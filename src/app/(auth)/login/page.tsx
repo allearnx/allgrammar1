@@ -40,7 +40,7 @@ export default function LoginPage() {
 
   return (
     <div className="flex min-h-screen items-center justify-center px-4 bg-purple-100/70">
-      <Card className="w-full max-w-lg shadow-xl backdrop-blur-xl bg-white/60 border border-white/40">
+      <Card className="w-full max-w-lg shadow-xl bg-white border border-white/40">
         <CardHeader className="text-center">
           <Image src="/logo.jpg" alt="올라영" width={120} height={120} className="mx-auto" />
           <CardDescription className="mt-2">AI 문법 마스터에 로그인하세요</CardDescription>
