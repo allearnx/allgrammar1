@@ -10,9 +10,9 @@ interface TopbarProps {
 
 const roleLabels: Record<string, string> = {
   student: '학생',
-  manager: '매니저',
-  admin: '관리자',
-  super_admin: '슈퍼관리자',
+  teacher: '선생님',
+  admin: '학원관리자',
+  boss: '총관리자',
 };
 
 export function Topbar({ user, title }: TopbarProps) {

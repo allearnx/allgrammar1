@@ -1,4 +1,4 @@
-export type UserRole = 'student' | 'manager' | 'admin' | 'super_admin';
+export type UserRole = 'student' | 'teacher' | 'admin' | 'boss';
 
 export type MemoryItemType = 'vocabulary' | 'sentence' | 'grammar_rule';
 

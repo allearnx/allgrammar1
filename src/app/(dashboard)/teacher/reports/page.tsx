@@ -4,7 +4,7 @@ import { Topbar } from '@/components/layout/topbar';
 import { ReportsClient } from './client';
 
 export default async function ReportsPage() {
-  const user = await requireRole(['manager', 'admin', 'super_admin']);
+  const user = await requireRole(['teacher', 'admin', 'boss']);
   const supabase = await createClient();
 
   const query = supabase
@@ -13,7 +13,7 @@ export default async function ReportsPage() {
     .eq('role', 'student')
     .order('full_name');
 
-  if (user.role !== 'super_admin' && user.academy_id) {
+  if (user.role !== 'boss' && user.academy_id) {
     query.eq('academy_id', user.academy_id);
   }
 

@@ -13,14 +13,14 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
-  // Check if user is manager+
+  // Check if user is teacher+
   const { data: profile } = await supabase
     .from('users')
     .select('role')
     .eq('id', user.id)
     .single();
 
-  if (!profile || !['manager', 'admin', 'super_admin'].includes(profile.role)) {
+  if (!profile || !['teacher', 'admin', 'boss'].includes(profile.role)) {
     return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
   }
 

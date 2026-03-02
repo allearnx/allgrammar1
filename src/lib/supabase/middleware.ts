@@ -71,22 +71,22 @@ export async function updateSession(request: NextRequest) {
     const role = profile?.role || 'student';
 
     // Check if user has access to this route
-    if (pathname.startsWith('/student') && role !== 'student' && role !== 'super_admin') {
+    if (pathname.startsWith('/student') && role !== 'student' && role !== 'boss') {
       const url = request.nextUrl.clone();
       url.pathname = getRoleDashboard(role);
       return NextResponse.redirect(url);
     }
-    if (pathname.startsWith('/manager') && role !== 'manager' && role !== 'super_admin') {
+    if (pathname.startsWith('/teacher') && role !== 'teacher' && role !== 'admin' && role !== 'boss') {
       const url = request.nextUrl.clone();
       url.pathname = getRoleDashboard(role);
       return NextResponse.redirect(url);
     }
-    if (pathname.startsWith('/admin') && role !== 'admin' && role !== 'super_admin') {
+    if (pathname.startsWith('/admin') && role !== 'admin' && role !== 'boss') {
       const url = request.nextUrl.clone();
       url.pathname = getRoleDashboard(role);
       return NextResponse.redirect(url);
     }
-    if (pathname.startsWith('/super-admin') && role !== 'super_admin') {
+    if (pathname.startsWith('/boss') && role !== 'boss') {
       const url = request.nextUrl.clone();
       url.pathname = getRoleDashboard(role);
       return NextResponse.redirect(url);
@@ -98,12 +98,12 @@ export async function updateSession(request: NextRequest) {
 
 function getRoleDashboard(role: string): string {
   switch (role) {
-    case 'manager':
-      return '/manager';
+    case 'teacher':
+      return '/teacher';
     case 'admin':
       return '/admin';
-    case 'super_admin':
-      return '/super-admin';
+    case 'boss':
+      return '/boss';
     default:
       return '/student';
   }

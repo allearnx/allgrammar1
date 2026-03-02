@@ -44,20 +44,31 @@ function getNavItems(role: string): NavItem[] {
     ];
   }
 
-  if (role === 'manager' || role === 'admin') {
+  if (role === 'teacher') {
     return [
-      { href: '/manager', label: '대시보드', icon: LayoutDashboard },
-      { href: '/manager/students', label: '학생 관리', icon: Users },
-      { href: '/manager/content', label: '콘텐츠 관리', icon: NotebookPen },
-      { href: '/manager/textbook-mode', label: '교과서 모드', icon: BookMarked },
-      { href: '/manager/reports', label: '리포트', icon: FileText },
+      { href: '/teacher', label: '대시보드', icon: LayoutDashboard },
+      { href: '/teacher/students', label: '학생 관리', icon: Users },
+      { href: '/teacher/content', label: '콘텐츠 관리', icon: NotebookPen },
+      { href: '/teacher/textbook-mode', label: '교과서 모드', icon: BookMarked },
+      { href: '/teacher/reports', label: '리포트', icon: FileText },
+    ];
+  }
+
+  if (role === 'admin') {
+    return [
+      { href: '/admin', label: '대시보드', icon: LayoutDashboard },
+      { href: '/admin/students', label: '학생 관리', icon: Users },
+      { href: '/admin/teachers', label: '선생님 관리', icon: GraduationCap },
+      { href: '/admin/content', label: '콘텐츠 관리', icon: NotebookPen },
+      { href: '/admin/textbook-mode', label: '교과서 모드', icon: BookMarked },
+      { href: '/admin/reports', label: '리포트', icon: FileText },
     ];
   }
 
   return [
-    { href: '/super-admin', label: '대시보드', icon: LayoutDashboard },
-    { href: '/super-admin/academies', label: '학원 관리', icon: Settings },
-    { href: '/super-admin/users', label: '사용자 관리', icon: Users },
+    { href: '/boss', label: '대시보드', icon: LayoutDashboard },
+    { href: '/boss/academies', label: '학원 관리', icon: Settings },
+    { href: '/boss/users', label: '사용자 관리', icon: Users },
   ];
 }
 

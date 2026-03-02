@@ -7,7 +7,7 @@ import { Users, BookOpen, FileText, BookMarked } from 'lucide-react';
 import Link from 'next/link';
 
 export default async function ManagerDashboard() {
-  const user = await requireRole(['manager', 'admin', 'super_admin']);
+  const user = await requireRole(['teacher', 'admin', 'boss']);
   const supabase = await createClient();
 
   // Get students in same academy
@@ -86,7 +86,7 @@ export default async function ManagerDashboard() {
                 <h3 className="font-semibold">학생 관리</h3>
                 <p className="text-sm text-muted-foreground">학생 목록 및 진도 확인</p>
                 <Button asChild className="mt-2">
-                  <Link href="/manager/students">학생 목록</Link>
+                  <Link href="/teacher/students">학생 목록</Link>
                 </Button>
               </div>
             </CardContent>
@@ -98,7 +98,7 @@ export default async function ManagerDashboard() {
                 <h3 className="font-semibold">콘텐츠 관리</h3>
                 <p className="text-sm text-muted-foreground">문법, 암기 항목, 교과서 관리</p>
                 <Button asChild variant="outline" className="mt-2">
-                  <Link href="/manager/content">콘텐츠 관리</Link>
+                  <Link href="/teacher/content">콘텐츠 관리</Link>
                 </Button>
               </div>
             </CardContent>
@@ -110,7 +110,7 @@ export default async function ManagerDashboard() {
                 <h3 className="font-semibold">리포트</h3>
                 <p className="text-sm text-muted-foreground">학생 학습 리포트 생성</p>
                 <Button asChild variant="outline" className="mt-2">
-                  <Link href="/manager/reports">리포트</Link>
+                  <Link href="/teacher/reports">리포트</Link>
                 </Button>
               </div>
             </CardContent>

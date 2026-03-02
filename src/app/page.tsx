@@ -20,12 +20,12 @@ export default async function Home() {
   const role = profile?.role || 'student';
 
   switch (role) {
-    case 'manager':
-      redirect('/manager');
+    case 'teacher':
+      redirect('/teacher');
     case 'admin':
       redirect('/admin');
-    case 'super_admin':
-      redirect('/super-admin');
+    case 'boss':
+      redirect('/boss');
     default:
       redirect('/student');
   }

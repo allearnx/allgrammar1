@@ -9,7 +9,7 @@ import { Eye } from 'lucide-react';
 import Link from 'next/link';
 
 export default async function StudentsPage() {
-  const user = await requireRole(['manager', 'admin', 'super_admin']);
+  const user = await requireRole(['teacher', 'admin', 'boss']);
   const supabase = await createClient();
 
   // Get students in same academy
@@ -19,7 +19,7 @@ export default async function StudentsPage() {
     .eq('role', 'student')
     .order('full_name');
 
-  if (user.role !== 'super_admin' && user.academy_id) {
+  if (user.role !== 'boss' && user.academy_id) {
     query.eq('academy_id', user.academy_id);
   }
 
@@ -89,7 +89,7 @@ export default async function StudentsPage() {
                       </div>
                     </div>
                     <Button asChild variant="outline" size="sm">
-                      <Link href={`/manager/students/${student.id}`}>
+                      <Link href={`/teacher/students/${student.id}`}>
                         <Eye className="h-4 w-4 mr-1" />
                         상세
                       </Link>

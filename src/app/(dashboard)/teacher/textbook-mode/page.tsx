@@ -4,7 +4,7 @@ import { Topbar } from '@/components/layout/topbar';
 import { TextbookModeClient } from './client';
 
 export default async function TextbookModePage() {
-  const user = await requireRole(['manager', 'admin', 'super_admin']);
+  const user = await requireRole(['teacher', 'admin', 'boss']);
   const supabase = await createClient();
 
   const { data: passages } = await supabase

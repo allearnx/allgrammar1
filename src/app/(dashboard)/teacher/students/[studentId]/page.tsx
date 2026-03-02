@@ -13,7 +13,7 @@ interface Props {
 
 export default async function StudentDetailPage({ params }: Props) {
   const { studentId } = await params;
-  const user = await requireRole(['manager', 'admin', 'super_admin']);
+  const user = await requireRole(['teacher', 'admin', 'boss']);
   const supabase = await createClient();
 
   const { data: student } = await supabase

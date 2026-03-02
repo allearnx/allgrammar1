@@ -103,7 +103,7 @@ export default function SignUpPage() {
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="student">학생</SelectItem>
-                  <SelectItem value="manager">매니저 (선생님)</SelectItem>
+                  <SelectItem value="teacher">선생님</SelectItem>
                 </SelectContent>
               </Select>
             </div>

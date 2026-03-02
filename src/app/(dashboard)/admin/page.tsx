@@ -2,7 +2,7 @@ import { requireRole } from '@/lib/auth/helpers';
 import { Topbar } from '@/components/layout/topbar';
 
 export default async function AdminDashboard() {
-  const user = await requireRole(['admin', 'super_admin']);
+  const user = await requireRole(['admin', 'boss']);
 
   return (
     <>

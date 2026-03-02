@@ -3,7 +3,7 @@
 -- ============================================
 
 -- Custom types
-CREATE TYPE user_role AS ENUM ('student', 'manager', 'admin', 'super_admin');
+CREATE TYPE user_role AS ENUM ('student', 'teacher', 'admin', 'boss');
 CREATE TYPE memory_item_type AS ENUM ('vocabulary', 'sentence', 'grammar_rule');
 
 -- ============================================
@@ -187,15 +187,15 @@ ALTER TABLE student_settings ENABLE ROW LEVEL SECURITY;
 CREATE POLICY "Academies: readable by members" ON academies
   FOR SELECT USING (
     EXISTS (SELECT 1 FROM users WHERE users.id = auth.uid() AND users.academy_id = academies.id)
-    OR EXISTS (SELECT 1 FROM users WHERE users.id = auth.uid() AND users.role = 'super_admin')
+    OR EXISTS (SELECT 1 FROM users WHERE users.id = auth.uid() AND users.role = 'boss')
   );
 
-CREATE POLICY "Academies: manageable by super_admin" ON academies
+CREATE POLICY "Academies: manageable by boss" ON academies
   FOR ALL USING (
-    EXISTS (SELECT 1 FROM users WHERE users.id = auth.uid() AND users.role = 'super_admin')
+    EXISTS (SELECT 1 FROM users WHERE users.id = auth.uid() AND users.role = 'boss')
   );
 
--- Users: own profile or same academy managers
+-- Users: own profile or same academy teachers/admins
 CREATE POLICY "Users: read own profile" ON users
   FOR SELECT USING (
     id = auth.uid()
@@ -203,11 +203,11 @@ CREATE POLICY "Users: read own profile" ON users
       EXISTS (
         SELECT 1 FROM users AS u
         WHERE u.id = auth.uid()
-        AND u.role IN ('manager', 'admin')
+        AND u.role IN ('teacher', 'admin')
         AND u.academy_id = users.academy_id
       )
     )
-    OR EXISTS (SELECT 1 FROM users AS u WHERE u.id = auth.uid() AND u.role = 'super_admin')
+    OR EXISTS (SELECT 1 FROM users AS u WHERE u.id = auth.uid() AND u.role = 'boss')
   );
 
 CREATE POLICY "Users: update own profile" ON users
@@ -220,83 +220,83 @@ CREATE POLICY "Users: insert own profile" ON users
 CREATE POLICY "Levels: readable by authenticated" ON levels
   FOR SELECT USING (auth.uid() IS NOT NULL);
 
-CREATE POLICY "Levels: manageable by managers+" ON levels
+CREATE POLICY "Levels: manageable by teachers+" ON levels
   FOR ALL USING (
-    EXISTS (SELECT 1 FROM users WHERE users.id = auth.uid() AND users.role IN ('manager', 'admin', 'super_admin'))
+    EXISTS (SELECT 1 FROM users WHERE users.id = auth.uid() AND users.role IN ('teacher', 'admin', 'boss'))
   );
 
 CREATE POLICY "Grammars: readable by authenticated" ON grammars
   FOR SELECT USING (auth.uid() IS NOT NULL);
 
-CREATE POLICY "Grammars: manageable by managers+" ON grammars
+CREATE POLICY "Grammars: manageable by teachers+" ON grammars
   FOR ALL USING (
-    EXISTS (SELECT 1 FROM users WHERE users.id = auth.uid() AND users.role IN ('manager', 'admin', 'super_admin'))
+    EXISTS (SELECT 1 FROM users WHERE users.id = auth.uid() AND users.role IN ('teacher', 'admin', 'boss'))
   );
 
--- Memory items: readable by all, manageable by managers+
+-- Memory items: readable by all, manageable by teachers+
 CREATE POLICY "Memory items: readable by authenticated" ON memory_items
   FOR SELECT USING (auth.uid() IS NOT NULL);
 
-CREATE POLICY "Memory items: manageable by managers+" ON memory_items
+CREATE POLICY "Memory items: manageable by teachers+" ON memory_items
   FOR ALL USING (
-    EXISTS (SELECT 1 FROM users WHERE users.id = auth.uid() AND users.role IN ('manager', 'admin', 'super_admin'))
+    EXISTS (SELECT 1 FROM users WHERE users.id = auth.uid() AND users.role IN ('teacher', 'admin', 'boss'))
   );
 
--- Student memory progress: own data only, managers can read same-academy
+-- Student memory progress: own data only, teachers can read same-academy
 CREATE POLICY "Memory progress: own data" ON student_memory_progress
   FOR ALL USING (student_id = auth.uid());
 
-CREATE POLICY "Memory progress: manager read" ON student_memory_progress
+CREATE POLICY "Memory progress: teacher read" ON student_memory_progress
   FOR SELECT USING (
     EXISTS (
-      SELECT 1 FROM users AS manager
+      SELECT 1 FROM users AS teacher
       JOIN users AS student ON student.id = student_memory_progress.student_id
-      WHERE manager.id = auth.uid()
-      AND manager.role IN ('manager', 'admin')
-      AND manager.academy_id = student.academy_id
+      WHERE teacher.id = auth.uid()
+      AND teacher.role IN ('teacher', 'admin')
+      AND teacher.academy_id = student.academy_id
     )
-    OR EXISTS (SELECT 1 FROM users WHERE users.id = auth.uid() AND users.role = 'super_admin')
+    OR EXISTS (SELECT 1 FROM users WHERE users.id = auth.uid() AND users.role = 'boss')
   );
 
--- Student progress: own data only, managers can read same-academy
+-- Student progress: own data only, teachers can read same-academy
 CREATE POLICY "Student progress: own data" ON student_progress
   FOR ALL USING (student_id = auth.uid());
 
-CREATE POLICY "Student progress: manager read" ON student_progress
+CREATE POLICY "Student progress: teacher read" ON student_progress
   FOR SELECT USING (
     EXISTS (
-      SELECT 1 FROM users AS manager
+      SELECT 1 FROM users AS teacher
       JOIN users AS student ON student.id = student_progress.student_id
-      WHERE manager.id = auth.uid()
-      AND manager.role IN ('manager', 'admin')
-      AND manager.academy_id = student.academy_id
+      WHERE teacher.id = auth.uid()
+      AND teacher.role IN ('teacher', 'admin')
+      AND teacher.academy_id = student.academy_id
     )
-    OR EXISTS (SELECT 1 FROM users WHERE users.id = auth.uid() AND users.role = 'super_admin')
+    OR EXISTS (SELECT 1 FROM users WHERE users.id = auth.uid() AND users.role = 'boss')
   );
 
--- Textbook passages: readable by all, manageable by managers+
+-- Textbook passages: readable by all, manageable by teachers+
 CREATE POLICY "Textbook passages: readable by authenticated" ON textbook_passages
   FOR SELECT USING (auth.uid() IS NOT NULL);
 
-CREATE POLICY "Textbook passages: manageable by managers+" ON textbook_passages
+CREATE POLICY "Textbook passages: manageable by teachers+" ON textbook_passages
   FOR ALL USING (
-    EXISTS (SELECT 1 FROM users WHERE users.id = auth.uid() AND users.role IN ('manager', 'admin', 'super_admin'))
+    EXISTS (SELECT 1 FROM users WHERE users.id = auth.uid() AND users.role IN ('teacher', 'admin', 'boss'))
   );
 
--- Student textbook progress: own data only, managers can read
+-- Student textbook progress: own data only, teachers can read
 CREATE POLICY "Textbook progress: own data" ON student_textbook_progress
   FOR ALL USING (student_id = auth.uid());
 
-CREATE POLICY "Textbook progress: manager read" ON student_textbook_progress
+CREATE POLICY "Textbook progress: teacher read" ON student_textbook_progress
   FOR SELECT USING (
     EXISTS (
-      SELECT 1 FROM users AS manager
+      SELECT 1 FROM users AS teacher
       JOIN users AS student ON student.id = student_textbook_progress.student_id
-      WHERE manager.id = auth.uid()
-      AND manager.role IN ('manager', 'admin')
-      AND manager.academy_id = student.academy_id
+      WHERE teacher.id = auth.uid()
+      AND teacher.role IN ('teacher', 'admin')
+      AND teacher.academy_id = student.academy_id
     )
-    OR EXISTS (SELECT 1 FROM users WHERE users.id = auth.uid() AND users.role = 'super_admin')
+    OR EXISTS (SELECT 1 FROM users WHERE users.id = auth.uid() AND users.role = 'boss')
   );
 
 -- Exams: same academy
@@ -307,15 +307,15 @@ CREATE POLICY "Exams: same academy" ON exams
       WHERE users.id = auth.uid()
       AND users.academy_id = exams.academy_id
     )
-    OR EXISTS (SELECT 1 FROM users WHERE users.id = auth.uid() AND users.role = 'super_admin')
+    OR EXISTS (SELECT 1 FROM users WHERE users.id = auth.uid() AND users.role = 'boss')
   );
 
-CREATE POLICY "Exams: manageable by managers+" ON exams
+CREATE POLICY "Exams: manageable by teachers+" ON exams
   FOR ALL USING (
     EXISTS (
       SELECT 1 FROM users
       WHERE users.id = auth.uid()
-      AND users.role IN ('manager', 'admin', 'super_admin')
+      AND users.role IN ('teacher', 'admin', 'boss')
       AND users.academy_id = exams.academy_id
     )
   );
