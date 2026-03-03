@@ -3,7 +3,7 @@ import { createClient } from '@/lib/supabase/server';
 import { Topbar } from '@/components/layout/topbar';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Users, BookOpen, FileText, BookMarked } from 'lucide-react';
+import { Users, BookOpen, FileText, BookMarked, ClipboardList } from 'lucide-react';
 import Link from 'next/link';
 
 export default async function ManagerDashboard() {
@@ -99,6 +99,18 @@ export default async function ManagerDashboard() {
                 <p className="text-sm text-muted-foreground">문법, 암기 항목, 교과서 관리</p>
                 <Button asChild variant="outline" className="mt-2">
                   <Link href="/teacher/content">콘텐츠 관리</Link>
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+          <Card className="hover:shadow-md transition-shadow">
+            <CardContent className="pt-6">
+              <div className="flex flex-col items-center text-center gap-3">
+                <ClipboardList className="h-10 w-10 text-primary" />
+                <h3 className="font-semibold">내신 관리</h3>
+                <p className="text-sm text-muted-foreground">내신 대비 교과서/단원 콘텐츠 관리</p>
+                <Button asChild variant="outline" className="mt-2">
+                  <Link href="/teacher/naesin">내신 관리</Link>
                 </Button>
               </div>
             </CardContent>

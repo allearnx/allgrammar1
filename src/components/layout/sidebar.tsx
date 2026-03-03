@@ -9,6 +9,7 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from '@/components/ui/sheet';
 import {
   BookOpen,
+  ClipboardList,
   GraduationCap,
   LayoutDashboard,
   LogOut,
@@ -40,6 +41,7 @@ const NAV_CONFIG: Record<string, NavItem[]> = {
     { href: '/student', label: '대시보드', icon: LayoutDashboard },
     { href: '/student/levels', label: '문법 학습', icon: GraduationCap },
     { href: '/student/review', label: '복습하기', icon: BookOpen },
+    { href: '/student/naesin', label: '내신 대비', icon: BookMarked },
     { href: '/student/progress', label: '내 진도', icon: BarChart3 },
   ],
   teacher: [
@@ -47,6 +49,7 @@ const NAV_CONFIG: Record<string, NavItem[]> = {
     { href: '/teacher/students', label: '학생 관리', icon: Users },
     { href: '/teacher/content', label: '콘텐츠 관리', icon: NotebookPen },
     { href: '/teacher/textbook-mode', label: '교과서 모드', icon: BookMarked },
+    { href: '/teacher/naesin', label: '내신 관리', icon: ClipboardList },
     { href: '/teacher/reports', label: '리포트', icon: FileText },
   ],
   admin: [
@@ -55,6 +58,7 @@ const NAV_CONFIG: Record<string, NavItem[]> = {
     { href: '/admin/teachers', label: '선생님 관리', icon: GraduationCap },
     { href: '/admin/content', label: '콘텐츠 관리', icon: NotebookPen },
     { href: '/admin/textbook-mode', label: '교과서 모드', icon: BookMarked },
+    { href: '/admin/naesin', label: '내신 관리', icon: ClipboardList },
     { href: '/admin/reports', label: '리포트', icon: FileText },
   ],
   boss: [
@@ -65,6 +69,7 @@ const NAV_CONFIG: Record<string, NavItem[]> = {
     { href: '/boss/teachers', label: '선생님 관리', icon: GraduationCap },
     { href: '/boss/content', label: '콘텐츠 관리', icon: NotebookPen },
     { href: '/boss/textbook-mode', label: '교과서 모드', icon: BookMarked },
+    { href: '/boss/naesin', label: '내신 관리', icon: ClipboardList },
     { href: '/boss/reports', label: '리포트', icon: FileText },
   ],
 };

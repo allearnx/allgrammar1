@@ -3,7 +3,7 @@ import { createClient } from '@/lib/supabase/server';
 import { Topbar } from '@/components/layout/topbar';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { BookOpen, GraduationCap, BarChart3, Clock } from 'lucide-react';
+import { BookOpen, BookMarked, GraduationCap, BarChart3, Clock } from 'lucide-react';
 import Link from 'next/link';
 
 export default async function StudentDashboard() {
@@ -124,6 +124,18 @@ export default async function StudentDashboard() {
               </CardContent>
             </Card>
           )}
+          <Card className="hover:shadow-md transition-shadow">
+            <CardContent className="pt-6">
+              <div className="flex flex-col items-center text-center gap-3">
+                <BookMarked className="h-10 w-10 text-primary" />
+                <h3 className="font-semibold">내신 대비</h3>
+                <p className="text-sm text-muted-foreground">교과서별 내신 시험을 준비하세요</p>
+                <Button asChild variant="outline" className="mt-2">
+                  <Link href="/student/naesin">내신 학습</Link>
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
           <Card className="hover:shadow-md transition-shadow">
             <CardContent className="pt-6">
               <div className="flex flex-col items-center text-center gap-3">

@@ -139,6 +139,137 @@ export interface StudentSettings {
   updated_at: string;
 }
 
+// ============================================
+// 내신 대비 시스템
+// ============================================
+
+export interface NaesinTextbook {
+  id: string;
+  grade: number;
+  publisher: string;
+  display_name: string;
+  sort_order: number;
+  is_active: boolean;
+  created_at: string;
+}
+
+export interface NaesinUnit {
+  id: string;
+  textbook_id: string;
+  unit_number: number;
+  title: string;
+  sort_order: number;
+  is_active: boolean;
+  created_at: string;
+}
+
+export interface NaesinVocabulary {
+  id: string;
+  unit_id: string;
+  front_text: string;
+  back_text: string;
+  quiz_options: string[] | null;
+  quiz_correct_index: number | null;
+  spelling_hint: string | null;
+  spelling_answer: string | null;
+  sort_order: number;
+  created_at: string;
+}
+
+export interface NaesinPassage {
+  id: string;
+  unit_id: string;
+  title: string;
+  original_text: string;
+  korean_translation: string;
+  blanks_easy: BlankItem[] | null;
+  blanks_medium: BlankItem[] | null;
+  blanks_hard: BlankItem[] | null;
+  sentences: SentenceItem[] | null;
+  sort_order: number;
+  created_at: string;
+}
+
+export type NaesinGrammarContentType = 'video' | 'text';
+
+export interface NaesinGrammarLesson {
+  id: string;
+  unit_id: string;
+  title: string;
+  content_type: NaesinGrammarContentType;
+  youtube_url: string | null;
+  youtube_video_id: string | null;
+  video_duration_seconds: number | null;
+  text_content: string | null;
+  sort_order: number;
+  created_at: string;
+}
+
+export interface NaesinOmrSheet {
+  id: string;
+  unit_id: string;
+  title: string;
+  total_questions: number;
+  answer_key: number[];
+  points_per_question: number[] | null;
+  sort_order: number;
+  created_at: string;
+}
+
+export interface NaesinStudentSettings {
+  id: string;
+  student_id: string;
+  textbook_id: string;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface NaesinStudentProgress {
+  id: string;
+  student_id: string;
+  unit_id: string;
+  vocab_flashcard_count: number;
+  vocab_quiz_score: number | null;
+  vocab_spelling_score: number | null;
+  vocab_completed: boolean;
+  passage_fill_blanks_best: number | null;
+  passage_ordering_best: number | null;
+  passage_completed: boolean;
+  grammar_video_completed: boolean;
+  grammar_text_read: boolean;
+  grammar_completed: boolean;
+  omr_completed: boolean;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface NaesinOmrAttempt {
+  id: string;
+  student_id: string;
+  omr_sheet_id: string;
+  student_answers: number[];
+  correct_count: number;
+  total_questions: number;
+  score_percent: number;
+  created_at: string;
+}
+
+export type NaesinStageStatus = 'locked' | 'available' | 'completed';
+
+export interface NaesinStageStatuses {
+  vocab: NaesinStageStatus;
+  passage: NaesinStageStatus;
+  grammar: NaesinStageStatus;
+  omr: NaesinStageStatus;
+}
+
+export interface NaesinContentAvailability {
+  hasVocab: boolean;
+  hasPassage: boolean;
+  hasGrammar: boolean;
+  hasOmr: boolean;
+}
+
 // Extended types with relations
 export interface GrammarWithLevel extends Grammar {
   level: Level;
