@@ -39,9 +39,11 @@ export async function updateSession(request: NextRequest) {
     }
   );
 
+  // getSession() reads JWT locally (no network call unless token refresh needed)
+  // getUser() was calling Supabase Auth server on EVERY navigation (~200ms)
   const {
-    data: { user },
-  } = await supabase.auth.getUser();
+    data: { session },
+  } = await supabase.auth.getSession();
 
   const pathname = request.nextUrl.pathname;
 
@@ -50,24 +52,45 @@ export async function updateSession(request: NextRequest) {
   const isPublicRoute = publicRoutes.some((route) => pathname.startsWith(route));
 
   // If not authenticated and not on a public route, redirect to login
-  if (!user && !isPublicRoute) {
+  if (!session && !isPublicRoute) {
     const url = request.nextUrl.clone();
     url.pathname = '/login';
     return NextResponse.redirect(url);
   }
 
-  // If authenticated, fetch role once and handle routing
-  if (user) {
-    const admin = createClient(
-      process.env.NEXT_PUBLIC_SUPABASE_URL!,
-      process.env.SUPABASE_SERVICE_ROLE_KEY!,
-      { auth: { autoRefreshToken: false, persistSession: false } }
-    );
-    const { data: profile } = await admin
-      .from('users')
-      .select('id, email, full_name, role, academy_id')
-      .eq('id', user.id)
-      .single();
+  // If authenticated, check role and handle routing
+  if (session) {
+    // Try cached profile from cookie first (avoids DB call on every navigation)
+    let profile: { id: string; email: string; full_name: string; role: string; academy_id: string | null } | null = null;
+    let cacheHit = false;
+
+    const cachedProfileStr = request.cookies.get('x-user-profile')?.value;
+    if (cachedProfileStr) {
+      try {
+        const parsed = JSON.parse(cachedProfileStr);
+        if (parsed.id === session.user.id) {
+          profile = parsed;
+          cacheHit = true;
+        }
+      } catch {
+        // Invalid cache, will re-fetch
+      }
+    }
+
+    // Cache miss: fetch from DB
+    if (!profile) {
+      const admin = createClient(
+        process.env.NEXT_PUBLIC_SUPABASE_URL!,
+        process.env.SUPABASE_SERVICE_ROLE_KEY!,
+        { auth: { autoRefreshToken: false, persistSession: false } }
+      );
+      const { data } = await admin
+        .from('users')
+        .select('id, email, full_name, role, academy_id')
+        .eq('id', session.user.id)
+        .single();
+      profile = data;
+    }
 
     const role = (profile?.role || 'student') as UserRole;
 
@@ -88,7 +111,6 @@ export async function updateSession(request: NextRequest) {
     }
 
     // Pass user profile to server components via request header
-    // so the layout doesn't need to re-fetch auth + profile (saves ~2 network calls)
     if (profile) {
       const requestHeaders = new Headers(request.headers);
       requestHeaders.set('x-user-profile', JSON.stringify(profile));
@@ -98,6 +120,16 @@ export async function updateSession(request: NextRequest) {
       supabaseResponse.headers.getSetCookie().forEach((cookie) => {
         response.headers.append('set-cookie', cookie);
       });
+      // Cache profile in cookie for subsequent navigations (5 min TTL)
+      if (!cacheHit) {
+        response.cookies.set('x-user-profile', JSON.stringify(profile), {
+          httpOnly: true,
+          secure: process.env.NODE_ENV === 'production',
+          sameSite: 'lax',
+          maxAge: 300,
+          path: '/',
+        });
+      }
       return response;
     }
   }

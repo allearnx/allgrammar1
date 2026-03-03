@@ -12,6 +12,7 @@ import {
   GraduationCap,
   LayoutDashboard,
   LogOut,
+  Loader2,
   Menu,
   NotebookPen,
   Settings,
@@ -21,7 +22,7 @@ import {
   BookMarked,
 } from 'lucide-react';
 import type { AuthUser } from '@/types/auth';
-import { useState } from 'react';
+import { useState, useTransition } from 'react';
 import { toast } from 'sonner';
 
 interface SidebarProps {
@@ -73,24 +74,44 @@ function getNavItems(role: string): NavItem[] {
 }
 
 function NavLinks({ items, pathname, onNavigate }: { items: NavItem[]; pathname: string; onNavigate?: () => void }) {
+  const router = useRouter();
+  const [isPending, startTransition] = useTransition();
+  const [pendingHref, setPendingHref] = useState<string | null>(null);
+
+  function handleClick(e: React.MouseEvent, href: string) {
+    e.preventDefault();
+    if (pathname === href) return;
+    setPendingHref(href);
+    startTransition(() => {
+      router.push(href);
+    });
+    onNavigate?.();
+  }
+
   return (
     <nav className="flex flex-col gap-1 px-3">
       {items.map((item) => {
         const isExactOnly = item.href.split('/').filter(Boolean).length === 1;
         const isActive = pathname === item.href || (!isExactOnly && pathname.startsWith(item.href + '/'));
+        const isLoading = isPending && pendingHref === item.href;
         return (
           <Link
             key={item.href}
             href={item.href}
-            onClick={onNavigate}
+            onClick={(e) => handleClick(e, item.href)}
             className={cn(
               'flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors',
               isActive
                 ? 'bg-primary text-primary-foreground'
-                : 'text-muted-foreground hover:bg-muted hover:text-foreground'
+                : 'text-muted-foreground hover:bg-muted hover:text-foreground',
+              isLoading && !isActive && 'bg-muted text-foreground'
             )}
           >
-            <item.icon className="h-4 w-4 shrink-0" />
+            {isLoading ? (
+              <Loader2 className="h-4 w-4 shrink-0 animate-spin" />
+            ) : (
+              <item.icon className="h-4 w-4 shrink-0" />
+            )}
             {item.label}
           </Link>
         );
