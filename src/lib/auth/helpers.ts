@@ -1,4 +1,5 @@
 import { cache } from 'react';
+import { headers } from 'next/headers';
 import { createClient } from '@/lib/supabase/server';
 import { createAdminClient } from '@/lib/supabase/admin';
 import { redirect } from 'next/navigation';
@@ -6,6 +7,18 @@ import type { AuthUser } from '@/types/auth';
 import type { UserRole } from '@/types/database';
 
 export const getUser = cache(async (): Promise<AuthUser | null> => {
+  // Fast path: read profile cached by middleware (avoids 2 redundant network calls)
+  const headersList = await headers();
+  const profileHeader = headersList.get('x-user-profile');
+  if (profileHeader) {
+    try {
+      return JSON.parse(profileHeader) as AuthUser;
+    } catch {
+      // Fall through to normal path
+    }
+  }
+
+  // Fallback: fetch from Supabase directly
   const supabase = await createClient();
 
   const {

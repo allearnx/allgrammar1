@@ -65,7 +65,7 @@ export async function updateSession(request: NextRequest) {
     );
     const { data: profile } = await admin
       .from('users')
-      .select('role')
+      .select('id, email, full_name, role, academy_id')
       .eq('id', user.id)
       .single();
 
@@ -85,6 +85,20 @@ export async function updateSession(request: NextRequest) {
         url.pathname = getRoleDashboard(role);
         return NextResponse.redirect(url);
       }
+    }
+
+    // Pass user profile to server components via request header
+    // so the layout doesn't need to re-fetch auth + profile (saves ~2 network calls)
+    if (profile) {
+      const requestHeaders = new Headers(request.headers);
+      requestHeaders.set('x-user-profile', JSON.stringify(profile));
+      const response = NextResponse.next({
+        request: { headers: requestHeaders },
+      });
+      supabaseResponse.headers.getSetCookie().forEach((cookie) => {
+        response.headers.append('set-cookie', cookie);
+      });
+      return response;
     }
   }
 
