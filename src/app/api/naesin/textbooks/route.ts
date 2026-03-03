@@ -1,22 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@/lib/supabase/server';
-
-async function requireTeacherPlus(supabase: Awaited<ReturnType<typeof createClient>>) {
-  const { data: { user } } = await supabase.auth.getUser();
-  if (!user) return null;
-  const { data: profile } = await supabase
-    .from('users')
-    .select('role')
-    .eq('id', user.id)
-    .single();
-  if (!profile || !['teacher', 'admin', 'boss'].includes(profile.role)) return null;
-  return user;
-}
+import { getUser } from '@/lib/auth/helpers';
 
 export async function POST(request: NextRequest) {
+  const user = await getUser();
+  if (!user || !['teacher', 'admin', 'boss'].includes(user.role)) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  }
   const supabase = await createClient();
-  const user = await requireTeacherPlus(supabase);
-  if (!user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
 
   const { grade, publisher, display_name, sort_order } = await request.json();
   if (!grade || !publisher || !display_name) {
@@ -34,9 +25,11 @@ export async function POST(request: NextRequest) {
 }
 
 export async function PATCH(request: NextRequest) {
+  const user = await getUser();
+  if (!user || !['teacher', 'admin', 'boss'].includes(user.role)) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  }
   const supabase = await createClient();
-  const user = await requireTeacherPlus(supabase);
-  if (!user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
 
   const { id, ...updates } = await request.json();
   if (!id) return NextResponse.json({ error: 'Missing id' }, { status: 400 });
@@ -53,9 +46,11 @@ export async function PATCH(request: NextRequest) {
 }
 
 export async function DELETE(request: NextRequest) {
+  const user = await getUser();
+  if (!user || !['teacher', 'admin', 'boss'].includes(user.role)) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  }
   const supabase = await createClient();
-  const user = await requireTeacherPlus(supabase);
-  if (!user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
 
   const { id } = await request.json();
   if (!id) return NextResponse.json({ error: 'Missing id' }, { status: 400 });

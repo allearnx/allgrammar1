@@ -187,15 +187,15 @@ function AddTextbookDialog({ onAdd }: { onAdd: (tb: NaesinTextbook) => void }) {
           display_name: displayName,
         }),
       });
-      if (!res.ok) throw new Error();
       const data = await res.json();
+      if (!res.ok) throw new Error(data.error || '알 수 없는 오류');
       onAdd(data);
       setOpen(false);
       setPublisher('');
       setDisplayName('');
       toast.success('교과서가 추가되었습니다');
-    } catch {
-      toast.error('교과서 추가 중 오류가 발생했습니다');
+    } catch (err) {
+      toast.error(`교과서 추가 실패: ${err instanceof Error ? err.message : '알 수 없는 오류'}`);
     } finally {
       setSaving(false);
     }
