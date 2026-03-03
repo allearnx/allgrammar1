@@ -48,8 +48,8 @@ export default function SignUpPage() {
   }
 
   return (
-    <div className="flex min-h-screen items-center justify-center px-4 bg-purple-100/70">
-      <Card className="w-full max-w-lg shadow-xl bg-white border border-white/40">
+    <div className="flex min-h-screen items-center justify-center px-4 bg-background">
+      <Card className="w-full max-w-lg shadow-xl">
         <CardHeader className="text-center">
           <Image src="/logo.jpg" alt="올라영" width={120} height={120} className="mx-auto" />
           <CardDescription className="mt-2">AI 문법 마스터에 가입하세요</CardDescription>
