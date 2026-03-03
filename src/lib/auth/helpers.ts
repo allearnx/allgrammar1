@@ -1,4 +1,5 @@
 import { createClient } from '@/lib/supabase/server';
+import { createAdminClient } from '@/lib/supabase/admin';
 import { redirect } from 'next/navigation';
 import type { AuthUser } from '@/types/auth';
 import type { UserRole } from '@/types/database';
@@ -12,7 +13,8 @@ export async function getUser(): Promise<AuthUser | null> {
 
   if (!user) return null;
 
-  const { data: profile } = await supabase
+  const admin = createAdminClient();
+  const { data: profile } = await admin
     .from('users')
     .select('id, email, full_name, role, academy_id')
     .eq('id', user.id)
