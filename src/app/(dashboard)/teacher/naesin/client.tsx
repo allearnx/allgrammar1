@@ -567,14 +567,14 @@ function BulkVocabUpload({ unitId, onAdd }: { unitId: string; onAdd: () => void 
       <DialogTrigger asChild>
         <Button size="sm" variant="outline">
           <Upload className="h-3.5 w-3.5 mr-1" />
-          CSV 업로드
+          단어 일괄 추가
         </Button>
       </DialogTrigger>
       <DialogContent>
-        <DialogHeader><DialogTitle>단어 일괄 업로드</DialogTitle></DialogHeader>
+        <DialogHeader><DialogTitle>단어 일괄 추가</DialogTitle></DialogHeader>
         <form onSubmit={handleSubmit} className="space-y-3">
           <div>
-            <Label>CSV 형식: 영어, 한국어, 스펠링정답(선택)</Label>
+            <Label>한 줄에 하나씩: 영어, 한국어</Label>
             <Textarea
               value={csvText}
               onChange={(e) => setCsvText(e.target.value)}
