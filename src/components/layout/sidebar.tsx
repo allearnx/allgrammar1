@@ -34,42 +34,37 @@ interface NavItem {
   icon: React.ComponentType<{ className?: string }>;
 }
 
-function getNavItems(role: string): NavItem[] {
-  if (role === 'student') {
-    return [
-      { href: '/student', label: '대시보드', icon: LayoutDashboard },
-      { href: '/student/levels', label: '문법 학습', icon: GraduationCap },
-      { href: '/student/review', label: '복습하기', icon: BookOpen },
-      { href: '/student/progress', label: '내 진도', icon: BarChart3 },
-    ];
-  }
-
-  if (role === 'teacher') {
-    return [
-      { href: '/teacher', label: '대시보드', icon: LayoutDashboard },
-      { href: '/teacher/students', label: '학생 관리', icon: Users },
-      { href: '/teacher/content', label: '콘텐츠 관리', icon: NotebookPen },
-      { href: '/teacher/textbook-mode', label: '교과서 모드', icon: BookMarked },
-      { href: '/teacher/reports', label: '리포트', icon: FileText },
-    ];
-  }
-
-  if (role === 'admin') {
-    return [
-      { href: '/admin', label: '대시보드', icon: LayoutDashboard },
-      { href: '/admin/students', label: '학생 관리', icon: Users },
-      { href: '/admin/teachers', label: '선생님 관리', icon: GraduationCap },
-      { href: '/admin/content', label: '콘텐츠 관리', icon: NotebookPen },
-      { href: '/admin/textbook-mode', label: '교과서 모드', icon: BookMarked },
-      { href: '/admin/reports', label: '리포트', icon: FileText },
-    ];
-  }
-
-  return [
+const NAV_CONFIG: Record<string, NavItem[]> = {
+  student: [
+    { href: '/student', label: '대시보드', icon: LayoutDashboard },
+    { href: '/student/levels', label: '문법 학습', icon: GraduationCap },
+    { href: '/student/review', label: '복습하기', icon: BookOpen },
+    { href: '/student/progress', label: '내 진도', icon: BarChart3 },
+  ],
+  teacher: [
+    { href: '/teacher', label: '대시보드', icon: LayoutDashboard },
+    { href: '/teacher/students', label: '학생 관리', icon: Users },
+    { href: '/teacher/content', label: '콘텐츠 관리', icon: NotebookPen },
+    { href: '/teacher/textbook-mode', label: '교과서 모드', icon: BookMarked },
+    { href: '/teacher/reports', label: '리포트', icon: FileText },
+  ],
+  admin: [
+    { href: '/admin', label: '대시보드', icon: LayoutDashboard },
+    { href: '/admin/students', label: '학생 관리', icon: Users },
+    { href: '/admin/teachers', label: '선생님 관리', icon: GraduationCap },
+    { href: '/admin/content', label: '콘텐츠 관리', icon: NotebookPen },
+    { href: '/admin/textbook-mode', label: '교과서 모드', icon: BookMarked },
+    { href: '/admin/reports', label: '리포트', icon: FileText },
+  ],
+  boss: [
     { href: '/boss', label: '대시보드', icon: LayoutDashboard },
     { href: '/boss/academies', label: '학원 관리', icon: Settings },
     { href: '/boss/users', label: '사용자 관리', icon: Users },
-  ];
+  ],
+};
+
+function getNavItems(role: string): NavItem[] {
+  return NAV_CONFIG[role] || NAV_CONFIG.student;
 }
 
 function NavLinks({ items, pathname, onNavigate }: { items: NavItem[]; pathname: string; onNavigate?: () => void }) {

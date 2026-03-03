@@ -7,6 +7,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Badge } from '@/components/ui/badge';
 import { Loader2, Send } from 'lucide-react';
 import { toast } from 'sonner';
+import { useSaveProgress } from '@/hooks/use-save-progress';
 import type { TextbookPassage, StudentTextbookProgress } from '@/types/database';
 
 interface TranslationViewProps {
@@ -21,6 +22,7 @@ interface GradingResult {
 }
 
 export function TranslationView({ passage, progress }: TranslationViewProps) {
+  const { saveTextbookProgress } = useSaveProgress();
   const [answer, setAnswer] = useState('');
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<GradingResult | null>(null);
@@ -51,16 +53,7 @@ export function TranslationView({ passage, progress }: TranslationViewProps) {
       setResult(data);
       setAttempts((prev) => prev + 1);
 
-      // Save progress
-      fetch('/api/textbook/progress', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          passageId: passage.id,
-          type: 'translation',
-          score: data.score,
-        }),
-      });
+      saveTextbookProgress(passage.id, 'translation', data.score);
     } catch (error) {
       toast.error('채점 중 오류가 발생했습니다', {
         description: error instanceof Error ? error.message : undefined,

@@ -9,6 +9,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { CheckCircle, XCircle, GripVertical, Shuffle } from 'lucide-react';
 import { toast } from 'sonner';
+import { useSaveProgress } from '@/hooks/use-save-progress';
 import type { TextbookPassage, StudentTextbookProgress, SentenceItem } from '@/types/database';
 
 interface OrderingViewProps {
@@ -42,6 +43,7 @@ function shuffleArray<T>(arr: T[]): T[] {
 }
 
 export function OrderingView({ passage, progress }: OrderingViewProps) {
+  const { saveTextbookProgress } = useSaveProgress();
   const sentences = (passage.sentences || []) as SentenceItem[];
   const [currentIndex, setCurrentIndex] = useState(0);
   const [showResult, setShowResult] = useState(false);
@@ -80,15 +82,7 @@ export function OrderingView({ passage, progress }: OrderingViewProps) {
       setIsCorrect(false);
     } else {
       const finalScore = Math.round((score.correct / sentences.length) * 100);
-      fetch('/api/textbook/progress', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          passageId: passage.id,
-          type: 'ordering',
-          score: finalScore,
-        }),
-      });
+      saveTextbookProgress(passage.id, 'ordering', finalScore);
       toast.success(`순서 배열 완료! ${score.correct}/${sentences.length} 정답`);
     }
   }

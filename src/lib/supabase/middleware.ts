@@ -1,5 +1,15 @@
 import { createServerClient } from '@supabase/ssr';
+import { createClient } from '@supabase/supabase-js';
 import { NextResponse, type NextRequest } from 'next/server';
+
+type UserRole = 'student' | 'teacher' | 'admin' | 'boss';
+
+const ROUTE_ACCESS: Record<string, UserRole[]> = {
+  '/student': ['student', 'boss'],
+  '/teacher': ['teacher', 'admin', 'boss'],
+  '/admin': ['admin', 'boss'],
+  '/boss': ['boss'],
+};
 
 export async function updateSession(request: NextRequest) {
   let supabaseResponse = NextResponse.next({
@@ -46,50 +56,35 @@ export async function updateSession(request: NextRequest) {
     return NextResponse.redirect(url);
   }
 
-  // If authenticated and on a public route, redirect to appropriate dashboard
-  if (user && isPublicRoute) {
-    const { data: profile } = await supabase
+  // If authenticated, fetch role once and handle routing
+  if (user && (isPublicRoute || (!isPublicRoute && pathname !== '/'))) {
+    const admin = createClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.SUPABASE_SERVICE_ROLE_KEY!,
+      { auth: { autoRefreshToken: false, persistSession: false } }
+    );
+    const { data: profile } = await admin
       .from('users')
       .select('role')
       .eq('id', user.id)
       .single();
 
-    const role = profile?.role || 'student';
-    const url = request.nextUrl.clone();
-    url.pathname = getRoleDashboard(role);
-    return NextResponse.redirect(url);
-  }
+    const role = (profile?.role || 'student') as UserRole;
 
-  // Role-based route protection
-  if (user && !isPublicRoute && pathname !== '/') {
-    const { data: profile } = await supabase
-      .from('users')
-      .select('role')
-      .eq('id', user.id)
-      .single();
-
-    const role = profile?.role || 'student';
-
-    // Check if user has access to this route
-    if (pathname.startsWith('/student') && role !== 'student' && role !== 'boss') {
+    // If on a public route, redirect to dashboard
+    if (isPublicRoute) {
       const url = request.nextUrl.clone();
       url.pathname = getRoleDashboard(role);
       return NextResponse.redirect(url);
     }
-    if (pathname.startsWith('/teacher') && role !== 'teacher' && role !== 'admin' && role !== 'boss') {
-      const url = request.nextUrl.clone();
-      url.pathname = getRoleDashboard(role);
-      return NextResponse.redirect(url);
-    }
-    if (pathname.startsWith('/admin') && role !== 'admin' && role !== 'boss') {
-      const url = request.nextUrl.clone();
-      url.pathname = getRoleDashboard(role);
-      return NextResponse.redirect(url);
-    }
-    if (pathname.startsWith('/boss') && role !== 'boss') {
-      const url = request.nextUrl.clone();
-      url.pathname = getRoleDashboard(role);
-      return NextResponse.redirect(url);
+
+    // Role-based route protection
+    for (const [routePrefix, allowedRoles] of Object.entries(ROUTE_ACCESS)) {
+      if (pathname.startsWith(routePrefix) && !allowedRoles.includes(role)) {
+        const url = request.nextUrl.clone();
+        url.pathname = getRoleDashboard(role);
+        return NextResponse.redirect(url);
+      }
     }
   }
 

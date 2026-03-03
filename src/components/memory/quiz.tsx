@@ -1,67 +1,49 @@
 'use client';
 
-import { useState, useCallback } from 'react';
+import { useState } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
-import { CheckCircle, XCircle, ChevronRight } from 'lucide-react';
+import { CheckCircle, XCircle } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { toast } from 'sonner';
-import type { MemoryItem, StudentMemoryProgress } from '@/types/database';
+import { useMemoryTest, type MemoryTestItem } from '@/hooks/use-memory-test';
+import { ScoreBadges, CompletionView, NextButton } from './shared';
 
 interface QuizViewProps {
-  items: (MemoryItem & { progress: StudentMemoryProgress | null })[];
+  items: MemoryTestItem[];
 }
 
 export function QuizView({ items }: QuizViewProps) {
-  const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
-  const [showResult, setShowResult] = useState(false);
-  const [score, setScore] = useState({ correct: 0, wrong: 0 });
-
-  const item = items[currentIndex];
-
-  const submitAnswer = useCallback(async (memoryItemId: string, isCorrect: boolean) => {
-    await fetch('/api/memory/progress', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        memoryItemId,
-        testType: 'quiz',
-        isCorrect,
-      }),
-    });
-  }, []);
+  const {
+    item,
+    currentIndex,
+    showResult,
+    score,
+    isFinished,
+    recordResult,
+    handleNext,
+    resetTest,
+  } = useMemoryTest(items, 'quiz', '퀴즈');
 
   function handleSelect(optionIndex: number) {
     if (showResult) return;
     setSelectedAnswer(optionIndex);
-    setShowResult(true);
-
-    const isCorrect = optionIndex === item.quiz_correct_index;
-    if (isCorrect) {
-      setScore((prev) => ({ ...prev, correct: prev.correct + 1 }));
-    } else {
-      setScore((prev) => ({ ...prev, wrong: prev.wrong + 1 }));
-    }
-
-    submitAnswer(item.id, isCorrect);
+    recordResult(optionIndex === item.quiz_correct_index);
   }
 
-  function handleNext() {
-    if (currentIndex < items.length - 1) {
-      setCurrentIndex(currentIndex + 1);
-      setSelectedAnswer(null);
-      setShowResult(false);
-    } else {
-      toast.success(`퀴즈 완료! ${score.correct}/${items.length} 정답`);
-    }
+  function handleNextAndReset() {
+    handleNext();
+    setSelectedAnswer(null);
+  }
+
+  function handleFullReset() {
+    resetTest();
+    setSelectedAnswer(null);
   }
 
   if (!item || !item.quiz_options) return null;
 
   const options = item.quiz_options as string[];
-  const isFinished = currentIndex === items.length - 1 && showResult;
 
   return (
     <div className="space-y-6">
@@ -69,16 +51,7 @@ export function QuizView({ items }: QuizViewProps) {
         <span className="text-sm text-muted-foreground">
           {currentIndex + 1} / {items.length}
         </span>
-        <div className="flex gap-2">
-          <Badge variant="outline" className="text-green-600">
-            <CheckCircle className="h-3 w-3 mr-1" />
-            {score.correct}
-          </Badge>
-          <Badge variant="outline" className="text-red-600">
-            <XCircle className="h-3 w-3 mr-1" />
-            {score.wrong}
-          </Badge>
-        </div>
+        <ScoreBadges correct={score.correct} wrong={score.wrong} />
       </div>
 
       <Card>
@@ -122,26 +95,14 @@ export function QuizView({ items }: QuizViewProps) {
       {showResult && (
         <div className="text-center">
           {isFinished ? (
-            <div className="space-y-3">
-              <p className="text-lg font-semibold">
-                퀴즈 완료! {score.correct}/{items.length} 정답
-              </p>
-              <Button
-                onClick={() => {
-                  setCurrentIndex(0);
-                  setSelectedAnswer(null);
-                  setShowResult(false);
-                  setScore({ correct: 0, wrong: 0 });
-                }}
-              >
-                다시 풀기
-              </Button>
-            </div>
+            <CompletionView
+              label="퀴즈"
+              correct={score.correct}
+              total={items.length}
+              onReset={handleFullReset}
+            />
           ) : (
-            <Button onClick={handleNext}>
-              다음 문제
-              <ChevronRight className="h-4 w-4 ml-1" />
-            </Button>
+            <NextButton onClick={handleNextAndReset} />
           )}
         </div>
       )}

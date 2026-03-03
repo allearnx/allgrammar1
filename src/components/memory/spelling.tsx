@@ -1,70 +1,48 @@
 'use client';
 
-import { useState, useCallback } from 'react';
+import { useState } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Badge } from '@/components/ui/badge';
-import { CheckCircle, XCircle, ChevronRight } from 'lucide-react';
-import { toast } from 'sonner';
-import type { MemoryItem, StudentMemoryProgress } from '@/types/database';
+import { useMemoryTest, type MemoryTestItem } from '@/hooks/use-memory-test';
+import { ScoreBadges, ResultCard, CompletionView, NextButton } from './shared';
 
 interface SpellingViewProps {
-  items: (MemoryItem & { progress: StudentMemoryProgress | null })[];
+  items: MemoryTestItem[];
 }
 
 export function SpellingView({ items }: SpellingViewProps) {
-  const [currentIndex, setCurrentIndex] = useState(0);
   const [answer, setAnswer] = useState('');
-  const [showResult, setShowResult] = useState(false);
-  const [isCorrect, setIsCorrect] = useState(false);
-  const [score, setScore] = useState({ correct: 0, wrong: 0 });
-
-  const item = items[currentIndex];
-
-  const submitAnswer = useCallback(async (memoryItemId: string, correct: boolean) => {
-    await fetch('/api/memory/progress', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        memoryItemId,
-        testType: 'spelling',
-        isCorrect: correct,
-      }),
-    });
-  }, []);
+  const {
+    item,
+    currentIndex,
+    showResult,
+    isCorrect,
+    score,
+    isFinished,
+    recordResult,
+    handleNext,
+    resetTest,
+  } = useMemoryTest(items, 'spelling', '스펠링 테스트');
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (!answer.trim() || showResult) return;
-
     const correct = answer.trim().toLowerCase() === item.spelling_answer?.toLowerCase();
-    setIsCorrect(correct);
-    setShowResult(true);
-
-    if (correct) {
-      setScore((prev) => ({ ...prev, correct: prev.correct + 1 }));
-    } else {
-      setScore((prev) => ({ ...prev, wrong: prev.wrong + 1 }));
-    }
-
-    submitAnswer(item.id, correct);
+    recordResult(correct);
   }
 
-  function handleNext() {
-    if (currentIndex < items.length - 1) {
-      setCurrentIndex(currentIndex + 1);
-      setAnswer('');
-      setShowResult(false);
-      setIsCorrect(false);
-    } else {
-      toast.success(`스펠링 테스트 완료! ${score.correct}/${items.length} 정답`);
-    }
+  function handleNextAndReset() {
+    handleNext();
+    setAnswer('');
+  }
+
+  function handleFullReset() {
+    resetTest();
+    setAnswer('');
   }
 
   if (!item) return null;
-
-  const isFinished = currentIndex === items.length - 1 && showResult;
 
   return (
     <div className="space-y-6">
@@ -72,16 +50,7 @@ export function SpellingView({ items }: SpellingViewProps) {
         <span className="text-sm text-muted-foreground">
           {currentIndex + 1} / {items.length}
         </span>
-        <div className="flex gap-2">
-          <Badge variant="outline" className="text-green-600">
-            <CheckCircle className="h-3 w-3 mr-1" />
-            {score.correct}
-          </Badge>
-          <Badge variant="outline" className="text-red-600">
-            <XCircle className="h-3 w-3 mr-1" />
-            {score.wrong}
-          </Badge>
-        </div>
+        <ScoreBadges correct={score.correct} wrong={score.wrong} />
       </div>
 
       <Card>
@@ -111,50 +80,17 @@ export function SpellingView({ items }: SpellingViewProps) {
 
       {showResult && (
         <div className="space-y-4">
-          <Card className={isCorrect ? 'border-green-500 bg-green-50' : 'border-red-500 bg-red-50'}>
-            <CardContent className="py-4 text-center">
-              {isCorrect ? (
-                <div className="flex items-center justify-center gap-2 text-green-700">
-                  <CheckCircle className="h-5 w-5" />
-                  <span className="font-medium">정답!</span>
-                </div>
-              ) : (
-                <div className="text-red-700">
-                  <div className="flex items-center justify-center gap-2 mb-2">
-                    <XCircle className="h-5 w-5" />
-                    <span className="font-medium">오답</span>
-                  </div>
-                  <p className="text-sm">
-                    정답: <strong>{item.spelling_answer}</strong>
-                  </p>
-                </div>
-              )}
-            </CardContent>
-          </Card>
-
+          <ResultCard isCorrect={isCorrect} correctAnswer={item.spelling_answer || undefined} />
           <div className="text-center">
             {isFinished ? (
-              <div className="space-y-3">
-                <p className="text-lg font-semibold">
-                  스펠링 테스트 완료! {score.correct}/{items.length} 정답
-                </p>
-                <Button
-                  onClick={() => {
-                    setCurrentIndex(0);
-                    setAnswer('');
-                    setShowResult(false);
-                    setIsCorrect(false);
-                    setScore({ correct: 0, wrong: 0 });
-                  }}
-                >
-                  다시 풀기
-                </Button>
-              </div>
+              <CompletionView
+                label="스펠링 테스트"
+                correct={score.correct}
+                total={items.length}
+                onReset={handleFullReset}
+              />
             ) : (
-              <Button onClick={handleNext}>
-                다음 문제
-                <ChevronRight className="h-4 w-4 ml-1" />
-              </Button>
+              <NextButton onClick={handleNextAndReset} />
             )}
           </div>
         </div>

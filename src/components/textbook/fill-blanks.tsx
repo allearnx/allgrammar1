@@ -8,6 +8,7 @@ import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { CheckCircle, XCircle } from 'lucide-react';
 import { toast } from 'sonner';
+import { useSaveProgress } from '@/hooks/use-save-progress';
 import type { TextbookPassage, StudentTextbookProgress, BlankItem } from '@/types/database';
 
 interface FillBlanksViewProps {
@@ -18,6 +19,7 @@ interface FillBlanksViewProps {
 type Difficulty = 'easy' | 'medium' | 'hard';
 
 export function FillBlanksView({ passage, progress }: FillBlanksViewProps) {
+  const { saveTextbookProgress } = useSaveProgress();
   const [difficulty, setDifficulty] = useState<Difficulty>('easy');
   const [answers, setAnswers] = useState<Record<number, string>>({});
   const [results, setResults] = useState<Record<number, boolean> | null>(null);
@@ -47,16 +49,7 @@ export function FillBlanksView({ passage, progress }: FillBlanksViewProps) {
     setResults(newResults);
     const score = Math.round((correctCount / blanks.length) * 100);
 
-    // Save progress
-    fetch('/api/textbook/progress', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        passageId: passage.id,
-        type: `fill_blanks_${difficulty}`,
-        score,
-      }),
-    });
+    saveTextbookProgress(passage.id, `fill_blanks_${difficulty}`, score);
 
     toast(score >= 80 ? '잘했어요!' : '다시 도전해보세요!', {
       description: `${correctCount}/${blanks.length} 정답 (${score}점)`,

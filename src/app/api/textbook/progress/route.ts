@@ -1,6 +1,27 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@/lib/supabase/server';
 
+interface ProgressTypeConfig {
+  scoreField: string;
+  attemptsField: string;
+}
+
+const PROGRESS_TYPES: Record<string, ProgressTypeConfig> = {
+  ordering: { scoreField: 'ordering_score', attemptsField: 'ordering_attempts' },
+  translation: { scoreField: 'translation_score', attemptsField: 'translation_attempts' },
+};
+
+function getProgressConfig(type: string): ProgressTypeConfig {
+  if (type.startsWith('fill_blanks_')) {
+    const difficulty = type.replace('fill_blanks_', '');
+    return {
+      scoreField: `fill_blanks_${difficulty}_score`,
+      attemptsField: 'fill_blanks_attempts',
+    };
+  }
+  return PROGRESS_TYPES[type];
+}
+
 export async function POST(request: NextRequest) {
   const supabase = await createClient();
 
@@ -18,42 +39,25 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: 'Missing fields' }, { status: 400 });
   }
 
-  // Build update based on type
+  const config = getProgressConfig(type);
+  if (!config) {
+    return NextResponse.json({ error: 'Invalid type' }, { status: 400 });
+  }
+
+  // Get current attempts to increment
+  const { data: existing } = await supabase
+    .from('student_textbook_progress')
+    .select(config.attemptsField)
+    .eq('student_id', user.id)
+    .eq('passage_id', passageId)
+    .single();
+
   const updates: Record<string, unknown> = {
     student_id: user.id,
     passage_id: passageId,
+    [config.scoreField]: score,
+    [config.attemptsField]: ((existing as Record<string, number> | null)?.[config.attemptsField] || 0) + 1,
   };
-
-  if (type.startsWith('fill_blanks_')) {
-    const difficulty = type.replace('fill_blanks_', '') as 'easy' | 'medium' | 'hard';
-    updates[`fill_blanks_${difficulty}_score`] = score;
-    // Get current attempts to increment
-    const { data: existing } = await supabase
-      .from('student_textbook_progress')
-      .select('fill_blanks_attempts')
-      .eq('student_id', user.id)
-      .eq('passage_id', passageId)
-      .single();
-    updates.fill_blanks_attempts = (existing?.fill_blanks_attempts || 0) + 1;
-  } else if (type === 'ordering') {
-    updates.ordering_score = score;
-    const { data: existing } = await supabase
-      .from('student_textbook_progress')
-      .select('ordering_attempts')
-      .eq('student_id', user.id)
-      .eq('passage_id', passageId)
-      .single();
-    updates.ordering_attempts = (existing?.ordering_attempts || 0) + 1;
-  } else if (type === 'translation') {
-    updates.translation_score = score;
-    const { data: existing } = await supabase
-      .from('student_textbook_progress')
-      .select('translation_attempts')
-      .eq('student_id', user.id)
-      .eq('passage_id', passageId)
-      .single();
-    updates.translation_attempts = (existing?.translation_attempts || 0) + 1;
-  }
 
   const { error } = await supabase
     .from('student_textbook_progress')

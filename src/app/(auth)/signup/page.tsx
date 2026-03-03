@@ -43,10 +43,8 @@ export default function SignUpPage() {
       return;
     }
 
-    toast.success('회원가입 완료!', {
-      description: '이메일을 확인해주세요.',
-    });
-    router.push('/login');
+    toast.success('회원가입 완료!');
+    router.push('/');
   }
 
   return (
