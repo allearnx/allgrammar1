@@ -9,7 +9,7 @@ import type { AuthUser } from '@/types/auth';
 
 interface Props {
   user: AuthUser;
-  basePath: '/teacher' | '/admin';
+  basePath: '/teacher' | '/admin' | '/boss';
 }
 
 export async function StudentsList({ user, basePath }: Props) {

@@ -38,3 +38,20 @@ export async function fetchStudentsList(academyId: string | null) {
   const { data: students } = await query;
   return students || [];
 }
+
+export async function fetchTeachersList(academyId: string | null) {
+  const admin = createAdminClient();
+
+  const query = admin
+    .from('users')
+    .select('id, full_name, email, is_active, created_at')
+    .eq('role', 'teacher')
+    .order('full_name');
+
+  if (academyId) {
+    query.eq('academy_id', academyId);
+  }
+
+  const { data: teachers } = await query;
+  return teachers || [];
+}

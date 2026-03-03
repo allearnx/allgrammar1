@@ -60,6 +60,11 @@ const NAV_CONFIG: Record<string, NavItem[]> = {
     { href: '/boss', label: '대시보드', icon: LayoutDashboard },
     { href: '/boss/academies', label: '학원 관리', icon: Settings },
     { href: '/boss/users', label: '사용자 관리', icon: Users },
+    { href: '/boss/students', label: '학생 관리', icon: Users },
+    { href: '/boss/teachers', label: '선생님 관리', icon: GraduationCap },
+    { href: '/boss/content', label: '콘텐츠 관리', icon: NotebookPen },
+    { href: '/boss/textbook-mode', label: '교과서 모드', icon: BookMarked },
+    { href: '/boss/reports', label: '리포트', icon: FileText },
   ],
 };
 
