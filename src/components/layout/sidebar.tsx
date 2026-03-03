@@ -107,9 +107,9 @@ function NavLinks({ items, pathname, onNavigate }: { items: NavItem[]; pathname:
             className={cn(
               'flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors',
               isActive
-                ? 'bg-sidebar-primary text-sidebar-primary-foreground'
-                : 'bg-sidebar-primary/40 text-white/80 hover:bg-white hover:text-sidebar-primary',
-              isLoading && !isActive && 'bg-white text-sidebar-primary'
+                ? 'text-white font-semibold'
+                : 'text-white/70 hover:bg-white/90 hover:text-sidebar-primary',
+              isLoading && !isActive && 'bg-white/90 text-sidebar-primary'
             )}
           >
             {isLoading ? (
@@ -170,7 +170,7 @@ export function Sidebar({ user }: SidebarProps) {
   return (
     <>
       {/* Desktop sidebar */}
-      <aside className="hidden w-64 shrink-0 border-r border-sidebar-border bg-sidebar backdrop-blur-xl text-sidebar-foreground md:block">
+      <aside className="hidden w-64 shrink-0 border-r border-sidebar-border bg-sidebar text-sidebar-foreground md:block">
         {sidebarContent}
       </aside>
 
@@ -181,7 +181,7 @@ export function Sidebar({ user }: SidebarProps) {
             <Menu className="h-5 w-5" />
           </Button>
         </SheetTrigger>
-        <SheetContent side="left" className="w-64 p-0 bg-sidebar backdrop-blur-xl text-sidebar-foreground">
+        <SheetContent side="left" className="w-64 p-0 bg-sidebar text-sidebar-foreground">
           <SheetTitle className="sr-only">내비게이션</SheetTitle>
           {sidebarContent}
         </SheetContent>
