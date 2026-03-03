@@ -170,7 +170,7 @@ export function Sidebar({ user }: SidebarProps) {
   return (
     <>
       {/* Desktop sidebar */}
-      <aside className="hidden w-64 shrink-0 border-r border-sidebar-border bg-sidebar text-sidebar-foreground md:block">
+      <aside className="hidden w-64 shrink-0 border-r border-sidebar-border bg-sidebar backdrop-blur-xl text-sidebar-foreground md:block">
         {sidebarContent}
       </aside>
 
@@ -181,7 +181,7 @@ export function Sidebar({ user }: SidebarProps) {
             <Menu className="h-5 w-5" />
           </Button>
         </SheetTrigger>
-        <SheetContent side="left" className="w-64 p-0 bg-sidebar text-sidebar-foreground">
+        <SheetContent side="left" className="w-64 p-0 bg-sidebar backdrop-blur-xl text-sidebar-foreground">
           <SheetTitle className="sr-only">내비게이션</SheetTitle>
           {sidebarContent}
         </SheetContent>
