@@ -242,32 +242,44 @@ function AddTextbookDialog({ onAdd }: { onAdd: (tb: NaesinTextbook) => void }) {
   );
 }
 
+const UNIT_OPTIONS = [
+  { value: '1', label: 'Lesson 1' },
+  { value: '2', label: 'Lesson 2' },
+  { value: '3', label: 'Lesson 3' },
+  { value: '4', label: 'Lesson 4' },
+  { value: '5', label: 'Lesson 5' },
+  { value: '6', label: 'Lesson 6' },
+  { value: '7', label: 'Lesson 7' },
+  { value: '8', label: 'Lesson 8' },
+  { value: '9', label: 'Special Lesson' },
+];
+
 function AddUnitDialog({ textbookId, onAdd }: { textbookId: string; onAdd: (unit: NaesinUnit) => void }) {
   const [open, setOpen] = useState(false);
-  const [unitNumber, setUnitNumber] = useState('');
-  const [title, setTitle] = useState('');
+  const [unitValue, setUnitValue] = useState('');
   const [saving, setSaving] = useState(false);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
+    if (!unitValue) return;
     setSaving(true);
     try {
+      const selected = UNIT_OPTIONS.find((o) => o.value === unitValue);
       const res = await fetch('/api/naesin/units', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           textbook_id: textbookId,
-          unit_number: Number(unitNumber),
-          title,
-          sort_order: Number(unitNumber),
+          unit_number: Number(unitValue),
+          title: selected?.label || `Lesson ${unitValue}`,
+          sort_order: Number(unitValue),
         }),
       });
       if (!res.ok) throw new Error();
       const data = await res.json();
       onAdd(data);
       setOpen(false);
-      setUnitNumber('');
-      setTitle('');
+      setUnitValue('');
       toast.success('단원이 추가되었습니다');
     } catch {
       toast.error('단원 추가 중 오류가 발생했습니다');
@@ -290,14 +302,17 @@ function AddUnitDialog({ textbookId, onAdd }: { textbookId: string; onAdd: (unit
         </DialogHeader>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <Label>단원 번호</Label>
-            <Input type="number" value={unitNumber} onChange={(e) => setUnitNumber(e.target.value)} placeholder="1" required />
+            <Label>단원 선택</Label>
+            <Select value={unitValue} onValueChange={setUnitValue}>
+              <SelectTrigger><SelectValue placeholder="단원을 선택하세요" /></SelectTrigger>
+              <SelectContent>
+                {UNIT_OPTIONS.map((o) => (
+                  <SelectItem key={o.value} value={o.value}>{o.label}</SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
           </div>
-          <div>
-            <Label>단원 제목</Label>
-            <Input value={title} onChange={(e) => setTitle(e.target.value)} placeholder="My New Friends" required />
-          </div>
-          <Button type="submit" className="w-full" disabled={saving}>
+          <Button type="submit" className="w-full" disabled={saving || !unitValue}>
             {saving ? '저장 중...' : '추가'}
           </Button>
         </form>
@@ -335,7 +350,7 @@ function UnitCard({
               <ChevronRight className="h-4 w-4 shrink-0" />
             )}
             <span className="font-medium">
-              Lesson {unit.unit_number}. {unit.title}
+              {unit.title}
             </span>
           </button>
           <Button
