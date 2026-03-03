@@ -107,9 +107,9 @@ function NavLinks({ items, pathname, onNavigate }: { items: NavItem[]; pathname:
             className={cn(
               'flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors',
               isActive
-                ? 'bg-primary text-primary-foreground'
-                : 'text-muted-foreground hover:bg-muted hover:text-foreground',
-              isLoading && !isActive && 'bg-muted text-foreground'
+                ? 'bg-sidebar-primary text-sidebar-primary-foreground'
+                : 'text-sidebar-foreground/70 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground',
+              isLoading && !isActive && 'bg-sidebar-accent text-sidebar-accent-foreground'
             )}
           >
             {isLoading ? (
@@ -141,7 +141,7 @@ export function Sidebar({ user }: SidebarProps) {
 
   const sidebarContent = (
     <div className="flex h-full flex-col">
-      <div className="flex h-14 items-center border-b px-4">
+      <div className="flex h-14 items-center border-b border-sidebar-border px-4">
         <span className="flex items-center gap-2 font-bold">
           <GraduationCap className="h-5 w-5" />
           <span>올라영</span>
@@ -150,14 +150,14 @@ export function Sidebar({ user }: SidebarProps) {
       <ScrollArea className="flex-1 py-4">
         <NavLinks items={navItems} pathname={pathname} onNavigate={() => setOpen(false)} />
       </ScrollArea>
-      <div className="border-t p-4">
+      <div className="border-t border-sidebar-border p-4">
         <div className="mb-3 px-3">
           <p className="text-sm font-medium truncate">{user.full_name}</p>
-          <p className="text-xs text-muted-foreground truncate">{user.email}</p>
+          <p className="text-xs text-sidebar-foreground/60 truncate">{user.email}</p>
         </div>
         <Button
           variant="ghost"
-          className="w-full justify-start gap-3 text-muted-foreground"
+          className="w-full justify-start gap-3 text-sidebar-foreground/60 hover:text-sidebar-foreground hover:bg-sidebar-accent"
           onClick={handleLogout}
         >
           <LogOut className="h-4 w-4" />
@@ -170,7 +170,7 @@ export function Sidebar({ user }: SidebarProps) {
   return (
     <>
       {/* Desktop sidebar */}
-      <aside className="hidden w-64 shrink-0 border-r bg-card md:block">
+      <aside className="hidden w-64 shrink-0 border-r border-sidebar-border bg-sidebar text-sidebar-foreground md:block">
         {sidebarContent}
       </aside>
 
@@ -181,7 +181,7 @@ export function Sidebar({ user }: SidebarProps) {
             <Menu className="h-5 w-5" />
           </Button>
         </SheetTrigger>
-        <SheetContent side="left" className="w-64 p-0">
+        <SheetContent side="left" className="w-64 p-0 bg-sidebar text-sidebar-foreground">
           <SheetTitle className="sr-only">내비게이션</SheetTitle>
           {sidebarContent}
         </SheetContent>
