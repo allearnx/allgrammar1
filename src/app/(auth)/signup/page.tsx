@@ -107,7 +107,7 @@ export default function SignUpPage() {
             </div>
           </CardContent>
           <CardFooter className="flex flex-col gap-3">
-            <Button type="submit" className="w-full bg-indigo-800 hover:bg-indigo-900 text-white" disabled={loading}>
+            <Button type="submit" className="w-full" disabled={loading}>
               {loading ? '가입 중...' : '회원가입'}
             </Button>
             <p className="text-sm text-muted-foreground">

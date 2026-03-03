@@ -1,17 +1,132 @@
 import { requireRole } from '@/lib/auth/helpers';
+import { createAdminClient } from '@/lib/supabase/admin';
 import { Topbar } from '@/components/layout/topbar';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Users, BookOpen, FileText, GraduationCap } from 'lucide-react';
+import Link from 'next/link';
 
 export default async function AdminDashboard() {
   const user = await requireRole(['admin', 'boss']);
+  const admin = createAdminClient();
+
+  const [studentRes, teacherRes, grammarRes, memoryRes] = await Promise.all([
+    admin
+      .from('users')
+      .select('id', { count: 'exact', head: true })
+      .eq('role', 'student')
+      .eq('academy_id', user.academy_id!),
+    admin
+      .from('users')
+      .select('id', { count: 'exact', head: true })
+      .eq('role', 'teacher')
+      .eq('academy_id', user.academy_id!),
+    admin
+      .from('grammars')
+      .select('id', { count: 'exact', head: true }),
+    admin
+      .from('memory_items')
+      .select('id', { count: 'exact', head: true }),
+  ]);
 
   return (
     <>
       <Topbar user={user} title="관리자 대시보드" />
-      <div className="p-4 md:p-6">
-        <h2 className="text-2xl font-bold mb-4">학원 관리</h2>
-        <p className="text-muted-foreground">
-          관리자 기능은 Phase 2에서 확장됩니다.
-        </p>
+      <div className="p-4 md:p-6 space-y-6">
+        <div>
+          <h2 className="text-2xl font-bold">안녕하세요, {user.full_name}님!</h2>
+          <p className="text-muted-foreground mt-1">학원 현황을 확인하세요.</p>
+        </div>
+
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <Card>
+            <CardHeader className="flex flex-row items-center justify-between pb-2">
+              <CardTitle className="text-sm font-medium">학생 수</CardTitle>
+              <Users className="h-4 w-4 text-muted-foreground" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold">{studentRes.count || 0}</div>
+            </CardContent>
+          </Card>
+          <Card>
+            <CardHeader className="flex flex-row items-center justify-between pb-2">
+              <CardTitle className="text-sm font-medium">선생님 수</CardTitle>
+              <GraduationCap className="h-4 w-4 text-muted-foreground" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold">{teacherRes.count || 0}</div>
+            </CardContent>
+          </Card>
+          <Card>
+            <CardHeader className="flex flex-row items-center justify-between pb-2">
+              <CardTitle className="text-sm font-medium">문법 주제</CardTitle>
+              <BookOpen className="h-4 w-4 text-muted-foreground" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold">{grammarRes.count || 0}</div>
+            </CardContent>
+          </Card>
+          <Card>
+            <CardHeader className="flex flex-row items-center justify-between pb-2">
+              <CardTitle className="text-sm font-medium">암기 항목</CardTitle>
+              <FileText className="h-4 w-4 text-muted-foreground" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold">{memoryRes.count || 0}</div>
+            </CardContent>
+          </Card>
+        </div>
+
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <Card className="hover:shadow-md transition-shadow">
+            <CardContent className="pt-6">
+              <div className="flex flex-col items-center text-center gap-3">
+                <Users className="h-10 w-10 text-primary" />
+                <h3 className="font-semibold">학생 관리</h3>
+                <p className="text-sm text-muted-foreground">학생 목록 및 진도 확인</p>
+                <Button asChild className="mt-2">
+                  <Link href="/admin/students">학생 목록</Link>
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+          <Card className="hover:shadow-md transition-shadow">
+            <CardContent className="pt-6">
+              <div className="flex flex-col items-center text-center gap-3">
+                <GraduationCap className="h-10 w-10 text-primary" />
+                <h3 className="font-semibold">선생님 관리</h3>
+                <p className="text-sm text-muted-foreground">선생님 목록 및 상태 관리</p>
+                <Button asChild variant="outline" className="mt-2">
+                  <Link href="/admin/teachers">선생님 목록</Link>
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+          <Card className="hover:shadow-md transition-shadow">
+            <CardContent className="pt-6">
+              <div className="flex flex-col items-center text-center gap-3">
+                <BookOpen className="h-10 w-10 text-primary" />
+                <h3 className="font-semibold">콘텐츠 관리</h3>
+                <p className="text-sm text-muted-foreground">문법, 암기 항목, 교과서 관리</p>
+                <Button asChild variant="outline" className="mt-2">
+                  <Link href="/admin/content">콘텐츠 관리</Link>
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+          <Card className="hover:shadow-md transition-shadow">
+            <CardContent className="pt-6">
+              <div className="flex flex-col items-center text-center gap-3">
+                <FileText className="h-10 w-10 text-primary" />
+                <h3 className="font-semibold">리포트</h3>
+                <p className="text-sm text-muted-foreground">학생 학습 리포트 생성</p>
+                <Button asChild variant="outline" className="mt-2">
+                  <Link href="/admin/reports">리포트</Link>
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
       </div>
     </>
   );

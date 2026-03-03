@@ -6,9 +6,9 @@ interface Props {
   params: Promise<{ studentId: string }>;
 }
 
-export default async function StudentDetailPage({ params }: Props) {
+export default async function AdminStudentDetailPage({ params }: Props) {
   const { studentId } = await params;
-  const user = await requireRole(['teacher', 'admin', 'boss']);
+  const user = await requireRole(['admin', 'boss']);
   return (
     <>
       <Topbar user={user} title="학생 상세" />
