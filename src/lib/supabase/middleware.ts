@@ -50,14 +50,14 @@ export async function updateSession(request: NextRequest) {
   const isPublicRoute = publicRoutes.some((route) => pathname.startsWith(route));
 
   // If not authenticated and not on a public route, redirect to login
-  if (!user && !isPublicRoute && pathname !== '/') {
+  if (!user && !isPublicRoute) {
     const url = request.nextUrl.clone();
     url.pathname = '/login';
     return NextResponse.redirect(url);
   }
 
   // If authenticated, fetch role once and handle routing
-  if (user && (isPublicRoute || (!isPublicRoute && pathname !== '/'))) {
+  if (user) {
     const admin = createClient(
       process.env.NEXT_PUBLIC_SUPABASE_URL!,
       process.env.SUPABASE_SERVICE_ROLE_KEY!,
@@ -71,8 +71,8 @@ export async function updateSession(request: NextRequest) {
 
     const role = (profile?.role || 'student') as UserRole;
 
-    // If on a public route, redirect to dashboard
-    if (isPublicRoute) {
+    // If on a public route or root, redirect to dashboard
+    if (isPublicRoute || pathname === '/') {
       const url = request.nextUrl.clone();
       url.pathname = getRoleDashboard(role);
       return NextResponse.redirect(url);

@@ -69,9 +69,10 @@ function getNavItems(role: string): NavItem[] {
 
 function NavLinks({ items, pathname, onNavigate }: { items: NavItem[]; pathname: string; onNavigate?: () => void }) {
   return (
-    <nav className="flex flex-col gap-1 px-2">
+    <nav className="flex flex-col gap-1 px-3">
       {items.map((item) => {
-        const isActive = pathname === item.href || (item.href !== '/' && pathname.startsWith(item.href + '/'));
+        const isExactOnly = item.href.split('/').filter(Boolean).length === 1;
+        const isActive = pathname === item.href || (!isExactOnly && pathname.startsWith(item.href + '/'));
         return (
           <Link
             key={item.href}
@@ -110,10 +111,10 @@ export function Sidebar({ user }: SidebarProps) {
   const sidebarContent = (
     <div className="flex h-full flex-col">
       <div className="flex h-14 items-center border-b px-4">
-        <Link href="/" className="flex items-center gap-2 font-bold">
+        <span className="flex items-center gap-2 font-bold">
           <GraduationCap className="h-5 w-5" />
           <span>올라영</span>
-        </Link>
+        </span>
       </div>
       <ScrollArea className="flex-1 py-4">
         <NavLinks items={navItems} pathname={pathname} onNavigate={() => setOpen(false)} />
