@@ -168,6 +168,7 @@ export interface NaesinVocabulary {
   unit_id: string;
   front_text: string;
   back_text: string;
+  part_of_speech: string | null;
   example_sentence: string | null;
   synonyms: string | null;
   antonyms: string | null;

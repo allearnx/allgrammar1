@@ -21,6 +21,7 @@ export async function POST(request: NextRequest) {
       unit_id,
       front_text,
       back_text,
+      part_of_speech: body.part_of_speech || null,
       example_sentence: body.example_sentence || null,
       synonyms: body.synonyms || null,
       antonyms: body.antonyms || null,

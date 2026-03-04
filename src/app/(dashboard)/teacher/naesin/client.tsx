@@ -559,6 +559,7 @@ function AddVocabDialog({ unitId, onAdd }: { unitId: string; onAdd: () => void }
   const [open, setOpen] = useState(false);
   const [frontText, setFrontText] = useState('');
   const [backText, setBackText] = useState('');
+  const [partOfSpeech, setPartOfSpeech] = useState('');
   const [exampleSentence, setExampleSentence] = useState('');
   const [synonyms, setSynonyms] = useState('');
   const [antonyms, setAntonyms] = useState('');
@@ -575,6 +576,7 @@ function AddVocabDialog({ unitId, onAdd }: { unitId: string; onAdd: () => void }
           unit_id: unitId,
           front_text: frontText,
           back_text: backText,
+          part_of_speech: partOfSpeech || null,
           example_sentence: exampleSentence || null,
           synonyms: synonyms || null,
           antonyms: antonyms || null,
@@ -585,6 +587,7 @@ function AddVocabDialog({ unitId, onAdd }: { unitId: string; onAdd: () => void }
       setOpen(false);
       setFrontText('');
       setBackText('');
+      setPartOfSpeech('');
       setExampleSentence('');
       setSynonyms('');
       setAntonyms('');
@@ -614,6 +617,10 @@ function AddVocabDialog({ unitId, onAdd }: { unitId: string; onAdd: () => void }
           <div>
             <Label>뒷면 (한국어)</Label>
             <Input value={backText} onChange={(e) => setBackText(e.target.value)} placeholder="사과" required />
+          </div>
+          <div>
+            <Label>품사 (선택)</Label>
+            <Input value={partOfSpeech} onChange={(e) => setPartOfSpeech(e.target.value)} placeholder="n. / v. / adj. / adv." />
           </div>
           <div>
             <Label>예문 (선택)</Label>
@@ -652,9 +659,10 @@ function BulkVocabUpload({ unitId, onAdd }: { unitId: string; onAdd: () => void 
         return {
           front_text: parts[0] || '',
           back_text: parts[1] || '',
-          example_sentence: parts[2] || null,
-          synonyms: parts[3] || null,
-          antonyms: parts[4] || null,
+          part_of_speech: parts[2] || null,
+          example_sentence: parts[3] || null,
+          synonyms: parts[4] || null,
+          antonyms: parts[5] || null,
           spelling_answer: parts[0] || null,
         };
       });
@@ -689,11 +697,11 @@ function BulkVocabUpload({ unitId, onAdd }: { unitId: string; onAdd: () => void 
         <DialogHeader><DialogTitle>단어 일괄 추가</DialogTitle></DialogHeader>
         <form onSubmit={handleSubmit} className="space-y-3">
           <div>
-            <Label>한 줄에 하나씩: 영어, 한국어, 예문, 유의어, 반의어</Label>
+            <Label>한 줄에 하나씩: 영어, 한국어, 품사, 예문, 유의어, 반의어</Label>
             <Textarea
               value={csvText}
               onChange={(e) => setCsvText(e.target.value)}
-              placeholder={`apple, 사과, I eat an apple., fruit, vegetable\nhappy, 행복한, I am happy., glad/joyful, sad/unhappy\ngrape, 포도`}
+              placeholder={`apple, 사과, n., I eat an apple., fruit\nhappy, 행복한, adj., I am happy., glad, sad\ngrape, 포도`}
               rows={8}
               required
             />

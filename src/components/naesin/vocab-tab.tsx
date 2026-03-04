@@ -151,6 +151,9 @@ function NaesinFlashcardView({ items, vocabulary, onComplete }: { items: Flashca
             style={{ backfaceVisibility: 'hidden', transform: 'rotateY(180deg)' }}
           >
             <CardContent className="text-center py-8 px-6">
+              {vocab?.part_of_speech && (
+                <p className="text-xs text-muted-foreground mb-1">{vocab.part_of_speech}</p>
+              )}
               <p className="text-xl font-medium">{item.back_text}</p>
               {(vocab?.synonyms || vocab?.antonyms) && (
                 <div className="mt-3 flex flex-wrap justify-center gap-x-4 gap-y-1 text-sm">
@@ -163,7 +166,7 @@ function NaesinFlashcardView({ items, vocabulary, onComplete }: { items: Flashca
                 </div>
               )}
               {vocab?.example_sentence && (
-                <p className="text-sm text-muted-foreground mt-3 italic">
+                <p className="text-sm text-muted-foreground mt-4 italic">
                   &ldquo;{vocab.example_sentence}&rdquo;
                 </p>
               )}
