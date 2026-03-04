@@ -21,10 +21,7 @@ export async function POST(request: NextRequest) {
     example_sentence: item.example_sentence || null,
     synonyms: item.synonyms || null,
     antonyms: item.antonyms || null,
-    quiz_options: item.quiz_options || null,
-    quiz_correct_index: item.quiz_correct_index ?? null,
-    spelling_hint: item.spelling_hint || null,
-    spelling_answer: item.spelling_answer || null,
+    spelling_answer: item.front_text || '',
     sort_order: idx,
   }));
 

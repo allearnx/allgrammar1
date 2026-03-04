@@ -14,6 +14,7 @@ import type { MemoryItem, StudentMemoryProgress, NaesinVocabulary } from '@/type
 
 type FlashcardItem = MemoryItem & { progress: StudentMemoryProgress | null };
 
+
 interface VocabTabProps {
   vocabulary: NaesinVocabulary[];
   unitId: string;
@@ -24,7 +25,7 @@ export function VocabTab({ vocabulary, unitId, onStageComplete }: VocabTabProps)
   const [activeTab, setActiveTab] = useState('flashcard');
   const items = vocabulary.map(vocabToMemoryItem);
 
-  const quizItems = items.filter((i) => i.quiz_options && i.quiz_correct_index !== null);
+  const hasEnoughForQuiz = vocabulary.length >= 4;
   const spellingItems = items.filter((i) => i.spelling_answer);
 
   async function saveVocabProgress(type: 'flashcard' | 'quiz' | 'spelling', score?: number) {
@@ -56,7 +57,7 @@ export function VocabTab({ vocabulary, unitId, onStageComplete }: VocabTabProps)
     <Tabs value={activeTab} onValueChange={setActiveTab}>
       <TabsList className="grid w-full grid-cols-3">
         <TabsTrigger value="flashcard">플래시카드</TabsTrigger>
-        <TabsTrigger value="quiz" disabled={quizItems.length === 0}>
+        <TabsTrigger value="quiz" disabled={!hasEnoughForQuiz}>
           퀴즈
         </TabsTrigger>
         <TabsTrigger value="spelling" disabled={spellingItems.length === 0}>
@@ -69,7 +70,7 @@ export function VocabTab({ vocabulary, unitId, onStageComplete }: VocabTabProps)
       </TabsContent>
 
       <TabsContent value="quiz" className="mt-4">
-        <NaesinQuizView items={quizItems} onComplete={(score) => saveVocabProgress('quiz', score)} />
+        <NaesinQuizView vocabulary={vocabulary} onComplete={(score) => saveVocabProgress('quiz', score)} />
       </TabsContent>
 
       <TabsContent value="spelling" className="mt-4">
@@ -186,34 +187,59 @@ function NaesinFlashcardView({ items, vocabulary, onComplete }: { items: Flashca
   );
 }
 
-function NaesinQuizView({ items, onComplete }: { items: FlashcardItem[]; onComplete: (score: number) => void }) {
+interface QuizQuestion {
+  front_text: string;
+  correctAnswer: string;
+  options: string[];
+  correctIndex: number;
+}
+
+function generateQuizQuestions(vocabulary: NaesinVocabulary[]): QuizQuestion[] {
+  return vocabulary.map((vocab) => {
+    const others = vocabulary
+      .filter((v) => v.id !== vocab.id)
+      .sort(() => Math.random() - 0.5)
+      .slice(0, 3)
+      .map((v) => v.back_text);
+    const options = [...others, vocab.back_text].sort(() => Math.random() - 0.5);
+    return {
+      front_text: vocab.front_text,
+      correctAnswer: vocab.back_text,
+      options,
+      correctIndex: options.indexOf(vocab.back_text),
+    };
+  });
+}
+
+function NaesinQuizView({ vocabulary, onComplete }: { vocabulary: NaesinVocabulary[]; onComplete: (score: number) => void }) {
+  const [questions, setQuestions] = useState<QuizQuestion[]>(() => generateQuizQuestions(vocabulary));
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
   const [showResult, setShowResult] = useState(false);
   const [score, setScore] = useState({ correct: 0, wrong: 0 });
 
-  const item = items[currentIndex];
-  const isFinished = currentIndex === items.length - 1 && showResult;
+  const question = questions[currentIndex];
+  const isFinished = currentIndex === questions.length - 1 && showResult;
 
   function handleSelect(optionIndex: number) {
     if (showResult) return;
     setSelectedAnswer(optionIndex);
-    const correct = optionIndex === item.quiz_correct_index;
+    const correct = optionIndex === question.correctIndex;
     setShowResult(true);
     if (correct) {
       setScore((prev) => ({ ...prev, correct: prev.correct + 1 }));
     } else {
       setScore((prev) => ({ ...prev, wrong: prev.wrong + 1 }));
     }
-    if (currentIndex === items.length - 1) {
+    if (currentIndex === questions.length - 1) {
       const finalCorrect = correct ? score.correct + 1 : score.correct;
-      const pct = Math.round((finalCorrect / items.length) * 100);
+      const pct = Math.round((finalCorrect / questions.length) * 100);
       onComplete(pct);
     }
   }
 
   function handleNext() {
-    if (currentIndex < items.length - 1) {
+    if (currentIndex < questions.length - 1) {
       setCurrentIndex(currentIndex + 1);
       setShowResult(false);
       setSelectedAnswer(null);
@@ -221,32 +247,32 @@ function NaesinQuizView({ items, onComplete }: { items: FlashcardItem[]; onCompl
   }
 
   function handleReset() {
+    setQuestions(generateQuizQuestions(vocabulary));
     setCurrentIndex(0);
     setShowResult(false);
     setSelectedAnswer(null);
     setScore({ correct: 0, wrong: 0 });
   }
 
-  if (!item || !item.quiz_options) return null;
-  const options = item.quiz_options as string[];
+  if (!question) return null;
 
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center">
-        <span className="text-sm text-muted-foreground">{currentIndex + 1} / {items.length}</span>
+        <span className="text-sm text-muted-foreground">{currentIndex + 1} / {questions.length}</span>
         <ScoreBadges correct={score.correct} wrong={score.wrong} />
       </div>
 
       <Card>
         <CardContent className="py-8 text-center">
-          <p className="text-lg font-medium">{item.front_text}</p>
+          <p className="text-lg font-medium">{question.front_text}</p>
         </CardContent>
       </Card>
 
       <div className="grid gap-3">
-        {options.map((option, idx) => {
+        {question.options.map((option, idx) => {
           const isSelected = selectedAnswer === idx;
-          const isCorrectOption = idx === item.quiz_correct_index;
+          const isCorrectOption = idx === question.correctIndex;
           return (
             <Button
               key={idx}
@@ -271,7 +297,7 @@ function NaesinQuizView({ items, onComplete }: { items: FlashcardItem[]; onCompl
       {showResult && (
         <div className="text-center">
           {isFinished ? (
-            <CompletionView label="퀴즈" correct={score.correct} total={items.length} onReset={handleReset} />
+            <CompletionView label="퀴즈" correct={score.correct} total={questions.length} onReset={handleReset} />
           ) : (
             <NextButton onClick={handleNext} />
           )}

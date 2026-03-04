@@ -562,16 +562,12 @@ function AddVocabDialog({ unitId, onAdd }: { unitId: string; onAdd: () => void }
   const [exampleSentence, setExampleSentence] = useState('');
   const [synonyms, setSynonyms] = useState('');
   const [antonyms, setAntonyms] = useState('');
-  const [quizOptions, setQuizOptions] = useState('');
-  const [correctIndex, setCorrectIndex] = useState('');
-  const [spellingAnswer, setSpellingAnswer] = useState('');
   const [saving, setSaving] = useState(false);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setSaving(true);
     try {
-      const options = quizOptions.trim() ? quizOptions.split(',').map((s) => s.trim()) : null;
       const res = await fetch('/api/naesin/vocabulary', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -582,9 +578,6 @@ function AddVocabDialog({ unitId, onAdd }: { unitId: string; onAdd: () => void }
           example_sentence: exampleSentence || null,
           synonyms: synonyms || null,
           antonyms: antonyms || null,
-          quiz_options: options,
-          quiz_correct_index: correctIndex ? Number(correctIndex) : null,
-          spelling_answer: spellingAnswer || null,
         }),
       });
       if (!res.ok) throw new Error();
@@ -595,9 +588,6 @@ function AddVocabDialog({ unitId, onAdd }: { unitId: string; onAdd: () => void }
       setExampleSentence('');
       setSynonyms('');
       setAntonyms('');
-      setQuizOptions('');
-      setCorrectIndex('');
-      setSpellingAnswer('');
       toast.success('단어가 추가되었습니다');
     } catch {
       toast.error('단어 추가 실패');
@@ -636,18 +626,6 @@ function AddVocabDialog({ unitId, onAdd }: { unitId: string; onAdd: () => void }
           <div>
             <Label>반의어 (선택, /로 구분)</Label>
             <Input value={antonyms} onChange={(e) => setAntonyms(e.target.value)} placeholder="sad / unhappy" />
-          </div>
-          <div>
-            <Label>퀴즈 선택지 (쉼표 구분)</Label>
-            <Input value={quizOptions} onChange={(e) => setQuizOptions(e.target.value)} placeholder="사과, 바나나, 포도, 딸기" />
-          </div>
-          <div>
-            <Label>정답 인덱스 (0부터)</Label>
-            <Input type="number" value={correctIndex} onChange={(e) => setCorrectIndex(e.target.value)} placeholder="0" />
-          </div>
-          <div>
-            <Label>스펠링 정답</Label>
-            <Input value={spellingAnswer} onChange={(e) => setSpellingAnswer(e.target.value)} placeholder="apple" />
           </div>
           <Button type="submit" className="w-full" disabled={saving}>
             {saving ? '저장 중...' : '추가'}
