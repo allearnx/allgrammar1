@@ -1,7 +1,7 @@
 import { requireRole } from '@/lib/auth/helpers';
 import { Topbar } from '@/components/layout/topbar';
 import { fetchStudentsList } from '@/lib/dashboard/queries';
-import { ReportsClient } from '@/app/(dashboard)/teacher/reports/client';
+import { ReportsClient } from '@/components/dashboard/reports-client';
 
 export default async function AdminReportsPage() {
   const user = await requireRole(['admin', 'boss']);

@@ -1,7 +1,7 @@
 import { requireRole } from '@/lib/auth/helpers';
 import { Topbar } from '@/components/layout/topbar';
 import { fetchTextbookData } from '@/lib/dashboard/queries';
-import { TextbookModeClient } from '@/app/(dashboard)/teacher/textbook-mode/client';
+import { TextbookModeClient } from '@/components/dashboard/textbook-mode-client';
 
 export default async function AdminTextbookModePage() {
   const user = await requireRole(['admin', 'boss']);

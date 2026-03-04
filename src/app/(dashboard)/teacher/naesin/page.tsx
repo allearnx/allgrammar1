@@ -1,7 +1,7 @@
 import { requireRole } from '@/lib/auth/helpers';
 import { createClient } from '@/lib/supabase/server';
 import { Topbar } from '@/components/layout/topbar';
-import { NaesinAdminClient } from './client';
+import { NaesinAdminClient } from '@/components/dashboard/naesin-admin-client';
 
 export default async function TeacherNaesinPage() {
   const user = await requireRole(['teacher', 'admin', 'boss']);

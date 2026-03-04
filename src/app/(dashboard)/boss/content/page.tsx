@@ -1,7 +1,7 @@
 import { requireRole } from '@/lib/auth/helpers';
 import { Topbar } from '@/components/layout/topbar';
 import { fetchContentData } from '@/lib/dashboard/queries';
-import { ContentClient } from '@/app/(dashboard)/teacher/content/client';
+import { ContentClient } from '@/components/dashboard/content-client';
 
 export default async function BossContentPage() {
   const user = await requireRole(['boss']);

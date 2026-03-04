@@ -1,7 +1,7 @@
 import { requireRole } from '@/lib/auth/helpers';
 import { Topbar } from '@/components/layout/topbar';
 import { fetchTeachersList } from '@/lib/dashboard/queries';
-import { TeachersClient } from '@/app/(dashboard)/admin/teachers/client';
+import { TeachersClient } from '@/components/dashboard/teachers-client';
 
 export default async function BossTeachersPage() {
   const user = await requireRole(['boss']);
