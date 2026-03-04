@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getUser } from '@/lib/auth/helpers';
 import Anthropic from '@anthropic-ai/sdk';
 
+export const maxDuration = 120;
+
 const anthropic = new Anthropic();
 
 export async function POST(request: NextRequest) {
@@ -77,8 +79,9 @@ JSON 배열로만 응답 (다른 텍스트 없이):
     return NextResponse.json({ items });
   } catch (error) {
     console.error('PDF extraction error:', error);
+    const message = error instanceof Error ? error.message : 'Unknown error';
     return NextResponse.json(
-      { error: 'PDF 단어 추출 중 오류가 발생했습니다.' },
+      { error: `PDF 단어 추출 중 오류: ${message}` },
       { status: 500 }
     );
   }
