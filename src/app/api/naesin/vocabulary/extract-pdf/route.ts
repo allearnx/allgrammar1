@@ -68,9 +68,13 @@ JSON 배열로만 응답 (다른 텍스트 없이):
 
     const responseText = message.content[0].type === 'text' ? message.content[0].text : '';
 
+    // Strip markdown code fences if present
+    const cleaned = responseText.replace(/```(?:json)?\s*/g, '').replace(/```\s*/g, '').trim();
+
     // Parse JSON array from response
-    const jsonMatch = responseText.match(/\[[\s\S]*\]/);
+    const jsonMatch = cleaned.match(/\[[\s\S]*\]/);
     if (!jsonMatch) {
+      console.error('AI raw response:', responseText);
       throw new Error('AI 응답에서 JSON을 파싱할 수 없습니다.');
     }
 
