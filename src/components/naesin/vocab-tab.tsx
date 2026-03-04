@@ -149,8 +149,18 @@ function NaesinFlashcardView({ items, vocabulary, onComplete }: { items: Flashca
             className="absolute inset-0 flex items-center justify-center bg-primary/5"
             style={{ backfaceVisibility: 'hidden', transform: 'rotateY(180deg)' }}
           >
-            <CardContent className="text-center py-12 px-6">
+            <CardContent className="text-center py-8 px-6">
               <p className="text-xl font-medium">{item.back_text}</p>
+              {(vocab?.synonyms || vocab?.antonyms) && (
+                <div className="mt-3 flex flex-wrap justify-center gap-x-4 gap-y-1 text-sm">
+                  {vocab.synonyms && (
+                    <span className="text-blue-600">= {vocab.synonyms}</span>
+                  )}
+                  {vocab.antonyms && (
+                    <span className="text-red-500">&harr; {vocab.antonyms}</span>
+                  )}
+                </div>
+              )}
               {vocab?.example_sentence && (
                 <p className="text-sm text-muted-foreground mt-3 italic">
                   &ldquo;{vocab.example_sentence}&rdquo;

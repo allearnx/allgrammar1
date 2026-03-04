@@ -447,6 +447,8 @@ function AddVocabDialog({ unitId, onAdd }: { unitId: string; onAdd: () => void }
   const [frontText, setFrontText] = useState('');
   const [backText, setBackText] = useState('');
   const [exampleSentence, setExampleSentence] = useState('');
+  const [synonyms, setSynonyms] = useState('');
+  const [antonyms, setAntonyms] = useState('');
   const [quizOptions, setQuizOptions] = useState('');
   const [correctIndex, setCorrectIndex] = useState('');
   const [spellingAnswer, setSpellingAnswer] = useState('');
@@ -465,6 +467,8 @@ function AddVocabDialog({ unitId, onAdd }: { unitId: string; onAdd: () => void }
           front_text: frontText,
           back_text: backText,
           example_sentence: exampleSentence || null,
+          synonyms: synonyms || null,
+          antonyms: antonyms || null,
           quiz_options: options,
           quiz_correct_index: correctIndex ? Number(correctIndex) : null,
           spelling_answer: spellingAnswer || null,
@@ -476,6 +480,8 @@ function AddVocabDialog({ unitId, onAdd }: { unitId: string; onAdd: () => void }
       setFrontText('');
       setBackText('');
       setExampleSentence('');
+      setSynonyms('');
+      setAntonyms('');
       setQuizOptions('');
       setCorrectIndex('');
       setSpellingAnswer('');
@@ -511,6 +517,14 @@ function AddVocabDialog({ unitId, onAdd }: { unitId: string; onAdd: () => void }
             <Input value={exampleSentence} onChange={(e) => setExampleSentence(e.target.value)} placeholder="I eat an apple every day." />
           </div>
           <div>
+            <Label>유의어 (선택, /로 구분)</Label>
+            <Input value={synonyms} onChange={(e) => setSynonyms(e.target.value)} placeholder="glad / joyful" />
+          </div>
+          <div>
+            <Label>반의어 (선택, /로 구분)</Label>
+            <Input value={antonyms} onChange={(e) => setAntonyms(e.target.value)} placeholder="sad / unhappy" />
+          </div>
+          <div>
             <Label>퀴즈 선택지 (쉼표 구분)</Label>
             <Input value={quizOptions} onChange={(e) => setQuizOptions(e.target.value)} placeholder="사과, 바나나, 포도, 딸기" />
           </div>
@@ -540,7 +554,7 @@ function BulkVocabUpload({ unitId, onAdd }: { unitId: string; onAdd: () => void 
     e.preventDefault();
     setSaving(true);
     try {
-      // Parse: front_text, back_text, example_sentence (optional)
+      // Parse: front_text, back_text, example_sentence, synonyms, antonyms
       const lines = csvText.trim().split('\n').filter((l) => l.trim());
       const items = lines.map((line) => {
         const parts = line.split(',').map((s) => s.trim());
@@ -548,6 +562,8 @@ function BulkVocabUpload({ unitId, onAdd }: { unitId: string; onAdd: () => void 
           front_text: parts[0] || '',
           back_text: parts[1] || '',
           example_sentence: parts[2] || null,
+          synonyms: parts[3] || null,
+          antonyms: parts[4] || null,
           spelling_answer: parts[0] || null,
         };
       });
@@ -582,11 +598,11 @@ function BulkVocabUpload({ unitId, onAdd }: { unitId: string; onAdd: () => void 
         <DialogHeader><DialogTitle>단어 일괄 추가</DialogTitle></DialogHeader>
         <form onSubmit={handleSubmit} className="space-y-3">
           <div>
-            <Label>한 줄에 하나씩: 영어, 한국어, 예문(선택)</Label>
+            <Label>한 줄에 하나씩: 영어, 한국어, 예문, 유의어, 반의어</Label>
             <Textarea
               value={csvText}
               onChange={(e) => setCsvText(e.target.value)}
-              placeholder={`apple, 사과, I eat an apple every day.\nbanana, 바나나, She likes bananas.\ngrape, 포도`}
+              placeholder={`apple, 사과, I eat an apple., fruit, vegetable\nhappy, 행복한, I am happy., glad/joyful, sad/unhappy\ngrape, 포도`}
               rows={8}
               required
             />

@@ -169,6 +169,8 @@ export interface NaesinVocabulary {
   front_text: string;
   back_text: string;
   example_sentence: string | null;
+  synonyms: string | null;
+  antonyms: string | null;
   quiz_options: string[] | null;
   quiz_correct_index: number | null;
   spelling_hint: string | null;
