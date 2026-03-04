@@ -808,6 +808,12 @@ function PdfVocabExtract({ unitId, onAdd }: { unitId: string; onAdd: () => void 
     }
   }
 
+  function updateWord(index: number, field: keyof ExtractedWord, value: string) {
+    setWords((prev) =>
+      prev.map((w, i) => (i === index ? { ...w, [field]: value || null } : w))
+    );
+  }
+
   function toggleWord(index: number) {
     setWords((prev) =>
       prev.map((w, i) => (i === index ? { ...w, selected: !w.selected } : w))
@@ -911,13 +917,17 @@ function PdfVocabExtract({ unitId, onAdd }: { unitId: string; onAdd: () => void 
                           onCheckedChange={() => toggleWord(i)}
                         />
                       </td>
-                      <td className="p-2 font-medium">{w.front_text}</td>
-                      <td className="p-2">{w.back_text}</td>
-                      <td className="p-2 hidden sm:table-cell text-muted-foreground">
-                        {w.part_of_speech || '-'}
+                      <td className="p-1">
+                        <Input className="h-7 text-sm font-medium" value={w.front_text} onChange={(e) => updateWord(i, 'front_text', e.target.value)} />
                       </td>
-                      <td className="p-2 hidden md:table-cell text-muted-foreground truncate max-w-[200px]">
-                        {w.example_sentence || '-'}
+                      <td className="p-1">
+                        <Input className="h-7 text-sm" value={w.back_text} onChange={(e) => updateWord(i, 'back_text', e.target.value)} />
+                      </td>
+                      <td className="p-1 hidden sm:table-cell">
+                        <Input className="h-7 text-sm w-16" value={w.part_of_speech || ''} onChange={(e) => updateWord(i, 'part_of_speech', e.target.value)} />
+                      </td>
+                      <td className="p-1 hidden md:table-cell">
+                        <Input className="h-7 text-sm" value={w.example_sentence || ''} onChange={(e) => updateWord(i, 'example_sentence', e.target.value)} placeholder="예문 입력" />
                       </td>
                       <td className="p-2">
                         <Button
