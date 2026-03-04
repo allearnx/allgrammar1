@@ -65,7 +65,7 @@ export function VocabTab({ vocabulary, unitId, onStageComplete }: VocabTabProps)
       </TabsList>
 
       <TabsContent value="flashcard" className="mt-4">
-        <NaesinFlashcardView items={items} onComplete={() => saveVocabProgress('flashcard')} />
+        <NaesinFlashcardView items={items} vocabulary={vocabulary} onComplete={() => saveVocabProgress('flashcard')} />
       </TabsContent>
 
       <TabsContent value="quiz" className="mt-4">
@@ -73,18 +73,19 @@ export function VocabTab({ vocabulary, unitId, onStageComplete }: VocabTabProps)
       </TabsContent>
 
       <TabsContent value="spelling" className="mt-4">
-        <NaesinSpellingView items={spellingItems} onComplete={(score) => saveVocabProgress('spelling', score)} />
+        <NaesinSpellingView items={spellingItems} vocabulary={vocabulary} onComplete={(score) => saveVocabProgress('spelling', score)} />
       </TabsContent>
     </Tabs>
   );
 }
 
-function NaesinFlashcardView({ items, onComplete }: { items: FlashcardItem[]; onComplete: () => void }) {
+function NaesinFlashcardView({ items, vocabulary, onComplete }: { items: FlashcardItem[]; vocabulary: NaesinVocabulary[]; onComplete: () => void }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [flipped, setFlipped] = useState(false);
   const [seenAll, setSeenAll] = useState(false);
 
   const item = items[currentIndex];
+  const vocab = vocabulary[currentIndex];
 
   function handleFlip() {
     setFlipped(!flipped);
@@ -150,6 +151,11 @@ function NaesinFlashcardView({ items, onComplete }: { items: FlashcardItem[]; on
           >
             <CardContent className="text-center py-12 px-6">
               <p className="text-xl font-medium">{item.back_text}</p>
+              {vocab?.example_sentence && (
+                <p className="text-sm text-muted-foreground mt-3 italic">
+                  &ldquo;{vocab.example_sentence}&rdquo;
+                </p>
+              )}
             </CardContent>
           </Card>
         </div>
@@ -265,7 +271,7 @@ function NaesinQuizView({ items, onComplete }: { items: FlashcardItem[]; onCompl
   );
 }
 
-function NaesinSpellingView({ items, onComplete }: { items: FlashcardItem[]; onComplete: (score: number) => void }) {
+function NaesinSpellingView({ items, vocabulary, onComplete }: { items: FlashcardItem[]; vocabulary: NaesinVocabulary[]; onComplete: (score: number) => void }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [answer, setAnswer] = useState('');
   const [showResult, setShowResult] = useState(false);
@@ -273,6 +279,8 @@ function NaesinSpellingView({ items, onComplete }: { items: FlashcardItem[]; onC
   const [score, setScore] = useState({ correct: 0, wrong: 0 });
 
   const item = items[currentIndex];
+  // Find matching vocabulary item for example_sentence
+  const vocab = vocabulary.find((v) => v.id === item?.id);
   const isFinished = currentIndex === items.length - 1 && showResult;
 
   function handleSubmit(e: React.FormEvent) {
@@ -323,6 +331,14 @@ function NaesinSpellingView({ items, onComplete }: { items: FlashcardItem[]; onC
         <CardContent className="py-8 text-center">
           <p className="text-sm text-muted-foreground mb-2">힌트</p>
           <p className="text-lg font-medium">{item.spelling_hint || item.back_text}</p>
+          {vocab?.example_sentence && (
+            <p className="text-sm text-muted-foreground mt-3 italic">
+              &ldquo;{vocab.example_sentence.replace(
+                new RegExp(item.spelling_answer || item.front_text, 'gi'),
+                '______'
+              )}&rdquo;
+            </p>
+          )}
         </CardContent>
       </Card>
 

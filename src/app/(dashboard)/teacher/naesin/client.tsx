@@ -446,6 +446,7 @@ function AddVocabDialog({ unitId, onAdd }: { unitId: string; onAdd: () => void }
   const [open, setOpen] = useState(false);
   const [frontText, setFrontText] = useState('');
   const [backText, setBackText] = useState('');
+  const [exampleSentence, setExampleSentence] = useState('');
   const [quizOptions, setQuizOptions] = useState('');
   const [correctIndex, setCorrectIndex] = useState('');
   const [spellingAnswer, setSpellingAnswer] = useState('');
@@ -463,6 +464,7 @@ function AddVocabDialog({ unitId, onAdd }: { unitId: string; onAdd: () => void }
           unit_id: unitId,
           front_text: frontText,
           back_text: backText,
+          example_sentence: exampleSentence || null,
           quiz_options: options,
           quiz_correct_index: correctIndex ? Number(correctIndex) : null,
           spelling_answer: spellingAnswer || null,
@@ -473,6 +475,7 @@ function AddVocabDialog({ unitId, onAdd }: { unitId: string; onAdd: () => void }
       setOpen(false);
       setFrontText('');
       setBackText('');
+      setExampleSentence('');
       setQuizOptions('');
       setCorrectIndex('');
       setSpellingAnswer('');
@@ -504,6 +507,10 @@ function AddVocabDialog({ unitId, onAdd }: { unitId: string; onAdd: () => void }
             <Input value={backText} onChange={(e) => setBackText(e.target.value)} placeholder="사과" required />
           </div>
           <div>
+            <Label>예문 (선택)</Label>
+            <Input value={exampleSentence} onChange={(e) => setExampleSentence(e.target.value)} placeholder="I eat an apple every day." />
+          </div>
+          <div>
             <Label>퀴즈 선택지 (쉼표 구분)</Label>
             <Input value={quizOptions} onChange={(e) => setQuizOptions(e.target.value)} placeholder="사과, 바나나, 포도, 딸기" />
           </div>
@@ -533,14 +540,15 @@ function BulkVocabUpload({ unitId, onAdd }: { unitId: string; onAdd: () => void 
     e.preventDefault();
     setSaving(true);
     try {
-      // Parse CSV: front_text, back_text, spelling_answer (optional)
+      // Parse: front_text, back_text, example_sentence (optional)
       const lines = csvText.trim().split('\n').filter((l) => l.trim());
       const items = lines.map((line) => {
         const parts = line.split(',').map((s) => s.trim());
         return {
           front_text: parts[0] || '',
           back_text: parts[1] || '',
-          spelling_answer: parts[2] || parts[0] || null,
+          example_sentence: parts[2] || null,
+          spelling_answer: parts[0] || null,
         };
       });
 
@@ -574,11 +582,11 @@ function BulkVocabUpload({ unitId, onAdd }: { unitId: string; onAdd: () => void 
         <DialogHeader><DialogTitle>단어 일괄 추가</DialogTitle></DialogHeader>
         <form onSubmit={handleSubmit} className="space-y-3">
           <div>
-            <Label>한 줄에 하나씩: 영어, 한국어</Label>
+            <Label>한 줄에 하나씩: 영어, 한국어, 예문(선택)</Label>
             <Textarea
               value={csvText}
               onChange={(e) => setCsvText(e.target.value)}
-              placeholder={`apple, 사과, apple\nbanana, 바나나, banana\ngrape, 포도, grape`}
+              placeholder={`apple, 사과, I eat an apple every day.\nbanana, 바나나, She likes bananas.\ngrape, 포도`}
               rows={8}
               required
             />

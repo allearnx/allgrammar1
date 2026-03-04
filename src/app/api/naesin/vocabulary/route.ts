@@ -21,6 +21,7 @@ export async function POST(request: NextRequest) {
       unit_id,
       front_text,
       back_text,
+      example_sentence: body.example_sentence || null,
       quiz_options: body.quiz_options || null,
       quiz_correct_index: body.quiz_correct_index ?? null,
       spelling_hint: body.spelling_hint || null,

@@ -18,6 +18,7 @@ export async function POST(request: NextRequest) {
     unit_id,
     front_text: item.front_text || '',
     back_text: item.back_text || '',
+    example_sentence: item.example_sentence || null,
     quiz_options: item.quiz_options || null,
     quiz_correct_index: item.quiz_correct_index ?? null,
     spelling_hint: item.spelling_hint || null,
