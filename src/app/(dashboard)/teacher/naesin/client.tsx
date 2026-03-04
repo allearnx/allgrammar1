@@ -495,7 +495,7 @@ function AddVocabDialog({ unitId, onAdd }: { unitId: string; onAdd: () => void }
           단어 추가
         </Button>
       </DialogTrigger>
-      <DialogContent>
+      <DialogContent className="max-h-[85vh] overflow-y-auto">
         <DialogHeader><DialogTitle>단어 추가</DialogTitle></DialogHeader>
         <form onSubmit={handleSubmit} className="space-y-3">
           <div>
@@ -578,7 +578,7 @@ function BulkVocabUpload({ unitId, onAdd }: { unitId: string; onAdd: () => void 
           단어 일괄 추가
         </Button>
       </DialogTrigger>
-      <DialogContent>
+      <DialogContent className="max-h-[85vh] overflow-y-auto">
         <DialogHeader><DialogTitle>단어 일괄 추가</DialogTitle></DialogHeader>
         <form onSubmit={handleSubmit} className="space-y-3">
           <div>
@@ -661,7 +661,7 @@ function AddPassageDialog({ unitId, onAdd }: { unitId: string; onAdd: () => void
           지문 추가
         </Button>
       </DialogTrigger>
-      <DialogContent className="max-w-lg">
+      <DialogContent className="max-w-lg max-h-[85vh] overflow-y-auto">
         <DialogHeader><DialogTitle>교과서 지문 추가</DialogTitle></DialogHeader>
         <form onSubmit={handleSubmit} className="space-y-3">
           <div>
@@ -738,7 +738,7 @@ function AddGrammarDialog({ unitId, onAdd }: { unitId: string; onAdd: () => void
           문법 추가
         </Button>
       </DialogTrigger>
-      <DialogContent>
+      <DialogContent className="max-h-[85vh] overflow-y-auto">
         <DialogHeader><DialogTitle>문법 설명 추가</DialogTitle></DialogHeader>
         <form onSubmit={handleSubmit} className="space-y-3">
           <div>
@@ -825,7 +825,7 @@ function AddOmrDialog({ unitId, onAdd }: { unitId: string; onAdd: () => void }) 
           OMR 추가
         </Button>
       </DialogTrigger>
-      <DialogContent>
+      <DialogContent className="max-h-[85vh] overflow-y-auto">
         <DialogHeader><DialogTitle>OMR 시트 추가</DialogTitle></DialogHeader>
         <form onSubmit={handleSubmit} className="space-y-3">
           <div>
