@@ -258,6 +258,18 @@ export interface NaesinOmrAttempt {
   created_at: string;
 }
 
+export interface NaesinVocabQuizResult {
+  id: string;
+  student_id: string;
+  unit_id: string;
+  attempt_number: number;
+  score: number;
+  total_questions: number;
+  correct_count: number;
+  wrong_words: { front_text: string; back_text: string }[];
+  created_at: string;
+}
+
 export type NaesinStageStatus = 'locked' | 'available' | 'completed';
 
 export interface NaesinStageStatuses {
