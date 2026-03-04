@@ -614,7 +614,7 @@ function AddVocabDialog({ unitId, onAdd }: { unitId: string; onAdd: () => void }
           단어 추가
         </Button>
       </DialogTrigger>
-      <DialogContent className="max-h-[85vh] overflow-y-auto">
+      <DialogContent className="max-w-2xl max-h-[85vh] overflow-y-auto">
         <DialogHeader><DialogTitle>단어 추가</DialogTitle></DialogHeader>
         <form onSubmit={handleSubmit} className="space-y-3">
           <div>
@@ -707,7 +707,7 @@ function BulkVocabUpload({ unitId, onAdd }: { unitId: string; onAdd: () => void 
           단어 일괄 추가
         </Button>
       </DialogTrigger>
-      <DialogContent className="max-h-[85vh] overflow-y-auto">
+      <DialogContent className="max-w-2xl max-h-[85vh] overflow-y-auto">
         <DialogHeader><DialogTitle>단어 일괄 추가</DialogTitle></DialogHeader>
         <form onSubmit={handleSubmit} className="space-y-3">
           <div>
