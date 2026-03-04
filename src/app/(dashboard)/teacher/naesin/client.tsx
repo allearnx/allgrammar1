@@ -28,6 +28,7 @@ import {
   Loader2,
   Check,
   X,
+  Pencil,
 } from 'lucide-react';
 import { toast } from 'sonner';
 import { Checkbox } from '@/components/ui/checkbox';
@@ -390,6 +391,8 @@ function UnitContentManager({ unitId }: { unitId: string }) {
   const [showVocabList, setShowVocabList] = useState(false);
   const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
   const [deleting, setDeleting] = useState(false);
+  const [editingId, setEditingId] = useState<string | null>(null);
+  const [editForm, setEditForm] = useState({ front_text: '', back_text: '', part_of_speech: '', example_sentence: '', synonyms: '', antonyms: '' });
   const [passageCount, setPassageCount] = useState<number | null>(null);
   const [grammarCount, setGrammarCount] = useState<number | null>(null);
   const [omrCount, setOmrCount] = useState<number | null>(null);
@@ -471,6 +474,35 @@ function UnitContentManager({ unitId }: { unitId: string }) {
     }
   }
 
+  function startEdit(v: NaesinVocabulary) {
+    setEditingId(v.id);
+    setEditForm({
+      front_text: v.front_text,
+      back_text: v.back_text,
+      part_of_speech: v.part_of_speech || '',
+      example_sentence: v.example_sentence || '',
+      synonyms: v.synonyms || '',
+      antonyms: v.antonyms || '',
+    });
+  }
+
+  async function saveEdit() {
+    if (!editingId) return;
+    const res = await fetch('/api/naesin/vocabulary', {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ id: editingId, ...editForm }),
+    });
+    if (res.ok) {
+      const updated = await res.json();
+      setVocabList((prev) => prev.map((v) => (v.id === editingId ? updated : v)));
+      setEditingId(null);
+      toast.success('단어가 수정되었습니다');
+    } else {
+      toast.error('수정 실패');
+    }
+  }
+
   const sections = [
     { label: '단어', icon: BookOpen, count: vocabList.length, color: 'text-blue-500', toggle: () => setShowVocabList(!showVocabList) },
     { label: '교과서 지문', icon: FileText, count: passageCount, color: 'text-orange-500' },
@@ -520,23 +552,53 @@ function UnitContentManager({ unitId }: { unitId: string }) {
               </Button>
             )}
           </div>
-          <div className="max-h-64 overflow-y-auto space-y-1 rounded-lg border p-2">
+          <div className="max-h-80 overflow-y-auto space-y-1 rounded-lg border p-2">
             {vocabList.map((v) => (
-              <div key={v.id} className="flex items-center gap-2 py-1.5 px-2 rounded hover:bg-muted/50 group">
-                <Checkbox
-                  checked={selectedIds.has(v.id)}
-                  onCheckedChange={() => toggleSelect(v.id)}
-                />
-                <span className="text-sm font-medium flex-1 truncate">{v.front_text}</span>
-                <span className="text-sm text-muted-foreground truncate max-w-[120px]">{v.back_text}</span>
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  className="h-6 w-6 opacity-0 group-hover:opacity-100"
-                  onClick={() => handleDeleteOne(v.id)}
-                >
-                  <Trash2 className="h-3.5 w-3.5 text-destructive" />
-                </Button>
+              <div key={v.id} className="rounded hover:bg-muted/50">
+                <div className="flex items-center gap-2 py-1.5 px-2 group">
+                  <Checkbox
+                    checked={selectedIds.has(v.id)}
+                    onCheckedChange={() => toggleSelect(v.id)}
+                  />
+                  <span className="text-sm font-medium flex-1 truncate">{v.front_text}</span>
+                  <span className="text-sm text-muted-foreground truncate max-w-[120px]">{v.back_text}</span>
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="h-6 w-6 opacity-0 group-hover:opacity-100"
+                    onClick={() => editingId === v.id ? setEditingId(null) : startEdit(v)}
+                  >
+                    <Pencil className="h-3.5 w-3.5" />
+                  </Button>
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="h-6 w-6 opacity-0 group-hover:opacity-100"
+                    onClick={() => handleDeleteOne(v.id)}
+                  >
+                    <Trash2 className="h-3.5 w-3.5 text-destructive" />
+                  </Button>
+                </div>
+                {editingId === v.id && (
+                  <div className="px-2 pb-2 space-y-2">
+                    <div className="grid grid-cols-2 gap-2">
+                      <Input className="h-7 text-sm" value={editForm.front_text} onChange={(e) => setEditForm({ ...editForm, front_text: e.target.value })} placeholder="영어" />
+                      <Input className="h-7 text-sm" value={editForm.back_text} onChange={(e) => setEditForm({ ...editForm, back_text: e.target.value })} placeholder="한국어" />
+                    </div>
+                    <div className="grid grid-cols-3 gap-2">
+                      <Input className="h-7 text-sm" value={editForm.part_of_speech} onChange={(e) => setEditForm({ ...editForm, part_of_speech: e.target.value })} placeholder="품사" />
+                      <Input className="h-7 text-sm col-span-2" value={editForm.example_sentence} onChange={(e) => setEditForm({ ...editForm, example_sentence: e.target.value })} placeholder="예문" />
+                    </div>
+                    <div className="grid grid-cols-2 gap-2">
+                      <Input className="h-7 text-sm" value={editForm.synonyms} onChange={(e) => setEditForm({ ...editForm, synonyms: e.target.value })} placeholder="유의어" />
+                      <Input className="h-7 text-sm" value={editForm.antonyms} onChange={(e) => setEditForm({ ...editForm, antonyms: e.target.value })} placeholder="반의어" />
+                    </div>
+                    <div className="flex gap-2 justify-end">
+                      <Button size="sm" variant="outline" className="h-7" onClick={() => setEditingId(null)}>취소</Button>
+                      <Button size="sm" className="h-7" onClick={saveEdit}>저장</Button>
+                    </div>
+                  </div>
+                )}
               </div>
             ))}
           </div>

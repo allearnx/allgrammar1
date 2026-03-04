@@ -35,6 +35,34 @@ export async function POST(request: NextRequest) {
   return NextResponse.json(data);
 }
 
+export async function PATCH(request: NextRequest) {
+  const user = await getUser();
+  if (!user || !['teacher', 'admin', 'boss'].includes(user.role)) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  }
+  const supabase = await createClient();
+
+  const { id, ...fields } = await request.json();
+  if (!id) return NextResponse.json({ error: 'Missing id' }, { status: 400 });
+
+  const allowed = ['front_text', 'back_text', 'part_of_speech', 'example_sentence', 'synonyms', 'antonyms'];
+  const updates: Record<string, unknown> = {};
+  for (const key of allowed) {
+    if (key in fields) updates[key] = fields[key] || null;
+  }
+  if (updates.front_text) updates.spelling_answer = updates.front_text;
+
+  const { data, error } = await supabase
+    .from('naesin_vocabulary')
+    .update(updates)
+    .eq('id', id)
+    .select()
+    .single();
+
+  if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+  return NextResponse.json(data);
+}
+
 export async function DELETE(request: NextRequest) {
   const user = await getUser();
   if (!user || !['teacher', 'admin', 'boss'].includes(user.role)) {
