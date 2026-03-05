@@ -10,50 +10,32 @@ import {
   RefreshCw,
 } from 'lucide-react';
 import { toast } from 'sonner';
-import { NaesinUnitDetail } from './[unitId]/client';
+import { LessonCard } from '@/components/naesin/lesson-card';
 import { ExamCountdown } from '@/components/naesin/exam-countdown';
 import { ExamDatePicker } from '@/components/naesin/exam-date-picker';
 import type {
   NaesinTextbook,
-  NaesinVocabulary,
-  NaesinPassage,
-  NaesinGrammarLesson,
   NaesinStageStatuses,
-  NaesinVocabQuizSet,
-  NaesinGrammarVideoProgress,
-  NaesinProblemSheet,
-  NaesinSimilarProblem,
-  NaesinLastReviewContent,
 } from '@/types/database';
 
-interface UnitDetail {
+interface UnitSummary {
   id: string;
   unit_number: number;
   title: string;
   sort_order: number;
-  vocabulary: NaesinVocabulary[];
-  passages: NaesinPassage[];
-  grammarLessons: NaesinGrammarLesson[];
   stageStatuses: NaesinStageStatuses;
-  quizSets: NaesinVocabQuizSet[];
-  completedSetIds: string[];
-  videoProgress: NaesinGrammarVideoProgress[];
-  problemSheets: NaesinProblemSheet[];
-  lastReviewProblemSheets: NaesinProblemSheet[];
-  similarProblems: NaesinSimilarProblem[];
-  reviewContent: NaesinLastReviewContent[];
-  examDate: string | null;
+  stageProgress: { vocab: number; passage: number; grammar: number; problem: number };
 }
 
 interface NaesinHomeProps {
   textbooks: NaesinTextbook[];
   selectedTextbook: NaesinTextbook | null;
-  unitDetails: UnitDetail[];
+  units: UnitSummary[];
   examDate?: string | null;
   textbookId?: string | null;
 }
 
-export function NaesinHome({ textbooks, selectedTextbook, unitDetails, examDate: initialExamDate, textbookId }: NaesinHomeProps) {
+export function NaesinHome({ textbooks, selectedTextbook, units, examDate: initialExamDate, textbookId }: NaesinHomeProps) {
   const router = useRouter();
   const [selecting, setSelecting] = useState(!selectedTextbook);
   const [saving, setSaving] = useState(false);
@@ -144,7 +126,7 @@ export function NaesinHome({ textbooks, selectedTextbook, unitDetails, examDate:
     );
   }
 
-  // Units list view — inline NaesinUnitDetail per unit
+  // Units overview with LessonCard per unit
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
@@ -174,34 +156,21 @@ export function NaesinHome({ textbooks, selectedTextbook, unitDetails, examDate:
 
       {examDate && <ExamCountdown examDate={examDate} />}
 
-      {unitDetails.length === 0 ? (
+      {units.length === 0 ? (
         <p className="text-center text-muted-foreground py-8">
           등록된 단원이 없습니다.
         </p>
       ) : (
-        <div className="space-y-10">
-          {unitDetails.map((unit) => (
-            <section key={unit.id}>
-              <h3 className="text-lg font-bold mb-4 border-b pb-2">
-                Lesson {unit.unit_number}. {unit.title}
-              </h3>
-              <NaesinUnitDetail
-                unit={{ id: unit.id, unit_number: unit.unit_number, title: unit.title }}
-                vocabulary={unit.vocabulary}
-                passages={unit.passages}
-                grammarLessons={unit.grammarLessons}
-                stageStatuses={unit.stageStatuses}
-                quizSets={unit.quizSets}
-                completedSetIds={unit.completedSetIds}
-                videoProgress={unit.videoProgress}
-                problemSheets={unit.problemSheets}
-                lastReviewProblemSheets={unit.lastReviewProblemSheets}
-                similarProblems={unit.similarProblems}
-                reviewContent={unit.reviewContent}
-                examDate={unit.examDate}
-                inline
-              />
-            </section>
+        <div className="space-y-3">
+          {units.map((unit) => (
+            <LessonCard
+              key={unit.id}
+              unitId={unit.id}
+              unitNumber={unit.unit_number}
+              title={unit.title}
+              stages={unit.stageStatuses}
+              stageProgress={unit.stageProgress}
+            />
           ))}
         </div>
       )}

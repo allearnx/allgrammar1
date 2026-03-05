@@ -2,10 +2,10 @@
 
 import { useState } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
-import { ChevronDown, ChevronRight, CheckCircle, Lock } from 'lucide-react';
+import { ChevronDown, ChevronRight, ChevronRightIcon, CheckCircle, Lock, BookOpen, FileText, GraduationCap, ClipboardList, Brain } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { StageProgressBar } from './stage-progress-bar';
-import type { NaesinStageStatuses } from '@/types/database';
+import type { NaesinStageStatuses, NaesinStageStatus } from '@/types/database';
 import Link from 'next/link';
 
 interface StageProgress {
@@ -22,6 +22,14 @@ interface LessonCardProps {
   stages: NaesinStageStatuses;
   stageProgress: StageProgress;
 }
+
+const STAGE_ROWS = [
+  { key: 'vocab' as const, label: '단어 암기', icon: BookOpen, progressKey: 'vocab' as const },
+  { key: 'passage' as const, label: '교과서 암기', icon: FileText, progressKey: 'passage' as const },
+  { key: 'grammar' as const, label: '문법 설명', icon: GraduationCap, progressKey: 'grammar' as const },
+  { key: 'problem' as const, label: '문제풀이', icon: ClipboardList, progressKey: 'problem' as const },
+  { key: 'lastReview' as const, label: '직전보강', icon: Brain, progressKey: null },
+] as const;
 
 export function LessonCard({
   unitId,
@@ -67,22 +75,61 @@ export function LessonCard({
           </div>
         </div>
 
-        {/* Expanded content */}
+        {/* Expanded: clickable stage rows */}
         {expanded && (
-          <div className="px-4 pb-4 pt-1 border-t space-y-3">
-            <StageProgressBar label="단어 시험" percent={stageProgress.vocab} />
-            <StageProgressBar label="교과서 암기" percent={stageProgress.passage} />
-            <StageProgressBar label="문법 영상" percent={stageProgress.grammar} />
-            <StageProgressBar label="문제풀이" percent={stageProgress.problem} />
-            {stages.lastReview !== 'locked' && (
-              <StageProgressBar label="직전보강" percent={0} />
-            )}
-            <Link
-              href={`/student/naesin/${unitId}`}
-              className="block text-center text-sm text-primary font-medium mt-2 hover:underline"
-            >
-              학습하기 &rarr;
-            </Link>
+          <div className="border-t divide-y">
+            {STAGE_ROWS.map((row) => {
+              const status = stages[row.key];
+              const isLocked = status === 'locked';
+              const percent = row.progressKey ? stageProgress[row.progressKey] : 0;
+              const Icon = row.icon;
+
+              const content = (
+                <div
+                  className={cn(
+                    'flex items-center gap-3 px-4 py-3 transition-colors',
+                    isLocked
+                      ? 'opacity-40 cursor-not-allowed'
+                      : 'hover:bg-muted/50 cursor-pointer'
+                  )}
+                >
+                  <div className="shrink-0">
+                    {status === 'completed' ? (
+                      <CheckCircle className="h-5 w-5 text-green-500" />
+                    ) : isLocked ? (
+                      <Lock className="h-5 w-5 text-muted-foreground" />
+                    ) : (
+                      <Icon className="h-5 w-5 text-primary" />
+                    )}
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-sm font-medium">{row.label}</p>
+                    <StageProgressBar
+                      label=""
+                      percent={percent}
+                      className="mt-1"
+                    />
+                  </div>
+                  {!isLocked && (
+                    <ChevronRightIcon className="h-4 w-4 text-muted-foreground shrink-0" />
+                  )}
+                </div>
+              );
+
+              if (isLocked) {
+                return <div key={row.key}>{content}</div>;
+              }
+
+              return (
+                <Link
+                  key={row.key}
+                  href={`/student/naesin/${unitId}/${row.key}`}
+                  className="block"
+                >
+                  {content}
+                </Link>
+              );
+            })}
           </div>
         )}
       </CardContent>
@@ -90,7 +137,7 @@ export function LessonCard({
   );
 }
 
-function StageStatusDot({ status }: { status: string }) {
+function StageStatusDot({ status }: { status: NaesinStageStatus }) {
   return (
     <div
       className={cn(

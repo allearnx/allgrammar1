@@ -35,9 +35,9 @@ export default async function NaesinPage() {
     examDate = examDateData?.exam_date || null;
   }
 
-  // If student has a textbook selected, get the units with full detail data
+  // If student has a textbook selected, get the units with lightweight data only
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  let unitDetails: any[] = [];
+  let units: any[] = [];
 
   if (setting?.textbook_id) {
     const { data: rawUnits } = await supabase
@@ -50,87 +50,60 @@ export default async function NaesinPage() {
     if (rawUnits && rawUnits.length > 0) {
       const unitIds = rawUnits.map((u) => u.id);
 
-      // Fetch all content for all units in parallel (batched)
+      // Only fetch existence checks + progress (not full content)
       const [
-        vocabRes,
-        passageRes,
-        grammarRes,
+        vocabCountRes,
+        passageCountRes,
+        grammarCountRes,
+        problemCountRes,
+        lastReviewSheetCountRes,
+        similarProblemCountRes,
+        reviewContentCountRes,
         progressRes,
-        quizSetsRes,
-        videoProgressRes,
-        problemSheetsRes,
-        lastReviewProblemSheetsRes,
-        similarProblemsRes,
-        reviewContentRes,
-        quizSetResultsRes,
+        quizSetsCountRes,
       ] = await Promise.all([
-        supabase.from('naesin_vocabulary').select('*').in('unit_id', unitIds).order('sort_order'),
-        supabase.from('naesin_passages').select('*').in('unit_id', unitIds).order('sort_order'),
-        supabase.from('naesin_grammar_lessons').select('*').in('unit_id', unitIds).order('sort_order'),
+        supabase.from('naesin_vocabulary').select('unit_id').in('unit_id', unitIds),
+        supabase.from('naesin_passages').select('unit_id').in('unit_id', unitIds),
+        supabase.from('naesin_grammar_lessons').select('id, unit_id, content_type').in('unit_id', unitIds),
+        supabase.from('naesin_problem_sheets').select('unit_id').eq('category', 'problem').in('unit_id', unitIds),
+        supabase.from('naesin_problem_sheets').select('unit_id').eq('category', 'last_review').in('unit_id', unitIds),
+        supabase.from('naesin_similar_problems').select('unit_id').eq('status', 'approved').in('unit_id', unitIds),
+        supabase.from('naesin_last_review_content').select('unit_id').in('unit_id', unitIds),
         supabase.from('naesin_student_progress').select('*').eq('student_id', user.id).in('unit_id', unitIds),
-        supabase.from('naesin_vocab_quiz_sets').select('*').in('unit_id', unitIds).order('set_order'),
-        supabase.from('naesin_grammar_video_progress').select('*').eq('student_id', user.id),
-        supabase.from('naesin_problem_sheets').select('*').eq('category', 'problem').in('unit_id', unitIds).order('sort_order'),
-        supabase.from('naesin_problem_sheets').select('*').eq('category', 'last_review').in('unit_id', unitIds).order('sort_order'),
-        supabase.from('naesin_similar_problems').select('*').in('unit_id', unitIds).eq('status', 'approved'),
-        supabase.from('naesin_last_review_content').select('*').in('unit_id', unitIds).order('sort_order'),
-        supabase.from('naesin_vocab_quiz_set_results').select('quiz_set_id, score').eq('student_id', user.id),
+        supabase.from('naesin_vocab_quiz_sets').select('id, unit_id').in('unit_id', unitIds),
       ]);
 
-      // Group data by unit_id
-      const vocabByUnit = groupBy(vocabRes.data || [], 'unit_id');
-      const passageByUnit = groupBy(passageRes.data || [], 'unit_id');
-      const grammarByUnit = groupBy(grammarRes.data || [], 'unit_id');
+      // Build per-unit existence sets
+      // For vocab/passage/problem we only need to know if any exist per unit
+      // Grammar needs content_type for video count
+      const vocabUnitIds = new Set((vocabCountRes.data || []).map((r) => r.unit_id));
+      const passageUnitIds = new Set((passageCountRes.data || []).map((r) => r.unit_id));
+      const grammarByUnit = groupBy(grammarCountRes.data || [], 'unit_id');
+      const problemUnitIds = new Set((problemCountRes.data || []).map((r) => r.unit_id));
+      const lastReviewSheetUnitIds = new Set((lastReviewSheetCountRes.data || []).map((r) => r.unit_id));
+      const similarProblemUnitIds = new Set((similarProblemCountRes.data || []).map((r) => r.unit_id));
+      const reviewContentUnitIds = new Set((reviewContentCountRes.data || []).map((r) => r.unit_id));
       const progressMap = new Map((progressRes.data || []).map((p) => [p.unit_id, p]));
-      const quizSetsByUnit = groupBy(quizSetsRes.data || [], 'unit_id');
-      const problemSheetsByUnit = groupBy(problemSheetsRes.data || [], 'unit_id');
-      const lastReviewSheetsByUnit = groupBy(lastReviewProblemSheetsRes.data || [], 'unit_id');
-      const similarProblemsByUnit = groupBy(similarProblemsRes.data || [], 'unit_id');
-      const reviewContentByUnit = groupBy(reviewContentRes.data || [], 'unit_id');
-      const allVideoProgress = videoProgressRes.data || [];
-      const allQuizSetResults = quizSetResultsRes.data || [];
+      const quizSetsByUnit = groupBy(quizSetsCountRes.data || [], 'unit_id');
 
-      unitDetails = rawUnits.map((u) => {
-        const unitVocab = vocabByUnit[u.id] || [];
-        const unitPassages = passageByUnit[u.id] || [];
-        const unitGrammar = grammarByUnit[u.id] || [];
+      units = rawUnits.map((u) => {
         const unitProgress = progressMap.get(u.id) || null;
-        const unitQuizSets = quizSetsByUnit[u.id] || [];
-        const unitProblemSheets = problemSheetsByUnit[u.id] || [];
-        const unitLastReviewSheets = lastReviewSheetsByUnit[u.id] || [];
-        const unitSimilarProblems = similarProblemsByUnit[u.id] || [];
-        const unitReviewContent = reviewContentByUnit[u.id] || [];
-
-        // Filter video progress to this unit's lessons
-        const lessonIds = unitGrammar.map((l: { id: string }) => l.id);
-        const unitVideoProgress = allVideoProgress.filter((vp: { lesson_id: string }) =>
-          lessonIds.includes(vp.lesson_id)
-        );
-
-        // Compute completed quiz set IDs (best score >= 80%)
-        const quizSetIds = unitQuizSets.map((s: { id: string }) => s.id);
-        const completedSetIds: string[] = [];
-        for (const setId of quizSetIds) {
-          const results = allQuizSetResults.filter((r) => r.quiz_set_id === setId);
-          const bestScore = Math.max(0, ...results.map((r) => r.score));
-          if (bestScore >= 80) completedSetIds.push(setId);
-        }
-
-        // Content availability
-        const hasLastReviewContent =
-          unitLastReviewSheets.length > 0 ||
-          unitSimilarProblems.length > 0 ||
-          unitReviewContent.length > 0;
-
+        const unitGrammar = grammarByUnit[u.id] || [];
         const videoLessons = unitGrammar.filter((l: { content_type: string }) => l.content_type === 'video');
+        const unitQuizSets = quizSetsByUnit[u.id] || [];
+
+        const hasLastReviewContent =
+          lastReviewSheetUnitIds.has(u.id) ||
+          similarProblemUnitIds.has(u.id) ||
+          reviewContentUnitIds.has(u.id);
 
         const stageStatuses = calculateStageStatuses({
           progress: unitProgress,
           content: {
-            hasVocab: unitVocab.length > 0,
-            hasPassage: unitPassages.length > 0,
+            hasVocab: vocabUnitIds.has(u.id),
+            hasPassage: passageUnitIds.has(u.id),
             hasGrammar: unitGrammar.length > 0,
-            hasProblem: unitProblemSheets.length > 0,
+            hasProblem: problemUnitIds.has(u.id),
             hasLastReview: hasLastReviewContent || !!examDate,
           },
           vocabQuizSetCount: unitQuizSets.length,
@@ -138,23 +111,16 @@ export default async function NaesinPage() {
           examDate,
         });
 
+        // Compute lightweight progress percentages
+        const stageProgress = computeStageProgress(unitProgress, unitQuizSets.length, videoLessons.length);
+
         return {
           id: u.id,
           unit_number: u.unit_number,
           title: u.title,
           sort_order: u.sort_order,
-          vocabulary: unitVocab,
-          passages: unitPassages,
-          grammarLessons: unitGrammar,
           stageStatuses,
-          quizSets: unitQuizSets,
-          completedSetIds,
-          videoProgress: unitVideoProgress,
-          problemSheets: unitProblemSheets,
-          lastReviewProblemSheets: unitLastReviewSheets,
-          similarProblems: unitSimilarProblems,
-          reviewContent: unitReviewContent,
-          examDate,
+          stageProgress,
         };
       });
     }
@@ -167,7 +133,7 @@ export default async function NaesinPage() {
         <NaesinHome
           textbooks={textbooks || []}
           selectedTextbook={setting?.textbook ? setting.textbook : null}
-          unitDetails={unitDetails}
+          units={units}
           examDate={examDate}
           textbookId={setting?.textbook_id || null}
         />
@@ -184,4 +150,57 @@ function groupBy<T extends Record<string, unknown>>(items: T[], key: string): Re
     result[k].push(item);
   }
   return result;
+}
+
+interface ProgressLike {
+  vocab_quiz_score: number | null;
+  vocab_spelling_score: number | null;
+  vocab_completed: boolean;
+  passage_fill_blanks_best: number | null;
+  passage_translation_best: number | null;
+  passage_completed: boolean;
+  grammar_videos_completed: number;
+  grammar_completed: boolean;
+  problem_completed: boolean;
+}
+
+function computeStageProgress(
+  progress: ProgressLike | null,
+  quizSetCount: number,
+  videoCount: number
+): { vocab: number; passage: number; grammar: number; problem: number } {
+  if (!progress) return { vocab: 0, passage: 0, grammar: 0, problem: 0 };
+
+  // Vocab: average of quiz + spelling scores (or 100 if completed)
+  let vocab = 0;
+  if (progress.vocab_completed) {
+    vocab = 100;
+  } else {
+    const q = progress.vocab_quiz_score ?? 0;
+    const s = progress.vocab_spelling_score ?? 0;
+    vocab = quizSetCount > 0 ? Math.round((q + s) / 2) : 0;
+  }
+
+  // Passage: average of fill_blanks + translation scores
+  let passage = 0;
+  if (progress.passage_completed) {
+    passage = 100;
+  } else {
+    const fb = progress.passage_fill_blanks_best ?? 0;
+    const tr = progress.passage_translation_best ?? 0;
+    passage = Math.round((fb + tr) / 2);
+  }
+
+  // Grammar: videos completed / total
+  let grammar = 0;
+  if (progress.grammar_completed) {
+    grammar = 100;
+  } else if (videoCount > 0) {
+    grammar = Math.round((progress.grammar_videos_completed / videoCount) * 100);
+  }
+
+  // Problem: 0 or 100
+  const problem = progress.problem_completed ? 100 : 0;
+
+  return { vocab, passage, grammar, problem };
 }
