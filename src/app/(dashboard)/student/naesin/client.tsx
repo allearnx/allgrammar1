@@ -10,47 +10,50 @@ import {
   RefreshCw,
 } from 'lucide-react';
 import { toast } from 'sonner';
-import { calculateStageStatuses } from '@/lib/naesin/stage-unlock';
-import { LessonCard } from '@/components/naesin/lesson-card';
+import { NaesinUnitDetail } from './[unitId]/client';
 import { ExamCountdown } from '@/components/naesin/exam-countdown';
 import { ExamDatePicker } from '@/components/naesin/exam-date-picker';
-import type { NaesinTextbook } from '@/types/database';
+import type {
+  NaesinTextbook,
+  NaesinVocabulary,
+  NaesinPassage,
+  NaesinGrammarLesson,
+  NaesinStageStatuses,
+  NaesinVocabQuizSet,
+  NaesinGrammarVideoProgress,
+  NaesinProblemSheet,
+  NaesinSimilarProblem,
+  NaesinLastReviewContent,
+} from '@/types/database';
 
-interface UnitWithProgress {
+interface UnitDetail {
   id: string;
   unit_number: number;
   title: string;
   sort_order: number;
-  hasVocab: boolean;
-  hasPassage: boolean;
-  hasGrammar: boolean;
-  hasProblem: boolean;
-  hasLastReview: boolean;
-  vocabQuizSetCount: number;
-  grammarVideoCount: number;
-  progress: {
-    vocab_completed: boolean;
-    passage_completed: boolean;
-    grammar_completed: boolean;
-    problem_completed: boolean;
-    vocab_quiz_sets_completed: number;
-    vocab_total_quiz_sets: number;
-    passage_fill_blanks_best: number | null;
-    passage_translation_best: number | null;
-    grammar_videos_completed: number;
-    grammar_total_videos: number;
-  } | null;
+  vocabulary: NaesinVocabulary[];
+  passages: NaesinPassage[];
+  grammarLessons: NaesinGrammarLesson[];
+  stageStatuses: NaesinStageStatuses;
+  quizSets: NaesinVocabQuizSet[];
+  completedSetIds: string[];
+  videoProgress: NaesinGrammarVideoProgress[];
+  problemSheets: NaesinProblemSheet[];
+  lastReviewProblemSheets: NaesinProblemSheet[];
+  similarProblems: NaesinSimilarProblem[];
+  reviewContent: NaesinLastReviewContent[];
+  examDate: string | null;
 }
 
 interface NaesinHomeProps {
   textbooks: NaesinTextbook[];
   selectedTextbook: NaesinTextbook | null;
-  units: UnitWithProgress[];
+  unitDetails: UnitDetail[];
   examDate?: string | null;
   textbookId?: string | null;
 }
 
-export function NaesinHome({ textbooks, selectedTextbook, units, examDate: initialExamDate, textbookId }: NaesinHomeProps) {
+export function NaesinHome({ textbooks, selectedTextbook, unitDetails, examDate: initialExamDate, textbookId }: NaesinHomeProps) {
   const router = useRouter();
   const [selecting, setSelecting] = useState(!selectedTextbook);
   const [saving, setSaving] = useState(false);
@@ -141,7 +144,7 @@ export function NaesinHome({ textbooks, selectedTextbook, units, examDate: initi
     );
   }
 
-  // Units list view
+  // Units list view — inline NaesinUnitDetail per unit
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
@@ -171,84 +174,35 @@ export function NaesinHome({ textbooks, selectedTextbook, units, examDate: initi
 
       {examDate && <ExamCountdown examDate={examDate} />}
 
-      {units.length === 0 ? (
+      {unitDetails.length === 0 ? (
         <p className="text-center text-muted-foreground py-8">
           등록된 단원이 없습니다.
         </p>
       ) : (
-        <div className="space-y-3">
-          {units.map((unit) => {
-            const stages = calculateStageStatuses({
-              progress: unit.progress
-                ? {
-                    ...unit.progress,
-                    id: '',
-                    student_id: '',
-                    unit_id: unit.id,
-                    vocab_flashcard_count: 0,
-                    vocab_quiz_score: null,
-                    vocab_spelling_score: null,
-                    passage_ordering_best: null,
-                    grammar_video_completed: false,
-                    grammar_text_read: false,
-                    omr_completed: false,
-                    last_review_unlocked: false,
-                    created_at: '',
-                    updated_at: '',
-                  }
-                : null,
-              content: {
-                hasVocab: unit.hasVocab,
-                hasPassage: unit.hasPassage,
-                hasGrammar: unit.hasGrammar,
-                hasProblem: unit.hasProblem,
-                hasLastReview: unit.hasLastReview,
-              },
-              vocabQuizSetCount: unit.vocabQuizSetCount,
-              grammarVideoCount: unit.grammarVideoCount,
-              examDate,
-            });
-
-            // Compute stage progress percentages
-            const vocabPercent = unit.progress?.vocab_completed
-              ? 100
-              : Math.max(
-                  (unit.progress?.vocab_quiz_sets_completed ?? 0) > 0 && unit.vocabQuizSetCount > 0
-                    ? Math.round(((unit.progress?.vocab_quiz_sets_completed ?? 0) / unit.vocabQuizSetCount) * 100)
-                    : 0,
-                  0
-                );
-
-            const passagePercent = unit.progress?.passage_completed
-              ? 100
-              : Math.round(
-                  ((unit.progress?.passage_fill_blanks_best ?? 0) + (unit.progress?.passage_translation_best ?? 0)) / 2
-                );
-
-            const grammarPercent = unit.progress?.grammar_completed
-              ? 100
-              : unit.grammarVideoCount > 0
-                ? Math.round(((unit.progress?.grammar_videos_completed ?? 0) / unit.grammarVideoCount) * 100)
-                : 0;
-
-            const problemPercent = unit.progress?.problem_completed ? 100 : 0;
-
-            return (
-              <LessonCard
-                key={unit.id}
-                unitId={unit.id}
-                unitNumber={unit.unit_number}
-                title={unit.title}
-                stages={stages}
-                stageProgress={{
-                  vocab: vocabPercent,
-                  passage: passagePercent,
-                  grammar: grammarPercent,
-                  problem: problemPercent,
-                }}
+        <div className="space-y-10">
+          {unitDetails.map((unit) => (
+            <section key={unit.id}>
+              <h3 className="text-lg font-bold mb-4 border-b pb-2">
+                Lesson {unit.unit_number}. {unit.title}
+              </h3>
+              <NaesinUnitDetail
+                unit={{ id: unit.id, unit_number: unit.unit_number, title: unit.title }}
+                vocabulary={unit.vocabulary}
+                passages={unit.passages}
+                grammarLessons={unit.grammarLessons}
+                stageStatuses={unit.stageStatuses}
+                quizSets={unit.quizSets}
+                completedSetIds={unit.completedSetIds}
+                videoProgress={unit.videoProgress}
+                problemSheets={unit.problemSheets}
+                lastReviewProblemSheets={unit.lastReviewProblemSheets}
+                similarProblems={unit.similarProblems}
+                reviewContent={unit.reviewContent}
+                examDate={unit.examDate}
+                inline
               />
-            );
-          })}
+            </section>
+          ))}
         </div>
       )}
     </div>

@@ -39,6 +39,8 @@ interface NaesinUnitDetailProps {
   similarProblems?: NaesinSimilarProblem[];
   reviewContent?: NaesinLastReviewContent[];
   examDate?: string | null;
+  /** When true, hides back button, heading, and exam countdown (rendered by parent) */
+  inline?: boolean;
 }
 
 const STAGE_CONFIG = [
@@ -63,6 +65,7 @@ export function NaesinUnitDetail({
   similarProblems,
   reviewContent,
   examDate,
+  inline,
 }: NaesinUnitDetailProps) {
   const router = useRouter();
 
@@ -87,20 +90,22 @@ export function NaesinUnitDetail({
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center gap-3">
-        <Button variant="ghost" size="icon" asChild>
-          <Link href="/student/naesin">
-            <ArrowLeft className="h-4 w-4" />
-          </Link>
-        </Button>
-        <div>
-          <h2 className="text-xl font-bold">
-            Lesson {unit.unit_number}. {unit.title}
-          </h2>
+      {!inline && (
+        <div className="flex items-center gap-3">
+          <Button variant="ghost" size="icon" asChild>
+            <Link href="/student/naesin">
+              <ArrowLeft className="h-4 w-4" />
+            </Link>
+          </Button>
+          <div>
+            <h2 className="text-xl font-bold">
+              Lesson {unit.unit_number}. {unit.title}
+            </h2>
+          </div>
         </div>
-      </div>
+      )}
 
-      {examDate && <ExamCountdown examDate={examDate} />}
+      {!inline && examDate && <ExamCountdown examDate={examDate} />}
 
       <Tabs value={activeTab} onValueChange={handleTabChange}>
         <TabsList className="grid w-full grid-cols-5">

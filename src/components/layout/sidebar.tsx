@@ -51,8 +51,6 @@ const NAV_CONFIG: Record<string, NavGroup[]> = {
     {
       label: '학습',
       items: [
-        { href: '/student/levels', label: '문법 학습', icon: GraduationCap },
-        { href: '/student/review', label: '복습하기', icon: BookOpen },
         { href: '/student/naesin', label: '내신 대비', icon: BookMarked },
       ],
     },
@@ -77,8 +75,6 @@ const NAV_CONFIG: Record<string, NavGroup[]> = {
     {
       label: '콘텐츠',
       items: [
-        { href: '/teacher/content', label: '콘텐츠 관리', icon: NotebookPen },
-        { href: '/teacher/textbook-mode', label: '교과서 모드', icon: BookMarked },
         { href: '/teacher/naesin', label: '내신 관리', icon: ClipboardList },
       ],
     },
@@ -104,8 +100,6 @@ const NAV_CONFIG: Record<string, NavGroup[]> = {
     {
       label: '콘텐츠',
       items: [
-        { href: '/admin/content', label: '콘텐츠 관리', icon: NotebookPen },
-        { href: '/admin/textbook-mode', label: '교과서 모드', icon: BookMarked },
         { href: '/admin/naesin', label: '내신 관리', icon: ClipboardList },
       ],
     },
