@@ -31,7 +31,7 @@ export function AddTextbookDialog({ onAdd }: { onAdd: (tb: NaesinTextbook) => vo
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          grade: Number(grade),
+          grade,
           publisher,
           display_name: displayName,
         }),
