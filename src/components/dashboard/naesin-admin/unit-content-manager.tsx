@@ -200,7 +200,7 @@ export function UnitContentManager({ unitId }: { unitId: string }) {
               </Button>
             )}
           </div>
-          <div className="max-h-[70vh] overflow-y-auto space-y-1 rounded-lg border p-2">
+          <div className="space-y-1 rounded-lg border p-2">
             {vocabList.map((v) => (
               <div key={v.id} className="rounded hover:bg-muted/50">
                 <div className="flex items-center gap-2 py-1.5 px-2 group">
