@@ -157,7 +157,7 @@ export function AddGrammarDialog({ unitId, onAdd }: { unitId: string; onAdd: () 
       <DialogTrigger asChild>
         <Button size="sm" variant="outline">
           <GraduationCap className="h-3.5 w-3.5 mr-1" />
-          문법 추가
+          문법 영상 올리기
         </Button>
       </DialogTrigger>
       <DialogContent className="max-h-[85vh] overflow-y-auto">
