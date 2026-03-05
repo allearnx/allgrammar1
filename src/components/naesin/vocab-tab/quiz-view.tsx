@@ -3,8 +3,9 @@
 import { useState } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { CheckCircle, XCircle, Copy, RefreshCw, RotateCcw } from 'lucide-react';
+import { Copy, RefreshCw, RotateCcw } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { MCQOptionList } from '@/components/shared/mcq-option-list';
 import { toast } from 'sonner';
 import { ScoreBadges, NextButton } from '@/components/memory/shared';
 import type { NaesinVocabulary, NaesinVocabQuizResult } from '@/types/database';
@@ -231,30 +232,15 @@ export function NaesinQuizView({
         </CardContent>
       </Card>
 
-      <div className="grid gap-3 max-w-md mx-auto">
-        {question.options.map((option, idx) => {
-          const isSelected = selectedAnswer === idx;
-          const isCorrectOption = idx === question.correctIndex;
-          return (
-            <Button
-              key={idx}
-              variant="outline"
-              className={cn(
-                'h-auto py-3 px-4 text-left justify-start whitespace-normal',
-                showResult && isCorrectOption && 'border-green-500 bg-green-50 text-green-700',
-                showResult && isSelected && !isCorrectOption && 'border-red-500 bg-red-50 text-red-700'
-              )}
-              onClick={() => handleSelect(idx)}
-              disabled={showResult}
-            >
-              <span className="mr-3 shrink-0 font-medium">{String.fromCharCode(65 + idx)}.</span>
-              {option}
-              {showResult && isCorrectOption && <CheckCircle className="h-4 w-4 ml-auto shrink-0 text-green-500" />}
-              {showResult && isSelected && !isCorrectOption && <XCircle className="h-4 w-4 ml-auto shrink-0 text-red-500" />}
-            </Button>
-          );
-        })}
-      </div>
+      <MCQOptionList
+        options={question.options}
+        selectedAnswer={selectedAnswer}
+        correctAnswer={question.correctIndex}
+        showResult={showResult}
+        onSelect={(v) => handleSelect(v as number)}
+        labelStyle="alpha"
+        className="max-w-md mx-auto"
+      />
 
       {showResult && !quizFinished && (
         <div className="text-center">

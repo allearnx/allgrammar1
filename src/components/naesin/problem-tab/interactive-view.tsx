@@ -5,8 +5,9 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
-import { CheckCircle, XCircle, AlertTriangle } from 'lucide-react';
+import { AlertTriangle } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { MCQOptionList } from '@/components/shared/mcq-option-list';
 import { toast } from 'sonner';
 import type { NaesinProblemSheet, NaesinProblemQuestion } from '@/types/database';
 
@@ -168,31 +169,14 @@ export function InteractiveProblemView({
       </Card>
 
       {question.options && question.options.length > 0 ? (
-        <div className="grid gap-3 max-w-lg mx-auto">
-          {question.options.map((option, idx) => {
-            const optionValue = String(idx + 1);
-            const isSelected = String(selectedAnswer) === optionValue;
-            const isCorrect = optionValue === String(question.answer);
-            return (
-              <Button
-                key={idx}
-                variant="outline"
-                className={cn(
-                  'h-auto py-3 px-4 text-left justify-start whitespace-normal',
-                  showResult && isCorrect && 'border-green-500 bg-green-50 text-green-700',
-                  showResult && isSelected && !isCorrect && 'border-red-500 bg-red-50 text-red-700'
-                )}
-                onClick={() => handleSelect(optionValue)}
-                disabled={showResult}
-              >
-                <span className="mr-3 shrink-0 font-medium">{idx + 1}.</span>
-                {option}
-                {showResult && isCorrect && <CheckCircle className="h-4 w-4 ml-auto shrink-0 text-green-500" />}
-                {showResult && isSelected && !isCorrect && <XCircle className="h-4 w-4 ml-auto shrink-0 text-red-500" />}
-              </Button>
-            );
-          })}
-        </div>
+        <MCQOptionList
+          options={question.options}
+          selectedAnswer={selectedAnswer}
+          correctAnswer={String(question.answer)}
+          showResult={showResult}
+          onSelect={(v) => handleSelect(v as string)}
+          className="max-w-lg mx-auto"
+        />
       ) : (
         <SubjectiveInput onSubmit={(answer) => handleSelect(answer)} disabled={showResult} />
       )}

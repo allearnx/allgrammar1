@@ -5,9 +5,9 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { FileText, PlayCircle, BookOpen, Brain, CheckCircle, XCircle } from 'lucide-react';
+import { FileText, PlayCircle, BookOpen, Brain } from 'lucide-react';
 import { toast } from 'sonner';
-import { cn } from '@/lib/utils';
+import { MCQOptionList } from '@/components/shared/mcq-option-list';
 import { ProblemTab } from './problem-tab';
 import { WrongAnswerReview } from './wrong-answer-review';
 import type { NaesinProblemSheet, NaesinSimilarProblem, NaesinLastReviewContent, NaesinProblemQuestion } from '@/types/database';
@@ -120,31 +120,14 @@ function SimilarProblemView({ problems }: { problems: NaesinSimilarProblem[] }) 
       </Card>
 
       {q.options && q.options.length > 0 && (
-        <div className="grid gap-3 max-w-lg mx-auto">
-          {q.options.map((option, idx) => {
-            const value = String(idx + 1);
-            const isSelected = selectedAnswer === value;
-            const isCorrectOption = value === String(q.answer);
-            return (
-              <Button
-                key={idx}
-                variant="outline"
-                className={cn(
-                  'h-auto py-3 px-4 text-left justify-start whitespace-normal',
-                  showResult && isCorrectOption && 'border-green-500 bg-green-50 text-green-700',
-                  showResult && isSelected && !isCorrectOption && 'border-red-500 bg-red-50 text-red-700'
-                )}
-                onClick={() => handleSelect(value)}
-                disabled={showResult}
-              >
-                <span className="mr-3 shrink-0 font-medium">{idx + 1}.</span>
-                {option}
-                {showResult && isCorrectOption && <CheckCircle className="h-4 w-4 ml-auto shrink-0 text-green-500" />}
-                {showResult && isSelected && !isCorrectOption && <XCircle className="h-4 w-4 ml-auto shrink-0 text-red-500" />}
-              </Button>
-            );
-          })}
-        </div>
+        <MCQOptionList
+          options={q.options}
+          selectedAnswer={selectedAnswer}
+          correctAnswer={String(q.answer)}
+          showResult={showResult}
+          onSelect={(v) => handleSelect(v as string)}
+          className="max-w-lg mx-auto"
+        />
       )}
 
       {showResult && q.explanation && (
