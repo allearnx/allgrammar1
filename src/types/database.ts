@@ -209,6 +209,7 @@ export interface NaesinGrammarLesson {
   created_at: string;
 }
 
+/** @deprecated OMR은 문제풀이(problem)로 대체됨. 히스토리용으로 유지 */
 export interface NaesinOmrSheet {
   id: string;
   unit_id: string;
@@ -243,10 +244,19 @@ export interface NaesinStudentProgress {
   grammar_text_read: boolean;
   grammar_completed: boolean;
   omr_completed: boolean;
+  // New columns for flow overhaul
+  vocab_quiz_sets_completed: number;
+  vocab_total_quiz_sets: number;
+  passage_translation_best: number | null;
+  grammar_videos_completed: number;
+  grammar_total_videos: number;
+  problem_completed: boolean;
+  last_review_unlocked: boolean;
   created_at: string;
   updated_at: string;
 }
 
+/** @deprecated OMR은 문제풀이(problem)로 대체됨. 히스토리용으로 유지 */
 export interface NaesinOmrAttempt {
   id: string;
   student_id: string;
@@ -276,14 +286,142 @@ export interface NaesinStageStatuses {
   vocab: NaesinStageStatus;
   passage: NaesinStageStatus;
   grammar: NaesinStageStatus;
-  omr: NaesinStageStatus;
+  problem: NaesinStageStatus;
+  lastReview: NaesinStageStatus;
+  /** @deprecated kept for backward compatibility */
+  omr?: NaesinStageStatus;
 }
 
 export interface NaesinContentAvailability {
   hasVocab: boolean;
   hasPassage: boolean;
   hasGrammar: boolean;
-  hasOmr: boolean;
+  hasProblem: boolean;
+  hasLastReview: boolean;
+  /** @deprecated */
+  hasOmr?: boolean;
+}
+
+// ============================================
+// 내신 대비 신규 테이블 인터페이스 (Flow Overhaul)
+// ============================================
+
+export interface NaesinExamDate {
+  id: string;
+  student_id: string;
+  textbook_id: string;
+  exam_date: string;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface NaesinVocabQuizSet {
+  id: string;
+  unit_id: string;
+  title: string;
+  set_order: number;
+  vocab_ids: string[];
+  created_at: string;
+}
+
+export interface NaesinVocabQuizSetResult {
+  id: string;
+  student_id: string;
+  quiz_set_id: string;
+  score: number;
+  wrong_words: { front_text: string; back_text: string }[];
+  created_at: string;
+}
+
+export interface NaesinGrammarVideoProgress {
+  id: string;
+  student_id: string;
+  lesson_id: string;
+  watch_percent: number;
+  max_position_reached: number;
+  duration: number;
+  cumulative_watch_seconds: number;
+  last_position: number;
+  completed: boolean;
+  updated_at: string;
+}
+
+export type NaesinProblemMode = 'interactive' | 'image_answer';
+export type NaesinProblemCategory = 'problem' | 'last_review';
+
+export interface NaesinProblemSheet {
+  id: string;
+  unit_id: string;
+  title: string;
+  mode: NaesinProblemMode;
+  questions: NaesinProblemQuestion[];
+  pdf_url: string | null;
+  answer_key: (string | number)[];
+  sort_order: number;
+  category: NaesinProblemCategory;
+  created_at: string;
+}
+
+export interface NaesinProblemQuestion {
+  number: number;
+  question: string;
+  options?: string[];
+  answer: string | number;
+  explanation?: string;
+}
+
+export interface NaesinProblemAttempt {
+  id: string;
+  student_id: string;
+  sheet_id: string;
+  answers: (string | number)[];
+  score: number;
+  total_questions: number;
+  wrong_answers: { number: number; userAnswer: string | number; correctAnswer: string | number; question?: string }[];
+  created_at: string;
+}
+
+export type NaesinWrongAnswerStage = 'vocab' | 'passage' | 'grammar' | 'problem' | 'lastReview';
+
+export interface NaesinWrongAnswer {
+  id: string;
+  student_id: string;
+  unit_id: string;
+  stage: NaesinWrongAnswerStage;
+  source_type: string;
+  question_data: Record<string, unknown>;
+  resolved: boolean;
+  created_at: string;
+}
+
+export type NaesinSimilarProblemStatus = 'pending' | 'approved' | 'rejected';
+
+export interface NaesinSimilarProblem {
+  id: string;
+  unit_id: string;
+  wrong_answer_id: string | null;
+  grammar_tag: string | null;
+  question_data: NaesinProblemQuestion;
+  status: NaesinSimilarProblemStatus;
+  created_by: string | null;
+  reviewed_by: string | null;
+  created_at: string;
+  updated_at: string;
+}
+
+export type NaesinLastReviewContentType = 'video' | 'pdf' | 'text';
+
+export interface NaesinLastReviewContent {
+  id: string;
+  unit_id: string;
+  content_type: NaesinLastReviewContentType;
+  title: string;
+  youtube_url: string | null;
+  youtube_video_id: string | null;
+  pdf_url: string | null;
+  text_content: string | null;
+  sort_order: number;
+  created_at: string;
 }
 
 // Extended types with relations

@@ -4,9 +4,10 @@ import { useState, useCallback } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { CheckCircle, XCircle, GripVertical, Shuffle } from 'lucide-react';
+import { CheckCircle, XCircle, GripVertical, Shuffle, Send, Loader2, AlertTriangle } from 'lucide-react';
 import { DragDropProvider } from '@dnd-kit/react';
 import { move } from '@dnd-kit/helpers';
 import { useSortable } from '@dnd-kit/react/sortable';
@@ -40,12 +41,12 @@ export function PassageTab({ passages, unitId, onStageComplete }: PassageTabProp
     (Array.isArray(passage.blanks_hard) && passage.blanks_hard.length > 0);
   const hasSentences = Array.isArray(passage.sentences) && passage.sentences.length > 0;
 
-  async function savePassageProgress(type: 'fill_blanks' | 'ordering', score: number) {
+  async function savePassageProgress(type: 'fill_blanks' | 'ordering' | 'translation', score: number, wrongAnswers?: unknown[]) {
     try {
       const res = await fetch('/api/naesin/passage/progress', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ unitId, type, score }),
+        body: JSON.stringify({ unitId, type, score, wrongAnswers }),
       });
       const data = await res.json();
       if (data.passageCompleted) {
@@ -54,6 +55,24 @@ export function PassageTab({ passages, unitId, onStageComplete }: PassageTabProp
       }
     } catch {
       toast.error('진도 저장 중 오류가 발생했습니다');
+    }
+  }
+
+  async function saveWrongAnswers(wrongItems: unknown[]) {
+    if (wrongItems.length === 0) return;
+    try {
+      await fetch('/api/naesin/wrong-answers', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          unitId,
+          stage: 'passage',
+          sourceType: activeTab,
+          wrongAnswers: wrongItems,
+        }),
+      });
+    } catch {
+      // Silent fail
     }
   }
 
@@ -78,12 +97,15 @@ export function PassageTab({ passages, unitId, onStageComplete }: PassageTabProp
       )}
 
       <Tabs value={activeTab} onValueChange={setActiveTab}>
-        <TabsList className="grid w-full grid-cols-2">
+        <TabsList className="grid w-full grid-cols-3">
           <TabsTrigger value="fill-blanks" disabled={!hasBlanks}>
             빈칸 채우기
           </TabsTrigger>
           <TabsTrigger value="ordering" disabled={!hasSentences}>
             순서 배열
+          </TabsTrigger>
+          <TabsTrigger value="translation">
+            영작
           </TabsTrigger>
         </TabsList>
 
@@ -91,7 +113,10 @@ export function PassageTab({ passages, unitId, onStageComplete }: PassageTabProp
           <NaesinFillBlanksView
             key={passage.id}
             passage={textbookPassage}
-            onScoreChange={(score) => savePassageProgress('fill_blanks', score)}
+            onScoreChange={(score, wrongs) => {
+              savePassageProgress('fill_blanks', score);
+              if (wrongs && wrongs.length > 0) saveWrongAnswers(wrongs);
+            }}
           />
         </TabsContent>
 
@@ -100,6 +125,17 @@ export function PassageTab({ passages, unitId, onStageComplete }: PassageTabProp
             key={passage.id}
             passage={textbookPassage}
             onScoreChange={(score) => savePassageProgress('ordering', score)}
+          />
+        </TabsContent>
+
+        <TabsContent value="translation" className="mt-4">
+          <NaesinTranslationView
+            key={passage.id}
+            passage={textbookPassage}
+            onScoreChange={(score, wrongs) => {
+              savePassageProgress('translation', score);
+              if (wrongs && wrongs.length > 0) saveWrongAnswers(wrongs);
+            }}
           />
         </TabsContent>
       </Tabs>
@@ -113,7 +149,13 @@ export function PassageTab({ passages, unitId, onStageComplete }: PassageTabProp
 
 type Difficulty = 'easy' | 'medium' | 'hard';
 
-function NaesinFillBlanksView({ passage, onScoreChange }: { passage: TextbookPassage; onScoreChange: (score: number) => void }) {
+function NaesinFillBlanksView({
+  passage,
+  onScoreChange,
+}: {
+  passage: TextbookPassage;
+  onScoreChange: (score: number, wrongAnswers?: unknown[]) => void;
+}) {
   const [difficulty, setDifficulty] = useState<Difficulty>('easy');
   const [answers, setAnswers] = useState<Record<number, string>>({});
   const [results, setResults] = useState<Record<number, boolean> | null>(null);
@@ -132,15 +174,26 @@ function NaesinFillBlanksView({ passage, onScoreChange }: { passage: TextbookPas
     if (blanks.length === 0) return;
     const newResults: Record<number, boolean> = {};
     let correctCount = 0;
+    const wrongs: unknown[] = [];
     blanks.forEach((blank) => {
       const userAnswer = (answers[blank.index] || '').trim().toLowerCase();
       const isCorrect = userAnswer === blank.answer.toLowerCase();
       newResults[blank.index] = isCorrect;
-      if (isCorrect) correctCount++;
+      if (isCorrect) {
+        correctCount++;
+      } else {
+        wrongs.push({
+          type: 'fill_blank',
+          difficulty,
+          blankIndex: blank.index,
+          correctAnswer: blank.answer,
+          userAnswer: answers[blank.index] || '',
+        });
+      }
     });
     setResults(newResults);
     const score = Math.round((correctCount / blanks.length) * 100);
-    onScoreChange(score);
+    onScoreChange(score, wrongs);
     toast(score >= 80 ? '잘했어요!' : '다시 도전해보세요!', {
       description: `${correctCount}/${blanks.length} 정답 (${score}점)`,
     });
@@ -197,6 +250,14 @@ function NaesinFillBlanksView({ passage, onScoreChange }: { passage: TextbookPas
               </div>
             </CardContent>
           </Card>
+
+          {results !== null && Object.values(results).some((v) => !v) && (
+            <div className="flex items-center gap-2 text-sm text-red-600 bg-red-50 rounded-lg px-3 py-2">
+              <AlertTriangle className="h-4 w-4 shrink-0" />
+              오답이 기록되었습니다. 오답을 써서 선생님에게 제출하세요.
+            </div>
+          )}
+
           <div className="flex gap-2">
             {results === null ? (
               <Button onClick={handleSubmit} className="flex-1">제출하기</Button>
@@ -354,6 +415,147 @@ function NaesinOrderingView({ passage, onScoreChange }: { passage: TextbookPassa
           </Button>
         )}
       </div>
+    </div>
+  );
+}
+
+// ============================================
+// Translation (영작)
+// ============================================
+
+interface TranslationGradingResult {
+  score: number;
+  feedback: string;
+  correctedSentence: string;
+}
+
+function NaesinTranslationView({
+  passage,
+  onScoreChange,
+}: {
+  passage: TextbookPassage;
+  onScoreChange: (score: number, wrongAnswers?: unknown[]) => void;
+}) {
+  const [answer, setAnswer] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [result, setResult] = useState<TranslationGradingResult | null>(null);
+
+  async function handleSubmit() {
+    if (!answer.trim() || loading) return;
+    setLoading(true);
+
+    try {
+      const response = await fetch('/api/textbook/grade-translation', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          passageId: passage.id,
+          koreanText: passage.korean_translation,
+          originalText: passage.original_text,
+          studentAnswer: answer.trim(),
+        }),
+      });
+
+      if (!response.ok) {
+        const error = await response.json();
+        throw new Error(error.error || 'Failed to grade');
+      }
+
+      const data = await response.json();
+      setResult(data);
+
+      const wrongs = data.score < 80
+        ? [{ type: 'translation', koreanText: passage.korean_translation, userAnswer: answer.trim(), score: data.score, feedback: data.feedback }]
+        : [];
+      onScoreChange(data.score, wrongs);
+    } catch (error) {
+      toast.error('채점 중 오류가 발생했습니다', {
+        description: error instanceof Error ? error.message : undefined,
+      });
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  function handleReset() {
+    setAnswer('');
+    setResult(null);
+  }
+
+  return (
+    <div className="space-y-6">
+      <Card>
+        <CardContent className="py-6">
+          <p className="text-sm text-muted-foreground mb-2">다음 한국어를 영어로 번역하세요:</p>
+          <p className="text-lg font-medium whitespace-pre-wrap">
+            {passage.korean_translation}
+          </p>
+        </CardContent>
+      </Card>
+
+      <div className="space-y-3">
+        <Textarea
+          value={answer}
+          onChange={(e) => setAnswer(e.target.value)}
+          placeholder="영어로 번역하세요..."
+          rows={4}
+          disabled={loading || result !== null}
+          className="resize-none"
+        />
+        <div className="flex justify-between items-center">
+          <span className="text-xs text-muted-foreground">AI 채점</span>
+          {result !== null ? (
+            <Button onClick={handleReset} variant="outline">다시 작성</Button>
+          ) : (
+            <Button onClick={handleSubmit} disabled={!answer.trim() || loading}>
+              {loading ? (
+                <>
+                  <Loader2 className="h-4 w-4 mr-1 animate-spin" />
+                  채점 중...
+                </>
+              ) : (
+                <>
+                  <Send className="h-4 w-4 mr-1" />
+                  제출
+                </>
+              )}
+            </Button>
+          )}
+        </div>
+      </div>
+
+      {result && (
+        <>
+          <Card className={result.score >= 80 ? 'border-green-500' : result.score >= 50 ? 'border-yellow-500' : 'border-red-500'}>
+            <CardContent className="py-6 space-y-4">
+              <div className="flex items-center justify-between">
+                <span className="font-medium">채점 결과</span>
+                <Badge
+                  variant={result.score >= 80 ? 'default' : 'secondary'}
+                  className={result.score >= 80 ? 'bg-green-500' : ''}
+                >
+                  {result.score}점
+                </Badge>
+              </div>
+              <div>
+                <p className="text-sm font-medium mb-1">피드백:</p>
+                <p className="text-sm text-muted-foreground whitespace-pre-wrap">{result.feedback}</p>
+              </div>
+              <div>
+                <p className="text-sm font-medium mb-1">모범 답안:</p>
+                <p className="text-sm whitespace-pre-wrap">{result.correctedSentence}</p>
+              </div>
+            </CardContent>
+          </Card>
+
+          {result.score < 80 && (
+            <div className="flex items-center gap-2 text-sm text-red-600 bg-red-50 rounded-lg px-3 py-2">
+              <AlertTriangle className="h-4 w-4 shrink-0" />
+              오답이 기록되었습니다. 오답을 써서 선생님에게 제출하세요.
+            </div>
+          )}
+        </>
+      )}
     </div>
   );
 }

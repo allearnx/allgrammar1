@@ -31,16 +31,20 @@ export async function POST(request: NextRequest) {
   } else if (type === 'ordering') {
     const currentBest = existing?.passage_ordering_best ?? 0;
     updates.passage_ordering_best = Math.max(currentBest, score);
+  } else if (type === 'translation') {
+    const currentBest = existing?.passage_translation_best ?? 0;
+    updates.passage_translation_best = Math.max(currentBest, score);
   }
 
   const fillScore = type === 'fill_blanks'
     ? Math.max(existing?.passage_fill_blanks_best ?? 0, score)
     : (existing?.passage_fill_blanks_best ?? 0);
-  const orderScore = type === 'ordering'
-    ? Math.max(existing?.passage_ordering_best ?? 0, score)
-    : (existing?.passage_ordering_best ?? 0);
+  const translationScore = type === 'translation'
+    ? Math.max(existing?.passage_translation_best ?? 0, score)
+    : (existing?.passage_translation_best ?? 0);
 
-  const passageCompleted = fillScore >= PASS_THRESHOLD && orderScore >= PASS_THRESHOLD;
+  // Completion: fill_blanks 80% + translation 80%
+  const passageCompleted = fillScore >= PASS_THRESHOLD && translationScore >= PASS_THRESHOLD;
   updates.passage_completed = passageCompleted;
 
   const { error } = await supabase

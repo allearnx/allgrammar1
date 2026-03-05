@@ -4,20 +4,17 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import {
   BookOpen,
-  BookMarked,
-  CheckCircle,
-  Circle,
-  Lock,
   RefreshCw,
 } from 'lucide-react';
 import { toast } from 'sonner';
 import { calculateStageStatuses } from '@/lib/naesin/stage-unlock';
-import type { NaesinTextbook, NaesinStageStatus } from '@/types/database';
-import Link from 'next/link';
+import { LessonCard } from '@/components/naesin/lesson-card';
+import { ExamCountdown } from '@/components/naesin/exam-countdown';
+import { ExamDatePicker } from '@/components/naesin/exam-date-picker';
+import type { NaesinTextbook } from '@/types/database';
 
 interface UnitWithProgress {
   id: string;
@@ -27,12 +24,21 @@ interface UnitWithProgress {
   hasVocab: boolean;
   hasPassage: boolean;
   hasGrammar: boolean;
-  hasOmr: boolean;
+  hasProblem: boolean;
+  hasLastReview: boolean;
+  vocabQuizSetCount: number;
+  grammarVideoCount: number;
   progress: {
     vocab_completed: boolean;
     passage_completed: boolean;
     grammar_completed: boolean;
-    omr_completed: boolean;
+    problem_completed: boolean;
+    vocab_quiz_sets_completed: number;
+    vocab_total_quiz_sets: number;
+    passage_fill_blanks_best: number | null;
+    passage_translation_best: number | null;
+    grammar_videos_completed: number;
+    grammar_total_videos: number;
   } | null;
 }
 
@@ -40,20 +46,23 @@ interface NaesinHomeProps {
   textbooks: NaesinTextbook[];
   selectedTextbook: NaesinTextbook | null;
   units: UnitWithProgress[];
+  examDate?: string | null;
+  textbookId?: string | null;
 }
 
-export function NaesinHome({ textbooks, selectedTextbook, units }: NaesinHomeProps) {
+export function NaesinHome({ textbooks, selectedTextbook, units, examDate: initialExamDate, textbookId }: NaesinHomeProps) {
   const router = useRouter();
   const [selecting, setSelecting] = useState(!selectedTextbook);
   const [saving, setSaving] = useState(false);
+  const [examDate, setExamDate] = useState(initialExamDate || null);
 
-  async function selectTextbook(textbookId: string) {
+  async function selectTextbook(tbId: string) {
     setSaving(true);
     try {
       const res = await fetch('/api/naesin/settings', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ textbookId }),
+        body: JSON.stringify({ textbookId: tbId }),
       });
       if (!res.ok) throw new Error();
       toast.success('교과서가 선택되었습니다');
@@ -142,11 +151,25 @@ export function NaesinHome({ textbooks, selectedTextbook, units }: NaesinHomePro
             {selectedTextbook.publisher} · 중{selectedTextbook.grade}
           </p>
         </div>
-        <Button variant="outline" size="sm" onClick={() => setSelecting(true)}>
-          <RefreshCw className="h-4 w-4 mr-1" />
-          교과서 변경
-        </Button>
+        <div className="flex gap-2">
+          {textbookId && (
+            <ExamDatePicker
+              textbookId={textbookId}
+              currentDate={examDate}
+              onDateChange={(date) => {
+                setExamDate(date);
+                router.refresh();
+              }}
+            />
+          )}
+          <Button variant="outline" size="sm" onClick={() => setSelecting(true)}>
+            <RefreshCw className="h-4 w-4 mr-1" />
+            교과서 변경
+          </Button>
+        </div>
       </div>
+
+      {examDate && <ExamCountdown examDate={examDate} />}
 
       {units.length === 0 ? (
         <p className="text-center text-muted-foreground py-8">
@@ -155,8 +178,8 @@ export function NaesinHome({ textbooks, selectedTextbook, units }: NaesinHomePro
       ) : (
         <div className="space-y-3">
           {units.map((unit) => {
-            const stages = calculateStageStatuses(
-              unit.progress
+            const stages = calculateStageStatuses({
+              progress: unit.progress
                 ? {
                     ...unit.progress,
                     id: '',
@@ -165,81 +188,69 @@ export function NaesinHome({ textbooks, selectedTextbook, units }: NaesinHomePro
                     vocab_flashcard_count: 0,
                     vocab_quiz_score: null,
                     vocab_spelling_score: null,
-                    passage_fill_blanks_best: null,
                     passage_ordering_best: null,
                     grammar_video_completed: false,
                     grammar_text_read: false,
+                    omr_completed: false,
+                    last_review_unlocked: false,
                     created_at: '',
                     updated_at: '',
                   }
                 : null,
-              {
+              content: {
                 hasVocab: unit.hasVocab,
                 hasPassage: unit.hasPassage,
                 hasGrammar: unit.hasGrammar,
-                hasOmr: unit.hasOmr,
-              }
-            );
+                hasProblem: unit.hasProblem,
+                hasLastReview: unit.hasLastReview,
+              },
+              vocabQuizSetCount: unit.vocabQuizSetCount,
+              grammarVideoCount: unit.grammarVideoCount,
+              examDate,
+            });
 
-            const allCompleted =
-              stages.vocab === 'completed' &&
-              stages.passage === 'completed' &&
-              stages.grammar === 'completed' &&
-              stages.omr === 'completed';
+            // Compute stage progress percentages
+            const vocabPercent = unit.progress?.vocab_completed
+              ? 100
+              : Math.max(
+                  (unit.progress?.vocab_quiz_sets_completed ?? 0) > 0 && unit.vocabQuizSetCount > 0
+                    ? Math.round(((unit.progress?.vocab_quiz_sets_completed ?? 0) / unit.vocabQuizSetCount) * 100)
+                    : 0,
+                  0
+                );
+
+            const passagePercent = unit.progress?.passage_completed
+              ? 100
+              : Math.round(
+                  ((unit.progress?.passage_fill_blanks_best ?? 0) + (unit.progress?.passage_translation_best ?? 0)) / 2
+                );
+
+            const grammarPercent = unit.progress?.grammar_completed
+              ? 100
+              : unit.grammarVideoCount > 0
+                ? Math.round(((unit.progress?.grammar_videos_completed ?? 0) / unit.grammarVideoCount) * 100)
+                : 0;
+
+            const problemPercent = unit.progress?.problem_completed ? 100 : 0;
 
             return (
-              <Link key={unit.id} href={`/student/naesin/${unit.id}`}>
-                <Card className="hover:shadow-sm transition-shadow cursor-pointer">
-                  <CardContent className="py-4">
-                    <div className="flex items-center gap-3">
-                      <div className="flex items-center justify-center h-10 w-10 rounded-full bg-primary/10 text-primary font-bold shrink-0">
-                        {unit.unit_number}
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <h3 className="font-medium">{unit.title}</h3>
-                        <div className="flex gap-1.5 mt-2">
-                          <StageBadge label="단어" status={stages.vocab} />
-                          <StageBadge label="교과서" status={stages.passage} />
-                          <StageBadge label="문법" status={stages.grammar} />
-                          <StageBadge label="OMR" status={stages.omr} />
-                        </div>
-                      </div>
-                      {allCompleted && (
-                        <Badge className="bg-green-500 text-white shrink-0">완료</Badge>
-                      )}
-                    </div>
-                  </CardContent>
-                </Card>
-              </Link>
+              <LessonCard
+                key={unit.id}
+                unitId={unit.id}
+                unitNumber={unit.unit_number}
+                title={unit.title}
+                stages={stages}
+                stageProgress={{
+                  vocab: vocabPercent,
+                  passage: passagePercent,
+                  grammar: grammarPercent,
+                  problem: problemPercent,
+                }}
+              />
             );
           })}
         </div>
       )}
     </div>
-  );
-}
-
-function StageBadge({ label, status }: { label: string; status: NaesinStageStatus }) {
-  if (status === 'completed') {
-    return (
-      <Badge variant="outline" className="text-green-600 border-green-300 text-xs gap-1">
-        <CheckCircle className="h-3 w-3" />
-        {label}
-      </Badge>
-    );
-  }
-  if (status === 'locked') {
-    return (
-      <Badge variant="outline" className="text-muted-foreground border-muted text-xs gap-1">
-        <Lock className="h-3 w-3" />
-        {label}
-      </Badge>
-    );
-  }
-  return (
-    <Badge variant="outline" className="text-blue-600 border-blue-300 text-xs gap-1">
-      <Circle className="h-3 w-3" />
-      {label}
-    </Badge>
   );
 }

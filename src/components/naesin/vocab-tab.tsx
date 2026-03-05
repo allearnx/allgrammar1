@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -10,7 +10,8 @@ import { cn } from '@/lib/utils';
 import { toast } from 'sonner';
 import { vocabToMemoryItem } from '@/lib/naesin/adapters';
 import { ScoreBadges, ResultCard, CompletionView, NextButton } from '@/components/memory/shared';
-import type { MemoryItem, StudentMemoryProgress, NaesinVocabulary, NaesinVocabQuizResult } from '@/types/database';
+import { QuizSetSelector } from './quiz-set-selector';
+import type { MemoryItem, StudentMemoryProgress, NaesinVocabulary, NaesinVocabQuizResult, NaesinVocabQuizSet } from '@/types/database';
 
 type FlashcardItem = MemoryItem & { progress: StudentMemoryProgress | null };
 
@@ -19,13 +20,36 @@ interface VocabTabProps {
   vocabulary: NaesinVocabulary[];
   unitId: string;
   onStageComplete: () => void;
+  quizSets?: NaesinVocabQuizSet[];
+  completedSetIds?: string[];
 }
 
-export function VocabTab({ vocabulary, unitId, onStageComplete }: VocabTabProps) {
+export function VocabTab({ vocabulary, unitId, onStageComplete, quizSets, completedSetIds }: VocabTabProps) {
   const [activeTab, setActiveTab] = useState('flashcard');
-  const items = vocabulary.map(vocabToMemoryItem);
+  const hasQuizSets = quizSets && quizSets.length > 0;
 
-  const hasEnoughForQuiz = vocabulary.length >= 4;
+  const completedSet = useMemo(
+    () => new Set(completedSetIds || []),
+    [completedSetIds]
+  );
+
+  // Find first uncompleted set or default to first
+  const firstUncompletedSet = hasQuizSets
+    ? quizSets.find((s) => !completedSet.has(s.id))?.id || quizSets[0].id
+    : null;
+  const [activeSetId, setActiveSetId] = useState<string | null>(firstUncompletedSet);
+
+  // Filter vocabulary by active quiz set
+  const filteredVocabulary = useMemo(() => {
+    if (!hasQuizSets || !activeSetId) return vocabulary;
+    const activeSet = quizSets.find((s) => s.id === activeSetId);
+    if (!activeSet) return vocabulary;
+    const vocabIdSet = new Set(activeSet.vocab_ids);
+    return vocabulary.filter((v) => vocabIdSet.has(v.id));
+  }, [hasQuizSets, activeSetId, quizSets, vocabulary]);
+
+  const items = filteredVocabulary.map(vocabToMemoryItem);
+  const hasEnoughForQuiz = filteredVocabulary.length >= 4;
   const spellingItems = items.filter((i) => i.spelling_answer);
 
   async function saveVocabProgress(type: 'flashcard' | 'quiz' | 'spelling', score?: number) {
@@ -33,7 +57,7 @@ export function VocabTab({ vocabulary, unitId, onStageComplete }: VocabTabProps)
       const res = await fetch('/api/naesin/vocab/progress', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ unitId, type, score, totalItems: vocabulary.length }),
+        body: JSON.stringify({ unitId, type, score, totalItems: filteredVocabulary.length }),
       });
       const data = await res.json();
       if (data.vocabCompleted) {
@@ -42,6 +66,19 @@ export function VocabTab({ vocabulary, unitId, onStageComplete }: VocabTabProps)
       }
     } catch {
       toast.error('진도 저장 중 오류가 발생했습니다');
+    }
+  }
+
+  async function saveQuizSetResult(score: number, wrongWords: { front_text: string; back_text: string }[]) {
+    if (!activeSetId) return;
+    try {
+      await fetch('/api/naesin/vocab/quiz-set-result', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ quizSetId: activeSetId, unitId, score, wrongWords }),
+      });
+    } catch {
+      // Silent fail
     }
   }
 
@@ -54,29 +91,57 @@ export function VocabTab({ vocabulary, unitId, onStageComplete }: VocabTabProps)
   }
 
   return (
-    <Tabs value={activeTab} onValueChange={setActiveTab}>
-      <TabsList className="grid w-full grid-cols-3">
-        <TabsTrigger value="flashcard">플래시카드</TabsTrigger>
-        <TabsTrigger value="quiz" disabled={!hasEnoughForQuiz}>
-          퀴즈
-        </TabsTrigger>
-        <TabsTrigger value="spelling" disabled={spellingItems.length === 0}>
-          스펠링
-        </TabsTrigger>
-      </TabsList>
+    <div className="space-y-4">
+      {hasQuizSets && (
+        <QuizSetSelector
+          quizSets={quizSets}
+          completedSetIds={completedSet}
+          activeSetId={activeSetId}
+          onSelect={setActiveSetId}
+        />
+      )}
 
-      <TabsContent value="flashcard" className="mt-4">
-        <NaesinFlashcardView items={items} vocabulary={vocabulary} onComplete={() => saveVocabProgress('flashcard')} />
-      </TabsContent>
+      <Tabs value={activeTab} onValueChange={setActiveTab}>
+        <TabsList className="grid w-full grid-cols-3">
+          <TabsTrigger value="flashcard">플래시카드</TabsTrigger>
+          <TabsTrigger value="quiz" disabled={!hasEnoughForQuiz}>
+            퀴즈
+          </TabsTrigger>
+          <TabsTrigger value="spelling" disabled={spellingItems.length === 0}>
+            스펠링
+          </TabsTrigger>
+        </TabsList>
 
-      <TabsContent value="quiz" className="mt-4">
-        <NaesinQuizView vocabulary={vocabulary} unitId={unitId} onComplete={(score) => saveVocabProgress('quiz', score)} />
-      </TabsContent>
+        <TabsContent value="flashcard" className="mt-4">
+          <NaesinFlashcardView
+            key={activeSetId || 'all'}
+            items={items}
+            vocabulary={filteredVocabulary}
+            onComplete={() => saveVocabProgress('flashcard')}
+          />
+        </TabsContent>
 
-      <TabsContent value="spelling" className="mt-4">
-        <NaesinSpellingView items={spellingItems} vocabulary={vocabulary} onComplete={(score) => saveVocabProgress('spelling', score)} />
-      </TabsContent>
-    </Tabs>
+        <TabsContent value="quiz" className="mt-4">
+          <NaesinQuizView
+            key={activeSetId || 'all'}
+            vocabulary={filteredVocabulary}
+            allVocabulary={vocabulary}
+            unitId={unitId}
+            onComplete={(score) => saveVocabProgress('quiz', score)}
+            onQuizSetResult={hasQuizSets ? saveQuizSetResult : undefined}
+          />
+        </TabsContent>
+
+        <TabsContent value="spelling" className="mt-4">
+          <NaesinSpellingView
+            key={activeSetId || 'all'}
+            items={spellingItems}
+            vocabulary={filteredVocabulary}
+            onComplete={(score) => saveVocabProgress('spelling', score)}
+          />
+        </TabsContent>
+      </Tabs>
+    </div>
   );
 }
 
@@ -197,10 +262,11 @@ interface QuizQuestion {
   correctIndex: number;
 }
 
-function generateQuizQuestions(vocabulary: NaesinVocabulary[], targetVocab?: NaesinVocabulary[]): QuizQuestion[] {
+function generateQuizQuestions(vocabulary: NaesinVocabulary[], allVocabulary?: NaesinVocabulary[], targetVocab?: NaesinVocabulary[]): QuizQuestion[] {
   const quizWords = targetVocab || vocabulary;
+  const optionPool = allVocabulary || vocabulary;
   return quizWords.map((vocab) => {
-    const others = vocabulary
+    const others = optionPool
       .filter((v) => v.id !== vocab.id)
       .sort(() => Math.random() - 0.5)
       .slice(0, 4)
@@ -220,8 +286,20 @@ interface WrongWord {
   back_text: string;
 }
 
-function NaesinQuizView({ vocabulary, unitId, onComplete }: { vocabulary: NaesinVocabulary[]; unitId: string; onComplete: (score: number) => void }) {
-  const [questions, setQuestions] = useState<QuizQuestion[]>(() => generateQuizQuestions(vocabulary));
+function NaesinQuizView({
+  vocabulary,
+  allVocabulary,
+  unitId,
+  onComplete,
+  onQuizSetResult,
+}: {
+  vocabulary: NaesinVocabulary[];
+  allVocabulary?: NaesinVocabulary[];
+  unitId: string;
+  onComplete: (score: number) => void;
+  onQuizSetResult?: (score: number, wrongWords: WrongWord[]) => void;
+}) {
+  const [questions, setQuestions] = useState<QuizQuestion[]>(() => generateQuizQuestions(vocabulary, allVocabulary));
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
   const [showResult, setShowResult] = useState(false);
@@ -249,11 +327,11 @@ function NaesinQuizView({ vocabulary, unitId, onComplete }: { vocabulary: Naesin
       const finalCorrect = correct ? score.correct + 1 : score.correct;
       const pct = Math.round((finalCorrect / questions.length) * 100);
       onComplete(pct);
-      // Save result to DB
-      saveQuizResult(finalCorrect, pct, correct
+      const finalWrong = correct
         ? wrongWords
-        : [...wrongWords, { front_text: question.front_text, back_text: question.correctAnswer }]
-      );
+        : [...wrongWords, { front_text: question.front_text, back_text: question.correctAnswer }];
+      saveQuizResult(finalCorrect, pct, finalWrong);
+      onQuizSetResult?.(pct, finalWrong);
     }
   }
 
@@ -277,7 +355,7 @@ function NaesinQuizView({ vocabulary, unitId, onComplete }: { vocabulary: Naesin
         setAttemptNumber(data.result.attempt_number);
       }
     } catch {
-      // Silent fail - quiz still works without saving
+      // Silent fail
     } finally {
       setSaving(false);
       setQuizFinished(true);
@@ -293,7 +371,7 @@ function NaesinQuizView({ vocabulary, unitId, onComplete }: { vocabulary: Naesin
   }
 
   function handleRetryAll() {
-    setQuestions(generateQuizQuestions(vocabulary));
+    setQuestions(generateQuizQuestions(vocabulary, allVocabulary));
     setCurrentIndex(0);
     setShowResult(false);
     setSelectedAnswer(null);
@@ -308,11 +386,11 @@ function NaesinQuizView({ vocabulary, unitId, onComplete }: { vocabulary: Naesin
     const wrongFrontTexts = new Set(wrongWords.map(w => w.front_text));
     const wrongVocab = vocabulary.filter(v => wrongFrontTexts.has(v.front_text));
     if (wrongVocab.length < 2) {
-      // Not enough wrong words for a meaningful quiz, retry all
       handleRetryAll();
       return;
     }
-    setQuestions(generateQuizQuestions(wrongVocab.length >= 5 ? wrongVocab : vocabulary, wrongVocab));
+    const pool = allVocabulary || vocabulary;
+    setQuestions(generateQuizQuestions(wrongVocab.length >= 5 ? wrongVocab : pool, pool, wrongVocab));
     setCurrentIndex(0);
     setShowResult(false);
     setSelectedAnswer(null);
@@ -331,7 +409,6 @@ function NaesinQuizView({ vocabulary, unitId, onComplete }: { vocabulary: Naesin
 
   if (!question && !quizFinished) return null;
 
-  // Custom result screen
   if (quizFinished) {
     const pct = Math.round((score.correct / questions.length) * 100);
     return (
@@ -446,7 +523,6 @@ function NaesinSpellingView({ items, vocabulary, onComplete }: { items: Flashcar
   const [score, setScore] = useState({ correct: 0, wrong: 0 });
 
   const item = items[currentIndex];
-  // Find matching vocabulary item for example_sentence
   const vocab = vocabulary.find((v) => v.id === item?.id);
   const isFinished = currentIndex === items.length - 1 && showResult;
 
