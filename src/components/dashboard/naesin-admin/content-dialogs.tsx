@@ -81,16 +81,16 @@ export function AddPassageDialog({ unitId, onAdd }: { unitId: string; onAdd: () 
         <DialogHeader><DialogTitle>교과서 지문 추가</DialogTitle></DialogHeader>
         <form onSubmit={handleSubmit} className="space-y-3">
           <div>
-            <Label>제목</Label>
-            <Input value={title} onChange={(e) => setTitle(e.target.value)} placeholder="본문 1" required />
+            <Label htmlFor="passage-title">제목</Label>
+            <Input id="passage-title" value={title} onChange={(e) => setTitle(e.target.value)} placeholder="본문 1" required />
           </div>
           <div>
-            <Label>영어 원문</Label>
-            <Textarea value={originalText} onChange={(e) => setOriginalText(e.target.value)} rows={4} required />
+            <Label htmlFor="passage-original">영어 원문</Label>
+            <Textarea id="passage-original" value={originalText} onChange={(e) => setOriginalText(e.target.value)} rows={4} required />
           </div>
           <div>
-            <Label>한국어 번역</Label>
-            <Textarea value={koreanTranslation} onChange={(e) => setKoreanTranslation(e.target.value)} rows={4} required />
+            <Label htmlFor="passage-korean">한국어 번역</Label>
+            <Textarea id="passage-korean" value={koreanTranslation} onChange={(e) => setKoreanTranslation(e.target.value)} rows={4} required />
           </div>
           <p className="text-xs text-muted-foreground">빈칸과 문장 배열은 원문에서 자동 생성됩니다.</p>
           <Button type="submit" className="w-full" disabled={saving}>
@@ -158,13 +158,13 @@ export function AddGrammarDialog({ unitId, onAdd }: { unitId: string; onAdd: () 
         <DialogHeader><DialogTitle>문법 설명 추가</DialogTitle></DialogHeader>
         <form onSubmit={handleSubmit} className="space-y-3">
           <div>
-            <Label>제목</Label>
-            <Input value={title} onChange={(e) => setTitle(e.target.value)} required />
+            <Label htmlFor="grammar-title">제목</Label>
+            <Input id="grammar-title" value={title} onChange={(e) => setTitle(e.target.value)} required />
           </div>
           <div>
-            <Label>콘텐츠 유형</Label>
+            <Label htmlFor="grammar-content-type">콘텐츠 유형</Label>
             <Select value={contentType} onValueChange={(v) => setContentType(v as 'video' | 'text')}>
-              <SelectTrigger><SelectValue /></SelectTrigger>
+              <SelectTrigger id="grammar-content-type"><SelectValue /></SelectTrigger>
               <SelectContent>
                 <SelectItem value="video">영상</SelectItem>
                 <SelectItem value="text">텍스트</SelectItem>
@@ -173,13 +173,13 @@ export function AddGrammarDialog({ unitId, onAdd }: { unitId: string; onAdd: () 
           </div>
           {contentType === 'video' ? (
             <div>
-              <Label>YouTube URL</Label>
-              <Input value={youtubeUrl} onChange={(e) => setYoutubeUrl(e.target.value)} placeholder="https://youtube.com/watch?v=..." required />
+              <Label htmlFor="grammar-youtube">YouTube URL</Label>
+              <Input id="grammar-youtube" value={youtubeUrl} onChange={(e) => setYoutubeUrl(e.target.value)} placeholder="https://youtube.com/watch?v=..." required />
             </div>
           ) : (
             <div>
-              <Label>텍스트 내용</Label>
-              <Textarea value={textContent} onChange={(e) => setTextContent(e.target.value)} rows={6} required />
+              <Label htmlFor="grammar-text">텍스트 내용</Label>
+              <Textarea id="grammar-text" value={textContent} onChange={(e) => setTextContent(e.target.value)} rows={6} required />
             </div>
           )}
           <Button type="submit" className="w-full" disabled={saving}>
@@ -245,16 +245,17 @@ export function AddOmrDialog({ unitId, onAdd }: { unitId: string; onAdd: () => v
         <DialogHeader><DialogTitle>OMR 시트 추가</DialogTitle></DialogHeader>
         <form onSubmit={handleSubmit} className="space-y-3">
           <div>
-            <Label>제목</Label>
-            <Input value={title} onChange={(e) => setTitle(e.target.value)} placeholder="1차 내신 대비" required />
+            <Label htmlFor="omr-title">제목</Label>
+            <Input id="omr-title" value={title} onChange={(e) => setTitle(e.target.value)} placeholder="1차 내신 대비" required />
           </div>
           <div>
-            <Label>총 문항 수</Label>
-            <Input type="number" value={totalQuestions} onChange={(e) => setTotalQuestions(e.target.value)} placeholder="25" required />
+            <Label htmlFor="omr-total">총 문항 수</Label>
+            <Input id="omr-total" type="number" value={totalQuestions} onChange={(e) => setTotalQuestions(e.target.value)} placeholder="25" required />
           </div>
           <div>
-            <Label>정답 (쉼표 구분, 1~5)</Label>
+            <Label htmlFor="omr-answers">정답 (쉼표 구분, 1~5)</Label>
             <Textarea
+              id="omr-answers"
               value={answerKeyText}
               onChange={(e) => setAnswerKeyText(e.target.value)}
               placeholder="3, 1, 5, 2, 4, 1, 3, ..."

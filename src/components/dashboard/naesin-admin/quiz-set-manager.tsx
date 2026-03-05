@@ -114,6 +114,7 @@ export function VocabQuizSetManager({ unitId }: { unitId: string }) {
   return (
     <div className="border rounded-lg p-3 space-y-2">
       <button
+        type="button"
         onClick={() => setExpanded(!expanded)}
         className="flex items-center gap-2 text-sm font-medium w-full"
       >

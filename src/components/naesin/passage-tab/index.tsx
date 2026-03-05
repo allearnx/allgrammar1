@@ -76,6 +76,7 @@ export function PassageTab({ passages, unitId, onStageComplete }: PassageTabProp
         <div className="flex gap-2 overflow-x-auto pb-2">
           {passages.map((p, idx) => (
             <button
+              type="button"
               key={p.id}
               onClick={() => setCurrentPassageIndex(idx)}
               className={`shrink-0 px-3 py-1.5 text-sm rounded-full border transition-colors ${

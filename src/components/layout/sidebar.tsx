@@ -247,7 +247,7 @@ export function Sidebar({ user }: SidebarProps) {
       {/* Mobile sidebar */}
       <Sheet open={open} onOpenChange={setOpen}>
         <SheetTrigger asChild>
-          <Button variant="ghost" size="icon" className="md:hidden fixed left-4 top-3 z-40">
+          <Button variant="ghost" size="icon" className="md:hidden fixed left-4 top-3 z-40" aria-label="메뉴 열기">
             <Menu className="h-5 w-5" />
           </Button>
         </SheetTrigger>

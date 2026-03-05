@@ -72,28 +72,28 @@ export function AddVocabDialog({ unitId, onAdd }: { unitId: string; onAdd: () =>
         <DialogHeader><DialogTitle>단어 추가</DialogTitle></DialogHeader>
         <form onSubmit={handleSubmit} className="space-y-3">
           <div>
-            <Label>앞면 (영어)</Label>
-            <Input value={frontText} onChange={(e) => setFrontText(e.target.value)} placeholder="apple" required />
+            <Label htmlFor="vocab-front">앞면 (영어)</Label>
+            <Input id="vocab-front" value={frontText} onChange={(e) => setFrontText(e.target.value)} placeholder="apple" required />
           </div>
           <div>
-            <Label>뒷면 (한국어)</Label>
-            <Input value={backText} onChange={(e) => setBackText(e.target.value)} placeholder="사과" required />
+            <Label htmlFor="vocab-back">뒷면 (한국어)</Label>
+            <Input id="vocab-back" value={backText} onChange={(e) => setBackText(e.target.value)} placeholder="사과" required />
           </div>
           <div>
-            <Label>품사 (선택)</Label>
-            <Input value={partOfSpeech} onChange={(e) => setPartOfSpeech(e.target.value)} placeholder="n. / v. / adj. / adv." />
+            <Label htmlFor="vocab-pos">품사 (선택)</Label>
+            <Input id="vocab-pos" value={partOfSpeech} onChange={(e) => setPartOfSpeech(e.target.value)} placeholder="n. / v. / adj. / adv." />
           </div>
           <div>
-            <Label>예문 (선택)</Label>
-            <Input value={exampleSentence} onChange={(e) => setExampleSentence(e.target.value)} placeholder="I eat an apple every day." />
+            <Label htmlFor="vocab-example">예문 (선택)</Label>
+            <Input id="vocab-example" value={exampleSentence} onChange={(e) => setExampleSentence(e.target.value)} placeholder="I eat an apple every day." />
           </div>
           <div>
-            <Label>유의어 (선택, /로 구분)</Label>
-            <Input value={synonyms} onChange={(e) => setSynonyms(e.target.value)} placeholder="glad / joyful" />
+            <Label htmlFor="vocab-synonyms">유의어 (선택, /로 구분)</Label>
+            <Input id="vocab-synonyms" value={synonyms} onChange={(e) => setSynonyms(e.target.value)} placeholder="glad / joyful" />
           </div>
           <div>
-            <Label>반의어 (선택, /로 구분)</Label>
-            <Input value={antonyms} onChange={(e) => setAntonyms(e.target.value)} placeholder="sad / unhappy" />
+            <Label htmlFor="vocab-antonyms">반의어 (선택, /로 구분)</Label>
+            <Input id="vocab-antonyms" value={antonyms} onChange={(e) => setAntonyms(e.target.value)} placeholder="sad / unhappy" />
           </div>
           <Button type="submit" className="w-full" disabled={saving}>
             {saving ? '저장 중...' : '추가'}
@@ -158,8 +158,9 @@ export function BulkVocabUpload({ unitId, onAdd }: { unitId: string; onAdd: () =
         <DialogHeader><DialogTitle>단어 일괄 추가</DialogTitle></DialogHeader>
         <form onSubmit={handleSubmit} className="space-y-3">
           <div>
-            <Label>한 줄에 하나씩: 영어, 한국어, 품사, 예문, 유의어, 반의어</Label>
+            <Label htmlFor="vocab-bulk-csv">한 줄에 하나씩: 영어, 한국어, 품사, 예문, 유의어, 반의어</Label>
             <Textarea
+              id="vocab-bulk-csv"
               value={csvText}
               onChange={(e) => setCsvText(e.target.value)}
               placeholder={`apple, 사과, n., I eat an apple., fruit\nhappy, 행복한, adj., I am happy., glad, sad\ngrape, 포도`}
@@ -354,12 +355,12 @@ export function PdfVocabExtract({ unitId, onAdd }: { unitId: string; onAdd: () =
               <table className="w-full text-sm">
                 <thead className="bg-muted/50 sticky top-0">
                   <tr>
-                    <th className="p-2 w-8"></th>
-                    <th className="p-2 text-left">단어</th>
-                    <th className="p-2 text-left">뜻</th>
-                    <th className="p-2 text-left hidden sm:table-cell">품사</th>
-                    <th className="p-2 text-left hidden md:table-cell">예문</th>
-                    <th className="p-2 w-8"></th>
+                    <th className="p-2 w-8" scope="col" aria-label="선택"></th>
+                    <th className="p-2 text-left" scope="col">단어</th>
+                    <th className="p-2 text-left" scope="col">뜻</th>
+                    <th className="p-2 text-left hidden sm:table-cell" scope="col">품사</th>
+                    <th className="p-2 text-left hidden md:table-cell" scope="col">예문</th>
+                    <th className="p-2 w-8" scope="col" aria-label="삭제"></th>
                   </tr>
                 </thead>
                 <tbody>
@@ -394,6 +395,7 @@ export function PdfVocabExtract({ unitId, onAdd }: { unitId: string; onAdd: () =
                           onClick={() =>
                             setWords((prev) => prev.filter((_, idx) => idx !== i))
                           }
+                          aria-label="삭제"
                         >
                           <X className="h-3.5 w-3.5 text-destructive" />
                         </Button>

@@ -112,6 +112,7 @@ export function UnitCard({
       <CardContent className="py-3">
         <div className="flex items-center justify-between">
           <button
+            type="button"
             onClick={onToggle}
             className="flex items-center gap-2 text-left flex-1"
           >

@@ -192,6 +192,7 @@ function ReviewContentView({ content }: { content: NaesinLastReviewContent[] }) 
                 <iframe
                   src={`https://www.youtube.com/embed/${item.youtube_video_id}`}
                   className="absolute inset-0 w-full h-full"
+                  title={item.title}
                   allowFullScreen
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 />

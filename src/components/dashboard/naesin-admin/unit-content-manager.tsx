@@ -202,6 +202,7 @@ export function UnitContentManager({ unitId }: { unitId: string }) {
                     size="icon"
                     className="h-6 w-6 opacity-0 group-hover:opacity-100"
                     onClick={() => editingId === v.id ? setEditingId(null) : startEdit(v)}
+                    aria-label="수정"
                   >
                     <Pencil className="h-3.5 w-3.5" />
                   </Button>
@@ -210,6 +211,7 @@ export function UnitContentManager({ unitId }: { unitId: string }) {
                     size="icon"
                     className="h-6 w-6 opacity-0 group-hover:opacity-100"
                     onClick={() => handleDeleteOne(v.id)}
+                    aria-label="삭제"
                   >
                     <Trash2 className="h-3.5 w-3.5 text-destructive" />
                   </Button>

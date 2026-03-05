@@ -32,6 +32,7 @@ export function OmrTab({ omrSheets, unitId, onStageComplete }: OmrTabProps) {
         <div className="flex gap-2 overflow-x-auto pb-2">
           {omrSheets.map((sheet, idx) => (
             <button
+              type="button"
               key={sheet.id}
               onClick={() => setCurrentSheetIndex(idx)}
               className={`shrink-0 px-3 py-1.5 text-sm rounded-full border transition-colors ${

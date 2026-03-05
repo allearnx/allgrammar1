@@ -31,6 +31,7 @@ export function ProblemTab({ sheets, unitId, onStageComplete }: ProblemTabProps)
         <div className="flex gap-2 overflow-x-auto pb-2">
           {sheets.map((sheet) => (
             <button
+              type="button"
               key={sheet.id}
               onClick={() => setActiveSheetId(sheet.id)}
               className={cn(
