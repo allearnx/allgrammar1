@@ -109,7 +109,7 @@ export default async function NaesinStagePage({ params }: Props) {
 
   return (
     <>
-      <Topbar user={user} title={`Lesson ${unit.unit_number}. ${unit.title}`} />
+      <Topbar user={user} title="내신 대비" />
       <div className="p-4 md:p-6">
         <NaesinStageView
           unit={{ id: unit.id, unit_number: unit.unit_number, title: unit.title }}
