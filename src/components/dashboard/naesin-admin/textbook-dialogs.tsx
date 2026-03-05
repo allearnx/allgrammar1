@@ -12,9 +12,86 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
-import { Plus } from 'lucide-react';
+import { Plus, Pencil } from 'lucide-react';
 import { toast } from 'sonner';
 import type { NaesinTextbook } from '@/types/database';
+
+export function EditTextbookDialog({
+  textbook,
+  open,
+  onOpenChange,
+  onSave,
+}: {
+  textbook: NaesinTextbook;
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
+  onSave: (tb: NaesinTextbook) => void;
+}) {
+  const [grade, setGrade] = useState(String(textbook.grade));
+  const [publisher, setPublisher] = useState(textbook.publisher);
+  const [displayName, setDisplayName] = useState(textbook.display_name);
+  const [saving, setSaving] = useState(false);
+
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    setSaving(true);
+    try {
+      const res = await fetch('/api/naesin/textbooks', {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          id: textbook.id,
+          grade,
+          publisher,
+          display_name: displayName,
+        }),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || '알 수 없는 오류');
+      onSave(data);
+      onOpenChange(false);
+      toast.success('교과서가 수정되었습니다');
+    } catch (err) {
+      toast.error(`교과서 수정 실패: ${err instanceof Error ? err.message : '알 수 없는 오류'}`);
+    } finally {
+      setSaving(false);
+    }
+  }
+
+  return (
+    <Dialog open={open} onOpenChange={onOpenChange}>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>교과서 수정</DialogTitle>
+        </DialogHeader>
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <div>
+            <Label>학년</Label>
+            <Select value={grade} onValueChange={setGrade}>
+              <SelectTrigger><SelectValue /></SelectTrigger>
+              <SelectContent>
+                <SelectItem value="1">중1</SelectItem>
+                <SelectItem value="2">중2</SelectItem>
+                <SelectItem value="3">중3</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+          <div>
+            <Label>출판사</Label>
+            <Input value={publisher} onChange={(e) => setPublisher(e.target.value)} required />
+          </div>
+          <div>
+            <Label>표시 이름</Label>
+            <Input value={displayName} onChange={(e) => setDisplayName(e.target.value)} required />
+          </div>
+          <Button type="submit" className="w-full" disabled={saving}>
+            {saving ? '저장 중...' : '수정'}
+          </Button>
+        </form>
+      </DialogContent>
+    </Dialog>
+  );
+}
 
 export function AddTextbookDialog({ onAdd }: { onAdd: (tb: NaesinTextbook) => void }) {
   const [open, setOpen] = useState(false);

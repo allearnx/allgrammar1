@@ -4,10 +4,10 @@ import { useState, useEffect } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Trash2 } from 'lucide-react';
+import { Trash2, Pencil } from 'lucide-react';
 import { toast } from 'sonner';
 import type { NaesinTextbook, NaesinUnit } from '@/types/database';
-import { AddTextbookDialog } from './textbook-dialogs';
+import { AddTextbookDialog, EditTextbookDialog } from './textbook-dialogs';
 import { AddUnitDialog, UnitCard } from './unit-section';
 import { ConfirmDialog } from '@/components/shared/confirm-dialog';
 
@@ -21,6 +21,7 @@ export function NaesinAdminClient({ textbooks: initialTextbooks }: NaesinAdminCl
   const [units, setUnits] = useState<NaesinUnit[]>([]);
   const [expandedUnit, setExpandedUnit] = useState<string | null>(null);
   const [deleteTextbookId, setDeleteTextbookId] = useState<string | null>(null);
+  const [editingTextbook, setEditingTextbook] = useState<NaesinTextbook | null>(null);
 
   // Load units when textbook selected
   useEffect(() => {
@@ -86,8 +87,21 @@ export function NaesinAdminClient({ textbooks: initialTextbooks }: NaesinAdminCl
                       className="h-8 w-8"
                       onClick={(e) => {
                         e.stopPropagation();
+                        setEditingTextbook(tb);
+                      }}
+                      aria-label="교과서 수정"
+                    >
+                      <Pencil className="h-4 w-4 text-muted-foreground" />
+                    </Button>
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      className="h-8 w-8"
+                      onClick={(e) => {
+                        e.stopPropagation();
                         setDeleteTextbookId(tb.id);
                       }}
+                      aria-label="교과서 삭제"
                     >
                       <Trash2 className="h-4 w-4 text-destructive" />
                     </Button>
@@ -162,6 +176,17 @@ export function NaesinAdminClient({ textbooks: initialTextbooks }: NaesinAdminCl
           }
         }}
       />
+      {editingTextbook && (
+        <EditTextbookDialog
+          textbook={editingTextbook}
+          open={editingTextbook !== null}
+          onOpenChange={(open) => { if (!open) setEditingTextbook(null); }}
+          onSave={(updated) => {
+            setTextbooks(textbooks.map((t) => (t.id === updated.id ? updated : t)));
+            if (selectedTextbook?.id === updated.id) setSelectedTextbook(updated);
+          }}
+        />
+      )}
     </div>
   );
 }
