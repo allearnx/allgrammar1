@@ -38,7 +38,7 @@ export const videoProgressSchema = z.object({
 export const omrSubmitSchema = z.object({
   unitId: ID,
   omrSheetId: ID,
-  studentAnswers: z.record(z.string(), z.unknown()),
+  studentAnswers: z.union([z.array(z.unknown()), z.record(z.string(), z.unknown())]),
   correctCount: z.number(),
   totalQuestions: z.number(),
   scorePercent: z.number(),
