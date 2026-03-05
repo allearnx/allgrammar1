@@ -44,7 +44,7 @@ export async function fetchTeachersList(academyId: string | null) {
 
   const query = admin
     .from('users')
-    .select('id, full_name, email, is_active, created_at')
+    .select('id, full_name, email, is_active, created_at, academy_id')
     .eq('role', 'teacher')
     .order('full_name');
 
