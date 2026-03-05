@@ -24,6 +24,7 @@ import {
   memoryProgressSchema,
   textbookProgressSchema,
   reportGenerateSchema,
+  grammarLessonCreateSchema,
 } from '@/lib/api/schemas';
 
 describe('vocabProgressSchema', () => {
@@ -362,6 +363,42 @@ describe('textbookProgressSchema', () => {
       type: 'fill_blanks',
       score: 70,
     }).success).toBe(false);
+  });
+});
+
+describe('nullish fields accept null from JSON clients', () => {
+  it('grammarLessonCreateSchema: null for optional fields', () => {
+    const result = grammarLessonCreateSchema.safeParse({
+      unit_id: 'u1',
+      title: '현재완료',
+      content_type: 'video',
+      youtube_url: 'https://youtube.com/watch?v=abc',
+      youtube_video_id: 'abc',
+      text_content: null,
+    });
+    expect(result.success).toBe(true);
+  });
+
+  it('vocabCreateSchema: null for optional fields', () => {
+    const result = vocabCreateSchema.safeParse({
+      unit_id: 'u1',
+      front_text: 'apple',
+      back_text: '사과',
+      part_of_speech: null,
+      example_sentence: null,
+      synonyms: null,
+      antonyms: null,
+    });
+    expect(result.success).toBe(true);
+  });
+
+  it('videoProgressSchema: null for optional fields', () => {
+    const result = videoProgressSchema.safeParse({
+      lessonId: 'l1',
+      unitId: null,
+      position: null,
+    });
+    expect(result.success).toBe(true);
   });
 });
 
