@@ -19,7 +19,7 @@ import {
   Settings,
   Users,
   FileText,
-  BarChart3,
+  // BarChart3,
   BookMarked,
 } from 'lucide-react';
 import type { AuthUser } from '@/types/auth';
@@ -54,11 +54,11 @@ const NAV_CONFIG: Record<string, NavGroup[]> = {
         { href: '/student/naesin', label: '내신 대비', icon: BookMarked },
       ],
     },
-    {
-      items: [
-        { href: '/student/progress', label: '내 진도', icon: BarChart3 },
-      ],
-    },
+    // {
+    //   items: [
+    //     { href: '/student/progress', label: '내 진도', icon: BarChart3 },
+    //   ],
+    // },
   ],
   teacher: [
     {
