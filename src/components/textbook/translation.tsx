@@ -26,8 +26,6 @@ export function TranslationView({ passage, progress }: TranslationViewProps) {
   const [answer, setAnswer] = useState('');
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<GradingResult | null>(null);
-  const [attempts, setAttempts] = useState(0);
-
   async function handleSubmit() {
     if (!answer.trim() || loading) return;
     setLoading(true);
@@ -51,7 +49,6 @@ export function TranslationView({ passage, progress }: TranslationViewProps) {
 
       const data = await response.json();
       setResult(data);
-      setAttempts((prev) => prev + 1);
 
       saveTextbookProgress(passage.id, 'translation', data.score);
     } catch (error) {

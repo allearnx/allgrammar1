@@ -61,7 +61,6 @@ export function OrderingView({ passage, progress }: OrderingViewProps) {
 
   function handleCheck() {
     if (!sentence) return;
-    const userSentence = items.join(' ');
     const originalWords = sentence.original.split(/\s+/);
     const correct = items.join(' ') === originalWords.join(' ');
 

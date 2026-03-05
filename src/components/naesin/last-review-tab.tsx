@@ -5,7 +5,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { FileText, PlayCircle, BookOpen, Brain, Loader2, CheckCircle, XCircle } from 'lucide-react';
+import { FileText, PlayCircle, BookOpen, Brain, CheckCircle, XCircle } from 'lucide-react';
 import { toast } from 'sonner';
 import { cn } from '@/lib/utils';
 import { ProblemTab } from './problem-tab';
