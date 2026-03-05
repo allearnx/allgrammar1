@@ -65,11 +65,11 @@ export function NaesinSpellingView({ items, vocabulary, onComplete }: { items: F
       </div>
 
       <Card>
-        <CardContent className="py-8 text-center">
+        <CardContent className="py-6 text-center">
           <p className="text-sm text-muted-foreground mb-2">힌트</p>
-          <p className="text-lg font-medium">{item.spelling_hint || item.back_text}</p>
+          <p className="text-2xl font-medium">{item.spelling_hint || item.back_text}</p>
           {vocab?.example_sentence && (
-            <p className="text-sm text-muted-foreground mt-3 italic">
+            <p className="text-base text-muted-foreground mt-3 italic">
               &ldquo;{vocab.example_sentence.replace(
                 new RegExp(item.spelling_answer || item.front_text, 'gi'),
                 '______'

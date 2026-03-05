@@ -81,11 +81,11 @@ export function NaesinFlashcardView({ items, vocabulary, onComplete }: { items: 
           >
             <CardContent className="text-center py-8 px-6">
               {vocab?.part_of_speech && (
-                <p className="text-sm text-muted-foreground mb-1">{vocab.part_of_speech}</p>
+                <p className="text-lg text-muted-foreground mb-1">{vocab.part_of_speech}</p>
               )}
               <p className="text-3xl font-medium">{item.back_text}</p>
               {(vocab?.synonyms || vocab?.antonyms) && (
-                <div className="mt-3 flex flex-wrap justify-center gap-x-4 gap-y-1 text-base">
+                <div className="mt-3 flex flex-wrap justify-center gap-x-4 gap-y-1 text-lg">
                   {vocab.synonyms && (
                     <span className="text-blue-600">= {vocab.synonyms}</span>
                   )}
@@ -95,7 +95,7 @@ export function NaesinFlashcardView({ items, vocabulary, onComplete }: { items: 
                 </div>
               )}
               {vocab?.example_sentence && (
-                <p className="text-base text-muted-foreground mt-4 italic">
+                <p className="text-lg text-muted-foreground mt-4 italic">
                   &ldquo;{vocab.example_sentence}&rdquo;
                 </p>
               )}
