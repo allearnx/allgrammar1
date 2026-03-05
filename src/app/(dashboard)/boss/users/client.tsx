@@ -63,7 +63,7 @@ export function UsersClient({ users, academies }: UsersClientProps) {
     });
   }, [users, roleFilter, academyFilter]);
 
-  async function handleUpdate(userId: string, updates: Record<string, any>) {
+  async function handleUpdate(userId: string, updates: Record<string, unknown>) {
     setUpdating(userId);
 
     try {
@@ -80,8 +80,8 @@ export function UsersClient({ users, academies }: UsersClientProps) {
 
       toast.success('사용자 정보가 변경되었습니다');
       router.refresh();
-    } catch (err: any) {
-      toast.error('변경 실패', { description: err.message });
+    } catch (err) {
+      toast.error('변경 실패', { description: err instanceof Error ? err.message : '알 수 없는 오류' });
     } finally {
       setUpdating(null);
     }

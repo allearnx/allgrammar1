@@ -3,6 +3,16 @@ import { createClient } from '@/lib/supabase/server';
 import { Topbar } from '@/components/layout/topbar';
 import { NaesinHome } from './client';
 import { calculateStageStatuses } from '@/lib/naesin/stage-unlock';
+import type { NaesinStageStatuses } from '@/types/database';
+
+interface UnitSummary {
+  id: string;
+  unit_number: number;
+  title: string;
+  sort_order: number;
+  stageStatuses: NaesinStageStatuses;
+  stageProgress: { vocab: number; passage: number; grammar: number; problem: number };
+}
 
 export default async function NaesinPage() {
   const user = await requireRole(['student']);
@@ -36,8 +46,7 @@ export default async function NaesinPage() {
   }
 
   // If student has a textbook selected, get the units with lightweight data only
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  let units: any[] = [];
+  let units: UnitSummary[] = [];
 
   if (setting?.textbook_id) {
     const { data: rawUnits } = await supabase

@@ -57,8 +57,8 @@ export function AcademiesClient({ academies }: AcademiesClientProps) {
       setName('');
       setAddOpen(false);
       router.refresh();
-    } catch (err: any) {
-      toast.error('추가 실패', { description: err.message });
+    } catch (err) {
+      toast.error('추가 실패', { description: err instanceof Error ? err.message : '알 수 없는 오류' });
     } finally {
       setSaving(false);
     }
@@ -86,8 +86,8 @@ export function AcademiesClient({ academies }: AcademiesClientProps) {
       setEditingAcademy(null);
       setName('');
       router.refresh();
-    } catch (err: any) {
-      toast.error('변경 실패', { description: err.message });
+    } catch (err) {
+      toast.error('변경 실패', { description: err instanceof Error ? err.message : '알 수 없는 오류' });
     } finally {
       setSaving(false);
     }
@@ -109,8 +109,8 @@ export function AcademiesClient({ academies }: AcademiesClientProps) {
 
       toast.success('학원이 삭제되었습니다');
       router.refresh();
-    } catch (err: any) {
-      toast.error('삭제 실패', { description: err.message });
+    } catch (err) {
+      toast.error('삭제 실패', { description: err instanceof Error ? err.message : '알 수 없는 오류' });
     } finally {
       setDeleting(null);
     }

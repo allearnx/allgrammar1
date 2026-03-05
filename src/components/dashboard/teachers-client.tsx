@@ -41,8 +41,8 @@ export function TeachersClient({ teachers }: TeachersClientProps) {
 
       toast.success(!currentActive ? '선생님 활성화' : '선생님 비활성화');
       router.refresh();
-    } catch (err: any) {
-      toast.error('변경 실패', { description: err.message });
+    } catch (err) {
+      toast.error('변경 실패', { description: err instanceof Error ? err.message : '알 수 없는 오류' });
     } finally {
       setUpdating(null);
     }

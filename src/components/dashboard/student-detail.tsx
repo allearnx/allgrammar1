@@ -5,6 +5,11 @@ import { notFound } from 'next/navigation';
 import { format } from 'date-fns';
 import type { AuthUser } from '@/types/auth';
 
+interface GrammarRelation {
+  title: string;
+  level?: { level_number: number; title_ko: string } | null;
+}
+
 interface Props {
   user: AuthUser;
   studentId: string;
@@ -111,11 +116,11 @@ export async function StudentDetail({ user, studentId }: Props) {
                   <div className="flex items-center justify-between">
                     <div>
                       <span className="text-sm font-medium">
-                        {(p.grammar as any)?.title || '문법'}
+                        {(p.grammar as GrammarRelation | null)?.title || '문법'}
                       </span>
-                      {(p.grammar as any)?.level && (
+                      {(p.grammar as GrammarRelation | null)?.level && (
                         <span className="text-xs text-muted-foreground ml-2">
-                          Lv.{(p.grammar as any).level.level_number}
+                          Lv.{(p.grammar as GrammarRelation).level!.level_number}
                         </span>
                       )}
                     </div>

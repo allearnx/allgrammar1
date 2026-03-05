@@ -8,8 +8,16 @@ import { Button } from '@/components/ui/button';
 import { createClient } from '@/lib/supabase/client';
 import { toast } from 'sonner';
 
+interface TextbookPassageWithGrammar {
+  id: string;
+  title: string;
+  original_text: string;
+  is_textbook_mode_active: boolean;
+  grammar: { title: string; level?: { level_number: number } | null } | null;
+}
+
 interface TextbookModeClientProps {
-  passages: any[];
+  passages: TextbookPassageWithGrammar[];
 }
 
 export function TextbookModeClient({ passages }: TextbookModeClientProps) {

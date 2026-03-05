@@ -123,8 +123,7 @@ export default async function NaesinStagePage({ params }: Props) {
   );
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-type SupabaseClient = any;
+type SupabaseClient = Awaited<ReturnType<typeof createClient>>;
 
 async function fetchStageData(
   supabase: SupabaseClient,

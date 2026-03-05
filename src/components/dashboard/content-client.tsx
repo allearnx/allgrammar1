@@ -13,8 +13,23 @@ import { Plus, ChevronDown, ChevronRight, BookOpen, FileText, Video } from 'luci
 import { createClient } from '@/lib/supabase/client';
 import { toast } from 'sonner';
 
+interface ContentGrammar {
+  id: string;
+  title: string;
+  youtube_video_id: string | null;
+  memory_items: { count: number }[];
+  textbook_passages: { count: number }[];
+}
+
+interface ContentLevel {
+  id: string;
+  level_number: number;
+  title_ko: string;
+  grammars: ContentGrammar[];
+}
+
 interface ContentClientProps {
-  levels: any[];
+  levels: ContentLevel[];
 }
 
 export function ContentClient({ levels }: ContentClientProps) {
@@ -96,7 +111,7 @@ export function ContentClient({ levels }: ContentClientProps) {
 
               {isExpanded && (
                 <div className="mt-4 ml-8 space-y-2">
-                  {grammars.map((grammar: any) => (
+                  {grammars.map((grammar) => (
                     <div
                       key={grammar.id}
                       className="flex items-center justify-between p-2 rounded-lg bg-muted/50"
