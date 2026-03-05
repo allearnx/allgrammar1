@@ -83,17 +83,13 @@ export function NaesinStageView({
 
   return (
     <div className="space-y-6">
-      {/* Header: back button + title */}
-      <div className="flex items-center gap-3">
-        <Button variant="ghost" size="icon" asChild>
-          <Link href="/student/naesin">
-            <ArrowLeft className="h-4 w-4" />
-          </Link>
-        </Button>
-        <h2 className="text-xl font-bold">
-          Lesson {unit.unit_number}. {unit.title}
-        </h2>
-      </div>
+      {/* Back button */}
+      <Button variant="ghost" size="sm" asChild className="-ml-2">
+        <Link href="/student/naesin">
+          <ArrowLeft className="h-4 w-4 mr-1" />
+          목록으로
+        </Link>
+      </Button>
 
       {/* 5-stage navigation bar */}
       <nav className="flex rounded-lg border bg-muted/30 p-1 gap-1">
