@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -11,6 +11,7 @@ import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { toast } from 'sonner';
+import { CheckCircle2, XCircle } from 'lucide-react';
 import type { UserRole } from '@/types/database';
 
 export default function SignUpPage() {
@@ -18,13 +19,45 @@ export default function SignUpPage() {
   const [password, setPassword] = useState('');
   const [fullName, setFullName] = useState('');
   const [role, setRole] = useState<UserRole>('student');
+  const [inviteCode, setInviteCode] = useState('');
+  const [academyName, setAcademyName] = useState<string | null>(null);
+  const [inviteError, setInviteError] = useState<string | null>(null);
+  const [validating, setValidating] = useState(false);
   const [loading, setLoading] = useState(false);
   const router = useRouter();
+
+  useEffect(() => {
+    const code = inviteCode.trim().toUpperCase();
+    setAcademyName(null);
+    setInviteError(null);
+
+    if (code.length !== 6) return;
+
+    const controller = new AbortController();
+    setValidating(true);
+
+    fetch(`/api/auth/validate-invite-code?code=${code}`, { signal: controller.signal })
+      .then(async (res) => {
+        if (res.ok) {
+          const data = await res.json();
+          setAcademyName(data.academyName);
+        } else {
+          setInviteError('유효하지 않은 초대 코드입니다');
+        }
+      })
+      .catch((err) => {
+        if (err.name !== 'AbortError') setInviteError('검증 중 오류가 발생했습니다');
+      })
+      .finally(() => setValidating(false));
+
+    return () => controller.abort();
+  }, [inviteCode]);
 
   async function handleSignUp(e: React.FormEvent) {
     e.preventDefault();
     setLoading(true);
 
+    const code = inviteCode.trim().toUpperCase();
     const supabase = createClient();
     const { error } = await supabase.auth.signUp({
       email,
@@ -33,6 +66,7 @@ export default function SignUpPage() {
         data: {
           full_name: fullName,
           role,
+          ...(code.length === 6 && academyName ? { invite_code: code } : {}),
         },
       },
     });
@@ -104,6 +138,34 @@ export default function SignUpPage() {
                   <SelectItem value="teacher">선생님</SelectItem>
                 </SelectContent>
               </Select>
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="inviteCode">초대 코드 (선택)</Label>
+              <Input
+                id="inviteCode"
+                type="text"
+                placeholder="6자리 코드 입력"
+                value={inviteCode}
+                onChange={(e) => setInviteCode(e.target.value.toUpperCase().slice(0, 6))}
+                maxLength={6}
+                className="font-mono tracking-widest uppercase"
+                autoComplete="off"
+              />
+              {validating && (
+                <p className="text-sm text-muted-foreground">확인 중...</p>
+              )}
+              {academyName && (
+                <p className="text-sm text-green-600 flex items-center gap-1">
+                  <CheckCircle2 className="h-4 w-4" />
+                  {academyName}
+                </p>
+              )}
+              {inviteError && (
+                <p className="text-sm text-destructive flex items-center gap-1">
+                  <XCircle className="h-4 w-4" />
+                  {inviteError}
+                </p>
+              )}
             </div>
           </CardContent>
           <CardFooter className="flex flex-col gap-3">

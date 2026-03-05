@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import { createApiHandler } from '@/lib/api';
 import { createAdminClient } from '@/lib/supabase/admin';
 import { academyCreateSchema } from '@/lib/api/schemas';
+import { generateInviteCode } from '@/lib/utils/invite-code';
 
 export const PATCH = createApiHandler(
   { roles: ['boss'], schema: academyCreateSchema },
@@ -14,6 +15,34 @@ export const PATCH = createApiHandler(
 
     if (error) return NextResponse.json({ error: error.message }, { status: 500 });
     return NextResponse.json({ success: true });
+  }
+);
+
+export const POST = createApiHandler(
+  { roles: ['boss'] },
+  async ({ params }) => {
+    const admin = createAdminClient();
+
+    let inviteCode = '';
+    for (let attempt = 0; attempt < 3; attempt++) {
+      inviteCode = generateInviteCode();
+      const { data: existing } = await admin
+        .from('academies')
+        .select('id')
+        .eq('invite_code', inviteCode)
+        .single();
+      if (!existing) break;
+    }
+
+    const { data, error } = await admin
+      .from('academies')
+      .update({ invite_code: inviteCode })
+      .eq('id', params.id)
+      .select('invite_code')
+      .single();
+
+    if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+    return NextResponse.json(data);
   }
 );
 

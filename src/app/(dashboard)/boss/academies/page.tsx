@@ -12,21 +12,28 @@ export default async function BossAcademiesPage() {
     .select('*')
     .order('created_at', { ascending: false });
 
-  // Get user counts per academy
-  const { data: userCounts } = await admin
+  // Get user counts and teacher info per academy
+  const { data: allUsers } = await admin
     .from('users')
-    .select('academy_id');
+    .select('academy_id, full_name, role');
 
   const countByAcademy = new Map<string, number>();
-  userCounts?.forEach((u) => {
+  const teachersByAcademy = new Map<string, string[]>();
+  allUsers?.forEach((u) => {
     if (u.academy_id) {
       countByAcademy.set(u.academy_id, (countByAcademy.get(u.academy_id) || 0) + 1);
+      if (u.role === 'teacher') {
+        const list = teachersByAcademy.get(u.academy_id) || [];
+        list.push(u.full_name);
+        teachersByAcademy.set(u.academy_id, list);
+      }
     }
   });
 
   const academiesWithCounts = (academies || []).map((a) => ({
     ...a,
     user_count: countByAcademy.get(a.id) || 0,
+    teachers: teachersByAcademy.get(a.id) || [],
   }));
 
   return (

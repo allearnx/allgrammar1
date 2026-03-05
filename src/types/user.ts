@@ -3,6 +3,7 @@ export type UserRole = 'student' | 'teacher' | 'admin' | 'boss';
 export interface Academy {
   id: string;
   name: string;
+  invite_code: string;
   created_at: string;
 }
 

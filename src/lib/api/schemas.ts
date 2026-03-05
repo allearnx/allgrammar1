@@ -226,6 +226,10 @@ export const academyCreateSchema = z.object({
   name: z.string().min(1).max(100),
 });
 
+export const inviteCodeSchema = z.object({
+  code: z.string().length(6).regex(/^[A-Z0-9]+$/),
+});
+
 export const userPatchSchema = z.object({
   role: z.enum(['student', 'teacher', 'admin', 'boss']).nullish(),
   academy_id: ID.nullish(),

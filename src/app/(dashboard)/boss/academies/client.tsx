@@ -13,7 +13,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
-import { Plus, Pencil, Trash2, Building2 } from 'lucide-react';
+import { Plus, Pencil, Trash2, Building2, Copy, RefreshCw, GraduationCap } from 'lucide-react';
 import { toast } from 'sonner';
 import { format } from 'date-fns';
 import { ConfirmDialog } from '@/components/shared/confirm-dialog';
@@ -21,8 +21,10 @@ import { ConfirmDialog } from '@/components/shared/confirm-dialog';
 interface Academy {
   id: string;
   name: string;
+  invite_code: string;
   created_at: string;
   user_count: number;
+  teachers: string[];
 }
 
 interface AcademiesClientProps {
@@ -37,6 +39,8 @@ export function AcademiesClient({ academies }: AcademiesClientProps) {
   const [saving, setSaving] = useState(false);
   const [deleting, setDeleting] = useState<string | null>(null);
   const [deleteConfirmId, setDeleteConfirmId] = useState<string | null>(null);
+  const [regenerateConfirmId, setRegenerateConfirmId] = useState<string | null>(null);
+  const [regenerating, setRegenerating] = useState<string | null>(null);
   const router = useRouter();
 
   async function handleAdd(e: React.FormEvent) {
@@ -117,6 +121,33 @@ export function AcademiesClient({ academies }: AcademiesClientProps) {
     }
   }
 
+  function handleCopyCode(code: string) {
+    navigator.clipboard.writeText(code);
+    toast.success('초대 코드가 복사되었습니다');
+  }
+
+  async function handleRegenerateCode(academyId: string) {
+    setRegenerating(academyId);
+
+    try {
+      const res = await fetch(`/api/boss/academies/${academyId}`, {
+        method: 'POST',
+      });
+
+      if (!res.ok) {
+        const data = await res.json();
+        throw new Error(data.error || 'Failed to regenerate');
+      }
+
+      toast.success('초대 코드가 재생성되었습니다');
+      router.refresh();
+    } catch (err) {
+      toast.error('재생성 실패', { description: err instanceof Error ? err.message : '알 수 없는 오류' });
+    } finally {
+      setRegenerating(null);
+    }
+  }
+
   return (
     <div className="space-y-4">
       <div className="flex items-center justify-between">
@@ -160,9 +191,40 @@ export function AcademiesClient({ academies }: AcademiesClientProps) {
                 <Building2 className="h-5 w-5 text-muted-foreground shrink-0" />
                 <div className="min-w-0">
                   <span className="font-medium truncate block">{academy.name}</span>
-                  <div className="flex gap-3 text-sm text-muted-foreground mt-1">
+                  <div className="flex flex-wrap gap-3 text-sm text-muted-foreground mt-1">
+                    <span className="flex items-center gap-1">
+                      초대 코드: <code className="font-mono font-semibold text-foreground bg-muted px-1.5 py-0.5 rounded">{academy.invite_code}</code>
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        className="h-6 w-6"
+                        onClick={() => handleCopyCode(academy.invite_code)}
+                      >
+                        <Copy className="h-3.5 w-3.5" />
+                      </Button>
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        className="h-6 w-6"
+                        onClick={() => setRegenerateConfirmId(academy.id)}
+                        disabled={regenerating === academy.id}
+                      >
+                        <RefreshCw className={`h-3.5 w-3.5 ${regenerating === academy.id ? 'animate-spin' : ''}`} />
+                      </Button>
+                    </span>
                     <span>회원 {academy.user_count}명</span>
                     <span>생성일: {format(new Date(academy.created_at), 'yyyy-MM-dd')}</span>
+                  </div>
+                  <div className="flex items-center gap-1.5 text-sm text-muted-foreground mt-1">
+                    <GraduationCap className="h-3.5 w-3.5 shrink-0" />
+                    <span>
+                      선생님 {academy.teachers.length}명
+                      {academy.teachers.length > 0 && (
+                        <span className="text-foreground ml-1">
+                          ({academy.teachers.join(', ')})
+                        </span>
+                      )}
+                    </span>
                   </div>
                 </div>
               </div>
@@ -206,6 +268,17 @@ export function AcademiesClient({ academies }: AcademiesClientProps) {
           const id = deleteConfirmId;
           setDeleteConfirmId(null);
           if (id) handleDelete(id);
+        }}
+      />
+
+      <ConfirmDialog
+        open={regenerateConfirmId !== null}
+        onOpenChange={(open) => { if (!open) setRegenerateConfirmId(null); }}
+        description="초대 코드를 재생성하시겠습니까? 기존 코드는 더 이상 사용할 수 없습니다."
+        onConfirm={() => {
+          const id = regenerateConfirmId;
+          setRegenerateConfirmId(null);
+          if (id) handleRegenerateCode(id);
         }}
       />
 
