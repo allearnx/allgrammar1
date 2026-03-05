@@ -43,7 +43,10 @@ export function AddVocabDialog({ unitId, onAdd }: { unitId: string; onAdd: () =>
           antonyms: antonyms || null,
         }),
       });
-      if (!res.ok) throw new Error();
+      if (!res.ok) {
+        const err = await res.json().catch(() => null);
+        throw new Error(err?.error || '요청에 실패했습니다');
+      }
       onAdd();
       setOpen(false);
       setFrontText('');
@@ -133,7 +136,10 @@ export function BulkVocabUpload({ unitId, onAdd }: { unitId: string; onAdd: () =
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ unit_id: unitId, items }),
       });
-      if (!res.ok) throw new Error();
+      if (!res.ok) {
+        const err = await res.json().catch(() => null);
+        throw new Error(err?.error || '요청에 실패했습니다');
+      }
       const data = await res.json();
       onAdd();
       setOpen(false);
@@ -253,7 +259,10 @@ export function PdfVocabExtract({ unitId, onAdd }: { unitId: string; onAdd: () =
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ unit_id: unitId, items }),
       });
-      if (!res.ok) throw new Error();
+      if (!res.ok) {
+        const err = await res.json().catch(() => null);
+        throw new Error(err?.error || '요청에 실패했습니다');
+      }
       const data = await res.json();
       onAdd();
       setOpen(false);

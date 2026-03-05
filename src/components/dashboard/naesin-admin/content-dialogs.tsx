@@ -55,7 +55,10 @@ export function AddPassageDialog({ unitId, onAdd }: { unitId: string; onAdd: () 
           sentences: sentences.length > 0 ? sentences : null,
         }),
       });
-      if (!res.ok) throw new Error();
+      if (!res.ok) {
+        const err = await res.json().catch(() => null);
+        throw new Error(err?.error || '요청에 실패했습니다');
+      }
       onAdd();
       setOpen(false);
       setTitle('');
@@ -132,7 +135,10 @@ export function AddGrammarDialog({ unitId, onAdd }: { unitId: string; onAdd: () 
           text_content: contentType === 'text' ? textContent : null,
         }),
       });
-      if (!res.ok) throw new Error();
+      if (!res.ok) {
+        const err = await res.json().catch(() => null);
+        throw new Error(err?.error || '요청에 실패했습니다');
+      }
       onAdd();
       setOpen(false);
       setTitle('');
@@ -219,7 +225,10 @@ export function AddOmrDialog({ unitId, onAdd }: { unitId: string; onAdd: () => v
           answer_key: answerKey,
         }),
       });
-      if (!res.ok) throw new Error();
+      if (!res.ok) {
+        const err = await res.json().catch(() => null);
+        throw new Error(err?.error || '요청에 실패했습니다');
+      }
       onAdd();
       setOpen(false);
       setTitle('');

@@ -94,6 +94,10 @@ export function InteractiveProblemView({
           totalQuestions: total,
         }),
       });
+      if (!res.ok) {
+        const err = await res.json().catch(() => null);
+        throw new Error(err?.error || '결과 저장에 실패했습니다');
+      }
       const data = await res.json();
       setFinished(true);
       if (data.score >= 80) {
@@ -101,6 +105,7 @@ export function InteractiveProblemView({
         onComplete?.();
       }
     } catch {
+      toast.error('결과 저장에 실패했습니다');
       setFinished(true);
     }
   }

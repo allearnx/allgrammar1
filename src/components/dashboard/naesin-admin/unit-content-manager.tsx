@@ -37,34 +37,42 @@ export function UnitContentManager({ unitId }: { unitId: string }) {
   }, [unitId]);
 
   async function loadCounts() {
-    const { createClient } = await import('@/lib/supabase/client');
-    const supabase = createClient();
-    const [v, p, g, o] = await Promise.all([
-      supabase.from('naesin_vocabulary').select('*').eq('unit_id', unitId).order('sort_order'),
-      supabase.from('naesin_passages').select('*', { count: 'exact', head: true }).eq('unit_id', unitId),
-      supabase.from('naesin_grammar_lessons').select('*', { count: 'exact', head: true }).eq('unit_id', unitId),
-      supabase.from('naesin_omr_sheets').select('*', { count: 'exact', head: true }).eq('unit_id', unitId),
-    ]);
-    setVocabList((v.data as NaesinVocabulary[]) || []);
-    setPassageCount(p.count ?? 0);
-    setGrammarCount(g.count ?? 0);
-    setOmrCount(o.count ?? 0);
-    setSelectedIds(new Set());
+    try {
+      const { createClient } = await import('@/lib/supabase/client');
+      const supabase = createClient();
+      const [v, p, g, o] = await Promise.all([
+        supabase.from('naesin_vocabulary').select('*').eq('unit_id', unitId).order('sort_order'),
+        supabase.from('naesin_passages').select('*', { count: 'exact', head: true }).eq('unit_id', unitId),
+        supabase.from('naesin_grammar_lessons').select('*', { count: 'exact', head: true }).eq('unit_id', unitId),
+        supabase.from('naesin_omr_sheets').select('*', { count: 'exact', head: true }).eq('unit_id', unitId),
+      ]);
+      setVocabList((v.data as NaesinVocabulary[]) || []);
+      setPassageCount(p.count ?? 0);
+      setGrammarCount(g.count ?? 0);
+      setOmrCount(o.count ?? 0);
+      setSelectedIds(new Set());
+    } catch {
+      toast.error('데이터를 불러오지 못했습니다');
+    }
   }
 
   async function handleDeleteOne(id: string) {
     if (!confirm('이 단어를 삭제하시겠습니까?')) return;
-    const res = await fetch('/api/naesin/vocabulary', {
-      method: 'DELETE',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ id }),
-    });
-    if (res.ok) {
-      setVocabList((prev) => prev.filter((v) => v.id !== id));
-      setSelectedIds((prev) => { const next = new Set(prev); next.delete(id); return next; });
-      toast.success('단어가 삭제되었습니다');
-    } else {
-      toast.error('삭제 실패');
+    try {
+      const res = await fetch('/api/naesin/vocabulary', {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id }),
+      });
+      if (res.ok) {
+        setVocabList((prev) => prev.filter((v) => v.id !== id));
+        setSelectedIds((prev) => { const next = new Set(prev); next.delete(id); return next; });
+        toast.success('단어가 삭제되었습니다');
+      } else {
+        toast.error('삭제 실패');
+      }
+    } catch {
+      toast.error('단어 삭제 중 오류가 발생했습니다');
     }
   }
 
@@ -123,18 +131,22 @@ export function UnitContentManager({ unitId }: { unitId: string }) {
 
   async function saveEdit() {
     if (!editingId) return;
-    const res = await fetch('/api/naesin/vocabulary', {
-      method: 'PATCH',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ id: editingId, ...editForm }),
-    });
-    if (res.ok) {
-      const updated = await res.json();
-      setVocabList((prev) => prev.map((v) => (v.id === editingId ? updated : v)));
-      setEditingId(null);
-      toast.success('단어가 수정되었습니다');
-    } else {
-      toast.error('수정 실패');
+    try {
+      const res = await fetch('/api/naesin/vocabulary', {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id: editingId, ...editForm }),
+      });
+      if (res.ok) {
+        const updated = await res.json();
+        setVocabList((prev) => prev.map((v) => (v.id === editingId ? updated : v)));
+        setEditingId(null);
+        toast.success('단어가 수정되었습니다');
+      } else {
+        toast.error('수정 실패');
+      }
+    } catch {
+      toast.error('단어 수정 중 오류가 발생했습니다');
     }
   }
 

@@ -38,7 +38,10 @@ export function CreateQuizSetFromSelection({
           vocabIds: Array.from(selectedIds),
         }),
       });
-      if (!res.ok) throw new Error();
+      if (!res.ok) {
+        const err = await res.json().catch(() => null);
+        throw new Error(err?.error || '요청에 실패했습니다');
+      }
       setTitle('');
       onCreated();
     } catch {
@@ -98,14 +101,20 @@ export function VocabQuizSetManager({ unitId }: { unitId: string }) {
 
   async function handleDelete(id: string) {
     if (!confirm('이 시험지를 삭제하시겠습니까?')) return;
-    const res = await fetch('/api/naesin/vocab-quiz-sets', {
-      method: 'DELETE',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ id }),
-    });
-    if (res.ok) {
-      setSets((prev) => prev.filter((s) => s.id !== id));
-      toast.success('시험지가 삭제되었습니다');
+    try {
+      const res = await fetch('/api/naesin/vocab-quiz-sets', {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id }),
+      });
+      if (res.ok) {
+        setSets((prev) => prev.filter((s) => s.id !== id));
+        toast.success('시험지가 삭제되었습니다');
+      } else {
+        toast.error('시험지 삭제에 실패했습니다');
+      }
+    } catch {
+      toast.error('시험지 삭제 중 오류가 발생했습니다');
     }
   }
 

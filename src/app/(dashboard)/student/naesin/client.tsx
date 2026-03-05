@@ -49,7 +49,10 @@ export function NaesinHome({ textbooks, selectedTextbook, units, examDate: initi
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ textbookId: tbId }),
       });
-      if (!res.ok) throw new Error();
+      if (!res.ok) {
+        const err = await res.json().catch(() => null);
+        throw new Error(err?.error || '요청에 실패했습니다');
+      }
       toast.success('교과서가 선택되었습니다');
       router.refresh();
       setSelecting(false);

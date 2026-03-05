@@ -34,7 +34,10 @@ export function ExamDatePicker({ textbookId, currentDate, onDateChange }: ExamDa
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ textbookId, examDate: date }),
       });
-      if (!res.ok) throw new Error();
+      if (!res.ok) {
+        const err = await res.json().catch(() => null);
+        throw new Error(err?.error || '요청에 실패했습니다');
+      }
       toast.success('시험일이 설정되었습니다');
       onDateChange(date);
       setOpen(false);

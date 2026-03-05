@@ -44,7 +44,10 @@ export function ReportsClient({ students }: ReportsClientProps) {
         body: JSON.stringify({ studentId: selectedStudent }),
       });
 
-      if (!response.ok) throw new Error('Failed to generate report');
+      if (!response.ok) {
+        const err = await response.json().catch(() => null);
+        throw new Error(err?.error || '리포트 생성에 실패했습니다');
+      }
 
       const data = await response.json();
       setReport(data);

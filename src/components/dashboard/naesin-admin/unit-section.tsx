@@ -50,7 +50,10 @@ export function AddUnitDialog({ textbookId, onAdd }: { textbookId: string; onAdd
           sort_order: Number(unitValue),
         }),
       });
-      if (!res.ok) throw new Error();
+      if (!res.ok) {
+        const err = await res.json().catch(() => null);
+        throw new Error(err?.error || '요청에 실패했습니다');
+      }
       const data = await res.json();
       onAdd(data);
       setOpen(false);
@@ -131,12 +134,20 @@ export function UnitCard({
             className="h-8 w-8 shrink-0"
             onClick={async () => {
               if (!confirm('이 단원을 삭제하시겠습니까?')) return;
-              const res = await fetch('/api/naesin/units', {
-                method: 'DELETE',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ id: unit.id }),
-              });
-              if (res.ok) onDelete();
+              try {
+                const res = await fetch('/api/naesin/units', {
+                  method: 'DELETE',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify({ id: unit.id }),
+                });
+                if (res.ok) {
+                  onDelete();
+                } else {
+                  toast.error('단원 삭제에 실패했습니다');
+                }
+              } catch {
+                toast.error('단원 삭제 중 오류가 발생했습니다');
+              }
             }}
           >
             <Trash2 className="h-4 w-4 text-destructive" />

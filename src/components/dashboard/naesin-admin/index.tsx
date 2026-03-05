@@ -30,14 +30,18 @@ export function NaesinAdminClient({ textbooks: initialTextbooks }: NaesinAdminCl
   }, [selectedTextbook?.id]);
 
   async function loadUnits(textbookId: string) {
-    const { createClient } = await import('@/lib/supabase/client');
-    const supabase = createClient();
-    const { data } = await supabase
-      .from('naesin_units')
-      .select('*')
-      .eq('textbook_id', textbookId)
-      .order('sort_order');
-    setUnits(data || []);
+    try {
+      const { createClient } = await import('@/lib/supabase/client');
+      const supabase = createClient();
+      const { data } = await supabase
+        .from('naesin_units')
+        .select('*')
+        .eq('textbook_id', textbookId)
+        .order('sort_order');
+      setUnits(data || []);
+    } catch {
+      toast.error('단원 목록을 불러오지 못했습니다');
+    }
   }
 
   return (
@@ -81,15 +85,21 @@ export function NaesinAdminClient({ textbooks: initialTextbooks }: NaesinAdminCl
                       onClick={async (e) => {
                         e.stopPropagation();
                         if (!confirm('이 교과서를 삭제하시겠습니까?')) return;
-                        const res = await fetch('/api/naesin/textbooks', {
-                          method: 'DELETE',
-                          headers: { 'Content-Type': 'application/json' },
-                          body: JSON.stringify({ id: tb.id }),
-                        });
-                        if (res.ok) {
-                          setTextbooks(textbooks.filter((t) => t.id !== tb.id));
-                          if (selectedTextbook?.id === tb.id) setSelectedTextbook(null);
-                          toast.success('교과서가 삭제되었습니다');
+                        try {
+                          const res = await fetch('/api/naesin/textbooks', {
+                            method: 'DELETE',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ id: tb.id }),
+                          });
+                          if (res.ok) {
+                            setTextbooks(textbooks.filter((t) => t.id !== tb.id));
+                            if (selectedTextbook?.id === tb.id) setSelectedTextbook(null);
+                            toast.success('교과서가 삭제되었습니다');
+                          } else {
+                            toast.error('교과서 삭제에 실패했습니다');
+                          }
+                        } catch {
+                          toast.error('교과서 삭제 중 오류가 발생했습니다');
                         }
                       }}
                     >
