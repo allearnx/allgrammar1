@@ -1,51 +1,50 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { createApiHandler } from '@/lib/api';
 import { createClient } from '@/lib/supabase/server';
+import { quizResultCreateSchema } from '@/lib/api/schemas';
 
-export async function POST(request: NextRequest) {
-  const supabase = await createClient();
-  const { data: { user } } = await supabase.auth.getUser();
-  if (!user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+export const POST = createApiHandler(
+  { schema: quizResultCreateSchema },
+  async ({ user, body, supabase }) => {
+    const { unitId, score, totalQuestions, correctCount, wrongWords } = body;
 
-  const { unitId, score, totalQuestions, correctCount, wrongWords } = await request.json();
-  if (!unitId || score == null || !totalQuestions) {
-    return NextResponse.json({ error: 'Missing fields' }, { status: 400 });
+    // Get current max attempt_number for this student+unit
+    const { data: latest } = await supabase
+      .from('naesin_vocab_quiz_results')
+      .select('attempt_number')
+      .eq('student_id', user.id)
+      .eq('unit_id', unitId)
+      .order('attempt_number', { ascending: false })
+      .limit(1)
+      .single();
+
+    const attemptNumber = (latest?.attempt_number ?? 0) + 1;
+
+    const { data, error } = await supabase
+      .from('naesin_vocab_quiz_results')
+      .insert({
+        student_id: user.id,
+        unit_id: unitId,
+        attempt_number: attemptNumber,
+        score,
+        total_questions: totalQuestions,
+        correct_count: correctCount,
+        wrong_words: wrongWords || [],
+      })
+      .select()
+      .single();
+
+    if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+    return NextResponse.json({ result: data });
   }
+);
 
-  // Get current max attempt_number for this student+unit
-  const { data: latest } = await supabase
-    .from('naesin_vocab_quiz_results')
-    .select('attempt_number')
-    .eq('student_id', user.id)
-    .eq('unit_id', unitId)
-    .order('attempt_number', { ascending: false })
-    .limit(1)
-    .single();
-
-  const attemptNumber = (latest?.attempt_number ?? 0) + 1;
-
-  const { data, error } = await supabase
-    .from('naesin_vocab_quiz_results')
-    .insert({
-      student_id: user.id,
-      unit_id: unitId,
-      attempt_number: attemptNumber,
-      score,
-      total_questions: totalQuestions,
-      correct_count: correctCount,
-      wrong_words: wrongWords || [],
-    })
-    .select()
-    .single();
-
-  if (error) return NextResponse.json({ error: error.message }, { status: 500 });
-  return NextResponse.json({ result: data });
-}
-
+// GET has special logic: resultId lookup works without auth (shared link)
 export async function GET(request: NextRequest) {
   const supabase = await createClient();
   const { searchParams } = new URL(request.url);
 
-  // Single result by ID (for shared link)
+  // Single result by ID (for shared link — no auth required)
   const resultId = searchParams.get('resultId');
   if (resultId) {
     const { data, error } = await supabase
@@ -60,7 +59,7 @@ export async function GET(request: NextRequest) {
 
   // List results for a unit (requires auth)
   const { data: { user } } = await supabase.auth.getUser();
-  if (!user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  if (!user) return NextResponse.json({ error: '로그인이 필요합니다.', code: 'UNAUTHORIZED' }, { status: 401 });
 
   const unitId = searchParams.get('unitId');
   const studentId = searchParams.get('studentId');

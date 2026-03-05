@@ -1,85 +1,61 @@
-import { NextRequest, NextResponse } from 'next/server';
-import { createClient } from '@/lib/supabase/server';
+import { NextResponse } from 'next/server';
+import { createApiHandler } from '@/lib/api';
+import { problemCreateSchema, idSchema } from '@/lib/api/schemas';
 
-export async function GET(request: NextRequest) {
-  const supabase = await createClient();
-  const { data: { user } } = await supabase.auth.getUser();
-  if (!user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+const ADMIN_ROLES = ['teacher', 'admin', 'boss'] as const;
 
-  const unitId = request.nextUrl.searchParams.get('unitId');
-  const category = request.nextUrl.searchParams.get('category') || 'problem';
-  if (!unitId) return NextResponse.json({ error: 'Missing unitId' }, { status: 400 });
+export const GET = createApiHandler(
+  {},
+  async ({ supabase, request }) => {
+    const unitId = request.nextUrl.searchParams.get('unitId');
+    const category = request.nextUrl.searchParams.get('category') || 'problem';
+    if (!unitId) return NextResponse.json({ error: 'Missing unitId' }, { status: 400 });
 
-  const { data, error } = await supabase
-    .from('naesin_problem_sheets')
-    .select('*')
-    .eq('unit_id', unitId)
-    .eq('category', category)
-    .order('sort_order');
+    const { data, error } = await supabase
+      .from('naesin_problem_sheets')
+      .select('*')
+      .eq('unit_id', unitId)
+      .eq('category', category)
+      .order('sort_order');
 
-  if (error) return NextResponse.json({ error: error.message }, { status: 500 });
-  return NextResponse.json(data);
-}
-
-export async function POST(request: NextRequest) {
-  const supabase = await createClient();
-  const { data: { user } } = await supabase.auth.getUser();
-  if (!user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-
-  const { data: userData } = await supabase
-    .from('users')
-    .select('role')
-    .eq('id', user.id)
-    .single();
-  if (!userData || !['teacher', 'admin', 'boss'].includes(userData.role)) {
-    return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
+    if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+    return NextResponse.json(data);
   }
+);
 
-  const { unitId, title, mode, questions, pdfUrl, answerKey, category } = await request.json();
-  if (!unitId || !title || !mode) {
-    return NextResponse.json({ error: 'Missing fields' }, { status: 400 });
+export const POST = createApiHandler(
+  { roles: [...ADMIN_ROLES], schema: problemCreateSchema },
+  async ({ body, supabase }) => {
+    const { unitId, title, mode, questions, pdfUrl, answerKey, category } = body;
+
+    const { data, error } = await supabase
+      .from('naesin_problem_sheets')
+      .insert({
+        unit_id: unitId,
+        title,
+        mode,
+        questions: questions || [],
+        pdf_url: pdfUrl || null,
+        answer_key: answerKey || [],
+        category: category || 'problem',
+      })
+      .select()
+      .single();
+
+    if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+    return NextResponse.json(data);
   }
+);
 
-  const { data, error } = await supabase
-    .from('naesin_problem_sheets')
-    .insert({
-      unit_id: unitId,
-      title,
-      mode,
-      questions: questions || [],
-      pdf_url: pdfUrl || null,
-      answer_key: answerKey || [],
-      category: category || 'problem',
-    })
-    .select()
-    .single();
+export const DELETE = createApiHandler(
+  { roles: [...ADMIN_ROLES], schema: idSchema, hasBody: true },
+  async ({ body, supabase }) => {
+    const { error } = await supabase
+      .from('naesin_problem_sheets')
+      .delete()
+      .eq('id', body.id);
 
-  if (error) return NextResponse.json({ error: error.message }, { status: 500 });
-  return NextResponse.json(data);
-}
-
-export async function DELETE(request: NextRequest) {
-  const supabase = await createClient();
-  const { data: { user } } = await supabase.auth.getUser();
-  if (!user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-
-  const { data: userData } = await supabase
-    .from('users')
-    .select('role')
-    .eq('id', user.id)
-    .single();
-  if (!userData || !['teacher', 'admin', 'boss'].includes(userData.role)) {
-    return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
+    if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+    return NextResponse.json({ success: true });
   }
-
-  const { id } = await request.json();
-  if (!id) return NextResponse.json({ error: 'Missing id' }, { status: 400 });
-
-  const { error } = await supabase
-    .from('naesin_problem_sheets')
-    .delete()
-    .eq('id', id);
-
-  if (error) return NextResponse.json({ error: error.message }, { status: 500 });
-  return NextResponse.json({ success: true });
-}
+);

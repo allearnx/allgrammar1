@@ -1,5 +1,6 @@
-import { NextRequest, NextResponse } from 'next/server';
-import { createClient } from '@/lib/supabase/server';
+import { NextResponse } from 'next/server';
+import { createApiHandler, ValidationError } from '@/lib/api';
+import { textbookProgressSchema } from '@/lib/api/schemas';
 
 interface ProgressTypeConfig {
   scoreField: string;
@@ -11,7 +12,7 @@ const PROGRESS_TYPES: Record<string, ProgressTypeConfig> = {
   translation: { scoreField: 'translation_score', attemptsField: 'translation_attempts' },
 };
 
-function getProgressConfig(type: string): ProgressTypeConfig {
+function getProgressConfig(type: string): ProgressTypeConfig | undefined {
   if (type.startsWith('fill_blanks_')) {
     const difficulty = type.replace('fill_blanks_', '');
     return {
@@ -22,52 +23,36 @@ function getProgressConfig(type: string): ProgressTypeConfig {
   return PROGRESS_TYPES[type];
 }
 
-export async function POST(request: NextRequest) {
-  const supabase = await createClient();
+export const POST = createApiHandler(
+  { schema: textbookProgressSchema },
+  async ({ user, body, supabase }) => {
+    const { passageId, type, score } = body;
 
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+    const config = getProgressConfig(type);
+    if (!config) throw new ValidationError('잘못된 유형입니다.');
 
-  if (!user) {
-    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    // Get current attempts to increment
+    const { data: existing } = await supabase
+      .from('student_textbook_progress')
+      .select(config.attemptsField)
+      .eq('student_id', user.id)
+      .eq('passage_id', passageId)
+      .single();
+
+    const updates: Record<string, unknown> = {
+      student_id: user.id,
+      passage_id: passageId,
+      [config.scoreField]: score,
+      [config.attemptsField]: ((existing as Record<string, number> | null)?.[config.attemptsField] || 0) + 1,
+    };
+
+    const { error } = await supabase
+      .from('student_textbook_progress')
+      .upsert(updates, {
+        onConflict: 'student_id,passage_id',
+      });
+
+    if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+    return NextResponse.json({ success: true });
   }
-
-  const { passageId, type, score } = await request.json();
-
-  if (!passageId || !type || score === undefined) {
-    return NextResponse.json({ error: 'Missing fields' }, { status: 400 });
-  }
-
-  const config = getProgressConfig(type);
-  if (!config) {
-    return NextResponse.json({ error: 'Invalid type' }, { status: 400 });
-  }
-
-  // Get current attempts to increment
-  const { data: existing } = await supabase
-    .from('student_textbook_progress')
-    .select(config.attemptsField)
-    .eq('student_id', user.id)
-    .eq('passage_id', passageId)
-    .single();
-
-  const updates: Record<string, unknown> = {
-    student_id: user.id,
-    passage_id: passageId,
-    [config.scoreField]: score,
-    [config.attemptsField]: ((existing as Record<string, number> | null)?.[config.attemptsField] || 0) + 1,
-  };
-
-  const { error } = await supabase
-    .from('student_textbook_progress')
-    .upsert(updates, {
-      onConflict: 'student_id,passage_id',
-    });
-
-  if (error) {
-    return NextResponse.json({ error: error.message }, { status: 500 });
-  }
-
-  return NextResponse.json({ success: true });
-}
+);

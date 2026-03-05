@@ -1,64 +1,33 @@
-import { NextRequest, NextResponse } from 'next/server';
-import { createClient } from '@/lib/supabase/server';
+import { NextResponse } from 'next/server';
+import { createApiHandler, NotFoundError, ForbiddenError } from '@/lib/api';
 import { createAdminClient } from '@/lib/supabase/admin';
+import { teacherPatchSchema } from '@/lib/api/schemas';
 
-export async function PATCH(
-  request: NextRequest,
-  { params }: { params: Promise<{ id: string }> }
-) {
-  const { id } = await params;
-  const supabase = await createClient();
+export const PATCH = createApiHandler(
+  { roles: ['admin', 'boss'], schema: teacherPatchSchema },
+  async ({ user, body, params }) => {
+    const admin = createAdminClient();
 
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+    // Only update teachers in same academy
+    const { data: teacher } = await admin
+      .from('users')
+      .select('academy_id')
+      .eq('id', params.id)
+      .eq('role', 'teacher')
+      .single();
 
-  if (!user) {
-    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    if (!teacher) throw new NotFoundError('선생님을 찾을 수 없습니다.');
+
+    if (user.role !== 'boss' && teacher.academy_id !== user.academy_id) {
+      throw new ForbiddenError();
+    }
+
+    const { error } = await admin
+      .from('users')
+      .update({ is_active: body.is_active })
+      .eq('id', params.id);
+
+    if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+    return NextResponse.json({ success: true });
   }
-
-  const admin = createAdminClient();
-
-  const { data: profile } = await admin
-    .from('users')
-    .select('role, academy_id')
-    .eq('id', user.id)
-    .single();
-
-  if (!profile || !['admin', 'boss'].includes(profile.role)) {
-    return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
-  }
-
-  const { is_active } = await request.json();
-
-  if (typeof is_active !== 'boolean') {
-    return NextResponse.json({ error: 'Invalid is_active value' }, { status: 400 });
-  }
-
-  // Only update teachers in same academy
-  const { data: teacher } = await admin
-    .from('users')
-    .select('academy_id')
-    .eq('id', id)
-    .eq('role', 'teacher')
-    .single();
-
-  if (!teacher) {
-    return NextResponse.json({ error: 'Teacher not found' }, { status: 404 });
-  }
-
-  if (profile.role !== 'boss' && teacher.academy_id !== profile.academy_id) {
-    return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
-  }
-
-  const { error } = await admin
-    .from('users')
-    .update({ is_active })
-    .eq('id', id);
-
-  if (error) {
-    return NextResponse.json({ error: error.message }, { status: 500 });
-  }
-
-  return NextResponse.json({ success: true });
-}
+);

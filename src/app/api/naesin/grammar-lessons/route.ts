@@ -1,50 +1,37 @@
-import { NextRequest, NextResponse } from 'next/server';
-import { createClient } from '@/lib/supabase/server';
-import { getUser } from '@/lib/auth/helpers';
+import { NextResponse } from 'next/server';
+import { createApiHandler } from '@/lib/api';
+import { grammarLessonCreateSchema, idSchema } from '@/lib/api/schemas';
 
-export async function POST(request: NextRequest) {
-  const user = await getUser();
-  if (!user || !['teacher', 'admin', 'boss'].includes(user.role)) {
-    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+const ADMIN_ROLES = ['teacher', 'admin', 'boss'] as const;
+
+export const POST = createApiHandler(
+  { roles: [...ADMIN_ROLES], schema: grammarLessonCreateSchema },
+  async ({ body, supabase }) => {
+    const { data, error } = await supabase
+      .from('naesin_grammar_lessons')
+      .insert({
+        unit_id: body.unit_id,
+        title: body.title,
+        content_type: body.content_type,
+        youtube_url: body.youtube_url || null,
+        youtube_video_id: body.youtube_video_id || null,
+        video_duration_seconds: body.video_duration_seconds || null,
+        text_content: body.text_content || null,
+        sort_order: body.sort_order || 0,
+      })
+      .select()
+      .single();
+
+    if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+    return NextResponse.json(data);
   }
-  const supabase = await createClient();
+);
 
-  const body = await request.json();
-  const { unit_id, title, content_type } = body;
-  if (!unit_id || !title || !content_type) {
-    return NextResponse.json({ error: 'Missing fields' }, { status: 400 });
+export const DELETE = createApiHandler(
+  { roles: [...ADMIN_ROLES], schema: idSchema, hasBody: true },
+  async ({ body, supabase }) => {
+    const { error } = await supabase.from('naesin_grammar_lessons').delete().eq('id', body.id);
+    if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+    return NextResponse.json({ success: true });
   }
-
-  const { data, error } = await supabase
-    .from('naesin_grammar_lessons')
-    .insert({
-      unit_id,
-      title,
-      content_type,
-      youtube_url: body.youtube_url || null,
-      youtube_video_id: body.youtube_video_id || null,
-      video_duration_seconds: body.video_duration_seconds || null,
-      text_content: body.text_content || null,
-      sort_order: body.sort_order || 0,
-    })
-    .select()
-    .single();
-
-  if (error) return NextResponse.json({ error: error.message }, { status: 500 });
-  return NextResponse.json(data);
-}
-
-export async function DELETE(request: NextRequest) {
-  const user = await getUser();
-  if (!user || !['teacher', 'admin', 'boss'].includes(user.role)) {
-    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-  }
-  const supabase = await createClient();
-
-  const { id } = await request.json();
-  if (!id) return NextResponse.json({ error: 'Missing id' }, { status: 400 });
-
-  const { error } = await supabase.from('naesin_grammar_lessons').delete().eq('id', id);
-  if (error) return NextResponse.json({ error: error.message }, { status: 500 });
-  return NextResponse.json({ success: true });
-}
+);
