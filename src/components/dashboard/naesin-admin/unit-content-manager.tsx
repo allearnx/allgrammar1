@@ -17,6 +17,7 @@ import {
 } from 'lucide-react';
 import { toast } from 'sonner';
 import type { NaesinVocabulary } from '@/types/database';
+import { ConfirmDialog } from '@/components/shared/confirm-dialog';
 import { AddVocabDialog, BulkVocabUpload, PdfVocabExtract } from './vocab-dialogs';
 import { AddPassageDialog, AddGrammarDialog, AddOmrDialog } from './content-dialogs';
 import { CreateQuizSetFromSelection, VocabQuizSetManager } from './quiz-set-manager';
@@ -28,6 +29,8 @@ export function UnitContentManager({ unitId }: { unitId: string }) {
   const [deleting, setDeleting] = useState(false);
   const [editingId, setEditingId] = useState<string | null>(null);
   const [editForm, setEditForm] = useState({ front_text: '', back_text: '', part_of_speech: '', example_sentence: '', synonyms: '', antonyms: '' });
+  const [deleteVocabId, setDeleteVocabId] = useState<string | null>(null);
+  const [bulkDeleteOpen, setBulkDeleteOpen] = useState(false);
   const [passageCount, setPassageCount] = useState<number | null>(null);
   const [grammarCount, setGrammarCount] = useState<number | null>(null);
   const [omrCount, setOmrCount] = useState<number | null>(null);
@@ -57,7 +60,6 @@ export function UnitContentManager({ unitId }: { unitId: string }) {
   }
 
   async function handleDeleteOne(id: string) {
-    if (!confirm('이 단어를 삭제하시겠습니까?')) return;
     try {
       const res = await fetch('/api/naesin/vocabulary', {
         method: 'DELETE',
@@ -78,7 +80,6 @@ export function UnitContentManager({ unitId }: { unitId: string }) {
 
   async function handleBulkDelete() {
     if (selectedIds.size === 0) return;
-    if (!confirm(`선택한 ${selectedIds.size}개 단어를 삭제하시겠습니까?`)) return;
     setDeleting(true);
     try {
       const results = await Promise.all(
@@ -191,7 +192,7 @@ export function UnitContentManager({ unitId }: { unitId: string }) {
               <Button
                 size="sm"
                 variant="destructive"
-                onClick={handleBulkDelete}
+                onClick={() => setBulkDeleteOpen(true)}
                 disabled={deleting}
               >
                 <Trash2 className="h-3.5 w-3.5 mr-1" />
@@ -222,7 +223,7 @@ export function UnitContentManager({ unitId }: { unitId: string }) {
                     variant="ghost"
                     size="icon"
                     className="h-6 w-6 opacity-0 group-hover:opacity-100"
-                    onClick={() => handleDeleteOne(v.id)}
+                    onClick={() => setDeleteVocabId(v.id)}
                     aria-label="삭제"
                   >
                     <Trash2 className="h-3.5 w-3.5 text-destructive" />
@@ -276,6 +277,27 @@ export function UnitContentManager({ unitId }: { unitId: string }) {
         <AddGrammarDialog unitId={unitId} onAdd={loadCounts} />
         <AddOmrDialog unitId={unitId} onAdd={loadCounts} />
       </div>
+
+      <ConfirmDialog
+        open={deleteVocabId !== null}
+        onOpenChange={(open) => { if (!open) setDeleteVocabId(null); }}
+        description="이 단어를 삭제하시겠습니까?"
+        onConfirm={() => {
+          const id = deleteVocabId;
+          setDeleteVocabId(null);
+          if (id) handleDeleteOne(id);
+        }}
+      />
+
+      <ConfirmDialog
+        open={bulkDeleteOpen}
+        onOpenChange={setBulkDeleteOpen}
+        description={`선택한 ${selectedIds.size}개 단어를 삭제하시겠습니까?`}
+        onConfirm={() => {
+          setBulkDeleteOpen(false);
+          handleBulkDelete();
+        }}
+      />
     </div>
   );
 }

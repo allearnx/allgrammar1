@@ -9,6 +9,7 @@ import { toast } from 'sonner';
 import type { NaesinTextbook, NaesinUnit } from '@/types/database';
 import { AddTextbookDialog } from './textbook-dialogs';
 import { AddUnitDialog, UnitCard } from './unit-section';
+import { ConfirmDialog } from '@/components/shared/confirm-dialog';
 
 interface NaesinAdminClientProps {
   textbooks: NaesinTextbook[];
@@ -19,6 +20,7 @@ export function NaesinAdminClient({ textbooks: initialTextbooks }: NaesinAdminCl
   const [selectedTextbook, setSelectedTextbook] = useState<NaesinTextbook | null>(null);
   const [units, setUnits] = useState<NaesinUnit[]>([]);
   const [expandedUnit, setExpandedUnit] = useState<string | null>(null);
+  const [deleteTextbookId, setDeleteTextbookId] = useState<string | null>(null);
 
   // Load units when textbook selected
   useEffect(() => {
@@ -82,25 +84,9 @@ export function NaesinAdminClient({ textbooks: initialTextbooks }: NaesinAdminCl
                       variant="ghost"
                       size="icon"
                       className="h-8 w-8"
-                      onClick={async (e) => {
+                      onClick={(e) => {
                         e.stopPropagation();
-                        if (!confirm('이 교과서를 삭제하시겠습니까?')) return;
-                        try {
-                          const res = await fetch('/api/naesin/textbooks', {
-                            method: 'DELETE',
-                            headers: { 'Content-Type': 'application/json' },
-                            body: JSON.stringify({ id: tb.id }),
-                          });
-                          if (res.ok) {
-                            setTextbooks(textbooks.filter((t) => t.id !== tb.id));
-                            if (selectedTextbook?.id === tb.id) setSelectedTextbook(null);
-                            toast.success('교과서가 삭제되었습니다');
-                          } else {
-                            toast.error('교과서 삭제에 실패했습니다');
-                          }
-                        } catch {
-                          toast.error('교과서 삭제 중 오류가 발생했습니다');
-                        }
+                        setDeleteTextbookId(tb.id);
                       }}
                     >
                       <Trash2 className="h-4 w-4 text-destructive" />
@@ -150,6 +136,32 @@ export function NaesinAdminClient({ textbooks: initialTextbooks }: NaesinAdminCl
           )}
         </div>
       )}
+      <ConfirmDialog
+        open={deleteTextbookId !== null}
+        onOpenChange={(open) => { if (!open) setDeleteTextbookId(null); }}
+        description="이 교과서를 삭제하시겠습니까?"
+        onConfirm={async () => {
+          const id = deleteTextbookId;
+          setDeleteTextbookId(null);
+          if (!id) return;
+          try {
+            const res = await fetch('/api/naesin/textbooks', {
+              method: 'DELETE',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ id }),
+            });
+            if (res.ok) {
+              setTextbooks(textbooks.filter((t) => t.id !== id));
+              if (selectedTextbook?.id === id) setSelectedTextbook(null);
+              toast.success('교과서가 삭제되었습니다');
+            } else {
+              toast.error('교과서 삭제에 실패했습니다');
+            }
+          } catch {
+            toast.error('교과서 삭제 중 오류가 발생했습니다');
+          }
+        }}
+      />
     </div>
   );
 }

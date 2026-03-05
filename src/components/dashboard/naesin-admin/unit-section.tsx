@@ -16,6 +16,7 @@ import { Plus, Trash2, ChevronDown, ChevronRight } from 'lucide-react';
 import { toast } from 'sonner';
 import type { NaesinUnit } from '@/types/database';
 import { UnitContentManager } from './unit-content-manager';
+import { ConfirmDialog } from '@/components/shared/confirm-dialog';
 
 export const UNIT_OPTIONS = [
   { value: '1', label: 'Lesson 1' },
@@ -110,6 +111,8 @@ export function UnitCard({
   onToggle: () => void;
   onDelete: () => void;
 }) {
+  const [deleteOpen, setDeleteOpen] = useState(false);
+
   return (
     <Card>
       <CardContent className="py-3">
@@ -132,23 +135,7 @@ export function UnitCard({
             variant="ghost"
             size="icon"
             className="h-8 w-8 shrink-0"
-            onClick={async () => {
-              if (!confirm('이 단원을 삭제하시겠습니까?')) return;
-              try {
-                const res = await fetch('/api/naesin/units', {
-                  method: 'DELETE',
-                  headers: { 'Content-Type': 'application/json' },
-                  body: JSON.stringify({ id: unit.id }),
-                });
-                if (res.ok) {
-                  onDelete();
-                } else {
-                  toast.error('단원 삭제에 실패했습니다');
-                }
-              } catch {
-                toast.error('단원 삭제 중 오류가 발생했습니다');
-              }
-            }}
+            onClick={() => setDeleteOpen(true)}
           >
             <Trash2 className="h-4 w-4 text-destructive" />
           </Button>
@@ -156,6 +143,29 @@ export function UnitCard({
 
         {expanded && <UnitContentManager unitId={unit.id} />}
       </CardContent>
+
+      <ConfirmDialog
+        open={deleteOpen}
+        onOpenChange={setDeleteOpen}
+        description="이 단원을 삭제하시겠습니까?"
+        onConfirm={async () => {
+          setDeleteOpen(false);
+          try {
+            const res = await fetch('/api/naesin/units', {
+              method: 'DELETE',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ id: unit.id }),
+            });
+            if (res.ok) {
+              onDelete();
+            } else {
+              toast.error('단원 삭제에 실패했습니다');
+            }
+          } catch {
+            toast.error('단원 삭제 중 오류가 발생했습니다');
+          }
+        }}
+      />
     </Card>
   );
 }

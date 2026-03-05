@@ -7,6 +7,7 @@ import { Badge } from '@/components/ui/badge';
 import { Trash2, ChevronDown, ChevronRight, Loader2 } from 'lucide-react';
 import { toast } from 'sonner';
 import type { NaesinVocabulary, NaesinVocabQuizSet } from '@/types/database';
+import { ConfirmDialog } from '@/components/shared/confirm-dialog';
 
 export function CreateQuizSetFromSelection({
   unitId,
@@ -84,6 +85,7 @@ export function CreateQuizSetFromSelection({
 export function VocabQuizSetManager({ unitId }: { unitId: string }) {
   const [sets, setSets] = useState<NaesinVocabQuizSet[]>([]);
   const [expanded, setExpanded] = useState(false);
+  const [deleteConfirmId, setDeleteConfirmId] = useState<string | null>(null);
 
   useEffect(() => {
     loadSets();
@@ -100,7 +102,6 @@ export function VocabQuizSetManager({ unitId }: { unitId: string }) {
   }
 
   async function handleDelete(id: string) {
-    if (!confirm('이 시험지를 삭제하시겠습니까?')) return;
     try {
       const res = await fetch('/api/naesin/vocab-quiz-sets', {
         method: 'DELETE',
@@ -144,7 +145,7 @@ export function VocabQuizSetManager({ unitId }: { unitId: string }) {
                 variant="ghost"
                 size="icon"
                 className="h-6 w-6"
-                onClick={() => handleDelete(set.id)}
+                onClick={() => setDeleteConfirmId(set.id)}
               >
                 <Trash2 className="h-3.5 w-3.5 text-destructive" />
               </Button>
@@ -152,6 +153,17 @@ export function VocabQuizSetManager({ unitId }: { unitId: string }) {
           ))}
         </div>
       )}
+
+      <ConfirmDialog
+        open={deleteConfirmId !== null}
+        onOpenChange={(open) => { if (!open) setDeleteConfirmId(null); }}
+        description="이 시험지를 삭제하시겠습니까?"
+        onConfirm={() => {
+          const id = deleteConfirmId;
+          setDeleteConfirmId(null);
+          if (id) handleDelete(id);
+        }}
+      />
     </div>
   );
 }

@@ -1,36 +1,43 @@
 import { z } from 'zod';
 
+// ── Shared Limits ──
+const ID = z.string().max(100);
+const SHORT = z.string().max(200);
+const MEDIUM = z.string().max(1000);
+const LONG = z.string().max(10000);
+const URL_STR = z.string().max(2000);
+
 // ── Student Progress Schemas ──
 
 export const vocabProgressSchema = z.object({
-  unitId: z.string(),
+  unitId: ID,
   type: z.enum(['flashcard', 'quiz', 'spelling']),
   score: z.number().optional(),
   totalItems: z.number().optional(),
 });
 
 export const grammarProgressSchema = z.object({
-  unitId: z.string(),
+  unitId: ID,
   type: z.enum(['video', 'text']),
 });
 
 export const passageProgressSchema = z.object({
-  unitId: z.string(),
+  unitId: ID,
   type: z.enum(['fill_blanks', 'ordering', 'translation']),
   score: z.number(),
 });
 
 export const videoProgressSchema = z.object({
-  lessonId: z.string(),
-  unitId: z.string().optional(),
+  lessonId: ID,
+  unitId: ID.optional(),
   position: z.number().optional(),
   duration: z.number().optional(),
   cumulativeSeconds: z.number().optional(),
 });
 
 export const omrSubmitSchema = z.object({
-  unitId: z.string(),
-  omrSheetId: z.string(),
+  unitId: ID,
+  omrSheetId: ID,
   studentAnswers: z.record(z.string(), z.unknown()),
   correctCount: z.number(),
   totalQuestions: z.number(),
@@ -38,8 +45,8 @@ export const omrSubmitSchema = z.object({
 });
 
 export const problemSubmitSchema = z.object({
-  sheetId: z.string(),
-  unitId: z.string().optional(),
+  sheetId: ID,
+  unitId: ID.optional(),
   answers: z.array(z.unknown()),
   totalQuestions: z.number(),
 });
@@ -47,34 +54,34 @@ export const problemSubmitSchema = z.object({
 // ── Wrong Answers Schemas ──
 
 export const wrongAnswerCreateSchema = z.object({
-  unitId: z.string(),
-  stage: z.string(),
-  sourceType: z.string(),
+  unitId: ID,
+  stage: SHORT,
+  sourceType: SHORT,
   wrongAnswers: z.array(z.unknown()).min(1),
 });
 
 export const wrongAnswerPatchSchema = z.object({
-  id: z.string(),
+  id: ID,
   resolved: z.boolean().optional(),
 });
 
 // ── Quiz & Grade Schemas ──
 
 export const quizSetResultSchema = z.object({
-  quizSetId: z.string(),
-  unitId: z.string().optional(),
+  quizSetId: ID,
+  unitId: ID.optional(),
   score: z.number(),
   wrongWords: z.array(z.unknown()).optional(),
 });
 
 export const gradeTranslationSchema = z.object({
-  koreanText: z.string(),
-  originalText: z.string(),
-  studentAnswer: z.string(),
+  koreanText: LONG,
+  originalText: LONG,
+  studentAnswer: LONG,
 });
 
 export const legacyVideoProgressSchema = z.object({
-  grammarId: z.string(),
+  grammarId: ID,
   position: z.number(),
   completed: z.boolean().optional(),
 });
@@ -82,65 +89,65 @@ export const legacyVideoProgressSchema = z.object({
 // ── Admin CRUD Schemas ──
 
 export const textbookCreateSchema = z.object({
-  grade: z.string(),
-  publisher: z.string(),
-  display_name: z.string(),
+  grade: SHORT,
+  publisher: SHORT,
+  display_name: SHORT,
   sort_order: z.number().optional(),
 });
 
 export const textbookPatchSchema = z.object({
-  id: z.string(),
+  id: ID,
 }).passthrough();
 
 export const unitCreateSchema = z.object({
-  textbook_id: z.string(),
+  textbook_id: ID,
   unit_number: z.number(),
-  title: z.string(),
+  title: SHORT,
   sort_order: z.number().optional(),
 });
 
 export const unitPatchSchema = z.object({
-  id: z.string(),
+  id: ID,
 }).passthrough();
 
 export const vocabCreateSchema = z.object({
-  unit_id: z.string(),
-  front_text: z.string(),
-  back_text: z.string(),
-  part_of_speech: z.string().optional(),
-  example_sentence: z.string().optional(),
-  synonyms: z.string().optional(),
-  antonyms: z.string().optional(),
+  unit_id: ID,
+  front_text: SHORT,
+  back_text: SHORT,
+  part_of_speech: SHORT.optional(),
+  example_sentence: MEDIUM.optional(),
+  synonyms: SHORT.optional(),
+  antonyms: SHORT.optional(),
   sort_order: z.number().optional(),
 });
 
 export const vocabPatchSchema = z.object({
-  id: z.string(),
-  front_text: z.string().optional(),
-  back_text: z.string().optional(),
-  part_of_speech: z.string().optional(),
-  example_sentence: z.string().optional(),
-  synonyms: z.string().optional(),
-  antonyms: z.string().optional(),
+  id: ID,
+  front_text: SHORT.optional(),
+  back_text: SHORT.optional(),
+  part_of_speech: SHORT.optional(),
+  example_sentence: MEDIUM.optional(),
+  synonyms: SHORT.optional(),
+  antonyms: SHORT.optional(),
 });
 
 export const vocabBulkSchema = z.object({
-  unit_id: z.string(),
+  unit_id: ID,
   items: z.array(z.object({
-    front_text: z.string(),
-    back_text: z.string(),
-    part_of_speech: z.string().optional(),
-    example_sentence: z.string().optional(),
-    synonyms: z.string().optional(),
-    antonyms: z.string().optional(),
-  })).min(1),
+    front_text: SHORT,
+    back_text: SHORT,
+    part_of_speech: SHORT.optional(),
+    example_sentence: MEDIUM.optional(),
+    synonyms: SHORT.optional(),
+    antonyms: SHORT.optional(),
+  })).min(1).max(500),
 });
 
 export const passageCreateSchema = z.object({
-  unit_id: z.string(),
-  title: z.string(),
-  original_text: z.string(),
-  korean_translation: z.string(),
+  unit_id: ID,
+  title: SHORT,
+  original_text: LONG,
+  korean_translation: LONG,
   blanks_easy: z.unknown().optional(),
   blanks_medium: z.unknown().optional(),
   blanks_hard: z.unknown().optional(),
@@ -149,79 +156,79 @@ export const passageCreateSchema = z.object({
 });
 
 export const grammarLessonCreateSchema = z.object({
-  unit_id: z.string(),
-  title: z.string(),
-  content_type: z.string(),
-  youtube_url: z.string().optional(),
-  youtube_video_id: z.string().optional(),
+  unit_id: ID,
+  title: SHORT,
+  content_type: SHORT,
+  youtube_url: URL_STR.optional(),
+  youtube_video_id: SHORT.optional(),
   video_duration_seconds: z.number().optional(),
-  text_content: z.string().optional(),
+  text_content: LONG.optional(),
   sort_order: z.number().optional(),
 });
 
 export const omrSheetCreateSchema = z.object({
-  unit_id: z.string(),
-  title: z.string(),
+  unit_id: ID,
+  title: SHORT,
   total_questions: z.number(),
-  answer_key: z.array(z.unknown()),
+  answer_key: z.array(z.unknown()).max(200),
   points_per_question: z.number().optional(),
   sort_order: z.number().optional(),
 });
 
 export const problemCreateSchema = z.object({
-  unitId: z.string(),
-  title: z.string(),
-  mode: z.string(),
+  unitId: ID,
+  title: SHORT,
+  mode: SHORT,
   questions: z.unknown().optional(),
-  pdfUrl: z.string().optional(),
+  pdfUrl: URL_STR.optional(),
   answerKey: z.unknown().optional(),
-  category: z.string().optional(),
+  category: SHORT.optional(),
 });
 
 export const vocabQuizSetCreateSchema = z.object({
-  unitId: z.string(),
-  title: z.string(),
-  vocabIds: z.array(z.string()).min(1),
+  unitId: ID,
+  title: SHORT,
+  vocabIds: z.array(ID).min(1).max(500),
 });
 
 export const similarProblemPatchSchema = z.object({
-  id: z.string(),
-  status: z.string().optional(),
+  id: ID,
+  status: SHORT.optional(),
   questionData: z.unknown().optional(),
 });
 
 export const lastReviewCreateSchema = z.object({
-  unitId: z.string(),
-  contentType: z.string(),
-  title: z.string(),
-  youtubeUrl: z.string().optional(),
-  youtubeVideoId: z.string().optional(),
-  pdfUrl: z.string().optional(),
-  textContent: z.string().optional(),
+  unitId: ID,
+  contentType: SHORT,
+  title: SHORT,
+  youtubeUrl: URL_STR.optional(),
+  youtubeVideoId: SHORT.optional(),
+  pdfUrl: URL_STR.optional(),
+  textContent: LONG.optional(),
 });
 
 export const examDateSchema = z.object({
-  textbookId: z.string(),
-  examDate: z.string(),
+  textbookId: ID,
+  examDate: SHORT,
 });
 
 export const settingsSchema = z.object({
-  textbookId: z.string(),
+  textbookId: ID,
 });
 
 export const idSchema = z.object({
-  id: z.string(),
+  id: ID,
 });
 
 // ── Boss/Admin Schemas ──
 
 export const academyCreateSchema = z.object({
-  name: z.string().min(1),
+  name: z.string().min(1).max(100),
 });
 
 export const userPatchSchema = z.object({
   role: z.enum(['student', 'teacher', 'admin', 'boss']).optional(),
-  academy_id: z.string().nullable().optional(),
+  academy_id: ID.nullable().optional(),
   is_active: z.boolean().optional(),
 });
 
@@ -230,27 +237,27 @@ export const teacherPatchSchema = z.object({
 });
 
 export const similarProblemGenerateSchema = z.object({
-  unitId: z.string(),
-  wrongAnswerIds: z.array(z.string()).optional(),
-  grammarTag: z.string().optional(),
+  unitId: ID,
+  wrongAnswerIds: z.array(ID).optional(),
+  grammarTag: SHORT.optional(),
 });
 
 // ── Memory & Textbook Schemas ──
 
 export const memoryProgressSchema = z.object({
-  memoryItemId: z.string(),
+  memoryItemId: ID,
   testType: z.enum(['flashcard', 'quiz', 'spelling']),
   isCorrect: z.boolean(),
 });
 
 export const textbookProgressSchema = z.object({
-  passageId: z.string(),
+  passageId: ID,
   type: z.enum(['fill_blanks_easy', 'fill_blanks_medium', 'fill_blanks_hard', 'ordering', 'translation']),
   score: z.number(),
 });
 
 export const quizResultCreateSchema = z.object({
-  unitId: z.string(),
+  unitId: ID,
   score: z.number(),
   totalQuestions: z.number(),
   correctCount: z.number().optional(),
@@ -258,5 +265,5 @@ export const quizResultCreateSchema = z.object({
 });
 
 export const reportGenerateSchema = z.object({
-  studentId: z.string(),
+  studentId: ID,
 });

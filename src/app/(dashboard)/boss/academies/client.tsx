@@ -16,6 +16,7 @@ import {
 import { Plus, Pencil, Trash2, Building2 } from 'lucide-react';
 import { toast } from 'sonner';
 import { format } from 'date-fns';
+import { ConfirmDialog } from '@/components/shared/confirm-dialog';
 
 interface Academy {
   id: string;
@@ -35,6 +36,7 @@ export function AcademiesClient({ academies }: AcademiesClientProps) {
   const [name, setName] = useState('');
   const [saving, setSaving] = useState(false);
   const [deleting, setDeleting] = useState<string | null>(null);
+  const [deleteConfirmId, setDeleteConfirmId] = useState<string | null>(null);
   const router = useRouter();
 
   async function handleAdd(e: React.FormEvent) {
@@ -94,7 +96,6 @@ export function AcademiesClient({ academies }: AcademiesClientProps) {
   }
 
   async function handleDelete(academyId: string) {
-    if (!confirm('정말 이 학원을 삭제하시겠습니까?')) return;
     setDeleting(academyId);
 
     try {
@@ -180,7 +181,7 @@ export function AcademiesClient({ academies }: AcademiesClientProps) {
                 <Button
                   variant="destructive"
                   size="sm"
-                  onClick={() => handleDelete(academy.id)}
+                  onClick={() => setDeleteConfirmId(academy.id)}
                   disabled={deleting === academy.id}
                 >
                   {deleting === academy.id ? '...' : <Trash2 className="h-4 w-4" />}
@@ -196,6 +197,17 @@ export function AcademiesClient({ academies }: AcademiesClientProps) {
           등록된 학원이 없습니다.
         </p>
       )}
+
+      <ConfirmDialog
+        open={deleteConfirmId !== null}
+        onOpenChange={(open) => { if (!open) setDeleteConfirmId(null); }}
+        description="정말 이 학원을 삭제하시겠습니까?"
+        onConfirm={() => {
+          const id = deleteConfirmId;
+          setDeleteConfirmId(null);
+          if (id) handleDelete(id);
+        }}
+      />
 
       <Dialog open={editOpen} onOpenChange={setEditOpen}>
         <DialogContent>
