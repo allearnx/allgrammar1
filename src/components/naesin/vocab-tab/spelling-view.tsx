@@ -58,7 +58,7 @@ export function NaesinSpellingView({ items, vocabulary, onComplete }: { items: F
   if (!item) return null;
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 max-w-md mx-auto">
       <div className="flex justify-between items-center">
         <span className="text-sm text-muted-foreground">{currentIndex + 1} / {items.length}</span>
         <ScoreBadges correct={score.correct} wrong={score.wrong} />
