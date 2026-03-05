@@ -7,21 +7,36 @@ export default async function BossUsersPage() {
   const user = await requireRole(['boss']);
   const admin = createAdminClient();
 
-  const { data: users } = await admin
-    .from('users')
-    .select('id, full_name, email, role, academy_id, is_active, created_at')
-    .order('created_at', { ascending: false });
+  const [usersRes, academiesRes, assignmentsRes] = await Promise.all([
+    admin
+      .from('users')
+      .select('id, full_name, email, role, academy_id, is_active, created_at')
+      .order('created_at', { ascending: false }),
+    admin
+      .from('academies')
+      .select('id, name')
+      .order('name'),
+    admin
+      .from('service_assignments')
+      .select('student_id, service'),
+  ]);
 
-  const { data: academies } = await admin
-    .from('academies')
-    .select('id, name')
-    .order('name');
+  // Build per-student service map
+  const serviceMap: Record<string, string[]> = {};
+  (assignmentsRes.data || []).forEach((a) => {
+    if (!serviceMap[a.student_id]) serviceMap[a.student_id] = [];
+    serviceMap[a.student_id].push(a.service);
+  });
 
   return (
     <>
       <Topbar user={user} title="사용자 관리" />
       <div className="p-4 md:p-6">
-        <UsersClient users={users || []} academies={academies || []} />
+        <UsersClient
+          users={usersRes.data || []}
+          academies={academiesRes.data || []}
+          serviceMap={serviceMap}
+        />
       </div>
     </>
   );

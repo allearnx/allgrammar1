@@ -13,6 +13,7 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { toast } from 'sonner';
+import { ServiceAssignmentToggle } from '@/components/dashboard/service-assignment-toggle';
 
 interface User {
   id: string;
@@ -32,6 +33,7 @@ interface Academy {
 interface UsersClientProps {
   users: User[];
   academies: Academy[];
+  serviceMap?: Record<string, string[]>;
 }
 
 const ROLE_LABELS: Record<string, string> = {
@@ -43,7 +45,7 @@ const ROLE_LABELS: Record<string, string> = {
 
 const ROLE_OPTIONS = ['student', 'teacher', 'admin', 'boss'];
 
-export function UsersClient({ users, academies }: UsersClientProps) {
+export function UsersClient({ users, academies, serviceMap = {} }: UsersClientProps) {
   const [roleFilter, setRoleFilter] = useState<string>('all');
   const [academyFilter, setAcademyFilter] = useState<string>('all');
   const [updating, setUpdating] = useState<string | null>(null);
@@ -143,6 +145,14 @@ export function UsersClient({ users, academies }: UsersClientProps) {
                   <p className="text-xs text-muted-foreground mt-1">
                     학원: {u.academy_id ? academyMap.get(u.academy_id) || '-' : '미배정'}
                   </p>
+                  {u.role === 'student' && (
+                    <div className="mt-1.5">
+                      <ServiceAssignmentToggle
+                        studentId={u.id}
+                        assignedServices={serviceMap[u.id] || []}
+                      />
+                    </div>
+                  )}
                 </div>
                 <div className="flex flex-wrap items-center gap-2 shrink-0">
                   <Select

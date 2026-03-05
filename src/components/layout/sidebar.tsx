@@ -19,8 +19,8 @@ import {
   Settings,
   Users,
   FileText,
-
   BookMarked,
+  BookA,
 } from 'lucide-react';
 import type { AuthUser } from '@/types/auth';
 import { useState, useTransition } from 'react';
@@ -28,6 +28,7 @@ import { toast } from 'sonner';
 
 interface SidebarProps {
   user: AuthUser;
+  services?: string[];
 }
 
 interface NavItem {
@@ -52,6 +53,7 @@ const NAV_CONFIG: Record<string, NavGroup[]> = {
       label: '학습',
       items: [
         { href: '/student/naesin', label: '내신 대비', icon: BookMarked },
+        { href: '/student/voca', label: '올톡보카', icon: BookA },
       ],
     },
   ],
@@ -71,6 +73,7 @@ const NAV_CONFIG: Record<string, NavGroup[]> = {
       label: '콘텐츠',
       items: [
         { href: '/teacher/naesin', label: '내신 관리', icon: ClipboardList },
+        { href: '/teacher/voca', label: '올톡보카 관리', icon: BookA },
       ],
     },
     {
@@ -96,6 +99,7 @@ const NAV_CONFIG: Record<string, NavGroup[]> = {
       label: '콘텐츠',
       items: [
         { href: '/admin/naesin', label: '내신 관리', icon: ClipboardList },
+        { href: '/admin/voca', label: '올톡보카 관리', icon: BookA },
       ],
     },
     {
@@ -125,6 +129,7 @@ const NAV_CONFIG: Record<string, NavGroup[]> = {
         { href: '/boss/content', label: '콘텐츠 관리', icon: NotebookPen },
         { href: '/boss/textbook-mode', label: '교과서 모드', icon: BookMarked },
         { href: '/boss/naesin', label: '내신 관리', icon: ClipboardList },
+        { href: '/boss/voca', label: '올톡보카 관리', icon: BookA },
       ],
     },
     {
@@ -135,8 +140,25 @@ const NAV_CONFIG: Record<string, NavGroup[]> = {
   ],
 };
 
-function getNavGroups(role: string): NavGroup[] {
-  return NAV_CONFIG[role] || NAV_CONFIG.student;
+// For students, filter nav items based on assigned services
+const SERVICE_HREF_MAP: Record<string, string> = {
+  naesin: '/student/naesin',
+  voca: '/student/voca',
+};
+
+function getNavGroups(role: string, services?: string[]): NavGroup[] {
+  const groups = NAV_CONFIG[role] || NAV_CONFIG.student;
+  if (role !== 'student' || !services) return groups;
+
+  // Filter student learning items based on assigned services
+  return groups.map((group) => {
+    if (group.label !== '학습') return group;
+    const serviceHrefs = new Set(services.map((s) => SERVICE_HREF_MAP[s]).filter(Boolean));
+    return {
+      ...group,
+      items: group.items.filter((item) => serviceHrefs.has(item.href)),
+    };
+  }).filter((group) => group.items.length > 0);
 }
 
 function NavLinks({ groups, pathname, onNavigate }: { groups: NavGroup[]; pathname: string; onNavigate?: () => void }) {
@@ -195,11 +217,11 @@ function NavLinks({ groups, pathname, onNavigate }: { groups: NavGroup[]; pathna
   );
 }
 
-export function Sidebar({ user }: SidebarProps) {
+export function Sidebar({ user, services }: SidebarProps) {
   const pathname = usePathname();
   const router = useRouter();
   const [open, setOpen] = useState(false);
-  const navGroups = getNavGroups(user.role);
+  const navGroups = getNavGroups(user.role, services);
 
   async function handleLogout() {
     const supabase = createClient();
