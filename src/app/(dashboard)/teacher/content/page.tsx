@@ -1,12 +1,9 @@
-import { requireRole } from '@/lib/auth/helpers';
 import { Topbar } from '@/components/layout/topbar';
-import { fetchContentData } from '@/lib/dashboard/queries';
 import { ContentClient } from '@/components/dashboard/content-client';
+import { getContentPageData } from '@/lib/dashboard/page-data';
 
-export default async function ContentPage() {
-  const user = await requireRole(['teacher', 'admin', 'boss']);
-  const levels = await fetchContentData();
-
+export default async function TeacherContentPage() {
+  const { user, levels } = await getContentPageData(['teacher', 'admin', 'boss']);
   return (
     <>
       <Topbar user={user} title="콘텐츠 관리" />

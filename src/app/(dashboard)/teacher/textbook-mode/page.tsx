@@ -1,12 +1,9 @@
-import { requireRole } from '@/lib/auth/helpers';
 import { Topbar } from '@/components/layout/topbar';
-import { fetchTextbookData } from '@/lib/dashboard/queries';
 import { TextbookModeClient } from '@/components/dashboard/textbook-mode-client';
+import { getTextbookModePageData } from '@/lib/dashboard/page-data';
 
-export default async function TextbookModePage() {
-  const user = await requireRole(['teacher', 'admin', 'boss']);
-  const passages = await fetchTextbookData();
-
+export default async function TeacherTextbookModePage() {
+  const { user, passages } = await getTextbookModePageData(['teacher', 'admin', 'boss']);
   return (
     <>
       <Topbar user={user} title="교과서 모드 관리" />

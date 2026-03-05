@@ -10,70 +10,26 @@ import { cn } from '@/lib/utils';
 import { toast } from 'sonner';
 import type { NaesinProblemSheet, NaesinProblemQuestion } from '@/types/database';
 
-interface ProblemTabProps {
-  sheets: NaesinProblemSheet[];
-  unitId: string;
-  onStageComplete?: () => void;
-}
-
-export function ProblemTab({ sheets, unitId, onStageComplete }: ProblemTabProps) {
-  const [activeSheetId, setActiveSheetId] = useState<string | null>(sheets[0]?.id || null);
-
-  if (sheets.length === 0) {
-    return (
-      <p className="text-center text-muted-foreground py-8">
-        등록된 문제지가 없습니다.
-      </p>
-    );
-  }
-
-  const activeSheet = sheets.find((s) => s.id === activeSheetId) || sheets[0];
+function SubjectiveInput({ onSubmit, disabled }: { onSubmit: (answer: string) => void; disabled: boolean }) {
+  const [answer, setAnswer] = useState('');
 
   return (
-    <div className="space-y-4">
-      {sheets.length > 1 && (
-        <div className="flex gap-2 overflow-x-auto pb-2">
-          {sheets.map((sheet) => (
-            <button
-              key={sheet.id}
-              onClick={() => setActiveSheetId(sheet.id)}
-              className={cn(
-                'shrink-0 px-3 py-1.5 text-sm rounded-full border transition-colors',
-                activeSheetId === sheet.id
-                  ? 'bg-primary text-primary-foreground border-primary'
-                  : 'bg-card hover:bg-muted border-border'
-              )}
-            >
-              {sheet.title}
-            </button>
-          ))}
-        </div>
-      )}
-
-      {activeSheet.mode === 'interactive' ? (
-        <InteractiveProblemView
-          key={activeSheet.id}
-          sheet={activeSheet}
-          unitId={unitId}
-          onComplete={onStageComplete}
-        />
-      ) : (
-        <ImageAnswerView
-          key={activeSheet.id}
-          sheet={activeSheet}
-          unitId={unitId}
-          onComplete={onStageComplete}
-        />
-      )}
+    <div className="flex gap-2 max-w-lg mx-auto">
+      <Input
+        value={answer}
+        onChange={(e) => setAnswer(e.target.value)}
+        placeholder="답을 입력하세요"
+        disabled={disabled}
+        className="flex-1"
+      />
+      <Button onClick={() => onSubmit(answer)} disabled={disabled || !answer.trim()}>
+        제출
+      </Button>
     </div>
   );
 }
 
-// ============================================
-// Mode A: Interactive (parsed questions)
-// ============================================
-
-function InteractiveProblemView({
+export function InteractiveProblemView({
   sheet,
   unitId,
   onComplete,
@@ -110,7 +66,6 @@ function InteractiveProblemView({
     }
 
     if (currentIndex === questions.length - 1) {
-      const finalCorrect = correct ? score.correct + 1 : score.correct;
       submitResults(
         questions.map((_, i) => i === currentIndex ? answer : ''),
         questions.length
@@ -256,148 +211,6 @@ function InteractiveProblemView({
             </p>
           </CardContent>
         </Card>
-      )}
-    </div>
-  );
-}
-
-function SubjectiveInput({ onSubmit, disabled }: { onSubmit: (answer: string) => void; disabled: boolean }) {
-  const [answer, setAnswer] = useState('');
-
-  return (
-    <div className="flex gap-2 max-w-lg mx-auto">
-      <Input
-        value={answer}
-        onChange={(e) => setAnswer(e.target.value)}
-        placeholder="답을 입력하세요"
-        disabled={disabled}
-        className="flex-1"
-      />
-      <Button onClick={() => onSubmit(answer)} disabled={disabled || !answer.trim()}>
-        제출
-      </Button>
-    </div>
-  );
-}
-
-// ============================================
-// Mode B: Image + Answer Key
-// ============================================
-
-function ImageAnswerView({
-  sheet,
-  unitId,
-  onComplete,
-}: {
-  sheet: NaesinProblemSheet;
-  unitId: string;
-  onComplete?: () => void;
-}) {
-  const totalQuestions = sheet.answer_key.length;
-  const [answers, setAnswers] = useState<Record<number, string>>({});
-  const [results, setResults] = useState<{ score: number; wrongAnswers: { number: number; userAnswer: string | number; correctAnswer: string | number }[] } | null>(null);
-  const [submitting, setSubmitting] = useState(false);
-
-  async function handleSubmit() {
-    setSubmitting(true);
-    const answerArray = Array.from({ length: totalQuestions }, (_, i) => answers[i] || '');
-
-    try {
-      const res = await fetch('/api/naesin/problems/submit', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          sheetId: sheet.id,
-          unitId,
-          answers: answerArray,
-          totalQuestions,
-        }),
-      });
-      const data = await res.json();
-      setResults({ score: data.score, wrongAnswers: data.wrongAnswers });
-      if (data.score >= 80) {
-        toast.success('문제풀이를 완료했습니다!');
-        onComplete?.();
-      }
-    } catch {
-      toast.error('제출 중 오류가 발생했습니다');
-    } finally {
-      setSubmitting(false);
-    }
-  }
-
-  return (
-    <div className="space-y-6">
-      {sheet.pdf_url && (
-        <div className="border rounded-lg overflow-hidden">
-          <iframe
-            src={sheet.pdf_url}
-            className="w-full h-[500px]"
-            title={sheet.title}
-          />
-        </div>
-      )}
-
-      {!results ? (
-        <>
-          <div className="space-y-3">
-            <p className="text-sm font-medium">답 입력 ({totalQuestions}문항)</p>
-            <div className="grid grid-cols-5 gap-2">
-              {Array.from({ length: totalQuestions }, (_, i) => (
-                <div key={i} className="flex items-center gap-1">
-                  <span className="text-xs text-muted-foreground w-5">{i + 1}</span>
-                  <Input
-                    className="h-8 text-sm text-center"
-                    value={answers[i] || ''}
-                    onChange={(e) => setAnswers({ ...answers, [i]: e.target.value })}
-                    placeholder="-"
-                  />
-                </div>
-              ))}
-            </div>
-          </div>
-          <Button onClick={handleSubmit} className="w-full" disabled={submitting}>
-            {submitting ? '채점 중...' : '제출하기'}
-          </Button>
-        </>
-      ) : (
-        <div className="space-y-4">
-          <div className="text-center">
-            <p className={cn(
-              'text-5xl font-bold',
-              results.score >= 80 ? 'text-green-600' : results.score >= 50 ? 'text-yellow-600' : 'text-red-600'
-            )}>
-              {results.score}점
-            </p>
-          </div>
-
-          {results.wrongAnswers.length > 0 && (
-            <>
-              <Card>
-                <CardContent className="py-4">
-                  <p className="font-medium text-red-600 mb-2">틀린 문제 ({results.wrongAnswers.length}개)</p>
-                  <div className="grid grid-cols-2 gap-2 text-sm">
-                    {results.wrongAnswers.map((w) => (
-                      <div key={w.number} className="flex gap-2">
-                        <span className="font-medium">#{w.number}</span>
-                        <span className="text-red-500">{w.userAnswer || '-'}</span>
-                        <span className="text-green-600">({w.correctAnswer})</span>
-                      </div>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
-              <div className="flex items-center gap-2 text-sm text-red-600 bg-red-50 rounded-lg px-3 py-2">
-                <AlertTriangle className="h-4 w-4 shrink-0" />
-                오답이 기록되었습니다.
-              </div>
-            </>
-          )}
-
-          <Button variant="outline" className="w-full" onClick={() => { setResults(null); setAnswers({}); }}>
-            다시 풀기
-          </Button>
-        </div>
       )}
     </div>
   );

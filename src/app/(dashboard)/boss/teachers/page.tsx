@@ -1,12 +1,9 @@
-import { requireRole } from '@/lib/auth/helpers';
 import { Topbar } from '@/components/layout/topbar';
-import { fetchTeachersList } from '@/lib/dashboard/queries';
 import { TeachersClient } from '@/components/dashboard/teachers-client';
+import { getTeachersPageData } from '@/lib/dashboard/page-data';
 
 export default async function BossTeachersPage() {
-  const user = await requireRole(['boss']);
-  const teachers = await fetchTeachersList(user.academy_id);
-
+  const { user, teachers } = await getTeachersPageData(['boss']);
   return (
     <>
       <Topbar user={user} title="선생님 관리" />

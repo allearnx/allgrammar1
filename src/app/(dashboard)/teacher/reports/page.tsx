@@ -1,12 +1,9 @@
-import { requireRole } from '@/lib/auth/helpers';
 import { Topbar } from '@/components/layout/topbar';
-import { fetchStudentsList } from '@/lib/dashboard/queries';
 import { ReportsClient } from '@/components/dashboard/reports-client';
+import { getReportsPageData } from '@/lib/dashboard/page-data';
 
-export default async function ReportsPage() {
-  const user = await requireRole(['teacher', 'admin', 'boss']);
-  const students = await fetchStudentsList(user.academy_id);
-
+export default async function TeacherReportsPage() {
+  const { user, students } = await getReportsPageData(['teacher', 'admin', 'boss']);
   return (
     <>
       <Topbar user={user} title="리포트" />
