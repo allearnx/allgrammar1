@@ -14,12 +14,13 @@ import {
   ChevronDown,
   ChevronRight,
   Pencil,
+  Brain,
 } from 'lucide-react';
 import { toast } from 'sonner';
 import type { NaesinVocabulary, NaesinGrammarLesson } from '@/types/database';
 import { ConfirmDialog } from '@/components/shared/confirm-dialog';
 import { AddVocabDialog, BulkVocabUpload, PdfVocabExtract } from './vocab-dialogs';
-import { AddPassageDialog, AddGrammarDialog, AddOmrDialog } from './content-dialogs';
+import { AddPassageDialog, AddGrammarDialog, AddOmrDialog, AddProblemDialog, AddLastReviewDialog } from './content-dialogs';
 import { CreateQuizSetFromSelection, VocabQuizSetManager } from './quiz-set-manager';
 
 export function UnitContentManager({ unitId }: { unitId: string }) {
@@ -34,6 +35,8 @@ export function UnitContentManager({ unitId }: { unitId: string }) {
   const [passageCount, setPassageCount] = useState<number | null>(null);
   const [grammarCount, setGrammarCount] = useState<number | null>(null);
   const [omrCount, setOmrCount] = useState<number | null>(null);
+  const [problemCount, setProblemCount] = useState<number | null>(null);
+  const [lastReviewCount, setLastReviewCount] = useState<number | null>(null);
   // Grammar lesson management
   const [grammarList, setGrammarList] = useState<NaesinGrammarLesson[]>([]);
   const [showGrammarList, setShowGrammarList] = useState(false);
@@ -49,17 +52,21 @@ export function UnitContentManager({ unitId }: { unitId: string }) {
     try {
       const { createClient } = await import('@/lib/supabase/client');
       const supabase = createClient();
-      const [v, p, g, o] = await Promise.all([
+      const [v, p, g, o, prob, lr] = await Promise.all([
         supabase.from('naesin_vocabulary').select('*').eq('unit_id', unitId).order('sort_order'),
         supabase.from('naesin_passages').select('*', { count: 'exact', head: true }).eq('unit_id', unitId),
         supabase.from('naesin_grammar_lessons').select('*').eq('unit_id', unitId).order('sort_order'),
         supabase.from('naesin_omr_sheets').select('*', { count: 'exact', head: true }).eq('unit_id', unitId),
+        supabase.from('naesin_problem_sheets').select('*', { count: 'exact', head: true }).eq('unit_id', unitId).eq('category', 'problem'),
+        supabase.from('naesin_last_review_content').select('*', { count: 'exact', head: true }).eq('unit_id', unitId),
       ]);
       setVocabList((v.data as NaesinVocabulary[]) || []);
       setPassageCount(p.count ?? 0);
       setGrammarList((g.data as NaesinGrammarLesson[]) || []);
       setGrammarCount(g.data?.length ?? 0);
       setOmrCount(o.count ?? 0);
+      setProblemCount(prob.count ?? 0);
+      setLastReviewCount(lr.count ?? 0);
       setSelectedIds(new Set());
     } catch {
       toast.error('데이터를 불러오지 못했습니다');
@@ -222,6 +229,8 @@ export function UnitContentManager({ unitId }: { unitId: string }) {
     { label: '교과서 지문', icon: FileText, count: passageCount, color: 'text-orange-500' },
     { label: '문법 설명', icon: GraduationCap, count: grammarCount, color: 'text-green-500', toggle: () => setShowGrammarList(!showGrammarList), expanded: showGrammarList },
     { label: 'OMR 시트', icon: ClipboardList, count: omrCount, color: 'text-purple-500' },
+    { label: '문제풀이', icon: ClipboardList, count: problemCount, color: 'text-red-500' },
+    { label: '직전보강', icon: Brain, count: lastReviewCount, color: 'text-amber-500' },
   ];
 
   return (
@@ -393,6 +402,8 @@ export function UnitContentManager({ unitId }: { unitId: string }) {
         <AddPassageDialog unitId={unitId} onAdd={loadCounts} />
         <AddGrammarDialog unitId={unitId} onAdd={loadCounts} />
         <AddOmrDialog unitId={unitId} onAdd={loadCounts} />
+        <AddProblemDialog unitId={unitId} onAdd={loadCounts} />
+        <AddLastReviewDialog unitId={unitId} onAdd={loadCounts} />
       </div>
 
       <ConfirmDialog
