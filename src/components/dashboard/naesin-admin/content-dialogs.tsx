@@ -147,12 +147,39 @@ export function AddPassageDialog({ unitId, onAdd }: { unitId: string; onAdd: () 
   const [blanksMedium, setBlanksMedium] = useState<BlankItem[] | null>(null);
   const [blanksHard, setBlanksHard] = useState<BlankItem[] | null>(null);
   const [saving, setSaving] = useState(false);
+  const [extractingText, setExtractingText] = useState(false);
+
+  async function handleTextPdfUpload(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setExtractingText(true);
+    try {
+      const formData = new FormData();
+      formData.append('file', file);
+      const res = await fetch('/api/naesin/passages/extract-text', {
+        method: 'POST',
+        body: formData,
+      });
+      if (!res.ok) {
+        const err = await res.json().catch(() => null);
+        throw new Error(err?.error || '추출 실패');
+      }
+      const data = await res.json();
+      if (data.title) setTitle(data.title);
+      if (data.original_text) setOriginalText(data.original_text);
+      if (data.korean_translation) setKoreanTranslation(data.korean_translation);
+      toast.success('본문이 추출되었습니다. 내용을 확인/수정해주세요.');
+    } catch (err) {
+      toast.error(err instanceof Error ? err.message : 'PDF 추출 실패');
+    } finally {
+      setExtractingText(false);
+    }
+  }
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setSaving(true);
     try {
-      // Use PDF-extracted blanks if available, otherwise auto-generate Easy
       let finalBlanksEasy = blanksEasy;
       if (!finalBlanksEasy) {
         const words = originalText.split(/\s+/);
@@ -162,7 +189,6 @@ export function AddPassageDialog({ unitId, onAdd }: { unitId: string; onAdd: () 
           .slice(0, 10);
       }
 
-      // Auto-generate sentences
       const originalSentences = originalText.split(/[.!?]+/).filter((s) => s.trim());
       const koreanSentences = koreanTranslation.split(/[.!?。]+/).filter((s) => s.trim());
       const sentences = originalSentences.map((s, i) => ({
@@ -216,6 +242,24 @@ export function AddPassageDialog({ unitId, onAdd }: { unitId: string; onAdd: () 
       <DialogContent className="max-w-lg max-h-[85vh] overflow-y-auto">
         <DialogHeader><DialogTitle>교과서 지문 추가</DialogTitle></DialogHeader>
         <form onSubmit={handleSubmit} className="space-y-3">
+          <div className="rounded-md border border-dashed p-3 text-center">
+            <input type="file" accept=".pdf" className="hidden" id="pdf-text-extract" onChange={handleTextPdfUpload} disabled={extractingText} />
+            <Button
+              type="button"
+              variant="ghost"
+              size="sm"
+              disabled={extractingText}
+              onClick={() => document.getElementById('pdf-text-extract')?.click()}
+            >
+              {extractingText ? (
+                <><Loader2 className="h-4 w-4 mr-1.5 animate-spin" />본문 추출 중...</>
+              ) : (
+                <><Upload className="h-4 w-4 mr-1.5" />PDF에서 본문 추출</>
+              )}
+            </Button>
+            <p className="text-xs text-muted-foreground mt-1">또는 아래에 직접 입력</p>
+          </div>
+
           <div>
             <Label htmlFor="passage-title">제목</Label>
             <Input id="passage-title" value={title} onChange={(e) => setTitle(e.target.value)} placeholder="본문 1" required />
