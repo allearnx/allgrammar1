@@ -32,7 +32,9 @@ export function UnitContentManager({ unitId }: { unitId: string }) {
   const [editForm, setEditForm] = useState({ front_text: '', back_text: '', part_of_speech: '', example_sentence: '', synonyms: '', antonyms: '' });
   const [deleteVocabId, setDeleteVocabId] = useState<string | null>(null);
   const [bulkDeleteOpen, setBulkDeleteOpen] = useState(false);
-  const [passageCount, setPassageCount] = useState<number | null>(null);
+  const [passageList, setPassageList] = useState<{ id: string; title: string }[]>([]);
+  const [showPassageList, setShowPassageList] = useState(false);
+  const [deletePassageId, setDeletePassageId] = useState<string | null>(null);
   const [grammarCount, setGrammarCount] = useState<number | null>(null);
   const [omrCount, setOmrCount] = useState<number | null>(null);
   const [problemCount, setProblemCount] = useState<number | null>(null);
@@ -54,14 +56,14 @@ export function UnitContentManager({ unitId }: { unitId: string }) {
       const supabase = createClient();
       const [v, p, g, o, prob, lr] = await Promise.all([
         supabase.from('naesin_vocabulary').select('*').eq('unit_id', unitId).order('sort_order'),
-        supabase.from('naesin_passages').select('*', { count: 'exact', head: true }).eq('unit_id', unitId),
+        supabase.from('naesin_passages').select('id, title').eq('unit_id', unitId).order('created_at'),
         supabase.from('naesin_grammar_lessons').select('*').eq('unit_id', unitId).order('sort_order'),
         supabase.from('naesin_omr_sheets').select('*', { count: 'exact', head: true }).eq('unit_id', unitId),
         supabase.from('naesin_problem_sheets').select('*', { count: 'exact', head: true }).eq('unit_id', unitId).eq('category', 'problem'),
         supabase.from('naesin_last_review_content').select('*', { count: 'exact', head: true }).eq('unit_id', unitId),
       ]);
       setVocabList((v.data as NaesinVocabulary[]) || []);
-      setPassageCount(p.count ?? 0);
+      setPassageList((p.data as { id: string; title: string }[]) || []);
       setGrammarList((g.data as NaesinGrammarLesson[]) || []);
       setGrammarCount(g.data?.length ?? 0);
       setOmrCount(o.count ?? 0);
@@ -205,6 +207,24 @@ export function UnitContentManager({ unitId }: { unitId: string }) {
     }
   }
 
+  async function handleDeletePassage(id: string) {
+    try {
+      const res = await fetch('/api/naesin/passages', {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id }),
+      });
+      if (res.ok) {
+        setPassageList((prev) => prev.filter((p) => p.id !== id));
+        toast.success('지문이 삭제되었습니다');
+      } else {
+        toast.error('삭제 실패');
+      }
+    } catch {
+      toast.error('지문 삭제 중 오류가 발생했습니다');
+    }
+  }
+
   async function handleDeleteGrammar(id: string) {
     try {
       const res = await fetch('/api/naesin/grammar-lessons', {
@@ -226,7 +246,7 @@ export function UnitContentManager({ unitId }: { unitId: string }) {
 
   const sections = [
     { label: '단어', icon: BookOpen, count: vocabList.length, color: 'text-blue-500', toggle: () => setShowVocabList(!showVocabList), expanded: showVocabList },
-    { label: '교과서 지문', icon: FileText, count: passageCount, color: 'text-orange-500' },
+    { label: '교과서 지문', icon: FileText, count: passageList.length, color: 'text-orange-500', toggle: () => setShowPassageList(!showPassageList), expanded: showPassageList },
     { label: '문법 설명', icon: GraduationCap, count: grammarCount, color: 'text-green-500', toggle: () => setShowGrammarList(!showGrammarList), expanded: showGrammarList },
     { label: 'OMR 시트', icon: ClipboardList, count: omrCount, color: 'text-purple-500' },
     { label: '문제풀이', icon: ClipboardList, count: problemCount, color: 'text-red-500' },
@@ -344,6 +364,27 @@ export function UnitContentManager({ unitId }: { unitId: string }) {
 
       <VocabQuizSetManager unitId={unitId} />
 
+      {/* 교과서 지문 목록 */}
+      {showPassageList && passageList.length > 0 && (
+        <div className="space-y-1 rounded-lg border p-2">
+          {passageList.map((passage) => (
+            <div key={passage.id} className="flex items-center gap-2 py-1.5 px-2 rounded hover:bg-muted/50 group">
+              <FileText className="h-3.5 w-3.5 text-orange-500 shrink-0" />
+              <span className="text-sm flex-1 truncate">{passage.title}</span>
+              <Button
+                variant="ghost"
+                size="icon"
+                className="h-6 w-6 opacity-0 group-hover:opacity-100"
+                onClick={() => setDeletePassageId(passage.id)}
+                aria-label="삭제"
+              >
+                <Trash2 className="h-3.5 w-3.5 text-destructive" />
+              </Button>
+            </div>
+          ))}
+        </div>
+      )}
+
       {/* 문법 설명 목록 */}
       {showGrammarList && grammarList.length > 0 && (
         <div className="space-y-1 rounded-lg border p-2">
@@ -424,6 +465,17 @@ export function UnitContentManager({ unitId }: { unitId: string }) {
         onConfirm={() => {
           setBulkDeleteOpen(false);
           handleBulkDelete();
+        }}
+      />
+
+      <ConfirmDialog
+        open={deletePassageId !== null}
+        onOpenChange={(open) => { if (!open) setDeletePassageId(null); }}
+        description="이 지문을 삭제하시겠습니까? 관련된 빈칸/배열/영작 데이터도 함께 삭제됩니다."
+        onConfirm={() => {
+          const id = deletePassageId;
+          setDeletePassageId(null);
+          if (id) handleDeletePassage(id);
         }}
       />
 
