@@ -13,26 +13,154 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
-import { FileText, GraduationCap, ClipboardList, Brain } from 'lucide-react';
+import { FileText, GraduationCap, ClipboardList, Brain, Upload, Loader2, Check, Wand2, X } from 'lucide-react';
 import { toast } from 'sonner';
+import type { BlankItem } from '@/types/textbook';
+
+type DifficultyKey = 'easy' | 'medium' | 'hard';
+
+const AUTO_INTERVAL: Record<DifficultyKey, number> = { easy: 5, medium: 3, hard: 2 };
+const DIFFICULTY_LABEL: Record<DifficultyKey, string> = { easy: 'Easy', medium: 'Medium', hard: 'Hard' };
+
+function generateAutoBlanks(originalText: string, difficulty: DifficultyKey): BlankItem[] {
+  const words = originalText.trim().split(/\s+/);
+  const interval = AUTO_INTERVAL[difficulty];
+  return words
+    .map((w, i) => ({ index: i, answer: w }))
+    .filter((_, i) => i % interval === interval - 1);
+}
+
+function BlankConfigurator({
+  difficulty,
+  originalText,
+  blanks,
+  onUpdate,
+}: {
+  difficulty: DifficultyKey;
+  originalText: string;
+  blanks: BlankItem[] | null;
+  onUpdate: (blanks: BlankItem[] | null) => void;
+}) {
+  const [extracting, setExtracting] = useState(false);
+  const label = DIFFICULTY_LABEL[difficulty];
+
+  async function handlePdfUpload(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    if (!originalText.trim()) {
+      toast.error('영어 원문을 먼저 입력해주세요.');
+      return;
+    }
+
+    setExtracting(true);
+    try {
+      const formData = new FormData();
+      formData.append('file', file);
+      formData.append('original_text', originalText);
+
+      const res = await fetch('/api/naesin/passages/extract-blanks', {
+        method: 'POST',
+        body: formData,
+      });
+      if (!res.ok) {
+        const err = await res.json().catch(() => null);
+        throw new Error(err?.error || '추출 실패');
+      }
+      const data = await res.json();
+      onUpdate(data.blanks);
+      toast.success(`${label}: ${data.blanks.length}개 빈칸 추출됨`);
+    } catch (err) {
+      toast.error(err instanceof Error ? err.message : 'PDF 추출 실패');
+    } finally {
+      setExtracting(false);
+    }
+  }
+
+  function handleAutoGenerate() {
+    if (!originalText.trim()) {
+      toast.error('영어 원문을 먼저 입력해주세요.');
+      return;
+    }
+    const generated = generateAutoBlanks(originalText, difficulty);
+    onUpdate(generated);
+    toast.success(`${label}: ${generated.length}개 빈칸 자동 생성됨`);
+  }
+
+  const hasOriginal = originalText.trim().length > 0;
+
+  return (
+    <div className="flex items-center gap-1.5">
+      <span className="min-w-[52px] text-xs font-medium">{label}</span>
+      <Button
+        type="button"
+        variant="outline"
+        size="sm"
+        className="h-7 text-xs"
+        disabled={!hasOriginal}
+        onClick={handleAutoGenerate}
+      >
+        <Wand2 className="h-3 w-3 mr-1" />자동
+      </Button>
+      <input
+        type="file"
+        accept=".pdf"
+        className="hidden"
+        id={`pdf-${difficulty}`}
+        onChange={handlePdfUpload}
+        disabled={extracting || !hasOriginal}
+      />
+      <Button
+        type="button"
+        variant="outline"
+        size="sm"
+        className="h-7 text-xs"
+        disabled={extracting || !hasOriginal}
+        onClick={() => document.getElementById(`pdf-${difficulty}`)?.click()}
+      >
+        {extracting ? (
+          <><Loader2 className="h-3 w-3 mr-1 animate-spin" />추출 중...</>
+        ) : (
+          <><Upload className="h-3 w-3 mr-1" />PDF</>
+        )}
+      </Button>
+      {blanks ? (
+        <span className="text-xs text-green-600 flex items-center gap-0.5 whitespace-nowrap">
+          <Check className="h-3 w-3" />{blanks.length}개
+          <button type="button" className="ml-0.5 text-muted-foreground hover:text-destructive" onClick={() => onUpdate(null)}>
+            <X className="h-3 w-3" />
+          </button>
+        </span>
+      ) : (
+        <span className="text-xs text-muted-foreground">미설정</span>
+      )}
+    </div>
+  );
+}
 
 export function AddPassageDialog({ unitId, onAdd }: { unitId: string; onAdd: () => void }) {
   const [open, setOpen] = useState(false);
   const [title, setTitle] = useState('');
   const [originalText, setOriginalText] = useState('');
   const [koreanTranslation, setKoreanTranslation] = useState('');
+  const [blanksEasy, setBlanksEasy] = useState<BlankItem[] | null>(null);
+  const [blanksMedium, setBlanksMedium] = useState<BlankItem[] | null>(null);
+  const [blanksHard, setBlanksHard] = useState<BlankItem[] | null>(null);
   const [saving, setSaving] = useState(false);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setSaving(true);
     try {
-      // Auto-generate simple blanks from the text
-      const words = originalText.split(/\s+/);
-      const blanksEasy = words
-        .map((w, i) => ({ index: i, answer: w }))
-        .filter((_, i) => i % 5 === 2) // every 5th word
-        .slice(0, 10);
+      // Use PDF-extracted blanks if available, otherwise auto-generate Easy
+      let finalBlanksEasy = blanksEasy;
+      if (!finalBlanksEasy) {
+        const words = originalText.split(/\s+/);
+        finalBlanksEasy = words
+          .map((w, i) => ({ index: i, answer: w }))
+          .filter((_, i) => i % 5 === 2)
+          .slice(0, 10);
+      }
 
       // Auto-generate sentences
       const originalSentences = originalText.split(/[.!?]+/).filter((s) => s.trim());
@@ -51,7 +179,9 @@ export function AddPassageDialog({ unitId, onAdd }: { unitId: string; onAdd: () 
           title,
           original_text: originalText,
           korean_translation: koreanTranslation,
-          blanks_easy: blanksEasy.length > 0 ? blanksEasy : null,
+          blanks_easy: finalBlanksEasy.length > 0 ? finalBlanksEasy : null,
+          blanks_medium: blanksMedium,
+          blanks_hard: blanksHard,
           sentences: sentences.length > 0 ? sentences : null,
         }),
       });
@@ -64,6 +194,9 @@ export function AddPassageDialog({ unitId, onAdd }: { unitId: string; onAdd: () 
       setTitle('');
       setOriginalText('');
       setKoreanTranslation('');
+      setBlanksEasy(null);
+      setBlanksMedium(null);
+      setBlanksHard(null);
       toast.success('지문이 추가되었습니다');
     } catch {
       toast.error('지문 추가 실패');
@@ -95,7 +228,18 @@ export function AddPassageDialog({ unitId, onAdd }: { unitId: string; onAdd: () 
             <Label htmlFor="passage-korean">한국어 번역</Label>
             <Textarea id="passage-korean" value={koreanTranslation} onChange={(e) => setKoreanTranslation(e.target.value)} rows={4} required />
           </div>
-          <p className="text-xs text-muted-foreground">빈칸과 문장 배열은 원문에서 자동 생성됩니다.</p>
+
+          <div className="space-y-2 rounded-md border p-3">
+            <p className="text-xs font-medium">빈칸 설정</p>
+            <p className="text-xs text-muted-foreground">난이도별로 자동 생성 또는 PDF에서 추출할 수 있습니다.</p>
+            <BlankConfigurator difficulty="easy" originalText={originalText} blanks={blanksEasy} onUpdate={setBlanksEasy} />
+            <BlankConfigurator difficulty="medium" originalText={originalText} blanks={blanksMedium} onUpdate={setBlanksMedium} />
+            <BlankConfigurator difficulty="hard" originalText={originalText} blanks={blanksHard} onUpdate={setBlanksHard} />
+            {!blanksEasy && !blanksMedium && !blanksHard && (
+              <p className="text-xs text-muted-foreground">미설정 시 Easy 빈칸은 자동 생성됩니다.</p>
+            )}
+          </div>
+
           <Button type="submit" className="w-full" disabled={saving}>
             {saving ? '저장 중...' : '추가'}
           </Button>
