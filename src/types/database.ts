@@ -9,3 +9,4 @@ export * from './memory';
 export * from './textbook';
 export * from './naesin';
 export * from './voca';
+export * from './report';
