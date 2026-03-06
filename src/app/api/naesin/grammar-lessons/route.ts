@@ -1,8 +1,13 @@
 import { NextResponse } from 'next/server';
 import { createApiHandler } from '@/lib/api';
 import { grammarLessonCreateSchema, idSchema } from '@/lib/api/schemas';
+import { z } from 'zod';
 
 const ADMIN_ROLES = ['teacher', 'admin', 'boss'] as const;
+
+const grammarLessonPatchSchema = z.object({
+  id: z.string().max(100),
+}).passthrough();
 
 export const POST = createApiHandler(
   { roles: [...ADMIN_ROLES], schema: grammarLessonCreateSchema },
@@ -22,6 +27,21 @@ export const POST = createApiHandler(
       .select()
       .single();
 
+    if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+    return NextResponse.json(data);
+  }
+);
+
+export const PATCH = createApiHandler(
+  { roles: [...ADMIN_ROLES], schema: grammarLessonPatchSchema },
+  async ({ body, supabase }) => {
+    const { id, ...updates } = body as Record<string, unknown>;
+    const { data, error } = await supabase
+      .from('naesin_grammar_lessons')
+      .update(updates)
+      .eq('id', id)
+      .select()
+      .single();
     if (error) return NextResponse.json({ error: error.message }, { status: 500 });
     return NextResponse.json(data);
   }

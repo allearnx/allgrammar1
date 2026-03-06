@@ -16,7 +16,7 @@ import {
   Pencil,
 } from 'lucide-react';
 import { toast } from 'sonner';
-import type { NaesinVocabulary } from '@/types/database';
+import type { NaesinVocabulary, NaesinGrammarLesson } from '@/types/database';
 import { ConfirmDialog } from '@/components/shared/confirm-dialog';
 import { AddVocabDialog, BulkVocabUpload, PdfVocabExtract } from './vocab-dialogs';
 import { AddPassageDialog, AddGrammarDialog, AddOmrDialog } from './content-dialogs';
@@ -34,6 +34,12 @@ export function UnitContentManager({ unitId }: { unitId: string }) {
   const [passageCount, setPassageCount] = useState<number | null>(null);
   const [grammarCount, setGrammarCount] = useState<number | null>(null);
   const [omrCount, setOmrCount] = useState<number | null>(null);
+  // Grammar lesson management
+  const [grammarList, setGrammarList] = useState<NaesinGrammarLesson[]>([]);
+  const [showGrammarList, setShowGrammarList] = useState(false);
+  const [deleteGrammarId, setDeleteGrammarId] = useState<string | null>(null);
+  const [editingGrammarId, setEditingGrammarId] = useState<string | null>(null);
+  const [grammarEditForm, setGrammarEditForm] = useState({ title: '', youtube_url: '', text_content: '' });
 
   useEffect(() => {
     loadCounts();
@@ -46,12 +52,13 @@ export function UnitContentManager({ unitId }: { unitId: string }) {
       const [v, p, g, o] = await Promise.all([
         supabase.from('naesin_vocabulary').select('*').eq('unit_id', unitId).order('sort_order'),
         supabase.from('naesin_passages').select('*', { count: 'exact', head: true }).eq('unit_id', unitId),
-        supabase.from('naesin_grammar_lessons').select('*', { count: 'exact', head: true }).eq('unit_id', unitId),
+        supabase.from('naesin_grammar_lessons').select('*').eq('unit_id', unitId).order('sort_order'),
         supabase.from('naesin_omr_sheets').select('*', { count: 'exact', head: true }).eq('unit_id', unitId),
       ]);
       setVocabList((v.data as NaesinVocabulary[]) || []);
       setPassageCount(p.count ?? 0);
-      setGrammarCount(g.count ?? 0);
+      setGrammarList((g.data as NaesinGrammarLesson[]) || []);
+      setGrammarCount(g.data?.length ?? 0);
       setOmrCount(o.count ?? 0);
       setSelectedIds(new Set());
     } catch {
@@ -151,10 +158,69 @@ export function UnitContentManager({ unitId }: { unitId: string }) {
     }
   }
 
+  function startGrammarEdit(lesson: NaesinGrammarLesson) {
+    setEditingGrammarId(lesson.id);
+    setGrammarEditForm({
+      title: lesson.title,
+      youtube_url: lesson.youtube_url || '',
+      text_content: lesson.text_content || '',
+    });
+  }
+
+  async function saveGrammarEdit() {
+    if (!editingGrammarId) return;
+    const lesson = grammarList.find((l) => l.id === editingGrammarId);
+    if (!lesson) return;
+    try {
+      const updates: Record<string, unknown> = { id: editingGrammarId, title: grammarEditForm.title };
+      if (lesson.content_type === 'video') {
+        updates.youtube_url = grammarEditForm.youtube_url || null;
+        const match = grammarEditForm.youtube_url.match(/(?:youtu\.be\/|v=)([^&\s]+)/);
+        updates.youtube_video_id = match ? match[1] : null;
+      } else {
+        updates.text_content = grammarEditForm.text_content || null;
+      }
+      const res = await fetch('/api/naesin/grammar-lessons', {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(updates),
+      });
+      if (res.ok) {
+        const updated = await res.json();
+        setGrammarList((prev) => prev.map((l) => (l.id === editingGrammarId ? updated : l)));
+        setEditingGrammarId(null);
+        toast.success('문법 설명이 수정되었습니다');
+      } else {
+        toast.error('수정 실패');
+      }
+    } catch {
+      toast.error('문법 설명 수정 중 오류가 발생했습니다');
+    }
+  }
+
+  async function handleDeleteGrammar(id: string) {
+    try {
+      const res = await fetch('/api/naesin/grammar-lessons', {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id }),
+      });
+      if (res.ok) {
+        setGrammarList((prev) => prev.filter((l) => l.id !== id));
+        setGrammarCount((prev) => (prev ?? 1) - 1);
+        toast.success('문법 설명이 삭제되었습니다');
+      } else {
+        toast.error('삭제 실패');
+      }
+    } catch {
+      toast.error('문법 설명 삭제 중 오류가 발생했습니다');
+    }
+  }
+
   const sections = [
-    { label: '단어', icon: BookOpen, count: vocabList.length, color: 'text-blue-500', toggle: () => setShowVocabList(!showVocabList) },
+    { label: '단어', icon: BookOpen, count: vocabList.length, color: 'text-blue-500', toggle: () => setShowVocabList(!showVocabList), expanded: showVocabList },
     { label: '교과서 지문', icon: FileText, count: passageCount, color: 'text-orange-500' },
-    { label: '문법 설명', icon: GraduationCap, count: grammarCount, color: 'text-green-500' },
+    { label: '문법 설명', icon: GraduationCap, count: grammarCount, color: 'text-green-500', toggle: () => setShowGrammarList(!showGrammarList), expanded: showGrammarList },
     { label: 'OMR 시트', icon: ClipboardList, count: omrCount, color: 'text-purple-500' },
   ];
 
@@ -172,7 +238,7 @@ export function UnitContentManager({ unitId }: { unitId: string }) {
             <Badge variant="secondary" className="ml-auto">
               {s.count === null ? '...' : s.count}개
             </Badge>
-            {s.toggle && (showVocabList ? <ChevronDown className="h-3 w-3" /> : <ChevronRight className="h-3 w-3" />)}
+            {s.toggle && (s.expanded ? <ChevronDown className="h-3 w-3" /> : <ChevronRight className="h-3 w-3" />)}
           </div>
         ))}
       </div>
@@ -269,6 +335,57 @@ export function UnitContentManager({ unitId }: { unitId: string }) {
 
       <VocabQuizSetManager unitId={unitId} />
 
+      {/* 문법 설명 목록 */}
+      {showGrammarList && grammarList.length > 0 && (
+        <div className="space-y-1 rounded-lg border p-2">
+          {grammarList.map((lesson) => (
+            <div key={lesson.id} className="rounded hover:bg-muted/50">
+              <div className="flex items-center gap-2 py-1.5 px-2 group">
+                <Badge variant="outline" className="text-[10px] h-4 px-1 shrink-0">
+                  {lesson.content_type === 'video' ? '영상' : '텍스트'}
+                </Badge>
+                <span className="text-sm font-medium flex-1 truncate">{lesson.title}</span>
+                {lesson.youtube_video_id && (
+                  <span className="text-xs text-muted-foreground truncate max-w-[100px]">{lesson.youtube_video_id}</span>
+                )}
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="h-6 w-6 opacity-0 group-hover:opacity-100"
+                  onClick={() => editingGrammarId === lesson.id ? setEditingGrammarId(null) : startGrammarEdit(lesson)}
+                  aria-label="수정"
+                >
+                  <Pencil className="h-3.5 w-3.5" />
+                </Button>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="h-6 w-6 opacity-0 group-hover:opacity-100"
+                  onClick={() => setDeleteGrammarId(lesson.id)}
+                  aria-label="삭제"
+                >
+                  <Trash2 className="h-3.5 w-3.5 text-destructive" />
+                </Button>
+              </div>
+              {editingGrammarId === lesson.id && (
+                <div className="px-2 pb-2 space-y-2">
+                  <Input className="h-7 text-sm" value={grammarEditForm.title} onChange={(e) => setGrammarEditForm({ ...grammarEditForm, title: e.target.value })} placeholder="제목" />
+                  {lesson.content_type === 'video' ? (
+                    <Input className="h-7 text-sm" value={grammarEditForm.youtube_url} onChange={(e) => setGrammarEditForm({ ...grammarEditForm, youtube_url: e.target.value })} placeholder="YouTube URL" />
+                  ) : (
+                    <Input className="h-7 text-sm" value={grammarEditForm.text_content} onChange={(e) => setGrammarEditForm({ ...grammarEditForm, text_content: e.target.value })} placeholder="텍스트 내용" />
+                  )}
+                  <div className="flex gap-2 justify-end">
+                    <Button size="sm" variant="outline" className="h-7" onClick={() => setEditingGrammarId(null)}>취소</Button>
+                    <Button size="sm" className="h-7" onClick={saveGrammarEdit}>저장</Button>
+                  </div>
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      )}
+
       <div className="flex flex-wrap gap-2">
         <AddVocabDialog unitId={unitId} onAdd={loadCounts} />
         <BulkVocabUpload unitId={unitId} onAdd={loadCounts} />
@@ -296,6 +413,17 @@ export function UnitContentManager({ unitId }: { unitId: string }) {
         onConfirm={() => {
           setBulkDeleteOpen(false);
           handleBulkDelete();
+        }}
+      />
+
+      <ConfirmDialog
+        open={deleteGrammarId !== null}
+        onOpenChange={(open) => { if (!open) setDeleteGrammarId(null); }}
+        description="이 문법 설명을 삭제하시겠습니까?"
+        onConfirm={() => {
+          const id = deleteGrammarId;
+          setDeleteGrammarId(null);
+          if (id) handleDeleteGrammar(id);
         }}
       />
     </div>
