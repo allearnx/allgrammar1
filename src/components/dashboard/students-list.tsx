@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
 import { Eye } from 'lucide-react';
 import Link from 'next/link';
+import { ServiceAssignmentToggle } from './service-assignment-toggle';
 import type { AuthUser } from '@/types/auth';
 
 interface Props {
@@ -49,6 +50,24 @@ export async function StudentsList({ user, basePath }: Props) {
     }
   });
 
+  // Fetch service assignments for boss/admin
+  const canManageServices = basePath === '/boss' || basePath === '/admin';
+  let serviceMap: Record<string, string[]> = {};
+
+  if (canManageServices && studentIds.length > 0) {
+    const { data: assignments } = await admin
+      .from('service_assignments')
+      .select('student_id, service')
+      .in('student_id', studentIds);
+
+    if (assignments) {
+      for (const a of assignments) {
+        if (!serviceMap[a.student_id]) serviceMap[a.student_id] = [];
+        serviceMap[a.student_id].push(a.service);
+      }
+    }
+  }
+
   return (
     <div className="p-4 md:p-6 space-y-4">
       <div className="flex items-center justify-between">
@@ -66,7 +85,7 @@ export async function StudentsList({ user, basePath }: Props) {
           return (
             <Card key={student.id}>
               <CardContent className="py-4">
-                <div className="flex items-center justify-between gap-4">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2 mb-1">
                       <span className="font-medium truncate">{student.full_name}</span>
@@ -85,8 +104,17 @@ export async function StudentsList({ user, basePath }: Props) {
                       </div>
                       <Progress value={percent} className="h-1.5" />
                     </div>
+                    {canManageServices && (
+                      <div className="mt-3">
+                        <p className="text-xs text-muted-foreground mb-1.5">서비스 배정</p>
+                        <ServiceAssignmentToggle
+                          studentId={student.id}
+                          assignedServices={serviceMap[student.id] || []}
+                        />
+                      </div>
+                    )}
                   </div>
-                  <Button asChild variant="outline" size="sm">
+                  <Button asChild variant="outline" size="sm" className="shrink-0">
                     <Link href={`${basePath}/students/${student.id}`}>
                       <Eye className="h-4 w-4 mr-1" />
                       상세

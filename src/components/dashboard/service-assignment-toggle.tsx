@@ -1,9 +1,9 @@
 'use client';
 
 import { useState } from 'react';
-import { Badge } from '@/components/ui/badge';
 import { cn } from '@/lib/utils';
 import { toast } from 'sonner';
+import { Check, X } from 'lucide-react';
 
 interface ServiceAssignmentToggleProps {
   studentId: string;
@@ -44,7 +44,8 @@ export function ServiceAssignmentToggle({
         return next;
       });
 
-      toast.success(isAssigned ? `${service} 해제됨` : `${service} 배정됨`);
+      const label = SERVICES.find((s) => s.key === service)?.label || service;
+      toast.success(isAssigned ? `${label} 해제됨` : `${label} 배정됨`);
       onUpdate?.();
     } catch {
       toast.error('서비스 배정 변경에 실패했습니다');
@@ -54,23 +55,28 @@ export function ServiceAssignmentToggle({
   }
 
   return (
-    <div className="flex gap-1">
-      {SERVICES.map((s) => (
-        <Badge
-          key={s.key}
-          variant={assigned.has(s.key) ? 'default' : 'outline'}
-          className={cn(
-            'cursor-pointer text-[10px] select-none transition-colors',
-            loading === s.key && 'opacity-50',
-            assigned.has(s.key)
-              ? 'bg-primary hover:bg-primary/80'
-              : 'hover:bg-muted'
-          )}
-          onClick={() => !loading && toggle(s.key)}
-        >
-          {s.label}
-        </Badge>
-      ))}
+    <div className="flex gap-2">
+      {SERVICES.map((s) => {
+        const active = assigned.has(s.key);
+        return (
+          <button
+            key={s.key}
+            type="button"
+            disabled={loading === s.key}
+            onClick={() => toggle(s.key)}
+            className={cn(
+              'inline-flex items-center gap-1.5 rounded-full px-4 py-1.5 text-sm font-medium transition-all select-none',
+              loading === s.key && 'opacity-50 cursor-wait',
+              active
+                ? 'bg-primary text-primary-foreground shadow-sm hover:bg-primary/90'
+                : 'bg-muted text-muted-foreground hover:bg-muted/80 border border-border'
+            )}
+          >
+            {active ? <Check className="h-3.5 w-3.5" /> : <X className="h-3.5 w-3.5" />}
+            {s.label}
+          </button>
+        );
+      })}
     </div>
   );
 }
