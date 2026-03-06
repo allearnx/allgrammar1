@@ -5,7 +5,7 @@ import { problemSubmitSchema } from '@/lib/api/schemas';
 export const POST = createApiHandler(
   { schema: problemSubmitSchema },
   async ({ user, body, supabase }) => {
-    const { sheetId, unitId, answers, totalQuestions } = body;
+    const { sheetId, unitId, answers, totalQuestions, aiResults } = body;
 
     // Fetch answer key
     const { data: sheet } = await supabase
@@ -18,22 +18,30 @@ export const POST = createApiHandler(
 
     // Grade
     const answerKey = sheet.answer_key as (string | number)[];
+    const questions = sheet.questions as { number: number; question: string; options?: string[] }[];
     let correctCount = 0;
-    const wrongAnswers: { number: number; userAnswer: string | number; correctAnswer: string | number; question?: string }[] = [];
+    const wrongAnswers: { number: number; userAnswer: string | number; correctAnswer: string | number; question?: string; aiFeedback?: { score: number; feedback: string; correctedAnswer: string } }[] = [];
 
     for (let i = 0; i < totalQuestions; i++) {
       const userAnswer = String(answers[i] ?? '').trim().toLowerCase();
       const correctAnswer = String(answerKey[i] ?? '').trim().toLowerCase();
+      const aiResult = aiResults?.[String(i)];
+      const isSubjective = !questions?.[i]?.options || questions[i].options!.length === 0;
 
-      if (userAnswer === correctAnswer) {
+      // Subjective with AI result: score >= 80 = correct
+      const isCorrect = (isSubjective && aiResult)
+        ? aiResult.score >= 80
+        : userAnswer === correctAnswer;
+
+      if (isCorrect) {
         correctCount++;
       } else {
-        const questions = sheet.questions as { number: number; question: string }[];
         wrongAnswers.push({
           number: i + 1,
           userAnswer: (answers[i] as string | number) ?? '',
           correctAnswer: answerKey[i] ?? '',
           question: questions?.[i]?.question,
+          ...(aiResult ? { aiFeedback: aiResult } : {}),
         });
       }
     }

@@ -12,7 +12,6 @@ import {
 import { toast } from 'sonner';
 import { LessonCard } from '@/components/naesin/lesson-card';
 import { ExamCountdown } from '@/components/naesin/exam-countdown';
-import { ExamDatePicker } from '@/components/naesin/exam-date-picker';
 import type {
   NaesinTextbook,
   NaesinStageStatuses,
@@ -27,19 +26,33 @@ interface UnitSummary {
   stageProgress: { vocab: number; passage: number; grammar: number; problem: number };
 }
 
+interface ExamGroup {
+  round: number;
+  label: string;
+  examDate: string | null;
+  units: UnitSummary[];
+}
+
 interface NaesinHomeProps {
   textbooks: NaesinTextbook[];
   selectedTextbook: NaesinTextbook | null;
   units: UnitSummary[];
   examDate?: string | null;
   textbookId?: string | null;
+  examGroups?: ExamGroup[];
 }
 
-export function NaesinHome({ textbooks, selectedTextbook, units, examDate: initialExamDate, textbookId }: NaesinHomeProps) {
+export function NaesinHome({
+  textbooks,
+  selectedTextbook,
+  units,
+  examDate: initialExamDate,
+  textbookId,
+  examGroups = [],
+}: NaesinHomeProps) {
   const router = useRouter();
   const [selecting, setSelecting] = useState(!selectedTextbook);
   const [saving, setSaving] = useState(false);
-  const [examDate, setExamDate] = useState(initialExamDate || null);
 
   async function selectTextbook(tbId: string) {
     setSaving(true);
@@ -129,6 +142,8 @@ export function NaesinHome({ textbooks, selectedTextbook, units, examDate: initi
     );
   }
 
+  const hasExamGroups = examGroups.length > 0;
+
   // Units overview with LessonCard per unit
   return (
     <div className="space-y-6">
@@ -139,43 +154,71 @@ export function NaesinHome({ textbooks, selectedTextbook, units, examDate: initi
             {selectedTextbook.publisher} · 중{selectedTextbook.grade}
           </p>
         </div>
-        <div className="flex gap-2">
-          {textbookId && (
-            <ExamDatePicker
-              textbookId={textbookId}
-              currentDate={examDate}
-              onDateChange={(date) => {
-                setExamDate(date);
-                router.refresh();
-              }}
-            />
-          )}
-          <Button variant="outline" size="sm" onClick={() => setSelecting(true)}>
-            <RefreshCw className="h-4 w-4 mr-1" />
-            교과서 변경
-          </Button>
-        </div>
+        <Button variant="outline" size="sm" onClick={() => setSelecting(true)}>
+          <RefreshCw className="h-4 w-4 mr-1" />
+          교과서 변경
+        </Button>
       </div>
 
-      {examDate && <ExamCountdown examDate={examDate} />}
-
-      {units.length === 0 ? (
-        <p className="text-center text-muted-foreground py-8">
-          등록된 단원이 없습니다.
-        </p>
-      ) : (
-        <div className="space-y-3">
-          {units.map((unit) => (
-            <LessonCard
-              key={unit.id}
-              unitId={unit.id}
-              unitNumber={unit.unit_number}
-              title={unit.title}
-              stages={unit.stageStatuses}
-              stageProgress={unit.stageProgress}
-            />
+      {/* Show exam-grouped view if assignments exist */}
+      {hasExamGroups ? (
+        <div className="space-y-6">
+          {examGroups.map((group) => (
+            <div key={group.round} className="space-y-3">
+              <div className="flex items-center gap-3">
+                <h3 className="text-lg font-semibold">{group.label}</h3>
+                {group.examDate && (
+                  <ExamCountdown examDate={group.examDate} className="flex-1" />
+                )}
+                {!group.examDate && (
+                  <span className="text-sm text-muted-foreground">(시험일 미배정)</span>
+                )}
+              </div>
+              {group.units.length === 0 ? (
+                <p className="text-center text-muted-foreground py-4 text-sm">
+                  배정된 단원이 없습니다.
+                </p>
+              ) : (
+                <div className="space-y-3">
+                  {group.units.map((unit) => (
+                    <LessonCard
+                      key={unit.id}
+                      unitId={unit.id}
+                      unitNumber={unit.unit_number}
+                      title={unit.title}
+                      stages={unit.stageStatuses}
+                      stageProgress={unit.stageProgress}
+                    />
+                  ))}
+                </div>
+              )}
+            </div>
           ))}
         </div>
+      ) : (
+        <>
+          {/* Legacy: flat display when no exam assignments */}
+          {initialExamDate && <ExamCountdown examDate={initialExamDate} />}
+
+          {units.length === 0 ? (
+            <p className="text-center text-muted-foreground py-8">
+              등록된 단원이 없습니다.
+            </p>
+          ) : (
+            <div className="space-y-3">
+              {units.map((unit) => (
+                <LessonCard
+                  key={unit.id}
+                  unitId={unit.id}
+                  unitNumber={unit.unit_number}
+                  title={unit.title}
+                  stages={unit.stageStatuses}
+                  stageProgress={unit.stageProgress}
+                />
+              ))}
+            </div>
+          )}
+        </>
       )}
     </div>
   );

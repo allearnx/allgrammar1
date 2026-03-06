@@ -4,18 +4,28 @@ import { Badge } from '@/components/ui/badge';
 import { notFound } from 'next/navigation';
 import { format } from 'date-fns';
 import type { AuthUser } from '@/types/auth';
+import type { NaesinExamAssignment, NaesinUnit } from '@/types/database';
+import { ExamAssignmentManager } from './exam-assignment-manager';
 
 interface GrammarRelation {
   title: string;
   level?: { level_number: number; title_ko: string } | null;
 }
 
+interface NaesinData {
+  textbookId: string;
+  textbookName: string;
+  units: Pick<NaesinUnit, 'id' | 'unit_number' | 'title'>[];
+  assignments: NaesinExamAssignment[];
+}
+
 interface Props {
   user: AuthUser;
   studentId: string;
+  naesinData?: NaesinData | null;
 }
 
-export async function StudentDetail({ user, studentId }: Props) {
+export async function StudentDetail({ user, studentId, naesinData }: Props) {
   const admin = createAdminClient();
 
   const { data: student } = await admin
@@ -145,6 +155,21 @@ export async function StudentDetail({ user, studentId }: Props) {
             )}
           </div>
         </div>
+
+        {/* Exam Assignment Manager */}
+        {naesinData && (
+          <div>
+            <h3 className="text-lg font-semibold mb-3">
+              시험 배정 — {naesinData.textbookName}
+            </h3>
+            <ExamAssignmentManager
+              studentId={studentId}
+              textbookId={naesinData.textbookId}
+              units={naesinData.units}
+              assignments={naesinData.assignments}
+            />
+          </div>
+        )}
       </div>
     </>
   );

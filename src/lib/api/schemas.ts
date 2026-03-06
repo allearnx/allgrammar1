@@ -49,6 +49,11 @@ export const problemSubmitSchema = z.object({
   unitId: ID.nullish(),
   answers: z.array(z.unknown()),
   totalQuestions: z.number(),
+  aiResults: z.record(z.string(), z.object({
+    score: z.number(),
+    feedback: z.string(),
+    correctedAnswer: z.string(),
+  })).nullish(),
 });
 
 // ── Wrong Answers Schemas ──
@@ -77,6 +82,12 @@ export const quizSetResultSchema = z.object({
 export const gradeTranslationSchema = z.object({
   koreanText: LONG,
   originalText: LONG,
+  studentAnswer: LONG,
+});
+
+export const gradeSubjectiveSchema = z.object({
+  question: LONG,
+  referenceAnswer: LONG,
   studentAnswer: LONG,
 });
 
@@ -210,6 +221,21 @@ export const lastReviewCreateSchema = z.object({
 export const examDateSchema = z.object({
   textbookId: ID,
   examDate: SHORT,
+});
+
+export const examAssignmentUpsertSchema = z.object({
+  studentId: ID,
+  textbookId: ID,
+  examRound: z.number().min(1).max(10),
+  examLabel: SHORT.nullish(),
+  examDate: SHORT.nullish(),
+  unitIds: z.array(ID).min(1).max(20),
+});
+
+export const examAssignmentDeleteSchema = z.object({
+  studentId: ID,
+  textbookId: ID,
+  examRound: z.number(),
 });
 
 export const settingsSchema = z.object({

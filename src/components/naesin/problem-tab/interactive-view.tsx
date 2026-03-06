@@ -3,30 +3,83 @@
 import { useState } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
 import { Badge } from '@/components/ui/badge';
-import { AlertTriangle } from 'lucide-react';
+import { AlertTriangle, Loader2, Bot } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { MCQOptionList } from '@/components/shared/mcq-option-list';
 import { toast } from 'sonner';
 import type { NaesinProblemSheet, NaesinProblemQuestion } from '@/types/database';
 
-function SubjectiveInput({ onSubmit, disabled }: { onSubmit: (answer: string) => void; disabled: boolean }) {
+interface AiFeedback {
+  score: number;
+  feedback: string;
+  correctedAnswer: string;
+}
+
+interface WrongItem {
+  number: number;
+  userAnswer: string | number;
+  correctAnswer: string | number;
+  question: string;
+  aiFeedback?: AiFeedback;
+}
+
+function SubjectiveInput({ onSubmit, disabled, isGrading }: { onSubmit: (answer: string) => void; disabled: boolean; isGrading: boolean }) {
   const [answer, setAnswer] = useState('');
 
   return (
-    <div className="flex gap-2 max-w-lg mx-auto">
-      <Input
+    <div className="max-w-lg mx-auto space-y-2">
+      <Textarea
         value={answer}
         onChange={(e) => setAnswer(e.target.value)}
         placeholder="답을 입력하세요"
         disabled={disabled}
-        className="flex-1"
+        rows={3}
+        className="resize-none"
       />
-      <Button onClick={() => onSubmit(answer)} disabled={disabled || !answer.trim()}>
-        제출
+      <Button
+        onClick={() => onSubmit(answer)}
+        disabled={disabled || !answer.trim()}
+        className="w-full"
+      >
+        {isGrading ? (
+          <>
+            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+            AI 채점 중...
+          </>
+        ) : (
+          '제출'
+        )}
       </Button>
     </div>
+  );
+}
+
+function AiFeedbackCard({ feedback, isCorrect }: { feedback: AiFeedback; isCorrect: boolean }) {
+  return (
+    <Card className={cn(
+      'border',
+      isCorrect ? 'bg-green-50 border-green-200' : 'bg-orange-50 border-orange-200'
+    )}>
+      <CardContent className="py-3 space-y-2">
+        <div className="flex items-center gap-2">
+          <Bot className="h-4 w-4 text-violet-600" />
+          <span className="text-sm font-medium text-violet-700">AI 채점</span>
+          <Badge variant={isCorrect ? 'default' : 'secondary'} className={cn(
+            'ml-auto',
+            isCorrect ? 'bg-green-600' : 'bg-orange-500 text-white'
+          )}>
+            {feedback.score}점
+          </Badge>
+        </div>
+        <p className="text-sm">{feedback.feedback}</p>
+        <div className="text-sm">
+          <span className="font-medium text-green-700">교정 답안: </span>
+          <span className="text-green-800">{feedback.correctedAnswer}</span>
+        </div>
+      </CardContent>
+    </Card>
   );
 }
 
@@ -45,32 +98,123 @@ export function InteractiveProblemView({
   const [showResult, setShowResult] = useState(false);
   const [score, setScore] = useState({ correct: 0, wrong: 0 });
   const [finished, setFinished] = useState(false);
-  const [wrongList, setWrongList] = useState<{ number: number; userAnswer: string | number; correctAnswer: string | number; question: string }[]>([]);
+  const [wrongList, setWrongList] = useState<WrongItem[]>([]);
+  const [isGrading, setIsGrading] = useState(false);
+  const [currentAiFeedback, setCurrentAiFeedback] = useState<AiFeedback | null>(null);
+  const [aiResultsMap, setAiResultsMap] = useState<Record<string, AiFeedback>>({});
 
   const question = questions[currentIndex];
+  const isSubjective = !question.options || question.options.length === 0;
 
-  function handleSelect(answer: string | number) {
-    if (showResult) return;
-    setSelectedAnswer(answer);
-    const correct = String(answer) === String(question.answer);
-    setShowResult(true);
-    if (correct) {
-      setScore((prev) => ({ ...prev, correct: prev.correct + 1 }));
-    } else {
-      setScore((prev) => ({ ...prev, wrong: prev.wrong + 1 }));
-      setWrongList((prev) => [...prev, {
-        number: question.number,
-        userAnswer: answer,
-        correctAnswer: question.answer,
-        question: question.question,
-      }]);
+  async function gradeSubjective(studentAnswer: string): Promise<AiFeedback | null> {
+    try {
+      const res = await fetch('/api/naesin/problems/grade-subjective', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          question: question.question,
+          referenceAnswer: String(question.answer),
+          studentAnswer,
+        }),
+      });
+      if (!res.ok) {
+        const err = await res.json().catch(() => null);
+        if (res.status === 429) {
+          toast.error(err?.error || '채점 횟수를 초과했습니다.');
+        } else {
+          toast.error('AI 채점에 실패했습니다.');
+        }
+        return null;
+      }
+      return await res.json();
+    } catch {
+      toast.error('AI 채점 중 오류가 발생했습니다.');
+      return null;
     }
+  }
 
-    if (currentIndex === questions.length - 1) {
-      submitResults(
-        questions.map((_, i) => i === currentIndex ? answer : ''),
-        questions.length
-      );
+  async function handleSelect(answer: string | number) {
+    if (showResult || isGrading) return;
+    setSelectedAnswer(answer);
+
+    if (isSubjective) {
+      // AI grading for subjective questions
+      setIsGrading(true);
+      const aiFeedback = await gradeSubjective(String(answer));
+      setIsGrading(false);
+
+      if (aiFeedback) {
+        setCurrentAiFeedback(aiFeedback);
+        setAiResultsMap((prev) => ({ ...prev, [String(currentIndex)]: aiFeedback }));
+        const correct = aiFeedback.score >= 80;
+        setShowResult(true);
+
+        if (correct) {
+          setScore((prev) => ({ ...prev, correct: prev.correct + 1 }));
+        } else {
+          setScore((prev) => ({ ...prev, wrong: prev.wrong + 1 }));
+          setWrongList((prev) => [...prev, {
+            number: question.number,
+            userAnswer: answer,
+            correctAnswer: question.answer,
+            question: question.question,
+            aiFeedback,
+          }]);
+        }
+
+        if (currentIndex === questions.length - 1) {
+          const updatedAiResults = { ...aiResultsMap, [String(currentIndex)]: aiFeedback };
+          submitResults(
+            questions.map((_, i) => i === currentIndex ? answer : ''),
+            questions.length,
+            updatedAiResults
+          );
+        }
+      } else {
+        // AI failed — fallback to exact match
+        const correct = String(answer).trim().toLowerCase() === String(question.answer).trim().toLowerCase();
+        setShowResult(true);
+        if (correct) {
+          setScore((prev) => ({ ...prev, correct: prev.correct + 1 }));
+        } else {
+          setScore((prev) => ({ ...prev, wrong: prev.wrong + 1 }));
+          setWrongList((prev) => [...prev, {
+            number: question.number,
+            userAnswer: answer,
+            correctAnswer: question.answer,
+            question: question.question,
+          }]);
+        }
+
+        if (currentIndex === questions.length - 1) {
+          submitResults(
+            questions.map((_, i) => i === currentIndex ? answer : ''),
+            questions.length
+          );
+        }
+      }
+    } else {
+      // MCQ — exact match (existing logic)
+      const correct = String(answer) === String(question.answer);
+      setShowResult(true);
+      if (correct) {
+        setScore((prev) => ({ ...prev, correct: prev.correct + 1 }));
+      } else {
+        setScore((prev) => ({ ...prev, wrong: prev.wrong + 1 }));
+        setWrongList((prev) => [...prev, {
+          number: question.number,
+          userAnswer: answer,
+          correctAnswer: question.answer,
+          question: question.question,
+        }]);
+      }
+
+      if (currentIndex === questions.length - 1) {
+        submitResults(
+          questions.map((_, i) => i === currentIndex ? answer : ''),
+          questions.length
+        );
+      }
     }
   }
 
@@ -79,10 +223,12 @@ export function InteractiveProblemView({
       setCurrentIndex(currentIndex + 1);
       setShowResult(false);
       setSelectedAnswer(null);
+      setCurrentAiFeedback(null);
     }
   }
 
-  async function submitResults(answers: (string | number)[], total: number) {
+  async function submitResults(answers: (string | number)[], total: number, finalAiResults?: Record<string, AiFeedback>) {
+    const mergedAiResults = finalAiResults ?? aiResultsMap;
     try {
       const res = await fetch('/api/naesin/problems/submit', {
         method: 'POST',
@@ -92,6 +238,7 @@ export function InteractiveProblemView({
           unitId,
           answers,
           totalQuestions: total,
+          ...(Object.keys(mergedAiResults).length > 0 ? { aiResults: mergedAiResults } : {}),
         }),
       });
       if (!res.ok) {
@@ -137,10 +284,17 @@ export function InteractiveProblemView({
                 <p className="font-medium text-red-600 mb-3">틀린 문제 ({wrongList.length}개)</p>
                 <div className="space-y-3">
                   {wrongList.map((w, i) => (
-                    <div key={i} className="text-sm border-b last:border-0 pb-2">
+                    <div key={i} className="text-sm border-b last:border-0 pb-2 space-y-1">
                       <p className="font-medium">#{w.number}. {w.question}</p>
                       <p className="text-red-500">내 답: {w.userAnswer}</p>
                       <p className="text-green-600">정답: {w.correctAnswer}</p>
+                      {w.aiFeedback && (
+                        <div className="mt-1 pl-2 border-l-2 border-violet-300">
+                          <p className="text-xs text-violet-600 font-medium">AI 채점: {w.aiFeedback.score}점</p>
+                          <p className="text-xs text-muted-foreground">{w.aiFeedback.feedback}</p>
+                          <p className="text-xs text-green-700">교정: {w.aiFeedback.correctedAnswer}</p>
+                        </div>
+                      )}
                     </div>
                   ))}
                 </div>
@@ -155,6 +309,12 @@ export function InteractiveProblemView({
       </div>
     );
   }
+
+  const isCurrentCorrect = showResult && (
+    isSubjective
+      ? (currentAiFeedback ? currentAiFeedback.score >= 80 : false)
+      : String(selectedAnswer) === String(question.answer)
+  );
 
   return (
     <div className="space-y-6">
@@ -183,7 +343,25 @@ export function InteractiveProblemView({
           className="max-w-lg mx-auto"
         />
       ) : (
-        <SubjectiveInput onSubmit={(answer) => handleSelect(answer)} disabled={showResult} />
+        <SubjectiveInput
+          onSubmit={(answer) => handleSelect(answer)}
+          disabled={showResult}
+          isGrading={isGrading}
+        />
+      )}
+
+      {showResult && isSubjective && selectedAnswer !== null && (
+        <div className="max-w-lg mx-auto space-y-2">
+          <div className={cn(
+            'text-center text-sm font-medium py-1.5 rounded-md',
+            isCurrentCorrect ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'
+          )}>
+            {isCurrentCorrect ? '정답입니다!' : '오답입니다'}
+          </div>
+          {currentAiFeedback && (
+            <AiFeedbackCard feedback={currentAiFeedback} isCorrect={isCurrentCorrect} />
+          )}
+        </div>
       )}
 
       {showResult && !finished && currentIndex < questions.length - 1 && (

@@ -270,6 +270,18 @@ export interface NaesinSimilarProblem {
   updated_at: string;
 }
 
+export interface NaesinExamAssignment {
+  id: string;
+  student_id: string;
+  textbook_id: string;
+  exam_round: number;
+  exam_label: string | null;
+  exam_date: string | null;
+  unit_ids: string[];
+  created_at: string;
+  updated_at: string;
+}
+
 export type NaesinLastReviewContentType = 'video' | 'pdf' | 'text';
 
 export interface NaesinLastReviewContent {

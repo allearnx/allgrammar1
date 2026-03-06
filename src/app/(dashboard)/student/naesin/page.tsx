@@ -3,7 +3,7 @@ import { createClient } from '@/lib/supabase/server';
 import { Topbar } from '@/components/layout/topbar';
 import { NaesinHome } from './client';
 import { calculateStageStatuses } from '@/lib/naesin/stage-unlock';
-import type { NaesinStageStatuses } from '@/types/database';
+import type { NaesinStageStatuses, NaesinExamAssignment } from '@/types/database';
 
 interface UnitSummary {
   id: string;
@@ -12,6 +12,13 @@ interface UnitSummary {
   sort_order: number;
   stageStatuses: NaesinStageStatuses;
   stageProgress: { vocab: number; passage: number; grammar: number; problem: number };
+}
+
+export interface ExamGroup {
+  round: number;
+  label: string;
+  examDate: string | null;
+  units: UnitSummary[];
 }
 
 export default async function NaesinPage() {
@@ -33,7 +40,7 @@ export default async function NaesinPage() {
     .order('grade')
     .order('sort_order');
 
-  // Get exam date if textbook selected
+  // Get exam date if textbook selected (legacy)
   let examDate: string | null = null;
   if (setting?.textbook_id) {
     const { data: examDateData } = await supabase
@@ -47,6 +54,7 @@ export default async function NaesinPage() {
 
   // If student has a textbook selected, get the units with lightweight data only
   let units: UnitSummary[] = [];
+  let examGroups: ExamGroup[] = [];
 
   if (setting?.textbook_id) {
     const { data: rawUnits } = await supabase
@@ -58,6 +66,14 @@ export default async function NaesinPage() {
 
     if (rawUnits && rawUnits.length > 0) {
       const unitIds = rawUnits.map((u) => u.id);
+
+      // Fetch exam assignments
+      const { data: assignments } = await supabase
+        .from('naesin_exam_assignments')
+        .select('*')
+        .eq('student_id', user.id)
+        .eq('textbook_id', setting.textbook_id)
+        .order('exam_round');
 
       // Only fetch existence checks + progress (not full content)
       const [
@@ -83,8 +99,6 @@ export default async function NaesinPage() {
       ]);
 
       // Build per-unit existence sets
-      // For vocab/passage/problem we only need to know if any exist per unit
-      // Grammar needs content_type for video count
       const vocabUnitIds = new Set((vocabCountRes.data || []).map((r) => r.unit_id));
       const passageUnitIds = new Set((passageCountRes.data || []).map((r) => r.unit_id));
       const grammarByUnit = groupBy(grammarCountRes.data || [], 'unit_id');
@@ -95,11 +109,13 @@ export default async function NaesinPage() {
       const progressMap = new Map((progressRes.data || []).map((p) => [p.unit_id, p]));
       const quizSetsByUnit = groupBy(quizSetsCountRes.data || [], 'unit_id');
 
-      units = rawUnits.map((u) => {
+      type RawUnit = { id: string; unit_number: number; title: string; sort_order: number };
+      function buildUnitSummary(u: RawUnit, overrideExamDate?: string | null): UnitSummary {
         const unitProgress = progressMap.get(u.id) || null;
         const unitGrammar = grammarByUnit[u.id] || [];
         const videoLessons = unitGrammar.filter((l: { content_type: string }) => l.content_type === 'video');
         const unitQuizSets = quizSetsByUnit[u.id] || [];
+        const effectiveExamDate = overrideExamDate !== undefined ? overrideExamDate : examDate;
 
         const hasLastReviewContent =
           lastReviewSheetUnitIds.has(u.id) ||
@@ -113,14 +129,13 @@ export default async function NaesinPage() {
             hasPassage: passageUnitIds.has(u.id),
             hasGrammar: unitGrammar.length > 0,
             hasProblem: problemUnitIds.has(u.id),
-            hasLastReview: hasLastReviewContent || !!examDate,
+            hasLastReview: hasLastReviewContent || !!effectiveExamDate,
           },
           vocabQuizSetCount: unitQuizSets.length,
           grammarVideoCount: videoLessons.length,
-          examDate,
+          examDate: effectiveExamDate,
         });
 
-        // Compute lightweight progress percentages
         const stageProgress = computeStageProgress(unitProgress, unitQuizSets.length, videoLessons.length);
 
         return {
@@ -131,7 +146,26 @@ export default async function NaesinPage() {
           stageStatuses,
           stageProgress,
         };
-      });
+      }
+
+      // Build exam groups from assignments
+      const assignmentsList = (assignments || []) as NaesinExamAssignment[];
+      const unitMap = new Map(rawUnits.map((u) => [u.id, u]));
+
+      if (assignmentsList.length > 0) {
+        examGroups = assignmentsList.map((a) => ({
+          round: a.exam_round,
+          label: a.exam_label || `${a.exam_round}차 시험`,
+          examDate: a.exam_date,
+          units: a.unit_ids
+            .map((uid) => unitMap.get(uid))
+            .filter(Boolean)
+            .map((u) => buildUnitSummary(u!, a.exam_date)),
+        }));
+      }
+
+      // Also build flat units for fallback display (when no assignments)
+      units = rawUnits.map((u) => buildUnitSummary(u));
     }
   }
 
@@ -145,6 +179,7 @@ export default async function NaesinPage() {
           units={units}
           examDate={examDate}
           textbookId={setting?.textbook_id || null}
+          examGroups={examGroups}
         />
       </div>
     </>
