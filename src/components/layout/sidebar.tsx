@@ -311,18 +311,6 @@ function NaesinTree({ exams, pathname, onNavigate }: { exams: NaesinSidebarExam[
                             const href = `/student/naesin/${unit.id}/${item.stage}`;
                             const isActive = pathname === href;
 
-                            if (isLocked) {
-                              return (
-                                <div
-                                  key={item.key}
-                                  className="flex items-center gap-2 px-2 py-1 text-xs opacity-40 cursor-not-allowed"
-                                >
-                                  <StageIcon status={status} />
-                                  <span className="truncate">{item.label}</span>
-                                </div>
-                              );
-                            }
-
                             return (
                               <Link
                                 key={item.key}
@@ -330,9 +318,11 @@ function NaesinTree({ exams, pathname, onNavigate }: { exams: NaesinSidebarExam[
                                 onClick={onNavigate}
                                 className={cn(
                                   'flex items-center gap-2 px-2 py-1 text-xs rounded-md transition-colors',
-                                  isActive
-                                    ? 'bg-[#f5f3ff] text-[#6d28d9] font-medium'
-                                    : 'hover:bg-[#f3f4f6] text-[#6b7280]'
+                                  isLocked
+                                    ? 'opacity-40'
+                                    : isActive
+                                      ? 'bg-[#f5f3ff] text-[#6d28d9] font-medium'
+                                      : 'hover:bg-[#f3f4f6] text-[#6b7280]'
                                 )}
                               >
                                 <StageIcon status={status} />

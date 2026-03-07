@@ -99,13 +99,12 @@ export default async function NaesinStagePage({ params }: Props) {
     examDate,
   });
 
-  // If the requested stage is locked, redirect to overview
-  if (stageStatuses[stageKey] === 'locked') {
-    redirect('/student/naesin');
-  }
+  const isLocked = stageStatuses[stageKey] === 'locked';
 
-  // Fetch stage-specific content
-  const stageData = await fetchStageData(supabase, user.id, unitId, stageKey, quizSets.map((s) => s.id));
+  // Skip data fetch for locked stages
+  const stageData = isLocked
+    ? {}
+    : await fetchStageData(supabase, user.id, unitId, stageKey, quizSets.map((s) => s.id));
 
   return (
     <>
@@ -116,6 +115,7 @@ export default async function NaesinStagePage({ params }: Props) {
           currentStage={stageKey}
           stageStatuses={stageStatuses}
           stageData={stageData}
+          isLocked={isLocked}
           examDate={examDate}
         />
       </div>
