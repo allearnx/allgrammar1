@@ -86,6 +86,14 @@ export const gradeTranslationSchema = z.object({
   studentAnswer: LONG,
 });
 
+export const gradeTranslationBatchSchema = z.object({
+  sentences: z.array(z.object({
+    koreanText: LONG,
+    originalText: LONG,
+    studentAnswer: LONG,
+  })).min(1).max(30),
+});
+
 export const gradeSubjectiveSchema = z.object({
   question: LONG,
   referenceAnswer: LONG,

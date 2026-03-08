@@ -73,24 +73,25 @@ function SentenceBysentenceTranslation({ passage, onComplete, showWrongAlert, ra
     setLoading(true);
 
     try {
-      // Grade all sentences in parallel
-      const gradePromises = sentences.map((s, idx) =>
-        fetch('/api/textbook/grade-translation', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            passageId: passage.id,
+      // Grade all sentences in a single batch request
+      const res = await fetch('/api/textbook/grade-translation-batch', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          sentences: sentences.map((s, idx) => ({
             koreanText: s.korean,
             originalText: s.original,
             studentAnswer: (answers[idx] || '').trim(),
-          }),
-        }).then(async (res) => {
-          if (!res.ok) throw new Error('채점 실패');
-          return res.json() as Promise<GradingResult>;
-        })
-      );
+          })),
+        }),
+      });
 
-      const gradeResults = await Promise.all(gradePromises);
+      if (!res.ok) {
+        const err = await res.json().catch(() => null);
+        throw new Error(err?.error || '채점 실패');
+      }
+
+      const { results: gradeResults } = await res.json() as { results: GradingResult[] };
 
       const resultMap: Record<number, GradingResult> = {};
       gradeResults.forEach((r, idx) => { resultMap[idx] = r; });
