@@ -45,11 +45,14 @@ export function PassageStageManager({ studentId, initialStages }: Props) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ studentId, stages }),
       });
-      if (!res.ok) throw new Error();
+      if (!res.ok) {
+        const err = await res.json().catch(() => null);
+        throw new Error(err?.error || '저장 실패');
+      }
       toast.success('교과서 암기 단계가 저장되었습니다');
     } catch (err) {
       console.error(err);
-      toast.error('저장 중 오류가 발생했습니다');
+      toast.error(err instanceof Error ? err.message : '저장 중 오류가 발생했습니다');
     } finally {
       setSaving(false);
     }
