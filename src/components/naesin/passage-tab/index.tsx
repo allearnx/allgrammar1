@@ -356,12 +356,12 @@ function StageDirectionModal({
           <span>{config.tip}</span>
         </div>
         {stage === 'translation' && (
-          <div className="space-y-1.5 p-2.5 rounded-lg bg-yellow-50 dark:bg-yellow-950/30 border border-yellow-200 dark:border-yellow-800">
-            <p className="text-xs font-medium text-yellow-800 dark:text-yellow-200">주의사항</p>
-            <ul className="text-xs text-yellow-700 dark:text-yellow-300 space-y-1 list-disc pl-4">
-              <li>대소문자 구분 (He ≠ he)</li>
-              <li>마침표, 쉼표 등 문장부호 정확히</li>
-              <li>공백도 정확히 (띄어쓰기 주의)</li>
+          <div className="space-y-1.5 p-2.5 rounded-lg bg-blue-50 dark:bg-blue-950/30 border border-blue-200 dark:border-blue-800">
+            <p className="text-xs font-medium text-blue-800 dark:text-blue-200">안내</p>
+            <ul className="text-xs text-blue-700 dark:text-blue-300 space-y-1 list-disc pl-4">
+              <li>한국어를 보고 영어 원문을 그대로 작성</li>
+              <li>AI가 채점하므로 사소한 오타는 괜찮아요</li>
+              <li>단어 누락이나 의미 변화는 오답 처리</li>
             </ul>
           </div>
         )}
