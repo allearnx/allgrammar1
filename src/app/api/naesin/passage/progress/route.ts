@@ -32,14 +32,30 @@ export const POST = createApiHandler(
       updates.passage_translation_best = Math.max(currentBest, score);
     }
 
-    const fillScore = type === 'fill_blanks'
-      ? Math.max(existing?.passage_fill_blanks_best ?? 0, score)
-      : (existing?.passage_fill_blanks_best ?? 0);
-    const translationScore = type === 'translation'
-      ? Math.max(existing?.passage_translation_best ?? 0, score)
-      : (existing?.passage_translation_best ?? 0);
+    // Fetch student's required stages to determine completion
+    const { data: settings } = await supabase
+      .from('naesin_student_settings')
+      .select('passage_required_stages')
+      .eq('student_id', user.id)
+      .single();
 
-    const passageCompleted = fillScore >= PASS_THRESHOLD && translationScore >= PASS_THRESHOLD;
+    const requiredStages: string[] =
+      (settings?.passage_required_stages as string[] | null) ?? ['fill_blanks', 'translation'];
+    const uniqueRequired = [...new Set(requiredStages)];
+
+    const scoreMap: Record<string, number> = {
+      fill_blanks: type === 'fill_blanks'
+        ? Math.max(existing?.passage_fill_blanks_best ?? 0, score)
+        : (existing?.passage_fill_blanks_best ?? 0),
+      ordering: type === 'ordering'
+        ? Math.max(existing?.passage_ordering_best ?? 0, score)
+        : (existing?.passage_ordering_best ?? 0),
+      translation: type === 'translation'
+        ? Math.max(existing?.passage_translation_best ?? 0, score)
+        : (existing?.passage_translation_best ?? 0),
+    };
+
+    const passageCompleted = uniqueRequired.every((s) => (scoreMap[s] ?? 0) >= PASS_THRESHOLD);
     updates.passage_completed = passageCompleted;
 
     const { error } = await supabase

@@ -112,16 +112,6 @@ function getPassageStatus(
 ): NaesinStageStatus {
   if (!hasContent) return 'completed';
   if (progress?.passage_completed) return 'completed';
-
-  // Check 80% threshold for fill_blanks AND translation
-  if (progress) {
-    const fillBlanks = progress.passage_fill_blanks_best ?? 0;
-    const translation = progress.passage_translation_best ?? 0;
-    if (fillBlanks >= 80 && translation >= 80 && prevStatus === 'completed') {
-      return 'completed';
-    }
-  }
-
   if (prevStatus !== 'completed') return 'locked';
   return 'available';
 }
