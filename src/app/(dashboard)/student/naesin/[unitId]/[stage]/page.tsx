@@ -162,12 +162,22 @@ async function fetchStageData(
     }
 
     case 'passage': {
-      const passageRes = await supabase
-        .from('naesin_passages')
-        .select('*')
-        .eq('unit_id', unitId)
-        .order('sort_order');
-      return { passages: passageRes.data || [] };
+      const [passageRes, settingsRes] = await Promise.all([
+        supabase
+          .from('naesin_passages')
+          .select('*')
+          .eq('unit_id', unitId)
+          .order('sort_order'),
+        supabase
+          .from('naesin_student_settings')
+          .select('passage_required_stages')
+          .eq('student_id', userId)
+          .single(),
+      ]);
+      return {
+        passages: passageRes.data || [],
+        passageRequiredStages: (settingsRes.data?.passage_required_stages as string[] | null) ?? ['fill_blanks', 'translation'],
+      };
     }
 
     case 'grammar': {

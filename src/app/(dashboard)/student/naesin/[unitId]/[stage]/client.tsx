@@ -62,6 +62,7 @@ interface StageData {
   vocabProgress?: VocabProgress;
   // passage
   passages?: NaesinPassage[];
+  passageRequiredStages?: string[];
   // grammar
   grammarLessons?: NaesinGrammarLesson[];
   videoProgress?: NaesinGrammarVideoProgress[];
@@ -188,6 +189,7 @@ export function NaesinStageView({
                 passages={stageData.passages || []}
                 unitId={unit.id}
                 onStageComplete={handleStageComplete}
+                requiredStages={stageData.passageRequiredStages}
               />
             )}
             {currentStage === 'grammar' && (

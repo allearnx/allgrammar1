@@ -6,6 +6,7 @@ import { format } from 'date-fns';
 import type { AuthUser } from '@/types/auth';
 import type { NaesinExamAssignment, NaesinUnit } from '@/types/database';
 import { ExamAssignmentManager } from './exam-assignment-manager';
+import { PassageStageManager } from './passage-stage-manager';
 
 interface GrammarRelation {
   title: string;
@@ -36,7 +37,7 @@ export async function StudentDetail({ user, studentId, naesinData }: Props) {
 
   if (!student) notFound();
 
-  const [videoRes, memoryRes, textbookRes] = await Promise.all([
+  const [videoRes, memoryRes, textbookRes, passageStagesRes] = await Promise.all([
     admin
       .from('student_progress')
       .select('*, grammar:grammars(title, level:levels(level_number, title_ko))')
@@ -50,7 +51,14 @@ export async function StudentDetail({ user, studentId, naesinData }: Props) {
       .from('student_textbook_progress')
       .select('*, passage:textbook_passages(title, grammar:grammars(title))')
       .eq('student_id', studentId),
+    admin
+      .from('naesin_student_settings')
+      .select('passage_required_stages')
+      .eq('student_id', studentId)
+      .single(),
   ]);
+
+  const passageStages = (passageStagesRes.data?.passage_required_stages as string[] | null) ?? ['fill_blanks', 'translation'];
 
   const videoProgress = videoRes.data || [];
   const memoryProgress = memoryRes.data || [];
@@ -155,6 +163,17 @@ export async function StudentDetail({ user, studentId, naesinData }: Props) {
             )}
           </div>
         </div>
+
+        {/* Passage Stage Manager */}
+        {naesinData && (
+          <div>
+            <h3 className="text-lg font-semibold mb-3">교과서 암기 단계 설정</h3>
+            <PassageStageManager
+              studentId={studentId}
+              initialStages={passageStages as ('fill_blanks' | 'ordering' | 'translation')[]}
+            />
+          </div>
+        )}
 
         {/* Exam Assignment Manager */}
         {naesinData && (

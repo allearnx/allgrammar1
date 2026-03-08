@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import {
   Dialog,
@@ -21,14 +21,41 @@ import type { NaesinPassage } from '@/types/database';
 
 const ONBOARDING_KEY = 'naesin-passage-onboarding-seen';
 
+type PassageStageType = 'fill_blanks' | 'ordering' | 'translation';
+
+const STAGE_TAB_MAP: Record<PassageStageType, { value: string; label: string }> = {
+  fill_blanks: { value: 'fill-blanks', label: '빈칸 채우기' },
+  ordering: { value: 'ordering', label: '순서 배열' },
+  translation: { value: 'translation', label: '영작' },
+};
+
 interface PassageTabProps {
   passages: NaesinPassage[];
   unitId: string;
   onStageComplete: () => void;
+  requiredStages?: string[];
 }
 
-export function PassageTab({ passages, unitId, onStageComplete }: PassageTabProps) {
-  const [activeTab, setActiveTab] = useState('fill-blanks');
+export function PassageTab({ passages, unitId, onStageComplete, requiredStages }: PassageTabProps) {
+  const stages = useMemo(() => {
+    const raw = (requiredStages ?? ['fill_blanks', 'translation']) as PassageStageType[];
+    return raw.filter((s) => STAGE_TAB_MAP[s]);
+  }, [requiredStages]);
+
+  // Unique stages for tabs (deduplicated, preserve order)
+  const uniqueStages = useMemo(() => [...new Set(stages)], [stages]);
+
+  // Count how many times each stage is required
+  const stageCounts = useMemo(() => {
+    const counts: Record<string, number> = {};
+    for (const s of stages) {
+      counts[s] = (counts[s] || 0) + 1;
+    }
+    return counts;
+  }, [stages]);
+
+  const firstTabValue = uniqueStages.length > 0 ? STAGE_TAB_MAP[uniqueStages[0]].value : 'fill-blanks';
+  const [activeTab, setActiveTab] = useState(firstTabValue);
   const [currentPassageIndex, setCurrentPassageIndex] = useState(0);
   const [showOnboarding, setShowOnboarding] = useState(false);
 
@@ -102,9 +129,15 @@ export function PassageTab({ passages, unitId, onStageComplete }: PassageTabProp
     }
   }
 
+  const gridCols = uniqueStages.length === 1 ? 'grid-cols-1' : uniqueStages.length === 2 ? 'grid-cols-2' : 'grid-cols-3';
+
   return (
     <div className="space-y-4">
-      <PassageOnboardingModal open={showOnboarding} onClose={dismissOnboarding} />
+      <PassageOnboardingModal
+        open={showOnboarding}
+        onClose={dismissOnboarding}
+        stages={uniqueStages}
+      />
 
       {passages.length > 1 && (
         <div className="flex gap-2 overflow-x-auto pb-2">
@@ -126,79 +159,105 @@ export function PassageTab({ passages, unitId, onStageComplete }: PassageTabProp
       )}
 
       <Tabs value={activeTab} onValueChange={setActiveTab}>
-        <TabsList className="grid w-full grid-cols-3">
-          <TabsTrigger value="fill-blanks" disabled={!hasBlanks}>
-            빈칸 채우기
-          </TabsTrigger>
-          <TabsTrigger value="ordering" disabled={!hasSentences}>
-            순서 배열
-          </TabsTrigger>
-          <TabsTrigger value="translation">
-            영작
-          </TabsTrigger>
+        <TabsList className={cn('grid w-full', gridCols)}>
+          {uniqueStages.map((stage) => {
+            const tab = STAGE_TAB_MAP[stage];
+            const disabled =
+              (stage === 'fill_blanks' && !hasBlanks) ||
+              (stage === 'ordering' && !hasSentences);
+            const count = stageCounts[stage] || 1;
+            return (
+              <TabsTrigger key={tab.value} value={tab.value} disabled={disabled}>
+                {tab.label}
+                {count > 1 && <span className="ml-1 text-xs opacity-60">x{count}</span>}
+              </TabsTrigger>
+            );
+          })}
         </TabsList>
 
-        <TabsContent value="fill-blanks" className="mt-4">
-          <NaesinFillBlanksView
-            key={passage.id}
-            passage={textbookPassage}
-            onScoreChange={(score, wrongs) => {
-              savePassageProgress('fill_blanks', score);
-              if (wrongs && wrongs.length > 0) saveWrongAnswers(wrongs);
-            }}
-          />
-        </TabsContent>
+        {uniqueStages.includes('fill_blanks') && (
+          <TabsContent value="fill-blanks" className="mt-4">
+            <NaesinFillBlanksView
+              key={passage.id}
+              passage={textbookPassage}
+              onScoreChange={(score, wrongs) => {
+                savePassageProgress('fill_blanks', score);
+                if (wrongs && wrongs.length > 0) saveWrongAnswers(wrongs);
+              }}
+            />
+          </TabsContent>
+        )}
 
-        <TabsContent value="ordering" className="mt-4">
-          <NaesinOrderingView
-            key={passage.id}
-            passage={textbookPassage}
-            onScoreChange={(score) => savePassageProgress('ordering', score)}
-          />
-        </TabsContent>
+        {uniqueStages.includes('ordering') && (
+          <TabsContent value="ordering" className="mt-4">
+            <NaesinOrderingView
+              key={passage.id}
+              passage={textbookPassage}
+              onScoreChange={(score) => savePassageProgress('ordering', score)}
+            />
+          </TabsContent>
+        )}
 
-        <TabsContent value="translation" className="mt-4">
-          <NaesinTranslationView
-            key={passage.id}
-            passage={textbookPassage}
-            onScoreChange={(score, wrongs) => {
-              savePassageProgress('translation', score);
-              if (wrongs && wrongs.length > 0) saveWrongAnswers(wrongs);
-            }}
-          />
-        </TabsContent>
+        {uniqueStages.includes('translation') && (
+          <TabsContent value="translation" className="mt-4">
+            <NaesinTranslationView
+              key={passage.id}
+              passage={textbookPassage}
+              onScoreChange={(score, wrongs) => {
+                savePassageProgress('translation', score);
+                if (wrongs && wrongs.length > 0) saveWrongAnswers(wrongs);
+              }}
+            />
+          </TabsContent>
+        )}
       </Tabs>
     </div>
   );
 }
 
-function PassageOnboardingModal({ open, onClose }: { open: boolean; onClose: () => void }) {
-  const steps = [
-    {
-      icon: FileText,
-      title: '1단계: 빈칸 채우기',
-      desc: '한글 해석을 보면서 영어 지문의 빈칸을 채워요.',
-      tip: '난이도를 쉬움 → 보통 → 어려움 순으로 도전!',
-      color: 'text-blue-600',
-      bg: 'bg-blue-50 dark:bg-blue-950/30',
-    },
-    {
-      icon: Shuffle,
-      title: '2단계: 순서 배열',
-      desc: '한글 뜻을 보고 영어 단어를 올바른 순서로 배열해요.',
-      tip: '드래그해서 순서를 바꿀 수 있어요!',
-      color: 'text-violet-600',
-      bg: 'bg-violet-50 dark:bg-violet-950/30',
-    },
-    {
-      icon: PenLine,
-      title: '3단계: 영작',
-      desc: '한글 해석을 보고 영어로 직접 작성해요.',
-      tip: 'AI가 채점해주니까 부담 없이 써봐!',
-      color: 'text-emerald-600',
-      bg: 'bg-emerald-50 dark:bg-emerald-950/30',
-    },
-  ];
+const ALL_STEPS = [
+  {
+    key: 'fill_blanks' as const,
+    icon: FileText,
+    title: '빈칸 채우기',
+    desc: '한글 해석을 보면서 영어 지문의 빈칸을 채워요.',
+    tip: '난이도를 쉬움 → 보통 → 어려움 순으로 도전!',
+    color: 'text-blue-600',
+    bg: 'bg-blue-50 dark:bg-blue-950/30',
+  },
+  {
+    key: 'ordering' as const,
+    icon: Shuffle,
+    title: '순서 배열',
+    desc: '한글 뜻을 보고 영어 단어를 올바른 순서로 배열해요.',
+    tip: '드래그해서 순서를 바꿀 수 있어요!',
+    color: 'text-violet-600',
+    bg: 'bg-violet-50 dark:bg-violet-950/30',
+  },
+  {
+    key: 'translation' as const,
+    icon: PenLine,
+    title: '영작',
+    desc: '한글 해석을 보고 영어로 직접 작성해요.',
+    tip: 'AI가 채점해주니까 부담 없이 써봐!',
+    color: 'text-emerald-600',
+    bg: 'bg-emerald-50 dark:bg-emerald-950/30',
+  },
+];
+
+function PassageOnboardingModal({
+  open,
+  onClose,
+  stages,
+}: {
+  open: boolean;
+  onClose: () => void;
+  stages: PassageStageType[];
+}) {
+  const steps = stages.map((s, i) => {
+    const config = ALL_STEPS.find((step) => step.key === s)!;
+    return { ...config, title: `${i + 1}단계: ${config.title}` };
+  });
 
   return (
     <Dialog open={open} onOpenChange={(v) => !v && onClose()}>
@@ -206,7 +265,7 @@ function PassageOnboardingModal({ open, onClose }: { open: boolean; onClose: () 
         <DialogHeader>
           <DialogTitle className="text-center text-lg">교과서 암기 학습 방법</DialogTitle>
           <DialogDescription className="text-center">
-            3단계를 순서대로 완료하면 다음으로 넘어갈 수 있어요!
+            {steps.length}단계를 순서대로 완료하면 다음으로 넘어갈 수 있어요!
           </DialogDescription>
         </DialogHeader>
 
@@ -236,7 +295,7 @@ function PassageOnboardingModal({ open, onClose }: { open: boolean; onClose: () 
         <div className="flex items-center gap-2 p-3 rounded-lg bg-orange-50 dark:bg-orange-950/30">
           <Target className="h-4 w-4 text-orange-600 shrink-0" />
           <p className="text-xs text-orange-700 dark:text-orange-300">
-            빈칸 채우기와 영작에서 <span className="font-bold">80점 이상</span>을 받으면 다음 단계가 열려요!
+            각 단계에서 <span className="font-bold">80점 이상</span>을 받으면 다음 단계가 열려요!
           </p>
         </div>
 
