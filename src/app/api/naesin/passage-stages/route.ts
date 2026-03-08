@@ -33,12 +33,23 @@ export const POST = createApiHandler(
   async ({ body, supabase }) => {
     const { studentId, stages } = body;
 
-    const { error } = await supabase
+    // Try update first
+    const { data: updated, error: updateError } = await supabase
       .from('naesin_student_settings')
       .update({ passage_required_stages: stages })
-      .eq('student_id', studentId);
+      .eq('student_id', studentId)
+      .select('id');
 
-    if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+    if (updateError) return NextResponse.json({ error: updateError.message }, { status: 500 });
+
+    // If no row existed, the student has no settings row yet
+    if (!updated || updated.length === 0) {
+      return NextResponse.json(
+        { error: '학생의 교과서 설정이 없습니다. 먼저 교과서를 배정해주세요.' },
+        { status: 404 }
+      );
+    }
+
     return NextResponse.json({ success: true });
   }
 );
