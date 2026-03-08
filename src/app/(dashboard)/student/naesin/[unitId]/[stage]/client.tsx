@@ -244,7 +244,7 @@ function LockedStageOverlay({
       <div className="blur-sm opacity-40 pointer-events-none select-none" aria-hidden>
         <div className="space-y-4 p-2">
           {/* Fake content blocks to give a colorful preview feel */}
-          <div className="h-10 rounded-lg bg-gradient-to-r from-purple-200 to-violet-300 w-3/4" />
+          <div className="h-10 rounded-lg bg-gradient-to-r from-indigo-200 to-indigo-300 w-3/4" />
           <div className="grid grid-cols-2 gap-3">
             <div className="h-24 rounded-lg bg-gradient-to-br from-blue-100 to-indigo-200" />
             <div className="h-24 rounded-lg bg-gradient-to-br from-pink-100 to-rose-200" />
@@ -255,13 +255,13 @@ function LockedStageOverlay({
             <div className="h-4 rounded bg-gradient-to-r from-sky-100 to-cyan-200 w-4/6" />
           </div>
           <div className="grid grid-cols-3 gap-3">
-            <div className="h-16 rounded-lg bg-gradient-to-br from-violet-100 to-purple-200" />
+            <div className="h-16 rounded-lg bg-gradient-to-br from-indigo-100 to-indigo-200" />
             <div className="h-16 rounded-lg bg-gradient-to-br from-fuchsia-100 to-pink-200" />
             <div className="h-16 rounded-lg bg-gradient-to-br from-indigo-100 to-blue-200" />
           </div>
           <div className="space-y-2">
             <div className="h-4 rounded bg-gradient-to-r from-rose-100 to-pink-200 w-full" />
-            <div className="h-4 rounded bg-gradient-to-r from-purple-100 to-violet-200 w-3/4" />
+            <div className="h-4 rounded bg-gradient-to-r from-indigo-100 to-indigo-200 w-3/4" />
           </div>
         </div>
       </div>

@@ -64,8 +64,8 @@ function AiFeedbackCard({ feedback, isCorrect }: { feedback: AiFeedback; isCorre
     )}>
       <CardContent className="py-3 space-y-2">
         <div className="flex items-center gap-2">
-          <Bot className="h-4 w-4 text-violet-600" />
-          <span className="text-sm font-medium text-violet-700">AI 채점</span>
+          <Bot className="h-4 w-4 text-indigo-600" />
+          <span className="text-sm font-medium text-indigo-700">AI 채점</span>
           <Badge variant={isCorrect ? 'default' : 'secondary'} className={cn(
             'ml-auto',
             isCorrect ? 'bg-green-600' : 'bg-orange-500 text-white'
@@ -291,8 +291,8 @@ export function InteractiveProblemView({
                       <p className="text-red-500">내 답: {w.userAnswer}</p>
                       <p className="text-green-600">정답: {w.correctAnswer}</p>
                       {w.aiFeedback && (
-                        <div className="mt-1 pl-2 border-l-2 border-violet-300">
-                          <p className="text-xs text-violet-600 font-medium">AI 채점: {w.aiFeedback.score}점</p>
+                        <div className="mt-1 pl-2 border-l-2 border-indigo-300">
+                          <p className="text-xs text-indigo-600 font-medium">AI 채점: {w.aiFeedback.score}점</p>
                           <p className="text-xs text-muted-foreground">{w.aiFeedback.feedback}</p>
                           <p className="text-xs text-green-700">교정: {w.aiFeedback.correctedAnswer}</p>
                         </div>

@@ -149,7 +149,7 @@ function StageStatusDot({ status }: { status: NaesinStageStatus }) {
         status === 'completed'
           ? 'bg-green-500'
           : status === 'available'
-            ? 'bg-purple-500'
+            ? 'bg-indigo-500'
             : 'bg-gray-300'
       )}
     />

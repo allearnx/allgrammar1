@@ -393,7 +393,7 @@ export function UnitContentManager({ unitId }: { unitId: string }) {
     { label: '단어', icon: BookOpen, count: vocabList.length, color: 'text-blue-500', toggle: () => setShowVocabList(!showVocabList), expanded: showVocabList },
     { label: '교과서 지문', icon: FileText, count: passageList.length, color: 'text-orange-500', toggle: () => setShowPassageList(!showPassageList), expanded: showPassageList },
     { label: '문법 설명', icon: GraduationCap, count: grammarCount, color: 'text-green-500', toggle: () => setShowGrammarList(!showGrammarList), expanded: showGrammarList },
-    { label: 'OMR 시트', icon: ClipboardList, count: omrCount, color: 'text-purple-500' },
+    { label: 'OMR 시트', icon: ClipboardList, count: omrCount, color: 'text-indigo-500' },
     { label: '문제풀이', icon: ClipboardList, count: problemCount, color: 'text-red-500' },
     { label: '직전보강', icon: Brain, count: lastReviewCount, color: 'text-amber-500' },
   ];

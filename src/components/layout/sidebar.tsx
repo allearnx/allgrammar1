@@ -192,7 +192,7 @@ const STAGE_ITEMS = [
 function StageIcon({ status }: { status: NaesinStageStatus }) {
   if (status === 'completed') return <CheckCircle className="h-3 w-3 text-green-500 shrink-0" />;
   if (status === 'locked') return <Lock className="h-3 w-3 text-muted-foreground shrink-0" />;
-  return <div className="h-3 w-3 rounded-full border-2 border-purple-500 shrink-0" />;
+  return <div className="h-3 w-3 rounded-full border-2 border-indigo-500 shrink-0" />;
 }
 
 function getDDayLabel(examDate: string | null): string | null {
@@ -256,7 +256,7 @@ function NaesinTree({ exams, pathname, onNavigate }: { exams: NaesinSidebarExam[
             {/* Exam round header */}
             <button
               onClick={() => toggleExam(exam.round)}
-              className="flex items-center gap-2 w-full px-3 py-1.5 text-xs font-medium rounded-md hover:bg-[#f3f4f6] transition-colors"
+              className="flex items-center gap-2 w-full px-3 py-1.5 text-xs font-medium rounded-md hover:bg-slate-100 transition-colors"
             >
               {isExamOpen ? (
                 <ChevronDown className="h-3 w-3 text-muted-foreground shrink-0" />
@@ -285,7 +285,7 @@ function NaesinTree({ exams, pathname, onNavigate }: { exams: NaesinSidebarExam[
                       {/* Unit header */}
                       <button
                         onClick={() => toggleUnit(unit.id)}
-                        className="flex items-center gap-2 w-full px-2 py-1 text-xs rounded-md hover:bg-[#f3f4f6] transition-colors"
+                        className="flex items-center gap-2 w-full px-2 py-1 text-xs rounded-md hover:bg-slate-100 transition-colors"
                       >
                         {isUnitOpen ? (
                           <ChevronDown className="h-3 w-3 text-muted-foreground shrink-0" />
@@ -298,7 +298,7 @@ function NaesinTree({ exams, pathname, onNavigate }: { exams: NaesinSidebarExam[
                         {unitCompleted ? (
                           <CheckCircle className="h-3 w-3 text-green-500 shrink-0" />
                         ) : (
-                          <div className="h-3 w-3 rounded-full border-2 border-purple-500 shrink-0" />
+                          <div className="h-3 w-3 rounded-full border-2 border-indigo-500 shrink-0" />
                         )}
                       </button>
 
@@ -321,8 +321,8 @@ function NaesinTree({ exams, pathname, onNavigate }: { exams: NaesinSidebarExam[
                                   isLocked
                                     ? 'opacity-40'
                                     : isActive
-                                      ? 'bg-[#f5f3ff] text-[#6d28d9] font-medium'
-                                      : 'hover:bg-[#f3f4f6] text-[#6b7280]'
+                                      ? 'bg-indigo-50 text-indigo-600 font-medium'
+                                      : 'hover:bg-slate-100 text-slate-500'
                                 )}
                               >
                                 <StageIcon status={status} />
@@ -374,7 +374,7 @@ function NavLinks({
       {groups.map((group, groupIdx) => (
         <div key={groupIdx} className={groupIdx > 0 ? 'mt-2 pt-2 border-t border-sidebar-border' : ''}>
           {group.label && (
-            <p className="px-3 py-1.5 text-xs font-semibold uppercase tracking-wider text-[#9ca3af]">
+            <p className="px-3 py-1.5 text-xs font-semibold uppercase tracking-wider text-slate-400">
               {group.label}
             </p>
           )}
@@ -393,15 +393,15 @@ function NavLinks({
                   className={cn(
                     'flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-colors relative',
                     isActive
-                      ? 'bg-[#f5f3ff] text-[#6d28d9] border-l-[3px] border-[#6d28d9] pl-[9px]'
-                      : 'text-[#6b7280] hover:bg-[#f3f4f6] hover:text-[#111827]',
-                    isLoading && !isActive && 'bg-[#f3f4f6] text-[#111827]'
+                      ? 'bg-indigo-50 text-indigo-600 border-l-[3px] border-indigo-600 pl-[9px]'
+                      : 'text-slate-500 hover:bg-slate-100 hover:text-slate-900',
+                    isLoading && !isActive && 'bg-slate-100 text-slate-900'
                   )}
                 >
                   {isLoading ? (
                     <Loader2 className="h-4 w-4 shrink-0 animate-spin" />
                   ) : (
-                    <item.icon className={cn('h-4 w-4 shrink-0', isActive ? 'text-[#6d28d9]' : 'text-[#9ca3af]')} />
+                    <item.icon className={cn('h-4 w-4 shrink-0', isActive ? 'text-indigo-600' : 'text-slate-400')} />
                   )}
                   {item.label}
                 </Link>
@@ -437,7 +437,7 @@ export function Sidebar({ user, services, naesinTree }: SidebarProps) {
   const sidebarContent = (
     <div className="flex h-full flex-col">
       <div className="flex h-14 items-center border-b border-sidebar-border px-4">
-        <span className="flex items-center gap-2 font-bold text-[#6d28d9]">
+        <span className="flex items-center gap-2 font-bold text-indigo-600">
           <GraduationCap className="h-5 w-5" />
           <span>올라영</span>
         </span>
@@ -447,12 +447,12 @@ export function Sidebar({ user, services, naesinTree }: SidebarProps) {
       </ScrollArea>
       <div className="border-t border-sidebar-border p-4">
         <div className="mb-3 px-3">
-          <p className="text-sm font-medium truncate text-[#111827]">{user.full_name}</p>
-          <p className="text-xs truncate text-[#9ca3af]">{user.email}</p>
+          <p className="text-sm font-medium truncate text-slate-900">{user.full_name}</p>
+          <p className="text-xs truncate text-slate-400">{user.email}</p>
         </div>
         <Button
           variant="ghost"
-          className="w-full justify-start gap-3 text-[#9ca3af] hover:text-[#111827] hover:bg-[#f3f4f6]"
+          className="w-full justify-start gap-3 text-slate-400 hover:text-slate-900 hover:bg-slate-100"
           onClick={handleLogout}
         >
           <LogOut className="h-4 w-4" />
