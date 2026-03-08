@@ -7,9 +7,11 @@ import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import {
   BookOpen,
+  ClipboardList,
   RefreshCw,
 } from 'lucide-react';
 import { toast } from 'sonner';
+import Link from 'next/link';
 import { LessonCard } from '@/components/naesin/lesson-card';
 import { ExamCountdown } from '@/components/naesin/exam-countdown';
 import type {
@@ -159,6 +161,19 @@ export function NaesinHome({
           교과서 변경
         </Button>
       </div>
+
+      {/* 교재 OMR 진입 */}
+      <Link href="/student/naesin/workbook-omr">
+        <Card className="hover:shadow-md transition-shadow">
+          <CardContent className="py-4 flex items-center gap-3">
+            <ClipboardList className="h-8 w-8 text-blue-500 shrink-0" />
+            <div>
+              <p className="font-medium">교재 OMR</p>
+              <p className="text-sm text-muted-foreground">내신 문제집 OMR 채점</p>
+            </div>
+          </CardContent>
+        </Card>
+      </Link>
 
       {/* Show exam-grouped view if assignments exist */}
       {hasExamGroups ? (

@@ -384,3 +384,50 @@ export const serviceAssignmentDeleteSchema = z.object({
   studentId: ID,
   service: z.enum(['naesin', 'voca']),
 });
+
+// ── Grammar Socratic Chat Schemas ──
+
+export const grammarChatStartSchema = z.object({
+  lessonId: ID,
+});
+
+export const grammarChatReplySchema = z.object({
+  sessionId: ID,
+  message: LONG,
+});
+
+// ── 교재 OMR Schemas ──
+
+export const workbookCreateSchema = z.object({
+  title: SHORT,
+  publisher: SHORT,
+  grade: z.number().min(1).max(3),
+  cover_image_url: URL_STR.nullish(),
+  sort_order: z.number().nullish(),
+});
+
+export const workbookPatchSchema = z.object({
+  id: ID,
+}).passthrough();
+
+export const workbookOmrSheetCreateSchema = z.object({
+  workbook_id: ID,
+  title: SHORT,
+  total_questions: z.number().min(1).max(200),
+  answer_key: z.array(z.number()).min(1).max(200),
+  sort_order: z.number().nullish(),
+});
+
+export const workbookOmrSubmitSchema = z.object({
+  omrSheetId: ID,
+  studentAnswers: z.array(z.number()).min(1).max(200),
+});
+
+export const grammarChatQuestionCreateSchema = z.object({
+  lessonId: ID,
+  questionText: LONG,
+  grammarConcept: MEDIUM.nullish(),
+  hint: MEDIUM.nullish(),
+  expectedAnswerKeywords: z.array(SHORT).nullish(),
+  sortOrder: z.number().nullish(),
+});

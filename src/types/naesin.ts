@@ -296,3 +296,82 @@ export interface NaesinLastReviewContent {
   sort_order: number;
   created_at: string;
 }
+
+// ============================================
+// 소크라틱 AI 문법 챗봇
+// ============================================
+
+export interface NaesinGrammarChatQuestion {
+  id: string;
+  lesson_id: string;
+  question_text: string;
+  grammar_concept: string | null;
+  hint: string | null;
+  expected_answer_keywords: string[];
+  sort_order: number;
+  created_at: string;
+}
+
+// ============================================
+// 교재 OMR (독립 기능)
+// ============================================
+
+export interface NaesinWorkbook {
+  id: string;
+  title: string;
+  publisher: string;
+  grade: number;
+  cover_image_url: string | null;
+  sort_order: number;
+  is_active: boolean;
+  created_at: string;
+}
+
+export interface NaesinWorkbookOmrSheet {
+  id: string;
+  workbook_id: string;
+  title: string;
+  total_questions: number;
+  answer_key: number[];
+  created_by: string | null;
+  sort_order: number;
+  created_at: string;
+}
+
+export interface NaesinWorkbookOmrAttempt {
+  id: string;
+  student_id: string;
+  omr_sheet_id: string;
+  student_answers: number[];
+  correct_count: number;
+  total_questions: number;
+  score_percent: number;
+  created_at: string;
+}
+
+export type NaesinGrammarChatMessageRole = 'ai' | 'student';
+
+export interface NaesinGrammarChatMessage {
+  role: NaesinGrammarChatMessageRole;
+  content: string;
+  questionId?: string;
+  feedback?: {
+    isCorrect: boolean;
+    correctedPoint: string | null;
+  };
+  timestamp: string;
+}
+
+export interface NaesinGrammarChatSession {
+  id: string;
+  student_id: string;
+  lesson_id: string;
+  messages: NaesinGrammarChatMessage[];
+  turn_count: number;
+  max_turns: number;
+  is_complete: boolean;
+  current_question_id: string | null;
+  questions_used: string[];
+  created_at: string;
+  updated_at: string;
+}
