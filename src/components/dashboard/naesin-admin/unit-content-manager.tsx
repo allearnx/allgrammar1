@@ -15,6 +15,7 @@ import {
   ChevronRight,
   Pencil,
   Brain,
+  Wand2,
 } from 'lucide-react';
 import { Textarea } from '@/components/ui/textarea';
 import { Loader2 } from 'lucide-react';
@@ -51,6 +52,7 @@ export function UnitContentManager({ unitId }: { unitId: string }) {
   const [deleteGrammarId, setDeleteGrammarId] = useState<string | null>(null);
   const [editingGrammarId, setEditingGrammarId] = useState<string | null>(null);
   const [grammarEditForm, setGrammarEditForm] = useState({ title: '', youtube_url: '', text_content: '' });
+  const [regeneratingGV, setRegeneratingGV] = useState<string | null>(null);
 
   useEffect(() => {
     loadCounts();
@@ -301,6 +303,38 @@ export function UnitContentManager({ unitId }: { unitId: string }) {
     }
   }
 
+  async function regenerateGrammarVocab(passage: NaesinPassage) {
+    if (!passage.sentences || passage.sentences.length === 0) {
+      toast.error('문장 데이터가 없습니다');
+      return;
+    }
+    setRegeneratingGV(passage.id);
+    try {
+      const gvRes = await fetch('/api/naesin/passages/extract-grammar-vocab', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ sentences: passage.sentences }),
+      });
+      if (!gvRes.ok) throw new Error('AI 생성 실패');
+      const gvData = await gvRes.json();
+
+      const patchRes = await fetch('/api/naesin/passages', {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id: passage.id, grammar_vocab_items: gvData.items || [] }),
+      });
+      if (!patchRes.ok) throw new Error('저장 실패');
+      const updated = await patchRes.json();
+      setPassageList((prev) => prev.map((p) => (p.id === passage.id ? updated : p)));
+      toast.success(`어법/어휘 문제 ${(gvData.items || []).length}개 생성됨`);
+    } catch (err) {
+      console.error(err);
+      toast.error('어법/어휘 재생성 실패');
+    } finally {
+      setRegeneratingGV(null);
+    }
+  }
+
   const sections = [
     { label: '단어', icon: BookOpen, count: vocabList.length, color: 'text-blue-500', toggle: () => setShowVocabList(!showVocabList), expanded: showVocabList },
     { label: '교과서 지문', icon: FileText, count: passageList.length, color: 'text-orange-500', toggle: () => setShowPassageList(!showPassageList), expanded: showPassageList },
@@ -429,6 +463,20 @@ export function UnitContentManager({ unitId }: { unitId: string }) {
               <div className="flex items-center gap-2 py-1.5 px-2 group">
                 <FileText className="h-3.5 w-3.5 text-orange-500 shrink-0" />
                 <span className="text-sm flex-1 truncate">{passage.title}</span>
+                {passage.grammar_vocab_items && (passage.grammar_vocab_items as unknown[]).length > 0 && (
+                  <Badge variant="outline" className="text-[10px] h-4 px-1 shrink-0">어법/어휘</Badge>
+                )}
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="h-6 w-6 opacity-0 group-hover:opacity-100"
+                  title="어법/어휘 재생성"
+                  onClick={() => regenerateGrammarVocab(passage)}
+                  disabled={regeneratingGV === passage.id}
+                  aria-label="어법/어휘 재생성"
+                >
+                  {regeneratingGV === passage.id ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <Wand2 className="h-3.5 w-3.5" />}
+                </Button>
                 <Button
                   variant="ghost"
                   size="icon"

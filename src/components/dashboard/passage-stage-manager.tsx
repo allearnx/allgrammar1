@@ -4,16 +4,17 @@ import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Plus, X, Save, Loader2, FileText, Shuffle, PenLine } from 'lucide-react';
+import { Plus, X, Save, Loader2, FileText, Shuffle, PenLine, BookOpen } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { toast } from 'sonner';
 
-type StageType = 'fill_blanks' | 'ordering' | 'translation';
+type StageType = 'fill_blanks' | 'ordering' | 'translation' | 'grammar_vocab';
 
 const STAGE_OPTIONS: { value: StageType; label: string; icon: typeof FileText }[] = [
   { value: 'fill_blanks', label: '빈칸 채우기', icon: FileText },
   { value: 'ordering', label: '순서 배열', icon: Shuffle },
   { value: 'translation', label: '영작', icon: PenLine },
+  { value: 'grammar_vocab', label: '어법/어휘', icon: BookOpen },
 ];
 
 interface Props {

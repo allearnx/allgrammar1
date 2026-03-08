@@ -4,7 +4,7 @@ import { z } from 'zod';
 
 const updateSchema = z.object({
   studentId: z.string().uuid(),
-  stages: z.array(z.enum(['fill_blanks', 'ordering', 'translation'])).min(1).max(6),
+  stages: z.array(z.enum(['fill_blanks', 'ordering', 'translation', 'grammar_vocab'])).min(1).max(6),
 });
 
 // GET: Fetch student's passage stages

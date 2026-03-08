@@ -236,11 +236,37 @@ export function AddPassageDialog({ unitId, onAdd }: { unitId: string; onAdd: () 
         const err = await res.json().catch(() => null);
         throw new Error(err?.error || '요청에 실패했습니다');
       }
+      const passageData = await res.json();
+      toast.success('지문이 추가되었습니다');
+
+      // Auto-generate grammar/vocab items in background
+      try {
+        toast.info('어법/어휘 문제 생성 중...');
+        const gvRes = await fetch('/api/naesin/passages/extract-grammar-vocab', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ sentences: builtSentences }),
+        });
+        if (gvRes.ok) {
+          const gvData = await gvRes.json();
+          if (gvData.items && gvData.items.length > 0) {
+            await fetch('/api/naesin/passages', {
+              method: 'PATCH',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ id: passageData.id, grammar_vocab_items: gvData.items }),
+            });
+            toast.success(`어법/어휘 문제 ${gvData.items.length}개 생성됨`);
+          }
+        }
+      } catch (gvErr) {
+        console.error('Grammar/vocab generation failed:', gvErr);
+        toast.warning('어법/어휘 문제 생성 실패 (나중에 수동 생성 가능)');
+      }
+
       onAdd();
       setOpen(false);
       setTitle('');
       setSentences([{ original: '', korean: '' }]);
-      toast.success('지문이 추가되었습니다');
     } catch (err) {
       console.error(err);
       toast.error('지문 추가 실패');

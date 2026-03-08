@@ -1,6 +1,24 @@
 import type { BlankItem, SentenceItem } from './textbook';
 
 // ============================================
+// 어법/어휘 선택 문제
+// ============================================
+
+export interface GrammarVocabChoicePoint {
+  startWord: number;   // 문장 내 단어 시작 인덱스
+  endWord: number;     // 문장 내 단어 끝 인덱스
+  options: string[];   // 2~3개 선택지
+  correctIndex: number; // 정답 인덱스
+}
+
+export interface GrammarVocabItem {
+  sentenceIndex: number;
+  original: string;
+  korean: string;
+  choicePoints: GrammarVocabChoicePoint[];
+}
+
+// ============================================
 // 내신 대비 시스템
 // ============================================
 
@@ -51,6 +69,7 @@ export interface NaesinPassage {
   blanks_medium: BlankItem[] | null;
   blanks_hard: BlankItem[] | null;
   sentences: SentenceItem[] | null;
+  grammar_vocab_items: GrammarVocabItem[] | null;
   sort_order: number;
   created_at: string;
 }
@@ -109,6 +128,7 @@ export interface NaesinStudentProgress {
   vocab_quiz_sets_completed: number;
   vocab_total_quiz_sets: number;
   passage_translation_best: number | null;
+  passage_grammar_vocab_best: number | null;
   grammar_videos_completed: number;
   grammar_total_videos: number;
   problem_completed: boolean;

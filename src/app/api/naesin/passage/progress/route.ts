@@ -39,6 +39,9 @@ export const POST = createApiHandler(
     } else if (type === 'translation') {
       const currentBest = existing?.passage_translation_best ?? 0;
       updates.passage_translation_best = Math.max(currentBest, score);
+    } else if (type === 'grammar_vocab') {
+      const currentBest = existing?.passage_grammar_vocab_best ?? 0;
+      updates.passage_grammar_vocab_best = Math.max(currentBest, score);
     }
 
     // Fetch student's required stages to determine completion
@@ -62,6 +65,9 @@ export const POST = createApiHandler(
       translation: type === 'translation'
         ? Math.max(existing?.passage_translation_best ?? 0, score)
         : (existing?.passage_translation_best ?? 0),
+      grammar_vocab: type === 'grammar_vocab'
+        ? Math.max(existing?.passage_grammar_vocab_best ?? 0, score)
+        : (existing?.passage_grammar_vocab_best ?? 0),
     };
 
     const passageCompleted = uniqueRequired.every((s) => (scoreMap[s] ?? 0) >= PASS_THRESHOLD);

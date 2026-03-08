@@ -21,6 +21,7 @@ function makeProgress(overrides: Partial<NaesinStudentProgress> = {}): NaesinStu
     vocab_quiz_sets_completed: 0,
     vocab_total_quiz_sets: 0,
     passage_translation_best: null,
+    passage_grammar_vocab_best: null,
     grammar_videos_completed: 0,
     grammar_total_videos: 0,
     problem_completed: false,
@@ -298,11 +299,13 @@ describe('calculateStageStatuses', () => {
 
   describe('교과서 암기 (passage) 완료 조건', () => {
     it('빈칸 80% + 영작 80% → passage completed', () => {
+      // passage_completed is set server-side by progress API when all required stages ≥80
       const result = calculateStageStatuses(makeInput({
         progress: makeProgress({
           vocab_completed: true,
           passage_fill_blanks_best: 85,
           passage_translation_best: 80,
+          passage_completed: true,
         }),
       }));
       expect(result.passage).toBe('completed');

@@ -27,6 +27,7 @@ export const POST = createApiHandler(
         blanks_medium: body.blanks_medium || null,
         blanks_hard: body.blanks_hard || null,
         sentences: body.sentences || null,
+        grammar_vocab_items: body.grammar_vocab_items || null,
         sort_order: body.sort_order || 0,
       })
       .select()
@@ -44,6 +45,7 @@ const passageUpdateSchema = z.object({
     original: z.string(),
     korean: z.string(),
   })).optional(),
+  grammar_vocab_items: z.unknown().nullish(),
 });
 
 export const PATCH = createApiHandler(
@@ -52,6 +54,9 @@ export const PATCH = createApiHandler(
     const updates: Record<string, unknown> = {};
 
     if (body.title) updates.title = body.title;
+    if (body.grammar_vocab_items !== undefined) {
+      updates.grammar_vocab_items = body.grammar_vocab_items || null;
+    }
 
     if (body.sentences) {
       const sentences = body.sentences.map((s: { original: string; korean: string }) => ({

@@ -12,21 +12,24 @@ import {
 import { Button } from '@/components/ui/button';
 import { toast } from 'sonner';
 import { cn } from '@/lib/utils';
-import { FileText, Shuffle, PenLine, Target, Lightbulb, ArrowRight } from 'lucide-react';
+import { FileText, Shuffle, PenLine, BookOpen, Target, Lightbulb, ArrowRight } from 'lucide-react';
 import { passageToTextbookPassage } from '@/lib/naesin/adapters';
 import { NaesinFillBlanksView } from './fill-blanks-view';
 import { NaesinOrderingView } from './ordering-view';
 import { NaesinTranslationView } from './translation-view';
+import { GrammarVocabView } from './grammar-vocab-view';
 import type { NaesinPassage } from '@/types/database';
+import type { GrammarVocabItem } from '@/types/naesin';
 
 const ONBOARDING_KEY = 'naesin-passage-onboarding-seen';
 
-type PassageStageType = 'fill_blanks' | 'ordering' | 'translation';
+type PassageStageType = 'fill_blanks' | 'ordering' | 'translation' | 'grammar_vocab';
 
 const STAGE_TAB_MAP: Record<PassageStageType, { value: string; label: string }> = {
   fill_blanks: { value: 'fill-blanks', label: '빈칸 채우기' },
   ordering: { value: 'ordering', label: '순서 배열' },
   translation: { value: 'translation', label: '영작' },
+  grammar_vocab: { value: 'grammar-vocab', label: '어법/어휘' },
 };
 
 interface PassageTabProps {
@@ -93,8 +96,10 @@ export function PassageTab({ passages, unitId, onStageComplete, requiredStages }
     (Array.isArray(passage.blanks_medium) && passage.blanks_medium.length > 0) ||
     (Array.isArray(passage.blanks_hard) && passage.blanks_hard.length > 0);
   const hasSentences = Array.isArray(passage.sentences) && passage.sentences.length > 0;
+  const grammarVocabItems = (passage.grammar_vocab_items ?? []) as GrammarVocabItem[];
+  const hasGrammarVocab = grammarVocabItems.length > 0;
 
-  async function savePassageProgress(type: 'fill_blanks' | 'ordering' | 'translation', score: number, difficulty?: string) {
+  async function savePassageProgress(type: 'fill_blanks' | 'ordering' | 'translation' | 'grammar_vocab', score: number, difficulty?: string) {
     try {
       const res = await fetch('/api/naesin/passage/progress', {
         method: 'POST',
@@ -130,7 +135,7 @@ export function PassageTab({ passages, unitId, onStageComplete, requiredStages }
       }
   }
 
-  const gridCols = uniqueStages.length === 1 ? 'grid-cols-1' : uniqueStages.length === 2 ? 'grid-cols-2' : 'grid-cols-3';
+  const gridCols = uniqueStages.length === 1 ? 'grid-cols-1' : uniqueStages.length === 2 ? 'grid-cols-2' : uniqueStages.length === 3 ? 'grid-cols-3' : 'grid-cols-4';
 
   return (
     <div className="space-y-4">
@@ -165,7 +170,8 @@ export function PassageTab({ passages, unitId, onStageComplete, requiredStages }
             const tab = STAGE_TAB_MAP[stage];
             const disabled =
               (stage === 'fill_blanks' && !hasBlanks) ||
-              (stage === 'ordering' && !hasSentences);
+              (stage === 'ordering' && !hasSentences) ||
+              (stage === 'grammar_vocab' && !hasGrammarVocab);
             const count = stageCounts[stage] || 1;
             return (
               <TabsTrigger key={tab.value} value={tab.value} disabled={disabled}>
@@ -211,6 +217,16 @@ export function PassageTab({ passages, unitId, onStageComplete, requiredStages }
             />
           </TabsContent>
         )}
+
+        {uniqueStages.includes('grammar_vocab') && (
+          <TabsContent value="grammar-vocab" className="mt-4">
+            <GrammarVocabView
+              key={passage.id}
+              items={grammarVocabItems}
+              onScoreChange={(score) => savePassageProgress('grammar_vocab', score)}
+            />
+          </TabsContent>
+        )}
       </Tabs>
     </div>
   );
@@ -243,6 +259,15 @@ const ALL_STEPS = [
     tip: 'AI가 채점해주니까 부담 없이 써봐!',
     color: 'text-emerald-600',
     bg: 'bg-emerald-50 dark:bg-emerald-950/30',
+  },
+  {
+    key: 'grammar_vocab' as const,
+    icon: BookOpen,
+    title: '어법/어휘',
+    desc: '문장에서 올바른 어법/어휘 표현을 선택해요.',
+    tip: '헷갈리는 문법과 어휘를 정확히 구별해봐!',
+    color: 'text-amber-600',
+    bg: 'bg-amber-50 dark:bg-amber-950/30',
   },
 ];
 

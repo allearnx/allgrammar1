@@ -23,7 +23,7 @@ export const grammarProgressSchema = z.object({
 
 export const passageProgressSchema = z.object({
   unitId: ID,
-  type: z.enum(['fill_blanks', 'ordering', 'translation']),
+  type: z.enum(['fill_blanks', 'ordering', 'translation', 'grammar_vocab']),
   score: z.number(),
   difficulty: z.enum(['easy', 'medium', 'hard']).nullish(),
 });
@@ -164,6 +164,7 @@ export const passageCreateSchema = z.object({
   blanks_medium: z.unknown().nullish(),
   blanks_hard: z.unknown().nullish(),
   sentences: z.unknown().nullish(),
+  grammar_vocab_items: z.unknown().nullish(),
   sort_order: z.number().nullish(),
 });
 
