@@ -142,6 +142,8 @@ function SentenceCard({
     if (range) {
       const key = `${itemIdx}-${range.cpIdx}`;
       const selectedIdx = selections[key];
+      // Add space before choice point (unless first element)
+      if (elements.length > 0) elements.push(' ');
       elements.push(
         <ChoicePointInline
           key={`cp-${key}`}
@@ -153,10 +155,9 @@ function SentenceCard({
       );
       wordIdx = range.endWord + 1;
     } else {
+      if (elements.length > 0) elements.push(' ');
       elements.push(
-        <span key={`w-${wordIdx}`} className="inline">
-          {wordIdx > 0 && ' '}{words[wordIdx]}
-        </span>
+        <span key={`w-${wordIdx}`}>{words[wordIdx]}</span>
       );
       wordIdx++;
     }
@@ -166,9 +167,9 @@ function SentenceCard({
     <Card>
       <CardContent className="py-3 px-4 space-y-2">
         <p className="text-sm text-muted-foreground">{item.korean}</p>
-        <div className="text-base leading-relaxed flex flex-wrap items-center gap-y-1">
+        <p className="text-base leading-relaxed">
           {elements}
-        </div>
+        </p>
       </CardContent>
     </Card>
   );
