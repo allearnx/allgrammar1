@@ -138,16 +138,35 @@ function BlankConfigurator({
   );
 }
 
+function splitIntoSentencePairs(originalText: string, koreanTranslation: string) {
+  const enSentences = originalText.split(/(?<=[.!?])\s+/).filter((s) => s.trim());
+  const koSentences = koreanTranslation.split(/(?<=[.!?。])\s+/).filter((s) => s.trim());
+  const maxLen = Math.max(enSentences.length, koSentences.length, 1);
+  return Array.from({ length: maxLen }, (_, i) => ({
+    original: enSentences[i]?.trim() || '',
+    korean: koSentences[i]?.trim() || '',
+  }));
+}
+
 export function AddPassageDialog({ unitId, onAdd }: { unitId: string; onAdd: () => void }) {
   const [open, setOpen] = useState(false);
   const [title, setTitle] = useState('');
-  const [originalText, setOriginalText] = useState('');
-  const [koreanTranslation, setKoreanTranslation] = useState('');
-  const [blanksEasy, setBlanksEasy] = useState<BlankItem[] | null>(null);
-  const [blanksMedium, setBlanksMedium] = useState<BlankItem[] | null>(null);
-  const [blanksHard, setBlanksHard] = useState<BlankItem[] | null>(null);
+  const [sentences, setSentences] = useState<{ original: string; korean: string }[]>([{ original: '', korean: '' }]);
   const [saving, setSaving] = useState(false);
   const [extractingText, setExtractingText] = useState(false);
+
+  function updateSentence(idx: number, field: 'original' | 'korean', value: string) {
+    setSentences((prev) => prev.map((s, i) => (i === idx ? { ...s, [field]: value } : s)));
+  }
+
+  function addSentence() {
+    setSentences((prev) => [...prev, { original: '', korean: '' }]);
+  }
+
+  function removeSentence(idx: number) {
+    if (sentences.length <= 1) return;
+    setSentences((prev) => prev.filter((_, i) => i !== idx));
+  }
 
   async function handleTextPdfUpload(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];
@@ -166,9 +185,10 @@ export function AddPassageDialog({ unitId, onAdd }: { unitId: string; onAdd: () 
       }
       const data = await res.json();
       if (data.title) setTitle(data.title);
-      if (data.original_text) setOriginalText(data.original_text);
-      if (data.korean_translation) setKoreanTranslation(data.korean_translation);
-      toast.success('본문이 추출되었습니다. 내용을 확인/수정해주세요.');
+      if (data.original_text && data.korean_translation) {
+        setSentences(splitIntoSentencePairs(data.original_text, data.korean_translation));
+      }
+      toast.success('본문이 추출되었습니다. 문장별로 확인/수정해주세요.');
     } catch (err) {
       toast.error(err instanceof Error ? err.message : 'PDF 추출 실패');
     } finally {
@@ -178,24 +198,25 @@ export function AddPassageDialog({ unitId, onAdd }: { unitId: string; onAdd: () 
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
+    const validSentences = sentences.filter((s) => s.original.trim() || s.korean.trim());
+    if (validSentences.length === 0) {
+      toast.error('최소 1개 문장을 입력해주세요.');
+      return;
+    }
     setSaving(true);
     try {
-      let finalBlanksEasy = blanksEasy;
-      if (!finalBlanksEasy) {
-        const words = originalText.split(/\s+/);
-        finalBlanksEasy = words
-          .map((w, i) => ({ index: i, answer: w }))
-          .filter((_, i) => i % 5 === 2)
-          .slice(0, 10);
-      }
-
-      const originalSentences = originalText.split(/[.!?]+/).filter((s) => s.trim());
-      const koreanSentences = koreanTranslation.split(/[.!?。]+/).filter((s) => s.trim());
-      const sentences = originalSentences.map((s, i) => ({
-        original: s.trim() + '.',
-        korean: koreanSentences[i]?.trim() || '',
-        words: s.trim().split(/\s+/),
+      const builtSentences = validSentences.map((s) => ({
+        original: s.original.trim(),
+        korean: s.korean.trim(),
+        words: s.original.trim().split(/\s+/).filter(Boolean),
       }));
+      const originalText = builtSentences.map((s) => s.original).join(' ');
+      const koreanTranslation = builtSentences.map((s) => s.korean).join(' ');
+
+      // Auto-generate blanks
+      const words = originalText.split(/\s+/);
+      const makeBlanks = (interval: number) =>
+        words.map((w, i) => ({ index: i, answer: w })).filter((_, i) => i % interval === interval - 1);
 
       const res = await fetch('/api/naesin/passages', {
         method: 'POST',
@@ -205,10 +226,10 @@ export function AddPassageDialog({ unitId, onAdd }: { unitId: string; onAdd: () 
           title,
           original_text: originalText,
           korean_translation: koreanTranslation,
-          blanks_easy: finalBlanksEasy.length > 0 ? finalBlanksEasy : null,
-          blanks_medium: blanksMedium,
-          blanks_hard: blanksHard,
-          sentences: sentences.length > 0 ? sentences : null,
+          blanks_easy: makeBlanks(5),
+          blanks_medium: makeBlanks(3),
+          blanks_hard: makeBlanks(2),
+          sentences: builtSentences,
         }),
       });
       if (!res.ok) {
@@ -218,11 +239,7 @@ export function AddPassageDialog({ unitId, onAdd }: { unitId: string; onAdd: () 
       onAdd();
       setOpen(false);
       setTitle('');
-      setOriginalText('');
-      setKoreanTranslation('');
-      setBlanksEasy(null);
-      setBlanksMedium(null);
-      setBlanksHard(null);
+      setSentences([{ original: '', korean: '' }]);
       toast.success('지문이 추가되었습니다');
     } catch (err) {
       console.error(err);
@@ -265,25 +282,45 @@ export function AddPassageDialog({ unitId, onAdd }: { unitId: string; onAdd: () 
             <Label htmlFor="passage-title">제목</Label>
             <Input id="passage-title" value={title} onChange={(e) => setTitle(e.target.value)} placeholder="본문 1" required />
           </div>
-          <div>
-            <Label htmlFor="passage-original">영어 원문</Label>
-            <Textarea id="passage-original" value={originalText} onChange={(e) => setOriginalText(e.target.value)} rows={4} required />
-          </div>
-          <div>
-            <Label htmlFor="passage-korean">한국어 번역</Label>
-            <Textarea id="passage-korean" value={koreanTranslation} onChange={(e) => setKoreanTranslation(e.target.value)} rows={4} required />
+
+          <div className="space-y-2">
+            <div className="flex items-center justify-between">
+              <Label>문장별 한/영 입력</Label>
+              <Button type="button" variant="ghost" size="sm" className="h-6 text-xs" onClick={addSentence}>
+                + 문장 추가
+              </Button>
+            </div>
+            <div className="space-y-2 max-h-[40vh] overflow-y-auto">
+              {sentences.map((s, idx) => (
+                <div key={idx} className="rounded-lg border p-2 space-y-1">
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs text-muted-foreground font-medium">{idx + 1}번 문장</span>
+                    {sentences.length > 1 && (
+                      <button type="button" onClick={() => removeSentence(idx)} className="text-xs text-muted-foreground hover:text-destructive">
+                        <X className="h-3.5 w-3.5" />
+                      </button>
+                    )}
+                  </div>
+                  <Textarea
+                    className="text-sm min-h-[2rem] resize-none"
+                    rows={1}
+                    value={s.korean}
+                    onChange={(e) => updateSentence(idx, 'korean', e.target.value)}
+                    placeholder="한국어"
+                  />
+                  <Textarea
+                    className="text-sm min-h-[2rem] resize-none"
+                    rows={1}
+                    value={s.original}
+                    onChange={(e) => updateSentence(idx, 'original', e.target.value)}
+                    placeholder="English"
+                  />
+                </div>
+              ))}
+            </div>
           </div>
 
-          <div className="space-y-2 rounded-md border p-3">
-            <p className="text-xs font-medium">빈칸 설정</p>
-            <p className="text-xs text-muted-foreground">난이도별로 자동 생성 또는 PDF에서 추출할 수 있습니다.</p>
-            <BlankConfigurator difficulty="easy" originalText={originalText} blanks={blanksEasy} onUpdate={setBlanksEasy} />
-            <BlankConfigurator difficulty="medium" originalText={originalText} blanks={blanksMedium} onUpdate={setBlanksMedium} />
-            <BlankConfigurator difficulty="hard" originalText={originalText} blanks={blanksHard} onUpdate={setBlanksHard} />
-            {!blanksEasy && !blanksMedium && !blanksHard && (
-              <p className="text-xs text-muted-foreground">미설정 시 Easy 빈칸은 자동 생성됩니다.</p>
-            )}
-          </div>
+          <p className="text-xs text-muted-foreground">빈칸은 저장 시 자동 생성됩니다.</p>
 
           <Button type="submit" className="w-full" disabled={saving}>
             {saving ? '저장 중...' : '추가'}
