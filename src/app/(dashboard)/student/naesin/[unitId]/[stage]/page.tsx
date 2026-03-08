@@ -104,7 +104,7 @@ export default async function NaesinStagePage({ params }: Props) {
   // Skip data fetch for locked stages
   const stageData = isLocked
     ? {}
-    : await fetchStageData(supabase, user.id, unitId, stageKey, quizSets.map((s) => s.id));
+    : await fetchStageData(supabase, user.id, unitId, stageKey, quizSets.map((s) => s.id), progress);
 
   return (
     <>
@@ -130,7 +130,8 @@ async function fetchStageData(
   userId: string,
   unitId: string,
   stage: StageKey,
-  quizSetIds: string[]
+  quizSetIds: string[],
+  progress: Record<string, unknown> | null
 ) {
   switch (stage) {
     case 'vocab': {
@@ -152,6 +153,11 @@ async function fetchStageData(
         vocabulary: vocabRes.data || [],
         quizSets: quizSetsRes.data || [],
         completedSetIds,
+        vocabProgress: {
+          flashcardCount: progress?.vocab_flashcard_count ?? 0,
+          quizScore: progress?.vocab_quiz_score ?? null,
+          spellingScore: progress?.vocab_spelling_score ?? null,
+        },
       };
     }
 

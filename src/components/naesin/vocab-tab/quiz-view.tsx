@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Copy, RefreshCw, RotateCcw } from 'lucide-react';
+import { Copy, RefreshCw, RotateCcw, Target, ArrowRight, CheckCircle } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { MCQOptionList } from '@/components/shared/mcq-option-list';
 import { toast } from 'sonner';
@@ -47,12 +47,14 @@ export function NaesinQuizView({
   unitId,
   onComplete,
   onQuizSetResult,
+  onGoToSpelling,
 }: {
   vocabulary: NaesinVocabulary[];
   allVocabulary?: NaesinVocabulary[];
   unitId: string;
   onComplete: (score: number) => void;
   onQuizSetResult?: (score: number, wrongWords: WrongWord[]) => void;
+  onGoToSpelling?: () => void;
 }) {
   const [questions, setQuestions] = useState<QuizQuestion[]>(() => generateQuizQuestions(vocabulary, allVocabulary));
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -166,8 +168,48 @@ export function NaesinQuizView({
 
   if (quizFinished) {
     const pct = Math.round((score.correct / questions.length) * 100);
+    const passed = pct >= 80;
+
     return (
       <div className="space-y-6 max-w-md mx-auto">
+        {/* Result CTA Banner */}
+        <Card className={cn(
+          'border',
+          passed
+            ? 'border-green-200 bg-green-50 dark:bg-green-950/30 dark:border-green-800'
+            : 'border-orange-200 bg-orange-50 dark:bg-orange-950/30 dark:border-orange-800'
+        )}>
+          <CardContent className="py-4 text-center space-y-2">
+            {passed ? (
+              <>
+                <CheckCircle className="h-8 w-8 text-green-600 mx-auto" />
+                <p className="font-medium text-green-800 dark:text-green-200">
+                  퀴즈 통과!
+                </p>
+                <p className="text-sm text-green-600 dark:text-green-400">
+                  {onGoToSpelling ? '이제 스펠링으로 넘어가자!' : '잘했어요!'}
+                </p>
+                {onGoToSpelling && (
+                  <Button onClick={onGoToSpelling} className="mt-2">
+                    스펠링 시작하기
+                    <ArrowRight className="h-4 w-4 ml-1" />
+                  </Button>
+                )}
+              </>
+            ) : (
+              <>
+                <Target className="h-8 w-8 text-orange-600 mx-auto" />
+                <p className="font-medium text-orange-800 dark:text-orange-200">
+                  아쉽다! 목표 점수는 80점이야
+                </p>
+                <p className="text-sm text-orange-600 dark:text-orange-400">
+                  다시 도전해봐!
+                </p>
+              </>
+            )}
+          </CardContent>
+        </Card>
+
         <div className="text-center space-y-2">
           <p className="text-sm text-muted-foreground">{attemptNumber}회차 결과</p>
           <p className={cn(
@@ -199,7 +241,7 @@ export function NaesinQuizView({
 
         <div className="flex flex-col gap-2">
           {wrongWords.length > 0 && (
-            <Button onClick={handleRetryWrong} className="w-full">
+            <Button onClick={handleRetryWrong} className={cn('w-full', !passed && 'ring-2 ring-orange-400')}>
               <RefreshCw className="h-4 w-4 mr-2" />
               {attemptNumber + 1}회차 다시 풀기 (틀린 단어)
             </Button>
@@ -223,7 +265,13 @@ export function NaesinQuizView({
     <div className="space-y-6">
       <div className="flex justify-between items-center">
         <span className="text-sm text-muted-foreground">{currentIndex + 1} / {questions.length}</span>
-        <ScoreBadges correct={score.correct} wrong={score.wrong} />
+        <div className="flex items-center gap-3">
+          <span className="inline-flex items-center gap-1 text-xs font-medium text-orange-600 bg-orange-100 dark:bg-orange-900/30 px-2 py-0.5 rounded-full">
+            <Target className="h-3 w-3" />
+            목표 80점
+          </span>
+          <ScoreBadges correct={score.correct} wrong={score.wrong} />
+        </div>
       </div>
 
       <Card className="max-w-md mx-auto">

@@ -48,11 +48,18 @@ const STAGE_CONFIG = [
   { key: 'lastReview' as const, label: '직전보강', shortLabel: '보강', icon: Brain, unlockHint: '시험 D-3일 전 자동 해금' },
 ];
 
+export interface VocabProgress {
+  flashcardCount: number;
+  quizScore: number | null;
+  spellingScore: number | null;
+}
+
 interface StageData {
   // vocab
   vocabulary?: NaesinVocabulary[];
   quizSets?: NaesinVocabQuizSet[];
   completedSetIds?: string[];
+  vocabProgress?: VocabProgress;
   // passage
   passages?: NaesinPassage[];
   // grammar
@@ -172,6 +179,8 @@ export function NaesinStageView({
                 onStageComplete={handleStageComplete}
                 quizSets={stageData.quizSets}
                 completedSetIds={stageData.completedSetIds}
+                vocabProgress={stageData.vocabProgress}
+                onNavigateToNextStage={() => router.push(`/student/naesin/${unit.id}/passage`)}
               />
             )}
             {currentStage === 'passage' && (

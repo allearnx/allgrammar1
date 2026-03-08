@@ -3,13 +3,22 @@
 import { useState } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { ChevronLeft, ChevronRight, RotateCcw } from 'lucide-react';
-import { toast } from 'sonner';
+import { ChevronLeft, ChevronRight, RotateCcw, CheckCircle, ArrowRight } from 'lucide-react';
 import type { MemoryItem, StudentMemoryProgress, NaesinVocabulary } from '@/types/database';
 
 type FlashcardItem = MemoryItem & { progress: StudentMemoryProgress | null };
 
-export function NaesinFlashcardView({ items, vocabulary, onComplete }: { items: FlashcardItem[]; vocabulary: NaesinVocabulary[]; onComplete: () => void }) {
+export function NaesinFlashcardView({
+  items,
+  vocabulary,
+  onComplete,
+  onGoToQuiz,
+}: {
+  items: FlashcardItem[];
+  vocabulary: NaesinVocabulary[];
+  onComplete: () => void;
+  onGoToQuiz?: () => void;
+}) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [flipped, setFlipped] = useState(false);
   const [seenAll, setSeenAll] = useState(false);
@@ -28,7 +37,6 @@ export function NaesinFlashcardView({ items, vocabulary, onComplete }: { items: 
     } else if (!seenAll) {
       setSeenAll(true);
       onComplete();
-      toast.success('모든 카드를 확인했습니다!');
     }
   }
 
@@ -48,6 +56,29 @@ export function NaesinFlashcardView({ items, vocabulary, onComplete }: { items: 
 
   return (
     <div className="space-y-6">
+      {/* Completion banner */}
+      {seenAll && (
+        <Card className="border-green-200 bg-green-50 dark:bg-green-950/30 dark:border-green-800">
+          <CardContent className="py-4 flex flex-col sm:flex-row items-center gap-3">
+            <CheckCircle className="h-6 w-6 text-green-600 shrink-0" />
+            <div className="flex-1 text-center sm:text-left">
+              <p className="font-medium text-green-800 dark:text-green-200">
+                모든 카드를 확인했어요!
+              </p>
+              <p className="text-sm text-green-600 dark:text-green-400">
+                {onGoToQuiz ? '이제 퀴즈를 풀어볼까요?' : '플래시카드 학습 완료!'}
+              </p>
+            </div>
+            {onGoToQuiz && (
+              <Button onClick={onGoToQuiz} className="shrink-0">
+                퀴즈 시작하기
+                <ArrowRight className="h-4 w-4 ml-1" />
+              </Button>
+            )}
+          </CardContent>
+        </Card>
+      )}
+
       <div className="text-center text-sm text-muted-foreground">
         {currentIndex + 1} / {items.length}
       </div>
