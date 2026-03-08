@@ -5,8 +5,14 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { CheckCircle, AlertTriangle } from 'lucide-react';
-import { toast } from 'sonner';
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+} from '@/components/ui/dialog';
+import { CheckCircle, AlertTriangle, Trophy, RotateCcw, PenLine } from 'lucide-react';
 import type { TextbookPassage, BlankItem } from '@/types/database';
 
 type Difficulty = 'easy' | 'medium' | 'hard';
@@ -38,6 +44,7 @@ export function FillBlanksExercise({ passage, onComplete, showWrongAlert }: Fill
   const [difficulty, setDifficulty] = useState<Difficulty>('easy');
   const [answers, setAnswers] = useState<Record<number, string>>({});
   const [results, setResults] = useState<Record<number, boolean> | null>(null);
+  const [resultModal, setResultModal] = useState<{ score: number; correct: number; total: number } | null>(null);
 
   const blanksMap: Record<Difficulty, BlankItem[] | null> = {
     easy: passage.blanks_easy as BlankItem[] | null,
@@ -137,14 +144,13 @@ export function FillBlanksExercise({ passage, onComplete, showWrongAlert }: Fill
     setResults(newResults);
     const score = Math.round((correctCount / blanks.length) * 100);
     onComplete(score, wrongs);
-    toast(score >= 80 ? '잘했어요!' : '다시 도전해보세요!', {
-      description: `${correctCount}/${blanks.length} 정답 (${score}점)`,
-    });
+    setResultModal({ score, correct: correctCount, total: blanks.length });
   }
 
   function handleReset() {
     setAnswers({});
     setResults(null);
+    setResultModal(null);
   }
 
   return (
@@ -202,20 +208,78 @@ export function FillBlanksExercise({ passage, onComplete, showWrongAlert }: Fill
             </>
           )}
 
-          {showWrongAlert && results !== null && Object.values(results).some((v) => !v) && (
-            <div className="flex items-center gap-2 text-sm text-red-600 bg-red-50 rounded-lg px-3 py-2">
-              <AlertTriangle className="h-4 w-4 shrink-0" />
-              오답이 기록되었습니다. 오답을 써서 선생님에게 제출하세요.
-            </div>
-          )}
-
           <div className="flex gap-2">
             {results === null ? (
               <Button onClick={handleSubmit} className="flex-1">제출하기</Button>
             ) : (
-              <Button onClick={handleReset} variant="outline" className="flex-1">다시 풀기</Button>
+              <Button onClick={handleReset} variant="outline" className="flex-1">
+                <RotateCcw className="h-4 w-4 mr-1" />
+                다시 풀기
+              </Button>
             )}
           </div>
+
+          {/* 채점 결과 팝업 */}
+          <Dialog open={resultModal !== null} onOpenChange={(v) => { if (!v) setResultModal(null); }}>
+            <DialogContent className="sm:max-w-sm">
+              {resultModal && resultModal.score >= 80 ? (
+                <>
+                  <DialogHeader>
+                    <div className="flex justify-center mb-2">
+                      <div className="h-16 w-16 rounded-full bg-green-100 flex items-center justify-center">
+                        <Trophy className="h-8 w-8 text-green-600" />
+                      </div>
+                    </div>
+                    <DialogTitle className="text-center text-lg">
+                      {resultModal.score}점 — 통과!
+                    </DialogTitle>
+                    <DialogDescription className="text-center">
+                      {resultModal.correct}/{resultModal.total} 정답! 잘했어!
+                    </DialogDescription>
+                  </DialogHeader>
+                  <Button onClick={() => setResultModal(null)} className="w-full mt-2">
+                    확인
+                  </Button>
+                </>
+              ) : resultModal ? (
+                <>
+                  <DialogHeader>
+                    <div className="flex justify-center mb-2">
+                      <div className="h-16 w-16 rounded-full bg-orange-100 flex items-center justify-center">
+                        <PenLine className="h-8 w-8 text-orange-600" />
+                      </div>
+                    </div>
+                    <DialogTitle className="text-center text-lg">
+                      {resultModal.score}점
+                    </DialogTitle>
+                    <DialogDescription className="text-center leading-relaxed">
+                      {resultModal.correct}/{resultModal.total} 정답
+                    </DialogDescription>
+                  </DialogHeader>
+                  <div className="space-y-3 mt-2">
+                    <div className="rounded-lg bg-orange-50 p-3 space-y-2">
+                      <div className="flex items-start gap-2">
+                        <AlertTriangle className="h-4 w-4 text-orange-600 mt-0.5 shrink-0" />
+                        <p className="text-sm text-orange-800">
+                          틀린 단어를 <span className="font-bold">오답 노트에 써서 선생님에게 제출</span>하고 다시 외워서 도전하자!
+                        </p>
+                      </div>
+                      <div className="flex items-start gap-2">
+                        <CheckCircle className="h-4 w-4 text-orange-600 mt-0.5 shrink-0" />
+                        <p className="text-sm text-orange-800">
+                          <span className="font-bold">80점 이상</span>을 받아야 다음 단계로 넘어갈 수 있어!
+                        </p>
+                      </div>
+                    </div>
+                    <Button onClick={() => { setResultModal(null); handleReset(); }} className="w-full" variant="default">
+                      <RotateCcw className="h-4 w-4 mr-1" />
+                      다시 풀기
+                    </Button>
+                  </div>
+                </>
+              ) : null}
+            </DialogContent>
+          </Dialog>
         </>
       )}
     </div>
