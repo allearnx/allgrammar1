@@ -73,7 +73,8 @@ export function WriteWrongWords({ wrongWords, dayId, onSubmitted }: WriteWrongWo
       setSubmitted(true);
       toast.success('선생님에게 제출되었습니다!');
       onSubmitted();
-    } catch {
+    } catch (err) {
+      console.error(err);
       toast.error('제출 중 오류가 발생했습니다');
     } finally {
       setSubmitting(false);

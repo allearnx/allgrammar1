@@ -77,7 +77,8 @@ export function ReportsClient({ students }: ReportsClientProps) {
       const data: EnhancedReportData = await response.json();
       setReport(data);
       toast.success('리포트가 생성되었습니다');
-    } catch {
+    } catch (err) {
+      console.error(err);
       toast.error('리포트 생성 실패');
     } finally {
       setLoading(false);
@@ -103,7 +104,8 @@ export function ReportsClient({ students }: ReportsClientProps) {
 
       if (error) throw error;
       setHistory((data as WeeklyReportRow[]) || []);
-    } catch {
+    } catch (err) {
+      console.error(err);
       toast.error('이력 조회 실패');
     } finally {
       setHistoryLoading(false);

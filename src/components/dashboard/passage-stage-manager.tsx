@@ -46,7 +46,8 @@ export function PassageStageManager({ studentId, initialStages }: Props) {
       });
       if (!res.ok) throw new Error();
       toast.success('교과서 암기 단계가 저장되었습니다');
-    } catch {
+    } catch (err) {
+      console.error(err);
       toast.error('저장 중 오류가 발생했습니다');
     } finally {
       setSaving(false);

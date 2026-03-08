@@ -47,7 +47,8 @@ export function ServiceAssignmentToggle({
       const label = SERVICES.find((s) => s.key === service)?.label || service;
       toast.success(isAssigned ? `${label} 해제됨` : `${label} 배정됨`);
       onUpdate?.();
-    } catch {
+    } catch (err) {
+      console.error(err);
       toast.error('서비스 배정 변경에 실패했습니다');
     } finally {
       setLoading(null);

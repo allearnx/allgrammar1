@@ -127,7 +127,8 @@ export function InteractiveProblemView({
         return null;
       }
       return await res.json();
-    } catch {
+    } catch (err) {
+      console.error(err);
       toast.error('AI 채점 중 오류가 발생했습니다.');
       return null;
     }
@@ -251,7 +252,8 @@ export function InteractiveProblemView({
         toast.success('문제풀이를 완료했습니다!');
         onComplete?.();
       }
-    } catch {
+    } catch (err) {
+      console.error(err);
       toast.error('결과 저장에 실패했습니다');
       setFinished(true);
     }

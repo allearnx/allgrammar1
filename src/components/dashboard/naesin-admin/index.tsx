@@ -44,7 +44,8 @@ export function NaesinAdminClient({ textbooks: initialTextbooks }: NaesinAdminCl
         .eq('textbook_id', textbookId)
         .order('sort_order');
       setUnits(data || []);
-    } catch {
+    } catch (err) {
+      console.error(err);
       toast.error('단원 목록을 불러오지 못했습니다');
     }
   }
@@ -180,7 +181,8 @@ export function NaesinAdminClient({ textbooks: initialTextbooks }: NaesinAdminCl
                 } else {
                   toast.error('교과서 삭제에 실패했습니다');
                 }
-              } catch {
+              } catch (err) {
+                console.error(err);
                 toast.error('교과서 삭제 중 오류가 발생했습니다');
               }
             }}

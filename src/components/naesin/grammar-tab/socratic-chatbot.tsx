@@ -36,7 +36,8 @@ export function SocraticChatbot({ lessonId, lessonTitle }: SocraticChatbotProps)
         } else {
           setHasQuestions(false);
         }
-      } catch {
+      } catch (err) {
+        console.error(err);
         setHasQuestions(false);
       }
     }

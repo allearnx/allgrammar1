@@ -33,7 +33,8 @@ export function ChatQuestionManager({ lessonId, lessonTitle }: ChatQuestionManag
         const data = await res.json();
         setQuestions(data);
       }
-    } catch {
+    } catch (err) {
+      console.error(err);
       toast.error('질문 목록을 불러오지 못했습니다');
     } finally {
       setLoading(false);
@@ -77,7 +78,8 @@ export function ChatQuestionManager({ lessonId, lessonTitle }: ChatQuestionManag
       } else {
         toast.error('수정 실패');
       }
-    } catch {
+    } catch (err) {
+      console.error(err);
       toast.error('질문 수정 중 오류가 발생했습니다');
     }
   }
@@ -95,7 +97,8 @@ export function ChatQuestionManager({ lessonId, lessonTitle }: ChatQuestionManag
       } else {
         toast.error('삭제 실패');
       }
-    } catch {
+    } catch (err) {
+      console.error(err);
       toast.error('질문 삭제 중 오류가 발생했습니다');
     }
   }

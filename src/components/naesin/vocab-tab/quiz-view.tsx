@@ -111,9 +111,9 @@ export function NaesinQuizView({
         setSavedResult(data.result);
         setAttemptNumber(data.result.attempt_number);
       }
-    } catch {
-      // Silent fail
-    } finally {
+    } catch (err) {
+      console.error(err);
+      } finally {
       setSaving(false);
       setQuizFinished(true);
     }

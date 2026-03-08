@@ -71,7 +71,8 @@ export function NaesinHome({
       toast.success('교과서가 선택되었습니다');
       router.refresh();
       setSelecting(false);
-    } catch {
+    } catch (err) {
+      console.error(err);
       toast.error('교과서 선택 중 오류가 발생했습니다');
     } finally {
       setSaving(false);

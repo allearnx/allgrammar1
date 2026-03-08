@@ -37,9 +37,9 @@ export function WrongAnswerReview({ unitId }: WrongAnswerReviewProps) {
       const res = await fetch(`/api/naesin/wrong-answers?${params}`);
       const data = await res.json();
       setWrongAnswers(Array.isArray(data) ? data : []);
-    } catch {
-      // ignore
-    } finally {
+    } catch (err) {
+      console.error(err);
+      } finally {
       setLoading(false);
     }
   }
@@ -53,7 +53,8 @@ export function WrongAnswerReview({ unitId }: WrongAnswerReviewProps) {
       });
       setWrongAnswers((prev) => prev.filter((wa) => wa.id !== id));
       toast.success('해결됨으로 표시되었습니다');
-    } catch {
+    } catch (err) {
+      console.error(err);
       toast.error('업데이트 실패');
     }
   }

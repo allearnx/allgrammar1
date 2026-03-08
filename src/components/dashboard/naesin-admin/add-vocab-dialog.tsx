@@ -54,7 +54,8 @@ export function AddVocabDialog({ unitId, onAdd }: { unitId: string; onAdd: () =>
       setSynonyms('');
       setAntonyms('');
       toast.success('단어가 추가되었습니다');
-    } catch {
+    } catch (err) {
+      console.error(err);
       toast.error('단어 추가 실패');
     } finally {
       setSaving(false);

@@ -106,7 +106,8 @@ export function PassageTab({ passages, unitId, onStageComplete, requiredStages }
         toast.success('교과서 암기 단계를 완료했습니다!');
         onStageComplete();
       }
-    } catch {
+    } catch (err) {
+      console.error(err);
       toast.error('진도 저장 중 오류가 발생했습니다');
     }
   }
@@ -124,9 +125,9 @@ export function PassageTab({ passages, unitId, onStageComplete, requiredStages }
           wrongAnswers: wrongItems,
         }),
       });
-    } catch {
-      // Silent fail
-    }
+    } catch (err) {
+      console.error(err);
+      }
   }
 
   const gridCols = uniqueStages.length === 1 ? 'grid-cols-1' : uniqueStages.length === 2 ? 'grid-cols-2' : 'grid-cols-3';

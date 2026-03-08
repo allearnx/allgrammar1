@@ -41,7 +41,8 @@ export function DayContentManager({ dayId }: { dayId: string }) {
       const data = await res.json();
       setVocabList(data || []);
       setSelectedIds(new Set());
-    } catch {
+    } catch (err) {
+      console.error(err);
       toast.error('단어 목록을 불러오지 못했습니다');
     } finally {
       setLoading(false);
@@ -62,7 +63,8 @@ export function DayContentManager({ dayId }: { dayId: string }) {
       } else {
         toast.error('삭제 실패');
       }
-    } catch {
+    } catch (err) {
+      console.error(err);
       toast.error('단어 삭제 중 오류가 발생했습니다');
     }
   }
@@ -84,7 +86,8 @@ export function DayContentManager({ dayId }: { dayId: string }) {
       setVocabList((prev) => prev.filter((v) => !selectedIds.has(v.id)));
       setSelectedIds(new Set());
       toast.success(`${successCount}개 단어가 삭제되었습니다`);
-    } catch {
+    } catch (err) {
+      console.error(err);
       toast.error('일괄 삭제 중 오류가 발생했습니다');
     } finally {
       setDeleting(false);
@@ -134,7 +137,8 @@ export function DayContentManager({ dayId }: { dayId: string }) {
       } else {
         toast.error('수정 실패');
       }
-    } catch {
+    } catch (err) {
+      console.error(err);
       toast.error('단어 수정 중 오류가 발생했습니다');
     }
   }
@@ -263,7 +267,8 @@ function AddVocabDialog({ dayId, onAdd }: { dayId: string; onAdd: () => void }) 
       setOpen(false);
       setForm({ front_text: '', back_text: '', part_of_speech: '', example_sentence: '', synonyms: '', antonyms: '', spelling_hint: '', spelling_answer: '' });
       toast.success('단어가 추가되었습니다');
-    } catch {
+    } catch (err) {
+      console.error(err);
       toast.error('단어 추가 중 오류가 발생했습니다');
     } finally {
       setSaving(false);
@@ -342,7 +347,8 @@ function BulkVocabUpload({ dayId, onAdd }: { dayId: string; onAdd: () => void })
       setOpen(false);
       setText('');
       toast.success(`${data.count}개 단어가 추가되었습니다`);
-    } catch {
+    } catch (err) {
+      console.error(err);
       toast.error('대량 업로드 중 오류가 발생했습니다');
     } finally {
       setSaving(false);

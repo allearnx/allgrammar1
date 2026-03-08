@@ -50,7 +50,8 @@ export function VocaTab({ vocabulary, dayId, progress }: VocaTabProps) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ dayId, type, score, matchingAttempt }),
       });
-    } catch {
+    } catch (err) {
+      console.error(err);
       toast.error('진도 저장 중 오류가 발생했습니다');
     }
   }

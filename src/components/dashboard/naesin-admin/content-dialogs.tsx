@@ -224,7 +224,8 @@ export function AddPassageDialog({ unitId, onAdd }: { unitId: string; onAdd: () 
       setBlanksMedium(null);
       setBlanksHard(null);
       toast.success('지문이 추가되었습니다');
-    } catch {
+    } catch (err) {
+      console.error(err);
       toast.error('지문 추가 실패');
     } finally {
       setSaving(false);
@@ -333,7 +334,8 @@ export function AddGrammarDialog({ unitId, onAdd }: { unitId: string; onAdd: () 
       setYoutubeUrl('');
       setTextContent('');
       toast.success('문법 설명이 추가되었습니다');
-    } catch {
+    } catch (err) {
+      console.error(err);
       toast.error('문법 설명 추가 실패');
     } finally {
       setSaving(false);
@@ -423,7 +425,8 @@ export function AddOmrDialog({ unitId, onAdd }: { unitId: string; onAdd: () => v
       setTotalQuestions('');
       setAnswerKeyText('');
       toast.success('OMR 시트가 추가되었습니다');
-    } catch {
+    } catch (err) {
+      console.error(err);
       toast.error('OMR 시트 추가 실패');
     } finally {
       setSaving(false);
@@ -512,7 +515,8 @@ export function AddProblemDialog({ unitId, onAdd }: { unitId: string; onAdd: () 
       setAnswerKeyText('');
       setPdfUrl('');
       toast.success('문제풀이 시트가 추가되었습니다');
-    } catch {
+    } catch (err) {
+      console.error(err);
       toast.error('문제풀이 시트 추가 실패');
     } finally {
       setSaving(false);
@@ -615,7 +619,8 @@ export function AddLastReviewDialog({ unitId, onAdd }: { unitId: string; onAdd: 
       setPdfUrl('');
       setTextContent('');
       toast.success('직전보강 자료가 추가되었습니다');
-    } catch {
+    } catch (err) {
+      console.error(err);
       toast.error('직전보강 자료 추가 실패');
     } finally {
       setSaving(false);
@@ -710,7 +715,8 @@ export function AddChatQuestionDialog({ lessonId, onAdd }: { lessonId: string; o
       setHint('');
       setKeywords('');
       toast.success('AI 질문이 추가되었습니다');
-    } catch {
+    } catch (err) {
+      console.error(err);
       toast.error('AI 질문 추가 실패');
     } finally {
       setSaving(false);

@@ -44,7 +44,8 @@ export function ImageAnswerView({
         toast.success('문제풀이를 완료했습니다!');
         onComplete?.();
       }
-    } catch {
+    } catch (err) {
+      console.error(err);
       toast.error('제출 중 오류가 발생했습니다');
     } finally {
       setSubmitting(false);

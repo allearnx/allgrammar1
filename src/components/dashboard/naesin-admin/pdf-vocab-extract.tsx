@@ -100,7 +100,8 @@ export function PdfVocabExtract({ unitId, onAdd }: { unitId: string; onAdd: () =
       setOpen(false);
       reset();
       toast.success(`${data.count}개 단어가 추가되었습니다`);
-    } catch {
+    } catch (err) {
+      console.error(err);
       toast.error('단어 저장 실패');
     } finally {
       setSaving(false);

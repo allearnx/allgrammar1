@@ -85,7 +85,8 @@ function AddDayDialog({ bookId, nextDayNumber, onAdd }: { bookId: string; nextDa
       setDayNumber(String(next));
       setTitle(`Day ${next}`);
       toast.success('Day가 추가되었습니다');
-    } catch {
+    } catch (err) {
+      console.error(err);
       toast.error('Day 추가 중 오류가 발생했습니다');
     } finally {
       setSaving(false);
@@ -168,7 +169,8 @@ function DayCard({
             });
             if (res.ok) onDelete();
             else toast.error('Day 삭제에 실패했습니다');
-          } catch {
+          } catch (err) {
+            console.error(err);
             toast.error('Day 삭제 중 오류가 발생했습니다');
           }
         }}

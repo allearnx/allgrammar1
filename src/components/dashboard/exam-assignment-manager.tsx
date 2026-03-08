@@ -89,7 +89,8 @@ export function ExamAssignmentManager({
       toast.success(`${local.examLabel || local.examRound + '차 시험'} 저장 완료`);
       setLocals((prev) => prev.map((l, i) => (i === idx ? { ...l, dirty: false } : l)));
       router.refresh();
-    } catch {
+    } catch (err) {
+      console.error(err);
       toast.error('시험 배정 저장 중 오류가 발생했습니다');
     } finally {
       setSavingRound(null);
@@ -113,7 +114,8 @@ export function ExamAssignmentManager({
       toast.success(`${local.examLabel || local.examRound + '차 시험'} 삭제 완료`);
       setLocals((prev) => prev.filter((_, i) => i !== idx));
       router.refresh();
-    } catch {
+    } catch (err) {
+      console.error(err);
       toast.error('시험 배정 삭제 중 오류가 발생했습니다');
     } finally {
       setDeletingRound(null);

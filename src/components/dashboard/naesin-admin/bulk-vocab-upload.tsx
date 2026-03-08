@@ -52,7 +52,8 @@ export function BulkVocabUpload({ unitId, onAdd }: { unitId: string; onAdd: () =
       setOpen(false);
       setCsvText('');
       toast.success(`${data.count}개 단어가 추가되었습니다`);
-    } catch {
+    } catch (err) {
+      console.error(err);
       toast.error('일괄 업로드 실패');
     } finally {
       setSaving(false);

@@ -44,7 +44,8 @@ export function VocaAdminClient({ books: initialBooks }: VocaAdminClientProps) {
       const res = await fetch(`/api/voca/days?bookId=${bookId}`);
       const data = await res.json();
       setDays(data || []);
-    } catch {
+    } catch (err) {
+      console.error(err);
       toast.error('Day 목록을 불러오지 못했습니다');
     }
   }
@@ -135,7 +136,8 @@ export function VocaAdminClient({ books: initialBooks }: VocaAdminClientProps) {
             } else {
               toast.error('교재 삭제에 실패했습니다');
             }
-          } catch {
+          } catch (err) {
+            console.error(err);
             toast.error('교재 삭제 중 오류가 발생했습니다');
           }
         }}
@@ -179,7 +181,8 @@ function AddBookDialog({ onAdd }: { onAdd: (book: VocaBook) => void }) {
       setTitle('');
       setDescription('');
       toast.success('교재가 추가되었습니다');
-    } catch {
+    } catch (err) {
+      console.error(err);
       toast.error('교재 추가 중 오류가 발생했습니다');
     } finally {
       setSaving(false);
@@ -241,7 +244,8 @@ function EditBookDialog({
       onSave(data);
       onOpenChange(false);
       toast.success('교재가 수정되었습니다');
-    } catch {
+    } catch (err) {
+      console.error(err);
       toast.error('교재 수정 중 오류가 발생했습니다');
     } finally {
       setSaving(false);

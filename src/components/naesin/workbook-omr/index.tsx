@@ -37,7 +37,8 @@ export function WorkbookOmrClient({ workbooks }: WorkbookOmrClientProps) {
       if (!res.ok) throw new Error();
       const data = await res.json();
       setSheets(data);
-    } catch {
+    } catch (err) {
+      console.error(err);
       toast.error('시트 목록을 불러오지 못했습니다');
     } finally {
       setLoading(false);
@@ -54,9 +55,9 @@ export function WorkbookOmrClient({ workbooks }: WorkbookOmrClientProps) {
         .eq('omr_sheet_id', sheetId)
         .order('created_at', { ascending: false });
       setAttempts((data || []) as NaesinWorkbookOmrAttempt[]);
-    } catch {
-      // Silently fail for history
-    }
+    } catch (err) {
+      console.error(err);
+      }
   }
 
   function handleSelectWorkbook(wb: NaesinWorkbook) {

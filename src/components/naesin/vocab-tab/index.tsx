@@ -120,7 +120,8 @@ export function VocabTab({ vocabulary, unitId, onStageComplete, quizSets, comple
         toast.success('단어 암기 단계를 완료했습니다!');
         onStageComplete();
       }
-    } catch {
+    } catch (err) {
+      console.error(err);
       toast.error('진도 저장 중 오류가 발생했습니다');
     }
   }
@@ -133,9 +134,9 @@ export function VocabTab({ vocabulary, unitId, onStageComplete, quizSets, comple
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ quizSetId: activeSetId, unitId, score, wrongWords }),
       });
-    } catch {
-      // Silent fail
-    }
+    } catch (err) {
+      console.error(err);
+      }
   }
 
   if (vocabulary.length === 0) {

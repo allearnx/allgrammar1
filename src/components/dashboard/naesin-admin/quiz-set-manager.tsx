@@ -45,7 +45,8 @@ export function CreateQuizSetFromSelection({
       }
       setTitle('');
       onCreated();
-    } catch {
+    } catch (err) {
+      console.error(err);
       toast.error('시험지 생성 실패');
     } finally {
       setSaving(false);
@@ -96,9 +97,9 @@ export function VocabQuizSetManager({ unitId }: { unitId: string }) {
       const res = await fetch(`/api/naesin/vocab-quiz-sets?unitId=${unitId}`);
       const data = await res.json();
       setSets(Array.isArray(data) ? data : []);
-    } catch {
-      // ignore
-    }
+    } catch (err) {
+      console.error(err);
+      }
   }
 
   async function handleDelete(id: string) {
@@ -114,7 +115,8 @@ export function VocabQuizSetManager({ unitId }: { unitId: string }) {
       } else {
         toast.error('시험지 삭제에 실패했습니다');
       }
-    } catch {
+    } catch (err) {
+      console.error(err);
       toast.error('시험지 삭제 중 오류가 발생했습니다');
     }
   }

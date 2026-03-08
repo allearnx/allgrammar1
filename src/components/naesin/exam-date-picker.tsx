@@ -41,7 +41,8 @@ export function ExamDatePicker({ textbookId, currentDate, onDateChange }: ExamDa
       toast.success('시험일이 설정되었습니다');
       onDateChange(date);
       setOpen(false);
-    } catch {
+    } catch (err) {
+      console.error(err);
       toast.error('시험일 설정 중 오류가 발생했습니다');
     } finally {
       setSaving(false);

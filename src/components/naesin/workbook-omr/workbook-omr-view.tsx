@@ -69,7 +69,8 @@ export function WorkbookOmrView({ sheet, onSubmitComplete }: WorkbookOmrViewProp
 
       onSubmitComplete(data);
       toast.success('채점 완료!');
-    } catch {
+    } catch (err) {
+      console.error(err);
       toast.error('제출 중 오류가 발생했습니다');
     } finally {
       setSubmitting(false);

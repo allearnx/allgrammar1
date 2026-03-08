@@ -76,7 +76,8 @@ export function UnitContentManager({ unitId }: { unitId: string }) {
       setProblemCount(prob.count ?? 0);
       setLastReviewCount(lr.count ?? 0);
       setSelectedIds(new Set());
-    } catch {
+    } catch (err) {
+      console.error(err);
       toast.error('데이터를 불러오지 못했습니다');
     }
   }
@@ -95,7 +96,8 @@ export function UnitContentManager({ unitId }: { unitId: string }) {
       } else {
         toast.error('삭제 실패');
       }
-    } catch {
+    } catch (err) {
+      console.error(err);
       toast.error('단어 삭제 중 오류가 발생했습니다');
     }
   }
@@ -117,7 +119,8 @@ export function UnitContentManager({ unitId }: { unitId: string }) {
       setVocabList((prev) => prev.filter((v) => !selectedIds.has(v.id)));
       setSelectedIds(new Set());
       toast.success(`${successCount}개 단어가 삭제되었습니다`);
-    } catch {
+    } catch (err) {
+      console.error(err);
       toast.error('일괄 삭제 중 오류가 발생했습니다');
     } finally {
       setDeleting(false);
@@ -168,7 +171,8 @@ export function UnitContentManager({ unitId }: { unitId: string }) {
       } else {
         toast.error('수정 실패');
       }
-    } catch {
+    } catch (err) {
+      console.error(err);
       toast.error('단어 수정 중 오류가 발생했습니다');
     }
   }
@@ -208,7 +212,8 @@ export function UnitContentManager({ unitId }: { unitId: string }) {
       } else {
         toast.error('수정 실패');
       }
-    } catch {
+    } catch (err) {
+      console.error(err);
       toast.error('문법 설명 수정 중 오류가 발생했습니다');
     }
   }
@@ -226,7 +231,8 @@ export function UnitContentManager({ unitId }: { unitId: string }) {
       } else {
         toast.error('삭제 실패');
       }
-    } catch {
+    } catch (err) {
+      console.error(err);
       toast.error('지문 삭제 중 오류가 발생했습니다');
     }
   }
@@ -267,7 +273,8 @@ export function UnitContentManager({ unitId }: { unitId: string }) {
       } else {
         toast.error('수정 실패');
       }
-    } catch {
+    } catch (err) {
+      console.error(err);
       toast.error('지문 수정 중 오류가 발생했습니다');
     } finally {
       setSavingPassage(false);
@@ -288,7 +295,8 @@ export function UnitContentManager({ unitId }: { unitId: string }) {
       } else {
         toast.error('삭제 실패');
       }
-    } catch {
+    } catch (err) {
+      console.error(err);
       toast.error('문법 설명 삭제 중 오류가 발생했습니다');
     }
   }

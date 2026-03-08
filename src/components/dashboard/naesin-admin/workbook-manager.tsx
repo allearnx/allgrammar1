@@ -40,7 +40,8 @@ export function WorkbookManager() {
         .order('grade')
         .order('sort_order');
       setWorkbooks((data || []) as NaesinWorkbook[]);
-    } catch {
+    } catch (err) {
+      console.error(err);
       toast.error('교재 목록을 불러오지 못했습니다');
     } finally {
       setLoading(false);
@@ -52,7 +53,8 @@ export function WorkbookManager() {
       const res = await fetch(`/api/naesin/workbook-omr-sheets?workbookId=${workbookId}`);
       if (!res.ok) throw new Error();
       setSheets(await res.json());
-    } catch {
+    } catch (err) {
+      console.error(err);
       toast.error('시트 목록을 불러오지 못했습니다');
     }
   }
@@ -83,7 +85,8 @@ export function WorkbookManager() {
         setSheets((prev) => prev.filter((s) => s.id !== id));
         toast.success('시트가 삭제되었습니다');
       }
-    } catch {
+    } catch (err) {
+      console.error(err);
       toast.error('삭제 중 오류가 발생했습니다');
     }
   }
@@ -225,7 +228,8 @@ function AddWorkbookDialog({ onAdd }: { onAdd: (wb: NaesinWorkbook) => void }) {
       setPublisher('');
       setGrade('1');
       toast.success('교재가 추가되었습니다');
-    } catch {
+    } catch (err) {
+      console.error(err);
       toast.error('교재 추가에 실패했습니다');
     } finally {
       setSaving(false);
@@ -323,7 +327,8 @@ function AddSheetDialog({ workbookId, onAdd }: { workbookId: string; onAdd: (she
       setTotalQuestions('');
       setAnswerKeyStr('');
       toast.success('OMR 시트가 추가되었습니다');
-    } catch {
+    } catch (err) {
+      console.error(err);
       toast.error('시트 추가에 실패했습니다');
     } finally {
       setSaving(false);

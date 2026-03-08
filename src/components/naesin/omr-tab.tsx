@@ -126,7 +126,8 @@ function OmrSheetView({ sheet, unitId, onStageComplete }: OmrSheetViewProps) {
         toast.success('OMR 시트 단계를 완료했습니다!');
         onStageComplete();
       }
-    } catch {
+    } catch (err) {
+      console.error(err);
       toast.error('제출 중 오류가 발생했습니다');
     } finally {
       setSubmitting(false);

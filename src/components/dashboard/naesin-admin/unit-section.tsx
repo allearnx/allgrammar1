@@ -60,7 +60,8 @@ export function AddUnitDialog({ textbookId, onAdd }: { textbookId: string; onAdd
       setOpen(false);
       setUnitValue('');
       toast.success('단원이 추가되었습니다');
-    } catch {
+    } catch (err) {
+      console.error(err);
       toast.error('단원 추가 중 오류가 발생했습니다');
     } finally {
       setSaving(false);
@@ -161,7 +162,8 @@ export function UnitCard({
             } else {
               toast.error('단원 삭제에 실패했습니다');
             }
-          } catch {
+          } catch (err) {
+            console.error(err);
             toast.error('단원 삭제 중 오류가 발생했습니다');
           }
         }}
