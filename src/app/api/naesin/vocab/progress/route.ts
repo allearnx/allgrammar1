@@ -30,13 +30,11 @@ export const POST = createApiHandler(
       updates.vocab_spelling_score = score;
     }
 
-    // Check if vocab stage should be completed
-    const flashcardCount = type === 'flashcard' ? (totalItems || 0) : (existing?.vocab_flashcard_count ?? 0);
+    // Check if vocab stage should be completed (quiz 80+ AND spelling 80+)
     const quizScore = type === 'quiz' ? score : (existing?.vocab_quiz_score ?? 0);
     const spellingScore = type === 'spelling' ? score : (existing?.vocab_spelling_score ?? 0);
 
     const vocabCompleted =
-      flashcardCount > 0 &&
       (quizScore ?? 0) >= PASS_THRESHOLD &&
       (spellingScore ?? 0) >= PASS_THRESHOLD;
 
