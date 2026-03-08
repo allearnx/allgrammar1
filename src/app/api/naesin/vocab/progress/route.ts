@@ -35,14 +35,8 @@ export const POST = createApiHandler(
     const quizScore = type === 'quiz' ? score : (existing?.vocab_quiz_score ?? 0);
     const spellingScore = type === 'spelling' ? score : (existing?.vocab_spelling_score ?? 0);
 
-    // Get total vocabulary count for this unit
-    const { count: vocabCount } = await supabase
-      .from('naesin_vocabulary')
-      .select('*', { count: 'exact', head: true })
-      .eq('unit_id', unitId);
-
     const vocabCompleted =
-      flashcardCount >= (vocabCount || 0) &&
+      flashcardCount > 0 &&
       (quizScore ?? 0) >= PASS_THRESHOLD &&
       (spellingScore ?? 0) >= PASS_THRESHOLD;
 
