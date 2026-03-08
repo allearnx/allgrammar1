@@ -117,8 +117,9 @@ export function FillBlanksExercise({ passage, onComplete, showWrongAlert }: Fill
     const wrongs: WrongBlank[] = [];
 
     blanks.forEach((blank) => {
-      const userAnswer = (answers[blank.index] || '').trim().toLowerCase();
-      const isCorrect = userAnswer === blank.answer.toLowerCase();
+      const normalize = (s: string) => s.trim().toLowerCase().replace(/[.,!?;:'"()]/g, '');
+      const userAnswer = normalize(answers[blank.index] || '');
+      const isCorrect = userAnswer === normalize(blank.answer);
       newResults[blank.index] = isCorrect;
       if (isCorrect) {
         correctCount++;
