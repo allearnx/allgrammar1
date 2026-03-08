@@ -141,7 +141,7 @@ function SentenceBysentenceTranslation({ passage, onComplete, showWrongAlert, ra
         return (
           <Card key={idx} className={result ? (result.score >= 80 ? 'border-green-500' : 'border-red-500') : ''}>
             <CardContent className="py-3 px-4 space-y-2">
-              <p className="text-sm text-muted-foreground">{idx + 1}. {s.korean}</p>
+              <p className="text-sm text-muted-foreground">{s.korean}</p>
               {results === null ? (
                 <Textarea
                   className="text-sm min-h-[2.5rem] resize-none"

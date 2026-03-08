@@ -5,6 +5,7 @@ import type {
   NaesinVocabulary,
   NaesinPassage,
 } from '@/types/database';
+import type { SentenceItem } from '@/types/textbook';
 
 /**
  * NaesinVocabulary → MemoryItem shape (for reusing FlashcardView, QuizView, SpellingView)
@@ -29,6 +30,28 @@ export function vocabToMemoryItem(
 }
 
 /**
+ * 숫자만 있는 문장(단락 번호)을 다음 문장의 korean에 합침
+ */
+function mergeParagraphNumbers(sentences: SentenceItem[]): SentenceItem[] {
+  const result: SentenceItem[] = [];
+  let pendingNumber = '';
+
+  for (const s of sentences) {
+    if (/^\d+\.?\s*$/.test(s.original.trim())) {
+      pendingNumber = s.original.trim();
+    } else {
+      result.push({
+        ...s,
+        korean: pendingNumber ? `${pendingNumber} ${s.korean}` : s.korean,
+      });
+      pendingNumber = '';
+    }
+  }
+
+  return result;
+}
+
+/**
  * NaesinPassage → TextbookPassage shape (for reusing FillBlanksView, OrderingView)
  */
 export function passageToTextbookPassage(passage: NaesinPassage): TextbookPassage {
@@ -41,7 +64,7 @@ export function passageToTextbookPassage(passage: NaesinPassage): TextbookPassag
     blanks_easy: passage.blanks_easy,
     blanks_medium: passage.blanks_medium,
     blanks_hard: passage.blanks_hard,
-    sentences: passage.sentences,
+    sentences: passage.sentences ? mergeParagraphNumbers(passage.sentences) : null,
     is_textbook_mode_active: true,
     created_at: passage.created_at,
   };
