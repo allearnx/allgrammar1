@@ -22,6 +22,7 @@ import { ConfirmDialog } from '@/components/shared/confirm-dialog';
 import { AddVocabDialog, BulkVocabUpload, PdfVocabExtract } from './vocab-dialogs';
 import { AddPassageDialog, AddGrammarDialog, AddOmrDialog, AddProblemDialog, AddLastReviewDialog } from './content-dialogs';
 import { CreateQuizSetFromSelection, VocabQuizSetManager } from './quiz-set-manager';
+import { ChatQuestionManager } from './chat-question-manager';
 
 export function UnitContentManager({ unitId }: { unitId: string }) {
   const [vocabList, setVocabList] = useState<NaesinVocabulary[]>([]);
@@ -431,6 +432,9 @@ export function UnitContentManager({ unitId }: { unitId: string }) {
                   </div>
                 </div>
               )}
+              <div className="px-2 pb-2">
+                <ChatQuestionManager lessonId={lesson.id} lessonTitle={lesson.title} />
+              </div>
             </div>
           ))}
         </div>

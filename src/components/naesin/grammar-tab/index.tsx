@@ -8,6 +8,7 @@ import { CheckCircle, PlayCircle, FileText } from 'lucide-react';
 import { toast } from 'sonner';
 import { StageProgressBar } from '../stage-progress-bar';
 import { NaesinYouTubePlayerTracked } from './youtube-player';
+import { SocraticChatbot } from './socratic-chatbot';
 import type { NaesinGrammarLesson, NaesinGrammarVideoProgress } from '@/types/database';
 
 interface GrammarTabProps {
@@ -172,6 +173,8 @@ function GrammarLessonCard({
         ) : (
           <p className="text-sm text-muted-foreground">콘텐츠가 없습니다.</p>
         )}
+
+        <SocraticChatbot lessonId={lesson.id} lessonTitle={lesson.title} />
       </CardContent>
     </Card>
   );
