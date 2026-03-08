@@ -22,6 +22,7 @@ import type { NaesinPassage } from '@/types/database';
 import type { GrammarVocabItem } from '@/types/naesin';
 
 const ONBOARDING_KEY = 'naesin-passage-onboarding-seen';
+const STAGE_DIRECTION_KEY = 'naesin-passage-stage-directions-seen';
 
 type PassageStageType = 'fill_blanks' | 'ordering' | 'translation' | 'grammar_vocab';
 
@@ -61,21 +62,68 @@ export function PassageTab({ passages, unitId, onStageComplete, requiredStages }
   const [activeTab, setActiveTab] = useState(firstTabValue);
   const [currentPassageIndex, setCurrentPassageIndex] = useState(0);
   const [showOnboarding, setShowOnboarding] = useState(false);
+  const [stageDirection, setStageDirection] = useState<PassageStageType | null>(null);
+
+  // Track which stage directions have been seen
+  const [seenDirections, setSeenDirections] = useState<Set<string>>(() => {
+    try {
+      const saved = localStorage.getItem(STAGE_DIRECTION_KEY);
+      return saved ? new Set(JSON.parse(saved)) : new Set();
+    } catch {
+      return new Set();
+    }
+  });
 
   useEffect(() => {
     try {
       if (!localStorage.getItem(ONBOARDING_KEY)) {
         setShowOnboarding(true);
+      } else {
+        // Onboarding already seen — show direction for the active stage
+        const stageKey = (Object.entries(STAGE_TAB_MAP) as [PassageStageType, { value: string }][])
+          .find(([, v]) => v.value === activeTab)?.[0];
+        if (stageKey && !seenDirections.has(stageKey)) {
+          setStageDirection(stageKey);
+        }
       }
     } catch {
       // localStorage unavailable
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   function dismissOnboarding() {
     setShowOnboarding(false);
     try {
       localStorage.setItem(ONBOARDING_KEY, '1');
+    } catch {
+      // localStorage unavailable
+    }
+    // Show direction for the first tab after onboarding
+    const firstStage = uniqueStages[0];
+    if (firstStage && !seenDirections.has(firstStage)) {
+      setStageDirection(firstStage);
+    }
+  }
+
+  function handleTabChange(tabValue: string) {
+    setActiveTab(tabValue);
+    // Find the stage key for this tab value
+    const stageKey = (Object.entries(STAGE_TAB_MAP) as [PassageStageType, { value: string }][])
+      .find(([, v]) => v.value === tabValue)?.[0];
+    if (stageKey && !seenDirections.has(stageKey)) {
+      setStageDirection(stageKey);
+    }
+  }
+
+  function dismissStageDirection() {
+    if (!stageDirection) return;
+    const next = new Set(seenDirections);
+    next.add(stageDirection);
+    setSeenDirections(next);
+    setStageDirection(null);
+    try {
+      localStorage.setItem(STAGE_DIRECTION_KEY, JSON.stringify([...next]));
     } catch {
       // localStorage unavailable
     }
@@ -164,7 +212,14 @@ export function PassageTab({ passages, unitId, onStageComplete, requiredStages }
         </div>
       )}
 
-      <Tabs value={activeTab} onValueChange={setActiveTab}>
+      {stageDirection && (
+        <StageDirectionModal
+          stage={stageDirection}
+          onClose={dismissStageDirection}
+        />
+      )}
+
+      <Tabs value={activeTab} onValueChange={handleTabChange}>
         <TabsList className={cn('grid w-full', gridCols)}>
           {uniqueStages.map((stage) => {
             const tab = STAGE_TAB_MAP[stage];
@@ -270,6 +325,48 @@ const ALL_STEPS = [
     bg: 'bg-amber-50 dark:bg-amber-950/30',
   },
 ];
+
+function StageDirectionModal({
+  stage,
+  onClose,
+}: {
+  stage: PassageStageType;
+  onClose: () => void;
+}) {
+  const config = ALL_STEPS.find((s) => s.key === stage);
+  if (!config) return null;
+  const Icon = config.icon;
+
+  return (
+    <Dialog open onOpenChange={(v) => !v && onClose()}>
+      <DialogContent className="sm:max-w-xs">
+        <DialogHeader>
+          <DialogTitle className={cn('text-center text-base flex items-center justify-center gap-2', config.color)}>
+            <Icon className="h-5 w-5" />
+            {config.title}
+          </DialogTitle>
+          <DialogDescription className="text-center text-sm">
+            {config.desc}
+          </DialogDescription>
+        </DialogHeader>
+        <div className="flex items-center gap-1.5 justify-center text-xs text-muted-foreground">
+          <Lightbulb className="h-3.5 w-3.5 shrink-0" />
+          <span>{config.tip}</span>
+        </div>
+        <div className="flex items-center gap-2 p-2.5 rounded-lg bg-orange-50 dark:bg-orange-950/30">
+          <Target className="h-4 w-4 text-orange-600 shrink-0" />
+          <p className="text-xs text-orange-700 dark:text-orange-300">
+            <span className="font-bold">80점 이상</span>이면 통과!
+          </p>
+        </div>
+        <Button onClick={onClose} className="w-full" size="sm">
+          시작하기
+          <ArrowRight className="h-4 w-4 ml-1" />
+        </Button>
+      </DialogContent>
+    </Dialog>
+  );
+}
 
 function PassageOnboardingModal({
   open,
