@@ -262,8 +262,11 @@ function SentenceBysentenceTranslation({ passage, onComplete, showWrongAlert, se
                   rows={1}
                   value={answers[globalIdx] || ''}
                   onChange={(e) => updateAnswer(globalIdx, e.target.value)}
+                  onPaste={(e) => e.preventDefault()}
+                  onDrop={(e) => e.preventDefault()}
                   placeholder="영어로 작성..."
                   disabled={grading}
+                  autoComplete="off"
                 />
               ) : result ? (
                 <div className="space-y-1.5">
@@ -373,9 +376,12 @@ function WholePassageTranslation({ passage, onComplete, showWrongAlert }: Transl
         <Textarea
           value={answer}
           onChange={(e) => setAnswer(e.target.value)}
+          onPaste={(e) => e.preventDefault()}
+          onDrop={(e) => e.preventDefault()}
           placeholder="영어로 작성하세요..."
           rows={4}
           disabled={result !== null}
+          autoComplete="off"
           className="resize-none"
         />
         <div className="flex justify-end">
