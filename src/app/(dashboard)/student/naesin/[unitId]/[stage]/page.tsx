@@ -170,13 +170,14 @@ async function fetchStageData(
           .order('sort_order'),
         supabase
           .from('naesin_student_settings')
-          .select('passage_required_stages')
+          .select('passage_required_stages, translation_sentences_per_page')
           .eq('student_id', userId)
           .single(),
       ]);
       return {
         passages: passageRes.data || [],
         passageRequiredStages: (settingsRes.data?.passage_required_stages as string[] | null) ?? ['fill_blanks', 'translation'],
+        translationSentencesPerPage: (settingsRes.data?.translation_sentences_per_page as number | null) ?? 10,
       };
     }
 

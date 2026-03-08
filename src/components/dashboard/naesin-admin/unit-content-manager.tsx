@@ -16,6 +16,8 @@ import {
   Pencil,
   Brain,
   Wand2,
+  Plus,
+  X,
 } from 'lucide-react';
 import { Textarea } from '@/components/ui/textarea';
 import { Loader2 } from 'lucide-react';
@@ -40,7 +42,7 @@ export function UnitContentManager({ unitId }: { unitId: string }) {
   const [showPassageList, setShowPassageList] = useState(false);
   const [deletePassageId, setDeletePassageId] = useState<string | null>(null);
   const [editingPassageId, setEditingPassageId] = useState<string | null>(null);
-  const [passageEditForm, setPassageEditForm] = useState<{ title: string; sentences: { original: string; korean: string }[] }>({ title: '', sentences: [] });
+  const [passageEditForm, setPassageEditForm] = useState<{ title: string; sentences: { original: string; korean: string; acceptedAnswers: string[] }[] }>({ title: '', sentences: [] });
   const [savingPassage, setSavingPassage] = useState(false);
   const [grammarCount, setGrammarCount] = useState<number | null>(null);
   const [omrCount, setOmrCount] = useState<number | null>(null);
@@ -242,8 +244,8 @@ export function UnitContentManager({ unitId }: { unitId: string }) {
   function startPassageEdit(passage: NaesinPassage) {
     setEditingPassageId(passage.id);
     const sentences = Array.isArray(passage.sentences) && passage.sentences.length > 0
-      ? passage.sentences.map((s) => ({ original: s.original, korean: s.korean }))
-      : [{ original: passage.original_text, korean: passage.korean_translation }];
+      ? passage.sentences.map((s) => ({ original: s.original, korean: s.korean, acceptedAnswers: s.acceptedAnswers || [] }))
+      : [{ original: passage.original_text, korean: passage.korean_translation, acceptedAnswers: [] as string[] }];
     setPassageEditForm({ title: passage.title, sentences });
   }
 
@@ -251,6 +253,52 @@ export function UnitContentManager({ unitId }: { unitId: string }) {
     setPassageEditForm((prev) => ({
       ...prev,
       sentences: prev.sentences.map((s, i) => (i === idx ? { ...s, [field]: value } : s)),
+    }));
+  }
+
+  function addSentence() {
+    setPassageEditForm((prev) => ({
+      ...prev,
+      sentences: [...prev.sentences, { original: '', korean: '', acceptedAnswers: [] }],
+    }));
+  }
+
+  function removeSentence(idx: number) {
+    if (passageEditForm.sentences.length <= 1) return;
+    setPassageEditForm((prev) => ({
+      ...prev,
+      sentences: prev.sentences.filter((_, i) => i !== idx),
+    }));
+  }
+
+  function addAcceptedAnswer(sentenceIdx: number) {
+    setPassageEditForm((prev) => ({
+      ...prev,
+      sentences: prev.sentences.map((s, i) =>
+        i === sentenceIdx ? { ...s, acceptedAnswers: [...s.acceptedAnswers, ''] } : s
+      ),
+    }));
+  }
+
+  function updateAcceptedAnswer(sentenceIdx: number, answerIdx: number, value: string) {
+    setPassageEditForm((prev) => ({
+      ...prev,
+      sentences: prev.sentences.map((s, i) =>
+        i === sentenceIdx
+          ? { ...s, acceptedAnswers: s.acceptedAnswers.map((a, j) => (j === answerIdx ? value : a)) }
+          : s
+      ),
+    }));
+  }
+
+  function removeAcceptedAnswer(sentenceIdx: number, answerIdx: number) {
+    setPassageEditForm((prev) => ({
+      ...prev,
+      sentences: prev.sentences.map((s, i) =>
+        i === sentenceIdx
+          ? { ...s, acceptedAnswers: s.acceptedAnswers.filter((_, j) => j !== answerIdx) }
+          : s
+      ),
     }));
   }
 
@@ -264,7 +312,13 @@ export function UnitContentManager({ unitId }: { unitId: string }) {
         body: JSON.stringify({
           id: editingPassageId,
           title: passageEditForm.title,
-          sentences: passageEditForm.sentences,
+          sentences: passageEditForm.sentences.map((s) => ({
+            original: s.original,
+            korean: s.korean,
+            ...(s.acceptedAnswers.filter(Boolean).length > 0
+              ? { acceptedAnswers: s.acceptedAnswers.filter(Boolean) }
+              : {}),
+          })),
         }),
       });
       if (res.ok) {
@@ -513,7 +567,7 @@ export function UnitContentManager({ unitId }: { unitId: string }) {
                   <div className="space-y-2">
                     <p className="text-xs text-muted-foreground font-medium">문장별 한/영 수정</p>
                     {passageEditForm.sentences.map((s, idx) => (
-                      <div key={idx} className="grid grid-cols-[auto_1fr] gap-2 items-start">
+                      <div key={idx} className="grid grid-cols-[auto_1fr_auto] gap-2 items-start">
                         <span className="text-xs text-muted-foreground pt-2 w-5 text-right">{idx + 1}</span>
                         <div className="space-y-1">
                           <Textarea
@@ -528,11 +582,56 @@ export function UnitContentManager({ unitId }: { unitId: string }) {
                             rows={1}
                             value={s.original}
                             onChange={(e) => updateSentence(idx, 'original', e.target.value)}
-                            placeholder="English"
+                            placeholder="English (기본 정답)"
                           />
+                          {/* 대체 정답 */}
+                          {s.acceptedAnswers.map((ans, aIdx) => (
+                            <div key={aIdx} className="flex gap-1">
+                              <Input
+                                className="h-7 text-sm flex-1"
+                                value={ans}
+                                onChange={(e) => updateAcceptedAnswer(idx, aIdx, e.target.value)}
+                                placeholder={`대체 정답 ${aIdx + 1}`}
+                              />
+                              <Button
+                                variant="ghost"
+                                size="icon"
+                                className="h-7 w-7 shrink-0"
+                                onClick={() => removeAcceptedAnswer(idx, aIdx)}
+                              >
+                                <X className="h-3 w-3 text-destructive" />
+                              </Button>
+                            </div>
+                          ))}
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            className="h-6 text-[11px] text-muted-foreground"
+                            onClick={() => addAcceptedAnswer(idx)}
+                          >
+                            <Plus className="h-3 w-3 mr-1" />대체 정답 추가
+                          </Button>
                         </div>
+                        {passageEditForm.sentences.length > 1 && (
+                          <Button
+                            variant="ghost"
+                            size="icon"
+                            className="h-7 w-7 mt-1"
+                            onClick={() => removeSentence(idx)}
+                          >
+                            <Trash2 className="h-3.5 w-3.5 text-destructive" />
+                          </Button>
+                        )}
                       </div>
                     ))}
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className="w-full h-7 text-xs"
+                      onClick={addSentence}
+                    >
+                      <Plus className="h-3 w-3 mr-1" />문장 추가
+                    </Button>
                   </div>
                   <div className="flex gap-2 justify-end">
                     <Button size="sm" variant="outline" className="h-7" onClick={() => setEditingPassageId(null)}>취소</Button>

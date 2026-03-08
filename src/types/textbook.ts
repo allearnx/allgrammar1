@@ -7,6 +7,7 @@ export interface SentenceItem {
   original: string;
   korean: string;
   words: string[];
+  acceptedAnswers?: string[];
 }
 
 export interface TextbookPassage {

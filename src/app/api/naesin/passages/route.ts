@@ -44,6 +44,7 @@ const passageUpdateSchema = z.object({
   sentences: z.array(z.object({
     original: z.string(),
     korean: z.string(),
+    acceptedAnswers: z.array(z.string()).optional(),
   })).optional(),
   grammar_vocab_items: z.unknown().nullish(),
 });
@@ -59,10 +60,11 @@ export const PATCH = createApiHandler(
     }
 
     if (body.sentences) {
-      const sentences = body.sentences.map((s: { original: string; korean: string }) => ({
+      const sentences = body.sentences.map((s: { original: string; korean: string; acceptedAnswers?: string[] }) => ({
         original: s.original,
         korean: s.korean,
         words: s.original.split(/\s+/).filter(Boolean),
+        ...(s.acceptedAnswers && s.acceptedAnswers.length > 0 ? { acceptedAnswers: s.acceptedAnswers } : {}),
       }));
       updates.sentences = sentences;
       const newOriginalText = sentences.map((s: { original: string }) => s.original).join(' ');

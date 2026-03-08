@@ -4,6 +4,8 @@ import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 import { Plus, X, Save, Loader2, FileText, Shuffle, PenLine, BookOpen } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { toast } from 'sonner';
@@ -20,12 +22,17 @@ const STAGE_OPTIONS: { value: StageType; label: string; icon: typeof FileText }[
 interface Props {
   studentId: string;
   initialStages: StageType[];
+  initialTranslationSentencesPerPage?: number;
 }
 
-export function PassageStageManager({ studentId, initialStages }: Props) {
+export function PassageStageManager({ studentId, initialStages, initialTranslationSentencesPerPage = 10 }: Props) {
   const [stages, setStages] = useState<StageType[]>(initialStages);
+  const [sentencesPerPage, setSentencesPerPage] = useState(initialTranslationSentencesPerPage);
   const [saving, setSaving] = useState(false);
-  const hasChanges = JSON.stringify(stages) !== JSON.stringify(initialStages);
+
+  const hasChanges =
+    JSON.stringify(stages) !== JSON.stringify(initialStages) ||
+    sentencesPerPage !== initialTranslationSentencesPerPage;
 
   function addStage(stage: StageType) {
     if (stages.length >= 6) return;
@@ -43,7 +50,11 @@ export function PassageStageManager({ studentId, initialStages }: Props) {
       const res = await fetch('/api/naesin/passage-stages', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ studentId, stages }),
+        body: JSON.stringify({
+          studentId,
+          stages,
+          translationSentencesPerPage: sentencesPerPage,
+        }),
       });
       if (!res.ok) {
         const err = await res.json().catch(() => null);
@@ -107,6 +118,22 @@ export function PassageStageManager({ studentId, initialStages }: Props) {
               </Button>
             );
           })}
+        </div>
+
+        {/* Translation sentences per page */}
+        <div className="flex items-center gap-3">
+          <Label htmlFor="sentences-per-page" className="text-sm whitespace-nowrap">
+            영작 한 번에 풀 문장 수
+          </Label>
+          <Input
+            id="sentences-per-page"
+            type="number"
+            min={1}
+            max={50}
+            value={sentencesPerPage}
+            onChange={(e) => setSentencesPerPage(Math.max(1, Math.min(50, Number(e.target.value) || 1)))}
+            className="w-20 h-8 text-sm"
+          />
         </div>
 
         {/* Save */}

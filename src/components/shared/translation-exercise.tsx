@@ -1,14 +1,14 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { Badge } from '@/components/ui/badge';
-import { Send, AlertTriangle, RotateCcw, Info } from 'lucide-react';
+import { Send, AlertTriangle, RotateCcw, ChevronRight } from 'lucide-react';
 import type { TextbookPassage } from '@/types/database';
 
-// ── 룰 기반 채점 유틸 ──
+// ── 룰 기반 채점 유틸 (WholePassageTranslation fallback 전용) ──
 
 /** 정규화: 소문자, 구두점 제거(아포스트로피 유지), 공백 통일 */
 function normalize(text: string): string {
@@ -34,8 +34,8 @@ function lcsLength(a: string[], b: string[]): number {
   return dp[m][n];
 }
 
-/** 원문과 학생 답안 비교 → 점수(0~100) */
-function gradeAnswer(original: string, student: string): number {
+/** 원문과 학생 답안 비교 → 점수(0~100) — fallback 전용 */
+function gradeAnswerLCS(original: string, student: string): number {
   const normOrig = normalize(original);
   const normStudent = normalize(student);
 
@@ -52,13 +52,30 @@ function gradeAnswer(original: string, student: string): number {
   return Math.min(score, 100);
 }
 
-/** 점수에 따른 피드백 메시지 */
-function getFeedback(score: number): string {
+/** 점수에 따른 피드백 메시지 (fallback 전용) */
+function getFeedbackLCS(score: number): string {
   if (score === 100) return '완벽합니다!';
   if (score >= 90) return '거의 맞았어요! 조금만 더 확인해보세요.';
   if (score >= 70) return '잘 쓰고 있어요. 빠진 부분을 확인하세요.';
   if (score >= 50) return '절반 이상 맞았어요. 원문을 다시 확인하세요.';
   return '원문을 다시 읽고 도전해보세요.';
+}
+
+// ── 정확 매칭 채점 (문장별 영작) ──
+
+interface SentenceData {
+  original: string;
+  korean: string;
+  acceptedAnswers?: string[];
+}
+
+function gradeExact(sentence: SentenceData, studentAnswer: string): boolean {
+  const trimmed = studentAnswer.trim();
+  if (trimmed === sentence.original) return true;
+  if (sentence.acceptedAnswers) {
+    return sentence.acceptedAnswers.some((ans) => trimmed === ans);
+  }
+  return false;
 }
 
 // ── 타입 ──
@@ -82,11 +99,12 @@ interface TranslationExerciseProps {
   onComplete: (score: number, wrongAnswers: WrongTranslation[]) => void;
   showWrongAlert?: boolean;
   rateLimitText?: string;
+  sentencesPerPage?: number;
 }
 
 // ── 메인 컴포넌트 ──
 
-export function TranslationExercise({ passage, onComplete, showWrongAlert }: TranslationExerciseProps) {
+export function TranslationExercise({ passage, onComplete, showWrongAlert, sentencesPerPage = 10 }: TranslationExerciseProps) {
   const hasSentences = Array.isArray(passage.sentences) && passage.sentences.length > 0;
 
   if (hasSentences) {
@@ -95,6 +113,7 @@ export function TranslationExercise({ passage, onComplete, showWrongAlert }: Tra
         passage={passage}
         onComplete={onComplete}
         showWrongAlert={showWrongAlert}
+        sentencesPerPage={sentencesPerPage}
       />
     );
   }
@@ -108,96 +127,152 @@ export function TranslationExercise({ passage, onComplete, showWrongAlert }: Tra
   );
 }
 
-// ── 문장별 영작 ──
+// ── 문장별 영작 (정확 매칭 + 페이지 분할) ──
 
-function SentenceBysentenceTranslation({ passage, onComplete, showWrongAlert }: TranslationExerciseProps) {
-  const sentences = passage.sentences!;
+function SentenceBysentenceTranslation({ passage, onComplete, showWrongAlert, sentencesPerPage = 10 }: TranslationExerciseProps) {
+  const sentences = passage.sentences! as SentenceData[];
+  const totalPages = Math.ceil(sentences.length / sentencesPerPage);
+
+  const [currentPage, setCurrentPage] = useState(0);
   const [answers, setAnswers] = useState<Record<number, string>>({});
-  const [results, setResults] = useState<Record<number, GradingResult> | null>(null);
+  const [pageResults, setPageResults] = useState<Record<number, Record<number, GradingResult>>>({});
 
-  function updateAnswer(idx: number, value: string) {
-    setAnswers((prev) => ({ ...prev, [idx]: value }));
+  // All pages' results collected for final scoring
+  const [allCorrectCount, setAllCorrectCount] = useState(0);
+  const [allWrongs, setAllWrongs] = useState<WrongTranslation[]>([]);
+  const [completed, setCompleted] = useState(false);
+
+  const pageStart = currentPage * sentencesPerPage;
+  const pageEnd = Math.min(pageStart + sentencesPerPage, sentences.length);
+  const pageSentences = useMemo(
+    () => sentences.slice(pageStart, pageEnd),
+    [sentences, pageStart, pageEnd]
+  );
+
+  const currentResults = pageResults[currentPage] ?? null;
+  const filledCount = pageSentences.filter((_, idx) => (answers[pageStart + idx] || '').trim().length > 0).length;
+  const allFilled = filledCount === pageSentences.length;
+
+  function updateAnswer(globalIdx: number, value: string) {
+    setAnswers((prev) => ({ ...prev, [globalIdx]: value }));
   }
 
-  const filledCount = sentences.filter((_, idx) => (answers[idx] || '').trim().length > 0).length;
-  const allFilled = filledCount === sentences.length;
-
-  function handleSubmit() {
+  function handleSubmitPage() {
     if (!allFilled) return;
 
-    const gradeResults: GradingResult[] = sentences.map((s, idx) => {
-      const studentAnswer = (answers[idx] || '').trim();
-      const score = gradeAnswer(s.original, studentAnswer);
-      return {
+    const results: Record<number, GradingResult> = {};
+    let pageCorrect = 0;
+    const pageWrongs: WrongTranslation[] = [];
+
+    pageSentences.forEach((s, localIdx) => {
+      const globalIdx = pageStart + localIdx;
+      const studentAnswer = (answers[globalIdx] || '').trim();
+      const isCorrect = gradeExact(s, studentAnswer);
+      const score = isCorrect ? 100 : 0;
+
+      results[globalIdx] = {
         score,
-        feedback: getFeedback(score),
+        feedback: isCorrect ? '정답!' : '오답',
         correctedSentence: s.original,
       };
+
+      if (isCorrect) {
+        pageCorrect++;
+      } else {
+        pageWrongs.push({
+          type: 'translation',
+          koreanText: s.korean,
+          userAnswer: studentAnswer,
+          score: 0,
+          feedback: '오답',
+        });
+      }
     });
 
-    const resultMap: Record<number, GradingResult> = {};
-    gradeResults.forEach((r, idx) => { resultMap[idx] = r; });
-    setResults(resultMap);
+    setPageResults((prev) => ({ ...prev, [currentPage]: results }));
 
-    const totalScore = Math.round(
-      gradeResults.reduce((sum, r) => sum + r.score, 0) / gradeResults.length
-    );
+    const newTotalCorrect = allCorrectCount + pageCorrect;
+    const newAllWrongs = [...allWrongs, ...pageWrongs];
+    setAllCorrectCount(newTotalCorrect);
+    setAllWrongs(newAllWrongs);
 
-    const wrongs: WrongTranslation[] = gradeResults
-      .map((r, idx) => r.score < 80 ? {
-        type: 'translation' as const,
-        koreanText: sentences[idx].korean,
-        userAnswer: (answers[idx] || '').trim(),
-        score: r.score,
-        feedback: r.feedback,
-      } : null)
-      .filter((w): w is WrongTranslation => w !== null);
+    // If last page, finalize
+    if (currentPage === totalPages - 1) {
+      const totalScore = Math.round((newTotalCorrect / sentences.length) * 100);
+      setCompleted(true);
+      onComplete(totalScore, newAllWrongs);
+    }
+  }
 
-    onComplete(totalScore, wrongs);
+  function handleNextPage() {
+    setCurrentPage((prev) => prev + 1);
   }
 
   function handleReset() {
     setAnswers({});
-    setResults(null);
+    setPageResults({});
+    setCurrentPage(0);
+    setAllCorrectCount(0);
+    setAllWrongs([]);
+    setCompleted(false);
   }
+
+  const isPageGraded = currentResults !== null;
+  const isLastPage = currentPage === totalPages - 1;
 
   return (
     <div className="space-y-3">
-      <div className="flex items-center gap-2 rounded-lg bg-blue-50 dark:bg-blue-950/30 px-3 py-2">
-        <Info className="h-4 w-4 text-blue-600 shrink-0" />
-        <p className="text-xs text-blue-700 dark:text-blue-300">
-          한국어 해석을 보고 영어 원문을 그대로 작성하세요.
+      {/* 경고 배너 */}
+      <div className="flex items-center gap-2 rounded-lg bg-yellow-50 dark:bg-yellow-950/30 px-3 py-2 border border-yellow-200 dark:border-yellow-800">
+        <AlertTriangle className="h-4 w-4 text-yellow-600 shrink-0" />
+        <p className="text-xs text-yellow-700 dark:text-yellow-300">
+          대소문자, 문장부호(마침표/쉼표), 공백이 정확해야 정답 처리됩니다.
         </p>
       </div>
 
-      {sentences.map((s, idx) => {
-        const result = results?.[idx];
+      {/* 진행률 */}
+      {totalPages > 1 && (
+        <div className="flex items-center justify-between text-sm text-muted-foreground">
+          <span>페이지 {currentPage + 1}/{totalPages} (문장 {pageStart + 1}~{pageEnd})</span>
+          {completed && (
+            <Badge variant="secondary">
+              {allCorrectCount}/{sentences.length} 정답
+            </Badge>
+          )}
+        </div>
+      )}
+
+      {pageSentences.map((s, localIdx) => {
+        const globalIdx = pageStart + localIdx;
+        const result = currentResults?.[globalIdx];
         return (
-          <Card key={idx} className={result ? (result.score >= 80 ? 'border-green-500' : 'border-red-500') : ''}>
+          <Card key={globalIdx} className={result ? (result.score === 100 ? 'border-green-500' : 'border-red-500') : ''}>
             <CardContent className="py-3 px-4 space-y-2">
-              <p className="text-sm text-muted-foreground">{s.korean}</p>
-              {results === null ? (
+              <p className="text-sm text-muted-foreground">
+                <span className="text-xs font-medium mr-1">{globalIdx + 1}.</span>
+                {s.korean}
+              </p>
+              {!isPageGraded ? (
                 <Textarea
                   className="text-sm min-h-[2.5rem] resize-none"
                   rows={1}
-                  value={answers[idx] || ''}
-                  onChange={(e) => updateAnswer(idx, e.target.value)}
+                  value={answers[globalIdx] || ''}
+                  onChange={(e) => updateAnswer(globalIdx, e.target.value)}
                   placeholder="영어로 작성..."
                 />
               ) : result ? (
                 <div className="space-y-1.5">
                   <div className="flex items-center gap-2">
-                    <p className="text-sm">{answers[idx]}</p>
+                    <p className="text-sm">{answers[globalIdx]}</p>
                     <Badge
-                      variant={result.score >= 80 ? 'default' : 'secondary'}
-                      className={result.score >= 80 ? 'bg-green-500 shrink-0' : 'shrink-0'}
+                      variant={result.score === 100 ? 'default' : 'secondary'}
+                      className={result.score === 100 ? 'bg-green-500 shrink-0' : 'shrink-0'}
                     >
-                      {result.score}점
+                      {result.score === 100 ? '정답' : '오답'}
                     </Badge>
                   </div>
-                  {result.score < 100 && (
+                  {result.score === 0 && (
                     <div className="text-xs space-y-1 bg-muted/50 rounded p-2">
-                      <p className="text-muted-foreground">{result.feedback}</p>
                       <p className="font-medium">정답: {result.correctedSentence}</p>
                     </div>
                   )}
@@ -208,16 +283,21 @@ function SentenceBysentenceTranslation({ passage, onComplete, showWrongAlert }: 
         );
       })}
 
-      {results === null && !allFilled && filledCount > 0 && (
+      {!isPageGraded && !allFilled && filledCount > 0 && (
         <p className="text-xs text-center text-muted-foreground">
-          {filledCount}/{sentences.length} 문장 작성 완료
+          {filledCount}/{pageSentences.length} 문장 작성 완료
         </p>
       )}
 
       <div className="flex gap-2">
-        {results === null ? (
-          <Button onClick={handleSubmit} className="w-full" disabled={!allFilled}>
-            <Send className="h-4 w-4 mr-1" />제출하기 ({filledCount}/{sentences.length})
+        {!isPageGraded ? (
+          <Button onClick={handleSubmitPage} className="w-full" disabled={!allFilled}>
+            <Send className="h-4 w-4 mr-1" />제출하기 ({filledCount}/{pageSentences.length})
+          </Button>
+        ) : !isLastPage && !completed ? (
+          <Button onClick={handleNextPage} className="w-full">
+            다음 페이지
+            <ChevronRight className="h-4 w-4 ml-1" />
           </Button>
         ) : (
           <Button onClick={handleReset} variant="outline" className="w-full">
@@ -227,7 +307,7 @@ function SentenceBysentenceTranslation({ passage, onComplete, showWrongAlert }: 
         )}
       </div>
 
-      {results && showWrongAlert && Object.values(results).some((r) => r.score < 80) && (
+      {completed && showWrongAlert && allWrongs.length > 0 && (
         <div className="flex items-center gap-2 text-sm text-red-600 bg-red-50 rounded-lg px-3 py-2">
           <AlertTriangle className="h-4 w-4 shrink-0" />
           오답이 기록되었습니다. 오답을 써서 선생님에게 제출하세요.
@@ -237,7 +317,7 @@ function SentenceBysentenceTranslation({ passage, onComplete, showWrongAlert }: 
   );
 }
 
-// ── 전체 본문 영작 (fallback) ──
+// ── 전체 본문 영작 (fallback — 기존 LCS 유지) ──
 
 function WholePassageTranslation({ passage, onComplete, showWrongAlert }: TranslationExerciseProps) {
   const [answer, setAnswer] = useState('');
@@ -246,10 +326,10 @@ function WholePassageTranslation({ passage, onComplete, showWrongAlert }: Transl
   function handleSubmit() {
     if (!answer.trim()) return;
 
-    const score = gradeAnswer(passage.original_text, answer.trim());
+    const score = gradeAnswerLCS(passage.original_text, answer.trim());
     const data: GradingResult = {
       score,
-      feedback: getFeedback(score),
+      feedback: getFeedbackLCS(score),
       correctedSentence: passage.original_text,
     };
     setResult(data);

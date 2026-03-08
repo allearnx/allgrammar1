@@ -53,12 +53,13 @@ export async function StudentDetail({ user, studentId, naesinData }: Props) {
       .eq('student_id', studentId),
     admin
       .from('naesin_student_settings')
-      .select('passage_required_stages')
+      .select('passage_required_stages, translation_sentences_per_page')
       .eq('student_id', studentId)
       .single(),
   ]);
 
   const passageStages = (passageStagesRes.data?.passage_required_stages as string[] | null) ?? ['fill_blanks', 'translation'];
+  const translationSentencesPerPage = (passageStagesRes.data?.translation_sentences_per_page as number | null) ?? 10;
 
   const videoProgress = videoRes.data || [];
   const memoryProgress = memoryRes.data || [];
@@ -171,6 +172,7 @@ export async function StudentDetail({ user, studentId, naesinData }: Props) {
             <PassageStageManager
               studentId={studentId}
               initialStages={passageStages as ('fill_blanks' | 'ordering' | 'translation' | 'grammar_vocab')[]}
+              initialTranslationSentencesPerPage={translationSentencesPerPage}
             />
           </div>
         )}

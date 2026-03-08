@@ -38,9 +38,10 @@ interface PassageTabProps {
   unitId: string;
   onStageComplete: () => void;
   requiredStages?: string[];
+  translationSentencesPerPage?: number;
 }
 
-export function PassageTab({ passages, unitId, onStageComplete, requiredStages }: PassageTabProps) {
+export function PassageTab({ passages, unitId, onStageComplete, requiredStages, translationSentencesPerPage }: PassageTabProps) {
   const stages = useMemo(() => {
     const raw = (requiredStages ?? ['fill_blanks', 'translation']) as PassageStageType[];
     return raw.filter((s) => STAGE_TAB_MAP[s]);
@@ -265,6 +266,7 @@ export function PassageTab({ passages, unitId, onStageComplete, requiredStages }
             <NaesinTranslationView
               key={passage.id}
               passage={textbookPassage}
+              sentencesPerPage={translationSentencesPerPage}
               onScoreChange={(score, wrongs) => {
                 savePassageProgress('translation', score);
                 if (wrongs && wrongs.length > 0) saveWrongAnswers(wrongs);
@@ -311,7 +313,7 @@ const ALL_STEPS = [
     icon: PenLine,
     title: '영작',
     desc: '한글 해석을 보고 영어로 직접 작성해요.',
-    tip: 'AI가 채점해주니까 부담 없이 써봐!',
+    tip: '대소문자, 마침표, 쉼표, 공백 모두 정확히!',
     color: 'text-emerald-600',
     bg: 'bg-emerald-50 dark:bg-emerald-950/30',
   },
@@ -353,6 +355,16 @@ function StageDirectionModal({
           <Lightbulb className="h-3.5 w-3.5 shrink-0" />
           <span>{config.tip}</span>
         </div>
+        {stage === 'translation' && (
+          <div className="space-y-1.5 p-2.5 rounded-lg bg-yellow-50 dark:bg-yellow-950/30 border border-yellow-200 dark:border-yellow-800">
+            <p className="text-xs font-medium text-yellow-800 dark:text-yellow-200">주의사항</p>
+            <ul className="text-xs text-yellow-700 dark:text-yellow-300 space-y-1 list-disc pl-4">
+              <li>대소문자 구분 (He ≠ he)</li>
+              <li>마침표, 쉼표 등 문장부호 정확히</li>
+              <li>공백도 정확히 (띄어쓰기 주의)</li>
+            </ul>
+          </div>
+        )}
         <div className="flex items-center gap-2 p-2.5 rounded-lg bg-orange-50 dark:bg-orange-950/30">
           <Target className="h-4 w-4 text-orange-600 shrink-0" />
           <p className="text-xs text-orange-700 dark:text-orange-300">

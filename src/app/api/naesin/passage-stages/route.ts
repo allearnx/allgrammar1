@@ -6,6 +6,7 @@ import { z } from 'zod';
 const updateSchema = z.object({
   studentId: z.string().uuid(),
   stages: z.array(z.enum(['fill_blanks', 'ordering', 'translation', 'grammar_vocab'])).min(1).max(6),
+  translationSentencesPerPage: z.number().int().min(1).max(50).optional(),
 });
 
 // GET: Fetch student's passage stages
@@ -19,12 +20,13 @@ export const GET = createApiHandler(
     const admin = createAdminClient();
     const { data } = await admin
       .from('naesin_student_settings')
-      .select('passage_required_stages')
+      .select('passage_required_stages, translation_sentences_per_page')
       .eq('student_id', studentId)
       .single();
 
     return NextResponse.json({
       stages: data?.passage_required_stages ?? ['fill_blanks', 'translation'],
+      translationSentencesPerPage: data?.translation_sentences_per_page ?? 10,
     });
   }
 );
@@ -33,13 +35,18 @@ export const GET = createApiHandler(
 export const POST = createApiHandler(
   { roles: ['teacher', 'admin', 'boss'], schema: updateSchema },
   async ({ body }) => {
-    const { studentId, stages } = body;
+    const { studentId, stages, translationSentencesPerPage } = body;
     const admin = createAdminClient();
+
+    const updatePayload: Record<string, unknown> = { passage_required_stages: stages };
+    if (translationSentencesPerPage !== undefined) {
+      updatePayload.translation_sentences_per_page = translationSentencesPerPage;
+    }
 
     // Try update first
     const { data: updated, error: updateError } = await admin
       .from('naesin_student_settings')
-      .update({ passage_required_stages: stages })
+      .update(updatePayload)
       .eq('student_id', studentId)
       .select('id');
 
