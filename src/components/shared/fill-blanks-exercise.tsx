@@ -58,7 +58,8 @@ export function FillBlanksExercise({ passage, onComplete, showWrongAlert }: Fill
     const ranges: SentenceRange[] = [];
     let offset = 0;
     for (const s of passage.sentences!) {
-      const wc = s.words.length;
+      // Use same split as original_text to keep indices aligned
+      const wc = s.original.split(/\s+/).filter(Boolean).length;
       ranges.push({ korean: s.korean, startIdx: offset, endIdx: offset + wc - 1, wordCount: wc });
       offset += wc;
     }
