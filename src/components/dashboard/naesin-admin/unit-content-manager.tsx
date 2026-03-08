@@ -463,20 +463,26 @@ export function UnitContentManager({ unitId }: { unitId: string }) {
               <div className="flex items-center gap-2 py-1.5 px-2 group">
                 <FileText className="h-3.5 w-3.5 text-orange-500 shrink-0" />
                 <span className="text-sm flex-1 truncate">{passage.title}</span>
-                {passage.grammar_vocab_items && (passage.grammar_vocab_items as unknown[]).length > 0 && (
-                  <Badge variant="outline" className="text-[10px] h-4 px-1 shrink-0">어법/어휘</Badge>
-                )}
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  className="h-6 w-6 opacity-0 group-hover:opacity-100"
-                  title="어법/어휘 재생성"
-                  onClick={() => regenerateGrammarVocab(passage)}
-                  disabled={regeneratingGV === passage.id}
-                  aria-label="어법/어휘 재생성"
-                >
-                  {regeneratingGV === passage.id ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <Wand2 className="h-3.5 w-3.5" />}
-                </Button>
+                {(() => {
+                  const hasGV = passage.grammar_vocab_items && (passage.grammar_vocab_items as unknown[]).length > 0;
+                  return (
+                    <Button
+                      variant={hasGV ? 'outline' : 'secondary'}
+                      size="sm"
+                      className="h-6 text-[11px] px-2 shrink-0"
+                      onClick={() => regenerateGrammarVocab(passage)}
+                      disabled={regeneratingGV === passage.id}
+                    >
+                      {regeneratingGV === passage.id ? (
+                        <><Loader2 className="h-3 w-3 mr-1 animate-spin" />생성 중...</>
+                      ) : hasGV ? (
+                        <><Wand2 className="h-3 w-3 mr-1" />어법/어휘 재생성</>
+                      ) : (
+                        <><Wand2 className="h-3 w-3 mr-1" />어법/어휘 생성</>
+                      )}
+                    </Button>
+                  );
+                })()}
                 <Button
                   variant="ghost"
                   size="icon"
