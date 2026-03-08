@@ -33,12 +33,23 @@ export async function StudentsList({ user, basePath }: Props) {
     .select('id', { count: 'exact', head: true });
 
   const studentIds = students?.map((s) => s.id) || [];
-  const { data: allProgress } = studentIds.length > 0
-    ? await admin
-        .from('student_progress')
-        .select('student_id, video_completed')
-        .in('student_id', studentIds)
-    : { data: [] };
+  const [progressRes, naesinProgressRes] = await Promise.all([
+    studentIds.length > 0
+      ? admin
+          .from('student_progress')
+          .select('student_id, video_completed')
+          .in('student_id', studentIds)
+      : Promise.resolve({ data: [] }),
+    studentIds.length > 0
+      ? admin
+          .from('naesin_student_progress')
+          .select('student_id, vocab_completed, passage_completed, grammar_completed, problem_completed')
+          .in('student_id', studentIds)
+      : Promise.resolve({ data: [] }),
+  ]);
+
+  const allProgress = progressRes.data || [];
+  const allNaesinProgress = naesinProgressRes.data || [];
 
   const progressByStudent = new Map<string, number>();
   allProgress?.forEach((p) => {
@@ -48,6 +59,16 @@ export async function StudentsList({ user, basePath }: Props) {
         (progressByStudent.get(p.student_id) || 0) + 1
       );
     }
+  });
+
+  // Naesin: count completed stages per student
+  const naesinByStudent = new Map<string, { stages: number; units: number }>();
+  allNaesinProgress?.forEach((p) => {
+    const prev = naesinByStudent.get(p.student_id) || { stages: 0, units: 0 };
+    const stageCount = (p.vocab_completed ? 1 : 0) + (p.passage_completed ? 1 : 0) + (p.grammar_completed ? 1 : 0) + (p.problem_completed ? 1 : 0);
+    prev.stages += stageCount;
+    if (stageCount === 4) prev.units += 1;
+    naesinByStudent.set(p.student_id, prev);
   });
 
   // Fetch service assignments for boss/admin
@@ -81,6 +102,7 @@ export async function StudentsList({ user, basePath }: Props) {
           const completed = progressByStudent.get(student.id) || 0;
           const total = totalGrammars || 0;
           const percent = total > 0 ? Math.round((completed / total) * 100) : 0;
+          const naesin = naesinByStudent.get(student.id);
 
           return (
             <Card key={student.id}>
@@ -97,9 +119,17 @@ export async function StudentsList({ user, basePath }: Props) {
                       </Badge>
                     </div>
                     <p className="text-sm text-muted-foreground truncate">{student.email}</p>
+                    {naesin && naesin.stages > 0 && (
+                      <div className="mt-2 flex items-center gap-2 text-xs text-muted-foreground">
+                        <span>내신: {naesin.stages}단계 완료</span>
+                        {naesin.units > 0 && (
+                          <Badge variant="secondary" className="text-xs">{naesin.units}단원 완료</Badge>
+                        )}
+                      </div>
+                    )}
                     <div className="mt-2 space-y-1">
                       <div className="flex justify-between text-xs text-muted-foreground">
-                        <span>학습 진도</span>
+                        <span>문법 학습</span>
                         <span>{completed}/{total} ({percent}%)</span>
                       </div>
                       <Progress value={percent} className="h-1.5" />

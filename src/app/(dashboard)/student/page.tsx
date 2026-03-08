@@ -3,7 +3,7 @@ import { createClient } from '@/lib/supabase/server';
 import { Topbar } from '@/components/layout/topbar';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { BookOpen, BookMarked, GraduationCap, BarChart3, Clock } from 'lucide-react';
+import { BookOpen, BookMarked, GraduationCap, BarChart3, Clock, CheckCircle } from 'lucide-react';
 import Link from 'next/link';
 
 export default async function StudentDashboard() {
@@ -11,7 +11,7 @@ export default async function StudentDashboard() {
   const supabase = await createClient();
 
   // Fetch progress stats
-  const [videoProgressRes, memoryProgressRes, dueReviewsRes] = await Promise.all([
+  const [videoProgressRes, memoryProgressRes, dueReviewsRes, naesinProgressRes] = await Promise.all([
     supabase
       .from('student_progress')
       .select('video_completed')
@@ -26,6 +26,10 @@ export default async function StudentDashboard() {
       .eq('student_id', user.id)
       .eq('is_mastered', false)
       .lte('next_review_date', new Date().toISOString().split('T')[0]),
+    supabase
+      .from('naesin_student_progress')
+      .select('vocab_completed, passage_completed, grammar_completed, problem_completed')
+      .eq('student_id', user.id),
   ]);
 
   const completedVideos = videoProgressRes.data?.filter((p) => p.video_completed).length || 0;
@@ -33,6 +37,15 @@ export default async function StudentDashboard() {
   const masteredItems = memoryProgressRes.data?.filter((p) => p.is_mastered).length || 0;
   const totalMemory = memoryProgressRes.data?.length || 0;
   const dueReviews = dueReviewsRes.data?.length || 0;
+
+  // Naesin stats
+  const naesinProgress = naesinProgressRes.data || [];
+  const naesinStagesCompleted = naesinProgress.reduce((acc, p) => {
+    return acc + (p.vocab_completed ? 1 : 0) + (p.passage_completed ? 1 : 0) + (p.grammar_completed ? 1 : 0) + (p.problem_completed ? 1 : 0);
+  }, 0);
+  const naesinUnitsFullyCompleted = naesinProgress.filter(
+    (p) => p.vocab_completed && p.passage_completed && p.grammar_completed && p.problem_completed
+  ).length;
 
   return (
     <>
@@ -46,6 +59,34 @@ export default async function StudentDashboard() {
 
         {/* Stats */}
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {naesinProgress.length > 0 && (
+            <>
+              <Card>
+                <CardHeader className="flex flex-row items-center justify-between pb-2">
+                  <CardTitle className="text-sm font-medium">내신 단계 완료</CardTitle>
+                  <CheckCircle className="h-4 w-4 text-muted-foreground" />
+                </CardHeader>
+                <CardContent>
+                  <div className="text-2xl font-bold">{naesinStagesCompleted}</div>
+                  <p className="text-xs text-muted-foreground">
+                    전체 {naesinProgress.length * 4}단계 중
+                  </p>
+                </CardContent>
+              </Card>
+              <Card>
+                <CardHeader className="flex flex-row items-center justify-between pb-2">
+                  <CardTitle className="text-sm font-medium">완료 단원</CardTitle>
+                  <BookMarked className="h-4 w-4 text-muted-foreground" />
+                </CardHeader>
+                <CardContent>
+                  <div className="text-2xl font-bold">{naesinUnitsFullyCompleted}</div>
+                  <p className="text-xs text-muted-foreground">
+                    전체 {naesinProgress.length}단원 중
+                  </p>
+                </CardContent>
+              </Card>
+            </>
+          )}
           <Card>
             <CardHeader className="flex flex-row items-center justify-between pb-2">
               <CardTitle className="text-sm font-medium">완료한 강의</CardTitle>
@@ -70,28 +111,32 @@ export default async function StudentDashboard() {
               </p>
             </CardContent>
           </Card>
-          <Card>
-            <CardHeader className="flex flex-row items-center justify-between pb-2">
-              <CardTitle className="text-sm font-medium">복습 대기</CardTitle>
-              <Clock className="h-4 w-4 text-muted-foreground" />
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold">{dueReviews}</div>
-              <p className="text-xs text-muted-foreground">오늘 복습할 항목</p>
-            </CardContent>
-          </Card>
-          <Card>
-            <CardHeader className="flex flex-row items-center justify-between pb-2">
-              <CardTitle className="text-sm font-medium">학습 진도</CardTitle>
-              <BarChart3 className="h-4 w-4 text-muted-foreground" />
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold">
-                {totalProgress > 0 ? Math.round((completedVideos / totalProgress) * 100) : 0}%
-              </div>
-              <p className="text-xs text-muted-foreground">전체 진도율</p>
-            </CardContent>
-          </Card>
+          {naesinProgress.length === 0 && (
+            <>
+              <Card>
+                <CardHeader className="flex flex-row items-center justify-between pb-2">
+                  <CardTitle className="text-sm font-medium">복습 대기</CardTitle>
+                  <Clock className="h-4 w-4 text-muted-foreground" />
+                </CardHeader>
+                <CardContent>
+                  <div className="text-2xl font-bold">{dueReviews}</div>
+                  <p className="text-xs text-muted-foreground">오늘 복습할 항목</p>
+                </CardContent>
+              </Card>
+              <Card>
+                <CardHeader className="flex flex-row items-center justify-between pb-2">
+                  <CardTitle className="text-sm font-medium">학습 진도</CardTitle>
+                  <BarChart3 className="h-4 w-4 text-muted-foreground" />
+                </CardHeader>
+                <CardContent>
+                  <div className="text-2xl font-bold">
+                    {totalProgress > 0 ? Math.round((completedVideos / totalProgress) * 100) : 0}%
+                  </div>
+                  <p className="text-xs text-muted-foreground">전체 진도율</p>
+                </CardContent>
+              </Card>
+            </>
+          )}
         </div>
 
         {/* Quick Actions */}
