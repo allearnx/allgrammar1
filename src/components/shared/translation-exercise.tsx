@@ -65,7 +65,8 @@ function SentenceBysentenceTranslation({ passage, onComplete, showWrongAlert, ra
     setAnswers((prev) => ({ ...prev, [idx]: value }));
   }
 
-  const allFilled = sentences.every((_, idx) => (answers[idx] || '').trim().length > 0);
+  const filledCount = sentences.filter((_, idx) => (answers[idx] || '').trim().length > 0).length;
+  const allFilled = filledCount === sentences.length;
 
   async function handleSubmit() {
     if (!allFilled || loading) return;
@@ -136,10 +137,14 @@ function SentenceBysentenceTranslation({ passage, onComplete, showWrongAlert, ra
 
       {sentences.map((s, idx) => {
         const result = results?.[idx];
+        const isEmpty = results === null && !(answers[idx] || '').trim();
         return (
           <Card key={idx} className={result ? (result.score >= 80 ? 'border-green-500' : 'border-red-500') : ''}>
             <CardContent className="py-3 px-4 space-y-2">
-              <p className="text-sm text-muted-foreground">{s.korean}</p>
+              <p className="text-sm text-muted-foreground">
+                <span className="text-xs text-muted-foreground/60 mr-1">{idx + 1}.</span>
+                {s.korean}
+              </p>
               {results === null ? (
                 <Textarea
                   className="text-sm min-h-[2.5rem] resize-none"
@@ -173,13 +178,19 @@ function SentenceBysentenceTranslation({ passage, onComplete, showWrongAlert, ra
         );
       })}
 
+      {results === null && !allFilled && filledCount > 0 && (
+        <p className="text-xs text-center text-muted-foreground">
+          {filledCount}/{sentences.length} 문장 작성 완료
+        </p>
+      )}
+
       <div className="flex gap-2">
         {results === null ? (
           <Button onClick={handleSubmit} className="w-full" disabled={!allFilled || loading}>
             {loading ? (
               <><Loader2 className="h-4 w-4 mr-1 animate-spin" />채점 중...</>
             ) : (
-              <><Send className="h-4 w-4 mr-1" />제출하기</>
+              <><Send className="h-4 w-4 mr-1" />제출하기 ({filledCount}/{sentences.length})</>
             )}
           </Button>
         ) : (
