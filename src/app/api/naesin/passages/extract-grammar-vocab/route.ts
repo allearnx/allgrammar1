@@ -37,7 +37,11 @@ export const POST = createApiHandler(
     const selected = eligible.slice(0, selectCount);
 
     const sentenceList = selected
-      .map((s, i) => `[${i}] English: ${s.original}\nKorean: ${s.korean}`)
+      .map((s, i) => {
+        const words = s.original.trim().split(/\s+/);
+        const wordMap = words.map((w, wi) => `  ${wi}: "${w}"`).join('\n');
+        return `[${i}] English: ${s.original}\nKorean: ${s.korean}\nWord indices:\n${wordMap}`;
+      })
       .join('\n\n');
 
     const message = await anthropic.messages.create({
@@ -55,13 +59,13 @@ Types of choice points:
 - **Vocabulary (어휘)**: easily confused words, synonyms with different nuance, collocations
 
 Rules:
-- Each choice point has startWord and endWord (0-indexed word positions in the sentence)
+- Each choice point has startWord and endWord (0-indexed word positions as shown in "Word indices" above)
 - startWord and endWord are inclusive (if a single word, startWord === endWord)
+- CRITICAL: The correct option MUST be the EXACT word(s) from the sentence at those positions (copy-paste from the word indices)
 - options: 2-3 choices including the correct answer
 - correctIndex: index of the correct answer in the options array
-- The correct option must exactly match the original word(s) in the sentence
 - Make wrong options plausible but clearly wrong for the level
-- Words are split by whitespace
+- Do NOT create overlapping choice points in the same sentence
 
 Sentences:
 ${sentenceList}
@@ -99,14 +103,39 @@ Respond with ONLY a JSON array (no other text):
       const items = JSON.parse(jsonMatch[0]);
 
       // Map back to original sentence indices and validate
-      const result = items.map((item: { sentenceIndex: number; choicePoints: unknown[]; original?: string; korean?: string }) => {
+      const result = items.map((item: { sentenceIndex: number; choicePoints: { startWord: number; endWord: number; options: string[]; correctIndex: number }[]; original?: string; korean?: string }) => {
         const originalSentence = selected[item.sentenceIndex];
         if (!originalSentence) return null;
+
+        const words = originalSentence.original.trim().split(/\s+/);
+
+        // Validate each choice point
+        const validChoicePoints = (item.choicePoints || []).filter((cp) => {
+          if (cp.startWord < 0 || cp.endWord >= words.length || cp.startWord > cp.endWord) return false;
+          if (!cp.options || cp.options.length < 2 || cp.correctIndex < 0 || cp.correctIndex >= cp.options.length) return false;
+          // Verify correct option matches actual words
+          const originalWords = words.slice(cp.startWord, cp.endWord + 1).join(' ');
+          return cp.options[cp.correctIndex] === originalWords;
+        });
+
+        // Remove overlapping ranges
+        const sorted = validChoicePoints.sort((a, b) => a.startWord - b.startWord);
+        const nonOverlapping: typeof validChoicePoints = [];
+        let lastEnd = -1;
+        for (const cp of sorted) {
+          if (cp.startWord > lastEnd) {
+            nonOverlapping.push(cp);
+            lastEnd = cp.endWord;
+          }
+        }
+
+        if (nonOverlapping.length === 0) return null;
+
         return {
           sentenceIndex: originalSentence.index,
           original: originalSentence.original,
           korean: originalSentence.korean,
-          choicePoints: item.choicePoints || [],
+          choicePoints: nonOverlapping,
         };
       }).filter(Boolean);
 

@@ -21,12 +21,39 @@ interface GrammarVocabViewProps {
 
 type SelectionMap = Record<string, number>; // key: `${itemIdx}-${cpIdx}`, value: selected option index
 
+/** choice point 유효성 검증: 범위가 문장 단어 수 안에 있고, 서로 겹치지 않는 것만 반환 */
+function getValidChoicePoints(item: GrammarVocabItem): GrammarVocabChoicePoint[] {
+  const words = item.original.split(/\s+/);
+  const valid: GrammarVocabChoicePoint[] = [];
+
+  // 정렬 후 겹치는 것 제거
+  const sorted = [...item.choicePoints]
+    .filter((cp) => cp.startWord >= 0 && cp.endWord < words.length && cp.startWord <= cp.endWord)
+    .sort((a, b) => a.startWord - b.startWord);
+
+  let lastEnd = -1;
+  for (const cp of sorted) {
+    if (cp.startWord > lastEnd) {
+      // 정답 옵션이 원문 단어와 일치하는지 검증
+      const originalWords = words.slice(cp.startWord, cp.endWord + 1).join(' ');
+      const correctOption = cp.options[cp.correctIndex];
+      if (correctOption === originalWords) {
+        valid.push(cp);
+        lastEnd = cp.endWord;
+      }
+    }
+  }
+  return valid;
+}
+
 export function GrammarVocabView({ items, onScoreChange }: GrammarVocabViewProps) {
   const [selections, setSelections] = useState<SelectionMap>({});
   const [submitted, setSubmitted] = useState(false);
   const [resultModal, setResultModal] = useState<{ score: number; correct: number; total: number } | null>(null);
 
-  const totalChoicePoints = items.reduce((sum, item) => sum + item.choicePoints.length, 0);
+  // 유효한 choice point만 카운트
+  const validCPMap = items.map((item) => getValidChoicePoints(item));
+  const totalChoicePoints = validCPMap.reduce((sum, cps) => sum + cps.length, 0);
 
   function selectOption(itemIdx: number, cpIdx: number, optionIdx: number) {
     if (submitted) return;
@@ -35,8 +62,8 @@ export function GrammarVocabView({ items, onScoreChange }: GrammarVocabViewProps
 
   function handleSubmit() {
     let correct = 0;
-    items.forEach((item, itemIdx) => {
-      item.choicePoints.forEach((cp, cpIdx) => {
+    items.forEach((_, itemIdx) => {
+      validCPMap[itemIdx].forEach((cp, cpIdx) => {
         const key = `${itemIdx}-${cpIdx}`;
         if (selections[key] === cp.correctIndex) {
           correct++;
@@ -74,6 +101,7 @@ export function GrammarVocabView({ items, onScoreChange }: GrammarVocabViewProps
           key={itemIdx}
           item={item}
           itemIdx={itemIdx}
+          validChoicePoints={validCPMap[itemIdx]}
           selections={selections}
           submitted={submitted}
           onSelect={selectOption}
@@ -113,20 +141,22 @@ export function GrammarVocabView({ items, onScoreChange }: GrammarVocabViewProps
 function SentenceCard({
   item,
   itemIdx,
+  validChoicePoints,
   selections,
   submitted,
   onSelect,
 }: {
   item: GrammarVocabItem;
   itemIdx: number;
+  validChoicePoints: GrammarVocabChoicePoint[];
   selections: SelectionMap;
   submitted: boolean;
   onSelect: (itemIdx: number, cpIdx: number, optionIdx: number) => void;
 }) {
   const words = item.original.split(/\s+/);
 
-  // Build ranges covered by choice points
-  const cpRanges = item.choicePoints.map((cp, cpIdx) => ({
+  // Build ranges covered by validated choice points
+  const cpRanges = validChoicePoints.map((cp, cpIdx) => ({
     cpIdx,
     cp,
     startWord: cp.startWord,
