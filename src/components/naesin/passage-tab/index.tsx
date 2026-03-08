@@ -94,12 +94,12 @@ export function PassageTab({ passages, unitId, onStageComplete, requiredStages }
     (Array.isArray(passage.blanks_hard) && passage.blanks_hard.length > 0);
   const hasSentences = Array.isArray(passage.sentences) && passage.sentences.length > 0;
 
-  async function savePassageProgress(type: 'fill_blanks' | 'ordering' | 'translation', score: number, wrongAnswers?: unknown[]) {
+  async function savePassageProgress(type: 'fill_blanks' | 'ordering' | 'translation', score: number, difficulty?: string) {
     try {
       const res = await fetch('/api/naesin/passage/progress', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ unitId, type, score, wrongAnswers }),
+        body: JSON.stringify({ unitId, type, score, difficulty }),
       });
       const data = await res.json();
       if (data.passageCompleted) {
@@ -181,8 +181,8 @@ export function PassageTab({ passages, unitId, onStageComplete, requiredStages }
             <NaesinFillBlanksView
               key={passage.id}
               passage={textbookPassage}
-              onScoreChange={(score, wrongs) => {
-                savePassageProgress('fill_blanks', score);
+              onScoreChange={(score, wrongs, difficulty) => {
+                savePassageProgress('fill_blanks', score, difficulty);
                 if (wrongs && wrongs.length > 0) saveWrongAnswers(wrongs);
               }}
             />

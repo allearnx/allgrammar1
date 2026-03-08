@@ -25,6 +25,7 @@ export const passageProgressSchema = z.object({
   unitId: ID,
   type: z.enum(['fill_blanks', 'ordering', 'translation']),
   score: z.number(),
+  difficulty: z.enum(['easy', 'medium', 'hard']).nullish(),
 });
 
 export const videoProgressSchema = z.object({

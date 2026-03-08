@@ -27,7 +27,7 @@ interface WrongBlank {
 
 interface FillBlanksExerciseProps {
   passage: TextbookPassage;
-  onComplete: (score: number, wrongAnswers: WrongBlank[]) => void;
+  onComplete: (score: number, wrongAnswers: WrongBlank[], difficulty: Difficulty) => void;
   showWrongAlert?: boolean;
 }
 
@@ -143,7 +143,7 @@ export function FillBlanksExercise({ passage, onComplete, showWrongAlert }: Fill
 
     setResults(newResults);
     const score = Math.round((correctCount / blanks.length) * 100);
-    onComplete(score, wrongs);
+    onComplete(score, wrongs, difficulty);
     setResultModal({ score, correct: correctCount, total: blanks.length });
   }
 
@@ -162,6 +162,11 @@ export function FillBlanksExercise({ passage, onComplete, showWrongAlert }: Fill
           <TabsTrigger value="hard" disabled={!passage.blanks_hard}>어려움</TabsTrigger>
         </TabsList>
       </Tabs>
+
+      <div className="flex items-center gap-2 text-xs text-muted-foreground bg-muted/50 rounded-lg px-3 py-2">
+        <AlertTriangle className="h-3.5 w-3.5 shrink-0" />
+        모든 시도가 점수로 기록되어 리포트에 반영됩니다. 80점 이상이면 다음 단계로 넘어갈 수 있어요!
+      </div>
 
       {blanks.length === 0 ? (
         <p className="text-center text-muted-foreground py-4">이 난이도의 빈칸 문제가 없습니다.</p>

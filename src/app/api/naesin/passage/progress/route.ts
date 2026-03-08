@@ -7,7 +7,16 @@ const PASS_THRESHOLD = 80;
 export const POST = createApiHandler(
   { schema: passageProgressSchema },
   async ({ user, body, supabase }) => {
-    const { unitId, type, score } = body;
+    const { unitId, type, score, difficulty } = body;
+
+    // Record this attempt
+    await supabase.from('naesin_passage_attempts').insert({
+      student_id: user.id,
+      unit_id: unitId,
+      type,
+      difficulty: difficulty || null,
+      score,
+    });
 
     const { data: existing } = await supabase
       .from('naesin_student_progress')

@@ -8,12 +8,12 @@ export function NaesinFillBlanksView({
   onScoreChange,
 }: {
   passage: TextbookPassage;
-  onScoreChange: (score: number, wrongAnswers?: unknown[]) => void;
+  onScoreChange: (score: number, wrongAnswers?: unknown[], difficulty?: string) => void;
 }) {
   return (
     <FillBlanksExercise
       passage={passage}
-      onComplete={(score, wrongs) => onScoreChange(score, wrongs)}
+      onComplete={(score, wrongs, difficulty) => onScoreChange(score, wrongs, difficulty)}
       showWrongAlert
     />
   );
