@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import { z } from 'zod';
 import { createApiHandler } from '@/lib/api';
 import { passageCreateSchema, idSchema } from '@/lib/api/schemas';
 
@@ -20,6 +21,45 @@ export const POST = createApiHandler(
         sentences: body.sentences || null,
         sort_order: body.sort_order || 0,
       })
+      .select()
+      .single();
+
+    if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+    return NextResponse.json(data);
+  }
+);
+
+const passageUpdateSchema = z.object({
+  id: z.string().max(100),
+  title: z.string().max(200).optional(),
+  sentences: z.array(z.object({
+    original: z.string(),
+    korean: z.string(),
+  })).optional(),
+});
+
+export const PATCH = createApiHandler(
+  { roles: [...ADMIN_ROLES], schema: passageUpdateSchema },
+  async ({ body, supabase }) => {
+    const updates: Record<string, unknown> = {};
+
+    if (body.title) updates.title = body.title;
+
+    if (body.sentences) {
+      const sentences = body.sentences.map((s: { original: string; korean: string }) => ({
+        original: s.original,
+        korean: s.korean,
+        words: s.original.split(/\s+/).filter(Boolean),
+      }));
+      updates.sentences = sentences;
+      updates.original_text = sentences.map((s: { original: string }) => s.original).join(' ');
+      updates.korean_translation = sentences.map((s: { korean: string }) => s.korean).join(' ');
+    }
+
+    const { data, error } = await supabase
+      .from('naesin_passages')
+      .update(updates)
+      .eq('id', body.id)
       .select()
       .single();
 

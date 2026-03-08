@@ -16,8 +16,10 @@ import {
   Pencil,
   Brain,
 } from 'lucide-react';
+import { Textarea } from '@/components/ui/textarea';
+import { Loader2 } from 'lucide-react';
 import { toast } from 'sonner';
-import type { NaesinVocabulary, NaesinGrammarLesson } from '@/types/database';
+import type { NaesinVocabulary, NaesinGrammarLesson, NaesinPassage } from '@/types/database';
 import { ConfirmDialog } from '@/components/shared/confirm-dialog';
 import { AddVocabDialog, BulkVocabUpload, PdfVocabExtract } from './vocab-dialogs';
 import { AddPassageDialog, AddGrammarDialog, AddOmrDialog, AddProblemDialog, AddLastReviewDialog } from './content-dialogs';
@@ -33,9 +35,12 @@ export function UnitContentManager({ unitId }: { unitId: string }) {
   const [editForm, setEditForm] = useState({ front_text: '', back_text: '', part_of_speech: '', example_sentence: '', synonyms: '', antonyms: '' });
   const [deleteVocabId, setDeleteVocabId] = useState<string | null>(null);
   const [bulkDeleteOpen, setBulkDeleteOpen] = useState(false);
-  const [passageList, setPassageList] = useState<{ id: string; title: string }[]>([]);
+  const [passageList, setPassageList] = useState<NaesinPassage[]>([]);
   const [showPassageList, setShowPassageList] = useState(false);
   const [deletePassageId, setDeletePassageId] = useState<string | null>(null);
+  const [editingPassageId, setEditingPassageId] = useState<string | null>(null);
+  const [passageEditForm, setPassageEditForm] = useState<{ title: string; sentences: { original: string; korean: string }[] }>({ title: '', sentences: [] });
+  const [savingPassage, setSavingPassage] = useState(false);
   const [grammarCount, setGrammarCount] = useState<number | null>(null);
   const [omrCount, setOmrCount] = useState<number | null>(null);
   const [problemCount, setProblemCount] = useState<number | null>(null);
@@ -57,14 +62,14 @@ export function UnitContentManager({ unitId }: { unitId: string }) {
       const supabase = createClient();
       const [v, p, g, o, prob, lr] = await Promise.all([
         supabase.from('naesin_vocabulary').select('*').eq('unit_id', unitId).order('sort_order'),
-        supabase.from('naesin_passages').select('id, title').eq('unit_id', unitId).order('created_at'),
+        supabase.from('naesin_passages').select('*').eq('unit_id', unitId).order('created_at'),
         supabase.from('naesin_grammar_lessons').select('*').eq('unit_id', unitId).order('sort_order'),
         supabase.from('naesin_omr_sheets').select('*', { count: 'exact', head: true }).eq('unit_id', unitId),
         supabase.from('naesin_problem_sheets').select('*', { count: 'exact', head: true }).eq('unit_id', unitId).eq('category', 'problem'),
         supabase.from('naesin_last_review_content').select('*', { count: 'exact', head: true }).eq('unit_id', unitId),
       ]);
       setVocabList((v.data as NaesinVocabulary[]) || []);
-      setPassageList((p.data as { id: string; title: string }[]) || []);
+      setPassageList((p.data as NaesinPassage[]) || []);
       setGrammarList((g.data as NaesinGrammarLesson[]) || []);
       setGrammarCount(g.data?.length ?? 0);
       setOmrCount(o.count ?? 0);
@@ -226,6 +231,49 @@ export function UnitContentManager({ unitId }: { unitId: string }) {
     }
   }
 
+  function startPassageEdit(passage: NaesinPassage) {
+    setEditingPassageId(passage.id);
+    const sentences = Array.isArray(passage.sentences) && passage.sentences.length > 0
+      ? passage.sentences.map((s) => ({ original: s.original, korean: s.korean }))
+      : [{ original: passage.original_text, korean: passage.korean_translation }];
+    setPassageEditForm({ title: passage.title, sentences });
+  }
+
+  function updateSentence(idx: number, field: 'original' | 'korean', value: string) {
+    setPassageEditForm((prev) => ({
+      ...prev,
+      sentences: prev.sentences.map((s, i) => (i === idx ? { ...s, [field]: value } : s)),
+    }));
+  }
+
+  async function savePassageEdit() {
+    if (!editingPassageId) return;
+    setSavingPassage(true);
+    try {
+      const res = await fetch('/api/naesin/passages', {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          id: editingPassageId,
+          title: passageEditForm.title,
+          sentences: passageEditForm.sentences,
+        }),
+      });
+      if (res.ok) {
+        const updated = await res.json();
+        setPassageList((prev) => prev.map((p) => (p.id === editingPassageId ? updated : p)));
+        setEditingPassageId(null);
+        toast.success('지문이 수정되었습니다');
+      } else {
+        toast.error('수정 실패');
+      }
+    } catch {
+      toast.error('지문 수정 중 오류가 발생했습니다');
+    } finally {
+      setSavingPassage(false);
+    }
+  }
+
   async function handleDeleteGrammar(id: string) {
     try {
       const res = await fetch('/api/naesin/grammar-lessons', {
@@ -369,18 +417,70 @@ export function UnitContentManager({ unitId }: { unitId: string }) {
       {showPassageList && passageList.length > 0 && (
         <div className="space-y-1 rounded-lg border p-2">
           {passageList.map((passage) => (
-            <div key={passage.id} className="flex items-center gap-2 py-1.5 px-2 rounded hover:bg-muted/50 group">
-              <FileText className="h-3.5 w-3.5 text-orange-500 shrink-0" />
-              <span className="text-sm flex-1 truncate">{passage.title}</span>
-              <Button
-                variant="ghost"
-                size="icon"
-                className="h-6 w-6 opacity-0 group-hover:opacity-100"
-                onClick={() => setDeletePassageId(passage.id)}
-                aria-label="삭제"
-              >
-                <Trash2 className="h-3.5 w-3.5 text-destructive" />
-              </Button>
+            <div key={passage.id} className="rounded hover:bg-muted/50">
+              <div className="flex items-center gap-2 py-1.5 px-2 group">
+                <FileText className="h-3.5 w-3.5 text-orange-500 shrink-0" />
+                <span className="text-sm flex-1 truncate">{passage.title}</span>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="h-6 w-6 opacity-0 group-hover:opacity-100"
+                  onClick={() => editingPassageId === passage.id ? setEditingPassageId(null) : startPassageEdit(passage)}
+                  aria-label="수정"
+                >
+                  <Pencil className="h-3.5 w-3.5" />
+                </Button>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="h-6 w-6 opacity-0 group-hover:opacity-100"
+                  onClick={() => setDeletePassageId(passage.id)}
+                  aria-label="삭제"
+                >
+                  <Trash2 className="h-3.5 w-3.5 text-destructive" />
+                </Button>
+              </div>
+              {editingPassageId === passage.id && (
+                <div className="px-2 pb-3 space-y-3">
+                  <Input
+                    className="h-8 text-sm"
+                    value={passageEditForm.title}
+                    onChange={(e) => setPassageEditForm({ ...passageEditForm, title: e.target.value })}
+                    placeholder="제목"
+                  />
+                  <div className="space-y-2">
+                    <p className="text-xs text-muted-foreground font-medium">문장별 한/영 수정</p>
+                    {passageEditForm.sentences.map((s, idx) => (
+                      <div key={idx} className="grid grid-cols-[auto_1fr] gap-2 items-start">
+                        <span className="text-xs text-muted-foreground pt-2 w-5 text-right">{idx + 1}</span>
+                        <div className="space-y-1">
+                          <Textarea
+                            className="text-sm min-h-[2.5rem] resize-none"
+                            rows={1}
+                            value={s.korean}
+                            onChange={(e) => updateSentence(idx, 'korean', e.target.value)}
+                            placeholder="한국어"
+                          />
+                          <Textarea
+                            className="text-sm min-h-[2.5rem] resize-none"
+                            rows={1}
+                            value={s.original}
+                            onChange={(e) => updateSentence(idx, 'original', e.target.value)}
+                            placeholder="English"
+                          />
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                  <div className="flex gap-2 justify-end">
+                    <Button size="sm" variant="outline" className="h-7" onClick={() => setEditingPassageId(null)}>취소</Button>
+                    <Button size="sm" className="h-7" onClick={savePassageEdit} disabled={savingPassage}>
+                      {savingPassage && <Loader2 className="h-3.5 w-3.5 mr-1 animate-spin" />}
+                      저장
+                    </Button>
+                  </div>
+                </div>
+              )}
             </div>
           ))}
         </div>
