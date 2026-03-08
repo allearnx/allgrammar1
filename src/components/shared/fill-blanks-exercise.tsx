@@ -90,6 +90,15 @@ export function FillBlanksExercise({ passage, onComplete, showWrongAlert }: Fill
         <p className="text-center text-muted-foreground py-4">이 난이도의 빈칸 문제가 없습니다.</p>
       ) : (
         <>
+          {passage.korean_translation && (
+            <Card className="bg-muted/40">
+              <CardContent className="py-4">
+                <p className="text-xs text-muted-foreground mb-1">한국어 해석</p>
+                <p className="text-sm whitespace-pre-wrap leading-relaxed">{passage.korean_translation}</p>
+              </CardContent>
+            </Card>
+          )}
+
           <Card>
             <CardContent className="py-6">
               <div className="flex flex-wrap gap-1.5 leading-8">
