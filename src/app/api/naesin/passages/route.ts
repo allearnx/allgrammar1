@@ -4,6 +4,14 @@ import { createApiHandler } from '@/lib/api';
 import { passageCreateSchema, idSchema } from '@/lib/api/schemas';
 
 const ADMIN_ROLES = ['teacher', 'admin', 'boss'] as const;
+const AUTO_INTERVAL = { easy: 5, medium: 3, hard: 2 } as const;
+
+function generateAutoBlanks(text: string, interval: number) {
+  const words = text.trim().split(/\s+/);
+  return words
+    .map((w, i) => ({ index: i, answer: w }))
+    .filter((_, i) => i % interval === interval - 1);
+}
 
 export const POST = createApiHandler(
   { roles: [...ADMIN_ROLES], schema: passageCreateSchema },
@@ -52,8 +60,14 @@ export const PATCH = createApiHandler(
         words: s.original.split(/\s+/).filter(Boolean),
       }));
       updates.sentences = sentences;
-      updates.original_text = sentences.map((s: { original: string }) => s.original).join(' ');
+      const newOriginalText = sentences.map((s: { original: string }) => s.original).join(' ');
+      updates.original_text = newOriginalText;
       updates.korean_translation = sentences.map((s: { korean: string }) => s.korean).join(' ');
+
+      // Regenerate blanks based on new text
+      updates.blanks_easy = generateAutoBlanks(newOriginalText, AUTO_INTERVAL.easy);
+      updates.blanks_medium = generateAutoBlanks(newOriginalText, AUTO_INTERVAL.medium);
+      updates.blanks_hard = generateAutoBlanks(newOriginalText, AUTO_INTERVAL.hard);
     }
 
     const { data, error } = await supabase
