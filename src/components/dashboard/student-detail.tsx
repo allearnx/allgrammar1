@@ -170,7 +170,7 @@ export async function StudentDetail({ user, studentId, naesinData }: Props) {
             <h3 className="text-lg font-semibold mb-3">교과서 암기 단계 설정</h3>
             <PassageStageManager
               studentId={studentId}
-              initialStages={passageStages as ('fill_blanks' | 'ordering' | 'translation')[]}
+              initialStages={passageStages as ('fill_blanks' | 'ordering' | 'translation' | 'grammar_vocab')[]}
             />
           </div>
         )}
