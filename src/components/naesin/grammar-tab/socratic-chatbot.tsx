@@ -151,8 +151,8 @@ export function SocraticChatbot({ lessonId, lessonTitle }: SocraticChatbotProps)
               </Button>
             </div>
           ) : (
-            <div className="space-y-3">
-              <ScrollArea className="max-h-[400px]" ref={scrollRef}>
+            <div className="flex flex-col" style={{ maxHeight: 'min(60vh, 480px)' }}>
+              <ScrollArea className="flex-1 min-h-0" ref={scrollRef}>
                 <div className="space-y-3 pr-2">
                   {messages.map((msg, i) => (
                     <ChatMessageBubble key={i} message={msg} />
@@ -166,33 +166,35 @@ export function SocraticChatbot({ lessonId, lessonTitle }: SocraticChatbotProps)
                 </div>
               </ScrollArea>
 
-              {session.is_complete ? (
-                <div className="flex justify-center pt-2">
-                  <Button onClick={handleRestart} variant="outline" size="sm">
-                    <RotateCcw className="h-4 w-4 mr-1.5" />
-                    다시 시작
-                  </Button>
-                </div>
-              ) : (
-                <div className="flex gap-2">
-                  <Input
-                    value={inputValue}
-                    onChange={(e) => setInputValue(e.target.value)}
-                    onKeyDown={handleKeyDown}
-                    placeholder="답변을 입력하세요..."
-                    disabled={loading}
-                    className="text-sm"
-                  />
-                  <Button
-                    onClick={handleSend}
-                    disabled={!inputValue.trim() || loading}
-                    size="icon"
-                    className="shrink-0"
-                  >
-                    <Send className="h-4 w-4" />
-                  </Button>
-                </div>
-              )}
+              <div className="shrink-0 pt-3 border-t mt-3">
+                {session.is_complete ? (
+                  <div className="flex justify-center">
+                    <Button onClick={handleRestart} variant="outline" size="sm">
+                      <RotateCcw className="h-4 w-4 mr-1.5" />
+                      다시 시작
+                    </Button>
+                  </div>
+                ) : (
+                  <div className="flex gap-2">
+                    <Input
+                      value={inputValue}
+                      onChange={(e) => setInputValue(e.target.value)}
+                      onKeyDown={handleKeyDown}
+                      placeholder="답변을 입력하세요..."
+                      disabled={loading}
+                      className="text-sm"
+                    />
+                    <Button
+                      onClick={handleSend}
+                      disabled={!inputValue.trim() || loading}
+                      size="icon"
+                      className="shrink-0"
+                    >
+                      <Send className="h-4 w-4" />
+                    </Button>
+                  </div>
+                )}
+              </div>
             </div>
           )}
         </CardContent>
