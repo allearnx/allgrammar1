@@ -226,7 +226,7 @@ export async function StudentDetail({ user, studentId, naesinData }: Props) {
                             );
                           })}
                         </div>
-                        {progress && (progress.vocab_quiz_score !== null || progress.passage_translation_best !== null) && (
+                        {progress && (progress.vocab_quiz_score !== null || progress.vocab_spelling_score !== null || progress.passage_fill_blanks_best !== null || progress.passage_ordering_best !== null || progress.passage_translation_best !== null || progress.passage_grammar_vocab_best !== null || progress.grammar_total_videos > 0) && (
                           <div className="flex gap-2 mt-2 flex-wrap">
                             {progress.vocab_quiz_score !== null && (
                               <span className={`text-xs px-1.5 py-0.5 rounded ${getScoreChip(progress.vocab_quiz_score)}`}>
@@ -243,9 +243,19 @@ export async function StudentDetail({ user, studentId, naesinData }: Props) {
                                 빈칸 {progress.passage_fill_blanks_best}점
                               </span>
                             )}
+                            {progress.passage_ordering_best !== null && (
+                              <span className={`text-xs px-1.5 py-0.5 rounded ${getScoreChip(progress.passage_ordering_best)}`}>
+                                순서 {progress.passage_ordering_best}점
+                              </span>
+                            )}
                             {progress.passage_translation_best !== null && (
                               <span className={`text-xs px-1.5 py-0.5 rounded ${getScoreChip(progress.passage_translation_best)}`}>
                                 영작 {progress.passage_translation_best}점
+                              </span>
+                            )}
+                            {progress.passage_grammar_vocab_best !== null && (
+                              <span className={`text-xs px-1.5 py-0.5 rounded ${getScoreChip(progress.passage_grammar_vocab_best)}`}>
+                                어법 {progress.passage_grammar_vocab_best}점
                               </span>
                             )}
                             {progress.grammar_total_videos > 0 && (

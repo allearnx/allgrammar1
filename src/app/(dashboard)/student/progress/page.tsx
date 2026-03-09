@@ -28,7 +28,7 @@ export default async function ProgressPage() {
       .eq('student_id', user.id),
     supabase
       .from('naesin_student_progress')
-      .select('unit_id, vocab_completed, vocab_quiz_score, vocab_spelling_score, passage_completed, passage_fill_blanks_best, passage_translation_best, grammar_completed, grammar_videos_completed, grammar_total_videos, problem_completed, updated_at')
+      .select('unit_id, vocab_completed, vocab_quiz_score, vocab_spelling_score, passage_completed, passage_fill_blanks_best, passage_ordering_best, passage_translation_best, passage_grammar_vocab_best, grammar_completed, grammar_videos_completed, grammar_total_videos, problem_completed, updated_at')
       .eq('student_id', user.id),
     supabase
       .from('naesin_student_settings')
@@ -203,7 +203,7 @@ export default async function ProgressPage() {
                         </div>
                       ))}
                     </div>
-                    {progress && (progress.vocab_quiz_score !== null || progress.passage_translation_best !== null) && (
+                    {progress && (progress.vocab_quiz_score !== null || progress.vocab_spelling_score !== null || progress.passage_fill_blanks_best !== null || progress.passage_ordering_best !== null || progress.passage_translation_best !== null || progress.passage_grammar_vocab_best !== null) && (
                       <div className="flex gap-2 mt-2 flex-wrap">
                         {progress.vocab_quiz_score !== null && (
                           <span className={`text-xs px-1.5 py-0.5 rounded ${getScoreChip(progress.vocab_quiz_score)}`}>
@@ -220,9 +220,19 @@ export default async function ProgressPage() {
                             빈칸 {progress.passage_fill_blanks_best}점
                           </span>
                         )}
+                        {progress.passage_ordering_best !== null && (
+                          <span className={`text-xs px-1.5 py-0.5 rounded ${getScoreChip(progress.passage_ordering_best)}`}>
+                            순서 {progress.passage_ordering_best}점
+                          </span>
+                        )}
                         {progress.passage_translation_best !== null && (
                           <span className={`text-xs px-1.5 py-0.5 rounded ${getScoreChip(progress.passage_translation_best)}`}>
                             영작 {progress.passage_translation_best}점
+                          </span>
+                        )}
+                        {progress.passage_grammar_vocab_best !== null && (
+                          <span className={`text-xs px-1.5 py-0.5 rounded ${getScoreChip(progress.passage_grammar_vocab_best)}`}>
+                            어법 {progress.passage_grammar_vocab_best}점
                           </span>
                         )}
                       </div>
