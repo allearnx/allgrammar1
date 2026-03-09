@@ -187,12 +187,7 @@ export async function StudentDetail({ user, studentId, naesinData }: Props) {
                       ? 'bg-green-100 text-green-700 dark:bg-green-950 dark:text-green-300'
                       : 'bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-300';
                   };
-                  const getPassageChip = (score: number | null) => {
-                    if (score === null) return '';
-                    return score >= 80
-                      ? 'bg-blue-100 text-blue-700 dark:bg-blue-950 dark:text-blue-300'
-                      : 'bg-amber-100 text-amber-700 dark:bg-amber-950 dark:text-amber-300';
-                  };
+                  const passageChip = 'bg-blue-100 text-blue-700 dark:bg-blue-950 dark:text-blue-300';
 
                   return (
                     <Card
@@ -247,22 +242,22 @@ export async function StudentDetail({ user, studentId, naesinData }: Props) {
                               </span>
                             )}
                             {progress.passage_fill_blanks_best !== null && (
-                              <span className={`text-xs px-1.5 py-0.5 rounded ${getPassageChip(progress.passage_fill_blanks_best)}`}>
+                              <span className={`text-xs px-1.5 py-0.5 rounded ${passageChip}`}>
                                 빈칸 {progress.passage_fill_blanks_best}점
                               </span>
                             )}
                             {progress.passage_ordering_best !== null && (
-                              <span className={`text-xs px-1.5 py-0.5 rounded ${getPassageChip(progress.passage_ordering_best)}`}>
+                              <span className={`text-xs px-1.5 py-0.5 rounded ${passageChip}`}>
                                 순서 {progress.passage_ordering_best}점
                               </span>
                             )}
                             {progress.passage_translation_best !== null && (
-                              <span className={`text-xs px-1.5 py-0.5 rounded ${getPassageChip(progress.passage_translation_best)}`}>
+                              <span className={`text-xs px-1.5 py-0.5 rounded ${passageChip}`}>
                                 영작 {progress.passage_translation_best}점
                               </span>
                             )}
                             {progress.passage_grammar_vocab_best !== null && (
-                              <span className={`text-xs px-1.5 py-0.5 rounded ${getPassageChip(progress.passage_grammar_vocab_best)}`}>
+                              <span className={`text-xs px-1.5 py-0.5 rounded ${passageChip}`}>
                                 어법/어휘 {progress.passage_grammar_vocab_best}점
                               </span>
                             )}
