@@ -5,7 +5,6 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
-import { ScrollArea } from '@/components/ui/scroll-area';
 import { Bot, ChevronDown, ChevronRight, Send, Loader2, RotateCcw } from 'lucide-react';
 import { toast } from 'sonner';
 import { ChatMessageBubble } from './chat-message-bubble';
@@ -152,22 +151,24 @@ export function SocraticChatbot({ lessonId, lessonTitle }: SocraticChatbotProps)
               </Button>
             </div>
           ) : (
-            <div className="flex flex-col" style={{ maxHeight: 'min(60vh, 480px)' }}>
-              <ScrollArea className="flex-1 min-h-0" ref={scrollRef}>
-                <div className="space-y-3 pr-2">
-                  {messages.map((msg, i) => (
-                    <ChatMessageBubble key={i} message={msg} />
-                  ))}
-                  {loading && (
-                    <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                      <Loader2 className="h-4 w-4 animate-spin" />
-                      AI가 생각하고 있어요...
-                    </div>
-                  )}
-                </div>
-              </ScrollArea>
+            <div>
+              <div
+                ref={scrollRef}
+                className="overflow-y-auto space-y-3 pr-1"
+                style={{ maxHeight: 'min(50vh, 360px)' }}
+              >
+                {messages.map((msg, i) => (
+                  <ChatMessageBubble key={i} message={msg} />
+                ))}
+                {loading && (
+                  <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                    <Loader2 className="h-4 w-4 animate-spin" />
+                    AI가 생각하고 있어요...
+                  </div>
+                )}
+              </div>
 
-              <div className="shrink-0 pt-3 border-t mt-3">
+              <div className="pt-3 border-t mt-3">
                 {session.is_complete ? (
                   <div className="flex justify-center">
                     <Button onClick={handleRestart} variant="outline" size="sm">
