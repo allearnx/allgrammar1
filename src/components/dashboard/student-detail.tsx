@@ -169,20 +169,29 @@ export async function StudentDetail({ user, studentId, naesinData }: Props) {
               <div className="space-y-2">
                 {naesinUnits.map((unit) => {
                   const progress = naesinProgressMap.get(unit.id);
+                  const hasPassageScore = progress?.passage_fill_blanks_best !== null || progress?.passage_ordering_best !== null || progress?.passage_translation_best !== null || progress?.passage_grammar_vocab_best !== null;
+                  const hasGrammarProgress = (progress?.grammar_videos_completed ?? 0) > 0;
+
                   const stages = [
-                    { key: 'vocab', label: '단어', icon: BookOpen, completed: progress?.vocab_completed ?? false },
-                    { key: 'passage', label: '교과서', icon: FileText, completed: progress?.passage_completed ?? false },
-                    { key: 'grammar', label: '문법', icon: GraduationCap, completed: progress?.grammar_completed ?? false },
-                    { key: 'problem', label: '문제', icon: ClipboardList, completed: progress?.problem_completed ?? false },
+                    { key: 'vocab', label: '단어', icon: BookOpen, completed: progress?.vocab_completed ?? false, inProgress: false },
+                    { key: 'passage', label: '교과서', icon: FileText, completed: progress?.passage_completed ?? false, inProgress: !progress?.passage_completed && !!hasPassageScore },
+                    { key: 'grammar', label: '문법', icon: GraduationCap, completed: progress?.grammar_completed ?? false, inProgress: !progress?.grammar_completed && hasGrammarProgress },
+                    { key: 'problem', label: '문제', icon: ClipboardList, completed: progress?.problem_completed ?? false, inProgress: false },
                   ];
                   const completedCount = stages.filter((s) => s.completed).length;
 
-                  // Score chip helper
-                  const getScoreChip = (score: number | null) => {
-                    if (score === null) return null;
+                  // Score chip helpers — vocab green, passage blue
+                  const getVocabChip = (score: number | null) => {
+                    if (score === null) return '';
                     return score >= 80
                       ? 'bg-green-100 text-green-700 dark:bg-green-950 dark:text-green-300'
                       : 'bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-300';
+                  };
+                  const getPassageChip = (score: number | null) => {
+                    if (score === null) return '';
+                    return score >= 80
+                      ? 'bg-blue-100 text-blue-700 dark:bg-blue-950 dark:text-blue-300'
+                      : 'bg-amber-100 text-amber-700 dark:bg-amber-950 dark:text-amber-300';
                   };
 
                   return (
@@ -210,51 +219,50 @@ export async function StudentDetail({ user, studentId, naesinData }: Props) {
                           </Badge>
                         </div>
                         <div className="flex items-center gap-3">
-                          {stages.map((stage) => {
-                            const Icon = stage.icon;
-                            return (
-                              <div key={stage.key} className="flex items-center gap-1">
-                                {stage.completed ? (
-                                  <CheckCircle className="h-3.5 w-3.5 text-green-500" />
-                                ) : (
-                                  <Circle className="h-3.5 w-3.5 text-muted-foreground/40" />
-                                )}
-                                <span className={`text-xs ${stage.completed ? 'text-foreground' : 'text-muted-foreground'}`}>
-                                  {stage.label}
-                                </span>
-                              </div>
-                            );
-                          })}
+                          {stages.map((stage) => (
+                            <div key={stage.key} className="flex items-center gap-1">
+                              {stage.completed ? (
+                                <CheckCircle className="h-3.5 w-3.5 text-green-500" />
+                              ) : stage.inProgress ? (
+                                <Circle className="h-3.5 w-3.5 text-amber-500 fill-amber-200 dark:fill-amber-900" />
+                              ) : (
+                                <Circle className="h-3.5 w-3.5 text-muted-foreground/40" />
+                              )}
+                              <span className={`text-xs ${stage.completed ? 'text-foreground' : stage.inProgress ? 'text-amber-600 font-medium dark:text-amber-400' : 'text-muted-foreground'}`}>
+                                {stage.label}
+                              </span>
+                            </div>
+                          ))}
                         </div>
                         {progress && (progress.vocab_quiz_score !== null || progress.vocab_spelling_score !== null || progress.passage_fill_blanks_best !== null || progress.passage_ordering_best !== null || progress.passage_translation_best !== null || progress.passage_grammar_vocab_best !== null || progress.grammar_total_videos > 0) && (
                           <div className="flex gap-2 mt-2 flex-wrap">
                             {progress.vocab_quiz_score !== null && (
-                              <span className={`text-xs px-1.5 py-0.5 rounded ${getScoreChip(progress.vocab_quiz_score)}`}>
+                              <span className={`text-xs px-1.5 py-0.5 rounded ${getVocabChip(progress.vocab_quiz_score)}`}>
                                 퀴즈 {progress.vocab_quiz_score}점
                               </span>
                             )}
                             {progress.vocab_spelling_score !== null && (
-                              <span className={`text-xs px-1.5 py-0.5 rounded ${getScoreChip(progress.vocab_spelling_score)}`}>
+                              <span className={`text-xs px-1.5 py-0.5 rounded ${getVocabChip(progress.vocab_spelling_score)}`}>
                                 스펠링 {progress.vocab_spelling_score}점
                               </span>
                             )}
                             {progress.passage_fill_blanks_best !== null && (
-                              <span className={`text-xs px-1.5 py-0.5 rounded ${getScoreChip(progress.passage_fill_blanks_best)}`}>
+                              <span className={`text-xs px-1.5 py-0.5 rounded ${getPassageChip(progress.passage_fill_blanks_best)}`}>
                                 빈칸 {progress.passage_fill_blanks_best}점
                               </span>
                             )}
                             {progress.passage_ordering_best !== null && (
-                              <span className={`text-xs px-1.5 py-0.5 rounded ${getScoreChip(progress.passage_ordering_best)}`}>
+                              <span className={`text-xs px-1.5 py-0.5 rounded ${getPassageChip(progress.passage_ordering_best)}`}>
                                 순서 {progress.passage_ordering_best}점
                               </span>
                             )}
                             {progress.passage_translation_best !== null && (
-                              <span className={`text-xs px-1.5 py-0.5 rounded ${getScoreChip(progress.passage_translation_best)}`}>
+                              <span className={`text-xs px-1.5 py-0.5 rounded ${getPassageChip(progress.passage_translation_best)}`}>
                                 영작 {progress.passage_translation_best}점
                               </span>
                             )}
                             {progress.passage_grammar_vocab_best !== null && (
-                              <span className={`text-xs px-1.5 py-0.5 rounded ${getScoreChip(progress.passage_grammar_vocab_best)}`}>
+                              <span className={`text-xs px-1.5 py-0.5 rounded ${getPassageChip(progress.passage_grammar_vocab_best)}`}>
                                 어법 {progress.passage_grammar_vocab_best}점
                               </span>
                             )}
