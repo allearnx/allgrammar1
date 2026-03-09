@@ -190,30 +190,7 @@ export default async function ProgressPage() {
           </div>
         )}
 
-        {/* Per-Level Grammar Progress */}
-        <div className="space-y-3">
-          <h3 className="text-lg font-semibold">레벨별 진도</h3>
-          {(levels || []).map((level) => {
-            const total = level.grammars.length;
-            const completed = level.grammars.filter((g: { id: string }) => completedSet.has(g.id)).length;
-            const percent = total > 0 ? Math.round((completed / total) * 100) : 0;
-
-            return (
-              <Card key={level.id}>
-                <CardContent className="py-3">
-                  <div className="flex items-center justify-between mb-2">
-                    <div className="flex items-center gap-2">
-                      <Badge variant="outline" className="text-xs">Lv.{level.level_number}</Badge>
-                      <span className="text-sm font-medium">{level.title_ko}</span>
-                    </div>
-                    <span className="text-xs text-muted-foreground">{completed}/{total}</span>
-                  </div>
-                  <Progress value={percent} className="h-1.5" />
-                </CardContent>
-              </Card>
-            );
-          })}
-        </div>
+        {/* Per-Level Grammar Progress - 임시 숨김 */}
       </div>
     </>
   );
