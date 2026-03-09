@@ -355,6 +355,12 @@ export const vocaVocabBulkSchema = z.object({
     antonyms: SHORT.nullish(),
     spelling_hint: SHORT.nullish(),
     spelling_answer: SHORT.nullish(),
+    idioms: z.array(z.object({
+      en: z.string(),
+      ko: z.string(),
+      example_en: z.string().optional(),
+      example_ko: z.string().optional(),
+    })).nullish(),
   })).min(1).max(500),
 });
 
@@ -363,6 +369,7 @@ export const vocaProgressSaveSchema = z.object({
   type: z.enum(['flashcard', 'quiz', 'spelling', 'matching']),
   score: z.number().nullish(),
   matchingAttempt: z.number().nullish(),
+  round: z.enum(['1', '2']).default('1'),
 });
 
 export const vocaMatchingSubmissionSchema = z.object({

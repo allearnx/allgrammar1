@@ -107,19 +107,38 @@ export function VocaHomeClient({ books, days, progressList }: VocaHomeClientProp
 function DayProgressBadges({ progress }: { progress?: VocaStudentProgress | null }) {
   if (!progress) return null;
 
+  const hasRound2 = progress.round2_flashcard_completed ||
+    progress.round2_quiz_score != null ||
+    progress.round2_matching_completed;
+
   return (
-    <div className="flex gap-1 mt-1">
-      {progress.flashcard_completed && (
-        <Badge variant="outline" className="text-[10px] h-4 px-1">카드</Badge>
-      )}
-      {progress.quiz_score != null && (
-        <Badge variant="outline" className="text-[10px] h-4 px-1">퀴즈 {progress.quiz_score}%</Badge>
-      )}
-      {progress.spelling_score != null && (
-        <Badge variant="outline" className="text-[10px] h-4 px-1">스펠링 {progress.spelling_score}%</Badge>
-      )}
-      {progress.matching_completed && (
-        <Badge variant="outline" className="text-[10px] h-4 px-1">매칭</Badge>
+    <div className="space-y-0.5 mt-1">
+      <div className="flex gap-1 flex-wrap">
+        {progress.flashcard_completed && (
+          <Badge variant="outline" className="text-[10px] h-4 px-1">카드</Badge>
+        )}
+        {progress.quiz_score != null && (
+          <Badge variant="outline" className="text-[10px] h-4 px-1">퀴즈 {progress.quiz_score}%</Badge>
+        )}
+        {progress.spelling_score != null && (
+          <Badge variant="outline" className="text-[10px] h-4 px-1">스펠링 {progress.spelling_score}%</Badge>
+        )}
+        {progress.matching_completed && (
+          <Badge variant="outline" className="text-[10px] h-4 px-1">매칭</Badge>
+        )}
+      </div>
+      {hasRound2 && (
+        <div className="flex gap-1 flex-wrap">
+          {progress.round2_flashcard_completed && (
+            <Badge variant="outline" className="text-[10px] h-4 px-1 border-blue-300 text-blue-600">2회 카드</Badge>
+          )}
+          {progress.round2_quiz_score != null && (
+            <Badge variant="outline" className="text-[10px] h-4 px-1 border-blue-300 text-blue-600">2회 종합 {progress.round2_quiz_score}%</Badge>
+          )}
+          {progress.round2_matching_completed && (
+            <Badge variant="outline" className="text-[10px] h-4 px-1 border-blue-300 text-blue-600">2회 매칭</Badge>
+          )}
+        </div>
       )}
     </div>
   );

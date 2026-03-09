@@ -6,26 +6,35 @@ import { vocaProgressSaveSchema } from '@/lib/api/schemas';
 export const POST = createApiHandler(
   { schema: vocaProgressSaveSchema },
   async ({ user, body, supabase }) => {
-    const { dayId, type, score, matchingAttempt } = body;
+    const { dayId, type, score, matchingAttempt, round } = body;
+    const isRound2 = round === '2';
 
     // Build update object based on type
     const updates: Record<string, unknown> = { updated_at: new Date().toISOString() };
 
     switch (type) {
       case 'flashcard':
-        updates.flashcard_completed = true;
+        updates[isRound2 ? 'round2_flashcard_completed' : 'flashcard_completed'] = true;
         break;
       case 'quiz':
-        updates.quiz_score = score;
+        updates[isRound2 ? 'round2_quiz_score' : 'quiz_score'] = score;
         break;
       case 'spelling':
         updates.spelling_score = score;
         break;
       case 'matching':
-        updates.matching_score = score;
-        updates.matching_attempt = matchingAttempt || 1;
-        if (score != null && score >= 90) {
-          updates.matching_completed = true;
+        if (isRound2) {
+          updates.round2_matching_score = score;
+          updates.round2_matching_attempt = matchingAttempt || 1;
+          if (score != null && score >= 90) {
+            updates.round2_matching_completed = true;
+          }
+        } else {
+          updates.matching_score = score;
+          updates.matching_attempt = matchingAttempt || 1;
+          if (score != null && score >= 90) {
+            updates.matching_completed = true;
+          }
         }
         break;
     }

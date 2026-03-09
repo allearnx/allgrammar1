@@ -20,6 +20,13 @@ export interface VocaDay {
   created_at: string;
 }
 
+export interface VocaIdiom {
+  en: string;
+  ko: string;
+  example_en?: string;
+  example_ko?: string;
+}
+
 export interface VocaVocabulary {
   id: string;
   day_id: string;
@@ -31,6 +38,7 @@ export interface VocaVocabulary {
   antonyms: string | null;
   spelling_hint: string | null;
   spelling_answer: string | null;
+  idioms: VocaIdiom[] | null;
   sort_order: number;
   created_at: string;
 }
@@ -45,6 +53,11 @@ export interface VocaStudentProgress {
   matching_score: number | null;
   matching_attempt: number;
   matching_completed: boolean;
+  round2_flashcard_completed: boolean;
+  round2_quiz_score: number | null;
+  round2_matching_score: number | null;
+  round2_matching_attempt: number;
+  round2_matching_completed: boolean;
   created_at: string;
   updated_at: string;
 }

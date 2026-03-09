@@ -26,6 +26,7 @@ export const POST = createApiHandler(
       antonyms: item.antonyms || null,
       spelling_hint: item.spelling_hint || null,
       spelling_answer: item.spelling_answer || null,
+      idioms: item.idioms || null,
       sort_order: nextOrder++,
     }));
 

@@ -27,7 +27,7 @@ export function DayContentManager({ dayId }: { dayId: string }) {
   const [editingId, setEditingId] = useState<string | null>(null);
   const [editForm, setEditForm] = useState({
     front_text: '', back_text: '', part_of_speech: '', example_sentence: '',
-    synonyms: '', antonyms: '', spelling_hint: '', spelling_answer: '',
+    synonyms: '', antonyms: '', spelling_hint: '', spelling_answer: '', idioms: '',
   });
   const [deleteVocabId, setDeleteVocabId] = useState<string | null>(null);
   const [bulkDeleteOpen, setBulkDeleteOpen] = useState(false);
@@ -118,16 +118,27 @@ export function DayContentManager({ dayId }: { dayId: string }) {
       antonyms: v.antonyms || '',
       spelling_hint: v.spelling_hint || '',
       spelling_answer: v.spelling_answer || '',
+      idioms: v.idioms ? JSON.stringify(v.idioms, null, 2) : '',
     });
   }
 
   async function saveEdit() {
     if (!editingId) return;
     try {
+      let parsedIdioms = null;
+      if (editForm.idioms.trim()) {
+        try {
+          parsedIdioms = JSON.parse(editForm.idioms);
+        } catch {
+          toast.error('숙어 JSON 형식이 올바르지 않습니다');
+          return;
+        }
+      }
+      const { idioms: _, ...rest } = editForm;
       const res = await fetch('/api/voca/vocabulary', {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ id: editingId, ...editForm }),
+        body: JSON.stringify({ id: editingId, ...rest, idioms: parsedIdioms }),
       });
       if (res.ok) {
         const updated = await res.json();
@@ -176,6 +187,7 @@ export function DayContentManager({ dayId }: { dayId: string }) {
                   <span className="text-sm text-muted-foreground truncate max-w-[120px]">{v.back_text}</span>
                   {v.synonyms && <Badge variant="outline" className="text-[10px] h-4 px-1">유</Badge>}
                   {v.antonyms && <Badge variant="outline" className="text-[10px] h-4 px-1">반</Badge>}
+                  {v.idioms && v.idioms.length > 0 && <Badge variant="outline" className="text-[10px] h-4 px-1 border-blue-300 text-blue-600">숙</Badge>}
                   <Button variant="ghost" size="icon" className="h-6 w-6 opacity-0 group-hover:opacity-100" onClick={() => editingId === v.id ? setEditingId(null) : startEdit(v)}>
                     <Pencil className="h-3.5 w-3.5" />
                   </Button>
@@ -200,6 +212,9 @@ export function DayContentManager({ dayId }: { dayId: string }) {
                     <div className="grid grid-cols-2 gap-2">
                       <Input className="h-7 text-sm" value={editForm.spelling_hint} onChange={(e) => setEditForm({ ...editForm, spelling_hint: e.target.value })} placeholder="스펠링 힌트" />
                       <Input className="h-7 text-sm" value={editForm.spelling_answer} onChange={(e) => setEditForm({ ...editForm, spelling_answer: e.target.value })} placeholder="스펠링 정답" />
+                    </div>
+                    <div>
+                      <Textarea className="text-xs font-mono" rows={3} value={editForm.idioms} onChange={(e) => setEditForm({ ...editForm, idioms: e.target.value })} placeholder='숙어 JSON: [{"en":"...", "ko":"...", "example_en":"...", "example_ko":"..."}]' />
                     </div>
                     <div className="flex gap-2 justify-end">
                       <Button size="sm" variant="outline" className="h-7" onClick={() => setEditingId(null)}>취소</Button>
@@ -392,6 +407,7 @@ interface ExtractedWord {
   example_sentence: string | null;
   synonyms: string | null;
   antonyms: string | null;
+  idioms: { en: string; ko: string; example_en?: string; example_ko?: string }[] | null;
   selected: boolean;
 }
 

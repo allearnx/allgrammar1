@@ -47,6 +47,7 @@ export async function POST(request: NextRequest) {
 - 중복 없이 핵심 단어만 선별
 - 관사(a, the), 전치사(in, on), 대명사(I, you) 등 기본 단어 제외
 - 고유명사 제외
+- 각 단어에 관련 숙어가 있으면 idioms 배열에 포함
 
 JSON 배열로만 응답 (다른 텍스트 없이):
 [
@@ -56,9 +57,11 @@ JSON 배열로만 응답 (다른 텍스트 없이):
     "part_of_speech": "n./v./adj./adv.",
     "example_sentence": "PDF에서 가져온 예문 또는 자연스러운 예문",
     "synonyms": "유의어 (없으면 null)",
-    "antonyms": "반의어 (없으면 null)"
+    "antonyms": "반의어 (없으면 null)",
+    "idioms": [{"en": "영어 숙어", "ko": "한국어 뜻", "example_en": "예문(영어)", "example_ko": "예문(한국어)"}]
   }
-]`,
+]
+idioms가 없으면 null로 표시.`,
             },
           ],
         },

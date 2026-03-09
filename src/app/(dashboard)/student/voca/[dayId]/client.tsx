@@ -1,9 +1,12 @@
 'use client';
 
+import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { ChevronLeft } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { VocaTab } from '@/components/voca/vocab-tab';
+import { VocaTab2 } from '@/components/voca/vocab-tab/voca-tab-round2';
+import { cn } from '@/lib/utils';
 import type { VocaDay, VocaVocabulary, VocaStudentProgress } from '@/types/voca';
 
 interface VocaDayClientProps {
@@ -14,6 +17,7 @@ interface VocaDayClientProps {
 
 export function VocaDayClient({ day, vocabulary, progress }: VocaDayClientProps) {
   const router = useRouter();
+  const [round, setRound] = useState<'1' | '2'>('1');
 
   return (
     <div className="space-y-4">
@@ -27,11 +31,45 @@ export function VocaDayClient({ day, vocabulary, progress }: VocaDayClientProps)
         </div>
       </div>
 
-      <VocaTab
-        vocabulary={vocabulary}
-        dayId={day.id}
-        progress={progress}
-      />
+      {/* Round toggle */}
+      <div className="flex gap-1 p-1 rounded-lg bg-muted w-fit">
+        <button
+          className={cn(
+            'px-4 py-1.5 rounded-md text-sm font-medium transition-colors',
+            round === '1'
+              ? 'bg-background text-foreground shadow-sm'
+              : 'text-muted-foreground hover:text-foreground'
+          )}
+          onClick={() => setRound('1')}
+        >
+          1회독
+        </button>
+        <button
+          className={cn(
+            'px-4 py-1.5 rounded-md text-sm font-medium transition-colors',
+            round === '2'
+              ? 'bg-background text-foreground shadow-sm'
+              : 'text-muted-foreground hover:text-foreground'
+          )}
+          onClick={() => setRound('2')}
+        >
+          2회독
+        </button>
+      </div>
+
+      {round === '1' ? (
+        <VocaTab
+          vocabulary={vocabulary}
+          dayId={day.id}
+          progress={progress}
+        />
+      ) : (
+        <VocaTab2
+          vocabulary={vocabulary}
+          dayId={day.id}
+          progress={progress}
+        />
+      )}
     </div>
   );
 }
