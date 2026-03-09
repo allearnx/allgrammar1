@@ -169,12 +169,12 @@ export async function StudentDetail({ user, studentId, naesinData }: Props) {
               <div className="space-y-2">
                 {naesinUnits.map((unit) => {
                   const progress = naesinProgressMap.get(unit.id);
-                  const hasPassageScore = progress?.passage_fill_blanks_best !== null || progress?.passage_ordering_best !== null || progress?.passage_translation_best !== null || progress?.passage_grammar_vocab_best !== null;
-                  const hasGrammarProgress = (progress?.grammar_videos_completed ?? 0) > 0;
+                  const hasPassageScore = !!progress && (progress.passage_fill_blanks_best != null || progress.passage_ordering_best != null || progress.passage_translation_best != null || progress.passage_grammar_vocab_best != null);
+                  const hasGrammarProgress = !!progress && (progress.grammar_videos_completed ?? 0) > 0;
 
                   const stages = [
                     { key: 'vocab', label: '단어', icon: BookOpen, completed: progress?.vocab_completed ?? false, inProgress: false },
-                    { key: 'passage', label: '교과서', icon: FileText, completed: progress?.passage_completed ?? false, inProgress: !progress?.passage_completed && !!hasPassageScore },
+                    { key: 'passage', label: '교과서 암기', icon: FileText, completed: progress?.passage_completed ?? false, inProgress: !progress?.passage_completed && hasPassageScore },
                     { key: 'grammar', label: '문법', icon: GraduationCap, completed: progress?.grammar_completed ?? false, inProgress: !progress?.grammar_completed && hasGrammarProgress },
                     { key: 'problem', label: '문제', icon: ClipboardList, completed: progress?.problem_completed ?? false, inProgress: false },
                   ];
@@ -263,7 +263,7 @@ export async function StudentDetail({ user, studentId, naesinData }: Props) {
                             )}
                             {progress.passage_grammar_vocab_best !== null && (
                               <span className={`text-xs px-1.5 py-0.5 rounded ${getPassageChip(progress.passage_grammar_vocab_best)}`}>
-                                어법 {progress.passage_grammar_vocab_best}점
+                                어법/어휘 {progress.passage_grammar_vocab_best}점
                               </span>
                             )}
                             {progress.grammar_total_videos > 0 && (
