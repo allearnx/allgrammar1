@@ -14,6 +14,8 @@ export interface StageUnlockInput {
   grammarVideoCount?: number;
   /** Student's exam date (ISO string) */
   examDate?: string | null;
+  /** Stages the student is allowed to access (from naesin_student_settings.enabled_stages) */
+  enabledStages?: string[];
 }
 
 /**
@@ -42,6 +44,7 @@ export function calculateStageStatuses(
   let vocabQuizSetCount = 0;
   let grammarVideoCount = 0;
   let examDate: string | null = null;
+  let enabledStages: string[] | null = null;
 
   // Support both old (progress, content) and new (input object) signatures
   if (contentArg !== undefined) {
@@ -54,6 +57,7 @@ export function calculateStageStatuses(
     vocabQuizSetCount = input.vocabQuizSetCount ?? 0;
     grammarVideoCount = input.grammarVideoCount ?? 0;
     examDate = input.examDate ?? null;
+    enabledStages = input.enabledStages ?? null;
   } else {
     progress = progressOrInput as NaesinStudentProgress | null;
     content = { hasVocab: false, hasPassage: false, hasGrammar: false, hasProblem: false, hasLastReview: false };
@@ -74,13 +78,25 @@ export function calculateStageStatuses(
   // Stage 5: Last Review — D-3 auto-unlock (progress-independent)
   const lastReviewStatus = getLastReviewStatus(content.hasLastReview, examDate);
 
-  return {
+  const result: NaesinStageStatuses = {
     vocab: vocabStatus,
     passage: passageStatus,
     grammar: grammarStatus,
     problem: problemStatus,
     lastReview: lastReviewStatus,
   };
+
+  // Override disabled stages to 'hidden'
+  if (enabledStages) {
+    const stageKeys = ['vocab', 'passage', 'grammar', 'problem', 'lastReview'] as const;
+    for (const key of stageKeys) {
+      if (!enabledStages.includes(key)) {
+        result[key] = 'hidden';
+      }
+    }
+  }
+
+  return result;
 }
 
 function getVocabStatus(

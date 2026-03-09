@@ -25,12 +25,14 @@ export default async function NaesinPage() {
   const user = await requireRole(['student']);
   const supabase = await createClient();
 
-  // Get student's textbook setting
+  // Get student's textbook setting (including enabled_stages)
   const { data: setting } = await supabase
     .from('naesin_student_settings')
     .select('*, textbook:naesin_textbooks(*)')
     .eq('student_id', user.id)
     .single();
+
+  const enabledStages = (setting?.enabled_stages as string[] | null) ?? undefined;
 
   // Get all active textbooks
   const { data: textbooks } = await supabase
@@ -134,6 +136,7 @@ export default async function NaesinPage() {
           vocabQuizSetCount: unitQuizSets.length,
           grammarVideoCount: videoLessons.length,
           examDate: effectiveExamDate,
+          enabledStages,
         });
 
         const stageProgress = computeStageProgress(unitProgress, unitQuizSets.length, videoLessons.length);

@@ -8,6 +8,7 @@ import type { AuthUser } from '@/types/auth';
 import type { NaesinExamAssignment, NaesinUnit } from '@/types/database';
 import { ExamAssignmentManager } from './exam-assignment-manager';
 import { PassageStageManager } from './passage-stage-manager';
+import { EnabledStagesManager } from './enabled-stages-manager';
 
 interface GrammarRelation {
   title: string;
@@ -71,7 +72,7 @@ export async function StudentDetail({ user, studentId, naesinData }: Props) {
       .eq('student_id', studentId),
     admin
       .from('naesin_student_settings')
-      .select('passage_required_stages, translation_sentences_per_page')
+      .select('passage_required_stages, translation_sentences_per_page, enabled_stages')
       .eq('student_id', studentId)
       .single(),
     admin
@@ -82,6 +83,7 @@ export async function StudentDetail({ user, studentId, naesinData }: Props) {
 
   const passageStages = (passageStagesRes.data?.passage_required_stages as string[] | null) ?? ['fill_blanks', 'translation'];
   const translationSentencesPerPage = (passageStagesRes.data?.translation_sentences_per_page as number | null) ?? 10;
+  const enabledStages = (passageStagesRes.data?.enabled_stages as string[] | null) ?? ['vocab', 'passage', 'grammar', 'problem', 'lastReview'];
 
   const videoProgress = videoRes.data || [];
   const memoryProgress = memoryRes.data || [];
@@ -321,6 +323,17 @@ export async function StudentDetail({ user, studentId, naesinData }: Props) {
                 </CardContent>
               </Card>
             </div>
+          </div>
+        )}
+
+        {/* Enabled Stages Manager */}
+        {naesinData && (
+          <div>
+            <h3 className="text-lg font-semibold tracking-tight mb-3">활성 단계 설정</h3>
+            <EnabledStagesManager
+              studentId={studentId}
+              initialStages={enabledStages as ('vocab' | 'passage' | 'grammar' | 'problem' | 'lastReview')[]}
+            />
           </div>
         )}
 

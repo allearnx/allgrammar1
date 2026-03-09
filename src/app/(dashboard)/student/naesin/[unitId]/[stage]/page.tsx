@@ -91,13 +91,28 @@ export default async function NaesinStagePage({ params }: Props) {
     hasLastReview: hasLastReviewContent || !!examDate,
   };
 
+  // Fetch enabled_stages from student settings
+  const { data: studentSettings } = await supabase
+    .from('naesin_student_settings')
+    .select('enabled_stages')
+    .eq('student_id', user.id)
+    .single();
+
+  const enabledStages = (studentSettings?.enabled_stages as string[] | null) ?? undefined;
+
   const stageStatuses = calculateStageStatuses({
     progress,
     content: contentAvailability,
     vocabQuizSetCount: quizSets.length,
     grammarVideoCount: videoLessons.length,
     examDate,
+    enabledStages,
   });
+
+  // Hidden stages → 404
+  if (stageStatuses[stageKey] === 'hidden') {
+    notFound();
+  }
 
   const isLocked = stageStatuses[stageKey] === 'locked';
 

@@ -105,6 +105,7 @@ export interface NaesinStudentSettings {
   id: string;
   student_id: string;
   textbook_id: string;
+  enabled_stages?: string[];
   created_at: string;
   updated_at: string;
 }
@@ -161,7 +162,7 @@ export interface NaesinVocabQuizResult {
   created_at: string;
 }
 
-export type NaesinStageStatus = 'locked' | 'available' | 'completed';
+export type NaesinStageStatus = 'locked' | 'available' | 'completed' | 'hidden';
 
 export interface NaesinStageStatuses {
   vocab: NaesinStageStatus;

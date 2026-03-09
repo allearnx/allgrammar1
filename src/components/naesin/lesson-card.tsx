@@ -40,11 +40,10 @@ export function LessonCard({
 }: LessonCardProps) {
   const [expanded, setExpanded] = useState(true);
 
-  const allCompleted =
-    stages.vocab === 'completed' &&
-    stages.passage === 'completed' &&
-    stages.grammar === 'completed' &&
-    stages.problem === 'completed';
+  const visibleStages = (['vocab', 'passage', 'grammar', 'problem'] as const).filter(
+    (key) => stages[key] !== 'hidden'
+  );
+  const allCompleted = visibleStages.length > 0 && visibleStages.every((key) => stages[key] === 'completed');
 
   return (
     <Card className="overflow-hidden">
@@ -60,9 +59,11 @@ export function LessonCard({
           <div className="flex-1 min-w-0">
             <h3 className="font-medium text-sm">{title}</h3>
             <div className="flex gap-1 mt-1">
-              {(['vocab', 'passage', 'grammar', 'problem', 'lastReview'] as const).map((key) => (
-                <StageStatusDot key={key} status={stages[key]} />
-              ))}
+              {(['vocab', 'passage', 'grammar', 'problem', 'lastReview'] as const)
+                .filter((key) => stages[key] !== 'hidden')
+                .map((key) => (
+                  <StageStatusDot key={key} status={stages[key]} />
+                ))}
             </div>
           </div>
           <div className="flex items-center gap-2 shrink-0">
@@ -78,7 +79,7 @@ export function LessonCard({
         {/* Expanded: clickable stage rows */}
         {expanded && (
           <div className="border-t divide-y">
-            {STAGE_ROWS.map((row) => {
+            {STAGE_ROWS.filter((row) => stages[row.key] !== 'hidden').map((row) => {
               const status = stages[row.key];
               const isLocked = status === 'locked';
               const percent = row.progressKey ? stageProgress[row.progressKey] : 0;

@@ -113,7 +113,7 @@ export function NaesinStageView({
       {/* 5-stage navigation bar */}
       <TooltipProvider>
         <nav className="flex rounded-lg border bg-muted/30 p-1 gap-1">
-          {STAGE_CONFIG.map((stage) => {
+          {STAGE_CONFIG.filter((stage) => stageStatuses[stage.key] !== 'hidden').map((stage) => {
             const status = stageStatuses[stage.key];
             const isLocked = status === 'locked';
             const isCurrent = stage.key === currentStage;
