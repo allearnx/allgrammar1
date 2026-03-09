@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import * as Sentry from '@sentry/nextjs';
 
 export class ApiError extends Error {
   constructor(
@@ -47,7 +48,7 @@ export function errorResponse(error: unknown): NextResponse {
     return NextResponse.json(body, { status: error.statusCode });
   }
 
-  console.error('[API Error]', error);
+  Sentry.captureException(error);
   return NextResponse.json(
     { error: '서버 오류가 발생했습니다.', code: 'INTERNAL_ERROR' },
     { status: 500 }
