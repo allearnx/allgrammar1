@@ -4,7 +4,16 @@ import { useState } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { CheckCircle, PlayCircle, FileText, GraduationCap } from 'lucide-react';
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from '@/components/ui/alert-dialog';
+import { CheckCircle, PlayCircle, FileText, GraduationCap, Bot } from 'lucide-react';
 import { toast } from 'sonner';
 import { StageProgressBar } from '../stage-progress-bar';
 import { NaesinYouTubePlayerTracked } from './youtube-player';
@@ -33,6 +42,7 @@ export function GrammarTab({ lessons, unitId, onStageComplete, videoProgress }: 
     });
     return map;
   });
+  const [showTutorPopup, setShowTutorPopup] = useState(false);
 
   if (lessons.length === 0) {
     return (
@@ -70,6 +80,7 @@ export function GrammarTab({ lessons, unitId, onStageComplete, videoProgress }: 
     setWatchPercents((prev) => ({ ...prev, [lessonId]: percent }));
     if (completed && !completedIds.has(lessonId)) {
       setCompletedIds((prev) => new Set(prev).add(lessonId));
+      setShowTutorPopup(true);
       // Check if all videos are complete
       const newCompleted = new Set(completedIds).add(lessonId);
       const videoLessons = lessons.filter((l) => l.content_type === 'video');
@@ -81,22 +92,45 @@ export function GrammarTab({ lessons, unitId, onStageComplete, videoProgress }: 
   }
 
   return (
-    <div className="space-y-6">
-      {lessons.map((lesson) => (
-        <GrammarLessonCard
-          key={lesson.id}
-          lesson={lesson}
-          isCompleted={completedIds.has(lesson.id)}
-          watchPercent={watchPercents[lesson.id] ?? 0}
-          unitId={unitId}
-          onTextComplete={() => markTextCompleted(lesson.id)}
-          onVideoProgress={(percent, completed) =>
-            handleVideoProgress(lesson.id, percent, completed)
-          }
-          initialProgress={videoProgress?.find((vp) => vp.lesson_id === lesson.id)}
-        />
-      ))}
-    </div>
+    <>
+      <div className="space-y-6">
+        {lessons.map((lesson) => (
+          <GrammarLessonCard
+            key={lesson.id}
+            lesson={lesson}
+            isCompleted={completedIds.has(lesson.id)}
+            watchPercent={watchPercents[lesson.id] ?? 0}
+            unitId={unitId}
+            onTextComplete={() => markTextCompleted(lesson.id)}
+            onVideoProgress={(percent, completed) =>
+              handleVideoProgress(lesson.id, percent, completed)
+            }
+            initialProgress={videoProgress?.find((vp) => vp.lesson_id === lesson.id)}
+          />
+        ))}
+      </div>
+
+      <AlertDialog open={showTutorPopup} onOpenChange={setShowTutorPopup}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <div className="flex justify-center mb-2">
+              <div className="rounded-full bg-blue-100 p-3 dark:bg-blue-950">
+                <Bot className="h-6 w-6 text-blue-600 dark:text-blue-400" />
+              </div>
+            </div>
+            <AlertDialogTitle className="text-center">영상 시청 완료!</AlertDialogTitle>
+            <AlertDialogDescription className="text-center">
+              이제 아래 <strong>AI 문법 튜터</strong>와 대화하며 배운 내용을 확인하세요.
+              <br />
+              AI 튜터는 <strong className="text-rose-500">필수 단계</strong>이니 꼭 완료해 주세요!
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter className="sm:justify-center">
+            <AlertDialogAction>확인</AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
+    </>
   );
 }
 
