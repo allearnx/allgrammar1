@@ -187,7 +187,7 @@ export async function StudentDetail({ user, studentId, naesinData }: Props) {
                       ? 'bg-green-100 text-green-700 dark:bg-green-950 dark:text-green-300'
                       : 'bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-300';
                   };
-                  const passageChip = 'bg-blue-100 text-blue-700 dark:bg-blue-950 dark:text-blue-300';
+                  const passageChip = 'bg-amber-100 text-amber-700 dark:bg-amber-950 dark:text-amber-300';
 
                   return (
                     <Card
