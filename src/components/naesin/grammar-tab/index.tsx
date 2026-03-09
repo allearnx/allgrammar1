@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { CheckCircle, PlayCircle, FileText } from 'lucide-react';
+import { CheckCircle, PlayCircle, FileText, GraduationCap } from 'lucide-react';
 import { toast } from 'sonner';
 import { StageProgressBar } from '../stage-progress-bar';
 import { NaesinYouTubePlayerTracked } from './youtube-player';
@@ -36,9 +36,12 @@ export function GrammarTab({ lessons, unitId, onStageComplete, videoProgress }: 
 
   if (lessons.length === 0) {
     return (
-      <p className="text-center text-muted-foreground py-8">
-        등록된 문법 설명이 없습니다.
-      </p>
+      <div className="flex flex-col items-center py-12">
+        <GraduationCap className="h-10 w-10 text-muted-foreground/30 mb-2" />
+        <p className="text-center text-muted-foreground">
+          등록된 문법 설명이 없습니다.
+        </p>
+      </div>
     );
   }
 

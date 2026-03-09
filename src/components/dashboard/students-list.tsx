@@ -3,7 +3,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
-import { Eye } from 'lucide-react';
+import { Eye, Users } from 'lucide-react';
 import Link from 'next/link';
 import { ServiceAssignmentToggle } from './service-assignment-toggle';
 import type { AuthUser } from '@/types/auth';
@@ -104,6 +104,13 @@ export async function StudentsList({ user, basePath }: Props) {
           const percent = total > 0 ? Math.round((completed / total) * 100) : 0;
           const naesin = naesinByStudent.get(student.id);
 
+          const progressColor =
+            percent >= 80
+              ? '[&>[data-slot=progress-indicator]]:bg-green-500'
+              : percent >= 40
+                ? '[&>[data-slot=progress-indicator]]:bg-indigo-500'
+                : '[&>[data-slot=progress-indicator]]:bg-slate-400';
+
           return (
             <Card key={student.id}>
               <CardContent className="py-4">
@@ -132,7 +139,7 @@ export async function StudentsList({ user, basePath }: Props) {
                         <span>문법 학습</span>
                         <span>{completed}/{total} ({percent}%)</span>
                       </div>
-                      <Progress value={percent} className="h-1.5" />
+                      <Progress value={percent} className={`h-2.5 ${progressColor}`} />
                     </div>
                     {canManageServices && (
                       <div className="mt-3">
@@ -156,9 +163,12 @@ export async function StudentsList({ user, basePath }: Props) {
           );
         })}
         {(!students || students.length === 0) && (
-          <p className="text-center text-muted-foreground py-8">
-            등록된 학생이 없습니다.
-          </p>
+          <div className="flex flex-col items-center py-12">
+            <Users className="h-10 w-10 text-muted-foreground/30 mb-2" />
+            <p className="text-center text-muted-foreground">
+              등록된 학생이 없습니다.
+            </p>
+          </div>
         )}
       </div>
     </div>

@@ -53,7 +53,7 @@ export default async function StudentDashboard() {
       <div className="p-4 md:p-6 space-y-6">
         {/* Welcome */}
         <div>
-          <h2 className="text-2xl font-bold">안녕하세요, {user.full_name}님! 👋</h2>
+          <h2 className="text-2xl font-bold tracking-tight">안녕하세요, {user.full_name}님! 👋</h2>
           <p className="text-muted-foreground mt-1">오늘도 영어 문법 공부를 시작해볼까요?</p>
         </div>
 
@@ -61,25 +61,29 @@ export default async function StudentDashboard() {
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {naesinProgress.length > 0 && (
             <>
-              <Card>
+              <Card className="border-l-4 border-l-green-500">
                 <CardHeader className="flex flex-row items-center justify-between pb-2">
-                  <CardTitle className="text-sm font-medium">내신 단계 완료</CardTitle>
-                  <CheckCircle className="h-4 w-4 text-muted-foreground" />
+                  <CardTitle className="text-xs font-medium uppercase tracking-wider text-muted-foreground">내신 단계 완료</CardTitle>
+                  <div className="rounded-full bg-green-100 p-2 dark:bg-green-950">
+                    <CheckCircle className="h-4 w-4 text-green-600 dark:text-green-400" />
+                  </div>
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold">{naesinStagesCompleted}</div>
+                  <div className="text-2xl font-bold tracking-tight">{naesinStagesCompleted}</div>
                   <p className="text-xs text-muted-foreground">
                     전체 {naesinProgress.length * 4}단계 중
                   </p>
                 </CardContent>
               </Card>
-              <Card>
+              <Card className="border-l-4 border-l-indigo-500">
                 <CardHeader className="flex flex-row items-center justify-between pb-2">
-                  <CardTitle className="text-sm font-medium">완료 단원</CardTitle>
-                  <BookMarked className="h-4 w-4 text-muted-foreground" />
+                  <CardTitle className="text-xs font-medium uppercase tracking-wider text-muted-foreground">완료 단원</CardTitle>
+                  <div className="rounded-full bg-indigo-100 p-2 dark:bg-indigo-950">
+                    <BookMarked className="h-4 w-4 text-indigo-600 dark:text-indigo-400" />
+                  </div>
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold">{naesinUnitsFullyCompleted}</div>
+                  <div className="text-2xl font-bold tracking-tight">{naesinUnitsFullyCompleted}</div>
                   <p className="text-xs text-muted-foreground">
                     전체 {naesinProgress.length}단원 중
                   </p>
@@ -87,25 +91,29 @@ export default async function StudentDashboard() {
               </Card>
             </>
           )}
-          <Card>
+          <Card className="border-l-4 border-l-green-500">
             <CardHeader className="flex flex-row items-center justify-between pb-2">
-              <CardTitle className="text-sm font-medium">완료한 강의</CardTitle>
-              <GraduationCap className="h-4 w-4 text-muted-foreground" />
+              <CardTitle className="text-xs font-medium uppercase tracking-wider text-muted-foreground">완료한 강의</CardTitle>
+              <div className="rounded-full bg-green-100 p-2 dark:bg-green-950">
+                <GraduationCap className="h-4 w-4 text-green-600 dark:text-green-400" />
+              </div>
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">{completedVideos}</div>
+              <div className="text-2xl font-bold tracking-tight">{completedVideos}</div>
               <p className="text-xs text-muted-foreground">
                 전체 {totalProgress}개 중
               </p>
             </CardContent>
           </Card>
-          <Card>
+          <Card className="border-l-4 border-l-indigo-500">
             <CardHeader className="flex flex-row items-center justify-between pb-2">
-              <CardTitle className="text-sm font-medium">암기 완료</CardTitle>
-              <BookOpen className="h-4 w-4 text-muted-foreground" />
+              <CardTitle className="text-xs font-medium uppercase tracking-wider text-muted-foreground">암기 완료</CardTitle>
+              <div className="rounded-full bg-indigo-100 p-2 dark:bg-indigo-950">
+                <BookOpen className="h-4 w-4 text-indigo-600 dark:text-indigo-400" />
+              </div>
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">{masteredItems}</div>
+              <div className="text-2xl font-bold tracking-tight">{masteredItems}</div>
               <p className="text-xs text-muted-foreground">
                 전체 {totalMemory}개 중
               </p>
@@ -113,23 +121,27 @@ export default async function StudentDashboard() {
           </Card>
           {naesinProgress.length === 0 && (
             <>
-              <Card>
+              <Card className="border-l-4 border-l-orange-500">
                 <CardHeader className="flex flex-row items-center justify-between pb-2">
-                  <CardTitle className="text-sm font-medium">복습 대기</CardTitle>
-                  <Clock className="h-4 w-4 text-muted-foreground" />
+                  <CardTitle className="text-xs font-medium uppercase tracking-wider text-muted-foreground">복습 대기</CardTitle>
+                  <div className="rounded-full bg-orange-100 p-2 dark:bg-orange-950">
+                    <Clock className="h-4 w-4 text-orange-600 dark:text-orange-400" />
+                  </div>
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold">{dueReviews}</div>
+                  <div className="text-2xl font-bold tracking-tight">{dueReviews}</div>
                   <p className="text-xs text-muted-foreground">오늘 복습할 항목</p>
                 </CardContent>
               </Card>
-              <Card>
+              <Card className="border-l-4 border-l-purple-500">
                 <CardHeader className="flex flex-row items-center justify-between pb-2">
-                  <CardTitle className="text-sm font-medium">학습 진도</CardTitle>
-                  <BarChart3 className="h-4 w-4 text-muted-foreground" />
+                  <CardTitle className="text-xs font-medium uppercase tracking-wider text-muted-foreground">학습 진도</CardTitle>
+                  <div className="rounded-full bg-purple-100 p-2 dark:bg-purple-950">
+                    <BarChart3 className="h-4 w-4 text-purple-600 dark:text-purple-400" />
+                  </div>
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold">
+                  <div className="text-2xl font-bold tracking-tight">
                     {totalProgress > 0 ? Math.round((completedVideos / totalProgress) * 100) : 0}%
                   </div>
                   <p className="text-xs text-muted-foreground">전체 진도율</p>
@@ -141,10 +153,12 @@ export default async function StudentDashboard() {
 
         {/* Quick Actions */}
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          <Card className="hover:shadow-md transition-shadow">
+          <Card className="hover:shadow-md transition-shadow border-indigo-200 bg-indigo-50/30 dark:border-indigo-800 dark:bg-indigo-950/20">
             <CardContent className="pt-6">
               <div className="flex flex-col items-center text-center gap-3">
-                <GraduationCap className="h-10 w-10 text-primary" />
+                <div className="rounded-full bg-indigo-100 p-3 dark:bg-indigo-950">
+                  <GraduationCap className="h-8 w-8 text-indigo-600 dark:text-indigo-400" />
+                </div>
                 <h3 className="font-semibold">문법 학습</h3>
                 <p className="text-sm text-muted-foreground">레벨별 영어 문법을 학습하세요</p>
                 <Button asChild className="mt-2">
@@ -154,10 +168,12 @@ export default async function StudentDashboard() {
             </CardContent>
           </Card>
           {dueReviews > 0 && (
-            <Card className="hover:shadow-md transition-shadow border-orange-200 bg-orange-50/50">
+            <Card className="hover:shadow-md transition-shadow border-orange-200 bg-orange-50/50 dark:border-orange-800 dark:bg-orange-950/20">
               <CardContent className="pt-6">
                 <div className="flex flex-col items-center text-center gap-3">
-                  <Clock className="h-10 w-10 text-orange-500" />
+                  <div className="rounded-full bg-orange-100 p-3 dark:bg-orange-950">
+                    <Clock className="h-8 w-8 text-orange-600 dark:text-orange-400" />
+                  </div>
                   <h3 className="font-semibold">복습하기</h3>
                   <p className="text-sm text-muted-foreground">
                     {dueReviews}개 항목이 복습을 기다리고 있어요
@@ -172,7 +188,9 @@ export default async function StudentDashboard() {
           <Card className="hover:shadow-md transition-shadow">
             <CardContent className="pt-6">
               <div className="flex flex-col items-center text-center gap-3">
-                <BookMarked className="h-10 w-10 text-primary" />
+                <div className="rounded-full bg-muted p-3">
+                  <BookMarked className="h-8 w-8 text-muted-foreground" />
+                </div>
                 <h3 className="font-semibold">내신 대비</h3>
                 <p className="text-sm text-muted-foreground">교과서별 내신 시험을 준비하세요</p>
                 <Button asChild variant="outline" className="mt-2">
@@ -184,7 +202,9 @@ export default async function StudentDashboard() {
           <Card className="hover:shadow-md transition-shadow">
             <CardContent className="pt-6">
               <div className="flex flex-col items-center text-center gap-3">
-                <BarChart3 className="h-10 w-10 text-primary" />
+                <div className="rounded-full bg-muted p-3">
+                  <BarChart3 className="h-8 w-8 text-muted-foreground" />
+                </div>
                 <h3 className="font-semibold">내 진도</h3>
                 <p className="text-sm text-muted-foreground">학습 현황을 확인하세요</p>
                 <Button asChild variant="outline" className="mt-2">

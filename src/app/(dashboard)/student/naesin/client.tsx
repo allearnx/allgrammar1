@@ -97,9 +97,12 @@ export function NaesinHome({
         </div>
 
         {textbooks.length === 0 ? (
-          <p className="text-center text-muted-foreground py-8">
-            등록된 교과서가 없습니다. 관리자에게 문의하세요.
-          </p>
+          <div className="flex flex-col items-center py-12">
+            <BookOpen className="h-10 w-10 text-muted-foreground/30 mb-2" />
+            <p className="text-center text-muted-foreground">
+              등록된 교과서가 없습니다. 관리자에게 문의하세요.
+            </p>
+          </div>
         ) : (
           <Tabs defaultValue="1">
             <TabsList className="grid w-full grid-cols-3">
@@ -127,9 +130,12 @@ export function NaesinHome({
                     ))}
                   </div>
                 ) : (
-                  <p className="text-center text-muted-foreground py-8">
-                    중{grade} 교과서가 아직 등록되지 않았습니다.
-                  </p>
+                  <div className="flex flex-col items-center py-12">
+                    <BookOpen className="h-10 w-10 text-muted-foreground/30 mb-2" />
+                    <p className="text-center text-muted-foreground">
+                      중{grade} 교과서가 아직 등록되지 않았습니다.
+                    </p>
+                  </div>
                 )}
               </TabsContent>
             ))}
@@ -191,9 +197,12 @@ export function NaesinHome({
                 )}
               </div>
               {group.units.length === 0 ? (
-                <p className="text-center text-muted-foreground py-4 text-sm">
+                <div className="flex flex-col items-center py-12">
+                <ClipboardList className="h-10 w-10 text-muted-foreground/30 mb-2" />
+                <p className="text-center text-muted-foreground text-sm">
                   배정된 단원이 없습니다.
                 </p>
+              </div>
               ) : (
                 <div className="space-y-3">
                   {group.units.map((unit) => (
@@ -217,9 +226,12 @@ export function NaesinHome({
           {initialExamDate && <ExamCountdown examDate={initialExamDate} />}
 
           {units.length === 0 ? (
-            <p className="text-center text-muted-foreground py-8">
-              등록된 단원이 없습니다.
-            </p>
+            <div className="flex flex-col items-center py-12">
+              <ClipboardList className="h-10 w-10 text-muted-foreground/30 mb-2" />
+              <p className="text-center text-muted-foreground">
+                등록된 단원이 없습니다.
+              </p>
+            </div>
           ) : (
             <div className="space-y-3">
               {units.map((unit) => (

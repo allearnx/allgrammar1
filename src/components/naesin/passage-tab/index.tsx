@@ -132,9 +132,12 @@ export function PassageTab({ passages, unitId, onStageComplete, requiredStages, 
 
   if (passages.length === 0) {
     return (
-      <p className="text-center text-muted-foreground py-8">
-        등록된 교과서 지문이 없습니다.
-      </p>
+      <div className="flex flex-col items-center py-12">
+        <FileText className="h-10 w-10 text-muted-foreground/30 mb-2" />
+        <p className="text-center text-muted-foreground">
+          등록된 교과서 지문이 없습니다.
+        </p>
+      </div>
     );
   }
 

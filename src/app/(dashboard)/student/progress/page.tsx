@@ -4,7 +4,7 @@ import { Topbar } from '@/components/layout/topbar';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
 import { Badge } from '@/components/ui/badge';
-import { CheckCircle, Circle, BookOpen, FileText, GraduationCap, ClipboardList } from 'lucide-react';
+import { CheckCircle, Circle, BookOpen, FileText, GraduationCap, ClipboardList, Clock, BarChart3 } from 'lucide-react';
 
 export default async function ProgressPage() {
   const user = await requireRole(['student']);
@@ -73,6 +73,14 @@ export default async function ProgressPage() {
     return acc + (p.vocab_completed ? 1 : 0) + (p.passage_completed ? 1 : 0) + (p.grammar_completed ? 1 : 0) + (p.problem_completed ? 1 : 0);
   }, 0);
 
+  // Score chip helper
+  const getScoreChip = (score: number | null) => {
+    if (score === null) return null;
+    return score >= 80
+      ? 'bg-green-100 text-green-700 dark:bg-green-950 dark:text-green-300'
+      : 'bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-300';
+  };
+
   return (
     <>
       <Topbar user={user} title="내 진도" />
@@ -80,40 +88,52 @@ export default async function ProgressPage() {
         {/* Summary Stats */}
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {naesinProgress.length > 0 && (
-            <Card>
-              <CardHeader className="pb-2">
-                <CardTitle className="text-sm font-medium">내신 단계 완료</CardTitle>
+            <Card className="border-l-4 border-l-green-500">
+              <CardHeader className="flex flex-row items-center justify-between pb-2">
+                <CardTitle className="text-xs font-medium uppercase tracking-wider text-muted-foreground">내신 단계 완료</CardTitle>
+                <div className="rounded-full bg-green-100 p-2 dark:bg-green-950">
+                  <CheckCircle className="h-4 w-4 text-green-600 dark:text-green-400" />
+                </div>
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold">{naesinStagesCompleted}/{naesinProgress.length * 4}</div>
+                <div className="text-2xl font-bold tracking-tight">{naesinStagesCompleted}/{naesinProgress.length * 4}</div>
                 <p className="text-xs text-muted-foreground">전체 단계 중</p>
               </CardContent>
             </Card>
           )}
-          <Card>
-            <CardHeader className="pb-2">
-              <CardTitle className="text-sm font-medium">총 학습 시간</CardTitle>
+          <Card className="border-l-4 border-l-sky-500">
+            <CardHeader className="flex flex-row items-center justify-between pb-2">
+              <CardTitle className="text-xs font-medium uppercase tracking-wider text-muted-foreground">총 학습 시간</CardTitle>
+              <div className="rounded-full bg-sky-100 p-2 dark:bg-sky-950">
+                <Clock className="h-4 w-4 text-sky-600 dark:text-sky-400" />
+              </div>
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">
+              <div className="text-2xl font-bold tracking-tight">
                 {hours > 0 ? `${hours}시간 ` : ''}{minutes}분
               </div>
             </CardContent>
           </Card>
-          <Card>
-            <CardHeader className="pb-2">
-              <CardTitle className="text-sm font-medium">암기 마스터</CardTitle>
+          <Card className="border-l-4 border-l-indigo-500">
+            <CardHeader className="flex flex-row items-center justify-between pb-2">
+              <CardTitle className="text-xs font-medium uppercase tracking-wider text-muted-foreground">암기 마스터</CardTitle>
+              <div className="rounded-full bg-indigo-100 p-2 dark:bg-indigo-950">
+                <BookOpen className="h-4 w-4 text-indigo-600 dark:text-indigo-400" />
+              </div>
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">{totalMastered}/{totalMemory}</div>
+              <div className="text-2xl font-bold tracking-tight">{totalMastered}/{totalMemory}</div>
             </CardContent>
           </Card>
-          <Card>
-            <CardHeader className="pb-2">
-              <CardTitle className="text-sm font-medium">퀴즈 정답률</CardTitle>
+          <Card className="border-l-4 border-l-purple-500">
+            <CardHeader className="flex flex-row items-center justify-between pb-2">
+              <CardTitle className="text-xs font-medium uppercase tracking-wider text-muted-foreground">퀴즈 정답률</CardTitle>
+              <div className="rounded-full bg-purple-100 p-2 dark:bg-purple-950">
+                <BarChart3 className="h-4 w-4 text-purple-600 dark:text-purple-400" />
+              </div>
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">
+              <div className="text-2xl font-bold tracking-tight">
                 {totalQuizCorrect + totalQuizWrong > 0
                   ? Math.round((totalQuizCorrect / (totalQuizCorrect + totalQuizWrong)) * 100)
                   : 0}%
@@ -125,7 +145,7 @@ export default async function ProgressPage() {
         {/* Naesin Per-Unit Progress */}
         {naesinUnits.length > 0 && (
           <div className="space-y-3">
-            <h3 className="text-lg font-semibold">내신 단원별 진도{textbookName ? ` — ${textbookName}` : ''}</h3>
+            <h3 className="text-lg font-semibold tracking-tight">내신 단원별 진도{textbookName ? ` — ${textbookName}` : ''}</h3>
             {naesinUnits.map((unit) => {
               const progress = naesinProgressMap.get(unit.id);
               const stages = [
@@ -137,8 +157,24 @@ export default async function ProgressPage() {
               const completedCount = stages.filter((s) => s.completed).length;
               const percent = Math.round((completedCount / 4) * 100);
 
+              const progressColor =
+                percent >= 80
+                  ? '[&>[data-slot=progress-indicator]]:bg-green-500'
+                  : percent >= 40
+                    ? '[&>[data-slot=progress-indicator]]:bg-indigo-500'
+                    : '[&>[data-slot=progress-indicator]]:bg-slate-400';
+
               return (
-                <Card key={unit.id}>
+                <Card
+                  key={unit.id}
+                  className={
+                    completedCount === 4
+                      ? 'border-l-4 border-l-green-500'
+                      : completedCount > 0
+                        ? 'border-l-4 border-l-amber-400'
+                        : 'border-l-4 border-l-slate-200 dark:border-l-slate-700'
+                  }
+                >
                   <CardContent className="py-3">
                     <div className="flex items-center justify-between mb-2">
                       <div className="flex items-center gap-2">
@@ -152,7 +188,7 @@ export default async function ProgressPage() {
                         {completedCount}/4
                       </Badge>
                     </div>
-                    <Progress value={percent} className="h-1.5 mb-2" />
+                    <Progress value={percent} className={`h-2.5 mb-2 ${progressColor}`} />
                     <div className="flex items-center gap-3">
                       {stages.map((stage) => (
                         <div key={stage.key} className="flex items-center gap-1">
@@ -170,16 +206,24 @@ export default async function ProgressPage() {
                     {progress && (progress.vocab_quiz_score !== null || progress.passage_translation_best !== null) && (
                       <div className="flex gap-2 mt-2 flex-wrap">
                         {progress.vocab_quiz_score !== null && (
-                          <span className="text-xs text-muted-foreground">퀴즈 {progress.vocab_quiz_score}점</span>
+                          <span className={`text-xs px-1.5 py-0.5 rounded ${getScoreChip(progress.vocab_quiz_score)}`}>
+                            퀴즈 {progress.vocab_quiz_score}점
+                          </span>
                         )}
                         {progress.vocab_spelling_score !== null && (
-                          <span className="text-xs text-muted-foreground">스펠링 {progress.vocab_spelling_score}점</span>
+                          <span className={`text-xs px-1.5 py-0.5 rounded ${getScoreChip(progress.vocab_spelling_score)}`}>
+                            스펠링 {progress.vocab_spelling_score}점
+                          </span>
                         )}
                         {progress.passage_fill_blanks_best !== null && (
-                          <span className="text-xs text-muted-foreground">빈칸 {progress.passage_fill_blanks_best}점</span>
+                          <span className={`text-xs px-1.5 py-0.5 rounded ${getScoreChip(progress.passage_fill_blanks_best)}`}>
+                            빈칸 {progress.passage_fill_blanks_best}점
+                          </span>
                         )}
                         {progress.passage_translation_best !== null && (
-                          <span className="text-xs text-muted-foreground">영작 {progress.passage_translation_best}점</span>
+                          <span className={`text-xs px-1.5 py-0.5 rounded ${getScoreChip(progress.passage_translation_best)}`}>
+                            영작 {progress.passage_translation_best}점
+                          </span>
                         )}
                       </div>
                     )}

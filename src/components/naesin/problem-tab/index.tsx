@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { ClipboardList } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { InteractiveProblemView } from './interactive-view';
 import { ImageAnswerView } from './image-answer-view';
@@ -17,9 +18,12 @@ export function ProblemTab({ sheets, unitId, onStageComplete }: ProblemTabProps)
 
   if (sheets.length === 0) {
     return (
-      <p className="text-center text-muted-foreground py-8">
-        등록된 문제지가 없습니다.
-      </p>
+      <div className="flex flex-col items-center py-12">
+        <ClipboardList className="h-10 w-10 text-muted-foreground/30 mb-2" />
+        <p className="text-center text-muted-foreground">
+          등록된 문제지가 없습니다.
+        </p>
+      </div>
     );
   }
 
