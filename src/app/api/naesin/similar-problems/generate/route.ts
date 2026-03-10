@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { createApiHandler } from '@/lib/api';
+import { logger } from '@/lib/logger';
 import { similarProblemGenerateSchema } from '@/lib/api/schemas';
 import Anthropic from '@anthropic-ai/sdk';
 
@@ -95,7 +96,7 @@ JSON 배열로만 응답:
       if (error) return NextResponse.json({ error: error.message }, { status: 500 });
       return NextResponse.json({ problems: inserted });
     } catch (error) {
-      console.error('Similar problem generation error:', error);
+      logger.error('ai.generate', { error: error instanceof Error ? error.message : String(error) });
       return NextResponse.json(
         { error: error instanceof Error ? error.message : '생성 중 오류' },
         { status: 500 }

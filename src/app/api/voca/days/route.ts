@@ -1,7 +1,6 @@
 import { NextResponse } from 'next/server';
 import { createApiHandler } from '@/lib/api/handler';
 import { vocaDayCreateSchema, idSchema } from '@/lib/api/schemas';
-import { createAdminClient } from '@/lib/supabase/admin';
 
 // GET — Day 목록 (book_id 쿼리 파라미터)
 export const GET = createApiHandler({ hasBody: false }, async ({ request, supabase }) => {
@@ -31,12 +30,11 @@ export const POST = createApiHandler(
   }
 );
 
-// DELETE — Day 삭제 (admin client로 RLS 우회 — student progress CASCADE 삭제 허용)
+// DELETE — Day 삭제
 export const DELETE = createApiHandler(
   { roles: ['teacher', 'admin', 'boss'], schema: idSchema, hasBody: true },
-  async ({ body }) => {
-    const admin = createAdminClient();
-    const { error } = await admin
+  async ({ body, supabase }) => {
+    const { error } = await supabase
       .from('voca_days')
       .delete()
       .eq('id', body.id);

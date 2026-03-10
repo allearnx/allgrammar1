@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { createApiHandler } from '@/lib/api';
+import { logger } from '@/lib/logger';
 import { z } from 'zod';
 import Anthropic from '@anthropic-ai/sdk';
 
@@ -95,7 +96,7 @@ Respond with ONLY a JSON array (no other text):
 
     const jsonMatch = cleaned.match(/\[[\s\S]*\]/);
     if (!jsonMatch) {
-      console.error('AI raw response:', responseText);
+      logger.warn('ai.parse_fail', { raw: responseText.slice(0, 500) });
       return NextResponse.json({ items: [] });
     }
 
@@ -141,7 +142,7 @@ Respond with ONLY a JSON array (no other text):
 
       return NextResponse.json({ items: result });
     } catch {
-      console.error('Failed to parse grammar vocab JSON:', cleaned);
+      logger.warn('ai.parse_fail', { raw: cleaned.slice(0, 500) });
       return NextResponse.json({ items: [] });
     }
   }

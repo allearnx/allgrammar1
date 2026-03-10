@@ -1,15 +1,12 @@
 import { NextResponse } from 'next/server';
 import { createApiHandler, NotFoundError, ForbiddenError } from '@/lib/api';
-import { createAdminClient } from '@/lib/supabase/admin';
 import { teacherPatchSchema } from '@/lib/api/schemas';
 
 export const PATCH = createApiHandler(
   { roles: ['admin', 'boss'], schema: teacherPatchSchema },
-  async ({ user, body, params }) => {
-    const admin = createAdminClient();
-
+  async ({ user, body, params, supabase }) => {
     // Only update teachers in same academy
-    const { data: teacher } = await admin
+    const { data: teacher } = await supabase
       .from('users')
       .select('academy_id')
       .eq('id', params.id)
@@ -22,7 +19,7 @@ export const PATCH = createApiHandler(
       throw new ForbiddenError();
     }
 
-    const { error } = await admin
+    const { error } = await supabase
       .from('users')
       .update({ is_active: body.is_active })
       .eq('id', params.id);

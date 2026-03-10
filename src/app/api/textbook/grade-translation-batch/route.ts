@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { createApiHandler } from '@/lib/api';
+import { logger } from '@/lib/logger';
 import { gradeTranslationBatchSchema } from '@/lib/api/schemas';
 import { checkRateLimit } from '@/lib/api/rate-limit';
 import Anthropic from '@anthropic-ai/sdk';
@@ -57,7 +58,7 @@ Grading criteria per sentence:
       const results = JSON.parse(jsonMatch[0]);
       return NextResponse.json({ results });
     } catch (error) {
-      console.error('AI batch grading error:', error);
+      logger.error('ai.grading', { error: error instanceof Error ? error.message : String(error) });
       return NextResponse.json(
         { error: 'AI 채점 중 오류가 발생했습니다.' },
         { status: 500 }

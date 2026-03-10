@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getUser } from '@/lib/auth/helpers';
+import { logger } from '@/lib/logger';
 import Anthropic from '@anthropic-ai/sdk';
 import { extractText } from 'unpdf';
 
@@ -92,7 +93,7 @@ export async function POST(request: NextRequest) {
 
     // 페이지를 ~6000자 그룹으로 묶어 병렬 처리
     const chunks = groupPages(pageTexts, 6000);
-    console.log(`PDF ${totalPages}p → ${chunks.length} chunks 병렬 처리`);
+    logger.info('ai.pdf_extract', { totalPages, chunks: chunks.length });
     const results = await Promise.all(chunks.map(extractChunk));
 
     // 결과 병합 + 중복 제거 (front_text 기준)
@@ -106,7 +107,7 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json({ items });
   } catch (error) {
-    console.error('PDF extraction error:', error);
+    logger.error('ai.pdf_extract', { error: error instanceof Error ? error.message : String(error) });
     const message = error instanceof Error ? error.message : 'Unknown error';
     return NextResponse.json(
       { error: `PDF 단어 추출 중 오류: ${message}` },

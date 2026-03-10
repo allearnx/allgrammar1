@@ -1,9 +1,9 @@
-import { createAdminClient } from '@/lib/supabase/admin';
+import { createClient } from '@/lib/supabase/server';
 
 export async function fetchContentData() {
-  const admin = createAdminClient();
+  const supabase = await createClient();
 
-  const { data: levels } = await admin
+  const { data: levels } = await supabase
     .from('levels')
     .select('*, grammars(*, memory_items(count), textbook_passages(count))')
     .order('level_number');
@@ -12,9 +12,9 @@ export async function fetchContentData() {
 }
 
 export async function fetchTextbookData() {
-  const admin = createAdminClient();
+  const supabase = await createClient();
 
-  const { data: passages } = await admin
+  const { data: passages } = await supabase
     .from('textbook_passages')
     .select('*, grammar:grammars(title, level:levels(level_number, title_ko))')
     .order('created_at', { ascending: false });
@@ -23,9 +23,9 @@ export async function fetchTextbookData() {
 }
 
 export async function fetchStudentsList(academyId: string | null) {
-  const admin = createAdminClient();
+  const supabase = await createClient();
 
-  const query = admin
+  const query = supabase
     .from('users')
     .select('id, full_name, email')
     .eq('role', 'student')
@@ -40,9 +40,9 @@ export async function fetchStudentsList(academyId: string | null) {
 }
 
 export async function fetchTeachersList(academyId: string | null) {
-  const admin = createAdminClient();
+  const supabase = await createClient();
 
-  const query = admin
+  const query = supabase
     .from('users')
     .select('id, full_name, email, is_active, created_at, academy_id')
     .eq('role', 'teacher')

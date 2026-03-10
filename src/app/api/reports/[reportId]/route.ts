@@ -1,14 +1,12 @@
 import { NextResponse } from 'next/server';
 import { createApiHandler, NotFoundError } from '@/lib/api';
-import { createAdminClient } from '@/lib/supabase/admin';
 
 export const DELETE = createApiHandler(
   { roles: ['teacher', 'admin', 'boss'] },
-  async ({ params }) => {
+  async ({ params, supabase }) => {
     const { reportId } = params;
-    const admin = createAdminClient();
 
-    const { data, error } = await admin
+    const { data, error } = await supabase
       .from('weekly_reports')
       .delete()
       .eq('id', reportId)

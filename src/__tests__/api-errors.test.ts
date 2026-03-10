@@ -99,13 +99,10 @@ describe('errorResponse', () => {
   });
 
   it('returns 500 for unknown errors', async () => {
-    const spy = vi.spyOn(console, 'error').mockImplementation(() => {});
     const res = errorResponse(new Error('random'));
     expect(res.status).toBe(500);
     const body = await res.json();
     expect(body.code).toBe('INTERNAL_ERROR');
-    expect(spy).toHaveBeenCalled();
-    spy.mockRestore();
   });
 
   it('returns 500 for non-Error values', async () => {

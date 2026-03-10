@@ -1,14 +1,12 @@
 import { NextResponse } from 'next/server';
 import { createApiHandler } from '@/lib/api';
-import { createAdminClient } from '@/lib/supabase/admin';
 import { academyCreateSchema } from '@/lib/api/schemas';
 import { generateInviteCode } from '@/lib/utils/invite-code';
 
 export const PATCH = createApiHandler(
   { roles: ['boss'], schema: academyCreateSchema },
-  async ({ body, params }) => {
-    const admin = createAdminClient();
-    const { error } = await admin
+  async ({ body, params, supabase }) => {
+    const { error } = await supabase
       .from('academies')
       .update({ name: body.name.trim() })
       .eq('id', params.id);
@@ -20,13 +18,11 @@ export const PATCH = createApiHandler(
 
 export const POST = createApiHandler(
   { roles: ['boss'] },
-  async ({ params }) => {
-    const admin = createAdminClient();
-
+  async ({ params, supabase }) => {
     let inviteCode = '';
     for (let attempt = 0; attempt < 3; attempt++) {
       inviteCode = generateInviteCode();
-      const { data: existing } = await admin
+      const { data: existing } = await supabase
         .from('academies')
         .select('id')
         .eq('invite_code', inviteCode)
@@ -34,7 +30,7 @@ export const POST = createApiHandler(
       if (!existing) break;
     }
 
-    const { data, error } = await admin
+    const { data, error } = await supabase
       .from('academies')
       .update({ invite_code: inviteCode })
       .eq('id', params.id)
@@ -48,11 +44,9 @@ export const POST = createApiHandler(
 
 export const DELETE = createApiHandler(
   { roles: ['boss'] },
-  async ({ params }) => {
-    const admin = createAdminClient();
-
+  async ({ params, supabase }) => {
     // Check if academy has users
-    const { count } = await admin
+    const { count } = await supabase
       .from('users')
       .select('id', { count: 'exact', head: true })
       .eq('academy_id', params.id);
@@ -64,7 +58,7 @@ export const DELETE = createApiHandler(
       );
     }
 
-    const { error } = await admin
+    const { error } = await supabase
       .from('academies')
       .delete()
       .eq('id', params.id);

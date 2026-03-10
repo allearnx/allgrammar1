@@ -5,6 +5,7 @@ Sentry.init({
 
   integrations: [
     Sentry.replayIntegration(),
+    Sentry.captureConsoleIntegration({ levels: ['error'] }),
   ],
 
   // 프로덕션에서 10% 트랜잭션 샘플링

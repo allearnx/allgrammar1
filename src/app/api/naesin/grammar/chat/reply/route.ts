@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { createApiHandler } from '@/lib/api';
+import { logger } from '@/lib/logger';
 import { grammarChatReplySchema } from '@/lib/api/schemas';
 import { checkRateLimit } from '@/lib/api/rate-limit';
 import Anthropic from '@anthropic-ai/sdk';
@@ -171,7 +172,7 @@ ${isLastTurn ? '- 마지막 턴이므로 전체 학습을 정리해주세요' : 
 
       return NextResponse.json(updated);
     } catch (error) {
-      console.error('Socratic chat AI error:', error);
+      logger.error('ai.chat', { error: error instanceof Error ? error.message : String(error) });
       return NextResponse.json(
         { error: 'AI 응답 생성 중 오류가 발생했습니다.' },
         { status: 500 }

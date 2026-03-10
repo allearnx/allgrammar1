@@ -1,14 +1,12 @@
 import { NextResponse } from 'next/server';
 import { createApiHandler } from '@/lib/api';
-import { createAdminClient } from '@/lib/supabase/admin';
 import { academyCreateSchema } from '@/lib/api/schemas';
 import { generateInviteCode } from '@/lib/utils/invite-code';
 
 export const GET = createApiHandler(
   { roles: ['boss'] },
-  async () => {
-    const admin = createAdminClient();
-    const { data, error } = await admin
+  async ({ supabase }) => {
+    const { data, error } = await supabase
       .from('academies')
       .select('*')
       .order('created_at', { ascending: false });
@@ -20,14 +18,12 @@ export const GET = createApiHandler(
 
 export const POST = createApiHandler(
   { roles: ['boss'], schema: academyCreateSchema },
-  async ({ body }) => {
-    const admin = createAdminClient();
-
+  async ({ body, supabase }) => {
     // 초대 코드 생성 (충돌 시 최대 3회 재시도)
     let inviteCode = '';
     for (let attempt = 0; attempt < 3; attempt++) {
       inviteCode = generateInviteCode();
-      const { data: existing } = await admin
+      const { data: existing } = await supabase
         .from('academies')
         .select('id')
         .eq('invite_code', inviteCode)
@@ -35,7 +31,7 @@ export const POST = createApiHandler(
       if (!existing) break;
     }
 
-    const { data, error } = await admin
+    const { data, error } = await supabase
       .from('academies')
       .insert({ name: body.name.trim(), invite_code: inviteCode })
       .select()

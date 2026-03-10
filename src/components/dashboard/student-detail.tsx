@@ -2,35 +2,11 @@ import { createAdminClient } from '@/lib/supabase/admin';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { notFound } from 'next/navigation';
-import { format } from 'date-fns';
-import { CheckCircle, Circle, BookOpen, FileText, GraduationCap, ClipboardList, Clock, Settings } from 'lucide-react';
+import { BookOpen, FileText, GraduationCap } from 'lucide-react';
 import type { AuthUser } from '@/types/auth';
 import type { NaesinExamAssignment, NaesinUnit } from '@/types/database';
-import { ExamAssignmentManager } from './exam-assignment-manager';
-import { PassageStageManager } from './passage-stage-manager';
-import { EnabledStagesManager } from './enabled-stages-manager';
-
-interface GrammarRelation {
-  title: string;
-  level?: { level_number: number; title_ko: string } | null;
-}
-
-interface NaesinProgressRow {
-  unit_id: string;
-  vocab_completed: boolean;
-  vocab_quiz_score: number | null;
-  vocab_spelling_score: number | null;
-  passage_completed: boolean;
-  passage_fill_blanks_best: number | null;
-  passage_ordering_best: number | null;
-  passage_translation_best: number | null;
-  passage_grammar_vocab_best: number | null;
-  grammar_completed: boolean;
-  grammar_videos_completed: number;
-  grammar_total_videos: number;
-  problem_completed: boolean;
-  updated_at: string;
-}
+import { NaesinProgressCard } from './naesin-progress-card';
+import { VocaProgressCard } from './voca-progress-card';
 
 interface NaesinData {
   textbookId: string;
@@ -118,7 +94,7 @@ export async function StudentDetail({ user, studentId, naesinData }: Props) {
   const videoProgress = videoRes.data || [];
   const memoryProgress = memoryRes.data || [];
   const textbookProgress = textbookRes.data || [];
-  const naesinProgress = (naesinProgressRes.data || []) as NaesinProgressRow[];
+  const naesinProgress = naesinProgressRes.data || [];
 
   const completedVideos = videoProgress.filter((p) => p.video_completed).length;
   const masteredMemory = memoryProgress.filter((p) => p.is_mastered).length;
@@ -126,47 +102,9 @@ export async function StudentDetail({ user, studentId, naesinData }: Props) {
   const hours = Math.floor(totalWatchedSeconds / 3600);
   const minutes = Math.floor((totalWatchedSeconds % 3600) / 60);
 
-  // Voca progress
   const vocaProgress = (vocaProgressRes.data || []) as unknown as VocaProgressRow[];
   const hasVocaAssignment = !!vocaAssignmentRes.data;
-
-  // Group voca progress by book
-  const vocaByBook = new Map<string, { bookTitle: string; sortOrder: number; days: VocaProgressRow[] }>();
-  for (const vp of vocaProgress) {
-    if (!vp.day) continue;
-    const book = vp.day.book;
-    if (!book) continue;
-    if (!vocaByBook.has(book.id)) {
-      vocaByBook.set(book.id, { bookTitle: book.title, sortOrder: book.sort_order, days: [] });
-    }
-    vocaByBook.get(book.id)!.days.push(vp);
-  }
-  // Sort books by sort_order, days by day_number
-  const vocaBooks = [...vocaByBook.entries()]
-    .sort((a, b) => a[1].sortOrder - b[1].sortOrder)
-    .map(([bookId, data]) => ({
-      bookId,
-      bookTitle: data.bookTitle,
-      days: data.days.sort((a, b) => (a.day?.day_number ?? 0) - (b.day?.day_number ?? 0)),
-    }));
-
-  // Voca stats
-  const vocaCompletedDays = vocaProgress.filter(
-    (p) => p.flashcard_completed && p.quiz_score !== null && p.spelling_score !== null && p.matching_completed
-  ).length;
-  const vocaTotalDays = vocaProgress.length;
-  const vocaQuizScores = vocaProgress.filter((p) => p.quiz_score !== null).map((p) => p.quiz_score!);
-  const vocaAvgQuiz = vocaQuizScores.length > 0 ? Math.round(vocaQuizScores.reduce((a, b) => a + b, 0) / vocaQuizScores.length) : null;
-  const vocaSpellingScores = vocaProgress.filter((p) => p.spelling_score !== null).map((p) => p.spelling_score!);
-  const vocaAvgSpelling = vocaSpellingScores.length > 0 ? Math.round(vocaSpellingScores.reduce((a, b) => a + b, 0) / vocaSpellingScores.length) : null;
-
-  // Naesin progress stats
-  const naesinProgressMap = new Map(naesinProgress.map((p) => [p.unit_id, p]));
   const naesinUnits = naesinData?.units || [];
-  const naesinStagesCompleted = naesinProgress.reduce((acc, p) => {
-    return acc + (p.vocab_completed ? 1 : 0) + (p.passage_completed ? 1 : 0) + (p.grammar_completed ? 1 : 0) + (p.problem_completed ? 1 : 0);
-  }, 0);
-  const naesinTotalStages = naesinUnits.length * 4;
 
   return (
     <>
@@ -186,347 +124,26 @@ export async function StudentDetail({ user, studentId, naesinData }: Props) {
           </CardContent>
         </Card>
 
-        {/* ── 내신 대비 서비스 카드 ── */}
+        {/* 내신 대비 서비스 카드 */}
         {naesinData && naesinUnits.length > 0 && (
-          <Card className="border-l-4 border-l-green-500">
-            <CardHeader className="pb-4">
-              <div className="flex items-center gap-2">
-                <div className="rounded-full bg-green-100 p-2 dark:bg-green-950">
-                  <GraduationCap className="h-5 w-5 text-green-600 dark:text-green-400" />
-                </div>
-                <CardTitle className="text-lg">내신 대비</CardTitle>
-                <Badge variant="outline" className="text-xs">{naesinData.textbookName}</Badge>
-              </div>
-            </CardHeader>
-            <CardContent className="space-y-6">
-              {/* 통계 3개 */}
-              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                <div className="rounded-lg border p-4">
-                  <div className="flex items-center justify-between mb-1">
-                    <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">내신 단계 완료</p>
-                    <CheckCircle className="h-4 w-4 text-green-600 dark:text-green-400" />
-                  </div>
-                  <div className="text-2xl font-bold tracking-tight">{naesinStagesCompleted}/{naesinTotalStages}</div>
-                  <p className="text-xs text-muted-foreground">전체 단계 중</p>
-                </div>
-                <div className="rounded-lg border p-4">
-                  <div className="flex items-center justify-between mb-1">
-                    <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">완료 단원</p>
-                    <BookOpen className="h-4 w-4 text-indigo-600 dark:text-indigo-400" />
-                  </div>
-                  <div className="text-2xl font-bold tracking-tight">
-                    {naesinProgress.filter((p) => p.vocab_completed && p.passage_completed && p.grammar_completed && p.problem_completed).length}/{naesinUnits.length}
-                  </div>
-                  <p className="text-xs text-muted-foreground">모든 단계 완료된 단원</p>
-                </div>
-                <div className="rounded-lg border p-4">
-                  <div className="flex items-center justify-between mb-1">
-                    <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">총 학습 시간</p>
-                    <Clock className="h-4 w-4 text-sky-600 dark:text-sky-400" />
-                  </div>
-                  <div className="text-2xl font-bold tracking-tight">{hours > 0 ? `${hours}h ` : ''}{minutes}m</div>
-                  <p className="text-xs text-muted-foreground">영상 시청 시간 기준</p>
-                </div>
-              </div>
-
-              {/* 단원별 진행률 */}
-              <div>
-                <h4 className="text-sm font-semibold tracking-tight mb-2">단원별 진행률</h4>
-                <div className="space-y-2">
-                  {naesinUnits.map((unit) => {
-                    const progress = naesinProgressMap.get(unit.id);
-                    const hasPassageScore = !!progress && (progress.passage_fill_blanks_best != null || progress.passage_ordering_best != null || progress.passage_translation_best != null || progress.passage_grammar_vocab_best != null);
-                    const hasGrammarProgress = !!progress && (progress.grammar_videos_completed ?? 0) > 0;
-
-                    const stages = [
-                      { key: 'vocab', label: '단어', icon: BookOpen, completed: progress?.vocab_completed ?? false, inProgress: false },
-                      { key: 'passage', label: '교과서 암기', icon: FileText, completed: progress?.passage_completed ?? false, inProgress: !progress?.passage_completed && hasPassageScore },
-                      { key: 'grammar', label: '문법', icon: GraduationCap, completed: progress?.grammar_completed ?? false, inProgress: !progress?.grammar_completed && hasGrammarProgress },
-                      { key: 'problem', label: '문제', icon: ClipboardList, completed: progress?.problem_completed ?? false, inProgress: false },
-                    ];
-                    const completedCount = stages.filter((s) => s.completed).length;
-
-                    const getVocabChip = (score: number | null) => {
-                      if (score === null) return '';
-                      return score >= 80
-                        ? 'bg-green-100 text-green-700 dark:bg-green-950 dark:text-green-300'
-                        : 'bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-300';
-                    };
-                    const passageChip = 'bg-amber-100 text-amber-700 dark:bg-amber-950 dark:text-amber-300';
-
-                    return (
-                      <div
-                        key={unit.id}
-                        className={`rounded-lg border p-3 ${
-                          completedCount === 4
-                            ? 'border-l-4 border-l-green-500'
-                            : completedCount > 0
-                              ? 'border-l-4 border-l-amber-400'
-                              : 'border-l-4 border-l-slate-200 dark:border-l-slate-700'
-                        }`}
-                      >
-                        <div className="flex items-center justify-between mb-2">
-                          <div className="flex items-center gap-2">
-                            <Badge variant="outline" className="text-xs shrink-0">L{unit.unit_number}</Badge>
-                            <span className="text-sm font-medium truncate">{unit.title}</span>
-                          </div>
-                          <Badge
-                            variant={completedCount === 4 ? 'default' : 'secondary'}
-                            className={completedCount === 4 ? 'bg-green-500 text-white shrink-0' : 'shrink-0'}
-                          >
-                            {completedCount}/4
-                          </Badge>
-                        </div>
-                        <div className="flex items-center gap-3">
-                          {stages.map((stage) => (
-                            <div key={stage.key} className="flex items-center gap-1">
-                              {stage.completed ? (
-                                <CheckCircle className="h-3.5 w-3.5 text-green-500" />
-                              ) : stage.inProgress ? (
-                                <Circle className="h-3.5 w-3.5 text-amber-500 fill-amber-200 dark:fill-amber-900" />
-                              ) : (
-                                <Circle className="h-3.5 w-3.5 text-muted-foreground/40" />
-                              )}
-                              <span className={`text-xs ${stage.completed ? 'text-foreground' : stage.inProgress ? 'text-amber-600 font-medium dark:text-amber-400' : 'text-muted-foreground'}`}>
-                                {stage.label}
-                              </span>
-                            </div>
-                          ))}
-                        </div>
-                        {progress && (progress.vocab_quiz_score !== null || progress.vocab_spelling_score !== null || progress.passage_fill_blanks_best !== null || progress.passage_ordering_best !== null || progress.passage_translation_best !== null || progress.passage_grammar_vocab_best !== null || progress.grammar_total_videos > 0) && (
-                          <div className="flex gap-2 mt-2 flex-wrap">
-                            {progress.vocab_quiz_score !== null && (
-                              <span className={`text-xs px-1.5 py-0.5 rounded ${getVocabChip(progress.vocab_quiz_score)}`}>
-                                퀴즈 {progress.vocab_quiz_score}점
-                              </span>
-                            )}
-                            {progress.vocab_spelling_score !== null && (
-                              <span className={`text-xs px-1.5 py-0.5 rounded ${getVocabChip(progress.vocab_spelling_score)}`}>
-                                스펠링 {progress.vocab_spelling_score}점
-                              </span>
-                            )}
-                            {progress.passage_fill_blanks_best !== null && (
-                              <span className={`text-xs px-1.5 py-0.5 rounded ${passageChip}`}>
-                                빈칸 {progress.passage_fill_blanks_best}점
-                              </span>
-                            )}
-                            {progress.passage_ordering_best !== null && (
-                              <span className={`text-xs px-1.5 py-0.5 rounded ${passageChip}`}>
-                                순서 {progress.passage_ordering_best}점
-                              </span>
-                            )}
-                            {progress.passage_translation_best !== null && (
-                              <span className={`text-xs px-1.5 py-0.5 rounded ${passageChip}`}>
-                                영작 {progress.passage_translation_best}점
-                              </span>
-                            )}
-                            {progress.passage_grammar_vocab_best !== null && (
-                              <span className={`text-xs px-1.5 py-0.5 rounded ${passageChip}`}>
-                                어법/어휘 {progress.passage_grammar_vocab_best}점
-                              </span>
-                            )}
-                            {progress.grammar_total_videos > 0 && (
-                              <span className="text-xs px-1.5 py-0.5 rounded bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-300">
-                                영상 {progress.grammar_videos_completed}/{progress.grammar_total_videos}
-                              </span>
-                            )}
-                          </div>
-                        )}
-                        {progress?.updated_at && (
-                          <p className="text-xs text-muted-foreground mt-1">
-                            마지막 학습: {format(new Date(progress.updated_at), 'MM/dd HH:mm')}
-                          </p>
-                        )}
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
-
-              {/* 설정 영역 */}
-              <div className="space-y-4 border-t pt-4">
-                <div className="flex items-center gap-2 mb-2">
-                  <Settings className="h-4 w-4 text-muted-foreground" />
-                  <h4 className="text-sm font-semibold tracking-tight">설정</h4>
-                </div>
-                <div>
-                  <h5 className="text-sm font-medium text-muted-foreground mb-2">활성 단계</h5>
-                  <EnabledStagesManager
-                    studentId={studentId}
-                    initialStages={enabledStages as ('vocab' | 'passage' | 'grammar' | 'problem' | 'lastReview')[]}
-                  />
-                </div>
-                <div>
-                  <h5 className="text-sm font-medium text-muted-foreground mb-2">교과서 암기 단계</h5>
-                  <PassageStageManager
-                    studentId={studentId}
-                    initialStages={passageStages as ('fill_blanks' | 'ordering' | 'translation' | 'grammar_vocab')[]}
-                    initialTranslationSentencesPerPage={translationSentencesPerPage}
-                  />
-                </div>
-                <div>
-                  <h5 className="text-sm font-medium text-muted-foreground mb-2">시험 배정</h5>
-                  <ExamAssignmentManager
-                    studentId={studentId}
-                    textbookId={naesinData.textbookId}
-                    units={naesinData.units}
-                    assignments={naesinData.assignments}
-                  />
-                </div>
-              </div>
-            </CardContent>
-          </Card>
+          <NaesinProgressCard
+            studentId={studentId}
+            naesinData={naesinData}
+            naesinProgress={naesinProgress}
+            hours={hours}
+            minutes={minutes}
+            enabledStages={enabledStages as ('vocab' | 'passage' | 'grammar' | 'problem' | 'lastReview')[]}
+            passageStages={passageStages as ('fill_blanks' | 'ordering' | 'translation' | 'grammar_vocab')[]}
+            translationSentencesPerPage={translationSentencesPerPage}
+          />
         )}
 
-        {/* ── 올톡보카 서비스 카드 ── */}
+        {/* 올톡보카 서비스 카드 */}
         {hasVocaAssignment && (
-          <Card className="border-l-4 border-l-violet-500">
-            <CardHeader className="pb-4">
-              <div className="flex items-center gap-2">
-                <div className="rounded-full bg-violet-100 p-2 dark:bg-violet-950">
-                  <BookOpen className="h-5 w-5 text-violet-600 dark:text-violet-400" />
-                </div>
-                <CardTitle className="text-lg">올톡보카</CardTitle>
-              </div>
-            </CardHeader>
-            <CardContent className="space-y-6">
-              {/* 통계 3개 */}
-              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                <div className="rounded-lg border p-4">
-                  <div className="flex items-center justify-between mb-1">
-                    <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">완료 Day</p>
-                    <CheckCircle className="h-4 w-4 text-violet-600 dark:text-violet-400" />
-                  </div>
-                  <div className="text-2xl font-bold tracking-tight">{vocaCompletedDays}/{vocaTotalDays}</div>
-                  <p className="text-xs text-muted-foreground">모든 단계 완료된 Day</p>
-                </div>
-                <div className="rounded-lg border p-4">
-                  <div className="flex items-center justify-between mb-1">
-                    <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">평균 퀴즈</p>
-                    <ClipboardList className="h-4 w-4 text-pink-600 dark:text-pink-400" />
-                  </div>
-                  <div className="text-2xl font-bold tracking-tight">{vocaAvgQuiz !== null ? `${vocaAvgQuiz}점` : '-'}</div>
-                  <p className="text-xs text-muted-foreground">퀴즈 평균 점수</p>
-                </div>
-                <div className="rounded-lg border p-4">
-                  <div className="flex items-center justify-between mb-1">
-                    <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">평균 스펠링</p>
-                    <BookOpen className="h-4 w-4 text-orange-600 dark:text-orange-400" />
-                  </div>
-                  <div className="text-2xl font-bold tracking-tight">{vocaAvgSpelling !== null ? `${vocaAvgSpelling}점` : '-'}</div>
-                  <p className="text-xs text-muted-foreground">스펠링 평균 점수</p>
-                </div>
-              </div>
-
-              {/* Day별 진행률 */}
-              {vocaBooks.length > 0 && (
-                <div>
-                  <h4 className="text-sm font-semibold tracking-tight mb-2">Day별 진행률</h4>
-                  <div className="space-y-4">
-                    {vocaBooks.map(({ bookId, bookTitle, days }) => (
-                      <div key={bookId}>
-                        <h5 className="text-sm font-medium text-muted-foreground mb-2">{bookTitle}</h5>
-                        <div className="space-y-2">
-                          {days.map((vp) => {
-                            const day = vp.day!;
-                            const r1Done = vp.flashcard_completed && vp.quiz_score !== null && vp.spelling_score !== null && vp.matching_completed;
-                            const r2Done = vp.round2_flashcard_completed && vp.round2_quiz_score !== null && vp.round2_matching_completed;
-                            const allDone = r1Done && r2Done;
-                            const hasAny = vp.flashcard_completed || vp.quiz_score !== null || vp.spelling_score !== null || vp.matching_completed;
-
-                            const scoreChip = (score: number | null) => {
-                              if (score === null) return 'bg-slate-100 text-slate-500 dark:bg-slate-800 dark:text-slate-400';
-                              return score >= 80
-                                ? 'bg-green-100 text-green-700 dark:bg-green-950 dark:text-green-300'
-                                : 'bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-300';
-                            };
-
-                            return (
-                              <div
-                                key={vp.day_id}
-                                className={`rounded-lg border p-3 ${
-                                  allDone
-                                    ? 'border-l-4 border-l-green-500'
-                                    : hasAny
-                                      ? 'border-l-4 border-l-amber-400'
-                                      : 'border-l-4 border-l-slate-200 dark:border-l-slate-700'
-                                }`}
-                              >
-                                <div className="flex items-center justify-between mb-2">
-                                  <div className="flex items-center gap-2">
-                                    <Badge variant="outline" className="text-xs shrink-0">Day {day.day_number}</Badge>
-                                    <span className="text-sm font-medium truncate">{day.title}</span>
-                                  </div>
-                                  <Badge
-                                    variant={allDone ? 'default' : 'secondary'}
-                                    className={allDone ? 'bg-green-500 text-white shrink-0' : 'shrink-0'}
-                                  >
-                                    {allDone ? '완료' : r1Done ? 'R1 완료' : '진행중'}
-                                  </Badge>
-                                </div>
-
-                                {/* Round 1 */}
-                                <div className="flex gap-2 flex-wrap">
-                                  <span className="text-xs font-medium text-muted-foreground w-8">R1</span>
-                                  <span className={`text-xs px-1.5 py-0.5 rounded ${vp.flashcard_completed ? 'bg-green-100 text-green-700 dark:bg-green-950 dark:text-green-300' : 'bg-slate-100 text-slate-500 dark:bg-slate-800 dark:text-slate-400'}`}>
-                                    플래시카드 {vp.flashcard_completed ? '✓' : '-'}
-                                  </span>
-                                  {vp.quiz_score !== null && (
-                                    <span className={`text-xs px-1.5 py-0.5 rounded ${scoreChip(vp.quiz_score)}`}>
-                                      퀴즈 {vp.quiz_score}점
-                                    </span>
-                                  )}
-                                  {vp.spelling_score !== null && (
-                                    <span className={`text-xs px-1.5 py-0.5 rounded ${scoreChip(vp.spelling_score)}`}>
-                                      스펠링 {vp.spelling_score}점
-                                    </span>
-                                  )}
-                                  {vp.matching_score !== null && (
-                                    <span className={`text-xs px-1.5 py-0.5 rounded ${scoreChip(vp.matching_score)}`}>
-                                      매칭 {vp.matching_score}점
-                                    </span>
-                                  )}
-                                </div>
-
-                                {/* Round 2 */}
-                                {(vp.round2_flashcard_completed || vp.round2_quiz_score !== null || vp.round2_matching_score !== null) && (
-                                  <div className="flex gap-2 flex-wrap mt-1">
-                                    <span className="text-xs font-medium text-muted-foreground w-8">R2</span>
-                                    <span className={`text-xs px-1.5 py-0.5 rounded ${vp.round2_flashcard_completed ? 'bg-green-100 text-green-700 dark:bg-green-950 dark:text-green-300' : 'bg-slate-100 text-slate-500 dark:bg-slate-800 dark:text-slate-400'}`}>
-                                      플래시카드 {vp.round2_flashcard_completed ? '✓' : '-'}
-                                    </span>
-                                    {vp.round2_quiz_score !== null && (
-                                      <span className={`text-xs px-1.5 py-0.5 rounded ${scoreChip(vp.round2_quiz_score)}`}>
-                                        퀴즈 {vp.round2_quiz_score}점
-                                      </span>
-                                    )}
-                                    {vp.round2_matching_score !== null && (
-                                      <span className={`text-xs px-1.5 py-0.5 rounded ${scoreChip(vp.round2_matching_score)}`}>
-                                        매칭 {vp.round2_matching_score}점
-                                      </span>
-                                    )}
-                                  </div>
-                                )}
-
-                                {vp.updated_at && (
-                                  <p className="text-xs text-muted-foreground mt-1">
-                                    마지막 학습: {format(new Date(vp.updated_at), 'MM/dd HH:mm')}
-                                  </p>
-                                )}
-                              </div>
-                            );
-                          })}
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
-            </CardContent>
-          </Card>
+          <VocaProgressCard vocaProgress={vocaProgress} />
         )}
 
-        {/* ── 문법 학습 서비스 카드 ── */}
+        {/* 문법 학습 서비스 카드 */}
         {completedVideos > 0 && (
           <Card className="border-l-4 border-l-sky-500">
             <CardHeader className="pb-4">

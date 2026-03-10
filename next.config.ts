@@ -1,6 +1,28 @@
 import type { NextConfig } from "next";
 import { withSentryConfig } from "@sentry/nextjs";
 
+const isDev = process.env.NODE_ENV === "development";
+
+// CSP: XSS 공격의 핵심 방어 헤더
+// - unsafe-inline: Next.js 인라인 스크립트/Tailwind 인라인 스타일에 필요
+// - unsafe-eval: Next.js HMR(개발 모드 전용)에 필요
+// - frame-src https:: PDF iframe이 외부 URL일 수 있어 https 전체 허용
+const cspDirectives = [
+  "default-src 'self'",
+  `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ""} https://www.youtube.com`,
+  "style-src 'self' 'unsafe-inline'",
+  "img-src 'self' data: blob:",
+  "font-src 'self'",
+  "frame-src https://www.youtube.com https:",
+  "connect-src 'self' https://*.supabase.co https://*.sentry.io",
+  "worker-src 'self' blob:",
+  "object-src 'none'",
+  "base-uri 'self'",
+  "form-action 'self'",
+  "frame-ancestors 'none'",
+  "upgrade-insecure-requests",
+].join("; ");
+
 const nextConfig: NextConfig = {
   experimental: {
     staleTimes: {
@@ -13,7 +35,9 @@ const nextConfig: NextConfig = {
       {
         source: "/(.*)",
         headers: [
-          // 클릭재킹 방지 — iframe 삽입 차단
+          // CSP — XSS, 데이터 유출, 클릭재킹 방지
+          { key: "Content-Security-Policy", value: cspDirectives },
+          // 클릭재킹 방지 — CSP frame-ancestors 미지원 브라우저 대비
           { key: "X-Frame-Options", value: "DENY" },
           // MIME 스니핑 방지
           { key: "X-Content-Type-Options", value: "nosniff" },

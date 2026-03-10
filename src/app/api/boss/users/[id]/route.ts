@@ -1,12 +1,10 @@
 import { NextResponse } from 'next/server';
 import { createApiHandler, NotFoundError, ValidationError } from '@/lib/api';
-import { createAdminClient } from '@/lib/supabase/admin';
 import { userPatchSchema } from '@/lib/api/schemas';
 
 export const PATCH = createApiHandler(
   { roles: ['boss'], schema: userPatchSchema },
-  async ({ body, params }) => {
-    const admin = createAdminClient();
+  async ({ body, params, supabase }) => {
     const updates: Record<string, unknown> = {};
 
     if ('role' in body && body.role !== undefined) {
@@ -15,7 +13,7 @@ export const PATCH = createApiHandler(
 
     if ('academy_id' in body) {
       if (body.academy_id !== null && body.academy_id !== undefined) {
-        const { data: academy } = await admin
+        const { data: academy } = await supabase
           .from('academies')
           .select('id')
           .eq('id', body.academy_id)
@@ -34,7 +32,7 @@ export const PATCH = createApiHandler(
       throw new ValidationError('수정할 항목이 없습니다.');
     }
 
-    const { error } = await admin
+    const { error } = await supabase
       .from('users')
       .update(updates)
       .eq('id', params.id);

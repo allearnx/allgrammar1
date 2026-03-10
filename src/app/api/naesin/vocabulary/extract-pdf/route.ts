@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getUser } from '@/lib/auth/helpers';
+import { logger } from '@/lib/logger';
 import Anthropic from '@anthropic-ai/sdk';
 
 export const maxDuration = 120;
@@ -74,7 +75,7 @@ JSON 배열로만 응답 (다른 텍스트 없이):
     // Parse JSON array from response
     const jsonMatch = cleaned.match(/\[[\s\S]*\]/);
     if (!jsonMatch) {
-      console.error('AI raw response:', responseText);
+      logger.warn('ai.parse_fail', { raw: responseText.slice(0, 500) });
       throw new Error('AI 응답에서 JSON을 파싱할 수 없습니다.');
     }
 
@@ -82,7 +83,7 @@ JSON 배열로만 응답 (다른 텍스트 없이):
 
     return NextResponse.json({ items });
   } catch (error) {
-    console.error('PDF extraction error:', error);
+    logger.error('ai.pdf_extract', { error: error instanceof Error ? error.message : String(error) });
     const message = error instanceof Error ? error.message : 'Unknown error';
     return NextResponse.json(
       { error: `PDF 단어 추출 중 오류: ${message}` },

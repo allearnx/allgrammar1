@@ -5,6 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
 import { Badge } from '@/components/ui/badge';
 import { CheckCircle, Circle, BookOpen, FileText, GraduationCap, ClipboardList, Clock, BarChart3 } from 'lucide-react';
+import { scoreChipClass, passageChipClass, progressBorderClass } from '@/lib/utils/progress-styles';
 
 export default async function ProgressPage() {
   const user = await requireRole(['student']);
@@ -73,14 +74,7 @@ export default async function ProgressPage() {
     return acc + (p.vocab_completed ? 1 : 0) + (p.passage_completed ? 1 : 0) + (p.grammar_completed ? 1 : 0) + (p.problem_completed ? 1 : 0);
   }, 0);
 
-  // Score chip helpers — vocab green, passage blue
-  const getVocabChip = (score: number | null) => {
-    if (score === null) return '';
-    return score >= 80
-      ? 'bg-green-100 text-green-700 dark:bg-green-950 dark:text-green-300'
-      : 'bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-300';
-  };
-  const passageChip = 'bg-amber-100 text-amber-700 dark:bg-amber-950 dark:text-amber-300';
+  // Score chip helpers from shared utility
 
   return (
     <>
@@ -171,13 +165,7 @@ export default async function ProgressPage() {
               return (
                 <Card
                   key={unit.id}
-                  className={
-                    completedCount === 4
-                      ? 'border-l-4 border-l-green-500'
-                      : completedCount > 0
-                        ? 'border-l-4 border-l-amber-400'
-                        : 'border-l-4 border-l-slate-200 dark:border-l-slate-700'
-                  }
+                  className={progressBorderClass(completedCount, 4)}
                 >
                   <CardContent className="py-3">
                     <div className="flex items-center justify-between mb-2">
@@ -212,32 +200,32 @@ export default async function ProgressPage() {
                     {progress && (progress.vocab_quiz_score !== null || progress.vocab_spelling_score !== null || progress.passage_fill_blanks_best !== null || progress.passage_ordering_best !== null || progress.passage_translation_best !== null || progress.passage_grammar_vocab_best !== null) && (
                       <div className="flex gap-2 mt-2 flex-wrap">
                         {progress.vocab_quiz_score !== null && (
-                          <span className={`text-xs px-1.5 py-0.5 rounded ${getVocabChip(progress.vocab_quiz_score)}`}>
+                          <span className={`text-xs px-1.5 py-0.5 rounded ${scoreChipClass(progress.vocab_quiz_score)}`}>
                             퀴즈 {progress.vocab_quiz_score}점
                           </span>
                         )}
                         {progress.vocab_spelling_score !== null && (
-                          <span className={`text-xs px-1.5 py-0.5 rounded ${getVocabChip(progress.vocab_spelling_score)}`}>
+                          <span className={`text-xs px-1.5 py-0.5 rounded ${scoreChipClass(progress.vocab_spelling_score)}`}>
                             스펠링 {progress.vocab_spelling_score}점
                           </span>
                         )}
                         {progress.passage_fill_blanks_best !== null && (
-                          <span className={`text-xs px-1.5 py-0.5 rounded ${passageChip}`}>
+                          <span className={`text-xs px-1.5 py-0.5 rounded ${passageChipClass}`}>
                             빈칸 {progress.passage_fill_blanks_best}점
                           </span>
                         )}
                         {progress.passage_ordering_best !== null && (
-                          <span className={`text-xs px-1.5 py-0.5 rounded ${passageChip}`}>
+                          <span className={`text-xs px-1.5 py-0.5 rounded ${passageChipClass}`}>
                             순서 {progress.passage_ordering_best}점
                           </span>
                         )}
                         {progress.passage_translation_best !== null && (
-                          <span className={`text-xs px-1.5 py-0.5 rounded ${passageChip}`}>
+                          <span className={`text-xs px-1.5 py-0.5 rounded ${passageChipClass}`}>
                             영작 {progress.passage_translation_best}점
                           </span>
                         )}
                         {progress.passage_grammar_vocab_best !== null && (
-                          <span className={`text-xs px-1.5 py-0.5 rounded ${passageChip}`}>
+                          <span className={`text-xs px-1.5 py-0.5 rounded ${passageChipClass}`}>
                             어법/어휘 {progress.passage_grammar_vocab_best}점
                           </span>
                         )}
