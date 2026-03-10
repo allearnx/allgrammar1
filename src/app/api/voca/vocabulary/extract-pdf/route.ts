@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getUser } from '@/lib/auth/helpers';
 import Anthropic from '@anthropic-ai/sdk';
 
-export const maxDuration = 120;
+export const maxDuration = 300;
 
 const anthropic = new Anthropic();
 

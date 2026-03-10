@@ -103,8 +103,15 @@ function PdfBulkExtract({ bookId, onCreated }: { bookId: string; onCreated: () =
       });
 
       if (!res.ok) {
-        const data = await res.json();
-        throw new Error(data.error || '추출 실패');
+        const text = await res.text();
+        let errorMsg = '추출 실패';
+        try {
+          const data = JSON.parse(text);
+          errorMsg = data.error || errorMsg;
+        } catch {
+          errorMsg = res.status === 504 ? 'PDF가 너무 커서 시간이 초과되었습니다. 더 작은 파일로 시도해주세요.' : '서버 오류가 발생했습니다.';
+        }
+        throw new Error(errorMsg);
       }
 
       const data = await res.json();
