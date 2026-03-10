@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { z } from 'zod';
 import { createApiHandler } from '@/lib/api';
+import { checkRateLimit } from '@/lib/api/rate-limit';
 import Anthropic from '@anthropic-ai/sdk';
 
 const anthropic = new Anthropic();
@@ -14,34 +15,13 @@ const schema = z.object({
   })).min(1).max(50),
 });
 
-// Rate limit: per user, per hour
-const rateLimitMap = new Map<string, { count: number; resetAt: number }>();
-const RATE_LIMIT = 30;
-const RATE_WINDOW_MS = 60 * 60 * 1000;
-
 export const POST = createApiHandler(
   { schema },
   async ({ user, body }) => {
     const { sentences } = body;
 
-    // Rate limiting
-    const now = Date.now();
-    const userLimit = rateLimitMap.get(user.id);
-    if (userLimit) {
-      if (now < userLimit.resetAt) {
-        if (userLimit.count >= RATE_LIMIT) {
-          return NextResponse.json(
-            { error: '시간당 채점 횟수를 초과했습니다. 잠시 후 다시 시도해주세요.' },
-            { status: 429 }
-          );
-        }
-        userLimit.count++;
-      } else {
-        rateLimitMap.set(user.id, { count: 1, resetAt: now + RATE_WINDOW_MS });
-      }
-    } else {
-      rateLimitMap.set(user.id, { count: 1, resetAt: now + RATE_WINDOW_MS });
-    }
+    const limited = checkRateLimit(user.id, 'naesin/grade-translation', 30);
+    if (limited) return limited;
 
     // 1) Exact match first — skip AI for perfect matches
     type ResultItem = { score: number; feedback: string; correctedSentence: string };

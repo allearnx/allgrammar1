@@ -1,38 +1,18 @@
 import { NextResponse } from 'next/server';
 import { createApiHandler } from '@/lib/api';
 import { gradeTranslationBatchSchema } from '@/lib/api/schemas';
+import { checkRateLimit } from '@/lib/api/rate-limit';
 import Anthropic from '@anthropic-ai/sdk';
 
 const anthropic = new Anthropic();
-
-// Rate limit: per user, per hour (counts per submission, not per sentence)
-const rateLimitMap = new Map<string, { count: number; resetAt: number }>();
-const RATE_LIMIT = 20;
-const RATE_WINDOW_MS = 60 * 60 * 1000;
 
 export const POST = createApiHandler(
   { schema: gradeTranslationBatchSchema },
   async ({ user, body }) => {
     const { sentences } = body;
 
-    // Rate limiting (1 count per batch submission)
-    const now = Date.now();
-    const userLimit = rateLimitMap.get(user.id);
-    if (userLimit) {
-      if (now < userLimit.resetAt) {
-        if (userLimit.count >= RATE_LIMIT) {
-          return NextResponse.json(
-            { error: '시간당 채점 횟수를 초과했습니다. 잠시 후 다시 시도해주세요.' },
-            { status: 429 }
-          );
-        }
-        userLimit.count++;
-      } else {
-        rateLimitMap.set(user.id, { count: 1, resetAt: now + RATE_WINDOW_MS });
-      }
-    } else {
-      rateLimitMap.set(user.id, { count: 1, resetAt: now + RATE_WINDOW_MS });
-    }
+    const limited = checkRateLimit(user.id, 'textbook/grade-translation-batch', 20);
+    if (limited) return limited;
 
     try {
       const sentenceList = sentences

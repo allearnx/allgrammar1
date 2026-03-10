@@ -1,14 +1,10 @@
 import { NextResponse } from 'next/server';
 import { createApiHandler } from '@/lib/api';
 import { gradeTranslationSchema } from '@/lib/api/schemas';
+import { checkRateLimit } from '@/lib/api/rate-limit';
 import Anthropic from '@anthropic-ai/sdk';
 
 const anthropic = new Anthropic();
-
-// Simple in-memory rate limit (per user, per hour)
-const rateLimitMap = new Map<string, { count: number; resetAt: number }>();
-const RATE_LIMIT = 10;
-const RATE_WINDOW_MS = 60 * 60 * 1000; // 1 hour
 
 // Simple cache for identical requests
 const responseCache = new Map<string, { result: unknown; expiresAt: number }>();
@@ -19,26 +15,11 @@ export const POST = createApiHandler(
   async ({ user, body }) => {
     const { koreanText, originalText, studentAnswer } = body;
 
-    // Rate limiting
-    const now = Date.now();
-    const userLimit = rateLimitMap.get(user.id);
-    if (userLimit) {
-      if (now < userLimit.resetAt) {
-        if (userLimit.count >= RATE_LIMIT) {
-          return NextResponse.json(
-            { error: '시간당 채점 횟수(10회)를 초과했습니다. 잠시 후 다시 시도해주세요.' },
-            { status: 429 }
-          );
-        }
-        userLimit.count++;
-      } else {
-        rateLimitMap.set(user.id, { count: 1, resetAt: now + RATE_WINDOW_MS });
-      }
-    } else {
-      rateLimitMap.set(user.id, { count: 1, resetAt: now + RATE_WINDOW_MS });
-    }
+    const limited = checkRateLimit(user.id, 'textbook/grade-translation', 10);
+    if (limited) return limited;
 
     // Check cache
+    const now = Date.now();
     const cacheKey = `${koreanText}::${studentAnswer.trim().toLowerCase()}`;
     const cached = responseCache.get(cacheKey);
     if (cached && now < cached.expiresAt) {

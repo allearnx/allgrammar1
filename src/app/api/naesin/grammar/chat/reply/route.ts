@@ -1,39 +1,19 @@
 import { NextResponse } from 'next/server';
 import { createApiHandler } from '@/lib/api';
 import { grammarChatReplySchema } from '@/lib/api/schemas';
+import { checkRateLimit } from '@/lib/api/rate-limit';
 import Anthropic from '@anthropic-ai/sdk';
 import type { NaesinGrammarChatMessage } from '@/types/database';
 
 const anthropic = new Anthropic();
-
-// Rate limit: 30 requests per hour per user
-const rateLimitMap = new Map<string, { count: number; resetAt: number }>();
-const RATE_LIMIT = 30;
-const RATE_WINDOW_MS = 60 * 60 * 1000;
 
 export const POST = createApiHandler(
   { schema: grammarChatReplySchema },
   async ({ user, body, supabase }) => {
     const { sessionId, message } = body;
 
-    // Rate limiting
-    const now = Date.now();
-    const userLimit = rateLimitMap.get(user.id);
-    if (userLimit) {
-      if (now < userLimit.resetAt) {
-        if (userLimit.count >= RATE_LIMIT) {
-          return NextResponse.json(
-            { error: '시간당 대화 횟수(30회)를 초과했습니다. 잠시 후 다시 시도해주세요.' },
-            { status: 429 }
-          );
-        }
-        userLimit.count++;
-      } else {
-        rateLimitMap.set(user.id, { count: 1, resetAt: now + RATE_WINDOW_MS });
-      }
-    } else {
-      rateLimitMap.set(user.id, { count: 1, resetAt: now + RATE_WINDOW_MS });
-    }
+    const limited = checkRateLimit(user.id, 'grammar/chat/reply', 30);
+    if (limited) return limited;
 
     // Get session
     const { data: session } = await supabase
