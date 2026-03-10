@@ -48,7 +48,7 @@ export const PATCH = createApiHandler(
 
 // DELETE — 단어 삭제
 export const DELETE = createApiHandler(
-  { roles: ['teacher', 'admin', 'boss'], schema: idSchema },
+  { roles: ['teacher', 'admin', 'boss'], schema: idSchema, hasBody: true },
   async ({ body, supabase }) => {
     const { error } = await supabase
       .from('voca_vocabulary')

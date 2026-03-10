@@ -33,7 +33,7 @@ export const POST = createApiHandler(
 
 // DELETE — boss/admin이 서비스 배정 해제
 export const DELETE = createApiHandler(
-  { roles: ['boss', 'admin'], schema: serviceAssignmentDeleteSchema },
+  { roles: ['boss', 'admin'], schema: serviceAssignmentDeleteSchema, hasBody: true },
   async ({ body }) => {
     const admin = createAdminClient();
     const { error } = await admin

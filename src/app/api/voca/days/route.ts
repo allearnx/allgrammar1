@@ -33,7 +33,7 @@ export const POST = createApiHandler(
 
 // DELETE — Day 삭제 (admin client로 RLS 우회 — student progress CASCADE 삭제 허용)
 export const DELETE = createApiHandler(
-  { roles: ['teacher', 'admin', 'boss'], schema: idSchema },
+  { roles: ['teacher', 'admin', 'boss'], schema: idSchema, hasBody: true },
   async ({ body }) => {
     const admin = createAdminClient();
     const { error } = await admin

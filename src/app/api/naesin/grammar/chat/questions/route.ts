@@ -89,7 +89,7 @@ export const PATCH = createApiHandler(
 
 // DELETE: Delete a question
 export const DELETE = createApiHandler(
-  { roles: ['teacher', 'admin', 'boss'] },
+  { roles: ['teacher', 'admin', 'boss'], hasBody: true },
   async ({ body, supabase }) => {
     const parsed = idSchema.safeParse(body);
     if (!parsed.success) {
