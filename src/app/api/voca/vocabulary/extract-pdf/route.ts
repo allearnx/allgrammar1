@@ -7,54 +7,40 @@ export const maxDuration = 120;
 
 const anthropic = new Anthropic();
 
-const CHUNK_SIZE = 3000; // 청크당 ~3000자 → 각 요청 10~20초
-
 const PROMPT = `아래 텍스트에서 영어 단어를 추출해주세요.
 
 규칙:
 - 중복 없이 핵심 단어만 선별
 - 관사(a, the), 전치사(in, on), 대명사(I, you) 등 기본 단어 제외
 - 고유명사 제외
-- 각 단어에 관련 숙어가 있으면 idioms 배열에 포함
 
 JSON 배열로만 응답 (다른 텍스트 없이):
-[
-  {
-    "front_text": "영어 단어",
-    "back_text": "한국어 뜻",
-    "part_of_speech": "n./v./adj./adv.",
-    "example_sentence": "텍스트에서 가져온 예문 또는 자연스러운 예문",
-    "synonyms": "유의어 (없으면 null)",
-    "antonyms": "반의어 (없으면 null)",
-    "idioms": [{"en": "영어 숙어", "ko": "한국어 뜻", "example_en": "예문(영어)", "example_ko": "예문(한국어)"}]
-  }
-]
-idioms가 없으면 null로 표시.`;
+[{"w":"영어 단어","m":"한국어 뜻","p":"n."}]
+w=단어, m=뜻, p=품사(n./v./adj./adv./prep./conj.)`;
 
-function splitIntoChunks(text: string, maxLen: number): string[] {
-  const chunks: string[] = [];
-  let start = 0;
-  while (start < text.length) {
-    let end = Math.min(start + maxLen, text.length);
-    // 문장 중간에서 자르지 않도록 마지막 줄바꿈/마침표 위치에서 자르기
-    if (end < text.length) {
-      const lastBreak = text.lastIndexOf('\n', end);
-      if (lastBreak > start) end = lastBreak + 1;
+// 페이지 텍스트를 ~6000자 이하 그룹으로 묶기
+function groupPages(pages: string[], maxLen: number): string[] {
+  const groups: string[] = [];
+  let current = '';
+  for (const page of pages) {
+    if (current && current.length + page.length > maxLen) {
+      groups.push(current);
+      current = '';
     }
-    chunks.push(text.slice(start, end));
-    start = end;
+    current += (current ? '\n' : '') + page;
   }
-  return chunks;
+  if (current) groups.push(current);
+  return groups;
 }
 
 async function extractChunk(chunk: string): Promise<unknown[]> {
   const stream = anthropic.messages.stream({
     model: 'claude-haiku-4-5-20251001',
-    max_tokens: 16384,
+    max_tokens: 8192,
     messages: [
       {
         role: 'user',
-        content: `${PROMPT}\n\n--- 텍스트 시작 ---\n${chunk}\n--- 텍스트 끝 ---`,
+        content: `${PROMPT}\n\n---\n${chunk}\n---`,
       },
     ],
   });
@@ -64,7 +50,18 @@ async function extractChunk(chunk: string): Promise<unknown[]> {
   const cleaned = responseText.replace(/```(?:json)?\s*/g, '').replace(/```\s*/g, '').trim();
   const jsonMatch = cleaned.match(/\[[\s\S]*\]/);
   if (!jsonMatch) return [];
-  return JSON.parse(jsonMatch[0]);
+
+  // 간소화 필드 → 기존 형식으로 변환
+  const raw = JSON.parse(jsonMatch[0]);
+  return raw.map((item: { w: string; m: string; p?: string }) => ({
+    front_text: item.w,
+    back_text: item.m,
+    part_of_speech: item.p || null,
+    example_sentence: null,
+    synonyms: null,
+    antonyms: null,
+    idioms: null,
+  }));
 }
 
 export async function POST(request: NextRequest) {
@@ -81,20 +78,21 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'PDF 파일을 업로드해주세요.' }, { status: 400 });
     }
 
-    // PDF 텍스트 추출 (서버리스 호환)
+    // PDF 텍스트 추출 — 페이지 단위 (서버리스 호환)
     const arrayBuffer = await file.arrayBuffer();
-    const { text } = await extractText(new Uint8Array(arrayBuffer), { mergePages: true });
-    const pdfText = (text as string).trim();
+    const { text: pages, totalPages } = await extractText(new Uint8Array(arrayBuffer), { mergePages: false });
+    const pageTexts = (pages as string[]).filter((p) => p.trim());
 
-    if (!pdfText) {
+    if (pageTexts.length === 0) {
       return NextResponse.json(
         { error: '텍스트를 추출할 수 없는 PDF입니다. (스캔/이미지 PDF는 지원하지 않습니다)' },
         { status: 400 }
       );
     }
 
-    // 텍스트를 청크로 분할 → 병렬 처리 (각 청크 10~20초, 전체 동시 실행)
-    const chunks = splitIntoChunks(pdfText, CHUNK_SIZE);
+    // 페이지를 ~6000자 그룹으로 묶어 병렬 처리
+    const chunks = groupPages(pageTexts, 6000);
+    console.log(`PDF ${totalPages}p → ${chunks.length} chunks 병렬 처리`);
     const results = await Promise.all(chunks.map(extractChunk));
 
     // 결과 병합 + 중복 제거 (front_text 기준)
