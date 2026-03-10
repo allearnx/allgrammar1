@@ -93,45 +93,55 @@ export function NaesinFlashcardView({
           style={{
             transformStyle: 'preserve-3d',
             transform: flipped ? 'rotateY(180deg)' : 'rotateY(0deg)',
-            minHeight: '220px',
+            minHeight: '240px',
           }}
         >
-          <Card
-            className="absolute inset-0 flex items-center justify-center border-0 bg-gradient-to-br from-violet-500 to-indigo-600 text-white shadow-lg"
+          {/* Front — English word */}
+          <div
+            className="absolute inset-0 flex flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-[0_4px_24px_-4px_rgba(0,0,0,0.08)] dark:border-slate-800 dark:bg-slate-900 dark:shadow-[0_4px_24px_-4px_rgba(0,0,0,0.4)]"
             style={{ backfaceVisibility: 'hidden' }}
           >
-            <CardContent className="text-center py-12 px-6">
-              <p className="text-3xl font-medium">{item.front_text}</p>
-              <p className="text-sm text-white/60 mt-4">탭하여 뒤집기</p>
-            </CardContent>
-          </Card>
+            <div className="h-1.5 bg-gradient-to-r from-teal-400 via-cyan-400 to-sky-400" />
+            <div className="flex flex-1 flex-col items-center justify-center px-6 py-10">
+              <p className="text-3xl font-semibold tracking-tight text-slate-900 dark:text-white">{item.front_text}</p>
+              <p className="mt-4 text-sm text-slate-400 dark:text-slate-500">탭하여 뒤집기</p>
+            </div>
+          </div>
 
-          <Card
-            className="absolute inset-0 flex items-center justify-center border-0 bg-gradient-to-br from-amber-400 to-orange-500 text-white shadow-lg"
+          {/* Back — Korean meaning */}
+          <div
+            className="absolute inset-0 flex flex-col overflow-hidden rounded-2xl border border-slate-200 bg-stone-50 shadow-[0_4px_24px_-4px_rgba(0,0,0,0.08)] dark:border-slate-800 dark:bg-slate-900 dark:shadow-[0_4px_24px_-4px_rgba(0,0,0,0.4)]"
             style={{ backfaceVisibility: 'hidden', transform: 'rotateY(180deg)' }}
           >
-            <CardContent className="text-center py-8 px-6">
+            <div className="h-1.5 bg-gradient-to-r from-rose-400 via-orange-300 to-amber-300" />
+            <div className="flex flex-1 flex-col items-center justify-center px-6 py-8">
               {vocab?.part_of_speech && (
-                <p className="text-lg text-white/70 mb-1">{vocab.part_of_speech}</p>
+                <span className="mb-2 rounded-full bg-slate-200/70 px-2.5 py-0.5 text-xs font-medium text-slate-500 dark:bg-slate-800 dark:text-slate-400">
+                  {vocab.part_of_speech}
+                </span>
               )}
-              <p className="text-3xl font-medium">{item.back_text}</p>
+              <p className="text-3xl font-semibold tracking-tight text-slate-900 dark:text-white">{item.back_text}</p>
               {(vocab?.synonyms || vocab?.antonyms) && (
-                <div className="mt-3 flex flex-wrap justify-center gap-x-3 gap-y-1">
+                <div className="mt-3 flex flex-wrap justify-center gap-2">
                   {vocab.synonyms && (
-                    <span className="text-sm px-2 py-0.5 rounded-full bg-white/25 backdrop-blur-sm">= {vocab.synonyms}</span>
+                    <span className="rounded-full bg-teal-100 px-2.5 py-0.5 text-sm font-medium text-teal-700 dark:bg-teal-950 dark:text-teal-300">
+                      = {vocab.synonyms}
+                    </span>
                   )}
                   {vocab.antonyms && (
-                    <span className="text-sm px-2 py-0.5 rounded-full bg-white/25 backdrop-blur-sm">&harr; {vocab.antonyms}</span>
+                    <span className="rounded-full bg-rose-100 px-2.5 py-0.5 text-sm font-medium text-rose-600 dark:bg-rose-950 dark:text-rose-300">
+                      &harr; {vocab.antonyms}
+                    </span>
                   )}
                 </div>
               )}
               {vocab?.example_sentence && (
-                <p className="text-lg text-white/70 mt-4 italic">
+                <p className="mt-4 text-center text-base italic text-slate-500 dark:text-slate-400">
                   &ldquo;{vocab.example_sentence}&rdquo;
                 </p>
               )}
-            </CardContent>
-          </Card>
+            </div>
+          </div>
         </div>
       </div>
 

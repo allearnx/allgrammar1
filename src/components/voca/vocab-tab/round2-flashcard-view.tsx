@@ -112,30 +112,32 @@ export function Round2FlashcardView({ vocabulary, onComplete }: Round2FlashcardV
         <Badge variant="outline">2회독</Badge>
       </div>
 
-      <Card
-        className={cn(
-          'cursor-pointer min-h-[200px] flex items-center justify-center transition-all border-0 shadow-lg',
-          flipped
-            ? 'bg-gradient-to-br from-amber-400 to-orange-500 text-white'
-            : 'bg-gradient-to-br from-violet-500 to-indigo-600 text-white'
-        )}
+      <div
+        className="cursor-pointer overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-[0_4px_24px_-4px_rgba(0,0,0,0.08)] transition-all dark:border-slate-800 dark:bg-slate-900 dark:shadow-[0_4px_24px_-4px_rgba(0,0,0,0.4)]"
         onClick={() => setFlipped(!flipped)}
+        style={{ minHeight: '220px' }}
       >
-        <CardContent className="py-8 text-center w-full">
+        <div className={cn(
+          'h-1.5',
+          flipped
+            ? 'bg-gradient-to-r from-rose-400 via-orange-300 to-amber-300'
+            : 'bg-gradient-to-r from-teal-400 via-cyan-400 to-sky-400'
+        )} />
+        <div className="flex flex-col items-center justify-center px-6 py-8" style={{ minHeight: '200px' }}>
           {!flipped ? (
-            <div>
-              <p className="text-2xl font-bold">{card.front}</p>
-              <p className="text-xs text-white/60 mt-2">탭하여 뒤집기</p>
+            <div className="text-center">
+              <p className="text-2xl font-semibold tracking-tight text-slate-900 dark:text-white">{card.front}</p>
+              <p className="mt-2 text-xs text-slate-400 dark:text-slate-500">탭하여 뒤집기</p>
             </div>
           ) : (
-            <div className="space-y-2 text-left px-4">
-              <p className="text-lg font-semibold text-center mb-3">{card.word}</p>
+            <div className="w-full space-y-2 text-left">
+              <p className="mb-3 text-center text-lg font-semibold text-slate-900 dark:text-white">{card.word}</p>
               {card.back.map((line, i) => (
                 <p
                   key={i}
                   className={cn(
-                    'text-sm',
-                    line.startsWith('  예)') && 'text-white/70 ml-4 italic'
+                    'text-sm text-slate-700 dark:text-slate-300',
+                    line.startsWith('  예)') && 'ml-4 italic text-slate-500 dark:text-slate-400'
                   )}
                 >
                   {line}
@@ -143,8 +145,8 @@ export function Round2FlashcardView({ vocabulary, onComplete }: Round2FlashcardV
               ))}
             </div>
           )}
-        </CardContent>
-      </Card>
+        </div>
+      </div>
 
       <div className="flex justify-between">
         <Button variant="outline" size="sm" onClick={handlePrev} disabled={currentIdx === 0}>
