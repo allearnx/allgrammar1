@@ -306,6 +306,7 @@ export const quizResultCreateSchema = z.object({
 
 export const reportGenerateSchema = z.object({
   studentId: ID,
+  reportType: z.enum(['all', 'naesin', 'voca']).default('all'),
 });
 
 // ── 올톡보카 Schemas ──

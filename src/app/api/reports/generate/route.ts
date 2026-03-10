@@ -93,7 +93,7 @@ function avgNullableScore(values: (number | null)[]): number | null {
 export const POST = createApiHandler(
   { roles: ['teacher', 'admin', 'boss'], schema: reportGenerateSchema },
   async ({ body, supabase, user }) => {
-    const { studentId } = body;
+    const { studentId, reportType } = body;
 
     // Get student info
     const { data: student } = await supabase
@@ -191,8 +191,8 @@ export const POST = createApiHandler(
 
     // ── 서비스 배정 확인 ──
     const services = (serviceRes.data || []).map((s) => s.service as 'naesin' | 'voca');
-    const hasNaesin = services.includes('naesin');
-    const hasVoca = services.includes('voca');
+    const hasNaesin = services.includes('naesin') && reportType !== 'voca';
+    const hasVoca = services.includes('voca') && reportType !== 'naesin';
 
     // ── 내신 대비 집계 ──
     let naesin: ReportNaesinStats | null = null;
@@ -282,6 +282,7 @@ export const POST = createApiHandler(
 
     // ── 리포트 조립 ──
     const report: EnhancedReportData = {
+      reportType,
       student: `${student.full_name} (${student.email})`,
       generatedAt: format(new Date(), 'yyyy-MM-dd HH:mm'),
       videoProgress: {

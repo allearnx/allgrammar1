@@ -65,6 +65,8 @@ export interface ReportVocaStats {
 
 /** API 응답 전체 구조 (= stats JSONB에 저장되는 구조) */
 export interface EnhancedReportData {
+  /** 리포트 타입: 전체 / 내신 / 올톡보카 */
+  reportType?: 'all' | 'naesin' | 'voca';
   student: string;
   generatedAt: string;
   videoProgress: ReportVideoProgress;

@@ -51,6 +51,7 @@ interface ReportsClientProps {
 
 export function ReportsClient({ students }: ReportsClientProps) {
   const [selectedStudent, setSelectedStudent] = useState('');
+  const [reportType, setReportType] = useState<'all' | 'naesin' | 'voca'>('all');
   const [loading, setLoading] = useState(false);
   const [report, setReport] = useState<EnhancedReportData | null>(null);
   const [history, setHistory] = useState<WeeklyReportRow[]>([]);
@@ -66,7 +67,7 @@ export function ReportsClient({ students }: ReportsClientProps) {
       const response = await fetch('/api/reports/generate', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ studentId: selectedStudent }),
+        body: JSON.stringify({ studentId: selectedStudent, reportType }),
       });
 
       if (!response.ok) {
@@ -137,6 +138,16 @@ export function ReportsClient({ students }: ReportsClientProps) {
             ))}
           </SelectContent>
         </Select>
+        <Select value={reportType} onValueChange={(v) => setReportType(v as 'all' | 'naesin' | 'voca')}>
+          <SelectTrigger className="w-[160px]">
+            <SelectValue />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="all">전체</SelectItem>
+            <SelectItem value="naesin">내신</SelectItem>
+            <SelectItem value="voca">올톡보카</SelectItem>
+          </SelectContent>
+        </Select>
         <Button onClick={handleGenerate} disabled={!selectedStudent || loading}>
           {loading ? (
             <>
@@ -204,9 +215,11 @@ export function ReportsClient({ students }: ReportsClientProps) {
             <p className="text-muted-foreground">{report.student}</p>
           </CardHeader>
           <CardContent>
-            <Tabs defaultValue="summary">
+            <Tabs defaultValue={report.reportType === 'naesin' ? 'naesin' : report.reportType === 'voca' ? 'voca' : 'summary'}>
               <TabsList>
-                <TabsTrigger value="summary">요약</TabsTrigger>
+                {(!report.reportType || report.reportType === 'all') && (
+                  <TabsTrigger value="summary">요약</TabsTrigger>
+                )}
                 {report.naesin && (
                   <TabsTrigger value="naesin">내신 대비</TabsTrigger>
                 )}

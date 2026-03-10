@@ -3,7 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { notFound } from 'next/navigation';
 import { format } from 'date-fns';
-import { CheckCircle, Circle, BookOpen, FileText, GraduationCap, ClipboardList, Clock } from 'lucide-react';
+import { CheckCircle, Circle, BookOpen, FileText, GraduationCap, ClipboardList, Clock, Settings } from 'lucide-react';
 import type { AuthUser } from '@/types/auth';
 import type { NaesinExamAssignment, NaesinUnit } from '@/types/database';
 import { ExamAssignmentManager } from './exam-assignment-manager';
@@ -186,87 +186,85 @@ export async function StudentDetail({ user, studentId, naesinData }: Props) {
           </CardContent>
         </Card>
 
-        {/* Naesin Progress (primary) */}
+        {/* ── 내신 대비 서비스 카드 ── */}
         {naesinData && naesinUnits.length > 0 && (
-          <>
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              <Card className="border-l-4 border-l-green-500">
-                <CardHeader className="flex flex-row items-center justify-between pb-2">
-                  <CardTitle className="text-xs font-medium uppercase tracking-wider text-muted-foreground">내신 단계 완료</CardTitle>
-                  <div className="rounded-full bg-green-100 p-2 dark:bg-green-950">
+          <Card className="border-l-4 border-l-green-500">
+            <CardHeader className="pb-4">
+              <div className="flex items-center gap-2">
+                <div className="rounded-full bg-green-100 p-2 dark:bg-green-950">
+                  <GraduationCap className="h-5 w-5 text-green-600 dark:text-green-400" />
+                </div>
+                <CardTitle className="text-lg">내신 대비</CardTitle>
+                <Badge variant="outline" className="text-xs">{naesinData.textbookName}</Badge>
+              </div>
+            </CardHeader>
+            <CardContent className="space-y-6">
+              {/* 통계 3개 */}
+              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                <div className="rounded-lg border p-4">
+                  <div className="flex items-center justify-between mb-1">
+                    <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">내신 단계 완료</p>
                     <CheckCircle className="h-4 w-4 text-green-600 dark:text-green-400" />
                   </div>
-                </CardHeader>
-                <CardContent>
                   <div className="text-2xl font-bold tracking-tight">{naesinStagesCompleted}/{naesinTotalStages}</div>
                   <p className="text-xs text-muted-foreground">전체 단계 중</p>
-                </CardContent>
-              </Card>
-              <Card className="border-l-4 border-l-indigo-500">
-                <CardHeader className="flex flex-row items-center justify-between pb-2">
-                  <CardTitle className="text-xs font-medium uppercase tracking-wider text-muted-foreground">완료 단원</CardTitle>
-                  <div className="rounded-full bg-indigo-100 p-2 dark:bg-indigo-950">
+                </div>
+                <div className="rounded-lg border p-4">
+                  <div className="flex items-center justify-between mb-1">
+                    <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">완료 단원</p>
                     <BookOpen className="h-4 w-4 text-indigo-600 dark:text-indigo-400" />
                   </div>
-                </CardHeader>
-                <CardContent>
                   <div className="text-2xl font-bold tracking-tight">
                     {naesinProgress.filter((p) => p.vocab_completed && p.passage_completed && p.grammar_completed && p.problem_completed).length}/{naesinUnits.length}
                   </div>
                   <p className="text-xs text-muted-foreground">모든 단계 완료된 단원</p>
-                </CardContent>
-              </Card>
-              <Card className="border-l-4 border-l-sky-500">
-                <CardHeader className="flex flex-row items-center justify-between pb-2">
-                  <CardTitle className="text-xs font-medium uppercase tracking-wider text-muted-foreground">총 학습 시간</CardTitle>
-                  <div className="rounded-full bg-sky-100 p-2 dark:bg-sky-950">
+                </div>
+                <div className="rounded-lg border p-4">
+                  <div className="flex items-center justify-between mb-1">
+                    <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">총 학습 시간</p>
                     <Clock className="h-4 w-4 text-sky-600 dark:text-sky-400" />
                   </div>
-                </CardHeader>
-                <CardContent>
                   <div className="text-2xl font-bold tracking-tight">{hours > 0 ? `${hours}h ` : ''}{minutes}m</div>
                   <p className="text-xs text-muted-foreground">영상 시청 시간 기준</p>
-                </CardContent>
-              </Card>
-            </div>
+                </div>
+              </div>
 
-            <div>
-              <h3 className="text-lg font-semibold tracking-tight mb-3">단원별 내신 진행률 — {naesinData.textbookName}</h3>
-              <div className="space-y-2">
-                {naesinUnits.map((unit) => {
-                  const progress = naesinProgressMap.get(unit.id);
-                  const hasPassageScore = !!progress && (progress.passage_fill_blanks_best != null || progress.passage_ordering_best != null || progress.passage_translation_best != null || progress.passage_grammar_vocab_best != null);
-                  const hasGrammarProgress = !!progress && (progress.grammar_videos_completed ?? 0) > 0;
+              {/* 단원별 진행률 */}
+              <div>
+                <h4 className="text-sm font-semibold tracking-tight mb-2">단원별 진행률</h4>
+                <div className="space-y-2">
+                  {naesinUnits.map((unit) => {
+                    const progress = naesinProgressMap.get(unit.id);
+                    const hasPassageScore = !!progress && (progress.passage_fill_blanks_best != null || progress.passage_ordering_best != null || progress.passage_translation_best != null || progress.passage_grammar_vocab_best != null);
+                    const hasGrammarProgress = !!progress && (progress.grammar_videos_completed ?? 0) > 0;
 
-                  const stages = [
-                    { key: 'vocab', label: '단어', icon: BookOpen, completed: progress?.vocab_completed ?? false, inProgress: false },
-                    { key: 'passage', label: '교과서 암기', icon: FileText, completed: progress?.passage_completed ?? false, inProgress: !progress?.passage_completed && hasPassageScore },
-                    { key: 'grammar', label: '문법', icon: GraduationCap, completed: progress?.grammar_completed ?? false, inProgress: !progress?.grammar_completed && hasGrammarProgress },
-                    { key: 'problem', label: '문제', icon: ClipboardList, completed: progress?.problem_completed ?? false, inProgress: false },
-                  ];
-                  const completedCount = stages.filter((s) => s.completed).length;
+                    const stages = [
+                      { key: 'vocab', label: '단어', icon: BookOpen, completed: progress?.vocab_completed ?? false, inProgress: false },
+                      { key: 'passage', label: '교과서 암기', icon: FileText, completed: progress?.passage_completed ?? false, inProgress: !progress?.passage_completed && hasPassageScore },
+                      { key: 'grammar', label: '문법', icon: GraduationCap, completed: progress?.grammar_completed ?? false, inProgress: !progress?.grammar_completed && hasGrammarProgress },
+                      { key: 'problem', label: '문제', icon: ClipboardList, completed: progress?.problem_completed ?? false, inProgress: false },
+                    ];
+                    const completedCount = stages.filter((s) => s.completed).length;
 
-                  // Score chip helpers — vocab green, passage blue
-                  const getVocabChip = (score: number | null) => {
-                    if (score === null) return '';
-                    return score >= 80
-                      ? 'bg-green-100 text-green-700 dark:bg-green-950 dark:text-green-300'
-                      : 'bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-300';
-                  };
-                  const passageChip = 'bg-amber-100 text-amber-700 dark:bg-amber-950 dark:text-amber-300';
+                    const getVocabChip = (score: number | null) => {
+                      if (score === null) return '';
+                      return score >= 80
+                        ? 'bg-green-100 text-green-700 dark:bg-green-950 dark:text-green-300'
+                        : 'bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-300';
+                    };
+                    const passageChip = 'bg-amber-100 text-amber-700 dark:bg-amber-950 dark:text-amber-300';
 
-                  return (
-                    <Card
-                      key={unit.id}
-                      className={
-                        completedCount === 4
-                          ? 'border-l-4 border-l-green-500'
-                          : completedCount > 0
-                            ? 'border-l-4 border-l-amber-400'
-                            : 'border-l-4 border-l-slate-200 dark:border-l-slate-700'
-                      }
-                    >
-                      <CardContent className="py-3">
+                    return (
+                      <div
+                        key={unit.id}
+                        className={`rounded-lg border p-3 ${
+                          completedCount === 4
+                            ? 'border-l-4 border-l-green-500'
+                            : completedCount > 0
+                              ? 'border-l-4 border-l-amber-400'
+                              : 'border-l-4 border-l-slate-200 dark:border-l-slate-700'
+                        }`}
+                      >
                         <div className="flex items-center justify-between mb-2">
                           <div className="flex items-center gap-2">
                             <Badge variant="outline" className="text-xs shrink-0">L{unit.unit_number}</Badge>
@@ -339,91 +337,121 @@ export async function StudentDetail({ user, studentId, naesinData }: Props) {
                             마지막 학습: {format(new Date(progress.updated_at), 'MM/dd HH:mm')}
                           </p>
                         )}
-                      </CardContent>
-                    </Card>
-                  );
-                })}
+                      </div>
+                    );
+                  })}
+                </div>
               </div>
-            </div>
-          </>
+
+              {/* 설정 영역 */}
+              <div className="space-y-4 border-t pt-4">
+                <div className="flex items-center gap-2 mb-2">
+                  <Settings className="h-4 w-4 text-muted-foreground" />
+                  <h4 className="text-sm font-semibold tracking-tight">설정</h4>
+                </div>
+                <div>
+                  <h5 className="text-sm font-medium text-muted-foreground mb-2">활성 단계</h5>
+                  <EnabledStagesManager
+                    studentId={studentId}
+                    initialStages={enabledStages as ('vocab' | 'passage' | 'grammar' | 'problem' | 'lastReview')[]}
+                  />
+                </div>
+                <div>
+                  <h5 className="text-sm font-medium text-muted-foreground mb-2">교과서 암기 단계</h5>
+                  <PassageStageManager
+                    studentId={studentId}
+                    initialStages={passageStages as ('fill_blanks' | 'ordering' | 'translation' | 'grammar_vocab')[]}
+                    initialTranslationSentencesPerPage={translationSentencesPerPage}
+                  />
+                </div>
+                <div>
+                  <h5 className="text-sm font-medium text-muted-foreground mb-2">시험 배정</h5>
+                  <ExamAssignmentManager
+                    studentId={studentId}
+                    textbookId={naesinData.textbookId}
+                    units={naesinData.units}
+                    assignments={naesinData.assignments}
+                  />
+                </div>
+              </div>
+            </CardContent>
+          </Card>
         )}
 
-        {/* 올톡보카 Progress */}
+        {/* ── 올톡보카 서비스 카드 ── */}
         {hasVocaAssignment && (
-          <>
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              <Card className="border-l-4 border-l-violet-500">
-                <CardHeader className="flex flex-row items-center justify-between pb-2">
-                  <CardTitle className="text-xs font-medium uppercase tracking-wider text-muted-foreground">완료 Day</CardTitle>
-                  <div className="rounded-full bg-violet-100 p-2 dark:bg-violet-950">
+          <Card className="border-l-4 border-l-violet-500">
+            <CardHeader className="pb-4">
+              <div className="flex items-center gap-2">
+                <div className="rounded-full bg-violet-100 p-2 dark:bg-violet-950">
+                  <BookOpen className="h-5 w-5 text-violet-600 dark:text-violet-400" />
+                </div>
+                <CardTitle className="text-lg">올톡보카</CardTitle>
+              </div>
+            </CardHeader>
+            <CardContent className="space-y-6">
+              {/* 통계 3개 */}
+              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                <div className="rounded-lg border p-4">
+                  <div className="flex items-center justify-between mb-1">
+                    <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">완료 Day</p>
                     <CheckCircle className="h-4 w-4 text-violet-600 dark:text-violet-400" />
                   </div>
-                </CardHeader>
-                <CardContent>
                   <div className="text-2xl font-bold tracking-tight">{vocaCompletedDays}/{vocaTotalDays}</div>
                   <p className="text-xs text-muted-foreground">모든 단계 완료된 Day</p>
-                </CardContent>
-              </Card>
-              <Card className="border-l-4 border-l-pink-500">
-                <CardHeader className="flex flex-row items-center justify-between pb-2">
-                  <CardTitle className="text-xs font-medium uppercase tracking-wider text-muted-foreground">평균 퀴즈</CardTitle>
-                  <div className="rounded-full bg-pink-100 p-2 dark:bg-pink-950">
+                </div>
+                <div className="rounded-lg border p-4">
+                  <div className="flex items-center justify-between mb-1">
+                    <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">평균 퀴즈</p>
                     <ClipboardList className="h-4 w-4 text-pink-600 dark:text-pink-400" />
                   </div>
-                </CardHeader>
-                <CardContent>
                   <div className="text-2xl font-bold tracking-tight">{vocaAvgQuiz !== null ? `${vocaAvgQuiz}점` : '-'}</div>
                   <p className="text-xs text-muted-foreground">퀴즈 평균 점수</p>
-                </CardContent>
-              </Card>
-              <Card className="border-l-4 border-l-orange-500">
-                <CardHeader className="flex flex-row items-center justify-between pb-2">
-                  <CardTitle className="text-xs font-medium uppercase tracking-wider text-muted-foreground">평균 스펠링</CardTitle>
-                  <div className="rounded-full bg-orange-100 p-2 dark:bg-orange-950">
+                </div>
+                <div className="rounded-lg border p-4">
+                  <div className="flex items-center justify-between mb-1">
+                    <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">평균 스펠링</p>
                     <BookOpen className="h-4 w-4 text-orange-600 dark:text-orange-400" />
                   </div>
-                </CardHeader>
-                <CardContent>
                   <div className="text-2xl font-bold tracking-tight">{vocaAvgSpelling !== null ? `${vocaAvgSpelling}점` : '-'}</div>
                   <p className="text-xs text-muted-foreground">스펠링 평균 점수</p>
-                </CardContent>
-              </Card>
-            </div>
+                </div>
+              </div>
 
-            {vocaBooks.length > 0 && (
-              <div>
-                <h3 className="text-lg font-semibold tracking-tight mb-3">올톡보카 Day별 진행률</h3>
-                <div className="space-y-4">
-                  {vocaBooks.map(({ bookId, bookTitle, days }) => (
-                    <div key={bookId}>
-                      <h4 className="text-sm font-medium text-muted-foreground mb-2">{bookTitle}</h4>
-                      <div className="space-y-2">
-                        {days.map((vp) => {
-                          const day = vp.day!;
-                          const r1Done = vp.flashcard_completed && vp.quiz_score !== null && vp.spelling_score !== null && vp.matching_completed;
-                          const r2Done = vp.round2_flashcard_completed && vp.round2_quiz_score !== null && vp.round2_matching_completed;
-                          const allDone = r1Done && r2Done;
-                          const hasAny = vp.flashcard_completed || vp.quiz_score !== null || vp.spelling_score !== null || vp.matching_completed;
+              {/* Day별 진행률 */}
+              {vocaBooks.length > 0 && (
+                <div>
+                  <h4 className="text-sm font-semibold tracking-tight mb-2">Day별 진행률</h4>
+                  <div className="space-y-4">
+                    {vocaBooks.map(({ bookId, bookTitle, days }) => (
+                      <div key={bookId}>
+                        <h5 className="text-sm font-medium text-muted-foreground mb-2">{bookTitle}</h5>
+                        <div className="space-y-2">
+                          {days.map((vp) => {
+                            const day = vp.day!;
+                            const r1Done = vp.flashcard_completed && vp.quiz_score !== null && vp.spelling_score !== null && vp.matching_completed;
+                            const r2Done = vp.round2_flashcard_completed && vp.round2_quiz_score !== null && vp.round2_matching_completed;
+                            const allDone = r1Done && r2Done;
+                            const hasAny = vp.flashcard_completed || vp.quiz_score !== null || vp.spelling_score !== null || vp.matching_completed;
 
-                          const scoreChip = (score: number | null) => {
-                            if (score === null) return 'bg-slate-100 text-slate-500 dark:bg-slate-800 dark:text-slate-400';
-                            return score >= 80
-                              ? 'bg-green-100 text-green-700 dark:bg-green-950 dark:text-green-300'
-                              : 'bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-300';
-                          };
+                            const scoreChip = (score: number | null) => {
+                              if (score === null) return 'bg-slate-100 text-slate-500 dark:bg-slate-800 dark:text-slate-400';
+                              return score >= 80
+                                ? 'bg-green-100 text-green-700 dark:bg-green-950 dark:text-green-300'
+                                : 'bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-300';
+                            };
 
-                          return (
-                            <Card
-                              key={vp.day_id}
-                              className={
-                                allDone
-                                  ? 'border-l-4 border-l-green-500'
-                                  : hasAny
-                                    ? 'border-l-4 border-l-amber-400'
-                                    : 'border-l-4 border-l-slate-200 dark:border-l-slate-700'
-                              }
-                            >
-                              <CardContent className="py-3">
+                            return (
+                              <div
+                                key={vp.day_id}
+                                className={`rounded-lg border p-3 ${
+                                  allDone
+                                    ? 'border-l-4 border-l-green-500'
+                                    : hasAny
+                                      ? 'border-l-4 border-l-amber-400'
+                                      : 'border-l-4 border-l-slate-200 dark:border-l-slate-700'
+                                }`}
+                              >
                                 <div className="flex items-center justify-between mb-2">
                                   <div className="flex items-center gap-2">
                                     <Badge variant="outline" className="text-xs shrink-0">Day {day.day_number}</Badge>
@@ -460,7 +488,7 @@ export async function StudentDetail({ user, studentId, naesinData }: Props) {
                                   )}
                                 </div>
 
-                                {/* Round 2 — only show if any R2 data exists */}
+                                {/* Round 2 */}
                                 {(vp.round2_flashcard_completed || vp.round2_quiz_score !== null || vp.round2_matching_score !== null) && (
                                   <div className="flex gap-2 flex-wrap mt-1">
                                     <span className="text-xs font-medium text-muted-foreground w-8">R2</span>
@@ -485,97 +513,56 @@ export async function StudentDetail({ user, studentId, naesinData }: Props) {
                                     마지막 학습: {format(new Date(vp.updated_at), 'MM/dd HH:mm')}
                                   </p>
                                 )}
-                              </CardContent>
-                            </Card>
-                          );
-                        })}
+                              </div>
+                            );
+                          })}
+                        </div>
                       </div>
-                    </div>
-                  ))}
+                    ))}
+                  </div>
                 </div>
-              </div>
-            )}
-          </>
+              )}
+            </CardContent>
+          </Card>
         )}
 
-        {/* Grammar Learning Stats (secondary) */}
+        {/* ── 문법 학습 서비스 카드 ── */}
         {completedVideos > 0 && (
-          <div>
-            <h3 className="text-lg font-semibold tracking-tight mb-3">문법 학습 현황</h3>
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              <Card className="border-l-4 border-l-green-500">
-                <CardHeader className="flex flex-row items-center justify-between pb-2">
-                  <CardTitle className="text-xs font-medium uppercase tracking-wider text-muted-foreground">완료 강의</CardTitle>
-                  <div className="rounded-full bg-green-100 p-2 dark:bg-green-950">
+          <Card className="border-l-4 border-l-sky-500">
+            <CardHeader className="pb-4">
+              <div className="flex items-center gap-2">
+                <div className="rounded-full bg-sky-100 p-2 dark:bg-sky-950">
+                  <FileText className="h-5 w-5 text-sky-600 dark:text-sky-400" />
+                </div>
+                <CardTitle className="text-lg">문법 학습 현황</CardTitle>
+              </div>
+            </CardHeader>
+            <CardContent>
+              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                <div className="rounded-lg border p-4">
+                  <div className="flex items-center justify-between mb-1">
+                    <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">완료 강의</p>
                     <GraduationCap className="h-4 w-4 text-green-600 dark:text-green-400" />
                   </div>
-                </CardHeader>
-                <CardContent>
                   <div className="text-2xl font-bold tracking-tight">{completedVideos}</div>
-                </CardContent>
-              </Card>
-              <Card className="border-l-4 border-l-indigo-500">
-                <CardHeader className="flex flex-row items-center justify-between pb-2">
-                  <CardTitle className="text-xs font-medium uppercase tracking-wider text-muted-foreground">암기 마스터</CardTitle>
-                  <div className="rounded-full bg-indigo-100 p-2 dark:bg-indigo-950">
+                </div>
+                <div className="rounded-lg border p-4">
+                  <div className="flex items-center justify-between mb-1">
+                    <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">암기 마스터</p>
                     <BookOpen className="h-4 w-4 text-indigo-600 dark:text-indigo-400" />
                   </div>
-                </CardHeader>
-                <CardContent>
                   <div className="text-2xl font-bold tracking-tight">{masteredMemory}/{memoryProgress.length}</div>
-                </CardContent>
-              </Card>
-              <Card className="border-l-4 border-l-purple-500">
-                <CardHeader className="flex flex-row items-center justify-between pb-2">
-                  <CardTitle className="text-xs font-medium uppercase tracking-wider text-muted-foreground">교과서 진행</CardTitle>
-                  <div className="rounded-full bg-purple-100 p-2 dark:bg-purple-950">
+                </div>
+                <div className="rounded-lg border p-4">
+                  <div className="flex items-center justify-between mb-1">
+                    <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">교과서 진행</p>
                     <FileText className="h-4 w-4 text-purple-600 dark:text-purple-400" />
                   </div>
-                </CardHeader>
-                <CardContent>
                   <div className="text-2xl font-bold tracking-tight">{textbookProgress.length}</div>
-                </CardContent>
-              </Card>
-            </div>
-          </div>
-        )}
-
-        {/* Enabled Stages Manager */}
-        {naesinData && (
-          <div>
-            <h3 className="text-lg font-semibold tracking-tight mb-3">활성 단계 설정</h3>
-            <EnabledStagesManager
-              studentId={studentId}
-              initialStages={enabledStages as ('vocab' | 'passage' | 'grammar' | 'problem' | 'lastReview')[]}
-            />
-          </div>
-        )}
-
-        {/* Passage Stage Manager */}
-        {naesinData && (
-          <div>
-            <h3 className="text-lg font-semibold tracking-tight mb-3">교과서 암기 단계 설정</h3>
-            <PassageStageManager
-              studentId={studentId}
-              initialStages={passageStages as ('fill_blanks' | 'ordering' | 'translation' | 'grammar_vocab')[]}
-              initialTranslationSentencesPerPage={translationSentencesPerPage}
-            />
-          </div>
-        )}
-
-        {/* Exam Assignment Manager */}
-        {naesinData && (
-          <div>
-            <h3 className="text-lg font-semibold tracking-tight mb-3">
-              시험 배정 — {naesinData.textbookName}
-            </h3>
-            <ExamAssignmentManager
-              studentId={studentId}
-              textbookId={naesinData.textbookId}
-              units={naesinData.units}
-              assignments={naesinData.assignments}
-            />
-          </div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
         )}
       </div>
     </>
