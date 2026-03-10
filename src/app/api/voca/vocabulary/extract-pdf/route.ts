@@ -24,7 +24,7 @@ export async function POST(request: NextRequest) {
     const arrayBuffer = await file.arrayBuffer();
     const base64Data = Buffer.from(arrayBuffer).toString('base64');
 
-    const message = await anthropic.messages.create({
+    const stream = anthropic.messages.stream({
       model: 'claude-haiku-4-5-20251001',
       max_tokens: 32768,
       messages: [
@@ -68,6 +68,7 @@ idioms가 없으면 null로 표시.`,
       ],
     });
 
+    const message = await stream.finalMessage();
     const responseText = message.content[0].type === 'text' ? message.content[0].text : '';
 
     // Strip markdown code fences if present
