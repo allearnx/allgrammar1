@@ -97,36 +97,36 @@ export function NaesinFlashcardView({
           }}
         >
           <Card
-            className="absolute inset-0 flex items-center justify-center"
+            className="absolute inset-0 flex items-center justify-center border-0 bg-gradient-to-br from-violet-500 to-indigo-600 text-white shadow-lg"
             style={{ backfaceVisibility: 'hidden' }}
           >
             <CardContent className="text-center py-12 px-6">
               <p className="text-3xl font-medium">{item.front_text}</p>
-              <p className="text-sm text-muted-foreground mt-4">탭하여 뒤집기</p>
+              <p className="text-sm text-white/60 mt-4">탭하여 뒤집기</p>
             </CardContent>
           </Card>
 
           <Card
-            className="absolute inset-0 flex items-center justify-center bg-primary/5"
+            className="absolute inset-0 flex items-center justify-center border-0 bg-gradient-to-br from-amber-400 to-orange-500 text-white shadow-lg"
             style={{ backfaceVisibility: 'hidden', transform: 'rotateY(180deg)' }}
           >
             <CardContent className="text-center py-8 px-6">
               {vocab?.part_of_speech && (
-                <p className="text-lg text-muted-foreground mb-1">{vocab.part_of_speech}</p>
+                <p className="text-lg text-white/70 mb-1">{vocab.part_of_speech}</p>
               )}
               <p className="text-3xl font-medium">{item.back_text}</p>
               {(vocab?.synonyms || vocab?.antonyms) && (
-                <div className="mt-3 flex flex-wrap justify-center gap-x-4 gap-y-1 text-lg">
+                <div className="mt-3 flex flex-wrap justify-center gap-x-3 gap-y-1">
                   {vocab.synonyms && (
-                    <span className="text-blue-600">= {vocab.synonyms}</span>
+                    <span className="text-sm px-2 py-0.5 rounded-full bg-white/25 backdrop-blur-sm">= {vocab.synonyms}</span>
                   )}
                   {vocab.antonyms && (
-                    <span className="text-red-500">&harr; {vocab.antonyms}</span>
+                    <span className="text-sm px-2 py-0.5 rounded-full bg-white/25 backdrop-blur-sm">&harr; {vocab.antonyms}</span>
                   )}
                 </div>
               )}
               {vocab?.example_sentence && (
-                <p className="text-lg text-muted-foreground mt-4 italic">
+                <p className="text-lg text-white/70 mt-4 italic">
                   &ldquo;{vocab.example_sentence}&rdquo;
                 </p>
               )}

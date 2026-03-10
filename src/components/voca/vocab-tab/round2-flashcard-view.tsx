@@ -114,8 +114,10 @@ export function Round2FlashcardView({ vocabulary, onComplete }: Round2FlashcardV
 
       <Card
         className={cn(
-          'cursor-pointer min-h-[200px] flex items-center justify-center transition-all',
-          flipped && 'bg-muted/30'
+          'cursor-pointer min-h-[200px] flex items-center justify-center transition-all border-0 shadow-lg',
+          flipped
+            ? 'bg-gradient-to-br from-amber-400 to-orange-500 text-white'
+            : 'bg-gradient-to-br from-violet-500 to-indigo-600 text-white'
         )}
         onClick={() => setFlipped(!flipped)}
       >
@@ -123,7 +125,7 @@ export function Round2FlashcardView({ vocabulary, onComplete }: Round2FlashcardV
           {!flipped ? (
             <div>
               <p className="text-2xl font-bold">{card.front}</p>
-              <p className="text-xs text-muted-foreground mt-2">탭하여 뒤집기</p>
+              <p className="text-xs text-white/60 mt-2">탭하여 뒤집기</p>
             </div>
           ) : (
             <div className="space-y-2 text-left px-4">
@@ -133,7 +135,7 @@ export function Round2FlashcardView({ vocabulary, onComplete }: Round2FlashcardV
                   key={i}
                   className={cn(
                     'text-sm',
-                    line.startsWith('  예)') && 'text-muted-foreground ml-4 italic'
+                    line.startsWith('  예)') && 'text-white/70 ml-4 italic'
                   )}
                 >
                   {line}
