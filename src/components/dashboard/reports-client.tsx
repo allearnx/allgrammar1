@@ -12,7 +12,7 @@ import {
 } from '@/components/ui/select';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Loader2, FileText, History, ChevronRight } from 'lucide-react';
+import { Loader2, FileText, History, ChevronRight, Trash2, Link } from 'lucide-react';
 import { toast } from 'sonner';
 import { createClient } from '@/lib/supabase/client';
 import type { EnhancedReportData, WeeklyReportRow } from '@/types/report';
@@ -57,6 +57,7 @@ export function ReportsClient({ students }: ReportsClientProps) {
   const [history, setHistory] = useState<WeeklyReportRow[]>([]);
   const [showHistory, setShowHistory] = useState(false);
   const [historyLoading, setHistoryLoading] = useState(false);
+  const [currentReportId, setCurrentReportId] = useState<string | null>(null);
 
   async function handleGenerate() {
     if (!selectedStudent) return;
@@ -77,6 +78,7 @@ export function ReportsClient({ students }: ReportsClientProps) {
 
       const data: EnhancedReportData = await response.json();
       setReport(data);
+      setCurrentReportId(data.reportId || null);
       toast.success('리포트가 생성되었습니다');
     } catch (err) {
       console.error(err);
@@ -115,7 +117,34 @@ export function ReportsClient({ students }: ReportsClientProps) {
 
   function loadHistoryReport(row: WeeklyReportRow) {
     setReport(row.stats);
+    setCurrentReportId(row.id);
     setShowHistory(false);
+  }
+
+  async function handleDelete(reportId: string) {
+    try {
+      const res = await fetch(`/api/reports/${reportId}`, { method: 'DELETE' });
+      if (!res.ok) {
+        const err = await res.json().catch(() => null);
+        throw new Error(err?.error || '삭제 실패');
+      }
+      setHistory((prev) => prev.filter((r) => r.id !== reportId));
+      if (currentReportId === reportId) {
+        setReport(null);
+        setCurrentReportId(null);
+      }
+      toast.success('리포트가 삭제되었습니다');
+    } catch (err) {
+      console.error(err);
+      toast.error('리포트 삭제 실패');
+    }
+  }
+
+  function handleCopyShareLink() {
+    if (!currentReportId) return;
+    const url = `${window.location.origin}/report/${currentReportId}`;
+    navigator.clipboard.writeText(url);
+    toast.success('공유 링크가 복사되었습니다');
   }
 
   return (
@@ -187,16 +216,27 @@ export function ReportsClient({ students }: ReportsClientProps) {
             ) : (
               <div className="space-y-1">
                 {history.map((row) => (
-                  <button
+                  <div
                     key={row.id}
-                    onClick={() => loadHistoryReport(row)}
                     className="flex w-full items-center justify-between rounded-md border px-4 py-2 text-sm hover:bg-muted transition-colors"
                   >
-                    <span>
-                      {row.week_start} ~ {row.week_end}
-                    </span>
-                    <ChevronRight className="h-4 w-4 text-muted-foreground" />
-                  </button>
+                    <button
+                      onClick={() => loadHistoryReport(row)}
+                      className="flex flex-1 items-center justify-between mr-2"
+                    >
+                      <span>
+                        {row.week_start} ~ {row.week_end}
+                      </span>
+                      <ChevronRight className="h-4 w-4 text-muted-foreground" />
+                    </button>
+                    <button
+                      onClick={() => handleDelete(row.id)}
+                      className="text-muted-foreground hover:text-destructive transition-colors p-1"
+                      title="삭제"
+                    >
+                      <Trash2 className="h-4 w-4" />
+                    </button>
+                  </div>
                 ))}
               </div>
             )}
@@ -210,7 +250,15 @@ export function ReportsClient({ students }: ReportsClientProps) {
           <CardHeader>
             <div className="flex items-center justify-between">
               <CardTitle>학습 리포트</CardTitle>
-              <Badge variant="secondary">{report.generatedAt}</Badge>
+              <div className="flex items-center gap-2">
+                {currentReportId && (
+                  <Button variant="outline" size="sm" onClick={handleCopyShareLink}>
+                    <Link className="h-4 w-4 mr-1" />
+                    공유 링크 복사
+                  </Button>
+                )}
+                <Badge variant="secondary">{report.generatedAt}</Badge>
+              </div>
             </div>
             <p className="text-muted-foreground">{report.student}</p>
           </CardHeader>

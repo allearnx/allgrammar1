@@ -67,6 +67,8 @@ export interface ReportVocaStats {
 export interface EnhancedReportData {
   /** 리포트 타입: 전체 / 내신 / 올톡보카 */
   reportType?: 'all' | 'naesin' | 'voca';
+  /** DB 저장 후 반환되는 리포트 ID (공유 링크용) */
+  reportId?: string;
   student: string;
   generatedAt: string;
   videoProgress: ReportVideoProgress;

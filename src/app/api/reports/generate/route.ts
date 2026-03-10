@@ -327,6 +327,18 @@ export const POST = createApiHandler(
       { onConflict: 'student_id,week_start' }
     );
 
+    // Fetch the upserted row's id for share link
+    const { data: saved } = await supabase
+      .from('weekly_reports')
+      .select('id')
+      .eq('student_id', studentId)
+      .eq('week_start', weekStart)
+      .single();
+
+    if (saved) {
+      report.reportId = saved.id;
+    }
+
     return NextResponse.json(report);
   }
 );

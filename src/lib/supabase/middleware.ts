@@ -54,7 +54,7 @@ export async function updateSession(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
 
   // Public routes that don't require auth
-  const publicRoutes = ['/login', '/signup', '/callback'];
+  const publicRoutes = ['/login', '/signup', '/callback', '/report', '/quiz-result'];
   const isPublicRoute = publicRoutes.some((route) => pathname.startsWith(route));
 
   // If not authenticated and not on a public route, redirect to login
