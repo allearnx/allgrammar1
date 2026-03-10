@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getUser } from '@/lib/auth/helpers';
 import Anthropic from '@anthropic-ai/sdk';
-import { PDFParse } from 'pdf-parse';
+import { extractText } from 'unpdf';
 
 export const maxDuration = 120;
 
@@ -21,12 +21,10 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'PDF 파일을 업로드해주세요.' }, { status: 400 });
     }
 
-    // PDF 텍스트 추출 (라이브러리 — base64 전송보다 훨씬 빠름)
+    // PDF 텍스트 추출 (서버리스 호환 — base64 전송보다 훨씬 빠름)
     const arrayBuffer = await file.arrayBuffer();
-    const pdf = new PDFParse({ data: new Uint8Array(arrayBuffer) });
-    const textResult = await pdf.getText();
-    const pdfText = textResult.text.trim();
-    await pdf.destroy();
+    const { text } = await extractText(new Uint8Array(arrayBuffer), { mergePages: true });
+    const pdfText = (text as string).trim();
 
     if (!pdfText) {
       return NextResponse.json(
