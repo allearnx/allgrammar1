@@ -390,6 +390,27 @@ export const vocaMatchingReviewSchema = z.object({
   status: z.enum(['pending', 'reviewed']),
 });
 
+export const vocaDaysWithVocabSchema = z.object({
+  book_id: ID,
+  words_per_day: z.number().min(1).max(200).default(30),
+  items: z.array(z.object({
+    front_text: SHORT,
+    back_text: SHORT,
+    part_of_speech: SHORT.nullish(),
+    example_sentence: MEDIUM.nullish(),
+    synonyms: SHORT.nullish(),
+    antonyms: SHORT.nullish(),
+    spelling_hint: SHORT.nullish(),
+    spelling_answer: SHORT.nullish(),
+    idioms: z.array(z.object({
+      en: z.string(),
+      ko: z.string(),
+      example_en: z.string().optional(),
+      example_ko: z.string().optional(),
+    })).nullish(),
+  })).min(1).max(2000),
+});
+
 // ── 서비스 배정 Schemas ──
 
 export const serviceAssignmentCreateSchema = z.object({

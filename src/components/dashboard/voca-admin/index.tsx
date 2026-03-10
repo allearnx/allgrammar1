@@ -116,6 +116,7 @@ export function VocaAdminClient({ books: initialBooks }: VocaAdminClientProps) {
             setDays(days.filter((d) => d.id !== dayId));
             toast.success('Day가 삭제되었습니다');
           }}
+          onDaysCreated={() => loadDays(selectedBook.id)}
         />
       )}
 
