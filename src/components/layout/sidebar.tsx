@@ -66,7 +66,7 @@ export function Sidebar({ user, services, naesinTree }: SidebarProps) {
   return (
     <>
       {/* Desktop sidebar */}
-      <aside className="hidden w-64 shrink-0 border-r border-sidebar-border bg-sidebar md:block">
+      <aside className="hidden w-64 shrink-0 bg-sidebar md:block">
         {sidebarContent}
       </aside>
 

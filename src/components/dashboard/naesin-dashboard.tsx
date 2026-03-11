@@ -195,9 +195,9 @@ export function NaesinDashboard({
   return (
     <div className="p-4 md:p-6 space-y-6">
       {/* Header Banner */}
-      <div className="rounded-xl bg-gradient-to-r from-emerald-500 to-teal-600 p-6 text-white">
+      <div className="rounded-xl bg-gradient-to-r from-violet-500 to-purple-600 p-6 text-white">
         <h2 className="text-2xl font-bold">안녕하세요, {userName}님! 👋</h2>
-        <p className="mt-1 text-emerald-100">내신 시험을 완벽하게 준비해볼까요?</p>
+        <p className="mt-1 text-violet-100">내신 시험을 완벽하게 준비해볼까요?</p>
         <div className="mt-4 flex flex-wrap gap-3">
           <Badge variant="secondary" className="bg-white/20 text-white border-0 backdrop-blur-sm">
             {textbookName}
@@ -221,28 +221,28 @@ export function NaesinDashboard({
           label="완료 단계"
           value={completedStages}
           sub={`전체 ${sortedUnits.length * 4}단계 중`}
-          color="teal"
+          color="violet"
           icon={<CheckCircle className="h-4 w-4" />}
         />
         <StatCard
           label="완료 단원"
           value={completedUnits}
           sub={`전체 ${sortedUnits.length}단원 중`}
-          color="emerald"
+          color="indigo"
           icon={<BookOpen className="h-4 w-4" />}
         />
         <StatCard
           label="단어 평균"
           value={avgVocabScore > 0 ? `${avgVocabScore}점` : '-'}
           sub="퀴즈 + 스펠링 평균"
-          color="cyan"
+          color="pink"
           icon={<ClipboardList className="h-4 w-4" />}
         />
         <StatCard
           label="시험 D-day"
           value={nearestDDay !== null ? (nearestDDay === 0 ? 'D-Day' : `D-${nearestDDay}`) : '-'}
           sub={nearestDDay !== null ? '가장 가까운 시험' : '시험 일정 없음'}
-          color="rose"
+          color="orange"
           icon={<CalendarDays className="h-4 w-4" />}
         />
       </div>
@@ -253,7 +253,7 @@ export function NaesinDashboard({
           <CardHeader className="pb-3">
             <div className="flex items-center justify-between">
               <CardTitle className="text-base flex items-center gap-2">
-                📚 현재 단원: {currentUnit.title}
+                📚 학습 흐름 — {currentUnit.title}
               </CardTitle>
               {currentDDay !== null && currentDDay >= 0 && (
                 <Badge variant="outline" className="text-xs">
@@ -272,7 +272,7 @@ export function NaesinDashboard({
               ))}
             </div>
             {ctaStage && currentUnit && (
-              <Button asChild className="bg-teal-600 hover:bg-teal-700">
+              <Button asChild className="bg-violet-600 hover:bg-violet-700">
                 <Link href={`/student/naesin/${currentUnit.id}/${ctaStage.stageKey}`}>
                   {ctaStage.label} 시작하기 <ArrowRight className="h-4 w-4 ml-1" />
                 </Link>
@@ -378,25 +378,25 @@ export function NaesinDashboard({
 // ── Sub-components ──
 
 const colorMap = {
-  teal: {
-    border: 'border-l-teal-500',
-    bg: 'bg-teal-100 dark:bg-teal-950',
-    text: 'text-teal-600 dark:text-teal-400',
+  violet: {
+    border: 'border-l-violet-500',
+    bg: 'bg-violet-100 dark:bg-violet-950',
+    text: 'text-violet-600 dark:text-violet-400',
   },
-  emerald: {
-    border: 'border-l-emerald-500',
-    bg: 'bg-emerald-100 dark:bg-emerald-950',
-    text: 'text-emerald-600 dark:text-emerald-400',
+  indigo: {
+    border: 'border-l-indigo-500',
+    bg: 'bg-indigo-100 dark:bg-indigo-950',
+    text: 'text-indigo-600 dark:text-indigo-400',
   },
-  cyan: {
-    border: 'border-l-cyan-500',
-    bg: 'bg-cyan-100 dark:bg-cyan-950',
-    text: 'text-cyan-600 dark:text-cyan-400',
+  pink: {
+    border: 'border-l-pink-500',
+    bg: 'bg-pink-100 dark:bg-pink-950',
+    text: 'text-pink-600 dark:text-pink-400',
   },
-  rose: {
-    border: 'border-l-rose-500',
-    bg: 'bg-rose-100 dark:bg-rose-950',
-    text: 'text-rose-600 dark:text-rose-400',
+  orange: {
+    border: 'border-l-orange-500',
+    bg: 'bg-orange-100 dark:bg-orange-950',
+    text: 'text-orange-600 dark:text-orange-400',
   },
 } as const;
 
@@ -443,7 +443,7 @@ function StageChip({ stage }: { stage: Stage }) {
   }
   if (stage.status === 'active') {
     return (
-      <span className="inline-flex items-center gap-1 rounded-full bg-emerald-100 px-3 py-1.5 text-sm font-medium text-emerald-700 ring-2 ring-emerald-400 dark:bg-emerald-950 dark:text-emerald-300">
+      <span className="inline-flex items-center gap-1 rounded-full bg-violet-100 px-3 py-1.5 text-sm font-medium text-violet-700 ring-2 ring-violet-400 dark:bg-violet-950 dark:text-violet-300">
         <PlayCircle className="h-3.5 w-3.5" />
         {stage.label}
       </span>

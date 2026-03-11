@@ -302,21 +302,24 @@ export function CombinedDashboard({
   const [vocaProgressOpen, setVocaProgressOpen] = useState(false);
   const [naesinProgressOpen, setNaesinProgressOpen] = useState(false);
 
+  // Voca CTA round
+  const vocaCtaRound = vocaActiveR1 ? '1' : '2';
+
   return (
-    <div className="min-h-screen bg-violet-50/40 backdrop-blur-sm p-4 md:p-6 space-y-6">
-      {/* Header Banner — light purple */}
-      <div className="rounded-xl bg-gradient-to-r from-violet-300 to-purple-400 p-6 text-white shadow-sm">
+    <div className="p-4 md:p-6 space-y-6">
+      {/* Header Banner */}
+      <div className="rounded-xl bg-gradient-to-r from-violet-500 to-purple-600 p-6 text-white">
         <h2 className="text-2xl font-bold">안녕하세요, {userName}님! 👋</h2>
-        <p className="mt-1 text-white/80">오늘도 영어 학습을 시작해볼까요?</p>
+        <p className="mt-1 text-violet-100">오늘도 영어 학습을 시작해볼까요?</p>
         <div className="mt-4 flex flex-wrap gap-3">
-          <Badge variant="secondary" className="bg-white/25 text-white border-0 backdrop-blur-sm">
+          <Badge variant="secondary" className="bg-white/20 text-white border-0 backdrop-blur-sm">
             올킬보카
           </Badge>
-          <Badge variant="secondary" className="bg-white/25 text-white border-0 backdrop-blur-sm">
+          <Badge variant="secondary" className="bg-white/20 text-white border-0 backdrop-blur-sm">
             {textbookName}
           </Badge>
           {nearestDDay !== null && (
-            <Badge variant="secondary" className="bg-white/25 text-white border-0 backdrop-blur-sm font-bold">
+            <Badge variant="secondary" className="bg-white/20 text-white border-0 backdrop-blur-sm font-bold">
               {nearestDDay === 0 ? 'D-Day' : `D-${nearestDDay}`}
             </Badge>
           )}
@@ -336,61 +339,89 @@ export function CombinedDashboard({
           label="내신 완료"
           value={naesinCompletedStages}
           sub={`전체 ${sortedUnits.length * 4}단계 중`}
-          color="teal"
+          color="indigo"
           icon={<Layers className="h-4 w-4" />}
         />
         <StatCard
           label="보카 퀴즈"
           value={vocaAvgScore > 0 ? `${vocaAvgScore}점` : '-'}
           sub="퀴즈 평균"
-          color="indigo"
+          color="pink"
           icon={<ClipboardList className="h-4 w-4" />}
         />
         <StatCard
           label="내신 단원"
           value={`${naesinCompletedUnits}/${sortedUnits.length}`}
           sub="완료 단원"
-          color="emerald"
+          color="orange"
           icon={<BookOpen className="h-4 w-4" />}
         />
         <StatCard
           label="내신 단어"
           value={naesinAvgVocab > 0 ? `${naesinAvgVocab}점` : '-'}
           sub="퀴즈 + 스펠링 평균"
-          color="cyan"
+          color="violet"
           icon={<Sparkles className="h-4 w-4" />}
         />
         <StatCard
           label="시험 D-day"
           value={nearestDDay !== null ? (nearestDDay === 0 ? 'D-Day' : `D-${nearestDDay}`) : '-'}
           sub={nearestDDay !== null ? '가장 가까운 시험' : '시험 일정 없음'}
-          color="rose"
+          color="orange"
           icon={<CalendarDays className="h-4 w-4" />}
         />
       </div>
 
-      {/* Voca Learning Flow */}
+      {/* Voca Learning Flow: Round 1 */}
       {currentVocaDay && (
-        <Card className="bg-white/70 backdrop-blur-sm border-violet-100">
+        <Card>
           <CardHeader className="pb-3">
             <div className="flex items-center justify-between">
               <CardTitle className="text-base flex items-center gap-2">
-                📚 올킬보카 — {currentVocaDay.title}
-                {!r1Done && <Badge variant="outline" className="text-xs">1회독</Badge>}
-                {r1Done && <Badge variant="outline" className="text-xs">2회독</Badge>}
+                📚 학습 흐름 — 1회독
+                <Badge variant="outline" className="text-xs">{currentVocaDay.title}</Badge>
               </CardTitle>
             </div>
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="flex items-center gap-2 flex-wrap">
-              {(r1Done ? r2Stages : r1Stages).map((stage, i) => (
+              {r1Stages.map((stage, i) => (
                 <div key={stage.key} className="flex items-center gap-2">
                   {i > 0 && <ArrowRight className="h-4 w-4 text-muted-foreground shrink-0" />}
-                  <VocaStageChip stage={stage} />
+                  <StageChip stage={stage} />
                 </div>
               ))}
             </div>
-            {vocaCtaStage && (
+            {vocaCtaStage && vocaCtaRound === '1' && (
+              <Button asChild className="bg-violet-600 hover:bg-violet-700">
+                <Link href={`/student/voca/${currentVocaDay.id}`}>
+                  {vocaCtaStage.label} 시작하기 <ArrowRight className="h-4 w-4 ml-1" />
+                </Link>
+              </Button>
+            )}
+          </CardContent>
+        </Card>
+      )}
+
+      {/* Voca Learning Flow: Round 2 */}
+      {currentVocaDay && (
+        <Card className={!r1Done ? 'opacity-60' : ''}>
+          <CardHeader className="pb-3">
+            <CardTitle className="text-base flex items-center gap-2">
+              📗 2회독
+              {!r1Done && <Badge variant="secondary" className="text-xs">1회독 완료 시 해금</Badge>}
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <div className="flex items-center gap-2 flex-wrap">
+              {r2Stages.map((stage, i) => (
+                <div key={stage.key} className="flex items-center gap-2">
+                  {i > 0 && <ArrowRight className="h-4 w-4 text-muted-foreground shrink-0" />}
+                  <StageChip stage={stage} />
+                </div>
+              ))}
+            </div>
+            {vocaCtaStage && vocaCtaRound === '2' && (
               <Button asChild className="bg-violet-600 hover:bg-violet-700">
                 <Link href={`/student/voca/${currentVocaDay.id}`}>
                   {vocaCtaStage.label} 시작하기 <ArrowRight className="h-4 w-4 ml-1" />
@@ -403,7 +434,7 @@ export function CombinedDashboard({
 
       {/* Naesin Learning Flow */}
       {currentUnit && currentNaesinStages.length > 0 && (
-        <Card className="bg-white/70 backdrop-blur-sm border-emerald-100">
+        <Card>
           <CardHeader className="pb-3">
             <div className="flex items-center justify-between">
               <CardTitle className="text-base flex items-center gap-2">
@@ -425,12 +456,12 @@ export function CombinedDashboard({
               {currentNaesinStages.map((stage, i) => (
                 <div key={stage.key} className="flex items-center gap-2">
                   {i > 0 && <ArrowRight className="h-4 w-4 text-muted-foreground shrink-0" />}
-                  <NaesinStageChip stage={stage} />
+                  <StageChip stage={stage} />
                 </div>
               ))}
             </div>
             {naesinCtaStage && (
-              <Button asChild className="bg-emerald-600 hover:bg-emerald-700">
+              <Button asChild className="bg-violet-600 hover:bg-violet-700">
                 <Link href={`/student/naesin/${currentUnit.id}/${naesinCtaStage.stageKey}`}>
                   {naesinCtaStage.label} 시작하기 <ArrowRight className="h-4 w-4 ml-1" />
                 </Link>
@@ -440,10 +471,10 @@ export function CombinedDashboard({
         </Card>
       )}
 
-      {/* Bottom: Progress (2-col) — swapped: 단원진행률 left, 올킬보카 right */}
+      {/* Bottom: Progress (2-col) — 단원진행률 left, 올킬보카 right */}
       <div className="grid gap-6 lg:grid-cols-2">
         {/* Naesin Unit Progress — collapsible */}
-        <Card className="bg-white/70 backdrop-blur-sm border-violet-100">
+        <Card>
           <CardHeader className="pb-3">
             <button
               type="button"
@@ -486,7 +517,7 @@ export function CombinedDashboard({
         </Card>
 
         {/* Voca Book — only current book's days, collapsible */}
-        <Card className="bg-white/70 backdrop-blur-sm border-violet-100">
+        <Card>
           <CardHeader className="pb-3">
             <button
               type="button"
@@ -554,30 +585,20 @@ const colorMap = {
     bg: 'bg-violet-100 dark:bg-violet-950',
     text: 'text-violet-600 dark:text-violet-400',
   },
-  teal: {
-    border: 'border-l-teal-500',
-    bg: 'bg-teal-100 dark:bg-teal-950',
-    text: 'text-teal-600 dark:text-teal-400',
-  },
   indigo: {
     border: 'border-l-indigo-500',
     bg: 'bg-indigo-100 dark:bg-indigo-950',
     text: 'text-indigo-600 dark:text-indigo-400',
   },
-  emerald: {
-    border: 'border-l-emerald-500',
-    bg: 'bg-emerald-100 dark:bg-emerald-950',
-    text: 'text-emerald-600 dark:text-emerald-400',
+  pink: {
+    border: 'border-l-pink-500',
+    bg: 'bg-pink-100 dark:bg-pink-950',
+    text: 'text-pink-600 dark:text-pink-400',
   },
-  cyan: {
-    border: 'border-l-cyan-500',
-    bg: 'bg-cyan-100 dark:bg-cyan-950',
-    text: 'text-cyan-600 dark:text-cyan-400',
-  },
-  rose: {
-    border: 'border-l-rose-500',
-    bg: 'bg-rose-100 dark:bg-rose-950',
-    text: 'text-rose-600 dark:text-rose-400',
+  orange: {
+    border: 'border-l-orange-500',
+    bg: 'bg-orange-100 dark:bg-orange-950',
+    text: 'text-orange-600 dark:text-orange-400',
   },
 } as const;
 
@@ -596,7 +617,7 @@ function StatCard({
 }) {
   const c = colorMap[color];
   return (
-    <Card className={`border-l-4 ${c.border} bg-white/70 backdrop-blur-sm`}>
+    <Card className={`border-l-4 ${c.border}`}>
       <CardHeader className="flex flex-row items-center justify-between pb-2">
         <CardTitle className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
           {label}
@@ -613,7 +634,7 @@ function StatCard({
   );
 }
 
-function VocaStageChip({ stage }: { stage: VocaStage }) {
+function StageChip({ stage }: { stage: { label: string; status: StageStatus } }) {
   if (stage.status === 'done') {
     return (
       <span className="inline-flex items-center gap-1 rounded-full bg-green-100 px-3 py-1.5 text-sm font-medium text-green-700 dark:bg-green-950 dark:text-green-300">
@@ -625,31 +646,6 @@ function VocaStageChip({ stage }: { stage: VocaStage }) {
   if (stage.status === 'active') {
     return (
       <span className="inline-flex items-center gap-1 rounded-full bg-violet-100 px-3 py-1.5 text-sm font-medium text-violet-700 ring-2 ring-violet-400 dark:bg-violet-950 dark:text-violet-300">
-        <PlayCircle className="h-3.5 w-3.5" />
-        {stage.label}
-      </span>
-    );
-  }
-  return (
-    <span className="inline-flex items-center gap-1 rounded-full bg-muted px-3 py-1.5 text-sm font-medium text-muted-foreground">
-      <Lock className="h-3.5 w-3.5" />
-      {stage.label}
-    </span>
-  );
-}
-
-function NaesinStageChip({ stage }: { stage: NaesinStage }) {
-  if (stage.status === 'done') {
-    return (
-      <span className="inline-flex items-center gap-1 rounded-full bg-green-100 px-3 py-1.5 text-sm font-medium text-green-700 dark:bg-green-950 dark:text-green-300">
-        <CheckCircle className="h-3.5 w-3.5" />
-        {stage.label}
-      </span>
-    );
-  }
-  if (stage.status === 'active') {
-    return (
-      <span className="inline-flex items-center gap-1 rounded-full bg-emerald-100 px-3 py-1.5 text-sm font-medium text-emerald-700 ring-2 ring-emerald-400 dark:bg-emerald-950 dark:text-emerald-300">
         <PlayCircle className="h-3.5 w-3.5" />
         {stage.label}
       </span>
