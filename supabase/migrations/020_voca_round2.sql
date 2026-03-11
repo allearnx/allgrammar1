@@ -1,4 +1,4 @@
--- 올톡보카 2회독 지원
+-- 올킬보카 2회독 지원
 
 -- 1) 숙어 컬럼 추가
 ALTER TABLE voca_vocabulary

@@ -46,7 +46,7 @@ export const NAV_CONFIG: Record<string, NavGroup[]> = {
       label: '학습',
       items: [
         { href: '/student/naesin', label: '내신 대비', icon: BookMarked },
-        { href: '/student/voca', label: '올톡보카', icon: BookA },
+        { href: '/student/voca', label: '올킬보카', icon: BookA },
       ],
     },
   ],
@@ -66,7 +66,7 @@ export const NAV_CONFIG: Record<string, NavGroup[]> = {
       label: '콘텐츠',
       items: [
         { href: '/teacher/naesin', label: '내신 관리', icon: ClipboardList },
-        { href: '/teacher/voca', label: '올톡보카 관리', icon: BookA },
+        { href: '/teacher/voca', label: '올킬보카 관리', icon: BookA },
       ],
     },
     {
@@ -92,7 +92,7 @@ export const NAV_CONFIG: Record<string, NavGroup[]> = {
       label: '콘텐츠',
       items: [
         { href: '/admin/naesin', label: '내신 관리', icon: ClipboardList },
-        { href: '/admin/voca', label: '올톡보카 관리', icon: BookA },
+        { href: '/admin/voca', label: '올킬보카 관리', icon: BookA },
       ],
     },
     {
@@ -122,7 +122,7 @@ export const NAV_CONFIG: Record<string, NavGroup[]> = {
         { href: '/boss/content', label: '콘텐츠 관리', icon: NotebookPen },
         { href: '/boss/textbook-mode', label: '교과서 모드', icon: BookMarked },
         { href: '/boss/naesin', label: '내신 관리', icon: ClipboardList },
-        { href: '/boss/voca', label: '올톡보카 관리', icon: BookA },
+        { href: '/boss/voca', label: '올킬보카 관리', icon: BookA },
       ],
     },
     {

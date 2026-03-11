@@ -1,8 +1,8 @@
 -- ============================================
--- 011: 올톡보카 + 서비스 배정 시스템
+-- 011: 올킬보카 + 서비스 배정 시스템
 -- ============================================
 
--- ── 서비스 배정 (내신 + 올톡보카 공용) ──
+-- ── 서비스 배정 (내신 + 올킬보카 공용) ──
 
 CREATE TABLE IF NOT EXISTS service_assignments (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -31,7 +31,7 @@ CREATE POLICY "boss_admin_manage_assignments"
 
 CREATE INDEX idx_service_assignments_student ON service_assignments(student_id);
 
--- ── 올톡보카 교재 ──
+-- ── 올킬보카 교재 ──
 
 CREATE TABLE IF NOT EXISTS voca_books (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -56,7 +56,7 @@ CREATE POLICY "teacher_plus_manage_voca_books"
     )
   );
 
--- ── 올톡보카 Day ──
+-- ── 올킬보카 Day ──
 
 CREATE TABLE IF NOT EXISTS voca_days (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -83,7 +83,7 @@ CREATE POLICY "teacher_plus_manage_voca_days"
 
 CREATE INDEX idx_voca_days_book ON voca_days(book_id);
 
--- ── 올톡보카 단어 ──
+-- ── 올킬보카 단어 ──
 
 CREATE TABLE IF NOT EXISTS voca_vocabulary (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),

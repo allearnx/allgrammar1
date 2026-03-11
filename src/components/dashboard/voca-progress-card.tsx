@@ -65,7 +65,7 @@ export function VocaProgressCard({ vocaProgress }: Props) {
           <div className="rounded-full bg-violet-100 p-2 dark:bg-violet-950">
             <BookOpen className="h-5 w-5 text-violet-600 dark:text-violet-400" />
           </div>
-          <CardTitle className="text-lg">올톡보카</CardTitle>
+          <CardTitle className="text-lg">올킬보카</CardTitle>
         </div>
       </CardHeader>
       <CardContent className="space-y-6">

@@ -138,7 +138,7 @@ export async function StudentDetail({ user, studentId, naesinData }: Props) {
           />
         )}
 
-        {/* 올톡보카 서비스 카드 */}
+        {/* 올킬보카 서비스 카드 */}
         {hasVocaAssignment && (
           <VocaProgressCard vocaProgress={vocaProgress} />
         )}

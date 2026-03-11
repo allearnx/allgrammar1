@@ -153,7 +153,7 @@ export function ReportsClient({ students }: ReportsClientProps) {
           <SelectContent>
             <SelectItem value="all">전체</SelectItem>
             <SelectItem value="naesin">내신</SelectItem>
-            <SelectItem value="voca">올톡보카</SelectItem>
+            <SelectItem value="voca">올킬보카</SelectItem>
           </SelectContent>
         </Select>
         <Button onClick={handleGenerate} disabled={!selectedStudent || loading}>

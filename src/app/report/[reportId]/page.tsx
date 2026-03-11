@@ -152,11 +152,11 @@ export default async function PublicReportPage({ params }: Props) {
           </Card>
         )}
 
-        {/* 올톡보카 */}
+        {/* 올킬보카 */}
         {report.voca && (
           <Card>
             <CardContent className="py-4 space-y-3">
-              <p className="font-medium">올톡보카</p>
+              <p className="font-medium">올킬보카</p>
               <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
                 <MetricCard
                   label="Day 진행"

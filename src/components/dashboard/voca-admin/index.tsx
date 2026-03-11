@@ -53,7 +53,7 @@ export function VocaAdminClient({ books: initialBooks }: VocaAdminClientProps) {
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
-        <h2 className="text-xl font-bold">올톡보카 관리</h2>
+        <h2 className="text-xl font-bold">올킬보카 관리</h2>
         <AddBookDialog onAdd={(book) => setBooks([...books, book])} />
       </div>
 
@@ -200,7 +200,7 @@ function AddBookDialog({ onAdd }: { onAdd: (book: VocaBook) => void }) {
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <Label>교재명</Label>
-            <Input value={title} onChange={(e) => setTitle(e.target.value)} placeholder="예: 올톡보카 중1" />
+            <Input value={title} onChange={(e) => setTitle(e.target.value)} placeholder="예: 올킬보카 중1" />
           </div>
           <div>
             <Label>설명 (선택)</Label>

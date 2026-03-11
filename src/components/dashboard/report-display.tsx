@@ -57,7 +57,7 @@ export function ReportDisplay({ report, currentReportId, onCopyShareLink }: Repo
               <TabsTrigger value="naesin">내신 대비</TabsTrigger>
             )}
             {report.voca && (
-              <TabsTrigger value="voca">올톡보카</TabsTrigger>
+              <TabsTrigger value="voca">올킬보카</TabsTrigger>
             )}
             <TabsTrigger value="analysis">분석</TabsTrigger>
           </TabsList>
@@ -97,7 +97,7 @@ export function ReportDisplay({ report, currentReportId, onCopyShareLink }: Repo
               )}
               {report.voca && (
                 <MetricCard
-                  label="올톡보카"
+                  label="올킬보카"
                   value={`${report.voca.daysInProgress}/${report.voca.totalDays} Day`}
                   sub={`퀴즈 평균 ${report.voca.quizAvgScore ?? '-'}점`}
                 />
@@ -154,7 +154,7 @@ export function ReportDisplay({ report, currentReportId, onCopyShareLink }: Repo
             </TabsContent>
           )}
 
-          {/* 올톡보카 탭 */}
+          {/* 올킬보카 탭 */}
           {report.voca && (
             <TabsContent value="voca" className="mt-4 space-y-4">
               <h3 className="font-semibold">Day 진행 현황</h3>

@@ -48,7 +48,7 @@ export interface ReportNaesinStats {
   quizSetAvgScore: number | null;
 }
 
-/** 올톡보카 통계 */
+/** 올킬보카 통계 */
 export interface ReportVocaStats {
   /** 진행 중인 Day 수 / 전체 Day 수 */
   daysInProgress: number;
@@ -65,7 +65,7 @@ export interface ReportVocaStats {
 
 /** API 응답 전체 구조 (= stats JSONB에 저장되는 구조) */
 export interface EnhancedReportData {
-  /** 리포트 타입: 전체 / 내신 / 올톡보카 */
+  /** 리포트 타입: 전체 / 내신 / 올킬보카 */
   reportType?: 'all' | 'naesin' | 'voca';
   /** DB 저장 후 반환되는 리포트 ID (공유 링크용) */
   reportId?: string;
@@ -80,7 +80,7 @@ export interface EnhancedReportData {
   services: ('naesin' | 'voca')[];
   /** 내신 대비 (서비스 배정 시만 존재) */
   naesin: ReportNaesinStats | null;
-  /** 올톡보카 (서비스 배정 시만 존재) */
+  /** 올킬보카 (서비스 배정 시만 존재) */
   voca: ReportVocaStats | null;
   /** 자동 분석 약점 */
   weaknesses: string[];

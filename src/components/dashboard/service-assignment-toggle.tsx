@@ -13,7 +13,7 @@ interface ServiceAssignmentToggleProps {
 
 const SERVICES = [
   { key: 'naesin', label: '내신' },
-  { key: 'voca', label: '올톡보카' },
+  { key: 'voca', label: '올킬보카' },
 ] as const;
 
 export function ServiceAssignmentToggle({

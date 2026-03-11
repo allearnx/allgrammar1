@@ -52,7 +52,7 @@ export default async function StudentVocaPage() {
 
   return (
     <>
-      <Topbar user={user} title="올톡보카" />
+      <Topbar user={user} title="올킬보카" />
       <div className="p-4 md:p-6">
         <VocaHomeClient
           books={(books as VocaBook[]) || []}

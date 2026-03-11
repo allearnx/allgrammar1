@@ -34,14 +34,14 @@ function computeWeaknesses(report: EnhancedReportData): string[] {
     }
   }
 
-  // 올톡보카
+  // 올킬보카
   if (report.voca) {
     const v = report.voca;
     if (v.quizAvgScore !== null && v.quizAvgScore < 60) {
-      w.push(`올톡보카 퀴즈 평균 ${v.quizAvgScore}점 (목표 60점)`);
+      w.push(`올킬보카 퀴즈 평균 ${v.quizAvgScore}점 (목표 60점)`);
     }
     if (v.spellingAvgScore !== null && v.spellingAvgScore < 60) {
-      w.push(`올톡보카 스펠링 평균 ${v.spellingAvgScore}점 (목표 60점)`);
+      w.push(`올킬보카 스펠링 평균 ${v.spellingAvgScore}점 (목표 60점)`);
     }
   }
 
@@ -67,10 +67,10 @@ function computeRecommendations(report: EnhancedReportData): string[] {
   }
   if (report.voca) {
     if (report.voca.totalDays > 0 && report.voca.daysInProgress < report.voca.totalDays) {
-      r.push('올톡보카 미완료 Day를 학습하세요');
+      r.push('올킬보카 미완료 Day를 학습하세요');
     }
     if (report.voca.spellingAvgScore !== null && report.voca.spellingAvgScore < 80) {
-      r.push('올톡보카 스펠링 연습을 더 하세요');
+      r.push('올킬보카 스펠링 연습을 더 하세요');
     }
   }
 
@@ -172,7 +172,7 @@ export const POST = createApiHandler(
         .select('score')
         .eq('student_id', studentId),
 
-      // Phase 2 — 올톡보카
+      // Phase 2 — 올킬보카
       supabase
         .from('voca_student_progress')
         .select('flashcard_completed, quiz_score, spelling_score, matching_completed')
@@ -260,7 +260,7 @@ export const POST = createApiHandler(
       };
     }
 
-    // ── 올톡보카 집계 ──
+    // ── 올킬보카 집계 ──
     let voca: ReportVocaStats | null = null;
     if (hasVoca) {
       const vProg = vocaProgressRes.data || [];

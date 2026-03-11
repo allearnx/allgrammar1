@@ -5,12 +5,355 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { BookOpen, BookMarked, GraduationCap, BarChart3, Clock, CheckCircle } from 'lucide-react';
 import Link from 'next/link';
+import { VocaDashboard } from '@/components/dashboard/voca-dashboard';
+import { NaesinDashboard } from '@/components/dashboard/naesin-dashboard';
+import { CombinedDashboard } from '@/components/dashboard/combined-dashboard';
+import type { VocaBook, VocaDay, VocaStudentProgress } from '@/types/voca';
+import type { NaesinUnit, NaesinStudentProgress, NaesinExamAssignment, NaesinContentAvailability } from '@/types/naesin';
 
 export default async function StudentDashboard() {
   const user = await requireRole(['student']);
   const supabase = await createClient();
 
-  // Fetch progress stats
+  // Check service assignments
+  const { data: assignments } = await supabase
+    .from('service_assignments')
+    .select('service')
+    .eq('student_id', user.id);
+
+  const services = assignments?.map((a) => a.service) || [];
+  const vocaOnly = services.length === 1 && services[0] === 'voca';
+  const naesinOnly = services.length === 1 && services[0] === 'naesin';
+  const hasBoth = services.includes('voca') && services.includes('naesin');
+
+  // ── Voca-only dashboard ──
+  if (vocaOnly) {
+    // Fetch voca data
+    const { data: books } = await supabase
+      .from('voca_books')
+      .select('*')
+      .eq('is_active', true)
+      .order('sort_order');
+
+    const bookIds = (books || []).map((b) => b.id);
+    let days: VocaDay[] = [];
+    if (bookIds.length > 0) {
+      const { data } = await supabase
+        .from('voca_days')
+        .select('*')
+        .in('book_id', bookIds)
+        .order('sort_order');
+      days = data || [];
+    }
+
+    const dayIds = days.map((d) => d.id);
+    let progressList: VocaStudentProgress[] = [];
+    if (dayIds.length > 0) {
+      const { data } = await supabase
+        .from('voca_student_progress')
+        .select('*')
+        .eq('student_id', user.id)
+        .in('day_id', dayIds);
+      progressList = data || [];
+    }
+
+    // Word count for current active day
+    const sortedDays = [...days].sort((a, b) => a.sort_order - b.sort_order);
+    const progressMap = new Map(progressList.map((p) => [p.day_id, p]));
+    const currentDay = sortedDays.find((d) => {
+      const p = progressMap.get(d.id);
+      if (!p) return true;
+      const r1 = p.flashcard_completed && (p.quiz_score ?? 0) >= 80 && (p.spelling_score ?? 0) >= 80 && p.matching_completed;
+      const r2 = p.round2_flashcard_completed && (p.round2_quiz_score ?? 0) >= 80 && p.round2_matching_completed;
+      return !r1 || !r2;
+    }) ?? sortedDays[0];
+
+    let wordCount = 0;
+    if (currentDay) {
+      const { count } = await supabase
+        .from('voca_vocabulary')
+        .select('id', { count: 'exact', head: true })
+        .eq('day_id', currentDay.id);
+      wordCount = count || 0;
+    }
+
+    return (
+      <>
+        <Topbar user={user} title="올킬보카" />
+        <VocaDashboard
+          userName={user.full_name}
+          books={(books as VocaBook[]) || []}
+          days={days}
+          progressList={progressList}
+          wordCount={wordCount}
+        />
+      </>
+    );
+  }
+
+  // ── Naesin-only dashboard ──
+  if (naesinOnly) {
+    // 1. Student settings → textbook_id + enabled_stages
+    const { data: settings } = await supabase
+      .from('naesin_student_settings')
+      .select('textbook_id, enabled_stages')
+      .eq('student_id', user.id)
+      .single();
+
+    const textbookId = settings?.textbook_id;
+
+    if (textbookId) {
+      // 2. Textbook name
+      const { data: textbook } = await supabase
+        .from('naesin_textbooks')
+        .select('display_name')
+        .eq('id', textbookId)
+        .single();
+
+      // 3. Units for this textbook
+      const { data: unitsData } = await supabase
+        .from('naesin_units')
+        .select('*')
+        .eq('textbook_id', textbookId)
+        .eq('is_active', true)
+        .order('sort_order');
+      const units: NaesinUnit[] = unitsData || [];
+      const unitIds = units.map((u) => u.id);
+
+      // 4. Exam assignments
+      const { data: examData } = await supabase
+        .from('naesin_exam_assignments')
+        .select('*')
+        .eq('student_id', user.id)
+        .eq('textbook_id', textbookId);
+      const examAssignments: NaesinExamAssignment[] = examData || [];
+
+      // 5. Student progress
+      let naesinProgressList: NaesinStudentProgress[] = [];
+      if (unitIds.length > 0) {
+        const { data } = await supabase
+          .from('naesin_student_progress')
+          .select('*')
+          .eq('student_id', user.id)
+          .in('unit_id', unitIds);
+        naesinProgressList = data || [];
+      }
+
+      // 6. Content availability per unit + quiz set counts + grammar video counts
+      const contentMap: Record<string, NaesinContentAvailability> = {};
+      const vocabQuizSetCounts: Record<string, number> = {};
+      const grammarVideoCounts: Record<string, number> = {};
+
+      if (unitIds.length > 0) {
+        const [vocabRes, passageRes, grammarRes, problemRes, lastReviewRes, quizSetRes, similarRes] =
+          await Promise.all([
+            supabase.from('naesin_vocabulary').select('unit_id').in('unit_id', unitIds),
+            supabase.from('naesin_passages').select('unit_id').in('unit_id', unitIds),
+            supabase.from('naesin_grammar_lessons').select('unit_id, content_type').in('unit_id', unitIds),
+            supabase.from('naesin_problem_sheets').select('unit_id').in('unit_id', unitIds).eq('category', 'problem'),
+            supabase.from('naesin_last_review_content').select('unit_id').in('unit_id', unitIds),
+            supabase.from('naesin_vocab_quiz_sets').select('unit_id').in('unit_id', unitIds),
+            supabase.from('naesin_similar_problems').select('unit_id').in('unit_id', unitIds).eq('status', 'approved'),
+          ]);
+
+        const vocabUnits = new Set((vocabRes.data || []).map((r) => r.unit_id));
+        const passageUnits = new Set((passageRes.data || []).map((r) => r.unit_id));
+        const grammarUnits = new Set((grammarRes.data || []).map((r) => r.unit_id));
+        const problemUnits = new Set((problemRes.data || []).map((r) => r.unit_id));
+        const lastReviewUnits = new Set((lastReviewRes.data || []).map((r) => r.unit_id));
+
+        // Count quiz sets and grammar videos per unit
+        for (const row of quizSetRes.data || []) {
+          vocabQuizSetCounts[row.unit_id] = (vocabQuizSetCounts[row.unit_id] || 0) + 1;
+        }
+        for (const row of grammarRes.data || []) {
+          if (row.content_type === 'video') {
+            grammarVideoCounts[row.unit_id] = (grammarVideoCounts[row.unit_id] || 0) + 1;
+          }
+        }
+
+        // Also check similar problems as last_review content
+        const similarUnits = new Set((similarRes.data || []).map((r) => r.unit_id));
+
+        for (const uid of unitIds) {
+          contentMap[uid] = {
+            hasVocab: vocabUnits.has(uid),
+            hasPassage: passageUnits.has(uid),
+            hasGrammar: grammarUnits.has(uid),
+            hasProblem: problemUnits.has(uid),
+            hasLastReview: lastReviewUnits.has(uid) || similarUnits.has(uid),
+          };
+        }
+      }
+
+      return (
+        <>
+          <Topbar user={user} title="내신 대비" />
+          <NaesinDashboard
+            userName={user.full_name}
+            textbookName={textbook?.display_name || '교과서'}
+            units={units}
+            progressList={naesinProgressList}
+            examAssignments={examAssignments}
+            contentMap={contentMap}
+            vocabQuizSetCounts={vocabQuizSetCounts}
+            grammarVideoCounts={grammarVideoCounts}
+            enabledStages={settings?.enabled_stages}
+          />
+        </>
+      );
+    }
+  }
+
+  // ── Combined (voca + naesin) dashboard ──
+  if (hasBoth) {
+    // Fetch voca data
+    const vocaBooksPromise = supabase
+      .from('voca_books')
+      .select('*')
+      .eq('is_active', true)
+      .order('sort_order');
+
+    // Fetch naesin settings
+    const naesinSettingsPromise = supabase
+      .from('naesin_student_settings')
+      .select('textbook_id, enabled_stages')
+      .eq('student_id', user.id)
+      .single();
+
+    const [{ data: vocaBooksData }, { data: naesinSettings }] = await Promise.all([
+      vocaBooksPromise,
+      naesinSettingsPromise,
+    ]);
+
+    const books = (vocaBooksData as VocaBook[]) || [];
+    const bookIds = books.map((b) => b.id);
+    const textbookId = naesinSettings?.textbook_id;
+
+    // Fetch voca days + naesin data in parallel
+    const [daysRes, textbookRes, unitsRes, examsRes] = await Promise.all([
+      bookIds.length > 0
+        ? supabase.from('voca_days').select('*').in('book_id', bookIds).order('sort_order')
+        : Promise.resolve({ data: null }),
+      textbookId
+        ? supabase.from('naesin_textbooks').select('display_name').eq('id', textbookId).single()
+        : Promise.resolve({ data: null }),
+      textbookId
+        ? supabase.from('naesin_units').select('*').eq('textbook_id', textbookId).eq('is_active', true).order('sort_order')
+        : Promise.resolve({ data: null }),
+      textbookId
+        ? supabase.from('naesin_exam_assignments').select('*').eq('student_id', user.id).eq('textbook_id', textbookId)
+        : Promise.resolve({ data: null }),
+    ]);
+
+    const vocaDays: VocaDay[] = daysRes.data || [];
+    const textbookName = textbookRes.data?.display_name || '교과서';
+    const naesinUnits: NaesinUnit[] = unitsRes.data || [];
+    const naesinExamAssignments: NaesinExamAssignment[] = examsRes.data || [];
+
+    // Fetch progress + content map (depends on days/units)
+    const dayIds = vocaDays.map((d) => d.id);
+    const unitIds = naesinUnits.map((u) => u.id);
+
+    const [vocaProgressRes2, naesinProgressRes2, ...contentResults] = await Promise.all([
+      dayIds.length > 0
+        ? supabase.from('voca_student_progress').select('*').eq('student_id', user.id).in('day_id', dayIds)
+        : Promise.resolve({ data: null }),
+      unitIds.length > 0
+        ? supabase.from('naesin_student_progress').select('*').eq('student_id', user.id).in('unit_id', unitIds)
+        : Promise.resolve({ data: null }),
+      ...(unitIds.length > 0
+        ? [
+            supabase.from('naesin_vocabulary').select('unit_id').in('unit_id', unitIds),
+            supabase.from('naesin_passages').select('unit_id').in('unit_id', unitIds),
+            supabase.from('naesin_grammar_lessons').select('unit_id, content_type').in('unit_id', unitIds),
+            supabase.from('naesin_problem_sheets').select('unit_id').in('unit_id', unitIds).eq('category', 'problem'),
+            supabase.from('naesin_last_review_content').select('unit_id').in('unit_id', unitIds),
+            supabase.from('naesin_vocab_quiz_sets').select('unit_id').in('unit_id', unitIds),
+            supabase.from('naesin_similar_problems').select('unit_id').in('unit_id', unitIds).eq('status', 'approved'),
+          ]
+        : []),
+    ]);
+
+    const vocaProgressList: VocaStudentProgress[] = vocaProgressRes2.data || [];
+    const naesinProgressList: NaesinStudentProgress[] = naesinProgressRes2.data || [];
+
+    const naesinContentMap: Record<string, NaesinContentAvailability> = {};
+    const vocabQuizSetCounts: Record<string, number> = {};
+    const grammarVideoCounts: Record<string, number> = {};
+
+    if (unitIds.length > 0 && contentResults.length >= 7) {
+      const [vocabRes, passageRes, grammarRes, problemRes, lastReviewRes, quizSetRes, similarRes] = contentResults;
+      const vocabUnits = new Set((vocabRes.data || []).map((r: { unit_id: string }) => r.unit_id));
+      const passageUnits = new Set((passageRes.data || []).map((r: { unit_id: string }) => r.unit_id));
+      const grammarUnits = new Set((grammarRes.data || []).map((r: { unit_id: string }) => r.unit_id));
+      const problemUnits = new Set((problemRes.data || []).map((r: { unit_id: string }) => r.unit_id));
+      const lastReviewUnits = new Set((lastReviewRes.data || []).map((r: { unit_id: string }) => r.unit_id));
+      const similarUnits = new Set((similarRes.data || []).map((r: { unit_id: string }) => r.unit_id));
+
+      for (const row of quizSetRes.data || []) {
+        vocabQuizSetCounts[row.unit_id] = (vocabQuizSetCounts[row.unit_id] || 0) + 1;
+      }
+      for (const row of (grammarRes.data || []) as { unit_id: string; content_type: string }[]) {
+        if (row.content_type === 'video') {
+          grammarVideoCounts[row.unit_id] = (grammarVideoCounts[row.unit_id] || 0) + 1;
+        }
+      }
+
+      for (const uid of unitIds) {
+        naesinContentMap[uid] = {
+          hasVocab: vocabUnits.has(uid),
+          hasPassage: passageUnits.has(uid),
+          hasGrammar: grammarUnits.has(uid),
+          hasProblem: problemUnits.has(uid),
+          hasLastReview: lastReviewUnits.has(uid) || similarUnits.has(uid),
+        };
+      }
+    }
+
+    // Word count for current active voca day
+    const sortedDays = [...vocaDays].sort((a, b) => a.sort_order - b.sort_order);
+    const vocaProgressMap = new Map(vocaProgressList.map((p) => [p.day_id, p]));
+    const currentDay = sortedDays.find((d) => {
+      const p = vocaProgressMap.get(d.id);
+      if (!p) return true;
+      const r1 = p.flashcard_completed && (p.quiz_score ?? 0) >= 80 && (p.spelling_score ?? 0) >= 80 && p.matching_completed;
+      const r2 = p.round2_flashcard_completed && (p.round2_quiz_score ?? 0) >= 80 && p.round2_matching_completed;
+      return !r1 || !r2;
+    }) ?? sortedDays[0];
+
+    let wordCount = 0;
+    if (currentDay) {
+      const { count } = await supabase
+        .from('voca_vocabulary')
+        .select('id', { count: 'exact', head: true })
+        .eq('day_id', currentDay.id);
+      wordCount = count || 0;
+    }
+
+    return (
+      <>
+        <Topbar user={user} title="학습 대시보드" />
+        <CombinedDashboard
+          userName={user.full_name}
+          vocaBooks={books}
+          vocaDays={vocaDays}
+          vocaProgressList={vocaProgressList}
+          vocaWordCount={wordCount}
+          textbookName={textbookName}
+          naesinUnits={naesinUnits}
+          naesinProgressList={naesinProgressList}
+          examAssignments={naesinExamAssignments}
+          contentMap={naesinContentMap}
+          vocabQuizSetCounts={vocabQuizSetCounts}
+          grammarVideoCounts={grammarVideoCounts}
+          enabledStages={naesinSettings?.enabled_stages}
+        />
+      </>
+    );
+  }
+
+  // ── Default dashboard (grammar/naesin) ──
   const [videoProgressRes, memoryProgressRes, dueReviewsRes, naesinProgressRes] = await Promise.all([
     supabase
       .from('student_progress')

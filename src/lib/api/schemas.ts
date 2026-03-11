@@ -309,7 +309,7 @@ export const reportGenerateSchema = z.object({
   reportType: z.enum(['all', 'naesin', 'voca']).default('all'),
 });
 
-// ── 올톡보카 Schemas ──
+// ── 올킬보카 Schemas ──
 
 export const vocaBookCreateSchema = z.object({
   title: SHORT,
