@@ -8,6 +8,8 @@ import { Check, X } from 'lucide-react';
 interface ServiceAssignmentToggleProps {
   studentId: string;
   assignedServices: string[];
+  vocaBooks?: { id: string; title: string }[];
+  assignedBookId?: string | null;
   onUpdate?: () => void;
 }
 
@@ -19,10 +21,14 @@ const SERVICES = [
 export function ServiceAssignmentToggle({
   studentId,
   assignedServices: initial,
+  vocaBooks,
+  assignedBookId: initialBookId,
   onUpdate,
 }: ServiceAssignmentToggleProps) {
   const [assigned, setAssigned] = useState<Set<string>>(new Set(initial));
   const [loading, setLoading] = useState<string | null>(null);
+  const [bookId, setBookId] = useState<string | null>(initialBookId ?? null);
+  const [bookLoading, setBookLoading] = useState(false);
 
   async function toggle(service: string) {
     const isAssigned = assigned.has(service);
@@ -36,6 +42,16 @@ export function ServiceAssignmentToggle({
       });
 
       if (!res.ok) throw new Error();
+
+      // 보카 OFF → 교재 배정도 해제
+      if (isAssigned && service === 'voca' && bookId) {
+        await fetch('/api/voca/book-assignments', {
+          method: 'DELETE',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ studentId }),
+        });
+        setBookId(null);
+      }
 
       setAssigned((prev) => {
         const next = new Set(prev);
@@ -55,8 +71,33 @@ export function ServiceAssignmentToggle({
     }
   }
 
+  async function handleBookChange(newBookId: string) {
+    if (!newBookId) return;
+    setBookLoading(true);
+    try {
+      const res = await fetch('/api/voca/book-assignments', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ studentId, bookId: newBookId }),
+      });
+      if (!res.ok) throw new Error();
+      setBookId(newBookId);
+      const bookTitle = vocaBooks?.find((b) => b.id === newBookId)?.title || '교재';
+      toast.success(`${bookTitle} 배정됨`);
+      onUpdate?.();
+    } catch (err) {
+      console.error(err);
+      toast.error('교재 배정에 실패했습니다');
+    } finally {
+      setBookLoading(false);
+    }
+  }
+
+  const vocaOn = assigned.has('voca');
+  const showBookSelect = vocaOn && vocaBooks && vocaBooks.length > 0;
+
   return (
-    <div className="flex gap-2">
+    <div className="flex flex-wrap items-center gap-2">
       {SERVICES.map((s) => {
         const active = assigned.has(s.key);
         return (
@@ -78,6 +119,22 @@ export function ServiceAssignmentToggle({
           </button>
         );
       })}
+      {showBookSelect && (
+        <select
+          value={bookId || ''}
+          onChange={(e) => handleBookChange(e.target.value)}
+          disabled={bookLoading}
+          className={cn(
+            'h-8 rounded-md border border-border bg-background px-2 text-sm',
+            bookLoading && 'opacity-50 cursor-wait'
+          )}
+        >
+          <option value="" disabled>교재 선택</option>
+          {vocaBooks.map((b) => (
+            <option key={b.id} value={b.id}>{b.title}</option>
+          ))}
+        </select>
+      )}
     </div>
   );
 }

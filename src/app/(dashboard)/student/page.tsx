@@ -28,12 +28,36 @@ export default async function StudentDashboard() {
 
   // ── Voca-only dashboard ──
   if (vocaOnly) {
-    // Fetch voca data
+    // 배정된 교재만 fetch
+    const { data: bookAssignment } = await supabase
+      .from('voca_book_assignments')
+      .select('book_id')
+      .eq('student_id', user.id)
+      .single();
+
+    if (!bookAssignment) {
+      return (
+        <>
+          <Topbar user={user} title="올킬보카" />
+          <div className="flex items-center justify-center min-h-[60vh] p-4">
+            <Card className="max-w-sm w-full text-center">
+              <CardContent className="pt-6 pb-6 space-y-2">
+                <BookOpen className="h-10 w-10 mx-auto text-muted-foreground/50" />
+                <h3 className="font-semibold text-lg">교재 미배정</h3>
+                <p className="text-sm text-muted-foreground">
+                  선생님이 교재를 배정하면 학습을 시작할 수 있어요
+                </p>
+              </CardContent>
+            </Card>
+          </div>
+        </>
+      );
+    }
+
     const { data: books } = await supabase
       .from('voca_books')
       .select('*')
-      .eq('is_active', true)
-      .order('sort_order');
+      .eq('id', bookAssignment.book_id);
 
     const bookIds = (books || []).map((b) => b.id);
     let days: VocaDay[] = [];
@@ -230,26 +254,29 @@ export default async function StudentDashboard() {
 
   // ── Combined (voca + naesin) dashboard ──
   if (hasBoth) {
-    // Fetch voca data
-    const vocaBooksPromise = supabase
-      .from('voca_books')
-      .select('*')
-      .eq('is_active', true)
-      .order('sort_order');
-
-    // Fetch naesin settings
-    const naesinSettingsPromise = supabase
-      .from('naesin_student_settings')
-      .select('textbook_id, enabled_stages')
-      .eq('student_id', user.id)
-      .single();
-
-    const [{ data: vocaBooksData }, { data: naesinSettings }] = await Promise.all([
-      vocaBooksPromise,
-      naesinSettingsPromise,
+    // 배정된 교재 확인 + 내신 설정 fetch
+    const [{ data: vocaBookAssignment }, { data: naesinSettings }] = await Promise.all([
+      supabase
+        .from('voca_book_assignments')
+        .select('book_id')
+        .eq('student_id', user.id)
+        .single(),
+      supabase
+        .from('naesin_student_settings')
+        .select('textbook_id, enabled_stages')
+        .eq('student_id', user.id)
+        .single(),
     ]);
 
-    const books = (vocaBooksData as VocaBook[]) || [];
+    let books: VocaBook[] = [];
+    if (vocaBookAssignment) {
+      const { data: vocaBooksData } = await supabase
+        .from('voca_books')
+        .select('*')
+        .eq('id', vocaBookAssignment.book_id);
+      books = (vocaBooksData as VocaBook[]) || [];
+    }
+
     const bookIds = books.map((b) => b.id);
     const textbookId = naesinSettings?.textbook_id;
 

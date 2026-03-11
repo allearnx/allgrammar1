@@ -3,12 +3,9 @@
 import Link from 'next/link';
 import {
   CheckCircle,
-  Lock,
   BookOpen,
   ClipboardList,
   Sparkles,
-  ArrowLeftRight,
-  ArrowRight,
 } from 'lucide-react';
 import type { VocaBook, VocaDay, VocaStudentProgress } from '@/types/voca';
 
@@ -20,11 +17,10 @@ interface Stage {
   key: string;
   label: string;
   status: StageStatus;
-  tab?: string;
-  icon: React.ReactNode;
+  emoji: string;
   description: string;
-  score?: number | null;
-  scoreLabel?: string;
+  scoreRequirement: string;
+  actualScore?: string;
 }
 
 interface Props {
@@ -45,11 +41,7 @@ const COLORS = {
   statPurple: '#7C3AED',
   statAmber: '#F59E0B',
   statSky: '#06B6D4',
-  stepDefault: { bg: '#D9F7FC', border: '#CCFAF4' },
-  stepActive: { bg: '#FFFFFF', border: '#7C3AED' },
-  stepDone: { bg: '#D9F7FC', border: '#4DD9C0' },
-  activeLabel: '#7C3AED',
-  ctaButton: '#7C3AED',
+  green: '#22C55E',
   progressDone: '#56C9A0',
   progressActive: '#7C3AED',
   wrongBg: '#FFF0F3',
@@ -73,24 +65,24 @@ function getR1Stages(p: VocaStudentProgress | null): Stage[] {
 
   return [
     {
-      key: 'flashcard', label: '플래시카드', status: fc ? 'done' : 'active', tab: 'flashcard',
-      icon: <BookOpen className="h-6 w-6" />, description: '단어 카드를 넘기며 학습',
-      scoreLabel: fc ? '완료' : undefined,
+      key: 'flashcard', label: '플래시카드', status: fc ? 'done' : 'active',
+      emoji: '👁️', description: '단어·뜻·예문을\n카드로 확인',
+      scoreRequirement: '카드 확인', actualScore: fc ? '완료 ✓' : undefined,
     },
     {
-      key: 'quiz', label: '퀴즈', status: quizStatus, tab: 'quiz',
-      icon: <ClipboardList className="h-6 w-6" />, description: '4지선다 객관식 테스트',
-      score: p?.quiz_score, scoreLabel: p?.quiz_score != null ? `${p.quiz_score}점` : undefined,
+      key: 'quiz', label: '퀴즈', status: quizStatus,
+      emoji: '✏️', description: '5지선다 객관식으로\n이해도를 확인해요',
+      scoreRequirement: '80점 통과', actualScore: p?.quiz_score != null ? `${p.quiz_score}점` : undefined,
     },
     {
-      key: 'spelling', label: '스펠링', status: spellStatus, tab: 'spelling',
-      icon: <Sparkles className="h-6 w-6" />, description: '빈칸에 스펠링 입력',
-      score: p?.spelling_score, scoreLabel: p?.spelling_score != null ? `${p.spelling_score}점` : undefined,
+      key: 'spelling', label: '스펠링', status: spellStatus,
+      emoji: '⌨️', description: '뜻 보고 영단어\n직접 입력',
+      scoreRequirement: '80점 통과', actualScore: p?.spelling_score != null ? `${p.spelling_score}점` : undefined,
     },
     {
-      key: 'matching', label: '매칭', status: matchStatus, tab: 'matching',
-      icon: <ArrowLeftRight className="h-6 w-6" />, description: '유의어/반의어 매칭',
-      score: p?.matching_score, scoreLabel: matchDone ? '완료' : p?.matching_score != null ? `${p.matching_score}점` : undefined,
+      key: 'matching', label: '매칭', status: matchStatus,
+      emoji: '🔗', description: '유의어·반의어\n연결하기',
+      scoreRequirement: '90점 통과', actualScore: matchDone ? '완료' : p?.matching_score != null ? `${p.matching_score}점` : undefined,
     },
   ];
 }
@@ -113,9 +105,9 @@ function getR2Stages(p: VocaStudentProgress | null): Stage[] {
 
   if (!r1Done) {
     return [
-      { key: 'r2_flashcard', label: '플래시카드', status: 'locked', icon: <BookOpen className="h-6 w-6" />, description: '2회독 복습 카드' },
-      { key: 'r2_quiz', label: '종합문제', status: 'locked', icon: <ClipboardList className="h-6 w-6" />, description: '종합 퀴즈' },
-      { key: 'r2_matching', label: '심화매칭', status: 'locked', icon: <ArrowLeftRight className="h-6 w-6" />, description: '심화 매칭 게임' },
+      { key: 'r2_flashcard', label: '플래시카드', status: 'locked', emoji: '📚', description: '유의어·반의어\n숙어 학습', scoreRequirement: '—' },
+      { key: 'r2_quiz', label: '종합 문제', status: 'locked', emoji: '🤖', description: '9가지 유형\nAI 서술형 채점', scoreRequirement: '—' },
+      { key: 'r2_matching', label: '심화 매칭', status: 'locked', emoji: '🔗', description: '고난도\n연결하기', scoreRequirement: '—' },
     ];
   }
 
@@ -125,18 +117,18 @@ function getR2Stages(p: VocaStudentProgress | null): Stage[] {
   return [
     {
       key: 'r2_flashcard', label: '플래시카드', status: fc2 ? 'done' : 'active',
-      icon: <BookOpen className="h-6 w-6" />, description: '2회독 복습 카드',
-      scoreLabel: fc2 ? '완료' : undefined,
+      emoji: '📚', description: '유의어·반의어\n숙어 학습',
+      scoreRequirement: '카드 확인', actualScore: fc2 ? '완료 ✓' : undefined,
     },
     {
-      key: 'r2_quiz', label: '종합문제', status: quiz2Status,
-      icon: <ClipboardList className="h-6 w-6" />, description: '종합 퀴즈',
-      score: p?.round2_quiz_score, scoreLabel: p?.round2_quiz_score != null ? `${p.round2_quiz_score}점` : undefined,
+      key: 'r2_quiz', label: '종합 문제', status: quiz2Status,
+      emoji: '🤖', description: '9가지 유형\nAI 서술형 채점',
+      scoreRequirement: '80점 통과', actualScore: p?.round2_quiz_score != null ? `${p.round2_quiz_score}점` : undefined,
     },
     {
-      key: 'r2_matching', label: '심화매칭', status: match2Status,
-      icon: <ArrowLeftRight className="h-6 w-6" />, description: '심화 매칭 게임',
-      score: p?.round2_matching_score, scoreLabel: match2Done ? '완료' : p?.round2_matching_score != null ? `${p.round2_matching_score}점` : undefined,
+      key: 'r2_matching', label: '심화 매칭', status: match2Status,
+      emoji: '🔗', description: '고난도\n연결하기',
+      scoreRequirement: '90점 통과', actualScore: match2Done ? '완료' : p?.round2_matching_score != null ? `${p.round2_matching_score}점` : undefined,
     },
   ];
 }
@@ -150,13 +142,33 @@ function isR2Complete(p: VocaStudentProgress | null): boolean {
   );
 }
 
+function getCtaText(stage: Stage): { title: string; sub: string } {
+  switch (stage.key) {
+    case 'flashcard':
+      return { title: '플래시카드를 시작할 차례예요!', sub: '단어 카드를 확인하면 다음 단계로 진행돼요' };
+    case 'quiz':
+      return { title: '퀴즈를 시작할 차례예요!', sub: '플래시카드 완료 · 퀴즈 80점 이상이면 다음 단계로 진행돼요' };
+    case 'spelling':
+      return { title: '스펠링을 시작할 차례예요!', sub: '퀴즈 통과 · 스펠링 80점 이상이면 다음 단계로 진행돼요' };
+    case 'matching':
+      return { title: '매칭을 시작할 차례예요!', sub: '스펠링 통과 · 매칭 90점 이상이면 1회독이 완료돼요' };
+    case 'r2_flashcard':
+      return { title: '2회독 플래시카드를 시작하세요!', sub: '유의어·반의어·숙어를 학습해요' };
+    case 'r2_quiz':
+      return { title: '종합 문제를 시작할 차례예요!', sub: '플래시카드 완료 · 80점 이상이면 다음 단계로 진행돼요' };
+    case 'r2_matching':
+      return { title: '심화 매칭을 시작할 차례예요!', sub: '종합문제 통과 · 90점 이상이면 2회독이 완료돼요' };
+    default:
+      return { title: `${stage.label}을 시작하세요!`, sub: '' };
+  }
+}
+
 // ── Component ──
 
 export function VocaDashboard({ userName, books, days, progressList, wordCount, wrongWordCounts = {} }: Props) {
   const progressMap = new Map<string, VocaStudentProgress>();
   progressList.forEach((p) => progressMap.set(p.day_id, p));
 
-  // Find current active day (first incomplete)
   const sortedDays = [...days].sort((a, b) => a.sort_order - b.sort_order);
   const currentDay = sortedDays.find((d) => {
     const p = progressMap.get(d.id) ?? null;
@@ -190,19 +202,18 @@ export function VocaDashboard({ userName, books, days, progressList, wordCount, 
   const r1Stages = getR1Stages(currentProgress);
   const r2Stages = getR2Stages(currentProgress);
   const r1Done = isR1Complete(currentProgress);
+  const r1AllDone = r1Stages.every((s) => s.status === 'done');
+  const r2AllDone = r2Stages.every((s) => s.status === 'done');
 
-  // Find CTA: first active stage
   const activeR1 = r1Stages.find((s) => s.status === 'active');
   const activeR2 = r2Stages.find((s) => s.status === 'active');
   const ctaStage = activeR1 ?? activeR2;
   const ctaRound = activeR1 ? '1' : '2';
 
-  // Wrong words: top 10 by count descending
   const wrongWordEntries = Object.entries(wrongWordCounts)
     .sort(([, a], [, b]) => b - a)
     .slice(0, 10);
 
-  // Day progress for bottom section
   const daysByBook = new Map<string, { book: VocaBook; days: VocaDay[] }>();
   for (const book of books) {
     daysByBook.set(book.id, { book, days: [] });
@@ -212,167 +223,116 @@ export function VocaDashboard({ userName, books, days, progressList, wordCount, 
   }
 
   return (
-    <div className="p-4 md:p-6 space-y-6">
+    <div className="p-4 md:p-6 space-y-5">
       {/* ── Header Banner ── */}
       <div
         className="relative overflow-hidden rounded-2xl p-6 md:p-8 text-white"
         style={{ background: COLORS.header }}
       >
-        {/* Decorative circles */}
-        <div
-          className="absolute -top-10 -right-10 h-40 w-40 rounded-full"
-          style={{ background: 'rgba(255,255,255,0.1)' }}
-        />
-        <div
-          className="absolute -bottom-8 -left-8 h-32 w-32 rounded-full"
-          style={{ background: 'rgba(255,255,255,0.05)' }}
-        />
+        <div className="absolute -top-10 -right-10 h-40 w-40 rounded-full" style={{ background: 'rgba(255,255,255,0.1)' }} />
+        <div className="absolute -bottom-8 -left-8 h-32 w-32 rounded-full" style={{ background: 'rgba(255,255,255,0.05)' }} />
 
-        <h2 className="relative text-2xl md:text-3xl font-bold">
-          안녕하세요, {userName}님! 👋
-        </h2>
+        <h2 className="relative text-2xl md:text-3xl font-bold">안녕하세요, {userName}님! 👋</h2>
         <p className="relative mt-1 text-white/80">오늘도 단어를 정복해볼까요?</p>
 
         <div className="relative mt-4 flex flex-wrap gap-3">
-          <span
-            className="inline-flex items-center rounded-full px-3 py-1 text-sm font-medium text-white"
-            style={{ border: `1.5px solid ${COLORS.bannerBadgeBorder}`, background: 'rgba(255,255,255,0.15)' }}
-          >
-            학습 단어 {wordCount}개
-          </span>
-          <span
-            className="inline-flex items-center rounded-full px-3 py-1 text-sm font-medium text-white"
-            style={{ border: `1.5px solid ${COLORS.bannerBadgeBorder}`, background: 'rgba(255,255,255,0.15)' }}
-          >
-            완료 단계 {r1CompletedStages}
-          </span>
-          {currentDay && (
-            <span
-              className="inline-flex items-center rounded-full px-3 py-1 text-sm font-medium text-white"
-              style={{ border: `1.5px solid ${COLORS.bannerBadgeBorder}`, background: 'rgba(255,255,255,0.15)' }}
-            >
-              현재: {currentDay.title}
+          {[`학습 단어 ${wordCount}개`, `완료 단계 ${r1CompletedStages}`, currentDay ? `현재: ${currentDay.title}` : ''].filter(Boolean).map((text) => (
+            <span key={text} className="inline-flex items-center rounded-full px-3 py-1 text-sm font-semibold text-gray-800" style={{ background: 'white' }}>
+              {text}
             </span>
-          )}
+          ))}
         </div>
       </div>
 
       {/* ── Stat Cards ── */}
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="grid gap-3 grid-cols-2 lg:grid-cols-4">
         <StatCard label="완료 단계" value={r1CompletedStages} sub={`전체 ${days.length * 4}단계 중`} color={COLORS.statMint} icon={<CheckCircle className="h-5 w-5" />} />
         <StatCard label="완료 단원" value={completedDays} sub={`전체 ${days.length}단원 중`} color={COLORS.statPurple} icon={<BookOpen className="h-5 w-5" />} />
         <StatCard label="암기 완료" value={totalMemorized} sub="플래시카드+퀴즈 통과" color={COLORS.statAmber} icon={<Sparkles className="h-5 w-5" />} />
         <StatCard label="평균 점수" value={avgScore > 0 ? `${avgScore}점` : '-'} sub="퀴즈 평균" color={COLORS.statSky} icon={<ClipboardList className="h-5 w-5" />} />
       </div>
 
-      {/* ── Learning Flow: Round 1 ── */}
+      {/* ── Flow Card: Round 1 ── */}
       {currentDay && (
-        <div className="rounded-2xl border bg-white p-5 md:p-6 space-y-5">
-          <h3 className="text-lg font-bold flex items-center gap-2">
-            📚 학습 흐름 — 1회독
-            <span className="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-medium" style={{ borderColor: COLORS.stepDone.border }}>
-              {currentDay.title}
+        <div className="rounded-2xl border border-gray-200 bg-white p-5 md:p-7">
+          {/* Header */}
+          <div className="flex items-center justify-between mb-5">
+            <div>
+              <div className="text-base font-bold">📖 1회독 — 기본 단어 암기</div>
+              <div className="text-sm text-gray-400 mt-0.5">4단계를 모두 통과해야 1회독이 완료됩니다</div>
+            </div>
+            <span className="shrink-0 rounded-full px-3.5 py-1 text-xs font-bold" style={{ background: r1AllDone ? '#DCFCE7' : '#F5F3FF', color: r1AllDone ? COLORS.green : '#7C3AED' }}>
+              {r1AllDone ? '완료 ✓' : '진행 중'}
             </span>
-          </h3>
+          </div>
 
-          <div className="flex items-stretch gap-3 overflow-x-auto pb-2">
+          {/* Steps */}
+          <div className="flex items-stretch gap-0 mb-5 overflow-visible">
             {r1Stages.map((stage, i) => (
-              <div key={stage.key} className="flex items-center gap-2" style={{ flex: stage.status === 'active' ? 1.35 : 1, minWidth: 0 }}>
-                {i > 0 && <ArrowRight className="h-4 w-4 shrink-0 text-gray-300" />}
-                <StepCard stage={stage} dayId={currentDay.id} />
+              <div key={stage.key} className="contents">
+                {i > 0 && <div className="flex items-center justify-center self-center px-1 md:px-1.5 text-gray-300 text-sm shrink-0">→</div>}
+                <FlowStep stage={stage} dayId={currentDay.id} />
               </div>
             ))}
           </div>
 
-          {/* CTA bar */}
+          {/* CTA */}
           {ctaStage && ctaRound === '1' && (
-            <div
-              className="flex items-center justify-between rounded-xl px-5 py-3"
-              style={{ background: 'linear-gradient(to right, #F5F3FF, #EDE9FE)' }}
-            >
-              <span className="text-sm font-medium text-gray-700">
-                다음 단계: <strong>{ctaStage.label}</strong>
-              </span>
-              <Link
-                href={`/student/voca/${currentDay.id}`}
-                className="inline-flex items-center gap-1.5 rounded-lg px-4 py-2 text-sm font-semibold text-white transition-colors hover:opacity-90"
-                style={{ background: COLORS.ctaButton }}
-              >
-                {ctaStage.label} 시작하기
-                <ArrowRight className="h-4 w-4" />
-              </Link>
-            </div>
+            <FlowCta stage={ctaStage} dayId={currentDay.id} />
           )}
         </div>
       )}
 
-      {/* ── Learning Flow: Round 2 ── */}
+      {/* ── Flow Card: Round 2 ── */}
       {currentDay && (
-        <div
-          className="rounded-2xl border bg-white p-5 md:p-6 space-y-5 transition-opacity"
-          style={{ opacity: r1Done ? 1 : 0.55 }}
-        >
-          <h3 className="text-lg font-bold flex items-center gap-2">
-            📗 2회독
-            {!r1Done && (
-              <span className="text-xs font-normal text-gray-400 ml-1">
-                1회독을 완료하면 해금됩니다!
-              </span>
-            )}
-          </h3>
+        <div className={`rounded-2xl border border-gray-200 bg-white p-5 md:p-7 ${!r1Done ? 'opacity-55' : ''}`}>
+          {/* Header */}
+          <div className="flex items-center justify-between mb-5">
+            <div>
+              <div className="text-base font-bold">📗 2회독 — 유의어 · 반의어 · 숙어</div>
+              <div className="text-sm text-gray-400 mt-0.5">
+                {r1Done ? '3단계를 모두 통과해야 2회독이 완료됩니다' : '1회독 완료 후 해금됩니다'}
+              </div>
+            </div>
+            <span className="shrink-0 rounded-full px-3.5 py-1 text-xs font-bold" style={{
+              background: r2AllDone ? '#DCFCE7' : !r1Done ? '#F3F4F6' : '#F5F3FF',
+              color: r2AllDone ? COLORS.green : !r1Done ? '#9CA3AF' : '#7C3AED',
+            }}>
+              {r2AllDone ? '완료 ✓' : !r1Done ? '🔒 잠김' : '진행 중'}
+            </span>
+          </div>
 
-          <div className="flex items-stretch gap-3 overflow-x-auto pb-2">
+          {/* Steps */}
+          <div className="flex items-stretch gap-0 mb-5 overflow-visible">
             {r2Stages.map((stage, i) => (
-              <div key={stage.key} className="flex items-center gap-2" style={{ flex: stage.status === 'active' ? 1.35 : 1, minWidth: 0 }}>
-                {i > 0 && <ArrowRight className="h-4 w-4 shrink-0 text-gray-300" />}
-                <StepCard stage={stage} dayId={currentDay.id} />
+              <div key={stage.key} className="contents">
+                {i > 0 && <div className="flex items-center justify-center self-center px-1 md:px-1.5 text-gray-300 text-sm shrink-0">→</div>}
+                <FlowStep stage={stage} dayId={currentDay.id} />
               </div>
             ))}
           </div>
 
-          {/* CTA bar for R2 */}
-          {ctaStage && ctaRound === '2' && currentDay && (
-            <div
-              className="flex items-center justify-between rounded-xl px-5 py-3"
-              style={{ background: 'linear-gradient(to right, #F5F3FF, #EDE9FE)' }}
-            >
-              <span className="text-sm font-medium text-gray-700">
-                다음 단계: <strong>{ctaStage.label}</strong>
-              </span>
-              <Link
-                href={`/student/voca/${currentDay.id}`}
-                className="inline-flex items-center gap-1.5 rounded-lg px-4 py-2 text-sm font-semibold text-white transition-colors hover:opacity-90"
-                style={{ background: COLORS.ctaButton }}
-              >
-                {ctaStage.label} 시작하기
-                <ArrowRight className="h-4 w-4" />
-              </Link>
-            </div>
+          {/* CTA */}
+          {ctaStage && ctaRound === '2' && (
+            <FlowCta stage={ctaStage} dayId={currentDay.id} />
           )}
         </div>
       )}
 
       {/* ── Bottom: Wrong Words + Day Progress ── */}
-      <div className="grid gap-6 lg:grid-cols-2">
+      <div className="grid gap-5 lg:grid-cols-2">
         {/* Wrong Words */}
         <div className="rounded-2xl p-5 md:p-6" style={{ background: COLORS.wrongBg }}>
-          <h3 className="text-base font-bold mb-4">📝 틀린 단어 복습</h3>
+          <h3 className="text-sm font-bold mb-3">❌ 틀린 단어 복습</h3>
           {wrongWordEntries.length > 0 ? (
             <div className="space-y-2">
               {wrongWordEntries.map(([word, count]) => {
                 const borderColor = count >= 3 ? COLORS.wrongBorder3 : count === 2 ? COLORS.wrongBorder2 : COLORS.wrongBorder1;
                 return (
-                  <div
-                    key={word}
-                    className="flex items-center justify-between rounded-lg bg-white px-3 py-2"
-                    style={{ borderLeft: `3px solid ${borderColor}` }}
-                  >
+                  <div key={word} className="flex items-center justify-between rounded-lg bg-white px-3 py-2" style={{ borderLeft: `3px solid ${borderColor}` }}>
                     <span className="text-sm font-medium text-gray-800">{word}</span>
-                    <span
-                      className="inline-flex items-center rounded-full px-2 py-0.5 text-xs font-semibold text-rose-700"
-                      style={{ background: COLORS.wrongBadge }}
-                    >
-                      {count}회
+                    <span className="inline-flex items-center rounded-full px-2 py-0.5 text-xs font-semibold text-rose-700" style={{ background: COLORS.wrongBadge }}>
+                      {count}회 오답
                     </span>
                   </div>
                 );
@@ -385,7 +345,7 @@ export function VocaDashboard({ userName, books, days, progressList, wordCount, 
 
         {/* Day Progress */}
         <div className="rounded-2xl border bg-white p-5 md:p-6">
-          <h3 className="text-base font-bold mb-4">📈 단원 진행률</h3>
+          <h3 className="text-sm font-bold mb-3">📈 이번 단원 진행률</h3>
           <div className="space-y-3">
             {sortedDays.map((day) => {
               const p = progressMap.get(day.id) ?? null;
@@ -402,20 +362,15 @@ export function VocaDashboard({ userName, books, days, progressList, wordCount, 
                 <div key={day.id}>
                   <div className="flex items-center justify-between text-sm mb-1.5">
                     <span className="font-medium truncate">{day.title}</span>
-                    <span className="text-xs text-gray-400 shrink-0 ml-2">{stagesComplete}/4</span>
+                    <span className="text-xs shrink-0 ml-2" style={{ color: isDone ? COLORS.green : isActive ? '#7C3AED' : '#9CA3AF', fontWeight: isDone || isActive ? 700 : 400 }}>
+                      {isDone ? '100%' : isActive ? '진행 중' : `잠김 🔒`}
+                    </span>
                   </div>
-                  <div className="h-2.5 w-full rounded-full bg-gray-200 overflow-hidden">
-                    <div
-                      className="h-full rounded-full transition-all"
-                      style={{
-                        width: `${pct}%`,
-                        background: isDone
-                          ? `linear-gradient(to right, ${COLORS.progressDone}, #4DD9C0)`
-                          : isActive
-                            ? COLORS.progressActive
-                            : '#D1D5DB',
-                      }}
-                    />
+                  <div className="h-2 w-full rounded-full bg-gray-100 overflow-hidden">
+                    <div className="h-full rounded-full transition-all" style={{
+                      width: `${pct}%`,
+                      background: isDone ? `linear-gradient(to right, ${COLORS.progressDone}, #4DD9C0)` : isActive ? COLORS.progressActive : '#E5E7EB',
+                    }} />
                   </div>
                 </div>
               );
@@ -432,26 +387,13 @@ export function VocaDashboard({ userName, books, days, progressList, wordCount, 
 
 // ── Sub-components ──
 
-function StatCard({
-  label,
-  value,
-  sub,
-  color,
-  icon,
-}: {
-  label: string;
-  value: string | number;
-  sub: string;
-  color: string;
-  icon: React.ReactNode;
+function StatCard({ label, value, sub, color, icon }: {
+  label: string; value: string | number; sub: string; color: string; icon: React.ReactNode;
 }) {
   return (
-    <div
-      className="rounded-xl border bg-white p-4"
-      style={{ borderLeftWidth: 4, borderLeftColor: color }}
-    >
-      <div className="flex items-center justify-between mb-2">
-        <span className="text-xs font-medium uppercase tracking-wider text-gray-500">{label}</span>
+    <div className="rounded-xl border bg-white p-3.5" style={{ borderLeftWidth: 4, borderLeftColor: color }}>
+      <div className="flex items-center justify-between mb-1.5">
+        <span className="text-xs font-semibold uppercase tracking-wider text-gray-500">{label}</span>
         <span style={{ color }}>{icon}</span>
       </div>
       <div className="text-2xl font-bold tracking-tight">{value}</div>
@@ -460,87 +402,98 @@ function StatCard({
   );
 }
 
-function StepCard({ stage, dayId }: { stage: Stage; dayId: string }) {
+function FlowStep({ stage, dayId }: { stage: Stage; dayId: string }) {
   const isDone = stage.status === 'done';
   const isActive = stage.status === 'active';
   const isLocked = stage.status === 'locked';
 
-  const style = isDone
-    ? COLORS.stepDone
-    : isActive
-      ? COLORS.stepActive
-      : COLORS.stepDefault;
-
-  const content = (
+  const card = (
     <div
-      className={`relative flex flex-col items-center text-center rounded-xl p-4 transition-all w-full ${
-        isActive ? 'shadow-lg' : ''
-      }`}
+      className="relative text-center transition-all flex flex-col items-center h-full"
       style={{
-        background: style.bg,
-        border: `2px solid ${style.border}`,
+        background: isDone ? '#D9F7FC' : isActive ? 'white' : '#D9F7FC',
+        border: isDone ? '1.5px solid #4DD9C0' : isActive ? '2px solid #7C3AED' : '1.5px solid #CCFAF4',
+        borderRadius: isActive ? 16 : 14,
+        padding: isActive ? '20px 10px 16px' : '16px 8px 12px',
+        boxShadow: isActive ? '0 8px 24px rgba(37,99,235,0.08)' : 'none',
+        zIndex: isActive ? 1 : 0,
+        wordBreak: 'keep-all' as const,
       }}
     >
       {/* Active label */}
       {isActive && (
-        <span
-          className="absolute -top-2.5 left-1/2 -translate-x-1/2 rounded-full px-2 py-0.5 text-[10px] font-bold text-white whitespace-nowrap"
-          style={{ background: COLORS.activeLabel }}
-        >
-          지금 여기!
-        </span>
-      )}
-
-      {/* Done check overlay */}
-      {isDone && (
-        <div className="absolute top-1.5 right-1.5">
-          <CheckCircle className="h-4 w-4" style={{ color: COLORS.stepDone.border }} />
+        <div className="absolute -top-3 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full px-2.5 py-0.5 text-xs font-bold tracking-wide text-white" style={{ background: '#7C3AED' }}>
+          ▶ 지금 여기!
         </div>
       )}
 
-      {/* Lock overlay */}
-      {isLocked && (
-        <div className="absolute top-1.5 right-1.5">
-          <Lock className="h-4 w-4 text-gray-400" />
-        </div>
-      )}
-
-      {/* Icon */}
-      <div className={`mb-2 ${isLocked ? 'text-gray-400' : isDone ? 'text-emerald-600' : ''}`} style={isActive ? { color: COLORS.activeLabel } : undefined}>
-        {stage.icon}
+      {/* Status icon — top right circle */}
+      <div className="absolute -top-2 -right-2 flex h-[24px] w-[24px] items-center justify-center rounded-full border-2 border-white text-xs font-bold" style={{
+        background: isDone ? COLORS.green : isActive ? '#7C3AED' : '#E5E7EB',
+        color: isDone || isActive ? 'white' : '#9CA3AF',
+      }}>
+        {isDone ? '✓' : isActive ? '▶' : '🔒'}
       </div>
 
-      {/* Label */}
-      <span className={`text-sm font-semibold ${isLocked ? 'text-gray-400' : ''}`} style={isActive ? { color: COLORS.activeLabel } : undefined}>
+      {/* Icon wrap */}
+      <div className="mx-auto mb-2 flex items-center justify-center rounded-xl" style={{
+        width: isActive ? 54 : 42,
+        height: isActive ? 54 : 42,
+        fontSize: isActive ? 28 : 22,
+        background: isDone ? 'rgba(37,99,235,0.08)' : 'white',
+      }}>
+        {stage.emoji}
+      </div>
+
+      {/* Name */}
+      <div className="font-bold leading-tight" style={{
+        fontSize: isActive ? 17 : 14,
+        color: isDone ? COLORS.green : isActive ? '#7C3AED' : '#4B5563',
+      }}>
         {stage.label}
-      </span>
+      </div>
 
       {/* Description */}
-      <span className={`text-[11px] mt-0.5 ${isLocked ? 'text-gray-300' : 'text-gray-500'}`}>
+      <div className="mt-1 leading-snug whitespace-pre-line" style={{
+        fontSize: isActive ? 14 : 13,
+        color: isActive ? '#6B7280' : '#9CA3AF',
+      }}>
         {stage.description}
-      </span>
+      </div>
 
       {/* Score badge */}
-      {stage.scoreLabel && (
-        <span
-          className={`mt-2 inline-flex items-center rounded-full px-2 py-0.5 text-[11px] font-semibold ${
-            isDone ? 'bg-emerald-100 text-emerald-700' : 'bg-violet-100 text-violet-700'
-          }`}
-        >
-          {stage.scoreLabel}
-        </span>
-      )}
+      <div className="mt-2 inline-block rounded-full font-bold" style={{
+        fontSize: isActive ? 14 : 13,
+        padding: isActive ? '4px 12px' : '3px 10px',
+        background: isDone ? COLORS.green : isActive ? '#7C3AED' : '#E5E7EB',
+        color: isDone || isActive ? 'white' : '#9CA3AF',
+      }}>
+        {isDone ? (stage.actualScore || '완료') : stage.scoreRequirement}
+      </div>
     </div>
   );
 
-  // Make clickable if not locked
   if (!isLocked && dayId) {
-    return (
-      <Link href={`/student/voca/${dayId}`} className="w-full block">
-        {content}
-      </Link>
-    );
+    return <Link href={`/student/voca/${dayId}`} className="block" style={{ flex: isActive ? 1.35 : 1 }}>{card}</Link>;
   }
+  return <div style={{ flex: isActive ? 1.35 : 1 }}>{card}</div>;
+}
 
-  return <div className="w-full">{content}</div>;
+function FlowCta({ stage, dayId }: { stage: Stage; dayId: string }) {
+  const cta = getCtaText(stage);
+  return (
+    <div className="flex items-center justify-between rounded-xl p-3.5 md:p-4" style={{ background: 'linear-gradient(120deg, #F5F3FF, #EDE9FE)', border: '1px solid rgba(37,99,235,0.08)' }}>
+      <div className="mr-3 min-w-0">
+        <div className="text-sm font-semibold" style={{ color: '#7C3AED' }}>{cta.title}</div>
+        <div className="text-sm text-gray-500 mt-0.5 truncate">{cta.sub}</div>
+      </div>
+      <Link
+        href={`/student/voca/${dayId}`}
+        className="shrink-0 rounded-[10px] px-5 py-2.5 text-sm font-bold text-white whitespace-nowrap"
+        style={{ background: '#7C3AED', boxShadow: '0 4px 12px rgba(37,99,235,0.15)' }}
+      >
+        {stage.label} 시작하기 →
+      </Link>
+    </div>
+  );
 }

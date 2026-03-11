@@ -19,14 +19,20 @@ export default async function StudentVocaPage() {
 
   if (!assignment) redirect('/student');
 
-  // Get active books
+  // 배정된 교재만 fetch
+  const { data: bookAssignment } = await supabase
+    .from('voca_book_assignments')
+    .select('book_id')
+    .eq('student_id', user.id)
+    .single();
+
+  if (!bookAssignment) redirect('/student');
+
   const { data: books } = await supabase
     .from('voca_books')
     .select('*')
-    .eq('is_active', true)
-    .order('sort_order');
+    .eq('id', bookAssignment.book_id);
 
-  // Get all days for these books
   const bookIds = (books || []).map((b) => b.id);
   let days: VocaDay[] = [];
   if (bookIds.length > 0) {

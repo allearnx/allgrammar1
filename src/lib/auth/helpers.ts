@@ -11,7 +11,7 @@ export const getUser = cache(async (): Promise<AuthUser | null> => {
   const profileHeader = headersList.get('x-user-profile');
   if (profileHeader) {
     try {
-      return JSON.parse(profileHeader) as AuthUser;
+      return JSON.parse(Buffer.from(profileHeader, 'base64').toString('utf-8')) as AuthUser;
     } catch {
       // Fall through to normal path
     }

@@ -213,7 +213,7 @@ export function PdfBulkExtract({ bookId, onCreated }: { bookId: string; onCreate
               </div>
               <div className="flex flex-wrap gap-1.5 text-xs">
                 {dayChunks.map((chunk, i) => (
-                  <span key={i} className="px-2 py-0.5 bg-primary/10 text-primary rounded-full">
+                  <span key={i} className="px-2 py-0.5 bg-violet-100 text-violet-700 rounded-full">
                     Day {i + 1} ({chunk.length}단어)
                   </span>
                 ))}

@@ -67,7 +67,7 @@ export function VocaAdminClient({ books: initialBooks }: VocaAdminClientProps) {
             <Card
               key={book.id}
               className={`cursor-pointer transition-shadow hover:shadow-md ${
-                selectedBook?.id === book.id ? 'ring-2 ring-primary' : ''
+                selectedBook?.id === book.id ? 'ring-2 ring-violet-600' : ''
               }`}
               onClick={() => setSelectedBook(book)}
             >

@@ -121,7 +121,7 @@ export async function updateSession(request: NextRequest) {
     // Pass user profile to server components via request header
     if (profile) {
       const requestHeaders = new Headers(request.headers);
-      requestHeaders.set('x-user-profile', JSON.stringify(profile));
+      requestHeaders.set('x-user-profile', Buffer.from(JSON.stringify(profile)).toString('base64'));
       const response = NextResponse.next({
         request: { headers: requestHeaders },
       });

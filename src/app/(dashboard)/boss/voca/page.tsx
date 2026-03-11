@@ -15,7 +15,7 @@ export default async function BossVocaPage() {
   return (
     <>
       <Topbar user={user} title="올킬보카 관리" />
-      <div className="p-4 md:p-6">
+      <div className="p-4 md:p-6 min-h-screen bg-violet-50/60">
         <VocaAdminClient books={books || []} />
       </div>
     </>

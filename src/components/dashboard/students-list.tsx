@@ -75,17 +75,37 @@ export async function StudentsList({ user, basePath }: Props) {
   const canManageServices = basePath === '/boss' || basePath === '/admin';
   let serviceMap: Record<string, string[]> = {};
 
+  let vocaBooks: { id: string; title: string }[] = [];
+  let bookAssignmentMap: Record<string, string> = {};
+
   if (canManageServices && studentIds.length > 0) {
-    const { data: assignments } = await admin
-      .from('service_assignments')
-      .select('student_id, service')
-      .in('student_id', studentIds);
+    const [{ data: assignments }, { data: vocaBooksData }, { data: bookAssignments }] = await Promise.all([
+      admin
+        .from('service_assignments')
+        .select('student_id, service')
+        .in('student_id', studentIds),
+      admin
+        .from('voca_books')
+        .select('id, title')
+        .eq('is_active', true)
+        .order('sort_order'),
+      admin
+        .from('voca_book_assignments')
+        .select('student_id, book_id')
+        .in('student_id', studentIds),
+    ]);
 
     if (assignments) {
       for (const a of assignments) {
         if (!serviceMap[a.student_id]) serviceMap[a.student_id] = [];
         serviceMap[a.student_id].push(a.service);
       }
+    }
+
+    vocaBooks = vocaBooksData || [];
+
+    for (const a of bookAssignments || []) {
+      bookAssignmentMap[a.student_id] = a.book_id;
     }
   }
 
@@ -147,6 +167,8 @@ export async function StudentsList({ user, basePath }: Props) {
                         <ServiceAssignmentToggle
                           studentId={student.id}
                           assignedServices={serviceMap[student.id] || []}
+                          vocaBooks={vocaBooks}
+                          assignedBookId={bookAssignmentMap[student.id] || null}
                         />
                       </div>
                     )}

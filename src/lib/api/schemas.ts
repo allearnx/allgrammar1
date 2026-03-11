@@ -424,6 +424,17 @@ export const serviceAssignmentDeleteSchema = z.object({
   service: z.enum(['naesin', 'voca']),
 });
 
+// ── 보카 교재 배정 Schemas ──
+
+export const vocaBookAssignmentSchema = z.object({
+  studentId: ID,
+  bookId: ID,
+});
+
+export const vocaBookAssignmentDeleteSchema = z.object({
+  studentId: ID,
+});
+
 // ── Grammar Socratic Chat Schemas ──
 
 export const grammarChatStartSchema = z.object({

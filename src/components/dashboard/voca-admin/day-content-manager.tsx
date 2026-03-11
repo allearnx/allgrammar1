@@ -86,7 +86,7 @@ export function DayContentManager({ dayId }: { dayId: string }) {
   return (
     <div className="mt-4 space-y-3 border-t pt-3">
       <div className="flex items-center gap-2 p-2 rounded-lg bg-muted/50">
-        <BookOpen className="h-4 w-4 text-blue-500" />
+        <BookOpen className="h-4 w-4 text-violet-600" />
         <span className="text-sm">단어</span>
         <Badge variant="secondary" className="ml-auto">{vocab.items.length}개</Badge>
       </div>
@@ -114,7 +114,7 @@ export function DayContentManager({ dayId }: { dayId: string }) {
                   <span className="text-sm text-muted-foreground truncate max-w-[120px]">{v.back_text}</span>
                   {v.synonyms && <Badge variant="outline" className="text-[10px] h-4 px-1">유</Badge>}
                   {v.antonyms && <Badge variant="outline" className="text-[10px] h-4 px-1">반</Badge>}
-                  {v.idioms && v.idioms.length > 0 && <Badge variant="outline" className="text-[10px] h-4 px-1 border-blue-300 text-blue-600">숙</Badge>}
+                  {v.idioms && v.idioms.length > 0 && <Badge variant="outline" className="text-[10px] h-4 px-1 border-violet-400 text-violet-700">숙</Badge>}
                   <Button variant="ghost" size="icon" className="h-6 w-6 opacity-0 group-hover:opacity-100" onClick={() => vocabEdit.editingId === v.id ? vocabEdit.cancelEdit() : vocabEdit.startEdit(v)}>
                     <Pencil className="h-3.5 w-3.5" />
                   </Button>
