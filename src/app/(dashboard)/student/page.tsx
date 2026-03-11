@@ -87,7 +87,8 @@ export default async function StudentDashboard() {
     const currentDay = sortedDays.find((d) => {
       const p = progressMap.get(d.id);
       if (!p) return true;
-      const r1 = p.flashcard_completed && (p.quiz_score ?? 0) >= 80 && (p.spelling_score ?? 0) >= 80 && p.matching_completed;
+      const quizPass = (p.quiz_score ?? 0) >= 80;
+      const r1 = (p.flashcard_completed || quizPass) && quizPass && (p.spelling_score ?? 0) >= 80 && p.matching_completed;
       const r2 = p.round2_flashcard_completed && (p.round2_quiz_score ?? 0) >= 80 && p.round2_matching_completed;
       return !r1 || !r2;
     }) ?? sortedDays[0];
@@ -367,7 +368,8 @@ export default async function StudentDashboard() {
     const currentDay = sortedDays.find((d) => {
       const p = vocaProgressMap.get(d.id);
       if (!p) return true;
-      const r1 = p.flashcard_completed && (p.quiz_score ?? 0) >= 80 && (p.spelling_score ?? 0) >= 80 && p.matching_completed;
+      const quizPass = (p.quiz_score ?? 0) >= 80;
+      const r1 = (p.flashcard_completed || quizPass) && quizPass && (p.spelling_score ?? 0) >= 80 && p.matching_completed;
       const r2 = p.round2_flashcard_completed && (p.round2_quiz_score ?? 0) >= 80 && p.round2_matching_completed;
       return !r1 || !r2;
     }) ?? sortedDays[0];

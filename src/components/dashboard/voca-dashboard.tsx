@@ -59,15 +59,18 @@ function getR1Stages(p: VocaStudentProgress | null): Stage[] {
   const spellPass = (p?.spelling_score ?? 0) >= 80;
   const matchDone = p?.matching_completed ?? false;
 
-  const quizStatus: StageStatus = quizPass ? 'done' : fc ? 'active' : 'locked';
+  // 이후 단계 통과 시 이전 단계도 완료로 간주 (데이터 불일치 방어)
+  const fcDone = fc || quizPass;
+
+  const quizStatus: StageStatus = quizPass ? 'done' : fcDone ? 'active' : 'locked';
   const spellStatus: StageStatus = spellPass ? 'done' : quizPass ? 'active' : 'locked';
   const matchStatus: StageStatus = matchDone ? 'done' : spellPass ? 'active' : 'locked';
 
   return [
     {
-      key: 'flashcard', label: '플래시카드', status: fc ? 'done' : 'active',
+      key: 'flashcard', label: '플래시카드', status: fcDone ? 'done' : 'active',
       emoji: '👁️', description: '단어·뜻·예문을\n카드로 확인',
-      scoreRequirement: '카드 확인', actualScore: fc ? '완료 ✓' : undefined,
+      scoreRequirement: '카드 확인', actualScore: fcDone ? '완료 ✓' : undefined,
     },
     {
       key: 'quiz', label: '퀴즈', status: quizStatus,
@@ -89,9 +92,11 @@ function getR1Stages(p: VocaStudentProgress | null): Stage[] {
 
 function isR1Complete(p: VocaStudentProgress | null): boolean {
   if (!p) return false;
+  const quizPass = (p.quiz_score ?? 0) >= 80;
+  const fcDone = p.flashcard_completed || quizPass;
   return (
-    p.flashcard_completed &&
-    (p.quiz_score ?? 0) >= 80 &&
+    fcDone &&
+    quizPass &&
     (p.spelling_score ?? 0) >= 80 &&
     p.matching_completed
   );
@@ -111,14 +116,17 @@ function getR2Stages(p: VocaStudentProgress | null): Stage[] {
     ];
   }
 
-  const quiz2Status: StageStatus = quiz2Pass ? 'done' : fc2 ? 'active' : 'locked';
+  // 이후 단계 통과 시 이전 단계도 완료로 간주
+  const fc2Done = fc2 || quiz2Pass;
+
+  const quiz2Status: StageStatus = quiz2Pass ? 'done' : fc2Done ? 'active' : 'locked';
   const match2Status: StageStatus = match2Done ? 'done' : quiz2Pass ? 'active' : 'locked';
 
   return [
     {
-      key: 'r2_flashcard', label: '플래시카드', status: fc2 ? 'done' : 'active',
+      key: 'r2_flashcard', label: '플래시카드', status: fc2Done ? 'done' : 'active',
       emoji: '📚', description: '유의어·반의어\n숙어 학습',
-      scoreRequirement: '카드 확인', actualScore: fc2 ? '완료 ✓' : undefined,
+      scoreRequirement: '카드 확인', actualScore: fc2Done ? '완료 ✓' : undefined,
     },
     {
       key: 'r2_quiz', label: '종합 문제', status: quiz2Status,
@@ -135,9 +143,11 @@ function getR2Stages(p: VocaStudentProgress | null): Stage[] {
 
 function isR2Complete(p: VocaStudentProgress | null): boolean {
   if (!p) return false;
+  const quiz2Pass = (p.round2_quiz_score ?? 0) >= 80;
+  const fc2Done = p.round2_flashcard_completed || quiz2Pass;
   return (
-    p.round2_flashcard_completed &&
-    (p.round2_quiz_score ?? 0) >= 80 &&
+    fc2Done &&
+    quiz2Pass &&
     p.round2_matching_completed
   );
 }
