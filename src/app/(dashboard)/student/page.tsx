@@ -77,6 +77,28 @@ export default async function StudentDashboard() {
       wordCount = count || 0;
     }
 
+    // Fetch wrong words from quiz results + matching submissions
+    const [quizResultsRes, matchingSubRes] = await Promise.all([
+      dayIds.length > 0
+        ? supabase.from('naesin_vocab_quiz_results').select('wrong_words').eq('student_id', user.id).in('unit_id', dayIds)
+        : Promise.resolve({ data: null }),
+      dayIds.length > 0
+        ? supabase.from('voca_matching_submissions').select('wrong_words').eq('student_id', user.id).in('day_id', dayIds)
+        : Promise.resolve({ data: null }),
+    ]);
+
+    const wrongWordCounts: Record<string, number> = {};
+    for (const row of quizResultsRes.data || []) {
+      for (const w of (row.wrong_words as { front_text: string }[]) || []) {
+        wrongWordCounts[w.front_text] = (wrongWordCounts[w.front_text] || 0) + 1;
+      }
+    }
+    for (const row of matchingSubRes.data || []) {
+      for (const w of (row.wrong_words as { word: string }[]) || []) {
+        wrongWordCounts[w.word] = (wrongWordCounts[w.word] || 0) + 1;
+      }
+    }
+
     return (
       <>
         <Topbar user={user} title="올킬보카" />
@@ -86,6 +108,7 @@ export default async function StudentDashboard() {
           days={days}
           progressList={progressList}
           wordCount={wordCount}
+          wrongWordCounts={wrongWordCounts}
         />
       </>
     );
