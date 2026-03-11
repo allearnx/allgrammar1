@@ -5,6 +5,8 @@ import {
   ForbiddenError,
   ValidationError,
   NotFoundError,
+  DatabaseError,
+  dbResult,
   errorResponse,
 } from '@/lib/api/errors';
 
@@ -110,5 +112,37 @@ describe('errorResponse', () => {
     const res = errorResponse('string error');
     expect(res.status).toBe(500);
     spy.mockRestore();
+  });
+});
+
+describe('DatabaseError', () => {
+  it('has statusCode 500 and DATABASE_ERROR code', () => {
+    const err = new DatabaseError('connection failed');
+    expect(err.statusCode).toBe(500);
+    expect(err.code).toBe('DATABASE_ERROR');
+    expect(err.message).toBe('connection failed');
+    expect(err).toBeInstanceOf(ApiError);
+  });
+});
+
+describe('dbResult', () => {
+  it('returns data when error is null', () => {
+    const result = dbResult({ data: { id: '1', name: 'test' }, error: null });
+    expect(result).toEqual({ id: '1', name: 'test' });
+  });
+
+  it('throws DatabaseError when error is present', () => {
+    expect(() =>
+      dbResult({ data: null, error: { message: 'duplicate key' } })
+    ).toThrow(DatabaseError);
+  });
+
+  it('includes error message in thrown DatabaseError', () => {
+    try {
+      dbResult({ data: null, error: { message: 'relation does not exist' } });
+    } catch (err) {
+      expect(err).toBeInstanceOf(DatabaseError);
+      expect((err as DatabaseError).message).toBe('relation does not exist');
+    }
   });
 });

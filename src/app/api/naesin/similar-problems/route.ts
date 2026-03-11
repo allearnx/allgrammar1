@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { createApiHandler } from '@/lib/api';
+import { createApiHandler, dbResult } from '@/lib/api';
 import { similarProblemPatchSchema, idSchema } from '@/lib/api/schemas';
 
 const ADMIN_ROLES = ['teacher', 'admin', 'boss'] as const;
@@ -21,8 +21,7 @@ export const GET = createApiHandler(
       query = query.eq('status', status);
     }
 
-    const { data, error } = await query;
-    if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+    const data = dbResult(await query);
     return NextResponse.json(data);
   }
 );
@@ -39,14 +38,13 @@ export const PATCH = createApiHandler(
     }
     if (questionData) updates.question_data = questionData;
 
-    const { data, error } = await supabase
+    const data = dbResult(await supabase
       .from('naesin_similar_problems')
       .update(updates)
       .eq('id', id)
       .select()
-      .single();
+      .single());
 
-    if (error) return NextResponse.json({ error: error.message }, { status: 500 });
     return NextResponse.json(data);
   }
 );
@@ -54,12 +52,10 @@ export const PATCH = createApiHandler(
 export const DELETE = createApiHandler(
   { roles: [...ADMIN_ROLES], schema: idSchema, hasBody: true },
   async ({ body, supabase }) => {
-    const { error } = await supabase
+    dbResult(await supabase
       .from('naesin_similar_problems')
       .delete()
-      .eq('id', body.id);
-
-    if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+      .eq('id', body.id));
     return NextResponse.json({ success: true });
   }
 );

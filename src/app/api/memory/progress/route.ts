@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { createApiHandler } from '@/lib/api';
+import { createApiHandler, dbResult } from '@/lib/api';
 import { memoryProgressSchema } from '@/lib/api/schemas';
 import { calculateNextReview } from '@/lib/memory/spaced-repetition';
 
@@ -44,13 +44,11 @@ export const POST = createApiHandler(
       }
     }
 
-    const { error } = await supabase
+    dbResult(await supabase
       .from('student_memory_progress')
       .upsert(updates, {
         onConflict: 'student_id,memory_item_id',
-      });
-
-    if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+      }));
     return NextResponse.json({ success: true, ...result });
   }
 );

@@ -1,17 +1,16 @@
 import { NextResponse } from 'next/server';
-import { createApiHandler } from '@/lib/api';
+import { createApiHandler, dbResult } from '@/lib/api';
 import { academyCreateSchema } from '@/lib/api/schemas';
 import { generateInviteCode } from '@/lib/utils/invite-code';
 
 export const GET = createApiHandler(
   { roles: ['boss'] },
   async ({ supabase }) => {
-    const { data, error } = await supabase
+    const data = dbResult(await supabase
       .from('academies')
       .select('*')
-      .order('created_at', { ascending: false });
+      .order('created_at', { ascending: false }));
 
-    if (error) return NextResponse.json({ error: error.message }, { status: 500 });
     return NextResponse.json(data);
   }
 );
@@ -31,13 +30,12 @@ export const POST = createApiHandler(
       if (!existing) break;
     }
 
-    const { data, error } = await supabase
+    const data = dbResult(await supabase
       .from('academies')
       .insert({ name: body.name.trim(), invite_code: inviteCode })
       .select()
-      .single();
+      .single());
 
-    if (error) return NextResponse.json({ error: error.message }, { status: 500 });
     return NextResponse.json(data, { status: 201 });
   }
 );

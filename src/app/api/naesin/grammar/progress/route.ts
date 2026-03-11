@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { createApiHandler } from '@/lib/api';
+import { createApiHandler, dbResult } from '@/lib/api';
 import { grammarProgressSchema } from '@/lib/api/schemas';
 
 export const POST = createApiHandler(
@@ -29,11 +29,9 @@ export const POST = createApiHandler(
     const textRead = type === 'text' ? true : (existing?.grammar_text_read ?? false);
     updates.grammar_completed = videoCompleted || textRead;
 
-    const { error } = await supabase
+    dbResult(await supabase
       .from('naesin_student_progress')
-      .upsert(updates, { onConflict: 'student_id,unit_id' });
-
-    if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+      .upsert(updates, { onConflict: 'student_id,unit_id' }));
     return NextResponse.json({ success: true, grammarCompleted: updates.grammar_completed });
   }
 );

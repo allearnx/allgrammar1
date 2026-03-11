@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { createApiHandler } from '@/lib/api';
+import { createApiHandler, dbResult } from '@/lib/api';
 import { workbookOmrSubmitSchema } from '@/lib/api/schemas';
 
 export const POST = createApiHandler(
@@ -27,7 +27,7 @@ export const POST = createApiHandler(
     const scorePercent = Math.round((correctCount / sheet.total_questions) * 100);
 
     // Save attempt
-    const { data: attempt, error: insertErr } = await supabase
+    const attempt = dbResult(await supabase
       .from('naesin_workbook_omr_attempts')
       .insert({
         student_id: user.id,
@@ -38,9 +38,7 @@ export const POST = createApiHandler(
         score_percent: scorePercent,
       })
       .select()
-      .single();
-
-    if (insertErr) return NextResponse.json({ error: insertErr.message }, { status: 500 });
+      .single());
 
     return NextResponse.json({
       ...attempt,

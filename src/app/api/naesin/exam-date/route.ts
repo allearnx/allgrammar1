@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { createApiHandler } from '@/lib/api';
+import { createApiHandler, dbResult } from '@/lib/api';
 import { examDateSchema } from '@/lib/api/schemas';
 
 export const GET = createApiHandler(
@@ -24,7 +24,7 @@ export const POST = createApiHandler(
   async ({ user, body, supabase }) => {
     const { textbookId, examDate } = body;
 
-    const { data, error } = await supabase
+    const data = dbResult(await supabase
       .from('naesin_exam_dates')
       .upsert(
         {
@@ -36,9 +36,8 @@ export const POST = createApiHandler(
         { onConflict: 'student_id,textbook_id' }
       )
       .select()
-      .single();
+      .single());
 
-    if (error) return NextResponse.json({ error: error.message }, { status: 500 });
     return NextResponse.json({ examDate: data });
   }
 );

@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { createApiHandler } from '@/lib/api';
+import { createApiHandler, dbResult } from '@/lib/api';
 import { createClient } from '@/lib/supabase/server';
 import { videoProgressSchema } from '@/lib/api/schemas';
 
@@ -29,7 +29,7 @@ export const POST = createApiHandler(
 
     const completed = watchPercent >= COMPLETION_THRESHOLD;
 
-    const { error } = await supabase
+    dbResult(await supabase
       .from('naesin_grammar_video_progress')
       .upsert(
         {
@@ -44,9 +44,7 @@ export const POST = createApiHandler(
           updated_at: new Date().toISOString(),
         },
         { onConflict: 'student_id,lesson_id' }
-      );
-
-    if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+      ));
 
     if (completed && unitId) {
       await updateGrammarStageProgress(supabase, user.id, unitId);

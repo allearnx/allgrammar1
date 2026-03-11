@@ -2,18 +2,14 @@ import { NextResponse } from 'next/server';
 import { createApiHandler } from '@/lib/api';
 import { logger } from '@/lib/logger';
 import { gradeTranslationBatchSchema } from '@/lib/api/schemas';
-import { checkRateLimit } from '@/lib/api/rate-limit';
 import Anthropic from '@anthropic-ai/sdk';
 
 const anthropic = new Anthropic();
 
 export const POST = createApiHandler(
-  { schema: gradeTranslationBatchSchema },
+  { schema: gradeTranslationBatchSchema, rateLimit: { max: 20 } },
   async ({ user, body }) => {
     const { sentences } = body;
-
-    const limited = checkRateLimit(user.id, 'textbook/grade-translation-batch', 20);
-    if (limited) return limited;
 
     try {
       const sentenceList = sentences

@@ -2,7 +2,6 @@ import { NextResponse } from 'next/server';
 import { z } from 'zod';
 import { createApiHandler } from '@/lib/api';
 import { logger } from '@/lib/logger';
-import { checkRateLimit } from '@/lib/api/rate-limit';
 import Anthropic from '@anthropic-ai/sdk';
 
 const anthropic = new Anthropic();
@@ -17,12 +16,9 @@ const schema = z.object({
 });
 
 export const POST = createApiHandler(
-  { schema },
+  { schema, rateLimit: { max: 30 } },
   async ({ user, body }) => {
     const { sentences } = body;
-
-    const limited = checkRateLimit(user.id, 'naesin/grade-translation', 30);
-    if (limited) return limited;
 
     // 1) Exact match first — skip AI for perfect matches
     type ResultItem = { score: number; feedback: string; correctedSentence: string };

@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { createApiHandler } from '@/lib/api';
+import { createApiHandler, dbResult } from '@/lib/api';
 import { examAssignmentUpsertSchema, examAssignmentDeleteSchema } from '@/lib/api/schemas';
 
 export const GET = createApiHandler(
@@ -17,14 +17,12 @@ export const GET = createApiHandler(
       return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
     }
 
-    const { data, error } = await supabase
+    const data = dbResult(await supabase
       .from('naesin_exam_assignments')
       .select('*')
       .eq('student_id', studentId)
       .eq('textbook_id', textbookId)
-      .order('exam_round');
-
-    if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+      .order('exam_round'));
     return NextResponse.json({ assignments: data || [] });
   }
 );
@@ -34,7 +32,7 @@ export const POST = createApiHandler(
   async ({ body, supabase }) => {
     const { studentId, textbookId, examRound, examLabel, examDate, unitIds } = body;
 
-    const { data, error } = await supabase
+    const data = dbResult(await supabase
       .from('naesin_exam_assignments')
       .upsert(
         {
@@ -49,9 +47,7 @@ export const POST = createApiHandler(
         { onConflict: 'student_id,textbook_id,exam_round' }
       )
       .select()
-      .single();
-
-    if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+      .single());
     return NextResponse.json({ assignment: data });
   }
 );
@@ -61,14 +57,12 @@ export const DELETE = createApiHandler(
   async ({ body, supabase }) => {
     const { studentId, textbookId, examRound } = body;
 
-    const { error } = await supabase
+    dbResult(await supabase
       .from('naesin_exam_assignments')
       .delete()
       .eq('student_id', studentId)
       .eq('textbook_id', textbookId)
-      .eq('exam_round', examRound);
-
-    if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+      .eq('exam_round', examRound));
     return NextResponse.json({ success: true });
   }
 );

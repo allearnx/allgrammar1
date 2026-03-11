@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { createApiHandler } from '@/lib/api';
+import { createApiHandler, dbResult } from '@/lib/api';
 import { grammarLessonCreateSchema, idSchema } from '@/lib/api/schemas';
 import { z } from 'zod';
 
@@ -12,7 +12,7 @@ const grammarLessonPatchSchema = z.object({
 export const POST = createApiHandler(
   { roles: [...ADMIN_ROLES], schema: grammarLessonCreateSchema },
   async ({ body, supabase }) => {
-    const { data, error } = await supabase
+    const data = dbResult(await supabase
       .from('naesin_grammar_lessons')
       .insert({
         unit_id: body.unit_id,
@@ -25,9 +25,7 @@ export const POST = createApiHandler(
         sort_order: body.sort_order || 0,
       })
       .select()
-      .single();
-
-    if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+      .single());
     return NextResponse.json(data);
   }
 );
@@ -36,13 +34,12 @@ export const PATCH = createApiHandler(
   { roles: [...ADMIN_ROLES], schema: grammarLessonPatchSchema },
   async ({ body, supabase }) => {
     const { id, ...updates } = body as Record<string, unknown>;
-    const { data, error } = await supabase
+    const data = dbResult(await supabase
       .from('naesin_grammar_lessons')
       .update(updates)
       .eq('id', id)
       .select()
-      .single();
-    if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+      .single());
     return NextResponse.json(data);
   }
 );
@@ -50,8 +47,7 @@ export const PATCH = createApiHandler(
 export const DELETE = createApiHandler(
   { roles: [...ADMIN_ROLES], schema: idSchema, hasBody: true },
   async ({ body, supabase }) => {
-    const { error } = await supabase.from('naesin_grammar_lessons').delete().eq('id', body.id);
-    if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+    dbResult(await supabase.from('naesin_grammar_lessons').delete().eq('id', body.id));
     return NextResponse.json({ success: true });
   }
 );

@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { createApiHandler } from '@/lib/api';
+import { createApiHandler, dbResult } from '@/lib/api';
 import { omrSheetCreateSchema, idSchema } from '@/lib/api/schemas';
 
 const ADMIN_ROLES = ['teacher', 'admin', 'boss'] as const;
@@ -7,7 +7,7 @@ const ADMIN_ROLES = ['teacher', 'admin', 'boss'] as const;
 export const POST = createApiHandler(
   { roles: [...ADMIN_ROLES], schema: omrSheetCreateSchema },
   async ({ body, supabase }) => {
-    const { data, error } = await supabase
+    const data = dbResult(await supabase
       .from('naesin_omr_sheets')
       .insert({
         unit_id: body.unit_id,
@@ -18,9 +18,7 @@ export const POST = createApiHandler(
         sort_order: body.sort_order || 0,
       })
       .select()
-      .single();
-
-    if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+      .single());
     return NextResponse.json(data);
   }
 );
@@ -28,8 +26,7 @@ export const POST = createApiHandler(
 export const DELETE = createApiHandler(
   { roles: [...ADMIN_ROLES], schema: idSchema, hasBody: true },
   async ({ body, supabase }) => {
-    const { error } = await supabase.from('naesin_omr_sheets').delete().eq('id', body.id);
-    if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+    dbResult(await supabase.from('naesin_omr_sheets').delete().eq('id', body.id));
     return NextResponse.json({ success: true });
   }
 );

@@ -91,7 +91,7 @@ function avgNullableScore(values: (number | null)[]): number | null {
 }
 
 export const POST = createApiHandler(
-  { roles: ['teacher', 'admin', 'boss'], schema: reportGenerateSchema },
+  { roles: ['teacher', 'admin', 'boss'], schema: reportGenerateSchema, rateLimit: { max: 5 } },
   async ({ body, supabase, user }) => {
     const { studentId, reportType } = body;
 

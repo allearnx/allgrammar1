@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { createApiHandler } from '@/lib/api';
+import { createApiHandler, dbResult } from '@/lib/api';
 import { wrongAnswerCreateSchema, wrongAnswerPatchSchema } from '@/lib/api/schemas';
 
 export const GET = createApiHandler(
@@ -21,8 +21,7 @@ export const GET = createApiHandler(
       query = query.eq('resolved', resolved === 'true');
     }
 
-    const { data, error } = await query;
-    if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+    const data = dbResult(await query);
     return NextResponse.json(data);
   }
 );
@@ -40,11 +39,9 @@ export const POST = createApiHandler(
       question_data: wa,
     }));
 
-    const { error } = await supabase
+    dbResult(await supabase
       .from('naesin_wrong_answers')
-      .insert(rows);
-
-    if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+      .insert(rows));
     return NextResponse.json({ success: true, count: rows.length });
   }
 );
@@ -54,13 +51,11 @@ export const PATCH = createApiHandler(
   async ({ user, body, supabase }) => {
     const { id, resolved } = body;
 
-    const { error } = await supabase
+    dbResult(await supabase
       .from('naesin_wrong_answers')
       .update({ resolved: resolved ?? true })
       .eq('id', id)
-      .eq('student_id', user.id);
-
-    if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+      .eq('student_id', user.id));
     return NextResponse.json({ success: true });
   }
 );

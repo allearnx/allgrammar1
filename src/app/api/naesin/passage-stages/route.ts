@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { createApiHandler } from '@/lib/api';
+import { createApiHandler, dbResult } from '@/lib/api';
 import { createAdminClient } from '@/lib/supabase/admin';
 import { z } from 'zod';
 
@@ -44,13 +44,11 @@ export const POST = createApiHandler(
     }
 
     // Try update first
-    const { data: updated, error: updateError } = await admin
+    const updated = dbResult(await admin
       .from('naesin_student_settings')
       .update(updatePayload)
       .eq('student_id', studentId)
-      .select('id');
-
-    if (updateError) return NextResponse.json({ error: updateError.message }, { status: 500 });
+      .select('id'));
 
     // If no row existed, try to find student's textbook and create settings
     if (!updated || updated.length === 0) {

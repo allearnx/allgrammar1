@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { createApiHandler, ValidationError } from '@/lib/api';
+import { createApiHandler, dbResult, ValidationError } from '@/lib/api';
 import { textbookProgressSchema } from '@/lib/api/schemas';
 
 interface ProgressTypeConfig {
@@ -46,13 +46,11 @@ export const POST = createApiHandler(
       [config.attemptsField]: ((existing as Record<string, number> | null)?.[config.attemptsField] || 0) + 1,
     };
 
-    const { error } = await supabase
+    dbResult(await supabase
       .from('student_textbook_progress')
       .upsert(updates, {
         onConflict: 'student_id,passage_id',
-      });
-
-    if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+      }));
     return NextResponse.json({ success: true });
   }
 );

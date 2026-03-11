@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { createApiHandler } from '@/lib/api';
+import { createApiHandler, dbResult } from '@/lib/api';
 import { legacyVideoProgressSchema } from '@/lib/api/schemas';
 
 export const POST = createApiHandler(
@@ -7,7 +7,7 @@ export const POST = createApiHandler(
   async ({ user, body, supabase }) => {
     const { grammarId, position, completed } = body;
 
-    const { error } = await supabase
+    dbResult(await supabase
       .from('student_progress')
       .upsert(
         {
@@ -20,9 +20,7 @@ export const POST = createApiHandler(
         {
           onConflict: 'student_id,grammar_id',
         }
-      );
-
-    if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+      ));
     return NextResponse.json({ success: true });
   }
 );

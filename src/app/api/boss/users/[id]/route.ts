@@ -1,10 +1,11 @@
 import { NextResponse } from 'next/server';
-import { createApiHandler, NotFoundError, ValidationError } from '@/lib/api';
+import { createApiHandler, dbResult, NotFoundError, ValidationError } from '@/lib/api';
+import { auditLog } from '@/lib/api/audit';
 import { userPatchSchema } from '@/lib/api/schemas';
 
 export const PATCH = createApiHandler(
   { roles: ['boss'], schema: userPatchSchema },
-  async ({ body, params, supabase }) => {
+  async ({ user, body, params, supabase }) => {
     const updates: Record<string, unknown> = {};
 
     if ('role' in body && body.role !== undefined) {
@@ -32,12 +33,15 @@ export const PATCH = createApiHandler(
       throw new ValidationError('수정할 항목이 없습니다.');
     }
 
-    const { error } = await supabase
+    dbResult(await supabase
       .from('users')
       .update(updates)
-      .eq('id', params.id);
+      .eq('id', params.id));
 
-    if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+    await auditLog(supabase, user.id, 'user.role_change', {
+      type: 'user', id: params.id, details: updates,
+    });
+
     return NextResponse.json({ success: true });
   }
 );

@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { createApiHandler } from '@/lib/api';
+import { createApiHandler, dbResult } from '@/lib/api';
 import { logger } from '@/lib/logger';
 import { similarProblemGenerateSchema } from '@/lib/api/schemas';
 import Anthropic from '@anthropic-ai/sdk';
@@ -9,7 +9,7 @@ export const maxDuration = 60;
 const anthropic = new Anthropic();
 
 export const POST = createApiHandler(
-  { roles: ['teacher', 'admin', 'boss'], schema: similarProblemGenerateSchema },
+  { roles: ['teacher', 'admin', 'boss'], schema: similarProblemGenerateSchema, rateLimit: { max: 10 } },
   async ({ user, body, supabase }) => {
     const { unitId, wrongAnswerIds, grammarTag } = body;
 
@@ -88,12 +88,11 @@ JSON 배열로만 응답:
         created_by: user.id,
       }));
 
-      const { data: inserted, error } = await supabase
+      const inserted = dbResult(await supabase
         .from('naesin_similar_problems')
         .insert(rows)
-        .select();
+        .select());
 
-      if (error) return NextResponse.json({ error: error.message }, { status: 500 });
       return NextResponse.json({ problems: inserted });
     } catch (error) {
       logger.error('ai.generate', { error: error instanceof Error ? error.message : String(error) });

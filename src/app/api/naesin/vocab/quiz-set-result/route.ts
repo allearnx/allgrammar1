@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { createApiHandler } from '@/lib/api';
+import { createApiHandler, dbResult } from '@/lib/api';
 import { quizSetResultSchema } from '@/lib/api/schemas';
 
 export const POST = createApiHandler(
@@ -8,7 +8,7 @@ export const POST = createApiHandler(
     const { quizSetId, unitId, score, wrongWords } = body;
 
     // Save result
-    const { data: result, error } = await supabase
+    const result = dbResult(await supabase
       .from('naesin_vocab_quiz_set_results')
       .insert({
         student_id: user.id,
@@ -17,9 +17,7 @@ export const POST = createApiHandler(
         wrong_words: wrongWords || [],
       })
       .select()
-      .single();
-
-    if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+      .single());
 
     // Check if this set is now completed (80%+) and update progress
     if (score >= 80 && unitId) {

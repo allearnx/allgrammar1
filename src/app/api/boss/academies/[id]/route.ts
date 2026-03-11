@@ -1,17 +1,16 @@
 import { NextResponse } from 'next/server';
-import { createApiHandler } from '@/lib/api';
+import { createApiHandler, dbResult } from '@/lib/api';
+import { auditLog } from '@/lib/api/audit';
 import { academyCreateSchema } from '@/lib/api/schemas';
 import { generateInviteCode } from '@/lib/utils/invite-code';
 
 export const PATCH = createApiHandler(
   { roles: ['boss'], schema: academyCreateSchema },
   async ({ body, params, supabase }) => {
-    const { error } = await supabase
+    dbResult(await supabase
       .from('academies')
       .update({ name: body.name.trim() })
-      .eq('id', params.id);
-
-    if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+      .eq('id', params.id));
     return NextResponse.json({ success: true });
   }
 );
@@ -30,21 +29,20 @@ export const POST = createApiHandler(
       if (!existing) break;
     }
 
-    const { data, error } = await supabase
+    const data = dbResult(await supabase
       .from('academies')
       .update({ invite_code: inviteCode })
       .eq('id', params.id)
       .select('invite_code')
-      .single();
+      .single());
 
-    if (error) return NextResponse.json({ error: error.message }, { status: 500 });
     return NextResponse.json(data);
   }
 );
 
 export const DELETE = createApiHandler(
   { roles: ['boss'] },
-  async ({ params, supabase }) => {
+  async ({ user, params, supabase }) => {
     // Check if academy has users
     const { count } = await supabase
       .from('users')
@@ -58,12 +56,15 @@ export const DELETE = createApiHandler(
       );
     }
 
-    const { error } = await supabase
+    dbResult(await supabase
       .from('academies')
       .delete()
-      .eq('id', params.id);
+      .eq('id', params.id));
 
-    if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+    await auditLog(supabase, user.id, 'academy.delete', {
+      type: 'academy', id: params.id,
+    });
+
     return NextResponse.json({ success: true });
   }
 );

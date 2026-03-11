@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { createApiHandler } from '@/lib/api';
+import { createApiHandler, dbResult } from '@/lib/api';
 import { createAdminClient } from '@/lib/supabase/admin';
 import { z } from 'zod';
 
@@ -38,13 +38,11 @@ export const POST = createApiHandler(
     const { studentId, stages } = body;
     const admin = createAdminClient();
 
-    const { data: updated, error: updateError } = await admin
+    const updated = dbResult(await admin
       .from('naesin_student_settings')
       .update({ enabled_stages: stages })
       .eq('student_id', studentId)
-      .select('id');
-
-    if (updateError) return NextResponse.json({ error: updateError.message }, { status: 500 });
+      .select('id'));
 
     if (!updated || updated.length === 0) {
       return NextResponse.json(

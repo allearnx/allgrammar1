@@ -11,6 +11,7 @@ import {
   ValidationError,
   errorResponse,
 } from './errors';
+import { checkRateLimit } from './rate-limit';
 import { logger } from '@/lib/logger';
 
 type SupabaseClient = Awaited<ReturnType<typeof createClient>>;
@@ -27,6 +28,7 @@ interface HandlerConfig<T = unknown> {
   roles?: UserRole[];
   schema?: ZodType<T>;
   hasBody?: boolean;
+  rateLimit?: { max: number; windowMs?: number };
 }
 
 async function safeParseJson(request: NextRequest): Promise<unknown> {
@@ -80,6 +82,15 @@ export function createApiHandler<T = unknown>(
       // 2. Role check
       if (config.roles && !config.roles.includes(user.role)) {
         throw new ForbiddenError();
+      }
+
+      // 2.5. Rate limit
+      if (config.rateLimit) {
+        const limited = checkRateLimit(user.id, path, config.rateLimit.max, config.rateLimit.windowMs);
+        if (limited) {
+          logger.warn('api.rate_limited', { method, path, userId });
+          return limited;
+        }
       }
 
       // 3. Parse body

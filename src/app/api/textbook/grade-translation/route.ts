@@ -2,7 +2,6 @@ import { NextResponse } from 'next/server';
 import { createApiHandler } from '@/lib/api';
 import { logger } from '@/lib/logger';
 import { gradeTranslationSchema } from '@/lib/api/schemas';
-import { checkRateLimit } from '@/lib/api/rate-limit';
 import Anthropic from '@anthropic-ai/sdk';
 
 const anthropic = new Anthropic();
@@ -12,12 +11,9 @@ const responseCache = new Map<string, { result: unknown; expiresAt: number }>();
 const CACHE_TTL_MS = 24 * 60 * 60 * 1000; // 24 hours
 
 export const POST = createApiHandler(
-  { schema: gradeTranslationSchema },
+  { schema: gradeTranslationSchema, rateLimit: { max: 10 } },
   async ({ user, body }) => {
     const { koreanText, originalText, studentAnswer } = body;
-
-    const limited = checkRateLimit(user.id, 'textbook/grade-translation', 10);
-    if (limited) return limited;
 
     // Check cache
     const now = Date.now();

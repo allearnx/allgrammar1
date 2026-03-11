@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { createApiHandler } from '@/lib/api';
+import { createApiHandler, dbResult } from '@/lib/api';
 import { vocabProgressSchema } from '@/lib/api/schemas';
 
 const PASS_THRESHOLD = 80;
@@ -40,11 +40,9 @@ export const POST = createApiHandler(
 
     updates.vocab_completed = vocabCompleted;
 
-    const { error } = await supabase
+    dbResult(await supabase
       .from('naesin_student_progress')
-      .upsert(updates, { onConflict: 'student_id,unit_id' });
-
-    if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+      .upsert(updates, { onConflict: 'student_id,unit_id' }));
     return NextResponse.json({ success: true, vocabCompleted });
   }
 );

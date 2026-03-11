@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getUser } from '@/lib/auth/helpers';
 import { logger } from '@/lib/logger';
+import { checkRateLimit } from '@/lib/api/rate-limit';
 import Anthropic from '@anthropic-ai/sdk';
 import { extractText } from 'unpdf';
 
@@ -70,6 +71,9 @@ export async function POST(request: NextRequest) {
   if (!user || !['teacher', 'admin', 'boss'].includes(user.role)) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
+
+  const limited = checkRateLimit(user.id, 'voca/vocabulary/extract-pdf', 10);
+  if (limited) return limited;
 
   try {
     const formData = await request.formData();

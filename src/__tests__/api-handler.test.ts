@@ -5,6 +5,7 @@ import { z } from 'zod';
 // Mock getUser and createClient before importing handler
 const mockGetUser = vi.fn();
 const mockCreateClient = vi.fn();
+const mockCheckRateLimit = vi.fn();
 
 vi.mock('@/lib/auth/helpers', () => ({
   getUser: (...args: unknown[]) => mockGetUser(...args),
@@ -12,6 +13,10 @@ vi.mock('@/lib/auth/helpers', () => ({
 
 vi.mock('@/lib/supabase/server', () => ({
   createClient: (...args: unknown[]) => mockCreateClient(...args),
+}));
+
+vi.mock('@/lib/api/rate-limit', () => ({
+  checkRateLimit: (...args: unknown[]) => mockCheckRateLimit(...args),
 }));
 
 import { createApiHandler } from '@/lib/api/handler';
@@ -50,6 +55,7 @@ beforeEach(() => {
   vi.clearAllMocks();
   mockGetUser.mockResolvedValue(fakeUser);
   mockCreateClient.mockResolvedValue(fakeSupabase);
+  mockCheckRateLimit.mockReturnValue(null);
 });
 
 describe('createApiHandler', () => {
@@ -295,6 +301,52 @@ describe('createApiHandler', () => {
       const data = await res.json();
       expect(data.hasSupabase).toBe(true);
       expect(mockCreateClient).toHaveBeenCalledOnce();
+    });
+  });
+
+  describe('rate limiting', () => {
+    it('returns 429 when rate limit is exceeded', async () => {
+      mockCheckRateLimit.mockReturnValue(
+        NextResponse.json(
+          { error: '시간당 요청 횟수를 초과했습니다.' },
+          { status: 429 }
+        )
+      );
+
+      const handler = createApiHandler(
+        { rateLimit: { max: 5 } },
+        async () => NextResponse.json({ ok: true })
+      );
+
+      const res = await handler(makeRequest('GET'));
+      expect(res.status).toBe(429);
+      expect(mockCheckRateLimit).toHaveBeenCalledWith(
+        'user-1',
+        '/api/test',
+        5,
+        undefined
+      );
+    });
+
+    it('proceeds normally when rate limit is not exceeded', async () => {
+      const handler = createApiHandler(
+        { rateLimit: { max: 10 } },
+        async () => NextResponse.json({ ok: true })
+      );
+
+      const res = await handler(makeRequest('GET'));
+      expect(res.status).toBe(200);
+      expect(mockCheckRateLimit).toHaveBeenCalledOnce();
+    });
+
+    it('skips rate limit check when not configured', async () => {
+      const handler = createApiHandler({}, async () =>
+        NextResponse.json({ ok: true })
+      );
+
+      const res = await handler(makeRequest('GET'));
+      expect(res.status).toBe(200);
+      expect(mockCheckRateLimit).not.toHaveBeenCalled();
     });
   });
 });

@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { createApiHandler } from '@/lib/api';
+import { createApiHandler, dbResult } from '@/lib/api';
 import { createClient } from '@/lib/supabase/server';
 import { quizResultCreateSchema } from '@/lib/api/schemas';
 
@@ -20,7 +20,7 @@ export const POST = createApiHandler(
 
     const attemptNumber = (latest?.attempt_number ?? 0) + 1;
 
-    const { data, error } = await supabase
+    const data = dbResult(await supabase
       .from('naesin_vocab_quiz_results')
       .insert({
         student_id: user.id,
@@ -32,9 +32,7 @@ export const POST = createApiHandler(
         wrong_words: wrongWords || [],
       })
       .select()
-      .single();
-
-    if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+      .single());
     return NextResponse.json({ result: data });
   }
 );
@@ -76,13 +74,11 @@ export async function GET(request: NextRequest) {
     ? (studentId || user.id)
     : user.id;
 
-  const { data, error } = await supabase
+  const data = dbResult(await supabase
     .from('naesin_vocab_quiz_results')
     .select('*')
     .eq('student_id', targetStudentId)
     .eq('unit_id', unitId)
-    .order('attempt_number', { ascending: true });
-
-  if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+    .order('attempt_number', { ascending: true }));
   return NextResponse.json({ results: data });
 }

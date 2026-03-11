@@ -37,6 +37,19 @@ export class NotFoundError extends ApiError {
   }
 }
 
+export class DatabaseError extends ApiError {
+  constructor(message: string) {
+    super(500, message, 'DATABASE_ERROR');
+  }
+}
+
+interface PgResult<T> { data: T; error: { message: string } | null }
+
+export function dbResult<T>(result: PgResult<T>): T {
+  if (result.error) throw new DatabaseError(result.error.message);
+  return result.data;
+}
+
 export function errorResponse(error: unknown): NextResponse {
   if (error instanceof ApiError) {
     const body: Record<string, unknown> = {

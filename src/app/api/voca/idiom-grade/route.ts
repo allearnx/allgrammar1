@@ -2,7 +2,6 @@ import { NextResponse } from 'next/server';
 import { z } from 'zod';
 import { createApiHandler } from '@/lib/api';
 import { logger } from '@/lib/logger';
-import { checkRateLimit } from '@/lib/api/rate-limit';
 import Anthropic from '@anthropic-ai/sdk';
 
 const anthropic = new Anthropic();
@@ -17,12 +16,9 @@ const schema = z.object({
 });
 
 export const POST = createApiHandler(
-  { schema },
+  { schema, rateLimit: { max: 20 } },
   async ({ user, body }) => {
     const { questions } = body;
-
-    const limited = checkRateLimit(user.id, 'voca/idiom-grade', 20);
-    if (limited) return limited;
 
     // 1) Exact match fast path
     type ResultItem = { score: number; feedback: string };

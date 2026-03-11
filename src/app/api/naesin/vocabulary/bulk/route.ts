@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { createApiHandler } from '@/lib/api';
+import { createApiHandler, dbResult } from '@/lib/api';
 import { vocabBulkSchema } from '@/lib/api/schemas';
 
 export const POST = createApiHandler(
@@ -19,12 +19,10 @@ export const POST = createApiHandler(
       sort_order: idx,
     }));
 
-    const { data, error } = await supabase
+    const data = dbResult(await supabase
       .from('naesin_vocabulary')
       .insert(rows)
-      .select();
-
-    if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+      .select());
     return NextResponse.json({ success: true, count: data?.length || 0 });
   }
 );

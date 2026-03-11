@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { createApiHandler, NotFoundError } from '@/lib/api';
+import { createApiHandler, NotFoundError, dbResult } from '@/lib/api';
 import { problemSubmitSchema } from '@/lib/api/schemas';
 
 export const POST = createApiHandler(
@@ -49,7 +49,7 @@ export const POST = createApiHandler(
     const score = Math.round((correctCount / totalQuestions) * 100);
 
     // Save attempt
-    const { data: attempt, error } = await supabase
+    const attempt = dbResult(await supabase
       .from('naesin_problem_attempts')
       .insert({
         student_id: user.id,
@@ -60,9 +60,7 @@ export const POST = createApiHandler(
         wrong_answers: wrongAnswers,
       })
       .select()
-      .single();
-
-    if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+      .single());
 
     // Save wrong answers to unified table
     if (wrongAnswers.length > 0 && unitId) {

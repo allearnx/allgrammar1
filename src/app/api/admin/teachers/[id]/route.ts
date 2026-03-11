@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
-import { createApiHandler, NotFoundError, ForbiddenError } from '@/lib/api';
+import { createApiHandler, dbResult, NotFoundError, ForbiddenError } from '@/lib/api';
+import { auditLog } from '@/lib/api/audit';
 import { teacherPatchSchema } from '@/lib/api/schemas';
 
 export const PATCH = createApiHandler(
@@ -19,12 +20,15 @@ export const PATCH = createApiHandler(
       throw new ForbiddenError();
     }
 
-    const { error } = await supabase
+    dbResult(await supabase
       .from('users')
       .update({ is_active: body.is_active })
-      .eq('id', params.id);
+      .eq('id', params.id));
 
-    if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+    await auditLog(supabase, user.id, 'teacher.remove', {
+      type: 'user', id: params.id, details: { is_active: body.is_active },
+    });
+
     return NextResponse.json({ success: true });
   }
 );
