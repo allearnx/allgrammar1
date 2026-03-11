@@ -48,6 +48,7 @@ export function NaesinQuizView({
   onComplete,
   onQuizSetResult,
   onGoToSpelling,
+  quizResultEndpoint = '/api/naesin/vocab/quiz-result',
 }: {
   vocabulary: NaesinVocabulary[];
   allVocabulary?: NaesinVocabulary[];
@@ -55,6 +56,7 @@ export function NaesinQuizView({
   onComplete: (score: number) => void;
   onQuizSetResult?: (score: number, wrongWords: WrongWord[]) => void;
   onGoToSpelling?: () => void;
+  quizResultEndpoint?: string;
 }) {
   const [questions, setQuestions] = useState<QuizQuestion[]>(() => generateQuizQuestions(vocabulary, allVocabulary));
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -95,7 +97,7 @@ export function NaesinQuizView({
   async function saveQuizResult(correctCount: number, pct: number, finalWrongWords: WrongWord[]) {
     setSaving(true);
     try {
-      const res = await fetch('/api/naesin/vocab/quiz-result', {
+      const res = await fetch(quizResultEndpoint, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

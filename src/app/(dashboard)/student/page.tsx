@@ -102,10 +102,10 @@ export default async function StudentDashboard() {
       wordCount = count || 0;
     }
 
-    // Fetch wrong words from quiz results + matching submissions
+    // Fetch wrong words from voca quiz results + matching submissions
     const [quizResultsRes, matchingSubRes] = await Promise.all([
       dayIds.length > 0
-        ? supabase.from('naesin_vocab_quiz_results').select('wrong_words').eq('student_id', user.id).in('unit_id', dayIds)
+        ? supabase.from('voca_quiz_results').select('wrong_words').eq('student_id', user.id).in('day_id', dayIds)
         : Promise.resolve({ data: null }),
       dayIds.length > 0
         ? supabase.from('voca_matching_submissions').select('wrong_words').eq('student_id', user.id).in('day_id', dayIds)

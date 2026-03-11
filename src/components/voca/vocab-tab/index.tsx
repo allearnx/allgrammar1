@@ -123,6 +123,7 @@ export function VocaTab({ vocabulary, dayId, progress }: VocaTabProps) {
           allVocabulary={naesinVocab}
           unitId={dayId}
           onComplete={(score) => saveProgress('quiz', score)}
+          quizResultEndpoint="/api/voca/quiz-result"
         />
       </TabsContent>
 
