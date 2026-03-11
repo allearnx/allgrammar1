@@ -26,11 +26,20 @@ interface VocaTabProps {
 export function VocaTab({ vocabulary, dayId, progress }: VocaTabProps) {
   const [activeTab, setActiveTab] = useState('flashcard');
   const [matchingWrongWords, setMatchingWrongWords] = useState<WrongWord[] | null>(null);
+  const [localProgress, setLocalProgress] = useState(progress);
 
   const items = useMemo(() => vocabulary.map(vocaToMemoryItem), [vocabulary]);
   const naesinVocab = useMemo(() => vocabulary.map(vocaToNaesinVocabulary), [vocabulary]);
   const hasEnoughForQuiz = vocabulary.length >= 4;
   const spellingItems = useMemo(() => items.filter((i) => i.spelling_answer), [items]);
+
+  // 완료 상태 계산
+  const fcDone = localProgress?.flashcard_completed || (localProgress?.quiz_score ?? 0) >= 80;
+  const quizScore = localProgress?.quiz_score ?? null;
+  const quizPass = (quizScore ?? 0) >= 80;
+  const spellScore = localProgress?.spelling_score ?? null;
+  const spellPass = (spellScore ?? 0) >= 80;
+  const matchDone = localProgress?.matching_completed ?? false;
 
   // Check if synonyms/antonyms exist for matching tab
   const hasSynAnt = useMemo(() => {
@@ -49,6 +58,15 @@ export function VocaTab({ vocabulary, dayId, progress }: VocaTabProps) {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ dayId, type, score, matchingAttempt }),
+      });
+      // 로컬 상태 업데이트
+      setLocalProgress((prev) => {
+        const base = prev ?? {} as VocaStudentProgress;
+        if (type === 'flashcard') return { ...base, flashcard_completed: true };
+        if (type === 'quiz') return { ...base, quiz_score: score ?? 0 };
+        if (type === 'spelling') return { ...base, spelling_score: score ?? 0 };
+        if (type === 'matching') return { ...base, matching_completed: (score ?? 0) >= 90 };
+        return base;
       });
     } catch (err) {
       console.error(err);
@@ -77,10 +95,18 @@ export function VocaTab({ vocabulary, dayId, progress }: VocaTabProps) {
   return (
     <Tabs value={activeTab} onValueChange={setActiveTab}>
       <TabsList className="grid w-full grid-cols-4">
-        <TabsTrigger value="flashcard">플래시카드</TabsTrigger>
-        <TabsTrigger value="quiz" disabled={!hasEnoughForQuiz}>퀴즈</TabsTrigger>
-        <TabsTrigger value="spelling" disabled={spellingItems.length === 0}>스펠링</TabsTrigger>
-        <TabsTrigger value="matching" disabled={!hasSynAnt}>매칭</TabsTrigger>
+        <TabsTrigger value="flashcard">
+          플래시카드{fcDone && <span className="ml-1 text-green-600">✓</span>}
+        </TabsTrigger>
+        <TabsTrigger value="quiz" disabled={!hasEnoughForQuiz}>
+          퀴즈{quizScore != null && <span className={`ml-1 ${quizPass ? 'text-green-600' : 'text-orange-500'}`}>{quizScore}점</span>}
+        </TabsTrigger>
+        <TabsTrigger value="spelling" disabled={spellingItems.length === 0}>
+          스펠링{spellScore != null && <span className={`ml-1 ${spellPass ? 'text-green-600' : 'text-orange-500'}`}>{spellScore}점</span>}
+        </TabsTrigger>
+        <TabsTrigger value="matching" disabled={!hasSynAnt}>
+          매칭{matchDone && <span className="ml-1 text-green-600">✓</span>}
+        </TabsTrigger>
       </TabsList>
 
       <TabsContent value="flashcard" className="mt-4">

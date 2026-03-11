@@ -24,6 +24,13 @@ interface VocaTab2Props {
 export function VocaTab2({ vocabulary, dayId, progress }: VocaTab2Props) {
   const [activeTab, setActiveTab] = useState('flashcard');
   const [matchingWrongWords, setMatchingWrongWords] = useState<WrongWord[] | null>(null);
+  const [localProgress, setLocalProgress] = useState(progress);
+
+  // 완료 상태 계산
+  const fc2Done = localProgress?.round2_flashcard_completed || (localProgress?.round2_quiz_score ?? 0) >= 80;
+  const quiz2Score = localProgress?.round2_quiz_score ?? null;
+  const quiz2Pass = (quiz2Score ?? 0) >= 80;
+  const match2Done = localProgress?.round2_matching_completed ?? false;
 
   const hasRound2Content = useMemo(() => {
     return vocabulary.some(
@@ -47,6 +54,13 @@ export function VocaTab2({ vocabulary, dayId, progress }: VocaTab2Props) {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ dayId, type, score, matchingAttempt, round: '2' }),
+      });
+      setLocalProgress((prev) => {
+        const base = prev ?? {} as VocaStudentProgress;
+        if (type === 'flashcard') return { ...base, round2_flashcard_completed: true };
+        if (type === 'quiz') return { ...base, round2_quiz_score: score ?? 0 };
+        if (type === 'matching') return { ...base, round2_matching_completed: (score ?? 0) >= 90 };
+        return base;
       });
     } catch (err) {
       console.error(err);
@@ -75,9 +89,15 @@ export function VocaTab2({ vocabulary, dayId, progress }: VocaTab2Props) {
   return (
     <Tabs value={activeTab} onValueChange={setActiveTab}>
       <TabsList className="grid w-full grid-cols-3">
-        <TabsTrigger value="flashcard">플래시카드</TabsTrigger>
-        <TabsTrigger value="quiz">종합 문제</TabsTrigger>
-        <TabsTrigger value="matching" disabled={!hasSynAnt}>매칭</TabsTrigger>
+        <TabsTrigger value="flashcard">
+          플래시카드{fc2Done && <span className="ml-1 text-green-600">✓</span>}
+        </TabsTrigger>
+        <TabsTrigger value="quiz">
+          종합 문제{quiz2Score != null && <span className={`ml-1 ${quiz2Pass ? 'text-green-600' : 'text-orange-500'}`}>{quiz2Score}점</span>}
+        </TabsTrigger>
+        <TabsTrigger value="matching" disabled={!hasSynAnt}>
+          매칭{match2Done && <span className="ml-1 text-green-600">✓</span>}
+        </TabsTrigger>
       </TabsList>
 
       <TabsContent value="flashcard" className="mt-4">
