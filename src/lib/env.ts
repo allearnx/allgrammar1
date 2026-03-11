@@ -12,6 +12,10 @@ const serverSchema = z.object({
   SENTRY_ORG: z.string().optional(),
   SENTRY_PROJECT: z.string().optional(),
   SENTRY_AUTH_TOKEN: z.string().optional(),
+
+  // Upstash Redis (없으면 인메모리 폴백)
+  UPSTASH_REDIS_REST_URL: z.string().url().optional(),
+  UPSTASH_REDIS_REST_TOKEN: z.string().min(1).optional(),
 });
 
 // 클라이언트 환경변수 (NEXT_PUBLIC_ 만)

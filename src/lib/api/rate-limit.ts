@@ -1,4 +1,36 @@
 import { NextResponse } from 'next/server';
+import { Ratelimit } from '@upstash/ratelimit';
+import { Redis } from '@upstash/redis';
+
+// --- Upstash Redis (환경변수 있을 때만) ---
+
+const redis =
+  process.env.UPSTASH_REDIS_REST_URL && process.env.UPSTASH_REDIS_REST_TOKEN
+    ? new Redis({
+        url: process.env.UPSTASH_REDIS_REST_URL,
+        token: process.env.UPSTASH_REDIS_REST_TOKEN,
+      })
+    : null;
+
+const limiterCache = new Map<string, Ratelimit>();
+
+function getUpstashLimiter(max: number, windowMs: number): Ratelimit | null {
+  if (!redis) return null;
+  const key = `${max}:${windowMs}`;
+  let limiter = limiterCache.get(key);
+  if (!limiter) {
+    const seconds = Math.max(1, Math.round(windowMs / 1000));
+    limiter = new Ratelimit({
+      redis,
+      limiter: Ratelimit.slidingWindow(max, `${seconds} s`),
+      prefix: 'rl',
+    });
+    limiterCache.set(key, limiter);
+  }
+  return limiter;
+}
+
+// --- 인메모리 폴백 (Vercel 서버리스 인스턴스별) ---
 
 interface RateLimitEntry {
   count: number;
@@ -7,7 +39,7 @@ interface RateLimitEntry {
 
 const stores = new Map<string, Map<string, RateLimitEntry>>();
 
-const CLEANUP_INTERVAL = 10 * 60 * 1000; // 10분마다 만료 엔트리 정리
+const CLEANUP_INTERVAL = 10 * 60 * 1000;
 let lastCleanup = Date.now();
 
 function cleanup() {
@@ -21,18 +53,11 @@ function cleanup() {
   }
 }
 
-/**
- * 인메모리 rate limiter.
- * Vercel 서버리스에서는 인스턴스별이라 완벽하지 않지만,
- * 단일 인스턴스 내 과다 호출은 방지됨.
- *
- * @returns null이면 통과, NextResponse면 429 응답 반환
- */
-export function checkRateLimit(
+function checkRateLimitInMemory(
   userId: string,
   endpoint: string,
   maxRequests: number,
-  windowMs: number = 60 * 60 * 1000
+  windowMs: number
 ): NextResponse | null {
   cleanup();
 
@@ -61,4 +86,33 @@ export function checkRateLimit(
   }
 
   return null;
+}
+
+// --- 통합 인터페이스 (Upstash 우선, 인메모리 폴백) ---
+
+/**
+ * Rate limiter: Upstash Redis가 설정되어 있으면 분산 제한,
+ * 없으면 인메모리 폴백 (인스턴스별 제한).
+ *
+ * @returns null이면 통과, NextResponse면 429 응답 반환
+ */
+export async function checkRateLimit(
+  userId: string,
+  endpoint: string,
+  maxRequests: number,
+  windowMs: number = 60 * 60 * 1000
+): Promise<NextResponse | null> {
+  const limiter = getUpstashLimiter(maxRequests, windowMs);
+  if (limiter) {
+    const { success } = await limiter.limit(`${endpoint}:${userId}`);
+    if (!success) {
+      return NextResponse.json(
+        { error: '시간당 요청 횟수를 초과했습니다. 잠시 후 다시 시도해주세요.' },
+        { status: 429 }
+      );
+    }
+    return null;
+  }
+
+  return checkRateLimitInMemory(userId, endpoint, maxRequests, windowMs);
 }

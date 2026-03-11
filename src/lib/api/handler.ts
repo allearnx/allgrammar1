@@ -86,7 +86,7 @@ export function createApiHandler<T = unknown>(
 
       // 2.5. Rate limit
       if (config.rateLimit) {
-        const limited = checkRateLimit(user.id, path, config.rateLimit.max, config.rateLimit.windowMs);
+        const limited = await checkRateLimit(user.id, path, config.rateLimit.max, config.rateLimit.windowMs);
         if (limited) {
           logger.warn('api.rate_limited', { method, path, userId });
           return limited;

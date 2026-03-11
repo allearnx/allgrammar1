@@ -14,7 +14,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
-  const limited = checkRateLimit(user.id, 'naesin/passages/extract-blanks', 10);
+  const limited = await checkRateLimit(user.id, 'naesin/passages/extract-blanks', 10);
   if (limited) return limited;
 
   try {

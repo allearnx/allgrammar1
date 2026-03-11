@@ -55,7 +55,7 @@ beforeEach(() => {
   vi.clearAllMocks();
   mockGetUser.mockResolvedValue(fakeUser);
   mockCreateClient.mockResolvedValue(fakeSupabase);
-  mockCheckRateLimit.mockReturnValue(null);
+  mockCheckRateLimit.mockResolvedValue(null);
 });
 
 describe('createApiHandler', () => {
@@ -306,7 +306,7 @@ describe('createApiHandler', () => {
 
   describe('rate limiting', () => {
     it('returns 429 when rate limit is exceeded', async () => {
-      mockCheckRateLimit.mockReturnValue(
+      mockCheckRateLimit.mockResolvedValue(
         NextResponse.json(
           { error: '시간당 요청 횟수를 초과했습니다.' },
           { status: 429 }
