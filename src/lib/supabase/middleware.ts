@@ -45,104 +45,107 @@ export async function updateSession(request: NextRequest) {
     }
   );
 
-  // getSession() reads JWT locally (no network call unless token refresh needed)
-  // getUser() was calling Supabase Auth server on EVERY navigation (~200ms)
-  const {
-    data: { session },
-  } = await supabase.auth.getSession();
-
   const pathname = request.nextUrl.pathname;
 
   // Public routes that don't require auth
   const publicRoutes = ['/login', '/signup', '/callback', '/report', '/quiz-result'];
   const isPublicRoute = publicRoutes.some((route) => pathname.startsWith(route));
 
-  // If not authenticated and not on a public route, redirect to login
-  if (!session && !isPublicRoute) {
+  // Try cached profile from cookie first (avoids DB + auth call on every navigation)
+  let profile: { id: string; email: string; full_name: string; role: string; academy_id: string | null } | null = null;
+  let cacheHit = false;
+  let userId: string | null = null;
+
+  const cachedProfileStr = request.cookies.get('x-user-profile')?.value;
+  if (cachedProfileStr) {
+    try {
+      profile = JSON.parse(cachedProfileStr);
+      userId = profile?.id ?? null;
+      cacheHit = true;
+    } catch {
+      // Invalid cache, will re-verify
+    }
+  }
+
+  // Cache miss: verify JWT via getUser() (server-side signature check)
+  if (!cacheHit) {
+    const { data: { user }, error } = await supabase.auth.getUser();
+    if (error || !user) {
+      // Not authenticated
+      if (!isPublicRoute) {
+        const url = request.nextUrl.clone();
+        url.pathname = '/login';
+        return NextResponse.redirect(url);
+      }
+      return supabaseResponse;
+    }
+    userId = user.id;
+
+    // Fetch profile from DB
+    const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+    if (!serviceRoleKey) throw new Error('SUPABASE_SERVICE_ROLE_KEY가 설정되지 않았습니다');
+    const admin = createClient(
+      supabaseUrl,
+      serviceRoleKey,
+      { auth: { autoRefreshToken: false, persistSession: false } }
+    );
+    const { data } = await admin
+      .from('users')
+      .select('id, email, full_name, role, academy_id')
+      .eq('id', user.id)
+      .single();
+    profile = data;
+  }
+
+  // If no profile (not authenticated), handle redirect
+  if (!profile) {
+    if (!isPublicRoute) {
+      const url = request.nextUrl.clone();
+      url.pathname = '/login';
+      return NextResponse.redirect(url);
+    }
+    return supabaseResponse;
+  }
+
+  // Authenticated from here
+  const role = (profile.role || 'student') as UserRole;
+
+  // If on a public route or root, redirect to dashboard
+  if (isPublicRoute || pathname === '/') {
     const url = request.nextUrl.clone();
-    url.pathname = '/login';
+    url.pathname = getRoleDashboard(role);
     return NextResponse.redirect(url);
   }
 
-  // If authenticated, check role and handle routing
-  if (session) {
-    // Try cached profile from cookie first (avoids DB call on every navigation)
-    let profile: { id: string; email: string; full_name: string; role: string; academy_id: string | null } | null = null;
-    let cacheHit = false;
-
-    const cachedProfileStr = request.cookies.get('x-user-profile')?.value;
-    if (cachedProfileStr) {
-      try {
-        const parsed = JSON.parse(cachedProfileStr);
-        if (parsed.id === session.user.id) {
-          profile = parsed;
-          cacheHit = true;
-        }
-      } catch {
-        // Invalid cache, will re-fetch
-      }
-    }
-
-    // Cache miss: fetch from DB
-    if (!profile) {
-      const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
-      if (!serviceRoleKey) throw new Error('SUPABASE_SERVICE_ROLE_KEY가 설정되지 않았습니다');
-      const admin = createClient(
-        supabaseUrl,
-        serviceRoleKey,
-        { auth: { autoRefreshToken: false, persistSession: false } }
-      );
-      const { data } = await admin
-        .from('users')
-        .select('id, email, full_name, role, academy_id')
-        .eq('id', session.user.id)
-        .single();
-      profile = data;
-    }
-
-    const role = (profile?.role || 'student') as UserRole;
-
-    // If on a public route or root, redirect to dashboard
-    if (isPublicRoute || pathname === '/') {
+  // Role-based route protection
+  for (const [routePrefix, allowedRoles] of Object.entries(ROUTE_ACCESS)) {
+    if (pathname.startsWith(routePrefix) && !allowedRoles.includes(role)) {
       const url = request.nextUrl.clone();
       url.pathname = getRoleDashboard(role);
       return NextResponse.redirect(url);
     }
-
-    // Role-based route protection
-    for (const [routePrefix, allowedRoles] of Object.entries(ROUTE_ACCESS)) {
-      if (pathname.startsWith(routePrefix) && !allowedRoles.includes(role)) {
-        const url = request.nextUrl.clone();
-        url.pathname = getRoleDashboard(role);
-        return NextResponse.redirect(url);
-      }
-    }
-
-    // Pass user profile to server components via request header
-    if (profile) {
-      const requestHeaders = new Headers(request.headers);
-      requestHeaders.set('x-user-profile', Buffer.from(JSON.stringify(profile)).toString('base64'));
-      const response = NextResponse.next({
-        request: { headers: requestHeaders },
-      });
-      supabaseResponse.headers.getSetCookie().forEach((cookie) => {
-        response.headers.append('set-cookie', cookie);
-      });
-      // Cache profile in cookie for subsequent navigations (5 min TTL)
-      if (!cacheHit) {
-        response.cookies.set('x-user-profile', JSON.stringify(profile), {
-          httpOnly: true,
-          secure: process.env.NODE_ENV === 'production',
-          sameSite: 'lax',
-          maxAge: 300,
-          path: '/',
-        });
-      }
-      return response;
-    }
   }
 
-  return supabaseResponse;
+  // Pass user profile to server components via request header
+  const requestHeaders = new Headers(request.headers);
+  requestHeaders.set('x-user-profile', Buffer.from(JSON.stringify(profile)).toString('base64'));
+  const response = NextResponse.next({
+    request: { headers: requestHeaders },
+  });
+  supabaseResponse.headers.getSetCookie().forEach((cookie) => {
+    response.headers.append('set-cookie', cookie);
+  });
+  // Cache profile in cookie for subsequent navigations (5 min TTL)
+  if (!cacheHit) {
+    response.cookies.set('x-user-profile', JSON.stringify(profile), {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'lax',
+      maxAge: 300,
+      path: '/',
+    });
+  }
+  return response;
 }
 
 function getRoleDashboard(role: string): string {
