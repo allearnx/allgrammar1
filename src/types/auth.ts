@@ -6,6 +6,7 @@ export interface AuthUser {
   full_name: string;
   role: UserRole;
   academy_id: string | null;
+  phone?: string | null;
 }
 
 export interface SignUpData {

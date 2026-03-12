@@ -26,6 +26,7 @@ export default function SignUpPage() {
   const [loading, setLoading] = useState(false);
   const [newAcademyName, setNewAcademyName] = useState('');
   const [contactNumber, setContactNumber] = useState('');
+  const [phone, setPhone] = useState('');
   const router = useRouter();
 
   const isAdminRole = role === 'admin';
@@ -78,6 +79,7 @@ export default function SignUpPage() {
         data: {
           full_name: fullName,
           role,
+          ...(phone.trim() ? { phone: phone.trim() } : {}),
           ...(isAdminRole
             ? { academy_name: newAcademyName.trim() }
             : code.length === 6 && academyName
@@ -116,6 +118,17 @@ export default function SignUpPage() {
                 onChange={(e) => setFullName(e.target.value)}
                 required
                 autoComplete="name"
+              />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="phone">전화번호</Label>
+              <Input
+                id="phone"
+                type="tel"
+                placeholder="010-0000-0000"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+                autoComplete="tel"
               />
             </div>
             <div className="space-y-2">

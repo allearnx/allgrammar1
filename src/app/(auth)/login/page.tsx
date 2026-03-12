@@ -77,6 +77,15 @@ export default function LoginPage() {
             <Button type="submit" className="w-full" disabled={loading}>
               {loading ? '로그인 중...' : '로그인'}
             </Button>
+            <div className="flex justify-center gap-4 text-sm">
+              <Link href="/find-email" className="text-muted-foreground underline-offset-4 hover:underline">
+                이메일 찾기
+              </Link>
+              <span className="text-muted-foreground">|</span>
+              <Link href="/forgot-password" className="text-muted-foreground underline-offset-4 hover:underline">
+                비밀번호 찾기
+              </Link>
+            </div>
             <p className="text-sm text-muted-foreground">
               계정이 없으신가요?{' '}
               <Link href="/signup" className="text-primary underline-offset-4 hover:underline">

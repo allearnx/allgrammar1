@@ -513,3 +513,10 @@ export const billingRegisterCardSchema = z.object({
 export const subscriptionCancelSchema = z.object({
   subscriptionId: ID,
 });
+
+// ── Auth Schemas ──
+
+export const changePasswordSchema = z.object({
+  oldPassword: z.string().min(6),
+  newPassword: z.string().min(6),
+});
