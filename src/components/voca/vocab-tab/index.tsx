@@ -3,13 +3,16 @@
 import { useState, useMemo } from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { toast } from 'sonner';
+import { cn } from '@/lib/utils';
 import { vocaToMemoryItem, vocaToNaesinVocabulary } from '@/lib/voca/adapters';
 import { NaesinFlashcardView } from '@/components/naesin/vocab-tab/flashcard-view';
 import { NaesinQuizView } from '@/components/naesin/vocab-tab/quiz-view';
 import { NaesinSpellingView } from '@/components/naesin/vocab-tab/spelling-view';
 import { MatchingView } from './matching-view';
 import { WriteWrongWords } from './write-wrong-words';
+import { WrongWordsSpelling } from './wrong-words-spelling';
 import type { VocaVocabulary, VocaStudentProgress } from '@/types/voca';
+import type { WrongWordItem } from '@/app/(dashboard)/student/voca/[dayId]/client';
 
 interface WrongWord {
   word: string;
@@ -21,9 +24,10 @@ interface VocaTabProps {
   vocabulary: VocaVocabulary[];
   dayId: string;
   progress: VocaStudentProgress | null;
+  wrongWords?: WrongWordItem[];
 }
 
-export function VocaTab({ vocabulary, dayId, progress }: VocaTabProps) {
+export function VocaTab({ vocabulary, dayId, progress, wrongWords = [] }: VocaTabProps) {
   const [activeTab, setActiveTab] = useState('flashcard');
   const [matchingWrongWords, setMatchingWrongWords] = useState<WrongWord[] | null>(null);
   const [localProgress, setLocalProgress] = useState(progress);
@@ -40,6 +44,8 @@ export function VocaTab({ vocabulary, dayId, progress }: VocaTabProps) {
   const spellScore = localProgress?.spelling_score ?? null;
   const spellPass = (spellScore ?? 0) >= 80;
   const matchDone = localProgress?.matching_completed ?? false;
+
+  const hasWrongWords = wrongWords.length > 0;
 
   // Check if synonyms/antonyms exist for matching tab
   const hasSynAnt = useMemo(() => {
@@ -94,7 +100,7 @@ export function VocaTab({ vocabulary, dayId, progress }: VocaTabProps) {
 
   return (
     <Tabs value={activeTab} onValueChange={setActiveTab}>
-      <TabsList className="grid w-full grid-cols-4">
+      <TabsList className={cn('grid w-full', hasWrongWords ? 'grid-cols-5' : 'grid-cols-4')}>
         <TabsTrigger value="flashcard">
           플래시카드{fcDone && <span className="ml-1 text-green-600">✓</span>}
         </TabsTrigger>
@@ -107,6 +113,11 @@ export function VocaTab({ vocabulary, dayId, progress }: VocaTabProps) {
         <TabsTrigger value="matching" disabled={!hasSynAnt}>
           매칭{matchDone && <span className="ml-1 text-green-600">✓</span>}
         </TabsTrigger>
+        {hasWrongWords && (
+          <TabsTrigger value="wrong-words" className="text-red-600">
+            오답
+          </TabsTrigger>
+        )}
       </TabsList>
 
       <TabsContent value="flashcard" className="mt-4">
@@ -153,6 +164,12 @@ export function VocaTab({ vocabulary, dayId, progress }: VocaTabProps) {
           />
         )}
       </TabsContent>
+
+      {hasWrongWords && (
+        <TabsContent value="wrong-words" className="mt-4">
+          <WrongWordsSpelling words={wrongWords} />
+        </TabsContent>
+      )}
     </Tabs>
   );
 }

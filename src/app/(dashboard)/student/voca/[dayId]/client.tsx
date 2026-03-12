@@ -9,13 +9,19 @@ import { VocaTab2 } from '@/components/voca/vocab-tab/voca-tab-round2';
 import { cn } from '@/lib/utils';
 import type { VocaDay, VocaVocabulary, VocaStudentProgress } from '@/types/voca';
 
+export interface WrongWordItem {
+  front_text: string;
+  back_text: string;
+}
+
 interface VocaDayClientProps {
   day: VocaDay;
   vocabulary: VocaVocabulary[];
   progress: VocaStudentProgress | null;
+  wrongWords: WrongWordItem[];
 }
 
-export function VocaDayClient({ day, vocabulary, progress }: VocaDayClientProps) {
+export function VocaDayClient({ day, vocabulary, progress, wrongWords }: VocaDayClientProps) {
   const router = useRouter();
   const [round, setRound] = useState<'1' | '2'>('1');
 
@@ -62,6 +68,7 @@ export function VocaDayClient({ day, vocabulary, progress }: VocaDayClientProps)
           vocabulary={vocabulary}
           dayId={day.id}
           progress={progress}
+          wrongWords={wrongWords}
         />
       ) : (
         <VocaTab2

@@ -48,6 +48,41 @@ export default async function StudentVocaDayPage({
     .eq('day_id', dayId)
     .single();
 
+  // Get wrong words from quiz results and matching submissions
+  const [{ data: quizResults }, { data: matchingSubmissions }] = await Promise.all([
+    supabase
+      .from('voca_quiz_results')
+      .select('wrong_words')
+      .eq('student_id', user.id)
+      .eq('day_id', dayId),
+    supabase
+      .from('voca_matching_submissions')
+      .select('wrong_words')
+      .eq('student_id', user.id)
+      .eq('day_id', dayId),
+  ]);
+
+  // Merge wrong words from both sources, deduplicate by front_text
+  const wrongWordsMap = new Map<string, { front_text: string; back_text: string }>();
+
+  for (const row of quizResults || []) {
+    const words = (row.wrong_words || []) as Array<{ front_text: string; back_text: string }>;
+    for (const w of words) {
+      if (w.front_text) wrongWordsMap.set(w.front_text.toLowerCase(), w);
+    }
+  }
+
+  for (const row of matchingSubmissions || []) {
+    const words = (row.wrong_words || []) as Array<{ word: string; match: string; type: string }>;
+    for (const w of words) {
+      if (w.word && !wrongWordsMap.has(w.word.toLowerCase())) {
+        wrongWordsMap.set(w.word.toLowerCase(), { front_text: w.word, back_text: w.match });
+      }
+    }
+  }
+
+  const wrongWords = Array.from(wrongWordsMap.values());
+
   return (
     <>
       <Topbar user={user} title={(day as VocaDay).title} />
@@ -56,6 +91,7 @@ export default async function StudentVocaDayPage({
           day={day as VocaDay}
           vocabulary={(vocabulary as VocaVocabulary[]) || []}
           progress={(progress as VocaStudentProgress) || null}
+          wrongWords={wrongWords}
         />
       </div>
     </>
