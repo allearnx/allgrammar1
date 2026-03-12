@@ -16,6 +16,13 @@ const serverSchema = z.object({
   // Upstash Redis (없으면 인메모리 폴백)
   UPSTASH_REDIS_REST_URL: z.string().url().optional(),
   UPSTASH_REDIS_REST_TOKEN: z.string().min(1).optional(),
+
+  // 토스페이먼츠 (없으면 결제 기능 비활성)
+  TOSS_PAYMENTS_SECRET_KEY: z.string().min(1).optional(),
+  NEXT_PUBLIC_TOSS_PAYMENTS_CLIENT_KEY: z.string().min(1).optional(),
+
+  // Cron 인증
+  CRON_SECRET: z.string().min(1).optional(),
 });
 
 // 클라이언트 환경변수 (NEXT_PUBLIC_ 만)
@@ -23,6 +30,7 @@ const clientSchema = z.object({
   NEXT_PUBLIC_SUPABASE_URL: z.string().url(),
   NEXT_PUBLIC_SUPABASE_ANON_KEY: z.string().min(1),
   NEXT_PUBLIC_SENTRY_DSN: z.string().optional(),
+  NEXT_PUBLIC_TOSS_PAYMENTS_CLIENT_KEY: z.string().optional(),
 });
 
 function validateEnv() {
@@ -43,4 +51,5 @@ export const clientEnv = clientSchema.parse({
   NEXT_PUBLIC_SUPABASE_URL: process.env.NEXT_PUBLIC_SUPABASE_URL,
   NEXT_PUBLIC_SUPABASE_ANON_KEY: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
   NEXT_PUBLIC_SENTRY_DSN: process.env.NEXT_PUBLIC_SENTRY_DSN,
+  NEXT_PUBLIC_TOSS_PAYMENTS_CLIENT_KEY: process.env.NEXT_PUBLIC_TOSS_PAYMENTS_CLIENT_KEY,
 });
