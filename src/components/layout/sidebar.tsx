@@ -30,6 +30,8 @@ export function Sidebar({ user, services, naesinTree }: SidebarProps) {
   async function handleLogout() {
     const supabase = createClient();
     await supabase.auth.signOut();
+    // httpOnly 프로필 캐시 쿠키 서버에서 제거
+    await fetch('/api/auth/logout', { method: 'POST' });
     toast.success('로그아웃되었습니다');
     router.push('/login');
     router.refresh();
