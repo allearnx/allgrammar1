@@ -119,7 +119,7 @@ export default async function QuizResultPage({ params }: Props) {
         )}
 
         <p className="text-center text-xs text-muted-foreground">
-          올라영 AI 문법 마스터
+          올라영 AI 러닝 엔진
         </p>
       </div>
     </div>

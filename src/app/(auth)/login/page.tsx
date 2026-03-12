@@ -39,11 +39,11 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="flex min-h-screen items-center justify-center px-4 bg-background">
+    <div className="flex min-h-screen items-center justify-center px-4 bg-violet-100">
       <Card className="w-full max-w-lg shadow-xl">
         <CardHeader className="text-center">
           <Image src="/logo.jpg" alt="올라영" width={120} height={120} className="mx-auto" />
-          <CardDescription className="mt-2">AI 문법 마스터에 로그인하세요</CardDescription>
+          <CardDescription className="mt-2">올라영 AI 러닝 엔진에 로그인하세요</CardDescription>
         </CardHeader>
         <form onSubmit={handleLogin}>
           <CardContent className="space-y-4">

@@ -220,7 +220,7 @@ export default async function PublicReportPage({ params }: Props) {
 
         {/* 워터마크 */}
         <p className="text-center text-xs text-muted-foreground">
-          올라영 AI 문법 마스터
+          올라영 AI 러닝 엔진
         </p>
       </div>
     </div>

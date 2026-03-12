@@ -20,7 +20,7 @@ const notoSansKr = Noto_Sans_KR({
 });
 
 export const metadata: Metadata = {
-  title: '올라영 AI 문법 마스터',
+  title: '올라영 AI 러닝 엔진',
   description: '중학생 영어 문법 학습 플랫폼',
 };
 

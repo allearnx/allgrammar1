@@ -24,7 +24,11 @@ export default function SignUpPage() {
   const [inviteError, setInviteError] = useState<string | null>(null);
   const [validating, setValidating] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [newAcademyName, setNewAcademyName] = useState('');
+  const [contactNumber, setContactNumber] = useState('');
   const router = useRouter();
+
+  const isAdminRole = role === 'admin';
 
   useEffect(() => {
     const code = inviteCode.trim().toUpperCase();
@@ -59,6 +63,14 @@ export default function SignUpPage() {
 
     const code = inviteCode.trim().toUpperCase();
     const supabase = createClient();
+
+    // admin 역할: 학원명 필수
+    if (isAdminRole && !newAcademyName.trim()) {
+      toast.error('학원명을 입력해주세요');
+      setLoading(false);
+      return;
+    }
+
     const { error } = await supabase.auth.signUp({
       email,
       password,
@@ -66,7 +78,11 @@ export default function SignUpPage() {
         data: {
           full_name: fullName,
           role,
-          ...(code.length === 6 && academyName ? { invite_code: code } : {}),
+          ...(isAdminRole
+            ? { academy_name: newAcademyName.trim() }
+            : code.length === 6 && academyName
+              ? { invite_code: code }
+              : {}),
         },
       },
     });
@@ -86,7 +102,7 @@ export default function SignUpPage() {
       <Card className="w-full max-w-lg shadow-xl">
         <CardHeader className="text-center">
           <Image src="/logo.jpg" alt="올라영" width={120} height={120} className="mx-auto" />
-          <CardDescription className="mt-2">AI 문법 마스터에 가입하세요</CardDescription>
+          <CardDescription className="mt-2">올라영 AI 러닝 엔진에 가입하세요</CardDescription>
         </CardHeader>
         <form onSubmit={handleSignUp}>
           <CardContent className="space-y-4">
@@ -136,37 +152,68 @@ export default function SignUpPage() {
                 <SelectContent>
                   <SelectItem value="student">학생</SelectItem>
                   <SelectItem value="teacher">선생님</SelectItem>
+                  <SelectItem value="admin">학원 원장</SelectItem>
                 </SelectContent>
               </Select>
             </div>
-            <div className="space-y-2">
-              <Label htmlFor="inviteCode">초대 코드 (선택)</Label>
-              <Input
-                id="inviteCode"
-                type="text"
-                placeholder="6자리 코드 입력"
-                value={inviteCode}
-                onChange={(e) => setInviteCode(e.target.value.toUpperCase().slice(0, 6))}
-                maxLength={6}
-                className="font-mono tracking-widest uppercase"
-                autoComplete="off"
-              />
-              {validating && (
-                <p className="text-sm text-muted-foreground">확인 중...</p>
-              )}
-              {academyName && (
-                <p className="text-sm text-green-600 flex items-center gap-1">
-                  <CheckCircle2 className="h-4 w-4" />
-                  {academyName}
+            {isAdminRole ? (
+              <>
+                <div className="space-y-2">
+                  <Label htmlFor="newAcademyName">학원명</Label>
+                  <Input
+                    id="newAcademyName"
+                    type="text"
+                    placeholder="학원 이름을 입력하세요"
+                    value={newAcademyName}
+                    onChange={(e) => setNewAcademyName(e.target.value)}
+                    required
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="contactNumber">연락처</Label>
+                  <Input
+                    id="contactNumber"
+                    type="tel"
+                    placeholder="010-0000-0000"
+                    value={contactNumber}
+                    onChange={(e) => setContactNumber(e.target.value)}
+                    required
+                  />
+                </div>
+                <p className="text-sm text-muted-foreground">
+                  가입 후 7일 무료 체험이 시작됩니다.
                 </p>
-              )}
-              {inviteError && (
-                <p className="text-sm text-destructive flex items-center gap-1">
-                  <XCircle className="h-4 w-4" />
-                  {inviteError}
-                </p>
-              )}
-            </div>
+              </>
+            ) : (
+              <div className="space-y-2">
+                <Label htmlFor="inviteCode">초대 코드 (선택)</Label>
+                <Input
+                  id="inviteCode"
+                  type="text"
+                  placeholder="6자리 코드 입력"
+                  value={inviteCode}
+                  onChange={(e) => setInviteCode(e.target.value.toUpperCase().slice(0, 6))}
+                  maxLength={6}
+                  className="font-mono tracking-widest uppercase"
+                  autoComplete="off"
+                />
+                {validating && (
+                  <p className="text-sm text-muted-foreground">확인 중...</p>
+                )}
+                {academyName && (
+                  <p className="text-sm text-green-600 flex items-center gap-1">
+                    <CheckCircle2 className="h-4 w-4" />
+                    {academyName}
+                  </p>
+                )}
+                {inviteError && (
+                  <p className="text-sm text-destructive flex items-center gap-1">
+                    <XCircle className="h-4 w-4" />
+                    {inviteError}
+                  </p>
+                )}
+              </div>
+            )}
           </CardContent>
           <CardFooter className="flex flex-col gap-3">
             <Button type="submit" className="w-full" disabled={loading}>
