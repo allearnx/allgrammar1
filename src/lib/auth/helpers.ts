@@ -22,16 +22,22 @@ export const getUser = cache(async (): Promise<AuthUser | null> => {
 
   const {
     data: { user },
+    error: authError,
   } = await supabase.auth.getUser();
 
-  if (!user) return null;
+  if (authError) console.error('[getUser] auth error:', authError.message);
+  if (!user) {
+    console.warn('[getUser] no auth user found');
+    return null;
+  }
 
-  const { data: profile } = await supabase
+  const { data: profile, error: profileError } = await supabase
     .from('users')
     .select('id, email, full_name, role, academy_id')
     .eq('id', user.id)
     .single();
 
+  if (profileError) console.error('[getUser] profile error:', profileError.message);
   if (!profile) return null;
 
   return profile as AuthUser;
