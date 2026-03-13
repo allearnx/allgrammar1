@@ -224,15 +224,33 @@ export function ComprehensiveQuiz({ vocabulary, dayId, onComplete }: Comprehensi
   const progressPct = Math.round((answeredCount / totalQuestions) * 100);
 
   return (
-    <div className="space-y-4 max-w-lg mx-auto">
-      <div className="flex items-center justify-between text-sm">
-        <span className="text-muted-foreground">{currentIdx + 1} / {totalQuestions}</span>
-        <QuestionTypeBadge type={question.type} />
+    <div className="space-y-4 max-w-lg mx-auto pb-6">
+      {/* Sticky header: progress + nav */}
+      <div className="sticky top-0 z-10 bg-background pt-2 pb-3 space-y-3 -mx-1 px-1">
+        <div className="flex items-center justify-between text-sm">
+          <span className="text-muted-foreground">{currentIdx + 1} / {totalQuestions}</span>
+          <QuestionTypeBadge type={question.type} />
+        </div>
+        <Progress value={progressPct} className="h-1.5" />
+        {/* Question navigation dots */}
+        <div className="flex flex-wrap gap-1 justify-center">
+          {questions.map((_, i) => (
+            <button
+              key={i}
+              className={cn(
+                'w-6 h-6 rounded-full text-xs border transition-colors',
+                i === currentIdx && 'ring-2 ring-primary',
+                answers.has(i) ? 'bg-primary text-primary-foreground' : 'bg-muted'
+              )}
+              onClick={() => setCurrentIdx(i)}
+            >
+              {i + 1}
+            </button>
+          ))}
+        </div>
       </div>
 
-      <Progress value={progressPct} className="h-1.5" />
-
-      <Card className="min-h-[200px]">
+      <Card>
         <CardContent className="py-6">
           <QuestionRenderer
             question={question}
@@ -268,23 +286,6 @@ export function ComprehensiveQuiz({ vocabulary, dayId, onComplete }: Comprehensi
             </Button>
           )}
         </div>
-      </div>
-
-      {/* Question navigation dots */}
-      <div className="flex flex-wrap gap-1 justify-center">
-        {questions.map((_, i) => (
-          <button
-            key={i}
-            className={cn(
-              'w-6 h-6 rounded-full text-xs border transition-colors',
-              i === currentIdx && 'ring-2 ring-primary',
-              answers.has(i) ? 'bg-primary text-primary-foreground' : 'bg-muted'
-            )}
-            onClick={() => setCurrentIdx(i)}
-          >
-            {i + 1}
-          </button>
-        ))}
       </div>
     </div>
   );
