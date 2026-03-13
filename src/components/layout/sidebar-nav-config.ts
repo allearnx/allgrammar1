@@ -1,11 +1,9 @@
 import {
   BookOpen,
   ClipboardList,
-  CreditCard,
   GraduationCap,
   LayoutDashboard,
   NotebookPen,
-  Receipt,
   Settings,
   Users,
   FileText,
@@ -51,11 +49,6 @@ export const NAV_CONFIG: Record<string, NavGroup[]> = {
         { href: '/student/voca', label: '올킬보카', icon: BookA },
       ],
     },
-    {
-      items: [
-        { href: '/student/billing', label: '결제 관리', icon: CreditCard },
-      ],
-    },
   ],
   teacher: [
     {
@@ -93,7 +86,6 @@ export const NAV_CONFIG: Record<string, NavGroup[]> = {
       items: [
         { href: '/admin/students', label: '학생 관리', icon: Users },
         { href: '/admin/teachers', label: '선생님 관리', icon: GraduationCap },
-        { href: '/admin/billing', label: '결제 관리', icon: CreditCard },
       ],
     },
     {
@@ -131,13 +123,6 @@ export const NAV_CONFIG: Record<string, NavGroup[]> = {
         { href: '/boss/textbook-mode', label: '교과서 모드', icon: BookMarked },
         { href: '/boss/naesin', label: '내신 관리', icon: ClipboardList },
         { href: '/boss/voca', label: '올킬보카 관리', icon: BookA },
-      ],
-    },
-    {
-      label: '결제',
-      items: [
-        { href: '/boss/plans', label: '요금 플랜', icon: CreditCard },
-        { href: '/boss/subscriptions', label: '구독 관리', icon: Receipt },
       ],
     },
     {
