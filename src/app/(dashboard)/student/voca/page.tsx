@@ -19,19 +19,16 @@ export default async function StudentVocaPage() {
 
   if (!assignment) redirect('/student');
 
-  // 배정된 교재만 fetch
+  // 배정된 교재가 있으면 해당 교재만, 없으면 전체 교재 fetch
   const { data: bookAssignment } = await supabase
     .from('voca_book_assignments')
     .select('book_id')
     .eq('student_id', user.id)
     .single();
 
-  if (!bookAssignment) redirect('/student');
-
-  const { data: books } = await supabase
-    .from('voca_books')
-    .select('*')
-    .eq('id', bookAssignment.book_id);
+  const { data: books } = bookAssignment
+    ? await supabase.from('voca_books').select('*').eq('id', bookAssignment.book_id)
+    : await supabase.from('voca_books').select('*').order('created_at');
 
   const bookIds = (books || []).map((b) => b.id);
   let days: VocaDay[] = [];
