@@ -60,14 +60,18 @@ export function shuffle<T>(arr: T[]): T[] {
 export function generateQuestions(vocabulary: VocaVocabulary[]): Question[] {
   const questions: Question[] = [];
 
-  const withSynonyms = vocabulary.filter((v) => v.synonyms);
-  const withAntonyms = vocabulary.filter((v) => v.antonyms);
-  const withExample = vocabulary.filter((v) => v.example_sentence);
+  const withSynonyms = shuffle(vocabulary.filter((v) => v.synonyms));
+  const withAntonyms = shuffle(vocabulary.filter((v) => v.antonyms));
+  const withExample = shuffle(vocabulary.filter((v) => v.example_sentence));
   const withIdioms = vocabulary.filter((v) => v.idioms && v.idioms.length > 0);
 
   // All synonym/antonym values for distractor generation
   const allSynonyms = withSynonyms.map((v) => v.synonyms!.split(',')[0].trim()).filter(Boolean);
   const allAntonyms = withAntonyms.map((v) => v.antonyms!.split(',')[0].trim()).filter(Boolean);
+
+  // Track used words to avoid same word appearing in multiple question types
+  const usedSynWords = new Set<string>();
+  const usedAntWords = new Set<string>();
 
   // 1. MC synonym (if >= 4 synonyms for distractors)
   if (withSynonyms.length >= 1 && allSynonyms.length >= 4) {
@@ -76,6 +80,7 @@ export function generateQuestions(vocabulary: VocaVocabulary[]): Question[] {
       const distractors = shuffle(allSynonyms.filter((s) => s !== correct)).slice(0, 4);
       if (distractors.length < 4) continue;
       const choices = shuffle([correct, ...distractors]);
+      usedSynWords.add(v.front_text);
       questions.push({
         type: 'mc_synonym',
         word: v.front_text,
@@ -94,6 +99,7 @@ export function generateQuestions(vocabulary: VocaVocabulary[]): Question[] {
       const distractors = shuffle(allAntonyms.filter((s) => s !== correct)).slice(0, 4);
       if (distractors.length < 4) continue;
       const choices = shuffle([correct, ...distractors]);
+      usedAntWords.add(v.front_text);
       questions.push({
         type: 'mc_antonym',
         word: v.front_text,
@@ -105,8 +111,8 @@ export function generateQuestions(vocabulary: VocaVocabulary[]): Question[] {
     }
   }
 
-  // 3. Short answer synonym
-  for (const v of withSynonyms.slice(0, 2)) {
+  // 3. Short answer synonym — skip words already used in MC synonym
+  for (const v of withSynonyms.filter((v) => !usedSynWords.has(v.front_text)).slice(0, 2)) {
     const accepted = v.synonyms!.split(',').map((s) => s.trim().toLowerCase()).filter(Boolean);
     questions.push({
       type: 'short_synonym',
@@ -117,8 +123,8 @@ export function generateQuestions(vocabulary: VocaVocabulary[]): Question[] {
     });
   }
 
-  // 4. Short answer antonym
-  for (const v of withAntonyms.slice(0, 2)) {
+  // 4. Short answer antonym — skip words already used in MC antonym
+  for (const v of withAntonyms.filter((v) => !usedAntWords.has(v.front_text)).slice(0, 2)) {
     const accepted = v.antonyms!.split(',').map((s) => s.trim().toLowerCase()).filter(Boolean);
     questions.push({
       type: 'short_antonym',
@@ -129,7 +135,7 @@ export function generateQuestions(vocabulary: VocaVocabulary[]): Question[] {
     });
   }
 
-  // 5. Fill blank
+  // 5. Fill blank — show Korean meaning as hint
   for (const v of withExample.slice(0, 3)) {
     const sentence = v.example_sentence!;
     const word = v.front_text.toLowerCase();
@@ -140,7 +146,7 @@ export function generateQuestions(vocabulary: VocaVocabulary[]): Question[] {
     questions.push({
       type: 'fill_blank',
       word: v.front_text,
-      prompt: `빈칸에 들어갈 단어를 쓰세요.\n${blanked}`,
+      prompt: `다음 빈칸에 알맞은 단어를 쓰세요.\n\n${blanked}\n\n💡 뜻: ${v.back_text}`,
       reference: v.front_text,
       acceptedAnswers: [word],
     });
