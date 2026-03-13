@@ -5,7 +5,12 @@ import { Topbar } from '@/components/layout/topbar';
 import { VocaHomeClient } from './client';
 import type { VocaBook, VocaDay, VocaStudentProgress } from '@/types/voca';
 
-export default async function StudentVocaPage() {
+export default async function StudentVocaPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ bookId?: string }>;
+}) {
+  const { bookId: initialBookId } = await searchParams;
   const user = await requireRole(['student']);
   const supabase = await createClient();
 
@@ -61,6 +66,7 @@ export default async function StudentVocaPage() {
           books={(books as VocaBook[]) || []}
           days={days}
           progressList={progressList}
+          initialBookId={initialBookId}
         />
       </div>
     </>

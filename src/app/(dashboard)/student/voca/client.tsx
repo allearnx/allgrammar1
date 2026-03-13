@@ -18,10 +18,14 @@ interface VocaHomeClientProps {
   books: VocaBook[];
   days: VocaDay[];
   progressList: VocaStudentProgress[];
+  initialBookId?: string;
 }
 
-export function VocaHomeClient({ books, days, progressList }: VocaHomeClientProps) {
-  const [selectedBookId, setSelectedBookId] = useState<string>(books[0]?.id || '');
+export function VocaHomeClient({ books, days, progressList, initialBookId }: VocaHomeClientProps) {
+  const defaultBookId = (initialBookId && books.some((b) => b.id === initialBookId))
+    ? initialBookId
+    : books[0]?.id || '';
+  const [selectedBookId, setSelectedBookId] = useState<string>(defaultBookId);
 
   const filteredDays = useMemo(
     () => days.filter((d) => d.book_id === selectedBookId),
