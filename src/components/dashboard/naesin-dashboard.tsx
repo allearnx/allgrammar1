@@ -3,15 +3,12 @@
 import Link from 'next/link';
 import {
   CheckCircle,
-  Lock,
   BookOpen,
   ClipboardList,
   Sparkles,
-  PenLine,
   CalendarDays,
   ArrowRight,
   Layers,
-  RefreshCw,
 } from 'lucide-react';
 import { calculateStageStatuses } from '@/lib/naesin/stage-unlock';
 import type {
@@ -30,8 +27,10 @@ interface Stage {
   label: string;
   stageKey: string;
   status: 'done' | 'active' | 'locked';
-  icon: React.ReactNode;
+  emoji: string;
   description: string;
+  scoreRequirement: string;
+  actualScore?: string;
 }
 
 interface Props {
@@ -66,12 +65,12 @@ const COLORS = {
 
 // ── Helpers ──
 
-const STAGE_META: Record<string, { icon: React.ReactNode; description: string }> = {
-  vocab: { icon: <BookOpen className="h-6 w-6" />, description: '교과서 단어를 암기합니다' },
-  passage: { icon: <ClipboardList className="h-6 w-6" />, description: '교과서 지문을 암기합니다' },
-  grammar: { icon: <Sparkles className="h-6 w-6" />, description: '핵심 문법을 학습합니다' },
-  problem: { icon: <PenLine className="h-6 w-6" />, description: '문제를 풀며 실력 확인' },
-  lastReview: { icon: <RefreshCw className="h-6 w-6" />, description: '시험 직전 최종 점검' },
+const STAGE_META: Record<string, { emoji: string; description: string; scoreRequirement: string }> = {
+  vocab: { emoji: '📖', description: '교과서 단어를\n암기합니다', scoreRequirement: '퀴즈+스펠링 통과' },
+  passage: { emoji: '📝', description: '교과서 지문을\n암기합니다', scoreRequirement: '지문 암기 완료' },
+  grammar: { emoji: '📐', description: '핵심 문법을\n학습합니다', scoreRequirement: '영상 시청 완료' },
+  problem: { emoji: '✏️', description: '문제를 풀며\n실력 확인', scoreRequirement: '문제풀이 완료' },
+  lastReview: { emoji: '🔄', description: '시험 직전\n최종 점검', scoreRequirement: '최종 점검 완료' },
 };
 
 const STAGE_LABELS: Record<string, string> = {
@@ -91,19 +90,29 @@ function mapStageStatus(s: NaesinStageStatus): 'done' | 'active' | 'locked' | nu
   return 'locked';
 }
 
-function getStagesForUnit(statuses: NaesinStageStatuses): Stage[] {
+function getStagesForUnit(statuses: NaesinStageStatuses, progress: NaesinStudentProgress | null): Stage[] {
   const stages: Stage[] = [];
   for (const key of STAGE_KEYS) {
     const mapped = mapStageStatus(statuses[key]);
     if (mapped === null) continue;
     const meta = STAGE_META[key];
+
+    let actualScore: string | undefined;
+    if (mapped === 'done') {
+      actualScore = '완료 ✓';
+    } else if (progress) {
+      if (key === 'vocab' && progress.vocab_quiz_score != null) actualScore = `${progress.vocab_quiz_score}점`;
+    }
+
     stages.push({
       key,
       label: STAGE_LABELS[key],
       stageKey: key === 'lastReview' ? 'last-review' : key,
       status: mapped,
-      icon: meta.icon,
+      emoji: meta.emoji,
       description: meta.description,
+      scoreRequirement: meta.scoreRequirement,
+      actualScore,
     });
   }
   return stages;
@@ -170,7 +179,8 @@ export function NaesinDashboard({
   }) ?? sortedUnits[0];
 
   const currentStatuses = currentUnit ? statusesMap.get(currentUnit.id) : undefined;
-  const currentStages = currentStatuses ? getStagesForUnit(currentStatuses) : [];
+  const currentProgress = currentUnit ? (progressMap.get(currentUnit.id) ?? null) : null;
+  const currentStages = currentStatuses ? getStagesForUnit(currentStatuses, currentProgress) : [];
   const ctaStage = currentStages.find((s) => s.status === 'active');
 
   // Stats
@@ -259,11 +269,11 @@ export function NaesinDashboard({
             )}
           </h3>
 
-          <div className="flex items-stretch gap-3 overflow-x-auto pb-2">
+          <div className="flex items-stretch gap-0 overflow-visible">
             {currentStages.map((stage, i) => (
-              <div key={stage.key} className="flex items-center gap-2" style={{ flex: stage.status === 'active' ? 1.35 : 1, minWidth: 0 }}>
-                {i > 0 && <ArrowRight className="h-4 w-4 shrink-0 text-gray-300" />}
-                <StepCard stage={stage} unitId={currentUnit.id} />
+              <div key={stage.key} className="contents">
+                {i > 0 && <div className="flex items-center justify-center self-center px-1 md:px-1.5 text-gray-300 text-sm shrink-0">→</div>}
+                <FlowStep stage={stage} unitId={currentUnit.id} />
               </div>
             ))}
           </div>
@@ -428,69 +438,81 @@ function StatCard({
   );
 }
 
-function StepCard({ stage, unitId }: { stage: Stage; unitId: string }) {
+function FlowStep({ stage, unitId }: { stage: Stage; unitId: string }) {
   const isDone = stage.status === 'done';
   const isActive = stage.status === 'active';
   const isLocked = stage.status === 'locked';
 
-  const style = isDone
-    ? COLORS.stepDone
-    : isActive
-      ? COLORS.stepActive
-      : COLORS.stepDefault;
+  const green = '#22C55E';
 
-  const content = (
+  const card = (
     <div
-      className={`relative flex flex-col items-center text-center rounded-xl p-4 transition-all w-full ${
-        isActive ? 'shadow-lg' : ''
-      }`}
+      className="relative text-center transition-all flex flex-col items-center h-full"
       style={{
-        background: style.bg,
-        border: `2px solid ${style.border}`,
+        background: isDone ? '#D9F7FC' : isActive ? 'white' : '#D9F7FC',
+        border: isDone ? '1.5px solid #4DD9C0' : isActive ? '2px solid #7C3AED' : '1.5px solid #CCFAF4',
+        borderRadius: isActive ? 16 : 14,
+        padding: isActive ? '28px 10px 24px' : '24px 8px 20px',
+        boxShadow: isActive ? '0 8px 24px rgba(37,99,235,0.08)' : 'none',
+        zIndex: isActive ? 1 : 0,
+        wordBreak: 'keep-all' as const,
       }}
     >
+      {/* Active label */}
       {isActive && (
-        <span
-          className="absolute -top-2.5 left-1/2 -translate-x-1/2 rounded-full px-2 py-0.5 text-[10px] font-bold text-white whitespace-nowrap"
-          style={{ background: COLORS.activeLabel }}
-        >
-          지금 여기!
-        </span>
-      )}
-
-      {isDone && (
-        <div className="absolute top-1.5 right-1.5">
-          <CheckCircle className="h-4 w-4" style={{ color: COLORS.stepDone.border }} />
+        <div className="absolute -top-3 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full px-2.5 py-0.5 text-xs font-bold tracking-wide text-white" style={{ background: '#7C3AED' }}>
+          ▶ 지금 여기!
         </div>
       )}
 
-      {isLocked && (
-        <div className="absolute top-1.5 right-1.5">
-          <Lock className="h-4 w-4 text-gray-400" />
-        </div>
-      )}
-
-      <div className={`mb-2 ${isLocked ? 'text-gray-400' : isDone ? 'text-emerald-600' : ''}`} style={isActive ? { color: COLORS.activeLabel } : undefined}>
-        {stage.icon}
+      {/* Status icon — top right circle */}
+      <div className="absolute -top-2 -right-2 flex h-[24px] w-[24px] items-center justify-center rounded-full border-2 border-white text-xs font-bold" style={{
+        background: isDone ? green : isActive ? '#7C3AED' : '#E5E7EB',
+        color: isDone || isActive ? 'white' : '#9CA3AF',
+      }}>
+        {isDone ? '✓' : isActive ? '▶' : '🔒'}
       </div>
 
-      <span className={`text-sm font-semibold ${isLocked ? 'text-gray-400' : ''}`} style={isActive ? { color: COLORS.activeLabel } : undefined}>
-        {stage.label}
-      </span>
+      {/* Icon wrap */}
+      <div className="mx-auto mb-3 flex items-center justify-center rounded-xl" style={{
+        width: isActive ? 58 : 48,
+        height: isActive ? 58 : 48,
+        fontSize: isActive ? 30 : 24,
+        background: isDone ? 'rgba(37,99,235,0.08)' : 'white',
+      }}>
+        {stage.emoji}
+      </div>
 
-      <span className={`text-[11px] mt-0.5 ${isLocked ? 'text-gray-300' : 'text-gray-500'}`}>
+      {/* Name */}
+      <div className="font-bold leading-tight" style={{
+        fontSize: isActive ? 17 : 14,
+        color: isDone ? green : isActive ? '#7C3AED' : '#4B5563',
+      }}>
+        {stage.label}
+      </div>
+
+      {/* Description */}
+      <div className="mt-2 leading-snug whitespace-pre-line" style={{
+        fontSize: isActive ? 14 : 13,
+        color: isActive ? '#6B7280' : '#9CA3AF',
+      }}>
         {stage.description}
-      </span>
+      </div>
+
+      {/* Score badge */}
+      <div className="mt-3 inline-block rounded-full font-bold" style={{
+        fontSize: isActive ? 14 : 13,
+        padding: isActive ? '4px 12px' : '3px 10px',
+        background: isDone ? green : isActive ? '#7C3AED' : '#E5E7EB',
+        color: isDone || isActive ? 'white' : '#9CA3AF',
+      }}>
+        {isDone ? (stage.actualScore || '완료') : stage.scoreRequirement}
+      </div>
     </div>
   );
 
   if (!isLocked && unitId) {
-    return (
-      <Link href={`/student/naesin/${unitId}/${stage.stageKey}`} className="w-full block">
-        {content}
-      </Link>
-    );
+    return <Link href={`/student/naesin/${unitId}/${stage.stageKey}`} className="block" style={{ flex: isActive ? 1.35 : 1 }}>{card}</Link>;
   }
-
-  return <div className="w-full">{content}</div>;
+  return <div style={{ flex: isActive ? 1.35 : 1 }}>{card}</div>;
 }

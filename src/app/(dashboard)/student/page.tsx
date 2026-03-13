@@ -284,12 +284,18 @@ export default async function StudentDashboard() {
     const dayIds = vocaDays.map((d) => d.id);
     const unitIds = naesinUnits.map((u) => u.id);
 
-    const [vocaProgressRes2, naesinProgressRes2, ...contentResults] = await Promise.all([
+    const [vocaProgressRes2, naesinProgressRes2, quizResultsRes2, matchingSubRes2, ...contentResults] = await Promise.all([
       dayIds.length > 0
         ? supabase.from('voca_student_progress').select('*').eq('student_id', user.id).in('day_id', dayIds)
         : Promise.resolve({ data: null }),
       unitIds.length > 0
         ? supabase.from('naesin_student_progress').select('*').eq('student_id', user.id).in('unit_id', unitIds)
+        : Promise.resolve({ data: null }),
+      dayIds.length > 0
+        ? supabase.from('voca_quiz_results').select('wrong_words').eq('student_id', user.id).in('day_id', dayIds)
+        : Promise.resolve({ data: null }),
+      dayIds.length > 0
+        ? supabase.from('voca_matching_submissions').select('wrong_words').eq('student_id', user.id).in('day_id', dayIds)
         : Promise.resolve({ data: null }),
       ...(unitIds.length > 0
         ? [
@@ -340,6 +346,19 @@ export default async function StudentDashboard() {
       }
     }
 
+    // Wrong word counts
+    const wrongWordCounts: Record<string, number> = {};
+    for (const row of quizResultsRes2.data || []) {
+      for (const w of (row.wrong_words as { front_text: string }[]) || []) {
+        wrongWordCounts[w.front_text] = (wrongWordCounts[w.front_text] || 0) + 1;
+      }
+    }
+    for (const row of matchingSubRes2.data || []) {
+      for (const w of (row.wrong_words as { word: string }[]) || []) {
+        wrongWordCounts[w.word] = (wrongWordCounts[w.word] || 0) + 1;
+      }
+    }
+
     // Word count for current active voca day
     const sortedDays = [...vocaDays].sort((a, b) => a.sort_order - b.sort_order);
     const vocaProgressMap = new Map(vocaProgressList.map((p) => [p.day_id, p]));
@@ -378,6 +397,7 @@ export default async function StudentDashboard() {
           vocabQuizSetCounts={vocabQuizSetCounts}
           grammarVideoCounts={grammarVideoCounts}
           enabledStages={naesinSettings?.enabled_stages}
+          wrongWordCounts={wrongWordCounts}
         />
       </>
     );

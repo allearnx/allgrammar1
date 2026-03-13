@@ -424,7 +424,7 @@ function FlowStep({ stage, dayId }: { stage: Stage; dayId: string }) {
         background: isDone ? '#D9F7FC' : isActive ? 'white' : '#D9F7FC',
         border: isDone ? '1.5px solid #4DD9C0' : isActive ? '2px solid #7C3AED' : '1.5px solid #CCFAF4',
         borderRadius: isActive ? 16 : 14,
-        padding: isActive ? '20px 10px 16px' : '16px 8px 12px',
+        padding: isActive ? '28px 10px 24px' : '24px 8px 20px',
         boxShadow: isActive ? '0 8px 24px rgba(37,99,235,0.08)' : 'none',
         zIndex: isActive ? 1 : 0,
         wordBreak: 'keep-all' as const,
@@ -446,10 +446,10 @@ function FlowStep({ stage, dayId }: { stage: Stage; dayId: string }) {
       </div>
 
       {/* Icon wrap */}
-      <div className="mx-auto mb-2 flex items-center justify-center rounded-xl" style={{
-        width: isActive ? 54 : 42,
-        height: isActive ? 54 : 42,
-        fontSize: isActive ? 28 : 22,
+      <div className="mx-auto mb-3 flex items-center justify-center rounded-xl" style={{
+        width: isActive ? 58 : 48,
+        height: isActive ? 58 : 48,
+        fontSize: isActive ? 30 : 24,
         background: isDone ? 'rgba(37,99,235,0.08)' : 'white',
       }}>
         {stage.emoji}
@@ -464,7 +464,7 @@ function FlowStep({ stage, dayId }: { stage: Stage; dayId: string }) {
       </div>
 
       {/* Description */}
-      <div className="mt-1 leading-snug whitespace-pre-line" style={{
+      <div className="mt-2 leading-snug whitespace-pre-line" style={{
         fontSize: isActive ? 14 : 13,
         color: isActive ? '#6B7280' : '#9CA3AF',
       }}>
@@ -472,7 +472,7 @@ function FlowStep({ stage, dayId }: { stage: Stage; dayId: string }) {
       </div>
 
       {/* Score badge */}
-      <div className="mt-2 inline-block rounded-full font-bold" style={{
+      <div className="mt-3 inline-block rounded-full font-bold" style={{
         fontSize: isActive ? 14 : 13,
         padding: isActive ? '4px 12px' : '3px 10px',
         background: isDone ? COLORS.green : isActive ? '#7C3AED' : '#E5E7EB',
