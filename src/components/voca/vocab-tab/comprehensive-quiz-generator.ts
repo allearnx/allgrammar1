@@ -63,24 +63,26 @@ export function generateQuestions(vocabulary: VocaVocabulary[]): Question[] {
   const withSynonyms = shuffle(vocabulary.filter((v) => v.synonyms));
   const withAntonyms = shuffle(vocabulary.filter((v) => v.antonyms));
   const withExample = shuffle(vocabulary.filter((v) => v.example_sentence));
-  const withIdioms = vocabulary.filter((v) => v.idioms && v.idioms.length > 0);
+  const withIdioms = shuffle(vocabulary.filter((v) => v.idioms && v.idioms.length > 0));
 
   // All synonym/antonym values for distractor generation
   const allSynonyms = withSynonyms.map((v) => v.synonyms!.split(',')[0].trim()).filter(Boolean);
   const allAntonyms = withAntonyms.map((v) => v.antonyms!.split(',')[0].trim()).filter(Boolean);
 
-  // Track used words to avoid same word appearing in multiple question types
-  const usedSynWords = new Set<string>();
-  const usedAntWords = new Set<string>();
+  // Global: each word appears in at most ONE question
+  const usedWords = new Set<string>();
 
-  // 1. MC synonym (if >= 4 synonyms for distractors)
+  // 1. MC synonym (max 3)
   if (withSynonyms.length >= 1 && allSynonyms.length >= 4) {
-    for (const v of withSynonyms.slice(0, 3)) {
+    let count = 0;
+    for (const v of withSynonyms) {
+      if (count >= 3 || usedWords.has(v.front_text)) continue;
       const correct = v.synonyms!.split(',')[0].trim();
       const distractors = shuffle(allSynonyms.filter((s) => s !== correct)).slice(0, 4);
       if (distractors.length < 4) continue;
       const choices = shuffle([correct, ...distractors]);
-      usedSynWords.add(v.front_text);
+      usedWords.add(v.front_text);
+      count++;
       questions.push({
         type: 'mc_synonym',
         word: v.front_text,
@@ -92,14 +94,17 @@ export function generateQuestions(vocabulary: VocaVocabulary[]): Question[] {
     }
   }
 
-  // 2. MC antonym
+  // 2. MC antonym (max 3)
   if (withAntonyms.length >= 1 && allAntonyms.length >= 4) {
-    for (const v of withAntonyms.slice(0, 3)) {
+    let count = 0;
+    for (const v of withAntonyms) {
+      if (count >= 3 || usedWords.has(v.front_text)) continue;
       const correct = v.antonyms!.split(',')[0].trim();
       const distractors = shuffle(allAntonyms.filter((s) => s !== correct)).slice(0, 4);
       if (distractors.length < 4) continue;
       const choices = shuffle([correct, ...distractors]);
-      usedAntWords.add(v.front_text);
+      usedWords.add(v.front_text);
+      count++;
       questions.push({
         type: 'mc_antonym',
         word: v.front_text,
@@ -111,38 +116,17 @@ export function generateQuestions(vocabulary: VocaVocabulary[]): Question[] {
     }
   }
 
-  // 3. Short answer synonym — skip words already used in MC synonym
-  for (const v of withSynonyms.filter((v) => !usedSynWords.has(v.front_text)).slice(0, 2)) {
-    const accepted = v.synonyms!.split(',').map((s) => s.trim().toLowerCase()).filter(Boolean);
-    questions.push({
-      type: 'short_synonym',
-      word: v.front_text,
-      prompt: `"${v.front_text}"의 유의어를 쓰세요.`,
-      reference: v.synonyms!,
-      acceptedAnswers: accepted,
-    });
-  }
-
-  // 4. Short answer antonym — skip words already used in MC antonym
-  for (const v of withAntonyms.filter((v) => !usedAntWords.has(v.front_text)).slice(0, 2)) {
-    const accepted = v.antonyms!.split(',').map((s) => s.trim().toLowerCase()).filter(Boolean);
-    questions.push({
-      type: 'short_antonym',
-      word: v.front_text,
-      prompt: `"${v.front_text}"의 반의어를 쓰세요.`,
-      reference: v.antonyms!,
-      acceptedAnswers: accepted,
-    });
-  }
-
-  // 5. Fill blank — show Korean meaning as hint
-  for (const v of withExample.slice(0, 3)) {
+  // 3. Fill blank (max 2) — skip already-used words
+  let fillCount = 0;
+  for (const v of withExample) {
+    if (fillCount >= 2 || usedWords.has(v.front_text)) continue;
     const sentence = v.example_sentence!;
     const word = v.front_text.toLowerCase();
-    // Create blank version
     const regex = new RegExp(`\\b${word}\\b`, 'gi');
     if (!regex.test(sentence)) continue;
     const blanked = sentence.replace(regex, '________');
+    usedWords.add(v.front_text);
+    fillCount++;
     questions.push({
       type: 'fill_blank',
       word: v.front_text,
@@ -152,43 +136,30 @@ export function generateQuestions(vocabulary: VocaVocabulary[]): Question[] {
     });
   }
 
-  // Idiom questions
+  // 4. Idiom questions — 1 question per idiom (randomly pick type)
   for (const v of withIdioms) {
+    if (usedWords.has(v.front_text)) continue;
+    usedWords.add(v.front_text);
     const idioms = v.idioms!;
     for (const idiom of idioms) {
-      // 6. Idiom en→ko
-      questions.push({
-        type: 'idiom_en_to_ko',
-        word: v.front_text,
-        prompt: `다음 숙어의 뜻을 한국어로 쓰세요.\n"${idiom.en}"`,
-        reference: idiom.ko,
-      });
+      // Pick one random question type per idiom
+      const types: QuestionType[] = ['idiom_en_to_ko'];
+      if (idiom.example_en && idiom.example_ko) types.push('idiom_example_translate');
+      const pickedType = types[Math.floor(Math.random() * types.length)];
 
-      // 7. Idiom ko→en
-      questions.push({
-        type: 'idiom_ko_to_en',
-        word: v.front_text,
-        prompt: `다음 뜻에 해당하는 영어 숙어를 쓰세요.\n"${idiom.ko}"`,
-        reference: idiom.en,
-      });
-
-      // 8. Example translate
-      if (idiom.example_en && idiom.example_ko) {
+      if (pickedType === 'idiom_en_to_ko') {
+        questions.push({
+          type: 'idiom_en_to_ko',
+          word: v.front_text,
+          prompt: `다음 숙어의 뜻을 한국어로 쓰세요.\n"${idiom.en}"`,
+          reference: idiom.ko,
+        });
+      } else {
         questions.push({
           type: 'idiom_example_translate',
           word: v.front_text,
           prompt: `다음 문장을 한국어로 해석하세요.\n"${idiom.example_en}"`,
-          reference: idiom.example_ko,
-        });
-      }
-
-      // 9. Writing (~10% so limit)
-      if (idiom.example_ko && idiom.example_en && Math.random() < 0.3) {
-        questions.push({
-          type: 'idiom_writing',
-          word: v.front_text,
-          prompt: `다음 문장을 영어로 쓰세요.\n"${idiom.example_ko}"`,
-          reference: idiom.example_en,
+          reference: idiom.example_ko!,
         });
       }
     }
