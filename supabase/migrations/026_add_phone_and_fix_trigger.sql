@@ -1,8 +1,23 @@
--- ── users 테이블에 phone 컬럼 추가 ──
+-- ============================================
+-- 026: phone 컬럼 추가 + handle_new_user 트리거 수정
+-- ============================================
+
+-- 1. phone 컬럼 추가
 ALTER TABLE public.users ADD COLUMN IF NOT EXISTS phone TEXT;
 
--- ── handle_new_user() 수정: phone 저장 ──
+-- 2. 기존 홈페이지 자동가입 유저의 phone 업데이트
+-- (auth.users의 raw_user_meta_data에 phone이 있는 경우)
+UPDATE public.users u
+SET phone = au.raw_user_meta_data->>'phone'
+FROM auth.users au
+WHERE u.id = au.id
+  AND au.raw_user_meta_data->>'phone' IS NOT NULL
+  AND u.phone IS NULL;
 
+-- 3. handle_new_user() 트리거 최신화
+-- - full_name OR name 둘 다 처리 (홈페이지는 name으로 보냄)
+-- - phone 저장
+-- - admin + academy_name 시 학원 자동 생성
 CREATE OR REPLACE FUNCTION handle_new_user()
 RETURNS TRIGGER AS $$
 DECLARE
@@ -10,11 +25,17 @@ DECLARE
   _invite_code TEXT;
   _academy_name TEXT;
   _role TEXT;
+  _full_name TEXT;
   _new_invite_code TEXT;
 BEGIN
   _invite_code := NEW.raw_user_meta_data->>'invite_code';
   _academy_name := NEW.raw_user_meta_data->>'academy_name';
   _role := COALESCE(NEW.raw_user_meta_data->>'role', 'student');
+  _full_name := COALESCE(
+    NEW.raw_user_meta_data->>'full_name',
+    NEW.raw_user_meta_data->>'name',
+    NEW.email
+  );
 
   -- admin + academy_name: 학원 자동 생성
   IF _role = 'admin' AND _academy_name IS NOT NULL AND _academy_name != '' THEN
@@ -30,7 +51,7 @@ BEGIN
   VALUES (
     NEW.id,
     NEW.email,
-    COALESCE(NEW.raw_user_meta_data->>'full_name', NEW.email),
+    _full_name,
     COALESCE(_role::user_role, 'student'),
     _academy_id,
     NEW.raw_user_meta_data->>'phone'
