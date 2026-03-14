@@ -8,9 +8,10 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import {
   BookOpen,
   ClipboardList,
-  RefreshCw,
   ChevronRight,
   Sparkles,
+  AlertTriangle,
+  Info,
 } from 'lucide-react';
 import { toast } from 'sonner';
 import Link from 'next/link';
@@ -55,8 +56,8 @@ export function NaesinHome({
   examGroups = [],
 }: NaesinHomeProps) {
   const router = useRouter();
-  const [selecting, setSelecting] = useState(!selectedTextbook);
   const [saving, setSaving] = useState(false);
+  const [confirmId, setConfirmId] = useState<string | null>(null);
 
   async function selectTextbook(tbId: string) {
     setSaving(true);
@@ -71,8 +72,8 @@ export function NaesinHome({
         throw new Error(err?.error || '요청에 실패했습니다');
       }
       toast.success('교과서가 선택되었습니다');
+      setConfirmId(null);
       router.refresh();
-      setSelecting(false);
     } catch (err) {
       console.error(err);
       toast.error('교과서 선택 중 오류가 발생했습니다');
@@ -81,8 +82,8 @@ export function NaesinHome({
     }
   }
 
-  // Textbook selection view
-  if (selecting || !selectedTextbook) {
+  // Textbook selection view (only when no textbook selected)
+  if (!selectedTextbook) {
     const gradeTextbooks: Record<number, NaesinTextbook[]> = {};
     textbooks.forEach((tb) => {
       if (!gradeTextbooks[tb.grade]) gradeTextbooks[tb.grade] = [];
@@ -142,6 +143,16 @@ export function NaesinHome({
             <p className="text-center text-gray-300 text-sm mt-1">관리자에게 문의하세요</p>
           </div>
         ) : (
+          <>
+          {/* 경고 메시지 */}
+          <div className="flex items-start gap-3 rounded-xl border border-amber-200 bg-amber-50 px-4 py-3">
+            <AlertTriangle className="h-5 w-5 text-amber-500 shrink-0 mt-0.5" />
+            <div>
+              <p className="text-sm font-medium text-amber-800">교과서는 한 번 선택하면 변경할 수 없습니다</p>
+              <p className="text-xs text-amber-600 mt-0.5">변경이 필요한 경우 학원 선생님에게 문의하세요</p>
+            </div>
+          </div>
+
           <Tabs defaultValue="1">
             {/* 학년 탭 — 필 스타일 */}
             <div className="flex gap-2">
@@ -176,7 +187,7 @@ export function NaesinHome({
                           key={tb.id}
                           type="button"
                           disabled={saving}
-                          onClick={() => selectTextbook(tb.id)}
+                          onClick={() => setConfirmId(tb.id)}
                           className="group relative flex items-center gap-0 rounded-xl overflow-hidden border border-gray-100 bg-white text-left transition-all hover:shadow-md hover:-translate-y-0.5 active:scale-[0.98] disabled:opacity-50"
                         >
                           {/* 책등 (spine) */}
@@ -215,13 +226,46 @@ export function NaesinHome({
               </TabsContent>
             ))}
           </Tabs>
+          </>
         )}
 
-        {selectedTextbook && (
-          <Button variant="ghost" onClick={() => setSelecting(false)}>
-            취소
-          </Button>
-        )}
+        {/* 확인 다이얼로그 */}
+        {confirmId && (() => {
+          const tb = textbooks.find((t) => t.id === confirmId);
+          return (
+            <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm p-4">
+              <div className="w-full max-w-sm rounded-2xl bg-white p-6 shadow-xl space-y-4">
+                <div className="flex items-center gap-2">
+                  <AlertTriangle className="h-5 w-5 text-amber-500" />
+                  <h3 className="text-base font-bold">교과서 선택 확인</h3>
+                </div>
+                <p className="text-sm text-gray-600">
+                  <span className="font-semibold text-gray-800">{tb?.display_name}</span>을(를) 선택하시겠습니까?
+                </p>
+                <p className="text-xs text-amber-600 bg-amber-50 rounded-lg px-3 py-2">
+                  선택 후에는 변경할 수 없습니다. 변경이 필요하면 학원 선생님에게 문의하세요.
+                </p>
+                <div className="flex gap-2 pt-1">
+                  <Button
+                    variant="outline"
+                    className="flex-1"
+                    onClick={() => setConfirmId(null)}
+                    disabled={saving}
+                  >
+                    취소
+                  </Button>
+                  <Button
+                    className="flex-1"
+                    onClick={() => selectTextbook(confirmId)}
+                    disabled={saving}
+                  >
+                    {saving ? '선택 중...' : '선택하기'}
+                  </Button>
+                </div>
+              </div>
+            </div>
+          );
+        })()}
       </div>
     );
   }
@@ -238,10 +282,10 @@ export function NaesinHome({
             {selectedTextbook.publisher} · 중{selectedTextbook.grade}
           </p>
         </div>
-        <Button variant="outline" size="sm" onClick={() => setSelecting(true)}>
-          <RefreshCw className="h-4 w-4 mr-1" />
-          교과서 변경
-        </Button>
+        <div className="flex items-center gap-1.5 text-xs text-gray-400">
+          <Info className="h-3.5 w-3.5" />
+          <span>변경 시 선생님 문의</span>
+        </div>
       </div>
 
       {/* 교재 OMR 진입 */}
