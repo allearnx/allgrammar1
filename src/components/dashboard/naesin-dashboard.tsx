@@ -11,6 +11,7 @@ import {
   Layers,
 } from 'lucide-react';
 import { calculateStageStatuses } from '@/lib/naesin/stage-unlock';
+import { MiniScoreTrend } from '@/components/charts/mini-score-trend';
 import type {
   NaesinUnit,
   NaesinStudentProgress,
@@ -43,6 +44,7 @@ interface Props {
   vocabQuizSetCounts: Record<string, number>;
   grammarVideoCounts: Record<string, number>;
   enabledStages?: string[];
+  quizHistory?: { date: string; score: number }[];
 }
 
 // ── Colors ──
@@ -145,6 +147,7 @@ export function NaesinDashboard({
   vocabQuizSetCounts,
   grammarVideoCounts,
   enabledStages,
+  quizHistory = [],
 }: Props) {
   const progressMap = new Map<string, NaesinStudentProgress>();
   progressList.forEach((p) => progressMap.set(p.unit_id, p));
@@ -255,6 +258,17 @@ export function NaesinDashboard({
         <StatCard label="완료 단원" value={completedUnits} sub={`전체 ${sortedUnits.length}단원 중`} color={COLORS.statPurple} icon={<BookOpen className="h-5 w-5" />} />
         <StatCard label="단어 평균" value={avgVocabScore > 0 ? `${avgVocabScore}점` : '-'} sub="퀴즈 + 스펠링 평균" color={COLORS.statAmber} icon={<ClipboardList className="h-5 w-5" />} />
         <StatCard label="시험 D-day" value={nearestDDay !== null ? (nearestDDay === 0 ? 'D-Day' : `D-${nearestDDay}`) : '-'} sub={nearestDDay !== null ? '가장 가까운 시험' : '시험 일정 없음'} color={COLORS.statSky} icon={<CalendarDays className="h-5 w-5" />} />
+      </div>
+
+      {/* ── Mini Chart + Report Link ── */}
+      <div className="rounded-2xl border bg-white p-5 md:p-6">
+        <div className="flex items-center justify-between mb-3">
+          <h3 className="text-sm font-bold">문제풀이 점수 추이</h3>
+          <Link href="/student/my-report" className="inline-flex items-center gap-1 text-xs font-medium text-violet-600 hover:underline">
+            자세히 보기 <ArrowRight className="h-3 w-3" />
+          </Link>
+        </div>
+        <MiniScoreTrend data={quizHistory} color="#06B6D4" height={64} />
       </div>
 
       {/* ── Learning Flow: Current Unit ── */}

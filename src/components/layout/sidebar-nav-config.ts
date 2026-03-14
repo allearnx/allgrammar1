@@ -49,6 +49,11 @@ export const NAV_CONFIG: Record<string, NavGroup[]> = {
         { href: '/student/voca', label: '올킬보카', icon: BookA },
       ],
     },
+    {
+      items: [
+        { href: '/student/my-report', label: '내 리포트', icon: FileText },
+      ],
+    },
   ],
   teacher: [
     {

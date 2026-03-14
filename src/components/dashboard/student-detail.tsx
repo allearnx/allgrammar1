@@ -7,6 +7,8 @@ import type { AuthUser } from '@/types/auth';
 import type { NaesinExamAssignment, NaesinUnit } from '@/types/database';
 import { NaesinProgressCard } from './naesin-progress-card';
 import { VocaProgressCard } from './voca-progress-card';
+import { StudentReportPanel } from './student-report-panel';
+import { ParentShareButton } from './parent-share-button';
 
 interface NaesinData {
   textbookId: string;
@@ -106,6 +108,10 @@ export async function StudentDetail({ user, studentId, naesinData }: Props) {
   const hasVocaAssignment = !!vocaAssignmentRes.data;
   const naesinUnits = naesinData?.units || [];
 
+  const detailServices: string[] = [];
+  if (naesinData) detailServices.push('naesin');
+  if (hasVocaAssignment) detailServices.push('voca');
+
   return (
     <>
       <div className="p-4 md:p-6 space-y-6">
@@ -117,9 +123,12 @@ export async function StudentDetail({ user, studentId, naesinData }: Props) {
                 <h2 className="text-xl font-bold tracking-tight">{student.full_name}</h2>
                 <p className="text-muted-foreground">{student.email}</p>
               </div>
-              <Badge variant={student.is_active ? 'default' : 'secondary'}>
-                {student.is_active ? '활성' : '비활성'}
-              </Badge>
+              <div className="flex items-center gap-2">
+                <ParentShareButton studentId={studentId} />
+                <Badge variant={student.is_active ? 'default' : 'secondary'}>
+                  {student.is_active ? '활성' : '비활성'}
+                </Badge>
+              </div>
             </div>
           </CardContent>
         </Card>
@@ -181,6 +190,9 @@ export async function StudentDetail({ user, studentId, naesinData }: Props) {
             </CardContent>
           </Card>
         )}
+
+        {/* 상세 리포트 패널 */}
+        <StudentReportPanel studentId={studentId} services={detailServices} />
       </div>
     </>
   );

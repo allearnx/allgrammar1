@@ -6,7 +6,9 @@ import {
   BookOpen,
   ClipboardList,
   Sparkles,
+  ArrowRight,
 } from 'lucide-react';
+import { MiniScoreTrend } from '@/components/charts/mini-score-trend';
 import type { VocaBook, VocaDay, VocaStudentProgress } from '@/types/voca';
 
 // ── Types ──
@@ -30,6 +32,7 @@ interface Props {
   progressList: VocaStudentProgress[];
   wordCount: number;
   wrongWordCounts?: Record<string, number>;
+  quizHistory?: { date: string; score: number }[];
 }
 
 // ── Colors ──
@@ -175,7 +178,7 @@ function getCtaText(stage: Stage): { title: string; sub: string } {
 
 // ── Component ──
 
-export function VocaDashboard({ userName, books, days, progressList, wordCount, wrongWordCounts = {} }: Props) {
+export function VocaDashboard({ userName, books, days, progressList, wordCount, wrongWordCounts = {}, quizHistory = [] }: Props) {
   const progressMap = new Map<string, VocaStudentProgress>();
   progressList.forEach((p) => progressMap.set(p.day_id, p));
 
@@ -260,6 +263,17 @@ export function VocaDashboard({ userName, books, days, progressList, wordCount, 
         <StatCard label="완료 단원" value={completedDays} sub={`전체 ${days.length}단원 중`} color={COLORS.statPurple} icon={<BookOpen className="h-5 w-5" />} />
         <StatCard label="암기 완료" value={totalMemorized} sub="플래시카드+퀴즈 통과" color={COLORS.statAmber} icon={<Sparkles className="h-5 w-5" />} />
         <StatCard label="평균 점수" value={avgScore > 0 ? `${avgScore}점` : '-'} sub="퀴즈 평균" color={COLORS.statSky} icon={<ClipboardList className="h-5 w-5" />} />
+      </div>
+
+      {/* ── Mini Chart + Report Link ── */}
+      <div className="rounded-2xl border bg-white p-5 md:p-6">
+        <div className="flex items-center justify-between mb-3">
+          <h3 className="text-sm font-bold">퀴즈 점수 추이</h3>
+          <Link href="/student/my-report" className="inline-flex items-center gap-1 text-xs font-medium text-violet-600 hover:underline">
+            자세히 보기 <ArrowRight className="h-3 w-3" />
+          </Link>
+        </div>
+        <MiniScoreTrend data={quizHistory} color="#7C3AED" height={64} />
       </div>
 
       {/* ── Flow Card: Round 1 ── */}

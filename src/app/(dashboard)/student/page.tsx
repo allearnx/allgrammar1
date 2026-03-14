@@ -83,13 +83,16 @@ export default async function StudentDashboard() {
       wordCount = count || 0;
     }
 
-    // Fetch wrong words from voca quiz results + matching submissions
-    const [quizResultsRes, matchingSubRes] = await Promise.all([
+    // Fetch wrong words from voca quiz results + matching submissions + quiz history
+    const [quizResultsRes, matchingSubRes, quizHistoryRes] = await Promise.all([
       dayIds.length > 0
         ? supabase.from('voca_quiz_results').select('wrong_words').eq('student_id', user.id).in('day_id', dayIds)
         : Promise.resolve({ data: null }),
       dayIds.length > 0
         ? supabase.from('voca_matching_submissions').select('wrong_words').eq('student_id', user.id).in('day_id', dayIds)
+        : Promise.resolve({ data: null }),
+      dayIds.length > 0
+        ? supabase.from('voca_quiz_results').select('score, created_at').eq('student_id', user.id).in('day_id', dayIds).order('created_at', { ascending: false }).limit(20)
         : Promise.resolve({ data: null }),
     ]);
 
@@ -105,6 +108,11 @@ export default async function StudentDashboard() {
       }
     }
 
+    const vocaQuizHistory = (quizHistoryRes.data || []).reverse().map((r: { score: number; created_at: string }) => ({
+      date: r.created_at.slice(0, 10),
+      score: r.score,
+    }));
+
     return (
       <>
         <Topbar user={user} title="올킬보카" />
@@ -115,6 +123,7 @@ export default async function StudentDashboard() {
           progressList={progressList}
           wordCount={wordCount}
           wrongWordCounts={wrongWordCounts}
+          quizHistory={vocaQuizHistory}
         />
       </>
     );
@@ -215,6 +224,16 @@ export default async function StudentDashboard() {
         }
       }
 
+      // Naesin quiz history for mini chart
+      const { data: naesinHistoryData } = unitIds.length > 0
+        ? await supabase.from('naesin_problem_attempts').select('score, total_questions, created_at').eq('student_id', user.id).order('created_at', { ascending: false }).limit(20)
+        : { data: null };
+
+      const naesinQuizHistory = (naesinHistoryData || []).reverse().map((r: { score: number; total_questions: number; created_at: string }) => ({
+        date: r.created_at.slice(0, 10),
+        score: r.total_questions > 0 ? Math.round((r.score / r.total_questions) * 100) : 0,
+      }));
+
       return (
         <>
           <Topbar user={user} title="내신 대비" />
@@ -228,6 +247,7 @@ export default async function StudentDashboard() {
             vocabQuizSetCounts={vocabQuizSetCounts}
             grammarVideoCounts={grammarVideoCounts}
             enabledStages={settings?.enabled_stages}
+            quizHistory={naesinQuizHistory}
           />
         </>
       );
@@ -380,6 +400,23 @@ export default async function StudentDashboard() {
       wordCount = count || 0;
     }
 
+    // Quiz history for mini charts
+    const [combinedVocaHistoryRes, combinedNaesinHistoryRes] = await Promise.all([
+      dayIds.length > 0
+        ? supabase.from('voca_quiz_results').select('score, created_at').eq('student_id', user.id).in('day_id', dayIds).order('created_at', { ascending: false }).limit(20)
+        : Promise.resolve({ data: null }),
+      supabase.from('naesin_problem_attempts').select('score, total_questions, created_at').eq('student_id', user.id).order('created_at', { ascending: false }).limit(20),
+    ]);
+
+    const combinedVocaHistory = (combinedVocaHistoryRes.data || []).reverse().map((r: { score: number; created_at: string }) => ({
+      date: r.created_at.slice(0, 10),
+      score: r.score,
+    }));
+    const combinedNaesinHistory = (combinedNaesinHistoryRes.data || []).reverse().map((r: { score: number; total_questions: number; created_at: string }) => ({
+      date: r.created_at.slice(0, 10),
+      score: r.total_questions > 0 ? Math.round((r.score / r.total_questions) * 100) : 0,
+    }));
+
     return (
       <>
         <Topbar user={user} title="학습 대시보드" />
@@ -398,6 +435,8 @@ export default async function StudentDashboard() {
           grammarVideoCounts={grammarVideoCounts}
           enabledStages={naesinSettings?.enabled_stages}
           wrongWordCounts={wrongWordCounts}
+          vocaQuizHistory={combinedVocaHistory}
+          naesinQuizHistory={combinedNaesinHistory}
         />
       </>
     );

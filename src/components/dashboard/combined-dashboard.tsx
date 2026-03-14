@@ -12,6 +12,7 @@ import {
   Layers,
 } from 'lucide-react';
 import { calculateStageStatuses } from '@/lib/naesin/stage-unlock';
+import { MiniScoreTrend } from '@/components/charts/mini-score-trend';
 import type { VocaBook, VocaDay, VocaStudentProgress } from '@/types/voca';
 import type {
   NaesinUnit,
@@ -62,6 +63,8 @@ interface Props {
   grammarVideoCounts: Record<string, number>;
   enabledStages?: string[];
   wrongWordCounts?: Record<string, number>;
+  vocaQuizHistory?: { date: string; score: number }[];
+  naesinQuizHistory?: { date: string; score: number }[];
 }
 
 // ── Colors ──
@@ -239,6 +242,8 @@ export function CombinedDashboard({
   grammarVideoCounts,
   enabledStages,
   wrongWordCounts = {},
+  vocaQuizHistory = [],
+  naesinQuizHistory = [],
 }: Props) {
   // ── Tab state ──
   const [activeTab, setActiveTab] = useState<'voca' | 'naesin'>('voca');
@@ -416,6 +421,26 @@ export function CombinedDashboard({
         >
           📖 내신대비
         </button>
+      </div>
+
+      {/* ── Mini Charts + Report Link ── */}
+      <div className="rounded-2xl border bg-white p-5 md:p-6">
+        <div className="flex items-center justify-between mb-3">
+          <h3 className="text-sm font-bold">점수 추이</h3>
+          <Link href="/student/my-report" className="inline-flex items-center gap-1 text-xs font-medium text-violet-600 hover:underline">
+            자세히 보기 <ArrowRight className="h-3 w-3" />
+          </Link>
+        </div>
+        <div className="grid gap-4 sm:grid-cols-2">
+          <div>
+            <p className="text-xs text-gray-500 mb-1">보카 퀴즈</p>
+            <MiniScoreTrend data={vocaQuizHistory} color="#7C3AED" height={56} />
+          </div>
+          <div>
+            <p className="text-xs text-gray-500 mb-1">내신 문제풀이</p>
+            <MiniScoreTrend data={naesinQuizHistory} color="#06B6D4" height={56} />
+          </div>
+        </div>
       </div>
 
       {/* ── Voca Tab Content ── */}

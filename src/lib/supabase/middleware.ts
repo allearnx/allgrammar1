@@ -48,7 +48,7 @@ export async function updateSession(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
 
   // Public routes that don't require auth
-  const publicRoutes = ['/login', '/signup', '/callback', '/report', '/quiz-result'];
+  const publicRoutes = ['/login', '/signup', '/callback', '/report', '/quiz-result', '/parent'];
   const isPublicRoute = publicRoutes.some((route) => pathname.startsWith(route));
 
   // Try cached profile from cookie first (avoids DB + auth call on every navigation)
@@ -110,11 +110,20 @@ export async function updateSession(request: NextRequest) {
   // Authenticated from here
   const role = (profile.role || 'student') as UserRole;
 
-  // If on a public route or root, redirect to dashboard
-  if (isPublicRoute || pathname === '/') {
+  // Public routes that stay accessible even when authenticated (no redirect)
+  const noRedirectRoutes = ['/parent', '/report', '/quiz-result'];
+  const isNoRedirectRoute = noRedirectRoutes.some((route) => pathname.startsWith(route));
+
+  // If on a public route or root, redirect to dashboard (except parent/report pages)
+  if ((isPublicRoute || pathname === '/') && !isNoRedirectRoute) {
     const url = request.nextUrl.clone();
     url.pathname = getRoleDashboard(role);
     return NextResponse.redirect(url);
+  }
+
+  // For no-redirect routes, just pass through
+  if (isNoRedirectRoute) {
+    return supabaseResponse;
   }
 
   // Role-based route protection
