@@ -3,7 +3,7 @@ import { createClient } from '@/lib/supabase/server';
 import { Topbar } from '@/components/layout/topbar';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Users, BookOpen, FileText, BookMarked, ClipboardList } from 'lucide-react';
+import { Users, BookOpen, FileText, BookMarked, ClipboardList, Rocket, BookA } from 'lucide-react';
 import Link from 'next/link';
 
 export default async function ManagerDashboard() {
@@ -85,6 +85,36 @@ export default async function ManagerDashboard() {
             </CardContent>
           </Card>
         </div>
+
+        {studentCount === 0 && (
+          <div
+            className="rounded-2xl p-6"
+            style={{ background: 'linear-gradient(120deg, #F5F3FF, #EDE9FE)' }}
+          >
+            <div className="flex items-center gap-2 mb-4">
+              <Rocket className="h-5 w-5 text-violet-500" />
+              <h3 className="text-lg font-bold">학원 시작 가이드</h3>
+            </div>
+            <div className="space-y-3">
+              <div className="flex items-center gap-3">
+                <span className="flex items-center justify-center bg-violet-500 text-white rounded-full w-7 h-7 text-sm font-bold shrink-0">1</span>
+                <Users className="h-5 w-5 text-violet-400 shrink-0" />
+                <span className="text-sm text-gray-700">학생 관리에서 초대 코드를 공유하세요</span>
+                <Link href="/teacher/students" className="ml-auto bg-violet-600 hover:bg-violet-700 text-white rounded-lg px-4 py-1.5 text-xs font-medium shrink-0 transition-colors">학생 관리</Link>
+              </div>
+              <div className="flex items-center gap-3">
+                <span className="flex items-center justify-center bg-violet-500 text-white rounded-full w-7 h-7 text-sm font-bold shrink-0">2</span>
+                <BookA className="h-5 w-5 text-violet-400 shrink-0" />
+                <span className="text-sm text-gray-700">학생에게 서비스(올킬보카/올인내신)를 배정하세요</span>
+              </div>
+              <div className="flex items-center gap-3">
+                <span className="flex items-center justify-center bg-violet-500 text-white rounded-full w-7 h-7 text-sm font-bold shrink-0">3</span>
+                <FileText className="h-5 w-5 text-violet-400 shrink-0" />
+                <span className="text-sm text-gray-700">학습 진도를 확인하고 리포트를 생성하세요</span>
+              </div>
+            </div>
+          </div>
+        )}
 
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           <Card className="hover:shadow-md transition-shadow border-indigo-200 bg-indigo-50/30 dark:border-indigo-800 dark:bg-indigo-950/20">

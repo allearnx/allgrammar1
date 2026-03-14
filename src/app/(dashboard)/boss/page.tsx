@@ -1,7 +1,7 @@
 import { requireRole } from '@/lib/auth/helpers';
 import { createAdminClient } from '@/lib/supabase/admin';
 import { Topbar } from '@/components/layout/topbar';
-import { Users, Building2, GraduationCap, BookOpen, UserCog, ArrowRight } from 'lucide-react';
+import { Users, Building2, GraduationCap, BookOpen, UserCog, ArrowRight, Rocket } from 'lucide-react';
 import Link from 'next/link';
 
 function StatCard({
@@ -164,6 +164,38 @@ export default async function BossDashboard() {
             icon={<GraduationCap className="h-5 w-5" />}
           />
         </div>
+
+        {/* ── 온보딩 가이드 ── */}
+        {academyCount === 0 && (
+          <div
+            className="rounded-2xl p-6"
+            style={{ background: 'linear-gradient(120deg, #F5F3FF, #EDE9FE)' }}
+          >
+            <div className="flex items-center gap-2 mb-4">
+              <Rocket className="h-5 w-5 text-violet-500" />
+              <h3 className="text-lg font-bold">학원 시작 가이드</h3>
+            </div>
+            <div className="space-y-3">
+              <div className="flex items-center gap-3">
+                <span className="flex items-center justify-center bg-violet-500 text-white rounded-full w-7 h-7 text-sm font-bold shrink-0">1</span>
+                <Building2 className="h-5 w-5 text-violet-400 shrink-0" />
+                <span className="text-sm text-gray-700">학원을 등록하세요</span>
+                <Link href="/boss/academies" className="ml-auto bg-violet-600 hover:bg-violet-700 text-white rounded-lg px-4 py-1.5 text-xs font-medium shrink-0 transition-colors">학원 관리</Link>
+              </div>
+              <div className="flex items-center gap-3">
+                <span className="flex items-center justify-center bg-violet-500 text-white rounded-full w-7 h-7 text-sm font-bold shrink-0">2</span>
+                <UserCog className="h-5 w-5 text-violet-400 shrink-0" />
+                <span className="text-sm text-gray-700">관리자/선생님을 배정하세요</span>
+                <Link href="/boss/users" className="ml-auto bg-violet-600 hover:bg-violet-700 text-white rounded-lg px-4 py-1.5 text-xs font-medium shrink-0 transition-colors">사용자 관리</Link>
+              </div>
+              <div className="flex items-center gap-3">
+                <span className="flex items-center justify-center bg-violet-500 text-white rounded-full w-7 h-7 text-sm font-bold shrink-0">3</span>
+                <Users className="h-5 w-5 text-violet-400 shrink-0" />
+                <span className="text-sm text-gray-700">전체 현황을 모니터링하세요</span>
+              </div>
+            </div>
+          </div>
+        )}
 
         {/* ── 퀵 액션 카드 ── */}
         <div className="grid gap-3 grid-cols-2 lg:grid-cols-4">
