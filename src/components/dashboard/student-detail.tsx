@@ -133,6 +133,14 @@ export async function StudentDetail({ user, studentId, naesinData }: Props) {
           </CardContent>
         </Card>
 
+        {/* 상세 리포트 패널 */}
+        <StudentReportPanel studentId={studentId} services={detailServices} />
+
+        {/* 올킬보카 서비스 카드 */}
+        {hasVocaAssignment && (
+          <VocaProgressCard vocaProgress={vocaProgress} />
+        )}
+
         {/* 내신 대비 서비스 카드 */}
         {naesinData && naesinUnits.length > 0 && (
           <NaesinProgressCard
@@ -145,11 +153,6 @@ export async function StudentDetail({ user, studentId, naesinData }: Props) {
             passageStages={passageStages as ('fill_blanks' | 'ordering' | 'translation' | 'grammar_vocab')[]}
             translationSentencesPerPage={translationSentencesPerPage}
           />
-        )}
-
-        {/* 올킬보카 서비스 카드 */}
-        {hasVocaAssignment && (
-          <VocaProgressCard vocaProgress={vocaProgress} />
         )}
 
         {/* 문법 학습 서비스 카드 */}
@@ -190,9 +193,6 @@ export async function StudentDetail({ user, studentId, naesinData }: Props) {
             </CardContent>
           </Card>
         )}
-
-        {/* 상세 리포트 패널 */}
-        <StudentReportPanel studentId={studentId} services={detailServices} />
       </div>
     </>
   );
