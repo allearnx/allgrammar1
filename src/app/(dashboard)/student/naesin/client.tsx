@@ -114,19 +114,23 @@ export function NaesinHome({
             {[1, 2, 3].map((grade) => (
               <TabsContent key={grade} value={String(grade)} className="mt-4">
                 {gradeTextbooks[grade]?.length ? (
-                  <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                  <div className="grid gap-2 sm:grid-cols-2">
                     {gradeTextbooks[grade].map((tb) => (
-                      <Card
+                      <button
                         key={tb.id}
-                        className="cursor-pointer hover:shadow-md transition-shadow"
-                        onClick={() => !saving && selectTextbook(tb.id)}
+                        type="button"
+                        disabled={saving}
+                        onClick={() => selectTextbook(tb.id)}
+                        className="flex items-center gap-3 rounded-xl border bg-white px-4 py-3 text-left transition-all hover:border-cyan-300 hover:shadow-sm active:scale-[0.98] disabled:opacity-50"
                       >
-                        <CardContent className="py-6 text-center">
-                          <BookOpen className="h-10 w-10 mx-auto text-primary mb-3" />
-                          <p className="font-medium">{tb.display_name}</p>
-                          <p className="text-sm text-muted-foreground mt-1">{tb.publisher}</p>
-                        </CardContent>
-                      </Card>
+                        <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-cyan-50">
+                          <BookOpen className="h-4.5 w-4.5 text-cyan-600" />
+                        </div>
+                        <div className="min-w-0">
+                          <p className="text-sm font-semibold truncate">{tb.display_name}</p>
+                          <p className="text-xs text-gray-400 truncate">{tb.publisher}</p>
+                        </div>
+                      </button>
                     ))}
                   </div>
                 ) : (
