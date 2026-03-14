@@ -68,7 +68,7 @@ const COLORS = {
 // ── Helpers ──
 
 const STAGE_META: Record<string, { emoji: string; description: string; scoreRequirement: string }> = {
-  vocab: { emoji: '📖', description: '교과서 단어를\n암기합니다', scoreRequirement: '퀴즈+스펠링 통과' },
+  vocab: { emoji: '📖', description: '교과서 단어를\n암기합니다', scoreRequirement: '퀴즈+스펠링 시작' },
   passage: { emoji: '📝', description: '교과서 지문을\n암기합니다', scoreRequirement: '지문 암기 완료' },
   grammar: { emoji: '📐', description: '핵심 문법을\n학습합니다', scoreRequirement: '영상 시청 완료' },
   problem: { emoji: '✏️', description: '문제를 풀며\n실력 확인', scoreRequirement: '문제풀이 완료' },
@@ -93,7 +93,7 @@ function mapStageStatus(s: NaesinStageStatus): 'done' | 'active' | 'locked' | nu
 }
 
 function getVocabBadgeText(progress: NaesinStudentProgress | null): string {
-  if (!progress) return '퀴즈+스펠링 통과';
+  if (!progress) return '퀴즈+스펠링 시작';
   const q = progress.vocab_quiz_score;
   const s = progress.vocab_spelling_score;
   const qDone = q !== null && q !== undefined;
@@ -101,14 +101,14 @@ function getVocabBadgeText(progress: NaesinStudentProgress | null): string {
   const qPass = qDone && q >= 80;
   const sPass = sDone && s >= 80;
 
-  if (!qDone && !sDone) return '퀴즈+스펠링 통과';
+  if (!qDone && !sDone) return '퀴즈+스펠링 시작';
   if (qDone && !sDone) return qPass ? `퀴즈 ${q}점 ✓ · 스펠링 대기` : `퀴즈 ${q}점 · 재도전`;
   if (qDone && sDone) {
     if (qPass && sPass) return `퀴즈 ${q}점 · 스펠링 ${s}점 ✓`;
     if (qPass && !sPass) return `퀴즈 ✓ · 스펠링 ${s}점 재도전`;
     return `퀴즈 ${q}점 · 스펠링 ${s}점 재도전`;
   }
-  return '퀴즈+스펠링 통과';
+  return '퀴즈+스펠링 시작';
 }
 
 function getPassageBadgeText(progress: NaesinStudentProgress | null): string {
