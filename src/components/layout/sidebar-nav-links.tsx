@@ -13,11 +13,13 @@ export function NavLinks({
   pathname,
   naesinTree,
   onNavigate,
+  hoverWhite,
 }: {
   groups: NavGroup[];
   pathname: string;
   naesinTree?: NaesinSidebarExam[];
   onNavigate?: () => void;
+  hoverWhite?: boolean;
 }) {
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
@@ -58,8 +60,10 @@ export function NavLinks({
                     'flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-colors relative',
                     isActive
                       ? 'bg-indigo-50 text-indigo-600 border-l-[3px] border-indigo-600 pl-[9px]'
-                      : 'text-slate-500 hover:bg-slate-100 hover:text-slate-900',
-                    isLoading && !isActive && 'bg-slate-100 text-slate-900'
+                      : hoverWhite
+                        ? 'text-slate-500 hover:bg-white hover:text-slate-900'
+                        : 'text-slate-500 hover:bg-slate-100 hover:text-slate-900',
+                    isLoading && !isActive && (hoverWhite ? 'bg-white text-slate-900' : 'bg-slate-100 text-slate-900')
                   )}
                 >
                   {isLoading ? (

@@ -27,6 +27,15 @@ export function Sidebar({ user, services, naesinTree }: SidebarProps) {
   const router = useRouter();
   const [open, setOpen] = useState(false);
   const navGroups = getNavGroups(user.role, services);
+  const sidebarBgMap: Record<string, string> = {
+    boss: 'bg-violet-100',
+    teacher: 'bg-sky-100',
+    admin: 'bg-indigo-100',
+    student: 'bg-cyan-100',
+  };
+  const isBoss = user.role === 'boss';
+  const hasCustomBg = user.role in sidebarBgMap;
+  const sidebarBg = sidebarBgMap[user.role] ?? 'bg-sidebar';
 
   async function handleLogout() {
     const supabase = createClient();
@@ -47,7 +56,7 @@ export function Sidebar({ user, services, naesinTree }: SidebarProps) {
         </span>
       </div>
       <ScrollArea className="flex-1 py-3">
-        <NavLinks groups={navGroups} pathname={pathname} naesinTree={naesinTree} onNavigate={() => setOpen(false)} />
+        <NavLinks groups={navGroups} pathname={pathname} naesinTree={naesinTree} onNavigate={() => setOpen(false)} hoverWhite={hasCustomBg} />
       </ScrollArea>
       <div className="border-t border-sidebar-border p-4">
         <div className="mb-3 px-3">
@@ -70,7 +79,7 @@ export function Sidebar({ user, services, naesinTree }: SidebarProps) {
   return (
     <>
       {/* Desktop sidebar */}
-      <aside className="hidden w-64 shrink-0 bg-sidebar md:block">
+      <aside className={`hidden w-64 shrink-0 ${sidebarBg} md:block`}>
         {sidebarContent}
       </aside>
 
@@ -81,7 +90,7 @@ export function Sidebar({ user, services, naesinTree }: SidebarProps) {
             <Menu className="h-5 w-5" />
           </Button>
         </SheetTrigger>
-        <SheetContent side="left" className="w-64 p-0 bg-sidebar">
+        <SheetContent side="left" className={`w-64 p-0 ${sidebarBg}`}>
           <SheetTitle className="sr-only">내비게이션</SheetTitle>
           {sidebarContent}
         </SheetContent>
