@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { cn } from '@/lib/utils';
-import { Loader2 } from 'lucide-react';
+import { Loader2, Lock } from 'lucide-react';
 import { useState, useTransition } from 'react';
 import type { NavGroup, NaesinSidebarExam } from './sidebar-nav-config';
 import { NaesinTree } from './sidebar-naesin-tree';
@@ -50,6 +50,20 @@ export function NavLinks({
             const isExactOnly = item.href.split('/').filter(Boolean).length === 1;
             const isActive = pathname === item.href || (!isExactOnly && pathname.startsWith(item.href + '/'));
             const isLoading = isPending && pendingHref === item.href;
+
+            if (item.disabled) {
+              return (
+                <div key={item.href}>
+                  <span
+                    aria-disabled="true"
+                    className="flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium opacity-40 pointer-events-none cursor-default text-slate-400"
+                  >
+                    <Lock className="h-4 w-4 shrink-0" />
+                    {item.label}
+                  </span>
+                </div>
+              );
+            }
 
             return (
               <div key={item.href}>

@@ -1,10 +1,7 @@
 import { requireRole } from '@/lib/auth/helpers';
 import { createClient } from '@/lib/supabase/server';
 import { Topbar } from '@/components/layout/topbar';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { BookOpen, BookMarked, GraduationCap, BarChart3, Clock, CheckCircle } from 'lucide-react';
-import Link from 'next/link';
+import { BookOpen, BookMarked, Lock, BookA, Zap, Target, Trophy, TrendingUp, Star, ArrowRight } from 'lucide-react';
 import { VocaDashboard } from '@/components/dashboard/voca-dashboard';
 import { NaesinDashboard } from '@/components/dashboard/naesin-dashboard';
 import { CombinedDashboard } from '@/components/dashboard/combined-dashboard';
@@ -442,209 +439,186 @@ export default async function StudentDashboard() {
     );
   }
 
-  // ── Default dashboard (grammar/naesin) ──
-  const [videoProgressRes, memoryProgressRes, dueReviewsRes, naesinProgressRes] = await Promise.all([
-    supabase
-      .from('student_progress')
-      .select('video_completed')
-      .eq('student_id', user.id),
-    supabase
-      .from('student_memory_progress')
-      .select('is_mastered')
-      .eq('student_id', user.id),
-    supabase
-      .from('student_memory_progress')
-      .select('id')
-      .eq('student_id', user.id)
-      .eq('is_mastered', false)
-      .lte('next_review_date', new Date().toISOString().split('T')[0]),
-    supabase
-      .from('naesin_student_progress')
-      .select('vocab_completed, passage_completed, grammar_completed, problem_completed')
-      .eq('student_id', user.id),
-  ]);
-
-  const completedVideos = videoProgressRes.data?.filter((p) => p.video_completed).length || 0;
-  const totalProgress = videoProgressRes.data?.length || 0;
-  const masteredItems = memoryProgressRes.data?.filter((p) => p.is_mastered).length || 0;
-  const totalMemory = memoryProgressRes.data?.length || 0;
-  const dueReviews = dueReviewsRes.data?.length || 0;
-
-  // Naesin stats
-  const naesinProgress = naesinProgressRes.data || [];
-  const naesinStagesCompleted = naesinProgress.reduce((acc, p) => {
-    return acc + (p.vocab_completed ? 1 : 0) + (p.passage_completed ? 1 : 0) + (p.grammar_completed ? 1 : 0) + (p.problem_completed ? 1 : 0);
-  }, 0);
-  const naesinUnitsFullyCompleted = naesinProgress.filter(
-    (p) => p.vocab_completed && p.passage_completed && p.grammar_completed && p.problem_completed
-  ).length;
-
+  // ── No services assigned: premium waiting screen ──
   return (
     <>
       <Topbar user={user} title="대시보드" />
-      <div className="p-4 md:p-6 space-y-6">
-        {/* Welcome */}
-        <div>
-          <h2 className="text-2xl font-bold tracking-tight">안녕하세요, {user.full_name}님! 👋</h2>
-          <p className="text-muted-foreground mt-1">오늘도 영어 문법 공부를 시작해볼까요?</p>
+      <div className="relative min-h-[calc(100vh-56px)] overflow-hidden bg-gradient-to-b from-slate-50 to-white">
+        {/* Blurred background: rich fake dashboard preview */}
+        <div className="pointer-events-none select-none blur-[6px] opacity-50 saturate-[1.2]">
+          <div className="p-4 md:p-6 space-y-5">
+            {/* Banner - matching project's premium header pattern */}
+            <div className="relative overflow-hidden rounded-2xl p-6 md:p-8 text-white" style={{ background: 'linear-gradient(135deg, #A78BFA 0%, #7C3AED 50%, #6D28D9 100%)' }}>
+              <div className="absolute -top-10 -right-10 h-40 w-40 rounded-full" style={{ background: 'rgba(255,255,255,0.1)' }} />
+              <div className="absolute -bottom-8 -left-8 h-32 w-32 rounded-full" style={{ background: 'rgba(255,255,255,0.05)' }} />
+              <div className="absolute top-4 right-20 h-16 w-16 rounded-full" style={{ background: 'rgba(255,255,255,0.07)' }} />
+              <h2 className="text-xl font-bold">안녕하세요, {user.full_name}님!</h2>
+              <p className="mt-1 text-sm" style={{ color: 'rgba(255,255,255,0.8)' }}>오늘도 열심히 공부해봐요</p>
+              <div className="mt-3 inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold" style={{ background: 'rgba(255,255,255,0.15)', backdropFilter: 'blur(8px)' }}>
+                Day 12 진행중
+              </div>
+            </div>
+
+            {/* Stat cards - matching project's border-l-4 pattern */}
+            <div className="grid gap-3 grid-cols-2 lg:grid-cols-3">
+              {[
+                { label: '평균 점수', value: '85점', color: '#7C3AED', bg: '#F5F3FF' },
+                { label: '학습 진도', value: '12/20 Day', color: '#06B6D4', bg: '#ECFEFF' },
+                { label: '연속 학습', value: '5일', color: '#F59E0B', bg: '#FFFBEB' },
+                { label: '완료 단어', value: '240개', color: '#22C55E', bg: '#F0FDF4' },
+                { label: '퀴즈 통과', value: '8회', color: '#F43F5E', bg: '#FFF1F2' },
+                { label: '틀린 단어', value: '15개', color: '#F97316', bg: '#FFF7ED' },
+              ].map((stat) => (
+                <div key={stat.label} className="rounded-xl bg-white p-4" style={{ borderLeft: `4px solid ${stat.color}`, boxShadow: '0 1px 3px rgba(0,0,0,0.04)' }}>
+                  <span className="text-[10px] font-medium uppercase tracking-wider text-gray-400">{stat.label}</span>
+                  <p className="mt-0.5 text-lg font-bold text-gray-900">{stat.value}</p>
+                </div>
+              ))}
+            </div>
+
+            {/* Tab bar */}
+            <div className="flex gap-2">
+              <div className="rounded-full px-4 py-1.5 text-sm font-semibold text-violet-700" style={{ background: '#EDE9FE' }}>올킬보카</div>
+              <div className="rounded-full bg-gray-100 px-4 py-1.5 text-sm font-medium text-gray-400">내신대비</div>
+            </div>
+
+            {/* Chart placeholder - faux mini chart */}
+            <div className="rounded-xl bg-white p-5" style={{ boxShadow: '0 1px 3px rgba(0,0,0,0.04)' }}>
+              <p className="text-sm font-semibold text-gray-700 mb-4">점수 추이</p>
+              <div className="flex items-end gap-1.5 h-24">
+                {[45, 60, 55, 70, 65, 80, 75, 85, 90, 88, 92, 95].map((h, i) => (
+                  <div key={i} className="flex-1 rounded-t" style={{ height: `${h}%`, background: `linear-gradient(to top, #A78BFA, #C4B5FD)`, opacity: 0.7 + (i * 0.025) }} />
+                ))}
+              </div>
+            </div>
+
+            {/* Flow steps - matching project pattern */}
+            <div className="grid grid-cols-4 gap-3">
+              {[
+                { step: '플래시카드', emoji: '📖' },
+                { step: '퀴즈', emoji: '✏️' },
+                { step: '스펠링', emoji: '🔤' },
+                { step: '매칭', emoji: '🎯' },
+              ].map((item, i) => (
+                <div key={item.step} className="rounded-xl bg-white p-3 text-center" style={{ border: i === 0 ? '1.5px solid #4DD9C0' : '1px solid #E5E7EB', boxShadow: i === 0 ? '0 4px 12px rgba(37,99,235,0.08)' : 'none' }}>
+                  <span className="text-lg">{item.emoji}</span>
+                  <p className="mt-1 text-xs font-medium text-gray-600">{item.step}</p>
+                </div>
+              ))}
+            </div>
+
+            {/* Bottom cards */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="rounded-xl bg-white p-5" style={{ boxShadow: '0 1px 3px rgba(0,0,0,0.04)' }}>
+                <p className="text-sm font-semibold text-gray-700 mb-3">틀린 단어 TOP 5</p>
+                <div className="space-y-2">
+                  {['vocabulary', 'grammar', 'pronunciation', 'comprehension', 'sentence'].map((word, i) => (
+                    <div key={word} className="flex items-center justify-between rounded-lg px-3 py-2" style={{ background: '#FAFAFA' }}>
+                      <div className="flex items-center gap-2">
+                        <span className="flex h-5 w-5 items-center justify-center rounded-full text-[10px] font-bold text-white" style={{ background: i < 3 ? '#F43F5E' : '#D1D5DB' }}>{i + 1}</span>
+                        <span className="text-sm text-gray-600">{word}</span>
+                      </div>
+                      <span className="text-xs font-medium" style={{ color: '#F43F5E' }}>{5 - i}회</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <div className="rounded-xl bg-white p-5" style={{ boxShadow: '0 1px 3px rgba(0,0,0,0.04)' }}>
+                <p className="text-sm font-semibold text-gray-700 mb-3">Day별 진행률</p>
+                <div className="space-y-2.5">
+                  {[
+                    { day: 1, pct: 100, color: '#56C9A0' },
+                    { day: 2, pct: 85, color: '#56C9A0' },
+                    { day: 3, pct: 60, color: '#7C3AED' },
+                    { day: 4, pct: 30, color: '#C4B5FD' },
+                    { day: 5, pct: 0, color: '#E5E7EB' },
+                  ].map(({ day, pct, color }) => (
+                    <div key={day} className="flex items-center gap-3">
+                      <span className="text-xs font-medium text-gray-500 w-12">Day {day}</span>
+                      <div className="flex-1 h-2.5 rounded-full bg-gray-100 overflow-hidden">
+                        <div className="h-full rounded-full transition-all" style={{ width: `${pct}%`, background: `linear-gradient(to right, ${color}, ${color}dd)` }} />
+                      </div>
+                      <span className="text-[10px] font-medium text-gray-400 w-8 text-right">{pct}%</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
 
-        {/* Stats */}
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {naesinProgress.length > 0 && (
-            <>
-              <Card className="border-l-4 border-l-green-500">
-                <CardHeader className="flex flex-row items-center justify-between pb-2">
-                  <CardTitle className="text-xs font-medium uppercase tracking-wider text-muted-foreground">내신 단계 완료</CardTitle>
-                  <div className="rounded-full bg-green-100 p-2 dark:bg-green-950">
-                    <CheckCircle className="h-4 w-4 text-green-600 dark:text-green-400" />
-                  </div>
-                </CardHeader>
-                <CardContent>
-                  <div className="text-2xl font-bold tracking-tight">{naesinStagesCompleted}</div>
-                  <p className="text-xs text-muted-foreground">
-                    전체 {naesinProgress.length * 4}단계 중
-                  </p>
-                </CardContent>
-              </Card>
-              <Card className="border-l-4 border-l-indigo-500">
-                <CardHeader className="flex flex-row items-center justify-between pb-2">
-                  <CardTitle className="text-xs font-medium uppercase tracking-wider text-muted-foreground">완료 단원</CardTitle>
-                  <div className="rounded-full bg-indigo-100 p-2 dark:bg-indigo-950">
-                    <BookMarked className="h-4 w-4 text-indigo-600 dark:text-indigo-400" />
-                  </div>
-                </CardHeader>
-                <CardContent>
-                  <div className="text-2xl font-bold tracking-tight">{naesinUnitsFullyCompleted}</div>
-                  <p className="text-xs text-muted-foreground">
-                    전체 {naesinProgress.length}단원 중
-                  </p>
-                </CardContent>
-              </Card>
-            </>
-          )}
-          <Card className="border-l-4 border-l-green-500">
-            <CardHeader className="flex flex-row items-center justify-between pb-2">
-              <CardTitle className="text-xs font-medium uppercase tracking-wider text-muted-foreground">완료한 강의</CardTitle>
-              <div className="rounded-full bg-green-100 p-2 dark:bg-green-950">
-                <GraduationCap className="h-4 w-4 text-green-600 dark:text-green-400" />
-              </div>
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold tracking-tight">{completedVideos}</div>
-              <p className="text-xs text-muted-foreground">
-                전체 {totalProgress}개 중
-              </p>
-            </CardContent>
-          </Card>
-          <Card className="border-l-4 border-l-indigo-500">
-            <CardHeader className="flex flex-row items-center justify-between pb-2">
-              <CardTitle className="text-xs font-medium uppercase tracking-wider text-muted-foreground">암기 완료</CardTitle>
-              <div className="rounded-full bg-indigo-100 p-2 dark:bg-indigo-950">
-                <BookOpen className="h-4 w-4 text-indigo-600 dark:text-indigo-400" />
-              </div>
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold tracking-tight">{masteredItems}</div>
-              <p className="text-xs text-muted-foreground">
-                전체 {totalMemory}개 중
-              </p>
-            </CardContent>
-          </Card>
-          {naesinProgress.length === 0 && (
-            <>
-              <Card className="border-l-4 border-l-orange-500">
-                <CardHeader className="flex flex-row items-center justify-between pb-2">
-                  <CardTitle className="text-xs font-medium uppercase tracking-wider text-muted-foreground">복습 대기</CardTitle>
-                  <div className="rounded-full bg-orange-100 p-2 dark:bg-orange-950">
-                    <Clock className="h-4 w-4 text-orange-600 dark:text-orange-400" />
-                  </div>
-                </CardHeader>
-                <CardContent>
-                  <div className="text-2xl font-bold tracking-tight">{dueReviews}</div>
-                  <p className="text-xs text-muted-foreground">오늘 복습할 항목</p>
-                </CardContent>
-              </Card>
-              <Card className="border-l-4 border-l-purple-500">
-                <CardHeader className="flex flex-row items-center justify-between pb-2">
-                  <CardTitle className="text-xs font-medium uppercase tracking-wider text-muted-foreground">학습 진도</CardTitle>
-                  <div className="rounded-full bg-purple-100 p-2 dark:bg-purple-950">
-                    <BarChart3 className="h-4 w-4 text-purple-600 dark:text-purple-400" />
-                  </div>
-                </CardHeader>
-                <CardContent>
-                  <div className="text-2xl font-bold tracking-tight">
-                    {totalProgress > 0 ? Math.round((completedVideos / totalProgress) * 100) : 0}%
-                  </div>
-                  <p className="text-xs text-muted-foreground">전체 진도율</p>
-                </CardContent>
-              </Card>
-            </>
-          )}
-        </div>
+        {/* Overlay gradient mesh for depth */}
+        <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse at 30% 20%, rgba(167,139,250,0.06) 0%, transparent 50%), radial-gradient(ellipse at 70% 80%, rgba(6,182,212,0.04) 0%, transparent 50%)' }} />
 
-        {/* Quick Actions */}
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          <Card className="hover:shadow-md transition-shadow border-indigo-200 bg-indigo-50/30 dark:border-indigo-800 dark:bg-indigo-950/20">
-            <CardContent className="pt-6">
-              <div className="flex flex-col items-center text-center gap-3">
-                <div className="rounded-full bg-indigo-100 p-3 dark:bg-indigo-950">
-                  <GraduationCap className="h-8 w-8 text-indigo-600 dark:text-indigo-400" />
-                </div>
-                <h3 className="font-semibold">문법 학습</h3>
-                <p className="text-sm text-muted-foreground">레벨별 영어 문법을 학습하세요</p>
-                <Button asChild className="mt-2">
-                  <Link href="/student/levels">학습 시작</Link>
-                </Button>
-              </div>
-            </CardContent>
-          </Card>
-          {dueReviews > 0 && (
-            <Card className="hover:shadow-md transition-shadow border-orange-200 bg-orange-50/50 dark:border-orange-800 dark:bg-orange-950/20">
-              <CardContent className="pt-6">
-                <div className="flex flex-col items-center text-center gap-3">
-                  <div className="rounded-full bg-orange-100 p-3 dark:bg-orange-950">
-                    <Clock className="h-8 w-8 text-orange-600 dark:text-orange-400" />
+        {/* Lock overlay - glassmorphism card */}
+        <div className="absolute inset-0 flex items-center justify-center" style={{ background: 'linear-gradient(180deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0.3) 100%)', backdropFilter: 'blur(2px)' }}>
+          <div
+            className="relative max-w-[420px] w-[92%] text-center"
+            style={{ animation: 'waitingFadeUp 0.6s ease-out both, waitingGlow 4s ease-in-out infinite 0.6s' }}
+          >
+            {/* Gradient border wrapper */}
+            <div className="rounded-[20px] p-[1.5px]" style={{ background: 'linear-gradient(135deg, #A78BFA 0%, #7C3AED 30%, #06B6D4 70%, #4DD9C0 100%)' }}>
+              <div className="rounded-[19px] bg-white/95 backdrop-blur-xl p-8">
+
+                {/* Animated lock icon with pulse ring */}
+                <div className="relative mx-auto mb-5 h-16 w-16">
+                  <div className="absolute inset-0 rounded-full" style={{ background: 'linear-gradient(135deg, #EDE9FE, #F5F3FF)', animation: 'waitingPulseRing 3s ease-in-out infinite' }} />
+                  <div
+                    className="relative flex h-16 w-16 items-center justify-center rounded-full"
+                    style={{ background: 'linear-gradient(135deg, #F5F3FF 0%, #EDE9FE 100%)', animation: 'waitingFloat 3s ease-in-out infinite' }}
+                  >
+                    <Lock className="h-7 w-7 text-violet-500" />
                   </div>
-                  <h3 className="font-semibold">복습하기</h3>
-                  <p className="text-sm text-muted-foreground">
-                    {dueReviews}개 항목이 복습을 기다리고 있어요
+                </div>
+
+                <h3 className="text-xl font-bold text-gray-900">
+                  환영합니다, {user.full_name}님!
+                </h3>
+                <p className="mt-2 text-sm text-gray-500 leading-relaxed">
+                  학원에서 과목을 배정하면<br />학습을 시작할 수 있어요
+                </p>
+
+                {/* Service cards with shimmer */}
+                <div className="mt-7 grid grid-cols-2 gap-3">
+                  {/* 올킬보카 */}
+                  <div className="group relative overflow-hidden rounded-xl p-4" style={{ border: '1.5px solid #E5E7EB', background: 'linear-gradient(135deg, #FAFAFA 0%, #F5F3FF 100%)' }}>
+                    <div className="absolute inset-0 opacity-30" style={{ background: 'linear-gradient(90deg, transparent 30%, rgba(167,139,250,0.15) 50%, transparent 70%)', backgroundSize: '200% 100%', animation: 'waitingShimmer 3s ease-in-out infinite' }} />
+                    <div className="relative">
+                      <div className="mx-auto mb-2.5 flex h-11 w-11 items-center justify-center rounded-full" style={{ background: 'linear-gradient(135deg, #EDE9FE 0%, #DDD6FE 100%)' }}>
+                        <BookA className="h-5 w-5 text-violet-500" />
+                      </div>
+                      <p className="text-sm font-semibold text-gray-700">올킬보카</p>
+                      <div className="mt-1.5 mx-auto flex h-5 w-5 items-center justify-center rounded-full bg-gray-100">
+                        <Lock className="h-3 w-3 text-gray-400" />
+                      </div>
+                    </div>
+                  </div>
+                  {/* 올인내신 */}
+                  <div className="group relative overflow-hidden rounded-xl p-4" style={{ border: '1.5px solid #E5E7EB', background: 'linear-gradient(135deg, #FAFAFA 0%, #ECFEFF 100%)' }}>
+                    <div className="absolute inset-0 opacity-30" style={{ background: 'linear-gradient(90deg, transparent 30%, rgba(6,182,212,0.15) 50%, transparent 70%)', backgroundSize: '200% 100%', animation: 'waitingShimmer 3s ease-in-out infinite 0.5s' }} />
+                    <div className="relative">
+                      <div className="mx-auto mb-2.5 flex h-11 w-11 items-center justify-center rounded-full" style={{ background: 'linear-gradient(135deg, #CFFAFE 0%, #A5F3FC 100%)' }}>
+                        <BookMarked className="h-5 w-5 text-cyan-600" />
+                      </div>
+                      <p className="text-sm font-semibold text-gray-700">올인내신</p>
+                      <div className="mt-1.5 mx-auto flex h-5 w-5 items-center justify-center rounded-full bg-gray-100">
+                        <Lock className="h-3 w-3 text-gray-400" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Bottom hint */}
+                <div className="mt-6 flex items-center justify-center gap-1.5">
+                  <div className="h-1 w-1 rounded-full bg-gray-300" />
+                  <p className="text-xs text-gray-400 font-medium">
+                    선생님에게 과목 배정을 요청하세요
                   </p>
-                  <Button asChild variant="outline" className="mt-2">
-                    <Link href="/student/review">복습 시작</Link>
-                  </Button>
+                  <div className="h-1 w-1 rounded-full bg-gray-300" />
                 </div>
-              </CardContent>
-            </Card>
-          )}
-          <Card className="hover:shadow-md transition-shadow">
-            <CardContent className="pt-6">
-              <div className="flex flex-col items-center text-center gap-3">
-                <div className="rounded-full bg-muted p-3">
-                  <BookMarked className="h-8 w-8 text-muted-foreground" />
-                </div>
-                <h3 className="font-semibold">내신 대비</h3>
-                <p className="text-sm text-muted-foreground">교과서별 내신 시험을 준비하세요</p>
-                <Button asChild variant="outline" className="mt-2">
-                  <Link href="/student/naesin">내신 학습</Link>
-                </Button>
               </div>
-            </CardContent>
-          </Card>
-          <Card className="hover:shadow-md transition-shadow">
-            <CardContent className="pt-6">
-              <div className="flex flex-col items-center text-center gap-3">
-                <div className="rounded-full bg-muted p-3">
-                  <BarChart3 className="h-8 w-8 text-muted-foreground" />
-                </div>
-                <h3 className="font-semibold">내 진도</h3>
-                <p className="text-sm text-muted-foreground">학습 현황을 확인하세요</p>
-                <Button asChild variant="outline" className="mt-2">
-                  <Link href="/student/progress">진도 확인</Link>
-                </Button>
-              </div>
-            </CardContent>
-          </Card>
+            </div>
+          </div>
         </div>
       </div>
     </>

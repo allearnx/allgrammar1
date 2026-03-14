@@ -28,6 +28,7 @@ export interface NavItem {
   href: string;
   label: string;
   icon: React.ComponentType<{ className?: string }>;
+  disabled?: boolean;
 }
 
 export interface NavGroup {
@@ -45,7 +46,7 @@ export const NAV_CONFIG: Record<string, NavGroup[]> = {
     {
       label: '학습',
       items: [
-        { href: '/student/naesin', label: '내신 대비', icon: BookMarked },
+        { href: '/student/naesin', label: '올인내신', icon: BookMarked },
         { href: '/student/voca', label: '올킬보카', icon: BookA },
       ],
     },
@@ -149,9 +150,14 @@ export function getNavGroups(role: string, services?: string[]): NavGroup[] {
   if (role !== 'student' || !services) return groups;
 
   // Filter student learning items based on assigned services
+  const serviceHrefs = new Set(services.map((s) => SERVICE_HREF_MAP[s]).filter(Boolean));
+
   return groups.map((group) => {
     if (group.label !== '학습') return group;
-    const serviceHrefs = new Set(services.map((s) => SERVICE_HREF_MAP[s]).filter(Boolean));
+    // No services assigned → keep items visible but disabled
+    if (serviceHrefs.size === 0) {
+      return { ...group, items: group.items.map((item) => ({ ...item, disabled: true })) };
+    }
     return {
       ...group,
       items: group.items.filter((item) => serviceHrefs.has(item.href)),
