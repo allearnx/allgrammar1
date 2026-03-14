@@ -92,7 +92,49 @@ function mapStageStatus(s: NaesinStageStatus): 'done' | 'active' | 'locked' | nu
   return 'locked';
 }
 
-function getStagesForUnit(statuses: NaesinStageStatuses, progress: NaesinStudentProgress | null): Stage[] {
+function getVocabBadgeText(progress: NaesinStudentProgress | null): string {
+  if (!progress) return '퀴즈+스펠링 통과';
+  const q = progress.vocab_quiz_score;
+  const s = progress.vocab_spelling_score;
+  const qDone = q !== null && q !== undefined;
+  const sDone = s !== null && s !== undefined;
+  const qPass = qDone && q >= 80;
+  const sPass = sDone && s >= 80;
+
+  if (!qDone && !sDone) return '퀴즈+스펠링 통과';
+  if (qDone && !sDone) return qPass ? `퀴즈 ${q}점 ✓ · 스펠링 대기` : `퀴즈 ${q}점 · 재도전`;
+  if (qDone && sDone) {
+    if (qPass && sPass) return `퀴즈 ${q}점 · 스펠링 ${s}점 ✓`;
+    if (qPass && !sPass) return `퀴즈 ✓ · 스펠링 ${s}점 재도전`;
+    return `퀴즈 ${q}점 · 스펠링 ${s}점 재도전`;
+  }
+  return '퀴즈+스펠링 통과';
+}
+
+function getPassageBadgeText(progress: NaesinStudentProgress | null): string {
+  if (!progress) return '지문 암기 완료';
+  const fb = progress.passage_fill_blanks_best;
+  const tr = progress.passage_translation_best;
+  if (fb === null && tr === null) return '지문 암기 완료';
+  const parts: string[] = [];
+  if (fb !== null) parts.push(`빈칸 ${fb}점${fb >= 80 ? ' ✓' : ''}`);
+  if (tr !== null) parts.push(`영작 ${tr}점${tr >= 80 ? ' ✓' : ''}`);
+  return parts.join(' · ') || '지문 암기 완료';
+}
+
+function getGrammarBadgeText(progress: NaesinStudentProgress | null, videoCount: number): string {
+  if (!progress || videoCount === 0) return '영상 시청 완료';
+  const done = progress.grammar_videos_completed ?? 0;
+  if (done >= videoCount) return `${videoCount}개 영상 시청 ✓`;
+  if (done > 0) return `${done}/${videoCount} 영상 시청 중`;
+  return '영상 시청 완료';
+}
+
+function getStagesForUnit(
+  statuses: NaesinStageStatuses,
+  progress: NaesinStudentProgress | null,
+  grammarVideoCount?: number,
+): Stage[] {
   const stages: Stage[] = [];
   for (const key of STAGE_KEYS) {
     const mapped = mapStageStatus(statuses[key]);
@@ -100,10 +142,14 @@ function getStagesForUnit(statuses: NaesinStageStatuses, progress: NaesinStudent
     const meta = STAGE_META[key];
 
     let actualScore: string | undefined;
+    let dynamicRequirement = meta.scoreRequirement;
+
     if (mapped === 'done') {
       actualScore = '완료 ✓';
-    } else if (progress) {
-      if (key === 'vocab' && progress.vocab_quiz_score != null) actualScore = `${progress.vocab_quiz_score}점`;
+    } else {
+      if (key === 'vocab') dynamicRequirement = getVocabBadgeText(progress);
+      else if (key === 'passage') dynamicRequirement = getPassageBadgeText(progress);
+      else if (key === 'grammar') dynamicRequirement = getGrammarBadgeText(progress, grammarVideoCount ?? 0);
     }
 
     stages.push({
@@ -113,7 +159,7 @@ function getStagesForUnit(statuses: NaesinStageStatuses, progress: NaesinStudent
       status: mapped,
       emoji: meta.emoji,
       description: meta.description,
-      scoreRequirement: meta.scoreRequirement,
+      scoreRequirement: dynamicRequirement,
       actualScore,
     });
   }
@@ -183,7 +229,8 @@ export function NaesinDashboard({
 
   const currentStatuses = currentUnit ? statusesMap.get(currentUnit.id) : undefined;
   const currentProgress = currentUnit ? (progressMap.get(currentUnit.id) ?? null) : null;
-  const currentStages = currentStatuses ? getStagesForUnit(currentStatuses, currentProgress) : [];
+  const currentGrammarVideoCount = currentUnit ? (grammarVideoCounts[currentUnit.id] ?? 0) : 0;
+  const currentStages = currentStatuses ? getStagesForUnit(currentStatuses, currentProgress, currentGrammarVideoCount) : [];
   const ctaStage = currentStages.find((s) => s.status === 'active');
 
   // Stats
