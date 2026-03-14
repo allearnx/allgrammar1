@@ -1,7 +1,8 @@
 import { requireRole } from '@/lib/auth/helpers';
 import { createClient } from '@/lib/supabase/server';
 import { Topbar } from '@/components/layout/topbar';
-import { BookOpen, BookMarked, Lock, BookA, Zap, Target, Trophy, TrendingUp, Star, ArrowRight } from 'lucide-react';
+import { BookOpen, BookMarked, Lock, BookA, Zap, Target, Trophy, TrendingUp, Star, ArrowRight, Sparkles } from 'lucide-react';
+import Link from 'next/link';
 import { VocaDashboard } from '@/components/dashboard/voca-dashboard';
 import { NaesinDashboard } from '@/components/dashboard/naesin-dashboard';
 import { CombinedDashboard } from '@/components/dashboard/combined-dashboard';
@@ -249,6 +250,43 @@ export default async function StudentDashboard() {
         </>
       );
     }
+
+    // naesin 배정되었지만 교과서 미선택
+    return (
+      <>
+        <Topbar user={user} title="내신 대비" />
+        <div className="p-4 md:p-6 space-y-6">
+          <div
+            className="relative overflow-hidden rounded-2xl p-6 md:p-8 text-white"
+            style={{ background: 'linear-gradient(135deg, #06B6D4 0%, #0891B2 100%)' }}
+          >
+            <div className="absolute -top-10 -right-10 h-40 w-40 rounded-full" style={{ background: 'rgba(255,255,255,0.1)' }} />
+            <h2 className="relative text-xl md:text-2xl font-bold">
+              환영합니다, {user.full_name}님!
+            </h2>
+            <p className="relative mt-1 text-white/80">올인내신이 배정되었어요</p>
+          </div>
+
+          <div
+            className="rounded-2xl p-6"
+            style={{ background: 'linear-gradient(120deg, #ECFEFF, #CFFAFE)' }}
+          >
+            <div className="flex items-center gap-2 mb-4">
+              <Sparkles className="h-5 w-5 text-cyan-500" />
+              <h3 className="text-lg font-bold">시작하기</h3>
+            </div>
+            <div className="space-y-3">
+              <div className="flex items-center gap-3">
+                <span className="flex items-center justify-center bg-cyan-500 text-white rounded-full w-7 h-7 text-sm font-bold shrink-0">1</span>
+                <BookMarked className="h-5 w-5 text-cyan-400 shrink-0" />
+                <span className="text-sm text-gray-700">교과서를 선택하면 학습을 시작할 수 있어요</span>
+                <Link href="/student/naesin" className="ml-auto bg-cyan-600 hover:bg-cyan-700 text-white rounded-lg px-4 py-1.5 text-xs font-medium shrink-0 transition-colors">교과서 선택</Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </>
+    );
   }
 
   // ── Combined (voca + naesin) dashboard ──
