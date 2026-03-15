@@ -18,10 +18,14 @@ export default async function BossAcademiesPage() {
     .select('academy_id, full_name, role');
 
   const countByAcademy = new Map<string, number>();
+  const studentCountByAcademy = new Map<string, number>();
   const teachersByAcademy = new Map<string, string[]>();
   allUsers?.forEach((u) => {
     if (u.academy_id) {
       countByAcademy.set(u.academy_id, (countByAcademy.get(u.academy_id) || 0) + 1);
+      if (u.role === 'student') {
+        studentCountByAcademy.set(u.academy_id, (studentCountByAcademy.get(u.academy_id) || 0) + 1);
+      }
       if (u.role === 'teacher') {
         const list = teachersByAcademy.get(u.academy_id) || [];
         list.push(u.full_name);
@@ -33,6 +37,8 @@ export default async function BossAcademiesPage() {
   const academiesWithCounts = (academies || []).map((a) => ({
     ...a,
     user_count: countByAcademy.get(a.id) || 0,
+    student_count: studentCountByAcademy.get(a.id) || 0,
+    max_students: a.max_students as number | null,
     teachers: teachersByAcademy.get(a.id) || [],
   }));
 

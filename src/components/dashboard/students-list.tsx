@@ -3,9 +3,11 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
-import { Eye, Users } from 'lucide-react';
+import { Eye, Users, Trash2 } from 'lucide-react';
 import Link from 'next/link';
 import { ServiceAssignmentToggle } from './service-assignment-toggle';
+import { StudentsToolbar } from './students-toolbar';
+import { StudentDeleteButton } from './student-delete-button';
 import type { AuthUser } from '@/types/auth';
 
 interface Props {
@@ -111,11 +113,19 @@ export async function StudentsList({ user, basePath }: Props) {
 
   return (
     <div className="p-4 md:p-6 space-y-4">
-      <div className="flex items-center justify-between">
-        <p className="text-muted-foreground">
-          총 {students?.length || 0}명의 학생
-        </p>
-      </div>
+      {canManageServices && (
+        <StudentsToolbar
+          studentIds={studentIds}
+          studentCount={students?.length || 0}
+        />
+      )}
+      {!canManageServices && (
+        <div className="flex items-center justify-between">
+          <p className="text-muted-foreground">
+            총 {students?.length || 0}명의 학생
+          </p>
+        </div>
+      )}
 
       <div className="space-y-3">
         {(students || []).map((student) => {
@@ -173,12 +183,21 @@ export async function StudentsList({ user, basePath }: Props) {
                       </div>
                     )}
                   </div>
-                  <Button asChild variant="outline" size="sm" className="shrink-0">
-                    <Link href={`${basePath}/students/${student.id}`}>
-                      <Eye className="h-4 w-4 mr-1" />
-                      상세
-                    </Link>
-                  </Button>
+                  <div className="flex items-center gap-1.5 shrink-0">
+                    <Button asChild variant="outline" size="sm">
+                      <Link href={`${basePath}/students/${student.id}`}>
+                        <Eye className="h-4 w-4 mr-1" />
+                        상세
+                      </Link>
+                    </Button>
+                    {basePath === '/boss' && (
+                      <StudentDeleteButton
+                        studentId={student.id}
+                        studentName={student.full_name}
+                        studentEmail={student.email}
+                      />
+                    )}
+                  </div>
                 </div>
               </CardContent>
             </Card>

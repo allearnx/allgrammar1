@@ -17,7 +17,7 @@ export async function GET(req: NextRequest) {
   const admin = createAdminClient();
   const { data, error } = await admin
     .from('academies')
-    .select('name')
+    .select('id, name, max_students')
     .eq('invite_code', code)
     .single();
 
@@ -25,5 +25,20 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error: '유효하지 않은 초대 코드입니다' }, { status: 404 });
   }
 
-  return NextResponse.json({ academyName: data.name });
+  // Check seat limit
+  let seatWarning: string | null = null;
+  if (data.max_students) {
+    const { count } = await admin
+      .from('users')
+      .select('id', { count: 'exact', head: true })
+      .eq('academy_id', data.id)
+      .eq('role', 'student')
+      .eq('is_active', true);
+
+    if ((count || 0) >= data.max_students) {
+      seatWarning = '학원의 최대 학생 수에 도달했습니다. 관리자에게 문의하세요.';
+    }
+  }
+
+  return NextResponse.json({ academyName: data.name, seatWarning });
 }

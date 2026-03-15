@@ -1,5 +1,7 @@
 import {
   ClipboardList,
+  CreditCard,
+  BarChart3,
   GraduationCap,
   LayoutDashboard,
   NotebookPen,
@@ -101,8 +103,21 @@ export const NAV_CONFIG: Record<string, NavGroup[]> = {
       ],
     },
     {
+      label: '통계',
+      items: [
+        { href: '/admin/analytics', label: '학원 통계', icon: BarChart3 },
+      ],
+    },
+    {
       items: [
         { href: '/admin/reports', label: '리포트', icon: FileText },
+      ],
+    },
+    {
+      label: '설정',
+      items: [
+        { href: '/admin/billing', label: '결제 관리', icon: CreditCard },
+        { href: '/admin/settings', label: '학원 설정', icon: Settings },
       ],
     },
   ],
@@ -128,6 +143,19 @@ export const NAV_CONFIG: Record<string, NavGroup[]> = {
         { href: '/boss/textbook-mode', label: '교과서 모드', icon: BookMarked },
         { href: '/boss/naesin', label: '내신 관리', icon: ClipboardList },
         { href: '/boss/voca', label: '올킬보카 관리', icon: BookA },
+      ],
+    },
+    {
+      label: '구독/결제',
+      items: [
+        { href: '/boss/subscriptions', label: '구독 관리', icon: CreditCard },
+        { href: '/boss/plans', label: '요금 플랜', icon: CreditCard },
+      ],
+    },
+    {
+      label: '통계',
+      items: [
+        { href: '/boss/analytics', label: '플랫폼 통계', icon: BarChart3 },
       ],
     },
     {

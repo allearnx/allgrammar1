@@ -14,6 +14,14 @@ import {
 } from '@/components/ui/select';
 import { toast } from 'sonner';
 import { format } from 'date-fns';
+import { Trash2 } from 'lucide-react';
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+} from '@/components/ui/dialog';
 
 interface Teacher {
   id: string;
@@ -36,6 +44,7 @@ interface TeachersClientProps {
 
 export function TeachersClient({ teachers, academies }: TeachersClientProps) {
   const [updating, setUpdating] = useState<string | null>(null);
+  const [deleteTarget, setDeleteTarget] = useState<Teacher | null>(null);
   const router = useRouter();
 
   const academyMap = useMemo(() => {
@@ -63,6 +72,24 @@ export function TeachersClient({ teachers, academies }: TeachersClientProps) {
       router.refresh();
     } catch (err) {
       toast.error('변경 실패', { description: err instanceof Error ? err.message : '알 수 없는 오류' });
+    } finally {
+      setUpdating(null);
+    }
+  }
+
+  async function handleDelete(teacherId: string) {
+    setUpdating(teacherId);
+    try {
+      const res = await fetch(`/api/boss/users/${teacherId}`, { method: 'DELETE' });
+      if (!res.ok) {
+        const data = await res.json();
+        throw new Error(data.error || '삭제 실패');
+      }
+      toast.success('선생님이 삭제되었습니다');
+      setDeleteTarget(null);
+      router.refresh();
+    } catch (err) {
+      toast.error('삭제 실패', { description: err instanceof Error ? err.message : '알 수 없는 오류' });
     } finally {
       setUpdating(null);
     }
@@ -163,11 +190,48 @@ export function TeachersClient({ teachers, academies }: TeachersClientProps) {
                       ? '비활성화'
                       : '활성화'}
                 </Button>
+                {academies && (
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    className="h-8 w-8 p-0 text-gray-400 hover:text-red-500"
+                    onClick={() => setDeleteTarget(teacher)}
+                    disabled={updating === teacher.id}
+                  >
+                    <Trash2 className="h-4 w-4" />
+                  </Button>
+                )}
               </div>
             </div>
           </CardContent>
         </Card>
       ))}
+
+      {/* 삭제 확인 다이얼로그 */}
+      <Dialog open={!!deleteTarget} onOpenChange={() => setDeleteTarget(null)}>
+        <DialogContent className="max-w-sm">
+          <DialogHeader>
+            <DialogTitle>선생님 삭제</DialogTitle>
+            <DialogDescription>
+              <strong>{deleteTarget?.full_name}</strong> ({deleteTarget?.email})를 삭제하시겠습니까?
+              이 작업은 되돌릴 수 없습니다.
+            </DialogDescription>
+          </DialogHeader>
+          <div className="flex justify-end gap-2 mt-4">
+            <Button variant="outline" size="sm" onClick={() => setDeleteTarget(null)}>
+              취소
+            </Button>
+            <Button
+              variant="destructive"
+              size="sm"
+              onClick={() => deleteTarget && handleDelete(deleteTarget.id)}
+              disabled={updating === deleteTarget?.id}
+            >
+              {updating === deleteTarget?.id ? '삭제 중...' : '삭제'}
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }

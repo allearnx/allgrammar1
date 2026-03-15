@@ -1,16 +1,57 @@
 import { requireRole } from '@/lib/auth/helpers';
 import { createAdminClient } from '@/lib/supabase/admin';
 import { Topbar } from '@/components/layout/topbar';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Users, BookOpen, FileText, GraduationCap, Rocket, BookA, BarChart3 } from 'lucide-react';
+import { Users, BookOpen, FileText, GraduationCap, Rocket, BookA, BarChart3, ArrowRight, Settings } from 'lucide-react';
 import Link from 'next/link';
+import { AdminOnboardingWizard } from '@/components/onboarding/admin-onboarding-wizard';
+
+function StatCard({
+  label,
+  value,
+  sub,
+  color,
+  icon,
+}: {
+  label: string;
+  value: string | number;
+  sub: string;
+  color: string;
+  icon: React.ReactNode;
+}) {
+  return (
+    <div
+      className="rounded-xl border bg-white p-3.5"
+      style={{ borderLeftWidth: 4, borderLeftColor: color }}
+    >
+      <div className="flex items-center justify-between mb-1.5">
+        <span className="text-xs font-semibold uppercase tracking-wider text-gray-500">{label}</span>
+        <span style={{ color }}>{icon}</span>
+      </div>
+      <div className="text-2xl font-bold tracking-tight">{value}</div>
+      <p className="text-xs text-gray-400 mt-0.5">{sub}</p>
+    </div>
+  );
+}
+
+const QUICK_ACTIONS = [
+  { title: '학생 관리', description: '학생 목록 및 진도 확인', href: '/admin/students', color: 'indigo', icon: Users },
+  { title: '선생님 관리', description: '선생님 목록 및 상태 관리', href: '/admin/teachers', color: 'blue', icon: GraduationCap },
+  { title: '학원 통계', description: '학습 현황 분석', href: '/admin/analytics', color: 'purple', icon: BarChart3 },
+  { title: '학원 설정', description: '학원 정보 및 초대 코드', href: '/admin/settings', color: 'emerald', icon: Settings },
+] as const;
+
+const ACTION_STYLES: Record<string, { bg: string; text: string; hoverBorder: string }> = {
+  indigo: { bg: 'bg-indigo-50', text: 'text-indigo-600', hoverBorder: 'hover:border-indigo-300' },
+  blue: { bg: 'bg-blue-50', text: 'text-blue-600', hoverBorder: 'hover:border-blue-300' },
+  purple: { bg: 'bg-purple-50', text: 'text-purple-600', hoverBorder: 'hover:border-purple-300' },
+  emerald: { bg: 'bg-emerald-50', text: 'text-emerald-600', hoverBorder: 'hover:border-emerald-300' },
+};
 
 export default async function AdminDashboard() {
   const user = await requireRole(['admin', 'boss']);
   const admin = createAdminClient();
 
-  const [studentRes, teacherRes, grammarRes, memoryRes] = await Promise.all([
+  const [studentRes, teacherRes, grammarRes, memoryRes, academyRes] = await Promise.all([
     admin
       .from('users')
       .select('id', { count: 'exact', head: true })
@@ -27,65 +68,120 @@ export default async function AdminDashboard() {
     admin
       .from('memory_items')
       .select('id', { count: 'exact', head: true }),
+    admin
+      .from('academies')
+      .select('max_students, onboarding_completed_at, invite_code')
+      .eq('id', user.academy_id!)
+      .single(),
   ]);
+
+  const maxStudents = academyRes.data?.max_students as number | null;
+  const onboardingCompleted = !!academyRes.data?.onboarding_completed_at;
+  const studentCount = studentRes.count || 0;
+  const seatPct = maxStudents ? Math.min((studentCount / maxStudents) * 100, 100) : 0;
 
   return (
     <>
       <Topbar user={user} title="관리자 대시보드" />
-      <div className="p-4 md:p-6 space-y-6">
-        <div>
-          <h2 className="text-2xl font-bold tracking-tight">안녕하세요, {user.full_name}님!</h2>
-          <p className="text-muted-foreground mt-1">학원 현황을 확인하세요.</p>
+      {!onboardingCompleted && academyRes.data?.invite_code && (
+        <AdminOnboardingWizard inviteCode={academyRes.data.invite_code} />
+      )}
+      <div className="p-4 md:p-6 space-y-5">
+        {/* ── 보라 배너 헤더 ── */}
+        <div
+          className="relative overflow-hidden rounded-2xl p-6 md:p-8 text-white"
+          style={{ background: 'linear-gradient(135deg, #A78BFA 0%, #7C3AED 50%, #6D28D9 100%)' }}
+        >
+          <div
+            className="absolute -top-10 -right-10 h-40 w-40 rounded-full"
+            style={{ background: 'rgba(255,255,255,0.1)' }}
+          />
+          <div
+            className="absolute -bottom-8 -left-8 h-32 w-32 rounded-full"
+            style={{ background: 'rgba(255,255,255,0.05)' }}
+          />
+
+          <h2 className="relative text-2xl md:text-3xl font-bold">
+            안녕하세요, {user.full_name}님!
+          </h2>
+          <p className="relative mt-1 text-white/80">
+            학원 현황을 확인하세요.
+          </p>
+
+          <div className="relative mt-4 flex flex-wrap gap-3">
+            <span className="inline-flex items-center rounded-full bg-white px-3 py-1 text-sm font-semibold text-gray-800">
+              관리자
+            </span>
+            {maxStudents && (
+              <span
+                className="inline-flex items-center rounded-full px-3 py-1 text-sm font-semibold"
+                style={{ background: 'rgba(255,255,255,0.15)', backdropFilter: 'blur(8px)' }}
+              >
+                좌석 {studentCount}/{maxStudents}
+              </span>
+            )}
+          </div>
         </div>
 
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          <Card className="border-l-4 border-l-blue-500">
-            <CardHeader className="flex flex-row items-center justify-between pb-2">
-              <CardTitle className="text-xs font-medium uppercase tracking-wider text-muted-foreground">학생 수</CardTitle>
-              <div className="rounded-full bg-blue-100 p-2 dark:bg-blue-950">
-                <Users className="h-4 w-4 text-blue-600 dark:text-blue-400" />
-              </div>
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold tracking-tight">{studentRes.count || 0}</div>
-            </CardContent>
-          </Card>
-          <Card className="border-l-4 border-l-indigo-500">
-            <CardHeader className="flex flex-row items-center justify-between pb-2">
-              <CardTitle className="text-xs font-medium uppercase tracking-wider text-muted-foreground">선생님 수</CardTitle>
-              <div className="rounded-full bg-indigo-100 p-2 dark:bg-indigo-950">
-                <GraduationCap className="h-4 w-4 text-indigo-600 dark:text-indigo-400" />
-              </div>
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold tracking-tight">{teacherRes.count || 0}</div>
-            </CardContent>
-          </Card>
-          <Card className="border-l-4 border-l-green-500">
-            <CardHeader className="flex flex-row items-center justify-between pb-2">
-              <CardTitle className="text-xs font-medium uppercase tracking-wider text-muted-foreground">문법 주제</CardTitle>
-              <div className="rounded-full bg-green-100 p-2 dark:bg-green-950">
-                <BookOpen className="h-4 w-4 text-green-600 dark:text-green-400" />
-              </div>
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold tracking-tight">{grammarRes.count || 0}</div>
-            </CardContent>
-          </Card>
-          <Card className="border-l-4 border-l-purple-500">
-            <CardHeader className="flex flex-row items-center justify-between pb-2">
-              <CardTitle className="text-xs font-medium uppercase tracking-wider text-muted-foreground">암기 항목</CardTitle>
-              <div className="rounded-full bg-purple-100 p-2 dark:bg-purple-950">
-                <FileText className="h-4 w-4 text-purple-600 dark:text-purple-400" />
-              </div>
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold tracking-tight">{memoryRes.count || 0}</div>
-            </CardContent>
-          </Card>
+        {/* ── 스탯 카드 ── */}
+        <div className="grid gap-3 grid-cols-2 lg:grid-cols-4">
+          <StatCard
+            label="학생 수"
+            value={studentCount}
+            sub="등록된 학생"
+            color="#7C3AED"
+            icon={<Users className="h-5 w-5" />}
+          />
+          <StatCard
+            label="선생님 수"
+            value={teacherRes.count || 0}
+            sub="등록된 선생님"
+            color="#06B6D4"
+            icon={<GraduationCap className="h-5 w-5" />}
+          />
+          <StatCard
+            label="문법 주제"
+            value={grammarRes.count || 0}
+            sub="전체 콘텐츠"
+            color="#56C9A0"
+            icon={<BookOpen className="h-5 w-5" />}
+          />
+          <StatCard
+            label="암기 항목"
+            value={memoryRes.count || 0}
+            sub="전체 콘텐츠"
+            color="#F59E0B"
+            icon={<FileText className="h-5 w-5" />}
+          />
         </div>
 
-        {studentRes.count === 0 && teacherRes.count === 0 && (
+        {/* ── 좌석 프로그레스 ── */}
+        {maxStudents && (
+          <div
+            className="rounded-xl border bg-white p-4"
+            style={{ borderLeftWidth: 4, borderLeftColor: seatPct >= 90 ? '#F43F5E' : '#06B6D4' }}
+          >
+            <div className="flex items-center justify-between mb-2">
+              <span className="text-xs font-semibold uppercase tracking-wider text-gray-500">좌석 현황</span>
+              <span className="text-sm text-gray-500">{studentCount} / {maxStudents}명</span>
+            </div>
+            <div className="h-2.5 w-full rounded-full bg-gray-100 overflow-hidden">
+              <div
+                className="h-full rounded-full transition-all"
+                style={{
+                  width: `${seatPct}%`,
+                  background: seatPct >= 90 ? '#F43F5E' : 'linear-gradient(to right, #06B6D4, #4DD9C0)',
+                }}
+              />
+            </div>
+            <p className="text-xs text-gray-400 mt-1">
+              {seatPct >= 90 ? '좌석이 거의 찼습니다' : `${Math.round(100 - seatPct)}% 여유`}
+            </p>
+          </div>
+        )}
+
+        {/* ── 온보딩 가이드 ── */}
+        {studentCount === 0 && (teacherRes.count || 0) === 0 && (
           <div
             className="rounded-2xl p-6"
             style={{ background: 'linear-gradient(120deg, #F5F3FF, #EDE9FE)' }}
@@ -121,63 +217,26 @@ export default async function AdminDashboard() {
           </div>
         )}
 
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          <Card className="hover:shadow-md transition-shadow border-indigo-200 bg-indigo-50/30 dark:border-indigo-800 dark:bg-indigo-950/20">
-            <CardContent className="pt-6">
-              <div className="flex flex-col items-center text-center gap-3">
-                <div className="rounded-full bg-indigo-100 p-3 dark:bg-indigo-950">
-                  <Users className="h-8 w-8 text-indigo-600 dark:text-indigo-400" />
+        {/* ── 퀵 액션 카드 ── */}
+        <div className="grid gap-3 grid-cols-2 lg:grid-cols-4">
+          {QUICK_ACTIONS.map((action) => {
+            const style = ACTION_STYLES[action.color];
+            const Icon = action.icon;
+            return (
+              <Link
+                key={action.href}
+                href={action.href}
+                className={`rounded-2xl border bg-white p-5 transition-all hover:shadow-md ${style.hoverBorder}`}
+              >
+                <div className={`inline-flex rounded-xl ${style.bg} p-3`}>
+                  <Icon className={`h-6 w-6 ${style.text}`} />
                 </div>
-                <h3 className="font-semibold">학생 관리</h3>
-                <p className="text-sm text-muted-foreground">학생 목록 및 진도 확인</p>
-                <Button asChild className="mt-2">
-                  <Link href="/admin/students">학생 목록</Link>
-                </Button>
-              </div>
-            </CardContent>
-          </Card>
-          <Card className="hover:shadow-md transition-shadow">
-            <CardContent className="pt-6">
-              <div className="flex flex-col items-center text-center gap-3">
-                <div className="rounded-full bg-muted p-3">
-                  <GraduationCap className="h-8 w-8 text-muted-foreground" />
-                </div>
-                <h3 className="font-semibold">선생님 관리</h3>
-                <p className="text-sm text-muted-foreground">선생님 목록 및 상태 관리</p>
-                <Button asChild variant="outline" className="mt-2">
-                  <Link href="/admin/teachers">선생님 목록</Link>
-                </Button>
-              </div>
-            </CardContent>
-          </Card>
-          <Card className="hover:shadow-md transition-shadow">
-            <CardContent className="pt-6">
-              <div className="flex flex-col items-center text-center gap-3">
-                <div className="rounded-full bg-muted p-3">
-                  <BookOpen className="h-8 w-8 text-muted-foreground" />
-                </div>
-                <h3 className="font-semibold">콘텐츠 관리</h3>
-                <p className="text-sm text-muted-foreground">문법, 암기 항목, 교과서 관리</p>
-                <Button asChild variant="outline" className="mt-2">
-                  <Link href="/admin/content">콘텐츠 관리</Link>
-                </Button>
-              </div>
-            </CardContent>
-          </Card>
-          <Card className="hover:shadow-md transition-shadow">
-            <CardContent className="pt-6">
-              <div className="flex flex-col items-center text-center gap-3">
-                <div className="rounded-full bg-muted p-3">
-                  <FileText className="h-8 w-8 text-muted-foreground" />
-                </div>
-                <h3 className="font-semibold">리포트</h3>
-                <p className="text-sm text-muted-foreground">학생 학습 리포트 생성</p>
-                <Button asChild variant="outline" className="mt-2">
-                  <Link href="/admin/reports">리포트</Link>
-                </Button>
-              </div>
-            </CardContent>
-          </Card>
+                <h3 className="mt-3 font-semibold">{action.title}</h3>
+                <p className="mt-1 text-sm text-gray-500">{action.description}</p>
+                <ArrowRight className="mt-3 h-4 w-4 text-gray-400" />
+              </Link>
+            );
+          })}
         </div>
       </div>
     </>

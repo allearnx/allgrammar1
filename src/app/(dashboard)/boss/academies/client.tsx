@@ -24,6 +24,8 @@ interface Academy {
   invite_code: string;
   created_at: string;
   user_count: number;
+  student_count: number;
+  max_students: number | null;
   teachers: string[];
 }
 
@@ -36,6 +38,7 @@ export function AcademiesClient({ academies }: AcademiesClientProps) {
   const [editOpen, setEditOpen] = useState(false);
   const [editingAcademy, setEditingAcademy] = useState<Academy | null>(null);
   const [name, setName] = useState('');
+  const [maxStudents, setMaxStudents] = useState('');
   const [saving, setSaving] = useState(false);
   const [deleting, setDeleting] = useState<string | null>(null);
   const [deleteConfirmId, setDeleteConfirmId] = useState<string | null>(null);
@@ -79,7 +82,10 @@ export function AcademiesClient({ academies }: AcademiesClientProps) {
       const res = await fetch(`/api/boss/academies/${editingAcademy.id}`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name }),
+        body: JSON.stringify({
+          name,
+          max_students: maxStudents ? parseInt(maxStudents, 10) : null,
+        }),
       });
 
       if (!res.ok) {
@@ -213,6 +219,9 @@ export function AcademiesClient({ academies }: AcademiesClientProps) {
                       </Button>
                     </span>
                     <span>회원 {academy.user_count}명</span>
+                    {academy.max_students && (
+                      <span>좌석 {academy.student_count}/{academy.max_students}명</span>
+                    )}
                     <span>생성일: {format(new Date(academy.created_at), 'yyyy-MM-dd')}</span>
                   </div>
                   <div className="flex items-center gap-1.5 text-sm text-muted-foreground mt-1">
@@ -235,6 +244,7 @@ export function AcademiesClient({ academies }: AcademiesClientProps) {
                   onClick={() => {
                     setEditingAcademy(academy);
                     setName(academy.name);
+                    setMaxStudents(academy.max_students?.toString() || '');
                     setEditOpen(true);
                   }}
                 >
@@ -294,6 +304,16 @@ export function AcademiesClient({ academies }: AcademiesClientProps) {
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 required
+              />
+            </div>
+            <div className="space-y-2">
+              <Label>최대 학생 수 (좌석)</Label>
+              <Input
+                type="number"
+                min="1"
+                value={maxStudents}
+                onChange={(e) => setMaxStudents(e.target.value)}
+                placeholder="비워두면 무제한"
               />
             </div>
             <Button type="submit" className="w-full" disabled={saving}>

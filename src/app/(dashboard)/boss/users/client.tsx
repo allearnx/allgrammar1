@@ -13,6 +13,14 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { toast } from 'sonner';
+import { Trash2 } from 'lucide-react';
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+} from '@/components/ui/dialog';
 interface User {
   id: string;
   full_name: string;
@@ -46,6 +54,7 @@ export function UsersClient({ users, academies }: UsersClientProps) {
   const [roleFilter, setRoleFilter] = useState<string>('all');
   const [academyFilter, setAcademyFilter] = useState<string>('all');
   const [updating, setUpdating] = useState<string | null>(null);
+  const [deleteTarget, setDeleteTarget] = useState<User | null>(null);
   const router = useRouter();
 
   const academyMap = useMemo(() => {
@@ -61,6 +70,24 @@ export function UsersClient({ users, academies }: UsersClientProps) {
       return true;
     });
   }, [users, roleFilter, academyFilter]);
+
+  async function handleDelete(userId: string) {
+    setUpdating(userId);
+    try {
+      const res = await fetch(`/api/boss/users/${userId}`, { method: 'DELETE' });
+      if (!res.ok) {
+        const data = await res.json();
+        throw new Error(data.error || '삭제 실패');
+      }
+      toast.success('사용자가 삭제되었습니다');
+      setDeleteTarget(null);
+      router.refresh();
+    } catch (err) {
+      toast.error('삭제 실패', { description: err instanceof Error ? err.message : '알 수 없는 오류' });
+    } finally {
+      setUpdating(null);
+    }
+  }
 
   async function handleUpdate(userId: string, updates: Record<string, unknown>) {
     setUpdating(userId);
@@ -188,6 +215,17 @@ export function UsersClient({ users, academies }: UsersClientProps) {
                   >
                     {u.is_active ? '비활성화' : '활성화'}
                   </Button>
+                  {u.role !== 'boss' && (
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      className="h-8 w-8 p-0 text-gray-400 hover:text-red-500"
+                      onClick={() => setDeleteTarget(u)}
+                      disabled={updating === u.id}
+                    >
+                      <Trash2 className="h-4 w-4" />
+                    </Button>
+                  )}
                 </div>
               </div>
             </CardContent>
@@ -199,6 +237,32 @@ export function UsersClient({ users, academies }: UsersClientProps) {
           </p>
         )}
       </div>
+
+      {/* 삭제 확인 다이얼로그 */}
+      <Dialog open={!!deleteTarget} onOpenChange={() => setDeleteTarget(null)}>
+        <DialogContent className="max-w-sm">
+          <DialogHeader>
+            <DialogTitle>사용자 삭제</DialogTitle>
+            <DialogDescription>
+              <strong>{deleteTarget?.full_name}</strong> ({deleteTarget?.email})를 삭제하시겠습니까?
+              이 작업은 되돌릴 수 없습니다.
+            </DialogDescription>
+          </DialogHeader>
+          <div className="flex justify-end gap-2 mt-4">
+            <Button variant="outline" size="sm" onClick={() => setDeleteTarget(null)}>
+              취소
+            </Button>
+            <Button
+              variant="destructive"
+              size="sm"
+              onClick={() => deleteTarget && handleDelete(deleteTarget.id)}
+              disabled={updating === deleteTarget?.id}
+            >
+              {updating === deleteTarget?.id ? '삭제 중...' : '삭제'}
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }

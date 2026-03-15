@@ -4,7 +4,15 @@ export interface Academy {
   id: string;
   name: string;
   invite_code: string;
+  contact_phone?: string | null;
+  contact_email?: string | null;
+  address?: string | null;
+  logo_url?: string | null;
+  max_students?: number | null;
+  onboarding_completed_at?: string | null;
+  owner_id?: string | null;
   created_at: string;
+  updated_at?: string | null;
 }
 
 export interface User {

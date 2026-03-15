@@ -1,15 +1,19 @@
 import { NextResponse } from 'next/server';
 import { createApiHandler, dbResult } from '@/lib/api';
 import { auditLog } from '@/lib/api/audit';
-import { academyCreateSchema } from '@/lib/api/schemas';
+import { academyPatchSchema } from '@/lib/api/schemas';
 import { generateInviteCode } from '@/lib/utils/invite-code';
 
 export const PATCH = createApiHandler(
-  { roles: ['boss'], schema: academyCreateSchema },
+  { roles: ['boss'], schema: academyPatchSchema },
   async ({ body, params, supabase }) => {
+    const updates: Record<string, unknown> = { updated_at: new Date().toISOString() };
+    if (body.name) updates.name = body.name.trim();
+    if (body.max_students !== undefined) updates.max_students = body.max_students;
+
     dbResult(await supabase
       .from('academies')
-      .update({ name: body.name.trim() })
+      .update(updates)
       .eq('id', params.id));
     return NextResponse.json({ success: true });
   }

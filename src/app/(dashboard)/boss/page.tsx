@@ -3,6 +3,7 @@ import { createAdminClient } from '@/lib/supabase/admin';
 import { Topbar } from '@/components/layout/topbar';
 import { Users, Building2, GraduationCap, BookOpen, UserCog, ArrowRight, Rocket } from 'lucide-react';
 import Link from 'next/link';
+import { BossAnalyticsClient } from './analytics/client';
 
 function StatCard({
   label,
@@ -101,11 +102,11 @@ export default async function BossDashboard() {
   return (
     <>
       <Topbar user={user} title="총관리자 대시보드" />
-      <div className="p-4 md:p-6 space-y-6">
+      <div className="p-4 md:p-6 space-y-5">
         {/* ── 보라 배너 헤더 ── */}
         <div
           className="relative overflow-hidden rounded-2xl p-6 md:p-8 text-white"
-          style={{ background: '#A78BFA' }}
+          style={{ background: 'linear-gradient(135deg, #A78BFA 0%, #7C3AED 50%, #6D28D9 100%)' }}
         >
           <div
             className="absolute -top-10 -right-10 h-40 w-40 rounded-full"
@@ -127,7 +128,10 @@ export default async function BossDashboard() {
             <span className="inline-flex items-center rounded-full bg-white px-3 py-1 text-sm font-semibold text-gray-800">
               총관리자
             </span>
-            <span className="inline-flex items-center rounded-full bg-white px-3 py-1 text-sm font-semibold text-gray-800">
+            <span
+              className="inline-flex items-center rounded-full px-3 py-1 text-sm font-semibold"
+              style={{ background: 'rgba(255,255,255,0.15)', backdropFilter: 'blur(8px)' }}
+            >
               학원 {academyCount}개
             </span>
           </div>
@@ -218,6 +222,9 @@ export default async function BossDashboard() {
             );
           })}
         </div>
+
+        {/* ── 플랫폼 통계 ── */}
+        <BossAnalyticsClient />
       </div>
     </>
   );

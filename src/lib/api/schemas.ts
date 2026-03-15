@@ -514,6 +514,36 @@ export const subscriptionCancelSchema = z.object({
   subscriptionId: ID,
 });
 
+// ── Academy Settings Schemas ──
+
+export const academySettingsSchema = z.object({
+  name: z.string().min(1).max(100).nullish(),
+  contact_phone: z.string().max(20).nullish(),
+  contact_email: z.string().email().max(200).nullish(),
+  address: z.string().max(500).nullish(),
+  logo_url: URL_STR.nullish(),
+});
+
+export const academyPatchSchema = z.object({
+  name: z.string().min(1).max(100).nullish(),
+  max_students: z.number().min(1).nullish(),
+});
+
+export const studentBulkImportSchema = z.object({
+  students: z.array(z.object({
+    full_name: z.string().min(1).max(100),
+    email: z.string().email().max(200),
+    phone: z.string().max(20).nullish(),
+  })).min(1).max(100),
+  services: z.array(z.enum(['naesin', 'voca'])).nullish(),
+});
+
+export const studentBulkAssignSchema = z.object({
+  studentIds: z.array(ID).min(1).max(100),
+  services: z.array(z.enum(['naesin', 'voca'])).min(1),
+  action: z.enum(['assign', 'revoke']),
+});
+
 // ── Auth Schemas ──
 
 export const changePasswordSchema = z.object({
