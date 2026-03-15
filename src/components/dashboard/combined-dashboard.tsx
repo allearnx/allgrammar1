@@ -13,7 +13,10 @@ import {
 } from 'lucide-react';
 import { calculateStageStatuses } from '@/lib/naesin/stage-unlock';
 import { MiniScoreTrend } from '@/components/charts/mini-score-trend';
-import type { VocaBook, VocaDay, VocaStudentProgress } from '@/types/voca';
+import { StatCard } from './combined/stat-card';
+import { VocaTabContent } from './combined/voca-tab-content';
+import { NaesinTabContent } from './combined/naesin-tab-content';
+import type { VocaDay, VocaStudentProgress } from '@/types/voca';
 import type {
   NaesinUnit,
   NaesinStudentProgress,
@@ -50,10 +53,8 @@ interface NaesinStage {
 
 interface Props {
   userName: string;
-  vocaBooks: VocaBook[];
   vocaDays: VocaDay[];
   vocaProgressList: VocaStudentProgress[];
-  vocaWordCount: number;
   textbookName: string;
   naesinUnits: NaesinUnit[];
   naesinProgressList: NaesinStudentProgress[];
@@ -76,18 +77,6 @@ const COLORS = {
   statPurple: '#7C3AED',
   statAmber: '#F59E0B',
   statSky: '#06B6D4',
-  stepDefault: { bg: '#D9F7FC', border: '#CCFAF4' },
-  stepActive: { bg: '#FFFFFF', border: '#7C3AED' },
-  stepDone: { bg: '#D9F7FC', border: '#4DD9C0' },
-  activeLabel: '#7C3AED',
-  ctaButton: '#7C3AED',
-  progressDone: '#56C9A0',
-  progressActive: '#7C3AED',
-  wrongBg: '#FFF0F3',
-  wrongBorder3: '#F43F5E',
-  wrongBorder2: '#FB7185',
-  wrongBorder1: '#FCA5A5',
-  wrongBadge: '#FFE4E6',
 };
 
 // ── Voca Helpers ──
@@ -229,10 +218,8 @@ function getDDay(dateStr: string | null): number | null {
 
 export function CombinedDashboard({
   userName,
-  vocaBooks: _vocaBooks,
   vocaDays,
   vocaProgressList,
-  vocaWordCount: _vocaWordCount,
   textbookName,
   naesinUnits,
   naesinProgressList,
@@ -443,405 +430,32 @@ export function CombinedDashboard({
         </div>
       </div>
 
-      {/* ── Voca Tab Content ── */}
+      {/* ── Tab Content ── */}
       {activeTab === 'voca' && (
-        <div className="space-y-6">
-          {/* Round 1 */}
-          {currentVocaDay && (
-            <div className="rounded-2xl border bg-white p-5 md:p-6 space-y-5">
-              <h3 className="text-lg font-bold flex items-center gap-2">
-                📚 학습 흐름 — 1회독
-                <span className="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-medium" style={{ borderColor: COLORS.stepDone.border }}>
-                  {currentVocaDay.title}
-                </span>
-              </h3>
-
-              <div className="flex items-stretch gap-0 overflow-visible">
-                {r1Stages.map((stage, i) => (
-                  <div key={stage.key} className="contents">
-                    {i > 0 && <div className="flex items-center justify-center self-center px-1 md:px-1.5 text-gray-300 text-sm shrink-0">→</div>}
-                    <FlowStep stage={stage} dayId={currentVocaDay.id} linkPrefix="/student/voca/" />
-                  </div>
-                ))}
-              </div>
-
-              {vocaCtaStage && vocaCtaRound === '1' && (
-                <div className="flex items-center justify-between rounded-xl px-5 py-3" style={{ background: 'linear-gradient(to right, #F5F3FF, #EDE9FE)' }}>
-                  <span className="text-sm font-medium text-gray-700">다음 단계: <strong>{vocaCtaStage.label}</strong></span>
-                  <Link href={`/student/voca/${currentVocaDay.id}`} className="inline-flex items-center gap-1.5 rounded-lg px-4 py-2 text-sm font-semibold text-white transition-colors hover:opacity-90" style={{ background: COLORS.ctaButton }}>
-                    {vocaCtaStage.label} 시작하기 <ArrowRight className="h-4 w-4" />
-                  </Link>
-                </div>
-              )}
-            </div>
-          )}
-
-          {/* Round 2 */}
-          {currentVocaDay && (
-            <div className="rounded-2xl border bg-white p-5 md:p-6 space-y-5 transition-opacity" style={{ opacity: r1Done ? 1 : 0.55 }}>
-              <h3 className="text-lg font-bold flex items-center gap-2">
-                📗 2회독
-                {!r1Done && <span className="text-xs font-normal text-gray-400 ml-1">1회독을 완료하면 해금됩니다!</span>}
-              </h3>
-
-              <div className="flex items-stretch gap-0 overflow-visible">
-                {r2Stages.map((stage, i) => (
-                  <div key={stage.key} className="contents">
-                    {i > 0 && <div className="flex items-center justify-center self-center px-1 md:px-1.5 text-gray-300 text-sm shrink-0">→</div>}
-                    <FlowStep stage={stage} dayId={currentVocaDay.id} linkPrefix="/student/voca/" />
-                  </div>
-                ))}
-              </div>
-
-              {vocaCtaStage && vocaCtaRound === '2' && (
-                <div className="flex items-center justify-between rounded-xl px-5 py-3" style={{ background: 'linear-gradient(to right, #F5F3FF, #EDE9FE)' }}>
-                  <span className="text-sm font-medium text-gray-700">다음 단계: <strong>{vocaCtaStage.label}</strong></span>
-                  <Link href={`/student/voca/${currentVocaDay.id}`} className="inline-flex items-center gap-1.5 rounded-lg px-4 py-2 text-sm font-semibold text-white transition-colors hover:opacity-90" style={{ background: COLORS.ctaButton }}>
-                    {vocaCtaStage.label} 시작하기 <ArrowRight className="h-4 w-4" />
-                  </Link>
-                </div>
-              )}
-            </div>
-          )}
-
-          {/* Bottom: Wrong Words + Day Progress */}
-          <div className="grid gap-5 lg:grid-cols-2">
-            {/* Wrong Words */}
-            <div className="rounded-2xl p-5 md:p-6" style={{ background: COLORS.wrongBg }}>
-              <h3 className="text-sm font-bold mb-3">❌ 틀린 단어 복습</h3>
-              {wrongWordEntries.length > 0 ? (
-                <div className="space-y-2">
-                  {wrongWordEntries.map(([word, count]) => {
-                    const borderColor = count >= 3 ? COLORS.wrongBorder3 : count === 2 ? COLORS.wrongBorder2 : COLORS.wrongBorder1;
-                    return (
-                      <div key={word} className="flex items-center justify-between rounded-lg bg-white px-3 py-2" style={{ borderLeft: `3px solid ${borderColor}` }}>
-                        <span className="text-sm font-medium text-gray-800">{word}</span>
-                        <span className="inline-flex items-center rounded-full px-2 py-0.5 text-xs font-semibold text-rose-700" style={{ background: COLORS.wrongBadge }}>
-                          {count}회 오답
-                        </span>
-                      </div>
-                    );
-                  })}
-                </div>
-              ) : (
-                <p className="text-sm text-gray-500">틀린 단어가 없습니다! 대단해요! 🎉</p>
-              )}
-            </div>
-
-            {/* Day Progress */}
-            <div className="rounded-2xl border bg-white p-5 md:p-6">
-              <h3 className="text-sm font-bold mb-3">📈 Day별 진행률</h3>
-              <div className="space-y-3">
-                {currentBookDays.map((day) => {
-                  const p = vocaProgressMap.get(day.id) ?? null;
-                  const isCurrent = day.id === currentVocaDay?.id;
-                  const stagesComplete =
-                    (p?.flashcard_completed ? 1 : 0) +
-                    ((p?.quiz_score ?? 0) >= 80 ? 1 : 0) +
-                    ((p?.spelling_score ?? 0) >= 80 ? 1 : 0) +
-                    (p?.matching_completed ? 1 : 0);
-                  const pct = Math.round((stagesComplete / 4) * 100);
-                  const isDone = isR1Complete(p);
-
-                  return (
-                    <Link
-                      key={day.id}
-                      href={`/student/voca/${day.id}`}
-                      className={`block rounded-xl border px-3.5 py-3 transition-colors ${
-                        isCurrent ? 'bg-white shadow-sm' : 'hover:bg-gray-50'
-                      }`}
-                      style={isCurrent ? { border: `2px solid ${COLORS.stepActive.border}` } : undefined}
-                    >
-                      <div className="flex items-center justify-between text-sm mb-1.5">
-                        <span className="font-medium truncate flex items-center gap-2">
-                          {day.title}
-                          {isCurrent && (
-                            <span className="inline-flex items-center rounded-full px-1.5 py-0 text-[10px] font-semibold text-white" style={{ background: COLORS.activeLabel }}>
-                              학습 중
-                            </span>
-                          )}
-                        </span>
-                        <span className="text-xs text-gray-400 shrink-0 ml-2">{stagesComplete}/4</span>
-                      </div>
-                      <div className="h-2.5 w-full rounded-full bg-gray-200 overflow-hidden">
-                        <div
-                          className="h-full rounded-full transition-all"
-                          style={{
-                            width: `${pct}%`,
-                            background: isDone
-                              ? `linear-gradient(to right, ${COLORS.progressDone}, #4DD9C0)`
-                              : isCurrent
-                                ? COLORS.progressActive
-                                : '#D1D5DB',
-                          }}
-                        />
-                      </div>
-                    </Link>
-                  );
-                })}
-                {currentBookDays.length === 0 && (
-                  <p className="text-sm text-gray-500">등록된 Day가 없습니다.</p>
-                )}
-              </div>
-            </div>
-          </div>
-        </div>
+        <VocaTabContent
+          currentDay={currentVocaDay}
+          r1Stages={r1Stages}
+          r2Stages={r2Stages}
+          r1Done={r1Done}
+          vocaCtaStage={vocaCtaStage}
+          vocaCtaRound={vocaCtaRound}
+          wrongWordEntries={wrongWordEntries}
+          currentBookDays={currentBookDays}
+          vocaProgressMap={vocaProgressMap}
+        />
       )}
 
-      {/* ── Naesin Tab Content ── */}
       {activeTab === 'naesin' && (
-        <div className="space-y-6">
-          {/* Learning Flow */}
-          {currentUnit && currentNaesinStages.length > 0 && (
-            <div className="rounded-2xl border bg-white p-5 md:p-6 space-y-5">
-              <h3 className="text-lg font-bold flex items-center gap-2">
-                📖 내신 대비 — {currentUnit.title}
-                {(() => {
-                  const assignment = examAssignments.find((a) => a.unit_ids.includes(currentUnit.id));
-                  const dday = assignment ? getDDay(assignment.exam_date) : null;
-                  return dday !== null && dday >= 0 ? (
-                    <span className="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-medium" style={{ borderColor: COLORS.stepDone.border }}>
-                      {dday === 0 ? 'D-Day' : `D-${dday}`}
-                    </span>
-                  ) : null;
-                })()}
-              </h3>
-
-              <div className="flex items-stretch gap-0 overflow-visible">
-                {currentNaesinStages.map((stage, i) => (
-                  <div key={stage.key} className="contents">
-                    {i > 0 && <div className="flex items-center justify-center self-center px-1 md:px-1.5 text-gray-300 text-sm shrink-0">→</div>}
-                    <FlowStep stage={stage} dayId={`${currentUnit.id}/${stage.stageKey}`} linkPrefix="/student/naesin/" />
-                  </div>
-                ))}
-              </div>
-
-              {naesinCtaStage && (
-                <div className="flex items-center justify-between rounded-xl px-5 py-3" style={{ background: 'linear-gradient(to right, #F5F3FF, #EDE9FE)' }}>
-                  <span className="text-sm font-medium text-gray-700">다음 단계: <strong>{naesinCtaStage.label}</strong></span>
-                  <Link href={`/student/naesin/${currentUnit.id}/${naesinCtaStage.stageKey}`} className="inline-flex items-center gap-1.5 rounded-lg px-4 py-2 text-sm font-semibold text-white transition-colors hover:opacity-90" style={{ background: COLORS.ctaButton }}>
-                    {naesinCtaStage.label} 시작하기 <ArrowRight className="h-4 w-4" />
-                  </Link>
-                </div>
-              )}
-            </div>
-          )}
-
-          {/* Bottom: Unit Progress + Exam Scope */}
-          <div className="grid gap-6 lg:grid-cols-2">
-            {/* Unit Progress */}
-            <div className="rounded-2xl border bg-white p-5 md:p-6">
-              <h3 className="text-base font-bold mb-4 flex items-center gap-2">
-                <Layers className="h-4 w-4" />
-                단원 진행률
-              </h3>
-              <div className="space-y-3">
-                {sortedUnits.map((unit) => {
-                  const s = statusesMap.get(unit.id);
-                  if (!s) return null;
-                  const done =
-                    (s.vocab === 'completed' ? 1 : 0) +
-                    (s.passage === 'completed' ? 1 : 0) +
-                    (s.grammar === 'completed' ? 1 : 0) +
-                    (s.problem === 'completed' ? 1 : 0);
-                  const pct = Math.round((done / 4) * 100);
-                  const isDone = isNaesinUnitComplete(s);
-                  const isActive = currentUnit?.id === unit.id;
-
-                  return (
-                    <div key={unit.id}>
-                      <div className="flex items-center justify-between text-sm mb-1.5">
-                        <span className="font-medium truncate">{unit.title}</span>
-                        <span className="text-xs text-gray-400 shrink-0 ml-2">{done}/4</span>
-                      </div>
-                      <div className="h-2.5 w-full rounded-full bg-gray-200 overflow-hidden">
-                        <div
-                          className="h-full rounded-full transition-all"
-                          style={{
-                            width: `${pct}%`,
-                            background: isDone
-                              ? `linear-gradient(to right, ${COLORS.progressDone}, #4DD9C0)`
-                              : isActive
-                                ? COLORS.progressActive
-                                : '#D1D5DB',
-                          }}
-                        />
-                      </div>
-                    </div>
-                  );
-                })}
-                {sortedUnits.length === 0 && (
-                  <p className="text-sm text-gray-500">등록된 단원이 없습니다.</p>
-                )}
-              </div>
-            </div>
-
-            {/* Exam Scope */}
-            <div className="rounded-2xl border bg-white p-5 md:p-6">
-              <h3 className="text-base font-bold mb-4 flex items-center gap-2">
-                <CalendarDays className="h-4 w-4" />
-                시험 범위
-              </h3>
-              <div className="space-y-3">
-                {examAssignments.length > 0 ? (
-                  examAssignments
-                    .sort((a, b) => a.exam_round - b.exam_round)
-                    .map((ea) => {
-                      const dday = getDDay(ea.exam_date);
-                      const unitTitles = ea.unit_ids
-                        .map((uid) => naesinUnits.find((u) => u.id === uid)?.title)
-                        .filter(Boolean);
-                      return (
-                        <div key={ea.id} className="rounded-xl border p-3.5">
-                          <div className="flex items-center justify-between mb-2">
-                            <span className="text-sm font-semibold">
-                              {ea.exam_label || `${ea.exam_round}차 시험`}
-                            </span>
-                            {dday !== null && dday >= 0 && (
-                              <span
-                                className={`inline-flex items-center rounded-full px-2 py-0.5 text-xs font-semibold ${
-                                  dday <= 7 ? 'bg-rose-100 text-rose-700' : 'bg-gray-100 text-gray-600'
-                                }`}
-                              >
-                                {dday === 0 ? 'D-Day' : `D-${dday}`}
-                              </span>
-                            )}
-                            {ea.exam_date && dday !== null && dday < 0 && (
-                              <span className="inline-flex items-center rounded-full bg-gray-100 px-2 py-0.5 text-xs font-medium text-gray-500">완료</span>
-                            )}
-                          </div>
-                          {ea.exam_date && (
-                            <p className="text-xs text-gray-400 mb-1.5">
-                              {new Date(ea.exam_date).toLocaleDateString('ko-KR')}
-                            </p>
-                          )}
-                          <div className="flex flex-wrap gap-1.5">
-                            {unitTitles.map((title, i) => (
-                              <span key={i} className="inline-flex items-center rounded-full border px-2 py-0.5 text-xs text-gray-600" style={{ borderColor: COLORS.stepDone.border }}>
-                                {title}
-                              </span>
-                            ))}
-                          </div>
-                        </div>
-                      );
-                    })
-                ) : (
-                  <p className="text-sm text-gray-500">등록된 시험 범위가 없습니다.</p>
-                )}
-              </div>
-            </div>
-          </div>
-        </div>
+        <NaesinTabContent
+          currentUnit={currentUnit}
+          currentNaesinStages={currentNaesinStages}
+          naesinCtaStage={naesinCtaStage}
+          sortedUnits={sortedUnits}
+          statusesMap={statusesMap}
+          examAssignments={examAssignments}
+          naesinUnits={naesinUnits}
+        />
       )}
     </div>
   );
-}
-
-// ── Sub-components ──
-
-function StatCard({
-  label,
-  value,
-  sub,
-  color,
-  icon,
-}: {
-  label: string;
-  value: string | number;
-  sub: string;
-  color: string;
-  icon: React.ReactNode;
-}) {
-  return (
-    <div
-      className="rounded-xl border bg-white p-4"
-      style={{ borderLeftWidth: 4, borderLeftColor: color }}
-    >
-      <div className="flex items-center justify-between mb-2">
-        <span className="text-xs font-medium uppercase tracking-wider text-gray-500">{label}</span>
-        <span style={{ color }}>{icon}</span>
-      </div>
-      <div className="text-2xl font-bold tracking-tight">{value}</div>
-      <p className="text-xs text-gray-400 mt-0.5">{sub}</p>
-    </div>
-  );
-}
-
-function FlowStep({ stage, dayId, linkPrefix }: { stage: VocaStage | NaesinStage; dayId: string; linkPrefix: string }) {
-  const isDone = stage.status === 'done';
-  const isActive = stage.status === 'active';
-  const isLocked = stage.status === 'locked';
-
-  const green = '#22C55E';
-
-  const card = (
-    <div
-      className="relative text-center transition-all flex flex-col items-center h-full"
-      style={{
-        background: isDone ? '#D9F7FC' : isActive ? 'white' : '#D9F7FC',
-        border: isDone ? '1.5px solid #4DD9C0' : isActive ? '2px solid #7C3AED' : '1.5px solid #CCFAF4',
-        borderRadius: isActive ? 16 : 14,
-        padding: isActive ? '28px 10px 24px' : '24px 8px 20px',
-        boxShadow: isActive ? '0 8px 24px rgba(37,99,235,0.08)' : 'none',
-        zIndex: isActive ? 1 : 0,
-        wordBreak: 'keep-all' as const,
-      }}
-    >
-      {/* Active label */}
-      {isActive && (
-        <div className="absolute -top-3 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full px-2.5 py-0.5 text-xs font-bold tracking-wide text-white" style={{ background: '#7C3AED' }}>
-          ▶ 지금 여기!
-        </div>
-      )}
-
-      {/* Status icon — top right circle */}
-      <div className="absolute -top-2 -right-2 flex h-[24px] w-[24px] items-center justify-center rounded-full border-2 border-white text-xs font-bold" style={{
-        background: isDone ? green : isActive ? '#7C3AED' : '#E5E7EB',
-        color: isDone || isActive ? 'white' : '#9CA3AF',
-      }}>
-        {isDone ? '✓' : isActive ? '▶' : '🔒'}
-      </div>
-
-      {/* Icon wrap */}
-      <div className="mx-auto mb-3 flex items-center justify-center rounded-xl" style={{
-        width: isActive ? 58 : 48,
-        height: isActive ? 58 : 48,
-        fontSize: isActive ? 30 : 24,
-        background: isDone ? 'rgba(37,99,235,0.08)' : 'white',
-      }}>
-        {stage.emoji}
-      </div>
-
-      {/* Name */}
-      <div className="font-bold leading-tight" style={{
-        fontSize: isActive ? 17 : 14,
-        color: isDone ? green : isActive ? '#7C3AED' : '#4B5563',
-      }}>
-        {stage.label}
-      </div>
-
-      {/* Description */}
-      <div className="mt-2 leading-snug whitespace-pre-line" style={{
-        fontSize: isActive ? 14 : 13,
-        color: isActive ? '#6B7280' : '#9CA3AF',
-      }}>
-        {stage.description}
-      </div>
-
-      {/* Score badge */}
-      <div className="mt-3 inline-block rounded-full font-bold" style={{
-        fontSize: isActive ? 14 : 13,
-        padding: isActive ? '4px 12px' : '3px 10px',
-        background: isDone ? green : isActive ? '#7C3AED' : '#E5E7EB',
-        color: isDone || isActive ? 'white' : '#9CA3AF',
-      }}>
-        {isDone ? (stage.actualScore || '완료') : stage.scoreRequirement}
-      </div>
-    </div>
-  );
-
-  if (!isLocked && dayId) {
-    return <Link href={`${linkPrefix}${dayId}`} className="block" style={{ flex: isActive ? 1.35 : 1 }}>{card}</Link>;
-  }
-  return <div style={{ flex: isActive ? 1.35 : 1 }}>{card}</div>;
 }
