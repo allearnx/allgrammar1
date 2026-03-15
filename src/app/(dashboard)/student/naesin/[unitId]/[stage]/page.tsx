@@ -4,6 +4,8 @@ import { Topbar } from '@/components/layout/topbar';
 import { notFound } from 'next/navigation';
 import { NaesinStageView } from './client';
 import { calculateStageStatuses } from '@/lib/naesin/stage-unlock';
+import { getPlanContext } from '@/lib/billing/get-plan-context';
+import { mergeEnabledStages } from '@/lib/billing/feature-gate';
 import type { NaesinContentAvailability } from '@/types/database';
 
 const VALID_STAGES = ['vocab', 'passage', 'grammar', 'problem', 'lastReview'] as const;
@@ -98,7 +100,12 @@ export default async function NaesinStagePage({ params }: Props) {
     .eq('student_id', user.id)
     .single();
 
-  const enabledStages = (studentSettings?.enabled_stages as string[] | null) ?? undefined;
+  // Merge teacher-configured stages with plan-based restrictions
+  const planContext = await getPlanContext(user.academy_id);
+  const enabledStages = mergeEnabledStages(
+    planContext.tier,
+    studentSettings?.enabled_stages as string[] | null,
+  );
 
   const stageStatuses = calculateStageStatuses({
     progress,

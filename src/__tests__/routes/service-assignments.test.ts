@@ -14,6 +14,10 @@ vi.mock('@/lib/supabase/server', () => ({
 vi.mock('@/lib/api/rate-limit', () => ({
   checkRateLimit: () => null,
 }));
+vi.mock('@/lib/billing/check-plan-api', () => ({
+  checkPlanGate: () => null,
+  checkServiceGate: () => null,
+}));
 
 function mockSupabaseChain(result: { data: unknown; error: unknown }) {
   const chain: Record<string, ReturnType<typeof vi.fn>> = {

@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { createApiHandler } from '@/lib/api';
 import { createAdminClient } from '@/lib/supabase/admin';
+import { checkPlanGate } from '@/lib/billing/check-plan-api';
 
 function escapeCsv(value: string): string {
   if (value.includes('"') || value.includes(',') || value.includes('\n')) {
@@ -15,6 +16,10 @@ export const GET = createApiHandler(
     if (!user.academy_id) {
       return NextResponse.json({ error: '학원에 소속되어 있지 않습니다.' }, { status: 400 });
     }
+
+    const blocked = await checkPlanGate(user.academy_id, 'bulk:export');
+    if (blocked) return blocked;
+
     const admin = createAdminClient();
     const academyId = user.academy_id;
 

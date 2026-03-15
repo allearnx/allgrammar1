@@ -1,16 +1,38 @@
 'use client';
 
-import { AlertTriangle, CreditCard, Clock } from 'lucide-react';
+import { AlertTriangle, CreditCard, Clock, Sparkles } from 'lucide-react';
 import Link from 'next/link';
 import type { SubscriptionStatus } from '@/types/billing';
+import type { Tier } from '@/lib/billing/feature-gate';
 
 interface SubscriptionBannerProps {
   status: SubscriptionStatus;
   trialDaysLeft?: number;
   billingPageHref: string;
+  tier?: Tier;
+  freeService?: 'naesin' | 'voca' | null;
 }
 
-export function SubscriptionBanner({ status, trialDaysLeft, billingPageHref }: SubscriptionBannerProps) {
+export function SubscriptionBanner({ status, trialDaysLeft, billingPageHref, tier, freeService }: SubscriptionBannerProps) {
+  // Free tier banner
+  if (tier === 'free') {
+    const serviceLabel = freeService === 'voca' ? '올킬보카' : '올인내신';
+    return (
+      <div className="bg-violet-50 border-b border-violet-200 px-4 py-2.5 flex items-center justify-between text-sm">
+        <div className="flex items-center gap-2 text-violet-700">
+          <Sparkles className="h-4 w-4" />
+          <span>무료 플랜 사용 중 (5명, {serviceLabel}만 이용 가능)</span>
+        </div>
+        <Link
+          href={billingPageHref}
+          className="flex items-center gap-1 text-violet-700 font-semibold hover:underline"
+        >
+          업그레이드 &rarr;
+        </Link>
+      </div>
+    );
+  }
+
   if (status === 'active') return null;
 
   if (status === 'trialing') {

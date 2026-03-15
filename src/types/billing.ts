@@ -1,5 +1,6 @@
 export type PlanTarget = 'academy' | 'individual';
 export type SubscriptionStatus = 'trialing' | 'active' | 'past_due' | 'canceled' | 'expired';
+export type SubscriptionTier = 'free' | 'paid';
 export type PaymentStatus = 'success' | 'failed' | 'refunded';
 
 export interface SubscriptionPlan {
@@ -21,6 +22,7 @@ export interface Subscription {
   academy_id: string | null;
   student_id: string | null;
   status: SubscriptionStatus;
+  tier: SubscriptionTier;
   billing_key: string | null;
   customer_key: string;
   current_period_start: string;

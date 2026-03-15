@@ -2,10 +2,20 @@ import { NextResponse } from 'next/server';
 import { createApiHandler } from '@/lib/api';
 import { createAdminClient } from '@/lib/supabase/admin';
 import { studentBulkAssignSchema } from '@/lib/api/schemas';
+import { checkPlanGate, checkServiceGate } from '@/lib/billing/check-plan-api';
 
 export const POST = createApiHandler(
   { roles: ['admin', 'boss'], schema: studentBulkAssignSchema, rateLimit: { max: 20, windowMs: 60_000 } },
   async ({ user, body }) => {
+    const blocked = await checkPlanGate(user.academy_id, 'bulk:assign');
+    if (blocked) return blocked;
+
+    // Free tier: only allow assigning the selected free service
+    if (body.action === 'assign') {
+      const serviceBlocked = await checkServiceGate(user.academy_id, body.services);
+      if (serviceBlocked) return serviceBlocked;
+    }
+
     const admin = createAdminClient();
 
     // Verify all students belong to admin's academy

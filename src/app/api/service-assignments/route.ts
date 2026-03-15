@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { createApiHandler } from '@/lib/api/handler';
 import { serviceAssignmentCreateSchema, serviceAssignmentDeleteSchema } from '@/lib/api/schemas';
+import { checkServiceGate } from '@/lib/billing/check-plan-api';
 
 // GET — 학생 본인의 배정 목록
 export const GET = createApiHandler({ hasBody: false }, async ({ user, supabase }) => {
@@ -15,6 +16,10 @@ export const GET = createApiHandler({ hasBody: false }, async ({ user, supabase 
 export const POST = createApiHandler(
   { roles: ['boss', 'admin'], schema: serviceAssignmentCreateSchema },
   async ({ user, body, supabase }) => {
+    // Free tier: only allow assigning the selected free service
+    const serviceBlocked = await checkServiceGate(user.academy_id, [body.service]);
+    if (serviceBlocked) return serviceBlocked;
+
     const { data, error } = await supabase
       .from('service_assignments')
       .upsert(

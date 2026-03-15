@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { ChevronLeft } from 'lucide-react';
+import { ChevronLeft, Lock } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { VocaTab } from '@/components/voca/vocab-tab';
 import { VocaTab2 } from '@/components/voca/vocab-tab/voca-tab-round2';
@@ -19,9 +19,10 @@ interface VocaDayClientProps {
   vocabulary: VocaVocabulary[];
   progress: VocaStudentProgress | null;
   wrongWords: WrongWordItem[];
+  round2Locked?: boolean;
 }
 
-export function VocaDayClient({ day, vocabulary, progress, wrongWords }: VocaDayClientProps) {
+export function VocaDayClient({ day, vocabulary, progress, wrongWords, round2Locked = false }: VocaDayClientProps) {
   const router = useRouter();
   const [round, setRound] = useState<'1' | '2'>('1');
 
@@ -53,12 +54,15 @@ export function VocaDayClient({ day, vocabulary, progress, wrongWords }: VocaDay
         <button
           className={cn(
             'px-4 py-1.5 rounded-md text-sm font-medium transition-colors',
+            round2Locked && 'opacity-50 cursor-not-allowed',
             round === '2'
               ? 'bg-background text-foreground shadow-sm'
               : 'text-muted-foreground hover:text-foreground'
           )}
-          onClick={() => setRound('2')}
+          onClick={() => !round2Locked && setRound('2')}
+          disabled={round2Locked}
         >
+          {round2Locked && <Lock className="inline h-3 w-3 mr-1" />}
           2회독
         </button>
       </div>

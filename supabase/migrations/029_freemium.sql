@@ -1,0 +1,85 @@
+-- ============================================
+-- 029: 프리미엄 플랜 (무료 5명 + 기능 제한)
+-- ============================================
+
+-- ── 1. academies에 free_service 컬럼 추가 ──
+ALTER TABLE academies ADD COLUMN IF NOT EXISTS free_service TEXT
+  CHECK (free_service IN ('naesin', 'voca'));
+
+-- ── 2. subscriptions에 tier 컬럼 추가 ──
+ALTER TABLE subscriptions ADD COLUMN IF NOT EXISTS tier TEXT
+  NOT NULL DEFAULT 'paid' CHECK (tier IN ('free', 'paid'));
+
+-- ── 3. handle_new_user() 수정: admin 가입 시 free_service 저장, max_students=5 ──
+CREATE OR REPLACE FUNCTION handle_new_user()
+RETURNS TRIGGER AS $$
+DECLARE
+  _academy_id UUID;
+  _invite_code TEXT;
+  _academy_name TEXT;
+  _role TEXT;
+  _full_name TEXT;
+  _new_invite_code TEXT;
+  _free_service TEXT;
+BEGIN
+  _invite_code := NEW.raw_user_meta_data->>'invite_code';
+  _academy_name := NEW.raw_user_meta_data->>'academy_name';
+  _role := COALESCE(NEW.raw_user_meta_data->>'role', 'student');
+  _full_name := COALESCE(
+    NEW.raw_user_meta_data->>'full_name',
+    NEW.raw_user_meta_data->>'name',
+    NEW.email
+  );
+  _free_service := NEW.raw_user_meta_data->>'free_service';
+
+  -- admin + academy_name: 학원 자동 생성
+  IF _role = 'admin' AND _academy_name IS NOT NULL AND _academy_name != '' THEN
+    _new_invite_code := upper(substr(md5(random()::text), 1, 6));
+    INSERT INTO public.academies (name, invite_code, owner_id, max_students, free_service)
+    VALUES (_academy_name, _new_invite_code, NEW.id, 5, _free_service)
+    RETURNING id INTO _academy_id;
+  ELSIF _invite_code IS NOT NULL AND _invite_code != '' THEN
+    SELECT id INTO _academy_id FROM public.academies WHERE invite_code = _invite_code;
+  END IF;
+
+  INSERT INTO public.users (id, email, full_name, role, academy_id, phone)
+  VALUES (
+    NEW.id,
+    NEW.email,
+    _full_name,
+    COALESCE(_role::user_role, 'student'),
+    _academy_id,
+    NEW.raw_user_meta_data->>'phone'
+  );
+  RETURN NEW;
+END;
+$$ LANGUAGE plpgsql SECURITY DEFINER;
+
+-- ── 4. auto_create_trial_subscription() 수정: tier='free' 구독 자동 생성 ──
+CREATE OR REPLACE FUNCTION auto_create_trial_subscription()
+RETURNS TRIGGER AS $$
+DECLARE
+  _plan_id UUID;
+BEGIN
+  -- owner_id가 있는 새 학원에만 적용 (자가 가입)
+  IF NEW.owner_id IS NULL THEN RETURN NEW; END IF;
+
+  -- 기본 학원 플랜 가져오기
+  SELECT id INTO _plan_id FROM subscription_plans
+  WHERE target = 'academy' AND is_active = true
+  ORDER BY sort_order LIMIT 1;
+
+  IF _plan_id IS NULL THEN RETURN NEW; END IF;
+
+  INSERT INTO subscriptions (
+    plan_id, academy_id, status, tier, customer_key,
+    current_period_start, current_period_end, trial_end, created_by
+  ) VALUES (
+    _plan_id, NEW.id, 'active', 'free',
+    'cust_' || replace(gen_random_uuid()::text, '-', ''),
+    now(), now() + interval '7 days', now() + interval '7 days', NEW.owner_id
+  );
+
+  RETURN NEW;
+END;
+$$ LANGUAGE plpgsql SECURITY DEFINER;

@@ -9,16 +9,17 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { Download, UserPlus, ChevronDown } from 'lucide-react';
+import { Download, UserPlus, ChevronDown, Lock } from 'lucide-react';
 import { toast } from 'sonner';
 import { BulkImportDialog } from './bulk-import-dialog';
 
 interface Props {
   studentIds: string[];
   studentCount: number;
+  bulkAllowed?: boolean;
 }
 
-export function StudentsToolbar({ studentIds, studentCount }: Props) {
+export function StudentsToolbar({ studentIds, studentCount, bulkAllowed = true }: Props) {
   const [assigning, setAssigning] = useState(false);
   const router = useRouter();
 
@@ -74,8 +75,8 @@ export function StudentsToolbar({ studentIds, studentCount }: Props) {
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <button
-              className="inline-flex items-center rounded-lg border bg-white px-3 py-1.5 text-sm font-medium text-gray-700 transition-all hover:shadow-sm hover:border-violet-300 disabled:opacity-50"
-              disabled={assigning || studentIds.length === 0}
+              className="inline-flex items-center rounded-lg border bg-white px-3 py-1.5 text-sm font-medium text-gray-700 transition-all hover:shadow-sm hover:border-violet-300 disabled:opacity-50 disabled:cursor-not-allowed"
+              disabled={assigning || studentIds.length === 0 || !bulkAllowed}
             >
               <UserPlus className="h-4 w-4 mr-1.5 text-gray-400" />
               전체 서비스 배정
@@ -102,13 +103,32 @@ export function StudentsToolbar({ studentIds, studentCount }: Props) {
           </DropdownMenuContent>
         </DropdownMenu>
 
-        <BulkImportDialog />
+        {bulkAllowed ? (
+          <BulkImportDialog />
+        ) : (
+          <button
+            disabled
+            className="inline-flex items-center rounded-lg border bg-white px-3 py-1.5 text-sm font-medium text-gray-400 opacity-50 cursor-not-allowed"
+          >
+            <Lock className="h-4 w-4 mr-1.5" />
+            학생 등록
+          </button>
+        )}
 
         <button
-          onClick={handleExport}
-          className="inline-flex items-center rounded-lg border bg-white px-3 py-1.5 text-sm font-medium text-gray-700 transition-all hover:shadow-sm hover:border-violet-300"
+          onClick={bulkAllowed ? handleExport : undefined}
+          disabled={!bulkAllowed}
+          className={`inline-flex items-center rounded-lg border bg-white px-3 py-1.5 text-sm font-medium transition-all ${
+            bulkAllowed
+              ? 'text-gray-700 hover:shadow-sm hover:border-violet-300'
+              : 'text-gray-400 opacity-50 cursor-not-allowed'
+          }`}
         >
-          <Download className="h-4 w-4 mr-1.5 text-gray-400" />
+          {bulkAllowed ? (
+            <Download className="h-4 w-4 mr-1.5 text-gray-400" />
+          ) : (
+            <Lock className="h-4 w-4 mr-1.5" />
+          )}
           내보내기
         </button>
       </div>

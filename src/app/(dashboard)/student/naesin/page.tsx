@@ -3,6 +3,8 @@ import { createClient } from '@/lib/supabase/server';
 import { Topbar } from '@/components/layout/topbar';
 import { NaesinHome } from './client';
 import { calculateStageStatuses } from '@/lib/naesin/stage-unlock';
+import { getPlanContext } from '@/lib/billing/get-plan-context';
+import { mergeEnabledStages } from '@/lib/billing/feature-gate';
 import type { NaesinStageStatuses, NaesinExamAssignment } from '@/types/database';
 
 interface UnitSummary {
@@ -32,7 +34,12 @@ export default async function NaesinPage() {
     .eq('student_id', user.id)
     .single();
 
-  const enabledStages = (setting?.enabled_stages as string[] | null) ?? undefined;
+  // Merge teacher-configured stages with plan-based restrictions
+  const planContext = await getPlanContext(user.academy_id);
+  const enabledStages = mergeEnabledStages(
+    planContext.tier,
+    setting?.enabled_stages as string[] | null,
+  );
 
   // Get all active textbooks
   const { data: textbooks } = await supabase

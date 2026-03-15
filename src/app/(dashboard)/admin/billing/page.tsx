@@ -8,7 +8,10 @@ import { Badge } from '@/components/ui/badge';
 import { toast } from 'sonner';
 import { CreditCard, Receipt } from 'lucide-react';
 import { SubscriptionBanner } from '@/components/billing/subscription-banner';
+import { PlanComparison } from '@/components/billing/plan-comparison';
 import type { Subscription, PaymentHistory, SubscriptionPlan } from '@/types/billing';
+import { deriveTier } from '@/lib/billing/feature-gate';
+import type { Tier, FreeService } from '@/lib/billing/feature-gate';
 
 interface SubscriptionWithPlan extends Subscription {
   plan: SubscriptionPlan;
@@ -18,6 +21,8 @@ export default function AdminBillingPage() {
   const [subscription, setSubscription] = useState<SubscriptionWithPlan | null>(null);
   const [payments, setPayments] = useState<PaymentHistory[]>([]);
   const [loading, setLoading] = useState(true);
+  const [tier, setTier] = useState<Tier>('free');
+  const [freeService, setFreeService] = useState<FreeService | null>(null);
 
   const fetchData = useCallback(async () => {
     const supabase = createClient();
@@ -36,6 +41,15 @@ export default function AdminBillingPage() {
       return;
     }
 
+    // Fetch academy free_service
+    const { data: academy } = await supabase
+      .from('academies')
+      .select('free_service')
+      .eq('id', profile.academy_id)
+      .single();
+
+    setFreeService((academy?.free_service as FreeService | null) ?? null);
+
     const { data: sub } = await supabase
       .from('subscriptions')
       .select('*, plan:subscription_plans(*)')
@@ -45,7 +59,9 @@ export default function AdminBillingPage() {
       .single();
 
     if (sub) {
-      setSubscription(sub as unknown as SubscriptionWithPlan);
+      const typedSub = sub as unknown as SubscriptionWithPlan;
+      setSubscription(typedSub);
+      setTier(deriveTier({ status: typedSub.status, tier: typedSub.tier }));
 
       // 결제 내역
       const { data: hist } = await supabase
@@ -113,6 +129,8 @@ export default function AdminBillingPage() {
           status={subscription.status}
           trialDaysLeft={trialDaysLeft}
           billingPageHref="/admin/billing"
+          tier={tier}
+          freeService={freeService}
         />
       )}
 
@@ -224,6 +242,16 @@ export default function AdminBillingPage() {
             </Card>
           </>
         )}
+
+        {/* 플랜 비교 */}
+        <Card>
+          <CardHeader>
+            <CardTitle>플랜 비교</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <PlanComparison showCta={tier === 'free'} />
+          </CardContent>
+        </Card>
       </div>
     </div>
   );

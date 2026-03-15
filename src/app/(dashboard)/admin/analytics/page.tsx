@@ -2,9 +2,14 @@ import { requireRole } from '@/lib/auth/helpers';
 import { Topbar } from '@/components/layout/topbar';
 import { BarChart3 } from 'lucide-react';
 import { AdminAnalyticsClient } from './client';
+import { getPlanContext } from '@/lib/billing/get-plan-context';
+import { canUseFeature } from '@/lib/billing/feature-gate';
+import { PremiumGate } from '@/components/billing/premium-gate';
 
 export default async function AdminAnalyticsPage() {
   const user = await requireRole(['admin', 'boss']);
+  const planContext = await getPlanContext(user.academy_id);
+  const chartsAllowed = canUseFeature(planContext.tier, 'analytics:charts');
 
   return (
     <>
@@ -34,7 +39,9 @@ export default async function AdminAnalyticsPage() {
           </div>
         </div>
 
-        <AdminAnalyticsClient />
+        <PremiumGate allowed={chartsAllowed} feature="통계 차트" role={user.role}>
+          <AdminAnalyticsClient />
+        </PremiumGate>
       </div>
     </>
   );

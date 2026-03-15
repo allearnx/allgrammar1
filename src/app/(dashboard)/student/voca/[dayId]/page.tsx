@@ -3,6 +3,8 @@ import { createClient } from '@/lib/supabase/server';
 import { redirect, notFound } from 'next/navigation';
 import { Topbar } from '@/components/layout/topbar';
 import { VocaDayClient } from './client';
+import { getPlanContext } from '@/lib/billing/get-plan-context';
+import { canUseFeature } from '@/lib/billing/feature-gate';
 import type { VocaVocabulary, VocaStudentProgress, VocaDay } from '@/types/voca';
 
 export default async function StudentVocaDayPage({
@@ -83,6 +85,9 @@ export default async function StudentVocaDayPage({
 
   const wrongWords = Array.from(wrongWordsMap.values());
 
+  const planContext = await getPlanContext(user.academy_id);
+  const round2Locked = !canUseFeature(planContext.tier, 'voca:round2');
+
   return (
     <>
       <Topbar user={user} title={(day as VocaDay).title} />
@@ -92,6 +97,7 @@ export default async function StudentVocaDayPage({
           vocabulary={(vocabulary as VocaVocabulary[]) || []}
           progress={(progress as VocaStudentProgress) || null}
           wrongWords={wrongWords}
+          round2Locked={round2Locked}
         />
       </div>
     </>

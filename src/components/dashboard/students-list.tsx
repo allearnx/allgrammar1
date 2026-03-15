@@ -8,6 +8,8 @@ import Link from 'next/link';
 import { ServiceAssignmentToggle } from './service-assignment-toggle';
 import { StudentsToolbar } from './students-toolbar';
 import { StudentDeleteButton } from './student-delete-button';
+import { getPlanContext } from '@/lib/billing/get-plan-context';
+import { canUseFeature } from '@/lib/billing/feature-gate';
 import type { AuthUser } from '@/types/auth';
 
 interface Props {
@@ -111,12 +113,16 @@ export async function StudentsList({ user, basePath }: Props) {
     }
   }
 
+  const planContext = await getPlanContext(user.academy_id);
+  const bulkAllowed = canUseFeature(planContext.tier, 'bulk:import');
+
   return (
     <div className="p-4 md:p-6 space-y-4">
       {canManageServices && (
         <StudentsToolbar
           studentIds={studentIds}
           studentCount={students?.length || 0}
+          bulkAllowed={bulkAllowed}
         />
       )}
       {!canManageServices && (

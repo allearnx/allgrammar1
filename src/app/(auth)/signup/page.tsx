@@ -14,6 +14,8 @@ import { toast } from 'sonner';
 import { CheckCircle2, XCircle } from 'lucide-react';
 import type { UserRole } from '@/types/database';
 
+type FreeService = 'naesin' | 'voca';
+
 export default function SignUpPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -27,6 +29,7 @@ export default function SignUpPage() {
   const [newAcademyName, setNewAcademyName] = useState('');
   const [contactNumber, setContactNumber] = useState('');
   const [phone, setPhone] = useState('');
+  const [freeService, setFreeService] = useState<FreeService>('naesin');
   const router = useRouter();
 
   const isAdminRole = role === 'admin';
@@ -83,7 +86,7 @@ export default function SignUpPage() {
           role,
           ...(phone.trim() ? { phone: phone.trim() } : {}),
           ...(isAdminRole
-            ? { academy_name: newAcademyName.trim() }
+            ? { academy_name: newAcademyName.trim(), free_service: freeService, contact_number: contactNumber.trim() || undefined }
             : code.length === 6 && academyName
               ? { invite_code: code }
               : {}),
@@ -195,8 +198,49 @@ export default function SignUpPage() {
                     required
                   />
                 </div>
+                <div className="space-y-2">
+                  <Label>무료 체험 서비스 선택</Label>
+                  <div className="grid grid-cols-2 gap-3">
+                    <label
+                      className={`flex flex-col items-center gap-1.5 rounded-xl border-2 p-3 cursor-pointer transition-all ${
+                        freeService === 'naesin'
+                          ? 'border-cyan-500 bg-cyan-50'
+                          : 'border-gray-200 hover:border-gray-300'
+                      }`}
+                    >
+                      <input
+                        type="radio"
+                        name="freeService"
+                        value="naesin"
+                        checked={freeService === 'naesin'}
+                        onChange={() => setFreeService('naesin')}
+                        className="sr-only"
+                      />
+                      <span className="text-sm font-semibold">올인내신</span>
+                      <span className="text-xs text-muted-foreground text-center">단어암기 + 교과서암기</span>
+                    </label>
+                    <label
+                      className={`flex flex-col items-center gap-1.5 rounded-xl border-2 p-3 cursor-pointer transition-all ${
+                        freeService === 'voca'
+                          ? 'border-violet-500 bg-violet-50'
+                          : 'border-gray-200 hover:border-gray-300'
+                      }`}
+                    >
+                      <input
+                        type="radio"
+                        name="freeService"
+                        value="voca"
+                        checked={freeService === 'voca'}
+                        onChange={() => setFreeService('voca')}
+                        className="sr-only"
+                      />
+                      <span className="text-sm font-semibold">올킬보카</span>
+                      <span className="text-xs text-muted-foreground text-center">1회독 단어 학습</span>
+                    </label>
+                  </div>
+                </div>
                 <p className="text-sm text-muted-foreground">
-                  가입 후 7일 무료 체험이 시작됩니다.
+                  5명까지 무료로 시작하세요. 유료 전환 시 모든 기능이 해제됩니다.
                 </p>
               </>
             ) : (

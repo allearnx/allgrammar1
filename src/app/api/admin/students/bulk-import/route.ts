@@ -3,6 +3,7 @@ import { randomBytes } from 'crypto';
 import { createApiHandler } from '@/lib/api';
 import { createAdminClient } from '@/lib/supabase/admin';
 import { studentBulkImportSchema } from '@/lib/api/schemas';
+import { checkPlanGate, checkServiceGate } from '@/lib/billing/check-plan-api';
 
 export const POST = createApiHandler(
   { roles: ['admin', 'boss'], schema: studentBulkImportSchema, rateLimit: { max: 10, windowMs: 60_000 } },
@@ -10,6 +11,16 @@ export const POST = createApiHandler(
     if (!user.academy_id) {
       return NextResponse.json({ error: '학원에 소속되어 있지 않습니다.' }, { status: 400 });
     }
+
+    const blocked = await checkPlanGate(user.academy_id, 'bulk:import');
+    if (blocked) return blocked;
+
+    // Free tier: only allow assigning the selected free service
+    if (body.services && body.services.length > 0) {
+      const serviceBlocked = await checkServiceGate(user.academy_id, body.services);
+      if (serviceBlocked) return serviceBlocked;
+    }
+
     const admin = createAdminClient();
     const academyId = user.academy_id;
 

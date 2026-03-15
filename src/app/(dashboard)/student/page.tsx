@@ -6,6 +6,8 @@ import Link from 'next/link';
 import { VocaDashboard } from '@/components/dashboard/voca-dashboard';
 import { NaesinDashboard } from '@/components/dashboard/naesin-dashboard';
 import { CombinedDashboard } from '@/components/dashboard/combined-dashboard';
+import { getPlanContext } from '@/lib/billing/get-plan-context';
+import { mergeEnabledStages } from '@/lib/billing/feature-gate';
 import type { VocaBook, VocaDay, VocaStudentProgress } from '@/types/voca';
 import type { NaesinUnit, NaesinStudentProgress, NaesinExamAssignment, NaesinContentAvailability } from '@/types/naesin';
 
@@ -23,6 +25,8 @@ export default async function StudentDashboard() {
   const vocaOnly = services.length === 1 && services[0] === 'voca';
   const naesinOnly = services.length === 1 && services[0] === 'naesin';
   const hasBoth = services.includes('voca') && services.includes('naesin');
+
+  const planContext = await getPlanContext(user.academy_id);
 
   // ── Voca-only dashboard ──
   if (vocaOnly) {
@@ -136,6 +140,12 @@ export default async function StudentDashboard() {
       .eq('student_id', user.id)
       .single();
 
+    // Merge teacher stages with plan-based restrictions
+    const effectiveEnabledStages = mergeEnabledStages(
+      planContext.tier,
+      settings?.enabled_stages as string[] | null,
+    );
+
     const textbookId = settings?.textbook_id;
 
     if (textbookId) {
@@ -244,7 +254,7 @@ export default async function StudentDashboard() {
             contentMap={contentMap}
             vocabQuizSetCounts={vocabQuizSetCounts}
             grammarVideoCounts={grammarVideoCounts}
-            enabledStages={settings?.enabled_stages}
+            enabledStages={effectiveEnabledStages}
             quizHistory={naesinQuizHistory}
           />
         </>
@@ -468,7 +478,10 @@ export default async function StudentDashboard() {
           contentMap={naesinContentMap}
           vocabQuizSetCounts={vocabQuizSetCounts}
           grammarVideoCounts={grammarVideoCounts}
-          enabledStages={naesinSettings?.enabled_stages}
+          enabledStages={mergeEnabledStages(
+            planContext.tier,
+            naesinSettings?.enabled_stages as string[] | null,
+          )}
           wrongWordCounts={wrongWordCounts}
           vocaQuizHistory={combinedVocaHistory}
           naesinQuizHistory={combinedNaesinHistory}
