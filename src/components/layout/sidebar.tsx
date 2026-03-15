@@ -54,10 +54,10 @@ export function Sidebar({ user, services, naesinTree }: SidebarProps) {
           <span>올라영</span>
         </span>
       </div>
-      <ScrollArea className="flex-1 py-3">
+      <ScrollArea className="flex-1 min-h-0 py-3">
         <NavLinks groups={navGroups} pathname={pathname} naesinTree={naesinTree} onNavigate={() => setOpen(false)} hoverWhite={hasCustomBg} />
       </ScrollArea>
-      <div className="border-t border-sidebar-border p-4">
+      <div className="shrink-0 border-t border-sidebar-border p-4">
         <div className="mb-3 px-3">
           <p className="text-sm font-medium truncate text-slate-900">{user.full_name}</p>
           <p className="text-xs truncate text-slate-400">{user.email}</p>
