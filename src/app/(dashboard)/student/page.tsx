@@ -7,6 +7,7 @@ import { VocaDashboard } from '@/components/dashboard/voca-dashboard';
 import { NaesinDashboard } from '@/components/dashboard/naesin-dashboard';
 import { CombinedDashboard } from '@/components/dashboard/combined-dashboard';
 import { getPlanContext } from '@/lib/billing/get-plan-context';
+import { SubscriptionBanner } from '@/components/billing/subscription-banner';
 import { mergeEnabledStages } from '@/lib/billing/feature-gate';
 import { fetchVocaDashboardData } from '@/lib/dashboard/fetch-voca-data';
 import { fetchNaesinDashboardData } from '@/lib/dashboard/fetch-naesin-data';
@@ -27,7 +28,9 @@ export default async function StudentDashboard() {
   const naesinOnly = services.length === 1 && services[0] === 'naesin';
   const hasBoth = services.includes('voca') && services.includes('naesin');
 
-  const planContext = await getPlanContext(user.academy_id);
+  const planContext = await getPlanContext(user.academy_id, user.id);
+
+  const isIndependent = !user.academy_id;
 
   // ── Voca-only dashboard ──
   if (vocaOnly) {
@@ -35,6 +38,15 @@ export default async function StudentDashboard() {
     return (
       <>
         <Topbar user={user} title="올킬보카" />
+        {isIndependent && planContext.tier === 'free' && (
+          <SubscriptionBanner
+            status="active"
+            tier="free"
+            freeService={planContext.freeService}
+            billingPageHref="/student/billing"
+            isIndividual
+          />
+        )}
         <VocaDashboard
           userName={user.full_name}
           books={(data.books as VocaBook[]) || []}

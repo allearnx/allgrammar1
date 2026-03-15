@@ -11,17 +11,21 @@ interface SubscriptionBannerProps {
   billingPageHref: string;
   tier?: Tier;
   freeService?: 'naesin' | 'voca' | null;
+  isIndividual?: boolean;
 }
 
-export function SubscriptionBanner({ status, trialDaysLeft, billingPageHref, tier, freeService }: SubscriptionBannerProps) {
+export function SubscriptionBanner({ status, trialDaysLeft, billingPageHref, tier, freeService, isIndividual }: SubscriptionBannerProps) {
   // Free tier banner
   if (tier === 'free') {
     const serviceLabel = freeService === 'voca' ? '올킬보카' : '올인내신';
+    const description = isIndividual
+      ? `무료 플랜 사용 중 (${serviceLabel} 1회독)`
+      : `무료 플랜 사용 중 (5명, ${serviceLabel}만 이용 가능)`;
     return (
       <div className="bg-violet-50 border-b border-violet-200 px-4 py-2.5 flex items-center justify-between text-sm">
         <div className="flex items-center gap-2 text-violet-700">
           <Sparkles className="h-4 w-4" />
-          <span>무료 플랜 사용 중 (5명, {serviceLabel}만 이용 가능)</span>
+          <span>{description}</span>
         </div>
         <Link
           href={billingPageHref}

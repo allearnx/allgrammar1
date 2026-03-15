@@ -85,7 +85,7 @@ export default async function StudentVocaDayPage({
 
   const wrongWords = Array.from(wrongWordsMap.values());
 
-  const planContext = await getPlanContext(user.academy_id);
+  const planContext = await getPlanContext(user.academy_id, user.id);
   const round2Locked = !canUseFeature(planContext.tier, 'voca:round2');
 
   return (

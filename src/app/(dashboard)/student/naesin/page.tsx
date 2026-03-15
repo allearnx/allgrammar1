@@ -35,7 +35,7 @@ export default async function NaesinPage() {
     .single();
 
   // Merge teacher-configured stages with plan-based restrictions
-  const planContext = await getPlanContext(user.academy_id);
+  const planContext = await getPlanContext(user.academy_id, user.id);
   const enabledStages = mergeEnabledStages(
     planContext.tier,
     setting?.enabled_stages as string[] | null,
