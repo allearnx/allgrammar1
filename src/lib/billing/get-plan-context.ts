@@ -7,34 +7,26 @@ export interface PlanContext {
   freeService: 'naesin' | 'voca' | null;
 }
 
-/** Fetch the plan context (tier + free service) for the user's academy or individual subscription */
+/** Fetch the plan context (tier + free service) for the user's academy or individual student */
 export async function getPlanContext(
   academyId: string | null,
   studentId?: string,
 ): Promise<PlanContext> {
   if (!academyId) {
-    // 독립 학생: 개인 구독 조회
+    // 독립 학생: service_assignments로 판단 (빌링 테이블 없음)
     if (studentId) {
       const supabase = await createClient();
-      const { data: sub } = await supabase
-        .from('subscriptions')
-        .select('status, tier, plan_id, subscription_plans(services)')
-        .eq('student_id', studentId)
-        .in('status', ['trialing', 'active', 'past_due'])
-        .order('created_at', { ascending: false })
-        .limit(1)
-        .single();
+      const { data: assignments } = await supabase
+        .from('service_assignments')
+        .select('service')
+        .eq('student_id', studentId);
 
-      if (sub) {
-        const plan = sub.subscription_plans as unknown as { services: string[] } | null;
-        const services = plan?.services ?? [];
+      const services = assignments?.map((a) => a.service) ?? [];
+      if (services.length > 0) {
         const freeService = services.includes('voca') ? 'voca' as const
           : services.includes('naesin') ? 'naesin' as const
           : null;
-        return {
-          tier: deriveTier(sub as { status: string; tier: string }),
-          freeService,
-        };
+        return { tier: 'free', freeService };
       }
     }
     return { tier: 'free', freeService: null };
