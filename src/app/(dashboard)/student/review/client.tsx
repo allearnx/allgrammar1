@@ -6,7 +6,6 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import { CheckCircle, XCircle, ChevronRight, BookOpen } from 'lucide-react';
-import { toast } from 'sonner';
 import Link from 'next/link';
 
 interface ReviewItem {

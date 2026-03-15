@@ -88,10 +88,6 @@ export function VocabQuizSetManager({ unitId }: { unitId: string }) {
   const [expanded, setExpanded] = useState(false);
   const [deleteConfirmId, setDeleteConfirmId] = useState<string | null>(null);
 
-  useEffect(() => {
-    loadSets();
-  }, [unitId]);
-
   async function loadSets() {
     try {
       const res = await fetch(`/api/naesin/vocab-quiz-sets?unitId=${unitId}`);
@@ -101,6 +97,12 @@ export function VocabQuizSetManager({ unitId }: { unitId: string }) {
       console.error(err);
       }
   }
+
+  useEffect(() => {
+     
+    loadSets();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [unitId]);
 
   async function handleDelete(id: string) {
     try {

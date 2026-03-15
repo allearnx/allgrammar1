@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -25,11 +25,7 @@ export function WrongAnswerReview({ unitId }: WrongAnswerReviewProps) {
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState<'all' | 'unresolved'>('unresolved');
 
-  useEffect(() => {
-    loadWrongAnswers();
-  }, [unitId, filter]);
-
-  async function loadWrongAnswers() {
+  const loadWrongAnswers = useCallback(async () => {
     setLoading(true);
     try {
       const params = new URLSearchParams({ unitId });
@@ -42,7 +38,11 @@ export function WrongAnswerReview({ unitId }: WrongAnswerReviewProps) {
       } finally {
       setLoading(false);
     }
-  }
+  }, [unitId, filter]);
+
+  useEffect(() => {
+    loadWrongAnswers();
+  }, [loadWrongAnswers]);
 
   async function markResolved(id: string) {
     try {

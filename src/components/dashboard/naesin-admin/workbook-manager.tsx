@@ -24,7 +24,7 @@ export function WorkbookManager() {
   useEffect(() => {
     if (selectedWorkbook) loadSheets(selectedWorkbook.id);
     else setSheets([]);
-  }, [selectedWorkbook?.id]);
+  }, [selectedWorkbook?.id, selectedWorkbook]);
 
   async function loadWorkbooks() {
     setLoading(true);

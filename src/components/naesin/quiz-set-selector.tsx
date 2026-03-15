@@ -1,6 +1,5 @@
 'use client';
 
-import { Badge } from '@/components/ui/badge';
 import { Lock, CheckCircle } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import type { NaesinVocabQuizSet } from '@/types/database';

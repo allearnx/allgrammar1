@@ -104,7 +104,7 @@ describe('naesin/passages', () => {
   });
 
   it('POST creates a passage (200)', async () => {
-    const { chain, from } = mockSupabaseChain({
+    const { from } = mockSupabaseChain({
       data: { id: 'p-1', title: 'Test' },
       error: null,
     });

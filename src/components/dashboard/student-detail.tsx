@@ -43,7 +43,7 @@ interface Props {
   naesinData?: NaesinData | null;
 }
 
-export async function StudentDetail({ user, studentId, naesinData }: Props) {
+export async function StudentDetail({ user: _user, studentId, naesinData }: Props) {
   const admin = createAdminClient();
 
   const { data: student } = await admin

@@ -229,10 +229,10 @@ function getDDay(dateStr: string | null): number | null {
 
 export function CombinedDashboard({
   userName,
-  vocaBooks,
+  vocaBooks: _vocaBooks,
   vocaDays,
   vocaProgressList,
-  vocaWordCount,
+  vocaWordCount: _vocaWordCount,
   textbookName,
   naesinUnits,
   naesinProgressList,

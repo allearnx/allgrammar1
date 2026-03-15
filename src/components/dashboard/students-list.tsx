@@ -73,10 +73,10 @@ export async function StudentsList({ user, basePath }: Props) {
 
   // Fetch service assignments for boss/admin
   const canManageServices = basePath === '/boss' || basePath === '/admin';
-  let serviceMap: Record<string, string[]> = {};
+  const serviceMap: Record<string, string[]> = {};
 
   let vocaBooks: { id: string; title: string }[] = [];
-  let bookAssignmentMap: Record<string, string> = {};
+  const bookAssignmentMap: Record<string, string> = {};
 
   if (canManageServices && studentIds.length > 0) {
     const [{ data: assignments }, { data: vocaBooksData }, { data: bookAssignments }] = await Promise.all([

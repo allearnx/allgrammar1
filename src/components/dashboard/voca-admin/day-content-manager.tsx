@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
@@ -56,7 +56,7 @@ export function DayContentManager({ dayId }: { dayId: string }) {
           throw new Error('숙어 JSON 형식이 올바르지 않습니다');
         }
       }
-      const { idioms: _, ...rest } = form;
+      const { idioms: _idioms, ...rest } = form;
       return { id, ...rest, idioms: parsedIdioms };
     },
     messages: { success: '단어가 수정되었습니다', error: '단어 수정 중 오류가 발생했습니다' },
@@ -64,9 +64,7 @@ export function DayContentManager({ dayId }: { dayId: string }) {
 
   const vocabDelete = useConfirmDelete(vocab.handleDeleteOne);
 
-  useEffect(() => { loadVocab(); }, [dayId]);
-
-  async function loadVocab() {
+  const loadVocab = useCallback(async () => {
     setLoading(true);
     try {
       const res = await fetch(`/api/voca/vocabulary?dayId=${dayId}`);
@@ -79,7 +77,9 @@ export function DayContentManager({ dayId }: { dayId: string }) {
     } finally {
       setLoading(false);
     }
-  }
+  }, [dayId, vocab]);
+
+  useEffect(() => { loadVocab(); }, [loadVocab]);
 
   if (loading) return <p className="text-sm text-muted-foreground mt-3">로딩 중...</p>;
 

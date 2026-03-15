@@ -2,7 +2,6 @@
 
 import { useState, useEffect, useMemo, useCallback } from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Button } from '@/components/ui/button';
 import { toast } from 'sonner';
 import { BookOpen } from 'lucide-react';
 import { vocabToMemoryItem } from '@/lib/naesin/adapters';
@@ -36,6 +35,7 @@ export function VocabTab({ vocabulary, unitId, onStageComplete, quizSets, comple
   useEffect(() => {
     try {
       if (!localStorage.getItem(ONBOARDING_KEY)) {
+        // eslint-disable-next-line react-hooks/set-state-in-effect
         setShowOnboarding(true);
       }
     } catch {

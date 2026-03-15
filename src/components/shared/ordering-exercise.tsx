@@ -4,7 +4,7 @@ import { useState, useCallback } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { CheckCircle, XCircle, Shuffle, Undo2, Info } from 'lucide-react';
+import { CheckCircle, XCircle, Shuffle, Undo2 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { toast } from 'sonner';
 import type { TextbookPassage, SentenceItem } from '@/types/database';

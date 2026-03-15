@@ -12,7 +12,7 @@ const CACHE_TTL_MS = 24 * 60 * 60 * 1000; // 24 hours
 
 export const POST = createApiHandler(
   { schema: gradeSubjectiveSchema, rateLimit: { max: 20 } },
-  async ({ user, body }) => {
+  async ({ user: _user, body }) => {
     const { question, referenceAnswer, studentAnswer } = body;
 
     // Check cache

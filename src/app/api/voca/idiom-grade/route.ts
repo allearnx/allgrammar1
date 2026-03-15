@@ -17,7 +17,7 @@ const schema = z.object({
 
 export const POST = createApiHandler(
   { schema, rateLimit: { max: 20 } },
-  async ({ user, body }) => {
+  async ({ user: _user, body }) => {
     const { questions } = body;
 
     // 1) Exact match fast path

@@ -4,15 +4,12 @@ import type {
   NaesinContentAvailability,
   NaesinExamDate,
   NaesinVocabQuizSet,
-  NaesinVocabQuizSetResult,
   NaesinGrammarVideoProgress,
   NaesinProblemSheet,
-  NaesinProblemAttempt,
   NaesinWrongAnswer,
   NaesinSimilarProblem,
   NaesinLastReviewContent,
   NaesinStudentProgress,
-  NaesinProblemQuestion,
 } from '@/types/database';
 
 describe('타입 검증 (컴파일 타임 + 런타임 구조 확인)', () => {

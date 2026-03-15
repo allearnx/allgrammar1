@@ -29,6 +29,7 @@ function generateAutoBlanks(originalText: string, difficulty: DifficultyKey): Bl
     .filter((_, i) => i % interval === interval - 1);
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function BlankConfigurator({
   difficulty,
   originalText,

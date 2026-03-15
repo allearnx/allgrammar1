@@ -23,6 +23,7 @@ export default function BossPlansPage() {
     setLoading(false);
   }, []);
 
+  // eslint-disable-next-line react-hooks/set-state-in-effect
   useEffect(() => { fetchPlans(); }, [fetchPlans]);
 
   async function handleCreate(form: FormData) {

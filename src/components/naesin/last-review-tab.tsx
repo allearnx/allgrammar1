@@ -6,7 +6,6 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { FileText, PlayCircle, BookOpen, Brain } from 'lucide-react';
-import { toast } from 'sonner';
 import { MCQOptionList } from '@/components/shared/mcq-option-list';
 import { ProblemTab } from './problem-tab';
 import { WrongAnswerReview } from './wrong-answer-review';
@@ -101,8 +100,6 @@ function SimilarProblemView({ problems }: { problems: NaesinSimilarProblem[] }) 
       setShowResult(false);
     }
   }
-
-  const isCorrect = selectedAnswer === String(q.answer);
 
   return (
     <div className="space-y-6">

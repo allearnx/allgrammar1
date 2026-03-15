@@ -10,7 +10,6 @@ import { toast } from 'sonner';
 import type { VocaVocabulary } from '@/types/voca';
 import {
   generateQuestions,
-  type Question,
   type MCQuestion,
   type ShortQuestion,
   type AIQuestion,
@@ -24,7 +23,7 @@ interface ComprehensiveQuizProps {
   onComplete: (score: number) => void;
 }
 
-export function ComprehensiveQuiz({ vocabulary, dayId, onComplete }: ComprehensiveQuizProps) {
+export function ComprehensiveQuiz({ vocabulary, dayId: _dayId, onComplete }: ComprehensiveQuizProps) {
   const questions = useMemo(() => generateQuestions(vocabulary), [vocabulary]);
   const [currentIdx, setCurrentIdx] = useState(0);
   const [answers, setAnswers] = useState<Map<number, string>>(new Map());

@@ -17,7 +17,7 @@ interface ChatQuestionManagerProps {
   lessonTitle: string;
 }
 
-export function ChatQuestionManager({ lessonId, lessonTitle }: ChatQuestionManagerProps) {
+export function ChatQuestionManager({ lessonId, lessonTitle: _lessonTitle }: ChatQuestionManagerProps) {
   const [questions, setQuestions] = useState<NaesinGrammarChatQuestion[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -60,6 +60,7 @@ export function ChatQuestionManager({ lessonId, lessonTitle }: ChatQuestionManag
 
   useEffect(() => {
     loadQuestions();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [lessonId]);
 
   async function loadQuestions() {

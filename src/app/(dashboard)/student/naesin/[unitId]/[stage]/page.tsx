@@ -1,7 +1,7 @@
 import { requireRole } from '@/lib/auth/helpers';
 import { createClient } from '@/lib/supabase/server';
 import { Topbar } from '@/components/layout/topbar';
-import { notFound, redirect } from 'next/navigation';
+import { notFound } from 'next/navigation';
 import { NaesinStageView } from './client';
 import { calculateStageStatuses } from '@/lib/naesin/stage-unlock';
 import type { NaesinContentAvailability } from '@/types/database';

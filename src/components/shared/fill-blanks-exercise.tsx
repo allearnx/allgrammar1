@@ -40,7 +40,7 @@ interface SentenceRange {
 
 const SHORT_SENTENCE_THRESHOLD = 8;
 
-export function FillBlanksExercise({ passage, onComplete, showWrongAlert }: FillBlanksExerciseProps) {
+export function FillBlanksExercise({ passage, onComplete, showWrongAlert: _showWrongAlert }: FillBlanksExerciseProps) {
   const [difficulty, setDifficulty] = useState<Difficulty>('easy');
   const [answers, setAnswers] = useState<Record<number, string>>({});
   const [results, setResults] = useState<Record<number, boolean> | null>(null);

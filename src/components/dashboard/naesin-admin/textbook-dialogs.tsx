@@ -12,7 +12,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
-import { Plus, Pencil } from 'lucide-react';
+import { Plus } from 'lucide-react';
 import { toast } from 'sonner';
 import type { NaesinTextbook } from '@/types/database';
 

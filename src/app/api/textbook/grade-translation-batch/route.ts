@@ -8,7 +8,7 @@ const anthropic = new Anthropic();
 
 export const POST = createApiHandler(
   { schema: gradeTranslationBatchSchema, rateLimit: { max: 20 } },
-  async ({ user, body }) => {
+  async ({ user: _user, body }) => {
     const { sentences } = body;
 
     try {

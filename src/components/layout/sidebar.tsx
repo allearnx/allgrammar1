@@ -33,7 +33,6 @@ export function Sidebar({ user, services, naesinTree }: SidebarProps) {
     admin: 'bg-indigo-100',
     student: 'bg-cyan-100',
   };
-  const isBoss = user.role === 'boss';
   const hasCustomBg = user.role in sidebarBgMap;
   const sidebarBg = sidebarBgMap[user.role] ?? 'bg-sidebar';
 

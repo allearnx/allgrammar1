@@ -82,7 +82,7 @@ export function PdfVocabExtract({ dayId, onAdd }: { dayId: string; onAdd: () => 
     }
     setSaving(true);
     try {
-      const items = selectedWords.map(({ selected: _, ...rest }) => ({
+      const items = selectedWords.map(({ selected: _selected, ...rest }) => ({
         ...rest,
         spelling_answer: rest.front_text,
       }));

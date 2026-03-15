@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { CheckCircle, FileText } from 'lucide-react';
+import { FileText } from 'lucide-react';
 import { toast } from 'sonner';
 import { OmrSheet } from './omr-sheet';
 import type { NaesinOmrSheet } from '@/types/database';

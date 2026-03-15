@@ -31,7 +31,7 @@ export async function updateSession(request: NextRequest) {
           return request.cookies.getAll();
         },
         setAll(cookiesToSet) {
-          cookiesToSet.forEach(({ name, value, options }) =>
+          cookiesToSet.forEach(({ name, value }) =>
             request.cookies.set(name, value)
           );
           supabaseResponse = NextResponse.next({
@@ -54,13 +54,10 @@ export async function updateSession(request: NextRequest) {
   // Try cached profile from cookie first (avoids DB + auth call on every navigation)
   let profile: { id: string; email: string; full_name: string; role: string; academy_id: string | null } | null = null;
   let cacheHit = false;
-  let userId: string | null = null;
-
   const cachedProfileStr = request.cookies.get('x-user-profile')?.value;
   if (cachedProfileStr) {
     try {
       profile = JSON.parse(cachedProfileStr);
-      userId = profile?.id ?? null;
       cacheHit = true;
     } catch {
       // Invalid cache, will re-verify
@@ -79,8 +76,6 @@ export async function updateSession(request: NextRequest) {
       }
       return supabaseResponse;
     }
-    userId = user.id;
-
     // Fetch profile from DB
     const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
     if (!serviceRoleKey) throw new Error('SUPABASE_SERVICE_ROLE_KEY가 설정되지 않았습니다');

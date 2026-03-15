@@ -32,6 +32,7 @@ export function NaesinAdminClient({ textbooks: initialTextbooks }: NaesinAdminCl
       return;
     }
     loadUnits(selectedTextbook.id);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedTextbook?.id]);
 
   async function loadUnits(textbookId: string) {

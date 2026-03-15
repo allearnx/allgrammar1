@@ -1,5 +1,4 @@
 import {
-  BookOpen,
   ClipboardList,
   GraduationCap,
   LayoutDashboard,

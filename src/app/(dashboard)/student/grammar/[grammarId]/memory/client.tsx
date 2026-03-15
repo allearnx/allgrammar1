@@ -16,7 +16,7 @@ interface MemoryClientProps {
   grammarId: string;
 }
 
-export function MemoryClient({ items, grammarId }: MemoryClientProps) {
+export function MemoryClient({ items }: MemoryClientProps) {
   const [activeTab, setActiveTab] = useState('flashcard');
 
   if (items.length === 0) {

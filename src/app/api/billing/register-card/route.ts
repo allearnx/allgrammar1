@@ -5,7 +5,7 @@ import { issueBillingKey, TossPaymentError } from '@/lib/payments/toss';
 
 export const POST = createApiHandler(
   { schema: billingRegisterCardSchema },
-  async ({ user, body, supabase }) => {
+  async ({ user: _user, body, supabase }) => {
     const { authKey, customerKey } = body;
 
     // 빌링키 발급

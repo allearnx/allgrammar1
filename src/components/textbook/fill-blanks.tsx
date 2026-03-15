@@ -15,7 +15,7 @@ export function FillBlanksView({ passage }: FillBlanksViewProps) {
   return (
     <FillBlanksExercise
       passage={passage}
-      onComplete={(score, _wrongs, _difficulty) => {
+      onComplete={(score) => {
         saveTextbookProgress(passage.id, 'fill_blanks_easy', score);
       }}
     />

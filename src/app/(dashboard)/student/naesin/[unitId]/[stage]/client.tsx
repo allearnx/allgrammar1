@@ -90,7 +90,6 @@ export function NaesinStageView({
   stageStatuses,
   stageData,
   isLocked: currentStageLocked,
-  examDate,
 }: NaesinStageViewProps) {
   const router = useRouter();
 

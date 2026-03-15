@@ -74,7 +74,7 @@ export default async function LevelDetailPage({ params }: Props) {
         </div>
 
         <div className="space-y-3">
-          {(grammars || []).map((grammar, index) => {
+          {(grammars || []).map((grammar) => {
             const isCompleted = completedMap.has(grammar.id);
             const hasMemory = hasMemoryMap.has(grammar.id);
             const hasTextbook = hasTextbookMap.has(grammar.id);

@@ -88,6 +88,7 @@ export default function StudentBillingPage() {
   if (loading) return <div className="p-6">로딩 중...</div>;
 
   const trialDaysLeft = subscription?.trial_end
+    // eslint-disable-next-line react-hooks/purity
     ? Math.max(0, Math.ceil((new Date(subscription.trial_end).getTime() - Date.now()) / 86400000))
     : 0;
 

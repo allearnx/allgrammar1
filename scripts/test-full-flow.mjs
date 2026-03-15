@@ -34,7 +34,7 @@ if (profile) {
 }
 
 // 3. 로그인 테스트
-const { data: loginData, error: loginErr } = await anon.auth.signInWithPassword({
+const { error: loginErr } = await anon.auth.signInWithPassword({
   email: testEmail,
   password: testPhone,
 });

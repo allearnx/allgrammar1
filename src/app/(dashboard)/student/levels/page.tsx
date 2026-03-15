@@ -5,7 +5,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import Link from 'next/link';
-import type { Level, Grammar, StudentProgress } from '@/types/database';
+import type { Level, Grammar } from '@/types/database';
 
 export default async function LevelsPage() {
   const user = await requireRole(['student']);

@@ -17,7 +17,7 @@ const schema = z.object({
 
 export const POST = createApiHandler(
   { schema, rateLimit: { max: 30 } },
-  async ({ user, body }) => {
+  async ({ user: _user, body }) => {
     const { sentences } = body;
 
     // 1) Exact match first — skip AI for perfect matches

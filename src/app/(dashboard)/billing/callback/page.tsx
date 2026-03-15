@@ -21,7 +21,9 @@ export default function BillingCallbackPage() {
       // 실패 콜백
       const code = searchParams.get('code');
       const message = searchParams.get('message');
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setStatus('error');
+       
       setErrorMessage(message || code || '카드 등록에 실패했습니다');
       return;
     }

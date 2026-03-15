@@ -56,7 +56,7 @@ export function YouTubePlayer({
     let mounted = true;
 
     async function init() {
-      const player = await createYouTubePlayer({
+      await createYouTubePlayer({
         videoId,
         elementId: 'yt-player',
         onReady: (p) => {

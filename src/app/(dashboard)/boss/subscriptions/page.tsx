@@ -1,7 +1,6 @@
 'use client';
 
 import { useEffect, useState, useCallback } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
@@ -40,6 +39,7 @@ export default function BossSubscriptionsPage() {
     setLoading(false);
   }, [statusFilter]);
 
+  // eslint-disable-next-line react-hooks/set-state-in-effect
   useEffect(() => { fetchSubs(); }, [fetchSubs]);
 
   if (loading) return <div className="p-6">로딩 중...</div>;

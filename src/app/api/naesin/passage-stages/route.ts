@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextResponse } from 'next/server';
 import { createApiHandler, dbResult } from '@/lib/api';
 import { createAdminClient } from '@/lib/supabase/admin';
 import { z } from 'zod';

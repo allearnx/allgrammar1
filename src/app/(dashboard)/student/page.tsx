@@ -1,7 +1,7 @@
 import { requireRole } from '@/lib/auth/helpers';
 import { createClient } from '@/lib/supabase/server';
 import { Topbar } from '@/components/layout/topbar';
-import { BookOpen, BookMarked, Lock, BookA, Zap, Target, Trophy, TrendingUp, Star, ArrowRight, Sparkles } from 'lucide-react';
+import { BookMarked, Lock, BookA, Sparkles } from 'lucide-react';
 import Link from 'next/link';
 import { VocaDashboard } from '@/components/dashboard/voca-dashboard';
 import { NaesinDashboard } from '@/components/dashboard/naesin-dashboard';

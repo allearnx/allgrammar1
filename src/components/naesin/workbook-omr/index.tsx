@@ -28,7 +28,7 @@ export function WorkbookOmrClient({ workbooks }: WorkbookOmrClientProps) {
   useEffect(() => {
     if (!selectedWorkbook) return;
     loadSheets(selectedWorkbook.id);
-  }, [selectedWorkbook?.id]);
+  }, [selectedWorkbook?.id, selectedWorkbook]);
 
   async function loadSheets(workbookId: string) {
     setLoading(true);

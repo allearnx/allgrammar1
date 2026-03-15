@@ -52,7 +52,6 @@ export function NaesinHome({
   selectedTextbook,
   units,
   examDate: initialExamDate,
-  textbookId,
   examGroups = [],
 }: NaesinHomeProps) {
   const router = useRouter();

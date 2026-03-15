@@ -31,14 +31,6 @@ export function VocaAdminClient({ books: initialBooks }: VocaAdminClientProps) {
   const [deleteBookId, setDeleteBookId] = useState<string | null>(null);
   const [editingBook, setEditingBook] = useState<VocaBook | null>(null);
 
-  useEffect(() => {
-    if (!selectedBook) {
-      setDays([]);
-      return;
-    }
-    loadDays(selectedBook.id);
-  }, [selectedBook?.id]);
-
   async function loadDays(bookId: string) {
     try {
       const res = await fetch(`/api/voca/days?bookId=${bookId}`);
@@ -49,6 +41,15 @@ export function VocaAdminClient({ books: initialBooks }: VocaAdminClientProps) {
       toast.error('Day 목록을 불러오지 못했습니다');
     }
   }
+
+  useEffect(() => {
+    if (!selectedBook) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setDays([]);
+      return;
+    }
+    loadDays(selectedBook.id);
+  }, [selectedBook?.id, selectedBook]);
 
   return (
     <div className="space-y-6">

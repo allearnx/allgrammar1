@@ -12,7 +12,7 @@ export default async function ProgressPage() {
   const supabase = await createClient();
 
   // Fetch all levels with grammars
-  const { data: levels } = await supabase
+  const { data: _levels } = await supabase
     .from('levels')
     .select('*, grammars(id)')
     .order('level_number');
@@ -57,7 +57,7 @@ export default async function ProgressPage() {
   const naesinProgressMap = new Map(naesinProgress.map((p) => [p.unit_id, p]));
   const textbookName = (naesinSettingsRes.data?.textbook as unknown as { display_name: string } | null)?.display_name || '';
 
-  const completedSet = new Set(
+  const _completedSet = new Set(
     videoProgress?.filter((p) => p.video_completed).map((p) => p.grammar_id) || []
   );
 

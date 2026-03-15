@@ -1,7 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { Button } from '@/components/ui/button';
+import { useState, useEffect, useCallback } from 'react';
 import { Badge } from '@/components/ui/badge';
 import {
   BookOpen,
@@ -93,11 +92,7 @@ export function UnitContentManager({ unitId }: { unitId: string }) {
   const [lastReviewCount, setLastReviewCount] = useState<number | null>(null);
   const [regeneratingGV, setRegeneratingGV] = useState<string | null>(null);
 
-  useEffect(() => {
-    loadCounts();
-  }, [unitId]);
-
-  async function loadCounts() {
+  const loadCounts = useCallback(async () => {
     try {
       const { createClient } = await import('@/lib/supabase/client');
       const supabase = createClient();
@@ -120,7 +115,11 @@ export function UnitContentManager({ unitId }: { unitId: string }) {
       console.error(err);
       toast.error('데이터를 불러오지 못했습니다');
     }
-  }
+  }, [unitId, vocab]);
+
+  useEffect(() => {
+    loadCounts();
+  }, [loadCounts]);
 
   async function handleDeletePassage(id: string) {
     try {

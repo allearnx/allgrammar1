@@ -73,8 +73,8 @@ export async function GET(request: NextRequest) {
   const [
     videoRes,
     memoryRes,
-    dueRes,
-    grammarCountRes,
+    _dueRes,
+    _grammarCountRes,
     naesinProgressRes,
     naesinProblemRes,
     naesinWrongRes,
@@ -196,7 +196,7 @@ export async function GET(request: NextRequest) {
   }
 
   // ── Weaknesses / Recommendations (lightweight) ──
-  const videoProg = videoRes.data || [];
+  const _videoProg = videoRes.data || [];
   const memProg = memoryRes.data || [];
   const totalQuizCorrect = memProg.reduce((a, p) => a + p.quiz_correct_count, 0);
   const totalQuizWrong = memProg.reduce((a, p) => a + p.quiz_wrong_count, 0);
@@ -222,7 +222,7 @@ export async function GET(request: NextRequest) {
   // ── Trends ──
   // Fetch day info for voca labels
   const vocaDayIds = [...new Set((vocaQuizHistoryRes.data || []).map((r) => r.day_id))];
-  let vocaDayMap: Record<string, { day_number: number; title: string }> = {};
+  const vocaDayMap: Record<string, { day_number: number; title: string }> = {};
   if (vocaDayIds.length > 0) {
     const { data: dayData } = await admin.from('voca_days').select('id, day_number, title').in('id', vocaDayIds);
     if (dayData) {
@@ -238,7 +238,7 @@ export async function GET(request: NextRequest) {
 
   // Fetch unit info for naesin labels
   const naesinUnitIds = [...new Set((naesinProblemHistoryRes.data || []).map((r) => r.unit_id))];
-  let naesinUnitMap: Record<string, { unit_number: number; title: string }> = {};
+  const naesinUnitMap: Record<string, { unit_number: number; title: string }> = {};
   if (naesinUnitIds.length > 0) {
     const { data: unitData } = await admin.from('naesin_units').select('id, unit_number, title').in('id', naesinUnitIds);
     if (unitData) {
@@ -305,7 +305,7 @@ export async function GET(request: NextRequest) {
 
   // Fetch unit titles for wrong by unit
   const wrongUnitIds = Object.keys(unitGroups);
-  let wrongUnitMap: Record<string, string> = {};
+  const wrongUnitMap: Record<string, string> = {};
   if (wrongUnitIds.length > 0) {
     const { data: unitData } = await admin.from('naesin_units').select('id, title').in('id', wrongUnitIds);
     if (unitData) {
@@ -325,7 +325,7 @@ export async function GET(request: NextRequest) {
   if (hasVoca) {
     const vProg = vocaProgressRes.data || [];
     const dayIds = [...new Set(vProg.map((p) => p.day_id))];
-    let dayInfoMap: Record<string, { day_number: number; title: string }> = {};
+    const dayInfoMap: Record<string, { day_number: number; title: string }> = {};
     if (dayIds.length > 0) {
       const { data: dayData } = await admin.from('voca_days').select('id, day_number, title').in('id', dayIds);
       if (dayData) {
@@ -360,7 +360,7 @@ export async function GET(request: NextRequest) {
   if (hasNaesin) {
     const nProg = naesinProgressRes.data || [];
     const unitIds = [...new Set(nProg.map((p) => p.unit_id))];
-    let unitInfoMap: Record<string, { unit_number: number; title: string }> = {};
+    const unitInfoMap: Record<string, { unit_number: number; title: string }> = {};
     if (unitIds.length > 0) {
       const { data: unitData } = await admin.from('naesin_units').select('id, unit_number, title').in('id', unitIds);
       if (unitData) {
@@ -403,7 +403,7 @@ export async function GET(request: NextRequest) {
     ...(vocaQuizActivityRes.data || []).map((r) => r.day_id),
     ...(vocaMatchingActivityRes.data || []).map((r) => r.day_id),
   ])];
-  let activityDayMap: Record<string, string> = {};
+  const activityDayMap: Record<string, string> = {};
   if (activityVocaDayIds.length > 0) {
     const { data: dayData } = await admin.from('voca_days').select('id, title').in('id', activityVocaDayIds);
     if (dayData) {
@@ -418,7 +418,7 @@ export async function GET(request: NextRequest) {
     ...(naesinPassageActivityRes.data || []).map((r) => r.unit_id),
     ...(naesinVideoActivityRes.data || []).map((r) => r.unit_id),
   ])];
-  let activityUnitMap: Record<string, string> = {};
+  const activityUnitMap: Record<string, string> = {};
   if (activityNaesinUnitIds.length > 0) {
     const { data: unitData } = await admin.from('naesin_units').select('id, title').in('id', activityNaesinUnitIds);
     if (unitData) {

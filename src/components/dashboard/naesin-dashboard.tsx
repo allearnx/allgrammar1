@@ -5,7 +5,6 @@ import {
   CheckCircle,
   BookOpen,
   ClipboardList,
-  Sparkles,
   CalendarDays,
   ArrowRight,
   Layers,
