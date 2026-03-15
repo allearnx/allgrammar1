@@ -522,6 +522,7 @@ export const academySettingsSchema = z.object({
   contact_email: z.string().email().max(200).nullish(),
   address: z.string().max(500).nullish(),
   logo_url: URL_STR.nullish(),
+  business_number: z.string().max(20).nullish(),
 });
 
 export const academyPatchSchema = z.object({

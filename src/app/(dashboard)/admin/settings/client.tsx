@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Copy, Check, Users, Building2, Mail, Phone, MapPin } from 'lucide-react';
+import { Copy, Check, Users, Building2, Mail, Phone, MapPin, FileText } from 'lucide-react';
 import { toast } from 'sonner';
 import type { Academy } from '@/types/user';
 
@@ -22,6 +22,7 @@ export function AcademySettingsClient({ academy, currentStudents }: Props) {
     contact_phone: academy.contact_phone || '',
     contact_email: academy.contact_email || '',
     address: academy.address || '',
+    business_number: academy.business_number || '',
   });
 
   function handleCopyCode() {
@@ -44,6 +45,7 @@ export function AcademySettingsClient({ academy, currentStudents }: Props) {
           contact_phone: form.contact_phone || null,
           contact_email: form.contact_email || null,
           address: form.address || null,
+          business_number: form.business_number || null,
         }),
       });
 
@@ -192,6 +194,19 @@ export function AcademySettingsClient({ academy, currentStudents }: Props) {
                 value={form.address}
                 onChange={(e) => setForm({ ...form, address: e.target.value })}
                 placeholder="서울시 강남구..."
+              />
+            </div>
+          </div>
+          <div className="space-y-1.5">
+            <Label htmlFor="business_number" className="text-xs font-semibold uppercase tracking-wider text-gray-500">사업자번호</Label>
+            <div className="relative">
+              <FileText className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
+              <Input
+                id="business_number"
+                className="pl-10"
+                value={form.business_number}
+                onChange={(e) => setForm({ ...form, business_number: e.target.value })}
+                placeholder="000-00-00000"
               />
             </div>
           </div>

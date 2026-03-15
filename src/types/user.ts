@@ -8,6 +8,7 @@ export interface Academy {
   contact_email?: string | null;
   address?: string | null;
   logo_url?: string | null;
+  business_number?: string | null;
   max_students?: number | null;
   onboarding_completed_at?: string | null;
   owner_id?: string | null;
