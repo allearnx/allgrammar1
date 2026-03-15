@@ -1,3 +1,5 @@
+// Phase 3 dead code — 프로덕션 DB에 subscriptions/payment_history 테이블 없음.
+// 빌링 구현 시까지 이 페이지는 동작하지 않음.
 'use client';
 
 import { useEffect, useState, useCallback } from 'react';

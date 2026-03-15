@@ -13,6 +13,8 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
+import { Badge } from '@/components/ui/badge';
+import { Checkbox } from '@/components/ui/checkbox';
 import { Plus, Pencil, Trash2, Building2, Copy, RefreshCw, GraduationCap } from 'lucide-react';
 import { toast } from 'sonner';
 import { format } from 'date-fns';
@@ -27,6 +29,7 @@ interface Academy {
   student_count: number;
   max_students: number | null;
   teachers: string[];
+  services: string[];
 }
 
 interface AcademiesClientProps {
@@ -39,6 +42,7 @@ export function AcademiesClient({ academies }: AcademiesClientProps) {
   const [editingAcademy, setEditingAcademy] = useState<Academy | null>(null);
   const [name, setName] = useState('');
   const [maxStudents, setMaxStudents] = useState('');
+  const [services, setServices] = useState<string[]>([]);
   const [saving, setSaving] = useState(false);
   const [deleting, setDeleting] = useState<string | null>(null);
   const [deleteConfirmId, setDeleteConfirmId] = useState<string | null>(null);
@@ -85,6 +89,7 @@ export function AcademiesClient({ academies }: AcademiesClientProps) {
         body: JSON.stringify({
           name,
           max_students: maxStudents ? parseInt(maxStudents, 10) : null,
+          services,
         }),
       });
 
@@ -235,6 +240,16 @@ export function AcademiesClient({ academies }: AcademiesClientProps) {
                       )}
                     </span>
                   </div>
+                  {academy.services && academy.services.length > 0 && (
+                    <div className="flex gap-1.5 mt-1.5">
+                      {academy.services.includes('naesin') && (
+                        <Badge variant="secondary">올인내신</Badge>
+                      )}
+                      {academy.services.includes('voca') && (
+                        <Badge variant="secondary">올킬보카</Badge>
+                      )}
+                    </div>
+                  )}
                 </div>
               </div>
               <div className="flex gap-2 shrink-0">
@@ -245,6 +260,7 @@ export function AcademiesClient({ academies }: AcademiesClientProps) {
                     setEditingAcademy(academy);
                     setName(academy.name);
                     setMaxStudents(academy.max_students?.toString() || '');
+                    setServices(academy.services || []);
                     setEditOpen(true);
                   }}
                 >
@@ -315,6 +331,33 @@ export function AcademiesClient({ academies }: AcademiesClientProps) {
                 onChange={(e) => setMaxStudents(e.target.value)}
                 placeholder="비워두면 무제한"
               />
+            </div>
+            <div className="space-y-2">
+              <Label>서비스 배정</Label>
+              <div className="flex gap-4">
+                <label className="flex items-center gap-2 cursor-pointer">
+                  <Checkbox
+                    checked={services.includes('naesin')}
+                    onCheckedChange={(checked) =>
+                      setServices((prev) =>
+                        checked ? [...prev.filter((s) => s !== 'naesin'), 'naesin'] : prev.filter((s) => s !== 'naesin')
+                      )
+                    }
+                  />
+                  <span className="text-sm">올인내신</span>
+                </label>
+                <label className="flex items-center gap-2 cursor-pointer">
+                  <Checkbox
+                    checked={services.includes('voca')}
+                    onCheckedChange={(checked) =>
+                      setServices((prev) =>
+                        checked ? [...prev.filter((s) => s !== 'voca'), 'voca'] : prev.filter((s) => s !== 'voca')
+                      )
+                    }
+                  />
+                  <span className="text-sm">올킬보카</span>
+                </label>
+              </div>
             </div>
             <Button type="submit" className="w-full" disabled={saving}>
               {saving ? '저장 중...' : '변경'}

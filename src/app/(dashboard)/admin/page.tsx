@@ -4,34 +4,7 @@ import { Topbar } from '@/components/layout/topbar';
 import { Users, BookOpen, FileText, GraduationCap, Rocket, BookA, BarChart3, ArrowRight, Settings } from 'lucide-react';
 import Link from 'next/link';
 import { AdminOnboardingWizard } from '@/components/onboarding/admin-onboarding-wizard';
-
-function StatCard({
-  label,
-  value,
-  sub,
-  color,
-  icon,
-}: {
-  label: string;
-  value: string | number;
-  sub: string;
-  color: string;
-  icon: React.ReactNode;
-}) {
-  return (
-    <div
-      className="rounded-xl border bg-white p-3.5"
-      style={{ borderLeftWidth: 4, borderLeftColor: color }}
-    >
-      <div className="flex items-center justify-between mb-1.5">
-        <span className="text-xs font-semibold uppercase tracking-wider text-gray-500">{label}</span>
-        <span style={{ color }}>{icon}</span>
-      </div>
-      <div className="text-2xl font-bold tracking-tight">{value}</div>
-      <p className="text-xs text-gray-400 mt-0.5">{sub}</p>
-    </div>
-  );
-}
+import { StatCard } from '@/components/shared/stat-card';
 
 const QUICK_ACTIONS = [
   { title: '학생 관리', description: '학생 목록 및 진도 확인', href: '/admin/students', color: 'indigo', icon: Users },

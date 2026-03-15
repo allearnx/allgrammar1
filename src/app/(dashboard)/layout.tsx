@@ -2,6 +2,7 @@ import { requireUser } from '@/lib/auth/helpers';
 import { createClient } from '@/lib/supabase/server';
 import { Sidebar } from '@/components/layout/sidebar';
 import { calculateStageStatuses } from '@/lib/naesin/stage-unlock';
+import { groupBy } from '@/lib/naesin/build-unit-summary';
 import type { NaesinStageStatuses } from '@/types/database';
 
 export interface NaesinSidebarExam {
@@ -167,12 +168,3 @@ async function fetchNaesinTree(
   }));
 }
 
-function groupBy<T extends Record<string, unknown>>(items: T[], key: string): Record<string, T[]> {
-  const result: Record<string, T[]> = {};
-  for (const item of items) {
-    const k = item[key] as string;
-    if (!result[k]) result[k] = [];
-    result[k].push(item);
-  }
-  return result;
-}

@@ -528,6 +528,7 @@ export const academySettingsSchema = z.object({
 export const academyPatchSchema = z.object({
   name: z.string().min(1).max(100).nullish(),
   max_students: z.number().min(1).nullish(),
+  services: z.array(z.enum(['naesin', 'voca'])).nullish(),
 });
 
 export const studentBulkImportSchema = z.object({

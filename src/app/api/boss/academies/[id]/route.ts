@@ -10,6 +10,7 @@ export const PATCH = createApiHandler(
     const updates: Record<string, unknown> = { updated_at: new Date().toISOString() };
     if (body.name) updates.name = body.name.trim();
     if (body.max_students !== undefined) updates.max_students = body.max_students;
+    if (body.services !== undefined) updates.services = body.services;
 
     dbResult(await supabase
       .from('academies')

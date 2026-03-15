@@ -40,6 +40,7 @@ export default async function BossAcademiesPage() {
     student_count: studentCountByAcademy.get(a.id) || 0,
     max_students: a.max_students as number | null,
     teachers: teachersByAcademy.get(a.id) || [],
+    services: (a.services as string[]) || [],
   }));
 
   return (

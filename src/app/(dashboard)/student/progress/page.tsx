@@ -11,12 +11,6 @@ export default async function ProgressPage() {
   const user = await requireRole(['student']);
   const supabase = await createClient();
 
-  // Fetch all levels with grammars
-  const { data: _levels } = await supabase
-    .from('levels')
-    .select('*, grammars(id)')
-    .order('level_number');
-
   // Fetch all progress
   const [videoProgressRes, memoryProgressRes, naesinProgressRes, naesinSettingsRes] = await Promise.all([
     supabase
@@ -56,10 +50,6 @@ export default async function ProgressPage() {
 
   const naesinProgressMap = new Map(naesinProgress.map((p) => [p.unit_id, p]));
   const textbookName = (naesinSettingsRes.data?.textbook as unknown as { display_name: string } | null)?.display_name || '';
-
-  const _completedSet = new Set(
-    videoProgress?.filter((p) => p.video_completed).map((p) => p.grammar_id) || []
-  );
 
   const totalWatchedSeconds = videoProgress?.reduce((acc, p) => acc + p.video_watched_seconds, 0) || 0;
   const totalMastered = memoryProgress?.filter((p) => p.is_mastered).length || 0;

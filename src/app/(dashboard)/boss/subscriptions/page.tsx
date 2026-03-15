@@ -4,6 +4,8 @@ import { useEffect, useState, useCallback } from 'react';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { ConfirmDialog } from '@/components/shared/confirm-dialog';
+import { toast } from 'sonner';
 import {
   CreditCard,
   Crown,
@@ -40,41 +42,14 @@ const STATUS_LABELS: Record<string, { label: string; variant: 'default' | 'secon
   expired: { label: '만료', variant: 'outline' },
 };
 
-function StatCard({
-  label,
-  value,
-  sub,
-  color,
-  icon,
-}: {
-  label: string;
-  value: string | number;
-  sub: string;
-  color: string;
-  icon: React.ReactNode;
-}) {
-  return (
-    <div
-      className="rounded-xl border bg-white p-3.5"
-      style={{ borderLeftWidth: 4, borderLeftColor: color }}
-    >
-      <div className="flex items-center justify-between mb-1.5">
-        <span className="text-xs font-semibold uppercase tracking-wider text-gray-500">
-          {label}
-        </span>
-        <span style={{ color }}>{icon}</span>
-      </div>
-      <div className="text-2xl font-bold tracking-tight">{value}</div>
-      <p className="text-xs text-gray-400 mt-0.5">{sub}</p>
-    </div>
-  );
-}
+import { StatCard } from '@/components/shared/stat-card';
 
 export default function BossSubscriptionsPage() {
   const [subs, setSubs] = useState<SubscriptionRow[]>([]);
   const [loading, setLoading] = useState(true);
   const [statusFilter, setStatusFilter] = useState('all');
   const [changingTier, setChangingTier] = useState<string | null>(null);
+  const [pendingTierChange, setPendingTierChange] = useState<{ subId: string; newTier: 'free' | 'paid' } | null>(null);
 
   const fetchSubs = useCallback(async () => {
     const params = statusFilter !== 'all' ? `?status=${statusFilter}` : '';
@@ -86,10 +61,16 @@ export default function BossSubscriptionsPage() {
   // eslint-disable-next-line react-hooks/set-state-in-effect
   useEffect(() => { fetchSubs(); }, [fetchSubs]);
 
-  const handleTierChange = async (subId: string, newTier: 'free' | 'paid') => {
+  const requestTierChange = (subId: string, newTier: 'free' | 'paid') => {
     if (newTier === 'free') {
-      if (!confirm('무료로 전환하면 유료 기능이 제한됩니다. 계속하시겠습니까?')) return;
+      setPendingTierChange({ subId, newTier });
+      return;
     }
+    executeTierChange(subId, newTier);
+  };
+
+  const executeTierChange = async (subId: string, newTier: 'free' | 'paid') => {
+    setPendingTierChange(null);
     setChangingTier(subId);
     try {
       const res = await fetch(`/api/boss/subscriptions/${subId}`, {
@@ -101,7 +82,7 @@ export default function BossSubscriptionsPage() {
         await fetchSubs();
       } else {
         const data = await res.json();
-        alert(data.error || '변경에 실패했습니다.');
+        toast.error(data.error || '변경에 실패했습니다.');
       }
     } finally {
       setChangingTier(null);
@@ -352,7 +333,7 @@ export default function BossSubscriptionsPage() {
                             className="text-white text-xs h-8"
                             style={{ background: 'linear-gradient(135deg, #10B981, #059669)' }}
                             disabled={isChanging}
-                            onClick={() => handleTierChange(sub.id, 'paid')}
+                            onClick={() => requestTierChange(sub.id, 'paid')}
                           >
                             {isChanging ? (
                               <Loader2 className="h-3.5 w-3.5 animate-spin" />
@@ -369,7 +350,7 @@ export default function BossSubscriptionsPage() {
                             variant="outline"
                             className="text-xs h-8 text-gray-500 hover:text-gray-700"
                             disabled={isChanging}
-                            onClick={() => handleTierChange(sub.id, 'free')}
+                            onClick={() => requestTierChange(sub.id, 'free')}
                           >
                             {isChanging ? (
                               <Loader2 className="h-3.5 w-3.5 animate-spin" />
@@ -390,6 +371,18 @@ export default function BossSubscriptionsPage() {
           </div>
         )}
       </div>
+
+      <ConfirmDialog
+        open={!!pendingTierChange}
+        onOpenChange={(open) => { if (!open) setPendingTierChange(null); }}
+        title="티어 변경"
+        description="무료로 전환하면 유료 기능이 제한됩니다. 계속하시겠습니까?"
+        confirmText="전환"
+        destructive={false}
+        onConfirm={() => {
+          if (pendingTierChange) executeTierChange(pendingTierChange.subId, pendingTierChange.newTier);
+        }}
+      />
     </div>
   );
 }
