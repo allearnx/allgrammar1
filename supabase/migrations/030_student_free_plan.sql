@@ -3,8 +3,7 @@
 -- (빌링 테이블 없이 service_assignments 직접 INSERT)
 -- ============================================
 
--- handle_new_user() 수정: 독립 학생에게 voca 서비스 자동 배정
--- 기반: 026 버전 (phone 포함)
+-- 1. handle_new_user() 수정: search_path 설정 + user_role 캐스팅 수정
 CREATE OR REPLACE FUNCTION handle_new_user()
 RETURNS TRIGGER AS $$
 DECLARE
@@ -24,7 +23,6 @@ BEGIN
     NEW.email
   );
 
-  -- admin + academy_name: 학원 자동 생성
   IF _role = 'admin' AND _academy_name IS NOT NULL AND _academy_name != '' THEN
     _new_invite_code := upper(substr(md5(random()::text), 1, 6));
     INSERT INTO public.academies (name, invite_code, owner_id)
@@ -39,17 +37,30 @@ BEGIN
     NEW.id,
     NEW.email,
     _full_name,
-    COALESCE(_role::user_role, 'student'),
+    _role::public.user_role,
     _academy_id,
     NEW.raw_user_meta_data->>'phone'
   );
+  RETURN NEW;
+END;
+$$ LANGUAGE plpgsql SECURITY DEFINER
+SET search_path = public;
 
-  -- 독립 학생(초대 코드 없음, 학원 없음): 올킬보카 자동 배정
-  IF _role = 'student' AND _academy_id IS NULL THEN
+-- 2. 독립 학생 voca 자동 배정 — users INSERT 트리거
+CREATE OR REPLACE FUNCTION auto_assign_voca_for_independent_student()
+RETURNS TRIGGER AS $$
+BEGIN
+  IF NEW.role = 'student' AND NEW.academy_id IS NULL THEN
     INSERT INTO public.service_assignments (student_id, service, assigned_by)
     VALUES (NEW.id, 'voca', NEW.id);
   END IF;
-
   RETURN NEW;
 END;
-$$ LANGUAGE plpgsql SECURITY DEFINER;
+$$ LANGUAGE plpgsql SECURITY DEFINER
+SET search_path = public;
+
+DROP TRIGGER IF EXISTS trg_auto_assign_voca ON public.users;
+CREATE TRIGGER trg_auto_assign_voca
+  AFTER INSERT ON public.users
+  FOR EACH ROW
+  EXECUTE FUNCTION auto_assign_voca_for_independent_student();
