@@ -77,7 +77,8 @@ export function DayContentManager({ dayId }: { dayId: string }) {
     } finally {
       setLoading(false);
     }
-  }, [dayId, vocab]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [dayId]);
 
   useEffect(() => { loadVocab(); }, [loadVocab]);
 
