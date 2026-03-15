@@ -31,3 +31,23 @@ setup('authenticate student', async ({ page }) => {
   }
   await login(page, email, password, 'e2e/.auth/student.json');
 });
+
+setup('authenticate admin', async ({ page }) => {
+  const email = process.env.TEST_ADMIN_EMAIL;
+  const password = process.env.TEST_ADMIN_PASSWORD;
+  if (!email || !password) {
+    setup.skip();
+    return;
+  }
+  await login(page, email, password, 'e2e/.auth/admin.json');
+});
+
+setup('authenticate teacher', async ({ page }) => {
+  const email = process.env.TEST_TEACHER_EMAIL;
+  const password = process.env.TEST_TEACHER_PASSWORD;
+  if (!email || !password) {
+    setup.skip();
+    return;
+  }
+  await login(page, email, password, 'e2e/.auth/teacher.json');
+});

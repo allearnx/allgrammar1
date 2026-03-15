@@ -32,7 +32,25 @@ export default defineConfig({
         ...devices['Desktop Chrome'],
         storageState: 'e2e/.auth/student.json',
       },
-      testMatch: /student\.spec\.ts/,
+      testMatch: /student.*\.spec\.ts/,
+      dependencies: ['setup'],
+    },
+    {
+      name: 'admin',
+      use: {
+        ...devices['Desktop Chrome'],
+        storageState: 'e2e/.auth/admin.json',
+      },
+      testMatch: /admin\.spec\.ts/,
+      dependencies: ['setup'],
+    },
+    {
+      name: 'teacher',
+      use: {
+        ...devices['Desktop Chrome'],
+        storageState: 'e2e/.auth/teacher.json',
+      },
+      testMatch: /teacher\.spec\.ts/,
       dependencies: ['setup'],
     },
     {
@@ -41,7 +59,7 @@ export default defineConfig({
         ...devices['Desktop Chrome'],
         storageState: { cookies: [], origins: [] },
       },
-      testMatch: /login\.spec\.ts/,
+      testMatch: /(login|signup)\.spec\.ts/,
       dependencies: ['setup'],
     },
   ],
