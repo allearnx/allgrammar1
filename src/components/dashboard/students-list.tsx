@@ -20,6 +20,18 @@ interface Props {
 export async function StudentsList({ user, basePath }: Props) {
   const admin = createAdminClient();
 
+  // boss는 전체 학생 조회, teacher/admin은 자기 학원만
+  if (!user.academy_id && user.role !== 'boss') {
+    return (
+      <div className="flex flex-col items-center py-12">
+        <Users className="h-10 w-10 text-muted-foreground/30 mb-2" />
+        <p className="text-center text-muted-foreground">
+          소속 학원이 없습니다.
+        </p>
+      </div>
+    );
+  }
+
   const query = admin
     .from('users')
     .select('*')

@@ -23,35 +23,31 @@ export async function fetchTextbookData() {
 }
 
 export async function fetchStudentsList(academyId: string | null) {
+  if (!academyId) return [];
+
   const supabase = await createClient();
 
-  const query = supabase
+  const { data: students } = await supabase
     .from('users')
     .select('id, full_name, email')
     .eq('role', 'student')
+    .eq('academy_id', academyId)
     .order('full_name');
 
-  if (academyId) {
-    query.eq('academy_id', academyId);
-  }
-
-  const { data: students } = await query;
   return students || [];
 }
 
 export async function fetchTeachersList(academyId: string | null) {
+  if (!academyId) return [];
+
   const supabase = await createClient();
 
-  const query = supabase
+  const { data: teachers } = await supabase
     .from('users')
     .select('id, full_name, email, is_active, created_at, academy_id')
     .eq('role', 'teacher')
+    .eq('academy_id', academyId)
     .order('full_name');
 
-  if (academyId) {
-    query.eq('academy_id', academyId);
-  }
-
-  const { data: teachers } = await query;
   return teachers || [];
 }
