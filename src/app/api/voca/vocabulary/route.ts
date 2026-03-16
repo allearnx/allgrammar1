@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { createApiHandler } from '@/lib/api/handler';
 import { vocaVocabCreateSchema, vocaVocabPatchSchema, idSchema } from '@/lib/api/schemas';
+import { requireContentPermission } from '@/lib/api/require-content-permission';
 
 // GET — 단어 목록 (dayId 쿼리 파라미터)
 export const GET = createApiHandler({ hasBody: false }, async ({ request, supabase }) => {
@@ -19,7 +20,8 @@ export const GET = createApiHandler({ hasBody: false }, async ({ request, supaba
 // POST — 단어 생성
 export const POST = createApiHandler(
   { roles: ['teacher', 'admin', 'boss'], schema: vocaVocabCreateSchema },
-  async ({ body, supabase }) => {
+  async ({ body, supabase, user }) => {
+    await requireContentPermission(user, supabase);
     const { data, error } = await supabase
       .from('voca_vocabulary')
       .insert(body)
@@ -33,7 +35,8 @@ export const POST = createApiHandler(
 // PATCH — 단어 수정
 export const PATCH = createApiHandler(
   { roles: ['teacher', 'admin', 'boss'], schema: vocaVocabPatchSchema },
-  async ({ body, supabase }) => {
+  async ({ body, supabase, user }) => {
+    await requireContentPermission(user, supabase);
     const { id, ...updates } = body as Record<string, unknown>;
     const { data, error } = await supabase
       .from('voca_vocabulary')
@@ -49,7 +52,8 @@ export const PATCH = createApiHandler(
 // DELETE — 단어 삭제
 export const DELETE = createApiHandler(
   { roles: ['teacher', 'admin', 'boss'], schema: idSchema, hasBody: true },
-  async ({ body, supabase }) => {
+  async ({ body, supabase, user }) => {
+    await requireContentPermission(user, supabase);
     const { error } = await supabase
       .from('voca_vocabulary')
       .delete()

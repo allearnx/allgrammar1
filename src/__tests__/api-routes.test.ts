@@ -18,6 +18,10 @@ vi.mock('@/lib/api/rate-limit', () => ({
   checkRateLimit: () => null,
 }));
 
+vi.mock('@/lib/api/require-content-permission', () => ({
+  requireContentPermission: vi.fn().mockResolvedValue(undefined),
+}));
+
 vi.mock('@/lib/utils/invite-code', () => ({
   generateInviteCode: () => 'TESTCODE',
 }));

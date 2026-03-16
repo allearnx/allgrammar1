@@ -1,11 +1,13 @@
 import { NextResponse } from 'next/server';
 import { createApiHandler } from '@/lib/api/handler';
 import { vocaBookPatchSchema } from '@/lib/api/schemas';
+import { requireContentPermission } from '@/lib/api/require-content-permission';
 
 // PATCH — 교재 수정
 export const PATCH = createApiHandler(
   { roles: ['teacher', 'admin', 'boss'], schema: vocaBookPatchSchema },
-  async ({ body, params, supabase }) => {
+  async ({ body, params, supabase, user }) => {
+    await requireContentPermission(user, supabase);
     const { id, ...updates } = body as Record<string, unknown>;
     const bookId = params.id || id;
     const { data, error } = await supabase
@@ -22,7 +24,8 @@ export const PATCH = createApiHandler(
 // DELETE — 교재 삭제
 export const DELETE = createApiHandler(
   { roles: ['teacher', 'admin', 'boss'], hasBody: false },
-  async ({ params, supabase }) => {
+  async ({ params, supabase, user }) => {
+    await requireContentPermission(user, supabase);
     const { error } = await supabase
       .from('voca_books')
       .delete()

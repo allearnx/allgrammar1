@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { createApiHandler, dbResult } from '@/lib/api';
 import { problemCreateSchema, idSchema } from '@/lib/api/schemas';
+import { requireContentPermission } from '@/lib/api/require-content-permission';
 
 const ADMIN_ROLES = ['teacher', 'admin', 'boss'] as const;
 
@@ -23,7 +24,8 @@ export const GET = createApiHandler(
 
 export const POST = createApiHandler(
   { roles: [...ADMIN_ROLES], schema: problemCreateSchema },
-  async ({ body, supabase }) => {
+  async ({ body, supabase, user }) => {
+    await requireContentPermission(user, supabase);
     const { unitId, title, mode, questions, pdfUrl, answerKey, category } = body;
 
     const data = dbResult(await supabase
@@ -45,7 +47,8 @@ export const POST = createApiHandler(
 
 export const DELETE = createApiHandler(
   { roles: [...ADMIN_ROLES], schema: idSchema, hasBody: true },
-  async ({ body, supabase }) => {
+  async ({ body, supabase, user }) => {
+    await requireContentPermission(user, supabase);
     dbResult(await supabase
       .from('naesin_problem_sheets')
       .delete()

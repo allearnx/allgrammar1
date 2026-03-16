@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { createApiHandler } from '@/lib/api/handler';
 import { vocaDayCreateSchema, idSchema } from '@/lib/api/schemas';
+import { requireContentPermission } from '@/lib/api/require-content-permission';
 
 // GET — Day 목록 (book_id 쿼리 파라미터)
 export const GET = createApiHandler({ hasBody: false }, async ({ request, supabase }) => {
@@ -19,7 +20,8 @@ export const GET = createApiHandler({ hasBody: false }, async ({ request, supaba
 // POST — Day 생성
 export const POST = createApiHandler(
   { roles: ['teacher', 'admin', 'boss'], schema: vocaDayCreateSchema },
-  async ({ body, supabase }) => {
+  async ({ body, supabase, user }) => {
+    await requireContentPermission(user, supabase);
     const { data, error } = await supabase
       .from('voca_days')
       .insert(body)
@@ -33,7 +35,8 @@ export const POST = createApiHandler(
 // DELETE — Day 삭제
 export const DELETE = createApiHandler(
   { roles: ['teacher', 'admin', 'boss'], schema: idSchema, hasBody: true },
-  async ({ body, supabase }) => {
+  async ({ body, supabase, user }) => {
+    await requireContentPermission(user, supabase);
     const { error } = await supabase
       .from('voca_days')
       .delete()

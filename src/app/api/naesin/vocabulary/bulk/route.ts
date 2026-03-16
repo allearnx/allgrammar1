@@ -1,10 +1,12 @@
 import { NextResponse } from 'next/server';
 import { createApiHandler, dbResult } from '@/lib/api';
 import { vocabBulkSchema } from '@/lib/api/schemas';
+import { requireContentPermission } from '@/lib/api/require-content-permission';
 
 export const POST = createApiHandler(
   { roles: ['teacher', 'admin', 'boss'], schema: vocabBulkSchema },
-  async ({ body, supabase }) => {
+  async ({ body, supabase, user }) => {
+    await requireContentPermission(user, supabase);
     const { unit_id, items } = body;
 
     const rows = items.map((item, idx) => ({

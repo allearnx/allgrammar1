@@ -14,6 +14,9 @@ vi.mock('@/lib/supabase/server', () => ({
 vi.mock('@/lib/api/rate-limit', () => ({
   checkRateLimit: () => null,
 }));
+vi.mock('@/lib/api/require-content-permission', () => ({
+  requireContentPermission: vi.fn().mockResolvedValue(undefined),
+}));
 
 function mockChain(result: { data: unknown; error: unknown }) {
   const chain: Record<string, ReturnType<typeof vi.fn>> = {

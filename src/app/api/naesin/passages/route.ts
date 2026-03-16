@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import { z } from 'zod';
 import { createApiHandler, dbResult } from '@/lib/api';
 import { passageCreateSchema, idSchema } from '@/lib/api/schemas';
+import { requireContentPermission } from '@/lib/api/require-content-permission';
 
 const ADMIN_ROLES = ['teacher', 'admin', 'boss'] as const;
 const AUTO_INTERVAL = { easy: 5, medium: 3, hard: 2 } as const;
@@ -15,7 +16,8 @@ function generateAutoBlanks(text: string, interval: number) {
 
 export const POST = createApiHandler(
   { roles: [...ADMIN_ROLES], schema: passageCreateSchema },
-  async ({ body, supabase }) => {
+  async ({ body, supabase, user }) => {
+    await requireContentPermission(user, supabase);
     const data = dbResult(await supabase
       .from('naesin_passages')
       .insert({
@@ -49,7 +51,8 @@ const passageUpdateSchema = z.object({
 
 export const PATCH = createApiHandler(
   { roles: [...ADMIN_ROLES], schema: passageUpdateSchema },
-  async ({ body, supabase }) => {
+  async ({ body, supabase, user }) => {
+    await requireContentPermission(user, supabase);
     const updates: Record<string, unknown> = {};
 
     if (body.title) updates.title = body.title;
@@ -87,7 +90,8 @@ export const PATCH = createApiHandler(
 
 export const DELETE = createApiHandler(
   { roles: [...ADMIN_ROLES], schema: idSchema, hasBody: true },
-  async ({ body, supabase }) => {
+  async ({ body, supabase, user }) => {
+    await requireContentPermission(user, supabase);
     dbResult(await supabase.from('naesin_passages').delete().eq('id', body.id));
     return NextResponse.json({ success: true });
   }

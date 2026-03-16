@@ -1,11 +1,13 @@
 import { NextResponse } from 'next/server';
 import { createApiHandler } from '@/lib/api/handler';
 import { vocaVocabBulkSchema } from '@/lib/api/schemas';
+import { requireContentPermission } from '@/lib/api/require-content-permission';
 
 // POST — 단어 대량 업로드
 export const POST = createApiHandler(
   { roles: ['teacher', 'admin', 'boss'], schema: vocaVocabBulkSchema },
-  async ({ body, supabase }) => {
+  async ({ body, supabase, user }) => {
+    await requireContentPermission(user, supabase);
     // Get current max sort_order
     const { data: existing } = await supabase
       .from('voca_vocabulary')

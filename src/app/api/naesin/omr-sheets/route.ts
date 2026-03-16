@@ -1,12 +1,14 @@
 import { NextResponse } from 'next/server';
 import { createApiHandler, dbResult } from '@/lib/api';
 import { omrSheetCreateSchema, idSchema } from '@/lib/api/schemas';
+import { requireContentPermission } from '@/lib/api/require-content-permission';
 
 const ADMIN_ROLES = ['teacher', 'admin', 'boss'] as const;
 
 export const POST = createApiHandler(
   { roles: [...ADMIN_ROLES], schema: omrSheetCreateSchema },
-  async ({ body, supabase }) => {
+  async ({ body, supabase, user }) => {
+    await requireContentPermission(user, supabase);
     const data = dbResult(await supabase
       .from('naesin_omr_sheets')
       .insert({
@@ -25,7 +27,8 @@ export const POST = createApiHandler(
 
 export const DELETE = createApiHandler(
   { roles: [...ADMIN_ROLES], schema: idSchema, hasBody: true },
-  async ({ body, supabase }) => {
+  async ({ body, supabase, user }) => {
+    await requireContentPermission(user, supabase);
     dbResult(await supabase.from('naesin_omr_sheets').delete().eq('id', body.id));
     return NextResponse.json({ success: true });
   }

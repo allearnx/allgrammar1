@@ -1,12 +1,14 @@
 import { NextResponse } from 'next/server';
 import { createApiHandler, dbResult } from '@/lib/api';
 import { vocabCreateSchema, vocabPatchSchema, idSchema } from '@/lib/api/schemas';
+import { requireContentPermission } from '@/lib/api/require-content-permission';
 
 const ADMIN_ROLES = ['teacher', 'admin', 'boss'] as const;
 
 export const POST = createApiHandler(
   { roles: [...ADMIN_ROLES], schema: vocabCreateSchema },
-  async ({ body, supabase }) => {
+  async ({ body, supabase, user }) => {
+    await requireContentPermission(user, supabase);
     const data = dbResult(await supabase
       .from('naesin_vocabulary')
       .insert({
@@ -28,7 +30,8 @@ export const POST = createApiHandler(
 
 export const PATCH = createApiHandler(
   { roles: [...ADMIN_ROLES], schema: vocabPatchSchema },
-  async ({ body, supabase }) => {
+  async ({ body, supabase, user }) => {
+    await requireContentPermission(user, supabase);
     const { id, ...fields } = body;
 
     const allowed = ['front_text', 'back_text', 'part_of_speech', 'example_sentence', 'synonyms', 'antonyms'];
@@ -50,7 +53,8 @@ export const PATCH = createApiHandler(
 
 export const DELETE = createApiHandler(
   { roles: [...ADMIN_ROLES], schema: idSchema, hasBody: true },
-  async ({ body, supabase }) => {
+  async ({ body, supabase, user }) => {
+    await requireContentPermission(user, supabase);
     dbResult(await supabase.from('naesin_vocabulary').delete().eq('id', body.id));
     return NextResponse.json({ success: true });
   }
