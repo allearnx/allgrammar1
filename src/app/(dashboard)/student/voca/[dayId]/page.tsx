@@ -19,7 +19,7 @@ export default async function StudentVocaDayPage({
   // Check service assignment
   const { data: assignment } = await supabase
     .from('service_assignments')
-    .select('id')
+    .select('id, round2_unlocked')
     .eq('student_id', user.id)
     .eq('service', 'voca')
     .single();
@@ -86,7 +86,7 @@ export default async function StudentVocaDayPage({
   const wrongWords = Array.from(wrongWordsMap.values());
 
   const planContext = await getPlanContext(user.academy_id, user.id);
-  const round2Locked = !canUseFeature(planContext.tier, 'voca:round2');
+  const round2Locked = !assignment?.round2_unlocked && !canUseFeature(planContext.tier, 'voca:round2');
 
   return (
     <>

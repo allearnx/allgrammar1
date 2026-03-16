@@ -424,6 +424,11 @@ export const serviceAssignmentDeleteSchema = z.object({
   service: z.enum(['naesin', 'voca']),
 });
 
+export const serviceAssignmentPatchSchema = z.object({
+  studentId: ID,
+  round2Unlocked: z.boolean(),
+});
+
 // ── 보카 교재 배정 Schemas ──
 
 export const vocaBookAssignmentSchema = z.object({

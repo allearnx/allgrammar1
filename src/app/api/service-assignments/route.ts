@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { createApiHandler } from '@/lib/api/handler';
-import { serviceAssignmentCreateSchema, serviceAssignmentDeleteSchema } from '@/lib/api/schemas';
+import { serviceAssignmentCreateSchema, serviceAssignmentDeleteSchema, serviceAssignmentPatchSchema } from '@/lib/api/schemas';
 import { checkServiceGate } from '@/lib/billing/check-plan-api';
 
 // GET — 학생 본인의 배정 목록
@@ -30,6 +30,20 @@ export const POST = createApiHandler(
       .single();
     if (error) return NextResponse.json({ error: error.message }, { status: 400 });
     return NextResponse.json(data);
+  }
+);
+
+// PATCH — boss가 2회독 잠금 해제 토글
+export const PATCH = createApiHandler(
+  { roles: ['boss'], schema: serviceAssignmentPatchSchema },
+  async ({ body, supabase }) => {
+    const { error } = await supabase
+      .from('service_assignments')
+      .update({ round2_unlocked: body.round2Unlocked })
+      .eq('student_id', body.studentId)
+      .eq('service', 'voca');
+    if (error) return NextResponse.json({ error: error.message }, { status: 400 });
+    return NextResponse.json({ success: true });
   }
 );
 

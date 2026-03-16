@@ -90,6 +90,7 @@ export async function StudentsList({ user, basePath }: Props) {
   // Fetch service assignments for boss/admin
   const canManageServices = basePath === '/boss' || basePath === '/admin';
   const serviceMap: Record<string, string[]> = {};
+  const round2Map: Record<string, boolean> = {};
 
   let vocaBooks: { id: string; title: string }[] = [];
   const bookAssignmentMap: Record<string, string> = {};
@@ -98,7 +99,7 @@ export async function StudentsList({ user, basePath }: Props) {
     const [{ data: assignments }, { data: vocaBooksData }, { data: bookAssignments }] = await Promise.all([
       admin
         .from('service_assignments')
-        .select('student_id, service')
+        .select('student_id, service, round2_unlocked')
         .in('student_id', studentIds),
       admin
         .from('voca_books')
@@ -115,6 +116,9 @@ export async function StudentsList({ user, basePath }: Props) {
       for (const a of assignments) {
         if (!serviceMap[a.student_id]) serviceMap[a.student_id] = [];
         serviceMap[a.student_id].push(a.service);
+        if (a.service === 'voca' && a.round2_unlocked) {
+          round2Map[a.student_id] = true;
+        }
       }
     }
 
@@ -197,6 +201,8 @@ export async function StudentsList({ user, basePath }: Props) {
                           assignedServices={serviceMap[student.id] || []}
                           vocaBooks={vocaBooks}
                           assignedBookId={bookAssignmentMap[student.id] || null}
+                          round2Unlocked={round2Map[student.id] || false}
+                          showRound2Toggle={basePath === '/boss'}
                         />
                       </div>
                     )}
