@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -10,8 +10,9 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader } from '@/components/ui/card';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { AdminSignupFields } from '@/components/auth/admin-signup-fields';
+import { InviteCodeField } from '@/components/auth/invite-code-field';
 import { toast } from 'sonner';
-import { CheckCircle2, XCircle } from 'lucide-react';
 import type { UserRole } from '@/types/database';
 
 type FreeService = 'naesin' | 'voca';
@@ -23,8 +24,6 @@ export default function SignUpPage() {
   const [role, setRole] = useState<UserRole>('student');
   const [inviteCode, setInviteCode] = useState('');
   const [academyName, setAcademyName] = useState<string | null>(null);
-  const [inviteError, setInviteError] = useState<string | null>(null);
-  const [validating, setValidating] = useState(false);
   const [loading, setLoading] = useState(false);
   const [newAcademyName, setNewAcademyName] = useState('');
   const [contactNumber, setContactNumber] = useState('');
@@ -34,50 +33,19 @@ export default function SignUpPage() {
 
   const isAdminRole = role === 'admin';
 
-  useEffect(() => {
-    const code = inviteCode.trim().toUpperCase();
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    setAcademyName(null);
-     
-    setInviteError(null);
-
-    if (code.length !== 6) return;
-
-    const controller = new AbortController();
-    setValidating(true);
-
-    fetch(`/api/auth/validate-invite-code?code=${code}`, { signal: controller.signal })
-      .then(async (res) => {
-        if (res.ok) {
-          const data = await res.json();
-          setAcademyName(data.academyName);
-        } else {
-          setInviteError('유효하지 않은 초대 코드입니다');
-        }
-      })
-      .catch((err) => {
-        if (err.name !== 'AbortError') setInviteError('검증 중 오류가 발생했습니다');
-      })
-      .finally(() => setValidating(false));
-
-    return () => controller.abort();
-  }, [inviteCode]);
-
   async function handleSignUp(e: React.FormEvent) {
     e.preventDefault();
     setLoading(true);
 
     const code = inviteCode.trim().toUpperCase();
-    const supabase = createClient();
 
-    // admin 역할: 학원명 필수
     if (isAdminRole && !newAcademyName.trim()) {
       toast.error('학원명을 입력해주세요');
       setLoading(false);
       return;
     }
 
-    const { error } = await supabase.auth.signUp({
+    const { error } = await createClient().auth.signUp({
       email,
       password,
       options: {
@@ -115,58 +83,24 @@ export default function SignUpPage() {
           <CardContent className="space-y-4">
             <div className="space-y-2">
               <Label htmlFor="fullName">이름</Label>
-              <Input
-                id="fullName"
-                type="text"
-                placeholder="홍길동"
-                value={fullName}
-                onChange={(e) => setFullName(e.target.value)}
-                required
-                autoComplete="name"
-              />
+              <Input id="fullName" type="text" placeholder="홍길동" value={fullName} onChange={(e) => setFullName(e.target.value)} required autoComplete="name" />
             </div>
             <div className="space-y-2">
               <Label htmlFor="phone">전화번호</Label>
-              <Input
-                id="phone"
-                type="tel"
-                placeholder="010-0000-0000"
-                value={phone}
-                onChange={(e) => setPhone(e.target.value)}
-                autoComplete="tel"
-              />
+              <Input id="phone" type="tel" placeholder="010-0000-0000" value={phone} onChange={(e) => setPhone(e.target.value)} autoComplete="tel" />
             </div>
             <div className="space-y-2">
               <Label htmlFor="email">이메일</Label>
-              <Input
-                id="email"
-                type="email"
-                placeholder="email@example.com"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-                autoComplete="email"
-              />
+              <Input id="email" type="email" placeholder="email@example.com" value={email} onChange={(e) => setEmail(e.target.value)} required autoComplete="email" />
             </div>
             <div className="space-y-2">
               <Label htmlFor="password">비밀번호</Label>
-              <Input
-                id="password"
-                type="password"
-                placeholder="6자 이상 입력하세요"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-                minLength={6}
-                autoComplete="new-password"
-              />
+              <Input id="password" type="password" placeholder="6자 이상 입력하세요" value={password} onChange={(e) => setPassword(e.target.value)} required minLength={6} autoComplete="new-password" />
             </div>
             <div className="space-y-2">
               <Label htmlFor="role">역할</Label>
               <Select value={role} onValueChange={(v) => setRole(v as UserRole)}>
-                <SelectTrigger>
-                  <SelectValue placeholder="역할 선택" />
-                </SelectTrigger>
+                <SelectTrigger><SelectValue placeholder="역할 선택" /></SelectTrigger>
                 <SelectContent>
                   <SelectItem value="student">학생</SelectItem>
                   <SelectItem value="teacher">선생님</SelectItem>
@@ -174,104 +108,23 @@ export default function SignUpPage() {
                 </SelectContent>
               </Select>
             </div>
+
             {isAdminRole ? (
-              <>
-                <div className="space-y-2">
-                  <Label htmlFor="newAcademyName">학원명</Label>
-                  <Input
-                    id="newAcademyName"
-                    type="text"
-                    placeholder="학원 이름을 입력하세요"
-                    value={newAcademyName}
-                    onChange={(e) => setNewAcademyName(e.target.value)}
-                    required
-                  />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="contactNumber">연락처</Label>
-                  <Input
-                    id="contactNumber"
-                    type="tel"
-                    placeholder="010-0000-0000"
-                    value={contactNumber}
-                    onChange={(e) => setContactNumber(e.target.value)}
-                    required
-                  />
-                </div>
-                <div className="space-y-2">
-                  <Label>무료 체험 서비스 선택</Label>
-                  <div className="grid grid-cols-2 gap-3">
-                    <label
-                      className={`flex flex-col items-center gap-1.5 rounded-xl border-2 p-3 cursor-pointer transition-all ${
-                        freeService === 'naesin'
-                          ? 'border-cyan-500 bg-cyan-50'
-                          : 'border-gray-200 hover:border-gray-300'
-                      }`}
-                    >
-                      <input
-                        type="radio"
-                        name="freeService"
-                        value="naesin"
-                        checked={freeService === 'naesin'}
-                        onChange={() => setFreeService('naesin')}
-                        className="sr-only"
-                      />
-                      <span className="text-sm font-semibold">올인내신</span>
-                      <span className="text-xs text-muted-foreground text-center">단어암기 + 교과서암기</span>
-                    </label>
-                    <label
-                      className={`flex flex-col items-center gap-1.5 rounded-xl border-2 p-3 cursor-pointer transition-all ${
-                        freeService === 'voca'
-                          ? 'border-violet-500 bg-violet-50'
-                          : 'border-gray-200 hover:border-gray-300'
-                      }`}
-                    >
-                      <input
-                        type="radio"
-                        name="freeService"
-                        value="voca"
-                        checked={freeService === 'voca'}
-                        onChange={() => setFreeService('voca')}
-                        className="sr-only"
-                      />
-                      <span className="text-sm font-semibold">올킬보카</span>
-                      <span className="text-xs text-muted-foreground text-center">1회독 단어 학습</span>
-                    </label>
-                  </div>
-                </div>
-                <p className="text-sm text-muted-foreground">
-                  5명까지 무료로 시작하세요. 유료 전환 시 모든 기능이 해제됩니다.
-                </p>
-              </>
+              <AdminSignupFields
+                academyName={newAcademyName}
+                onAcademyNameChange={setNewAcademyName}
+                contactNumber={contactNumber}
+                onContactNumberChange={setContactNumber}
+                freeService={freeService}
+                onFreeServiceChange={setFreeService}
+              />
             ) : (
-              <div className="space-y-2">
-                <Label htmlFor="inviteCode">초대 코드 (선택)</Label>
-                <Input
-                  id="inviteCode"
-                  type="text"
-                  placeholder="6자리 코드 입력"
-                  value={inviteCode}
-                  onChange={(e) => setInviteCode(e.target.value.toUpperCase().slice(0, 6))}
-                  maxLength={6}
-                  className="font-mono tracking-widest uppercase"
-                  autoComplete="off"
-                />
-                {validating && (
-                  <p className="text-sm text-muted-foreground">확인 중...</p>
-                )}
-                {academyName && (
-                  <p className="text-sm text-green-600 flex items-center gap-1">
-                    <CheckCircle2 className="h-4 w-4" />
-                    {academyName}
-                  </p>
-                )}
-                {inviteError && (
-                  <p className="text-sm text-destructive flex items-center gap-1">
-                    <XCircle className="h-4 w-4" />
-                    {inviteError}
-                  </p>
-                )}
-              </div>
+              <InviteCodeField
+                value={inviteCode}
+                onChange={setInviteCode}
+                academyName={academyName}
+                onAcademyNameChange={setAcademyName}
+              />
             )}
           </CardContent>
           <CardFooter className="flex flex-col gap-3">
@@ -280,9 +133,7 @@ export default function SignUpPage() {
             </Button>
             <p className="text-sm text-muted-foreground">
               이미 계정이 있으신가요?{' '}
-              <Link href="/login" className="text-primary underline-offset-4 hover:underline">
-                로그인
-              </Link>
+              <Link href="/login" className="text-primary underline-offset-4 hover:underline">로그인</Link>
             </p>
           </CardFooter>
         </form>

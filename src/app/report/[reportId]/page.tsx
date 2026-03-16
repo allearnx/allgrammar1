@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation';
 import { createAdminClient } from '@/lib/supabase/admin';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
+import { MetricCard } from '@/components/shared/metric-card';
 import type { Metadata } from 'next';
 import type { EnhancedReportData } from '@/types/report';
 
@@ -26,24 +27,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: `${studentName} 학습 리포트 (${data.week_start} ~ ${data.week_end})`,
   };
-}
-
-function MetricCard({
-  label,
-  value,
-  sub,
-}: {
-  label: string;
-  value: string | number;
-  sub?: string;
-}) {
-  return (
-    <div className="rounded-lg border p-4">
-      <p className="text-sm text-muted-foreground">{label}</p>
-      <p className="text-2xl font-bold mt-1">{value}</p>
-      {sub && <p className="text-xs text-muted-foreground">{sub}</p>}
-    </div>
-  );
 }
 
 export default async function PublicReportPage({ params }: Props) {
@@ -74,36 +57,13 @@ export default async function PublicReportPage({ params }: Props) {
 
         {/* 요약 */}
         {(!report.reportType || report.reportType === 'all') && (
-          <Card>
-            <CardContent className="py-4 space-y-3">
-              <p className="font-medium">요약</p>
-              <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-                <MetricCard
-                  label="영상 학습"
-                  value={`${report.videoProgress.completed}/${report.videoProgress.total}`}
-                  sub="완료/전체"
-                />
-                <MetricCard
-                  label="암기 마스터"
-                  value={`${report.memoryProgress.mastered}/${report.memoryProgress.total}`}
-                  sub={`복습 대기: ${report.memoryProgress.dueReviews}`}
-                />
-                <MetricCard
-                  label="총 학습 시간"
-                  value={`${report.totalWatchedMinutes}분`}
-                />
-                <MetricCard
-                  label="퀴즈 정답률"
-                  value={`${report.quizAccuracy}%`}
-                />
-                <MetricCard
-                  label="교과서 학습"
-                  value={report.textbookProgress.completed}
-                  sub="완료 지문"
-                />
-              </div>
-            </CardContent>
-          </Card>
+          <ReportSection title="요약">
+            <MetricCard label="영상 학습" value={`${report.videoProgress.completed}/${report.videoProgress.total}`} sub="완료/전체" />
+            <MetricCard label="암기 마스터" value={`${report.memoryProgress.mastered}/${report.memoryProgress.total}`} sub={`복습 대기: ${report.memoryProgress.dueReviews}`} />
+            <MetricCard label="총 학습 시간" value={`${report.totalWatchedMinutes}분`} />
+            <MetricCard label="퀴즈 정답률" value={`${report.quizAccuracy}%`} />
+            <MetricCard label="교과서 학습" value={report.textbookProgress.completed} sub="완료 지문" />
+          </ReportSection>
         )}
 
         {/* 내신 대비 */}
@@ -112,41 +72,19 @@ export default async function PublicReportPage({ params }: Props) {
             <CardContent className="py-4 space-y-3">
               <p className="font-medium">내신 대비</p>
               <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-                <MetricCard
-                  label="단원 진행"
-                  value={`${report.naesin.unitsInProgress}/${report.naesin.totalUnits}`}
-                  sub="진행 중/전체"
-                />
-                <MetricCard
-                  label="문제풀이"
-                  value={`${report.naesin.problemAvgScore ?? '-'}점`}
-                  sub={`${report.naesin.problemAttempts}회 시도`}
-                />
-                <MetricCard
-                  label="미해결 오답"
-                  value={report.naesin.unresolvedWrongAnswers}
-                />
-                <MetricCard
-                  label="문법 영상"
-                  value={`${report.naesin.videoCompleted}/${report.naesin.videoTotal}`}
-                  sub="완료/전체"
-                />
-                <MetricCard
-                  label="총 시청 시간"
-                  value={`${Math.round(report.naesin.totalWatchSeconds / 60)}분`}
-                />
-                <MetricCard
-                  label="퀴즈셋 평균"
-                  value={`${report.naesin.quizSetAvgScore ?? '-'}점`}
-                />
+                <MetricCard label="단원 진행" value={`${report.naesin.unitsInProgress}/${report.naesin.totalUnits}`} sub="진행 중/전체" />
+                <MetricCard label="문제풀이" value={`${report.naesin.problemAvgScore ?? '-'}점`} sub={`${report.naesin.problemAttempts}회 시도`} />
+                <MetricCard label="미해결 오답" value={report.naesin.unresolvedWrongAnswers} />
+                <MetricCard label="문법 영상" value={`${report.naesin.videoCompleted}/${report.naesin.videoTotal}`} sub="완료/전체" />
+                <MetricCard label="총 시청 시간" value={`${Math.round(report.naesin.totalWatchSeconds / 60)}분`} />
+                <MetricCard label="퀴즈셋 평균" value={`${report.naesin.quizSetAvgScore ?? '-'}점`} />
               </div>
               <p className="text-sm font-medium mt-2">단계별 완료</p>
               <div className="grid gap-3 sm:grid-cols-3 lg:grid-cols-5">
-                <MetricCard label="어휘" value={report.naesin.stagesCompleted.vocab} sub="단원 완료" />
-                <MetricCard label="지문" value={report.naesin.stagesCompleted.passage} sub="단원 완료" />
-                <MetricCard label="문법" value={report.naesin.stagesCompleted.grammar} sub="단원 완료" />
-                <MetricCard label="문제풀이" value={report.naesin.stagesCompleted.problem} sub="단원 완료" />
-                <MetricCard label="직전보강" value={report.naesin.stagesCompleted.lastReview} sub="단원 완료" />
+                {(['vocab', 'passage', 'grammar', 'problem', 'lastReview'] as const).map((key) => {
+                  const labels: Record<string, string> = { vocab: '어휘', passage: '지문', grammar: '문법', problem: '문제풀이', lastReview: '직전보강' };
+                  return <MetricCard key={key} label={labels[key]} value={report.naesin!.stagesCompleted[key]} sub="단원 완료" />;
+                })}
               </div>
             </CardContent>
           </Card>
@@ -154,36 +92,13 @@ export default async function PublicReportPage({ params }: Props) {
 
         {/* 올킬보카 */}
         {report.voca && (
-          <Card>
-            <CardContent className="py-4 space-y-3">
-              <p className="font-medium">올킬보카</p>
-              <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-                <MetricCard
-                  label="Day 진행"
-                  value={`${report.voca.daysInProgress}/${report.voca.totalDays}`}
-                  sub="진행 중/전체"
-                />
-                <MetricCard
-                  label="플래시카드"
-                  value={report.voca.flashcardCompleted}
-                  sub="완료 Day"
-                />
-                <MetricCard
-                  label="매칭 완료"
-                  value={report.voca.matchingCompleted}
-                  sub="완료 Day"
-                />
-                <MetricCard
-                  label="퀴즈 평균"
-                  value={`${report.voca.quizAvgScore ?? '-'}점`}
-                />
-                <MetricCard
-                  label="스펠링 평균"
-                  value={`${report.voca.spellingAvgScore ?? '-'}점`}
-                />
-              </div>
-            </CardContent>
-          </Card>
+          <ReportSection title="올킬보카">
+            <MetricCard label="Day 진행" value={`${report.voca.daysInProgress}/${report.voca.totalDays}`} sub="진행 중/전체" />
+            <MetricCard label="플래시카드" value={report.voca.flashcardCompleted} sub="완료 Day" />
+            <MetricCard label="매칭 완료" value={report.voca.matchingCompleted} sub="완료 Day" />
+            <MetricCard label="퀴즈 평균" value={`${report.voca.quizAvgScore ?? '-'}점`} />
+            <MetricCard label="스펠링 평균" value={`${report.voca.spellingAvgScore ?? '-'}점`} />
+          </ReportSection>
         )}
 
         {/* 분석 */}
@@ -218,11 +133,23 @@ export default async function PublicReportPage({ params }: Props) {
           </CardContent>
         </Card>
 
-        {/* 워터마크 */}
         <p className="text-center text-xs text-muted-foreground">
           올라영 AI 러닝 엔진
         </p>
       </div>
     </div>
+  );
+}
+
+function ReportSection({ title, children }: { title: string; children: React.ReactNode }) {
+  return (
+    <Card>
+      <CardContent className="py-4 space-y-3">
+        <p className="font-medium">{title}</p>
+        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          {children}
+        </div>
+      </CardContent>
+    </Card>
   );
 }
