@@ -5,9 +5,20 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Users, BookOpen, FileText, BookMarked, ClipboardList, Rocket, BookA } from 'lucide-react';
 import Link from 'next/link';
+import { JoinAcademyForm } from '@/components/dashboard/join-academy-form';
 
 export default async function ManagerDashboard() {
   const user = await requireRole(['teacher', 'admin', 'boss']);
+
+  if (!user.academy_id) {
+    return (
+      <>
+        <Topbar user={user} title="매니저 대시보드" />
+        <JoinAcademyForm />
+      </>
+    );
+  }
+
   const supabase = await createClient();
 
   // Get students in same academy
