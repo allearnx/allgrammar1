@@ -13,6 +13,7 @@ export async function GET(request: NextRequest) {
 
   let targetStudentId: string;
   let services: ('naesin' | 'voca')[] = [];
+  let user: Awaited<ReturnType<typeof getUser>> = null;
 
   if (token) {
     // Token-based access (parent share)
@@ -36,7 +37,7 @@ export async function GET(request: NextRequest) {
     services = (svcData || []).map((s) => s.service as 'naesin' | 'voca');
   } else {
     // Authenticated access
-    const user = await getUser();
+    user = await getUser();
     if (!user) {
       return NextResponse.json({ error: '인증이 필요합니다.' }, { status: 401 });
     }
@@ -62,8 +63,13 @@ export async function GET(request: NextRequest) {
     services = (svcData || []).map((s) => s.service as 'naesin' | 'voca');
   }
 
-  // Use admin client for data queries (works for both token and auth paths)
-  const admin = createAdminClient();
+  // Choose client: student viewing own data → RLS, otherwise → admin bypass
+  let queryClient;
+  if (!token && user?.role === 'student') {
+    queryClient = await createClient();
+  } else {
+    queryClient = createAdminClient();
+  }
   const hasNaesin = services.includes('naesin');
   const hasVoca = services.includes('voca');
   const today = format(new Date(), 'yyyy-MM-dd');
@@ -95,37 +101,37 @@ export async function GET(request: NextRequest) {
     naesinVideoActivityRes,
   ] = await Promise.all([
     // Phase 1
-    admin.from('student_progress').select('video_completed, video_watched_seconds').eq('student_id', targetStudentId),
-    admin.from('student_memory_progress').select('is_mastered, quiz_correct_count, quiz_wrong_count').eq('student_id', targetStudentId),
-    admin.from('student_memory_progress').select('id').eq('student_id', targetStudentId).eq('is_mastered', false).lte('next_review_date', today),
-    admin.from('grammars').select('id', { count: 'exact', head: true }),
+    queryClient.from('student_progress').select('video_completed, video_watched_seconds').eq('student_id', targetStudentId),
+    queryClient.from('student_memory_progress').select('is_mastered, quiz_correct_count, quiz_wrong_count').eq('student_id', targetStudentId),
+    queryClient.from('student_memory_progress').select('id').eq('student_id', targetStudentId).eq('is_mastered', false).lte('next_review_date', today),
+    queryClient.from('grammars').select('id', { count: 'exact', head: true }),
 
     // Naesin
-    admin.from('naesin_student_progress').select('unit_id, vocab_completed, vocab_quiz_score, passage_completed, grammar_completed, problem_completed, last_review_unlocked').eq('student_id', targetStudentId),
-    admin.from('naesin_problem_attempts').select('score, total_questions, created_at').eq('student_id', targetStudentId).order('created_at', { ascending: false }).limit(50),
-    admin.from('naesin_wrong_answers').select('id, resolved, stage, unit_id').eq('student_id', targetStudentId),
-    admin.from('naesin_grammar_video_progress').select('completed, cumulative_watch_seconds').eq('student_id', targetStudentId),
-    admin.from('naesin_vocab_quiz_set_results').select('score, created_at').eq('student_id', targetStudentId).order('created_at', { ascending: false }).limit(50),
+    queryClient.from('naesin_student_progress').select('unit_id, vocab_completed, vocab_quiz_score, passage_completed, grammar_completed, problem_completed, last_review_unlocked').eq('student_id', targetStudentId),
+    queryClient.from('naesin_problem_attempts').select('score, total_questions, created_at').eq('student_id', targetStudentId).order('created_at', { ascending: false }).limit(50),
+    queryClient.from('naesin_wrong_answers').select('id, resolved, stage, unit_id').eq('student_id', targetStudentId),
+    queryClient.from('naesin_grammar_video_progress').select('completed, cumulative_watch_seconds').eq('student_id', targetStudentId),
+    queryClient.from('naesin_vocab_quiz_set_results').select('score, created_at').eq('student_id', targetStudentId).order('created_at', { ascending: false }).limit(50),
 
     // Voca
-    admin.from('voca_student_progress').select('day_id, flashcard_completed, quiz_score, spelling_score, matching_score, matching_completed, round2_flashcard_completed, round2_quiz_score, round2_matching_score, round2_matching_completed').eq('student_id', targetStudentId),
+    queryClient.from('voca_student_progress').select('day_id, flashcard_completed, quiz_score, spelling_score, matching_score, matching_completed, round2_flashcard_completed, round2_quiz_score, round2_matching_score, round2_matching_completed').eq('student_id', targetStudentId),
 
     // Trends
-    admin.from('voca_quiz_results').select('score, created_at, wrong_words, day_id').eq('student_id', targetStudentId).order('created_at', { ascending: false }).limit(50),
-    admin.from('naesin_problem_attempts').select('score, total_questions, created_at, unit_id').eq('student_id', targetStudentId).order('created_at', { ascending: false }).limit(50),
-    admin.from('naesin_vocab_quiz_set_results').select('score, created_at').eq('student_id', targetStudentId).order('created_at', { ascending: false }).limit(50),
+    queryClient.from('voca_quiz_results').select('score, created_at, wrong_words, day_id').eq('student_id', targetStudentId).order('created_at', { ascending: false }).limit(50),
+    queryClient.from('naesin_problem_attempts').select('score, total_questions, created_at, unit_id').eq('student_id', targetStudentId).order('created_at', { ascending: false }).limit(50),
+    queryClient.from('naesin_vocab_quiz_set_results').select('score, created_at').eq('student_id', targetStudentId).order('created_at', { ascending: false }).limit(50),
 
     // Wrong words
-    admin.from('voca_quiz_results').select('wrong_words').eq('student_id', targetStudentId),
-    admin.from('voca_matching_submissions').select('wrong_words').eq('student_id', targetStudentId),
+    queryClient.from('voca_quiz_results').select('wrong_words').eq('student_id', targetStudentId),
+    queryClient.from('voca_matching_submissions').select('wrong_words').eq('student_id', targetStudentId),
 
     // Activity log (last 90 days)
-    admin.from('voca_quiz_results').select('score, created_at, day_id').eq('student_id', targetStudentId).gte('created_at', ninetyDaysAgo).order('created_at', { ascending: false }).limit(200),
-    admin.from('voca_matching_submissions').select('score, created_at, day_id').eq('student_id', targetStudentId).gte('created_at', ninetyDaysAgo).order('created_at', { ascending: false }).limit(200),
-    admin.from('naesin_vocab_quiz_set_results').select('score, created_at, unit_id').eq('student_id', targetStudentId).gte('created_at', ninetyDaysAgo).order('created_at', { ascending: false }).limit(200),
-    admin.from('naesin_problem_attempts').select('score, total_questions, created_at, unit_id').eq('student_id', targetStudentId).gte('created_at', ninetyDaysAgo).order('created_at', { ascending: false }).limit(200),
-    admin.from('naesin_passage_attempts').select('created_at, unit_id').eq('student_id', targetStudentId).gte('created_at', ninetyDaysAgo).order('created_at', { ascending: false }).limit(200),
-    admin.from('naesin_grammar_video_progress').select('created_at, unit_id').eq('student_id', targetStudentId).eq('completed', true).gte('created_at', ninetyDaysAgo).order('created_at', { ascending: false }).limit(200),
+    queryClient.from('voca_quiz_results').select('score, created_at, day_id').eq('student_id', targetStudentId).gte('created_at', ninetyDaysAgo).order('created_at', { ascending: false }).limit(200),
+    queryClient.from('voca_matching_submissions').select('score, created_at, day_id').eq('student_id', targetStudentId).gte('created_at', ninetyDaysAgo).order('created_at', { ascending: false }).limit(200),
+    queryClient.from('naesin_vocab_quiz_set_results').select('score, created_at, unit_id').eq('student_id', targetStudentId).gte('created_at', ninetyDaysAgo).order('created_at', { ascending: false }).limit(200),
+    queryClient.from('naesin_problem_attempts').select('score, total_questions, created_at, unit_id').eq('student_id', targetStudentId).gte('created_at', ninetyDaysAgo).order('created_at', { ascending: false }).limit(200),
+    queryClient.from('naesin_passage_attempts').select('created_at, unit_id').eq('student_id', targetStudentId).gte('created_at', ninetyDaysAgo).order('created_at', { ascending: false }).limit(200),
+    queryClient.from('naesin_grammar_video_progress').select('created_at, unit_id').eq('student_id', targetStudentId).eq('completed', true).gte('created_at', ninetyDaysAgo).order('created_at', { ascending: false }).limit(200),
   ]);
 
   // ── Naesin stats ──
@@ -137,20 +143,20 @@ export async function GET(request: NextRequest) {
     const nVideos = naesinVideoRes.data || [];
     const nQuizSets = naesinQuizSetRes.data || [];
 
-    const settingsRes = await admin.from('naesin_student_settings').select('textbook_id').eq('student_id', targetStudentId);
+    const settingsRes = await queryClient.from('naesin_student_settings').select('textbook_id').eq('student_id', targetStudentId);
     const textbookIds = (settingsRes.data || []).map((s) => s.textbook_id);
 
     let totalUnitsCount = 0;
     if (textbookIds.length > 0) {
-      const { count } = await admin.from('naesin_units').select('id', { count: 'exact', head: true }).in('textbook_id', textbookIds);
+      const { count } = await queryClient.from('naesin_units').select('id', { count: 'exact', head: true }).in('textbook_id', textbookIds);
       totalUnitsCount = count || 0;
     }
 
     let totalGrammarVideos = 0;
     if (textbookIds.length > 0) {
-      const { data: unitIds } = await admin.from('naesin_units').select('id').in('textbook_id', textbookIds);
+      const { data: unitIds } = await queryClient.from('naesin_units').select('id').in('textbook_id', textbookIds);
       if (unitIds && unitIds.length > 0) {
-        const { count } = await admin.from('naesin_grammar_lessons').select('id', { count: 'exact', head: true }).in('unit_id', unitIds.map((u) => u.id)).eq('content_type', 'video');
+        const { count } = await queryClient.from('naesin_grammar_lessons').select('id', { count: 'exact', head: true }).in('unit_id', unitIds.map((u) => u.id)).eq('content_type', 'video');
         totalGrammarVideos = count || 0;
       }
     }
@@ -183,7 +189,7 @@ export async function GET(request: NextRequest) {
   let voca: ReportVocaStats | null = null;
   if (hasVoca) {
     const vProg = vocaProgressRes.data || [];
-    const { count: totalDaysCount } = await admin.from('voca_days').select('id', { count: 'exact', head: true });
+    const { count: totalDaysCount } = await queryClient.from('voca_days').select('id', { count: 'exact', head: true });
 
     voca = {
       daysInProgress: vProg.length,
@@ -224,7 +230,7 @@ export async function GET(request: NextRequest) {
   const vocaDayIds = [...new Set((vocaQuizHistoryRes.data || []).map((r) => r.day_id))];
   const vocaDayMap: Record<string, { day_number: number; title: string }> = {};
   if (vocaDayIds.length > 0) {
-    const { data: dayData } = await admin.from('voca_days').select('id, day_number, title').in('id', vocaDayIds);
+    const { data: dayData } = await queryClient.from('voca_days').select('id, day_number, title').in('id', vocaDayIds);
     if (dayData) {
       for (const d of dayData) vocaDayMap[d.id] = { day_number: d.day_number, title: d.title };
     }
@@ -240,7 +246,7 @@ export async function GET(request: NextRequest) {
   const naesinUnitIds = [...new Set((naesinProblemHistoryRes.data || []).map((r) => r.unit_id))];
   const naesinUnitMap: Record<string, { unit_number: number; title: string }> = {};
   if (naesinUnitIds.length > 0) {
-    const { data: unitData } = await admin.from('naesin_units').select('id, unit_number, title').in('id', naesinUnitIds);
+    const { data: unitData } = await queryClient.from('naesin_units').select('id, unit_number, title').in('id', naesinUnitIds);
     if (unitData) {
       for (const u of unitData) naesinUnitMap[u.id] = { unit_number: u.unit_number, title: u.title };
     }
@@ -307,7 +313,7 @@ export async function GET(request: NextRequest) {
   const wrongUnitIds = Object.keys(unitGroups);
   const wrongUnitMap: Record<string, string> = {};
   if (wrongUnitIds.length > 0) {
-    const { data: unitData } = await admin.from('naesin_units').select('id, title').in('id', wrongUnitIds);
+    const { data: unitData } = await queryClient.from('naesin_units').select('id, title').in('id', wrongUnitIds);
     if (unitData) {
       for (const u of unitData) wrongUnitMap[u.id] = u.title;
     }
@@ -327,7 +333,7 @@ export async function GET(request: NextRequest) {
     const dayIds = [...new Set(vProg.map((p) => p.day_id))];
     const dayInfoMap: Record<string, { day_number: number; title: string }> = {};
     if (dayIds.length > 0) {
-      const { data: dayData } = await admin.from('voca_days').select('id, day_number, title').in('id', dayIds);
+      const { data: dayData } = await queryClient.from('voca_days').select('id, day_number, title').in('id', dayIds);
       if (dayData) {
         for (const d of dayData) dayInfoMap[d.id] = { day_number: d.day_number, title: d.title };
       }
@@ -362,7 +368,7 @@ export async function GET(request: NextRequest) {
     const unitIds = [...new Set(nProg.map((p) => p.unit_id))];
     const unitInfoMap: Record<string, { unit_number: number; title: string }> = {};
     if (unitIds.length > 0) {
-      const { data: unitData } = await admin.from('naesin_units').select('id, unit_number, title').in('id', unitIds);
+      const { data: unitData } = await queryClient.from('naesin_units').select('id, unit_number, title').in('id', unitIds);
       if (unitData) {
         for (const u of unitData) unitInfoMap[u.id] = { unit_number: u.unit_number, title: u.title };
       }
@@ -405,7 +411,7 @@ export async function GET(request: NextRequest) {
   ])];
   const activityDayMap: Record<string, string> = {};
   if (activityVocaDayIds.length > 0) {
-    const { data: dayData } = await admin.from('voca_days').select('id, title').in('id', activityVocaDayIds);
+    const { data: dayData } = await queryClient.from('voca_days').select('id, title').in('id', activityVocaDayIds);
     if (dayData) {
       for (const d of dayData) activityDayMap[d.id] = d.title;
     }
@@ -420,7 +426,7 @@ export async function GET(request: NextRequest) {
   ])];
   const activityUnitMap: Record<string, string> = {};
   if (activityNaesinUnitIds.length > 0) {
-    const { data: unitData } = await admin.from('naesin_units').select('id, title').in('id', activityNaesinUnitIds);
+    const { data: unitData } = await queryClient.from('naesin_units').select('id, title').in('id', activityNaesinUnitIds);
     if (unitData) {
       for (const u of unitData) activityUnitMap[u.id] = u.title;
     }
