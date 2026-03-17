@@ -1,8 +1,9 @@
 'use client';
 
 import Link from 'next/link';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, BookOpen, BookMarked, XCircle, TrendingUp } from 'lucide-react';
 import { FlowStep } from './flow-step';
+import { BRAND } from '@/lib/utils/brand-colors';
 import type { VocaDay, VocaStudentProgress } from '@/types/voca';
 
 type StageStatus = 'done' | 'active' | 'locked';
@@ -11,24 +12,24 @@ interface VocaStage {
   key: string;
   label: string;
   status: StageStatus;
-  emoji: string;
+  icon: React.ReactNode;
   description: string;
   scoreRequirement: string;
   actualScore?: string;
 }
 
 const COLORS = {
-  stepActive: { border: '#7C3AED' },
-  stepDone: { border: '#4DD9C0' },
-  activeLabel: '#7C3AED',
-  ctaButton: '#7C3AED',
-  progressDone: '#56C9A0',
-  progressActive: '#7C3AED',
-  wrongBg: '#FFF0F3',
-  wrongBorder3: '#F43F5E',
-  wrongBorder2: '#FB7185',
-  wrongBorder1: '#FCA5A5',
-  wrongBadge: '#FFE4E6',
+  stepActive: { border: BRAND.step.activeBorder },
+  stepDone: { border: BRAND.step.doneBorder },
+  activeLabel: BRAND.violet,
+  ctaButton: BRAND.violet,
+  progressDone: BRAND.progress.done,
+  progressActive: BRAND.progress.active,
+  wrongBg: BRAND.wrong.bg,
+  wrongBorder3: BRAND.wrong.border3,
+  wrongBorder2: BRAND.wrong.border2,
+  wrongBorder1: BRAND.wrong.border1,
+  wrongBadge: BRAND.wrong.badge,
 };
 
 function isR1Complete(p: VocaStudentProgress | null): boolean {
@@ -70,7 +71,7 @@ export function VocaTabContent({
       {currentDay && (
         <div className="rounded-2xl border bg-white p-5 md:p-6 space-y-5">
           <h3 className="text-lg font-bold flex items-center gap-2">
-            📚 학습 흐름 — 1회독
+            <BookOpen className="h-4 w-4" /> 학습 흐름 — 1회독
             <span className="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-medium" style={{ borderColor: COLORS.stepDone.border }}>
               {currentDay.title}
             </span>
@@ -100,7 +101,7 @@ export function VocaTabContent({
       {currentDay && (
         <div className="rounded-2xl border bg-white p-5 md:p-6 space-y-5 transition-opacity" style={{ opacity: r1Done ? 1 : 0.55 }}>
           <h3 className="text-lg font-bold flex items-center gap-2">
-            📗 2회독
+            <BookMarked className="h-4 w-4" /> 2회독
             {!r1Done && <span className="text-xs font-normal text-gray-400 ml-1">1회독을 완료하면 해금됩니다!</span>}
           </h3>
 
@@ -128,7 +129,7 @@ export function VocaTabContent({
       <div className="grid gap-5 lg:grid-cols-2">
         {/* Wrong Words */}
         <div className="rounded-2xl p-5 md:p-6" style={{ background: COLORS.wrongBg }}>
-          <h3 className="text-sm font-bold mb-3">❌ 틀린 단어 복습</h3>
+          <h3 className="text-sm font-bold mb-3 flex items-center gap-1.5"><XCircle className="h-4 w-4 text-rose-500" /> 틀린 단어 복습</h3>
           {wrongWordEntries.length > 0 ? (
             <div className="space-y-2">
               {wrongWordEntries.map(([word, count]) => {
@@ -144,13 +145,13 @@ export function VocaTabContent({
               })}
             </div>
           ) : (
-            <p className="text-sm text-gray-500">틀린 단어가 없습니다! 대단해요! 🎉</p>
+            <p className="text-sm text-gray-500">틀린 단어가 없습니다! 대단해요!</p>
           )}
         </div>
 
         {/* Day Progress */}
         <div className="rounded-2xl border bg-white p-5 md:p-6">
-          <h3 className="text-sm font-bold mb-3">📈 Day별 진행률</h3>
+          <h3 className="text-sm font-bold mb-3 flex items-center gap-1.5"><TrendingUp className="h-4 w-4" /> Day별 진행률</h3>
           <div className="space-y-3">
             {currentBookDays.map((day) => {
               const p = vocaProgressMap.get(day.id) ?? null;

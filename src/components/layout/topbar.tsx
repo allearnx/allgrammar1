@@ -17,17 +17,17 @@ const roleLabels: Record<string, string> = {
 };
 
 const roleBorderColors: Record<string, string> = {
-  student: 'border-t-blue-500',
-  teacher: 'border-t-indigo-500',
-  admin: 'border-t-purple-500',
-  boss: 'border-t-slate-500',
+  student: 'border-t-cyan-500',
+  teacher: 'border-t-sky-500',
+  admin: 'border-t-indigo-500',
+  boss: 'border-t-violet-500',
 };
 
 const roleBadgeColors: Record<string, string> = {
-  student: 'bg-blue-100 text-blue-700 dark:bg-blue-950 dark:text-blue-300',
-  teacher: 'bg-indigo-100 text-indigo-700 dark:bg-indigo-950 dark:text-indigo-300',
-  admin: 'bg-purple-100 text-purple-700 dark:bg-purple-950 dark:text-purple-300',
-  boss: 'bg-slate-100 text-slate-700 dark:bg-slate-950 dark:text-slate-300',
+  student: 'bg-cyan-100 text-cyan-700 dark:bg-cyan-950 dark:text-cyan-300',
+  teacher: 'bg-sky-100 text-sky-700 dark:bg-sky-950 dark:text-sky-300',
+  admin: 'bg-indigo-100 text-indigo-700 dark:bg-indigo-950 dark:text-indigo-300',
+  boss: 'bg-violet-100 text-violet-700 dark:bg-violet-950 dark:text-violet-300',
 };
 
 export function Topbar({ user, title }: TopbarProps) {

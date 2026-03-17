@@ -34,7 +34,7 @@ export default async function BossDashboard() {
   return (
     <>
       <Topbar user={user} title="총관리자 대시보드" />
-      <div className="p-4 md:p-6 space-y-5">
+      <div className="p-4 md:p-6 pb-12 space-y-5">
         <DashboardBanner
           greeting={`안녕하세요, ${user.full_name}님!`}
           subtitle="전체 시스템 현황을 확인하세요."

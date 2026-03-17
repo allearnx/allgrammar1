@@ -5,14 +5,13 @@ export function NaesinNoTextbookScreen({ userName }: { userName: string }) {
   return (
     <div className="p-4 md:p-6 space-y-6">
       <div
-        className="relative overflow-hidden rounded-2xl p-6 md:p-8 text-white"
+        className="overflow-hidden rounded-2xl p-6 md:p-8 text-white"
         style={{ background: 'linear-gradient(135deg, #06B6D4 0%, #0891B2 100%)' }}
       >
-        <div className="absolute -top-10 -right-10 h-40 w-40 rounded-full" style={{ background: 'rgba(255,255,255,0.1)' }} />
-        <h2 className="relative text-xl md:text-2xl font-bold">
+        <h2 className="text-xl md:text-2xl font-bold">
           환영합니다, {userName}님!
         </h2>
-        <p className="relative mt-1 text-white/80">올인내신이 배정되었어요</p>
+        <p className="mt-1 text-white/80">올인내신이 배정되었어요</p>
       </div>
 
       <div

@@ -1,5 +1,6 @@
 import { createAdminClient } from '@/lib/supabase/admin';
 import { StudentReportPanel } from '@/components/dashboard/student-report-panel';
+import { Lock } from 'lucide-react';
 
 interface Props {
   params: Promise<{ token: string }>;
@@ -21,7 +22,7 @@ export default async function ParentReportPage({ params }: Props) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50">
         <div className="text-center space-y-4 px-4">
-          <div className="text-5xl">🔒</div>
+          <Lock className="h-12 w-12 text-gray-400 mx-auto" />
           <h1 className="text-xl font-bold text-gray-800">링크가 만료되었습니다</h1>
           <p className="text-gray-500 text-sm max-w-sm">
             이 리포트 링크는 더 이상 유효하지 않습니다.<br />
@@ -44,9 +45,7 @@ export default async function ParentReportPage({ params }: Props) {
     <div className="min-h-screen bg-gray-50">
       {/* ── Purple Hero Banner ── */}
       <header className="relative overflow-hidden bg-gradient-to-r from-violet-400 to-purple-500 px-4 py-5">
-        <div className="absolute -top-10 -right-10 h-40 w-40 rounded-full" style={{ background: 'rgba(255,255,255,0.1)' }} />
-        <div className="absolute -bottom-8 -left-8 h-32 w-32 rounded-full" style={{ background: 'rgba(255,255,255,0.1)' }} />
-        <div className="relative max-w-4xl mx-auto flex items-center gap-3">
+        <div className="max-w-4xl mx-auto flex items-center gap-3">
           <div className="h-9 w-9 rounded-lg bg-white/20 backdrop-blur flex items-center justify-center">
             <span className="text-white font-bold text-sm">OL</span>
           </div>

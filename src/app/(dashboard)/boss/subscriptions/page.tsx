@@ -68,9 +68,7 @@ export default function BossSubscriptionsPage() {
         className="relative overflow-hidden rounded-2xl p-6 text-white"
         style={{ background: 'linear-gradient(135deg, #A78BFA 0%, #7C3AED 50%, #6D28D9 100%)' }}
       >
-        <div className="absolute -top-10 -right-10 h-40 w-40 rounded-full" style={{ background: 'rgba(255,255,255,0.1)' }} />
-        <div className="absolute -bottom-8 -left-8 h-32 w-32 rounded-full" style={{ background: 'rgba(255,255,255,0.05)' }} />
-        <div className="relative flex items-center gap-3">
+        <div className="flex items-center gap-3">
           <div className="inline-flex rounded-xl p-2.5" style={{ background: 'rgba(255,255,255,0.15)' }}>
             <CreditCard className="h-6 w-6" />
           </div>

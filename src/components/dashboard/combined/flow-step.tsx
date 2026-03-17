@@ -1,17 +1,20 @@
 'use client';
 
 import Link from 'next/link';
+import { Lock } from 'lucide-react';
 
 type StageStatus = 'done' | 'active' | 'locked';
 
-interface Stage {
+export interface Stage {
   key: string;
   label: string;
   status: StageStatus;
-  emoji: string;
+  icon: React.ReactNode;
   description: string;
   scoreRequirement: string;
   actualScore?: string;
+  /** Only used by naesin stages for URL building */
+  stageKey?: string;
 }
 
 export function FlowStep({ stage, dayId, linkPrefix }: { stage: Stage; dayId: string; linkPrefix: string }) {
@@ -29,7 +32,7 @@ export function FlowStep({ stage, dayId, linkPrefix }: { stage: Stage; dayId: st
         border: isDone ? '1.5px solid #4DD9C0' : isActive ? '2px solid #7C3AED' : '1.5px solid #CCFAF4',
         borderRadius: isActive ? 16 : 14,
         padding: isActive ? '28px 10px 24px' : '24px 8px 20px',
-        boxShadow: isActive ? '0 8px 24px rgba(37,99,235,0.08)' : 'none',
+        boxShadow: isActive ? '0 8px 24px rgba(124,58,237,0.08)' : 'none',
         zIndex: isActive ? 1 : 0,
         wordBreak: 'keep-all' as const,
       }}
@@ -37,7 +40,7 @@ export function FlowStep({ stage, dayId, linkPrefix }: { stage: Stage; dayId: st
       {/* Active label */}
       {isActive && (
         <div className="absolute -top-3 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full px-2.5 py-0.5 text-xs font-bold tracking-wide text-white" style={{ background: '#7C3AED' }}>
-          ▶ 지금 여기!
+          지금 여기!
         </div>
       )}
 
@@ -46,17 +49,17 @@ export function FlowStep({ stage, dayId, linkPrefix }: { stage: Stage; dayId: st
         background: isDone ? green : isActive ? '#7C3AED' : '#E5E7EB',
         color: isDone || isActive ? 'white' : '#9CA3AF',
       }}>
-        {isDone ? '✓' : isActive ? '▶' : '🔒'}
+        {isDone ? '✓' : isActive ? '▶' : <Lock className="h-3 w-3" />}
       </div>
 
       {/* Icon wrap */}
       <div className="mx-auto mb-3 flex items-center justify-center rounded-xl" style={{
         width: isActive ? 58 : 48,
         height: isActive ? 58 : 48,
-        fontSize: isActive ? 30 : 24,
-        background: isDone ? 'rgba(37,99,235,0.08)' : 'white',
+        background: isDone ? 'rgba(124,58,237,0.08)' : 'white',
+        color: isDone ? green : isActive ? '#7C3AED' : '#9CA3AF',
       }}>
-        {stage.emoji}
+        {stage.icon}
       </div>
 
       {/* Name */}

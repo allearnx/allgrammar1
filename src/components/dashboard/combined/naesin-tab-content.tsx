@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { ArrowRight, Layers, CalendarDays } from 'lucide-react';
 import { FlowStep } from './flow-step';
+import { BRAND } from '@/lib/utils/brand-colors';
 import type { NaesinUnit, NaesinStageStatuses, NaesinExamAssignment } from '@/types/naesin';
 
 type StageStatus = 'done' | 'active' | 'locked';
@@ -12,17 +13,17 @@ interface NaesinStage {
   label: string;
   stageKey: string;
   status: StageStatus;
-  emoji: string;
+  icon: React.ReactNode;
   description: string;
   scoreRequirement: string;
   actualScore?: string;
 }
 
 const COLORS = {
-  stepDone: { border: '#4DD9C0' },
-  ctaButton: '#7C3AED',
-  progressDone: '#56C9A0',
-  progressActive: '#7C3AED',
+  stepDone: { border: BRAND.step.doneBorder },
+  ctaButton: BRAND.violet,
+  progressDone: BRAND.progress.done,
+  progressActive: BRAND.progress.active,
 };
 
 function isNaesinUnitComplete(statuses: NaesinStageStatuses): boolean {
@@ -65,7 +66,7 @@ export function NaesinTabContent({
       {currentUnit && currentNaesinStages.length > 0 && (
         <div className="rounded-2xl border bg-white p-5 md:p-6 space-y-5">
           <h3 className="text-lg font-bold flex items-center gap-2">
-            📖 내신 대비 — {currentUnit.title}
+            내신 대비 — {currentUnit.title}
             {(() => {
               const assignment = examAssignments.find((a) => a.unit_ids.includes(currentUnit.id));
               const dday = assignment ? getDDay(assignment.exam_date) : null;

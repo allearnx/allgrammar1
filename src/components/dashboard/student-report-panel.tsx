@@ -8,8 +8,9 @@ import { UnitScoreChart } from '@/components/charts/unit-score-chart';
 import { ActivityCalendar } from '@/components/charts/activity-calendar';
 import {
   Loader2, AlertCircle, TrendingUp, BarChart3, AlertTriangle,
-  CalendarDays, LayoutDashboard, BookOpen, Target, Sparkles,
+  CalendarDays, LayoutDashboard, BookOpen, Target, Sparkles, PartyPopper,
 } from 'lucide-react';
+import { STAT_COLORS } from '@/lib/utils/brand-colors';
 import type { StudentReportData } from '@/types/student-report';
 
 interface Props {
@@ -17,13 +18,6 @@ interface Props {
   services?: string[];
   token?: string;
 }
-
-const STAT_COLORS = {
-  violet: '#7C3AED',
-  cyan: '#06B6D4',
-  mint: '#56C9A0',
-  amber: '#F59E0B',
-};
 
 export function StudentReportPanel({ studentId, services: servicesProp, token }: Props) {
   const [data, setData] = useState<StudentReportData | null>(null);
@@ -82,9 +76,7 @@ export function StudentReportPanel({ studentId, services: servicesProp, token }:
     <div className="rounded-2xl overflow-hidden border bg-white">
       {/* ── Purple Banner Header ── */}
       <div className="relative overflow-hidden bg-gradient-to-r from-violet-400 to-purple-500 p-6 text-white">
-        <div className="absolute -top-10 -right-10 h-40 w-40 rounded-full" style={{ background: 'rgba(255,255,255,0.1)' }} />
-        <div className="absolute -bottom-8 -left-8 h-32 w-32 rounded-full" style={{ background: 'rgba(255,255,255,0.05)' }} />
-        <div className="relative flex items-center gap-3">
+        <div className="flex items-center gap-3">
           <BarChart3 className="h-6 w-6" />
           <h2 className="text-lg font-bold">상세 리포트</h2>
           <div className="flex gap-2 ml-auto">
@@ -203,7 +195,7 @@ export function StudentReportPanel({ studentId, services: servicesProp, token }:
 
             {data.current.weaknesses.length === 0 && data.current.recommendations.length === 0 && (
               <div className="rounded-xl border border-dashed p-8 text-center">
-                <p className="text-2xl mb-2">🎉</p>
+                <PartyPopper className="h-8 w-8 text-violet-400 mb-2" />
                 <p className="text-sm text-gray-500 font-medium">약점이 없습니다! 잘하고 있어요!</p>
               </div>
             )}
@@ -269,7 +261,7 @@ export function StudentReportPanel({ studentId, services: servicesProp, token }:
             )}
             {data.unitBreakdown.vocaDays.length === 0 && data.unitBreakdown.naesinUnits.length === 0 && (
               <div className="rounded-xl border border-dashed p-8 text-center">
-                <p className="text-2xl mb-2">📊</p>
+                <BarChart3 className="h-8 w-8 text-gray-300 mb-2" />
                 <p className="text-sm text-gray-400">아직 학습 데이터가 없어요</p>
               </div>
             )}
@@ -334,7 +326,7 @@ export function StudentReportPanel({ studentId, services: servicesProp, token }:
 
             {data.wrongAnalysis.vocaTopWrong.length === 0 && data.wrongAnalysis.naesinWrongByStage.length === 0 && (
               <div className="rounded-xl border border-dashed p-8 text-center">
-                <p className="text-2xl mb-2">🎉</p>
+                <PartyPopper className="h-8 w-8 text-violet-400 mb-2" />
                 <p className="text-sm text-gray-500 font-medium">오답 없음! 완벽해요!</p>
               </div>
             )}

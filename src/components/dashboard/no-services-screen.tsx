@@ -14,9 +14,6 @@ export function NoServicesScreen({ userName }: NoServicesScreenProps) {
         <div className="p-4 md:p-6 space-y-5">
           {/* Banner - matching project's premium header pattern */}
           <div className="relative overflow-hidden rounded-2xl p-6 md:p-8 text-white" style={{ background: 'linear-gradient(135deg, #A78BFA 0%, #7C3AED 50%, #6D28D9 100%)' }}>
-            <div className="absolute -top-10 -right-10 h-40 w-40 rounded-full" style={{ background: 'rgba(255,255,255,0.1)' }} />
-            <div className="absolute -bottom-8 -left-8 h-32 w-32 rounded-full" style={{ background: 'rgba(255,255,255,0.05)' }} />
-            <div className="absolute top-4 right-20 h-16 w-16 rounded-full" style={{ background: 'rgba(255,255,255,0.07)' }} />
             <h2 className="text-xl font-bold">안녕하세요, {userName}님!</h2>
             <p className="mt-1 text-sm" style={{ color: 'rgba(255,255,255,0.8)' }}>오늘도 열심히 공부해봐요</p>
             <div className="mt-3 inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold" style={{ background: 'rgba(255,255,255,0.15)', backdropFilter: 'blur(8px)' }}>

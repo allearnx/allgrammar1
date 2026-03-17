@@ -9,6 +9,7 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from 'recharts';
+import { BarChart3 } from 'lucide-react';
 
 interface Props {
   data: { date: string; score: number; label?: string }[];
@@ -21,7 +22,7 @@ export function ScoreTrendChart({ data, title, color = '#7C3AED', height = 280 }
   if (data.length === 0) {
     return (
       <div className="flex flex-col items-center justify-center rounded-xl border border-dashed p-8" style={{ height }}>
-        <p className="text-2xl mb-2">📊</p>
+        <BarChart3 className="h-8 w-8 text-gray-300 mb-2" />
         <p className="text-sm text-gray-400">아직 데이터가 없어요</p>
       </div>
     );

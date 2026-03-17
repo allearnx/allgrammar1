@@ -1,7 +1,11 @@
 'use client';
 
 import { useState, useMemo } from 'react';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import {
+  ChevronLeft, ChevronRight, PenLine, Keyboard, Link2,
+  BookOpen, FileText, Ruler, ClipboardList,
+} from 'lucide-react';
+import { DOT_COLORS } from '@/lib/utils/brand-colors';
 import type { ActivityRecord } from '@/types/student-report';
 
 interface Props {
@@ -10,21 +14,16 @@ interface Props {
 
 const WEEKDAYS = ['일', '월', '화', '수', '목', '금', '토'];
 
-const TYPE_ICONS: Record<string, string> = {
-  voca_quiz: '✏️',
-  voca_spelling: '⌨️',
-  voca_matching: '🔗',
-  naesin_vocab: '📖',
-  naesin_passage: '📝',
-  naesin_problem: '✏️',
-  naesin_video: '📐',
+const TYPE_ICONS: Record<string, React.ReactNode> = {
+  voca_quiz: <PenLine className="h-4 w-4" />,
+  voca_spelling: <Keyboard className="h-4 w-4" />,
+  voca_matching: <Link2 className="h-4 w-4" />,
+  naesin_vocab: <BookOpen className="h-4 w-4" />,
+  naesin_passage: <FileText className="h-4 w-4" />,
+  naesin_problem: <PenLine className="h-4 w-4" />,
+  naesin_video: <Ruler className="h-4 w-4" />,
 };
 
-const DOT_COLORS = {
-  voca: '#7C3AED',
-  naesin: '#06B6D4',
-  mixed: '#F59E0B',
-};
 
 const BORDER_COLORS: Record<string, string> = {
   voca_quiz: '#7C3AED',
@@ -178,7 +177,7 @@ export function ActivityCalendar({ activities }: Props) {
               return (
                 <div key={i} className="flex items-center justify-between rounded-lg border px-3 py-2" style={{ borderLeft: `3px solid ${borderColor}` }}>
                   <div className="flex items-center gap-2">
-                    <span className="rounded-lg bg-gray-50 p-1.5 text-base">{TYPE_ICONS[a.type] || '📋'}</span>
+                    <span className="rounded-lg bg-gray-50 p-1.5 flex items-center justify-center text-gray-600">{TYPE_ICONS[a.type] || <ClipboardList className="h-4 w-4" />}</span>
                     <span className="text-sm text-gray-700">{a.label}</span>
                   </div>
                   {a.score !== null ? (

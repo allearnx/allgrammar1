@@ -77,15 +77,7 @@ export function AdminOnboardingWizard({ inviteCode }: Props) {
           className="relative overflow-hidden px-6 pt-6 pb-5 text-white"
           style={{ background: 'linear-gradient(135deg, #A78BFA 0%, #7C3AED 50%, #6D28D9 100%)' }}
         >
-          <div
-            className="absolute -top-8 -right-8 h-32 w-32 rounded-full"
-            style={{ background: 'rgba(255,255,255,0.1)' }}
-          />
-          <div
-            className="absolute -bottom-6 -left-6 h-24 w-24 rounded-full"
-            style={{ background: 'rgba(255,255,255,0.05)' }}
-          />
-          <DialogHeader className="relative">
+          <DialogHeader>
             <DialogTitle className="flex items-center gap-2 text-white text-lg">
               <Rocket className="h-5 w-5" />
               {steps[step].title}

@@ -105,15 +105,7 @@ export function AcademySettingsClient({ academy, currentStudents }: Props) {
         className="relative overflow-hidden rounded-2xl p-6 text-white"
         style={{ background: 'linear-gradient(135deg, #A78BFA 0%, #7C3AED 50%, #6D28D9 100%)' }}
       >
-        <div
-          className="absolute -top-10 -right-10 h-40 w-40 rounded-full"
-          style={{ background: 'rgba(255,255,255,0.1)' }}
-        />
-        <div
-          className="absolute -bottom-8 -left-8 h-32 w-32 rounded-full"
-          style={{ background: 'rgba(255,255,255,0.05)' }}
-        />
-        <div className="relative">
+        <div>
           <span className="text-xs font-semibold uppercase tracking-wider text-white/70">초대 코드</span>
           <div className="mt-2 flex items-center gap-3">
             <code className="text-3xl font-mono font-bold tracking-[0.3em]">

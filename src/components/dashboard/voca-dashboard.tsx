@@ -4,11 +4,23 @@ import Link from 'next/link';
 import {
   CheckCircle,
   BookOpen,
+  BookMarked,
   ClipboardList,
   Sparkles,
   ArrowRight,
+  Eye,
+  PenLine,
+  Keyboard,
+  Link2,
+  LibraryBig,
+  BrainCircuit,
+  TrendingUp,
+  XCircle,
 } from 'lucide-react';
+import { BRAND } from '@/lib/utils/brand-colors';
 import { MiniScoreTrend } from '@/components/charts/mini-score-trend';
+import { FlowStep } from './combined/flow-step';
+import { StatCard } from '@/components/shared/stat-card';
 import type { VocaBook, VocaDay, VocaStudentProgress } from '@/types/voca';
 
 // ── Types ──
@@ -19,7 +31,7 @@ interface Stage {
   key: string;
   label: string;
   status: StageStatus;
-  emoji: string;
+  icon: React.ReactNode;
   description: string;
   scoreRequirement: string;
   actualScore?: string;
@@ -38,20 +50,20 @@ interface Props {
 // ── Colors ──
 
 const COLORS = {
-  header: '#A78BFA',
-  bannerBadgeBorder: '#4DD9C0',
-  statMint: '#56C9A0',
-  statPurple: '#7C3AED',
-  statAmber: '#F59E0B',
-  statSky: '#06B6D4',
-  green: '#22C55E',
-  progressDone: '#56C9A0',
-  progressActive: '#7C3AED',
-  wrongBg: '#FFF0F3',
-  wrongBorder3: '#F43F5E',
-  wrongBorder2: '#FB7185',
-  wrongBorder1: '#FCA5A5',
-  wrongBadge: '#FFE4E6',
+  header: BRAND.violetLight,
+  bannerBadgeBorder: BRAND.teal,
+  statMint: BRAND.mint,
+  statPurple: BRAND.violet,
+  statAmber: BRAND.amber,
+  statSky: BRAND.cyan,
+  green: BRAND.green,
+  progressDone: BRAND.progress.done,
+  progressActive: BRAND.progress.active,
+  wrongBg: BRAND.wrong.bg,
+  wrongBorder3: BRAND.wrong.border3,
+  wrongBorder2: BRAND.wrong.border2,
+  wrongBorder1: BRAND.wrong.border1,
+  wrongBadge: BRAND.wrong.badge,
 };
 
 // ── Helpers ──
@@ -72,22 +84,22 @@ function getR1Stages(p: VocaStudentProgress | null): Stage[] {
   return [
     {
       key: 'flashcard', label: '플래시카드', status: fcDone ? 'done' : 'active',
-      emoji: '👁️', description: '단어·뜻·예문을\n카드로 확인',
+      icon: <Eye className="h-6 w-6" />, description: '단어·뜻·예문을\n카드로 확인',
       scoreRequirement: '카드 확인', actualScore: fcDone ? '완료 ✓' : undefined,
     },
     {
       key: 'quiz', label: '퀴즈', status: quizStatus,
-      emoji: '✏️', description: '5지선다 객관식으로\n이해도를 확인해요',
+      icon: <PenLine className="h-6 w-6" />, description: '5지선다 객관식으로\n이해도를 확인해요',
       scoreRequirement: '80점 통과', actualScore: p?.quiz_score != null ? `${p.quiz_score}점` : undefined,
     },
     {
       key: 'spelling', label: '스펠링', status: spellStatus,
-      emoji: '⌨️', description: '뜻 보고 영단어\n직접 입력',
+      icon: <Keyboard className="h-6 w-6" />, description: '뜻 보고 영단어\n직접 입력',
       scoreRequirement: '80점 통과', actualScore: p?.spelling_score != null ? `${p.spelling_score}점` : undefined,
     },
     {
       key: 'matching', label: '매칭', status: matchStatus,
-      emoji: '🔗', description: '유의어·반의어\n연결하기',
+      icon: <Link2 className="h-6 w-6" />, description: '유의어·반의어\n연결하기',
       scoreRequirement: '90점 통과', actualScore: matchDone ? '완료' : p?.matching_score != null ? `${p.matching_score}점` : undefined,
     },
   ];
@@ -113,9 +125,9 @@ function getR2Stages(p: VocaStudentProgress | null): Stage[] {
 
   if (!r1Done) {
     return [
-      { key: 'r2_flashcard', label: '플래시카드', status: 'locked', emoji: '📚', description: '유의어·반의어\n숙어 학습', scoreRequirement: '—' },
-      { key: 'r2_quiz', label: '종합 문제', status: 'locked', emoji: '🤖', description: '9가지 유형\nAI 서술형 채점', scoreRequirement: '—' },
-      { key: 'r2_matching', label: '심화 매칭', status: 'locked', emoji: '🔗', description: '고난도\n연결하기', scoreRequirement: '—' },
+      { key: 'r2_flashcard', label: '플래시카드', status: 'locked', icon: <LibraryBig className="h-6 w-6" />, description: '유의어·반의어\n숙어 학습', scoreRequirement: '—' },
+      { key: 'r2_quiz', label: '종합 문제', status: 'locked', icon: <BrainCircuit className="h-6 w-6" />, description: '9가지 유형\nAI 서술형 채점', scoreRequirement: '—' },
+      { key: 'r2_matching', label: '심화 매칭', status: 'locked', icon: <Link2 className="h-6 w-6" />, description: '고난도\n연결하기', scoreRequirement: '—' },
     ];
   }
 
@@ -128,17 +140,17 @@ function getR2Stages(p: VocaStudentProgress | null): Stage[] {
   return [
     {
       key: 'r2_flashcard', label: '플래시카드', status: fc2Done ? 'done' : 'active',
-      emoji: '📚', description: '유의어·반의어\n숙어 학습',
+      icon: <LibraryBig className="h-6 w-6" />, description: '유의어·반의어\n숙어 학습',
       scoreRequirement: '카드 확인', actualScore: fc2Done ? '완료 ✓' : undefined,
     },
     {
       key: 'r2_quiz', label: '종합 문제', status: quiz2Status,
-      emoji: '🤖', description: '9가지 유형\nAI 서술형 채점',
+      icon: <BrainCircuit className="h-6 w-6" />, description: '9가지 유형\nAI 서술형 채점',
       scoreRequirement: '80점 통과', actualScore: p?.round2_quiz_score != null ? `${p.round2_quiz_score}점` : undefined,
     },
     {
       key: 'r2_matching', label: '심화 매칭', status: match2Status,
-      emoji: '🔗', description: '고난도\n연결하기',
+      icon: <Link2 className="h-6 w-6" />, description: '고난도\n연결하기',
       scoreRequirement: '90점 통과', actualScore: match2Done ? '완료' : p?.round2_matching_score != null ? `${p.round2_matching_score}점` : undefined,
     },
   ];
@@ -242,13 +254,10 @@ export function VocaDashboard({ userName, books, days, progressList, wordCount, 
         className="relative overflow-hidden rounded-2xl p-6 md:p-8 text-white"
         style={{ background: COLORS.header }}
       >
-        <div className="absolute -top-10 -right-10 h-40 w-40 rounded-full" style={{ background: 'rgba(255,255,255,0.1)' }} />
-        <div className="absolute -bottom-8 -left-8 h-32 w-32 rounded-full" style={{ background: 'rgba(255,255,255,0.05)' }} />
+        <h2 className="text-2xl md:text-3xl font-bold">안녕하세요, {userName}님!</h2>
+        <p className="mt-1 text-white/80">오늘도 단어를 정복해볼까요?</p>
 
-        <h2 className="relative text-2xl md:text-3xl font-bold">안녕하세요, {userName}님! 👋</h2>
-        <p className="relative mt-1 text-white/80">오늘도 단어를 정복해볼까요?</p>
-
-        <div className="relative mt-4 flex flex-wrap gap-3">
+        <div className="mt-4 flex flex-wrap gap-3">
           {[`학습 단어 ${wordCount}개`, `완료 단계 ${r1CompletedStages}`, currentDay ? `현재: ${currentDay.title}` : ''].filter(Boolean).map((text) => (
             <span key={text} className="inline-flex items-center rounded-full px-3 py-1 text-sm font-semibold text-gray-800" style={{ background: 'white' }}>
               {text}
@@ -282,7 +291,7 @@ export function VocaDashboard({ userName, books, days, progressList, wordCount, 
           {/* Header */}
           <div className="flex items-center justify-between mb-5">
             <div>
-              <div className="text-base font-bold">📖 1회독 — 기본 단어 암기</div>
+              <div className="text-base font-bold flex items-center gap-1.5"><BookOpen className="h-4 w-4" /> 1회독 — 기본 단어 암기</div>
               <div className="text-sm text-gray-400 mt-0.5">4단계를 모두 통과해야 1회독이 완료됩니다</div>
             </div>
             <span className="shrink-0 rounded-full px-3.5 py-1 text-xs font-bold" style={{ background: r1AllDone ? '#DCFCE7' : '#F5F3FF', color: r1AllDone ? COLORS.green : '#7C3AED' }}>
@@ -295,7 +304,7 @@ export function VocaDashboard({ userName, books, days, progressList, wordCount, 
             {r1Stages.map((stage, i) => (
               <div key={stage.key} className="contents">
                 {i > 0 && <div className="flex items-center justify-center self-center px-1 md:px-1.5 text-gray-300 text-sm shrink-0">→</div>}
-                <FlowStep stage={stage} dayId={currentDay.id} />
+                <FlowStep stage={stage} dayId={currentDay.id} linkPrefix="/student/voca/" />
               </div>
             ))}
           </div>
@@ -313,7 +322,7 @@ export function VocaDashboard({ userName, books, days, progressList, wordCount, 
           {/* Header */}
           <div className="flex items-center justify-between mb-5">
             <div>
-              <div className="text-base font-bold">📗 2회독 — 유의어 · 반의어 · 숙어</div>
+              <div className="text-base font-bold flex items-center gap-1.5"><BookMarked className="h-4 w-4" /> 2회독 — 유의어 · 반의어 · 숙어</div>
               <div className="text-sm text-gray-400 mt-0.5">
                 {r1Done ? '3단계를 모두 통과해야 2회독이 완료됩니다' : '1회독 완료 후 해금됩니다'}
               </div>
@@ -322,7 +331,7 @@ export function VocaDashboard({ userName, books, days, progressList, wordCount, 
               background: r2AllDone ? '#DCFCE7' : !r1Done ? '#F3F4F6' : '#F5F3FF',
               color: r2AllDone ? COLORS.green : !r1Done ? '#9CA3AF' : '#7C3AED',
             }}>
-              {r2AllDone ? '완료 ✓' : !r1Done ? '🔒 잠김' : '진행 중'}
+              {r2AllDone ? '완료 ✓' : !r1Done ? '잠김' : '진행 중'}
             </span>
           </div>
 
@@ -331,7 +340,7 @@ export function VocaDashboard({ userName, books, days, progressList, wordCount, 
             {r2Stages.map((stage, i) => (
               <div key={stage.key} className="contents">
                 {i > 0 && <div className="flex items-center justify-center self-center px-1 md:px-1.5 text-gray-300 text-sm shrink-0">→</div>}
-                <FlowStep stage={stage} dayId={currentDay.id} />
+                <FlowStep stage={stage} dayId={currentDay.id} linkPrefix="/student/voca/" />
               </div>
             ))}
           </div>
@@ -347,7 +356,7 @@ export function VocaDashboard({ userName, books, days, progressList, wordCount, 
       <div className="grid gap-5 lg:grid-cols-2">
         {/* Wrong Words */}
         <div className="rounded-2xl p-5 md:p-6" style={{ background: COLORS.wrongBg }}>
-          <h3 className="text-sm font-bold mb-3">❌ 틀린 단어 복습</h3>
+          <h3 className="text-sm font-bold mb-3 flex items-center gap-1.5"><XCircle className="h-4 w-4 text-rose-500" /> 틀린 단어 복습</h3>
           {wrongWordEntries.length > 0 ? (
             <div className="space-y-2">
               {wrongWordEntries.map(([word, count]) => {
@@ -363,13 +372,13 @@ export function VocaDashboard({ userName, books, days, progressList, wordCount, 
               })}
             </div>
           ) : (
-            <p className="text-sm text-gray-500">틀린 단어가 없습니다! 대단해요! 🎉</p>
+            <p className="text-sm text-gray-500">틀린 단어가 없습니다! 대단해요!</p>
           )}
         </div>
 
         {/* Day Progress */}
         <div className="rounded-2xl border bg-white p-5 md:p-6">
-          <h3 className="text-sm font-bold mb-3">📈 이번 단원 진행률</h3>
+          <h3 className="text-sm font-bold mb-3 flex items-center gap-1.5"><TrendingUp className="h-4 w-4" /> 이번 단원 진행률</h3>
           <div className="space-y-3">
             {sortedDays.map((day) => {
               const p = progressMap.get(day.id) ?? null;
@@ -387,7 +396,7 @@ export function VocaDashboard({ userName, books, days, progressList, wordCount, 
                   <div className="flex items-center justify-between text-sm mb-1.5">
                     <span className="font-medium truncate">{day.title}</span>
                     <span className="text-xs shrink-0 ml-2" style={{ color: isDone ? COLORS.green : isActive ? '#7C3AED' : '#9CA3AF', fontWeight: isDone || isActive ? 700 : 400 }}>
-                      {isDone ? '100%' : isActive ? '진행 중' : `잠김 🔒`}
+                      {isDone ? '100%' : isActive ? '진행 중' : '잠김'}
                     </span>
                   </div>
                   <div className="h-2 w-full rounded-full bg-gray-100 overflow-hidden">
@@ -410,98 +419,6 @@ export function VocaDashboard({ userName, books, days, progressList, wordCount, 
 }
 
 // ── Sub-components ──
-
-function StatCard({ label, value, sub, color, icon }: {
-  label: string; value: string | number; sub: string; color: string; icon: React.ReactNode;
-}) {
-  return (
-    <div className="rounded-xl border bg-white p-3.5" style={{ borderLeftWidth: 4, borderLeftColor: color }}>
-      <div className="flex items-center justify-between mb-1.5">
-        <span className="text-xs font-semibold uppercase tracking-wider text-gray-500">{label}</span>
-        <span style={{ color }}>{icon}</span>
-      </div>
-      <div className="text-2xl font-bold tracking-tight">{value}</div>
-      <p className="text-xs text-gray-400 mt-0.5">{sub}</p>
-    </div>
-  );
-}
-
-function FlowStep({ stage, dayId }: { stage: Stage; dayId: string }) {
-  const isDone = stage.status === 'done';
-  const isActive = stage.status === 'active';
-  const isLocked = stage.status === 'locked';
-
-  const card = (
-    <div
-      className="relative text-center transition-all flex flex-col items-center h-full"
-      style={{
-        background: isDone ? '#D9F7FC' : isActive ? 'white' : '#D9F7FC',
-        border: isDone ? '1.5px solid #4DD9C0' : isActive ? '2px solid #7C3AED' : '1.5px solid #CCFAF4',
-        borderRadius: isActive ? 16 : 14,
-        padding: isActive ? '28px 10px 24px' : '24px 8px 20px',
-        boxShadow: isActive ? '0 8px 24px rgba(37,99,235,0.08)' : 'none',
-        zIndex: isActive ? 1 : 0,
-        wordBreak: 'keep-all' as const,
-      }}
-    >
-      {/* Active label */}
-      {isActive && (
-        <div className="absolute -top-3 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full px-2.5 py-0.5 text-xs font-bold tracking-wide text-white" style={{ background: '#7C3AED' }}>
-          ▶ 지금 여기!
-        </div>
-      )}
-
-      {/* Status icon — top right circle */}
-      <div className="absolute -top-2 -right-2 flex h-[24px] w-[24px] items-center justify-center rounded-full border-2 border-white text-xs font-bold" style={{
-        background: isDone ? COLORS.green : isActive ? '#7C3AED' : '#E5E7EB',
-        color: isDone || isActive ? 'white' : '#9CA3AF',
-      }}>
-        {isDone ? '✓' : isActive ? '▶' : '🔒'}
-      </div>
-
-      {/* Icon wrap */}
-      <div className="mx-auto mb-3 flex items-center justify-center rounded-xl" style={{
-        width: isActive ? 58 : 48,
-        height: isActive ? 58 : 48,
-        fontSize: isActive ? 30 : 24,
-        background: isDone ? 'rgba(37,99,235,0.08)' : 'white',
-      }}>
-        {stage.emoji}
-      </div>
-
-      {/* Name */}
-      <div className="font-bold leading-tight" style={{
-        fontSize: isActive ? 17 : 14,
-        color: isDone ? COLORS.green : isActive ? '#7C3AED' : '#4B5563',
-      }}>
-        {stage.label}
-      </div>
-
-      {/* Description */}
-      <div className="mt-2 leading-snug whitespace-pre-line" style={{
-        fontSize: isActive ? 14 : 13,
-        color: isActive ? '#6B7280' : '#9CA3AF',
-      }}>
-        {stage.description}
-      </div>
-
-      {/* Score badge */}
-      <div className="mt-3 inline-block rounded-full font-bold" style={{
-        fontSize: isActive ? 14 : 13,
-        padding: isActive ? '4px 12px' : '3px 10px',
-        background: isDone ? COLORS.green : isActive ? '#7C3AED' : '#E5E7EB',
-        color: isDone || isActive ? 'white' : '#9CA3AF',
-      }}>
-        {isDone ? (stage.actualScore || '완료') : stage.scoreRequirement}
-      </div>
-    </div>
-  );
-
-  if (!isLocked && dayId) {
-    return <Link href={`/student/voca/${dayId}`} className="block" style={{ flex: isActive ? 1.35 : 1 }}>{card}</Link>;
-  }
-  return <div style={{ flex: isActive ? 1.35 : 1 }}>{card}</div>;
-}
 
 function FlowCta({ stage, dayId }: { stage: Stage; dayId: string }) {
   const cta = getCtaText(stage);

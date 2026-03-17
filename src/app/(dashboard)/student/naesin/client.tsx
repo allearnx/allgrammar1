@@ -103,9 +103,7 @@ export function NaesinHome({
           className="relative overflow-hidden rounded-2xl px-5 py-6"
           style={{ background: 'linear-gradient(135deg, #0891B2 0%, #06B6D4 50%, #22D3EE 100%)' }}
         >
-          <div className="absolute -top-8 -right-8 h-32 w-32 rounded-full" style={{ background: 'rgba(255,255,255,0.1)' }} />
-          <div className="absolute -bottom-6 -left-6 h-24 w-24 rounded-full" style={{ background: 'rgba(255,255,255,0.06)' }} />
-          <div className="relative">
+          <div>
             <div className="flex items-center gap-2 mb-1">
               <Sparkles className="h-5 w-5 text-white/90" />
               <h2 className="text-lg font-bold text-white">교과서를 선택하세요</h2>

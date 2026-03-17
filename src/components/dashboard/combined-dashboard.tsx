@@ -5,15 +5,26 @@ import Link from 'next/link';
 import {
   CheckCircle,
   BookOpen,
+  BookMarked,
   ClipboardList,
   Sparkles,
   ArrowRight,
   CalendarDays,
   Layers,
+  Eye,
+  PenLine,
+  Keyboard,
+  Link2,
+  LibraryBig,
+  BrainCircuit,
+  FileText,
+  Ruler,
+  RefreshCw,
 } from 'lucide-react';
+import { BRAND } from '@/lib/utils/brand-colors';
 import { calculateStageStatuses } from '@/lib/naesin/stage-unlock';
 import { MiniScoreTrend } from '@/components/charts/mini-score-trend';
-import { StatCard } from './combined/stat-card';
+import { StatCard } from '@/components/shared/stat-card';
 import { VocaTabContent } from './combined/voca-tab-content';
 import { NaesinTabContent } from './combined/naesin-tab-content';
 import type { VocaDay, VocaStudentProgress } from '@/types/voca';
@@ -34,7 +45,7 @@ interface VocaStage {
   key: string;
   label: string;
   status: StageStatus;
-  emoji: string;
+  icon: React.ReactNode;
   description: string;
   scoreRequirement: string;
   actualScore?: string;
@@ -45,7 +56,7 @@ interface NaesinStage {
   label: string;
   stageKey: string;
   status: StageStatus;
-  emoji: string;
+  icon: React.ReactNode;
   description: string;
   scoreRequirement: string;
   actualScore?: string;
@@ -71,12 +82,12 @@ interface Props {
 // ── Colors ──
 
 const COLORS = {
-  header: '#A78BFA',
-  bannerBadgeBorder: '#4DD9C0',
-  statMint: '#56C9A0',
-  statPurple: '#7C3AED',
-  statAmber: '#F59E0B',
-  statSky: '#06B6D4',
+  header: BRAND.violetLight,
+  bannerBadgeBorder: BRAND.teal,
+  statMint: BRAND.mint,
+  statPurple: BRAND.violet,
+  statAmber: BRAND.amber,
+  statSky: BRAND.cyan,
 };
 
 // ── Voca Helpers ──
@@ -93,10 +104,10 @@ function getR1Stages(p: VocaStudentProgress | null): VocaStage[] {
   const matchStatus: StageStatus = matchDone ? 'done' : spellPass ? 'active' : 'locked';
 
   return [
-    { key: 'flashcard', label: '플래시카드', status: fcDone ? 'done' : 'active', emoji: '👁️', description: '단어·뜻·예문을\n카드로 확인', scoreRequirement: '카드 확인', actualScore: fcDone ? '완료 ✓' : undefined },
-    { key: 'quiz', label: '퀴즈', status: quizStatus, emoji: '✏️', description: '5지선다 객관식으로\n이해도를 확인해요', scoreRequirement: '80점 통과', actualScore: p?.quiz_score != null ? `${p.quiz_score}점` : undefined },
-    { key: 'spelling', label: '스펠링', status: spellStatus, emoji: '⌨️', description: '뜻 보고 영단어\n직접 입력', scoreRequirement: '80점 통과', actualScore: p?.spelling_score != null ? `${p.spelling_score}점` : undefined },
-    { key: 'matching', label: '매칭', status: matchStatus, emoji: '🔗', description: '유의어·반의어\n연결하기', scoreRequirement: '90점 통과', actualScore: matchDone ? '완료' : p?.matching_score != null ? `${p.matching_score}점` : undefined },
+    { key: 'flashcard', label: '플래시카드', status: fcDone ? 'done' : 'active', icon: <Eye className="h-6 w-6" />, description: '단어·뜻·예문을\n카드로 확인', scoreRequirement: '카드 확인', actualScore: fcDone ? '완료 ✓' : undefined },
+    { key: 'quiz', label: '퀴즈', status: quizStatus, icon: <PenLine className="h-6 w-6" />, description: '5지선다 객관식으로\n이해도를 확인해요', scoreRequirement: '80점 통과', actualScore: p?.quiz_score != null ? `${p.quiz_score}점` : undefined },
+    { key: 'spelling', label: '스펠링', status: spellStatus, icon: <Keyboard className="h-6 w-6" />, description: '뜻 보고 영단어\n직접 입력', scoreRequirement: '80점 통과', actualScore: p?.spelling_score != null ? `${p.spelling_score}점` : undefined },
+    { key: 'matching', label: '매칭', status: matchStatus, icon: <Link2 className="h-6 w-6" />, description: '유의어·반의어\n연결하기', scoreRequirement: '90점 통과', actualScore: matchDone ? '완료' : p?.matching_score != null ? `${p.matching_score}점` : undefined },
   ];
 }
 
@@ -118,9 +129,9 @@ function getR2Stages(p: VocaStudentProgress | null): VocaStage[] {
 
   if (!r1Done) {
     return [
-      { key: 'r2_flashcard', label: '플래시카드', status: 'locked', emoji: '📚', description: '유의어·반의어\n숙어 학습', scoreRequirement: '—' },
-      { key: 'r2_quiz', label: '종합 문제', status: 'locked', emoji: '🤖', description: '9가지 유형\nAI 서술형 채점', scoreRequirement: '—' },
-      { key: 'r2_matching', label: '심화 매칭', status: 'locked', emoji: '🔗', description: '고난도\n연결하기', scoreRequirement: '—' },
+      { key: 'r2_flashcard', label: '플래시카드', status: 'locked', icon: <LibraryBig className="h-6 w-6" />, description: '유의어·반의어\n숙어 학습', scoreRequirement: '—' },
+      { key: 'r2_quiz', label: '종합 문제', status: 'locked', icon: <BrainCircuit className="h-6 w-6" />, description: '9가지 유형\nAI 서술형 채점', scoreRequirement: '—' },
+      { key: 'r2_matching', label: '심화 매칭', status: 'locked', icon: <Link2 className="h-6 w-6" />, description: '고난도\n연결하기', scoreRequirement: '—' },
     ];
   }
 
@@ -129,9 +140,9 @@ function getR2Stages(p: VocaStudentProgress | null): VocaStage[] {
   const match2Status: StageStatus = match2Done ? 'done' : quiz2Pass ? 'active' : 'locked';
 
   return [
-    { key: 'r2_flashcard', label: '플래시카드', status: fc2Done ? 'done' : 'active', emoji: '📚', description: '유의어·반의어\n숙어 학습', scoreRequirement: '카드 확인', actualScore: fc2Done ? '완료 ✓' : undefined },
-    { key: 'r2_quiz', label: '종합 문제', status: quiz2Status, emoji: '🤖', description: '9가지 유형\nAI 서술형 채점', scoreRequirement: '80점 통과', actualScore: p?.round2_quiz_score != null ? `${p.round2_quiz_score}점` : undefined },
-    { key: 'r2_matching', label: '심화 매칭', status: match2Status, emoji: '🔗', description: '고난도\n연결하기', scoreRequirement: '90점 통과', actualScore: match2Done ? '완료' : p?.round2_matching_score != null ? `${p.round2_matching_score}점` : undefined },
+    { key: 'r2_flashcard', label: '플래시카드', status: fc2Done ? 'done' : 'active', icon: <LibraryBig className="h-6 w-6" />, description: '유의어·반의어\n숙어 학습', scoreRequirement: '카드 확인', actualScore: fc2Done ? '완료 ✓' : undefined },
+    { key: 'r2_quiz', label: '종합 문제', status: quiz2Status, icon: <BrainCircuit className="h-6 w-6" />, description: '9가지 유형\nAI 서술형 채점', scoreRequirement: '80점 통과', actualScore: p?.round2_quiz_score != null ? `${p.round2_quiz_score}점` : undefined },
+    { key: 'r2_matching', label: '심화 매칭', status: match2Status, icon: <Link2 className="h-6 w-6" />, description: '고난도\n연결하기', scoreRequirement: '90점 통과', actualScore: match2Done ? '완료' : p?.round2_matching_score != null ? `${p.round2_matching_score}점` : undefined },
   ];
 }
 
@@ -146,12 +157,12 @@ function isR2Complete(p: VocaStudentProgress | null): boolean {
 
 // ── Naesin Helpers ──
 
-const NAESIN_STAGE_META: Record<string, { emoji: string; description: string; scoreRequirement: string }> = {
-  vocab: { emoji: '📖', description: '교과서 단어를\n암기합니다', scoreRequirement: '퀴즈+스펠링 통과' },
-  passage: { emoji: '📝', description: '교과서 지문을\n암기합니다', scoreRequirement: '지문 암기 완료' },
-  grammar: { emoji: '📐', description: '핵심 문법을\n학습합니다', scoreRequirement: '영상 시청 완료' },
-  problem: { emoji: '✏️', description: '문제를 풀며\n실력 확인', scoreRequirement: '문제풀이 완료' },
-  lastReview: { emoji: '🔄', description: '시험 직전\n최종 점검', scoreRequirement: '최종 점검 완료' },
+const NAESIN_STAGE_META: Record<string, { icon: React.ReactNode; description: string; scoreRequirement: string }> = {
+  vocab: { icon: <BookOpen className="h-6 w-6" />, description: '교과서 단어를\n암기합니다', scoreRequirement: '퀴즈+스펠링 통과' },
+  passage: { icon: <FileText className="h-6 w-6" />, description: '교과서 지문을\n암기합니다', scoreRequirement: '지문 암기 완료' },
+  grammar: { icon: <Ruler className="h-6 w-6" />, description: '핵심 문법을\n학습합니다', scoreRequirement: '영상 시청 완료' },
+  problem: { icon: <PenLine className="h-6 w-6" />, description: '문제를 풀며\n실력 확인', scoreRequirement: '문제풀이 완료' },
+  lastReview: { icon: <RefreshCw className="h-6 w-6" />, description: '시험 직전\n최종 점검', scoreRequirement: '최종 점검 완료' },
 };
 
 const NAESIN_STAGE_LABELS: Record<string, string> = {
@@ -190,7 +201,7 @@ function getNaesinStages(statuses: NaesinStageStatuses, progress: NaesinStudentP
       label: NAESIN_STAGE_LABELS[key],
       stageKey: key === 'lastReview' ? 'last-review' : key,
       status: mapped,
-      emoji: meta.emoji,
+      icon: meta.icon,
       description: meta.description,
       scoreRequirement: meta.scoreRequirement,
       actualScore,
@@ -353,13 +364,10 @@ export function CombinedDashboard({
         className="relative overflow-hidden rounded-2xl p-6 md:p-8 text-white"
         style={{ background: COLORS.header }}
       >
-        <div className="absolute -top-10 -right-10 h-40 w-40 rounded-full" style={{ background: 'rgba(255,255,255,0.1)' }} />
-        <div className="absolute -bottom-8 -left-8 h-32 w-32 rounded-full" style={{ background: 'rgba(255,255,255,0.05)' }} />
+        <h2 className="text-2xl md:text-3xl font-bold">안녕하세요, {userName}님!</h2>
+        <p className="mt-1 text-white/80">오늘도 영어 학습을 시작해볼까요?</p>
 
-        <h2 className="relative text-2xl md:text-3xl font-bold">안녕하세요, {userName}님! 👋</h2>
-        <p className="relative mt-1 text-white/80">오늘도 영어 학습을 시작해볼까요?</p>
-
-        <div className="relative mt-4 flex flex-wrap gap-3">
+        <div className="mt-4 flex flex-wrap gap-3">
           <span className="inline-flex items-center rounded-full px-3 py-1 text-sm font-medium text-white" style={{ border: `1.5px solid ${COLORS.bannerBadgeBorder}`, background: 'rgba(255,255,255,0.15)' }}>
             올킬보카
           </span>
@@ -395,7 +403,7 @@ export function CombinedDashboard({
               : 'text-gray-500 hover:text-gray-700'
           }`}
         >
-          📚 올킬보카
+          <BookOpen className="mr-1.5 inline h-4 w-4" />올킬보카
         </button>
         <button
           type="button"
@@ -406,7 +414,7 @@ export function CombinedDashboard({
               : 'text-gray-500 hover:text-gray-700'
           }`}
         >
-          📖 내신대비
+          <BookMarked className="mr-1.5 inline h-4 w-4" />내신대비
         </button>
       </div>
 
