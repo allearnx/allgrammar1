@@ -11,6 +11,7 @@ import { toast } from 'sonner';
 import { getNavGroups } from './sidebar-nav-config';
 import { NavLinks } from './sidebar-nav-links';
 import { ChangePasswordDialog } from './change-password-dialog';
+import { DeleteAccountDialog } from './delete-account-dialog';
 import type { AuthUser } from '@/types/auth';
 import type { NaesinSidebarExam } from './sidebar-nav-config';
 
@@ -63,6 +64,7 @@ export function Sidebar({ user, services, naesinTree }: SidebarProps) {
           <p className="text-xs truncate text-slate-400">{user.email}</p>
         </div>
         <ChangePasswordDialog />
+        {user.role === 'student' && <DeleteAccountDialog />}
         <Button
           variant="ghost"
           className="w-full justify-start gap-3 text-slate-400 hover:text-slate-900 hover:bg-slate-100"
