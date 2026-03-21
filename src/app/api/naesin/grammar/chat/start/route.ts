@@ -8,20 +8,13 @@ export const POST = createApiHandler(
   async ({ user, body, supabase }) => {
     const { lessonId } = body;
 
-    // Check for existing incomplete session
-    const { data: existing } = await supabase
+    // Close any existing incomplete sessions for this lesson
+    await supabase
       .from('naesin_grammar_chat_sessions')
-      .select('*')
+      .update({ is_complete: true, updated_at: new Date().toISOString() })
       .eq('student_id', user.id)
       .eq('lesson_id', lessonId)
-      .eq('is_complete', false)
-      .order('created_at', { ascending: false })
-      .limit(1)
-      .maybeSingle();
-
-    if (existing) {
-      return NextResponse.json(existing);
-    }
+      .eq('is_complete', false);
 
     // Get questions for this lesson
     const { data: questions } = await supabase

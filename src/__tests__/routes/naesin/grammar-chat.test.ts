@@ -32,6 +32,25 @@ describe('naesin/grammar/chat/start', () => {
     vi.resetModules();
   });
 
+  function buildChain(overrides: Record<string, ReturnType<typeof vi.fn>> = {}) {
+    const chain: Record<string, ReturnType<typeof vi.fn>> = {
+      select: vi.fn().mockReturnThis(),
+      insert: vi.fn().mockReturnThis(),
+      update: vi.fn().mockReturnThis(),
+      eq: vi.fn().mockReturnThis(),
+      order: vi.fn().mockReturnThis(),
+      limit: vi.fn().mockReturnThis(),
+      maybeSingle: vi.fn().mockResolvedValue({ data: null, error: null }),
+      single: vi.fn().mockResolvedValue({ data: null, error: null }),
+      then: vi.fn((resolve: (v: unknown) => void) => resolve({ data: [], error: null })),
+      ...overrides,
+    };
+    for (const key of Object.keys(chain)) {
+      if (!['maybeSingle', 'single', 'then'].includes(key)) chain[key].mockReturnValue(chain);
+    }
+    return chain;
+  }
+
   it('새 세션 생성 (질문 존재)', async () => {
     const questions = [
       { id: 'q-1', question_text: 'What is present tense?', sort_order: 0 },
@@ -44,19 +63,10 @@ describe('naesin/grammar/chat/start', () => {
       turn_count: 0,
     };
 
-    const chain: Record<string, ReturnType<typeof vi.fn>> = {
-      select: vi.fn().mockReturnThis(),
-      insert: vi.fn().mockReturnThis(),
-      eq: vi.fn().mockReturnThis(),
-      order: vi.fn().mockReturnThis(),
-      limit: vi.fn().mockReturnThis(),
-      maybeSingle: vi.fn().mockResolvedValue({ data: null, error: null }),
+    const chain = buildChain({
       single: vi.fn().mockResolvedValue({ data: newSession, error: null }),
       then: vi.fn((resolve: (v: unknown) => void) => resolve({ data: questions, error: null })),
-    };
-    for (const key of Object.keys(chain)) {
-      if (!['maybeSingle', 'single', 'then'].includes(key)) chain[key].mockReturnValue(chain);
-    }
+    });
 
     const from = vi.fn().mockReturnValue(chain);
     mockGetUser.mockResolvedValue(testStudent);
@@ -69,24 +79,22 @@ describe('naesin/grammar/chat/start', () => {
     expect(body.id).toBe('session-1');
   });
 
-  it('기존 미완료 세션 반환', async () => {
-    const existingSession = {
-      id: 'session-existing',
+  it('기존 미완료 세션 닫고 새 세션 생성', async () => {
+    const questions = [
+      { id: 'q-1', question_text: 'What is present tense?', sort_order: 0 },
+    ];
+    const newSession = {
+      id: 'session-new',
       student_id: 'student-1',
       lesson_id: 'lesson-1',
-      is_complete: false,
+      messages: [{ role: 'ai', content: 'What is present tense?', questionId: 'q-1' }],
+      turn_count: 0,
     };
 
-    const chain: Record<string, ReturnType<typeof vi.fn>> = {
-      select: vi.fn().mockReturnThis(),
-      eq: vi.fn().mockReturnThis(),
-      order: vi.fn().mockReturnThis(),
-      limit: vi.fn().mockReturnThis(),
-      maybeSingle: vi.fn().mockResolvedValue({ data: existingSession, error: null }),
-    };
-    for (const key of Object.keys(chain)) {
-      if (key !== 'maybeSingle') chain[key].mockReturnValue(chain);
-    }
+    const chain = buildChain({
+      single: vi.fn().mockResolvedValue({ data: newSession, error: null }),
+      then: vi.fn((resolve: (v: unknown) => void) => resolve({ data: questions, error: null })),
+    });
 
     const from = vi.fn().mockReturnValue(chain);
     mockGetUser.mockResolvedValue(testStudent);
@@ -96,21 +104,16 @@ describe('naesin/grammar/chat/start', () => {
     const res = await POST(makeRequest({ lessonId: 'lesson-1' }));
     expect(res.status).toBe(200);
     const body = await res.json();
-    expect(body.id).toBe('session-existing');
+    // Should create a new session, not return existing
+    expect(body.id).toBe('session-new');
+    // Should have called update to close existing sessions
+    expect(chain.update).toHaveBeenCalled();
   });
 
   it('질문 없는 레슨 → 404', async () => {
-    const chain: Record<string, ReturnType<typeof vi.fn>> = {
-      select: vi.fn().mockReturnThis(),
-      eq: vi.fn().mockReturnThis(),
-      order: vi.fn().mockReturnThis(),
-      limit: vi.fn().mockReturnThis(),
-      maybeSingle: vi.fn().mockResolvedValue({ data: null, error: null }),
+    const chain = buildChain({
       then: vi.fn((resolve: (v: unknown) => void) => resolve({ data: [], error: null })),
-    };
-    for (const key of Object.keys(chain)) {
-      if (!['maybeSingle', 'then'].includes(key)) chain[key].mockReturnValue(chain);
-    }
+    });
 
     const from = vi.fn().mockReturnValue(chain);
     mockGetUser.mockResolvedValue(testStudent);

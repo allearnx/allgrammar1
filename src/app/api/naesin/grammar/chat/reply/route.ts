@@ -140,8 +140,8 @@ ${isLastTurn ? '- 마지막 턴이므로 전체 학습을 정리해주세요' : 
         const completeMsg: NaesinGrammarChatMessage = {
           role: 'ai',
           content: isLastTurn
-            ? '수고했어요! 오늘 문법 대화를 마무리합니다. 다시 도전하고 싶으면 "다시 시작" 버튼을 눌러주세요!'
-            : '준비된 질문을 모두 완료했어요! 잘 했습니다. 다시 도전하고 싶으면 "다시 시작" 버튼을 눌러주세요!',
+            ? '수고했어요! 문법 대화를 마무리합니다. 이제 문제 풀기 단계로 넘어가서 배운 내용을 확인해 보세요!'
+            : '준비된 질문을 모두 완료했어요! 잘 했습니다. 이제 문제 풀기 단계에서 실력을 확인해 보세요!',
           timestamp: new Date().toISOString(),
         };
         updatedMessages.push(completeMsg);

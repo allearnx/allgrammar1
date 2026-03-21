@@ -118,14 +118,20 @@ export function SocraticChatbot({ lessonId, lessonTitle }: SocraticChatbotProps)
     <Card className="mt-4">
       <CardHeader
         className="py-3 px-4 cursor-pointer"
-        onClick={() => setExpanded(!expanded)}
+        onClick={() => {
+          const next = !expanded;
+          if (!next) {
+            setSession(null);
+            setInputValue('');
+          }
+          setExpanded(next);
+        }}
       >
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
             {expanded ? <ChevronDown className="h-4 w-4" /> : <ChevronRight className="h-4 w-4" />}
             <Bot className="h-4 w-4 text-blue-500" />
             <CardTitle className="text-sm font-medium">AI 문법 튜터</CardTitle>
-            <Badge className="bg-rose-500 text-white text-[10px] px-1.5 py-0">필수</Badge>
           </div>
           {session && (
             <Badge variant="secondary" className="text-xs">
