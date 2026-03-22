@@ -20,7 +20,7 @@ export interface UnitPassageListProps {
   onSaveEdit: () => void;
   onTitleChange: (title: string) => void;
   onUpdateSentence: (idx: number, field: 'original' | 'korean', value: string) => void;
-  onAddSentence: () => void;
+  onAddSentence: (afterIdx?: number) => void;
   onRemoveSentence: (idx: number) => void;
   onAddAcceptedAnswer: (sentenceIdx: number) => void;
   onUpdateAcceptedAnswer: (sentenceIdx: number, answerIdx: number, value: string) => void;
@@ -93,59 +93,73 @@ export function UnitPassageList({
               <div className="space-y-2">
                 <p className="text-xs text-muted-foreground font-medium">문장별 한/영 수정</p>
                 {editForm.sentences.map((s, idx) => (
-                  <div key={idx} className="grid grid-cols-[auto_1fr_auto] gap-2 items-start">
-                    <span className="text-xs text-muted-foreground pt-2 w-5 text-right">{idx + 1}</span>
-                    <div className="space-y-1">
-                      <Textarea
-                        className="text-sm min-h-[2.5rem] resize-none"
-                        rows={1}
-                        value={s.korean}
-                        onChange={(e) => onUpdateSentence(idx, 'korean', e.target.value)}
-                        placeholder="한국어"
-                      />
-                      <Textarea
-                        className="text-sm min-h-[2.5rem] resize-none"
-                        rows={1}
-                        value={s.original}
-                        onChange={(e) => onUpdateSentence(idx, 'original', e.target.value)}
-                        placeholder="English (기본 정답)"
-                      />
-                      {s.acceptedAnswers.map((ans, aIdx) => (
-                        <div key={aIdx} className="flex gap-1">
-                          <Input
-                            className="h-7 text-sm flex-1"
-                            value={ans}
-                            onChange={(e) => onUpdateAcceptedAnswer(idx, aIdx, e.target.value)}
-                            placeholder={`대체 정답 ${aIdx + 1}`}
-                          />
-                          <Button
-                            variant="ghost"
-                            size="icon"
-                            className="h-7 w-7 shrink-0"
-                            onClick={() => onRemoveAcceptedAnswer(idx, aIdx)}
-                          >
-                            <X className="h-3 w-3 text-destructive" />
-                          </Button>
-                        </div>
-                      ))}
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        className="h-6 text-[11px] text-muted-foreground"
-                        onClick={() => onAddAcceptedAnswer(idx)}
-                      >
-                        <Plus className="h-3 w-3 mr-1" />대체 정답 추가
-                      </Button>
+                  <div key={idx}>
+                    <div className="grid grid-cols-[auto_1fr_auto] gap-2 items-start">
+                      <span className="text-xs text-muted-foreground pt-2 w-5 text-right">{idx + 1}</span>
+                      <div className="space-y-1">
+                        <Textarea
+                          className="text-sm min-h-[2.5rem] resize-none"
+                          rows={1}
+                          value={s.korean}
+                          onChange={(e) => onUpdateSentence(idx, 'korean', e.target.value)}
+                          placeholder="한국어"
+                        />
+                        <Textarea
+                          className="text-sm min-h-[2.5rem] resize-none"
+                          rows={1}
+                          value={s.original}
+                          onChange={(e) => onUpdateSentence(idx, 'original', e.target.value)}
+                          placeholder="English (기본 정답)"
+                        />
+                        {s.acceptedAnswers.map((ans, aIdx) => (
+                          <div key={aIdx} className="flex gap-1">
+                            <Input
+                              className="h-7 text-sm flex-1"
+                              value={ans}
+                              onChange={(e) => onUpdateAcceptedAnswer(idx, aIdx, e.target.value)}
+                              placeholder={`대체 정답 ${aIdx + 1}`}
+                            />
+                            <Button
+                              variant="ghost"
+                              size="icon"
+                              className="h-7 w-7 shrink-0"
+                              onClick={() => onRemoveAcceptedAnswer(idx, aIdx)}
+                            >
+                              <X className="h-3 w-3 text-destructive" />
+                            </Button>
+                          </div>
+                        ))}
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          className="h-6 text-[11px] text-muted-foreground"
+                          onClick={() => onAddAcceptedAnswer(idx)}
+                        >
+                          <Plus className="h-3 w-3 mr-1" />대체 정답 추가
+                        </Button>
+                      </div>
+                      {editForm.sentences.length > 1 && (
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          className="h-7 w-7 mt-1"
+                          onClick={() => onRemoveSentence(idx)}
+                        >
+                          <Trash2 className="h-3.5 w-3.5 text-destructive" />
+                        </Button>
+                      )}
                     </div>
-                    {editForm.sentences.length > 1 && (
-                      <Button
-                        variant="ghost"
-                        size="icon"
-                        className="h-7 w-7 mt-1"
-                        onClick={() => onRemoveSentence(idx)}
-                      >
-                        <Trash2 className="h-3.5 w-3.5 text-destructive" />
-                      </Button>
+                    {idx < editForm.sentences.length - 1 && (
+                      <div className="flex justify-center py-0.5">
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          className="h-5 text-[10px] text-muted-foreground/60 hover:text-muted-foreground px-2"
+                          onClick={() => onAddSentence(idx)}
+                        >
+                          <Plus className="h-2.5 w-2.5 mr-0.5" />사이에 삽입
+                        </Button>
+                      </div>
                     )}
                   </div>
                 ))}
@@ -153,7 +167,7 @@ export function UnitPassageList({
                   variant="outline"
                   size="sm"
                   className="w-full h-7 text-xs"
-                  onClick={onAddSentence}
+                  onClick={() => onAddSentence()}
                 >
                   <Plus className="h-3 w-3 mr-1" />문장 추가
                 </Button>

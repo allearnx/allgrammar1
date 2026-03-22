@@ -155,11 +155,16 @@ export function UnitContentManager({ unitId }: { unitId: string }) {
     }));
   }
 
-  function addSentence() {
-    setPassageEditForm((prev) => ({
-      ...prev,
-      sentences: [...prev.sentences, { original: '', korean: '', acceptedAnswers: [] }],
-    }));
+  function addSentence(afterIdx?: number) {
+    setPassageEditForm((prev) => {
+      const newSentence = { original: '', korean: '', acceptedAnswers: [] };
+      if (afterIdx === undefined) {
+        return { ...prev, sentences: [...prev.sentences, newSentence] };
+      }
+      const sentences = [...prev.sentences];
+      sentences.splice(afterIdx + 1, 0, newSentence);
+      return { ...prev, sentences };
+    });
   }
 
   function removeSentence(idx: number) {
