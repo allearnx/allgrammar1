@@ -8,6 +8,8 @@ import { AlertTriangle } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { toast } from 'sonner';
 import type { NaesinProblemSheet } from '@/types/database';
+import { useProblemDraft } from '@/hooks/use-problem-draft';
+import type { ImageAnswerDraft } from '@/hooks/use-problem-draft';
 
 export function ImageAnswerView({
   sheet,
@@ -19,7 +21,12 @@ export function ImageAnswerView({
   onComplete?: () => void;
 }) {
   const totalQuestions = sheet.answer_key.length;
-  const [answers, setAnswers] = useState<Record<number, string>>({});
+  const { loadDraft, saveDraft, clearDraft } = useProblemDraft(sheet.id, totalQuestions);
+
+  const [answers, setAnswers] = useState<Record<number, string>>(() => {
+    const d = loadDraft();
+    return d?.mode === 'image_answer' ? d.answers : {};
+  });
   const [results, setResults] = useState<{ score: number; wrongAnswers: { number: number; userAnswer: string | number; correctAnswer: string | number }[] } | null>(null);
   const [submitting, setSubmitting] = useState(false);
 
@@ -39,6 +46,7 @@ export function ImageAnswerView({
         }),
       });
       const data = await res.json();
+      clearDraft();
       setResults({ score: data.score, wrongAnswers: data.wrongAnswers });
       if (data.score >= 80) {
         toast.success('문제풀이를 완료했습니다!');
@@ -75,7 +83,11 @@ export function ImageAnswerView({
                   <Input
                     className="h-8 text-sm text-center"
                     value={answers[i] || ''}
-                    onChange={(e) => setAnswers({ ...answers, [i]: e.target.value })}
+                    onChange={(e) => {
+                      const newAnswers = { ...answers, [i]: e.target.value };
+                      setAnswers(newAnswers);
+                      saveDraft({ mode: 'image_answer', answers: newAnswers });
+                    }}
                     placeholder="-"
                   />
                 </div>
@@ -120,7 +132,7 @@ export function ImageAnswerView({
             </>
           )}
 
-          <Button variant="outline" className="w-full" onClick={() => { setResults(null); setAnswers({}); }}>
+          <Button variant="outline" className="w-full" onClick={() => { clearDraft(); setResults(null); setAnswers({}); }}>
             다시 풀기
           </Button>
         </div>

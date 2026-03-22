@@ -10,20 +10,10 @@ import { cn } from '@/lib/utils';
 import { MCQOptionList } from '@/components/shared/mcq-option-list';
 import { toast } from 'sonner';
 import type { NaesinProblemSheet, NaesinProblemQuestion } from '@/types/database';
+import { useProblemDraft } from '@/hooks/use-problem-draft';
+import type { AiFeedback, WrongItem, InteractiveDraft } from '@/hooks/use-problem-draft';
 
-interface AiFeedback {
-  score: number;
-  feedback: string;
-  correctedAnswer: string;
-}
-
-interface WrongItem {
-  number: number;
-  userAnswer: string | number;
-  correctAnswer: string | number;
-  question: string;
-  aiFeedback?: AiFeedback;
-}
+export type { AiFeedback, WrongItem };
 
 function SubjectiveInput({ onSubmit, disabled, isGrading }: { onSubmit: (answer: string) => void; disabled: boolean; isGrading: boolean }) {
   const [answer, setAnswer] = useState('');
@@ -93,15 +83,29 @@ export function InteractiveProblemView({
   onComplete?: () => void;
 }) {
   const questions = sheet.questions as NaesinProblemQuestion[];
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const { loadDraft, saveDraft, clearDraft } = useProblemDraft(sheet.id, questions.length);
+
+  const [currentIndex, setCurrentIndex] = useState(() => {
+    const d = loadDraft();
+    return d?.mode === 'interactive' ? d.currentIndex : 0;
+  });
   const [selectedAnswer, setSelectedAnswer] = useState<string | number | null>(null);
   const [showResult, setShowResult] = useState(false);
-  const [score, setScore] = useState({ correct: 0, wrong: 0 });
+  const [score, setScore] = useState(() => {
+    const d = loadDraft();
+    return d?.mode === 'interactive' ? d.score : { correct: 0, wrong: 0 };
+  });
   const [finished, setFinished] = useState(false);
-  const [wrongList, setWrongList] = useState<WrongItem[]>([]);
+  const [wrongList, setWrongList] = useState<WrongItem[]>(() => {
+    const d = loadDraft();
+    return d?.mode === 'interactive' ? d.wrongList : [];
+  });
   const [isGrading, setIsGrading] = useState(false);
   const [currentAiFeedback, setCurrentAiFeedback] = useState<AiFeedback | null>(null);
-  const [aiResultsMap, setAiResultsMap] = useState<Record<string, AiFeedback>>({});
+  const [aiResultsMap, setAiResultsMap] = useState<Record<string, AiFeedback>>(() => {
+    const d = loadDraft();
+    return d?.mode === 'interactive' ? d.aiResultsMap : {};
+  });
 
   const question = questions[currentIndex];
   const isSubjective = !question.options || question.options.length === 0;
@@ -134,9 +138,25 @@ export function InteractiveProblemView({
     }
   }
 
+  function saveCurrentDraft(
+    newScore: { correct: number; wrong: number },
+    newWrongList: WrongItem[],
+    newAiResultsMap: Record<string, AiFeedback>,
+  ) {
+    saveDraft({
+      mode: 'interactive',
+      currentIndex,
+      score: newScore,
+      wrongList: newWrongList,
+      aiResultsMap: newAiResultsMap,
+      answeredUpTo: currentIndex,
+    });
+  }
+
   async function handleSelect(answer: string | number) {
     if (showResult || isGrading) return;
     setSelectedAnswer(answer);
+    const isLast = currentIndex === questions.length - 1;
 
     if (isSubjective) {
       // AI grading for subjective questions
@@ -146,75 +166,99 @@ export function InteractiveProblemView({
 
       if (aiFeedback) {
         setCurrentAiFeedback(aiFeedback);
-        setAiResultsMap((prev) => ({ ...prev, [String(currentIndex)]: aiFeedback }));
+        const newAiResultsMap = { ...aiResultsMap, [String(currentIndex)]: aiFeedback };
+        setAiResultsMap(newAiResultsMap);
         const correct = aiFeedback.score >= 80;
         setShowResult(true);
 
+        let newScore = score;
+        let newWrongList = wrongList;
         if (correct) {
-          setScore((prev) => ({ ...prev, correct: prev.correct + 1 }));
+          newScore = { ...score, correct: score.correct + 1 };
+          setScore(newScore);
         } else {
-          setScore((prev) => ({ ...prev, wrong: prev.wrong + 1 }));
-          setWrongList((prev) => [...prev, {
+          newScore = { ...score, wrong: score.wrong + 1 };
+          setScore(newScore);
+          const wrongItem: WrongItem = {
             number: question.number,
             userAnswer: answer,
             correctAnswer: question.answer,
             question: question.question,
             aiFeedback,
-          }]);
+          };
+          newWrongList = [...wrongList, wrongItem];
+          setWrongList(newWrongList);
         }
 
-        if (currentIndex === questions.length - 1) {
-          const updatedAiResults = { ...aiResultsMap, [String(currentIndex)]: aiFeedback };
+        if (isLast) {
           submitResults(
             questions.map((_, i) => i === currentIndex ? answer : ''),
             questions.length,
-            updatedAiResults
+            newAiResultsMap
           );
+        } else {
+          saveCurrentDraft(newScore, newWrongList, newAiResultsMap);
         }
       } else {
         // AI failed — fallback to exact match
         const correct = String(answer).trim().toLowerCase() === String(question.answer).trim().toLowerCase();
         setShowResult(true);
+        let newScore = score;
+        let newWrongList = wrongList;
         if (correct) {
-          setScore((prev) => ({ ...prev, correct: prev.correct + 1 }));
+          newScore = { ...score, correct: score.correct + 1 };
+          setScore(newScore);
         } else {
-          setScore((prev) => ({ ...prev, wrong: prev.wrong + 1 }));
-          setWrongList((prev) => [...prev, {
+          newScore = { ...score, wrong: score.wrong + 1 };
+          setScore(newScore);
+          const wrongItem: WrongItem = {
             number: question.number,
             userAnswer: answer,
             correctAnswer: question.answer,
             question: question.question,
-          }]);
+          };
+          newWrongList = [...wrongList, wrongItem];
+          setWrongList(newWrongList);
         }
 
-        if (currentIndex === questions.length - 1) {
+        if (isLast) {
           submitResults(
             questions.map((_, i) => i === currentIndex ? answer : ''),
             questions.length
           );
+        } else {
+          saveCurrentDraft(newScore, newWrongList, aiResultsMap);
         }
       }
     } else {
       // MCQ — exact match (existing logic)
       const correct = String(answer) === String(question.answer);
       setShowResult(true);
+      let newScore = score;
+      let newWrongList = wrongList;
       if (correct) {
-        setScore((prev) => ({ ...prev, correct: prev.correct + 1 }));
+        newScore = { ...score, correct: score.correct + 1 };
+        setScore(newScore);
       } else {
-        setScore((prev) => ({ ...prev, wrong: prev.wrong + 1 }));
-        setWrongList((prev) => [...prev, {
+        newScore = { ...score, wrong: score.wrong + 1 };
+        setScore(newScore);
+        const wrongItem: WrongItem = {
           number: question.number,
           userAnswer: answer,
           correctAnswer: question.answer,
           question: question.question,
-        }]);
+        };
+        newWrongList = [...wrongList, wrongItem];
+        setWrongList(newWrongList);
       }
 
-      if (currentIndex === questions.length - 1) {
+      if (isLast) {
         submitResults(
           questions.map((_, i) => i === currentIndex ? answer : ''),
           questions.length
         );
+      } else {
+        saveCurrentDraft(newScore, newWrongList, aiResultsMap);
       }
     }
   }
@@ -247,6 +291,7 @@ export function InteractiveProblemView({
         throw new Error(err?.error || '결과 저장에 실패했습니다');
       }
       const data = await res.json();
+      clearDraft();
       setFinished(true);
       if (data.score >= 80) {
         toast.success('문제풀이를 완료했습니다!');
