@@ -138,9 +138,18 @@ function BlankConfigurator({
   );
 }
 
+function splitSentences(text: string, punctuationRe: RegExp): string[] {
+  // 1) 줄바꿈으로 먼저 분리 (리스트형 텍스트 대응)
+  const lines = text.split(/\n+/).map((l) => l.trim()).filter(Boolean);
+  // 2) 각 줄 안에서 마침표/물음표/느낌표 뒤 공백으로 추가 분리
+  return lines.flatMap((line) =>
+    line.split(punctuationRe).map((s) => s.trim()).filter(Boolean)
+  );
+}
+
 function splitIntoSentencePairs(originalText: string, koreanTranslation: string) {
-  const enSentences = originalText.split(/(?<=[.!?])\s+/).filter((s) => s.trim());
-  const koSentences = koreanTranslation.split(/(?<=[.!?。])\s+/).filter((s) => s.trim());
+  const enSentences = splitSentences(originalText, /(?<=[.!?])\s+/);
+  const koSentences = splitSentences(koreanTranslation, /(?<=[.!?。])\s+/);
   const maxLen = Math.max(enSentences.length, koSentences.length, 1);
   return Array.from({ length: maxLen }, (_, i) => ({
     original: enSentences[i]?.trim() || '',
