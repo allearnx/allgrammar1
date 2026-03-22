@@ -15,7 +15,7 @@ import { toast } from 'sonner';
 import type { NaesinVocabulary, NaesinGrammarLesson, NaesinPassage } from '@/types/database';
 import { ConfirmDialog } from '@/components/shared/confirm-dialog';
 import { AddVocabDialog, BulkVocabUpload, PdfVocabExtract } from './vocab-dialogs';
-import { AddPassageDialog, AddGrammarDialog, AddOmrDialog, AddProblemDialog, AddLastReviewDialog } from './content-dialogs';
+import { AddPassageDialog, AddGrammarDialog, AddOmrDialog, AddProblemDialog, AddLastReviewDialog, BulkOmrUploadDialog, BulkProblemUploadDialog } from './content-dialogs';
 import { VocabQuizSetManager } from './quiz-set-manager';
 import { useListCrud } from '@/hooks/use-list-crud';
 import { useInlineEdit } from '@/hooks/use-inline-edit';
@@ -385,6 +385,8 @@ export function UnitContentManager({ unitId }: { unitId: string }) {
         <AddGrammarDialog unitId={unitId} onAdd={loadCounts} />
         <AddOmrDialog unitId={unitId} onAdd={loadCounts} />
         <AddProblemDialog unitId={unitId} onAdd={loadCounts} />
+        <BulkOmrUploadDialog unitId={unitId} onAdd={loadCounts} />
+        <BulkProblemUploadDialog unitId={unitId} onAdd={loadCounts} />
         <AddLastReviewDialog unitId={unitId} onAdd={loadCounts} />
       </div>
 
