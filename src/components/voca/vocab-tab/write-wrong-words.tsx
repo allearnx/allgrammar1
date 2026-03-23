@@ -7,15 +7,10 @@ import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import { CheckCircle, Send } from 'lucide-react';
 import { toast } from 'sonner';
-
-interface WrongWord {
-  word: string;
-  match: string;
-  type: 'synonym' | 'antonym';
-}
+import type { VocaWrongWord } from '@/types/voca';
 
 interface WriteWrongWordsProps {
-  wrongWords: WrongWord[];
+  wrongWords: VocaWrongWord[];
   dayId: string;
   onSubmitted: () => void;
 }
@@ -106,7 +101,7 @@ export function WriteWrongWords({ wrongWords, dayId, onSubmitted }: WriteWrongWo
               <span className="text-muted-foreground">=</span>
               <span className="text-muted-foreground">{w.match}</span>
               <Badge variant="outline" className="text-xs">
-                {w.type === 'synonym' ? '유의어' : '반의어'}
+                {w.type === 'synonym' ? '유의어' : w.type === 'antonym' ? '반의어' : '예문'}
               </Badge>
             </div>
             <div className="grid grid-cols-5 gap-2">

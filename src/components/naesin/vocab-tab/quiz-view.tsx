@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Copy, RefreshCw, RotateCcw, Target, ArrowRight, CheckCircle } from 'lucide-react';
-import { cn } from '@/lib/utils';
+import { cn, shuffle } from '@/lib/utils';
 import { MCQOptionList } from '@/components/shared/mcq-option-list';
 import { toast } from 'sonner';
 import { ScoreBadges, NextButton } from '@/components/memory/shared';
@@ -23,7 +23,7 @@ interface WrongWord {
 }
 
 function generateQuizQuestions(vocabulary: NaesinVocabulary[], allVocabulary?: NaesinVocabulary[], targetVocab?: NaesinVocabulary[]): QuizQuestion[] {
-  const quizWords = targetVocab || vocabulary;
+  const quizWords = shuffle(targetVocab || vocabulary);
   const optionPool = allVocabulary || vocabulary;
   return quizWords.map((vocab) => {
     const others = optionPool

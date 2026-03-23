@@ -8,17 +8,11 @@ import { vocaToMemoryItem, vocaToNaesinVocabulary } from '@/lib/voca/adapters';
 import { NaesinFlashcardView } from '@/components/naesin/vocab-tab/flashcard-view';
 import { NaesinQuizView } from '@/components/naesin/vocab-tab/quiz-view';
 import { NaesinSpellingView } from '@/components/naesin/vocab-tab/spelling-view';
-import { MatchingView } from './matching-view';
+import { SentenceMatch } from './sentence-match';
 import { WriteWrongWords } from './write-wrong-words';
 import { WrongWordsSpelling } from './wrong-words-spelling';
-import type { VocaVocabulary, VocaStudentProgress } from '@/types/voca';
+import type { VocaVocabulary, VocaStudentProgress, VocaWrongWord } from '@/types/voca';
 import type { WrongWordItem } from '@/app/(dashboard)/student/voca/[dayId]/client';
-
-interface WrongWord {
-  word: string;
-  match: string;
-  type: 'synonym' | 'antonym';
-}
 
 interface VocaTabProps {
   vocabulary: VocaVocabulary[];
@@ -29,7 +23,7 @@ interface VocaTabProps {
 
 export function VocaTab({ vocabulary, dayId, progress, wrongWords = [] }: VocaTabProps) {
   const [activeTab, setActiveTab] = useState('flashcard');
-  const [matchingWrongWords, setMatchingWrongWords] = useState<WrongWord[] | null>(null);
+  const [matchingWrongWords, setMatchingWrongWords] = useState<VocaWrongWord[] | null>(null);
   const [localProgress, setLocalProgress] = useState(progress);
 
   const items = useMemo(() => vocabulary.map(vocaToMemoryItem), [vocabulary]);
@@ -47,15 +41,8 @@ export function VocaTab({ vocabulary, dayId, progress, wrongWords = [] }: VocaTa
 
   const hasWrongWords = wrongWords.length > 0;
 
-  // Check if synonyms/antonyms exist for matching tab
-  const hasSynAnt = useMemo(() => {
-    let synCount = 0;
-    let antCount = 0;
-    for (const v of vocabulary) {
-      if (v.synonyms) synCount++;
-      if (v.antonyms) antCount++;
-    }
-    return synCount >= 2 || antCount >= 2;
+  const hasExampleSentences = useMemo(() => {
+    return vocabulary.filter((v) => v.example_sentence).length >= 2;
   }, [vocabulary]);
 
   async function saveProgress(type: 'flashcard' | 'quiz' | 'spelling' | 'matching', score?: number, matchingAttempt?: number) {
@@ -85,7 +72,7 @@ export function VocaTab({ vocabulary, dayId, progress, wrongWords = [] }: VocaTa
     toast.success(`매칭 완료! ${score}점`);
   }
 
-  function handleMatchingFail(wrongWords: WrongWord[]) {
+  function handleMatchingFail(wrongWords: VocaWrongWord[]) {
     setMatchingWrongWords(wrongWords);
     saveProgress('matching', 0, 2);
   }
@@ -110,7 +97,7 @@ export function VocaTab({ vocabulary, dayId, progress, wrongWords = [] }: VocaTa
         <TabsTrigger value="spelling" disabled={spellingItems.length === 0}>
           스펠링{spellScore != null && <span className={`ml-1 ${spellPass ? 'text-green-600' : 'text-orange-500'}`}>{spellScore}점</span>}
         </TabsTrigger>
-        <TabsTrigger value="matching" disabled={!hasSynAnt}>
+        <TabsTrigger value="matching" disabled={!hasExampleSentences}>
           매칭{matchDone && <span className="ml-1 text-green-600">✓</span>}
         </TabsTrigger>
         {hasWrongWords && (
@@ -157,7 +144,7 @@ export function VocaTab({ vocabulary, dayId, progress, wrongWords = [] }: VocaTa
             }}
           />
         ) : (
-          <MatchingView
+          <SentenceMatch
             vocabulary={vocabulary}
             onComplete={handleMatchingComplete}
             onFail={handleMatchingFail}

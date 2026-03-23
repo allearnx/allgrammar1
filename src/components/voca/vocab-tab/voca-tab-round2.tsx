@@ -7,13 +7,7 @@ import { Round2FlashcardView } from './round2-flashcard-view';
 import { ComprehensiveQuiz } from './comprehensive-quiz';
 import { MatchingView } from './matching-view';
 import { WriteWrongWords } from './write-wrong-words';
-import type { VocaVocabulary, VocaStudentProgress } from '@/types/voca';
-
-interface WrongWord {
-  word: string;
-  match: string;
-  type: 'synonym' | 'antonym';
-}
+import type { VocaVocabulary, VocaStudentProgress, VocaWrongWord } from '@/types/voca';
 
 interface VocaTab2Props {
   vocabulary: VocaVocabulary[];
@@ -23,7 +17,7 @@ interface VocaTab2Props {
 
 export function VocaTab2({ vocabulary, dayId, progress }: VocaTab2Props) {
   const [activeTab, setActiveTab] = useState('flashcard');
-  const [matchingWrongWords, setMatchingWrongWords] = useState<WrongWord[] | null>(null);
+  const [matchingWrongWords, setMatchingWrongWords] = useState<VocaWrongWord[] | null>(null);
   const [localProgress, setLocalProgress] = useState(progress);
   const [quizWrongWords, setQuizWrongWords] = useState<string[]>([]);
 
@@ -74,7 +68,7 @@ export function VocaTab2({ vocabulary, dayId, progress }: VocaTab2Props) {
     toast.success(`매칭 완료! ${score}점`);
   }
 
-  function handleMatchingFail(wrongWords: WrongWord[]) {
+  function handleMatchingFail(wrongWords: VocaWrongWord[]) {
     setMatchingWrongWords(wrongWords);
     saveProgress('matching', 0, 2);
   }

@@ -1,18 +1,18 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Target, CheckCircle, ArrowRight, RotateCcw } from 'lucide-react';
-import { cn } from '@/lib/utils';
+import { cn, shuffle } from '@/lib/utils';
 import { ScoreBadges, ResultCard, NextButton } from '@/components/memory/shared';
 import type { MemoryItem, StudentMemoryProgress, NaesinVocabulary } from '@/types/database';
 
 type FlashcardItem = MemoryItem & { progress: StudentMemoryProgress | null };
 
 export function NaesinSpellingView({
-  items,
+  items: rawItems,
   vocabulary,
   onComplete,
   onGoToNextStage,
@@ -24,6 +24,7 @@ export function NaesinSpellingView({
   onGoToNextStage?: () => void;
   quizScore?: number | null;
 }) {
+  const items = useMemo(() => shuffle(rawItems), [rawItems]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [answer, setAnswer] = useState('');
   const [showResult, setShowResult] = useState(false);

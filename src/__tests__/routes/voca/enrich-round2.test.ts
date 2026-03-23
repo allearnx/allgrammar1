@@ -67,8 +67,8 @@ describe('voca/vocabulary/enrich-round2', () => {
     mockCreateClient.mockResolvedValue({ from });
 
     mockCreate.mockResolvedValue(aiResponse([
-      { id: 'v1', s: 'glad, cheerful', a: 'sad', i: [{ en: 'happy hour', ko: '할인 시간', example_en: 'Let\'s go.', example_ko: '가자.' }] },
-      { id: 'v2', s: 'sprint', a: 'walk', i: null },
+      { id: 'v1', s: 'glad, cheerful', a: 'sad', e: 'I am happy.', i: [{ en: 'happy hour', ko: '할인 시간', example_en: 'Let\'s go.', example_ko: '가자.' }] },
+      { id: 'v2', s: 'sprint', a: 'walk', e: 'I like to run.', i: null },
     ]));
 
     const { POST } = await import('@/app/api/voca/vocabulary/enrich-round2/route');
@@ -88,12 +88,18 @@ describe('voca/vocabulary/enrich-round2', () => {
     expect(chain.update).toHaveBeenCalledWith({
       synonyms: 'glad, cheerful',
       antonyms: 'sad',
+      example_sentence: 'I am happy.',
       idioms: [{ en: 'happy hour', ko: '할인 시간', example_en: 'Let\'s go.', example_ko: '가자.' }],
+      spelling_answer: 'happy',
+      spelling_hint: '행복한',
     });
     expect(chain.update).toHaveBeenCalledWith({
       synonyms: 'sprint',
       antonyms: 'walk',
+      example_sentence: 'I like to run.',
       idioms: null,
+      spelling_answer: 'run',
+      spelling_hint: '달리다',
     });
   });
 

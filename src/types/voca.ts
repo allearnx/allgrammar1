@@ -62,13 +62,21 @@ export interface VocaStudentProgress {
   updated_at: string;
 }
 
+export type VocaWrongWordType = 'synonym' | 'antonym' | 'sentence';
+
+export interface VocaWrongWord {
+  word: string;
+  match: string;
+  type: VocaWrongWordType;
+}
+
 export type VocaMatchingSubmissionStatus = 'pending' | 'reviewed';
 
 export interface VocaMatchingSubmission {
   id: string;
   student_id: string;
   day_id: string;
-  wrong_words: { word: string; match: string; type: 'synonym' | 'antonym' }[];
+  wrong_words: VocaWrongWord[];
   writings: { word: string; attempts: string[] }[];
   status: VocaMatchingSubmissionStatus;
   reviewed_by: string | null;

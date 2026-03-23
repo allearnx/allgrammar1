@@ -5,18 +5,9 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { CheckCircle, XCircle, Shuffle, Undo2 } from 'lucide-react';
-import { cn } from '@/lib/utils';
+import { cn, shuffle } from '@/lib/utils';
 import { toast } from 'sonner';
 import type { TextbookPassage, SentenceItem } from '@/types/database';
-
-export function shuffleArray<T>(arr: T[]): T[] {
-  const shuffled = [...arr];
-  for (let i = shuffled.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-  }
-  return shuffled;
-}
 
 interface OrderingExerciseProps {
   passage: TextbookPassage;
@@ -40,7 +31,7 @@ export function OrderingExercise({ passage, onComplete }: OrderingExerciseProps)
 
   // Word bank (shuffled) and selected words
   const [bank, setBank] = useState<WordItem[]>(() =>
-    sentence ? shuffleArray(sentence.words.map((w, i) => ({ word: w, originalIndex: i }))) : []
+    sentence ? shuffle(sentence.words.map((w, i) => ({ word: w, originalIndex: i }))) : []
   );
   const [selected, setSelected] = useState<WordItem[]>([]);
 
@@ -81,7 +72,7 @@ export function OrderingExercise({ passage, onComplete }: OrderingExerciseProps)
     if (currentIndex < sentences.length - 1) {
       const nextSentence = sentences[currentIndex + 1];
       setCurrentIndex(currentIndex + 1);
-      setBank(shuffleArray(nextSentence.words.map((w, i) => ({ word: w, originalIndex: i }))));
+      setBank(shuffle(nextSentence.words.map((w, i) => ({ word: w, originalIndex: i }))));
       setSelected([]);
       setShowResult(false);
       setIsCorrect(false);
@@ -96,7 +87,7 @@ export function OrderingExercise({ passage, onComplete }: OrderingExerciseProps)
     if (!sentence || showResult) return;
     // Return all selected words to bank and reshuffle
     const allWords = sentence.words.map((w, i) => ({ word: w, originalIndex: i }));
-    setBank(shuffleArray(allWords));
+    setBank(shuffle(allWords));
     setSelected([]);
   }
 

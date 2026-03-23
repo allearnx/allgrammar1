@@ -82,7 +82,7 @@ export function DayContentManager({ dayId }: { dayId: string }) {
   }, [dayId]);
 
   const handleEnrichRound2 = async () => {
-    const needsEnrich = vocab.items.filter((v) => !v.synonyms && !v.antonyms);
+    const needsEnrich = vocab.items.filter((v) => !v.synonyms && !v.antonyms && !v.example_sentence);
     const targetItems = needsEnrich.length > 0 ? needsEnrich : vocab.items;
     if (targetItems.length === 0) return;
 
@@ -97,6 +97,8 @@ export function DayContentManager({ dayId }: { dayId: string }) {
             front_text: v.front_text,
             back_text: v.back_text,
             part_of_speech: v.part_of_speech,
+            example_sentence: v.example_sentence,
+            spelling_answer: v.spelling_answer,
           })),
         }),
       });
@@ -194,7 +196,7 @@ export function DayContentManager({ dayId }: { dayId: string }) {
         {vocab.items.length > 0 && (
           <Button size="sm" variant="outline" onClick={handleEnrichRound2} disabled={enriching}>
             {enriching ? <Loader2 className="h-3.5 w-3.5 mr-1 animate-spin" /> : <Wand2 className="h-3.5 w-3.5 mr-1" />}
-            {enriching ? '생성 중...' : vocab.items.some((v) => !v.synonyms && !v.antonyms) ? '2회독 생성' : '2회독 재생성'}
+            {enriching ? '생성 중...' : vocab.items.some((v) => !v.synonyms && !v.antonyms && !v.example_sentence) ? '데이터 보강' : '데이터 재생성'}
           </Button>
         )}
       </div>
