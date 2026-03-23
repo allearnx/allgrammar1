@@ -19,6 +19,7 @@ interface WrongWord {
 
 interface MatchingViewProps {
   vocabulary: VocaVocabulary[];
+  priorityWords?: string[];
   onComplete: (score: number, attempt: number) => void;
   onFail: (wrongWords: WrongWord[]) => void;
 }
@@ -52,15 +53,23 @@ function buildPairs(vocabulary: VocaVocabulary[]): { synonymPairs: MatchPair[]; 
 
 type RoundType = 'synonym' | 'antonym';
 
-export function MatchingView({ vocabulary, onComplete, onFail }: MatchingViewProps) {
+function prioritizePairs(pairs: MatchPair[], priorityWords: string[], max: number): MatchPair[] {
+  if (priorityWords.length === 0) return shuffle(pairs).slice(0, max);
+  const prioritySet = new Set(priorityWords.map((w) => w.toLowerCase()));
+  const priority = pairs.filter((p) => prioritySet.has(p.word.toLowerCase()));
+  const rest = pairs.filter((p) => !prioritySet.has(p.word.toLowerCase()));
+  return [...shuffle(priority), ...shuffle(rest)].slice(0, max);
+}
+
+export function MatchingView({ vocabulary, priorityWords = [], onComplete, onFail }: MatchingViewProps) {
   const { synonymPairs, antonymPairs } = useMemo(() => buildPairs(vocabulary), [vocabulary]);
 
   const allPairs = useMemo(() => {
     const pairs: MatchPair[] = [];
-    if (synonymPairs.length >= 2) pairs.push(...synonymPairs.slice(0, 5));
-    if (antonymPairs.length >= 2) pairs.push(...antonymPairs.slice(0, 5));
+    if (synonymPairs.length >= 2) pairs.push(...prioritizePairs(synonymPairs, priorityWords, 5));
+    if (antonymPairs.length >= 2) pairs.push(...prioritizePairs(antonymPairs, priorityWords, 5));
     return pairs;
-  }, [synonymPairs, antonymPairs]);
+  }, [synonymPairs, antonymPairs, priorityWords]);
 
   // Determine rounds
   const rounds = useMemo(() => {
@@ -78,8 +87,8 @@ export function MatchingView({ vocabulary, onComplete, onFail }: MatchingViewPro
 
   const roundPairs = useMemo(() => {
     const source = currentRound === 'synonym' ? synonymPairs : antonymPairs;
-    return shuffle(source).slice(0, 5);
-  }, [currentRound, synonymPairs, antonymPairs, attempt]); // eslint-disable-line react-hooks/exhaustive-deps
+    return prioritizePairs(source, priorityWords, 5);
+  }, [currentRound, synonymPairs, antonymPairs, priorityWords, attempt]); // eslint-disable-line react-hooks/exhaustive-deps
 
   if (allPairs.length < 2) {
     return (

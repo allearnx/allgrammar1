@@ -20,7 +20,7 @@ import { QuestionRenderer, QuestionTypeBadge } from './comprehensive-quiz-render
 interface ComprehensiveQuizProps {
   vocabulary: VocaVocabulary[];
   dayId: string;
-  onComplete: (score: number) => void;
+  onComplete: (score: number, wrongWords?: string[]) => void;
 }
 
 export function ComprehensiveQuiz({ vocabulary, dayId: _dayId, onComplete }: ComprehensiveQuizProps) {
@@ -150,7 +150,10 @@ export function ComprehensiveQuiz({ vocabulary, dayId: _dayId, onComplete }: Com
       const totalScore = Math.round(
         questionResults.reduce((sum, r) => sum + r.score, 0) / questionResults.length
       );
-      onComplete(totalScore);
+      const wrongWords = questionResults
+        .filter((r) => r.score < 80)
+        .map((r) => r.question.word);
+      onComplete(totalScore, wrongWords);
     } catch (err) {
       console.error(err);
       toast.error('채점 중 오류가 발생했습니다');

@@ -25,6 +25,7 @@ export function VocaTab2({ vocabulary, dayId, progress }: VocaTab2Props) {
   const [activeTab, setActiveTab] = useState('flashcard');
   const [matchingWrongWords, setMatchingWrongWords] = useState<WrongWord[] | null>(null);
   const [localProgress, setLocalProgress] = useState(progress);
+  const [quizWrongWords, setQuizWrongWords] = useState<string[]>([]);
 
   // 완료 상태 계산
   const fc2Done = localProgress?.round2_flashcard_completed || (localProgress?.round2_quiz_score ?? 0) >= 80;
@@ -111,7 +112,10 @@ export function VocaTab2({ vocabulary, dayId, progress }: VocaTab2Props) {
         <ComprehensiveQuiz
           vocabulary={vocabulary}
           dayId={dayId}
-          onComplete={(score) => saveProgress('quiz', score)}
+          onComplete={(score, wrongWords) => {
+            saveProgress('quiz', score);
+            setQuizWrongWords(wrongWords || []);
+          }}
         />
       </TabsContent>
 
@@ -128,6 +132,7 @@ export function VocaTab2({ vocabulary, dayId, progress }: VocaTab2Props) {
         ) : (
           <MatchingView
             vocabulary={vocabulary}
+            priorityWords={quizWrongWords}
             onComplete={handleMatchingComplete}
             onFail={handleMatchingFail}
           />

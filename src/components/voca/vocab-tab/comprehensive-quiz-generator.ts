@@ -136,32 +136,32 @@ export function generateQuestions(vocabulary: VocaVocabulary[]): Question[] {
     });
   }
 
-  // 4. Idiom questions — 1 question per idiom (randomly pick type)
+  // 4. Idiom questions — 1 question per word (max 4), pick one random idiom per word
+  let idiomCount = 0;
   for (const v of withIdioms) {
-    if (usedWords.has(v.front_text)) continue;
+    if (idiomCount >= 4 || usedWords.has(v.front_text)) continue;
     usedWords.add(v.front_text);
-    const idioms = v.idioms!;
-    for (const idiom of idioms) {
-      // Pick one random question type per idiom
-      const types: QuestionType[] = ['idiom_en_to_ko'];
-      if (idiom.example_en && idiom.example_ko) types.push('idiom_example_translate');
-      const pickedType = types[Math.floor(Math.random() * types.length)];
+    idiomCount++;
+    // Pick one random idiom from the word's idiom list
+    const idiom = v.idioms![Math.floor(Math.random() * v.idioms!.length)];
+    const types: QuestionType[] = ['idiom_en_to_ko'];
+    if (idiom.example_en && idiom.example_ko) types.push('idiom_example_translate');
+    const pickedType = types[Math.floor(Math.random() * types.length)];
 
-      if (pickedType === 'idiom_en_to_ko') {
-        questions.push({
-          type: 'idiom_en_to_ko',
-          word: v.front_text,
-          prompt: `다음 숙어의 뜻을 한국어로 쓰세요.\n"${idiom.en}"`,
-          reference: idiom.ko,
-        });
-      } else {
-        questions.push({
-          type: 'idiom_example_translate',
-          word: v.front_text,
-          prompt: `다음 문장을 한국어로 해석하세요.\n"${idiom.example_en}"`,
-          reference: idiom.example_ko!,
-        });
-      }
+    if (pickedType === 'idiom_en_to_ko') {
+      questions.push({
+        type: 'idiom_en_to_ko',
+        word: v.front_text,
+        prompt: `다음 숙어의 뜻을 한국어로 쓰세요.\n"${idiom.en}"`,
+        reference: idiom.ko,
+      });
+    } else {
+      questions.push({
+        type: 'idiom_example_translate',
+        word: v.front_text,
+        prompt: `다음 문장을 한국어로 해석하세요.\n"${idiom.example_en}"`,
+        reference: idiom.example_ko!,
+      });
     }
   }
 
