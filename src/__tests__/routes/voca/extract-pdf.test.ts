@@ -14,19 +14,11 @@ vi.mock('@/lib/logger', () => ({
   logger: { info: vi.fn(), error: vi.fn() },
 }));
 
-// Mock unpdf
-vi.mock('unpdf', () => ({
-  extractText: vi.fn().mockResolvedValue({
-    text: ['apple banana cherry'],
-    totalPages: 1,
-  }),
-}));
-
-// Mock Anthropic
-const mockStream = vi.fn();
+// Mock Anthropic — now uses messages.create (not stream)
+const mockCreate = vi.fn();
 vi.mock('@anthropic-ai/sdk', () => ({
   default: class {
-    messages = { stream: mockStream };
+    messages = { create: mockCreate };
   },
 }));
 
@@ -48,16 +40,14 @@ describe('voca/vocabulary/extract-pdf', () => {
     vi.resetModules();
   });
 
-  it('응답에 유의어/반의어/숙어 포함', async () => {
+  it('PDF를 Sonnet에 직접 전송하여 유의어/반의어/숙어 포함 추출', async () => {
     mockGetUser.mockResolvedValue(testTeacher);
-    mockStream.mockReturnValue({
-      finalMessage: () => Promise.resolve({
-        content: [{ type: 'text', text: JSON.stringify([
-          { w: 'happy', m: '행복한', p: 'adj.', s: 'glad, joyful', a: 'sad', i: [{ en: 'happy hour', ko: '할인 시간', example_en: 'Let\'s go to happy hour.', example_ko: '할인 시간에 가자.' }] },
-          { w: 'run', m: '달리다', p: 'v.', s: 'sprint', a: null, i: null },
-          { w: 'book', m: '책', p: 'n.', s: null, a: null, i: null },
-        ]) }],
-      }),
+    mockCreate.mockResolvedValue({
+      content: [{ type: 'text', text: JSON.stringify([
+        { w: 'happy', m: '행복한', p: 'adj.', s: 'glad, joyful', a: 'sad', i: [{ en: 'happy hour', ko: '할인 시간', example_en: 'Let\'s go to happy hour.', example_ko: '할인 시간에 가자.' }] },
+        { w: 'run', m: '달리다', p: 'v.', s: 'sprint', a: null, i: null },
+        { w: 'book', m: '책', p: 'n.', s: null, a: null, i: null },
+      ]) }],
     });
 
     const { POST } = await import('@/app/api/voca/vocabulary/extract-pdf/route');
@@ -85,6 +75,12 @@ describe('voca/vocabulary/extract-pdf', () => {
     expect(body.items[2].synonyms).toBeNull();
     expect(body.items[2].antonyms).toBeNull();
     expect(body.items[2].idioms).toBeNull();
+
+    // Sonnet 모델로 PDF document 전송 확인
+    expect(mockCreate).toHaveBeenCalledTimes(1);
+    const callArgs = mockCreate.mock.calls[0][0];
+    expect(callArgs.model).toBe('claude-sonnet-4-6');
+    expect(callArgs.messages[0].content[0].type).toBe('document');
   });
 
   it('학생 권한 거부', async () => {
@@ -104,5 +100,22 @@ describe('voca/vocabulary/extract-pdf', () => {
     const txtFile = new File(['hello'], 'test.txt', { type: 'text/plain' });
     const res = await POST(makeFormRequest(txtFile));
     expect(res.status).toBe(400);
+  });
+
+  it('중복 단어 제거', async () => {
+    mockGetUser.mockResolvedValue(testTeacher);
+    mockCreate.mockResolvedValue({
+      content: [{ type: 'text', text: JSON.stringify([
+        { w: 'apple', m: '사과', p: 'n.' },
+        { w: 'Apple', m: '사과', p: 'n.' },
+        { w: 'banana', m: '바나나', p: 'n.' },
+      ]) }],
+    });
+
+    const { POST } = await import('@/app/api/voca/vocabulary/extract-pdf/route');
+    const pdfFile = new File([new Blob(['pdf'])], 'test.pdf', { type: 'application/pdf' });
+    const res = await POST(makeFormRequest(pdfFile));
+    const body = await res.json();
+    expect(body.items).toHaveLength(2);
   });
 });
