@@ -18,11 +18,11 @@ vi.mock('@/lib/logger', () => ({
   logger: { info: vi.fn(), warn: vi.fn(), error: vi.fn() },
 }));
 
-// Mock Anthropic
-const mockStream = vi.fn();
+// Mock Anthropic — messages.create
+const mockCreate = vi.fn();
 vi.mock('@anthropic-ai/sdk', () => ({
   default: class {
-    messages = { stream: mockStream };
+    messages = { create: mockCreate };
   },
 }));
 
@@ -48,6 +48,10 @@ function makeRequest(body: unknown) {
   });
 }
 
+function aiResponse(data: unknown) {
+  return { content: [{ type: 'text', text: JSON.stringify(data) }] };
+}
+
 beforeEach(() => {
   vi.clearAllMocks();
 });
@@ -62,14 +66,10 @@ describe('voca/vocabulary/enrich-round2', () => {
     const { from, chain } = mockChain({ data: null, error: null });
     mockCreateClient.mockResolvedValue({ from });
 
-    mockStream.mockReturnValue({
-      finalMessage: () => Promise.resolve({
-        content: [{ type: 'text', text: JSON.stringify([
-          { id: 'v1', s: 'glad, cheerful', a: 'sad', i: [{ en: 'happy hour', ko: '할인 시간', example_en: 'Let\'s go.', example_ko: '가자.' }] },
-          { id: 'v2', s: 'sprint', a: 'walk', i: null },
-        ]) }],
-      }),
-    });
+    mockCreate.mockResolvedValue(aiResponse([
+      { id: 'v1', s: 'glad, cheerful', a: 'sad', i: [{ en: 'happy hour', ko: '할인 시간', example_en: 'Let\'s go.', example_ko: '가자.' }] },
+      { id: 'v2', s: 'sprint', a: 'walk', i: null },
+    ]));
 
     const { POST } = await import('@/app/api/voca/vocabulary/enrich-round2/route');
     const res = await POST(makeRequest({
@@ -130,14 +130,10 @@ describe('voca/vocabulary/enrich-round2', () => {
     const from = vi.fn().mockReturnValue(chain);
     mockCreateClient.mockResolvedValue({ from });
 
-    mockStream.mockReturnValue({
-      finalMessage: () => Promise.resolve({
-        content: [{ type: 'text', text: JSON.stringify([
-          { id: 'v1', s: 'a', a: 'b', i: null },
-          { id: 'v2', s: 'c', a: 'd', i: null },
-        ]) }],
-      }),
-    });
+    mockCreate.mockResolvedValue(aiResponse([
+      { id: 'v1', s: 'a', a: 'b', i: null },
+      { id: 'v2', s: 'c', a: 'd', i: null },
+    ]));
 
     const { POST } = await import('@/app/api/voca/vocabulary/enrich-round2/route');
     const res = await POST(makeRequest({
@@ -161,18 +157,14 @@ describe('voca/vocabulary/enrich-round2', () => {
       id: `v${i}`, front_text: `word${i}`, back_text: `뜻${i}`, part_of_speech: null,
     }));
 
-    mockStream.mockImplementation(() => ({
-      finalMessage: () => Promise.resolve({
-        content: [{ type: 'text', text: JSON.stringify(
-          items.map((item) => ({ id: item.id, s: 'syn', a: 'ant', i: null })),
-        ) }],
-      }),
-    }));
+    mockCreate.mockResolvedValue(aiResponse(
+      items.map((item) => ({ id: item.id, s: 'syn', a: 'ant', i: null })),
+    ));
 
     const { POST } = await import('@/app/api/voca/vocabulary/enrich-round2/route');
     const res = await POST(makeRequest({ items }));
 
     expect(res.status).toBe(200);
-    expect(mockStream).toHaveBeenCalledTimes(2);
+    expect(mockCreate).toHaveBeenCalledTimes(2);
   });
 });

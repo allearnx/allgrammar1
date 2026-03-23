@@ -38,13 +38,12 @@ interface AiEnrichResult { id: string; s?: string | null; a?: string | null; i?:
 async function enrichChunk(items: VocabItem[]) {
   const wordList = items.map((item) => `- id:${item.id} | ${item.front_text} (${item.back_text}, ${item.part_of_speech || ''})`).join('\n');
 
-  const stream = anthropic.messages.stream({
+  const message = await anthropic.messages.create({
     model: 'claude-haiku-4-5-20251001',
     max_tokens: 8192,
     messages: [{ role: 'user', content: `${PROMPT}\n\n---\n${wordList}\n---` }],
   });
 
-  const message = await stream.finalMessage();
   const raw = parseAiJsonArray<AiEnrichResult>(message);
   return raw.map((item) => ({
     id: item.id,
@@ -71,15 +70,16 @@ export const POST = createApiHandler(
     const results = await Promise.all(chunks.map(enrichChunk));
     const enriched = results.flat();
 
-    // DB 업데이트
-    let updated = 0;
-    for (const item of enriched) {
-      const { error } = await supabase
-        .from('voca_vocabulary')
-        .update({ synonyms: item.synonyms, antonyms: item.antonyms, idioms: item.idioms })
-        .eq('id', item.id);
-      if (!error) updated++;
-    }
+    // DB 업데이트 (병렬)
+    const dbResults = await Promise.all(
+      enriched.map((item) =>
+        supabase
+          .from('voca_vocabulary')
+          .update({ synonyms: item.synonyms, antonyms: item.antonyms, idioms: item.idioms })
+          .eq('id', item.id)
+      )
+    );
+    const updated = dbResults.filter((r) => !r.error).length;
 
     return NextResponse.json({ updated });
   }
