@@ -6,7 +6,7 @@ import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Textarea } from '@/components/ui/textarea';
-import { BookOpen, Trash2, Pencil } from 'lucide-react';
+import { BookOpen, Trash2, Pencil, Wand2, Loader2 } from 'lucide-react';
 import { toast } from 'sonner';
 import { ConfirmDialog } from '@/components/shared/confirm-dialog';
 import { useListCrud } from '@/hooks/use-list-crud';
@@ -20,6 +20,7 @@ import type { VocaVocabulary } from '@/types/voca';
 export function DayContentManager({ dayId }: { dayId: string }) {
   const [loading, setLoading] = useState(true);
   const [bulkDeleteOpen, setBulkDeleteOpen] = useState(false);
+  const [enriching, setEnriching] = useState(false);
 
   const vocab = useListCrud<VocaVocabulary>({
     apiEndpoint: '/api/voca/vocabulary',
@@ -79,6 +80,36 @@ export function DayContentManager({ dayId }: { dayId: string }) {
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dayId]);
+
+  const handleEnrichRound2 = async () => {
+    const needsEnrich = vocab.items.filter((v) => !v.synonyms && !v.antonyms);
+    const targetItems = needsEnrich.length > 0 ? needsEnrich : vocab.items;
+    if (targetItems.length === 0) return;
+
+    setEnriching(true);
+    try {
+      const res = await fetch('/api/voca/vocabulary/enrich-round2', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          items: targetItems.map((v) => ({
+            id: v.id,
+            front_text: v.front_text,
+            back_text: v.back_text,
+            part_of_speech: v.part_of_speech,
+          })),
+        }),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error);
+      toast.success(`${data.updated}개 단어에 2회독 데이터가 생성되었습니다`);
+      loadVocab();
+    } catch (err) {
+      toast.error(err instanceof Error ? err.message : '2회독 데이터 생성 중 오류가 발생했습니다');
+    } finally {
+      setEnriching(false);
+    }
+  };
 
   useEffect(() => { loadVocab(); }, [loadVocab]);
 
@@ -160,6 +191,12 @@ export function DayContentManager({ dayId }: { dayId: string }) {
         <AddVocabDialog dayId={dayId} onAdd={loadVocab} />
         <BulkVocabUpload dayId={dayId} onAdd={loadVocab} />
         <PdfVocabExtract dayId={dayId} onAdd={loadVocab} />
+        {vocab.items.length > 0 && (
+          <Button size="sm" variant="outline" onClick={handleEnrichRound2} disabled={enriching}>
+            {enriching ? <Loader2 className="h-3.5 w-3.5 mr-1 animate-spin" /> : <Wand2 className="h-3.5 w-3.5 mr-1" />}
+            {enriching ? '생성 중...' : vocab.items.some((v) => !v.synonyms && !v.antonyms) ? '2회독 생성' : '2회독 재생성'}
+          </Button>
+        )}
       </div>
 
       <ConfirmDialog

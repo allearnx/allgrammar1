@@ -4,6 +4,7 @@ import { logger } from '@/lib/logger';
 import { checkRateLimit } from '@/lib/api/rate-limit';
 import Anthropic from '@anthropic-ai/sdk';
 import { extractText } from 'unpdf';
+import { parseAiJsonArray } from '@/lib/ai-json';
 
 export const maxDuration = 120;
 
@@ -15,10 +16,12 @@ const PROMPT = `아래 텍스트에서 영어 단어를 추출해주세요.
 - 중복 없이 핵심 단어만 선별
 - 관사(a, the), 전치사(in, on), 대명사(I, you) 등 기본 단어 제외
 - 고유명사 제외
+- 각 단어에 유의어(s), 반의어(a), 관련 숙어(i)도 함께 제공
+- 유의어/반의어가 없으면 null, 숙어가 없으면 null
 
 JSON 배열로만 응답 (다른 텍스트 없이):
-[{"w":"영어 단어","m":"한국어 뜻","p":"n."}]
-w=단어, m=뜻, p=품사(n./v./adj./adv./prep./conj.)`;
+[{"w":"단어","m":"뜻","p":"n.","s":"유의어1, 유의어2","a":"반의어1","i":[{"en":"숙어","ko":"뜻","example_en":"예문","example_ko":"해석"}]}]
+w=단어, m=뜻, p=품사(n./v./adj./adv./prep./conj.), s=유의어(쉼표 구분, 없으면 null), a=반의어(쉼표 구분, 없으면 null), i=숙어 배열(없으면 null)`;
 
 // 페이지 텍스트를 ~6000자 이하 그룹으로 묶기
 function groupPages(pages: string[], maxLen: number): string[] {
@@ -48,21 +51,15 @@ async function extractChunk(chunk: string): Promise<unknown[]> {
   });
 
   const message = await stream.finalMessage();
-  const responseText = message.content[0].type === 'text' ? message.content[0].text : '';
-  const cleaned = responseText.replace(/```(?:json)?\s*/g, '').replace(/```\s*/g, '').trim();
-  const jsonMatch = cleaned.match(/\[[\s\S]*\]/);
-  if (!jsonMatch) return [];
-
-  // 간소화 필드 → 기존 형식으로 변환
-  const raw = JSON.parse(jsonMatch[0]);
-  return raw.map((item: { w: string; m: string; p?: string }) => ({
+  const raw = parseAiJsonArray<{ w: string; m: string; p?: string; s?: string | null; a?: string | null; i?: Array<{ en: string; ko: string; example_en?: string; example_ko?: string }> | null }>(message);
+  return raw.map((item) => ({
     front_text: item.w,
     back_text: item.m,
     part_of_speech: item.p || null,
     example_sentence: null,
-    synonyms: null,
-    antonyms: null,
-    idioms: null,
+    synonyms: item.s || null,
+    antonyms: item.a || null,
+    idioms: item.i || null,
   }));
 }
 

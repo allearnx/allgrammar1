@@ -3,6 +3,7 @@ import { getUser } from '@/lib/auth/helpers';
 import { logger } from '@/lib/logger';
 import { checkRateLimit } from '@/lib/api/rate-limit';
 import Anthropic from '@anthropic-ai/sdk';
+import { extractAiText, parseAiJsonObject } from '@/lib/ai-json';
 
 export const maxDuration = 120;
 
@@ -66,16 +67,11 @@ JSON 객체로만 응답 (다른 텍스트 없이):
       ],
     });
 
-    const responseText = message.content[0].type === 'text' ? message.content[0].text : '';
-    const cleaned = responseText.replace(/```(?:json)?\s*/g, '').replace(/```\s*/g, '').trim();
-
-    const jsonMatch = cleaned.match(/\{[\s\S]*\}/);
-    if (!jsonMatch) {
-      logger.warn('ai.parse_fail', { raw: responseText.slice(0, 500) });
+    const result = parseAiJsonObject<{ title?: string; original_text?: string; korean_translation?: string }>(message);
+    if (!result) {
+      logger.warn('ai.parse_fail', { raw: extractAiText(message).slice(0, 500) });
       throw new Error('AI 응답에서 JSON을 파싱할 수 없습니다.');
     }
-
-    const result = JSON.parse(jsonMatch[0]);
     return NextResponse.json({
       title: result.title || '',
       original_text: result.original_text || '',

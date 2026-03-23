@@ -3,6 +3,7 @@ import { createApiHandler } from '@/lib/api';
 import { logger } from '@/lib/logger';
 import { z } from 'zod';
 import Anthropic from '@anthropic-ai/sdk';
+import { extractAiText } from '@/lib/ai-json';
 
 export const maxDuration = 120;
 
@@ -91,12 +92,10 @@ Respond with ONLY a JSON array (no other text):
       ],
     });
 
-    const responseText = message.content[0].type === 'text' ? message.content[0].text : '';
-    const cleaned = responseText.replace(/```(?:json)?\s*/g, '').replace(/```\s*/g, '').trim();
-
+    const cleaned = extractAiText(message);
     const jsonMatch = cleaned.match(/\[[\s\S]*\]/);
     if (!jsonMatch) {
-      logger.warn('ai.parse_fail', { raw: responseText.slice(0, 500) });
+      logger.warn('ai.parse_fail', { raw: cleaned.slice(0, 500) });
       return NextResponse.json({ items: [] });
     }
 

@@ -3,6 +3,7 @@ import { createApiHandler, dbResult } from '@/lib/api';
 import { logger } from '@/lib/logger';
 import { similarProblemGenerateSchema } from '@/lib/api/schemas';
 import Anthropic from '@anthropic-ai/sdk';
+import { parseAiJsonArray } from '@/lib/ai-json';
 
 export const maxDuration = 60;
 
@@ -69,15 +70,10 @@ JSON 배열로만 응답:
         ],
       });
 
-      const responseText = message.content[0].type === 'text' ? message.content[0].text : '';
-      const cleaned = responseText.replace(/```(?:json)?\s*/g, '').replace(/```\s*/g, '').trim();
-      const jsonMatch = cleaned.match(/\[[\s\S]*\]/);
-
-      if (!jsonMatch) {
+      const questions = parseAiJsonArray(message);
+      if (questions.length === 0) {
         throw new Error('AI 응답 파싱 실패');
       }
-
-      const questions = JSON.parse(jsonMatch[0]);
 
       const rows = questions.map((q: unknown) => ({
         unit_id: unitId,
