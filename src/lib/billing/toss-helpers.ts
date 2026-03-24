@@ -1,20 +1,43 @@
 import { createClient } from '@/lib/supabase/client';
 import { toast } from 'sonner';
 
-export function requestTossCardAuth(customerKey: string) {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function getTossSDK(): any | null {
   // @ts-expect-error -- tosspayments sdk loaded via script
-  const tossPayments = window.TossPayments?.(
-    process.env.NEXT_PUBLIC_TOSS_PAYMENTS_CLIENT_KEY,
-  );
-  if (!tossPayments) {
-    toast.error('결제 모듈을 불러올 수 없습니다');
-    return;
-  }
+  const tp = window.TossPayments?.(process.env.NEXT_PUBLIC_TOSS_PAYMENTS_CLIENT_KEY);
+  if (!tp) toast.error('결제 모듈을 불러올 수 없습니다');
+  return tp ?? null;
+}
 
-  const payment = tossPayments.payment({ customerKey });
-  payment.requestBillingAuth('카드', {
+export function requestTossCardAuth(customerKey: string) {
+  const tp = getTossSDK();
+  if (!tp) return;
+
+  tp.payment({ customerKey }).requestBillingAuth('카드', {
     successUrl: `${window.location.origin}/billing/callback?customerKey=${customerKey}`,
     failUrl: `${window.location.origin}/billing/callback`,
+  });
+}
+
+export function requestTossPayment({
+  amount,
+  orderId,
+  orderName,
+}: {
+  amount: number;
+  orderId: string;
+  orderName: string;
+}) {
+  const tp = getTossSDK();
+  if (!tp) return;
+
+  tp.payment({ customerKey: 'ANONYMOUS' }).requestPayment({
+    method: '카드',
+    amount: { currency: 'KRW', value: amount },
+    orderId,
+    orderName,
+    successUrl: `${window.location.origin}/payment/callback?name=${encodeURIComponent(orderName)}`,
+    failUrl: `${window.location.origin}/payment/callback`,
   });
 }
 

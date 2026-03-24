@@ -2,6 +2,7 @@ export type PlanTarget = 'academy' | 'individual';
 export type SubscriptionStatus = 'trialing' | 'active' | 'past_due' | 'canceled' | 'expired';
 export type SubscriptionTier = 'free' | 'paid';
 export type PaymentStatus = 'success' | 'failed' | 'refunded';
+export type OrderStatus = 'pending' | 'paid' | 'failed' | 'refunded' | 'canceled';
 
 export interface SubscriptionPlan {
   id: string;
@@ -47,6 +48,21 @@ export interface PaymentHistory {
   failure_code: string | null;
   failure_message: string | null;
   receipt_url: string | null;
+  paid_at: string | null;
+  created_at: string;
+}
+
+export interface Order {
+  id: string;
+  user_id: string;
+  order_name: string;
+  amount: number;
+  status: OrderStatus;
+  toss_order_id: string;
+  toss_payment_key: string | null;
+  receipt_url: string | null;
+  failure_code: string | null;
+  failure_message: string | null;
   paid_at: string | null;
   created_at: string;
 }

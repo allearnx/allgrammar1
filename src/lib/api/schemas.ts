@@ -520,6 +520,13 @@ export const subscriptionCancelSchema = z.object({
   subscriptionId: ID,
 });
 
+export const paymentConfirmSchema = z.object({
+  paymentKey: z.string().min(1),
+  orderId: z.string().min(1),
+  amount: z.number().int().min(100),
+  orderName: z.string().min(1),
+});
+
 // ── Academy Settings Schemas ──
 
 export const academySettingsSchema = z.object({

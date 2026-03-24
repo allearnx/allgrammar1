@@ -67,6 +67,18 @@ interface ChargeResponse {
   receipt?: { url: string };
 }
 
+export async function confirmPayment(
+  paymentKey: string,
+  orderId: string,
+  amount: number,
+): Promise<ChargeResponse> {
+  return tossRequest<ChargeResponse>(
+    '/payments/confirm',
+    { paymentKey, orderId, amount },
+    orderId, // Idempotency-Key로 중복 승인 방지
+  );
+}
+
 export async function chargeBilling(
   billingKey: string,
   params: {
