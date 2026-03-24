@@ -11,7 +11,6 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
 import ConsultationForm from '@/components/public/consultation-form';
-import PublicFooter from '@/components/public/footer';
 
 // 후기 이미지 (1.png ~ 13.png)
 const reviewImages = Array.from({ length: 13 }, (_, i) => `/review/${i + 1}.png`);
@@ -334,9 +333,6 @@ export default function LandingPage() {
 
       {/* ===== 5. 상담 신청 폼 ===== */}
       <ConsultationForm />
-
-      {/* ===== 6. 푸터 ===== */}
-      <PublicFooter />
 
       {/* ===== 플로팅 상담 버튼 ===== */}
       <button

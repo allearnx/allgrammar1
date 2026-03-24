@@ -2,7 +2,6 @@ import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { createAdminClient } from '@/lib/supabase/admin';
 import { CATEGORY_LABELS, formatPrice, type Course, type TeacherProfile } from '@/types/public';
-import PublicFooter from '@/components/public/footer';
 
 function getCategoryColor(category: string) {
   switch (category) {
@@ -206,7 +205,6 @@ export default async function CourseDetailPage({
         </div>
       </section>
 
-      <PublicFooter />
     </>
   );
 }
