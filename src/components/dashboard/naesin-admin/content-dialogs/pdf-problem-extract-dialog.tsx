@@ -20,12 +20,99 @@ import type { NaesinProblemQuestion } from '@/types/naesin';
 interface GeneratedQuestion {
   number: number;
   question: string;
-  options?: string[] | null;
+  options: string[] | null;
   answer: string;
-  explanation?: string;
+  explanation: string;
 }
 
 type Step = 'upload' | 'loading' | 'preview';
+
+function hasOptions(q: GeneratedQuestion): boolean {
+  return q.options !== null && q.options.length > 0;
+}
+
+/** AI 응답을 정규화: options/explanation을 일관된 타입으로 */
+function normalizeQuestions(raw: Record<string, unknown>[]): GeneratedQuestion[] {
+  return raw.map((q, i) => ({
+    number: (q.number as number) || i + 1,
+    question: (q.question as string) || '',
+    options: Array.isArray(q.options) && q.options.length > 0 ? q.options as string[] : null,
+    answer: String(q.answer ?? ''),
+    explanation: (q.explanation as string) || '',
+  }));
+}
+
+function QuestionEditRow({
+  question,
+  onUpdate,
+  onUpdateOption,
+  onDone,
+}: {
+  question: GeneratedQuestion;
+  onUpdate: (field: keyof GeneratedQuestion, value: string) => void;
+  onUpdateOption: (optIdx: number, value: string) => void;
+  onDone: () => void;
+}) {
+  return (
+    <td colSpan={5} className="p-3 space-y-2">
+      <div>
+        <Label className="text-xs">문제</Label>
+        <Textarea
+          value={question.question}
+          onChange={(e) => onUpdate('question', e.target.value)}
+          rows={2}
+        />
+      </div>
+      {hasOptions(question) && (
+        <div className="grid grid-cols-5 gap-1">
+          {question.options!.map((opt, oi) => (
+            <Input
+              key={oi}
+              value={opt}
+              onChange={(e) => onUpdateOption(oi, e.target.value)}
+              className="text-xs"
+            />
+          ))}
+        </div>
+      )}
+      <div className="grid grid-cols-2 gap-2">
+        <div>
+          <Label className="text-xs">정답</Label>
+          <Input value={question.answer} onChange={(e) => onUpdate('answer', e.target.value)} />
+        </div>
+        <div>
+          <Label className="text-xs">해설</Label>
+          <Input value={question.explanation} onChange={(e) => onUpdate('explanation', e.target.value)} />
+        </div>
+      </div>
+      <Button size="sm" variant="outline" onClick={onDone}>편집 완료</Button>
+    </td>
+  );
+}
+
+function QuestionViewRow({
+  question,
+  onEdit,
+}: {
+  question: GeneratedQuestion;
+  onEdit: () => void;
+}) {
+  return (
+    <>
+      <td className="p-2">{question.number}</td>
+      <td className="p-2 max-w-[300px] truncate">{question.question}</td>
+      <td className="p-2">
+        <Badge variant={hasOptions(question) ? 'outline' : 'secondary'} className="text-xs">
+          {hasOptions(question) ? '객관식' : '서술형'}
+        </Badge>
+      </td>
+      <td className="p-2 text-xs">{question.answer}</td>
+      <td className="p-2">
+        <Button size="sm" variant="ghost" onClick={onEdit}>수정</Button>
+      </td>
+    </>
+  );
+}
 
 export function PdfProblemExtractDialog({ unitId, unitTitle, onAdd }: { unitId: string; unitTitle?: string; onAdd: () => void }) {
   const [open, setOpen] = useState(false);
@@ -76,7 +163,7 @@ export function PdfProblemExtractDialog({ unitId, unitTitle, onAdd }: { unitId: 
       }
 
       const data = await res.json();
-      setQuestions(data.questions || []);
+      setQuestions(normalizeQuestions(data.questions || []));
       setOriginalCount(data.originalCount || 0);
       setStep('preview');
       toast.success(`원본 ${data.originalCount}문제 → ${data.questions?.length || 0}문제 생성 완료`);
@@ -89,9 +176,7 @@ export function PdfProblemExtractDialog({ unitId, unitTitle, onAdd }: { unitId: 
   }
 
   function updateQuestion(idx: number, field: keyof GeneratedQuestion, value: string) {
-    setQuestions((prev) =>
-      prev.map((q, i) => (i === idx ? { ...q, [field]: value } : q))
-    );
+    setQuestions((prev) => prev.map((q, i) => (i === idx ? { ...q, [field]: value } : q)));
   }
 
   function updateOption(qIdx: number, optIdx: number, value: string) {
@@ -112,7 +197,7 @@ export function PdfProblemExtractDialog({ unitId, unitTitle, onAdd }: { unitId: 
       const formatted: NaesinProblemQuestion[] = questions.map((q, i) => ({
         number: i + 1,
         question: q.question,
-        ...(q.options && q.options.length > 0 ? { options: q.options } : {}),
+        ...(hasOptions(q) ? { options: q.options! } : {}),
         answer: q.answer,
         ...(q.explanation ? { explanation: q.explanation } : {}),
       }));
@@ -148,16 +233,11 @@ export function PdfProblemExtractDialog({ unitId, unitTitle, onAdd }: { unitId: 
     }
   }
 
-  function handleOpenChange(v: boolean) {
-    setOpen(v);
-    if (!v) resetForm();
-  }
-
-  const mcqCount = questions.filter((q) => q.options && q.options.length > 0).length;
-  const subCount = questions.filter((q) => !q.options || q.options.length === 0).length;
+  const mcqCount = questions.filter(hasOptions).length;
+  const subCount = questions.length - mcqCount;
 
   return (
-    <Dialog open={open} onOpenChange={handleOpenChange}>
+    <Dialog open={open} onOpenChange={(v) => { setOpen(v); if (!v) resetForm(); }}>
       <DialogTrigger asChild>
         <Button size="sm" variant="outline">
           <Wand2 className="h-3.5 w-3.5 mr-1" />
@@ -184,18 +264,8 @@ export function PdfProblemExtractDialog({ unitId, unitTitle, onAdd }: { unitId: 
               />
             </div>
             <div>
-              <input
-                ref={fileInputRef}
-                type="file"
-                accept=".pdf"
-                className="hidden"
-                onChange={handleFileUpload}
-              />
-              <Button
-                className="w-full"
-                onClick={() => fileInputRef.current?.click()}
-                disabled={!title.trim()}
-              >
+              <input ref={fileInputRef} type="file" accept=".pdf" className="hidden" onChange={handleFileUpload} />
+              <Button className="w-full" onClick={() => fileInputRef.current?.click()} disabled={!title.trim()}>
                 <FileUp className="h-4 w-4 mr-2" />
                 PDF 업로드 및 생성 시작
               </Button>
@@ -240,63 +310,14 @@ export function PdfProblemExtractDialog({ unitId, unitTitle, onAdd }: { unitId: 
                   {questions.map((q, i) => (
                     <tr key={i} className="border-t">
                       {editingIdx === i ? (
-                        <td colSpan={5} className="p-3 space-y-2">
-                          <div>
-                            <Label className="text-xs">문제</Label>
-                            <Textarea
-                              value={q.question}
-                              onChange={(e) => updateQuestion(i, 'question', e.target.value)}
-                              rows={2}
-                            />
-                          </div>
-                          {q.options && q.options.length > 0 && (
-                            <div className="grid grid-cols-5 gap-1">
-                              {q.options.map((opt, oi) => (
-                                <Input
-                                  key={oi}
-                                  value={opt}
-                                  onChange={(e) => updateOption(i, oi, e.target.value)}
-                                  className="text-xs"
-                                />
-                              ))}
-                            </div>
-                          )}
-                          <div className="grid grid-cols-2 gap-2">
-                            <div>
-                              <Label className="text-xs">정답</Label>
-                              <Input
-                                value={q.answer}
-                                onChange={(e) => updateQuestion(i, 'answer', e.target.value)}
-                              />
-                            </div>
-                            <div>
-                              <Label className="text-xs">해설</Label>
-                              <Input
-                                value={q.explanation || ''}
-                                onChange={(e) => updateQuestion(i, 'explanation', e.target.value)}
-                              />
-                            </div>
-                          </div>
-                          <Button size="sm" variant="outline" onClick={() => setEditingIdx(null)}>
-                            편집 완료
-                          </Button>
-                        </td>
+                        <QuestionEditRow
+                          question={q}
+                          onUpdate={(field, value) => updateQuestion(i, field, value)}
+                          onUpdateOption={(optIdx, value) => updateOption(i, optIdx, value)}
+                          onDone={() => setEditingIdx(null)}
+                        />
                       ) : (
-                        <>
-                          <td className="p-2">{q.number}</td>
-                          <td className="p-2 max-w-[300px] truncate">{q.question}</td>
-                          <td className="p-2">
-                            <Badge variant={!q.options || q.options.length === 0 ? 'secondary' : 'outline'} className="text-xs">
-                              {!q.options || q.options.length === 0 ? '서술형' : '객관식'}
-                            </Badge>
-                          </td>
-                          <td className="p-2 text-xs">{q.answer}</td>
-                          <td className="p-2">
-                            <Button size="sm" variant="ghost" onClick={() => setEditingIdx(i)}>
-                              수정
-                            </Button>
-                          </td>
-                        </>
+                        <QuestionViewRow question={q} onEdit={() => setEditingIdx(i)} />
                       )}
                     </tr>
                   ))}
@@ -304,11 +325,7 @@ export function PdfProblemExtractDialog({ unitId, unitTitle, onAdd }: { unitId: 
               </table>
             </div>
 
-            <Button
-              className="w-full"
-              onClick={handleSubmit}
-              disabled={saving || !title.trim()}
-            >
+            <Button className="w-full" onClick={handleSubmit} disabled={saving || !title.trim()}>
               {saving ? '저장 중...' : `${questions.length}문제 시트 저장`}
             </Button>
           </div>

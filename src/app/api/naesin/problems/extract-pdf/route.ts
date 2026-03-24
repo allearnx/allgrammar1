@@ -3,7 +3,7 @@ import { getUser } from '@/lib/auth/helpers';
 import { logger } from '@/lib/logger';
 import { checkRateLimit } from '@/lib/api/rate-limit';
 import Anthropic from '@anthropic-ai/sdk';
-import { extractAiText } from '@/lib/ai-json';
+import { requireAiJsonArray } from '@/lib/ai-json';
 
 export const maxDuration = 120;
 
@@ -71,17 +71,11 @@ JSON 배열로만 응답 (다른 텍스트 없이):
       ],
     });
 
-    const cleaned = extractAiText(message);
-    const jsonMatch = cleaned.match(/\[[\s\S]*\]/);
-    if (!jsonMatch) {
-      logger.warn('ai.parse_fail', { raw: cleaned.slice(0, 500) });
-      throw new Error('AI 응답에서 JSON을 파싱할 수 없습니다.');
-    }
-
-    const questions = JSON.parse(jsonMatch[0]);
+    const questions = requireAiJsonArray(message, 'ai.pdf_extract');
     return NextResponse.json({ questions });
   } catch (error) {
-    logger.error('ai.pdf_extract', { error: error instanceof Error ? error.message : String(error) });
+    const msg = error instanceof Error ? error.message : String(error);
+    logger.error('ai.pdf_extract', { error: msg });
     return NextResponse.json(
       { error: error instanceof Error ? error.message : 'PDF 파싱 중 오류가 발생했습니다.' },
       { status: 500 }

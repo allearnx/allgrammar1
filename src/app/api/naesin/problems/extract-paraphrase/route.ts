@@ -3,7 +3,7 @@ import { getUser } from '@/lib/auth/helpers';
 import { logger } from '@/lib/logger';
 import { checkRateLimit } from '@/lib/api/rate-limit';
 import Anthropic from '@anthropic-ai/sdk';
-import { extractAiText } from '@/lib/ai-json';
+import { requireAiJsonArray } from '@/lib/ai-json';
 
 export const maxDuration = 300;
 
@@ -47,11 +47,7 @@ export async function POST(request: NextRequest) {
           content: [
             {
               type: 'document',
-              source: {
-                type: 'base64',
-                media_type: mediaType,
-                data: pdfBase64,
-              },
+              source: { type: 'base64', media_type: mediaType, data: pdfBase64 },
             },
             {
               type: 'text',
@@ -84,14 +80,7 @@ export async function POST(request: NextRequest) {
       ],
     });
 
-    const extractedText = extractAiText(extractMessage);
-    const extractMatch = extractedText.match(/\[[\s\S]*\]/);
-    if (!extractMatch) {
-      logger.warn('ai.extract_parse_fail', { raw: extractedText.slice(0, 500) });
-      throw new Error('PDF에서 문제를 추출할 수 없습니다.');
-    }
-
-    const originalQuestions = JSON.parse(extractMatch[0]);
+    const originalQuestions = requireAiJsonArray(extractMessage, 'ai.extract');
     logger.info('ai.extract_done', { count: originalQuestions.length, unitId });
 
     // Step 2: Paraphrase into 50 questions
@@ -131,19 +120,13 @@ ${DISTRIBUTION}
       ],
     });
 
-    const paraphrasedText = extractAiText(paraphraseMessage);
-    const paraphraseMatch = paraphrasedText.match(/\[[\s\S]*\]/);
-    if (!paraphraseMatch) {
-      logger.warn('ai.paraphrase_parse_fail', { raw: paraphrasedText.slice(0, 500) });
-      throw new Error('패러프레이징된 문제를 생성할 수 없습니다.');
-    }
-
-    const questions = JSON.parse(paraphraseMatch[0]);
+    const questions = requireAiJsonArray(paraphraseMessage, 'ai.paraphrase');
     logger.info('ai.paraphrase_done', { count: questions.length, unitId });
 
     return NextResponse.json({ questions, originalCount: originalQuestions.length });
   } catch (error) {
-    logger.error('ai.extract_paraphrase', { error: error instanceof Error ? error.message : String(error) });
+    const msg = error instanceof Error ? error.message : String(error);
+    logger.error('ai.extract_paraphrase', { error: msg });
     return NextResponse.json(
       { error: error instanceof Error ? error.message : 'PDF 패러프레이징 중 오류가 발생했습니다.' },
       { status: 500 }

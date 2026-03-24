@@ -12,6 +12,7 @@ import {
   Brain,
 } from 'lucide-react';
 import { toast } from 'sonner';
+import { logger } from '@/lib/logger';
 import type { NaesinVocabulary, NaesinGrammarLesson, NaesinPassage } from '@/types/database';
 import { ConfirmDialog } from '@/components/shared/confirm-dialog';
 import { AddVocabDialog, BulkVocabUpload, PdfVocabExtract } from './vocab-dialogs';
@@ -112,7 +113,7 @@ export function UnitContentManager({ unitId }: { unitId: string }) {
       setLastReviewCount(lr.count ?? 0);
       vocab.setSelectedIds(new Set());
     } catch (err) {
-      console.error(err);
+      logger.error('unit.load_counts', { error: err instanceof Error ? err.message : String(err) });
       toast.error('데이터를 불러오지 못했습니다');
     }
   }, [unitId, vocab]);
@@ -135,7 +136,7 @@ export function UnitContentManager({ unitId }: { unitId: string }) {
         toast.error('삭제 실패');
       }
     } catch (err) {
-      console.error(err);
+      logger.error('unit.delete_passage', { error: err instanceof Error ? err.message : String(err) });
       toast.error('지문 삭제 중 오류가 발생했습니다');
     }
   }
@@ -234,7 +235,7 @@ export function UnitContentManager({ unitId }: { unitId: string }) {
         toast.error('수정 실패');
       }
     } catch (err) {
-      console.error(err);
+      logger.error('unit.save_passage', { error: err instanceof Error ? err.message : String(err) });
       toast.error('지문 수정 중 오류가 발생했습니다');
     } finally {
       setSavingPassage(false);
@@ -255,7 +256,7 @@ export function UnitContentManager({ unitId }: { unitId: string }) {
         toast.error('삭제 실패');
       }
     } catch (err) {
-      console.error(err);
+      logger.error('unit.delete_grammar', { error: err instanceof Error ? err.message : String(err) });
       toast.error('문법 설명 삭제 중 오류가 발생했습니다');
     }
   }
@@ -285,7 +286,7 @@ export function UnitContentManager({ unitId }: { unitId: string }) {
       setPassageList((prev) => prev.map((p) => (p.id === passage.id ? updated : p)));
       toast.success(`어법/어휘 문제 ${(gvData.items || []).length}개 생성됨`);
     } catch (err) {
-      console.error(err);
+      logger.error('unit.regen_grammar_vocab', { error: err instanceof Error ? err.message : String(err) });
       toast.error('어법/어휘 재생성 실패');
     } finally {
       setRegeneratingGV(null);
