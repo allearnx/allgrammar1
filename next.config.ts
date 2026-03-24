@@ -30,6 +30,17 @@ const nextConfig: NextConfig = {
     },
   },
 
+  async redirects() {
+    return [
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "allrounderenglish.kr" }],
+        destination: "https://home.allrounderenglish.co.kr/:path*",
+        permanent: true,
+      },
+    ];
+  },
+
   async headers() {
     return [
       {
