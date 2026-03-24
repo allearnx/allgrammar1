@@ -12,6 +12,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader } from '@/co
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { AdminSignupFields } from '@/components/auth/admin-signup-fields';
 import { InviteCodeField } from '@/components/auth/invite-code-field';
+import { AcademySignupGuide } from '@/components/auth/academy-signup-guide';
 import { toast } from 'sonner';
 import type { UserRole } from '@/types/database';
 
@@ -33,11 +34,24 @@ export default function SignUpPage() {
 
   const isAdminRole = role === 'admin';
 
+  function buildMetadata() {
+    const data: Record<string, string | undefined> = { full_name: fullName, role };
+    if (phone.trim()) data.phone = phone.trim();
+
+    if (isAdminRole) {
+      data.academy_name = newAcademyName.trim();
+      data.free_service = freeService;
+      data.contact_number = contactNumber.trim() || undefined;
+    } else {
+      const code = inviteCode.trim().toUpperCase();
+      if (code.length === 6 && academyName) data.invite_code = code;
+    }
+    return data;
+  }
+
   async function handleSignUp(e: React.FormEvent) {
     e.preventDefault();
     setLoading(true);
-
-    const code = inviteCode.trim().toUpperCase();
 
     if (isAdminRole && !newAcademyName.trim()) {
       toast.error('학원명을 입력해주세요');
@@ -48,18 +62,7 @@ export default function SignUpPage() {
     const { error } = await createClient().auth.signUp({
       email,
       password,
-      options: {
-        data: {
-          full_name: fullName,
-          role,
-          ...(phone.trim() ? { phone: phone.trim() } : {}),
-          ...(isAdminRole
-            ? { academy_name: newAcademyName.trim(), free_service: freeService, contact_number: contactNumber.trim() || undefined }
-            : code.length === 6 && academyName
-              ? { invite_code: code }
-              : {}),
-        },
-      },
+      options: { data: buildMetadata() },
     });
 
     if (error) {
@@ -74,70 +77,74 @@ export default function SignUpPage() {
 
   return (
     <div className="flex min-h-screen items-center justify-center px-4 bg-background">
-      <Card className="w-full max-w-lg shadow-xl">
-        <CardHeader className="text-center">
-          <Image src="/logo.jpg" alt="올라영" width={120} height={120} className="mx-auto" />
-          <CardDescription className="mt-2">올라영 AI 러닝 엔진에 가입하세요</CardDescription>
-        </CardHeader>
-        <form onSubmit={handleSignUp}>
-          <CardContent className="space-y-4">
-            <div className="space-y-2">
-              <Label htmlFor="fullName">이름</Label>
-              <Input id="fullName" type="text" placeholder="홍길동" value={fullName} onChange={(e) => setFullName(e.target.value)} required autoComplete="name" />
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="phone">전화번호</Label>
-              <Input id="phone" type="tel" placeholder="010-0000-0000" value={phone} onChange={(e) => setPhone(e.target.value)} autoComplete="tel" />
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="email">이메일</Label>
-              <Input id="email" type="email" placeholder="email@example.com" value={email} onChange={(e) => setEmail(e.target.value)} required autoComplete="email" />
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="password">비밀번호</Label>
-              <Input id="password" type="password" placeholder="6자 이상 입력하세요" value={password} onChange={(e) => setPassword(e.target.value)} required minLength={6} autoComplete="new-password" />
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="role">역할</Label>
-              <Select value={role} onValueChange={(v) => setRole(v as UserRole)}>
-                <SelectTrigger><SelectValue placeholder="역할 선택" /></SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="student">학생</SelectItem>
-                  <SelectItem value="teacher">선생님</SelectItem>
-                  <SelectItem value="admin">학원 원장</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
+      <div className={`w-full transition-all duration-300 grid grid-cols-1 gap-6 items-start ${isAdminRole ? 'max-w-4xl lg:grid-cols-[1fr_380px]' : 'max-w-lg'}`}>
+          <Card className="w-full shadow-xl">
+            <CardHeader className="text-center">
+              <Image src="/logo.jpg" alt="올라영" width={120} height={120} className="mx-auto" />
+              <CardDescription className="mt-2">올라영 AI 러닝 엔진에 가입하세요</CardDescription>
+            </CardHeader>
+            <form onSubmit={handleSignUp}>
+              <CardContent className="space-y-4">
+                <div className="space-y-2">
+                  <Label htmlFor="fullName">이름</Label>
+                  <Input id="fullName" type="text" placeholder="홍길동" value={fullName} onChange={(e) => setFullName(e.target.value)} required autoComplete="name" />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="phone">전화번호</Label>
+                  <Input id="phone" type="tel" placeholder="010-0000-0000" value={phone} onChange={(e) => setPhone(e.target.value)} autoComplete="tel" />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="email">이메일</Label>
+                  <Input id="email" type="email" placeholder="email@example.com" value={email} onChange={(e) => setEmail(e.target.value)} required autoComplete="email" />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="password">비밀번호</Label>
+                  <Input id="password" type="password" placeholder="6자 이상 입력하세요" value={password} onChange={(e) => setPassword(e.target.value)} required minLength={6} autoComplete="new-password" />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="role">역할</Label>
+                  <Select value={role} onValueChange={(v) => setRole(v as UserRole)}>
+                    <SelectTrigger><SelectValue placeholder="역할 선택" /></SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="student">학생</SelectItem>
+                      <SelectItem value="teacher">선생님</SelectItem>
+                      <SelectItem value="admin">학원 원장</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
 
-            {isAdminRole ? (
-              <AdminSignupFields
-                academyName={newAcademyName}
-                onAcademyNameChange={setNewAcademyName}
-                contactNumber={contactNumber}
-                onContactNumberChange={setContactNumber}
-                freeService={freeService}
-                onFreeServiceChange={setFreeService}
-              />
-            ) : (
-              <InviteCodeField
-                value={inviteCode}
-                onChange={setInviteCode}
-                academyName={academyName}
-                onAcademyNameChange={setAcademyName}
-              />
-            )}
-          </CardContent>
-          <CardFooter className="flex flex-col gap-3">
-            <Button type="submit" className="w-full" disabled={loading}>
-              {loading ? '가입 중...' : '회원가입'}
-            </Button>
-            <p className="text-sm text-muted-foreground">
-              이미 계정이 있으신가요?{' '}
-              <Link href="/login" className="text-primary underline-offset-4 hover:underline">로그인</Link>
-            </p>
-          </CardFooter>
-        </form>
-      </Card>
+                {isAdminRole ? (
+                  <AdminSignupFields
+                    academyName={newAcademyName}
+                    onAcademyNameChange={setNewAcademyName}
+                    contactNumber={contactNumber}
+                    onContactNumberChange={setContactNumber}
+                    freeService={freeService}
+                    onFreeServiceChange={setFreeService}
+                  />
+                ) : (
+                  <InviteCodeField
+                    value={inviteCode}
+                    onChange={setInviteCode}
+                    academyName={academyName}
+                    onAcademyNameChange={setAcademyName}
+                  />
+                )}
+              </CardContent>
+              <CardFooter className="flex flex-col gap-3">
+                <Button type="submit" className="w-full" disabled={loading}>
+                  {loading ? '가입 중...' : '회원가입'}
+                </Button>
+                <p className="text-sm text-muted-foreground">
+                  이미 계정이 있으신가요?{' '}
+                  <Link href="/login" className="text-primary underline-offset-4 hover:underline">로그인</Link>
+                </p>
+              </CardFooter>
+            </form>
+          </Card>
+
+          {isAdminRole && <AcademySignupGuide />}
+      </div>
     </div>
   );
 }
