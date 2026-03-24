@@ -1,28 +1,24 @@
 'use client';
 
-import { useState, useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Script from 'next/script';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import { toast } from 'sonner';
 
 export default function PaymentPage() {
   const searchParams = useSearchParams();
   const name = searchParams.get('name') || '';
   const price = Number(searchParams.get('price')) || 0;
-  const [sdkReady, setSdkReady] = useState(false);
-
-  useEffect(() => {
-    if (typeof window !== 'undefined' && 'TossPayments' in window) {
-      setSdkReady(true);
-    }
-  }, []);
 
   const handlePayment = () => {
     if (!name || price < 100) return;
     // @ts-expect-error -- TossPayments v1 loaded via script tag
     const tp = window.TossPayments?.(process.env.NEXT_PUBLIC_TOSS_PAYMENTS_CLIENT_KEY);
-    if (!tp) return;
+    if (!tp) {
+      toast.error('결제 모듈을 불러오는 중입니다. 잠시 후 다시 시도해주세요.');
+      return;
+    }
 
     const orderId = `order_${Date.now()}_${Math.random().toString(36).slice(2, 9)}`;
     tp.requestPayment('카드', {
@@ -51,7 +47,6 @@ export default function PaymentPage() {
       <Script
         src="https://js.tosspayments.com/v1/payment"
         strategy="afterInteractive"
-        onLoad={() => setSdkReady(true)}
       />
       <div className="flex min-h-[60vh] items-center justify-center p-4">
         <Card className="w-full max-w-md">
@@ -65,8 +60,8 @@ export default function PaymentPage() {
                 {price.toLocaleString('ko-KR')}원
               </p>
             </div>
-            <Button onClick={handlePayment} size="lg" className="w-full" disabled={!sdkReady}>
-              {sdkReady ? '결제하기' : '결제 모듈 로딩 중...'}
+            <Button onClick={handlePayment} size="lg" className="w-full">
+              결제하기
             </Button>
           </CardContent>
         </Card>
