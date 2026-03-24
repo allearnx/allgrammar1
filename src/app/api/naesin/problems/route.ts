@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { createApiHandler, dbResult } from '@/lib/api';
-import { problemCreateSchema, idSchema } from '@/lib/api/schemas';
+import { problemCreateSchema, problemPatchSchema, idSchema } from '@/lib/api/schemas';
 import { requireContentPermission } from '@/lib/api/require-content-permission';
 
 const ADMIN_ROLES = ['teacher', 'admin', 'boss'] as const;
@@ -39,6 +39,21 @@ export const POST = createApiHandler(
         answer_key: answerKey || [],
         category: category || 'problem',
       })
+      .select()
+      .single());
+    return NextResponse.json(data);
+  }
+);
+
+export const PATCH = createApiHandler(
+  { roles: [...ADMIN_ROLES], schema: problemPatchSchema },
+  async ({ body, supabase, user }) => {
+    await requireContentPermission(user, supabase);
+    const { id, ...updates } = body as Record<string, unknown>;
+    const data = dbResult(await supabase
+      .from('naesin_problem_sheets')
+      .update(updates)
+      .eq('id', id)
       .select()
       .single());
     return NextResponse.json(data);

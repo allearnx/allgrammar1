@@ -17,7 +17,7 @@ import { Wand2, Loader2, FileUp } from 'lucide-react';
 import { toast } from 'sonner';
 import type { NaesinProblemQuestion } from '@/types/naesin';
 
-interface GeneratedQuestion {
+export interface GeneratedQuestion {
   number: number;
   question: string;
   options: string[] | null;
@@ -27,7 +27,7 @@ interface GeneratedQuestion {
 
 type Step = 'upload' | 'loading' | 'preview';
 
-function hasOptions(q: GeneratedQuestion): boolean {
+export function hasOptions(q: GeneratedQuestion): boolean {
   return q.options !== null && q.options.length > 0;
 }
 
@@ -42,7 +42,7 @@ function normalizeQuestions(raw: Record<string, unknown>[]): GeneratedQuestion[]
   }));
 }
 
-function QuestionEditRow({
+export function QuestionEditRow({
   question,
   onUpdate,
   onUpdateOption,
@@ -90,7 +90,7 @@ function QuestionEditRow({
   );
 }
 
-function QuestionViewRow({
+export function QuestionViewRow({
   question,
   onEdit,
 }: {
@@ -295,7 +295,7 @@ export function PdfProblemExtractDialog({ unitId, unitTitle, onAdd }: { unitId: 
               {subCount > 0 && <Badge variant="outline">서술형 {subCount}</Badge>}
             </div>
 
-            <div className="rounded-lg border overflow-hidden max-h-[400px] overflow-y-auto">
+            <div className="rounded-lg border overflow-hidden max-h-[60vh] overflow-y-auto">
               <table className="w-full text-sm">
                 <thead className="bg-muted/50 sticky top-0">
                   <tr>

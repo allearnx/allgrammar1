@@ -14,6 +14,7 @@ import {
 import { toast } from 'sonner';
 import { logger } from '@/lib/logger';
 import type { NaesinVocabulary, NaesinGrammarLesson, NaesinPassage } from '@/types/database';
+import type { NaesinProblemSheet } from '@/types/naesin';
 import { ConfirmDialog } from '@/components/shared/confirm-dialog';
 import { AddVocabDialog, BulkVocabUpload, PdfVocabExtract } from './vocab-dialogs';
 import { AddPassageDialog, AddGrammarDialog, AddOmrDialog, AddProblemDialog, AddLastReviewDialog, BulkOmrUploadDialog, BulkProblemUploadDialog, PdfProblemExtractDialog } from './content-dialogs';
@@ -23,8 +24,35 @@ import { useInlineEdit } from '@/hooks/use-inline-edit';
 import { useConfirmDelete } from '@/hooks/use-confirm-delete';
 import { extractVideoId } from '@/lib/utils/youtube';
 import { UnitVocabList } from './unit-vocab-list';
-import { UnitPassageList, type PassageEditForm } from './unit-passage-list';
+import { UnitPassageList } from './unit-passage-list';
 import { UnitGrammarList } from './unit-grammar-list';
+import { UnitProblemList } from './unit-problem-list';
+
+/** 공통 삭제 핸들러 생성 */
+function makeDeleteHandler(
+  endpoint: string,
+  setList: (fn: (prev: { id: string }[]) => { id: string }[]) => void,
+  messages: { success: string; error: string; logKey: string },
+) {
+  return async (id: string) => {
+    try {
+      const res = await fetch(endpoint, {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id }),
+      });
+      if (res.ok) {
+        setList((prev) => prev.filter((item) => item.id !== id));
+        toast.success(messages.success);
+      } else {
+        toast.error('삭제 실패');
+      }
+    } catch (err) {
+      logger.error(messages.logKey, { error: err instanceof Error ? err.message : String(err) });
+      toast.error(messages.error);
+    }
+  };
+}
 
 export function UnitContentManager({ unitId }: { unitId: string }) {
   const vocab = useListCrud<NaesinVocabulary>({
@@ -58,14 +86,23 @@ export function UnitContentManager({ unitId }: { unitId: string }) {
 
   const [passageList, setPassageList] = useState<NaesinPassage[]>([]);
   const [showPassageList, setShowPassageList] = useState(false);
-  const [editingPassageId, setEditingPassageId] = useState<string | null>(null);
-  const [passageEditForm, setPassageEditForm] = useState<PassageEditForm>({ title: '', sentences: [] });
-  const [savingPassage, setSavingPassage] = useState(false);
-  const passageDelete = useConfirmDelete(handleDeletePassage);
+  const passageDelete = useConfirmDelete(
+    makeDeleteHandler('/api/naesin/passages', setPassageList as never, {
+      success: '지문이 삭제되었습니다',
+      error: '지문 삭제 중 오류가 발생했습니다',
+      logKey: 'unit.delete_passage',
+    }),
+  );
 
   const [grammarList, setGrammarList] = useState<NaesinGrammarLesson[]>([]);
   const [showGrammarList, setShowGrammarList] = useState(false);
-  const grammarDelete = useConfirmDelete(handleDeleteGrammar);
+  const grammarDelete = useConfirmDelete(
+    makeDeleteHandler('/api/naesin/grammar-lessons', setGrammarList as never, {
+      success: '문법 설명이 삭제되었습니다',
+      error: '문법 설명 삭제 중 오류가 발생했습니다',
+      logKey: 'unit.delete_grammar',
+    }),
+  );
 
   const grammarEdit = useInlineEdit<NaesinGrammarLesson, { title: string; youtube_url: string; text_content: string }>({
     apiEndpoint: '/api/naesin/grammar-lessons',
@@ -88,8 +125,17 @@ export function UnitContentManager({ unitId }: { unitId: string }) {
     messages: { success: '문법 설명이 수정되었습니다', error: '문법 설명 수정 중 오류가 발생했습니다' },
   }, setGrammarList);
 
+  const [problemList, setProblemList] = useState<NaesinProblemSheet[]>([]);
+  const [showProblemList, setShowProblemList] = useState(false);
+  const problemDelete = useConfirmDelete(
+    makeDeleteHandler('/api/naesin/problems', setProblemList as never, {
+      success: '문제 시트가 삭제되었습니다',
+      error: '문제 시트 삭제 중 오류가 발생했습니다',
+      logKey: 'unit.delete_problem',
+    }),
+  );
+
   const [omrCount, setOmrCount] = useState<number | null>(null);
-  const [problemCount, setProblemCount] = useState<number | null>(null);
   const [lastReviewCount, setLastReviewCount] = useState<number | null>(null);
   const [regeneratingGV, setRegeneratingGV] = useState<string | null>(null);
 
@@ -102,14 +148,14 @@ export function UnitContentManager({ unitId }: { unitId: string }) {
         supabase.from('naesin_passages').select('*').eq('unit_id', unitId).order('created_at'),
         supabase.from('naesin_grammar_lessons').select('*').eq('unit_id', unitId).order('sort_order'),
         supabase.from('naesin_omr_sheets').select('*', { count: 'exact', head: true }).eq('unit_id', unitId),
-        supabase.from('naesin_problem_sheets').select('*', { count: 'exact', head: true }).eq('unit_id', unitId).eq('category', 'problem'),
+        supabase.from('naesin_problem_sheets').select('*').eq('unit_id', unitId).eq('category', 'problem').order('created_at'),
         supabase.from('naesin_last_review_content').select('*', { count: 'exact', head: true }).eq('unit_id', unitId),
       ]);
       vocab.setItems((v.data as NaesinVocabulary[]) || []);
       setPassageList((p.data as NaesinPassage[]) || []);
       setGrammarList((g.data as NaesinGrammarLesson[]) || []);
       setOmrCount(o.count ?? 0);
-      setProblemCount(prob.count ?? 0);
+      setProblemList((prob.data as NaesinProblemSheet[]) || []);
       setLastReviewCount(lr.count ?? 0);
       vocab.setSelectedIds(new Set());
     } catch (err) {
@@ -121,145 +167,6 @@ export function UnitContentManager({ unitId }: { unitId: string }) {
   useEffect(() => {
     loadCounts();
   }, [loadCounts]);
-
-  async function handleDeletePassage(id: string) {
-    try {
-      const res = await fetch('/api/naesin/passages', {
-        method: 'DELETE',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ id }),
-      });
-      if (res.ok) {
-        setPassageList((prev) => prev.filter((p) => p.id !== id));
-        toast.success('지문이 삭제되었습니다');
-      } else {
-        toast.error('삭제 실패');
-      }
-    } catch (err) {
-      logger.error('unit.delete_passage', { error: err instanceof Error ? err.message : String(err) });
-      toast.error('지문 삭제 중 오류가 발생했습니다');
-    }
-  }
-
-  function startPassageEdit(passage: NaesinPassage) {
-    setEditingPassageId(passage.id);
-    const sentences = Array.isArray(passage.sentences) && passage.sentences.length > 0
-      ? passage.sentences.map((s) => ({ original: s.original, korean: s.korean, acceptedAnswers: s.acceptedAnswers || [] }))
-      : [{ original: passage.original_text, korean: passage.korean_translation, acceptedAnswers: [] as string[] }];
-    setPassageEditForm({ title: passage.title, sentences });
-  }
-
-  function updateSentence(idx: number, field: 'original' | 'korean', value: string) {
-    setPassageEditForm((prev) => ({
-      ...prev,
-      sentences: prev.sentences.map((s, i) => (i === idx ? { ...s, [field]: value } : s)),
-    }));
-  }
-
-  function addSentence(afterIdx?: number) {
-    setPassageEditForm((prev) => {
-      const newSentence = { original: '', korean: '', acceptedAnswers: [] };
-      if (afterIdx === undefined) {
-        return { ...prev, sentences: [...prev.sentences, newSentence] };
-      }
-      const sentences = [...prev.sentences];
-      sentences.splice(afterIdx + 1, 0, newSentence);
-      return { ...prev, sentences };
-    });
-  }
-
-  function removeSentence(idx: number) {
-    if (passageEditForm.sentences.length <= 1) return;
-    setPassageEditForm((prev) => ({
-      ...prev,
-      sentences: prev.sentences.filter((_, i) => i !== idx),
-    }));
-  }
-
-  function addAcceptedAnswer(sentenceIdx: number) {
-    setPassageEditForm((prev) => ({
-      ...prev,
-      sentences: prev.sentences.map((s, i) =>
-        i === sentenceIdx ? { ...s, acceptedAnswers: [...s.acceptedAnswers, ''] } : s
-      ),
-    }));
-  }
-
-  function updateAcceptedAnswer(sentenceIdx: number, answerIdx: number, value: string) {
-    setPassageEditForm((prev) => ({
-      ...prev,
-      sentences: prev.sentences.map((s, i) =>
-        i === sentenceIdx
-          ? { ...s, acceptedAnswers: s.acceptedAnswers.map((a, j) => (j === answerIdx ? value : a)) }
-          : s
-      ),
-    }));
-  }
-
-  function removeAcceptedAnswer(sentenceIdx: number, answerIdx: number) {
-    setPassageEditForm((prev) => ({
-      ...prev,
-      sentences: prev.sentences.map((s, i) =>
-        i === sentenceIdx
-          ? { ...s, acceptedAnswers: s.acceptedAnswers.filter((_, j) => j !== answerIdx) }
-          : s
-      ),
-    }));
-  }
-
-  async function savePassageEdit() {
-    if (!editingPassageId) return;
-    setSavingPassage(true);
-    try {
-      const res = await fetch('/api/naesin/passages', {
-        method: 'PATCH',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          id: editingPassageId,
-          title: passageEditForm.title,
-          sentences: passageEditForm.sentences.map((s) => ({
-            original: s.original,
-            korean: s.korean,
-            ...(s.acceptedAnswers.filter(Boolean).length > 0
-              ? { acceptedAnswers: s.acceptedAnswers.filter(Boolean) }
-              : {}),
-          })),
-        }),
-      });
-      if (res.ok) {
-        const updated = await res.json();
-        setPassageList((prev) => prev.map((p) => (p.id === editingPassageId ? updated : p)));
-        setEditingPassageId(null);
-        toast.success('지문이 수정되었습니다');
-      } else {
-        toast.error('수정 실패');
-      }
-    } catch (err) {
-      logger.error('unit.save_passage', { error: err instanceof Error ? err.message : String(err) });
-      toast.error('지문 수정 중 오류가 발생했습니다');
-    } finally {
-      setSavingPassage(false);
-    }
-  }
-
-  async function handleDeleteGrammar(id: string) {
-    try {
-      const res = await fetch('/api/naesin/grammar-lessons', {
-        method: 'DELETE',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ id }),
-      });
-      if (res.ok) {
-        setGrammarList((prev) => prev.filter((l) => l.id !== id));
-        toast.success('문법 설명이 삭제되었습니다');
-      } else {
-        toast.error('삭제 실패');
-      }
-    } catch (err) {
-      logger.error('unit.delete_grammar', { error: err instanceof Error ? err.message : String(err) });
-      toast.error('문법 설명 삭제 중 오류가 발생했습니다');
-    }
-  }
 
   async function regenerateGrammarVocab(passage: NaesinPassage) {
     if (!passage.sentences || passage.sentences.length === 0) {
@@ -293,17 +200,12 @@ export function UnitContentManager({ unitId }: { unitId: string }) {
     }
   }
 
-  function handlePassageTitleChange(title: string) {
-    setPassageEditForm((prev) => ({ ...prev, title }));
-  }
-
-  const grammarCount = grammarList.length;
   const sections = [
     { label: '단어', icon: BookOpen, count: vocab.items.length, color: 'text-blue-500', toggle: () => setShowVocabList(!showVocabList), expanded: showVocabList },
     { label: '교과서 지문', icon: FileText, count: passageList.length, color: 'text-orange-500', toggle: () => setShowPassageList(!showPassageList), expanded: showPassageList },
-    { label: '문법 설명', icon: GraduationCap, count: grammarCount, color: 'text-green-500', toggle: () => setShowGrammarList(!showGrammarList), expanded: showGrammarList },
+    { label: '문법 설명', icon: GraduationCap, count: grammarList.length, color: 'text-green-500', toggle: () => setShowGrammarList(!showGrammarList), expanded: showGrammarList },
     { label: 'OMR 시트', icon: ClipboardList, count: omrCount, color: 'text-indigo-500' },
-    { label: '문제풀이', icon: ClipboardList, count: problemCount, color: 'text-red-500' },
+    { label: '문제풀이', icon: ClipboardList, count: problemList.length, color: 'text-red-500', toggle: () => setShowProblemList(!showProblemList), expanded: showProblemList },
     { label: '직전보강', icon: Brain, count: lastReviewCount, color: 'text-amber-500' },
   ];
 
@@ -351,20 +253,8 @@ export function UnitContentManager({ unitId }: { unitId: string }) {
       {showPassageList && passageList.length > 0 && (
         <UnitPassageList
           passages={passageList}
-          editingId={editingPassageId}
-          editForm={passageEditForm}
-          savingPassage={savingPassage}
           regeneratingGV={regeneratingGV}
-          onStartEdit={startPassageEdit}
-          onCancelEdit={() => setEditingPassageId(null)}
-          onSaveEdit={savePassageEdit}
-          onTitleChange={handlePassageTitleChange}
-          onUpdateSentence={updateSentence}
-          onAddSentence={addSentence}
-          onRemoveSentence={removeSentence}
-          onAddAcceptedAnswer={addAcceptedAnswer}
-          onUpdateAcceptedAnswer={updateAcceptedAnswer}
-          onRemoveAcceptedAnswer={removeAcceptedAnswer}
+          onUpdate={(updated) => setPassageList((prev) => prev.map((p) => (p.id === updated.id ? updated : p)))}
           onRequestDelete={passageDelete.requestDelete}
           onRegenerateGrammarVocab={regenerateGrammarVocab}
         />
@@ -380,6 +270,14 @@ export function UnitContentManager({ unitId }: { unitId: string }) {
           cancelEdit={grammarEdit.cancelEdit}
           saveEdit={grammarEdit.saveEdit}
           onRequestDelete={grammarDelete.requestDelete}
+        />
+      )}
+
+      {showProblemList && problemList.length > 0 && (
+        <UnitProblemList
+          sheets={problemList}
+          onUpdate={(updated) => setProblemList((prev) => prev.map((s) => (s.id === updated.id ? updated : s)))}
+          onRequestDelete={problemDelete.requestDelete}
         />
       )}
 
@@ -420,6 +318,11 @@ export function UnitContentManager({ unitId }: { unitId: string }) {
       <ConfirmDialog
         description="이 문법 설명을 삭제하시겠습니까?"
         {...grammarDelete.confirmDialogProps}
+      />
+
+      <ConfirmDialog
+        description="이 문제 시트를 삭제하시겠습니까? 관련된 학생 답안도 함께 삭제됩니다."
+        {...problemDelete.confirmDialogProps}
       />
     </div>
   );

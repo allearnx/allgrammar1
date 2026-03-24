@@ -206,6 +206,10 @@ export const problemCreateSchema = z.object({
   category: SHORT.nullish(),
 });
 
+export const problemPatchSchema = z.object({
+  id: ID,
+}).passthrough();
+
 export const vocabQuizSetCreateSchema = z.object({
   unitId: ID,
   title: SHORT,
