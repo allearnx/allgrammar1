@@ -105,7 +105,7 @@ function LoginForm() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full py-4 bg-gradient-to-r from-violet-500 to-purple-500 hover:from-violet-600 hover:to-purple-600 text-white text-lg font-bold rounded-2xl transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-violet-300/30"
+              className="w-full py-4 bg-[#A78BFA] hover:bg-[#9171f0] text-white text-lg font-bold rounded-2xl transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-[#A78BFA]/30"
             >
               {loading ? (
                 <span className="flex items-center justify-center gap-2">
