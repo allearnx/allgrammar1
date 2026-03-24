@@ -172,4 +172,71 @@ describe('getPlanContext', () => {
 
     expect(result).toEqual({ tier: 'free', freeService: null });
   });
+
+  // ── 구독 tier 조회 테스트 ──
+
+  it('active paid subscription → tier: paid', async () => {
+    const supabase = mockSupabaseMultiTable({
+      academies: { data: { services: ['naesin', 'voca'] }, error: null },
+      subscriptions: { data: { status: 'active', tier: 'paid' }, error: null },
+    });
+    mockCreateClient.mockResolvedValue(supabase);
+
+    const { getPlanContext } = await import('@/lib/billing/get-plan-context');
+    const result = await getPlanContext('academy-paid');
+
+    expect(result).toEqual({ tier: 'paid', freeService: 'voca' });
+  });
+
+  it('trialing paid subscription → tier: trialing', async () => {
+    const supabase = mockSupabaseMultiTable({
+      academies: { data: { services: ['naesin'] }, error: null },
+      subscriptions: { data: { status: 'trialing', tier: 'paid' }, error: null },
+    });
+    mockCreateClient.mockResolvedValue(supabase);
+
+    const { getPlanContext } = await import('@/lib/billing/get-plan-context');
+    const result = await getPlanContext('academy-trial');
+
+    expect(result).toEqual({ tier: 'trialing', freeService: 'naesin' });
+  });
+
+  it('active free subscription → tier: free', async () => {
+    const supabase = mockSupabaseMultiTable({
+      academies: { data: { services: ['voca'] }, error: null },
+      subscriptions: { data: { status: 'active', tier: 'free' }, error: null },
+    });
+    mockCreateClient.mockResolvedValue(supabase);
+
+    const { getPlanContext } = await import('@/lib/billing/get-plan-context');
+    const result = await getPlanContext('academy-free-sub');
+
+    expect(result).toEqual({ tier: 'free', freeService: 'voca' });
+  });
+
+  it('past_due paid subscription → tier: paid', async () => {
+    const supabase = mockSupabaseMultiTable({
+      academies: { data: { services: ['naesin'] }, error: null },
+      subscriptions: { data: { status: 'past_due', tier: 'paid' }, error: null },
+    });
+    mockCreateClient.mockResolvedValue(supabase);
+
+    const { getPlanContext } = await import('@/lib/billing/get-plan-context');
+    const result = await getPlanContext('academy-pastdue');
+
+    expect(result).toEqual({ tier: 'paid', freeService: 'naesin' });
+  });
+
+  it('no subscription → tier: free', async () => {
+    const supabase = mockSupabaseMultiTable({
+      academies: { data: { services: ['voca'] }, error: null },
+      subscriptions: { data: null, error: { code: 'PGRST116' } },
+    });
+    mockCreateClient.mockResolvedValue(supabase);
+
+    const { getPlanContext } = await import('@/lib/billing/get-plan-context');
+    const result = await getPlanContext('academy-nosub');
+
+    expect(result).toEqual({ tier: 'free', freeService: 'voca' });
+  });
 });

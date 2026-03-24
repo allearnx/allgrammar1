@@ -1,7 +1,7 @@
 'use client';
 
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { Suspense, useState } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
 import { createClient } from '@/lib/supabase/client';
@@ -14,11 +14,12 @@ import { AdminSignupFields } from '@/components/auth/admin-signup-fields';
 import { InviteCodeField } from '@/components/auth/invite-code-field';
 import { AcademySignupGuide } from '@/components/auth/academy-signup-guide';
 import { toast } from 'sonner';
+import { isSafeRedirect } from '@/lib/auth/redirect';
 import type { UserRole } from '@/types/database';
 
 type FreeService = 'naesin' | 'voca';
 
-export default function SignUpPage() {
+function SignUpForm() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [fullName, setFullName] = useState('');
@@ -31,6 +32,9 @@ export default function SignUpPage() {
   const [phone, setPhone] = useState('');
   const [freeService, setFreeService] = useState<FreeService>('naesin');
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const nextParam = searchParams.get('next');
+  const redirectTo = isSafeRedirect(nextParam) ? nextParam : '/';
 
   const isAdminRole = role === 'admin';
 
@@ -72,7 +76,7 @@ export default function SignUpPage() {
     }
 
     toast.success('회원가입 완료!');
-    router.push('/');
+    router.push(redirectTo);
   }
 
   return (
@@ -137,7 +141,10 @@ export default function SignUpPage() {
                 </Button>
                 <p className="text-sm text-muted-foreground">
                   이미 계정이 있으신가요?{' '}
-                  <Link href="/login" className="text-primary underline-offset-4 hover:underline">로그인</Link>
+                  <Link
+                    href={nextParam && isSafeRedirect(nextParam) ? `/login?next=${encodeURIComponent(nextParam)}` : '/login'}
+                    className="text-primary underline-offset-4 hover:underline"
+                  >로그인</Link>
                 </p>
               </CardFooter>
             </form>
@@ -146,5 +153,13 @@ export default function SignUpPage() {
           {isAdminRole && <AcademySignupGuide />}
       </div>
     </div>
+  );
+}
+
+export default function SignUpPage() {
+  return (
+    <Suspense>
+      <SignUpForm />
+    </Suspense>
   );
 }

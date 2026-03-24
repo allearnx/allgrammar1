@@ -1,7 +1,7 @@
 'use client';
 
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { Suspense, useState } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
 import { createClient } from '@/lib/supabase/client';
@@ -10,12 +10,16 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader } from '@/components/ui/card';
 import { toast } from 'sonner';
+import { isSafeRedirect } from '@/lib/auth/redirect';
 
-export default function LoginPage() {
+function LoginForm() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const nextParam = searchParams.get('next');
+  const redirectTo = isSafeRedirect(nextParam) ? nextParam : '/';
 
   async function handleLogin(e: React.FormEvent) {
     e.preventDefault();
@@ -34,9 +38,13 @@ export default function LoginPage() {
     }
 
     toast.success('로그인 성공!');
-    router.push('/');
+    router.push(redirectTo);
     router.refresh();
   }
+
+  const signupHref = nextParam && isSafeRedirect(nextParam)
+    ? `/signup?next=${encodeURIComponent(nextParam)}`
+    : '/signup';
 
   return (
     <div className="flex min-h-screen items-center justify-center px-4 bg-violet-100">
@@ -88,7 +96,7 @@ export default function LoginPage() {
             </div>
             <p className="text-sm text-muted-foreground">
               계정이 없으신가요?{' '}
-              <Link href="/signup" className="text-primary underline-offset-4 hover:underline">
+              <Link href={signupHref} className="text-primary underline-offset-4 hover:underline">
                 회원가입
               </Link>
             </p>
@@ -96,5 +104,13 @@ export default function LoginPage() {
         </form>
       </Card>
     </div>
+  );
+}
+
+export default function LoginPage() {
+  return (
+    <Suspense>
+      <LoginForm />
+    </Suspense>
   );
 }

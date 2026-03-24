@@ -1,4 +1,5 @@
 import { createClient } from '@/lib/supabase/server';
+import { deriveTier } from './feature-gate';
 import type { Tier } from './feature-gate';
 
 export interface PlanContext {
@@ -33,18 +34,25 @@ export async function getPlanContext(
 
   const supabase = await createClient();
 
-  const { data: academy } = await supabase
-    .from('academies')
-    .select('services')
-    .eq('id', academyId)
-    .single();
+  const [{ data: academy }, { data: sub }] = await Promise.all([
+    supabase.from('academies').select('services').eq('id', academyId).single(),
+    supabase
+      .from('subscriptions')
+      .select('status, tier')
+      .eq('academy_id', academyId)
+      .in('status', ['trialing', 'active', 'past_due'])
+      .order('created_at', { ascending: false })
+      .limit(1)
+      .single(),
+  ]);
 
   const services: string[] = (academy?.services as string[]) ?? [];
-  // Derive freeService from academy.services array (prefer voca if both assigned)
   const freeService: 'naesin' | 'voca' | null =
     services.includes('voca') ? 'voca'
     : services.includes('naesin') ? 'naesin'
     : null;
 
-  return { tier: 'free' as Tier, freeService };
+  const tier: Tier = deriveTier(sub ?? null);
+
+  return { tier, freeService };
 }
