@@ -1,6 +1,6 @@
 'use client';
 
-import { Suspense, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -21,6 +21,13 @@ function LoginForm() {
   const nextParam = searchParams.get('next');
   const redirectTo = isSafeRedirect(nextParam) ? nextParam : '/';
 
+  // next 파라미터를 sessionStorage에 백업 (회원가입 페이지 이동 시 유실 방지)
+  useEffect(() => {
+    if (isSafeRedirect(nextParam)) {
+      sessionStorage.setItem('authRedirect', nextParam);
+    }
+  }, [nextParam]);
+
   async function handleLogin(e: React.FormEvent) {
     e.preventDefault();
     setLoading(true);
@@ -38,6 +45,7 @@ function LoginForm() {
     }
 
     toast.success('로그인 성공!');
+    sessionStorage.removeItem('authRedirect');
     router.push(redirectTo);
     router.refresh();
   }

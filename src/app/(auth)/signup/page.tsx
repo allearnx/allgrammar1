@@ -34,7 +34,10 @@ function SignUpForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const nextParam = searchParams.get('next');
-  const redirectTo = isSafeRedirect(nextParam) ? nextParam : '/';
+  const storedRedirect = typeof window !== 'undefined' ? sessionStorage.getItem('authRedirect') : null;
+  const redirectTo = isSafeRedirect(nextParam) ? nextParam
+    : isSafeRedirect(storedRedirect) ? storedRedirect
+    : '/';
 
   const isAdminRole = role === 'admin';
 
@@ -76,6 +79,7 @@ function SignUpForm() {
     }
 
     toast.success('회원가입 완료!');
+    sessionStorage.removeItem('authRedirect');
     window.location.href = redirectTo;
   }
 
