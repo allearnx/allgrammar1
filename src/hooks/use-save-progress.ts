@@ -2,6 +2,7 @@
 
 import { useCallback } from 'react';
 import { toast } from 'sonner';
+import { logger } from '@/lib/logger';
 
 export function useSaveProgress() {
   const saveTextbookProgress = useCallback(async (passageId: string, type: string, score: number) => {
@@ -12,7 +13,7 @@ export function useSaveProgress() {
         body: JSON.stringify({ passageId, type, score }),
       });
     } catch (err) {
-      console.error(err);
+      logger.error('hook.save_progress', { error: err instanceof Error ? err.message : String(err) });
       toast.error('진도 저장 중 오류가 발생했습니다');
     }
   }, []);

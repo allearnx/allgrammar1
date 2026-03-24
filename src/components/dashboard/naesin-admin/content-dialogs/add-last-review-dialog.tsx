@@ -16,6 +16,7 @@ import {
 import { Brain } from 'lucide-react';
 import { toast } from 'sonner';
 import { extractVideoId } from '@/lib/utils/youtube';
+import { logger } from '@/lib/logger';
 
 export function AddLastReviewDialog({ unitId, onAdd }: { unitId: string; onAdd: () => void }) {
   const [open, setOpen] = useState(false);
@@ -56,7 +57,7 @@ export function AddLastReviewDialog({ unitId, onAdd }: { unitId: string; onAdd: 
       setTextContent('');
       toast.success('직전보강 자료가 추가되었습니다');
     } catch (err) {
-      console.error(err);
+      logger.error('admin.add_last_review', { error: err instanceof Error ? err.message : String(err) });
       toast.error('직전보강 자료 추가 실패');
     } finally {
       setSaving(false);

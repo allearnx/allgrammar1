@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { cn } from '@/lib/utils';
 import { toast } from 'sonner';
 import { Check, X } from 'lucide-react';
+import { logger } from '@/lib/logger';
 
 interface ServiceAssignmentToggleProps {
   studentId: string;
@@ -70,7 +71,7 @@ export function ServiceAssignmentToggle({
       toast.success(isAssigned ? `${label} 해제됨` : `${label} 배정됨`);
       onUpdate?.();
     } catch (err) {
-      console.error(err);
+      logger.error('admin.service_assignment', { error: err instanceof Error ? err.message : String(err) });
       toast.error('서비스 배정 변경에 실패했습니다');
     } finally {
       setLoading(null);
@@ -92,7 +93,7 @@ export function ServiceAssignmentToggle({
       toast.success(`${bookTitle} 배정됨`);
       onUpdate?.();
     } catch (err) {
-      console.error(err);
+      logger.error('admin.service_assignment', { error: err instanceof Error ? err.message : String(err) });
       toast.error('교재 배정에 실패했습니다');
     } finally {
       setBookLoading(false);

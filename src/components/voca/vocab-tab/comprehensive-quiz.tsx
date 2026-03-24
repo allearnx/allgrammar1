@@ -6,6 +6,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
 import { Loader2, CheckCircle, XCircle, RotateCcw } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { logger } from '@/lib/logger';
 import { toast } from 'sonner';
 import type { VocaVocabulary } from '@/types/voca';
 import {
@@ -155,7 +156,7 @@ export function ComprehensiveQuiz({ vocabulary, dayId: _dayId, onComplete }: Com
         .map((r) => r.question.word);
       onComplete(totalScore, wrongWords);
     } catch (err) {
-      console.error(err);
+      logger.error('voca.comprehensive_quiz', { error: err instanceof Error ? err.message : String(err) });
       toast.error('채점 중 오류가 발생했습니다');
     } finally {
       setGrading(false);

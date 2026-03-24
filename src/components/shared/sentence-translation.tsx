@@ -7,6 +7,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Badge } from '@/components/ui/badge';
 import { Send, AlertTriangle, RotateCcw, ChevronRight, Loader2 } from 'lucide-react';
 import type { TranslationExerciseProps, SentenceData, GradingResult, WrongTranslation } from './translation-exercise';
+import { logger } from '@/lib/logger';
 
 export function SentenceBysentenceTranslation({ passage, onComplete, showWrongAlert, sentencesPerPage = 10 }: TranslationExerciseProps) {
   const sentences = passage.sentences! as SentenceData[];
@@ -100,7 +101,7 @@ export function SentenceBysentenceTranslation({ passage, onComplete, showWrongAl
         onComplete(totalScore, newAllWrongs);
       }
     } catch (err) {
-      console.error(err);
+      logger.error('shared.sentence_translation', { error: err instanceof Error ? err.message : String(err) });
       setGradingError(err instanceof Error ? err.message : '채점 중 오류가 발생했습니다');
     } finally {
       setGrading(false);

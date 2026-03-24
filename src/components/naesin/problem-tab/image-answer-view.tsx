@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { AlertTriangle } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { logger } from '@/lib/logger';
 import { toast } from 'sonner';
 import type { NaesinProblemSheet } from '@/types/database';
 import { useProblemDraft } from '@/hooks/use-problem-draft';
@@ -53,7 +54,7 @@ export function ImageAnswerView({
         onComplete?.();
       }
     } catch (err) {
-      console.error(err);
+      logger.error('naesin.image_answer_view', { error: err instanceof Error ? err.message : String(err) });
       toast.error('제출 중 오류가 발생했습니다');
     } finally {
       setSubmitting(false);

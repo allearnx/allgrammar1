@@ -12,6 +12,7 @@ import { AddTextbookDialog, EditTextbookDialog } from './textbook-dialogs';
 import { AddUnitDialog, UnitCard } from './unit-section';
 import { ConfirmDialog } from '@/components/shared/confirm-dialog';
 import { WorkbookManager } from './workbook-manager';
+import { logger } from '@/lib/logger';
 
 interface NaesinAdminClientProps {
   textbooks: NaesinTextbook[];
@@ -46,7 +47,7 @@ export function NaesinAdminClient({ textbooks: initialTextbooks }: NaesinAdminCl
         .order('sort_order');
       setUnits(data || []);
     } catch (err) {
-      console.error(err);
+      logger.error('admin.naesin_index', { error: err instanceof Error ? err.message : String(err) });
       toast.error('단원 목록을 불러오지 못했습니다');
     }
   }
@@ -183,7 +184,7 @@ export function NaesinAdminClient({ textbooks: initialTextbooks }: NaesinAdminCl
                   toast.error('교과서 삭제에 실패했습니다');
                 }
               } catch (err) {
-                console.error(err);
+                logger.error('admin.naesin_index', { error: err instanceof Error ? err.message : String(err) });
                 toast.error('교과서 삭제 중 오류가 발생했습니다');
               }
             }}

@@ -15,6 +15,7 @@ import { toast } from 'sonner';
 import { createClient } from '@/lib/supabase/client';
 import type { EnhancedReportData, WeeklyReportRow } from '@/types/report';
 import { ReportDisplay } from './report-display';
+import { logger } from '@/lib/logger';
 
 // ── 타입 ──
 
@@ -60,7 +61,7 @@ export function ReportsClient({ students }: ReportsClientProps) {
       setCurrentReportId(data.reportId || null);
       toast.success('리포트가 생성되었습니다');
     } catch (err) {
-      console.error(err);
+      logger.error('admin.reports', { error: err instanceof Error ? err.message : String(err) });
       toast.error('리포트 생성 실패');
     } finally {
       setLoading(false);
@@ -87,7 +88,7 @@ export function ReportsClient({ students }: ReportsClientProps) {
       if (error) throw error;
       setHistory((data as WeeklyReportRow[]) || []);
     } catch (err) {
-      console.error(err);
+      logger.error('admin.reports', { error: err instanceof Error ? err.message : String(err) });
       toast.error('이력 조회 실패');
     } finally {
       setHistoryLoading(false);
@@ -114,7 +115,7 @@ export function ReportsClient({ students }: ReportsClientProps) {
       }
       toast.success('리포트가 삭제되었습니다');
     } catch (err) {
-      console.error(err);
+      logger.error('admin.reports', { error: err instanceof Error ? err.message : String(err) });
       toast.error('리포트 삭제 실패');
     }
   }

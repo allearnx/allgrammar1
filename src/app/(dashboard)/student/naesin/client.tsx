@@ -19,6 +19,7 @@ import { LessonCard } from '@/components/naesin/lesson-card';
 import { ExamCountdown } from '@/components/naesin/exam-countdown';
 import type { NaesinTextbook } from '@/types/database';
 import type { UnitSummary, ExamGroup } from '@/lib/naesin/build-unit-summary';
+import { logger } from '@/lib/logger';
 
 const GRADE_COLORS = [
   { accent: '#06B6D4', light: '#ECFEFF', mid: '#CFFAFE', text: '#0891B2' },
@@ -72,7 +73,7 @@ export function NaesinHome({
       setConfirmId(null);
       router.refresh();
     } catch (err) {
-      console.error(err);
+      logger.error('student.naesin_client', { error: err instanceof Error ? err.message : String(err) });
       toast.error('교과서 선택 중 오류가 발생했습니다');
     } finally {
       setSaving(false);

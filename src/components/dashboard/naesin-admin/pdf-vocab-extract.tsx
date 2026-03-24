@@ -14,6 +14,7 @@ import {
 } from '@/components/ui/dialog';
 import { FileText, Loader2, Check, X } from 'lucide-react';
 import { toast } from 'sonner';
+import { logger } from '@/lib/logger';
 
 interface ExtractedWord {
   front_text: string;
@@ -101,7 +102,7 @@ export function PdfVocabExtract({ unitId, onAdd }: { unitId: string; onAdd: () =
       reset();
       toast.success(`${data.count}개 단어가 추가되었습니다`);
     } catch (err) {
-      console.error(err);
+      logger.error('admin.pdf_vocab_extract', { error: err instanceof Error ? err.message : String(err) });
       toast.error('단어 저장 실패');
     } finally {
       setSaving(false);

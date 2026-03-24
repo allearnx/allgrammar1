@@ -9,6 +9,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, Dialog
 import { Plus } from 'lucide-react';
 import { toast } from 'sonner';
 import type { NaesinWorkbook } from '@/types/naesin';
+import { logger } from '@/lib/logger';
 
 export function AddWorkbookDialog({ onAdd }: { onAdd: (wb: NaesinWorkbook) => void }) {
   const [open, setOpen] = useState(false);
@@ -35,7 +36,7 @@ export function AddWorkbookDialog({ onAdd }: { onAdd: (wb: NaesinWorkbook) => vo
       setGrade('1');
       toast.success('교재가 추가되었습니다');
     } catch (err) {
-      console.error(err);
+      logger.error('admin.add_workbook', { error: err instanceof Error ? err.message : String(err) });
       toast.error('교재 추가에 실패했습니다');
     } finally {
       setSaving(false);

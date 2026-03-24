@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { CheckCircle, AlertTriangle } from 'lucide-react';
 import { toast } from 'sonner';
+import { logger } from '@/lib/logger';
 import type { NaesinWrongAnswer } from '@/types/database';
 
 interface WrongAnswerReviewProps {
@@ -34,7 +35,7 @@ export function WrongAnswerReview({ unitId }: WrongAnswerReviewProps) {
       const data = await res.json();
       setWrongAnswers(Array.isArray(data) ? data : []);
     } catch (err) {
-      console.error(err);
+      logger.error('wrong_answer_review', { error: err instanceof Error ? err.message : String(err) });
       } finally {
       setLoading(false);
     }
@@ -54,7 +55,7 @@ export function WrongAnswerReview({ unitId }: WrongAnswerReviewProps) {
       setWrongAnswers((prev) => prev.filter((wa) => wa.id !== id));
       toast.success('해결됨으로 표시되었습니다');
     } catch (err) {
-      console.error(err);
+      logger.error('wrong_answer_review', { error: err instanceof Error ? err.message : String(err) });
       toast.error('업데이트 실패');
     }
   }

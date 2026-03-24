@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { toast } from 'sonner';
+import { logger } from '@/lib/logger';
 import { OmrSheet } from '@/components/naesin/omr-sheet';
 import type { NaesinWorkbookOmrSheet, NaesinWorkbookOmrAttempt } from '@/types/naesin';
 
@@ -70,7 +71,7 @@ export function WorkbookOmrView({ sheet, onSubmitComplete }: WorkbookOmrViewProp
       onSubmitComplete(data);
       toast.success('채점 완료!');
     } catch (err) {
-      console.error(err);
+      logger.error('workbook_omr.view', { error: err instanceof Error ? err.message : String(err) });
       toast.error('제출 중 오류가 발생했습니다');
     } finally {
       setSubmitting(false);

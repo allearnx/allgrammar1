@@ -2,6 +2,7 @@
 
 import { useState, type Dispatch, type SetStateAction } from 'react';
 import { toast } from 'sonner';
+import { logger } from '@/lib/logger';
 
 interface UseListCrudMessages {
   deleteSuccess: string;
@@ -38,7 +39,7 @@ export function useListCrud<T extends { id: string }>(options: {
         toast.error('삭제 실패');
       }
     } catch (err) {
-      console.error(err);
+      logger.error('hook.list_crud', { error: err instanceof Error ? err.message : String(err) });
       toast.error(messages.deleteError);
     }
   }
@@ -61,7 +62,7 @@ export function useListCrud<T extends { id: string }>(options: {
       setSelectedIds(new Set());
       toast.success(messages.bulkSuccess(successCount));
     } catch (err) {
-      console.error(err);
+      logger.error('hook.list_crud', { error: err instanceof Error ? err.message : String(err) });
       toast.error(messages.bulkError);
     } finally {
       setDeleting(false);

@@ -13,6 +13,7 @@ import {
 } from '@/components/ui/dialog';
 import { Upload } from 'lucide-react';
 import { toast } from 'sonner';
+import { logger } from '@/lib/logger';
 
 export function BulkVocabUpload({ dayId, onAdd }: { dayId: string; onAdd: () => void }) {
   const [open, setOpen] = useState(false);
@@ -54,7 +55,7 @@ export function BulkVocabUpload({ dayId, onAdd }: { dayId: string; onAdd: () => 
       setText('');
       toast.success(`${data.count}개 단어가 추가되었습니다`);
     } catch (err) {
-      console.error(err);
+      logger.error('voca_admin.bulk_vocab', { error: err instanceof Error ? err.message : String(err) });
       toast.error('대량 업로드 중 오류가 발생했습니다');
     } finally {
       setSaving(false);

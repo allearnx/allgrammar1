@@ -13,6 +13,7 @@ import {
 } from '@/components/ui/dialog';
 import { BookOpen } from 'lucide-react';
 import { toast } from 'sonner';
+import { logger } from '@/lib/logger';
 
 export function AddVocabDialog({ unitId, onAdd }: { unitId: string; onAdd: () => void }) {
   const [open, setOpen] = useState(false);
@@ -55,7 +56,7 @@ export function AddVocabDialog({ unitId, onAdd }: { unitId: string; onAdd: () =>
       setAntonyms('');
       toast.success('단어가 추가되었습니다');
     } catch (err) {
-      console.error(err);
+      logger.error('admin.add_vocab', { error: err instanceof Error ? err.message : String(err) });
       toast.error('단어 추가 실패');
     } finally {
       setSaving(false);

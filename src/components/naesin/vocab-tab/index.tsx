@@ -3,6 +3,7 @@
 import { useState, useEffect, useMemo, useCallback } from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { toast } from 'sonner';
+import { logger } from '@/lib/logger';
 import { BookOpen } from 'lucide-react';
 import { vocabToMemoryItem } from '@/lib/naesin/adapters';
 import { QuizSetSelector } from '../quiz-set-selector';
@@ -115,7 +116,7 @@ export function VocabTab({ vocabulary, unitId, onStageComplete, quizSets, comple
         onStageComplete();
       }
     } catch (err) {
-      console.error(err);
+      logger.error('naesin.vocab_tab', { error: err instanceof Error ? err.message : String(err) });
       toast.error('진도 저장 중 오류가 발생했습니다');
     }
   }
@@ -129,7 +130,7 @@ export function VocabTab({ vocabulary, unitId, onStageComplete, quizSets, comple
         body: JSON.stringify({ quizSetId: activeSetId, unitId, score, wrongWords }),
       });
     } catch (err) {
-      console.error(err);
+      logger.error('naesin.vocab_tab', { error: err instanceof Error ? err.message : String(err) });
       }
   }
 

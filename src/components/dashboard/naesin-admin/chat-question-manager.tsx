@@ -11,6 +11,7 @@ import { useInlineEdit } from '@/hooks/use-inline-edit';
 import { useConfirmDelete } from '@/hooks/use-confirm-delete';
 import { AddChatQuestionDialog } from './content-dialogs';
 import type { NaesinGrammarChatQuestion } from '@/types/database';
+import { logger } from '@/lib/logger';
 
 interface ChatQuestionManagerProps {
   lessonId: string;
@@ -53,7 +54,7 @@ export function ChatQuestionManager({ lessonId, lessonTitle: _lessonTitle }: Cha
         toast.error('삭제 실패');
       }
     } catch (err) {
-      console.error(err);
+      logger.error('admin.chat_question', { error: err instanceof Error ? err.message : String(err) });
       toast.error('질문 삭제 중 오류가 발생했습니다');
     }
   });
@@ -71,7 +72,7 @@ export function ChatQuestionManager({ lessonId, lessonTitle: _lessonTitle }: Cha
         setQuestions(data);
       }
     } catch (err) {
-      console.error(err);
+      logger.error('admin.chat_question', { error: err instanceof Error ? err.message : String(err) });
       toast.error('질문 목록을 불러오지 못했습니다');
     } finally {
       setLoading(false);

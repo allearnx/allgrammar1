@@ -8,6 +8,7 @@ import { Badge } from '@/components/ui/badge';
 import { AlertTriangle, Loader2, Bot } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { MCQOptionList } from '@/components/shared/mcq-option-list';
+import { logger } from '@/lib/logger';
 import { toast } from 'sonner';
 import type { NaesinProblemSheet, NaesinProblemQuestion } from '@/types/database';
 import { useProblemDraft } from '@/hooks/use-problem-draft';
@@ -132,7 +133,7 @@ export function InteractiveProblemView({
       }
       return await res.json();
     } catch (err) {
-      console.error(err);
+      logger.error('naesin.interactive_view', { error: err instanceof Error ? err.message : String(err) });
       toast.error('AI 채점 중 오류가 발생했습니다.');
       return null;
     }
@@ -298,7 +299,7 @@ export function InteractiveProblemView({
         onComplete?.();
       }
     } catch (err) {
-      console.error(err);
+      logger.error('naesin.interactive_view', { error: err instanceof Error ? err.message : String(err) });
       toast.error('결과 저장에 실패했습니다');
       setFinished(true);
     }

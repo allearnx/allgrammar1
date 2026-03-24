@@ -16,6 +16,7 @@ import {
 import { GraduationCap } from 'lucide-react';
 import { toast } from 'sonner';
 import { extractVideoId } from '@/lib/utils/youtube';
+import { logger } from '@/lib/logger';
 
 export function AddGrammarDialog({ unitId, onAdd }: { unitId: string; onAdd: () => void }) {
   const [open, setOpen] = useState(false);
@@ -53,7 +54,7 @@ export function AddGrammarDialog({ unitId, onAdd }: { unitId: string; onAdd: () 
       setTextContent('');
       toast.success('문법 설명이 추가되었습니다');
     } catch (err) {
-      console.error(err);
+      logger.error('admin.add_grammar', { error: err instanceof Error ? err.message : String(err) });
       toast.error('문법 설명 추가 실패');
     } finally {
       setSaving(false);

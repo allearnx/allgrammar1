@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
+import { logger } from '@/lib/logger';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -36,7 +37,7 @@ export function SocraticChatbot({ lessonId, lessonTitle }: SocraticChatbotProps)
           setHasQuestions(false);
         }
       } catch (err) {
-        console.error(err);
+        logger.error('chatbot.check_questions', { error: err instanceof Error ? err.message : String(err) });
         setHasQuestions(false);
       }
     }

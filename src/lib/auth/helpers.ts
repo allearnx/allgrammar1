@@ -4,6 +4,7 @@ import { createClient } from '@/lib/supabase/server';
 import { redirect } from 'next/navigation';
 import type { AuthUser } from '@/types/auth';
 import type { UserRole } from '@/types/database';
+import { logger } from '@/lib/logger';
 
 export const getUser = cache(async (): Promise<AuthUser | null> => {
   // Fast path: read profile cached by middleware (avoids 2 redundant network calls)
@@ -25,9 +26,9 @@ export const getUser = cache(async (): Promise<AuthUser | null> => {
     error: authError,
   } = await supabase.auth.getUser();
 
-  if (authError) console.error('[getUser] auth error:', authError.message);
+  if (authError) logger.error('auth.get_user', { error: authError.message });
   if (!user) {
-    console.warn('[getUser] no auth user found');
+    logger.warn('auth.no_user');
     return null;
   }
 
@@ -37,7 +38,7 @@ export const getUser = cache(async (): Promise<AuthUser | null> => {
     .eq('id', user.id)
     .single();
 
-  if (profileError) console.error('[getUser] profile error:', profileError.message);
+  if (profileError) logger.error('auth.get_profile', { error: profileError.message });
   if (!profile) return null;
 
   return profile as AuthUser;

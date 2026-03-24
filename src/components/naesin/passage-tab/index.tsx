@@ -3,6 +3,7 @@
 import { useState, useEffect, useMemo } from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { toast } from 'sonner';
+import { logger } from '@/lib/logger';
 import { cn } from '@/lib/utils';
 import { FileText } from 'lucide-react';
 import { passageToTextbookPassage } from '@/lib/naesin/adapters';
@@ -151,7 +152,7 @@ export function PassageTab({ passages, unitId, onStageComplete, requiredStages, 
         onStageComplete();
       }
     } catch (err) {
-      console.error(err);
+      logger.error('naesin.passage_tab', { error: err instanceof Error ? err.message : String(err) });
       toast.error('진도 저장 중 오류가 발생했습니다');
     }
   }
@@ -170,7 +171,7 @@ export function PassageTab({ passages, unitId, onStageComplete, requiredStages, 
         }),
       });
     } catch (err) {
-      console.error(err);
+      logger.error('naesin.passage_tab', { error: err instanceof Error ? err.message : String(err) });
       }
   }
 

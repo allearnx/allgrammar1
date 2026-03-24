@@ -14,6 +14,7 @@ import {
 } from '@/components/ui/dialog';
 import { ClipboardList } from 'lucide-react';
 import { toast } from 'sonner';
+import { logger } from '@/lib/logger';
 
 export function AddOmrDialog({ unitId, onAdd }: { unitId: string; onAdd: () => void }) {
   const [open, setOpen] = useState(false);
@@ -54,7 +55,7 @@ export function AddOmrDialog({ unitId, onAdd }: { unitId: string; onAdd: () => v
       setAnswerKeyText('');
       toast.success('OMR 시트가 추가되었습니다');
     } catch (err) {
-      console.error(err);
+      logger.error('admin.add_omr', { error: err instanceof Error ? err.message : String(err) });
       toast.error('OMR 시트 추가 실패');
     } finally {
       setSaving(false);

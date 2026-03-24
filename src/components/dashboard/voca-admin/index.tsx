@@ -18,6 +18,7 @@ import { toast } from 'sonner';
 import { ConfirmDialog } from '@/components/shared/confirm-dialog';
 import { DaySection } from './day-section';
 import type { VocaBook, VocaDay } from '@/types/voca';
+import { logger } from '@/lib/logger';
 
 interface VocaAdminClientProps {
   books: VocaBook[];
@@ -37,7 +38,7 @@ export function VocaAdminClient({ books: initialBooks }: VocaAdminClientProps) {
       const data = await res.json();
       setDays(data || []);
     } catch (err) {
-      console.error(err);
+      logger.error('voca_admin.index', { error: err instanceof Error ? err.message : String(err) });
       toast.error('Day 목록을 불러오지 못했습니다');
     }
   }
@@ -139,7 +140,7 @@ export function VocaAdminClient({ books: initialBooks }: VocaAdminClientProps) {
               toast.error('교재 삭제에 실패했습니다');
             }
           } catch (err) {
-            console.error(err);
+            logger.error('voca_admin.index', { error: err instanceof Error ? err.message : String(err) });
             toast.error('교재 삭제 중 오류가 발생했습니다');
           }
         }}
@@ -184,7 +185,7 @@ function AddBookDialog({ onAdd }: { onAdd: (book: VocaBook) => void }) {
       setDescription('');
       toast.success('교재가 추가되었습니다');
     } catch (err) {
-      console.error(err);
+      logger.error('voca_admin.index', { error: err instanceof Error ? err.message : String(err) });
       toast.error('교재 추가 중 오류가 발생했습니다');
     } finally {
       setSaving(false);
@@ -247,7 +248,7 @@ function EditBookDialog({
       onOpenChange(false);
       toast.success('교재가 수정되었습니다');
     } catch (err) {
-      console.error(err);
+      logger.error('voca_admin.index', { error: err instanceof Error ? err.message : String(err) });
       toast.error('교재 수정 중 오류가 발생했습니다');
     } finally {
       setSaving(false);

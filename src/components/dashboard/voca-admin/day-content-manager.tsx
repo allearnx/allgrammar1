@@ -16,6 +16,7 @@ import { AddVocabDialog } from './add-vocab-dialog';
 import { BulkVocabUpload } from './bulk-vocab-upload';
 import { PdfVocabExtract } from './pdf-vocab-extract';
 import type { VocaVocabulary } from '@/types/voca';
+import { logger } from '@/lib/logger';
 
 export function DayContentManager({ dayId }: { dayId: string }) {
   const [loading, setLoading] = useState(true);
@@ -73,7 +74,7 @@ export function DayContentManager({ dayId }: { dayId: string }) {
       vocab.setItems(data || []);
       vocab.setSelectedIds(new Set());
     } catch (err) {
-      console.error(err);
+      logger.error('voca_admin.day_content', { error: err instanceof Error ? err.message : String(err) });
       toast.error('단어 목록을 불러오지 못했습니다');
     } finally {
       setLoading(false);

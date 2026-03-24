@@ -15,6 +15,7 @@ import {
 } from '@/components/ui/dialog';
 import { ClipboardList } from 'lucide-react';
 import { toast } from 'sonner';
+import { logger } from '@/lib/logger';
 
 export function AddProblemDialog({ unitId, onAdd }: { unitId: string; onAdd: () => void }) {
   const [open, setOpen] = useState(false);
@@ -60,7 +61,7 @@ export function AddProblemDialog({ unitId, onAdd }: { unitId: string; onAdd: () 
       setPdfUrl('');
       toast.success('문제풀이 시트가 추가되었습니다');
     } catch (err) {
-      console.error(err);
+      logger.error('admin.add_problem', { error: err instanceof Error ? err.message : String(err) });
       toast.error('문제풀이 시트 추가 실패');
     } finally {
       setSaving(false);

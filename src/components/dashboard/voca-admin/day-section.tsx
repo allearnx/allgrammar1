@@ -10,6 +10,7 @@ import { DayContentManager } from './day-content-manager';
 import { PdfBulkExtract } from './pdf-bulk-extract';
 import { AddDayDialog } from './add-day-dialog';
 import type { VocaBook, VocaDay } from '@/types/voca';
+import { logger } from '@/lib/logger';
 
 interface DaySectionProps {
   book: VocaBook;
@@ -97,7 +98,7 @@ function DayCard({
             if (res.ok) onDelete();
             else toast.error('Day 삭제에 실패했습니다');
           } catch (err) {
-            console.error(err);
+            logger.error('voca_admin.day_section', { error: err instanceof Error ? err.message : String(err) });
             toast.error('Day 삭제 중 오류가 발생했습니다');
           }
         }}

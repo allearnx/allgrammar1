@@ -2,6 +2,7 @@
 
 import { useState, type Dispatch, type SetStateAction } from 'react';
 import { toast } from 'sonner';
+import { logger } from '@/lib/logger';
 
 export function useInlineEdit<TItem extends { id: string }, TForm>(
   options: {
@@ -46,7 +47,7 @@ export function useInlineEdit<TItem extends { id: string }, TForm>(
       if (err instanceof Error && err.message) {
         toast.error(err.message);
       } else {
-        console.error(err);
+        logger.error('hook.inline_edit', { error: err instanceof Error ? err.message : String(err) });
         toast.error(messages.error);
       }
     }

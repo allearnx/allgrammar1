@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { FileText } from 'lucide-react';
 import { toast } from 'sonner';
+import { logger } from '@/lib/logger';
 import { OmrSheet } from './omr-sheet';
 import type { NaesinOmrSheet } from '@/types/database';
 
@@ -127,7 +128,7 @@ function OmrSheetView({ sheet, unitId, onStageComplete }: OmrSheetViewProps) {
         onStageComplete();
       }
     } catch (err) {
-      console.error(err);
+      logger.error('naesin.omr_tab', { error: err instanceof Error ? err.message : String(err) });
       toast.error('제출 중 오류가 발생했습니다');
     } finally {
       setSubmitting(false);

@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Copy, RefreshCw, RotateCcw, Target, ArrowRight, CheckCircle } from 'lucide-react';
 import { cn, shuffle } from '@/lib/utils';
 import { MCQOptionList } from '@/components/shared/mcq-option-list';
+import { logger } from '@/lib/logger';
 import { toast } from 'sonner';
 import { ScoreBadges, NextButton } from '@/components/memory/shared';
 import type { NaesinVocabulary, NaesinVocabQuizResult } from '@/types/database';
@@ -114,7 +115,7 @@ export function NaesinQuizView({
         setAttemptNumber(data.result.attempt_number);
       }
     } catch (err) {
-      console.error(err);
+      logger.error('naesin.vocab_quiz', { error: err instanceof Error ? err.message : String(err) });
       } finally {
       setSaving(false);
       setQuizFinished(true);

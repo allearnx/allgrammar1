@@ -14,6 +14,7 @@ import {
 import { Plus } from 'lucide-react';
 import { toast } from 'sonner';
 import type { VocaDay } from '@/types/voca';
+import { logger } from '@/lib/logger';
 
 export function AddDayDialog({ bookId, nextDayNumber, onAdd }: { bookId: string; nextDayNumber: number; onAdd: (day: VocaDay) => void }) {
   const [open, setOpen] = useState(false);
@@ -45,7 +46,7 @@ export function AddDayDialog({ bookId, nextDayNumber, onAdd }: { bookId: string;
       setTitle(`Day ${next}`);
       toast.success('Day가 추가되었습니다');
     } catch (err) {
-      console.error(err);
+      logger.error('voca_admin.add_day', { error: err instanceof Error ? err.message : String(err) });
       toast.error('Day 추가 중 오류가 발생했습니다');
     } finally {
       setSaving(false);

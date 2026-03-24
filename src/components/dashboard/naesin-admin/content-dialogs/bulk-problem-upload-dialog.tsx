@@ -17,6 +17,7 @@ import { Upload, Download, ChevronDown, ChevronRight, FileUp } from 'lucide-reac
 import { toast } from 'sonner';
 import Papa from 'papaparse';
 import type { NaesinProblemQuestion } from '@/types/naesin';
+import { logger } from '@/lib/logger';
 
 interface ParsedQuestion {
   number: number;
@@ -215,7 +216,7 @@ export function BulkProblemUploadDialog({ unitId, onAdd }: { unitId: string; onA
       resetForm();
       toast.success(`${preview.length}문제 시트가 추가되었습니다`);
     } catch (err) {
-      console.error(err);
+      logger.error('admin.bulk_problem', { error: err instanceof Error ? err.message : String(err) });
       toast.error(err instanceof Error ? err.message : '일괄 업로드 실패');
     } finally {
       setSaving(false);

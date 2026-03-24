@@ -13,6 +13,7 @@ import {
 } from '@/components/ui/dialog';
 import { Plus } from 'lucide-react';
 import { toast } from 'sonner';
+import { logger } from '@/lib/logger';
 
 export function AddVocabDialog({ dayId, onAdd }: { dayId: string; onAdd: () => void }) {
   const [open, setOpen] = useState(false);
@@ -48,7 +49,7 @@ export function AddVocabDialog({ dayId, onAdd }: { dayId: string; onAdd: () => v
       setForm({ front_text: '', back_text: '', part_of_speech: '', example_sentence: '', synonyms: '', antonyms: '', spelling_hint: '', spelling_answer: '' });
       toast.success('단어가 추가되었습니다');
     } catch (err) {
-      console.error(err);
+      logger.error('voca_admin.add_vocab', { error: err instanceof Error ? err.message : String(err) });
       toast.error('단어 추가 중 오류가 발생했습니다');
     } finally {
       setSaving(false);

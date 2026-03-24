@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import { CheckCircle, Send } from 'lucide-react';
+import { logger } from '@/lib/logger';
 import { toast } from 'sonner';
 import type { VocaWrongWord } from '@/types/voca';
 
@@ -69,7 +70,7 @@ export function WriteWrongWords({ wrongWords, dayId, onSubmitted }: WriteWrongWo
       toast.success('선생님에게 제출되었습니다!');
       onSubmitted();
     } catch (err) {
-      console.error(err);
+      logger.error('voca.write_wrong_words', { error: err instanceof Error ? err.message : String(err) });
       toast.error('제출 중 오류가 발생했습니다');
     } finally {
       setSubmitting(false);

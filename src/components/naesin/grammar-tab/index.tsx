@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
+import { logger } from '@/lib/logger';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import {
@@ -71,7 +72,7 @@ export function GrammarTab({ lessons, unitId, onStageComplete, videoProgress }: 
         onStageComplete();
       }
     } catch (err) {
-      console.error(err);
+      logger.error('naesin.grammar_tab', { error: err instanceof Error ? err.message : String(err) });
       toast.error('진도 저장 중 오류가 발생했습니다');
     }
   }

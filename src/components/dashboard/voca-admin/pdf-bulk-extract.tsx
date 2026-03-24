@@ -14,6 +14,7 @@ import {
 } from '@/components/ui/dialog';
 import { FileText, Loader2, Check, X as XIcon } from 'lucide-react';
 import { toast } from 'sonner';
+import { logger } from '@/lib/logger';
 
 interface ExtractedWord {
   front_text: string;
@@ -119,7 +120,7 @@ export function PdfBulkExtract({ bookId, onCreated }: { bookId: string; onCreate
       reset();
       toast.success(`${data.days.length}개 Day, ${data.totalWords}개 단어가 생성되었습니다`);
     } catch (err) {
-      console.error(err);
+      logger.error('voca_admin.pdf_bulk', { error: err instanceof Error ? err.message : String(err) });
       toast.error('저장 실패');
     } finally {
       setSaving(false);

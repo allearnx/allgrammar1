@@ -9,6 +9,7 @@ import { Label } from '@/components/ui/label';
 import { Plus, X, Save, Loader2, FileText, Shuffle, PenLine, BookOpen } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { toast } from 'sonner';
+import { logger } from '@/lib/logger';
 
 type StageType = 'fill_blanks' | 'ordering' | 'translation' | 'grammar_vocab';
 
@@ -62,7 +63,7 @@ export function PassageStageManager({ studentId, initialStages, initialTranslati
       }
       toast.success('교과서 암기 단계가 저장되었습니다');
     } catch (err) {
-      console.error(err);
+      logger.error('admin.passage_stage', { error: err instanceof Error ? err.message : String(err) });
       toast.error(err instanceof Error ? err.message : '저장 중 오류가 발생했습니다');
     } finally {
       setSaving(false);

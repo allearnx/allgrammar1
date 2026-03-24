@@ -8,6 +8,7 @@ import { Trash2, ChevronDown, ChevronRight, Loader2 } from 'lucide-react';
 import { toast } from 'sonner';
 import type { NaesinVocabulary, NaesinVocabQuizSet } from '@/types/database';
 import { ConfirmDialog } from '@/components/shared/confirm-dialog';
+import { logger } from '@/lib/logger';
 
 export function CreateQuizSetFromSelection({
   unitId,
@@ -46,7 +47,7 @@ export function CreateQuizSetFromSelection({
       setTitle('');
       onCreated();
     } catch (err) {
-      console.error(err);
+      logger.error('admin.quiz_set', { error: err instanceof Error ? err.message : String(err) });
       toast.error('시험지 생성 실패');
     } finally {
       setSaving(false);
@@ -94,7 +95,7 @@ export function VocabQuizSetManager({ unitId }: { unitId: string }) {
       const data = await res.json();
       setSets(Array.isArray(data) ? data : []);
     } catch (err) {
-      console.error(err);
+      logger.error('admin.quiz_set', { error: err instanceof Error ? err.message : String(err) });
       }
   }
 
@@ -118,7 +119,7 @@ export function VocabQuizSetManager({ unitId }: { unitId: string }) {
         toast.error('시험지 삭제에 실패했습니다');
       }
     } catch (err) {
-      console.error(err);
+      logger.error('admin.quiz_set', { error: err instanceof Error ? err.message : String(err) });
       toast.error('시험지 삭제 중 오류가 발생했습니다');
     }
   }

@@ -7,6 +7,7 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { Save, Loader2, BookOpen, FileText, GraduationCap, ClipboardList, Brain } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { toast } from 'sonner';
+import { logger } from '@/lib/logger';
 
 type StageKey = 'vocab' | 'passage' | 'grammar' | 'problem' | 'lastReview';
 
@@ -64,7 +65,7 @@ export function EnabledStagesManager({ studentId, initialStages }: Props) {
       }
       toast.success('활성 단계가 저장되었습니다');
     } catch (err) {
-      console.error(err);
+      logger.error('admin.enabled_stages', { error: err instanceof Error ? err.message : String(err) });
       toast.error(err instanceof Error ? err.message : '저장 중 오류가 발생했습니다');
     } finally {
       setSaving(false);

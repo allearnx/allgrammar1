@@ -3,6 +3,7 @@
 import { useState, useMemo } from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { toast } from 'sonner';
+import { logger } from '@/lib/logger';
 import { Round2FlashcardView } from './round2-flashcard-view';
 import { ComprehensiveQuiz } from './comprehensive-quiz';
 import { MatchingView } from './matching-view';
@@ -58,7 +59,7 @@ export function VocaTab2({ vocabulary, dayId, progress }: VocaTab2Props) {
         return base;
       });
     } catch (err) {
-      console.error(err);
+      logger.error('voca.round2', { error: err instanceof Error ? err.message : String(err) });
       toast.error('진도 저장 중 오류가 발생했습니다');
     }
   }

@@ -8,6 +8,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, Dialog
 import { Plus } from 'lucide-react';
 import { toast } from 'sonner';
 import type { NaesinWorkbookOmrSheet } from '@/types/naesin';
+import { logger } from '@/lib/logger';
 
 export function AddSheetDialog({ workbookId, onAdd }: { workbookId: string; onAdd: (sheet: NaesinWorkbookOmrSheet) => void }) {
   const [open, setOpen] = useState(false);
@@ -53,7 +54,7 @@ export function AddSheetDialog({ workbookId, onAdd }: { workbookId: string; onAd
       setAnswerKeyStr('');
       toast.success('OMR 시트가 추가되었습니다');
     } catch (err) {
-      console.error(err);
+      logger.error('admin.add_sheet', { error: err instanceof Error ? err.message : String(err) });
       toast.error('시트 추가에 실패했습니다');
     } finally {
       setSaving(false);

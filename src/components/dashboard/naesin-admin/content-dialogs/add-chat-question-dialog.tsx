@@ -14,6 +14,7 @@ import {
 } from '@/components/ui/dialog';
 import { Bot } from 'lucide-react';
 import { toast } from 'sonner';
+import { logger } from '@/lib/logger';
 
 export function AddChatQuestionDialog({ lessonId, onAdd }: { lessonId: string; onAdd: () => void }) {
   const [open, setOpen] = useState(false);
@@ -51,7 +52,7 @@ export function AddChatQuestionDialog({ lessonId, onAdd }: { lessonId: string; o
       setKeywords('');
       toast.success('AI 질문이 추가되었습니다');
     } catch (err) {
-      console.error(err);
+      logger.error('admin.add_chat_question', { error: err instanceof Error ? err.message : String(err) });
       toast.error('AI 질문 추가 실패');
     } finally {
       setSaving(false);

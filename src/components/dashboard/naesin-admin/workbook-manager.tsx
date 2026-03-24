@@ -9,6 +9,7 @@ import { ConfirmDialog } from '@/components/shared/confirm-dialog';
 import { AddWorkbookDialog } from './add-workbook-dialog';
 import { AddSheetDialog } from './add-sheet-dialog';
 import type { NaesinWorkbook, NaesinWorkbookOmrSheet } from '@/types/naesin';
+import { logger } from '@/lib/logger';
 
 export function WorkbookManager() {
   const [workbooks, setWorkbooks] = useState<NaesinWorkbook[]>([]);
@@ -38,7 +39,7 @@ export function WorkbookManager() {
         .order('sort_order');
       setWorkbooks((data || []) as NaesinWorkbook[]);
     } catch (err) {
-      console.error(err);
+      logger.error('admin.workbook', { error: err instanceof Error ? err.message : String(err) });
       toast.error('교재 목록을 불러오지 못했습니다');
     } finally {
       setLoading(false);
@@ -51,7 +52,7 @@ export function WorkbookManager() {
       if (!res.ok) throw new Error();
       setSheets(await res.json());
     } catch (err) {
-      console.error(err);
+      logger.error('admin.workbook', { error: err instanceof Error ? err.message : String(err) });
       toast.error('시트 목록을 불러오지 못했습니다');
     }
   }
@@ -83,7 +84,7 @@ export function WorkbookManager() {
         toast.success('시트가 삭제되었습니다');
       }
     } catch (err) {
-      console.error(err);
+      logger.error('admin.workbook', { error: err instanceof Error ? err.message : String(err) });
       toast.error('삭제 중 오류가 발생했습니다');
     }
   }

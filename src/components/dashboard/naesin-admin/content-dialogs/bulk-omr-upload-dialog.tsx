@@ -13,6 +13,7 @@ import {
 } from '@/components/ui/dialog';
 import { Upload, Download, ChevronDown, ChevronRight } from 'lucide-react';
 import { toast } from 'sonner';
+import { logger } from '@/lib/logger';
 
 interface ParsedOmrSheet {
   title: string;
@@ -149,7 +150,7 @@ export function BulkOmrUploadDialog({ unitId, onAdd }: { unitId: string; onAdd: 
       resetForm();
       toast.success(`${successCount}개 문제풀이 시트가 추가되었습니다`);
     } catch (err) {
-      console.error(err);
+      logger.error('admin.bulk_omr', { error: err instanceof Error ? err.message : String(err) });
       toast.error(err instanceof Error ? err.message : '일괄 업로드 실패');
     } finally {
       setSaving(false);

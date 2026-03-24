@@ -10,6 +10,7 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { Plus, Trash2, Save, Loader2 } from 'lucide-react';
 import { toast } from 'sonner';
 import type { NaesinExamAssignment, NaesinUnit } from '@/types/database';
+import { logger } from '@/lib/logger';
 
 interface ExamAssignmentManagerProps {
   studentId: string;
@@ -90,7 +91,7 @@ export function ExamAssignmentManager({
       setLocals((prev) => prev.map((l, i) => (i === idx ? { ...l, dirty: false } : l)));
       router.refresh();
     } catch (err) {
-      console.error(err);
+      logger.error('admin.exam_assignment', { error: err instanceof Error ? err.message : String(err) });
       toast.error('시험 배정 저장 중 오류가 발생했습니다');
     } finally {
       setSavingRound(null);
@@ -115,7 +116,7 @@ export function ExamAssignmentManager({
       setLocals((prev) => prev.filter((_, i) => i !== idx));
       router.refresh();
     } catch (err) {
-      console.error(err);
+      logger.error('admin.exam_assignment', { error: err instanceof Error ? err.message : String(err) });
       toast.error('시험 배정 삭제 중 오류가 발생했습니다');
     } finally {
       setDeletingRound(null);

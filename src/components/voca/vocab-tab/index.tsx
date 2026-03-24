@@ -3,6 +3,7 @@
 import { useState, useMemo } from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { toast } from 'sonner';
+import { logger } from '@/lib/logger';
 import { cn } from '@/lib/utils';
 import { vocaToMemoryItem, vocaToNaesinVocabulary } from '@/lib/voca/adapters';
 import { NaesinFlashcardView } from '@/components/naesin/vocab-tab/flashcard-view';
@@ -62,7 +63,7 @@ export function VocaTab({ vocabulary, dayId, progress, wrongWords = [] }: VocaTa
         return base;
       });
     } catch (err) {
-      console.error(err);
+      logger.error('voca.tab', { error: err instanceof Error ? err.message : String(err) });
       toast.error('진도 저장 중 오류가 발생했습니다');
     }
   }

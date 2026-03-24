@@ -15,6 +15,7 @@ import {
 import { FileText, Upload, Loader2, Check, Wand2, X } from 'lucide-react';
 import { toast } from 'sonner';
 import type { BlankItem } from '@/types/textbook';
+import { logger } from '@/lib/logger';
 
 type DifficultyKey = 'easy' | 'medium' | 'hard';
 
@@ -266,7 +267,7 @@ export function AddPassageDialog({ unitId, onAdd }: { unitId: string; onAdd: () 
           }
         }
       } catch (gvErr) {
-        console.error('Grammar/vocab generation failed:', gvErr);
+        logger.error('admin.add_passage.grammar_vocab', { error: gvErr instanceof Error ? gvErr.message : String(gvErr) });
         toast.warning('어법/어휘 문제 생성 실패 (나중에 수동 생성 가능)');
       }
 
@@ -275,7 +276,7 @@ export function AddPassageDialog({ unitId, onAdd }: { unitId: string; onAdd: () 
       setTitle('');
       setSentences([{ original: '', korean: '' }]);
     } catch (err) {
-      console.error(err);
+      logger.error('admin.add_passage', { error: err instanceof Error ? err.message : String(err) });
       toast.error('지문 추가 실패');
     } finally {
       setSaving(false);

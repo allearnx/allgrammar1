@@ -17,6 +17,7 @@ import { toast } from 'sonner';
 import type { NaesinUnit } from '@/types/database';
 import { UnitContentManager } from './unit-content-manager';
 import { ConfirmDialog } from '@/components/shared/confirm-dialog';
+import { logger } from '@/lib/logger';
 
 export const UNIT_OPTIONS = [
   { value: '1', label: 'Lesson 1' },
@@ -61,7 +62,7 @@ export function AddUnitDialog({ textbookId, onAdd }: { textbookId: string; onAdd
       setUnitValue('');
       toast.success('단원이 추가되었습니다');
     } catch (err) {
-      console.error(err);
+      logger.error('admin.unit_section', { error: err instanceof Error ? err.message : String(err) });
       toast.error('단원 추가 중 오류가 발생했습니다');
     } finally {
       setSaving(false);
@@ -163,7 +164,7 @@ export function UnitCard({
               toast.error('단원 삭제에 실패했습니다');
             }
           } catch (err) {
-            console.error(err);
+            logger.error('admin.unit_section', { error: err instanceof Error ? err.message : String(err) });
             toast.error('단원 삭제 중 오류가 발생했습니다');
           }
         }}

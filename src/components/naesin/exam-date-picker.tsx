@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { logger } from '@/lib/logger';
 import {
   Dialog,
   DialogContent,
@@ -42,7 +43,7 @@ export function ExamDatePicker({ textbookId, currentDate, onDateChange }: ExamDa
       onDateChange(date);
       setOpen(false);
     } catch (err) {
-      console.error(err);
+      logger.error('naesin.exam_date_picker', { error: err instanceof Error ? err.message : String(err) });
       toast.error('시험일 설정 중 오류가 발생했습니다');
     } finally {
       setSaving(false);

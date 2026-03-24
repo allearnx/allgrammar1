@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { ArrowLeft, BookOpen, FileText, Clock } from 'lucide-react';
+import { logger } from '@/lib/logger';
 import { toast } from 'sonner';
 import { WorkbookOmrView } from './workbook-omr-view';
 import type { NaesinWorkbook, NaesinWorkbookOmrSheet, NaesinWorkbookOmrAttempt } from '@/types/naesin';
@@ -38,7 +39,7 @@ export function WorkbookOmrClient({ workbooks }: WorkbookOmrClientProps) {
       const data = await res.json();
       setSheets(data);
     } catch (err) {
-      console.error(err);
+      logger.error('workbook_omr', { error: err instanceof Error ? err.message : String(err) });
       toast.error('시트 목록을 불러오지 못했습니다');
     } finally {
       setLoading(false);
@@ -56,7 +57,7 @@ export function WorkbookOmrClient({ workbooks }: WorkbookOmrClientProps) {
         .order('created_at', { ascending: false });
       setAttempts((data || []) as NaesinWorkbookOmrAttempt[]);
     } catch (err) {
-      console.error(err);
+      logger.error('workbook_omr', { error: err instanceof Error ? err.message : String(err) });
       }
   }
 
