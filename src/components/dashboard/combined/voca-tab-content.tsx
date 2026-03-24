@@ -4,19 +4,9 @@ import Link from 'next/link';
 import { ArrowRight, BookOpen, BookMarked, XCircle, TrendingUp } from 'lucide-react';
 import { FlowStep } from './flow-step';
 import { BRAND } from '@/lib/utils/brand-colors';
+import { isR1Complete } from '@/lib/dashboard/voca-helpers';
+import type { VocaStage } from '@/lib/dashboard/voca-helpers';
 import type { VocaDay, VocaStudentProgress } from '@/types/voca';
-
-type StageStatus = 'done' | 'active' | 'locked';
-
-interface VocaStage {
-  key: string;
-  label: string;
-  status: StageStatus;
-  icon: React.ReactNode;
-  description: string;
-  scoreRequirement: string;
-  actualScore?: string;
-}
 
 const COLORS = {
   stepActive: { border: BRAND.step.activeBorder },
@@ -31,16 +21,6 @@ const COLORS = {
   wrongBorder1: BRAND.wrong.border1,
   wrongBadge: BRAND.wrong.badge,
 };
-
-function isR1Complete(p: VocaStudentProgress | null): boolean {
-  if (!p) return false;
-  return (
-    p.flashcard_completed &&
-    (p.quiz_score ?? 0) >= 80 &&
-    (p.spelling_score ?? 0) >= 80 &&
-    p.matching_completed
-  );
-}
 
 interface Props {
   currentDay: VocaDay | undefined;

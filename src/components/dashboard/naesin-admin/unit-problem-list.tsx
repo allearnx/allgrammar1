@@ -173,7 +173,7 @@ export function UnitProblemList({ sheets, onUpdate, onRequestDelete }: UnitProbl
                         <th className="text-left p-2">문제</th>
                         <th className="text-left p-2 w-16">유형</th>
                         <th className="text-left p-2 w-20">정답</th>
-                        {isEditing && <th className="text-left p-2 w-16">편집</th>}
+                        <th className="text-left p-2 w-16">편집</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -189,7 +189,10 @@ export function UnitProblemList({ sheets, onUpdate, onRequestDelete }: UnitProbl
                           ) : (
                             <QuestionViewRow
                               question={q}
-                              onEdit={() => { if (isEditing) setEditingQIdx(i); }}
+                              onEdit={() => {
+                              if (!isEditing) startEdit(sheet);
+                              setEditingQIdx(i);
+                            }}
                             />
                           )}
                         </tr>

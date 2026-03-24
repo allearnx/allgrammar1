@@ -8,34 +8,23 @@ import {
   ClipboardList,
   Sparkles,
   ArrowRight,
-  Eye,
-  PenLine,
-  Keyboard,
-  Link2,
-  LibraryBig,
-  BrainCircuit,
   TrendingUp,
   XCircle,
 } from 'lucide-react';
 import { BRAND } from '@/lib/utils/brand-colors';
+import {
+  getR1Stages,
+  getR2Stages,
+  isR1Complete,
+  isR2Complete,
+  computeVocaStats,
+} from '@/lib/dashboard/voca-helpers';
 import { MiniScoreTrend } from '@/components/charts/mini-score-trend';
 import { FlowStep } from './combined/flow-step';
 import { StatCard } from '@/components/shared/stat-card';
 import type { VocaBook, VocaDay, VocaStudentProgress } from '@/types/voca';
 
 // ── Types ──
-
-type StageStatus = 'done' | 'active' | 'locked';
-
-interface Stage {
-  key: string;
-  label: string;
-  status: StageStatus;
-  icon: React.ReactNode;
-  description: string;
-  scoreRequirement: string;
-  actualScore?: string;
-}
 
 interface Props {
   userName: string;
@@ -68,106 +57,9 @@ const COLORS = {
 
 // ── Helpers ──
 
-function getR1Stages(p: VocaStudentProgress | null): Stage[] {
-  const fc = p?.flashcard_completed ?? false;
-  const quizPass = (p?.quiz_score ?? 0) >= 80;
-  const spellPass = (p?.spelling_score ?? 0) >= 80;
-  const matchDone = p?.matching_completed ?? false;
+import type { VocaStage } from '@/lib/dashboard/voca-helpers';
 
-  // 이후 단계 통과 시 이전 단계도 완료로 간주 (데이터 불일치 방어)
-  const fcDone = fc || quizPass;
-
-  const quizStatus: StageStatus = quizPass ? 'done' : fcDone ? 'active' : 'locked';
-  const spellStatus: StageStatus = spellPass ? 'done' : quizPass ? 'active' : 'locked';
-  const matchStatus: StageStatus = matchDone ? 'done' : spellPass ? 'active' : 'locked';
-
-  return [
-    {
-      key: 'flashcard', label: '플래시카드', status: fcDone ? 'done' : 'active',
-      icon: <Eye className="h-6 w-6" />, description: '단어·뜻·예문을\n카드로 확인',
-      scoreRequirement: '카드 확인', actualScore: fcDone ? '완료 ✓' : undefined,
-    },
-    {
-      key: 'quiz', label: '퀴즈', status: quizStatus,
-      icon: <PenLine className="h-6 w-6" />, description: '5지선다 객관식으로\n이해도를 확인해요',
-      scoreRequirement: '80점 통과', actualScore: p?.quiz_score != null ? `${p.quiz_score}점` : undefined,
-    },
-    {
-      key: 'spelling', label: '스펠링', status: spellStatus,
-      icon: <Keyboard className="h-6 w-6" />, description: '뜻 보고 영단어\n직접 입력',
-      scoreRequirement: '80점 통과', actualScore: p?.spelling_score != null ? `${p.spelling_score}점` : undefined,
-    },
-    {
-      key: 'matching', label: '매칭', status: matchStatus,
-      icon: <Link2 className="h-6 w-6" />, description: '유의어·반의어\n연결하기',
-      scoreRequirement: '90점 통과', actualScore: matchDone ? '완료' : p?.matching_score != null ? `${p.matching_score}점` : undefined,
-    },
-  ];
-}
-
-function isR1Complete(p: VocaStudentProgress | null): boolean {
-  if (!p) return false;
-  const quizPass = (p.quiz_score ?? 0) >= 80;
-  const fcDone = p.flashcard_completed || quizPass;
-  return (
-    fcDone &&
-    quizPass &&
-    (p.spelling_score ?? 0) >= 80 &&
-    p.matching_completed
-  );
-}
-
-function getR2Stages(p: VocaStudentProgress | null): Stage[] {
-  const r1Done = isR1Complete(p);
-  const fc2 = p?.round2_flashcard_completed ?? false;
-  const quiz2Pass = (p?.round2_quiz_score ?? 0) >= 80;
-  const match2Done = p?.round2_matching_completed ?? false;
-
-  if (!r1Done) {
-    return [
-      { key: 'r2_flashcard', label: '플래시카드', status: 'locked', icon: <LibraryBig className="h-6 w-6" />, description: '유의어·반의어\n숙어 학습', scoreRequirement: '—' },
-      { key: 'r2_quiz', label: '종합 문제', status: 'locked', icon: <BrainCircuit className="h-6 w-6" />, description: '9가지 유형\nAI 서술형 채점', scoreRequirement: '—' },
-      { key: 'r2_matching', label: '심화 매칭', status: 'locked', icon: <Link2 className="h-6 w-6" />, description: '고난도\n연결하기', scoreRequirement: '—' },
-    ];
-  }
-
-  // 이후 단계 통과 시 이전 단계도 완료로 간주
-  const fc2Done = fc2 || quiz2Pass;
-
-  const quiz2Status: StageStatus = quiz2Pass ? 'done' : fc2Done ? 'active' : 'locked';
-  const match2Status: StageStatus = match2Done ? 'done' : quiz2Pass ? 'active' : 'locked';
-
-  return [
-    {
-      key: 'r2_flashcard', label: '플래시카드', status: fc2Done ? 'done' : 'active',
-      icon: <LibraryBig className="h-6 w-6" />, description: '유의어·반의어\n숙어 학습',
-      scoreRequirement: '카드 확인', actualScore: fc2Done ? '완료 ✓' : undefined,
-    },
-    {
-      key: 'r2_quiz', label: '종합 문제', status: quiz2Status,
-      icon: <BrainCircuit className="h-6 w-6" />, description: '9가지 유형\nAI 서술형 채점',
-      scoreRequirement: '80점 통과', actualScore: p?.round2_quiz_score != null ? `${p.round2_quiz_score}점` : undefined,
-    },
-    {
-      key: 'r2_matching', label: '심화 매칭', status: match2Status,
-      icon: <Link2 className="h-6 w-6" />, description: '고난도\n연결하기',
-      scoreRequirement: '90점 통과', actualScore: match2Done ? '완료' : p?.round2_matching_score != null ? `${p.round2_matching_score}점` : undefined,
-    },
-  ];
-}
-
-function isR2Complete(p: VocaStudentProgress | null): boolean {
-  if (!p) return false;
-  const quiz2Pass = (p.round2_quiz_score ?? 0) >= 80;
-  const fc2Done = p.round2_flashcard_completed || quiz2Pass;
-  return (
-    fc2Done &&
-    quiz2Pass &&
-    p.round2_matching_completed
-  );
-}
-
-function getCtaText(stage: Stage): { title: string; sub: string } {
+function getCtaText(stage: VocaStage): { title: string; sub: string } {
   switch (stage.key) {
     case 'flashcard':
       return { title: '플래시카드를 시작할 차례예요!', sub: '단어 카드를 확인하면 다음 단계로 진행돼요' };
@@ -203,21 +95,9 @@ export function VocaDashboard({ userName, books, days, progressList, wordCount, 
   const currentProgress = currentDay ? (progressMap.get(currentDay.id) ?? null) : null;
 
   // Stats
-  const r1CompletedStages = progressList.reduce((acc, p) => {
-    return acc + (p.flashcard_completed ? 1 : 0)
-      + ((p.quiz_score ?? 0) >= 80 ? 1 : 0)
-      + ((p.spelling_score ?? 0) >= 80 ? 1 : 0)
-      + (p.matching_completed ? 1 : 0);
-  }, 0);
+  const { r1CompletedStages, avgQuizScore: avgScore, wrongWordEntries } = computeVocaStats(progressList, wrongWordCounts);
 
   const completedDays = progressList.filter((p) => isR1Complete(p)).length;
-
-  const quizScores = progressList
-    .filter((p) => p.quiz_score !== null)
-    .map((p) => p.quiz_score!);
-  const avgScore = quizScores.length > 0
-    ? Math.round(quizScores.reduce((a, b) => a + b, 0) / quizScores.length)
-    : 0;
 
   const totalMemorized = progressList.filter(
     (p) => p.flashcard_completed && (p.quiz_score ?? 0) >= 80
@@ -234,10 +114,6 @@ export function VocaDashboard({ userName, books, days, progressList, wordCount, 
   const activeR2 = r2Stages.find((s) => s.status === 'active');
   const ctaStage = activeR1 ?? activeR2;
   const ctaRound = activeR1 ? '1' : '2';
-
-  const wrongWordEntries = Object.entries(wrongWordCounts)
-    .sort(([, a], [, b]) => b - a)
-    .slice(0, 10);
 
   const daysByBook = new Map<string, { book: VocaBook; days: VocaDay[] }>();
   for (const book of books) {
@@ -420,7 +296,7 @@ export function VocaDashboard({ userName, books, days, progressList, wordCount, 
 
 // ── Sub-components ──
 
-function FlowCta({ stage, dayId }: { stage: Stage; dayId: string }) {
+function FlowCta({ stage, dayId }: { stage: VocaStage; dayId: string }) {
   const cta = getCtaText(stage);
   return (
     <div className="flex items-center justify-between rounded-xl p-3.5 md:p-4" style={{ background: 'linear-gradient(120deg, #F5F3FF, #EDE9FE)', border: '1px solid rgba(37,99,235,0.08)' }}>

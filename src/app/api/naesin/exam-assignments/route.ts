@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { createApiHandler, dbResult } from '@/lib/api';
 import { examAssignmentUpsertSchema, examAssignmentDeleteSchema } from '@/lib/api/schemas';
+import { requireAcademyScope } from '@/lib/api/require-academy-scope';
 
 export const GET = createApiHandler(
   {},
@@ -17,6 +18,11 @@ export const GET = createApiHandler(
       return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
     }
 
+    // Teachers/admins can only access students in their academy
+    if (user.role !== 'student') {
+      await requireAcademyScope(user, studentId, supabase);
+    }
+
     const data = dbResult(await supabase
       .from('naesin_exam_assignments')
       .select('*')
@@ -29,8 +35,10 @@ export const GET = createApiHandler(
 
 export const POST = createApiHandler(
   { roles: ['teacher', 'admin', 'boss'], schema: examAssignmentUpsertSchema },
-  async ({ body, supabase }) => {
+  async ({ body, supabase, user }) => {
     const { studentId, textbookId, examRound, examLabel, examDate, unitIds } = body;
+
+    await requireAcademyScope(user, studentId, supabase);
 
     const data = dbResult(await supabase
       .from('naesin_exam_assignments')
@@ -54,8 +62,10 @@ export const POST = createApiHandler(
 
 export const DELETE = createApiHandler(
   { roles: ['teacher', 'admin', 'boss'], schema: examAssignmentDeleteSchema, hasBody: true },
-  async ({ body, supabase }) => {
+  async ({ body, supabase, user }) => {
     const { studentId, textbookId, examRound } = body;
+
+    await requireAcademyScope(user, studentId, supabase);
 
     dbResult(await supabase
       .from('naesin_exam_assignments')

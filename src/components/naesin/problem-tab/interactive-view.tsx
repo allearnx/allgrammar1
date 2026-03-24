@@ -154,113 +154,78 @@ export function InteractiveProblemView({
     });
   }
 
+  function applyResult(
+    correct: boolean,
+    answer: string | number,
+    q: NaesinProblemQuestion,
+    aiFeedback?: AiFeedback,
+  ): { newScore: typeof score; newWrongList: WrongItem[] } {
+    if (correct) {
+      const newScore = { ...score, correct: score.correct + 1 };
+      setScore(newScore);
+      return { newScore, newWrongList: wrongList };
+    }
+    const newScore = { ...score, wrong: score.wrong + 1 };
+    setScore(newScore);
+    const wrongItem: WrongItem = {
+      number: q.number,
+      userAnswer: answer,
+      correctAnswer: q.answer,
+      question: q.question,
+      ...(aiFeedback ? { aiFeedback } : {}),
+    };
+    const newWrongList = [...wrongList, wrongItem];
+    setWrongList(newWrongList);
+    return { newScore, newWrongList };
+  }
+
+  function finishOrSave(
+    isLast: boolean,
+    answer: string | number,
+    newScore: typeof score,
+    newWrongList: WrongItem[],
+    aiMap: Record<string, AiFeedback>,
+  ) {
+    if (isLast) {
+      submitResults(
+        questions.map((_, i) => i === currentIndex ? answer : ''),
+        questions.length,
+        aiMap,
+      );
+    } else {
+      saveCurrentDraft(newScore, newWrongList, aiMap);
+    }
+  }
+
   async function handleSelect(answer: string | number) {
     if (showResult || isGrading) return;
     setSelectedAnswer(answer);
     const isLast = currentIndex === questions.length - 1;
 
     if (isSubjective) {
-      // AI grading for subjective questions
       setIsGrading(true);
       const aiFeedback = await gradeSubjective(String(answer));
       setIsGrading(false);
 
       if (aiFeedback) {
         setCurrentAiFeedback(aiFeedback);
-        const newAiResultsMap = { ...aiResultsMap, [String(currentIndex)]: aiFeedback };
-        setAiResultsMap(newAiResultsMap);
+        const newAiMap = { ...aiResultsMap, [String(currentIndex)]: aiFeedback };
+        setAiResultsMap(newAiMap);
         const correct = aiFeedback.score >= 80;
         setShowResult(true);
-
-        let newScore = score;
-        let newWrongList = wrongList;
-        if (correct) {
-          newScore = { ...score, correct: score.correct + 1 };
-          setScore(newScore);
-        } else {
-          newScore = { ...score, wrong: score.wrong + 1 };
-          setScore(newScore);
-          const wrongItem: WrongItem = {
-            number: question.number,
-            userAnswer: answer,
-            correctAnswer: question.answer,
-            question: question.question,
-            aiFeedback,
-          };
-          newWrongList = [...wrongList, wrongItem];
-          setWrongList(newWrongList);
-        }
-
-        if (isLast) {
-          submitResults(
-            questions.map((_, i) => i === currentIndex ? answer : ''),
-            questions.length,
-            newAiResultsMap
-          );
-        } else {
-          saveCurrentDraft(newScore, newWrongList, newAiResultsMap);
-        }
+        const { newScore, newWrongList } = applyResult(correct, answer, question, aiFeedback);
+        finishOrSave(isLast, answer, newScore, newWrongList, newAiMap);
       } else {
-        // AI failed — fallback to exact match
         const correct = String(answer).trim().toLowerCase() === String(question.answer).trim().toLowerCase();
         setShowResult(true);
-        let newScore = score;
-        let newWrongList = wrongList;
-        if (correct) {
-          newScore = { ...score, correct: score.correct + 1 };
-          setScore(newScore);
-        } else {
-          newScore = { ...score, wrong: score.wrong + 1 };
-          setScore(newScore);
-          const wrongItem: WrongItem = {
-            number: question.number,
-            userAnswer: answer,
-            correctAnswer: question.answer,
-            question: question.question,
-          };
-          newWrongList = [...wrongList, wrongItem];
-          setWrongList(newWrongList);
-        }
-
-        if (isLast) {
-          submitResults(
-            questions.map((_, i) => i === currentIndex ? answer : ''),
-            questions.length
-          );
-        } else {
-          saveCurrentDraft(newScore, newWrongList, aiResultsMap);
-        }
+        const { newScore, newWrongList } = applyResult(correct, answer, question);
+        finishOrSave(isLast, answer, newScore, newWrongList, aiResultsMap);
       }
     } else {
-      // MCQ — exact match (existing logic)
       const correct = String(answer) === String(question.answer);
       setShowResult(true);
-      let newScore = score;
-      let newWrongList = wrongList;
-      if (correct) {
-        newScore = { ...score, correct: score.correct + 1 };
-        setScore(newScore);
-      } else {
-        newScore = { ...score, wrong: score.wrong + 1 };
-        setScore(newScore);
-        const wrongItem: WrongItem = {
-          number: question.number,
-          userAnswer: answer,
-          correctAnswer: question.answer,
-          question: question.question,
-        };
-        newWrongList = [...wrongList, wrongItem];
-        setWrongList(newWrongList);
-      }
-
-      if (isLast) {
-        submitResults(
-          questions.map((_, i) => i === currentIndex ? answer : ''),
-          questions.length
-        );
-      } else {
-        saveCurrentDraft(newScore, newWrongList, aiResultsMap);
-      }
+      const { newScore, newWrongList } = applyResult(correct, answer, question);
+      finishOrSave(isLast, answer, newScore, newWrongList, aiResultsMap);
     }
   }
 

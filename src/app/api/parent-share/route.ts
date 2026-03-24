@@ -1,6 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getUser } from '@/lib/auth/helpers';
 import { createAdminClient } from '@/lib/supabase/admin';
+import { createClient } from '@/lib/supabase/server';
+import { requireAcademyScope } from '@/lib/api/require-academy-scope';
+import { ForbiddenError } from '@/lib/api/errors';
 
 const ALLOWED_ROLES = ['teacher', 'admin', 'boss'];
 
@@ -13,6 +16,16 @@ export async function GET(request: NextRequest) {
   const studentId = new URL(request.url).searchParams.get('studentId');
   if (!studentId) {
     return NextResponse.json({ error: 'studentId가 필요합니다.' }, { status: 400 });
+  }
+
+  try {
+    const supabase = await createClient();
+    await requireAcademyScope(user, studentId, supabase);
+  } catch (e) {
+    if (e instanceof ForbiddenError) {
+      return NextResponse.json({ error: e.message }, { status: 403 });
+    }
+    throw e;
   }
 
   const admin = createAdminClient();
@@ -38,6 +51,16 @@ export async function POST(request: NextRequest) {
   const studentId = body.studentId;
   if (!studentId) {
     return NextResponse.json({ error: 'studentId가 필요합니다.' }, { status: 400 });
+  }
+
+  try {
+    const supabase = await createClient();
+    await requireAcademyScope(user, studentId, supabase);
+  } catch (e) {
+    if (e instanceof ForbiddenError) {
+      return NextResponse.json({ error: e.message }, { status: 403 });
+    }
+    throw e;
   }
 
   const admin = createAdminClient();
@@ -76,6 +99,16 @@ export async function DELETE(request: NextRequest) {
   const studentId = body.studentId;
   if (!studentId) {
     return NextResponse.json({ error: 'studentId가 필요합니다.' }, { status: 400 });
+  }
+
+  try {
+    const supabase = await createClient();
+    await requireAcademyScope(user, studentId, supabase);
+  } catch (e) {
+    if (e instanceof ForbiddenError) {
+      return NextResponse.json({ error: e.message }, { status: 403 });
+    }
+    throw e;
   }
 
   const admin = createAdminClient();

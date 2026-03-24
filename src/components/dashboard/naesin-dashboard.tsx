@@ -15,13 +15,20 @@ import {
 } from 'lucide-react';
 import { BRAND } from '@/lib/utils/brand-colors';
 import { calculateStageStatuses } from '@/lib/naesin/stage-unlock';
+import {
+  getDDay,
+  isNaesinUnitComplete,
+  mapNaesinStatus,
+  NAESIN_STAGE_KEYS,
+  NAESIN_STAGE_LABELS,
+  computeNaesinStats,
+} from '@/lib/dashboard/naesin-helpers';
 import { MiniScoreTrend } from '@/components/charts/mini-score-trend';
 import { FlowStep } from './combined/flow-step';
 import { StatCard } from '@/components/shared/stat-card';
 import type {
   NaesinUnit,
   NaesinStudentProgress,
-  NaesinStageStatus,
   NaesinStageStatuses,
   NaesinContentAvailability,
   NaesinExamAssignment,
@@ -81,22 +88,6 @@ const STAGE_META: Record<string, { icon: React.ReactNode; description: string; s
   lastReview: { icon: <RefreshCw className="h-6 w-6" />, description: '시험 직전\n최종 점검', scoreRequirement: '최종 점검 완료' },
 };
 
-const STAGE_LABELS: Record<string, string> = {
-  vocab: '단어 암기',
-  passage: '교과서 암기',
-  grammar: '문법 설명',
-  problem: '문제풀이',
-  lastReview: '직전보강',
-};
-
-const STAGE_KEYS = ['vocab', 'passage', 'grammar', 'problem', 'lastReview'] as const;
-
-function mapStageStatus(s: NaesinStageStatus): 'done' | 'active' | 'locked' | null {
-  if (s === 'completed') return 'done';
-  if (s === 'available') return 'active';
-  if (s === 'hidden') return null;
-  return 'locked';
-}
 
 function getVocabBadgeText(progress: NaesinStudentProgress | null): string {
   if (!progress) return '퀴즈+스펠링 시작';
@@ -142,8 +133,8 @@ function getStagesForUnit(
   grammarVideoCount?: number,
 ): Stage[] {
   const stages: Stage[] = [];
-  for (const key of STAGE_KEYS) {
-    const mapped = mapStageStatus(statuses[key]);
+  for (const key of NAESIN_STAGE_KEYS) {
+    const mapped = mapNaesinStatus(statuses[key]);
     if (mapped === null) continue;
     const meta = STAGE_META[key];
 
@@ -160,7 +151,7 @@ function getStagesForUnit(
 
     stages.push({
       key,
-      label: STAGE_LABELS[key],
+      label: NAESIN_STAGE_LABELS[key],
       stageKey: key === 'lastReview' ? 'last-review' : key,
       status: mapped,
       icon: meta.icon,
@@ -172,20 +163,6 @@ function getStagesForUnit(
   return stages;
 }
 
-function isUnitComplete(statuses: NaesinStageStatuses): boolean {
-  return (['vocab', 'passage', 'grammar', 'problem'] as const).every(
-    (k) => statuses[k] === 'completed' || statuses[k] === 'hidden',
-  );
-}
-
-function getDDay(dateStr: string | null): number | null {
-  if (!dateStr) return null;
-  const today = new Date();
-  today.setHours(0, 0, 0, 0);
-  const exam = new Date(dateStr);
-  exam.setHours(0, 0, 0, 0);
-  return Math.ceil((exam.getTime() - today.getTime()) / (1000 * 60 * 60 * 24));
-}
 
 // ── Component ──
 
@@ -230,7 +207,7 @@ export function NaesinDashboard({
   // Find current active unit
   const currentUnit = sortedUnits.find((u) => {
     const s = statusesMap.get(u.id);
-    return s && !isUnitComplete(s);
+    return s && !isNaesinUnitComplete(s);
   }) ?? sortedUnits[0];
 
   const currentStatuses = currentUnit ? statusesMap.get(currentUnit.id) : undefined;
@@ -240,35 +217,8 @@ export function NaesinDashboard({
   const ctaStage = currentStages.find((s) => s.status === 'active');
 
   // Stats
-  const completedStages = sortedUnits.reduce((acc, u) => {
-    const s = statusesMap.get(u.id);
-    if (!s) return acc;
-    return acc
-      + (s.vocab === 'completed' ? 1 : 0)
-      + (s.passage === 'completed' ? 1 : 0)
-      + (s.grammar === 'completed' ? 1 : 0)
-      + (s.problem === 'completed' ? 1 : 0);
-  }, 0);
-
-  const completedUnits = sortedUnits.filter((u) => {
-    const s = statusesMap.get(u.id);
-    return s && isUnitComplete(s);
-  }).length;
-
-  const vocabScores = progressList.flatMap((p) => {
-    const scores: number[] = [];
-    if (p.vocab_quiz_score !== null) scores.push(p.vocab_quiz_score);
-    if (p.vocab_spelling_score !== null) scores.push(p.vocab_spelling_score);
-    return scores;
-  });
-  const avgVocabScore = vocabScores.length > 0
-    ? Math.round(vocabScores.reduce((a, b) => a + b, 0) / vocabScores.length)
-    : 0;
-
-  const futureDDays = examAssignments
-    .map((a) => getDDay(a.exam_date))
-    .filter((d): d is number => d !== null && d >= 0);
-  const nearestDDay = futureDDays.length > 0 ? Math.min(...futureDDays) : null;
+  const { completedStages, completedUnits, avgVocabScore, nearestDDay } =
+    computeNaesinStats(progressList, statusesMap, sortedUnits, examAssignments);
 
   const currentAssignment = currentUnit
     ? examAssignments.find((a) => a.unit_ids.includes(currentUnit.id))
@@ -382,7 +332,7 @@ export function NaesinDashboard({
                 (s.grammar === 'completed' ? 1 : 0) +
                 (s.problem === 'completed' ? 1 : 0);
               const pct = Math.round((done / 4) * 100);
-              const isDone = isUnitComplete(s);
+              const isDone = isNaesinUnitComplete(s);
               const isActive = currentUnit?.id === unit.id;
 
               return (

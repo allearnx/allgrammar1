@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { createApiHandler, NotFoundError } from '@/lib/api';
 import { reportGenerateSchema } from '@/lib/api/schemas';
+import { requireAcademyScope } from '@/lib/api/require-academy-scope';
 import { format, startOfWeek, endOfWeek } from 'date-fns';
 import type { EnhancedReportData, ReportNaesinStats, ReportVocaStats } from '@/types/report';
 import { computeWeaknesses, computeRecommendations, avgScore, avgNullableScore } from '@/lib/utils/report-analysis';
@@ -9,6 +10,8 @@ export const POST = createApiHandler(
   { roles: ['teacher', 'admin', 'boss'], schema: reportGenerateSchema, rateLimit: { max: 5 } },
   async ({ body, supabase, user }) => {
     const { studentId, reportType } = body;
+
+    await requireAcademyScope(user, studentId, supabase);
 
     // Get student info
     const { data: student } = await supabase

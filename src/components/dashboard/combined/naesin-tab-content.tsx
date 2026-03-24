@@ -4,15 +4,14 @@ import Link from 'next/link';
 import { ArrowRight, Layers, CalendarDays } from 'lucide-react';
 import { FlowStep } from './flow-step';
 import { BRAND } from '@/lib/utils/brand-colors';
+import { getDDay, isNaesinUnitComplete } from '@/lib/dashboard/naesin-helpers';
 import type { NaesinUnit, NaesinStageStatuses, NaesinExamAssignment } from '@/types/naesin';
-
-type StageStatus = 'done' | 'active' | 'locked';
 
 interface NaesinStage {
   key: string;
   label: string;
   stageKey: string;
-  status: StageStatus;
+  status: 'done' | 'active' | 'locked';
   icon: React.ReactNode;
   description: string;
   scoreRequirement: string;
@@ -25,21 +24,6 @@ const COLORS = {
   progressDone: BRAND.progress.done,
   progressActive: BRAND.progress.active,
 };
-
-function isNaesinUnitComplete(statuses: NaesinStageStatuses): boolean {
-  return (['vocab', 'passage', 'grammar', 'problem'] as const).every(
-    (k) => statuses[k] === 'completed' || statuses[k] === 'hidden',
-  );
-}
-
-function getDDay(dateStr: string | null): number | null {
-  if (!dateStr) return null;
-  const today = new Date();
-  today.setHours(0, 0, 0, 0);
-  const exam = new Date(dateStr);
-  exam.setHours(0, 0, 0, 0);
-  return Math.ceil((exam.getTime() - today.getTime()) / (1000 * 60 * 60 * 24));
-}
 
 interface Props {
   currentUnit: NaesinUnit | undefined;

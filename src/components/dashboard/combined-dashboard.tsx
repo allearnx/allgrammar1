@@ -11,18 +11,28 @@ import {
   ArrowRight,
   CalendarDays,
   Layers,
-  Eye,
   PenLine,
-  Keyboard,
-  Link2,
-  LibraryBig,
-  BrainCircuit,
   FileText,
   Ruler,
   RefreshCw,
 } from 'lucide-react';
 import { BRAND } from '@/lib/utils/brand-colors';
 import { calculateStageStatuses } from '@/lib/naesin/stage-unlock';
+import {
+  getDDay,
+  isNaesinUnitComplete,
+  mapNaesinStatus,
+  NAESIN_STAGE_KEYS,
+  NAESIN_STAGE_LABELS,
+  computeNaesinStats,
+} from '@/lib/dashboard/naesin-helpers';
+import {
+  getR1Stages,
+  getR2Stages,
+  isR1Complete,
+  isR2Complete,
+  computeVocaStats,
+} from '@/lib/dashboard/voca-helpers';
 import { MiniScoreTrend } from '@/components/charts/mini-score-trend';
 import { StatCard } from '@/components/shared/stat-card';
 import { VocaTabContent } from './combined/voca-tab-content';
@@ -31,7 +41,6 @@ import type { VocaDay, VocaStudentProgress } from '@/types/voca';
 import type {
   NaesinUnit,
   NaesinStudentProgress,
-  NaesinStageStatus,
   NaesinStageStatuses,
   NaesinContentAvailability,
   NaesinExamAssignment,
@@ -39,23 +48,11 @@ import type {
 
 // ── Types ──
 
-type StageStatus = 'done' | 'active' | 'locked';
-
-interface VocaStage {
-  key: string;
-  label: string;
-  status: StageStatus;
-  icon: React.ReactNode;
-  description: string;
-  scoreRequirement: string;
-  actualScore?: string;
-}
-
 interface NaesinStage {
   key: string;
   label: string;
   stageKey: string;
-  status: StageStatus;
+  status: 'done' | 'active' | 'locked';
   icon: React.ReactNode;
   description: string;
   scoreRequirement: string;
@@ -90,71 +87,6 @@ const COLORS = {
   statSky: BRAND.cyan,
 };
 
-// ── Voca Helpers ──
-
-function getR1Stages(p: VocaStudentProgress | null): VocaStage[] {
-  const fc = p?.flashcard_completed ?? false;
-  const quizPass = (p?.quiz_score ?? 0) >= 80;
-  const spellPass = (p?.spelling_score ?? 0) >= 80;
-  const matchDone = p?.matching_completed ?? false;
-
-  const fcDone = fc || quizPass;
-  const quizStatus: StageStatus = quizPass ? 'done' : fcDone ? 'active' : 'locked';
-  const spellStatus: StageStatus = spellPass ? 'done' : quizPass ? 'active' : 'locked';
-  const matchStatus: StageStatus = matchDone ? 'done' : spellPass ? 'active' : 'locked';
-
-  return [
-    { key: 'flashcard', label: '플래시카드', status: fcDone ? 'done' : 'active', icon: <Eye className="h-6 w-6" />, description: '단어·뜻·예문을\n카드로 확인', scoreRequirement: '카드 확인', actualScore: fcDone ? '완료 ✓' : undefined },
-    { key: 'quiz', label: '퀴즈', status: quizStatus, icon: <PenLine className="h-6 w-6" />, description: '5지선다 객관식으로\n이해도를 확인해요', scoreRequirement: '80점 통과', actualScore: p?.quiz_score != null ? `${p.quiz_score}점` : undefined },
-    { key: 'spelling', label: '스펠링', status: spellStatus, icon: <Keyboard className="h-6 w-6" />, description: '뜻 보고 영단어\n직접 입력', scoreRequirement: '80점 통과', actualScore: p?.spelling_score != null ? `${p.spelling_score}점` : undefined },
-    { key: 'matching', label: '매칭', status: matchStatus, icon: <Link2 className="h-6 w-6" />, description: '유의어·반의어\n연결하기', scoreRequirement: '90점 통과', actualScore: matchDone ? '완료' : p?.matching_score != null ? `${p.matching_score}점` : undefined },
-  ];
-}
-
-function isR1Complete(p: VocaStudentProgress | null): boolean {
-  if (!p) return false;
-  return (
-    p.flashcard_completed &&
-    (p.quiz_score ?? 0) >= 80 &&
-    (p.spelling_score ?? 0) >= 80 &&
-    p.matching_completed
-  );
-}
-
-function getR2Stages(p: VocaStudentProgress | null): VocaStage[] {
-  const r1Done = isR1Complete(p);
-  const fc2 = p?.round2_flashcard_completed ?? false;
-  const quiz2Pass = (p?.round2_quiz_score ?? 0) >= 80;
-  const match2Done = p?.round2_matching_completed ?? false;
-
-  if (!r1Done) {
-    return [
-      { key: 'r2_flashcard', label: '플래시카드', status: 'locked', icon: <LibraryBig className="h-6 w-6" />, description: '유의어·반의어\n숙어 학습', scoreRequirement: '—' },
-      { key: 'r2_quiz', label: '종합 문제', status: 'locked', icon: <BrainCircuit className="h-6 w-6" />, description: '9가지 유형\nAI 서술형 채점', scoreRequirement: '—' },
-      { key: 'r2_matching', label: '심화 매칭', status: 'locked', icon: <Link2 className="h-6 w-6" />, description: '고난도\n연결하기', scoreRequirement: '—' },
-    ];
-  }
-
-  const fc2Done = fc2 || quiz2Pass;
-  const quiz2Status: StageStatus = quiz2Pass ? 'done' : fc2Done ? 'active' : 'locked';
-  const match2Status: StageStatus = match2Done ? 'done' : quiz2Pass ? 'active' : 'locked';
-
-  return [
-    { key: 'r2_flashcard', label: '플래시카드', status: fc2Done ? 'done' : 'active', icon: <LibraryBig className="h-6 w-6" />, description: '유의어·반의어\n숙어 학습', scoreRequirement: '카드 확인', actualScore: fc2Done ? '완료 ✓' : undefined },
-    { key: 'r2_quiz', label: '종합 문제', status: quiz2Status, icon: <BrainCircuit className="h-6 w-6" />, description: '9가지 유형\nAI 서술형 채점', scoreRequirement: '80점 통과', actualScore: p?.round2_quiz_score != null ? `${p.round2_quiz_score}점` : undefined },
-    { key: 'r2_matching', label: '심화 매칭', status: match2Status, icon: <Link2 className="h-6 w-6" />, description: '고난도\n연결하기', scoreRequirement: '90점 통과', actualScore: match2Done ? '완료' : p?.round2_matching_score != null ? `${p.round2_matching_score}점` : undefined },
-  ];
-}
-
-function isR2Complete(p: VocaStudentProgress | null): boolean {
-  if (!p) return false;
-  return (
-    p.round2_flashcard_completed &&
-    (p.round2_quiz_score ?? 0) >= 80 &&
-    p.round2_matching_completed
-  );
-}
-
 // ── Naesin Helpers ──
 
 const NAESIN_STAGE_META: Record<string, { icon: React.ReactNode; description: string; scoreRequirement: string }> = {
@@ -164,23 +96,6 @@ const NAESIN_STAGE_META: Record<string, { icon: React.ReactNode; description: st
   problem: { icon: <PenLine className="h-6 w-6" />, description: '문제를 풀며\n실력 확인', scoreRequirement: '문제풀이 완료' },
   lastReview: { icon: <RefreshCw className="h-6 w-6" />, description: '시험 직전\n최종 점검', scoreRequirement: '최종 점검 완료' },
 };
-
-const NAESIN_STAGE_LABELS: Record<string, string> = {
-  vocab: '단어 암기',
-  passage: '교과서 암기',
-  grammar: '문법 설명',
-  problem: '문제풀이',
-  lastReview: '직전보강',
-};
-
-const NAESIN_STAGE_KEYS = ['vocab', 'passage', 'grammar', 'problem', 'lastReview'] as const;
-
-function mapNaesinStatus(s: NaesinStageStatus): StageStatus | null {
-  if (s === 'completed') return 'done';
-  if (s === 'available') return 'active';
-  if (s === 'hidden') return null;
-  return 'locked';
-}
 
 function getNaesinStages(statuses: NaesinStageStatuses, progress: NaesinStudentProgress | null): NaesinStage[] {
   const stages: NaesinStage[] = [];
@@ -208,21 +123,6 @@ function getNaesinStages(statuses: NaesinStageStatuses, progress: NaesinStudentP
     });
   }
   return stages;
-}
-
-function isNaesinUnitComplete(statuses: NaesinStageStatuses): boolean {
-  return (['vocab', 'passage', 'grammar', 'problem'] as const).every(
-    (k) => statuses[k] === 'completed' || statuses[k] === 'hidden',
-  );
-}
-
-function getDDay(dateStr: string | null): number | null {
-  if (!dateStr) return null;
-  const today = new Date();
-  today.setHours(0, 0, 0, 0);
-  const exam = new Date(dateStr);
-  exam.setHours(0, 0, 0, 0);
-  return Math.ceil((exam.getTime() - today.getTime()) / (1000 * 60 * 60 * 24));
 }
 
 // ── Component ──
@@ -267,24 +167,8 @@ export function CombinedDashboard({
   const vocaCtaRound = vocaActiveR1 ? '1' : '2';
 
   // Voca stats
-  const r1CompletedStages = vocaProgressList.reduce((acc, p) => {
-    return acc + (p.flashcard_completed ? 1 : 0)
-      + ((p.quiz_score ?? 0) >= 80 ? 1 : 0)
-      + ((p.spelling_score ?? 0) >= 80 ? 1 : 0)
-      + (p.matching_completed ? 1 : 0);
-  }, 0);
-
-  const vocaQuizScores = vocaProgressList
-    .filter((p) => p.quiz_score !== null)
-    .map((p) => p.quiz_score!);
-  const vocaAvgScore = vocaQuizScores.length > 0
-    ? Math.round(vocaQuizScores.reduce((a, b) => a + b, 0) / vocaQuizScores.length)
-    : 0;
-
-  // Wrong words
-  const wrongWordEntries = Object.entries(wrongWordCounts)
-    .sort(([, a], [, b]) => b - a)
-    .slice(0, 10);
+  const { r1CompletedStages, avgQuizScore: vocaAvgScore, wrongWordEntries } =
+    computeVocaStats(vocaProgressList, wrongWordCounts);
 
   // Current active book
   const currentBookId = currentVocaDay?.book_id;
@@ -327,35 +211,12 @@ export function CombinedDashboard({
   const naesinCtaStage = currentNaesinStages.find((s) => s.status === 'active');
 
   // Naesin stats
-  const naesinCompletedStages = sortedUnits.reduce((acc, u) => {
-    const s = statusesMap.get(u.id);
-    if (!s) return acc;
-    return acc
-      + (s.vocab === 'completed' ? 1 : 0)
-      + (s.passage === 'completed' ? 1 : 0)
-      + (s.grammar === 'completed' ? 1 : 0)
-      + (s.problem === 'completed' ? 1 : 0);
-  }, 0);
-
-  const naesinCompletedUnits = sortedUnits.filter((u) => {
-    const s = statusesMap.get(u.id);
-    return s && isNaesinUnitComplete(s);
-  }).length;
-
-  const naesinVocabScores = naesinProgressList.flatMap((p) => {
-    const scores: number[] = [];
-    if (p.vocab_quiz_score !== null) scores.push(p.vocab_quiz_score);
-    if (p.vocab_spelling_score !== null) scores.push(p.vocab_spelling_score);
-    return scores;
-  });
-  const naesinAvgVocab = naesinVocabScores.length > 0
-    ? Math.round(naesinVocabScores.reduce((a, b) => a + b, 0) / naesinVocabScores.length)
-    : 0;
-
-  const futureDDays = examAssignments
-    .map((a) => getDDay(a.exam_date))
-    .filter((d): d is number => d !== null && d >= 0);
-  const nearestDDay = futureDDays.length > 0 ? Math.min(...futureDDays) : null;
+  const {
+    completedStages: naesinCompletedStages,
+    completedUnits: naesinCompletedUnits,
+    avgVocabScore: naesinAvgVocab,
+    nearestDDay,
+  } = computeNaesinStats(naesinProgressList, statusesMap, sortedUnits, examAssignments);
 
   return (
     <div className="p-4 md:p-6 space-y-6">

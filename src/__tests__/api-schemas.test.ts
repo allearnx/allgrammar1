@@ -114,9 +114,6 @@ describe('omrSubmitSchema', () => {
       unitId: 'u1',
       omrSheetId: 'omr1',
       studentAnswers: { '1': 3, '2': 1 },
-      correctCount: 2,
-      totalQuestions: 2,
-      scorePercent: 100,
     });
     expect(result.success).toBe(true);
   });

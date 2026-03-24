@@ -34,6 +34,7 @@ function buildParaphrasePrompt(
 ) {
   const typeRules = questionType === 'mcq'
     ? `- options에 5지선다 (① ② ③ ④ ⑤), answer에 정답 번호(1~5)
+- 정답 번호가 1~5에 골고루 분포하도록 (각 6~7개). 특정 번호에 몰리지 않게 할 것
 - 유형 표시: [빈칸 채우기], [영작 선택], [용법 구별], [어법 판단]`
     : `- options는 null, answer에 정답 텍스트
 - 유형 표시: [서술형-영작], [서술형-어순 배열], [서술형-오류 수정]`;
