@@ -5,7 +5,7 @@ import { issueBillingKey, TossPaymentError } from '@/lib/payments/toss';
 
 export const POST = createApiHandler(
   { schema: billingRegisterCardSchema },
-  async ({ user: _user, body, supabase }) => {
+  async ({ user, body, supabase }) => {
     const { authKey, customerKey } = body;
 
     // 빌링키 발급
@@ -22,12 +22,23 @@ export const POST = createApiHandler(
       throw err;
     }
 
-    // 해당 customerKey의 구독 찾아서 billingKey 저장
-    const { data: subscription, error: findErr } = await supabase
+    // 해당 customerKey의 구독 찾아서 billingKey 저장 (소유권 검증 포함)
+    let query = supabase
       .from('subscriptions')
       .select('id')
       .eq('customer_key', customerKey)
-      .in('status', ['trialing', 'active', 'past_due'])
+      .in('status', ['trialing', 'active', 'past_due']);
+
+    // 본인이 생성했거나, 본인이 학생이거나, 소속 학원 구독만 허용
+    if (user.academy_id) {
+      query = query.or(
+        `created_by.eq.${user.id},student_id.eq.${user.id},academy_id.eq.${user.academy_id}`,
+      );
+    } else {
+      query = query.or(`created_by.eq.${user.id},student_id.eq.${user.id}`);
+    }
+
+    const { data: subscription, error: findErr } = await query
       .order('created_at', { ascending: false })
       .limit(1)
       .single();

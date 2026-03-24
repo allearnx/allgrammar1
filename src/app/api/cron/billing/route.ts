@@ -151,6 +151,12 @@ async function processSubscriptionCharge(
     });
 
     results.charged++;
+    logger.info('cron.billing.charge_success', {
+      subscriptionId: sub.id,
+      amount: charge.totalAmount,
+      orderId: charge.orderId,
+      paymentKey: charge.paymentKey,
+    });
   } catch (err) {
     const failedCount = ((sub.failed_payment_count as number) || 0) + 1;
     const graceEnd = new Date();
@@ -178,6 +184,8 @@ async function processSubscriptionCharge(
     results.failed++;
     logger.warn('cron.billing.charge_failed', {
       subscriptionId: sub.id,
+      amount,
+      orderId,
       failedCount,
       error: err instanceof Error ? err.message : String(err),
     });

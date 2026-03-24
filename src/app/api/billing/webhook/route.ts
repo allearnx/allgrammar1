@@ -1,10 +1,29 @@
+import crypto from 'node:crypto';
 import { NextRequest, NextResponse } from 'next/server';
 import { createAdminClient } from '@/lib/supabase/admin';
 import { logger } from '@/lib/logger';
 
+function verifyWebhookSecret(received: unknown): boolean {
+  const expected = process.env.TOSS_PAYMENTS_SECRET_KEY;
+  if (!expected) return false;
+  if (typeof received !== 'string') return false;
+
+  const a = Buffer.from(received);
+  const b = Buffer.from(expected);
+  if (a.length !== b.length) return false;
+  return crypto.timingSafeEqual(a, b);
+}
+
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
+
+    // 웹훅 시크릿 검증
+    if (!verifyWebhookSecret(body.secret)) {
+      logger.warn('toss.webhook.unauthorized', { hasSecret: !!body.secret });
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+
     const { eventType, data } = body;
 
     logger.info('toss.webhook', { eventType, paymentKey: data?.paymentKey });
