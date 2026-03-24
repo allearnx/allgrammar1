@@ -9,11 +9,11 @@ const isDev = process.env.NODE_ENV === "development";
 // - frame-src https:: PDF iframe이 외부 URL일 수 있어 https 전체 허용
 const cspDirectives = [
   "default-src 'self'",
-  `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ""} https://www.youtube.com https://js.tosspayments.com`,
-  "style-src 'self' 'unsafe-inline'",
-  "img-src 'self' data: blob:",
-  "font-src 'self'",
-  "frame-src https://www.youtube.com https://js.tosspayments.com https:",
+  `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ""} https://www.youtube.com https://*.tosspayments.com`,
+  "style-src 'self' 'unsafe-inline' https://*.tosspayments.com",
+  "img-src 'self' data: blob: https://*.tosspayments.com",
+  "font-src 'self' https://*.tosspayments.com",
+  "frame-src https://www.youtube.com https://*.tosspayments.com https:",
   "connect-src 'self' https://*.supabase.co https://*.sentry.io https://*.tosspayments.com",
   "worker-src 'self' blob:",
   "object-src 'none'",
