@@ -100,7 +100,7 @@ export function QuestionViewRow({
   return (
     <>
       <td className="p-2">{question.number}</td>
-      <td className="p-2 max-w-[300px] truncate">{question.question}</td>
+      <td className="p-2 whitespace-pre-wrap break-words">{question.question}</td>
       <td className="p-2">
         <Badge variant={hasOptions(question) ? 'outline' : 'secondary'} className="text-xs">
           {hasOptions(question) ? '객관식' : '서술형'}
