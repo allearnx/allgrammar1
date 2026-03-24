@@ -84,77 +84,91 @@ function SignUpForm() {
   }
 
   return (
-    <div className="flex min-h-screen items-center justify-center px-4 bg-background">
-      <div className={`w-full transition-all duration-300 grid grid-cols-1 gap-6 items-start ${isAdminRole ? 'max-w-4xl lg:grid-cols-[1fr_380px]' : 'max-w-lg'}`}>
-          <Card className="w-full shadow-xl">
-            <CardHeader className="text-center">
-              <Image src="/logo.jpg" alt="올라영" width={120} height={120} className="mx-auto" />
-              <CardDescription className="mt-2">올라영 AI 러닝 엔진에 가입하세요</CardDescription>
-            </CardHeader>
-            <form onSubmit={handleSignUp}>
-              <CardContent className="space-y-4">
-                <div className="space-y-2">
-                  <Label htmlFor="fullName">이름</Label>
-                  <Input id="fullName" type="text" placeholder="홍길동" value={fullName} onChange={(e) => setFullName(e.target.value)} required autoComplete="name" />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="phone">전화번호</Label>
-                  <Input id="phone" type="tel" placeholder="010-0000-0000" value={phone} onChange={(e) => setPhone(e.target.value)} autoComplete="tel" />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="email">이메일</Label>
-                  <Input id="email" type="email" placeholder="email@example.com" value={email} onChange={(e) => setEmail(e.target.value)} required autoComplete="email" />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="password">비밀번호</Label>
-                  <Input id="password" type="password" placeholder="6자 이상 입력하세요" value={password} onChange={(e) => setPassword(e.target.value)} required minLength={6} autoComplete="new-password" />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="role">역할</Label>
-                  <Select value={role} onValueChange={(v) => setRole(v as UserRole)}>
-                    <SelectTrigger><SelectValue placeholder="역할 선택" /></SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="student">학생</SelectItem>
-                      <SelectItem value="teacher">선생님</SelectItem>
-                      <SelectItem value="admin">학원 원장</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
+    <div className="flex min-h-screen items-center justify-center px-4 py-12 bg-gradient-to-b from-slate-50 to-white">
+      <div className={`w-full transition-all duration-300 grid grid-cols-1 gap-6 items-start ${isAdminRole ? 'max-w-4xl lg:grid-cols-[1fr_380px]' : 'max-w-md'}`}>
+        <div>
+          {/* 로고 + 타이틀 */}
+          <div className="text-center mb-8">
+            <Link href="/">
+              <Image src="/logo.png" alt="올라영" width={80} height={80} className="mx-auto rounded-2xl shadow-lg shadow-violet-200/50" />
+            </Link>
+            <h1 className="mt-5 text-2xl font-black text-[#1d1d1f] tracking-tight">회원가입</h1>
+            <p className="mt-2 text-[#86868b]">올라영 AI 러닝 엔진에 가입하세요</p>
+          </div>
 
-                {isAdminRole ? (
-                  <AdminSignupFields
-                    academyName={newAcademyName}
-                    onAcademyNameChange={setNewAcademyName}
-                    contactNumber={contactNumber}
-                    onContactNumberChange={setContactNumber}
-                    freeService={freeService}
-                    onFreeServiceChange={setFreeService}
-                  />
-                ) : (
-                  <InviteCodeField
-                    value={inviteCode}
-                    onChange={setInviteCode}
-                    academyName={academyName}
-                    onAcademyNameChange={setAcademyName}
-                  />
-                )}
-              </CardContent>
-              <CardFooter className="flex flex-col gap-3">
-                <Button type="submit" className="w-full" disabled={loading}>
-                  {loading ? '가입 중...' : '회원가입'}
-                </Button>
-                <p className="text-sm text-muted-foreground">
-                  이미 계정이 있으신가요?{' '}
-                  <Link
-                    href={nextParam && isSafeRedirect(nextParam) ? `/login?next=${encodeURIComponent(nextParam)}` : '/login'}
-                    className="text-primary underline-offset-4 hover:underline"
-                  >로그인</Link>
-                </p>
-              </CardFooter>
+          {/* 폼 카드 */}
+          <div className="rounded-3xl p-8 bg-white/70 backdrop-blur-xl border border-gray-200/50 shadow-xl shadow-gray-200/50">
+            <form onSubmit={handleSignUp} className="space-y-5">
+              <div>
+                <label htmlFor="fullName" className="block text-sm font-bold text-slate-700 mb-2">이름</label>
+                <Input id="fullName" type="text" placeholder="홍길동" value={fullName} onChange={(e) => setFullName(e.target.value)} required autoComplete="name" className="rounded-2xl py-4 px-5 border-2 border-gray-200 focus:ring-4 focus:ring-violet-100 focus:border-violet-400" />
+              </div>
+              <div>
+                <label htmlFor="phone" className="block text-sm font-bold text-slate-700 mb-2">전화번호</label>
+                <Input id="phone" type="tel" placeholder="010-0000-0000" value={phone} onChange={(e) => setPhone(e.target.value)} autoComplete="tel" className="rounded-2xl py-4 px-5 border-2 border-gray-200 focus:ring-4 focus:ring-violet-100 focus:border-violet-400" />
+              </div>
+              <div>
+                <label htmlFor="email" className="block text-sm font-bold text-slate-700 mb-2">이메일</label>
+                <Input id="email" type="email" placeholder="email@example.com" value={email} onChange={(e) => setEmail(e.target.value)} required autoComplete="email" className="rounded-2xl py-4 px-5 border-2 border-gray-200 focus:ring-4 focus:ring-violet-100 focus:border-violet-400" />
+              </div>
+              <div>
+                <label htmlFor="password" className="block text-sm font-bold text-slate-700 mb-2">비밀번호</label>
+                <Input id="password" type="password" placeholder="6자 이상 입력하세요" value={password} onChange={(e) => setPassword(e.target.value)} required minLength={6} autoComplete="new-password" className="rounded-2xl py-4 px-5 border-2 border-gray-200 focus:ring-4 focus:ring-violet-100 focus:border-violet-400" />
+              </div>
+              <div>
+                <label htmlFor="role" className="block text-sm font-bold text-slate-700 mb-2">역할</label>
+                <Select value={role} onValueChange={(v) => setRole(v as UserRole)}>
+                  <SelectTrigger className="rounded-2xl py-4 px-5 border-2 border-gray-200 h-auto"><SelectValue placeholder="역할 선택" /></SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="student">학생</SelectItem>
+                    <SelectItem value="teacher">선생님</SelectItem>
+                    <SelectItem value="admin">학원 원장</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+
+              {isAdminRole ? (
+                <AdminSignupFields
+                  academyName={newAcademyName}
+                  onAcademyNameChange={setNewAcademyName}
+                  contactNumber={contactNumber}
+                  onContactNumberChange={setContactNumber}
+                  freeService={freeService}
+                  onFreeServiceChange={setFreeService}
+                />
+              ) : (
+                <InviteCodeField
+                  value={inviteCode}
+                  onChange={setInviteCode}
+                  academyName={academyName}
+                  onAcademyNameChange={setAcademyName}
+                />
+              )}
+
+              <button
+                type="submit"
+                disabled={loading}
+                className="w-full py-4 bg-gradient-to-r from-violet-500 to-purple-500 hover:from-violet-600 hover:to-purple-600 text-white text-lg font-bold rounded-2xl transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-violet-300/30"
+              >
+                {loading ? '가입 중...' : '회원가입'}
+              </button>
             </form>
-          </Card>
 
-          {isAdminRole && <AcademySignupGuide />}
+            <p className="mt-6 text-center text-sm text-[#86868b]">
+              이미 계정이 있으신가요?{' '}
+              <Link
+                href={nextParam && isSafeRedirect(nextParam) ? `/login?next=${encodeURIComponent(nextParam)}` : '/login'}
+                className="text-violet-600 font-bold hover:text-violet-700 transition-colors"
+              >로그인</Link>
+            </p>
+          </div>
+
+          <p className="mt-3 text-center">
+            <Link href="/" className="text-sm text-[#86868b] hover:text-violet-600 transition-colors">&larr; 홈으로 돌아가기</Link>
+          </p>
+        </div>
+
+        {isAdminRole && <AcademySignupGuide />}
       </div>
     </div>
   );

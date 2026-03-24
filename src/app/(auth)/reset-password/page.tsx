@@ -5,10 +5,6 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
 import { createClient } from '@/lib/supabase/client';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Card, CardContent, CardDescription, CardFooter, CardHeader } from '@/components/ui/card';
 import { toast } from 'sonner';
 
 export default function ResetPasswordPage() {
@@ -19,8 +15,6 @@ export default function ResetPasswordPage() {
   const router = useRouter();
 
   useEffect(() => {
-    // Supabase sends the user here with access_token in the URL hash.
-    // The client SDK automatically picks it up and sets the session.
     const supabase = createClient();
     supabase.auth.onAuthStateChange((event) => {
       if (event === 'PASSWORD_RECOVERY') {
@@ -61,38 +55,49 @@ export default function ResetPasswordPage() {
 
   if (!ready) {
     return (
-      <div className="flex min-h-screen items-center justify-center px-4 bg-violet-100">
-        <Card className="w-full max-w-lg shadow-xl">
-          <CardHeader className="text-center">
-            <Image src="/logo.jpg" alt="올라영" width={120} height={120} className="mx-auto" />
-            <CardDescription className="mt-2">비밀번호 재설정 링크를 확인하고 있습니다...</CardDescription>
-          </CardHeader>
-          <CardContent className="text-center">
-            <p className="text-sm text-muted-foreground">
+      <div className="flex min-h-screen items-center justify-center px-4 bg-gradient-to-b from-slate-50 to-white">
+        <div className="w-full max-w-md">
+          <div className="text-center mb-8">
+            <Link href="/">
+              <Image src="/logo.png" alt="올라영" width={80} height={80} className="mx-auto rounded-2xl shadow-lg shadow-violet-200/50" />
+            </Link>
+            <h1 className="mt-5 text-2xl font-black text-[#1d1d1f] tracking-tight">비밀번호 재설정</h1>
+            <p className="mt-2 text-[#86868b]">링크를 확인하고 있습니다...</p>
+          </div>
+          <div className="rounded-3xl p-8 bg-white/70 backdrop-blur-xl border border-gray-200/50 shadow-xl shadow-gray-200/50 text-center">
+            <svg className="animate-spin h-8 w-8 text-violet-500 mx-auto mb-4" viewBox="0 0 24 24">
+              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
+              <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+            </svg>
+            <p className="text-[#86868b]">
               잠시만 기다려주세요. 링크가 유효하지 않으면{' '}
-              <Link href="/forgot-password" className="text-primary underline-offset-4 hover:underline">
+              <Link href="/forgot-password" className="text-violet-600 font-bold hover:text-violet-700 transition-colors">
                 다시 요청
               </Link>
               해주세요.
             </p>
-          </CardContent>
-        </Card>
+          </div>
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="flex min-h-screen items-center justify-center px-4 bg-violet-100">
-      <Card className="w-full max-w-lg shadow-xl">
-        <CardHeader className="text-center">
-          <Image src="/logo.jpg" alt="올라영" width={120} height={120} className="mx-auto" />
-          <CardDescription className="mt-2">새 비밀번호를 설정해주세요</CardDescription>
-        </CardHeader>
-        <form onSubmit={handleSubmit}>
-          <CardContent className="space-y-4">
-            <div className="space-y-2">
-              <Label htmlFor="new-password">새 비밀번호</Label>
-              <Input
+    <div className="flex min-h-screen items-center justify-center px-4 bg-gradient-to-b from-slate-50 to-white">
+      <div className="w-full max-w-md">
+        <div className="text-center mb-8">
+          <Link href="/">
+            <Image src="/logo.png" alt="올라영" width={80} height={80} className="mx-auto rounded-2xl shadow-lg shadow-violet-200/50" />
+          </Link>
+          <h1 className="mt-5 text-2xl font-black text-[#1d1d1f] tracking-tight">비밀번호 재설정</h1>
+          <p className="mt-2 text-[#86868b]">새 비밀번호를 설정해주세요</p>
+        </div>
+
+        <div className="rounded-3xl p-8 bg-white/70 backdrop-blur-xl border border-gray-200/50 shadow-xl shadow-gray-200/50">
+          <form onSubmit={handleSubmit} className="space-y-5">
+            <div>
+              <label htmlFor="new-password" className="block text-sm font-bold text-slate-700 mb-2">새 비밀번호</label>
+              <input
                 id="new-password"
                 type="password"
                 placeholder="6자 이상 입력하세요"
@@ -101,11 +106,13 @@ export default function ResetPasswordPage() {
                 required
                 minLength={6}
                 autoComplete="new-password"
+                disabled={loading}
+                className="w-full px-5 py-4 border-2 border-gray-200 rounded-2xl focus:ring-4 focus:ring-violet-100 focus:border-violet-400 transition-all text-slate-800 placeholder:text-slate-400 font-medium bg-white/80 outline-none"
               />
             </div>
-            <div className="space-y-2">
-              <Label htmlFor="confirm-password">새 비밀번호 확인</Label>
-              <Input
+            <div>
+              <label htmlFor="confirm-password" className="block text-sm font-bold text-slate-700 mb-2">새 비밀번호 확인</label>
+              <input
                 id="confirm-password"
                 type="password"
                 placeholder="비밀번호를 다시 입력하세요"
@@ -114,16 +121,20 @@ export default function ResetPasswordPage() {
                 required
                 minLength={6}
                 autoComplete="new-password"
+                disabled={loading}
+                className="w-full px-5 py-4 border-2 border-gray-200 rounded-2xl focus:ring-4 focus:ring-violet-100 focus:border-violet-400 transition-all text-slate-800 placeholder:text-slate-400 font-medium bg-white/80 outline-none"
               />
             </div>
-          </CardContent>
-          <CardFooter className="flex flex-col gap-3">
-            <Button type="submit" className="w-full" disabled={loading}>
+            <button
+              type="submit"
+              disabled={loading}
+              className="w-full py-4 bg-gradient-to-r from-violet-500 to-purple-500 hover:from-violet-600 hover:to-purple-600 text-white text-lg font-bold rounded-2xl transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-violet-300/30"
+            >
               {loading ? '변경 중...' : '비밀번호 변경'}
-            </Button>
-          </CardFooter>
-        </form>
-      </Card>
+            </button>
+          </form>
+        </div>
+      </div>
     </div>
   );
 }
