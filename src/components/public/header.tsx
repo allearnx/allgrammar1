@@ -169,7 +169,7 @@ export default function PublicHeader({ isLoggedIn = false }: PublicHeaderProps) 
             ) : (
               <Link
                 href="/login"
-                className="ml-2 px-5 py-2.5 text-sm font-medium text-white bg-gradient-to-r from-violet-400 to-purple-400 hover:from-violet-500 hover:to-purple-500 rounded-full transition-all duration-200 shadow-lg shadow-violet-300/30"
+                className="ml-2 px-5 py-2.5 text-sm font-medium text-[#A78BFA] border-2 border-[#A78BFA] hover:bg-[#A78BFA] hover:text-white rounded-full transition-all duration-200"
               >
                 로그인
               </Link>
@@ -286,7 +286,7 @@ export default function PublicHeader({ isLoggedIn = false }: PublicHeaderProps) 
           ) : (
             <Link
               href="/login"
-              className="block mt-3 px-4 py-3 text-base font-medium text-white text-center bg-gradient-to-r from-violet-400 to-purple-400 hover:from-violet-500 hover:to-purple-500 rounded-full transition-all shadow-lg shadow-violet-300/30"
+              className="block mt-3 px-4 py-3 text-base font-medium text-[#A78BFA] text-center border-2 border-[#A78BFA] hover:bg-[#A78BFA] hover:text-white rounded-full transition-all"
               onClick={() => setIsMenuOpen(false)}
             >
               로그인
