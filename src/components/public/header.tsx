@@ -35,7 +35,7 @@ const menuItems = [
     dropdownItems: [
       { label: '수강후기', href: '/reviews' },
       { label: 'FAQ', href: '/faq' },
-      { label: '자료실', href: 'https://cafe.naver.com/bridgetosuccess', isExternal: true },
+      { label: '자료실', href: 'https://cafe.naver.com/f-e/cafes/30994203/menus/31', isExternal: true },
     ]
   },
 ];
