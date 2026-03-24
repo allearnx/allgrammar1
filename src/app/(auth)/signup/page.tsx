@@ -76,8 +76,7 @@ function SignUpForm() {
     }
 
     toast.success('회원가입 완료!');
-    router.push(redirectTo);
-    router.refresh();
+    window.location.href = redirectTo;
   }
 
   return (
