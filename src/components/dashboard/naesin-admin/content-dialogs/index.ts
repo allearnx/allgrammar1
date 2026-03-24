@@ -6,3 +6,4 @@ export { AddLastReviewDialog } from './add-last-review-dialog';
 export { AddChatQuestionDialog } from './add-chat-question-dialog';
 export { BulkOmrUploadDialog } from './bulk-omr-upload-dialog';
 export { BulkProblemUploadDialog } from './bulk-problem-upload-dialog';
+export { PdfProblemExtractDialog } from './pdf-problem-extract-dialog';
