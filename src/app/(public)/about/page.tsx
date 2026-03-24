@@ -1,3 +1,5 @@
+import ConsultationLink from '@/components/public/consultation-link';
+
 const features = [
   {
     title: '실시간 수업 + 녹화 영상 제공',
@@ -173,12 +175,11 @@ export default function AboutPage() {
           <p className="text-lg text-[#86868b] mb-8">
             무료 레벨테스트로 학생의 현재 수준을 확인해보세요.
           </p>
-          <a
-            href="/#consultation-form"
+          <ConsultationLink
             className="inline-block px-8 py-4 text-lg font-bold text-white bg-gradient-to-r from-violet-400 to-purple-400 hover:from-violet-500 hover:to-purple-500 rounded-full transition-all shadow-lg shadow-violet-300/30"
           >
             무료 상담 신청하기
-          </a>
+          </ConsultationLink>
         </div>
       </section>
     </>

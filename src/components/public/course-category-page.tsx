@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { createAdminClient } from '@/lib/supabase/admin';
+import ConsultationLink from '@/components/public/consultation-link';
 import {
   type CourseCategory,
   type Course,
@@ -130,12 +131,11 @@ export default async function CourseCategoryPage({ category }: { category: Cours
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-2xl md:text-3xl font-bold text-[#1d1d1f] mb-4">어떤 강의가 맞는지 모르겠다면?</h2>
           <p className="text-[#86868b] mb-6">무료 레벨테스트로 딱 맞는 강의를 추천받으세요!</p>
-          <Link
-            href="/#consultation-form"
+          <ConsultationLink
             className="inline-block px-8 py-4 text-lg font-bold text-white bg-gradient-to-r from-violet-400 to-purple-400 hover:from-violet-500 hover:to-purple-500 rounded-full transition-all shadow-lg shadow-violet-300/30"
           >
             무료 상담 신청하기
-          </Link>
+          </ConsultationLink>
         </div>
       </section>
 

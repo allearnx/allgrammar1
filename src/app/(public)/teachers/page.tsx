@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { createClient } from '@/lib/supabase/server';
+import ConsultationLink from '@/components/public/consultation-link';
 import type { TeacherProfile } from '@/types/public';
 
 export default async function TeachersPage() {
@@ -93,12 +94,11 @@ export default async function TeachersPage() {
           <p className="text-[#86868b] mb-6">
             무료 상담을 통해 학생에게 맞는 선생님을 만나보세요!
           </p>
-          <a
-            href="/#consultation-form"
+          <ConsultationLink
             className="inline-block px-8 py-4 text-lg font-bold text-white bg-gradient-to-r from-violet-400 to-purple-400 hover:from-violet-500 hover:to-purple-500 rounded-full transition-all shadow-lg shadow-violet-300/30"
           >
             무료 상담 신청하기
-          </a>
+          </ConsultationLink>
         </div>
       </section>
     </>

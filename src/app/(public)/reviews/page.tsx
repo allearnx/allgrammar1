@@ -1,5 +1,5 @@
-import Link from 'next/link';
 import { createClient } from '@/lib/supabase/server';
+import ConsultationLink from '@/components/public/consultation-link';
 import type { Review } from '@/types/public';
 
 export default async function ReviewsPage() {
@@ -78,15 +78,14 @@ export default async function ReviewsPage() {
           <p className="text-slate-500 mb-8">
             지금 바로 상담 신청하고, 맞춤 학습 상담을 받아보세요
           </p>
-          <Link
-            href="/#consultation-form"
+          <ConsultationLink
             className="inline-flex items-center gap-2 px-8 py-4 bg-violet-500 hover:bg-violet-600 text-white font-bold rounded-full transition-colors shadow-lg"
           >
             무료 상담 신청하기
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
             </svg>
-          </Link>
+          </ConsultationLink>
         </div>
       </section>
     </>

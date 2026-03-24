@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { createAdminClient } from '@/lib/supabase/admin';
+import ConsultationLink from '@/components/public/consultation-link';
 import { CATEGORY_LABELS, formatPrice, type Course, type TeacherProfile } from '@/types/public';
 
 function getCategoryColor(category: string) {
@@ -137,12 +138,11 @@ export default async function CourseDetailPage({
                 >
                   {formatPrice(c.price)}원 수강 신청하기
                 </Link>
-                <Link
-                  href="/#consultation-form"
+                <ConsultationLink
                   className="block w-full py-4 text-center text-lg font-bold text-violet-600 bg-white border-2 border-violet-200 hover:border-violet-400 hover:bg-violet-50 rounded-full transition-all"
                 >
                   수강 상담 신청하기
-                </Link>
+                </ConsultationLink>
               </div>
             </div>
           </div>
@@ -196,12 +196,11 @@ export default async function CourseDetailPage({
           <p className="text-[#86868b] mb-6">
             무료 상담을 통해 자세한 안내를 받아보세요!
           </p>
-          <Link
-            href="/#consultation-form"
+          <ConsultationLink
             className="inline-block px-8 py-4 text-lg font-bold text-white bg-gradient-to-r from-violet-400 to-purple-400 hover:from-violet-500 hover:to-purple-500 rounded-full transition-all shadow-lg shadow-violet-300/30"
           >
             무료 상담 신청하기
-          </Link>
+          </ConsultationLink>
         </div>
       </section>
 

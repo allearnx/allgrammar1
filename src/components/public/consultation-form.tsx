@@ -5,7 +5,7 @@ import { createBrowserClient } from '@supabase/ssr';
 import { GRADE_OPTIONS } from '@/types/public';
 import type { Course } from '@/types/public';
 
-export default function ConsultationForm() {
+export default function ConsultationForm({ onSuccess }: { onSuccess?: () => void } = {}) {
   const [studentName, setStudentName] = useState('');
   const [studentGrade, setStudentGrade] = useState('');
   const [parentPhone, setParentPhone] = useState('');

@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { createClient } from '@/lib/supabase/server';
+import ConsultationLink from '@/components/public/consultation-link';
 import type { TeacherProfile, Course } from '@/types/public';
 import { CATEGORY_LABELS, formatPrice } from '@/types/public';
 
@@ -73,12 +74,11 @@ export default async function TeacherDetailPage({ params }: { params: Promise<{ 
                 </div>
               )}
               <div className="mt-8">
-                <a
-                  href="/#consultation-form"
+                <ConsultationLink
                   className="inline-block px-8 py-4 text-lg font-bold text-white bg-gradient-to-r from-violet-400 to-purple-400 hover:from-violet-500 hover:to-purple-500 rounded-full transition-all shadow-lg shadow-violet-300/30"
                 >
                   {t.display_name} 선생님께 상담 신청하기
-                </a>
+                </ConsultationLink>
               </div>
             </div>
           </div>
@@ -151,12 +151,11 @@ export default async function TeacherDetailPage({ params }: { params: Promise<{ 
           <p className="text-[#86868b] mb-6">
             무료 상담을 통해 맞춤 학습 플랜을 받아보세요!
           </p>
-          <a
-            href="/#consultation-form"
+          <ConsultationLink
             className="inline-block px-8 py-4 text-lg font-bold text-white bg-gradient-to-r from-violet-400 to-purple-400 hover:from-violet-500 hover:to-purple-500 rounded-full transition-all shadow-lg shadow-violet-300/30"
           >
             무료 상담 신청하기
-          </a>
+          </ConsultationLink>
         </div>
       </section>
     </>
