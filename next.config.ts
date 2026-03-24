@@ -11,7 +11,7 @@ const cspDirectives = [
   "default-src 'self'",
   `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ""} https://www.youtube.com https://*.tosspayments.com`,
   "style-src 'self' 'unsafe-inline' https://*.tosspayments.com",
-  "img-src 'self' data: blob: https://*.tosspayments.com",
+  "img-src 'self' data: blob: https://*.tosspayments.com https://*.supabase.co",
   "font-src 'self' https://*.tosspayments.com",
   "frame-src https://www.youtube.com https://*.tosspayments.com https:",
   "connect-src 'self' https://*.supabase.co https://*.sentry.io https://*.tosspayments.com",
@@ -28,6 +28,16 @@ const nextConfig: NextConfig = {
     staleTimes: {
       dynamic: 30,
     },
+  },
+
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "*.supabase.co",
+        pathname: "/storage/v1/object/public/**",
+      },
+    ],
   },
 
   async headers() {

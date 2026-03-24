@@ -48,8 +48,12 @@ export async function updateSession(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
 
   // Public routes that don't require auth
-  const publicRoutes = ['/login', '/signup', '/callback', '/report', '/quiz-result', '/parent'];
-  const isPublicRoute = publicRoutes.some((route) => pathname.startsWith(route));
+  const publicRoutes = [
+    '/login', '/signup', '/callback', '/report', '/quiz-result', '/parent',
+    '/courses', '/teachers', '/reviews', '/faq', '/allkill', '/about',
+    '/curriculum', '/schedule', '/terms', '/privacy',
+  ];
+  const isPublicRoute = pathname === '/' || publicRoutes.some((route) => pathname.startsWith(route));
 
   // Try cached profile from cookie first (avoids DB + auth call on every navigation)
   let profile: { id: string; email: string; full_name: string; role: string; academy_id: string | null } | null = null;
@@ -108,19 +112,40 @@ export async function updateSession(request: NextRequest) {
   const role = (profile.role || 'student') as UserRole;
 
   // Public routes that stay accessible even when authenticated (no redirect)
-  const noRedirectRoutes = ['/parent', '/report', '/quiz-result'];
-  const isNoRedirectRoute = noRedirectRoutes.some((route) => pathname.startsWith(route));
+  const noRedirectRoutes = [
+    '/parent', '/report', '/quiz-result',
+    '/courses', '/teachers', '/reviews', '/faq', '/allkill', '/about',
+    '/curriculum', '/schedule', '/terms', '/privacy',
+  ];
+  const isNoRedirectRoute = pathname === '/' || noRedirectRoutes.some((route) => pathname.startsWith(route));
 
-  // If on a public route or root, redirect to dashboard (except parent/report pages)
-  if ((isPublicRoute || pathname === '/') && !isNoRedirectRoute) {
+  // If on a public route (login/signup), redirect to dashboard (except noRedirect pages)
+  if (isPublicRoute && !isNoRedirectRoute) {
     const url = request.nextUrl.clone();
     url.pathname = getRoleDashboard(role);
     return NextResponse.redirect(url);
   }
 
-  // For no-redirect routes, just pass through
+  // For no-redirect routes (public pages), pass through with profile headers
   if (isNoRedirectRoute) {
-    return supabaseResponse;
+    const requestHeaders = new Headers(request.headers);
+    requestHeaders.set('x-user-profile', Buffer.from(JSON.stringify(profile)).toString('base64'));
+    const response = NextResponse.next({
+      request: { headers: requestHeaders },
+    });
+    supabaseResponse.headers.getSetCookie().forEach((cookie) => {
+      response.headers.append('set-cookie', cookie);
+    });
+    if (!cacheHit) {
+      response.cookies.set('x-user-profile', JSON.stringify(profile), {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production',
+        sameSite: 'lax',
+        maxAge: 300,
+        path: '/',
+      });
+    }
+    return response;
   }
 
   // Role-based route protection

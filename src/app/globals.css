@@ -147,3 +147,27 @@
   0%, 100% { box-shadow: 0 0 20px rgba(124,58,237,0.08), 0 8px 32px rgba(124,58,237,0.06); }
   50% { box-shadow: 0 0 30px rgba(124,58,237,0.15), 0 8px 40px rgba(124,58,237,0.1); }
 }
+
+/* ===== 공개 페이지: 로고 마키 (무한 스크롤) ===== */
+@keyframes marquee-left {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+@keyframes marquee-right {
+  0% { transform: translateX(-50%); }
+  100% { transform: translateX(0); }
+}
+.marquee-track {
+  display: flex;
+  width: max-content;
+  will-change: transform;
+}
+.marquee-left {
+  animation: marquee-left 40s linear infinite;
+}
+.marquee-right {
+  animation: marquee-right 40s linear infinite;
+}
+.marquee-wrapper:hover .marquee-track {
+  animation-play-state: paused;
+}
