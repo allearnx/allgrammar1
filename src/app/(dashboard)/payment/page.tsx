@@ -86,7 +86,7 @@ export default function PaymentPage() {
       </header>
 
       {/* 본문 */}
-      <main className="mx-auto max-w-[480px] px-4 pb-28 pt-5 space-y-4">
+      <main className="mx-auto max-w-[480px] px-4 pb-8 pt-5 space-y-4">
         {/* 주문 상품 */}
         <section className="rounded-2xl bg-white p-5">
           <h2 className="mb-4 text-[15px] font-semibold text-gray-900">주문 상품</h2>
@@ -130,26 +130,24 @@ export default function PaymentPage() {
         </section>
       </main>
 
-      {/* 하단 고정 CTA */}
-      <div className="fixed bottom-0 left-0 right-0 z-10 border-t border-gray-100 bg-white pb-[env(safe-area-inset-bottom)]">
-        <div className="mx-auto max-w-[480px] px-4 py-3 space-y-2">
-          <button
-            onClick={handlePayment}
-            disabled={!sdkReady || loading}
-            className="w-full rounded-xl bg-[#3182F6] py-4 text-[16px] font-semibold text-white transition-colors hover:bg-[#1b6ef3] disabled:bg-gray-300 disabled:cursor-not-allowed"
-          >
-            {!sdkReady
-              ? '결제 준비 중...'
-              : loading
-                ? '결제창 여는 중...'
-                : `${price.toLocaleString('ko-KR')}원 결제하기`}
-          </button>
-          <div className="flex items-center justify-center gap-1.5 py-1">
-            <ShieldCheck className="h-3.5 w-3.5 text-gray-400" />
-            <p className="text-xs text-gray-400">
-              안전한 결제를 위해 토스페이먼츠가 결제를 처리합니다
-            </p>
-          </div>
+      {/* CTA — 콘텐츠 바로 아래 */}
+      <div className="mx-auto max-w-[480px] px-4 pb-8 space-y-2">
+        <button
+          onClick={handlePayment}
+          disabled={!sdkReady || loading}
+          className="w-full rounded-xl bg-[#3182F6] py-4 text-[16px] font-semibold text-white transition-colors hover:bg-[#1b6ef3] disabled:bg-gray-300 disabled:cursor-not-allowed"
+        >
+          {!sdkReady
+            ? '결제 준비 중...'
+            : loading
+              ? '결제창 여는 중...'
+              : `${price.toLocaleString('ko-KR')}원 결제하기`}
+        </button>
+        <div className="flex items-center justify-center gap-1.5 py-1">
+          <ShieldCheck className="h-3.5 w-3.5 text-gray-400" />
+          <p className="text-xs text-gray-400">
+            안전한 결제를 위해 토스페이먼츠가 결제를 처리합니다
+          </p>
         </div>
       </div>
     </div>
