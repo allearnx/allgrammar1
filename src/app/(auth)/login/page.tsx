@@ -15,13 +15,14 @@ function LoginForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const nextParam = searchParams.get('next');
-  const redirectTo = isSafeRedirect(nextParam) ? nextParam : '/';
+  const hasExplicitNext = isSafeRedirect(nextParam);
+  const redirectTo = hasExplicitNext ? nextParam : null; // null = resolve after login
 
   useEffect(() => {
-    if (isSafeRedirect(nextParam)) {
+    if (hasExplicitNext) {
       sessionStorage.setItem('authRedirect', nextParam);
     }
-  }, [nextParam]);
+  }, [hasExplicitNext, nextParam]);
 
   async function handleLogin(e: React.FormEvent) {
     e.preventDefault();
@@ -41,11 +42,34 @@ function LoginForm() {
 
     toast.success('로그인 성공!');
     sessionStorage.removeItem('authRedirect');
-    router.push(redirectTo);
+
+    if (redirectTo) {
+      router.push(redirectTo);
+    } else {
+      // No explicit next param — redirect to role-based dashboard
+      const { data: { user } } = await supabase.auth.getUser();
+      if (user) {
+        const { data: profile } = await supabase
+          .from('users')
+          .select('role')
+          .eq('id', user.id)
+          .single();
+        const role = profile?.role || 'student';
+        const dashboards: Record<string, string> = {
+          boss: '/boss',
+          admin: '/admin',
+          teacher: '/teacher',
+          student: '/student',
+        };
+        router.push(dashboards[role] || '/student');
+      } else {
+        router.push('/student');
+      }
+    }
     router.refresh();
   }
 
-  const signupHref = nextParam && isSafeRedirect(nextParam)
+  const signupHref = hasExplicitNext
     ? `/signup?next=${encodeURIComponent(nextParam)}`
     : '/signup';
 

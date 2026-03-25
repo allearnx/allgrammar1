@@ -27,7 +27,7 @@ export function Sidebar({ user, services, naesinTree }: SidebarProps) {
   const pathname = usePathname();
   const router = useRouter();
   const [open, setOpen] = useState(false);
-  const navGroups = getNavGroups(user.role, services);
+  const navGroups = getNavGroups(user.role, services, user.is_homepage_manager);
   const sidebarBgMap: Record<string, string> = {
     boss: 'bg-violet-100',
     teacher: 'bg-sky-100',

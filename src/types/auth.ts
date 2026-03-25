@@ -7,6 +7,7 @@ export interface AuthUser {
   role: UserRole;
   academy_id: string | null;
   phone?: string | null;
+  is_homepage_manager?: boolean;
 }
 
 export interface SignUpData {

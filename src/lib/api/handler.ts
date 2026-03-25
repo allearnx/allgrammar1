@@ -29,6 +29,7 @@ interface HandlerConfig<T = unknown> {
   schema?: ZodType<T>;
   hasBody?: boolean;
   rateLimit?: { max: number; windowMs?: number };
+  allowHomepageManager?: boolean;
 }
 
 async function safeParseJson(request: NextRequest): Promise<unknown> {
@@ -81,7 +82,10 @@ export function createApiHandler<T = unknown>(
 
       // 2. Role check
       if (config.roles && !config.roles.includes(user.role)) {
-        throw new ForbiddenError();
+        // Allow is_homepage_manager to bypass role check
+        if (!config.allowHomepageManager || !user.is_homepage_manager) {
+          throw new ForbiddenError();
+        }
       }
 
       // 2.5. Rate limit

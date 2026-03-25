@@ -10,6 +10,11 @@ import {
   FileText,
   BookMarked,
   BookA,
+  MessageSquare,
+  BookOpen,
+  UserCircle,
+  Star,
+  HelpCircle,
 } from 'lucide-react';
 import type { NaesinStageStatuses } from '@/types/database';
 
@@ -153,6 +158,16 @@ export const NAV_CONFIG: Record<string, NavGroup[]> = {
       ],
     },
     {
+      label: '홈페이지 관리',
+      items: [
+        { href: '/boss/consultations', label: '상담 신청', icon: MessageSquare },
+        { href: '/boss/courses', label: '코스 관리', icon: BookOpen },
+        { href: '/boss/teacher-profiles', label: '선생님 프로필', icon: UserCircle },
+        { href: '/boss/reviews', label: '후기 관리', icon: Star },
+        { href: '/boss/faqs', label: 'FAQ 관리', icon: HelpCircle },
+      ],
+    },
+    {
       label: '통계',
       items: [
         { href: '/boss/analytics', label: '플랫폼 통계', icon: BarChart3 },
@@ -172,8 +187,25 @@ const SERVICE_HREF_MAP: Record<string, string> = {
   voca: '/student/voca',
 };
 
-export function getNavGroups(role: string, services?: string[]): NavGroup[] {
-  const groups = NAV_CONFIG[role] || NAV_CONFIG.student;
+export const HOMEPAGE_MANAGER_GROUP: NavGroup = {
+  label: '홈페이지 관리',
+  items: [
+    { href: '/boss/consultations', label: '상담 신청', icon: MessageSquare },
+    { href: '/boss/courses', label: '코스 관리', icon: BookOpen },
+    { href: '/boss/teacher-profiles', label: '선생님 프로필', icon: UserCircle },
+    { href: '/boss/reviews', label: '후기 관리', icon: Star },
+    { href: '/boss/faqs', label: 'FAQ 관리', icon: HelpCircle },
+  ],
+};
+
+export function getNavGroups(role: string, services?: string[], isHomepageManager?: boolean): NavGroup[] {
+  let groups = NAV_CONFIG[role] || NAV_CONFIG.student;
+
+  // Non-boss homepage managers get the homepage section appended
+  if (isHomepageManager && role !== 'boss') {
+    groups = [...groups, HOMEPAGE_MANAGER_GROUP];
+  }
+
   if (role !== 'student' || !services) return groups;
 
   // Filter student learning items based on assigned services

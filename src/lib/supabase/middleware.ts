@@ -56,7 +56,7 @@ export async function updateSession(request: NextRequest) {
   const isPublicRoute = pathname === '/' || publicRoutes.some((route) => pathname.startsWith(route));
 
   // Try cached profile from cookie first (avoids DB + auth call on every navigation)
-  let profile: { id: string; email: string; full_name: string; role: string; academy_id: string | null } | null = null;
+  let profile: { id: string; email: string; full_name: string; role: string; academy_id: string | null; is_homepage_manager?: boolean } | null = null;
   let cacheHit = false;
   const cachedProfileStr = request.cookies.get('x-user-profile')?.value;
   if (cachedProfileStr) {
@@ -91,7 +91,7 @@ export async function updateSession(request: NextRequest) {
     );
     const { data } = await admin
       .from('users')
-      .select('id, email, full_name, role, academy_id')
+      .select('id, email, full_name, role, academy_id, is_homepage_manager')
       .eq('id', user.id)
       .single();
     profile = data;
@@ -148,9 +148,20 @@ export async function updateSession(request: NextRequest) {
     return response;
   }
 
+  // Homepage manager routes (accessible by is_homepage_manager regardless of role)
+  const homepageManagerRoutes = [
+    '/boss/consultations', '/boss/courses', '/boss/teacher-profiles',
+    '/boss/reviews', '/boss/faqs',
+  ];
+  const isHomepageManagerRoute = homepageManagerRoutes.some((r) => pathname.startsWith(r));
+
   // Role-based route protection
   for (const [routePrefix, allowedRoles] of Object.entries(ROUTE_ACCESS)) {
     if (pathname.startsWith(routePrefix) && !allowedRoles.includes(role)) {
+      // Allow homepage managers to access homepage management routes
+      if (isHomepageManagerRoute && profile.is_homepage_manager) {
+        break;
+      }
       const url = request.nextUrl.clone();
       url.pathname = getRoleDashboard(role);
       return NextResponse.redirect(url);

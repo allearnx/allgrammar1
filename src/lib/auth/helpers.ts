@@ -34,7 +34,7 @@ export const getUser = cache(async (): Promise<AuthUser | null> => {
 
   const { data: profile, error: profileError } = await supabase
     .from('users')
-    .select('id, email, full_name, role, academy_id')
+    .select('id, email, full_name, role, academy_id, is_homepage_manager')
     .eq('id', user.id)
     .single();
 
