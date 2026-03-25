@@ -52,7 +52,7 @@ export async function updateSession(request: NextRequest) {
   const publicRoutes = [
     '/login', '/signup', '/callback', '/report', '/quiz-result', '/parent',
     '/courses', '/teachers', '/reviews', '/faq', '/allkill', '/about',
-    '/curriculum', '/schedule', '/terms', '/privacy',
+    '/curriculum', '/schedule', '/terms', '/privacy', '/trial',
   ];
   const isPublicRoute = pathname === '/' || publicRoutes.some((route) => pathname.startsWith(route));
 
@@ -114,7 +114,7 @@ export async function updateSession(request: NextRequest) {
   const noRedirectRoutes = [
     '/parent', '/report', '/quiz-result',
     '/courses', '/teachers', '/reviews', '/faq', '/allkill', '/about',
-    '/curriculum', '/schedule', '/terms', '/privacy',
+    '/curriculum', '/schedule', '/terms', '/privacy', '/trial',
   ];
   const isNoRedirectRoute = pathname === '/' || noRedirectRoutes.some((route) => pathname.startsWith(route));
 
