@@ -148,16 +148,16 @@ export default function SchoolExamPage() {
               그것도 아주 잘.
             </p>
 
-            <div className="sinaesin-proof sinaesin-serif sinaesin-anim" style={{ animationDelay: '0.2s' }}>
-              <div className="sinaesin-proof-inner" style={{ display: 'flex', alignItems: 'center', gap: 20 }}>
-                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2 }}>
-                  <span style={{ fontSize: '0.88rem', fontWeight: 700, color: '#7a5a1a', letterSpacing: '0.08em', whiteSpace: 'nowrap' }}>수강생 95% · 95점 달성</span>
-                  <span style={{ fontSize: '0.65rem', fontWeight: 400, color: '#b8966a', letterSpacing: '0.1em', fontFamily: 'inherit', whiteSpace: 'nowrap' }}>STUDENT ACHIEVEMENT</span>
+            <div className="sinaesin-proof sinaesin-serif sinaesin-anim" style={{ animationDelay: '0.2s', padding: '20px 56px' }}>
+              <div className="sinaesin-proof-inner" style={{ display: 'flex', alignItems: 'center', gap: 28 }}>
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4 }}>
+                  <span style={{ fontSize: '1.15rem', fontWeight: 700, color: '#7a5a1a', letterSpacing: '0.08em', whiteSpace: 'nowrap' }}>수강생 95% · 95점 달성</span>
+                  <span style={{ fontSize: '0.75rem', fontWeight: 400, color: '#b8966a', letterSpacing: '0.1em', fontFamily: 'inherit', whiteSpace: 'nowrap' }}>STUDENT ACHIEVEMENT</span>
                 </div>
-                <div className="sinaesin-proof-divider" style={{ width: 4, height: 4, borderRadius: '50%', background: '#c9a84c', flexShrink: 0 }} />
-                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2 }}>
-                  <span style={{ fontSize: '0.88rem', fontWeight: 700, color: '#7a5a1a', letterSpacing: '0.08em', whiteSpace: 'nowrap' }}>2026 동탄국제고 합격</span>
-                  <span style={{ fontSize: '0.65rem', fontWeight: 400, color: '#b8966a', letterSpacing: '0.1em', fontFamily: 'inherit', whiteSpace: 'nowrap' }}>DONGTAN INTERNATIONAL HIGH</span>
+                <div className="sinaesin-proof-divider" style={{ width: 5, height: 5, borderRadius: '50%', background: '#c9a84c', flexShrink: 0 }} />
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4 }}>
+                  <span style={{ fontSize: '1.15rem', fontWeight: 700, color: '#7a5a1a', letterSpacing: '0.08em', whiteSpace: 'nowrap' }}>2026 동탄국제고 합격</span>
+                  <span style={{ fontSize: '0.75rem', fontWeight: 400, color: '#b8966a', letterSpacing: '0.1em', fontFamily: 'inherit', whiteSpace: 'nowrap' }}>DONGTAN INTERNATIONAL HIGH</span>
                 </div>
               </div>
             </div>
