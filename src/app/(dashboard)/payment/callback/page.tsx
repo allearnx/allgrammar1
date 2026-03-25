@@ -97,8 +97,9 @@ export default function PaymentCallbackPage() {
                 </Button>
               ) : (
                 <>
+                  <p className="text-lg font-semibold">감사합니다!</p>
                   <p className="text-sm text-muted-foreground text-center">
-                    담당 선생님이 학습 안내를 위해 연락드립니다.
+                    담당 선생님이 온보딩을 위해 곧 연락드릴 거예요.
                   </p>
                   <Button asChild variant="outline">
                     <Link href="/">홈으로 가기</Link>
