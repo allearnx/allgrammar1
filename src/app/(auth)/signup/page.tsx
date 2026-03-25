@@ -34,13 +34,6 @@ function SignUpForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const nextParam = searchParams.get('next');
-  const storedRedirect = typeof window !== 'undefined' ? sessionStorage.getItem('authRedirect') : null;
-  const dashboards: Record<string, string> = {
-    student: '/student', teacher: '/teacher', admin: '/admin', boss: '/boss',
-  };
-  const redirectTo = isSafeRedirect(nextParam) ? nextParam
-    : isSafeRedirect(storedRedirect) ? storedRedirect
-    : dashboards[role] || '/student';
 
   const isAdminRole = role === 'admin';
 
@@ -82,8 +75,21 @@ function SignUpForm() {
     }
 
     toast.success('회원가입 완료!');
+
+    // Compute redirect at action time using actual browser URL
+    const sp = new URLSearchParams(window.location.search);
+    const next = sp.get('next');
+    const stored = sessionStorage.getItem('authRedirect');
     sessionStorage.removeItem('authRedirect');
-    window.location.href = redirectTo;
+
+    const dashboards: Record<string, string> = {
+      student: '/student', teacher: '/teacher', admin: '/admin', boss: '/boss',
+    };
+    const target = isSafeRedirect(next) ? next
+      : isSafeRedirect(stored) ? stored
+      : dashboards[role] || '/student';
+
+    window.location.href = target;
   }
 
   return (
