@@ -341,22 +341,34 @@ export function CoursesClient({ courses, teachers }: { courses: CourseItem[]; te
             </div>
             <div className="space-y-2">
               <Label>담당 선생님</Label>
-              <Select
-                value={form.teacher_id || 'none'}
-                onValueChange={(v) => setForm({ ...form, teacher_id: v === 'none' ? '' : v })}
-              >
-                <SelectTrigger>
-                  <SelectValue placeholder="선택 안 함" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="none">선택 안 함</SelectItem>
-                  {teachers.filter((t) => t.user_id).map((t) => (
-                    <SelectItem key={t.id} value={t.user_id!}>
-                      {t.display_name}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
+              <div className="flex gap-2">
+                <Select
+                  value={form.teacher_id || undefined}
+                  onValueChange={(v) => setForm({ ...form, teacher_id: v })}
+                >
+                  <SelectTrigger className="flex-1">
+                    <SelectValue placeholder="선택 안 함" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {teachers.filter((t) => t.user_id).map((t) => (
+                      <SelectItem key={t.id} value={t.user_id!}>
+                        {t.display_name}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+                {form.teacher_id && (
+                  <Button
+                    type="button"
+                    variant="ghost"
+                    size="icon"
+                    className="h-10 w-10 shrink-0"
+                    onClick={() => setForm({ ...form, teacher_id: '' })}
+                  >
+                    <X className="h-4 w-4" />
+                  </Button>
+                )}
+              </div>
             </div>
             <div className="space-y-2">
               <Label>썸네일 이미지</Label>
