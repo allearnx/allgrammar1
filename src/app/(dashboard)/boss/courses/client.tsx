@@ -31,7 +31,7 @@ import {
   TableRow,
 } from '@/components/ui/table';
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Plus, Pencil, Trash2, BookOpen, Upload, Loader2 } from 'lucide-react';
+import { Plus, Pencil, Trash2, BookOpen, Upload, Loader2, X } from 'lucide-react';
 import { toast } from 'sonner';
 import { ConfirmDialog } from '@/components/shared/confirm-dialog';
 import type { CourseCategory } from '@/types/public';
@@ -64,7 +64,7 @@ interface FormData {
   description: string;
   price: number;
   thumbnail_url: string;
-  detail_image_url: string;
+  detail_image_urls: string[];
   teacher_id: string;
   is_active: boolean;
   sort_order: number;
@@ -76,7 +76,7 @@ const defaultForm: FormData = {
   description: '',
   price: 0,
   thumbnail_url: '',
-  detail_image_url: '',
+  detail_image_urls: [],
   teacher_id: '',
   is_active: true,
   sort_order: 0,
@@ -106,13 +106,22 @@ export function CoursesClient({ courses, teachers }: { courses: CourseItem[]; te
 
   function openEdit(course: CourseItem) {
     setEditingId(course.id);
+    let detailUrls: string[] = [];
+    if (course.detail_image_url) {
+      try {
+        const parsed = JSON.parse(course.detail_image_url);
+        detailUrls = Array.isArray(parsed) ? parsed : [course.detail_image_url];
+      } catch {
+        detailUrls = [course.detail_image_url];
+      }
+    }
     setForm({
       title: course.title,
       category: course.category,
       description: course.description,
       price: course.price,
       thumbnail_url: course.thumbnail_url || '',
-      detail_image_url: course.detail_image_url || '',
+      detail_image_urls: detailUrls,
       teacher_id: course.teacher_id || '',
       is_active: course.is_active,
       sort_order: course.sort_order,
@@ -123,12 +132,16 @@ export function CoursesClient({ courses, teachers }: { courses: CourseItem[]; te
   async function handleUpload(file: File, field: 'thumbnail_url' | 'detail_image_url') {
     setUploading(field);
     try {
-      const formData = new FormData();
-      formData.append('file', file);
-      const res = await fetch('/api/boss/upload', { method: 'POST', body: formData });
+      const fd = new FormData();
+      fd.append('file', file);
+      const res = await fetch('/api/boss/upload', { method: 'POST', body: fd });
       if (!res.ok) throw new Error((await res.json()).error || '업로드 실패');
       const { url } = await res.json();
-      setForm((prev) => ({ ...prev, [field]: url }));
+      if (field === 'detail_image_url') {
+        setForm((prev) => ({ ...prev, detail_image_urls: [...prev.detail_image_urls, url] }));
+      } else {
+        setForm((prev) => ({ ...prev, [field]: url }));
+      }
       toast.success('이미지가 업로드되었습니다');
     } catch (err) {
       toast.error('업로드 실패', { description: err instanceof Error ? err.message : '알 수 없는 오류' });
@@ -142,10 +155,11 @@ export function CoursesClient({ courses, teachers }: { courses: CourseItem[]; te
     setSaving(true);
     try {
       const isEdit = editingId !== null;
+      const { detail_image_urls, ...rest } = form;
       const payload = {
-        ...form,
+        ...rest,
         thumbnail_url: form.thumbnail_url || null,
-        detail_image_url: form.detail_image_url || null,
+        detail_image_url: detail_image_urls.length > 0 ? JSON.stringify(detail_image_urls) : null,
         teacher_id: form.teacher_id || null,
       };
       const res = await fetch('/api/boss/courses', {
@@ -386,44 +400,54 @@ export function CoursesClient({ courses, teachers }: { courses: CourseItem[]; te
               </div>
             </div>
             <div className="space-y-2">
-              <Label>상세 이미지</Label>
-              <div className="flex items-center gap-3">
-                {form.detail_image_url ? (
-                  <Image
-                    src={form.detail_image_url}
-                    alt="detail"
-                    width={64}
-                    height={64}
-                    className="rounded object-cover w-16 h-16"
-                  />
-                ) : (
-                  <div className="w-16 h-16 rounded bg-muted flex items-center justify-center text-xs text-muted-foreground">
-                    미설정
-                  </div>
-                )}
-                <div>
-                  <input
-                    ref={detailInputRef}
-                    type="file"
-                    accept="image/*"
-                    className="hidden"
-                    onChange={(e) => {
-                      const file = e.target.files?.[0];
-                      if (file) handleUpload(file, 'detail_image_url');
-                      e.target.value = '';
-                    }}
-                  />
-                  <Button
-                    type="button"
-                    variant="outline"
-                    size="sm"
-                    onClick={() => detailInputRef.current?.click()}
-                    disabled={uploading === 'detail_image_url'}
-                  >
-                    {uploading === 'detail_image_url' ? <Loader2 className="h-4 w-4 mr-1 animate-spin" /> : <Upload className="h-4 w-4 mr-1" />}
-                    {uploading === 'detail_image_url' ? '업로드 중...' : '상세 이미지 업로드'}
-                  </Button>
+              <Label>상세 이미지 ({form.detail_image_urls.length}개)</Label>
+              {form.detail_image_urls.length > 0 && (
+                <div className="flex gap-2 overflow-x-auto pb-2">
+                  {form.detail_image_urls.map((url, idx) => (
+                    <div key={idx} className="relative flex-shrink-0">
+                      <Image
+                        src={url}
+                        alt={`detail-${idx + 1}`}
+                        width={64}
+                        height={64}
+                        className="rounded object-cover w-16 h-16"
+                      />
+                      <button
+                        type="button"
+                        className="absolute -top-1.5 -right-1.5 bg-destructive text-destructive-foreground rounded-full w-5 h-5 flex items-center justify-center"
+                        onClick={() => setForm((prev) => ({
+                          ...prev,
+                          detail_image_urls: prev.detail_image_urls.filter((_, i) => i !== idx),
+                        }))}
+                      >
+                        <X className="h-3 w-3" />
+                      </button>
+                    </div>
+                  ))}
                 </div>
+              )}
+              <div>
+                <input
+                  ref={detailInputRef}
+                  type="file"
+                  accept="image/*"
+                  className="hidden"
+                  onChange={(e) => {
+                    const file = e.target.files?.[0];
+                    if (file) handleUpload(file, 'detail_image_url');
+                    e.target.value = '';
+                  }}
+                />
+                <Button
+                  type="button"
+                  variant="outline"
+                  size="sm"
+                  onClick={() => detailInputRef.current?.click()}
+                  disabled={uploading === 'detail_image_url'}
+                >
+                  {uploading === 'detail_image_url' ? <Loader2 className="h-4 w-4 mr-1 animate-spin" /> : <Upload className="h-4 w-4 mr-1" />}
+                  {uploading === 'detail_image_url' ? '업로드 중...' : '이미지 추가'}
+                </Button>
               </div>
             </div>
             <div className="grid grid-cols-2 gap-4">
