@@ -10,6 +10,7 @@ import PricingSection from './_sections/PricingSection';
 import GuideSection from './_sections/GuideSection';
 import FinalCtaSection from './_sections/FinalCtaSection';
 import { C } from './_data';
+import { createAdminClient } from '@/lib/supabase/admin';
 
 const montserrat = Montserrat({ weight: ['700', '900'], subsets: ['latin'], preload: false });
 
@@ -18,7 +19,16 @@ export const metadata: Metadata = {
   description: '7단계 학습 시스템으로 진짜 내 단어를 만드세요. AI 영작 채점, 학부모 리포트, 틀린 단어 집중 복습.',
 };
 
-export default function AllkillPage() {
+export default async function AllkillPage() {
+  const supabase = createAdminClient();
+  const { data: vocaCourse } = await supabase
+    .from('courses')
+    .select('id')
+    .eq('category', 'voca')
+    .eq('is_active', true)
+    .limit(1)
+    .single();
+  const vocaCourseId = vocaCourse?.id || undefined;
   return (
     <>
       <style suppressHydrationWarning>{`
@@ -186,9 +196,9 @@ export default function AllkillPage() {
         <FlowSection />
         <PersonaSection />
         <StatsSection />
-        <PricingSection />
+        <PricingSection vocaCourseId={vocaCourseId} />
         <GuideSection />
-        <FinalCtaSection />
+        <FinalCtaSection vocaCourseId={vocaCourseId} />
       </div>
     </>
   );

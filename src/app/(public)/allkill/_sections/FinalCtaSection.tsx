@@ -1,7 +1,7 @@
 import AllkillPayButton from '@/components/public/allkill-pay-button';
 import { C } from '../_data';
 
-export default function FinalCtaSection() {
+export default function FinalCtaSection({ vocaCourseId }: { vocaCourseId?: string }) {
   return (
     <section className="allkill-final-cta" style={{ background: C.lavender, padding: '100px 60px', textAlign: 'center', position: 'relative', overflow: 'hidden', boxSizing: 'border-box' }}>
       <div style={{ position: 'absolute', top: -100, right: -100, width: 400, height: 400, borderRadius: '50%', background: 'rgba(255,255,255,0.06)', pointerEvents: 'none' }} />
@@ -14,7 +14,7 @@ export default function FinalCtaSection() {
           언제든 취소 가능.<br />수능 영어 단어, 이번엔 진짜로 끝냅니다.
         </p>
         <div style={{ maxWidth: 320, margin: '0 auto' }}>
-          <AllkillPayButton />
+          <AllkillPayButton courseId={vocaCourseId} />
         </div>
         <p style={{ marginTop: 16, fontSize: 13, color: 'rgba(255,255,255,0.45)' }}>
           이미 구독 중이신가요?{' '}
