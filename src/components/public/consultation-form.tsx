@@ -72,17 +72,20 @@ export default function ConsultationForm({ onSuccess }: { onSuccess?: () => void
 
     setIsLoading(true);
     try {
-      const supabase = createBrowserClient(
-        process.env.NEXT_PUBLIC_SUPABASE_URL!,
-        process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-      );
-      const { error: insertError } = await supabase.from('consultations').insert({
-        student_name: studentName.trim(),
-        grade: studentGrade,
-        parent_phone: parentPhone,
-        interest_course_ids: interestCourseIds,
+      const res = await fetch('/api/public/consultations', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          student_name: studentName.trim(),
+          grade: studentGrade,
+          parent_phone: parentPhone,
+          interest_course_ids: interestCourseIds,
+        }),
       });
-      if (insertError) throw insertError;
+      if (!res.ok) {
+        const data = await res.json();
+        throw new Error(data.error || '신청 실패');
+      }
 
       setShowModal(true);
       setStudentName('');

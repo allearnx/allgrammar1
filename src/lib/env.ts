@@ -23,6 +23,10 @@ const serverSchema = z.object({
 
   // Cron 인증
   CRON_SECRET: z.string().min(1).optional(),
+
+  // 텔레그램 알림 (없으면 알림 비활성)
+  TELEGRAM_BOT_TOKEN: z.string().min(1).optional(),
+  TELEGRAM_CHAT_ID: z.string().min(1).optional(),
 });
 
 // 클라이언트 환경변수 (NEXT_PUBLIC_ 만)
