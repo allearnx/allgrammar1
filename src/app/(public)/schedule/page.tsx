@@ -97,12 +97,12 @@ const scheduleData: Record<string, Record<string, ScheduleCell>> = {
     ]},
   },
   'pm-9': {
-    '월': { classes: [{ name: '올톡보카', time: '9:00-10:00', teacher: '', type: 'voca' }] },
+    '월': { classes: [{ name: '올킬보카', time: '9:00-10:00', teacher: '', type: 'voca' }] },
     '화': { classes: [] },
-    '수': { classes: [{ name: '올톡보카', time: '9:00-10:00', teacher: '', type: 'voca' }] },
-    '목': { classes: [{ name: '올톡보카', time: '9:00-10:00', teacher: '', type: 'voca' }] },
+    '수': { classes: [{ name: '올킬보카', time: '9:00-10:00', teacher: '', type: 'voca' }] },
+    '목': { classes: [{ name: '올킬보카', time: '9:00-10:00', teacher: '', type: 'voca' }] },
     '토': { classes: [] },
-    '일': { classes: [{ name: '올톡보카', time: '9:00-10:00', teacher: '', type: 'voca' }] },
+    '일': { classes: [{ name: '올킬보카', time: '9:00-10:00', teacher: '', type: 'voca' }] },
   },
 };
 

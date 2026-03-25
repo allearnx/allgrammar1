@@ -71,7 +71,7 @@ export const CATEGORY_LABELS: Record<CourseCategory, string> = {
   grammar: '문법',
   school_exam: '내신',
   international: '국제학교/유학생',
-  voca: '올톡보카',
+  voca: '올킬보카',
   reading: '리딩',
 };
 
@@ -141,7 +141,7 @@ export const CATEGORY_PAGE_CONFIG: Record<CourseCategory, CategoryPageTheme> = {
   },
   voca: {
     englishTitle: 'Vocabulary Course',
-    highlightedTitle: '올톡보카',
+    highlightedTitle: '올킬보카',
     description: '실시간 소통으로 완성하는 어휘력',
     heroBgClass: 'from-rose-50 to-white',
     heroTitleGradientClass: 'from-rose-500 via-pink-500 to-orange-400',

@@ -24,7 +24,7 @@ const menuItems = [
       { label: '문법', href: '/courses/grammar' },
       { label: '내신', href: '/courses/school_exam' },
       { label: '국제학교/유학생', href: '/courses/international' },
-      { label: '올톡보카', href: '/courses/voca' },
+      { label: '올킬보카', href: '/courses/voca' },
       { label: '리딩', href: '/courses/reading' },
     ]
   },
