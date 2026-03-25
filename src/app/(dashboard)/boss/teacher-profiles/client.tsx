@@ -217,7 +217,7 @@ export function TeacherProfilesClient({ profiles }: { profiles: TeacherProfile[]
       </div>
 
       <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
-        <DialogContent className="max-w-lg">
+        <DialogContent className="max-w-lg max-h-[90vh] overflow-y-auto">
           <DialogHeader>
             <DialogTitle>{editingId ? '프로필 수정' : '프로필 추가'}</DialogTitle>
           </DialogHeader>
