@@ -626,7 +626,7 @@ export const teacherProfilePatchSchema = z.object({
 export const courseCreateSchema = z.object({
   title: SHORT,
   category: z.enum(['grammar', 'school_exam', 'international', 'voca', 'reading']).default('grammar'),
-  description: LONG,
+  description: LONG.default(''),
   price: z.number().min(0),
   thumbnail_url: URL_STR.nullish(),
   detail_image_url: z.string().max(50000).nullish(),

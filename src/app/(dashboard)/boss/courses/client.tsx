@@ -335,7 +335,6 @@ export function CoursesClient({ courses, teachers }: { courses: CourseItem[]; te
                 value={form.description}
                 onChange={(e) => setForm({ ...form, description: e.target.value })}
                 rows={3}
-                required
               />
             </div>
             <div className="space-y-2">
