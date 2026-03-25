@@ -82,21 +82,6 @@ export const statsItems = [
   { num: '90점', label: '매칭 통과 기준' },
 ];
 
-export const freePlanIncluded = ['최근 4개년 수능·모의고사 기출', '틀린 단어 복습'];
-
-export const freePlanSteps = [
-  { step: '01', name: '플래시카드', note: '자유 학습' },
-  { step: '02', name: '퀴즈', note: '80점 통과' },
-  { step: '03', name: '스펠링', note: '80점 통과' },
-  { step: '04', name: '매칭', note: '90점 통과' },
-];
-
-export const freePlanLocked = [
-  { icon: '🔒', text: '2회독 심화 학습 (7단계 전체)' },
-  { icon: '🔒', text: 'AI 서술형 영작 채점' },
-  { icon: '🔒', text: '학부모 학습 리포트 공유' },
-];
-
 export const proPlanFeatures = ['수록 단어 전체 무제한 이용', 'AI 서술형 채점', '학부모 리포트 공유', '틀린 단어 복습 시스템'];
 
 export const proRoundSteps = [
