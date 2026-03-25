@@ -28,16 +28,7 @@ const menuItems = [
       { label: '리딩', href: '/courses/reading' },
     ]
   },
-  {
-    label: '학습운영센터',
-    href: '#',
-    hasDropdown: true,
-    dropdownItems: [
-      { label: '수강후기', href: '/reviews' },
-      { label: 'FAQ', href: '/faq' },
-      { label: '자료실', href: 'https://cafe.naver.com/f-e/cafes/30994203/menus/31', isExternal: true },
-    ]
-  },
+  { label: '레벨테스트', href: 'https://leveltest.allrounderenglish.co.kr/', hasDropdown: false, isExternal: true },
 ];
 
 interface PublicHeaderProps {
@@ -103,6 +94,15 @@ export default function PublicHeader({ isLoggedIn = false }: PublicHeaderProps) 
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                     </svg>
                   </button>
+                ) : item.isExternal ? (
+                  <a
+                    href={item.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-4 py-2 text-xl font-medium text-[#1d1d1f] hover:text-[#0071e3] transition-colors duration-200 flex items-center gap-1"
+                  >
+                    {item.label}
+                  </a>
                 ) : (
                   <Link
                     href={item.href}
@@ -253,6 +253,16 @@ export default function PublicHeader({ isLoggedIn = false }: PublicHeaderProps) 
                     ))}
                   </div>
                 </>
+              ) : item.isExternal ? (
+                <a
+                  href={item.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block px-4 py-3 text-base font-medium text-[#1d1d1f] hover:text-[#0071e3] transition-colors"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  {item.label}
+                </a>
               ) : (
                 <Link
                   href={item.href}
