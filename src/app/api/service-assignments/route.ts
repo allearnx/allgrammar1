@@ -16,9 +16,11 @@ export const GET = createApiHandler({ hasBody: false }, async ({ user, supabase 
 export const POST = createApiHandler(
   { roles: ['boss', 'admin'], schema: serviceAssignmentCreateSchema },
   async ({ user, body, supabase }) => {
-    // Free tier: only allow assigning the selected free service
-    const serviceBlocked = await checkServiceGate(user.academy_id, [body.service]);
-    if (serviceBlocked) return serviceBlocked;
+    // Boss는 플랜 제한 없이 서비스 배정 가능
+    if (user.role !== 'boss') {
+      const serviceBlocked = await checkServiceGate(user.academy_id, [body.service]);
+      if (serviceBlocked) return serviceBlocked;
+    }
 
     const { data, error } = await supabase
       .from('service_assignments')

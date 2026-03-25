@@ -119,6 +119,7 @@ export const POST = createApiHandler(
               service,
               assigned_by: user.id,
               source: 'payment',
+              ...(service === 'voca' ? { round2_unlocked: true } : {}),
             },
             { onConflict: 'student_id,service' },
           );
