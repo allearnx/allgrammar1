@@ -35,7 +35,7 @@ export async function getPlanContext(
   const supabase = await createClient();
 
   const [{ data: academy }, { data: sub }] = await Promise.all([
-    supabase.from('academies').select('services').eq('id', academyId).single(),
+    supabase.from('academies').select('free_service').eq('id', academyId).single(),
     supabase
       .from('subscriptions')
       .select('status, tier')
@@ -46,11 +46,8 @@ export async function getPlanContext(
       .single(),
   ]);
 
-  const services: string[] = (academy?.services as string[]) ?? [];
   const freeService: 'naesin' | 'voca' | null =
-    services.includes('voca') ? 'voca'
-    : services.includes('naesin') ? 'naesin'
-    : null;
+    (academy?.free_service as 'naesin' | 'voca') ?? null;
 
   const tier: Tier = deriveTier(sub ?? null);
 
