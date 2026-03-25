@@ -3,27 +3,12 @@ import { createApiHandler } from '@/lib/api/handler';
 import { paymentConfirmSchema } from '@/lib/api/schemas';
 import { confirmPayment, cancelPayment, TossPaymentError } from '@/lib/payments/toss';
 import { logger } from '@/lib/logger';
-
-const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
-const TELEGRAM_CHAT_ID = process.env.TELEGRAM_CHAT_ID;
+import { sendTelegram } from '@/lib/telegram';
 
 const CATEGORY_TO_SERVICE: Record<string, 'voca' | 'naesin'> = {
   voca: 'voca',
   school_exam: 'naesin',
 };
-
-async function sendUrgentTelegram(message: string) {
-  if (!TELEGRAM_BOT_TOKEN || !TELEGRAM_CHAT_ID) return;
-  try {
-    await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ chat_id: TELEGRAM_CHAT_ID, text: message }),
-    });
-  } catch (err) {
-    logger.error('telegram.urgent_failed', { error: err instanceof Error ? err.message : String(err) });
-  }
-}
 
 export const POST = createApiHandler(
   { schema: paymentConfirmSchema },
@@ -88,7 +73,7 @@ export const POST = createApiHandler(
         });
       }
 
-      sendUrgentTelegram(
+      sendTelegram(
         `🚨 결제 긴급 알림\n\n주문 기록 저장 실패 → 토스 취소 시도\n주문: ${orderId}\n금액: ${result.totalAmount}원\n유저: ${user.email}\n에러: ${insertErr.message}`
       );
 
@@ -133,7 +118,7 @@ export const POST = createApiHandler(
           });
 
           // 돈은 받았으니 취소 안 함 — 수동 대응
-          sendUrgentTelegram(
+          sendTelegram(
             `🚨 서비스 활성화 실패\n\n결제는 성공했으나 서비스 배정 실패\n주문: ${orderId}\n서비스: ${service}\n유저: ${user.email}\n에러: ${assignErr.message}\n\n👉 수동으로 서비스 배정 필요`
           );
         } else {
@@ -144,7 +129,7 @@ export const POST = createApiHandler(
 
     // ── 4. 결제 성공 텔레그램 알림 ──
     const serviceName = serviceActivated === 'voca' ? '올킬보카' : serviceActivated === 'naesin' ? '올인내신' : null;
-    sendUrgentTelegram(
+    sendTelegram(
       [
         '💰 결제 완료',
         '',
