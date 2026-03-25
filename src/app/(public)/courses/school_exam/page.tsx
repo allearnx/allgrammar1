@@ -192,24 +192,24 @@ export default function SchoolExamPage() {
         </section>
 
         {/* CURRICULUM */}
-        <section style={{ padding: '96px 24px', background: 'var(--navy)' }}>
+        <section style={{ padding: '64px 24px', background: 'var(--navy)' }}>
           <div style={{ maxWidth: 1000, margin: '0 auto' }}>
-            <div style={{ display: 'inline-block', fontSize: '0.7rem', fontWeight: 700, letterSpacing: '0.12em', color: '#c9a84c', textTransform: 'uppercase' as const, background: 'rgba(201,168,76,0.15)', padding: '4px 12px', borderRadius: 100, marginBottom: 20, border: '1px solid rgba(201,168,76,0.3)' }}>
+            <div style={{ display: 'inline-block', fontSize: '0.7rem', fontWeight: 700, letterSpacing: '0.12em', color: '#c9a84c', textTransform: 'uppercase' as const, background: 'rgba(201,168,76,0.15)', padding: '4px 12px', borderRadius: 100, marginBottom: 16, border: '1px solid rgba(201,168,76,0.3)' }}>
               커리큘럼
             </div>
-            <h2 style={{ fontSize: 'clamp(1.8rem, 4vw, 2.6rem)', fontWeight: 900, lineHeight: 1.25, color: 'white', marginBottom: 16 }}>
+            <h2 style={{ fontSize: 'clamp(1.8rem, 4vw, 2.6rem)', fontWeight: 900, lineHeight: 1.25, color: 'white', marginBottom: 12 }}>
               내신 1등급의<br /><span style={{ color: '#a78bfa' }}>순서가 있습니다.</span>
             </h2>
             <p style={{ fontSize: '0.95rem', color: 'rgba(255,255,255,0.5)', lineHeight: 1.85, maxWidth: 520 }}>
               순서가 틀리면 시간 낭비입니다.<br />올인내신은 검증된 순서대로 가르칩니다.
             </p>
-            <div className="sinaesin-timeline" style={{ display: 'flex', flexDirection: 'column', gap: 0, marginTop: 56, position: 'relative' }}>
+            <div className="sinaesin-timeline" style={{ display: 'flex', flexDirection: 'column', gap: 0, marginTop: 32, position: 'relative' }}>
               {curriculumSteps.map((item) => (
-                <div key={item.step} className="sinaesin-feature-card">
+                <div key={item.step} className="sinaesin-feature-card" style={{ padding: '20px 0' }}>
                   <div className="sinaesin-step sinaesin-serif">{item.step}</div>
                   <div className="sinaesin-feature-content">
-                    <h3 style={{ fontSize: '1.05rem', fontWeight: 700, color: 'white', marginBottom: 8, lineHeight: 1.4 }}>{item.title}</h3>
-                    <p style={{ fontSize: '0.875rem', color: 'rgba(255,255,255,0.45)', lineHeight: 1.75, whiteSpace: 'pre-line', wordBreak: 'keep-all' as const }}>{item.desc}</p>
+                    <h3 style={{ fontSize: '1.05rem', fontWeight: 700, color: 'white', marginBottom: 6, lineHeight: 1.4 }}>{item.title}</h3>
+                    <p style={{ fontSize: '0.875rem', color: 'rgba(255,255,255,0.45)', lineHeight: 1.7, whiteSpace: 'pre-line', wordBreak: 'keep-all' as const }}>{item.desc}</p>
                   </div>
                 </div>
               ))}
