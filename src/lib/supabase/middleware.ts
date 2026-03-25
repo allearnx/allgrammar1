@@ -1,6 +1,7 @@
 import { createServerClient } from '@supabase/ssr';
 import { createClient } from '@supabase/supabase-js';
 import { NextResponse, type NextRequest } from 'next/server';
+import { isSafeRedirect } from '@/lib/auth/redirect';
 
 type UserRole = 'student' | 'teacher' | 'admin' | 'boss';
 
@@ -74,10 +75,9 @@ export async function updateSession(request: NextRequest) {
     if (error || !user) {
       // Not authenticated
       if (!isPublicRoute) {
-        const url = request.nextUrl.clone();
-        url.pathname = '/login';
-        url.searchParams.set('next', request.nextUrl.pathname + request.nextUrl.search);
-        return NextResponse.redirect(url);
+        const loginUrl = new URL('/login', request.nextUrl.origin);
+        loginUrl.searchParams.set('next', request.nextUrl.pathname + request.nextUrl.search);
+        return NextResponse.redirect(loginUrl);
       }
       return supabaseResponse;
     }
@@ -100,10 +100,9 @@ export async function updateSession(request: NextRequest) {
   // If no profile (not authenticated), handle redirect
   if (!profile) {
     if (!isPublicRoute) {
-      const url = request.nextUrl.clone();
-      url.pathname = '/login';
-      url.searchParams.set('next', request.nextUrl.pathname + request.nextUrl.search);
-      return NextResponse.redirect(url);
+      const loginUrl = new URL('/login', request.nextUrl.origin);
+      loginUrl.searchParams.set('next', request.nextUrl.pathname + request.nextUrl.search);
+      return NextResponse.redirect(loginUrl);
     }
     return supabaseResponse;
   }
@@ -121,9 +120,9 @@ export async function updateSession(request: NextRequest) {
 
   // If on a public route (login/signup), redirect to dashboard (except noRedirect pages)
   if (isPublicRoute && !isNoRedirectRoute) {
-    const url = request.nextUrl.clone();
-    url.pathname = getRoleDashboard(role);
-    return NextResponse.redirect(url);
+    const nextParam = request.nextUrl.searchParams.get('next');
+    const target = isSafeRedirect(nextParam) ? nextParam : getRoleDashboard(role);
+    return NextResponse.redirect(new URL(target, request.nextUrl.origin));
   }
 
   // For no-redirect routes (public pages), pass through with profile headers

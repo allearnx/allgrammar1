@@ -35,9 +35,12 @@ function SignUpForm() {
   const searchParams = useSearchParams();
   const nextParam = searchParams.get('next');
   const storedRedirect = typeof window !== 'undefined' ? sessionStorage.getItem('authRedirect') : null;
+  const dashboards: Record<string, string> = {
+    student: '/student', teacher: '/teacher', admin: '/admin', boss: '/boss',
+  };
   const redirectTo = isSafeRedirect(nextParam) ? nextParam
     : isSafeRedirect(storedRedirect) ? storedRedirect
-    : '/';
+    : dashboards[role] || '/student';
 
   const isAdminRole = role === 'admin';
 

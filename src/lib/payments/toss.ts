@@ -79,6 +79,10 @@ export async function confirmPayment(
   );
 }
 
+export async function cancelPayment(paymentKey: string, cancelReason: string) {
+  return tossRequest('/payments/' + paymentKey + '/cancel', { cancelReason });
+}
+
 export async function chargeBilling(
   billingKey: string,
   params: {

@@ -13,12 +13,14 @@ export default function PaymentCallbackPage() {
   const [status, setStatus] = useState<'loading' | 'success' | 'error'>('loading');
   const [errorMessage, setErrorMessage] = useState('');
   const [receiptUrl, setReceiptUrl] = useState<string | null>(null);
+  const [serviceActivated, setServiceActivated] = useState<string | null>(null);
 
   useEffect(() => {
     const paymentKey = searchParams.get('paymentKey');
     const orderId = searchParams.get('orderId');
     const amount = searchParams.get('amount');
     const orderName = searchParams.get('name');
+    const courseId = searchParams.get('courseId');
 
     if (!paymentKey || !orderId || !amount) {
       const code = searchParams.get('code');
@@ -39,6 +41,7 @@ export default function PaymentCallbackPage() {
             orderId,
             amount: Number(amount),
             orderName: orderName || '',
+            ...(courseId ? { courseId } : {}),
           }),
         });
         const data = await res.json();
@@ -46,6 +49,7 @@ export default function PaymentCallbackPage() {
         if (res.ok) {
           setStatus('success');
           setReceiptUrl(data.receiptUrl ?? null);
+          setServiceActivated(data.serviceActivated ?? null);
           toast.success('결제가 완료되었습니다');
         } else {
           setStatus('error');
@@ -87,9 +91,20 @@ export default function PaymentCallbackPage() {
                   영수증 보기
                 </a>
               )}
-              <Button asChild>
-                <Link href="/student">학습하러 가기</Link>
-              </Button>
+              {serviceActivated ? (
+                <Button asChild>
+                  <Link href="/student">학습하러 가기</Link>
+                </Button>
+              ) : (
+                <>
+                  <p className="text-sm text-muted-foreground text-center">
+                    담당 선생님이 학습 안내를 위해 연락드립니다.
+                  </p>
+                  <Button asChild variant="outline">
+                    <Link href="/">홈으로 가기</Link>
+                  </Button>
+                </>
+              )}
             </>
           )}
           {status === 'error' && (

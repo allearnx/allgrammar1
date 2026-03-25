@@ -8,6 +8,7 @@ import { toast } from 'sonner';
 
 export default function PaymentPage() {
   const searchParams = useSearchParams();
+  const courseId = searchParams.get('courseId') || '';
   const name = searchParams.get('name') || '';
   const price = Number(searchParams.get('price')) || 0;
   const [sdkReady, setSdkReady] = useState(false);
@@ -45,7 +46,7 @@ export default function PaymentPage() {
       amount: price,
       orderId,
       orderName: name,
-      successUrl: `${window.location.origin}/payment/callback?name=${encodeURIComponent(name)}`,
+      successUrl: `${window.location.origin}/payment/callback?courseId=${encodeURIComponent(courseId)}&name=${encodeURIComponent(name)}`,
       failUrl: `${window.location.origin}/payment/callback`,
     }).catch(() => {
       setLoading(false);

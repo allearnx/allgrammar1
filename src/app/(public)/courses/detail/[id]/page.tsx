@@ -47,7 +47,7 @@ export default async function CourseDetailPage({
     teacher = data as unknown as TeacherProfile | null;
   }
 
-  const paymentUrl = `/payment?name=${encodeURIComponent(c.title)}&price=${c.price}`;
+  const paymentUrl = `/payment?courseId=${c.id}&name=${encodeURIComponent(c.title)}&price=${c.price}`;
 
   return (
     <>

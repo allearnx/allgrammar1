@@ -1,20 +1,40 @@
 import { NextResponse } from 'next/server';
 import { createApiHandler } from '@/lib/api/handler';
 import { paymentConfirmSchema } from '@/lib/api/schemas';
-import { confirmPayment, TossPaymentError } from '@/lib/payments/toss';
+import { confirmPayment, cancelPayment, TossPaymentError } from '@/lib/payments/toss';
 import { logger } from '@/lib/logger';
+
+const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
+const TELEGRAM_CHAT_ID = process.env.TELEGRAM_CHAT_ID;
+
+const CATEGORY_TO_SERVICE: Record<string, 'voca' | 'naesin'> = {
+  voca: 'voca',
+  school_exam: 'naesin',
+};
+
+async function sendUrgentTelegram(message: string) {
+  if (!TELEGRAM_BOT_TOKEN || !TELEGRAM_CHAT_ID) return;
+  try {
+    await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ chat_id: TELEGRAM_CHAT_ID, text: message }),
+    });
+  } catch (err) {
+    logger.error('telegram.urgent_failed', { error: err instanceof Error ? err.message : String(err) });
+  }
+}
 
 export const POST = createApiHandler(
   { schema: paymentConfirmSchema },
   async ({ user, body, supabase }) => {
-    const { paymentKey, orderId, amount, orderName } = body;
+    const { paymentKey, orderId, amount, orderName, courseId } = body;
 
-    // 토스 결제 승인
+    // ── 1. 토스 결제 승인 ──
     let result;
     try {
       result = await confirmPayment(paymentKey, orderId, amount);
     } catch (err) {
-      // 실패 시 orders에 failed 기록
       await supabase.from('orders').insert({
         user_id: user.id,
         order_name: orderName,
@@ -22,6 +42,7 @@ export const POST = createApiHandler(
         status: 'failed',
         toss_order_id: orderId,
         toss_payment_key: paymentKey,
+        course_id: courseId || null,
         failure_code: err instanceof TossPaymentError ? err.code : 'UNKNOWN',
         failure_message: err instanceof Error ? err.message : '결제 승인 실패',
       });
@@ -35,7 +56,7 @@ export const POST = createApiHandler(
       throw err;
     }
 
-    // 성공 → orders에 paid 기록
+    // ── 2. 주문 기록 저장 ──
     const { error: insertErr } = await supabase.from('orders').insert({
       user_id: user.id,
       order_name: orderName,
@@ -44,6 +65,7 @@ export const POST = createApiHandler(
       toss_order_id: orderId,
       toss_payment_key: result.paymentKey,
       receipt_url: result.receipt?.url ?? null,
+      course_id: courseId || null,
       paid_at: new Date().toISOString(),
     });
 
@@ -53,15 +75,76 @@ export const POST = createApiHandler(
         userId: user.id,
         error: insertErr.message,
       });
+
+      // 주문 기록 실패 → 토스 결제 즉시 취소
+      try {
+        await cancelPayment(result.paymentKey, '주문 기록 저장 실패로 인한 자동 취소');
+        logger.error('payment.auto_canceled', { orderId, paymentKey: result.paymentKey });
+      } catch (cancelErr) {
+        logger.error('payment.cancel_also_failed', {
+          orderId,
+          paymentKey: result.paymentKey,
+          error: cancelErr instanceof Error ? cancelErr.message : String(cancelErr),
+        });
+      }
+
+      sendUrgentTelegram(
+        `🚨 결제 긴급 알림\n\n주문 기록 저장 실패 → 토스 취소 시도\n주문: ${orderId}\n금액: ${result.totalAmount}원\n유저: ${user.email}\n에러: ${insertErr.message}`
+      );
+
       return NextResponse.json(
-        { error: '주문 기록 저장 실패' },
+        { error: '주문 처리 중 오류가 발생했습니다. 결제가 취소되었습니다.' },
         { status: 500 },
       );
+    }
+
+    // ── 3. 서비스 자동 활성화 (voca/school_exam 코스만) ──
+    let serviceActivated: 'voca' | 'naesin' | null = null;
+
+    if (courseId) {
+      const { data: course } = await supabase
+        .from('courses')
+        .select('category')
+        .eq('id', courseId)
+        .single();
+
+      const service = course ? CATEGORY_TO_SERVICE[course.category] : null;
+
+      if (service) {
+        const { error: assignErr } = await supabase
+          .from('service_assignments')
+          .upsert(
+            {
+              student_id: user.id,
+              service,
+              assigned_by: user.id,
+              source: 'payment',
+            },
+            { onConflict: 'student_id,service' },
+          );
+
+        if (assignErr) {
+          logger.error('payment.service_activation_failed', {
+            orderId,
+            userId: user.id,
+            service,
+            error: assignErr.message,
+          });
+
+          // 돈은 받았으니 취소 안 함 — 수동 대응
+          sendUrgentTelegram(
+            `🚨 서비스 활성화 실패\n\n결제는 성공했으나 서비스 배정 실패\n주문: ${orderId}\n서비스: ${service}\n유저: ${user.email}\n에러: ${assignErr.message}\n\n👉 수동으로 서비스 배정 필요`
+          );
+        } else {
+          serviceActivated = service;
+        }
+      }
     }
 
     return NextResponse.json({
       success: true,
       receiptUrl: result.receipt?.url ?? null,
+      serviceActivated,
     });
   },
 );

@@ -525,6 +525,7 @@ export const paymentConfirmSchema = z.object({
   orderId: z.string().min(1),
   amount: z.number().int().min(100),
   orderName: z.string().min(1),
+  courseId: z.string().uuid().optional(),
 });
 
 // ── Academy Settings Schemas ──
