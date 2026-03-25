@@ -24,6 +24,8 @@ async function sendTelegramNotification(data: {
     `📚 학년: ${gradeLabel}`,
     `📞 연락처: ${data.parent_phone}`,
     `🎯 관심 수업: ${coursesText}`,
+    '',
+    '👉 https://www.allrounderenglish.co.kr/boss/consultations',
   ].join('\n');
 
   try {
