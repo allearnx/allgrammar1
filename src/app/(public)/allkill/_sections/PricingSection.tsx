@@ -1,7 +1,7 @@
 import AllkillPayButton from '@/components/public/allkill-pay-button';
 import { C, proPlanFeatures, proRoundSteps, academyFeatures } from '../_data';
 
-export default function PricingSection({ vocaCourseId }: { vocaCourseId?: string }) {
+export default function PricingSection({ vocaCourseId, vocaCoursePrice }: { vocaCourseId?: string; vocaCoursePrice?: number }) {
   return (
     <section id="price" className="allkill-section" style={{ padding: '96px 60px', background: 'white' }}>
       <div style={{ maxWidth: 1200, margin: '0 auto' }}>
@@ -44,7 +44,7 @@ export default function PricingSection({ vocaCourseId }: { vocaCourseId?: string
                 </div>
               </div>
             </div>
-            <AllkillPayButton courseId={vocaCourseId} />
+            <AllkillPayButton courseId={vocaCourseId} price={vocaCoursePrice} />
           </div>
 
           {/* 학원 단체 */}

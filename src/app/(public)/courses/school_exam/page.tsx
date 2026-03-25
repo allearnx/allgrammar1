@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Noto_Serif_KR, Nanum_Pen_Script } from 'next/font/google';
 import SinaeSinPayButton from '@/components/public/sinaesin-pay-button';
 import ConsultationLink from '@/components/public/consultation-link';
+import { createAdminClient } from '@/lib/supabase/admin';
 
 const notoSerif = Noto_Serif_KR({ weight: ['700'], subsets: ['latin'], preload: false });
 const nanumPen = Nanum_Pen_Script({ weight: ['400'], preload: false });
@@ -50,7 +51,16 @@ const pricingItems = [
   ['성취도 리포트', '학부모 공유 가능'],
 ];
 
-export default function SchoolExamPage() {
+export default async function SchoolExamPage() {
+  const supabase = createAdminClient();
+  const { data: examCourse } = await supabase
+    .from('courses')
+    .select('id, price, title')
+    .eq('category', 'school_exam')
+    .eq('is_active', true)
+    .limit(1)
+    .single();
+
   return (
     <>
       <style suppressHydrationWarning>{`
@@ -302,7 +312,7 @@ export default function SchoolExamPage() {
                     </span>
                   </div>
                 ))}
-                <SinaeSinPayButton />
+                <SinaeSinPayButton courseId={examCourse?.id} price={examCourse?.price} name={examCourse?.title} />
               </div>
             </div>
           </div>

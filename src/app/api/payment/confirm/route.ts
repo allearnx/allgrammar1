@@ -141,6 +141,20 @@ export const POST = createApiHandler(
       }
     }
 
+    // ── 4. 결제 성공 텔레그램 알림 ──
+    const serviceName = serviceActivated === 'voca' ? '올킬보카' : serviceActivated === 'naesin' ? '올인내신' : null;
+    sendUrgentTelegram(
+      [
+        '💰 결제 완료',
+        '',
+        `👤 ${user.email}`,
+        `📦 ${orderName}`,
+        `💳 ${result.totalAmount.toLocaleString()}원`,
+        `🔖 주문번호: ${orderId}`,
+        serviceName ? `✅ ${serviceName} 자동 활성화 완료` : '',
+      ].filter(Boolean).join('\n'),
+    );
+
     return NextResponse.json({
       success: true,
       receiptUrl: result.receipt?.url ?? null,

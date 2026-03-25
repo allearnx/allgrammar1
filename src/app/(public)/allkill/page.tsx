@@ -23,12 +23,13 @@ export default async function AllkillPage() {
   const supabase = createAdminClient();
   const { data: vocaCourse } = await supabase
     .from('courses')
-    .select('id')
+    .select('id, price, title')
     .eq('category', 'voca')
     .eq('is_active', true)
     .limit(1)
     .single();
   const vocaCourseId = vocaCourse?.id || undefined;
+  const vocaCoursePrice = vocaCourse?.price || undefined;
   return (
     <>
       <style suppressHydrationWarning>{`
@@ -196,9 +197,9 @@ export default async function AllkillPage() {
         <FlowSection />
         <PersonaSection />
         <StatsSection />
-        <PricingSection vocaCourseId={vocaCourseId} />
+        <PricingSection vocaCourseId={vocaCourseId} vocaCoursePrice={vocaCoursePrice} />
         <GuideSection />
-        <FinalCtaSection vocaCourseId={vocaCourseId} />
+        <FinalCtaSection vocaCourseId={vocaCourseId} vocaCoursePrice={vocaCoursePrice} />
       </div>
     </>
   );
