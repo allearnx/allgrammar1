@@ -42,7 +42,7 @@ export default async function CourseDetailPage({
     const { data } = await supabase
       .from('teacher_profiles')
       .select('*')
-      .eq('user_id', c.teacher_id)
+      .eq('id', c.teacher_id)
       .single();
     teacher = data as unknown as TeacherProfile | null;
   }

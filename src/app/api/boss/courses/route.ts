@@ -15,19 +15,19 @@ export const GET = createApiHandler(
 
     const rows = (courses ?? []) as Array<Record<string, unknown> & { teacher_id: string | null }>;
 
-    // Resolve teacher names via teacher_profiles (user_id matches courses.teacher_id)
+    // Resolve teacher names via teacher_profiles (courses.teacher_id → teacher_profiles.id)
     const teacherIds = [...new Set(rows.map((c) => c.teacher_id).filter(Boolean))] as string[];
     let teacherMap: Record<string, string> = {};
     if (teacherIds.length > 0) {
       const profiles = dbResult(
         await supabase
           .from('teacher_profiles')
-          .select('user_id, display_name')
-          .in('user_id', teacherIds)
+          .select('id, display_name')
+          .in('id', teacherIds)
       );
-      const profileRows = (profiles ?? []) as Array<{ user_id: string; display_name: string }>;
+      const profileRows = (profiles ?? []) as Array<{ id: string; display_name: string }>;
       teacherMap = Object.fromEntries(
-        profileRows.map((p) => [p.user_id, p.display_name])
+        profileRows.map((p) => [p.id, p.display_name])
       );
     }
 

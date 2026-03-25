@@ -16,18 +16,18 @@ export default async function BossCoursesPage() {
 
   const { data: teachers } = await admin
     .from('teacher_profiles')
-    .select('id, user_id, display_name')
+    .select('id, display_name')
     .eq('is_visible', true)
     .order('sort_order', { ascending: true });
 
-  // Resolve teacher names (courses.teacher_id → users.id → teacher_profiles.user_id)
-  const teacherByUserId = Object.fromEntries(
-    (teachers || []).map((t) => [t.user_id, t.display_name])
+  // Resolve teacher names (courses.teacher_id → teacher_profiles.id)
+  const teacherById = Object.fromEntries(
+    (teachers || []).map((t) => [t.id, t.display_name])
   );
 
   const enriched = (courses || []).map((c) => ({
     ...c,
-    teacher_name: c.teacher_id ? teacherByUserId[c.teacher_id] || null : null,
+    teacher_name: c.teacher_id ? teacherById[c.teacher_id] || null : null,
   }));
 
   return (

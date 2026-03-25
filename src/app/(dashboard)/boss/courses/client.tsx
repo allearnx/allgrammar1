@@ -54,7 +54,6 @@ interface CourseItem {
 
 interface TeacherOption {
   id: string;
-  user_id: string | null;
   display_name: string;
 }
 
@@ -350,8 +349,8 @@ export function CoursesClient({ courses, teachers }: { courses: CourseItem[]; te
                     <SelectValue placeholder="선택 안 함" />
                   </SelectTrigger>
                   <SelectContent>
-                    {teachers.filter((t) => t.user_id).map((t) => (
-                      <SelectItem key={t.id} value={t.user_id!}>
+                    {teachers.map((t) => (
+                      <SelectItem key={t.id} value={t.id}>
                         {t.display_name}
                       </SelectItem>
                     ))}

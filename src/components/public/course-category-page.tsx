@@ -24,17 +24,17 @@ export default async function CourseCategoryPage({ category }: { category: Cours
 
   const courseList = (courses as Course[] | null) || [];
 
-  // Fetch teacher profiles for courses that have teacher_id
+  // Fetch teacher profiles for courses that have teacher_id (→ teacher_profiles.id)
   const teacherIds = [...new Set(courseList.map(c => c.teacher_id).filter(Boolean))] as string[];
   let teacherMap: Record<string, TeacherProfile> = {};
   if (teacherIds.length > 0) {
     const { data: teachers } = await supabase
       .from('teacher_profiles')
       .select('*')
-      .in('user_id', teacherIds);
+      .in('id', teacherIds);
     if (teachers) {
       teacherMap = Object.fromEntries(
-        (teachers as TeacherProfile[]).map(t => [t.user_id, t])
+        (teachers as TeacherProfile[]).map(t => [t.id, t])
       );
     }
   }
