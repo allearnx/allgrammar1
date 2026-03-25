@@ -73,13 +73,6 @@ export default async function TeacherDetailPage({ params }: { params: Promise<{ 
                   <p className="text-lg text-[#424245] leading-relaxed whitespace-pre-line">{t.bio}</p>
                 </div>
               )}
-              <div className="mt-8">
-                <ConsultationLink
-                  className="inline-block px-8 py-4 text-lg font-bold text-white bg-gradient-to-r from-violet-400 to-purple-400 hover:from-violet-500 hover:to-purple-500 rounded-full transition-all shadow-lg shadow-violet-300/30"
-                >
-                  {t.display_name} 선생님께 상담 신청하기
-                </ConsultationLink>
-              </div>
             </div>
           </div>
         </div>
