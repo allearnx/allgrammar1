@@ -82,6 +82,13 @@ function SignUpForm() {
     const stored = sessionStorage.getItem('authRedirect');
     sessionStorage.removeItem('authRedirect');
 
+    console.log('[signup] window.location.search:', window.location.search);
+    console.log('[signup] next param:', next);
+    console.log('[signup] stored redirect:', stored);
+    console.log('[signup] isSafeRedirect(next):', isSafeRedirect(next));
+    console.log('[signup] isSafeRedirect(stored):', isSafeRedirect(stored));
+    console.log('[signup] role:', role);
+
     const dashboards: Record<string, string> = {
       student: '/student', teacher: '/teacher', admin: '/admin', boss: '/boss',
     };
@@ -89,6 +96,7 @@ function SignUpForm() {
       : isSafeRedirect(stored) ? stored
       : dashboards[role] || '/student';
 
+    console.log('[signup] REDIRECTING TO:', target);
     window.location.href = target;
   }
 
