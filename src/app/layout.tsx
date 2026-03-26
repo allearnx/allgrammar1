@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono, Noto_Sans_KR } from 'next/font/google';
 import { Toaster } from 'sonner';
+import { Analytics } from '@vercel/analytics/next';
 import './globals.css';
 
 const geistSans = Geist({
@@ -36,6 +37,7 @@ export default function RootLayout({
       >
         {children}
         <Toaster position="top-center" richColors />
+        <Analytics />
       </body>
     </html>
   );
