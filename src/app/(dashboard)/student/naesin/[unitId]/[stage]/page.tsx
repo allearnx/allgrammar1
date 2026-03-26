@@ -60,10 +60,9 @@ export default async function NaesinStagePage({ params }: Props) {
     enabledStages,
   });
 
-  if (stageStatuses[stageKey] === 'hidden') notFound();
-
+  const isHidden = stageStatuses[stageKey] === 'hidden';
   const isLocked = stageStatuses[stageKey] === 'locked';
-  const stageData = isLocked
+  const stageData = (isHidden || isLocked)
     ? {}
     : await fetchStageData(supabase, user.id, unitId, stageKey, quizSetIds, progress);
 
@@ -77,6 +76,7 @@ export default async function NaesinStagePage({ params }: Props) {
           stageStatuses={stageStatuses}
           stageData={stageData}
           isLocked={isLocked}
+          isHidden={isHidden}
           examDate={examDate}
         />
       </div>

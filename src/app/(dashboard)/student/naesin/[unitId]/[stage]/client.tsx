@@ -6,6 +6,7 @@ import {
   ArrowLeft,
   CheckCircle,
   Lock,
+  Crown,
   BookOpen,
   FileText,
   GraduationCap,
@@ -81,6 +82,7 @@ interface NaesinStageViewProps {
   stageStatuses: NaesinStageStatuses;
   stageData: StageData;
   isLocked?: boolean;
+  isHidden?: boolean;
   examDate?: string | null;
 }
 
@@ -90,6 +92,7 @@ export function NaesinStageView({
   stageStatuses,
   stageData,
   isLocked: currentStageLocked,
+  isHidden: currentStageHidden,
 }: NaesinStageViewProps) {
   const router = useRouter();
 
@@ -165,7 +168,12 @@ export function NaesinStageView({
 
       {/* Stage content */}
       <div>
-        {currentStageLocked ? (
+        {currentStageHidden ? (
+          <PremiumStageOverlay
+            label={currentConfig?.label || ''}
+            Icon={currentConfig?.icon || Lock}
+          />
+        ) : currentStageLocked ? (
           <LockedStageOverlay
             label={currentConfig?.label || ''}
             unlockHint={currentConfig?.unlockHint || ''}
@@ -280,6 +288,53 @@ function LockedStageOverlay({
           <div className="flex items-center gap-2 text-xs text-muted-foreground">
             <Icon className="h-3.5 w-3.5" />
             <span>이전 단계를 완료하면 열려요</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function PremiumStageOverlay({
+  label,
+  Icon,
+}: {
+  label: string;
+  Icon: React.ComponentType<{ className?: string }>;
+}) {
+  return (
+    <div className="relative rounded-xl overflow-hidden">
+      <div className="blur-sm opacity-30 pointer-events-none select-none" aria-hidden>
+        <div className="space-y-4 p-2">
+          <div className="h-10 rounded-lg bg-gradient-to-r from-amber-200 to-yellow-300 w-3/4" />
+          <div className="grid grid-cols-2 gap-3">
+            <div className="h-24 rounded-lg bg-gradient-to-br from-amber-100 to-yellow-200" />
+            <div className="h-24 rounded-lg bg-gradient-to-br from-orange-100 to-amber-200" />
+          </div>
+          <div className="space-y-2">
+            <div className="h-4 rounded bg-gradient-to-r from-yellow-100 to-amber-200 w-full" />
+            <div className="h-4 rounded bg-gradient-to-r from-amber-100 to-orange-200 w-5/6" />
+            <div className="h-4 rounded bg-gradient-to-r from-yellow-100 to-amber-200 w-4/6" />
+          </div>
+        </div>
+      </div>
+
+      <div className="absolute inset-0 flex flex-col items-center justify-center">
+        <div className="flex flex-col items-center gap-4 bg-background/80 backdrop-blur-sm rounded-2xl px-8 py-8 shadow-lg border max-w-xs text-center">
+          <div className="flex items-center justify-center h-16 w-16 rounded-full bg-amber-50">
+            <Crown className="h-8 w-8 text-amber-500" />
+          </div>
+          <div>
+            <h3 className="text-lg font-semibold">{label}</h3>
+            <p className="text-sm text-muted-foreground mt-2 leading-relaxed">
+              유료 서비스에서 이용할 수 있는 기능이에요.
+              <br />
+              선생님께 문의해 주세요!
+            </p>
+          </div>
+          <div className="flex items-center gap-2 text-xs text-amber-600">
+            <Icon className="h-3.5 w-3.5" />
+            <span>Pro 플랜에서 사용 가능</span>
           </div>
         </div>
       </div>
