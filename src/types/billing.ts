@@ -55,6 +55,7 @@ export interface PaymentHistory {
 export interface Order {
   id: string;
   user_id: string;
+  course_id: string | null;
   order_name: string;
   amount: number;
   status: OrderStatus;

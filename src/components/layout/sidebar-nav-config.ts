@@ -5,6 +5,7 @@ import {
   GraduationCap,
   LayoutDashboard,
   NotebookPen,
+  Receipt,
   Settings,
   Users,
   FileText,
@@ -155,6 +156,7 @@ export const NAV_CONFIG: Record<string, NavGroup[]> = {
       items: [
         { href: '/boss/subscriptions', label: '구독 관리', icon: CreditCard },
         { href: '/boss/plans', label: '요금 플랜', icon: CreditCard },
+        { href: '/boss/orders', label: '주문 내역', icon: Receipt },
       ],
     },
     {
