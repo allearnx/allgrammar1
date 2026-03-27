@@ -18,6 +18,9 @@ vi.mock('@/lib/billing/check-plan-api', () => ({
   checkPlanGate: () => null,
   checkServiceGate: () => null,
 }));
+vi.mock('@/lib/api/require-academy-scope', () => ({
+  requireAcademyScope: vi.fn().mockResolvedValue(undefined),
+}));
 
 function mockSupabaseChain(result: { data: unknown; error: unknown }) {
   const chain: Record<string, ReturnType<typeof vi.fn>> = {

@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import { createApiHandler } from '@/lib/api/handler';
 import { serviceAssignmentCreateSchema, serviceAssignmentDeleteSchema, serviceAssignmentPatchSchema } from '@/lib/api/schemas';
 import { checkServiceGate } from '@/lib/billing/check-plan-api';
+import { requireAcademyScope } from '@/lib/api/require-academy-scope';
 
 // GET — 학생 본인의 배정 목록
 export const GET = createApiHandler({ hasBody: false }, async ({ user, supabase }) => {
@@ -16,6 +17,7 @@ export const GET = createApiHandler({ hasBody: false }, async ({ user, supabase 
 export const POST = createApiHandler(
   { roles: ['boss', 'admin'], schema: serviceAssignmentCreateSchema },
   async ({ user, body, supabase }) => {
+    await requireAcademyScope(user, body.studentId, supabase);
     // Boss는 플랜 제한 없이 서비스 배정 가능
     if (user.role !== 'boss') {
       const serviceBlocked = await checkServiceGate(user.academy_id, [body.service]);
@@ -38,7 +40,8 @@ export const POST = createApiHandler(
 // PATCH — boss가 2회독 잠금 해제 토글
 export const PATCH = createApiHandler(
   { roles: ['boss'], schema: serviceAssignmentPatchSchema },
-  async ({ body, supabase }) => {
+  async ({ user, body, supabase }) => {
+    await requireAcademyScope(user, body.studentId, supabase);
     const { error } = await supabase
       .from('service_assignments')
       .update({ round2_unlocked: body.round2Unlocked })
@@ -52,7 +55,8 @@ export const PATCH = createApiHandler(
 // DELETE — boss/admin이 서비스 배정 해제
 export const DELETE = createApiHandler(
   { roles: ['boss', 'admin'], schema: serviceAssignmentDeleteSchema, hasBody: true },
-  async ({ body, supabase }) => {
+  async ({ user, body, supabase }) => {
+    await requireAcademyScope(user, body.studentId, supabase);
     const { error } = await supabase
       .from('service_assignments')
       .delete()

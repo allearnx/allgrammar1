@@ -24,7 +24,7 @@ export const POST = createApiHandler(
 );
 
 // GET — 제출 목록 (teacher/admin/boss)
-export const GET = createApiHandler({ hasBody: false }, async ({ request, supabase }) => {
+export const GET = createApiHandler({ roles: ['teacher', 'admin', 'boss'], hasBody: false }, async ({ request, supabase }) => {
   const { searchParams } = new URL(request.url);
   const dayId = searchParams.get('dayId');
   const status = searchParams.get('status');

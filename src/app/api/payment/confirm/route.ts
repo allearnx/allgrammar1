@@ -41,6 +41,24 @@ export const POST = createApiHandler(
       throw err;
     }
 
+    // ── 1-1. 금액 위변조 방어 검증 ──
+    if (result.totalAmount !== amount) {
+      logger.error('payment.amount_mismatch', {
+        orderId,
+        clientAmount: amount,
+        tossAmount: result.totalAmount,
+        userId: user.id,
+      });
+      await cancelPayment(result.paymentKey, '결제 금액 불일치로 인한 자동 취소');
+      sendTelegram(
+        `🚨 결제 금액 위변조 감지\n\n클라이언트: ${amount}원\n토스: ${result.totalAmount}원\n유저: ${user.email}\n주문: ${orderId}\n\n→ 자동 취소 완료`
+      );
+      return NextResponse.json(
+        { error: '결제 금액이 일치하지 않습니다.' },
+        { status: 400 },
+      );
+    }
+
     // ── 2. 주문 기록 저장 ──
     const { error: insertErr } = await supabase.from('orders').insert({
       user_id: user.id,
