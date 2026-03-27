@@ -168,6 +168,8 @@ export function UsersClient({ users, academies }: UsersClientProps) {
                   <p className="text-sm text-muted-foreground truncate">{u.email}</p>
                   <p className="text-xs text-muted-foreground mt-1">
                     학원: {u.academy_id ? academyMap.get(u.academy_id) || '-' : '미배정'}
+                    {' · '}
+                    가입: {new Date(u.created_at).toLocaleDateString('ko-KR')}
                   </p>
                 </div>
                 <div className="flex flex-wrap items-center gap-2 shrink-0">
