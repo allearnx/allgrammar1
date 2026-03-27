@@ -23,21 +23,27 @@ export default async function StudentDashboard() {
   const hasNaesin = services.includes('naesin');
   const isIndependent = !user.academy_id;
 
-  // ── Voca only ──
-  if (hasVoca && !hasNaesin) {
-    const planContext = await getPlanContext(user.academy_id, user.id);
+  const planContext = (hasVoca || hasNaesin)
+    ? await getPlanContext(user.academy_id, user.id)
+    : null;
+
+  // ── 무료 학생: 항상 내신(vocab/passage) + 보카 둘 다 표시 ──
+  if (planContext && planContext.tier === 'free' && (hasVoca || hasNaesin)) {
+    return <CombinedSection user={user} planContext={planContext} />;
+  }
+
+  // ── Voca only (유료) ──
+  if (hasVoca && !hasNaesin && planContext) {
     return <VocaSection user={user} planContext={planContext} isIndependent={isIndependent} />;
   }
 
-  // ── Naesin only ──
-  if (hasNaesin && !hasVoca) {
-    const planContext = await getPlanContext(user.academy_id, user.id);
+  // ── Naesin only (유료) ──
+  if (hasNaesin && !hasVoca && planContext) {
     return <NaesinSection user={user} planContext={planContext} />;
   }
 
-  // ── Both ──
-  if (hasVoca && hasNaesin) {
-    const planContext = await getPlanContext(user.academy_id, user.id);
+  // ── Both (유료) ──
+  if (hasVoca && hasNaesin && planContext) {
     return <CombinedSection user={user} planContext={planContext} />;
   }
 
