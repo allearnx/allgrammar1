@@ -1,11 +1,51 @@
 'use client';
 
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { BookA, BookMarked, Building2, ShoppingCart } from 'lucide-react';
+import { BookA, BookMarked, ShoppingCart, Loader2 } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { JoinAcademyForm } from './join-academy-form';
 import { formatPrice } from '@/types/public';
+
+function Divider() {
+  return (
+    <div className="relative">
+      <div className="absolute inset-0 flex items-center">
+        <div className="w-full border-t border-gray-200" />
+      </div>
+      <div className="relative flex justify-center text-sm">
+        <span className="bg-white px-3 text-gray-400">또는</span>
+      </div>
+    </div>
+  );
+}
+
+type FreeService = 'voca' | 'naesin';
+
+const SERVICE_OPTIONS: {
+  value: FreeService;
+  label: string;
+  desc: string;
+  icon: React.ReactNode;
+  activeColor: string;
+}[] = [
+  {
+    value: 'voca',
+    label: '올킬보카',
+    desc: '1회독 단어 학습',
+    icon: <BookA className="h-6 w-6 text-violet-500" />,
+    activeColor: 'border-violet-500 bg-violet-50',
+  },
+  {
+    value: 'naesin',
+    label: '올인내신',
+    desc: '단어암기 + 교과서암기',
+    icon: <BookMarked className="h-6 w-6 text-emerald-500" />,
+    activeColor: 'border-emerald-500 bg-emerald-50',
+  },
+];
 
 interface CourseItem {
   id: string;
@@ -44,6 +84,33 @@ const CATEGORY_LABEL: Record<string, string> = {
 };
 
 export function IndependentStudentScreen({ userName, courses }: IndependentStudentScreenProps) {
+  const router = useRouter();
+  const [selected, setSelected] = useState<FreeService>('voca');
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+
+  async function handleSelectService() {
+    setLoading(true);
+    setError('');
+    try {
+      const res = await fetch('/api/student/select-free-service', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ service: selected }),
+      });
+      if (!res.ok) {
+        const data = await res.json();
+        setError(data.error || '서비스 선택에 실패했습니다.');
+        return;
+      }
+      router.refresh();
+    } catch {
+      setError('네트워크 오류가 발생했습니다.');
+    } finally {
+      setLoading(false);
+    }
+  }
+
   return (
     <div className="min-h-[calc(100vh-56px)] bg-gradient-to-b from-slate-50 to-white">
       <div className="max-w-2xl mx-auto px-4 py-8 space-y-8">
@@ -53,24 +120,71 @@ export function IndependentStudentScreen({ userName, courses }: IndependentStude
             환영합니다, {userName}님!
           </h1>
           <p className="mt-1 text-sm text-muted-foreground">
-            학원에 합류하거나, 개인 코스를 구매하여 학습을 시작하세요.
+            무료 서비스를 선택하여 학습을 시작하세요.
           </p>
         </div>
 
-        {/* Section 1: Join Academy */}
+        {/* Section 1: Free Service Selection */}
+        <Card>
+          <CardHeader className="text-center pb-4">
+            <CardTitle className="text-lg">무료 서비스 선택</CardTitle>
+            <p className="text-sm text-muted-foreground mt-1">
+              아래 서비스 중 하나를 선택하세요.
+            </p>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <div className="grid grid-cols-2 gap-3">
+              {SERVICE_OPTIONS.map((opt) => (
+                <label
+                  key={opt.value}
+                  className={`flex flex-col items-center gap-2 rounded-xl border-2 p-4 cursor-pointer transition-all ${
+                    selected === opt.value ? opt.activeColor : 'border-gray-200 hover:border-gray-300'
+                  }`}
+                >
+                  <input
+                    type="radio"
+                    name="freeService"
+                    value={opt.value}
+                    checked={selected === opt.value}
+                    onChange={() => setSelected(opt.value)}
+                    className="sr-only"
+                  />
+                  {opt.icon}
+                  <span className="text-sm font-semibold">{opt.label}</span>
+                  <span className="text-xs text-muted-foreground text-center">{opt.desc}</span>
+                </label>
+              ))}
+            </div>
+
+            {error && (
+              <p className="text-sm text-red-500 text-center">{error}</p>
+            )}
+
+            <Button
+              className="w-full"
+              onClick={handleSelectService}
+              disabled={loading}
+            >
+              {loading ? (
+                <>
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                  선택 중...
+                </>
+              ) : (
+                '시작하기'
+              )}
+            </Button>
+          </CardContent>
+        </Card>
+
+        <Divider />
+
+        {/* Section 2: Join Academy */}
         <JoinAcademyForm compact />
 
-        {/* Divider */}
-        <div className="relative">
-          <div className="absolute inset-0 flex items-center">
-            <div className="w-full border-t border-gray-200" />
-          </div>
-          <div className="relative flex justify-center text-sm">
-            <span className="bg-white px-3 text-gray-400">또는</span>
-          </div>
-        </div>
+        <Divider />
 
-        {/* Section 2: Course Purchase */}
+        {/* Section 3: Course Purchase */}
         <Card>
           <CardHeader className="text-center pb-4">
             <div className="mx-auto rounded-full bg-amber-100 p-3 mb-2">
