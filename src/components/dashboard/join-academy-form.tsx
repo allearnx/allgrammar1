@@ -5,7 +5,8 @@ import { useRouter } from 'next/navigation';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import { Building2, Loader2 } from 'lucide-react';
+import { Building2, Loader2, Plus } from 'lucide-react';
+import Link from 'next/link';
 
 export function JoinAcademyForm({ compact = false }: { compact?: boolean } = {}) {
   const router = useRouter();
@@ -133,6 +134,24 @@ export function JoinAcademyForm({ compact = false }: { compact?: boolean } = {})
               )}
             </Button>
           </form>
+
+          {/* 프리랜서 선생님용 학원 만들기 안내 */}
+          <div className="mt-6 pt-5 border-t">
+            <div className="text-center space-y-2">
+              <p className="text-sm text-muted-foreground">
+                초대 코드가 없으신가요?
+              </p>
+              <p className="text-xs text-muted-foreground">
+                직접 학원을 만들어 학생을 관리할 수 있어요.
+              </p>
+              <Button variant="outline" size="sm" asChild className="mt-2">
+                <Link href="/teacher/create-academy">
+                  <Plus className="h-3.5 w-3.5 mr-1" />
+                  학원 만들기
+                </Link>
+              </Button>
+            </div>
+          </div>
         </CardContent>
       </Card>
     </div>

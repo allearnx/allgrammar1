@@ -667,3 +667,10 @@ export const upgradePlanSchema = z.object({
   amount: z.number().int().min(100),
   planId: z.string().uuid(),
 });
+
+// ── 학원 만들기 (교사→원장 전환) ──
+
+export const createAcademySchema = z.object({
+  academyName: z.string().min(1).max(100),
+  freeService: z.enum(['naesin', 'voca']),
+});
