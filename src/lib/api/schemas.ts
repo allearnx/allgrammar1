@@ -217,6 +217,26 @@ export const similarProblemPatchSchema = z.object({
   id: ID,
   status: SHORT.nullish(),
   questionData: z.unknown().nullish(),
+  rejectionReason: z.enum([
+    'wrong_answer',
+    'grammar_error',
+    'too_easy',
+    'too_hard',
+    'ambiguous',
+    'duplicate',
+    'other',
+  ]).nullish(),
+});
+
+export const problemValidateSchema = z.object({
+  questions: z.array(z.object({
+    number: z.number(),
+    question: z.string(),
+    options: z.array(z.string()).nullish(),
+    answer: z.union([z.string(), z.number()]),
+    explanation: z.string().nullish(),
+  })).min(1).max(200),
+  skipAi: z.boolean().nullish(),
 });
 
 export const lastReviewCreateSchema = z.object({

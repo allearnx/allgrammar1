@@ -13,9 +13,10 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
-import { Wand2, Loader2, FileUp } from 'lucide-react';
+import { Wand2, Loader2, FileUp, ShieldCheck, AlertTriangle, XCircle, CheckCircle2 } from 'lucide-react';
 import { toast } from 'sonner';
 import type { NaesinProblemQuestion } from '@/types/naesin';
+import type { FullValidationResult, ValidationBadge } from '@/lib/validation';
 
 export interface GeneratedQuestion {
   number: number;
@@ -54,7 +55,7 @@ export function QuestionEditRow({
   onDone: () => void;
 }) {
   return (
-    <td colSpan={5} className="p-3 space-y-2">
+    <td colSpan={6} className="p-3 space-y-2">
       <div>
         <Label className="text-xs">문제</Label>
         <Textarea
@@ -114,6 +115,43 @@ export function QuestionViewRow({
   );
 }
 
+function ValidationBadgeIcon({ badge }: { badge?: ValidationBadge }) {
+  if (!badge) return null;
+  if (badge === 'pass') return <CheckCircle2 className="h-4 w-4 text-green-600" />;
+  if (badge === 'warn') return <AlertTriangle className="h-4 w-4 text-yellow-600" />;
+  return <XCircle className="h-4 w-4 text-red-600" />;
+}
+
+function QuestionBadge({ questionNumber, validation }: { questionNumber: number; validation?: FullValidationResult | null }) {
+  if (!validation) return null;
+
+  const structuralError = validation.structural.issues.some(
+    (i) => i.questionNumber === questionNumber && i.severity === 'error',
+  );
+  if (structuralError) return <XCircle className="h-3.5 w-3.5 text-red-600" />;
+
+  const answerMismatch = validation.answerCheck?.results.find(
+    (r) => r.questionNumber === questionNumber && !r.match,
+  );
+  if (answerMismatch) return <AlertTriangle className="h-3.5 w-3.5 text-yellow-600" />;
+
+  const tooObvious = validation.answerCheck?.results.find(
+    (r) => r.questionNumber === questionNumber && r.tooObvious,
+  );
+  if (tooObvious) return <AlertTriangle className="h-3.5 w-3.5 text-orange-500" />;
+
+  const qualityFlagged = validation.qualityScore?.scores.find(
+    (s) => s.questionNumber === questionNumber && s.flags.length > 0,
+  );
+  if (qualityFlagged) return <AlertTriangle className="h-3.5 w-3.5 text-yellow-600" />;
+
+  if (validation.answerCheck || validation.qualityScore) {
+    return <CheckCircle2 className="h-3.5 w-3.5 text-green-600" />;
+  }
+
+  return null;
+}
+
 export function PdfProblemExtractDialog({ unitId, unitTitle, onAdd }: { unitId: string; unitTitle?: string; onAdd: () => void }) {
   const [open, setOpen] = useState(false);
   const [step, setStep] = useState<Step>('upload');
@@ -122,6 +160,8 @@ export function PdfProblemExtractDialog({ unitId, unitTitle, onAdd }: { unitId: 
   const [originalCount, setOriginalCount] = useState(0);
   const [saving, setSaving] = useState(false);
   const [editingIdx, setEditingIdx] = useState<number | null>(null);
+  const [validation, setValidation] = useState<FullValidationResult | null>(null);
+  const [validating, setValidating] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   function resetForm() {
@@ -130,6 +170,8 @@ export function PdfProblemExtractDialog({ unitId, unitTitle, onAdd }: { unitId: 
     setQuestions([]);
     setOriginalCount(0);
     setEditingIdx(null);
+    setValidation(null);
+    setValidating(false);
   }
 
   async function handleFileUpload(e: React.ChangeEvent<HTMLInputElement>) {
@@ -165,6 +207,9 @@ export function PdfProblemExtractDialog({ unitId, unitTitle, onAdd }: { unitId: 
       const data = await res.json();
       setQuestions(normalizeQuestions(data.questions || []));
       setOriginalCount(data.originalCount || 0);
+      if (data.validation?.structural) {
+        setValidation({ structural: data.validation.structural, badge: data.validation.structural.valid ? 'pass' : 'fail', summary: '' });
+      }
       setStep('preview');
       toast.success(`원본 ${data.originalCount}문제 → ${data.questions?.length || 0}문제 생성 완료`);
     } catch (err) {
@@ -173,6 +218,39 @@ export function PdfProblemExtractDialog({ unitId, unitTitle, onAdd }: { unitId: 
     }
 
     e.target.value = '';
+  }
+
+  async function handleAiValidation() {
+    if (questions.length === 0) return;
+    setValidating(true);
+    try {
+      const formatted = questions.map((q, i) => ({
+        number: i + 1,
+        question: q.question,
+        ...(hasOptions(q) ? { options: q.options } : {}),
+        answer: q.answer,
+        ...(q.explanation ? { explanation: q.explanation } : {}),
+      }));
+
+      const res = await fetch('/api/naesin/problems/validate', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ questions: formatted }),
+      });
+
+      if (!res.ok) {
+        const err = await res.json().catch(() => null);
+        throw new Error(err?.error || 'AI 검증 실패');
+      }
+
+      const result: FullValidationResult = await res.json();
+      setValidation(result);
+      toast.success(`AI 검증 완료: ${result.summary}`);
+    } catch (err) {
+      toast.error(err instanceof Error ? err.message : 'AI 검증 실패');
+    } finally {
+      setValidating(false);
+    }
   }
 
   function updateQuestion(idx: number, field: keyof GeneratedQuestion, value: string) {
@@ -288,12 +366,42 @@ export function PdfProblemExtractDialog({ unitId, unitTitle, onAdd }: { unitId: 
 
         {step === 'preview' && (
           <div className="space-y-4">
-            <div className="flex flex-wrap gap-2 text-sm">
+            {/* Summary bar */}
+            <div className="flex flex-wrap items-center gap-2 text-sm">
               <Badge variant="secondary">원본 {originalCount}문제</Badge>
               <Badge variant="secondary">생성 {questions.length}문제</Badge>
               {mcqCount > 0 && <Badge variant="outline">객관식 {mcqCount}</Badge>}
               {subCount > 0 && <Badge variant="outline">서술형 {subCount}</Badge>}
+              {validation && (
+                <Badge
+                  variant={validation.badge === 'pass' ? 'default' : validation.badge === 'warn' ? 'secondary' : 'destructive'}
+                  className="gap-1"
+                >
+                  <ValidationBadgeIcon badge={validation.badge} />
+                  {validation.summary || (validation.badge === 'pass' ? '검증 통과' : validation.badge === 'warn' ? '경고 있음' : '오류 있음')}
+                </Badge>
+              )}
             </div>
+
+            {/* AI Validation button */}
+            <Button
+              size="sm"
+              variant="outline"
+              onClick={handleAiValidation}
+              disabled={validating || questions.length === 0}
+            >
+              {validating ? (
+                <>
+                  <Loader2 className="h-3.5 w-3.5 mr-1 animate-spin" />
+                  AI 검증 중...
+                </>
+              ) : (
+                <>
+                  <ShieldCheck className="h-3.5 w-3.5 mr-1" />
+                  AI 검증 실행
+                </>
+              )}
+            </Button>
 
             <div className="rounded-lg border overflow-hidden max-h-[60vh] overflow-y-auto">
               <table className="w-full text-sm">
@@ -304,6 +412,7 @@ export function PdfProblemExtractDialog({ unitId, unitTitle, onAdd }: { unitId: 
                     <th className="text-left p-2 w-16">유형</th>
                     <th className="text-left p-2 w-20">정답</th>
                     <th className="text-left p-2 w-16">편집</th>
+                    <th className="text-left p-2 w-10">검증</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -317,7 +426,12 @@ export function PdfProblemExtractDialog({ unitId, unitTitle, onAdd }: { unitId: 
                           onDone={() => setEditingIdx(null)}
                         />
                       ) : (
-                        <QuestionViewRow question={q} onEdit={() => setEditingIdx(i)} />
+                        <>
+                          <QuestionViewRow question={q} onEdit={() => setEditingIdx(i)} />
+                          <td className="p-2">
+                            <QuestionBadge questionNumber={q.number} validation={validation} />
+                          </td>
+                        </>
                       )}
                     </tr>
                   ))}

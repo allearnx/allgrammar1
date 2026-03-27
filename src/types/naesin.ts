@@ -278,6 +278,15 @@ export interface NaesinWrongAnswer {
 
 export type NaesinSimilarProblemStatus = 'pending' | 'approved' | 'rejected';
 
+export type RejectionReason =
+  | 'wrong_answer'
+  | 'grammar_error'
+  | 'too_easy'
+  | 'too_hard'
+  | 'ambiguous'
+  | 'duplicate'
+  | 'other';
+
 export interface NaesinSimilarProblem {
   id: string;
   unit_id: string;
@@ -285,6 +294,9 @@ export interface NaesinSimilarProblem {
   grammar_tag: string | null;
   question_data: NaesinProblemQuestion;
   status: NaesinSimilarProblemStatus;
+  quality_score: number | null;
+  rejection_reason: RejectionReason | null;
+  validation_result: Record<string, unknown> | null;
   created_by: string | null;
   reviewed_by: string | null;
   created_at: string;

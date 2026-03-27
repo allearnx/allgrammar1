@@ -4,6 +4,8 @@ import { logger } from '@/lib/logger';
 import { similarProblemGenerateSchema } from '@/lib/api/schemas';
 import Anthropic from '@anthropic-ai/sdk';
 import { parseAiJsonArray } from '@/lib/ai-json';
+import { runFullValidation } from '@/lib/validation';
+import type { NaesinProblemQuestion } from '@/types/naesin';
 
 export const maxDuration = 60;
 
@@ -75,21 +77,35 @@ JSON 배열로만 응답:
         throw new Error('AI 응답 파싱 실패');
       }
 
-      const rows = questions.map((q: unknown) => ({
-        unit_id: unitId,
-        wrong_answer_id: wrongAnswerIds?.[0] || null,
-        grammar_tag: grammarTag || null,
-        question_data: q,
-        status: 'pending',
-        created_by: user.id,
-      }));
+      // Run full validation (Layer 1+2+3)
+      const validation = await runFullValidation(
+        questions as NaesinProblemQuestion[],
+        anthropic,
+      );
+
+      const qualityScores = validation.qualityScore?.scores || [];
+
+      const rows = questions.map((q: unknown) => {
+        const qData = q as NaesinProblemQuestion;
+        const qs = qualityScores.find((s) => s.questionNumber === qData.number);
+        return {
+          unit_id: unitId,
+          wrong_answer_id: wrongAnswerIds?.[0] || null,
+          grammar_tag: grammarTag || null,
+          question_data: q,
+          status: 'pending',
+          created_by: user.id,
+          quality_score: qs?.overall ?? null,
+          validation_result: validation,
+        };
+      });
 
       const inserted = dbResult(await supabase
         .from('naesin_similar_problems')
         .insert(rows)
         .select());
 
-      return NextResponse.json({ problems: inserted });
+      return NextResponse.json({ problems: inserted, validation });
     } catch (error) {
       logger.error('ai.generate', { error: error instanceof Error ? error.message : String(error) });
       return NextResponse.json(

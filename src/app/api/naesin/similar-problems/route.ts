@@ -29,7 +29,7 @@ export const GET = createApiHandler(
 export const PATCH = createApiHandler(
   { roles: [...ADMIN_ROLES], schema: similarProblemPatchSchema },
   async ({ user, body, supabase }) => {
-    const { id, status, questionData } = body;
+    const { id, status, questionData, rejectionReason } = body;
 
     const updates: Record<string, unknown> = { updated_at: new Date().toISOString() };
     if (status) {
@@ -37,6 +37,7 @@ export const PATCH = createApiHandler(
       updates.reviewed_by = user.id;
     }
     if (questionData) updates.question_data = questionData;
+    if (rejectionReason) updates.rejection_reason = rejectionReason;
 
     const data = dbResult(await supabase
       .from('naesin_similar_problems')

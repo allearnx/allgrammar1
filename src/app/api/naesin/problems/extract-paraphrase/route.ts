@@ -4,6 +4,8 @@ import { logger } from '@/lib/logger';
 import { checkRateLimit } from '@/lib/api/rate-limit';
 import Anthropic from '@anthropic-ai/sdk';
 import { requireAiJsonArray } from '@/lib/ai-json';
+import { validateProblemStructure } from '@/lib/validation';
+import type { NaesinProblemQuestion } from '@/types/naesin';
 
 export const maxDuration = 300;
 
@@ -157,7 +159,10 @@ export async function POST(request: NextRequest) {
 
     logger.info('ai.paraphrase_done', { mcq: mcqQuestions.length, subjective: subjectiveQuestions.length, total: questions.length, unitId });
 
-    return NextResponse.json({ questions, originalCount: originalQuestions.length });
+    // Layer 1: Structural validation (free, instant)
+    const structural = validateProblemStructure(questions as NaesinProblemQuestion[], mcqQuestions.length, subjectiveQuestions.length);
+
+    return NextResponse.json({ questions, originalCount: originalQuestions.length, validation: { structural } });
   } catch (error) {
     const msg = error instanceof Error ? error.message : String(error);
     logger.error('ai.extract_paraphrase', { error: msg });
