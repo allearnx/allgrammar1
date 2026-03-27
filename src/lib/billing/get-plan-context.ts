@@ -13,9 +13,28 @@ export async function getPlanContext(
   studentId?: string,
 ): Promise<PlanContext> {
   if (!academyId) {
-    // 독립 학생: service_assignments로 판단 (빌링 테이블 없음)
+    // 독립 학생: 구독 테이블 먼저 확인, 없으면 service_assignments로 판단
     if (studentId) {
       const supabase = await createClient();
+
+      // 구독이 있으면 (유료 업그레이드한 학생) 구독 기반으로 판단
+      const { data: sub } = await supabase
+        .from('subscriptions')
+        .select('status, tier')
+        .eq('student_id', studentId)
+        .in('status', ['trialing', 'active', 'past_due'])
+        .order('created_at', { ascending: false })
+        .limit(1)
+        .single();
+
+      if (sub) {
+        const tier = deriveTier(sub);
+        if (tier === 'paid' || tier === 'trialing') {
+          return { tier, freeService: null };
+        }
+      }
+
+      // Free tier 또는 구독 없음: service_assignments로 판단
       const { data: assignments } = await supabase
         .from('service_assignments')
         .select('service')

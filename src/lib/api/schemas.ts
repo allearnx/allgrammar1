@@ -658,3 +658,12 @@ export const changePasswordSchema = z.object({
 export const deleteAccountSchema = z.object({
   password: z.string().min(6),
 });
+
+// ── 업그레이드 결제 Schemas ──
+
+export const upgradePlanSchema = z.object({
+  paymentKey: z.string().min(1),
+  orderId: z.string().min(1),
+  amount: z.number().int().min(100),
+  planId: z.string().uuid(),
+});

@@ -56,12 +56,12 @@ export function PremiumGate({ allowed, feature, role, children }: PremiumGatePro
 
               {isAdmin && (
                 <Link
-                  href="/admin/billing"
+                  href="/pricing"
                   className="mt-5 inline-flex items-center gap-1.5 rounded-lg px-5 py-2.5 text-sm font-semibold text-white transition-all hover:opacity-90"
                   style={{ background: 'linear-gradient(135deg, #7C3AED, #6D28D9)' }}
                 >
                   <Sparkles className="h-4 w-4" />
-                  업그레이드 신청
+                  요금제 보기
                 </Link>
               )}
             </div>

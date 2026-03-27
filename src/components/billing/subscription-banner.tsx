@@ -28,7 +28,7 @@ export function SubscriptionBanner({ status, trialDaysLeft, billingPageHref, tie
           <span>{description}</span>
         </div>
         <Link
-          href={billingPageHref}
+          href="/pricing"
           className="flex items-center gap-1 text-violet-700 font-semibold hover:underline"
         >
           업그레이드 &rarr;

@@ -65,12 +65,12 @@ export function PlanComparison({ showCta = true }: PlanComparisonProps) {
       {showCta && (
         <div className="text-center">
           <Link
-            href="/admin/billing"
+            href="/pricing"
             className="inline-flex items-center gap-1.5 rounded-lg px-6 py-2.5 text-sm font-semibold text-white transition-all hover:opacity-90"
             style={{ background: 'linear-gradient(135deg, #7C3AED, #6D28D9)' }}
           >
             <Sparkles className="h-4 w-4" />
-            업그레이드 문의
+            요금제 보기
           </Link>
         </div>
       )}

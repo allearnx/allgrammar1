@@ -28,6 +28,7 @@ const menuItems = [
       { label: '리딩', href: '/courses/reading' },
     ]
   },
+  { label: '요금제', href: '/pricing', hasDropdown: false },
   { label: '레벨테스트', href: 'https://leveltest.allrounderenglish.co.kr/', hasDropdown: false, isExternal: true },
 ];
 

@@ -1,6 +1,8 @@
 'use client';
 
 import { useEffect, useState, useCallback } from 'react';
+import Link from 'next/link';
+import { Sparkles } from 'lucide-react';
 import { createClient } from '@/lib/supabase/client';
 import { Card, CardContent } from '@/components/ui/card';
 import { SubscriptionBanner } from '@/components/billing/subscription-banner';
@@ -135,6 +137,25 @@ export function BillingPageContent({ mode }: BillingPageContentProps) {
             />
             <PaymentHistoryCard payments={payments} />
           </>
+        )}
+
+        {mode === 'academy' && tier === 'free' && (
+          <Card className="border-violet-200 bg-gradient-to-br from-violet-50 to-white">
+            <CardContent className="pt-6 text-center">
+              <Sparkles className="h-8 w-8 text-violet-500 mx-auto mb-3" />
+              <h3 className="text-lg font-bold text-gray-900 mb-1">더 많은 기능이 필요하신가요?</h3>
+              <p className="text-sm text-gray-500 mb-4">
+                유료 플랜으로 업그레이드하면 모든 서비스를 이용할 수 있습니다.
+              </p>
+              <Link
+                href="/pricing"
+                className="inline-flex items-center gap-1.5 rounded-lg px-6 py-2.5 text-sm font-semibold text-white transition-all hover:opacity-90"
+                style={{ background: 'linear-gradient(135deg, #7C3AED, #6D28D9)' }}
+              >
+                요금제 보기
+              </Link>
+            </CardContent>
+          </Card>
         )}
 
         {mode === 'academy' && (
