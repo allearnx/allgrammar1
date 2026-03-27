@@ -47,8 +47,18 @@ function validateEnv() {
   return result.data;
 }
 
-// 서버에서만 호출
-export const env = typeof window === 'undefined' ? validateEnv() : ({} as ReturnType<typeof validateEnv>);
+// 서버에서만 호출 — Proxy로 감싸 런타임에 최초 접근 시점에 검증 (빌드 시점에는 실행 안 됨)
+function createLazyEnv() {
+  let validated: ReturnType<typeof validateEnv> | null = null;
+  return new Proxy({} as ReturnType<typeof validateEnv>, {
+    get(_, prop: string) {
+      if (!validated) validated = validateEnv();
+      return validated[prop as keyof ReturnType<typeof validateEnv>];
+    },
+  });
+}
+
+export const env = typeof window === 'undefined' ? createLazyEnv() : ({} as ReturnType<typeof validateEnv>);
 
 // 클라이언트에서 안전하게 사용
 export const clientEnv = clientSchema.parse({
