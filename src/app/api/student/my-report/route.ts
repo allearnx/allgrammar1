@@ -48,6 +48,19 @@ export async function GET(request: NextRequest) {
         return NextResponse.json({ error: 'studentId가 필요합니다.' }, { status: 400 });
       }
       targetStudentId = studentIdParam;
+
+      // 학원 범위 검증: boss는 무조건 통과, teacher/admin은 같은 학원만
+      if (user.role !== 'boss') {
+        const supabaseForCheck = await createClient();
+        const { data: student } = await supabaseForCheck
+          .from('users')
+          .select('academy_id')
+          .eq('id', targetStudentId)
+          .single();
+        if (!student || student.academy_id !== user.academy_id) {
+          return NextResponse.json({ error: '해당 학생에 대한 접근 권한이 없습니다.' }, { status: 403 });
+        }
+      }
     } else {
       return NextResponse.json({ error: '권한이 없습니다.' }, { status: 403 });
     }
