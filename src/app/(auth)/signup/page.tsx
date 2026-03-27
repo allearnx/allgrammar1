@@ -120,12 +120,10 @@ function SignUpForm() {
                 <label htmlFor="fullName" className="block text-sm font-bold text-slate-700 mb-2">이름</label>
                 <Input id="fullName" type="text" placeholder="홍길동" value={fullName} onChange={(e) => setFullName(e.target.value)} required autoComplete="name" className="rounded-2xl py-4 px-5 border-2 border-gray-200 focus:ring-4 focus:ring-violet-100 focus:border-violet-400" />
               </div>
-              {!isAdminRole && (
-                <div>
-                  <label htmlFor="phone" className="block text-sm font-bold text-slate-700 mb-2">전화번호</label>
-                  <Input id="phone" type="tel" placeholder="010-0000-0000" value={phone} onChange={(e) => setPhone(e.target.value)} autoComplete="tel" className="rounded-2xl py-4 px-5 border-2 border-gray-200 focus:ring-4 focus:ring-violet-100 focus:border-violet-400" />
-                </div>
-              )}
+              <div>
+                <label htmlFor="phone" className="block text-sm font-bold text-slate-700 mb-2">전화번호</label>
+                <Input id="phone" type="tel" placeholder="010-0000-0000" value={phone} onChange={(e) => setPhone(e.target.value)} autoComplete="tel" className="rounded-2xl py-4 px-5 border-2 border-gray-200 focus:ring-4 focus:ring-violet-100 focus:border-violet-400" />
+              </div>
               <div>
                 <label htmlFor="email" className="block text-sm font-bold text-slate-700 mb-2">이메일</label>
                 <Input id="email" type="email" placeholder="email@example.com" value={email} onChange={(e) => setEmail(e.target.value)} required autoComplete="email" className="rounded-2xl py-4 px-5 border-2 border-gray-200 focus:ring-4 focus:ring-violet-100 focus:border-violet-400" />
@@ -150,8 +148,6 @@ function SignUpForm() {
                 <AdminSignupFields
                   academyName={newAcademyName}
                   onAcademyNameChange={setNewAcademyName}
-                  contactNumber={contactNumber}
-                  onContactNumberChange={setContactNumber}
                   freeService={freeService}
                   onFreeServiceChange={setFreeService}
                 />

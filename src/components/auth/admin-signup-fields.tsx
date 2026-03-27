@@ -13,8 +13,6 @@ const SERVICE_OPTIONS: { value: FreeService; label: string; desc: string; active
 interface AdminSignupFieldsProps {
   academyName: string;
   onAcademyNameChange: (v: string) => void;
-  contactNumber: string;
-  onContactNumberChange: (v: string) => void;
   freeService: FreeService;
   onFreeServiceChange: (v: FreeService) => void;
 }
@@ -22,8 +20,6 @@ interface AdminSignupFieldsProps {
 export function AdminSignupFields({
   academyName,
   onAcademyNameChange,
-  contactNumber,
-  onContactNumberChange,
   freeService,
   onFreeServiceChange,
 }: AdminSignupFieldsProps) {
@@ -37,17 +33,6 @@ export function AdminSignupFields({
           placeholder="학원 이름을 입력하세요"
           value={academyName}
           onChange={(e) => onAcademyNameChange(e.target.value)}
-          required
-        />
-      </div>
-      <div className="space-y-2">
-        <Label htmlFor="contactNumber">연락처</Label>
-        <Input
-          id="contactNumber"
-          type="tel"
-          placeholder="010-0000-0000"
-          value={contactNumber}
-          onChange={(e) => onContactNumberChange(e.target.value)}
           required
         />
       </div>

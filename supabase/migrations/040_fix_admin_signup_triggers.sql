@@ -17,7 +17,7 @@ DECLARE
   _full_name TEXT;
   _new_invite_code TEXT;
   _free_service TEXT;
-  _contact_number TEXT;
+  _phone TEXT;
 BEGIN
   _invite_code := NEW.raw_user_meta_data->>'invite_code';
   _academy_name := NEW.raw_user_meta_data->>'academy_name';
@@ -28,15 +28,15 @@ BEGIN
     NEW.email
   );
   _free_service := NEW.raw_user_meta_data->>'free_service';
-  _contact_number := NEW.raw_user_meta_data->>'contact_number';
+  _phone := NEW.raw_user_meta_data->>'phone';
 
   IF _role = 'admin' AND _academy_name IS NOT NULL AND _academy_name != '' THEN
     INSERT INTO public.users (id, email, full_name, role, phone)
-    VALUES (NEW.id, NEW.email, _full_name, _role::public.user_role, _contact_number);
+    VALUES (NEW.id, NEW.email, _full_name, _role::public.user_role, _phone);
 
     _new_invite_code := upper(substr(md5(random()::text), 1, 6));
     INSERT INTO public.academies (name, invite_code, owner_id, max_students, free_service, contact_phone)
-    VALUES (_academy_name, _new_invite_code, NEW.id, 5, _free_service, _contact_number)
+    VALUES (_academy_name, _new_invite_code, NEW.id, 5, _free_service, _phone)
     RETURNING id INTO _academy_id;
 
     UPDATE public.users SET academy_id = _academy_id WHERE id = NEW.id;
@@ -46,7 +46,7 @@ BEGIN
     END IF;
 
     INSERT INTO public.users (id, email, full_name, role, academy_id, phone)
-    VALUES (NEW.id, NEW.email, _full_name, _role::public.user_role, _academy_id, NEW.raw_user_meta_data->>'phone');
+    VALUES (NEW.id, NEW.email, _full_name, _role::public.user_role, _academy_id, _phone);
   END IF;
 
   RETURN NEW;
