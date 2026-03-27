@@ -7,7 +7,7 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Building2, Loader2 } from 'lucide-react';
 
-export function JoinAcademyForm() {
+export function JoinAcademyForm({ compact = false }: { compact?: boolean } = {}) {
   const router = useRouter();
   const [code, setCode] = useState('');
   const [academyName, setAcademyName] = useState<string | null>(null);
@@ -75,8 +75,8 @@ export function JoinAcademyForm() {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-[60vh] p-4">
-      <Card className="w-full max-w-md">
+    <div className={compact ? '' : 'flex items-center justify-center min-h-[60vh] p-4'}>
+      <Card className={compact ? 'w-full' : 'w-full max-w-md'}>
         <CardHeader className="text-center">
           <div className="mx-auto rounded-full bg-violet-100 p-3 dark:bg-violet-950 mb-2">
             <Building2 className="h-8 w-8 text-violet-600 dark:text-violet-400" />

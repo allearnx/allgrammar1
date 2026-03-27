@@ -1,0 +1,147 @@
+'use client';
+
+import Link from 'next/link';
+import { BookA, BookMarked, Building2, ShoppingCart } from 'lucide-react';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { JoinAcademyForm } from './join-academy-form';
+import { formatPrice } from '@/types/public';
+
+interface CourseItem {
+  id: string;
+  title: string;
+  category: string;
+  price: number;
+  description: string;
+}
+
+interface IndependentStudentScreenProps {
+  userName: string;
+  courses: CourseItem[];
+}
+
+const CATEGORY_ICON: Record<string, React.ReactNode> = {
+  voca: <BookA className="h-5 w-5 text-violet-500" />,
+  school_exam: <BookMarked className="h-5 w-5 text-emerald-500" />,
+};
+
+const CATEGORY_STYLE: Record<string, { border: string; bg: string; badge: string }> = {
+  voca: {
+    border: 'border-violet-200 hover:border-violet-400',
+    bg: 'bg-violet-50',
+    badge: 'bg-violet-100 text-violet-700',
+  },
+  school_exam: {
+    border: 'border-emerald-200 hover:border-emerald-400',
+    bg: 'bg-emerald-50',
+    badge: 'bg-emerald-100 text-emerald-700',
+  },
+};
+
+const CATEGORY_LABEL: Record<string, string> = {
+  voca: '올킬보카',
+  school_exam: '올인내신',
+};
+
+export function IndependentStudentScreen({ userName, courses }: IndependentStudentScreenProps) {
+  return (
+    <div className="min-h-[calc(100vh-56px)] bg-gradient-to-b from-slate-50 to-white">
+      <div className="max-w-2xl mx-auto px-4 py-8 space-y-8">
+        {/* Welcome */}
+        <div className="text-center">
+          <h1 className="text-2xl font-bold text-gray-900">
+            환영합니다, {userName}님!
+          </h1>
+          <p className="mt-1 text-sm text-muted-foreground">
+            학원에 합류하거나, 개인 코스를 구매하여 학습을 시작하세요.
+          </p>
+        </div>
+
+        {/* Section 1: Join Academy */}
+        <JoinAcademyForm compact />
+
+        {/* Divider */}
+        <div className="relative">
+          <div className="absolute inset-0 flex items-center">
+            <div className="w-full border-t border-gray-200" />
+          </div>
+          <div className="relative flex justify-center text-sm">
+            <span className="bg-white px-3 text-gray-400">또는</span>
+          </div>
+        </div>
+
+        {/* Section 2: Course Purchase */}
+        <Card>
+          <CardHeader className="text-center pb-4">
+            <div className="mx-auto rounded-full bg-amber-100 p-3 mb-2">
+              <ShoppingCart className="h-6 w-6 text-amber-600" />
+            </div>
+            <CardTitle className="text-lg">개인 코스 구매</CardTitle>
+            <p className="text-sm text-muted-foreground mt-1">
+              학원 없이 직접 코스를 구매하여 바로 학습할 수 있어요.
+            </p>
+          </CardHeader>
+          <CardContent>
+            {courses.length === 0 ? (
+              <p className="text-center text-sm text-muted-foreground py-4">
+                현재 구매 가능한 코스가 없습니다.
+              </p>
+            ) : (
+              <div className="grid gap-3">
+                {courses.map((course) => {
+                  const style = CATEGORY_STYLE[course.category] ?? {
+                    border: 'border-gray-200 hover:border-gray-400',
+                    bg: 'bg-gray-50',
+                    badge: 'bg-gray-100 text-gray-700',
+                  };
+                  const icon = CATEGORY_ICON[course.category] ?? (
+                    <BookA className="h-5 w-5 text-gray-500" />
+                  );
+                  const label = CATEGORY_LABEL[course.category] ?? course.category;
+                  const paymentUrl = `/payment?courseId=${course.id}&name=${encodeURIComponent(course.title)}&price=${course.price}`;
+
+                  return (
+                    <Link key={course.id} href={paymentUrl}>
+                      <div
+                        className={`flex items-center gap-4 rounded-xl border p-4 transition-colors ${style.border}`}
+                      >
+                        <div className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-full ${style.bg}`}>
+                          {icon}
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <div className="flex items-center gap-2">
+                            <span className="font-semibold text-sm text-gray-900 truncate">
+                              {course.title}
+                            </span>
+                            <span className={`shrink-0 text-[10px] font-medium rounded-full px-2 py-0.5 ${style.badge}`}>
+                              {label}
+                            </span>
+                          </div>
+                          {course.description && (
+                            <p className="text-xs text-muted-foreground mt-0.5 line-clamp-1">
+                              {course.description}
+                            </p>
+                          )}
+                        </div>
+                        <div className="shrink-0 text-right">
+                          <span className="text-sm font-bold text-gray-900">
+                            {formatPrice(course.price)}원
+                          </span>
+                        </div>
+                      </div>
+                    </Link>
+                  );
+                })}
+              </div>
+            )}
+          </CardContent>
+        </Card>
+
+        {/* Help text */}
+        <p className="text-center text-xs text-gray-400">
+          결제 후 해당 서비스가 자동으로 활성화됩니다.
+        </p>
+      </div>
+    </div>
+  );
+}

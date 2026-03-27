@@ -17,6 +17,37 @@ export interface NaesinDashboardData {
   quizHistory: { date: string; score: number }[];
 }
 
+export interface NaesinSettings {
+  textbook_id: string | null;
+  enabled_stages: string[] | null;
+}
+
+export async function fetchNaesinSettings(
+  supabase: SupabaseClient,
+  userId: string,
+): Promise<NaesinSettings> {
+  const { data } = await supabase
+    .from('naesin_student_settings')
+    .select('textbook_id, enabled_stages')
+    .eq('student_id', userId)
+    .single();
+  return {
+    textbook_id: data?.textbook_id ?? null,
+    enabled_stages: (data?.enabled_stages as string[] | null) ?? null,
+  };
+}
+
+export const EMPTY_NAESIN_DATA: NaesinDashboardData = {
+  textbookName: '교과서',
+  units: [],
+  progressList: [],
+  examAssignments: [],
+  contentMap: {},
+  vocabQuizSetCounts: {},
+  grammarVideoCounts: {},
+  quizHistory: [],
+};
+
 export async function fetchNaesinDashboardData(
   supabase: SupabaseClient,
   userId: string,

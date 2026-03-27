@@ -3,7 +3,7 @@ import { createApiHandler, ValidationError, NotFoundError } from '@/lib/api';
 import { createAdminClient } from '@/lib/supabase/admin';
 
 export const POST = createApiHandler(
-  { roles: ['teacher'] },
+  { roles: ['student', 'teacher'] },
   async ({ user, body }) => {
     const { inviteCode } = body as { inviteCode?: string };
 
