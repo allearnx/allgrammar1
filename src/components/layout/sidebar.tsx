@@ -65,6 +65,12 @@ export function Sidebar({ user, services, naesinTree }: SidebarProps) {
         </div>
         <ChangePasswordDialog />
         {user.role === 'student' && <DeleteAccountDialog />}
+        {user.role === 'admin' && (
+          <DeleteAccountDialog
+            apiEndpoint="/api/admin/delete-account"
+            warning="학원과 모든 관련 데이터가 영구 삭제됩니다. 학원에 소속된 회원이 있으면 탈퇴할 수 없습니다."
+          />
+        )}
         <Button
           variant="ghost"
           className="w-full justify-start gap-3 text-slate-400 hover:text-slate-900 hover:bg-slate-100"

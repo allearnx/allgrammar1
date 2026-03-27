@@ -18,7 +18,15 @@ import {
 import { UserX } from 'lucide-react';
 import { toast } from 'sonner';
 
-export function DeleteAccountDialog() {
+interface DeleteAccountDialogProps {
+  apiEndpoint?: string;
+  warning?: string;
+}
+
+export function DeleteAccountDialog({
+  apiEndpoint = '/api/student/delete-account',
+  warning = '모든 학습 데이터가 영구 삭제됩니다.',
+}: DeleteAccountDialogProps) {
   const router = useRouter();
   const [open, setOpen] = useState(false);
   const [password, setPassword] = useState('');
@@ -33,7 +41,7 @@ export function DeleteAccountDialog() {
     setLoading(true);
 
     try {
-      const res = await fetch('/api/student/delete-account', {
+      const res = await fetch(apiEndpoint, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ password }),
@@ -80,7 +88,7 @@ export function DeleteAccountDialog() {
           </DialogDescription>
         </DialogHeader>
         <div className="rounded-md border border-red-200 bg-red-50 p-3 text-sm text-red-700">
-          모든 학습 데이터가 영구 삭제됩니다.
+          {warning}
         </div>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="space-y-2">
