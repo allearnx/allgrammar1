@@ -38,6 +38,11 @@ const clientSchema = z.object({
 });
 
 function validateEnv() {
+  // CI 빌드 시 검증 건너뛰기 (placeholder 환경변수 사용)
+  if (process.env.SKIP_ENV_VALIDATION === 'true') {
+    return process.env as unknown as z.infer<typeof serverSchema>;
+  }
+
   const result = serverSchema.safeParse(process.env);
   if (!result.success) {
     const missing = result.error.issues.map((i) => `  - ${i.path.join('.')}: ${i.message}`);
