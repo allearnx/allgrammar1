@@ -46,10 +46,30 @@ export async function getPlanContext(
       .single(),
   ]);
 
+  const tier: Tier = deriveTier(sub ?? null);
+
+  // Free tier 학원: 학생 개인 service_assignments 기반으로 freeService 결정
+  if (tier === 'free' && studentId) {
+    const { data: studentAssignments } = await supabase
+      .from('service_assignments')
+      .select('service')
+      .eq('student_id', studentId);
+
+    const studentServices = studentAssignments?.map((a) => a.service) ?? [];
+    if (studentServices.length > 0) {
+      const studentFreeService = studentServices.includes('voca') ? 'voca' as const
+        : studentServices.includes('naesin') ? 'naesin' as const
+        : null;
+      return { tier, freeService: studentFreeService };
+    }
+    // 학생 개인 선택 없으면 academy.free_service 폴백
+    const freeService: 'naesin' | 'voca' | null =
+      (academy?.free_service as 'naesin' | 'voca') ?? null;
+    return { tier, freeService };
+  }
+
   const freeService: 'naesin' | 'voca' | null =
     (academy?.free_service as 'naesin' | 'voca') ?? null;
-
-  const tier: Tier = deriveTier(sub ?? null);
 
   return { tier, freeService };
 }

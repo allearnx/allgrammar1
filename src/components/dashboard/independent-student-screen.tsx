@@ -58,6 +58,7 @@ interface CourseItem {
 interface IndependentStudentScreenProps {
   userName: string;
   courses: CourseItem[];
+  isAcademy?: boolean;
 }
 
 const CATEGORY_ICON: Record<string, React.ReactNode> = {
@@ -83,7 +84,7 @@ const CATEGORY_LABEL: Record<string, string> = {
   school_exam: '올인내신',
 };
 
-export function IndependentStudentScreen({ userName, courses }: IndependentStudentScreenProps) {
+export function IndependentStudentScreen({ userName, courses, isAcademy = false }: IndependentStudentScreenProps) {
   const router = useRouter();
   const [selected, setSelected] = useState<FreeService>('voca');
   const [loading, setLoading] = useState(false);
@@ -177,84 +178,88 @@ export function IndependentStudentScreen({ userName, courses }: IndependentStude
           </CardContent>
         </Card>
 
-        <Divider />
+        {!isAcademy && (
+          <>
+            <Divider />
 
-        {/* Section 2: Join Academy */}
-        <JoinAcademyForm compact />
+            {/* Section 2: Join Academy */}
+            <JoinAcademyForm compact />
 
-        <Divider />
+            <Divider />
 
-        {/* Section 3: Course Purchase */}
-        <Card>
-          <CardHeader className="text-center pb-4">
-            <div className="mx-auto rounded-full bg-amber-100 p-3 mb-2">
-              <ShoppingCart className="h-6 w-6 text-amber-600" />
-            </div>
-            <CardTitle className="text-lg">개인 코스 구매</CardTitle>
-            <p className="text-sm text-muted-foreground mt-1">
-              학원 없이 직접 코스를 구매하여 바로 학습할 수 있어요.
-            </p>
-          </CardHeader>
-          <CardContent>
-            {courses.length === 0 ? (
-              <p className="text-center text-sm text-muted-foreground py-4">
-                현재 구매 가능한 코스가 없습니다.
-              </p>
-            ) : (
-              <div className="grid gap-3">
-                {courses.map((course) => {
-                  const style = CATEGORY_STYLE[course.category] ?? {
-                    border: 'border-gray-200 hover:border-gray-400',
-                    bg: 'bg-gray-50',
-                    badge: 'bg-gray-100 text-gray-700',
-                  };
-                  const icon = CATEGORY_ICON[course.category] ?? (
-                    <BookA className="h-5 w-5 text-gray-500" />
-                  );
-                  const label = CATEGORY_LABEL[course.category] ?? course.category;
-                  const paymentUrl = `/payment?courseId=${course.id}&name=${encodeURIComponent(course.title)}&price=${course.price}`;
+            {/* Section 3: Course Purchase */}
+            <Card>
+              <CardHeader className="text-center pb-4">
+                <div className="mx-auto rounded-full bg-amber-100 p-3 mb-2">
+                  <ShoppingCart className="h-6 w-6 text-amber-600" />
+                </div>
+                <CardTitle className="text-lg">개인 코스 구매</CardTitle>
+                <p className="text-sm text-muted-foreground mt-1">
+                  학원 없이 직접 코스를 구매하여 바로 학습할 수 있어요.
+                </p>
+              </CardHeader>
+              <CardContent>
+                {courses.length === 0 ? (
+                  <p className="text-center text-sm text-muted-foreground py-4">
+                    현재 구매 가능한 코스가 없습니다.
+                  </p>
+                ) : (
+                  <div className="grid gap-3">
+                    {courses.map((course) => {
+                      const style = CATEGORY_STYLE[course.category] ?? {
+                        border: 'border-gray-200 hover:border-gray-400',
+                        bg: 'bg-gray-50',
+                        badge: 'bg-gray-100 text-gray-700',
+                      };
+                      const icon = CATEGORY_ICON[course.category] ?? (
+                        <BookA className="h-5 w-5 text-gray-500" />
+                      );
+                      const label = CATEGORY_LABEL[course.category] ?? course.category;
+                      const paymentUrl = `/payment?courseId=${course.id}&name=${encodeURIComponent(course.title)}&price=${course.price}`;
 
-                  return (
-                    <Link key={course.id} href={paymentUrl}>
-                      <div
-                        className={`flex items-center gap-4 rounded-xl border p-4 transition-colors ${style.border}`}
-                      >
-                        <div className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-full ${style.bg}`}>
-                          {icon}
-                        </div>
-                        <div className="flex-1 min-w-0">
-                          <div className="flex items-center gap-2">
-                            <span className="font-semibold text-sm text-gray-900 truncate">
-                              {course.title}
-                            </span>
-                            <span className={`shrink-0 text-[10px] font-medium rounded-full px-2 py-0.5 ${style.badge}`}>
-                              {label}
-                            </span>
+                      return (
+                        <Link key={course.id} href={paymentUrl}>
+                          <div
+                            className={`flex items-center gap-4 rounded-xl border p-4 transition-colors ${style.border}`}
+                          >
+                            <div className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-full ${style.bg}`}>
+                              {icon}
+                            </div>
+                            <div className="flex-1 min-w-0">
+                              <div className="flex items-center gap-2">
+                                <span className="font-semibold text-sm text-gray-900 truncate">
+                                  {course.title}
+                                </span>
+                                <span className={`shrink-0 text-[10px] font-medium rounded-full px-2 py-0.5 ${style.badge}`}>
+                                  {label}
+                                </span>
+                              </div>
+                              {course.description && (
+                                <p className="text-xs text-muted-foreground mt-0.5 line-clamp-1">
+                                  {course.description}
+                                </p>
+                              )}
+                            </div>
+                            <div className="shrink-0 text-right">
+                              <span className="text-sm font-bold text-gray-900">
+                                {formatPrice(course.price)}원
+                              </span>
+                            </div>
                           </div>
-                          {course.description && (
-                            <p className="text-xs text-muted-foreground mt-0.5 line-clamp-1">
-                              {course.description}
-                            </p>
-                          )}
-                        </div>
-                        <div className="shrink-0 text-right">
-                          <span className="text-sm font-bold text-gray-900">
-                            {formatPrice(course.price)}원
-                          </span>
-                        </div>
-                      </div>
-                    </Link>
-                  );
-                })}
-              </div>
-            )}
-          </CardContent>
-        </Card>
+                        </Link>
+                      );
+                    })}
+                  </div>
+                )}
+              </CardContent>
+            </Card>
 
-        {/* Help text */}
-        <p className="text-center text-xs text-gray-400">
-          결제 후 해당 서비스가 자동으로 활성화됩니다.
-        </p>
+            {/* Help text */}
+            <p className="text-center text-xs text-gray-400">
+              결제 후 해당 서비스가 자동으로 활성화됩니다.
+            </p>
+          </>
+        )}
       </div>
     </div>
   );

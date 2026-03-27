@@ -75,7 +75,8 @@ describe('boss/subscriptions/[id] PATCH — tier 변경', () => {
 
     // admin client — 업데이트용
     const adminChain = mockChain({ data: null, error: null });
-    mockCreateAdminClient.mockReturnValue({ from: adminChain.from });
+    const mockRpc = vi.fn().mockResolvedValue({ data: null, error: null });
+    mockCreateAdminClient.mockReturnValue({ from: adminChain.from, rpc: mockRpc });
 
     const { PATCH } = await import('@/app/api/boss/subscriptions/[id]/route');
     const res = await PATCH(
@@ -91,6 +92,8 @@ describe('boss/subscriptions/[id] PATCH — tier 변경', () => {
     expect(adminChain.from).toHaveBeenCalledWith('subscriptions');
     // admin client로 academies 업데이트 확인
     expect(adminChain.from).toHaveBeenCalledWith('academies');
+    // sync_subscription_services RPC 호출 확인
+    expect(mockRpc).toHaveBeenCalledWith('sync_subscription_services', { sub_id: 'sub-1' });
   });
 
   it('유료→무료 다운그레이드 성공', async () => {
@@ -118,6 +121,9 @@ describe('boss/subscriptions/[id] PATCH — tier 변경', () => {
     expect(res.status).toBe(200);
     const body = await res.json();
     expect(body.tier).toBe('free');
+
+    // subscription 서비스 삭제 확인
+    expect(adminChain.from).toHaveBeenCalledWith('service_assignments');
   });
 
   it('동일 tier 변경 → 400', async () => {

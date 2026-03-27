@@ -26,6 +26,7 @@ export const PATCH = createApiHandler(
       return NextResponse.json({ error: '이미 동일한 tier입니다.' }, { status: 400 });
     }
 
+    const prevTier = sub.tier;
     const admin = createAdminClient();
 
     // 구독 tier 업데이트
@@ -56,12 +57,25 @@ export const PATCH = createApiHandler(
           })
           .eq('id', sub.academy_id));
       }
+
+      // free→paid: 기존 학생들에게 서비스 자동배정
+      // paid→free: subscription 서비스 회수 (manual 보존)
+      if (prevTier === 'free' && tier === 'paid') {
+        await admin.rpc('sync_subscription_services', { sub_id: subId });
+      } else if (prevTier !== 'free' && tier === 'free') {
+        // paid→free 다운그레이드: subscription 소스 서비스만 삭제
+        await admin
+          .from('service_assignments')
+          .delete()
+          .eq('subscription_id', subId)
+          .eq('source', 'subscription');
+      }
     }
 
     await auditLog(supabase, user.id, 'subscription.tier_change', {
       type: 'subscription',
       id: subId,
-      details: { from: sub.tier, to: tier, academy_id: sub.academy_id },
+      details: { from: prevTier, to: tier, academy_id: sub.academy_id },
     });
 
     return NextResponse.json({ success: true, tier });

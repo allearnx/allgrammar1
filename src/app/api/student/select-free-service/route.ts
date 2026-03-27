@@ -9,12 +9,23 @@ const selectFreeServiceSchema = z.object({
 export const POST = createApiHandler(
   { roles: ['student'], schema: selectFreeServiceSchema },
   async ({ user, body, supabase }) => {
-    // 독립 학생만 가능
+    // 학원 소속이면 free tier인지 확인
     if (user.academy_id) {
-      return NextResponse.json(
-        { error: '학원 소속 학생은 이 기능을 사용할 수 없습니다.' },
-        { status: 403 },
-      );
+      const { data: sub } = await supabase
+        .from('subscriptions')
+        .select('tier')
+        .eq('academy_id', user.academy_id)
+        .in('status', ['trialing', 'active', 'past_due'])
+        .order('created_at', { ascending: false })
+        .limit(1)
+        .single();
+
+      if (sub?.tier !== 'free') {
+        return NextResponse.json(
+          { error: '유료 학원 학생은 이 기능을 사용할 수 없습니다.' },
+          { status: 403 },
+        );
+      }
     }
 
     // 이미 서비스가 있는지 확인

@@ -41,7 +41,9 @@ export default async function StudentDashboard() {
     return <CombinedSection user={user} planContext={planContext} />;
   }
 
-  // ── No services: independent → join + buy; academy → wait for teacher ──
+  // ── No services ──
+
+  // 독립 학생: 서비스 선택 + 학원합류 + 코스구매
   if (isIndependent) {
     const admin = createAdminClient();
     const { data: courses } = await admin
@@ -59,6 +61,20 @@ export default async function StudentDashboard() {
     );
   }
 
+  // 학원 학생: tier 확인 후 분기
+  const planContext = await getPlanContext(user.academy_id, user.id);
+
+  if (planContext.tier === 'free') {
+    // 무료 학원 학생: 서비스 택1 선택 화면
+    return (
+      <>
+        <Topbar user={user} title="대시보드" />
+        <IndependentStudentScreen userName={user.full_name} courses={[]} isAcademy />
+      </>
+    );
+  }
+
+  // 유료 학원인데 서비스 없음: 안전장치 (정상적으로는 발생하지 않음)
   return (
     <>
       <Topbar user={user} title="대시보드" />
