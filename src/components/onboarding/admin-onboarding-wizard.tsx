@@ -16,11 +16,12 @@ import { toast } from 'sonner';
 
 interface Props {
   inviteCode: string;
+  hasContactPhone?: boolean;
 }
 
-export function AdminOnboardingWizard({ inviteCode }: Props) {
+export function AdminOnboardingWizard({ inviteCode, hasContactPhone }: Props) {
   const [open, setOpen] = useState(true);
-  const [step, setStep] = useState(0);
+  const [step, setStep] = useState(hasContactPhone ? 1 : 0);
   const [form, setForm] = useState({
     contact_phone: '',
     contact_email: '',

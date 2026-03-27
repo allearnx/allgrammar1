@@ -24,7 +24,7 @@ export default async function AdminDashboard() {
     admin.from('users').select('id', { count: 'exact', head: true }).eq('role', 'teacher').eq('academy_id', user.academy_id!),
     admin.from('grammars').select('id', { count: 'exact', head: true }),
     admin.from('memory_items').select('id', { count: 'exact', head: true }),
-    admin.from('academies').select('max_students, onboarding_completed_at, invite_code').eq('id', user.academy_id!).single(),
+    admin.from('academies').select('max_students, onboarding_completed_at, invite_code, contact_phone').eq('id', user.academy_id!).single(),
   ]);
 
   const maxStudents = academyRes.data?.max_students as number | null;
@@ -36,7 +36,7 @@ export default async function AdminDashboard() {
     <>
       <Topbar user={user} title="관리자 대시보드" />
       {!onboardingCompleted && academyRes.data?.invite_code && (
-        <AdminOnboardingWizard inviteCode={academyRes.data.invite_code} />
+        <AdminOnboardingWizard inviteCode={academyRes.data.invite_code} hasContactPhone={!!academyRes.data?.contact_phone} />
       )}
       <div className="p-4 md:p-6 space-y-5">
         <DashboardBanner
