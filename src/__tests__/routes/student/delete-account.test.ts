@@ -68,7 +68,7 @@ function makeRequest(body?: unknown) {
     init.body = JSON.stringify(body);
     headers['content-type'] = 'application/json';
   }
-  return new NextRequest('http://localhost/api/student/delete-account', { ...init, headers });
+  return new NextRequest('http://localhost/api/student/delete-account', { ...init, headers } as any);
 }
 
 beforeEach(() => {

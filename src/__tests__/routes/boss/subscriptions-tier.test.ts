@@ -47,7 +47,7 @@ function makeRequest(method: string, body?: unknown) {
     init.body = JSON.stringify(body);
     headers['content-type'] = 'application/json';
   }
-  return new NextRequest('http://localhost/api/boss/subscriptions/sub-1', { ...init, headers });
+  return new NextRequest('http://localhost/api/boss/subscriptions/sub-1', { ...init, headers } as any);
 }
 
 beforeEach(() => {

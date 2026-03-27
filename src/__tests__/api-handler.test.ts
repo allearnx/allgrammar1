@@ -37,7 +37,7 @@ function makeRequest(
   return new NextRequest('http://localhost/api/test', {
     ...init,
     headers,
-  });
+  } as any);
 }
 
 const fakeUser = {

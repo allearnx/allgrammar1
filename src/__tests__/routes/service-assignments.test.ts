@@ -42,7 +42,7 @@ function makeRequest(method: string, body?: unknown) {
     init.body = JSON.stringify(body);
     headers['content-type'] = 'application/json';
   }
-  return new NextRequest('http://localhost/api/service-assignments', { ...init, headers });
+  return new NextRequest('http://localhost/api/service-assignments', { ...init, headers } as any);
 }
 
 beforeEach(() => {

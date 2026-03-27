@@ -6,8 +6,7 @@ function makeVocab(overrides: Partial<VocaVocabulary> & { front_text: string }):
   return {
     id: overrides.front_text,
     day_id: 'day-1',
-    front_text: overrides.front_text,
-    back_text: overrides.back_text || '뜻',
+    back_text: '뜻',
     part_of_speech: null,
     example_sentence: null,
     synonyms: null,

@@ -41,7 +41,7 @@ function makeRequest(
     headers['content-type'] = 'application/json';
   }
 
-  return new NextRequest(url, { ...init, headers });
+  return new NextRequest(url, { ...init, headers } as any);
 }
 
 function mockSupabaseChain(result: { data: unknown; error: unknown }) {

@@ -17,7 +17,7 @@ export function createMockRequest(
     headers['content-type'] = 'application/json';
   }
 
-  return new NextRequest(url, { ...init, headers });
+  return new NextRequest(url, { ...init, headers } as any);
 }
 
 // ── User helpers ──
