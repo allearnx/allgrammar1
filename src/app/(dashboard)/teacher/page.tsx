@@ -8,6 +8,7 @@ import { OnboardingGuide } from '@/components/shared/onboarding-guide';
 import { Users, BookOpen, FileText, BookMarked, ClipboardList, BookA } from 'lucide-react';
 import Link from 'next/link';
 import { JoinAcademyForm } from '@/components/dashboard/join-academy-form';
+import { InviteCodeCard } from '@/components/shared/invite-code-card';
 import type { LucideIcon } from 'lucide-react';
 
 const NAV_CARDS: { title: string; description: string; href: string; icon: LucideIcon; primary?: boolean }[] = [
@@ -31,11 +32,12 @@ export default async function ManagerDashboard() {
 
   const supabase = await createClient();
 
-  const [studentRes, grammarRes, memoryRes, textbookRes] = await Promise.all([
+  const [studentRes, grammarRes, memoryRes, textbookRes, academyRes] = await Promise.all([
     supabase.from('users').select('id', { count: 'exact', head: true }).eq('role', 'student').eq('academy_id', user.academy_id!),
     supabase.from('grammars').select('id', { count: 'exact', head: true }),
     supabase.from('memory_items').select('id', { count: 'exact', head: true }),
     supabase.from('textbook_passages').select('id', { count: 'exact', head: true }),
+    supabase.from('academies').select('name, invite_code').eq('id', user.academy_id!).single(),
   ]);
 
   const studentCount = studentRes.count || 0;
@@ -48,6 +50,10 @@ export default async function ManagerDashboard() {
           <h2 className="text-2xl font-bold tracking-tight">안녕하세요, {user.full_name}님!</h2>
           <p className="text-muted-foreground mt-1">학원 학습 현황을 확인하세요.</p>
         </div>
+
+        {academyRes.data?.invite_code && (
+          <InviteCodeCard code={academyRes.data.invite_code} academyName={academyRes.data.name} />
+        )}
 
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           <StatCard label="총 학생 수" value={studentCount} color="#3B82F6" icon={<Users className="h-5 w-5" />} />
