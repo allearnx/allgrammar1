@@ -6,6 +6,7 @@ import { DashboardBanner } from '@/components/shared/dashboard-banner';
 import { QuickActionGrid, type QuickAction } from '@/components/shared/quick-action-grid';
 import { OnboardingGuide } from '@/components/shared/onboarding-guide';
 import { AdminOnboardingWizard } from '@/components/onboarding/admin-onboarding-wizard';
+import { InviteCodeCard } from '@/components/shared/invite-code-card';
 import { Users, BookOpen, FileText, GraduationCap, BookA, BarChart3, Settings } from 'lucide-react';
 
 const QUICK_ACTIONS: QuickAction[] = [
@@ -24,19 +25,20 @@ export default async function AdminDashboard() {
     admin.from('users').select('id', { count: 'exact', head: true }).eq('role', 'teacher').eq('academy_id', user.academy_id!),
     admin.from('grammars').select('id', { count: 'exact', head: true }),
     admin.from('memory_items').select('id', { count: 'exact', head: true }),
-    admin.from('academies').select('max_students, onboarding_completed_at, invite_code, contact_phone').eq('id', user.academy_id!).single(),
+    admin.from('academies').select('name, max_students, onboarding_completed_at, invite_code').eq('id', user.academy_id!).single(),
   ]);
 
   const maxStudents = academyRes.data?.max_students as number | null;
   const onboardingCompleted = !!academyRes.data?.onboarding_completed_at;
+  const inviteCode = academyRes.data?.invite_code as string | null;
   const studentCount = studentRes.count || 0;
   const seatPct = maxStudents ? Math.min((studentCount / maxStudents) * 100, 100) : 0;
 
   return (
     <>
       <Topbar user={user} title="관리자 대시보드" />
-      {!onboardingCompleted && academyRes.data?.invite_code && (
-        <AdminOnboardingWizard inviteCode={academyRes.data.invite_code} hasContactPhone={!!academyRes.data?.contact_phone} />
+      {!onboardingCompleted && inviteCode && (
+        <AdminOnboardingWizard inviteCode={inviteCode} />
       )}
       <div className="p-4 md:p-6 space-y-5">
         <DashboardBanner
@@ -45,6 +47,8 @@ export default async function AdminDashboard() {
           roleBadge="관리자"
           chips={maxStudents ? [{ label: `좌석 ${studentCount}/${maxStudents}` }] : undefined}
         />
+
+        {inviteCode && <InviteCodeCard code={inviteCode} academyName={academyRes.data?.name || '학원'} />}
 
         <div className="grid gap-3 grid-cols-2 lg:grid-cols-4">
           <StatCard label="학생 수" value={studentCount} sub="등록된 학생" color="#7C3AED" icon={<Users className="h-5 w-5" />} />
