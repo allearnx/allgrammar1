@@ -58,12 +58,12 @@ export function BillingPageContent({ mode }: BillingPageContentProps) {
 
       subscriptionQuery = supabase
         .from('subscriptions')
-        .select('*, plan:subscription_plans(*)')
+        .select('id, plan_id, academy_id, student_id, status, tier, billing_key, customer_key, current_period_start, current_period_end, trial_end, grace_period_end, failed_payment_count, canceled_at, created_at, plan:subscription_plans(*)')
         .eq('academy_id', profile.academy_id);
     } else {
       subscriptionQuery = supabase
         .from('subscriptions')
-        .select('*, plan:subscription_plans(*)')
+        .select('id, plan_id, academy_id, student_id, status, tier, billing_key, customer_key, current_period_start, current_period_end, trial_end, grace_period_end, failed_payment_count, canceled_at, created_at, plan:subscription_plans(*)')
         .eq('student_id', user.id);
     }
 
@@ -127,7 +127,7 @@ export function BillingPageContent({ mode }: BillingPageContentProps) {
               planName={subscription.plan?.name}
               status={subscription.status}
               priceLabel={priceLabel}
-              billingKey={subscription.billing_key}
+              hasCard={!!subscription.billing_key}
               periodStart={subscription.current_period_start}
               periodEnd={subscription.current_period_end}
               onRegisterCard={() => requestTossCardAuth(subscription.customer_key)}

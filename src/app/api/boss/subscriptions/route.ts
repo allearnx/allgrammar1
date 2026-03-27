@@ -11,7 +11,9 @@ export const GET = createApiHandler(
     let query = supabase
       .from('subscriptions')
       .select(`
-        *,
+        id, plan_id, academy_id, student_id, status, tier,
+        current_period_start, current_period_end, trial_end,
+        grace_period_end, failed_payment_count, canceled_at, created_by, created_at,
         plan:subscription_plans(*),
         academy:academies(id, name),
         student:users!subscriptions_student_id_fkey(id, full_name, email)

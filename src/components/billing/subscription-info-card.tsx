@@ -9,7 +9,7 @@ interface SubscriptionInfoCardProps {
   planName: string;
   status: string;
   priceLabel: string;
-  billingKey: string | null;
+  hasCard: boolean;
   periodStart: string;
   periodEnd: string;
   onRegisterCard: () => void;
@@ -20,7 +20,7 @@ export function SubscriptionInfoCard({
   planName,
   status,
   priceLabel,
-  billingKey,
+  hasCard,
   periodStart,
   periodEnd,
   onRegisterCard,
@@ -43,7 +43,7 @@ export function SubscriptionInfoCard({
           <Badge>{status}</Badge>
         </div>
         <Row label="금액" value={priceLabel} />
-        <Row label="결제 수단" value={billingKey ? '카드 등록됨' : '미등록'} />
+        <Row label="결제 수단" value={hasCard ? '카드 등록됨' : '미등록'} />
         <div className="flex justify-between">
           <span className="text-muted-foreground">현재 기간</span>
           <span className="text-sm">
@@ -52,9 +52,9 @@ export function SubscriptionInfoCard({
           </span>
         </div>
         <div className="flex gap-2 pt-2">
-          <Button variant={billingKey ? 'outline' : 'default'} onClick={onRegisterCard}>
-            {!billingKey && <CreditCard className="h-4 w-4 mr-1" />}
-            {billingKey ? '카드 변경' : '카드 등록'}
+          <Button variant={hasCard ? 'outline' : 'default'} onClick={onRegisterCard}>
+            {!hasCard && <CreditCard className="h-4 w-4 mr-1" />}
+            {hasCard ? '카드 변경' : '카드 등록'}
           </Button>
           {isCancellable && (
             <Button variant="destructive" onClick={onCancel}>
