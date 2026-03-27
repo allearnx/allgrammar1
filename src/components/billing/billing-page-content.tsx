@@ -90,7 +90,7 @@ export function BillingPageContent({ mode }: BillingPageContentProps) {
     setLoading(false);
   }, [mode]);
 
-  useEffect(() => { fetchData(); }, [fetchData]);
+  useEffect(() => { fetchData(); }, [fetchData]); // eslint-disable-line react-hooks/set-state-in-effect -- data fetching
 
   if (loading) return <div className="p-6">로딩 중...</div>;
 

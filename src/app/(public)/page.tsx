@@ -90,7 +90,7 @@ export default function LandingPage() {
     const hideUntil = localStorage.getItem('eventPopupHideUntil');
     const now = new Date().getTime();
     if (!hideUntil || now > parseInt(hideUntil)) {
-      setShowEventPopup(true);
+      setShowEventPopup(true); // eslint-disable-line react-hooks/set-state-in-effect -- reading localStorage
     }
   }, []);
 

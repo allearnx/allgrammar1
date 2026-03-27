@@ -18,7 +18,7 @@ export default function PaymentPage() {
   useEffect(() => {
     if (typeof window === 'undefined') return;
     if ('TossPayments' in window) {
-      setSdkReady(true);
+      setSdkReady(true); // eslint-disable-line react-hooks/set-state-in-effect -- checking if script already loaded
       return;
     }
     const script = document.createElement('script');

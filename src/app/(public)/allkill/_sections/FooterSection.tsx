@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 export default function FooterSection() {
   return (
     <footer className="bg-[#f5f5f7] pt-6 pb-8 px-4">
@@ -35,9 +37,9 @@ export default function FooterSection() {
         <div className="mt-12 pt-6 border-t border-gray-200 text-center text-[#86868b] text-sm">
           <p>Copyright © allrounderenglish Inc. All Rights Reserved.</p>
           <div className="mt-2 flex justify-center gap-4 text-xs">
-            <a href="/terms" className="hover:underline hover:text-[#424245]">이용약관</a>
+            <Link href="/terms" className="hover:underline hover:text-[#424245]">이용약관</Link>
             <span>|</span>
-            <a href="/privacy" className="font-bold hover:underline hover:text-[#424245]">개인정보처리방침</a>
+            <Link href="/privacy" className="font-bold hover:underline hover:text-[#424245]">개인정보처리방침</Link>
           </div>
         </div>
       </div>
