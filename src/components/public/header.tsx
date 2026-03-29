@@ -59,7 +59,7 @@ export default function PublicHeader({ isLoggedIn = false }: PublicHeaderProps) 
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
-        <div className="flex items-center justify-between h-16">
+        <div className="flex items-center justify-between h-[72px]">
           {/* 로고 */}
           <Link href="/" className="flex items-center flex-shrink-0">
             <Image
@@ -67,7 +67,7 @@ export default function PublicHeader({ isLoggedIn = false }: PublicHeaderProps) 
               alt="올라영"
               width={360}
               height={120}
-              className="h-12 w-auto"
+              className="h-14 w-auto"
               priority
             />
           </Link>
@@ -83,7 +83,7 @@ export default function PublicHeader({ isLoggedIn = false }: PublicHeaderProps) 
               >
                 {item.hasDropdown ? (
                   <button
-                    className="px-3 py-2 text-sm font-medium text-[#1d1d1f] hover:text-[#0071e3] transition-colors duration-200 flex items-center gap-1"
+                    className="px-2.5 py-2 text-[15px] font-medium text-[#1d1d1f] hover:text-[#0071e3] transition-colors duration-200 flex items-center gap-1"
                   >
                     {item.label}
                     <svg
@@ -100,14 +100,14 @@ export default function PublicHeader({ isLoggedIn = false }: PublicHeaderProps) 
                     href={item.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="px-3 py-2 text-sm font-medium text-[#1d1d1f] hover:text-[#0071e3] transition-colors duration-200 flex items-center gap-1"
+                    className="px-2.5 py-2 text-[15px] font-medium text-[#1d1d1f] hover:text-[#0071e3] transition-colors duration-200 flex items-center gap-1"
                   >
                     {item.label}
                   </a>
                 ) : (
                   <Link
                     href={item.href}
-                    className="px-3 py-2 text-sm font-medium text-[#1d1d1f] hover:text-[#0071e3] transition-colors duration-200 flex items-center gap-1"
+                    className="px-2.5 py-2 text-[15px] font-medium text-[#1d1d1f] hover:text-[#0071e3] transition-colors duration-200 flex items-center gap-1"
                   >
                     {item.label}
                   </Link>
@@ -153,7 +153,7 @@ export default function PublicHeader({ isLoggedIn = false }: PublicHeaderProps) 
             {/* 올인내신 강조 버튼 */}
             <Link
               href="/courses/school_exam"
-              className="ml-2 relative px-5 py-2.5 text-sm font-bold text-white rounded-full transition-all duration-200 shadow-lg hover:scale-105"
+              className="ml-2 relative px-5 py-2.5 text-[15px] font-bold text-white rounded-full transition-all duration-200 shadow-lg hover:scale-105"
               style={{ background: 'linear-gradient(135deg, #3B82F6 0%, #06B6D4 100%)', boxShadow: '0 4px 20px rgba(59,130,246,0.4)' }}
             >
               <span className="absolute -top-2 -right-1 bg-rose-500 text-white text-[10px] font-black px-1.5 py-0.5 rounded-full leading-none">NEW</span>
@@ -162,7 +162,7 @@ export default function PublicHeader({ isLoggedIn = false }: PublicHeaderProps) 
             {/* 올킬보카 강조 버튼 */}
             <Link
               href="/allkill"
-              className="relative px-5 py-2.5 text-sm font-bold text-white rounded-full transition-all duration-200 shadow-lg hover:scale-105"
+              className="relative px-5 py-2.5 text-[15px] font-bold text-white rounded-full transition-all duration-200 shadow-lg hover:scale-105"
               style={{ background: 'linear-gradient(135deg, #A78BFA 0%, #4DD9C0 100%)', boxShadow: '0 4px 20px rgba(167,139,250,0.4)' }}
             >
               <span className="absolute -top-2 -right-1 bg-rose-500 text-white text-[10px] font-black px-1.5 py-0.5 rounded-full leading-none">NEW</span>
@@ -172,14 +172,14 @@ export default function PublicHeader({ isLoggedIn = false }: PublicHeaderProps) 
             {isLoggedIn ? (
               <Link
                 href="/student"
-                className="ml-2 px-5 py-2.5 text-sm font-medium text-white bg-gradient-to-r from-violet-400 to-purple-400 hover:from-violet-500 hover:to-purple-500 rounded-full transition-all duration-200 shadow-lg shadow-violet-300/30"
+                className="ml-2 px-5 py-2.5 text-[15px] font-medium text-white bg-gradient-to-r from-violet-400 to-purple-400 hover:from-violet-500 hover:to-purple-500 rounded-full transition-all duration-200 shadow-lg shadow-violet-300/30"
               >
                 내 대시보드
               </Link>
             ) : (
               <Link
                 href="/login"
-                className="ml-2 px-5 py-2.5 text-sm font-medium text-[#A78BFA] border-2 border-[#A78BFA] hover:bg-[#A78BFA] hover:text-white rounded-full transition-all duration-200"
+                className="ml-2 px-5 py-2.5 text-[15px] font-medium text-[#A78BFA] border-2 border-[#A78BFA] hover:bg-[#A78BFA] hover:text-white rounded-full transition-all duration-200"
               >
                 로그인
               </Link>
