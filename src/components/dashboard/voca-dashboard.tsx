@@ -21,6 +21,7 @@ import {
 } from '@/lib/dashboard/voca-helpers';
 import { MiniScoreTrend } from '@/components/charts/mini-score-trend';
 import { FlowStep } from './combined/flow-step';
+import { FlowCta } from './combined/flow-cta';
 import { StatCard } from '@/components/shared/stat-card';
 import type { VocaBook, VocaDay, VocaStudentProgress } from '@/types/voca';
 
@@ -54,31 +55,6 @@ const COLORS = {
   wrongBorder1: BRAND.wrong.border1,
   wrongBadge: BRAND.wrong.badge,
 };
-
-// ── Helpers ──
-
-import type { VocaStage } from '@/lib/dashboard/voca-helpers';
-
-function getCtaText(stage: VocaStage): { title: string; sub: string } {
-  switch (stage.key) {
-    case 'flashcard':
-      return { title: '플래시카드를 시작할 차례예요!', sub: '단어 카드를 확인하면 다음 단계로 진행돼요' };
-    case 'quiz':
-      return { title: '퀴즈를 시작할 차례예요!', sub: '플래시카드 완료 · 퀴즈 80점 이상이면 다음 단계로 진행돼요' };
-    case 'spelling':
-      return { title: '스펠링을 시작할 차례예요!', sub: '퀴즈 통과 · 스펠링 80점 이상이면 다음 단계로 진행돼요' };
-    case 'matching':
-      return { title: '매칭을 시작할 차례예요!', sub: '스펠링 통과 · 매칭 90점 이상이면 1회독이 완료돼요' };
-    case 'r2_flashcard':
-      return { title: '2회독 플래시카드를 시작하세요!', sub: '유의어·반의어·숙어를 학습해요' };
-    case 'r2_quiz':
-      return { title: '종합 문제를 시작할 차례예요!', sub: '플래시카드 완료 · 80점 이상이면 다음 단계로 진행돼요' };
-    case 'r2_matching':
-      return { title: '심화 매칭을 시작할 차례예요!', sub: '종합문제 통과 · 90점 이상이면 2회독이 완료돼요' };
-    default:
-      return { title: `${stage.label}을 시작하세요!`, sub: '' };
-  }
-}
 
 // ── Component ──
 
@@ -290,27 +266,6 @@ export function VocaDashboard({ userName, books, days, progressList, wordCount, 
           </div>
         </div>
       </div>
-    </div>
-  );
-}
-
-// ── Sub-components ──
-
-function FlowCta({ stage, dayId }: { stage: VocaStage; dayId: string }) {
-  const cta = getCtaText(stage);
-  return (
-    <div className="flex items-center justify-between rounded-xl p-3.5 md:p-4" style={{ background: 'linear-gradient(120deg, #F5F3FF, #EDE9FE)', border: '1px solid rgba(37,99,235,0.08)' }}>
-      <div className="mr-3 min-w-0">
-        <div className="text-sm font-semibold" style={{ color: '#7C3AED' }}>{cta.title}</div>
-        <div className="text-sm text-gray-500 mt-0.5 truncate">{cta.sub}</div>
-      </div>
-      <Link
-        href={`/student/voca/${dayId}`}
-        className="shrink-0 rounded-[10px] px-5 py-2.5 text-sm font-bold text-white whitespace-nowrap"
-        style={{ background: '#7C3AED', boxShadow: '0 4px 12px rgba(37,99,235,0.15)' }}
-      >
-        {stage.label} 시작하기 →
-      </Link>
     </div>
   );
 }

@@ -11,20 +11,13 @@ import {
   ArrowRight,
   CalendarDays,
   Layers,
-  PenLine,
-  FileText,
-  Ruler,
-  RefreshCw,
 } from 'lucide-react';
 import { BRAND } from '@/lib/utils/brand-colors';
 import { calculateStageStatuses } from '@/lib/naesin/stage-unlock';
 import {
-  getDDay,
   isNaesinUnitComplete,
-  mapNaesinStatus,
-  NAESIN_STAGE_KEYS,
-  NAESIN_STAGE_LABELS,
   computeNaesinStats,
+  getNaesinStagesSimple,
 } from '@/lib/dashboard/naesin-helpers';
 import {
   getR1Stages,
@@ -45,19 +38,6 @@ import type {
   NaesinContentAvailability,
   NaesinExamAssignment,
 } from '@/types/naesin';
-
-// ── Types ──
-
-interface NaesinStage {
-  key: string;
-  label: string;
-  stageKey: string;
-  status: 'done' | 'active' | 'locked';
-  icon: React.ReactNode;
-  description: string;
-  scoreRequirement: string;
-  actualScore?: string;
-}
 
 interface Props {
   userName: string;
@@ -86,44 +66,6 @@ const COLORS = {
   statAmber: BRAND.amber,
   statSky: BRAND.cyan,
 };
-
-// ── Naesin Helpers ──
-
-const NAESIN_STAGE_META: Record<string, { icon: React.ReactNode; description: string; scoreRequirement: string }> = {
-  vocab: { icon: <BookOpen className="h-6 w-6" />, description: '교과서 단어를\n암기합니다', scoreRequirement: '퀴즈+스펠링 통과' },
-  passage: { icon: <FileText className="h-6 w-6" />, description: '교과서 지문을\n암기합니다', scoreRequirement: '지문 암기 완료' },
-  grammar: { icon: <Ruler className="h-6 w-6" />, description: '핵심 문법을\n학습합니다', scoreRequirement: '영상 시청 완료' },
-  problem: { icon: <PenLine className="h-6 w-6" />, description: '문제를 풀며\n실력 확인', scoreRequirement: '문제풀이 완료' },
-  lastReview: { icon: <RefreshCw className="h-6 w-6" />, description: '시험 직전\n최종 점검', scoreRequirement: '최종 점검 완료' },
-};
-
-function getNaesinStages(statuses: NaesinStageStatuses, progress: NaesinStudentProgress | null): NaesinStage[] {
-  const stages: NaesinStage[] = [];
-  for (const key of NAESIN_STAGE_KEYS) {
-    const mapped = mapNaesinStatus(statuses[key]);
-    if (mapped === null) continue;
-    const meta = NAESIN_STAGE_META[key];
-
-    let actualScore: string | undefined;
-    if (mapped === 'done') {
-      actualScore = '완료 ✓';
-    } else if (progress) {
-      if (key === 'vocab' && progress.vocab_quiz_score != null) actualScore = `${progress.vocab_quiz_score}점`;
-    }
-
-    stages.push({
-      key,
-      label: NAESIN_STAGE_LABELS[key],
-      stageKey: key === 'lastReview' ? 'last-review' : key,
-      status: mapped,
-      icon: meta.icon,
-      description: meta.description,
-      scoreRequirement: meta.scoreRequirement,
-      actualScore,
-    });
-  }
-  return stages;
-}
 
 // ── Component ──
 
@@ -207,7 +149,7 @@ export function CombinedDashboard({
 
   const currentNaesinStatuses = currentUnit ? statusesMap.get(currentUnit.id) : undefined;
   const currentNaesinProgress = currentUnit ? (naesinProgressMap.get(currentUnit.id) ?? null) : null;
-  const currentNaesinStages = currentNaesinStatuses ? getNaesinStages(currentNaesinStatuses, currentNaesinProgress) : [];
+  const currentNaesinStages = currentNaesinStatuses ? getNaesinStagesSimple(currentNaesinStatuses, currentNaesinProgress) : [];
   const naesinCtaStage = currentNaesinStages.find((s) => s.status === 'active');
 
   // Naesin stats

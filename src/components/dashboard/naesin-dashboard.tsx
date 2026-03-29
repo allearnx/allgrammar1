@@ -7,25 +7,20 @@ import {
   ClipboardList,
   CalendarDays,
   ArrowRight,
-  Layers,
-  FileText,
-  Ruler,
-  PenLine,
-  RefreshCw,
 } from 'lucide-react';
 import { BRAND } from '@/lib/utils/brand-colors';
 import { calculateStageStatuses } from '@/lib/naesin/stage-unlock';
 import {
   getDDay,
   isNaesinUnitComplete,
-  mapNaesinStatus,
-  NAESIN_STAGE_KEYS,
-  NAESIN_STAGE_LABELS,
   computeNaesinStats,
+  getNaesinStagesForUnit,
 } from '@/lib/dashboard/naesin-helpers';
 import { MiniScoreTrend } from '@/components/charts/mini-score-trend';
 import { FlowStep } from './combined/flow-step';
 import { StatCard } from '@/components/shared/stat-card';
+import { UnitProgressList } from './naesin/unit-progress-list';
+import { ExamScopeList } from './naesin/exam-scope-list';
 import type {
   NaesinUnit,
   NaesinStudentProgress,
@@ -33,19 +28,6 @@ import type {
   NaesinContentAvailability,
   NaesinExamAssignment,
 } from '@/types/naesin';
-
-// ── Types ──
-
-interface Stage {
-  key: string;
-  label: string;
-  stageKey: string;
-  status: 'done' | 'active' | 'locked';
-  icon: React.ReactNode;
-  description: string;
-  scoreRequirement: string;
-  actualScore?: string;
-}
 
 interface Props {
   userName: string;
@@ -77,92 +59,6 @@ const COLORS = {
   progressDone: BRAND.progress.done,
   progressActive: BRAND.progress.active,
 };
-
-// ── Helpers ──
-
-const STAGE_META: Record<string, { icon: React.ReactNode; description: string; scoreRequirement: string }> = {
-  vocab: { icon: <BookOpen className="h-6 w-6" />, description: '교과서 단어를\n암기합니다', scoreRequirement: '퀴즈+스펠링 시작' },
-  passage: { icon: <FileText className="h-6 w-6" />, description: '교과서 지문을\n암기합니다', scoreRequirement: '지문 암기 완료' },
-  grammar: { icon: <Ruler className="h-6 w-6" />, description: '핵심 문법을\n학습합니다', scoreRequirement: '영상 시청 완료' },
-  problem: { icon: <PenLine className="h-6 w-6" />, description: '문제를 풀며\n실력 확인', scoreRequirement: '문제풀이 완료' },
-  lastReview: { icon: <RefreshCw className="h-6 w-6" />, description: '시험 직전\n최종 점검', scoreRequirement: '최종 점검 완료' },
-};
-
-
-function getVocabBadgeText(progress: NaesinStudentProgress | null): string {
-  if (!progress) return '퀴즈+스펠링 시작';
-  const q = progress.vocab_quiz_score;
-  const s = progress.vocab_spelling_score;
-  const qDone = q !== null && q !== undefined;
-  const sDone = s !== null && s !== undefined;
-  const qPass = qDone && q >= 80;
-  const sPass = sDone && s >= 80;
-
-  if (!qDone && !sDone) return '퀴즈+스펠링 시작';
-  if (qDone && !sDone) return qPass ? `퀴즈 ${q}점 ✓ · 스펠링 대기` : `퀴즈 ${q}점 · 재도전`;
-  if (qDone && sDone) {
-    if (qPass && sPass) return `퀴즈 ${q}점 · 스펠링 ${s}점 ✓`;
-    if (qPass && !sPass) return `퀴즈 ✓ · 스펠링 ${s}점 재도전`;
-    return `퀴즈 ${q}점 · 스펠링 ${s}점 재도전`;
-  }
-  return '퀴즈+스펠링 시작';
-}
-
-function getPassageBadgeText(progress: NaesinStudentProgress | null): string {
-  if (!progress) return '지문 암기 완료';
-  const fb = progress.passage_fill_blanks_best;
-  const tr = progress.passage_translation_best;
-  if (fb === null && tr === null) return '지문 암기 완료';
-  const parts: string[] = [];
-  if (fb !== null) parts.push(`빈칸 ${fb}점${fb >= 80 ? ' ✓' : ''}`);
-  if (tr !== null) parts.push(`영작 ${tr}점${tr >= 80 ? ' ✓' : ''}`);
-  return parts.join(' · ') || '지문 암기 완료';
-}
-
-function getGrammarBadgeText(progress: NaesinStudentProgress | null, videoCount: number): string {
-  if (!progress || videoCount === 0) return '영상 시청 완료';
-  const done = progress.grammar_videos_completed ?? 0;
-  if (done >= videoCount) return `${videoCount}개 영상 시청 ✓`;
-  if (done > 0) return `${done}/${videoCount} 영상 시청 중`;
-  return '영상 시청 완료';
-}
-
-function getStagesForUnit(
-  statuses: NaesinStageStatuses,
-  progress: NaesinStudentProgress | null,
-  grammarVideoCount?: number,
-): Stage[] {
-  const stages: Stage[] = [];
-  for (const key of NAESIN_STAGE_KEYS) {
-    const mapped = mapNaesinStatus(statuses[key]);
-    if (mapped === null) continue;
-    const meta = STAGE_META[key];
-
-    let actualScore: string | undefined;
-    let dynamicRequirement = meta.scoreRequirement;
-
-    if (mapped === 'done') {
-      actualScore = '완료 ✓';
-    } else {
-      if (key === 'vocab') dynamicRequirement = getVocabBadgeText(progress);
-      else if (key === 'passage') dynamicRequirement = getPassageBadgeText(progress);
-      else if (key === 'grammar') dynamicRequirement = getGrammarBadgeText(progress, grammarVideoCount ?? 0);
-    }
-
-    stages.push({
-      key,
-      label: NAESIN_STAGE_LABELS[key],
-      stageKey: key === 'lastReview' ? 'last-review' : key,
-      status: mapped,
-      icon: meta.icon,
-      description: meta.description,
-      scoreRequirement: dynamicRequirement,
-      actualScore,
-    });
-  }
-  return stages;
-}
-
 
 // ── Component ──
 
@@ -213,7 +109,7 @@ export function NaesinDashboard({
   const currentStatuses = currentUnit ? statusesMap.get(currentUnit.id) : undefined;
   const currentProgress = currentUnit ? (progressMap.get(currentUnit.id) ?? null) : null;
   const currentGrammarVideoCount = currentUnit ? (grammarVideoCounts[currentUnit.id] ?? 0) : 0;
-  const currentStages = currentStatuses ? getStagesForUnit(currentStatuses, currentProgress, currentGrammarVideoCount) : [];
+  const currentStages = currentStatuses ? getNaesinStagesForUnit(currentStatuses, currentProgress, currentGrammarVideoCount) : [];
   const ctaStage = currentStages.find((s) => s.status === 'active');
 
   // Stats
@@ -316,107 +212,18 @@ export function NaesinDashboard({
 
       {/* ── Bottom: Unit Progress + Exam Scope ── */}
       <div className="grid gap-6 lg:grid-cols-2">
-        {/* Unit Progress */}
-        <div className="rounded-2xl border bg-white p-5 md:p-6">
-          <h3 className="text-base font-bold mb-4 flex items-center gap-2">
-            <Layers className="h-4 w-4" />
-            단원 진행률
-          </h3>
-          <div className="space-y-3">
-            {sortedUnits.map((unit) => {
-              const s = statusesMap.get(unit.id);
-              if (!s) return null;
-              const done =
-                (s.vocab === 'completed' ? 1 : 0) +
-                (s.passage === 'completed' ? 1 : 0) +
-                (s.grammar === 'completed' ? 1 : 0) +
-                (s.problem === 'completed' ? 1 : 0);
-              const pct = Math.round((done / 4) * 100);
-              const isDone = isNaesinUnitComplete(s);
-              const isActive = currentUnit?.id === unit.id;
-
-              return (
-                <div key={unit.id}>
-                  <div className="flex items-center justify-between text-sm mb-1.5">
-                    <span className="font-medium truncate">{unit.title}</span>
-                    <span className="text-xs text-gray-400 shrink-0 ml-2">{done}/4</span>
-                  </div>
-                  <div className="h-2.5 w-full rounded-full bg-gray-200 overflow-hidden">
-                    <div
-                      className="h-full rounded-full transition-all"
-                      style={{
-                        width: `${pct}%`,
-                        background: isDone
-                          ? `linear-gradient(to right, ${COLORS.progressDone}, #4DD9C0)`
-                          : isActive
-                            ? COLORS.progressActive
-                            : '#D1D5DB',
-                      }}
-                    />
-                  </div>
-                </div>
-              );
-            })}
-            {sortedUnits.length === 0 && (
-              <p className="text-sm text-gray-500">등록된 단원이 없습니다.</p>
-            )}
-          </div>
-        </div>
-
-        {/* Exam Scope */}
-        <div className="rounded-2xl border bg-white p-5 md:p-6">
-          <h3 className="text-base font-bold mb-4 flex items-center gap-2">
-            <CalendarDays className="h-4 w-4" />
-            시험 범위
-          </h3>
-          <div className="space-y-3">
-            {examAssignments.length > 0 ? (
-              examAssignments
-                .sort((a, b) => a.exam_round - b.exam_round)
-                .map((ea) => {
-                  const dday = getDDay(ea.exam_date);
-                  const unitTitles = ea.unit_ids
-                    .map((uid) => units.find((u) => u.id === uid)?.title)
-                    .filter(Boolean);
-                  return (
-                    <div key={ea.id} className="rounded-xl border p-3.5">
-                      <div className="flex items-center justify-between mb-2">
-                        <span className="text-sm font-semibold">
-                          {ea.exam_label || `${ea.exam_round}차 시험`}
-                        </span>
-                        {dday !== null && dday >= 0 && (
-                          <span
-                            className={`inline-flex items-center rounded-full px-2 py-0.5 text-xs font-semibold ${
-                              dday <= 7 ? 'bg-rose-100 text-rose-700' : 'bg-gray-100 text-gray-600'
-                            }`}
-                          >
-                            {dday === 0 ? 'D-Day' : `D-${dday}`}
-                          </span>
-                        )}
-                        {ea.exam_date && dday !== null && dday < 0 && (
-                          <span className="inline-flex items-center rounded-full bg-gray-100 px-2 py-0.5 text-xs font-medium text-gray-500">완료</span>
-                        )}
-                      </div>
-                      {ea.exam_date && (
-                        <p className="text-xs text-gray-400 mb-1.5">
-                          {new Date(ea.exam_date).toLocaleDateString('ko-KR')}
-                        </p>
-                      )}
-                      <div className="flex flex-wrap gap-1.5">
-                        {unitTitles.map((title, i) => (
-                          <span key={i} className="inline-flex items-center rounded-full border px-2 py-0.5 text-xs text-gray-600" style={{ borderColor: COLORS.stepDone.border }}>
-                            {title}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  );
-                })
-            ) : (
-              <p className="text-sm text-gray-500">등록된 시험 범위가 없습니다.</p>
-            )}
-          </div>
-        </div>
+        <UnitProgressList
+          sortedUnits={sortedUnits}
+          statusesMap={statusesMap}
+          currentUnitId={currentUnit?.id}
+          progressDone={COLORS.progressDone}
+          progressActive={COLORS.progressActive}
+        />
+        <ExamScopeList
+          examAssignments={examAssignments}
+          units={units}
+          stepDoneBorder={COLORS.stepDone.border}
+        />
       </div>
     </div>
   );

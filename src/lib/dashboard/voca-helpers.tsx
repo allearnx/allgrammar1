@@ -142,3 +142,24 @@ export function computeVocaStats(
 
   return { r1CompletedStages, avgQuizScore, wrongWordEntries };
 }
+
+export function getCtaText(stage: VocaStage): { title: string; sub: string } {
+  switch (stage.key) {
+    case 'flashcard':
+      return { title: '플래시카드를 시작할 차례예요!', sub: '단어 카드를 확인하면 다음 단계로 진행돼요' };
+    case 'quiz':
+      return { title: '퀴즈를 시작할 차례예요!', sub: '플래시카드 완료 · 퀴즈 80점 이상이면 다음 단계로 진행돼요' };
+    case 'spelling':
+      return { title: '스펠링을 시작할 차례예요!', sub: '퀴즈 통과 · 스펠링 80점 이상이면 다음 단계로 진행돼요' };
+    case 'matching':
+      return { title: '매칭을 시작할 차례예요!', sub: '스펠링 통과 · 매칭 90점 이상이면 1회독이 완료돼요' };
+    case 'r2_flashcard':
+      return { title: '2회독 플래시카드를 시작하세요!', sub: '유의어·반의어·숙어를 학습해요' };
+    case 'r2_quiz':
+      return { title: '종합 문제를 시작할 차례예요!', sub: '플래시카드 완료 · 80점 이상이면 다음 단계로 진행돼요' };
+    case 'r2_matching':
+      return { title: '심화 매칭을 시작할 차례예요!', sub: '종합문제 통과 · 90점 이상이면 2회독이 완료돼요' };
+    default:
+      return { title: `${stage.label}을 시작하세요!`, sub: '' };
+  }
+}
