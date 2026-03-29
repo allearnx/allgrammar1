@@ -37,13 +37,18 @@ export async function getPlanContext(
       // Free tier 또는 구독 없음: service_assignments로 판단
       const { data: assignments } = await supabase
         .from('service_assignments')
-        .select('service')
+        .select('service, source')
         .eq('student_id', studentId);
 
-      const services = assignments?.map((a) => a.service) ?? [];
+      const services = assignments ?? [];
+      const hasPaidAssignment = services.some((a) => a.source === 'payment');
+
       if (services.length > 0) {
-        const freeService = services.includes('voca') ? 'voca' as const
-          : services.includes('naesin') ? 'naesin' as const
+        if (hasPaidAssignment) {
+          return { tier: 'paid', freeService: null };
+        }
+        const freeService = services.some((a) => a.service === 'voca') ? 'voca' as const
+          : services.some((a) => a.service === 'naesin') ? 'naesin' as const
           : null;
         return { tier: 'free', freeService };
       }
@@ -71,13 +76,16 @@ export async function getPlanContext(
   if (tier === 'free' && studentId) {
     const { data: studentAssignments } = await supabase
       .from('service_assignments')
-      .select('service')
+      .select('service, source')
       .eq('student_id', studentId);
 
-    const studentServices = studentAssignments?.map((a) => a.service) ?? [];
+    const studentServices = studentAssignments ?? [];
     if (studentServices.length > 0) {
-      const studentFreeService = studentServices.includes('voca') ? 'voca' as const
-        : studentServices.includes('naesin') ? 'naesin' as const
+      if (studentServices.some((a) => a.source === 'payment')) {
+        return { tier: 'paid', freeService: null };
+      }
+      const studentFreeService = studentServices.some((a) => a.service === 'voca') ? 'voca' as const
+        : studentServices.some((a) => a.service === 'naesin') ? 'naesin' as const
         : null;
       return { tier, freeService: studentFreeService };
     }
