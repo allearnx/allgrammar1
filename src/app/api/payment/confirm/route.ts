@@ -50,7 +50,7 @@ export const POST = createApiHandler(
         userId: user.id,
       });
       await cancelPayment(result.paymentKey, '결제 금액 불일치로 인한 자동 취소');
-      sendTelegram(
+      await sendTelegram(
         `🚨 결제 금액 위변조 감지\n\n클라이언트: ${amount}원\n토스: ${result.totalAmount}원\n유저: ${user.email}\n주문: ${orderId}\n\n→ 자동 취소 완료`
       );
       return NextResponse.json(
@@ -91,7 +91,7 @@ export const POST = createApiHandler(
         });
       }
 
-      sendTelegram(
+      await sendTelegram(
         `🚨 결제 긴급 알림\n\n주문 기록 저장 실패 → 토스 취소 시도\n주문: ${orderId}\n금액: ${result.totalAmount}원\n유저: ${user.email}\n에러: ${insertErr.message}`
       );
 
@@ -136,7 +136,7 @@ export const POST = createApiHandler(
           });
 
           // 돈은 받았으니 취소 안 함 — 수동 대응
-          sendTelegram(
+          await sendTelegram(
             `🚨 서비스 활성화 실패\n\n결제는 성공했으나 서비스 배정 실패\n주문: ${orderId}\n서비스: ${service}\n유저: ${user.email}\n에러: ${assignErr.message}\n\n👉 수동으로 서비스 배정 필요`
           );
         } else {
@@ -147,7 +147,7 @@ export const POST = createApiHandler(
 
     // ── 4. 결제 성공 텔레그램 알림 ──
     const serviceName = serviceActivated === 'voca' ? '올킬보카' : serviceActivated === 'naesin' ? '올인내신' : null;
-    sendTelegram(
+    await sendTelegram(
       [
         '💰 결제 완료',
         '',

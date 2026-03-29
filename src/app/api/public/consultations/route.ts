@@ -41,7 +41,7 @@ export async function POST(request: NextRequest) {
     // Send telegram (non-blocking)
     const gradeLabel = GRADE_OPTIONS.find((o) => o.value === grade)?.label || grade;
     const coursesText = courseNames.length > 0 ? courseNames.join(', ') : '미선택';
-    sendTelegram(
+    await sendTelegram(
       [
         '📩 새 상담 신청',
         '',

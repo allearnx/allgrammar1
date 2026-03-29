@@ -72,7 +72,7 @@ export const POST = createApiHandler(
         userId: user.id,
       });
       await cancelPayment(result.paymentKey, '결제 금액 불일치로 인한 자동 취소');
-      sendTelegram(
+      await sendTelegram(
         `🚨 업그레이드 금액 위변조 감지\n\n클라이언트: ${amount}원\n토스: ${result.totalAmount}원\n유저: ${user.email}\n주문: ${orderId}\n\n→ 자동 취소 완료`
       );
       return NextResponse.json(
@@ -104,7 +104,7 @@ export const POST = createApiHandler(
         error: subErr.message,
       });
       // 결제는 성공했으므로 취소하지 않고 수동 대응
-      sendTelegram(
+      await sendTelegram(
         `🚨 업그레이드 DB 오류\n\n구독 업데이트 실패\n구독ID: ${sub.id}\n유저: ${user.email}\n에러: ${subErr.message}\n\n결제는 완료됨 — 수동 처리 필요`
       );
       return NextResponse.json(
