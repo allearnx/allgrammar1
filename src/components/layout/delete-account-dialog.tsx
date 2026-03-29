@@ -23,6 +23,8 @@ interface DeleteAccountDialogProps {
   warning?: string;
 }
 
+const CONFIRM_TEXT = '삭제합니다';
+
 export function DeleteAccountDialog({
   apiEndpoint = '/api/student/delete-account',
   warning = '모든 학습 데이터가 영구 삭제됩니다.',
@@ -30,10 +32,12 @@ export function DeleteAccountDialog({
   const router = useRouter();
   const [open, setOpen] = useState(false);
   const [password, setPassword] = useState('');
+  const [confirmText, setConfirmText] = useState('');
   const [loading, setLoading] = useState(false);
 
   function reset() {
     setPassword('');
+    setConfirmText('');
   }
 
   async function handleSubmit(e: React.FormEvent) {
@@ -104,10 +108,22 @@ export function DeleteAccountDialog({
               autoComplete="current-password"
             />
           </div>
+          <div className="space-y-2">
+            <Label htmlFor="delete-confirm">
+              확인을 위해 <span className="font-bold text-red-600">{CONFIRM_TEXT}</span>를 입력하세요
+            </Label>
+            <Input
+              id="delete-confirm"
+              value={confirmText}
+              onChange={(e) => setConfirmText(e.target.value)}
+              placeholder={CONFIRM_TEXT}
+              autoComplete="off"
+            />
+          </div>
           <DialogFooter>
             <Button
               type="submit"
-              disabled={loading}
+              disabled={loading || confirmText !== CONFIRM_TEXT}
               variant="destructive"
               className="w-full"
             >

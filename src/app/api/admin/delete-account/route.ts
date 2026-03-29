@@ -34,16 +34,18 @@ export const POST = createApiHandler(
 
     // 2. 학원에 소속된 다른 회원 확인 (adminClient로 RLS 우회)
     if (user.academy_id) {
-      const { count } = await adminClient
+      const { data: members, count } = await adminClient
         .from('users')
-        .select('id', { count: 'exact', head: true })
+        .select('id, name, email, role', { count: 'exact' })
         .eq('academy_id', user.academy_id)
         .eq('is_active', true)
-        .neq('id', user.id);
+        .neq('id', user.id)
+        .limit(5);
 
       if (count && count > 0) {
+        const names = (members || []).map((m) => `${m.name || m.email} (${m.role})`).join(', ');
         return NextResponse.json(
-          { error: `학원에 ${count}명의 회원이 있습니다. 먼저 모든 회원을 제거한 후 탈퇴해주세요.` },
+          { error: `학원에 ${count}명의 회원이 있습니다: ${names}. 먼저 모든 회원을 제거한 후 탈퇴해주세요.` },
           { status: 400 },
         );
       }
