@@ -20,6 +20,7 @@ export interface ExamGroup {
 export interface BuildContext {
   vocabUnitIds: Set<string>;
   passageUnitIds: Set<string>;
+  dialogueUnitIds: Set<string>;
   grammarByUnit: Record<string, { content_type: string }[]>;
   problemUnitIds: Set<string>;
   lastReviewSheetUnitIds: Set<string>;
@@ -110,6 +111,7 @@ export function buildUnitSummary(
     content: {
       hasVocab: ctx.vocabUnitIds.has(u.id),
       hasPassage: ctx.passageUnitIds.has(u.id),
+      hasDialogue: ctx.dialogueUnitIds.has(u.id),
       hasGrammar: unitGrammar.length > 0,
       hasProblem: ctx.problemUnitIds.has(u.id),
       hasLastReview: hasLastReviewContent || !!effectiveExamDate,

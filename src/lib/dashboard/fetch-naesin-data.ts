@@ -82,10 +82,11 @@ export async function fetchNaesinDashboardData(
   const grammarVideoCounts: Record<string, number> = {};
 
   if (unitIds.length > 0) {
-    const [vocabRes, passageRes, grammarRes, problemRes, lastReviewRes, quizSetRes, similarRes] =
+    const [vocabRes, passageRes, dialogueRes, grammarRes, problemRes, lastReviewRes, quizSetRes, similarRes] =
       await Promise.all([
         supabase.from('naesin_vocabulary').select('unit_id').in('unit_id', unitIds),
         supabase.from('naesin_passages').select('unit_id').in('unit_id', unitIds),
+        supabase.from('naesin_dialogues').select('unit_id').in('unit_id', unitIds),
         supabase.from('naesin_grammar_lessons').select('unit_id, content_type').in('unit_id', unitIds),
         supabase.from('naesin_problem_sheets').select('unit_id').in('unit_id', unitIds).eq('category', 'problem'),
         supabase.from('naesin_last_review_content').select('unit_id').in('unit_id', unitIds),
@@ -95,6 +96,7 @@ export async function fetchNaesinDashboardData(
 
     const vocabUnits = new Set((vocabRes.data || []).map((r: { unit_id: string }) => r.unit_id));
     const passageUnits = new Set((passageRes.data || []).map((r: { unit_id: string }) => r.unit_id));
+    const dialogueUnits = new Set((dialogueRes.data || []).map((r: { unit_id: string }) => r.unit_id));
     const grammarUnits = new Set((grammarRes.data || []).map((r: { unit_id: string }) => r.unit_id));
     const problemUnits = new Set((problemRes.data || []).map((r: { unit_id: string }) => r.unit_id));
     const lastReviewUnits = new Set((lastReviewRes.data || []).map((r: { unit_id: string }) => r.unit_id));
@@ -113,6 +115,7 @@ export async function fetchNaesinDashboardData(
       contentMap[uid] = {
         hasVocab: vocabUnits.has(uid),
         hasPassage: passageUnits.has(uid),
+        hasDialogue: dialogueUnits.has(uid),
         hasGrammar: grammarUnits.has(uid),
         hasProblem: problemUnits.has(uid),
         hasLastReview: lastReviewUnits.has(uid) || similarUnits.has(uid),

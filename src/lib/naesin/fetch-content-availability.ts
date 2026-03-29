@@ -22,6 +22,7 @@ export async function fetchContentAvailability(
     progressRes,
     vocabCountRes,
     passageCountRes,
+    dialogueCountRes,
     grammarRes,
     problemCountRes,
     lastReviewSheetCountRes,
@@ -33,6 +34,7 @@ export async function fetchContentAvailability(
     supabase.from('naesin_student_progress').select('*').eq('student_id', userId).eq('unit_id', unitId).single(),
     supabase.from('naesin_vocabulary').select('id', { count: 'exact', head: true }).eq('unit_id', unitId),
     supabase.from('naesin_passages').select('id', { count: 'exact', head: true }).eq('unit_id', unitId),
+    supabase.from('naesin_dialogues').select('id', { count: 'exact', head: true }).eq('unit_id', unitId),
     supabase.from('naesin_grammar_lessons').select('id, content_type').eq('unit_id', unitId),
     supabase.from('naesin_problem_sheets').select('id', { count: 'exact', head: true }).eq('unit_id', unitId).eq('category', 'problem'),
     supabase.from('naesin_problem_sheets').select('id', { count: 'exact', head: true }).eq('unit_id', unitId).eq('category', 'last_review'),
@@ -57,6 +59,7 @@ export async function fetchContentAvailability(
     contentAvailability: {
       hasVocab: (vocabCountRes.count ?? 0) > 0,
       hasPassage: (passageCountRes.count ?? 0) > 0,
+      hasDialogue: (dialogueCountRes.count ?? 0) > 0,
       hasGrammar: grammarLessonsAll.length > 0,
       hasProblem: (problemCountRes.count ?? 0) > 0,
       hasLastReview: hasLastReviewContent || !!examDate,

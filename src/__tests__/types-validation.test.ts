@@ -14,15 +14,17 @@ import type {
 
 describe('타입 검증 (컴파일 타임 + 런타임 구조 확인)', () => {
   describe('NaesinStageStatuses', () => {
-    it('5단계 key를 가진다 (vocab, passage, grammar, problem, lastReview)', () => {
+    it('6단계 key를 가진다 (vocab, passage, dialogue, grammar, problem, lastReview)', () => {
       const statuses: NaesinStageStatuses = {
         vocab: 'available',
         passage: 'locked',
+        dialogue: 'locked',
         grammar: 'locked',
         problem: 'locked',
         lastReview: 'locked',
       };
       expect(statuses.vocab).toBe('available');
+      expect(statuses.dialogue).toBe('locked');
       expect(statuses.problem).toBe('locked');
       expect(statuses.lastReview).toBe('locked');
     });
@@ -31,6 +33,7 @@ describe('타입 검증 (컴파일 타임 + 런타임 구조 확인)', () => {
       const statuses: NaesinStageStatuses = {
         vocab: 'completed',
         passage: 'completed',
+        dialogue: 'completed',
         grammar: 'completed',
         problem: 'completed',
         lastReview: 'available',
@@ -41,14 +44,16 @@ describe('타입 검증 (컴파일 타임 + 런타임 구조 확인)', () => {
   });
 
   describe('NaesinContentAvailability', () => {
-    it('hasProblem, hasLastReview 포함', () => {
+    it('hasProblem, hasLastReview, hasDialogue 포함', () => {
       const content: NaesinContentAvailability = {
         hasVocab: true,
         hasPassage: true,
+        hasDialogue: false,
         hasGrammar: true,
         hasProblem: false,
         hasLastReview: false,
       };
+      expect(content.hasDialogue).toBe(false);
       expect(content.hasProblem).toBe(false);
       expect(content.hasLastReview).toBe(false);
     });

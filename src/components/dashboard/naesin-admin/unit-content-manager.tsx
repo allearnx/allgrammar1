@@ -5,6 +5,7 @@ import { Badge } from '@/components/ui/badge';
 import {
   BookOpen,
   FileText,
+  MessageSquare,
   GraduationCap,
   ClipboardList,
   ChevronDown,
@@ -17,7 +18,7 @@ import type { NaesinVocabulary, NaesinGrammarLesson, NaesinPassage } from '@/typ
 import type { NaesinProblemSheet } from '@/types/naesin';
 import { ConfirmDialog } from '@/components/shared/confirm-dialog';
 import { AddVocabDialog, BulkVocabUpload, PdfVocabExtract } from './vocab-dialogs';
-import { AddPassageDialog, AddGrammarDialog, AddOmrDialog, AddProblemDialog, AddLastReviewDialog, BulkOmrUploadDialog, BulkProblemUploadDialog, PdfProblemExtractDialog } from './content-dialogs';
+import { AddPassageDialog, AddDialogueDialog, AddGrammarDialog, AddOmrDialog, AddProblemDialog, AddLastReviewDialog, BulkOmrUploadDialog, BulkProblemUploadDialog, PdfProblemExtractDialog } from './content-dialogs';
 import { VocabQuizSetManager } from './quiz-set-manager';
 import { useListCrud } from '@/hooks/use-list-crud';
 import { useInlineEdit } from '@/hooks/use-inline-edit';
@@ -135,6 +136,7 @@ export function UnitContentManager({ unitId }: { unitId: string }) {
     }),
   );
 
+  const [dialogueCount, setDialogueCount] = useState<number | null>(null);
   const [omrCount, setOmrCount] = useState<number | null>(null);
   const [lastReviewCount, setLastReviewCount] = useState<number | null>(null);
   const [regeneratingGV, setRegeneratingGV] = useState<string | null>(null);
@@ -143,9 +145,10 @@ export function UnitContentManager({ unitId }: { unitId: string }) {
     try {
       const { createClient } = await import('@/lib/supabase/client');
       const supabase = createClient();
-      const [v, p, g, o, prob, lr] = await Promise.all([
+      const [v, p, dlg, g, o, prob, lr] = await Promise.all([
         supabase.from('naesin_vocabulary').select('*').eq('unit_id', unitId).order('sort_order'),
         supabase.from('naesin_passages').select('*').eq('unit_id', unitId).order('created_at'),
+        supabase.from('naesin_dialogues').select('*', { count: 'exact', head: true }).eq('unit_id', unitId),
         supabase.from('naesin_grammar_lessons').select('*').eq('unit_id', unitId).order('sort_order'),
         supabase.from('naesin_omr_sheets').select('*', { count: 'exact', head: true }).eq('unit_id', unitId),
         supabase.from('naesin_problem_sheets').select('*').eq('unit_id', unitId).eq('category', 'problem').order('created_at'),
@@ -153,6 +156,7 @@ export function UnitContentManager({ unitId }: { unitId: string }) {
       ]);
       vocab.setItems((v.data as NaesinVocabulary[]) || []);
       setPassageList((p.data as NaesinPassage[]) || []);
+      setDialogueCount(dlg.count ?? 0);
       setGrammarList((g.data as NaesinGrammarLesson[]) || []);
       setOmrCount(o.count ?? 0);
       setProblemList((prob.data as NaesinProblemSheet[]) || []);
@@ -203,6 +207,7 @@ export function UnitContentManager({ unitId }: { unitId: string }) {
   const sections = [
     { label: '단어', icon: BookOpen, count: vocab.items.length, color: 'text-blue-500', toggle: () => setShowVocabList(!showVocabList), expanded: showVocabList },
     { label: '교과서 지문', icon: FileText, count: passageList.length, color: 'text-orange-500', toggle: () => setShowPassageList(!showPassageList), expanded: showPassageList },
+    { label: '대화문', icon: MessageSquare, count: dialogueCount, color: 'text-violet-500' },
     { label: '문법 설명', icon: GraduationCap, count: grammarList.length, color: 'text-green-500', toggle: () => setShowGrammarList(!showGrammarList), expanded: showGrammarList },
     { label: 'OMR 시트', icon: ClipboardList, count: omrCount, color: 'text-indigo-500' },
     { label: '문제풀이', icon: ClipboardList, count: problemList.length, color: 'text-red-500', toggle: () => setShowProblemList(!showProblemList), expanded: showProblemList },
@@ -286,6 +291,7 @@ export function UnitContentManager({ unitId }: { unitId: string }) {
         <BulkVocabUpload module="naesin" parentId={unitId} onAdd={loadCounts} />
         <PdfVocabExtract module="naesin" parentId={unitId} onAdd={loadCounts} />
         <AddPassageDialog unitId={unitId} onAdd={loadCounts} />
+        <AddDialogueDialog unitId={unitId} onAdd={loadCounts} />
         <AddGrammarDialog unitId={unitId} onAdd={loadCounts} />
         <AddOmrDialog unitId={unitId} onAdd={loadCounts} />
         <AddProblemDialog unitId={unitId} onAdd={loadCounts} />

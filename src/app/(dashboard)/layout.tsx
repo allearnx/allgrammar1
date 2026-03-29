@@ -79,7 +79,7 @@ async function fetchNaesinTree(
   if (!setting?.textbook_id) return undefined;
 
   // Fetch assignments, units, and progress in parallel
-  const [assignmentsRes, unitsRes, progressRes, vocabRes, passageRes, grammarRes, problemRes, lastReviewSheetRes, similarRes, reviewContentRes, quizSetsRes] = await Promise.all([
+  const [assignmentsRes, unitsRes, progressRes, vocabRes, passageRes, dialogueRes, grammarRes, problemRes, lastReviewSheetRes, similarRes, reviewContentRes, quizSetsRes] = await Promise.all([
     supabase
       .from('naesin_exam_assignments')
       .select('*')
@@ -101,6 +101,9 @@ async function fetchNaesinTree(
       .select('unit_id'),
     supabase
       .from('naesin_passages')
+      .select('unit_id'),
+    supabase
+      .from('naesin_dialogues')
       .select('unit_id'),
     supabase
       .from('naesin_grammar_lessons')
@@ -134,6 +137,7 @@ async function fetchNaesinTree(
   const progressMap = new Map((progressRes.data || []).map((p) => [p.unit_id, p]));
   const vocabUnitIds = new Set((vocabRes.data || []).map((r) => r.unit_id));
   const passageUnitIds = new Set((passageRes.data || []).map((r) => r.unit_id));
+  const dialogueUnitIds = new Set((dialogueRes.data || []).map((r) => r.unit_id));
   const grammarByUnit = groupBy(grammarRes.data || [], 'unit_id');
   const problemUnitIds = new Set((problemRes.data || []).map((r) => r.unit_id));
   const lastReviewSheetUnitIds = new Set((lastReviewSheetRes.data || []).map((r) => r.unit_id));
@@ -160,6 +164,7 @@ async function fetchNaesinTree(
           content: {
             hasVocab: vocabUnitIds.has(u!.id),
             hasPassage: passageUnitIds.has(u!.id),
+            hasDialogue: dialogueUnitIds.has(u!.id),
             hasGrammar: unitGrammar.length > 0,
             hasProblem: problemUnitIds.has(u!.id),
             hasLastReview: hasLastReview || !!a.exam_date,

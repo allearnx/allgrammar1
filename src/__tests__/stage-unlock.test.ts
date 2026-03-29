@@ -22,6 +22,8 @@ function makeProgress(overrides: Partial<NaesinStudentProgress> = {}): NaesinStu
     vocab_total_quiz_sets: 0,
     passage_translation_best: null,
     passage_grammar_vocab_best: null,
+    dialogue_translation_best: null,
+    dialogue_completed: false,
     grammar_videos_completed: 0,
     grammar_total_videos: 0,
     problem_completed: false,
@@ -36,6 +38,7 @@ function makeContent(overrides: Partial<NaesinContentAvailability> = {}): Naesin
   return {
     hasVocab: true,
     hasPassage: true,
+    hasDialogue: true,
     hasGrammar: true,
     hasProblem: true,
     hasLastReview: true,
@@ -60,6 +63,7 @@ describe('calculateStageStatuses', () => {
       const result = calculateStageStatuses(makeInput());
       expect(result.vocab).toBe('available');
       expect(result.passage).toBe('locked');
+      expect(result.dialogue).toBe('locked');
       expect(result.grammar).toBe('locked');
       expect(result.problem).toBe('locked');
       expect(result.lastReview).toBe('locked');
@@ -71,25 +75,39 @@ describe('calculateStageStatuses', () => {
       }));
       expect(result.vocab).toBe('completed');
       expect(result.passage).toBe('available');
+      expect(result.dialogue).toBe('locked');
       expect(result.grammar).toBe('locked');
     });
 
-    it('vocab+passage 완료 → grammar available', () => {
+    it('vocab+passage 완료 → dialogue available', () => {
       const result = calculateStageStatuses(makeInput({
         progress: makeProgress({
           vocab_completed: true,
           passage_completed: true,
         }),
       }));
-      expect(result.grammar).toBe('available');
-      expect(result.problem).toBe('locked');
+      expect(result.dialogue).toBe('available');
+      expect(result.grammar).toBe('locked');
     });
 
-    it('vocab+passage+grammar 완료 → problem available', () => {
+    it('vocab+passage+dialogue 완료 → grammar available', () => {
       const result = calculateStageStatuses(makeInput({
         progress: makeProgress({
           vocab_completed: true,
           passage_completed: true,
+          dialogue_completed: true,
+        }),
+      }));
+      expect(result.grammar).toBe('available');
+      expect(result.problem).toBe('locked');
+    });
+
+    it('vocab+passage+dialogue+grammar 완료 → problem available', () => {
+      const result = calculateStageStatuses(makeInput({
+        progress: makeProgress({
+          vocab_completed: true,
+          passage_completed: true,
+          dialogue_completed: true,
           grammar_completed: true,
         }),
       }));
@@ -102,12 +120,14 @@ describe('calculateStageStatuses', () => {
         progress: makeProgress({
           vocab_completed: true,
           passage_completed: true,
+          dialogue_completed: true,
           grammar_completed: true,
           problem_completed: true,
         }),
       }));
       expect(result.vocab).toBe('completed');
       expect(result.passage).toBe('completed');
+      expect(result.dialogue).toBe('completed');
       expect(result.grammar).toBe('completed');
       expect(result.problem).toBe('completed');
       // lastReview는 D-3 이내여야 available
@@ -124,12 +144,13 @@ describe('calculateStageStatuses', () => {
       expect(result.passage).toBe('available');
     });
 
-    it('vocab+passage 콘텐츠 없으면 → grammar available', () => {
+    it('vocab+passage+dialogue 콘텐츠 없으면 → grammar available', () => {
       const result = calculateStageStatuses(makeInput({
-        content: makeContent({ hasVocab: false, hasPassage: false }),
+        content: makeContent({ hasVocab: false, hasPassage: false, hasDialogue: false }),
       }));
       expect(result.vocab).toBe('completed');
       expect(result.passage).toBe('completed');
+      expect(result.dialogue).toBe('completed');
       expect(result.grammar).toBe('available');
     });
 
@@ -138,6 +159,7 @@ describe('calculateStageStatuses', () => {
         content: makeContent({
           hasVocab: false,
           hasPassage: false,
+          hasDialogue: false,
           hasGrammar: false,
           hasProblem: false,
           hasLastReview: false,
@@ -145,6 +167,7 @@ describe('calculateStageStatuses', () => {
       }));
       expect(result.vocab).toBe('completed');
       expect(result.passage).toBe('completed');
+      expect(result.dialogue).toBe('completed');
       expect(result.grammar).toBe('completed');
       expect(result.problem).toBe('completed');
       expect(result.lastReview).toBe('locked');
@@ -225,6 +248,7 @@ describe('calculateStageStatuses', () => {
         progress: makeProgress({
           vocab_completed: true,
           passage_completed: true,
+          dialogue_completed: true,
           grammar_videos_completed: 3,
           grammar_total_videos: 3,
         }),
@@ -238,6 +262,7 @@ describe('calculateStageStatuses', () => {
         progress: makeProgress({
           vocab_completed: true,
           passage_completed: true,
+          dialogue_completed: true,
           grammar_videos_completed: 2,
           grammar_total_videos: 3,
         }),
@@ -251,6 +276,7 @@ describe('calculateStageStatuses', () => {
         progress: makeProgress({
           vocab_completed: true,
           passage_completed: true,
+          dialogue_completed: true,
           grammar_completed: true,
         }),
         grammarVideoCount: 0,
@@ -340,6 +366,7 @@ describe('calculateStageStatuses', () => {
       const content: NaesinContentAvailability = {
         hasVocab: true,
         hasPassage: true,
+        hasDialogue: false,
         hasGrammar: false,
         hasProblem: false,
         hasLastReview: false,
@@ -347,6 +374,7 @@ describe('calculateStageStatuses', () => {
       const result = calculateStageStatuses(progress, content);
       expect(result.vocab).toBe('completed');
       expect(result.passage).toBe('available');
+      expect(result.dialogue).toBe('completed'); // no content
       expect(result.grammar).toBe('completed'); // no content
       expect(result.problem).toBe('completed'); // no content
       expect(result.lastReview).toBe('locked');
@@ -356,6 +384,7 @@ describe('calculateStageStatuses', () => {
       const content: NaesinContentAvailability = {
         hasVocab: true,
         hasPassage: false,
+        hasDialogue: false,
         hasGrammar: false,
         hasProblem: false,
         hasLastReview: false,
@@ -363,6 +392,7 @@ describe('calculateStageStatuses', () => {
       const result = calculateStageStatuses(null, content);
       expect(result.vocab).toBe('available');
       expect(result.passage).toBe('completed');
+      expect(result.dialogue).toBe('completed');
     });
   });
 });

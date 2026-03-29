@@ -9,6 +9,7 @@ import {
   Crown,
   BookOpen,
   FileText,
+  MessageSquare,
   GraduationCap,
   ClipboardList,
   Brain,
@@ -23,6 +24,7 @@ import {
 import { VocabTab } from '@/components/naesin/vocab-tab';
 import { PassageTab } from '@/components/naesin/passage-tab';
 import { GrammarTab } from '@/components/naesin/grammar-tab';
+import { DialogueTab } from '@/components/naesin/dialogue-tab';
 import { ProblemTab } from '@/components/naesin/problem-tab';
 import { LastReviewTab } from '@/components/naesin/last-review-tab';
 import type {
@@ -37,14 +39,16 @@ import type {
   NaesinSimilarProblem,
   NaesinLastReviewContent,
 } from '@/types/database';
+import type { NaesinDialogue } from '@/types/naesin';
 import Link from 'next/link';
 
-type StageKey = 'vocab' | 'passage' | 'grammar' | 'problem' | 'lastReview';
+type StageKey = 'vocab' | 'passage' | 'dialogue' | 'grammar' | 'problem' | 'lastReview';
 
 const STAGE_CONFIG = [
   { key: 'vocab' as const, label: '단어 암기', shortLabel: '단어', icon: BookOpen, unlockHint: null },
   { key: 'passage' as const, label: '교과서 암기', shortLabel: '교과서', icon: FileText, unlockHint: '단어 암기 80% 이상 달성 시 해금' },
-  { key: 'grammar' as const, label: '문법 설명', shortLabel: '문법', icon: GraduationCap, unlockHint: '교과서 암기 80% 이상 달성 시 해금' },
+  { key: 'dialogue' as const, label: '대화문 암기', shortLabel: '대화문', icon: MessageSquare, unlockHint: '교과서 암기 80% 이상 달성 시 해금' },
+  { key: 'grammar' as const, label: '문법 설명', shortLabel: '문법', icon: GraduationCap, unlockHint: '대화문 암기 완료 시 해금' },
   { key: 'problem' as const, label: '문제풀이', shortLabel: '문제', icon: ClipboardList, unlockHint: '문법 설명 완료 시 해금' },
   { key: 'lastReview' as const, label: '직전보강', shortLabel: '보강', icon: Brain, unlockHint: '시험 D-3일 전 자동 해금' },
 ];
@@ -65,6 +69,8 @@ interface StageData {
   passages?: NaesinPassage[];
   passageRequiredStages?: string[];
   translationSentencesPerPage?: number;
+  // dialogue
+  dialogues?: NaesinDialogue[];
   // grammar
   grammarLessons?: NaesinGrammarLesson[];
   videoProgress?: NaesinGrammarVideoProgress[];
@@ -199,6 +205,13 @@ export function NaesinStageView({
                 onStageComplete={handleStageComplete}
                 requiredStages={stageData.passageRequiredStages}
                 translationSentencesPerPage={stageData.translationSentencesPerPage}
+              />
+            )}
+            {currentStage === 'dialogue' && (
+              <DialogueTab
+                dialogues={stageData.dialogues || []}
+                unitId={unit.id}
+                onStageComplete={handleStageComplete}
               />
             )}
             {currentStage === 'grammar' && (

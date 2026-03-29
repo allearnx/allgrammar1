@@ -73,6 +73,7 @@ export default async function NaesinPage() {
       const [
         vocabCountRes,
         passageCountRes,
+        dialogueCountRes,
         grammarCountRes,
         problemCountRes,
         lastReviewSheetCountRes,
@@ -83,6 +84,7 @@ export default async function NaesinPage() {
       ] = await Promise.all([
         supabase.from('naesin_vocabulary').select('unit_id').in('unit_id', unitIds),
         supabase.from('naesin_passages').select('unit_id').in('unit_id', unitIds),
+        supabase.from('naesin_dialogues').select('unit_id').in('unit_id', unitIds),
         supabase.from('naesin_grammar_lessons').select('id, unit_id, content_type').in('unit_id', unitIds),
         supabase.from('naesin_problem_sheets').select('unit_id').eq('category', 'problem').in('unit_id', unitIds),
         supabase.from('naesin_problem_sheets').select('unit_id').eq('category', 'last_review').in('unit_id', unitIds),
@@ -96,6 +98,7 @@ export default async function NaesinPage() {
       const ctx = {
         vocabUnitIds: new Set((vocabCountRes.data || []).map((r) => r.unit_id)),
         passageUnitIds: new Set((passageCountRes.data || []).map((r) => r.unit_id)),
+        dialogueUnitIds: new Set((dialogueCountRes.data || []).map((r) => r.unit_id)),
         grammarByUnit: groupBy(grammarCountRes.data || [], 'unit_id'),
         problemUnitIds: new Set((problemCountRes.data || []).map((r) => r.unit_id)),
         lastReviewSheetUnitIds: new Set((lastReviewSheetCountRes.data || []).map((r) => r.unit_id)),

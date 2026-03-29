@@ -57,38 +57,38 @@ describe('canUseFeature', () => {
 });
 
 describe('getAllowedNaesinStages', () => {
-  it('paid → all 5 stages', () => {
+  it('paid → all 6 stages', () => {
     expect(getAllowedNaesinStages('paid')).toEqual([
-      'vocab', 'passage', 'grammar', 'problem', 'lastReview',
+      'vocab', 'passage', 'dialogue', 'grammar', 'problem', 'lastReview',
     ]);
   });
 
-  it('trialing → all 5 stages', () => {
+  it('trialing → all 6 stages', () => {
     expect(getAllowedNaesinStages('trialing')).toEqual([
-      'vocab', 'passage', 'grammar', 'problem', 'lastReview',
+      'vocab', 'passage', 'dialogue', 'grammar', 'problem', 'lastReview',
     ]);
   });
 
-  it('free → only vocab + passage', () => {
-    expect(getAllowedNaesinStages('free')).toEqual(['vocab', 'passage']);
+  it('free → only vocab + passage + dialogue', () => {
+    expect(getAllowedNaesinStages('free')).toEqual(['vocab', 'passage', 'dialogue']);
   });
 });
 
 describe('mergeEnabledStages', () => {
   it('free + no teacher stages → plan stages only', () => {
-    expect(mergeEnabledStages('free', null)).toEqual(['vocab', 'passage']);
-    expect(mergeEnabledStages('free', undefined)).toEqual(['vocab', 'passage']);
+    expect(mergeEnabledStages('free', null)).toEqual(['vocab', 'passage', 'dialogue']);
+    expect(mergeEnabledStages('free', undefined)).toEqual(['vocab', 'passage', 'dialogue']);
   });
 
   it('paid + no teacher stages → all stages', () => {
     expect(mergeEnabledStages('paid', null)).toEqual([
-      'vocab', 'passage', 'grammar', 'problem', 'lastReview',
+      'vocab', 'passage', 'dialogue', 'grammar', 'problem', 'lastReview',
     ]);
   });
 
-  it('free + teacher enables all → intersection with plan (vocab+passage only)', () => {
-    const teacherAll = ['vocab', 'passage', 'grammar', 'problem', 'lastReview'];
-    expect(mergeEnabledStages('free', teacherAll)).toEqual(['vocab', 'passage']);
+  it('free + teacher enables all → intersection with plan (vocab+passage+dialogue only)', () => {
+    const teacherAll = ['vocab', 'passage', 'dialogue', 'grammar', 'problem', 'lastReview'];
+    expect(mergeEnabledStages('free', teacherAll)).toEqual(['vocab', 'passage', 'dialogue']);
   });
 
   it('paid + teacher restricts to vocab only → vocab only', () => {

@@ -24,9 +24,10 @@ export function UnitProgressList({ sortedUnits, statusesMap, currentUnitId, prog
           const done =
             (s.vocab === 'completed' ? 1 : 0) +
             (s.passage === 'completed' ? 1 : 0) +
+            (s.dialogue === 'completed' ? 1 : 0) +
             (s.grammar === 'completed' ? 1 : 0) +
             (s.problem === 'completed' ? 1 : 0);
-          const pct = Math.round((done / 4) * 100);
+          const pct = Math.round((done / 5) * 100);
           const isDone = isNaesinUnitComplete(s);
           const isActive = currentUnitId === unit.id;
 
@@ -34,7 +35,7 @@ export function UnitProgressList({ sortedUnits, statusesMap, currentUnitId, prog
             <div key={unit.id}>
               <div className="flex items-center justify-between text-sm mb-1.5">
                 <span className="font-medium truncate">{unit.title}</span>
-                <span className="text-xs text-gray-400 shrink-0 ml-2">{done}/4</span>
+                <span className="text-xs text-gray-400 shrink-0 ml-2">{done}/5</span>
               </div>
               <div className="h-2.5 w-full rounded-full bg-gray-200 overflow-hidden">
                 <div

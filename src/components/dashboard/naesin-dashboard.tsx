@@ -84,7 +84,7 @@ export function NaesinDashboard({
   for (const unit of sortedUnits) {
     const progress = progressMap.get(unit.id) ?? null;
     const content = contentMap[unit.id] ?? {
-      hasVocab: false, hasPassage: false, hasGrammar: false, hasProblem: false, hasLastReview: false,
+      hasVocab: false, hasPassage: false, hasDialogue: false, hasGrammar: false, hasProblem: false, hasLastReview: false,
     };
     const assignment = examAssignments.find((a) => a.unit_ids.includes(unit.id));
     const examDate = assignment?.exam_date ?? null;
@@ -150,7 +150,7 @@ export function NaesinDashboard({
 
       {/* ── Stat Cards ── */}
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        <StatCard label="완료 단계" value={completedStages} sub={`전체 ${sortedUnits.length * 4}단계 중`} color={COLORS.statMint} icon={<CheckCircle className="h-5 w-5" />} />
+        <StatCard label="완료 단계" value={completedStages} sub={`전체 ${sortedUnits.length * 5}단계 중`} color={COLORS.statMint} icon={<CheckCircle className="h-5 w-5" />} />
         <StatCard label="완료 단원" value={completedUnits} sub={`전체 ${sortedUnits.length}단원 중`} color={COLORS.statPurple} icon={<BookOpen className="h-5 w-5" />} />
         <StatCard label="단어 평균" value={avgVocabScore > 0 ? `${avgVocabScore}점` : '-'} sub="퀴즈 + 스펠링 평균" color={COLORS.statAmber} icon={<ClipboardList className="h-5 w-5" />} />
         <StatCard label="시험 D-day" value={nearestDDay !== null ? (nearestDDay === 0 ? 'D-Day' : `D-${nearestDDay}`) : '-'} sub={nearestDDay !== null ? '가장 가까운 시험' : '시험 일정 없음'} color={COLORS.statSky} icon={<CalendarDays className="h-5 w-5" />} />

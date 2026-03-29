@@ -2,7 +2,7 @@ import type { createClient } from '@/lib/supabase/server';
 import type { NaesinStudentProgress } from '@/types/naesin';
 
 type SupabaseClient = Awaited<ReturnType<typeof createClient>>;
-type StageKey = 'vocab' | 'passage' | 'grammar' | 'problem' | 'lastReview';
+type StageKey = 'vocab' | 'passage' | 'dialogue' | 'grammar' | 'problem' | 'lastReview';
 
 export async function fetchStageData(
   supabase: SupabaseClient,
@@ -17,6 +17,8 @@ export async function fetchStageData(
       return fetchVocabData(supabase, userId, unitId, quizSetIds, progress);
     case 'passage':
       return fetchPassageData(supabase, userId, unitId);
+    case 'dialogue':
+      return fetchDialogueData(supabase, unitId);
     case 'grammar':
       return fetchGrammarData(supabase, userId, unitId);
     case 'problem':
@@ -69,6 +71,15 @@ async function fetchPassageData(supabase: SupabaseClient, userId: string, unitId
     passageRequiredStages: (settingsRes.data?.passage_required_stages as string[] | null) ?? ['fill_blanks', 'translation'],
     translationSentencesPerPage: (settingsRes.data?.translation_sentences_per_page as number | null) ?? 10,
   };
+}
+
+async function fetchDialogueData(supabase: SupabaseClient, unitId: string) {
+  const dialogueRes = await supabase
+    .from('naesin_dialogues')
+    .select('*')
+    .eq('unit_id', unitId)
+    .order('sort_order');
+  return { dialogues: dialogueRes.data || [] };
 }
 
 async function fetchGrammarData(supabase: SupabaseClient, userId: string, unitId: string) {

@@ -9,7 +9,7 @@ import { mergeEnabledStages } from '@/lib/billing/feature-gate';
 import { fetchContentAvailability } from '@/lib/naesin/fetch-content-availability';
 import { fetchStageData } from '@/lib/naesin/fetch-stage-data';
 
-const VALID_STAGES = ['vocab', 'passage', 'grammar', 'problem', 'lastReview'] as const;
+const VALID_STAGES = ['vocab', 'passage', 'dialogue', 'grammar', 'problem', 'lastReview'] as const;
 type StageKey = (typeof VALID_STAGES)[number];
 
 interface Props {

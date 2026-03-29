@@ -60,7 +60,7 @@ export function calculateStageStatuses(
     enabledStages = input.enabledStages ?? null;
   } else {
     progress = progressOrInput as NaesinStudentProgress | null;
-    content = { hasVocab: false, hasPassage: false, hasGrammar: false, hasProblem: false, hasLastReview: false };
+    content = { hasVocab: false, hasPassage: false, hasDialogue: false, hasGrammar: false, hasProblem: false, hasLastReview: false };
   }
 
   // Stage 1: Vocab — always available (first stage)
@@ -69,18 +69,22 @@ export function calculateStageStatuses(
   // Stage 2: Passage — requires vocab completed
   const passageStatus = getPassageStatus(progress, content.hasPassage, vocabStatus);
 
-  // Stage 3: Grammar — requires passage completed
-  const grammarStatus = getGrammarStatus(progress, content.hasGrammar, passageStatus, grammarVideoCount);
+  // Stage 3: Dialogue — requires passage completed
+  const dialogueStatus = getDialogueStatus(progress, content.hasDialogue, passageStatus);
 
-  // Stage 4: Problem — requires grammar completed
+  // Stage 4: Grammar — requires dialogue completed
+  const grammarStatus = getGrammarStatus(progress, content.hasGrammar, dialogueStatus, grammarVideoCount);
+
+  // Stage 5: Problem — requires grammar completed
   const problemStatus = getProblemStatus(progress, content.hasProblem, grammarStatus);
 
-  // Stage 5: Last Review — D-3 auto-unlock (progress-independent)
+  // Stage 6: Last Review — D-3 auto-unlock (progress-independent)
   const lastReviewStatus = getLastReviewStatus(content.hasLastReview, examDate);
 
   const result: NaesinStageStatuses = {
     vocab: vocabStatus,
     passage: passageStatus,
+    dialogue: dialogueStatus,
     grammar: grammarStatus,
     problem: problemStatus,
     lastReview: lastReviewStatus,
@@ -88,7 +92,7 @@ export function calculateStageStatuses(
 
   // Override disabled stages to 'hidden'
   if (enabledStages) {
-    const stageKeys = ['vocab', 'passage', 'grammar', 'problem', 'lastReview'] as const;
+    const stageKeys = ['vocab', 'passage', 'dialogue', 'grammar', 'problem', 'lastReview'] as const;
     for (const key of stageKeys) {
       if (!enabledStages.includes(key)) {
         result[key] = 'hidden';
@@ -128,6 +132,17 @@ function getPassageStatus(
 ): NaesinStageStatus {
   if (!hasContent) return 'completed';
   if (progress?.passage_completed) return 'completed';
+  if (prevStatus !== 'completed') return 'locked';
+  return 'available';
+}
+
+function getDialogueStatus(
+  progress: NaesinStudentProgress | null,
+  hasContent: boolean,
+  prevStatus: NaesinStageStatus
+): NaesinStageStatus {
+  if (!hasContent) return 'completed';
+  if (progress?.dialogue_completed) return 'completed';
   if (prevStatus !== 'completed') return 'locked';
   return 'available';
 }

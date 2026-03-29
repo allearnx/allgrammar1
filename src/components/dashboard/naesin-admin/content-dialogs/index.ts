@@ -1,4 +1,5 @@
 export { AddPassageDialog } from './add-passage-dialog';
+export { AddDialogueDialog } from './add-dialogue-dialog';
 export { AddGrammarDialog } from './add-grammar-dialog';
 export { AddOmrDialog } from './add-omr-dialog';
 export { AddProblemDialog } from './add-problem-dialog';

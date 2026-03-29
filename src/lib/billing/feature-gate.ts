@@ -11,8 +11,8 @@ export type Feature =
 
 export type Tier = 'free' | 'paid' | 'trialing';
 
-const ALL_NAESIN_STAGES = ['vocab', 'passage', 'grammar', 'problem', 'lastReview'];
-const FREE_NAESIN_STAGES = ['vocab', 'passage'];
+const ALL_NAESIN_STAGES = ['vocab', 'passage', 'dialogue', 'grammar', 'problem', 'lastReview'];
+const FREE_NAESIN_STAGES = ['vocab', 'passage', 'dialogue'];
 
 const PAID_ONLY_FEATURES: ReadonlySet<Feature> = new Set([
   'naesin:grammar',

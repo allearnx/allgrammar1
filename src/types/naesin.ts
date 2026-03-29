@@ -74,6 +74,21 @@ export interface NaesinPassage {
   created_at: string;
 }
 
+export interface NaesinDialogueSentence {
+  original: string;
+  korean: string;
+  speaker?: string;
+}
+
+export interface NaesinDialogue {
+  id: string;
+  unit_id: string;
+  title: string;
+  sentences: NaesinDialogueSentence[];
+  sort_order: number;
+  created_at: string;
+}
+
 export type NaesinGrammarContentType = 'video' | 'text';
 
 export interface NaesinGrammarLesson {
@@ -130,6 +145,8 @@ export interface NaesinStudentProgress {
   vocab_total_quiz_sets: number;
   passage_translation_best: number | null;
   passage_grammar_vocab_best: number | null;
+  dialogue_translation_best: number | null;
+  dialogue_completed: boolean;
   grammar_videos_completed: number;
   grammar_total_videos: number;
   problem_completed: boolean;
@@ -167,6 +184,7 @@ export type NaesinStageStatus = 'locked' | 'available' | 'completed' | 'hidden';
 export interface NaesinStageStatuses {
   vocab: NaesinStageStatus;
   passage: NaesinStageStatus;
+  dialogue: NaesinStageStatus;
   grammar: NaesinStageStatus;
   problem: NaesinStageStatus;
   lastReview: NaesinStageStatus;
@@ -177,6 +195,7 @@ export interface NaesinStageStatuses {
 export interface NaesinContentAvailability {
   hasVocab: boolean;
   hasPassage: boolean;
+  hasDialogue: boolean;
   hasGrammar: boolean;
   hasProblem: boolean;
   hasLastReview: boolean;

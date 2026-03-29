@@ -126,7 +126,7 @@ export function CombinedDashboard({
   for (const unit of sortedUnits) {
     const progress = naesinProgressMap.get(unit.id) ?? null;
     const content = contentMap[unit.id] ?? {
-      hasVocab: false, hasPassage: false, hasGrammar: false, hasProblem: false, hasLastReview: false,
+      hasVocab: false, hasPassage: false, hasDialogue: false, hasGrammar: false, hasProblem: false, hasLastReview: false,
     };
     const assignment = examAssignments.find((a) => a.unit_ids.includes(unit.id));
     const examDate = assignment?.exam_date ?? null;
@@ -188,7 +188,7 @@ export function CombinedDashboard({
       {/* ── Stat Cards — 6 cards, 3-col ── */}
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         <StatCard label="보카 완료" value={r1CompletedStages} sub={`전체 ${vocaDays.length * 4}단계 중`} color={COLORS.statMint} icon={<CheckCircle className="h-5 w-5" />} />
-        <StatCard label="내신 완료" value={naesinCompletedStages} sub={`전체 ${sortedUnits.length * 4}단계 중`} color={COLORS.statPurple} icon={<Layers className="h-5 w-5" />} />
+        <StatCard label="내신 완료" value={naesinCompletedStages} sub={`전체 ${sortedUnits.length * 5}단계 중`} color={COLORS.statPurple} icon={<Layers className="h-5 w-5" />} />
         <StatCard label="보카 퀴즈" value={vocaAvgScore > 0 ? `${vocaAvgScore}점` : '-'} sub="퀴즈 평균" color={COLORS.statAmber} icon={<ClipboardList className="h-5 w-5" />} />
         <StatCard label="내신 단원" value={`${naesinCompletedUnits}/${sortedUnits.length}`} sub="완료 단원" color={COLORS.statSky} icon={<BookOpen className="h-5 w-5" />} />
         <StatCard label="내신 단어" value={naesinAvgVocab > 0 ? `${naesinAvgVocab}점` : '-'} sub="퀴즈 + 스펠링 평균" color={COLORS.statPurple} icon={<Sparkles className="h-5 w-5" />} />
