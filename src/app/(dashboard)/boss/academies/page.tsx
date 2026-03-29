@@ -15,12 +15,14 @@ export default async function BossAcademiesPage() {
   // Get user counts and teacher info per academy
   const { data: allUsers } = await admin
     .from('users')
-    .select('academy_id, full_name, role');
+    .select('id, academy_id, full_name, role, email, phone');
 
   const countByAcademy = new Map<string, number>();
   const studentCountByAcademy = new Map<string, number>();
   const teachersByAcademy = new Map<string, string[]>();
+  const ownerByUserId = new Map<string, { full_name: string; email: string; phone: string | null }>();
   allUsers?.forEach((u) => {
+    ownerByUserId.set(u.id, { full_name: u.full_name, email: u.email, phone: u.phone });
     if (u.academy_id) {
       countByAcademy.set(u.academy_id, (countByAcademy.get(u.academy_id) || 0) + 1);
       if (u.role === 'student') {
@@ -34,14 +36,20 @@ export default async function BossAcademiesPage() {
     }
   });
 
-  const academiesWithCounts = (academies || []).map((a) => ({
-    ...a,
-    user_count: countByAcademy.get(a.id) || 0,
-    student_count: studentCountByAcademy.get(a.id) || 0,
-    max_students: a.max_students as number | null,
-    teachers: teachersByAcademy.get(a.id) || [],
-    services: (a.services as string[]) || [],
-  }));
+  const academiesWithCounts = (academies || []).map((a) => {
+    const owner = a.owner_id ? ownerByUserId.get(a.owner_id) : null;
+    return {
+      ...a,
+      user_count: countByAcademy.get(a.id) || 0,
+      student_count: studentCountByAcademy.get(a.id) || 0,
+      max_students: a.max_students as number | null,
+      teachers: teachersByAcademy.get(a.id) || [],
+      services: (a.services as string[]) || [],
+      owner_name: owner?.full_name || null,
+      owner_email: owner?.email || null,
+      owner_phone: owner?.phone || null,
+    };
+  });
 
   return (
     <>

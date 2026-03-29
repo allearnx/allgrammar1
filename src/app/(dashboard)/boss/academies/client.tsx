@@ -15,7 +15,7 @@ import {
 } from '@/components/ui/dialog';
 import { Badge } from '@/components/ui/badge';
 import { Checkbox } from '@/components/ui/checkbox';
-import { Plus, Pencil, Trash2, Building2, Copy, RefreshCw, GraduationCap } from 'lucide-react';
+import { Plus, Pencil, Trash2, Building2, Copy, RefreshCw, GraduationCap, User, Mail, Phone } from 'lucide-react';
 import { toast } from 'sonner';
 import { format } from 'date-fns';
 import { ConfirmDialog } from '@/components/shared/confirm-dialog';
@@ -30,6 +30,9 @@ interface Academy {
   max_students: number | null;
   teachers: string[];
   services: string[];
+  owner_name: string | null;
+  owner_email: string | null;
+  owner_phone: string | null;
 }
 
 interface AcademiesClientProps {
@@ -240,6 +243,26 @@ export function AcademiesClient({ academies }: AcademiesClientProps) {
                       )}
                     </span>
                   </div>
+                  {academy.owner_name && (
+                    <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-muted-foreground mt-1">
+                      <span className="flex items-center gap-1">
+                        <User className="h-3.5 w-3.5 shrink-0" />
+                        원장: <span className="text-foreground">{academy.owner_name}</span>
+                      </span>
+                      {academy.owner_email && (
+                        <span className="flex items-center gap-1">
+                          <Mail className="h-3.5 w-3.5 shrink-0" />
+                          <span className="text-foreground">{academy.owner_email}</span>
+                        </span>
+                      )}
+                      {academy.owner_phone && (
+                        <span className="flex items-center gap-1">
+                          <Phone className="h-3.5 w-3.5 shrink-0" />
+                          <span className="text-foreground">{academy.owner_phone}</span>
+                        </span>
+                      )}
+                    </div>
+                  )}
                   {academy.services && academy.services.length > 0 && (
                     <div className="flex gap-1.5 mt-1.5">
                       {academy.services.includes('naesin') && (
