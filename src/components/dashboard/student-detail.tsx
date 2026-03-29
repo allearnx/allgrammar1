@@ -9,6 +9,7 @@ import { NaesinProgressCard } from './naesin-progress-card';
 import { VocaProgressCard } from './voca-progress-card';
 import { StudentReportPanel } from './student-report-panel';
 import { ParentShareButton } from './parent-share-button';
+import { ImpersonateButton } from './impersonate-button';
 
 interface NaesinData {
   textbookId: string;
@@ -124,6 +125,7 @@ export async function StudentDetail({ user: _user, studentId, naesinData }: Prop
                 <p className="text-muted-foreground">{student.email}</p>
               </div>
               <div className="flex items-center gap-2">
+                <ImpersonateButton studentId={studentId} />
                 <ParentShareButton studentId={studentId} />
                 <Badge variant={student.is_active ? 'default' : 'secondary'}>
                   {student.is_active ? '활성' : '비활성'}
