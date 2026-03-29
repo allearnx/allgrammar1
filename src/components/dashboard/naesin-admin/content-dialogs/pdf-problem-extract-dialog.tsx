@@ -4,7 +4,6 @@ import { useState, useRef } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Textarea } from '@/components/ui/textarea';
 import { Badge } from '@/components/ui/badge';
 import {
   Dialog,
@@ -13,144 +12,15 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
-import { Wand2, Loader2, FileUp, ShieldCheck, AlertTriangle, XCircle, CheckCircle2 } from 'lucide-react';
+import { Wand2, Loader2, FileUp, ShieldCheck } from 'lucide-react';
 import { toast } from 'sonner';
 import type { NaesinProblemQuestion } from '@/types/naesin';
-import type { FullValidationResult, ValidationBadge } from '@/lib/validation';
-
-export interface GeneratedQuestion {
-  number: number;
-  question: string;
-  options: string[] | null;
-  answer: string;
-  explanation: string;
-}
+import type { FullValidationResult } from '@/lib/validation';
+import type { GeneratedQuestion } from './question-utils';
+import { hasOptions, normalizeQuestions } from './question-utils';
+import { QuestionEditRow, QuestionViewRow, ValidationBadgeIcon, QuestionBadge } from './question-table-rows';
 
 type Step = 'upload' | 'loading' | 'preview';
-
-export function hasOptions(q: GeneratedQuestion): boolean {
-  return q.options !== null && q.options.length > 0;
-}
-
-/** AI 응답을 정규화: options/explanation을 일관된 타입으로 */
-function normalizeQuestions(raw: Record<string, unknown>[]): GeneratedQuestion[] {
-  return raw.map((q, i) => ({
-    number: (q.number as number) || i + 1,
-    question: (q.question as string) || '',
-    options: Array.isArray(q.options) && q.options.length > 0 ? q.options as string[] : null,
-    answer: String(q.answer ?? ''),
-    explanation: (q.explanation as string) || '',
-  }));
-}
-
-export function QuestionEditRow({
-  question,
-  onUpdate,
-  onUpdateOption,
-  onDone,
-}: {
-  question: GeneratedQuestion;
-  onUpdate: (field: keyof GeneratedQuestion, value: string) => void;
-  onUpdateOption: (optIdx: number, value: string) => void;
-  onDone: () => void;
-}) {
-  return (
-    <td colSpan={6} className="p-3 space-y-2">
-      <div>
-        <Label className="text-xs">문제</Label>
-        <Textarea
-          value={question.question}
-          onChange={(e) => onUpdate('question', e.target.value)}
-          rows={2}
-        />
-      </div>
-      {hasOptions(question) && (
-        <div className="grid grid-cols-5 gap-1">
-          {question.options!.map((opt, oi) => (
-            <Input
-              key={oi}
-              value={opt}
-              onChange={(e) => onUpdateOption(oi, e.target.value)}
-              className="text-xs"
-            />
-          ))}
-        </div>
-      )}
-      <div className="grid grid-cols-2 gap-2">
-        <div>
-          <Label className="text-xs">정답</Label>
-          <Input value={question.answer} onChange={(e) => onUpdate('answer', e.target.value)} />
-        </div>
-        <div>
-          <Label className="text-xs">해설</Label>
-          <Input value={question.explanation} onChange={(e) => onUpdate('explanation', e.target.value)} />
-        </div>
-      </div>
-      <Button size="sm" variant="outline" onClick={onDone}>편집 완료</Button>
-    </td>
-  );
-}
-
-export function QuestionViewRow({
-  question,
-  onEdit,
-}: {
-  question: GeneratedQuestion;
-  onEdit: () => void;
-}) {
-  return (
-    <>
-      <td className="p-2">{question.number}</td>
-      <td className="p-2 whitespace-pre-wrap break-words">{question.question}</td>
-      <td className="p-2">
-        <Badge variant={hasOptions(question) ? 'outline' : 'secondary'} className="text-xs">
-          {hasOptions(question) ? '객관식' : '서술형'}
-        </Badge>
-      </td>
-      <td className="p-2 text-xs">{question.answer}</td>
-      <td className="p-2">
-        <Button size="sm" variant="ghost" onClick={onEdit}>수정</Button>
-      </td>
-    </>
-  );
-}
-
-function ValidationBadgeIcon({ badge }: { badge?: ValidationBadge }) {
-  if (!badge) return null;
-  if (badge === 'pass') return <CheckCircle2 className="h-4 w-4 text-green-600" />;
-  if (badge === 'warn') return <AlertTriangle className="h-4 w-4 text-yellow-600" />;
-  return <XCircle className="h-4 w-4 text-red-600" />;
-}
-
-function QuestionBadge({ questionNumber, validation }: { questionNumber: number; validation?: FullValidationResult | null }) {
-  if (!validation) return null;
-
-  const structuralError = validation.structural.issues.some(
-    (i) => i.questionNumber === questionNumber && i.severity === 'error',
-  );
-  if (structuralError) return <XCircle className="h-3.5 w-3.5 text-red-600" />;
-
-  const answerMismatch = validation.answerCheck?.results.find(
-    (r) => r.questionNumber === questionNumber && !r.match,
-  );
-  if (answerMismatch) return <AlertTriangle className="h-3.5 w-3.5 text-yellow-600" />;
-
-  const tooObvious = validation.answerCheck?.results.find(
-    (r) => r.questionNumber === questionNumber && r.tooObvious,
-  );
-  if (tooObvious) return <AlertTriangle className="h-3.5 w-3.5 text-orange-500" />;
-
-  const qualityFlagged = validation.qualityScore?.scores.find(
-    (s) => s.questionNumber === questionNumber && s.flags.length > 0,
-  );
-  if (qualityFlagged) return <AlertTriangle className="h-3.5 w-3.5 text-yellow-600" />;
-
-  if (validation.answerCheck || validation.qualityScore) {
-    return <CheckCircle2 className="h-3.5 w-3.5 text-green-600" />;
-  }
-
-  return null;
-}
 
 export function PdfProblemExtractDialog({ unitId, unitTitle, onAdd }: { unitId: string; unitTitle?: string; onAdd: () => void }) {
   const [open, setOpen] = useState(false);
@@ -366,7 +236,6 @@ export function PdfProblemExtractDialog({ unitId, unitTitle, onAdd }: { unitId: 
 
         {step === 'preview' && (
           <div className="space-y-4">
-            {/* Summary bar */}
             <div className="flex flex-wrap items-center gap-2 text-sm">
               <Badge variant="secondary">원본 {originalCount}문제</Badge>
               <Badge variant="secondary">생성 {questions.length}문제</Badge>
@@ -383,7 +252,6 @@ export function PdfProblemExtractDialog({ unitId, unitTitle, onAdd }: { unitId: 
               )}
             </div>
 
-            {/* AI Validation button */}
             <Button
               size="sm"
               variant="outline"

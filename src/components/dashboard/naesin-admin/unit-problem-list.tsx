@@ -8,12 +8,8 @@ import { ClipboardList, ChevronDown, ChevronRight, Pencil, Trash2, Loader2 } fro
 import { toast } from 'sonner';
 import { logger } from '@/lib/logger';
 import type { NaesinProblemSheet, NaesinProblemQuestion } from '@/types/naesin';
-import {
-  QuestionEditRow,
-  QuestionViewRow,
-  hasOptions,
-  type GeneratedQuestion,
-} from './content-dialogs/pdf-problem-extract-dialog';
+import { QuestionEditRow, QuestionViewRow } from './content-dialogs/question-table-rows';
+import { hasOptions, type GeneratedQuestion } from './content-dialogs/question-utils';
 
 /** DB question → GeneratedQuestion 변환 */
 function toGenerated(q: NaesinProblemQuestion): GeneratedQuestion {
