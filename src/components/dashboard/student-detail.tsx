@@ -44,7 +44,7 @@ interface Props {
   naesinData?: NaesinData | null;
 }
 
-export async function StudentDetail({ user: _user, studentId, naesinData }: Props) {
+export async function StudentDetail({ user, studentId, naesinData }: Props) {
   const admin = createAdminClient();
 
   const { data: student } = await admin
@@ -125,7 +125,7 @@ export async function StudentDetail({ user: _user, studentId, naesinData }: Prop
                 <p className="text-muted-foreground">{student.email}</p>
               </div>
               <div className="flex items-center gap-2">
-                <ImpersonateButton studentId={studentId} />
+                {user.role === 'boss' && <ImpersonateButton studentId={studentId} />}
                 <ParentShareButton studentId={studentId} />
                 <Badge variant={student.is_active ? 'default' : 'secondary'}>
                   {student.is_active ? '활성' : '비활성'}

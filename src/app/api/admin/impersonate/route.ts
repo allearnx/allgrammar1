@@ -8,24 +8,20 @@ const schema = z.object({
 });
 
 export const POST = createApiHandler(
-  { roles: ['admin', 'boss'], schema },
-  async ({ user, body }) => {
+  { roles: ['boss'], schema },
+  async ({ body }) => {
     const { studentId } = body;
     const adminClient = createAdminClient();
 
-    // 1. 같은 학원 소속 학생인지 확인
+    // boss는 모든 학원 학생 조회 가능
     const { data: student } = await adminClient
       .from('users')
-      .select('id, email, academy_id, role')
+      .select('id, email, role')
       .eq('id', studentId)
       .single();
 
     if (!student) {
       return NextResponse.json({ error: '학생을 찾을 수 없습니다.' }, { status: 404 });
-    }
-
-    if (student.academy_id !== user.academy_id) {
-      return NextResponse.json({ error: '같은 학원 소속 학생만 조회할 수 있습니다.' }, { status: 403 });
     }
 
     if (student.role !== 'student') {
