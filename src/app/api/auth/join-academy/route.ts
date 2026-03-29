@@ -29,12 +29,28 @@ export const POST = createApiHandler(
     // Find academy by invite code
     const { data: academy, error } = await admin
       .from('academies')
-      .select('id, name')
+      .select('id, name, max_students')
       .eq('invite_code', code)
       .single();
 
     if (error || !academy) {
       throw new NotFoundError('유효하지 않은 초대 코드입니다.');
+    }
+
+    // Enforce seat limit for students
+    if (user.role === 'student' && academy.max_students) {
+      const { count } = await admin
+        .from('users')
+        .select('id', { count: 'exact', head: true })
+        .eq('academy_id', academy.id)
+        .eq('role', 'student')
+        .eq('is_active', true);
+
+      if ((count || 0) >= academy.max_students) {
+        throw new ValidationError(
+          '학원의 최대 학생 수에 도달했습니다. 관리자에게 문의하세요.',
+        );
+      }
     }
 
     // Update user's academy_id
