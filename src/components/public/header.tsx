@@ -153,9 +153,10 @@ export default function PublicHeader({ isLoggedIn = false }: PublicHeaderProps) 
             {/* 올인내신 강조 버튼 */}
             <Link
               href="/courses/school_exam"
-              className="ml-2 px-5 py-2.5 text-sm font-bold text-white rounded-full transition-all duration-200 shadow-lg hover:scale-105"
+              className="ml-2 relative px-5 py-2.5 text-sm font-bold text-white rounded-full transition-all duration-200 shadow-lg hover:scale-105"
               style={{ background: 'linear-gradient(135deg, #3B82F6 0%, #06B6D4 100%)', boxShadow: '0 4px 20px rgba(59,130,246,0.4)' }}
             >
+              <span className="absolute -top-2 -right-1 bg-rose-500 text-white text-[10px] font-black px-1.5 py-0.5 rounded-full leading-none">NEW</span>
               ✦ 올인내신
             </Link>
             {/* 올킬보카 강조 버튼 */}
@@ -286,10 +287,11 @@ export default function PublicHeader({ isLoggedIn = false }: PublicHeaderProps) 
           {/* 올인내신 강조 버튼 (모바일) */}
           <Link
             href="/courses/school_exam"
-            className="block mt-3 px-4 py-3 text-base font-bold text-white text-center rounded-full transition-all hover:scale-[1.02]"
+            className="relative block mt-3 px-4 py-3 text-base font-bold text-white text-center rounded-full transition-all hover:scale-[1.02]"
             style={{ background: 'linear-gradient(135deg, #3B82F6 0%, #06B6D4 100%)', boxShadow: '0 4px 20px rgba(59,130,246,0.4)' }}
             onClick={() => setIsMenuOpen(false)}
           >
+            <span className="absolute -top-2 left-1/2 -translate-x-1/2 bg-rose-500 text-white text-[10px] font-black px-2 py-0.5 rounded-full leading-none whitespace-nowrap">NEW</span>
             ✦ 올인내신
           </Link>
           {/* 올킬보카 강조 버튼 (모바일) */}
