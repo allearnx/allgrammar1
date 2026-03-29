@@ -38,25 +38,16 @@ export const POST = createApiHandler(
       return NextResponse.json({ error: '로그인 링크 생성에 실패했습니다.' }, { status: 500 });
     }
 
-    // action_link의 redirect_to가 Supabase Site URL(localhost)을 사용할 수 있으므로
-    // 요청 origin으로 교체
-    const origin = request.headers.get('origin') || request.headers.get('referer')?.replace(/\/+$/, '') || '';
+    // action_link의 redirect_to가 Supabase Site URL(localhost:3000 등)을 사용하므로
+    // 요청 origin으로 통째로 교체
+    const origin = request.headers.get('origin')
+      || request.headers.get('referer')?.replace(/\/[^/]*$/, '')
+      || '';
     let url = linkData.properties.action_link;
-    if (origin && url.includes('redirect_to=')) {
+    if (origin) {
       const parsed = new URL(url);
-      const redirectTo = parsed.searchParams.get('redirect_to');
-      if (redirectTo) {
-        try {
-          const redirectParsed = new URL(redirectTo);
-          const originParsed = new URL(origin);
-          redirectParsed.protocol = originParsed.protocol;
-          redirectParsed.host = originParsed.host;
-          parsed.searchParams.set('redirect_to', redirectParsed.toString());
-          url = parsed.toString();
-        } catch {
-          // URL 파싱 실패 시 원본 유지
-        }
-      }
+      parsed.searchParams.set('redirect_to', origin);
+      url = parsed.toString();
     }
 
     return NextResponse.json({
