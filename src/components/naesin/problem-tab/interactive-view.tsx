@@ -5,7 +5,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { Badge } from '@/components/ui/badge';
-import { AlertTriangle, Loader2, Bot } from 'lucide-react';
+import { AlertTriangle, Loader2, Bot, Clock } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { MCQOptionList } from '@/components/shared/mcq-option-list';
 import { logger } from '@/lib/logger';
@@ -13,8 +13,40 @@ import { toast } from 'sonner';
 import type { NaesinProblemSheet, NaesinProblemQuestion } from '@/types/database';
 import { useProblemDraft } from '@/hooks/use-problem-draft';
 import type { AiFeedback, WrongItem, InteractiveDraft } from '@/hooks/use-problem-draft';
+import { useQuestionTimer } from '@/hooks/use-question-timer';
 
 export type { AiFeedback, WrongItem };
+
+const MCQ_TIME_LIMIT = 40;
+const SUBJECTIVE_TIME_LIMIT = 120;
+
+function TimerBadge({ remaining, isExpired }: { remaining: number; isExpired: boolean }) {
+  if (isExpired) {
+    return (
+      <Badge variant="destructive" className="gap-1 animate-pulse">
+        <Clock className="h-3 w-3" />
+        시간 초과
+      </Badge>
+    );
+  }
+  const mins = Math.floor(remaining / 60);
+  const secs = remaining % 60;
+  const display = mins > 0 ? `${mins}:${String(secs).padStart(2, '0')}` : `${secs}초`;
+  const isWarning = remaining <= 10;
+
+  return (
+    <Badge
+      variant="secondary"
+      className={cn(
+        'gap-1 tabular-nums',
+        isWarning && 'bg-yellow-100 text-yellow-700 border-yellow-300 animate-pulse',
+      )}
+    >
+      <Clock className="h-3 w-3" />
+      {display}
+    </Badge>
+  );
+}
 
 function SubjectiveInput({ onSubmit, disabled, isGrading }: { onSubmit: (answer: string) => void; disabled: boolean; isGrading: boolean }) {
   const [answer, setAnswer] = useState('');
@@ -107,9 +139,15 @@ export function InteractiveProblemView({
     const d = loadDraft();
     return d?.mode === 'interactive' ? d.aiResultsMap : {};
   });
+  const [overtimeQuestions, setOvertimeQuestions] = useState<number[]>(() => {
+    const d = loadDraft();
+    return d?.mode === 'interactive' ? (d.overtimeQuestions ?? []) : [];
+  });
 
   const question = questions[currentIndex];
   const isSubjective = !question.options || question.options.length === 0;
+  const timeLimit = isSubjective ? SUBJECTIVE_TIME_LIMIT : MCQ_TIME_LIMIT;
+  const { remaining, isExpired, reset: resetTimer, pause: pauseTimer } = useQuestionTimer(timeLimit);
 
   async function gradeSubjective(studentAnswer: string): Promise<AiFeedback | null> {
     try {
@@ -143,6 +181,7 @@ export function InteractiveProblemView({
     newScore: { correct: number; wrong: number },
     newWrongList: WrongItem[],
     newAiResultsMap: Record<string, AiFeedback>,
+    newOvertimeQuestions?: number[],
   ) {
     saveDraft({
       mode: 'interactive',
@@ -151,6 +190,7 @@ export function InteractiveProblemView({
       wrongList: newWrongList,
       aiResultsMap: newAiResultsMap,
       answeredUpTo: currentIndex,
+      overtimeQuestions: newOvertimeQuestions ?? overtimeQuestions,
     });
   }
 
@@ -185,6 +225,7 @@ export function InteractiveProblemView({
     newScore: typeof score,
     newWrongList: WrongItem[],
     aiMap: Record<string, AiFeedback>,
+    ot?: number[],
   ) {
     if (isLast) {
       submitResults(
@@ -193,13 +234,21 @@ export function InteractiveProblemView({
         aiMap,
       );
     } else {
-      saveCurrentDraft(newScore, newWrongList, aiMap);
+      saveCurrentDraft(newScore, newWrongList, aiMap, ot);
     }
   }
 
   async function handleSelect(answer: string | number) {
     if (showResult || isGrading) return;
     setSelectedAnswer(answer);
+    pauseTimer();
+
+    let currentOvertime = overtimeQuestions;
+    if (isExpired) {
+      currentOvertime = [...overtimeQuestions, question.number];
+      setOvertimeQuestions(currentOvertime);
+    }
+
     const isLast = currentIndex === questions.length - 1;
 
     if (isSubjective) {
@@ -214,27 +263,30 @@ export function InteractiveProblemView({
         const correct = aiFeedback.score >= 80;
         setShowResult(true);
         const { newScore, newWrongList } = applyResult(correct, answer, question, aiFeedback);
-        finishOrSave(isLast, answer, newScore, newWrongList, newAiMap);
+        finishOrSave(isLast, answer, newScore, newWrongList, newAiMap, currentOvertime);
       } else {
         const correct = String(answer).trim().toLowerCase() === String(question.answer).trim().toLowerCase();
         setShowResult(true);
         const { newScore, newWrongList } = applyResult(correct, answer, question);
-        finishOrSave(isLast, answer, newScore, newWrongList, aiResultsMap);
+        finishOrSave(isLast, answer, newScore, newWrongList, aiResultsMap, currentOvertime);
       }
     } else {
       const correct = String(answer) === String(question.answer);
       setShowResult(true);
       const { newScore, newWrongList } = applyResult(correct, answer, question);
-      finishOrSave(isLast, answer, newScore, newWrongList, aiResultsMap);
+      finishOrSave(isLast, answer, newScore, newWrongList, aiResultsMap, currentOvertime);
     }
   }
 
   function handleNext() {
     if (currentIndex < questions.length - 1) {
+      const nextQ = questions[currentIndex + 1];
+      const nextIsSubjective = !nextQ.options || nextQ.options.length === 0;
       setCurrentIndex(currentIndex + 1);
       setShowResult(false);
       setSelectedAnswer(null);
       setCurrentAiFeedback(null);
+      resetTimer(nextIsSubjective ? SUBJECTIVE_TIME_LIMIT : MCQ_TIME_LIMIT);
     }
   }
 
@@ -334,6 +386,7 @@ export function InteractiveProblemView({
       <div className="flex justify-between items-center">
         <span className="text-sm text-muted-foreground">{currentIndex + 1} / {questions.length}</span>
         <div className="flex gap-2">
+          {!showResult && <TimerBadge remaining={remaining} isExpired={isExpired} />}
           <Badge variant="secondary" className="text-green-600">{score.correct} 정답</Badge>
           <Badge variant="secondary" className="text-red-600">{score.wrong} 오답</Badge>
         </div>

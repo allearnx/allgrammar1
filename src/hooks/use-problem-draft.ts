@@ -29,6 +29,7 @@ export interface InteractiveDraft {
   wrongList: WrongItem[];
   aiResultsMap: Record<string, AiFeedback>;
   answeredUpTo: number;
+  overtimeQuestions: number[];
 }
 
 export interface ImageAnswerDraft {
