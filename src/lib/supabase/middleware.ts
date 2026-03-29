@@ -50,7 +50,7 @@ export async function updateSession(request: NextRequest) {
 
   // Public routes that don't require auth
   const publicRoutes = [
-    '/login', '/signup', '/callback', '/report', '/quiz-result', '/parent',
+    '/login', '/signup', '/callback', '/impersonate', '/report', '/quiz-result', '/parent',
     '/courses', '/teachers', '/reviews', '/faq', '/allkill', '/about',
     '/curriculum', '/schedule', '/terms', '/privacy', '/trial', '/pricing',
   ];

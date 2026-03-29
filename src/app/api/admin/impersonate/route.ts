@@ -46,7 +46,7 @@ export const POST = createApiHandler(
     let url = linkData.properties.action_link;
     if (origin) {
       const parsed = new URL(url);
-      parsed.searchParams.set('redirect_to', `${origin}/callback?next=/student`);
+      parsed.searchParams.set('redirect_to', `${origin}/impersonate`);
       url = parsed.toString();
     }
 
