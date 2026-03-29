@@ -10,18 +10,32 @@ export default function ImpersonatePage() {
   const [error, setError] = useState(false);
 
   useEffect(() => {
-    const supabase = createClient();
+    const hash = window.location.hash;
+    if (!hash) {
+      setError(true);
+      return;
+    }
 
-    // createBrowserClient가 URL hash의 access_token을 자동 감지하여 세션 설정
-    supabase.auth.onAuthStateChange((event) => {
-      if (event === 'SIGNED_IN') {
+    const params = new URLSearchParams(hash.substring(1));
+    const accessToken = params.get('access_token');
+    const refreshToken = params.get('refresh_token');
+
+    if (!accessToken || !refreshToken) {
+      setError(true);
+      return;
+    }
+
+    const supabase = createClient();
+    supabase.auth.setSession({
+      access_token: accessToken,
+      refresh_token: refreshToken,
+    }).then(({ error: err }) => {
+      if (err) {
+        setError(true);
+      } else {
         router.replace('/student');
       }
     });
-
-    // 5초 내 로그인 안 되면 실패 처리
-    const timeout = setTimeout(() => setError(true), 5000);
-    return () => clearTimeout(timeout);
   }, [router]);
 
   if (error) {
