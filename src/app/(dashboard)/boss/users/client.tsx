@@ -25,6 +25,7 @@ interface User {
   id: string;
   full_name: string;
   email: string;
+  phone: string | null;
   role: string;
   academy_id: string | null;
   is_active: boolean;
@@ -165,7 +166,9 @@ export function UsersClient({ users, academies }: UsersClientProps) {
                       {u.is_active ? '활성' : '비활성'}
                     </Badge>
                   </div>
-                  <p className="text-sm text-muted-foreground truncate">{u.email}</p>
+                  <p className="text-sm text-muted-foreground truncate">
+                    {u.email}{u.phone && <span className="ml-2">{u.phone}</span>}
+                  </p>
                   <p className="text-xs text-muted-foreground mt-1">
                     학원: {u.academy_id ? academyMap.get(u.academy_id) || '-' : '미배정'}
                     {' · '}

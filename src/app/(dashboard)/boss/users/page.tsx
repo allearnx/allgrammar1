@@ -10,7 +10,7 @@ export default async function BossUsersPage() {
   const [usersRes, academiesRes] = await Promise.all([
     admin
       .from('users')
-      .select('id, full_name, email, role, academy_id, is_active, created_at')
+      .select('id, full_name, email, phone, role, academy_id, is_active, created_at')
       .order('created_at', { ascending: false }),
     admin
       .from('academies')
