@@ -1,0 +1,103 @@
+'use client';
+
+import { useState } from 'react';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog';
+import { Plus } from 'lucide-react';
+import { toast } from 'sonner';
+import { logger } from '@/lib/logger';
+import type { VocabDialogProps } from './types';
+import { getVocabConfig } from './types';
+
+const INITIAL_FORM = {
+  front_text: '', back_text: '', part_of_speech: '', example_sentence: '',
+  synonyms: '', antonyms: '', spelling_hint: '', spelling_answer: '',
+};
+
+export function AddVocabDialog({ module, parentId, onAdd }: VocabDialogProps) {
+  const [open, setOpen] = useState(false);
+  const [form, setForm] = useState(INITIAL_FORM);
+  const [saving, setSaving] = useState(false);
+  const cfg = getVocabConfig(module);
+
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    if (!form.front_text.trim() || !form.back_text.trim()) return;
+    setSaving(true);
+    try {
+      const body: Record<string, string | null> = {
+        [cfg.parentIdKey]: parentId,
+        front_text: form.front_text.trim(),
+        back_text: form.back_text.trim(),
+        part_of_speech: form.part_of_speech.trim() || null,
+        example_sentence: form.example_sentence.trim() || null,
+        synonyms: form.synonyms.trim() || null,
+        antonyms: form.antonyms.trim() || null,
+      };
+      if (module === 'voca') {
+        body.spelling_hint = form.spelling_hint.trim() || null;
+        body.spelling_answer = form.spelling_answer.trim() || null;
+      }
+      const res = await fetch(cfg.apiBase, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body),
+      });
+      if (!res.ok) {
+        const err = await res.json().catch(() => null);
+        throw new Error(err?.error || '요청에 실패했습니다');
+      }
+      onAdd();
+      setOpen(false);
+      setForm(INITIAL_FORM);
+      toast.success('단어가 추가되었습니다');
+    } catch (err) {
+      logger.error(`${cfg.logPrefix}.add_vocab`, { error: err instanceof Error ? err.message : String(err) });
+      toast.error('단어 추가 실패');
+    } finally {
+      setSaving(false);
+    }
+  }
+
+  return (
+    <Dialog open={open} onOpenChange={setOpen}>
+      <DialogTrigger asChild>
+        <Button size="sm" variant="outline"><Plus className="h-4 w-4 mr-1" />단어 추가</Button>
+      </DialogTrigger>
+      <DialogContent className="max-w-2xl max-h-[85vh] overflow-y-auto">
+        <DialogHeader><DialogTitle>단어 추가</DialogTitle></DialogHeader>
+        <form onSubmit={handleSubmit} className="space-y-3">
+          <div className="grid grid-cols-2 gap-3">
+            <div><Label>영어 *</Label><Input value={form.front_text} onChange={(e) => setForm({ ...form, front_text: e.target.value })} placeholder="apple" /></div>
+            <div><Label>한국어 *</Label><Input value={form.back_text} onChange={(e) => setForm({ ...form, back_text: e.target.value })} placeholder="사과" /></div>
+          </div>
+          <div className="grid grid-cols-3 gap-3">
+            <div><Label>품사</Label><Input value={form.part_of_speech} onChange={(e) => setForm({ ...form, part_of_speech: e.target.value })} placeholder="n. / v. / adj. / adv." /></div>
+            <div className="col-span-2"><Label>예문</Label><Input value={form.example_sentence} onChange={(e) => setForm({ ...form, example_sentence: e.target.value })} placeholder="I eat an apple every day." /></div>
+          </div>
+          <div className="grid grid-cols-2 gap-3">
+            <div><Label>유의어</Label><Input value={form.synonyms} onChange={(e) => setForm({ ...form, synonyms: e.target.value })} placeholder="glad / joyful" /></div>
+            <div><Label>반의어</Label><Input value={form.antonyms} onChange={(e) => setForm({ ...form, antonyms: e.target.value })} placeholder="sad / unhappy" /></div>
+          </div>
+          {module === 'voca' && (
+            <div className="grid grid-cols-2 gap-3">
+              <div><Label>스펠링 힌트</Label><Input value={form.spelling_hint} onChange={(e) => setForm({ ...form, spelling_hint: e.target.value })} /></div>
+              <div><Label>스펠링 정답</Label><Input value={form.spelling_answer} onChange={(e) => setForm({ ...form, spelling_answer: e.target.value })} /></div>
+            </div>
+          )}
+          <Button type="submit" className="w-full" disabled={saving || !form.front_text.trim() || !form.back_text.trim()}>
+            {saving ? '저장 중...' : '추가'}
+          </Button>
+        </form>
+      </DialogContent>
+    </Dialog>
+  );
+}

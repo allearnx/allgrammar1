@@ -282,9 +282,9 @@ export function UnitContentManager({ unitId }: { unitId: string }) {
       )}
 
       <div className="flex flex-wrap gap-2">
-        <AddVocabDialog unitId={unitId} onAdd={loadCounts} />
-        <BulkVocabUpload unitId={unitId} onAdd={loadCounts} />
-        <PdfVocabExtract unitId={unitId} onAdd={loadCounts} />
+        <AddVocabDialog module="naesin" parentId={unitId} onAdd={loadCounts} />
+        <BulkVocabUpload module="naesin" parentId={unitId} onAdd={loadCounts} />
+        <PdfVocabExtract module="naesin" parentId={unitId} onAdd={loadCounts} />
         <AddPassageDialog unitId={unitId} onAdd={loadCounts} />
         <AddGrammarDialog unitId={unitId} onAdd={loadCounts} />
         <AddOmrDialog unitId={unitId} onAdd={loadCounts} />

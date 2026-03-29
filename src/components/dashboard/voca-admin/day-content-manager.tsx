@@ -12,9 +12,7 @@ import { ConfirmDialog } from '@/components/shared/confirm-dialog';
 import { useListCrud } from '@/hooks/use-list-crud';
 import { useInlineEdit } from '@/hooks/use-inline-edit';
 import { useConfirmDelete } from '@/hooks/use-confirm-delete';
-import { AddVocabDialog } from './add-vocab-dialog';
-import { BulkVocabUpload } from './bulk-vocab-upload';
-import { PdfVocabExtract } from './pdf-vocab-extract';
+import { AddVocabDialog, BulkVocabUpload, PdfVocabExtract } from '@/components/shared/vocab-dialogs';
 import type { VocaVocabulary } from '@/types/voca';
 import { logger } from '@/lib/logger';
 
@@ -191,9 +189,9 @@ export function DayContentManager({ dayId }: { dayId: string }) {
       )}
 
       <div className="flex flex-wrap gap-2">
-        <AddVocabDialog dayId={dayId} onAdd={loadVocab} />
-        <BulkVocabUpload dayId={dayId} onAdd={loadVocab} />
-        <PdfVocabExtract dayId={dayId} onAdd={loadVocab} />
+        <AddVocabDialog module="voca" parentId={dayId} onAdd={loadVocab} />
+        <BulkVocabUpload module="voca" parentId={dayId} onAdd={loadVocab} />
+        <PdfVocabExtract module="voca" parentId={dayId} onAdd={loadVocab} />
         {vocab.items.length > 0 && (
           <Button size="sm" variant="outline" onClick={handleEnrichRound2} disabled={enriching}>
             {enriching ? <Loader2 className="h-3.5 w-3.5 mr-1 animate-spin" /> : <Wand2 className="h-3.5 w-3.5 mr-1" />}

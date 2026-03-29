@@ -15,6 +15,8 @@ import {
 import { FileText, Loader2, Check, X as XIcon } from 'lucide-react';
 import { toast } from 'sonner';
 import { logger } from '@/lib/logger';
+import type { VocabDialogProps } from './types';
+import { getVocabConfig } from './types';
 
 interface ExtractedWord {
   front_text: string;
@@ -27,13 +29,14 @@ interface ExtractedWord {
   selected: boolean;
 }
 
-export function PdfVocabExtract({ dayId, onAdd }: { dayId: string; onAdd: () => void }) {
+export function PdfVocabExtract({ module, parentId, onAdd }: VocabDialogProps) {
   const [open, setOpen] = useState(false);
   const [step, setStep] = useState<1 | 2>(1);
   const [file, setFile] = useState<File | null>(null);
   const [extracting, setExtracting] = useState(false);
   const [saving, setSaving] = useState(false);
   const [words, setWords] = useState<ExtractedWord[]>([]);
+  const cfg = getVocabConfig(module);
 
   function reset() {
     setStep(1);
@@ -50,7 +53,7 @@ export function PdfVocabExtract({ dayId, onAdd }: { dayId: string; onAdd: () => 
       const formData = new FormData();
       formData.append('file', file);
 
-      const res = await fetch('/api/voca/vocabulary/extract-pdf', {
+      const res = await fetch(`${cfg.apiBase}/extract-pdf`, {
         method: 'POST',
         body: formData,
       });
@@ -88,10 +91,10 @@ export function PdfVocabExtract({ dayId, onAdd }: { dayId: string; onAdd: () => 
         spelling_answer: rest.front_text,
       }));
 
-      const res = await fetch('/api/voca/vocabulary/bulk', {
+      const res = await fetch(`${cfg.apiBase}/bulk`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ day_id: dayId, items }),
+        body: JSON.stringify({ [cfg.parentIdKey]: parentId, items }),
       });
       if (!res.ok) {
         const err = await res.json().catch(() => null);
@@ -103,7 +106,7 @@ export function PdfVocabExtract({ dayId, onAdd }: { dayId: string; onAdd: () => 
       reset();
       toast.success(`${data.count}개 단어가 추가되었습니다`);
     } catch (err) {
-      logger.error('voca_admin.pdf_extract', { error: err instanceof Error ? err.message : String(err) });
+      logger.error(`${cfg.logPrefix}.pdf_vocab_extract`, { error: err instanceof Error ? err.message : String(err) });
       toast.error('단어 저장 실패');
     } finally {
       setSaving(false);
@@ -128,6 +131,7 @@ export function PdfVocabExtract({ dayId, onAdd }: { dayId: string; onAdd: () => 
   }
 
   const selectedCount = words.filter((w) => w.selected).length;
+  const pdfLabel = module === 'naesin' ? '교과서 PDF' : 'PDF';
 
   return (
     <Dialog
@@ -161,7 +165,7 @@ export function PdfVocabExtract({ dayId, onAdd }: { dayId: string; onAdd: () => 
               />
             </div>
             <p className="text-xs text-muted-foreground">
-              PDF를 업로드하면 AI가 핵심 단어를 자동으로 추출합니다.
+              {pdfLabel}를 업로드하면 AI가 핵심 단어를 자동으로 추출합니다.
             </p>
             <Button
               className="w-full"
