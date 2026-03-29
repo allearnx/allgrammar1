@@ -30,12 +30,15 @@ export const POST = createApiHandler(
       );
     }
 
-    // 2. 학원에 소속된 다른 회원 확인
+    const adminClient = createAdminClient();
+
+    // 2. 학원에 소속된 다른 회원 확인 (adminClient로 RLS 우회)
     if (user.academy_id) {
-      const { count } = await supabase
+      const { count } = await adminClient
         .from('users')
         .select('id', { count: 'exact', head: true })
         .eq('academy_id', user.academy_id)
+        .eq('is_active', true)
         .neq('id', user.id);
 
       if (count && count > 0) {
@@ -51,18 +54,23 @@ export const POST = createApiHandler(
       type: 'user', id: user.id, details: { email: user.email, academy_id: user.academy_id },
     });
 
-    const adminClient = createAdminClient();
-
     // 4. 학원 삭제 (CASCADE로 subscriptions, exams 등 정리)
-    if (user.academy_id) {
-      dbResult(await adminClient.from('academies').delete().eq('id', user.academy_id));
+    try {
+      if (user.academy_id) {
+        dbResult(await adminClient.from('academies').delete().eq('id', user.academy_id));
+      }
+
+      // 5. users 테이블 삭제
+      dbResult(await adminClient.from('users').delete().eq('id', user.id));
+
+      // 6. auth.users 삭제
+      await adminClient.auth.admin.deleteUser(user.id);
+    } catch {
+      return NextResponse.json(
+        { error: '계정 삭제 중 오류가 발생했습니다. 다시 시도해주세요.' },
+        { status: 500 },
+      );
     }
-
-    // 5. users 테이블 삭제
-    dbResult(await adminClient.from('users').delete().eq('id', user.id));
-
-    // 6. auth.users 삭제
-    await adminClient.auth.admin.deleteUser(user.id);
 
     return NextResponse.json({ success: true });
   },
