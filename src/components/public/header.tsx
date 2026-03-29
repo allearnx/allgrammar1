@@ -67,7 +67,7 @@ export default function PublicHeader({ isLoggedIn = false }: PublicHeaderProps) 
               alt="올라영"
               width={360}
               height={120}
-              className="h-14 w-auto"
+              className="h-16 w-auto"
               priority
             />
           </Link>
