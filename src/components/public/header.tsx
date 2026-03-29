@@ -59,7 +59,7 @@ export default function PublicHeader({ isLoggedIn = false }: PublicHeaderProps) 
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
-        <div className="flex items-center justify-between h-20">
+        <div className="flex items-center justify-between h-16">
           {/* 로고 */}
           <Link href="/" className="flex items-center flex-shrink-0">
             <Image
@@ -67,7 +67,7 @@ export default function PublicHeader({ isLoggedIn = false }: PublicHeaderProps) 
               alt="올라영"
               width={360}
               height={120}
-              className="h-20 w-auto"
+              className="h-12 w-auto"
               priority
             />
           </Link>
@@ -83,7 +83,7 @@ export default function PublicHeader({ isLoggedIn = false }: PublicHeaderProps) 
               >
                 {item.hasDropdown ? (
                   <button
-                    className="px-4 py-2 text-xl font-medium text-[#1d1d1f] hover:text-[#0071e3] transition-colors duration-200 flex items-center gap-1"
+                    className="px-3 py-2 text-sm font-medium text-[#1d1d1f] hover:text-[#0071e3] transition-colors duration-200 flex items-center gap-1"
                   >
                     {item.label}
                     <svg
@@ -100,14 +100,14 @@ export default function PublicHeader({ isLoggedIn = false }: PublicHeaderProps) 
                     href={item.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="px-4 py-2 text-xl font-medium text-[#1d1d1f] hover:text-[#0071e3] transition-colors duration-200 flex items-center gap-1"
+                    className="px-3 py-2 text-sm font-medium text-[#1d1d1f] hover:text-[#0071e3] transition-colors duration-200 flex items-center gap-1"
                   >
                     {item.label}
                   </a>
                 ) : (
                   <Link
                     href={item.href}
-                    className="px-4 py-2 text-xl font-medium text-[#1d1d1f] hover:text-[#0071e3] transition-colors duration-200 flex items-center gap-1"
+                    className="px-3 py-2 text-sm font-medium text-[#1d1d1f] hover:text-[#0071e3] transition-colors duration-200 flex items-center gap-1"
                   >
                     {item.label}
                   </Link>
