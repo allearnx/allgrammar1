@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { CheckCircle, XCircle } from 'lucide-react';
@@ -14,6 +14,8 @@ interface QuizViewProps {
 
 export function QuizView({ items }: QuizViewProps) {
   const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const resultRef = useRef<HTMLDivElement>(null);
   const {
     item,
     currentIndex,
@@ -24,6 +26,16 @@ export function QuizView({ items }: QuizViewProps) {
     handleNext,
     resetTest,
   } = useMemoryTest(items, 'quiz', '퀴즈');
+
+  useEffect(() => {
+    containerRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, [currentIndex]);
+
+  useEffect(() => {
+    if (showResult) {
+      resultRef.current?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+  }, [showResult]);
 
   function handleSelect(optionIndex: number) {
     if (showResult) return;
@@ -46,7 +58,7 @@ export function QuizView({ items }: QuizViewProps) {
   const options = item.quiz_options as string[];
 
   return (
-    <div className="space-y-6">
+    <div ref={containerRef} className="space-y-6 scroll-mt-4">
       <div className="flex justify-between items-center">
         <span className="text-sm text-muted-foreground">
           {currentIndex + 1} / {items.length}
@@ -93,7 +105,7 @@ export function QuizView({ items }: QuizViewProps) {
       </div>
 
       {showResult && (
-        <div className="text-center">
+        <div ref={resultRef} className="text-center">
           {isFinished ? (
             <CompletionView
               label="퀴즈"

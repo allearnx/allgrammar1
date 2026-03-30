@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useRef, useEffect } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -24,6 +24,8 @@ export function NaesinSpellingView({
   onGoToNextStage?: () => void;
   quizScore?: number | null;
 }) {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const resultRef = useRef<HTMLDivElement>(null);
   const items = useMemo(() => shuffle(rawItems), [rawItems]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [answer, setAnswer] = useState('');
@@ -70,6 +72,16 @@ export function NaesinSpellingView({
     setScore({ correct: 0, wrong: 0 });
   }
 
+  useEffect(() => {
+    containerRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, [currentIndex]);
+
+  useEffect(() => {
+    if (showResult) {
+      resultRef.current?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+  }, [showResult]);
+
   if (!item) return null;
 
   // Calculate final score for completion view
@@ -81,7 +93,7 @@ export function NaesinSpellingView({
   const allVocabDone = passed && quizPassed;
 
   return (
-    <div className="space-y-6 max-w-md mx-auto">
+    <div ref={containerRef} className="space-y-6 max-w-md mx-auto scroll-mt-4">
       <div className="flex justify-between items-center">
         <span className="text-sm text-muted-foreground">{currentIndex + 1} / {items.length}</span>
         <div className="flex items-center gap-3">
@@ -204,7 +216,7 @@ export function NaesinSpellingView({
           </form>
 
           {showResult && (
-            <div className="space-y-4">
+            <div ref={resultRef} className="space-y-4">
               <ResultCard isCorrect={isCorrect} correctAnswer={item.spelling_answer || undefined} />
               <div className="text-center">
                 <NextButton onClick={handleNext} />

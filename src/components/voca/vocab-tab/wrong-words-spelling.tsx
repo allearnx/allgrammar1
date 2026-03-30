@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -10,6 +10,8 @@ import { ScoreBadges, ResultCard, NextButton } from '@/components/memory/shared'
 import type { WrongWordItem } from '@/app/(dashboard)/student/voca/[dayId]/client';
 
 export function WrongWordsSpelling({ words }: { words: WrongWordItem[] }) {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const resultRef = useRef<HTMLDivElement>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [answer, setAnswer] = useState('');
   const [showResult, setShowResult] = useState(false);
@@ -52,6 +54,16 @@ export function WrongWordsSpelling({ words }: { words: WrongWordItem[] }) {
     setWrongList([]);
   }
 
+  useEffect(() => {
+    containerRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, [currentIndex]);
+
+  useEffect(() => {
+    if (showResult) {
+      resultRef.current?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+  }, [showResult]);
+
   if (!item) return null;
 
   const finalPct = isFinished
@@ -59,7 +71,7 @@ export function WrongWordsSpelling({ words }: { words: WrongWordItem[] }) {
     : 0;
 
   return (
-    <div className="space-y-6 max-w-md mx-auto">
+    <div ref={containerRef} className="space-y-6 max-w-md mx-auto scroll-mt-4">
       <div className="flex justify-between items-center">
         <span className="text-sm text-muted-foreground">
           {currentIndex + 1} / {words.length}
@@ -142,7 +154,7 @@ export function WrongWordsSpelling({ words }: { words: WrongWordItem[] }) {
           </form>
 
           {showResult && (
-            <div className="space-y-4">
+            <div ref={resultRef} className="space-y-4">
               <ResultCard isCorrect={isCorrect} correctAnswer={item.front_text} />
               <div className="text-center">
                 <NextButton onClick={handleNext} />

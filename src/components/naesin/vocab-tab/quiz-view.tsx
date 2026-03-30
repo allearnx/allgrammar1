@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Copy, RefreshCw, RotateCcw, Target, ArrowRight, CheckCircle } from 'lucide-react';
@@ -59,6 +59,8 @@ export function NaesinQuizView({
   onGoToSpelling?: () => void;
   quizResultEndpoint?: string;
 }) {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const resultRef = useRef<HTMLDivElement>(null);
   const [questions, setQuestions] = useState<QuizQuestion[]>(() => generateQuizQuestions(vocabulary, allVocabulary));
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
@@ -71,6 +73,16 @@ export function NaesinQuizView({
   const [saving, setSaving] = useState(false);
 
   const question = questions[currentIndex];
+
+  useEffect(() => {
+    containerRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, [currentIndex]);
+
+  useEffect(() => {
+    if (showResult) {
+      resultRef.current?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+  }, [showResult]);
 
   function handleSelect(optionIndex: number) {
     if (showResult) return;
@@ -265,7 +277,7 @@ export function NaesinQuizView({
   }
 
   return (
-    <div className="space-y-6">
+    <div ref={containerRef} className="space-y-6 scroll-mt-4">
       <div className="flex justify-between items-center">
         <span className="text-sm text-muted-foreground">{currentIndex + 1} / {questions.length}</span>
         <div className="flex items-center gap-3">
@@ -294,7 +306,7 @@ export function NaesinQuizView({
       />
 
       {showResult && !quizFinished && (
-        <div className="text-center">
+        <div ref={resultRef} className="text-center">
           {currentIndex < questions.length - 1 ? (
             <NextButton onClick={handleNext} />
           ) : (

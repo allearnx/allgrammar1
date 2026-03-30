@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useRef, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
@@ -25,6 +25,7 @@ interface ComprehensiveQuizProps {
 }
 
 export function ComprehensiveQuiz({ vocabulary, dayId: _dayId, onComplete }: ComprehensiveQuizProps) {
+  const questionRef = useRef<HTMLDivElement>(null);
   const questions = useMemo(() => generateQuestions(vocabulary), [vocabulary]);
   const [currentIdx, setCurrentIdx] = useState(0);
   const [answers, setAnswers] = useState<Map<number, string>>(new Map());
@@ -41,6 +42,10 @@ export function ComprehensiveQuiz({ vocabulary, dayId: _dayId, onComplete }: Com
 
   const question = questions[currentIdx];
   const totalQuestions = questions.length;
+
+  useEffect(() => {
+    questionRef.current?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }, [currentIdx]);
 
   function handleAnswer(answer: string) {
     setAnswers((prev) => new Map(prev).set(currentIdx, answer));
@@ -253,7 +258,7 @@ export function ComprehensiveQuiz({ vocabulary, dayId: _dayId, onComplete }: Com
         </div>
       </div>
 
-      <Card>
+      <Card ref={questionRef}>
         <CardContent className="py-6">
           <QuestionRenderer
             question={question}

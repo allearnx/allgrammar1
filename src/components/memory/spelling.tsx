@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -13,6 +13,8 @@ interface SpellingViewProps {
 
 export function SpellingView({ items }: SpellingViewProps) {
   const [answer, setAnswer] = useState('');
+  const containerRef = useRef<HTMLDivElement>(null);
+  const resultRef = useRef<HTMLDivElement>(null);
   const {
     item,
     currentIndex,
@@ -24,6 +26,16 @@ export function SpellingView({ items }: SpellingViewProps) {
     handleNext,
     resetTest,
   } = useMemoryTest(items, 'spelling', '스펠링 테스트');
+
+  useEffect(() => {
+    containerRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, [currentIndex]);
+
+  useEffect(() => {
+    if (showResult) {
+      resultRef.current?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+  }, [showResult]);
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -45,7 +57,7 @@ export function SpellingView({ items }: SpellingViewProps) {
   if (!item) return null;
 
   return (
-    <div className="space-y-6">
+    <div ref={containerRef} className="space-y-6 scroll-mt-4">
       <div className="flex justify-between items-center">
         <span className="text-sm text-muted-foreground">
           {currentIndex + 1} / {items.length}
@@ -79,7 +91,7 @@ export function SpellingView({ items }: SpellingViewProps) {
       </form>
 
       {showResult && (
-        <div className="space-y-4">
+        <div ref={resultRef} className="space-y-4">
           <ResultCard isCorrect={isCorrect} correctAnswer={item.spelling_answer || undefined} />
           <div className="text-center">
             {isFinished ? (
