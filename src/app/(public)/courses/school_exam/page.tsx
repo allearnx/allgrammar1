@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Noto_Serif_KR, Nanum_Pen_Script } from 'next/font/google';
 import SinaeSinPayButton from '@/components/public/sinaesin-pay-button';
 import ConsultationLink from '@/components/public/consultation-link';
+import NaesinReviewCarousel from './review-carousel';
 import { createAdminClient } from '@/lib/supabase/admin';
 
 const notoSerif = Noto_Serif_KR({ weight: ['700'], subsets: ['latin'], preload: false });
@@ -274,6 +275,22 @@ export default async function SchoolExamPage() {
                 올인내신은 그 기반을 온라인에서 만들어 드립니다.
               </p>
             </div>
+          </div>
+        </section>
+
+        {/* REVIEW */}
+        <section style={{ padding: '96px 24px', background: '#f5f3ff' }}>
+          <div style={{ maxWidth: 1000, margin: '0 auto' }}>
+            <div style={{ display: 'inline-block', fontSize: '0.7rem', fontWeight: 700, letterSpacing: '0.12em', color: '#92784a', textTransform: 'uppercase' as const, background: '#fdf6e3', padding: '4px 12px', borderRadius: 100, marginBottom: 20, border: '1px solid #e8dcc8' }}>
+              수강 후기
+            </div>
+            <h2 style={{ fontSize: 'clamp(1.8rem, 4vw, 2.6rem)', fontWeight: 900, lineHeight: 1.25, letterSpacing: '-0.5px', color: 'var(--navy)', marginBottom: 16 }}>
+              직접 경험한 학부모님들의<br /><span style={{ color: '#a78bfa' }}>생생한 후기입니다.</span>
+            </h2>
+            <p style={{ fontSize: '0.95rem', color: 'var(--text-muted)', lineHeight: 1.85, maxWidth: 520, marginBottom: 56, wordBreak: 'keep-all' as const }}>
+              카카오톡으로 전해진 실제 후기를 그대로 공개합니다.
+            </p>
+            <NaesinReviewCarousel />
           </div>
         </section>
 
