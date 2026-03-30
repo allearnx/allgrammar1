@@ -120,6 +120,11 @@ export const NAV_CONFIG: Record<string, NavGroup[]> = {
       ],
     },
     {
+      items: [
+        { href: '/admin/guide', label: '사용 방법', icon: BookOpen },
+      ],
+    },
+    {
       label: '설정',
       items: [
         { href: '/admin/billing', label: '결제 관리', icon: CreditCard },
