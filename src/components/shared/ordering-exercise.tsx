@@ -59,7 +59,7 @@ export function OrderingExercise({ passage, onComplete }: OrderingExerciseProps)
 
   function handleCheck() {
     if (!sentence || selected.length !== sentence.words.length) return;
-    const correct = selected.every((item, i) => item.originalIndex === i);
+    const correct = selected.every((item, i) => item.word === sentence.words[i]);
     setIsCorrect(correct);
     setShowResult(true);
     setScore((prev) => ({
@@ -168,7 +168,7 @@ export function OrderingExercise({ passage, onComplete }: OrderingExerciseProps)
                 showResult
                   ? isCorrect
                     ? 'bg-green-100 dark:bg-green-900/50 text-green-800 dark:text-green-200'
-                    : item.originalIndex === idx
+                    : item.word === sentence.words[idx]
                       ? 'bg-green-100 dark:bg-green-900/50 text-green-800 dark:text-green-200'
                       : 'bg-red-100 dark:bg-red-900/50 text-red-800 dark:text-red-200'
                   : 'bg-primary/10 text-primary border border-primary/20 hover:bg-primary/20 active:scale-95 cursor-pointer'
