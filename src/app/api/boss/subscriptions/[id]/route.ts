@@ -29,10 +29,21 @@ export const PATCH = createApiHandler(
     const prevTier = sub.tier;
     const admin = createAdminClient();
 
-    // 구독 tier 업데이트
+    // 구독 tier 업데이트 (유료 전환 시 기간 설정)
+    const now = new Date();
+    const updatePayload: Record<string, unknown> = { tier };
+
+    if (prevTier === 'free' && tier === 'paid') {
+      const periodEnd = new Date(now);
+      periodEnd.setDate(periodEnd.getDate() + 30);
+      updatePayload.current_period_start = now.toISOString();
+      updatePayload.current_period_end = periodEnd.toISOString();
+      updatePayload.status = 'active';
+    }
+
     dbResult(await admin
       .from('subscriptions')
-      .update({ tier })
+      .update(updatePayload)
       .eq('id', subId));
 
     // 학원 구독인 경우 academies 테이블도 업데이트
