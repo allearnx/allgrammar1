@@ -271,6 +271,7 @@ export const examAssignmentDeleteSchema = z.object({
 
 export const settingsSchema = z.object({
   textbookId: ID,
+  studentId: ID.optional(),
 });
 
 export const idSchema = z.object({

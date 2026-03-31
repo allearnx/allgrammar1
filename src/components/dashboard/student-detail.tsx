@@ -10,6 +10,7 @@ import { VocaProgressCard } from './voca-progress-card';
 import { StudentReportPanel } from './student-report-panel';
 import { ParentShareButton } from './parent-share-button';
 import { ImpersonateButton } from './impersonate-button';
+import { TextbookAssigner } from './textbook-assigner';
 
 interface NaesinData {
   textbookId: string;
@@ -55,7 +56,7 @@ export async function StudentDetail({ user, studentId, naesinData }: Props) {
 
   if (!student) notFound();
 
-  const [videoRes, memoryRes, textbookRes, passageStagesRes, naesinProgressRes, vocaProgressRes, vocaAssignmentRes] = await Promise.all([
+  const [videoRes, memoryRes, textbookRes, passageStagesRes, naesinProgressRes, vocaProgressRes, vocaAssignmentRes, naesinAssignmentRes, naesinTextbooksRes] = await Promise.all([
     admin
       .from('student_progress')
       .select('*, grammar:grammars(title, level:levels(level_number, title_ko))')
@@ -88,6 +89,18 @@ export async function StudentDetail({ user, studentId, naesinData }: Props) {
       .eq('student_id', studentId)
       .eq('service', 'voca')
       .maybeSingle(),
+    admin
+      .from('service_assignments')
+      .select('id')
+      .eq('student_id', studentId)
+      .eq('service', 'naesin')
+      .maybeSingle(),
+    admin
+      .from('naesin_textbooks')
+      .select('id, grade, publisher, display_name')
+      .eq('is_active', true)
+      .order('grade')
+      .order('sort_order'),
   ]);
 
   const passageStages = (passageStagesRes.data?.passage_required_stages as string[] | null) ?? ['fill_blanks', 'translation'];
@@ -107,6 +120,8 @@ export async function StudentDetail({ user, studentId, naesinData }: Props) {
 
   const vocaProgress = (vocaProgressRes.data || []) as unknown as VocaProgressRow[];
   const hasVocaAssignment = !!vocaAssignmentRes.data;
+  const hasNaesinAssignment = !!naesinAssignmentRes.data;
+  const naesinTextbooks = naesinTextbooksRes.data || [];
   const naesinUnits = naesinData?.units || [];
 
   const detailServices: string[] = [];
@@ -141,6 +156,15 @@ export async function StudentDetail({ user, studentId, naesinData }: Props) {
         {/* 올킬보카 서비스 카드 */}
         {hasVocaAssignment && (
           <VocaProgressCard vocaProgress={vocaProgress} />
+        )}
+
+        {/* 교과서 배정 */}
+        {hasNaesinAssignment && (
+          <TextbookAssigner
+            studentId={studentId}
+            textbooks={naesinTextbooks}
+            currentTextbookName={naesinData?.textbookName}
+          />
         )}
 
         {/* 내신 대비 서비스 카드 */}
