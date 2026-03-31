@@ -255,14 +255,21 @@ export function AddPassageDialog({ unitId, onAdd }: { unitId: string; onAdd: () 
       const passageData = await res.json();
       toast.success('지문이 추가되었습니다');
 
-      try {
-        toast.info('어법/어휘 문제 생성 중...');
-        const gvRes = await fetch('/api/naesin/passages/extract-grammar-vocab', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ sentences: builtSentences }),
-        });
-        if (gvRes.ok) {
+      // Close dialog immediately — grammar/vocab generation runs in background
+      onAdd();
+      setOpen(false);
+      setTitle('');
+      setSentences([{ original: '', korean: '' }]);
+
+      // Fire-and-forget: grammar/vocab generation (user doesn't need to wait)
+      toast.info('어법/어휘 문제 백그라운드 생성 중...');
+      fetch('/api/naesin/passages/extract-grammar-vocab', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ sentences: builtSentences }),
+      })
+        .then(async (gvRes) => {
+          if (!gvRes.ok) throw new Error('API error');
           const gvData = await gvRes.json();
           if (gvData.items && gvData.items.length > 0) {
             await fetch('/api/naesin/passages', {
@@ -271,17 +278,13 @@ export function AddPassageDialog({ unitId, onAdd }: { unitId: string; onAdd: () 
               body: JSON.stringify({ id: passageData.id, grammar_vocab_items: gvData.items }),
             });
             toast.success(`어법/어휘 문제 ${gvData.items.length}개 생성됨`);
+            onAdd(); // Refresh list to show updated data
           }
-        }
-      } catch (gvErr) {
-        logger.error('admin.add_passage.grammar_vocab', { error: gvErr instanceof Error ? gvErr.message : String(gvErr) });
-        toast.warning('어법/어휘 문제 생성 실패 (나중에 수동 생성 가능)');
-      }
-
-      onAdd();
-      setOpen(false);
-      setTitle('');
-      setSentences([{ original: '', korean: '' }]);
+        })
+        .catch((gvErr) => {
+          logger.error('admin.add_passage.grammar_vocab', { error: gvErr instanceof Error ? gvErr.message : String(gvErr) });
+          toast.warning('어법/어휘 문제 생성 실패 (나중에 수동 생성 가능)');
+        });
     } catch (err) {
       logger.error('admin.add_passage', { error: err instanceof Error ? err.message : String(err) });
       toast.error('지문 추가 실패');

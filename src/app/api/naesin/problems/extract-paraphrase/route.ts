@@ -84,10 +84,10 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'unitId, pdfBase64, mediaType는 필수입니다.' }, { status: 400 });
     }
 
-    // Step 1: Extract problems from PDF
+    // Step 1: Extract problems from PDF (Haiku — fast OCR, quality-critical paraphrasing stays Sonnet)
     const extractMessage = await anthropic.messages.create({
-      model: 'claude-sonnet-4-6',
-      max_tokens: 16384,
+      model: 'claude-haiku-4-5-20251001',
+      max_tokens: 8192,
       messages: [
         {
           role: 'user',
