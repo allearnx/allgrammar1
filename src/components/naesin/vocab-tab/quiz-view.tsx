@@ -10,6 +10,7 @@ import { logger } from '@/lib/logger';
 import { toast } from 'sonner';
 import { ScoreBadges, NextButton } from '@/components/memory/shared';
 import { useRetryWrong } from '@/hooks/use-retry-wrong';
+import { getEncouragement } from '@/lib/naesin/encouragement';
 import type { NaesinVocabulary, NaesinVocabQuizResult } from '@/types/database';
 
 interface QuizQuestion {
@@ -212,7 +213,7 @@ export function NaesinQuizView({
               <>
                 <CheckCircle className="h-8 w-8 text-green-600 mx-auto" />
                 <p className="font-medium text-green-800 dark:text-green-200">
-                  퀴즈 통과!
+                  {getEncouragement(pct)}
                 </p>
                 <p className="text-sm text-green-600 dark:text-green-400">
                   {onGoToSpelling ? '이제 스펠링으로 넘어가자!' : '잘했어요!'}
@@ -228,7 +229,7 @@ export function NaesinQuizView({
               <>
                 <Target className="h-8 w-8 text-orange-600 mx-auto" />
                 <p className="font-medium text-orange-800 dark:text-orange-200">
-                  아쉽다! 목표 점수는 80점이야
+                  {getEncouragement(pct)}
                 </p>
                 <p className="text-sm text-orange-600 dark:text-orange-400">
                   다시 도전해봐!

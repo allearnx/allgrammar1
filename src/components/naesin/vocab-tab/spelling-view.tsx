@@ -8,6 +8,7 @@ import { Target, CheckCircle, ArrowRight, RotateCcw, ListRestart } from 'lucide-
 import { cn, shuffle } from '@/lib/utils';
 import { ScoreBadges, ResultCard, NextButton } from '@/components/memory/shared';
 import { useRetryWrong } from '@/hooks/use-retry-wrong';
+import { getEncouragement } from '@/lib/naesin/encouragement';
 import type { MemoryItem, StudentMemoryProgress, NaesinVocabulary } from '@/types/database';
 
 type FlashcardItem = MemoryItem & { progress: StudentMemoryProgress | null };
@@ -294,7 +295,7 @@ function SpellingStatusBanner({
       <Card className="border-orange-200 bg-orange-50 dark:bg-orange-950/30 dark:border-orange-800">
         <CardContent className="py-4 text-center space-y-2">
           <Target className="h-8 w-8 text-orange-600 mx-auto" />
-          <p className="font-medium text-orange-800 dark:text-orange-200">아쉽다! 목표 점수는 80점이야</p>
+          <p className="font-medium text-orange-800 dark:text-orange-200">{getEncouragement(0)}</p>
           <p className="text-sm text-orange-600 dark:text-orange-400">다시 도전해봐!</p>
         </CardContent>
       </Card>
@@ -306,7 +307,7 @@ function SpellingStatusBanner({
       <CardContent className="py-4 text-center space-y-2">
         <CheckCircle className="h-8 w-8 text-green-600 mx-auto" />
         <p className="font-medium text-green-800 dark:text-green-200">
-          {allVocabDone ? '단어 암기 단계 완료!' : '스펠링 통과!'}
+          {allVocabDone ? '단어 암기 단계 완료!' : getEncouragement(100)}
         </p>
         <p className="text-sm text-green-600 dark:text-green-400">
           {allVocabDone ? '교과서 암기로 넘어가자!' : '나머지 단계도 마무리하자'}

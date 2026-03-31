@@ -58,61 +58,38 @@ function makeInput(overrides: Partial<StageUnlockInput> = {}): StageUnlockInput 
 }
 
 describe('calculateStageStatuses', () => {
-  describe('기본 잠금 흐름 (5단계 순차)', () => {
-    it('진도 없으면 vocab만 available, 나머지 locked', () => {
+  describe('순서 잠금 없음 (모든 단계 즉시 접근)', () => {
+    it('진도 없어도 콘텐츠 있는 모든 단계가 available', () => {
       const result = calculateStageStatuses(makeInput());
       expect(result.vocab).toBe('available');
-      expect(result.passage).toBe('locked');
-      expect(result.dialogue).toBe('locked');
-      expect(result.grammar).toBe('locked');
-      expect(result.problem).toBe('locked');
-      expect(result.lastReview).toBe('locked');
+      expect(result.passage).toBe('available');
+      expect(result.dialogue).toBe('available');
+      expect(result.grammar).toBe('available');
+      expect(result.problem).toBe('available');
+      expect(result.lastReview).toBe('locked'); // D-3 유지
     });
 
-    it('vocab 완료 → passage available', () => {
+    it('vocab 완료 → vocab completed, 나머지 available', () => {
       const result = calculateStageStatuses(makeInput({
         progress: makeProgress({ vocab_completed: true }),
       }));
       expect(result.vocab).toBe('completed');
       expect(result.passage).toBe('available');
-      expect(result.dialogue).toBe('locked');
-      expect(result.grammar).toBe('locked');
-    });
-
-    it('vocab+passage 완료 → dialogue available', () => {
-      const result = calculateStageStatuses(makeInput({
-        progress: makeProgress({
-          vocab_completed: true,
-          passage_completed: true,
-        }),
-      }));
       expect(result.dialogue).toBe('available');
-      expect(result.grammar).toBe('locked');
-    });
-
-    it('vocab+passage+dialogue 완료 → grammar available', () => {
-      const result = calculateStageStatuses(makeInput({
-        progress: makeProgress({
-          vocab_completed: true,
-          passage_completed: true,
-          dialogue_completed: true,
-        }),
-      }));
       expect(result.grammar).toBe('available');
-      expect(result.problem).toBe('locked');
     });
 
-    it('vocab+passage+dialogue+grammar 완료 → problem available', () => {
+    it('vocab+passage 완료 → 둘 completed, 나머지 available', () => {
       const result = calculateStageStatuses(makeInput({
         progress: makeProgress({
           vocab_completed: true,
           passage_completed: true,
-          dialogue_completed: true,
-          grammar_completed: true,
         }),
       }));
-      expect(result.problem).toBe('available');
-      expect(result.lastReview).toBe('locked');
+      expect(result.vocab).toBe('completed');
+      expect(result.passage).toBe('completed');
+      expect(result.dialogue).toBe('available');
+      expect(result.grammar).toBe('available');
     });
 
     it('전체 완료 → 모두 completed (lastReview 제외 - D-3 필요)', () => {
@@ -234,9 +211,8 @@ describe('calculateStageStatuses', () => {
         progress: null, // 아무 진도 없음
         examDate: futureDate.toISOString().split('T')[0],
       }));
-      // vocab은 available, 나머지 locked이지만...
       expect(result.vocab).toBe('available');
-      expect(result.passage).toBe('locked');
+      expect(result.passage).toBe('available');
       // lastReview는 D-3 이므로 available
       expect(result.lastReview).toBe('available');
     });
@@ -357,6 +333,20 @@ describe('calculateStageStatuses', () => {
         }),
       }));
       expect(result.passage).toBe('available');
+    });
+  });
+
+  describe('enabledStages hidden 적용', () => {
+    it('enabledStages에 없는 단계는 hidden', () => {
+      const result = calculateStageStatuses(makeInput({
+        enabledStages: ['vocab', 'passage', 'problem'],
+      }));
+      expect(result.vocab).toBe('available');
+      expect(result.passage).toBe('available');
+      expect(result.dialogue).toBe('hidden');
+      expect(result.grammar).toBe('hidden');
+      expect(result.problem).toBe('available');
+      expect(result.lastReview).toBe('hidden');
     });
   });
 

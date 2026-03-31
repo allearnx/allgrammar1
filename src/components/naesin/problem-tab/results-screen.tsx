@@ -1,6 +1,7 @@
 import { Card, CardContent } from '@/components/ui/card';
 import { AlertTriangle } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { getEncouragement } from '@/lib/naesin/encouragement';
 import type { WrongItem } from '@/hooks/use-problem-draft';
 
 export function ResultsScreen({
@@ -25,6 +26,12 @@ export function ResultsScreen({
         </p>
         <p className="text-muted-foreground">
           {totalQuestions}문제 중 {score.correct}개 정답
+        </p>
+        <p className={cn(
+          'text-sm font-medium mt-1',
+          pct >= 80 ? 'text-green-600' : 'text-orange-600'
+        )}>
+          {getEncouragement(pct)}
         </p>
       </div>
 

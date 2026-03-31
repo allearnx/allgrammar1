@@ -19,12 +19,9 @@ export interface StageUnlockInput {
 }
 
 /**
- * 5-stage progressive unlock:
- * vocab → passage → grammar → problem → lastReview
- *
- * All thresholds are 80%.
+ * All stages with content are available (no sequential lock).
+ * Completed stages stay completed. Stages with no content auto-complete.
  * lastReview unlocks D-3 before exam (progress-independent).
- * Stages with no content auto-complete.
  */
 export function calculateStageStatuses(input: StageUnlockInput): NaesinStageStatuses;
 /**
@@ -63,25 +60,25 @@ export function calculateStageStatuses(
     content = { hasVocab: false, hasPassage: false, hasDialogue: false, hasGrammar: false, hasProblem: false, hasLastReview: false };
   }
 
-  // Stage 1: Vocab — always available (first stage)
+  // Stage 1: Vocab
   const vocabStatus = getVocabStatus(progress, content.hasVocab, vocabQuizSetCount);
 
-  // Stage 2: Passage — requires vocab completed
-  const passageStatus = getPassageStatus(progress, content.hasPassage, vocabStatus);
+  // Stage 2: Passage
+  const passageStatus = getPassageStatus(progress, content.hasPassage);
 
-  // Stage 3: Dialogue — requires passage completed
-  const dialogueStatus = getDialogueStatus(progress, content.hasDialogue, passageStatus);
+  // Stage 3: Dialogue
+  const dialogueStatus = getDialogueStatus(progress, content.hasDialogue);
 
-  // Stage 4: Grammar — requires dialogue completed
-  const grammarStatus = getGrammarStatus(progress, content.hasGrammar, dialogueStatus, grammarVideoCount);
+  // Stage 4: Grammar
+  const grammarStatus = getGrammarStatus(progress, content.hasGrammar, grammarVideoCount);
 
-  // Stage 5: Problem — requires grammar completed
-  const problemStatus = getProblemStatus(progress, content.hasProblem, grammarStatus);
+  // Stage 5: Problem
+  const problemStatus = getProblemStatus(progress, content.hasProblem);
 
   // Stage 6: Last Review — D-3 auto-unlock (progress-independent)
   const lastReviewStatus = getLastReviewStatus(content.hasLastReview, examDate);
 
-  const result: NaesinStageStatuses = {
+  let result: NaesinStageStatuses = {
     vocab: vocabStatus,
     passage: passageStatus,
     dialogue: dialogueStatus,
@@ -128,29 +125,24 @@ function getVocabStatus(
 function getPassageStatus(
   progress: NaesinStudentProgress | null,
   hasContent: boolean,
-  prevStatus: NaesinStageStatus
 ): NaesinStageStatus {
   if (!hasContent) return 'completed';
   if (progress?.passage_completed) return 'completed';
-  if (prevStatus !== 'completed') return 'locked';
   return 'available';
 }
 
 function getDialogueStatus(
   progress: NaesinStudentProgress | null,
   hasContent: boolean,
-  prevStatus: NaesinStageStatus
 ): NaesinStageStatus {
   if (!hasContent) return 'completed';
   if (progress?.dialogue_completed) return 'completed';
-  if (prevStatus !== 'completed') return 'locked';
   return 'available';
 }
 
 function getGrammarStatus(
   progress: NaesinStudentProgress | null,
   hasContent: boolean,
-  prevStatus: NaesinStageStatus,
   videoCount: number
 ): NaesinStageStatus {
   if (!hasContent) return 'completed';
@@ -163,18 +155,15 @@ function getGrammarStatus(
     }
   }
 
-  if (prevStatus !== 'completed') return 'locked';
   return 'available';
 }
 
 function getProblemStatus(
   progress: NaesinStudentProgress | null,
   hasContent: boolean,
-  prevStatus: NaesinStageStatus
 ): NaesinStageStatus {
   if (!hasContent) return 'completed';
   if (progress?.problem_completed) return 'completed';
-  if (prevStatus !== 'completed') return 'locked';
   return 'available';
 }
 

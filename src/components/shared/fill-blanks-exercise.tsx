@@ -14,6 +14,7 @@ import {
 } from '@/components/ui/dialog';
 import { CheckCircle, AlertTriangle, Trophy, RotateCcw, PenLine, ListRestart } from 'lucide-react';
 import { useRetryWrong } from '@/hooks/use-retry-wrong';
+import { getEncouragement } from '@/lib/naesin/encouragement';
 import type { TextbookPassage, BlankItem } from '@/types/database';
 
 type Difficulty = 'easy' | 'medium' | 'hard';
@@ -228,7 +229,7 @@ export function FillBlanksExercise({ passage, onComplete, showWrongAlert: _showW
 
       <div className="flex items-center gap-2 text-xs text-muted-foreground bg-muted/50 rounded-lg px-3 py-2">
         <AlertTriangle className="h-3.5 w-3.5 shrink-0" />
-        모든 시도가 점수로 기록되어 리포트에 반영됩니다. 80점 이상이면 다음 단계로 넘어갈 수 있어요!
+        모든 시도가 점수로 기록되어 리포트에 반영됩니다.
       </div>
 
       {retryMode && (
@@ -343,7 +344,7 @@ function FillBlanksResultDialog({
                 </div>
               </div>
               <DialogTitle className="text-center text-lg">
-                {result.score}점 — 통과!
+                {result.score}점 — {getEncouragement(result.score)}
               </DialogTitle>
               <DialogDescription className="text-center">
                 {result.correct}/{result.total} 정답! 잘했어!
@@ -371,7 +372,7 @@ function FillBlanksResultDialog({
                 {result.score}점
               </DialogTitle>
               <DialogDescription className="text-center leading-relaxed">
-                {result.correct}/{result.total} 정답
+                {result.correct}/{result.total} 정답 — {getEncouragement(result.score)}
               </DialogDescription>
             </DialogHeader>
             <div className="space-y-3 mt-2">
@@ -380,12 +381,6 @@ function FillBlanksResultDialog({
                   <AlertTriangle className="h-4 w-4 text-orange-600 mt-0.5 shrink-0" />
                   <p className="text-sm text-orange-800">
                     틀린 단어를 <span className="font-bold">오답 노트에 써서 선생님에게 제출</span>하고 다시 외워서 도전하자!
-                  </p>
-                </div>
-                <div className="flex items-start gap-2">
-                  <CheckCircle className="h-4 w-4 text-orange-600 mt-0.5 shrink-0" />
-                  <p className="text-sm text-orange-800">
-                    <span className="font-bold">80점 이상</span>을 받아야 다음 단계로 넘어갈 수 있어!
                   </p>
                 </div>
               </div>
