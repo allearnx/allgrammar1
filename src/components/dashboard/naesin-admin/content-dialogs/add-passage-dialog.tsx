@@ -195,7 +195,14 @@ export function AddPassageDialog({ unitId, onAdd }: { unitId: string; onAdd: () 
       }
       const data = await res.json();
       if (data.title) setTitle(data.title);
-      if (data.original_text && data.korean_translation) {
+      if (data.sentences && data.sentences.length > 0) {
+        // Use pre-paired sentences from AI (no misalignment risk)
+        setSentences(data.sentences.map((s: { original: string; korean: string }) => ({
+          original: s.original?.trim() || '',
+          korean: s.korean?.trim() || '',
+        })));
+      } else if (data.original_text && data.korean_translation) {
+        // Fallback: split and pair (legacy)
         setSentences(splitIntoSentencePairs(data.original_text, data.korean_translation));
       }
       toast.success('본문이 추출되었습니다. 문장별로 확인/수정해주세요.');
