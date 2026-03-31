@@ -5,6 +5,7 @@ import SinaeSinPayButton from '@/components/public/sinaesin-pay-button';
 import ConsultationLink from '@/components/public/consultation-link';
 import NaesinReviewCarousel from './review-carousel';
 import { createAdminClient } from '@/lib/supabase/admin';
+import { whyCards, curriculumSteps, oldWay, newWay, pricingItems } from './school-exam-data';
 import './naesin.css';
 
 const notoSerif = Noto_Serif_KR({ weight: ['700'], subsets: ['latin'], preload: false });
@@ -14,45 +15,6 @@ export const metadata: Metadata = {
   title: '올인내신 | 상위권을 위한 영어 내신 대비',
   description: '95점에서 100점으로 가는 그 구간을 집중적으로 파고듭니다. 킬러 문제, 대치동 자료, AI 변형 문제 완벽 대비.',
 };
-
-const whyCards = [
-  { num: 'Point 01', title: '킬러 문제에 강하다', desc: '상위권이 실제로 틀리는 문제만 집중합니다.\n기초 반복은 이제 그만.' },
-  { num: 'Point 02', title: '자료의 퀄리티가 다릅니다', desc: '대치동 아이들이 쓰는 그 자료입니다.\n자료 받으러 학원가지 마세요.' },
-  { num: 'Point 03', title: '오프라인보다 더 촘촘한 관리', desc: '오답, 학습 현황, 성취도까지 선생님이 파악합니다.\n학원보다 더 꼼꼼하게.' },
-  { num: 'Point 04', title: '대형학원 수준의 학습량,\n그리고 더 나은 효율', desc: '양은 그대로, 쉬운 반복은 삭제.\n틀리는 문제 유형만 집중 반복합니다.' },
-];
-
-const curriculumSteps = [
-  { step: '01', title: '단어 → 문법 → 본문 순서 지키기', desc: '중학 수준을 넘어서는 심화 문법까지 다루기 위해\n문법을 먼저 시작해야 합니다.\n여기서 최소 10점이 올라요.' },
-  { step: '02', title: 'AI로 강화된 본문 변형 — 철저 대비', desc: '무작정 암기는 변형 문제에 취약합니다.\n어디가 중요한지를 알아야 어떤 변형이 나와도 대응할 수 있어요.' },
-  { step: '03', title: '문법은 고등까지 — 시험이 실력 쌓는 기회', desc: '중학 문법에서 끝내지 마세요.\n고등 문법까지 깊이 있는 문제를 풀어야 고등 시험 범위를 감당할 수 있어요.' },
-  { step: '04', title: '기출문제로 유형 익히기', desc: '문제집 문제 ≠ 기출문제.\n본인 학교보다 어려운 학군지 기출까지 풀어야 출제 유형에 익숙해집니다.' },
-  { step: '05', title: '틀린 문제 집요하게 분석', desc: '답만 확인하고 넘어가면 안 됩니다.\n왜 틀렸는지 이유를 파악하고 외워야 진짜 실력이 됩니다.' },
-];
-
-const oldWay = [
-  '기초 반복 위주 — 틀리는 문제 유형을 파고들지 않음',
-  '본문 암기에만 집중 — 변형 문제에 취약',
-  '중학 문법 수준에서 멈춤',
-  '자료의 질이 학원마다 천차만별',
-  '오답 관리가 학생 개인 몫',
-];
-
-const newWay = [
-  '킬러 문제만 집중 — 상위권이 실제로 틀리는 유형 반복',
-  'AI 변형 문제로 어떤 변형도 대응 가능',
-  '고등 문법까지 — 수능·내신 완벽 대비',
-  '대치동 수준의 자료, 온라인으로',
-  '오답 자동 누적 & 선생님이 직접 관리',
-];
-
-const pricingItems = [
-  ['녹화 강의', '교과서별·문법별, 언제든 다시 볼 수 있어요'],
-  ['주 4회 그룹 온라인 클리닉', '함께 공부하고, 스케줄 점검하고, 오답을 선생님이 직접 설명합니다'],
-  ['교과서 본문 암기', '자체 플랫폼으로 학습 현황 실시간 관리'],
-  ['기출 문제 뱅크', '오답 자동 누적 및 재출제'],
-  ['성취도 리포트', '학부모 공유 가능'],
-];
 
 export default async function SchoolExamPage() {
   const supabase = createAdminClient();
