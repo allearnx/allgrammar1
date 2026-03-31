@@ -1,7 +1,6 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
-import { logger } from '@/lib/logger';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -22,37 +21,13 @@ export function SocraticChatbot({ lessonId, lessonTitle }: SocraticChatbotProps)
   const [inputValue, setInputValue] = useState('');
   const [loading, setLoading] = useState(false);
   const [starting, setStarting] = useState(false);
-  const [hasQuestions, setHasQuestions] = useState<boolean | null>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
-
-  // Check if this lesson has chat questions
-  useEffect(() => {
-    async function checkQuestions() {
-      try {
-        const res = await fetch(`/api/naesin/grammar/chat/questions?lessonId=${lessonId}`);
-        if (res.ok) {
-          const data = await res.json();
-          setHasQuestions(Array.isArray(data) && data.length > 0);
-        } else {
-          setHasQuestions(false);
-        }
-      } catch (err) {
-        logger.error('chatbot.check_questions', { error: err instanceof Error ? err.message : String(err) });
-        setHasQuestions(false);
-      }
-    }
-    checkQuestions();
-  }, [lessonId]);
 
   useEffect(() => {
     if (scrollRef.current) {
       scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
     }
   }, [session?.messages]);
-
-  if (hasQuestions === null || hasQuestions === false) {
-    return null;
-  }
 
   async function handleStart() {
     setStarting(true);

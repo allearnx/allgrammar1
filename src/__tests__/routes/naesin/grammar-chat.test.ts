@@ -4,6 +4,7 @@ import { testStudent } from '../../helpers/fixtures';
 
 const mockGetUser = vi.fn();
 const mockCreateClient = vi.fn();
+const mockAdminFrom = vi.fn();
 
 vi.mock('@/lib/auth/helpers', () => ({
   getUser: (...args: unknown[]) => mockGetUser(...args),
@@ -11,9 +12,32 @@ vi.mock('@/lib/auth/helpers', () => ({
 vi.mock('@/lib/supabase/server', () => ({
   createClient: (...args: unknown[]) => mockCreateClient(...args),
 }));
+vi.mock('@/lib/supabase/admin', () => ({
+  createAdminClient: () => ({ from: mockAdminFrom }),
+}));
 vi.mock('@/lib/api/rate-limit', () => ({
   checkRateLimit: () => null,
 }));
+vi.mock('@anthropic-ai/sdk', () => {
+  return {
+    default: class {
+      messages = {
+        create: vi.fn().mockResolvedValue({
+          content: [{
+            type: 'text',
+            text: JSON.stringify([
+              { question_text: 'Auto Q1', grammar_concept: 'Test', hint: 'hint', expected_answer_keywords: ['key'] },
+              { question_text: 'Auto Q2', grammar_concept: 'Test', hint: 'hint', expected_answer_keywords: ['key'] },
+              { question_text: 'Auto Q3', grammar_concept: 'Test', hint: 'hint', expected_answer_keywords: ['key'] },
+              { question_text: 'Auto Q4', grammar_concept: 'Test', hint: 'hint', expected_answer_keywords: ['key'] },
+              { question_text: 'Auto Q5', grammar_concept: 'Test', hint: 'hint', expected_answer_keywords: ['key'] },
+            ]),
+          }],
+        }),
+      };
+    },
+  };
+});
 
 function makeRequest(body: unknown) {
   return new NextRequest('http://localhost/api/naesin/grammar/chat/start', {
@@ -104,24 +128,67 @@ describe('naesin/grammar/chat/start', () => {
     const res = await POST(makeRequest({ lessonId: 'lesson-1' }));
     expect(res.status).toBe(200);
     const body = await res.json();
-    // Should create a new session, not return existing
     expect(body.id).toBe('session-new');
-    // Should have called update to close existing sessions
     expect(chain.update).toHaveBeenCalled();
   });
 
-  it('질문 없는 레슨 → 404', async () => {
-    const chain = buildChain({
-      then: vi.fn((resolve: (v: unknown) => void) => resolve({ data: [], error: null })),
+  it('질문 없는 레슨 → AI 자동 생성 후 세션 시작', async () => {
+    const generatedQuestions = [
+      { id: 'auto-q-1', question_text: 'Auto Q1', sort_order: 0 },
+    ];
+    const newSession = {
+      id: 'session-auto',
+      student_id: 'student-1',
+      lesson_id: 'lesson-empty',
+      messages: [{ role: 'ai', content: 'Auto Q1', questionId: 'auto-q-1' }],
+      turn_count: 0,
+    };
+
+    // Track questions query count to return different results
+    let questionsQueryCount = 0;
+
+    const sessionChain = buildChain();
+    const questionsChain = buildChain({
+      then: vi.fn((resolve: (v: unknown) => void) => {
+        questionsQueryCount++;
+        if (questionsQueryCount === 1) {
+          resolve({ data: [], error: null });
+        } else {
+          resolve({ data: generatedQuestions, error: null });
+        }
+      }),
+    });
+    const lessonChain = buildChain({
+      single: vi.fn().mockResolvedValue({ data: { title: 'Present Tense', text_content: 'Content here' }, error: null }),
+    });
+    const sessionInsertChain = buildChain({
+      single: vi.fn().mockResolvedValue({ data: newSession, error: null }),
     });
 
-    const from = vi.fn().mockReturnValue(chain);
+    // Track session from() calls to return insert chain on second call
+    let sessionFromCount = 0;
+    const from = vi.fn((table: string) => {
+      if (table === 'naesin_grammar_chat_questions') return questionsChain;
+      if (table === 'naesin_grammar_lessons') return lessonChain;
+      // naesin_grammar_chat_sessions
+      sessionFromCount++;
+      return sessionFromCount === 1 ? sessionChain : sessionInsertChain;
+    });
+
+    // Admin client mock for insert
+    const adminChain = buildChain();
+    mockAdminFrom.mockReturnValue(adminChain);
+
     mockGetUser.mockResolvedValue(testStudent);
     mockCreateClient.mockResolvedValue({ from });
 
     const { POST } = await import('@/app/api/naesin/grammar/chat/start/route');
     const res = await POST(makeRequest({ lessonId: 'lesson-empty' }));
-    expect(res.status).toBe(404);
+    expect(res.status).toBe(200);
+    const body = await res.json();
+    expect(body.id).toBe('session-auto');
+    // Admin client should have been called to insert generated questions
+    expect(mockAdminFrom).toHaveBeenCalledWith('naesin_grammar_chat_questions');
   });
 
   it('미인증 → 401', async () => {
