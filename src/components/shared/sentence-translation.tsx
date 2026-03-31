@@ -5,7 +5,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { Badge } from '@/components/ui/badge';
-import { Send, AlertTriangle, RotateCcw, ChevronRight, Loader2 } from 'lucide-react';
+import { Send, AlertTriangle, RotateCcw, ChevronRight, Loader2, ListRestart } from 'lucide-react';
 import type { TranslationExerciseProps, SentenceData, GradingResult, WrongTranslation } from './translation-exercise';
 import { logger } from '@/lib/logger';
 
@@ -19,21 +19,28 @@ export function SentenceBysentenceTranslation({ passage, onComplete, showWrongAl
   const [grading, setGrading] = useState(false);
   const [gradingError, setGradingError] = useState<string | null>(null);
 
-  // All pages' results collected for final scoring
   const [allCorrectCount, setAllCorrectCount] = useState(0);
   const [allWrongs, setAllWrongs] = useState<WrongTranslation[]>([]);
   const [completed, setCompleted] = useState(false);
 
-  const pageStart = currentPage * sentencesPerPage;
-  const pageEnd = Math.min(pageStart + sentencesPerPage, sentences.length);
-  const pageSentences = useMemo(
-    () => sentences.slice(pageStart, pageEnd),
-    [sentences, pageStart, pageEnd]
-  );
+  // Retry-wrong-only state
+  const [retryMode, setRetryMode] = useState(false);
+  const [retryWrongIndices, setRetryWrongIndices] = useState<number[]>([]);
+  const [retryPreviousCorrectCount, setRetryPreviousCorrectCount] = useState(0);
 
-  const currentResults = pageResults[currentPage] ?? null;
-  const filledCount = pageSentences.filter((_, idx) => (answers[pageStart + idx] || '').trim().length > 0).length;
-  const allFilled = filledCount === pageSentences.length;
+  // In retry mode, show only wrong sentences (single page)
+  const effectiveSentences = useMemo(() => {
+    if (retryMode) {
+      return retryWrongIndices.map((gi) => ({ sentence: sentences[gi], globalIdx: gi }));
+    }
+    const pageStart = currentPage * sentencesPerPage;
+    const pageEnd = Math.min(pageStart + sentencesPerPage, sentences.length);
+    return sentences.slice(pageStart, pageEnd).map((s, i) => ({ sentence: s, globalIdx: pageStart + i }));
+  }, [retryMode, retryWrongIndices, sentences, currentPage, sentencesPerPage]);
+
+  const currentResults = retryMode ? (pageResults[-1] ?? null) : (pageResults[currentPage] ?? null);
+  const filledCount = effectiveSentences.filter(({ globalIdx }) => (answers[globalIdx] || '').trim().length > 0).length;
+  const allFilled = filledCount === effectiveSentences.length;
 
   function updateAnswer(globalIdx: number, value: string) {
     setAnswers((prev) => ({ ...prev, [globalIdx]: value }));
@@ -46,10 +53,10 @@ export function SentenceBysentenceTranslation({ passage, onComplete, showWrongAl
     setGradingError(null);
 
     try {
-      const payload = pageSentences.map((s, localIdx) => ({
+      const payload = effectiveSentences.map(({ sentence: s, globalIdx }) => ({
         koreanText: s.korean,
         originalText: s.original,
-        studentAnswer: (answers[pageStart + localIdx] || '').trim(),
+        studentAnswer: (answers[globalIdx] || '').trim(),
         ...(s.acceptedAnswers?.length ? { acceptedAnswers: s.acceptedAnswers } : {}),
       }));
 
@@ -72,7 +79,7 @@ export function SentenceBysentenceTranslation({ passage, onComplete, showWrongAl
       const pageWrongs: WrongTranslation[] = [];
 
       apiResults.forEach((r, localIdx) => {
-        const globalIdx = pageStart + localIdx;
+        const { globalIdx, sentence: s } = effectiveSentences[localIdx];
         results[globalIdx] = r;
 
         if (r.score === 100) {
@@ -80,7 +87,7 @@ export function SentenceBysentenceTranslation({ passage, onComplete, showWrongAl
         } else {
           pageWrongs.push({
             type: 'translation',
-            koreanText: pageSentences[localIdx].korean,
+            koreanText: s.korean,
             userAnswer: (answers[globalIdx] || '').trim(),
             score: r.score,
             feedback: r.feedback,
@@ -88,17 +95,30 @@ export function SentenceBysentenceTranslation({ passage, onComplete, showWrongAl
         }
       });
 
-      setPageResults((prev) => ({ ...prev, [currentPage]: results }));
+      if (retryMode) {
+        // Store retry results under key -1
+        setPageResults((prev) => ({ ...prev, [-1]: results }));
 
-      const newTotalCorrect = allCorrectCount + pageCorrect;
-      const newAllWrongs = [...allWrongs, ...pageWrongs];
-      setAllCorrectCount(newTotalCorrect);
-      setAllWrongs(newAllWrongs);
-
-      if (currentPage === totalPages - 1) {
-        const totalScore = Math.round((newTotalCorrect / sentences.length) * 100);
+        // Combine: previous correct + newly correct in this retry
+        const totalCorrect = retryPreviousCorrectCount + pageCorrect;
+        const totalScore = Math.round((totalCorrect / sentences.length) * 100);
+        setAllCorrectCount(totalCorrect);
+        setAllWrongs(pageWrongs);
         setCompleted(true);
-        onComplete(totalScore, newAllWrongs);
+        onComplete(totalScore, pageWrongs);
+      } else {
+        setPageResults((prev) => ({ ...prev, [currentPage]: results }));
+
+        const newTotalCorrect = allCorrectCount + pageCorrect;
+        const newAllWrongs = [...allWrongs, ...pageWrongs];
+        setAllCorrectCount(newTotalCorrect);
+        setAllWrongs(newAllWrongs);
+
+        if (currentPage === totalPages - 1) {
+          const totalScore = Math.round((newTotalCorrect / sentences.length) * 100);
+          setCompleted(true);
+          onComplete(totalScore, newAllWrongs);
+        }
       }
     } catch (err) {
       logger.error('shared.sentence_translation', { error: err instanceof Error ? err.message : String(err) });
@@ -112,6 +132,58 @@ export function SentenceBysentenceTranslation({ passage, onComplete, showWrongAl
     setCurrentPage((prev) => prev + 1);
   }
 
+  function handleRetryWrong() {
+    if (!completed) return;
+
+    // Collect wrong sentence indices from all page results
+    const wrongIndices: number[] = [];
+    let correctSoFar = 0;
+
+    if (retryMode) {
+      // In retry-of-retry: check retry results (key -1)
+      const retryResults = pageResults[-1];
+      for (const gi of retryWrongIndices) {
+        const r = retryResults?.[gi];
+        if (r && r.score === 100) {
+          correctSoFar++;
+        } else {
+          wrongIndices.push(gi);
+        }
+      }
+      correctSoFar += retryPreviousCorrectCount;
+    } else {
+      // First retry: check all page results
+      for (let gi = 0; gi < sentences.length; gi++) {
+        const pageIdx = Math.floor(gi / sentencesPerPage);
+        const r = pageResults[pageIdx]?.[gi];
+        if (r && r.score === 100) {
+          correctSoFar++;
+        } else {
+          wrongIndices.push(gi);
+        }
+      }
+    }
+
+    if (wrongIndices.length === 0) return;
+
+    // Clear answers for wrong sentences
+    const newAnswers: Record<number, string> = {};
+    // Keep no answers — user must re-type
+
+    setRetryWrongIndices(wrongIndices);
+    setRetryPreviousCorrectCount(correctSoFar);
+    setAnswers(newAnswers);
+    setPageResults((prev) => {
+      const next = { ...prev };
+      delete next[-1]; // clear old retry results
+      return next;
+    });
+    setAllWrongs([]);
+    setCompleted(false);
+    setGradingError(null);
+    setRetryMode(true);
+  }
+
   function handleReset() {
     setAnswers({});
     setPageResults({});
@@ -120,10 +192,14 @@ export function SentenceBysentenceTranslation({ passage, onComplete, showWrongAl
     setAllWrongs([]);
     setCompleted(false);
     setGradingError(null);
+    setRetryMode(false);
+    setRetryWrongIndices([]);
+    setRetryPreviousCorrectCount(0);
   }
 
   const isPageGraded = currentResults !== null;
-  const isLastPage = currentPage === totalPages - 1;
+  const isLastPage = retryMode ? true : currentPage === totalPages - 1;
+  const wrongCount = completed ? allWrongs.length : 0;
 
   return (
     <div className="space-y-3">
@@ -135,10 +211,17 @@ export function SentenceBysentenceTranslation({ passage, onComplete, showWrongAl
         </p>
       </div>
 
+      {retryMode && (
+        <div className="flex items-center gap-2 text-xs text-orange-700 bg-orange-50 rounded-lg px-3 py-2">
+          <ListRestart className="h-3.5 w-3.5 shrink-0" />
+          틀린 {retryWrongIndices.length}문장만 다시 풀어보세요
+        </div>
+      )}
+
       {/* 진행률 */}
-      {totalPages > 1 && (
+      {!retryMode && totalPages > 1 && (
         <div className="flex items-center justify-between text-sm text-muted-foreground">
-          <span>페이지 {currentPage + 1}/{totalPages} (문장 {pageStart + 1}~{pageEnd})</span>
+          <span>페이지 {currentPage + 1}/{totalPages} (문장 {currentPage * sentencesPerPage + 1}~{Math.min((currentPage + 1) * sentencesPerPage, sentences.length)})</span>
           {completed && (
             <Badge variant="secondary">
               {allCorrectCount}/{sentences.length} 정답
@@ -147,8 +230,7 @@ export function SentenceBysentenceTranslation({ passage, onComplete, showWrongAl
         </div>
       )}
 
-      {pageSentences.map((s, localIdx) => {
-        const globalIdx = pageStart + localIdx;
+      {effectiveSentences.map(({ sentence: s, globalIdx }) => {
         const result = currentResults?.[globalIdx];
         return (
           <Card key={globalIdx} className={result ? (result.score === 100 ? 'border-green-500' : 'border-red-500') : ''}>
@@ -195,7 +277,7 @@ export function SentenceBysentenceTranslation({ passage, onComplete, showWrongAl
 
       {!isPageGraded && !allFilled && filledCount > 0 && (
         <p className="text-xs text-center text-muted-foreground">
-          {filledCount}/{pageSentences.length} 문장 작성 완료
+          {filledCount}/{effectiveSentences.length} 문장 작성 완료
         </p>
       )}
 
@@ -212,7 +294,7 @@ export function SentenceBysentenceTranslation({ passage, onComplete, showWrongAl
             {grading ? (
               <><Loader2 className="h-4 w-4 mr-1 animate-spin" />채점 중...</>
             ) : (
-              <><Send className="h-4 w-4 mr-1" />제출하기 ({filledCount}/{pageSentences.length})</>
+              <><Send className="h-4 w-4 mr-1" />제출하기 ({filledCount}/{effectiveSentences.length})</>
             )}
           </Button>
         ) : !isLastPage && !completed ? (
@@ -221,10 +303,18 @@ export function SentenceBysentenceTranslation({ passage, onComplete, showWrongAl
             <ChevronRight className="h-4 w-4 ml-1" />
           </Button>
         ) : (
-          <Button onClick={handleReset} variant="outline" className="w-full">
-            <RotateCcw className="h-4 w-4 mr-1" />
-            다시 풀기
-          </Button>
+          <>
+            {wrongCount > 0 && (
+              <Button onClick={handleRetryWrong} className="flex-1">
+                <ListRestart className="h-4 w-4 mr-1" />
+                오답만 다시 풀기
+              </Button>
+            )}
+            <Button onClick={handleReset} variant="outline" className="flex-1">
+              <RotateCcw className="h-4 w-4 mr-1" />
+              전체 다시 풀기
+            </Button>
+          </>
         )}
       </div>
 

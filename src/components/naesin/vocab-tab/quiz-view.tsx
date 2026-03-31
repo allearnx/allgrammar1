@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Copy, RefreshCw, RotateCcw, Target, ArrowRight, CheckCircle } from 'lucide-react';
+import { Copy, RotateCcw, Target, ArrowRight, CheckCircle, ListRestart } from 'lucide-react';
 import { cn, shuffle } from '@/lib/utils';
 import { MCQOptionList } from '@/components/shared/mcq-option-list';
 import { logger } from '@/lib/logger';
@@ -72,6 +72,10 @@ export function NaesinQuizView({
   const [attemptNumber, setAttemptNumber] = useState(1);
   const [saving, setSaving] = useState(false);
 
+  // Retry-wrong-only state
+  const [retryPreviousCorrectCount, setRetryPreviousCorrectCount] = useState(0);
+  const totalOriginalCount = vocabulary.length;
+
   const question = questions[currentIndex];
 
   useEffect(() => {
@@ -97,12 +101,15 @@ export function NaesinQuizView({
     }
     if (currentIndex === questions.length - 1) {
       const finalCorrect = correct ? score.correct + 1 : score.correct;
-      const pct = Math.round((finalCorrect / questions.length) * 100);
-      onComplete(pct);
       const finalWrong = correct
         ? wrongWords
         : [...wrongWords, { front_text: question.front_text, back_text: question.correctAnswer }];
-      saveQuizResult(finalCorrect, pct, finalWrong);
+
+      // Combined score: previous correct + this round's correct / total original
+      const combinedCorrect = retryPreviousCorrectCount + finalCorrect;
+      const pct = Math.round((combinedCorrect / totalOriginalCount) * 100);
+      onComplete(pct);
+      saveQuizResult(combinedCorrect, pct, finalWrong);
       onQuizSetResult?.(pct, finalWrong);
     }
   }
@@ -116,7 +123,7 @@ export function NaesinQuizView({
         body: JSON.stringify({
           unitId,
           score: pct,
-          totalQuestions: questions.length,
+          totalQuestions: totalOriginalCount,
           correctCount,
           wrongWords: finalWrongWords,
         }),
@@ -151,6 +158,7 @@ export function NaesinQuizView({
     setWrongWords([]);
     setQuizFinished(false);
     setSavedResult(null);
+    setRetryPreviousCorrectCount(0);
   }
 
   function handleRetryWrong() {
@@ -162,6 +170,11 @@ export function NaesinQuizView({
       return;
     }
     const pool = allVocabulary || vocabulary;
+
+    // Save previously correct count for combined scoring
+    const newPreviousCorrect = retryPreviousCorrectCount + score.correct;
+    setRetryPreviousCorrectCount(newPreviousCorrect);
+
     setQuestions(generateQuizQuestions(wrongVocab.length >= 5 ? wrongVocab : pool, pool, wrongVocab));
     setCurrentIndex(0);
     setShowResult(false);
@@ -182,7 +195,8 @@ export function NaesinQuizView({
   if (!question && !quizFinished) return null;
 
   if (quizFinished) {
-    const pct = Math.round((score.correct / questions.length) * 100);
+    const combinedCorrect = retryPreviousCorrectCount + score.correct;
+    const pct = Math.round((combinedCorrect / totalOriginalCount) * 100);
     const passed = pct >= 80;
 
     return (
@@ -234,7 +248,7 @@ export function NaesinQuizView({
             {pct}점
           </p>
           <p className="text-muted-foreground">
-            {questions.length}문제 중 {score.correct}개 정답
+            {totalOriginalCount}문제 중 {combinedCorrect}개 정답
           </p>
         </div>
 
@@ -257,8 +271,8 @@ export function NaesinQuizView({
         <div className="flex flex-col gap-2">
           {wrongWords.length > 0 && (
             <Button onClick={handleRetryWrong} className={cn('w-full', !passed && 'ring-2 ring-orange-400')}>
-              <RefreshCw className="h-4 w-4 mr-2" />
-              {attemptNumber + 1}회차 다시 풀기 (틀린 단어)
+              <ListRestart className="h-4 w-4 mr-2" />
+              오답만 다시 풀기
             </Button>
           )}
           <Button variant="outline" onClick={handleRetryAll} className="w-full">
@@ -285,9 +299,16 @@ export function NaesinQuizView({
             <Target className="h-3 w-3" />
             목표 80점
           </span>
-          <ScoreBadges correct={score.correct} wrong={score.wrong} />
+          <ScoreBadges correct={retryPreviousCorrectCount + score.correct} wrong={score.wrong} />
         </div>
       </div>
+
+      {retryPreviousCorrectCount > 0 && (
+        <div className="flex items-center gap-2 text-xs text-orange-700 bg-orange-50 rounded-lg px-3 py-2">
+          <ListRestart className="h-3.5 w-3.5 shrink-0" />
+          틀린 {questions.length}개 단어만 다시 풀어보세요
+        </div>
+      )}
 
       <Card className="max-w-md mx-auto">
         <CardContent className="py-8 text-center">

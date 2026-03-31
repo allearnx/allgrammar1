@@ -1,10 +1,10 @@
 'use client';
 
-import { useState, useMemo, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Target, CheckCircle, ArrowRight, RotateCcw } from 'lucide-react';
+import { Target, CheckCircle, ArrowRight, RotateCcw, ListRestart } from 'lucide-react';
 import { cn, shuffle } from '@/lib/utils';
 import { ScoreBadges, ResultCard, NextButton } from '@/components/memory/shared';
 import type { MemoryItem, StudentMemoryProgress, NaesinVocabulary } from '@/types/database';
@@ -26,12 +26,17 @@ export function NaesinSpellingView({
 }) {
   const containerRef = useRef<HTMLDivElement>(null);
   const resultRef = useRef<HTMLDivElement>(null);
-  const items = useMemo(() => shuffle(rawItems), [rawItems]);
+  const [items, setItems] = useState(() => shuffle(rawItems));
   const [currentIndex, setCurrentIndex] = useState(0);
   const [answer, setAnswer] = useState('');
   const [showResult, setShowResult] = useState(false);
   const [isCorrect, setIsCorrect] = useState(false);
   const [score, setScore] = useState({ correct: 0, wrong: 0 });
+  const [wrongItems, setWrongItems] = useState<FlashcardItem[]>([]);
+
+  // Retry-wrong-only state
+  const [retryPreviousCorrectCount, setRetryPreviousCorrectCount] = useState(0);
+  const totalOriginalCount = rawItems.length;
 
   const item = items[currentIndex];
   const vocab = vocabulary.find((v) => v.id === item?.id);
@@ -47,10 +52,12 @@ export function NaesinSpellingView({
       setScore((prev) => ({ ...prev, correct: prev.correct + 1 }));
     } else {
       setScore((prev) => ({ ...prev, wrong: prev.wrong + 1 }));
+      setWrongItems((prev) => [...prev, item]);
     }
     if (currentIndex === items.length - 1) {
       const finalCorrect = correct ? score.correct + 1 : score.correct;
-      const pct = Math.round((finalCorrect / items.length) * 100);
+      const combinedCorrect = retryPreviousCorrectCount + finalCorrect;
+      const pct = Math.round((combinedCorrect / totalOriginalCount) * 100);
       onComplete(pct);
     }
   }
@@ -64,12 +71,28 @@ export function NaesinSpellingView({
     }
   }
 
-  function handleReset() {
+  function handleRetryWrong() {
+    if (wrongItems.length === 0) return;
+    const newPreviousCorrect = retryPreviousCorrectCount + score.correct;
+    setRetryPreviousCorrectCount(newPreviousCorrect);
+    setItems(shuffle(wrongItems));
     setCurrentIndex(0);
     setShowResult(false);
     setIsCorrect(false);
     setAnswer('');
     setScore({ correct: 0, wrong: 0 });
+    setWrongItems([]);
+  }
+
+  function handleReset() {
+    setItems(shuffle(rawItems));
+    setCurrentIndex(0);
+    setShowResult(false);
+    setIsCorrect(false);
+    setAnswer('');
+    setScore({ correct: 0, wrong: 0 });
+    setWrongItems([]);
+    setRetryPreviousCorrectCount(0);
   }
 
   useEffect(() => {
@@ -85,8 +108,9 @@ export function NaesinSpellingView({
   if (!item) return null;
 
   // Calculate final score for completion view
+  const combinedCorrect = retryPreviousCorrectCount + score.correct;
   const finalPct = isFinished
-    ? Math.round((score.correct / items.length) * 100)
+    ? Math.round((combinedCorrect / totalOriginalCount) * 100)
     : 0;
   const passed = finalPct >= 80;
   const quizPassed = quizScore !== null && quizScore !== undefined && quizScore >= 80;
@@ -103,85 +127,32 @@ export function NaesinSpellingView({
               목표 80점
             </span>
           )}
-          <ScoreBadges correct={score.correct} wrong={score.wrong} />
+          <ScoreBadges correct={retryPreviousCorrectCount + score.correct} wrong={score.wrong} />
         </div>
       </div>
 
+      {retryPreviousCorrectCount > 0 && !isFinished && (
+        <div className="flex items-center gap-2 text-xs text-orange-700 bg-orange-50 rounded-lg px-3 py-2">
+          <ListRestart className="h-3.5 w-3.5 shrink-0" />
+          틀린 {items.length}개 단어만 다시 풀어보세요
+        </div>
+      )}
+
       {/* Completion view */}
       {isFinished ? (
-        <div className="space-y-4">
-          <ResultCard isCorrect={isCorrect} correctAnswer={item.spelling_answer || undefined} />
-
-          <Card className={cn(
-            'border',
-            passed
-              ? 'border-green-200 bg-green-50 dark:bg-green-950/30 dark:border-green-800'
-              : 'border-orange-200 bg-orange-50 dark:bg-orange-950/30 dark:border-orange-800'
-          )}>
-            <CardContent className="py-4 text-center space-y-2">
-              {passed ? (
-                allVocabDone ? (
-                  <>
-                    <CheckCircle className="h-8 w-8 text-green-600 mx-auto" />
-                    <p className="font-medium text-green-800 dark:text-green-200">
-                      단어 암기 단계 완료!
-                    </p>
-                    <p className="text-sm text-green-600 dark:text-green-400">
-                      교과서 암기로 넘어가자!
-                    </p>
-                    {onGoToNextStage && (
-                      <Button onClick={onGoToNextStage} className="mt-2">
-                        교과서 암기 시작하기
-                        <ArrowRight className="h-4 w-4 ml-1" />
-                      </Button>
-                    )}
-                  </>
-                ) : (
-                  <>
-                    <CheckCircle className="h-8 w-8 text-green-600 mx-auto" />
-                    <p className="font-medium text-green-800 dark:text-green-200">
-                      스펠링 통과!
-                    </p>
-                    <p className="text-sm text-green-600 dark:text-green-400">
-                      나머지 단계도 마무리하자
-                    </p>
-                  </>
-                )
-              ) : (
-                <>
-                  <Target className="h-8 w-8 text-orange-600 mx-auto" />
-                  <p className="font-medium text-orange-800 dark:text-orange-200">
-                    아쉽다! 목표 점수는 80점이야
-                  </p>
-                  <p className="text-sm text-orange-600 dark:text-orange-400">
-                    다시 도전해봐!
-                  </p>
-                </>
-              )}
-            </CardContent>
-          </Card>
-
-          <div className="text-center space-y-2">
-            <p className={cn(
-              'text-5xl font-bold',
-              finalPct >= 80 ? 'text-green-600' : finalPct >= 50 ? 'text-yellow-600' : 'text-red-600'
-            )}>
-              {finalPct}점
-            </p>
-            <p className="text-muted-foreground">
-              {items.length}문제 중 {score.correct}개 정답
-            </p>
-          </div>
-
-          <Button
-            onClick={handleReset}
-            variant={passed ? 'outline' : 'default'}
-            className={cn('w-full', !passed && 'ring-2 ring-orange-400')}
-          >
-            <RotateCcw className="h-4 w-4 mr-2" />
-            다시 풀기
-          </Button>
-        </div>
+        <SpellingCompletionView
+          isCorrect={isCorrect}
+          correctAnswer={item.spelling_answer || undefined}
+          passed={passed}
+          allVocabDone={allVocabDone}
+          finalPct={finalPct}
+          totalOriginalCount={totalOriginalCount}
+          combinedCorrect={combinedCorrect}
+          wrongItems={wrongItems}
+          onGoToNextStage={onGoToNextStage}
+          onRetryWrong={handleRetryWrong}
+          onReset={handleReset}
+        />
       ) : (
         <>
           <Card>
@@ -226,5 +197,129 @@ export function NaesinSpellingView({
         </>
       )}
     </div>
+  );
+}
+
+function SpellingCompletionView({
+  isCorrect,
+  correctAnswer,
+  passed,
+  allVocabDone,
+  finalPct,
+  totalOriginalCount,
+  combinedCorrect,
+  wrongItems,
+  onGoToNextStage,
+  onRetryWrong,
+  onReset,
+}: {
+  isCorrect: boolean;
+  correctAnswer?: string;
+  passed: boolean;
+  allVocabDone: boolean;
+  finalPct: number;
+  totalOriginalCount: number;
+  combinedCorrect: number;
+  wrongItems: FlashcardItem[];
+  onGoToNextStage?: () => void;
+  onRetryWrong: () => void;
+  onReset: () => void;
+}) {
+  return (
+    <div className="space-y-4">
+      <ResultCard isCorrect={isCorrect} correctAnswer={correctAnswer} />
+
+      <SpellingStatusBanner
+        passed={passed}
+        allVocabDone={allVocabDone}
+        onGoToNextStage={onGoToNextStage}
+      />
+
+      <div className="text-center space-y-2">
+        <p className={cn(
+          'text-5xl font-bold',
+          finalPct >= 80 ? 'text-green-600' : finalPct >= 50 ? 'text-yellow-600' : 'text-red-600'
+        )}>
+          {finalPct}점
+        </p>
+        <p className="text-muted-foreground">
+          {totalOriginalCount}문제 중 {combinedCorrect}개 정답
+        </p>
+      </div>
+
+      {wrongItems.length > 0 && (
+        <Card>
+          <CardContent className="py-4">
+            <p className="font-medium text-red-600 mb-3">틀린 단어 ({wrongItems.length}개)</p>
+            <div className="space-y-2">
+              {wrongItems.map((w, i) => (
+                <div key={i} className="flex justify-between items-center py-1.5 border-b last:border-0">
+                  <span className="font-medium">{w.front_text}</span>
+                  <span className="text-muted-foreground text-sm">{w.spelling_answer}</span>
+                </div>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+      )}
+
+      <div className="flex flex-col gap-2">
+        {wrongItems.length > 0 && (
+          <Button
+            onClick={onRetryWrong}
+            className={cn('w-full', !passed && 'ring-2 ring-orange-400')}
+          >
+            <ListRestart className="h-4 w-4 mr-2" />
+            오답만 다시 풀기
+          </Button>
+        )}
+        <Button onClick={onReset} variant="outline" className="w-full">
+          <RotateCcw className="h-4 w-4 mr-2" />
+          전체 다시 풀기
+        </Button>
+      </div>
+    </div>
+  );
+}
+
+function SpellingStatusBanner({
+  passed,
+  allVocabDone,
+  onGoToNextStage,
+}: {
+  passed: boolean;
+  allVocabDone: boolean;
+  onGoToNextStage?: () => void;
+}) {
+  if (!passed) {
+    return (
+      <Card className="border-orange-200 bg-orange-50 dark:bg-orange-950/30 dark:border-orange-800">
+        <CardContent className="py-4 text-center space-y-2">
+          <Target className="h-8 w-8 text-orange-600 mx-auto" />
+          <p className="font-medium text-orange-800 dark:text-orange-200">아쉽다! 목표 점수는 80점이야</p>
+          <p className="text-sm text-orange-600 dark:text-orange-400">다시 도전해봐!</p>
+        </CardContent>
+      </Card>
+    );
+  }
+
+  return (
+    <Card className="border-green-200 bg-green-50 dark:bg-green-950/30 dark:border-green-800">
+      <CardContent className="py-4 text-center space-y-2">
+        <CheckCircle className="h-8 w-8 text-green-600 mx-auto" />
+        <p className="font-medium text-green-800 dark:text-green-200">
+          {allVocabDone ? '단어 암기 단계 완료!' : '스펠링 통과!'}
+        </p>
+        <p className="text-sm text-green-600 dark:text-green-400">
+          {allVocabDone ? '교과서 암기로 넘어가자!' : '나머지 단계도 마무리하자'}
+        </p>
+        {allVocabDone && onGoToNextStage && (
+          <Button onClick={onGoToNextStage} className="mt-2">
+            교과서 암기 시작하기
+            <ArrowRight className="h-4 w-4 ml-1" />
+          </Button>
+        )}
+      </CardContent>
+    </Card>
   );
 }

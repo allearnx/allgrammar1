@@ -271,7 +271,10 @@ export function PassageTab({ passages, unitId, onStageComplete, requiredStages, 
             <GrammarVocabView
               key={passage.id}
               items={grammarVocabItems}
-              onScoreChange={(score) => savePassageProgress('grammar_vocab', score)}
+              onScoreChange={(score, wrongs) => {
+                savePassageProgress('grammar_vocab', score);
+                if (wrongs && wrongs.length > 0) saveWrongAnswers(wrongs);
+              }}
             />
           </TabsContent>
         )}
