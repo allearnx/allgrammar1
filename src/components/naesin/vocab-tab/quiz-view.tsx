@@ -9,6 +9,7 @@ import { MCQOptionList } from '@/components/shared/mcq-option-list';
 import { logger } from '@/lib/logger';
 import { toast } from 'sonner';
 import { ScoreBadges, NextButton } from '@/components/memory/shared';
+import { useRetryWrong } from '@/hooks/use-retry-wrong';
 import type { NaesinVocabulary, NaesinVocabQuizResult } from '@/types/database';
 
 interface QuizQuestion {
@@ -72,8 +73,7 @@ export function NaesinQuizView({
   const [attemptNumber, setAttemptNumber] = useState(1);
   const [saving, setSaving] = useState(false);
 
-  // Retry-wrong-only state
-  const [retryPreviousCorrectCount, setRetryPreviousCorrectCount] = useState(0);
+  const { previousCorrectCount: retryPreviousCorrectCount, isRetrying, startRetry, reset: resetRetry, getCombinedScore } = useRetryWrong();
   const totalOriginalCount = vocabulary.length;
 
   const question = questions[currentIndex];
@@ -107,7 +107,7 @@ export function NaesinQuizView({
 
       // Combined score: previous correct + this round's correct / total original
       const combinedCorrect = retryPreviousCorrectCount + finalCorrect;
-      const pct = Math.round((combinedCorrect / totalOriginalCount) * 100);
+      const pct = getCombinedScore(finalCorrect, totalOriginalCount);
       onComplete(pct);
       saveQuizResult(combinedCorrect, pct, finalWrong);
       onQuizSetResult?.(pct, finalWrong);
@@ -158,7 +158,7 @@ export function NaesinQuizView({
     setWrongWords([]);
     setQuizFinished(false);
     setSavedResult(null);
-    setRetryPreviousCorrectCount(0);
+    resetRetry();
   }
 
   function handleRetryWrong() {
@@ -172,8 +172,7 @@ export function NaesinQuizView({
     const pool = allVocabulary || vocabulary;
 
     // Save previously correct count for combined scoring
-    const newPreviousCorrect = retryPreviousCorrectCount + score.correct;
-    setRetryPreviousCorrectCount(newPreviousCorrect);
+    startRetry(score.correct);
 
     setQuestions(generateQuizQuestions(wrongVocab.length >= 5 ? wrongVocab : pool, pool, wrongVocab));
     setCurrentIndex(0);
@@ -196,7 +195,7 @@ export function NaesinQuizView({
 
   if (quizFinished) {
     const combinedCorrect = retryPreviousCorrectCount + score.correct;
-    const pct = Math.round((combinedCorrect / totalOriginalCount) * 100);
+    const pct = getCombinedScore(score.correct, totalOriginalCount);
     const passed = pct >= 80;
 
     return (
@@ -303,7 +302,7 @@ export function NaesinQuizView({
         </div>
       </div>
 
-      {retryPreviousCorrectCount > 0 && (
+      {isRetrying && (
         <div className="flex items-center gap-2 text-xs text-orange-700 bg-orange-50 rounded-lg px-3 py-2">
           <ListRestart className="h-3.5 w-3.5 shrink-0" />
           틀린 {questions.length}개 단어만 다시 풀어보세요

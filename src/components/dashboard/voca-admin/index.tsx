@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useReducer } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -24,19 +24,64 @@ interface VocaAdminClientProps {
   books: VocaBook[];
 }
 
+interface VocaAdminState {
+  selectedBook: VocaBook | null;
+  days: VocaDay[];
+  expandedDay: string | null;
+  deleteBookId: string | null;
+  editingBook: VocaBook | null;
+}
+
+type VocaAdminAction =
+  | { type: 'SELECT_BOOK'; book: VocaBook }
+  | { type: 'SET_DAYS'; days: VocaDay[] }
+  | { type: 'TOGGLE_DAY'; dayId: string }
+  | { type: 'ADD_DAY'; day: VocaDay }
+  | { type: 'DELETE_DAY'; dayId: string }
+  | { type: 'SET_DELETE_BOOK'; id: string | null }
+  | { type: 'SET_EDITING_BOOK'; book: VocaBook | null }
+  | { type: 'CLEAR_SELECTION' };
+
+function vocaAdminReducer(state: VocaAdminState, action: VocaAdminAction): VocaAdminState {
+  switch (action.type) {
+    case 'SELECT_BOOK':
+      return { ...state, selectedBook: action.book, days: [], expandedDay: null };
+    case 'SET_DAYS':
+      return { ...state, days: action.days };
+    case 'TOGGLE_DAY':
+      return { ...state, expandedDay: state.expandedDay === action.dayId ? null : action.dayId };
+    case 'ADD_DAY':
+      return { ...state, days: [...state.days, action.day] };
+    case 'DELETE_DAY':
+      return { ...state, days: state.days.filter((d) => d.id !== action.dayId) };
+    case 'SET_DELETE_BOOK':
+      return { ...state, deleteBookId: action.id };
+    case 'SET_EDITING_BOOK':
+      return { ...state, editingBook: action.book };
+    case 'CLEAR_SELECTION':
+      return { ...state, selectedBook: null, days: [], expandedDay: null };
+    default:
+      return state;
+  }
+}
+
+const initialState: VocaAdminState = {
+  selectedBook: null,
+  days: [],
+  expandedDay: null,
+  deleteBookId: null,
+  editingBook: null,
+};
+
 export function VocaAdminClient({ books: initialBooks }: VocaAdminClientProps) {
   const [books, setBooks] = useState(initialBooks);
-  const [selectedBook, setSelectedBook] = useState<VocaBook | null>(null);
-  const [days, setDays] = useState<VocaDay[]>([]);
-  const [expandedDay, setExpandedDay] = useState<string | null>(null);
-  const [deleteBookId, setDeleteBookId] = useState<string | null>(null);
-  const [editingBook, setEditingBook] = useState<VocaBook | null>(null);
+  const [state, dispatch] = useReducer(vocaAdminReducer, initialState);
 
   async function loadDays(bookId: string) {
     try {
       const res = await fetch(`/api/voca/days?bookId=${bookId}`);
       const data = await res.json();
-      setDays(data || []);
+      dispatch({ type: 'SET_DAYS', days: data || [] });
     } catch (err) {
       logger.error('voca_admin.index', { error: err instanceof Error ? err.message : String(err) });
       toast.error('Day 목록을 불러오지 못했습니다');
@@ -44,13 +89,12 @@ export function VocaAdminClient({ books: initialBooks }: VocaAdminClientProps) {
   }
 
   useEffect(() => {
-    if (!selectedBook) {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
-      setDays([]);
+    if (!state.selectedBook) {
+      dispatch({ type: 'SET_DAYS', days: [] });
       return;
     }
-    loadDays(selectedBook.id);
-  }, [selectedBook?.id, selectedBook]);
+    loadDays(state.selectedBook.id);
+  }, [state.selectedBook?.id, state.selectedBook]);
 
   return (
     <div className="space-y-6">
@@ -69,9 +113,9 @@ export function VocaAdminClient({ books: initialBooks }: VocaAdminClientProps) {
             <Card
               key={book.id}
               className={`cursor-pointer transition-shadow hover:shadow-md ${
-                selectedBook?.id === book.id ? 'ring-2 ring-violet-600' : ''
+                state.selectedBook?.id === book.id ? 'ring-2 ring-violet-600' : ''
               }`}
-              onClick={() => setSelectedBook(book)}
+              onClick={() => dispatch({ type: 'SELECT_BOOK', book })}
             >
               <CardContent className="py-4">
                 <div className="flex items-center justify-between">
@@ -87,7 +131,7 @@ export function VocaAdminClient({ books: initialBooks }: VocaAdminClientProps) {
                       variant="ghost"
                       size="icon"
                       className="h-8 w-8"
-                      onClick={(e) => { e.stopPropagation(); setEditingBook(book); }}
+                      onClick={(e) => { e.stopPropagation(); dispatch({ type: 'SET_EDITING_BOOK', book }); }}
                     >
                       <Pencil className="h-4 w-4 text-muted-foreground" />
                     </Button>
@@ -95,7 +139,7 @@ export function VocaAdminClient({ books: initialBooks }: VocaAdminClientProps) {
                       variant="ghost"
                       size="icon"
                       className="h-8 w-8"
-                      onClick={(e) => { e.stopPropagation(); setDeleteBookId(book.id); }}
+                      onClick={(e) => { e.stopPropagation(); dispatch({ type: 'SET_DELETE_BOOK', id: book.id }); }}
                     >
                       <Trash2 className="h-4 w-4 text-destructive" />
                     </Button>
@@ -107,34 +151,34 @@ export function VocaAdminClient({ books: initialBooks }: VocaAdminClientProps) {
         </div>
       )}
 
-      {selectedBook && (
+      {state.selectedBook && (
         <DaySection
-          book={selectedBook}
-          days={days}
-          expandedDay={expandedDay}
-          onToggleDay={(dayId) => setExpandedDay(expandedDay === dayId ? null : dayId)}
-          onAddDay={(day) => setDays([...days, day])}
+          book={state.selectedBook}
+          days={state.days}
+          expandedDay={state.expandedDay}
+          onToggleDay={(dayId) => dispatch({ type: 'TOGGLE_DAY', dayId })}
+          onAddDay={(day) => dispatch({ type: 'ADD_DAY', day })}
           onDeleteDay={(dayId) => {
-            setDays(days.filter((d) => d.id !== dayId));
+            dispatch({ type: 'DELETE_DAY', dayId });
             toast.success('Day가 삭제되었습니다');
           }}
-          onDaysCreated={() => loadDays(selectedBook.id)}
+          onDaysCreated={() => loadDays(state.selectedBook!.id)}
         />
       )}
 
       <ConfirmDialog
-        open={deleteBookId !== null}
-        onOpenChange={(open) => { if (!open) setDeleteBookId(null); }}
+        open={state.deleteBookId !== null}
+        onOpenChange={(open) => { if (!open) dispatch({ type: 'SET_DELETE_BOOK', id: null }); }}
         description="이 교재를 삭제하시겠습니까? 포함된 모든 Day와 단어도 삭제됩니다."
         onConfirm={async () => {
-          const id = deleteBookId;
-          setDeleteBookId(null);
+          const id = state.deleteBookId;
+          dispatch({ type: 'SET_DELETE_BOOK', id: null });
           if (!id) return;
           try {
             const res = await fetch(`/api/voca/books/${id}`, { method: 'DELETE' });
             if (res.ok) {
               setBooks(books.filter((b) => b.id !== id));
-              if (selectedBook?.id === id) setSelectedBook(null);
+              if (state.selectedBook?.id === id) dispatch({ type: 'CLEAR_SELECTION' });
               toast.success('교재가 삭제되었습니다');
             } else {
               toast.error('교재 삭제에 실패했습니다');
@@ -146,14 +190,14 @@ export function VocaAdminClient({ books: initialBooks }: VocaAdminClientProps) {
         }}
       />
 
-      {editingBook && (
+      {state.editingBook && (
         <EditBookDialog
-          book={editingBook}
+          book={state.editingBook}
           open
-          onOpenChange={(open) => { if (!open) setEditingBook(null); }}
+          onOpenChange={(open) => { if (!open) dispatch({ type: 'SET_EDITING_BOOK', book: null }); }}
           onSave={(updated) => {
             setBooks(books.map((b) => (b.id === updated.id ? updated : b)));
-            if (selectedBook?.id === updated.id) setSelectedBook(updated);
+            if (state.selectedBook?.id === updated.id) dispatch({ type: 'SELECT_BOOK', book: updated });
           }}
         />
       )}

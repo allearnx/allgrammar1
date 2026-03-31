@@ -8,6 +8,7 @@ import { Badge } from '@/components/ui/badge';
 import { Send, AlertTriangle, RotateCcw, ChevronRight, Loader2, ListRestart } from 'lucide-react';
 import type { TranslationExerciseProps, SentenceData, GradingResult, WrongTranslation } from './translation-exercise';
 import { logger } from '@/lib/logger';
+import { useRetryWrong } from '@/hooks/use-retry-wrong';
 
 export function SentenceBysentenceTranslation({ passage, onComplete, showWrongAlert, sentencesPerPage = 10 }: TranslationExerciseProps) {
   const sentences = passage.sentences! as SentenceData[];
@@ -26,7 +27,7 @@ export function SentenceBysentenceTranslation({ passage, onComplete, showWrongAl
   // Retry-wrong-only state
   const [retryMode, setRetryMode] = useState(false);
   const [retryWrongIndices, setRetryWrongIndices] = useState<number[]>([]);
-  const [retryPreviousCorrectCount, setRetryPreviousCorrectCount] = useState(0);
+  const { previousCorrectCount: retryPreviousCorrectCount, startRetry, reset: resetRetry, getCombinedScore } = useRetryWrong();
 
   // In retry mode, show only wrong sentences (single page)
   const effectiveSentences = useMemo(() => {
@@ -101,7 +102,7 @@ export function SentenceBysentenceTranslation({ passage, onComplete, showWrongAl
 
         // Combine: previous correct + newly correct in this retry
         const totalCorrect = retryPreviousCorrectCount + pageCorrect;
-        const totalScore = Math.round((totalCorrect / sentences.length) * 100);
+        const totalScore = getCombinedScore(pageCorrect, sentences.length);
         setAllCorrectCount(totalCorrect);
         setAllWrongs(pageWrongs);
         setCompleted(true);
@@ -150,7 +151,6 @@ export function SentenceBysentenceTranslation({ passage, onComplete, showWrongAl
           wrongIndices.push(gi);
         }
       }
-      correctSoFar += retryPreviousCorrectCount;
     } else {
       // First retry: check all page results
       for (let gi = 0; gi < sentences.length; gi++) {
@@ -171,7 +171,7 @@ export function SentenceBysentenceTranslation({ passage, onComplete, showWrongAl
     // Keep no answers — user must re-type
 
     setRetryWrongIndices(wrongIndices);
-    setRetryPreviousCorrectCount(correctSoFar);
+    startRetry(correctSoFar);
     setAnswers(newAnswers);
     setPageResults((prev) => {
       const next = { ...prev };
@@ -194,7 +194,7 @@ export function SentenceBysentenceTranslation({ passage, onComplete, showWrongAl
     setGradingError(null);
     setRetryMode(false);
     setRetryWrongIndices([]);
-    setRetryPreviousCorrectCount(0);
+    resetRetry();
   }
 
   const isPageGraded = currentResults !== null;

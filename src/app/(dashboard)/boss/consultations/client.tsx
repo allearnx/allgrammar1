@@ -30,6 +30,7 @@ import {
 import { MessageSquare, StickyNote } from 'lucide-react';
 import { toast } from 'sonner';
 import { format } from 'date-fns';
+import { fetchWithToast } from '@/lib/fetch-with-toast';
 import { GRADE_OPTIONS } from '@/types/public';
 
 interface ConsultationItem {
@@ -70,16 +71,15 @@ export function ConsultationsClient({ consultations }: { consultations: Consulta
   async function handleStatusChange(id: string, status: string) {
     setSaving(true);
     try {
-      const res = await fetch('/api/boss/consultations', {
+      await fetchWithToast('/api/boss/consultations', {
         method: 'PATCH',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ id, status }),
+        body: { id, status },
+        successMessage: '상태가 변경되었습니다',
+        errorMessage: '변경 실패',
       });
-      if (!res.ok) throw new Error((await res.json()).error || '상태 변경 실패');
-      toast.success('상태가 변경되었습니다');
       router.refresh();
-    } catch (err) {
-      toast.error('변경 실패', { description: err instanceof Error ? err.message : '알 수 없는 오류' });
+    } catch {
+      // error already toasted
     } finally {
       setSaving(false);
     }
@@ -89,17 +89,16 @@ export function ConsultationsClient({ consultations }: { consultations: Consulta
     if (!selected) return;
     setSaving(true);
     try {
-      const res = await fetch('/api/boss/consultations', {
+      await fetchWithToast('/api/boss/consultations', {
         method: 'PATCH',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ id: selected.id, memo }),
+        body: { id: selected.id, memo },
+        successMessage: '메모가 저장되었습니다',
+        errorMessage: '저장 실패',
       });
-      if (!res.ok) throw new Error((await res.json()).error || '메모 저장 실패');
-      toast.success('메모가 저장되었습니다');
       setMemoOpen(false);
       router.refresh();
-    } catch (err) {
-      toast.error('저장 실패', { description: err instanceof Error ? err.message : '알 수 없는 오류' });
+    } catch {
+      // error already toasted
     } finally {
       setSaving(false);
     }

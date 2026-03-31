@@ -1,6 +1,5 @@
 'use client';
 
-import { useState } from 'react';
 import Link from 'next/link';
 import {
   CheckCircle,
@@ -13,50 +12,12 @@ import {
   Layers,
 } from 'lucide-react';
 import { BRAND } from '@/lib/utils/brand-colors';
-import { calculateStageStatuses } from '@/lib/naesin/stage-unlock';
-import {
-  isNaesinUnitComplete,
-  computeNaesinStats,
-  getNaesinStagesSimple,
-} from '@/lib/dashboard/naesin-helpers';
-import {
-  getR1Stages,
-  getR2Stages,
-  isR1Complete,
-  isR2Complete,
-  computeVocaStats,
-} from '@/lib/dashboard/voca-helpers';
 import { MiniScoreTrend } from '@/components/charts/mini-score-trend';
 import { StatCard } from '@/components/shared/stat-card';
 import { VocaTabContent } from './combined/voca-tab-content';
 import { NaesinTabContent } from './combined/naesin-tab-content';
-import type { VocaDay, VocaStudentProgress } from '@/types/voca';
-import type {
-  NaesinUnit,
-  NaesinStudentProgress,
-  NaesinStageStatuses,
-  NaesinContentAvailability,
-  NaesinExamAssignment,
-} from '@/types/naesin';
-
-interface Props {
-  userName: string;
-  vocaDays: VocaDay[];
-  vocaProgressList: VocaStudentProgress[];
-  textbookName: string;
-  naesinUnits: NaesinUnit[];
-  naesinProgressList: NaesinStudentProgress[];
-  examAssignments: NaesinExamAssignment[];
-  contentMap: Record<string, NaesinContentAvailability>;
-  vocabQuizSetCounts: Record<string, number>;
-  grammarVideoCounts: Record<string, number>;
-  enabledStages?: string[];
-  wrongWordCounts?: Record<string, number>;
-  vocaQuizHistory?: { date: string; score: number }[];
-  naesinQuizHistory?: { date: string; score: number }[];
-}
-
-// ── Colors ──
+import { DashboardProvider, useDashboardContext } from './combined/dashboard-context';
+import type { DashboardProps } from './combined/dashboard-context';
 
 const COLORS = {
   header: BRAND.violetLight,
@@ -67,98 +28,23 @@ const COLORS = {
   statSky: BRAND.cyan,
 };
 
-// ── Component ──
+export function CombinedDashboard(props: DashboardProps) {
+  return (
+    <DashboardProvider {...props}>
+      <DashboardContent />
+    </DashboardProvider>
+  );
+}
 
-export function CombinedDashboard({
-  userName,
-  vocaDays,
-  vocaProgressList,
-  textbookName,
-  naesinUnits,
-  naesinProgressList,
-  examAssignments,
-  contentMap,
-  vocabQuizSetCounts,
-  grammarVideoCounts,
-  enabledStages,
-  wrongWordCounts = {},
-  vocaQuizHistory = [],
-  naesinQuizHistory = [],
-}: Props) {
-  // ── Tab state ──
-  const [activeTab, setActiveTab] = useState<'voca' | 'naesin'>('voca');
-
-  // ── Voca state ──
-  const vocaProgressMap = new Map<string, VocaStudentProgress>();
-  vocaProgressList.forEach((p) => vocaProgressMap.set(p.day_id, p));
-
-  const sortedDays = [...vocaDays].sort((a, b) => a.sort_order - b.sort_order);
-  const currentVocaDay = sortedDays.find((d) => {
-    const p = vocaProgressMap.get(d.id) ?? null;
-    return !isR1Complete(p) || !isR2Complete(p);
-  }) ?? sortedDays[0];
-
-  const currentVocaProgress = currentVocaDay ? (vocaProgressMap.get(currentVocaDay.id) ?? null) : null;
-  const r1Stages = currentVocaProgress !== undefined ? getR1Stages(currentVocaProgress) : [];
-  const r1Done = isR1Complete(currentVocaProgress);
-
-  const vocaActiveR1 = r1Stages.find((s) => s.status === 'active');
-  const r2Stages = currentVocaProgress !== undefined ? getR2Stages(currentVocaProgress) : [];
-  const vocaActiveR2 = r2Stages.find((s) => s.status === 'active');
-  const vocaCtaStage = vocaActiveR1 ?? vocaActiveR2;
-  const vocaCtaRound = vocaActiveR1 ? '1' : '2';
-
-  // Voca stats
-  const { r1CompletedStages, avgQuizScore: vocaAvgScore, wrongWordEntries } =
-    computeVocaStats(vocaProgressList, wrongWordCounts);
-
-  // Current active book
-  const currentBookId = currentVocaDay?.book_id;
-  const currentBookDays = sortedDays.filter((d) => d.book_id === currentBookId);
-
-  // ── Naesin state ──
-  const naesinProgressMap = new Map<string, NaesinStudentProgress>();
-  naesinProgressList.forEach((p) => naesinProgressMap.set(p.unit_id, p));
-
-  const sortedUnits = [...naesinUnits].sort((a, b) => a.sort_order - b.sort_order);
-
-  const statusesMap = new Map<string, NaesinStageStatuses>();
-  for (const unit of sortedUnits) {
-    const progress = naesinProgressMap.get(unit.id) ?? null;
-    const content = contentMap[unit.id] ?? {
-      hasVocab: false, hasPassage: false, hasDialogue: false, hasGrammar: false, hasProblem: false, hasLastReview: false,
-    };
-    const assignment = examAssignments.find((a) => a.unit_ids.includes(unit.id));
-    const examDate = assignment?.exam_date ?? null;
-
-    const statuses = calculateStageStatuses({
-      progress,
-      content,
-      vocabQuizSetCount: vocabQuizSetCounts[unit.id] ?? 0,
-      grammarVideoCount: grammarVideoCounts[unit.id] ?? 0,
-      examDate,
-      enabledStages,
-    });
-    statusesMap.set(unit.id, statuses);
-  }
-
-  const currentUnit = sortedUnits.find((u) => {
-    const s = statusesMap.get(u.id);
-    return s && !isNaesinUnitComplete(s);
-  }) ?? sortedUnits[0];
-
-  const currentNaesinStatuses = currentUnit ? statusesMap.get(currentUnit.id) : undefined;
-  const currentNaesinProgress = currentUnit ? (naesinProgressMap.get(currentUnit.id) ?? null) : null;
-  const currentNaesinStages = currentNaesinStatuses ? getNaesinStagesSimple(currentNaesinStatuses, currentNaesinProgress) : [];
-  const naesinCtaStage = currentNaesinStages.find((s) => s.status === 'active');
-
-  // Naesin stats
+function DashboardContent() {
   const {
-    completedStages: naesinCompletedStages,
-    completedUnits: naesinCompletedUnits,
-    avgVocabScore: naesinAvgVocab,
-    nearestDDay,
-  } = computeNaesinStats(naesinProgressList, statusesMap, sortedUnits, examAssignments);
+    activeTab, setActiveTab,
+    userName, textbookName, nearestDDay,
+    vocaDaysCount, sortedUnitsCount,
+    r1CompletedStages, naesinCompletedStages,
+    vocaAvgScore, naesinCompletedUnits, naesinAvgVocab,
+    vocaQuizHistory, naesinQuizHistory,
+  } = useDashboardContext();
 
   return (
     <div className="p-4 md:p-6 space-y-6">
@@ -185,12 +71,12 @@ export function CombinedDashboard({
         </div>
       </div>
 
-      {/* ── Stat Cards — 6 cards, 3-col ── */}
+      {/* ── Stat Cards ── */}
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        <StatCard label="보카 완료" value={r1CompletedStages} sub={`전체 ${vocaDays.length * 4}단계 중`} color={COLORS.statMint} icon={<CheckCircle className="h-5 w-5" />} />
-        <StatCard label="내신 완료" value={naesinCompletedStages} sub={`전체 ${sortedUnits.length * 5}단계 중`} color={COLORS.statPurple} icon={<Layers className="h-5 w-5" />} />
+        <StatCard label="보카 완료" value={r1CompletedStages} sub={`전체 ${vocaDaysCount * 4}단계 중`} color={COLORS.statMint} icon={<CheckCircle className="h-5 w-5" />} />
+        <StatCard label="내신 완료" value={naesinCompletedStages} sub={`전체 ${sortedUnitsCount * 5}단계 중`} color={COLORS.statPurple} icon={<Layers className="h-5 w-5" />} />
         <StatCard label="보카 퀴즈" value={vocaAvgScore > 0 ? `${vocaAvgScore}점` : '-'} sub="퀴즈 평균" color={COLORS.statAmber} icon={<ClipboardList className="h-5 w-5" />} />
-        <StatCard label="내신 단원" value={`${naesinCompletedUnits}/${sortedUnits.length}`} sub="완료 단원" color={COLORS.statSky} icon={<BookOpen className="h-5 w-5" />} />
+        <StatCard label="내신 단원" value={`${naesinCompletedUnits}/${sortedUnitsCount}`} sub="완료 단원" color={COLORS.statSky} icon={<BookOpen className="h-5 w-5" />} />
         <StatCard label="내신 단어" value={naesinAvgVocab > 0 ? `${naesinAvgVocab}점` : '-'} sub="퀴즈 + 스펠링 평균" color={COLORS.statPurple} icon={<Sparkles className="h-5 w-5" />} />
         <StatCard label="시험 D-day" value={nearestDDay !== null ? (nearestDDay === 0 ? 'D-Day' : `D-${nearestDDay}`) : '-'} sub={nearestDDay !== null ? '가장 가까운 시험' : '시험 일정 없음'} color={COLORS.statAmber} icon={<CalendarDays className="h-5 w-5" />} />
       </div>
@@ -242,31 +128,8 @@ export function CombinedDashboard({
       </div>
 
       {/* ── Tab Content ── */}
-      {activeTab === 'voca' && (
-        <VocaTabContent
-          currentDay={currentVocaDay}
-          r1Stages={r1Stages}
-          r2Stages={r2Stages}
-          r1Done={r1Done}
-          vocaCtaStage={vocaCtaStage}
-          vocaCtaRound={vocaCtaRound}
-          wrongWordEntries={wrongWordEntries}
-          currentBookDays={currentBookDays}
-          vocaProgressMap={vocaProgressMap}
-        />
-      )}
-
-      {activeTab === 'naesin' && (
-        <NaesinTabContent
-          currentUnit={currentUnit}
-          currentNaesinStages={currentNaesinStages}
-          naesinCtaStage={naesinCtaStage}
-          sortedUnits={sortedUnits}
-          statusesMap={statusesMap}
-          examAssignments={examAssignments}
-          naesinUnits={naesinUnits}
-        />
-      )}
+      {activeTab === 'voca' && <VocaTabContent />}
+      {activeTab === 'naesin' && <NaesinTabContent />}
     </div>
   );
 }

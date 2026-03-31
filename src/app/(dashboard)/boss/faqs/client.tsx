@@ -33,6 +33,7 @@ import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Plus, Pencil, Trash2, HelpCircle } from 'lucide-react';
 import { toast } from 'sonner';
 import { ConfirmDialog } from '@/components/shared/confirm-dialog';
+import { fetchWithToast } from '@/lib/fetch-with-toast';
 import type { FAQ, FAQCategory } from '@/types/public';
 import { FAQ_CATEGORY_LABELS } from '@/types/public';
 
@@ -88,17 +89,16 @@ export function FaqsClient({ faqs }: { faqs: FAQ[] }) {
     setSaving(true);
     try {
       const isEdit = editingId !== null;
-      const res = await fetch('/api/boss/faqs', {
+      await fetchWithToast('/api/boss/faqs', {
         method: isEdit ? 'PATCH' : 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(isEdit ? { id: editingId, ...form } : form),
+        body: isEdit ? { id: editingId, ...form } : form,
+        successMessage: isEdit ? 'FAQ가 수정되었습니다' : 'FAQ가 추가되었습니다',
+        errorMessage: '저장 실패',
       });
-      if (!res.ok) throw new Error((await res.json()).error || '저장 실패');
-      toast.success(isEdit ? 'FAQ가 수정되었습니다' : 'FAQ가 추가되었습니다');
       setDialogOpen(false);
       router.refresh();
-    } catch (err) {
-      toast.error('저장 실패', { description: err instanceof Error ? err.message : '알 수 없는 오류' });
+    } catch {
+      // error already toasted
     } finally {
       setSaving(false);
     }
@@ -106,16 +106,15 @@ export function FaqsClient({ faqs }: { faqs: FAQ[] }) {
 
   async function handleDelete(id: string) {
     try {
-      const res = await fetch('/api/boss/faqs', {
+      await fetchWithToast('/api/boss/faqs', {
         method: 'DELETE',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ id }),
+        body: { id },
+        successMessage: 'FAQ가 삭제되었습니다',
+        errorMessage: '삭제 실패',
       });
-      if (!res.ok) throw new Error((await res.json()).error || '삭제 실패');
-      toast.success('FAQ가 삭제되었습니다');
       router.refresh();
-    } catch (err) {
-      toast.error('삭제 실패', { description: err instanceof Error ? err.message : '알 수 없는 오류' });
+    } catch {
+      // error already toasted
     }
   }
 

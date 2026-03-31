@@ -13,6 +13,7 @@ import {
   DialogDescription,
 } from '@/components/ui/dialog';
 import { CheckCircle, AlertTriangle, Trophy, RotateCcw, PenLine, ListRestart } from 'lucide-react';
+import { useRetryWrong } from '@/hooks/use-retry-wrong';
 import type { TextbookPassage, BlankItem } from '@/types/database';
 
 type Difficulty = 'easy' | 'medium' | 'hard';
@@ -49,7 +50,7 @@ export function FillBlanksExercise({ passage, onComplete, showWrongAlert: _showW
   // Retry-wrong-only state
   const [retryMode, setRetryMode] = useState(false);
   const [lockedCorrect, setLockedCorrect] = useState<Record<number, string>>({});
-  const [previousCorrectCount, setPreviousCorrectCount] = useState(0);
+  const { previousCorrectCount, startRetry, reset: resetRetry, getCombinedScore } = useRetryWrong();
 
   const blanksMap: Record<Difficulty, BlankItem[] | null> = {
     easy: passage.blanks_easy as BlankItem[] | null,
@@ -169,8 +170,9 @@ export function FillBlanksExercise({ passage, onComplete, showWrongAlert: _showW
     setResults(newResults);
 
     // In retry mode, combine previous correct + new correct
-    const totalCorrect = retryMode ? previousCorrectCount + (correctCount - Object.keys(lockedCorrect).length) : correctCount;
-    const score = Math.round((totalCorrect / blanks.length) * 100);
+    const newlyCorrect = correctCount - Object.keys(lockedCorrect).length;
+    const totalCorrect = retryMode ? previousCorrectCount + newlyCorrect : correctCount;
+    const score = retryMode ? getCombinedScore(newlyCorrect, blanks.length) : Math.round((correctCount / blanks.length) * 100);
     onComplete(score, wrongs, difficulty);
     setResultModal({ score, correct: totalCorrect, total: blanks.length });
   }
@@ -180,12 +182,12 @@ export function FillBlanksExercise({ passage, onComplete, showWrongAlert: _showW
 
     // Count correct answers from current results (including previously locked ones)
     const correctIndices: Record<number, string> = { ...lockedCorrect };
-    let totalCorrectSoFar = previousCorrectCount;
+    let newlyCorrect = 0;
 
     blanks.forEach((blank) => {
       if (results[blank.index] === true && lockedCorrect[blank.index] === undefined) {
         correctIndices[blank.index] = answers[blank.index] || blank.answer;
-        totalCorrectSoFar++;
+        newlyCorrect++;
       }
     });
 
@@ -198,7 +200,7 @@ export function FillBlanksExercise({ passage, onComplete, showWrongAlert: _showW
     });
 
     setLockedCorrect(correctIndices);
-    setPreviousCorrectCount(totalCorrectSoFar);
+    startRetry(newlyCorrect);
     setAnswers(newAnswers);
     setResults(null);
     setResultModal(null);
@@ -211,7 +213,7 @@ export function FillBlanksExercise({ passage, onComplete, showWrongAlert: _showW
     setResultModal(null);
     setRetryMode(false);
     setLockedCorrect({});
-    setPreviousCorrectCount(0);
+    resetRetry();
   }
 
   return (

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useReducer } from 'react';
 import { useRouter } from 'next/navigation';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -19,6 +19,7 @@ import { Plus, Pencil, Trash2, Building2, Copy, RefreshCw, GraduationCap, User, 
 import { toast } from 'sonner';
 import { format } from 'date-fns';
 import { ConfirmDialog } from '@/components/shared/confirm-dialog';
+import { fetchWithToast } from '@/lib/fetch-with-toast';
 
 interface Academy {
   id: string;
@@ -39,99 +40,144 @@ interface AcademiesClientProps {
   academies: Academy[];
 }
 
+interface AcademyState {
+  addOpen: boolean;
+  editOpen: boolean;
+  editingAcademy: Academy | null;
+  name: string;
+  maxStudents: string;
+  services: string[];
+  saving: boolean;
+  deleting: string | null;
+  deleteConfirmId: string | null;
+  regenerateConfirmId: string | null;
+  regenerating: string | null;
+}
+
+type AcademyAction =
+  | { type: 'SET_ADD_OPEN'; open: boolean }
+  | { type: 'OPEN_EDIT'; academy: Academy }
+  | { type: 'CLOSE_EDIT' }
+  | { type: 'SET_NAME'; name: string }
+  | { type: 'SET_MAX_STUDENTS'; value: string }
+  | { type: 'SET_SERVICES'; services: string[] }
+  | { type: 'SET_SAVING'; saving: boolean }
+  | { type: 'SET_DELETING'; id: string | null }
+  | { type: 'SET_DELETE_CONFIRM'; id: string | null }
+  | { type: 'SET_REGENERATE_CONFIRM'; id: string | null }
+  | { type: 'SET_REGENERATING'; id: string | null }
+  | { type: 'RESET_ADD_FORM' };
+
+function academyReducer(state: AcademyState, action: AcademyAction): AcademyState {
+  switch (action.type) {
+    case 'SET_ADD_OPEN':
+      return { ...state, addOpen: action.open };
+    case 'OPEN_EDIT':
+      return {
+        ...state,
+        editingAcademy: action.academy,
+        name: action.academy.name,
+        maxStudents: action.academy.max_students?.toString() || '',
+        services: action.academy.services || [],
+        editOpen: true,
+      };
+    case 'CLOSE_EDIT':
+      return { ...state, editOpen: false, editingAcademy: null, name: '' };
+    case 'SET_NAME':
+      return { ...state, name: action.name };
+    case 'SET_MAX_STUDENTS':
+      return { ...state, maxStudents: action.value };
+    case 'SET_SERVICES':
+      return { ...state, services: action.services };
+    case 'SET_SAVING':
+      return { ...state, saving: action.saving };
+    case 'SET_DELETING':
+      return { ...state, deleting: action.id };
+    case 'SET_DELETE_CONFIRM':
+      return { ...state, deleteConfirmId: action.id };
+    case 'SET_REGENERATE_CONFIRM':
+      return { ...state, regenerateConfirmId: action.id };
+    case 'SET_REGENERATING':
+      return { ...state, regenerating: action.id };
+    case 'RESET_ADD_FORM':
+      return { ...state, name: '', addOpen: false };
+    default:
+      return state;
+  }
+}
+
+const academyInitialState: AcademyState = {
+  addOpen: false,
+  editOpen: false,
+  editingAcademy: null,
+  name: '',
+  maxStudents: '',
+  services: [],
+  saving: false,
+  deleting: null,
+  deleteConfirmId: null,
+  regenerateConfirmId: null,
+  regenerating: null,
+};
+
 export function AcademiesClient({ academies }: AcademiesClientProps) {
-  const [addOpen, setAddOpen] = useState(false);
-  const [editOpen, setEditOpen] = useState(false);
-  const [editingAcademy, setEditingAcademy] = useState<Academy | null>(null);
-  const [name, setName] = useState('');
-  const [maxStudents, setMaxStudents] = useState('');
-  const [services, setServices] = useState<string[]>([]);
-  const [saving, setSaving] = useState(false);
-  const [deleting, setDeleting] = useState<string | null>(null);
-  const [deleteConfirmId, setDeleteConfirmId] = useState<string | null>(null);
-  const [regenerateConfirmId, setRegenerateConfirmId] = useState<string | null>(null);
-  const [regenerating, setRegenerating] = useState<string | null>(null);
+  const [state, dispatch] = useReducer(academyReducer, academyInitialState);
   const router = useRouter();
 
   async function handleAdd(e: React.FormEvent) {
     e.preventDefault();
-    setSaving(true);
+    dispatch({ type: 'SET_SAVING', saving: true });
 
     try {
-      const res = await fetch('/api/boss/academies', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name }),
+      await fetchWithToast('/api/boss/academies', {
+        body: { name: state.name },
+        successMessage: '학원이 추가되었습니다',
+        errorMessage: '추가 실패',
       });
-
-      if (!res.ok) {
-        const data = await res.json();
-        throw new Error(data.error || 'Failed to create');
-      }
-
-      toast.success('학원이 추가되었습니다');
-      setName('');
-      setAddOpen(false);
+      dispatch({ type: 'RESET_ADD_FORM' });
       router.refresh();
-    } catch (err) {
-      toast.error('추가 실패', { description: err instanceof Error ? err.message : '알 수 없는 오류' });
+    } catch {
+      // error already toasted
     } finally {
-      setSaving(false);
+      dispatch({ type: 'SET_SAVING', saving: false });
     }
   }
 
   async function handleEdit(e: React.FormEvent) {
     e.preventDefault();
-    if (!editingAcademy) return;
-    setSaving(true);
+    if (!state.editingAcademy) return;
+    dispatch({ type: 'SET_SAVING', saving: true });
 
     try {
-      const res = await fetch(`/api/boss/academies/${editingAcademy.id}`, {
+      await fetchWithToast(`/api/boss/academies/${state.editingAcademy.id}`, {
         method: 'PATCH',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          name,
-          max_students: maxStudents ? parseInt(maxStudents, 10) : null,
-          services,
-        }),
+        body: { name: state.name, max_students: state.maxStudents ? parseInt(state.maxStudents, 10) : null, services: state.services },
+        successMessage: '학원 이름이 변경되었습니다',
+        errorMessage: '변경 실패',
       });
-
-      if (!res.ok) {
-        const data = await res.json();
-        throw new Error(data.error || 'Failed to update');
-      }
-
-      toast.success('학원 이름이 변경되었습니다');
-      setEditOpen(false);
-      setEditingAcademy(null);
-      setName('');
+      dispatch({ type: 'CLOSE_EDIT' });
       router.refresh();
-    } catch (err) {
-      toast.error('변경 실패', { description: err instanceof Error ? err.message : '알 수 없는 오류' });
+    } catch {
+      // error already toasted
     } finally {
-      setSaving(false);
+      dispatch({ type: 'SET_SAVING', saving: false });
     }
   }
 
   async function handleDelete(academyId: string) {
-    setDeleting(academyId);
+    dispatch({ type: 'SET_DELETING', id: academyId });
 
     try {
-      const res = await fetch(`/api/boss/academies/${academyId}`, {
+      await fetchWithToast(`/api/boss/academies/${academyId}`, {
         method: 'DELETE',
+        successMessage: '학원이 삭제되었습니다',
+        errorMessage: '삭제 실패',
       });
-
-      if (!res.ok) {
-        const data = await res.json();
-        throw new Error(data.error || 'Failed to delete');
-      }
-
-      toast.success('학원이 삭제되었습니다');
       router.refresh();
-    } catch (err) {
-      toast.error('삭제 실패', { description: err instanceof Error ? err.message : '알 수 없는 오류' });
+    } catch {
+      // error already toasted
     } finally {
-      setDeleting(null);
+      dispatch({ type: 'SET_DELETING', id: null });
     }
   }
 
@@ -141,24 +187,18 @@ export function AcademiesClient({ academies }: AcademiesClientProps) {
   }
 
   async function handleRegenerateCode(academyId: string) {
-    setRegenerating(academyId);
+    dispatch({ type: 'SET_REGENERATING', id: academyId });
 
     try {
-      const res = await fetch(`/api/boss/academies/${academyId}`, {
-        method: 'POST',
+      await fetchWithToast(`/api/boss/academies/${academyId}`, {
+        successMessage: '초대 코드가 재생성되었습니다',
+        errorMessage: '재생성 실패',
       });
-
-      if (!res.ok) {
-        const data = await res.json();
-        throw new Error(data.error || 'Failed to regenerate');
-      }
-
-      toast.success('초대 코드가 재생성되었습니다');
       router.refresh();
-    } catch (err) {
-      toast.error('재생성 실패', { description: err instanceof Error ? err.message : '알 수 없는 오류' });
+    } catch {
+      // error already toasted
     } finally {
-      setRegenerating(null);
+      dispatch({ type: 'SET_REGENERATING', id: null });
     }
   }
 
@@ -168,7 +208,7 @@ export function AcademiesClient({ academies }: AcademiesClientProps) {
         <p className="text-muted-foreground">
           총 {academies.length}개 학원
         </p>
-        <Dialog open={addOpen} onOpenChange={setAddOpen}>
+        <Dialog open={state.addOpen} onOpenChange={(open) => dispatch({ type: 'SET_ADD_OPEN', open })}>
           <DialogTrigger asChild>
             <Button>
               <Plus className="h-4 w-4 mr-1" />
@@ -183,14 +223,14 @@ export function AcademiesClient({ academies }: AcademiesClientProps) {
               <div className="space-y-2">
                 <Label>학원 이름</Label>
                 <Input
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
+                  value={state.name}
+                  onChange={(e) => dispatch({ type: 'SET_NAME', name: e.target.value })}
                   placeholder="예: 올라영어학원"
                   required
                 />
               </div>
-              <Button type="submit" className="w-full" disabled={saving}>
-                {saving ? '저장 중...' : '추가'}
+              <Button type="submit" className="w-full" disabled={state.saving}>
+                {state.saving ? '저장 중...' : '추가'}
               </Button>
             </form>
           </DialogContent>
@@ -220,10 +260,10 @@ export function AcademiesClient({ academies }: AcademiesClientProps) {
                         variant="ghost"
                         size="icon"
                         className="h-6 w-6"
-                        onClick={() => setRegenerateConfirmId(academy.id)}
-                        disabled={regenerating === academy.id}
+                        onClick={() => dispatch({ type: 'SET_REGENERATE_CONFIRM', id: academy.id })}
+                        disabled={state.regenerating === academy.id}
                       >
-                        <RefreshCw className={`h-3.5 w-3.5 ${regenerating === academy.id ? 'animate-spin' : ''}`} />
+                        <RefreshCw className={`h-3.5 w-3.5 ${state.regenerating === academy.id ? 'animate-spin' : ''}`} />
                       </Button>
                     </span>
                     <span>회원 {academy.user_count}명</span>
@@ -279,23 +319,17 @@ export function AcademiesClient({ academies }: AcademiesClientProps) {
                 <Button
                   variant="outline"
                   size="sm"
-                  onClick={() => {
-                    setEditingAcademy(academy);
-                    setName(academy.name);
-                    setMaxStudents(academy.max_students?.toString() || '');
-                    setServices(academy.services || []);
-                    setEditOpen(true);
-                  }}
+                  onClick={() => dispatch({ type: 'OPEN_EDIT', academy })}
                 >
                   <Pencil className="h-4 w-4" />
                 </Button>
                 <Button
                   variant="destructive"
                   size="sm"
-                  onClick={() => setDeleteConfirmId(academy.id)}
-                  disabled={deleting === academy.id}
+                  onClick={() => dispatch({ type: 'SET_DELETE_CONFIRM', id: academy.id })}
+                  disabled={state.deleting === academy.id}
                 >
-                  {deleting === academy.id ? '...' : <Trash2 className="h-4 w-4" />}
+                  {state.deleting === academy.id ? '...' : <Trash2 className="h-4 w-4" />}
                 </Button>
               </div>
             </div>
@@ -310,28 +344,28 @@ export function AcademiesClient({ academies }: AcademiesClientProps) {
       )}
 
       <ConfirmDialog
-        open={deleteConfirmId !== null}
-        onOpenChange={(open) => { if (!open) setDeleteConfirmId(null); }}
+        open={state.deleteConfirmId !== null}
+        onOpenChange={(open) => { if (!open) dispatch({ type: 'SET_DELETE_CONFIRM', id: null }); }}
         description="정말 이 학원을 삭제하시겠습니까?"
         onConfirm={() => {
-          const id = deleteConfirmId;
-          setDeleteConfirmId(null);
+          const id = state.deleteConfirmId;
+          dispatch({ type: 'SET_DELETE_CONFIRM', id: null });
           if (id) handleDelete(id);
         }}
       />
 
       <ConfirmDialog
-        open={regenerateConfirmId !== null}
-        onOpenChange={(open) => { if (!open) setRegenerateConfirmId(null); }}
+        open={state.regenerateConfirmId !== null}
+        onOpenChange={(open) => { if (!open) dispatch({ type: 'SET_REGENERATE_CONFIRM', id: null }); }}
         description="초대 코드를 재생성하시겠습니까? 기존 코드는 더 이상 사용할 수 없습니다."
         onConfirm={() => {
-          const id = regenerateConfirmId;
-          setRegenerateConfirmId(null);
+          const id = state.regenerateConfirmId;
+          dispatch({ type: 'SET_REGENERATE_CONFIRM', id: null });
           if (id) handleRegenerateCode(id);
         }}
       />
 
-      <Dialog open={editOpen} onOpenChange={setEditOpen}>
+      <Dialog open={state.editOpen} onOpenChange={(open) => { if (!open) dispatch({ type: 'CLOSE_EDIT' }); }}>
         <DialogContent>
           <DialogHeader>
             <DialogTitle>학원 이름 변경</DialogTitle>
@@ -340,8 +374,8 @@ export function AcademiesClient({ academies }: AcademiesClientProps) {
             <div className="space-y-2">
               <Label>학원 이름</Label>
               <Input
-                value={name}
-                onChange={(e) => setName(e.target.value)}
+                value={state.name}
+                onChange={(e) => dispatch({ type: 'SET_NAME', name: e.target.value })}
                 required
               />
             </div>
@@ -350,8 +384,8 @@ export function AcademiesClient({ academies }: AcademiesClientProps) {
               <Input
                 type="number"
                 min="1"
-                value={maxStudents}
-                onChange={(e) => setMaxStudents(e.target.value)}
+                value={state.maxStudents}
+                onChange={(e) => dispatch({ type: 'SET_MAX_STUDENTS', value: e.target.value })}
                 placeholder="비워두면 무제한"
               />
             </div>
@@ -360,30 +394,36 @@ export function AcademiesClient({ academies }: AcademiesClientProps) {
               <div className="flex gap-4">
                 <label className="flex items-center gap-2 cursor-pointer">
                   <Checkbox
-                    checked={services.includes('naesin')}
+                    checked={state.services.includes('naesin')}
                     onCheckedChange={(checked) =>
-                      setServices((prev) =>
-                        checked ? [...prev.filter((s) => s !== 'naesin'), 'naesin'] : prev.filter((s) => s !== 'naesin')
-                      )
+                      dispatch({
+                        type: 'SET_SERVICES',
+                        services: checked
+                          ? [...state.services.filter((s) => s !== 'naesin'), 'naesin']
+                          : state.services.filter((s) => s !== 'naesin'),
+                      })
                     }
                   />
                   <span className="text-sm">올인내신</span>
                 </label>
                 <label className="flex items-center gap-2 cursor-pointer">
                   <Checkbox
-                    checked={services.includes('voca')}
+                    checked={state.services.includes('voca')}
                     onCheckedChange={(checked) =>
-                      setServices((prev) =>
-                        checked ? [...prev.filter((s) => s !== 'voca'), 'voca'] : prev.filter((s) => s !== 'voca')
-                      )
+                      dispatch({
+                        type: 'SET_SERVICES',
+                        services: checked
+                          ? [...state.services.filter((s) => s !== 'voca'), 'voca']
+                          : state.services.filter((s) => s !== 'voca'),
+                      })
                     }
                   />
                   <span className="text-sm">올킬보카</span>
                 </label>
               </div>
             </div>
-            <Button type="submit" className="w-full" disabled={saving}>
-              {saving ? '저장 중...' : '변경'}
+            <Button type="submit" className="w-full" disabled={state.saving}>
+              {state.saving ? '저장 중...' : '변경'}
             </Button>
           </form>
         </DialogContent>

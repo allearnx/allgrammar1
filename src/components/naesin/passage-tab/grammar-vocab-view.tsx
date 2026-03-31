@@ -12,6 +12,7 @@ import {
 } from '@/components/ui/dialog';
 import { CheckCircle, AlertTriangle, Trophy, RotateCcw, Info, ListRestart } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { useRetryWrong } from '@/hooks/use-retry-wrong';
 import type { GrammarVocabItem, GrammarVocabChoicePoint } from '@/types/naesin';
 
 export interface WrongChoicePoint {
@@ -62,7 +63,7 @@ export function GrammarVocabView({ items, onScoreChange }: GrammarVocabViewProps
   const [retryMode, setRetryMode] = useState(false);
   const [lockedCorrectKeys, setLockedCorrectKeys] = useState<Set<string>>(new Set());
   const [wrongItemIndices, setWrongItemIndices] = useState<Set<number>>(new Set());
-  const [previousCorrectCount, setPreviousCorrectCount] = useState(0);
+  const { previousCorrectCount, startRetry, reset: resetRetry, getCombinedScore } = useRetryWrong();
 
   const validCPMap = items.map((item) => getValidChoicePoints(item));
   const totalChoicePoints = validCPMap.reduce((sum, cps) => sum + cps.length, 0);
@@ -117,7 +118,9 @@ export function GrammarVocabView({ items, onScoreChange }: GrammarVocabViewProps
     // In retry mode, combine previous correct + newly correct (excluding locked)
     const newlyCorrect = correct - lockedCorrectKeys.size;
     const totalCorrect = retryMode ? previousCorrectCount + newlyCorrect : correct;
-    const score = totalChoicePoints > 0 ? Math.round((totalCorrect / totalChoicePoints) * 100) : 0;
+    const score = retryMode
+      ? getCombinedScore(newlyCorrect, totalChoicePoints)
+      : (totalChoicePoints > 0 ? Math.round((correct / totalChoicePoints) * 100) : 0);
     setSubmitted(true);
     setResultModal({ score, correct: totalCorrect, total: totalChoicePoints });
     onScoreChange(score, wrongs);
@@ -126,7 +129,7 @@ export function GrammarVocabView({ items, onScoreChange }: GrammarVocabViewProps
   function handleRetryWrong() {
     // Collect currently correct keys (including previously locked)
     const newLockedKeys = new Set(lockedCorrectKeys);
-    let totalCorrectSoFar = previousCorrectCount;
+    let newlyCorrect = 0;
     const newWrongItems = new Set<number>();
 
     items.forEach((_, itemIdx) => {
@@ -136,7 +139,7 @@ export function GrammarVocabView({ items, onScoreChange }: GrammarVocabViewProps
         if (lockedCorrectKeys.has(key)) return; // already locked
         if (selections[key] === cp.correctIndex) {
           newLockedKeys.add(key);
-          totalCorrectSoFar++;
+          newlyCorrect++;
         } else {
           hasWrong = true;
         }
@@ -153,7 +156,7 @@ export function GrammarVocabView({ items, onScoreChange }: GrammarVocabViewProps
     }
 
     setLockedCorrectKeys(newLockedKeys);
-    setPreviousCorrectCount(totalCorrectSoFar);
+    startRetry(newlyCorrect);
     setWrongItemIndices(newWrongItems);
     setSelections(newSelections);
     setSubmitted(false);
@@ -168,7 +171,7 @@ export function GrammarVocabView({ items, onScoreChange }: GrammarVocabViewProps
     setRetryMode(false);
     setLockedCorrectKeys(new Set());
     setWrongItemIndices(new Set());
-    setPreviousCorrectCount(0);
+    resetRetry();
   }
 
   // In retry mode, only count unlocked CPs for "allSelected"

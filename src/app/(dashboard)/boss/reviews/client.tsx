@@ -25,6 +25,7 @@ import {
 import { Plus, Pencil, Trash2, Star } from 'lucide-react';
 import { toast } from 'sonner';
 import { ConfirmDialog } from '@/components/shared/confirm-dialog';
+import { fetchWithToast } from '@/lib/fetch-with-toast';
 import type { Review } from '@/types/public';
 
 interface FormData {
@@ -77,21 +78,17 @@ export function ReviewsClient({ reviews }: { reviews: Review[] }) {
     setSaving(true);
     try {
       const isEdit = editingId !== null;
-      const payload = {
-        ...form,
-        achievement: form.achievement || null,
-      };
-      const res = await fetch('/api/boss/reviews', {
+      const payload = { ...form, achievement: form.achievement || null };
+      await fetchWithToast('/api/boss/reviews', {
         method: isEdit ? 'PATCH' : 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(isEdit ? { id: editingId, ...payload } : payload),
+        body: isEdit ? { id: editingId, ...payload } : payload,
+        successMessage: isEdit ? '후기가 수정되었습니다' : '후기가 추가되었습니다',
+        errorMessage: '저장 실패',
       });
-      if (!res.ok) throw new Error((await res.json()).error || '저장 실패');
-      toast.success(isEdit ? '후기가 수정되었습니다' : '후기가 추가되었습니다');
       setDialogOpen(false);
       router.refresh();
-    } catch (err) {
-      toast.error('저장 실패', { description: err instanceof Error ? err.message : '알 수 없는 오류' });
+    } catch {
+      // error already toasted
     } finally {
       setSaving(false);
     }
@@ -99,16 +96,15 @@ export function ReviewsClient({ reviews }: { reviews: Review[] }) {
 
   async function handleDelete(id: string) {
     try {
-      const res = await fetch('/api/boss/reviews', {
+      await fetchWithToast('/api/boss/reviews', {
         method: 'DELETE',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ id }),
+        body: { id },
+        successMessage: '후기가 삭제되었습니다',
+        errorMessage: '삭제 실패',
       });
-      if (!res.ok) throw new Error((await res.json()).error || '삭제 실패');
-      toast.success('후기가 삭제되었습니다');
       router.refresh();
-    } catch (err) {
-      toast.error('삭제 실패', { description: err instanceof Error ? err.message : '알 수 없는 오류' });
+    } catch {
+      // error already toasted
     }
   }
 

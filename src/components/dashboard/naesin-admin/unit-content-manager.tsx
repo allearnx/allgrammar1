@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useReducer } from 'react';
 import { Badge } from '@/components/ui/badge';
 import {
   BookOpen,
@@ -55,6 +55,53 @@ function makeDeleteHandler(
   };
 }
 
+interface ContentManagerState {
+  showVocabList: boolean;
+  showPassageList: boolean;
+  showGrammarList: boolean;
+  showProblemList: boolean;
+  bulkDeleteOpen: boolean;
+  dialogueCount: number | null;
+  omrCount: number | null;
+  lastReviewCount: number | null;
+  regeneratingGV: string | null;
+}
+
+type ContentManagerAction =
+  | { type: 'TOGGLE_SECTION'; section: 'vocab' | 'passage' | 'grammar' | 'problem' }
+  | { type: 'SET_BULK_DELETE_OPEN'; open: boolean }
+  | { type: 'SET_COUNTS'; dialogueCount: number; omrCount: number; lastReviewCount: number }
+  | { type: 'SET_REGENERATING_GV'; id: string | null };
+
+function contentManagerReducer(state: ContentManagerState, action: ContentManagerAction): ContentManagerState {
+  switch (action.type) {
+    case 'TOGGLE_SECTION': {
+      const key = `show${action.section.charAt(0).toUpperCase() + action.section.slice(1)}List` as keyof ContentManagerState;
+      return { ...state, [key]: !state[key] };
+    }
+    case 'SET_BULK_DELETE_OPEN':
+      return { ...state, bulkDeleteOpen: action.open };
+    case 'SET_COUNTS':
+      return { ...state, dialogueCount: action.dialogueCount, omrCount: action.omrCount, lastReviewCount: action.lastReviewCount };
+    case 'SET_REGENERATING_GV':
+      return { ...state, regeneratingGV: action.id };
+    default:
+      return state;
+  }
+}
+
+const contentManagerInitialState: ContentManagerState = {
+  showVocabList: false,
+  showPassageList: false,
+  showGrammarList: false,
+  showProblemList: false,
+  bulkDeleteOpen: false,
+  dialogueCount: null,
+  omrCount: null,
+  lastReviewCount: null,
+  regeneratingGV: null,
+};
+
 export function UnitContentManager({ unitId }: { unitId: string }) {
   const vocab = useListCrud<NaesinVocabulary>({
     apiEndpoint: '/api/naesin/vocabulary',
@@ -82,11 +129,9 @@ export function UnitContentManager({ unitId }: { unitId: string }) {
 
   const vocabDelete = useConfirmDelete(vocab.handleDeleteOne);
 
-  const [showVocabList, setShowVocabList] = useState(false);
-  const [bulkDeleteOpen, setBulkDeleteOpen] = useState(false);
+  const [cm, dispatchCM] = useReducer(contentManagerReducer, contentManagerInitialState);
 
   const [passageList, setPassageList] = useState<NaesinPassage[]>([]);
-  const [showPassageList, setShowPassageList] = useState(false);
   const passageDelete = useConfirmDelete(
     makeDeleteHandler('/api/naesin/passages', setPassageList as never, {
       success: '지문이 삭제되었습니다',
@@ -96,7 +141,6 @@ export function UnitContentManager({ unitId }: { unitId: string }) {
   );
 
   const [grammarList, setGrammarList] = useState<NaesinGrammarLesson[]>([]);
-  const [showGrammarList, setShowGrammarList] = useState(false);
   const grammarDelete = useConfirmDelete(
     makeDeleteHandler('/api/naesin/grammar-lessons', setGrammarList as never, {
       success: '문법 설명이 삭제되었습니다',
@@ -127,7 +171,6 @@ export function UnitContentManager({ unitId }: { unitId: string }) {
   }, setGrammarList);
 
   const [problemList, setProblemList] = useState<NaesinProblemSheet[]>([]);
-  const [showProblemList, setShowProblemList] = useState(false);
   const problemDelete = useConfirmDelete(
     makeDeleteHandler('/api/naesin/problems', setProblemList as never, {
       success: '문제 시트가 삭제되었습니다',
@@ -136,10 +179,6 @@ export function UnitContentManager({ unitId }: { unitId: string }) {
     }),
   );
 
-  const [dialogueCount, setDialogueCount] = useState<number | null>(null);
-  const [omrCount, setOmrCount] = useState<number | null>(null);
-  const [lastReviewCount, setLastReviewCount] = useState<number | null>(null);
-  const [regeneratingGV, setRegeneratingGV] = useState<string | null>(null);
 
   const loadCounts = useCallback(async () => {
     try {
@@ -156,11 +195,9 @@ export function UnitContentManager({ unitId }: { unitId: string }) {
       ]);
       vocab.setItems((v.data as NaesinVocabulary[]) || []);
       setPassageList((p.data as NaesinPassage[]) || []);
-      setDialogueCount(dlg.count ?? 0);
+      dispatchCM({ type: 'SET_COUNTS', dialogueCount: dlg.count ?? 0, omrCount: o.count ?? 0, lastReviewCount: lr.count ?? 0 });
       setGrammarList((g.data as NaesinGrammarLesson[]) || []);
-      setOmrCount(o.count ?? 0);
       setProblemList((prob.data as NaesinProblemSheet[]) || []);
-      setLastReviewCount(lr.count ?? 0);
       vocab.setSelectedIds(new Set());
     } catch (err) {
       logger.error('unit.load_counts', { error: err instanceof Error ? err.message : String(err) });
@@ -177,7 +214,7 @@ export function UnitContentManager({ unitId }: { unitId: string }) {
       toast.error('문장 데이터가 없습니다');
       return;
     }
-    setRegeneratingGV(passage.id);
+    dispatchCM({ type: 'SET_REGENERATING_GV', id: passage.id });
     try {
       const gvRes = await fetch('/api/naesin/passages/extract-grammar-vocab', {
         method: 'POST',
@@ -200,18 +237,18 @@ export function UnitContentManager({ unitId }: { unitId: string }) {
       logger.error('unit.regen_grammar_vocab', { error: err instanceof Error ? err.message : String(err) });
       toast.error('어법/어휘 재생성 실패');
     } finally {
-      setRegeneratingGV(null);
+      dispatchCM({ type: 'SET_REGENERATING_GV', id: null });
     }
   }
 
   const sections = [
-    { label: '단어', icon: BookOpen, count: vocab.items.length, color: 'text-blue-500', toggle: () => setShowVocabList(!showVocabList), expanded: showVocabList },
-    { label: '교과서 지문', icon: FileText, count: passageList.length, color: 'text-orange-500', toggle: () => setShowPassageList(!showPassageList), expanded: showPassageList },
-    { label: '대화문', icon: MessageSquare, count: dialogueCount, color: 'text-violet-500' },
-    { label: '문법 설명', icon: GraduationCap, count: grammarList.length, color: 'text-green-500', toggle: () => setShowGrammarList(!showGrammarList), expanded: showGrammarList },
-    { label: 'OMR 시트', icon: ClipboardList, count: omrCount, color: 'text-indigo-500' },
-    { label: '문제풀이', icon: ClipboardList, count: problemList.length, color: 'text-red-500', toggle: () => setShowProblemList(!showProblemList), expanded: showProblemList },
-    { label: '직전보강', icon: Brain, count: lastReviewCount, color: 'text-amber-500' },
+    { label: '단어', icon: BookOpen, count: vocab.items.length, color: 'text-blue-500', toggle: () => dispatchCM({ type: 'TOGGLE_SECTION', section: 'vocab' }), expanded: cm.showVocabList },
+    { label: '교과서 지문', icon: FileText, count: passageList.length, color: 'text-orange-500', toggle: () => dispatchCM({ type: 'TOGGLE_SECTION', section: 'passage' }), expanded: cm.showPassageList },
+    { label: '대화문', icon: MessageSquare, count: cm.dialogueCount, color: 'text-violet-500' },
+    { label: '문법 설명', icon: GraduationCap, count: grammarList.length, color: 'text-green-500', toggle: () => dispatchCM({ type: 'TOGGLE_SECTION', section: 'grammar' }), expanded: cm.showGrammarList },
+    { label: 'OMR 시트', icon: ClipboardList, count: cm.omrCount, color: 'text-indigo-500' },
+    { label: '문제풀이', icon: ClipboardList, count: problemList.length, color: 'text-red-500', toggle: () => dispatchCM({ type: 'TOGGLE_SECTION', section: 'problem' }), expanded: cm.showProblemList },
+    { label: '직전보강', icon: Brain, count: cm.lastReviewCount, color: 'text-amber-500' },
   ];
 
   return (
@@ -233,7 +270,7 @@ export function UnitContentManager({ unitId }: { unitId: string }) {
         ))}
       </div>
 
-      {showVocabList && vocab.items.length > 0 && (
+      {cm.showVocabList && vocab.items.length > 0 && (
         <UnitVocabList
           unitId={unitId}
           items={vocab.items}
@@ -249,23 +286,23 @@ export function UnitContentManager({ unitId }: { unitId: string }) {
           cancelEdit={vocabEdit.cancelEdit}
           saveEdit={vocabEdit.saveEdit}
           onRequestDelete={vocabDelete.requestDelete}
-          onBulkDeleteOpen={() => setBulkDeleteOpen(true)}
+          onBulkDeleteOpen={() => dispatchCM({ type: 'SET_BULK_DELETE_OPEN', open: true })}
         />
       )}
 
       <VocabQuizSetManager unitId={unitId} />
 
-      {showPassageList && passageList.length > 0 && (
+      {cm.showPassageList && passageList.length > 0 && (
         <UnitPassageList
           passages={passageList}
-          regeneratingGV={regeneratingGV}
+          regeneratingGV={cm.regeneratingGV}
           onUpdate={(updated) => setPassageList((prev) => prev.map((p) => (p.id === updated.id ? updated : p)))}
           onRequestDelete={passageDelete.requestDelete}
           onRegenerateGrammarVocab={regenerateGrammarVocab}
         />
       )}
 
-      {showGrammarList && grammarList.length > 0 && (
+      {cm.showGrammarList && grammarList.length > 0 && (
         <UnitGrammarList
           lessons={grammarList}
           editingId={grammarEdit.editingId}
@@ -278,7 +315,7 @@ export function UnitContentManager({ unitId }: { unitId: string }) {
         />
       )}
 
-      {showProblemList && problemList.length > 0 && (
+      {cm.showProblemList && problemList.length > 0 && (
         <UnitProblemList
           sheets={problemList}
           onUpdate={(updated) => setProblemList((prev) => prev.map((s) => (s.id === updated.id ? updated : s)))}
@@ -307,11 +344,11 @@ export function UnitContentManager({ unitId }: { unitId: string }) {
       />
 
       <ConfirmDialog
-        open={bulkDeleteOpen}
-        onOpenChange={setBulkDeleteOpen}
+        open={cm.bulkDeleteOpen}
+        onOpenChange={(open) => dispatchCM({ type: 'SET_BULK_DELETE_OPEN', open })}
         description={`선택한 ${vocab.selectedIds.size}개 단어를 삭제하시겠습니까?`}
         onConfirm={() => {
-          setBulkDeleteOpen(false);
+          dispatchCM({ type: 'SET_BULK_DELETE_OPEN', open: false });
           vocab.handleBulkDelete();
         }}
       />

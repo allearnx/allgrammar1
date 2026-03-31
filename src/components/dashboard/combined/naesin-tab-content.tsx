@@ -5,18 +5,7 @@ import { ArrowRight, Layers, CalendarDays } from 'lucide-react';
 import { FlowStep } from './flow-step';
 import { BRAND } from '@/lib/utils/brand-colors';
 import { getDDay, isNaesinUnitComplete } from '@/lib/dashboard/naesin-helpers';
-import type { NaesinUnit, NaesinStageStatuses, NaesinExamAssignment } from '@/types/naesin';
-
-interface NaesinStage {
-  key: string;
-  label: string;
-  stageKey: string;
-  status: 'done' | 'active' | 'locked';
-  icon: React.ReactNode;
-  description: string;
-  scoreRequirement: string;
-  actualScore?: string;
-}
+import { useDashboardContext } from './dashboard-context';
 
 const COLORS = {
   stepDone: { border: BRAND.step.doneBorder },
@@ -25,25 +14,12 @@ const COLORS = {
   progressActive: BRAND.progress.active,
 };
 
-interface Props {
-  currentUnit: NaesinUnit | undefined;
-  currentNaesinStages: NaesinStage[];
-  naesinCtaStage: NaesinStage | undefined;
-  sortedUnits: NaesinUnit[];
-  statusesMap: Map<string, NaesinStageStatuses>;
-  examAssignments: NaesinExamAssignment[];
-  naesinUnits: NaesinUnit[];
-}
+export function NaesinTabContent() {
+  const {
+    currentUnit, currentNaesinStages, naesinCtaStage,
+    sortedUnits, statusesMap, examAssignments, naesinUnits,
+  } = useDashboardContext();
 
-export function NaesinTabContent({
-  currentUnit,
-  currentNaesinStages,
-  naesinCtaStage,
-  sortedUnits,
-  statusesMap,
-  examAssignments,
-  naesinUnits,
-}: Props) {
   return (
     <div className="space-y-6">
       {/* Learning Flow */}

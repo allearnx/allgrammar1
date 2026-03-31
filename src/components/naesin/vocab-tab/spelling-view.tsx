@@ -7,6 +7,7 @@ import { Input } from '@/components/ui/input';
 import { Target, CheckCircle, ArrowRight, RotateCcw, ListRestart } from 'lucide-react';
 import { cn, shuffle } from '@/lib/utils';
 import { ScoreBadges, ResultCard, NextButton } from '@/components/memory/shared';
+import { useRetryWrong } from '@/hooks/use-retry-wrong';
 import type { MemoryItem, StudentMemoryProgress, NaesinVocabulary } from '@/types/database';
 
 type FlashcardItem = MemoryItem & { progress: StudentMemoryProgress | null };
@@ -34,8 +35,7 @@ export function NaesinSpellingView({
   const [score, setScore] = useState({ correct: 0, wrong: 0 });
   const [wrongItems, setWrongItems] = useState<FlashcardItem[]>([]);
 
-  // Retry-wrong-only state
-  const [retryPreviousCorrectCount, setRetryPreviousCorrectCount] = useState(0);
+  const { previousCorrectCount: retryPreviousCorrectCount, isRetrying, startRetry, reset: resetRetry, getCombinedScore } = useRetryWrong();
   const totalOriginalCount = rawItems.length;
 
   const item = items[currentIndex];
@@ -56,8 +56,7 @@ export function NaesinSpellingView({
     }
     if (currentIndex === items.length - 1) {
       const finalCorrect = correct ? score.correct + 1 : score.correct;
-      const combinedCorrect = retryPreviousCorrectCount + finalCorrect;
-      const pct = Math.round((combinedCorrect / totalOriginalCount) * 100);
+      const pct = getCombinedScore(finalCorrect, totalOriginalCount);
       onComplete(pct);
     }
   }
@@ -73,8 +72,7 @@ export function NaesinSpellingView({
 
   function handleRetryWrong() {
     if (wrongItems.length === 0) return;
-    const newPreviousCorrect = retryPreviousCorrectCount + score.correct;
-    setRetryPreviousCorrectCount(newPreviousCorrect);
+    startRetry(score.correct);
     setItems(shuffle(wrongItems));
     setCurrentIndex(0);
     setShowResult(false);
@@ -92,7 +90,7 @@ export function NaesinSpellingView({
     setAnswer('');
     setScore({ correct: 0, wrong: 0 });
     setWrongItems([]);
-    setRetryPreviousCorrectCount(0);
+    resetRetry();
   }
 
   useEffect(() => {
@@ -110,7 +108,7 @@ export function NaesinSpellingView({
   // Calculate final score for completion view
   const combinedCorrect = retryPreviousCorrectCount + score.correct;
   const finalPct = isFinished
-    ? Math.round((combinedCorrect / totalOriginalCount) * 100)
+    ? getCombinedScore(score.correct, totalOriginalCount)
     : 0;
   const passed = finalPct >= 80;
   const quizPassed = quizScore !== null && quizScore !== undefined && quizScore >= 80;
@@ -131,7 +129,7 @@ export function NaesinSpellingView({
         </div>
       </div>
 
-      {retryPreviousCorrectCount > 0 && !isFinished && (
+      {isRetrying && !isFinished && (
         <div className="flex items-center gap-2 text-xs text-orange-700 bg-orange-50 rounded-lg px-3 py-2">
           <ListRestart className="h-3.5 w-3.5 shrink-0" />
           틀린 {items.length}개 단어만 다시 풀어보세요

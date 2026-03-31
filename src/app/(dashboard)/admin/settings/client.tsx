@@ -6,6 +6,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Copy, Check, Users, Building2, Mail, Phone, MapPin, FileText } from 'lucide-react';
 import { toast } from 'sonner';
+import { fetchWithToast } from '@/lib/fetch-with-toast';
 import type { Academy } from '@/types/user';
 
 interface Props {
@@ -37,27 +38,21 @@ export function AcademySettingsClient({ academy, currentStudents }: Props) {
     setSaving(true);
 
     try {
-      const res = await fetch('/api/admin/settings', {
+      await fetchWithToast('/api/admin/settings', {
         method: 'PATCH',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
+        body: {
           name: form.name || null,
           contact_phone: form.contact_phone || null,
           contact_email: form.contact_email || null,
           address: form.address || null,
           business_number: form.business_number || null,
-        }),
+        },
+        successMessage: '설정이 저장되었습니다',
+        errorMessage: '저장 실패',
       });
-
-      if (!res.ok) {
-        const data = await res.json();
-        throw new Error(data.error || '저장 실패');
-      }
-
-      toast.success('설정이 저장되었습니다');
       router.refresh();
-    } catch (err) {
-      toast.error('저장 실패', { description: err instanceof Error ? err.message : '알 수 없는 오류' });
+    } catch {
+      // error already toasted
     } finally {
       setSaving(false);
     }

@@ -33,6 +33,7 @@ import {
 import { Plus, Pencil, Trash2, UserCircle, Upload, Loader2 } from 'lucide-react';
 import { toast } from 'sonner';
 import { ConfirmDialog } from '@/components/shared/confirm-dialog';
+import { fetchWithToast } from '@/lib/fetch-with-toast';
 import type { TeacherProfile } from '@/types/public';
 
 interface FormData {
@@ -87,15 +88,16 @@ export function TeacherProfilesClient({ profiles }: { profiles: TeacherProfile[]
     if (!file) return;
     setUploading(true);
     try {
-      const formData = new FormData();
-      formData.append('file', file);
-      const res = await fetch('/api/boss/upload', { method: 'POST', body: formData });
-      if (!res.ok) throw new Error((await res.json()).error || '업로드 실패');
-      const { url } = await res.json();
+      const fd = new FormData();
+      fd.append('file', file);
+      const { url } = await fetchWithToast<{ url: string }>('/api/boss/upload', {
+        body: fd,
+        successMessage: '이미지가 업로드되었습니다',
+        errorMessage: '업로드 실패',
+      });
       setForm((prev) => ({ ...prev, image_url: url }));
-      toast.success('이미지가 업로드되었습니다');
-    } catch (err) {
-      toast.error('업로드 실패', { description: err instanceof Error ? err.message : '알 수 없는 오류' });
+    } catch {
+      // error already toasted
     } finally {
       setUploading(false);
       if (fileInputRef.current) fileInputRef.current.value = '';
@@ -107,21 +109,17 @@ export function TeacherProfilesClient({ profiles }: { profiles: TeacherProfile[]
     setSaving(true);
     try {
       const isEdit = editingId !== null;
-      const payload = {
-        ...form,
-        image_url: form.image_url || null,
-      };
-      const res = await fetch('/api/boss/teacher-profiles', {
+      const payload = { ...form, image_url: form.image_url || null };
+      await fetchWithToast('/api/boss/teacher-profiles', {
         method: isEdit ? 'PATCH' : 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(isEdit ? { id: editingId, ...payload } : payload),
+        body: isEdit ? { id: editingId, ...payload } : payload,
+        successMessage: isEdit ? '프로필이 수정되었습니다' : '프로필이 추가되었습니다',
+        errorMessage: '저장 실패',
       });
-      if (!res.ok) throw new Error((await res.json()).error || '저장 실패');
-      toast.success(isEdit ? '프로필이 수정되었습니다' : '프로필이 추가되었습니다');
       setDialogOpen(false);
       router.refresh();
-    } catch (err) {
-      toast.error('저장 실패', { description: err instanceof Error ? err.message : '알 수 없는 오류' });
+    } catch {
+      // error already toasted
     } finally {
       setSaving(false);
     }
@@ -129,16 +127,15 @@ export function TeacherProfilesClient({ profiles }: { profiles: TeacherProfile[]
 
   async function handleDelete(id: string) {
     try {
-      const res = await fetch('/api/boss/teacher-profiles', {
+      await fetchWithToast('/api/boss/teacher-profiles', {
         method: 'DELETE',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ id }),
+        body: { id },
+        successMessage: '프로필이 삭제되었습니다',
+        errorMessage: '삭제 실패',
       });
-      if (!res.ok) throw new Error((await res.json()).error || '삭제 실패');
-      toast.success('프로필이 삭제되었습니다');
       router.refresh();
-    } catch (err) {
-      toast.error('삭제 실패', { description: err instanceof Error ? err.message : '알 수 없는 오류' });
+    } catch {
+      // error already toasted
     }
   }
 

@@ -13,6 +13,7 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { toast } from 'sonner';
+import { fetchWithToast } from '@/lib/fetch-with-toast';
 import { Trash2 } from 'lucide-react';
 import {
   Dialog,
@@ -75,16 +76,15 @@ export function UsersClient({ users, academies }: UsersClientProps) {
   async function handleDelete(userId: string) {
     setUpdating(userId);
     try {
-      const res = await fetch(`/api/boss/users/${userId}`, { method: 'DELETE' });
-      if (!res.ok) {
-        const data = await res.json();
-        throw new Error(data.error || '삭제 실패');
-      }
-      toast.success('사용자가 삭제되었습니다');
+      await fetchWithToast(`/api/boss/users/${userId}`, {
+        method: 'DELETE',
+        successMessage: '사용자가 삭제되었습니다',
+        errorMessage: '삭제 실패',
+      });
       setDeleteTarget(null);
       router.refresh();
-    } catch (err) {
-      toast.error('삭제 실패', { description: err instanceof Error ? err.message : '알 수 없는 오류' });
+    } catch {
+      // error already toasted
     } finally {
       setUpdating(null);
     }
@@ -92,23 +92,16 @@ export function UsersClient({ users, academies }: UsersClientProps) {
 
   async function handleUpdate(userId: string, updates: Record<string, unknown>) {
     setUpdating(userId);
-
     try {
-      const res = await fetch(`/api/boss/users/${userId}`, {
+      await fetchWithToast(`/api/boss/users/${userId}`, {
         method: 'PATCH',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(updates),
+        body: updates,
+        successMessage: '사용자 정보가 변경되었습니다',
+        errorMessage: '변경 실패',
       });
-
-      if (!res.ok) {
-        const data = await res.json();
-        throw new Error(data.error || 'Failed to update');
-      }
-
-      toast.success('사용자 정보가 변경되었습니다');
       router.refresh();
-    } catch (err) {
-      toast.error('변경 실패', { description: err instanceof Error ? err.message : '알 수 없는 오류' });
+    } catch {
+      // error already toasted
     } finally {
       setUpdating(null);
     }

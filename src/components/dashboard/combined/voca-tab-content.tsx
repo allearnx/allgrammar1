@@ -5,8 +5,7 @@ import { ArrowRight, BookOpen, BookMarked, XCircle, TrendingUp } from 'lucide-re
 import { FlowStep } from './flow-step';
 import { BRAND } from '@/lib/utils/brand-colors';
 import { isR1Complete } from '@/lib/dashboard/voca-helpers';
-import type { VocaStage } from '@/lib/dashboard/voca-helpers';
-import type { VocaDay, VocaStudentProgress } from '@/types/voca';
+import { useDashboardContext } from './dashboard-context';
 
 const COLORS = {
   stepActive: { border: BRAND.step.activeBorder },
@@ -22,29 +21,14 @@ const COLORS = {
   wrongBadge: BRAND.wrong.badge,
 };
 
-interface Props {
-  currentDay: VocaDay | undefined;
-  r1Stages: VocaStage[];
-  r2Stages: VocaStage[];
-  r1Done: boolean;
-  vocaCtaStage: VocaStage | undefined;
-  vocaCtaRound: string;
-  wrongWordEntries: [string, number][];
-  currentBookDays: VocaDay[];
-  vocaProgressMap: Map<string, VocaStudentProgress>;
-}
+export function VocaTabContent() {
+  const {
+    currentVocaDay: currentDay,
+    r1Stages, r2Stages, r1Done,
+    vocaCtaStage, vocaCtaRound,
+    wrongWordEntries, currentBookDays, vocaProgressMap,
+  } = useDashboardContext();
 
-export function VocaTabContent({
-  currentDay,
-  r1Stages,
-  r2Stages,
-  r1Done,
-  vocaCtaStage,
-  vocaCtaRound,
-  wrongWordEntries,
-  currentBookDays,
-  vocaProgressMap,
-}: Props) {
   return (
     <div className="space-y-6">
       {/* Round 1 */}
