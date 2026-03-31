@@ -10,10 +10,14 @@ export default async function ProgressPage() {
   const supabase = await createClient();
 
   // Fetch all progress
-  const [videoProgressRes, memoryProgressRes, naesinProgressRes, naesinSettingsRes] = await Promise.all([
+  const [videoProgressRes, naesinVideoProgressRes, memoryProgressRes, naesinProgressRes, naesinSettingsRes] = await Promise.all([
     supabase
       .from('student_progress')
       .select('grammar_id, video_completed, video_watched_seconds')
+      .eq('student_id', user.id),
+    supabase
+      .from('naesin_grammar_video_progress')
+      .select('cumulative_watch_seconds')
       .eq('student_id', user.id),
     supabase
       .from('student_memory_progress')
@@ -49,7 +53,9 @@ export default async function ProgressPage() {
   const naesinProgressMap = new Map(naesinProgress.map((p) => [p.unit_id, p]));
   const textbookName = (naesinSettingsRes.data?.textbook as unknown as { display_name: string } | null)?.display_name || '';
 
-  const totalWatchedSeconds = videoProgress?.reduce((acc, p) => acc + p.video_watched_seconds, 0) || 0;
+  const legacyWatchedSeconds = videoProgress?.reduce((acc, p) => acc + p.video_watched_seconds, 0) || 0;
+  const naesinWatchedSeconds = naesinVideoProgressRes.data?.reduce((acc, p) => acc + (p.cumulative_watch_seconds || 0), 0) || 0;
+  const totalWatchedSeconds = legacyWatchedSeconds + naesinWatchedSeconds;
   const totalMastered = memoryProgress?.filter((p) => p.is_mastered).length || 0;
   const totalMemory = memoryProgress?.length || 0;
   const totalQuizCorrect = memoryProgress?.reduce((acc, p) => acc + p.quiz_correct_count, 0) || 0;

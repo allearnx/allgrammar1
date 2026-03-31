@@ -56,12 +56,16 @@ export async function StudentDetail({ user, studentId, naesinData }: Props) {
 
   if (!student) notFound();
 
-  const [videoRes, memoryRes, textbookRes, passageStagesRes, naesinProgressRes, vocaProgressRes, vocaAssignmentRes, naesinAssignmentRes, naesinTextbooksRes] = await Promise.all([
+  const [videoRes, naesinVideoRes, memoryRes, textbookRes, passageStagesRes, naesinProgressRes, vocaProgressRes, vocaAssignmentRes, naesinAssignmentRes, naesinTextbooksRes] = await Promise.all([
     admin
       .from('student_progress')
       .select('*, grammar:grammars(title, level:levels(level_number, title_ko))')
       .eq('student_id', studentId)
       .order('updated_at', { ascending: false }),
+    admin
+      .from('naesin_grammar_video_progress')
+      .select('cumulative_watch_seconds')
+      .eq('student_id', studentId),
     admin
       .from('student_memory_progress')
       .select('*, memory_item:memory_items(front_text, grammar:grammars(title))')
@@ -114,7 +118,9 @@ export async function StudentDetail({ user, studentId, naesinData }: Props) {
 
   const completedVideos = videoProgress.filter((p) => p.video_completed).length;
   const masteredMemory = memoryProgress.filter((p) => p.is_mastered).length;
-  const totalWatchedSeconds = videoProgress.reduce((a, p) => a + p.video_watched_seconds, 0);
+  const legacyWatchedSeconds = videoProgress.reduce((a, p) => a + p.video_watched_seconds, 0);
+  const naesinWatchedSeconds = naesinVideoRes.data?.reduce((a, p) => a + (p.cumulative_watch_seconds || 0), 0) || 0;
+  const totalWatchedSeconds = legacyWatchedSeconds + naesinWatchedSeconds;
   const hours = Math.floor(totalWatchedSeconds / 3600);
   const minutes = Math.floor((totalWatchedSeconds % 3600) / 60);
 
