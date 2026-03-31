@@ -7,15 +7,16 @@ import { checkPlanGate, checkServiceGate } from '@/lib/billing/check-plan-api';
 export const POST = createApiHandler(
   { roles: ['admin', 'boss'], schema: studentBulkAssignSchema, rateLimit: { max: 20, windowMs: 60_000 } },
   async ({ user, body }) => {
-    // Boss는 플랜 제한 없이 배정 가능
+    // 벌크 기능은 유료 전용 (boss 제외)
     if (user.role !== 'boss') {
       const blocked = await checkPlanGate(user.academy_id, 'bulk:assign');
       if (blocked) return blocked;
+    }
 
-      if (body.action === 'assign') {
-        const serviceBlocked = await checkServiceGate(user.academy_id, body.services);
-        if (serviceBlocked) return serviceBlocked;
-      }
+    // 서비스 제한은 모든 역할에 적용 (무료 플랜: 1개 서비스만)
+    if (body.action === 'assign') {
+      const serviceBlocked = await checkServiceGate(user.academy_id, body.services);
+      if (serviceBlocked) return serviceBlocked;
     }
 
     const admin = createAdminClient();

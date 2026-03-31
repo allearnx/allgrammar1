@@ -5,6 +5,7 @@ import { Topbar } from '@/components/layout/topbar';
 import { NoServicesScreen } from '@/components/dashboard/no-services-screen';
 import { IndependentStudentScreen } from '@/components/dashboard/independent-student-screen';
 import { getPlanContext } from '@/lib/billing/get-plan-context';
+import { isServiceAllowed } from '@/lib/billing/feature-gate';
 import { VocaSection } from './_sections/voca-section';
 import { NaesinSection } from './_sections/naesin-section';
 import { CombinedSection } from './_sections/combined-section';
@@ -18,26 +19,31 @@ export default async function StudentDashboard() {
     .select('service')
     .eq('student_id', user.id);
 
-  const services = assignments?.map((a) => a.service) ?? [];
+  const rawServices = assignments?.map((a) => a.service) ?? [];
+  const isIndependent = !user.academy_id;
+
+  // 플랜에 맞지 않는 서비스 필터링 (무료 플랜: 1개만 허용)
+  const planContext = await getPlanContext(user.academy_id, user.id);
+  const services = rawServices.filter((s) =>
+    s === 'naesin' || s === 'voca'
+      ? isServiceAllowed(planContext.tier, planContext.freeService, s)
+      : true,
+  );
   const hasVoca = services.includes('voca');
   const hasNaesin = services.includes('naesin');
-  const isIndependent = !user.academy_id;
 
   // ── Voca only ──
   if (hasVoca && !hasNaesin) {
-    const planContext = await getPlanContext(user.academy_id, user.id);
     return <VocaSection user={user} planContext={planContext} isIndependent={isIndependent} />;
   }
 
   // ── Naesin only ──
   if (hasNaesin && !hasVoca) {
-    const planContext = await getPlanContext(user.academy_id, user.id);
     return <NaesinSection user={user} planContext={planContext} />;
   }
 
   // ── Both ──
   if (hasVoca && hasNaesin) {
-    const planContext = await getPlanContext(user.academy_id, user.id);
     return <CombinedSection user={user} planContext={planContext} />;
   }
 
@@ -62,8 +68,6 @@ export default async function StudentDashboard() {
   }
 
   // 학원 학생: tier 확인 후 분기
-  const planContext = await getPlanContext(user.academy_id, user.id);
-
   if (planContext.tier === 'free') {
     // 무료 학원 학생: 서비스 택1 선택 화면
     return (

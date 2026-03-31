@@ -9,6 +9,7 @@ import { logger } from '@/lib/logger';
 interface ServiceAssignmentToggleProps {
   studentId: string;
   assignedServices: string[];
+  allowedServices?: string[];
   vocaBooks?: { id: string; title: string }[];
   assignedBookId?: string | null;
   round2Unlocked?: boolean;
@@ -24,6 +25,7 @@ const SERVICES = [
 export function ServiceAssignmentToggle({
   studentId,
   assignedServices: initial,
+  allowedServices,
   vocaBooks,
   assignedBookId: initialBookId,
   round2Unlocked: initialRound2 = false,
@@ -126,15 +128,18 @@ export function ServiceAssignmentToggle({
     <div className="flex flex-wrap items-center gap-2">
       {SERVICES.map((s) => {
         const active = assigned.has(s.key);
+        const blocked = allowedServices && !allowedServices.includes(s.key);
         return (
           <button
             key={s.key}
             type="button"
-            disabled={loading === s.key}
+            disabled={loading === s.key || !!blocked}
             onClick={() => toggle(s.key)}
+            title={blocked ? '현재 플랜에서 사용할 수 없는 서비스입니다' : undefined}
             className={cn(
               'inline-flex items-center gap-1.5 rounded-full px-4 py-1.5 text-sm font-medium transition-all select-none',
               loading === s.key && 'opacity-50 cursor-wait',
+              blocked && 'opacity-40 cursor-not-allowed',
               active
                 ? 'bg-primary text-primary-foreground shadow-sm hover:bg-primary/90'
                 : 'bg-muted text-muted-foreground hover:bg-muted/80 border border-border'

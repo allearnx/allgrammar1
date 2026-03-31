@@ -18,11 +18,9 @@ export const POST = createApiHandler(
   { roles: ['boss', 'admin'], schema: serviceAssignmentCreateSchema },
   async ({ user, body, supabase }) => {
     await requireAcademyScope(user, body.studentId, supabase);
-    // Boss는 플랜 제한 없이 서비스 배정 가능
-    if (user.role !== 'boss') {
-      const serviceBlocked = await checkServiceGate(user.academy_id, [body.service]);
-      if (serviceBlocked) return serviceBlocked;
-    }
+    // 모든 역할에 플랜 기반 서비스 제한 적용 (무료 플랜: 1개 서비스만)
+    const serviceBlocked = await checkServiceGate(user.academy_id, [body.service]);
+    if (serviceBlocked) return serviceBlocked;
 
     const { data, error } = await supabase
       .from('service_assignments')
