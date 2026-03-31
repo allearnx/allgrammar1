@@ -21,8 +21,9 @@ const notoSansKr = Noto_Sans_KR({
 });
 
 export const metadata: Metadata = {
-  title: '올라영 AI 러닝 엔진',
-  description: '중학생 영어 문법 학습 플랫폼',
+  title: '올라영 | 중고등·국제학교 영어 내신·어휘·문법 AI 학습',
+  description:
+    '중고등·국제학교 영어 완전 정복. 내신·어휘·문법 AI 맞춤 학습 + 25년 경력 원장 직강. 강남 기출 분석 기반으로 1등급 도전하세요.',
 };
 
 export default function RootLayout({
