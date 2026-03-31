@@ -669,6 +669,14 @@ export const coursePatchSchema = z.object({
   sort_order: z.number().nullish(),
 });
 
+// ── Learning Session Schemas ──
+
+export const learningSessionHeartbeatSchema = z.object({
+  contextType: z.enum(['naesin', 'voca']),
+  contextId: z.string().max(100),
+  seconds: z.number().int().min(1).max(120),
+});
+
 // ── Auth Schemas ──
 
 export const changePasswordSchema = z.object({

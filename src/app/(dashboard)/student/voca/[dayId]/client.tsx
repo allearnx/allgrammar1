@@ -8,6 +8,7 @@ import { VocaTab } from '@/components/voca/vocab-tab';
 import { VocaTab2 } from '@/components/voca/vocab-tab/voca-tab-round2';
 import { cn } from '@/lib/utils';
 import type { VocaDay, VocaVocabulary, VocaStudentProgress } from '@/types/voca';
+import { useLearningSession } from '@/hooks/use-learning-session';
 
 export interface WrongWordItem {
   front_text: string;
@@ -25,6 +26,7 @@ interface VocaDayClientProps {
 export function VocaDayClient({ day, vocabulary, progress, wrongWords, round2Locked = false }: VocaDayClientProps) {
   const router = useRouter();
   const [round, setRound] = useState<'1' | '2'>('1');
+  useLearningSession('voca', day.id);
 
   return (
     <div className="space-y-4">

@@ -25,7 +25,7 @@ export default async function ProgressPage() {
       .eq('student_id', user.id),
     supabase
       .from('naesin_student_progress')
-      .select('unit_id, vocab_completed, vocab_quiz_score, vocab_spelling_score, passage_completed, passage_fill_blanks_best, passage_ordering_best, passage_translation_best, passage_grammar_vocab_best, grammar_completed, grammar_videos_completed, grammar_total_videos, problem_completed, updated_at')
+      .select('unit_id, vocab_completed, vocab_quiz_score, vocab_spelling_score, passage_completed, passage_fill_blanks_best, passage_ordering_best, passage_translation_best, passage_grammar_vocab_best, grammar_completed, grammar_videos_completed, grammar_total_videos, problem_completed, total_learning_seconds, updated_at')
       .eq('student_id', user.id),
     supabase
       .from('naesin_student_settings')
@@ -55,7 +55,8 @@ export default async function ProgressPage() {
 
   const legacyWatchedSeconds = videoProgress?.reduce((acc, p) => acc + p.video_watched_seconds, 0) || 0;
   const naesinWatchedSeconds = naesinVideoProgressRes.data?.reduce((acc, p) => acc + (p.cumulative_watch_seconds || 0), 0) || 0;
-  const totalWatchedSeconds = legacyWatchedSeconds + naesinWatchedSeconds;
+  const naesinSessionSeconds = naesinProgress.reduce((acc, p) => acc + (p.total_learning_seconds || 0), 0);
+  const totalWatchedSeconds = legacyWatchedSeconds + naesinWatchedSeconds + naesinSessionSeconds;
   const totalMastered = memoryProgress?.filter((p) => p.is_mastered).length || 0;
   const totalMemory = memoryProgress?.length || 0;
   const totalQuizCorrect = memoryProgress?.reduce((acc, p) => acc + p.quiz_correct_count, 0) || 0;

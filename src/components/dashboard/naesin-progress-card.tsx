@@ -98,7 +98,7 @@ export function NaesinProgressCard({
               <Clock className="h-4 w-4 text-sky-600 dark:text-sky-400" />
             </div>
             <div className="text-2xl font-bold tracking-tight">{hours > 0 ? `${hours}h ` : ''}{minutes}m</div>
-            <p className="text-xs text-muted-foreground">영상 시청 시간 기준</p>
+            <p className="text-xs text-muted-foreground">영상 + 학습 활동 시간</p>
           </div>
         </div>
 

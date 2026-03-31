@@ -81,7 +81,7 @@ export async function StudentDetail({ user, studentId, naesinData }: Props) {
       .single(),
     admin
       .from('naesin_student_progress')
-      .select('unit_id, vocab_completed, vocab_quiz_score, vocab_spelling_score, passage_completed, passage_fill_blanks_best, passage_ordering_best, passage_translation_best, passage_grammar_vocab_best, grammar_completed, grammar_videos_completed, grammar_total_videos, problem_completed, updated_at')
+      .select('unit_id, vocab_completed, vocab_quiz_score, vocab_spelling_score, passage_completed, passage_fill_blanks_best, passage_ordering_best, passage_translation_best, passage_grammar_vocab_best, grammar_completed, grammar_videos_completed, grammar_total_videos, problem_completed, total_learning_seconds, updated_at')
       .eq('student_id', studentId),
     admin
       .from('voca_student_progress')
@@ -120,7 +120,8 @@ export async function StudentDetail({ user, studentId, naesinData }: Props) {
   const masteredMemory = memoryProgress.filter((p) => p.is_mastered).length;
   const legacyWatchedSeconds = videoProgress.reduce((a, p) => a + p.video_watched_seconds, 0);
   const naesinWatchedSeconds = naesinVideoRes.data?.reduce((a, p) => a + (p.cumulative_watch_seconds || 0), 0) || 0;
-  const totalWatchedSeconds = legacyWatchedSeconds + naesinWatchedSeconds;
+  const naesinSessionSeconds = naesinProgress.reduce((a, p) => a + (p.total_learning_seconds || 0), 0);
+  const totalWatchedSeconds = legacyWatchedSeconds + naesinWatchedSeconds + naesinSessionSeconds;
   const hours = Math.floor(totalWatchedSeconds / 3600);
   const minutes = Math.floor((totalWatchedSeconds % 3600) / 60);
 

@@ -41,6 +41,7 @@ import type {
 } from '@/types/database';
 import type { NaesinDialogue } from '@/types/naesin';
 import Link from 'next/link';
+import { useLearningSession } from '@/hooks/use-learning-session';
 
 type StageKey = 'vocab' | 'passage' | 'dialogue' | 'grammar' | 'problem' | 'lastReview';
 
@@ -101,6 +102,7 @@ export function NaesinStageView({
   isHidden: currentStageHidden,
 }: NaesinStageViewProps) {
   const router = useRouter();
+  useLearningSession('naesin', unit.id);
 
   function handleStageComplete() {
     router.refresh();
