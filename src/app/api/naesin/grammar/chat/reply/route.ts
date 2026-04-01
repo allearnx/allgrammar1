@@ -5,6 +5,8 @@ import { grammarChatReplySchema } from '@/lib/api/schemas';
 import Anthropic from '@anthropic-ai/sdk';
 import type { NaesinGrammarChatMessage } from '@/types/database';
 
+export const maxDuration = 60;
+
 const anthropic = new Anthropic();
 
 export const POST = createApiHandler(

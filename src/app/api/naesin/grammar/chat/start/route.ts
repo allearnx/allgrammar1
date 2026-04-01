@@ -7,6 +7,8 @@ import { createAdminClient } from '@/lib/supabase/admin';
 import { requireAiJsonArray } from '@/lib/ai-json';
 import type { NaesinGrammarChatMessage } from '@/types/database';
 
+export const maxDuration = 60;
+
 const anthropic = new Anthropic();
 
 interface GeneratedQuestion {
@@ -155,8 +157,9 @@ ${lesson.text_content ? `레슨 내용:\n${lesson.text_content}` : ''}
       .single();
 
     if (error) {
+      logger.error('chat.session_create', { error: error.message, lessonId });
       return NextResponse.json(
-        { error: '세션 생성에 실패했습니다.' },
+        { error: `세션 생성 실패: ${error.message}` },
         { status: 500 }
       );
     }
