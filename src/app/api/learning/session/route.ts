@@ -56,6 +56,27 @@ export const POST = createApiHandler(
       }
     }
 
+    // Daily log upsert
+    const today = new Date().toISOString().split('T')[0];
+    const { data: dailyRow } = await supabase
+      .from('learning_daily_log')
+      .select('seconds')
+      .eq('student_id', user.id)
+      .eq('date', today)
+      .eq('context_type', contextType)
+      .maybeSingle();
+
+    if (dailyRow) {
+      await supabase.from('learning_daily_log')
+        .update({ seconds: dailyRow.seconds + seconds })
+        .eq('student_id', user.id)
+        .eq('date', today)
+        .eq('context_type', contextType);
+    } else {
+      await supabase.from('learning_daily_log')
+        .insert({ student_id: user.id, date: today, context_type: contextType, seconds });
+    }
+
     return NextResponse.json({ success: true });
   }
 );

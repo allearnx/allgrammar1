@@ -148,6 +148,14 @@ export interface NaesinStudentProgress {
   passage_grammar_vocab_best: number | null;
   dialogue_translation_best: number | null;
   dialogue_completed: boolean;
+  // Round 2 columns
+  round2_passage_fill_blanks_best: number | null;
+  round2_passage_ordering_best: number | null;
+  round2_passage_translation_best: number | null;
+  round2_passage_grammar_vocab_best: number | null;
+  round2_passage_completed: boolean;
+  round2_dialogue_translation_best: number | null;
+  round2_dialogue_completed: boolean;
   grammar_videos_completed: number;
   grammar_total_videos: number;
   problem_completed: boolean;

@@ -5,7 +5,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { toast } from 'sonner';
 import { logger } from '@/lib/logger';
 import { cn } from '@/lib/utils';
-import { Download, FileText } from 'lucide-react';
+import { Download, FileText, Lock } from 'lucide-react';
 import { passageToTextbookPassage } from '@/lib/naesin/adapters';
 import { NaesinFillBlanksView } from './fill-blanks-view';
 import { NaesinOrderingView } from './ordering-view';
@@ -33,9 +33,14 @@ interface PassageTabProps {
   onStageComplete: () => void;
   requiredStages?: string[];
   translationSentencesPerPage?: number;
+  naesinRequiredRounds?: number;
+  round1Completed?: boolean;
 }
 
-export function PassageTab({ passages, unitId, onStageComplete, requiredStages, translationSentencesPerPage }: PassageTabProps) {
+export function PassageTab({ passages, unitId, onStageComplete, requiredStages, translationSentencesPerPage, naesinRequiredRounds, round1Completed }: PassageTabProps) {
+  const hasRound2 = (naesinRequiredRounds ?? 1) >= 2;
+  const [currentRound, setCurrentRound] = useState<1 | 2>(1);
+
   const stages = useMemo(() => {
     const raw = (requiredStages ?? ['fill_blanks', 'translation']) as PassageStageType[];
     return raw.filter((s) => STAGE_TAB_MAP[s]);
@@ -144,11 +149,15 @@ export function PassageTab({ passages, unitId, onStageComplete, requiredStages, 
       const res = await fetch('/api/naesin/passage/progress', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ unitId, type, score, difficulty }),
+        body: JSON.stringify({ unitId, type, score, difficulty, round: String(currentRound) }),
       });
       const data = await res.json();
       if (data.passageCompleted) {
-        toast.success('교과서 암기 단계를 완료했습니다!');
+        if (hasRound2 && currentRound === 1) {
+          toast.success('1회독 완료! 2회독을 시작하세요');
+        } else {
+          toast.success('교과서 암기 단계를 완료했습니다!');
+        }
         onStageComplete();
       }
     } catch (err) {
@@ -177,6 +186,8 @@ export function PassageTab({ passages, unitId, onStageComplete, requiredStages, 
 
   const gridCols = uniqueStages.length === 1 ? 'grid-cols-1' : uniqueStages.length === 2 ? 'grid-cols-2' : uniqueStages.length === 3 ? 'grid-cols-3' : 'grid-cols-4';
 
+  const round2Locked = hasRound2 && currentRound === 2 && !round1Completed;
+
   return (
     <div className="space-y-4">
       <PassageOnboardingModal
@@ -185,112 +196,156 @@ export function PassageTab({ passages, unitId, onStageComplete, requiredStages, 
         stages={uniqueStages}
       />
 
-      {passages.length > 1 && (
-        <div className="flex gap-2 overflow-x-auto pb-2">
-          {passages.map((p, idx) => (
-            <button
-              type="button"
-              key={p.id}
-              onClick={() => setCurrentPassageIndex(idx)}
-              className={`shrink-0 px-3 py-1.5 text-sm rounded-full border transition-colors ${
-                idx === currentPassageIndex
-                  ? 'bg-primary text-primary-foreground border-primary'
-                  : 'bg-card hover:bg-muted border-border'
-              }`}
-            >
-              {p.title}
-            </button>
-          ))}
+      {/* Round toggle */}
+      {hasRound2 && (
+        <div className="flex items-center gap-2">
+          <button
+            type="button"
+            onClick={() => setCurrentRound(1)}
+            className={cn(
+              'px-4 py-2 text-sm font-medium rounded-lg border transition-colors',
+              currentRound === 1
+                ? 'bg-primary text-primary-foreground border-primary'
+                : 'bg-card hover:bg-muted border-border'
+            )}
+          >
+            1회독
+          </button>
+          <button
+            type="button"
+            onClick={() => round1Completed && setCurrentRound(2)}
+            disabled={!round1Completed}
+            className={cn(
+              'px-4 py-2 text-sm font-medium rounded-lg border transition-colors',
+              currentRound === 2
+                ? 'bg-primary text-primary-foreground border-primary'
+                : 'bg-card hover:bg-muted border-border',
+              !round1Completed && 'opacity-50 cursor-not-allowed'
+            )}
+          >
+            {!round1Completed && <Lock className="inline h-3.5 w-3.5 mr-1" />}
+            2회독
+          </button>
         </div>
       )}
 
-      {passage.pdf_url && (
-        <a
-          href={passage.pdf_url}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium text-blue-600 bg-blue-50 hover:bg-blue-100 rounded-lg border border-blue-200 transition-colors"
-        >
-          <Download className="h-3.5 w-3.5" />
-          본문 PDF 다운로드
-        </a>
+      {round2Locked ? (
+        <div className="flex flex-col items-center py-12 text-center">
+          <Lock className="h-10 w-10 text-muted-foreground/30 mb-2" />
+          <p className="text-muted-foreground">
+            1회독을 먼저 완료해야 2회독을 시작할 수 있습니다.
+          </p>
+        </div>
+      ) : (
+        <>
+          {passages.length > 1 && (
+            <div className="flex gap-2 overflow-x-auto pb-2">
+              {passages.map((p, idx) => (
+                <button
+                  type="button"
+                  key={p.id}
+                  onClick={() => setCurrentPassageIndex(idx)}
+                  className={`shrink-0 px-3 py-1.5 text-sm rounded-full border transition-colors ${
+                    idx === currentPassageIndex
+                      ? 'bg-primary text-primary-foreground border-primary'
+                      : 'bg-card hover:bg-muted border-border'
+                  }`}
+                >
+                  {p.title}
+                </button>
+              ))}
+            </div>
+          )}
+
+          {passage.pdf_url && (
+            <a
+              href={passage.pdf_url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium text-blue-600 bg-blue-50 hover:bg-blue-100 rounded-lg border border-blue-200 transition-colors"
+            >
+              <Download className="h-3.5 w-3.5" />
+              본문 PDF 다운로드
+            </a>
+          )}
+
+          {stageDirection && (
+            <StageDirectionModal
+              stage={stageDirection}
+              onClose={dismissStageDirection}
+            />
+          )}
+
+          <Tabs value={activeTab} onValueChange={handleTabChange}>
+            <TabsList className={cn('grid w-full', gridCols)}>
+              {uniqueStages.map((stage) => {
+                const tab = STAGE_TAB_MAP[stage];
+                const disabled =
+                  (stage === 'fill_blanks' && !hasBlanks) ||
+                  (stage === 'ordering' && !hasSentences) ||
+                  (stage === 'grammar_vocab' && !hasGrammarVocab);
+                const count = stageCounts[stage] || 1;
+                return (
+                  <TabsTrigger key={tab.value} value={tab.value} disabled={disabled}>
+                    {tab.label}
+                    {count > 1 && <span className="ml-1 text-xs opacity-60">x{count}</span>}
+                  </TabsTrigger>
+                );
+              })}
+            </TabsList>
+
+            {uniqueStages.includes('fill_blanks') && (
+              <TabsContent value="fill-blanks" className="mt-4">
+                <NaesinFillBlanksView
+                  key={`${passage.id}-r${currentRound}`}
+                  passage={textbookPassage}
+                  onScoreChange={(score, wrongs, difficulty) => {
+                    savePassageProgress('fill_blanks', score, difficulty);
+                    if (wrongs && wrongs.length > 0) saveWrongAnswers(wrongs);
+                  }}
+                />
+              </TabsContent>
+            )}
+
+            {uniqueStages.includes('ordering') && (
+              <TabsContent value="ordering" className="mt-4">
+                <NaesinOrderingView
+                  key={`${passage.id}-r${currentRound}`}
+                  passage={textbookPassage}
+                  onScoreChange={(score) => savePassageProgress('ordering', score)}
+                />
+              </TabsContent>
+            )}
+
+            {uniqueStages.includes('translation') && (
+              <TabsContent value="translation" className="mt-4">
+                <NaesinTranslationView
+                  key={`${passage.id}-r${currentRound}`}
+                  passage={textbookPassage}
+                  sentencesPerPage={translationSentencesPerPage}
+                  onScoreChange={(score, wrongs) => {
+                    savePassageProgress('translation', score);
+                    if (wrongs && wrongs.length > 0) saveWrongAnswers(wrongs);
+                  }}
+                />
+              </TabsContent>
+            )}
+
+            {uniqueStages.includes('grammar_vocab') && (
+              <TabsContent value="grammar-vocab" className="mt-4">
+                <GrammarVocabView
+                  key={`${passage.id}-r${currentRound}`}
+                  items={grammarVocabItems}
+                  onScoreChange={(score, wrongs) => {
+                    savePassageProgress('grammar_vocab', score);
+                    if (wrongs && wrongs.length > 0) saveWrongAnswers(wrongs);
+                  }}
+                />
+              </TabsContent>
+            )}
+          </Tabs>
+        </>
       )}
-
-      {stageDirection && (
-        <StageDirectionModal
-          stage={stageDirection}
-          onClose={dismissStageDirection}
-        />
-      )}
-
-      <Tabs value={activeTab} onValueChange={handleTabChange}>
-        <TabsList className={cn('grid w-full', gridCols)}>
-          {uniqueStages.map((stage) => {
-            const tab = STAGE_TAB_MAP[stage];
-            const disabled =
-              (stage === 'fill_blanks' && !hasBlanks) ||
-              (stage === 'ordering' && !hasSentences) ||
-              (stage === 'grammar_vocab' && !hasGrammarVocab);
-            const count = stageCounts[stage] || 1;
-            return (
-              <TabsTrigger key={tab.value} value={tab.value} disabled={disabled}>
-                {tab.label}
-                {count > 1 && <span className="ml-1 text-xs opacity-60">x{count}</span>}
-              </TabsTrigger>
-            );
-          })}
-        </TabsList>
-
-        {uniqueStages.includes('fill_blanks') && (
-          <TabsContent value="fill-blanks" className="mt-4">
-            <NaesinFillBlanksView
-              key={passage.id}
-              passage={textbookPassage}
-              onScoreChange={(score, wrongs, difficulty) => {
-                savePassageProgress('fill_blanks', score, difficulty);
-                if (wrongs && wrongs.length > 0) saveWrongAnswers(wrongs);
-              }}
-            />
-          </TabsContent>
-        )}
-
-        {uniqueStages.includes('ordering') && (
-          <TabsContent value="ordering" className="mt-4">
-            <NaesinOrderingView
-              key={passage.id}
-              passage={textbookPassage}
-              onScoreChange={(score) => savePassageProgress('ordering', score)}
-            />
-          </TabsContent>
-        )}
-
-        {uniqueStages.includes('translation') && (
-          <TabsContent value="translation" className="mt-4">
-            <NaesinTranslationView
-              key={passage.id}
-              passage={textbookPassage}
-              sentencesPerPage={translationSentencesPerPage}
-              onScoreChange={(score, wrongs) => {
-                savePassageProgress('translation', score);
-                if (wrongs && wrongs.length > 0) saveWrongAnswers(wrongs);
-              }}
-            />
-          </TabsContent>
-        )}
-
-        {uniqueStages.includes('grammar_vocab') && (
-          <TabsContent value="grammar-vocab" className="mt-4">
-            <GrammarVocabView
-              key={passage.id}
-              items={grammarVocabItems}
-              onScoreChange={(score, wrongs) => {
-                savePassageProgress('grammar_vocab', score);
-                if (wrongs && wrongs.length > 0) saveWrongAnswers(wrongs);
-              }}
-            />
-          </TabsContent>
-        )}
-      </Tabs>
     </div>
   );
 }

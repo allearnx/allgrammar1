@@ -18,7 +18,7 @@ export async function fetchStageData(
     case 'passage':
       return fetchPassageData(supabase, userId, unitId);
     case 'dialogue':
-      return fetchDialogueData(supabase, unitId);
+      return fetchDialogueData(supabase, userId, unitId);
     case 'grammar':
       return fetchGrammarData(supabase, userId, unitId);
     case 'problem':
@@ -62,24 +62,28 @@ async function fetchVocabData(
 }
 
 async function fetchPassageData(supabase: SupabaseClient, userId: string, unitId: string) {
-  const [passageRes, settingsRes] = await Promise.all([
+  const [passageRes, settingsRes, progressRes] = await Promise.all([
     supabase.from('naesin_passages').select('*').eq('unit_id', unitId).order('sort_order'),
     supabase.from('naesin_student_settings').select('passage_required_stages, translation_sentences_per_page').eq('student_id', userId).single(),
+    supabase.from('naesin_student_progress').select('passage_completed').eq('student_id', userId).eq('unit_id', unitId).single(),
   ]);
   return {
     passages: passageRes.data || [],
     passageRequiredStages: (settingsRes.data?.passage_required_stages as string[] | null) ?? ['fill_blanks', 'translation'],
     translationSentencesPerPage: (settingsRes.data?.translation_sentences_per_page as number | null) ?? 10,
+    passageRound1Completed: progressRes.data?.passage_completed ?? false,
   };
 }
 
-async function fetchDialogueData(supabase: SupabaseClient, unitId: string) {
-  const dialogueRes = await supabase
-    .from('naesin_dialogues')
-    .select('*')
-    .eq('unit_id', unitId)
-    .order('sort_order');
-  return { dialogues: dialogueRes.data || [] };
+async function fetchDialogueData(supabase: SupabaseClient, userId: string, unitId: string) {
+  const [dialogueRes, progressRes] = await Promise.all([
+    supabase.from('naesin_dialogues').select('*').eq('unit_id', unitId).order('sort_order'),
+    supabase.from('naesin_student_progress').select('dialogue_completed').eq('student_id', userId).eq('unit_id', unitId).single(),
+  ]);
+  return {
+    dialogues: dialogueRes.data || [],
+    dialogueRound1Completed: progressRes.data?.dialogue_completed ?? false,
+  };
 }
 
 async function fetchGrammarData(supabase: SupabaseClient, userId: string, unitId: string) {

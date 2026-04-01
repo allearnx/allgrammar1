@@ -334,7 +334,7 @@ export function StudentReportPanel({ studentId, services: servicesProp, token }:
 
           {/* ── 학습 기록 ── */}
           <TabsContent value="activity" className="mt-4">
-            <ActivityCalendar activities={data.activityLog} />
+            <ActivityCalendar activities={data.activityLog} dailySeconds={data.dailyLearningSeconds} />
           </TabsContent>
         </Tabs>
       </div>

@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import { FileText, Pencil, Trash2, Loader2, Wand2, Plus, X, Upload, Check, Download } from 'lucide-react';
+import { FileText, Pencil, Trash2, Loader2, Wand2, Plus, X, Upload, Check, Download, FileUp } from 'lucide-react';
 import { toast } from 'sonner';
 import { logger } from '@/lib/logger';
 import type { NaesinPassage } from '@/types/database';
@@ -33,6 +33,53 @@ export function UnitPassageList({
   const [editPdfUrl, setEditPdfUrl] = useState<string | null>(null);
   const [uploadingPdf, setUploadingPdf] = useState(false);
   const [saving, setSaving] = useState(false);
+  const [quickUploadingId, setQuickUploadingId] = useState<string | null>(null);
+
+  async function handleQuickPdfUpload(passageId: string, e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setQuickUploadingId(passageId);
+    try {
+      const formData = new FormData();
+      formData.append('file', file);
+      const uploadRes = await fetch('/api/naesin/passages/upload-pdf', { method: 'POST', body: formData });
+      if (!uploadRes.ok) {
+        const err = await uploadRes.json().catch(() => null);
+        throw new Error(err?.error || '업로드 실패');
+      }
+      const { url } = await uploadRes.json();
+      const patchRes = await fetch('/api/naesin/passages', {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id: passageId, pdf_url: url }),
+      });
+      if (!patchRes.ok) throw new Error('저장 실패');
+      const updated = await patchRes.json();
+      onUpdate(updated);
+      toast.success('PDF 업로드 완료');
+    } catch (err) {
+      toast.error(err instanceof Error ? err.message : 'PDF 업로드 실패');
+    } finally {
+      setQuickUploadingId(null);
+      e.target.value = '';
+    }
+  }
+
+  async function handleRemovePdf(passageId: string) {
+    try {
+      const res = await fetch('/api/naesin/passages', {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id: passageId, pdf_url: null }),
+      });
+      if (!res.ok) throw new Error('삭제 실패');
+      const updated = await res.json();
+      onUpdate(updated);
+      toast.success('PDF가 제거되었습니다');
+    } catch (err) {
+      toast.error(err instanceof Error ? err.message : 'PDF 제거 실패');
+    }
+  }
 
   function startEdit(passage: NaesinPassage) {
     setEditingId(passage.id);
@@ -154,7 +201,34 @@ export function UnitPassageList({
           <div className="flex items-center gap-2 py-1.5 px-2 group">
             <FileText className="h-3.5 w-3.5 text-orange-500 shrink-0" />
             <span className="text-sm flex-1 truncate">{passage.title}</span>
-            {passage.pdf_url && <span className="text-[10px] text-blue-500 font-medium shrink-0">PDF</span>}
+            {passage.pdf_url ? (
+              <span className="flex items-center gap-1 shrink-0">
+                <a href={passage.pdf_url} target="_blank" rel="noopener noreferrer" className="text-[10px] text-blue-500 font-medium flex items-center gap-0.5 hover:underline">
+                  <Download className="h-3 w-3" />PDF
+                </a>
+                <button type="button" className="text-muted-foreground hover:text-destructive opacity-0 group-hover:opacity-100" onClick={() => handleRemovePdf(passage.id)}>
+                  <X className="h-3 w-3" />
+                </button>
+              </span>
+            ) : (
+              <>
+                <input type="file" accept=".pdf" className="hidden" id={`quick-pdf-${passage.id}`} onChange={(e) => handleQuickPdfUpload(passage.id, e)} disabled={quickUploadingId === passage.id} />
+                <Button
+                  type="button"
+                  variant="ghost"
+                  size="sm"
+                  className="h-6 text-[10px] px-1.5 shrink-0 text-muted-foreground"
+                  disabled={quickUploadingId === passage.id}
+                  onClick={() => document.getElementById(`quick-pdf-${passage.id}`)?.click()}
+                >
+                  {quickUploadingId === passage.id ? (
+                    <Loader2 className="h-3 w-3 animate-spin" />
+                  ) : (
+                    <><FileUp className="h-3 w-3 mr-0.5" />PDF</>
+                  )}
+                </Button>
+              </>
+            )}
             {(() => {
               const hasGV = passage.grammar_vocab_items && (passage.grammar_vocab_items as unknown[]).length > 0;
               return (

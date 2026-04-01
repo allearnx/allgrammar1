@@ -16,6 +16,8 @@ export interface StageUnlockInput {
   examDate?: string | null;
   /** Stages the student is allowed to access (from naesin_student_settings.enabled_stages) */
   enabledStages?: string[];
+  /** Academy-level required rounds for passage/dialogue (1 or 2) */
+  naesinRequiredRounds?: number;
 }
 
 /**
@@ -42,6 +44,7 @@ export function calculateStageStatuses(
   let grammarVideoCount = 0;
   let examDate: string | null = null;
   let enabledStages: string[] | null = null;
+  let naesinRequiredRounds = 1;
 
   // Support both old (progress, content) and new (input object) signatures
   if (contentArg !== undefined) {
@@ -55,6 +58,7 @@ export function calculateStageStatuses(
     grammarVideoCount = input.grammarVideoCount ?? 0;
     examDate = input.examDate ?? null;
     enabledStages = input.enabledStages ?? null;
+    naesinRequiredRounds = input.naesinRequiredRounds ?? 1;
   } else {
     progress = progressOrInput as NaesinStudentProgress | null;
     content = { hasVocab: false, hasPassage: false, hasDialogue: false, hasGrammar: false, hasProblem: false, hasLastReview: false };
@@ -64,10 +68,10 @@ export function calculateStageStatuses(
   const vocabStatus = getVocabStatus(progress, content.hasVocab, vocabQuizSetCount);
 
   // Stage 2: Passage
-  const passageStatus = getPassageStatus(progress, content.hasPassage);
+  const passageStatus = getPassageStatus(progress, content.hasPassage, naesinRequiredRounds);
 
   // Stage 3: Dialogue
-  const dialogueStatus = getDialogueStatus(progress, content.hasDialogue);
+  const dialogueStatus = getDialogueStatus(progress, content.hasDialogue, naesinRequiredRounds);
 
   // Stage 4: Grammar
   const grammarStatus = getGrammarStatus(progress, content.hasGrammar, grammarVideoCount);
@@ -125,18 +129,29 @@ function getVocabStatus(
 function getPassageStatus(
   progress: NaesinStudentProgress | null,
   hasContent: boolean,
+  requiredRounds: number,
 ): NaesinStageStatus {
   if (!hasContent) return 'completed';
-  if (progress?.passage_completed) return 'completed';
+  if (requiredRounds >= 2) {
+    // Both round1 and round2 must be completed
+    if (progress?.passage_completed && progress?.round2_passage_completed) return 'completed';
+  } else {
+    if (progress?.passage_completed) return 'completed';
+  }
   return 'available';
 }
 
 function getDialogueStatus(
   progress: NaesinStudentProgress | null,
   hasContent: boolean,
+  requiredRounds: number,
 ): NaesinStageStatus {
   if (!hasContent) return 'completed';
-  if (progress?.dialogue_completed) return 'completed';
+  if (requiredRounds >= 2) {
+    if (progress?.dialogue_completed && progress?.round2_dialogue_completed) return 'completed';
+  } else {
+    if (progress?.dialogue_completed) return 'completed';
+  }
   return 'available';
 }
 

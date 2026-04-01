@@ -50,11 +50,27 @@ export async function buildStudentReport(
 
   const activityLog = await computeActivityLog(queryClient, vocaQuizActivityRes.data || [], vocaMatchingActivityRes.data || [], naesinVocabActivityRes.data || [], naesinProblemActivityRes.data || [], naesinPassageActivityRes.data || [], naesinVideoActivityRes.data || []);
 
+  // Fetch daily learning seconds
+  const { data: dailyRows } = await queryClient
+    .from('learning_daily_log')
+    .select('date, seconds')
+    .eq('student_id', studentId)
+    .gte('date', ninetyDaysAgo);
+
+  const dailyLearningSeconds: Record<string, number> = {};
+  if (dailyRows) {
+    for (const row of dailyRows) {
+      const d = row.date;
+      dailyLearningSeconds[d] = (dailyLearningSeconds[d] || 0) + row.seconds;
+    }
+  }
+
   return {
     current: { services, naesin, voca, weaknesses, recommendations },
     trends,
     wrongAnalysis,
     unitBreakdown,
     activityLog,
+    dailyLearningSeconds,
   };
 }

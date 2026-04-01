@@ -12,7 +12,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
-import { MessageSquare, X } from 'lucide-react';
+import { MessageSquare, X, Upload, Loader2 } from 'lucide-react';
 import { toast } from 'sonner';
 import { logger } from '@/lib/logger';
 
@@ -27,6 +27,7 @@ export function AddDialogueDialog({ unitId, onAdd }: { unitId: string; onAdd: ()
   const [title, setTitle] = useState('');
   const [sentences, setSentences] = useState<Sentence[]>([{ original: '', korean: '', speaker: '' }]);
   const [saving, setSaving] = useState(false);
+  const [extractingText, setExtractingText] = useState(false);
 
   function updateSentence(idx: number, field: keyof Sentence, value: string) {
     setSentences((prev) => prev.map((s, i) => (i === idx ? { ...s, [field]: value } : s)));
@@ -39,6 +40,38 @@ export function AddDialogueDialog({ unitId, onAdd }: { unitId: string; onAdd: ()
   function removeSentence(idx: number) {
     if (sentences.length <= 1) return;
     setSentences((prev) => prev.filter((_, i) => i !== idx));
+  }
+
+  async function handleTextPdfUpload(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setExtractingText(true);
+    try {
+      const formData = new FormData();
+      formData.append('file', file);
+      const res = await fetch('/api/naesin/dialogues/extract-text', {
+        method: 'POST',
+        body: formData,
+      });
+      if (!res.ok) {
+        const err = await res.json().catch(() => null);
+        throw new Error(err?.error || '추출 실패');
+      }
+      const data = await res.json();
+      if (data.title) setTitle(data.title);
+      if (data.sentences && data.sentences.length > 0) {
+        setSentences(data.sentences.map((s: { original: string; korean: string; speaker?: string }) => ({
+          original: s.original?.trim() || '',
+          korean: s.korean?.trim() || '',
+          speaker: s.speaker?.trim() || '',
+        })));
+      }
+      toast.success('대화문이 추출되었습니다. 문장별로 확인/수정해주세요.');
+    } catch (err) {
+      toast.error(err instanceof Error ? err.message : 'PDF 추출 실패');
+    } finally {
+      setExtractingText(false);
+    }
   }
 
   async function handleSubmit(e: React.FormEvent) {
@@ -93,6 +126,24 @@ export function AddDialogueDialog({ unitId, onAdd }: { unitId: string; onAdd: ()
       <DialogContent className="max-w-lg max-h-[85vh] overflow-y-auto">
         <DialogHeader><DialogTitle>대화문 추가</DialogTitle></DialogHeader>
         <form onSubmit={handleSubmit} className="space-y-3">
+          <div className="rounded-md border border-dashed p-3 text-center">
+            <input type="file" accept=".pdf" className="hidden" id="pdf-dialogue-extract" onChange={handleTextPdfUpload} disabled={extractingText} />
+            <Button
+              type="button"
+              variant="ghost"
+              size="sm"
+              disabled={extractingText}
+              onClick={() => document.getElementById('pdf-dialogue-extract')?.click()}
+            >
+              {extractingText ? (
+                <><Loader2 className="h-4 w-4 mr-1.5 animate-spin" />대화문 추출 중...</>
+              ) : (
+                <><Upload className="h-4 w-4 mr-1.5" />PDF에서 대화문 추출</>
+              )}
+            </Button>
+            <p className="text-xs text-muted-foreground mt-1">또는 아래에 직접 입력</p>
+          </div>
+
           <div>
             <Label htmlFor="dialogue-title">제목</Label>
             <Input id="dialogue-title" value={title} onChange={(e) => setTitle(e.target.value)} placeholder="대화문 1" required />

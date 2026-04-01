@@ -24,6 +24,14 @@ function makeProgress(overrides: Partial<NaesinStudentProgress> = {}): NaesinStu
     passage_grammar_vocab_best: null,
     dialogue_translation_best: null,
     dialogue_completed: false,
+    // Round 2 defaults
+    round2_passage_fill_blanks_best: null,
+    round2_passage_ordering_best: null,
+    round2_passage_translation_best: null,
+    round2_passage_grammar_vocab_best: null,
+    round2_passage_completed: false,
+    round2_dialogue_translation_best: null,
+    round2_dialogue_completed: false,
     grammar_videos_completed: 0,
     grammar_total_videos: 0,
     problem_completed: false,
@@ -383,6 +391,90 @@ describe('calculateStageStatuses', () => {
       expect(result.vocab).toBe('available');
       expect(result.passage).toBe('completed');
       expect(result.dialogue).toBe('completed');
+    });
+  });
+
+  describe('2회독 (naesinRequiredRounds = 2)', () => {
+    it('requiredRounds=2, round1만 완료 → passage available', () => {
+      const result = calculateStageStatuses(makeInput({
+        progress: makeProgress({
+          passage_completed: true,
+          round2_passage_completed: false,
+        }),
+        naesinRequiredRounds: 2,
+      }));
+      expect(result.passage).toBe('available');
+    });
+
+    it('requiredRounds=2, round1 + round2 완료 → passage completed', () => {
+      const result = calculateStageStatuses(makeInput({
+        progress: makeProgress({
+          passage_completed: true,
+          round2_passage_completed: true,
+        }),
+        naesinRequiredRounds: 2,
+      }));
+      expect(result.passage).toBe('completed');
+    });
+
+    it('requiredRounds=1, round1만 완료 → passage completed (기존 동작)', () => {
+      const result = calculateStageStatuses(makeInput({
+        progress: makeProgress({
+          passage_completed: true,
+        }),
+        naesinRequiredRounds: 1,
+      }));
+      expect(result.passage).toBe('completed');
+    });
+
+    it('requiredRounds=2, dialogue round1만 완료 → dialogue available', () => {
+      const result = calculateStageStatuses(makeInput({
+        progress: makeProgress({
+          dialogue_completed: true,
+          round2_dialogue_completed: false,
+        }),
+        naesinRequiredRounds: 2,
+      }));
+      expect(result.dialogue).toBe('available');
+    });
+
+    it('requiredRounds=2, dialogue round1 + round2 완료 → dialogue completed', () => {
+      const result = calculateStageStatuses(makeInput({
+        progress: makeProgress({
+          dialogue_completed: true,
+          round2_dialogue_completed: true,
+        }),
+        naesinRequiredRounds: 2,
+      }));
+      expect(result.dialogue).toBe('completed');
+    });
+
+    it('requiredRounds=1, dialogue round1만 완료 → dialogue completed (기존 동작)', () => {
+      const result = calculateStageStatuses(makeInput({
+        progress: makeProgress({
+          dialogue_completed: true,
+        }),
+        naesinRequiredRounds: 1,
+      }));
+      expect(result.dialogue).toBe('completed');
+    });
+
+    it('requiredRounds=2, 콘텐츠 없으면 → auto-complete (2회독 무관)', () => {
+      const result = calculateStageStatuses(makeInput({
+        content: makeContent({ hasPassage: false, hasDialogue: false }),
+        naesinRequiredRounds: 2,
+      }));
+      expect(result.passage).toBe('completed');
+      expect(result.dialogue).toBe('completed');
+    });
+
+    it('requiredRounds=2, 진도 없으면 → available', () => {
+      const result = calculateStageStatuses(makeInput({
+        progress: null,
+        naesinRequiredRounds: 2,
+      }));
+      expect(result.passage).toBe('available');
+      expect(result.dialogue).toBe('available');
     });
   });
 });

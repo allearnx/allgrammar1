@@ -164,8 +164,7 @@ export function AddPassageDialog({ unitId, onAdd }: { unitId: string; onAdd: () 
   const [sentences, setSentences] = useState<{ original: string; korean: string }[]>([{ original: '', korean: '' }]);
   const [saving, setSaving] = useState(false);
   const [extractingText, setExtractingText] = useState(false);
-  const [pdfUrl, setPdfUrl] = useState('');
-  const [uploadingPdf, setUploadingPdf] = useState(false);
+  const [pdfUrl] = useState('');
 
   function updateSentence(idx: number, field: 'original' | 'korean', value: string) {
     setSentences((prev) => prev.map((s, i) => (i === idx ? { ...s, [field]: value } : s)));
@@ -212,28 +211,6 @@ export function AddPassageDialog({ unitId, onAdd }: { unitId: string; onAdd: () 
       toast.error(err instanceof Error ? err.message : 'PDF 추출 실패');
     } finally {
       setExtractingText(false);
-    }
-  }
-
-  async function handlePassagePdfUpload(e: React.ChangeEvent<HTMLInputElement>) {
-    const file = e.target.files?.[0];
-    if (!file) return;
-    setUploadingPdf(true);
-    try {
-      const formData = new FormData();
-      formData.append('file', file);
-      const res = await fetch('/api/naesin/passages/upload-pdf', { method: 'POST', body: formData });
-      if (!res.ok) {
-        const err = await res.json().catch(() => null);
-        throw new Error(err?.error || '업로드 실패');
-      }
-      const data = await res.json();
-      setPdfUrl(data.url);
-      toast.success('본문 PDF가 업로드되었습니다');
-    } catch (err) {
-      toast.error(err instanceof Error ? err.message : 'PDF 업로드 실패');
-    } finally {
-      setUploadingPdf(false);
     }
   }
 
@@ -285,7 +262,6 @@ export function AddPassageDialog({ unitId, onAdd }: { unitId: string; onAdd: () 
       setOpen(false);
       setTitle('');
       setSentences([{ original: '', korean: '' }]);
-      setPdfUrl('');
 
       // Fire-and-forget: grammar/vocab generation (user doesn't need to wait)
       toast.info('어법/어휘 문제 백그라운드 생성 중...');
@@ -390,35 +366,7 @@ export function AddPassageDialog({ unitId, onAdd }: { unitId: string; onAdd: () 
             </div>
           </div>
 
-          <div>
-            <Label>본문 PDF (학생 다운로드용, 선택)</Label>
-            <div className="flex items-center gap-2 mt-1">
-              <input type="file" accept=".pdf" className="hidden" id="pdf-passage-upload" onChange={handlePassagePdfUpload} disabled={uploadingPdf} />
-              <Button
-                type="button"
-                variant="outline"
-                size="sm"
-                disabled={uploadingPdf}
-                onClick={() => document.getElementById('pdf-passage-upload')?.click()}
-              >
-                {uploadingPdf ? (
-                  <><Loader2 className="h-3.5 w-3.5 mr-1 animate-spin" />업로드 중...</>
-                ) : (
-                  <><Upload className="h-3.5 w-3.5 mr-1" />PDF 업로드</>
-                )}
-              </Button>
-              {pdfUrl && (
-                <span className="text-xs text-green-600 flex items-center gap-1">
-                  <Check className="h-3 w-3" />업로드 완료
-                  <button type="button" className="ml-1 text-muted-foreground hover:text-destructive" onClick={() => setPdfUrl('')}>
-                    <X className="h-3 w-3" />
-                  </button>
-                </span>
-              )}
-            </div>
-          </div>
-
-          <p className="text-xs text-muted-foreground">빈칸은 저장 시 자동 생성됩니다.</p>
+          <p className="text-xs text-muted-foreground">빈칸은 저장 시 자동 생성됩니다. 학생 다운로드용 PDF는 지문 목록에서 별도 업로드하세요.</p>
 
           <Button type="submit" className="w-full" disabled={saving}>
             {saving ? '저장 중...' : '추가'}

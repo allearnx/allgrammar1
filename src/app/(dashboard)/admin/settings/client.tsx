@@ -4,7 +4,8 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Copy, Check, Users, Building2, Mail, Phone, MapPin, FileText } from 'lucide-react';
+import { Switch } from '@/components/ui/switch';
+import { Copy, Check, Users, Building2, Mail, Phone, MapPin, FileText, BookOpen } from 'lucide-react';
 import { toast } from 'sonner';
 import { fetchWithToast } from '@/lib/fetch-with-toast';
 import type { Academy } from '@/types/user';
@@ -24,6 +25,7 @@ export function AcademySettingsClient({ academy, currentStudents }: Props) {
     contact_email: academy.contact_email || '',
     address: academy.address || '',
     business_number: academy.business_number || '',
+    naesin_required_rounds: academy.naesin_required_rounds ?? 1,
   });
 
   function handleCopyCode() {
@@ -46,6 +48,7 @@ export function AcademySettingsClient({ academy, currentStudents }: Props) {
           contact_email: form.contact_email || null,
           address: form.address || null,
           business_number: form.business_number || null,
+          naesin_required_rounds: form.naesin_required_rounds,
         },
         successMessage: '설정이 저장되었습니다',
         errorMessage: '저장 실패',
@@ -197,6 +200,25 @@ export function AcademySettingsClient({ academy, currentStudents }: Props) {
               />
             </div>
           </div>
+          {/* 내신 2회독 설정 */}
+          <div className="flex items-center justify-between rounded-lg border p-4">
+            <div className="flex items-center gap-3">
+              <div className="inline-flex rounded-lg bg-emerald-50 p-2">
+                <BookOpen className="h-4 w-4 text-emerald-600" />
+              </div>
+              <div>
+                <p className="text-sm font-medium">교과서/대화문 2회독</p>
+                <p className="text-xs text-muted-foreground">학생이 지문과 대화문을 2번 반복 학습합니다</p>
+              </div>
+            </div>
+            <Switch
+              checked={form.naesin_required_rounds >= 2}
+              onCheckedChange={(checked) =>
+                setForm({ ...form, naesin_required_rounds: checked ? 2 : 1 })
+              }
+            />
+          </div>
+
           <button
             type="submit"
             disabled={saving}

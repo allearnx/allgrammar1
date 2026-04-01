@@ -48,4 +48,6 @@ export interface StudentReportData {
   };
   /** 날짜별 학습 활동 기록 */
   activityLog: ActivityRecord[];
+  /** 날짜별 학습 시간 (초) — 히트맵용 */
+  dailyLearningSeconds?: Record<string, number>;
 }

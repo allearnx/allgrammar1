@@ -3,13 +3,14 @@
 import { useState, useMemo } from 'react';
 import {
   ChevronLeft, ChevronRight, PenLine, Keyboard, Link2,
-  BookOpen, FileText, Ruler, ClipboardList,
+  BookOpen, FileText, Ruler, ClipboardList, Clock,
 } from 'lucide-react';
 import { DOT_COLORS } from '@/lib/utils/brand-colors';
 import type { ActivityRecord } from '@/types/student-report';
 
 interface Props {
   activities: ActivityRecord[];
+  dailySeconds?: Record<string, number>;
 }
 
 const WEEKDAYS = ['일', '월', '화', '수', '목', '금', '토'];
@@ -51,7 +52,25 @@ function getDotColor(activities: ActivityRecord[]): string {
   return DOT_COLORS.voca;
 }
 
-export function ActivityCalendar({ activities }: Props) {
+function getHeatmapBg(seconds: number | undefined): string {
+  if (!seconds || seconds <= 0) return '';
+  const minutes = seconds / 60;
+  if (minutes >= 30) return 'rgba(34, 197, 94, 0.5)';
+  if (minutes >= 15) return 'rgba(34, 197, 94, 0.3)';
+  return 'rgba(34, 197, 94, 0.15)';
+}
+
+function formatMinutes(seconds: number): string {
+  const m = Math.floor(seconds / 60);
+  if (m >= 60) {
+    const h = Math.floor(m / 60);
+    const rem = m % 60;
+    return rem > 0 ? `${h}시간 ${rem}분` : `${h}시간`;
+  }
+  return `${m}분`;
+}
+
+export function ActivityCalendar({ activities, dailySeconds }: Props) {
   const today = new Date();
   const [currentYear, setCurrentYear] = useState(today.getFullYear());
   const [currentMonth, setCurrentMonth] = useState(today.getMonth());
@@ -136,6 +155,7 @@ export function ActivityCalendar({ activities }: Props) {
           else if (count >= 1) dotOpacity = 0.45;
 
           const dotColor = count > 0 ? getDotColor(dayActivities) : '#7C3AED';
+          const heatmapBg = dailySeconds ? getHeatmapBg(dailySeconds[dateStr]) : '';
 
           return (
             <button
@@ -148,6 +168,7 @@ export function ActivityCalendar({ activities }: Props) {
                     ? 'bg-violet-50 ring-1 ring-violet-300'
                     : 'hover:bg-violet-50'
               }`}
+              style={!isSelected && !isToday && heatmapBg ? { backgroundColor: heatmapBg } : undefined}
             >
               <span className={`${isToday ? 'font-bold' : ''} ${count > 0 ? 'text-gray-800' : 'text-gray-400'}`}>
                 {day}
@@ -166,6 +187,14 @@ export function ActivityCalendar({ activities }: Props) {
       {/* Selected day activities */}
       {selectedDate && (
         <div className="mt-4 space-y-2">
+          {dailySeconds && dailySeconds[selectedDate] > 0 && (
+            <div className="flex items-center gap-2 rounded-lg bg-green-50 px-3 py-2">
+              <Clock className="h-4 w-4 text-green-600" />
+              <span className="text-sm font-semibold text-green-700">
+                총 {formatMinutes(dailySeconds[selectedDate])} 학습
+              </span>
+            </div>
+          )}
           <h5 className="text-xs font-semibold text-gray-500">
             {selectedDate.slice(5).replace('-', '/')} 학습 기록
           </h5>

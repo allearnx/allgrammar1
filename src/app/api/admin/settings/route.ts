@@ -12,7 +12,7 @@ export const GET = createApiHandler(
     const admin = createAdminClient();
     const data = dbResult(await admin
       .from('academies')
-      .select('id, name, invite_code, contact_phone, contact_email, address, logo_url, business_number, max_students, onboarding_completed_at, created_at, updated_at')
+      .select('id, name, invite_code, contact_phone, contact_email, address, logo_url, business_number, max_students, naesin_required_rounds, onboarding_completed_at, created_at, updated_at')
       .eq('id', user.academy_id)
       .single());
 
@@ -42,6 +42,9 @@ export const PATCH = createApiHandler(
     if (body.address !== undefined) updates.address = body.address;
     if (body.logo_url !== undefined) updates.logo_url = body.logo_url;
     if (body.business_number !== undefined) updates.business_number = body.business_number;
+    if (body.naesin_required_rounds !== undefined && body.naesin_required_rounds !== null) {
+      updates.naesin_required_rounds = body.naesin_required_rounds;
+    }
 
     dbResult(await admin
       .from('academies')

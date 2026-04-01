@@ -30,6 +30,7 @@ export interface BuildContext {
   quizSetsByUnit: Record<string, unknown[]>;
   examDate: string | null;
   enabledStages: string[];
+  naesinRequiredRounds?: number;
 }
 
 export function groupBy<T extends Record<string, unknown>>(items: T[], key: string): Record<string, T[]> {
@@ -120,6 +121,7 @@ export function buildUnitSummary(
     grammarVideoCount: videoLessons.length,
     examDate: effectiveExamDate,
     enabledStages: ctx.enabledStages,
+    naesinRequiredRounds: ctx.naesinRequiredRounds,
   });
 
   const stageProgress = computeStageProgress(unitProgress, unitQuizSets.length, videoLessons.length);

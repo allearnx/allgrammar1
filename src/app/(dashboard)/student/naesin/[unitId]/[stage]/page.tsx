@@ -45,6 +45,17 @@ export default async function NaesinStagePage({ params }: Props) {
     .eq('student_id', user.id)
     .single();
 
+  // Fetch academy-level naesin_required_rounds
+  let naesinRequiredRounds = 1;
+  if (user.academy_id) {
+    const { data: academy } = await supabase
+      .from('academies')
+      .select('naesin_required_rounds')
+      .eq('id', user.academy_id)
+      .single();
+    naesinRequiredRounds = academy?.naesin_required_rounds ?? 1;
+  }
+
   const planContext = await getPlanContext(user.academy_id, user.id);
   const enabledStages = mergeEnabledStages(
     planContext.tier,
@@ -58,13 +69,18 @@ export default async function NaesinStagePage({ params }: Props) {
     grammarVideoCount: videoLessons.length,
     examDate,
     enabledStages,
+    naesinRequiredRounds,
   });
 
   const isHidden = stageStatuses[stageKey] === 'hidden';
   const isLocked = stageStatuses[stageKey] === 'locked';
-  const stageData = (isHidden || isLocked)
+  const rawStageData = (isHidden || isLocked)
     ? {}
     : await fetchStageData(supabase, user.id, unitId, stageKey, quizSetIds, progress);
+  const stageData = {
+    ...rawStageData,
+    naesinRequiredRounds,
+  };
 
   return (
     <>

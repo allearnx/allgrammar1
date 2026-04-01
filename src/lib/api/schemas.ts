@@ -26,6 +26,7 @@ export const passageProgressSchema = z.object({
   type: z.enum(['fill_blanks', 'ordering', 'translation', 'grammar_vocab']),
   score: z.number(),
   difficulty: z.enum(['easy', 'medium', 'hard']).nullish(),
+  round: z.enum(['1', '2']).default('1'),
 });
 
 export const videoProgressSchema = z.object({
@@ -559,6 +560,7 @@ export const academySettingsSchema = z.object({
   address: z.string().max(500).nullish(),
   logo_url: URL_STR.nullish(),
   business_number: z.string().max(20).nullish(),
+  naesin_required_rounds: z.number().min(1).max(2).nullish(),
 });
 
 export const academyPatchSchema = z.object({

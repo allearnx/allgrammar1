@@ -81,6 +81,10 @@ interface StageData {
   lastReviewProblemSheets?: NaesinProblemSheet[];
   similarProblems?: NaesinSimilarProblem[];
   reviewContent?: NaesinLastReviewContent[];
+  // round2 settings
+  naesinRequiredRounds?: number;
+  passageRound1Completed?: boolean;
+  dialogueRound1Completed?: boolean;
 }
 
 interface NaesinStageViewProps {
@@ -207,6 +211,8 @@ export function NaesinStageView({
                 onStageComplete={handleStageComplete}
                 requiredStages={stageData.passageRequiredStages}
                 translationSentencesPerPage={stageData.translationSentencesPerPage}
+                naesinRequiredRounds={stageData.naesinRequiredRounds}
+                round1Completed={stageData.passageRound1Completed}
               />
             )}
             {currentStage === 'dialogue' && (
@@ -214,6 +220,8 @@ export function NaesinStageView({
                 dialogues={stageData.dialogues || []}
                 unitId={unit.id}
                 onStageComplete={handleStageComplete}
+                naesinRequiredRounds={stageData.naesinRequiredRounds}
+                round1Completed={stageData.dialogueRound1Completed}
               />
             )}
             {currentStage === 'grammar' && (

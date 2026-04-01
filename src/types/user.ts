@@ -11,6 +11,7 @@ export interface Academy {
   business_number?: string | null;
   max_students?: number | null;
   onboarding_completed_at?: string | null;
+  naesin_required_rounds?: number;
   owner_id?: string | null;
   created_at: string;
   updated_at?: string | null;

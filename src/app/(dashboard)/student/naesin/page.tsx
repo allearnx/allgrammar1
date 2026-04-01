@@ -26,6 +26,17 @@ export default async function NaesinPage() {
     setting?.enabled_stages as string[] | null,
   );
 
+  // Fetch academy-level naesin_required_rounds
+  let naesinRequiredRounds = 1;
+  if (user.academy_id) {
+    const { data: academy } = await supabase
+      .from('academies')
+      .select('naesin_required_rounds')
+      .eq('id', user.academy_id)
+      .single();
+    naesinRequiredRounds = academy?.naesin_required_rounds ?? 1;
+  }
+
   // Get all active textbooks
   const { data: textbooks } = await supabase
     .from('naesin_textbooks')
@@ -108,6 +119,7 @@ export default async function NaesinPage() {
         quizSetsByUnit: groupBy(quizSetsCountRes.data || [], 'unit_id'),
         examDate,
         enabledStages,
+        naesinRequiredRounds,
       };
 
       // Build exam groups from assignments

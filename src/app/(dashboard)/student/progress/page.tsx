@@ -4,6 +4,7 @@ import { Topbar } from '@/components/layout/topbar';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { CheckCircle, BookOpen, Clock, BarChart3 } from 'lucide-react';
 import { NaesinUnitProgressCard } from '@/components/progress/naesin-unit-progress-card';
+import { LearningCalendarSection } from './learning-calendar-section';
 
 export default async function ProgressPage() {
   const user = await requireRole(['student']);
@@ -145,6 +146,9 @@ export default async function ProgressPage() {
             ))}
           </div>
         )}
+
+        {/* 학습 캘린더 */}
+        <LearningCalendarSection />
 
         {/* Per-Level Grammar Progress - 임시 숨김 */}
       </div>
