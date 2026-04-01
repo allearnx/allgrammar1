@@ -31,7 +31,6 @@ import {
   TableRow,
 } from '@/components/ui/table';
 import { Plus, Pencil, Trash2, UserCircle, Upload, Loader2 } from 'lucide-react';
-import { toast } from 'sonner';
 import { ConfirmDialog } from '@/components/shared/confirm-dialog';
 import { fetchWithToast } from '@/lib/fetch-with-toast';
 import type { TeacherProfile } from '@/types/public';

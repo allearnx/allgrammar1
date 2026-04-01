@@ -12,7 +12,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { toast } from 'sonner';
 import { fetchWithToast } from '@/lib/fetch-with-toast';
 import { Trash2 } from 'lucide-react';
 import {

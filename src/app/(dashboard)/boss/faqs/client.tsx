@@ -31,7 +31,6 @@ import {
 } from '@/components/ui/table';
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Plus, Pencil, Trash2, HelpCircle } from 'lucide-react';
-import { toast } from 'sonner';
 import { ConfirmDialog } from '@/components/shared/confirm-dialog';
 import { fetchWithToast } from '@/lib/fetch-with-toast';
 import type { FAQ, FAQCategory } from '@/types/public';
