@@ -36,6 +36,7 @@ function makePassage(overrides: Partial<NaesinPassage> = {}): NaesinPassage {
       { original: 'The cat sat.', korean: '고양이가 앉았다.', words: ['The', 'cat', 'sat.'] },
     ],
     grammar_vocab_items: null,
+    pdf_url: null,
     sort_order: 1,
     created_at: '2026-01-01T00:00:00Z',
     ...overrides,

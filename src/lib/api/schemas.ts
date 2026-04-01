@@ -170,6 +170,7 @@ export const passageCreateSchema = z.object({
   blanks_hard: z.unknown().nullish(),
   sentences: z.unknown().nullish(),
   grammar_vocab_items: z.unknown().nullish(),
+  pdf_url: URL_STR.nullish(),
   sort_order: z.number().nullish(),
 });
 

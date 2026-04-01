@@ -5,7 +5,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { toast } from 'sonner';
 import { logger } from '@/lib/logger';
 import { cn } from '@/lib/utils';
-import { FileText } from 'lucide-react';
+import { Download, FileText } from 'lucide-react';
 import { passageToTextbookPassage } from '@/lib/naesin/adapters';
 import { NaesinFillBlanksView } from './fill-blanks-view';
 import { NaesinOrderingView } from './ordering-view';
@@ -202,6 +202,18 @@ export function PassageTab({ passages, unitId, onStageComplete, requiredStages, 
             </button>
           ))}
         </div>
+      )}
+
+      {passage.pdf_url && (
+        <a
+          href={passage.pdf_url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium text-blue-600 bg-blue-50 hover:bg-blue-100 rounded-lg border border-blue-200 transition-colors"
+        >
+          <Download className="h-3.5 w-3.5" />
+          본문 PDF 다운로드
+        </a>
       )}
 
       {stageDirection && (

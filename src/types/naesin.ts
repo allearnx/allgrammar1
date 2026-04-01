@@ -70,6 +70,7 @@ export interface NaesinPassage {
   blanks_hard: BlankItem[] | null;
   sentences: SentenceItem[] | null;
   grammar_vocab_items: GrammarVocabItem[] | null;
+  pdf_url: string | null;
   sort_order: number;
   created_at: string;
 }

@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import { FileText, Pencil, Trash2, Loader2, Wand2, Plus, X } from 'lucide-react';
+import { FileText, Pencil, Trash2, Loader2, Wand2, Plus, X, Upload, Check, Download } from 'lucide-react';
 import { toast } from 'sonner';
 import { logger } from '@/lib/logger';
 import type { NaesinPassage } from '@/types/database';
@@ -30,11 +30,14 @@ export function UnitPassageList({
   const [editingId, setEditingId] = useState<string | null>(null);
   const [editTitle, setEditTitle] = useState('');
   const [editSentences, setEditSentences] = useState<PassageSentence[]>([]);
+  const [editPdfUrl, setEditPdfUrl] = useState<string | null>(null);
+  const [uploadingPdf, setUploadingPdf] = useState(false);
   const [saving, setSaving] = useState(false);
 
   function startEdit(passage: NaesinPassage) {
     setEditingId(passage.id);
     setEditTitle(passage.title);
+    setEditPdfUrl(passage.pdf_url || null);
     const sentences = Array.isArray(passage.sentences) && passage.sentences.length > 0
       ? passage.sentences.map((s) => ({ original: s.original, korean: s.korean, acceptedAnswers: s.acceptedAnswers || [] }))
       : [{ original: passage.original_text, korean: passage.korean_translation, acceptedAnswers: [] as string[] }];
@@ -45,6 +48,29 @@ export function UnitPassageList({
     setEditingId(null);
     setEditTitle('');
     setEditSentences([]);
+    setEditPdfUrl(null);
+  }
+
+  async function handleEditPdfUpload(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setUploadingPdf(true);
+    try {
+      const formData = new FormData();
+      formData.append('file', file);
+      const res = await fetch('/api/naesin/passages/upload-pdf', { method: 'POST', body: formData });
+      if (!res.ok) {
+        const err = await res.json().catch(() => null);
+        throw new Error(err?.error || '업로드 실패');
+      }
+      const data = await res.json();
+      setEditPdfUrl(data.url);
+      toast.success('PDF 업로드 완료');
+    } catch (err) {
+      toast.error(err instanceof Error ? err.message : 'PDF 업로드 실패');
+    } finally {
+      setUploadingPdf(false);
+    }
   }
 
   function updateSentence(idx: number, field: 'original' | 'korean', value: string) {
@@ -98,6 +124,7 @@ export function UnitPassageList({
         body: JSON.stringify({
           id: editingId,
           title: editTitle,
+          pdf_url: editPdfUrl || null,
           sentences: editSentences.map((s) => ({
             original: s.original,
             korean: s.korean,
@@ -127,6 +154,7 @@ export function UnitPassageList({
           <div className="flex items-center gap-2 py-1.5 px-2 group">
             <FileText className="h-3.5 w-3.5 text-orange-500 shrink-0" />
             <span className="text-sm flex-1 truncate">{passage.title}</span>
+            {passage.pdf_url && <span className="text-[10px] text-blue-500 font-medium shrink-0">PDF</span>}
             {(() => {
               const hasGV = passage.grammar_vocab_items && (passage.grammar_vocab_items as unknown[]).length > 0;
               return (
@@ -255,6 +283,31 @@ export function UnitPassageList({
                 >
                   <Plus className="h-3 w-3 mr-1" />문장 추가
                 </Button>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="text-xs text-muted-foreground font-medium">본문 PDF</span>
+                <input type="file" accept=".pdf" className="hidden" id={`edit-pdf-${passage.id}`} onChange={handleEditPdfUpload} disabled={uploadingPdf} />
+                <Button
+                  type="button"
+                  variant="outline"
+                  size="sm"
+                  className="h-6 text-[11px]"
+                  disabled={uploadingPdf}
+                  onClick={() => document.getElementById(`edit-pdf-${passage.id}`)?.click()}
+                >
+                  {uploadingPdf ? <Loader2 className="h-3 w-3 mr-1 animate-spin" /> : <Upload className="h-3 w-3 mr-1" />}
+                  {editPdfUrl ? '변경' : '업로드'}
+                </Button>
+                {editPdfUrl && (
+                  <>
+                    <a href={editPdfUrl} target="_blank" rel="noopener noreferrer" className="text-xs text-blue-600 flex items-center gap-0.5">
+                      <Download className="h-3 w-3" />보기
+                    </a>
+                    <button type="button" className="text-muted-foreground hover:text-destructive" onClick={() => setEditPdfUrl(null)}>
+                      <X className="h-3 w-3" />
+                    </button>
+                  </>
+                )}
               </div>
               <div className="flex gap-2 justify-end">
                 <Button size="sm" variant="outline" className="h-7" onClick={cancelEdit}>취소</Button>

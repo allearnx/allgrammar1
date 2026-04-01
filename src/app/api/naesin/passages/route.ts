@@ -30,6 +30,7 @@ export const POST = createApiHandler(
         blanks_hard: body.blanks_hard || null,
         sentences: body.sentences || null,
         grammar_vocab_items: body.grammar_vocab_items || null,
+        pdf_url: body.pdf_url || null,
         sort_order: body.sort_order || 0,
       })
       .select()
@@ -47,6 +48,7 @@ const passageUpdateSchema = z.object({
     acceptedAnswers: z.array(z.string()).optional(),
   })).optional(),
   grammar_vocab_items: z.unknown().nullish(),
+  pdf_url: z.string().max(2000).nullish(),
 });
 
 export const PATCH = createApiHandler(
@@ -58,6 +60,9 @@ export const PATCH = createApiHandler(
     if (body.title) updates.title = body.title;
     if (body.grammar_vocab_items !== undefined) {
       updates.grammar_vocab_items = body.grammar_vocab_items || null;
+    }
+    if (body.pdf_url !== undefined) {
+      updates.pdf_url = body.pdf_url || null;
     }
 
     if (body.sentences) {
