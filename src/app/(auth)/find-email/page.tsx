@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { toast } from 'sonner';
+import { fetchWithToast } from '@/lib/fetch-with-toast';
 
 export default function FindEmailPage() {
   const [name, setName] = useState('');
@@ -17,22 +17,14 @@ export default function FindEmailPage() {
     setMaskedEmail(null);
 
     try {
-      const res = await fetch('/api/auth/find-email', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name: name.trim(), phone: phone.trim() }),
+      const data = await fetchWithToast<{ email: string }>('/api/auth/find-email', {
+        body: { name: name.trim(), phone: phone.trim() },
+        errorMessage: '이메일을 찾을 수 없습니다.',
       });
-
-      const data = await res.json();
-
-      if (!res.ok) {
-        toast.error(data.error || '이메일을 찾을 수 없습니다.');
-        return;
-      }
 
       setMaskedEmail(data.email);
     } catch {
-      toast.error('네트워크 오류가 발생했습니다.');
+      // fetchWithToast already shows toast on !res.ok; catch network errors
     } finally {
       setLoading(false);
     }

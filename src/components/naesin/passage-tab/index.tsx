@@ -1,9 +1,8 @@
 'use client';
 
-import { useState, useEffect, useMemo } from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { toast } from 'sonner';
-import { logger } from '@/lib/logger';
+import { fetchWithToast } from '@/lib/fetch-with-toast';
 import { cn } from '@/lib/utils';
 import { Download, FileText, Lock } from 'lucide-react';
 import { passageToTextbookPassage } from '@/lib/naesin/adapters';
@@ -12,20 +11,11 @@ import { NaesinOrderingView } from './ordering-view';
 import { NaesinTranslationView } from './translation-view';
 import { GrammarVocabView } from './grammar-vocab-view';
 import { StageDirectionModal, PassageOnboardingModal } from './passage-onboarding';
+import { usePassageTabState, STAGE_TAB_MAP } from '@/hooks/use-passage-tab-state';
 import type { NaesinPassage } from '@/types/database';
 import type { GrammarVocabItem } from '@/types/naesin';
 
-const ONBOARDING_KEY = 'naesin-passage-onboarding-seen';
-const STAGE_DIRECTION_KEY = 'naesin-passage-stage-directions-seen';
-
-export type PassageStageType = 'fill_blanks' | 'ordering' | 'translation' | 'grammar_vocab';
-
-const STAGE_TAB_MAP: Record<PassageStageType, { value: string; label: string }> = {
-  fill_blanks: { value: 'fill-blanks', label: '빈칸 채우기' },
-  ordering: { value: 'ordering', label: '순서 배열' },
-  translation: { value: 'translation', label: '영작' },
-  grammar_vocab: { value: 'grammar-vocab', label: '어법/어휘' },
-};
+export type { PassageStageType } from '@/hooks/use-passage-tab-state';
 
 interface PassageTabProps {
   passages: NaesinPassage[];
@@ -38,90 +28,7 @@ interface PassageTabProps {
 }
 
 export function PassageTab({ passages, unitId, onStageComplete, requiredStages, translationSentencesPerPage, naesinRequiredRounds, round1Completed }: PassageTabProps) {
-  const hasRound2 = (naesinRequiredRounds ?? 1) >= 2;
-  const [currentRound, setCurrentRound] = useState<1 | 2>(1);
-
-  const stages = useMemo(() => {
-    const raw = (requiredStages ?? ['fill_blanks', 'translation']) as PassageStageType[];
-    return raw.filter((s) => STAGE_TAB_MAP[s]);
-  }, [requiredStages]);
-
-  const uniqueStages = useMemo(() => [...new Set(stages)], [stages]);
-
-  const stageCounts = useMemo(() => {
-    const counts: Record<string, number> = {};
-    for (const s of stages) {
-      counts[s] = (counts[s] || 0) + 1;
-    }
-    return counts;
-  }, [stages]);
-
-  const firstTabValue = uniqueStages.length > 0 ? STAGE_TAB_MAP[uniqueStages[0]].value : 'fill-blanks';
-  const [activeTab, setActiveTab] = useState(firstTabValue);
-  const [currentPassageIndex, setCurrentPassageIndex] = useState(0);
-  const [showOnboarding, setShowOnboarding] = useState(false);
-  const [stageDirection, setStageDirection] = useState<PassageStageType | null>(null);
-
-  const [seenDirections, setSeenDirections] = useState<Set<string>>(() => {
-    try {
-      const saved = localStorage.getItem(STAGE_DIRECTION_KEY);
-      return saved ? new Set(JSON.parse(saved)) : new Set();
-    } catch {
-      return new Set();
-    }
-  });
-
-  useEffect(() => {
-    try {
-      if (!localStorage.getItem(ONBOARDING_KEY)) {
-        setShowOnboarding(true);
-      } else {
-        const stageKey = (Object.entries(STAGE_TAB_MAP) as [PassageStageType, { value: string }][])
-          .find(([, v]) => v.value === activeTab)?.[0];
-        if (stageKey && !seenDirections.has(stageKey)) {
-          setStageDirection(stageKey);
-        }
-      }
-    } catch {
-      // localStorage unavailable
-    }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  function dismissOnboarding() {
-    setShowOnboarding(false);
-    try {
-      localStorage.setItem(ONBOARDING_KEY, '1');
-    } catch {
-      // localStorage unavailable
-    }
-    const firstStage = uniqueStages[0];
-    if (firstStage && !seenDirections.has(firstStage)) {
-      setStageDirection(firstStage);
-    }
-  }
-
-  function handleTabChange(tabValue: string) {
-    setActiveTab(tabValue);
-    const stageKey = (Object.entries(STAGE_TAB_MAP) as [PassageStageType, { value: string }][])
-      .find(([, v]) => v.value === tabValue)?.[0];
-    if (stageKey && !seenDirections.has(stageKey)) {
-      setStageDirection(stageKey);
-    }
-  }
-
-  function dismissStageDirection() {
-    if (!stageDirection) return;
-    const next = new Set(seenDirections);
-    next.add(stageDirection);
-    setSeenDirections(next);
-    setStageDirection(null);
-    try {
-      localStorage.setItem(STAGE_DIRECTION_KEY, JSON.stringify([...next]));
-    } catch {
-      // localStorage unavailable
-    }
-  }
+  const s = usePassageTabState({ requiredStages, naesinRequiredRounds, round1Completed });
 
   if (passages.length === 0) {
     return (
@@ -134,7 +41,7 @@ export function PassageTab({ passages, unitId, onStageComplete, requiredStages, 
     );
   }
 
-  const passage = passages[currentPassageIndex];
+  const passage = passages[s.currentPassageIndex];
   const textbookPassage = passageToTextbookPassage(passage);
   const hasBlanks =
     (Array.isArray(passage.blanks_easy) && passage.blanks_easy.length > 0) ||
@@ -146,65 +53,59 @@ export function PassageTab({ passages, unitId, onStageComplete, requiredStages, 
 
   async function savePassageProgress(type: 'fill_blanks' | 'ordering' | 'translation' | 'grammar_vocab', score: number, difficulty?: string) {
     try {
-      const res = await fetch('/api/naesin/passage/progress', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ unitId, type, score, difficulty, round: String(currentRound) }),
+      const data = await fetchWithToast<{ passageCompleted?: boolean }>('/api/naesin/passage/progress', {
+        body: { unitId, type, score, difficulty, round: String(s.currentRound) },
+        errorMessage: '진도 저장 중 오류가 발생했습니다',
+        logContext: 'naesin.passage_tab',
       });
-      const data = await res.json();
       if (data.passageCompleted) {
-        if (hasRound2 && currentRound === 1) {
+        if (s.hasRound2 && s.currentRound === 1) {
           toast.success('1회독 완료! 2회독을 시작하세요');
         } else {
           toast.success('교과서 암기 단계를 완료했습니다!');
         }
         onStageComplete();
       }
-    } catch (err) {
-      logger.error('naesin.passage_tab', { error: err instanceof Error ? err.message : String(err) });
-      toast.error('진도 저장 중 오류가 발생했습니다');
+    } catch {
+      // error already toasted by fetchWithToast
     }
   }
 
   async function saveWrongAnswers(wrongItems: unknown[]) {
     if (wrongItems.length === 0) return;
     try {
-      await fetch('/api/naesin/wrong-answers', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
+      await fetchWithToast('/api/naesin/wrong-answers', {
+        body: {
           unitId,
           stage: 'passage',
-          sourceType: activeTab,
+          sourceType: s.activeTab,
           wrongAnswers: wrongItems,
-        }),
+        },
+        silent: true,
+        logContext: 'naesin.passage_tab',
       });
-    } catch (err) {
-      logger.error('naesin.passage_tab', { error: err instanceof Error ? err.message : String(err) });
-      }
+    } catch {
+      // swallow - fire-and-forget
+    }
   }
-
-  const gridCols = uniqueStages.length === 1 ? 'grid-cols-1' : uniqueStages.length === 2 ? 'grid-cols-2' : uniqueStages.length === 3 ? 'grid-cols-3' : 'grid-cols-4';
-
-  const round2Locked = hasRound2 && currentRound === 2 && !round1Completed;
 
   return (
     <div className="space-y-4">
       <PassageOnboardingModal
-        open={showOnboarding}
-        onClose={dismissOnboarding}
-        stages={uniqueStages}
+        open={s.showOnboarding}
+        onClose={s.dismissOnboarding}
+        stages={s.uniqueStages}
       />
 
       {/* Round toggle */}
-      {hasRound2 && (
+      {s.hasRound2 && (
         <div className="flex items-center gap-2">
           <button
             type="button"
-            onClick={() => setCurrentRound(1)}
+            onClick={() => s.setCurrentRound(1)}
             className={cn(
               'px-4 py-2 text-sm font-medium rounded-lg border transition-colors',
-              currentRound === 1
+              s.currentRound === 1
                 ? 'bg-primary text-primary-foreground border-primary'
                 : 'bg-card hover:bg-muted border-border'
             )}
@@ -213,11 +114,11 @@ export function PassageTab({ passages, unitId, onStageComplete, requiredStages, 
           </button>
           <button
             type="button"
-            onClick={() => round1Completed && setCurrentRound(2)}
+            onClick={() => round1Completed && s.setCurrentRound(2)}
             disabled={!round1Completed}
             className={cn(
               'px-4 py-2 text-sm font-medium rounded-lg border transition-colors',
-              currentRound === 2
+              s.currentRound === 2
                 ? 'bg-primary text-primary-foreground border-primary'
                 : 'bg-card hover:bg-muted border-border',
               !round1Completed && 'opacity-50 cursor-not-allowed'
@@ -229,7 +130,7 @@ export function PassageTab({ passages, unitId, onStageComplete, requiredStages, 
         </div>
       )}
 
-      {round2Locked ? (
+      {s.round2Locked ? (
         <div className="flex flex-col items-center py-12 text-center">
           <Lock className="h-10 w-10 text-muted-foreground/30 mb-2" />
           <p className="text-muted-foreground">
@@ -244,9 +145,9 @@ export function PassageTab({ passages, unitId, onStageComplete, requiredStages, 
                 <button
                   type="button"
                   key={p.id}
-                  onClick={() => setCurrentPassageIndex(idx)}
+                  onClick={() => s.setCurrentPassageIndex(idx)}
                   className={`shrink-0 px-3 py-1.5 text-sm rounded-full border transition-colors ${
-                    idx === currentPassageIndex
+                    idx === s.currentPassageIndex
                       ? 'bg-primary text-primary-foreground border-primary'
                       : 'bg-card hover:bg-muted border-border'
                   }`}
@@ -269,22 +170,22 @@ export function PassageTab({ passages, unitId, onStageComplete, requiredStages, 
             </a>
           )}
 
-          {stageDirection && (
+          {s.stageDirection && (
             <StageDirectionModal
-              stage={stageDirection}
-              onClose={dismissStageDirection}
+              stage={s.stageDirection}
+              onClose={s.dismissStageDirection}
             />
           )}
 
-          <Tabs value={activeTab} onValueChange={handleTabChange}>
-            <TabsList className={cn('grid w-full', gridCols)}>
-              {uniqueStages.map((stage) => {
+          <Tabs value={s.activeTab} onValueChange={s.handleTabChange}>
+            <TabsList className={cn('grid w-full', s.gridCols)}>
+              {s.uniqueStages.map((stage) => {
                 const tab = STAGE_TAB_MAP[stage];
                 const disabled =
                   (stage === 'fill_blanks' && !hasBlanks) ||
                   (stage === 'ordering' && !hasSentences) ||
                   (stage === 'grammar_vocab' && !hasGrammarVocab);
-                const count = stageCounts[stage] || 1;
+                const count = s.stageCounts[stage] || 1;
                 return (
                   <TabsTrigger key={tab.value} value={tab.value} disabled={disabled}>
                     {tab.label}
@@ -294,10 +195,10 @@ export function PassageTab({ passages, unitId, onStageComplete, requiredStages, 
               })}
             </TabsList>
 
-            {uniqueStages.includes('fill_blanks') && (
+            {s.uniqueStages.includes('fill_blanks') && (
               <TabsContent value="fill-blanks" className="mt-4">
                 <NaesinFillBlanksView
-                  key={`${passage.id}-r${currentRound}`}
+                  key={`${passage.id}-r${s.currentRound}`}
                   passage={textbookPassage}
                   onScoreChange={(score, wrongs, difficulty) => {
                     savePassageProgress('fill_blanks', score, difficulty);
@@ -307,20 +208,20 @@ export function PassageTab({ passages, unitId, onStageComplete, requiredStages, 
               </TabsContent>
             )}
 
-            {uniqueStages.includes('ordering') && (
+            {s.uniqueStages.includes('ordering') && (
               <TabsContent value="ordering" className="mt-4">
                 <NaesinOrderingView
-                  key={`${passage.id}-r${currentRound}`}
+                  key={`${passage.id}-r${s.currentRound}`}
                   passage={textbookPassage}
                   onScoreChange={(score) => savePassageProgress('ordering', score)}
                 />
               </TabsContent>
             )}
 
-            {uniqueStages.includes('translation') && (
+            {s.uniqueStages.includes('translation') && (
               <TabsContent value="translation" className="mt-4">
                 <NaesinTranslationView
-                  key={`${passage.id}-r${currentRound}`}
+                  key={`${passage.id}-r${s.currentRound}`}
                   passage={textbookPassage}
                   sentencesPerPage={translationSentencesPerPage}
                   onScoreChange={(score, wrongs) => {
@@ -331,10 +232,10 @@ export function PassageTab({ passages, unitId, onStageComplete, requiredStages, 
               </TabsContent>
             )}
 
-            {uniqueStages.includes('grammar_vocab') && (
+            {s.uniqueStages.includes('grammar_vocab') && (
               <TabsContent value="grammar-vocab" className="mt-4">
                 <GrammarVocabView
-                  key={`${passage.id}-r${currentRound}`}
+                  key={`${passage.id}-r${s.currentRound}`}
                   items={grammarVocabItems}
                   onScoreChange={(score, wrongs) => {
                     savePassageProgress('grammar_vocab', score);

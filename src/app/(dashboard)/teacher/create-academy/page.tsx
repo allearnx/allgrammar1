@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { fetchWithToast } from '@/lib/fetch-with-toast';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -32,22 +33,15 @@ export default function CreateAcademyPage() {
     setError(null);
 
     try {
-      const res = await fetch('/api/teacher/create-academy', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ academyName: trimmed, freeService }),
+      await fetchWithToast('/api/teacher/create-academy', {
+        body: { academyName: trimmed, freeService },
+        silent: true,
       });
-      const data = await res.json();
-
-      if (res.ok) {
-        // Role changed to admin — redirect to admin dashboard
-        router.push('/admin');
-        router.refresh();
-      } else {
-        setError(data.error || '학원 생성에 실패했습니다.');
-      }
-    } catch {
-      setError('학원 생성 중 오류가 발생했습니다.');
+      // Role changed to admin — redirect to admin dashboard
+      router.push('/admin');
+      router.refresh();
+    } catch (err) {
+      setError(err instanceof Error ? err.message : '학원 생성 중 오류가 발생했습니다.');
     } finally {
       setSubmitting(false);
     }

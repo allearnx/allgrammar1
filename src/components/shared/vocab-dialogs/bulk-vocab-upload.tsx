@@ -13,7 +13,7 @@ import {
 } from '@/components/ui/dialog';
 import { Upload } from 'lucide-react';
 import { toast } from 'sonner';
-import { logger } from '@/lib/logger';
+import { fetchWithToast } from '@/lib/fetch-with-toast';
 import type { VocabDialogProps } from './types';
 import { getVocabConfig } from './types';
 
@@ -51,23 +51,17 @@ export function BulkVocabUpload({ module, parentId, onAdd }: VocabDialogProps) {
 
     setSaving(true);
     try {
-      const res = await fetch(`${cfg.apiBase}/bulk`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ [cfg.parentIdKey]: parentId, items }),
+      const data = await fetchWithToast<{ count: number }>(`${cfg.apiBase}/bulk`, {
+        body: { [cfg.parentIdKey]: parentId, items },
+        errorMessage: '일괄 업로드 실패',
+        logContext: `${cfg.logPrefix}.bulk_vocab`,
       });
-      if (!res.ok) {
-        const err = await res.json().catch(() => null);
-        throw new Error(err?.error || '요청에 실패했습니다');
-      }
-      const data = await res.json();
       onAdd();
       setOpen(false);
       setText('');
       toast.success(`${data.count}개 단어가 추가되었습니다`);
-    } catch (err) {
-      logger.error(`${cfg.logPrefix}.bulk_vocab`, { error: err instanceof Error ? err.message : String(err) });
-      toast.error('일괄 업로드 실패');
+    } catch {
+      // fetchWithToast already shows toast
     } finally {
       setSaving(false);
     }

@@ -6,8 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import { CheckCircle, Send } from 'lucide-react';
-import { logger } from '@/lib/logger';
-import { toast } from 'sonner';
+import { fetchWithToast } from '@/lib/fetch-with-toast';
 import type { VocaWrongWord } from '@/types/voca';
 
 interface WriteWrongWordsProps {
@@ -53,25 +52,22 @@ export function WriteWrongWords({ wrongWords, dayId, onSubmitted }: WriteWrongWo
     if (!allComplete) return;
     setSubmitting(true);
     try {
-      const res = await fetch('/api/voca/matching-submission', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
+      await fetchWithToast('/api/voca/matching-submission', {
+        body: {
           dayId,
           wrongWords,
           writings: wrongWords.map((w) => ({
             word: w.word,
             attempts: writings[w.word],
           })),
-        }),
+        },
+        successMessage: '선생님에게 제출되었습니다!',
+        errorMessage: '제출 중 오류가 발생했습니다',
       });
-      if (!res.ok) throw new Error();
       setSubmitted(true);
-      toast.success('선생님에게 제출되었습니다!');
       onSubmitted();
-    } catch (err) {
-      logger.error('voca.write_wrong_words', { error: err instanceof Error ? err.message : String(err) });
-      toast.error('제출 중 오류가 발생했습니다');
+    } catch {
+      // error toast already shown by fetchWithToast
     } finally {
       setSubmitting(false);
     }

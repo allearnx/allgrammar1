@@ -12,151 +12,11 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
-import { FileText, Upload, Loader2, Check, Wand2, X } from 'lucide-react';
+import { FileText, Upload, Loader2, X } from 'lucide-react';
 import { toast } from 'sonner';
-import type { BlankItem } from '@/types/textbook';
 import { logger } from '@/lib/logger';
-
-type DifficultyKey = 'easy' | 'medium' | 'hard';
-
-const AUTO_INTERVAL: Record<DifficultyKey, number> = { easy: 5, medium: 3, hard: 2 };
-const DIFFICULTY_LABEL: Record<DifficultyKey, string> = { easy: 'Easy', medium: 'Medium', hard: 'Hard' };
-
-function generateAutoBlanks(originalText: string, difficulty: DifficultyKey): BlankItem[] {
-  const words = originalText.trim().split(/\s+/);
-  const interval = AUTO_INTERVAL[difficulty];
-  return words
-    .map((w, i) => ({ index: i, answer: w }))
-    .filter((_, i) => i % interval === interval - 1);
-}
-
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-function BlankConfigurator({
-  difficulty,
-  originalText,
-  blanks,
-  onUpdate,
-}: {
-  difficulty: DifficultyKey;
-  originalText: string;
-  blanks: BlankItem[] | null;
-  onUpdate: (blanks: BlankItem[] | null) => void;
-}) {
-  const [extracting, setExtracting] = useState(false);
-  const label = DIFFICULTY_LABEL[difficulty];
-
-  async function handlePdfUpload(e: React.ChangeEvent<HTMLInputElement>) {
-    const file = e.target.files?.[0];
-    if (!file) return;
-
-    if (!originalText.trim()) {
-      toast.error('영어 원문을 먼저 입력해주세요.');
-      return;
-    }
-
-    setExtracting(true);
-    try {
-      const formData = new FormData();
-      formData.append('file', file);
-      formData.append('original_text', originalText);
-
-      const res = await fetch('/api/naesin/passages/extract-blanks', {
-        method: 'POST',
-        body: formData,
-      });
-      if (!res.ok) {
-        const err = await res.json().catch(() => null);
-        throw new Error(err?.error || '추출 실패');
-      }
-      const data = await res.json();
-      onUpdate(data.blanks);
-      toast.success(`${label}: ${data.blanks.length}개 빈칸 추출됨`);
-    } catch (err) {
-      toast.error(err instanceof Error ? err.message : 'PDF 추출 실패');
-    } finally {
-      setExtracting(false);
-    }
-  }
-
-  function handleAutoGenerate() {
-    if (!originalText.trim()) {
-      toast.error('영어 원문을 먼저 입력해주세요.');
-      return;
-    }
-    const generated = generateAutoBlanks(originalText, difficulty);
-    onUpdate(generated);
-    toast.success(`${label}: ${generated.length}개 빈칸 자동 생성됨`);
-  }
-
-  const hasOriginal = originalText.trim().length > 0;
-
-  return (
-    <div className="flex items-center gap-1.5">
-      <span className="min-w-[52px] text-xs font-medium">{label}</span>
-      <Button
-        type="button"
-        variant="outline"
-        size="sm"
-        className="h-7 text-xs"
-        disabled={!hasOriginal}
-        onClick={handleAutoGenerate}
-      >
-        <Wand2 className="h-3 w-3 mr-1" />자동
-      </Button>
-      <input
-        type="file"
-        accept=".pdf"
-        className="hidden"
-        id={`pdf-${difficulty}`}
-        onChange={handlePdfUpload}
-        disabled={extracting || !hasOriginal}
-      />
-      <Button
-        type="button"
-        variant="outline"
-        size="sm"
-        className="h-7 text-xs"
-        disabled={extracting || !hasOriginal}
-        onClick={() => document.getElementById(`pdf-${difficulty}`)?.click()}
-      >
-        {extracting ? (
-          <><Loader2 className="h-3 w-3 mr-1 animate-spin" />추출 중...</>
-        ) : (
-          <><Upload className="h-3 w-3 mr-1" />PDF</>
-        )}
-      </Button>
-      {blanks ? (
-        <span className="text-xs text-green-600 flex items-center gap-0.5 whitespace-nowrap">
-          <Check className="h-3 w-3" />{blanks.length}개
-          <button type="button" className="ml-0.5 text-muted-foreground hover:text-destructive" onClick={() => onUpdate(null)}>
-            <X className="h-3 w-3" />
-          </button>
-        </span>
-      ) : (
-        <span className="text-xs text-muted-foreground">미설정</span>
-      )}
-    </div>
-  );
-}
-
-function splitSentences(text: string, punctuationRe: RegExp): string[] {
-  // 1) 줄바꿈으로 먼저 분리 (리스트형 텍스트 대응)
-  const lines = text.split(/\n+/).map((l) => l.trim()).filter(Boolean);
-  // 2) 각 줄 안에서 마침표/물음표/느낌표 뒤 공백으로 추가 분리
-  return lines.flatMap((line) =>
-    line.split(punctuationRe).map((s) => s.trim()).filter(Boolean)
-  );
-}
-
-function splitIntoSentencePairs(originalText: string, koreanTranslation: string) {
-  const enSentences = splitSentences(originalText, /(?<=[.!?])\s+/);
-  const koSentences = splitSentences(koreanTranslation, /(?<=[.!?。])\s+/);
-  const maxLen = Math.max(enSentences.length, koSentences.length, 1);
-  return Array.from({ length: maxLen }, (_, i) => ({
-    original: enSentences[i]?.trim() || '',
-    korean: koSentences[i]?.trim() || '',
-  }));
-}
+import { fetchWithToast } from '@/lib/fetch-with-toast';
+import { splitIntoSentencePairs } from '@/lib/naesin/sentence-utils';
 
 export function AddPassageDialog({ unitId, onAdd }: { unitId: string; onAdd: () => void }) {
   const [open, setOpen] = useState(false);
@@ -186,30 +46,20 @@ export function AddPassageDialog({ unitId, onAdd }: { unitId: string; onAdd: () 
     try {
       const formData = new FormData();
       formData.append('file', file);
-      const res = await fetch('/api/naesin/passages/extract-text', {
-        method: 'POST',
-        body: formData,
-      });
-      if (!res.ok) {
-        const err = await res.json().catch(() => null);
-        throw new Error(err?.error || '추출 실패');
-      }
-      const data = await res.json();
+      const data = await fetchWithToast<{ title?: string; sentences?: { original: string; korean: string }[]; original_text?: string; korean_translation?: string }>(
+        '/api/naesin/passages/extract-text',
+        { body: formData, successMessage: '본문이 추출되었습니다. 문장별로 확인/수정해주세요.', errorMessage: 'PDF 추출 실패' },
+      );
       if (data.title) setTitle(data.title);
       if (data.sentences && data.sentences.length > 0) {
-        // Use pre-paired sentences from AI (no misalignment risk)
-        setSentences(data.sentences.map((s: { original: string; korean: string }) => ({
+        setSentences(data.sentences.map((s) => ({
           original: s.original?.trim() || '',
           korean: s.korean?.trim() || '',
         })));
       } else if (data.original_text && data.korean_translation) {
-        // Fallback: split and pair (legacy)
         setSentences(splitIntoSentencePairs(data.original_text, data.korean_translation));
       }
-      toast.success('본문이 추출되었습니다. 문장별로 확인/수정해주세요.');
-    } catch (err) {
-      toast.error(err instanceof Error ? err.message : 'PDF 추출 실패');
-    } finally {
+    } catch { /* fetchWithToast handles toasts */ } finally {
       setExtractingText(false);
     }
   }
@@ -235,10 +85,8 @@ export function AddPassageDialog({ unitId, onAdd }: { unitId: string; onAdd: () 
       const makeBlanks = (interval: number) =>
         words.map((w, i) => ({ index: i, answer: w })).filter((_, i) => i % interval === interval - 1);
 
-      const res = await fetch('/api/naesin/passages', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
+      const passageData = await fetchWithToast<{ id: string }>('/api/naesin/passages', {
+        body: {
           unit_id: unitId,
           title,
           original_text: originalText,
@@ -248,14 +96,11 @@ export function AddPassageDialog({ unitId, onAdd }: { unitId: string; onAdd: () 
           blanks_hard: makeBlanks(2),
           sentences: builtSentences,
           pdf_url: pdfUrl || null,
-        }),
+        },
+        successMessage: '지문이 추가되었습니다',
+        errorMessage: '지문 추가 실패',
+        logContext: 'admin.add_passage',
       });
-      if (!res.ok) {
-        const err = await res.json().catch(() => null);
-        throw new Error(err?.error || '요청에 실패했습니다');
-      }
-      const passageData = await res.json();
-      toast.success('지문이 추가되었습니다');
 
       // Close dialog immediately — grammar/vocab generation runs in background
       onAdd();
@@ -287,10 +132,7 @@ export function AddPassageDialog({ unitId, onAdd }: { unitId: string; onAdd: () 
           logger.error('admin.add_passage.grammar_vocab', { error: gvErr instanceof Error ? gvErr.message : String(gvErr) });
           toast.warning('어법/어휘 문제 생성 실패 (나중에 수동 생성 가능)');
         });
-    } catch (err) {
-      logger.error('admin.add_passage', { error: err instanceof Error ? err.message : String(err) });
-      toast.error('지문 추가 실패');
-    } finally {
+    } catch { /* fetchWithToast handles toasts/logging */ } finally {
       setSaving(false);
     }
   }

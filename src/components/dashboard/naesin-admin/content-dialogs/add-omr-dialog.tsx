@@ -14,52 +14,33 @@ import {
 } from '@/components/ui/dialog';
 import { ClipboardList } from 'lucide-react';
 import { toast } from 'sonner';
-import { logger } from '@/lib/logger';
+import { useFormDialog } from '@/hooks/use-form-dialog';
+import { fetchWithToast } from '@/lib/fetch-with-toast';
 
 export function AddOmrDialog({ unitId, onAdd }: { unitId: string; onAdd: () => void }) {
-  const [open, setOpen] = useState(false);
+  const { open, setOpen, saving, handleSubmit } = useFormDialog({
+    onSuccess: onAdd,
+    logContext: 'admin.add_omr',
+    successMessage: 'OMR 시트가 추가되었습니다',
+    errorMessage: 'OMR 시트 추가 실패',
+  });
   const [title, setTitle] = useState('');
   const [totalQuestions, setTotalQuestions] = useState('');
   const [answerKeyText, setAnswerKeyText] = useState('');
-  const [saving, setSaving] = useState(false);
 
-  async function handleSubmit(e: React.FormEvent) {
+  async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
-    setSaving(true);
-    try {
-      const answerKey = answerKeyText.split(',').map((s) => Number(s.trim()));
-      if (answerKey.length !== Number(totalQuestions)) {
-        toast.error('정답 개수와 문항 수가 일치하지 않습니다');
-        setSaving(false);
-        return;
-      }
-
-      const res = await fetch('/api/naesin/omr-sheets', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          unit_id: unitId,
-          title,
-          total_questions: Number(totalQuestions),
-          answer_key: answerKey,
-        }),
-      });
-      if (!res.ok) {
-        const err = await res.json().catch(() => null);
-        throw new Error(err?.error || '요청에 실패했습니다');
-      }
-      onAdd();
-      setOpen(false);
-      setTitle('');
-      setTotalQuestions('');
-      setAnswerKeyText('');
-      toast.success('OMR 시트가 추가되었습니다');
-    } catch (err) {
-      logger.error('admin.add_omr', { error: err instanceof Error ? err.message : String(err) });
-      toast.error('OMR 시트 추가 실패');
-    } finally {
-      setSaving(false);
+    const answerKey = answerKeyText.split(',').map((s) => Number(s.trim()));
+    if (answerKey.length !== Number(totalQuestions)) {
+      toast.error('정답 개수와 문항 수가 일치하지 않습니다');
+      return;
     }
+    await handleSubmit(async () => {
+      await fetchWithToast('/api/naesin/omr-sheets', {
+        body: { unit_id: unitId, title, total_questions: Number(totalQuestions), answer_key: answerKey },
+        silent: true,
+      });
+    }, () => { setTitle(''); setTotalQuestions(''); setAnswerKeyText(''); });
   }
 
   return (
@@ -72,7 +53,7 @@ export function AddOmrDialog({ unitId, onAdd }: { unitId: string; onAdd: () => v
       </DialogTrigger>
       <DialogContent className="max-h-[85vh] overflow-y-auto">
         <DialogHeader><DialogTitle>OMR 시트 추가</DialogTitle></DialogHeader>
-        <form onSubmit={handleSubmit} className="space-y-3">
+        <form onSubmit={onSubmit} className="space-y-3">
           <div>
             <Label htmlFor="omr-title">제목</Label>
             <Input id="omr-title" value={title} onChange={(e) => setTitle(e.target.value)} placeholder="1차 내신 대비" required />

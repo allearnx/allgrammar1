@@ -8,6 +8,7 @@ import { Loader2, CheckCircle, XCircle, RotateCcw } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { logger } from '@/lib/logger';
 import { toast } from 'sonner';
+import { fetchWithToast } from '@/lib/fetch-with-toast';
 import type { VocaVocabulary } from '@/types/voca';
 import {
   generateQuestions,
@@ -103,41 +104,29 @@ export function ComprehensiveQuiz({ vocabulary, dayId: _dayId, onComplete }: Com
       // 2) Grade AI questions in batch
       if (aiQuestions.length > 0) {
         try {
-          const res = await fetch('/api/voca/idiom-grade', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              questions: aiQuestions.map((aq) => ({
-                type: aq.question.type,
-                prompt: aq.question.prompt,
-                reference: aq.question.reference,
-                studentAnswer: aq.answer || '',
-              })),
-            }),
+          const data = await fetchWithToast<{ results: { score: number; feedback: string }[] }>(
+            '/api/voca/idiom-grade',
+            {
+              body: {
+                questions: aiQuestions.map((aq) => ({
+                  type: aq.question.type,
+                  prompt: aq.question.prompt,
+                  reference: aq.question.reference,
+                  studentAnswer: aq.answer || '',
+                })),
+              },
+              silent: true,
+            },
+          );
+          aiQuestions.forEach((aq, arrIdx) => {
+            const result = data.results[arrIdx];
+            questionResults[aq.idx] = {
+              question: aq.question,
+              studentAnswer: aq.answer || '(미응답)',
+              score: result.score,
+              feedback: result.feedback,
+            };
           });
-
-          if (res.ok) {
-            const data = await res.json();
-            aiQuestions.forEach((aq, arrIdx) => {
-              const result = data.results[arrIdx];
-              questionResults[aq.idx] = {
-                question: aq.question,
-                studentAnswer: aq.answer || '(미응답)',
-                score: result.score,
-                feedback: result.feedback,
-              };
-            });
-          } else {
-            // Fallback: mark all AI as needs retry
-            aiQuestions.forEach((aq) => {
-              questionResults[aq.idx] = {
-                question: aq.question,
-                studentAnswer: aq.answer || '(미응답)',
-                score: 0,
-                feedback: '채점 실패 — 다시 시도해주세요',
-              };
-            });
-          }
         } catch {
           aiQuestions.forEach((aq) => {
             questionResults[aq.idx] = {

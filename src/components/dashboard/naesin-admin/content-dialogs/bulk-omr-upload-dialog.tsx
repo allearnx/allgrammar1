@@ -13,7 +13,7 @@ import {
 } from '@/components/ui/dialog';
 import { Upload, Download, ChevronDown, ChevronRight } from 'lucide-react';
 import { toast } from 'sonner';
-import { logger } from '@/lib/logger';
+import { fetchWithToast } from '@/lib/fetch-with-toast';
 
 interface ParsedOmrSheet {
   title: string;
@@ -127,22 +127,11 @@ export function BulkOmrUploadDialog({ unitId, onAdd }: { unitId: string; onAdd: 
     let successCount = 0;
     try {
       for (const sheet of preview) {
-        const res = await fetch('/api/naesin/problems', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            unitId,
-            title: sheet.title,
-            mode: 'image_answer',
-            answerKey: sheet.answerKey,
-            pdfUrl: sheet.pdfUrl,
-            category: 'problem',
-          }),
+        await fetchWithToast('/api/naesin/problems', {
+          body: { unitId, title: sheet.title, mode: 'image_answer', answerKey: sheet.answerKey, pdfUrl: sheet.pdfUrl, category: 'problem' },
+          silent: true,
+          logContext: 'admin.bulk_omr',
         });
-        if (!res.ok) {
-          const err = await res.json().catch(() => null);
-          throw new Error(err?.error || `"${sheet.title}" 저장 실패`);
-        }
         successCount++;
       }
       onAdd();
@@ -150,7 +139,6 @@ export function BulkOmrUploadDialog({ unitId, onAdd }: { unitId: string; onAdd: 
       resetForm();
       toast.success(`${successCount}개 문제풀이 시트가 추가되었습니다`);
     } catch (err) {
-      logger.error('admin.bulk_omr', { error: err instanceof Error ? err.message : String(err) });
       toast.error(err instanceof Error ? err.message : '일괄 업로드 실패');
     } finally {
       setSaving(false);

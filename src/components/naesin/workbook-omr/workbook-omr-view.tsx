@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { toast } from 'sonner';
-import { logger } from '@/lib/logger';
+import { fetchWithToast } from '@/lib/fetch-with-toast';
 import { OmrSheet } from '@/components/naesin/omr-sheet';
 import type { NaesinWorkbookOmrSheet, NaesinWorkbookOmrAttempt } from '@/types/naesin';
 
@@ -45,14 +45,12 @@ export function WorkbookOmrView({ sheet, onSubmitComplete }: WorkbookOmrViewProp
     const studentAnswers = Array.from({ length: sheet.total_questions }, (_, i) => answers[i] || 0);
 
     try {
-      const res = await fetch('/api/naesin/workbook-omr/submit', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ omrSheetId: sheet.id, studentAnswers }),
+      const data = await fetchWithToast<NaesinWorkbookOmrAttempt & { answer_key: number[] }>('/api/naesin/workbook-omr/submit', {
+        body: { omrSheetId: sheet.id, studentAnswers },
+        successMessage: '채점 완료!',
+        errorMessage: '제출 중 오류가 발생했습니다',
+        logContext: 'workbook_omr.view',
       });
-
-      if (!res.ok) throw new Error();
-      const data = await res.json();
 
       // Show results with answer key from server
       const answerKey = data.answer_key as number[];
@@ -69,10 +67,8 @@ export function WorkbookOmrView({ sheet, onSubmitComplete }: WorkbookOmrViewProp
       });
 
       onSubmitComplete(data);
-      toast.success('채점 완료!');
-    } catch (err) {
-      logger.error('workbook_omr.view', { error: err instanceof Error ? err.message : String(err) });
-      toast.error('제출 중 오류가 발생했습니다');
+    } catch {
+      // error already toasted by fetchWithToast
     } finally {
       setSubmitting(false);
     }

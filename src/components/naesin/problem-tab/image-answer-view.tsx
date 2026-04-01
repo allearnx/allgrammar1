@@ -6,8 +6,8 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { AlertTriangle } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { logger } from '@/lib/logger';
 import { toast } from 'sonner';
+import { fetchWithToast } from '@/lib/fetch-with-toast';
 import type { NaesinProblemSheet } from '@/types/database';
 import { useProblemDraft } from '@/hooks/use-problem-draft';
 import type { ImageAnswerDraft } from '@/hooks/use-problem-draft';
@@ -36,26 +36,24 @@ export function ImageAnswerView({
     const answerArray = Array.from({ length: totalQuestions }, (_, i) => answers[i] || '');
 
     try {
-      const res = await fetch('/api/naesin/problems/submit', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
+      const data = await fetchWithToast<{ score: number; wrongAnswers: { number: number; userAnswer: string | number; correctAnswer: string | number }[] }>('/api/naesin/problems/submit', {
+        body: {
           sheetId: sheet.id,
           unitId,
           answers: answerArray,
           totalQuestions,
-        }),
+        },
+        errorMessage: '제출 중 오류가 발생했습니다',
+        logContext: 'naesin.image_answer_view',
       });
-      const data = await res.json();
       clearDraft();
       setResults({ score: data.score, wrongAnswers: data.wrongAnswers });
       if (data.score >= 80) {
         toast.success('문제풀이를 완료했습니다!');
         onComplete?.();
       }
-    } catch (err) {
-      logger.error('naesin.image_answer_view', { error: err instanceof Error ? err.message : String(err) });
-      toast.error('제출 중 오류가 발생했습니다');
+    } catch {
+      // error already toasted by fetchWithToast
     } finally {
       setSubmitting(false);
     }

@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { createClient } from '@/lib/supabase/client';
+import { fetchWithToast } from '@/lib/fetch-with-toast';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -16,7 +17,6 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog';
 import { UserX } from 'lucide-react';
-import { toast } from 'sonner';
 
 interface DeleteAccountDialogProps {
   apiEndpoint?: string;
@@ -45,29 +45,21 @@ export function DeleteAccountDialog({
     setLoading(true);
 
     try {
-      const res = await fetch(apiEndpoint, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ password }),
+      await fetchWithToast(apiEndpoint, {
+        body: { password },
+        successMessage: '계정이 삭제되었습니다.',
+        errorMessage: '계정 삭제에 실패했습니다.',
       });
-
-      const data = await res.json();
-
-      if (!res.ok) {
-        toast.error(data.error || '계정 삭제에 실패했습니다.');
-        return;
-      }
 
       // 클라이언트 세션 정리
       const supabase = createClient();
       await supabase.auth.signOut();
       await fetch('/api/auth/logout', { method: 'POST' });
 
-      toast.success('계정이 삭제되었습니다.');
       router.push('/login');
       router.refresh();
     } catch {
-      toast.error('네트워크 오류가 발생했습니다.');
+      // fetchWithToast already shows error toast
     } finally {
       setLoading(false);
     }

@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import { Bot, ChevronDown, ChevronRight, Send, Loader2, RotateCcw } from 'lucide-react';
-import { toast } from 'sonner';
+import { fetchWithToast } from '@/lib/fetch-with-toast';
 import { ChatMessageBubble } from './chat-message-bubble';
 import type { NaesinGrammarChatMessage, NaesinGrammarChatSession } from '@/types/database';
 
@@ -32,20 +32,14 @@ export function SocraticChatbot({ lessonId, lessonTitle }: SocraticChatbotProps)
   async function handleStart() {
     setStarting(true);
     try {
-      const res = await fetch('/api/naesin/grammar/chat/start', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ lessonId }),
+      const data = await fetchWithToast<NaesinGrammarChatSession>('/api/naesin/grammar/chat/start', {
+        body: { lessonId },
+        errorMessage: '대화 시작에 실패했습니다.',
       });
-      if (!res.ok) {
-        const data = await res.json().catch(() => null);
-        throw new Error(data?.error || '대화 시작에 실패했습니다.');
-      }
-      const data = await res.json();
       setSession(data);
       setExpanded(true);
-    } catch (err) {
-      toast.error(err instanceof Error ? err.message : '대화 시작에 실패했습니다.');
+    } catch {
+      // error already toasted by fetchWithToast
     } finally {
       setStarting(false);
     }
@@ -62,20 +56,14 @@ export function SocraticChatbot({ lessonId, lessonTitle }: SocraticChatbotProps)
 
     setLoading(true);
     try {
-      const res = await fetch('/api/naesin/grammar/chat/reply', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ sessionId: session.id, message: inputValue.trim() }),
+      const updated = await fetchWithToast<NaesinGrammarChatSession>('/api/naesin/grammar/chat/reply', {
+        body: { sessionId: session.id, message: inputValue.trim() },
+        errorMessage: '응답 생성에 실패했습니다.',
       });
-      if (!res.ok) {
-        const data = await res.json().catch(() => null);
-        throw new Error(data?.error || '응답 생성에 실패했습니다.');
-      }
-      const updated = await res.json();
       setSession(updated);
       setInputValue('');
-    } catch (err) {
-      toast.error(err instanceof Error ? err.message : '응답 생성에 실패했습니다.');
+    } catch {
+      // error already toasted by fetchWithToast
     } finally {
       setLoading(false);
     }

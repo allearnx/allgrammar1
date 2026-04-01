@@ -14,6 +14,7 @@ import {
 } from 'lucide-react';
 import { toast } from 'sonner';
 import { logger } from '@/lib/logger';
+import { fetchWithToast } from '@/lib/fetch-with-toast';
 import type { NaesinVocabulary, NaesinGrammarLesson, NaesinPassage } from '@/types/database';
 import type { NaesinProblemSheet } from '@/types/naesin';
 import { ConfirmDialog } from '@/components/shared/confirm-dialog';
@@ -28,79 +29,8 @@ import { UnitVocabList } from './unit-vocab-list';
 import { UnitPassageList } from './unit-passage-list';
 import { UnitGrammarList } from './unit-grammar-list';
 import { UnitProblemList } from './unit-problem-list';
-
-/** 공통 삭제 핸들러 생성 */
-function makeDeleteHandler(
-  endpoint: string,
-  setList: (fn: (prev: { id: string }[]) => { id: string }[]) => void,
-  messages: { success: string; error: string; logKey: string },
-) {
-  return async (id: string) => {
-    try {
-      const res = await fetch(endpoint, {
-        method: 'DELETE',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ id }),
-      });
-      if (res.ok) {
-        setList((prev) => prev.filter((item) => item.id !== id));
-        toast.success(messages.success);
-      } else {
-        toast.error('삭제 실패');
-      }
-    } catch (err) {
-      logger.error(messages.logKey, { error: err instanceof Error ? err.message : String(err) });
-      toast.error(messages.error);
-    }
-  };
-}
-
-interface ContentManagerState {
-  showVocabList: boolean;
-  showPassageList: boolean;
-  showGrammarList: boolean;
-  showProblemList: boolean;
-  bulkDeleteOpen: boolean;
-  dialogueCount: number | null;
-  omrCount: number | null;
-  lastReviewCount: number | null;
-  regeneratingGV: string | null;
-}
-
-type ContentManagerAction =
-  | { type: 'TOGGLE_SECTION'; section: 'vocab' | 'passage' | 'grammar' | 'problem' }
-  | { type: 'SET_BULK_DELETE_OPEN'; open: boolean }
-  | { type: 'SET_COUNTS'; dialogueCount: number; omrCount: number; lastReviewCount: number }
-  | { type: 'SET_REGENERATING_GV'; id: string | null };
-
-function contentManagerReducer(state: ContentManagerState, action: ContentManagerAction): ContentManagerState {
-  switch (action.type) {
-    case 'TOGGLE_SECTION': {
-      const key = `show${action.section.charAt(0).toUpperCase() + action.section.slice(1)}List` as keyof ContentManagerState;
-      return { ...state, [key]: !state[key] };
-    }
-    case 'SET_BULK_DELETE_OPEN':
-      return { ...state, bulkDeleteOpen: action.open };
-    case 'SET_COUNTS':
-      return { ...state, dialogueCount: action.dialogueCount, omrCount: action.omrCount, lastReviewCount: action.lastReviewCount };
-    case 'SET_REGENERATING_GV':
-      return { ...state, regeneratingGV: action.id };
-    default:
-      return state;
-  }
-}
-
-const contentManagerInitialState: ContentManagerState = {
-  showVocabList: false,
-  showPassageList: false,
-  showGrammarList: false,
-  showProblemList: false,
-  bulkDeleteOpen: false,
-  dialogueCount: null,
-  omrCount: null,
-  lastReviewCount: null,
-  regeneratingGV: null,
-};
+import { makeDeleteHandler } from '@/lib/naesin/make-delete-handler';
+import { contentManagerReducer, contentManagerInitialState } from './unit-content-manager-state';
 
 export function UnitContentManager({ unitId }: { unitId: string }) {
   const vocab = useListCrud<NaesinVocabulary>({
@@ -216,27 +146,20 @@ export function UnitContentManager({ unitId }: { unitId: string }) {
     }
     dispatchCM({ type: 'SET_REGENERATING_GV', id: passage.id });
     try {
-      const gvRes = await fetch('/api/naesin/passages/extract-grammar-vocab', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ sentences: passage.sentences }),
+      const gvData = await fetchWithToast<{ items?: unknown[] }>('/api/naesin/passages/extract-grammar-vocab', {
+        body: { sentences: passage.sentences },
+        silent: true,
+        logContext: 'unit.regen_grammar_vocab',
       });
-      if (!gvRes.ok) throw new Error('AI 생성 실패');
-      const gvData = await gvRes.json();
-
-      const patchRes = await fetch('/api/naesin/passages', {
+      const updated = await fetchWithToast<NaesinPassage>('/api/naesin/passages', {
         method: 'PATCH',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ id: passage.id, grammar_vocab_items: gvData.items || [] }),
+        body: { id: passage.id, grammar_vocab_items: gvData.items || [] },
+        successMessage: `어법/어휘 문제 ${(gvData.items || []).length}개 생성됨`,
+        errorMessage: '어법/어휘 재생성 실패',
+        logContext: 'unit.regen_grammar_vocab',
       });
-      if (!patchRes.ok) throw new Error('저장 실패');
-      const updated = await patchRes.json();
       setPassageList((prev) => prev.map((p) => (p.id === passage.id ? updated : p)));
-      toast.success(`어법/어휘 문제 ${(gvData.items || []).length}개 생성됨`);
-    } catch (err) {
-      logger.error('unit.regen_grammar_vocab', { error: err instanceof Error ? err.message : String(err) });
-      toast.error('어법/어휘 재생성 실패');
-    } finally {
+    } catch { /* fetchWithToast handles toasts/logging */ } finally {
       dispatchCM({ type: 'SET_REGENERATING_GV', id: null });
     }
   }

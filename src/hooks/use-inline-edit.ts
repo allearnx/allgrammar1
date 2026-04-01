@@ -1,8 +1,7 @@
 'use client';
 
 import { useState, type Dispatch, type SetStateAction } from 'react';
-import { toast } from 'sonner';
-import { logger } from '@/lib/logger';
+import { fetchWithToast } from '@/lib/fetch-with-toast';
 
 export function useInlineEdit<TItem extends { id: string }, TForm>(
   options: {
@@ -30,27 +29,15 @@ export function useInlineEdit<TItem extends { id: string }, TForm>(
     if (!editingId) return;
     try {
       const payload = toPayload(editingId, editForm);
-      const res = await fetch(apiEndpoint, {
+      const updated = await fetchWithToast<TItem>(apiEndpoint, {
         method: 'PATCH',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload),
+        body: payload,
+        successMessage: messages.success,
+        errorMessage: messages.error,
       });
-      if (res.ok) {
-        const updated = await res.json();
-        setItems((prev) => prev.map((item) => (item.id === editingId ? updated : item)));
-        setEditingId(null);
-        toast.success(messages.success);
-      } else {
-        toast.error(messages.error);
-      }
-    } catch (err) {
-      if (err instanceof Error && err.message) {
-        toast.error(err.message);
-      } else {
-        logger.error('hook.inline_edit', { error: err instanceof Error ? err.message : String(err) });
-        toast.error(messages.error);
-      }
-    }
+      setItems((prev) => prev.map((item) => (item.id === editingId ? updated : item)));
+      setEditingId(null);
+    } catch { /* fetchWithToast handles toasts */ }
   }
 
   return { editingId, editForm, setEditForm, startEdit, cancelEdit, saveEdit };

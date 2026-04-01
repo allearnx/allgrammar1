@@ -15,9 +15,9 @@ import {
 } from '@/components/ui/dialog';
 import { Upload, Download, ChevronDown, ChevronRight, FileUp } from 'lucide-react';
 import { toast } from 'sonner';
+import { fetchWithToast } from '@/lib/fetch-with-toast';
 import Papa from 'papaparse';
 import type { NaesinProblemQuestion } from '@/types/naesin';
-import { logger } from '@/lib/logger';
 
 interface ParsedQuestion {
   number: number;
@@ -195,30 +195,16 @@ export function BulkProblemUploadDialog({ unitId, onAdd }: { unitId: string; onA
 
       const answerKey = preview.map((q) => q.answer);
 
-      const res = await fetch('/api/naesin/problems', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          unitId,
-          title: title.trim(),
-          mode: 'interactive',
-          questions,
-          answerKey,
-          category: 'problem',
-        }),
+      await fetchWithToast('/api/naesin/problems', {
+        body: { unitId, title: title.trim(), mode: 'interactive', questions, answerKey, category: 'problem' },
+        successMessage: `${preview.length}문제 시트가 추가되었습니다`,
+        errorMessage: '일괄 업로드 실패',
+        logContext: 'admin.bulk_problem',
       });
-      if (!res.ok) {
-        const err = await res.json().catch(() => null);
-        throw new Error(err?.error || '요청에 실패했습니다');
-      }
       onAdd();
       setOpen(false);
       resetForm();
-      toast.success(`${preview.length}문제 시트가 추가되었습니다`);
-    } catch (err) {
-      logger.error('admin.bulk_problem', { error: err instanceof Error ? err.message : String(err) });
-      toast.error(err instanceof Error ? err.message : '일괄 업로드 실패');
-    } finally {
+    } catch { /* fetchWithToast handles toasts/logging */ } finally {
       setSaving(false);
     }
   }

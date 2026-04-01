@@ -8,8 +8,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Plus, X, Save, Loader2, FileText, Shuffle, PenLine, BookOpen } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { toast } from 'sonner';
-import { logger } from '@/lib/logger';
+import { fetchWithToast } from '@/lib/fetch-with-toast';
 
 type StageType = 'fill_blanks' | 'ordering' | 'translation' | 'grammar_vocab';
 
@@ -48,23 +47,18 @@ export function PassageStageManager({ studentId, initialStages, initialTranslati
   async function handleSave() {
     setSaving(true);
     try {
-      const res = await fetch('/api/naesin/passage-stages', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
+      await fetchWithToast('/api/naesin/passage-stages', {
+        body: {
           studentId,
           stages,
           translationSentencesPerPage: sentencesPerPage,
-        }),
+        },
+        successMessage: '교과서 암기 단계가 저장되었습니다',
+        errorMessage: '저장 중 오류가 발생했습니다',
+        logContext: 'admin.passage_stage',
       });
-      if (!res.ok) {
-        const err = await res.json().catch(() => null);
-        throw new Error(err?.error || '저장 실패');
-      }
-      toast.success('교과서 암기 단계가 저장되었습니다');
-    } catch (err) {
-      logger.error('admin.passage_stage', { error: err instanceof Error ? err.message : String(err) });
-      toast.error(err instanceof Error ? err.message : '저장 중 오류가 발생했습니다');
+    } catch {
+      // fetchWithToast already showed toast and logged
     } finally {
       setSaving(false);
     }

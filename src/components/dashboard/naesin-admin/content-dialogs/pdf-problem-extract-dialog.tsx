@@ -14,6 +14,7 @@ import {
 } from '@/components/ui/dialog';
 import { Wand2, Loader2, FileUp, ShieldCheck } from 'lucide-react';
 import { toast } from 'sonner';
+import { fetchWithToast } from '@/lib/fetch-with-toast';
 import type { NaesinProblemQuestion } from '@/types/naesin';
 import type { FullValidationResult } from '@/lib/validation';
 import type { GeneratedQuestion } from './question-utils';
@@ -58,32 +59,19 @@ export function PdfProblemExtractDialog({ unitId, unitTitle, onAdd }: { unitId: 
       const arrayBuffer = await file.arrayBuffer();
       const base64 = Buffer.from(arrayBuffer).toString('base64');
 
-      const res = await fetch('/api/naesin/problems/extract-paraphrase', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          unitId,
-          unitTitle: unitTitle || '',
-          pdfBase64: base64,
-          mediaType: 'application/pdf',
-        }),
-      });
-
-      if (!res.ok) {
-        const err = await res.json().catch(() => null);
-        throw new Error(err?.error || 'AI 문제 생성에 실패했습니다.');
-      }
-
-      const data = await res.json();
+      const data = await fetchWithToast<{ questions?: Record<string, unknown>[]; originalCount?: number; validation?: { structural: FullValidationResult['structural'] } }>(
+        '/api/naesin/problems/extract-paraphrase',
+        { body: { unitId, unitTitle: unitTitle || '', pdfBase64: base64, mediaType: 'application/pdf' }, errorMessage: 'AI 문제 생성에 실패했습니다.' },
+      );
       setQuestions(normalizeQuestions(data.questions || []));
       setOriginalCount(data.originalCount || 0);
       if (data.validation?.structural) {
-        setValidation({ structural: data.validation.structural, badge: data.validation.structural.valid ? 'pass' : 'fail', summary: '' });
+        const s = data.validation.structural;
+        setValidation({ structural: s, badge: s.valid ? 'pass' : 'fail', summary: '' });
       }
       setStep('preview');
       toast.success(`원본 ${data.originalCount}문제 → ${data.questions?.length || 0}문제 생성 완료`);
-    } catch (err) {
-      toast.error(err instanceof Error ? err.message : 'PDF 처리 중 오류 발생');
+    } catch {
       setStep('upload');
     }
 
@@ -102,23 +90,13 @@ export function PdfProblemExtractDialog({ unitId, unitTitle, onAdd }: { unitId: 
         ...(q.explanation ? { explanation: q.explanation } : {}),
       }));
 
-      const res = await fetch('/api/naesin/problems/validate', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ questions: formatted }),
+      const result = await fetchWithToast<FullValidationResult>('/api/naesin/problems/validate', {
+        body: { questions: formatted },
+        errorMessage: 'AI 검증 실패',
       });
-
-      if (!res.ok) {
-        const err = await res.json().catch(() => null);
-        throw new Error(err?.error || 'AI 검증 실패');
-      }
-
-      const result: FullValidationResult = await res.json();
       setValidation(result);
       toast.success(`AI 검증 완료: ${result.summary}`);
-    } catch (err) {
-      toast.error(err instanceof Error ? err.message : 'AI 검증 실패');
-    } finally {
+    } catch { /* fetchWithToast handles error toast */ } finally {
       setValidating(false);
     }
   }
@@ -152,31 +130,15 @@ export function PdfProblemExtractDialog({ unitId, unitTitle, onAdd }: { unitId: 
 
       const answerKey = questions.map((q) => q.answer);
 
-      const res = await fetch('/api/naesin/problems', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          unitId,
-          title: title.trim(),
-          mode: 'interactive',
-          questions: formatted,
-          answerKey,
-          category: 'problem',
-        }),
+      await fetchWithToast('/api/naesin/problems', {
+        body: { unitId, title: title.trim(), mode: 'interactive', questions: formatted, answerKey, category: 'problem' },
+        successMessage: `${formatted.length}문제 시트가 추가되었습니다`,
+        errorMessage: '저장에 실패했습니다.',
       });
-
-      if (!res.ok) {
-        const err = await res.json().catch(() => null);
-        throw new Error(err?.error || '저장에 실패했습니다.');
-      }
-
       onAdd();
       setOpen(false);
       resetForm();
-      toast.success(`${formatted.length}문제 시트가 추가되었습니다`);
-    } catch (err) {
-      toast.error(err instanceof Error ? err.message : '저장 실패');
-    } finally {
+    } catch { /* fetchWithToast handles toasts */ } finally {
       setSaving(false);
     }
   }

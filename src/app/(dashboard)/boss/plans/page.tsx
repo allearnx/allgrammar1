@@ -2,7 +2,7 @@
 
 import { useEffect, useState, useCallback } from 'react';
 import { Button } from '@/components/ui/button';
-import { toast } from 'sonner';
+import { fetchWithToast } from '@/lib/fetch-with-toast';
 import { Plus, X } from 'lucide-react';
 import { PlanCreateForm } from '@/components/boss/plan-create-form';
 import { PlanCard } from '@/components/boss/plan-card';
@@ -15,9 +15,17 @@ export default function BossPlansPage() {
   const [showCreate, setShowCreate] = useState(false);
 
   const fetchPlans = useCallback(async () => {
-    const res = await fetch('/api/boss/plans');
-    if (res.ok) setPlans(await res.json());
-    setLoading(false);
+    try {
+      const data = await fetchWithToast<SubscriptionPlan[]>('/api/boss/plans', {
+        method: 'GET',
+        silent: true,
+      });
+      setPlans(data);
+    } catch {
+      // silently ignore fetch errors
+    } finally {
+      setLoading(false);
+    }
   }, []);
 
   // eslint-disable-next-line react-hooks/set-state-in-effect
@@ -33,32 +41,29 @@ export default function BossPlansPage() {
       description: form.get('description') as string || null,
     };
 
-    const res = await fetch('/api/boss/plans', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(body),
-    });
-
-    if (res.ok) {
-      toast.success('요금제가 생성되었습니다');
+    try {
+      await fetchWithToast('/api/boss/plans', {
+        body,
+        successMessage: '요금제가 생성되었습니다',
+        errorMessage: '생성 실패',
+      });
       setShowCreate(false);
       fetchPlans();
-    } else {
-      const data = await res.json();
-      toast.error(data.error || '생성 실패');
+    } catch {
+      // fetchWithToast already shows error toast
     }
   }
 
   async function handleToggleActive(plan: SubscriptionPlan) {
-    const res = await fetch('/api/boss/plans', {
-      method: 'PATCH',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ id: plan.id, is_active: !plan.is_active }),
-    });
-
-    if (res.ok) {
-      toast.success(plan.is_active ? '비활성화됨' : '활성화됨');
+    try {
+      await fetchWithToast('/api/boss/plans', {
+        method: 'PATCH',
+        body: { id: plan.id, is_active: !plan.is_active },
+        successMessage: plan.is_active ? '비활성화됨' : '활성화됨',
+      });
       fetchPlans();
+    } catch {
+      // fetchWithToast already shows error toast
     }
   }
 

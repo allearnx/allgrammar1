@@ -7,7 +7,7 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { Save, Loader2, BookOpen, FileText, GraduationCap, ClipboardList, Brain } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { toast } from 'sonner';
-import { logger } from '@/lib/logger';
+import { fetchWithToast } from '@/lib/fetch-with-toast';
 
 type StageKey = 'vocab' | 'passage' | 'grammar' | 'problem' | 'lastReview';
 
@@ -54,19 +54,14 @@ export function EnabledStagesManager({ studentId, initialStages }: Props) {
     }
     setSaving(true);
     try {
-      const res = await fetch('/api/naesin/enabled-stages', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ studentId, stages }),
+      await fetchWithToast('/api/naesin/enabled-stages', {
+        body: { studentId, stages },
+        successMessage: '활성 단계가 저장되었습니다',
+        errorMessage: '저장 중 오류가 발생했습니다',
+        logContext: 'admin.enabled_stages',
       });
-      if (!res.ok) {
-        const err = await res.json().catch(() => null);
-        throw new Error(err?.error || '저장 실패');
-      }
-      toast.success('활성 단계가 저장되었습니다');
-    } catch (err) {
-      logger.error('admin.enabled_stages', { error: err instanceof Error ? err.message : String(err) });
-      toast.error(err instanceof Error ? err.message : '저장 중 오류가 발생했습니다');
+    } catch {
+      // fetchWithToast already showed toast and logged
     } finally {
       setSaving(false);
     }

@@ -1,17 +1,16 @@
 'use client';
 
-import { useEffect, useState } from 'react';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
-import { Badge } from '@/components/ui/badge';
 import { ScoreTrendChart } from '@/components/charts/score-trend-chart';
 import { UnitScoreChart } from '@/components/charts/unit-score-chart';
 import { ActivityCalendar } from '@/components/charts/activity-calendar';
 import {
   Loader2, AlertCircle, TrendingUp, BarChart3, AlertTriangle,
-  CalendarDays, LayoutDashboard, BookOpen, Target, Sparkles, PartyPopper,
+  CalendarDays, LayoutDashboard,
 } from 'lucide-react';
-import { STAT_COLORS } from '@/lib/utils/brand-colors';
-import type { StudentReportData } from '@/types/student-report';
+import { useStudentReport } from '@/hooks/use-student-report';
+import { SummaryTab } from './report-tabs/summary-tab';
+import { WrongAnalysisTab } from './report-tabs/wrong-analysis-tab';
 
 interface Props {
   studentId?: string;
@@ -20,33 +19,7 @@ interface Props {
 }
 
 export function StudentReportPanel({ studentId, services: servicesProp, token }: Props) {
-  const [data, setData] = useState<StudentReportData | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    async function fetchReport() {
-      setLoading(true);
-      setError(null);
-      try {
-        const params = new URLSearchParams();
-        if (studentId) params.set('studentId', studentId);
-        if (token) params.set('token', token);
-        const res = await fetch(`/api/student/my-report?${params.toString()}`);
-        if (!res.ok) {
-          const body = await res.json().catch(() => ({}));
-          throw new Error(body.error || '리포트를 불러올 수 없습니다.');
-        }
-        const json = await res.json();
-        setData(json);
-      } catch (err) {
-        setError(err instanceof Error ? err.message : '오류가 발생했습니다.');
-      } finally {
-        setLoading(false);
-      }
-    }
-    fetchReport();
-  }, [studentId, token]);
+  const { data, loading, error } = useStudentReport(studentId, token);
 
   if (loading) {
     return (
@@ -121,84 +94,8 @@ export function StudentReportPanel({ studentId, services: servicesProp, token }:
             </TabsTrigger>
           </TabsList>
 
-          {/* ── 주간 요약 ── */}
-          <TabsContent value="summary" className="mt-4 space-y-4">
-            <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-              {hasVoca && data.current.voca && (
-                <>
-                  <StatCard
-                    label="보카 퀴즈 평균"
-                    value={data.current.voca.quizAvgScore !== null ? `${data.current.voca.quizAvgScore}점` : '-'}
-                    color={STAT_COLORS.violet}
-                    icon={<Target className="h-5 w-5" />}
-                  />
-                  <StatCard
-                    label="보카 진행률"
-                    value={`${data.current.voca.daysInProgress}/${data.current.voca.totalDays} Day`}
-                    color={STAT_COLORS.mint}
-                    icon={<BookOpen className="h-5 w-5" />}
-                  />
-                </>
-              )}
-              {hasNaesin && data.current.naesin && (
-                <>
-                  <StatCard
-                    label="내신 문제풀이 평균"
-                    value={data.current.naesin.problemAvgScore !== null ? `${data.current.naesin.problemAvgScore}점` : '-'}
-                    color={STAT_COLORS.cyan}
-                    icon={<BarChart3 className="h-5 w-5" />}
-                  />
-                  <StatCard
-                    label="내신 진행률"
-                    value={`${data.current.naesin.unitsInProgress}/${data.current.naesin.totalUnits} 단원`}
-                    color={STAT_COLORS.amber}
-                    icon={<TrendingUp className="h-5 w-5" />}
-                  />
-                </>
-              )}
-            </div>
-
-            {/* Weakness section */}
-            {data.current.weaknesses.length > 0 && (
-              <div className="rounded-xl bg-amber-50/70 p-4">
-                <h4 className="text-sm font-semibold mb-2 flex items-center gap-1.5 text-amber-800">
-                  <AlertTriangle className="h-4 w-4" />
-                  약점 분석
-                </h4>
-                <div className="flex flex-wrap gap-2">
-                  {data.current.weaknesses.map((w, i) => (
-                    <Badge key={i} variant="outline" className="bg-amber-100 border-amber-200 text-amber-800">
-                      {w}
-                    </Badge>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {/* Recommendations section */}
-            {data.current.recommendations.length > 0 && (
-              <div className="rounded-xl bg-cyan-50/70 p-4">
-                <h4 className="text-sm font-semibold mb-2 flex items-center gap-1.5 text-cyan-800">
-                  <Sparkles className="h-4 w-4" />
-                  추천 학습
-                </h4>
-                <ul className="space-y-1.5">
-                  {data.current.recommendations.map((r, i) => (
-                    <li key={i} className="text-sm text-gray-700 flex items-start gap-2">
-                      <span className="mt-1.5 h-2 w-2 rounded-full bg-cyan-400 shrink-0" />
-                      {r}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
-
-            {data.current.weaknesses.length === 0 && data.current.recommendations.length === 0 && (
-              <div className="rounded-xl border border-dashed p-8 text-center">
-                <PartyPopper className="h-8 w-8 text-violet-400 mb-2" />
-                <p className="text-sm text-gray-500 font-medium">약점이 없습니다! 잘하고 있어요!</p>
-              </div>
-            )}
+          <TabsContent value="summary" className="mt-4">
+            <SummaryTab data={data} hasVoca={hasVoca} hasNaesin={hasNaesin} />
           </TabsContent>
 
           {/* ── 성적 추이 ── */}
@@ -268,68 +165,8 @@ export function StudentReportPanel({ studentId, services: servicesProp, token }:
           </TabsContent>
 
           {/* ── 오답 분석 ── */}
-          <TabsContent value="wrong" className="mt-4 space-y-6">
-            {hasVoca && data.wrongAnalysis.vocaTopWrong.length > 0 && (
-              <div className="rounded-xl bg-rose-50/60 p-4">
-                <h4 className="text-sm font-semibold mb-3 text-rose-800">자주 틀리는 단어 TOP 10</h4>
-                <div className="space-y-2">
-                  {data.wrongAnalysis.vocaTopWrong.map((w) => {
-                    const borderColor = w.count >= 3 ? '#F43F5E' : w.count === 2 ? '#FB7185' : '#FCA5A5';
-                    return (
-                      <div key={w.word} className="flex items-center justify-between rounded-lg bg-white px-3 py-2" style={{ borderLeft: `3px solid ${borderColor}` }}>
-                        <span className="text-sm font-medium text-gray-800">{w.word}</span>
-                        <Badge className="bg-rose-100 text-rose-700 border-0 text-xs hover:bg-rose-100">{w.count}회</Badge>
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
-            )}
-
-            {hasNaesin && data.wrongAnalysis.naesinWrongByStage.length > 0 && (
-              <div>
-                <h4 className="text-sm font-semibold mb-3">내신 스테이지별 오답</h4>
-                <div className="grid gap-2 sm:grid-cols-2">
-                  {data.wrongAnalysis.naesinWrongByStage.map((s) => (
-                    <div key={s.stage} className="flex items-center justify-between rounded-lg border px-3 py-2.5" style={{ borderLeft: '3px solid #06B6D4' }}>
-                      <span className="text-sm font-medium">{s.stage}</span>
-                      <div className="flex gap-3 text-xs">
-                        <span className="text-gray-500">전체 {s.total}</span>
-                        {s.unresolved > 0 && (
-                          <span className="text-red-500 font-semibold">미해결 {s.unresolved}</span>
-                        )}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {hasNaesin && data.wrongAnalysis.naesinWrongByUnit.length > 0 && (
-              <div>
-                <h4 className="text-sm font-semibold mb-3">내신 단원별 오답</h4>
-                <div className="space-y-2">
-                  {data.wrongAnalysis.naesinWrongByUnit.map((u) => (
-                    <div key={u.unitId} className="flex items-center justify-between rounded-lg border px-3 py-2" style={{ borderLeft: '3px solid #06B6D4' }}>
-                      <span className="text-sm font-medium truncate">{u.unitTitle}</span>
-                      <div className="flex gap-3 text-xs shrink-0">
-                        <span className="text-gray-500">전체 {u.total}</span>
-                        {u.unresolved > 0 && (
-                          <span className="text-red-500 font-semibold">미해결 {u.unresolved}</span>
-                        )}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {data.wrongAnalysis.vocaTopWrong.length === 0 && data.wrongAnalysis.naesinWrongByStage.length === 0 && (
-              <div className="rounded-xl border border-dashed p-8 text-center">
-                <PartyPopper className="h-8 w-8 text-violet-400 mb-2" />
-                <p className="text-sm text-gray-500 font-medium">오답 없음! 완벽해요!</p>
-              </div>
-            )}
+          <TabsContent value="wrong" className="mt-4">
+            <WrongAnalysisTab data={data} hasVoca={hasVoca} hasNaesin={hasNaesin} />
           </TabsContent>
 
           {/* ── 학습 기록 ── */}
@@ -338,20 +175,6 @@ export function StudentReportPanel({ studentId, services: servicesProp, token }:
           </TabsContent>
         </Tabs>
       </div>
-    </div>
-  );
-}
-
-function StatCard({ label, value, color, icon }: {
-  label: string; value: string; color: string; icon: React.ReactNode;
-}) {
-  return (
-    <div className="rounded-xl border bg-white p-3.5" style={{ borderLeftWidth: 4, borderLeftColor: color }}>
-      <div className="flex items-center justify-between mb-1.5">
-        <span className="text-xs font-semibold uppercase tracking-wider text-gray-500">{label}</span>
-        <span style={{ color }}>{icon}</span>
-      </div>
-      <p className="text-xl font-bold tracking-tight">{value}</p>
     </div>
   );
 }

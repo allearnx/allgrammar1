@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { FileText } from 'lucide-react';
 import { toast } from 'sonner';
-import { logger } from '@/lib/logger';
+import { fetchWithToast } from '@/lib/fetch-with-toast';
 import { OmrSheet } from './omr-sheet';
 import type { NaesinOmrSheet } from '@/types/database';
 
@@ -110,26 +110,24 @@ function OmrSheetView({ sheet, unitId, onStageComplete }: OmrSheetViewProps) {
     // Save to server
     try {
       const studentAnswers = Array.from({ length: sheet.total_questions }, (_, i) => answers[i] || 0);
-      const res = await fetch('/api/naesin/omr/submit', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
+      const data = await fetchWithToast<{ omrCompleted?: boolean }>('/api/naesin/omr/submit', {
+        body: {
           unitId,
           omrSheetId: sheet.id,
           studentAnswers,
           correctCount,
           totalQuestions: sheet.total_questions,
           scorePercent: percent,
-        }),
+        },
+        errorMessage: '제출 중 오류가 발생했습니다',
+        logContext: 'naesin.omr_tab',
       });
-      const data = await res.json();
       if (data.omrCompleted) {
         toast.success('OMR 시트 단계를 완료했습니다!');
         onStageComplete();
       }
-    } catch (err) {
-      logger.error('naesin.omr_tab', { error: err instanceof Error ? err.message : String(err) });
-      toast.error('제출 중 오류가 발생했습니다');
+    } catch {
+      // error already toasted by fetchWithToast
     } finally {
       setSubmitting(false);
     }

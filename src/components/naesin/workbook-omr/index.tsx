@@ -7,7 +7,7 @@ import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { ArrowLeft, BookOpen, FileText, Clock } from 'lucide-react';
 import { logger } from '@/lib/logger';
-import { toast } from 'sonner';
+import { fetchWithToast } from '@/lib/fetch-with-toast';
 import { WorkbookOmrView } from './workbook-omr-view';
 import type { NaesinWorkbook, NaesinWorkbookOmrSheet, NaesinWorkbookOmrAttempt } from '@/types/naesin';
 
@@ -34,13 +34,14 @@ export function WorkbookOmrClient({ workbooks }: WorkbookOmrClientProps) {
   async function loadSheets(workbookId: string) {
     setLoading(true);
     try {
-      const res = await fetch(`/api/naesin/workbook-omr-sheets?workbookId=${workbookId}`);
-      if (!res.ok) throw new Error();
-      const data = await res.json();
+      const data = await fetchWithToast<NaesinWorkbookOmrSheet[]>(`/api/naesin/workbook-omr-sheets?workbookId=${workbookId}`, {
+        method: 'GET',
+        errorMessage: '시트 목록을 불러오지 못했습니다',
+        logContext: 'workbook_omr',
+      });
       setSheets(data);
-    } catch (err) {
-      logger.error('workbook_omr', { error: err instanceof Error ? err.message : String(err) });
-      toast.error('시트 목록을 불러오지 못했습니다');
+    } catch {
+      // error already toasted by fetchWithToast
     } finally {
       setLoading(false);
     }

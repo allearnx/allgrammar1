@@ -13,11 +13,10 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog';
 import { Plus, Trash2, ChevronDown, ChevronRight } from 'lucide-react';
-import { toast } from 'sonner';
 import type { NaesinUnit } from '@/types/database';
 import { UnitContentManager } from './unit-content-manager';
 import { ConfirmDialog } from '@/components/shared/confirm-dialog';
-import { logger } from '@/lib/logger';
+import { fetchWithToast } from '@/lib/fetch-with-toast';
 
 export const UNIT_OPTIONS = [
   { value: '1', label: 'Lesson 1' },
@@ -42,28 +41,22 @@ export function AddUnitDialog({ textbookId, onAdd }: { textbookId: string; onAdd
     setSaving(true);
     try {
       const selected = UNIT_OPTIONS.find((o) => o.value === unitValue);
-      const res = await fetch('/api/naesin/units', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
+      const data = await fetchWithToast<NaesinUnit>('/api/naesin/units', {
+        body: {
           textbook_id: textbookId,
           unit_number: Number(unitValue),
           title: selected?.label || `Lesson ${unitValue}`,
           sort_order: Number(unitValue),
-        }),
+        },
+        successMessage: '단원이 추가되었습니다',
+        errorMessage: '단원 추가 중 오류가 발생했습니다',
+        logContext: 'admin.unit_section',
       });
-      if (!res.ok) {
-        const err = await res.json().catch(() => null);
-        throw new Error(err?.error || '요청에 실패했습니다');
-      }
-      const data = await res.json();
       onAdd(data);
       setOpen(false);
       setUnitValue('');
-      toast.success('단원이 추가되었습니다');
-    } catch (err) {
-      logger.error('admin.unit_section', { error: err instanceof Error ? err.message : String(err) });
-      toast.error('단원 추가 중 오류가 발생했습니다');
+    } catch {
+      // fetchWithToast already handles toast + logging
     } finally {
       setSaving(false);
     }
@@ -153,19 +146,15 @@ export function UnitCard({
         onConfirm={async () => {
           setDeleteOpen(false);
           try {
-            const res = await fetch('/api/naesin/units', {
+            await fetchWithToast('/api/naesin/units', {
               method: 'DELETE',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({ id: unit.id }),
+              body: { id: unit.id },
+              errorMessage: '단원 삭제에 실패했습니다',
+              logContext: 'admin.unit_section',
             });
-            if (res.ok) {
-              onDelete();
-            } else {
-              toast.error('단원 삭제에 실패했습니다');
-            }
-          } catch (err) {
-            logger.error('admin.unit_section', { error: err instanceof Error ? err.message : String(err) });
-            toast.error('단원 삭제 중 오류가 발생했습니다');
+            onDelete();
+          } catch {
+            // fetchWithToast already handles toast + logging
           }
         }}
       />

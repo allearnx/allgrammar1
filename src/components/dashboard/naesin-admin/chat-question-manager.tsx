@@ -5,13 +5,12 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import { Bot, Trash2, Pencil, GripVertical } from 'lucide-react';
-import { toast } from 'sonner';
 import { ConfirmDialog } from '@/components/shared/confirm-dialog';
 import { useInlineEdit } from '@/hooks/use-inline-edit';
 import { useConfirmDelete } from '@/hooks/use-confirm-delete';
 import { AddChatQuestionDialog } from './content-dialogs';
 import type { NaesinGrammarChatQuestion } from '@/types/database';
-import { logger } from '@/lib/logger';
+import { fetchWithToast } from '@/lib/fetch-with-toast';
 
 interface ChatQuestionManagerProps {
   lessonId: string;
@@ -42,20 +41,16 @@ export function ChatQuestionManager({ lessonId, lessonTitle: _lessonTitle }: Cha
 
   const confirmDelete = useConfirmDelete(async (id) => {
     try {
-      const res = await fetch('/api/naesin/grammar/chat/questions', {
+      await fetchWithToast('/api/naesin/grammar/chat/questions', {
         method: 'DELETE',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ id }),
+        body: { id },
+        successMessage: '질문이 삭제되었습니다',
+        errorMessage: '질문 삭제 중 오류가 발생했습니다',
+        logContext: 'admin.chat_question',
       });
-      if (res.ok) {
-        setQuestions((prev) => prev.filter((q) => q.id !== id));
-        toast.success('질문이 삭제되었습니다');
-      } else {
-        toast.error('삭제 실패');
-      }
-    } catch (err) {
-      logger.error('admin.chat_question', { error: err instanceof Error ? err.message : String(err) });
-      toast.error('질문 삭제 중 오류가 발생했습니다');
+      setQuestions((prev) => prev.filter((q) => q.id !== id));
+    } catch {
+      // fetchWithToast already handles toast + logging
     }
   });
 
@@ -66,14 +61,17 @@ export function ChatQuestionManager({ lessonId, lessonTitle: _lessonTitle }: Cha
 
   async function loadQuestions() {
     try {
-      const res = await fetch(`/api/naesin/grammar/chat/questions?lessonId=${lessonId}`);
-      if (res.ok) {
-        const data = await res.json();
-        setQuestions(data);
-      }
-    } catch (err) {
-      logger.error('admin.chat_question', { error: err instanceof Error ? err.message : String(err) });
-      toast.error('질문 목록을 불러오지 못했습니다');
+      const data = await fetchWithToast<NaesinGrammarChatQuestion[]>(
+        `/api/naesin/grammar/chat/questions?lessonId=${lessonId}`,
+        {
+          method: 'GET',
+          errorMessage: '질문 목록을 불러오지 못했습니다',
+          logContext: 'admin.chat_question',
+        },
+      );
+      setQuestions(data);
+    } catch {
+      // fetchWithToast already handles toast + logging
     } finally {
       setLoading(false);
     }

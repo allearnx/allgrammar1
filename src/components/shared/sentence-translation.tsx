@@ -7,7 +7,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Badge } from '@/components/ui/badge';
 import { Send, AlertTriangle, RotateCcw, ChevronRight, Loader2, ListRestart } from 'lucide-react';
 import type { TranslationExerciseProps, SentenceData, GradingResult, WrongTranslation } from './translation-exercise';
-import { logger } from '@/lib/logger';
+import { fetchWithToast } from '@/lib/fetch-with-toast';
 import { useRetryWrong } from '@/hooks/use-retry-wrong';
 
 export function SentenceBysentenceTranslation({ passage, onComplete, showWrongAlert, sentencesPerPage = 10 }: TranslationExerciseProps) {
@@ -61,19 +61,13 @@ export function SentenceBysentenceTranslation({ passage, onComplete, showWrongAl
         ...(s.acceptedAnswers?.length ? { acceptedAnswers: s.acceptedAnswers } : {}),
       }));
 
-      const res = await fetch('/api/naesin/passage/grade-translation', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ sentences: payload }),
+      const data = await fetchWithToast<{ results: { score: number; feedback: string; correctedSentence: string }[] }>('/api/naesin/passage/grade-translation', {
+        body: { sentences: payload },
+        errorMessage: '채점 실패',
+        logContext: 'shared.sentence_translation',
       });
 
-      if (!res.ok) {
-        const err = await res.json().catch(() => null);
-        throw new Error(err?.error || '채점 실패');
-      }
-
-      const data = await res.json();
-      const apiResults: { score: number; feedback: string; correctedSentence: string }[] = data.results;
+      const apiResults = data.results;
 
       const results: Record<number, GradingResult> = {};
       let pageCorrect = 0;
@@ -122,7 +116,7 @@ export function SentenceBysentenceTranslation({ passage, onComplete, showWrongAl
         }
       }
     } catch (err) {
-      logger.error('shared.sentence_translation', { error: err instanceof Error ? err.message : String(err) });
+      // fetchWithToast already toasts; store the message for inline display
       setGradingError(err instanceof Error ? err.message : '채점 중 오류가 발생했습니다');
     } finally {
       setGrading(false);

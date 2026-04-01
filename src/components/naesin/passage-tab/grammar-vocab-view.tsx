@@ -1,6 +1,5 @@
 'use client';
 
-import { useState, useMemo } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import {
@@ -12,187 +11,19 @@ import {
 } from '@/components/ui/dialog';
 import { CheckCircle, AlertTriangle, Trophy, RotateCcw, Info, ListRestart } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { useRetryWrong } from '@/hooks/use-retry-wrong';
+import { useGrammarVocabQuiz } from '@/hooks/use-grammar-vocab-quiz';
+import type { WrongChoicePoint, SelectionMap } from '@/hooks/use-grammar-vocab-quiz';
 import type { GrammarVocabItem, GrammarVocabChoicePoint } from '@/types/naesin';
 
-export interface WrongChoicePoint {
-  type: 'grammar_vocab';
-  itemIdx: number;
-  cpIdx: number;
-  correctOption: string;
-  selectedOption: string;
-  sentence: string;
-}
+export type { WrongChoicePoint };
 
 interface GrammarVocabViewProps {
   items: GrammarVocabItem[];
   onScoreChange: (score: number, wrongs?: WrongChoicePoint[]) => void;
 }
 
-type SelectionMap = Record<string, number>; // key: `${itemIdx}-${cpIdx}`, value: selected option index
-
-/** choice point 유효성 검증: 범위가 문장 단어 수 안에 있고, 서로 겹치지 않는 것만 반환 */
-function getValidChoicePoints(item: GrammarVocabItem): GrammarVocabChoicePoint[] {
-  const words = item.original.split(/\s+/);
-  const valid: GrammarVocabChoicePoint[] = [];
-
-  const sorted = [...item.choicePoints]
-    .filter((cp) => cp.startWord >= 0 && cp.endWord < words.length && cp.startWord <= cp.endWord)
-    .sort((a, b) => a.startWord - b.startWord);
-
-  let lastEnd = -1;
-  for (const cp of sorted) {
-    if (cp.startWord > lastEnd) {
-      const originalWords = words.slice(cp.startWord, cp.endWord + 1).join(' ');
-      const correctOption = cp.options[cp.correctIndex];
-      if (correctOption === originalWords) {
-        valid.push(cp);
-        lastEnd = cp.endWord;
-      }
-    }
-  }
-  return valid;
-}
-
 export function GrammarVocabView({ items, onScoreChange }: GrammarVocabViewProps) {
-  const [selections, setSelections] = useState<SelectionMap>({});
-  const [submitted, setSubmitted] = useState(false);
-  const [resultModal, setResultModal] = useState<{ score: number; correct: number; total: number } | null>(null);
-
-  // Retry-wrong-only state
-  const [retryMode, setRetryMode] = useState(false);
-  const [lockedCorrectKeys, setLockedCorrectKeys] = useState<Set<string>>(new Set());
-  const [wrongItemIndices, setWrongItemIndices] = useState<Set<number>>(new Set());
-  const { previousCorrectCount, startRetry, reset: resetRetry, getCombinedScore } = useRetryWrong();
-
-  const validCPMap = items.map((item) => getValidChoicePoints(item));
-  const totalChoicePoints = validCPMap.reduce((sum, cps) => sum + cps.length, 0);
-
-  // In retry mode, count wrongs (non-locked, wrong selections)
-  const wrongCount = useMemo(() => {
-    if (!submitted) return 0;
-    let count = 0;
-    items.forEach((_, itemIdx) => {
-      validCPMap[itemIdx].forEach((cp, cpIdx) => {
-        const key = `${itemIdx}-${cpIdx}`;
-        if (!lockedCorrectKeys.has(key) && selections[key] !== cp.correctIndex) {
-          count++;
-        }
-      });
-    });
-    return count;
-  }, [submitted, items, validCPMap, selections, lockedCorrectKeys]);
-
-  function selectOption(itemIdx: number, cpIdx: number, optionIdx: number) {
-    if (submitted) return;
-    const key = `${itemIdx}-${cpIdx}`;
-    if (lockedCorrectKeys.has(key)) return; // locked in retry mode
-    setSelections((prev) => ({ ...prev, [key]: optionIdx }));
-  }
-
-  function handleSubmit() {
-    let correct = 0;
-    const wrongs: WrongChoicePoint[] = [];
-    items.forEach((item, itemIdx) => {
-      validCPMap[itemIdx].forEach((cp, cpIdx) => {
-        const key = `${itemIdx}-${cpIdx}`;
-        if (lockedCorrectKeys.has(key)) {
-          correct++; // locked = already correct
-          return;
-        }
-        if (selections[key] === cp.correctIndex) {
-          correct++;
-        } else {
-          wrongs.push({
-            type: 'grammar_vocab',
-            itemIdx,
-            cpIdx,
-            correctOption: cp.options[cp.correctIndex],
-            selectedOption: cp.options[selections[key] ?? -1] || '',
-            sentence: item.original,
-          });
-        }
-      });
-    });
-
-    // In retry mode, combine previous correct + newly correct (excluding locked)
-    const newlyCorrect = correct - lockedCorrectKeys.size;
-    const totalCorrect = retryMode ? previousCorrectCount + newlyCorrect : correct;
-    const score = retryMode
-      ? getCombinedScore(newlyCorrect, totalChoicePoints)
-      : (totalChoicePoints > 0 ? Math.round((correct / totalChoicePoints) * 100) : 0);
-    setSubmitted(true);
-    setResultModal({ score, correct: totalCorrect, total: totalChoicePoints });
-    onScoreChange(score, wrongs);
-  }
-
-  function handleRetryWrong() {
-    // Collect currently correct keys (including previously locked)
-    const newLockedKeys = new Set(lockedCorrectKeys);
-    let newlyCorrect = 0;
-    const newWrongItems = new Set<number>();
-
-    items.forEach((_, itemIdx) => {
-      let hasWrong = false;
-      validCPMap[itemIdx].forEach((cp, cpIdx) => {
-        const key = `${itemIdx}-${cpIdx}`;
-        if (lockedCorrectKeys.has(key)) return; // already locked
-        if (selections[key] === cp.correctIndex) {
-          newLockedKeys.add(key);
-          newlyCorrect++;
-        } else {
-          hasWrong = true;
-        }
-      });
-      if (hasWrong) newWrongItems.add(itemIdx);
-    });
-
-    // Clear wrong selections, keep correct ones
-    const newSelections: SelectionMap = {};
-    for (const key of newLockedKeys) {
-      const [itemIdxStr, cpIdxStr] = key.split('-');
-      const cp = validCPMap[Number(itemIdxStr)][Number(cpIdxStr)];
-      newSelections[key] = cp.correctIndex;
-    }
-
-    setLockedCorrectKeys(newLockedKeys);
-    startRetry(newlyCorrect);
-    setWrongItemIndices(newWrongItems);
-    setSelections(newSelections);
-    setSubmitted(false);
-    setResultModal(null);
-    setRetryMode(true);
-  }
-
-  function handleRetry() {
-    setSelections({});
-    setSubmitted(false);
-    setResultModal(null);
-    setRetryMode(false);
-    setLockedCorrectKeys(new Set());
-    setWrongItemIndices(new Set());
-    resetRetry();
-  }
-
-  // In retry mode, only count unlocked CPs for "allSelected"
-  const allSelected = useMemo(() => {
-    let needed = 0;
-    let filled = 0;
-    items.forEach((_, itemIdx) => {
-      validCPMap[itemIdx].forEach((_, cpIdx) => {
-        const key = `${itemIdx}-${cpIdx}`;
-        if (lockedCorrectKeys.has(key)) return;
-        needed++;
-        if (selections[key] !== undefined) filled++;
-      });
-    });
-    return needed > 0 && filled === needed;
-  }, [items, validCPMap, selections, lockedCorrectKeys]);
-
-  // Filter items to show in retry mode
-  const visibleItems = retryMode
-    ? items.map((item, idx) => ({ item, idx })).filter(({ idx }) => wrongItemIndices.has(idx))
-    : items.map((item, idx) => ({ item, idx }));
+  const q = useGrammarVocabQuiz({ items, onScoreChange });
 
   return (
     <div className="space-y-3">
@@ -204,7 +35,7 @@ export function GrammarVocabView({ items, onScoreChange }: GrammarVocabViewProps
         </p>
       </div>
 
-      {retryMode && (
+      {q.retryMode && (
         <div className="flex items-center gap-2 text-xs text-orange-700 bg-orange-50 rounded-lg px-3 py-2">
           <ListRestart className="h-3.5 w-3.5 shrink-0" />
           틀린 문제만 다시 풀어보세요 (맞은 선택지는 잠금 처리됨)
@@ -212,38 +43,38 @@ export function GrammarVocabView({ items, onScoreChange }: GrammarVocabViewProps
       )}
 
       {/* Sentence cards */}
-      {visibleItems.map(({ item, idx: itemIdx }) => (
+      {q.visibleItems.map(({ item, idx: itemIdx }) => (
         <SentenceCard
           key={itemIdx}
           item={item}
           itemIdx={itemIdx}
-          validChoicePoints={validCPMap[itemIdx]}
-          selections={selections}
-          submitted={submitted}
-          lockedKeys={lockedCorrectKeys}
-          onSelect={selectOption}
+          validChoicePoints={q.validCPMap[itemIdx]}
+          selections={q.selections}
+          submitted={q.submitted}
+          lockedKeys={q.lockedCorrectKeys}
+          onSelect={q.selectOption}
         />
       ))}
 
       {/* Submit / Retry */}
       <div className="flex gap-2">
-        {!submitted ? (
+        {!q.submitted ? (
           <Button
             className="w-full"
-            onClick={handleSubmit}
-            disabled={!allSelected}
+            onClick={q.handleSubmit}
+            disabled={!q.allSelected}
           >
             제출하기
           </Button>
         ) : (
           <>
-            {wrongCount > 0 && (
-              <Button className="flex-1" onClick={handleRetryWrong}>
+            {q.wrongCount > 0 && (
+              <Button className="flex-1" onClick={q.handleRetryWrong}>
                 <ListRestart className="h-4 w-4 mr-1" />
                 오답만 다시 풀기
               </Button>
             )}
-            <Button className="flex-1" variant="outline" onClick={handleRetry}>
+            <Button className="flex-1" variant="outline" onClick={q.handleRetry}>
               <RotateCcw className="h-4 w-4 mr-1" />
               전체 다시 풀기
             </Button>
@@ -252,13 +83,13 @@ export function GrammarVocabView({ items, onScoreChange }: GrammarVocabViewProps
       </div>
 
       {/* Result Dialog */}
-      {resultModal && (
+      {q.resultModal && (
         <ResultDialog
-          result={resultModal}
-          wrongCount={wrongCount}
-          onClose={() => setResultModal(null)}
-          onRetry={handleRetry}
-          onRetryWrong={handleRetryWrong}
+          result={q.resultModal}
+          wrongCount={q.wrongCount}
+          onClose={() => q.setResultModal(null)}
+          onRetry={q.handleRetry}
+          onRetryWrong={q.handleRetryWrong}
         />
       )}
     </div>
@@ -346,7 +177,6 @@ function ChoicePointInline({
   locked: boolean;
   onSelect: (optIdx: number) => void;
 }) {
-  // Locked: show only the correct answer in green, no interaction
   if (locked) {
     return (
       <span className="inline-flex items-center gap-1 mx-1">

@@ -13,8 +13,7 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog';
 import { Bot } from 'lucide-react';
-import { toast } from 'sonner';
-import { logger } from '@/lib/logger';
+import { fetchWithToast } from '@/lib/fetch-with-toast';
 
 export function AddChatQuestionDialog({ lessonId, onAdd }: { lessonId: string; onAdd: () => void }) {
   const [open, setOpen] = useState(false);
@@ -29,32 +28,25 @@ export function AddChatQuestionDialog({ lessonId, onAdd }: { lessonId: string; o
     setSaving(true);
     try {
       const expectedKeywords = keywords.split(',').map((k) => k.trim()).filter(Boolean);
-      const res = await fetch('/api/naesin/grammar/chat/questions', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
+      await fetchWithToast('/api/naesin/grammar/chat/questions', {
+        body: {
           lessonId,
           questionText,
           grammarConcept: grammarConcept || null,
           hint: hint || null,
           expectedAnswerKeywords: expectedKeywords.length > 0 ? expectedKeywords : null,
-        }),
+        },
+        successMessage: 'AI 질문이 추가되었습니다',
+        errorMessage: 'AI 질문 추가 실패',
+        logContext: 'admin.add_chat_question',
       });
-      if (!res.ok) {
-        const err = await res.json().catch(() => null);
-        throw new Error(err?.error || '요청에 실패했습니다');
-      }
       onAdd();
       setOpen(false);
       setQuestionText('');
       setGrammarConcept('');
       setHint('');
       setKeywords('');
-      toast.success('AI 질문이 추가되었습니다');
-    } catch (err) {
-      logger.error('admin.add_chat_question', { error: err instanceof Error ? err.message : String(err) });
-      toast.error('AI 질문 추가 실패');
-    } finally {
+    } catch { /* fetchWithToast handles toasts/logging */ } finally {
       setSaving(false);
     }
   }

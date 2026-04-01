@@ -8,7 +8,7 @@ import { Trash2, ChevronDown, ChevronRight, Loader2 } from 'lucide-react';
 import { toast } from 'sonner';
 import type { NaesinVocabulary, NaesinVocabQuizSet } from '@/types/database';
 import { ConfirmDialog } from '@/components/shared/confirm-dialog';
-import { logger } from '@/lib/logger';
+import { fetchWithToast } from '@/lib/fetch-with-toast';
 
 export function CreateQuizSetFromSelection({
   unitId,
@@ -31,24 +31,19 @@ export function CreateQuizSetFromSelection({
     }
     setSaving(true);
     try {
-      const res = await fetch('/api/naesin/vocab-quiz-sets', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
+      await fetchWithToast('/api/naesin/vocab-quiz-sets', {
+        body: {
           unitId,
           title: title.trim(),
           vocabIds: Array.from(selectedIds),
-        }),
+        },
+        errorMessage: '시험지 생성 실패',
+        logContext: 'admin.quiz_set',
       });
-      if (!res.ok) {
-        const err = await res.json().catch(() => null);
-        throw new Error(err?.error || '요청에 실패했습니다');
-      }
       setTitle('');
       onCreated();
-    } catch (err) {
-      logger.error('admin.quiz_set', { error: err instanceof Error ? err.message : String(err) });
-      toast.error('시험지 생성 실패');
+    } catch {
+      // fetchWithToast already handles toast + logging
     } finally {
       setSaving(false);
     }
@@ -91,12 +86,15 @@ export function VocabQuizSetManager({ unitId }: { unitId: string }) {
 
   async function loadSets() {
     try {
-      const res = await fetch(`/api/naesin/vocab-quiz-sets?unitId=${unitId}`);
-      const data = await res.json();
+      const data = await fetchWithToast<NaesinVocabQuizSet[]>(`/api/naesin/vocab-quiz-sets?unitId=${unitId}`, {
+        method: 'GET',
+        silent: true,
+        logContext: 'admin.quiz_set',
+      });
       setSets(Array.isArray(data) ? data : []);
-    } catch (err) {
-      logger.error('admin.quiz_set', { error: err instanceof Error ? err.message : String(err) });
-      }
+    } catch {
+      // fetchWithToast already handles logging
+    }
   }
 
   useEffect(() => {
@@ -107,20 +105,16 @@ export function VocabQuizSetManager({ unitId }: { unitId: string }) {
 
   async function handleDelete(id: string) {
     try {
-      const res = await fetch('/api/naesin/vocab-quiz-sets', {
+      await fetchWithToast('/api/naesin/vocab-quiz-sets', {
         method: 'DELETE',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ id }),
+        body: { id },
+        successMessage: '시험지가 삭제되었습니다',
+        errorMessage: '시험지 삭제에 실패했습니다',
+        logContext: 'admin.quiz_set',
       });
-      if (res.ok) {
-        setSets((prev) => prev.filter((s) => s.id !== id));
-        toast.success('시험지가 삭제되었습니다');
-      } else {
-        toast.error('시험지 삭제에 실패했습니다');
-      }
-    } catch (err) {
-      logger.error('admin.quiz_set', { error: err instanceof Error ? err.message : String(err) });
-      toast.error('시험지 삭제 중 오류가 발생했습니다');
+      setSets((prev) => prev.filter((s) => s.id !== id));
+    } catch {
+      // fetchWithToast already handles toast + logging
     }
   }
 

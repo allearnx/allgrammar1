@@ -4,9 +4,8 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { toast } from 'sonner';
 import { BookOpen, MessageCircle } from 'lucide-react';
-import { logger } from '@/lib/logger';
+import { fetchWithToast } from '@/lib/fetch-with-toast';
 
 interface Textbook {
   id: string;
@@ -56,20 +55,15 @@ export function TextbookAssigner({ studentId, textbooks, currentTextbookName }: 
     if (!selectedId) return;
     setSaving(true);
     try {
-      const res = await fetch('/api/naesin/settings', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ textbookId: selectedId, studentId }),
+      await fetchWithToast('/api/naesin/settings', {
+        body: { textbookId: selectedId, studentId },
+        successMessage: '교과서가 배정되었습니다',
+        errorMessage: '교과서 배정 중 오류가 발생했습니다',
+        logContext: 'textbook_assigner',
       });
-      if (!res.ok) {
-        const err = await res.json().catch(() => null);
-        throw new Error(err?.error || '요청에 실패했습니다');
-      }
-      toast.success('교과서가 배정되었습니다');
       router.refresh();
-    } catch (err) {
-      logger.error('textbook_assigner', { error: err instanceof Error ? err.message : String(err) });
-      toast.error('교과서 배정 중 오류가 발생했습니다');
+    } catch {
+      // fetchWithToast already showed toast and logged
     } finally {
       setSaving(false);
     }

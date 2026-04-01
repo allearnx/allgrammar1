@@ -9,7 +9,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, Dialog
 import { Plus } from 'lucide-react';
 import { toast } from 'sonner';
 import type { NaesinWorkbook } from '@/types/naesin';
-import { logger } from '@/lib/logger';
+import { fetchWithToast } from '@/lib/fetch-with-toast';
 
 export function AddWorkbookDialog({ onAdd }: { onAdd: (wb: NaesinWorkbook) => void }) {
   const [open, setOpen] = useState(false);
@@ -22,22 +22,19 @@ export function AddWorkbookDialog({ onAdd }: { onAdd: (wb: NaesinWorkbook) => vo
     if (!title.trim()) { toast.error('교재명을 입력해주세요'); return; }
     setSaving(true);
     try {
-      const res = await fetch('/api/naesin/workbooks', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ title: title.trim(), publisher: publisher.trim(), grade: Number(grade) }),
+      const data = await fetchWithToast<NaesinWorkbook>('/api/naesin/workbooks', {
+        body: { title: title.trim(), publisher: publisher.trim(), grade: Number(grade) },
+        successMessage: '교재가 추가되었습니다',
+        errorMessage: '교재 추가에 실패했습니다',
+        logContext: 'admin.add_workbook',
       });
-      if (!res.ok) throw new Error();
-      const data = await res.json();
       onAdd(data);
       setOpen(false);
       setTitle('');
       setPublisher('');
       setGrade('1');
-      toast.success('교재가 추가되었습니다');
-    } catch (err) {
-      logger.error('admin.add_workbook', { error: err instanceof Error ? err.message : String(err) });
-      toast.error('교재 추가에 실패했습니다');
+    } catch {
+      // fetchWithToast already handles toast + logging
     } finally {
       setSaving(false);
     }

@@ -9,12 +9,12 @@ import { Textarea } from '@/components/ui/textarea';
 import { BookOpen, Trash2, Pencil, Wand2, Loader2 } from 'lucide-react';
 import { toast } from 'sonner';
 import { ConfirmDialog } from '@/components/shared/confirm-dialog';
+import { fetchWithToast } from '@/lib/fetch-with-toast';
 import { useListCrud } from '@/hooks/use-list-crud';
 import { useInlineEdit } from '@/hooks/use-inline-edit';
 import { useConfirmDelete } from '@/hooks/use-confirm-delete';
 import { AddVocabDialog, BulkVocabUpload, PdfVocabExtract } from '@/components/shared/vocab-dialogs';
 import type { VocaVocabulary } from '@/types/voca';
-import { logger } from '@/lib/logger';
 
 export function DayContentManager({ dayId }: { dayId: string }) {
   const [loading, setLoading] = useState(true);
@@ -67,12 +67,14 @@ export function DayContentManager({ dayId }: { dayId: string }) {
   const loadVocab = useCallback(async () => {
     setLoading(true);
     try {
-      const res = await fetch(`/api/voca/vocabulary?dayId=${dayId}`);
-      const data = await res.json();
+      const data = await fetchWithToast<VocaVocabulary[]>(`/api/voca/vocabulary?dayId=${dayId}`, {
+        method: 'GET',
+        silent: true,
+        logContext: 'voca_admin.day_content',
+      });
       vocab.setItems(data || []);
       vocab.setSelectedIds(new Set());
-    } catch (err) {
-      logger.error('voca_admin.day_content', { error: err instanceof Error ? err.message : String(err) });
+    } catch {
       toast.error('단어 목록을 불러오지 못했습니다');
     } finally {
       setLoading(false);
@@ -87,10 +89,8 @@ export function DayContentManager({ dayId }: { dayId: string }) {
 
     setEnriching(true);
     try {
-      const res = await fetch('/api/voca/vocabulary/enrich-round2', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
+      const data = await fetchWithToast<{ updated: number }>('/api/voca/vocabulary/enrich-round2', {
+        body: {
           items: targetItems.map((v) => ({
             id: v.id,
             front_text: v.front_text,
@@ -99,14 +99,15 @@ export function DayContentManager({ dayId }: { dayId: string }) {
             example_sentence: v.example_sentence,
             spelling_answer: v.spelling_answer,
           })),
-        }),
+        },
+        successMessage: undefined,
+        errorMessage: '2회독 데이터 생성 중 오류가 발생했습니다',
+        logContext: 'voca_admin.day_content',
       });
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.error);
       toast.success(`${data.updated}개 단어에 2회독 데이터가 생성되었습니다`);
       loadVocab();
-    } catch (err) {
-      toast.error(err instanceof Error ? err.message : '2회독 데이터 생성 중 오류가 발생했습니다');
+    } catch {
+      // fetchWithToast already shows toast
     } finally {
       setEnriching(false);
     }

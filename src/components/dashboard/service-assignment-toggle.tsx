@@ -2,9 +2,8 @@
 
 import { useState } from 'react';
 import { cn } from '@/lib/utils';
-import { toast } from 'sonner';
 import { Check, X } from 'lucide-react';
-import { logger } from '@/lib/logger';
+import { fetchWithToast } from '@/lib/fetch-with-toast';
 
 interface ServiceAssignmentToggleProps {
   studentId: string;
@@ -44,20 +43,22 @@ export function ServiceAssignmentToggle({
     setLoading(service);
 
     try {
-      const res = await fetch('/api/service-assignments', {
-        method: isAssigned ? 'DELETE' : 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ studentId, service }),
-      });
+      const label = SERVICES.find((s) => s.key === service)?.label || service;
 
-      if (!res.ok) throw new Error();
+      await fetchWithToast('/api/service-assignments', {
+        method: isAssigned ? 'DELETE' : 'POST',
+        body: { studentId, service },
+        successMessage: isAssigned ? `${label} 해제됨` : `${label} 배정됨`,
+        errorMessage: '서비스 배정 변경에 실패했습니다',
+        logContext: 'admin.service_assignment',
+      });
 
       // 보카 OFF → 교재 배정도 해제
       if (isAssigned && service === 'voca' && bookId) {
-        await fetch('/api/voca/book-assignments', {
+        await fetchWithToast('/api/voca/book-assignments', {
           method: 'DELETE',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ studentId }),
+          body: { studentId },
+          silent: true,
         });
         setBookId(null);
       }
@@ -69,12 +70,9 @@ export function ServiceAssignmentToggle({
         return next;
       });
 
-      const label = SERVICES.find((s) => s.key === service)?.label || service;
-      toast.success(isAssigned ? `${label} 해제됨` : `${label} 배정됨`);
       onUpdate?.();
-    } catch (err) {
-      logger.error('admin.service_assignment', { error: err instanceof Error ? err.message : String(err) });
-      toast.error('서비스 배정 변경에 실패했습니다');
+    } catch {
+      // fetchWithToast already showed toast and logged
     } finally {
       setLoading(null);
     }
@@ -84,19 +82,17 @@ export function ServiceAssignmentToggle({
     if (!newBookId) return;
     setBookLoading(true);
     try {
-      const res = await fetch('/api/voca/book-assignments', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ studentId, bookId: newBookId }),
-      });
-      if (!res.ok) throw new Error();
-      setBookId(newBookId);
       const bookTitle = vocaBooks?.find((b) => b.id === newBookId)?.title || '교재';
-      toast.success(`${bookTitle} 배정됨`);
+      await fetchWithToast('/api/voca/book-assignments', {
+        body: { studentId, bookId: newBookId },
+        successMessage: `${bookTitle} 배정됨`,
+        errorMessage: '교재 배정에 실패했습니다',
+        logContext: 'admin.service_assignment',
+      });
+      setBookId(newBookId);
       onUpdate?.();
-    } catch (err) {
-      logger.error('admin.service_assignment', { error: err instanceof Error ? err.message : String(err) });
-      toast.error('교재 배정에 실패했습니다');
+    } catch {
+      // fetchWithToast already showed toast and logged
     } finally {
       setBookLoading(false);
     }
@@ -105,17 +101,16 @@ export function ServiceAssignmentToggle({
   async function toggleRound2() {
     setRound2Loading(true);
     try {
-      const res = await fetch('/api/service-assignments', {
+      await fetchWithToast('/api/service-assignments', {
         method: 'PATCH',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ studentId, round2Unlocked: !round2 }),
+        body: { studentId, round2Unlocked: !round2 },
+        successMessage: round2 ? '2회독 잠금' : '2회독 해제',
+        errorMessage: '2회독 변경에 실패했습니다',
       });
-      if (!res.ok) throw new Error();
       setRound2(!round2);
-      toast.success(round2 ? '2회독 잠금' : '2회독 해제');
       onUpdate?.();
     } catch {
-      toast.error('2회독 변경에 실패했습니다');
+      // fetchWithToast already showed toast
     } finally {
       setRound2Loading(false);
     }

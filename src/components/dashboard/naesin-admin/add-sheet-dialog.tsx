@@ -8,7 +8,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, Dialog
 import { Plus } from 'lucide-react';
 import { toast } from 'sonner';
 import type { NaesinWorkbookOmrSheet } from '@/types/naesin';
-import { logger } from '@/lib/logger';
+import { fetchWithToast } from '@/lib/fetch-with-toast';
 
 export function AddSheetDialog({ workbookId, onAdd }: { workbookId: string; onAdd: (sheet: NaesinWorkbookOmrSheet) => void }) {
   const [open, setOpen] = useState(false);
@@ -35,27 +35,24 @@ export function AddSheetDialog({ workbookId, onAdd }: { workbookId: string; onAd
 
     setSaving(true);
     try {
-      const res = await fetch('/api/naesin/workbook-omr-sheets', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
+      const data = await fetchWithToast<NaesinWorkbookOmrSheet>('/api/naesin/workbook-omr-sheets', {
+        body: {
           workbook_id: workbookId,
           title: title.trim(),
           total_questions: total,
           answer_key: answerKey,
-        }),
+        },
+        successMessage: 'OMR 시트가 추가되었습니다',
+        errorMessage: '시트 추가에 실패했습니다',
+        logContext: 'admin.add_sheet',
       });
-      if (!res.ok) throw new Error();
-      const data = await res.json();
       onAdd(data);
       setOpen(false);
       setTitle('');
       setTotalQuestions('');
       setAnswerKeyStr('');
-      toast.success('OMR 시트가 추가되었습니다');
-    } catch (err) {
-      logger.error('admin.add_sheet', { error: err instanceof Error ? err.message : String(err) });
-      toast.error('시트 추가에 실패했습니다');
+    } catch {
+      // fetchWithToast already handles toast + logging
     } finally {
       setSaving(false);
     }

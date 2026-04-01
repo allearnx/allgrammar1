@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { logger } from '@/lib/logger';
+import { fetchWithToast } from '@/lib/fetch-with-toast';
 import {
   Dialog,
   DialogContent,
@@ -13,7 +13,6 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog';
 import { Calendar } from 'lucide-react';
-import { toast } from 'sonner';
 
 interface ExamDatePickerProps {
   textbookId: string;
@@ -30,21 +29,16 @@ export function ExamDatePicker({ textbookId, currentDate, onDateChange }: ExamDa
     if (!date) return;
     setSaving(true);
     try {
-      const res = await fetch('/api/naesin/exam-date', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ textbookId, examDate: date }),
+      await fetchWithToast('/api/naesin/exam-date', {
+        body: { textbookId, examDate: date },
+        successMessage: '시험일이 설정되었습니다',
+        errorMessage: '시험일 설정 중 오류가 발생했습니다',
+        logContext: 'naesin.exam_date_picker',
       });
-      if (!res.ok) {
-        const err = await res.json().catch(() => null);
-        throw new Error(err?.error || '요청에 실패했습니다');
-      }
-      toast.success('시험일이 설정되었습니다');
       onDateChange(date);
       setOpen(false);
-    } catch (err) {
-      logger.error('naesin.exam_date_picker', { error: err instanceof Error ? err.message : String(err) });
-      toast.error('시험일 설정 중 오류가 발생했습니다');
+    } catch {
+      // error already toasted by fetchWithToast
     } finally {
       setSaving(false);
     }

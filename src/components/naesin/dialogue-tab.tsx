@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { MessageSquare, Lock } from 'lucide-react';
 import { toast } from 'sonner';
-import { logger } from '@/lib/logger';
+import { fetchWithToast } from '@/lib/fetch-with-toast';
 import { cn } from '@/lib/utils';
 import { TranslationExercise } from '@/components/shared/translation-exercise';
 import type { NaesinDialogue } from '@/types/naesin';
@@ -60,12 +60,11 @@ export function DialogueTab({ dialogues, unitId, onStageComplete, naesinRequired
 
   async function saveDialogueProgress(score: number) {
     try {
-      const res = await fetch('/api/naesin/dialogue/progress', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ unitId, score, round: String(currentRound) }),
+      const data = await fetchWithToast<{ dialogueCompleted?: boolean }>('/api/naesin/dialogue/progress', {
+        body: { unitId, score, round: String(currentRound) },
+        errorMessage: '진도 저장 중 오류가 발생했습니다',
+        logContext: 'naesin.dialogue_tab',
       });
-      const data = await res.json();
       if (data.dialogueCompleted) {
         if (hasRound2 && currentRound === 1) {
           toast.success('1회독 완료! 2회독을 시작하세요');
@@ -74,9 +73,8 @@ export function DialogueTab({ dialogues, unitId, onStageComplete, naesinRequired
         }
         onStageComplete();
       }
-    } catch (err) {
-      logger.error('naesin.dialogue_tab', { error: err instanceof Error ? err.message : String(err) });
-      toast.error('진도 저장 중 오류가 발생했습니다');
+    } catch {
+      // error already toasted by fetchWithToast
     }
   }
 

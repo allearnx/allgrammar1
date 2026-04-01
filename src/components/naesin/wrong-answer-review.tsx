@@ -5,8 +5,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { CheckCircle, AlertTriangle } from 'lucide-react';
-import { toast } from 'sonner';
-import { logger } from '@/lib/logger';
+import { fetchWithToast } from '@/lib/fetch-with-toast';
 import type { NaesinWrongAnswer } from '@/types/database';
 
 interface WrongAnswerReviewProps {
@@ -31,12 +30,15 @@ export function WrongAnswerReview({ unitId }: WrongAnswerReviewProps) {
     try {
       const params = new URLSearchParams({ unitId });
       if (filter === 'unresolved') params.set('resolved', 'false');
-      const res = await fetch(`/api/naesin/wrong-answers?${params}`);
-      const data = await res.json();
+      const data = await fetchWithToast<NaesinWrongAnswer[]>(`/api/naesin/wrong-answers?${params}`, {
+        method: 'GET',
+        silent: true,
+        logContext: 'wrong_answer_review',
+      });
       setWrongAnswers(Array.isArray(data) ? data : []);
-    } catch (err) {
-      logger.error('wrong_answer_review', { error: err instanceof Error ? err.message : String(err) });
-      } finally {
+    } catch {
+      // silently handled
+    } finally {
       setLoading(false);
     }
   }, [unitId, filter]);
@@ -47,16 +49,16 @@ export function WrongAnswerReview({ unitId }: WrongAnswerReviewProps) {
 
   async function markResolved(id: string) {
     try {
-      await fetch('/api/naesin/wrong-answers', {
+      await fetchWithToast('/api/naesin/wrong-answers', {
         method: 'PATCH',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ id, resolved: true }),
+        body: { id, resolved: true },
+        successMessage: '해결됨으로 표시되었습니다',
+        errorMessage: '업데이트 실패',
+        logContext: 'wrong_answer_review',
       });
       setWrongAnswers((prev) => prev.filter((wa) => wa.id !== id));
-      toast.success('해결됨으로 표시되었습니다');
-    } catch (err) {
-      logger.error('wrong_answer_review', { error: err instanceof Error ? err.message : String(err) });
-      toast.error('업데이트 실패');
+    } catch {
+      // error already toasted by fetchWithToast
     }
   }
 

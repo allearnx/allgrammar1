@@ -14,7 +14,8 @@ import {
 } from '@/components/ui/dialog';
 import { MessageSquare, X, Upload, Loader2 } from 'lucide-react';
 import { toast } from 'sonner';
-import { logger } from '@/lib/logger';
+import { useFormDialog } from '@/hooks/use-form-dialog';
+import { fetchWithToast } from '@/lib/fetch-with-toast';
 
 interface Sentence {
   original: string;
@@ -23,10 +24,14 @@ interface Sentence {
 }
 
 export function AddDialogueDialog({ unitId, onAdd }: { unitId: string; onAdd: () => void }) {
-  const [open, setOpen] = useState(false);
+  const { open, setOpen, saving, handleSubmit } = useFormDialog({
+    onSuccess: onAdd,
+    logContext: 'admin.add_dialogue',
+    successMessage: '대화문이 추가되었습니다',
+    errorMessage: '대화문 추가 실패',
+  });
   const [title, setTitle] = useState('');
   const [sentences, setSentences] = useState<Sentence[]>([{ original: '', korean: '', speaker: '' }]);
-  const [saving, setSaving] = useState(false);
   const [extractingText, setExtractingText] = useState(false);
 
   function updateSentence(idx: number, field: keyof Sentence, value: string) {
@@ -49,70 +54,41 @@ export function AddDialogueDialog({ unitId, onAdd }: { unitId: string; onAdd: ()
     try {
       const formData = new FormData();
       formData.append('file', file);
-      const res = await fetch('/api/naesin/dialogues/extract-text', {
-        method: 'POST',
-        body: formData,
-      });
-      if (!res.ok) {
-        const err = await res.json().catch(() => null);
-        throw new Error(err?.error || '추출 실패');
-      }
-      const data = await res.json();
+      const data = await fetchWithToast<{ title?: string; sentences?: { original: string; korean: string; speaker?: string }[] }>(
+        '/api/naesin/dialogues/extract-text',
+        { body: formData, successMessage: '대화문이 추출되었습니다. 문장별로 확인/수정해주세요.', errorMessage: 'PDF 추출 실패' },
+      );
       if (data.title) setTitle(data.title);
       if (data.sentences && data.sentences.length > 0) {
-        setSentences(data.sentences.map((s: { original: string; korean: string; speaker?: string }) => ({
+        setSentences(data.sentences.map((s) => ({
           original: s.original?.trim() || '',
           korean: s.korean?.trim() || '',
           speaker: s.speaker?.trim() || '',
         })));
       }
-      toast.success('대화문이 추출되었습니다. 문장별로 확인/수정해주세요.');
-    } catch (err) {
-      toast.error(err instanceof Error ? err.message : 'PDF 추출 실패');
-    } finally {
+    } catch { /* fetchWithToast handles toasts */ } finally {
       setExtractingText(false);
     }
   }
 
-  async function handleSubmit(e: React.FormEvent) {
+  async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
     const validSentences = sentences.filter((s) => s.original.trim() || s.korean.trim());
     if (validSentences.length === 0) {
       toast.error('최소 1개 문장을 입력해주세요.');
       return;
     }
-    setSaving(true);
-    try {
+    await handleSubmit(async () => {
       const builtSentences = validSentences.map((s) => ({
         original: s.original.trim(),
         korean: s.korean.trim(),
         ...(s.speaker.trim() ? { speaker: s.speaker.trim() } : {}),
       }));
-
-      const res = await fetch('/api/naesin/dialogues', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          unit_id: unitId,
-          title: title || '대화문',
-          sentences: builtSentences,
-        }),
+      await fetchWithToast('/api/naesin/dialogues', {
+        body: { unit_id: unitId, title: title || '대화문', sentences: builtSentences },
+        silent: true,
       });
-      if (!res.ok) {
-        const err = await res.json().catch(() => null);
-        throw new Error(err?.error || '요청에 실패했습니다');
-      }
-      toast.success('대화문이 추가되었습니다');
-      onAdd();
-      setOpen(false);
-      setTitle('');
-      setSentences([{ original: '', korean: '', speaker: '' }]);
-    } catch (err) {
-      logger.error('admin.add_dialogue', { error: err instanceof Error ? err.message : String(err) });
-      toast.error('대화문 추가 실패');
-    } finally {
-      setSaving(false);
-    }
+    }, () => { setTitle(''); setSentences([{ original: '', korean: '', speaker: '' }]); });
   }
 
   return (
@@ -125,7 +101,7 @@ export function AddDialogueDialog({ unitId, onAdd }: { unitId: string; onAdd: ()
       </DialogTrigger>
       <DialogContent className="max-w-lg max-h-[85vh] overflow-y-auto">
         <DialogHeader><DialogTitle>대화문 추가</DialogTitle></DialogHeader>
-        <form onSubmit={handleSubmit} className="space-y-3">
+        <form onSubmit={onSubmit} className="space-y-3">
           <div className="rounded-md border border-dashed p-3 text-center">
             <input type="file" accept=".pdf" className="hidden" id="pdf-dialogue-extract" onChange={handleTextPdfUpload} disabled={extractingText} />
             <Button

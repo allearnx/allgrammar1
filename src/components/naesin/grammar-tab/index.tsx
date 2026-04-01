@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
-import { logger } from '@/lib/logger';
+import { fetchWithToast } from '@/lib/fetch-with-toast';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import {
@@ -60,20 +60,18 @@ export function GrammarTab({ lessons, unitId, onStageComplete, videoProgress }: 
     if (completedIds.has(lessonId)) return;
 
     try {
-      const res = await fetch('/api/naesin/grammar/progress', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ unitId, type: 'text' }),
+      const data = await fetchWithToast<{ grammarCompleted?: boolean }>('/api/naesin/grammar/progress', {
+        body: { unitId, type: 'text' },
+        errorMessage: '진도 저장 중 오류가 발생했습니다',
+        logContext: 'naesin.grammar_tab',
       });
-      const data = await res.json();
       setCompletedIds((prev) => new Set(prev).add(lessonId));
       if (data.grammarCompleted) {
         toast.success('문법 설명 단계를 완료했습니다!');
         onStageComplete();
       }
-    } catch (err) {
-      logger.error('naesin.grammar_tab', { error: err instanceof Error ? err.message : String(err) });
-      toast.error('진도 저장 중 오류가 발생했습니다');
+    } catch {
+      // error already toasted by fetchWithToast
     }
   }
 

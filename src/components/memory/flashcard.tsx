@@ -5,6 +5,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { ChevronLeft, ChevronRight, RotateCcw } from 'lucide-react';
 import { toast } from 'sonner';
+import { fetchWithToast } from '@/lib/fetch-with-toast';
 import type { MemoryItem, StudentMemoryProgress } from '@/types/database';
 
 interface FlashcardViewProps {
@@ -18,15 +19,12 @@ export function FlashcardView({ items }: FlashcardViewProps) {
   const item = items[currentIndex];
 
   const markSeen = useCallback(async (memoryItemId: string) => {
-    await fetch('/api/memory/progress', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        memoryItemId,
-        testType: 'flashcard',
-        isCorrect: true,
-      }),
-    });
+    try {
+      await fetchWithToast('/api/memory/progress', {
+        body: { memoryItemId, testType: 'flashcard', isCorrect: true },
+        silent: true,
+      });
+    } catch { /* swallow */ }
   }, []);
 
   function handleFlip() {

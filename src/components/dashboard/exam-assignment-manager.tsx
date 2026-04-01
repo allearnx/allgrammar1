@@ -10,7 +10,7 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { Plus, Trash2, Save, Loader2 } from 'lucide-react';
 import { toast } from 'sonner';
 import type { NaesinExamAssignment, NaesinUnit } from '@/types/database';
-import { logger } from '@/lib/logger';
+import { fetchWithToast } from '@/lib/fetch-with-toast';
 
 interface ExamAssignmentManagerProps {
   studentId: string;
@@ -74,25 +74,23 @@ export function ExamAssignmentManager({
     }
     setSavingRound(local.examRound);
     try {
-      const res = await fetch('/api/naesin/exam-assignments', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
+      await fetchWithToast('/api/naesin/exam-assignments', {
+        body: {
           studentId,
           textbookId,
           examRound: local.examRound,
           examLabel: local.examLabel || null,
           examDate: local.examDate || null,
           unitIds: local.unitIds,
-        }),
+        },
+        successMessage: `${local.examLabel || local.examRound + '차 시험'} 저장 완료`,
+        errorMessage: '시험 배정 저장 중 오류가 발생했습니다',
+        logContext: 'admin.exam_assignment',
       });
-      if (!res.ok) throw new Error('저장 실패');
-      toast.success(`${local.examLabel || local.examRound + '차 시험'} 저장 완료`);
       setLocals((prev) => prev.map((l, i) => (i === idx ? { ...l, dirty: false } : l)));
       router.refresh();
-    } catch (err) {
-      logger.error('admin.exam_assignment', { error: err instanceof Error ? err.message : String(err) });
-      toast.error('시험 배정 저장 중 오류가 발생했습니다');
+    } catch {
+      // fetchWithToast already showed toast and logged
     } finally {
       setSavingRound(null);
     }
@@ -102,22 +100,21 @@ export function ExamAssignmentManager({
     const local = locals[idx];
     setDeletingRound(local.examRound);
     try {
-      const res = await fetch('/api/naesin/exam-assignments', {
+      await fetchWithToast('/api/naesin/exam-assignments', {
         method: 'DELETE',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
+        body: {
           studentId,
           textbookId,
           examRound: local.examRound,
-        }),
+        },
+        successMessage: `${local.examLabel || local.examRound + '차 시험'} 삭제 완료`,
+        errorMessage: '시험 배정 삭제 중 오류가 발생했습니다',
+        logContext: 'admin.exam_assignment',
       });
-      if (!res.ok) throw new Error('삭제 실패');
-      toast.success(`${local.examLabel || local.examRound + '차 시험'} 삭제 완료`);
       setLocals((prev) => prev.filter((_, i) => i !== idx));
       router.refresh();
-    } catch (err) {
-      logger.error('admin.exam_assignment', { error: err instanceof Error ? err.message : String(err) });
-      toast.error('시험 배정 삭제 중 오류가 발생했습니다');
+    } catch {
+      // fetchWithToast already showed toast and logged
     } finally {
       setDeletingRound(null);
     }

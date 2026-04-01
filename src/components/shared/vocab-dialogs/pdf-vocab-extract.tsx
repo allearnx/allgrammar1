@@ -14,7 +14,7 @@ import {
 } from '@/components/ui/dialog';
 import { FileText, Loader2, Check, X as XIcon } from 'lucide-react';
 import { toast } from 'sonner';
-import { logger } from '@/lib/logger';
+import { fetchWithToast } from '@/lib/fetch-with-toast';
 import type { VocabDialogProps } from './types';
 import { getVocabConfig } from './types';
 
@@ -53,26 +53,24 @@ export function PdfVocabExtract({ module, parentId, onAdd }: VocabDialogProps) {
       const formData = new FormData();
       formData.append('file', file);
 
-      const res = await fetch(`${cfg.apiBase}/extract-pdf`, {
-        method: 'POST',
-        body: formData,
-      });
+      const data = await fetchWithToast<{ items: Omit<ExtractedWord, 'selected'>[] }>(
+        `${cfg.apiBase}/extract-pdf`,
+        {
+          body: formData,
+          errorMessage: 'PDF 단어 추출 실패',
+          logContext: `${cfg.logPrefix}.pdf_vocab_extract`,
+        },
+      );
 
-      if (!res.ok) {
-        const data = await res.json();
-        throw new Error(data.error || '추출 실패');
-      }
-
-      const data = await res.json();
       setWords(
-        data.items.map((item: Omit<ExtractedWord, 'selected'>) => ({
+        data.items.map((item) => ({
           ...item,
           selected: true,
         }))
       );
       setStep(2);
-    } catch (err) {
-      toast.error(err instanceof Error ? err.message : 'PDF 단어 추출 실패');
+    } catch {
+      // fetchWithToast already shows toast
     } finally {
       setExtracting(false);
     }
@@ -91,23 +89,17 @@ export function PdfVocabExtract({ module, parentId, onAdd }: VocabDialogProps) {
         spelling_answer: rest.front_text,
       }));
 
-      const res = await fetch(`${cfg.apiBase}/bulk`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ [cfg.parentIdKey]: parentId, items }),
+      const data = await fetchWithToast<{ count: number }>(`${cfg.apiBase}/bulk`, {
+        body: { [cfg.parentIdKey]: parentId, items },
+        errorMessage: '단어 저장 실패',
+        logContext: `${cfg.logPrefix}.pdf_vocab_extract`,
       });
-      if (!res.ok) {
-        const err = await res.json().catch(() => null);
-        throw new Error(err?.error || '요청에 실패했습니다');
-      }
-      const data = await res.json();
       onAdd();
       setOpen(false);
       reset();
       toast.success(`${data.count}개 단어가 추가되었습니다`);
-    } catch (err) {
-      logger.error(`${cfg.logPrefix}.pdf_vocab_extract`, { error: err instanceof Error ? err.message : String(err) });
-      toast.error('단어 저장 실패');
+    } catch {
+      // fetchWithToast already shows toast
     } finally {
       setSaving(false);
     }

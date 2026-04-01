@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Eye, Loader2, Copy, Check } from 'lucide-react';
 import { toast } from 'sonner';
+import { fetchWithToast } from '@/lib/fetch-with-toast';
 import {
   Dialog,
   DialogContent,
@@ -20,13 +21,11 @@ export function ImpersonateButton({ studentId }: { studentId: string }) {
   async function handleClick() {
     setLoading(true);
     try {
-      const res = await fetch('/api/admin/impersonate', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ studentId }),
+      const data = await fetchWithToast<{ url: string }>('/api/admin/impersonate', {
+        body: { studentId },
+        errorMessage: '링크 생성 실패',
+        silent: true,
       });
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.error);
       setUrl(data.url);
     } catch (err) {
       toast.error(err instanceof Error ? err.message : '링크 생성 실패');

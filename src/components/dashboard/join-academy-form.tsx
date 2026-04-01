@@ -2,6 +2,7 @@
 
 import { useState, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
+import { fetchWithToast } from '@/lib/fetch-with-toast';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
@@ -27,18 +28,15 @@ export function JoinAcademyForm({ compact = false }: { compact?: boolean } = {})
     setValidating(true);
     setError(null);
     try {
-      const res = await fetch(`/api/auth/validate-invite-code?code=${trimmed}`);
-      const data = await res.json();
-      if (res.ok) {
-        setAcademyName(data.academyName);
-        setError(null);
-      } else {
-        setAcademyName(null);
-        setError(data.error || '유효하지 않은 초대 코드입니다.');
-      }
-    } catch {
+      const data = await fetchWithToast<{ academyName: string }>(`/api/auth/validate-invite-code?code=${trimmed}`, {
+        method: 'GET',
+        silent: true,
+      });
+      setAcademyName(data.academyName);
+      setError(null);
+    } catch (err) {
       setAcademyName(null);
-      setError('코드 확인 중 오류가 발생했습니다.');
+      setError(err instanceof Error ? err.message : '코드 확인 중 오류가 발생했습니다.');
     } finally {
       setValidating(false);
     }
@@ -57,19 +55,13 @@ export function JoinAcademyForm({ compact = false }: { compact?: boolean } = {})
     setSubmitting(true);
     setError(null);
     try {
-      const res = await fetch('/api/auth/join-academy', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ inviteCode: code }),
+      await fetchWithToast('/api/auth/join-academy', {
+        body: { inviteCode: code },
+        silent: true,
       });
-      const data = await res.json();
-      if (res.ok) {
-        router.refresh();
-      } else {
-        setError(data.error || '학원 연결에 실패했습니다.');
-      }
-    } catch {
-      setError('학원 연결 중 오류가 발생했습니다.');
+      router.refresh();
+    } catch (err) {
+      setError(err instanceof Error ? err.message : '학원 연결 중 오류가 발생했습니다.');
     } finally {
       setSubmitting(false);
     }

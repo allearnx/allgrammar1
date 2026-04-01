@@ -4,13 +4,12 @@ import { useState } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { ChevronDown, ChevronRight, Trash2 } from 'lucide-react';
-import { toast } from 'sonner';
 import { ConfirmDialog } from '@/components/shared/confirm-dialog';
+import { fetchWithToast } from '@/lib/fetch-with-toast';
 import { DayContentManager } from './day-content-manager';
 import { PdfBulkExtract } from './pdf-bulk-extract';
 import { AddDayDialog } from './add-day-dialog';
 import type { VocaBook, VocaDay } from '@/types/voca';
-import { logger } from '@/lib/logger';
 
 interface DaySectionProps {
   book: VocaBook;
@@ -90,16 +89,15 @@ function DayCard({
         onConfirm={async () => {
           setDeleteOpen(false);
           try {
-            const res = await fetch('/api/voca/days', {
+            await fetchWithToast('/api/voca/days', {
               method: 'DELETE',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({ id: day.id }),
+              body: { id: day.id },
+              errorMessage: 'Day 삭제에 실패했습니다',
+              logContext: 'voca_admin.day_section',
             });
-            if (res.ok) onDelete();
-            else toast.error('Day 삭제에 실패했습니다');
-          } catch (err) {
-            logger.error('voca_admin.day_section', { error: err instanceof Error ? err.message : String(err) });
-            toast.error('Day 삭제 중 오류가 발생했습니다');
+            onDelete();
+          } catch {
+            // fetchWithToast already shows toast
           }
         }}
       />

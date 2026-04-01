@@ -13,6 +13,7 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { Label } from '@/components/ui/label';
 import { Upload, FileSpreadsheet, AlertCircle, CheckCircle2 } from 'lucide-react';
 import { toast } from 'sonner';
+import { fetchWithToast } from '@/lib/fetch-with-toast';
 import Papa from 'papaparse';
 
 interface ParsedStudent {
@@ -73,17 +74,17 @@ export function BulkImportDialog() {
   async function handleImport() {
     setImporting(true);
     try {
-      const res = await fetch('/api/admin/students/bulk-import', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          students,
-          services: services.length > 0 ? services : undefined,
-        }),
-      });
-
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.error || '등록 실패');
+      const data = await fetchWithToast<{ created: number; failed: { email: string; reason: string }[] }>(
+        '/api/admin/students/bulk-import',
+        {
+          body: {
+            students,
+            services: services.length > 0 ? services : undefined,
+          },
+          errorMessage: '등록 실패',
+          silent: true,
+        },
+      );
 
       setResult(data);
       if (data.created > 0) {

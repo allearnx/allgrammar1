@@ -16,9 +16,9 @@ import {
 } from '@/components/ui/dialog';
 import { toast } from 'sonner';
 import { ConfirmDialog } from '@/components/shared/confirm-dialog';
+import { fetchWithToast } from '@/lib/fetch-with-toast';
 import { DaySection } from './day-section';
 import type { VocaBook, VocaDay } from '@/types/voca';
-import { logger } from '@/lib/logger';
 
 interface VocaAdminClientProps {
   books: VocaBook[];
@@ -79,11 +79,13 @@ export function VocaAdminClient({ books: initialBooks }: VocaAdminClientProps) {
 
   async function loadDays(bookId: string) {
     try {
-      const res = await fetch(`/api/voca/days?bookId=${bookId}`);
-      const data = await res.json();
+      const data = await fetchWithToast<VocaDay[]>(`/api/voca/days?bookId=${bookId}`, {
+        method: 'GET',
+        silent: true,
+        logContext: 'voca_admin.index',
+      });
       dispatch({ type: 'SET_DAYS', days: data || [] });
-    } catch (err) {
-      logger.error('voca_admin.index', { error: err instanceof Error ? err.message : String(err) });
+    } catch {
       toast.error('Day 목록을 불러오지 못했습니다');
     }
   }
@@ -175,17 +177,16 @@ export function VocaAdminClient({ books: initialBooks }: VocaAdminClientProps) {
           dispatch({ type: 'SET_DELETE_BOOK', id: null });
           if (!id) return;
           try {
-            const res = await fetch(`/api/voca/books/${id}`, { method: 'DELETE' });
-            if (res.ok) {
-              setBooks(books.filter((b) => b.id !== id));
-              if (state.selectedBook?.id === id) dispatch({ type: 'CLEAR_SELECTION' });
-              toast.success('교재가 삭제되었습니다');
-            } else {
-              toast.error('교재 삭제에 실패했습니다');
-            }
-          } catch (err) {
-            logger.error('voca_admin.index', { error: err instanceof Error ? err.message : String(err) });
-            toast.error('교재 삭제 중 오류가 발생했습니다');
+            await fetchWithToast(`/api/voca/books/${id}`, {
+              method: 'DELETE',
+              successMessage: '교재가 삭제되었습니다',
+              errorMessage: '교재 삭제에 실패했습니다',
+              logContext: 'voca_admin.index',
+            });
+            setBooks(books.filter((b) => b.id !== id));
+            if (state.selectedBook?.id === id) dispatch({ type: 'CLEAR_SELECTION' });
+          } catch {
+            // fetchWithToast already shows toast
           }
         }}
       />
@@ -216,21 +217,18 @@ function AddBookDialog({ onAdd }: { onAdd: (book: VocaBook) => void }) {
     if (!title.trim()) return;
     setSaving(true);
     try {
-      const res = await fetch('/api/voca/books', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ title: title.trim(), description: description.trim() || null }),
+      const data = await fetchWithToast<VocaBook>('/api/voca/books', {
+        body: { title: title.trim(), description: description.trim() || null },
+        successMessage: '교재가 추가되었습니다',
+        errorMessage: '교재 추가 중 오류가 발생했습니다',
+        logContext: 'voca_admin.index',
       });
-      if (!res.ok) throw new Error();
-      const data = await res.json();
       onAdd(data);
       setOpen(false);
       setTitle('');
       setDescription('');
-      toast.success('교재가 추가되었습니다');
-    } catch (err) {
-      logger.error('voca_admin.index', { error: err instanceof Error ? err.message : String(err) });
-      toast.error('교재 추가 중 오류가 발생했습니다');
+    } catch {
+      // fetchWithToast already shows toast
     } finally {
       setSaving(false);
     }
@@ -281,19 +279,17 @@ function EditBookDialog({
     if (!title.trim()) return;
     setSaving(true);
     try {
-      const res = await fetch(`/api/voca/books/${book.id}`, {
+      const data = await fetchWithToast<VocaBook>(`/api/voca/books/${book.id}`, {
         method: 'PATCH',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ id: book.id, title: title.trim(), description: description.trim() || null }),
+        body: { id: book.id, title: title.trim(), description: description.trim() || null },
+        successMessage: '교재가 수정되었습니다',
+        errorMessage: '교재 수정 중 오류가 발생했습니다',
+        logContext: 'voca_admin.index',
       });
-      if (!res.ok) throw new Error();
-      const data = await res.json();
       onSave(data);
       onOpenChange(false);
-      toast.success('교재가 수정되었습니다');
-    } catch (err) {
-      logger.error('voca_admin.index', { error: err instanceof Error ? err.message : String(err) });
-      toast.error('교재 수정 중 오류가 발생했습니다');
+    } catch {
+      // fetchWithToast already shows toast
     } finally {
       setSaving(false);
     }

@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { fetchWithToast } from '@/lib/fetch-with-toast';
 import { Building2, Users, TrendingUp } from 'lucide-react';
 import {
   BarChart,
@@ -55,11 +56,7 @@ export function BossAnalyticsClient() {
   const [error, setError] = useState(false);
 
   useEffect(() => {
-    fetch('/api/boss/analytics')
-      .then((res) => {
-        if (!res.ok) throw new Error('fetch failed');
-        return res.json();
-      })
+    fetchWithToast<BossAnalyticsData>('/api/boss/analytics', { method: 'GET', silent: true })
       .then(setData)
       .catch(() => setError(true))
       .finally(() => setLoading(false));

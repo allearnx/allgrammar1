@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { fetchWithToast } from '@/lib/fetch-with-toast';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -45,24 +46,15 @@ export function ChangePasswordDialog() {
     setLoading(true);
 
     try {
-      const res = await fetch('/api/auth/change-password', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ oldPassword, newPassword }),
+      await fetchWithToast('/api/auth/change-password', {
+        body: { oldPassword, newPassword },
+        successMessage: '비밀번호가 변경되었습니다.',
+        errorMessage: '비밀번호 변경에 실패했습니다.',
       });
-
-      const data = await res.json();
-
-      if (!res.ok) {
-        toast.error(data.error || '비밀번호 변경에 실패했습니다.');
-        return;
-      }
-
-      toast.success('비밀번호가 변경되었습니다.');
       reset();
       setOpen(false);
     } catch {
-      toast.error('네트워크 오류가 발생했습니다.');
+      // fetchWithToast already shows error toast
     } finally {
       setLoading(false);
     }

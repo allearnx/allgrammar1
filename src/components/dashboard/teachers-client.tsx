@@ -12,7 +12,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { toast } from 'sonner';
+import { fetchWithToast } from '@/lib/fetch-with-toast';
 import { format } from 'date-fns';
 import { Trash2 } from 'lucide-react';
 import {
@@ -57,21 +57,15 @@ export function TeachersClient({ teachers, academies }: TeachersClientProps) {
     setUpdating(teacherId);
 
     try {
-      const res = await fetch(`/api/admin/teachers/${teacherId}`, {
+      await fetchWithToast(`/api/admin/teachers/${teacherId}`, {
         method: 'PATCH',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ is_active: !currentActive }),
+        body: { is_active: !currentActive },
+        successMessage: !currentActive ? '선생님 활성화' : '선생님 비활성화',
+        errorMessage: '변경 실패',
       });
-
-      if (!res.ok) {
-        const data = await res.json();
-        throw new Error(data.error || 'Failed to update');
-      }
-
-      toast.success(!currentActive ? '선생님 활성화' : '선생님 비활성화');
       router.refresh();
-    } catch (err) {
-      toast.error('변경 실패', { description: err instanceof Error ? err.message : '알 수 없는 오류' });
+    } catch {
+      // fetchWithToast already showed toast
     } finally {
       setUpdating(null);
     }
@@ -80,16 +74,15 @@ export function TeachersClient({ teachers, academies }: TeachersClientProps) {
   async function handleDelete(teacherId: string) {
     setUpdating(teacherId);
     try {
-      const res = await fetch(`/api/boss/users/${teacherId}`, { method: 'DELETE' });
-      if (!res.ok) {
-        const data = await res.json();
-        throw new Error(data.error || '삭제 실패');
-      }
-      toast.success('선생님이 삭제되었습니다');
+      await fetchWithToast(`/api/boss/users/${teacherId}`, {
+        method: 'DELETE',
+        successMessage: '선생님이 삭제되었습니다',
+        errorMessage: '삭제 실패',
+      });
       setDeleteTarget(null);
       router.refresh();
-    } catch (err) {
-      toast.error('삭제 실패', { description: err instanceof Error ? err.message : '알 수 없는 오류' });
+    } catch {
+      // fetchWithToast already showed toast
     } finally {
       setUpdating(null);
     }
@@ -99,21 +92,15 @@ export function TeachersClient({ teachers, academies }: TeachersClientProps) {
     setUpdating(teacherId);
 
     try {
-      const res = await fetch(`/api/boss/users/${teacherId}`, {
+      await fetchWithToast(`/api/boss/users/${teacherId}`, {
         method: 'PATCH',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ academy_id: academyId === 'none' ? null : academyId }),
+        body: { academy_id: academyId === 'none' ? null : academyId },
+        successMessage: '학원이 변경되었습니다',
+        errorMessage: '변경 실패',
       });
-
-      if (!res.ok) {
-        const data = await res.json();
-        throw new Error(data.error || 'Failed to update');
-      }
-
-      toast.success('학원이 변경되었습니다');
       router.refresh();
-    } catch (err) {
-      toast.error('변경 실패', { description: err instanceof Error ? err.message : '알 수 없는 오류' });
+    } catch {
+      // fetchWithToast already showed toast
     } finally {
       setUpdating(null);
     }

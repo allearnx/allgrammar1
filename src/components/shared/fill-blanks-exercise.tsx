@@ -1,6 +1,5 @@
 'use client';
 
-import { useState, useMemo } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -13,8 +12,8 @@ import {
   DialogDescription,
 } from '@/components/ui/dialog';
 import { CheckCircle, AlertTriangle, Trophy, RotateCcw, PenLine, ListRestart } from 'lucide-react';
-import { useRetryWrong } from '@/hooks/use-retry-wrong';
 import { getEncouragement } from '@/lib/naesin/encouragement';
+import { useFillBlanksState } from '@/hooks/use-fill-blanks-state';
 import type { TextbookPassage, BlankItem } from '@/types/database';
 
 type Difficulty = 'easy' | 'medium' | 'hard';
@@ -33,86 +32,23 @@ interface FillBlanksExerciseProps {
   showWrongAlert?: boolean;
 }
 
-interface SentenceRange {
-  korean: string;
-  startIdx: number;
-  endIdx: number;
-  wordCount: number;
-}
-
-const SHORT_SENTENCE_THRESHOLD = 8;
-
 export function FillBlanksExercise({ passage, onComplete, showWrongAlert: _showWrongAlert }: FillBlanksExerciseProps) {
-  const [difficulty, setDifficulty] = useState<Difficulty>('easy');
-  const [answers, setAnswers] = useState<Record<number, string>>({});
-  const [results, setResults] = useState<Record<number, boolean> | null>(null);
-  const [resultModal, setResultModal] = useState<{ score: number; correct: number; total: number } | null>(null);
-
-  // Retry-wrong-only state
-  const [retryMode, setRetryMode] = useState(false);
-  const [lockedCorrect, setLockedCorrect] = useState<Record<number, string>>({});
-  const { previousCorrectCount, startRetry, reset: resetRetry, getCombinedScore } = useRetryWrong();
-
-  const blanksMap: Record<Difficulty, BlankItem[] | null> = {
-    easy: passage.blanks_easy as BlankItem[] | null,
-    medium: passage.blanks_medium as BlankItem[] | null,
-    hard: passage.blanks_hard as BlankItem[] | null,
-  };
-
-  const blanks = blanksMap[difficulty] || [];
-  const words = passage.original_text.split(/\s+/);
-  const blankIndices = new Set(blanks.map((b) => b.index));
-
-  const hasSentences = Array.isArray(passage.sentences) && passage.sentences.length > 0;
-
-  // Count how many wrongs exist (for button visibility)
-  const wrongCount = results ? Object.values(results).filter((v) => !v).length : 0;
-
-  // Build sentence ranges and group short ones into pairs
-  const sentenceGroups = useMemo(() => {
-    if (!hasSentences) return null;
-
-    const ranges: SentenceRange[] = [];
-    let offset = 0;
-    for (const s of passage.sentences!) {
-      const wc = s.original.split(/\s+/).filter(Boolean).length;
-      ranges.push({ korean: s.korean, startIdx: offset, endIdx: offset + wc - 1, wordCount: wc });
-      offset += wc;
-    }
-
-    const groups: SentenceRange[][] = [];
-    let i = 0;
-    while (i < ranges.length) {
-      const cur = ranges[i];
-      if (cur.wordCount < SHORT_SENTENCE_THRESHOLD && i + 1 < ranges.length) {
-        const next = ranges[i + 1];
-        if (next.wordCount < SHORT_SENTENCE_THRESHOLD) {
-          groups.push([cur, next]);
-          i += 2;
-          continue;
-        }
-      }
-      groups.push([cur]);
-      i++;
-    }
-    return groups;
-  }, [hasSentences, passage.sentences]);
+  const s = useFillBlanksState({ passage, onComplete });
 
   function renderWord(idx: number) {
-    if (blankIndices.has(idx)) {
-      // In retry mode, locked blanks show as green text (no input)
-      if (retryMode && lockedCorrect[idx] !== undefined) {
+    if (s.blankIndices.has(idx)) {
+      if (s.retryMode && s.lockedCorrect[idx] !== undefined) {
         return (
           <span key={idx} className="inline-flex items-center gap-1">
             <span className="px-2 py-0.5 text-sm font-medium text-green-700 bg-green-50 border border-green-300 rounded">
-              {lockedCorrect[idx]}
+              {s.lockedCorrect[idx]}
             </span>
             <CheckCircle className="h-4 w-4 text-green-500" />
           </span>
         );
       }
 
-      const result = results?.[idx];
+      const result = s.results?.[idx];
       return (
         <span key={idx} className="inline-flex items-center gap-1">
           <Input
@@ -120,110 +56,30 @@ export function FillBlanksExercise({ passage, onComplete, showWrongAlert: _showW
               result === true ? 'border-green-500 bg-green-50' :
               result === false ? 'border-red-500 bg-red-50' : ''
             }`}
-            value={answers[idx] || ''}
-            onChange={(e) => setAnswers({ ...answers, [idx]: e.target.value })}
-            disabled={results !== null}
+            value={s.answers[idx] || ''}
+            onChange={(e) => s.setAnswers({ ...s.answers, [idx]: e.target.value })}
+            disabled={s.results !== null}
             placeholder="___"
           />
           {result === true && <CheckCircle className="h-4 w-4 text-green-500" />}
           {result === false && (
             <span className="text-xs text-red-500">
-              ({blanks.find((b) => b.index === idx)?.answer})
+              ({s.blanks.find((b: BlankItem) => b.index === idx)?.answer})
             </span>
           )}
         </span>
       );
     }
-    return <span key={idx}>{words[idx]}</span>;
-  }
-
-  function handleSubmit() {
-    if (blanks.length === 0) return;
-    const newResults: Record<number, boolean> = {};
-    let correctCount = 0;
-    const wrongs: WrongBlank[] = [];
-
-    blanks.forEach((blank) => {
-      // In retry mode, skip locked blanks
-      if (retryMode && lockedCorrect[blank.index] !== undefined) {
-        newResults[blank.index] = true;
-        correctCount++;
-        return;
-      }
-
-      const normalize = (s: string) => s.trim().toLowerCase().replace(/[.,!?;:'"()]/g, '');
-      const userAnswer = normalize(answers[blank.index] || '');
-      const isCorrect = userAnswer === normalize(blank.answer);
-      newResults[blank.index] = isCorrect;
-      if (isCorrect) {
-        correctCount++;
-      } else {
-        wrongs.push({
-          type: 'fill_blank',
-          difficulty,
-          blankIndex: blank.index,
-          correctAnswer: blank.answer,
-          userAnswer: answers[blank.index] || '',
-        });
-      }
-    });
-
-    setResults(newResults);
-
-    // In retry mode, combine previous correct + new correct
-    const newlyCorrect = correctCount - Object.keys(lockedCorrect).length;
-    const totalCorrect = retryMode ? previousCorrectCount + newlyCorrect : correctCount;
-    const score = retryMode ? getCombinedScore(newlyCorrect, blanks.length) : Math.round((correctCount / blanks.length) * 100);
-    onComplete(score, wrongs, difficulty);
-    setResultModal({ score, correct: totalCorrect, total: blanks.length });
-  }
-
-  function handleRetryWrong() {
-    if (!results) return;
-
-    // Count correct answers from current results (including previously locked ones)
-    const correctIndices: Record<number, string> = { ...lockedCorrect };
-    let newlyCorrect = 0;
-
-    blanks.forEach((blank) => {
-      if (results[blank.index] === true && lockedCorrect[blank.index] === undefined) {
-        correctIndices[blank.index] = answers[blank.index] || blank.answer;
-        newlyCorrect++;
-      }
-    });
-
-    // Clear wrong answers, keep correct locked
-    const newAnswers: Record<number, string> = {};
-    blanks.forEach((blank) => {
-      if (correctIndices[blank.index] !== undefined) {
-        newAnswers[blank.index] = correctIndices[blank.index];
-      }
-    });
-
-    setLockedCorrect(correctIndices);
-    startRetry(newlyCorrect);
-    setAnswers(newAnswers);
-    setResults(null);
-    setResultModal(null);
-    setRetryMode(true);
-  }
-
-  function handleReset() {
-    setAnswers({});
-    setResults(null);
-    setResultModal(null);
-    setRetryMode(false);
-    setLockedCorrect({});
-    resetRetry();
+    return <span key={idx}>{s.words[idx]}</span>;
   }
 
   return (
     <div className="space-y-4">
-      <Tabs value={difficulty} onValueChange={(v) => { setDifficulty(v as Difficulty); handleReset(); }}>
+      <Tabs value={s.difficulty} onValueChange={(v) => s.changeDifficulty(v as Difficulty)}>
         <TabsList className="grid w-full grid-cols-3">
-          <TabsTrigger value="easy" disabled={retryMode}>쉬움</TabsTrigger>
-          <TabsTrigger value="medium" disabled={!passage.blanks_medium || retryMode}>보통</TabsTrigger>
-          <TabsTrigger value="hard" disabled={!passage.blanks_hard || retryMode}>어려움</TabsTrigger>
+          <TabsTrigger value="easy" disabled={s.retryMode}>쉬움</TabsTrigger>
+          <TabsTrigger value="medium" disabled={!passage.blanks_medium || s.retryMode}>보통</TabsTrigger>
+          <TabsTrigger value="hard" disabled={!passage.blanks_hard || s.retryMode}>어려움</TabsTrigger>
         </TabsList>
       </Tabs>
 
@@ -232,20 +88,20 @@ export function FillBlanksExercise({ passage, onComplete, showWrongAlert: _showW
         모든 시도가 점수로 기록되어 리포트에 반영됩니다.
       </div>
 
-      {retryMode && (
+      {s.retryMode && (
         <div className="flex items-center gap-2 text-xs text-orange-700 bg-orange-50 rounded-lg px-3 py-2">
           <ListRestart className="h-3.5 w-3.5 shrink-0" />
-          틀린 {blanks.length - Object.keys(lockedCorrect).length}개 빈칸만 다시 풀어보세요
+          틀린 {s.blanks.length - Object.keys(s.lockedCorrect).length}개 빈칸만 다시 풀어보세요
         </div>
       )}
 
-      {blanks.length === 0 ? (
+      {s.blanks.length === 0 ? (
         <p className="text-center text-muted-foreground py-4">이 난이도의 빈칸 문제가 없습니다.</p>
       ) : (
         <>
-          {sentenceGroups ? (
+          {s.sentenceGroups ? (
             <div className="space-y-3">
-              {sentenceGroups.map((group, gi) => (
+              {s.sentenceGroups.map((group, gi) => (
                 <Card key={gi}>
                   <CardContent className="py-4 space-y-4">
                     {group.map((sentence, si) => (
@@ -275,7 +131,7 @@ export function FillBlanksExercise({ passage, onComplete, showWrongAlert: _showW
               <Card>
                 <CardContent className="py-6">
                   <div className="flex flex-wrap gap-1.5 leading-8">
-                    {words.map((_, idx) => renderWord(idx))}
+                    {s.words.map((_, idx) => renderWord(idx))}
                   </div>
                 </CardContent>
               </Card>
@@ -283,17 +139,17 @@ export function FillBlanksExercise({ passage, onComplete, showWrongAlert: _showW
           )}
 
           <div className="flex gap-2">
-            {results === null ? (
-              <Button onClick={handleSubmit} className="flex-1">제출하기</Button>
+            {s.results === null ? (
+              <Button onClick={s.handleSubmit} className="flex-1">제출하기</Button>
             ) : (
               <>
-                {wrongCount > 0 && (
-                  <Button onClick={handleRetryWrong} className="flex-1">
+                {s.wrongCount > 0 && (
+                  <Button onClick={s.handleRetryWrong} className="flex-1">
                     <ListRestart className="h-4 w-4 mr-1" />
                     오답만 다시 풀기
                   </Button>
                 )}
-                <Button onClick={handleReset} variant="outline" className="flex-1">
+                <Button onClick={s.handleReset} variant="outline" className="flex-1">
                   <RotateCcw className="h-4 w-4 mr-1" />
                   전체 다시 풀기
                 </Button>
@@ -301,14 +157,13 @@ export function FillBlanksExercise({ passage, onComplete, showWrongAlert: _showW
             )}
           </div>
 
-          {/* 채점 결과 팝업 */}
-          {resultModal && (
+          {s.resultModal && (
             <FillBlanksResultDialog
-              result={resultModal}
-              wrongCount={wrongCount}
-              onClose={() => setResultModal(null)}
-              onRetryWrong={() => { setResultModal(null); handleRetryWrong(); }}
-              onReset={() => { setResultModal(null); handleReset(); }}
+              result={s.resultModal}
+              wrongCount={s.wrongCount}
+              onClose={() => s.setResultModal(null)}
+              onRetryWrong={() => { s.setResultModal(null); s.handleRetryWrong(); }}
+              onReset={() => { s.setResultModal(null); s.handleReset(); }}
             />
           )}
         </>

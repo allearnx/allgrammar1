@@ -11,7 +11,7 @@ import {
   DialogDescription,
 } from '@/components/ui/dialog';
 import { Trash2 } from 'lucide-react';
-import { toast } from 'sonner';
+import { fetchWithToast } from '@/lib/fetch-with-toast';
 
 interface Props {
   studentId: string;
@@ -27,16 +27,15 @@ export function StudentDeleteButton({ studentId, studentName, studentEmail }: Pr
   async function handleDelete() {
     setDeleting(true);
     try {
-      const res = await fetch(`/api/boss/users/${studentId}`, { method: 'DELETE' });
-      if (!res.ok) {
-        const data = await res.json();
-        throw new Error(data.error || '삭제 실패');
-      }
-      toast.success('학생이 삭제되었습니다');
+      await fetchWithToast(`/api/boss/users/${studentId}`, {
+        method: 'DELETE',
+        successMessage: '학생이 삭제되었습니다',
+        errorMessage: '삭제 실패',
+      });
       setOpen(false);
       router.refresh();
-    } catch (err) {
-      toast.error('삭제 실패', { description: err instanceof Error ? err.message : '알 수 없는 오류' });
+    } catch {
+      // fetchWithToast already showed toast
     } finally {
       setDeleting(false);
     }

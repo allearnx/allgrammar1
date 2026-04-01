@@ -2,7 +2,7 @@
 
 import { useState, type Dispatch, type SetStateAction } from 'react';
 import { toast } from 'sonner';
-import { logger } from '@/lib/logger';
+import { fetchWithToast } from '@/lib/fetch-with-toast';
 
 interface UseListCrudMessages {
   deleteSuccess: string;
@@ -22,47 +22,39 @@ export function useListCrud<T extends { id: string }>(options: {
 
   async function handleDeleteOne(id: string) {
     try {
-      const res = await fetch(apiEndpoint, {
+      await fetchWithToast(apiEndpoint, {
         method: 'DELETE',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ id }),
+        body: { id },
+        successMessage: messages.deleteSuccess,
+        errorMessage: messages.deleteError,
       });
-      if (res.ok) {
-        setItems((prev) => prev.filter((v) => v.id !== id));
-        setSelectedIds((prev) => {
-          const next = new Set(prev);
-          next.delete(id);
-          return next;
-        });
-        toast.success(messages.deleteSuccess);
-      } else {
-        toast.error('삭제 실패');
-      }
-    } catch (err) {
-      logger.error('hook.list_crud', { error: err instanceof Error ? err.message : String(err) });
-      toast.error(messages.deleteError);
-    }
+      setItems((prev) => prev.filter((v) => v.id !== id));
+      setSelectedIds((prev) => {
+        const next = new Set(prev);
+        next.delete(id);
+        return next;
+      });
+    } catch { /* fetchWithToast handles toasts */ }
   }
 
   async function handleBulkDelete() {
     if (selectedIds.size === 0) return;
     setDeleting(true);
     try {
-      const results = await Promise.all(
+      const results = await Promise.allSettled(
         Array.from(selectedIds).map((id) =>
-          fetch(apiEndpoint, {
+          fetchWithToast(apiEndpoint, {
             method: 'DELETE',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ id }),
+            body: { id },
+            silent: true,
           })
         )
       );
-      const successCount = results.filter((r) => r.ok).length;
+      const successCount = results.filter((r) => r.status === 'fulfilled').length;
       setItems((prev) => prev.filter((v) => !selectedIds.has(v.id)));
       setSelectedIds(new Set());
       toast.success(messages.bulkSuccess(successCount));
-    } catch (err) {
-      logger.error('hook.list_crud', { error: err instanceof Error ? err.message : String(err) });
+    } catch {
       toast.error(messages.bulkError);
     } finally {
       setDeleting(false);

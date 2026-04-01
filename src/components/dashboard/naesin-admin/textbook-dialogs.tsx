@@ -13,8 +13,8 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog';
 import { Plus } from 'lucide-react';
-import { toast } from 'sonner';
 import type { NaesinTextbook } from '@/types/database';
+import { fetchWithToast } from '@/lib/fetch-with-toast';
 
 export function EditTextbookDialog({
   textbook,
@@ -36,23 +36,21 @@ export function EditTextbookDialog({
     e.preventDefault();
     setSaving(true);
     try {
-      const res = await fetch('/api/naesin/textbooks', {
+      const data = await fetchWithToast<NaesinTextbook>('/api/naesin/textbooks', {
         method: 'PATCH',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
+        body: {
           id: textbook.id,
           grade,
           publisher,
           display_name: displayName,
-        }),
+        },
+        successMessage: '교과서가 수정되었습니다',
+        errorMessage: '교과서 수정 실패',
       });
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.error || '알 수 없는 오류');
       onSave(data);
       onOpenChange(false);
-      toast.success('교과서가 수정되었습니다');
-    } catch (err) {
-      toast.error(`교과서 수정 실패: ${err instanceof Error ? err.message : '알 수 없는 오류'}`);
+    } catch {
+      // fetchWithToast already handles toast
     } finally {
       setSaving(false);
     }
@@ -104,24 +102,21 @@ export function AddTextbookDialog({ onAdd }: { onAdd: (tb: NaesinTextbook) => vo
     e.preventDefault();
     setSaving(true);
     try {
-      const res = await fetch('/api/naesin/textbooks', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
+      const data = await fetchWithToast<NaesinTextbook>('/api/naesin/textbooks', {
+        body: {
           grade,
           publisher,
           display_name: displayName,
-        }),
+        },
+        successMessage: '교과서가 추가되었습니다',
+        errorMessage: '교과서 추가 실패',
       });
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.error || '알 수 없는 오류');
       onAdd(data);
       setOpen(false);
       setPublisher('');
       setDisplayName('');
-      toast.success('교과서가 추가되었습니다');
-    } catch (err) {
-      toast.error(`교과서 추가 실패: ${err instanceof Error ? err.message : '알 수 없는 오류'}`);
+    } catch {
+      // fetchWithToast already handles toast
     } finally {
       setSaving(false);
     }

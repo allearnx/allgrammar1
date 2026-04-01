@@ -2,38 +2,12 @@
 
 import { useState, useCallback } from 'react';
 import { EXAM_SETS } from '../_data';
-import type { ExamSet, Question, Section } from '../_data';
+import type { ExamSet, Question } from '../_data';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import Link from 'next/link';
-
-// ── Grading helpers ──
-
-function normalize(s: string): string {
-  return s
-    .toLowerCase()
-    .replace(/[.,!?;:'"]/g, '')
-    .replace(/\s+/g, ' ')
-    .trim();
-}
-
-function gradeSubjective(userAnswer: string, correct: string, acceptable?: string[]): boolean {
-  const norm = normalize(userAnswer);
-  if (!norm) return false;
-  const allAnswers = [correct, ...(acceptable ?? [])];
-  return allAnswers.some((a) => normalize(a) === norm);
-}
-
-function flattenQuestions(sections: Section[]): { question: Question; passage?: string }[] {
-  const result: { question: Question; passage?: string }[] = [];
-  for (const section of sections) {
-    for (const q of section.questions) {
-      result.push({ question: q, passage: section.passage });
-    }
-  }
-  return result;
-}
+import { gradeSubjective, flattenQuestions } from '@/lib/trial-exam-utils';
 
 // ── Components ──
 

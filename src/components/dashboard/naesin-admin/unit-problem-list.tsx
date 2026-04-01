@@ -6,7 +6,7 @@ import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import { ClipboardList, ChevronDown, ChevronRight, Pencil, Trash2, Loader2 } from 'lucide-react';
 import { toast } from 'sonner';
-import { logger } from '@/lib/logger';
+import { fetchWithToast } from '@/lib/fetch-with-toast';
 import type { NaesinProblemSheet, NaesinProblemQuestion } from '@/types/naesin';
 import { QuestionEditRow, QuestionViewRow } from './content-dialogs/question-table-rows';
 import { hasOptions, type GeneratedQuestion } from './content-dialogs/question-utils';
@@ -83,26 +83,16 @@ export function UnitProblemList({ sheets, onUpdate, onRequestDelete }: UnitProbl
     try {
       const questions = editQuestions.map(toDbQuestion);
       const answerKey = editQuestions.map((q) => q.answer);
-
-      const res = await fetch('/api/naesin/problems', {
+      const updated = await fetchWithToast<NaesinProblemSheet>('/api/naesin/problems', {
         method: 'PATCH',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          id: editingSheetId,
-          title: editTitle.trim(),
-          questions,
-          answer_key: answerKey,
-        }),
+        body: { id: editingSheetId, title: editTitle.trim(), questions, answer_key: answerKey },
+        successMessage: '문제 시트가 수정되었습니다',
+        errorMessage: '문제 시트 수정 중 오류가 발생했습니다',
+        logContext: 'unit.save_problem_sheet',
       });
-      if (!res.ok) throw new Error('저장 실패');
-      const updated = await res.json();
       onUpdate(updated);
       cancelEdit();
-      toast.success('문제 시트가 수정되었습니다');
-    } catch (err) {
-      logger.error('unit.save_problem_sheet', { error: err instanceof Error ? err.message : String(err) });
-      toast.error('문제 시트 수정 중 오류가 발생했습니다');
-    } finally {
+    } catch { /* fetchWithToast handles toasts/logging */ } finally {
       setSaving(false);
     }
   }

@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { BookA, BookMarked, ShoppingCart, Loader2 } from 'lucide-react';
+import { fetchWithToast } from '@/lib/fetch-with-toast';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { JoinAcademyForm } from './join-academy-form';
@@ -94,19 +95,13 @@ export function IndependentStudentScreen({ userName, courses, isAcademy = false 
     setLoading(true);
     setError('');
     try {
-      const res = await fetch('/api/student/select-free-service', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ service: selected }),
+      await fetchWithToast('/api/student/select-free-service', {
+        body: { service: selected },
+        silent: true,
       });
-      if (!res.ok) {
-        const data = await res.json();
-        setError(data.error || '서비스 선택에 실패했습니다.');
-        return;
-      }
       router.refresh();
-    } catch {
-      setError('네트워크 오류가 발생했습니다.');
+    } catch (err) {
+      setError(err instanceof Error ? err.message : '네트워크 오류가 발생했습니다.');
     } finally {
       setLoading(false);
     }

@@ -14,28 +14,29 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog';
 import { Brain } from 'lucide-react';
-import { toast } from 'sonner';
 import { extractVideoId } from '@/lib/utils/youtube';
-import { logger } from '@/lib/logger';
+import { useFormDialog } from '@/hooks/use-form-dialog';
+import { fetchWithToast } from '@/lib/fetch-with-toast';
 
 export function AddLastReviewDialog({ unitId, onAdd }: { unitId: string; onAdd: () => void }) {
-  const [open, setOpen] = useState(false);
+  const { open, setOpen, saving, handleSubmit } = useFormDialog({
+    onSuccess: onAdd,
+    logContext: 'admin.add_last_review',
+    successMessage: '직전보강 자료가 추가되었습니다',
+    errorMessage: '직전보강 자료 추가 실패',
+  });
   const [title, setTitle] = useState('');
   const [contentType, setContentType] = useState<'video' | 'pdf' | 'text'>('video');
   const [youtubeUrl, setYoutubeUrl] = useState('');
   const [pdfUrl, setPdfUrl] = useState('');
   const [textContent, setTextContent] = useState('');
-  const [saving, setSaving] = useState(false);
 
-  async function handleSubmit(e: React.FormEvent) {
+  async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
-    setSaving(true);
-    try {
+    await handleSubmit(async () => {
       const videoId = contentType === 'video' ? extractVideoId(youtubeUrl) : null;
-      const res = await fetch('/api/naesin/last-review', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
+      await fetchWithToast('/api/naesin/last-review', {
+        body: {
           unitId,
           contentType,
           title,
@@ -43,25 +44,10 @@ export function AddLastReviewDialog({ unitId, onAdd }: { unitId: string; onAdd: 
           youtubeVideoId: videoId,
           pdfUrl: contentType === 'pdf' ? pdfUrl : null,
           textContent: contentType === 'text' ? textContent : null,
-        }),
+        },
+        silent: true,
       });
-      if (!res.ok) {
-        const err = await res.json().catch(() => null);
-        throw new Error(err?.error || '요청에 실패했습니다');
-      }
-      onAdd();
-      setOpen(false);
-      setTitle('');
-      setYoutubeUrl('');
-      setPdfUrl('');
-      setTextContent('');
-      toast.success('직전보강 자료가 추가되었습니다');
-    } catch (err) {
-      logger.error('admin.add_last_review', { error: err instanceof Error ? err.message : String(err) });
-      toast.error('직전보강 자료 추가 실패');
-    } finally {
-      setSaving(false);
-    }
+    }, () => { setTitle(''); setYoutubeUrl(''); setPdfUrl(''); setTextContent(''); });
   }
 
   return (
@@ -74,7 +60,7 @@ export function AddLastReviewDialog({ unitId, onAdd }: { unitId: string; onAdd: 
       </DialogTrigger>
       <DialogContent className="max-h-[85vh] overflow-y-auto">
         <DialogHeader><DialogTitle>직전보강 자료 추가</DialogTitle></DialogHeader>
-        <form onSubmit={handleSubmit} className="space-y-3">
+        <form onSubmit={onSubmit} className="space-y-3">
           <div>
             <Label htmlFor="lastreview-title">제목</Label>
             <Input id="lastreview-title" value={title} onChange={(e) => setTitle(e.target.value)} required />

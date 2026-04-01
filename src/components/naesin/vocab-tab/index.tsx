@@ -3,7 +3,7 @@
 import { useState, useEffect, useMemo, useCallback } from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { toast } from 'sonner';
-import { logger } from '@/lib/logger';
+import { fetchWithToast } from '@/lib/fetch-with-toast';
 import { BookOpen } from 'lucide-react';
 import { vocabToMemoryItem } from '@/lib/naesin/adapters';
 import { QuizSetSelector } from '../quiz-set-selector';
@@ -95,12 +95,11 @@ export function VocabTab({ vocabulary, unitId, onStageComplete, quizSets, comple
 
   async function saveVocabProgress(type: 'flashcard' | 'quiz' | 'spelling', score?: number) {
     try {
-      const res = await fetch('/api/naesin/vocab/progress', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ unitId, type, score, totalItems: filteredVocabulary.length }),
+      const data = await fetchWithToast<{ vocabCompleted?: boolean }>('/api/naesin/vocab/progress', {
+        body: { unitId, type, score, totalItems: filteredVocabulary.length },
+        errorMessage: '진도 저장 중 오류가 발생했습니다',
+        logContext: 'naesin.vocab_tab',
       });
-      const data = await res.json();
 
       // Update local progress state
       if (type === 'flashcard') {
@@ -115,23 +114,22 @@ export function VocabTab({ vocabulary, unitId, onStageComplete, quizSets, comple
         toast.success('단어 암기 단계를 완료했습니다!');
         onStageComplete();
       }
-    } catch (err) {
-      logger.error('naesin.vocab_tab', { error: err instanceof Error ? err.message : String(err) });
-      toast.error('진도 저장 중 오류가 발생했습니다');
+    } catch {
+      // error already toasted by fetchWithToast
     }
   }
 
   async function saveQuizSetResult(score: number, wrongWords: { front_text: string; back_text: string }[]) {
     if (!activeSetId) return;
     try {
-      await fetch('/api/naesin/vocab/quiz-set-result', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ quizSetId: activeSetId, unitId, score, wrongWords }),
+      await fetchWithToast('/api/naesin/vocab/quiz-set-result', {
+        body: { quizSetId: activeSetId, unitId, score, wrongWords },
+        silent: true,
+        logContext: 'naesin.vocab_tab',
       });
-    } catch (err) {
-      logger.error('naesin.vocab_tab', { error: err instanceof Error ? err.message : String(err) });
-      }
+    } catch {
+      // swallow - fire-and-forget
+    }
   }
 
   if (vocabulary.length === 0) {

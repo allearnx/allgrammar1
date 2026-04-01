@@ -7,6 +7,7 @@ import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import { CheckCircle, XCircle, ChevronRight, BookOpen } from 'lucide-react';
 import Link from 'next/link';
+import { fetchWithToast } from '@/lib/fetch-with-toast';
 
 interface ReviewItem {
   id: string;
@@ -67,15 +68,14 @@ export function ReviewClient({ items }: ReviewClientProps) {
       setScore((prev) => ({ ...prev, wrong: prev.wrong + 1 }));
     }
 
-    fetch('/api/memory/progress', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
+    fetchWithToast('/api/memory/progress', {
+      body: {
         memoryItemId: memoryItem.id,
         testType: 'spelling',
         isCorrect: correct,
-      }),
-    });
+      },
+      silent: true,
+    }).catch(() => { /* swallow */ });
   }
 
   function handleNext() {

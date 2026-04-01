@@ -15,57 +15,35 @@ import {
 } from '@/components/ui/dialog';
 import { ClipboardList } from 'lucide-react';
 import { toast } from 'sonner';
-import { logger } from '@/lib/logger';
+import { useFormDialog } from '@/hooks/use-form-dialog';
+import { fetchWithToast } from '@/lib/fetch-with-toast';
 
 export function AddProblemDialog({ unitId, onAdd }: { unitId: string; onAdd: () => void }) {
-  const [open, setOpen] = useState(false);
+  const { open, setOpen, saving, handleSubmit } = useFormDialog({
+    onSuccess: onAdd,
+    logContext: 'admin.add_problem',
+    successMessage: '문제풀이 시트가 추가되었습니다',
+    errorMessage: '문제풀이 시트 추가 실패',
+  });
   const [title, setTitle] = useState('');
   const [mode, setMode] = useState<'interactive' | 'image_answer'>('interactive');
   const [totalQuestions, setTotalQuestions] = useState('');
   const [answerKeyText, setAnswerKeyText] = useState('');
   const [pdfUrl, setPdfUrl] = useState('');
-  const [saving, setSaving] = useState(false);
 
-  async function handleSubmit(e: React.FormEvent) {
+  async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
-    setSaving(true);
-    try {
-      const answerKey = answerKeyText.split(',').map((s) => s.trim()).filter(Boolean);
-      if (answerKey.length !== Number(totalQuestions)) {
-        toast.error('정답 개수와 문항 수가 일치하지 않습니다');
-        setSaving(false);
-        return;
-      }
-
-      const res = await fetch('/api/naesin/problems', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          unitId,
-          title,
-          mode,
-          answerKey,
-          category: 'problem',
-          pdfUrl: pdfUrl || null,
-        }),
-      });
-      if (!res.ok) {
-        const err = await res.json().catch(() => null);
-        throw new Error(err?.error || '요청에 실패했습니다');
-      }
-      onAdd();
-      setOpen(false);
-      setTitle('');
-      setTotalQuestions('');
-      setAnswerKeyText('');
-      setPdfUrl('');
-      toast.success('문제풀이 시트가 추가되었습니다');
-    } catch (err) {
-      logger.error('admin.add_problem', { error: err instanceof Error ? err.message : String(err) });
-      toast.error('문제풀이 시트 추가 실패');
-    } finally {
-      setSaving(false);
+    const answerKey = answerKeyText.split(',').map((s) => s.trim()).filter(Boolean);
+    if (answerKey.length !== Number(totalQuestions)) {
+      toast.error('정답 개수와 문항 수가 일치하지 않습니다');
+      return;
     }
+    await handleSubmit(async () => {
+      await fetchWithToast('/api/naesin/problems', {
+        body: { unitId, title, mode, answerKey, category: 'problem', pdfUrl: pdfUrl || null },
+        silent: true,
+      });
+    }, () => { setTitle(''); setTotalQuestions(''); setAnswerKeyText(''); setPdfUrl(''); });
   }
 
   return (
@@ -78,7 +56,7 @@ export function AddProblemDialog({ unitId, onAdd }: { unitId: string; onAdd: () 
       </DialogTrigger>
       <DialogContent className="max-h-[85vh] overflow-y-auto">
         <DialogHeader><DialogTitle>문제풀이 시트 추가</DialogTitle></DialogHeader>
-        <form onSubmit={handleSubmit} className="space-y-3">
+        <form onSubmit={onSubmit} className="space-y-3">
           <div>
             <Label htmlFor="problem-title">제목</Label>
             <Input id="problem-title" value={title} onChange={(e) => setTitle(e.target.value)} placeholder="1과 문제풀이" required />

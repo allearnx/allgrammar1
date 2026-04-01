@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Link2, Check, RefreshCw, Loader2, X } from 'lucide-react';
+import { fetchWithToast } from '@/lib/fetch-with-toast';
 
 interface Props {
   studentId: string;
@@ -18,11 +19,13 @@ export function ParentShareButton({ studentId }: Props) {
   const fetchToken = async () => {
     setLoading(true);
     try {
-      const res = await fetch(`/api/parent-share?studentId=${studentId}`);
-      if (res.ok) {
-        const data = await res.json();
-        setToken(data.token || null);
-      }
+      const data = await fetchWithToast<{ token?: string }>(`/api/parent-share?studentId=${studentId}`, {
+        method: 'GET',
+        silent: true,
+      });
+      setToken(data?.token || null);
+    } catch {
+      // silent GET — ignore errors
     } finally {
       setLoading(false);
       setFetched(true);
@@ -32,15 +35,13 @@ export function ParentShareButton({ studentId }: Props) {
   const generateToken = async () => {
     setLoading(true);
     try {
-      const res = await fetch('/api/parent-share', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ studentId }),
+      const data = await fetchWithToast<{ token: string }>('/api/parent-share', {
+        body: { studentId },
+        silent: true,
       });
-      if (res.ok) {
-        const data = await res.json();
-        setToken(data.token);
-      }
+      setToken(data.token);
+    } catch {
+      // silent — ignore errors
     } finally {
       setLoading(false);
     }
@@ -49,12 +50,14 @@ export function ParentShareButton({ studentId }: Props) {
   const revokeToken = async () => {
     setLoading(true);
     try {
-      await fetch('/api/parent-share', {
+      await fetchWithToast('/api/parent-share', {
         method: 'DELETE',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ studentId }),
+        body: { studentId },
+        silent: true,
       });
       setToken(null);
+    } catch {
+      // silent — ignore errors
     } finally {
       setLoading(false);
     }

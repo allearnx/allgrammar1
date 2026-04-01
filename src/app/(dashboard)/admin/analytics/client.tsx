@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { fetchWithToast } from '@/lib/fetch-with-toast';
 import { Users, Activity, TrendingUp, BookMarked, BookA } from 'lucide-react';
 import {
   BarChart,
@@ -30,11 +31,7 @@ export function AdminAnalyticsClient() {
   const [error, setError] = useState(false);
 
   useEffect(() => {
-    fetch('/api/admin/analytics')
-      .then((res) => {
-        if (!res.ok) throw new Error('fetch failed');
-        return res.json();
-      })
+    fetchWithToast<AnalyticsData>('/api/admin/analytics', { method: 'GET', silent: true })
       .then(setData)
       .catch(() => setError(true))
       .finally(() => setLoading(false));

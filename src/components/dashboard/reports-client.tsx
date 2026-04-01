@@ -16,6 +16,7 @@ import { createClient } from '@/lib/supabase/client';
 import type { EnhancedReportData, WeeklyReportRow } from '@/types/report';
 import { ReportDisplay } from './report-display';
 import { logger } from '@/lib/logger';
+import { fetchWithToast } from '@/lib/fetch-with-toast';
 
 // ── 타입 ──
 
@@ -45,24 +46,16 @@ export function ReportsClient({ students }: ReportsClientProps) {
     setShowHistory(false);
 
     try {
-      const response = await fetch('/api/reports/generate', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ studentId: selectedStudent, reportType }),
+      const data = await fetchWithToast<EnhancedReportData>('/api/reports/generate', {
+        body: { studentId: selectedStudent, reportType },
+        successMessage: '리포트가 생성되었습니다',
+        errorMessage: '리포트 생성 실패',
+        logContext: 'admin.reports',
       });
-
-      if (!response.ok) {
-        const err = await response.json().catch(() => null);
-        throw new Error(err?.error || '리포트 생성에 실패했습니다');
-      }
-
-      const data: EnhancedReportData = await response.json();
       setReport(data);
       setCurrentReportId(data.reportId || null);
-      toast.success('리포트가 생성되었습니다');
-    } catch (err) {
-      logger.error('admin.reports', { error: err instanceof Error ? err.message : String(err) });
-      toast.error('리포트 생성 실패');
+    } catch {
+      // fetchWithToast already showed toast and logged
     } finally {
       setLoading(false);
     }
@@ -103,20 +96,19 @@ export function ReportsClient({ students }: ReportsClientProps) {
 
   async function handleDelete(reportId: string) {
     try {
-      const res = await fetch(`/api/reports/${reportId}`, { method: 'DELETE' });
-      if (!res.ok) {
-        const err = await res.json().catch(() => null);
-        throw new Error(err?.error || '삭제 실패');
-      }
+      await fetchWithToast(`/api/reports/${reportId}`, {
+        method: 'DELETE',
+        successMessage: '리포트가 삭제되었습니다',
+        errorMessage: '리포트 삭제 실패',
+        logContext: 'admin.reports',
+      });
       setHistory((prev) => prev.filter((r) => r.id !== reportId));
       if (currentReportId === reportId) {
         setReport(null);
         setCurrentReportId(null);
       }
-      toast.success('리포트가 삭제되었습니다');
-    } catch (err) {
-      logger.error('admin.reports', { error: err instanceof Error ? err.message : String(err) });
-      toast.error('리포트 삭제 실패');
+    } catch {
+      // fetchWithToast already showed toast and logged
     }
   }
 

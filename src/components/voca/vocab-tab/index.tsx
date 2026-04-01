@@ -3,8 +3,8 @@
 import { useState, useMemo } from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { toast } from 'sonner';
-import { logger } from '@/lib/logger';
 import { cn } from '@/lib/utils';
+import { fetchWithToast } from '@/lib/fetch-with-toast';
 import { vocaToMemoryItem, vocaToNaesinVocabulary } from '@/lib/voca/adapters';
 import { NaesinFlashcardView } from '@/components/naesin/vocab-tab/flashcard-view';
 import { NaesinQuizView } from '@/components/naesin/vocab-tab/quiz-view';
@@ -48,24 +48,20 @@ export function VocaTab({ vocabulary, dayId, progress, wrongWords = [] }: VocaTa
 
   async function saveProgress(type: 'flashcard' | 'quiz' | 'spelling' | 'matching', score?: number, matchingAttempt?: number) {
     try {
-      await fetch('/api/voca/progress', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ dayId, type, score, matchingAttempt }),
+      await fetchWithToast('/api/voca/progress', {
+        body: { dayId, type, score, matchingAttempt },
+        silent: true,
       });
-      // 로컬 상태 업데이트
-      setLocalProgress((prev) => {
-        const base = prev ?? {} as VocaStudentProgress;
-        if (type === 'flashcard') return { ...base, flashcard_completed: true };
-        if (type === 'quiz') return { ...base, quiz_score: score ?? 0 };
-        if (type === 'spelling') return { ...base, spelling_score: score ?? 0 };
-        if (type === 'matching') return { ...base, matching_completed: (score ?? 0) >= 90 };
-        return base;
-      });
-    } catch (err) {
-      logger.error('voca.tab', { error: err instanceof Error ? err.message : String(err) });
-      toast.error('진도 저장 중 오류가 발생했습니다');
-    }
+    } catch { /* swallow */ }
+    // 로컬 상태 업데이트
+    setLocalProgress((prev) => {
+      const base = prev ?? {} as VocaStudentProgress;
+      if (type === 'flashcard') return { ...base, flashcard_completed: true };
+      if (type === 'quiz') return { ...base, quiz_score: score ?? 0 };
+      if (type === 'spelling') return { ...base, spelling_score: score ?? 0 };
+      if (type === 'matching') return { ...base, matching_completed: (score ?? 0) >= 90 };
+      return base;
+    });
   }
 
   function handleMatchingComplete(score: number, attempt: number) {

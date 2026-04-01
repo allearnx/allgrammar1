@@ -13,13 +13,12 @@ import {
   AlertTriangle,
   Info,
 } from 'lucide-react';
-import { toast } from 'sonner';
+import { fetchWithToast } from '@/lib/fetch-with-toast';
 import Link from 'next/link';
 import { LessonCard } from '@/components/naesin/lesson-card';
 import { ExamCountdown } from '@/components/naesin/exam-countdown';
 import type { NaesinTextbook } from '@/types/database';
 import type { UnitSummary, ExamGroup } from '@/lib/naesin/build-unit-summary';
-import { logger } from '@/lib/logger';
 
 const GRADE_COLORS = [
   { accent: '#06B6D4', light: '#ECFEFF', mid: '#CFFAFE', text: '#0891B2' },
@@ -60,21 +59,15 @@ export function NaesinHome({
   async function selectTextbook(tbId: string) {
     setSaving(true);
     try {
-      const res = await fetch('/api/naesin/settings', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ textbookId: tbId }),
+      await fetchWithToast('/api/naesin/settings', {
+        body: { textbookId: tbId },
+        successMessage: '교과서가 선택되었습니다',
+        errorMessage: '교과서 선택 중 오류가 발생했습니다',
       });
-      if (!res.ok) {
-        const err = await res.json().catch(() => null);
-        throw new Error(err?.error || '요청에 실패했습니다');
-      }
-      toast.success('교과서가 선택되었습니다');
       setConfirmId(null);
       router.refresh();
-    } catch (err) {
-      logger.error('student.naesin_client', { error: err instanceof Error ? err.message : String(err) });
-      toast.error('교과서 선택 중 오류가 발생했습니다');
+    } catch {
+      // error toast already shown by fetchWithToast
     } finally {
       setSaving(false);
     }

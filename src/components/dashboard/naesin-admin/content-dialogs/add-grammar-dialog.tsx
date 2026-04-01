@@ -14,51 +14,38 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog';
 import { GraduationCap } from 'lucide-react';
-import { toast } from 'sonner';
 import { extractVideoId } from '@/lib/utils/youtube';
-import { logger } from '@/lib/logger';
+import { useFormDialog } from '@/hooks/use-form-dialog';
+import { fetchWithToast } from '@/lib/fetch-with-toast';
 
 export function AddGrammarDialog({ unitId, onAdd }: { unitId: string; onAdd: () => void }) {
-  const [open, setOpen] = useState(false);
+  const { open, setOpen, saving, handleSubmit } = useFormDialog({
+    onSuccess: onAdd,
+    logContext: 'admin.add_grammar',
+    successMessage: '문법 설명이 추가되었습니다',
+    errorMessage: '문법 설명 추가 실패',
+  });
   const [title, setTitle] = useState('');
   const [contentType, setContentType] = useState<'video' | 'text'>('video');
   const [youtubeUrl, setYoutubeUrl] = useState('');
   const [textContent, setTextContent] = useState('');
-  const [saving, setSaving] = useState(false);
 
-  async function handleSubmit(e: React.FormEvent) {
+  async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
-    setSaving(true);
-    try {
+    await handleSubmit(async () => {
       const videoId = contentType === 'video' ? extractVideoId(youtubeUrl) : null;
-      const res = await fetch('/api/naesin/grammar-lessons', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
+      await fetchWithToast('/api/naesin/grammar-lessons', {
+        body: {
           unit_id: unitId,
           title,
           content_type: contentType,
           youtube_url: contentType === 'video' ? youtubeUrl : null,
           youtube_video_id: videoId,
           text_content: contentType === 'text' ? textContent : null,
-        }),
+        },
+        silent: true,
       });
-      if (!res.ok) {
-        const err = await res.json().catch(() => null);
-        throw new Error(err?.error || '요청에 실패했습니다');
-      }
-      onAdd();
-      setOpen(false);
-      setTitle('');
-      setYoutubeUrl('');
-      setTextContent('');
-      toast.success('문법 설명이 추가되었습니다');
-    } catch (err) {
-      logger.error('admin.add_grammar', { error: err instanceof Error ? err.message : String(err) });
-      toast.error('문법 설명 추가 실패');
-    } finally {
-      setSaving(false);
-    }
+    }, () => { setTitle(''); setYoutubeUrl(''); setTextContent(''); });
   }
 
   return (
@@ -71,7 +58,7 @@ export function AddGrammarDialog({ unitId, onAdd }: { unitId: string; onAdd: () 
       </DialogTrigger>
       <DialogContent className="max-h-[85vh] overflow-y-auto">
         <DialogHeader><DialogTitle>문법 설명 추가</DialogTitle></DialogHeader>
-        <form onSubmit={handleSubmit} className="space-y-3">
+        <form onSubmit={onSubmit} className="space-y-3">
           <div>
             <Label htmlFor="grammar-title">제목</Label>
             <Input id="grammar-title" value={title} onChange={(e) => setTitle(e.target.value)} required />

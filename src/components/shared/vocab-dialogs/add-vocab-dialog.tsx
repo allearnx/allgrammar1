@@ -12,8 +12,7 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog';
 import { Plus } from 'lucide-react';
-import { toast } from 'sonner';
-import { logger } from '@/lib/logger';
+import { fetchWithToast } from '@/lib/fetch-with-toast';
 import type { VocabDialogProps } from './types';
 import { getVocabConfig } from './types';
 
@@ -46,22 +45,17 @@ export function AddVocabDialog({ module, parentId, onAdd }: VocabDialogProps) {
         body.spelling_hint = form.spelling_hint.trim() || null;
         body.spelling_answer = form.spelling_answer.trim() || null;
       }
-      const res = await fetch(cfg.apiBase, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(body),
+      await fetchWithToast(cfg.apiBase, {
+        body,
+        successMessage: '단어가 추가되었습니다',
+        errorMessage: '단어 추가 실패',
+        logContext: `${cfg.logPrefix}.add_vocab`,
       });
-      if (!res.ok) {
-        const err = await res.json().catch(() => null);
-        throw new Error(err?.error || '요청에 실패했습니다');
-      }
       onAdd();
       setOpen(false);
       setForm(INITIAL_FORM);
-      toast.success('단어가 추가되었습니다');
-    } catch (err) {
-      logger.error(`${cfg.logPrefix}.add_vocab`, { error: err instanceof Error ? err.message : String(err) });
-      toast.error('단어 추가 실패');
+    } catch {
+      // fetchWithToast already shows toast
     } finally {
       setSaving(false);
     }

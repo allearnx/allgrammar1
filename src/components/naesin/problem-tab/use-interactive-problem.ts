@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { toast } from 'sonner';
-import { logger } from '@/lib/logger';
+import { fetchWithToast } from '@/lib/fetch-with-toast';
 import type { NaesinProblemQuestion } from '@/types/database';
 import { useProblemDraft } from '@/hooks/use-problem-draft';
 import type { AiFeedback, WrongItem } from '@/hooks/use-problem-draft';
@@ -55,28 +55,17 @@ export function useInteractiveProblem({
 
   async function gradeSubjective(studentAnswer: string): Promise<AiFeedback | null> {
     try {
-      const res = await fetch('/api/naesin/problems/grade-subjective', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
+      return await fetchWithToast<AiFeedback>('/api/naesin/problems/grade-subjective', {
+        body: {
           question: question.question,
           referenceAnswer: String(question.answer),
           studentAnswer,
-        }),
+        },
+        errorMessage: 'AI 채점에 실패했습니다.',
+        logContext: 'naesin.interactive_view',
       });
-      if (!res.ok) {
-        const err = await res.json().catch(() => null);
-        if (res.status === 429) {
-          toast.error(err?.error || '채점 횟수를 초과했습니다.');
-        } else {
-          toast.error('AI 채점에 실패했습니다.');
-        }
-        return null;
-      }
-      return await res.json();
-    } catch (err) {
-      logger.error('naesin.interactive_view', { error: err instanceof Error ? err.message : String(err) });
-      toast.error('AI 채점 중 오류가 발생했습니다.');
+    } catch {
+      // error already toasted by fetchWithToast (includes 429 server message)
       return null;
     }
   }
@@ -197,31 +186,25 @@ export function useInteractiveProblem({
   async function submitResults(answers: (string | number)[], total: number, finalAiResults?: Record<string, AiFeedback>) {
     const mergedAiResults = finalAiResults ?? aiResultsMap;
     try {
-      const res = await fetch('/api/naesin/problems/submit', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
+      const data = await fetchWithToast<{ score: number }>('/api/naesin/problems/submit', {
+        body: {
           sheetId,
           unitId,
           answers,
           totalQuestions: total,
           ...(Object.keys(mergedAiResults).length > 0 ? { aiResults: mergedAiResults } : {}),
-        }),
+        },
+        errorMessage: '결과 저장에 실패했습니다',
+        logContext: 'naesin.interactive_view',
       });
-      if (!res.ok) {
-        const err = await res.json().catch(() => null);
-        throw new Error(err?.error || '결과 저장에 실패했습니다');
-      }
-      const data = await res.json();
       clearDraft();
       setFinished(true);
       if (data.score >= 80) {
         toast.success('문제풀이를 완료했습니다!');
         onComplete?.();
       }
-    } catch (err) {
-      logger.error('naesin.interactive_view', { error: err instanceof Error ? err.message : String(err) });
-      toast.error('결과 저장에 실패했습니다');
+    } catch {
+      // error already toasted by fetchWithToast
       setFinished(true);
     }
   }

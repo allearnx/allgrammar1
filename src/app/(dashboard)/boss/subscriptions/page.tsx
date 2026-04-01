@@ -6,7 +6,7 @@ import { ConfirmDialog } from '@/components/shared/confirm-dialog';
 import { StatCard } from '@/components/shared/stat-card';
 import { SubscriptionTableRow, type SubscriptionRow } from '@/components/boss/subscription-table-row';
 import { SubscriptionsSkeleton } from '@/components/boss/subscriptions-skeleton';
-import { toast } from 'sonner';
+import { fetchWithToast } from '@/lib/fetch-with-toast';
 import { CreditCard, Crown, Users, Inbox, Zap } from 'lucide-react';
 
 export default function BossSubscriptionsPage() {
@@ -17,10 +17,18 @@ export default function BossSubscriptionsPage() {
   const [pendingTierChange, setPendingTierChange] = useState<{ subId: string; newTier: 'free' | 'paid' } | null>(null);
 
   const fetchSubs = useCallback(async () => {
-    const params = statusFilter !== 'all' ? `?status=${statusFilter}` : '';
-    const res = await fetch(`/api/boss/subscriptions${params}`);
-    if (res.ok) setSubs(await res.json());
-    setLoading(false);
+    try {
+      const params = statusFilter !== 'all' ? `?status=${statusFilter}` : '';
+      const data = await fetchWithToast<SubscriptionRow[]>(`/api/boss/subscriptions${params}`, {
+        method: 'GET',
+        silent: true,
+      });
+      setSubs(data);
+    } catch {
+      // silently ignore fetch errors
+    } finally {
+      setLoading(false);
+    }
   }, [statusFilter]);
 
   // eslint-disable-next-line react-hooks/set-state-in-effect
@@ -38,17 +46,14 @@ export default function BossSubscriptionsPage() {
     setPendingTierChange(null);
     setChangingTier(subId);
     try {
-      const res = await fetch(`/api/boss/subscriptions/${subId}`, {
+      await fetchWithToast(`/api/boss/subscriptions/${subId}`, {
         method: 'PATCH',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ tier: newTier }),
+        body: { tier: newTier },
+        errorMessage: '변경에 실패했습니다.',
       });
-      if (res.ok) {
-        await fetchSubs();
-      } else {
-        const data = await res.json();
-        toast.error(data.error || '변경에 실패했습니다.');
-      }
+      await fetchSubs();
+    } catch {
+      // fetchWithToast already shows error toast
     } finally {
       setChangingTier(null);
     }

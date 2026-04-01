@@ -14,7 +14,7 @@ import {
 } from '@/components/ui/dialog';
 import { FileText, Loader2, Check, X as XIcon } from 'lucide-react';
 import { toast } from 'sonner';
-import { logger } from '@/lib/logger';
+import { fetchWithToast } from '@/lib/fetch-with-toast';
 
 interface ExtractedWord {
   front_text: string;
@@ -52,33 +52,24 @@ export function PdfBulkExtract({ bookId, onCreated }: { bookId: string; onCreate
       const formData = new FormData();
       formData.append('file', file);
 
-      const res = await fetch('/api/voca/vocabulary/extract-pdf', {
-        method: 'POST',
-        body: formData,
-      });
+      const data = await fetchWithToast<{ items: Omit<ExtractedWord, 'selected'>[] }>(
+        '/api/voca/vocabulary/extract-pdf',
+        {
+          body: formData,
+          errorMessage: 'PDF 단어 추출 실패',
+          logContext: 'voca_admin.pdf_bulk',
+        },
+      );
 
-      if (!res.ok) {
-        const text = await res.text();
-        let errorMsg = '추출 실패';
-        try {
-          const data = JSON.parse(text);
-          errorMsg = data.error || errorMsg;
-        } catch {
-          errorMsg = res.status === 504 ? 'PDF가 너무 커서 시간이 초과되었습니다. 더 작은 파일로 시도해주세요.' : '서버 오류가 발생했습니다.';
-        }
-        throw new Error(errorMsg);
-      }
-
-      const data = await res.json();
       setWords(
-        data.items.map((item: Omit<ExtractedWord, 'selected'>) => ({
+        data.items.map((item) => ({
           ...item,
           selected: true,
         }))
       );
       setStep(2);
-    } catch (err) {
-      toast.error(err instanceof Error ? err.message : 'PDF 단어 추출 실패');
+    } catch {
+      // fetchWithToast already shows toast
     } finally {
       setExtracting(false);
     }
@@ -103,25 +94,21 @@ export function PdfBulkExtract({ bookId, onCreated }: { bookId: string; onCreate
         spelling_answer: rest.front_text,
       }));
 
-      const res = await fetch('/api/voca/days-with-vocabulary', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ book_id: bookId, words_per_day: wordsPerDay, items }),
-      });
+      const data = await fetchWithToast<{ days: unknown[]; totalWords: number }>(
+        '/api/voca/days-with-vocabulary',
+        {
+          body: { book_id: bookId, words_per_day: wordsPerDay, items },
+          errorMessage: '저장 실패',
+          logContext: 'voca_admin.pdf_bulk',
+        },
+      );
 
-      if (!res.ok) {
-        const err = await res.json().catch(() => null);
-        throw new Error(err?.error || '요청에 실패했습니다');
-      }
-
-      const data = await res.json();
       onCreated();
       setOpen(false);
       reset();
       toast.success(`${data.days.length}개 Day, ${data.totalWords}개 단어가 생성되었습니다`);
-    } catch (err) {
-      logger.error('voca_admin.pdf_bulk', { error: err instanceof Error ? err.message : String(err) });
-      toast.error('저장 실패');
+    } catch {
+      // fetchWithToast already shows toast
     } finally {
       setSaving(false);
     }

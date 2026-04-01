@@ -13,6 +13,7 @@ import { AddUnitDialog, UnitCard } from './unit-section';
 import { ConfirmDialog } from '@/components/shared/confirm-dialog';
 import { WorkbookManager } from './workbook-manager';
 import { logger } from '@/lib/logger';
+import { fetchWithToast } from '@/lib/fetch-with-toast';
 
 interface NaesinAdminClientProps {
   textbooks: NaesinTextbook[];
@@ -171,21 +172,17 @@ export function NaesinAdminClient({ textbooks: initialTextbooks }: NaesinAdminCl
               setDeleteTextbookId(null);
               if (!id) return;
               try {
-                const res = await fetch('/api/naesin/textbooks', {
+                await fetchWithToast('/api/naesin/textbooks', {
                   method: 'DELETE',
-                  headers: { 'Content-Type': 'application/json' },
-                  body: JSON.stringify({ id }),
+                  body: { id },
+                  successMessage: '교과서가 삭제되었습니다',
+                  errorMessage: '교과서 삭제에 실패했습니다',
+                  logContext: 'admin.naesin_index',
                 });
-                if (res.ok) {
-                  setTextbooks(textbooks.filter((t) => t.id !== id));
-                  if (selectedTextbook?.id === id) setSelectedTextbook(null);
-                  toast.success('교과서가 삭제되었습니다');
-                } else {
-                  toast.error('교과서 삭제에 실패했습니다');
-                }
-              } catch (err) {
-                logger.error('admin.naesin_index', { error: err instanceof Error ? err.message : String(err) });
-                toast.error('교과서 삭제 중 오류가 발생했습니다');
+                setTextbooks(textbooks.filter((t) => t.id !== id));
+                if (selectedTextbook?.id === id) setSelectedTextbook(null);
+              } catch {
+                // fetchWithToast already handles toast + logging
               }
             }}
           />

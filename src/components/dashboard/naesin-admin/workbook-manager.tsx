@@ -10,6 +10,7 @@ import { AddWorkbookDialog } from './add-workbook-dialog';
 import { AddSheetDialog } from './add-sheet-dialog';
 import type { NaesinWorkbook, NaesinWorkbookOmrSheet } from '@/types/naesin';
 import { logger } from '@/lib/logger';
+import { fetchWithToast } from '@/lib/fetch-with-toast';
 
 export function WorkbookManager() {
   const [workbooks, setWorkbooks] = useState<NaesinWorkbook[]>([]);
@@ -48,12 +49,17 @@ export function WorkbookManager() {
 
   async function loadSheets(workbookId: string) {
     try {
-      const res = await fetch(`/api/naesin/workbook-omr-sheets?workbookId=${workbookId}`);
-      if (!res.ok) throw new Error();
-      setSheets(await res.json());
-    } catch (err) {
-      logger.error('admin.workbook', { error: err instanceof Error ? err.message : String(err) });
-      toast.error('시트 목록을 불러오지 못했습니다');
+      const data = await fetchWithToast<NaesinWorkbookOmrSheet[]>(
+        `/api/naesin/workbook-omr-sheets?workbookId=${workbookId}`,
+        {
+          method: 'GET',
+          errorMessage: '시트 목록을 불러오지 못했습니다',
+          logContext: 'admin.workbook',
+        },
+      );
+      setSheets(data);
+    } catch {
+      // fetchWithToast already handles toast + logging
     }
   }
 
@@ -67,25 +73,22 @@ export function WorkbookManager() {
         ? '/api/naesin/workbooks'
         : '/api/naesin/workbook-omr-sheets';
 
-      const res = await fetch(endpoint, {
+      await fetchWithToast(endpoint, {
         method: 'DELETE',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ id }),
+        body: { id },
+        successMessage: type === 'workbook' ? '교재가 삭제되었습니다' : '시트가 삭제되었습니다',
+        errorMessage: '삭제 중 오류가 발생했습니다',
+        logContext: 'admin.workbook',
       });
-
-      if (!res.ok) throw new Error();
 
       if (type === 'workbook') {
         setWorkbooks((prev) => prev.filter((w) => w.id !== id));
         if (selectedWorkbook?.id === id) setSelectedWorkbook(null);
-        toast.success('교재가 삭제되었습니다');
       } else {
         setSheets((prev) => prev.filter((s) => s.id !== id));
-        toast.success('시트가 삭제되었습니다');
       }
-    } catch (err) {
-      logger.error('admin.workbook', { error: err instanceof Error ? err.message : String(err) });
-      toast.error('삭제 중 오류가 발생했습니다');
+    } catch {
+      // fetchWithToast already handles toast + logging
     }
   }
 

@@ -3,7 +3,7 @@
 import { useState, useMemo } from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { toast } from 'sonner';
-import { logger } from '@/lib/logger';
+import { fetchWithToast } from '@/lib/fetch-with-toast';
 import { Round2FlashcardView } from './round2-flashcard-view';
 import { ComprehensiveQuiz } from './comprehensive-quiz';
 import { MatchingView } from './matching-view';
@@ -46,22 +46,18 @@ export function VocaTab2({ vocabulary, dayId, progress }: VocaTab2Props) {
 
   async function saveProgress(type: 'flashcard' | 'quiz' | 'matching', score?: number, matchingAttempt?: number) {
     try {
-      await fetch('/api/voca/progress', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ dayId, type, score, matchingAttempt, round: '2' }),
+      await fetchWithToast('/api/voca/progress', {
+        body: { dayId, type, score, matchingAttempt, round: '2' },
+        silent: true,
       });
-      setLocalProgress((prev) => {
-        const base = prev ?? {} as VocaStudentProgress;
-        if (type === 'flashcard') return { ...base, round2_flashcard_completed: true };
-        if (type === 'quiz') return { ...base, round2_quiz_score: score ?? 0 };
-        if (type === 'matching') return { ...base, round2_matching_completed: (score ?? 0) >= 90 };
-        return base;
-      });
-    } catch (err) {
-      logger.error('voca.round2', { error: err instanceof Error ? err.message : String(err) });
-      toast.error('진도 저장 중 오류가 발생했습니다');
-    }
+    } catch { /* swallow */ }
+    setLocalProgress((prev) => {
+      const base = prev ?? {} as VocaStudentProgress;
+      if (type === 'flashcard') return { ...base, round2_flashcard_completed: true };
+      if (type === 'quiz') return { ...base, round2_quiz_score: score ?? 0 };
+      if (type === 'matching') return { ...base, round2_matching_completed: (score ?? 0) >= 90 };
+      return base;
+    });
   }
 
   function handleMatchingComplete(score: number, attempt: number) {

@@ -12,9 +12,8 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog';
 import { Plus } from 'lucide-react';
-import { toast } from 'sonner';
+import { fetchWithToast } from '@/lib/fetch-with-toast';
 import type { VocaDay } from '@/types/voca';
-import { logger } from '@/lib/logger';
 
 export function AddDayDialog({ bookId, nextDayNumber, onAdd }: { bookId: string; nextDayNumber: number; onAdd: (day: VocaDay) => void }) {
   const [open, setOpen] = useState(false);
@@ -27,27 +26,24 @@ export function AddDayDialog({ bookId, nextDayNumber, onAdd }: { bookId: string;
     if (!title.trim()) return;
     setSaving(true);
     try {
-      const res = await fetch('/api/voca/days', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
+      const data = await fetchWithToast<VocaDay>('/api/voca/days', {
+        body: {
           book_id: bookId,
           day_number: Number(dayNumber),
           title: title.trim(),
           sort_order: Number(dayNumber),
-        }),
+        },
+        successMessage: 'Day가 추가되었습니다',
+        errorMessage: 'Day 추가 중 오류가 발생했습니다',
+        logContext: 'voca_admin.add_day',
       });
-      if (!res.ok) throw new Error();
-      const data = await res.json();
       onAdd(data);
       setOpen(false);
       const next = Number(dayNumber) + 1;
       setDayNumber(String(next));
       setTitle(`Day ${next}`);
-      toast.success('Day가 추가되었습니다');
-    } catch (err) {
-      logger.error('voca_admin.add_day', { error: err instanceof Error ? err.message : String(err) });
-      toast.error('Day 추가 중 오류가 발생했습니다');
+    } catch {
+      // fetchWithToast already shows toast
     } finally {
       setSaving(false);
     }

@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { createBrowserClient } from '@supabase/ssr';
+import { fetchWithToast } from '@/lib/fetch-with-toast';
 import { GRADE_OPTIONS } from '@/types/public';
 import type { Course } from '@/types/public';
 
@@ -72,20 +73,15 @@ export default function ConsultationForm({ onSuccess }: { onSuccess?: () => void
 
     setIsLoading(true);
     try {
-      const res = await fetch('/api/public/consultations', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
+      await fetchWithToast('/api/public/consultations', {
+        body: {
           student_name: studentName.trim(),
           grade: studentGrade,
           parent_phone: parentPhone,
           interest_course_ids: interestCourseIds,
-        }),
+        },
+        silent: true,
       });
-      if (!res.ok) {
-        const data = await res.json();
-        throw new Error(data.error || '신청 실패');
-      }
 
       setShowModal(true);
       setStudentName('');
