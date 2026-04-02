@@ -26,7 +26,7 @@ export function NaesinQuizView({
   onGoToSpelling?: () => void;
   quizResultEndpoint?: string;
 }) {
-  const q = useQuizState({
+  const { containerRef, resultRef, ...q } = useQuizState({
     vocabulary,
     allVocabulary,
     unitId,
@@ -58,7 +58,7 @@ export function NaesinQuizView({
   }
 
   return (
-    <div ref={q.containerRef} className="space-y-6 scroll-mt-4">
+    <div ref={containerRef} className="space-y-6 scroll-mt-4">
       <div className="flex justify-between items-center">
         <span className="text-sm text-muted-foreground">{q.currentIndex + 1} / {q.questions.length}</span>
         <div className="flex items-center gap-3">
@@ -94,11 +94,11 @@ export function NaesinQuizView({
       />
 
       {q.showResult && !q.quizFinished && (
-        <div ref={q.resultRef} className="text-center">
+        <div ref={resultRef} className="text-center">
           {q.currentIndex < q.questions.length - 1 ? (
             <NextButton onClick={q.handleNext} />
           ) : (
-            q.saving && <p className="text-sm text-muted-foreground">결과 저장 중...</p>
+            q.saving ? <p className="text-sm text-muted-foreground">결과 저장 중...</p> : null
           )}
         </div>
       )}

@@ -33,6 +33,10 @@ export function ComprehensiveQuiz({ vocabulary, dayId: _dayId, onComplete }: Com
   const [results, setResults] = useState<QuestionResult[] | null>(null);
   const [grading, setGrading] = useState(false);
 
+  useEffect(() => {
+    questionRef.current?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }, [currentIdx]);
+
   if (questions.length === 0) {
     return (
       <p className="text-center text-muted-foreground py-8">
@@ -43,10 +47,6 @@ export function ComprehensiveQuiz({ vocabulary, dayId: _dayId, onComplete }: Com
 
   const question = questions[currentIdx];
   const totalQuestions = questions.length;
-
-  useEffect(() => {
-    questionRef.current?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-  }, [currentIdx]);
 
   function handleAnswer(answer: string) {
     setAnswers((prev) => new Map(prev).set(currentIdx, answer));

@@ -92,7 +92,7 @@ export function calculateStageStatuses(
   // Stage 8: Last Review — D-3 auto-unlock (progress-independent)
   const lastReviewStatus = getLastReviewStatus(content.hasLastReview, examDate);
 
-  let result: NaesinStageStatuses = {
+  const result: NaesinStageStatuses = {
     vocab: vocabStatus,
     passage: passageStatus,
     dialogue: dialogueStatus,

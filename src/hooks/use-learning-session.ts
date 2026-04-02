@@ -8,7 +8,7 @@ export function useLearningSession(
   contextType: 'naesin' | 'voca',
   contextId: string
 ) {
-  const lastTickRef = useRef(Date.now());
+  const lastTickRef = useRef(0);
   const accumulatedRef = useRef(0);
 
   useEffect(() => {

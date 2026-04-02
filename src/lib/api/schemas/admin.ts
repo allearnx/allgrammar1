@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { ID, SHORT, MEDIUM, URL_STR } from './_shared';
+import { ID, URL_STR } from './_shared';
 
 // ── Boss/Admin Schemas ──
 
