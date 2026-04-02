@@ -30,6 +30,7 @@ export interface InteractiveDraft {
   aiResultsMap: Record<string, AiFeedback>;
   answeredUpTo: number;
   overtimeQuestions: number[];
+  answersMap: Record<number, string | number>;
 }
 
 export interface ImageAnswerDraft {

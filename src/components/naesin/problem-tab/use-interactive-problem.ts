@@ -47,6 +47,10 @@ export function useInteractiveProblem({
     const d = loadDraft();
     return d?.mode === 'interactive' ? (d.overtimeQuestions ?? []) : [];
   });
+  const [answersMap, setAnswersMap] = useState<Record<number, string | number>>(() => {
+    const d = loadDraft();
+    return d?.mode === 'interactive' ? (d.answersMap ?? {}) : {};
+  });
 
   const question = questions[currentIndex];
   const isSubjective = !question?.options || question.options.length === 0;
@@ -75,6 +79,7 @@ export function useInteractiveProblem({
     newWrongList: WrongItem[],
     newAiResultsMap: Record<string, AiFeedback>,
     newOvertimeQuestions?: number[],
+    newAnswersMap?: Record<number, string | number>,
   ) {
     saveDraft({
       mode: 'interactive',
@@ -84,6 +89,7 @@ export function useInteractiveProblem({
       aiResultsMap: newAiResultsMap,
       answeredUpTo: currentIndex,
       overtimeQuestions: newOvertimeQuestions ?? overtimeQuestions,
+      answersMap: newAnswersMap ?? answersMap,
     });
   }
 
@@ -120,14 +126,14 @@ export function useInteractiveProblem({
     aiMap: Record<string, AiFeedback>,
     ot?: number[],
   ) {
+    const updatedAnswersMap = { ...answersMap, [currentIndex]: answer };
+    setAnswersMap(updatedAnswersMap);
+
     if (isLast) {
-      submitResults(
-        questions.map((_, i) => i === currentIndex ? answer : ''),
-        questions.length,
-        aiMap,
-      );
+      const allAnswers = questions.map((_, i) => updatedAnswersMap[i] ?? '');
+      submitResults(allAnswers, questions.length, aiMap);
     } else {
-      saveCurrentDraft(newScore, newWrongList, aiMap, ot);
+      saveCurrentDraft(newScore, newWrongList, aiMap, ot, updatedAnswersMap);
     }
   }
 

@@ -34,6 +34,7 @@ function makeDraft(): InteractiveDraft {
     aiResultsMap: {},
     answeredUpTo: 3,
     overtimeQuestions: [],
+    answersMap: { 0: '2', 1: '3', 2: '1' },
   };
 }
 
@@ -118,6 +119,7 @@ describe('useProblemDraft', () => {
         aiResultsMap: {},
         answeredUpTo: 2,
         overtimeQuestions: [],
+        answersMap: { 0: '1', 1: '3' },
       });
 
       const stored = JSON.parse(store[KEY]);
@@ -165,7 +167,7 @@ describe('useProblemDraft', () => {
 
       const { saveDraft } = useProblemDraft(SHEET_ID, Q_COUNT);
       expect(() =>
-        saveDraft({ mode: 'interactive', currentIndex: 0, score: { correct: 0, wrong: 0 }, wrongList: [], aiResultsMap: {}, answeredUpTo: 0, overtimeQuestions: [] })
+        saveDraft({ mode: 'interactive', currentIndex: 0, score: { correct: 0, wrong: 0 }, wrongList: [], aiResultsMap: {}, answeredUpTo: 0, overtimeQuestions: [], answersMap: {} })
       ).not.toThrow();
     });
 
