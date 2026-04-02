@@ -137,7 +137,7 @@ export function ActivityCalendar({ activities, dailySeconds }: Props) {
 
         {/* Empty cells before first day */}
         {Array.from({ length: firstDay }).map((_, i) => (
-          <div key={`empty-${i}`} className="aspect-square" />
+          <div key={`empty-${i}`} className="h-9" />
         ))}
 
         {/* Day cells */}
@@ -161,7 +161,7 @@ export function ActivityCalendar({ activities, dailySeconds }: Props) {
             <button
               key={day}
               onClick={() => setSelectedDate(isSelected ? null : dateStr)}
-              className={`aspect-square flex flex-col items-center justify-center rounded-lg text-xs transition-all relative ${
+              className={`h-9 flex items-center justify-center rounded-md text-xs transition-all relative ${
                 isSelected
                   ? 'bg-violet-100 ring-2 ring-violet-400'
                   : isToday
@@ -175,7 +175,7 @@ export function ActivityCalendar({ activities, dailySeconds }: Props) {
               </span>
               {count > 0 && (
                 <div
-                  className="absolute bottom-1 h-1.5 w-1.5 rounded-full"
+                  className="absolute bottom-0.5 h-1 w-1 rounded-full"
                   style={{ background: dotColor, opacity: dotOpacity }}
                 />
               )}
