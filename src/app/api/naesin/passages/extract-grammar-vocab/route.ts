@@ -21,7 +21,7 @@ const ADMIN_ROLES = ['teacher', 'admin', 'boss'] as const;
 const MIN_WORD_COUNT = 5;
 
 export const POST = createApiHandler(
-  { roles: [...ADMIN_ROLES], schema, rateLimit: { max: 10 } },
+  { roles: [...ADMIN_ROLES], schema, rateLimit: { max: 50 } },
   async ({ body }) => {
     const { sentences } = body;
 

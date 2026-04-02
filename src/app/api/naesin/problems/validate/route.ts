@@ -13,7 +13,7 @@ export const POST = createApiHandler(
   {
     roles: ['teacher', 'admin', 'boss'],
     schema: problemValidateSchema,
-    rateLimit: { max: 10 },
+    rateLimit: { max: 50 },
   },
   async ({ body }) => {
     const { questions, skipAi } = body;

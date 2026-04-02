@@ -12,7 +12,7 @@ export const maxDuration = 60;
 const anthropic = new Anthropic();
 
 export const POST = createApiHandler(
-  { roles: ['teacher', 'admin', 'boss'], schema: similarProblemGenerateSchema, rateLimit: { max: 10 } },
+  { roles: ['teacher', 'admin', 'boss'], schema: similarProblemGenerateSchema, rateLimit: { max: 50 } },
   async ({ user, body, supabase }) => {
     const { unitId, wrongAnswerIds, grammarTag } = body;
 
