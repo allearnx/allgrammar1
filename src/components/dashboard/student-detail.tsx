@@ -11,6 +11,7 @@ import { StudentReportPanel } from './student-report-panel';
 import { ParentShareButton } from './parent-share-button';
 import { ImpersonateButton } from './impersonate-button';
 import { TextbookAssigner } from './textbook-assigner';
+import { getPlanContext } from '@/lib/billing/get-plan-context';
 
 interface NaesinData {
   textbookId: string;
@@ -110,6 +111,7 @@ export async function StudentDetail({ user, studentId, naesinData }: Props) {
   const passageStages = (passageStagesRes.data?.passage_required_stages as string[] | null) ?? ['fill_blanks', 'translation'];
   const translationSentencesPerPage = (passageStagesRes.data?.translation_sentences_per_page as number | null) ?? 10;
   const enabledStages = (passageStagesRes.data?.enabled_stages as string[] | null) ?? ['vocab', 'passage', 'dialogue', 'textbookVideo', 'grammar', 'problem', 'mockExam', 'lastReview'];
+  const planContext = await getPlanContext(student.academy_id, studentId);
 
   const videoProgress = videoRes.data || [];
   const memoryProgress = memoryRes.data || [];
@@ -185,6 +187,7 @@ export async function StudentDetail({ user, studentId, naesinData }: Props) {
             enabledStages={enabledStages as ('vocab' | 'passage' | 'grammar' | 'problem' | 'lastReview')[]}
             passageStages={passageStages as ('fill_blanks' | 'ordering' | 'translation' | 'grammar_vocab')[]}
             translationSentencesPerPage={translationSentencesPerPage}
+            tier={planContext.tier}
           />
         )}
 

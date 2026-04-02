@@ -7,6 +7,7 @@ import { ExamAssignmentManager } from './exam-assignment-manager';
 import { PassageStageManager } from './passage-stage-manager';
 import { EnabledStagesManager } from './enabled-stages-manager';
 import type { NaesinExamAssignment, NaesinUnit } from '@/types/database';
+import type { Tier } from '@/lib/billing/feature-gate';
 
 interface NaesinProgressRow {
   unit_id: string;
@@ -41,6 +42,7 @@ interface Props {
   enabledStages: ('vocab' | 'passage' | 'grammar' | 'problem' | 'lastReview')[];
   passageStages: ('fill_blanks' | 'ordering' | 'translation' | 'grammar_vocab')[];
   translationSentencesPerPage: number;
+  tier?: Tier;
 }
 
 export function NaesinProgressCard({
@@ -52,6 +54,7 @@ export function NaesinProgressCard({
   enabledStages,
   passageStages,
   translationSentencesPerPage,
+  tier,
 }: Props) {
   const naesinUnits = naesinData.units;
   const naesinProgressMap = new Map(naesinProgress.map((p) => [p.unit_id, p]));
@@ -213,6 +216,7 @@ export function NaesinProgressCard({
             <EnabledStagesManager
               studentId={studentId}
               initialStages={enabledStages}
+              tier={tier}
             />
           </div>
           <div>
