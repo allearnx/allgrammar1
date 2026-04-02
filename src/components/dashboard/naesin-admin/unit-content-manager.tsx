@@ -19,7 +19,7 @@ import { toast } from 'sonner';
 import { logger } from '@/lib/logger';
 import { fetchWithToast } from '@/lib/fetch-with-toast';
 import type { NaesinVocabulary, NaesinGrammarLesson, NaesinPassage } from '@/types/database';
-import type { NaesinProblemSheet, NaesinTextbookVideo } from '@/types/naesin';
+import type { NaesinDialogue, NaesinProblemSheet, NaesinTextbookVideo } from '@/types/naesin';
 import { ConfirmDialog } from '@/components/shared/confirm-dialog';
 import { AddVocabDialog, BulkVocabUpload, PdfVocabExtract } from './vocab-dialogs';
 import { AddPassageDialog, AddDialogueDialog, AddGrammarDialog, AddOmrDialog, AddProblemDialog, AddLastReviewDialog, BulkOmrUploadDialog, BulkProblemUploadDialog, PdfProblemExtractDialog, AddTextbookVideoDialog, AddMockExamDialog } from './content-dialogs';
@@ -31,6 +31,7 @@ import { extractVideoId } from '@/lib/utils/youtube';
 import { UnitVocabList } from './unit-vocab-list';
 import { UnitPassageList } from './unit-passage-list';
 import { UnitGrammarList } from './unit-grammar-list';
+import { UnitDialogueList } from './unit-dialogue-list';
 import { UnitProblemList } from './unit-problem-list';
 import { makeDeleteHandler } from '@/lib/naesin/make-delete-handler';
 import { contentManagerReducer, contentManagerInitialState } from './unit-content-manager-state';
@@ -70,6 +71,15 @@ export function UnitContentManager({ unitId }: { unitId: string }) {
       success: '지문이 삭제되었습니다',
       error: '지문 삭제 중 오류가 발생했습니다',
       logKey: 'unit.delete_passage',
+    }),
+  );
+
+  const [dialogueList, setDialogueList] = useState<NaesinDialogue[]>([]);
+  const dialogueDelete = useConfirmDelete(
+    makeDeleteHandler('/api/naesin/dialogues', setDialogueList as never, {
+      success: '대화문이 삭제되었습니다',
+      error: '대화문 삭제 중 오류가 발생했습니다',
+      logKey: 'unit.delete_dialogue',
     }),
   );
 
@@ -138,7 +148,7 @@ export function UnitContentManager({ unitId }: { unitId: string }) {
       const [v, p, dlg, g, o, prob, lr, tbv, mock] = await Promise.all([
         supabase.from('naesin_vocabulary').select('*').eq('unit_id', unitId).order('sort_order'),
         supabase.from('naesin_passages').select('*').eq('unit_id', unitId).order('created_at'),
-        supabase.from('naesin_dialogues').select('*', { count: 'exact', head: true }).eq('unit_id', unitId),
+        supabase.from('naesin_dialogues').select('*').eq('unit_id', unitId).order('created_at'),
         supabase.from('naesin_grammar_lessons').select('*').eq('unit_id', unitId).order('sort_order'),
         supabase.from('naesin_omr_sheets').select('*', { count: 'exact', head: true }).eq('unit_id', unitId),
         supabase.from('naesin_problem_sheets').select('*').eq('unit_id', unitId).eq('category', 'problem').order('created_at'),
@@ -148,7 +158,8 @@ export function UnitContentManager({ unitId }: { unitId: string }) {
       ]);
       vocab.setItems((v.data as NaesinVocabulary[]) || []);
       setPassageList((p.data as NaesinPassage[]) || []);
-      dispatchCM({ type: 'SET_COUNTS', dialogueCount: dlg.count ?? 0, omrCount: o.count ?? 0, lastReviewCount: lr.count ?? 0 });
+      setDialogueList((dlg.data as NaesinDialogue[]) || []);
+      dispatchCM({ type: 'SET_COUNTS', omrCount: o.count ?? 0, lastReviewCount: lr.count ?? 0 });
       setGrammarList((g.data as NaesinGrammarLesson[]) || []);
       setProblemList((prob.data as NaesinProblemSheet[]) || []);
       setTextbookVideoList((tbv.data as NaesinTextbookVideo[]) || []);
@@ -192,7 +203,7 @@ export function UnitContentManager({ unitId }: { unitId: string }) {
   const sections = [
     { label: '단어', icon: BookOpen, count: vocab.items.length, color: 'text-blue-500', toggle: () => dispatchCM({ type: 'TOGGLE_SECTION', section: 'vocab' }), expanded: cm.showVocabList },
     { label: '교과서 지문', icon: FileText, count: passageList.length, color: 'text-orange-500', toggle: () => dispatchCM({ type: 'TOGGLE_SECTION', section: 'passage' }), expanded: cm.showPassageList },
-    { label: '대화문', icon: MessageSquare, count: cm.dialogueCount, color: 'text-violet-500' },
+    { label: '대화문', icon: MessageSquare, count: dialogueList.length, color: 'text-violet-500', toggle: () => dispatchCM({ type: 'TOGGLE_SECTION', section: 'dialogue' }), expanded: cm.showDialogueList },
     { label: '본문 설명 영상', icon: PlayCircle, count: textbookVideoList.length, color: 'text-cyan-500', toggle: () => dispatchCM({ type: 'TOGGLE_SECTION', section: 'textbookVideo' }), expanded: cm.showTextbookVideoList },
     { label: '문법 설명', icon: GraduationCap, count: grammarList.length, color: 'text-green-500', toggle: () => dispatchCM({ type: 'TOGGLE_SECTION', section: 'grammar' }), expanded: cm.showGrammarList },
     { label: 'OMR 시트', icon: ClipboardList, count: cm.omrCount, color: 'text-indigo-500' },
@@ -249,6 +260,14 @@ export function UnitContentManager({ unitId }: { unitId: string }) {
           onUpdate={(updated) => setPassageList((prev) => prev.map((p) => (p.id === updated.id ? updated : p)))}
           onRequestDelete={passageDelete.requestDelete}
           onRegenerateGrammarVocab={regenerateGrammarVocab}
+        />
+      )}
+
+      {cm.showDialogueList && dialogueList.length > 0 && (
+        <UnitDialogueList
+          dialogues={dialogueList}
+          onUpdate={(updated) => setDialogueList((prev) => prev.map((d) => (d.id === updated.id ? updated : d)))}
+          onRequestDelete={dialogueDelete.requestDelete}
         />
       )}
 
@@ -334,6 +353,11 @@ export function UnitContentManager({ unitId }: { unitId: string }) {
       <ConfirmDialog
         description="이 지문을 삭제하시겠습니까? 관련된 빈칸/배열/영작 데이터도 함께 삭제됩니다."
         {...passageDelete.confirmDialogProps}
+      />
+
+      <ConfirmDialog
+        description="이 대화문을 삭제하시겠습니까?"
+        {...dialogueDelete.confirmDialogProps}
       />
 
       <ConfirmDialog
