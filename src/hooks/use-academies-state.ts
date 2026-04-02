@@ -12,6 +12,7 @@ export interface Academy {
   student_count: number;
   max_students: number | null;
   teachers: string[];
+  students: string[];
   services: string[];
   owner_name: string | null;
   owner_email: string | null;

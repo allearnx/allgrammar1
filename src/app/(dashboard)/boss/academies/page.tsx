@@ -20,6 +20,7 @@ export default async function BossAcademiesPage() {
   const countByAcademy = new Map<string, number>();
   const studentCountByAcademy = new Map<string, number>();
   const teachersByAcademy = new Map<string, string[]>();
+  const studentsByAcademy = new Map<string, string[]>();
   const ownerByUserId = new Map<string, { full_name: string; email: string; phone: string | null }>();
   allUsers?.forEach((u) => {
     ownerByUserId.set(u.id, { full_name: u.full_name, email: u.email, phone: u.phone });
@@ -27,6 +28,9 @@ export default async function BossAcademiesPage() {
       countByAcademy.set(u.academy_id, (countByAcademy.get(u.academy_id) || 0) + 1);
       if (u.role === 'student') {
         studentCountByAcademy.set(u.academy_id, (studentCountByAcademy.get(u.academy_id) || 0) + 1);
+        const list = studentsByAcademy.get(u.academy_id) || [];
+        list.push(u.full_name);
+        studentsByAcademy.set(u.academy_id, list);
       }
       if (u.role === 'teacher') {
         const list = teachersByAcademy.get(u.academy_id) || [];
@@ -44,6 +48,7 @@ export default async function BossAcademiesPage() {
       student_count: studentCountByAcademy.get(a.id) || 0,
       max_students: a.max_students as number | null,
       teachers: teachersByAcademy.get(a.id) || [],
+      students: studentsByAcademy.get(a.id) || [],
       services: (a.services as string[]) || [],
       owner_name: owner?.full_name || null,
       owner_email: owner?.email || null,

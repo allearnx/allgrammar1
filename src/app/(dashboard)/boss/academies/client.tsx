@@ -107,6 +107,17 @@ export function AcademiesClient({ academies }: AcademiesClientProps) {
                       )}
                     </span>
                   </div>
+                  <div className="flex items-center gap-1.5 text-sm text-muted-foreground mt-1">
+                    <User className="h-3.5 w-3.5 shrink-0" />
+                    <span>
+                      학생 {academy.students.length}명
+                      {academy.students.length > 0 && (
+                        <span className="text-foreground ml-1">
+                          ({academy.students.join(', ')})
+                        </span>
+                      )}
+                    </span>
+                  </div>
                   {academy.owner_name && (
                     <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-muted-foreground mt-1">
                       <span className="flex items-center gap-1">
