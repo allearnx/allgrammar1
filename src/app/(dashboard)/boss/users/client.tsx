@@ -37,9 +37,15 @@ interface Academy {
   name: string;
 }
 
+interface ServiceAssignment {
+  student_id: string;
+  service: string;
+}
+
 interface UsersClientProps {
   users: User[];
   academies: Academy[];
+  serviceAssignments: ServiceAssignment[];
 }
 
 const ROLE_LABELS: Record<string, string> = {
@@ -51,7 +57,12 @@ const ROLE_LABELS: Record<string, string> = {
 
 const ROLE_OPTIONS = ['student', 'teacher', 'admin', 'boss'];
 
-export function UsersClient({ users, academies }: UsersClientProps) {
+const SERVICE_LABELS: Record<string, string> = {
+  naesin: '올인내신',
+  voca: '올킬보카',
+};
+
+export function UsersClient({ users, academies, serviceAssignments }: UsersClientProps) {
   const [roleFilter, setRoleFilter] = useState<string>('all');
   const [academyFilter, setAcademyFilter] = useState<string>('all');
   const [updating, setUpdating] = useState<string | null>(null);
@@ -63,6 +74,13 @@ export function UsersClient({ users, academies }: UsersClientProps) {
     academies.forEach((a) => map.set(a.id, a.name));
     return map;
   }, [academies]);
+
+  // 학생별 서비스 매핑 (student_id → service)
+  const serviceMap = useMemo(() => {
+    const map = new Map<string, string>();
+    serviceAssignments.forEach((sa) => map.set(sa.student_id, sa.service));
+    return map;
+  }, [serviceAssignments]);
 
   const filteredUsers = useMemo(() => {
     return users.filter((u) => {
@@ -98,6 +116,36 @@ export function UsersClient({ users, academies }: UsersClientProps) {
         successMessage: '사용자 정보가 변경되었습니다',
         errorMessage: '변경 실패',
       });
+      router.refresh();
+    } catch {
+      // error already toasted
+    } finally {
+      setUpdating(null);
+    }
+  }
+
+  async function handleServiceChange(studentId: string, newService: string) {
+    setUpdating(studentId);
+    try {
+      const currentService = serviceMap.get(studentId);
+      // 기존 서비스 해제
+      if (currentService) {
+        await fetchWithToast('/api/service-assignments', {
+          method: 'DELETE',
+          body: { studentId, service: currentService },
+          successMessage: '',
+          errorMessage: '서비스 해제 실패',
+        });
+      }
+      // 새 서비스 배정
+      if (newService !== 'none') {
+        await fetchWithToast('/api/service-assignments', {
+          method: 'POST',
+          body: { studentId, service: newService },
+          successMessage: '서비스가 변경되었습니다',
+          errorMessage: '서비스 변경 실패',
+        });
+      }
       router.refresh();
     } catch {
       // error already toasted
@@ -203,6 +251,22 @@ export function UsersClient({ users, academies }: UsersClientProps) {
                       ))}
                     </SelectContent>
                   </Select>
+                  {u.role === 'student' && (
+                    <Select
+                      value={serviceMap.get(u.id) || 'none'}
+                      onValueChange={(val) => handleServiceChange(u.id, val)}
+                      disabled={updating === u.id}
+                    >
+                      <SelectTrigger className="w-[120px] h-8 text-xs">
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="none">서비스 없음</SelectItem>
+                        <SelectItem value="naesin">올인내신</SelectItem>
+                        <SelectItem value="voca">올킬보카</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  )}
                   <Button
                     variant={u.is_active ? 'destructive' : 'default'}
                     size="sm"
