@@ -4,7 +4,6 @@ import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import {
   ArrowLeft,
-  CheckCircle,
   Lock,
   Crown,
   BookOpen,
@@ -16,13 +15,6 @@ import {
   FileQuestion,
   Brain,
 } from 'lucide-react';
-import { cn } from '@/lib/utils';
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from '@/components/ui/tooltip';
 import { VocabTab } from '@/components/naesin/vocab-tab';
 import { PassageTab } from '@/components/naesin/passage-tab';
 import { GrammarTab } from '@/components/naesin/grammar-tab';
@@ -35,7 +27,6 @@ import type {
   NaesinPassage,
   NaesinGrammarLesson,
   NaesinStageStatuses,
-  NaesinStageStatus,
   NaesinVocabQuizSet,
   NaesinGrammarVideoProgress,
   NaesinTextbookVideo,
@@ -47,6 +38,7 @@ import type {
 import type { NaesinDialogue } from '@/types/naesin';
 import Link from 'next/link';
 import { useLearningSession } from '@/hooks/use-learning-session';
+import { StageNavBar } from './stage-nav-bar';
 
 type StageKey = 'vocab' | 'passage' | 'dialogue' | 'textbookVideo' | 'grammar' | 'problem' | 'mockExam' | 'lastReview';
 
@@ -68,32 +60,23 @@ export interface VocabProgress {
 }
 
 interface StageData {
-  // vocab
   vocabulary?: NaesinVocabulary[];
   quizSets?: NaesinVocabQuizSet[];
   completedSetIds?: string[];
   vocabProgress?: VocabProgress;
-  // passage
   passages?: NaesinPassage[];
   passageRequiredStages?: string[];
   translationSentencesPerPage?: number;
-  // dialogue
   dialogues?: NaesinDialogue[];
-  // textbookVideo
   textbookVideos?: NaesinTextbookVideo[];
   textbookVideoProgress?: NaesinTextbookVideoProgress[];
-  // grammar
   grammarLessons?: NaesinGrammarLesson[];
   videoProgress?: NaesinGrammarVideoProgress[];
-  // problem
   problemSheets?: NaesinProblemSheet[];
-  // mockExam
   mockExamSheets?: NaesinProblemSheet[];
-  // lastReview
   lastReviewProblemSheets?: NaesinProblemSheet[];
   similarProblems?: NaesinSimilarProblem[];
   reviewContent?: NaesinLastReviewContent[];
-  // round2 settings
   naesinRequiredRounds?: number;
   passageRound1Completed?: boolean;
   dialogueRound1Completed?: boolean;
@@ -108,6 +91,85 @@ interface NaesinStageViewProps {
   isHidden?: boolean;
   examDate?: string | null;
 }
+
+type StageRenderer = (props: {
+  stageData: StageData;
+  unitId: string;
+  onStageComplete: () => void;
+  router: ReturnType<typeof useRouter>;
+}) => React.ReactNode;
+
+const STAGE_RENDERERS: Record<StageKey, StageRenderer> = {
+  vocab: ({ stageData, unitId, onStageComplete, router }) => (
+    <VocabTab
+      vocabulary={stageData.vocabulary || []}
+      unitId={unitId}
+      onStageComplete={onStageComplete}
+      quizSets={stageData.quizSets}
+      completedSetIds={stageData.completedSetIds}
+      vocabProgress={stageData.vocabProgress}
+      onNavigateToNextStage={() => router.push(`/student/naesin/${unitId}/passage`)}
+    />
+  ),
+  passage: ({ stageData, unitId, onStageComplete }) => (
+    <PassageTab
+      passages={stageData.passages || []}
+      unitId={unitId}
+      onStageComplete={onStageComplete}
+      requiredStages={stageData.passageRequiredStages}
+      translationSentencesPerPage={stageData.translationSentencesPerPage}
+      naesinRequiredRounds={stageData.naesinRequiredRounds}
+      round1Completed={stageData.passageRound1Completed}
+    />
+  ),
+  dialogue: ({ stageData, unitId, onStageComplete }) => (
+    <DialogueTab
+      dialogues={stageData.dialogues || []}
+      unitId={unitId}
+      onStageComplete={onStageComplete}
+      naesinRequiredRounds={stageData.naesinRequiredRounds}
+      round1Completed={stageData.dialogueRound1Completed}
+    />
+  ),
+  textbookVideo: ({ stageData, unitId, onStageComplete }) => (
+    <TextbookVideoTab
+      videos={stageData.textbookVideos || []}
+      unitId={unitId}
+      onStageComplete={onStageComplete}
+      videoProgress={stageData.textbookVideoProgress}
+    />
+  ),
+  grammar: ({ stageData, unitId, onStageComplete }) => (
+    <GrammarTab
+      lessons={stageData.grammarLessons || []}
+      unitId={unitId}
+      onStageComplete={onStageComplete}
+      videoProgress={stageData.videoProgress}
+    />
+  ),
+  problem: ({ stageData, unitId, onStageComplete }) => (
+    <ProblemTab
+      sheets={stageData.problemSheets || []}
+      unitId={unitId}
+      onStageComplete={onStageComplete}
+    />
+  ),
+  mockExam: ({ stageData, unitId, onStageComplete }) => (
+    <ProblemTab
+      sheets={stageData.mockExamSheets || []}
+      unitId={unitId}
+      onStageComplete={onStageComplete}
+    />
+  ),
+  lastReview: ({ stageData, unitId }) => (
+    <LastReviewTab
+      unitId={unitId}
+      problemSheets={stageData.lastReviewProblemSheets || []}
+      similarProblems={stageData.similarProblems || []}
+      reviewContent={stageData.reviewContent || []}
+    />
+  ),
+};
 
 export function NaesinStageView({
   unit,
@@ -125,10 +187,10 @@ export function NaesinStageView({
   }
 
   const currentConfig = STAGE_CONFIG.find((s) => s.key === currentStage);
+  const renderStage = STAGE_RENDERERS[currentStage];
 
   return (
     <div className="space-y-6">
-      {/* Back button */}
       <Button variant="ghost" size="sm" asChild className="-ml-2">
         <Link href="/student/naesin">
           <ArrowLeft className="h-4 w-4 mr-1" />
@@ -136,61 +198,13 @@ export function NaesinStageView({
         </Link>
       </Button>
 
-      {/* 5-stage navigation bar */}
-      <TooltipProvider>
-        <nav className="flex rounded-lg border bg-muted/30 p-1 gap-1">
-          {STAGE_CONFIG.filter((stage) => stageStatuses[stage.key] !== 'hidden').map((stage) => {
-            const status = stageStatuses[stage.key];
-            const isLocked = status === 'locked';
-            const isCurrent = stage.key === currentStage;
-            const Icon = stage.icon;
+      <StageNavBar
+        stages={STAGE_CONFIG}
+        stageStatuses={stageStatuses}
+        currentStage={currentStage}
+        unitId={unit.id}
+      />
 
-            if (isLocked) {
-              return (
-                <Tooltip key={stage.key}>
-                  <TooltipTrigger asChild>
-                    <Link
-                      href={`/student/naesin/${unit.id}/${stage.key}`}
-                      className={cn(
-                        'flex-1 flex items-center justify-center gap-1.5 rounded-md px-2 py-2 text-xs sm:text-sm opacity-40',
-                        isCurrent && 'bg-background shadow-sm opacity-50'
-                      )}
-                    >
-                      <Lock className="h-3.5 w-3.5" />
-                      <span className="hidden sm:inline">{stage.label}</span>
-                      <span className="sm:hidden">{stage.shortLabel}</span>
-                    </Link>
-                  </TooltipTrigger>
-                  {stage.unlockHint && (
-                    <TooltipContent>
-                      {stage.unlockHint}
-                    </TooltipContent>
-                  )}
-                </Tooltip>
-              );
-            }
-
-            return (
-              <Link
-                key={stage.key}
-                href={`/student/naesin/${unit.id}/${stage.key}`}
-                className={cn(
-                  'flex-1 flex items-center justify-center gap-1.5 rounded-md px-2 py-2 text-xs sm:text-sm transition-colors',
-                  isCurrent
-                    ? 'bg-background shadow-sm font-semibold text-primary'
-                    : 'hover:bg-background/50 text-muted-foreground'
-                )}
-              >
-                <StageIcon status={status} FallbackIcon={Icon} />
-                <span className="hidden sm:inline">{stage.label}</span>
-                <span className="sm:hidden">{stage.shortLabel}</span>
-              </Link>
-            );
-          })}
-        </nav>
-      </TooltipProvider>
-
-      {/* Stage content */}
       <div>
         {currentStageHidden ? (
           <PremiumStageOverlay
@@ -204,86 +218,11 @@ export function NaesinStageView({
             Icon={currentConfig?.icon || Lock}
           />
         ) : (
-          <>
-            {currentStage === 'vocab' && (
-              <VocabTab
-                vocabulary={stageData.vocabulary || []}
-                unitId={unit.id}
-                onStageComplete={handleStageComplete}
-                quizSets={stageData.quizSets}
-                completedSetIds={stageData.completedSetIds}
-                vocabProgress={stageData.vocabProgress}
-                onNavigateToNextStage={() => router.push(`/student/naesin/${unit.id}/passage`)}
-              />
-            )}
-            {currentStage === 'passage' && (
-              <PassageTab
-                passages={stageData.passages || []}
-                unitId={unit.id}
-                onStageComplete={handleStageComplete}
-                requiredStages={stageData.passageRequiredStages}
-                translationSentencesPerPage={stageData.translationSentencesPerPage}
-                naesinRequiredRounds={stageData.naesinRequiredRounds}
-                round1Completed={stageData.passageRound1Completed}
-              />
-            )}
-            {currentStage === 'dialogue' && (
-              <DialogueTab
-                dialogues={stageData.dialogues || []}
-                unitId={unit.id}
-                onStageComplete={handleStageComplete}
-                naesinRequiredRounds={stageData.naesinRequiredRounds}
-                round1Completed={stageData.dialogueRound1Completed}
-              />
-            )}
-            {currentStage === 'textbookVideo' && (
-              <TextbookVideoTab
-                videos={stageData.textbookVideos || []}
-                unitId={unit.id}
-                onStageComplete={handleStageComplete}
-                videoProgress={stageData.textbookVideoProgress}
-              />
-            )}
-            {currentStage === 'grammar' && (
-              <GrammarTab
-                lessons={stageData.grammarLessons || []}
-                unitId={unit.id}
-                onStageComplete={handleStageComplete}
-                videoProgress={stageData.videoProgress}
-              />
-            )}
-            {currentStage === 'problem' && (
-              <ProblemTab
-                sheets={stageData.problemSheets || []}
-                unitId={unit.id}
-                onStageComplete={handleStageComplete}
-              />
-            )}
-            {currentStage === 'mockExam' && (
-              <ProblemTab
-                sheets={stageData.mockExamSheets || []}
-                unitId={unit.id}
-                onStageComplete={handleStageComplete}
-              />
-            )}
-            {currentStage === 'lastReview' && (
-              <LastReviewTab
-                unitId={unit.id}
-                problemSheets={stageData.lastReviewProblemSheets || []}
-                similarProblems={stageData.similarProblems || []}
-                reviewContent={stageData.reviewContent || []}
-              />
-            )}
-          </>
+          renderStage({ stageData, unitId: unit.id, onStageComplete: handleStageComplete, router })
         )}
       </div>
     </div>
   );
-}
-
-function StageIcon({ status, FallbackIcon }: { status: NaesinStageStatus; FallbackIcon: React.ComponentType<{ className?: string }> }) {
-  if (status === 'completed') return <CheckCircle className="h-3.5 w-3.5 text-green-500" />;
-  return <FallbackIcon className="h-3.5 w-3.5" />;
 }
 
 function LockedStageOverlay({
@@ -297,10 +236,8 @@ function LockedStageOverlay({
 }) {
   return (
     <div className="relative rounded-xl overflow-hidden">
-      {/* Blurred colorful preview background */}
       <div className="blur-sm opacity-40 pointer-events-none select-none" aria-hidden>
         <div className="space-y-4 p-2">
-          {/* Fake content blocks to give a colorful preview feel */}
           <div className="h-10 rounded-lg bg-gradient-to-r from-indigo-200 to-indigo-300 w-3/4" />
           <div className="grid grid-cols-2 gap-3">
             <div className="h-24 rounded-lg bg-gradient-to-br from-blue-100 to-indigo-200" />
@@ -323,7 +260,6 @@ function LockedStageOverlay({
         </div>
       </div>
 
-      {/* Lock overlay */}
       <div className="absolute inset-0 flex flex-col items-center justify-center">
         <div className="flex flex-col items-center gap-4 bg-background/80 backdrop-blur-sm rounded-2xl px-8 py-8 shadow-lg border max-w-xs text-center">
           <div className="flex items-center justify-center h-16 w-16 rounded-full bg-muted">

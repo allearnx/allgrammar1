@@ -19,22 +19,12 @@ import { LessonCard } from '@/components/naesin/lesson-card';
 import { ExamCountdown } from '@/components/naesin/exam-countdown';
 import type { NaesinTextbook } from '@/types/database';
 import type { UnitSummary, ExamGroup } from '@/lib/naesin/build-unit-summary';
+import { useNaesinHomeData } from './use-naesin-home-data';
 
 const GRADE_COLORS = [
   { accent: '#06B6D4', light: '#ECFEFF', mid: '#CFFAFE', text: '#0891B2' },
   { accent: '#8B5CF6', light: '#F5F3FF', mid: '#EDE9FE', text: '#7C3AED' },
   { accent: '#F59E0B', light: '#FFFBEB', mid: '#FEF3C7', text: '#D97706' },
-];
-
-const PUBLISHER_PALETTES = [
-  { bg: 'linear-gradient(135deg, #DBEAFE 0%, #BFDBFE 100%)', spine: '#3B82F6', text: '#1E40AF' },
-  { bg: 'linear-gradient(135deg, #FCE7F3 0%, #FBCFE8 100%)', spine: '#EC4899', text: '#BE185D' },
-  { bg: 'linear-gradient(135deg, #D1FAE5 0%, #A7F3D0 100%)', spine: '#10B981', text: '#065F46' },
-  { bg: 'linear-gradient(135deg, #FEF3C7 0%, #FDE68A 100%)', spine: '#F59E0B', text: '#92400E' },
-  { bg: 'linear-gradient(135deg, #E0E7FF 0%, #C7D2FE 100%)', spine: '#6366F1', text: '#3730A3' },
-  { bg: 'linear-gradient(135deg, #FFE4E6 0%, #FECDD3 100%)', spine: '#F43F5E', text: '#9F1239' },
-  { bg: 'linear-gradient(135deg, #CCFBF1 0%, #99F6E4 100%)', spine: '#14B8A6', text: '#115E59' },
-  { bg: 'linear-gradient(135deg, #FEE2E2 0%, #FECACA 100%)', spine: '#EF4444', text: '#991B1B' },
 ];
 
 interface NaesinHomeProps {
@@ -73,23 +63,10 @@ export function NaesinHome({
     }
   }
 
+  const { gradeTextbooks, publisherColorMap } = useNaesinHomeData(textbooks);
+
   // Textbook selection view (only when no textbook selected)
   if (!selectedTextbook) {
-    const gradeTextbooks: Record<number, NaesinTextbook[]> = {};
-    textbooks.forEach((tb) => {
-      if (!gradeTextbooks[tb.grade]) gradeTextbooks[tb.grade] = [];
-      gradeTextbooks[tb.grade].push(tb);
-    });
-
-    const publisherColorMap = new Map<string, typeof PUBLISHER_PALETTES[0]>();
-    let colorIdx = 0;
-    textbooks.forEach((tb) => {
-      if (!publisherColorMap.has(tb.publisher)) {
-        publisherColorMap.set(tb.publisher, PUBLISHER_PALETTES[colorIdx % PUBLISHER_PALETTES.length]);
-        colorIdx++;
-      }
-    });
-
     return (
       <div className="space-y-5">
         {/* 헤더 */}
