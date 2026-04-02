@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback, useReducer } from 'react';
 import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
 import {
   BookOpen,
   FileText,
@@ -11,15 +12,17 @@ import {
   ChevronDown,
   ChevronRight,
   Brain,
+  PlayCircle,
+  FileQuestion,
 } from 'lucide-react';
 import { toast } from 'sonner';
 import { logger } from '@/lib/logger';
 import { fetchWithToast } from '@/lib/fetch-with-toast';
 import type { NaesinVocabulary, NaesinGrammarLesson, NaesinPassage } from '@/types/database';
-import type { NaesinProblemSheet } from '@/types/naesin';
+import type { NaesinProblemSheet, NaesinTextbookVideo } from '@/types/naesin';
 import { ConfirmDialog } from '@/components/shared/confirm-dialog';
 import { AddVocabDialog, BulkVocabUpload, PdfVocabExtract } from './vocab-dialogs';
-import { AddPassageDialog, AddDialogueDialog, AddGrammarDialog, AddOmrDialog, AddProblemDialog, AddLastReviewDialog, BulkOmrUploadDialog, BulkProblemUploadDialog, PdfProblemExtractDialog } from './content-dialogs';
+import { AddPassageDialog, AddDialogueDialog, AddGrammarDialog, AddOmrDialog, AddProblemDialog, AddLastReviewDialog, BulkOmrUploadDialog, BulkProblemUploadDialog, PdfProblemExtractDialog, AddTextbookVideoDialog, AddMockExamDialog } from './content-dialogs';
 import { VocabQuizSetManager } from './quiz-set-manager';
 import { useListCrud } from '@/hooks/use-list-crud';
 import { useInlineEdit } from '@/hooks/use-inline-edit';
@@ -109,12 +112,30 @@ export function UnitContentManager({ unitId }: { unitId: string }) {
     }),
   );
 
+  const [textbookVideoList, setTextbookVideoList] = useState<NaesinTextbookVideo[]>([]);
+  const textbookVideoDelete = useConfirmDelete(
+    makeDeleteHandler('/api/naesin/textbook-videos', setTextbookVideoList as never, {
+      success: '설명 영상이 삭제되었습니다',
+      error: '설명 영상 삭제 중 오류가 발생했습니다',
+      logKey: 'unit.delete_textbook_video',
+    }),
+  );
+
+  const [mockExamList, setMockExamList] = useState<NaesinProblemSheet[]>([]);
+  const mockExamDelete = useConfirmDelete(
+    makeDeleteHandler('/api/naesin/problems', setMockExamList as never, {
+      success: '예상문제 시트가 삭제되었습니다',
+      error: '예상문제 시트 삭제 중 오류가 발생했습니다',
+      logKey: 'unit.delete_mock_exam',
+    }),
+  );
+
 
   const loadCounts = useCallback(async () => {
     try {
       const { createClient } = await import('@/lib/supabase/client');
       const supabase = createClient();
-      const [v, p, dlg, g, o, prob, lr] = await Promise.all([
+      const [v, p, dlg, g, o, prob, lr, tbv, mock] = await Promise.all([
         supabase.from('naesin_vocabulary').select('*').eq('unit_id', unitId).order('sort_order'),
         supabase.from('naesin_passages').select('*').eq('unit_id', unitId).order('created_at'),
         supabase.from('naesin_dialogues').select('*', { count: 'exact', head: true }).eq('unit_id', unitId),
@@ -122,12 +143,16 @@ export function UnitContentManager({ unitId }: { unitId: string }) {
         supabase.from('naesin_omr_sheets').select('*', { count: 'exact', head: true }).eq('unit_id', unitId),
         supabase.from('naesin_problem_sheets').select('*').eq('unit_id', unitId).eq('category', 'problem').order('created_at'),
         supabase.from('naesin_last_review_content').select('*', { count: 'exact', head: true }).eq('unit_id', unitId),
+        supabase.from('naesin_textbook_videos').select('*').eq('unit_id', unitId).order('sort_order'),
+        supabase.from('naesin_problem_sheets').select('*').eq('unit_id', unitId).eq('category', 'mock_exam').order('created_at'),
       ]);
       vocab.setItems((v.data as NaesinVocabulary[]) || []);
       setPassageList((p.data as NaesinPassage[]) || []);
       dispatchCM({ type: 'SET_COUNTS', dialogueCount: dlg.count ?? 0, omrCount: o.count ?? 0, lastReviewCount: lr.count ?? 0 });
       setGrammarList((g.data as NaesinGrammarLesson[]) || []);
       setProblemList((prob.data as NaesinProblemSheet[]) || []);
+      setTextbookVideoList((tbv.data as NaesinTextbookVideo[]) || []);
+      setMockExamList((mock.data as NaesinProblemSheet[]) || []);
       vocab.setSelectedIds(new Set());
     } catch (err) {
       logger.error('unit.load_counts', { error: err instanceof Error ? err.message : String(err) });
@@ -168,9 +193,11 @@ export function UnitContentManager({ unitId }: { unitId: string }) {
     { label: '단어', icon: BookOpen, count: vocab.items.length, color: 'text-blue-500', toggle: () => dispatchCM({ type: 'TOGGLE_SECTION', section: 'vocab' }), expanded: cm.showVocabList },
     { label: '교과서 지문', icon: FileText, count: passageList.length, color: 'text-orange-500', toggle: () => dispatchCM({ type: 'TOGGLE_SECTION', section: 'passage' }), expanded: cm.showPassageList },
     { label: '대화문', icon: MessageSquare, count: cm.dialogueCount, color: 'text-violet-500' },
+    { label: '본문 설명 영상', icon: PlayCircle, count: textbookVideoList.length, color: 'text-cyan-500', toggle: () => dispatchCM({ type: 'TOGGLE_SECTION', section: 'textbookVideo' }), expanded: cm.showTextbookVideoList },
     { label: '문법 설명', icon: GraduationCap, count: grammarList.length, color: 'text-green-500', toggle: () => dispatchCM({ type: 'TOGGLE_SECTION', section: 'grammar' }), expanded: cm.showGrammarList },
     { label: 'OMR 시트', icon: ClipboardList, count: cm.omrCount, color: 'text-indigo-500' },
     { label: '문제풀이', icon: ClipboardList, count: problemList.length, color: 'text-red-500', toggle: () => dispatchCM({ type: 'TOGGLE_SECTION', section: 'problem' }), expanded: cm.showProblemList },
+    { label: '예상문제', icon: FileQuestion, count: mockExamList.length, color: 'text-pink-500', toggle: () => dispatchCM({ type: 'TOGGLE_SECTION', section: 'mockExam' }), expanded: cm.showMockExamList },
     { label: '직전보강', icon: Brain, count: cm.lastReviewCount, color: 'text-amber-500' },
   ];
 
@@ -238,11 +265,37 @@ export function UnitContentManager({ unitId }: { unitId: string }) {
         />
       )}
 
+      {cm.showTextbookVideoList && textbookVideoList.length > 0 && (
+        <div className="space-y-1 rounded-lg border p-3">
+          <h4 className="text-sm font-semibold text-gray-700 mb-2">본문 설명 영상 목록</h4>
+          {textbookVideoList.map((v) => (
+            <div key={v.id} className="flex items-center justify-between py-1.5 px-2 rounded hover:bg-muted/50">
+              <div className="flex items-center gap-2 min-w-0">
+                <PlayCircle className="h-4 w-4 text-cyan-500 shrink-0" />
+                <span className="text-sm truncate">{v.title}</span>
+                {v.youtube_video_id && <span className="text-xs text-gray-400">{v.youtube_video_id}</span>}
+              </div>
+              <Button size="sm" variant="ghost" className="text-red-500 hover:text-red-700 h-7 px-2" onClick={() => textbookVideoDelete.requestDelete(v.id)}>
+                삭제
+              </Button>
+            </div>
+          ))}
+        </div>
+      )}
+
       {cm.showProblemList && problemList.length > 0 && (
         <UnitProblemList
           sheets={problemList}
           onUpdate={(updated) => setProblemList((prev) => prev.map((s) => (s.id === updated.id ? updated : s)))}
           onRequestDelete={problemDelete.requestDelete}
+        />
+      )}
+
+      {cm.showMockExamList && mockExamList.length > 0 && (
+        <UnitProblemList
+          sheets={mockExamList}
+          onUpdate={(updated) => setMockExamList((prev) => prev.map((s) => (s.id === updated.id ? updated : s)))}
+          onRequestDelete={mockExamDelete.requestDelete}
         />
       )}
 
@@ -254,7 +307,9 @@ export function UnitContentManager({ unitId }: { unitId: string }) {
         <AddDialogueDialog unitId={unitId} onAdd={loadCounts} />
         <AddGrammarDialog unitId={unitId} onAdd={loadCounts} />
         <AddOmrDialog unitId={unitId} onAdd={loadCounts} />
+        <AddTextbookVideoDialog unitId={unitId} onAdd={loadCounts} />
         <AddProblemDialog unitId={unitId} onAdd={loadCounts} />
+        <AddMockExamDialog unitId={unitId} onAdd={loadCounts} />
         <BulkOmrUploadDialog unitId={unitId} onAdd={loadCounts} />
         <BulkProblemUploadDialog unitId={unitId} onAdd={loadCounts} />
         <PdfProblemExtractDialog unitId={unitId} onAdd={loadCounts} />
@@ -289,6 +344,16 @@ export function UnitContentManager({ unitId }: { unitId: string }) {
       <ConfirmDialog
         description="이 문제 시트를 삭제하시겠습니까? 관련된 학생 답안도 함께 삭제됩니다."
         {...problemDelete.confirmDialogProps}
+      />
+
+      <ConfirmDialog
+        description="이 설명 영상을 삭제하시겠습니까?"
+        {...textbookVideoDelete.confirmDialogProps}
+      />
+
+      <ConfirmDialog
+        description="이 예상문제 시트를 삭제하시겠습니까? 관련된 학생 답안도 함께 삭제됩니다."
+        {...mockExamDelete.confirmDialogProps}
       />
     </div>
   );

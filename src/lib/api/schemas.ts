@@ -203,6 +203,12 @@ export const omrSheetCreateSchema = z.object({
   sort_order: z.number().nullish(),
 });
 
+export const textbookVideoCreateSchema = z.object({
+  unitId: ID,
+  title: SHORT,
+  youtubeUrl: URL_STR,
+});
+
 export const problemCreateSchema = z.object({
   unitId: ID,
   title: SHORT,

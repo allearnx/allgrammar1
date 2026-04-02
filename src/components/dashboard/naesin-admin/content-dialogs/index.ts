@@ -8,3 +8,5 @@ export { AddChatQuestionDialog } from './add-chat-question-dialog';
 export { BulkOmrUploadDialog } from './bulk-omr-upload-dialog';
 export { BulkProblemUploadDialog } from './bulk-problem-upload-dialog';
 export { PdfProblemExtractDialog } from './pdf-problem-extract-dialog';
+export { AddTextbookVideoDialog } from './add-textbook-video-dialog';
+export { AddMockExamDialog } from './add-mock-exam-dialog';
