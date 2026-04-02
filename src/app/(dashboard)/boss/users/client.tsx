@@ -12,8 +12,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+import { Input } from '@/components/ui/input';
 import { fetchWithToast } from '@/lib/fetch-with-toast';
-import { Trash2 } from 'lucide-react';
+import { Trash2, Search } from 'lucide-react';
 import {
   Dialog,
   DialogContent,
@@ -63,6 +64,7 @@ const SERVICE_LABELS: Record<string, string> = {
 };
 
 export function UsersClient({ users, academies, serviceAssignments }: UsersClientProps) {
+  const [nameSearch, setNameSearch] = useState('');
   const [roleFilter, setRoleFilter] = useState<string>('all');
   const [academyFilter, setAcademyFilter] = useState<string>('all');
   const [updating, setUpdating] = useState<string | null>(null);
@@ -83,12 +85,14 @@ export function UsersClient({ users, academies, serviceAssignments }: UsersClien
   }, [serviceAssignments]);
 
   const filteredUsers = useMemo(() => {
+    const q = nameSearch.trim().toLowerCase();
     return users.filter((u) => {
+      if (q && !u.full_name.toLowerCase().includes(q)) return false;
       if (roleFilter !== 'all' && u.role !== roleFilter) return false;
       if (academyFilter !== 'all' && u.academy_id !== academyFilter) return false;
       return true;
     });
-  }, [users, roleFilter, academyFilter]);
+  }, [users, nameSearch, roleFilter, academyFilter]);
 
   async function handleDelete(userId: string) {
     setUpdating(userId);
@@ -157,6 +161,15 @@ export function UsersClient({ users, academies, serviceAssignments }: UsersClien
   return (
     <div className="space-y-4">
       <div className="flex flex-wrap items-center gap-3">
+        <div className="relative">
+          <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+          <Input
+            placeholder="이름 검색"
+            value={nameSearch}
+            onChange={(e) => setNameSearch(e.target.value)}
+            className="pl-8 w-[160px] h-9"
+          />
+        </div>
         <p className="text-muted-foreground">
           총 {filteredUsers.length}명
         </p>
