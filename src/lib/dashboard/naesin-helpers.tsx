@@ -2,8 +2,10 @@ import {
   BookOpen,
   FileText,
   MessageSquare,
+  PlayCircle,
   Ruler,
   PenLine,
+  FileQuestion,
   RefreshCw,
 } from 'lucide-react';
 import type {
@@ -14,14 +16,16 @@ import type {
   NaesinExamAssignment,
 } from '@/types/naesin';
 
-export const NAESIN_STAGE_KEYS = ['vocab', 'passage', 'dialogue', 'grammar', 'problem', 'lastReview'] as const;
+export const NAESIN_STAGE_KEYS = ['vocab', 'passage', 'dialogue', 'textbookVideo', 'grammar', 'problem', 'mockExam', 'lastReview'] as const;
 
 export const NAESIN_STAGE_LABELS: Record<string, string> = {
   vocab: '단어 암기',
   passage: '교과서 암기',
   dialogue: '대화문 암기',
+  textbookVideo: '설명 영상',
   grammar: '문법 설명',
   problem: '문제풀이',
+  mockExam: '예상문제',
   lastReview: '직전보강',
 };
 
@@ -35,7 +39,7 @@ export function getDDay(dateStr: string | null): number | null {
 }
 
 export function isNaesinUnitComplete(statuses: NaesinStageStatuses): boolean {
-  return (['vocab', 'passage', 'dialogue', 'grammar', 'problem'] as const).every(
+  return (['vocab', 'passage', 'dialogue', 'textbookVideo', 'grammar', 'problem', 'mockExam'] as const).every(
     (k) => statuses[k] === 'completed' || statuses[k] === 'hidden',
   );
 }
@@ -65,8 +69,10 @@ export function computeNaesinStats(
       + (s.vocab === 'completed' ? 1 : 0)
       + (s.passage === 'completed' ? 1 : 0)
       + (s.dialogue === 'completed' ? 1 : 0)
+      + (s.textbookVideo === 'completed' ? 1 : 0)
       + (s.grammar === 'completed' ? 1 : 0)
-      + (s.problem === 'completed' ? 1 : 0);
+      + (s.problem === 'completed' ? 1 : 0)
+      + (s.mockExam === 'completed' ? 1 : 0);
   }, 0);
 
   const completedUnits = sortedUnits.filter((u) => {
@@ -111,8 +117,10 @@ export const NAESIN_STAGE_META: Record<string, { icon: React.ReactNode; descript
   vocab: { icon: <BookOpen className="h-6 w-6" />, description: '교과서 단어를\n암기합니다', scoreRequirement: '퀴즈+스펠링 시작' },
   passage: { icon: <FileText className="h-6 w-6" />, description: '교과서 지문을\n암기합니다', scoreRequirement: '지문 암기 완료' },
   dialogue: { icon: <MessageSquare className="h-6 w-6" />, description: '대화문을\n영작합니다', scoreRequirement: '대화문 암기 완료' },
+  textbookVideo: { icon: <PlayCircle className="h-6 w-6" />, description: '교과서 설명\n영상 시청', scoreRequirement: '영상 시청 완료' },
   grammar: { icon: <Ruler className="h-6 w-6" />, description: '핵심 문법을\n학습합니다', scoreRequirement: '영상 시청 완료' },
   problem: { icon: <PenLine className="h-6 w-6" />, description: '문제를 풀며\n실력 확인', scoreRequirement: '문제풀이 완료' },
+  mockExam: { icon: <FileQuestion className="h-6 w-6" />, description: '예상문제로\n실전 테스트', scoreRequirement: '예상문제 완료' },
   lastReview: { icon: <RefreshCw className="h-6 w-6" />, description: '시험 직전\n최종 점검', scoreRequirement: '최종 점검 완료' },
 };
 

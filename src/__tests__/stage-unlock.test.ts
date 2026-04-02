@@ -36,6 +36,10 @@ function makeProgress(overrides: Partial<NaesinStudentProgress> = {}): NaesinStu
     grammar_total_videos: 0,
     problem_completed: false,
     last_review_unlocked: false,
+    textbook_video_completed: false,
+    textbook_videos_completed: 0,
+    textbook_total_videos: 0,
+    mock_exam_completed: false,
     created_at: '',
     updated_at: '',
     ...overrides,
@@ -47,8 +51,10 @@ function makeContent(overrides: Partial<NaesinContentAvailability> = {}): Naesin
     hasVocab: true,
     hasPassage: true,
     hasDialogue: true,
+    hasTextbookVideo: true,
     hasGrammar: true,
     hasProblem: true,
+    hasMockExam: true,
     hasLastReview: true,
     ...overrides,
   };
@@ -365,16 +371,20 @@ describe('calculateStageStatuses', () => {
         hasVocab: true,
         hasPassage: true,
         hasDialogue: false,
+        hasTextbookVideo: false,
         hasGrammar: false,
         hasProblem: false,
+        hasMockExam: false,
         hasLastReview: false,
       };
       const result = calculateStageStatuses(progress, content);
       expect(result.vocab).toBe('completed');
       expect(result.passage).toBe('available');
       expect(result.dialogue).toBe('completed'); // no content
+      expect(result.textbookVideo).toBe('completed'); // no content
       expect(result.grammar).toBe('completed'); // no content
       expect(result.problem).toBe('completed'); // no content
+      expect(result.mockExam).toBe('completed'); // no content
       expect(result.lastReview).toBe('locked');
     });
 
@@ -383,8 +393,10 @@ describe('calculateStageStatuses', () => {
         hasVocab: true,
         hasPassage: false,
         hasDialogue: false,
+        hasTextbookVideo: false,
         hasGrammar: false,
         hasProblem: false,
+        hasMockExam: false,
         hasLastReview: false,
       };
       const result = calculateStageStatuses(null, content);

@@ -8,6 +8,7 @@ interface ContentAvailabilityResult {
   progress: NaesinStudentProgress | null;
   contentAvailability: NaesinContentAvailability;
   videoLessons: { id: string; content_type: string }[];
+  textbookVideoCount: number;
   quizSetIds: string[];
   examDate: string | null;
 }
@@ -24,7 +25,9 @@ export async function fetchContentAvailability(
     passageCountRes,
     dialogueCountRes,
     grammarRes,
+    textbookVideoCountRes,
     problemCountRes,
+    mockExamCountRes,
     lastReviewSheetCountRes,
     similarProblemCountRes,
     reviewContentCountRes,
@@ -36,7 +39,9 @@ export async function fetchContentAvailability(
     supabase.from('naesin_passages').select('id', { count: 'exact', head: true }).eq('unit_id', unitId),
     supabase.from('naesin_dialogues').select('id', { count: 'exact', head: true }).eq('unit_id', unitId),
     supabase.from('naesin_grammar_lessons').select('id, content_type').eq('unit_id', unitId),
+    supabase.from('naesin_textbook_videos').select('id', { count: 'exact', head: true }).eq('unit_id', unitId),
     supabase.from('naesin_problem_sheets').select('id', { count: 'exact', head: true }).eq('unit_id', unitId).eq('category', 'problem'),
+    supabase.from('naesin_problem_sheets').select('id', { count: 'exact', head: true }).eq('unit_id', unitId).eq('category', 'mock_exam'),
     supabase.from('naesin_problem_sheets').select('id', { count: 'exact', head: true }).eq('unit_id', unitId).eq('category', 'last_review'),
     supabase.from('naesin_similar_problems').select('id', { count: 'exact', head: true }).eq('unit_id', unitId).eq('status', 'approved'),
     supabase.from('naesin_last_review_content').select('id', { count: 'exact', head: true }).eq('unit_id', unitId),
@@ -47,6 +52,7 @@ export async function fetchContentAvailability(
   ]);
 
   const grammarLessonsAll = grammarRes.data || [];
+  const textbookVideoCount = textbookVideoCountRes.count ?? 0;
   const hasLastReviewContent =
     (lastReviewSheetCountRes.count ?? 0) > 0 ||
     (similarProblemCountRes.count ?? 0) > 0 ||
@@ -60,11 +66,14 @@ export async function fetchContentAvailability(
       hasVocab: (vocabCountRes.count ?? 0) > 0,
       hasPassage: (passageCountRes.count ?? 0) > 0,
       hasDialogue: (dialogueCountRes.count ?? 0) > 0,
+      hasTextbookVideo: textbookVideoCount > 0,
       hasGrammar: grammarLessonsAll.length > 0,
       hasProblem: (problemCountRes.count ?? 0) > 0,
+      hasMockExam: (mockExamCountRes.count ?? 0) > 0,
       hasLastReview: hasLastReviewContent || !!examDate,
     },
     videoLessons: grammarLessonsAll.filter((l) => l.content_type === 'video'),
+    textbookVideoCount,
     quizSetIds: (quizSetsRes.data || []).map((s) => s.id),
     examDate,
   };

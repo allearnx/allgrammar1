@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
-import { ChevronDown, ChevronRight, ChevronRightIcon, CheckCircle, Lock, BookOpen, FileText, GraduationCap, ClipboardList, Brain } from 'lucide-react';
+import { ChevronDown, ChevronRight, ChevronRightIcon, CheckCircle, Lock, BookOpen, FileText, PlayCircle, GraduationCap, ClipboardList, FileQuestion, Brain } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { StageProgressBar } from './stage-progress-bar';
 import type { NaesinStageStatuses, NaesinStageStatus } from '@/types/database';
@@ -11,8 +11,10 @@ import Link from 'next/link';
 interface StageProgress {
   vocab: number;
   passage: number;
+  textbookVideo: number;
   grammar: number;
   problem: number;
+  mockExam: number;
 }
 
 interface LessonCardProps {
@@ -26,8 +28,10 @@ interface LessonCardProps {
 const STAGE_ROWS = [
   { key: 'vocab' as const, label: '단어 암기', icon: BookOpen, progressKey: 'vocab' as const, unlockHint: null },
   { key: 'passage' as const, label: '교과서 암기', icon: FileText, progressKey: 'passage' as const, unlockHint: '단어 암기 80% 이상 달성 시 해금' },
-  { key: 'grammar' as const, label: '문법 설명', icon: GraduationCap, progressKey: 'grammar' as const, unlockHint: '교과서 암기 80% 이상 달성 시 해금' },
+  { key: 'textbookVideo' as const, label: '설명 영상', icon: PlayCircle, progressKey: 'textbookVideo' as const, unlockHint: '대화문 암기 완료 시 해금' },
+  { key: 'grammar' as const, label: '문법 설명', icon: GraduationCap, progressKey: 'grammar' as const, unlockHint: '설명 영상 완료 시 해금' },
   { key: 'problem' as const, label: '문제풀이', icon: ClipboardList, progressKey: 'problem' as const, unlockHint: '문법 설명 완료 시 해금' },
+  { key: 'mockExam' as const, label: '예상문제', icon: FileQuestion, progressKey: 'mockExam' as const, unlockHint: '문제풀이 완료 시 해금' },
   { key: 'lastReview' as const, label: '직전보강', icon: Brain, progressKey: null, unlockHint: '시험 D-3일 전 자동 해금' },
 ] as const;
 
@@ -40,7 +44,7 @@ export function LessonCard({
 }: LessonCardProps) {
   const [expanded, setExpanded] = useState(true);
 
-  const visibleStages = (['vocab', 'passage', 'grammar', 'problem'] as const).filter(
+  const visibleStages = (['vocab', 'passage', 'textbookVideo', 'grammar', 'problem', 'mockExam'] as const).filter(
     (key) => stages[key] !== 'hidden'
   );
   const allCompleted = visibleStages.length > 0 && visibleStages.every((key) => stages[key] === 'completed');
@@ -59,7 +63,7 @@ export function LessonCard({
           <div className="flex-1 min-w-0">
             <h3 className="font-medium text-sm">{title}</h3>
             <div className="flex gap-1 mt-1">
-              {(['vocab', 'passage', 'grammar', 'problem', 'lastReview'] as const)
+              {(['vocab', 'passage', 'textbookVideo', 'grammar', 'problem', 'mockExam', 'lastReview'] as const)
                 .filter((key) => stages[key] !== 'hidden')
                 .map((key) => (
                   <StageStatusDot key={key} status={stages[key]} />

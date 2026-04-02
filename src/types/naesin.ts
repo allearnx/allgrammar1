@@ -90,6 +90,30 @@ export interface NaesinDialogue {
   created_at: string;
 }
 
+export interface NaesinTextbookVideo {
+  id: string;
+  unit_id: string;
+  title: string;
+  youtube_url: string | null;
+  youtube_video_id: string | null;
+  video_duration_seconds: number | null;
+  sort_order: number;
+  created_at: string;
+}
+
+export interface NaesinTextbookVideoProgress {
+  id: string;
+  student_id: string;
+  video_id: string;
+  watch_percent: number;
+  max_position_reached: number;
+  duration: number;
+  cumulative_watch_seconds: number;
+  last_position: number;
+  completed: boolean;
+  updated_at: string;
+}
+
 export type NaesinGrammarContentType = 'video' | 'text';
 
 export interface NaesinGrammarLesson {
@@ -160,6 +184,10 @@ export interface NaesinStudentProgress {
   grammar_total_videos: number;
   problem_completed: boolean;
   last_review_unlocked: boolean;
+  textbook_video_completed: boolean;
+  textbook_videos_completed: number;
+  textbook_total_videos: number;
+  mock_exam_completed: boolean;
   created_at: string;
   updated_at: string;
 }
@@ -194,8 +222,10 @@ export interface NaesinStageStatuses {
   vocab: NaesinStageStatus;
   passage: NaesinStageStatus;
   dialogue: NaesinStageStatus;
+  textbookVideo: NaesinStageStatus;
   grammar: NaesinStageStatus;
   problem: NaesinStageStatus;
+  mockExam: NaesinStageStatus;
   lastReview: NaesinStageStatus;
   /** @deprecated kept for backward compatibility */
   omr?: NaesinStageStatus;
@@ -205,8 +235,10 @@ export interface NaesinContentAvailability {
   hasVocab: boolean;
   hasPassage: boolean;
   hasDialogue: boolean;
+  hasTextbookVideo: boolean;
   hasGrammar: boolean;
   hasProblem: boolean;
+  hasMockExam: boolean;
   hasLastReview: boolean;
   /** @deprecated */
   hasOmr?: boolean;
@@ -257,7 +289,7 @@ export interface NaesinGrammarVideoProgress {
 }
 
 export type NaesinProblemMode = 'interactive' | 'image_answer';
-export type NaesinProblemCategory = 'problem' | 'last_review';
+export type NaesinProblemCategory = 'problem' | 'last_review' | 'mock_exam';
 
 export interface NaesinProblemSheet {
   id: string;

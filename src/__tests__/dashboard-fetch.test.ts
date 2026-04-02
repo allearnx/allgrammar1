@@ -220,8 +220,10 @@ describe('fetchNaesinDashboardData', () => {
       hasVocab: true,
       hasPassage: true,
       hasDialogue: false,
+      hasTextbookVideo: false,
       hasGrammar: true,
       hasProblem: false,
+      hasMockExam: false,
       hasLastReview: false,
     });
     expect(result.vocabQuizSetCounts['unit-1']).toBe(2);

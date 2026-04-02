@@ -7,7 +7,7 @@ export interface UnitSummary {
   title: string;
   sort_order: number;
   stageStatuses: NaesinStageStatuses;
-  stageProgress: { vocab: number; passage: number; grammar: number; problem: number };
+  stageProgress: { vocab: number; passage: number; textbookVideo: number; grammar: number; problem: number; mockExam: number };
 }
 
 export interface ExamGroup {
@@ -21,8 +21,10 @@ export interface BuildContext {
   vocabUnitIds: Set<string>;
   passageUnitIds: Set<string>;
   dialogueUnitIds: Set<string>;
+  textbookVideoByUnit: Record<string, unknown[]>;
   grammarByUnit: Record<string, { content_type: string }[]>;
   problemUnitIds: Set<string>;
+  mockExamUnitIds: Set<string>;
   lastReviewSheetUnitIds: Set<string>;
   similarProblemUnitIds: Set<string>;
   reviewContentUnitIds: Set<string>;
@@ -46,9 +48,10 @@ export function groupBy<T extends Record<string, unknown>>(items: T[], key: stri
 export function computeStageProgress(
   progress: NaesinStudentProgress | null,
   quizSetCount: number,
-  videoCount: number
-): { vocab: number; passage: number; grammar: number; problem: number } {
-  if (!progress) return { vocab: 0, passage: 0, grammar: 0, problem: 0 };
+  videoCount: number,
+  textbookVideoCount: number,
+): { vocab: number; passage: number; textbookVideo: number; grammar: number; problem: number; mockExam: number } {
+  if (!progress) return { vocab: 0, passage: 0, textbookVideo: 0, grammar: 0, problem: 0, mockExam: 0 };
 
   // Vocab: average of quiz + spelling scores (or 100 if completed)
   let vocab = 0;
@@ -70,6 +73,14 @@ export function computeStageProgress(
     passage = Math.round((fb + tr) / 2);
   }
 
+  // Textbook Video: videos completed / total
+  let textbookVideo = 0;
+  if (progress.textbook_video_completed) {
+    textbookVideo = 100;
+  } else if (textbookVideoCount > 0) {
+    textbookVideo = Math.round((progress.textbook_videos_completed / textbookVideoCount) * 100);
+  }
+
   // Grammar: videos completed / total
   let grammar = 0;
   if (progress.grammar_completed) {
@@ -81,7 +92,10 @@ export function computeStageProgress(
   // Problem: 0 or 100
   const problem = progress.problem_completed ? 100 : 0;
 
-  return { vocab, passage, grammar, problem };
+  // Mock Exam: 0 or 100
+  const mockExam = progress.mock_exam_completed ? 100 : 0;
+
+  return { vocab, passage, textbookVideo, grammar, problem, mockExam };
 }
 
 interface RawUnit {
@@ -99,6 +113,7 @@ export function buildUnitSummary(
   const unitProgress = ctx.progressMap.get(u.id) || null;
   const unitGrammar = ctx.grammarByUnit[u.id] || [];
   const videoLessons = unitGrammar.filter((l) => l.content_type === 'video');
+  const unitTextbookVideos = ctx.textbookVideoByUnit[u.id] || [];
   const unitQuizSets = ctx.quizSetsByUnit[u.id] || [];
   const effectiveExamDate = overrideExamDate !== undefined ? overrideExamDate : ctx.examDate;
 
@@ -113,18 +128,21 @@ export function buildUnitSummary(
       hasVocab: ctx.vocabUnitIds.has(u.id),
       hasPassage: ctx.passageUnitIds.has(u.id),
       hasDialogue: ctx.dialogueUnitIds.has(u.id),
+      hasTextbookVideo: unitTextbookVideos.length > 0,
       hasGrammar: unitGrammar.length > 0,
       hasProblem: ctx.problemUnitIds.has(u.id),
+      hasMockExam: ctx.mockExamUnitIds.has(u.id),
       hasLastReview: hasLastReviewContent || !!effectiveExamDate,
     },
     vocabQuizSetCount: unitQuizSets.length,
+    textbookVideoCount: unitTextbookVideos.length,
     grammarVideoCount: videoLessons.length,
     examDate: effectiveExamDate,
     enabledStages: ctx.enabledStages,
     naesinRequiredRounds: ctx.naesinRequiredRounds,
   });
 
-  const stageProgress = computeStageProgress(unitProgress, unitQuizSets.length, videoLessons.length);
+  const stageProgress = computeStageProgress(unitProgress, unitQuizSets.length, videoLessons.length, unitTextbookVideos.length);
 
   return {
     id: u.id,

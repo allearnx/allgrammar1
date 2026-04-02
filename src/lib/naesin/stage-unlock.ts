@@ -10,6 +10,8 @@ export interface StageUnlockInput {
   content: NaesinContentAvailability;
   /** Number of vocab quiz sets created by teacher for this unit */
   vocabQuizSetCount?: number;
+  /** Number of textbook video lessons for this unit */
+  textbookVideoCount?: number;
   /** Number of grammar video lessons for this unit */
   grammarVideoCount?: number;
   /** Student's exam date (ISO string) */
@@ -41,6 +43,7 @@ export function calculateStageStatuses(
   let progress: NaesinStudentProgress | null;
   let content: NaesinContentAvailability;
   let vocabQuizSetCount = 0;
+  let textbookVideoCount = 0;
   let grammarVideoCount = 0;
   let examDate: string | null = null;
   let enabledStages: string[] | null = null;
@@ -55,13 +58,14 @@ export function calculateStageStatuses(
     progress = input.progress;
     content = input.content;
     vocabQuizSetCount = input.vocabQuizSetCount ?? 0;
+    textbookVideoCount = input.textbookVideoCount ?? 0;
     grammarVideoCount = input.grammarVideoCount ?? 0;
     examDate = input.examDate ?? null;
     enabledStages = input.enabledStages ?? null;
     naesinRequiredRounds = input.naesinRequiredRounds ?? 1;
   } else {
     progress = progressOrInput as NaesinStudentProgress | null;
-    content = { hasVocab: false, hasPassage: false, hasDialogue: false, hasGrammar: false, hasProblem: false, hasLastReview: false };
+    content = { hasVocab: false, hasPassage: false, hasDialogue: false, hasTextbookVideo: false, hasGrammar: false, hasProblem: false, hasMockExam: false, hasLastReview: false };
   }
 
   // Stage 1: Vocab
@@ -73,27 +77,35 @@ export function calculateStageStatuses(
   // Stage 3: Dialogue
   const dialogueStatus = getDialogueStatus(progress, content.hasDialogue, naesinRequiredRounds);
 
-  // Stage 4: Grammar
+  // Stage 4: Textbook Video
+  const textbookVideoStatus = getTextbookVideoStatus(progress, content.hasTextbookVideo, textbookVideoCount);
+
+  // Stage 5: Grammar
   const grammarStatus = getGrammarStatus(progress, content.hasGrammar, grammarVideoCount);
 
-  // Stage 5: Problem
+  // Stage 6: Problem
   const problemStatus = getProblemStatus(progress, content.hasProblem);
 
-  // Stage 6: Last Review — D-3 auto-unlock (progress-independent)
+  // Stage 7: Mock Exam
+  const mockExamStatus = getMockExamStatus(progress, content.hasMockExam);
+
+  // Stage 8: Last Review — D-3 auto-unlock (progress-independent)
   const lastReviewStatus = getLastReviewStatus(content.hasLastReview, examDate);
 
   let result: NaesinStageStatuses = {
     vocab: vocabStatus,
     passage: passageStatus,
     dialogue: dialogueStatus,
+    textbookVideo: textbookVideoStatus,
     grammar: grammarStatus,
     problem: problemStatus,
+    mockExam: mockExamStatus,
     lastReview: lastReviewStatus,
   };
 
   // Override disabled stages to 'hidden'
   if (enabledStages) {
-    const stageKeys = ['vocab', 'passage', 'dialogue', 'grammar', 'problem', 'lastReview'] as const;
+    const stageKeys = ['vocab', 'passage', 'dialogue', 'textbookVideo', 'grammar', 'problem', 'mockExam', 'lastReview'] as const;
     for (const key of stageKeys) {
       if (!enabledStages.includes(key)) {
         result[key] = 'hidden';
@@ -179,6 +191,33 @@ function getProblemStatus(
 ): NaesinStageStatus {
   if (!hasContent) return 'completed';
   if (progress?.problem_completed) return 'completed';
+  return 'available';
+}
+
+function getTextbookVideoStatus(
+  progress: NaesinStudentProgress | null,
+  hasContent: boolean,
+  videoCount: number,
+): NaesinStageStatus {
+  if (!hasContent) return 'completed';
+  if (progress?.textbook_video_completed) return 'completed';
+
+  // All videos must be 80%+ watched
+  if (videoCount > 0 && progress) {
+    if (progress.textbook_videos_completed >= videoCount) {
+      return 'completed';
+    }
+  }
+
+  return 'available';
+}
+
+function getMockExamStatus(
+  progress: NaesinStudentProgress | null,
+  hasContent: boolean,
+): NaesinStageStatus {
+  if (!hasContent) return 'completed';
+  if (progress?.mock_exam_completed) return 'completed';
   return 'available';
 }
 

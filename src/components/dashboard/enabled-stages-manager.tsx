@@ -4,20 +4,23 @@ import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Checkbox } from '@/components/ui/checkbox';
-import { Save, Loader2, BookOpen, FileText, GraduationCap, ClipboardList, Brain } from 'lucide-react';
+import { Save, Loader2, BookOpen, FileText, PlayCircle, GraduationCap, ClipboardList, FileQuestion, Brain } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { toast } from 'sonner';
 import { fetchWithToast } from '@/lib/fetch-with-toast';
 
-type StageKey = 'vocab' | 'passage' | 'grammar' | 'problem' | 'lastReview';
+type StageKey = 'vocab' | 'passage' | 'dialogue' | 'textbookVideo' | 'grammar' | 'problem' | 'mockExam' | 'lastReview';
 
-const ALL_STAGES: StageKey[] = ['vocab', 'passage', 'grammar', 'problem', 'lastReview'];
+const ALL_STAGES: StageKey[] = ['vocab', 'passage', 'dialogue', 'textbookVideo', 'grammar', 'problem', 'mockExam', 'lastReview'];
 
 const STAGE_OPTIONS: { value: StageKey; label: string; icon: typeof BookOpen }[] = [
   { value: 'vocab', label: '단어 암기', icon: BookOpen },
   { value: 'passage', label: '교과서 암기', icon: FileText },
+  { value: 'dialogue', label: '대화문 암기', icon: FileText },
+  { value: 'textbookVideo', label: '설명 영상', icon: PlayCircle },
   { value: 'grammar', label: '문법 설명', icon: GraduationCap },
   { value: 'problem', label: '문제풀이', icon: ClipboardList },
+  { value: 'mockExam', label: '예상문제', icon: FileQuestion },
   { value: 'lastReview', label: '직전보강', icon: Brain },
 ];
 

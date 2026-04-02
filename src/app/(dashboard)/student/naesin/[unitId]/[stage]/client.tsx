@@ -10,8 +10,10 @@ import {
   BookOpen,
   FileText,
   MessageSquare,
+  PlayCircle,
   GraduationCap,
   ClipboardList,
+  FileQuestion,
   Brain,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -26,6 +28,7 @@ import { PassageTab } from '@/components/naesin/passage-tab';
 import { GrammarTab } from '@/components/naesin/grammar-tab';
 import { DialogueTab } from '@/components/naesin/dialogue-tab';
 import { ProblemTab } from '@/components/naesin/problem-tab';
+import { TextbookVideoTab } from '@/components/naesin/textbook-video-tab';
 import { LastReviewTab } from '@/components/naesin/last-review-tab';
 import type {
   NaesinVocabulary,
@@ -35,6 +38,8 @@ import type {
   NaesinStageStatus,
   NaesinVocabQuizSet,
   NaesinGrammarVideoProgress,
+  NaesinTextbookVideo,
+  NaesinTextbookVideoProgress,
   NaesinProblemSheet,
   NaesinSimilarProblem,
   NaesinLastReviewContent,
@@ -43,14 +48,16 @@ import type { NaesinDialogue } from '@/types/naesin';
 import Link from 'next/link';
 import { useLearningSession } from '@/hooks/use-learning-session';
 
-type StageKey = 'vocab' | 'passage' | 'dialogue' | 'grammar' | 'problem' | 'lastReview';
+type StageKey = 'vocab' | 'passage' | 'dialogue' | 'textbookVideo' | 'grammar' | 'problem' | 'mockExam' | 'lastReview';
 
 const STAGE_CONFIG = [
   { key: 'vocab' as const, label: '단어 암기', shortLabel: '단어', icon: BookOpen, unlockHint: null },
   { key: 'passage' as const, label: '교과서 암기', shortLabel: '교과서', icon: FileText, unlockHint: '단어 암기 80% 이상 달성 시 해금' },
   { key: 'dialogue' as const, label: '대화문 암기', shortLabel: '대화문', icon: MessageSquare, unlockHint: '교과서 암기 80% 이상 달성 시 해금' },
-  { key: 'grammar' as const, label: '문법 설명', shortLabel: '문법', icon: GraduationCap, unlockHint: '대화문 암기 완료 시 해금' },
+  { key: 'textbookVideo' as const, label: '설명 영상', shortLabel: '영상', icon: PlayCircle, unlockHint: '대화문 암기 완료 시 해금' },
+  { key: 'grammar' as const, label: '문법 설명', shortLabel: '문법', icon: GraduationCap, unlockHint: '설명 영상 완료 시 해금' },
   { key: 'problem' as const, label: '문제풀이', shortLabel: '문제', icon: ClipboardList, unlockHint: '문법 설명 완료 시 해금' },
+  { key: 'mockExam' as const, label: '예상문제', shortLabel: '예상', icon: FileQuestion, unlockHint: '문제풀이 완료 시 해금' },
   { key: 'lastReview' as const, label: '직전보강', shortLabel: '보강', icon: Brain, unlockHint: '시험 D-3일 전 자동 해금' },
 ];
 
@@ -72,11 +79,16 @@ interface StageData {
   translationSentencesPerPage?: number;
   // dialogue
   dialogues?: NaesinDialogue[];
+  // textbookVideo
+  textbookVideos?: NaesinTextbookVideo[];
+  textbookVideoProgress?: NaesinTextbookVideoProgress[];
   // grammar
   grammarLessons?: NaesinGrammarLesson[];
   videoProgress?: NaesinGrammarVideoProgress[];
   // problem
   problemSheets?: NaesinProblemSheet[];
+  // mockExam
+  mockExamSheets?: NaesinProblemSheet[];
   // lastReview
   lastReviewProblemSheets?: NaesinProblemSheet[];
   similarProblems?: NaesinSimilarProblem[];
@@ -224,6 +236,14 @@ export function NaesinStageView({
                 round1Completed={stageData.dialogueRound1Completed}
               />
             )}
+            {currentStage === 'textbookVideo' && (
+              <TextbookVideoTab
+                videos={stageData.textbookVideos || []}
+                unitId={unit.id}
+                onStageComplete={handleStageComplete}
+                videoProgress={stageData.textbookVideoProgress}
+              />
+            )}
             {currentStage === 'grammar' && (
               <GrammarTab
                 lessons={stageData.grammarLessons || []}
@@ -235,6 +255,13 @@ export function NaesinStageView({
             {currentStage === 'problem' && (
               <ProblemTab
                 sheets={stageData.problemSheets || []}
+                unitId={unit.id}
+                onStageComplete={handleStageComplete}
+              />
+            )}
+            {currentStage === 'mockExam' && (
+              <ProblemTab
+                sheets={stageData.mockExamSheets || []}
                 unitId={unit.id}
                 onStageComplete={handleStageComplete}
               />

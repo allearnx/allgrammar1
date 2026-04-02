@@ -109,7 +109,7 @@ export async function StudentDetail({ user, studentId, naesinData }: Props) {
 
   const passageStages = (passageStagesRes.data?.passage_required_stages as string[] | null) ?? ['fill_blanks', 'translation'];
   const translationSentencesPerPage = (passageStagesRes.data?.translation_sentences_per_page as number | null) ?? 10;
-  const enabledStages = (passageStagesRes.data?.enabled_stages as string[] | null) ?? ['vocab', 'passage', 'grammar', 'problem', 'lastReview'];
+  const enabledStages = (passageStagesRes.data?.enabled_stages as string[] | null) ?? ['vocab', 'passage', 'dialogue', 'textbookVideo', 'grammar', 'problem', 'mockExam', 'lastReview'];
 
   const videoProgress = videoRes.data || [];
   const memoryProgress = memoryRes.data || [];

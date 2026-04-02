@@ -37,6 +37,14 @@ export const videoProgressSchema = z.object({
   cumulativeSeconds: z.number().nullish(),
 });
 
+export const textbookVideoProgressSchema = z.object({
+  lessonId: ID,
+  unitId: ID.nullish(),
+  position: z.number().nullish(),
+  duration: z.number().nullish(),
+  cumulativeSeconds: z.number().nullish(),
+});
+
 export const omrSubmitSchema = z.object({
   unitId: ID,
   omrSheetId: ID,

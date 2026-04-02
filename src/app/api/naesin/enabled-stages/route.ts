@@ -4,7 +4,7 @@ import { createAdminClient } from '@/lib/supabase/admin';
 import { requireAcademyScope } from '@/lib/api/require-academy-scope';
 import { z } from 'zod';
 
-const ALL_STAGES = ['vocab', 'passage', 'grammar', 'problem', 'lastReview'] as const;
+const ALL_STAGES = ['vocab', 'passage', 'dialogue', 'textbookVideo', 'grammar', 'problem', 'mockExam', 'lastReview'] as const;
 
 const updateSchema = z.object({
   studentId: z.string().uuid(),

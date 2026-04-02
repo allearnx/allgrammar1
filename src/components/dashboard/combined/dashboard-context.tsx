@@ -148,7 +148,7 @@ export function DashboardProvider({
     for (const unit of sortedUnits) {
       const progress = naesinProgressMap.get(unit.id) ?? null;
       const content = contentMap[unit.id] ?? {
-        hasVocab: false, hasPassage: false, hasDialogue: false, hasGrammar: false, hasProblem: false, hasLastReview: false,
+        hasVocab: false, hasPassage: false, hasDialogue: false, hasTextbookVideo: false, hasGrammar: false, hasProblem: false, hasMockExam: false, hasLastReview: false,
       };
       const assignment = examAssignments.find((a) => a.unit_ids.includes(unit.id));
       const examDate = assignment?.exam_date ?? null;

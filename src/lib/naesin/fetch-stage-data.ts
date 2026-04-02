@@ -2,7 +2,7 @@ import type { createClient } from '@/lib/supabase/server';
 import type { NaesinStudentProgress } from '@/types/naesin';
 
 type SupabaseClient = Awaited<ReturnType<typeof createClient>>;
-type StageKey = 'vocab' | 'passage' | 'dialogue' | 'grammar' | 'problem' | 'lastReview';
+type StageKey = 'vocab' | 'passage' | 'dialogue' | 'textbookVideo' | 'grammar' | 'problem' | 'mockExam' | 'lastReview';
 
 export async function fetchStageData(
   supabase: SupabaseClient,
@@ -19,10 +19,14 @@ export async function fetchStageData(
       return fetchPassageData(supabase, userId, unitId);
     case 'dialogue':
       return fetchDialogueData(supabase, userId, unitId);
+    case 'textbookVideo':
+      return fetchTextbookVideoData(supabase, userId, unitId);
     case 'grammar':
       return fetchGrammarData(supabase, userId, unitId);
     case 'problem':
       return fetchProblemData(supabase, unitId);
+    case 'mockExam':
+      return fetchMockExamData(supabase, unitId);
     case 'lastReview':
       return fetchLastReviewData(supabase, unitId);
   }
@@ -99,6 +103,31 @@ async function fetchGrammarData(supabase: SupabaseClient, userId: string, unitId
   );
 
   return { grammarLessons, videoProgress };
+}
+
+async function fetchTextbookVideoData(supabase: SupabaseClient, userId: string, unitId: string) {
+  const [videoRes, videoProgressRes] = await Promise.all([
+    supabase.from('naesin_textbook_videos').select('*').eq('unit_id', unitId).order('sort_order'),
+    supabase.from('naesin_textbook_video_progress').select('*').eq('student_id', userId),
+  ]);
+
+  const textbookVideos = videoRes.data || [];
+  const videoIds = textbookVideos.map((v: { id: string }) => v.id);
+  const textbookVideoProgress = (videoProgressRes.data || []).filter(
+    (vp: { video_id: string }) => videoIds.includes(vp.video_id),
+  );
+
+  return { textbookVideos, textbookVideoProgress };
+}
+
+async function fetchMockExamData(supabase: SupabaseClient, unitId: string) {
+  const mockExamRes = await supabase
+    .from('naesin_problem_sheets')
+    .select('*')
+    .eq('unit_id', unitId)
+    .eq('category', 'mock_exam')
+    .order('sort_order');
+  return { mockExamSheets: mockExamRes.data || [] };
 }
 
 async function fetchProblemData(supabase: SupabaseClient, unitId: string) {

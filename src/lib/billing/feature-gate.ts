@@ -1,6 +1,8 @@
 export type Feature =
   | 'naesin:grammar'
   | 'naesin:problem'
+  | 'naesin:textbookVideo'
+  | 'naesin:mockExam'
   | 'voca:round2'
   | 'analytics:charts'
   | 'analytics:rankings'
@@ -11,12 +13,14 @@ export type Feature =
 
 export type Tier = 'free' | 'paid' | 'trialing';
 
-const ALL_NAESIN_STAGES = ['vocab', 'passage', 'dialogue', 'grammar', 'problem', 'lastReview'];
+const ALL_NAESIN_STAGES = ['vocab', 'passage', 'dialogue', 'textbookVideo', 'grammar', 'problem', 'mockExam', 'lastReview'];
 const FREE_NAESIN_STAGES = ['vocab', 'passage', 'dialogue'];
 
 const PAID_ONLY_FEATURES: ReadonlySet<Feature> = new Set([
   'naesin:grammar',
   'naesin:problem',
+  'naesin:textbookVideo',
+  'naesin:mockExam',
   'voca:round2',
   'analytics:charts',
   'analytics:rankings',

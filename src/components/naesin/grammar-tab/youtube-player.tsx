@@ -13,12 +13,14 @@ export function NaesinYouTubePlayerTracked({
   unitId,
   onVideoProgress,
   initialProgress,
+  progressEndpoint = '/api/naesin/grammar/video-progress',
 }: {
   videoId: string;
   lessonId: string;
   unitId: string;
   onVideoProgress: (percent: number, completed: boolean) => void;
   initialProgress?: NaesinGrammarVideoProgress;
+  progressEndpoint?: string;
 }) {
   const containerRef = useRef<HTMLDivElement>(null);
   const playerRef = useRef<YT.Player | null>(null);
@@ -42,9 +44,9 @@ export function NaesinYouTubePlayerTracked({
       });
 
       if (typeof navigator.sendBeacon === 'function') {
-        navigator.sendBeacon('/api/naesin/grammar/video-progress', body);
+        navigator.sendBeacon(progressEndpoint, body);
       } else {
-        fetch('/api/naesin/grammar/video-progress', {
+        fetch(progressEndpoint, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body,
@@ -60,7 +62,7 @@ export function NaesinYouTubePlayerTracked({
         onVideoProgress(percent, completed);
       }
     },
-    [lessonId, unitId, onVideoProgress]
+    [lessonId, unitId, onVideoProgress, progressEndpoint]
   );
 
   useEffect(() => {
@@ -162,7 +164,7 @@ export function NaesinYouTubePlayerTracked({
           duration: playerRef.current.getDuration(),
           cumulativeSeconds: cumulativeRef.current,
         });
-        navigator.sendBeacon('/api/naesin/grammar/video-progress', body);
+        navigator.sendBeacon(progressEndpoint, body);
       }
     }
 
@@ -176,7 +178,7 @@ export function NaesinYouTubePlayerTracked({
       if (intervalRef.current) clearInterval(intervalRef.current);
       if (playerRef.current) playerRef.current.destroy();
     };
-  }, [videoId, lessonId, unitId, elementId, saveProgress, initialProgress]);
+  }, [videoId, lessonId, unitId, elementId, saveProgress, initialProgress, progressEndpoint]);
 
   return (
     <div className="relative w-full aspect-video bg-black rounded-lg overflow-hidden">

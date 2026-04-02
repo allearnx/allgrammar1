@@ -32,7 +32,8 @@ describe('deriveTier', () => {
 
 describe('canUseFeature', () => {
   const ALL_FEATURES: Feature[] = [
-    'naesin:grammar', 'naesin:problem', 'voca:round2',
+    'naesin:grammar', 'naesin:problem', 'naesin:textbookVideo', 'naesin:mockExam',
+    'voca:round2',
     'analytics:charts', 'analytics:rankings',
     'bulk:import', 'bulk:assign', 'bulk:export', 'reports',
   ];
@@ -57,15 +58,15 @@ describe('canUseFeature', () => {
 });
 
 describe('getAllowedNaesinStages', () => {
-  it('paid → all 6 stages', () => {
+  it('paid → all 8 stages', () => {
     expect(getAllowedNaesinStages('paid')).toEqual([
-      'vocab', 'passage', 'dialogue', 'grammar', 'problem', 'lastReview',
+      'vocab', 'passage', 'dialogue', 'textbookVideo', 'grammar', 'problem', 'mockExam', 'lastReview',
     ]);
   });
 
-  it('trialing → all 6 stages', () => {
+  it('trialing → all 8 stages', () => {
     expect(getAllowedNaesinStages('trialing')).toEqual([
-      'vocab', 'passage', 'dialogue', 'grammar', 'problem', 'lastReview',
+      'vocab', 'passage', 'dialogue', 'textbookVideo', 'grammar', 'problem', 'mockExam', 'lastReview',
     ]);
   });
 
@@ -82,12 +83,12 @@ describe('mergeEnabledStages', () => {
 
   it('paid + no teacher stages → all stages', () => {
     expect(mergeEnabledStages('paid', null)).toEqual([
-      'vocab', 'passage', 'dialogue', 'grammar', 'problem', 'lastReview',
+      'vocab', 'passage', 'dialogue', 'textbookVideo', 'grammar', 'problem', 'mockExam', 'lastReview',
     ]);
   });
 
   it('free + teacher enables all → intersection with plan (vocab+passage+dialogue only)', () => {
-    const teacherAll = ['vocab', 'passage', 'dialogue', 'grammar', 'problem', 'lastReview'];
+    const teacherAll = ['vocab', 'passage', 'dialogue', 'textbookVideo', 'grammar', 'problem', 'mockExam', 'lastReview'];
     expect(mergeEnabledStages('free', teacherAll)).toEqual(['vocab', 'passage', 'dialogue']);
   });
 

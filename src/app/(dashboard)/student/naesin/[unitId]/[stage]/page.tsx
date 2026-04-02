@@ -9,7 +9,7 @@ import { mergeEnabledStages } from '@/lib/billing/feature-gate';
 import { fetchContentAvailability } from '@/lib/naesin/fetch-content-availability';
 import { fetchStageData } from '@/lib/naesin/fetch-stage-data';
 
-const VALID_STAGES = ['vocab', 'passage', 'dialogue', 'grammar', 'problem', 'lastReview'] as const;
+const VALID_STAGES = ['vocab', 'passage', 'dialogue', 'textbookVideo', 'grammar', 'problem', 'mockExam', 'lastReview'] as const;
 type StageKey = (typeof VALID_STAGES)[number];
 
 interface Props {
@@ -35,7 +35,7 @@ export default async function NaesinStagePage({ params }: Props) {
 
   const textbookId = (unit.textbook as { id: string; display_name: string } | null)?.id ?? null;
 
-  const { progress, contentAvailability, videoLessons, quizSetIds, examDate } =
+  const { progress, contentAvailability, videoLessons, textbookVideoCount, quizSetIds, examDate } =
     await fetchContentAvailability(supabase, user.id, unitId, textbookId);
 
   // Fetch enabled_stages from student settings
@@ -66,6 +66,7 @@ export default async function NaesinStagePage({ params }: Props) {
     progress,
     content: contentAvailability,
     vocabQuizSetCount: quizSetIds.length,
+    textbookVideoCount,
     grammarVideoCount: videoLessons.length,
     examDate,
     enabledStages,

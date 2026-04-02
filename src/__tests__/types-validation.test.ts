@@ -14,13 +14,15 @@ import type {
 
 describe('타입 검증 (컴파일 타임 + 런타임 구조 확인)', () => {
   describe('NaesinStageStatuses', () => {
-    it('6단계 key를 가진다 (vocab, passage, dialogue, grammar, problem, lastReview)', () => {
+    it('8단계 key를 가진다', () => {
       const statuses: NaesinStageStatuses = {
         vocab: 'available',
         passage: 'locked',
         dialogue: 'locked',
+        textbookVideo: 'locked',
         grammar: 'locked',
         problem: 'locked',
+        mockExam: 'locked',
         lastReview: 'locked',
       };
       expect(statuses.vocab).toBe('available');
@@ -34,8 +36,10 @@ describe('타입 검증 (컴파일 타임 + 런타임 구조 확인)', () => {
         vocab: 'completed',
         passage: 'completed',
         dialogue: 'completed',
+        textbookVideo: 'completed',
         grammar: 'completed',
         problem: 'completed',
+        mockExam: 'completed',
         lastReview: 'available',
         omr: 'completed', // deprecated but still valid
       };
@@ -49,8 +53,10 @@ describe('타입 검증 (컴파일 타임 + 런타임 구조 확인)', () => {
         hasVocab: true,
         hasPassage: true,
         hasDialogue: false,
+        hasTextbookVideo: false,
         hasGrammar: true,
         hasProblem: false,
+        hasMockExam: false,
         hasLastReview: false,
       };
       expect(content.hasDialogue).toBe(false);
