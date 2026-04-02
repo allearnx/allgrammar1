@@ -8,7 +8,7 @@ import { Receipt, DollarSign, CheckCircle2, XCircle, RotateCcw, Inbox, ExternalL
 import type { Order, OrderStatus } from '@/types/billing';
 
 interface OrderWithJoins extends Order {
-  user: { full_name: string; email: string } | null;
+  user: { full_name: string; email: string; phone: string | null } | null;
   course: { title: string } | null;
 }
 
@@ -133,6 +133,9 @@ export function OrdersClient({ orders }: OrdersClientProps) {
                     <td className="px-5 py-3">
                       <div className="font-medium text-gray-900">{order.user?.full_name || '-'}</div>
                       <div className="text-xs text-gray-400">{order.user?.email || '-'}</div>
+                      {order.user?.phone && (
+                        <div className="text-xs text-gray-400">{order.user.phone}</div>
+                      )}
                     </td>
                     <td className="px-5 py-3">
                       <div className="text-gray-900">{order.order_name}</div>

@@ -12,7 +12,7 @@ export default async function BossOrdersPage() {
 
   const { data: orders } = await admin
     .from('orders')
-    .select('*, user:users(full_name, email), course:courses(title)')
+    .select('*, user:users(full_name, email, phone), course:courses(title)')
     .order('created_at', { ascending: false });
 
   return (
