@@ -63,7 +63,7 @@ export default async function ParentReportPage({ params }: Props) {
           <p className="text-sm text-gray-500 mt-1">실시간 학습 현황</p>
         </div>
 
-        <StudentReportPanel token={token} services={services} />
+        <StudentReportPanel token={token} services={services} role="parent" />
       </main>
 
       {/* Watermark */}

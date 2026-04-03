@@ -370,6 +370,10 @@ export const grammarChatQuestionCreateSchema = z.object({
 
 // ── Learning Session Schemas ──
 
+export const aiAnalysisSchema = z.object({
+  studentId: ID,
+});
+
 export const learningSessionHeartbeatSchema = z.object({
   contextType: z.enum(['naesin', 'voca']),
   contextId: z.string().max(100),

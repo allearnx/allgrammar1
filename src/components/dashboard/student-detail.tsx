@@ -160,7 +160,7 @@ export async function StudentDetail({ user, studentId, naesinData }: Props) {
         </Card>
 
         {/* 상세 리포트 패널 */}
-        <StudentReportPanel studentId={studentId} services={detailServices} />
+        <StudentReportPanel studentId={studentId} services={detailServices} role={user.role} tier={planContext.tier} />
 
         {/* 올킬보카 서비스 카드 */}
         {hasVocaAssignment && (

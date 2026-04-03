@@ -6,19 +6,23 @@ import { UnitScoreChart } from '@/components/charts/unit-score-chart';
 import { ActivityCalendar } from '@/components/charts/activity-calendar';
 import {
   Loader2, AlertCircle, TrendingUp, BarChart3, AlertTriangle,
-  CalendarDays, LayoutDashboard,
+  CalendarDays, LayoutDashboard, Brain,
 } from 'lucide-react';
 import { useStudentReport } from '@/hooks/use-student-report';
 import { SummaryTab } from './report-tabs/summary-tab';
 import { WrongAnalysisTab } from './report-tabs/wrong-analysis-tab';
+import { AiAnalysisTab } from './report-tabs/ai-analysis-tab';
+import type { Tier } from '@/lib/billing/feature-gate';
 
 interface Props {
   studentId?: string;
   services?: string[];
   token?: string;
+  role?: 'teacher' | 'admin' | 'boss' | 'student' | 'parent';
+  tier?: Tier;
 }
 
-export function StudentReportPanel({ studentId, services: servicesProp, token }: Props) {
+export function StudentReportPanel({ studentId, services: servicesProp, token, role = 'student', tier = 'free' }: Props) {
   const { data, loading, error } = useStudentReport(studentId, token);
 
   if (loading) {
@@ -91,6 +95,11 @@ export function StudentReportPanel({ studentId, services: servicesProp, token }:
               <CalendarDays className="h-3.5 w-3.5" />
               <span className="hidden sm:inline">학습 기록</span>
               <span className="sm:hidden">기록</span>
+            </TabsTrigger>
+            <TabsTrigger value="ai" className="gap-1">
+              <Brain className="h-3.5 w-3.5" />
+              <span className="hidden sm:inline">AI 분석</span>
+              <span className="sm:hidden">AI</span>
             </TabsTrigger>
           </TabsList>
 
@@ -172,6 +181,11 @@ export function StudentReportPanel({ studentId, services: servicesProp, token }:
           {/* ── 학습 기록 ── */}
           <TabsContent value="activity" className="mt-4">
             <ActivityCalendar activities={data.activityLog} dailySeconds={data.dailyLearningSeconds} />
+          </TabsContent>
+
+          {/* ── AI 분석 ── */}
+          <TabsContent value="ai" className="mt-4">
+            <AiAnalysisTab studentId={studentId} role={role} tier={tier} token={token} />
           </TabsContent>
         </Tabs>
       </div>

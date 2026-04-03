@@ -18,7 +18,7 @@ export default async function MyReportPage() {
     <>
       <Topbar user={user} title="내 리포트" />
       <div className="p-4 md:p-6">
-        <StudentReportPanel services={services} />
+        <StudentReportPanel services={services} role="student" />
       </div>
     </>
   );
