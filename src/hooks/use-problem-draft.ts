@@ -88,5 +88,62 @@ export function useProblemDraft(sheetId: string, questionCount: number) {
     }
   }
 
-  return { loadDraft, saveDraft, clearDraft };
+  async function saveServerDraft(draft: DraftInput, unitId?: string | null): Promise<boolean> {
+    try {
+      const full: ProblemDraft = {
+        ...draft,
+        version: DRAFT_VERSION,
+        sheetId,
+        questionCount,
+        savedAt: new Date().toISOString(),
+      } as ProblemDraft;
+
+      const answeredCount = full.mode === 'interactive'
+        ? Object.keys(full.answersMap ?? {}).length
+        : Object.keys((full as ImageAnswerDraft).answers ?? {}).length;
+
+      const res = await fetch('/api/naesin/problems/draft/save', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          sheetId,
+          unitId: unitId ?? null,
+          draftData: full,
+          answeredCount,
+        }),
+      });
+      return res.ok;
+    } catch {
+      return false;
+    }
+  }
+
+  async function loadServerDraft(): Promise<ProblemDraft | null> {
+    try {
+      const res = await fetch(`/api/naesin/problems/draft/load?sheetId=${sheetId}`);
+      if (!res.ok) return null;
+      const data = await res.json();
+      if (!data?.draft_data) return null;
+      const draft = data.draft_data as ProblemDraft;
+      if (draft.version !== DRAFT_VERSION) return null;
+      if (draft.questionCount !== questionCount) return null;
+      return draft;
+    } catch {
+      return null;
+    }
+  }
+
+  async function clearServerDraft(): Promise<void> {
+    try {
+      await fetch('/api/naesin/problems/draft/delete', {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ sheetId }),
+      });
+    } catch {
+      // ignore
+    }
+  }
+
+  return { loadDraft, saveDraft, clearDraft, saveServerDraft, loadServerDraft, clearServerDraft };
 }

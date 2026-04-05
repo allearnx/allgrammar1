@@ -75,6 +75,13 @@ export const POST = createApiHandler(
       await supabase.from('naesin_wrong_answers').insert(wrongRows);
     }
 
+    // Delete server draft on successful submit
+    await supabase
+      .from('naesin_problem_drafts')
+      .delete()
+      .eq('student_id', user.id)
+      .eq('sheet_id', sheetId);
+
     // Update progress if needed
     if (unitId) {
       await supabase

@@ -1,9 +1,9 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { toast } from 'sonner';
 import { fetchWithToast } from '@/lib/fetch-with-toast';
 import type { NaesinProblemQuestion } from '@/types/database';
 import { useProblemDraft } from '@/hooks/use-problem-draft';
-import type { AiFeedback, WrongItem } from '@/hooks/use-problem-draft';
+import type { AiFeedback, WrongItem, InteractiveDraft } from '@/hooks/use-problem-draft';
 import { useQuestionTimer } from '@/hooks/use-question-timer';
 
 export const MCQ_TIME_LIMIT = 40;
@@ -20,7 +20,8 @@ export function useInteractiveProblem({
   unitId: string;
   onComplete?: () => void;
 }) {
-  const { loadDraft, saveDraft, clearDraft } = useProblemDraft(sheetId, questions.length);
+  const { loadDraft, saveDraft, clearDraft, saveServerDraft, loadServerDraft, clearServerDraft } = useProblemDraft(sheetId, questions.length);
+  const [isMidSaving, setIsMidSaving] = useState(false);
 
   const [currentIndex, setCurrentIndex] = useState(() => {
     const d = loadDraft();
@@ -51,6 +52,27 @@ export function useInteractiveProblem({
     const d = loadDraft();
     return d?.mode === 'interactive' ? (d.answersMap ?? {}) : {};
   });
+
+  // Load server draft on mount (use server if newer than localStorage)
+  useEffect(() => {
+    let cancelled = false;
+    loadServerDraft().then((serverDraft) => {
+      if (cancelled || !serverDraft || serverDraft.mode !== 'interactive') return;
+      const localDraft = loadDraft();
+      const localTime = localDraft?.savedAt ? new Date(localDraft.savedAt).getTime() : 0;
+      const serverTime = serverDraft.savedAt ? new Date(serverDraft.savedAt).getTime() : 0;
+      if (serverTime > localTime) {
+        setCurrentIndex(serverDraft.currentIndex);
+        setScore(serverDraft.score);
+        setWrongList(serverDraft.wrongList);
+        setAiResultsMap(serverDraft.aiResultsMap);
+        setOvertimeQuestions(serverDraft.overtimeQuestions ?? []);
+        setAnswersMap(serverDraft.answersMap ?? {});
+      }
+    });
+    return () => { cancelled = true; };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [sheetId]);
 
   const question = questions[currentIndex];
   const isSubjective = !question?.options || question.options.length === 0;
@@ -189,6 +211,37 @@ export function useInteractiveProblem({
     }
   }
 
+  async function handleMidSave() {
+    const answered = Object.keys(answersMap).length;
+    if (answered === 0) return;
+    setIsMidSaving(true);
+    try {
+      const draftInput: Omit<InteractiveDraft, 'version' | 'sheetId' | 'questionCount' | 'savedAt'> = {
+        mode: 'interactive',
+        currentIndex: showResult ? currentIndex + 1 : currentIndex,
+        score,
+        wrongList,
+        aiResultsMap,
+        answeredUpTo: currentIndex,
+        overtimeQuestions,
+        answersMap,
+      };
+      // Save to both localStorage and server
+      saveDraft(draftInput);
+      const ok = await saveServerDraft(draftInput, unitId);
+      const partialScore = questions.length > 0
+        ? Math.round((score.correct / answered) * 100)
+        : 0;
+      if (ok) {
+        toast.success(`중간 저장 완료 (${answered}/${questions.length}문제, ${partialScore}점)`);
+      } else {
+        toast.error('서버 저장에 실패했습니다. 로컬에만 저장되었습니다.');
+      }
+    } finally {
+      setIsMidSaving(false);
+    }
+  }
+
   async function submitResults(answers: (string | number)[], total: number, finalAiResults?: Record<string, AiFeedback>) {
     const mergedAiResults = finalAiResults ?? aiResultsMap;
     try {
@@ -204,6 +257,7 @@ export function useInteractiveProblem({
         logContext: 'naesin.interactive_view',
       });
       clearDraft();
+      clearServerDraft();
       setFinished(true);
       if (data.score >= 80) {
         toast.success('문제풀이를 완료했습니다!');
@@ -230,5 +284,8 @@ export function useInteractiveProblem({
     isExpired,
     handleSelect,
     handleNext,
+    handleMidSave,
+    isMidSaving,
+    answersMap,
   };
 }

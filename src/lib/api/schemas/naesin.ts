@@ -403,3 +403,16 @@ export const problemCopySchema = z.object({
   targetUnitIds: z.array(ID).min(1).max(50),
   newTitle: SHORT.nullish(),
 });
+
+// ── Problem Draft Schemas ──
+
+export const problemDraftSaveSchema = z.object({
+  sheetId: ID,
+  unitId: ID.nullish(),
+  draftData: z.record(z.string(), z.unknown()),
+  answeredCount: z.number().int().min(0),
+});
+
+export const problemDraftDeleteSchema = z.object({
+  sheetId: ID,
+});

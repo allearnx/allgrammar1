@@ -5,7 +5,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { Badge } from '@/components/ui/badge';
-import { Loader2, Bot, Clock } from 'lucide-react';
+import { Loader2, Bot, Clock, Save } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { MCQOptionList } from '@/components/shared/mcq-option-list';
 import type { NaesinProblemSheet, NaesinProblemQuestion } from '@/types/database';
@@ -115,7 +115,7 @@ export function InteractiveProblemView({
     currentIndex, selectedAnswer, showResult, score, finished,
     wrongList, isGrading, currentAiFeedback,
     question, isSubjective, remaining, isExpired,
-    handleSelect, handleNext,
+    handleSelect, handleNext, handleMidSave, isMidSaving, answersMap,
   } = useInteractiveProblem({ sheetId: sheet.id, questions, unitId, onComplete });
 
   if (questions.length === 0) {
@@ -136,7 +136,20 @@ export function InteractiveProblemView({
     <div className="space-y-6">
       <div className="flex justify-between items-center">
         <span className="text-sm text-muted-foreground">{currentIndex + 1} / {questions.length}</span>
-        <div className="flex gap-2">
+        <div className="flex gap-2 items-center">
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={handleMidSave}
+            disabled={isMidSaving || Object.keys(answersMap).length === 0}
+          >
+            {isMidSaving ? (
+              <Loader2 className="h-4 w-4 animate-spin" />
+            ) : (
+              <Save className="h-4 w-4" />
+            )}
+            <span className="ml-1 hidden sm:inline">중간 저장</span>
+          </Button>
           {!showResult && <TimerBadge remaining={remaining} isExpired={isExpired} />}
           <Badge variant="secondary" className="text-green-600">{score.correct} 정답</Badge>
           <Badge variant="secondary" className="text-red-600">{score.wrong} 오답</Badge>
