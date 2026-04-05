@@ -79,6 +79,20 @@ export function UnitProblemList({ sheets, onUpdate, onRequestDelete }: UnitProbl
     );
   }
 
+  function toggleQuestionType(idx: number) {
+    setEditQuestions((prev) =>
+      prev.map((q, i) => {
+        if (i !== idx) return q;
+        // 객관식 → 단답형: options 제거, 정답 초기화
+        if (q.options && q.options.length > 0) {
+          return { ...q, options: null, answer: '' };
+        }
+        // 단답형 → 객관식: 5개 빈 선택지 추가
+        return { ...q, options: ['', '', '', '', ''], answer: '' };
+      })
+    );
+  }
+
   async function saveEdit() {
     if (!editingSheetId || !editTitle.trim()) return;
     setSaving(true);
@@ -192,6 +206,7 @@ export function UnitProblemList({ sheets, onUpdate, onRequestDelete }: UnitProbl
                               question={q}
                               onUpdate={(field, value) => updateQuestion(i, field, value)}
                               onUpdateOption={(optIdx, value) => updateOption(i, optIdx, value)}
+                              onToggleType={() => toggleQuestionType(i)}
                               onDone={() => setEditingQIdx(null)}
                             />
                           ) : (

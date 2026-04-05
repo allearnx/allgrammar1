@@ -12,15 +12,38 @@ export function QuestionEditRow({
   question,
   onUpdate,
   onUpdateOption,
+  onToggleType,
   onDone,
 }: {
   question: GeneratedQuestion;
   onUpdate: (field: keyof GeneratedQuestion, value: string) => void;
   onUpdateOption: (optIdx: number, value: string) => void;
+  onToggleType?: () => void;
   onDone: () => void;
 }) {
+  const isMcq = hasOptions(question);
   return (
     <td colSpan={6} className="p-3 space-y-2">
+      {onToggleType && (
+        <div className="flex items-center gap-2">
+          <Button
+            size="sm"
+            variant={isMcq ? 'default' : 'outline'}
+            className="h-6 text-xs"
+            onClick={() => { if (!isMcq) onToggleType(); }}
+          >
+            객관식
+          </Button>
+          <Button
+            size="sm"
+            variant={!isMcq ? 'default' : 'outline'}
+            className="h-6 text-xs"
+            onClick={() => { if (isMcq) onToggleType(); }}
+          >
+            단답형
+          </Button>
+        </div>
+      )}
       <div>
         <Label className="text-xs">문제</Label>
         <Textarea
@@ -29,7 +52,7 @@ export function QuestionEditRow({
           rows={2}
         />
       </div>
-      {hasOptions(question) && (
+      {isMcq && (
         <div className="grid grid-cols-5 gap-1">
           {question.options!.map((opt, oi) => (
             <Input
