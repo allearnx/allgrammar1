@@ -82,9 +82,11 @@ export function QuestionEditRow({
 export function QuestionViewRow({
   question,
   onEdit,
+  onDelete,
 }: {
   question: GeneratedQuestion;
   onEdit: () => void;
+  onDelete?: () => void;
 }) {
   return (
     <>
@@ -97,7 +99,14 @@ export function QuestionViewRow({
       </td>
       <td className="p-2 text-xs">{question.answer}</td>
       <td className="p-2">
-        <Button size="sm" variant="ghost" onClick={onEdit}>수정</Button>
+        <div className="flex items-center gap-1">
+          <Button size="sm" variant="ghost" onClick={onEdit}>수정</Button>
+          {onDelete && (
+            <Button size="sm" variant="ghost" onClick={onDelete} className="text-destructive hover:text-destructive">
+              <XCircle className="h-3.5 w-3.5" />
+            </Button>
+          )}
+        </div>
       </td>
     </>
   );

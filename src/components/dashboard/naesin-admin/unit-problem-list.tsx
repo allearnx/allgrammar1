@@ -79,6 +79,13 @@ export function UnitProblemList({ sheets, onUpdate, onRequestDelete }: UnitProbl
     );
   }
 
+  function deleteQuestion(idx: number) {
+    setEditQuestions((prev) =>
+      prev.filter((_, i) => i !== idx).map((q, i) => ({ ...q, number: i + 1 }))
+    );
+    setEditingQIdx(null);
+  }
+
   function toggleQuestionType(idx: number) {
     setEditQuestions((prev) =>
       prev.map((q, i) => {
@@ -216,6 +223,7 @@ export function UnitProblemList({ sheets, onUpdate, onRequestDelete }: UnitProbl
                               if (!isEditing) startEdit(sheet);
                               setEditingQIdx(i);
                             }}
+                              onDelete={isEditing ? () => deleteQuestion(i) : undefined}
                             />
                           )}
                         </tr>
