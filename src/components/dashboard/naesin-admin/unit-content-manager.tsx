@@ -10,7 +10,10 @@ import {
   Brain,
   PlayCircle,
   FileQuestion,
+  ChevronDown,
+  type LucideIcon,
 } from 'lucide-react';
+import { Collapsible, CollapsibleTrigger, CollapsibleContent } from '@/components/ui/collapsible';
 import { ConfirmDialog } from '@/components/shared/confirm-dialog';
 import { AddVocabDialog, BulkVocabUpload, PdfVocabExtract } from './vocab-dialogs';
 import { AddPassageDialog, AddDialogueDialog, AddGrammarDialog, AddOmrDialog, AddProblemDialog, AddLastReviewDialog, BulkOmrUploadDialog, BulkProblemUploadDialog, PdfProblemExtractDialog, AddTextbookVideoDialog, AddMockExamDialog, AiProblemGenerateDialog, ImportTemplateDialog } from './content-dialogs';
@@ -24,6 +27,25 @@ import type { NaesinProblemSheet } from '@/types/naesin';
 import { makeUpdateHandler } from '@/lib/naesin/make-update-handler';
 import { ContentSectionGrid, type ContentSection } from './content-section-grid';
 import { useUnitContentData } from './use-unit-content-data';
+
+function CollapsibleButtonGroup({ label, icon: Icon, children }: { label: string; icon: LucideIcon; children: React.ReactNode }) {
+  return (
+    <Collapsible>
+      <CollapsibleTrigger asChild>
+        <Button variant="outline" size="sm" className="gap-1.5 group">
+          <Icon className="h-4 w-4" />
+          {label}
+          <ChevronDown className="h-3.5 w-3.5 text-muted-foreground transition-transform group-data-[state=open]:rotate-180" />
+        </Button>
+      </CollapsibleTrigger>
+      <CollapsibleContent>
+        <div className="flex flex-wrap gap-2 mt-2 ml-2">
+          {children}
+        </div>
+      </CollapsibleContent>
+    </Collapsible>
+  );
+}
 
 export function UnitContentManager({ unitId }: { unitId: string }) {
   const {
@@ -149,23 +171,31 @@ export function UnitContentManager({ unitId }: { unitId: string }) {
         />
       )}
 
-      <div className="flex flex-wrap gap-2">
-        <AddVocabDialog module="naesin" parentId={unitId} onAdd={refresh} />
-        <BulkVocabUpload module="naesin" parentId={unitId} onAdd={refresh} />
-        <PdfVocabExtract module="naesin" parentId={unitId} onAdd={refresh} />
-        <AddPassageDialog unitId={unitId} onAdd={refresh} />
-        <AddDialogueDialog unitId={unitId} onAdd={refresh} />
-        <AddGrammarDialog unitId={unitId} onAdd={refresh} />
-        <AddOmrDialog unitId={unitId} onAdd={refresh} />
-        <AddTextbookVideoDialog unitId={unitId} onAdd={refresh} />
-        <AddProblemDialog unitId={unitId} onAdd={refresh} />
-        <AddMockExamDialog unitId={unitId} onAdd={refresh} />
-        <BulkOmrUploadDialog unitId={unitId} onAdd={refresh} />
-        <BulkProblemUploadDialog unitId={unitId} onAdd={refresh} />
-        <PdfProblemExtractDialog unitId={unitId} onAdd={refresh} />
-        <AiProblemGenerateDialog unitId={unitId} onAdd={refresh} />
-        <ImportTemplateDialog unitId={unitId} onAdd={refresh} />
-        <AddLastReviewDialog unitId={unitId} onAdd={refresh} />
+      <div className="space-y-2">
+        <CollapsibleButtonGroup label="단어 추가" icon={BookOpen}>
+          <AddVocabDialog module="naesin" parentId={unitId} onAdd={refresh} />
+          <BulkVocabUpload module="naesin" parentId={unitId} onAdd={refresh} />
+          <PdfVocabExtract module="naesin" parentId={unitId} onAdd={refresh} />
+        </CollapsibleButtonGroup>
+
+        <CollapsibleButtonGroup label="콘텐츠 추가" icon={FileText}>
+          <AddPassageDialog unitId={unitId} onAdd={refresh} />
+          <AddDialogueDialog unitId={unitId} onAdd={refresh} />
+          <AddGrammarDialog unitId={unitId} onAdd={refresh} />
+          <AddTextbookVideoDialog unitId={unitId} onAdd={refresh} />
+          <AddLastReviewDialog unitId={unitId} onAdd={refresh} />
+        </CollapsibleButtonGroup>
+
+        <CollapsibleButtonGroup label="문제 추가" icon={ClipboardList}>
+          <AddProblemDialog unitId={unitId} onAdd={refresh} />
+          <AddMockExamDialog unitId={unitId} onAdd={refresh} />
+          <AddOmrDialog unitId={unitId} onAdd={refresh} />
+          <BulkOmrUploadDialog unitId={unitId} onAdd={refresh} />
+          <BulkProblemUploadDialog unitId={unitId} onAdd={refresh} />
+          <PdfProblemExtractDialog unitId={unitId} onAdd={refresh} />
+          <AiProblemGenerateDialog unitId={unitId} onAdd={refresh} />
+          <ImportTemplateDialog unitId={unitId} onAdd={refresh} />
+        </CollapsibleButtonGroup>
       </div>
 
       <ConfirmDialog
