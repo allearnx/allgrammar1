@@ -1,3 +1,5 @@
+import type { NaesinProblemQuestion } from '@/types/naesin';
+
 export interface GeneratedQuestion {
   number: number;
   question: string;
@@ -19,4 +21,26 @@ export function normalizeQuestions(raw: Record<string, unknown>[]): GeneratedQue
     answer: String(q.answer ?? ''),
     explanation: (q.explanation as string) || '',
   }));
+}
+
+/** DB question → GeneratedQuestion 변환 */
+export function toGenerated(q: NaesinProblemQuestion): GeneratedQuestion {
+  return {
+    number: q.number,
+    question: q.question,
+    options: q.options && q.options.length > 0 ? q.options : null,
+    answer: String(q.answer ?? ''),
+    explanation: q.explanation || '',
+  };
+}
+
+/** GeneratedQuestion → DB question 변환 */
+export function toDbQuestion(q: GeneratedQuestion, idx: number): NaesinProblemQuestion {
+  return {
+    number: idx + 1,
+    question: q.question,
+    ...(hasOptions(q) ? { options: q.options! } : {}),
+    answer: q.answer,
+    ...(q.explanation ? { explanation: q.explanation } : {}),
+  };
 }

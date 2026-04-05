@@ -4,9 +4,10 @@ import { useState, useRef, useEffect } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Target, CheckCircle, ArrowRight, RotateCcw, ListRestart } from 'lucide-react';
+import { Target, CheckCircle, ArrowRight, ListRestart } from 'lucide-react';
 import { cn, shuffle } from '@/lib/utils';
 import { ScoreBadges, ResultCard, NextButton } from '@/components/memory/shared';
+import { QuizCompletionActions } from '@/components/shared/quiz-completion-actions';
 import { useRetryWrong } from '@/hooks/use-retry-wrong';
 import { getEncouragement } from '@/lib/naesin/encouragement';
 import type { MemoryItem, StudentMemoryProgress, NaesinVocabulary } from '@/types/database';
@@ -263,19 +264,13 @@ function SpellingCompletionView({
       )}
 
       <div className="flex flex-col gap-2">
-        {wrongItems.length > 0 && (
-          <Button
-            onClick={onRetryWrong}
-            className={cn('w-full', !passed && 'ring-2 ring-orange-400')}
-          >
-            <ListRestart className="h-4 w-4 mr-2" />
-            오답만 다시 풀기
-          </Button>
-        )}
-        <Button onClick={onReset} variant="outline" className="w-full">
-          <RotateCcw className="h-4 w-4 mr-2" />
-          전체 다시 풀기
-        </Button>
+        <QuizCompletionActions
+          wrongCount={wrongItems.length}
+          onRetryWrong={onRetryWrong}
+          onReset={onReset}
+          passed={passed}
+          layout="column"
+        />
       </div>
     </div>
   );

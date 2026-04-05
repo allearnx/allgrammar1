@@ -5,7 +5,8 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { Badge } from '@/components/ui/badge';
-import { Send, AlertTriangle, RotateCcw, ChevronRight, Loader2, ListRestart } from 'lucide-react';
+import { Send, AlertTriangle, ChevronRight, Loader2, ListRestart } from 'lucide-react';
+import { QuizCompletionActions } from '@/components/shared/quiz-completion-actions';
 import type { TranslationExerciseProps, SentenceData, GradingResult, WrongTranslation } from './translation-exercise';
 import { fetchWithToast } from '@/lib/fetch-with-toast';
 import { useRetryWrong } from '@/hooks/use-retry-wrong';
@@ -297,18 +298,11 @@ export function SentenceBysentenceTranslation({ passage, onComplete, showWrongAl
             <ChevronRight className="h-4 w-4 ml-1" />
           </Button>
         ) : (
-          <>
-            {wrongCount > 0 && (
-              <Button onClick={handleRetryWrong} className="flex-1">
-                <ListRestart className="h-4 w-4 mr-1" />
-                오답만 다시 풀기
-              </Button>
-            )}
-            <Button onClick={handleReset} variant="outline" className="flex-1">
-              <RotateCcw className="h-4 w-4 mr-1" />
-              전체 다시 풀기
-            </Button>
-          </>
+          <QuizCompletionActions
+            wrongCount={wrongCount}
+            onRetryWrong={handleRetryWrong}
+            onReset={handleReset}
+          />
         )}
       </div>
 

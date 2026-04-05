@@ -20,6 +20,7 @@ import type { FullValidationResult } from '@/lib/validation';
 import type { GeneratedQuestion } from './question-utils';
 import { hasOptions, normalizeQuestions } from './question-utils';
 import { QuestionEditRow, QuestionViewRow, ValidationBadgeIcon, QuestionBadge } from './question-table-rows';
+import { useQuestionEditor } from '@/hooks/use-question-editor';
 
 type Step = 'upload' | 'loading' | 'preview';
 
@@ -27,10 +28,9 @@ export function PdfProblemExtractDialog({ unitId, unitTitle, onAdd }: { unitId: 
   const [open, setOpen] = useState(false);
   const [step, setStep] = useState<Step>('upload');
   const [title, setTitle] = useState('');
-  const [questions, setQuestions] = useState<GeneratedQuestion[]>([]);
+  const editor = useQuestionEditor();
   const [originalCount, setOriginalCount] = useState(0);
   const [saving, setSaving] = useState(false);
-  const [editingIdx, setEditingIdx] = useState<number | null>(null);
   const [validation, setValidation] = useState<FullValidationResult | null>(null);
   const [validating, setValidating] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -38,9 +38,9 @@ export function PdfProblemExtractDialog({ unitId, unitTitle, onAdd }: { unitId: 
   function resetForm() {
     setStep('upload');
     setTitle('');
-    setQuestions([]);
+    editor.setQuestions([]);
     setOriginalCount(0);
-    setEditingIdx(null);
+    editor.setEditingIdx(null);
     setValidation(null);
     setValidating(false);
   }
@@ -63,7 +63,7 @@ export function PdfProblemExtractDialog({ unitId, unitTitle, onAdd }: { unitId: 
         '/api/naesin/problems/extract-paraphrase',
         { body: { unitId, unitTitle: unitTitle || '', pdfBase64: base64, mediaType: 'application/pdf' }, errorMessage: 'AI 문제 생성에 실패했습니다.' },
       );
-      setQuestions(normalizeQuestions(data.questions || []));
+      editor.setQuestions(normalizeQuestions(data.questions || []));
       setOriginalCount(data.originalCount || 0);
       if (data.validation?.structural) {
         const s = data.validation.structural;
@@ -79,10 +79,10 @@ export function PdfProblemExtractDialog({ unitId, unitTitle, onAdd }: { unitId: 
   }
 
   async function handleAiValidation() {
-    if (questions.length === 0) return;
+    if (editor.questions.length === 0) return;
     setValidating(true);
     try {
-      const formatted = questions.map((q, i) => ({
+      const formatted = editor.questions.map((q, i) => ({
         number: i + 1,
         question: q.question,
         ...(hasOptions(q) ? { options: q.options } : {}),
@@ -101,26 +101,11 @@ export function PdfProblemExtractDialog({ unitId, unitTitle, onAdd }: { unitId: 
     }
   }
 
-  function updateQuestion(idx: number, field: keyof GeneratedQuestion, value: string) {
-    setQuestions((prev) => prev.map((q, i) => (i === idx ? { ...q, [field]: value } : q)));
-  }
-
-  function updateOption(qIdx: number, optIdx: number, value: string) {
-    setQuestions((prev) =>
-      prev.map((q, i) => {
-        if (i !== qIdx || !q.options) return q;
-        const newOptions = [...q.options];
-        newOptions[optIdx] = value;
-        return { ...q, options: newOptions };
-      })
-    );
-  }
-
   async function handleSubmit() {
-    if (questions.length === 0 || !title.trim()) return;
+    if (editor.questions.length === 0 || !title.trim()) return;
     setSaving(true);
     try {
-      const formatted: NaesinProblemQuestion[] = questions.map((q, i) => ({
+      const formatted: NaesinProblemQuestion[] = editor.questions.map((q, i) => ({
         number: i + 1,
         question: q.question,
         ...(hasOptions(q) ? { options: q.options! } : {}),
@@ -128,7 +113,7 @@ export function PdfProblemExtractDialog({ unitId, unitTitle, onAdd }: { unitId: 
         ...(q.explanation ? { explanation: q.explanation } : {}),
       }));
 
-      const answerKey = questions.map((q) => q.answer);
+      const answerKey = editor.questions.map((q) => q.answer);
 
       await fetchWithToast('/api/naesin/problems', {
         body: { unitId, title: title.trim(), mode: 'interactive', questions: formatted, answerKey, category: 'problem' },
@@ -143,6 +128,7 @@ export function PdfProblemExtractDialog({ unitId, unitTitle, onAdd }: { unitId: 
     }
   }
 
+  const { questions } = editor;
   const mcqCount = questions.filter(hasOptions).length;
   const subCount = questions.length - mcqCount;
 
@@ -248,16 +234,16 @@ export function PdfProblemExtractDialog({ unitId, unitTitle, onAdd }: { unitId: 
                 <tbody>
                   {questions.map((q, i) => (
                     <tr key={i} className="border-t">
-                      {editingIdx === i ? (
+                      {editor.editingIdx === i ? (
                         <QuestionEditRow
                           question={q}
-                          onUpdate={(field, value) => updateQuestion(i, field, value)}
-                          onUpdateOption={(optIdx, value) => updateOption(i, optIdx, value)}
-                          onDone={() => setEditingIdx(null)}
+                          onUpdate={(field, value) => editor.updateQuestion(i, field, value)}
+                          onUpdateOption={(optIdx, value) => editor.updateOption(i, optIdx, value)}
+                          onDone={() => editor.setEditingIdx(null)}
                         />
                       ) : (
                         <>
-                          <QuestionViewRow question={q} onEdit={() => setEditingIdx(i)} />
+                          <QuestionViewRow question={q} onEdit={() => editor.setEditingIdx(i)} />
                           <td className="p-2">
                             <QuestionBadge questionNumber={q.number} validation={validation} />
                           </td>

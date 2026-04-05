@@ -11,6 +11,7 @@ import {
 } from '@/components/ui/dialog';
 import { CheckCircle, AlertTriangle, Trophy, RotateCcw, Info, ListRestart } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { QuizCompletionActions } from '@/components/shared/quiz-completion-actions';
 import { useGrammarVocabQuiz } from '@/hooks/use-grammar-vocab-quiz';
 import type { WrongChoicePoint, SelectionMap } from '@/hooks/use-grammar-vocab-quiz';
 import type { GrammarVocabItem, GrammarVocabChoicePoint } from '@/types/naesin';
@@ -67,18 +68,11 @@ export function GrammarVocabView({ items, onScoreChange }: GrammarVocabViewProps
             제출하기
           </Button>
         ) : (
-          <>
-            {q.wrongCount > 0 && (
-              <Button className="flex-1" onClick={q.handleRetryWrong}>
-                <ListRestart className="h-4 w-4 mr-1" />
-                오답만 다시 풀기
-              </Button>
-            )}
-            <Button className="flex-1" variant="outline" onClick={q.handleRetry}>
-              <RotateCcw className="h-4 w-4 mr-1" />
-              전체 다시 풀기
-            </Button>
-          </>
+          <QuizCompletionActions
+            wrongCount={q.wrongCount}
+            onRetryWrong={q.handleRetryWrong}
+            onReset={q.handleRetry}
+          />
         )}
       </div>
 
