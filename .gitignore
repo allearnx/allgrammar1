@@ -49,3 +49,4 @@ backup_*.sql
 next-env.d.ts
 .claude/skills/ui-ux-pro-max/scripts/__pycache__/
 .mcp.json
+supabase/.temp/
