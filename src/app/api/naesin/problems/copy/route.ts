@@ -27,6 +27,7 @@ export const POST = createApiHandler(
       answer_key: source.answer_key || [],
       category: source.category || 'problem',
       pdf_url: source.pdf_url || null,
+      ...(source.is_template ? { source_template_id: sourceSheetId } : {}),
     }));
 
     // 3. Bulk insert

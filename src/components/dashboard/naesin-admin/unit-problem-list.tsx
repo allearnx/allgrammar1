@@ -1,15 +1,23 @@
 'use client';
 
 import { useState } from 'react';
+import { usePathname } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
-import { ClipboardList, ChevronDown, ChevronRight, Pencil, Trash2, Loader2, Wand2, Copy } from 'lucide-react';
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogFooter,
+} from '@/components/ui/dialog';
+import { ClipboardList, ChevronDown, ChevronRight, Pencil, Trash2, Loader2, Wand2, Copy, Bookmark, BookmarkCheck, FolderSearch } from 'lucide-react';
 import { fetchWithToast } from '@/lib/fetch-with-toast';
 import type { NaesinProblemSheet, NaesinProblemQuestion } from '@/types/naesin';
 import { QuestionEditRow, QuestionViewRow } from './content-dialogs/question-table-rows';
 import { hasOptions, type GeneratedQuestion } from './content-dialogs/question-utils';
-import { AiProblemImproveDialog, CopyProblemDialog } from './content-dialogs';
+import { AiProblemImproveDialog, CopyProblemDialog, TemplateCopiesDialog } from './content-dialogs';
 
 /** DB question → GeneratedQuestion 변환 */
 function toGenerated(q: NaesinProblemQuestion): GeneratedQuestion {
@@ -40,6 +48,8 @@ interface UnitProblemListProps {
 }
 
 export function UnitProblemList({ sheets, onUpdate, onRequestDelete }: UnitProblemListProps) {
+  const pathname = usePathname();
+  const isBoss = pathname.startsWith('/boss/');
   const [expandedId, setExpandedId] = useState<string | null>(null);
   const [editingSheetId, setEditingSheetId] = useState<string | null>(null);
   const [editTitle, setEditTitle] = useState('');
@@ -48,6 +58,10 @@ export function UnitProblemList({ sheets, onUpdate, onRequestDelete }: UnitProbl
   const [saving, setSaving] = useState(false);
   const [improveSheetId, setImproveSheetId] = useState<string | null>(null);
   const [copySheetId, setCopySheetId] = useState<string | null>(null);
+  const [copiesSheetId, setCopiesSheetId] = useState<string | null>(null);
+  const [templateDialogId, setTemplateDialogId] = useState<string | null>(null);
+  const [templateTopic, setTemplateTopic] = useState('');
+  const [savingTemplate, setSavingTemplate] = useState(false);
 
   function startEdit(sheet: NaesinProblemSheet) {
     setEditingSheetId(sheet.id);
@@ -100,6 +114,51 @@ export function UnitProblemList({ sheets, onUpdate, onRequestDelete }: UnitProbl
     );
   }
 
+  function openTemplateDialog(sheet: NaesinProblemSheet) {
+    setTemplateDialogId(sheet.id);
+    setTemplateTopic(sheet.template_topic || '');
+  }
+
+  async function toggleTemplate(sheetId: string, currentlyTemplate: boolean) {
+    if (currentlyTemplate) {
+      // 해제
+      setSavingTemplate(true);
+      try {
+        const updated = await fetchWithToast<NaesinProblemSheet>('/api/naesin/problems', {
+          method: 'PATCH',
+          body: { id: sheetId, is_template: false, template_topic: null },
+          successMessage: '템플릿 해제됨',
+          errorMessage: '템플릿 해제 실패',
+          logContext: 'unit.toggle_template',
+        });
+        onUpdate(updated);
+      } catch { /* */ } finally {
+        setSavingTemplate(false);
+      }
+    } else {
+      openTemplateDialog(sheets.find((s) => s.id === sheetId)!);
+    }
+  }
+
+  async function saveTemplate() {
+    if (!templateDialogId || !templateTopic.trim()) return;
+    setSavingTemplate(true);
+    try {
+      const updated = await fetchWithToast<NaesinProblemSheet>('/api/naesin/problems', {
+        method: 'PATCH',
+        body: { id: templateDialogId, is_template: true, template_topic: templateTopic.trim() },
+        successMessage: '템플릿으로 저장됨',
+        errorMessage: '템플릿 저장 실패',
+        logContext: 'unit.save_template',
+      });
+      onUpdate(updated);
+      setTemplateDialogId(null);
+      setTemplateTopic('');
+    } catch { /* */ } finally {
+      setSavingTemplate(false);
+    }
+  }
+
   async function saveEdit() {
     if (!editingSheetId || !editTitle.trim()) return;
     setSaving(true);
@@ -141,6 +200,7 @@ export function UnitProblemList({ sheets, onUpdate, onRequestDelete }: UnitProbl
               <Badge variant="secondary" className="text-[11px]">{questions.length}문제</Badge>
               {mcqCount > 0 && <Badge variant="outline" className="text-[11px]">객관식 {mcqCount}</Badge>}
               {subCount > 0 && <Badge variant="outline" className="text-[11px]">서술형 {subCount}</Badge>}
+              {sheet.is_template && <Badge className="text-[10px] bg-amber-100 text-amber-700 hover:bg-amber-100">템플릿</Badge>}
               <Button
                 variant="ghost"
                 size="icon"
@@ -160,6 +220,33 @@ export function UnitProblemList({ sheets, onUpdate, onRequestDelete }: UnitProbl
               >
                 <Copy className="h-3.5 w-3.5 text-blue-500" />
               </Button>
+              {isBoss && (
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="h-6 w-6 opacity-0 group-hover:opacity-100"
+                  onClick={(e) => { e.stopPropagation(); toggleTemplate(sheet.id, !!sheet.is_template); }}
+                  disabled={savingTemplate}
+                  aria-label={sheet.is_template ? '템플릿 해제' : '템플릿 저장'}
+                  title={sheet.is_template ? '템플릿 해제' : '템플릿으로 저장'}
+                >
+                  {sheet.is_template
+                    ? <BookmarkCheck className="h-3.5 w-3.5 text-amber-500" />
+                    : <Bookmark className="h-3.5 w-3.5 text-amber-500" />}
+                </Button>
+              )}
+              {isBoss && sheet.is_template && (
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="h-6 w-6 opacity-0 group-hover:opacity-100"
+                  onClick={(e) => { e.stopPropagation(); setCopiesSheetId(sheet.id); }}
+                  aria-label="복사본 관리"
+                  title="복사본 관리"
+                >
+                  <FolderSearch className="h-3.5 w-3.5 text-emerald-500" />
+                </Button>
+              )}
               <Button
                 variant="ghost"
                 size="icon"
@@ -263,6 +350,36 @@ export function UnitProblemList({ sheets, onUpdate, onRequestDelete }: UnitProbl
           onOpenChange={(v) => { if (!v) setCopySheetId(null); }}
         />
       )}
+
+      {copiesSheetId && sheets.find((s) => s.id === copiesSheetId) && (
+        <TemplateCopiesDialog
+          sheet={sheets.find((s) => s.id === copiesSheetId)!}
+          open={true}
+          onOpenChange={(v) => { if (!v) setCopiesSheetId(null); }}
+        />
+      )}
+
+      <Dialog open={templateDialogId !== null} onOpenChange={(v) => { if (!v) { setTemplateDialogId(null); setTemplateTopic(''); } }}>
+        <DialogContent className="max-w-sm">
+          <DialogHeader>
+            <DialogTitle>템플릿 주제 입력</DialogTitle>
+          </DialogHeader>
+          <Input
+            className="h-9"
+            value={templateTopic}
+            onChange={(e) => setTemplateTopic(e.target.value)}
+            placeholder="예: to부정사, 사역동사, 관계대명사"
+            autoFocus
+          />
+          <DialogFooter>
+            <Button variant="outline" size="sm" onClick={() => { setTemplateDialogId(null); setTemplateTopic(''); }}>취소</Button>
+            <Button size="sm" onClick={saveTemplate} disabled={savingTemplate || !templateTopic.trim()}>
+              {savingTemplate && <Loader2 className="h-3.5 w-3.5 mr-1 animate-spin" />}
+              저장
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }

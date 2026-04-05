@@ -301,6 +301,9 @@ export interface NaesinProblemSheet {
   answer_key: (string | number)[];
   sort_order: number;
   category: NaesinProblemCategory;
+  is_template?: boolean;
+  template_topic?: string | null;
+  source_template_id?: string | null;
   created_at: string;
 }
 

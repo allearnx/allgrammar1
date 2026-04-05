@@ -50,6 +50,12 @@ export const PATCH = createApiHandler(
   async ({ body, supabase, user }) => {
     await requireContentPermission(user, supabase);
     const { id, ...updates } = body as Record<string, unknown>;
+
+    // is_template / template_topic 변경은 boss만 가능
+    if (('is_template' in updates || 'template_topic' in updates) && user.role !== 'boss') {
+      return NextResponse.json({ error: '템플릿 설정은 boss만 가능합니다' }, { status: 403 });
+    }
+
     const data = dbResult(await supabase
       .from('naesin_problem_sheets')
       .update(updates)
