@@ -397,3 +397,9 @@ export const aiProblemGenerateSchema = z.object({
 export const aiProblemImproveSchema = z.object({
   sheetId: ID,
 });
+
+export const problemCopySchema = z.object({
+  sourceSheetId: ID,
+  targetUnitIds: z.array(ID).min(1).max(50),
+  newTitle: SHORT.nullish(),
+});

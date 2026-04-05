@@ -12,3 +12,4 @@ export { AddTextbookVideoDialog } from './add-textbook-video-dialog';
 export { AddMockExamDialog } from './add-mock-exam-dialog';
 export { AiProblemGenerateDialog } from './ai-problem-generate-dialog';
 export { AiProblemImproveDialog } from './ai-problem-improve-dialog';
+export { CopyProblemDialog } from './copy-problem-dialog';

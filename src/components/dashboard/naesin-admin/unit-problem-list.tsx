@@ -4,12 +4,12 @@ import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
-import { ClipboardList, ChevronDown, ChevronRight, Pencil, Trash2, Loader2, Wand2 } from 'lucide-react';
+import { ClipboardList, ChevronDown, ChevronRight, Pencil, Trash2, Loader2, Wand2, Copy } from 'lucide-react';
 import { fetchWithToast } from '@/lib/fetch-with-toast';
 import type { NaesinProblemSheet, NaesinProblemQuestion } from '@/types/naesin';
 import { QuestionEditRow, QuestionViewRow } from './content-dialogs/question-table-rows';
 import { hasOptions, type GeneratedQuestion } from './content-dialogs/question-utils';
-import { AiProblemImproveDialog } from './content-dialogs';
+import { AiProblemImproveDialog, CopyProblemDialog } from './content-dialogs';
 
 /** DB question → GeneratedQuestion 변환 */
 function toGenerated(q: NaesinProblemQuestion): GeneratedQuestion {
@@ -47,6 +47,7 @@ export function UnitProblemList({ sheets, onUpdate, onRequestDelete }: UnitProbl
   const [editingQIdx, setEditingQIdx] = useState<number | null>(null);
   const [saving, setSaving] = useState(false);
   const [improveSheetId, setImproveSheetId] = useState<string | null>(null);
+  const [copySheetId, setCopySheetId] = useState<string | null>(null);
 
   function startEdit(sheet: NaesinProblemSheet) {
     setEditingSheetId(sheet.id);
@@ -127,6 +128,16 @@ export function UnitProblemList({ sheets, onUpdate, onRequestDelete }: UnitProbl
                 aria-label="수정"
               >
                 <Pencil className="h-3.5 w-3.5" />
+              </Button>
+              <Button
+                variant="ghost"
+                size="icon"
+                className="h-6 w-6 opacity-0 group-hover:opacity-100"
+                onClick={(e) => { e.stopPropagation(); setCopySheetId(sheet.id); }}
+                aria-label="복사"
+                title="다른 단원에 복사"
+              >
+                <Copy className="h-3.5 w-3.5 text-blue-500" />
               </Button>
               <Button
                 variant="ghost"
@@ -219,6 +230,14 @@ export function UnitProblemList({ sheets, onUpdate, onRequestDelete }: UnitProbl
           open={true}
           onOpenChange={(v) => { if (!v) setImproveSheetId(null); }}
           onUpdate={onUpdate}
+        />
+      )}
+
+      {copySheetId && sheets.find((s) => s.id === copySheetId) && (
+        <CopyProblemDialog
+          sheet={sheets.find((s) => s.id === copySheetId)!}
+          open={true}
+          onOpenChange={(v) => { if (!v) setCopySheetId(null); }}
         />
       )}
     </div>
