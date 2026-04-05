@@ -133,7 +133,7 @@ export function UnitProblemList({ sheets, onUpdate, onRequestDelete }: UnitProbl
           <div key={sheet.id} className="rounded hover:bg-muted/50">
             <div
               className="flex items-center gap-2 py-1.5 px-2 group cursor-pointer"
-              onClick={() => setExpandedId(isExpanded ? null : sheet.id)}
+              onClick={() => { if (!isEditing) setExpandedId(isExpanded ? null : sheet.id); }}
             >
               {isExpanded ? <ChevronDown className="h-3 w-3 shrink-0" /> : <ChevronRight className="h-3 w-3 shrink-0" />}
               <ClipboardList className="h-3.5 w-3.5 text-red-500 shrink-0" />
