@@ -40,6 +40,9 @@ export async function fetchWithToast<T = unknown>(
     try {
       const data = await res.json();
       serverError = data.error;
+      if (data.details?.length) {
+        serverError = `${serverError} (${data.details.join(', ')})`;
+      }
     } catch {
       // response may not be JSON
     }

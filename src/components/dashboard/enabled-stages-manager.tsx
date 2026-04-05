@@ -39,7 +39,9 @@ interface Props {
 }
 
 export function EnabledStagesManager({ studentId, initialStages, tier = 'paid' }: Props) {
-  const [stages, setStages] = useState<StageKey[]>(initialStages);
+  // Filter out any invalid stage values from DB
+  const safeInitial = initialStages.filter((s) => ALL_STAGES.includes(s));
+  const [stages, setStages] = useState<StageKey[]>(safeInitial);
   const [saving, setSaving] = useState(false);
   const isFree = tier === 'free';
 

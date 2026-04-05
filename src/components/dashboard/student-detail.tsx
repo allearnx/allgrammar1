@@ -184,7 +184,7 @@ export async function StudentDetail({ user, studentId, naesinData }: Props) {
             naesinProgress={naesinProgress}
             hours={hours}
             minutes={minutes}
-            enabledStages={enabledStages as ('vocab' | 'passage' | 'grammar' | 'problem' | 'lastReview')[]}
+            enabledStages={enabledStages as ('vocab' | 'passage' | 'dialogue' | 'textbookVideo' | 'grammar' | 'problem' | 'mockExam' | 'lastReview')[]}
             passageStages={passageStages as ('fill_blanks' | 'ordering' | 'translation' | 'grammar_vocab')[]}
             translationSentencesPerPage={translationSentencesPerPage}
             tier={planContext.tier}

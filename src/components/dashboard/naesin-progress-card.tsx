@@ -39,7 +39,7 @@ interface Props {
   naesinProgress: NaesinProgressRow[];
   hours: number;
   minutes: number;
-  enabledStages: ('vocab' | 'passage' | 'grammar' | 'problem' | 'lastReview')[];
+  enabledStages: ('vocab' | 'passage' | 'dialogue' | 'textbookVideo' | 'grammar' | 'problem' | 'mockExam' | 'lastReview')[];
   passageStages: ('fill_blanks' | 'ordering' | 'translation' | 'grammar_vocab')[];
   translationSentencesPerPage: number;
   tier?: Tier;
