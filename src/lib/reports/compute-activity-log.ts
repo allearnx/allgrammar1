@@ -47,7 +47,8 @@ export async function computeActivityLog(
   }
   for (const r of naesinPassageActivity) {
     const typeLabel = r.type === 'fill_blanks' ? '빈칸' : r.type === 'ordering' ? '순서배열' : r.type === 'translation' ? '영작' : r.type === 'grammar_vocab' ? '어법/어휘' : '지문 학습';
-    const diffLabel = r.difficulty ? ` (${r.difficulty})` : '';
+    const diffMap: Record<string, string> = { easy: '쉬움', medium: '보통', hard: '어려움' };
+    const diffLabel = r.difficulty ? ` (${diffMap[r.difficulty] || r.difficulty})` : '';
     log.push({ date: format(new Date(r.created_at), 'yyyy-MM-dd'), type: 'naesin_passage', label: `내신 ${unitMap[r.unit_id] || 'Unit'} ${typeLabel}${diffLabel}`, score: r.score ?? null, maxScore: r.score != null ? 100 : null });
   }
   for (const r of naesinVideoActivity) {

@@ -57,7 +57,7 @@ export async function StudentDetail({ user, studentId, naesinData }: Props) {
 
   if (!student) notFound();
 
-  const [videoRes, naesinVideoRes, memoryRes, textbookRes, passageStagesRes, naesinProgressRes, vocaProgressRes, vocaAssignmentRes, naesinAssignmentRes, naesinTextbooksRes] = await Promise.all([
+  const [videoRes, naesinVideoRes, memoryRes, textbookRes, passageStagesRes, naesinProgressRes, vocaProgressRes, vocaAssignmentRes, naesinAssignmentRes, naesinTextbooksRes, fillBlanksAttemptsRes] = await Promise.all([
     admin
       .from('student_progress')
       .select('*, grammar:grammars(title, level:levels(level_number, title_ko))')
@@ -106,7 +106,22 @@ export async function StudentDetail({ user, studentId, naesinData }: Props) {
       .eq('is_active', true)
       .order('grade')
       .order('sort_order'),
+    admin
+      .from('naesin_passage_attempts')
+      .select('unit_id, difficulty, score')
+      .eq('student_id', studentId)
+      .eq('type', 'fill_blanks')
+      .not('difficulty', 'is', null),
   ]);
+
+  // Build fill_blanks difficulty best scores per unit
+  const fillBlanksByUnit: Record<string, Record<string, number>> = {};
+  for (const a of fillBlanksAttemptsRes.data || []) {
+    if (!a.difficulty) continue;
+    if (!fillBlanksByUnit[a.unit_id]) fillBlanksByUnit[a.unit_id] = {};
+    const cur = fillBlanksByUnit[a.unit_id][a.difficulty] ?? 0;
+    fillBlanksByUnit[a.unit_id][a.difficulty] = Math.max(cur, a.score);
+  }
 
   const passageStages = (passageStagesRes.data?.passage_required_stages as string[] | null) ?? ['fill_blanks', 'translation'];
   const translationSentencesPerPage = (passageStagesRes.data?.translation_sentences_per_page as number | null) ?? 10;
@@ -188,6 +203,7 @@ export async function StudentDetail({ user, studentId, naesinData }: Props) {
             passageStages={passageStages as ('fill_blanks' | 'ordering' | 'translation' | 'grammar_vocab')[]}
             translationSentencesPerPage={translationSentencesPerPage}
             tier={planContext.tier}
+            fillBlanksByUnit={fillBlanksByUnit}
           />
         )}
 

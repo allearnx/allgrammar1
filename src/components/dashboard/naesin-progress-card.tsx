@@ -43,6 +43,7 @@ interface Props {
   passageStages: ('fill_blanks' | 'ordering' | 'translation' | 'grammar_vocab')[];
   translationSentencesPerPage: number;
   tier?: Tier;
+  fillBlanksByUnit?: Record<string, Record<string, number>>;
 }
 
 export function NaesinProgressCard({
@@ -55,6 +56,7 @@ export function NaesinProgressCard({
   passageStages,
   translationSentencesPerPage,
   tier,
+  fillBlanksByUnit,
 }: Props) {
   const naesinUnits = naesinData.units;
   const naesinProgressMap = new Map(naesinProgress.map((p) => [p.unit_id, p]));
@@ -167,11 +169,22 @@ export function NaesinProgressCard({
                           스펠링 {progress.vocab_spelling_score}점
                         </span>
                       )}
-                      {progress.passage_fill_blanks_best !== null && (
-                        <span className={`text-xs px-1.5 py-0.5 rounded ${passageChipClass}`}>
-                          빈칸 {progress.passage_fill_blanks_best}점
-                        </span>
-                      )}
+                      {progress.passage_fill_blanks_best !== null && (() => {
+                        const fb = fillBlanksByUnit?.[unit.id];
+                        const DIFF_LABEL: Record<string, string> = { easy: '쉬움', medium: '보통', hard: '어려움' };
+                        if (fb && Object.keys(fb).length > 0) {
+                          return Object.entries(fb).map(([diff, score]) => (
+                            <span key={diff} className={`text-xs px-1.5 py-0.5 rounded ${passageChipClass}`}>
+                              빈칸({DIFF_LABEL[diff] || diff}) {score}점
+                            </span>
+                          ));
+                        }
+                        return (
+                          <span className={`text-xs px-1.5 py-0.5 rounded ${passageChipClass}`}>
+                            빈칸 {progress.passage_fill_blanks_best}점
+                          </span>
+                        );
+                      })()}
                       {progress.passage_ordering_best !== null && (
                         <span className={`text-xs px-1.5 py-0.5 rounded ${passageChipClass}`}>
                           순서 {progress.passage_ordering_best}점
