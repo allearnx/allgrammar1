@@ -4,11 +4,12 @@ import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
-import { ClipboardList, ChevronDown, ChevronRight, Pencil, Trash2, Loader2 } from 'lucide-react';
+import { ClipboardList, ChevronDown, ChevronRight, Pencil, Trash2, Loader2, Wand2 } from 'lucide-react';
 import { fetchWithToast } from '@/lib/fetch-with-toast';
 import type { NaesinProblemSheet, NaesinProblemQuestion } from '@/types/naesin';
 import { QuestionEditRow, QuestionViewRow } from './content-dialogs/question-table-rows';
 import { hasOptions, type GeneratedQuestion } from './content-dialogs/question-utils';
+import { AiProblemImproveDialog } from './content-dialogs';
 
 /** DB question → GeneratedQuestion 변환 */
 function toGenerated(q: NaesinProblemQuestion): GeneratedQuestion {
@@ -45,6 +46,7 @@ export function UnitProblemList({ sheets, onUpdate, onRequestDelete }: UnitProbl
   const [editQuestions, setEditQuestions] = useState<GeneratedQuestion[]>([]);
   const [editingQIdx, setEditingQIdx] = useState<number | null>(null);
   const [saving, setSaving] = useState(false);
+  const [improveSheetId, setImproveSheetId] = useState<string | null>(null);
 
   function startEdit(sheet: NaesinProblemSheet) {
     setEditingSheetId(sheet.id);
@@ -130,6 +132,16 @@ export function UnitProblemList({ sheets, onUpdate, onRequestDelete }: UnitProbl
                 variant="ghost"
                 size="icon"
                 className="h-6 w-6 opacity-0 group-hover:opacity-100"
+                onClick={(e) => { e.stopPropagation(); setImproveSheetId(sheet.id); }}
+                aria-label="AI 개선"
+                title="AI 개선"
+              >
+                <Wand2 className="h-3.5 w-3.5 text-violet-500" />
+              </Button>
+              <Button
+                variant="ghost"
+                size="icon"
+                className="h-6 w-6 opacity-0 group-hover:opacity-100"
                 onClick={(e) => { e.stopPropagation(); onRequestDelete(sheet.id); }}
                 aria-label="삭제"
               >
@@ -200,6 +212,15 @@ export function UnitProblemList({ sheets, onUpdate, onRequestDelete }: UnitProbl
           </div>
         );
       })}
+
+      {improveSheetId && sheets.find((s) => s.id === improveSheetId) && (
+        <AiProblemImproveDialog
+          sheet={sheets.find((s) => s.id === improveSheetId)!}
+          open={true}
+          onOpenChange={(v) => { if (!v) setImproveSheetId(null); }}
+          onUpdate={onUpdate}
+        />
+      )}
     </div>
   );
 }

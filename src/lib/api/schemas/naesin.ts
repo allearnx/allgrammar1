@@ -379,3 +379,21 @@ export const learningSessionHeartbeatSchema = z.object({
   contextId: z.string().max(100),
   seconds: z.number().int().min(1).max(120),
 });
+
+// ── AI Problem Generation/Improvement Schemas ──
+
+export const aiProblemGenerateSchema = z.object({
+  unitId: ID,
+  title: SHORT,
+  grammarTopic: SHORT,
+  focusPoints: LONG.nullish(),
+  grade: z.enum(['1', '2', '3']),
+  mcqCount: z.number().int().min(0).max(50).default(15),
+  selectAllCount: z.number().int().min(0).max(10).default(3),
+  subjectiveCount: z.number().int().min(0).max(10).default(2),
+  trapPercent: z.enum(['20', '25', '30']).default('20'),
+});
+
+export const aiProblemImproveSchema = z.object({
+  sheetId: ID,
+});

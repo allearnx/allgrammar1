@@ -13,7 +13,7 @@ import {
 } from 'lucide-react';
 import { ConfirmDialog } from '@/components/shared/confirm-dialog';
 import { AddVocabDialog, BulkVocabUpload, PdfVocabExtract } from './vocab-dialogs';
-import { AddPassageDialog, AddDialogueDialog, AddGrammarDialog, AddOmrDialog, AddProblemDialog, AddLastReviewDialog, BulkOmrUploadDialog, BulkProblemUploadDialog, PdfProblemExtractDialog, AddTextbookVideoDialog, AddMockExamDialog } from './content-dialogs';
+import { AddPassageDialog, AddDialogueDialog, AddGrammarDialog, AddOmrDialog, AddProblemDialog, AddLastReviewDialog, BulkOmrUploadDialog, BulkProblemUploadDialog, PdfProblemExtractDialog, AddTextbookVideoDialog, AddMockExamDialog, AiProblemGenerateDialog } from './content-dialogs';
 import { VocabQuizSetManager } from './quiz-set-manager';
 import { UnitVocabList } from './unit-vocab-list';
 import { UnitPassageList } from './unit-passage-list';
@@ -160,6 +160,7 @@ export function UnitContentManager({ unitId }: { unitId: string }) {
         <BulkOmrUploadDialog unitId={unitId} onAdd={refresh} />
         <BulkProblemUploadDialog unitId={unitId} onAdd={refresh} />
         <PdfProblemExtractDialog unitId={unitId} onAdd={refresh} />
+        <AiProblemGenerateDialog unitId={unitId} onAdd={refresh} />
         <AddLastReviewDialog unitId={unitId} onAdd={refresh} />
       </div>
 
