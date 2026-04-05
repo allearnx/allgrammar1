@@ -159,7 +159,14 @@ export function InteractiveProblemView({
       <Card>
         <CardContent className="py-6">
           <p className="text-sm text-muted-foreground mb-2">문제 {question.number}</p>
-          <p className="text-lg font-medium whitespace-pre-wrap">{question.question}</p>
+          <p className="text-lg font-medium whitespace-pre-wrap">
+            {/^\[.+?\]/.test(question.question) ? (
+              <>
+                <span className="font-bold">{question.question.match(/^\[.+?\]/)![0]}</span>
+                {question.question.replace(/^\[.+?\]/, '')}
+              </>
+            ) : question.question}
+          </p>
         </CardContent>
       </Card>
 
