@@ -13,7 +13,7 @@ import {
   DialogFooter,
 } from '@/components/ui/dialog';
 import { fetchWithToast } from '@/lib/fetch-with-toast';
-import type { NaesinProblemSheet } from '@/types/naesin';
+import type { NaesinProblemSheet, NaesinTemplate } from '@/types/naesin';
 import { toGenerated, toDbQuestion } from './content-dialogs/question-utils';
 import { AiProblemImproveDialog, CopyProblemDialog, TemplateCopiesDialog } from './content-dialogs';
 import { useQuestionEditor } from '@/hooks/use-question-editor';
@@ -35,7 +35,8 @@ export function UnitProblemList({ sheets, onUpdate, onRequestDelete }: UnitProbl
   const [saving, setSaving] = useState(false);
   const [improveSheetId, setImproveSheetId] = useState<string | null>(null);
   const [copySheetId, setCopySheetId] = useState<string | null>(null);
-  const [copiesSheetId, setCopiesSheetId] = useState<string | null>(null);
+  const [copiesTemplateId, setCopiesTemplateId] = useState<string | null>(null);
+  const [copiesTemplateTitle, setCopiesTemplateTitle] = useState('');
   const [templateDialogId, setTemplateDialogId] = useState<string | null>(null);
   const [templateTopic, setTemplateTopic] = useState('');
   const [savingTemplate, setSavingTemplate] = useState(false);
@@ -83,40 +84,32 @@ export function UnitProblemList({ sheets, onUpdate, onRequestDelete }: UnitProbl
     editor.setEditingIdx(null);
   }
 
-  async function toggleTemplate(sheetId: string, currentlyTemplate: boolean) {
-    if (currentlyTemplate) {
-      setSavingTemplate(true);
-      try {
-        const updated = await fetchWithToast<NaesinProblemSheet>('/api/naesin/problems', {
-          method: 'PATCH',
-          body: { id: sheetId, is_template: false, template_topic: null },
-          successMessage: '템플릿 해제됨',
-          errorMessage: '템플릿 해제 실패',
-          logContext: 'unit.toggle_template',
-        });
-        onUpdate(updated);
-      } catch { /* */ } finally {
-        setSavingTemplate(false);
-      }
-    } else {
-      const sheet = sheets.find((s) => s.id === sheetId)!;
-      setTemplateDialogId(sheet.id);
-      setTemplateTopic(sheet.template_topic || '');
-    }
+  function handleSaveTemplate(sheetId: string) {
+    const sheet = sheets.find((s) => s.id === sheetId)!;
+    setTemplateDialogId(sheet.id);
+    setTemplateTopic(sheet.template_topic || '');
   }
 
   async function saveTemplate() {
     if (!templateDialogId || !templateTopic.trim()) return;
+    const sheet = sheets.find((s) => s.id === templateDialogId);
+    if (!sheet) return;
     setSavingTemplate(true);
     try {
-      const updated = await fetchWithToast<NaesinProblemSheet>('/api/naesin/problems', {
-        method: 'PATCH',
-        body: { id: templateDialogId, is_template: true, template_topic: templateTopic.trim() },
-        successMessage: '���플릿으로 저장됨',
+      await fetchWithToast<NaesinTemplate>('/api/naesin/templates', {
+        method: 'POST',
+        body: {
+          title: sheet.title,
+          templateTopic: templateTopic.trim(),
+          questions: sheet.questions || [],
+          answerKey: sheet.answer_key || [],
+          category: sheet.category || 'problem',
+          mode: sheet.mode || 'interactive',
+        },
+        successMessage: '템플릿으로 저장됨',
         errorMessage: '템플릿 저장 실패',
         logContext: 'unit.save_template',
       });
-      onUpdate(updated);
       setTemplateDialogId(null);
       setTemplateTopic('');
     } catch { /* */ } finally {
@@ -167,9 +160,9 @@ export function UnitProblemList({ sheets, onUpdate, onRequestDelete }: UnitProbl
           onCancelEdit={cancelEdit}
           onSaveEdit={saveEdit}
           onMoveSheet={moveSheet}
-          onToggleTemplate={toggleTemplate}
+          onSaveTemplate={handleSaveTemplate}
           onCopy={(id) => setCopySheetId(id)}
-          onCopies={(id) => setCopiesSheetId(id)}
+          onCopies={(templateId, title) => { setCopiesTemplateId(templateId); setCopiesTemplateTitle(title); }}
           onImprove={(id) => setImproveSheetId(id)}
           onRequestDelete={onRequestDelete}
           onEditQuestion={(field, idx, value) => editor.updateQuestion(idx, field, value)}
@@ -198,11 +191,12 @@ export function UnitProblemList({ sheets, onUpdate, onRequestDelete }: UnitProbl
         />
       )}
 
-      {copiesSheetId && sheets.find((s) => s.id === copiesSheetId) && (
+      {copiesTemplateId && (
         <TemplateCopiesDialog
-          sheet={sheets.find((s) => s.id === copiesSheetId)!}
+          templateId={copiesTemplateId}
+          templateTitle={copiesTemplateTitle}
           open={true}
-          onOpenChange={(v) => { if (!v) setCopiesSheetId(null); }}
+          onOpenChange={(v) => { if (!v) { setCopiesTemplateId(null); setCopiesTemplateTitle(''); } }}
         />
       )}
 

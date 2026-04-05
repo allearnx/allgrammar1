@@ -1,7 +1,7 @@
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
-import { ClipboardList, ChevronDown, ChevronRight, Pencil, Trash2, Loader2, Wand2, Copy, Bookmark, BookmarkCheck, FolderSearch, ArrowUp, ArrowDown } from 'lucide-react';
+import { ClipboardList, ChevronDown, ChevronRight, Pencil, Trash2, Loader2, Wand2, Copy, Bookmark, ArrowUp, ArrowDown } from 'lucide-react';
 import type { NaesinProblemSheet, NaesinProblemQuestion } from '@/types/naesin';
 import { QuestionEditRow, QuestionViewRow } from './content-dialogs/question-table-rows';
 import { toGenerated, type GeneratedQuestion } from './content-dialogs/question-utils';
@@ -25,9 +25,9 @@ interface ProblemSheetItemProps {
   onCancelEdit: () => void;
   onSaveEdit: () => void;
   onMoveSheet: (index: number, direction: 'up' | 'down') => void;
-  onToggleTemplate: (sheetId: string, isTemplate: boolean) => void;
+  onSaveTemplate: (sheetId: string) => void;
   onCopy: (sheetId: string) => void;
-  onCopies: (sheetId: string) => void;
+  onCopies: (templateId: string, title: string) => void;
   onImprove: (sheetId: string) => void;
   onRequestDelete: (sheetId: string) => void;
   onEditQuestion: (field: keyof GeneratedQuestion, idx: number, value: string) => void;
@@ -57,7 +57,7 @@ export function ProblemSheetItem({
   onCancelEdit,
   onSaveEdit,
   onMoveSheet,
-  onToggleTemplate,
+  onSaveTemplate,
   onCopy,
   onCopies,
   onImprove,
@@ -103,7 +103,6 @@ export function ProblemSheetItem({
         <Badge variant="secondary" className="text-[11px]">{questions.length}문제</Badge>
         {mcqCount > 0 && <Badge variant="outline" className="text-[11px]">객관식 {mcqCount}</Badge>}
         {subCount > 0 && <Badge variant="outline" className="text-[11px]">서술형 {subCount}</Badge>}
-        {sheet.is_template && <Badge className="text-[10px] bg-amber-100 text-amber-700 hover:bg-amber-100">템플릿</Badge>}
         <Button
           variant="ghost"
           size="icon"
@@ -128,26 +127,12 @@ export function ProblemSheetItem({
             variant="ghost"
             size="icon"
             className="h-6 w-6 opacity-0 group-hover:opacity-100"
-            onClick={(e) => { e.stopPropagation(); onToggleTemplate(sheet.id, !!sheet.is_template); }}
+            onClick={(e) => { e.stopPropagation(); onSaveTemplate(sheet.id); }}
             disabled={savingTemplate}
-            aria-label={sheet.is_template ? '템플릿 해제' : '템플릿 저장'}
-            title={sheet.is_template ? '템플릿 해제' : '템플릿으로 저장'}
+            aria-label="템플릿 저장"
+            title="템플릿으로 저장"
           >
-            {sheet.is_template
-              ? <BookmarkCheck className="h-3.5 w-3.5 text-amber-500" />
-              : <Bookmark className="h-3.5 w-3.5 text-amber-500" />}
-          </Button>
-        )}
-        {isBoss && sheet.is_template && (
-          <Button
-            variant="ghost"
-            size="icon"
-            className="h-6 w-6 opacity-0 group-hover:opacity-100"
-            onClick={(e) => { e.stopPropagation(); onCopies(sheet.id); }}
-            aria-label="복사본 관리"
-            title="복사본 관리"
-          >
-            <FolderSearch className="h-3.5 w-3.5 text-emerald-500" />
+            <Bookmark className="h-3.5 w-3.5 text-amber-500" />
           </Button>
         )}
         <Button

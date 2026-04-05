@@ -13,9 +13,9 @@ export const GET = createApiHandler(
       return NextResponse.json({ error: 'templateId required' }, { status: 400 });
     }
 
-    // Fetch template info for title-based fallback
+    // Fetch template info from naesin_templates
     const template = dbResult(await supabase
-      .from('naesin_problem_sheets')
+      .from('naesin_templates')
       .select('id, title')
       .eq('id', templateId)
       .single());

@@ -307,6 +307,18 @@ export interface NaesinProblemSheet {
   created_at: string;
 }
 
+export interface NaesinTemplate {
+  id: string;
+  title: string;
+  template_topic: string;
+  questions: NaesinProblemQuestion[];
+  answer_key: (string | number)[];
+  category: NaesinProblemCategory;
+  mode: NaesinProblemMode;
+  created_by: string | null;
+  created_at: string;
+}
+
 export interface NaesinProblemQuestion {
   number: number;
   question: string;

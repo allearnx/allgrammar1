@@ -13,7 +13,6 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { Badge } from '@/components/ui/badge';
 import { Loader2, Trash2 } from 'lucide-react';
 import { fetchWithToast } from '@/lib/fetch-with-toast';
-import type { NaesinProblemSheet } from '@/types/naesin';
 
 interface CopyItem {
   id: string;
@@ -27,13 +26,14 @@ interface CopyItem {
 }
 
 interface TemplateCopiesDialogProps {
-  sheet: NaesinProblemSheet;
+  templateId: string;
+  templateTitle: string;
   open: boolean;
   onOpenChange: (open: boolean) => void;
   onDeleted?: () => void;
 }
 
-export function TemplateCopiesDialog({ sheet, open, onOpenChange, onDeleted }: TemplateCopiesDialogProps) {
+export function TemplateCopiesDialog({ templateId, templateTitle, open, onOpenChange, onDeleted }: TemplateCopiesDialogProps) {
   const [copies, setCopies] = useState<CopyItem[]>([]);
   const [grouped, setGrouped] = useState<Record<string, CopyItem[]>>({});
   const [loading, setLoading] = useState(false);
@@ -45,13 +45,13 @@ export function TemplateCopiesDialog({ sheet, open, onOpenChange, onDeleted }: T
     setSelected(new Set());
     loadCopies();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [open, sheet.id]);
+  }, [open, templateId]);
 
   async function loadCopies() {
     setLoading(true);
     try {
       const data = await fetchWithToast<{ copies: CopyItem[]; grouped: Record<string, CopyItem[]> }>(
-        `/api/naesin/templates/copies?templateId=${sheet.id}`,
+        `/api/naesin/templates/copies?templateId=${templateId}`,
         { logContext: 'template.load_copies' }
       );
       setCopies(data.copies);
@@ -117,7 +117,7 @@ export function TemplateCopiesDialog({ sheet, open, onOpenChange, onDeleted }: T
       <DialogContent className="max-w-lg max-h-[80vh] flex flex-col">
         <DialogHeader>
           <DialogTitle className="text-base">복사본 관리</DialogTitle>
-          <p className="text-xs text-muted-foreground truncate">원본: {sheet.title}</p>
+          <p className="text-xs text-muted-foreground truncate">원본: {templateTitle}</p>
         </DialogHeader>
 
         <div className="flex-1 overflow-y-auto space-y-3 min-h-0">

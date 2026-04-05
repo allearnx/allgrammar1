@@ -404,6 +404,28 @@ export const problemCopySchema = z.object({
   newTitle: SHORT.nullish(),
 });
 
+export const templateCreateSchema = z.object({
+  title: SHORT,
+  templateTopic: SHORT,
+  questions: z.array(z.unknown()),
+  answerKey: z.array(z.unknown()),
+  category: SHORT.default('problem'),
+  mode: SHORT.default('interactive'),
+});
+
+export const templatePatchSchema = z.object({
+  id: ID,
+  title: SHORT.nullish(),
+  templateTopic: SHORT.nullish(),
+  questions: z.array(z.unknown()).nullish(),
+  answerKey: z.array(z.unknown()).nullish(),
+});
+
+export const templateImportSchema = z.object({
+  templateId: ID,
+  targetUnitIds: z.array(ID).min(1).max(50),
+});
+
 // ── Problem Draft Schemas ──
 
 export const problemDraftSaveSchema = z.object({
