@@ -20,6 +20,7 @@ import { UnitPassageList } from './unit-passage-list';
 import { UnitGrammarList } from './unit-grammar-list';
 import { UnitDialogueList } from './unit-dialogue-list';
 import { UnitProblemList } from './unit-problem-list';
+import type { NaesinProblemSheet } from '@/types/naesin';
 import { makeUpdateHandler } from '@/lib/naesin/make-update-handler';
 import { ContentSectionGrid, type ContentSection } from './content-section-grid';
 import { useUnitContentData } from './use-unit-content-data';
@@ -40,8 +41,10 @@ export function UnitContentManager({ unitId }: { unitId: string }) {
 
   const onUpdatePassage = makeUpdateHandler(setPassageList);
   const onUpdateDialogue = makeUpdateHandler(setDialogueList);
-  const onUpdateProblem = makeUpdateHandler(setProblemList);
-  const onUpdateMockExam = makeUpdateHandler(setMockExamList);
+  const onUpdateProblem = (updated: NaesinProblemSheet) =>
+    setProblemList((prev) => prev.map((s) => (s.id === updated.id ? updated : s)).sort((a, b) => a.sort_order - b.sort_order));
+  const onUpdateMockExam = (updated: NaesinProblemSheet) =>
+    setMockExamList((prev) => prev.map((s) => (s.id === updated.id ? updated : s)).sort((a, b) => a.sort_order - b.sort_order));
 
   const sections: ContentSection[] = [
     { label: '단어', icon: BookOpen, count: vocab.items.length, color: 'text-blue-500', toggle: () => dispatchCM({ type: 'TOGGLE_SECTION', section: 'vocab' }), expanded: cm.showVocabList },

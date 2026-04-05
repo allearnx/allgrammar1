@@ -12,7 +12,7 @@ import {
   DialogTitle,
   DialogFooter,
 } from '@/components/ui/dialog';
-import { ClipboardList, ChevronDown, ChevronRight, Pencil, Trash2, Loader2, Wand2, Copy, Bookmark, BookmarkCheck, FolderSearch } from 'lucide-react';
+import { ClipboardList, ChevronDown, ChevronRight, Pencil, Trash2, Loader2, Wand2, Copy, Bookmark, BookmarkCheck, FolderSearch, ArrowUp, ArrowDown } from 'lucide-react';
 import { fetchWithToast } from '@/lib/fetch-with-toast';
 import type { NaesinProblemSheet, NaesinProblemQuestion } from '@/types/naesin';
 import { QuestionEditRow, QuestionViewRow } from './content-dialogs/question-table-rows';
@@ -62,6 +62,35 @@ export function UnitProblemList({ sheets, onUpdate, onRequestDelete }: UnitProbl
   const [templateDialogId, setTemplateDialogId] = useState<string | null>(null);
   const [templateTopic, setTemplateTopic] = useState('');
   const [savingTemplate, setSavingTemplate] = useState(false);
+  const [reordering, setReordering] = useState(false);
+
+  async function moveSheet(index: number, direction: 'up' | 'down') {
+    const swapIdx = direction === 'up' ? index - 1 : index + 1;
+    if (swapIdx < 0 || swapIdx >= sheets.length) return;
+    setReordering(true);
+    try {
+      const a = sheets[index];
+      const b = sheets[swapIdx];
+      const [aOrder, bOrder] = [a.sort_order, b.sort_order];
+      // 같은 sort_order면 index 기반으로 구분
+      const newAOrder = aOrder === bOrder ? (direction === 'up' ? aOrder - 1 : aOrder + 1) : bOrder;
+      const newBOrder = aOrder === bOrder ? aOrder : aOrder;
+      const [updA, updB] = await Promise.all([
+        fetchWithToast<NaesinProblemSheet>('/api/naesin/problems', {
+          method: 'PATCH', body: { id: a.id, sort_order: newAOrder },
+          logContext: 'unit.reorder_sheet',
+        }),
+        fetchWithToast<NaesinProblemSheet>('/api/naesin/problems', {
+          method: 'PATCH', body: { id: b.id, sort_order: newBOrder },
+          logContext: 'unit.reorder_sheet',
+        }),
+      ]);
+      onUpdate(updA);
+      onUpdate(updB);
+    } catch { /* */ } finally {
+      setReordering(false);
+    }
+  }
 
   function startEdit(sheet: NaesinProblemSheet) {
     setEditingSheetId(sheet.id);
@@ -181,7 +210,7 @@ export function UnitProblemList({ sheets, onUpdate, onRequestDelete }: UnitProbl
 
   return (
     <div className="space-y-1 rounded-lg border p-2">
-      {sheets.map((sheet) => {
+      {sheets.map((sheet, sheetIdx) => {
         const isExpanded = expandedId === sheet.id;
         const isEditing = editingSheetId === sheet.id;
         const questions: NaesinProblemQuestion[] = sheet.questions || [];
@@ -194,6 +223,24 @@ export function UnitProblemList({ sheets, onUpdate, onRequestDelete }: UnitProbl
               className="flex items-center gap-2 py-1.5 px-2 group cursor-pointer"
               onClick={() => { if (!isEditing) setExpandedId(isExpanded ? null : sheet.id); }}
             >
+              <div className="flex flex-col opacity-0 group-hover:opacity-100 shrink-0">
+                <button
+                  className="p-0 h-3 text-muted-foreground hover:text-foreground disabled:opacity-30"
+                  disabled={sheetIdx === 0 || reordering}
+                  onClick={(e) => { e.stopPropagation(); moveSheet(sheetIdx, 'up'); }}
+                  aria-label="위로"
+                >
+                  <ArrowUp className="h-3 w-3" />
+                </button>
+                <button
+                  className="p-0 h-3 text-muted-foreground hover:text-foreground disabled:opacity-30"
+                  disabled={sheetIdx === sheets.length - 1 || reordering}
+                  onClick={(e) => { e.stopPropagation(); moveSheet(sheetIdx, 'down'); }}
+                  aria-label="아래로"
+                >
+                  <ArrowDown className="h-3 w-3" />
+                </button>
+              </div>
               {isExpanded ? <ChevronDown className="h-3 w-3 shrink-0" /> : <ChevronRight className="h-3 w-3 shrink-0" />}
               <ClipboardList className="h-3.5 w-3.5 text-red-500 shrink-0" />
               <span className="text-sm flex-1 truncate">{sheet.title}</span>
