@@ -5,16 +5,18 @@ import { getRoleConfig } from '@/lib/auth/role-page-config';
 
 interface Props {
   params: Promise<{ role: string }>;
+  searchParams: Promise<{ q?: string }>;
 }
 
-export default async function StudentsPage({ params }: Props) {
+export default async function StudentsPage({ params, searchParams }: Props) {
   const { role } = await params;
+  const { q } = await searchParams;
   const { allowedRoles, basePath } = getRoleConfig(role);
   const { user } = await getStudentsPageData(allowedRoles);
   return (
     <>
       <Topbar user={user} title="학생 관리" />
-      <StudentsList user={user} basePath={basePath} />
+      <StudentsList user={user} basePath={basePath} searchQuery={q} />
     </>
   );
 }

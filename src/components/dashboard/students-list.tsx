@@ -1,3 +1,4 @@
+import { Suspense } from 'react';
 import { createAdminClient } from '@/lib/supabase/admin';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -8,6 +9,7 @@ import Link from 'next/link';
 import { ServiceAssignmentToggle } from './service-assignment-toggle';
 import { StudentsToolbar } from './students-toolbar';
 import { StudentDeleteButton } from './student-delete-button';
+import { StudentSearchInput } from './student-search-input';
 import { getPlanContext } from '@/lib/billing/get-plan-context';
 import { canUseFeature, isServiceAllowed } from '@/lib/billing/feature-gate';
 import type { AuthUser } from '@/types/auth';
@@ -15,9 +17,10 @@ import type { AuthUser } from '@/types/auth';
 interface Props {
   user: AuthUser;
   basePath: '/teacher' | '/admin' | '/boss';
+  searchQuery?: string;
 }
 
-export async function StudentsList({ user, basePath }: Props) {
+export async function StudentsList({ user, basePath, searchQuery }: Props) {
   const admin = createAdminClient();
 
   // boss는 전체 학생 조회, teacher/admin은 자기 학원만
@@ -40,6 +43,10 @@ export async function StudentsList({ user, basePath }: Props) {
 
   if (user.academy_id) {
     query.eq('academy_id', user.academy_id);
+  }
+
+  if (searchQuery) {
+    query.ilike('full_name', `%${searchQuery}%`);
   }
 
   const { data: students } = await query;
@@ -151,6 +158,10 @@ export async function StudentsList({ user, basePath }: Props) {
           </p>
         </div>
       )}
+
+      <Suspense>
+        <StudentSearchInput />
+      </Suspense>
 
       <div className="space-y-3">
         {(students || []).map((student) => {
