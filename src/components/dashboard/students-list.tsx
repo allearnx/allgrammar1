@@ -35,6 +35,8 @@ export async function StudentsList({ user, basePath, searchQuery }: Props) {
     );
   }
 
+  const isBoss = basePath === '/boss';
+
   const query = admin
     .from('users')
     .select('*')
@@ -50,6 +52,16 @@ export async function StudentsList({ user, basePath, searchQuery }: Props) {
   }
 
   const { data: students } = await query;
+
+  // boss: 학원명 매핑
+  const academyNameMap: Record<string, string> = {};
+  if (isBoss && students && students.length > 0) {
+    const academyIds = [...new Set(students.map((s) => s.academy_id).filter(Boolean))] as string[];
+    if (academyIds.length > 0) {
+      const { data: academies } = await admin.from('academies').select('id, name').in('id', academyIds);
+      if (academies) for (const a of academies) academyNameMap[a.id] = a.name;
+    }
+  }
 
   const { count: totalGrammars } = await admin
     .from('grammars')
@@ -192,6 +204,11 @@ export async function StudentsList({ user, basePath, searchQuery }: Props) {
                       </Badge>
                     </div>
                     <p className="text-sm text-muted-foreground truncate">{student.email}</p>
+                    {isBoss && (
+                      <p className="text-xs text-muted-foreground">
+                        {student.academy_id ? academyNameMap[student.academy_id] || '미소속' : '미소속'}
+                      </p>
+                    )}
                     {naesin && naesin.stages > 0 && (
                       <div className="mt-2 flex items-center gap-2 text-xs text-muted-foreground">
                         <span>내신: {naesin.stages}단계 완료</span>

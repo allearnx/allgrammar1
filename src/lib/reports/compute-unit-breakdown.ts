@@ -8,6 +8,7 @@ export async function computeUnitBreakdown(
   vocaProgressData: { day_id: string; flashcard_completed: boolean; quiz_score: number | null; spelling_score: number | null; matching_score: number | null; matching_completed: boolean; round2_flashcard_completed: boolean; round2_quiz_score: number | null; round2_matching_completed: boolean }[],
   naesinProgressData: { unit_id: string; vocab_completed: boolean; vocab_quiz_score: number | null; passage_completed: boolean; grammar_completed: boolean; problem_completed: boolean }[],
   naesinProblemHistory: { score: number; total_questions: number; unit_id: string }[],
+  naesinPassageAttempts: { unit_id: string; type: string; difficulty: string | null; score: number }[] = [],
 ) {
   const vocaDays: StudentReportData['unitBreakdown']['vocaDays'] = [];
   if (hasVoca && vocaProgressData.length > 0) {
@@ -55,11 +56,32 @@ export async function computeUnitBreakdown(
       if (p.total_questions > 0) problemsByUnit[p.unit_id].push(Math.round((p.score / p.total_questions) * 100));
     }
 
+    // Compute best passage scores per unit (type + difficulty)
+    const passageBestByUnit: Record<string, Record<string, number>> = {};
+    for (const pa of naesinPassageAttempts) {
+      if (!passageBestByUnit[pa.unit_id]) passageBestByUnit[pa.unit_id] = {};
+      const key = pa.difficulty ? `${pa.type}:${pa.difficulty}` : pa.type;
+      passageBestByUnit[pa.unit_id][key] = Math.max(passageBestByUnit[pa.unit_id][key] ?? 0, pa.score);
+    }
+
     for (const p of naesinProgressData) {
       const unitInfo = unitInfoMap[p.unit_id];
       const stagesCompleted = (p.vocab_completed ? 1 : 0) + (p.passage_completed ? 1 : 0) + (p.grammar_completed ? 1 : 0) + (p.problem_completed ? 1 : 0);
       const unitScores = problemsByUnit[p.unit_id] || [];
       const problemAvg = unitScores.length > 0 ? Math.round(unitScores.reduce((a, b) => a + b, 0) / unitScores.length) : null;
+
+      // Build passageScores from best attempts
+      const unitPassage = passageBestByUnit[p.unit_id];
+      const passageScores = unitPassage ? {
+        fill_blanks: {
+          easy: unitPassage['fill_blanks:easy'] as number | undefined,
+          medium: unitPassage['fill_blanks:medium'] as number | undefined,
+          hard: unitPassage['fill_blanks:hard'] as number | undefined,
+        },
+        ordering: unitPassage['ordering'] as number | undefined,
+        translation: unitPassage['translation'] as number | undefined,
+        grammar_vocab: unitPassage['grammar_vocab'] as number | undefined,
+      } : undefined;
 
       naesinUnits.push({
         unitNumber: unitInfo?.unit_number || 0,
@@ -68,6 +90,7 @@ export async function computeUnitBreakdown(
         passageComplete: p.passage_completed,
         problemScore: problemAvg,
         stagesCompleted,
+        passageScores,
       });
     }
     naesinUnits.sort((a, b) => a.unitNumber - b.unitNumber);

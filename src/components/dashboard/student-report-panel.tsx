@@ -152,18 +152,67 @@ export function StudentReportPanel({ studentId, services: servicesProp, token, r
               />
             )}
             {hasNaesin && data.unitBreakdown.naesinUnits.length > 0 && (
-              <UnitScoreChart
-                title="내신 단원별 점수"
-                data={data.unitBreakdown.naesinUnits.map((u) => ({
-                  name: `U${u.unitNumber}`,
-                  어휘: u.vocabScore ?? 0,
-                  문제풀이: u.problemScore ?? 0,
-                }))}
-                bars={[
-                  { dataKey: '어휘', name: '어휘', color: '#F59E0B' },
-                  { dataKey: '문제풀이', name: '문제풀이', color: '#06B6D4' },
-                ]}
-              />
+              <>
+                <UnitScoreChart
+                  title="내신 단원별 점수"
+                  data={data.unitBreakdown.naesinUnits.map((u) => ({
+                    name: `U${u.unitNumber}`,
+                    어휘: u.vocabScore ?? 0,
+                    문제풀이: u.problemScore ?? 0,
+                  }))}
+                  bars={[
+                    { dataKey: '어휘', name: '어휘', color: '#F59E0B' },
+                    { dataKey: '문제풀이', name: '문제풀이', color: '#06B6D4' },
+                  ]}
+                />
+
+                {/* 본문 암기 상세 */}
+                {data.unitBreakdown.naesinUnits.some((u) => u.passageScores) && (
+                  <div className="rounded-xl border p-4">
+                    <h3 className="font-semibold text-sm mb-3">본문 암기 상세</h3>
+                    <div className="overflow-x-auto">
+                      <table className="w-full text-sm">
+                        <thead>
+                          <tr className="border-b text-left text-muted-foreground">
+                            <th className="pb-2 pr-3 font-medium">단원</th>
+                            <th className="pb-2 px-2 font-medium text-center" colSpan={3}>빈칸</th>
+                            <th className="pb-2 px-2 font-medium text-center">순서배열</th>
+                            <th className="pb-2 px-2 font-medium text-center">영작</th>
+                            <th className="pb-2 px-2 font-medium text-center">어법/어휘</th>
+                          </tr>
+                          <tr className="border-b text-xs text-muted-foreground/70">
+                            <th></th>
+                            <th className="pb-1.5 px-1 font-normal text-center">Easy</th>
+                            <th className="pb-1.5 px-1 font-normal text-center">Med</th>
+                            <th className="pb-1.5 px-1 font-normal text-center">Hard</th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {data.unitBreakdown.naesinUnits.filter((u) => u.passageScores).map((u) => {
+                            const ps = u.passageScores!;
+                            const renderScore = (v?: number) =>
+                              v != null ? <span className={v >= 80 ? 'text-green-600 font-medium' : v >= 50 ? 'text-amber-600' : 'text-red-500'}>{v}</span> : <span className="text-muted-foreground/40">-</span>;
+                            return (
+                              <tr key={u.unitNumber} className="border-b last:border-0">
+                                <td className="py-2 pr-3 font-medium whitespace-nowrap">U{u.unitNumber}</td>
+                                <td className="py-2 px-1 text-center">{renderScore(ps.fill_blanks?.easy)}</td>
+                                <td className="py-2 px-1 text-center">{renderScore(ps.fill_blanks?.medium)}</td>
+                                <td className="py-2 px-1 text-center">{renderScore(ps.fill_blanks?.hard)}</td>
+                                <td className="py-2 px-2 text-center">{renderScore(ps.ordering)}</td>
+                                <td className="py-2 px-2 text-center">{renderScore(ps.translation)}</td>
+                                <td className="py-2 px-2 text-center">{renderScore(ps.grammar_vocab)}</td>
+                              </tr>
+                            );
+                          })}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                )}
+              </>
             )}
             {data.unitBreakdown.vocaDays.length === 0 && data.unitBreakdown.naesinUnits.length === 0 && (
               <div className="rounded-xl border border-dashed p-8 text-center">

@@ -44,6 +44,12 @@ export interface StudentReportData {
       passageComplete: boolean;
       problemScore: number | null;
       stagesCompleted: number;
+      passageScores?: {
+        fill_blanks?: { easy?: number; medium?: number; hard?: number };
+        ordering?: number;
+        translation?: number;
+        grammar_vocab?: number;
+      };
     }[];
   };
   /** 날짜별 학습 활동 기록 */

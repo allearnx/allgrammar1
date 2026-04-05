@@ -27,6 +27,7 @@ export async function buildStudentReport(
     vocaQuizWrongRes, vocaMatchingWrongRes,
     vocaQuizActivityRes, vocaMatchingActivityRes, naesinVocabActivityRes,
     naesinProblemActivityRes, naesinPassageActivityRes, naesinVideoActivityRes,
+    naesinPassageAllRes,
   ] = await fetchRawData(queryClient, studentId, ninetyDaysAgo);
 
   const naesin = hasNaesin
@@ -46,7 +47,7 @@ export async function buildStudentReport(
 
   const wrongAnalysis = await computeWrongAnalysis(queryClient, vocaQuizWrongRes.data || [], vocaMatchingWrongRes.data || [], (naesinWrongRes.data || []) as { resolved: boolean; stage: string; unit_id: string }[]);
 
-  const unitBreakdown = await computeUnitBreakdown(queryClient, hasVoca, hasNaesin, vocaProgressRes.data || [], naesinProgressRes.data || [], naesinProblemRes.data || []);
+  const unitBreakdown = await computeUnitBreakdown(queryClient, hasVoca, hasNaesin, vocaProgressRes.data || [], naesinProgressRes.data || [], naesinProblemRes.data || [], naesinPassageAllRes.data || []);
 
   const activityLog = await computeActivityLog(queryClient, vocaQuizActivityRes.data || [], vocaMatchingActivityRes.data || [], naesinVocabActivityRes.data || [], naesinProblemActivityRes.data || [], naesinPassageActivityRes.data || [], naesinVideoActivityRes.data || []);
 
