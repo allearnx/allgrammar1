@@ -1,12 +1,14 @@
 import { NextResponse } from 'next/server';
 import { createApiHandler, dbResult } from '@/lib/api';
+import { requireContentPermission } from '@/lib/api/require-content-permission';
 import { templateImportSchema } from '@/lib/api/schemas';
 
 const ADMIN_ROLES = ['teacher', 'admin', 'boss'] as const;
 
 export const POST = createApiHandler(
   { roles: [...ADMIN_ROLES], schema: templateImportSchema },
-  async ({ body, supabase }) => {
+  async ({ user, body, supabase }) => {
+    await requireContentPermission(user, supabase);
     const { templateId, targetUnitIds } = body;
 
     // 1. Fetch template from naesin_templates

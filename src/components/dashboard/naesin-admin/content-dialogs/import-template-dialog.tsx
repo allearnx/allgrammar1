@@ -35,7 +35,7 @@ interface Props {
 
 export function ImportTemplateDialog({ unitId, onAdd }: Props) {
   const pathname = usePathname();
-  const isBoss = pathname.startsWith('/boss/');
+  const canManageTemplates = pathname.startsWith('/boss/') || pathname.startsWith('/teacher/') || pathname.startsWith('/admin/');
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [grouped, setGrouped] = useState<Record<string, TemplateItem[]>>({});
@@ -203,7 +203,7 @@ export function ImportTemplateDialog({ unitId, onAdd }: Props) {
                             '가져오기'
                           )}
                         </Button>
-                        {isBoss && (
+                        {canManageTemplates && (
                           <Button
                             variant="ghost"
                             size="icon"
@@ -215,7 +215,7 @@ export function ImportTemplateDialog({ unitId, onAdd }: Props) {
                             <Pencil className="h-3.5 w-3.5" />
                           </Button>
                         )}
-                        {isBoss && (
+                        {canManageTemplates && (
                           <Button
                             variant="ghost"
                             size="icon"

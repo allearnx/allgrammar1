@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { z } from 'zod';
 import { createApiHandler, NotFoundError } from '@/lib/api';
+import { requireContentPermission } from '@/lib/api/require-content-permission';
 import { createAdminClient } from '@/lib/supabase/admin';
 import { normalize } from '@/lib/naesin/normalize-answer';
 
@@ -10,7 +11,8 @@ const regradeSchema = z.object({
 
 export const POST = createApiHandler(
   { schema: regradeSchema, roles: ['teacher', 'admin', 'boss'] },
-  async ({ body, supabase }) => {
+  async ({ user, body, supabase }) => {
+    await requireContentPermission(user, supabase);
     const { sheetId } = body;
 
     // 1. 시트 정보 조회 (RLS 허용)

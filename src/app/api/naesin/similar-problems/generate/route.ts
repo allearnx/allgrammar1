@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { createApiHandler, dbResult } from '@/lib/api';
+import { requireContentPermission } from '@/lib/api/require-content-permission';
 import { logger } from '@/lib/logger';
 import { similarProblemGenerateSchema } from '@/lib/api/schemas';
 import Anthropic from '@anthropic-ai/sdk';
@@ -14,6 +15,7 @@ const anthropic = new Anthropic();
 export const POST = createApiHandler(
   { roles: ['teacher', 'admin', 'boss'], schema: similarProblemGenerateSchema, rateLimit: { max: 50 } },
   async ({ user, body, supabase }) => {
+    await requireContentPermission(user, supabase);
     const { unitId, wrongAnswerIds, grammarTag } = body;
 
     // Fetch wrong answers for context

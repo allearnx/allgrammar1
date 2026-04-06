@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { createApiHandler } from '@/lib/api';
+import { requireContentPermission } from '@/lib/api/require-content-permission';
 import { logger } from '@/lib/logger';
 import { aiProblemGenerateSchema } from '@/lib/api/schemas';
 import Anthropic from '@anthropic-ai/sdk';
@@ -163,7 +164,8 @@ JSON 배열로만 응답하세요. 서술형은 options를 null로 설정합니�
 
 export const POST = createApiHandler(
   { roles: ['teacher', 'admin', 'boss'], schema: aiProblemGenerateSchema, rateLimit: { max: 30 } },
-  async ({ user, body }) => {
+  async ({ user, body, supabase }) => {
+    await requireContentPermission(user, supabase);
     const { unitId, title, grammarTopic, focusPoints, grade, mcqCount, selectAllCount, subjectiveCount, trapPercent } = body;
 
     const totalCount = mcqCount + selectAllCount + subjectiveCount;

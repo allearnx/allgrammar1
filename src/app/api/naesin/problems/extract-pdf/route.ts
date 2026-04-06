@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getUser } from '@/lib/auth/helpers';
+import { requireContentPermission } from '@/lib/api/require-content-permission';
 import { logger } from '@/lib/logger';
 import { checkRateLimit } from '@/lib/api/rate-limit';
 import Anthropic from '@anthropic-ai/sdk';
@@ -13,6 +14,12 @@ export async function POST(request: NextRequest) {
   const user = await getUser();
   if (!user || !['teacher', 'admin', 'boss'].includes(user.role)) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  }
+
+  const { createClient } = await import('@/lib/supabase/server');
+  const supabase = await createClient();
+  try { await requireContentPermission(user, supabase); } catch {
+    return NextResponse.json({ error: '콘텐츠 관리 권한이 없습니다.' }, { status: 403 });
   }
 
   const limited = await checkRateLimit(user.id, 'naesin/problems/extract-pdf', 50);

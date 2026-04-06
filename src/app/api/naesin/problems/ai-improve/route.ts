@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { createApiHandler, dbResult } from '@/lib/api';
+import { requireContentPermission } from '@/lib/api/require-content-permission';
 import { logger } from '@/lib/logger';
 import { aiProblemImproveSchema } from '@/lib/api/schemas';
 import Anthropic from '@anthropic-ai/sdk';
@@ -116,6 +117,7 @@ JSON 객체로만 응답하세요. 다른 텍스트는 포함하지 마세요.
 export const POST = createApiHandler(
   { roles: ['teacher', 'admin', 'boss'], schema: aiProblemImproveSchema, rateLimit: { max: 30 } },
   async ({ user, body, supabase }) => {
+    await requireContentPermission(user, supabase);
     const { sheetId } = body;
 
     // Fetch the problem sheet

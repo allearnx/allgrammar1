@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { createApiHandler } from '@/lib/api';
+import { requireContentPermission } from '@/lib/api/require-content-permission';
 import { grammarChatQuestionCreateSchema, idSchema } from '@/lib/api/schemas';
 
 // GET: List questions for a lesson
@@ -30,7 +31,8 @@ export async function GET(request: Request) {
 // POST: Create a new question
 export const POST = createApiHandler(
   { schema: grammarChatQuestionCreateSchema, roles: ['teacher', 'admin', 'boss'] },
-  async ({ body, supabase }) => {
+  async ({ user, body, supabase }) => {
+    await requireContentPermission(user, supabase);
     const { lessonId, questionText, grammarConcept, hint, expectedAnswerKeywords, sortOrder } = body;
 
     const { data, error } = await supabase
@@ -57,7 +59,8 @@ export const POST = createApiHandler(
 // PATCH: Update a question
 export const PATCH = createApiHandler(
   { roles: ['teacher', 'admin', 'boss'] },
-  async ({ body, supabase }) => {
+  async ({ user, body, supabase }) => {
+    await requireContentPermission(user, supabase);
     const parsed = idSchema.safeParse(body);
     if (!parsed.success) {
       return NextResponse.json({ error: 'id가 필요합니다.' }, { status: 400 });
@@ -90,7 +93,8 @@ export const PATCH = createApiHandler(
 // DELETE: Delete a question
 export const DELETE = createApiHandler(
   { roles: ['teacher', 'admin', 'boss'], hasBody: true },
-  async ({ body, supabase }) => {
+  async ({ user, body, supabase }) => {
+    await requireContentPermission(user, supabase);
     const parsed = idSchema.safeParse(body);
     if (!parsed.success) {
       return NextResponse.json({ error: 'id가 필요합니다.' }, { status: 400 });
