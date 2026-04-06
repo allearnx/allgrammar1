@@ -282,13 +282,13 @@ BEGIN
       'answer','3'),
 
     jsonb_build_object('number',37,
-      'question',E'다음 두 문장을 한 문장으로 바르게 연결한 것은?\n\n• Min is in the hospital.\n• He was sick yesterday.',
+      'question',E'다음 두 문장을 한 문장으로 바르게 연결한 것은?\n\n• Emily is on vacation.\n• She finished all her projects.',
       'options',jsonb_build_array(
-        'Min is in the hospital who was sick yesterday.',
-        'Min is in the hospital which was sick yesterday.',
-        'Min who was sick yesterday is in the hospital.',
-        'Min which was sick yesterday is in the hospital.',
-        'Min who was sick is in the hospital yesterday.'),
+        'Emily is on vacation who finished all her projects.',
+        'Emily is on vacation which finished all her projects.',
+        'Emily who finished all her projects is on vacation.',
+        'Emily which finished all her projects is on vacation.',
+        'Emily who finished all her projects on vacation.'),
       'answer','3'),
 
     jsonb_build_object('number',38,
@@ -372,14 +372,14 @@ BEGIN
       'answer','1'),
 
     jsonb_build_object('number',46,
-      'question',E'다음 두 문장을 한 문장으로 바르게 연결한 것은?\n\n• I have an electronic dictionary.\n• It is very useful.',
+      'question',E'다음 두 문장을 한 문장으로 바르게 연결한 것은?\n\n• The man lives next door.\n• He speaks five languages.',
       'options',jsonb_build_array(
-        'I have an electronic dictionary and is very useful.',
-        'I have an electronic dictionary what is very useful.',
-        'I have an electronic dictionary which is very useful.',
-        'I have an electronic dictionary whose is very useful.',
-        'I have an electronic dictionary who is very useful.'),
-      'answer','3'),
+        'The man lives next door who speaks five languages.',
+        'The man who speaks five languages lives next door.',
+        'The man which speaks five languages lives next door.',
+        'The man speaks five languages who lives next door.',
+        'The man whom speaks five languages lives next door.'),
+      'answer','2'),
 
     -- ═══════════════════════════════════════════
     -- Part 6: 어법 판별 (Q47~Q70)
@@ -631,7 +631,7 @@ BEGIN
     '1','2','2','2','2','4','1','2','5','1',
     '5','2','2','3','3','5',
     '1','5','4','5','1','4','3','3, 5',
-    '3, 4','3','3','3','2','2, 5','2','4','4','3','1','3',
+    '3, 4','3','3','3','2','2, 5','2','4','4','3','1','2',
     '2','1','5','2','5','3','3','2','3','3','5','1','5','5','5','2','3, 4','5','4','3','1','2','2, 3','1'
   );
 
