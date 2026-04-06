@@ -3,6 +3,7 @@ import { createApiHandler } from '@/lib/api/handler';
 import { serviceAssignmentCreateSchema, serviceAssignmentDeleteSchema, serviceAssignmentPatchSchema } from '@/lib/api/schemas';
 import { checkServiceGate } from '@/lib/billing/check-plan-api';
 import { requireAcademyScope } from '@/lib/api/require-academy-scope';
+import { createAdminClient } from '@/lib/supabase/admin';
 
 // GET — 학생 본인의 배정 목록
 export const GET = createApiHandler({ hasBody: false }, async ({ user, supabase }) => {
@@ -24,7 +25,9 @@ export const POST = createApiHandler(
       if (serviceBlocked) return serviceBlocked;
     }
 
-    const { data, error } = await supabase
+    // boss는 adminClient 사용 (API 라우트에서 RLS 세션 만료 문제 방지)
+    const client = user.role === 'boss' ? createAdminClient() : supabase;
+    const { data, error } = await client
       .from('service_assignments')
       .upsert(
         { student_id: body.studentId, service: body.service, assigned_by: user.id },
@@ -40,9 +43,9 @@ export const POST = createApiHandler(
 // PATCH — boss가 2회독 잠금 해제 토글
 export const PATCH = createApiHandler(
   { roles: ['boss'], schema: serviceAssignmentPatchSchema },
-  async ({ user, body, supabase }) => {
-    await requireAcademyScope(user, body.studentId, supabase);
-    const { error } = await supabase
+  async ({ user, body }) => {
+    const admin = createAdminClient();
+    const { error } = await admin
       .from('service_assignments')
       .update({ round2_unlocked: body.round2Unlocked })
       .eq('student_id', body.studentId)
@@ -57,7 +60,8 @@ export const DELETE = createApiHandler(
   { roles: ['boss', 'admin'], schema: serviceAssignmentDeleteSchema, hasBody: true },
   async ({ user, body, supabase }) => {
     await requireAcademyScope(user, body.studentId, supabase);
-    const { error } = await supabase
+    const client = user.role === 'boss' ? createAdminClient() : supabase;
+    const { error } = await client
       .from('service_assignments')
       .delete()
       .eq('student_id', body.studentId)

@@ -4,12 +4,16 @@ import { testAdmin, testStudent, testBoss } from '../helpers/fixtures';
 
 const mockGetUser = vi.fn();
 const mockCreateClient = vi.fn();
+const mockCreateAdminClient = vi.fn();
 
 vi.mock('@/lib/auth/helpers', () => ({
   getUser: (...args: unknown[]) => mockGetUser(...args),
 }));
 vi.mock('@/lib/supabase/server', () => ({
   createClient: (...args: unknown[]) => mockCreateClient(...args),
+}));
+vi.mock('@/lib/supabase/admin', () => ({
+  createAdminClient: (...args: unknown[]) => mockCreateAdminClient(...args),
 }));
 vi.mock('@/lib/api/rate-limit', () => ({
   checkRateLimit: () => null,
@@ -74,6 +78,7 @@ describe('service-assignments', () => {
     });
     mockGetUser.mockResolvedValue(testBoss);
     mockCreateClient.mockResolvedValue({ from });
+    mockCreateAdminClient.mockReturnValue({ from });
 
     const { POST } = await import('@/app/api/service-assignments/route');
     const res = await POST(makeRequest('POST', { studentId: 'student-1', service: 'naesin' }));
@@ -108,6 +113,7 @@ describe('service-assignments', () => {
     const { from } = mockSupabaseChain({ data: null, error: null });
     mockGetUser.mockResolvedValue(testBoss);
     mockCreateClient.mockResolvedValue({ from });
+    mockCreateAdminClient.mockReturnValue({ from });
 
     const { DELETE } = await import('@/app/api/service-assignments/route');
     const res = await DELETE(makeRequest('DELETE', { studentId: 'student-1', service: 'naesin' }));
