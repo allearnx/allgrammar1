@@ -183,7 +183,8 @@ export function NaesinStageView({
   useLearningSession('naesin', unit.id);
 
   function handleStageComplete() {
-    router.refresh();
+    // router.refresh()를 즉시 호출하면 채점 결과 등 클라이언트 state가 날아감.
+    // 다음 스테이지로 이동하면 서버에서 최신 데이터를 가져오므로 별도 refresh 불필요.
   }
 
   const currentConfig = STAGE_CONFIG.find((s) => s.key === currentStage);
