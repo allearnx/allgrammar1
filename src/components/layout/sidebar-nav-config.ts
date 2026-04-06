@@ -10,6 +10,7 @@ import {
   Users,
   FileDown,
   FileText,
+  FileCheck,
   BookMarked,
   BookA,
   MessageSquare,
@@ -82,6 +83,7 @@ export const NAV_CONFIG: Record<string, NavGroup[]> = {
       items: [
         { href: '/teacher/naesin', label: '내신 관리', icon: ClipboardList },
         { href: '/teacher/voca', label: '올킬보카 관리', icon: BookA },
+        { href: '/teacher/voca/submissions', label: '오답노트 확인', icon: FileCheck },
       ],
     },
     {
@@ -109,6 +111,7 @@ export const NAV_CONFIG: Record<string, NavGroup[]> = {
       items: [
         { href: '/admin/naesin', label: '내신 관리', icon: ClipboardList },
         { href: '/admin/voca', label: '올킬보카 관리', icon: BookA },
+        { href: '/admin/voca/submissions', label: '오답노트 확인', icon: FileCheck },
       ],
     },
     {
@@ -158,6 +161,7 @@ export const NAV_CONFIG: Record<string, NavGroup[]> = {
         { href: '/boss/textbook-mode', label: '교과서 모드', icon: BookMarked },
         { href: '/boss/naesin', label: '내신 관리', icon: ClipboardList },
         { href: '/boss/voca', label: '올킬보카 관리', icon: BookA },
+        { href: '/boss/voca/submissions', label: '오답노트 확인', icon: FileCheck },
       ],
     },
     {
