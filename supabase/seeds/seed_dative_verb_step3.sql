@@ -271,7 +271,7 @@ BEGIN
       'answer','ⓐ I want to buy my parents two mugs. ⓑ I will buy Max a key chain.'),
 
     jsonb_build_object('number',60,
-      'question',E'다음 해석에 맞게 괄호 안에 주어진 단어와 <조건>을 참고하여 빈칸을 완성하시오.\n\n<조건>\n• 괄호 안에 주어진 단어를 시제에 맞게 변형할 것\n• 반드시 각 빈칸에 단어를 하나씩만 써 넣어 모든 빈칸을 완성할 것\n\n(1) Sophie는 Nara에게 목걸이 하나를 만들어 주었다.\n→ Sophie ___ ___ ___ ___ ___ Nara. (make)\n\n(2) Leo는 그의 누나에게 편지 한 통을 써 줄 것이다.\n→ Leo ___ ___ ___ ___ ___ ___ his sister. (write)',
+      'question',E'다음 해석에 맞게 괄호 안에 주어진 단어와 <조건>을 참고하여 빈칸을 완성하시오.\n\n<조건>\n• 괄호 안에 주어진 단어를 시제에 맞게 변형할 것\n• 반드시 각 빈칸에 단어를 하나씩만 써 넣어 모든 빈칸을 완성할 것\n\n(1) Sophie는 Nara에게 목걸이 하나를 만들어 주었다.\n→ Sophie ___ ___ ___ ___ Nara. (make)\n\n(2) Leo는 그의 누나에게 편지 한 통을 써 줄 것이다.\n→ Leo ___ ___ ___ ___ ___ his sister. (write)',
       'answer','(1) made a necklace for (2) will write a letter to')
   );
 
