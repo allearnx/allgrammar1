@@ -88,7 +88,7 @@ export function NaesinQuizView({
         selectedAnswer={q.selectedAnswer}
         correctAnswer={q.question!.correctIndex}
         showResult={q.showResult}
-        onSelect={(v) => q.handleSelect(v as number)}
+        onSelect={(v) => q.handleSelect(Number(v))}
         labelStyle="alpha"
         className="max-w-md mx-auto"
       />
