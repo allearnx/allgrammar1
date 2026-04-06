@@ -87,8 +87,8 @@ export function InteractiveProblemView({
   const {
     currentIndex, selectedAnswer, showResult, score, finished,
     wrongList, isGrading, isCurrentCorrect,
-    question, isSubjective, remaining, isExpired,
-    handleSelect, handleNext, handleMidSave, isMidSaving, answersMap,
+    question, isSubjective, isMultiSelect, multiSelectedValues, remaining, isExpired,
+    handleSelect, handleMultiToggle, handleMultiSubmit, handleNext, handleMidSave, isMidSaving, answersMap,
   } = useInteractiveProblem({ sheetId: sheet.id, questions, unitId, onComplete });
 
   if (questions.length === 0) {
@@ -145,6 +145,10 @@ export function InteractiveProblemView({
           showResult={showResult}
           onSelect={(v) => handleSelect(v as string)}
           className="max-w-lg mx-auto"
+          multiSelect={isMultiSelect}
+          selectedValues={multiSelectedValues}
+          onToggle={handleMultiToggle}
+          onSubmit={handleMultiSubmit}
         />
       ) : (
         <SubjectiveInput

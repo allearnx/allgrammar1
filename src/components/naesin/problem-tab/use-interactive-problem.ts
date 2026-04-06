@@ -28,6 +28,7 @@ export function useInteractiveProblem({
     return d?.mode === 'interactive' ? d.currentIndex : 0;
   });
   const [selectedAnswer, setSelectedAnswer] = useState<string | number | null>(null);
+  const [multiSelectedValues, setMultiSelectedValues] = useState<string[]>([]);
   const [showResult, setShowResult] = useState(false);
   const [score, setScore] = useState(() => {
     const d = loadDraft();
@@ -76,6 +77,7 @@ export function useInteractiveProblem({
 
   const question = questions[currentIndex];
   const isSubjective = !question?.options || question.options.length === 0;
+  const isMultiSelect = !isSubjective && String(question.answer).includes(',');
   const timeLimit = isSubjective ? SUBJECTIVE_TIME_LIMIT : MCQ_TIME_LIMIT;
   const { remaining, isExpired, reset: resetTimer, pause: pauseTimer } = useQuestionTimer(timeLimit);
 
@@ -199,6 +201,36 @@ export function useInteractiveProblem({
     }
   }
 
+  function handleMultiToggle(value: string) {
+    if (showResult) return;
+    setMultiSelectedValues((prev) =>
+      prev.includes(value) ? prev.filter((v) => v !== value) : [...prev, value]
+    );
+  }
+
+  function handleMultiSubmit() {
+    if (showResult || multiSelectedValues.length === 0) return;
+    const sortedAnswer = [...multiSelectedValues].sort((a, b) => Number(a) - Number(b)).join(', ');
+    // Normalize correct answer for comparison
+    const correctParts = String(question.answer).split(',').map((s) => s.trim()).sort((a, b) => Number(a) - Number(b));
+    const normalizedCorrect = correctParts.join(', ');
+
+    pauseTimer();
+
+    let currentOvertime = overtimeQuestions;
+    if (isExpired) {
+      currentOvertime = [...overtimeQuestions, question.number];
+      setOvertimeQuestions(currentOvertime);
+    }
+
+    const isLast = currentIndex === questions.length - 1;
+    const correct = sortedAnswer === normalizedCorrect;
+    setSelectedAnswer(sortedAnswer);
+    setShowResult(true);
+    const { newScore, newWrongList } = applyResult(correct, sortedAnswer, question);
+    finishOrSave(isLast, sortedAnswer, newScore, newWrongList, aiResultsMap, currentOvertime);
+  }
+
   function handleNext() {
     if (currentIndex < questions.length - 1) {
       const nextQ = questions[currentIndex + 1];
@@ -206,6 +238,7 @@ export function useInteractiveProblem({
       setCurrentIndex(currentIndex + 1);
       setShowResult(false);
       setSelectedAnswer(null);
+      setMultiSelectedValues([]);
       setSubjectiveResult(null);
       resetTimer(nextIsSubjective ? SUBJECTIVE_TIME_LIMIT : MCQ_TIME_LIMIT);
     }
@@ -273,7 +306,13 @@ export function useInteractiveProblem({
   const isCurrentCorrect = showResult && (
     isSubjective
       ? (subjectiveResult ? subjectiveResult.score === 100 : false)
-      : String(selectedAnswer) === String(question.answer)
+      : isMultiSelect
+        ? (() => {
+            const sel = String(selectedAnswer).split(',').map((s) => s.trim()).sort((a, b) => Number(a) - Number(b)).join(', ');
+            const cor = String(question.answer).split(',').map((s) => s.trim()).sort((a, b) => Number(a) - Number(b)).join(', ');
+            return sel === cor;
+          })()
+        : String(selectedAnswer) === String(question.answer)
   );
 
   return {
@@ -287,9 +326,13 @@ export function useInteractiveProblem({
     isCurrentCorrect,
     question,
     isSubjective,
+    isMultiSelect,
+    multiSelectedValues,
     remaining,
     isExpired,
     handleSelect,
+    handleMultiToggle,
+    handleMultiSubmit,
     handleNext,
     handleMidSave,
     isMidSaving,
