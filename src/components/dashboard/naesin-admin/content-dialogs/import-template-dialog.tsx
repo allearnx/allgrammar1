@@ -125,7 +125,7 @@ export function ImportTemplateDialog({ unitId, onAdd }: Props) {
             템플릿에서 가져오기
           </Button>
         </DialogTrigger>
-        <DialogContent className="max-w-4xl max-h-[85vh] overflow-y-auto">
+        <DialogContent className="max-w-6xl max-h-[85vh] overflow-y-auto">
           <DialogHeader>
             <DialogTitle className="flex items-center gap-2">
               <Library className="h-4 w-4" />
