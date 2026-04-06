@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { createApiHandler, dbResult } from '@/lib/api';
 import { requireContentPermission } from '@/lib/api/require-content-permission';
+import { createAdminClient } from '@/lib/supabase/admin';
 import { logger } from '@/lib/logger';
 import { similarProblemGenerateSchema } from '@/lib/api/schemas';
 import Anthropic from '@anthropic-ai/sdk';
@@ -18,16 +19,19 @@ export const POST = createApiHandler(
     await requireContentPermission(user, supabase);
     const { unitId, wrongAnswerIds, grammarTag } = body;
 
+    // Admin client for queries (boss has no academy_id, RLS would block)
+    const admin = createAdminClient();
+
     // Fetch wrong answers for context
     let wrongAnswers: unknown[] = [];
     if (wrongAnswerIds?.length) {
-      const { data } = await supabase
+      const { data } = await admin
         .from('naesin_wrong_answers')
         .select('*')
         .in('id', wrongAnswerIds);
       wrongAnswers = data || [];
     } else {
-      const { data } = await supabase
+      const { data } = await admin
         .from('naesin_wrong_answers')
         .select('*')
         .eq('unit_id', unitId)
@@ -102,7 +106,7 @@ JSON 배열로만 응답:
         };
       });
 
-      const inserted = dbResult(await supabase
+      const inserted = dbResult(await admin
         .from('naesin_similar_problems')
         .insert(rows)
         .select());

@@ -15,8 +15,11 @@ export const POST = createApiHandler(
     await requireContentPermission(user, supabase);
     const { sheetId } = body;
 
-    // 1. 시트 정보 조회 (RLS 허용)
-    const { data: sheet } = await supabase
+    // Admin client for all queries (boss has no academy_id, RLS would block)
+    const admin = createAdminClient();
+
+    // 1. 시트 정보 조회
+    const { data: sheet } = await admin
       .from('naesin_problem_sheets')
       .select('id, unit_id, answer_key, questions, mode')
       .eq('id', sheetId)
@@ -24,8 +27,8 @@ export const POST = createApiHandler(
 
     if (!sheet) throw new NotFoundError('시험지를 찾을 수 없습니다.');
 
-    // 2. 해당 시트의 모든 시도 조회 (teacher는 SELECT 가능)
-    const { data: attempts } = await supabase
+    // 2. 해당 시트의 모든 시도 조회
+    const { data: attempts } = await admin
       .from('naesin_problem_attempts')
       .select('id, student_id, answers, score, total_questions, wrong_answers')
       .eq('sheet_id', sheetId);
@@ -41,9 +44,6 @@ export const POST = createApiHandler(
       options?: string[];
       acceptedAnswers?: string[];
     }[];
-
-    // Admin client for UPDATE/DELETE (teacher RLS = SELECT only)
-    const admin = createAdminClient();
 
     let changed = 0;
 

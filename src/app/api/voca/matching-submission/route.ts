@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { createApiHandler } from '@/lib/api/handler';
 import { vocaMatchingSubmissionSchema, vocaMatchingReviewSchema } from '@/lib/api/schemas';
+import { createAdminClient } from '@/lib/supabase/admin';
 
 // POST — 오답 5번 쓰기 제출
 export const POST = createApiHandler(
@@ -24,12 +25,13 @@ export const POST = createApiHandler(
 );
 
 // GET — 제출 목록 (teacher/admin/boss)
-export const GET = createApiHandler({ roles: ['teacher', 'admin', 'boss'], hasBody: false }, async ({ request, supabase }) => {
+export const GET = createApiHandler({ roles: ['teacher', 'admin', 'boss'], hasBody: false }, async ({ request }) => {
   const { searchParams } = new URL(request.url);
   const dayId = searchParams.get('dayId');
   const status = searchParams.get('status');
 
-  let query = supabase
+  const admin = createAdminClient();
+  let query = admin
     .from('voca_matching_submissions')
     .select('*, student:users!voca_matching_submissions_student_id_fkey(full_name, email)')
     .order('created_at', { ascending: false });
@@ -44,8 +46,9 @@ export const GET = createApiHandler({ roles: ['teacher', 'admin', 'boss'], hasBo
 // PATCH — 검토 완료 표시
 export const PATCH = createApiHandler(
   { roles: ['teacher', 'admin', 'boss'], schema: vocaMatchingReviewSchema },
-  async ({ user, body, supabase }) => {
-    const { data, error } = await supabase
+  async ({ user, body }) => {
+    const admin = createAdminClient();
+    const { data, error } = await admin
       .from('voca_matching_submissions')
       .update({ status: body.status, reviewed_by: user.id, updated_at: new Date().toISOString() })
       .eq('id', body.id)

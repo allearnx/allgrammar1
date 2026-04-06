@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { createApiHandler, dbResult } from '@/lib/api';
 import { requireAcademyScope } from '@/lib/api/require-academy-scope';
+import { createAdminClient } from '@/lib/supabase/admin';
 
 export const GET = createApiHandler(
   { roles: ['teacher', 'admin', 'boss'] },
@@ -12,8 +13,11 @@ export const GET = createApiHandler(
 
     await requireAcademyScope(user, studentId, supabase);
 
+    // Staff uses admin client to bypass RLS (boss has no academy_id)
+    const admin = createAdminClient();
+
     const data = dbResult(
-      await supabase
+      await admin
         .from('naesin_wrong_answers')
         .select('*')
         .eq('student_id', studentId)
