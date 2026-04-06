@@ -62,6 +62,25 @@ export interface VocaStudentProgress {
   updated_at: string;
 }
 
+export const EMPTY_VOCA_PROGRESS: VocaStudentProgress = {
+  id: '',
+  student_id: '',
+  day_id: '',
+  flashcard_completed: false,
+  quiz_score: null,
+  spelling_score: null,
+  matching_score: null,
+  matching_attempt: 0,
+  matching_completed: false,
+  round2_flashcard_completed: false,
+  round2_quiz_score: null,
+  round2_matching_score: null,
+  round2_matching_attempt: 0,
+  round2_matching_completed: false,
+  created_at: '',
+  updated_at: '',
+};
+
 export type VocaWrongWordType = 'synonym' | 'antonym' | 'sentence';
 
 export interface VocaWrongWord {

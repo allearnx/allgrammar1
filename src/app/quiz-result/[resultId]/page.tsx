@@ -16,11 +16,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     .from('naesin_vocab_quiz_results')
     .select('score, users!student_id(full_name)')
     .eq('id', resultId)
+    .returns<{ score: number; users: { full_name: string } | null }[]>()
     .single();
 
   if (!data) return { title: '퀴즈 결과' };
 
-  const studentName = (data.users as unknown as { full_name: string } | null)?.full_name || '학생';
+  const studentName = data.users?.full_name || '학생';
   return {
     title: `${studentName}의 단어 퀴즈 결과 - ${data.score}점`,
   };

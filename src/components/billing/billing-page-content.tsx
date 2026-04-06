@@ -60,12 +60,12 @@ export function BillingPageContent({ mode }: BillingPageContentProps) {
 
       subscriptionQuery = supabase
         .from('subscriptions')
-        .select('id, plan_id, academy_id, student_id, status, tier, billing_key, customer_key, current_period_start, current_period_end, trial_end, grace_period_end, failed_payment_count, canceled_at, created_at, plan:subscription_plans(*)')
+        .select('*, plan:subscription_plans(*)')
         .eq('academy_id', profile.academy_id);
     } else {
       subscriptionQuery = supabase
         .from('subscriptions')
-        .select('id, plan_id, academy_id, student_id, status, tier, billing_key, customer_key, current_period_start, current_period_end, trial_end, grace_period_end, failed_payment_count, canceled_at, created_at, plan:subscription_plans(*)')
+        .select('*, plan:subscription_plans(*)')
         .eq('student_id', user.id);
     }
 
@@ -75,7 +75,7 @@ export function BillingPageContent({ mode }: BillingPageContentProps) {
       .single();
 
     if (sub) {
-      const typedSub = sub as unknown as SubscriptionWithPlan;
+      const typedSub = sub as SubscriptionWithPlan;
       setSubscription(typedSub);
       if (mode === 'academy') {
         setTier(deriveTier({ status: typedSub.status, tier: typedSub.tier }));

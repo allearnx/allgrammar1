@@ -12,7 +12,7 @@ import { NaesinSpellingView } from '@/components/naesin/vocab-tab/spelling-view'
 import { SentenceMatch } from './sentence-match';
 import { WriteWrongWords } from './write-wrong-words';
 import { WrongWordsSpelling } from './wrong-words-spelling';
-import type { VocaVocabulary, VocaStudentProgress, VocaWrongWord } from '@/types/voca';
+import { EMPTY_VOCA_PROGRESS, type VocaVocabulary, type VocaStudentProgress, type VocaWrongWord } from '@/types/voca';
 import type { WrongWordItem } from '@/app/(dashboard)/student/voca/[dayId]/client';
 
 interface VocaTabProps {
@@ -55,7 +55,7 @@ export function VocaTab({ vocabulary, dayId, progress, wrongWords = [] }: VocaTa
     } catch { /* swallow */ }
     // 로컬 상태 업데이트
     setLocalProgress((prev) => {
-      const base = prev ?? {} as VocaStudentProgress;
+      const base = prev ?? EMPTY_VOCA_PROGRESS;
       if (type === 'flashcard') return { ...base, flashcard_completed: true };
       if (type === 'quiz') return { ...base, quiz_score: score ?? 0 };
       if (type === 'spelling') return { ...base, spelling_score: score ?? 0 };

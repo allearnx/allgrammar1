@@ -32,6 +32,7 @@ export default async function ProgressPage() {
       .from('naesin_student_settings')
       .select('textbook_id, textbook:naesin_textbooks(display_name)')
       .eq('student_id', user.id)
+      .returns<{ textbook_id: string; textbook: { display_name: string } | null }[]>()
       .single(),
   ]);
 
@@ -52,7 +53,7 @@ export default async function ProgressPage() {
   }
 
   const naesinProgressMap = new Map(naesinProgress.map((p) => [p.unit_id, p]));
-  const textbookName = (naesinSettingsRes.data?.textbook as unknown as { display_name: string } | null)?.display_name || '';
+  const textbookName = naesinSettingsRes.data?.textbook?.display_name || '';
 
   const legacyWatchedSeconds = videoProgress?.reduce((acc, p) => acc + p.video_watched_seconds, 0) || 0;
   const naesinWatchedSeconds = naesinVideoProgressRes.data?.reduce((acc, p) => acc + (p.cumulative_watch_seconds || 0), 0) || 0;

@@ -28,13 +28,14 @@ export default async function CourseDetailPage({
     .select('*')
     .eq('id', id)
     .eq('is_active', true)
+    .returns<Course[]>()
     .single();
 
   if (!course) {
     notFound();
   }
 
-  const c = course as unknown as Course;
+  const c = course;
 
   // Fetch teacher profile if teacher_id exists
   let teacher: TeacherProfile | null = null;
@@ -44,7 +45,7 @@ export default async function CourseDetailPage({
       .select('*')
       .eq('id', c.teacher_id)
       .single();
-    teacher = data as unknown as TeacherProfile | null;
+    teacher = data as TeacherProfile | null;
   }
 
   const paymentUrl = `/payment?courseId=${c.id}&name=${encodeURIComponent(c.title)}&price=${c.price}`;

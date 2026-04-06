@@ -16,6 +16,7 @@ export async function fetchNaesinExamData(studentId: string): Promise<NaesinExam
     .from('naesin_student_settings')
     .select('textbook_id, textbook:naesin_textbooks(display_name)')
     .eq('student_id', studentId)
+    .returns<{ textbook_id: string; textbook: { display_name: string } | null }[]>()
     .single();
 
   if (!setting?.textbook_id) return null;
@@ -36,8 +37,8 @@ export async function fetchNaesinExamData(studentId: string): Promise<NaesinExam
   ]);
 
   return {
-    textbookId: setting.textbook_id as string,
-    textbookName: (setting.textbook as unknown as { display_name: string } | null)?.display_name || '',
+    textbookId: setting.textbook_id,
+    textbookName: setting.textbook?.display_name || '',
     units: unitsRes.data || [],
     assignments: assignmentsRes.data || [],
   };

@@ -8,7 +8,7 @@ import { Round2FlashcardView } from './round2-flashcard-view';
 import { ComprehensiveQuiz } from './comprehensive-quiz';
 import { MatchingView } from './matching-view';
 import { WriteWrongWords } from './write-wrong-words';
-import type { VocaVocabulary, VocaStudentProgress, VocaWrongWord } from '@/types/voca';
+import { EMPTY_VOCA_PROGRESS, type VocaVocabulary, type VocaStudentProgress, type VocaWrongWord } from '@/types/voca';
 
 interface VocaTab2Props {
   vocabulary: VocaVocabulary[];
@@ -52,7 +52,7 @@ export function VocaTab2({ vocabulary, dayId, progress }: VocaTab2Props) {
       });
     } catch { /* swallow */ }
     setLocalProgress((prev) => {
-      const base = prev ?? {} as VocaStudentProgress;
+      const base = prev ?? EMPTY_VOCA_PROGRESS;
       if (type === 'flashcard') return { ...base, round2_flashcard_completed: true };
       if (type === 'quiz') return { ...base, round2_quiz_score: score ?? 0 };
       if (type === 'matching') return { ...base, round2_matching_completed: (score ?? 0) >= 90 };

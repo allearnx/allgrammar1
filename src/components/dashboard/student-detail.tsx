@@ -87,7 +87,8 @@ export async function StudentDetail({ user, studentId, naesinData }: Props) {
     admin
       .from('voca_student_progress')
       .select('day_id, flashcard_completed, quiz_score, spelling_score, matching_score, matching_completed, round2_flashcard_completed, round2_quiz_score, round2_matching_score, round2_matching_completed, updated_at, day:voca_days(id, day_number, title, book:voca_books(id, title, sort_order))')
-      .eq('student_id', studentId),
+      .eq('student_id', studentId)
+      .returns<VocaProgressRow[]>(),
     admin
       .from('service_assignments')
       .select('id')
@@ -142,7 +143,7 @@ export async function StudentDetail({ user, studentId, naesinData }: Props) {
   const hours = Math.floor(totalWatchedSeconds / 3600);
   const minutes = Math.floor((totalWatchedSeconds % 3600) / 60);
 
-  const vocaProgress = (vocaProgressRes.data || []) as unknown as VocaProgressRow[];
+  const vocaProgress = vocaProgressRes.data || [];
   const hasVocaAssignment = !!vocaAssignmentRes.data;
   const hasNaesinAssignment = !!naesinAssignmentRes.data;
   const naesinTextbooks = naesinTextbooksRes.data || [];
