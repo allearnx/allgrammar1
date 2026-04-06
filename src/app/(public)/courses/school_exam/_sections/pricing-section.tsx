@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import SinaeSinPayButton from '@/components/public/sinaesin-pay-button';
 import { trialPersonalItems, trialAcademyItems, premiumItems } from '../school-exam-data';
 
@@ -38,12 +39,12 @@ export function PricingSection({ examCourse }: PricingSectionProps) {
               ))}
             </div>
             <div className="px-7 pb-7">
-              <a
+              <Link
                 href="/signup"
                 className="block w-full text-center py-3.5 rounded-xl bg-slate-100 text-slate-700 font-bold text-[0.9rem] transition-all hover:bg-slate-200"
               >
                 체험하기 &rarr;
-              </a>
+              </Link>
             </div>
           </div>
 
@@ -94,12 +95,12 @@ export function PricingSection({ examCourse }: PricingSectionProps) {
               ))}
             </div>
             <div className="px-7 pb-7">
-              <a
+              <Link
                 href="/signup?role=teacher"
                 className="block w-full text-center py-3.5 rounded-xl bg-slate-100 text-slate-700 font-bold text-[0.9rem] transition-all hover:bg-slate-200"
               >
                 학원 체험하기 &rarr;
-              </a>
+              </Link>
             </div>
           </div>
         </div>
