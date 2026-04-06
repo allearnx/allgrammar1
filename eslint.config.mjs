@@ -17,6 +17,10 @@ const eslintConfig = defineConfig([
           ignoreRestSiblings: true,
         },
       ],
+      "@typescript-eslint/consistent-type-assertions": [
+        "warn",
+        { assertionStyle: "never" },
+      ],
     },
   },
   {

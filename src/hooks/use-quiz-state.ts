@@ -17,7 +17,7 @@ export interface WrongWord {
   back_text: string;
 }
 
-function generateQuizQuestions(vocabulary: NaesinVocabulary[], allVocabulary?: NaesinVocabulary[], targetVocab?: NaesinVocabulary[]): QuizQuestion[] {
+export function generateQuizQuestions(vocabulary: NaesinVocabulary[], allVocabulary?: NaesinVocabulary[], targetVocab?: NaesinVocabulary[]): QuizQuestion[] {
   const quizWords = shuffle(targetVocab || vocabulary);
   const optionPool = allVocabulary || vocabulary;
   return quizWords.map((vocab) => {
