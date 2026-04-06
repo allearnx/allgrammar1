@@ -58,6 +58,24 @@ export function DialogueTab({ dialogues, unitId, onStageComplete, naesinRequired
   const dialogue = dialogues[currentIndex];
   const passage = dialogueToTextbookPassage(dialogue);
 
+  async function saveWrongAnswers(wrongItems: unknown[]) {
+    if (wrongItems.length === 0) return;
+    try {
+      await fetchWithToast('/api/naesin/wrong-answers', {
+        body: {
+          unitId,
+          stage: 'dialogue',
+          sourceType: 'translation',
+          wrongAnswers: wrongItems,
+        },
+        silent: true,
+        logContext: 'naesin.dialogue_tab.wrong_answers',
+      });
+    } catch {
+      // error already toasted by fetchWithToast
+    }
+  }
+
   async function saveDialogueProgress(score: number) {
     try {
       const data = await fetchWithToast<{ dialogueCompleted?: boolean }>('/api/naesin/dialogue/progress', {
@@ -146,7 +164,10 @@ export function DialogueTab({ dialogues, unitId, onStageComplete, naesinRequired
           <TranslationExercise
             key={`${dialogue.id}-r${currentRound}`}
             passage={passage}
-            onComplete={(score) => saveDialogueProgress(score)}
+            onComplete={(score, wrongs) => {
+              saveDialogueProgress(score);
+              if (wrongs?.length) saveWrongAnswers(wrongs);
+            }}
             showWrongAlert
           />
         </>

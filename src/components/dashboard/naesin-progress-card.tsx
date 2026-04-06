@@ -1,7 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { format } from 'date-fns';
-import { CheckCircle, Circle, BookOpen, FileText, GraduationCap, ClipboardList, Clock, Settings } from 'lucide-react';
+import { CheckCircle, Circle, BookOpen, FileText, GraduationCap, ClipboardList, Clock, Settings, MessageSquare } from 'lucide-react';
 import { scoreChipClass, passageChipClass, progressBorderClass } from '@/lib/utils/progress-styles';
 import { ExamAssignmentManager } from './exam-assignment-manager';
 import { PassageStageManager } from './passage-stage-manager';
@@ -19,6 +19,8 @@ interface NaesinProgressRow {
   passage_ordering_best: number | null;
   passage_translation_best: number | null;
   passage_grammar_vocab_best: number | null;
+  dialogue_translation_best: number | null;
+  dialogue_completed: boolean;
   grammar_completed: boolean;
   grammar_videos_completed: number;
   grammar_total_videos: number;
@@ -60,10 +62,11 @@ export function NaesinProgressCard({
 }: Props) {
   const naesinUnits = naesinData.units;
   const naesinProgressMap = new Map(naesinProgress.map((p) => [p.unit_id, p]));
+  const stageCount = 5;
   const naesinStagesCompleted = naesinProgress.reduce((acc, p) => {
-    return acc + (p.vocab_completed ? 1 : 0) + (p.passage_completed ? 1 : 0) + (p.grammar_completed ? 1 : 0) + (p.problem_completed ? 1 : 0);
+    return acc + (p.vocab_completed ? 1 : 0) + (p.passage_completed ? 1 : 0) + (p.dialogue_completed ? 1 : 0) + (p.grammar_completed ? 1 : 0) + (p.problem_completed ? 1 : 0);
   }, 0);
-  const naesinTotalStages = naesinUnits.length * 4;
+  const naesinTotalStages = naesinUnits.length * stageCount;
 
   return (
     <Card className="border-l-4 border-l-green-500">
@@ -93,7 +96,7 @@ export function NaesinProgressCard({
               <BookOpen className="h-4 w-4 text-indigo-600 dark:text-indigo-400" />
             </div>
             <div className="text-2xl font-bold tracking-tight">
-              {naesinProgress.filter((p) => p.vocab_completed && p.passage_completed && p.grammar_completed && p.problem_completed).length}/{naesinUnits.length}
+              {naesinProgress.filter((p) => p.vocab_completed && p.passage_completed && p.dialogue_completed && p.grammar_completed && p.problem_completed).length}/{naesinUnits.length}
             </div>
             <p className="text-xs text-muted-foreground">모든 단계 완료된 단원</p>
           </div>
@@ -116,9 +119,12 @@ export function NaesinProgressCard({
               const hasPassageScore = !!progress && (progress.passage_fill_blanks_best != null || progress.passage_ordering_best != null || progress.passage_translation_best != null || progress.passage_grammar_vocab_best != null);
               const hasGrammarProgress = !!progress && (progress.grammar_videos_completed ?? 0) > 0;
 
+              const hasDialogueScore = !!progress && progress.dialogue_translation_best != null;
+
               const stages = [
                 { key: 'vocab', label: '단어', icon: BookOpen, completed: progress?.vocab_completed ?? false, inProgress: false },
                 { key: 'passage', label: '교과서 암기', icon: FileText, completed: progress?.passage_completed ?? false, inProgress: !progress?.passage_completed && hasPassageScore },
+                { key: 'dialogue', label: '대화문', icon: MessageSquare, completed: progress?.dialogue_completed ?? false, inProgress: !progress?.dialogue_completed && hasDialogueScore },
                 { key: 'grammar', label: '문법', icon: GraduationCap, completed: progress?.grammar_completed ?? false, inProgress: !progress?.grammar_completed && hasGrammarProgress },
                 { key: 'problem', label: '문제', icon: ClipboardList, completed: progress?.problem_completed ?? false, inProgress: false },
               ];
@@ -127,7 +133,7 @@ export function NaesinProgressCard({
               return (
                 <div
                   key={unit.id}
-                  className={`rounded-lg border p-3 ${progressBorderClass(completedCount, 4)}`}
+                  className={`rounded-lg border p-3 ${progressBorderClass(completedCount, stageCount)}`}
                 >
                   <div className="flex items-center justify-between mb-2">
                     <div className="flex items-center gap-2">
@@ -135,10 +141,10 @@ export function NaesinProgressCard({
                       <span className="text-sm font-medium truncate">{unit.title}</span>
                     </div>
                     <Badge
-                      variant={completedCount === 4 ? 'default' : 'secondary'}
-                      className={completedCount === 4 ? 'bg-green-500 text-white shrink-0' : 'shrink-0'}
+                      variant={completedCount === stageCount ? 'default' : 'secondary'}
+                      className={completedCount === stageCount ? 'bg-green-500 text-white shrink-0' : 'shrink-0'}
                     >
-                      {completedCount}/4
+                      {completedCount}/{stageCount}
                     </Badge>
                   </div>
                   <div className="flex items-center gap-3">
@@ -157,7 +163,7 @@ export function NaesinProgressCard({
                       </div>
                     ))}
                   </div>
-                  {progress && (progress.vocab_quiz_score !== null || progress.vocab_spelling_score !== null || progress.passage_fill_blanks_best !== null || progress.passage_ordering_best !== null || progress.passage_translation_best !== null || progress.passage_grammar_vocab_best !== null || progress.grammar_total_videos > 0) && (
+                  {progress && (progress.vocab_quiz_score !== null || progress.vocab_spelling_score !== null || progress.passage_fill_blanks_best !== null || progress.passage_ordering_best !== null || progress.passage_translation_best !== null || progress.passage_grammar_vocab_best !== null || progress.dialogue_translation_best !== null || progress.grammar_total_videos > 0) && (
                     <div className="flex gap-2 mt-2 flex-wrap">
                       {progress.vocab_quiz_score !== null && (
                         <span className={`text-xs px-1.5 py-0.5 rounded ${scoreChipClass(progress.vocab_quiz_score)}`}>
@@ -198,6 +204,11 @@ export function NaesinProgressCard({
                       {progress.passage_grammar_vocab_best !== null && (
                         <span className={`text-xs px-1.5 py-0.5 rounded ${passageChipClass}`}>
                           어법/어휘 {progress.passage_grammar_vocab_best}점
+                        </span>
+                      )}
+                      {progress.dialogue_translation_best !== null && (
+                        <span className={`text-xs px-1.5 py-0.5 rounded ${scoreChipClass(progress.dialogue_translation_best)}`}>
+                          대화문 {progress.dialogue_translation_best}점
                         </span>
                       )}
                       {progress.grammar_total_videos > 0 && (

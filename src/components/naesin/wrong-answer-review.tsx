@@ -15,6 +15,7 @@ interface WrongAnswerReviewProps {
 const STAGE_LABELS: Record<string, string> = {
   vocab: '단어',
   passage: '교과서 암기',
+  dialogue: '대화문 암기',
   grammar: '문법',
   problem: '문제풀이',
   lastReview: '직전보강',
