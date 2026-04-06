@@ -15,4 +15,6 @@ export { AiProblemImproveDialog } from './ai-problem-improve-dialog';
 export { CopyProblemDialog } from './copy-problem-dialog';
 export { ImportTemplateDialog } from './import-template-dialog';
 export { EditTemplateDialog } from './edit-template-dialog';
+export { BulkPassageUploadDialog } from './bulk-passage-upload-dialog';
+export { BulkDialogueUploadDialog } from './bulk-dialogue-upload-dialog';
 export { TemplateCopiesDialog } from './template-copies-dialog';

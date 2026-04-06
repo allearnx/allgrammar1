@@ -16,7 +16,7 @@ import {
 import { Collapsible, CollapsibleTrigger, CollapsibleContent } from '@/components/ui/collapsible';
 import { ConfirmDialog } from '@/components/shared/confirm-dialog';
 import { AddVocabDialog, BulkVocabUpload, PdfVocabExtract } from './vocab-dialogs';
-import { AddPassageDialog, AddDialogueDialog, AddGrammarDialog, AddOmrDialog, AddProblemDialog, AddLastReviewDialog, BulkOmrUploadDialog, BulkProblemUploadDialog, PdfProblemExtractDialog, AddTextbookVideoDialog, AddMockExamDialog, AiProblemGenerateDialog, ImportTemplateDialog } from './content-dialogs';
+import { AddPassageDialog, AddDialogueDialog, AddGrammarDialog, AddOmrDialog, AddProblemDialog, AddLastReviewDialog, BulkOmrUploadDialog, BulkProblemUploadDialog, PdfProblemExtractDialog, AddTextbookVideoDialog, AddMockExamDialog, AiProblemGenerateDialog, ImportTemplateDialog, BulkPassageUploadDialog, BulkDialogueUploadDialog } from './content-dialogs';
 import { VocabQuizSetManager } from './quiz-set-manager';
 import { UnitVocabList } from './unit-vocab-list';
 import { UnitPassageList } from './unit-passage-list';
@@ -180,7 +180,9 @@ export function UnitContentManager({ unitId }: { unitId: string }) {
 
         <CollapsibleButtonGroup label="콘텐츠 추가" icon={FileText}>
           <AddPassageDialog unitId={unitId} onAdd={refresh} />
+          <BulkPassageUploadDialog unitId={unitId} onAdd={refresh} />
           <AddDialogueDialog unitId={unitId} onAdd={refresh} />
+          <BulkDialogueUploadDialog unitId={unitId} onAdd={refresh} />
           <AddGrammarDialog unitId={unitId} onAdd={refresh} />
           <AddTextbookVideoDialog unitId={unitId} onAdd={refresh} />
           <AddLastReviewDialog unitId={unitId} onAdd={refresh} />
