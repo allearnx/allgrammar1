@@ -24,6 +24,12 @@ export function YouTubePlayer({
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const lastSavedRef = useRef(0);
 
+  // Stable refs for callbacks to avoid useEffect re-runs
+  const onProgressUpdateRef = useRef(onProgressUpdate);
+  onProgressUpdateRef.current = onProgressUpdate;
+  const onCompleteRef = useRef(onComplete);
+  onCompleteRef.current = onComplete;
+
   const saveProgress = useCallback(
     async (seconds: number, completed: boolean = false) => {
       if (seconds === lastSavedRef.current && !completed) return;
@@ -47,10 +53,14 @@ export function YouTubePlayer({
         }).catch(() => {});
       }
 
-      onProgressUpdate?.(seconds);
+      onProgressUpdateRef.current?.(seconds);
     },
-    [grammarId, onProgressUpdate]
+    [grammarId]
   );
+
+  // Stable ref for saveProgress so useEffect doesn't depend on it
+  const saveProgressRef = useRef(saveProgress);
+  saveProgressRef.current = saveProgress;
 
   useEffect(() => {
     let mounted = true;
@@ -76,14 +86,14 @@ export function YouTubePlayer({
               intervalRef.current = setInterval(() => {
                 if (playerRef.current) {
                   const currentTime = playerRef.current.getCurrentTime();
-                  saveProgress(currentTime);
+                  saveProgressRef.current(currentTime);
                 }
               }, SAVE_INTERVAL_MS);
             }
           } else if (state === YT.PlayerState.PAUSED) {
             // Save on pause
             if (playerRef.current) {
-              saveProgress(playerRef.current.getCurrentTime());
+              saveProgressRef.current(playerRef.current.getCurrentTime());
             }
             if (intervalRef.current) {
               clearInterval(intervalRef.current);
@@ -92,8 +102,8 @@ export function YouTubePlayer({
           } else if (state === YT.PlayerState.ENDED) {
             // Save completion
             if (playerRef.current) {
-              saveProgress(playerRef.current.getDuration(), true);
-              onComplete?.();
+              saveProgressRef.current(playerRef.current.getDuration(), true);
+              onCompleteRef.current?.();
             }
             if (intervalRef.current) {
               clearInterval(intervalRef.current);
@@ -109,7 +119,7 @@ export function YouTubePlayer({
     // Save on visibility change
     function handleVisibilityChange() {
       if (document.hidden && playerRef.current) {
-        saveProgress(playerRef.current.getCurrentTime());
+        saveProgressRef.current(playerRef.current.getCurrentTime());
       }
     }
 
@@ -140,7 +150,8 @@ export function YouTubePlayer({
         playerRef.current.destroy();
       }
     };
-  }, [videoId, grammarId, initialPosition, saveProgress, onComplete]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [videoId, grammarId, initialPosition]);
 
   return (
     <div className="relative w-full aspect-video bg-black rounded-lg overflow-hidden">

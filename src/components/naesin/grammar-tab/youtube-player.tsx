@@ -31,6 +31,10 @@ export function NaesinYouTubePlayerTracked({
   const completedRef = useRef(initialProgress?.completed ?? false);
   const elementId = `naesin-yt-${lessonId}`;
 
+  // Stable refs for callbacks to avoid useEffect re-runs
+  const onVideoProgressRef = useRef(onVideoProgress);
+  onVideoProgressRef.current = onVideoProgress;
+
   const saveProgress = useCallback(
     (position: number, duration: number) => {
       if (completedRef.current) return;
@@ -59,14 +63,19 @@ export function NaesinYouTubePlayerTracked({
         const percent = Math.min(100, Math.round((maxPositionRef.current / duration) * 100));
         const completed = percent >= COMPLETION_THRESHOLD;
         if (completed) completedRef.current = true;
-        onVideoProgress(percent, completed);
+        onVideoProgressRef.current(percent, completed);
       }
     },
-    [lessonId, unitId, onVideoProgress, progressEndpoint]
+    [lessonId, unitId, progressEndpoint]
   );
+
+  // Stable ref for saveProgress so useEffect doesn't depend on it
+  const saveProgressRef = useRef(saveProgress);
+  saveProgressRef.current = saveProgress;
 
   useEffect(() => {
     let mounted = true;
+    const startPosition = initialProgress?.last_position ?? 0;
 
     async function init() {
       await loadYouTubeAPI();
@@ -79,8 +88,7 @@ export function NaesinYouTubePlayerTracked({
           modestbranding: 1,
           rel: 0,
           cc_load_policy: 0,
-          // @ts-expect-error - 'start' is valid YouTube player param
-          ...(initialProgress?.last_position > 0 ? { start: Math.floor(initialProgress.last_position) } : {}),
+          ...(startPosition > 0 ? { start: Math.floor(startPosition) } : {}),
         },
         events: {
           onStateChange: (event: YT.OnStateChangeEvent) => {
@@ -100,7 +108,7 @@ export function NaesinYouTubePlayerTracked({
                     const currentTime = playerRef.current.getCurrentTime();
                     maxPositionRef.current = Math.max(maxPositionRef.current, currentTime);
                     const duration = playerRef.current.getDuration();
-                    saveProgress(maxPositionRef.current, duration);
+                    saveProgressRef.current(maxPositionRef.current, duration);
                   }
                 }, SAVE_INTERVAL_MS);
               }
@@ -112,7 +120,7 @@ export function NaesinYouTubePlayerTracked({
               if (playerRef.current) {
                 const currentTime = playerRef.current.getCurrentTime();
                 maxPositionRef.current = Math.max(maxPositionRef.current, currentTime);
-                saveProgress(maxPositionRef.current, playerRef.current.getDuration());
+                saveProgressRef.current(maxPositionRef.current, playerRef.current.getDuration());
               }
               if (intervalRef.current) {
                 clearInterval(intervalRef.current);
@@ -126,7 +134,7 @@ export function NaesinYouTubePlayerTracked({
               if (playerRef.current) {
                 const duration = playerRef.current.getDuration();
                 maxPositionRef.current = duration;
-                saveProgress(duration, duration);
+                saveProgressRef.current(duration, duration);
               }
               if (intervalRef.current) {
                 clearInterval(intervalRef.current);
@@ -148,7 +156,7 @@ export function NaesinYouTubePlayerTracked({
         }
         const currentTime = playerRef.current.getCurrentTime();
         maxPositionRef.current = Math.max(maxPositionRef.current, currentTime);
-        saveProgress(maxPositionRef.current, playerRef.current.getDuration());
+        saveProgressRef.current(maxPositionRef.current, playerRef.current.getDuration());
       }
     }
 
@@ -178,7 +186,8 @@ export function NaesinYouTubePlayerTracked({
       if (intervalRef.current) clearInterval(intervalRef.current);
       if (playerRef.current) playerRef.current.destroy();
     };
-  }, [videoId, lessonId, unitId, elementId, saveProgress, initialProgress, progressEndpoint]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [videoId, lessonId, unitId, elementId, progressEndpoint]);
 
   return (
     <div className="relative w-full aspect-video bg-black rounded-lg overflow-hidden">
