@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { createClient } from '@/lib/supabase/client';
 import { Loader2 } from 'lucide-react';
@@ -8,38 +8,38 @@ import { Loader2 } from 'lucide-react';
 export default function ImpersonatePage() {
   const router = useRouter();
   const [error, setError] = useState(false);
-  const ran = useRef(false);
 
   useEffect(() => {
-    if (ran.current) return;
-    ran.current = true;
+    async function handleImpersonate() {
+      const hash = window.location.hash;
+      if (!hash) {
+        setError(true);
+        return;
+      }
 
-    const hash = window.location.hash;
-    if (!hash) {
-      setError(true);
-      return;
-    }
+      const params = new URLSearchParams(hash.substring(1));
+      const accessToken = params.get('access_token');
+      const refreshToken = params.get('refresh_token');
 
-    const params = new URLSearchParams(hash.substring(1));
-    const accessToken = params.get('access_token');
-    const refreshToken = params.get('refresh_token');
+      if (!accessToken || !refreshToken) {
+        setError(true);
+        return;
+      }
 
-    if (!accessToken || !refreshToken) {
-      setError(true);
-      return;
-    }
+      const supabase = createClient();
+      const { error: err } = await supabase.auth.setSession({
+        access_token: accessToken,
+        refresh_token: refreshToken,
+      });
 
-    const supabase = createClient();
-    supabase.auth.setSession({
-      access_token: accessToken,
-      refresh_token: refreshToken,
-    }).then(({ error: err }) => {
       if (err) {
         setError(true);
       } else {
         router.replace('/student');
       }
-    });
+    }
+
+    handleImpersonate();
   }, [router]);
 
   if (error) {
