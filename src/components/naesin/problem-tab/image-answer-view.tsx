@@ -11,6 +11,7 @@ import { fetchWithToast } from '@/lib/fetch-with-toast';
 import type { NaesinProblemSheet } from '@/types/database';
 import { useProblemDraft } from '@/hooks/use-problem-draft';
 import type { ImageAnswerDraft } from '@/hooks/use-problem-draft';
+import { isSafeIframeSrc } from '@/lib/utils/safe-url';
 
 export function ImageAnswerView({
   sheet,
@@ -61,12 +62,13 @@ export function ImageAnswerView({
 
   return (
     <div className="space-y-6">
-      {sheet.pdf_url && (
+      {sheet.pdf_url && isSafeIframeSrc(sheet.pdf_url) && (
         <div className="border rounded-lg overflow-hidden">
           <iframe
             src={sheet.pdf_url}
             className="w-full h-[500px]"
             title={sheet.title}
+            sandbox="allow-same-origin"
           />
         </div>
       )}

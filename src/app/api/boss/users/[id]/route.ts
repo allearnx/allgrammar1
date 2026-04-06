@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { createApiHandler, dbResult, NotFoundError, ValidationError } from '@/lib/api';
+import { createApiHandler, dbResult, NotFoundError, ValidationError, ForbiddenError } from '@/lib/api';
 import { auditLog } from '@/lib/api/audit';
 import { userPatchSchema } from '@/lib/api/schemas';
 import { createAdminClient } from '@/lib/supabase/admin';
@@ -60,14 +60,18 @@ export const DELETE = createApiHandler(
       );
     }
 
-    // 대상 사용자 확인
+    // 대상 사용자 확인 + 학원 소속 검증
     const { data: target } = await supabase
       .from('users')
-      .select('id, role, email')
+      .select('id, role, email, academy_id')
       .eq('id', targetId)
       .single();
 
     if (!target) throw new NotFoundError('사용자를 찾을 수 없습니다.');
+
+    if (target.academy_id && user.academy_id && target.academy_id !== user.academy_id) {
+      throw new ForbiddenError('다른 학원 사용자는 삭제할 수 없습니다.');
+    }
 
     // users 테이블에서 삭제
     dbResult(await supabase.from('users').delete().eq('id', targetId));

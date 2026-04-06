@@ -3,7 +3,7 @@ import { createApiHandler, dbResult } from '@/lib/api';
 import { learningSessionHeartbeatSchema } from '@/lib/api/schemas';
 
 export const POST = createApiHandler(
-  { schema: learningSessionHeartbeatSchema },
+  { schema: learningSessionHeartbeatSchema, rateLimit: { max: 120 } },
   async ({ user, body, supabase }) => {
     const { contextType, contextId, seconds } = body;
 

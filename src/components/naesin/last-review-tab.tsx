@@ -10,6 +10,7 @@ import { MCQOptionList } from '@/components/shared/mcq-option-list';
 import { ProblemTab } from './problem-tab';
 import { WrongAnswerReview } from './wrong-answer-review';
 import type { NaesinProblemSheet, NaesinSimilarProblem, NaesinLastReviewContent, NaesinProblemQuestion } from '@/types/database';
+import { isSafeIframeSrc } from '@/lib/utils/safe-url';
 
 interface LastReviewTabProps {
   unitId: string;
@@ -179,11 +180,12 @@ function ReviewContentView({ content }: { content: NaesinLastReviewContent[] }) 
               </div>
             )}
 
-            {item.content_type === 'pdf' && item.pdf_url && (
+            {item.content_type === 'pdf' && item.pdf_url && isSafeIframeSrc(item.pdf_url) && (
               <iframe
                 src={item.pdf_url}
                 className="w-full h-[400px] rounded-lg border"
                 title={item.title}
+                sandbox="allow-same-origin"
               />
             )}
 

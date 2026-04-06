@@ -39,16 +39,21 @@ export const POST = createApiHandler(
     }
 
     // action_link의 redirect_to가 Supabase Site URL(localhost:3000 등)을 사용하므로
-    // 요청 origin으로 통째로 교체
-    const origin = request.headers.get('origin')
+    // 요청 origin으로 통째로 교체 (허용된 origin만)
+    const rawOrigin = request.headers.get('origin')
       || request.headers.get('referer')?.replace(/\/[^/]*$/, '')
       || '';
+    const allowedOrigins = [
+      process.env.NEXT_PUBLIC_SUPABASE_URL ? new URL(request.url).origin : '',
+      'http://localhost:3000',
+    ].filter(Boolean);
+    const origin = allowedOrigins.some((o) => rawOrigin === o || rawOrigin.endsWith('.vercel.app'))
+      ? rawOrigin
+      : new URL(request.url).origin;
     let url = linkData.properties.action_link;
-    if (origin) {
-      const parsed = new URL(url);
-      parsed.searchParams.set('redirect_to', `${origin}/impersonate`);
-      url = parsed.toString();
-    }
+    const parsed = new URL(url);
+    parsed.searchParams.set('redirect_to', `${origin}/impersonate`);
+    url = parsed.toString();
 
     return NextResponse.json({
       url,
