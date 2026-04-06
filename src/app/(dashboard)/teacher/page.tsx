@@ -5,7 +5,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { StatCard } from '@/components/shared/stat-card';
 import { OnboardingGuide } from '@/components/shared/onboarding-guide';
-import { Users, BookOpen, FileText, BookMarked, ClipboardList, BookA } from 'lucide-react';
+import { Users, BookOpen, FileText, FileDown, BookMarked, ClipboardList, BookA } from 'lucide-react';
 import Link from 'next/link';
 import { JoinAcademyForm } from '@/components/dashboard/join-academy-form';
 import { InviteCodeCard } from '@/components/shared/invite-code-card';
@@ -16,6 +16,7 @@ const NAV_CARDS: { title: string; description: string; href: string; icon: Lucid
   { title: '콘텐츠 관리', description: '문법, 암기 항목, 교과서 관리', href: '/teacher/content', icon: BookOpen },
   { title: '내신 관리', description: '내신 대비 교과서/단원 콘텐츠 관리', href: '/teacher/naesin', icon: ClipboardList },
   { title: '리포트', description: '학생 학습 리포트 생성', href: '/teacher/reports', icon: FileText },
+  { title: '학습자료', description: 'PDF 학습자료 업로드 및 관리', href: '/teacher/materials', icon: FileDown },
 ];
 
 export default async function ManagerDashboard() {

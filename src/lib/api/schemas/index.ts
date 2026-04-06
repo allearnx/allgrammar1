@@ -4,3 +4,4 @@ export * from './billing';
 export * from './admin';
 export * from './public';
 export * from './auth';
+export * from './materials';

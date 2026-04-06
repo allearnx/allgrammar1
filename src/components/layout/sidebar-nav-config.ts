@@ -8,6 +8,7 @@ import {
   Receipt,
   Settings,
   Users,
+  FileDown,
   FileText,
   BookMarked,
   BookA,
@@ -60,6 +61,7 @@ export const NAV_CONFIG: Record<string, NavGroup[]> = {
     {
       items: [
         { href: '/student/my-report', label: '내 리포트', icon: FileText },
+        { href: '/student/materials', label: '학습자료', icon: FileDown },
       ],
     },
   ],
@@ -85,6 +87,7 @@ export const NAV_CONFIG: Record<string, NavGroup[]> = {
     {
       items: [
         { href: '/teacher/reports', label: '리포트', icon: FileText },
+        { href: '/teacher/materials', label: '학습자료', icon: FileDown },
       ],
     },
   ],
@@ -117,6 +120,7 @@ export const NAV_CONFIG: Record<string, NavGroup[]> = {
     {
       items: [
         { href: '/admin/reports', label: '리포트', icon: FileText },
+        { href: '/admin/materials', label: '학습자료', icon: FileDown },
       ],
     },
     {
@@ -183,6 +187,7 @@ export const NAV_CONFIG: Record<string, NavGroup[]> = {
     {
       items: [
         { href: '/boss/reports', label: '리포트', icon: FileText },
+        { href: '/boss/materials', label: '학습자료', icon: FileDown },
       ],
     },
   ],
