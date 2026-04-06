@@ -3,7 +3,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Badge } from '@/components/ui/badge';
-import { CheckCircle2, AlertTriangle, XCircle } from 'lucide-react';
+import { CheckCircle2, AlertTriangle, XCircle, Wand2, Plus, X } from 'lucide-react';
 import type { GeneratedQuestion } from './question-utils';
 import { hasOptions } from './question-utils';
 import type { FullValidationResult, ValidationBadge } from '@/lib/validation';
@@ -14,14 +14,34 @@ export function QuestionEditRow({
   onUpdateOption,
   onToggleType,
   onDone,
+  onUpdateAcceptedAnswers,
+  onGenerateAcceptedAnswers,
 }: {
   question: GeneratedQuestion;
   onUpdate: (field: keyof GeneratedQuestion, value: string) => void;
   onUpdateOption: (optIdx: number, value: string) => void;
   onToggleType?: () => void;
   onDone: () => void;
+  onUpdateAcceptedAnswers?: (answers: string[]) => void;
+  onGenerateAcceptedAnswers?: () => void;
 }) {
   const isMcq = hasOptions(question);
+  const accepted = question.acceptedAnswers ?? [];
+
+  function handleAddAccepted() {
+    onUpdateAcceptedAnswers?.([...accepted, '']);
+  }
+
+  function handleRemoveAccepted(idx: number) {
+    onUpdateAcceptedAnswers?.(accepted.filter((_, i) => i !== idx));
+  }
+
+  function handleChangeAccepted(idx: number, value: string) {
+    const next = [...accepted];
+    next[idx] = value;
+    onUpdateAcceptedAnswers?.(next);
+  }
+
   return (
     <td colSpan={6} className="p-3 space-y-2">
       {onToggleType && (
@@ -74,6 +94,64 @@ export function QuestionEditRow({
           <Input value={question.explanation} onChange={(e) => onUpdate('explanation', e.target.value)} />
         </div>
       </div>
+
+      {/* 허용 답안 (서술형만) */}
+      {!isMcq && onUpdateAcceptedAnswers && (
+        <div className="space-y-1.5 border-t pt-2">
+          <div className="flex items-center gap-2">
+            <Label className="text-xs">허용 답안</Label>
+            {onGenerateAcceptedAnswers && (
+              <Button
+                type="button"
+                size="sm"
+                variant="outline"
+                className="h-6 text-xs gap-1"
+                onClick={onGenerateAcceptedAnswers}
+              >
+                <Wand2 className="h-3 w-3" />
+                자동 생성
+              </Button>
+            )}
+            <Button
+              type="button"
+              size="sm"
+              variant="outline"
+              className="h-6 text-xs gap-1"
+              onClick={handleAddAccepted}
+            >
+              <Plus className="h-3 w-3" />
+              추가
+            </Button>
+          </div>
+          {accepted.length > 0 && (
+            <div className="space-y-1">
+              {accepted.map((a, ai) => (
+                <div key={ai} className="flex items-center gap-1">
+                  <Input
+                    value={a}
+                    onChange={(e) => handleChangeAccepted(ai, e.target.value)}
+                    className="h-7 text-xs flex-1"
+                    placeholder="허용 답안 입력"
+                  />
+                  <Button
+                    type="button"
+                    size="sm"
+                    variant="ghost"
+                    className="h-7 w-7 p-0 text-muted-foreground hover:text-destructive"
+                    onClick={() => handleRemoveAccepted(ai)}
+                  >
+                    <X className="h-3 w-3" />
+                  </Button>
+                </div>
+              ))}
+            </div>
+          )}
+          {accepted.length === 0 && (
+            <p className="text-xs text-muted-foreground">허용 답안이 없습니다. 정답만으로 채점됩니다.</p>
+          )}
+        </div>
+      )}
+
       <Button size="sm" variant="outline" onClick={onDone}>편집 완료</Button>
     </td>
   );

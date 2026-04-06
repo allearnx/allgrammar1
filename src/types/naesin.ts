@@ -325,6 +325,7 @@ export interface NaesinProblemQuestion {
   options?: string[];
   answer: string | number;
   explanation?: string;
+  acceptedAnswers?: string[];
 }
 
 export interface NaesinProblemAttempt {

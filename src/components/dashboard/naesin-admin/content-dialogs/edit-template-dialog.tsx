@@ -14,7 +14,7 @@ import { Badge } from '@/components/ui/badge';
 import { Loader2 } from 'lucide-react';
 import { fetchWithToast } from '@/lib/fetch-with-toast';
 import { useQuestionEditor } from '@/hooks/use-question-editor';
-import { toGenerated, toDbQuestion, type GeneratedQuestion } from './question-utils';
+import { toGenerated, toDbQuestion } from './question-utils';
 import { QuestionEditRow, QuestionViewRow } from './question-table-rows';
 import type { NaesinProblemQuestion } from '@/types/naesin';
 
@@ -120,6 +120,8 @@ export function EditTemplateDialog({ template, open, onOpenChange, onUpdated }: 
                       onUpdateOption={(optIdx, value) => editor.updateOption(i, optIdx, value)}
                       onToggleType={() => editor.toggleQuestionType(i)}
                       onDone={() => editor.setEditingIdx(null)}
+                      onUpdateAcceptedAnswers={(answers) => editor.updateAcceptedAnswers(i, answers)}
+                      onGenerateAcceptedAnswers={() => editor.generateAcceptedAnswers(i)}
                     />
                   ) : (
                     <QuestionViewRow

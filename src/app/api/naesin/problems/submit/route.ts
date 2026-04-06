@@ -2,6 +2,15 @@ import { NextResponse } from 'next/server';
 import { createApiHandler, NotFoundError, dbResult } from '@/lib/api';
 import { problemSubmitSchema } from '@/lib/api/schemas';
 
+/** 정규화: 대소문자 무시, 앞뒤 공백, 끝 마침표, 연속 공백 → 단일 공백 */
+function normalize(s: string): string {
+  return s
+    .trim()
+    .toLowerCase()
+    .replace(/\.+\s*$/, '')
+    .replace(/\s+/g, ' ');
+}
+
 export const POST = createApiHandler(
   { schema: problemSubmitSchema },
   async ({ user, body, supabase }) => {
@@ -18,20 +27,30 @@ export const POST = createApiHandler(
 
     // Grade
     const answerKey = sheet.answer_key as (string | number)[];
-    const questions = sheet.questions as { number: number; question: string; options?: string[] }[];
+    const questions = sheet.questions as { number: number; question: string; options?: string[]; acceptedAnswers?: string[] }[];
     let correctCount = 0;
-    const wrongAnswers: { number: number; userAnswer: string | number; correctAnswer: string | number; question?: string; aiFeedback?: { score: number; feedback: string; correctedAnswer: string } }[] = [];
+    const wrongAnswers: { number: number; userAnswer: string | number; correctAnswer: string | number; question?: string }[] = [];
 
     for (let i = 0; i < totalQuestions; i++) {
-      const userAnswer = String(answers[i] ?? '').trim().toLowerCase();
-      const correctAnswer = String(answerKey[i] ?? '').trim().toLowerCase();
-      const aiResult = aiResults?.[String(i)];
+      const userAnswer = String(answers[i] ?? '');
+      const correctAnswer = String(answerKey[i] ?? '');
       const isSubjective = !questions?.[i]?.options || questions[i].options!.length === 0;
 
-      // Subjective with AI result: score >= 80 = correct
-      const isCorrect = (isSubjective && aiResult)
-        ? aiResult.score >= 80
-        : userAnswer === correctAnswer;
+      let isCorrect: boolean;
+
+      if (isSubjective) {
+        // 규칙 기반 정규화 채점: aiResults가 있으면 score === 100, 없으면 정규화 비교
+        const aiResult = aiResults?.[String(i)];
+        if (aiResult) {
+          isCorrect = aiResult.score === 100;
+        } else {
+          const studentNorm = normalize(userAnswer);
+          const candidates = [correctAnswer, ...(questions?.[i]?.acceptedAnswers ?? [])];
+          isCorrect = candidates.some((c) => normalize(c) === studentNorm);
+        }
+      } else {
+        isCorrect = userAnswer.trim().toLowerCase() === correctAnswer.trim().toLowerCase();
+      }
 
       if (isCorrect) {
         correctCount++;
@@ -41,7 +60,6 @@ export const POST = createApiHandler(
           userAnswer: (answers[i] as string | number) ?? '',
           correctAnswer: answerKey[i] ?? '',
           question: questions?.[i]?.question,
-          ...(aiResult ? { aiFeedback: aiResult } : {}),
         });
       }
     }

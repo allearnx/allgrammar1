@@ -6,6 +6,7 @@ export interface GeneratedQuestion {
   options: string[] | null;
   answer: string;
   explanation: string;
+  acceptedAnswers?: string[];
 }
 
 export function hasOptions(q: GeneratedQuestion): boolean {
@@ -20,6 +21,7 @@ export function normalizeQuestions(raw: Record<string, unknown>[]): GeneratedQue
     options: Array.isArray(q.options) && q.options.length > 0 ? q.options as string[] : null,
     answer: String(q.answer ?? ''),
     explanation: (q.explanation as string) || '',
+    acceptedAnswers: Array.isArray(q.acceptedAnswers) ? q.acceptedAnswers as string[] : undefined,
   }));
 }
 
@@ -31,6 +33,7 @@ export function toGenerated(q: NaesinProblemQuestion): GeneratedQuestion {
     options: q.options && q.options.length > 0 ? q.options : null,
     answer: String(q.answer ?? ''),
     explanation: q.explanation || '',
+    acceptedAnswers: q.acceptedAnswers,
   };
 }
 
@@ -42,5 +45,6 @@ export function toDbQuestion(q: GeneratedQuestion, idx: number): NaesinProblemQu
     ...(hasOptions(q) ? { options: q.options! } : {}),
     answer: q.answer,
     ...(q.explanation ? { explanation: q.explanation } : {}),
+    ...(q.acceptedAnswers && q.acceptedAnswers.length > 0 ? { acceptedAnswers: q.acceptedAnswers } : {}),
   };
 }

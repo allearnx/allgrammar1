@@ -6,8 +6,8 @@ function draftKey(sheetId: string) {
 
 export interface AiFeedback {
   score: number;
-  feedback: string;
-  correctedAnswer: string;
+  feedback?: string;
+  correctedAnswer?: string;
 }
 
 export interface WrongItem {

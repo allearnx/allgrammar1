@@ -39,6 +39,57 @@ export function useQuestionEditor(initial: GeneratedQuestion[] = []) {
     );
   }
 
+  function updateAcceptedAnswers(idx: number, answers: string[]) {
+    setQuestions((prev) =>
+      prev.map((q, i) => (i === idx ? { ...q, acceptedAnswers: answers } : q))
+    );
+  }
+
+  /** 정답 기반으로 허용 답안 자동 생성 */
+  function generateAcceptedAnswers(idx: number) {
+    const q = questions[idx];
+    if (!q) return;
+
+    const answer = String(q.answer).trim();
+    if (!answer) return;
+
+    const variants = new Set<string>();
+    variants.add(answer);
+
+    // 마침표 있는/없는 버전
+    if (answer.endsWith('.')) {
+      variants.add(answer.slice(0, -1));
+    } else {
+      variants.add(answer + '.');
+    }
+
+    // 첫 글자 대문자/소문자 변형
+    for (const v of [...variants]) {
+      if (v.length > 0) {
+        variants.add(v.charAt(0).toUpperCase() + v.slice(1));
+        variants.add(v.charAt(0).toLowerCase() + v.slice(1));
+      }
+    }
+
+    // 하위 문항 (1) xxx (2) yyy 형태 감지 및 변형
+    const subItemPattern = /\(\d+\)\s*[^()]+/g;
+    const subItems = answer.match(subItemPattern);
+    if (subItems && subItems.length > 1) {
+      // 각 하위 문항 사이에 줄바꿈 또는 콤마로 분리한 변형
+      const items = subItems.map((s) => s.trim());
+      variants.add(items.join(' '));
+      variants.add(items.join(', '));
+      variants.add(items.join('\n'));
+    }
+
+    // 원본 답은 제외 (이미 referenceAnswer로 비교됨)
+    variants.delete(answer);
+
+    setQuestions((prev) =>
+      prev.map((q, i) => (i === idx ? { ...q, acceptedAnswers: [...variants] } : q))
+    );
+  }
+
   return {
     questions,
     setQuestions,
@@ -48,5 +99,7 @@ export function useQuestionEditor(initial: GeneratedQuestion[] = []) {
     updateOption,
     deleteQuestion,
     toggleQuestionType,
+    updateAcceptedAnswers,
+    generateAcceptedAnswers,
   };
 }

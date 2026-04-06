@@ -52,8 +52,8 @@ export const problemSubmitSchema = z.object({
   totalQuestions: z.number(),
   aiResults: z.record(z.string(), z.object({
     score: z.number(),
-    feedback: z.string(),
-    correctedAnswer: z.string(),
+    feedback: z.string().optional(),
+    correctedAnswer: z.string().optional(),
   })).nullish(),
 });
 
@@ -98,6 +98,7 @@ export const gradeSubjectiveSchema = z.object({
   question: LONG,
   referenceAnswer: LONG,
   studentAnswer: LONG,
+  acceptedAnswers: z.array(z.string()).nullish(),
 });
 
 export const legacyVideoProgressSchema = z.object({

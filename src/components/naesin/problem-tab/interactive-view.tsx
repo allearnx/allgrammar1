@@ -5,15 +5,15 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { Badge } from '@/components/ui/badge';
-import { Loader2, Bot, Clock, Save } from 'lucide-react';
+import { Loader2, Clock, Save } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { MCQOptionList } from '@/components/shared/mcq-option-list';
 import type { NaesinProblemSheet, NaesinProblemQuestion } from '@/types/database';
-import type { AiFeedback, WrongItem } from '@/hooks/use-problem-draft';
+import type { WrongItem } from '@/hooks/use-problem-draft';
 import { useInteractiveProblem } from './use-interactive-problem';
 import { ResultsScreen } from './results-screen';
 
-export type { AiFeedback, WrongItem };
+export type { WrongItem };
 
 function TimerBadge({ remaining, isExpired }: { remaining: number; isExpired: boolean }) {
   if (isExpired) {
@@ -64,40 +64,13 @@ function SubjectiveInput({ onSubmit, disabled, isGrading }: { onSubmit: (answer:
         {isGrading ? (
           <>
             <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-            AI 채점 중...
+            채점 중...
           </>
         ) : (
           '제출'
         )}
       </Button>
     </div>
-  );
-}
-
-function AiFeedbackCard({ feedback, isCorrect }: { feedback: AiFeedback; isCorrect: boolean }) {
-  return (
-    <Card className={cn(
-      'border',
-      isCorrect ? 'bg-green-50 border-green-200' : 'bg-orange-50 border-orange-200'
-    )}>
-      <CardContent className="py-3 space-y-2">
-        <div className="flex items-center gap-2">
-          <Bot className="h-4 w-4 text-indigo-600" />
-          <span className="text-sm font-medium text-indigo-700">AI 채점</span>
-          <Badge variant={isCorrect ? 'default' : 'secondary'} className={cn(
-            'ml-auto',
-            isCorrect ? 'bg-green-600' : 'bg-orange-500 text-white'
-          )}>
-            {feedback.score}점
-          </Badge>
-        </div>
-        <p className="text-sm">{feedback.feedback}</p>
-        <div className="text-sm">
-          <span className="font-medium text-green-700">교정 답안: </span>
-          <span className="text-green-800">{feedback.correctedAnswer}</span>
-        </div>
-      </CardContent>
-    </Card>
   );
 }
 
@@ -113,7 +86,7 @@ export function InteractiveProblemView({
   const questions = sheet.questions as NaesinProblemQuestion[];
   const {
     currentIndex, selectedAnswer, showResult, score, finished,
-    wrongList, isGrading, currentAiFeedback,
+    wrongList, isGrading, isCurrentCorrect,
     question, isSubjective, remaining, isExpired,
     handleSelect, handleNext, handleMidSave, isMidSaving, answersMap,
   } = useInteractiveProblem({ sheetId: sheet.id, questions, unitId, onComplete });
@@ -125,12 +98,6 @@ export function InteractiveProblemView({
   if (finished) {
     return <ResultsScreen score={score} totalQuestions={questions.length} wrongList={wrongList} />;
   }
-
-  const isCurrentCorrect = showResult && (
-    isSubjective
-      ? (currentAiFeedback ? currentAiFeedback.score >= 80 : false)
-      : String(selectedAnswer) === String(question.answer)
-  );
 
   return (
     <div className="space-y-6">
@@ -195,8 +162,10 @@ export function InteractiveProblemView({
           )}>
             {isCurrentCorrect ? '정답입니다!' : '오답입니다'}
           </div>
-          {currentAiFeedback && (
-            <AiFeedbackCard feedback={currentAiFeedback} isCorrect={isCurrentCorrect} />
+          {!isCurrentCorrect && (
+            <div className="text-center text-sm text-green-700 bg-green-50 py-1.5 rounded-md">
+              정답: {String(question.answer)}
+            </div>
           )}
         </div>
       )}

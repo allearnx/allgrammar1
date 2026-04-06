@@ -39,7 +39,7 @@ export function useInteractiveProblem({
     return d?.mode === 'interactive' ? d.wrongList : [];
   });
   const [isGrading, setIsGrading] = useState(false);
-  const [currentAiFeedback, setCurrentAiFeedback] = useState<AiFeedback | null>(null);
+  const [subjectiveResult, setSubjectiveResult] = useState<{ score: number } | null>(null);
   const [aiResultsMap, setAiResultsMap] = useState<Record<string, AiFeedback>>(() => {
     const d = loadDraft();
     return d?.mode === 'interactive' ? d.aiResultsMap : {};
@@ -79,19 +79,19 @@ export function useInteractiveProblem({
   const timeLimit = isSubjective ? SUBJECTIVE_TIME_LIMIT : MCQ_TIME_LIMIT;
   const { remaining, isExpired, reset: resetTimer, pause: pauseTimer } = useQuestionTimer(timeLimit);
 
-  async function gradeSubjective(studentAnswer: string): Promise<AiFeedback | null> {
+  async function gradeSubjective(studentAnswer: string): Promise<{ score: number } | null> {
     try {
-      return await fetchWithToast<AiFeedback>('/api/naesin/problems/grade-subjective', {
+      return await fetchWithToast<{ score: number }>('/api/naesin/problems/grade-subjective', {
         body: {
           question: question.question,
           referenceAnswer: String(question.answer),
           studentAnswer,
+          acceptedAnswers: question.acceptedAnswers,
         },
-        errorMessage: 'AI 채점에 실패했습니다.',
+        errorMessage: '채점에 실패했습니다.',
         logContext: 'naesin.interactive_view',
       });
     } catch {
-      // error already toasted by fetchWithToast (includes 429 server message)
       return null;
     }
   }
@@ -119,7 +119,6 @@ export function useInteractiveProblem({
     correct: boolean,
     answer: string | number,
     q: NaesinProblemQuestion,
-    aiFeedback?: AiFeedback,
   ): { newScore: typeof score; newWrongList: WrongItem[] } {
     if (correct) {
       const newScore = { ...score, correct: score.correct + 1 };
@@ -133,7 +132,6 @@ export function useInteractiveProblem({
       userAnswer: answer,
       correctAnswer: q.answer,
       question: q.question,
-      ...(aiFeedback ? { aiFeedback } : {}),
     };
     const newWrongList = [...wrongList, wrongItem];
     setWrongList(newWrongList);
@@ -174,18 +172,20 @@ export function useInteractiveProblem({
 
     if (isSubjective) {
       setIsGrading(true);
-      const aiFeedback = await gradeSubjective(String(answer));
+      const result = await gradeSubjective(String(answer));
       setIsGrading(false);
 
-      if (aiFeedback) {
-        setCurrentAiFeedback(aiFeedback);
+      if (result) {
+        setSubjectiveResult(result);
+        const aiFeedback: AiFeedback = { score: result.score };
         const newAiMap = { ...aiResultsMap, [String(currentIndex)]: aiFeedback };
         setAiResultsMap(newAiMap);
-        const correct = aiFeedback.score >= 80;
+        const correct = result.score === 100;
         setShowResult(true);
-        const { newScore, newWrongList } = applyResult(correct, answer, question, aiFeedback);
+        const { newScore, newWrongList } = applyResult(correct, answer, question);
         finishOrSave(isLast, answer, newScore, newWrongList, newAiMap, currentOvertime);
       } else {
+        // Fallback: simple string comparison
         const correct = String(answer).trim().toLowerCase() === String(question.answer).trim().toLowerCase();
         setShowResult(true);
         const { newScore, newWrongList } = applyResult(correct, answer, question);
@@ -206,7 +206,7 @@ export function useInteractiveProblem({
       setCurrentIndex(currentIndex + 1);
       setShowResult(false);
       setSelectedAnswer(null);
-      setCurrentAiFeedback(null);
+      setSubjectiveResult(null);
       resetTimer(nextIsSubjective ? SUBJECTIVE_TIME_LIMIT : MCQ_TIME_LIMIT);
     }
   }
@@ -269,6 +269,13 @@ export function useInteractiveProblem({
     }
   }
 
+  // Compute isCurrentCorrect for the view
+  const isCurrentCorrect = showResult && (
+    isSubjective
+      ? (subjectiveResult ? subjectiveResult.score === 100 : false)
+      : String(selectedAnswer) === String(question.answer)
+  );
+
   return {
     currentIndex,
     selectedAnswer,
@@ -277,7 +284,7 @@ export function useInteractiveProblem({
     finished,
     wrongList,
     isGrading,
-    currentAiFeedback,
+    isCurrentCorrect,
     question,
     isSubjective,
     remaining,
