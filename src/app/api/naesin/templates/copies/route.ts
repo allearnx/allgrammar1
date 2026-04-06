@@ -1,12 +1,14 @@
 import { NextResponse } from 'next/server';
 import { createApiHandler, dbResult } from '@/lib/api';
+import { requireContentPermission } from '@/lib/api/require-content-permission';
 
 interface UnitRow { id: string; title: string; unit_number: number; textbook_id: string }
 interface TbRow { id: string; display_name: string }
 
 export const GET = createApiHandler(
-  { roles: ['boss'], hasBody: false },
-  async ({ supabase, request }) => {
+  { roles: ['teacher', 'admin', 'boss'], hasBody: false },
+  async ({ supabase, request, user }) => {
+    await requireContentPermission(user, supabase);
     const { searchParams } = new URL(request.url);
     const templateId = searchParams.get('templateId');
     if (!templateId) {

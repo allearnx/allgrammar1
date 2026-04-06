@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { createApiHandler, dbResult } from '@/lib/api';
+import { requireContentPermission } from '@/lib/api/require-content-permission';
 import { templateCreateSchema, templatePatchSchema } from '@/lib/api/schemas';
 
 const ADMIN_ROLES = ['teacher', 'admin', 'boss'] as const;
@@ -26,8 +27,9 @@ export const GET = createApiHandler(
 );
 
 export const POST = createApiHandler(
-  { roles: ['boss'], schema: templateCreateSchema },
+  { roles: [...ADMIN_ROLES], schema: templateCreateSchema },
   async ({ body, supabase, user }) => {
+    await requireContentPermission(user, supabase);
     const { title, templateTopic, questions, answerKey, category, mode } = body;
 
     const inserted = dbResult(await supabase
@@ -49,8 +51,9 @@ export const POST = createApiHandler(
 );
 
 export const PATCH = createApiHandler(
-  { roles: ['boss'], schema: templatePatchSchema },
-  async ({ body, supabase }) => {
+  { roles: [...ADMIN_ROLES], schema: templatePatchSchema },
+  async ({ body, supabase, user }) => {
+    await requireContentPermission(user, supabase);
     const { id, title, templateTopic, questions, answerKey, syncCopies } = body;
 
     const updates: Record<string, unknown> = {};
@@ -91,8 +94,9 @@ export const PATCH = createApiHandler(
 );
 
 export const DELETE = createApiHandler(
-  { roles: ['boss'] },
-  async ({ supabase, request }) => {
+  { roles: [...ADMIN_ROLES] },
+  async ({ supabase, request, user }) => {
+    await requireContentPermission(user, supabase);
     const { searchParams } = new URL(request.url);
     const id = searchParams.get('id');
     if (!id) {
