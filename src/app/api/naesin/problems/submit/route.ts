@@ -1,15 +1,7 @@
 import { NextResponse } from 'next/server';
 import { createApiHandler, NotFoundError, dbResult } from '@/lib/api';
 import { problemSubmitSchema } from '@/lib/api/schemas';
-
-/** 정규화: 대소문자 무시, 앞뒤 공백, 끝 마침표, 연속 공백 → 단일 공백 */
-function normalize(s: string): string {
-  return s
-    .trim()
-    .toLowerCase()
-    .replace(/\.+\s*$/, '')
-    .replace(/\s+/g, ' ');
-}
+import { normalize } from '@/lib/naesin/normalize-answer';
 
 export const POST = createApiHandler(
   { schema: problemSubmitSchema },

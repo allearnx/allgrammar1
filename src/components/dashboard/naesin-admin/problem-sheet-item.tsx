@@ -1,7 +1,7 @@
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
-import { ClipboardList, ChevronDown, ChevronRight, Pencil, Trash2, Loader2, Wand2, Copy, Bookmark, ArrowUp, ArrowDown } from 'lucide-react';
+import { ClipboardList, ChevronDown, ChevronRight, Pencil, Trash2, Loader2, Wand2, Copy, Bookmark, ArrowUp, ArrowDown, RotateCcw } from 'lucide-react';
 import type { NaesinProblemSheet, NaesinProblemQuestion } from '@/types/naesin';
 import { QuestionEditRow, QuestionViewRow } from './content-dialogs/question-table-rows';
 import { toGenerated, type GeneratedQuestion } from './content-dialogs/question-utils';
@@ -36,6 +36,8 @@ interface ProblemSheetItemProps {
   onDoneEditing: () => void;
   onSetEditingIdx: (idx: number) => void;
   onDeleteQuestion: (idx: number) => void;
+  onRegrade: (sheetId: string) => void;
+  regrading: boolean;
 }
 
 export function ProblemSheetItem({
@@ -68,6 +70,8 @@ export function ProblemSheetItem({
   onDoneEditing,
   onSetEditingIdx,
   onDeleteQuestion,
+  onRegrade,
+  regrading,
 }: ProblemSheetItemProps) {
   const questions: NaesinProblemQuestion[] = sheet.questions || [];
   const mcqCount = questions.filter((q) => q.options && q.options.length > 0).length;
@@ -135,6 +139,17 @@ export function ProblemSheetItem({
             <Bookmark className="h-3.5 w-3.5 text-amber-500" />
           </Button>
         )}
+        <Button
+          variant="ghost"
+          size="icon"
+          className="h-6 w-6 opacity-0 group-hover:opacity-100"
+          onClick={(e) => { e.stopPropagation(); onRegrade(sheet.id); }}
+          disabled={regrading}
+          aria-label="재채점"
+          title="제출된 시도 재채점"
+        >
+          {regrading ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <RotateCcw className="h-3.5 w-3.5 text-emerald-500" />}
+        </Button>
         <Button
           variant="ghost"
           size="icon"

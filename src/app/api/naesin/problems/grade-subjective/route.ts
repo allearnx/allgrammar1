@@ -1,15 +1,7 @@
 import { NextResponse } from 'next/server';
 import { createApiHandler } from '@/lib/api';
 import { gradeSubjectiveSchema } from '@/lib/api/schemas';
-
-/** 정규화: 대소문자 무시, 앞뒤 공백, 끝 마침표, 연속 공백 → 단일 공백 */
-function normalize(s: string): string {
-  return s
-    .trim()
-    .toLowerCase()
-    .replace(/\.+\s*$/, '')   // 끝의 마침표(+뒤 공백) 제거
-    .replace(/\s+/g, ' ');    // 연속 공백 → 단일 공백
-}
+import { normalize } from '@/lib/naesin/normalize-answer';
 
 export const POST = createApiHandler(
   { schema: gradeSubjectiveSchema, rateLimit: { max: 60 } },

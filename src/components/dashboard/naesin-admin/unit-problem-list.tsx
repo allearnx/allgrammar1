@@ -12,6 +12,7 @@ import {
   DialogTitle,
   DialogFooter,
 } from '@/components/ui/dialog';
+import { toast } from 'sonner';
 import { fetchWithToast } from '@/lib/fetch-with-toast';
 import type { NaesinProblemSheet, NaesinTemplate } from '@/types/naesin';
 import { toGenerated, toDbQuestion } from './content-dialogs/question-utils';
@@ -41,6 +42,7 @@ export function UnitProblemList({ sheets, onUpdate, onRequestDelete }: UnitProbl
   const [templateTopic, setTemplateTopic] = useState('');
   const [savingTemplate, setSavingTemplate] = useState(false);
   const [reordering, setReordering] = useState(false);
+  const [regradingId, setRegradingId] = useState<string | null>(null);
 
   async function moveSheet(index: number, direction: 'up' | 'down') {
     const swapIdx = direction === 'up' ? index - 1 : index + 1;
@@ -135,6 +137,25 @@ export function UnitProblemList({ sheets, onUpdate, onRequestDelete }: UnitProbl
     }
   }
 
+  async function regrade(sheetId: string) {
+    setRegradingId(sheetId);
+    try {
+      const result = await fetchWithToast<{ total: number; changed: number }>('/api/naesin/problems/regrade', {
+        method: 'POST',
+        body: { sheetId },
+        errorMessage: '재채점 실패',
+        logContext: 'unit.regrade_sheet',
+      });
+      toast.success(
+        result.changed > 0
+          ? `${result.total}개 시도 중 ${result.changed}개 점수 변경`
+          : '변경된 시도 없음',
+      );
+    } catch { /* fetchWithToast handles error toasts */ } finally {
+      setRegradingId(null);
+    }
+  }
+
   return (
     <div className="space-y-1 rounded-lg border p-2">
       {sheets.map((sheet, sheetIdx) => (
@@ -169,6 +190,8 @@ export function UnitProblemList({ sheets, onUpdate, onRequestDelete }: UnitProbl
           onDoneEditing={() => editor.setEditingIdx(null)}
           onSetEditingIdx={editor.setEditingIdx}
           onDeleteQuestion={editor.deleteQuestion}
+          onRegrade={regrade}
+          regrading={regradingId === sheet.id}
         />
       ))}
 
