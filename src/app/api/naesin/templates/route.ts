@@ -51,7 +51,7 @@ export const POST = createApiHandler(
 export const PATCH = createApiHandler(
   { roles: ['boss'], schema: templatePatchSchema },
   async ({ body, supabase }) => {
-    const { id, title, templateTopic, questions, answerKey } = body;
+    const { id, title, templateTopic, questions, answerKey, syncCopies } = body;
 
     const updates: Record<string, unknown> = {};
     if (title != null) updates.title = title;
@@ -70,7 +70,23 @@ export const PATCH = createApiHandler(
       .select()
       .single());
 
-    return NextResponse.json(updated);
+    // 복사본 일괄 업데이트
+    let syncedCount = 0;
+    if (syncCopies && (questions != null || answerKey != null)) {
+      const sheetUpdates: Record<string, unknown> = {};
+      if (questions != null) sheetUpdates.questions = questions;
+      if (answerKey != null) sheetUpdates.answer_key = answerKey;
+
+      const { data: synced } = await supabase
+        .from('naesin_problem_sheets')
+        .update(sheetUpdates)
+        .eq('source_template_id', id)
+        .select('id');
+
+      syncedCount = synced?.length ?? 0;
+    }
+
+    return NextResponse.json({ ...updated, syncedCount });
   }
 );
 

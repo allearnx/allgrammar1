@@ -420,6 +420,7 @@ export const templatePatchSchema = z.object({
   templateTopic: SHORT.nullish(),
   questions: z.array(z.unknown()).nullish(),
   answerKey: z.array(z.unknown()).nullish(),
+  syncCopies: z.boolean().optional(),
 });
 
 export const templateImportSchema = z.object({

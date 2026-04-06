@@ -11,7 +11,9 @@ import {
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
-import { Loader2 } from 'lucide-react';
+import { Loader2, RefreshCw } from 'lucide-react';
+import { Checkbox } from '@/components/ui/checkbox';
+import { toast } from 'sonner';
 import { fetchWithToast } from '@/lib/fetch-with-toast';
 import { useQuestionEditor } from '@/hooks/use-question-editor';
 import { toGenerated, toDbQuestion } from './question-utils';
@@ -34,6 +36,7 @@ export function EditTemplateDialog({ template, open, onOpenChange, onUpdated }: 
   const [title, setTitle] = useState(template.title);
   const [topic, setTopic] = useState(template.template_topic);
   const [saving, setSaving] = useState(false);
+  const [syncCopies, setSyncCopies] = useState(false);
   const editor = useQuestionEditor();
 
   useEffect(() => {
@@ -52,7 +55,7 @@ export function EditTemplateDialog({ template, open, onOpenChange, onUpdated }: 
     try {
       const questions = editor.questions.map(toDbQuestion);
       const answerKey = editor.questions.map((q) => q.answer);
-      await fetchWithToast('/api/naesin/templates', {
+      const result = await fetchWithToast<{ syncedCount?: number }>('/api/naesin/templates', {
         method: 'PATCH',
         body: {
           id: template.id,
@@ -60,11 +63,18 @@ export function EditTemplateDialog({ template, open, onOpenChange, onUpdated }: 
           templateTopic: topic.trim(),
           questions,
           answerKey,
+          syncCopies,
         },
-        successMessage: '템플릿이 수정되었습니다',
+        successMessage: syncCopies
+          ? undefined
+          : '템플릿이 수정되었습니다',
         errorMessage: '템플릿 수정 실패',
         logContext: 'template.edit',
       });
+      if (syncCopies) {
+        const cnt = result?.syncedCount ?? 0;
+        toast.success(`템플릿 수정 완료 (복사본 ${cnt}개 업데이트)`);
+      }
       onUpdated();
       onOpenChange(false);
     } catch { /* */ } finally {
@@ -136,12 +146,19 @@ export function EditTemplateDialog({ template, open, onOpenChange, onUpdated }: 
           </table>
         </div>
 
-        <DialogFooter className="gap-2">
-          <Button variant="outline" size="sm" onClick={() => onOpenChange(false)}>취소</Button>
-          <Button size="sm" onClick={handleSave} disabled={saving || !title.trim() || !topic.trim()}>
-            {saving && <Loader2 className="h-3.5 w-3.5 mr-1 animate-spin" />}
-            저장
-          </Button>
+        <DialogFooter className="gap-2 flex-col sm:flex-row items-start sm:items-center">
+          <label className="flex items-center gap-2 text-xs text-muted-foreground mr-auto cursor-pointer">
+            <Checkbox checked={syncCopies} onCheckedChange={(v) => setSyncCopies(v === true)} />
+            <RefreshCw className="h-3 w-3" />
+            복사본 일괄 업데이트
+          </label>
+          <div className="flex gap-2">
+            <Button variant="outline" size="sm" onClick={() => onOpenChange(false)}>취소</Button>
+            <Button size="sm" onClick={handleSave} disabled={saving || !title.trim() || !topic.trim()}>
+              {saving && <Loader2 className="h-3.5 w-3.5 mr-1 animate-spin" />}
+              저장
+            </Button>
+          </div>
         </DialogFooter>
       </DialogContent>
     </Dialog>
