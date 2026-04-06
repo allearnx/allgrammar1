@@ -47,23 +47,21 @@ export function UnitProblemList({ sheets, onUpdate, onRequestDelete }: UnitProbl
     if (swapIdx < 0 || swapIdx >= sheets.length) return;
     setReordering(true);
     try {
-      const a = sheets[index];
-      const b = sheets[swapIdx];
-      const [aOrder, bOrder] = [a.sort_order, b.sort_order];
-      const newAOrder = aOrder === bOrder ? (direction === 'up' ? aOrder - 1 : aOrder + 1) : bOrder;
-      const newBOrder = aOrder === bOrder ? aOrder : aOrder;
-      const [updA, updB] = await Promise.all([
-        fetchWithToast<NaesinProblemSheet>('/api/naesin/problems', {
-          method: 'PATCH', body: { id: a.id, sort_order: newAOrder },
-          logContext: 'unit.reorder_sheet',
-        }),
-        fetchWithToast<NaesinProblemSheet>('/api/naesin/problems', {
-          method: 'PATCH', body: { id: b.id, sort_order: newBOrder },
-          logContext: 'unit.reorder_sheet',
-        }),
-      ]);
-      onUpdate(updA);
-      onUpdate(updB);
+      // Normalize all sort_orders to sequential indices, with swap applied
+      const batch: { id: string; sort_order: number }[] = [];
+      sheets.forEach((s, i) => {
+        const target = i === index ? swapIdx : i === swapIdx ? index : i;
+        if (s.sort_order !== target) batch.push({ id: s.id, sort_order: target });
+      });
+      const results = await Promise.all(
+        batch.map(({ id, sort_order }) =>
+          fetchWithToast<NaesinProblemSheet>('/api/naesin/problems', {
+            method: 'PATCH', body: { id, sort_order },
+            logContext: 'unit.reorder_sheet',
+          })
+        )
+      );
+      results.forEach(onUpdate);
     } catch { /* */ } finally {
       setReordering(false);
     }
