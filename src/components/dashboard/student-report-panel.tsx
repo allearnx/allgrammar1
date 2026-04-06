@@ -224,7 +224,7 @@ export function StudentReportPanel({ studentId, services: servicesProp, token, r
 
           {/* ── 오답 분석 ── */}
           <TabsContent value="wrong" className="mt-4">
-            <WrongAnalysisTab data={data} hasVoca={hasVoca} hasNaesin={hasNaesin} />
+            <WrongAnalysisTab data={data} hasVoca={hasVoca} hasNaesin={hasNaesin} studentId={studentId} role={role} />
           </TabsContent>
 
           {/* ── 학습 기록 ── */}

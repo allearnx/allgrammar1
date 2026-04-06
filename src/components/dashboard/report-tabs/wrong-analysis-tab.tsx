@@ -1,8 +1,27 @@
+'use client';
+
+import { lazy, Suspense, useState } from 'react';
 import { Badge } from '@/components/ui/badge';
-import { PartyPopper } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { PartyPopper, Loader2, Eye, EyeOff } from 'lucide-react';
 import type { StudentReportData } from '@/types/student-report';
 
-export function WrongAnalysisTab({ data, hasVoca, hasNaesin }: { data: StudentReportData; hasVoca: boolean; hasNaesin: boolean }) {
+const WrongAnswerDetailPanel = lazy(() =>
+  import('./wrong-answer-detail-panel').then((m) => ({ default: m.WrongAnswerDetailPanel }))
+);
+
+interface Props {
+  data: StudentReportData;
+  hasVoca: boolean;
+  hasNaesin: boolean;
+  studentId?: string;
+  role?: string;
+}
+
+export function WrongAnalysisTab({ data, hasVoca, hasNaesin, studentId, role }: Props) {
+  const [showDetail, setShowDetail] = useState(false);
+  const isStaff = role === 'teacher' || role === 'admin' || role === 'boss';
+
   return (
     <div className="space-y-6">
       {hasVoca && data.wrongAnalysis.vocaTopWrong.length > 0 && (
@@ -58,6 +77,32 @@ export function WrongAnalysisTab({ data, hasVoca, hasNaesin }: { data: StudentRe
             ))}
           </div>
         </div>
+      )}
+
+      {/* 선생님/원장/boss: 오답 상세 보기 버튼 */}
+      {isStaff && studentId && hasNaesin && (
+        <Button
+          variant="outline"
+          size="sm"
+          className="w-full gap-2"
+          onClick={() => setShowDetail((prev) => !prev)}
+        >
+          {showDetail ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+          {showDetail ? '오답 상세 닫기' : '오답 상세 보기'}
+        </Button>
+      )}
+
+      {showDetail && studentId && (
+        <Suspense
+          fallback={
+            <div className="flex items-center justify-center py-8">
+              <Loader2 className="h-5 w-5 animate-spin text-violet-500" />
+              <span className="ml-2 text-sm text-gray-500">로딩 중...</span>
+            </div>
+          }
+        >
+          <WrongAnswerDetailPanel studentId={studentId} />
+        </Suspense>
       )}
 
       {data.wrongAnalysis.vocaTopWrong.length === 0 && data.wrongAnalysis.naesinWrongByStage.length === 0 && (
