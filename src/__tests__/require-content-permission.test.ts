@@ -30,16 +30,12 @@ function makeSupabase(canManageContent: boolean) {
 }
 
 describe('requireContentPermission', () => {
-  it('boss + can_manage_content=true → 통과', async () => {
+  it('boss는 DB 조회 없이 즉시 통과', async () => {
+    const supabase = makeSupabase(false);
     await expect(
-      requireContentPermission(makeUser({ role: 'boss' }), makeSupabase(true))
+      requireContentPermission(makeUser({ role: 'boss' }), supabase)
     ).resolves.toBeUndefined();
-  });
-
-  it('boss + can_manage_content=false → ForbiddenError', async () => {
-    await expect(
-      requireContentPermission(makeUser({ role: 'boss' }), makeSupabase(false))
-    ).rejects.toThrow(ForbiddenError);
+    expect(supabase.from).not.toHaveBeenCalled();
   });
 
   it('teacher + can_manage_content=true → 통과', async () => {
