@@ -19,6 +19,8 @@ interface NaesinProgressRow {
   passage_ordering_best: number | null;
   passage_translation_best: number | null;
   passage_grammar_vocab_best: number | null;
+  dialogue_ordering_best: number | null;
+  dialogue_first_letter_best: number | null;
   dialogue_translation_best: number | null;
   dialogue_completed: boolean;
   grammar_completed: boolean;
@@ -119,7 +121,7 @@ export function NaesinProgressCard({
               const hasPassageScore = !!progress && (progress.passage_fill_blanks_best != null || progress.passage_ordering_best != null || progress.passage_translation_best != null || progress.passage_grammar_vocab_best != null);
               const hasGrammarProgress = !!progress && (progress.grammar_videos_completed ?? 0) > 0;
 
-              const hasDialogueScore = !!progress && progress.dialogue_translation_best != null;
+              const hasDialogueScore = !!progress && (progress.dialogue_ordering_best != null || progress.dialogue_first_letter_best != null || progress.dialogue_translation_best != null);
 
               const stages = [
                 { key: 'vocab', label: '단어', icon: BookOpen, completed: progress?.vocab_completed ?? false, inProgress: false },
@@ -163,7 +165,7 @@ export function NaesinProgressCard({
                       </div>
                     ))}
                   </div>
-                  {progress && (progress.vocab_quiz_score !== null || progress.vocab_spelling_score !== null || progress.passage_fill_blanks_best !== null || progress.passage_ordering_best !== null || progress.passage_translation_best !== null || progress.passage_grammar_vocab_best !== null || progress.dialogue_translation_best !== null || progress.grammar_total_videos > 0) && (
+                  {progress && (progress.vocab_quiz_score !== null || progress.vocab_spelling_score !== null || progress.passage_fill_blanks_best !== null || progress.passage_ordering_best !== null || progress.passage_translation_best !== null || progress.passage_grammar_vocab_best !== null || progress.dialogue_ordering_best !== null || progress.dialogue_first_letter_best !== null || progress.dialogue_translation_best !== null || progress.grammar_total_videos > 0) && (
                     <div className="flex gap-2 mt-2 flex-wrap">
                       {progress.vocab_quiz_score !== null && (
                         <span className={`text-xs px-1.5 py-0.5 rounded ${scoreChipClass(progress.vocab_quiz_score)}`}>
@@ -206,9 +208,19 @@ export function NaesinProgressCard({
                           어법/어휘 {progress.passage_grammar_vocab_best}점
                         </span>
                       )}
+                      {progress.dialogue_ordering_best !== null && (
+                        <span className={`text-xs px-1.5 py-0.5 rounded ${scoreChipClass(progress.dialogue_ordering_best)}`}>
+                          대화순서 {progress.dialogue_ordering_best}점
+                        </span>
+                      )}
+                      {progress.dialogue_first_letter_best !== null && (
+                        <span className={`text-xs px-1.5 py-0.5 rounded ${scoreChipClass(progress.dialogue_first_letter_best)}`}>
+                          첫글자 {progress.dialogue_first_letter_best}점
+                        </span>
+                      )}
                       {progress.dialogue_translation_best !== null && (
                         <span className={`text-xs px-1.5 py-0.5 rounded ${scoreChipClass(progress.dialogue_translation_best)}`}>
-                          대화문 {progress.dialogue_translation_best}점
+                          대화영작 {progress.dialogue_translation_best}점
                         </span>
                       )}
                       {progress.grammar_total_videos > 0 && (

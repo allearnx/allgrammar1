@@ -22,6 +22,8 @@ function makeProgress(overrides: Partial<NaesinStudentProgress> = {}): NaesinStu
     vocab_total_quiz_sets: 0,
     passage_translation_best: null,
     passage_grammar_vocab_best: null,
+    dialogue_ordering_best: null,
+    dialogue_first_letter_best: null,
     dialogue_translation_best: null,
     dialogue_completed: false,
     // Round 2 defaults
@@ -30,6 +32,8 @@ function makeProgress(overrides: Partial<NaesinStudentProgress> = {}): NaesinStu
     round2_passage_translation_best: null,
     round2_passage_grammar_vocab_best: null,
     round2_passage_completed: false,
+    round2_dialogue_ordering_best: null,
+    round2_dialogue_first_letter_best: null,
     round2_dialogue_translation_best: null,
     round2_dialogue_completed: false,
     grammar_videos_completed: 0,

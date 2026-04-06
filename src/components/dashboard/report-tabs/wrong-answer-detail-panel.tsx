@@ -118,7 +118,20 @@ function ReadOnlyWrongAnswerCard({ wrongAnswer }: { wrongAnswer: NaesinWrongAnsw
               {data.feedback ? <p className="text-sm">{data.feedback}</p> : null}
             </>
           ) : null}
-          {data.number && data.type !== 'fill_blank' && data.type !== 'translation' ? (
+          {data.type === 'ordering' ? (
+            <>
+              <p className="text-red-500">학생 배열: {data.userOrder || '-'}</p>
+              <p className="text-green-600">정답 순서: {data.correctOrder}</p>
+            </>
+          ) : null}
+          {data.type === 'first_letter' ? (
+            <>
+              <p className="text-muted-foreground">{data.koreanText || ''}</p>
+              <p className="text-red-500">학생 답: {data.userAnswer || '-'}</p>
+              <p className="text-green-600">정답: {data.correctAnswer}</p>
+            </>
+          ) : null}
+          {data.number && data.type !== 'fill_blank' && data.type !== 'translation' && data.type !== 'ordering' && data.type !== 'first_letter' ? (
             <>
               <p className="text-red-500">학생 답: {data.userAnswer || '-'}</p>
               <p className="text-green-600">정답: {data.correctAnswer}</p>

@@ -123,6 +123,8 @@ const naesinProgress = {
   vocab_total_quiz_sets: 0,
   passage_translation_best: null,
   passage_grammar_vocab_best: null,
+  dialogue_ordering_best: null,
+  dialogue_first_letter_best: null,
   dialogue_translation_best: null,
   dialogue_completed: false,
   grammar_videos_completed: 0,

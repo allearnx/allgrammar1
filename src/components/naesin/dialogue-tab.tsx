@@ -5,6 +5,9 @@ import { MessageSquare, Lock } from 'lucide-react';
 import { toast } from 'sonner';
 import { fetchWithToast } from '@/lib/fetch-with-toast';
 import { cn } from '@/lib/utils';
+import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
+import { DialogueLineOrdering } from '@/components/shared/dialogue-line-ordering';
+import { FirstLetterExercise } from '@/components/shared/first-letter-exercise';
 import { TranslationExercise } from '@/components/shared/translation-exercise';
 import type { NaesinDialogue } from '@/types/naesin';
 import type { TextbookPassage } from '@/types/database';
@@ -39,10 +42,13 @@ function dialogueToTextbookPassage(dialogue: NaesinDialogue): TextbookPassage {
   };
 }
 
+type DialogueExerciseType = 'ordering' | 'first_letter' | 'translation';
+
 export function DialogueTab({ dialogues, unitId, onStageComplete, naesinRequiredRounds, round1Completed }: DialogueTabProps) {
   const hasRound2 = (naesinRequiredRounds ?? 1) >= 2;
   const [currentRound, setCurrentRound] = useState<1 | 2>(1);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [activeTab, setActiveTab] = useState<DialogueExerciseType>('ordering');
 
   if (dialogues.length === 0) {
     return (
@@ -58,14 +64,14 @@ export function DialogueTab({ dialogues, unitId, onStageComplete, naesinRequired
   const dialogue = dialogues[currentIndex];
   const passage = dialogueToTextbookPassage(dialogue);
 
-  async function saveWrongAnswers(wrongItems: unknown[]) {
+  async function saveWrongAnswers(wrongItems: unknown[], sourceType: string = 'translation') {
     if (wrongItems.length === 0) return;
     try {
       await fetchWithToast('/api/naesin/wrong-answers', {
         body: {
           unitId,
           stage: 'dialogue',
-          sourceType: 'translation',
+          sourceType,
           wrongAnswers: wrongItems,
         },
         silent: true,
@@ -76,10 +82,10 @@ export function DialogueTab({ dialogues, unitId, onStageComplete, naesinRequired
     }
   }
 
-  async function saveDialogueProgress(score: number) {
+  async function saveDialogueProgress(score: number, type: DialogueExerciseType) {
     try {
       const data = await fetchWithToast<{ dialogueCompleted?: boolean }>('/api/naesin/dialogue/progress', {
-        body: { unitId, score, round: String(currentRound) },
+        body: { unitId, score, round: String(currentRound), type },
         errorMessage: '진도 저장 중 오류가 발생했습니다',
         logContext: 'naesin.dialogue_tab',
       });
@@ -142,6 +148,7 @@ export function DialogueTab({ dialogues, unitId, onStageComplete, naesinRequired
         </div>
       ) : (
         <>
+          {/* Dialogue selector */}
           {dialogues.length > 1 && (
             <div className="flex gap-2 overflow-x-auto pb-2">
               {dialogues.map((d, idx) => (
@@ -161,15 +168,48 @@ export function DialogueTab({ dialogues, unitId, onStageComplete, naesinRequired
             </div>
           )}
 
-          <TranslationExercise
-            key={`${dialogue.id}-r${currentRound}`}
-            passage={passage}
-            onComplete={(score, wrongs) => {
-              saveDialogueProgress(score);
-              if (wrongs?.length) saveWrongAnswers(wrongs);
-            }}
-            showWrongAlert
-          />
+          {/* 3-tab exercise layout */}
+          <Tabs value={activeTab} onValueChange={(v) => setActiveTab(v as DialogueExerciseType)}>
+            <TabsList className="w-full">
+              <TabsTrigger value="ordering" className="flex-1">순서 배열</TabsTrigger>
+              <TabsTrigger value="first_letter" className="flex-1">첫 글자</TabsTrigger>
+              <TabsTrigger value="translation" className="flex-1">영작</TabsTrigger>
+            </TabsList>
+
+            <TabsContent value="ordering">
+              <DialogueLineOrdering
+                key={`ordering-${dialogue.id}-r${currentRound}`}
+                sentences={dialogue.sentences}
+                onComplete={(score, wrongs) => {
+                  saveDialogueProgress(score, 'ordering');
+                  if (wrongs?.length) saveWrongAnswers(wrongs, 'ordering');
+                }}
+              />
+            </TabsContent>
+
+            <TabsContent value="first_letter">
+              <FirstLetterExercise
+                key={`fl-${dialogue.id}-r${currentRound}`}
+                sentences={dialogue.sentences}
+                onComplete={(score, wrongs) => {
+                  saveDialogueProgress(score, 'first_letter');
+                  if (wrongs?.length) saveWrongAnswers(wrongs, 'first_letter');
+                }}
+              />
+            </TabsContent>
+
+            <TabsContent value="translation">
+              <TranslationExercise
+                key={`tr-${dialogue.id}-r${currentRound}`}
+                passage={passage}
+                onComplete={(score, wrongs) => {
+                  saveDialogueProgress(score, 'translation');
+                  if (wrongs?.length) saveWrongAnswers(wrongs, 'translation');
+                }}
+                showWrongAlert
+              />
+            </TabsContent>
+          </Tabs>
         </>
       )}
     </div>

@@ -170,6 +170,8 @@ export interface NaesinStudentProgress {
   vocab_total_quiz_sets: number;
   passage_translation_best: number | null;
   passage_grammar_vocab_best: number | null;
+  dialogue_ordering_best: number | null;
+  dialogue_first_letter_best: number | null;
   dialogue_translation_best: number | null;
   dialogue_completed: boolean;
   // Round 2 columns
@@ -178,6 +180,8 @@ export interface NaesinStudentProgress {
   round2_passage_translation_best: number | null;
   round2_passage_grammar_vocab_best: number | null;
   round2_passage_completed: boolean;
+  round2_dialogue_ordering_best: number | null;
+  round2_dialogue_first_letter_best: number | null;
   round2_dialogue_translation_best: number | null;
   round2_dialogue_completed: boolean;
   grammar_videos_completed: number;
@@ -339,7 +343,7 @@ export interface NaesinProblemAttempt {
   created_at: string;
 }
 
-export type NaesinWrongAnswerStage = 'vocab' | 'passage' | 'grammar' | 'problem' | 'lastReview';
+export type NaesinWrongAnswerStage = 'vocab' | 'passage' | 'dialogue' | 'grammar' | 'problem' | 'lastReview';
 
 export interface NaesinWrongAnswer {
   id: string;
