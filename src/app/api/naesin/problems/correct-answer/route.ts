@@ -1,8 +1,8 @@
 import { NextResponse } from 'next/server';
 import { z } from 'zod';
 import { createApiHandler, NotFoundError } from '@/lib/api';
-import { requireContentPermission } from '@/lib/api/require-content-permission';
 import { createAdminClient } from '@/lib/supabase/admin';
+import { checkPlanGate } from '@/lib/billing/check-plan-api';
 import { normalize } from '@/lib/naesin/normalize-answer';
 
 const correctAnswerSchema = z.object({
@@ -15,7 +15,11 @@ const correctAnswerSchema = z.object({
 export const PATCH = createApiHandler(
   { schema: correctAnswerSchema, roles: ['teacher', 'admin', 'boss'] },
   async ({ user, body, supabase }) => {
-    await requireContentPermission(user, supabase);
+    // 유료 플랜 원장/선생님 모두 사용 가능 (boss는 무조건 통과)
+    if (user.role !== 'boss') {
+      const blocked = await checkPlanGate(user.academy_id, 'naesin:problem');
+      if (blocked) return blocked;
+    }
     const { sheetId, questionIndex, newAnswer, mode } = body;
 
     const admin = createAdminClient();
