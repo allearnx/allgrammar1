@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import { z } from 'zod';
 import { createApiHandler, dbResult } from '@/lib/api';
 import { requireAcademyScope } from '@/lib/api/require-academy-scope';
 import { createAdminClient } from '@/lib/supabase/admin';
@@ -26,5 +27,32 @@ export const GET = createApiHandler(
     );
 
     return NextResponse.json(data);
+  }
+);
+
+// 선생님/원장이 학생의 오답을 정답처리 (resolved=true)
+const resolveSchema = z.object({
+  wrongAnswerId: z.string().uuid(),
+  studentId: z.string().uuid(),
+});
+
+export const PATCH = createApiHandler(
+  { schema: resolveSchema, roles: ['teacher', 'admin', 'boss'] },
+  async ({ user, body, supabase }) => {
+    const { wrongAnswerId, studentId } = body;
+
+    await requireAcademyScope(user, studentId, supabase);
+
+    const admin = createAdminClient();
+
+    dbResult(
+      await admin
+        .from('naesin_wrong_answers')
+        .update({ resolved: true })
+        .eq('id', wrongAnswerId)
+        .eq('student_id', studentId)
+    );
+
+    return NextResponse.json({ success: true });
   }
 );

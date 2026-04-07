@@ -30,6 +30,8 @@ interface Props {
   studentId: string;
 }
 
+const TEXTBOOK_STAGES = new Set(['passage', 'dialogue', 'vocab']);
+
 export function WrongAnswerDetailPanel({ studentId }: Props) {
   const [wrongAnswers, setWrongAnswers] = useState<NaesinWrongAnswer[]>([]);
   const [loading, setLoading] = useState(true);
@@ -106,6 +108,7 @@ export function WrongAnswerDetailPanel({ studentId }: Props) {
               <ReadOnlyWrongAnswerCard
                 key={wa.id}
                 wrongAnswer={wa}
+                studentId={studentId}
                 onCorrected={fetchWrongAnswers}
               />
             ))}
@@ -118,9 +121,11 @@ export function WrongAnswerDetailPanel({ studentId }: Props) {
 
 function ReadOnlyWrongAnswerCard({
   wrongAnswer,
+  studentId,
   onCorrected,
 }: {
   wrongAnswer: NaesinWrongAnswer;
+  studentId: string;
   onCorrected: () => void;
 }) {
   const data = wrongAnswer.question_data as Record<string, string>;
@@ -129,6 +134,7 @@ function ReadOnlyWrongAnswerCard({
   const [submitting, setSubmitting] = useState(false);
 
   const isProblemStage = wrongAnswer.stage === 'problem' && wrongAnswer.sheet_id;
+  const isTextbookStage = TEXTBOOK_STAGES.has(wrongAnswer.stage);
   const questionIndex = data.number ? Number(data.number) - 1 : -1;
 
   const handleCorrectAnswer = async () => {
@@ -172,6 +178,30 @@ function ReadOnlyWrongAnswerCard({
           },
           successMessage: '정답처리 완료',
           logContext: 'accept_answer',
+        }
+      );
+      onCorrected();
+    } catch {
+      // handled by fetchWithToast
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  // 교과서 암기 오답 정답처리 (resolved=true)
+  const handleResolve = async () => {
+    setSubmitting(true);
+    try {
+      await fetchWithToast(
+        '/api/naesin/wrong-answers/student',
+        {
+          method: 'PATCH',
+          body: {
+            wrongAnswerId: wrongAnswer.id,
+            studentId,
+          },
+          successMessage: '정답처리 완료',
+          logContext: 'resolve_wrong_answer',
         }
       );
       onCorrected();
@@ -259,6 +289,18 @@ function ReadOnlyWrongAnswerCard({
                     정답 수정
                   </Button>
                 </div>
+              )}
+              {isTextbookStage && !wrongAnswer.resolved && (
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="h-5 px-1.5 text-xs text-green-600 ml-auto"
+                  onClick={handleResolve}
+                  disabled={submitting}
+                >
+                  {submitting ? <Loader2 className="h-3 w-3 animate-spin mr-0.5" /> : <Check className="h-3 w-3 mr-0.5" />}
+                  정답처리
+                </Button>
               )}
             </div>
           </div>
