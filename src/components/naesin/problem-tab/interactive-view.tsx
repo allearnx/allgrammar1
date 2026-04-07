@@ -140,6 +140,7 @@ export function InteractiveProblemView({
         />
       ) : (
         <SubjectiveInput
+          key={currentIndex}
           onSubmit={(answer) => handleSelect(answer)}
           disabled={showResult}
           isGrading={isGrading}
