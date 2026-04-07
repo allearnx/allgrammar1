@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import {
   Dialog,
   DialogContent,
@@ -15,13 +15,10 @@ import { LearningOrderGuide } from './learning-order-guide';
 const STORAGE_KEY = 'naesin-learning-order-guide-seen';
 
 export function LearningOrderModal() {
-  const [open, setOpen] = useState(false);
-
-  useEffect(() => {
-    if (!sessionStorage.getItem(STORAGE_KEY)) {
-      setOpen(true);
-    }
-  }, []);
+  const [open, setOpen] = useState(() => {
+    if (typeof window === 'undefined') return false;
+    return !sessionStorage.getItem(STORAGE_KEY);
+  });
 
   function handleClose() {
     sessionStorage.setItem(STORAGE_KEY, '1');
