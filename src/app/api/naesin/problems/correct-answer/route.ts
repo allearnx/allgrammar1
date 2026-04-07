@@ -9,13 +9,14 @@ const correctAnswerSchema = z.object({
   sheetId: z.string().uuid(),
   questionIndex: z.number().int().min(0),
   newAnswer: z.union([z.string(), z.number()]),
+  mode: z.enum(['replace', 'accept']).default('replace'),
 });
 
 export const PATCH = createApiHandler(
   { schema: correctAnswerSchema, roles: ['teacher', 'admin', 'boss'] },
   async ({ user, body, supabase }) => {
     await requireContentPermission(user, supabase);
-    const { sheetId, questionIndex, newAnswer } = body;
+    const { sheetId, questionIndex, newAnswer, mode } = body;
 
     const admin = createAdminClient();
 
@@ -41,10 +42,22 @@ export const PATCH = createApiHandler(
       throw new NotFoundError('문항 번호가 범위를 벗어났습니다.');
     }
 
-    // 2. answer_key + questions[].answer 업데이트
-    answerKey[questionIndex] = newAnswer;
-    if (questions[questionIndex]) {
-      questions[questionIndex].answer = newAnswer;
+    // 2. 정답 업데이트
+    if (mode === 'accept') {
+      // acceptedAnswers에 추가 (기존 정답 유지)
+      if (questions[questionIndex]) {
+        const existing = questions[questionIndex].acceptedAnswers ?? [];
+        const newVal = String(newAnswer);
+        if (!existing.includes(newVal)) {
+          questions[questionIndex].acceptedAnswers = [...existing, newVal];
+        }
+      }
+    } else {
+      // 정답 자체를 교체
+      answerKey[questionIndex] = newAnswer;
+      if (questions[questionIndex]) {
+        questions[questionIndex].answer = newAnswer;
+      }
     }
 
     await admin

@@ -13,7 +13,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog';
-import { Loader2, CheckCircle, AlertTriangle, Pencil } from 'lucide-react';
+import { Loader2, CheckCircle, AlertTriangle, Pencil, Check } from 'lucide-react';
 import { fetchWithToast } from '@/lib/fetch-with-toast';
 import type { NaesinWrongAnswer } from '@/types/database';
 
@@ -156,6 +156,32 @@ function ReadOnlyWrongAnswerCard({
     }
   };
 
+  const handleAcceptAnswer = async () => {
+    if (!wrongAnswer.sheet_id || questionIndex < 0 || !data.userAnswer) return;
+    setSubmitting(true);
+    try {
+      await fetchWithToast(
+        '/api/naesin/problems/correct-answer',
+        {
+          method: 'PATCH',
+          body: {
+            sheetId: wrongAnswer.sheet_id,
+            questionIndex,
+            newAnswer: data.userAnswer,
+            mode: 'accept',
+          },
+          successMessage: '정답처리 완료',
+          logContext: 'accept_answer',
+        }
+      );
+      onCorrected();
+    } catch {
+      // handled by fetchWithToast
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
   return (
     <>
       <Card className={wrongAnswer.resolved ? 'opacity-60' : ''}>
@@ -209,18 +235,30 @@ function ReadOnlyWrongAnswerCard({
                 </Badge>
               )}
               {isProblemStage && questionIndex >= 0 && (
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  className="h-5 px-1.5 text-xs text-muted-foreground ml-auto"
-                  onClick={() => {
-                    setNewAnswer(data.correctAnswer || '');
-                    setDialogOpen(true);
-                  }}
-                >
-                  <Pencil className="h-3 w-3 mr-0.5" />
-                  정답 수정
-                </Button>
+                <div className="flex gap-1 ml-auto">
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    className="h-5 px-1.5 text-xs text-green-600"
+                    onClick={handleAcceptAnswer}
+                    disabled={submitting || !data.userAnswer}
+                  >
+                    {submitting ? <Loader2 className="h-3 w-3 animate-spin mr-0.5" /> : <Check className="h-3 w-3 mr-0.5" />}
+                    정답처리
+                  </Button>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    className="h-5 px-1.5 text-xs text-muted-foreground"
+                    onClick={() => {
+                      setNewAnswer(data.correctAnswer || '');
+                      setDialogOpen(true);
+                    }}
+                  >
+                    <Pencil className="h-3 w-3 mr-0.5" />
+                    정답 수정
+                  </Button>
+                </div>
               )}
             </div>
           </div>
