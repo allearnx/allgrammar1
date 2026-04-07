@@ -4,6 +4,7 @@ import type { AuthUser } from '@/types/auth';
 import { Badge } from '@/components/ui/badge';
 import { cn } from '@/lib/utils';
 import { NotificationCenter } from './notification-center';
+import { useIsPaid } from './paid-status-context';
 
 interface TopbarProps {
   user: AuthUser;
@@ -32,6 +33,10 @@ const roleBadgeColors: Record<string, string> = {
 };
 
 export function Topbar({ user, title }: TopbarProps) {
+  const isPaid = useIsPaid();
+  const showNotifications =
+    user.role === 'boss' || (user.role !== 'student' && isPaid !== false);
+
   return (
     <header className={cn(
       "sticky top-0 z-30 flex h-14 items-center gap-4 border-b border-t-2 bg-card px-4 md:px-6",
@@ -41,7 +46,7 @@ export function Topbar({ user, title }: TopbarProps) {
       <div className="w-8 md:hidden" />
       <h1 className="text-lg font-semibold tracking-tight truncate">{title || '대시보드'}</h1>
       <div className="ml-auto flex items-center gap-3">
-        {user.role !== 'student' && <NotificationCenter />}
+        {showNotifications && <NotificationCenter />}
         <Badge
           variant="secondary"
           className={cn(

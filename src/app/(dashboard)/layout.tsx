@@ -1,6 +1,8 @@
 import { requireUser } from '@/lib/auth/helpers';
 import { createClient } from '@/lib/supabase/server';
 import { Sidebar } from '@/components/layout/sidebar';
+import { PaidStatusProvider } from '@/components/layout/paid-status-context';
+import { getPlanContext } from '@/lib/billing/get-plan-context';
 import { calculateStageStatuses } from '@/lib/naesin/stage-unlock';
 import { groupBy } from '@/lib/naesin/build-unit-summary';
 import type { NaesinStageStatuses } from '@/types/database';
@@ -42,7 +44,15 @@ export default async function DashboardLayout({
     }
   }
 
+  // Compute isPaid for Topbar NotificationCenter gating
+  const isPaid =
+    user.role === 'boss' ||
+    (user.academy_id
+      ? (await getPlanContext(user.academy_id)).tier !== 'free'
+      : false);
+
   return (
+    <PaidStatusProvider isPaid={isPaid}>
     <div className="flex h-screen overflow-hidden">
       <Sidebar user={user} services={services} naesinTree={naesinTree} />
       <main className="flex-1 overflow-y-auto">
@@ -60,6 +70,7 @@ export default async function DashboardLayout({
         </svg>
       </a>
     </div>
+    </PaidStatusProvider>
   );
 }
 

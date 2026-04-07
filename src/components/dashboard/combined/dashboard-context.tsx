@@ -42,6 +42,7 @@ export interface DashboardProps {
   wrongWordCounts?: Record<string, number>;
   vocaQuizHistory?: { date: string; score: number }[];
   naesinQuizHistory?: { date: string; score: number }[];
+  isPaid?: boolean;
 }
 
 // ── Context value ──

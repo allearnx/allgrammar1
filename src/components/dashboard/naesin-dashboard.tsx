@@ -21,6 +21,7 @@ import { FlowStep } from './combined/flow-step';
 import { StatCard } from '@/components/shared/stat-card';
 import { UnitProgressList } from './naesin/unit-progress-list';
 import { ExamScopeList } from './naesin/exam-scope-list';
+import { LearningOrderModal } from '@/components/naesin/learning-order-modal';
 import type {
   NaesinUnit,
   NaesinStudentProgress,
@@ -40,6 +41,7 @@ interface Props {
   grammarVideoCounts: Record<string, number>;
   enabledStages?: string[];
   quizHistory?: { date: string; score: number }[];
+  isPaid?: boolean;
 }
 
 // ── Colors ──
@@ -73,6 +75,7 @@ export function NaesinDashboard({
   grammarVideoCounts,
   enabledStages,
   quizHistory = [],
+  isPaid = false,
 }: Props) {
   const progressMap = new Map<string, NaesinStudentProgress>();
   progressList.forEach((p) => progressMap.set(p.unit_id, p));
@@ -225,6 +228,8 @@ export function NaesinDashboard({
           stepDoneBorder={COLORS.stepDone.border}
         />
       </div>
+
+      {isPaid && <LearningOrderModal />}
     </div>
   );
 }

@@ -159,6 +159,7 @@ export default async function NaesinPage() {
           units={units}
           examDate={examDate}
           examGroups={examGroups}
+          isPaid={planContext.tier !== 'free'}
         />
       </div>
     </>

@@ -11,6 +11,8 @@ import { fetchWithToast } from '@/lib/fetch-with-toast';
 import Link from 'next/link';
 import { LessonCard } from '@/components/naesin/lesson-card';
 import { ExamCountdown } from '@/components/naesin/exam-countdown';
+import { LearningOrderGuide } from '@/components/naesin/learning-order-guide';
+import { LearningOrderModal } from '@/components/naesin/learning-order-modal';
 import type { NaesinTextbook } from '@/types/database';
 import type { UnitSummary, ExamGroup } from '@/lib/naesin/build-unit-summary';
 import { TextbookSelector } from './textbook-selector';
@@ -21,6 +23,7 @@ interface NaesinHomeProps {
   units: UnitSummary[];
   examDate?: string | null;
   examGroups?: ExamGroup[];
+  isPaid?: boolean;
 }
 
 export function NaesinHome({
@@ -29,6 +32,7 @@ export function NaesinHome({
   units,
   examDate: initialExamDate,
   examGroups = [],
+  isPaid = false,
 }: NaesinHomeProps) {
   const router = useRouter();
   const [saving, setSaving] = useState(false);
@@ -75,6 +79,9 @@ export function NaesinHome({
           <span>변경 시 선생님 문의</span>
         </div>
       </div>
+
+      {/* 학습 순서 가이드 (유료만) */}
+      {isPaid && <LearningOrderGuide mode="card" />}
 
       {/* 교재 OMR 진입 */}
       <Link href="/student/naesin/workbook-omr">
@@ -155,6 +162,9 @@ export function NaesinHome({
           )}
         </>
       )}
+
+      {/* 학습 순서 팝업 (유료만, 세션당 1회) */}
+      {isPaid && <LearningOrderModal />}
     </div>
   );
 }

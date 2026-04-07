@@ -42,6 +42,7 @@ export async function NaesinSection({ user, planContext }: Props) {
         grammarVideoCounts={data.grammarVideoCounts}
         enabledStages={enabledStages}
         quizHistory={data.quizHistory}
+        isPaid={planContext.tier !== 'free'}
       />
     </>
   );

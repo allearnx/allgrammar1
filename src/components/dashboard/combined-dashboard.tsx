@@ -17,6 +17,7 @@ import { StatCard } from '@/components/shared/stat-card';
 import { VocaTabContent } from './combined/voca-tab-content';
 import { NaesinTabContent } from './combined/naesin-tab-content';
 import { DashboardProvider, useDashboardContext } from './combined/dashboard-context';
+import { LearningOrderModal } from '@/components/naesin/learning-order-modal';
 import type { DashboardProps } from './combined/dashboard-context';
 
 const COLORS = {
@@ -32,6 +33,7 @@ export function CombinedDashboard(props: DashboardProps) {
   return (
     <DashboardProvider {...props}>
       <DashboardContent />
+      {props.isPaid && <LearningOrderModal />}
     </DashboardProvider>
   );
 }

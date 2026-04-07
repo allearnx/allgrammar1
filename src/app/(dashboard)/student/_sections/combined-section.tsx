@@ -45,6 +45,7 @@ export async function CombinedSection({ user, planContext }: Props) {
         wrongWordCounts={vocaData.wrongWordCounts}
         vocaQuizHistory={vocaData.quizHistory}
         naesinQuizHistory={naesinData.quizHistory}
+        isPaid={planContext.tier !== 'free'}
       />
     </>
   );
