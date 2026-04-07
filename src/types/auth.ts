@@ -8,6 +8,7 @@ export interface AuthUser {
   academy_id: string | null;
   phone?: string | null;
   is_homepage_manager?: boolean;
+  can_manage_content?: boolean;
 }
 
 export interface SignUpData {

@@ -34,14 +34,17 @@ export const getUser = cache(async (): Promise<AuthUser | null> => {
 
   const { data: profile, error: profileError } = await supabase
     .from('users')
-    .select('id, email, full_name, role, academy_id, is_homepage_manager')
+    .select('id, email, full_name, role, academy_id, is_homepage_manager, academy:academies(can_manage_content)')
     .eq('id', user.id)
     .single();
 
   if (profileError) logger.error('auth.get_profile', { error: profileError.message });
   if (!profile) return null;
 
-  return profile as AuthUser;
+  const rawAcademy = profile.academy;
+  const academy = (Array.isArray(rawAcademy) ? rawAcademy[0] : rawAcademy) as { can_manage_content: boolean } | null;
+  const { academy: _drop, ...rest } = profile;
+  return { ...rest, can_manage_content: academy?.can_manage_content ?? false } as AuthUser;
 });
 
 export async function requireUser(): Promise<AuthUser> {

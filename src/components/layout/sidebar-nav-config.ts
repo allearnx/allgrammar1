@@ -40,6 +40,7 @@ export interface NavItem {
   label: string;
   icon: React.ComponentType<{ className?: string }>;
   disabled?: boolean;
+  requireContentPermission?: boolean;
 }
 
 export interface NavGroup {
@@ -86,7 +87,7 @@ export const NAV_CONFIG: Record<string, NavGroup[]> = {
         { href: '/teacher/naesin', label: '내신 관리', icon: ClipboardList },
         { href: '/teacher/voca', label: '올킬보카 관리', icon: BookA },
         { href: '/teacher/voca/submissions', label: '오답노트 확인', icon: FileCheck },
-        { href: '/teacher/naesin?tab=templates', label: '문제 템플릿', icon: Library },
+        { href: '/teacher/naesin?tab=templates', label: '문제 템플릿', icon: Library, requireContentPermission: true },
       ],
     },
     {
@@ -115,7 +116,6 @@ export const NAV_CONFIG: Record<string, NavGroup[]> = {
         { href: '/admin/naesin', label: '내신 관리', icon: ClipboardList },
         { href: '/admin/voca', label: '올킬보카 관리', icon: BookA },
         { href: '/admin/voca/submissions', label: '오답노트 확인', icon: FileCheck },
-        { href: '/admin/naesin?tab=templates', label: '문제 템플릿', icon: Library },
       ],
     },
     {
@@ -220,12 +220,20 @@ export const HOMEPAGE_MANAGER_GROUP: NavGroup = {
   ],
 };
 
-export function getNavGroups(role: string, services?: string[], isHomepageManager?: boolean): NavGroup[] {
+export function getNavGroups(role: string, services?: string[], isHomepageManager?: boolean, canManageContent?: boolean): NavGroup[] {
   let groups = NAV_CONFIG[role] || NAV_CONFIG.student;
 
   // Non-boss homepage managers get the homepage section appended
   if (isHomepageManager && role !== 'boss') {
     groups = [...groups, HOMEPAGE_MANAGER_GROUP];
+  }
+
+  // Filter items requiring content permission (boss always passes)
+  if (role !== 'boss' && !canManageContent) {
+    groups = groups.map((group) => ({
+      ...group,
+      items: group.items.filter((item) => !item.requireContentPermission),
+    })).filter((group) => group.items.length > 0);
   }
 
   if (role !== 'student' || !services) return groups;

@@ -57,7 +57,7 @@ export async function updateSession(request: NextRequest) {
   const isPublicRoute = pathname === '/' || publicRoutes.some((route) => pathname.startsWith(route));
 
   // Try cached profile from cookie first (avoids DB + auth call on every navigation)
-  let profile: { id: string; email: string; full_name: string; role: string; academy_id: string | null; is_homepage_manager?: boolean } | null = null;
+  let profile: { id: string; email: string; full_name: string; role: string; academy_id: string | null; is_homepage_manager?: boolean; can_manage_content?: boolean } | null = null;
   let cacheHit = false;
   const cachedProfileStr = request.cookies.get('x-user-profile')?.value;
   if (cachedProfileStr) {
@@ -91,10 +91,15 @@ export async function updateSession(request: NextRequest) {
     );
     const { data } = await admin
       .from('users')
-      .select('id, email, full_name, role, academy_id, is_homepage_manager')
+      .select('id, email, full_name, role, academy_id, is_homepage_manager, academy:academies(can_manage_content)')
       .eq('id', user.id)
       .single();
-    profile = data;
+    if (data) {
+      const rawAcademy = data.academy;
+      const academy = (Array.isArray(rawAcademy) ? rawAcademy[0] : rawAcademy) as { can_manage_content: boolean } | null;
+      const { academy: _drop, ...rest } = data;
+      profile = { ...rest, can_manage_content: academy?.can_manage_content ?? false };
+    }
   }
 
   // If no profile (not authenticated), handle redirect
