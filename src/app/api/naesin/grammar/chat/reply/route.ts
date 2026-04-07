@@ -31,11 +31,17 @@ export const POST = createApiHandler(
     }
 
     // Get current question details
-    const { data: currentQuestion } = await supabase
-      .from('naesin_grammar_chat_questions')
-      .select('*')
-      .eq('id', session.current_question_id)
-      .single();
+    const { data: currentQuestion } = session.current_question_id
+      ? await supabase
+          .from('naesin_grammar_chat_questions')
+          .select('*')
+          .eq('id', session.current_question_id)
+          .single()
+      : { data: null };
+
+    if (!currentQuestion) {
+      return NextResponse.json({ error: '현재 질문을 찾을 수 없습니다.' }, { status: 400 });
+    }
 
     // Get lesson title for context
     const { data: lesson } = await supabase
@@ -93,9 +99,16 @@ ${isLastTurn ? '- 마지막 턴이므로 전체 학습을 정리해주세요' : 
 
       const responseText = aiResponse.content[0].type === 'text' ? aiResponse.content[0].text : '';
       const jsonMatch = responseText.match(/\{[\s\S]*\}/);
-      if (!jsonMatch) throw new Error('Invalid AI response format');
-
-      const result = JSON.parse(jsonMatch[0]);
+      let result: { feedback: string; isCorrect: boolean; correctedPoint: string | null };
+      if (jsonMatch) {
+        try {
+          result = JSON.parse(jsonMatch[0]);
+        } catch {
+          result = { feedback: responseText.slice(0, 500), isCorrect: false, correctedPoint: null };
+        }
+      } else {
+        result = { feedback: responseText.slice(0, 500) || '응답을 처리하지 못했습니다.', isCorrect: false, correctedPoint: null };
+      }
 
       // Build messages
       const messages = session.messages as NaesinGrammarChatMessage[];

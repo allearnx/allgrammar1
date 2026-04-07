@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useCallback } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -22,6 +22,7 @@ export function SocraticChatbot({ lessonId, lessonTitle }: SocraticChatbotProps)
   const [loading, setLoading] = useState(false);
   const [starting, setStarting] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
+  const abortRef = useRef<AbortController | null>(null);
 
   useEffect(() => {
     if (scrollRef.current) {
@@ -29,19 +30,40 @@ export function SocraticChatbot({ lessonId, lessonTitle }: SocraticChatbotProps)
     }
   }, [session?.messages]);
 
+  // Cleanup on unmount
+  useEffect(() => {
+    return () => { abortRef.current?.abort(); };
+  }, []);
+
+  const cancelInflight = useCallback(() => {
+    if (abortRef.current) {
+      abortRef.current.abort();
+      abortRef.current = null;
+    }
+    setStarting(false);
+    setLoading(false);
+  }, []);
+
   async function handleStart() {
+    cancelInflight();
+    const controller = new AbortController();
+    abortRef.current = controller;
+
     setStarting(true);
     try {
       const data = await fetchWithToast<NaesinGrammarChatSession>('/api/naesin/grammar/chat/start', {
         body: { lessonId },
         errorMessage: '대화 시작에 실패했습니다.',
+        fetchOptions: { signal: controller.signal },
       });
+      if (controller.signal.aborted) return;
       setSession(data);
       setExpanded(true);
-    } catch {
+    } catch (e) {
+      if (e instanceof DOMException && e.name === 'AbortError') return;
       // error already toasted by fetchWithToast
     } finally {
-      setStarting(false);
+      if (!controller.signal.aborted) setStarting(false);
     }
   }
 
@@ -54,18 +76,25 @@ export function SocraticChatbot({ lessonId, lessonTitle }: SocraticChatbotProps)
   async function handleSend() {
     if (!session || !inputValue.trim() || loading) return;
 
+    cancelInflight();
+    const controller = new AbortController();
+    abortRef.current = controller;
+
     setLoading(true);
     try {
       const updated = await fetchWithToast<NaesinGrammarChatSession>('/api/naesin/grammar/chat/reply', {
         body: { sessionId: session.id, message: inputValue.trim() },
         errorMessage: '응답 생성에 실패했습니다.',
+        fetchOptions: { signal: controller.signal },
       });
+      if (controller.signal.aborted) return;
       setSession(updated);
       setInputValue('');
-    } catch {
+    } catch (e) {
+      if (e instanceof DOMException && e.name === 'AbortError') return;
       // error already toasted by fetchWithToast
     } finally {
-      setLoading(false);
+      if (!controller.signal.aborted) setLoading(false);
     }
   }
 
@@ -76,6 +105,13 @@ export function SocraticChatbot({ lessonId, lessonTitle }: SocraticChatbotProps)
     }
   }
 
+  function handleCollapse() {
+    cancelInflight();
+    setSession(null);
+    setInputValue('');
+    setExpanded(false);
+  }
+
   const messages = (session?.messages || []) as NaesinGrammarChatMessage[];
 
   return (
@@ -83,12 +119,11 @@ export function SocraticChatbot({ lessonId, lessonTitle }: SocraticChatbotProps)
       <CardHeader
         className="py-3 px-4 cursor-pointer"
         onClick={() => {
-          const next = !expanded;
-          if (!next) {
-            setSession(null);
-            setInputValue('');
+          if (expanded) {
+            handleCollapse();
+          } else {
+            setExpanded(true);
           }
-          setExpanded(next);
         }}
       >
         <div className="flex items-center justify-between">
@@ -112,13 +147,18 @@ export function SocraticChatbot({ lessonId, lessonTitle }: SocraticChatbotProps)
               <p className="text-sm text-muted-foreground mb-3">
                 AI 튜터와 &quot;{lessonTitle}&quot; 문법을 대화로 연습해보세요!
               </p>
-              <Button onClick={handleStart} disabled={starting} size="sm">
-                {starting ? (
-                  <><Loader2 className="h-4 w-4 mr-1.5 animate-spin" />시작 중...</>
-                ) : (
-                  <><Bot className="h-4 w-4 mr-1.5" />대화 시작</>
-                )}
-              </Button>
+              {starting ? (
+                <div className="space-y-2">
+                  <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
+                    <Loader2 className="h-4 w-4 animate-spin" />
+                    채팅을 준비 중입니다. 잠시만 기다려 주세요!
+                  </div>
+                </div>
+              ) : (
+                <Button onClick={handleStart} size="sm">
+                  <Bot className="h-4 w-4 mr-1.5" />대화 시작
+                </Button>
+              )}
             </div>
           ) : (
             <div>

@@ -9,6 +9,8 @@ interface FetchWithToastOptions {
   logContext?: string;
   /** Skip toast notifications entirely */
   silent?: boolean;
+  /** Additional fetch options (e.g. AbortController signal) */
+  fetchOptions?: RequestInit;
 }
 
 /**
@@ -22,7 +24,7 @@ export async function fetchWithToast<T = unknown>(
   url: string,
   options: FetchWithToastOptions = {},
 ): Promise<T> {
-  const { method = 'POST', body, successMessage, errorMessage, logContext, silent } = options;
+  const { method = 'POST', body, successMessage, errorMessage, logContext, silent, fetchOptions } = options;
 
   const isFormData = body instanceof FormData;
 
@@ -33,6 +35,7 @@ export async function fetchWithToast<T = unknown>(
         ? { body }
         : { headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) }
       : {}),
+    ...fetchOptions,
   });
 
   if (!res.ok) {
