@@ -135,7 +135,7 @@ async function fetchProblemData(supabase: SupabaseClient, unitId: string) {
     .from('naesin_problem_sheets')
     .select('*')
     .eq('unit_id', unitId)
-    .eq('category', 'problem')
+    .in('category', ['problem', 'grammar'])
     .order('sort_order');
   return { problemSheets: problemRes.data || [] };
 }
