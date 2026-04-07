@@ -5,20 +5,21 @@ import { requireContentPermission } from '@/lib/api/require-content-permission';
 import { createAdminClient } from '@/lib/supabase/admin';
 import { normalize } from '@/lib/naesin/normalize-answer';
 
-const regradeSchema = z.object({
+const correctAnswerSchema = z.object({
   sheetId: z.string().uuid(),
+  questionIndex: z.number().int().min(0),
+  newAnswer: z.union([z.string(), z.number()]),
 });
 
-export const POST = createApiHandler(
-  { schema: regradeSchema, roles: ['teacher', 'admin', 'boss'] },
+export const PATCH = createApiHandler(
+  { schema: correctAnswerSchema, roles: ['teacher', 'admin', 'boss'] },
   async ({ user, body, supabase }) => {
     await requireContentPermission(user, supabase);
-    const { sheetId } = body;
+    const { sheetId, questionIndex, newAnswer } = body;
 
-    // Admin client for all queries (boss has no academy_id, RLS would block)
     const admin = createAdminClient();
 
-    // 1. 시트 정보 조회
+    // 1. 시트 조회
     const { data: sheet } = await admin
       .from('naesin_problem_sheets')
       .select('id, unit_id, answer_key, questions, mode')
@@ -27,23 +28,39 @@ export const POST = createApiHandler(
 
     if (!sheet) throw new NotFoundError('시험지를 찾을 수 없습니다.');
 
-    // 2. 해당 시트의 모든 시도 조회
+    const answerKey = sheet.answer_key as (string | number)[];
+    const questions = sheet.questions as {
+      number: number;
+      question: string;
+      options?: string[];
+      answer: string | number;
+      acceptedAnswers?: string[];
+    }[];
+
+    if (questionIndex >= answerKey.length) {
+      throw new NotFoundError('문항 번호가 범위를 벗어났습니다.');
+    }
+
+    // 2. answer_key + questions[].answer 업데이트
+    answerKey[questionIndex] = newAnswer;
+    if (questions[questionIndex]) {
+      questions[questionIndex].answer = newAnswer;
+    }
+
+    await admin
+      .from('naesin_problem_sheets')
+      .update({ answer_key: answerKey, questions })
+      .eq('id', sheetId);
+
+    // 3. 재채점: 기존 regrade 로직과 동일
     const { data: attempts } = await admin
       .from('naesin_problem_attempts')
       .select('id, student_id, answers, score, total_questions, wrong_answers')
       .eq('sheet_id', sheetId);
 
     if (!attempts || attempts.length === 0) {
-      return NextResponse.json({ total: 0, changed: 0 });
+      return NextResponse.json({ updated: true, total: 0, changed: 0 });
     }
-
-    const answerKey = sheet.answer_key as (string | number)[];
-    const questions = sheet.questions as {
-      number: number;
-      question: string;
-      options?: string[];
-      acceptedAnswers?: string[];
-    }[];
 
     let changed = 0;
 
@@ -96,19 +113,19 @@ export const POST = createApiHandler(
       if (newScore !== attempt.score) {
         changed++;
 
-        // 시도 점수 업데이트
         await admin
           .from('naesin_problem_attempts')
           .update({ score: newScore, wrong_answers: wrongAnswers })
           .eq('id', attempt.id);
 
-        // 오답 테이블 갱신: 기존 problem 오답 삭제 → 새 오답 삽입
+        // 오답 테이블 갱신: 해당 시트의 problem 오답만 삭제 → 새 오답 삽입
         await admin
           .from('naesin_wrong_answers')
           .delete()
           .eq('student_id', attempt.student_id)
           .eq('unit_id', sheet.unit_id)
-          .eq('stage', 'problem');
+          .eq('stage', 'problem')
+          .eq('sheet_id', sheetId);
 
         if (wrongAnswers.length > 0) {
           const wrongRows = wrongAnswers.map((wa) => ({
@@ -124,6 +141,6 @@ export const POST = createApiHandler(
       }
     }
 
-    return NextResponse.json({ total: attempts.length, changed });
+    return NextResponse.json({ updated: true, total: attempts.length, changed });
   }
 );

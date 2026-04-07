@@ -80,6 +80,7 @@ export const POST = createApiHandler(
         stage: 'problem',
         source_type: sheet.mode,
         question_data: wa,
+        sheet_id: sheetId,
       }));
 
       await supabase.from('naesin_wrong_answers').insert(wrongRows);

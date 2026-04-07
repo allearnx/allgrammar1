@@ -1,9 +1,19 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Loader2, CheckCircle, AlertTriangle } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from '@/components/ui/dialog';
+import { Loader2, CheckCircle, AlertTriangle, Pencil } from 'lucide-react';
 import { fetchWithToast } from '@/lib/fetch-with-toast';
 import type { NaesinWrongAnswer } from '@/types/database';
 
@@ -24,23 +34,28 @@ export function WrongAnswerDetailPanel({ studentId }: Props) {
   const [wrongAnswers, setWrongAnswers] = useState<NaesinWrongAnswer[]>([]);
   const [loading, setLoading] = useState(true);
 
+  const fetchWrongAnswers = useCallback(async () => {
+    try {
+      const data = await fetchWithToast<NaesinWrongAnswer[]>(
+        `/api/naesin/wrong-answers/student?studentId=${studentId}`,
+        { method: 'GET', silent: true, logContext: 'wrong_answer_detail_panel' }
+      );
+      setWrongAnswers(Array.isArray(data) ? data : []);
+    } catch {
+      // silently handled
+    } finally {
+      setLoading(false);
+    }
+  }, [studentId]);
+
   useEffect(() => {
     let cancelled = false;
     (async () => {
-      try {
-        const data = await fetchWithToast<NaesinWrongAnswer[]>(
-          `/api/naesin/wrong-answers/student?studentId=${studentId}`,
-          { method: 'GET', silent: true, logContext: 'wrong_answer_detail_panel' }
-        );
-        if (!cancelled) setWrongAnswers(Array.isArray(data) ? data : []);
-      } catch {
-        // silently handled
-      } finally {
-        if (!cancelled) setLoading(false);
-      }
+      await fetchWrongAnswers();
+      if (cancelled) return;
     })();
     return () => { cancelled = true; };
-  }, [studentId]);
+  }, [fetchWrongAnswers]);
 
   if (loading) {
     return (
@@ -88,7 +103,11 @@ export function WrongAnswerDetailPanel({ studentId }: Props) {
           </p>
           <div className="space-y-2">
             {items.map((wa) => (
-              <ReadOnlyWrongAnswerCard key={wa.id} wrongAnswer={wa} />
+              <ReadOnlyWrongAnswerCard
+                key={wa.id}
+                wrongAnswer={wa}
+                onCorrected={fetchWrongAnswers}
+              />
             ))}
           </div>
         </div>
@@ -97,58 +116,154 @@ export function WrongAnswerDetailPanel({ studentId }: Props) {
   );
 }
 
-function ReadOnlyWrongAnswerCard({ wrongAnswer }: { wrongAnswer: NaesinWrongAnswer }) {
+function ReadOnlyWrongAnswerCard({
+  wrongAnswer,
+  onCorrected,
+}: {
+  wrongAnswer: NaesinWrongAnswer;
+  onCorrected: () => void;
+}) {
   const data = wrongAnswer.question_data as Record<string, string>;
+  const [dialogOpen, setDialogOpen] = useState(false);
+  const [newAnswer, setNewAnswer] = useState(data.correctAnswer || '');
+  const [submitting, setSubmitting] = useState(false);
+
+  const isProblemStage = wrongAnswer.stage === 'problem' && wrongAnswer.sheet_id;
+  const questionIndex = data.number ? Number(data.number) - 1 : -1;
+
+  const handleCorrectAnswer = async () => {
+    if (!wrongAnswer.sheet_id || questionIndex < 0 || !newAnswer.trim()) return;
+    setSubmitting(true);
+    try {
+      await fetchWithToast(
+        '/api/naesin/problems/correct-answer',
+        {
+          method: 'PATCH',
+          body: JSON.stringify({
+            sheetId: wrongAnswer.sheet_id,
+            questionIndex,
+            newAnswer: newAnswer.trim(),
+          }),
+          logContext: 'correct_answer',
+        }
+      );
+      setDialogOpen(false);
+      onCorrected();
+    } catch {
+      // handled by fetchWithToast
+    } finally {
+      setSubmitting(false);
+    }
+  };
 
   return (
-    <Card className={wrongAnswer.resolved ? 'opacity-60' : ''}>
-      <CardContent className="py-3">
-        <div className="text-sm space-y-1">
-          {data.question ? <p className="font-medium">{data.question}</p> : null}
-          {data.type === 'fill_blank' ? (
-            <>
-              <p className="text-red-500">학생 답: {data.userAnswer || '-'}</p>
-              <p className="text-green-600">정답: {data.correctAnswer}</p>
-            </>
-          ) : null}
-          {data.type === 'translation' ? (
-            <>
-              <p className="text-muted-foreground">{data.koreanText || ''}</p>
-              <p className="text-red-500">학생 답: {data.userAnswer || '-'}</p>
-              {data.feedback ? <p className="text-sm">{data.feedback}</p> : null}
-            </>
-          ) : null}
-          {data.type === 'ordering' ? (
-            <>
-              <p className="text-red-500">학생 배열: {data.userOrder || '-'}</p>
-              <p className="text-green-600">정답 순서: {data.correctOrder}</p>
-            </>
-          ) : null}
-          {data.type === 'first_letter' ? (
-            <>
-              <p className="text-muted-foreground">{data.koreanText || ''}</p>
-              <p className="text-red-500">학생 답: {data.userAnswer || '-'}</p>
-              <p className="text-green-600">정답: {data.correctAnswer}</p>
-            </>
-          ) : null}
-          {data.number && data.type !== 'fill_blank' && data.type !== 'translation' && data.type !== 'ordering' && data.type !== 'first_letter' ? (
-            <>
-              <p className="text-red-500">학생 답: {data.userAnswer || '-'}</p>
-              <p className="text-green-600">정답: {data.correctAnswer}</p>
-            </>
-          ) : null}
-          <div className="flex gap-1.5 pt-1">
-            <Badge variant="secondary" className="text-xs">
-              {wrongAnswer.source_type}
-            </Badge>
-            {wrongAnswer.resolved && (
-              <Badge className="bg-green-100 text-green-700 border-0 text-xs hover:bg-green-100">
-                해결됨
+    <>
+      <Card className={wrongAnswer.resolved ? 'opacity-60' : ''}>
+        <CardContent className="py-3">
+          <div className="text-sm space-y-1">
+            {data.question ? <p className="font-medium">{data.question}</p> : null}
+            {data.type === 'fill_blank' ? (
+              <>
+                <p className="text-red-500">학생 답: {data.userAnswer || '-'}</p>
+                <p className="text-green-600">정답: {data.correctAnswer}</p>
+              </>
+            ) : null}
+            {data.type === 'translation' ? (
+              <>
+                <p className="text-muted-foreground">{data.koreanText || ''}</p>
+                <p className="text-red-500">학생 답: {data.userAnswer || '-'}</p>
+                {data.feedback ? <p className="text-sm">{data.feedback}</p> : null}
+              </>
+            ) : null}
+            {data.type === 'ordering' ? (
+              <>
+                <p className="text-red-500">학생 배열: {data.userOrder || '-'}</p>
+                <p className="text-green-600">정답 순서: {data.correctOrder}</p>
+              </>
+            ) : null}
+            {data.type === 'first_letter' ? (
+              <>
+                <p className="text-muted-foreground">{data.koreanText || ''}</p>
+                <p className="text-red-500">학생 답: {data.userAnswer || '-'}</p>
+                <p className="text-green-600">정답: {data.correctAnswer}</p>
+              </>
+            ) : null}
+            {data.number && data.type !== 'fill_blank' && data.type !== 'translation' && data.type !== 'ordering' && data.type !== 'first_letter' ? (
+              <>
+                <p className="text-red-500">학생 답: {data.userAnswer || '-'}</p>
+                <p className="text-green-600">정답: {data.correctAnswer}</p>
+              </>
+            ) : null}
+            <div className="flex items-center gap-1.5 pt-1">
+              {wrongAnswer.sheet?.title && (
+                <Badge variant="outline" className="text-xs">
+                  {wrongAnswer.sheet.title}
+                </Badge>
+              )}
+              <Badge variant="secondary" className="text-xs">
+                {wrongAnswer.source_type}
               </Badge>
-            )}
+              {wrongAnswer.resolved && (
+                <Badge className="bg-green-100 text-green-700 border-0 text-xs hover:bg-green-100">
+                  해결됨
+                </Badge>
+              )}
+              {isProblemStage && questionIndex >= 0 && (
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="h-5 px-1.5 text-xs text-muted-foreground ml-auto"
+                  onClick={() => {
+                    setNewAnswer(data.correctAnswer || '');
+                    setDialogOpen(true);
+                  }}
+                >
+                  <Pencil className="h-3 w-3 mr-0.5" />
+                  정답 수정
+                </Button>
+              )}
+            </div>
           </div>
-        </div>
-      </CardContent>
-    </Card>
+        </CardContent>
+      </Card>
+
+      <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle>정답 수정</DialogTitle>
+            <DialogDescription>
+              {data.number && `${data.number}번 문항`}
+              {wrongAnswer.sheet?.title && ` — ${wrongAnswer.sheet.title}`}
+            </DialogDescription>
+          </DialogHeader>
+          <div className="space-y-3">
+            {data.question && (
+              <p className="text-sm text-muted-foreground">{data.question}</p>
+            )}
+            <div>
+              <label className="text-sm font-medium">새 정답</label>
+              <Input
+                value={newAnswer}
+                onChange={(e) => setNewAnswer(e.target.value)}
+                placeholder="정답을 입력하세요"
+                className="mt-1"
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' && !submitting) handleCorrectAnswer();
+                }}
+              />
+            </div>
+          </div>
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setDialogOpen(false)} disabled={submitting}>
+              취소
+            </Button>
+            <Button onClick={handleCorrectAnswer} disabled={submitting || !newAnswer.trim()}>
+              {submitting && <Loader2 className="h-4 w-4 animate-spin mr-1" />}
+              수정 및 재채점
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+    </>
   );
 }

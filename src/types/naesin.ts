@@ -353,6 +353,8 @@ export interface NaesinWrongAnswer {
   source_type: string;
   question_data: Record<string, unknown>;
   resolved: boolean;
+  sheet_id?: string | null;
+  sheet?: { id: string; title: string } | null;
   created_at: string;
 }
 

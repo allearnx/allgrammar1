@@ -19,7 +19,7 @@ export const GET = createApiHandler(
     const data = dbResult(
       await admin
         .from('naesin_wrong_answers')
-        .select('*')
+        .select('*, sheet:naesin_problem_sheets(id, title)')
         .eq('student_id', studentId)
         .order('created_at', { ascending: false })
         .limit(200)
