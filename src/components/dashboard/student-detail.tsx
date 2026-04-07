@@ -57,7 +57,7 @@ export async function StudentDetail({ user, studentId, naesinData }: Props) {
 
   if (!student) notFound();
 
-  const [videoRes, naesinVideoRes, memoryRes, textbookRes, passageStagesRes, naesinProgressRes, vocaProgressRes, vocaAssignmentRes, naesinAssignmentRes, naesinTextbooksRes, fillBlanksAttemptsRes] = await Promise.all([
+  const [videoRes, naesinVideoRes, memoryRes, textbookRes, passageStagesRes, naesinProgressRes, vocaProgressRes, vocaAssignmentRes, naesinAssignmentRes, naesinTextbooksRes, fillBlanksAttemptsRes, problemSheetsRes, problemAttemptsRes] = await Promise.all([
     admin
       .from('student_progress')
       .select('*, grammar:grammars(title, level:levels(level_number, title_ko))')
@@ -113,6 +113,16 @@ export async function StudentDetail({ user, studentId, naesinData }: Props) {
       .eq('student_id', studentId)
       .eq('type', 'fill_blanks')
       .not('difficulty', 'is', null),
+    admin
+      .from('naesin_problem_sheets')
+      .select('id, unit_id, title, sort_order')
+      .eq('category', 'problem')
+      .in('unit_id', (naesinData?.units || []).map((u) => u.id))
+      .order('sort_order'),
+    admin
+      .from('naesin_problem_attempts')
+      .select('sheet_id, score, total_questions')
+      .eq('student_id', studentId),
   ]);
 
   // Build fill_blanks difficulty best scores per unit
@@ -122,6 +132,23 @@ export async function StudentDetail({ user, studentId, naesinData }: Props) {
     if (!fillBlanksByUnit[a.unit_id]) fillBlanksByUnit[a.unit_id] = {};
     const cur = fillBlanksByUnit[a.unit_id][a.difficulty] ?? 0;
     fillBlanksByUnit[a.unit_id][a.difficulty] = Math.max(cur, a.score);
+  }
+
+  // Build problem sheets by unit
+  const problemSheetsByUnit: Record<string, { id: string; title: string }[]> = {};
+  for (const s of problemSheetsRes.data || []) {
+    if (!problemSheetsByUnit[s.unit_id]) problemSheetsByUnit[s.unit_id] = [];
+    problemSheetsByUnit[s.unit_id].push({ id: s.id, title: s.title });
+  }
+
+  // Build problem attempts best score by sheet
+  const problemAttemptsBySheet: Record<string, { score: number; total: number; pct: number }> = {};
+  for (const a of problemAttemptsRes.data || []) {
+    const cur = problemAttemptsBySheet[a.sheet_id];
+    const pct = a.total_questions > 0 ? Math.round((a.score / a.total_questions) * 100) : 0;
+    if (!cur || pct > cur.pct) {
+      problemAttemptsBySheet[a.sheet_id] = { score: a.score, total: a.total_questions, pct };
+    }
   }
 
   const passageStages = (passageStagesRes.data?.passage_required_stages as string[] | null) ?? ['fill_blanks', 'translation'];
@@ -205,6 +232,8 @@ export async function StudentDetail({ user, studentId, naesinData }: Props) {
             translationSentencesPerPage={translationSentencesPerPage}
             tier={planContext.tier}
             fillBlanksByUnit={fillBlanksByUnit}
+            problemSheetsByUnit={problemSheetsByUnit}
+            problemAttemptsBySheet={problemAttemptsBySheet}
           />
         )}
 

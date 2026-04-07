@@ -48,6 +48,8 @@ interface Props {
   translationSentencesPerPage: number;
   tier?: Tier;
   fillBlanksByUnit?: Record<string, Record<string, number>>;
+  problemSheetsByUnit?: Record<string, { id: string; title: string }[]>;
+  problemAttemptsBySheet?: Record<string, { score: number; total: number; pct: number }>;
 }
 
 export function NaesinProgressCard({
@@ -61,6 +63,8 @@ export function NaesinProgressCard({
   translationSentencesPerPage,
   tier,
   fillBlanksByUnit,
+  problemSheetsByUnit,
+  problemAttemptsBySheet,
 }: Props) {
   const naesinUnits = naesinData.units;
   const naesinProgressMap = new Map(naesinProgress.map((p) => [p.unit_id, p]));
@@ -123,12 +127,16 @@ export function NaesinProgressCard({
 
               const hasDialogueScore = !!progress && (progress.dialogue_ordering_best != null || progress.dialogue_first_letter_best != null || progress.dialogue_translation_best != null);
 
+              const unitSheets = problemSheetsByUnit?.[unit.id] || [];
+              const unitSheetAttempts = unitSheets.filter((s) => problemAttemptsBySheet?.[s.id]);
+              const hasSomeSheetAttempts = unitSheetAttempts.length > 0 && unitSheetAttempts.length < unitSheets.length;
+
               const stages = [
                 { key: 'vocab', label: '단어', icon: BookOpen, completed: progress?.vocab_completed ?? false, inProgress: false },
                 { key: 'passage', label: '교과서 암기', icon: FileText, completed: progress?.passage_completed ?? false, inProgress: !progress?.passage_completed && hasPassageScore },
                 { key: 'dialogue', label: '대화문', icon: MessageSquare, completed: progress?.dialogue_completed ?? false, inProgress: !progress?.dialogue_completed && hasDialogueScore },
                 { key: 'grammar', label: '문법', icon: GraduationCap, completed: progress?.grammar_completed ?? false, inProgress: !progress?.grammar_completed && hasGrammarProgress },
-                { key: 'problem', label: '문제', icon: ClipboardList, completed: progress?.problem_completed ?? false, inProgress: false },
+                { key: 'problem', label: '문제', icon: ClipboardList, completed: progress?.problem_completed ?? false, inProgress: !(progress?.problem_completed) && hasSomeSheetAttempts },
               ];
               const completedCount = stages.filter((s) => s.completed).length;
 
@@ -165,19 +173,19 @@ export function NaesinProgressCard({
                       </div>
                     ))}
                   </div>
-                  {progress && (progress.vocab_quiz_score !== null || progress.vocab_spelling_score !== null || progress.passage_fill_blanks_best !== null || progress.passage_ordering_best !== null || progress.passage_translation_best !== null || progress.passage_grammar_vocab_best !== null || progress.dialogue_ordering_best !== null || progress.dialogue_first_letter_best !== null || progress.dialogue_translation_best !== null || progress.grammar_total_videos > 0) && (
+                  {(progress && (progress.vocab_quiz_score !== null || progress.vocab_spelling_score !== null || progress.passage_fill_blanks_best !== null || progress.passage_ordering_best !== null || progress.passage_translation_best !== null || progress.passage_grammar_vocab_best !== null || progress.dialogue_ordering_best !== null || progress.dialogue_first_letter_best !== null || progress.dialogue_translation_best !== null || progress.grammar_total_videos > 0) || unitSheets.length > 0) && (
                     <div className="flex gap-2 mt-2 flex-wrap">
-                      {progress.vocab_quiz_score !== null && (
+                      {progress?.vocab_quiz_score !== null && progress?.vocab_quiz_score !== undefined && (
                         <span className={`text-xs px-1.5 py-0.5 rounded ${scoreChipClass(progress.vocab_quiz_score)}`}>
                           퀴즈 {progress.vocab_quiz_score}점
                         </span>
                       )}
-                      {progress.vocab_spelling_score !== null && (
+                      {progress?.vocab_spelling_score !== null && progress?.vocab_spelling_score !== undefined && (
                         <span className={`text-xs px-1.5 py-0.5 rounded ${scoreChipClass(progress.vocab_spelling_score)}`}>
                           스펠링 {progress.vocab_spelling_score}점
                         </span>
                       )}
-                      {progress.passage_fill_blanks_best !== null && (() => {
+                      {progress?.passage_fill_blanks_best !== null && progress?.passage_fill_blanks_best !== undefined && (() => {
                         const fb = fillBlanksByUnit?.[unit.id];
                         const DIFF_LABEL: Record<string, string> = { easy: '쉬움', medium: '보통', hard: '어려움' };
                         if (fb && Object.keys(fb).length > 0) {
@@ -193,41 +201,57 @@ export function NaesinProgressCard({
                           </span>
                         );
                       })()}
-                      {progress.passage_ordering_best !== null && (
+                      {progress?.passage_ordering_best != null && (
                         <span className={`text-xs px-1.5 py-0.5 rounded ${passageChipClass}`}>
                           순서 {progress.passage_ordering_best}점
                         </span>
                       )}
-                      {progress.passage_translation_best !== null && (
+                      {progress?.passage_translation_best != null && (
                         <span className={`text-xs px-1.5 py-0.5 rounded ${passageChipClass}`}>
                           영작 {progress.passage_translation_best}점
                         </span>
                       )}
-                      {progress.passage_grammar_vocab_best !== null && (
+                      {progress?.passage_grammar_vocab_best != null && (
                         <span className={`text-xs px-1.5 py-0.5 rounded ${passageChipClass}`}>
                           어법/어휘 {progress.passage_grammar_vocab_best}점
                         </span>
                       )}
-                      {progress.dialogue_ordering_best !== null && (
+                      {progress?.dialogue_ordering_best != null && (
                         <span className={`text-xs px-1.5 py-0.5 rounded ${scoreChipClass(progress.dialogue_ordering_best)}`}>
                           대화순서 {progress.dialogue_ordering_best}점
                         </span>
                       )}
-                      {progress.dialogue_first_letter_best !== null && (
+                      {progress?.dialogue_first_letter_best != null && (
                         <span className={`text-xs px-1.5 py-0.5 rounded ${scoreChipClass(progress.dialogue_first_letter_best)}`}>
                           첫글자 {progress.dialogue_first_letter_best}점
                         </span>
                       )}
-                      {progress.dialogue_translation_best !== null && (
+                      {progress?.dialogue_translation_best != null && (
                         <span className={`text-xs px-1.5 py-0.5 rounded ${scoreChipClass(progress.dialogue_translation_best)}`}>
                           대화영작 {progress.dialogue_translation_best}점
                         </span>
                       )}
-                      {progress.grammar_total_videos > 0 && (
+                      {(progress?.grammar_total_videos ?? 0) > 0 && progress && (
                         <span className="text-xs px-1.5 py-0.5 rounded bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-300">
                           영상 {progress.grammar_videos_completed}/{progress.grammar_total_videos}
                         </span>
                       )}
+                      {unitSheets.map((sheet, idx) => {
+                        const attempt = problemAttemptsBySheet?.[sheet.id];
+                        const label = unitSheets.length > 1 ? `문제${idx + 1}` : '문제';
+                        if (attempt) {
+                          return (
+                            <span key={sheet.id} className={`text-xs px-1.5 py-0.5 rounded ${scoreChipClass(attempt.pct)}`}>
+                              {label} {attempt.pct}점
+                            </span>
+                          );
+                        }
+                        return (
+                          <span key={sheet.id} className="text-xs px-1.5 py-0.5 rounded bg-gray-100 text-gray-500 dark:bg-gray-800 dark:text-gray-400">
+                            {label} 미완료
+                          </span>
+                        );
+                      })}
                     </div>
                   )}
                   {progress?.updated_at && (
