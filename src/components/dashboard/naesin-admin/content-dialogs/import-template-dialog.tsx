@@ -11,6 +11,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
+import { Checkbox } from '@/components/ui/checkbox';
 import { Loader2, Library, ClipboardList, Trash2, Pencil } from 'lucide-react';
 import { fetchWithToast } from '@/lib/fetch-with-toast';
 import { EditTemplateDialog } from './edit-template-dialog';
@@ -41,6 +42,8 @@ export function ImportTemplateDialog({ unitId, onAdd }: Props) {
   const [grouped, setGrouped] = useState<Record<string, TemplateItem[]>>({});
   const [activeTopic, setActiveTopic] = useState<string | null>(null);
   const [copying, setCopying] = useState<string | null>(null);
+  const [bulkImporting, setBulkImporting] = useState(false);
+  const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
   const [deleting, setDeleting] = useState<string | null>(null);
   const [editingTemplate, setEditingTemplate] = useState<TemplateItem | null>(null);
 
@@ -68,6 +71,15 @@ export function ImportTemplateDialog({ unitId, onAdd }: Props) {
     }
   }
 
+  function toggleSelect(id: string) {
+    setSelectedIds((prev) => {
+      const next = new Set(prev);
+      if (next.has(id)) next.delete(id);
+      else next.add(id);
+      return next;
+    });
+  }
+
   async function handleImport(templateId: string) {
     setCopying(templateId);
     try {
@@ -86,6 +98,29 @@ export function ImportTemplateDialog({ unitId, onAdd }: Props) {
       // fetchWithToast handles toast
     } finally {
       setCopying(null);
+    }
+  }
+
+  async function handleBulkImport() {
+    if (selectedIds.size === 0) return;
+    setBulkImporting(true);
+    try {
+      await Promise.all(
+        Array.from(selectedIds).map((templateId) =>
+          fetchWithToast('/api/naesin/templates/import', {
+            body: { templateId, targetUnitIds: [unitId] },
+            errorMessage: '템플릿 가져오기 실패',
+            logContext: 'import_template.bulk_import',
+          })
+        )
+      );
+      setSelectedIds(new Set());
+      setOpen(false);
+      onAdd();
+    } catch {
+      // fetchWithToast handles toast
+    } finally {
+      setBulkImporting(false);
     }
   }
 
@@ -161,6 +196,24 @@ export function ImportTemplateDialog({ unitId, onAdd }: Props) {
                 ))}
               </div>
 
+              {/* Bulk import bar */}
+              {selectedIds.size > 0 && (
+                <div className="flex items-center justify-between rounded-lg border border-primary/30 bg-primary/5 px-3 py-2">
+                  <span className="text-sm font-medium">{selectedIds.size}개 선택됨</span>
+                  <Button
+                    size="sm"
+                    className="h-7 text-xs"
+                    disabled={bulkImporting}
+                    onClick={handleBulkImport}
+                  >
+                    {bulkImporting ? (
+                      <Loader2 className="h-3 w-3 animate-spin mr-1" />
+                    ) : null}
+                    {selectedIds.size}개 가져오기
+                  </Button>
+                </div>
+              )}
+
               {/* Template list */}
               {activeTopic && grouped[activeTopic] && (
                 <div className="space-y-1.5 rounded-lg border p-2 max-h-[50vh] overflow-y-auto">
@@ -176,6 +229,11 @@ export function ImportTemplateDialog({ unitId, onAdd }: Props) {
                         key={tmpl.id}
                         className="flex items-center gap-2 rounded px-3 py-2 hover:bg-muted/50"
                       >
+                        <Checkbox
+                          checked={selectedIds.has(tmpl.id)}
+                          onCheckedChange={() => toggleSelect(tmpl.id)}
+                          aria-label={`${tmpl.title} 선택`}
+                        />
                         <ClipboardList className="h-3.5 w-3.5 text-red-500 shrink-0" />
                         <span className="text-sm flex-1 truncate">{tmpl.title}</span>
                         <Badge variant="secondary" className="text-[11px]">
