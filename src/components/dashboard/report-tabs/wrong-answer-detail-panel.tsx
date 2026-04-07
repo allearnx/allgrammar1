@@ -139,11 +139,11 @@ function ReadOnlyWrongAnswerCard({
         '/api/naesin/problems/correct-answer',
         {
           method: 'PATCH',
-          body: JSON.stringify({
+          body: {
             sheetId: wrongAnswer.sheet_id,
             questionIndex,
             newAnswer: newAnswer.trim(),
-          }),
+          },
           logContext: 'correct_answer',
         }
       );
