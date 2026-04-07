@@ -113,7 +113,7 @@ function SimilarProblemView({ problems }: { problems: NaesinSimilarProblem[] }) 
 
       <Card>
         <CardContent className="py-6">
-          <p className="text-lg font-medium whitespace-pre-wrap">{q.question}</p>
+          <p className="text-lg font-medium whitespace-pre-wrap">{q.question.replace(/\\n/g, '\n')}</p>
         </CardContent>
       </Card>
 

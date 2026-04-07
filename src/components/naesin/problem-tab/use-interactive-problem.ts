@@ -6,8 +6,8 @@ import { useProblemDraft } from '@/hooks/use-problem-draft';
 import type { AiFeedback, WrongItem, InteractiveDraft } from '@/hooks/use-problem-draft';
 import { useQuestionTimer } from '@/hooks/use-question-timer';
 
-export const MCQ_TIME_LIMIT = 40;
-export const SUBJECTIVE_TIME_LIMIT = 120;
+export const MCQ_MIN_TIME = 10;
+export const SUBJECTIVE_MIN_TIME = 30;
 
 export function useInteractiveProblem({
   sheetId,
@@ -78,8 +78,8 @@ export function useInteractiveProblem({
   const question = questions[currentIndex];
   const isSubjective = !question?.options || question.options.length === 0;
   const isMultiSelect = !isSubjective && String(question.answer).includes(',');
-  const timeLimit = isSubjective ? SUBJECTIVE_TIME_LIMIT : MCQ_TIME_LIMIT;
-  const { remaining, isExpired, reset: resetTimer, pause: pauseTimer } = useQuestionTimer(timeLimit);
+  const minTime = isSubjective ? SUBJECTIVE_MIN_TIME : MCQ_MIN_TIME;
+  const { remaining, isExpired: isReady, reset: resetTimer, pause: pauseTimer } = useQuestionTimer(minTime);
 
   async function gradeSubjective(studentAnswer: string): Promise<{ score: number } | null> {
     try {
@@ -146,7 +146,6 @@ export function useInteractiveProblem({
     newScore: typeof score,
     newWrongList: WrongItem[],
     aiMap: Record<string, AiFeedback>,
-    ot?: number[],
   ) {
     const updatedAnswersMap = { ...answersMap, [currentIndex]: answer };
     setAnswersMap(updatedAnswersMap);
@@ -155,7 +154,7 @@ export function useInteractiveProblem({
       const allAnswers = questions.map((_, i) => updatedAnswersMap[i] ?? '');
       submitResults(allAnswers, questions.length, aiMap);
     } else {
-      saveCurrentDraft(newScore, newWrongList, aiMap, ot, updatedAnswersMap);
+      saveCurrentDraft(newScore, newWrongList, aiMap, undefined, updatedAnswersMap);
     }
   }
 
@@ -163,12 +162,6 @@ export function useInteractiveProblem({
     if (showResult || isGrading) return;
     setSelectedAnswer(answer);
     pauseTimer();
-
-    let currentOvertime = overtimeQuestions;
-    if (isExpired) {
-      currentOvertime = [...overtimeQuestions, question.number];
-      setOvertimeQuestions(currentOvertime);
-    }
 
     const isLast = currentIndex === questions.length - 1;
 
@@ -185,19 +178,19 @@ export function useInteractiveProblem({
         const correct = result.score === 100;
         setShowResult(true);
         const { newScore, newWrongList } = applyResult(correct, answer, question);
-        finishOrSave(isLast, answer, newScore, newWrongList, newAiMap, currentOvertime);
+        finishOrSave(isLast, answer, newScore, newWrongList, newAiMap);
       } else {
         // Fallback: simple string comparison
         const correct = String(answer).trim().toLowerCase() === String(question.answer).trim().toLowerCase();
         setShowResult(true);
         const { newScore, newWrongList } = applyResult(correct, answer, question);
-        finishOrSave(isLast, answer, newScore, newWrongList, aiResultsMap, currentOvertime);
+        finishOrSave(isLast, answer, newScore, newWrongList, aiResultsMap);
       }
     } else {
       const correct = String(answer) === String(question.answer);
       setShowResult(true);
       const { newScore, newWrongList } = applyResult(correct, answer, question);
-      finishOrSave(isLast, answer, newScore, newWrongList, aiResultsMap, currentOvertime);
+      finishOrSave(isLast, answer, newScore, newWrongList, aiResultsMap);
     }
   }
 
@@ -217,18 +210,12 @@ export function useInteractiveProblem({
 
     pauseTimer();
 
-    let currentOvertime = overtimeQuestions;
-    if (isExpired) {
-      currentOvertime = [...overtimeQuestions, question.number];
-      setOvertimeQuestions(currentOvertime);
-    }
-
     const isLast = currentIndex === questions.length - 1;
     const correct = sortedAnswer === normalizedCorrect;
     setSelectedAnswer(sortedAnswer);
     setShowResult(true);
     const { newScore, newWrongList } = applyResult(correct, sortedAnswer, question);
-    finishOrSave(isLast, sortedAnswer, newScore, newWrongList, aiResultsMap, currentOvertime);
+    finishOrSave(isLast, sortedAnswer, newScore, newWrongList, aiResultsMap);
   }
 
   function handleNext() {
@@ -240,7 +227,7 @@ export function useInteractiveProblem({
       setSelectedAnswer(null);
       setMultiSelectedValues([]);
       setSubjectiveResult(null);
-      resetTimer(nextIsSubjective ? SUBJECTIVE_TIME_LIMIT : MCQ_TIME_LIMIT);
+      resetTimer(nextIsSubjective ? SUBJECTIVE_MIN_TIME : MCQ_MIN_TIME);
     }
   }
 
@@ -329,7 +316,7 @@ export function useInteractiveProblem({
     isMultiSelect,
     multiSelectedValues,
     remaining,
-    isExpired,
+    isReady,
     handleSelect,
     handleMultiToggle,
     handleMultiSubmit,

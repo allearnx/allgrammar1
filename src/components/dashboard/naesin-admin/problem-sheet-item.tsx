@@ -36,6 +36,8 @@ interface ProblemSheetItemProps {
   onDoneEditing: () => void;
   onSetEditingIdx: (idx: number) => void;
   onDeleteQuestion: (idx: number) => void;
+  onUpdateAcceptedAnswers: (idx: number, answers: string[]) => void;
+  onGenerateAcceptedAnswers: (idx: number) => void;
   onRegrade: (sheetId: string) => void;
   regrading: boolean;
 }
@@ -70,6 +72,8 @@ export function ProblemSheetItem({
   onDoneEditing,
   onSetEditingIdx,
   onDeleteQuestion,
+  onUpdateAcceptedAnswers,
+  onGenerateAcceptedAnswers,
   onRegrade,
   regrading,
 }: ProblemSheetItemProps) {
@@ -205,6 +209,8 @@ export function ProblemSheetItem({
                         onUpdateOption={(optIdx, value) => onEditOption(i, optIdx, value)}
                         onToggleType={() => onToggleQuestionType(i)}
                         onDone={onDoneEditing}
+                        onUpdateAcceptedAnswers={(answers) => onUpdateAcceptedAnswers(i, answers)}
+                        onGenerateAcceptedAnswers={() => onGenerateAcceptedAnswers(i)}
                       />
                     ) : (
                       <QuestionViewRow

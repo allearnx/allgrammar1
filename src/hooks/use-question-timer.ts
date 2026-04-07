@@ -10,18 +10,17 @@ export function useQuestionTimer(initialSeconds: number) {
   useEffect(() => {
     intervalRef.current = setInterval(() => {
       setRemaining((prev) => {
+        if (prev <= 0) return 0;
         const next = prev - 1;
-        if (next <= 0 && !isExpired) {
-          setIsExpired(true);
-        }
-        return next;
+        if (next <= 0) setIsExpired(true);
+        return Math.max(next, 0);
       });
     }, 1000);
 
     return () => {
       if (intervalRef.current) clearInterval(intervalRef.current);
     };
-  }, [isExpired]);
+  }, []);
 
   const reset = useCallback((newSeconds?: number) => {
     if (intervalRef.current) clearInterval(intervalRef.current);
@@ -29,11 +28,10 @@ export function useQuestionTimer(initialSeconds: number) {
     setIsExpired(false);
     intervalRef.current = setInterval(() => {
       setRemaining((prev) => {
+        if (prev <= 0) return 0;
         const next = prev - 1;
-        if (next <= 0) {
-          setIsExpired(true);
-        }
-        return next;
+        if (next <= 0) setIsExpired(true);
+        return Math.max(next, 0);
       });
     }, 1000);
   }, [initialSeconds]);

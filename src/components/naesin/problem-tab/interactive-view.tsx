@@ -15,30 +15,12 @@ import { ResultsScreen } from './results-screen';
 
 export type { WrongItem };
 
-function TimerBadge({ remaining, isExpired }: { remaining: number; isExpired: boolean }) {
-  if (isExpired) {
-    return (
-      <Badge variant="destructive" className="gap-1 animate-pulse">
-        <Clock className="h-3 w-3" />
-        시간 초과
-      </Badge>
-    );
-  }
-  const mins = Math.floor(remaining / 60);
-  const secs = remaining % 60;
-  const display = mins > 0 ? `${mins}:${String(secs).padStart(2, '0')}` : `${secs}초`;
-  const isWarning = remaining <= 10;
-
+function MinTimeBadge({ remaining }: { remaining: number }) {
+  if (remaining <= 0) return null;
   return (
-    <Badge
-      variant="secondary"
-      className={cn(
-        'gap-1 tabular-nums',
-        isWarning && 'bg-yellow-100 text-yellow-700 border-yellow-300 animate-pulse',
-      )}
-    >
+    <Badge variant="secondary" className="gap-1 tabular-nums">
       <Clock className="h-3 w-3" />
-      {display}
+      {remaining}초 후 답변 가능
     </Badge>
   );
 }
@@ -87,7 +69,7 @@ export function InteractiveProblemView({
   const {
     currentIndex, selectedAnswer, showResult, score, finished,
     wrongList, isGrading, isCurrentCorrect,
-    question, isSubjective, isMultiSelect, multiSelectedValues, remaining, isExpired,
+    question, isSubjective, isMultiSelect, multiSelectedValues, remaining, isReady,
     handleSelect, handleMultiToggle, handleMultiSubmit, handleNext, handleMidSave, isMidSaving, answersMap,
   } = useInteractiveProblem({ sheetId: sheet.id, questions, unitId, onComplete });
 
@@ -117,7 +99,7 @@ export function InteractiveProblemView({
             )}
             <span className="ml-1 hidden sm:inline">중간 저장</span>
           </Button>
-          {!showResult && <TimerBadge remaining={remaining} isExpired={isExpired} />}
+          {!showResult && <MinTimeBadge remaining={remaining} />}
           <Badge variant="secondary" className="text-green-600">{score.correct} 정답</Badge>
           <Badge variant="secondary" className="text-red-600">{score.wrong} 오답</Badge>
         </div>
@@ -127,12 +109,18 @@ export function InteractiveProblemView({
         <CardContent className="py-6">
           <p className="text-sm text-muted-foreground mb-2">문제 {question.number}</p>
           <p className="text-lg font-medium whitespace-pre-wrap">
-            {/^\[.+?\]/.test(question.question) ? (
-              <>
-                <span className="font-bold">{question.question.match(/^\[.+?\]/)![0]}</span>
-                {question.question.replace(/^\[.+?\]/, '')}
-              </>
-            ) : question.question}
+            {(() => {
+              const q = question.question.replace(/\\n/g, '\n');
+              if (/^\[.+?\]/.test(q)) {
+                return (
+                  <>
+                    <span className="font-bold">{q.match(/^\[.+?\]/)![0]}</span>
+                    {q.replace(/^\[.+?\]/, '')}
+                  </>
+                );
+              }
+              return q;
+            })()}
           </p>
         </CardContent>
       </Card>

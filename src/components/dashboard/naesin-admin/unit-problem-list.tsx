@@ -190,6 +190,8 @@ export function UnitProblemList({ sheets, onUpdate, onRequestDelete }: UnitProbl
           onDoneEditing={() => editor.setEditingIdx(null)}
           onSetEditingIdx={editor.setEditingIdx}
           onDeleteQuestion={editor.deleteQuestion}
+          onUpdateAcceptedAnswers={editor.updateAcceptedAnswers}
+          onGenerateAcceptedAnswers={editor.generateAcceptedAnswers}
           onRegrade={regrade}
           regrading={regradingId === sheet.id}
         />
