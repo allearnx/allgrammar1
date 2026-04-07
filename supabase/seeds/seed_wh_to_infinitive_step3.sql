@@ -297,8 +297,8 @@ BEGIN
     '의문사+to부정사',
     q,
     a,
-    'grammar',
-    'practice'
+    'problem',
+    'interactive'
   );
 
   RAISE NOTICE '의문사+to부정사 Step3 템플릿 생성 완료 (40문제, 서술형, paraphrased)';

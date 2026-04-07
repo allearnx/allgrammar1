@@ -100,7 +100,7 @@ export default async function NaesinPage() {
         supabase.from('naesin_dialogues').select('unit_id').in('unit_id', unitIds),
         supabase.from('naesin_textbook_videos').select('id, unit_id').in('unit_id', unitIds),
         supabase.from('naesin_grammar_lessons').select('id, unit_id, content_type').in('unit_id', unitIds),
-        supabase.from('naesin_problem_sheets').select('unit_id').in('category', ['problem', 'grammar']).in('unit_id', unitIds),
+        supabase.from('naesin_problem_sheets').select('unit_id').eq('category', 'problem').in('unit_id', unitIds),
         supabase.from('naesin_problem_sheets').select('unit_id').eq('category', 'mock_exam').in('unit_id', unitIds),
         supabase.from('naesin_problem_sheets').select('unit_id').eq('category', 'last_review').in('unit_id', unitIds),
         supabase.from('naesin_similar_problems').select('unit_id').eq('status', 'approved').in('unit_id', unitIds),

@@ -111,7 +111,7 @@ async function fetchNaesinTree(
     supabase
       .from('naesin_problem_sheets')
       .select('unit_id')
-      .in('category', ['problem', 'grammar']),
+      .eq('category', 'problem'),
     supabase
       .from('naesin_problem_sheets')
       .select('unit_id')
