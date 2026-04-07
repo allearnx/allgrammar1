@@ -26,7 +26,7 @@
 ```bash
 npm install
 npm run dev          # http://localhost:3000
-npm run test         # vitest (432 tests)
+npm run test         # vitest (466 tests)
 npm run build        # production build
 npx tsc --noEmit     # type check only
 ```
@@ -139,7 +139,7 @@ src/
 │   │   ├── teacher/         # teacher dashboard
 │   │   └── [role]/          # shared views (reports, etc.)
 │   ├── (public)/            # public marketing pages
-│   └── api/                 # API routes (~70 endpoints)
+│   └── api/                 # API routes (~127 endpoints)
 │
 ├── components/
 │   ├── auth/                # signup fields, invite code
@@ -158,7 +158,7 @@ src/
 │   ├── ui/                  # ShadCN UI primitives
 │   └── voca/                # voca learning components
 │
-├── hooks/                   # Custom React hooks (21 files)
+├── hooks/                   # Custom React hooks (23 files)
 │   ├── use-list-crud.ts     # generic list CRUD with optimistic updates
 │   ├── use-inline-edit.ts   # inline editing pattern
 │   ├── use-confirm-delete.ts # delete confirmation dialog
@@ -196,7 +196,7 @@ src/
 │   ├── grammar.ts           # Phase 1 grammar types
 │   └── ...
 │
-└── __tests__/               # 432 tests (vitest)
+└── __tests__/               # 466 tests (vitest)
 ```
 
 ---
@@ -267,7 +267,7 @@ logger.error('feature.error', { error: err.message });
 
 ## Database
 
-- **52 migrations**: `supabase/migrations/001_*.sql` ~ `052_*.sql`
+- **62 migrations**: `supabase/migrations/001_*.sql` ~ `062_*.sql`
 - **RLS**: 모든 테이블에 Row Level Security 적용 (학원별 격리)
 - **DB 트리거**: `SECURITY DEFINER` + `SET search_path = public` 필수
 - SQL 마이그레이션 적용: Supabase SQL Editor 사용
@@ -300,12 +300,12 @@ logger.error('feature.error', { error: err.message });
 ## Testing
 
 ```bash
-npm run test              # vitest 전체 실행 (432 tests)
+npm run test              # vitest 전체 실행 (466 tests)
 npx vitest run --watch    # watch mode
 npx tsc --noEmit          # type check only
 ```
 
-테스트 위치: `src/__tests__/` (41 파일, 432 테스트)
+테스트 위치: `src/__tests__/` (43 파일, 466 테스트)
 
 주요 테스트:
 - API 스키마 검증 (`api-schemas.test.ts`)
