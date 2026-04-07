@@ -91,14 +91,20 @@ export async function updateSession(request: NextRequest) {
     );
     const { data } = await admin
       .from('users')
-      .select('id, email, full_name, role, academy_id, is_homepage_manager, academy:academies(can_manage_content)')
+      .select('id, email, full_name, role, academy_id, is_homepage_manager')
       .eq('id', user.id)
       .single();
     if (data) {
-      const rawAcademy = data.academy;
-      const academy = (Array.isArray(rawAcademy) ? rawAcademy[0] : rawAcademy) as { can_manage_content: boolean } | null;
-      const { academy: _drop, ...rest } = data;
-      profile = { ...rest, can_manage_content: academy?.can_manage_content ?? false };
+      let canManageContent = false;
+      if (data.academy_id) {
+        const { data: acad } = await admin
+          .from('academies')
+          .select('can_manage_content')
+          .eq('id', data.academy_id)
+          .single();
+        canManageContent = acad?.can_manage_content ?? false;
+      }
+      profile = { ...data, can_manage_content: canManageContent };
     }
   }
 
