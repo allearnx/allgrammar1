@@ -146,7 +146,7 @@ export function ProblemSheetItem({
         <Button
           variant="ghost"
           size="icon"
-          className="h-6 w-6 opacity-0 group-hover:opacity-100"
+          className="h-6 w-6"
           onClick={(e) => { e.stopPropagation(); onRegrade(sheet.id); }}
           disabled={regrading}
           aria-label="재채점"

@@ -11,3 +11,4 @@ export * from './naesin';
 export * from './voca';
 export * from './report';
 export * from './billing';
+export * from './announcement';

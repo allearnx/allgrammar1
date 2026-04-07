@@ -3,6 +3,7 @@
 import type { AuthUser } from '@/types/auth';
 import { Badge } from '@/components/ui/badge';
 import { cn } from '@/lib/utils';
+import { NotificationCenter } from './notification-center';
 
 interface TopbarProps {
   user: AuthUser;
@@ -40,6 +41,7 @@ export function Topbar({ user, title }: TopbarProps) {
       <div className="w-8 md:hidden" />
       <h1 className="text-lg font-semibold tracking-tight truncate">{title || '대시보드'}</h1>
       <div className="ml-auto flex items-center gap-3">
+        {user.role !== 'student' && <NotificationCenter />}
         <Badge
           variant="secondary"
           className={cn(

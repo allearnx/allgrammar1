@@ -18,6 +18,7 @@ import {
   UserCircle,
   Star,
   HelpCircle,
+  Megaphone,
 } from 'lucide-react';
 import type { NaesinStageStatuses } from '@/types/database';
 
@@ -152,6 +153,7 @@ export const NAV_CONFIG: Record<string, NavGroup[]> = {
         { href: '/boss/users', label: '사용자 관리', icon: Users },
         { href: '/boss/students', label: '학생 관리', icon: Users },
         { href: '/boss/teachers', label: '선생님 관리', icon: GraduationCap },
+        { href: '/boss/announcements', label: '공지사항', icon: Megaphone },
       ],
     },
     {
