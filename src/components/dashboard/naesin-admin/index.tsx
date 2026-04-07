@@ -12,14 +12,16 @@ import { AddTextbookDialog, EditTextbookDialog } from './textbook-dialogs';
 import { AddUnitDialog, UnitCard } from './unit-section';
 import { ConfirmDialog } from '@/components/shared/confirm-dialog';
 import { WorkbookManager } from './workbook-manager';
+import { TemplateLibraryClient } from './template-library-client';
 import { logger } from '@/lib/logger';
 import { fetchWithToast } from '@/lib/fetch-with-toast';
 
 interface NaesinAdminClientProps {
   textbooks: NaesinTextbook[];
+  initialTab?: string;
 }
 
-export function NaesinAdminClient({ textbooks: initialTextbooks }: NaesinAdminClientProps) {
+export function NaesinAdminClient({ textbooks: initialTextbooks, initialTab }: NaesinAdminClientProps) {
   const [textbooks, setTextbooks] = useState(initialTextbooks);
   const [selectedTextbook, setSelectedTextbook] = useState<NaesinTextbook | null>(null);
   const [units, setUnits] = useState<NaesinUnit[]>([]);
@@ -54,10 +56,11 @@ export function NaesinAdminClient({ textbooks: initialTextbooks }: NaesinAdminCl
   }
 
   return (
-    <Tabs defaultValue="content" className="space-y-6">
+    <Tabs defaultValue={initialTab || 'content'} className="space-y-6">
       <TabsList>
         <TabsTrigger value="content">내신 콘텐츠 관리</TabsTrigger>
         <TabsTrigger value="workbook-omr">교재 OMR 관리</TabsTrigger>
+        <TabsTrigger value="templates">문제 템플릿</TabsTrigger>
       </TabsList>
 
       <TabsContent value="content">
@@ -202,6 +205,10 @@ export function NaesinAdminClient({ textbooks: initialTextbooks }: NaesinAdminCl
 
       <TabsContent value="workbook-omr">
         <WorkbookManager />
+      </TabsContent>
+
+      <TabsContent value="templates">
+        <TemplateLibraryClient />
       </TabsContent>
     </Tabs>
   );

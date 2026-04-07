@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { cn } from '@/lib/utils';
 import { Loader2, Lock } from 'lucide-react';
 import { useState, useTransition } from 'react';
@@ -22,12 +22,15 @@ export function NavLinks({
   hoverWhite?: boolean;
 }) {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const [isPending, startTransition] = useTransition();
   const [pendingHref, setPendingHref] = useState<string | null>(null);
 
+  const fullPath = searchParams.toString() ? `${pathname}?${searchParams.toString()}` : pathname;
+
   function handleClick(e: React.MouseEvent, href: string) {
     e.preventDefault();
-    if (pathname === href) return;
+    if (fullPath === href) return;
     setPendingHref(href);
     startTransition(() => {
       router.push(href);
@@ -47,8 +50,12 @@ export function NavLinks({
           {group.items.map((item) => {
             const isNaesinItem = item.href === '/student/naesin';
             const hasTree = isNaesinItem && naesinTree && naesinTree.length > 0;
-            const isExactOnly = item.href.split('/').filter(Boolean).length === 1;
-            const isActive = pathname === item.href || (!isExactOnly && pathname.startsWith(item.href + '/'));
+            const hrefPath = item.href.split('?')[0];
+            const isExactOnly = hrefPath.split('/').filter(Boolean).length === 1;
+            const hasQuery = item.href.includes('?');
+            const isActive = hasQuery
+              ? fullPath === item.href
+              : pathname === item.href || (!isExactOnly && pathname.startsWith(item.href + '/'));
             const isLoading = isPending && pendingHref === item.href;
 
             if (item.disabled) {

@@ -5,17 +5,19 @@ import { getRoleConfig } from '@/lib/auth/role-page-config';
 
 interface Props {
   params: Promise<{ role: string }>;
+  searchParams: Promise<{ tab?: string }>;
 }
 
-export default async function NaesinPage({ params }: Props) {
+export default async function NaesinPage({ params, searchParams }: Props) {
   const { role } = await params;
+  const { tab } = await searchParams;
   const { allowedRoles } = getRoleConfig(role);
   const { user, textbooks } = await getNaesinPageData(allowedRoles);
   return (
     <>
       <Topbar user={user} title="내신 관리" />
       <div className="p-4 md:p-6">
-        <NaesinAdminClient textbooks={textbooks} />
+        <NaesinAdminClient textbooks={textbooks} initialTab={tab} />
       </div>
     </>
   );

@@ -86,7 +86,7 @@ export const NAV_CONFIG: Record<string, NavGroup[]> = {
         { href: '/teacher/naesin', label: '내신 관리', icon: ClipboardList },
         { href: '/teacher/voca', label: '올킬보카 관리', icon: BookA },
         { href: '/teacher/voca/submissions', label: '오답노트 확인', icon: FileCheck },
-        { href: '/teacher/naesin/templates', label: '문제 템플릿', icon: Library },
+        { href: '/teacher/naesin?tab=templates', label: '문제 템플릿', icon: Library },
       ],
     },
     {
@@ -115,7 +115,7 @@ export const NAV_CONFIG: Record<string, NavGroup[]> = {
         { href: '/admin/naesin', label: '내신 관리', icon: ClipboardList },
         { href: '/admin/voca', label: '올킬보카 관리', icon: BookA },
         { href: '/admin/voca/submissions', label: '오답노트 확인', icon: FileCheck },
-        { href: '/admin/naesin/templates', label: '문제 템플릿', icon: Library },
+        { href: '/admin/naesin?tab=templates', label: '문제 템플릿', icon: Library },
       ],
     },
     {
@@ -167,7 +167,7 @@ export const NAV_CONFIG: Record<string, NavGroup[]> = {
         { href: '/boss/naesin', label: '내신 관리', icon: ClipboardList },
         { href: '/boss/voca', label: '올킬보카 관리', icon: BookA },
         { href: '/boss/voca/submissions', label: '오답노트 확인', icon: FileCheck },
-        { href: '/boss/naesin/templates', label: '문제 템플릿', icon: Library },
+        { href: '/boss/naesin?tab=templates', label: '문제 템플릿', icon: Library },
       ],
     },
     {
