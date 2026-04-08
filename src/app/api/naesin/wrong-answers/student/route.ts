@@ -21,10 +21,9 @@ export const GET = createApiHandler(
     const data = dbResult(
       await admin
         .from('naesin_wrong_answers')
-        .select('*, sheet:naesin_problem_sheets(id, title, questions)')
+        .select('*, sheet:naesin_problem_sheets(id, title, questions), unit:naesin_units(id, unit_number, title)')
         .eq('student_id', studentId)
         .order('created_at', { ascending: false })
-        .limit(200)
     );
 
     enrichWrongAnswersFromSheet(data as Record<string, unknown>[]);

@@ -1,10 +1,11 @@
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useMemo } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { Switch } from '@/components/ui/switch';
 import {
   Dialog,
   DialogContent,
@@ -16,7 +17,8 @@ import {
 import { Loader2, CheckCircle, AlertTriangle, Pencil, Check } from 'lucide-react';
 import { fetchWithToast } from '@/lib/fetch-with-toast';
 import { FormattedText } from '@/components/shared/formatted-text';
-import type { NaesinWrongAnswer } from '@/types/database';
+import { cn } from '@/lib/utils';
+import type { NaesinWrongAnswer, NaesinWrongAnswerStage } from '@/types/naesin';
 
 const STAGE_LABELS: Record<string, string> = {
   vocab: '단어',
@@ -26,6 +28,8 @@ const STAGE_LABELS: Record<string, string> = {
   problem: '문제풀이',
   lastReview: '직전보강',
 };
+
+const STAGE_ORDER: NaesinWrongAnswerStage[] = ['vocab', 'passage', 'dialogue', 'grammar', 'problem', 'lastReview'];
 
 interface Props {
   studentId: string;
@@ -37,6 +41,8 @@ const TEXTBOOK_STAGES = new Set(['passage', 'dialogue', 'vocab']);
 export function WrongAnswerDetailPanel({ studentId, onRefresh }: Props) {
   const [wrongAnswers, setWrongAnswers] = useState<NaesinWrongAnswer[]>([]);
   const [loading, setLoading] = useState(true);
+  const [stageFilter, setStageFilter] = useState<NaesinWrongAnswerStage | 'all'>('all');
+  const [unresolvedOnly, setUnresolvedOnly] = useState(false);
 
   const fetchWrongAnswers = useCallback(async () => {
     try {
@@ -61,6 +67,40 @@ export function WrongAnswerDetailPanel({ studentId, onRefresh }: Props) {
     return () => { cancelled = true; };
   }, [fetchWrongAnswers]);
 
+  // Derive available stages from data
+  const availableStages = useMemo(() => {
+    const set = new Set(wrongAnswers.map((wa) => wa.stage));
+    return STAGE_ORDER.filter((s) => set.has(s));
+  }, [wrongAnswers]);
+
+  // Filter
+  const filtered = useMemo(() => {
+    let items = wrongAnswers;
+    if (stageFilter !== 'all') items = items.filter((wa) => wa.stage === stageFilter);
+    if (unresolvedOnly) items = items.filter((wa) => !wa.resolved);
+    return items;
+  }, [wrongAnswers, stageFilter, unresolvedOnly]);
+
+  // Group: stage → unit
+  const grouped = useMemo(() => {
+    const map: Record<string, Record<string, { unitLabel: string; items: NaesinWrongAnswer[] }>> = {};
+    for (const wa of filtered) {
+      if (!map[wa.stage]) map[wa.stage] = {};
+      const unitKey = wa.unit_id;
+      if (!map[wa.stage][unitKey]) {
+        const unitLabel = wa.unit
+          ? `L${wa.unit.unit_number} ${wa.unit.title}`
+          : '기타';
+        map[wa.stage][unitKey] = { unitLabel, items: [] };
+      }
+      map[wa.stage][unitKey].items.push(wa);
+    }
+    return map;
+  }, [filtered]);
+
+  const totalCount = wrongAnswers.length;
+  const unresolvedCount = wrongAnswers.filter((wa) => !wa.resolved).length;
+
   if (loading) {
     return (
       <div className="flex items-center justify-center py-8">
@@ -70,7 +110,7 @@ export function WrongAnswerDetailPanel({ studentId, onRefresh }: Props) {
     );
   }
 
-  if (wrongAnswers.length === 0) {
+  if (totalCount === 0) {
     return (
       <div className="text-center py-8">
         <CheckCircle className="h-10 w-10 text-green-500 mx-auto mb-2" />
@@ -79,44 +119,99 @@ export function WrongAnswerDetailPanel({ studentId, onRefresh }: Props) {
     );
   }
 
-  // Group by stage
-  const grouped: Record<string, NaesinWrongAnswer[]> = {};
-  wrongAnswers.forEach((wa) => {
-    if (!grouped[wa.stage]) grouped[wa.stage] = [];
-    grouped[wa.stage].push(wa);
-  });
-
-  const unresolvedCount = wrongAnswers.filter((wa) => !wa.resolved).length;
-
   return (
     <div className="space-y-4 mt-4">
+      {/* Header */}
       <div className="flex items-center gap-2">
         <AlertTriangle className="h-4 w-4 text-red-500" />
         <span className="text-sm font-medium">
-          전체 {wrongAnswers.length}개
+          전체 {totalCount}개
           {unresolvedCount > 0 && (
             <span className="text-red-500 ml-1">(미해결 {unresolvedCount}개)</span>
           )}
         </span>
       </div>
 
-      {Object.entries(grouped).map(([stage, items]) => (
-        <div key={stage}>
-          <p className="text-sm font-medium text-muted-foreground mb-2">
-            {STAGE_LABELS[stage] || stage} ({items.length}개)
-          </p>
-          <div className="space-y-2">
-            {items.map((wa) => (
-              <ReadOnlyWrongAnswerCard
-                key={wa.id}
-                wrongAnswer={wa}
-                studentId={studentId}
-                onCorrected={() => { fetchWrongAnswers(); onRefresh?.(); }}
-              />
-            ))}
-          </div>
+      {/* Filters */}
+      <div className="space-y-2">
+        {/* Stage filter chips */}
+        <div className="flex flex-wrap gap-1.5">
+          <button
+            className={cn(
+              'px-2.5 py-1 rounded-full text-xs font-medium transition-colors',
+              stageFilter === 'all'
+                ? 'bg-primary text-primary-foreground'
+                : 'bg-muted text-muted-foreground hover:bg-muted/80'
+            )}
+            onClick={() => setStageFilter('all')}
+          >
+            전체
+          </button>
+          {availableStages.map((s) => {
+            const count = wrongAnswers.filter((wa) => wa.stage === s).length;
+            return (
+              <button
+                key={s}
+                className={cn(
+                  'px-2.5 py-1 rounded-full text-xs font-medium transition-colors',
+                  stageFilter === s
+                    ? 'bg-primary text-primary-foreground'
+                    : 'bg-muted text-muted-foreground hover:bg-muted/80'
+                )}
+                onClick={() => setStageFilter(s)}
+              >
+                {STAGE_LABELS[s]} {count}
+              </button>
+            );
+          })}
         </div>
-      ))}
+
+        {/* Unresolved toggle */}
+        <label className="flex items-center gap-2 cursor-pointer">
+          <Switch checked={unresolvedOnly} onCheckedChange={setUnresolvedOnly} />
+          <span className="text-xs text-muted-foreground">미해결만 보기</span>
+        </label>
+      </div>
+
+      {/* Filtered count */}
+      {(stageFilter !== 'all' || unresolvedOnly) && (
+        <p className="text-xs text-muted-foreground">
+          필터 결과: {filtered.length}개
+        </p>
+      )}
+
+      {/* Grouped results: stage → unit */}
+      {filtered.length === 0 ? (
+        <div className="text-center py-6">
+          <CheckCircle className="h-8 w-8 text-green-500 mx-auto mb-2" />
+          <p className="text-sm text-muted-foreground">해당 조건에 맞는 오답이 없습니다.</p>
+        </div>
+      ) : (
+        STAGE_ORDER.filter((s) => grouped[s]).map((stage) => (
+          <div key={stage} className="space-y-3">
+            <h4 className="text-sm font-semibold border-b pb-1">
+              {STAGE_LABELS[stage] || stage}
+            </h4>
+            {Object.entries(grouped[stage])
+              .sort(([, a], [, b]) => a.unitLabel.localeCompare(b.unitLabel, 'ko'))
+              .map(([unitKey, { unitLabel, items }]) => (
+                <div key={unitKey} className="space-y-2">
+                  <p className="text-xs font-medium text-muted-foreground pl-1">
+                    {unitLabel} ({items.length}개)
+                  </p>
+                  {items.map((wa) => (
+                    <ReadOnlyWrongAnswerCard
+                      key={wa.id}
+                      wrongAnswer={wa}
+                      studentId={studentId}
+                      onCorrected={() => { fetchWrongAnswers(); onRefresh?.(); }}
+                    />
+                  ))}
+                </div>
+              ))}
+          </div>
+        ))
+      )}
     </div>
   );
 }

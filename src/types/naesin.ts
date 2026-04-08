@@ -356,6 +356,7 @@ export interface NaesinWrongAnswer {
   resolved: boolean;
   sheet_id?: string | null;
   sheet?: { id: string; title: string } | null;
+  unit?: { id: string; unit_number: number; title: string } | null;
   created_at: string;
 }
 
