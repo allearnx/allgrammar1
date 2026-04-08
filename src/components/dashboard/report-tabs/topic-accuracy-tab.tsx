@@ -1,15 +1,25 @@
 'use client';
 
+import Link from 'next/link';
 import { TopicAccuracyChart } from '@/components/charts/topic-accuracy-chart';
 import { MiniScoreTrend } from '@/components/charts/mini-score-trend';
-import { AlertTriangle } from 'lucide-react';
+import { AlertTriangle, ArrowRight } from 'lucide-react';
 import type { TopicAccuracyItem } from '@/types/student-report';
 
 interface Props {
   topicAccuracy: TopicAccuracyItem[];
+  role?: 'teacher' | 'admin' | 'boss' | 'student' | 'parent';
 }
 
-export function TopicAccuracyTab({ topicAccuracy }: Props) {
+function unitSummary(titles: string[]): string {
+  if (titles.length === 0) return '';
+  if (titles.length === 1) return titles[0];
+  return `${titles[0]} 외 ${titles.length - 1}개 단원`;
+}
+
+export function TopicAccuracyTab({ topicAccuracy, role }: Props) {
+  const isStudent = !role || role === 'student';
+
   // Weak topics: accuracy < 60 and at least 2 attempts
   const weakTopics = topicAccuracy
     .filter((t) => t.accuracy < 60 && t.attemptCount >= 2)
@@ -43,15 +53,35 @@ export function TopicAccuracyTab({ topicAccuracy }: Props) {
             <h3 className="font-semibold text-sm text-amber-800">취약 토픽</h3>
           </div>
           <div className="space-y-2">
-            {weakTopics.map((t) => (
-              <div key={t.topic} className="flex items-center justify-between rounded-lg bg-white px-3 py-2 border border-amber-100">
-                <span className="text-sm font-medium text-gray-700">{t.topic}</span>
-                <div className="flex items-center gap-3 text-sm">
-                  <span className="text-gray-500">{t.attemptCount}회 시도</span>
-                  <span className="font-bold text-red-500">{t.accuracy}%</span>
+            {weakTopics.map((t) => {
+              const href = isStudent && t.unitIds?.[0]
+                ? `/student/naesin/${t.unitIds[0]}/problem`
+                : null;
+              const summary = unitSummary(t.unitTitles ?? []);
+
+              return (
+                <div key={t.topic} className="rounded-lg bg-white px-3 py-2 border border-amber-100">
+                  <div className="flex items-center justify-between">
+                    <div className="min-w-0">
+                      <span className="text-sm font-medium text-gray-700">{t.topic}</span>
+                      {summary && (
+                        <p className="text-xs text-gray-400 truncate mt-0.5">{summary}</p>
+                      )}
+                    </div>
+                    <div className="flex items-center gap-3 text-sm shrink-0">
+                      <span className="text-gray-500">{t.attemptCount}회 시도</span>
+                      <span className="font-bold text-red-500">{t.accuracy}%</span>
+                      {href && (
+                        <Link href={href} className="flex items-center gap-0.5 text-xs font-semibold text-violet-600 hover:text-violet-700">
+                          연습하기
+                          <ArrowRight className="h-3 w-3" />
+                        </Link>
+                      )}
+                    </div>
+                  </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       )}

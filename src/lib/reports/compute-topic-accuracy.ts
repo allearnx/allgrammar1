@@ -75,7 +75,11 @@ export async function computeTopicAccuracy(
   }
 
   // 4. Resolve topic for each attempt
-  type Acc = { correct: number; total: number; count: number; weekly: Map<string, { correct: number; total: number }> };
+  type Acc = {
+    correct: number; total: number; count: number;
+    weekly: Map<string, { correct: number; total: number }>;
+    unitLatest: Map<string, string>; // unitId → latest created_at
+  };
   const topicMap = new Map<string, Acc>();
 
   for (const a of attempts) {
@@ -87,12 +91,16 @@ export async function computeTopicAccuracy(
 
     let acc = topicMap.get(topic);
     if (!acc) {
-      acc = { correct: 0, total: 0, count: 0, weekly: new Map() };
+      acc = { correct: 0, total: 0, count: 0, weekly: new Map(), unitLatest: new Map() };
       topicMap.set(topic, acc);
     }
     acc.correct += a.score;
     acc.total += a.total_questions;
     acc.count += 1;
+
+    // Track latest attempt per unit
+    const prev = acc.unitLatest.get(a.unit_id);
+    if (!prev || a.created_at > prev) acc.unitLatest.set(a.unit_id, a.created_at);
 
     const wk = isoWeek(a.created_at);
     const wAcc = acc.weekly.get(wk) ?? { correct: 0, total: 0 };
@@ -116,7 +124,13 @@ export async function computeTopicAccuracy(
         accuracy: w.total > 0 ? Math.round((w.correct / w.total) * 100) : 0,
       }));
 
-    result.push({ topic, totalCorrect: acc.correct, totalQuestions: acc.total, accuracy, attemptCount: acc.count, trend: weeks });
+    // Unit IDs sorted by latest attempt (most recent first)
+    const sortedUnits = [...acc.unitLatest.entries()]
+      .sort(([, a], [, b]) => b.localeCompare(a))
+      .map(([uid]) => uid);
+    const sortedUnitTitles = sortedUnits.map((uid) => unitTitleMap.get(uid) ?? uid);
+
+    result.push({ topic, totalCorrect: acc.correct, totalQuestions: acc.total, accuracy, attemptCount: acc.count, trend: weeks, unitIds: sortedUnits, unitTitles: sortedUnitTitles });
   }
 
   result.sort((a, b) => a.accuracy - b.accuracy);

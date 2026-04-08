@@ -230,7 +230,7 @@ export function StudentReportPanel({ studentId, services: servicesProp, token, r
 
           {/* ── 토픽별 ── */}
           <TabsContent value="topics" className="mt-4">
-            <TopicAccuracyTab topicAccuracy={data.topicAccuracy ?? []} />
+            <TopicAccuracyTab topicAccuracy={data.topicAccuracy ?? []} role={role} />
           </TabsContent>
 
           {/* ── 오답 분석 ── */}

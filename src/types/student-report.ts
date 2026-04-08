@@ -8,6 +8,8 @@ export interface TopicAccuracyItem {
   accuracy: number;        // 0-100
   attemptCount: number;
   trend: { week: string; accuracy: number }[];
+  unitIds: string[];       // 해당 토픽 출현 단원 (최근 시도순)
+  unitTitles: string[];    // unitIds 대응 단원명
 }
 
 /** 학습 활동 기록 (캘린더 + 리스트용) */
