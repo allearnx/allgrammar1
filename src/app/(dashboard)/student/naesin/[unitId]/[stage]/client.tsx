@@ -74,6 +74,12 @@ interface StageData {
   videoProgress?: NaesinGrammarVideoProgress[];
   problemSheets?: NaesinProblemSheet[];
   bestScoreBySheet?: Record<string, number>;
+  lastAttemptBySheet?: Record<string, {
+    score: number;
+    total_questions: number;
+    wrong_answers: { number: number; userAnswer: string | number; correctAnswer: string | number; question?: string }[];
+    created_at: string;
+  }>;
   mockExamSheets?: NaesinProblemSheet[];
   lastReviewProblemSheets?: NaesinProblemSheet[];
   similarProblems?: NaesinSimilarProblem[];
@@ -154,6 +160,7 @@ const STAGE_RENDERERS: Record<StageKey, StageRenderer> = {
       unitId={unitId}
       onStageComplete={onStageComplete}
       bestScoreBySheet={stageData.bestScoreBySheet}
+      lastAttemptBySheet={stageData.lastAttemptBySheet}
     />
   ),
   mockExam: ({ stageData, unitId, onStageComplete }) => (

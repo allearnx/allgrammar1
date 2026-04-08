@@ -141,21 +141,37 @@ async function fetchProblemData(supabase: SupabaseClient, unitId: string, userId
     userId
       ? supabase
           .from('naesin_problem_attempts')
-          .select('sheet_id, score')
+          .select('sheet_id, score, total_questions, wrong_answers, created_at')
           .eq('student_id', userId)
+          .order('created_at', { ascending: false })
       : Promise.resolve({ data: [] }),
   ]);
 
-  // Compute best score per sheet
+  // Compute best score + last attempt per sheet
   const bestScoreBySheet: Record<string, number> = {};
+  const lastAttemptBySheet: Record<string, {
+    score: number;
+    total_questions: number;
+    wrong_answers: { number: number; userAnswer: string | number; correctAnswer: string | number; question?: string }[];
+    created_at: string;
+  }> = {};
   for (const row of attemptsRes.data || []) {
     const prev = bestScoreBySheet[row.sheet_id];
     if (prev == null || row.score > prev) {
       bestScoreBySheet[row.sheet_id] = row.score;
     }
+    // 최신순 정렬이므로 첫 번째가 최근 시도
+    if (!lastAttemptBySheet[row.sheet_id]) {
+      lastAttemptBySheet[row.sheet_id] = {
+        score: row.score,
+        total_questions: row.total_questions,
+        wrong_answers: row.wrong_answers || [],
+        created_at: row.created_at,
+      };
+    }
   }
 
-  return { problemSheets: problemRes.data || [], bestScoreBySheet };
+  return { problemSheets: problemRes.data || [], bestScoreBySheet, lastAttemptBySheet };
 }
 
 async function fetchLastReviewData(supabase: SupabaseClient, unitId: string) {
