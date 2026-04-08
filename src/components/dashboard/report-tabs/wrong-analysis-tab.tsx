@@ -16,9 +16,10 @@ interface Props {
   hasNaesin: boolean;
   studentId?: string;
   role?: string;
+  onRefresh?: () => void;
 }
 
-export function WrongAnalysisTab({ data, hasVoca, hasNaesin, studentId, role }: Props) {
+export function WrongAnalysisTab({ data, hasVoca, hasNaesin, studentId, role, onRefresh }: Props) {
   const [showDetail, setShowDetail] = useState(false);
   const isStaff = role === 'teacher' || role === 'admin' || role === 'boss';
 
@@ -101,7 +102,7 @@ export function WrongAnalysisTab({ data, hasVoca, hasNaesin, studentId, role }: 
             </div>
           }
         >
-          <WrongAnswerDetailPanel studentId={studentId} />
+          <WrongAnswerDetailPanel studentId={studentId} onRefresh={onRefresh} />
         </Suspense>
       )}
 

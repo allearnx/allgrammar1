@@ -24,7 +24,7 @@ interface Props {
 }
 
 export function StudentReportPanel({ studentId, services: servicesProp, token, role = 'student', tier = 'free' }: Props) {
-  const { data, loading, error } = useStudentReport(studentId, token);
+  const { data, loading, error, refetch } = useStudentReport(studentId, token);
 
   if (loading) {
     return (
@@ -235,7 +235,7 @@ export function StudentReportPanel({ studentId, services: servicesProp, token, r
 
           {/* ── 오답 분석 ── */}
           <TabsContent value="wrong" className="mt-4">
-            <WrongAnalysisTab data={data} hasVoca={hasVoca} hasNaesin={hasNaesin} studentId={studentId} role={role} />
+            <WrongAnalysisTab data={data} hasVoca={hasVoca} hasNaesin={hasNaesin} studentId={studentId} role={role} onRefresh={refetch} />
           </TabsContent>
 
           {/* ── 학습 기록 ── */}

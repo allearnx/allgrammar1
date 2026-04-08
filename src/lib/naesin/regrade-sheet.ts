@@ -85,7 +85,14 @@ export async function regradeSheet(
 
     const newScore = Math.round((correctCount / totalQuestions) * 100);
 
-    if (newScore !== attempt.score) {
+    // 점수 또는 오답 목록이 바뀌었는지 확인
+    const oldWrongNums = ((attempt.wrong_answers ?? []) as { number: number }[])
+      .map((w) => w.number).sort((a, b) => a - b).join(',');
+    const newWrongNums = wrongAnswers
+      .map((w) => w.number).sort((a, b) => a - b).join(',');
+    const hasChange = newScore !== attempt.score || oldWrongNums !== newWrongNums;
+
+    if (hasChange) {
       changed++;
 
       await admin

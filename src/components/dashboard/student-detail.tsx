@@ -145,7 +145,7 @@ export async function StudentDetail({ user, studentId, naesinData }: Props) {
   const problemAttemptsBySheet: Record<string, { score: number; total: number; pct: number }> = {};
   for (const a of problemAttemptsRes.data || []) {
     const cur = problemAttemptsBySheet[a.sheet_id];
-    const pct = a.total_questions > 0 ? Math.round((a.score / a.total_questions) * 100) : 0;
+    const pct = a.score ?? 0;
     if (!cur || pct > cur.pct) {
       problemAttemptsBySheet[a.sheet_id] = { score: a.score, total: a.total_questions, pct };
     }

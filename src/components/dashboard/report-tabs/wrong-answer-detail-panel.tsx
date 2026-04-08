@@ -28,11 +28,12 @@ const STAGE_LABELS: Record<string, string> = {
 
 interface Props {
   studentId: string;
+  onRefresh?: () => void;
 }
 
 const TEXTBOOK_STAGES = new Set(['passage', 'dialogue', 'vocab']);
 
-export function WrongAnswerDetailPanel({ studentId }: Props) {
+export function WrongAnswerDetailPanel({ studentId, onRefresh }: Props) {
   const [wrongAnswers, setWrongAnswers] = useState<NaesinWrongAnswer[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -109,7 +110,7 @@ export function WrongAnswerDetailPanel({ studentId }: Props) {
                 key={wa.id}
                 wrongAnswer={wa}
                 studentId={studentId}
-                onCorrected={fetchWrongAnswers}
+                onCorrected={() => { fetchWrongAnswers(); onRefresh?.(); }}
               />
             ))}
           </div>
