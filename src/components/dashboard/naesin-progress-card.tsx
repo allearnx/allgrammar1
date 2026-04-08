@@ -238,7 +238,8 @@ export function NaesinProgressCard({
                       )}
                       {unitSheets.map((sheet, idx) => {
                         const attempt = problemAttemptsBySheet?.[sheet.id];
-                        const label = unitSheets.length > 1 ? `문제${idx + 1}` : '문제';
+                        const fallback = unitSheets.length > 1 ? `문제${idx + 1}` : '문제';
+                        const label = sheet.title || fallback;
                         if (attempt) {
                           return (
                             <span key={sheet.id} className={`text-xs px-1.5 py-0.5 rounded ${scoreChipClass(attempt.pct)}`}>
