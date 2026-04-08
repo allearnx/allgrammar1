@@ -66,9 +66,46 @@ export const PATCH = createApiHandler(
       .update({ answer_key: answerKey, questions })
       .eq('id', sheetId);
 
-    // 3. 재채점
+    // 3. 원본 템플릿에도 동기화 (source_template_id가 있는 경우)
+    const { data: sheetFull } = await admin
+      .from('naesin_problem_sheets')
+      .select('source_template_id')
+      .eq('id', sheetId)
+      .single();
+
+    let templateSynced = false;
+    if (sheetFull?.source_template_id) {
+      const { data: tmpl } = await admin
+        .from('naesin_templates')
+        .select('id, questions')
+        .eq('id', sheetFull.source_template_id)
+        .single();
+
+      if (tmpl) {
+        const tmplQuestions = tmpl.questions as typeof questions;
+        if (tmplQuestions[questionIndex]) {
+          if (mode === 'accept') {
+            const existing = tmplQuestions[questionIndex].acceptedAnswers ?? [];
+            const newVal = String(newAnswer);
+            if (!existing.includes(newVal)) {
+              tmplQuestions[questionIndex].acceptedAnswers = [...existing, newVal];
+            }
+          } else {
+            tmplQuestions[questionIndex].answer = newAnswer;
+          }
+          const tmplAnswerKey = tmplQuestions.map((q) => q.answer);
+          await admin
+            .from('naesin_templates')
+            .update({ questions: tmplQuestions, answer_key: tmplAnswerKey })
+            .eq('id', tmpl.id);
+          templateSynced = true;
+        }
+      }
+    }
+
+    // 4. 재채점
     const result = await regradeSheet(sheetId);
 
-    return NextResponse.json({ updated: true, ...result });
+    return NextResponse.json({ updated: true, templateSynced, ...result });
   }
 );
