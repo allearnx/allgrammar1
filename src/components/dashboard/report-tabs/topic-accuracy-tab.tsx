@@ -3,7 +3,8 @@
 import Link from 'next/link';
 import { TopicAccuracyChart } from '@/components/charts/topic-accuracy-chart';
 import { MiniScoreTrend } from '@/components/charts/mini-score-trend';
-import { AlertTriangle, ArrowRight } from 'lucide-react';
+import { AlertTriangle, ArrowRight, Clock } from 'lucide-react';
+import { computeReviewItems } from '@/lib/reports/forgetting-curve';
 import type { TopicAccuracyItem } from '@/types/student-report';
 
 interface Props {
@@ -86,7 +87,60 @@ export function TopicAccuracyTab({ topicAccuracy, role }: Props) {
         </div>
       )}
 
-      {/* 3. Mini trend charts per topic */}
+      {/* 3. Review needed (forgetting curve) */}
+      {(() => {
+        const reviewItems = computeReviewItems(topicAccuracy).slice(0, 5);
+        if (reviewItems.length === 0) return null;
+        return (
+          <div className="rounded-xl border border-blue-200 bg-blue-50/50 p-4">
+            <div className="flex items-center gap-2 mb-3">
+              <Clock className="h-4 w-4 text-blue-500" />
+              <h3 className="font-semibold text-sm text-blue-800">복습 필요</h3>
+              <span className="text-xs text-blue-400">망각 곡선 기반</span>
+            </div>
+            <div className="space-y-2">
+              {reviewItems.map((r) => {
+                const barColor = r.retention < 30 ? '#EF4444' : '#F59E0B';
+                const href = isStudent && r.unitIds?.[0]
+                  ? `/student/naesin/${r.unitIds[0]}/problem`
+                  : null;
+
+                return (
+                  <div key={r.topic} className="rounded-lg bg-white px-3 py-2 border border-blue-100">
+                    <div className="flex items-center justify-between">
+                      <div className="min-w-0 flex-1">
+                        <span className="text-sm font-medium text-gray-700">{r.topic}</span>
+                        <div className="flex items-center gap-2 mt-1">
+                          <div className="h-1.5 flex-1 max-w-[120px] rounded-full bg-gray-100 overflow-hidden">
+                            <div
+                              className="h-full rounded-full"
+                              style={{ width: `${r.retention}%`, backgroundColor: barColor }}
+                            />
+                          </div>
+                          <span className="text-xs font-bold" style={{ color: barColor }}>
+                            {r.retention}%
+                          </span>
+                        </div>
+                      </div>
+                      <div className="flex items-center gap-3 text-sm shrink-0 ml-3">
+                        <span className="text-xs text-gray-400">{r.daysSince}일 전</span>
+                        {href && (
+                          <Link href={href} className="flex items-center gap-0.5 text-xs font-semibold text-violet-600 hover:text-violet-700">
+                            연습하기
+                            <ArrowRight className="h-3 w-3" />
+                          </Link>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        );
+      })()}
+
+      {/* 4. Mini trend charts per topic */}
       {topicsWithTrend.length > 0 && (
         <div className="rounded-xl border p-4">
           <h3 className="font-semibold text-sm mb-3">토픽별 추이</h3>

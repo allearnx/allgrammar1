@@ -1,5 +1,6 @@
 import { Topbar } from '@/components/layout/topbar';
 import { StudentsList } from '@/components/dashboard/students-list';
+import { ClassReviewOverview } from '@/components/dashboard/class-review-overview';
 import { getStudentsPageData } from '@/lib/dashboard/page-data';
 import { getRoleConfig } from '@/lib/auth/role-page-config';
 
@@ -16,6 +17,7 @@ export default async function StudentsPage({ params, searchParams }: Props) {
   return (
     <>
       <Topbar user={user} title="학생 관리" />
+      <ClassReviewOverview basePath={basePath} />
       <StudentsList user={user} basePath={basePath} searchQuery={q} />
     </>
   );
