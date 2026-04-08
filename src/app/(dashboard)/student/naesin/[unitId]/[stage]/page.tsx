@@ -35,7 +35,7 @@ export default async function NaesinStagePage({ params }: Props) {
 
   const textbookId = (unit.textbook as { id: string; display_name: string } | null)?.id ?? null;
 
-  const { progress, contentAvailability, videoLessons, textbookVideoCount, quizSetIds, examDate } =
+  const { progress, contentAvailability, videoLessons, textbookVideoCount, quizSetIds, examDate, problemSheetCount, problemSheetsAttempted } =
     await fetchContentAvailability(supabase, user.id, unitId, textbookId);
 
   // Fetch enabled_stages from student settings
@@ -71,6 +71,8 @@ export default async function NaesinStagePage({ params }: Props) {
     examDate,
     enabledStages,
     naesinRequiredRounds,
+    problemSheetCount,
+    problemSheetsAttempted,
   });
 
   const isHidden = stageStatuses[stageKey] === 'hidden';

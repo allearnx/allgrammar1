@@ -20,6 +20,10 @@ export interface StageUnlockInput {
   enabledStages?: string[];
   /** Academy-level required rounds for passage/dialogue (1 or 2) */
   naesinRequiredRounds?: number;
+  /** Number of problem sheets for this unit */
+  problemSheetCount?: number;
+  /** Number of problem sheets the student has attempted */
+  problemSheetsAttempted?: number;
 }
 
 /**
@@ -48,6 +52,8 @@ export function calculateStageStatuses(
   let examDate: string | null = null;
   let enabledStages: string[] | null = null;
   let naesinRequiredRounds = 1;
+  let problemSheetCount = 0;
+  let problemSheetsAttempted = 0;
 
   // Support both old (progress, content) and new (input object) signatures
   if (contentArg !== undefined) {
@@ -63,6 +69,8 @@ export function calculateStageStatuses(
     examDate = input.examDate ?? null;
     enabledStages = input.enabledStages ?? null;
     naesinRequiredRounds = input.naesinRequiredRounds ?? 1;
+    problemSheetCount = input.problemSheetCount ?? 0;
+    problemSheetsAttempted = input.problemSheetsAttempted ?? 0;
   } else {
     progress = progressOrInput as NaesinStudentProgress | null;
     content = { hasVocab: false, hasPassage: false, hasDialogue: false, hasTextbookVideo: false, hasGrammar: false, hasProblem: false, hasMockExam: false, hasLastReview: false };
@@ -84,7 +92,7 @@ export function calculateStageStatuses(
   const grammarStatus = getGrammarStatus(progress, content.hasGrammar, grammarVideoCount);
 
   // Stage 6: Problem
-  const problemStatus = getProblemStatus(progress, content.hasProblem);
+  const problemStatus = getProblemStatus(progress, content.hasProblem, problemSheetCount, problemSheetsAttempted);
 
   // Stage 7: Mock Exam
   const mockExamStatus = getMockExamStatus(progress, content.hasMockExam);
@@ -188,9 +196,15 @@ function getGrammarStatus(
 function getProblemStatus(
   progress: NaesinStudentProgress | null,
   hasContent: boolean,
+  sheetCount?: number,
+  sheetsAttempted?: number,
 ): NaesinStageStatus {
   if (!hasContent) return 'completed';
   if (progress?.problem_completed) return 'completed';
+  // Sheet-based completion: all sheets attempted
+  if (sheetCount && sheetCount > 0 && sheetsAttempted != null && sheetsAttempted >= sheetCount) {
+    return 'completed';
+  }
   return 'available';
 }
 

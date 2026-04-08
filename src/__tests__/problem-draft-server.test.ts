@@ -357,18 +357,44 @@ describe('problems/submit draft cleanup', () => {
   });
 
   it('POST deletes server draft after successful submission', async () => {
-    const { from, chain } = mockSupabaseChain({
-      data: {
-        id: 'attempt-1',
-        answer_key: ['1', '2', '3'],
-        questions: [
-          { number: 1, question: 'Q1', options: ['A', 'B', 'C', 'D'] },
-          { number: 2, question: 'Q2', options: ['A', 'B', 'C', 'D'] },
-          { number: 3, question: 'Q3', options: ['A', 'B', 'C', 'D'] },
-        ],
-        mode: 'interactive',
-      },
-      error: null,
+    const sheetData = {
+      id: 'attempt-1',
+      answer_key: ['1', '2', '3'],
+      questions: [
+        { number: 1, question: 'Q1', options: ['A', 'B', 'C', 'D'] },
+        { number: 2, question: 'Q2', options: ['A', 'B', 'C', 'D'] },
+        { number: 3, question: 'Q3', options: ['A', 'B', 'C', 'D'] },
+      ],
+      mode: 'interactive',
+    };
+    const { from: defaultFrom, chain } = mockSupabaseChain({ data: sheetData, error: null });
+    // Table-aware from: return arrays for list queries, single for sheet lookup
+    const from = vi.fn((table: string) => {
+      if (table === 'naesin_problem_sheets' || table === 'naesin_problem_attempts') {
+        // These need to resolve as { data: [...], error: null } for list queries
+        // but the sheet lookup (with .single()) should return the sheetData
+        const listResult = { data: table === 'naesin_problem_sheets' ? [{ id: 'sheet-1' }] : [], error: null };
+        const listChain: Record<string, ReturnType<typeof vi.fn>> = {
+          select: vi.fn().mockReturnThis(),
+          insert: vi.fn().mockReturnThis(),
+          update: vi.fn().mockReturnThis(),
+          delete: vi.fn().mockReturnThis(),
+          upsert: vi.fn().mockReturnThis(),
+          eq: vi.fn().mockReturnThis(),
+          in: vi.fn().mockReturnThis(),
+          order: vi.fn().mockReturnThis(),
+          limit: vi.fn().mockReturnThis(),
+          single: vi.fn().mockResolvedValue({ data: sheetData, error: null }),
+          then: vi.fn((resolve: (v: unknown) => void) => resolve(listResult)),
+        };
+        for (const key of Object.keys(listChain)) {
+          if (key !== 'single' && key !== 'then') {
+            listChain[key].mockReturnValue(listChain);
+          }
+        }
+        return listChain;
+      }
+      return chain;
     });
     mockGetUser.mockResolvedValue(fakeStudent);
     mockCreateClient.mockResolvedValue({ from });

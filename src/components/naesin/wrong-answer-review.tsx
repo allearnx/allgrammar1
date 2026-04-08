@@ -126,52 +126,65 @@ export function WrongAnswerReview({ unitId }: WrongAnswerReviewProps) {
   );
 }
 
-function WrongAnswerCard({ wrongAnswer, onResolve }: { wrongAnswer: NaesinWrongAnswer; onResolve: () => void }) {
-  const data = wrongAnswer.question_data as Record<string, string>;
+export function WrongAnswerCard({ wrongAnswer, onResolve }: { wrongAnswer: NaesinWrongAnswer; onResolve?: () => void }) {
+  const data = wrongAnswer.question_data as Record<string, unknown>;
+
+  const options = data.options as string[] | undefined;
+  const explanation = data.explanation as string | undefined;
 
   return (
     <Card className={wrongAnswer.resolved ? 'opacity-60' : ''}>
       <CardContent className="py-3">
         <div className="flex items-start justify-between gap-2">
           <div className="text-sm space-y-1 flex-1">
-            {data.question ? <p className="font-medium">{data.question}</p> : null}
+            {data.question ? <p className="font-medium">{String(data.question)}</p> : null}
             {data.type === 'fill_blank' ? (
               <>
-                <p className="text-red-500">내 답: {data.userAnswer || '-'}</p>
-                <p className="text-green-600">정답: {data.correctAnswer}</p>
+                <p className="text-red-500">내 답: {String(data.userAnswer || '-')}</p>
+                <p className="text-green-600">정답: {String(data.correctAnswer)}</p>
               </>
             ) : null}
             {data.type === 'translation' ? (
               <>
-                <p className="text-muted-foreground">{data.koreanText || ''}</p>
-                <p className="text-red-500">내 답: {data.userAnswer || '-'}</p>
-                {data.feedback ? <p className="text-sm">{data.feedback}</p> : null}
+                <p className="text-muted-foreground">{String(data.koreanText || '')}</p>
+                <p className="text-red-500">내 답: {String(data.userAnswer || '-')}</p>
+                {data.feedback ? <p className="text-sm">{String(data.feedback)}</p> : null}
               </>
             ) : null}
             {data.type === 'ordering' ? (
               <>
-                <p className="text-red-500">내 배열: {data.userOrder || '-'}</p>
-                <p className="text-green-600">정답 순서: {data.correctOrder}</p>
+                <p className="text-red-500">내 배열: {String(data.userOrder || '-')}</p>
+                <p className="text-green-600">정답 순���: {String(data.correctOrder)}</p>
               </>
             ) : null}
             {data.type === 'first_letter' ? (
               <>
-                <p className="text-muted-foreground">{data.koreanText || ''}</p>
-                <p className="text-red-500">내 답: {data.userAnswer || '-'}</p>
-                <p className="text-green-600">정답: {data.correctAnswer}</p>
+                <p className="text-muted-foreground">{String(data.koreanText || '')}</p>
+                <p className="text-red-500">내 ��: {String(data.userAnswer || '-')}</p>
+                <p className="text-green-600">정답: {String(data.correctAnswer)}</p>
               </>
             ) : null}
             {data.number && data.type !== 'fill_blank' && data.type !== 'translation' && data.type !== 'ordering' && data.type !== 'first_letter' ? (
               <>
-                <p className="text-red-500">내 답: {data.userAnswer || '-'}</p>
-                <p className="text-green-600">정답: {data.correctAnswer}</p>
+                <p className="text-red-500">내 답: {String(data.userAnswer || '-')}</p>
+                <p className="text-green-600">정답: {String(data.correctAnswer)}</p>
               </>
             ) : null}
+            {options && options.length > 0 && (
+              <div className="mt-1 pl-2 border-l-2 border-muted space-y-0.5">
+                {options.map((opt, i) => (
+                  <p key={i} className="text-xs text-muted-foreground">{i + 1}. {opt}</p>
+                ))}
+              </div>
+            )}
+            {explanation && (
+              <p className="text-xs text-blue-600 mt-1">해���: {explanation}</p>
+            )}
             <Badge variant="secondary" className="text-xs">
               {wrongAnswer.source_type}
             </Badge>
           </div>
-          {!wrongAnswer.resolved && (
+          {!wrongAnswer.resolved && onResolve && (
             <Button size="sm" variant="outline" className="h-7 text-xs shrink-0" onClick={onResolve}>
               해결됨
             </Button>

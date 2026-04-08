@@ -30,6 +30,8 @@ export interface BuildContext {
   reviewContentUnitIds: Set<string>;
   progressMap: Map<string, NaesinStudentProgress>;
   quizSetsByUnit: Record<string, unknown[]>;
+  problemSheetIdsByUnit: Record<string, string[]>;
+  attemptedSheetIds: Set<string>;
   examDate: string | null;
   enabledStages: string[];
   naesinRequiredRounds?: number;
@@ -50,6 +52,8 @@ export function computeStageProgress(
   quizSetCount: number,
   videoCount: number,
   textbookVideoCount: number,
+  problemSheetCount?: number,
+  problemSheetsAttempted?: number,
 ): { vocab: number; passage: number; textbookVideo: number; grammar: number; problem: number; mockExam: number } {
   if (!progress) return { vocab: 0, passage: 0, textbookVideo: 0, grammar: 0, problem: 0, mockExam: 0 };
 
@@ -89,8 +93,13 @@ export function computeStageProgress(
     grammar = Math.round((progress.grammar_videos_completed / videoCount) * 100);
   }
 
-  // Problem: 0 or 100
-  const problem = progress.problem_completed ? 100 : 0;
+  // Problem: sheet-based progress if available, otherwise 0/100
+  let problem = 0;
+  if (progress.problem_completed) {
+    problem = 100;
+  } else if (problemSheetCount != null && problemSheetCount > 0) {
+    problem = Math.round(((problemSheetsAttempted ?? 0) / problemSheetCount) * 100);
+  }
 
   // Mock Exam: 0 or 100
   const mockExam = progress.mock_exam_completed ? 100 : 0;
@@ -122,6 +131,9 @@ export function buildUnitSummary(
     ctx.similarProblemUnitIds.has(u.id) ||
     ctx.reviewContentUnitIds.has(u.id);
 
+  const unitProblemSheetIds = ctx.problemSheetIdsByUnit[u.id] || [];
+  const unitProblemSheetsAttempted = unitProblemSheetIds.filter((id) => ctx.attemptedSheetIds.has(id)).length;
+
   const stageStatuses = calculateStageStatuses({
     progress: unitProgress,
     content: {
@@ -140,9 +152,11 @@ export function buildUnitSummary(
     examDate: effectiveExamDate,
     enabledStages: ctx.enabledStages,
     naesinRequiredRounds: ctx.naesinRequiredRounds,
+    problemSheetCount: unitProblemSheetIds.length,
+    problemSheetsAttempted: unitProblemSheetsAttempted,
   });
 
-  const stageProgress = computeStageProgress(unitProgress, unitQuizSets.length, videoLessons.length, unitTextbookVideos.length);
+  const stageProgress = computeStageProgress(unitProgress, unitQuizSets.length, videoLessons.length, unitTextbookVideos.length, unitProblemSheetIds.length, unitProblemSheetsAttempted);
 
   return {
     id: u.id,

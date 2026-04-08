@@ -19,7 +19,7 @@ export const POST = createApiHandler(
 
     // Grade
     const answerKey = sheet.answer_key as (string | number)[];
-    const questions = sheet.questions as { number: number; question: string; options?: string[]; acceptedAnswers?: string[] }[];
+    const questions = sheet.questions as { number: number; question: string; options?: string[]; acceptedAnswers?: string[]; explanation?: string }[];
     let correctCount = 0;
     const wrongAnswers: { number: number; userAnswer: string | number; correctAnswer: string | number; question?: string }[] = [];
 
@@ -72,16 +72,24 @@ export const POST = createApiHandler(
       .select()
       .single());
 
-    // Save wrong answers to unified table
+    // Save wrong answers to unified table with enriched data
     if (wrongAnswers.length > 0 && unitId) {
-      const wrongRows = wrongAnswers.map((wa) => ({
-        student_id: user.id,
-        unit_id: unitId,
-        stage: 'problem',
-        source_type: sheet.mode,
-        question_data: wa,
-        sheet_id: sheetId,
-      }));
+      const wrongRows = wrongAnswers.map((wa) => {
+        const idx = wa.number - 1;
+        const q = questions?.[idx];
+        return {
+          student_id: user.id,
+          unit_id: unitId,
+          stage: 'problem',
+          source_type: sheet.mode,
+          question_data: {
+            ...wa,
+            ...(q?.options ? { options: q.options } : {}),
+            ...(q?.explanation ? { explanation: q.explanation } : {}),
+          },
+          sheet_id: sheetId,
+        };
+      });
 
       await supabase.from('naesin_wrong_answers').insert(wrongRows);
     }
@@ -93,12 +101,28 @@ export const POST = createApiHandler(
       .eq('student_id', user.id)
       .eq('sheet_id', sheetId);
 
-    // Update progress if needed
+    // Update progress: mark completed only when all sheets in the unit have been attempted
     if (unitId) {
+      const { data: allSheets } = await supabase
+        .from('naesin_problem_sheets')
+        .select('id')
+        .eq('unit_id', unitId)
+        .eq('category', 'problem');
+      const sheetIds = (allSheets || []).map((s) => s.id);
+
+      const { data: attemptRows } = await supabase
+        .from('naesin_problem_attempts')
+        .select('sheet_id')
+        .eq('student_id', user.id)
+        .in('sheet_id', sheetIds.length > 0 ? sheetIds : ['__none__']);
+      const attemptedIds = new Set((attemptRows || []).map((r) => r.sheet_id));
+
+      const allCompleted = sheetIds.length > 0 && sheetIds.every((id) => attemptedIds.has(id));
+
       await supabase
         .from('naesin_student_progress')
         .upsert(
-          { student_id: user.id, unit_id: unitId, problem_completed: true },
+          { student_id: user.id, unit_id: unitId, problem_completed: allCompleted },
           { onConflict: 'student_id,unit_id' }
         );
     }

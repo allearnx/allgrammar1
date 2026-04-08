@@ -6,22 +6,45 @@ export const GET = createApiHandler(
   {},
   async ({ user, supabase, request }) => {
     const unitId = request.nextUrl.searchParams.get('unitId');
-    if (!unitId) return NextResponse.json({ error: 'Missing unitId' }, { status: 400 });
-
     const resolved = request.nextUrl.searchParams.get('resolved');
 
     let query = supabase
       .from('naesin_wrong_answers')
-      .select('*')
+      .select('*, sheet:naesin_problem_sheets(id, title)')
       .eq('student_id', user.id)
-      .eq('unit_id', unitId)
       .order('created_at', { ascending: false });
+
+    if (unitId) {
+      query = query.eq('unit_id', unitId);
+    } else {
+      query = query.limit(500);
+    }
 
     if (resolved !== null && resolved !== undefined) {
       query = query.eq('resolved', resolved === 'true');
     }
 
     const data = dbResult(await query);
+
+    // When fetching all (no unitId), enrich with unit/textbook info
+    if (!unitId) {
+      const allUnitIds = [...new Set((data as { unit_id: string }[]).map((d) => d.unit_id))];
+      if (allUnitIds.length > 0) {
+        const { data: units } = await supabase
+          .from('naesin_units')
+          .select('id, unit_number, title, textbook:naesin_textbooks(id, display_name)')
+          .in('id', allUnitIds);
+        const unitMap = new Map((units || []).map((u) => [u.id, u]));
+        for (const item of data as Record<string, unknown>[]) {
+          const unitInfo = unitMap.get(item.unit_id as string);
+          if (unitInfo) {
+            item.unit_info = { unit_number: unitInfo.unit_number, title: unitInfo.title };
+            item.textbook_info = unitInfo.textbook;
+          }
+        }
+      }
+    }
+
     return NextResponse.json(data);
   }
 );

@@ -20,7 +20,7 @@ function MinTimeBadge({ remaining }: { remaining: number }) {
   return (
     <Badge variant="secondary" className="gap-1 tabular-nums">
       <Clock className="h-3 w-3" />
-      {remaining}초 후 답변 가능
+      문제를 꼼꼼하게 읽고 푸세요
     </Badge>
   );
 }

@@ -11,6 +11,8 @@ interface ContentAvailabilityResult {
   textbookVideoCount: number;
   quizSetIds: string[];
   examDate: string | null;
+  problemSheetCount: number;
+  problemSheetsAttempted: number;
 }
 
 export async function fetchContentAvailability(
@@ -33,6 +35,7 @@ export async function fetchContentAvailability(
     reviewContentCountRes,
     examDateRes,
     quizSetsRes,
+    problemAttemptsRes,
   ] = await Promise.all([
     supabase.from('naesin_student_progress').select('*').eq('student_id', userId).eq('unit_id', unitId).single(),
     supabase.from('naesin_vocabulary').select('id', { count: 'exact', head: true }).eq('unit_id', unitId),
@@ -40,7 +43,7 @@ export async function fetchContentAvailability(
     supabase.from('naesin_dialogues').select('id', { count: 'exact', head: true }).eq('unit_id', unitId),
     supabase.from('naesin_grammar_lessons').select('id, content_type').eq('unit_id', unitId),
     supabase.from('naesin_textbook_videos').select('id', { count: 'exact', head: true }).eq('unit_id', unitId),
-    supabase.from('naesin_problem_sheets').select('id', { count: 'exact', head: true }).eq('unit_id', unitId).eq('category', 'problem'),
+    supabase.from('naesin_problem_sheets').select('id').eq('unit_id', unitId).eq('category', 'problem'),
     supabase.from('naesin_problem_sheets').select('id', { count: 'exact', head: true }).eq('unit_id', unitId).eq('category', 'mock_exam'),
     supabase.from('naesin_problem_sheets').select('id', { count: 'exact', head: true }).eq('unit_id', unitId).eq('category', 'last_review'),
     supabase.from('naesin_similar_problems').select('id', { count: 'exact', head: true }).eq('unit_id', unitId).eq('status', 'approved'),
@@ -49,10 +52,15 @@ export async function fetchContentAvailability(
       ? supabase.from('naesin_exam_dates').select('exam_date').eq('student_id', userId).eq('textbook_id', textbookId).single()
       : Promise.resolve({ data: null }),
     supabase.from('naesin_vocab_quiz_sets').select('id').eq('unit_id', unitId),
+    supabase.from('naesin_problem_attempts').select('sheet_id').eq('student_id', userId),
   ]);
 
   const grammarLessonsAll = grammarRes.data || [];
   const textbookVideoCount = textbookVideoCountRes.count ?? 0;
+  const problemSheets = problemCountRes.data || [];
+  const problemSheetIds = problemSheets.map((s) => s.id);
+  const attemptedSheetIds = new Set((problemAttemptsRes.data || []).map((r) => r.sheet_id));
+  const problemSheetsAttempted = problemSheetIds.filter((id) => attemptedSheetIds.has(id)).length;
   const hasLastReviewContent =
     (lastReviewSheetCountRes.count ?? 0) > 0 ||
     (similarProblemCountRes.count ?? 0) > 0 ||
@@ -68,7 +76,7 @@ export async function fetchContentAvailability(
       hasDialogue: (dialogueCountRes.count ?? 0) > 0,
       hasTextbookVideo: textbookVideoCount > 0,
       hasGrammar: grammarLessonsAll.length > 0,
-      hasProblem: (problemCountRes.count ?? 0) > 0,
+      hasProblem: problemSheetIds.length > 0,
       hasMockExam: (mockExamCountRes.count ?? 0) > 0,
       hasLastReview: hasLastReviewContent || !!examDate,
     },
@@ -76,5 +84,7 @@ export async function fetchContentAvailability(
     textbookVideoCount,
     quizSetIds: (quizSetsRes.data || []).map((s) => s.id),
     examDate,
+    problemSheetCount: problemSheetIds.length,
+    problemSheetsAttempted,
   };
 }

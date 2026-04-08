@@ -73,6 +73,7 @@ interface StageData {
   grammarLessons?: NaesinGrammarLesson[];
   videoProgress?: NaesinGrammarVideoProgress[];
   problemSheets?: NaesinProblemSheet[];
+  bestScoreBySheet?: Record<string, number>;
   mockExamSheets?: NaesinProblemSheet[];
   lastReviewProblemSheets?: NaesinProblemSheet[];
   similarProblems?: NaesinSimilarProblem[];
@@ -152,6 +153,7 @@ const STAGE_RENDERERS: Record<StageKey, StageRenderer> = {
       sheets={stageData.problemSheets || []}
       unitId={unitId}
       onStageComplete={onStageComplete}
+      bestScoreBySheet={stageData.bestScoreBySheet}
     />
   ),
   mockExam: ({ stageData, unitId, onStageComplete }) => (

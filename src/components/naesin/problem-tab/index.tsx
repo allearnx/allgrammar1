@@ -11,9 +11,10 @@ interface ProblemTabProps {
   sheets: NaesinProblemSheet[];
   unitId: string;
   onStageComplete?: () => void;
+  bestScoreBySheet?: Record<string, number>;
 }
 
-export function ProblemTab({ sheets, unitId, onStageComplete }: ProblemTabProps) {
+export function ProblemTab({ sheets, unitId, onStageComplete, bestScoreBySheet }: ProblemTabProps) {
   const [activeSheetId, setActiveSheetId] = useState<string | null>(sheets[0]?.id || null);
 
   if (sheets.length === 0) {
@@ -33,21 +34,30 @@ export function ProblemTab({ sheets, unitId, onStageComplete }: ProblemTabProps)
     <div className="space-y-4">
       {sheets.length > 1 && (
         <div className="flex gap-2 overflow-x-auto pb-2">
-          {sheets.map((sheet) => (
-            <button
-              type="button"
-              key={sheet.id}
-              onClick={() => setActiveSheetId(sheet.id)}
-              className={cn(
-                'shrink-0 px-3 py-1.5 text-sm rounded-full border transition-colors',
-                activeSheetId === sheet.id
-                  ? 'bg-primary text-primary-foreground border-primary'
-                  : 'bg-card hover:bg-muted border-border'
-              )}
-            >
-              {sheet.title}
-            </button>
-          ))}
+          {sheets.map((sheet) => {
+            const bestScore = bestScoreBySheet?.[sheet.id];
+            const hasScore = bestScore != null;
+            const isActive = activeSheetId === sheet.id;
+            return (
+              <button
+                type="button"
+                key={sheet.id}
+                onClick={() => setActiveSheetId(sheet.id)}
+                className={cn(
+                  'shrink-0 px-3 py-1.5 text-sm rounded-full border transition-colors',
+                  isActive
+                    ? 'bg-primary text-primary-foreground border-primary'
+                    : hasScore
+                      ? 'bg-green-50 text-green-700 border-green-300 hover:bg-green-100'
+                      : 'bg-card hover:bg-muted border-border'
+                )}
+              >
+                {hasScore && <span className="mr-1">&#10003;</span>}
+                {sheet.title}
+                {hasScore && <span className="ml-1">{bestScore}점</span>}
+              </button>
+            );
+          })}
         </div>
       )}
 

@@ -94,20 +94,32 @@ export default async function NaesinPage() {
         reviewContentCountRes,
         progressRes,
         quizSetsCountRes,
+        attemptedSheetsRes,
       ] = await Promise.all([
         supabase.from('naesin_vocabulary').select('unit_id').in('unit_id', unitIds),
         supabase.from('naesin_passages').select('unit_id').in('unit_id', unitIds),
         supabase.from('naesin_dialogues').select('unit_id').in('unit_id', unitIds),
         supabase.from('naesin_textbook_videos').select('id, unit_id').in('unit_id', unitIds),
         supabase.from('naesin_grammar_lessons').select('id, unit_id, content_type').in('unit_id', unitIds),
-        supabase.from('naesin_problem_sheets').select('unit_id').eq('category', 'problem').in('unit_id', unitIds),
+        supabase.from('naesin_problem_sheets').select('id, unit_id').eq('category', 'problem').in('unit_id', unitIds),
         supabase.from('naesin_problem_sheets').select('unit_id').eq('category', 'mock_exam').in('unit_id', unitIds),
         supabase.from('naesin_problem_sheets').select('unit_id').eq('category', 'last_review').in('unit_id', unitIds),
         supabase.from('naesin_similar_problems').select('unit_id').eq('status', 'approved').in('unit_id', unitIds),
         supabase.from('naesin_last_review_content').select('unit_id').in('unit_id', unitIds),
         supabase.from('naesin_student_progress').select('*').eq('student_id', user.id).in('unit_id', unitIds),
         supabase.from('naesin_vocab_quiz_sets').select('id, unit_id').in('unit_id', unitIds),
+        supabase.from('naesin_problem_attempts').select('sheet_id').eq('student_id', user.id),
       ]);
+
+      // Build problem sheet IDs grouped by unit, and attempted sheet IDs set
+      const problemSheetRows = problemCountRes.data || [];
+      const problemSheetIdsByUnit: Record<string, string[]> = {};
+      for (const row of problemSheetRows) {
+        const uid = row.unit_id;
+        if (!problemSheetIdsByUnit[uid]) problemSheetIdsByUnit[uid] = [];
+        problemSheetIdsByUnit[uid].push(row.id);
+      }
+      const attemptedSheetIds = new Set((attemptedSheetsRes.data || []).map((r) => r.sheet_id));
 
       // Build per-unit context
       const ctx = {
@@ -123,6 +135,8 @@ export default async function NaesinPage() {
         reviewContentUnitIds: new Set((reviewContentCountRes.data || []).map((r) => r.unit_id)),
         progressMap: new Map((progressRes.data || []).map((p) => [p.unit_id, p])),
         quizSetsByUnit: groupBy(quizSetsCountRes.data || [], 'unit_id'),
+        problemSheetIdsByUnit,
+        attemptedSheetIds,
         examDate,
         enabledStages,
         naesinRequiredRounds,

@@ -24,7 +24,7 @@ export async function fetchStageData(
     case 'grammar':
       return fetchGrammarData(supabase, userId, unitId);
     case 'problem':
-      return fetchProblemData(supabase, unitId);
+      return fetchProblemData(supabase, unitId, userId);
     case 'mockExam':
       return fetchMockExamData(supabase, unitId);
     case 'lastReview':
@@ -130,14 +130,32 @@ async function fetchMockExamData(supabase: SupabaseClient, unitId: string) {
   return { mockExamSheets: mockExamRes.data || [] };
 }
 
-async function fetchProblemData(supabase: SupabaseClient, unitId: string) {
-  const problemRes = await supabase
-    .from('naesin_problem_sheets')
-    .select('*')
-    .eq('unit_id', unitId)
-    .eq('category', 'problem')
-    .order('sort_order');
-  return { problemSheets: problemRes.data || [] };
+async function fetchProblemData(supabase: SupabaseClient, unitId: string, userId?: string) {
+  const [problemRes, attemptsRes] = await Promise.all([
+    supabase
+      .from('naesin_problem_sheets')
+      .select('*')
+      .eq('unit_id', unitId)
+      .eq('category', 'problem')
+      .order('sort_order'),
+    userId
+      ? supabase
+          .from('naesin_problem_attempts')
+          .select('sheet_id, score')
+          .eq('student_id', userId)
+      : Promise.resolve({ data: [] }),
+  ]);
+
+  // Compute best score per sheet
+  const bestScoreBySheet: Record<string, number> = {};
+  for (const row of attemptsRes.data || []) {
+    const prev = bestScoreBySheet[row.sheet_id];
+    if (prev == null || row.score > prev) {
+      bestScoreBySheet[row.sheet_id] = row.score;
+    }
+  }
+
+  return { problemSheets: problemRes.data || [], bestScoreBySheet };
 }
 
 async function fetchLastReviewData(supabase: SupabaseClient, unitId: string) {
