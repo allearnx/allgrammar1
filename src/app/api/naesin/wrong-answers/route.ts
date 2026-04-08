@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { createApiHandler, dbResult } from '@/lib/api';
 import { wrongAnswerCreateSchema, wrongAnswerPatchSchema } from '@/lib/api/schemas';
+import { enrichWrongAnswersFromSheet } from '@/lib/naesin/enrich-wrong-answers';
 
 export const GET = createApiHandler(
   {},
@@ -10,7 +11,7 @@ export const GET = createApiHandler(
 
     let query = supabase
       .from('naesin_wrong_answers')
-      .select('*, sheet:naesin_problem_sheets(id, title)')
+      .select('*, sheet:naesin_problem_sheets(id, title, questions)')
       .eq('student_id', user.id)
       .order('created_at', { ascending: false });
 
@@ -25,6 +26,9 @@ export const GET = createApiHandler(
     }
 
     const data = dbResult(await query);
+
+    // Enrich problem wrong answers with missing options/explanation from sheet
+    enrichWrongAnswersFromSheet(data as Record<string, unknown>[]);
 
     // When fetching all (no unitId), enrich with unit/textbook info
     if (!unitId) {

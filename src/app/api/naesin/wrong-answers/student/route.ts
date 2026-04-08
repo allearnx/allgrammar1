@@ -3,6 +3,7 @@ import { z } from 'zod';
 import { createApiHandler, dbResult } from '@/lib/api';
 import { requireAcademyScope } from '@/lib/api/require-academy-scope';
 import { createAdminClient } from '@/lib/supabase/admin';
+import { enrichWrongAnswersFromSheet } from '@/lib/naesin/enrich-wrong-answers';
 
 export const GET = createApiHandler(
   { roles: ['teacher', 'admin', 'boss'] },
@@ -20,11 +21,13 @@ export const GET = createApiHandler(
     const data = dbResult(
       await admin
         .from('naesin_wrong_answers')
-        .select('*, sheet:naesin_problem_sheets(id, title)')
+        .select('*, sheet:naesin_problem_sheets(id, title, questions)')
         .eq('student_id', studentId)
         .order('created_at', { ascending: false })
         .limit(200)
     );
+
+    enrichWrongAnswersFromSheet(data as Record<string, unknown>[]);
 
     return NextResponse.json(data);
   }
