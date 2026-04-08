@@ -93,12 +93,12 @@ export function computeStageProgress(
     grammar = Math.round((progress.grammar_videos_completed / videoCount) * 100);
   }
 
-  // Problem: sheet-based progress if available, otherwise 0/100
+  // Problem: sheet-based progress (우선), fallback to boolean flag
   let problem = 0;
-  if (progress.problem_completed) {
-    problem = 100;
-  } else if (problemSheetCount != null && problemSheetCount > 0) {
+  if (problemSheetCount != null && problemSheetCount > 0) {
     problem = Math.round(((problemSheetsAttempted ?? 0) / problemSheetCount) * 100);
+  } else if (progress.problem_completed) {
+    problem = 100;
   }
 
   // Mock Exam: 0 or 100

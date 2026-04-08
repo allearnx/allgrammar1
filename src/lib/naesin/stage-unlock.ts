@@ -200,11 +200,12 @@ function getProblemStatus(
   sheetsAttempted?: number,
 ): NaesinStageStatus {
   if (!hasContent) return 'completed';
-  if (progress?.problem_completed) return 'completed';
-  // Sheet-based completion: all sheets attempted
-  if (sheetCount && sheetCount > 0 && sheetsAttempted != null && sheetsAttempted >= sheetCount) {
-    return 'completed';
+  // Sheet-based completion (우선)
+  if (sheetCount != null && sheetCount > 0) {
+    return (sheetsAttempted != null && sheetsAttempted >= sheetCount) ? 'completed' : 'available';
   }
+  // Fallback: boolean flag (시트 없는 경우)
+  if (progress?.problem_completed) return 'completed';
   return 'available';
 }
 
