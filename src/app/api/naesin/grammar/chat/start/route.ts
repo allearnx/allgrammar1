@@ -88,15 +88,26 @@ ${lesson.text_content ? `레슨 내용:\n${lesson.text_content}` : ''}
 
         // Insert generated questions using admin client (bypasses RLS)
         const adminClient = createAdminClient();
-        const rows = generated.map((q, i) => ({
-          lesson_id: lessonId,
-          question_text: q.question_text,
-          grammar_concept: q.grammar_concept || null,
-          hint: q.hint || null,
-          expected_answer_keywords: q.expected_answer_keywords || [],
-          sort_order: i,
-          is_auto_generated: true,
-        }));
+        const rows = generated
+          .filter((q) => typeof q.question_text === 'string' && q.question_text.trim())
+          .map((q, i) => ({
+            lesson_id: lessonId,
+            question_text: q.question_text.trim(),
+            grammar_concept: typeof q.grammar_concept === 'string' ? q.grammar_concept : null,
+            hint: typeof q.hint === 'string' ? q.hint : null,
+            expected_answer_keywords: Array.isArray(q.expected_answer_keywords)
+              ? q.expected_answer_keywords.filter((k): k is string => typeof k === 'string')
+              : [],
+            sort_order: i,
+            is_auto_generated: true,
+          }));
+
+        if (rows.length === 0) {
+          return NextResponse.json(
+            { error: 'AI가 유효한 질문을 생성하지 못했습니다.' },
+            { status: 500 }
+          );
+        }
 
         const { error: insertError } = await adminClient
           .from('naesin_grammar_chat_questions')
@@ -105,7 +116,7 @@ ${lesson.text_content ? `레슨 내용:\n${lesson.text_content}` : ''}
         if (insertError) {
           logger.error('ai.chat_questions_insert', { error: insertError.message });
           return NextResponse.json(
-            { error: 'AI 질문 저장에 실패했습니다.' },
+            { error: `AI 질문 저장에 실패했습니다: ${insertError.message}` },
             { status: 500 }
           );
         }
