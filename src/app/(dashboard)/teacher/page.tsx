@@ -4,6 +4,7 @@ import { Topbar } from '@/components/layout/topbar';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { StatCard } from '@/components/shared/stat-card';
+import { DashboardBanner } from '@/components/shared/dashboard-banner';
 import { OnboardingGuide } from '@/components/shared/onboarding-guide';
 import { Users, BookOpen, FileText, FileDown, BookMarked, ClipboardList, BookA } from 'lucide-react';
 import Link from 'next/link';
@@ -47,10 +48,12 @@ export default async function ManagerDashboard() {
     <>
       <Topbar user={user} title="매니저 대시보드" />
       <div className="p-4 md:p-6 space-y-6">
-        <div>
-          <h2 className="text-2xl font-bold tracking-tight">안녕하세요, {user.full_name}님!</h2>
-          <p className="text-muted-foreground mt-1">학원 학습 현황을 확인하세요.</p>
-        </div>
+        <DashboardBanner
+          greeting={`안녕하세요, ${user.full_name}님!`}
+          subtitle="학원 학습 현황을 확인하세요."
+          roleBadge="선생님"
+          variant="white"
+        />
 
         {academyRes.data?.invite_code && (
           <InviteCodeCard code={academyRes.data.invite_code} academyName={academyRes.data.name} />

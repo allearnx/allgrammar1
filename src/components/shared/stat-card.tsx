@@ -1,3 +1,7 @@
+'use client';
+
+import { CountUp } from './motion';
+
 interface StatCardProps {
   label: string;
   value: string | number;
@@ -9,15 +13,28 @@ interface StatCardProps {
 export function StatCard({ label, value, sub, color, icon }: StatCardProps) {
   return (
     <div
-      className="rounded-xl border bg-white p-3.5"
-      style={{ borderLeftWidth: 4, borderLeftColor: color }}
+      className="group relative overflow-hidden rounded-xl border bg-white p-4 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md"
     >
-      <div className="flex items-center justify-between mb-1.5">
+      {/* top accent gradient */}
+      <div
+        className="absolute inset-x-0 top-0 h-1 rounded-t-xl"
+        style={{ background: `linear-gradient(90deg, ${color}, ${color}88)` }}
+      />
+
+      <div className="flex items-center justify-between mb-2">
         <span className="text-xs font-semibold uppercase tracking-wider text-gray-500">{label}</span>
-        <span style={{ color }}>{icon}</span>
+        <span
+          className="inline-flex items-center justify-center rounded-lg p-1.5"
+          style={{ background: `${color}14`, color }}
+        >
+          {icon}
+        </span>
       </div>
-      <div className="text-2xl font-bold tracking-tight">{value}</div>
-      {sub && <p className="text-xs text-gray-400 mt-0.5">{sub}</p>}
+
+      <div className="text-2xl font-bold tracking-tight">
+        {typeof value === 'number' ? <CountUp to={value} /> : value}
+      </div>
+      {sub && <p className="text-xs text-gray-400 mt-1">{sub}</p>}
     </div>
   );
 }

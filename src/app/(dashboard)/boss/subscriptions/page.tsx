@@ -86,10 +86,10 @@ export default function BossSubscriptionsPage() {
 
       {/* ── 스탯 카드 ── */}
       <div className="grid gap-3 grid-cols-2 lg:grid-cols-4">
-        <StatCard label="전체 구독" value={totalCount} sub="등록된 구독" color="#7C3AED" icon={<Users className="h-5 w-5" />} />
-        <StatCard label="유료 구독" value={paidCount} sub="프리미엄 사용 중" color="#10B981" icon={<Crown className="h-5 w-5" />} />
-        <StatCard label="무료 구독" value={freeCount} sub="무료 플랜" color="#06B6D4" icon={<Zap className="h-5 w-5" />} />
-        <StatCard label="활성 구독" value={activeCount} sub="활성 + 체험 중" color="#F59E0B" icon={<CreditCard className="h-5 w-5" />} />
+        <StatCard label="전체 구독" value={totalCount} sub="등록된 구독" color="#A78BFA" icon={<Users className="h-5 w-5" />} />
+        <StatCard label="유료 구독" value={paidCount} sub="프리미엄 사용 중" color="#7C3AED" icon={<Crown className="h-5 w-5" />} />
+        <StatCard label="무료 구독" value={freeCount} sub="무료 플랜" color="#C4B5FD" icon={<Zap className="h-5 w-5" />} />
+        <StatCard label="활성 구독" value={activeCount} sub="활성 + 체험 중" color="#DDD6FE" icon={<CreditCard className="h-5 w-5" />} />
       </div>
 
       {/* ── 필터 + 테이블 ── */}

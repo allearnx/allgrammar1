@@ -148,6 +148,12 @@
   50% { box-shadow: 0 0 30px rgba(124,58,237,0.15), 0 8px 40px rgba(124,58,237,0.1); }
 }
 
+/* ===== Shimmer skeleton ===== */
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
 /* ===== 공개 페이지: 로고 마키 (무한 스크롤) ===== */
 @keyframes marquee-left {
   0% { transform: translateX(0); }

@@ -46,6 +46,7 @@ export default async function AdminDashboard() {
           subtitle="학원 현황을 확인하세요."
           roleBadge="관리자"
           chips={maxStudents ? [{ label: `좌석 ${studentCount}/${maxStudents}` }] : undefined}
+          variant="white"
         />
 
         {inviteCode && <InviteCodeCard code={inviteCode} academyName={academyRes.data?.name || '학원'} />}

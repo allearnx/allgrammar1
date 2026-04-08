@@ -25,11 +25,11 @@ const STATUS_LABELS: Record<OrderStatus, string> = {
 };
 
 const STATUS_COLORS: Record<OrderStatus, string> = {
-  pending: 'bg-yellow-100 text-yellow-700',
-  paid: 'bg-emerald-100 text-emerald-700',
-  failed: 'bg-red-100 text-red-700',
-  refunded: 'bg-blue-100 text-blue-700',
-  canceled: 'bg-gray-100 text-gray-600',
+  pending: 'bg-violet-100 text-violet-700',
+  paid: 'bg-violet-200 text-violet-800',
+  failed: 'bg-gray-100 text-gray-600',
+  refunded: 'bg-violet-50 text-violet-600',
+  canceled: 'bg-gray-100 text-gray-500',
 };
 
 function formatKRW(amount: number) {
@@ -66,7 +66,7 @@ export function OrdersClient({ orders }: OrdersClientProps) {
       {/* ── 그라데이션 헤더 ── */}
       <div
         className="relative overflow-hidden rounded-2xl p-6 text-white"
-        style={{ background: 'linear-gradient(135deg, #FBBF24 0%, #F59E0B 50%, #D97706 100%)' }}
+        style={{ background: 'linear-gradient(135deg, #A78BFA 0%, #7C3AED 50%, #6D28D9 100%)' }}
       >
         <div className="flex items-center gap-3">
           <div className="inline-flex rounded-xl p-2.5" style={{ background: 'rgba(255,255,255,0.15)' }}>
@@ -81,10 +81,10 @@ export function OrdersClient({ orders }: OrdersClientProps) {
 
       {/* ── 스탯 카드 ── */}
       <div className="grid gap-3 grid-cols-2 lg:grid-cols-4">
-        <StatCard label="총 매출" value={formatKRW(totalRevenue)} sub="결제완료 기준" color="#D97706" icon={<DollarSign className="h-5 w-5" />} />
-        <StatCard label="결제완료" value={paidCount} sub="성공 건수" color="#10B981" icon={<CheckCircle2 className="h-5 w-5" />} />
-        <StatCard label="실패" value={failedCount} sub="결제 실패" color="#EF4444" icon={<XCircle className="h-5 w-5" />} />
-        <StatCard label="환불" value={refundedCount} sub="환불 처리" color="#3B82F6" icon={<RotateCcw className="h-5 w-5" />} />
+        <StatCard label="총 매출" value={formatKRW(totalRevenue)} sub="결제완료 기준" color="#A78BFA" icon={<DollarSign className="h-5 w-5" />} />
+        <StatCard label="결제완료" value={paidCount} sub="성공 건수" color="#8B5CF6" icon={<CheckCircle2 className="h-5 w-5" />} />
+        <StatCard label="실패" value={failedCount} sub="결제 실패" color="#9CA3AF" icon={<XCircle className="h-5 w-5" />} />
+        <StatCard label="환불" value={refundedCount} sub="환불 처리" color="#C4B5FD" icon={<RotateCcw className="h-5 w-5" />} />
       </div>
 
       {/* ── 필터 + 테이블 ── */}
@@ -110,9 +110,9 @@ export function OrdersClient({ orders }: OrdersClientProps) {
           <div className="px-5 py-16 text-center">
             <div
               className="inline-flex rounded-full p-4 mb-3"
-              style={{ background: 'linear-gradient(120deg, #FFFBEB, #FEF3C7)' }}
+              style={{ background: 'linear-gradient(120deg, #F5F3FF, #EDE9FE)' }}
             >
-              <Inbox className="h-7 w-7 text-amber-400" />
+              <Inbox className="h-7 w-7 text-violet-400" />
             </div>
             <p className="text-sm font-medium text-gray-700">주문 내역이 없습니다</p>
             <p className="text-xs text-gray-400 mt-1">홈페이지에서 코스 결제가 발생하면 표시됩니다</p>
@@ -156,7 +156,7 @@ export function OrdersClient({ orders }: OrdersClientProps) {
                           href={order.receipt_url}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="inline-flex items-center gap-1 text-amber-600 hover:text-amber-700 text-xs font-medium"
+                          className="inline-flex items-center gap-1 text-violet-600 hover:text-violet-700 text-xs font-medium"
                         >
                           영수증 <ExternalLink className="h-3 w-3" />
                         </a>
