@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import { createApiHandler, dbResult } from '@/lib/api';
 import { problemCreateSchema, problemPatchSchema, idSchema } from '@/lib/api/schemas';
 import { requireContentPermission } from '@/lib/api/require-content-permission';
+import { regradeSheet } from '@/lib/naesin/regrade-sheet';
 
 const ADMIN_ROLES = ['teacher', 'admin', 'boss'] as const;
 
@@ -62,6 +63,12 @@ export const PATCH = createApiHandler(
       .eq('id', id)
       .select()
       .single());
+
+    // questions 또는 answer_key 변경 시 자동 재채점
+    if ('questions' in updates || 'answer_key' in updates) {
+      await regradeSheet(id as string);
+    }
+
     return NextResponse.json(data);
   }
 );

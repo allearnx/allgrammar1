@@ -3,7 +3,7 @@ import { z } from 'zod';
 import { createApiHandler, NotFoundError } from '@/lib/api';
 import { createAdminClient } from '@/lib/supabase/admin';
 import { checkPlanGate } from '@/lib/billing/check-plan-api';
-import { normalize } from '@/lib/naesin/normalize-answer';
+import { regradeSheet } from '@/lib/naesin/regrade-sheet';
 
 const correctAnswerSchema = z.object({
   sheetId: z.string().uuid(),
@@ -15,7 +15,6 @@ const correctAnswerSchema = z.object({
 export const PATCH = createApiHandler(
   { schema: correctAnswerSchema, roles: ['teacher', 'admin', 'boss'] },
   async ({ user, body, supabase }) => {
-    // 유료 플랜 원장/선생님 모두 사용 가능 (boss는 무조건 통과)
     if (user.role !== 'boss') {
       const blocked = await checkPlanGate(user.academy_id, 'naesin:problem');
       if (blocked) return blocked;
@@ -27,7 +26,7 @@ export const PATCH = createApiHandler(
     // 1. 시트 조회
     const { data: sheet } = await admin
       .from('naesin_problem_sheets')
-      .select('id, unit_id, answer_key, questions, mode')
+      .select('id, answer_key, questions')
       .eq('id', sheetId)
       .single();
 
@@ -48,7 +47,6 @@ export const PATCH = createApiHandler(
 
     // 2. 정답 업데이트
     if (mode === 'accept') {
-      // acceptedAnswers에 추가 (기존 정답 유지)
       if (questions[questionIndex]) {
         const existing = questions[questionIndex].acceptedAnswers ?? [];
         const newVal = String(newAnswer);
@@ -57,7 +55,6 @@ export const PATCH = createApiHandler(
         }
       }
     } else {
-      // 정답 자체를 교체
       answerKey[questionIndex] = newAnswer;
       if (questions[questionIndex]) {
         questions[questionIndex].answer = newAnswer;
@@ -69,95 +66,9 @@ export const PATCH = createApiHandler(
       .update({ answer_key: answerKey, questions })
       .eq('id', sheetId);
 
-    // 3. 재채점: 기존 regrade 로직과 동일
-    const { data: attempts } = await admin
-      .from('naesin_problem_attempts')
-      .select('id, student_id, answers, score, total_questions, wrong_answers')
-      .eq('sheet_id', sheetId);
+    // 3. 재채점
+    const result = await regradeSheet(sheetId);
 
-    if (!attempts || attempts.length === 0) {
-      return NextResponse.json({ updated: true, total: 0, changed: 0 });
-    }
-
-    let changed = 0;
-
-    for (const attempt of attempts) {
-      const answers = attempt.answers as (string | number)[];
-      const totalQuestions = attempt.total_questions;
-      let correctCount = 0;
-      const wrongAnswers: {
-        number: number;
-        userAnswer: string | number;
-        correctAnswer: string | number;
-        question?: string;
-      }[] = [];
-
-      for (let i = 0; i < totalQuestions; i++) {
-        const userAnswer = String(answers[i] ?? '');
-        const correctAnswer = String(answerKey[i] ?? '');
-        const isSubjective =
-          !questions?.[i]?.options || questions[i].options!.length === 0;
-
-        let isCorrect: boolean;
-
-        if (isSubjective) {
-          const studentNorm = normalize(userAnswer);
-          const candidates = [
-            correctAnswer,
-            ...(questions?.[i]?.acceptedAnswers ?? []),
-          ];
-          isCorrect = candidates.some((c) => normalize(c) === studentNorm);
-        } else {
-          isCorrect =
-            userAnswer.trim().toLowerCase() ===
-            correctAnswer.trim().toLowerCase();
-        }
-
-        if (isCorrect) {
-          correctCount++;
-        } else {
-          wrongAnswers.push({
-            number: i + 1,
-            userAnswer: (answers[i] as string | number) ?? '',
-            correctAnswer: answerKey[i] ?? '',
-            question: questions?.[i]?.question,
-          });
-        }
-      }
-
-      const newScore = Math.round((correctCount / totalQuestions) * 100);
-
-      if (newScore !== attempt.score) {
-        changed++;
-
-        await admin
-          .from('naesin_problem_attempts')
-          .update({ score: newScore, wrong_answers: wrongAnswers })
-          .eq('id', attempt.id);
-
-        // 오답 테이블 갱신: 해당 시트의 problem 오답만 삭제 → 새 오답 삽입
-        await admin
-          .from('naesin_wrong_answers')
-          .delete()
-          .eq('student_id', attempt.student_id)
-          .eq('unit_id', sheet.unit_id)
-          .eq('stage', 'problem')
-          .eq('sheet_id', sheetId);
-
-        if (wrongAnswers.length > 0) {
-          const wrongRows = wrongAnswers.map((wa) => ({
-            student_id: attempt.student_id,
-            unit_id: sheet.unit_id,
-            stage: 'problem',
-            source_type: sheet.mode,
-            question_data: wa,
-            sheet_id: sheetId,
-          }));
-          await admin.from('naesin_wrong_answers').insert(wrongRows);
-        }
-      }
-    }
-
-    return NextResponse.json({ updated: true, total: attempts.length, changed });
+    return NextResponse.json({ updated: true, ...result });
   }
 );

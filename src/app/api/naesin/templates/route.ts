@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import { createApiHandler, dbResult } from '@/lib/api';
 import { requireContentPermission } from '@/lib/api/require-content-permission';
 import { templateCreateSchema, templatePatchSchema } from '@/lib/api/schemas';
+import { regradeSheet } from '@/lib/naesin/regrade-sheet';
 
 const ADMIN_ROLES = ['teacher', 'admin', 'boss'] as const;
 
@@ -87,6 +88,13 @@ export const PATCH = createApiHandler(
         .select('id');
 
       syncedCount = synced?.length ?? 0;
+
+      // synced 시트 자동 재채점
+      if (synced && synced.length > 0) {
+        for (const s of synced) {
+          await regradeSheet(s.id);
+        }
+      }
     }
 
     return NextResponse.json({ ...updated, syncedCount });
