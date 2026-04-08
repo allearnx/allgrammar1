@@ -80,6 +80,7 @@ export const NAV_CONFIG: Record<string, NavGroup[]> = {
       label: '관리',
       items: [
         { href: '/teacher/students', label: '학생 관리', icon: Users },
+        { href: '/teacher/announcements', label: '공지사항', icon: Megaphone },
       ],
     },
     {
@@ -109,6 +110,7 @@ export const NAV_CONFIG: Record<string, NavGroup[]> = {
       items: [
         { href: '/admin/students', label: '학생 관리', icon: Users },
         { href: '/admin/teachers', label: '선생님 관리', icon: GraduationCap },
+        { href: '/admin/announcements', label: '공지사항', icon: Megaphone },
       ],
     },
     {
