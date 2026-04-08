@@ -389,7 +389,8 @@ BEGIN
     -- Q39 (O: 기호 분류 서술형)
     jsonb_build_object('number',39,
       'question',E'다음 <보기>의 문장 중에서 밑줄 친 부분의 쓰임이 같은 것끼리 기호를 쓰시오.\n\nⓐ She has a lot of dishes to wash.\nⓑ I am excited to start the new project.\nⓒ He wants to buy a new laptop.\nⓓ There is nothing to eat in the fridge.\nⓔ They went to the airport to pick up their parents.\nⓕ Her dream is to become a chef.',
-      'answer','ⓐ, ⓓ'),
+      'answer','ⓐ, ⓓ',
+      'acceptedAnswers',jsonb_build_array('a, d','ⓐ,ⓓ','ⓐ ⓓ','a,d')),
 
     -- ═══════════════════════════════════════════
     -- Part 4: 어법 오류 판별 (Q40~Q50)
