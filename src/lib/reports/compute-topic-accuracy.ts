@@ -130,7 +130,11 @@ export async function computeTopicAccuracy(
       .map(([uid]) => uid);
     const sortedUnitTitles = sortedUnits.map((uid) => unitTitleMap.get(uid) ?? uid);
 
-    result.push({ topic, totalCorrect: acc.correct, totalQuestions: acc.total, accuracy, attemptCount: acc.count, trend: weeks, unitIds: sortedUnits, unitTitles: sortedUnitTitles });
+    const lastStudiedAt = acc.unitLatest.size > 0
+      ? [...acc.unitLatest.values()].sort().pop()
+      : undefined;
+
+    result.push({ topic, totalCorrect: acc.correct, totalQuestions: acc.total, accuracy, attemptCount: acc.count, trend: weeks, unitIds: sortedUnits, unitTitles: sortedUnitTitles, lastStudiedAt });
   }
 
   result.sort((a, b) => a.accuracy - b.accuracy);

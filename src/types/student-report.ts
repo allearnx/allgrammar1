@@ -10,6 +10,7 @@ export interface TopicAccuracyItem {
   trend: { week: string; accuracy: number }[];
   unitIds: string[];       // 해당 토픽 출현 단원 (최근 시도순)
   unitTitles: string[];    // unitIds 대응 단원명
+  lastStudiedAt?: string;  // ISO timestamp, 가장 최근 학습일
 }
 
 /** 학습 활동 기록 (캘린더 + 리스트용) */

@@ -19,6 +19,7 @@ import {
 } from '@/lib/dashboard/naesin-helpers';
 import { MiniScoreTrend } from '@/components/charts/mini-score-trend';
 import { TopicWeaknessCard } from './topic-weakness-card';
+import { ReviewAlertCard } from './review-alert-card';
 import { StatCard } from '@/components/shared/stat-card';
 import { UnitProgressList } from './naesin/unit-progress-list';
 import { ExamScopeList } from './naesin/exam-scope-list';
@@ -172,6 +173,7 @@ export function NaesinDashboard({
 
       {/* ── Topic Weakness Card ── */}
       <TopicWeaknessCard />
+      <ReviewAlertCard />
 
       {/* ── Learning Flow: Current Unit ── */}
       {currentUnit && currentStages.length > 0 && (
