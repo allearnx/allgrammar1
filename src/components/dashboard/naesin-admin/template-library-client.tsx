@@ -1,9 +1,9 @@
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useMemo } from 'react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Card, CardContent } from '@/components/ui/card';
+import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from '@/components/ui/accordion';
 import { Loader2, Library, ClipboardList, Trash2, Pencil, Search } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { fetchWithToast } from '@/lib/fetch-with-toast';
@@ -21,7 +21,6 @@ interface TemplateItem {
 export function TemplateLibraryClient() {
   const [loading, setLoading] = useState(true);
   const [grouped, setGrouped] = useState<Record<string, TemplateItem[]>>({});
-  const [activeTopic, setActiveTopic] = useState<string | null>(null);
   const [deleting, setDeleting] = useState<string | null>(null);
   const [editingTemplate, setEditingTemplate] = useState<TemplateItem | null>(null);
   const [search, setSearch] = useState('');
@@ -34,8 +33,6 @@ export function TemplateLibraryClient() {
         { method: 'GET', silent: true, logContext: 'template_library' }
       );
       setGrouped(data.grouped);
-      const topics = Object.keys(data.grouped);
-      if (topics.length > 0) setActiveTopic((prev) => prev && topics.includes(prev) ? prev : topics[0]);
     } catch {
       // handled
     } finally {
@@ -72,10 +69,21 @@ export function TemplateLibraryClient() {
   const topics = Object.keys(grouped);
   const totalTemplates = Object.values(grouped).reduce((sum, arr) => sum + arr.length, 0);
 
-  const currentItems = activeTopic ? (grouped[activeTopic] ?? []) : [];
-  const filtered = search
-    ? currentItems.filter((t) => t.title.toLowerCase().includes(search.toLowerCase()))
-    : currentItems;
+  // Filter across all topics when searching
+  const filteredGrouped = useMemo(() => {
+    if (!search) return grouped;
+    const q = search.toLowerCase();
+    const result: Record<string, TemplateItem[]> = {};
+    for (const [topic, items] of Object.entries(grouped)) {
+      const matched = items.filter(
+        (t) => t.title.toLowerCase().includes(q) || topic.toLowerCase().includes(q)
+      );
+      if (matched.length > 0) result[topic] = matched;
+    }
+    return result;
+  }, [grouped, search]);
+
+  const filteredTopics = Object.keys(filteredGrouped);
 
   if (loading) {
     return (
@@ -102,87 +110,93 @@ export function TemplateLibraryClient() {
         </div>
       ) : (
         <>
-          {/* Topic tabs */}
-          <div className="flex flex-wrap gap-1.5">
-            {topics.map((topic) => (
-              <Button
-                key={topic}
-                variant={activeTopic === topic ? 'default' : 'outline'}
-                size="sm"
-                className="h-8"
-                onClick={() => { setActiveTopic(topic); setSearch(''); }}
-              >
-                {topic}
-                <Badge variant="secondary" className="ml-1.5 text-[10px]">
-                  {grouped[topic].length}
-                </Badge>
-              </Button>
-            ))}
-          </div>
-
-          {/* Search */}
+          {/* Global search */}
           <div className="relative max-w-sm">
             <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
             <Input
-              placeholder="템플릿 검색..."
+              placeholder="전체 템플릿 검색..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               className="pl-9 h-9"
             />
           </div>
 
-          {/* Template cards */}
-          <div className="space-y-2">
-            {filtered.map((tmpl) => {
-              const qCount = tmpl.questions?.length || 0;
-              const mcqCount = (tmpl.questions || []).filter(
-                (q) => q.options && q.options.length > 0
-              ).length;
-              const subCount = qCount - mcqCount;
+          {filteredTopics.length === 0 ? (
+            <p className="text-center text-muted-foreground py-8">검색 결과가 없습니다</p>
+          ) : (
+            <Accordion
+              type="multiple"
+              defaultValue={search ? filteredTopics : [filteredTopics[0]]}
+              key={search}
+              className="rounded-lg border"
+            >
+              {filteredTopics.map((topic) => {
+                const items = filteredGrouped[topic];
+                const topicQCount = items.reduce((s, t) => s + (t.questions?.length || 0), 0);
 
-              return (
-                <Card key={tmpl.id} className="hover:bg-muted/30 transition-colors">
-                  <CardContent className="py-3 flex items-center gap-3">
-                    <ClipboardList className="h-4 w-4 text-red-500 shrink-0" />
-                    <div className="flex-1 min-w-0">
-                      <p className="text-sm font-medium truncate">{tmpl.title}</p>
-                    </div>
-                    <div className="flex items-center gap-1.5 shrink-0">
-                      <Badge variant="secondary" className="text-xs">{qCount}문제</Badge>
-                      {mcqCount > 0 && <Badge variant="outline" className="text-xs">객관식 {mcqCount}</Badge>}
-                      {subCount > 0 && <Badge variant="outline" className="text-xs">서술형 {subCount}</Badge>}
-                      <Button
-                        variant="ghost"
-                        size="icon"
-                        className="h-8 w-8"
-                        onClick={() => setEditingTemplate(tmpl)}
-                      >
-                        <Pencil className="h-3.5 w-3.5" />
-                      </Button>
-                      <Button
-                        variant="ghost"
-                        size="icon"
-                        className="h-8 w-8"
-                        disabled={deleting === tmpl.id}
-                        onClick={() => handleDelete(tmpl.id)}
-                      >
-                        {deleting === tmpl.id ? (
-                          <Loader2 className="h-3.5 w-3.5 animate-spin" />
-                        ) : (
-                          <Trash2 className="h-3.5 w-3.5 text-destructive" />
-                        )}
-                      </Button>
-                    </div>
-                  </CardContent>
-                </Card>
-              );
-            })}
-            {filtered.length === 0 && (
-              <p className="text-center text-muted-foreground py-8">
-                {search ? '검색 결과가 없습니다' : '이 주제의 템플릿이 없습니다'}
-              </p>
-            )}
-          </div>
+                return (
+                  <AccordionItem key={topic} value={topic} className="px-4">
+                    <AccordionTrigger className="hover:no-underline">
+                      <div className="flex items-center gap-2">
+                        <span className="font-semibold">{topic}</span>
+                        <Badge variant="secondary" className="text-[10px]">{items.length}개</Badge>
+                        <span className="text-xs text-muted-foreground">{topicQCount}문제</span>
+                      </div>
+                    </AccordionTrigger>
+                    <AccordionContent>
+                      <div className="space-y-1">
+                        {items.map((tmpl) => {
+                          const qCount = tmpl.questions?.length || 0;
+                          const mcqCount = (tmpl.questions || []).filter(
+                            (q) => q.options && q.options.length > 0
+                          ).length;
+                          const subCount = qCount - mcqCount;
+
+                          return (
+                            <div
+                              key={tmpl.id}
+                              className="flex items-center gap-3 rounded-md px-3 py-2 hover:bg-muted/50 transition-colors"
+                            >
+                              <ClipboardList className="h-4 w-4 text-violet-500 shrink-0" />
+                              <div className="flex-1 min-w-0">
+                                <p className="text-sm font-medium truncate">{tmpl.title}</p>
+                              </div>
+                              <div className="flex items-center gap-1.5 shrink-0">
+                                <Badge variant="secondary" className="text-xs">{qCount}문제</Badge>
+                                {mcqCount > 0 && <Badge variant="outline" className="text-xs">객관식 {mcqCount}</Badge>}
+                                {subCount > 0 && <Badge variant="outline" className="text-xs">서술형 {subCount}</Badge>}
+                                <Button
+                                  variant="ghost"
+                                  size="icon"
+                                  className="h-8 w-8"
+                                  onClick={() => setEditingTemplate(tmpl)}
+                                >
+                                  <Pencil className="h-3.5 w-3.5" />
+                                </Button>
+                                <Button
+                                  variant="ghost"
+                                  size="icon"
+                                  className="h-8 w-8"
+                                  disabled={deleting === tmpl.id}
+                                  onClick={() => handleDelete(tmpl.id)}
+                                >
+                                  {deleting === tmpl.id ? (
+                                    <Loader2 className="h-3.5 w-3.5 animate-spin" />
+                                  ) : (
+                                    <Trash2 className="h-3.5 w-3.5 text-destructive" />
+                                  )}
+                                </Button>
+                              </div>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </AccordionContent>
+                  </AccordionItem>
+                );
+              })}
+            </Accordion>
+          )}
         </>
       )}
 
