@@ -173,7 +173,14 @@ export function WrongAnswerCard({ wrongAnswer, onResolve }: { wrongAnswer: Naesi
                 <p className="text-green-600">정답: {String(data.correctAnswer)}</p>
               </>
             ) : null}
-            {data.number && data.type !== 'fill_blank' && data.type !== 'translation' && data.type !== 'ordering' && data.type !== 'first_letter' ? (
+            {data.type === 'grammar_vocab' ? (
+              <>
+                {data.sentence && <p className="text-muted-foreground">{String(data.sentence)}</p>}
+                <p className="text-red-500">내 선택: {String(data.selectedOption || '-')}</p>
+                <p className="text-green-600">정답: {String(data.correctOption)}</p>
+              </>
+            ) : null}
+            {data.number && data.type !== 'fill_blank' && data.type !== 'translation' && data.type !== 'ordering' && data.type !== 'first_letter' && data.type !== 'grammar_vocab' ? (
               <>
                 <p className="text-red-500">내 답: {String(data.userAnswer || '-')}</p>
                 <p className="text-green-600">정답: {String(data.correctAnswer)}</p>

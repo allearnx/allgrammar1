@@ -11,6 +11,7 @@ interface WrongBlank {
   blankIndex: number;
   correctAnswer: string;
   userAnswer: string;
+  question?: string;
 }
 
 interface SentenceRange {
@@ -99,12 +100,33 @@ export function useFillBlanksState({ passage, onComplete }: UseFillBlanksStateOp
       if (isCorrect) {
         correctCount++;
       } else {
+        // Find the sentence containing this blank for context
+        let question = '';
+        if (passage.sentences) {
+          let offset = 0;
+          for (const sent of passage.sentences) {
+            const wc = sent.original.split(/\s+/).filter(Boolean).length;
+            if (blank.index >= offset && blank.index < offset + wc) {
+              question = sent.original;
+              break;
+            }
+            offset += wc;
+          }
+        }
+        if (!question) {
+          const s = Math.max(0, blank.index - 4);
+          const e = Math.min(words.length - 1, blank.index + 4);
+          const parts: string[] = [];
+          for (let j = s; j <= e; j++) parts.push(j === blank.index ? '____' : words[j]);
+          question = (s > 0 ? '... ' : '') + parts.join(' ') + (e < words.length - 1 ? ' ...' : '');
+        }
         wrongs.push({
           type: 'fill_blank',
           difficulty,
           blankIndex: blank.index,
           correctAnswer: blank.answer,
           userAnswer: answers[blank.index] || '',
+          question,
         });
       }
     });
