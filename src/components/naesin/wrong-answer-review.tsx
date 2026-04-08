@@ -187,9 +187,16 @@ export function WrongAnswerCard({ wrongAnswer, onResolve }: { wrongAnswer: Naesi
             {explanation && (
               <p className="text-xs text-blue-600 mt-1">해���: {explanation}</p>
             )}
-            <Badge variant="secondary" className="text-xs">
-              {wrongAnswer.source_type}
-            </Badge>
+            <div className="flex items-center gap-1.5 pt-1">
+              {wrongAnswer.sheet?.title && (
+                <Badge variant="outline" className="text-xs">
+                  {wrongAnswer.sheet.title}
+                </Badge>
+              )}
+              <Badge variant="secondary" className="text-xs">
+                {wrongAnswer.source_type}
+              </Badge>
+            </div>
           </div>
           {!wrongAnswer.resolved && onResolve && (
             <Button size="sm" variant="outline" className="h-7 text-xs shrink-0" onClick={onResolve}>

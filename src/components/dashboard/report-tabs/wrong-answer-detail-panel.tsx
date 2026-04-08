@@ -128,11 +128,13 @@ function ReadOnlyWrongAnswerCard({
   studentId: string;
   onCorrected: () => void;
 }) {
-  const data = wrongAnswer.question_data as Record<string, string>;
+  const data = wrongAnswer.question_data as Record<string, unknown>;
   const [dialogOpen, setDialogOpen] = useState(false);
-  const [newAnswer, setNewAnswer] = useState(data.correctAnswer || '');
+  const [newAnswer, setNewAnswer] = useState(String(data.correctAnswer || ''));
   const [submitting, setSubmitting] = useState(false);
 
+  const options = data.options as string[] | undefined;
+  const explanation = data.explanation as string | undefined;
   const isProblemStage = wrongAnswer.stage === 'problem' && wrongAnswer.sheet_id;
   const isTextbookStage = TEXTBOOK_STAGES.has(wrongAnswer.stage);
   const questionIndex = data.number ? Number(data.number) - 1 : -1;
@@ -163,7 +165,7 @@ function ReadOnlyWrongAnswerCard({
   };
 
   const handleAcceptAnswer = async () => {
-    if (!wrongAnswer.sheet_id || questionIndex < 0 || !data.userAnswer) return;
+    if (!wrongAnswer.sheet_id || questionIndex < 0 || !String(data.userAnswer || '')) return;
     setSubmitting(true);
     try {
       await fetchWithToast(
@@ -173,7 +175,7 @@ function ReadOnlyWrongAnswerCard({
           body: {
             sheetId: wrongAnswer.sheet_id,
             questionIndex,
-            newAnswer: data.userAnswer,
+            newAnswer: String(data.userAnswer),
             mode: 'accept',
           },
           successMessage: '정답처리 완료',
@@ -217,39 +219,49 @@ function ReadOnlyWrongAnswerCard({
       <Card className={wrongAnswer.resolved ? 'opacity-60' : ''}>
         <CardContent className="py-3">
           <div className="text-sm space-y-1">
-            {data.question ? <p className="font-medium">{data.question}</p> : null}
+            {data.question ? <p className="font-medium">{String(data.question)}</p> : null}
             {data.type === 'fill_blank' ? (
               <>
-                <p className="text-red-500">학생 답: {data.userAnswer || '-'}</p>
-                <p className="text-green-600">정답: {data.correctAnswer}</p>
+                <p className="text-red-500">학생 답: {String(data.userAnswer || '-')}</p>
+                <p className="text-green-600">정답: {String(data.correctAnswer)}</p>
               </>
             ) : null}
             {data.type === 'translation' ? (
               <>
-                <p className="text-muted-foreground">{data.koreanText || ''}</p>
-                <p className="text-red-500">학생 답: {data.userAnswer || '-'}</p>
-                {data.feedback ? <p className="text-sm">{data.feedback}</p> : null}
+                <p className="text-muted-foreground">{String(data.koreanText || '')}</p>
+                <p className="text-red-500">학생 답: {String(data.userAnswer || '-')}</p>
+                {data.feedback ? <p className="text-sm">{String(data.feedback)}</p> : null}
               </>
             ) : null}
             {data.type === 'ordering' ? (
               <>
-                <p className="text-red-500">학생 배열: {data.userOrder || '-'}</p>
-                <p className="text-green-600">정답 순서: {data.correctOrder}</p>
+                <p className="text-red-500">학생 배열: {String(data.userOrder || '-')}</p>
+                <p className="text-green-600">정답 순서: {String(data.correctOrder)}</p>
               </>
             ) : null}
             {data.type === 'first_letter' ? (
               <>
-                <p className="text-muted-foreground">{data.koreanText || ''}</p>
-                <p className="text-red-500">학생 답: {data.userAnswer || '-'}</p>
-                <p className="text-green-600">정답: {data.correctAnswer}</p>
+                <p className="text-muted-foreground">{String(data.koreanText || '')}</p>
+                <p className="text-red-500">학생 답: {String(data.userAnswer || '-')}</p>
+                <p className="text-green-600">정답: {String(data.correctAnswer)}</p>
               </>
             ) : null}
             {data.number && data.type !== 'fill_blank' && data.type !== 'translation' && data.type !== 'ordering' && data.type !== 'first_letter' ? (
               <>
-                <p className="text-red-500">학생 답: {data.userAnswer || '-'}</p>
-                <p className="text-green-600">정답: {data.correctAnswer}</p>
+                <p className="text-red-500">학생 답: {String(data.userAnswer || '-')}</p>
+                <p className="text-green-600">정답: {String(data.correctAnswer)}</p>
               </>
             ) : null}
+            {options && options.length > 0 && (
+              <div className="mt-1 pl-2 border-l-2 border-muted space-y-0.5">
+                {options.map((opt, i) => (
+                  <p key={i} className="text-xs text-muted-foreground">{i + 1}. {opt}</p>
+                ))}
+              </div>
+            )}
+            {explanation && (
+              <p className="text-xs text-blue-600 mt-1">해설: {explanation}</p>
+            )}
             <div className="flex items-center gap-1.5 pt-1">
               {wrongAnswer.sheet?.title && (
                 <Badge variant="outline" className="text-xs">
@@ -271,7 +283,7 @@ function ReadOnlyWrongAnswerCard({
                     size="sm"
                     className="h-5 px-1.5 text-xs text-green-600"
                     onClick={handleAcceptAnswer}
-                    disabled={submitting || !data.userAnswer}
+                    disabled={submitting || !String(data.userAnswer || '')}
                   >
                     {submitting ? <Loader2 className="h-3 w-3 animate-spin mr-0.5" /> : <Check className="h-3 w-3 mr-0.5" />}
                     정답처리
@@ -281,7 +293,7 @@ function ReadOnlyWrongAnswerCard({
                     size="sm"
                     className="h-5 px-1.5 text-xs text-muted-foreground"
                     onClick={() => {
-                      setNewAnswer(data.correctAnswer || '');
+                      setNewAnswer(String(data.correctAnswer || ''));
                       setDialogOpen(true);
                     }}
                   >
@@ -312,14 +324,14 @@ function ReadOnlyWrongAnswerCard({
           <DialogHeader>
             <DialogTitle>정답 수정</DialogTitle>
             <DialogDescription>
-              {data.number && `${data.number}번 문항`}
-              {wrongAnswer.sheet?.title && ` — ${wrongAnswer.sheet.title}`}
+              {data.number ? `${String(data.number)}번 문항` : null}
+              {wrongAnswer.sheet?.title ? ` — ${wrongAnswer.sheet.title}` : null}
             </DialogDescription>
           </DialogHeader>
           <div className="space-y-3">
-            {data.question && (
-              <p className="text-sm text-muted-foreground">{data.question}</p>
-            )}
+            {data.question ? (
+              <p className="text-sm text-muted-foreground">{String(data.question)}</p>
+            ) : null}
             <div>
               <label className="text-sm font-medium">새 정답</label>
               <Input
