@@ -74,6 +74,13 @@ export const POST = createApiHandler(
 
     // Save wrong answers to unified table with enriched data
     if (wrongAnswers.length > 0 && unitId) {
+      // 같은 시트의 이전 오답 정리 (재시도 시 중복 방지)
+      await supabase
+        .from('naesin_wrong_answers')
+        .delete()
+        .eq('student_id', user.id)
+        .eq('sheet_id', sheetId);
+
       const wrongRows = wrongAnswers.map((wa) => {
         const idx = wa.number - 1;
         const q = questions?.[idx];
@@ -91,7 +98,7 @@ export const POST = createApiHandler(
         };
       });
 
-      await supabase.from('naesin_wrong_answers').insert(wrongRows);
+      dbResult(await supabase.from('naesin_wrong_answers').insert(wrongRows));
     }
 
     // Delete server draft on successful submit
