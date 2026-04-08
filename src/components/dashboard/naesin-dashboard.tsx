@@ -7,6 +7,7 @@ import {
   ClipboardList,
   CalendarDays,
   ArrowRight,
+  Flame,
 } from 'lucide-react';
 import { BRAND } from '@/lib/utils/brand-colors';
 import { calculateStageStatuses } from '@/lib/naesin/stage-unlock';
@@ -23,6 +24,7 @@ import { StatCard } from '@/components/shared/stat-card';
 import { UnitProgressList } from './naesin/unit-progress-list';
 import { ExamScopeList } from './naesin/exam-scope-list';
 import { LearningOrderModal } from '@/components/naesin/learning-order-modal';
+import { useStreak } from '@/hooks/use-streak';
 import type {
   NaesinUnit,
   NaesinStudentProgress,
@@ -117,6 +119,7 @@ export function NaesinDashboard({
   const ctaStage = currentStages.find((s) => s.status === 'active');
 
   // Stats
+  const streak = useStreak();
   const { completedStages, completedUnits, avgVocabScore, nearestDDay } =
     computeNaesinStats(progressList, statusesMap, sortedUnits, examAssignments);
 
@@ -149,6 +152,12 @@ export function NaesinDashboard({
               {currentDDay === 0 ? 'D-Day' : `D-${currentDDay}`}
             </span>
           )}
+          {streak > 0 && (
+            <span className="inline-flex items-center gap-1 rounded-full px-3 py-1 text-xs font-bold bg-amber-400/90 text-amber-900">
+              <Flame className="h-3.5 w-3.5" />
+              {streak}일 연속
+            </span>
+          )}
         </div>
       </div>
 
@@ -158,6 +167,7 @@ export function NaesinDashboard({
         <StatCard label="완료 단원" value={completedUnits} sub={`전체 ${sortedUnits.length}단원 중`} color={COLORS.statPurple} icon={<BookOpen className="h-5 w-5" />} />
         <StatCard label="단어 평균" value={avgVocabScore > 0 ? `${avgVocabScore}점` : '-'} sub="퀴즈 + 스펠링 평균" color={COLORS.statAmber} icon={<ClipboardList className="h-5 w-5" />} />
         <StatCard label="시험 D-day" value={nearestDDay !== null ? (nearestDDay === 0 ? 'D-Day' : `D-${nearestDDay}`) : '-'} sub={nearestDDay !== null ? '가장 가까운 시험' : '시험 일정 없음'} color={COLORS.statSky} icon={<CalendarDays className="h-5 w-5" />} />
+        <StatCard label="연속 학습" value={streak > 0 ? `${streak}일` : '-'} sub={streak >= 7 ? '대단해요!' : streak > 0 ? '계속 이어가세요' : '오늘 시작해보세요'} color="#F59E0B" icon={<Flame className="h-4 w-4" />} />
       </div>
 
       {/* ── Mini Chart + Report Link ── */}
