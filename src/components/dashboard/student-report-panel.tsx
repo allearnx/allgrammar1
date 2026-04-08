@@ -6,12 +6,13 @@ import { UnitScoreChart } from '@/components/charts/unit-score-chart';
 import { ActivityCalendar } from '@/components/charts/activity-calendar';
 import {
   Loader2, AlertCircle, TrendingUp, BarChart3, AlertTriangle,
-  CalendarDays, LayoutDashboard, Brain,
+  CalendarDays, LayoutDashboard, Brain, Target,
 } from 'lucide-react';
 import { useStudentReport } from '@/hooks/use-student-report';
 import { SummaryTab } from './report-tabs/summary-tab';
 import { WrongAnalysisTab } from './report-tabs/wrong-analysis-tab';
 import { AiAnalysisTab } from './report-tabs/ai-analysis-tab';
+import { TopicAccuracyTab } from './report-tabs/topic-accuracy-tab';
 import type { Tier } from '@/lib/billing/feature-gate';
 
 interface Props {
@@ -85,6 +86,11 @@ export function StudentReportPanel({ studentId, services: servicesProp, token, r
               <BarChart3 className="h-3.5 w-3.5" />
               <span className="hidden sm:inline">단원별</span>
               <span className="sm:hidden">단원</span>
+            </TabsTrigger>
+            <TabsTrigger value="topics" className="gap-1">
+              <Target className="h-3.5 w-3.5" />
+              <span className="hidden sm:inline">토픽별</span>
+              <span className="sm:hidden">토픽</span>
             </TabsTrigger>
             <TabsTrigger value="wrong" className="gap-1">
               <AlertTriangle className="h-3.5 w-3.5" />
@@ -220,6 +226,11 @@ export function StudentReportPanel({ studentId, services: servicesProp, token, r
                 <p className="text-sm text-gray-400">아직 학습 데이터가 없어요</p>
               </div>
             )}
+          </TabsContent>
+
+          {/* ── 토픽별 ── */}
+          <TabsContent value="topics" className="mt-4">
+            <TopicAccuracyTab topicAccuracy={data.topicAccuracy ?? []} />
           </TabsContent>
 
           {/* ── 오답 분석 ── */}

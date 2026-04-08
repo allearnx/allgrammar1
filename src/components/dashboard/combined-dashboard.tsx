@@ -13,6 +13,7 @@ import {
 } from 'lucide-react';
 import { BRAND } from '@/lib/utils/brand-colors';
 import { MiniScoreTrend } from '@/components/charts/mini-score-trend';
+import { TopicWeaknessCard } from './topic-weakness-card';
 import { StatCard } from '@/components/shared/stat-card';
 import { VocaTabContent } from './combined/voca-tab-content';
 import { NaesinTabContent } from './combined/naesin-tab-content';
@@ -128,6 +129,9 @@ function DashboardContent() {
           </div>
         </div>
       </div>
+
+      {/* ── Topic Weakness Card ── */}
+      <TopicWeaknessCard />
 
       {/* ── Tab Content ── */}
       {activeTab === 'voca' && <VocaTabContent />}

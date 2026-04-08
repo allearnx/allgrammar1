@@ -9,6 +9,7 @@ import { computeTrends } from './compute-trends';
 import { computeWrongAnalysis } from './compute-wrong-analysis';
 import { computeUnitBreakdown } from './compute-unit-breakdown';
 import { computeActivityLog } from './compute-activity-log';
+import { computeTopicAccuracy } from './compute-topic-accuracy';
 
 export async function buildStudentReport(
   queryClient: SupabaseClient,
@@ -28,6 +29,7 @@ export async function buildStudentReport(
     vocaQuizActivityRes, vocaMatchingActivityRes, naesinVocabActivityRes,
     naesinProblemActivityRes, naesinPassageActivityRes, naesinVideoActivityRes,
     naesinPassageAllRes,
+    naesinProblemAllRes,
   ] = await fetchRawData(queryClient, studentId, ninetyDaysAgo);
 
   const naesin = hasNaesin
@@ -51,6 +53,11 @@ export async function buildStudentReport(
 
   const activityLog = await computeActivityLog(queryClient, vocaQuizActivityRes.data || [], vocaMatchingActivityRes.data || [], naesinVocabActivityRes.data || [], naesinProblemActivityRes.data || [], naesinPassageActivityRes.data || [], naesinVideoActivityRes.data || []);
 
+  // Topic accuracy
+  const topicAccuracy = hasNaesin
+    ? await computeTopicAccuracy(queryClient, naesinProblemAllRes.data || [])
+    : [];
+
   // Fetch daily learning seconds
   const { data: dailyRows } = await queryClient
     .from('learning_daily_log')
@@ -73,5 +80,6 @@ export async function buildStudentReport(
     unitBreakdown,
     activityLog,
     dailyLearningSeconds,
+    topicAccuracy,
   };
 }

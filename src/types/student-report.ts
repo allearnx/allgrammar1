@@ -1,5 +1,15 @@
 import type { ReportNaesinStats, ReportVocaStats } from './report';
 
+/** 토픽별 정답률 항목 */
+export interface TopicAccuracyItem {
+  topic: string;           // "수여동사", "관계대명사 what"
+  totalCorrect: number;
+  totalQuestions: number;
+  accuracy: number;        // 0-100
+  attemptCount: number;
+  trend: { week: string; accuracy: number }[];
+}
+
 /** 학습 활동 기록 (캘린더 + 리스트용) */
 export interface ActivityRecord {
   date: string;          // 'yyyy-MM-dd'
@@ -56,4 +66,6 @@ export interface StudentReportData {
   activityLog: ActivityRecord[];
   /** 날짜별 학습 시간 (초) — 히트맵용 */
   dailyLearningSeconds?: Record<string, number>;
+  /** 토픽별 정답률 */
+  topicAccuracy?: TopicAccuracyItem[];
 }

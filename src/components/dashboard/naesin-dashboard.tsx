@@ -17,6 +17,7 @@ import {
   getNaesinStagesForUnit,
 } from '@/lib/dashboard/naesin-helpers';
 import { MiniScoreTrend } from '@/components/charts/mini-score-trend';
+import { TopicWeaknessCard } from './topic-weakness-card';
 import { FlowStep } from './combined/flow-step';
 import { StatCard } from '@/components/shared/stat-card';
 import { UnitProgressList } from './naesin/unit-progress-list';
@@ -169,6 +170,9 @@ export function NaesinDashboard({
         </div>
         <MiniScoreTrend data={quizHistory} color="#06B6D4" height={64} />
       </div>
+
+      {/* ── Topic Weakness Card ── */}
+      <TopicWeaknessCard />
 
       {/* ── Learning Flow: Current Unit ── */}
       {currentUnit && currentStages.length > 0 && (
