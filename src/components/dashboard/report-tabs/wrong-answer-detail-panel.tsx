@@ -232,6 +232,7 @@ function ReadOnlyWrongAnswerCard({
               <>
                 <p className="text-muted-foreground">{String(data.koreanText || '')}</p>
                 <p className="text-red-500">학생 답: {String(data.userAnswer || '-')}</p>
+                {data.correctAnswer ? <p className="text-green-600">정답: {String(data.correctAnswer)}</p> : null}
                 {data.feedback ? <p className="text-sm">{String(data.feedback)}</p> : null}
               </>
             ) : null}

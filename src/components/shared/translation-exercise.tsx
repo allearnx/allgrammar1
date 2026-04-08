@@ -22,6 +22,7 @@ export interface WrongTranslation {
   type: 'translation';
   koreanText: string;
   userAnswer: string;
+  correctAnswer?: string;
   score: number;
   feedback: string;
 }

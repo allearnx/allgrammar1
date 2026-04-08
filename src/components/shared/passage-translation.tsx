@@ -23,7 +23,7 @@ export function WholePassageTranslation({ passage, onComplete, showWrongAlert }:
     };
     setResult(data);
     const wrongs: WrongTranslation[] = score < 80
-      ? [{ type: 'translation', koreanText: passage.korean_translation, userAnswer: answer.trim(), score, feedback: data.feedback }]
+      ? [{ type: 'translation', koreanText: passage.korean_translation, userAnswer: answer.trim(), correctAnswer: passage.original_text, score, feedback: data.feedback }]
       : [];
     onComplete(score, wrongs);
   }

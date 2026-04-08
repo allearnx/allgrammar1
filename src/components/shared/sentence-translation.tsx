@@ -85,6 +85,7 @@ export function SentenceBysentenceTranslation({ passage, onComplete, showWrongAl
             type: 'translation',
             koreanText: s.korean,
             userAnswer: (answers[globalIdx] || '').trim(),
+            correctAnswer: s.original,
             score: r.score,
             feedback: r.feedback,
           });
