@@ -8,6 +8,7 @@ import { CheckCircle2, AlertTriangle, XCircle, Wand2, Plus, X, ImagePlus, Loader
 import { fetchWithToast } from '@/lib/fetch-with-toast';
 import type { GeneratedQuestion } from './question-utils';
 import { hasOptions } from './question-utils';
+import { FormattedText } from '@/components/shared/formatted-text';
 import type { FullValidationResult, ValidationBadge } from '@/lib/validation';
 
 export function QuestionEditRow({
@@ -235,13 +236,13 @@ export function QuestionViewRow({
     <>
       <td className="p-2">{question.number}</td>
       <td className="p-2 whitespace-pre-wrap break-words">
-        <span>{question.question.replace(/\\n/g, '\n')}</span>
+        <span><FormattedText text={question.question.replace(/\\n/g, '\n')} /></span>
         {question.imageUrl && <ImageIcon className="inline-block ml-1 h-3.5 w-3.5 text-muted-foreground" />}
         {hasOptions(question) && (
           <div className="mt-1 text-xs text-muted-foreground space-y-0.5">
             {question.options!.map((opt, oi) => (
               <div key={oi}>
-                <span className="font-medium">{'①②③④⑤'[oi] ?? `${oi + 1}`}</span>{' '}{opt}
+                <span className="font-medium">{'①②③④⑤'[oi] ?? `${oi + 1}`}</span>{' '}<FormattedText text={opt} />
               </div>
             ))}
           </div>

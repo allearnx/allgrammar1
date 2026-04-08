@@ -2,6 +2,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { AlertTriangle } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { getEncouragement } from '@/lib/naesin/encouragement';
+import { FormattedText } from '@/components/shared/formatted-text';
 import type { WrongItem } from '@/hooks/use-problem-draft';
 
 export function ResultsScreen({
@@ -43,7 +44,7 @@ export function ResultsScreen({
               <div className="space-y-3">
                 {wrongList.map((w, i) => (
                   <div key={i} className="text-sm border-b last:border-0 pb-2 space-y-1">
-                    <p className="font-medium">#{w.number}. {w.question}</p>
+                    <p className="font-medium">#{w.number}. <FormattedText text={w.question} /></p>
                     <p className="text-red-500">내 답: {w.userAnswer}</p>
                     <p className="text-green-600">정답: {w.correctAnswer}</p>
                   </div>

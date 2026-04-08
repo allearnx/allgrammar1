@@ -185,7 +185,7 @@ BEGIN
     jsonb_build_object('number',48,'question',E'다음 중 어법상 옳은 문장을 모두 고르시오.','options',jsonb_build_array('I believe that honesty is important.','I don''t know that she will join us.','She asked him whether he liked soccer.','He wonders if the bus has already left.','I''m sure if she is a kind person.'),'answer','1,3,4'),
 
     -- #49 if가 명사절로 쓰인 것 모두 고르기
-    jsonb_build_object('number',49,'question',E'다음 중 밑줄 친 if가 "~인지 아닌지"의 뜻으로 쓰인 것을 모두 고르시오.','options',jsonb_build_array('Can you tell me if this seat is taken?','If you press this button, the machine will start.','I''m not sure if the concert has been canceled.','If we leave now, we can catch the early train.','She doubts if he will keep his promise.'),'answer','1,3,5'),
+    jsonb_build_object('number',49,'question',E'다음 중 밑줄 친 if가 "~인지 아닌지"의 뜻으로 쓰인 것을 모두 고르시오.','options',jsonb_build_array('Can you tell me <u>if</u> this seat is taken?','<u>If</u> you press this button, the machine will start.','I''m not sure <u>if</u> the concert has been canceled.','<u>If</u> we leave now, we can catch the early train.','She doubts <u>if</u> he will keep his promise.'),'answer','1,3,5'),
 
     -- #50 어법상 옳은 문장 모두 고르기 (명사절 if 종합)
     jsonb_build_object('number',50,'question',E'다음 중 어법상 옳은 문장을 모두 고르시오.','options',jsonb_build_array('I wonder if will she come tomorrow.','Please check if the window is closed.','He asked me if did I finish my homework.','Do you know if the exam is on Monday?','She is curious whether he will accept the offer.'),'answer','2,4,5')

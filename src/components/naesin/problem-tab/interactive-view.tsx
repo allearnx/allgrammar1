@@ -8,6 +8,7 @@ import { Badge } from '@/components/ui/badge';
 import { Loader2, Clock, Save, RefreshCw } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { MCQOptionList } from '@/components/shared/mcq-option-list';
+import { FormattedText } from '@/components/shared/formatted-text';
 import type { NaesinProblemSheet, NaesinProblemQuestion } from '@/types/database';
 import type { WrongItem } from '@/hooks/use-problem-draft';
 import { useInteractiveProblem } from './use-interactive-problem';
@@ -148,11 +149,11 @@ export function InteractiveProblemView({
                 return (
                   <>
                     <span className="font-bold">{q.match(/^\[.+?\]/)![0]}</span>
-                    {q.replace(/^\[.+?\]/, '')}
+                    <FormattedText text={q.replace(/^\[.+?\]/, '')} />
                   </>
                 );
               }
-              return q;
+              return <FormattedText text={q} />;
             })()}
           </p>
         </CardContent>

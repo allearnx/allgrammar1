@@ -15,6 +15,7 @@ import {
 } from '@/components/ui/dialog';
 import { Loader2, CheckCircle, AlertTriangle, Pencil, Check } from 'lucide-react';
 import { fetchWithToast } from '@/lib/fetch-with-toast';
+import { FormattedText } from '@/components/shared/formatted-text';
 import type { NaesinWrongAnswer } from '@/types/database';
 
 const STAGE_LABELS: Record<string, string> = {
@@ -220,7 +221,7 @@ function ReadOnlyWrongAnswerCard({
       <Card className={wrongAnswer.resolved ? 'opacity-60' : ''}>
         <CardContent className="py-3">
           <div className="text-sm space-y-1">
-            {data.question ? <p className="font-medium">{String(data.question)}</p> : null}
+            {data.question ? <p className="font-medium"><FormattedText text={String(data.question)} /></p> : null}
             {data.type === 'fill_blank' ? (
               <>
                 <p className="text-red-500">학생 답: {String(data.userAnswer || '-')}</p>
@@ -331,7 +332,7 @@ function ReadOnlyWrongAnswerCard({
           </DialogHeader>
           <div className="space-y-3">
             {data.question ? (
-              <p className="text-sm text-muted-foreground">{String(data.question)}</p>
+              <p className="text-sm text-muted-foreground"><FormattedText text={String(data.question)} /></p>
             ) : null}
             <div>
               <label className="text-sm font-medium">새 정답</label>

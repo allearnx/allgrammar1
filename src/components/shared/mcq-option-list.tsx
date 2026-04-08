@@ -3,6 +3,7 @@
 import { Button } from '@/components/ui/button';
 import { CheckCircle, XCircle, Square, CheckSquare } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { FormattedText } from '@/components/shared/formatted-text';
 
 interface MCQOptionListProps {
   options: string[];
@@ -79,7 +80,7 @@ export function MCQOptionList({
                 <Square className="h-4 w-4 mr-3 shrink-0 text-muted-foreground/40" />
               )}
               <span className="mr-3 shrink-0 font-medium">{label}</span>
-              {option}
+              <FormattedText text={option} />
             </Button>
           );
         }
@@ -101,7 +102,7 @@ export function MCQOptionList({
             disabled={showResult}
           >
             <span className="mr-3 shrink-0 font-medium">{label}</span>
-            {option}
+            <FormattedText text={option} />
             {showResult && isCorrectOption && <CheckCircle className="h-4 w-4 ml-auto shrink-0 text-green-500" />}
             {showResult && isSelected && !isCorrectOption && <XCircle className="h-4 w-4 ml-auto shrink-0 text-red-500" />}
           </Button>

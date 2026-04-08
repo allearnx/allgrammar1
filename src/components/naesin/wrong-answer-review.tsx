@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { CheckCircle, AlertTriangle } from 'lucide-react';
 import { fetchWithToast } from '@/lib/fetch-with-toast';
+import { FormattedText } from '@/components/shared/formatted-text';
 import type { NaesinWrongAnswer } from '@/types/database';
 
 interface WrongAnswerReviewProps {
@@ -144,7 +145,7 @@ export function WrongAnswerCard({ wrongAnswer, onResolve }: { wrongAnswer: Naesi
                 className="max-w-full max-h-48 rounded border mb-2"
               />
             ) : null}
-            {data.question ? <p className="font-medium">{String(data.question)}</p> : null}
+            {data.question ? <p className="font-medium"><FormattedText text={String(data.question)} /></p> : null}
             {data.type === 'fill_blank' ? (
               <>
                 <p className="text-red-500">내 답: {String(data.userAnswer || '-')}</p>
