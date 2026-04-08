@@ -5,7 +5,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { Badge } from '@/components/ui/badge';
-import { Loader2, Clock, Save } from 'lucide-react';
+import { Loader2, Clock, Save, RefreshCw } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { MCQOptionList } from '@/components/shared/mcq-option-list';
 import type { NaesinProblemSheet, NaesinProblemQuestion } from '@/types/database';
@@ -71,7 +71,9 @@ export function InteractiveProblemView({
     wrongList, isGrading, isCurrentCorrect,
     question, isSubjective, isMultiSelect, multiSelectedValues, remaining, isReady,
     handleSelect, handleMultiToggle, handleMultiSubmit, handleNext, handleMidSave, isMidSaving, answersMap,
+    submitFailed, retrySubmit,
   } = useInteractiveProblem({ sheetId: sheet.id, questions, unitId, onComplete });
+  const [isRetrying, setIsRetrying] = useState(false);
 
   if (questions.length === 0) {
     return <p className="text-center text-muted-foreground py-4">문제가 없습니다.</p>;
@@ -79,6 +81,30 @@ export function InteractiveProblemView({
 
   if (finished) {
     return <ResultsScreen score={score} totalQuestions={questions.length} wrongList={wrongList} />;
+  }
+
+  if (submitFailed) {
+    return (
+      <div className="space-y-4 max-w-md mx-auto py-8 text-center">
+        <div className="text-red-600 text-lg font-semibold">결과 저장에 실패했습니다</div>
+        <p className="text-sm text-muted-foreground">
+          네트워크 오류로 결과가 저장되지 않았습니다.<br />
+          답안은 안전하게 보관되어 있으니 아래 버튼을 눌러 다시 저장해 주세요.
+        </p>
+        <div className="flex justify-center gap-3 pt-2">
+          <Button
+            onClick={async () => { setIsRetrying(true); await retrySubmit(); setIsRetrying(false); }}
+            disabled={isRetrying}
+          >
+            {isRetrying ? <Loader2 className="h-4 w-4 animate-spin mr-2" /> : <RefreshCw className="h-4 w-4 mr-2" />}
+            다시 저장하기
+          </Button>
+        </div>
+        <div className="text-xs text-muted-foreground pt-4">
+          점수: {score.correct}개 정답 / {questions.length}문제 ({Math.round((score.correct / questions.length) * 100)}점)
+        </div>
+      </div>
+    );
   }
 
   return (

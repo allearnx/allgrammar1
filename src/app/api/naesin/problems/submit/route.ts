@@ -3,6 +3,8 @@ import { createApiHandler, NotFoundError, dbResult } from '@/lib/api';
 import { problemSubmitSchema } from '@/lib/api/schemas';
 import { normalize } from '@/lib/naesin/normalize-answer';
 
+export const maxDuration = 30;
+
 export const POST = createApiHandler(
   { schema: problemSubmitSchema },
   async ({ user, body, supabase }) => {
@@ -75,11 +77,11 @@ export const POST = createApiHandler(
     // Save wrong answers to unified table with enriched data
     if (wrongAnswers.length > 0 && unitId) {
       // 같은 시트의 이전 오답 정리 (재시도 시 중복 방지)
-      await supabase
+      dbResult(await supabase
         .from('naesin_wrong_answers')
         .delete()
         .eq('student_id', user.id)
-        .eq('sheet_id', sheetId);
+        .eq('sheet_id', sheetId));
 
       const wrongRows = wrongAnswers.map((wa) => {
         const idx = wa.number - 1;
@@ -102,11 +104,11 @@ export const POST = createApiHandler(
     }
 
     // Delete server draft on successful submit
-    await supabase
+    dbResult(await supabase
       .from('naesin_problem_drafts')
       .delete()
       .eq('student_id', user.id)
-      .eq('sheet_id', sheetId);
+      .eq('sheet_id', sheetId));
 
     // Update progress: mark completed only when all sheets in the unit have been attempted
     if (unitId) {
@@ -126,12 +128,12 @@ export const POST = createApiHandler(
 
       const allCompleted = sheetIds.length > 0 && sheetIds.every((id) => attemptedIds.has(id));
 
-      await supabase
+      dbResult(await supabase
         .from('naesin_student_progress')
         .upsert(
           { student_id: user.id, unit_id: unitId, problem_completed: allCompleted },
           { onConflict: 'student_id,unit_id' }
-        );
+        ));
     }
 
     return NextResponse.json({ attempt, score, correctCount, wrongAnswers });

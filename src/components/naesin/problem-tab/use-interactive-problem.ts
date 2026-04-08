@@ -262,8 +262,12 @@ export function useInteractiveProblem({
     }
   }
 
+  const [submitFailed, setSubmitFailed] = useState(false);
+  const [pendingSubmit, setPendingSubmit] = useState<{ answers: (string | number)[]; total: number; aiResults: Record<string, AiFeedback> } | null>(null);
+
   async function submitResults(answers: (string | number)[], total: number, finalAiResults?: Record<string, AiFeedback>) {
     const mergedAiResults = finalAiResults ?? aiResultsMap;
+    setSubmitFailed(false);
     try {
       const data = await fetchWithToast<{ score: number }>('/api/naesin/problems/submit', {
         body: {
@@ -279,14 +283,32 @@ export function useInteractiveProblem({
       clearDraft();
       clearServerDraft();
       setFinished(true);
+      setPendingSubmit(null);
       if (data.score >= 80) {
         toast.success('문제풀이를 완료했습니다!');
         onComplete?.();
       }
     } catch {
-      // error already toasted by fetchWithToast
-      setFinished(true);
+      // 제출 실패 — finished로 전환하지 않고 재시도 가능하게 유지
+      setSubmitFailed(true);
+      setPendingSubmit({ answers, total, aiResults: mergedAiResults });
+      // 서버 드래프트에 최종 상태 백업 저장
+      saveServerDraft({
+        mode: 'interactive',
+        currentIndex: questions.length - 1,
+        score,
+        wrongList,
+        aiResultsMap: mergedAiResults,
+        answeredUpTo: questions.length - 1,
+        overtimeQuestions,
+        answersMap,
+      }, unitId).catch(() => {});
     }
+  }
+
+  async function retrySubmit() {
+    if (!pendingSubmit) return;
+    await submitResults(pendingSubmit.answers, pendingSubmit.total, pendingSubmit.aiResults);
   }
 
   // Compute isCurrentCorrect for the view
@@ -324,5 +346,7 @@ export function useInteractiveProblem({
     handleMidSave,
     isMidSaving,
     answersMap,
+    submitFailed,
+    retrySubmit,
   };
 }
