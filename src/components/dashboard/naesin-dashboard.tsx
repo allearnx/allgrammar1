@@ -19,11 +19,12 @@ import {
 } from '@/lib/dashboard/naesin-helpers';
 import { MiniScoreTrend } from '@/components/charts/mini-score-trend';
 import { TopicWeaknessCard } from './topic-weakness-card';
-import { FlowStep } from './combined/flow-step';
 import { StatCard } from '@/components/shared/stat-card';
 import { UnitProgressList } from './naesin/unit-progress-list';
 import { ExamScopeList } from './naesin/exam-scope-list';
+import { LearningFlowSection } from './naesin/learning-flow-section';
 import { LearningOrderModal } from '@/components/naesin/learning-order-modal';
+import { BannerBadge } from './shared/banner-badge';
 import { useStreak } from '@/hooks/use-streak';
 import type {
   NaesinUnit,
@@ -51,16 +52,11 @@ interface Props {
 
 const COLORS = {
   header: BRAND.violetLight,
-  bannerBadgeBorder: BRAND.teal,
   statMint: BRAND.mint,
   statPurple: BRAND.violet,
   statAmber: BRAND.amber,
   statSky: BRAND.cyan,
-  stepDefault: { bg: BRAND.step.defaultBg, border: BRAND.step.defaultBorder },
-  stepActive: { bg: '#FFFFFF', border: BRAND.step.activeBorder },
   stepDone: { bg: BRAND.step.defaultBg, border: BRAND.step.doneBorder },
-  activeLabel: BRAND.violet,
-  ctaButton: BRAND.violet,
   progressDone: BRAND.progress.done,
   progressActive: BRAND.progress.active,
 };
@@ -139,18 +135,12 @@ export function NaesinDashboard({
         <p className="mt-1 text-white/80">내신 시험을 완벽하게 준비해볼까요?</p>
 
         <div className="mt-4 flex flex-wrap gap-3">
-          <span className="inline-flex items-center rounded-full px-3 py-1 text-sm font-medium text-white" style={{ border: `1.5px solid ${COLORS.bannerBadgeBorder}`, background: 'rgba(255,255,255,0.15)' }}>
-            {textbookName}
-          </span>
+          <BannerBadge>{textbookName}</BannerBadge>
           {currentUnit && (
-            <span className="inline-flex items-center rounded-full px-3 py-1 text-sm font-medium text-white" style={{ border: `1.5px solid ${COLORS.bannerBadgeBorder}`, background: 'rgba(255,255,255,0.15)' }}>
-              현재: {currentUnit.title}
-            </span>
+            <BannerBadge>현재: {currentUnit.title}</BannerBadge>
           )}
           {currentDDay !== null && currentDDay >= 0 && (
-            <span className="inline-flex items-center rounded-full px-3 py-1 text-sm font-bold text-white" style={{ border: `1.5px solid ${COLORS.bannerBadgeBorder}`, background: 'rgba(255,255,255,0.15)' }}>
-              {currentDDay === 0 ? 'D-Day' : `D-${currentDDay}`}
-            </span>
+            <BannerBadge bold>{currentDDay === 0 ? 'D-Day' : `D-${currentDDay}`}</BannerBadge>
           )}
           {streak > 0 && (
             <span className="inline-flex items-center gap-1 rounded-full px-3 py-1 text-xs font-bold bg-amber-400/90 text-amber-900">
@@ -167,7 +157,6 @@ export function NaesinDashboard({
         <StatCard label="완료 단원" value={completedUnits} sub={`전체 ${sortedUnits.length}단원 중`} color={COLORS.statPurple} icon={<BookOpen className="h-5 w-5" />} />
         <StatCard label="단어 평균" value={avgVocabScore > 0 ? `${avgVocabScore}점` : '-'} sub="퀴즈 + 스펠링 평균" color={COLORS.statAmber} icon={<ClipboardList className="h-5 w-5" />} />
         <StatCard label="시험 D-day" value={nearestDDay !== null ? (nearestDDay === 0 ? 'D-Day' : `D-${nearestDDay}`) : '-'} sub={nearestDDay !== null ? '가장 가까운 시험' : '시험 일정 없음'} color={COLORS.statSky} icon={<CalendarDays className="h-5 w-5" />} />
-        <StatCard label="연속 학습" value={streak > 0 ? `${streak}일` : '-'} sub={streak >= 7 ? '대단해요!' : streak > 0 ? '계속 이어가세요' : '오늘 시작해보세요'} color="#F59E0B" icon={<Flame className="h-4 w-4" />} />
       </div>
 
       {/* ── Mini Chart + Report Link ── */}
@@ -186,45 +175,12 @@ export function NaesinDashboard({
 
       {/* ── Learning Flow: Current Unit ── */}
       {currentUnit && currentStages.length > 0 && (
-        <div className="rounded-2xl border bg-white p-5 md:p-6 space-y-5">
-          <h3 className="text-lg font-bold flex items-center gap-2">
-            학습 흐름 — {currentUnit.title}
-            {currentDDay !== null && currentDDay >= 0 && (
-              <span className="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-medium" style={{ borderColor: COLORS.stepDone.border }}>
-                {currentDDay === 0 ? 'D-Day' : `D-${currentDDay}`}
-              </span>
-            )}
-          </h3>
-
-          <div className="flex items-stretch gap-0 overflow-visible">
-            {currentStages.map((stage, i) => (
-              <div key={stage.key} className="contents">
-                {i > 0 && <div className="flex items-center justify-center self-center px-1 md:px-1.5 text-gray-300 text-sm shrink-0">→</div>}
-                <FlowStep stage={stage} dayId={`${currentUnit.id}/${stage.stageKey}`} linkPrefix="/student/naesin/" />
-              </div>
-            ))}
-          </div>
-
-          {/* CTA bar */}
-          {ctaStage && (
-            <div
-              className="flex items-center justify-between rounded-xl px-5 py-3"
-              style={{ background: 'linear-gradient(to right, #F5F3FF, #EDE9FE)' }}
-            >
-              <span className="text-sm font-medium text-gray-700">
-                다음 단계: <strong>{ctaStage.label}</strong>
-              </span>
-              <Link
-                href={`/student/naesin/${currentUnit.id}/${ctaStage.stageKey}`}
-                className="inline-flex items-center gap-1.5 rounded-lg px-4 py-2 text-sm font-semibold text-white transition-colors hover:opacity-90"
-                style={{ background: COLORS.ctaButton }}
-              >
-                {ctaStage.label} 시작하기
-                <ArrowRight className="h-4 w-4" />
-              </Link>
-            </div>
-          )}
-        </div>
+        <LearningFlowSection
+          currentUnit={currentUnit}
+          currentStages={currentStages}
+          ctaStage={ctaStage}
+          currentDDay={currentDDay}
+        />
       )}
 
       {/* ── Bottom: Unit Progress + Exam Scope ── */}
@@ -247,5 +203,3 @@ export function NaesinDashboard({
     </div>
   );
 }
-
-

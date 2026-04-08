@@ -20,12 +20,12 @@ import { VocaTabContent } from './combined/voca-tab-content';
 import { NaesinTabContent } from './combined/naesin-tab-content';
 import { DashboardProvider, useDashboardContext } from './combined/dashboard-context';
 import { LearningOrderModal } from '@/components/naesin/learning-order-modal';
+import { BannerBadge } from './shared/banner-badge';
 import { useStreak } from '@/hooks/use-streak';
 import type { DashboardProps } from './combined/dashboard-context';
 
 const COLORS = {
   header: BRAND.violetLight,
-  bannerBadgeBorder: BRAND.teal,
   statMint: BRAND.mint,
   statPurple: BRAND.violet,
   statAmber: BRAND.amber,
@@ -63,16 +63,10 @@ function DashboardContent() {
         <p className="mt-1 text-white/80">오늘도 영어 학습을 시작해볼까요?</p>
 
         <div className="mt-4 flex flex-wrap gap-3">
-          <span className="inline-flex items-center rounded-full px-3 py-1 text-sm font-medium text-white" style={{ border: `1.5px solid ${COLORS.bannerBadgeBorder}`, background: 'rgba(255,255,255,0.15)' }}>
-            올킬보카
-          </span>
-          <span className="inline-flex items-center rounded-full px-3 py-1 text-sm font-medium text-white" style={{ border: `1.5px solid ${COLORS.bannerBadgeBorder}`, background: 'rgba(255,255,255,0.15)' }}>
-            {textbookName}
-          </span>
+          <BannerBadge>올킬보카</BannerBadge>
+          <BannerBadge>{textbookName}</BannerBadge>
           {nearestDDay !== null && (
-            <span className="inline-flex items-center rounded-full px-3 py-1 text-sm font-bold text-white" style={{ border: `1.5px solid ${COLORS.bannerBadgeBorder}`, background: 'rgba(255,255,255,0.15)' }}>
-              {nearestDDay === 0 ? 'D-Day' : `D-${nearestDDay}`}
-            </span>
+            <BannerBadge bold>{nearestDDay === 0 ? 'D-Day' : `D-${nearestDDay}`}</BannerBadge>
           )}
           {streak > 0 && (
             <span className="inline-flex items-center gap-1 rounded-full px-3 py-1 text-xs font-bold bg-amber-400/90 text-amber-900">
@@ -91,7 +85,6 @@ function DashboardContent() {
         <StatCard label="내신 단원" value={`${naesinCompletedUnits}/${sortedUnitsCount}`} sub="완료 단원" color={COLORS.statSky} icon={<BookOpen className="h-5 w-5" />} />
         <StatCard label="내신 단어" value={naesinAvgVocab > 0 ? `${naesinAvgVocab}점` : '-'} sub="퀴즈 + 스펠링 평균" color={COLORS.statPurple} icon={<Sparkles className="h-5 w-5" />} />
         <StatCard label="시험 D-day" value={nearestDDay !== null ? (nearestDDay === 0 ? 'D-Day' : `D-${nearestDDay}`) : '-'} sub={nearestDDay !== null ? '가장 가까운 시험' : '시험 일정 없음'} color={COLORS.statAmber} icon={<CalendarDays className="h-5 w-5" />} />
-        <StatCard label="연속 학습" value={streak > 0 ? `${streak}일` : '-'} sub={streak >= 7 ? '대단해요!' : streak > 0 ? '계속 이어가세요' : '오늘 시작해보세요'} color="#F59E0B" icon={<Flame className="h-4 w-4" />} />
       </div>
 
       {/* ── Tab Buttons ── */}
