@@ -3,7 +3,7 @@ import { createApiHandler, NotFoundError, dbResult } from '@/lib/api';
 import { problemSubmitSchema } from '@/lib/api/schemas';
 import { normalize } from '@/lib/naesin/normalize-answer';
 
-export const maxDuration = 30;
+export const maxDuration = 60;
 
 export const POST = createApiHandler(
   { schema: problemSubmitSchema },
