@@ -108,6 +108,13 @@ export function InteractiveProblemView({
       <Card>
         <CardContent className="py-6">
           <p className="text-sm text-muted-foreground mb-2">문제 {question.number}</p>
+          {question.imageUrl && (
+            <img
+              src={question.imageUrl}
+              alt={`문제 ${question.number}`}
+              className="max-w-full rounded-lg border mb-3"
+            />
+          )}
           <p className="text-lg font-medium whitespace-pre-wrap">
             {(() => {
               const q = question.question.replace(/\\n/g, '\n');

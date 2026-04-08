@@ -1,9 +1,11 @@
+import { useRef, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Badge } from '@/components/ui/badge';
-import { CheckCircle2, AlertTriangle, XCircle, Wand2, Plus, X } from 'lucide-react';
+import { CheckCircle2, AlertTriangle, XCircle, Wand2, Plus, X, ImagePlus, Loader2, Trash2, ImageIcon } from 'lucide-react';
+import { fetchWithToast } from '@/lib/fetch-with-toast';
 import type { GeneratedQuestion } from './question-utils';
 import { hasOptions } from './question-utils';
 import type { FullValidationResult, ValidationBadge } from '@/lib/validation';
@@ -27,6 +29,27 @@ export function QuestionEditRow({
 }) {
   const isMcq = hasOptions(question);
   const accepted = question.acceptedAnswers ?? [];
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const [uploading, setUploading] = useState(false);
+
+  async function handleImageUpload(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setUploading(true);
+    try {
+      const formData = new FormData();
+      formData.append('file', file);
+      const data = await fetchWithToast<{ url: string }>('/api/naesin/upload-image', {
+        body: formData,
+        errorMessage: '이미지 업로드 실패',
+        logContext: 'question_image_upload',
+      });
+      onUpdate('imageUrl' as keyof GeneratedQuestion, data.url);
+    } finally {
+      setUploading(false);
+      if (fileInputRef.current) fileInputRef.current.value = '';
+    }
+  }
 
   function handleAddAccepted() {
     onUpdateAcceptedAnswers?.([...accepted, '']);
@@ -152,6 +175,48 @@ export function QuestionEditRow({
         </div>
       )}
 
+      {/* 이미지 첨부 */}
+      <div className="border-t pt-2 space-y-1.5">
+        <Label className="text-xs">문제 이미지</Label>
+        <input
+          ref={fileInputRef}
+          type="file"
+          accept="image/*"
+          className="hidden"
+          onChange={handleImageUpload}
+        />
+        {question.imageUrl ? (
+          <div className="flex items-start gap-2">
+            <img
+              src={question.imageUrl}
+              alt="문제 이미지"
+              className="max-h-32 rounded border"
+            />
+            <Button
+              type="button"
+              size="sm"
+              variant="ghost"
+              className="text-destructive hover:text-destructive h-7 w-7 p-0"
+              onClick={() => onUpdate('imageUrl' as keyof GeneratedQuestion, '')}
+            >
+              <Trash2 className="h-3.5 w-3.5" />
+            </Button>
+          </div>
+        ) : (
+          <Button
+            type="button"
+            size="sm"
+            variant="outline"
+            className="h-7 text-xs gap-1"
+            disabled={uploading}
+            onClick={() => fileInputRef.current?.click()}
+          >
+            {uploading ? <Loader2 className="h-3 w-3 animate-spin" /> : <ImagePlus className="h-3 w-3" />}
+            {uploading ? '업로드 중...' : '이미지 추가'}
+          </Button>
+        )}
+      </div>
+
       <Button size="sm" variant="outline" onClick={onDone}>편집 완료</Button>
     </td>
   );
@@ -169,7 +234,10 @@ export function QuestionViewRow({
   return (
     <>
       <td className="p-2">{question.number}</td>
-      <td className="p-2 whitespace-pre-wrap break-words">{question.question.replace(/\\n/g, '\n')}</td>
+      <td className="p-2 whitespace-pre-wrap break-words">
+        <span>{question.question.replace(/\\n/g, '\n')}</span>
+        {question.imageUrl && <ImageIcon className="inline-block ml-1 h-3.5 w-3.5 text-muted-foreground" />}
+      </td>
       <td className="p-2">
         <Badge variant={hasOptions(question) ? 'outline' : 'secondary'} className="text-xs">
           {hasOptions(question) ? '객관식' : '서술형'}

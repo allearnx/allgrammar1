@@ -330,6 +330,7 @@ export interface NaesinProblemQuestion {
   answer: string | number;
   explanation?: string;
   acceptedAnswers?: string[];
+  imageUrl?: string;
 }
 
 export interface NaesinProblemAttempt {

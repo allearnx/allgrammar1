@@ -137,6 +137,13 @@ export function WrongAnswerCard({ wrongAnswer, onResolve }: { wrongAnswer: Naesi
       <CardContent className="py-3">
         <div className="flex items-start justify-between gap-2">
           <div className="text-sm space-y-1 flex-1">
+            {data.imageUrl ? (
+              <img
+                src={String(data.imageUrl)}
+                alt="문제 이미지"
+                className="max-w-full max-h-48 rounded border mb-2"
+              />
+            ) : null}
             {data.question ? <p className="font-medium">{String(data.question)}</p> : null}
             {data.type === 'fill_blank' ? (
               <>

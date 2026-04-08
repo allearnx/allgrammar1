@@ -7,6 +7,7 @@ export interface GeneratedQuestion {
   answer: string;
   explanation: string;
   acceptedAnswers?: string[];
+  imageUrl?: string | null;
 }
 
 export function hasOptions(q: GeneratedQuestion): boolean {
@@ -34,6 +35,7 @@ export function toGenerated(q: NaesinProblemQuestion): GeneratedQuestion {
     answer: String(q.answer ?? ''),
     explanation: q.explanation || '',
     acceptedAnswers: q.acceptedAnswers,
+    imageUrl: q.imageUrl || null,
   };
 }
 
@@ -46,5 +48,6 @@ export function toDbQuestion(q: GeneratedQuestion, idx: number): NaesinProblemQu
     answer: q.answer,
     ...(q.explanation ? { explanation: q.explanation } : {}),
     ...(q.acceptedAnswers && q.acceptedAnswers.length > 0 ? { acceptedAnswers: q.acceptedAnswers } : {}),
+    ...(q.imageUrl ? { imageUrl: q.imageUrl } : {}),
   };
 }
