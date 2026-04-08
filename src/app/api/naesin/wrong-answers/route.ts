@@ -2,12 +2,81 @@ import { NextResponse } from 'next/server';
 import { createApiHandler, dbResult } from '@/lib/api';
 import { wrongAnswerCreateSchema, wrongAnswerPatchSchema } from '@/lib/api/schemas';
 import { enrichWrongAnswersFromSheet } from '@/lib/naesin/enrich-wrong-answers';
+import { createAdminClient } from '@/lib/supabase/admin';
+
+/**
+ * 학생 본인의 누락된 문제풀이 오답 자동 복구.
+ */
+async function autoBackfillForStudent(studentId: string) {
+  const admin = createAdminClient();
+
+  const { data: attempts } = await admin
+    .from('naesin_problem_attempts')
+    .select('id, sheet_id, wrong_answers')
+    .eq('student_id', studentId)
+    .not('wrong_answers', 'eq', '[]');
+
+  if (!attempts || attempts.length === 0) return;
+
+  const { data: existing } = await admin
+    .from('naesin_wrong_answers')
+    .select('sheet_id')
+    .eq('student_id', studentId)
+    .eq('stage', 'problem')
+    .not('sheet_id', 'is', null);
+
+  const existingSet = new Set((existing || []).map((e) => e.sheet_id));
+  const missing = attempts.filter((a) => !existingSet.has(a.sheet_id));
+  if (missing.length === 0) return;
+
+  const sheetIds = [...new Set(missing.map((a) => a.sheet_id))];
+  const { data: sheets } = await admin
+    .from('naesin_problem_sheets')
+    .select('id, unit_id, mode, questions')
+    .in('id', sheetIds);
+
+  const sheetMap = new Map((sheets || []).map((s) => [s.id, s]));
+  const rows: Record<string, unknown>[] = [];
+  const seen = new Set<string>();
+
+  for (const attempt of missing) {
+    if (seen.has(attempt.sheet_id)) continue;
+    seen.add(attempt.sheet_id);
+    const sheet = sheetMap.get(attempt.sheet_id);
+    if (!sheet) continue;
+    const wrongAnswers = attempt.wrong_answers as {
+      number: number; userAnswer: string | number;
+      correctAnswer: string | number; question?: string;
+    }[];
+    if (!wrongAnswers || wrongAnswers.length === 0) continue;
+    const questions = (sheet.questions || []) as { options?: string[]; explanation?: string }[];
+    for (const wa of wrongAnswers) {
+      const idx = wa.number - 1;
+      const q = questions[idx];
+      rows.push({
+        student_id: studentId, unit_id: sheet.unit_id,
+        stage: 'problem', source_type: sheet.mode || 'interactive',
+        question_data: { ...wa, ...(q?.options ? { options: q.options } : {}), ...(q?.explanation ? { explanation: q.explanation } : {}) },
+        sheet_id: attempt.sheet_id,
+      });
+    }
+  }
+
+  if (rows.length > 0) {
+    for (let i = 0; i < rows.length; i += 500) {
+      await admin.from('naesin_wrong_answers').insert(rows.slice(i, i + 500));
+    }
+  }
+}
 
 export const GET = createApiHandler(
   {},
   async ({ user, supabase, request }) => {
     const unitId = request.nextUrl.searchParams.get('unitId');
     const resolved = request.nextUrl.searchParams.get('resolved');
+
+    // 누락된 문제풀이 오답 자동 복구
+    await autoBackfillForStudent(user.id);
 
     let query = supabase
       .from('naesin_wrong_answers')

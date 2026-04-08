@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { CheckCircle, XCircle, Square, CheckSquare } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { FormattedText } from '@/components/shared/formatted-text';
+import { resolveCorrectIndex } from '@/lib/naesin/normalize-answer';
 
 interface MCQOptionListProps {
   options: string[];
@@ -36,8 +37,10 @@ export function MCQOptionList({
   onToggle,
   onSubmit,
 }: MCQOptionListProps) {
+  // 정답이 옵션 번호가 아닌 텍스트인 경우 번호로 변환
+  const resolved = resolveCorrectIndex(String(correctAnswer), options);
   const correctSet = multiSelect
-    ? new Set(String(correctAnswer).split(',').map((s) => s.trim()))
+    ? new Set(String(resolved).split(',').map((s) => s.trim()))
     : null;
 
   return (
@@ -85,9 +88,9 @@ export function MCQOptionList({
           );
         }
 
-        // 단일 선택 (기존 로직)
+        // 단일 선택 — resolved를 사용하여 텍스트 정답도 처리
         const isSelected = String(selectedAnswer) === String(value);
-        const isCorrectOption = String(value) === String(correctAnswer);
+        const isCorrectOption = String(value) === String(resolved);
 
         return (
           <Button

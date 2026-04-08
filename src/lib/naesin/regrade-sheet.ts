@@ -1,5 +1,5 @@
 import { createAdminClient } from '@/lib/supabase/admin';
-import { normalize } from '@/lib/naesin/normalize-answer';
+import { normalize, matchMcqAnswer } from '@/lib/naesin/normalize-answer';
 
 /**
  * 시트 1개를 재채점하고 오답 테이블을 갱신한다.
@@ -66,9 +66,7 @@ export async function regradeSheet(
         ];
         isCorrect = candidates.some((c) => normalize(c) === studentNorm);
       } else {
-        isCorrect =
-          userAnswer.trim().toLowerCase() ===
-          correctAnswer.trim().toLowerCase();
+        isCorrect = matchMcqAnswer(userAnswer, correctAnswer, questions?.[i]?.options);
       }
 
       if (isCorrect) {

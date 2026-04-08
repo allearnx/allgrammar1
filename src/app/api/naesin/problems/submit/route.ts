@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { createApiHandler, NotFoundError, dbResult } from '@/lib/api';
 import { problemSubmitSchema } from '@/lib/api/schemas';
-import { normalize } from '@/lib/naesin/normalize-answer';
+import { normalize, matchMcqAnswer } from '@/lib/naesin/normalize-answer';
 
 export const maxDuration = 60;
 
@@ -43,7 +43,7 @@ export const POST = createApiHandler(
           isCorrect = candidates.some((c) => normalize(c) === studentNorm);
         }
       } else {
-        isCorrect = userAnswer.trim().toLowerCase() === correctAnswer.trim().toLowerCase();
+        isCorrect = matchMcqAnswer(userAnswer, correctAnswer, questions?.[i]?.options);
       }
 
       if (isCorrect) {

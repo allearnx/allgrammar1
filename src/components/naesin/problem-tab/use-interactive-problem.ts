@@ -5,6 +5,7 @@ import type { NaesinProblemQuestion } from '@/types/database';
 import { useProblemDraft } from '@/hooks/use-problem-draft';
 import type { AiFeedback, WrongItem, InteractiveDraft } from '@/hooks/use-problem-draft';
 import { useQuestionTimer } from '@/hooks/use-question-timer';
+import { matchMcqAnswer } from '@/lib/naesin/normalize-answer';
 
 export const MCQ_MIN_TIME = 10;
 export const SUBJECTIVE_MIN_TIME = 30;
@@ -187,7 +188,7 @@ export function useInteractiveProblem({
         finishOrSave(isLast, answer, newScore, newWrongList, aiResultsMap);
       }
     } else {
-      const correct = String(answer) === String(question.answer);
+      const correct = matchMcqAnswer(String(answer), String(question.answer), question.options);
       setShowResult(true);
       const { newScore, newWrongList } = applyResult(correct, answer, question);
       finishOrSave(isLast, answer, newScore, newWrongList, aiResultsMap);
@@ -321,7 +322,7 @@ export function useInteractiveProblem({
             const cor = String(question.answer).split(',').map((s) => s.trim()).sort((a, b) => Number(a) - Number(b)).join(', ');
             return sel === cor;
           })()
-        : String(selectedAnswer) === String(question.answer)
+        : matchMcqAnswer(String(selectedAnswer), String(question.answer), question.options)
   );
 
   return {

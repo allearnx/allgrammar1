@@ -6,3 +6,48 @@ export function normalize(s: string): string {
     .replace(/\.+\s*$/, '')
     .replace(/\s+/g, ' ');
 }
+
+/**
+ * 객관식 정답 매칭: 학생 답(1-indexed 번호)이 정답과 일치하는지 확인.
+ * 정답이 번호가 아닌 텍스트로 저장된 경우도 처리한다.
+ */
+export function matchMcqAnswer(
+  userAnswer: string,
+  correctAnswer: string,
+  options?: string[],
+): boolean {
+  // 1차: 직접 비교 (둘 다 번호이거나 둘 다 텍스트인 경우)
+  if (userAnswer.trim().toLowerCase() === correctAnswer.trim().toLowerCase()) {
+    return true;
+  }
+  if (!options || options.length === 0) return false;
+  // 2차: 학생 답이 번호이고 정답이 텍스트인 경우
+  const idx = parseInt(userAnswer, 10);
+  if (!isNaN(idx) && idx >= 1 && idx <= options.length) {
+    if (options[idx - 1].trim().toLowerCase() === correctAnswer.trim().toLowerCase()) {
+      return true;
+    }
+  }
+  // 3차: 정답이 번호이고 학생 답이 텍스트인 경우
+  const cidx = parseInt(correctAnswer, 10);
+  if (!isNaN(cidx) && cidx >= 1 && cidx <= options.length) {
+    if (options[cidx - 1].trim().toLowerCase() === userAnswer.trim().toLowerCase()) {
+      return true;
+    }
+  }
+  return false;
+}
+
+/**
+ * 정답을 1-indexed 옵션 번호로 변환.
+ * 이미 유효한 번호면 그대로, 텍스트면 매칭되는 옵션 번호를 반환.
+ */
+export function resolveCorrectIndex(correctAnswer: string, options: string[]): string {
+  const num = parseInt(correctAnswer, 10);
+  if (!isNaN(num) && num >= 1 && num <= options.length) return correctAnswer;
+  const idx = options.findIndex(
+    (opt) => opt.trim().toLowerCase() === correctAnswer.trim().toLowerCase(),
+  );
+  if (idx !== -1) return String(idx + 1);
+  return correctAnswer;
+}
