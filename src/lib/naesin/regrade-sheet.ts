@@ -121,5 +121,77 @@ export async function regradeSheet(
     }
   }
 
+  // 중간 저장된 draft도 재평가
+  const { data: drafts } = await admin
+    .from('naesin_problem_drafts')
+    .select('id, draft_data')
+    .eq('sheet_id', sheetId);
+
+  if (drafts && drafts.length > 0) {
+    for (const draft of drafts) {
+      const d = draft.draft_data;
+      if (!d || d.mode !== 'interactive') continue;
+      const answersMap = d.answersMap as Record<number, string | number> | undefined;
+      if (!answersMap || Object.keys(answersMap).length === 0) continue;
+
+      const aiResultsMap = (d.aiResultsMap ?? {}) as Record<string, { score: number }>;
+      let correct = 0;
+      let wrong = 0;
+      const newWrongList: {
+        number: number;
+        userAnswer: string | number;
+        correctAnswer: string | number;
+        question: string;
+        aiFeedback?: unknown;
+      }[] = [];
+
+      for (const [idxStr, userAnswer] of Object.entries(answersMap)) {
+        const i = Number(idxStr);
+        if (i < 0 || i >= answerKey.length) continue;
+
+        const correctAnswer = String(answerKey[i] ?? '');
+        const q = questions?.[i];
+        const isSubjective = !q?.options || q.options.length === 0;
+
+        let isCorrect: boolean;
+        if (isSubjective) {
+          const aiResult = aiResultsMap[idxStr];
+          if (aiResult && aiResult.score === 100) {
+            isCorrect = true;
+          } else {
+            const studentNorm = normalize(String(userAnswer));
+            const candidates = [correctAnswer, ...(q?.acceptedAnswers ?? [])];
+            isCorrect = candidates.some((c) => normalize(c) === studentNorm);
+          }
+        } else {
+          isCorrect = matchMcqAnswer(String(userAnswer), correctAnswer, q?.options);
+        }
+
+        if (isCorrect) {
+          correct++;
+        } else {
+          wrong++;
+          newWrongList.push({
+            number: q?.number ?? i + 1,
+            userAnswer,
+            correctAnswer: answerKey[i],
+            question: q?.question ?? '',
+            ...(aiResultsMap[idxStr] ? { aiFeedback: aiResultsMap[idxStr] } : {}),
+          });
+        }
+      }
+
+      const oldScore = d.score as { correct: number; wrong: number };
+      if (oldScore.correct !== correct || oldScore.wrong !== wrong) {
+        await admin
+          .from('naesin_problem_drafts')
+          .update({
+            draft_data: { ...d, score: { correct, wrong }, wrongList: newWrongList },
+          })
+          .eq('id', draft.id);
+      }
+    }
+  }
+
   return { total: attempts.length, changed };
 }
