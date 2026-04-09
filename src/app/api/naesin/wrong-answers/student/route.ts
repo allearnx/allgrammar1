@@ -98,6 +98,92 @@ async function autoBackfillForStudent(
   return rows.length;
 }
 
+/**
+ * 풀이 중(draft)인 문제 시트의 오답을 가져온다.
+ * isDraft=true 플래그를 붙여 UI에서 구분할 수 있게 한다.
+ */
+async function getDraftWrongAnswers(
+  admin: ReturnType<typeof createAdminClient>,
+  studentId: string,
+) {
+  const { data: drafts } = await admin
+    .from('naesin_problem_drafts')
+    .select('sheet_id, unit_id, draft_data, updated_at')
+    .eq('student_id', studentId);
+
+  if (!drafts || drafts.length === 0) return [];
+
+  // draft_data.wrongList 에서 오답 추출
+  const sheetIds = drafts.map((d) => d.sheet_id).filter(Boolean);
+  const { data: sheets } = await admin
+    .from('naesin_problem_sheets')
+    .select('id, title, unit_id, mode, questions')
+    .in('id', sheetIds);
+
+  const sheetMap = new Map((sheets || []).map((s) => [s.id, s]));
+
+  // unit 정보 조회
+  const unitIds = [...new Set(drafts.map((d) => d.unit_id).filter(Boolean))];
+  const unitMap = new Map<string, { id: string; unit_number: number; title: string }>();
+  if (unitIds.length > 0) {
+    const { data: units } = await admin
+      .from('naesin_units')
+      .select('id, unit_number, title')
+      .in('id', unitIds);
+    for (const u of units || []) unitMap.set(u.id, u);
+  }
+
+  const results: Record<string, unknown>[] = [];
+
+  for (const draft of drafts) {
+    const dd = draft.draft_data as {
+      mode?: string;
+      wrongList?: {
+        number: number;
+        userAnswer: string | number;
+        correctAnswer: string | number;
+        question: string;
+      }[];
+      score?: { correct: number; wrong: number };
+      answersMap?: Record<number, string | number>;
+    } | null;
+
+    if (!dd || dd.mode !== 'interactive' || !dd.wrongList || dd.wrongList.length === 0) continue;
+
+    const sheet = sheetMap.get(draft.sheet_id);
+    const unitId = draft.unit_id || sheet?.unit_id;
+    const questions = (sheet?.questions || []) as { options?: string[]; explanation?: string }[];
+    const answeredCount = dd.answersMap ? Object.keys(dd.answersMap).length : 0;
+    const totalCount = questions.length || 0;
+
+    for (const wa of dd.wrongList) {
+      const idx = wa.number - 1;
+      const q = questions[idx];
+      results.push({
+        id: `draft-${draft.sheet_id}-${wa.number}`,
+        student_id: studentId,
+        unit_id: unitId,
+        stage: 'problem',
+        source_type: sheet?.mode || 'interactive',
+        question_data: {
+          ...wa,
+          ...(q?.options ? { options: q.options } : {}),
+          ...(q?.explanation ? { explanation: q.explanation } : {}),
+        },
+        sheet_id: draft.sheet_id,
+        sheet: sheet ? { id: sheet.id, title: sheet.title, questions: sheet.questions } : null,
+        unit: unitId ? unitMap.get(unitId) ?? null : null,
+        resolved: false,
+        created_at: draft.updated_at,
+        isDraft: true,
+        draftProgress: `${answeredCount}/${totalCount}`,
+      });
+    }
+  }
+
+  return results;
+}
+
 export const GET = createApiHandler(
   { roles: ['teacher', 'admin', 'boss'] },
   async ({ user, supabase, request }) => {
@@ -124,7 +210,10 @@ export const GET = createApiHandler(
 
     enrichWrongAnswersFromSheet(data as Record<string, unknown>[]);
 
-    return NextResponse.json(data);
+    // 풀이 중(draft) 오답도 포함
+    const draftWrongAnswers = await getDraftWrongAnswers(admin, studentId);
+
+    return NextResponse.json([...(data || []), ...draftWrongAnswers]);
   }
 );
 

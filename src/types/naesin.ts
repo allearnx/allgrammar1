@@ -358,6 +358,10 @@ export interface NaesinWrongAnswer {
   sheet?: { id: string; title: string } | null;
   unit?: { id: string; unit_number: number; title: string } | null;
   created_at: string;
+  /** 풀이 중(draft) 오답 여부 */
+  isDraft?: boolean;
+  /** 풀이 진행 상황 (예: "5/10") */
+  draftProgress?: string;
 }
 
 export type NaesinSimilarProblemStatus = 'pending' | 'approved' | 'rejected';

@@ -234,6 +234,7 @@ function ReadOnlyWrongAnswerCard({
   const explanation = data.explanation as string | undefined;
   const isProblemStage = wrongAnswer.stage === 'problem' && wrongAnswer.sheet_id;
   const isTextbookStage = TEXTBOOK_STAGES.has(wrongAnswer.stage);
+  const isDraft = wrongAnswer.isDraft;
   const questionIndex = data.number ? Number(data.number) - 1 : -1;
 
   const handleCorrectAnswer = async () => {
@@ -351,6 +352,20 @@ function ReadOnlyWrongAnswerCard({
                 <p className="text-green-600">정답: {String(data.correctOption)}</p>
               </>
             ) : null}
+            {data.type === 'vocab_quiz' ? (
+              <>
+                <p className="font-medium">{String(data.front_text)}</p>
+                <p className="text-green-600">뜻: {String(data.back_text)}</p>
+              </>
+            ) : null}
+            {data.type === 'vocab_spelling' ? (
+              <>
+                <p className="font-medium">{String(data.front_text)}</p>
+                <p className="text-muted-foreground">{String(data.back_text)}</p>
+                <p className="text-red-500">학생 답: {String(data.userAnswer || '-')}</p>
+                <p className="text-green-600">정답: {String(data.correctAnswer)}</p>
+              </>
+            ) : null}
             {data.number && data.type !== 'fill_blank' && data.type !== 'translation' && data.type !== 'ordering' && data.type !== 'first_letter' && data.type !== 'grammar_vocab' ? (
               <>
                 <p className="text-red-500">학생 답: {String(data.userAnswer || '-')}</p>
@@ -368,20 +383,27 @@ function ReadOnlyWrongAnswerCard({
               <p className="text-xs text-blue-600 mt-1">해설: {explanation}</p>
             )}
             <div className="flex items-center gap-1.5 pt-1">
+              {isDraft && (
+                <Badge className="bg-amber-100 text-amber-700 border-0 text-xs hover:bg-amber-100">
+                  풀이 중 {wrongAnswer.draftProgress ? `(${wrongAnswer.draftProgress})` : ''}
+                </Badge>
+              )}
               {wrongAnswer.sheet?.title && (
                 <Badge variant="outline" className="text-xs">
                   {wrongAnswer.sheet.title}
                 </Badge>
               )}
-              <Badge variant="secondary" className="text-xs">
-                {wrongAnswer.source_type}
-              </Badge>
+              {!isDraft && (
+                <Badge variant="secondary" className="text-xs">
+                  {wrongAnswer.source_type}
+                </Badge>
+              )}
               {wrongAnswer.resolved && (
                 <Badge className="bg-green-100 text-green-700 border-0 text-xs hover:bg-green-100">
                   해결됨
                 </Badge>
               )}
-              {isProblemStage && questionIndex >= 0 && (
+              {!isDraft && isProblemStage && questionIndex >= 0 && (
                 <div className="flex gap-1 ml-auto">
                   <Button
                     variant="ghost"
@@ -407,7 +429,7 @@ function ReadOnlyWrongAnswerCard({
                   </Button>
                 </div>
               )}
-              {isTextbookStage && !wrongAnswer.resolved && (
+              {!isDraft && isTextbookStage && !wrongAnswer.resolved && (
                 <Button
                   variant="ghost"
                   size="sm"
