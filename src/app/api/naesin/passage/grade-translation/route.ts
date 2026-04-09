@@ -16,7 +16,7 @@ const schema = z.object({
 });
 
 export const POST = createApiHandler(
-  { schema, rateLimit: { max: 30 } },
+  { schema, rateLimit: { max: 100 } },
   async ({ user: _user, body }) => {
     const { sentences } = body;
 

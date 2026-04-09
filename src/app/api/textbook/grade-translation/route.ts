@@ -11,7 +11,7 @@ const responseCache = new Map<string, { result: unknown; expiresAt: number }>();
 const CACHE_TTL_MS = 24 * 60 * 60 * 1000; // 24 hours
 
 export const POST = createApiHandler(
-  { schema: gradeTranslationSchema, rateLimit: { max: 10 } },
+  { schema: gradeTranslationSchema, rateLimit: { max: 100 } },
   async ({ user: _user, body }) => {
     const { koreanText, originalText, studentAnswer } = body;
 

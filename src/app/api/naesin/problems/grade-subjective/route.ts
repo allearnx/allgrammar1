@@ -4,7 +4,7 @@ import { gradeSubjectiveSchema } from '@/lib/api/schemas';
 import { normalize } from '@/lib/naesin/normalize-answer';
 
 export const POST = createApiHandler(
-  { schema: gradeSubjectiveSchema, rateLimit: { max: 60 } },
+  { schema: gradeSubjectiveSchema, rateLimit: { max: 200 } },
   async ({ body }) => {
     const { referenceAnswer, studentAnswer, acceptedAnswers } = body;
 

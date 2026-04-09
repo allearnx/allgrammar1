@@ -10,7 +10,7 @@ export const maxDuration = 60;
 const anthropic = new Anthropic();
 
 export const POST = createApiHandler(
-  { schema: grammarChatReplySchema, rateLimit: { max: 30 } },
+  { schema: grammarChatReplySchema, rateLimit: { max: 100 } },
   async ({ user, body, supabase }) => {
     const { sessionId, message } = body;
 

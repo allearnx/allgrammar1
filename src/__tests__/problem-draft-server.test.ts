@@ -311,6 +311,64 @@ describe('draft/load route', () => {
     );
     expect(res.status).toBe(401);
   });
+
+  it('GET re-evaluates draft with current acceptedAnswers (정답처리 반영)', async () => {
+    const draftWithAnswers = {
+      ...sampleDraftData,
+      answersMap: { 0: 'goes', 1: '2', 2: 'went' },
+      score: { correct: 1, wrong: 2 },
+      wrongList: [
+        { number: 1, userAnswer: 'goes', correctAnswer: 'go', question: 'Q1' },
+        { number: 3, userAnswer: 'went', correctAnswer: 'gone', question: 'Q3' },
+      ],
+    };
+
+    const sheetData = {
+      answer_key: ['go', '2', 'gone'],
+      questions: [
+        { number: 1, question: 'Q1', acceptedAnswers: ['goes'] },  // teacher accepted 'goes'
+        { number: 2, question: 'Q2', options: ['A', 'B', 'C', 'D'] },
+        { number: 3, question: 'Q3', acceptedAnswers: [] },  // 'went' still wrong
+      ],
+    };
+
+    const from = vi.fn((table: string) => {
+      const makeChain = (singleResult: { data: unknown; error: unknown }) => {
+        const c: Record<string, ReturnType<typeof vi.fn>> = {
+          select: vi.fn().mockReturnThis(),
+          eq: vi.fn().mockReturnThis(),
+          single: vi.fn().mockResolvedValue(singleResult),
+        };
+        for (const key of Object.keys(c)) {
+          if (key !== 'single') c[key].mockReturnValue(c);
+        }
+        return c;
+      };
+      if (table === 'naesin_problem_drafts') {
+        return makeChain({ data: { id: 'draft-1', draft_data: draftWithAnswers }, error: null });
+      }
+      if (table === 'naesin_problem_sheets') {
+        return makeChain({ data: sheetData, error: null });
+      }
+      return makeChain({ data: null, error: null });
+    });
+
+    mockGetUser.mockResolvedValue(fakeStudent);
+    mockCreateClient.mockResolvedValue({ from });
+
+    const { GET } = await import('@/app/api/naesin/problems/draft/load/route');
+    const res = await GET(
+      makeRequest('GET', undefined, 'http://localhost/api/naesin/problems/draft/load?sheetId=sheet-1')
+    );
+    expect(res.status).toBe(200);
+    const body = await res.json();
+
+    // 'goes' was accepted → now correct (2 correct, 1 wrong)
+    expect(body.draft_data.score).toEqual({ correct: 2, wrong: 1 });
+    expect(body.draft_data.wrongList).toHaveLength(1);
+    expect(body.draft_data.wrongList[0].number).toBe(3);
+    expect(body.draft_data.wrongList[0].userAnswer).toBe('went');
+  });
 });
 
 describe('draft/delete route', () => {

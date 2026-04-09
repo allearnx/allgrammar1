@@ -7,7 +7,7 @@ import Anthropic from '@anthropic-ai/sdk';
 const anthropic = new Anthropic();
 
 export const POST = createApiHandler(
-  { schema: gradeTranslationBatchSchema, rateLimit: { max: 20 } },
+  { schema: gradeTranslationBatchSchema, rateLimit: { max: 100 } },
   async ({ user: _user, body }) => {
     const { sentences } = body;
 
