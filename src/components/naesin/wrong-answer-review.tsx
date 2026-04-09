@@ -180,6 +180,20 @@ export function WrongAnswerCard({ wrongAnswer, onResolve }: { wrongAnswer: Naesi
                 <p className="text-green-600">정답: {String(data.correctOption)}</p>
               </>
             ) : null}
+            {data.type === 'vocab_quiz' ? (
+              <>
+                <p className="font-medium">{String(data.front_text)}</p>
+                <p className="text-green-600">뜻: {String(data.back_text)}</p>
+              </>
+            ) : null}
+            {data.type === 'vocab_spelling' ? (
+              <>
+                <p className="font-medium">{String(data.front_text)}</p>
+                <p className="text-muted-foreground">{String(data.back_text)}</p>
+                <p className="text-red-500">내 답: {String(data.userAnswer || '-')}</p>
+                <p className="text-green-600">정답: {String(data.correctAnswer)}</p>
+              </>
+            ) : null}
             {data.number && data.type !== 'fill_blank' && data.type !== 'translation' && data.type !== 'ordering' && data.type !== 'first_letter' && data.type !== 'grammar_vocab' ? (
               <>
                 <p className="text-red-500">내 답: {String(data.userAnswer || '-')}</p>

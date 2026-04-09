@@ -42,6 +42,7 @@ interface UseQuizStateOptions {
   unitId: string;
   onComplete: (score: number) => void;
   onQuizSetResult?: (score: number, wrongWords: WrongWord[]) => void;
+  onWrongAnswers?: (wrongWords: WrongWord[]) => void;
   quizResultEndpoint?: string;
 }
 
@@ -51,6 +52,7 @@ export function useQuizState({
   unitId,
   onComplete,
   onQuizSetResult,
+  onWrongAnswers,
   quizResultEndpoint = '/api/naesin/vocab/quiz-result',
 }: UseQuizStateOptions) {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -121,6 +123,7 @@ export function useQuizState({
       onComplete(pct);
       saveQuizResult(combinedCorrect, pct, finalWrong);
       onQuizSetResult?.(pct, finalWrong);
+      if (finalWrong.length > 0) onWrongAnswers?.(finalWrong);
     }
   }
 

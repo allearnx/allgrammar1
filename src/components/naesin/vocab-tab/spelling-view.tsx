@@ -14,16 +14,25 @@ import type { MemoryItem, StudentMemoryProgress, NaesinVocabulary } from '@/type
 
 type FlashcardItem = MemoryItem & { progress: StudentMemoryProgress | null };
 
+export interface SpellingWrongItem {
+  front_text: string;
+  back_text: string;
+  userAnswer: string;
+  correctAnswer: string;
+}
+
 export function NaesinSpellingView({
   items: rawItems,
   vocabulary,
   onComplete,
+  onWrongAnswers,
   onGoToNextStage,
   quizScore,
 }: {
   items: FlashcardItem[];
   vocabulary: NaesinVocabulary[];
   onComplete: (score: number) => void;
+  onWrongAnswers?: (items: SpellingWrongItem[]) => void;
   onGoToNextStage?: () => void;
   quizScore?: number | null;
 }) {
@@ -36,6 +45,7 @@ export function NaesinSpellingView({
   const [isCorrect, setIsCorrect] = useState(false);
   const [score, setScore] = useState({ correct: 0, wrong: 0 });
   const [wrongItems, setWrongItems] = useState<FlashcardItem[]>([]);
+  const [wrongDetails, setWrongDetails] = useState<SpellingWrongItem[]>([]);
 
   const { previousCorrectCount: retryPreviousCorrectCount, isRetrying, startRetry, reset: resetRetry, getCombinedScore } = useRetryWrong();
   const totalOriginalCount = rawItems.length;
@@ -55,11 +65,26 @@ export function NaesinSpellingView({
     } else {
       setScore((prev) => ({ ...prev, wrong: prev.wrong + 1 }));
       setWrongItems((prev) => [...prev, item]);
+      setWrongDetails((prev) => [...prev, {
+        front_text: item.front_text,
+        back_text: item.back_text,
+        userAnswer: answer.trim(),
+        correctAnswer: item.spelling_answer || item.front_text,
+      }]);
     }
     if (currentIndex === items.length - 1) {
       const finalCorrect = correct ? score.correct + 1 : score.correct;
       const pct = getCombinedScore(finalCorrect, totalOriginalCount);
       onComplete(pct);
+      const finalWrongDetails = correct
+        ? wrongDetails
+        : [...wrongDetails, {
+            front_text: item.front_text,
+            back_text: item.back_text,
+            userAnswer: answer.trim(),
+            correctAnswer: item.spelling_answer || item.front_text,
+          }];
+      if (finalWrongDetails.length > 0) onWrongAnswers?.(finalWrongDetails);
     }
   }
 
@@ -82,6 +107,7 @@ export function NaesinSpellingView({
     setAnswer('');
     setScore({ correct: 0, wrong: 0 });
     setWrongItems([]);
+    setWrongDetails([]);
   }
 
   function handleReset() {
@@ -92,6 +118,7 @@ export function NaesinSpellingView({
     setAnswer('');
     setScore({ correct: 0, wrong: 0 });
     setWrongItems([]);
+    setWrongDetails([]);
     resetRetry();
   }
 

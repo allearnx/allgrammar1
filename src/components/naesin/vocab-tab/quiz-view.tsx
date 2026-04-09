@@ -15,6 +15,7 @@ export function NaesinQuizView({
   unitId,
   onComplete,
   onQuizSetResult,
+  onWrongAnswers,
   onGoToSpelling,
   quizResultEndpoint = '/api/naesin/vocab/quiz-result',
 }: {
@@ -23,6 +24,7 @@ export function NaesinQuizView({
   unitId: string;
   onComplete: (score: number) => void;
   onQuizSetResult?: (score: number, wrongWords: WrongWord[]) => void;
+  onWrongAnswers?: (wrongWords: WrongWord[]) => void;
   onGoToSpelling?: () => void;
   quizResultEndpoint?: string;
 }) {
@@ -32,6 +34,7 @@ export function NaesinQuizView({
     unitId,
     onComplete,
     onQuizSetResult,
+    onWrongAnswers,
     quizResultEndpoint,
   });
 

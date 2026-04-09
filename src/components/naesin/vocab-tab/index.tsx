@@ -119,6 +119,22 @@ export function VocabTab({ vocabulary, unitId, onStageComplete, quizSets, comple
     }
   }
 
+  async function saveVocabWrongAnswers(
+    sourceType: 'quiz' | 'spelling',
+    wrongItems: Record<string, unknown>[],
+  ) {
+    if (wrongItems.length === 0) return;
+    try {
+      await fetchWithToast('/api/naesin/wrong-answers', {
+        body: { unitId, stage: 'vocab', sourceType, wrongAnswers: wrongItems },
+        silent: true,
+        logContext: 'naesin.vocab_wrong',
+      });
+    } catch {
+      // swallow - fire-and-forget
+    }
+  }
+
   async function saveQuizSetResult(score: number, wrongWords: { front_text: string; back_text: string }[]) {
     if (!activeSetId) return;
     try {
@@ -195,6 +211,12 @@ export function VocabTab({ vocabulary, unitId, onStageComplete, quizSets, comple
             unitId={unitId}
             onComplete={(score) => saveVocabProgress('quiz', score)}
             onQuizSetResult={hasQuizSets ? saveQuizSetResult : undefined}
+            onWrongAnswers={(wrongWords) =>
+              saveVocabWrongAnswers(
+                'quiz',
+                wrongWords.map((w) => ({ type: 'vocab_quiz', front_text: w.front_text, back_text: w.back_text })),
+              )
+            }
             onGoToSpelling={hasSpelling ? goToSpelling : undefined}
           />
         </TabsContent>
@@ -205,6 +227,18 @@ export function VocabTab({ vocabulary, unitId, onStageComplete, quizSets, comple
             items={spellingItems}
             vocabulary={filteredVocabulary}
             onComplete={(score) => saveVocabProgress('spelling', score)}
+            onWrongAnswers={(items) =>
+              saveVocabWrongAnswers(
+                'spelling',
+                items.map((w) => ({
+                  type: 'vocab_spelling',
+                  front_text: w.front_text,
+                  back_text: w.back_text,
+                  userAnswer: w.userAnswer,
+                  correctAnswer: w.correctAnswer,
+                })),
+              )
+            }
             onGoToNextStage={onNavigateToNextStage}
             quizScore={localProgress.quizScore}
           />
