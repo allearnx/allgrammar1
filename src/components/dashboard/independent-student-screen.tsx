@@ -35,14 +35,14 @@ const SERVICE_OPTIONS: {
   {
     value: 'voca',
     label: '올킬보카',
-    desc: '1회독 단어 학습',
+    desc: '최근 4개년 고1·고2·고3 기출 단어 + 26년 고1 3월 단어',
     icon: <BookA className="h-6 w-6 text-violet-500" />,
     activeColor: 'border-violet-500 bg-violet-50',
   },
   {
     value: 'naesin',
     label: '올인내신',
-    desc: '단어암기 + 교과서암기',
+    desc: '내신대비의 최강자! 교과서 암기부터 기출문제 풀이까지!',
     icon: <BookMarked className="h-6 w-6 text-emerald-500" />,
     activeColor: 'border-emerald-500 bg-emerald-50',
   },

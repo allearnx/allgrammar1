@@ -1,13 +1,11 @@
 'use client';
 
-import Link from 'next/link';
 import {
   CheckCircle,
   BookOpen,
   BookMarked,
   ClipboardList,
   Sparkles,
-  ArrowRight,
   TrendingUp,
   XCircle,
 } from 'lucide-react';
@@ -130,9 +128,7 @@ export function VocaDashboard({ userName, books, days, progressList, wordCount, 
       <div className="rounded-2xl border bg-white p-5 md:p-6">
         <div className="flex items-center justify-between mb-3">
           <h3 className="text-sm font-bold">퀴즈 점수 추이</h3>
-          <Link href="/student/my-report" className="inline-flex items-center gap-1 text-xs font-medium text-violet-600 hover:underline">
-            자세히 보기 <ArrowRight className="h-3 w-3" />
-          </Link>
+          <span className="text-xs text-gray-400">유료 플랜 전용</span>
         </div>
         <MiniScoreTrend data={quizHistory} color="#7C3AED" height={64} />
       </div>
@@ -176,7 +172,7 @@ export function VocaDashboard({ userName, books, days, progressList, wordCount, 
             <div>
               <div className="text-base font-bold flex items-center gap-1.5"><BookMarked className="h-4 w-4" /> 2회독 — 유의어 · 반의어 · 숙어</div>
               <div className="text-sm text-gray-400 mt-0.5">
-                {r1Done ? '3단계를 모두 통과해야 2회독이 완료됩니다' : '1회독 완료 후 해금됩니다'}
+                {r1Done ? '3단계를 모두 통과해야 2회독이 완료됩니다' : '유료 플랜 전용 · 업그레이드는 선생님과 상담하세요'}
               </div>
             </div>
             <span className="shrink-0 rounded-full px-3.5 py-1 text-xs font-bold" style={{
