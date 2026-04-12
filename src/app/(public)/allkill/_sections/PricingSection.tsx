@@ -47,7 +47,7 @@ export default function PricingSection({ vocaCourseId, vocaCoursePrice }: { voca
               <s style={{ color: 'rgba(0,0,0,0.3)' }}>정가 88,000원</s> → <b style={{ color: C.lavenderDark }}>얼리버드 특가</b>
             </div>
             <div className="allkill-price-notice" style={{ background: '#FEF9C3', border: '1px solid #FDE047', color: '#713F12' }}>
-              📚 고1·고2·고3 최근 4개년 모의고사 기출 단어
+              📚 고1·고2·고3 최근 4개년 모의고사 기출 단어<br />📖 주요 시중 교재 단어집 순차 수록 중
             </div>
             <div style={{ height: 1, background: '#F2F0FF', marginBottom: 28 }} />
             <div style={{ display: 'flex', flexDirection: 'column', gap: 14, marginBottom: 36, flex: 1 }}>
