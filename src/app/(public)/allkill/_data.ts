@@ -82,6 +82,8 @@ export const statsItems = [
   { num: '90점', label: '매칭 통과 기준' },
 ];
 
+export const freePlanFeatures = ['1회독 4단계 학습', '플래시카드', '퀴즈 (80점 통과)', '스펠링 (80점 통과)', '매칭 (90점 통과)'];
+
 export const proPlanFeatures = ['수록 단어 전체 무제한 이용', 'AI 서술형 채점', '학부모 리포트 공유', '틀린 단어 복습 시스템'];
 
 export const proRoundSteps = [
