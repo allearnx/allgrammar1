@@ -41,13 +41,13 @@ export default function PricingSection({ vocaCourseId, vocaCoursePrice }: { voca
           {/* 개인 구독 */}
           <div className="allkill-price-card" style={{ borderRadius: 20, padding: '40px 36px', border: `2px solid ${C.lavender}`, boxShadow: '0 16px 48px rgba(167,139,250,0.18)', position: 'relative', transition: 'transform 0.2s', display: 'flex', flexDirection: 'column' }}>
             <div style={{ position: 'absolute', top: -15, left: '50%', transform: 'translateX(-50%)', background: C.lavender, color: 'white', fontSize: 13, fontWeight: 700, padding: '5px 18px', borderRadius: 100, whiteSpace: 'nowrap' }}>🐣 얼리버드 특가</div>
-            <div className="allkill-price-plan-label" style={{ color: C.gray400 }}>개인 구독</div>
+            <div className="allkill-price-plan-label" style={{ color: C.gray400 }}>1:1 온라인 관리</div>
             <div className="allkill-montserrat allkill-price-amount" style={{ color: C.gray800 }}>월 66,000<span className="allkill-price-amount-unit" style={{ color: C.gray400 }}>원</span></div>
             <div className="allkill-price-discount" style={{ color: C.gray400 }}>
               <s style={{ color: 'rgba(0,0,0,0.3)' }}>정가 88,000원</s> → <b style={{ color: C.lavenderDark }}>얼리버드 특가</b>
             </div>
             <div className="allkill-price-notice" style={{ background: '#FEF9C3', border: '1px solid #FDE047', color: '#713F12' }}>
-              📚 현재 수록 단어: 고1·2·3 3월 모의고사<br />각 학년 1–2과 단어 제공 중 (업데이트 예정)
+              📚 고1·고2·고3 최근 4개년 모의고사 기출 단어
             </div>
             <div style={{ height: 1, background: '#F2F0FF', marginBottom: 28 }} />
             <div style={{ display: 'flex', flexDirection: 'column', gap: 14, marginBottom: 36, flex: 1 }}>

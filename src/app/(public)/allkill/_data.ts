@@ -84,7 +84,7 @@ export const statsItems = [
 
 export const freePlanFeatures = ['1회독 4단계 학습', '플래시카드', '퀴즈 (80점 통과)', '스펠링 (80점 통과)', '매칭 (90점 통과)'];
 
-export const proPlanFeatures = ['수록 단어 전체 무제한 이용', 'AI 서술형 채점', '학부모 리포트 공유', '틀린 단어 복습 시스템'];
+export const proPlanFeatures = ['선생님과 주 2회 온라인 시험', '개별 진도 관리 (90점 통과 시스템)', '오답 관리 & 틀린 단어 복습', '1회독 + 2회독 전체 포함', 'AI 서술형 채점', '학부모 리포트 공유'];
 
 export const proRoundSteps = [
   { step: '01', name: '플래시카드', note: '자유 학습', round: 1 },
