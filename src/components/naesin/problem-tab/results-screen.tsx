@@ -45,8 +45,31 @@ export function ResultsScreen({
                 {wrongList.map((w, i) => (
                   <div key={i} className="text-sm border-b last:border-0 pb-2 space-y-1">
                     <p className="font-medium">#{w.number}. <FormattedText text={w.question} /></p>
-                    <p className="text-red-500">내 답: {w.userAnswer}</p>
-                    <p className="text-green-600">정답: {w.correctAnswer}</p>
+                    {w.subParts ? (() => {
+                      const parts = String(w.userAnswer).split(' / ');
+                      const norm = (s: string) => s.trim().toLowerCase().replace(/[.\s]+$/g, '');
+                      return (
+                        <div className="space-y-0.5">
+                          {w.subParts.map((sp, j) => {
+                            const student = parts[j]?.trim() ?? '';
+                            const candidates = [sp.answer, ...(sp.acceptedAnswers ?? [])];
+                            const ok = candidates.some(c => norm(c) === norm(student));
+                            return (
+                              <div key={j} className="flex gap-2">
+                                <span className="font-medium w-8 shrink-0">{sp.label}</span>
+                                <span className={ok ? 'text-green-600' : 'text-red-500'}>{student || '(미입력)'}</span>
+                                {!ok && <span className="text-green-600">→ {sp.answer}</span>}
+                              </div>
+                            );
+                          })}
+                        </div>
+                      );
+                    })() : (
+                      <>
+                        <p className="text-red-500">내 답: {w.userAnswer}</p>
+                        <p className="text-green-600">정답: {w.correctAnswer}</p>
+                      </>
+                    )}
                   </div>
                 ))}
               </div>

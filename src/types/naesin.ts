@@ -323,6 +323,12 @@ export interface NaesinTemplate {
   created_at: string;
 }
 
+export interface SubPart {
+  label: string;
+  answer: string;
+  acceptedAnswers?: string[];
+}
+
 export interface NaesinProblemQuestion {
   number: number;
   question: string;
@@ -331,6 +337,7 @@ export interface NaesinProblemQuestion {
   explanation?: string;
   acceptedAnswers?: string[];
   imageUrl?: string;
+  subParts?: SubPart[];
 }
 
 export interface NaesinProblemAttempt {

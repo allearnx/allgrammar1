@@ -173,17 +173,32 @@ jsonb_build_object('number',30,
   'question',E'다음 문장 (1), (2), (3)에서 어법상 어색한 부분을 찾아 바르게 고쳐 쓰시오.\n(1) She allowed we to enter the building.\n(2) I told her goes to the science camp.\n(3) This app enable us contacting family and friends easily.',
   'answer',E'(1) we → us / (2) goes → to go / (3) contacting → to contact',
   'similar_answers',jsonb_build_array('(1) we→us / (2) goes→to go / (3) contacting→to contact','we → us / goes → to go / contacting → to contact','(1) us (2) to go (3) to contact'),
-  'explanation',E'(1) allow + 목적어(목적격) + to부정사이므로 we → us. (2) tell + 목적어 + to부정사이므로 goes → to go. (3) enable + 목적어 + to부정사이므로 contacting → to contact.'),
+  'explanation',E'(1) allow + 목적어(목적격) + to부정사이므로 we → us. (2) tell + 목적어 + to부정사이므로 goes → to go. (3) enable + 목적어 + to부정사이므로 contacting → to contact.',
+  'subParts',jsonb_build_array(
+    jsonb_build_object('label','(1)','answer','us','acceptedAnswers',jsonb_build_array('we → us','we→us')),
+    jsonb_build_object('label','(2)','answer','to go','acceptedAnswers',jsonb_build_array('goes → to go','goes→to go')),
+    jsonb_build_object('label','(3)','answer','to contact','acceptedAnswers',jsonb_build_array('contacting → to contact','contacting→to contact'))
+  )),
 jsonb_build_object('number',31,
   'question',E'다음 글에서 어법상 어색한 것을 2개 찾아 그 기호를 쓰고 바르게 고쳐 쓰시오.\nLast weekend, Suji called me and asked (1)if I could go to the bookstore with her. I agreed. Suji wanted to buy pens and books. I couldn''t understand (2)why she needed them all. When I asked her (3)how much did they cost, she said she didn''t care. Also, I was not sure (4)how long she would keep the plants. Anyway, she bought all she wanted. I think (5)she should not bought them at that time.',
   'answer',E'(3) how much did they cost → how much they cost / (5) should not bought → should not have bought',
   'similar_answers',jsonb_build_array('(3) how much they cost / (5) should not have bought','3) how much did they cost → how much they cost / 5) should not bought → should not have bought','(3) how much they cost, (5) should not have bought'),
-  'explanation',E'(3) 간접의문문은 「의문사 + 주어 + 동사」 어순이므로 how much did they cost → how much they cost. (5) should + have p.p. 구문이므로 should not bought → should not have bought.'),
+  'explanation',E'(3) 간접의문문은 「의문사 + 주어 + 동사」 어순이므로 how much did they cost → how much they cost. (5) should + have p.p. 구문이므로 should not bought → should not have bought.',
+  'subParts',jsonb_build_array(
+    jsonb_build_object('label','(3)','answer','how much they cost','acceptedAnswers',jsonb_build_array('how much did they cost → how much they cost')),
+    jsonb_build_object('label','(5)','answer','should not have bought','acceptedAnswers',jsonb_build_array('should not bought → should not have bought'))
+  )),
 jsonb_build_object('number',32,
   'question',E'다음 문장에서 어법상 어색한 부분을 각각 찾아 기호를 쓰고 바르게 고쳐 쓰시오.\n(A) He wants her to not leave now.\n(B) My coach asked me practice harder every day.\n(C) The teacher advised us not to run in the hallway.\n(D) Dad allowed me playing computer games after dinner.\n(E) My mother wants that I get up early every morning.',
   'answer',E'(A) to not leave → not to leave / (B) practice → to practice / (D) playing → to play / (E) wants that I get → wants me to get',
   'similar_answers',jsonb_build_array('(A) not to leave / (B) to practice / (D) to play / (E) wants me to get','A) to not leave → not to leave / B) practice → to practice / D) playing → to play / E) wants that I get → wants me to get','(A) not to leave (B) to practice (D) to play (E) wants me to get'),
-  'explanation',E'(A) to부정사의 부정은 not + to부정사 → not to leave. (B) ask + 목적어 + to부정사 → to practice. (C)는 올바른 문장. (D) allow + 목적어 + to부정사 → to play. (E) want + 목적어 + to부정사 → wants me to get.'),
+  'explanation',E'(A) to부정사의 부정은 not + to부정사 → not to leave. (B) ask + 목적어 + to부정사 → to practice. (C)는 올바른 문장. (D) allow + 목적어 + to부정사 → to play. (E) want + 목적어 + to부정사 → wants me to get.',
+  'subParts',jsonb_build_array(
+    jsonb_build_object('label','(A)','answer','not to leave','acceptedAnswers',jsonb_build_array('to not leave → not to leave')),
+    jsonb_build_object('label','(B)','answer','to practice','acceptedAnswers',jsonb_build_array('practice → to practice')),
+    jsonb_build_object('label','(D)','answer','to play','acceptedAnswers',jsonb_build_array('playing → to play')),
+    jsonb_build_object('label','(E)','answer','wants me to get','acceptedAnswers',jsonb_build_array('wants that I get → wants me to get'))
+  )),
 
 -- Part 5. 두 문장의 의미가 같도록 빈칸 채우기 (Q33~Q38)
 jsonb_build_object('number',33,
@@ -222,12 +237,21 @@ jsonb_build_object('number',39,
   'question',E'[Part 6] 다음 상황을 읽고 빈칸을 완성하시오.\nCinderella: Make a dress for me. Please take me to the party.\nMs. Fairy: Come back home by midnight. Wear your glass shoes.\n<보기> Cinderella wanted Ms. Fairy to make a dress for her.\n\n(1) Cinderella wanted Ms. Fairy _______________.\n(2) Ms. Fairy told Cinderella _______________.\n(3) Ms. Fairy told Cinderella _______________.',
   'answer',E'(1) to take her to the party / (2) to come back home by midnight / (3) to wear her glass shoes',
   'similar_answers',jsonb_build_array('to take her to the party / to come back home by midnight / to wear her glass shoes','(1) to take her to the party (2) to come back home by midnight (3) to wear her glass shoes'),
-  'explanation',E'(1) want + 목적어 + to부정사: take me → to take her. (2) tell + 목적어 + to부정사: Come back → to come back home by midnight. (3) tell + 목적어 + to부정사: Wear your → to wear her glass shoes.'),
+  'explanation',E'(1) want + 목적어 + to부정사: take me → to take her. (2) tell + 목적어 + to부정사: Come back → to come back home by midnight. (3) tell + 목적어 + to부정사: Wear your → to wear her glass shoes.',
+  'subParts',jsonb_build_array(
+    jsonb_build_object('label','(1)','answer','to take her to the party','acceptedAnswers',jsonb_build_array()),
+    jsonb_build_object('label','(2)','answer','to come back home by midnight','acceptedAnswers',jsonb_build_array('to come back by midnight')),
+    jsonb_build_object('label','(3)','answer','to wear her glass shoes','acceptedAnswers',jsonb_build_array())
+  )),
 jsonb_build_object('number',40,
   'question',E'다음 메모를 읽고 빈칸을 완성하시오.\nBobby,\nWe''ll be home late.\n(1) 개에게 먹이를 줄 것\n(2) 컴퓨터 게임을 하지 말 것\nLove, Mom and Dad\n\n(1) Bobby''s parents want _______________.\n(2) Bobby''s parents want _______________.',
   'answer',E'(1) him to feed the dog / (2) him not to play computer games',
   'similar_answers',jsonb_build_array('him to feed the dog / him not to play computer games','(1) him to feed the dog (2) him not to play computer games'),
-  'explanation',E'(1) want + 목적어(him) + to부정사(to feed the dog). (2) 부정은 not + to부정사: want + him + not to play computer games.')
+  'explanation',E'(1) want + 목적어(him) + to부정사(to feed the dog). (2) 부정은 not + to부정사: want + him + not to play computer games.',
+  'subParts',jsonb_build_array(
+    jsonb_build_object('label','(1)','answer','him to feed the dog','acceptedAnswers',jsonb_build_array()),
+    jsonb_build_object('label','(2)','answer','him not to play computer games','acceptedAnswers',jsonb_build_array())
+  ))
 ,
     -- ═══════════════════════════════════════════
     -- Part 6 continued. 상황 / 메모 기반 완성하기 (Q41~Q44)
@@ -237,22 +261,42 @@ jsonb_build_object('number',40,
   'question',E'[Part 6] 다음 대화를 읽고 빈칸을 완성하시오.\n\nMom: Hana, turn off the computer.\nDad: Duna, you should clean your room.\nHana: Dad, would you wash the dishes?\nDuna: Mom, will you help me fix the dress?\n\n<보기> Mom wants Hana to turn off the computer.\n\n(1) Dad _______________.\n(2) Hana _______________.\n(3) Duna _______________.',
   'answer',E'wants Duna to clean her room / wants her dad to wash the dishes / wants her mom to help her fix the dress',
   'similar_answers',jsonb_build_array(E'asks Duna to clean her room / asks her dad to wash the dishes / asks her mom to help her fix the dress',E'wants Duna to clean her room / wants Dad to wash the dishes / wants Mom to help her fix the dress',E'asks Duna to clean her room / asks Dad to wash the dishes / asks Mom to help her fix the dress'),
-  'explanation',E'want/ask+목적어+to부정사 구문. (1) Dad wants Duna to clean her room (2) Hana wants her dad to wash the dishes (3) Duna wants her mom to help her fix the dress. asks도 정답으로 인정.'),
+  'explanation',E'want/ask+목적어+to부정사 구문. (1) Dad wants Duna to clean her room (2) Hana wants her dad to wash the dishes (3) Duna wants her mom to help her fix the dress. asks도 정답으로 인정.',
+  'subParts',jsonb_build_array(
+    jsonb_build_object('label','(1)','answer','wants Duna to clean her room','acceptedAnswers',jsonb_build_array('asks Duna to clean her room')),
+    jsonb_build_object('label','(2)','answer','wants her dad to wash the dishes','acceptedAnswers',jsonb_build_array('asks her dad to wash the dishes','wants Dad to wash the dishes','asks Dad to wash the dishes')),
+    jsonb_build_object('label','(3)','answer','wants her mom to help her fix the dress','acceptedAnswers',jsonb_build_array('asks her mom to help her fix the dress','wants Mom to help her fix the dress','asks Mom to help her fix the dress'))
+  )),
 jsonb_build_object('number',42,
   'question',E'다음 메모들을 읽고 빈칸을 완성하시오.\n\nPlease come home early. - Mom\nWhy don''t you join the drama club? - Somi\nCan you bring some snacks to the party? - Jake\nDon''t be late for soccer practice. - Coach Kim\n\n<보기> Mom told me to come home early.\n\n(1) Jake asked _______________.\n(2) Somi asked _______________.\n(3) Coach Kim told _______________.',
   'answer',E'me to bring some snacks to the party / me to join the drama club / me not to be late for soccer practice',
   'similar_answers',jsonb_build_array(),
-  'explanation',E'ask/tell+목적어+to부정사 구문. (1) Jake asked me to bring some snacks to the party. (2) Somi asked me to join the drama club. (3) Coach Kim told me not to be late for soccer practice. 부정 명령은 not to로 전환.'),
+  'explanation',E'ask/tell+목적어+to부정사 구문. (1) Jake asked me to bring some snacks to the party. (2) Somi asked me to join the drama club. (3) Coach Kim told me not to be late for soccer practice. 부정 명령은 not to로 전환.',
+  'subParts',jsonb_build_array(
+    jsonb_build_object('label','(1)','answer','me to bring some snacks to the party','acceptedAnswers',jsonb_build_array()),
+    jsonb_build_object('label','(2)','answer','me to join the drama club','acceptedAnswers',jsonb_build_array()),
+    jsonb_build_object('label','(3)','answer','me not to be late for soccer practice','acceptedAnswers',jsonb_build_array())
+  )),
 jsonb_build_object('number',43,
   'question',E'다음 편지를 읽고 빈칸을 완성하시오.\n\nAlice,\nI''m leaving for Jeju-do now. Water the flowers every morning. And walk the dog in the afternoon. Please take care of yourself.\nLove, Mom\n\n→ Alice''s mother wants her _______________ and _______________.',
   'answer',E'to water the flowers every morning / to walk the dog in the afternoon',
   'similar_answers',jsonb_build_array(),
-  'explanation',E'want+목적어+to부정사 구문. 편지 내용의 명령문을 to부정사로 전환: wants her to water the flowers every morning and to walk the dog in the afternoon.'),
+  'explanation',E'want+목적어+to부정사 구문. 편지 내용의 명령문을 to부정사로 전환: wants her to water the flowers every morning and to walk the dog in the afternoon.',
+  'subParts',jsonb_build_array(
+    jsonb_build_object('label','(1)','answer','to water the flowers every morning','acceptedAnswers',jsonb_build_array()),
+    jsonb_build_object('label','(2)','answer','to walk the dog in the afternoon','acceptedAnswers',jsonb_build_array())
+  )),
 jsonb_build_object('number',44,
   'question',E'다음 표를 보고 빈칸을 완성하시오.\n\nJudy가 지난주에 한 일\n월요일: 여동생 돌보기\n화요일: 정원에 꽃에 물 주기\n토요일: 친구와 쇼핑 가기\n일요일: 쿠키 만들기\n\n(1) Judy''s mom wanted her _______________ on Monday. (want)\n(2) Judy''s mom made her _______________ on Tuesday. (make)\n(3) Judy''s mom allowed her _______________ on Saturday. (allow)\n(4) Judy''s mom helped her _______________ on Sunday. (help)',
   'answer',E'to take care of her sister / water flowers in the garden / to go shopping with her friend / make some cookies',
   'similar_answers',jsonb_build_array(E'to take care of her sister / water the flowers in the garden / to go shopping with her friend / make some cookies',E'to take care of her sister / water flowers in the garden / to go shopping with her friend / to make some cookies',E'to take care of her younger sister / water flowers in the garden / to go shopping with her friend / make some cookies'),
-  'explanation',E'동사별 목적격 보어 형태 구분. (1) want+to부정사: to take care of her sister (2) make(사역)+원형부정사: water flowers in the garden (3) allow+to부정사: to go shopping with her friend (4) help+원형부정사(또는 to부정사): make some cookies. help는 원형/to부정사 모두 가능.'),
+  'explanation',E'동사별 목적격 보어 형태 구분. (1) want+to부정사: to take care of her sister (2) make(사역)+원형부정사: water flowers in the garden (3) allow+to부정사: to go shopping with her friend (4) help+원형부정사(또는 to부정사): make some cookies. help는 원형/to부정사 모두 가능.',
+  'subParts',jsonb_build_array(
+    jsonb_build_object('label','(1)','answer','to take care of her sister','acceptedAnswers',jsonb_build_array('to take care of her younger sister')),
+    jsonb_build_object('label','(2)','answer','water flowers in the garden','acceptedAnswers',jsonb_build_array('water the flowers in the garden')),
+    jsonb_build_object('label','(3)','answer','to go shopping with her friend','acceptedAnswers',jsonb_build_array()),
+    jsonb_build_object('label','(4)','answer','make some cookies','acceptedAnswers',jsonb_build_array('to make some cookies'))
+  )),
 
     -- ═══════════════════════════════════════════
     -- Part 7. 조건 영작 (Q45~Q56)
@@ -327,22 +371,44 @@ jsonb_build_object('number',56,
   'question',E'[Part 8] 다음 두 문장의 의미가 같도록 주어진 단어를 활용하여 다시 쓰시오.\n\n<보기> She said to us "Please come to my house for dinner." (invite)\n→ She invited us to come to her house for dinner.\n\n(1) My mother said to me, "Drink warm milk before you sleep." (want)\n→ My mother ___.\n(2) The teacher said to him, "You can go home and take a rest." (let)\n→ The teacher ___.\n(3) The woman said to me, "You can have some cake." (allow)\n→ The woman ___.',
   'answer',E'wanted me to drink warm milk before I slept / let him go home and take a rest / allowed me to have some cake',
   'similar_answers',jsonb_build_array(E'wanted me to drink warm milk before I slept / let him go home and take a rest / allowed me to have some cake.',E'wants me to drink warm milk before I sleep / let him go home and take a rest / allowed me to have some cake'),
-  'explanation',E'동사별 목적격 보어 형태 구분. (1) want+to부정사: wanted me to drink warm milk before I slept (2) let+원형부정사: let him go home and take a rest (3) allow+to부정사: allowed me to have some cake.'),
+  'explanation',E'동사별 목적격 보어 형태 구분. (1) want+to부정사: wanted me to drink warm milk before I slept (2) let+원형부정사: let him go home and take a rest (3) allow+to부정사: allowed me to have some cake.',
+  'subParts',jsonb_build_array(
+    jsonb_build_object('label','(1)','answer','wanted me to drink warm milk before I slept','acceptedAnswers',jsonb_build_array('wants me to drink warm milk before I sleep')),
+    jsonb_build_object('label','(2)','answer','let him go home and take a rest','acceptedAnswers',jsonb_build_array()),
+    jsonb_build_object('label','(3)','answer','allowed me to have some cake','acceptedAnswers',jsonb_build_array())
+  )),
 jsonb_build_object('number',58,
   'question',E'다음 대화의 내용에 맞게 빈칸에 알맞은 말을 쓰시오.\n\nCinderella: Take me to the party, please.\nMs. Fairy: Don''t forget to come back home by midnight.\n\n(A) Cinderella tells ___ ___ her to the party.\n(B) Ms. Fairy asks ___ ___ home by midnight.',
   'answer',E'Ms. Fairy / to take / Cinderella / to come back',
   'similar_answers',jsonb_build_array(E'Ms. Fairy to take / Cinderella to come back'),
-  'explanation',E'tell/ask+목적어+to부정사 구문. (A) Cinderella tells Ms. Fairy to take her to the party. (B) Ms. Fairy asks Cinderella to come back home by midnight.'),
+  'explanation',E'tell/ask+목적어+to부정사 구문. (A) Cinderella tells Ms. Fairy to take her to the party. (B) Ms. Fairy asks Cinderella to come back home by midnight.',
+  'subParts',jsonb_build_array(
+    jsonb_build_object('label','(A-1)','answer','Ms. Fairy','acceptedAnswers',jsonb_build_array()),
+    jsonb_build_object('label','(A-2)','answer','to take','acceptedAnswers',jsonb_build_array()),
+    jsonb_build_object('label','(B-1)','answer','Cinderella','acceptedAnswers',jsonb_build_array()),
+    jsonb_build_object('label','(B-2)','answer','to come back','acceptedAnswers',jsonb_build_array())
+  )),
 jsonb_build_object('number',59,
   'question',E'다음 런던 여행 안내 책자를 읽고, 주어진 단어를 알맞게 변형하여 빈칸을 완성하시오.\n\nWe don''t want you (1)___(drive) into London during rush hour. If you don''t want to be stuck in traffic, we''d ask you (2)___(travel) by train. We''d expect you (3)___(buy) a saver ticket because it is cheaper. But railway companies don''t allow you (4)___(use) saver tickets before ten o''clock. This is to tell people (5)___(take) a later train.',
   'answer',E'to drive / to travel / to buy / to use / to take',
   'similar_answers',jsonb_build_array(),
-  'explanation',E'want/ask/expect/allow/tell 모두 목적어+to부정사 구문을 취하는 동사. 모든 빈칸에 to+동사원형을 넣는다.'),
+  'explanation',E'want/ask/expect/allow/tell 모두 목적어+to부정사 구문을 취하는 동사. 모든 빈칸에 to+동사원형을 넣는다.',
+  'subParts',jsonb_build_array(
+    jsonb_build_object('label','(1)','answer','to drive','acceptedAnswers',jsonb_build_array()),
+    jsonb_build_object('label','(2)','answer','to travel','acceptedAnswers',jsonb_build_array()),
+    jsonb_build_object('label','(3)','answer','to buy','acceptedAnswers',jsonb_build_array()),
+    jsonb_build_object('label','(4)','answer','to use','acceptedAnswers',jsonb_build_array()),
+    jsonb_build_object('label','(5)','answer','to take','acceptedAnswers',jsonb_build_array())
+  )),
 jsonb_build_object('number',60,
   'question',E'다음 블로그 글의 내용에 맞게 조건에 맞게 빈칸을 완성하시오.\n\n블로그의 두 가지 장점\n• 우리는 다른 사람들과 정보를 공유할 수 있다.\n• 우리는 우리의 개성을 표현할 수 있다.\n\nI want to tell you about blogs. There are two benefits of blogs.\nOne benefit is that (1)_______________.\nThe other benefit is that (2)_______________.\n[조건] enable 동사를 반드시 사용할 것',
   'answer',E'blogs enable us to share information with others / blogs enable us to express our personality',
   'similar_answers',jsonb_build_array(E'blogs enable us to share information with other people / blogs enable us to express our personalities',E'blogs enable us to share information with others / blogs enable us to express our individuality'),
-  'explanation',E'enable+목적어+to부정사 구문. (1) blogs enable us to share information with others (2) blogs enable us to express our personality.')
+  'explanation',E'enable+목적어+to부정사 구문. (1) blogs enable us to share information with others (2) blogs enable us to express our personality.',
+  'subParts',jsonb_build_array(
+    jsonb_build_object('label','(1)','answer','blogs enable us to share information with others','acceptedAnswers',jsonb_build_array('blogs enable us to share information with other people')),
+    jsonb_build_object('label','(2)','answer','blogs enable us to express our personality','acceptedAnswers',jsonb_build_array('blogs enable us to express our personalities','blogs enable us to express our individuality'))
+  ))
   );
 
   a := jsonb_build_array();

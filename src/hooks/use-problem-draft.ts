@@ -16,6 +16,7 @@ export interface WrongItem {
   correctAnswer: string | number;
   question: string;
   aiFeedback?: AiFeedback;
+  subParts?: { label: string; answer: string; acceptedAnswers?: string[] }[];
 }
 
 export interface InteractiveDraft {

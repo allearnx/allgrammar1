@@ -5,7 +5,7 @@ import type { NaesinProblemQuestion } from '@/types/database';
 import { useProblemDraft } from '@/hooks/use-problem-draft';
 import type { AiFeedback, WrongItem, InteractiveDraft } from '@/hooks/use-problem-draft';
 import { useQuestionTimer } from '@/hooks/use-question-timer';
-import { matchMcqAnswer } from '@/lib/naesin/normalize-answer';
+import { matchMcqAnswer, normalize } from '@/lib/naesin/normalize-answer';
 
 export const MCQ_MIN_TIME = 10;
 export const SUBJECTIVE_MIN_TIME = 30;
@@ -132,6 +132,17 @@ export function useInteractiveProblem({
   const { remaining, isExpired: isReady, reset: resetTimer, pause: pauseTimer } = useQuestionTimer(minTime);
 
   async function gradeSubjective(studentAnswer: string): Promise<{ score: number } | null> {
+    // subParts: client-side exact match grading (no API call needed)
+    if (question.subParts) {
+      const parts = String(studentAnswer).split(' / ');
+      const allCorrect = question.subParts.every((sp, i) => {
+        const studentNorm = normalize(parts[i]?.trim() ?? '');
+        const candidates = [sp.answer, ...(sp.acceptedAnswers ?? [])];
+        return candidates.some(c => normalize(c) === studentNorm);
+      });
+      return { score: allCorrect ? 100 : 0 };
+    }
+
     try {
       return await fetchWithToast<{ score: number }>('/api/naesin/problems/grade-subjective', {
         body: {
@@ -191,6 +202,7 @@ export function useInteractiveProblem({
       userAnswer: answer,
       correctAnswer: q.answer,
       question: q.question,
+      ...(q.subParts ? { subParts: q.subParts } : {}),
     };
     const newWrongList = [...wrongList, wrongItem];
     setWrongList(newWrongList);

@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Badge } from '@/components/ui/badge';
 import { Loader2, Clock, Save, RefreshCw } from 'lucide-react';
@@ -10,6 +11,7 @@ import { cn } from '@/lib/utils';
 import { MCQOptionList } from '@/components/shared/mcq-option-list';
 import { FormattedText } from '@/components/shared/formatted-text';
 import type { NaesinProblemSheet, NaesinProblemQuestion } from '@/types/database';
+import type { SubPart } from '@/types/naesin';
 import type { WrongItem } from '@/hooks/use-problem-draft';
 import { useInteractiveProblem } from './use-interactive-problem';
 import { ResultsScreen } from './results-screen';
@@ -52,6 +54,35 @@ function SubjectiveInput({ onSubmit, disabled, isGrading }: { onSubmit: (answer:
         ) : (
           '제출'
         )}
+      </Button>
+    </div>
+  );
+}
+
+function MultiPartInput({ subParts, onSubmit, disabled, isGrading }: {
+  subParts: SubPart[];
+  onSubmit: (answer: string) => void;
+  disabled: boolean;
+  isGrading: boolean;
+}) {
+  const [answers, setAnswers] = useState<string[]>(subParts.map(() => ''));
+  const allFilled = answers.every(a => a.trim());
+
+  return (
+    <div className="max-w-lg mx-auto space-y-3">
+      {subParts.map((part, i) => (
+        <div key={i} className="flex items-center gap-2">
+          <span className="text-sm font-medium text-muted-foreground w-8 shrink-0">{part.label}</span>
+          <Input
+            value={answers[i]}
+            onChange={(e) => { const next = [...answers]; next[i] = e.target.value; setAnswers(next); }}
+            placeholder={`${part.label} 답을 입력하세요`}
+            disabled={disabled}
+          />
+        </div>
+      ))}
+      <Button onClick={() => onSubmit(answers.join(' / '))} disabled={disabled || !allFilled} className="w-full">
+        {isGrading ? (<><Loader2 className="mr-2 h-4 w-4 animate-spin" />채점 중...</>) : ('제출')}
       </Button>
     </div>
   );
@@ -172,6 +203,14 @@ export function InteractiveProblemView({
           onToggle={handleMultiToggle}
           onSubmit={handleMultiSubmit}
         />
+      ) : question.subParts ? (
+        <MultiPartInput
+          key={currentIndex}
+          subParts={question.subParts}
+          onSubmit={(answer) => handleSelect(answer)}
+          disabled={showResult}
+          isGrading={isGrading}
+        />
       ) : (
         <SubjectiveInput
           key={currentIndex}
@@ -189,11 +228,30 @@ export function InteractiveProblemView({
           )}>
             {isCurrentCorrect ? '정답입니다!' : '오답입니다'}
           </div>
-          {!isCurrentCorrect && (
+          {!isCurrentCorrect && question.subParts ? (
+            <div className="space-y-1 text-sm rounded-md bg-gray-50 p-3">
+              {(() => {
+                const parts = String(selectedAnswer).split(' / ');
+                return question.subParts.map((sp, i) => {
+                  const studentAns = parts[i]?.trim() ?? '';
+                  const candidates = [sp.answer, ...(sp.acceptedAnswers ?? [])];
+                  const norm = (s: string) => s.trim().toLowerCase().replace(/[.\s]+$/g, '');
+                  const partCorrect = candidates.some(c => norm(c) === norm(studentAns));
+                  return (
+                    <div key={i} className="flex gap-2">
+                      <span className="font-medium w-8 shrink-0">{sp.label}</span>
+                      <span className={partCorrect ? 'text-green-600' : 'text-red-500'}>{studentAns || '(미입력)'}</span>
+                      {!partCorrect && <span className="text-green-600">→ {sp.answer}</span>}
+                    </div>
+                  );
+                });
+              })()}
+            </div>
+          ) : !isCurrentCorrect ? (
             <div className="text-center text-sm text-green-700 bg-green-50 py-1.5 rounded-md">
               정답: {String(question.answer)}
             </div>
-          )}
+          ) : null}
         </div>
       )}
 

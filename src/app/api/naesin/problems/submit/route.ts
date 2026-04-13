@@ -21,7 +21,7 @@ export const POST = createApiHandler(
 
     // Grade
     const answerKey = sheet.answer_key as (string | number)[];
-    const questions = sheet.questions as { number: number; question: string; options?: string[]; acceptedAnswers?: string[]; explanation?: string }[];
+    const questions = sheet.questions as { number: number; question: string; options?: string[]; acceptedAnswers?: string[]; explanation?: string; subParts?: { label: string; answer: string; acceptedAnswers?: string[] }[] }[];
     let correctCount = 0;
     const wrongAnswers: { number: number; userAnswer: string | number; correctAnswer: string | number; question?: string }[] = [];
 
@@ -33,14 +33,25 @@ export const POST = createApiHandler(
       let isCorrect: boolean;
 
       if (isSubjective) {
-        // 규칙 기반 정규화 채점: aiResults가 있으면 score === 100, 없으면 정규화 비교
-        const aiResult = aiResults?.[String(i)];
-        if (aiResult) {
-          isCorrect = aiResult.score === 100;
+        const q = questions?.[i];
+        if (q?.subParts) {
+          // subParts grading: each part must match
+          const parts = userAnswer.split(' / ');
+          isCorrect = q.subParts.every((sp, j) => {
+            const studentNorm = normalize(parts[j]?.trim() ?? '');
+            const candidates = [sp.answer, ...(sp.acceptedAnswers ?? [])];
+            return candidates.some((c) => normalize(c) === studentNorm);
+          });
         } else {
-          const studentNorm = normalize(userAnswer);
-          const candidates = [correctAnswer, ...(questions?.[i]?.acceptedAnswers ?? [])];
-          isCorrect = candidates.some((c) => normalize(c) === studentNorm);
+          // 규칙 기반 정규화 채점: aiResults가 있으면 score === 100, 없으면 정규화 비교
+          const aiResult = aiResults?.[String(i)];
+          if (aiResult) {
+            isCorrect = aiResult.score === 100;
+          } else {
+            const studentNorm = normalize(userAnswer);
+            const candidates = [correctAnswer, ...(q?.acceptedAnswers ?? [])];
+            isCorrect = candidates.some((c) => normalize(c) === studentNorm);
+          }
         }
       } else {
         isCorrect = matchMcqAnswer(userAnswer, correctAnswer, questions?.[i]?.options);
