@@ -26,10 +26,11 @@ const STAGE_LABELS: Record<string, string> = {
   dialogue: '대화문 암기',
   grammar: '문법',
   problem: '문제풀이',
+  mockExam: '예상문제',
   lastReview: '직전보강',
 };
 
-const STAGE_ORDER: NaesinWrongAnswerStage[] = ['vocab', 'passage', 'dialogue', 'grammar', 'problem', 'lastReview'];
+const STAGE_ORDER: NaesinWrongAnswerStage[] = ['vocab', 'passage', 'dialogue', 'grammar', 'problem', 'mockExam', 'lastReview'];
 
 interface Props {
   studentId: string;

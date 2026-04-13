@@ -344,7 +344,7 @@ export interface NaesinProblemAttempt {
   created_at: string;
 }
 
-export type NaesinWrongAnswerStage = 'vocab' | 'passage' | 'dialogue' | 'grammar' | 'problem' | 'lastReview';
+export type NaesinWrongAnswerStage = 'vocab' | 'passage' | 'dialogue' | 'grammar' | 'problem' | 'mockExam' | 'lastReview';
 
 export interface NaesinWrongAnswer {
   id: string;
