@@ -168,6 +168,8 @@ const STAGE_RENDERERS: Record<StageKey, StageRenderer> = {
       sheets={stageData.mockExamSheets || []}
       unitId={unitId}
       onStageComplete={onStageComplete}
+      bestScoreBySheet={stageData.bestScoreBySheet}
+      lastAttemptBySheet={stageData.lastAttemptBySheet}
     />
   ),
   lastReview: ({ stageData, unitId }) => (

@@ -13,7 +13,7 @@ export const POST = createApiHandler(
     // Fetch answer key
     const { data: sheet } = await supabase
       .from('naesin_problem_sheets')
-      .select('answer_key, questions, mode')
+      .select('answer_key, questions, mode, category')
       .eq('id', sheetId)
       .single();
 
@@ -89,7 +89,7 @@ export const POST = createApiHandler(
         return {
           student_id: user.id,
           unit_id: unitId,
-          stage: 'problem',
+          stage: sheet.category === 'mock_exam' ? 'mockExam' : 'problem',
           source_type: sheet.mode,
           question_data: {
             ...wa,
@@ -112,11 +112,15 @@ export const POST = createApiHandler(
 
     // Update progress: mark completed only when all sheets in the unit have been attempted
     if (unitId) {
+      const isMockExam = sheet.category === 'mock_exam';
+      const targetCategory = isMockExam ? 'mock_exam' : 'problem';
+      const progressField = isMockExam ? 'mock_exam_completed' : 'problem_completed';
+
       const { data: allSheets } = await supabase
         .from('naesin_problem_sheets')
         .select('id')
         .eq('unit_id', unitId)
-        .eq('category', 'problem');
+        .eq('category', targetCategory);
       const sheetIds = (allSheets || []).map((s) => s.id);
 
       const { data: attemptRows } = await supabase
@@ -131,7 +135,7 @@ export const POST = createApiHandler(
       dbResult(await supabase
         .from('naesin_student_progress')
         .upsert(
-          { student_id: user.id, unit_id: unitId, problem_completed: allCompleted },
+          { student_id: user.id, unit_id: unitId, [progressField]: allCompleted },
           { onConflict: 'student_id,unit_id' }
         ));
     }

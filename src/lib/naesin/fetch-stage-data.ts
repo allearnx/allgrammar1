@@ -26,7 +26,7 @@ export async function fetchStageData(
     case 'problem':
       return fetchProblemData(supabase, unitId, userId);
     case 'mockExam':
-      return fetchMockExamData(supabase, unitId);
+      return fetchMockExamData(supabase, unitId, userId);
     case 'lastReview':
       return fetchLastReviewData(supabase, unitId);
   }
@@ -120,14 +120,50 @@ async function fetchTextbookVideoData(supabase: SupabaseClient, userId: string, 
   return { textbookVideos, textbookVideoProgress };
 }
 
-async function fetchMockExamData(supabase: SupabaseClient, unitId: string) {
-  const mockExamRes = await supabase
-    .from('naesin_problem_sheets')
-    .select('*')
-    .eq('unit_id', unitId)
-    .eq('category', 'mock_exam')
-    .order('sort_order');
-  return { mockExamSheets: mockExamRes.data || [] };
+async function fetchMockExamData(supabase: SupabaseClient, unitId: string, userId?: string) {
+  const [mockExamRes, attemptsRes] = await Promise.all([
+    supabase
+      .from('naesin_problem_sheets')
+      .select('*')
+      .eq('unit_id', unitId)
+      .eq('category', 'mock_exam')
+      .order('sort_order'),
+    userId
+      ? supabase
+          .from('naesin_problem_attempts')
+          .select('sheet_id, score, total_questions, wrong_answers, created_at')
+          .eq('student_id', userId)
+          .order('created_at', { ascending: false })
+      : Promise.resolve({ data: [] }),
+  ]);
+
+  const mockExamSheets = mockExamRes.data || [];
+  const mockSheetIds = new Set(mockExamSheets.map((s) => s.id));
+
+  const bestScoreBySheet: Record<string, number> = {};
+  const lastAttemptBySheet: Record<string, {
+    score: number;
+    total_questions: number;
+    wrong_answers: { number: number; userAnswer: string | number; correctAnswer: string | number; question?: string }[];
+    created_at: string;
+  }> = {};
+  for (const row of attemptsRes.data || []) {
+    if (!mockSheetIds.has(row.sheet_id)) continue;
+    const prev = bestScoreBySheet[row.sheet_id];
+    if (prev == null || row.score > prev) {
+      bestScoreBySheet[row.sheet_id] = row.score;
+    }
+    if (!lastAttemptBySheet[row.sheet_id]) {
+      lastAttemptBySheet[row.sheet_id] = {
+        score: row.score,
+        total_questions: row.total_questions,
+        wrong_answers: row.wrong_answers || [],
+        created_at: row.created_at,
+      };
+    }
+  }
+
+  return { mockExamSheets, bestScoreBySheet, lastAttemptBySheet };
 }
 
 async function fetchProblemData(supabase: SupabaseClient, unitId: string, userId?: string) {
