@@ -1,7 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { Copy, Check } from 'lucide-react';
+import Link from 'next/link';
+import { Copy, Check, UserPlus } from 'lucide-react';
 
 export function InviteCodeCard({ code, academyName }: { code: string; academyName: string }) {
   const [copied, setCopied] = useState(false);
@@ -31,9 +32,19 @@ export function InviteCodeCard({ code, academyName }: { code: string; academyNam
           {copied ? '복사됨' : '복사'}
         </button>
       </div>
-      <p className="mt-2 text-xs text-white/60">
-        학생 가입 시 이 코드를 알려주세요.
-      </p>
+      <div className="mt-3 flex items-center justify-between">
+        <p className="text-xs text-white/60">
+          학생 가입 시 이 코드를 알려주세요.
+        </p>
+        <Link
+          href="/admin/guide/students"
+          className="inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-semibold transition-all hover:bg-white/25"
+          style={{ background: 'rgba(255,255,255,0.15)', backdropFilter: 'blur(8px)' }}
+        >
+          <UserPlus className="h-3.5 w-3.5" />
+          학생 등록 가이드
+        </Link>
+      </div>
     </div>
   );
 }

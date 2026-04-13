@@ -2,9 +2,8 @@
 
 import { useEffect, useState, useCallback } from 'react';
 import Link from 'next/link';
-import { Sparkles } from 'lucide-react';
+import { Check, Crown, Users } from 'lucide-react';
 import { createClient } from '@/lib/supabase/client';
-import { Card, CardContent } from '@/components/ui/card';
 import { SubscriptionBanner } from '@/components/billing/subscription-banner';
 import { SubscriptionInfoCard } from '@/components/billing/subscription-info-card';
 import { PaymentHistoryCard } from '@/components/billing/payment-history-card';
@@ -25,6 +24,8 @@ interface BillingPageContentProps {
 export function BillingPageContent({ mode }: BillingPageContentProps) {
   const [subscription, setSubscription] = useState<SubscriptionWithPlan | null>(null);
   const [payments, setPayments] = useState<PaymentHistory[]>([]);
+  const [plans, setPlans] = useState<SubscriptionPlan[]>([]);
+  const [currentPlanId, setCurrentPlanId] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [tier, setTier] = useState<Tier>('free');
   const [freeService, setFreeService] = useState<FreeService | null>(null);
@@ -77,6 +78,7 @@ export function BillingPageContent({ mode }: BillingPageContentProps) {
     if (sub) {
       const typedSub = sub as SubscriptionWithPlan;
       setSubscription(typedSub);
+      setCurrentPlanId(sub.plan_id);
       if (mode === 'academy') {
         setTier(deriveTier({ status: typedSub.status, tier: typedSub.tier }));
       }
@@ -89,12 +91,28 @@ export function BillingPageContent({ mode }: BillingPageContentProps) {
       setPayments((hist as PaymentHistory[]) || []);
     }
 
+    if (mode === 'academy') {
+      const { data: planRows } = await supabase
+        .from('subscription_plans')
+        .select('*')
+        .eq('target', 'academy')
+        .eq('is_active', true)
+        .order('sort_order', { ascending: true });
+      setPlans((planRows as SubscriptionPlan[]) || []);
+    }
+
     setLoading(false);
   }, [mode]);
 
   useEffect(() => { fetchData(); }, [fetchData]); // eslint-disable-line react-hooks/set-state-in-effect -- data fetching
 
-  if (loading) return <div className="p-6">로딩 중...</div>;
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center py-20">
+        <div className="h-6 w-6 animate-spin rounded-full border-2 border-gray-200 border-t-[#3182F6]" />
+      </div>
+    );
+  }
 
   const trialDaysLeft = calcTrialDaysLeft(subscription?.trial_end ?? null);
   const priceLabel = mode === 'academy'
@@ -112,19 +130,22 @@ export function BillingPageContent({ mode }: BillingPageContentProps) {
         />
       )}
 
-      <div className="p-6 space-y-6">
-        <h1 className="text-2xl font-bold">결제 관리</h1>
+      <div className="p-5 md:p-8 space-y-8 max-w-5xl mx-auto">
+        <h1 className="text-[22px] font-bold text-gray-900">결제 관리</h1>
 
         {!subscription ? (
-          <Card>
-            <CardContent className="py-8 text-center text-muted-foreground">
+          <div className="rounded-2xl border border-gray-100 bg-white shadow-[0_2px_12px_rgba(0,0,0,0.04)] p-10 text-center">
+            <div className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-gray-50 mb-4">
+              <Crown className="h-6 w-6 text-gray-300" />
+            </div>
+            <p className="text-[15px] text-gray-500">
               {mode === 'academy'
                 ? '활성 구독이 없습니다'
                 : '활성 구독이 없습니다. 요금제를 선택해주세요.'}
-            </CardContent>
-          </Card>
+            </p>
+          </div>
         ) : (
-          <>
+          <div className="space-y-5">
             <SubscriptionInfoCard
               planName={subscription.plan?.name}
               status={subscription.status}
@@ -136,36 +157,143 @@ export function BillingPageContent({ mode }: BillingPageContentProps) {
               onCancel={() => cancelSubscription(subscription.id, fetchData)}
             />
             <PaymentHistoryCard payments={payments} />
-          </>
+          </div>
         )}
 
-        {mode === 'academy' && tier === 'free' && (
-          <Card className="border-violet-200 bg-gradient-to-br from-violet-50 to-white">
-            <CardContent className="pt-6 text-center">
-              <Sparkles className="h-8 w-8 text-violet-500 mx-auto mb-3" />
-              <h3 className="text-lg font-bold text-gray-900 mb-1">더 많은 기능이 필요하신가요?</h3>
-              <p className="text-sm text-gray-500 mb-4">
-                유료 플랜으로 업그레이드하면 모든 서비스를 이용할 수 있습니다.
-              </p>
-              <Link
-                href="/pricing"
-                className="inline-flex items-center gap-1.5 rounded-lg px-6 py-2.5 text-sm font-semibold text-white transition-all hover:opacity-90"
-                style={{ background: 'linear-gradient(135deg, #7C3AED, #6D28D9)' }}
-              >
-                요금제 보기
-              </Link>
-            </CardContent>
-          </Card>
+        {/* 요금제 카드 */}
+        {mode === 'academy' && plans.length > 0 && (
+          <section className="space-y-5">
+            <h2 className="text-[17px] font-bold text-gray-900">요금제</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3">
+              {plans.map((plan) => {
+                const isCurrent =
+                  (plan.price_per_unit === 0 && tier === 'free') ||
+                  (plan.id === currentPlanId && tier !== 'free');
+                return (
+                  <PlanCard
+                    key={plan.id}
+                    plan={plan}
+                    isCurrent={isCurrent}
+                    isFree={tier === 'free'}
+                    popular={plan.name === 'Pro 40'}
+                  />
+                );
+              })}
+            </div>
+          </section>
         )}
 
+        {/* 기능 비교 */}
         {mode === 'academy' && (
-          <Card>
-            <CardContent className="pt-6">
-              <PlanComparison showCta={tier === 'free'} />
-            </CardContent>
-          </Card>
+          <section className="space-y-5">
+            <h2 className="text-[17px] font-bold text-gray-900">기능 비교</h2>
+            <div className="rounded-2xl bg-white border border-gray-100 shadow-[0_2px_12px_rgba(0,0,0,0.04)] overflow-hidden">
+              <PlanComparison showCta={false} />
+            </div>
+          </section>
         )}
       </div>
+    </div>
+  );
+}
+
+/* ─────── PlanCard (Toss-style) ─────── */
+
+const FEATURES_BY_PLAN: Record<string, string[]> = {
+  '무료': ['학생 5명', '서비스 1개 택1', '기본 통계'],
+  'Pro 8': ['학생 8명', '올인내신 + 올킬보카', '차트 + 랭킹', '학생 리포트'],
+  'Pro 40': ['학생 40명', '올인내신 + 올킬보카', '차트 + 랭킹', '대량 관리', '학생 리포트'],
+  'Pro 80': ['학생 80명', '올인내신 + 올킬보카', '차트 + 랭킹', '대량 관리', '학생 리포트'],
+  'Pro 150': ['학생 150명', '올인내신 + 올킬보카', '차트 + 랭킹', '대량 관리', '학생 리포트'],
+};
+
+function PlanCard({
+  plan,
+  isCurrent,
+  isFree,
+  popular,
+}: {
+  plan: SubscriptionPlan;
+  isCurrent: boolean;
+  isFree: boolean;
+  popular?: boolean;
+}) {
+  const isFreePlan = plan.price_per_unit === 0;
+  const features = FEATURES_BY_PLAN[plan.name] || [];
+
+  return (
+    <div
+      className={`relative flex flex-col rounded-2xl p-5 transition-all ${
+        popular
+          ? 'bg-[#3182F6] text-white shadow-lg shadow-blue-200/50'
+          : 'bg-white border border-gray-100 shadow-[0_2px_12px_rgba(0,0,0,0.04)]'
+      } ${isCurrent ? 'ring-2 ring-[#3182F6] ring-offset-2' : ''}`}
+    >
+      {popular && (
+        <div className="absolute -top-2.5 left-1/2 -translate-x-1/2 rounded-full bg-white px-3 py-0.5 text-[11px] font-bold text-[#3182F6] shadow-sm">
+          인기
+        </div>
+      )}
+
+      {/* 플랜명 */}
+      <div className="flex items-center gap-2 mb-3">
+        <div className={`flex h-7 w-7 items-center justify-center rounded-lg ${popular ? 'bg-white/20' : 'bg-gray-50'}`}>
+          <Users className={`h-3.5 w-3.5 ${popular ? 'text-white' : 'text-gray-400'}`} />
+        </div>
+        <h3 className={`text-[13px] font-bold ${popular ? 'text-white' : 'text-gray-900'}`}>
+          {plan.name}
+        </h3>
+      </div>
+
+      {/* 가격 */}
+      <div className="mb-4">
+        {isFreePlan ? (
+          <span className={`text-2xl font-bold ${popular ? 'text-white' : 'text-gray-900'}`}>무료</span>
+        ) : (
+          <>
+            <span className={`text-2xl font-bold tabular-nums ${popular ? 'text-white' : 'text-gray-900'}`}>
+              {plan.price_per_unit.toLocaleString('ko-KR')}
+            </span>
+            <span className={`text-xs ml-0.5 ${popular ? 'text-white/60' : 'text-gray-400'}`}>원/월</span>
+          </>
+        )}
+      </div>
+
+      {/* 기능 */}
+      <ul className="mb-5 flex-1 space-y-2">
+        {features.map((f) => (
+          <li key={f} className="flex items-start gap-1.5 text-[12px]">
+            <Check className={`h-3.5 w-3.5 mt-0.5 shrink-0 ${popular ? 'text-white/70' : 'text-[#3182F6]'}`} />
+            <span className={popular ? 'text-white/90' : 'text-gray-600'}>{f}</span>
+          </li>
+        ))}
+      </ul>
+
+      {/* CTA */}
+      {isCurrent ? (
+        <div className={`rounded-xl py-2.5 text-center text-[13px] font-semibold ${
+          popular ? 'bg-white/20 text-white' : 'bg-gray-50 text-gray-400'
+        }`}>
+          현재 플랜
+        </div>
+      ) : isFree && !isFreePlan ? (
+        <Link
+          href={`/admin/upgrade?planId=${plan.id}`}
+          className={`block rounded-xl py-2.5 text-center text-[13px] font-semibold transition-all ${
+            popular
+              ? 'bg-white text-[#3182F6] hover:bg-white/90'
+              : 'bg-[#3182F6] text-white hover:bg-[#2272EB]'
+          }`}
+        >
+          업그레이드
+        </Link>
+      ) : (
+        <div className={`rounded-xl py-2.5 text-center text-[13px] font-semibold ${
+          popular ? 'bg-white/20 text-white' : 'bg-gray-50 text-gray-400'
+        }`}>
+          플랜 변경 문의
+        </div>
+      )}
     </div>
   );
 }

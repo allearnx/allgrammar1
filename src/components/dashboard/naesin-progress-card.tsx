@@ -48,7 +48,7 @@ interface Props {
   translationSentencesPerPage: number;
   tier?: Tier;
   fillBlanksByUnit?: Record<string, Record<string, number>>;
-  problemSheetsByUnit?: Record<string, { id: string; title: string }[]>;
+  problemSheetsByUnit?: Record<string, { id: string; title: string; category?: string }[]>;
   problemAttemptsBySheet?: Record<string, { score: number; total: number; pct: number }>;
 }
 
@@ -238,7 +238,8 @@ export function NaesinProgressCard({
                       )}
                       {unitSheets.map((sheet, idx) => {
                         const attempt = problemAttemptsBySheet?.[sheet.id];
-                        const fallback = unitSheets.length > 1 ? `문제${idx + 1}` : '문제';
+                        const isMockExam = sheet.category === 'mock_exam';
+                        const fallback = isMockExam ? '예상문제' : unitSheets.length > 1 ? `문제${idx + 1}` : '문제';
                         const label = sheet.title || fallback;
                         if (attempt) {
                           return (

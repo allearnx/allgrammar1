@@ -1,79 +1,131 @@
 'use client';
 
-import { Check, X, Sparkles } from 'lucide-react';
-import Link from 'next/link';
+import { Check, X } from 'lucide-react';
 
 interface PlanComparisonProps {
   showCta?: boolean;
 }
 
-const ROWS = [
-  { label: '학생 수', free: '5명', paid: '플랜별' },
-  { label: '서비스', free: '학원당 1개', paid: '올인내신 + 올킬보카' },
-  { label: '내신 단어암기', free: true, paid: true },
-  { label: '내신 교과서암기', free: true, paid: true },
-  { label: '내신 문법영상', free: false, paid: true },
-  { label: '내신 문제풀이', free: false, paid: true },
-  { label: '올킬보카 1회독', free: true, paid: true },
-  { label: '올킬보카 2회독', free: false, paid: true },
-  { label: '통계', free: '기본 숫자', paid: '차트 + 랭킹' },
-  { label: '대량 관리', free: false, paid: true },
-  { label: '학생 리포트', free: false, paid: true },
-] as const;
+interface Row {
+  label: string;
+  free: boolean | string;
+  paid: boolean | string;
+}
 
-function CellValue({ value }: { value: boolean | string }) {
+interface Group {
+  category: string;
+  rows: Row[];
+}
+
+const GROUPS: Group[] = [
+  {
+    category: '기본',
+    rows: [
+      { label: '학생 수', free: '5명', paid: '최대 150명' },
+      { label: '서비스', free: '1개 택1', paid: '올인내신 + 올킬보카' },
+    ],
+  },
+  {
+    category: '올인내신',
+    rows: [
+      { label: '단어 암기', free: true, paid: true },
+      { label: '교과서 암기', free: true, paid: true },
+      { label: '문법 영상 + AI 챗봇', free: false, paid: true },
+      { label: '문제풀이 + AI 채점', free: false, paid: true },
+    ],
+  },
+  {
+    category: '올킬보카',
+    rows: [
+      { label: '1회독 (플래시카드/퀴즈)', free: true, paid: true },
+      { label: '2회독 (심화 복습)', free: false, paid: true },
+    ],
+  },
+  {
+    category: '학원 관리',
+    rows: [
+      { label: '통계', free: '기본 숫자', paid: '차트 + 랭킹' },
+      { label: '대량 학생 관리', free: false, paid: true },
+      { label: '학생 리포트', free: false, paid: true },
+    ],
+  },
+];
+
+function CellValue({ value, highlight = false }: { value: boolean | string; highlight?: boolean }) {
   if (typeof value === 'string') {
-    return <span className="text-sm text-gray-700">{value}</span>;
+    return (
+      <span className={`text-[13px] font-medium ${highlight ? 'text-[#3182F6]' : 'text-gray-600'}`}>
+        {value}
+      </span>
+    );
   }
   return value ? (
-    <Check className="h-5 w-5 text-green-500 mx-auto" />
+    <div className={`mx-auto flex h-6 w-6 items-center justify-center rounded-full ${highlight ? 'bg-[#3182F6]/10' : 'bg-emerald-50'}`}>
+      <Check className={`h-3.5 w-3.5 ${highlight ? 'text-[#3182F6]' : 'text-emerald-500'}`} />
+    </div>
   ) : (
-    <X className="h-5 w-5 text-gray-300 mx-auto" />
+    <div className="mx-auto flex h-6 w-6 items-center justify-center rounded-full bg-red-50">
+      <X className="h-3.5 w-3.5 text-red-400" />
+    </div>
   );
 }
 
-export function PlanComparison({ showCta = true }: PlanComparisonProps) {
+export function PlanComparison({ showCta: _showCta = false }: PlanComparisonProps) {
   return (
-    <div className="space-y-5">
-      <div className="overflow-hidden rounded-xl border">
-        <table className="w-full text-left text-sm">
-          <thead>
-            <tr className="bg-gray-50">
-              <th className="px-4 py-3 font-semibold text-gray-700">기능</th>
-              <th className="px-4 py-3 text-center font-semibold text-gray-700">무료</th>
-              <th className="px-4 py-3 text-center font-semibold" style={{ color: '#7C3AED' }}>
-                프리미엄
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {ROWS.map((row) => (
-              <tr key={row.label} className="border-t">
-                <td className="px-4 py-2.5 text-sm text-gray-600">{row.label}</td>
-                <td className="px-4 py-2.5 text-center">
-                  <CellValue value={row.free} />
-                </td>
-                <td className="px-4 py-2.5 text-center">
-                  <CellValue value={row.paid} />
+    <div className="overflow-hidden">
+      <table className="w-full text-sm">
+        {/* 헤더 */}
+        <thead>
+          <tr>
+            <th className="px-5 py-4 text-left text-[13px] font-semibold text-gray-400 w-[45%]">
+              기능
+            </th>
+            <th className="px-4 py-4 text-center text-[13px] font-semibold text-gray-400 w-[27.5%]">
+              무료
+            </th>
+            <th
+              className="px-4 py-4 text-center text-[13px] font-bold w-[27.5%]"
+              style={{ background: 'linear-gradient(180deg, #EFF6FF 0%, #DBEAFE 100%)', color: '#3182F6' }}
+            >
+              프리미엄
+            </th>
+          </tr>
+        </thead>
+
+        <tbody>
+          {GROUPS.map((group) => (
+            <>
+              {/* 카테고리 헤더 */}
+              <tr key={`cat-${group.category}`}>
+                <td
+                  colSpan={3}
+                  className="px-5 pt-5 pb-2 text-[11px] font-bold uppercase tracking-widest text-gray-400"
+                  style={{ background: '#FAFAFA' }}
+                >
+                  {group.category}
                 </td>
               </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-
-      {showCta && (
-        <div className="text-center">
-          <Link
-            href="/pricing"
-            className="inline-flex items-center gap-1.5 rounded-lg px-6 py-2.5 text-sm font-semibold text-white transition-all hover:opacity-90"
-            style={{ background: 'linear-gradient(135deg, #7C3AED, #6D28D9)' }}
-          >
-            <Sparkles className="h-4 w-4" />
-            요금제 보기
-          </Link>
-        </div>
-      )}
+              {/* 기능 행 */}
+              {group.rows.map((row, idx) => (
+                <tr
+                  key={row.label}
+                  className={`border-b border-gray-50 last:border-0 transition-colors hover:bg-gray-50/50 ${
+                    idx % 2 === 1 ? 'bg-gray-50/30' : 'bg-white'
+                  }`}
+                >
+                  <td className="px-5 py-3.5 text-[13px] text-gray-700">{row.label}</td>
+                  <td className="px-4 py-3.5 text-center">
+                    <CellValue value={row.free} />
+                  </td>
+                  <td className="px-4 py-3.5 text-center bg-[#F8FBFF]">
+                    <CellValue value={row.paid} highlight />
+                  </td>
+                </tr>
+              ))}
+            </>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 }

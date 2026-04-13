@@ -115,8 +115,8 @@ export async function StudentDetail({ user, studentId, naesinData }: Props) {
       .not('difficulty', 'is', null),
     admin
       .from('naesin_problem_sheets')
-      .select('id, unit_id, title, sort_order')
-      .eq('category', 'problem')
+      .select('id, unit_id, title, sort_order, category')
+      .in('category', ['problem', 'mock_exam'])
       .in('unit_id', (naesinData?.units || []).map((u) => u.id))
       .order('sort_order'),
     admin
@@ -135,10 +135,10 @@ export async function StudentDetail({ user, studentId, naesinData }: Props) {
   }
 
   // Build problem sheets by unit
-  const problemSheetsByUnit: Record<string, { id: string; title: string }[]> = {};
+  const problemSheetsByUnit: Record<string, { id: string; title: string; category: string }[]> = {};
   for (const s of problemSheetsRes.data || []) {
     if (!problemSheetsByUnit[s.unit_id]) problemSheetsByUnit[s.unit_id] = [];
-    problemSheetsByUnit[s.unit_id].push({ id: s.id, title: s.title });
+    problemSheetsByUnit[s.unit_id].push({ id: s.id, title: s.title, category: s.category });
   }
 
   // Build problem attempts best score by sheet
