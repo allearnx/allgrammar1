@@ -90,7 +90,7 @@ async function fetchNaesinTree(
   if (!setting?.textbook_id) return undefined;
 
   // Fetch assignments, units, and progress in parallel
-  const [assignmentsRes, unitsRes, progressRes, vocabRes, passageRes, dialogueRes, grammarRes, problemRes, lastReviewSheetRes, similarRes, reviewContentRes, quizSetsRes] = await Promise.all([
+  const [assignmentsRes, unitsRes, progressRes, vocabRes, passageRes, dialogueRes, grammarRes, problemRes, lastReviewSheetRes, similarRes, reviewContentRes, quizSetsRes, mockExamRes] = await Promise.all([
     supabase
       .from('naesin_exam_assignments')
       .select('*')
@@ -137,6 +137,10 @@ async function fetchNaesinTree(
     supabase
       .from('naesin_vocab_quiz_sets')
       .select('id, unit_id'),
+    supabase
+      .from('naesin_problem_sheets')
+      .select('unit_id')
+      .eq('category', 'mock_exam'),
   ]);
 
   const assignments = assignmentsRes.data || [];
@@ -151,6 +155,7 @@ async function fetchNaesinTree(
   const dialogueUnitIds = new Set((dialogueRes.data || []).map((r) => r.unit_id));
   const grammarByUnit = groupBy(grammarRes.data || [], 'unit_id');
   const problemUnitIds = new Set((problemRes.data || []).map((r) => r.unit_id));
+  const mockExamUnitIds = new Set((mockExamRes.data || []).map((r) => r.unit_id));
   const lastReviewSheetUnitIds = new Set((lastReviewSheetRes.data || []).map((r) => r.unit_id));
   const similarUnitIds = new Set((similarRes.data || []).map((r) => r.unit_id));
   const reviewContentUnitIds = new Set((reviewContentRes.data || []).map((r) => r.unit_id));
@@ -179,7 +184,7 @@ async function fetchNaesinTree(
             hasTextbookVideo: false,
             hasGrammar: unitGrammar.length > 0,
             hasProblem: problemUnitIds.has(u!.id),
-            hasMockExam: false,
+            hasMockExam: mockExamUnitIds.has(u!.id),
             hasLastReview: hasLastReview || !!a.exam_date,
           },
           vocabQuizSetCount: unitQuizSets.length,
