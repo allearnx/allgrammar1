@@ -12,32 +12,14 @@ import { ParentShareButton } from './parent-share-button';
 import { ImpersonateButton } from './impersonate-button';
 import { TextbookAssigner } from './textbook-assigner';
 import { getPlanContext } from '@/lib/billing/get-plan-context';
+import { fetchNaesinProgress } from '@/lib/naesin/fetch-naesin-progress';
+import { fetchVocaProgress } from '@/lib/voca/fetch-voca-progress';
 
 interface NaesinData {
   textbookId: string;
   textbookName: string;
   units: Pick<NaesinUnit, 'id' | 'unit_number' | 'title'>[];
   assignments: NaesinExamAssignment[];
-}
-
-interface VocaProgressRow {
-  day_id: string;
-  flashcard_completed: boolean;
-  quiz_score: number | null;
-  spelling_score: number | null;
-  matching_score: number | null;
-  matching_completed: boolean;
-  round2_flashcard_completed: boolean;
-  round2_quiz_score: number | null;
-  round2_matching_score: number | null;
-  round2_matching_completed: boolean;
-  updated_at: string;
-  day: {
-    id: string;
-    day_number: number;
-    title: string;
-    book: { id: string; title: string; sort_order: number } | null;
-  } | null;
 }
 
 interface Props {
@@ -57,16 +39,13 @@ export async function StudentDetail({ user, studentId, naesinData }: Props) {
 
   if (!student) notFound();
 
-  const [videoRes, naesinVideoRes, memoryRes, textbookRes, passageStagesRes, naesinProgressRes, vocaProgressRes, vocaAssignmentRes, naesinAssignmentRes, naesinTextbooksRes, fillBlanksAttemptsRes, problemSheetsRes, problemAttemptsRes] = await Promise.all([
+  // Fetch page-specific queries + shared voca progress in parallel
+  const [videoRes, memoryRes, textbookRes, passageStagesRes, vocaAssignmentRes, naesinAssignmentRes, naesinTextbooksRes, vocaProgress] = await Promise.all([
     admin
       .from('student_progress')
       .select('*, grammar:grammars(title, level:levels(level_number, title_ko))')
       .eq('student_id', studentId)
       .order('updated_at', { ascending: false }),
-    admin
-      .from('naesin_grammar_video_progress')
-      .select('cumulative_watch_seconds')
-      .eq('student_id', studentId),
     admin
       .from('student_memory_progress')
       .select('*, memory_item:memory_items(front_text, grammar:grammars(title))')
@@ -80,15 +59,6 @@ export async function StudentDetail({ user, studentId, naesinData }: Props) {
       .select('passage_required_stages, translation_sentences_per_page, enabled_stages')
       .eq('student_id', studentId)
       .single(),
-    admin
-      .from('naesin_student_progress')
-      .select('unit_id, vocab_completed, vocab_quiz_score, vocab_spelling_score, passage_completed, passage_fill_blanks_best, passage_ordering_best, passage_translation_best, passage_grammar_vocab_best, dialogue_ordering_best, dialogue_first_letter_best, dialogue_translation_best, dialogue_completed, grammar_completed, grammar_videos_completed, grammar_total_videos, problem_completed, total_learning_seconds, updated_at')
-      .eq('student_id', studentId),
-    admin
-      .from('voca_student_progress')
-      .select('day_id, flashcard_completed, quiz_score, spelling_score, matching_score, matching_completed, round2_flashcard_completed, round2_quiz_score, round2_matching_score, round2_matching_completed, updated_at, day:voca_days(id, day_number, title, book:voca_books(id, title, sort_order))')
-      .eq('student_id', studentId)
-      .returns<VocaProgressRow[]>(),
     admin
       .from('service_assignments')
       .select('id')
@@ -107,70 +77,26 @@ export async function StudentDetail({ user, studentId, naesinData }: Props) {
       .eq('is_active', true)
       .order('grade')
       .order('sort_order'),
-    admin
-      .from('naesin_passage_attempts')
-      .select('unit_id, difficulty, score')
-      .eq('student_id', studentId)
-      .eq('type', 'fill_blanks')
-      .not('difficulty', 'is', null),
-    admin
-      .from('naesin_problem_sheets')
-      .select('id, unit_id, title, sort_order, category')
-      .in('category', ['problem', 'mock_exam'])
-      .in('unit_id', (naesinData?.units || []).map((u) => u.id))
-      .order('sort_order'),
-    admin
-      .from('naesin_problem_attempts')
-      .select('sheet_id, score, total_questions')
-      .eq('student_id', studentId),
+    fetchVocaProgress(studentId),
   ]);
 
-  // Build fill_blanks difficulty best scores per unit
-  const fillBlanksByUnit: Record<string, Record<string, number>> = {};
-  for (const a of fillBlanksAttemptsRes.data || []) {
-    if (!a.difficulty) continue;
-    if (!fillBlanksByUnit[a.unit_id]) fillBlanksByUnit[a.unit_id] = {};
-    const cur = fillBlanksByUnit[a.unit_id][a.difficulty] ?? 0;
-    fillBlanksByUnit[a.unit_id][a.difficulty] = Math.max(cur, a.score);
-  }
+  const videoProgress = videoRes.data || [];
+  const memoryProgress = memoryRes.data || [];
+  const textbookProgress = textbookRes.data || [];
+  const completedVideos = videoProgress.filter((p) => p.video_completed).length;
+  const masteredMemory = memoryProgress.filter((p) => p.is_mastered).length;
 
-  // Build problem sheets by unit
-  const problemSheetsByUnit: Record<string, { id: string; title: string; category: string }[]> = {};
-  for (const s of problemSheetsRes.data || []) {
-    if (!problemSheetsByUnit[s.unit_id]) problemSheetsByUnit[s.unit_id] = [];
-    problemSheetsByUnit[s.unit_id].push({ id: s.id, title: s.title, category: s.category });
-  }
-
-  // Build problem attempts best score by sheet
-  const problemAttemptsBySheet: Record<string, { score: number; total: number; pct: number }> = {};
-  for (const a of problemAttemptsRes.data || []) {
-    const cur = problemAttemptsBySheet[a.sheet_id];
-    const pct = a.score ?? 0;
-    if (!cur || pct > cur.pct) {
-      problemAttemptsBySheet[a.sheet_id] = { score: a.score, total: a.total_questions, pct };
-    }
-  }
+  // Naesin progress (depends on videoRes for legacy watch seconds)
+  const legacyWatchedSeconds = videoProgress.reduce((a, p) => a + p.video_watched_seconds, 0);
+  const { naesinProgress, hours, minutes, fillBlanksByUnit, problemSheetsByUnit, problemAttemptsBySheet } = naesinData
+    ? await fetchNaesinProgress(studentId, naesinData, legacyWatchedSeconds)
+    : { naesinProgress: [], hours: 0, minutes: 0, fillBlanksByUnit: {}, problemSheetsByUnit: {}, problemAttemptsBySheet: {} };
 
   const passageStages = (passageStagesRes.data?.passage_required_stages as string[] | null) ?? ['fill_blanks', 'translation'];
   const translationSentencesPerPage = (passageStagesRes.data?.translation_sentences_per_page as number | null) ?? 10;
   const enabledStages = (passageStagesRes.data?.enabled_stages as string[] | null) ?? ['vocab', 'passage', 'dialogue', 'textbookVideo', 'grammar', 'problem', 'mockExam', 'lastReview'];
   const planContext = await getPlanContext(student.academy_id, studentId);
 
-  const videoProgress = videoRes.data || [];
-  const memoryProgress = memoryRes.data || [];
-  const textbookProgress = textbookRes.data || [];
-  const naesinProgress = naesinProgressRes.data || [];
-
-  const completedVideos = videoProgress.filter((p) => p.video_completed).length;
-  const masteredMemory = memoryProgress.filter((p) => p.is_mastered).length;
-  const legacyWatchedSeconds = videoProgress.reduce((a, p) => a + p.video_watched_seconds, 0);
-  const naesinWatchedSeconds = naesinVideoRes.data?.reduce((a, p) => a + (p.cumulative_watch_seconds || 0), 0) || 0;
-  const naesinSessionSeconds = naesinProgress.reduce((a, p) => a + (p.total_learning_seconds || 0), 0);
-  const totalWatchedSeconds = legacyWatchedSeconds + naesinWatchedSeconds + naesinSessionSeconds;
-  const hours = Math.floor(totalWatchedSeconds / 3600);
-  const minutes = Math.floor((totalWatchedSeconds % 3600) / 60);
-
-  const vocaProgress = vocaProgressRes.data || [];
   const hasVocaAssignment = !!vocaAssignmentRes.data;
   const hasNaesinAssignment = !!naesinAssignmentRes.data;
   const naesinTextbooks = naesinTextbooksRes.data || [];
@@ -204,20 +130,6 @@ export async function StudentDetail({ user, studentId, naesinData }: Props) {
 
         {/* 상세 리포트 패널 */}
         <StudentReportPanel studentId={studentId} services={detailServices} role={user.role} tier={planContext.tier} />
-
-        {/* 올킬보카 서비스 카드 */}
-        {hasVocaAssignment && (
-          <VocaProgressCard vocaProgress={vocaProgress} />
-        )}
-
-        {/* 교과서 배정 */}
-        {hasNaesinAssignment && (
-          <TextbookAssigner
-            studentId={studentId}
-            textbooks={naesinTextbooks}
-            currentTextbookName={naesinData?.textbookName}
-          />
-        )}
 
         {/* 내신 대비 서비스 카드 */}
         {naesinData && naesinUnits.length > 0 && (
@@ -274,6 +186,20 @@ export async function StudentDetail({ user, studentId, naesinData }: Props) {
               </div>
             </CardContent>
           </Card>
+        )}
+
+        {/* 올킬보카 서비스 카드 */}
+        {hasVocaAssignment && (
+          <VocaProgressCard vocaProgress={vocaProgress} />
+        )}
+
+        {/* 교과서 배정 */}
+        {hasNaesinAssignment && (
+          <TextbookAssigner
+            studentId={studentId}
+            textbooks={naesinTextbooks}
+            currentTextbookName={naesinData?.textbookName}
+          />
         )}
       </div>
     </>

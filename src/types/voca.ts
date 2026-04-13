@@ -107,6 +107,31 @@ export interface VocaMatchingSubmission {
 // 서비스 배정
 // ============================================
 
+/** Supabase JOIN shape: voca_student_progress + voca_days + voca_books */
+export interface VocaProgressRow {
+  day_id: string;
+  flashcard_completed: boolean;
+  quiz_score: number | null;
+  spelling_score: number | null;
+  matching_score: number | null;
+  matching_completed: boolean;
+  round2_flashcard_completed: boolean;
+  round2_quiz_score: number | null;
+  round2_matching_score: number | null;
+  round2_matching_completed: boolean;
+  updated_at: string;
+  day: {
+    id: string;
+    day_number: number;
+    title: string;
+    book: { id: string; title: string; sort_order: number } | null;
+  } | null;
+}
+
+// ============================================
+// 서비스 배정
+// ============================================
+
 export type ServiceType = 'naesin' | 'voca';
 
 export interface ServiceAssignment {
