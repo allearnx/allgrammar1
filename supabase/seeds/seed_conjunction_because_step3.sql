@@ -3,7 +3,7 @@ DECLARE
   q jsonb;
   a jsonb;
 BEGIN
-  DELETE FROM naesin_templates WHERE title = '접속사because Step 3';
+  DELETE FROM naesin_templates WHERE title = '접속사 because Step 3';
 
   q := jsonb_build_array(
     -- ═══════════════════════════════════════════
@@ -227,6 +227,6 @@ jsonb_build_object('number',30,
   a := jsonb_build_array();
 
   INSERT INTO naesin_templates (title, template_topic, category, mode, questions, answer_key)
-  VALUES ('접속사because Step 3', '접속사because', 'problem', 'interactive', q, a);
+  VALUES ('접속사 because Step 3', '접속사 because', 'problem', 'interactive', q, a);
 END;
 $$;
