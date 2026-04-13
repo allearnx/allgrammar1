@@ -229,7 +229,7 @@ function ReadOnlyWrongAnswerCard({
 }) {
   const data = wrongAnswer.question_data as Record<string, unknown>;
   const [dialogOpen, setDialogOpen] = useState(false);
-  const [newAnswer, setNewAnswer] = useState(String(data.correctAnswer || ''));
+  const [newAnswer, setNewAnswer] = useState(extractAnswer(data.correctAnswer));
   const [submitting, setSubmitting] = useState(false);
 
   const options = data.options as string[] | undefined;
@@ -424,7 +424,7 @@ function ReadOnlyWrongAnswerCard({
                     size="sm"
                     className="h-5 px-1.5 text-xs text-muted-foreground"
                     onClick={() => {
-                      setNewAnswer(String(data.correctAnswer || ''));
+                      setNewAnswer(extractAnswer(data.correctAnswer));
                       setDialogOpen(true);
                     }}
                   >
