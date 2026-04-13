@@ -1,5 +1,5 @@
 import { createAdminClient } from '@/lib/supabase/admin';
-import { normalize, matchMcqAnswer } from '@/lib/naesin/normalize-answer';
+import { normalize, matchMcqAnswer, extractAnswer } from '@/lib/naesin/normalize-answer';
 
 /**
  * 시트 1개를 재채점하고 오답 테이블을 갱신한다.
@@ -52,7 +52,7 @@ export async function regradeSheet(
 
     for (let i = 0; i < totalQuestions; i++) {
       const userAnswer = String(answers[i] ?? '');
-      const correctAnswer = String(answerKey[i] ?? '');
+      const correctAnswer = extractAnswer(answerKey[i]);
       const isSubjective =
         !questions?.[i]?.options || questions[i].options!.length === 0;
 
@@ -75,7 +75,7 @@ export async function regradeSheet(
         wrongAnswers.push({
           number: i + 1,
           userAnswer: (answers[i] as string | number) ?? '',
-          correctAnswer: answerKey[i] ?? '',
+          correctAnswer,
           question: questions?.[i]?.question,
         });
       }
@@ -149,7 +149,7 @@ export async function regradeSheet(
         const i = Number(idxStr);
         if (i < 0 || i >= answerKey.length) continue;
 
-        const correctAnswer = String(answerKey[i] ?? '');
+        const correctAnswer = extractAnswer(answerKey[i]);
         const q = questions?.[i];
         const isSubjective = !q?.options || q.options.length === 0;
 
@@ -174,7 +174,7 @@ export async function regradeSheet(
           newWrongList.push({
             number: q?.number ?? i + 1,
             userAnswer,
-            correctAnswer: answerKey[i],
+            correctAnswer: extractAnswer(answerKey[i]),
             question: q?.question ?? '',
             ...(aiResultsMap[idxStr] ? { aiFeedback: aiResultsMap[idxStr] } : {}),
           });
