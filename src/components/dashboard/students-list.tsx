@@ -10,6 +10,7 @@ import { ServiceAssignmentToggle } from './service-assignment-toggle';
 import { StudentsToolbar } from './students-toolbar';
 import { StudentDeleteButton } from './student-delete-button';
 import { StudentSearchInput } from './student-search-input';
+import { AddStudentDialog } from './add-student-dialog';
 import { getPlanContext } from '@/lib/billing/get-plan-context';
 import { canUseFeature, isServiceAllowed } from '@/lib/billing/feature-gate';
 import type { AuthUser } from '@/types/auth';
@@ -260,11 +261,20 @@ export async function StudentsList({ user, basePath, searchQuery }: Props) {
           );
         })}
         {(!students || students.length === 0) && (
-          <div className="flex flex-col items-center py-12">
-            <Users className="h-10 w-10 text-muted-foreground/30 mb-2" />
-            <p className="text-center text-muted-foreground">
-              등록된 학생이 없습니다.
+          <div
+            className="flex flex-col items-center py-12 px-4 rounded-2xl"
+            style={{ background: 'linear-gradient(120deg, #F5F3FF, #EDE9FE)' }}
+          >
+            <div className="rounded-full bg-white/60 p-4 mb-3">
+              <Users className="h-8 w-8 text-violet-500" />
+            </div>
+            <p className="text-center text-gray-700 font-semibold mb-1">
+              아직 등록된 학생이 없습니다
             </p>
+            <p className="text-center text-sm text-muted-foreground mb-5">
+              학생을 한 명 추가해서 바로 시작해보세요
+            </p>
+            {canManageServices && <AddStudentDialog variant="cta" label="첫 학생 추가하기" />}
           </div>
         )}
       </div>

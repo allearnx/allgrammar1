@@ -12,6 +12,7 @@ import {
 import { Download, UserPlus, ChevronDown, Lock } from 'lucide-react';
 import { toast } from 'sonner';
 import { BulkImportDialog } from './bulk-import-dialog';
+import { AddStudentDialog } from './add-student-dialog';
 
 interface Props {
   studentIds: string[];
@@ -72,6 +73,8 @@ export function StudentsToolbar({ studentIds, studentCount, bulkAllowed = true }
         총 <span className="font-semibold text-gray-800">{studentCount}</span>명의 학생
       </p>
       <div className="flex flex-wrap items-center gap-2">
+        <AddStudentDialog />
+
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <button

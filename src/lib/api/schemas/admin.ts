@@ -65,6 +65,13 @@ export const studentBulkImportSchema = z.object({
   services: z.array(z.enum(['naesin', 'voca'])).nullish(),
 });
 
+export const studentAddSchema = z.object({
+  full_name: z.string().min(1).max(100),
+  email: z.string().email().max(200),
+  phone: z.string().max(20).optional().or(z.literal('')),
+  services: z.array(z.enum(['naesin', 'voca'])).optional(),
+});
+
 export const studentBulkAssignSchema = z.object({
   studentIds: z.array(ID).min(1).max(100),
   services: z.array(z.enum(['naesin', 'voca'])).min(1),

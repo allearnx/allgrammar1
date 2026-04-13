@@ -5,20 +5,20 @@ import { Card, CardContent } from '@/components/ui/card';
 import { fetchWithToast } from '@/lib/fetch-with-toast';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-} from '@/components/ui/alert-dialog';
-import { CheckCircle, PlayCircle, FileText, GraduationCap, Bot } from 'lucide-react';
+// import {
+//   AlertDialog,
+//   AlertDialogAction,
+//   AlertDialogContent,
+//   AlertDialogDescription,
+//   AlertDialogFooter,
+//   AlertDialogHeader,
+//   AlertDialogTitle,
+// } from '@/components/ui/alert-dialog';
+import { CheckCircle, PlayCircle, FileText, GraduationCap } from 'lucide-react';
 import { toast } from 'sonner';
 import { StageProgressBar } from '../stage-progress-bar';
 import { NaesinYouTubePlayerTracked } from './youtube-player';
-import { SocraticChatbot } from './socratic-chatbot';
+// import { SocraticChatbot } from './socratic-chatbot';
 import type { NaesinGrammarLesson, NaesinGrammarVideoProgress } from '@/types/database';
 
 interface GrammarTabProps {
@@ -43,7 +43,7 @@ export function GrammarTab({ lessons, unitId, onStageComplete, videoProgress }: 
     });
     return map;
   });
-  const [showTutorPopup, setShowTutorPopup] = useState(false);
+  // const [showTutorPopup, setShowTutorPopup] = useState(false);
 
   if (lessons.length === 0) {
     return (
@@ -79,7 +79,7 @@ export function GrammarTab({ lessons, unitId, onStageComplete, videoProgress }: 
     setWatchPercents((prev) => ({ ...prev, [lessonId]: percent }));
     if (completed && !completedIds.has(lessonId)) {
       setCompletedIds((prev) => new Set(prev).add(lessonId));
-      setShowTutorPopup(true);
+      // setShowTutorPopup(true);
       // Check if all videos are complete
       const newCompleted = new Set(completedIds).add(lessonId);
       const videoLessons = lessons.filter((l) => l.content_type === 'video');
@@ -109,6 +109,7 @@ export function GrammarTab({ lessons, unitId, onStageComplete, videoProgress }: 
         ))}
       </div>
 
+      {/* AI 튜터 팝업 숨김
       <AlertDialog open={showTutorPopup} onOpenChange={setShowTutorPopup}>
         <AlertDialogContent>
           <AlertDialogHeader>
@@ -129,6 +130,7 @@ export function GrammarTab({ lessons, unitId, onStageComplete, videoProgress }: 
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
+      */}
     </>
   );
 }
@@ -211,7 +213,7 @@ function GrammarLessonCard({
           <p className="text-sm text-muted-foreground">콘텐츠가 없습니다.</p>
         )}
 
-        <SocraticChatbot lessonId={lesson.id} lessonTitle={lesson.title} />
+        {/* <SocraticChatbot lessonId={lesson.id} lessonTitle={lesson.title} /> */}
       </CardContent>
     </Card>
   );

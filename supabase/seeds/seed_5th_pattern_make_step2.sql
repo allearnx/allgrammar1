@@ -227,7 +227,7 @@ BEGIN
       'options',jsonb_build_array(
         E'A: What''s the matter?\nB: The presentation <u>makes</u> me a bit anxious.',
         E'A: You always <u>make</u> me concerned.\nB: I''m sorry, I won''t do it again.',
-        'A: The weather keeps changing. I feel gloomy.\nB: It <u>makes</u> me gloomy, too.',
+        E'A: The weather keeps changing. I feel gloomy.\nB: It <u>makes</u> me gloomy, too.',
         E'A: Hey! How was your day?\nB: I had so many tasks. That <u>makes</u> me exhausted.',
         E'A: Tomorrow is Jisu''s birthday.\nB: Right, I''ll <u>make</u> her a card.'),
       'answer','5'),
