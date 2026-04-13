@@ -22,6 +22,8 @@ interface MCQOptionListProps {
   onToggle?: (value: string) => void;
   /** multiSelect 모드에서 제출 */
   onSubmit?: () => void;
+  /** 자동 제출용: 선택해야 할 정답 개수 (설정 시 해당 개수 클릭하면 자동 제출, 제출 버튼 숨김) */
+  expectedCount?: number;
 }
 
 export function MCQOptionList({
@@ -36,6 +38,7 @@ export function MCQOptionList({
   selectedValues = [],
   onToggle,
   onSubmit,
+  expectedCount,
 }: MCQOptionListProps) {
   // 정답이 옵션 번호가 아닌 텍스트인 경우 번호로 변환
   const resolved = resolveCorrectIndex(String(correctAnswer), options);
@@ -113,13 +116,19 @@ export function MCQOptionList({
       })}
 
       {multiSelect && !showResult && (
-        <Button
-          onClick={onSubmit}
-          disabled={selectedValues.length === 0}
-          className="mt-2"
-        >
-          제출 ({selectedValues.length}개 선택)
-        </Button>
+        expectedCount ? (
+          <p className="text-center text-sm text-muted-foreground mt-2">
+            {selectedValues.length}/{expectedCount}개 선택 {selectedValues.length < expectedCount && `(${expectedCount}개를 선택하면 자동 제출)`}
+          </p>
+        ) : (
+          <Button
+            onClick={onSubmit}
+            disabled={selectedValues.length === 0}
+            className="mt-2"
+          >
+            제출 ({selectedValues.length}개 선택)
+          </Button>
+        )
       )}
     </div>
   );

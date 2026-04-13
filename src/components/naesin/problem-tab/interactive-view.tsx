@@ -103,7 +103,7 @@ export function InteractiveProblemView({
     wrongList, isGrading, isCurrentCorrect,
     question, isSubjective, isMultiSelect, multiSelectedValues, remaining, isReady,
     handleSelect, handleMultiToggle, handleMultiSubmit, handleNext, handleMidSave, isMidSaving, answersMap,
-    submitFailed, retrySubmit,
+    submitFailed, retrySubmit, multiExpectedCount,
   } = useInteractiveProblem({ sheetId: sheet.id, questions, unitId, onComplete });
   const [isRetrying, setIsRetrying] = useState(false);
 
@@ -202,6 +202,7 @@ export function InteractiveProblemView({
           selectedValues={multiSelectedValues}
           onToggle={handleMultiToggle}
           onSubmit={handleMultiSubmit}
+          expectedCount={multiExpectedCount}
         />
       ) : question.subParts ? (
         <MultiPartInput

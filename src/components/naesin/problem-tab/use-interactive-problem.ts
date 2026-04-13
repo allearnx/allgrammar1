@@ -127,7 +127,8 @@ export function useInteractiveProblem({
 
   const question = questions[currentIndex];
   const isSubjective = !question?.options || question.options.length === 0;
-  const isMultiSelect = !isSubjective && String(question.answer).includes(',');
+  const answerHasComma = String(question?.answer).includes(',');
+  const isMultiSelect = !isSubjective && (answerHasComma || /모두\s*고르/.test(question?.question ?? ''));
   const minTime = isSubjective ? SUBJECTIVE_MIN_TIME : MCQ_MIN_TIME;
   const { remaining, isExpired: isReady, reset: resetTimer, pause: pauseTimer } = useQuestionTimer(minTime);
 
@@ -263,17 +264,24 @@ export function useInteractiveProblem({
     }
   }
 
+  // 정답에 쉼표가 있으면 개수 확정 → 자동 제출, 없으면(정답 1개 모두고르기) 0 → 수동 제출 버튼
+  const multiExpectedCount = isMultiSelect && answerHasComma ? String(question.answer).split(',').length : 0;
+
   function handleMultiToggle(value: string) {
     if (showResult) return;
-    setMultiSelectedValues((prev) =>
-      prev.includes(value) ? prev.filter((v) => v !== value) : [...prev, value]
-    );
+    const newValues = multiSelectedValues.includes(value)
+      ? multiSelectedValues.filter((v) => v !== value)
+      : [...multiSelectedValues, value];
+    setMultiSelectedValues(newValues);
+
+    // Auto-submit when expected count reached
+    if (newValues.length === multiExpectedCount) {
+      submitMultiValues(newValues);
+    }
   }
 
-  function handleMultiSubmit() {
-    if (showResult || multiSelectedValues.length === 0) return;
-    const sortedAnswer = [...multiSelectedValues].sort((a, b) => Number(a) - Number(b)).join(', ');
-    // Normalize correct answer for comparison
+  function submitMultiValues(values: string[]) {
+    const sortedAnswer = [...values].sort((a, b) => Number(a) - Number(b)).join(', ');
     const correctParts = String(question.answer).split(',').map((s) => s.trim()).sort((a, b) => Number(a) - Number(b));
     const normalizedCorrect = correctParts.join(', ');
 
@@ -285,6 +293,11 @@ export function useInteractiveProblem({
     setShowResult(true);
     const { newScore, newWrongList } = applyResult(correct, sortedAnswer, question);
     finishOrSave(isLast, sortedAnswer, newScore, newWrongList, aiResultsMap);
+  }
+
+  function handleMultiSubmit() {
+    if (showResult || multiSelectedValues.length === 0) return;
+    submitMultiValues(multiSelectedValues);
   }
 
   function handleNext() {
@@ -417,5 +430,6 @@ export function useInteractiveProblem({
     answersMap,
     submitFailed,
     retrySubmit,
+    multiExpectedCount,
   };
 }
