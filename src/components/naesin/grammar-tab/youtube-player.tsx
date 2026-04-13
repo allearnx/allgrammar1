@@ -4,7 +4,7 @@ import { useEffect, useRef, useCallback } from 'react';
 import { loadYouTubeAPI } from '@/lib/youtube/player-api';
 import type { NaesinGrammarVideoProgress } from '@/types/database';
 
-const SAVE_INTERVAL_MS = 30000; // 30 seconds
+const SAVE_INTERVAL_MS = 10000; // 10 seconds
 const COMPLETION_THRESHOLD = 80;
 
 export function NaesinYouTubePlayerTracked({
