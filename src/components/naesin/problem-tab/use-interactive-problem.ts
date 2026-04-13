@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { toast } from 'sonner';
 import { fetchWithToast } from '@/lib/fetch-with-toast';
 import type { NaesinProblemQuestion } from '@/types/database';
@@ -55,6 +55,55 @@ export function useInteractiveProblem({
     return d?.mode === 'interactive' ? (d.answersMap ?? {}) : {};
   });
 
+  // ── Auto-save to server: ref for latest state ──
+  const draftStateRef = useRef({ currentIndex, score, wrongList, aiResultsMap, overtimeQuestions, answersMap });
+  useEffect(() => {
+    draftStateRef.current = { currentIndex, score, wrongList, aiResultsMap, overtimeQuestions, answersMap };
+  }, [currentIndex, score, wrongList, aiResultsMap, overtimeQuestions, answersMap]);
+
+  // ── Auto-save to server on tab close / visibility hidden ──
+  useEffect(() => {
+    function flushDraftToServer() {
+      const state = draftStateRef.current;
+      const answered = Object.keys(state.answersMap).length;
+      if (answered === 0) return;
+      const payload = JSON.stringify({
+        sheetId,
+        unitId,
+        draftData: {
+          mode: 'interactive',
+          version: 1,
+          sheetId,
+          questionCount: questions.length,
+          savedAt: new Date().toISOString(),
+          currentIndex: state.currentIndex,
+          score: state.score,
+          wrongList: state.wrongList,
+          aiResultsMap: state.aiResultsMap,
+          answeredUpTo: state.currentIndex,
+          overtimeQuestions: state.overtimeQuestions,
+          answersMap: state.answersMap,
+        },
+        answeredCount: answered,
+      });
+      navigator.sendBeacon(
+        '/api/naesin/problems/draft/save',
+        new Blob([payload], { type: 'application/json' }),
+      );
+    }
+
+    function handleVisibility() {
+      if (document.visibilityState === 'hidden') flushDraftToServer();
+    }
+
+    window.addEventListener('beforeunload', flushDraftToServer);
+    document.addEventListener('visibilitychange', handleVisibility);
+    return () => {
+      window.removeEventListener('beforeunload', flushDraftToServer);
+      document.removeEventListener('visibilitychange', handleVisibility);
+    };
+  }, [sheetId, unitId, questions.length]);
+
   // Load server draft on mount (use server if newer than localStorage)
   useEffect(() => {
     let cancelled = false;
@@ -106,8 +155,8 @@ export function useInteractiveProblem({
     newOvertimeQuestions?: number[],
     newAnswersMap?: Record<number, string | number>,
   ) {
-    saveDraft({
-      mode: 'interactive',
+    const draftInput = {
+      mode: 'interactive' as const,
       currentIndex,
       score: newScore,
       wrongList: newWrongList,
@@ -115,7 +164,14 @@ export function useInteractiveProblem({
       answeredUpTo: currentIndex,
       overtimeQuestions: newOvertimeQuestions ?? overtimeQuestions,
       answersMap: newAnswersMap ?? answersMap,
-    });
+    };
+    saveDraft(draftInput);
+
+    // Auto-save to server every 5 questions
+    const answered = Object.keys(newAnswersMap ?? answersMap).length;
+    if (answered > 0 && answered % 5 === 0) {
+      saveServerDraft(draftInput, unitId);
+    }
   }
 
   function applyResult(
