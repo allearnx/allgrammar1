@@ -172,7 +172,7 @@ async function fetchProblemData(supabase: SupabaseClient, unitId: string, userId
       .from('naesin_problem_sheets')
       .select('*')
       .eq('unit_id', unitId)
-      .eq('category', 'problem')
+      .in('category', ['problem', 'external_passage', 'eng_eng_def'])
       .order('sort_order'),
     userId
       ? supabase

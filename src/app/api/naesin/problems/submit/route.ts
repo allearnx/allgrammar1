@@ -124,14 +124,15 @@ export const POST = createApiHandler(
     // Update progress: mark completed only when all sheets in the unit have been attempted
     if (unitId) {
       const isMockExam = sheet.category === 'mock_exam';
-      const targetCategory = isMockExam ? 'mock_exam' : 'problem';
+      const problemGroupCategories = ['problem', 'external_passage', 'eng_eng_def'];
+      const targetCategories = isMockExam ? ['mock_exam'] : problemGroupCategories;
       const progressField = isMockExam ? 'mock_exam_completed' : 'problem_completed';
 
       const { data: allSheets } = await supabase
         .from('naesin_problem_sheets')
         .select('id')
         .eq('unit_id', unitId)
-        .eq('category', targetCategory);
+        .in('category', targetCategories);
       const sheetIds = (allSheets || []).map((s) => s.id);
 
       const { data: attemptRows } = await supabase

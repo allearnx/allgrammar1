@@ -6,6 +6,7 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Switch } from '@/components/ui/switch';
+import { extractAnswer } from '@/lib/naesin/normalize-answer';
 import {
   Dialog,
   DialogContent,
@@ -322,14 +323,14 @@ function ReadOnlyWrongAnswerCard({
             {data.type === 'fill_blank' ? (
               <>
                 <p className="text-red-500">학생 답: {String(data.userAnswer || '-')}</p>
-                <p className="text-green-600">정답: {String(data.correctAnswer)}</p>
+                <p className="text-green-600">정답: {extractAnswer(data.correctAnswer)}</p>
               </>
             ) : null}
             {data.type === 'translation' ? (
               <>
                 <p className="text-muted-foreground">{String(data.koreanText || '')}</p>
                 <p className="text-red-500">학생 답: {String(data.userAnswer || '-')}</p>
-                {data.correctAnswer ? <p className="text-green-600">정답: {String(data.correctAnswer)}</p> : null}
+                {data.correctAnswer ? <p className="text-green-600">정답: {extractAnswer(data.correctAnswer)}</p> : null}
                 {data.feedback ? <p className="text-sm">{String(data.feedback)}</p> : null}
               </>
             ) : null}
@@ -343,7 +344,7 @@ function ReadOnlyWrongAnswerCard({
               <>
                 <p className="text-muted-foreground">{String(data.koreanText || '')}</p>
                 <p className="text-red-500">학생 답: {String(data.userAnswer || '-')}</p>
-                <p className="text-green-600">정답: {String(data.correctAnswer)}</p>
+                <p className="text-green-600">정답: {extractAnswer(data.correctAnswer)}</p>
               </>
             ) : null}
             {data.type === 'grammar_vocab' ? (
@@ -364,13 +365,13 @@ function ReadOnlyWrongAnswerCard({
                 <p className="font-medium">{String(data.front_text)}</p>
                 <p className="text-muted-foreground">{String(data.back_text)}</p>
                 <p className="text-red-500">학생 답: {String(data.userAnswer || '-')}</p>
-                <p className="text-green-600">정답: {String(data.correctAnswer)}</p>
+                <p className="text-green-600">정답: {extractAnswer(data.correctAnswer)}</p>
               </>
             ) : null}
             {data.number && data.type !== 'fill_blank' && data.type !== 'translation' && data.type !== 'ordering' && data.type !== 'first_letter' && data.type !== 'grammar_vocab' ? (
               <>
                 <p className="text-red-500">학생 답: {String(data.userAnswer || '-')}</p>
-                <p className="text-green-600">정답: {String(data.correctAnswer)}</p>
+                <p className="text-green-600">정답: {extractAnswer(data.correctAnswer)}</p>
               </>
             ) : null}
             {options && options.length > 0 && (
@@ -396,7 +397,9 @@ function ReadOnlyWrongAnswerCard({
               )}
               {!isDraft && (
                 <Badge variant="secondary" className="text-xs">
-                  {wrongAnswer.source_type}
+                  {wrongAnswer.source_type === 'external_passage' ? '외부지문'
+                    : wrongAnswer.source_type === 'eng_eng_def' ? '영영풀이'
+                    : wrongAnswer.source_type}
                 </Badge>
               )}
               {wrongAnswer.resolved && (

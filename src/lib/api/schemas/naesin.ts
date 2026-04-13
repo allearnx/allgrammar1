@@ -399,6 +399,30 @@ export const aiProblemImproveSchema = z.object({
   sheetId: ID,
 });
 
+export const engEngDefGenerateSchema = z.object({
+  title: SHORT,
+  words: z.array(z.object({
+    english: z.string().min(1).max(100),
+    korean: z.string().min(1).max(200),
+  })).min(1).max(100),
+  mcqCount: z.number().int().min(0).max(50).default(10),
+  writingCount: z.number().int().min(0).max(30).default(5),
+  contextCount: z.number().int().min(0).max(30).default(5),
+});
+
+export const passageSubmitSchema = z.object({
+  sheetId: ID,
+  unitId: ID,
+  orderingScore: z.number().min(0).max(100),
+  translationScore: z.number().min(0).max(100),
+  wrongSentences: z.array(z.object({
+    number: z.number(),
+    type: z.enum(['ordering', 'translation']),
+    userAnswer: z.string(),
+    correctAnswer: z.string(),
+  })).default([]),
+});
+
 export const problemCopySchema = z.object({
   sourceSheetId: ID,
   targetUnitIds: z.array(ID).min(1).max(50),

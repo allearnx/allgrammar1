@@ -8,6 +8,7 @@ import { cn } from '@/lib/utils';
 import { getEncouragement } from '@/lib/naesin/encouragement';
 import { InteractiveProblemView } from './interactive-view';
 import { ImageAnswerView } from './image-answer-view';
+import { ExternalPassageView } from './external-passage-view';
 import type { NaesinProblemSheet } from '@/types/database';
 
 interface LastAttempt {
@@ -86,6 +87,13 @@ export function ProblemTab({ sheets, unitId, onStageComplete, bestScoreBySheet, 
 
       {showSummary ? (
         <AttemptSummary attempt={lastAttempt} onRetry={handleRetry} />
+      ) : activeSheet.category === 'external_passage' ? (
+        <ExternalPassageView
+          key={activeSheet.id}
+          sheet={activeSheet}
+          unitId={unitId}
+          onComplete={onStageComplete}
+        />
       ) : activeSheet.mode === 'interactive' ? (
         <InteractiveProblemView
           key={activeSheet.id}

@@ -16,7 +16,7 @@ import {
 import { Collapsible, CollapsibleTrigger, CollapsibleContent } from '@/components/ui/collapsible';
 import { ConfirmDialog } from '@/components/shared/confirm-dialog';
 import { AddVocabDialog, BulkVocabUpload, PdfVocabExtract } from './vocab-dialogs';
-import { AddPassageDialog, AddDialogueDialog, AddGrammarDialog, AddOmrDialog, AddProblemDialog, AddLastReviewDialog, BulkOmrUploadDialog, BulkProblemUploadDialog, PdfProblemExtractDialog, AddTextbookVideoDialog, AddMockExamDialog, AiProblemGenerateDialog, ImportTemplateDialog, BulkPassageUploadDialog, BulkDialogueUploadDialog } from './content-dialogs';
+import { AddPassageDialog, AddDialogueDialog, AddGrammarDialog, AddOmrDialog, AddProblemDialog, AddLastReviewDialog, BulkOmrUploadDialog, BulkProblemUploadDialog, PdfProblemExtractDialog, AddTextbookVideoDialog, AddMockExamDialog, AiProblemGenerateDialog, ImportTemplateDialog, BulkPassageUploadDialog, BulkDialogueUploadDialog, CreateEngEngDefDialog, CreateExternalPassageDialog } from './content-dialogs';
 import { VocabQuizSetManager } from './quiz-set-manager';
 import { UnitVocabList } from './unit-vocab-list';
 import { UnitPassageList } from './unit-passage-list';
@@ -196,6 +196,8 @@ export function UnitContentManager({ unitId }: { unitId: string }) {
           <BulkProblemUploadDialog unitId={unitId} onAdd={refresh} />
           <PdfProblemExtractDialog unitId={unitId} onAdd={refresh} />
           <AiProblemGenerateDialog unitId={unitId} onAdd={refresh} />
+          <CreateEngEngDefDialog unitId={unitId} onAdd={refresh} />
+          <CreateExternalPassageDialog unitId={unitId} onAdd={refresh} />
           <ImportTemplateDialog unitId={unitId} onAdd={refresh} />
         </CollapsibleButtonGroup>
       </div>

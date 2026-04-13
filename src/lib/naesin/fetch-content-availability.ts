@@ -43,7 +43,7 @@ export async function fetchContentAvailability(
     supabase.from('naesin_dialogues').select('id', { count: 'exact', head: true }).eq('unit_id', unitId),
     supabase.from('naesin_grammar_lessons').select('id, content_type').eq('unit_id', unitId),
     supabase.from('naesin_textbook_videos').select('id', { count: 'exact', head: true }).eq('unit_id', unitId),
-    supabase.from('naesin_problem_sheets').select('id').eq('unit_id', unitId).eq('category', 'problem'),
+    supabase.from('naesin_problem_sheets').select('id').eq('unit_id', unitId).in('category', ['problem', 'external_passage', 'eng_eng_def']),
     supabase.from('naesin_problem_sheets').select('id', { count: 'exact', head: true }).eq('unit_id', unitId).eq('category', 'mock_exam'),
     supabase.from('naesin_problem_sheets').select('id', { count: 'exact', head: true }).eq('unit_id', unitId).eq('category', 'last_review'),
     supabase.from('naesin_similar_problems').select('id', { count: 'exact', head: true }).eq('unit_id', unitId).eq('status', 'approved'),

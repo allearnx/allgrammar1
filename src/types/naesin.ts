@@ -293,7 +293,7 @@ export interface NaesinGrammarVideoProgress {
 }
 
 export type NaesinProblemMode = 'interactive' | 'image_answer';
-export type NaesinProblemCategory = 'problem' | 'last_review' | 'mock_exam';
+export type NaesinProblemCategory = 'problem' | 'last_review' | 'mock_exam' | 'external_passage' | 'eng_eng_def';
 
 export interface NaesinProblemSheet {
   id: string;
@@ -338,6 +338,14 @@ export interface NaesinProblemQuestion {
   acceptedAnswers?: string[];
   imageUrl?: string;
   subParts?: SubPart[];
+}
+
+export interface ExternalPassageSentence {
+  number: number;
+  original: string;
+  korean: string;
+  words: string[];
+  acceptedAnswers?: string[];
 }
 
 export interface NaesinProblemAttempt {

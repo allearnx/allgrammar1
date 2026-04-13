@@ -240,8 +240,11 @@ export function NaesinProgressCard({
                       )}
                       {unitSheets.map((sheet, idx) => {
                         const attempt = problemAttemptsBySheet?.[sheet.id];
-                        const isMockExam = sheet.category === 'mock_exam';
-                        const fallback = isMockExam ? '예상문제' : unitSheets.length > 1 ? `문제${idx + 1}` : '문제';
+                        const categoryLabel = sheet.category === 'mock_exam' ? '예상문제'
+                          : sheet.category === 'external_passage' ? '외부지문'
+                          : sheet.category === 'eng_eng_def' ? '영영풀이'
+                          : unitSheets.length > 1 ? `문제${idx + 1}` : '문제';
+                        const fallback = categoryLabel;
                         const label = sheet.title || fallback;
                         if (attempt) {
                           return (

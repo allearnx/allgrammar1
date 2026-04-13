@@ -75,8 +75,9 @@ export function TemplateLibraryClient() {
     const q = search.toLowerCase();
     const result: Record<string, TemplateItem[]> = {};
     for (const [topic, items] of Object.entries(grouped)) {
+      const categoryLabels: Record<string, string> = { external_passage: '외부지문', eng_eng_def: '영영풀이' };
       const matched = items.filter(
-        (t) => t.title.toLowerCase().includes(q) || topic.toLowerCase().includes(q)
+        (t) => t.title.toLowerCase().includes(q) || topic.toLowerCase().includes(q) || (categoryLabels[t.category] || '').includes(q)
       );
       if (matched.length > 0) result[topic] = matched;
     }
@@ -162,6 +163,12 @@ export function TemplateLibraryClient() {
                                 <p className="text-sm font-medium truncate">{tmpl.title}</p>
                               </div>
                               <div className="flex items-center gap-1.5 shrink-0">
+                                {tmpl.category === 'external_passage' && (
+                                  <Badge className="text-xs bg-orange-100 text-orange-700 dark:bg-orange-900 dark:text-orange-300">외부지문</Badge>
+                                )}
+                                {tmpl.category === 'eng_eng_def' && (
+                                  <Badge className="text-xs bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-300">영영풀이</Badge>
+                                )}
                                 <Badge variant="secondary" className="text-xs">{qCount}문제</Badge>
                                 {mcqCount > 0 && <Badge variant="outline" className="text-xs">객관식 {mcqCount}</Badge>}
                                 {subCount > 0 && <Badge variant="outline" className="text-xs">서술형 {subCount}</Badge>}

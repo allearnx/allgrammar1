@@ -62,7 +62,7 @@ export async function fetchNaesinProgress(
     admin
       .from('naesin_problem_sheets')
       .select('id, unit_id, title, sort_order, category')
-      .in('category', ['problem', 'mock_exam'])
+      .in('category', ['problem', 'mock_exam', 'external_passage', 'eng_eng_def'])
       .in('unit_id', unitIds)
       .order('sort_order'),
     admin

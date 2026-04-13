@@ -18,3 +18,5 @@ export { EditTemplateDialog } from './edit-template-dialog';
 export { BulkPassageUploadDialog } from './bulk-passage-upload-dialog';
 export { BulkDialogueUploadDialog } from './bulk-dialogue-upload-dialog';
 export { TemplateCopiesDialog } from './template-copies-dialog';
+export { CreateEngEngDefDialog } from './create-eng-eng-def-dialog';
+export { CreateExternalPassageDialog } from './create-external-passage-dialog';

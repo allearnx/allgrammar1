@@ -1,3 +1,17 @@
+/**
+ * answer_key 항목이 객체({ answer, number })일 때 answer 문자열만 추출.
+ * 문자열/숫자면 그대로, 그 외는 빈 문자열 반환.
+ */
+export function extractAnswer(val: unknown): string {
+  if (val == null) return '';
+  if (typeof val === 'string') return val;
+  if (typeof val === 'number') return String(val);
+  if (typeof val === 'object' && 'answer' in (val as Record<string, unknown>)) {
+    return String((val as Record<string, unknown>).answer ?? '');
+  }
+  return '';
+}
+
 /** 정규화: 대소문자 무시, 앞뒤 공백, 끝 마침표, 연속 공백 → 단일 공백 */
 export function normalize(s: string): string {
   return s
