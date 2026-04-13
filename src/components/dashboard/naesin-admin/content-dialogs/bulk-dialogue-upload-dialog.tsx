@@ -67,10 +67,22 @@ export function parseDialogueBlocks(text: string): { dialogues: ParsedDialogue[]
 
     const sentences: { original: string; korean: string; speaker?: string }[] = [];
     for (let i = 0; i + 1 < contentLines.length; i += 2) {
-      const { speaker, text: originalText } = parseSpeaker(contentLines[i]);
+      let line1 = contentLines[i];
+      let line2 = contentLines[i + 1];
+
+      // 자동 언어 감지: 첫 줄이 한글이고 둘째 줄이 영어면 스왑
+      if (/[가-힣]/.test(line1) && !/[가-힣]/.test(line2)) {
+        [line1, line2] = [line2, line1];
+      }
+
+      // 양쪽 모두에서 화자 추출 시도 (어느 줄에 붙어있어도 감지)
+      const parsed1 = parseSpeaker(line1);
+      const parsed2 = parseSpeaker(line2);
+      const speaker = parsed1.speaker || parsed2.speaker;
+
       sentences.push({
-        original: originalText,
-        korean: contentLines[i + 1],
+        original: parsed1.text,
+        korean: parsed2.text,
         ...(speaker ? { speaker } : {}),
       });
     }
@@ -204,7 +216,7 @@ export function BulkDialogueUploadDialog({ unitId, onAdd }: { unitId: string; on
             <div className="mb-3 rounded-lg bg-muted/50 p-3 text-sm space-y-1">
               <p className="font-medium">--- 로 대화문 구분</p>
               <p className="text-muted-foreground">첫 줄에 <code>제목: ...</code> (선택, 없으면 자동 번호)</p>
-              <p className="text-muted-foreground">2줄씩 짝: 영어 → 한국어</p>
+              <p className="text-muted-foreground">2줄씩 짝: 영어/한국어 순서 자동 감지</p>
               <p className="text-muted-foreground">영어 줄에 <code>A: </code> 같은 화자 접두사 자동 감지</p>
               <pre className="text-xs bg-background rounded p-2 overflow-x-auto whitespace-pre-wrap">{PLACEHOLDER}</pre>
             </div>

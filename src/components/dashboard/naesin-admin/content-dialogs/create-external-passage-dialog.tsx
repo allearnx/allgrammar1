@@ -81,7 +81,15 @@ export function CreateExternalPassageDialog({ unitId, onAdd }: { unitId: string;
       // Support: "English sentence | 한국어 번역" or "English sentence\t한국어 번역"
       const parts = line.split(/\s*\|\s*|\t/);
       if (parts.length >= 2) {
-        parsed.push({ original: parts[0].trim(), korean: parts.slice(1).join(' ').trim() });
+        let engPart = parts[0].trim();
+        let korPart = parts.slice(1).join(' ').trim();
+
+        // 자동 언어 감지: 앞쪽이 한글이고 뒤쪽이 영어면 스왑
+        if (/[가-힣]/.test(engPart) && !/[가-힣]/.test(korPart)) {
+          [engPart, korPart] = [korPart, engPart];
+        }
+
+        parsed.push({ original: engPart, korean: korPart });
       }
     }
 

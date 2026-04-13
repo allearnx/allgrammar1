@@ -59,7 +59,15 @@ export function parsePassageBlocks(text: string): { passages: ParsedPassage[]; e
 
     const sentences: { original: string; korean: string }[] = [];
     for (let i = 0; i + 1 < contentLines.length; i += 2) {
-      sentences.push({ original: contentLines[i], korean: contentLines[i + 1] });
+      let engLine = contentLines[i];
+      let korLine = contentLines[i + 1];
+
+      // 자동 언어 감지: 첫 줄이 한글이고 둘째 줄이 영어면 스왑
+      if (/[가-힣]/.test(engLine) && !/[가-힣]/.test(korLine)) {
+        [engLine, korLine] = [korLine, engLine];
+      }
+
+      sentences.push({ original: engLine, korean: korLine });
     }
 
     if (sentences.length > 0) {
@@ -239,7 +247,7 @@ export function BulkPassageUploadDialog({ unitId, onAdd }: { unitId: string; onA
             <div className="mb-3 rounded-lg bg-muted/50 p-3 text-sm space-y-1">
               <p className="font-medium">--- 로 지문 구분</p>
               <p className="text-muted-foreground">첫 줄에 <code>제목: ...</code> (선택, 없으면 자동 번호)</p>
-              <p className="text-muted-foreground">이후 2줄씩 짝: 영어 → 한국어</p>
+              <p className="text-muted-foreground">이후 2줄씩 짝: 영어/한국어 순서 자동 감지</p>
               <pre className="text-xs bg-background rounded p-2 overflow-x-auto whitespace-pre-wrap">{PLACEHOLDER}</pre>
             </div>
           )}
