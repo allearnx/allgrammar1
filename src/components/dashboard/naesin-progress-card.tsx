@@ -50,6 +50,7 @@ interface Props {
   fillBlanksByUnit?: Record<string, Record<string, number>>;
   problemSheetsByUnit?: Record<string, { id: string; title: string; category?: string }[]>;
   problemAttemptsBySheet?: Record<string, { score: number; total: number; pct: number }>;
+  hideSettings?: boolean;
 }
 
 export function NaesinProgressCard({
@@ -65,6 +66,7 @@ export function NaesinProgressCard({
   fillBlanksByUnit,
   problemSheetsByUnit,
   problemAttemptsBySheet,
+  hideSettings,
 }: Props) {
   const naesinUnits = naesinData.units;
   const naesinProgressMap = new Map(naesinProgress.map((p) => [p.unit_id, p]));
@@ -268,37 +270,39 @@ export function NaesinProgressCard({
         </div>
 
         {/* 설정 영역 */}
-        <div className="space-y-4 border-t pt-4">
-          <div className="flex items-center gap-2 mb-2">
-            <Settings className="h-4 w-4 text-muted-foreground" />
-            <h4 className="text-sm font-semibold tracking-tight">설정</h4>
+        {!hideSettings && (
+          <div className="space-y-4 border-t pt-4">
+            <div className="flex items-center gap-2 mb-2">
+              <Settings className="h-4 w-4 text-muted-foreground" />
+              <h4 className="text-sm font-semibold tracking-tight">설정</h4>
+            </div>
+            <div>
+              <h5 className="text-sm font-medium text-muted-foreground mb-2">활성 단계</h5>
+              <EnabledStagesManager
+                studentId={studentId}
+                initialStages={enabledStages}
+                tier={tier}
+              />
+            </div>
+            <div>
+              <h5 className="text-sm font-medium text-muted-foreground mb-2">교과서 암기 단계</h5>
+              <PassageStageManager
+                studentId={studentId}
+                initialStages={passageStages}
+                initialTranslationSentencesPerPage={translationSentencesPerPage}
+              />
+            </div>
+            <div>
+              <h5 className="text-sm font-medium text-muted-foreground mb-2">시험 배정</h5>
+              <ExamAssignmentManager
+                studentId={studentId}
+                textbookId={naesinData.textbookId}
+                units={naesinData.units}
+                assignments={naesinData.assignments}
+              />
+            </div>
           </div>
-          <div>
-            <h5 className="text-sm font-medium text-muted-foreground mb-2">활성 단계</h5>
-            <EnabledStagesManager
-              studentId={studentId}
-              initialStages={enabledStages}
-              tier={tier}
-            />
-          </div>
-          <div>
-            <h5 className="text-sm font-medium text-muted-foreground mb-2">교과서 암기 단계</h5>
-            <PassageStageManager
-              studentId={studentId}
-              initialStages={passageStages}
-              initialTranslationSentencesPerPage={translationSentencesPerPage}
-            />
-          </div>
-          <div>
-            <h5 className="text-sm font-medium text-muted-foreground mb-2">시험 배정</h5>
-            <ExamAssignmentManager
-              studentId={studentId}
-              textbookId={naesinData.textbookId}
-              units={naesinData.units}
-              assignments={naesinData.assignments}
-            />
-          </div>
-        </div>
+        )}
       </CardContent>
     </Card>
   );

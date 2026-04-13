@@ -1,5 +1,11 @@
 import { createAdminClient } from '@/lib/supabase/admin';
 import { StudentReportPanel } from '@/components/dashboard/student-report-panel';
+import { NaesinProgressCard } from '@/components/dashboard/naesin-progress-card';
+import { VocaProgressCard } from '@/components/dashboard/voca-progress-card';
+import { ParentProgressTabs } from '@/components/dashboard/parent-progress-tabs';
+import { fetchNaesinExamData } from '@/lib/naesin/fetch-exam-data';
+import { fetchNaesinProgress } from '@/lib/naesin/fetch-naesin-progress';
+import { fetchVocaProgress } from '@/lib/voca/fetch-voca-progress';
 import { Lock } from 'lucide-react';
 
 interface Props {
@@ -33,13 +39,44 @@ export default async function ParentReportPage({ params }: Props) {
     );
   }
 
-  // Get student info + services
-  const [{ data: student }, { data: svcData }] = await Promise.all([
-    admin.from('users').select('full_name').eq('id', tokenRow.student_id).single(),
-    admin.from('service_assignments').select('service').eq('student_id', tokenRow.student_id),
+  const studentId = tokenRow.student_id;
+
+  // Fetch base data in parallel
+  const [{ data: student }, { data: svcData }, naesinData] = await Promise.all([
+    admin.from('users').select('full_name').eq('id', studentId).single(),
+    admin.from('service_assignments').select('service').eq('student_id', studentId),
+    fetchNaesinExamData(studentId),
   ]);
 
   const services = (svcData || []).map((s) => s.service);
+  const hasNaesin = !!naesinData && naesinData.units.length > 0;
+  const hasVoca = services.includes('voca');
+
+  // Fetch progress data in parallel via shared helpers
+  const [naesinProgressData, vocaProgress] = await Promise.all([
+    hasNaesin ? fetchNaesinProgress(studentId, naesinData!) : null,
+    hasVoca ? fetchVocaProgress(studentId) : Promise.resolve([]),
+  ]);
+
+  // Build cards
+  const naesinCard = hasNaesin && naesinProgressData ? (
+    <NaesinProgressCard
+      studentId={studentId}
+      naesinData={naesinData!}
+      naesinProgress={naesinProgressData.naesinProgress}
+      hours={naesinProgressData.hours}
+      minutes={naesinProgressData.minutes}
+      enabledStages={['vocab', 'passage', 'dialogue', 'textbookVideo', 'grammar', 'problem', 'mockExam', 'lastReview']}
+      passageStages={['fill_blanks', 'translation']}
+      translationSentencesPerPage={10}
+      fillBlanksByUnit={naesinProgressData.fillBlanksByUnit}
+      problemSheetsByUnit={naesinProgressData.problemSheetsByUnit}
+      problemAttemptsBySheet={naesinProgressData.problemAttemptsBySheet}
+      hideSettings
+    />
+  ) : null;
+
+  const vocaCard = hasVoca ? <VocaProgressCard vocaProgress={vocaProgress} /> : null;
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -62,6 +99,16 @@ export default async function ParentReportPage({ params }: Props) {
           </h1>
           <p className="text-sm text-gray-500 mt-1">실시간 학습 현황</p>
         </div>
+
+        {/* Progress tabs: 올인내신 / 올킬보카 */}
+        {(hasNaesin || hasVoca) && (
+          <ParentProgressTabs
+            hasNaesin={hasNaesin}
+            hasVoca={hasVoca}
+            naesinCard={naesinCard}
+            vocaCard={vocaCard}
+          />
+        )}
 
         <StudentReportPanel token={token} services={services} role="parent" />
       </main>
