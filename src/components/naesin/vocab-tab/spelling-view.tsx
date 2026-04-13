@@ -14,6 +14,23 @@ import type { MemoryItem, StudentMemoryProgress, NaesinVocabulary } from '@/type
 
 type FlashcardItem = MemoryItem & { progress: StudentMemoryProgress | null };
 
+/** 예문에서 학습 단어를 ______ 으로 마스킹 (활용형·구문 패턴 대응) */
+function maskWordInSentence(sentence: string, word: string): string {
+  const escaped = word.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  if (new RegExp(escaped, 'i').test(sentence)) {
+    return sentence.replace(new RegExp(escaped, 'gi'), '______');
+  }
+  // 구문 패턴(be filled with, share A with B 등)에서 핵심 단어만 추출 후 활용형 매칭
+  const stop = new Set(['a','b','be','to','of','in','on','at','for','from','by','with','up','out']);
+  const contentWords = word.split(/\s+/).filter(w => !stop.has(w.toLowerCase()) && w.length > 1);
+  let result = sentence;
+  for (const cw of contentWords) {
+    const ce = cw.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    result = result.replace(new RegExp(`\\b${ce}\\w*\\b`, 'gi'), '______');
+  }
+  return result;
+}
+
 export interface SpellingWrongItem {
   front_text: string;
   back_text: string;
@@ -188,9 +205,9 @@ export function NaesinSpellingView({
               <p className="text-2xl font-medium">{item.spelling_hint || item.back_text}</p>
               {vocab?.example_sentence && (
                 <p className="text-base text-muted-foreground mt-3 italic">
-                  &ldquo;{vocab.example_sentence.replace(
-                    new RegExp(item.spelling_answer || item.front_text, 'gi'),
-                    '______'
+                  &ldquo;{maskWordInSentence(
+                    vocab.example_sentence,
+                    item.spelling_answer || item.front_text
                   )}&rdquo;
                 </p>
               )}
