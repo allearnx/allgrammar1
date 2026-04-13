@@ -379,6 +379,7 @@ export const learningSessionHeartbeatSchema = z.object({
   contextType: z.enum(['naesin', 'voca']),
   contextId: z.string().max(100),
   seconds: z.number().int().min(1).max(120),
+  stage: z.string().max(30).optional(),
 });
 
 // ── AI Problem Generation/Improvement Schemas ──

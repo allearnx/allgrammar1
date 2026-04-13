@@ -6,7 +6,8 @@ const HEARTBEAT_INTERVAL = 30_000; // 30 seconds
 
 export function useLearningSession(
   contextType: 'naesin' | 'voca',
-  contextId: string
+  contextId: string,
+  stage?: string
 ) {
   const lastTickRef = useRef(0);
   const accumulatedRef = useRef(0);
@@ -28,7 +29,7 @@ export function useLearningSession(
     function sendHeartbeat(seconds: number) {
       if (seconds < 1) return;
       const capped = Math.min(seconds, 120);
-      const payload = JSON.stringify({ contextType, contextId, seconds: capped });
+      const payload = JSON.stringify({ contextType, contextId, seconds: capped, ...(stage && { stage }) });
       fetch('/api/learning/session', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -40,7 +41,7 @@ export function useLearningSession(
     function sendBeaconHeartbeat(seconds: number) {
       if (seconds < 1) return;
       const capped = Math.min(seconds, 120);
-      const payload = JSON.stringify({ contextType, contextId, seconds: capped });
+      const payload = JSON.stringify({ contextType, contextId, seconds: capped, ...(stage && { stage }) });
       if (navigator.sendBeacon) {
         navigator.sendBeacon(
           '/api/learning/session',
@@ -101,5 +102,5 @@ export function useLearningSession(
         accumulatedRef.current = 0;
       }
     };
-  }, [contextType, contextId]);
+  }, [contextType, contextId, stage]);
 }

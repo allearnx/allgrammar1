@@ -191,7 +191,7 @@ export function NaesinStageView({
   isHidden: currentStageHidden,
 }: NaesinStageViewProps) {
   const router = useRouter();
-  useLearningSession('naesin', unit.id);
+  useLearningSession('naesin', unit.id, currentStage);
 
   function handleStageComplete() {
     // router.refresh()를 즉시 호출하면 채점 결과 등 클라이언트 state가 날아감.

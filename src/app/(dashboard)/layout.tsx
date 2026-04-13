@@ -2,6 +2,7 @@ import { requireUser } from '@/lib/auth/helpers';
 import { createClient } from '@/lib/supabase/server';
 import { Sidebar } from '@/components/layout/sidebar';
 import { PaidStatusProvider } from '@/components/layout/paid-status-context';
+import { PresenceTracker } from '@/components/layout/presence-tracker';
 import { getPlanContext } from '@/lib/billing/get-plan-context';
 import { calculateStageStatuses } from '@/lib/naesin/stage-unlock';
 import { groupBy } from '@/lib/naesin/build-unit-summary';
@@ -53,6 +54,7 @@ export default async function DashboardLayout({
 
   return (
     <PaidStatusProvider isPaid={isPaid}>
+    <PresenceTracker />
     <div className="flex h-screen overflow-hidden">
       <Sidebar user={user} services={services} naesinTree={naesinTree} />
       <main className="flex-1 overflow-y-auto">

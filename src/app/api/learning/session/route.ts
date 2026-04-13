@@ -5,7 +5,7 @@ import { learningSessionHeartbeatSchema } from '@/lib/api/schemas';
 export const POST = createApiHandler(
   { schema: learningSessionHeartbeatSchema, rateLimit: { max: 300 } },
   async ({ user, body, supabase }) => {
-    const { contextType, contextId, seconds } = body;
+    const { contextType, contextId, seconds, stage } = body;
 
     if (contextType === 'naesin') {
       const { data: existing } = await supabase
@@ -18,7 +18,10 @@ export const POST = createApiHandler(
       if (existing) {
         dbResult(await supabase
           .from('naesin_student_progress')
-          .update({ total_learning_seconds: (existing.total_learning_seconds || 0) + seconds })
+          .update({
+            total_learning_seconds: (existing.total_learning_seconds || 0) + seconds,
+            ...(stage && { current_stage: stage }),
+          })
           .eq('student_id', user.id)
           .eq('unit_id', contextId));
       } else {
@@ -28,6 +31,7 @@ export const POST = createApiHandler(
             student_id: user.id,
             unit_id: contextId,
             total_learning_seconds: seconds,
+            ...(stage && { current_stage: stage }),
           }));
       }
     } else {
