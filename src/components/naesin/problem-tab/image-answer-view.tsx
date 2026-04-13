@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { AlertTriangle } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { extractAnswer } from '@/lib/naesin/normalize-answer';
 import { toast } from 'sonner';
 import { fetchWithToast } from '@/lib/fetch-with-toast';
 import type { NaesinProblemSheet } from '@/types/database';
@@ -120,7 +121,7 @@ export function ImageAnswerView({
                       <div key={w.number} className="flex gap-2">
                         <span className="font-medium">#{w.number}</span>
                         <span className="text-red-500">{w.userAnswer || '-'}</span>
-                        <span className="text-green-600">({w.correctAnswer})</span>
+                        <span className="text-green-600">({extractAnswer(w.correctAnswer)})</span>
                       </div>
                     ))}
                   </div>

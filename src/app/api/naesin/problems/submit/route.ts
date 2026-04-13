@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { createApiHandler, NotFoundError, dbResult } from '@/lib/api';
 import { problemSubmitSchema } from '@/lib/api/schemas';
-import { normalize, matchMcqAnswer } from '@/lib/naesin/normalize-answer';
+import { normalize, matchMcqAnswer, extractAnswer } from '@/lib/naesin/normalize-answer';
 
 export const maxDuration = 60;
 
@@ -27,7 +27,7 @@ export const POST = createApiHandler(
 
     for (let i = 0; i < totalQuestions; i++) {
       const userAnswer = String(answers[i] ?? '');
-      const correctAnswer = String(answerKey[i] ?? '');
+      const correctAnswer = extractAnswer(answerKey[i]);
       const isSubjective = !questions?.[i]?.options || questions[i].options!.length === 0;
 
       let isCorrect: boolean;
@@ -63,7 +63,7 @@ export const POST = createApiHandler(
         wrongAnswers.push({
           number: i + 1,
           userAnswer: (answers[i] as string | number) ?? '',
-          correctAnswer: answerKey[i] ?? '',
+          correctAnswer: extractAnswer(answerKey[i]),
           question: questions?.[i]?.question,
         });
       }

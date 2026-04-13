@@ -7,6 +7,7 @@ import { Badge } from '@/components/ui/badge';
 import { CheckCircle, AlertTriangle } from 'lucide-react';
 import { fetchWithToast } from '@/lib/fetch-with-toast';
 import { FormattedText } from '@/components/shared/formatted-text';
+import { extractAnswer } from '@/lib/naesin/normalize-answer';
 import type { NaesinWrongAnswer } from '@/types/database';
 
 interface WrongAnswerReviewProps {
@@ -150,14 +151,14 @@ export function WrongAnswerCard({ wrongAnswer, onResolve }: { wrongAnswer: Naesi
             {data.type === 'fill_blank' ? (
               <>
                 <p className="text-red-500">내 답: {String(data.userAnswer || '-')}</p>
-                <p className="text-green-600">정답: {String(data.correctAnswer)}</p>
+                <p className="text-green-600">정답: {extractAnswer(data.correctAnswer)}</p>
               </>
             ) : null}
             {data.type === 'translation' ? (
               <>
                 <p className="text-muted-foreground">{String(data.koreanText || '')}</p>
                 <p className="text-red-500">내 답: {String(data.userAnswer || '-')}</p>
-                {data.correctAnswer ? <p className="text-green-600">정답: {String(data.correctAnswer)}</p> : null}
+                {data.correctAnswer ? <p className="text-green-600">정답: {extractAnswer(data.correctAnswer)}</p> : null}
                 {data.feedback ? <p className="text-sm">{String(data.feedback)}</p> : null}
               </>
             ) : null}
@@ -171,7 +172,7 @@ export function WrongAnswerCard({ wrongAnswer, onResolve }: { wrongAnswer: Naesi
               <>
                 <p className="text-muted-foreground">{String(data.koreanText || '')}</p>
                 <p className="text-red-500">내 ��: {String(data.userAnswer || '-')}</p>
-                <p className="text-green-600">정답: {String(data.correctAnswer)}</p>
+                <p className="text-green-600">정답: {extractAnswer(data.correctAnswer)}</p>
               </>
             ) : null}
             {data.type === 'grammar_vocab' ? (
@@ -192,13 +193,13 @@ export function WrongAnswerCard({ wrongAnswer, onResolve }: { wrongAnswer: Naesi
                 <p className="font-medium">{String(data.front_text)}</p>
                 <p className="text-muted-foreground">{String(data.back_text)}</p>
                 <p className="text-red-500">내 답: {String(data.userAnswer || '-')}</p>
-                <p className="text-green-600">정답: {String(data.correctAnswer)}</p>
+                <p className="text-green-600">정답: {extractAnswer(data.correctAnswer)}</p>
               </>
             ) : null}
             {data.number && data.type !== 'fill_blank' && data.type !== 'translation' && data.type !== 'ordering' && data.type !== 'first_letter' && data.type !== 'grammar_vocab' ? (
               <>
                 <p className="text-red-500">내 답: {String(data.userAnswer || '-')}</p>
-                <p className="text-green-600">정답: {String(data.correctAnswer)}</p>
+                <p className="text-green-600">정답: {extractAnswer(data.correctAnswer)}</p>
               </>
             ) : null}
             {options && options.length > 0 && (

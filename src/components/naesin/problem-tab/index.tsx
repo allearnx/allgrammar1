@@ -6,6 +6,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { getEncouragement } from '@/lib/naesin/encouragement';
+import { extractAnswer } from '@/lib/naesin/normalize-answer';
 import { InteractiveProblemView } from './interactive-view';
 import { ImageAnswerView } from './image-answer-view';
 import { ExternalPassageView } from './external-passage-view';
@@ -150,7 +151,7 @@ function AttemptSummary({ attempt, onRetry }: { attempt: LastAttempt; onRetry: (
                 <div key={i} className="text-sm border-b last:border-0 pb-2 space-y-1">
                   <p className="font-medium">#{w.number}. {w.question || ''}</p>
                   <p className="text-red-500">내 답: {String(w.userAnswer || '-')}</p>
-                  <p className="text-green-600">정답: {String(w.correctAnswer)}</p>
+                  <p className="text-green-600">정답: {extractAnswer(w.correctAnswer)}</p>
                 </div>
               ))}
             </div>

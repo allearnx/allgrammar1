@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { createApiHandler } from '@/lib/api';
-import { normalize, matchMcqAnswer } from '@/lib/naesin/normalize-answer';
+import { normalize, matchMcqAnswer, extractAnswer } from '@/lib/naesin/normalize-answer';
 
 export const GET = createApiHandler(
   {},
@@ -59,7 +59,7 @@ export const GET = createApiHandler(
       const i = Number(idxStr);
       if (i < 0 || i >= answerKey.length) continue;
 
-      const correctAnswer = String(answerKey[i] ?? '');
+      const correctAnswer = extractAnswer(answerKey[i]);
       const q = questions?.[i];
       const isSubjective = !q?.options || q.options.length === 0;
 
@@ -85,7 +85,7 @@ export const GET = createApiHandler(
         newWrongList.push({
           number: (q?.number ?? i + 1),
           userAnswer,
-          correctAnswer: answerKey[i],
+          correctAnswer: extractAnswer(answerKey[i]),
           question: q?.question ?? '',
           ...(aiResultsMap[idxStr] ? { aiFeedback: aiResultsMap[idxStr] } : {}),
         });
