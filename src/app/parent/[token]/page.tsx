@@ -1,5 +1,4 @@
 import { createAdminClient } from '@/lib/supabase/admin';
-import { StudentReportPanel } from '@/components/dashboard/student-report-panel';
 import { NaesinProgressCard } from '@/components/dashboard/naesin-progress-card';
 import { VocaProgressCard } from '@/components/dashboard/voca-progress-card';
 import { ParentProgressTabs } from '@/components/dashboard/parent-progress-tabs';
@@ -110,7 +109,6 @@ export default async function ParentReportPage({ params }: Props) {
           />
         )}
 
-        <StudentReportPanel token={token} services={services} role="parent" />
       </main>
 
       {/* Watermark */}
