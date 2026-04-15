@@ -66,7 +66,10 @@ export function DialogueLineOrdering({ sentences, onComplete }: DialogueLineOrde
     setShowResult(true);
   }
 
-  const correctCount = selected.filter((item, i) => item.originalIndex === i).length;
+  // 동일한 텍스트+화자 문장은 서로 교환 가능하므로 텍스트 기준 비교
+  const correctCount = selected.filter((item, i) =>
+    item.original === lines[i].original && (item.speaker ?? '') === (lines[i].speaker ?? '')
+  ).length;
   const score = Math.round((correctCount / lines.length) * 100);
   const allCorrect = correctCount === lines.length;
 
@@ -144,7 +147,7 @@ export function DialogueLineOrdering({ sentences, onComplete }: DialogueLineOrde
             </p>
           )}
           {selected.map((item, idx) => {
-            const isCorrectPosition = item.originalIndex === idx;
+            const isCorrectPosition = item.original === lines[idx].original && (item.speaker ?? '') === (lines[idx].speaker ?? '');
             return (
               <button
                 key={`s-${item.originalIndex}`}
