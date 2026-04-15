@@ -70,7 +70,7 @@ export const vocaMatchingSubmissionSchema = z.object({
   wrongWords: z.array(z.object({
     word: SHORT,
     match: SHORT,
-    type: z.enum(['synonym', 'antonym']),
+    type: z.enum(['synonym', 'antonym', 'sentence']),
   })),
   writings: z.array(z.object({
     word: SHORT,
