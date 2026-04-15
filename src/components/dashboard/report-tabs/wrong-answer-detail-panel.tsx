@@ -377,12 +377,12 @@ function ReadOnlyWrongAnswerCard({
             {options && options.length > 0 && (
               <div className="mt-1 pl-2 border-l-2 border-muted space-y-0.5">
                 {options.map((opt, i) => (
-                  <p key={i} className="text-xs text-muted-foreground">{i + 1}. {opt}</p>
+                  <p key={i} className="text-xs text-muted-foreground">{i + 1}. <FormattedText text={opt} /></p>
                 ))}
               </div>
             )}
             {explanation && (
-              <p className="text-xs text-blue-600 mt-1">해설: {explanation}</p>
+              <p className="text-xs text-blue-600 mt-1">해설: <FormattedText text={explanation} /></p>
             )}
             <div className="flex items-center gap-1.5 pt-1">
               {isDraft && (
