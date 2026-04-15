@@ -50,6 +50,7 @@ interface Props {
   fillBlanksByUnit?: Record<string, Record<string, number>>;
   problemSheetsByUnit?: Record<string, { id: string; title: string; category?: string }[]>;
   problemAttemptsBySheet?: Record<string, { score: number; total: number; pct: number }>;
+  grammarContentByUnit?: Record<string, boolean>;
   hideSettings?: boolean;
 }
 
@@ -66,13 +67,19 @@ export function NaesinProgressCard({
   fillBlanksByUnit,
   problemSheetsByUnit,
   problemAttemptsBySheet,
+  grammarContentByUnit,
   hideSettings,
 }: Props) {
   const naesinUnits = naesinData.units;
   const naesinProgressMap = new Map(naesinProgress.map((p) => [p.unit_id, p]));
   const stageCount = 5;
-  const naesinStagesCompleted = naesinProgress.reduce((acc, p) => {
-    return acc + (p.vocab_completed ? 1 : 0) + (p.passage_completed ? 1 : 0) + (p.dialogue_completed ? 1 : 0) + (p.grammar_completed ? 1 : 0) + (p.problem_completed ? 1 : 0);
+  const isGrammarCompleted = (unitId: string, progress: NaesinProgressRow | undefined) => {
+    if (grammarContentByUnit && !grammarContentByUnit[unitId]) return true; // no grammar content = auto-completed
+    return progress?.grammar_completed ?? false;
+  };
+  const naesinStagesCompleted = naesinUnits.reduce((acc, unit) => {
+    const p = naesinProgressMap.get(unit.id);
+    return acc + (p?.vocab_completed ? 1 : 0) + (p?.passage_completed ? 1 : 0) + (p?.dialogue_completed ? 1 : 0) + (isGrammarCompleted(unit.id, p) ? 1 : 0) + (p?.problem_completed ? 1 : 0);
   }, 0);
   const naesinTotalStages = naesinUnits.length * stageCount;
 
@@ -104,7 +111,10 @@ export function NaesinProgressCard({
               <BookOpen className="h-4 w-4 text-indigo-600 dark:text-indigo-400" />
             </div>
             <div className="text-2xl font-bold tracking-tight">
-              {naesinProgress.filter((p) => p.vocab_completed && p.passage_completed && p.dialogue_completed && p.grammar_completed && p.problem_completed).length}/{naesinUnits.length}
+              {naesinUnits.filter((unit) => {
+                const p = naesinProgressMap.get(unit.id);
+                return p?.vocab_completed && p?.passage_completed && p?.dialogue_completed && isGrammarCompleted(unit.id, p) && p?.problem_completed;
+              }).length}/{naesinUnits.length}
             </div>
             <p className="text-xs text-muted-foreground">모든 단계 완료된 단원</p>
           </div>
@@ -133,11 +143,12 @@ export function NaesinProgressCard({
               const unitSheetAttempts = unitSheets.filter((s) => problemAttemptsBySheet?.[s.id]);
               const hasSomeSheetAttempts = unitSheetAttempts.length > 0 && unitSheetAttempts.length < unitSheets.length;
 
+              const grammarDone = isGrammarCompleted(unit.id, progress);
               const stages = [
                 { key: 'vocab', label: '단어', icon: BookOpen, completed: progress?.vocab_completed ?? false, inProgress: false },
                 { key: 'passage', label: '교과서 암기', icon: FileText, completed: progress?.passage_completed ?? false, inProgress: !progress?.passage_completed && hasPassageScore },
                 { key: 'dialogue', label: '대화문', icon: MessageSquare, completed: progress?.dialogue_completed ?? false, inProgress: !progress?.dialogue_completed && hasDialogueScore },
-                { key: 'grammar', label: '문법', icon: GraduationCap, completed: progress?.grammar_completed ?? false, inProgress: !progress?.grammar_completed && hasGrammarProgress },
+                { key: 'grammar', label: '문법', icon: GraduationCap, completed: grammarDone, inProgress: !grammarDone && hasGrammarProgress },
                 { key: 'problem', label: '문제', icon: ClipboardList, completed: progress?.problem_completed ?? false, inProgress: !(progress?.problem_completed) && hasSomeSheetAttempts },
               ];
               const completedCount = stages.filter((s) => s.completed).length;

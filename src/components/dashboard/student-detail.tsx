@@ -88,9 +88,9 @@ export async function StudentDetail({ user, studentId, naesinData }: Props) {
 
   // Naesin progress (depends on videoRes for legacy watch seconds)
   const legacyWatchedSeconds = videoProgress.reduce((a, p) => a + p.video_watched_seconds, 0);
-  const { naesinProgress, hours, minutes, fillBlanksByUnit, problemSheetsByUnit, problemAttemptsBySheet } = naesinData
+  const { naesinProgress, hours, minutes, fillBlanksByUnit, problemSheetsByUnit, problemAttemptsBySheet, grammarContentByUnit } = naesinData
     ? await fetchNaesinProgress(studentId, naesinData, legacyWatchedSeconds)
-    : { naesinProgress: [], hours: 0, minutes: 0, fillBlanksByUnit: {}, problemSheetsByUnit: {}, problemAttemptsBySheet: {} };
+    : { naesinProgress: [], hours: 0, minutes: 0, fillBlanksByUnit: {}, problemSheetsByUnit: {}, problemAttemptsBySheet: {}, grammarContentByUnit: {} };
 
   const passageStages = (passageStagesRes.data?.passage_required_stages as string[] | null) ?? ['fill_blanks', 'translation'];
   const translationSentencesPerPage = (passageStagesRes.data?.translation_sentences_per_page as number | null) ?? 10;
@@ -146,6 +146,7 @@ export async function StudentDetail({ user, studentId, naesinData }: Props) {
             fillBlanksByUnit={fillBlanksByUnit}
             problemSheetsByUnit={problemSheetsByUnit}
             problemAttemptsBySheet={problemAttemptsBySheet}
+            grammarContentByUnit={grammarContentByUnit}
           />
         )}
 

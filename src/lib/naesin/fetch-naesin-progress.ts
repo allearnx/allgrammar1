@@ -28,6 +28,7 @@ export interface NaesinProgressResult {
   fillBlanksByUnit: Record<string, Record<string, number>>;
   problemSheetsByUnit: Record<string, { id: string; title: string; category: string }[]>;
   problemAttemptsBySheet: Record<string, { score: number; total: number; pct: number }>;
+  grammarContentByUnit: Record<string, boolean>;
 }
 
 /**
@@ -44,7 +45,7 @@ export async function fetchNaesinProgress(
   const admin = createAdminClient();
   const unitIds = naesinData.units.map((u) => u.id);
 
-  const [progressRes, videoRes, fillBlanksRes, sheetsRes, attemptsRes] = await Promise.all([
+  const [progressRes, videoRes, fillBlanksRes, sheetsRes, attemptsRes, grammarLessonsRes] = await Promise.all([
     admin
       .from('naesin_student_progress')
       .select('unit_id, vocab_completed, vocab_quiz_score, vocab_spelling_score, passage_completed, passage_fill_blanks_best, passage_ordering_best, passage_translation_best, passage_grammar_vocab_best, dialogue_ordering_best, dialogue_first_letter_best, dialogue_translation_best, dialogue_completed, grammar_completed, grammar_videos_completed, grammar_total_videos, problem_completed, total_learning_seconds, updated_at')
@@ -69,6 +70,11 @@ export async function fetchNaesinProgress(
       .from('naesin_problem_attempts')
       .select('sheet_id, score, total_questions')
       .eq('student_id', studentId),
+    admin
+      .from('naesin_grammar_lessons')
+      .select('unit_id')
+      .in('unit_id', unitIds)
+      .eq('content_type', 'video'),
   ]);
 
   const naesinProgress = progressRes.data || [];
@@ -106,5 +112,11 @@ export async function fetchNaesinProgress(
     }
   }
 
-  return { naesinProgress, hours, minutes, fillBlanksByUnit, problemSheetsByUnit, problemAttemptsBySheet };
+  // Grammar content availability per unit (units with at least one grammar video)
+  const grammarContentByUnit: Record<string, boolean> = {};
+  for (const lesson of grammarLessonsRes.data || []) {
+    grammarContentByUnit[lesson.unit_id] = true;
+  }
+
+  return { naesinProgress, hours, minutes, fillBlanksByUnit, problemSheetsByUnit, problemAttemptsBySheet, grammarContentByUnit };
 }

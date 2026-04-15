@@ -42,14 +42,24 @@ export default async function ProgressPage() {
 
   // Fetch naesin unit names if we have progress
   let naesinUnits: { id: string; unit_number: number; title: string }[] = [];
+  let grammarContentByUnit: Record<string, boolean> = {};
   if (naesinSettingsRes.data?.textbook_id) {
-    const { data } = await supabase
-      .from('naesin_units')
-      .select('id, unit_number, title')
-      .eq('textbook_id', naesinSettingsRes.data.textbook_id)
-      .eq('is_active', true)
-      .order('sort_order');
-    naesinUnits = data || [];
+    const [unitsRes, grammarLessonsRes] = await Promise.all([
+      supabase
+        .from('naesin_units')
+        .select('id, unit_number, title')
+        .eq('textbook_id', naesinSettingsRes.data.textbook_id)
+        .eq('is_active', true)
+        .order('sort_order'),
+      supabase
+        .from('naesin_grammar_lessons')
+        .select('unit_id')
+        .eq('content_type', 'video'),
+    ]);
+    naesinUnits = unitsRes.data || [];
+    for (const lesson of grammarLessonsRes.data || []) {
+      grammarContentByUnit[lesson.unit_id] = true;
+    }
   }
 
   const naesinProgressMap = new Map(naesinProgress.map((p) => [p.unit_id, p]));
@@ -68,7 +78,8 @@ export default async function ProgressPage() {
   const minutes = Math.floor((totalWatchedSeconds % 3600) / 60);
 
   const naesinStagesCompleted = naesinProgress.reduce((acc, p) => {
-    return acc + (p.vocab_completed ? 1 : 0) + (p.passage_completed ? 1 : 0) + (p.grammar_completed ? 1 : 0) + (p.problem_completed ? 1 : 0);
+    const grammarDone = grammarContentByUnit[p.unit_id] !== undefined ? p.grammar_completed : true;
+    return acc + (p.vocab_completed ? 1 : 0) + (p.passage_completed ? 1 : 0) + (grammarDone ? 1 : 0) + (p.problem_completed ? 1 : 0);
   }, 0);
 
   // Score chip helpers from shared utility
@@ -143,6 +154,7 @@ export default async function ProgressPage() {
                 key={unit.id}
                 unit={unit}
                 progress={naesinProgressMap.get(unit.id)}
+                hasGrammarContent={grammarContentByUnit[unit.id] ?? false}
               />
             ))}
           </div>

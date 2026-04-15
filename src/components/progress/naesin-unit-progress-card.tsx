@@ -21,6 +21,7 @@ interface NaesinProgress {
 interface Props {
   unit: { id: string; unit_number: number; title: string };
   progress: NaesinProgress | undefined;
+  hasGrammarContent?: boolean;
 }
 
 const STAGE_CONFIG = [
@@ -39,7 +40,7 @@ const SCORE_CHIPS: { field: keyof NaesinProgress; label: string; type: 'score' |
   { field: 'passage_grammar_vocab_best', label: '어법/어휘', type: 'passage' },
 ];
 
-export function NaesinUnitProgressCard({ unit, progress }: Props) {
+export function NaesinUnitProgressCard({ unit, progress, hasGrammarContent }: Props) {
   const hasPassageScore = !!progress && (
     progress.passage_fill_blanks_best != null ||
     progress.passage_ordering_best != null ||
@@ -47,13 +48,14 @@ export function NaesinUnitProgressCard({ unit, progress }: Props) {
     progress.passage_grammar_vocab_best != null
   );
   const hasGrammarProgress = !!progress && (progress.grammar_videos_completed ?? 0) > 0;
+  const grammarDone = hasGrammarContent === false ? true : (progress?.grammar_completed ?? false);
 
   const stages = STAGE_CONFIG.map((cfg) => ({
     ...cfg,
-    completed: progress?.[cfg.field] ?? false,
+    completed: cfg.key === 'grammar' ? grammarDone : (progress?.[cfg.field] ?? false),
     inProgress:
       cfg.key === 'passage' ? !progress?.passage_completed && hasPassageScore :
-      cfg.key === 'grammar' ? !progress?.grammar_completed && hasGrammarProgress :
+      cfg.key === 'grammar' ? !grammarDone && hasGrammarProgress :
       false,
   }));
 
