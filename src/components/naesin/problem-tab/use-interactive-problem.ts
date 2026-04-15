@@ -204,6 +204,7 @@ export function useInteractiveProblem({
       correctAnswer: q.answer,
       question: q.question,
       ...(q.subParts ? { subParts: q.subParts } : {}),
+      ...(q.options && q.options.length > 0 ? { options: q.options } : {}),
     };
     const newWrongList = [...wrongList, wrongItem];
     setWrongList(newWrongList);

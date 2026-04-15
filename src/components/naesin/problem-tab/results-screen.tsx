@@ -71,6 +71,15 @@ export function ResultsScreen({
                         <p className="text-green-600">정답: {extractAnswer(w.correctAnswer)}</p>
                       </>
                     )}
+                    {w.options && w.options.length > 0 && (
+                      <div className="mt-1 pl-2 border-l-2 border-muted space-y-0.5">
+                        {w.options.map((opt, oi) => (
+                          <p key={oi} className="text-xs text-muted-foreground">
+                            <span className="font-medium">{'①②③④⑤'[oi] ?? `${oi + 1}`}</span>{' '}<FormattedText text={opt} />
+                          </p>
+                        ))}
+                      </div>
+                    )}
                   </div>
                 ))}
               </div>
