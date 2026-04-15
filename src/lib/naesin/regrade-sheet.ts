@@ -35,6 +35,7 @@ export async function regradeSheet(
     question: string;
     options?: string[];
     acceptedAnswers?: string[];
+    explanation?: string;
   }[];
 
   let changed = 0;
@@ -108,14 +109,22 @@ export async function regradeSheet(
         .eq('sheet_id', sheetId);
 
       if (wrongAnswers.length > 0) {
-        const wrongRows = wrongAnswers.map((wa) => ({
-          student_id: attempt.student_id,
-          unit_id: sheet.unit_id,
-          stage: 'problem',
-          source_type: sheet.mode,
-          question_data: wa,
-          sheet_id: sheetId,
-        }));
+        const wrongRows = wrongAnswers.map((wa) => {
+          const idx = wa.number - 1;
+          const q = questions?.[idx];
+          return {
+            student_id: attempt.student_id,
+            unit_id: sheet.unit_id,
+            stage: 'problem',
+            source_type: sheet.mode,
+            question_data: {
+              ...wa,
+              ...(q?.options ? { options: q.options } : {}),
+              ...(q?.explanation ? { explanation: q.explanation } : {}),
+            },
+            sheet_id: sheetId,
+          };
+        });
         await admin.from('naesin_wrong_answers').insert(wrongRows);
       }
     }
