@@ -52,10 +52,15 @@ export default async function ParentReportPage({ params }: Props) {
   const hasVoca = services.includes('voca');
 
   // Fetch progress data in parallel via shared helpers
-  const [naesinProgressData, vocaProgress] = await Promise.all([
+  const [naesinProgressData, vocaProgress, vocaSubRes] = await Promise.all([
     hasNaesin ? fetchNaesinProgress(studentId, naesinData!) : null,
     hasVoca ? fetchVocaProgress(studentId) : Promise.resolve([]),
+    hasVoca
+      ? admin.from('voca_matching_submissions').select('day_id, status').eq('student_id', studentId)
+      : Promise.resolve({ data: null }),
   ]);
+  const vocaSubmissionStatuses: Record<string, string> = {};
+  for (const s of vocaSubRes.data || []) vocaSubmissionStatuses[s.day_id] = s.status;
 
   // Build cards
   const naesinCard = hasNaesin && naesinProgressData ? (
@@ -76,7 +81,7 @@ export default async function ParentReportPage({ params }: Props) {
     />
   ) : null;
 
-  const vocaCard = hasVoca ? <VocaProgressCard vocaProgress={vocaProgress} /> : null;
+  const vocaCard = hasVoca ? <VocaProgressCard vocaProgress={vocaProgress} submissionStatuses={vocaSubmissionStatuses} /> : null;
 
   return (
     <div className="min-h-screen bg-gray-50">

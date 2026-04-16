@@ -46,16 +46,25 @@ export default async function StudentVocaPage({
     days = data || [];
   }
 
-  // Get student progress for all days
+  // Get student progress + submission statuses for all days
   const dayIds = days.map((d) => d.id);
   let progressList: VocaStudentProgress[] = [];
+  const submissionStatusMap: Record<string, string> = {};
   if (dayIds.length > 0) {
-    const { data } = await supabase
-      .from('voca_student_progress')
-      .select('*')
-      .eq('student_id', user.id)
-      .in('day_id', dayIds);
+    const [{ data }, { data: submissions }] = await Promise.all([
+      supabase
+        .from('voca_student_progress')
+        .select('*')
+        .eq('student_id', user.id)
+        .in('day_id', dayIds),
+      supabase
+        .from('voca_matching_submissions')
+        .select('day_id, status')
+        .eq('student_id', user.id)
+        .in('day_id', dayIds),
+    ]);
     progressList = data || [];
+    for (const s of submissions || []) submissionStatusMap[s.day_id] = s.status;
   }
 
   return (
@@ -66,6 +75,7 @@ export default async function StudentVocaPage({
           books={(books as VocaBook[]) || []}
           days={days}
           progressList={progressList}
+          submissionStatuses={submissionStatusMap}
           initialBookId={initialBookId}
         />
       </div>

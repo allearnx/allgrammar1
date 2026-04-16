@@ -7,9 +7,10 @@ import type { VocaProgressRow } from '@/types/voca';
 
 interface Props {
   vocaProgress: VocaProgressRow[];
+  submissionStatuses?: Record<string, string>;
 }
 
-export function VocaProgressCard({ vocaProgress }: Props) {
+export function VocaProgressCard({ vocaProgress, submissionStatuses = {} }: Props) {
   // Group by book
   const vocaByBook = new Map<string, { bookTitle: string; sortOrder: number; days: VocaProgressRow[] }>();
   for (const vp of vocaProgress) {
@@ -131,6 +132,11 @@ export function VocaProgressCard({ vocaProgress }: Props) {
                             {vp.matching_score !== null && (
                               <span className={`text-xs px-1.5 py-0.5 rounded ${scoreChipClass(vp.matching_score)}`}>
                                 매칭 {vp.matching_score}점
+                              </span>
+                            )}
+                            {submissionStatuses[vp.day_id] && (
+                              <span className={`text-xs px-1.5 py-0.5 rounded ${submissionStatuses[vp.day_id] === 'reviewed' ? 'bg-green-100 text-green-700 dark:bg-green-950 dark:text-green-300' : 'bg-orange-100 text-orange-700 dark:bg-orange-950 dark:text-orange-300'}`}>
+                                {submissionStatuses[vp.day_id] === 'reviewed' ? '오답쓰기 확인' : '오답쓰기 미확인'}
                               </span>
                             )}
                           </div>

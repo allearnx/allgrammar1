@@ -8,6 +8,7 @@ export interface VocaDashboardData {
   wordCount: number;
   wrongWordCounts: Record<string, number>;
   quizHistory: { date: string; score: number }[];
+  submissionStatuses: Record<string, string>;
 }
 
 export async function fetchVocaDashboardData(
@@ -77,7 +78,7 @@ export async function fetchVocaDashboardData(
       ? supabase.from('voca_quiz_results').select('wrong_words').eq('student_id', userId).in('day_id', dayIds)
       : Promise.resolve({ data: null }),
     dayIds.length > 0
-      ? supabase.from('voca_matching_submissions').select('wrong_words').eq('student_id', userId).in('day_id', dayIds)
+      ? supabase.from('voca_matching_submissions').select('day_id, status, wrong_words').eq('student_id', userId).in('day_id', dayIds)
       : Promise.resolve({ data: null }),
     dayIds.length > 0
       ? supabase.from('voca_quiz_results').select('score, created_at').eq('student_id', userId).in('day_id', dayIds).order('created_at', { ascending: false }).limit(20)
@@ -90,7 +91,9 @@ export async function fetchVocaDashboardData(
       wrongWordCounts[w.front_text] = (wrongWordCounts[w.front_text] || 0) + 1;
     }
   }
+  const submissionStatuses: Record<string, string> = {};
   for (const row of matchingSubRes.data || []) {
+    if (row.day_id && row.status) submissionStatuses[row.day_id] = row.status;
     for (const w of (row.wrong_words as { word: string }[]) || []) {
       wrongWordCounts[w.word] = (wrongWordCounts[w.word] || 0) + 1;
     }
@@ -101,5 +104,5 @@ export async function fetchVocaDashboardData(
     score: r.score,
   }));
 
-  return { books, days, progressList, wordCount, wrongWordCounts, quizHistory };
+  return { books, days, progressList, wordCount, wrongWordCounts, quizHistory, submissionStatuses };
 }

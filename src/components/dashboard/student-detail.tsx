@@ -40,7 +40,7 @@ export async function StudentDetail({ user, studentId, naesinData }: Props) {
   if (!student) notFound();
 
   // Fetch page-specific queries + shared voca progress in parallel
-  const [videoRes, memoryRes, textbookRes, passageStagesRes, vocaAssignmentRes, naesinAssignmentRes, naesinTextbooksRes, vocaProgress] = await Promise.all([
+  const [videoRes, memoryRes, textbookRes, passageStagesRes, vocaAssignmentRes, naesinAssignmentRes, naesinTextbooksRes, vocaProgress, vocaSubRes] = await Promise.all([
     admin
       .from('student_progress')
       .select('*, grammar:grammars(title, level:levels(level_number, title_ko))')
@@ -78,6 +78,10 @@ export async function StudentDetail({ user, studentId, naesinData }: Props) {
       .order('grade')
       .order('sort_order'),
     fetchVocaProgress(studentId),
+    admin
+      .from('voca_matching_submissions')
+      .select('day_id, status')
+      .eq('student_id', studentId),
   ]);
 
   const videoProgress = videoRes.data || [];
@@ -96,6 +100,9 @@ export async function StudentDetail({ user, studentId, naesinData }: Props) {
   const translationSentencesPerPage = (passageStagesRes.data?.translation_sentences_per_page as number | null) ?? 10;
   const enabledStages = (passageStagesRes.data?.enabled_stages as string[] | null) ?? ['vocab', 'passage', 'dialogue', 'textbookVideo', 'grammar', 'problem', 'mockExam', 'lastReview'];
   const planContext = await getPlanContext(student.academy_id, studentId);
+
+  const vocaSubmissionStatuses: Record<string, string> = {};
+  for (const s of vocaSubRes.data || []) vocaSubmissionStatuses[s.day_id] = s.status;
 
   const hasVocaAssignment = !!vocaAssignmentRes.data;
   const hasNaesinAssignment = !!naesinAssignmentRes.data;
@@ -191,7 +198,7 @@ export async function StudentDetail({ user, studentId, naesinData }: Props) {
 
         {/* 올킬보카 서비스 카드 */}
         {hasVocaAssignment && (
-          <VocaProgressCard vocaProgress={vocaProgress} />
+          <VocaProgressCard vocaProgress={vocaProgress} submissionStatuses={vocaSubmissionStatuses} />
         )}
 
         {/* 교과서 배정 */}

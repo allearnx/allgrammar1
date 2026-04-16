@@ -18,10 +18,11 @@ interface VocaHomeClientProps {
   books: VocaBook[];
   days: VocaDay[];
   progressList: VocaStudentProgress[];
+  submissionStatuses?: Record<string, string>;
   initialBookId?: string;
 }
 
-export function VocaHomeClient({ books, days, progressList, initialBookId }: VocaHomeClientProps) {
+export function VocaHomeClient({ books, days, progressList, submissionStatuses = {}, initialBookId }: VocaHomeClientProps) {
   const defaultBookId = (initialBookId && books.some((b) => b.id === initialBookId))
     ? initialBookId
     : books[0]?.id || '';
@@ -90,7 +91,7 @@ export function VocaHomeClient({ books, days, progressList, initialBookId }: Voc
                         <BookOpen className="h-5 w-5 text-primary" />
                         <div>
                           <p className="font-medium">{day.title}</p>
-                          <DayProgressBadges progress={prog} />
+                          <DayProgressBadges progress={prog} submissionStatus={submissionStatuses[day.id]} />
                         </div>
                       </div>
                       {completed && (
@@ -108,40 +109,47 @@ export function VocaHomeClient({ books, days, progressList, initialBookId }: Voc
   );
 }
 
-function DayProgressBadges({ progress }: { progress?: VocaStudentProgress | null }) {
-  if (!progress) return null;
+function DayProgressBadges({ progress, submissionStatus }: { progress?: VocaStudentProgress | null; submissionStatus?: string }) {
+  if (!progress && !submissionStatus) return null;
 
-  const hasRound2 = progress.round2_flashcard_completed ||
-    progress.round2_quiz_score != null ||
-    progress.round2_matching_completed;
+  const hasRound2 = progress?.round2_flashcard_completed ||
+    progress?.round2_quiz_score != null ||
+    progress?.round2_matching_completed;
 
   return (
     <div className="space-y-0.5 mt-1">
       <div className="flex gap-1 flex-wrap">
-        {progress.flashcard_completed && (
+        {progress?.flashcard_completed && (
           <Badge variant="outline" className="text-[10px] h-4 px-1">카드</Badge>
         )}
-        {progress.quiz_score != null && (
+        {progress?.quiz_score != null && (
           <Badge variant="outline" className="text-[10px] h-4 px-1">퀴즈 {progress.quiz_score}%</Badge>
         )}
-        {progress.spelling_score != null && (
+        {progress?.spelling_score != null && (
           <Badge variant="outline" className="text-[10px] h-4 px-1">스펠링 {progress.spelling_score}%</Badge>
         )}
-        {progress.matching_completed && (
+        {progress?.matching_completed && (
           <Badge variant="outline" className="text-[10px] h-4 px-1">매칭</Badge>
         )}
       </div>
       {hasRound2 && (
         <div className="flex gap-1 flex-wrap">
-          {progress.round2_flashcard_completed && (
+          {progress?.round2_flashcard_completed && (
             <Badge variant="outline" className="text-[10px] h-4 px-1 border-blue-300 text-blue-600">2회 카드</Badge>
           )}
-          {progress.round2_quiz_score != null && (
+          {progress?.round2_quiz_score != null && (
             <Badge variant="outline" className="text-[10px] h-4 px-1 border-blue-300 text-blue-600">2회 종합 {progress.round2_quiz_score}%</Badge>
           )}
-          {progress.round2_matching_completed && (
+          {progress?.round2_matching_completed && (
             <Badge variant="outline" className="text-[10px] h-4 px-1 border-blue-300 text-blue-600">2회 매칭</Badge>
           )}
+        </div>
+      )}
+      {submissionStatus && (
+        <div className="flex gap-1 flex-wrap">
+          <Badge variant="outline" className={`text-[10px] h-4 px-1 ${submissionStatus === 'reviewed' ? 'border-green-400 text-green-600' : 'border-orange-400 text-orange-600'}`}>
+            {submissionStatus === 'reviewed' ? '오답쓰기 확인됨' : '오답쓰기 제출'}
+          </Badge>
         </div>
       )}
     </div>

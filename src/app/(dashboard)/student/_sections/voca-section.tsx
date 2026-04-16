@@ -37,6 +37,7 @@ export async function VocaSection({ user, planContext, isIndependent }: Props) {
         wordCount={data.wordCount}
         wrongWordCounts={data.wrongWordCounts}
         quizHistory={data.quizHistory}
+        submissionStatuses={data.submissionStatuses}
       />
     </>
   );

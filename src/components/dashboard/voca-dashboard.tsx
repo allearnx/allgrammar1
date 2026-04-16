@@ -33,6 +33,7 @@ interface Props {
   wordCount: number;
   wrongWordCounts?: Record<string, number>;
   quizHistory?: { date: string; score: number }[];
+  submissionStatuses?: Record<string, string>;
 }
 
 // ── Colors ──
@@ -56,7 +57,7 @@ const COLORS = {
 
 // ── Component ──
 
-export function VocaDashboard({ userName, books, days, progressList, wordCount, wrongWordCounts = {}, quizHistory = [] }: Props) {
+export function VocaDashboard({ userName, books, days, progressList, wordCount, wrongWordCounts = {}, quizHistory = [], submissionStatuses = {} }: Props) {
   const progressMap = new Map<string, VocaStudentProgress>();
   progressList.forEach((p) => progressMap.set(p.day_id, p));
 
@@ -243,8 +244,15 @@ export function VocaDashboard({ userName, books, days, progressList, wordCount, 
                 <div key={day.id}>
                   <div className="flex items-center justify-between text-sm mb-1.5">
                     <span className="font-medium truncate">{day.title}</span>
-                    <span className="text-xs shrink-0 ml-2" style={{ color: isDone ? COLORS.green : isActive ? '#7C3AED' : '#9CA3AF', fontWeight: isDone || isActive ? 700 : 400 }}>
-                      {isDone ? '100%' : isActive ? '진행 중' : '잠김'}
+                    <span className="flex items-center gap-1.5 shrink-0 ml-2">
+                      {submissionStatuses[day.id] && !p?.matching_completed && (
+                        <span className={`text-[10px] font-semibold px-1.5 py-0.5 rounded-full ${submissionStatuses[day.id] === 'reviewed' ? 'bg-green-100 text-green-700' : 'bg-orange-100 text-orange-700'}`}>
+                          {submissionStatuses[day.id] === 'reviewed' ? '확인됨' : '제출함'}
+                        </span>
+                      )}
+                      <span className="text-xs" style={{ color: isDone ? COLORS.green : isActive ? '#7C3AED' : '#9CA3AF', fontWeight: isDone || isActive ? 700 : 400 }}>
+                        {isDone ? '100%' : isActive ? '진행 중' : '잠김'}
+                      </span>
                     </span>
                   </div>
                   <div className="h-2 w-full rounded-full bg-gray-100 overflow-hidden">
