@@ -2,7 +2,7 @@
 -- Part 1: 형태/스펠링 오류 (10) → Part 2: 변화표 (10) → Part 3: 문법 판단 (20)
 -- → Part 4: 종합/영작 (10) → Part 5: 표/데이터 해석 (10)
 
-INSERT INTO naesin_templates (title, template_topic, questions, answer_key)
+INSERT INTO naesin_templates (title, template_topic, questions, answer_key, category, mode)
 VALUES (
   '최상급 Step2',
   '최상급',
@@ -72,5 +72,7 @@ VALUES (
     {"number":59,"question":"[다음 대화를 읽고 알맞은 것을 고르시오]\n\nA: My bag weighs 5 kg.\nB: Mine weighs 8 kg.\nC: My bag is lighter than A''s.","options":["B has the lightest bag.","A has the heaviest bag.","C''s bag is heavier than B''s.","C has the lightest bag.","A''s bag is the heaviest."],"answer":"4"},
     {"number":60,"question":"[다음 표를 보고 알맞지 않은 것을 고르시오]\n\n| 학생 | 달리기(초) | 수영(초) |\n| Jisu | 12 | 45 |\n| Hana | 10 | 50 |\n| Doyun | 14 | 40 |\n\n※ 시간이 짧을수록 빠름","options":["Hana is the fastest runner.","Doyun is the fastest swimmer.","Jisu runs faster than Doyun.","Hana is the fastest swimmer.","Doyun is the slowest runner."],"answer":"4"}
   ]'::jsonb,
-  '["1","4","2","3","5","5","4","3","3","4","2","3","3","2","1","4","3","1","5","2","1","3","1","5","1, 2, 3","5","3","3","1","3","5","4","4","2","5","2","4","4","2, 4, 5","4","3","3","2","3","3","2","3","3","2","1","4","1","2","5","5","3","2","3","4","4"]'::jsonb
+  '["1","4","2","3","5","5","4","3","3","4","2","3","3","2","1","4","3","1","5","2","1","3","1","5","1, 2, 3","5","3","3","1","3","5","4","4","2","5","2","4","4","2, 4, 5","4","3","3","2","3","3","2","3","3","2","1","4","1","2","5","5","3","2","3","4","4"]'::jsonb,
+  'problem',
+  'interactive'
 );

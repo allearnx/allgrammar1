@@ -84,6 +84,7 @@ export default async function StudentVocaDayPage({
   }
 
   const wrongWords = Array.from(wrongWordsMap.values());
+  const hasMatchingSubmission = (matchingSubmissions?.length ?? 0) > 0;
 
   const planContext = await getPlanContext(user.academy_id, user.id);
   const round2Locked = !assignment?.round2_unlocked && !canUseFeature(planContext.tier, 'voca:round2');
@@ -98,6 +99,7 @@ export default async function StudentVocaDayPage({
           progress={(progress as VocaStudentProgress) || null}
           wrongWords={wrongWords}
           round2Locked={round2Locked}
+          hasMatchingSubmission={hasMatchingSubmission}
         />
       </div>
     </>

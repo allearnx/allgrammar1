@@ -4,8 +4,8 @@ DECLARE
   a jsonb;
 BEGIN
   -- 기존 템플릿 삭제 (중복 방지)
-  DELETE FROM naesin_problem_sheets
-  WHERE title = '관계대명사 what Step1' AND is_template = true;
+  DELETE FROM naesin_templates
+  WHERE title = '관계대명사 what Step1';
 
   q := jsonb_build_array(
     -- 유형 1: what절의 역할 구분 (1-20)

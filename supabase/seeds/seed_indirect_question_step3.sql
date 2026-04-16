@@ -1,4 +1,4 @@
--- 간접의문문 Step3 — 서술형 실전 (70문항)
+-- 간접의문문 Step 3 — 서술형 실전 (70문항)
 -- 중2 동아(윤정미) Lesson 2
 -- category: problem, mode: interactive
 
@@ -10,7 +10,7 @@ INSERT INTO public.naesin_templates (
   questions,
   answer_key
 ) VALUES (
-  '간접의문문 Step3',
+  '간접의문문 Step 3',
   '간접의문문',
   'problem',
   'interactive',

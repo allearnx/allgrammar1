@@ -12,6 +12,7 @@ import { NaesinSpellingView } from '@/components/naesin/vocab-tab/spelling-view'
 import { SentenceMatch } from './sentence-match';
 import { WriteWrongWords } from './write-wrong-words';
 import { WrongWordsSpelling } from './wrong-words-spelling';
+import { CheckCircle } from 'lucide-react';
 import { EMPTY_VOCA_PROGRESS, type VocaVocabulary, type VocaStudentProgress, type VocaWrongWord } from '@/types/voca';
 import type { WrongWordItem } from '@/app/(dashboard)/student/voca/[dayId]/client';
 
@@ -20,12 +21,14 @@ interface VocaTabProps {
   dayId: string;
   progress: VocaStudentProgress | null;
   wrongWords?: WrongWordItem[];
+  hasMatchingSubmission?: boolean;
 }
 
-export function VocaTab({ vocabulary, dayId, progress, wrongWords = [] }: VocaTabProps) {
+export function VocaTab({ vocabulary, dayId, progress, wrongWords = [], hasMatchingSubmission = false }: VocaTabProps) {
   const [activeTab, setActiveTab] = useState('flashcard');
   const [matchingWrongWords, setMatchingWrongWords] = useState<VocaWrongWord[] | null>(null);
   const [localProgress, setLocalProgress] = useState(progress);
+  const [submitted, setSubmitted] = useState(hasMatchingSubmission);
 
   const items = useMemo(() => vocabulary.map(vocaToMemoryItem), [vocabulary]);
   const naesinVocab = useMemo(() => vocabulary.map(vocaToNaesinVocabulary), [vocabulary]);
@@ -137,9 +140,16 @@ export function VocaTab({ vocabulary, dayId, progress, wrongWords = [] }: VocaTa
             dayId={dayId}
             onSubmitted={() => {
               setMatchingWrongWords(null);
+              setSubmitted(true);
               toast.success('매칭 학습이 완료되었습니다');
             }}
           />
+        ) : submitted ? (
+          <div className="text-center py-8 space-y-3">
+            <CheckCircle className="h-12 w-12 text-green-500 mx-auto" />
+            <p className="text-lg font-medium">제출 완료!</p>
+            <p className="text-muted-foreground">선생님이 확인하면 알려드립니다.</p>
+          </div>
         ) : (
           <SentenceMatch
             vocabulary={vocabulary}

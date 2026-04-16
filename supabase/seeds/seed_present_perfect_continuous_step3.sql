@@ -1,11 +1,11 @@
--- 현재완료진행형 Step3 60문제 (MCQ 4문항 + 서술형 56문항)
+-- 현재완료진행 Step3 60문제 (MCQ 4문항 + 서술형 56문항)
 -- 난이도: 하(Part1-2) → 중(Part3-4) → 중상(Part5-6) → 상(Part7-9)
 DO $$
 DECLARE
   q jsonb;
   a jsonb;
 BEGIN
-  DELETE FROM naesin_templates WHERE title = '현재완료진행형 Step3';
+  DELETE FROM naesin_templates WHERE title = '현재완료진행 Step3';
 
   -- ═══════════════════════════════════════
   -- Part 1 (Q1-Q5): 보기 단어 시제 변형 빈칸
@@ -247,8 +247,8 @@ BEGIN
   INSERT INTO naesin_templates (
     title, template_topic, questions, answer_key, category, mode
   ) VALUES (
-    '현재완료진행형 Step3', '현재완료진행형', q, a, 'problem', 'interactive'
+    '현재완료진행 Step3', '현재완료진행', q, a, 'problem', 'interactive'
   );
 
-  RAISE NOTICE '현재완료진행형 Step3 (60문제) 시드 완료';
+  RAISE NOTICE '현재완료진행 Step3 (60문제) 시드 완료';
 END $$;

@@ -2,7 +2,7 @@
 -- Part 1: 객관식 (15) → Part 2: 최상급+전치사 변환 (10) → Part 3: 정보 활용 (7)
 -- → Part 4: 원급→비교급/최상급 (18) → Part 5: 보기 선택+최상급 (14) → Part 6: 영작 (12)
 
-INSERT INTO naesin_templates (title, template_topic, questions, answer_key)
+INSERT INTO naesin_templates (title, template_topic, questions, answer_key, category, mode)
 VALUES (
   '최상급 Step1',
   '최상급',
@@ -96,5 +96,7 @@ VALUES (
     "stronger","the nearest","the deepest","The wildest","the most exciting","colder","younger","easier","higher","lower","the most tired","the quietest","taller, the tallest","the driest, the sunniest","the most wonderful, the best","the most venomous","the nicest","faster, the fastest",
     "the shortest","the largest","the oldest","the deepest","the widest","the cleverest","the loudest","the driest","the cleanest","the cheapest","the fastest","the most beautiful","the bravest","the kindest",
     "What is the fastest animal in the world?","Which building is the tallest in our city?","I will choose the best gift from this store.","It is the biggest music festival in the country.","I will give my books to the most diligent student.","They started to play the most exciting song.","Siberia is the coldest region in Russia.","The Tyrannosaurus was the largest and scariest dinosaur.","It was the happiest moment of my life.","Canada is not the smallest country in the world.","Nauru is the smallest island country in the world.","The highest mountain in the world is Mount Everest."
-  ]'::jsonb
+  ]'::jsonb,
+  'problem',
+  'interactive'
 );

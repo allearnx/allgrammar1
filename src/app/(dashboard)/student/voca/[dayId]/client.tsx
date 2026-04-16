@@ -21,9 +21,10 @@ interface VocaDayClientProps {
   progress: VocaStudentProgress | null;
   wrongWords: WrongWordItem[];
   round2Locked?: boolean;
+  hasMatchingSubmission?: boolean;
 }
 
-export function VocaDayClient({ day, vocabulary, progress, wrongWords, round2Locked = false }: VocaDayClientProps) {
+export function VocaDayClient({ day, vocabulary, progress, wrongWords, round2Locked = false, hasMatchingSubmission = false }: VocaDayClientProps) {
   const router = useRouter();
   const [round, setRound] = useState<'1' | '2'>('1');
   useLearningSession('voca', day.id);
@@ -75,6 +76,7 @@ export function VocaDayClient({ day, vocabulary, progress, wrongWords, round2Loc
           dayId={day.id}
           progress={progress}
           wrongWords={wrongWords}
+          hasMatchingSubmission={hasMatchingSubmission}
         />
       ) : (
         <VocaTab2
