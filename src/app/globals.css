@@ -122,6 +122,17 @@
   }
   body {
     @apply bg-background text-foreground;
+    /* iOS Safari: prevent overscroll bounce + tap highlight color */
+    -webkit-tap-highlight-color: rgba(124, 58, 237, 0.15);
+    -webkit-text-size-adjust: 100%;
+  }
+  /* iOS Safari: prevent 300ms tap delay and double-tap zoom on interactive elements */
+  button, a, [role="button"], input[type="button"], input[type="submit"] {
+    touch-action: manipulation;
+  }
+  /* iOS Safari: prevent input auto-zoom (font-size must be >= 16px) */
+  input, textarea, select {
+    font-size: max(16px, 1em);
   }
 }
 

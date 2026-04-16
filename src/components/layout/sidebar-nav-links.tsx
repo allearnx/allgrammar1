@@ -1,10 +1,9 @@
 'use client';
 
 import Link from 'next/link';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
 import { cn } from '@/lib/utils';
-import { Loader2, Lock } from 'lucide-react';
-import { useState, useTransition } from 'react';
+import { Lock } from 'lucide-react';
 import type { NavGroup, NaesinSidebarExam } from './sidebar-nav-config';
 import { NaesinTree } from './sidebar-naesin-tree';
 
@@ -21,22 +20,9 @@ export function NavLinks({
   onNavigate?: () => void;
   hoverWhite?: boolean;
 }) {
-  const router = useRouter();
   const searchParams = useSearchParams();
-  const [isPending, startTransition] = useTransition();
-  const [pendingHref, setPendingHref] = useState<string | null>(null);
 
   const fullPath = searchParams.toString() ? `${pathname}?${searchParams.toString()}` : pathname;
-
-  function handleClick(e: React.MouseEvent, href: string) {
-    e.preventDefault();
-    if (fullPath === href) return;
-    setPendingHref(href);
-    startTransition(() => {
-      router.push(href);
-    });
-    onNavigate?.();
-  }
 
   return (
     <nav className="flex flex-col gap-0.5 px-3">
@@ -56,7 +42,6 @@ export function NavLinks({
             const isActive = hasQuery
               ? fullPath === item.href
               : pathname === item.href || (!isExactOnly && pathname.startsWith(item.href + '/'));
-            const isLoading = isPending && pendingHref === item.href;
 
             if (item.disabled) {
               return (
@@ -76,22 +61,17 @@ export function NavLinks({
               <div key={item.href}>
                 <Link
                   href={item.href}
-                  onClick={(e) => handleClick(e, item.href)}
+                  onClick={() => onNavigate?.()}
                   className={cn(
                     'flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-colors relative',
                     isActive
                       ? 'bg-indigo-50 text-indigo-600 border-l-[3px] border-indigo-600 pl-[9px]'
                       : hoverWhite
                         ? 'text-slate-500 hover:bg-white hover:text-slate-900'
-                        : 'text-slate-500 hover:bg-slate-100 hover:text-slate-900',
-                    isLoading && !isActive && (hoverWhite ? 'bg-white text-slate-900' : 'bg-slate-100 text-slate-900')
+                        : 'text-slate-500 hover:bg-slate-100 hover:text-slate-900'
                   )}
                 >
-                  {isLoading ? (
-                    <Loader2 className="h-4 w-4 shrink-0 animate-spin" />
-                  ) : (
-                    <item.icon className={cn('h-4 w-4 shrink-0', isActive ? 'text-indigo-600' : 'text-slate-400')} />
-                  )}
+                  <item.icon className={cn('h-4 w-4 shrink-0', isActive ? 'text-indigo-600' : 'text-slate-400')} />
                   {item.label}
                 </Link>
                 {/* Naesin tree navigation below the 내신 대비 link */}

@@ -55,9 +55,9 @@ export default async function DashboardLayout({
   return (
     <PaidStatusProvider isPaid={isPaid}>
     <PresenceTracker />
-    <div className="flex h-screen overflow-hidden">
+    <div className="flex h-[100dvh] overflow-hidden">
       <Sidebar user={user} services={services} naesinTree={naesinTree} />
-      <main className="flex-1 overflow-y-auto">
+      <main className="flex-1 overflow-y-auto overscroll-contain">
         {children}
       </main>
       <a
