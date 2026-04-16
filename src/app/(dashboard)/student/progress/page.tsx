@@ -42,7 +42,7 @@ export default async function ProgressPage() {
 
   // Fetch naesin unit names if we have progress
   let naesinUnits: { id: string; unit_number: number; title: string }[] = [];
-  let grammarContentByUnit: Record<string, boolean> = {};
+  const grammarContentByUnit: Record<string, boolean> = {};
   if (naesinSettingsRes.data?.textbook_id) {
     const [unitsRes, grammarLessonsRes] = await Promise.all([
       supabase
