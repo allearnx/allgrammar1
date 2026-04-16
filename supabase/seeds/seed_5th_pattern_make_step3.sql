@@ -51,10 +51,10 @@ BEGIN
     jsonb_build_object('number',12,'question',E'다음 (A)와 (B)에서 관련이 있는 단어를 각각 하나씩 골라 make를 이용하여 <예시>와 같은 문장을 완성하시오.\n\n<예시> Stretching makes your muscles firm.\n\n(A): your skin / the room / our teeth / your muscles\n(B): bright / smooth / firm / healthy\n\nSunlight ___.','answer','Sunlight makes the room bright.','acceptedAnswers',jsonb_build_array('Sunlight makes the room bright','makes the room bright.','makes the room bright')),
 
     -- Q13 ((A)(B) 조합 영작 2)
-    jsonb_build_object('number',13,'question',E'(A): your skin / the room / our teeth / your muscles\n(B): bright / smooth / firm / healthy\n\nLotion ___.','answer','Lotion makes your skin smooth.','acceptedAnswers',jsonb_build_array('Lotion makes your skin smooth','makes your skin smooth.','makes your skin smooth')),
+    jsonb_build_object('number',13,'question',E'다음 (A)와 (B)에서 관련이 있는 단어를 각각 하나씩 골라 make를 이용하여 <예시>와 같은 문장을 완성하시오.\n\n(A): your skin / the room / our teeth / your muscles\n(B): bright / smooth / firm / healthy\n\nLotion ___.','answer','Lotion makes your skin smooth.','acceptedAnswers',jsonb_build_array('Lotion makes your skin smooth','makes your skin smooth.','makes your skin smooth')),
 
     -- Q14 ((A)(B) 조합 영작 3)
-    jsonb_build_object('number',14,'question',E'(A): your skin / the room / our teeth / your muscles\n(B): bright / smooth / firm / healthy\n\nBrushing ___.','answer','Brushing makes our teeth healthy.','acceptedAnswers',jsonb_build_array('Brushing makes our teeth healthy','makes our teeth healthy.','makes our teeth healthy')),
+    jsonb_build_object('number',14,'question',E'다음 (A)와 (B)에서 관련이 있는 단어를 각각 하나씩 골라 make를 이용하여 <예시>와 같은 문장을 완성하시오.\n\n(A): your skin / the room / our teeth / your muscles\n(B): bright / smooth / firm / healthy\n\nBrushing ___.','answer','Brushing makes our teeth healthy.','acceptedAnswers',jsonb_build_array('Brushing makes our teeth healthy','makes our teeth healthy.','makes our teeth healthy')),
 
     -- Q15 (배열)
     jsonb_build_object('number',15,'question',E'다음 주어진 우리말과 같은 뜻이 되도록 괄호 안의 단어를 배열하여 한 문장으로 쓰시오.\n\n따뜻한 차는 나를 편안하게 만든다.\n(comfortable / warm tea / me / makes)','answer','Warm tea makes me comfortable.','acceptedAnswers',jsonb_build_array('Warm tea makes me comfortable')),
@@ -79,7 +79,7 @@ BEGIN
     jsonb_build_object('number',20,'question',E'다음 <보기>의 단어를 알맞게 변형하여 우리말에 맞는 영어 문장을 완성하시오. (단, 모든 단어를 변형하는 것은 아님)\n\n<보기> keep, make, child, safe, us, proud\n\n그 어머니는 아이들을 안전하게 지키고 있다.','answer','The mother is keeping the children safe.','acceptedAnswers',jsonb_build_array('The mother is keeping the children safe')),
 
     -- Q21 (보기 단어 변형: make + O + OC)
-    jsonb_build_object('number',21,'question',E'<보기> keep, make, child, safe, us, proud\n\n그녀의 성공은 우리를 자랑스럽게 만든다.','answer','Her success makes us proud.','acceptedAnswers',jsonb_build_array('Her success makes us proud')),
+    jsonb_build_object('number',21,'question',E'다음 <보기>의 단어를 알맞게 변형하여 우리말에 맞는 영어 문장을 완성하시오. (단, 모든 단어를 변형하는 것은 아님)\n\n<보기> keep, make, child, safe, us, proud\n\n그녀의 성공은 우리를 자랑스럽게 만든다.','answer','Her success makes us proud.','acceptedAnswers',jsonb_build_array('Her success makes us proud')),
 
     -- Q22 (활동+감정 영작 1)
     jsonb_build_object('number',22,'question',E'다음 활동을 할 때 기분이 어떤지 <조건>에 맞게 쓰시오.\n\n| 음악 발표회 | proud / nervous |\n| 과학 실험 | curious / confused |\n\n<조건>\n• 각 활동과 제시된 단어를 선택 사용할 것\n• make를 활용하여 완전한 문장으로 쓸 것\n\n(1) 음악 발표회','answer','The music concert makes me proud.','acceptedAnswers',jsonb_build_array('The music concert makes me proud','The music concert makes me nervous.','The music concert makes me nervous','Music concerts make me proud.','Music concerts make me proud','Music concerts make me nervous.','Music concerts make me nervous')),
@@ -117,7 +117,7 @@ BEGIN
     jsonb_build_object('number',30,'question',E'다음 (A), (B)에 주어진 단어를 이용하여 다음 문장을 영어로 쓰시오. (단, 필요시 형태를 바꿀 것)\n\n(A) horror movies, long lectures, sunny weather, surprise parties, final exams\n(B) frighten, tire, relax, excite, stress\n\n긴 강의는 나를 피곤하게 만든다.','answer','Long lectures make me tired.','acceptedAnswers',jsonb_build_array('Long lectures make me tired')),
 
     -- Q31 ((A)(B) 단어 활용 영작 2: excite→excited)
-    jsonb_build_object('number',31,'question',E'(A) horror movies, long lectures, sunny weather, surprise parties, final exams\n(B) frighten, tire, relax, excite, stress\n\n깜짝 파티는 나를 신나게 만든다.','answer','Surprise parties make me excited.','acceptedAnswers',jsonb_build_array('Surprise parties make me excited'))
+    jsonb_build_object('number',31,'question',E'다음 (A), (B)에 주어진 단어를 이용하여 다음 문장을 영어로 쓰시오. (단, 필요시 형태를 바꿀 것)\n\n(A) horror movies, long lectures, sunny weather, surprise parties, final exams\n(B) frighten, tire, relax, excite, stress\n\n깜짝 파티는 나를 신나게 만든다.','answer','Surprise parties make me excited.','acceptedAnswers',jsonb_build_array('Surprise parties make me excited'))
   );
 
   a := jsonb_build_array(
