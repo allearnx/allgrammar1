@@ -59,7 +59,7 @@ export const PATCH = createApiHandler(
 );
 
 export const DELETE = createApiHandler(
-  { roles: ['boss'], schema: idSchema },
+  { roles: ['boss'], schema: idSchema, hasBody: true },
   async ({ body, supabase }) => {
     dbResult(await supabase.from('announcements').delete().eq('id', body.id));
     return NextResponse.json({ success: true });
