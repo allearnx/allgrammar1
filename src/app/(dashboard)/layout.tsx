@@ -1,3 +1,4 @@
+import type { Metadata } from 'next';
 import { requireUser } from '@/lib/auth/helpers';
 import { createClient } from '@/lib/supabase/server';
 import { Sidebar } from '@/components/layout/sidebar';
@@ -7,6 +8,10 @@ import { getPlanContext } from '@/lib/billing/get-plan-context';
 import { calculateStageStatuses } from '@/lib/naesin/stage-unlock';
 import { groupBy } from '@/lib/naesin/build-unit-summary';
 import type { NaesinStageStatuses } from '@/types/database';
+
+export const metadata: Metadata = {
+  robots: { index: false, follow: false },
+};
 
 export interface NaesinSidebarExam {
   round: number;
