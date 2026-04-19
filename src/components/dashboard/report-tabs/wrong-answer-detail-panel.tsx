@@ -234,7 +234,7 @@ function ReadOnlyWrongAnswerCard({
 
   const options = data.options as string[] | undefined;
   const explanation = data.explanation as string | undefined;
-  const isProblemStage = wrongAnswer.stage === 'problem' && wrongAnswer.sheet_id;
+  const isProblemStage = (wrongAnswer.stage === 'problem' || wrongAnswer.stage === 'mockExam') && wrongAnswer.sheet_id;
   const isTextbookStage = TEXTBOOK_STAGES.has(wrongAnswer.stage);
   const isDraft = wrongAnswer.isDraft;
   const questionIndex = data.number ? Number(data.number) - 1 : -1;

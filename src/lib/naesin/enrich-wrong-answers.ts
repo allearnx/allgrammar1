@@ -5,7 +5,7 @@
  */
 export function enrichWrongAnswersFromSheet(data: Record<string, unknown>[]): void {
   for (const item of data) {
-    if (item.stage !== 'problem') continue;
+    if (item.stage !== 'problem' && item.stage !== 'mockExam') continue;
     const sheet = item.sheet as { id: string; title: string; questions?: unknown[] } | null;
     if (!sheet?.questions) continue;
 
