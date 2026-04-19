@@ -333,7 +333,7 @@ BEGIN
       'explanation',E'⑤ will be taught us → will be taught to us (4형식→수동태 시 간접목적어 앞에 전치사 to 필요) 또는 We will be taught English grammar by him.')
   );
 
-  a := jsonb_build_array('3', '2', '2', '2', '5', '1', '1', '2', '3', '2', '4', '2', '3', '4', '3', '2', '1', '3', '2', '5', '5', '4', '1', '2', '3', '2', '3', '3', '2', '3', '1', '4', '3', '5');
+  a := jsonb_build_array('3', '2', '2', '2', '5', '1', '1', '2', '3', '2', '4', '2', '3', '4', '3', '2', '1', '3', '2', '5', '5', '4', '1', '2,4', '2', '3', '2', '3', '3', '2', '3', '1', '4', '3', '5');
 
   INSERT INTO naesin_templates (title, template_topic, questions, answer_key, category, mode)
   VALUES (
