@@ -20,8 +20,12 @@ export const POST = createApiHandler(
     if (!sheet) throw new NotFoundError('시험지를 찾을 수 없습니다.');
 
     // Grade
-    const answerKey = sheet.answer_key as (string | number)[];
-    const questions = sheet.questions as { number: number; question: string; options?: string[]; acceptedAnswers?: string[]; explanation?: string; subParts?: { label: string; answer: string; acceptedAnswers?: string[] }[] }[];
+    const questions = sheet.questions as { number: number; question: string; answer?: string | number; options?: string[]; acceptedAnswers?: string[]; explanation?: string; subParts?: { label: string; answer: string; acceptedAnswers?: string[] }[] }[];
+    // Fallback: if answer_key is empty, rebuild from questions[].answer
+    const rawAnswerKey = sheet.answer_key as (string | number)[];
+    const answerKey = rawAnswerKey.length > 0
+      ? rawAnswerKey
+      : questions.map((q) => q.answer ?? '');
     let correctCount = 0;
     const wrongAnswers: { number: number; userAnswer: string | number; correctAnswer: string | number; question?: string }[] = [];
 
