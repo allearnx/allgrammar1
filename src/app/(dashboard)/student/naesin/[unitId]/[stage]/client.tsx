@@ -1,5 +1,6 @@
 'use client';
 
+import { useState, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import {
@@ -104,6 +105,7 @@ type StageRenderer = (props: {
   unitId: string;
   onStageComplete: () => void;
   router: ReturnType<typeof useRouter>;
+  onActiveSheetChange?: (category: string) => void;
 }) => React.ReactNode;
 
 const STAGE_RENDERERS: Record<StageKey, StageRenderer> = {
@@ -154,13 +156,14 @@ const STAGE_RENDERERS: Record<StageKey, StageRenderer> = {
       videoProgress={stageData.videoProgress}
     />
   ),
-  problem: ({ stageData, unitId, onStageComplete }) => (
+  problem: ({ stageData, unitId, onStageComplete, onActiveSheetChange }) => (
     <ProblemTab
       sheets={stageData.problemSheets || []}
       unitId={unitId}
       onStageComplete={onStageComplete}
       bestScoreBySheet={stageData.bestScoreBySheet}
       lastAttemptBySheet={stageData.lastAttemptBySheet}
+      onActiveSheetChange={onActiveSheetChange}
     />
   ),
   mockExam: ({ stageData, unitId, onStageComplete }) => (
@@ -191,7 +194,17 @@ export function NaesinStageView({
   isHidden: currentStageHidden,
 }: NaesinStageViewProps) {
   const router = useRouter();
-  useLearningSession('naesin', unit.id, currentStage);
+  const [refinedStage, setRefinedStage] = useState<string>(currentStage);
+
+  const handleActiveSheetChange = useCallback((category: string) => {
+    if (category === 'external_passage' || category === 'eng_eng_def') {
+      setRefinedStage(category);
+    } else {
+      setRefinedStage(currentStage);
+    }
+  }, [currentStage]);
+
+  useLearningSession('naesin', unit.id, refinedStage);
 
   function handleStageComplete() {
     // router.refresh()를 즉시 호출하면 채점 결과 등 클라이언트 state가 날아감.
@@ -230,7 +243,7 @@ export function NaesinStageView({
             Icon={currentConfig?.icon || Lock}
           />
         ) : (
-          renderStage({ stageData, unitId: unit.id, onStageComplete: handleStageComplete, router })
+          renderStage({ stageData, unitId: unit.id, onStageComplete: handleStageComplete, router, onActiveSheetChange: handleActiveSheetChange })
         )}
       </div>
     </div>

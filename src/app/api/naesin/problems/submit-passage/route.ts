@@ -7,10 +7,13 @@ export const maxDuration = 60;
 export const POST = createApiHandler(
   { schema: passageSubmitSchema },
   async ({ user, body, supabase }) => {
-    const { sheetId, unitId, orderingScore, translationScore, wrongSentences } = body;
+    const { sheetId, unitId, orderingScore, translationScore, fillBlanksScore, wrongSentences } = body;
 
-    const score = Math.round((orderingScore + translationScore) / 2);
-    const totalQuestions = 2; // ordering + translation exercises
+    const hasFillBlanks = fillBlanksScore != null;
+    const score = hasFillBlanks
+      ? Math.round((fillBlanksScore + orderingScore + translationScore) / 3)
+      : Math.round((orderingScore + translationScore) / 2);
+    const totalQuestions = hasFillBlanks ? 3 : 2;
 
     // Save attempt in the standard problem attempts table
     const attempt = dbResult(await supabase
@@ -18,14 +21,14 @@ export const POST = createApiHandler(
       .insert({
         student_id: user.id,
         sheet_id: sheetId,
-        answers: [orderingScore, translationScore],
+        answers: hasFillBlanks ? [fillBlanksScore, orderingScore, translationScore] : [orderingScore, translationScore],
         score,
         total_questions: totalQuestions,
         wrong_answers: wrongSentences.map((ws) => ({
           number: ws.number,
           userAnswer: ws.userAnswer,
           correctAnswer: ws.correctAnswer,
-          question: `[${ws.type === 'ordering' ? '순서배열' : '영작'}] #${ws.number}`,
+          question: `[${ws.type === 'ordering' ? '순서배열' : ws.type === 'fill_blank' ? '빈칸채우기' : '영작'}] #${ws.number}`,
         })),
       })
       .select()
@@ -49,7 +52,7 @@ export const POST = createApiHandler(
           number: ws.number,
           userAnswer: ws.userAnswer,
           correctAnswer: ws.correctAnswer,
-          question: `[${ws.type === 'ordering' ? '순서배열' : '영작'}] #${ws.number}`,
+          question: `[${ws.type === 'ordering' ? '순서배열' : ws.type === 'fill_blank' ? '빈칸채우기' : '영작'}] #${ws.number}`,
         },
         sheet_id: sheetId,
       }));
@@ -84,6 +87,7 @@ export const POST = createApiHandler(
     return NextResponse.json({
       attempt,
       score,
+      fillBlanksScore: fillBlanksScore ?? null,
       orderingScore,
       translationScore,
       wrongCount: wrongSentences.length,

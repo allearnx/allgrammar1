@@ -418,9 +418,10 @@ export const passageSubmitSchema = z.object({
   unitId: ID,
   orderingScore: z.number().min(0).max(100),
   translationScore: z.number().min(0).max(100),
+  fillBlanksScore: z.number().min(0).max(100).optional(),
   wrongSentences: z.array(z.object({
     number: z.number(),
-    type: z.enum(['ordering', 'translation']),
+    type: z.enum(['ordering', 'translation', 'fill_blank']),
     userAnswer: z.string(),
     correctAnswer: z.string(),
   })).default([]),

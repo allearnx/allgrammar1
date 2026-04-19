@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { ClipboardList, RotateCcw } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -25,11 +25,20 @@ interface ProblemTabProps {
   onStageComplete?: () => void;
   bestScoreBySheet?: Record<string, number>;
   lastAttemptBySheet?: Record<string, LastAttempt>;
+  onActiveSheetChange?: (category: string) => void;
 }
 
-export function ProblemTab({ sheets, unitId, onStageComplete, bestScoreBySheet, lastAttemptBySheet }: ProblemTabProps) {
+export function ProblemTab({ sheets, unitId, onStageComplete, bestScoreBySheet, lastAttemptBySheet, onActiveSheetChange }: ProblemTabProps) {
   const [activeSheetId, setActiveSheetId] = useState<string | null>(sheets[0]?.id || null);
   const [retrySheetIds, setRetrySheetIds] = useState<Set<string>>(new Set());
+
+  const activeSheet = sheets.find((s) => s.id === activeSheetId) || sheets[0];
+
+  useEffect(() => {
+    if (activeSheet && onActiveSheetChange) {
+      onActiveSheetChange(activeSheet.category);
+    }
+  }, [activeSheet?.category, onActiveSheetChange]);
 
   if (sheets.length === 0) {
     return (
@@ -42,7 +51,6 @@ export function ProblemTab({ sheets, unitId, onStageComplete, bestScoreBySheet, 
     );
   }
 
-  const activeSheet = sheets.find((s) => s.id === activeSheetId) || sheets[0];
   const lastAttempt = lastAttemptBySheet?.[activeSheet.id];
   const hasCompleted = bestScoreBySheet?.[activeSheet.id] != null;
   const showSummary = hasCompleted && lastAttempt && !retrySheetIds.has(activeSheet.id);

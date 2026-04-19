@@ -1,20 +1,28 @@
 'use client';
 
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useMemo } from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Badge } from '@/components/ui/badge';
-import { CheckCircle2, ArrowRightLeft, PenLine } from 'lucide-react';
+import { CheckCircle2, ArrowRightLeft, PenLine, TextCursorInput } from 'lucide-react';
 import { OrderingExercise } from '@/components/shared/ordering-exercise';
 import { TranslationExercise, type WrongTranslation } from '@/components/shared/translation-exercise';
+import { FillBlanksExercise } from '@/components/shared/fill-blanks-exercise';
 import { fetchWithToast } from '@/lib/fetch-with-toast';
 import type { NaesinProblemSheet } from '@/types/database';
-import type { TextbookPassage, SentenceItem } from '@/types/textbook';
+import type { TextbookPassage, SentenceItem, BlankItem } from '@/types/textbook';
 import type { ExternalPassageSentence } from '@/types/naesin';
 
 interface ExternalPassageViewProps {
   sheet: NaesinProblemSheet;
   unitId: string;
   onComplete?: () => void;
+}
+
+function generateBlanks(originalText: string, interval: number): BlankItem[] {
+  const words = originalText.trim().split(/\s+/);
+  return words
+    .map((w, i) => ({ index: i, answer: w }))
+    .filter((_, i) => i % interval === interval - 1);
 }
 
 /** Convert sheet questions (ExternalPassageSentence[]) to a mock TextbookPassage for reuse */
@@ -26,15 +34,17 @@ function toTextbookPassage(sheet: NaesinProblemSheet): TextbookPassage {
     acceptedAnswers: q.acceptedAnswers,
   }));
 
+  const originalText = sentences.map((s) => s.original).join(' ');
+
   return {
     id: sheet.id,
     grammar_id: '',
     title: sheet.title,
-    original_text: sentences.map((s) => s.original).join(' '),
+    original_text: originalText,
     korean_translation: sentences.map((s) => s.korean).join(' '),
-    blanks_easy: null,
-    blanks_medium: null,
-    blanks_hard: null,
+    blanks_easy: generateBlanks(originalText, 5),
+    blanks_medium: generateBlanks(originalText, 3),
+    blanks_hard: generateBlanks(originalText, 2),
     sentences,
     is_textbook_mode_active: true,
     created_at: sheet.created_at,
@@ -42,13 +52,18 @@ function toTextbookPassage(sheet: NaesinProblemSheet): TextbookPassage {
 }
 
 export function ExternalPassageView({ sheet, unitId, onComplete }: ExternalPassageViewProps) {
+  const [fillBlanksScore, setFillBlanksScore] = useState<number | null>(null);
   const [orderingScore, setOrderingScore] = useState<number | null>(null);
   const [translationScore, setTranslationScore] = useState<number | null>(null);
   const [translationWrongs, setTranslationWrongs] = useState<WrongTranslation[]>([]);
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
-  const passage = toTextbookPassage(sheet);
+  const passage = useMemo(() => toTextbookPassage(sheet), [sheet]);
+
+  const handleFillBlanksComplete = useCallback((score: number) => {
+    setFillBlanksScore(score);
+  }, []);
 
   const handleOrderingComplete = useCallback((score: number) => {
     setOrderingScore(score);
@@ -59,10 +74,10 @@ export function ExternalPassageView({ sheet, unitId, onComplete }: ExternalPassa
     setTranslationWrongs(wrongs);
   }, []);
 
-  const bothDone = orderingScore !== null && translationScore !== null;
+  const allDone = fillBlanksScore !== null && orderingScore !== null && translationScore !== null;
 
   async function handleSubmit() {
-    if (!bothDone || submitting) return;
+    if (!allDone || submitting) return;
     setSubmitting(true);
 
     const wrongSentences = [
@@ -79,6 +94,7 @@ export function ExternalPassageView({ sheet, unitId, onComplete }: ExternalPassa
         body: {
           sheetId: sheet.id,
           unitId,
+          fillBlanksScore,
           orderingScore,
           translationScore,
           wrongSentences,
@@ -94,12 +110,12 @@ export function ExternalPassageView({ sheet, unitId, onComplete }: ExternalPassa
     }
   }
 
-  // Auto-submit when both exercises are done
-  if (bothDone && !submitted && !submitting) {
+  // Auto-submit when all exercises are done
+  if (allDone && !submitted && !submitting) {
     handleSubmit();
   }
 
-  const avgScore = bothDone ? Math.round((orderingScore + translationScore) / 2) : null;
+  const avgScore = allDone ? Math.round((fillBlanksScore + orderingScore + translationScore) / 3) : null;
 
   return (
     <div className="space-y-4">
@@ -113,6 +129,7 @@ export function ExternalPassageView({ sheet, unitId, onComplete }: ExternalPassa
           <CheckCircle2 className="h-10 w-10 text-green-500 mx-auto" />
           <p className="text-3xl font-bold">{avgScore}점</p>
           <div className="flex justify-center gap-4 text-sm text-muted-foreground">
+            <span>빈칸 {fillBlanksScore}점</span>
             <span>순서배열 {orderingScore}점</span>
             <span>영작 {translationScore}점</span>
           </div>
@@ -120,11 +137,18 @@ export function ExternalPassageView({ sheet, unitId, onComplete }: ExternalPassa
       )}
 
       {!submitted && (
-        <Tabs defaultValue="ordering" className="w-full">
-          <TabsList className="grid w-full grid-cols-2">
+        <Tabs defaultValue="fillBlanks" className="w-full">
+          <TabsList className="grid w-full grid-cols-3">
+            <TabsTrigger value="fillBlanks" className="gap-1.5">
+              <TextCursorInput className="h-3.5 w-3.5" />
+              빈칸
+              {fillBlanksScore !== null && (
+                <Badge variant="outline" className="ml-1 text-xs">{fillBlanksScore}점</Badge>
+              )}
+            </TabsTrigger>
             <TabsTrigger value="ordering" className="gap-1.5">
               <ArrowRightLeft className="h-3.5 w-3.5" />
-              순서 배열
+              순서
               {orderingScore !== null && (
                 <Badge variant="outline" className="ml-1 text-xs">{orderingScore}점</Badge>
               )}
@@ -137,6 +161,20 @@ export function ExternalPassageView({ sheet, unitId, onComplete }: ExternalPassa
               )}
             </TabsTrigger>
           </TabsList>
+
+          <TabsContent value="fillBlanks" className="mt-4">
+            {fillBlanksScore !== null ? (
+              <div className="text-center py-8 text-muted-foreground">
+                <CheckCircle2 className="h-8 w-8 text-green-500 mx-auto mb-2" />
+                <p>빈칸 채우기 완료! ({fillBlanksScore}점)</p>
+              </div>
+            ) : (
+              <FillBlanksExercise
+                passage={passage}
+                onComplete={handleFillBlanksComplete}
+              />
+            )}
+          </TabsContent>
 
           <TabsContent value="ordering" className="mt-4">
             {orderingScore !== null ? (

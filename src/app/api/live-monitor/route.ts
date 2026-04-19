@@ -19,6 +19,8 @@ const STAGE_LABELS: Record<string, string> = {
   textbookVideo: '설명 영상',
   grammar: '문법 설명',
   problem: '문제풀이',
+  external_passage: '외부지문',
+  eng_eng_def: '영영풀이',
   mockExam: '모의고사',
   lastReview: '라스트리뷰',
 };
