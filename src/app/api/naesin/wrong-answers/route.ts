@@ -58,6 +58,7 @@ async function autoBackfillForStudent(studentId: string) {
         stage: 'problem', source_type: sheet.mode || 'interactive',
         question_data: { ...wa, ...(q?.options ? { options: q.options } : {}), ...(q?.explanation ? { explanation: q.explanation } : {}) },
         sheet_id: attempt.sheet_id,
+        round: 1,
       });
     }
   }
