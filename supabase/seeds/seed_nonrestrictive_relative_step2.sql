@@ -291,7 +291,7 @@ jsonb_build_object('number',74,'question',E'다음 글의 밑줄 친 부분 중 
 jsonb_build_object('number',75,'question',E'다음 글의 밑줄 친 부분 중 어법상 옳은 것을 모두 고르시오.\n\nLast summer I interned at a publishing company, ①<u>that</u> specializes in children''s books. My supervisor was Ms. Kang, ②<u>who</u> had been in the industry for over twenty years. She gave me a lot of feedback on my work, ③<u>which</u> helped me improve quickly. One day, I accidentally deleted an important file, ④<u>which it</u> caused a major panic in the office. Luckily, a colleague recovered it, ⑤<u>which</u> saved the day.','type','select_all','options',jsonb_build_array(E'①',E'②',E'③',E'④',E'⑤'),'answer',jsonb_build_array('2','3','5'),'explanation',E'②③⑤ 옳음. ①that→which ④which it→which')
   );
 
-  a := jsonb_build_array();
+  a := jsonb_build_array(E'4', E'5', E'3', E'4', E'5', E'4', E'1', E'3', E'1', E'1', E'4', E'1', E'1', E'1', E'1', E'3', E'2', E'2', E'3', E'3', E'3', E'5', E'5', E'3', E'3', E'4', E'3', E'3', E'4', E'5', E'3', E'4', E'3', E'4', E'1', E'3', E'3', E'2', E'5', E'4', E'2', E'2', E'3', E'3', E'2', E'3', E'3', E'3', E'3', E'3', E'2', E'1', E'3', E'3', E'4', E'1', E'2', E'1', E'1', E'1');
 
   INSERT INTO naesin_templates (title, template_topic, questions, answer_key, category, mode)
   VALUES (E'관계대명사의 계속적 용법 Step 2', E'관계대명사의 계속적 용법', q1 || q2 || q3, a, 'problem', 'interactive');

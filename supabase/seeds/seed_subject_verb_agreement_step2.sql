@@ -382,7 +382,7 @@ BEGIN
       'explanation',E'45 percent of the students(복수) → 복수동사 say')
   );
 
-  a := jsonb_build_array();
+  a := jsonb_build_array('5', '1', '2', '1', '2', '5', '1', '1', '4', '5', '4', '2', '5', '5', '1', '2', '4', '4', '5', '3', '1', '2,4', '3', '5', '3', '2', '4', '2', '1', '4', '3', '2', '3', '3', '4');
 
   INSERT INTO naesin_templates (title, template_topic, questions, answer_key, category, mode)
   VALUES (

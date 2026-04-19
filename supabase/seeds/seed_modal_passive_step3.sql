@@ -232,7 +232,7 @@ BEGIN
       'explanation',E'능동태 → 수동태: 목적어(The main stage backdrop) + will be designed + by 행위자(a local artist)')
   );
 
-  a := jsonb_build_array();
+  a := jsonb_build_array(E'will be discovered', E'should be addressed', E'might be planted', E'can be used', E'must not be submitted', E'Will / be held', E'must be not removed → must not be removed', E'should kept → should be kept', E'No error', E'must not be entered → must not enter', E'will be submit → will be submitted', E'No error', E'will be replaced', E'must not be used', E'should be submitted', E'(16a) will be converted / (16b) should be completed', E'This information should not be shared with anyone without permission.', E'When will the new traffic rules be enforced?', E'Fresh produce must be kept in a cool, dry place.', E'The meeting room cannot be reserved without prior approval.', E'Library books must be returned by Friday.', E'Tickets can be purchased at the entrance.', E'Children should not be left unattended in public places.', E'Will the winners be announced at the ceremony?', E'The deadline may not be extended this time.', E'Waste should be sorted before it is recycled.', E'This old factory can be converted into a local cultural center.', E'Endangered animals must not be hunted for any reason.', E'Where will the next World Expo be held?', E'The main stage backdrop will be designed by a local artist.');
 
   INSERT INTO naesin_templates (title, template_topic, questions, answer_key, category, mode)
   VALUES (

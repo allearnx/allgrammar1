@@ -547,7 +547,7 @@ BEGIN
       'explanation',E'"~때문에"는 이유를 나타내므로 since가 적절합니다. ①④ 양보, ② although(양보), ⑤ 역접은 문맥에 맞지 않습니다.')
   );
 
-  a := jsonb_build_array();
+  a := jsonb_build_array(E'4', E'2', E'3', E'4', E'5', E'4', E'3', E'4', E'4', E'1,5', E'3', E'1', E'5', E'1', E'2', E'3', E'2', E'4', E'3', E'3', E'3', E'4', E'4', E'1', E'2', E'4', E'4', E'1', E'4', E'1,5', E'3', E'4', E'5', E'3', E'5', E'2', E'2', E'2', E'2', E'3', E'4', E'2', E'2', E'4', E'2', E'4', E'1', E'5', E'1', E'2', E'2', E'2', E'3', E'2,3', E'1,4', E'2', E'2', E'2', E'5', E'3,4', E'5', E'1', E'5', E'5', E'3', E'2', E'3', E'4', E'5', E'2', E'1', E'5', E'1', E'5', E'3', E'3', E'2', E'5', E'3', E'2', E'4', E'3', E'2', E'2', E'3', E'2', E'2', E'2', E'2', E'3', E'2,5', E'2', E'3', E'4', E'2', E'3', E'2', E'5', E'4', E'3');
 
   INSERT INTO naesin_templates (title, template_topic, questions, answer_key, category, mode)
   VALUES (E'접속사 since/though Step 2', E'접속사 since/though', q, a, 'problem', 'interactive');

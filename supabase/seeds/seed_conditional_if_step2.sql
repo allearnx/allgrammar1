@@ -86,7 +86,7 @@ jsonb_build_object('number',69,'question',E'다음 중 어법상 옳은 문장�
 jsonb_build_object('number',70,'question',E'다음 중 어법상 옳은 문장의 총 개수를 고르시오.\n\nⓐ If I don''t run, I will be late.\nⓑ Unless you study harder, you will fail.\nⓒ If it will rain, I will stay at home.\nⓓ She''ll be angry if someone eats her pizza.\nⓔ Unless he will come right now, he''ll lose his job.','type','mcq','options',jsonb_build_array(E'1개',E'2개',E'3개',E'4개',E'5개'),'answer',E'3','explanation',E'ⓐ, ⓑ, ⓓ 옳음 (3개). ⓒ will rain→rains ⓔ will come→comes')
   );
 
-  a := jsonb_build_array();
+  a := jsonb_build_array(E'1', E'2', E'3', E'1', E'3', E'5', E'1', E'3', E'4', E'3', E'2', E'5', E'2', E'4', E'3', E'5', E'4', E'1', E'5', E'3', E'3', E'5', E'2', E'1', E'2', E'5', E'2', E'1', E'2', E'2', E'3', E'4', E'2', E'2', E'3', E'4', E'5', E'3', E'5', E'1', E'1', E'3', E'3', E'4', E'2', E'3', E'4', E'1', E'5', E'2', E'5', E'2', E'5', E'5', E'1', E'2', E'○', E'○', E'✕', E'○', E'2', E'3', E'2', E'3', E'3', E'3', E'3', E'4', E'2', E'3');
 
   INSERT INTO naesin_templates (title, template_topic, questions, answer_key, category, mode)
   VALUES (E'조건문 if Step 2', E'조건문 if', q1 || q2 || q3, a, 'problem', 'interactive');
