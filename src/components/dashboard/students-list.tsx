@@ -79,10 +79,18 @@ export async function StudentsList({ user, basePath, searchQuery }: Props) {
     studentIds.length > 0
       ? admin
           .from('naesin_student_progress')
-          .select('student_id, vocab_completed, passage_completed, grammar_completed, problem_completed')
+          .select('student_id, vocab_completed, passage_completed, grammar_completed, problem_completed, round2_passage_completed, round2_dialogue_completed')
           .in('student_id', studentIds)
       : Promise.resolve({ data: [] }),
   ]);
+
+  // Fetch academy naesinRequiredRounds
+  let naesinRequiredRounds = 1;
+  if (user.academy_id) {
+    const { data: academy } = await admin.from('academies').select('naesin_required_rounds').eq('id', user.academy_id).single();
+    naesinRequiredRounds = academy?.naesin_required_rounds ?? 1;
+  }
+  const hasRound2 = naesinRequiredRounds >= 2;
 
   const allProgress = progressRes.data || [];
   const allNaesinProgress = naesinProgressRes.data || [];
@@ -98,12 +106,16 @@ export async function StudentsList({ user, basePath, searchQuery }: Props) {
   });
 
   // Naesin: count completed stages per student
+  const stagesPerUnit = hasRound2 ? 6 : 4;
   const naesinByStudent = new Map<string, { stages: number; units: number }>();
   allNaesinProgress?.forEach((p) => {
     const prev = naesinByStudent.get(p.student_id) || { stages: 0, units: 0 };
-    const stageCount = (p.vocab_completed ? 1 : 0) + (p.passage_completed ? 1 : 0) + (p.grammar_completed ? 1 : 0) + (p.problem_completed ? 1 : 0);
+    let stageCount = (p.vocab_completed ? 1 : 0) + (p.passage_completed ? 1 : 0) + (p.grammar_completed ? 1 : 0) + (p.problem_completed ? 1 : 0);
+    if (hasRound2) {
+      stageCount += (p.round2_passage_completed ? 1 : 0) + (p.round2_dialogue_completed ? 1 : 0);
+    }
     prev.stages += stageCount;
-    if (stageCount === 4) prev.units += 1;
+    if (stageCount === stagesPerUnit) prev.units += 1;
     naesinByStudent.set(p.student_id, prev);
   });
 

@@ -42,7 +42,7 @@ export default async function ParentReportPage({ params }: Props) {
 
   // Fetch base data in parallel
   const [{ data: student }, { data: svcData }, naesinData] = await Promise.all([
-    admin.from('users').select('full_name').eq('id', studentId).single(),
+    admin.from('users').select('full_name, academy_id').eq('id', studentId).single(),
     admin.from('service_assignments').select('service').eq('student_id', studentId),
     fetchNaesinExamData(studentId),
   ]);
@@ -62,6 +62,13 @@ export default async function ParentReportPage({ params }: Props) {
   const vocaSubmissionStatuses: Record<string, string> = {};
   for (const s of vocaSubRes.data || []) vocaSubmissionStatuses[s.day_id] = s.status;
 
+  // Fetch academy naesinRequiredRounds
+  let naesinRequiredRounds = 1;
+  if (student?.academy_id) {
+    const { data: academy } = await admin.from('academies').select('naesin_required_rounds').eq('id', student.academy_id).single();
+    naesinRequiredRounds = academy?.naesin_required_rounds ?? 1;
+  }
+
   // Build cards
   const naesinCard = hasNaesin && naesinProgressData ? (
     <NaesinProgressCard
@@ -77,6 +84,7 @@ export default async function ParentReportPage({ params }: Props) {
       problemSheetsByUnit={naesinProgressData.problemSheetsByUnit}
       problemAttemptsBySheet={naesinProgressData.problemAttemptsBySheet}
       grammarContentByUnit={naesinProgressData.grammarContentByUnit}
+      naesinRequiredRounds={naesinRequiredRounds}
       hideSettings
     />
   ) : null;

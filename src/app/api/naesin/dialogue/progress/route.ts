@@ -53,6 +53,7 @@ export const POST = createApiHandler(
         unit_id: unitId,
         [colBest]: newBest,
         [colCompleted]: dialogueCompleted,
+        current_round: isRound2 ? 2 : 1,
       }, { onConflict: 'student_id,unit_id' }));
 
     return NextResponse.json({ success: true, dialogueCompleted, round, type });

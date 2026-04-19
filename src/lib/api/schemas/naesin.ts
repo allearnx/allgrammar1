@@ -64,6 +64,7 @@ export const wrongAnswerCreateSchema = z.object({
   stage: SHORT,
   sourceType: SHORT,
   wrongAnswers: z.array(z.unknown()).min(1),
+  round: z.number().int().min(1).max(2).optional(),
 });
 
 export const wrongAnswerPatchSchema = z.object({
@@ -380,6 +381,7 @@ export const learningSessionHeartbeatSchema = z.object({
   contextId: z.string().max(100),
   seconds: z.number().int().min(1).max(120),
   stage: z.string().max(30).optional(),
+  round: z.number().int().min(1).max(2).optional(),
 });
 
 // ── AI Problem Generation/Improvement Schemas ──

@@ -125,7 +125,7 @@ export const GET = createApiHandler(
 export const POST = createApiHandler(
   { schema: wrongAnswerCreateSchema },
   async ({ user, body, supabase }) => {
-    const { unitId, stage, sourceType, wrongAnswers } = body;
+    const { unitId, stage, sourceType, wrongAnswers, round } = body;
 
     const rows = wrongAnswers.map((wa: unknown) => ({
       student_id: user.id,
@@ -133,6 +133,7 @@ export const POST = createApiHandler(
       stage,
       source_type: sourceType,
       question_data: wa,
+      round: round ?? 1,
     }));
 
     dbResult(await supabase

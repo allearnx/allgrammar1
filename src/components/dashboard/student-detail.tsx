@@ -96,6 +96,17 @@ export async function StudentDetail({ user, studentId, naesinData }: Props) {
     ? await fetchNaesinProgress(studentId, naesinData, legacyWatchedSeconds)
     : { naesinProgress: [], hours: 0, minutes: 0, fillBlanksByUnit: {}, problemSheetsByUnit: {}, problemAttemptsBySheet: {}, grammarContentByUnit: {} };
 
+  // Fetch academy-level naesin_required_rounds
+  let naesinRequiredRounds = 1;
+  if (student.academy_id) {
+    const { data: academy } = await admin
+      .from('academies')
+      .select('naesin_required_rounds')
+      .eq('id', student.academy_id)
+      .single();
+    naesinRequiredRounds = academy?.naesin_required_rounds ?? 1;
+  }
+
   const passageStages = (passageStagesRes.data?.passage_required_stages as string[] | null) ?? ['fill_blanks', 'translation'];
   const translationSentencesPerPage = (passageStagesRes.data?.translation_sentences_per_page as number | null) ?? 10;
   const enabledStages = (passageStagesRes.data?.enabled_stages as string[] | null) ?? ['vocab', 'passage', 'dialogue', 'textbookVideo', 'grammar', 'problem', 'mockExam', 'lastReview'];
@@ -154,6 +165,7 @@ export async function StudentDetail({ user, studentId, naesinData }: Props) {
             problemSheetsByUnit={problemSheetsByUnit}
             problemAttemptsBySheet={problemAttemptsBySheet}
             grammarContentByUnit={grammarContentByUnit}
+            naesinRequiredRounds={naesinRequiredRounds}
           />
         )}
 

@@ -152,6 +152,28 @@ describe('learningSessionHeartbeatSchema', () => {
     });
     expect(result.success).toBe(false);
   });
+
+  it('accepts optional round field', async () => {
+    const { learningSessionHeartbeatSchema } = await import('@/lib/api/schemas');
+    const result = learningSessionHeartbeatSchema.safeParse({
+      contextType: 'naesin',
+      contextId: 'unit-1',
+      seconds: 30,
+      round: 2,
+    });
+    expect(result.success).toBe(true);
+  });
+
+  it('rejects round outside 1-2', async () => {
+    const { learningSessionHeartbeatSchema } = await import('@/lib/api/schemas');
+    const result = learningSessionHeartbeatSchema.safeParse({
+      contextType: 'naesin',
+      contextId: 'unit-1',
+      seconds: 30,
+      round: 3,
+    });
+    expect(result.success).toBe(false);
+  });
 });
 
 // ── API Route Tests ──

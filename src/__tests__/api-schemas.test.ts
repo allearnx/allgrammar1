@@ -155,6 +155,28 @@ describe('wrongAnswerCreateSchema', () => {
     });
     expect(result.success).toBe(false);
   });
+
+  it('accepts optional round field', () => {
+    const result = wrongAnswerCreateSchema.safeParse({
+      unitId: 'u1',
+      stage: 'passage',
+      sourceType: 'translation',
+      wrongAnswers: [{ word: 'test' }],
+      round: 2,
+    });
+    expect(result.success).toBe(true);
+  });
+
+  it('rejects round outside 1-2', () => {
+    const result = wrongAnswerCreateSchema.safeParse({
+      unitId: 'u1',
+      stage: 'passage',
+      sourceType: 'translation',
+      wrongAnswers: [{ word: 'test' }],
+      round: 3,
+    });
+    expect(result.success).toBe(false);
+  });
 });
 
 describe('wrongAnswerPatchSchema', () => {

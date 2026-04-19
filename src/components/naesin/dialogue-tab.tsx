@@ -73,6 +73,7 @@ export function DialogueTab({ dialogues, unitId, onStageComplete, naesinRequired
           stage: 'dialogue',
           sourceType,
           wrongAnswers: wrongItems,
+          round: currentRound,
         },
         silent: true,
         logContext: 'naesin.dialogue_tab.wrong_answers',

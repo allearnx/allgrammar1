@@ -28,6 +28,16 @@ interface NaesinProgressRow {
   grammar_total_videos: number;
   problem_completed: boolean;
   updated_at: string;
+  // Round 2
+  round2_passage_fill_blanks_best?: number | null;
+  round2_passage_ordering_best?: number | null;
+  round2_passage_translation_best?: number | null;
+  round2_passage_grammar_vocab_best?: number | null;
+  round2_passage_completed?: boolean;
+  round2_dialogue_ordering_best?: number | null;
+  round2_dialogue_first_letter_best?: number | null;
+  round2_dialogue_translation_best?: number | null;
+  round2_dialogue_completed?: boolean;
 }
 
 interface NaesinData {
@@ -51,6 +61,7 @@ interface Props {
   problemSheetsByUnit?: Record<string, { id: string; title: string; category?: string }[]>;
   problemAttemptsBySheet?: Record<string, { score: number; total: number; pct: number }>;
   grammarContentByUnit?: Record<string, boolean>;
+  naesinRequiredRounds?: number;
   hideSettings?: boolean;
 }
 
@@ -68,18 +79,22 @@ export function NaesinProgressCard({
   problemSheetsByUnit,
   problemAttemptsBySheet,
   grammarContentByUnit,
+  naesinRequiredRounds,
   hideSettings,
 }: Props) {
+  const hasRound2 = (naesinRequiredRounds ?? 1) >= 2;
   const naesinUnits = naesinData.units;
   const naesinProgressMap = new Map(naesinProgress.map((p) => [p.unit_id, p]));
-  const stageCount = 5;
+  const stageCount = hasRound2 ? 7 : 5;
   const isGrammarCompleted = (unitId: string, progress: NaesinProgressRow | undefined) => {
     if (grammarContentByUnit && !grammarContentByUnit[unitId]) return true; // no grammar content = auto-completed
     return progress?.grammar_completed ?? false;
   };
   const naesinStagesCompleted = naesinUnits.reduce((acc, unit) => {
     const p = naesinProgressMap.get(unit.id);
-    return acc + (p?.vocab_completed ? 1 : 0) + (p?.passage_completed ? 1 : 0) + (p?.dialogue_completed ? 1 : 0) + (isGrammarCompleted(unit.id, p) ? 1 : 0) + (p?.problem_completed ? 1 : 0);
+    const base = (p?.vocab_completed ? 1 : 0) + (p?.passage_completed ? 1 : 0) + (p?.dialogue_completed ? 1 : 0) + (isGrammarCompleted(unit.id, p) ? 1 : 0) + (p?.problem_completed ? 1 : 0);
+    const r2 = hasRound2 ? (p?.round2_passage_completed ? 1 : 0) + (p?.round2_dialogue_completed ? 1 : 0) : 0;
+    return acc + base + r2;
   }, 0);
   const naesinTotalStages = naesinUnits.length * stageCount;
 
@@ -138,6 +153,8 @@ export function NaesinProgressCard({
               const hasGrammarProgress = !!progress && (progress.grammar_videos_completed ?? 0) > 0;
 
               const hasDialogueScore = !!progress && (progress.dialogue_ordering_best != null || progress.dialogue_first_letter_best != null || progress.dialogue_translation_best != null);
+              const hasRound2PassageScore = hasRound2 && !!progress && (progress.round2_passage_fill_blanks_best != null || progress.round2_passage_ordering_best != null || progress.round2_passage_translation_best != null || progress.round2_passage_grammar_vocab_best != null);
+              const hasRound2DialogueScore = hasRound2 && !!progress && (progress.round2_dialogue_ordering_best != null || progress.round2_dialogue_first_letter_best != null || progress.round2_dialogue_translation_best != null);
 
               const unitSheets = problemSheetsByUnit?.[unit.id] || [];
               const unitSheetAttempts = unitSheets.filter((s) => problemAttemptsBySheet?.[s.id]);
@@ -147,7 +164,9 @@ export function NaesinProgressCard({
               const stages = [
                 { key: 'vocab', label: '단어', icon: BookOpen, completed: progress?.vocab_completed ?? false, inProgress: false },
                 { key: 'passage', label: '교과서 암기', icon: FileText, completed: progress?.passage_completed ?? false, inProgress: !progress?.passage_completed && hasPassageScore },
+                ...(hasRound2 ? [{ key: 'passage_r2', label: '암기(2회독)', icon: FileText, completed: progress?.round2_passage_completed ?? false, inProgress: !(progress?.round2_passage_completed) && !!hasRound2PassageScore }] : []),
                 { key: 'dialogue', label: '대화문', icon: MessageSquare, completed: progress?.dialogue_completed ?? false, inProgress: !progress?.dialogue_completed && hasDialogueScore },
+                ...(hasRound2 ? [{ key: 'dialogue_r2', label: '대화문(2회독)', icon: MessageSquare, completed: progress?.round2_dialogue_completed ?? false, inProgress: !(progress?.round2_dialogue_completed) && !!hasRound2DialogueScore }] : []),
                 { key: 'grammar', label: '문법', icon: GraduationCap, completed: grammarDone, inProgress: !grammarDone && hasGrammarProgress },
                 { key: 'problem', label: '문제', icon: ClipboardList, completed: progress?.problem_completed ?? false, inProgress: !(progress?.problem_completed) && hasSomeSheetAttempts },
               ];
@@ -242,6 +261,41 @@ export function NaesinProgressCard({
                       {progress?.dialogue_translation_best != null && (
                         <span className={`text-xs px-1.5 py-0.5 rounded ${scoreChipClass(progress.dialogue_translation_best)}`}>
                           대화영작 {progress.dialogue_translation_best}점
+                        </span>
+                      )}
+                      {hasRound2 && progress?.round2_passage_fill_blanks_best != null && (
+                        <span className={`text-xs px-1.5 py-0.5 rounded ${passageChipClass}`}>
+                          빈칸(2회독) {progress.round2_passage_fill_blanks_best}점
+                        </span>
+                      )}
+                      {hasRound2 && progress?.round2_passage_ordering_best != null && (
+                        <span className={`text-xs px-1.5 py-0.5 rounded ${passageChipClass}`}>
+                          순서(2회독) {progress.round2_passage_ordering_best}점
+                        </span>
+                      )}
+                      {hasRound2 && progress?.round2_passage_translation_best != null && (
+                        <span className={`text-xs px-1.5 py-0.5 rounded ${passageChipClass}`}>
+                          영작(2회독) {progress.round2_passage_translation_best}점
+                        </span>
+                      )}
+                      {hasRound2 && progress?.round2_passage_grammar_vocab_best != null && (
+                        <span className={`text-xs px-1.5 py-0.5 rounded ${passageChipClass}`}>
+                          어법/어휘(2회독) {progress.round2_passage_grammar_vocab_best}점
+                        </span>
+                      )}
+                      {hasRound2 && progress?.round2_dialogue_ordering_best != null && (
+                        <span className={`text-xs px-1.5 py-0.5 rounded ${scoreChipClass(progress.round2_dialogue_ordering_best)}`}>
+                          대화순서(2회독) {progress.round2_dialogue_ordering_best}점
+                        </span>
+                      )}
+                      {hasRound2 && progress?.round2_dialogue_first_letter_best != null && (
+                        <span className={`text-xs px-1.5 py-0.5 rounded ${scoreChipClass(progress.round2_dialogue_first_letter_best)}`}>
+                          첫글자(2회독) {progress.round2_dialogue_first_letter_best}점
+                        </span>
+                      )}
+                      {hasRound2 && progress?.round2_dialogue_translation_best != null && (
+                        <span className={`text-xs px-1.5 py-0.5 rounded ${scoreChipClass(progress.round2_dialogue_translation_best)}`}>
+                          대화영작(2회독) {progress.round2_dialogue_translation_best}점
                         </span>
                       )}
                       {(progress?.grammar_total_videos ?? 0) > 0 && progress && (

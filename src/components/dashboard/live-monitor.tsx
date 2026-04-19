@@ -17,6 +17,7 @@ interface StudentActivity {
     type: 'naesin' | 'voca';
     label: string;
     stage: string | null;
+    round?: number;
     updatedAt: string;
   } | null;
   todaySeconds: number;
@@ -155,6 +156,7 @@ export function LiveMonitorClient({ basePath }: { basePath: string }) {
                         <span className="truncate text-xs text-muted-foreground">
                           {student.currentActivity.label}
                           {student.currentActivity.stage && ` · ${student.currentActivity.stage}`}
+                          {student.currentActivity.round && student.currentActivity.round >= 2 && ' (2회독)'}
                         </span>
                       </div>
                     ) : (

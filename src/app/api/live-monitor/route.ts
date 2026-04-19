@@ -67,7 +67,7 @@ export const GET = createApiHandler(
     ] = await Promise.all([
       admin
         .from('naesin_student_progress')
-        .select('student_id, unit_id, updated_at, current_stage, vocab_completed, dialogue_completed, passage_completed, grammar_completed, problem_completed')
+        .select('student_id, unit_id, updated_at, current_stage, current_round, vocab_completed, dialogue_completed, passage_completed, grammar_completed, problem_completed')
         .in('student_id', studentIds),
       admin
         .from('voca_student_progress')
@@ -160,15 +160,17 @@ export const GET = createApiHandler(
       if (status === 'learning') learningCount++;
       else if (status === 'online') onlineCount++;
 
-      let currentActivity: { type: 'naesin' | 'voca'; label: string; stage: string | null; updatedAt: string } | null = null;
+      let currentActivity: { type: 'naesin' | 'voca'; label: string; stage: string | null; round?: number; updatedAt: string } | null = null;
       if (isLearning) {
         if (naesinTime >= vocaTime && latestNaesin) {
           const unit = unitMap.get(latestNaesin.unit_id);
           const stageKey = latestNaesin.current_stage as string | undefined;
+          const currentRound = (latestNaesin as Record<string, unknown>).current_round as number | undefined;
           currentActivity = {
             type: 'naesin',
             label: unit ? `Unit ${unit.unit_number} ${unit.title}` : '내신 학습 중',
             stage: stageKey ? (STAGE_LABELS[stageKey] || stageKey) : null,
+            ...(currentRound && currentRound >= 2 ? { round: currentRound } : {}),
             updatedAt: latestNaesin.updated_at,
           };
         } else if (latestVoca) {

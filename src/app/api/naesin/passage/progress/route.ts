@@ -81,6 +81,8 @@ export const POST = createApiHandler(
     const passageCompleted = uniqueRequired.every((s) => (scoreMap[s] ?? 0) >= PASS_THRESHOLD);
     updates[colCompleted] = passageCompleted;
 
+    updates.current_round = isRound2 ? 2 : 1;
+
     dbResult(await supabase
       .from('naesin_student_progress')
       .upsert(updates, { onConflict: 'student_id,unit_id' }));
