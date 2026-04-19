@@ -127,7 +127,7 @@ export function useUnitContentData(unitId: string) {
         supabase.from('naesin_dialogues').select('*').eq('unit_id', unitId).order('created_at'),
         supabase.from('naesin_grammar_lessons').select('*').eq('unit_id', unitId).order('sort_order'),
         supabase.from('naesin_omr_sheets').select('*', { count: 'exact', head: true }).eq('unit_id', unitId),
-        supabase.from('naesin_problem_sheets').select('*').eq('unit_id', unitId).eq('category', 'problem').order('sort_order'),
+        supabase.from('naesin_problem_sheets').select('*').eq('unit_id', unitId).in('category', ['problem', 'external_passage', 'eng_eng_def']).order('sort_order'),
         supabase.from('naesin_last_review_content').select('*', { count: 'exact', head: true }).eq('unit_id', unitId),
         supabase.from('naesin_textbook_videos').select('*').eq('unit_id', unitId).order('sort_order'),
         supabase.from('naesin_problem_sheets').select('*').eq('unit_id', unitId).eq('category', 'mock_exam').order('sort_order'),
