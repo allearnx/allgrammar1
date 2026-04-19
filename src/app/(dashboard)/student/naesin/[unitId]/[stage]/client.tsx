@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import {
@@ -195,6 +195,11 @@ export function NaesinStageView({
 }: NaesinStageViewProps) {
   const router = useRouter();
   const [refinedStage, setRefinedStage] = useState<string>(currentStage);
+
+  // Reset refinedStage when navigating to a different stage
+  useEffect(() => {
+    setRefinedStage(currentStage);
+  }, [currentStage]);
 
   const handleActiveSheetChange = useCallback((category: string) => {
     if (category === 'external_passage' || category === 'eng_eng_def') {
