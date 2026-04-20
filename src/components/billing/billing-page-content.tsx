@@ -2,7 +2,7 @@
 
 import { useEffect, useState, useCallback } from 'react';
 import Link from 'next/link';
-import { Check, Crown, Users } from 'lucide-react';
+import { Check, CheckCircle, Crown, Users } from 'lucide-react';
 import { createClient } from '@/lib/supabase/client';
 import { SubscriptionBanner } from '@/components/billing/subscription-banner';
 import { SubscriptionInfoCard } from '@/components/billing/subscription-info-card';
@@ -10,7 +10,7 @@ import { PaymentHistoryCard } from '@/components/billing/payment-history-card';
 import { PlanComparison } from '@/components/billing/plan-comparison';
 import { requestTossCardAuth, cancelSubscription, calcTrialDaysLeft } from '@/lib/billing/toss-helpers';
 import { deriveTier } from '@/lib/billing/feature-gate';
-import type { Subscription, PaymentHistory, SubscriptionPlan } from '@/types/billing';
+import type { Subscription, PaymentHistory, SubscriptionPlan, Order } from '@/types/billing';
 import type { Tier, FreeService } from '@/lib/billing/feature-gate';
 
 interface SubscriptionWithPlan extends Subscription {
@@ -26,6 +26,8 @@ export function BillingPageContent({ mode }: BillingPageContentProps) {
   const [payments, setPayments] = useState<PaymentHistory[]>([]);
   const [plans, setPlans] = useState<SubscriptionPlan[]>([]);
   const [currentPlanId, setCurrentPlanId] = useState<string | null>(null);
+  const [orders, setOrders] = useState<Order[]>([]);
+  const [services, setServices] = useState<{ service: string }[]>([]);
   const [loading, setLoading] = useState(true);
   const [tier, setTier] = useState<Tier>('free');
   const [freeService, setFreeService] = useState<FreeService | null>(null);
@@ -91,6 +93,22 @@ export function BillingPageContent({ mode }: BillingPageContentProps) {
       setPayments((hist as PaymentHistory[]) || []);
     }
 
+    // 개인 학생: subscription 없어도 orders + service_assignments 조회
+    if (mode === 'student') {
+      const { data: orderRows } = await supabase
+        .from('orders')
+        .select('*')
+        .eq('user_id', user.id)
+        .order('created_at', { ascending: false });
+      setOrders((orderRows as Order[]) || []);
+
+      const { data: svcRows } = await supabase
+        .from('service_assignments')
+        .select('service')
+        .eq('student_id', user.id);
+      setServices(svcRows || []);
+    }
+
     if (mode === 'academy') {
       const { data: planRows } = await supabase
         .from('subscription_plans')
@@ -134,16 +152,23 @@ export function BillingPageContent({ mode }: BillingPageContentProps) {
         <h1 className="text-[22px] font-bold text-gray-900">결제 관리</h1>
 
         {!subscription ? (
-          <div className="rounded-2xl border border-gray-100 bg-white shadow-[0_2px_12px_rgba(0,0,0,0.04)] p-10 text-center">
-            <div className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-gray-50 mb-4">
-              <Crown className="h-6 w-6 text-gray-300" />
+          mode === 'student' && (services.length > 0 || orders.length > 0) ? (
+            <div className="space-y-5">
+              <StudentServiceCard services={services} />
+              <StudentOrderHistory orders={orders} />
             </div>
-            <p className="text-[15px] text-gray-500">
-              {mode === 'academy'
-                ? '활성 구독이 없습니다'
-                : '활성 구독이 없습니다. 요금제를 선택해주세요.'}
-            </p>
-          </div>
+          ) : (
+            <div className="rounded-2xl border border-gray-100 bg-white shadow-[0_2px_12px_rgba(0,0,0,0.04)] p-10 text-center">
+              <div className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-gray-50 mb-4">
+                <Crown className="h-6 w-6 text-gray-300" />
+              </div>
+              <p className="text-[15px] text-gray-500">
+                {mode === 'academy'
+                  ? '활성 구독이 없습니다'
+                  : '활성 구독이 없습니다. 요금제를 선택해주세요.'}
+              </p>
+            </div>
+          )
         ) : (
           <div className="space-y-5">
             <SubscriptionInfoCard
@@ -157,6 +182,9 @@ export function BillingPageContent({ mode }: BillingPageContentProps) {
               onCancel={() => cancelSubscription(subscription.id, fetchData)}
             />
             <PaymentHistoryCard payments={payments} />
+            {mode === 'student' && orders.length > 0 && (
+              <StudentOrderHistory orders={orders} />
+            )}
           </div>
         )}
 
@@ -292,6 +320,109 @@ function PlanCard({
           popular ? 'bg-white/20 text-white' : 'bg-gray-50 text-gray-400'
         }`}>
           플랜 변경 문의
+        </div>
+      )}
+    </div>
+  );
+}
+
+/* ─────── Student Service / Order Cards ─────── */
+
+const SERVICE_LABELS: Record<string, string> = {
+  naesin: '올인내신',
+  voca: '올킬보카',
+};
+
+function StudentServiceCard({ services }: { services: { service: string }[] }) {
+  return (
+    <div className="rounded-2xl bg-white border border-gray-100 shadow-[0_2px_12px_rgba(0,0,0,0.04)] overflow-hidden">
+      <div className="px-6 pt-6 pb-4">
+        <h3 className="text-[15px] font-semibold text-gray-400">이용 중인 서비스</h3>
+      </div>
+      <div className="px-6 pb-6 space-y-2">
+        {services.map((s) => (
+          <div key={s.service} className="flex items-center gap-2.5 rounded-xl bg-emerald-50 px-4 py-3">
+            <CheckCircle className="h-4 w-4 text-emerald-600 shrink-0" />
+            <span className="text-[14px] font-semibold text-emerald-700">
+              {SERVICE_LABELS[s.service] || s.service}
+            </span>
+            <span className="ml-auto text-[12px] text-emerald-600 font-medium">이용 중</span>
+          </div>
+        ))}
+        {services.length === 0 && (
+          <p className="text-sm text-gray-400 py-2">활성화된 서비스가 없습니다</p>
+        )}
+      </div>
+    </div>
+  );
+}
+
+function formatDate(d: string) {
+  return new Date(d).toLocaleDateString('ko', { year: 'numeric', month: 'short', day: 'numeric' });
+}
+
+const ORDER_STATUS_MAP: Record<string, { label: string; color: string; bg: string }> = {
+  paid: { label: '완료', color: 'text-emerald-700', bg: 'bg-emerald-50' },
+  failed: { label: '실패', color: 'text-red-700', bg: 'bg-red-50' },
+  refunded: { label: '환불', color: 'text-amber-700', bg: 'bg-amber-50' },
+  canceled: { label: '취소', color: 'text-gray-500', bg: 'bg-gray-100' },
+  pending: { label: '대기', color: 'text-gray-500', bg: 'bg-gray-100' },
+};
+
+function StudentOrderHistory({ orders }: { orders: Order[] }) {
+  return (
+    <div className="rounded-2xl bg-white border border-gray-100 shadow-[0_2px_12px_rgba(0,0,0,0.04)] overflow-hidden">
+      <div className="px-6 pt-6 pb-4">
+        <h3 className="text-[15px] font-semibold text-gray-400 flex items-center gap-2">
+          결제 내역
+        </h3>
+      </div>
+      {orders.length === 0 ? (
+        <div className="px-6 pb-8 text-center">
+          <p className="text-sm text-gray-400 py-4">결제 내역이 없습니다</p>
+        </div>
+      ) : (
+        <div>
+          {orders.map((o, idx) => {
+            const info = ORDER_STATUS_MAP[o.status] || ORDER_STATUS_MAP.pending;
+            return (
+              <div
+                key={o.id}
+                className={`flex items-center justify-between px-6 py-4 ${
+                  idx < orders.length - 1 ? 'border-b border-gray-50' : ''
+                }`}
+              >
+                <div className="flex flex-col gap-1">
+                  <span className="text-[13px] font-medium text-gray-900">
+                    {o.order_name}
+                  </span>
+                  <div className="flex items-center gap-2">
+                    <span className="text-[12px] text-gray-400">
+                      {formatDate(o.paid_at || o.created_at)}
+                    </span>
+                    <span className={`inline-flex items-center rounded-full px-2 py-0.5 text-[11px] font-semibold ${info.color} ${info.bg}`}>
+                      {info.label}
+                    </span>
+                  </div>
+                </div>
+                <div className="flex items-center gap-3">
+                  <span className="text-[15px] font-bold text-gray-900 tabular-nums">
+                    {o.amount.toLocaleString()}원
+                  </span>
+                  {o.receipt_url && (
+                    <a
+                      href={o.receipt_url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-[12px] text-gray-400 hover:text-[#3182F6] transition-colors"
+                    >
+                      영수증
+                    </a>
+                  )}
+                </div>
+              </div>
+            );
+          })}
         </div>
       )}
     </div>
