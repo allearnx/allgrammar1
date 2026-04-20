@@ -73,7 +73,7 @@ INSERT INTO public.naesin_templates (
     "number": 6,
     "type": "short_answer",
     "direction": "다음 우리말과 일치하도록 괄호 안에 주어진 단어를 이용하여 빈칸에 알맞은 말을 쓰시오.",
-    "question": "아무도 그 비밀이 어떻게 밝혀졌는지 모른다. (reveal)\n\nNo one knows _______________ the secret.",
+    "question": "아무도 그 비밀이 어떻게 밝혀졌는지 모른다. (reveal)\n\nNo one knows _______________.",
     "answer": "how the secret was revealed",
     "similar_answers": [],
     "explanation": "간접의문문에서 수동태는 '의문사 + 주어 + be동사 + 과거분사' 어순을 사용한다."
