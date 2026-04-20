@@ -11,7 +11,7 @@ import type { TranslationExerciseProps, SentenceData, GradingResult, WrongTransl
 import { fetchWithToast } from '@/lib/fetch-with-toast';
 import { useRetryWrong } from '@/hooks/use-retry-wrong';
 
-export function SentenceBysentenceTranslation({ passage, onComplete, showWrongAlert, sentencesPerPage = 10 }: TranslationExerciseProps) {
+export function SentenceBysentenceTranslation({ passage, onComplete, onPageWrongs, showWrongAlert, sentencesPerPage = 10 }: TranslationExerciseProps) {
   const sentences = passage.sentences! as SentenceData[];
   const totalPages = Math.ceil(sentences.length / sentencesPerPage);
 
@@ -91,6 +91,11 @@ export function SentenceBysentenceTranslation({ passage, onComplete, showWrongAl
           });
         }
       });
+
+      // Save page wrongs immediately for incremental persistence
+      if (!retryMode && pageWrongs.length > 0) {
+        onPageWrongs?.(pageWrongs);
+      }
 
       if (retryMode) {
         // Store retry results under key -1

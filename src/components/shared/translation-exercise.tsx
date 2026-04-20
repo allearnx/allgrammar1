@@ -30,6 +30,7 @@ export interface WrongTranslation {
 export interface TranslationExerciseProps {
   passage: TextbookPassage;
   onComplete: (score: number, wrongAnswers: WrongTranslation[]) => void;
+  onPageWrongs?: (wrongs: WrongTranslation[]) => void;
   showWrongAlert?: boolean;
   rateLimitText?: string;
   sentencesPerPage?: number;
@@ -37,7 +38,7 @@ export interface TranslationExerciseProps {
 
 // ── 메인 컴포넌트 ──
 
-export function TranslationExercise({ passage, onComplete, showWrongAlert, sentencesPerPage = 10 }: TranslationExerciseProps) {
+export function TranslationExercise({ passage, onComplete, onPageWrongs, showWrongAlert, sentencesPerPage = 10 }: TranslationExerciseProps) {
   const hasSentences = Array.isArray(passage.sentences) && passage.sentences.length > 0;
 
   if (hasSentences) {
@@ -45,6 +46,7 @@ export function TranslationExercise({ passage, onComplete, showWrongAlert, sente
       <SentenceBysentenceTranslation
         passage={passage}
         onComplete={onComplete}
+        onPageWrongs={onPageWrongs}
         showWrongAlert={showWrongAlert}
         sentencesPerPage={sentencesPerPage}
       />
