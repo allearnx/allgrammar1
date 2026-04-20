@@ -419,7 +419,7 @@ jsonb_build_object(
       'answer', 'Since it was very cold, we stayed indoors.',
       'acceptedAnswers', jsonb_build_array('Since it was very cold, we stayed indoors.', 'Since it was very cold, we stayed indoors', 'We stayed indoors since it was very cold.', 'We stayed indoors since it was very cold'),
       'explanation', E'so(그래서) → 이유-결과 관계 → since 사용. \"It was very cold, so we stayed indoors.\"에서 so 앞이 이유이므로 since절로 바꿀 수 있다.',
-      'similar_answers', jsonb_build_array('Since it was very cold, we stayed indoors.', 'We stayed indoors since it was very cold.')
+      'acceptedAnswers', jsonb_build_array('Since it was very cold, we stayed indoors.', 'We stayed indoors since it was very cold.')
     ),
     jsonb_build_object(
       'id', 51,
@@ -428,7 +428,7 @@ jsonb_build_object(
       'answer', 'Though she was tired, she finished all her homework.',
       'acceptedAnswers', jsonb_build_array('Though she was tired, she finished all her homework.', 'Though she was tired, she finished all her homework', 'Although she was tired, she finished all her homework.', 'Although she was tired, she finished all her homework'),
       'explanation', E'but(그러나) → 양보 관계 → though 사용. \"She was tired, but she finished all her homework.\"에서 but 앞의 내용에도 불구하고 뒤의 결과가 나왔으므로 though를 사용한다.',
-      'similar_answers', jsonb_build_array('Though she was tired, she finished all her homework.', 'Although she was tired, she finished all her homework.')
+      'acceptedAnswers', jsonb_build_array('Though she was tired, she finished all her homework.', 'Although she was tired, she finished all her homework.')
     ),
     jsonb_build_object(
       'id', 52,
@@ -437,7 +437,7 @@ jsonb_build_object(
       'answer', E'Though he didn\'t have a map, he found the place easily.',
       'acceptedAnswers', jsonb_build_array(E'Though he didn\'t have a map, he found the place easily.', E'Though he didn\'t have a map, he found the place easily', E'Although he didn\'t have a map, he found the place easily.', E'Although he didn\'t have a map, he found the place easily'),
       'explanation', E'but(그러나) → 양보 관계 → though 사용. 지도가 없었음에도 불구하고 쉽게 찾았으므로 though를 사용한다.',
-      'similar_answers', jsonb_build_array(E'Though he didn\'t have a map, he found the place easily.', E'Although he didn\'t have a map, he found the place easily.')
+      'acceptedAnswers', jsonb_build_array(E'Though he didn\'t have a map, he found the place easily.', E'Although he didn\'t have a map, he found the place easily.')
     ),
     jsonb_build_object(
       'id', 53,
@@ -446,7 +446,7 @@ jsonb_build_object(
       'answer', E'Since the shoes were too expensive, I couldn\'t buy them.',
       'acceptedAnswers', jsonb_build_array(E'Since the shoes were too expensive, I couldn\'t buy them.', E'Since the shoes were too expensive, I couldn\'t buy them', E'I couldn\'t buy the shoes since they were too expensive.', E'I couldn\'t buy the shoes since they were too expensive'),
       'explanation', E'because(~때문에) → 이유-결과 관계 → since 사용. 신발이 너무 비쌌기 때문에 살 수 없었으므로 since를 사용한다.',
-      'similar_answers', jsonb_build_array(E'Since the shoes were too expensive, I couldn\'t buy them.', E'I couldn\'t buy the shoes since they were too expensive.')
+      'acceptedAnswers', jsonb_build_array(E'Since the shoes were too expensive, I couldn\'t buy them.', E'I couldn\'t buy the shoes since they were too expensive.')
     ),
     jsonb_build_object(
       'id', 54,
@@ -455,7 +455,7 @@ jsonb_build_object(
       'answer', E'Though the concert was amazing, I didn\'t enjoy it much.',
       'acceptedAnswers', jsonb_build_array(E'Though the concert was amazing, I didn\'t enjoy it much.', E'Though the concert was amazing, I didn\'t enjoy it much', E'Although the concert was amazing, I didn\'t enjoy it much.', E'Although the concert was amazing, I didn\'t enjoy it much'),
       'explanation', E'but(그러나) → 양보 관계 → though 사용. 콘서트가 훌륭했음에도 불구하고 많이 즐기지 못했으므로 though를 사용한다.',
-      'similar_answers', jsonb_build_array(E'Though the concert was amazing, I didn\'t enjoy it much.', E'Although the concert was amazing, I didn\'t enjoy it much.')
+      'acceptedAnswers', jsonb_build_array(E'Though the concert was amazing, I didn\'t enjoy it much.', E'Although the concert was amazing, I didn\'t enjoy it much.')
     ),
     jsonb_build_object(
       'id', 55,
@@ -464,7 +464,7 @@ jsonb_build_object(
       'answer', 'Though Tom studied hard for the exam, he still got a low score.',
       'acceptedAnswers', jsonb_build_array('Though Tom studied hard for the exam, he still got a low score.', 'Though Tom studied hard for the exam, he still got a low score', 'Although Tom studied hard for the exam, he still got a low score.', 'Although Tom studied hard for the exam, he still got a low score'),
       'explanation', E'but(그러나) → 양보 관계 → though 사용. 열심히 공부했음에도 불구하고 낮은 점수를 받았으므로 though를 사용한다.',
-      'similar_answers', jsonb_build_array('Though Tom studied hard for the exam, he still got a low score.', 'Although Tom studied hard for the exam, he still got a low score.')
+      'acceptedAnswers', jsonb_build_array('Though Tom studied hard for the exam, he still got a low score.', 'Although Tom studied hard for the exam, he still got a low score.')
     ),
     jsonb_build_object(
       'id', 56,
@@ -473,7 +473,7 @@ jsonb_build_object(
       'answer', E'Since there was a typhoon, we couldn\'t go camping.',
       'acceptedAnswers', jsonb_build_array(E'Since there was a typhoon, we couldn\'t go camping.', E'Since there was a typhoon, we couldn\'t go camping', E'We couldn\'t go camping since there was a typhoon.', E'We couldn\'t go camping since there was a typhoon'),
       'explanation', E'because of(~때문에) → 이유-결과 관계 → since 사용. \"because of + 명사\"를 \"since + 주어 + 동사\" 절로 바꿔야 한다.',
-      'similar_answers', jsonb_build_array(E'Since there was a typhoon, we couldn\'t go camping.', E'We couldn\'t go camping since there was a typhoon.')
+      'acceptedAnswers', jsonb_build_array(E'Since there was a typhoon, we couldn\'t go camping.', E'We couldn\'t go camping since there was a typhoon.')
     ),
     jsonb_build_object(
       'id', 57,
@@ -482,7 +482,7 @@ jsonb_build_object(
       'answer', 'Though she has lived in New York for ten years, she still misses Korea.',
       'acceptedAnswers', jsonb_build_array('Though she has lived in New York for ten years, she still misses Korea.', 'Though she has lived in New York for ten years, she still misses Korea', 'Although she has lived in New York for ten years, she still misses Korea.', 'Although she has lived in New York for ten years, she still misses Korea'),
       'explanation', E'but(그러나) → 양보 관계 → though 사용. 10년이나 뉴욕에 살았음에도 불구하고 여전히 한국이 그리우므로 though를 사용한다.',
-      'similar_answers', jsonb_build_array('Though she has lived in New York for ten years, she still misses Korea.', 'Although she has lived in New York for ten years, she still misses Korea.')
+      'acceptedAnswers', jsonb_build_array('Though she has lived in New York for ten years, she still misses Korea.', 'Although she has lived in New York for ten years, she still misses Korea.')
     ),
     jsonb_build_object(
       'id', 58,
@@ -491,7 +491,7 @@ jsonb_build_object(
       'answer', E'Since he is very young, he can\'t drive a car.',
       'acceptedAnswers', jsonb_build_array(E'Since he is very young, he can\'t drive a car.', E'Since he is very young, he can\'t drive a car', E'He can\'t drive a car since he is very young.', E'He can\'t drive a car since he is very young'),
       'explanation', E'Therefore(그러므로) → 이유-결과 관계 → since 사용. 매우 어리기 때문에 운전을 할 수 없으므로 since를 사용한다.',
-      'similar_answers', jsonb_build_array(E'Since he is very young, he can\'t drive a car.', E'He can\'t drive a car since he is very young.')
+      'acceptedAnswers', jsonb_build_array(E'Since he is very young, he can\'t drive a car.', E'He can\'t drive a car since he is very young.')
     ),
     jsonb_build_object(
       'id', 59,
@@ -500,7 +500,7 @@ jsonb_build_object(
       'answer', 'Though she has a lot of money, she never buys expensive things.',
       'acceptedAnswers', jsonb_build_array('Though she has a lot of money, she never buys expensive things.', 'Though she has a lot of money, she never buys expensive things', 'Although she has a lot of money, she never buys expensive things.', 'Although she has a lot of money, she never buys expensive things'),
       'explanation', E'but(그러나) → 양보 관계 → though 사용. 돈이 많음에도 불구하고 비싼 물건을 사지 않으므로 though를 사용한다.',
-      'similar_answers', jsonb_build_array('Though she has a lot of money, she never buys expensive things.', 'Although she has a lot of money, she never buys expensive things.')
+      'acceptedAnswers', jsonb_build_array('Though she has a lot of money, she never buys expensive things.', 'Although she has a lot of money, she never buys expensive things.')
     ),
     jsonb_build_object(
       'id', 60,
@@ -509,7 +509,7 @@ jsonb_build_object(
       'answer', 'Though he had eaten a big lunch an hour ago, he was already hungry.',
       'acceptedAnswers', jsonb_build_array('Though he had eaten a big lunch an hour ago, he was already hungry.', 'Though he had eaten a big lunch an hour ago, he was already hungry', 'Although he had eaten a big lunch an hour ago, he was already hungry.', 'Although he had eaten a big lunch an hour ago, he was already hungry'),
       'explanation', E'but(그러나) → 양보 관계 → though 사용. 한 시간 전에 큰 점심을 먹었음에도 불구하고 이미 배가 고팠으므로 though를 사용한다.',
-      'similar_answers', jsonb_build_array('Though he had eaten a big lunch an hour ago, he was already hungry.', 'Although he had eaten a big lunch an hour ago, he was already hungry.')
+      'acceptedAnswers', jsonb_build_array('Though he had eaten a big lunch an hour ago, he was already hungry.', 'Although he had eaten a big lunch an hour ago, he was already hungry.')
     ),
     jsonb_build_object(
       'id', 61,
@@ -518,7 +518,7 @@ jsonb_build_object(
       'answer', 'Since my parents were not home during the weekend, I had to take care of my little brother.',
       'acceptedAnswers', jsonb_build_array('Since my parents were not home during the weekend, I had to take care of my little brother.', 'Since my parents were not home during the weekend, I had to take care of my little brother', 'I had to take care of my little brother since my parents were not home during the weekend.', 'I had to take care of my little brother since my parents were not home during the weekend'),
       'explanation', E'So(그래서) → 이유-결과 관계 → since 사용. 부모님이 주말에 집에 안 계셨기 때문에 남동생을 돌봐야 했으므로 since를 사용한다.',
-      'similar_answers', jsonb_build_array('Since my parents were not home during the weekend, I had to take care of my little brother.', 'I had to take care of my little brother since my parents were not home during the weekend.')
+      'acceptedAnswers', jsonb_build_array('Since my parents were not home during the weekend, I had to take care of my little brother.', 'I had to take care of my little brother since my parents were not home during the weekend.')
     ),
 
     -- Part 6: 두 문장을 since / though를 이용하여 한 문장으로 쓰기 (Q62-Q74)
@@ -529,7 +529,7 @@ jsonb_build_object(
       'answer', 'Though it was already midnight, the streets were still crowded.',
       'acceptedAnswers', jsonb_build_array('Though it was already midnight, the streets were still crowded.', 'Though it was already midnight, the streets were still crowded', 'Although it was already midnight, the streets were still crowded.', 'Although it was already midnight, the streets were still crowded', 'The streets were still crowded though it was already midnight.', 'The streets were still crowded though it was already midnight', 'The streets were still crowded although it was already midnight.', 'The streets were still crowded although it was already midnight'),
       'explanation', E'자정이었음에도 불구하고 거리가 여전히 붐볐다 → 양보 관계 → though 사용.',
-      'similar_answers', jsonb_build_array('Though it was already midnight, the streets were still crowded.', 'Although it was already midnight, the streets were still crowded.')
+      'acceptedAnswers', jsonb_build_array('Though it was already midnight, the streets were still crowded.', 'Although it was already midnight, the streets were still crowded.')
     ),
     jsonb_build_object(
       'id', 63,
@@ -538,7 +538,7 @@ jsonb_build_object(
       'answer', E'Since he had a bad cold, he couldn\'t go to school.',
       'acceptedAnswers', jsonb_build_array(E'Since he had a bad cold, he couldn\'t go to school.', E'Since he had a bad cold, he couldn\'t go to school', E'He couldn\'t go to school since he had a bad cold.', E'He couldn\'t go to school since he had a bad cold'),
       'explanation', E'심한 감기에 걸렸기 때문에 학교에 갈 수 없었다 → 이유-결과 관계 → since 사용.',
-      'similar_answers', jsonb_build_array(E'Since he had a bad cold, he couldn\'t go to school.', E'He couldn\'t go to school since he had a bad cold.')
+      'acceptedAnswers', jsonb_build_array(E'Since he had a bad cold, he couldn\'t go to school.', E'He couldn\'t go to school since he had a bad cold.')
     ),
     jsonb_build_object(
       'id', 64,
@@ -547,7 +547,7 @@ jsonb_build_object(
       'answer', 'Though she was nervous, she gave a confident presentation.',
       'acceptedAnswers', jsonb_build_array('Though she was nervous, she gave a confident presentation.', 'Though she was nervous, she gave a confident presentation', 'Although she was nervous, she gave a confident presentation.', 'Although she was nervous, she gave a confident presentation', 'She gave a confident presentation though she was nervous.', 'She gave a confident presentation though she was nervous', 'She gave a confident presentation although she was nervous.', 'She gave a confident presentation although she was nervous'),
       'explanation', E'긴장했음에도 불구하고 자신감 있는 발표를 했다 → 양보 관계 → though 사용.',
-      'similar_answers', jsonb_build_array('Though she was nervous, she gave a confident presentation.', 'Although she was nervous, she gave a confident presentation.')
+      'acceptedAnswers', jsonb_build_array('Though she was nervous, she gave a confident presentation.', 'Although she was nervous, she gave a confident presentation.')
     ),
     jsonb_build_object(
       'id', 65,
@@ -556,7 +556,7 @@ jsonb_build_object(
       'answer', 'Since nobody was at home, I left a note on the door.',
       'acceptedAnswers', jsonb_build_array('Since nobody was at home, I left a note on the door.', 'Since nobody was at home, I left a note on the door', 'I left a note on the door since nobody was at home.', 'I left a note on the door since nobody was at home'),
       'explanation', E'아무도 집에 없었기 때문에 문에 메모를 남겼다 → 이유-결과 관계 → since 사용.',
-      'similar_answers', jsonb_build_array('Since nobody was at home, I left a note on the door.', 'I left a note on the door since nobody was at home.')
+      'acceptedAnswers', jsonb_build_array('Since nobody was at home, I left a note on the door.', 'I left a note on the door since nobody was at home.')
     ),
     jsonb_build_object(
       'id', 66,
@@ -565,7 +565,7 @@ jsonb_build_object(
       'answer', 'Though it was her first time on stage, she performed perfectly.',
       'acceptedAnswers', jsonb_build_array('Though it was her first time on stage, she performed perfectly.', 'Though it was her first time on stage, she performed perfectly', 'Although it was her first time on stage, she performed perfectly.', 'Although it was her first time on stage, she performed perfectly', 'She performed perfectly though it was her first time on stage.', 'She performed perfectly though it was her first time on stage', 'She performed perfectly although it was her first time on stage.', 'She performed perfectly although it was her first time on stage'),
       'explanation', E'무대에 처음 섰음에도 불구하고 완벽하게 공연했다 → 양보 관계 → though 사용.',
-      'similar_answers', jsonb_build_array('Though it was her first time on stage, she performed perfectly.', 'Although it was her first time on stage, she performed perfectly.')
+      'acceptedAnswers', jsonb_build_array('Though it was her first time on stage, she performed perfectly.', 'Although it was her first time on stage, she performed perfectly.')
     ),
     jsonb_build_object(
       'id', 67,
@@ -574,7 +574,7 @@ jsonb_build_object(
       'answer', 'Since I had nothing to do at home, I decided to take a walk in the park.',
       'acceptedAnswers', jsonb_build_array('Since I had nothing to do at home, I decided to take a walk in the park.', 'Since I had nothing to do at home, I decided to take a walk in the park', 'I decided to take a walk in the park since I had nothing to do at home.', 'I decided to take a walk in the park since I had nothing to do at home'),
       'explanation', E'집에서 할 일이 없었기 때문에 공원에 산책하러 갔다 → 이유-결과 관계 → since 사용.',
-      'similar_answers', jsonb_build_array('Since I had nothing to do at home, I decided to take a walk in the park.', 'I decided to take a walk in the park since I had nothing to do at home.')
+      'acceptedAnswers', jsonb_build_array('Since I had nothing to do at home, I decided to take a walk in the park.', 'I decided to take a walk in the park since I had nothing to do at home.')
     ),
     jsonb_build_object(
       'id', 68,
@@ -583,7 +583,7 @@ jsonb_build_object(
       'answer', 'Though he failed the exam several times, he never gave up on his dream.',
       'acceptedAnswers', jsonb_build_array('Though he failed the exam several times, he never gave up on his dream.', 'Though he failed the exam several times, he never gave up on his dream', 'Although he failed the exam several times, he never gave up on his dream.', 'Although he failed the exam several times, he never gave up on his dream', 'He never gave up on his dream though he failed the exam several times.', 'He never gave up on his dream though he failed the exam several times', 'He never gave up on his dream although he failed the exam several times.', 'He never gave up on his dream although he failed the exam several times'),
       'explanation', E'시험에 여러 번 떨어졌음에도 불구하고 꿈을 포기하지 않았다 → 양보 관계 → though 사용.',
-      'similar_answers', jsonb_build_array('Though he failed the exam several times, he never gave up on his dream.', 'Although he failed the exam several times, he never gave up on his dream.')
+      'acceptedAnswers', jsonb_build_array('Though he failed the exam several times, he never gave up on his dream.', 'Although he failed the exam several times, he never gave up on his dream.')
     ),
     jsonb_build_object(
       'id', 69,
@@ -592,7 +592,7 @@ jsonb_build_object(
       'answer', 'Though the movie got terrible reviews, it became a huge box office hit.',
       'acceptedAnswers', jsonb_build_array('Though the movie got terrible reviews, it became a huge box office hit.', 'Though the movie got terrible reviews, it became a huge box office hit', 'Although the movie got terrible reviews, it became a huge box office hit.', 'Although the movie got terrible reviews, it became a huge box office hit', 'It became a huge box office hit though the movie got terrible reviews.', 'It became a huge box office hit though the movie got terrible reviews', 'It became a huge box office hit although the movie got terrible reviews.', 'It became a huge box office hit although the movie got terrible reviews'),
       'explanation', E'영화가 끔찍한 평가를 받았음에도 불구하고 큰 흥행을 했다 → 양보 관계 → though 사용.',
-      'similar_answers', jsonb_build_array('Though the movie got terrible reviews, it became a huge box office hit.', 'Although the movie got terrible reviews, it became a huge box office hit.')
+      'acceptedAnswers', jsonb_build_array('Though the movie got terrible reviews, it became a huge box office hit.', 'Although the movie got terrible reviews, it became a huge box office hit.')
     ),
     jsonb_build_object(
       'id', 70,
@@ -601,7 +601,7 @@ jsonb_build_object(
       'answer', E'Since Mia lost her phone, she couldn\'t contact anyone.',
       'acceptedAnswers', jsonb_build_array(E'Since Mia lost her phone, she couldn\'t contact anyone.', E'Since Mia lost her phone, she couldn\'t contact anyone', E'She couldn\'t contact anyone since Mia lost her phone.', E'She couldn\'t contact anyone since Mia lost her phone'),
       'explanation', E'Mia가 전화를 잃어버렸기 때문에 아무에게도 연락할 수 없었다 → 이유-결과 관계 → since 사용.',
-      'similar_answers', jsonb_build_array(E'Since Mia lost her phone, she couldn\'t contact anyone.', E'She couldn\'t contact anyone since Mia lost her phone.')
+      'acceptedAnswers', jsonb_build_array(E'Since Mia lost her phone, she couldn\'t contact anyone.', E'She couldn\'t contact anyone since Mia lost her phone.')
     ),
     jsonb_build_object(
       'id', 71,
@@ -610,7 +610,7 @@ jsonb_build_object(
       'answer', 'Though the flight was delayed by three hours, we still caught our connecting flight.',
       'acceptedAnswers', jsonb_build_array('Though the flight was delayed by three hours, we still caught our connecting flight.', 'Though the flight was delayed by three hours, we still caught our connecting flight', 'Although the flight was delayed by three hours, we still caught our connecting flight.', 'Although the flight was delayed by three hours, we still caught our connecting flight', 'We still caught our connecting flight though the flight was delayed by three hours.', 'We still caught our connecting flight though the flight was delayed by three hours', 'We still caught our connecting flight although the flight was delayed by three hours.', 'We still caught our connecting flight although the flight was delayed by three hours'),
       'explanation', E'비행기가 3시간 지연되었음에도 불구하고 환승 비행기를 탔다 → 양보 관계 → though 사용.',
-      'similar_answers', jsonb_build_array('Though the flight was delayed by three hours, we still caught our connecting flight.', 'Although the flight was delayed by three hours, we still caught our connecting flight.')
+      'acceptedAnswers', jsonb_build_array('Though the flight was delayed by three hours, we still caught our connecting flight.', 'Although the flight was delayed by three hours, we still caught our connecting flight.')
     ),
     jsonb_build_object(
       'id', 72,
@@ -619,7 +619,7 @@ jsonb_build_object(
       'answer', 'Since he is good at painting, he could easily learn how to draw cartoons.',
       'acceptedAnswers', jsonb_build_array('Since he is good at painting, he could easily learn how to draw cartoons.', 'Since he is good at painting, he could easily learn how to draw cartoons', 'He could easily learn how to draw cartoons since he is good at painting.', 'He could easily learn how to draw cartoons since he is good at painting'),
       'explanation', E'그림을 잘 그리기 때문에 만화 그리는 법을 쉽게 배울 수 있다 → 이유-결과 관계 → since 사용.',
-      'similar_answers', jsonb_build_array('Since he is good at painting, he could easily learn how to draw cartoons.', 'He could easily learn how to draw cartoons since he is good at painting.')
+      'acceptedAnswers', jsonb_build_array('Since he is good at painting, he could easily learn how to draw cartoons.', 'He could easily learn how to draw cartoons since he is good at painting.')
     ),
     jsonb_build_object(
       'id', 73,
@@ -628,7 +628,7 @@ jsonb_build_object(
       'answer', 'Though Ms. Wilson is not Korean, she enjoys eating kimchi very much.',
       'acceptedAnswers', jsonb_build_array('Though Ms. Wilson is not Korean, she enjoys eating kimchi very much.', 'Though Ms. Wilson is not Korean, she enjoys eating kimchi very much', 'Although Ms. Wilson is not Korean, she enjoys eating kimchi very much.', 'Although Ms. Wilson is not Korean, she enjoys eating kimchi very much', 'She enjoys eating kimchi very much though Ms. Wilson is not Korean.', 'She enjoys eating kimchi very much though Ms. Wilson is not Korean', 'She enjoys eating kimchi very much although Ms. Wilson is not Korean.', 'She enjoys eating kimchi very much although Ms. Wilson is not Korean'),
       'explanation', E'Wilson 선생님은 한국인이 아님에도 불구하고 김치 먹는 것을 매우 좋아한다 → 양보 관계 → though 사용.',
-      'similar_answers', jsonb_build_array('Though Ms. Wilson is not Korean, she enjoys eating kimchi very much.', 'Although Ms. Wilson is not Korean, she enjoys eating kimchi very much.')
+      'acceptedAnswers', jsonb_build_array('Though Ms. Wilson is not Korean, she enjoys eating kimchi very much.', 'Although Ms. Wilson is not Korean, she enjoys eating kimchi very much.')
     ),
     jsonb_build_object(
       'id', 74,
@@ -637,7 +637,7 @@ jsonb_build_object(
       'answer', 'Since the problem is very hard to solve, you should ask someone for help.',
       'acceptedAnswers', jsonb_build_array('Since the problem is very hard to solve, you should ask someone for help.', 'Since the problem is very hard to solve, you should ask someone for help', 'You should ask someone for help since the problem is very hard to solve.', 'You should ask someone for help since the problem is very hard to solve'),
       'explanation', E'문제가 풀기 매우 어렵기 때문에 누군가에게 도움을 요청해야 한다 → 이유-결과 관계 → since 사용.',
-      'similar_answers', jsonb_build_array('Since the problem is very hard to solve, you should ask someone for help.', 'You should ask someone for help since the problem is very hard to solve.')
+      'acceptedAnswers', jsonb_build_array('Since the problem is very hard to solve, you should ask someone for help.', 'You should ask someone for help since the problem is very hard to solve.')
     )
   );
 

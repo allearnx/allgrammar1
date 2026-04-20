@@ -12,168 +12,168 @@ BEGIN
       'number', 1,
       'question', E'[Part 1] 계속적 용법이 되도록 필요한 곳에 콤마(,)를 넣어 전체 문장을 다시 쓰시오.\n\nMy grandfather who is 80 years old still goes jogging every morning.',
       'answer', E'My grandfather, who is 80 years old, still goes jogging every morning.',
-      'similar_answers', jsonb_build_array(E'My grandfather, who is 80 years old, still goes jogging every morning'),
+      'acceptedAnswers', jsonb_build_array(E'My grandfather, who is 80 years old, still goes jogging every morning'),
       'explanation', E'고유명사/유일한 존재(My grandfather)이므로 계속적 용법 사용 — who 앞뒤에 콤마'
     ),
     jsonb_build_object(
       'number', 2,
       'question', E'계속적 용법이 되도록 필요한 곳에 콤마(,)를 넣어 전체 문장을 다시 쓰시오.\n\nParis which is the capital of France is famous for the Eiffel Tower.',
       'answer', E'Paris, which is the capital of France, is famous for the Eiffel Tower.',
-      'similar_answers', jsonb_build_array(),
+      'acceptedAnswers', jsonb_build_array(),
       'explanation', E'고유명사 Paris는 유일하므로 계속적 용법 사용'
     ),
     jsonb_build_object(
       'number', 3,
       'question', E'계속적 용법이 되도록 필요한 곳에 콤마(,)를 넣어 전체 문장을 다시 쓰시오.\n\nShe called her best friend Amy who lives in Busan.',
       'answer', E'She called her best friend Amy, who lives in Busan.',
-      'similar_answers', jsonb_build_array(),
+      'acceptedAnswers', jsonb_build_array(),
       'explanation', E'Amy라는 이름으로 이미 특정된 사람이므로 계속적 용법'
     ),
     jsonb_build_object(
       'number', 4,
       'question', E'계속적 용법이 되도록 필요한 곳에 콤마(,)를 넣어 전체 문장을 다시 쓰시오.\n\nThe singer whose voice is amazing released a new album last week.',
       'answer', E'The singer, whose voice is amazing, released a new album last week.',
-      'similar_answers', jsonb_build_array(),
+      'acceptedAnswers', jsonb_build_array(),
       'explanation', E'이미 특정된 가수에 대한 부연 설명이므로 계속적 용법'
     ),
     jsonb_build_object(
       'number', 5,
       'question', E'계속적 용법이 되도록 필요한 곳에 콤마(,)를 넣어 전체 문장을 다시 쓰시오.\n\nI watched the documentary which was filmed in Antarctica.',
       'answer', E'I watched the documentary, which was filmed in Antarctica.',
-      'similar_answers', jsonb_build_array(),
+      'acceptedAnswers', jsonb_build_array(),
       'explanation', E'특정 다큐멘터리에 대한 부연 설명'
     ),
     jsonb_build_object(
       'number', 6,
       'question', E'계속적 용법이 되도록 필요한 곳에 콤마(,)를 넣어 전체 문장을 다시 쓰시오.\n\nProfessor Han who taught us biology retired last semester.',
       'answer', E'Professor Han, who taught us biology, retired last semester.',
-      'similar_answers', jsonb_build_array(),
+      'acceptedAnswers', jsonb_build_array(),
       'explanation', E'고유명사 Professor Han — 계속적 용법'
     ),
     jsonb_build_object(
       'number', 7,
       'question', E'계속적 용법이 되도록 필요한 곳에 콤마(,)를 넣어 전체 문장을 다시 쓰시오.\n\nHe bought a new laptop which turned out to have a defect.',
       'answer', E'He bought a new laptop, which turned out to have a defect.',
-      'similar_answers', jsonb_build_array(),
+      'acceptedAnswers', jsonb_build_array(),
       'explanation', E'새 노트북에 대한 부연 설명'
     ),
     jsonb_build_object(
       'number', 8,
       'question', E'계속적 용법이 되도록 필요한 곳에 콤마(,)를 넣어 전체 문장을 다시 쓰시오.\n\nMy neighbor Mr. Choi who has three cats is a very quiet person.',
       'answer', E'My neighbor Mr. Choi, who has three cats, is a very quiet person.',
-      'similar_answers', jsonb_build_array(),
+      'acceptedAnswers', jsonb_build_array(),
       'explanation', E'고유명사 Mr. Choi — 계속적 용법'
     ),
     jsonb_build_object(
       'number', 9,
       'question', E'계속적 용법이 되도록 필요한 곳에 콤마(,)를 넣어 전체 문장을 다시 쓰시오.\n\nShe passed the final exam which made her parents very proud.',
       'answer', E'She passed the final exam, which made her parents very proud.',
-      'similar_answers', jsonb_build_array(),
+      'acceptedAnswers', jsonb_build_array(),
       'explanation', E'앞 문장 전체(기말고사 합격)를 선행사로 하는 계속적 용법'
     ),
     jsonb_build_object(
       'number', 10,
       'question', E'계속적 용법이 되도록 필요한 곳에 콤마(,)를 넣어 전체 문장을 다시 쓰시오.\n\nEdison who invented the light bulb changed the world forever.',
       'answer', E'Edison, who invented the light bulb, changed the world forever.',
-      'similar_answers', jsonb_build_array(),
+      'acceptedAnswers', jsonb_build_array(),
       'explanation', E'고유명사 Edison — 계속적 용법'
     ),
     jsonb_build_object(
       'number', 11,
       'question', E'[Part 2] 다음 두 문장을 관계대명사의 계속적 용법을 사용하여 한 문장으로 쓰시오.\n\n• I called my old teacher.\n• She remembered me at once.',
       'answer', E'I called my old teacher, who remembered me at once.',
-      'similar_answers', jsonb_build_array(),
+      'acceptedAnswers', jsonb_build_array(),
       'explanation', E'선행사 my old teacher(사람) + 주격 who'
     ),
     jsonb_build_object(
       'number', 12,
       'question', E'다음 두 문장을 관계대명사의 계속적 용법을 사용하여 한 문장으로 쓰시오.\n\n• We visited the science museum.\n• It was closed for renovation.',
       'answer', E'We visited the science museum, which was closed for renovation.',
-      'similar_answers', jsonb_build_array(),
+      'acceptedAnswers', jsonb_build_array(),
       'explanation', E'선행사 the science museum(사물) + 주격 which'
     ),
     jsonb_build_object(
       'number', 13,
       'question', E'다음 두 문장을 관계대명사의 계속적 용법을 사용하여 한 문장으로 쓰시오.\n\n• My brother runs a small café downtown.\n• He makes the best coffee I''ve ever tasted.',
       'answer', E'My brother, who makes the best coffee I''ve ever tasted, runs a small café downtown.',
-      'similar_answers', jsonb_build_array(E'My brother, who makes the best coffee I''ve ever tasted, runs a small cafe downtown.'),
+      'acceptedAnswers', jsonb_build_array(E'My brother, who makes the best coffee I''ve ever tasted, runs a small cafe downtown.'),
       'explanation', E'선행사 My brother(사람) + who절 삽입'
     ),
     jsonb_build_object(
       'number', 14,
       'question', E'다음 두 문장을 관계대명사의 계속적 용법을 사용하여 한 문장으로 쓰시오.\n\n• She lent me her bicycle.\n• It had a broken bell.',
       'answer', E'She lent me her bicycle, which had a broken bell.',
-      'similar_answers', jsonb_build_array(),
+      'acceptedAnswers', jsonb_build_array(),
       'explanation', E'선행사 her bicycle(사물) + which'
     ),
     jsonb_build_object(
       'number', 15,
       'question', E'다음 두 문장을 관계대명사의 계속적 용법을 사용하여 한 문장으로 쓰시오.\n\n• I decided to take the early bus.\n• It arrived ten minutes late.',
       'answer', E'I decided to take the early bus, which arrived ten minutes late.',
-      'similar_answers', jsonb_build_array(),
+      'acceptedAnswers', jsonb_build_array(),
       'explanation', E'선행사 the early bus(사물) + which'
     ),
     jsonb_build_object(
       'number', 16,
       'question', E'다음 두 문장을 관계대명사의 계속적 용법을 사용하여 한 문장으로 쓰시오.\n\n• We met Dr. Yoon at the conference.\n• She is an expert in climate science.',
       'answer', E'We met Dr. Yoon at the conference, who is an expert in climate science.',
-      'similar_answers', jsonb_build_array(),
+      'acceptedAnswers', jsonb_build_array(),
       'explanation', E'선행사 Dr. Yoon(사람) + who'
     ),
     jsonb_build_object(
       'number', 17,
       'question', E'다음 두 문장을 관계대명사의 계속적 용법을 사용하여 한 문장으로 쓰시오.\n\n• He apologized to me.\n• It surprised everyone in the room.',
       'answer', E'He apologized to me, which surprised everyone in the room.',
-      'similar_answers', jsonb_build_array(),
+      'acceptedAnswers', jsonb_build_array(),
       'explanation', E'앞 문장 전체를 선행사로 하는 which'
     ),
     jsonb_build_object(
       'number', 18,
       'question', E'다음 두 문장을 관계대명사의 계속적 용법을 사용하여 한 문장으로 쓰시오.\n\n• I have a younger sister.\n• She won first prize in a national art competition.',
       'answer', E'I have a younger sister, who won first prize in a national art competition.',
-      'similar_answers', jsonb_build_array(),
+      'acceptedAnswers', jsonb_build_array(),
       'explanation', E'선행사 a younger sister(사람) + who'
     ),
     jsonb_build_object(
       'number', 19,
       'question', E'다음 두 문장을 관계대명사의 계속적 용법을 사용하여 한 문장으로 쓰시오.\n\n• They moved to a new apartment last month.\n• It is right next to the subway station.',
       'answer', E'They moved to a new apartment last month, which is right next to the subway station.',
-      'similar_answers', jsonb_build_array(),
+      'acceptedAnswers', jsonb_build_array(),
       'explanation', E'선행사 a new apartment(사물) + which'
     ),
     jsonb_build_object(
       'number', 20,
       'question', E'다음 두 문장을 관계대명사의 계속적 용법을 사용하여 한 문장으로 쓰시오.\n\n• My coach encouraged me to keep practicing.\n• He is known for his strict training style.',
       'answer', E'My coach, who is known for his strict training style, encouraged me to keep practicing.',
-      'similar_answers', jsonb_build_array(),
+      'acceptedAnswers', jsonb_build_array(),
       'explanation', E'선행사 My coach(사람) + who절 삽입'
     ),
     jsonb_build_object(
       'number', 21,
       'question', E'다음 두 문장을 관계대명사의 계속적 용법을 사용하여 한 문장으로 쓰시오.\n\n• She forgot to bring her umbrella.\n• It made her completely soaked in the rain.',
       'answer', E'She forgot to bring her umbrella, which made her completely soaked in the rain.',
-      'similar_answers', jsonb_build_array(),
+      'acceptedAnswers', jsonb_build_array(),
       'explanation', E'앞 문장 전체를 선행사로 하는 which'
     ),
     jsonb_build_object(
       'number', 22,
       'question', E'다음 두 문장을 관계대명사의 계속적 용법을 사용하여 한 문장으로 쓰시오.\n\n• The team won the championship three times in a row.\n• This delighted all the fans.',
       'answer', E'The team won the championship three times in a row, which delighted all the fans.',
-      'similar_answers', jsonb_build_array(),
+      'acceptedAnswers', jsonb_build_array(),
       'explanation', E'앞 문장 전체를 선행사 → which'
     ),
     jsonb_build_object(
       'number', 23,
       'question', E'다음 두 문장을 관계대명사의 계속적 용법을 사용하여 한 문장으로 쓰시오.\n\n• I talked to a stranger on the train.\n• He turned out to be my father''s old friend.',
       'answer', E'I talked to a stranger on the train, who turned out to be my father''s old friend.',
-      'similar_answers', jsonb_build_array(),
+      'acceptedAnswers', jsonb_build_array(),
       'explanation', E'선행사 a stranger(사람) + who'
     ),
     jsonb_build_object(
       'number', 24,
       'question', E'다음 두 문장을 관계대명사의 계속적 용법을 사용하여 한 문장으로 쓰시오.\n\n• She donated all her savings to the shelter.\n• It moved many people deeply.',
       'answer', E'She donated all her savings to the shelter, which moved many people deeply.',
-      'similar_answers', jsonb_build_array(),
+      'acceptedAnswers', jsonb_build_array(),
       'explanation', E'앞 문장 전체를 선행사 → which'
     ),
     jsonb_build_object(
@@ -262,154 +262,154 @@ BEGIN
       'number', 35,
       'question', E'[Part 4] [A]와 [B]를 연결하여 관계대명사의 계속적 용법(, who / , which)으로 한 문장을 쓰시오.\n\n[A] I admire my science teacher.\n[B] He explains everything we need to know.',
       'answer', E'I admire my science teacher, who explains everything we need to know.',
-      'similar_answers', jsonb_build_array(E'I admire my science teacher, who explained everything we needed to know.'),
+      'acceptedAnswers', jsonb_build_array(E'I admire my science teacher, who explained everything we needed to know.'),
       'explanation', E'선행사 my science teacher(사람) + 주격 who'
     ),
     jsonb_build_object(
       'number', 36,
       'question', E'[A]와 [B]를 연결하여 관계대명사의 계속적 용법(, who / , which)으로 한 문장을 쓰시오.\n\n[A] We stayed at a small hotel.\n[B] It was a very small but cozy place.',
       'answer', E'We stayed at a small hotel, which was a very small but cozy place.',
-      'similar_answers', jsonb_build_array(E'We stayed at a small hotel, which was very small but cozy.'),
+      'acceptedAnswers', jsonb_build_array(E'We stayed at a small hotel, which was very small but cozy.'),
       'explanation', E'선행사 a small hotel(사물) + which'
     ),
     jsonb_build_object(
       'number', 37,
       'question', E'[A]와 [B]를 연결하여 관계대명사의 계속적 용법(, who / , which)으로 한 문장을 쓰시오.\n\n[A] She introduced me to her cousin.\n[B] She works as a marine biologist.',
       'answer', E'She introduced me to her cousin, who works as a marine biologist.',
-      'similar_answers', jsonb_build_array(),
+      'acceptedAnswers', jsonb_build_array(),
       'explanation', E'선행사 her cousin(사람) + who'
     ),
     jsonb_build_object(
       'number', 38,
       'question', E'[A]와 [B]를 연결하여 관계대명사의 계속적 용법(, who / , which)으로 한 문장을 쓰시오.\n\n[A] He submitted his report late.\n[B] It upset his professor greatly.',
       'answer', E'He submitted his report late, which upset his professor greatly.',
-      'similar_answers', jsonb_build_array(),
+      'acceptedAnswers', jsonb_build_array(),
       'explanation', E'앞 문장 전체를 선행사 → which'
     ),
     jsonb_build_object(
       'number', 39,
       'question', E'[A]와 [B]를 연결하여 관계대명사의 계속적 용법(, who / , which)으로 한 문장을 쓰시오.\n\n[A] I lost my house key.\n[B] It turned out to be under my school bag.',
       'answer', E'I lost my house key, which turned out to be under my school bag.',
-      'similar_answers', jsonb_build_array(),
+      'acceptedAnswers', jsonb_build_array(),
       'explanation', E'선행사 my house key(사물) + which'
     ),
     jsonb_build_object(
       'number', 40,
       'question', E'[A]와 [B]를 연결하여 관계대명사의 계속적 용법(, who / , which)으로 한 문장을 쓰시오.\n\n[A] They canceled the outdoor concert.\n[B] It disappointed everyone who had bought tickets.',
       'answer', E'They canceled the outdoor concert, which disappointed everyone who had bought tickets.',
-      'similar_answers', jsonb_build_array(),
+      'acceptedAnswers', jsonb_build_array(),
       'explanation', E'앞 문장 전체를 선행사 → which'
     ),
     jsonb_build_object(
       'number', 41,
       'question', E'[A]와 [B]를 연결하여 관계대명사의 계속적 용법(, who / , which)으로 한 문장을 쓰시오.\n\n[A] She received a scholarship.\n[B] It covered all her tuition fees.',
       'answer', E'She received a scholarship, which covered all her tuition fees.',
-      'similar_answers', jsonb_build_array(),
+      'acceptedAnswers', jsonb_build_array(),
       'explanation', E'선행사 a scholarship(사물) + which'
     ),
     jsonb_build_object(
       'number', 42,
       'question', E'[A]와 [B]를 연결하여 관계대명사의 계속적 용법(, who / , which)으로 한 문장을 쓰시오.\n\n[A] I read the novel twice.\n[B] It was really touching and made me cry.',
       'answer', E'I read the novel twice, which was really touching and made me cry.',
-      'similar_answers', jsonb_build_array(),
+      'acceptedAnswers', jsonb_build_array(),
       'explanation', E'선행사 the novel(사물) + which'
     ),
     jsonb_build_object(
       'number', 43,
       'question', E'[A]와 [B]를 연결하여 관계대명사의 계속적 용법(, who / , which)으로 한 문장을 쓰시오.\n\n[A] We adopted a puppy last spring.\n[B] 자유롭게 [B]를 작성하여 문장을 완성하시오.',
       'answer', E'We adopted a puppy last spring, which has become part of our family.',
-      'similar_answers', jsonb_build_array(E'We adopted a puppy last spring, which has grown a lot since then.', E'We adopted a puppy last spring, which was the best decision we ever made.'),
+      'acceptedAnswers', jsonb_build_array(E'We adopted a puppy last spring, which has grown a lot since then.', E'We adopted a puppy last spring, which was the best decision we ever made.'),
       'explanation', E'선행사 a puppy(사물) 또는 앞 문장 전체 → which'
     ),
     jsonb_build_object(
       'number', 44,
       'question', E'[A]와 [B]를 연결하여 관계대명사의 계속적 용법(, who / , which)으로 한 문장을 쓰시오.\n\n[A] He sent me a long message.\n[B] It was really touching and made me cry.',
       'answer', E'He sent me a long message, which was really touching and made me cry.',
-      'similar_answers', jsonb_build_array(E'He sent me a long message, which explained everything we needed to know.'),
+      'acceptedAnswers', jsonb_build_array(E'He sent me a long message, which explained everything we needed to know.'),
       'explanation', E'선행사 a long message(사물) + which'
     ),
     jsonb_build_object(
       'number', 45,
       'question', E'[Part 5] 두 문장이 같은 의미가 되도록 빈칸에 알맞은 말을 쓰시오.\n\nShe passed the audition, and it made her dream come true.\n→ She passed the audition, ________ made her dream come true.',
       'answer', E'which',
-      'similar_answers', jsonb_build_array(),
+      'acceptedAnswers', jsonb_build_array(),
       'explanation', E'and it → which (접속사+대명사 → 관계대명사)'
     ),
     jsonb_build_object(
       'number', 46,
       'question', E'두 문장이 같은 의미가 되도록 빈칸에 알맞은 말을 쓰시오.\n\nI respect my grandfather, for he devoted his life to education.\n→ I respect my grandfather, ________ devoted his life to education.',
       'answer', E'who',
-      'similar_answers', jsonb_build_array(),
+      'acceptedAnswers', jsonb_build_array(),
       'explanation', E'for he → who'
     ),
     jsonb_build_object(
       'number', 47,
       'question', E'두 문장이 같은 의미가 되도록 빈칸에 알맞은 말을 쓰시오.\n\nHe told me he would quit his job, but it was a lie.\n→ He told me he would quit his job, ________ was a lie.',
       'answer', E'which',
-      'similar_answers', jsonb_build_array(),
+      'acceptedAnswers', jsonb_build_array(),
       'explanation', E'but it → which'
     ),
     jsonb_build_object(
       'number', 48,
       'question', E'두 문장이 같은 의미가 되도록 빈칸에 알맞은 말을 쓰시오.\n\nShe scolded her son, and he burst into tears.\n→ She scolded her son, ________ burst into tears.',
       'answer', E'who',
-      'similar_answers', jsonb_build_array(),
+      'acceptedAnswers', jsonb_build_array(),
       'explanation', E'and he → who'
     ),
     jsonb_build_object(
       'number', 49,
       'question', E'두 문장이 같은 의미가 되도록 빈칸에 알맞은 말을 쓰시오.\n\nI bought a new phone, and it stopped working after two days.\n→ I bought a new phone, ________ stopped working after two days.',
       'answer', E'which',
-      'similar_answers', jsonb_build_array(),
+      'acceptedAnswers', jsonb_build_array(),
       'explanation', E'and it → which'
     ),
     jsonb_build_object(
       'number', 50,
       'question', E'두 문장이 같은 의미가 되도록 빈칸에 알맞은 말을 쓰시오.\n\nMy cat knocked over the vase, and it shattered on the floor.\n→ My cat knocked over the vase, ________ shattered on the floor.',
       'answer', E'which',
-      'similar_answers', jsonb_build_array(E'and it'),
+      'acceptedAnswers', jsonb_build_array(E'and it'),
       'explanation', E'and it → which (관계대명사로 전환)'
     ),
     jsonb_build_object(
       'number', 51,
       'question', E'두 문장이 같은 의미가 되도록 빈칸에 알맞은 말을 쓰시오.\n\nWe don''t trust him, for he always breaks his promises.\n→ We don''t trust him, ________ always breaks his promises.',
       'answer', E'who',
-      'similar_answers', jsonb_build_array(),
+      'acceptedAnswers', jsonb_build_array(),
       'explanation', E'for he → who'
     ),
     jsonb_build_object(
       'number', 52,
       'question', E'두 문장이 같은 의미가 되도록 빈칸에 알맞은 말을 쓰시오.\n\nI scored full marks on the test, and it shocked even my teacher.\n→ I scored full marks on the test, ________ shocked even my teacher.',
       'answer', E'which',
-      'similar_answers', jsonb_build_array(),
+      'acceptedAnswers', jsonb_build_array(),
       'explanation', E'and it → which'
     ),
     jsonb_build_object(
       'number', 53,
       'question', E'두 문장이 같은 의미가 되도록 빈칸에 알맞은 말을 쓰시오.\n\nJenny ignored everyone at the party, which seemed rude to many guests.\n→ Jenny ignored everyone at the party, ________ seemed rude to many guests.',
       'answer', E'and it',
-      'similar_answers', jsonb_build_array(E'and this', E'and that'),
+      'acceptedAnswers', jsonb_build_array(E'and this', E'and that'),
       'explanation', E'which → and it (관계대명사 → 접속사+대명사)'
     ),
     jsonb_build_object(
       'number', 54,
       'question', E'두 문장이 같은 의미가 되도록 빈칸에 알맞은 말을 쓰시오.\n\nI visited my old school, but it had been completely rebuilt.\n→ I visited my old school, ________ had been completely rebuilt.',
       'answer', E'which',
-      'similar_answers', jsonb_build_array(),
+      'acceptedAnswers', jsonb_build_array(),
       'explanation', E'but it → which'
     ),
     jsonb_build_object(
       'number', 55,
       'question', E'두 문장이 같은 의미가 되도록 빈칸에 알맞은 말을 쓰시오.\n\nShe apologized sincerely, which finally calmed him down.\n→ She apologized sincerely, ________ finally calmed him down.',
       'answer', E'and it',
-      'similar_answers', jsonb_build_array(E'and this', E'and that'),
+      'acceptedAnswers', jsonb_build_array(E'and this', E'and that'),
       'explanation', E'which → and it (관계대명사 → 접속사+대명사)'
     ),
     jsonb_build_object(
       'number', 56,
       'question', E'두 문장이 같은 의미가 되도록 빈칸에 알맞은 말을 쓰시오.\n\nHe refused to help me, and it hurt my feelings deeply.\n→ He refused to help me, ________ hurt my feelings deeply.',
       'answer', E'which',
-      'similar_answers', jsonb_build_array(),
+      'acceptedAnswers', jsonb_build_array(),
       'explanation', E'and it → which'
     ),
     jsonb_build_object(
@@ -514,56 +514,56 @@ jsonb_build_object(
   'number', 71,
   'question', E'[Part 7] 다음 단어들을 알맞은 순서로 배열하여 문장을 완성하시오.\n\n나는 남동생이 하나 있는데, 그는 프로 게이머가 되고 싶어 한다.\n(a brother, I, who, professional gamer, have, wants to be, a)',
   'answer', E'I have a brother, who wants to be a professional gamer.',
-  'similar_answers', jsonb_build_array(),
+  'acceptedAnswers', jsonb_build_array(),
   'explanation', E'I have a brother(나는 남동생이 하나 있다) + , who wants to be a professional gamer(그는 프로 게이머가 되고 싶어 한다). 사람 선행사 → who.'
 ),
 jsonb_build_object(
   'number', 72,
   'question', E'다음 단어들을 알맞은 순서로 배열하여 문장을 완성하시오.\n\n그녀는 그 소설을 다 읽었는데, 그것은 매우 감동적이었다.\n(she, the novel, finished, which, very moving, was)',
   'answer', E'She finished the novel, which was very moving.',
-  'similar_answers', jsonb_build_array(),
+  'acceptedAnswers', jsonb_build_array(),
   'explanation', E'She finished the novel(그녀는 소설을 다 읽었다) + , which was very moving(그것은 매우 감동적이었다). 사물 선행사 → which.'
 ),
 jsonb_build_object(
   'number', 73,
   'question', E'다음 단어들을 알맞은 순서로 배열하여 문장을 완성하시오.\n\n그는 그 경기에서 졌는데, 그것이 그를 더 열심히 훈련하게 만들었다.\n(the match, him, he, which, lost, train, harder, made)',
   'answer', E'He lost the match, which made him train harder.',
-  'similar_answers', jsonb_build_array(),
+  'acceptedAnswers', jsonb_build_array(),
   'explanation', E'He lost the match(그는 경기에서 졌다) + , which made him train harder(그것이 그를 더 열심히 훈련하게 만들었다). 앞 문장 전체 선행사 → which.'
 ),
 jsonb_build_object(
   'number', 74,
   'question', E'다음 단어들을 알맞은 순서로 배열하여 문장을 완성하시오.\n\n나의 사촌 Mia는 미국에 사는데, 이번 여름에 한국을 방문할 예정이다.\n(my cousin Mia, who, this summer, lives in the U.S., visit Korea, is planning to)',
   'answer', E'My cousin Mia, who lives in the U.S., is planning to visit Korea this summer.',
-  'similar_answers', jsonb_build_array(E'My cousin Mia, who lives in the U.S., is planning to visit Korea this summer'),
+  'acceptedAnswers', jsonb_build_array(E'My cousin Mia, who lives in the U.S., is planning to visit Korea this summer'),
   'explanation', E'My cousin Mia, who lives in the U.S.(미국에 사는 사촌 Mia) + is planning to visit Korea this summer(이번 여름에 한국 방문 예정). 삽입절 구조의 계속적 용법.'
 ),
 jsonb_build_object(
   'number', 75,
   'question', E'다음 단어들을 알맞은 순서로 배열하여 문장을 완성하시오.\n\n서울을 방문하면 경복궁에 꼭 가야 하는데, 그곳은 조선 시대에 지어졌다.\nWhen you visit Seoul, _________________________.\n(Gyeongbokgung, during, was built, must, you, the Joseon Dynasty, visit, which)',
   'answer', E'When you visit Seoul, you must visit Gyeongbokgung, which was built during the Joseon Dynasty.',
-  'similar_answers', jsonb_build_array(),
+  'acceptedAnswers', jsonb_build_array(),
   'explanation', E'you must visit Gyeongbokgung(경복궁에 꼭 가야 한다) + , which was built during the Joseon Dynasty(그곳은 조선 시대에 지어졌다). 사물 선행사 → which.'
 ),
 jsonb_build_object(
   'number', 76,
   'question', E'다음 단어들을 알맞은 순서로 배열하여 문장을 완성하시오.\n\n그들은 새 카페를 열었는데, 그것은 내 집 바로 앞에 있다.\n(opened, which, right, they, is, a new café, my house, in front of)',
   'answer', E'They opened a new café, which is right in front of my house.',
-  'similar_answers', jsonb_build_array(E'They opened a new cafe, which is right in front of my house.'),
+  'acceptedAnswers', jsonb_build_array(E'They opened a new cafe, which is right in front of my house.'),
   'explanation', E'They opened a new café(새 카페를 열었다) + , which is right in front of my house(내 집 바로 앞에 있다). 사물 선행사 → which.'
 ),
 jsonb_build_object(
   'number', 77,
   'question', E'다음 단어들을 알맞은 순서로 배열하여 문장을 완성하시오.\n\n나는 수학 선생님을 매우 좋아하는데, 그는 수업을 항상 재미있게 해주신다.\n(my math teacher, I, who, really like, always makes, class fun)',
   'answer', E'I really like my math teacher, who always makes class fun.',
-  'similar_answers', jsonb_build_array(),
+  'acceptedAnswers', jsonb_build_array(),
   'explanation', E'I really like my math teacher(수학 선생님을 매우 좋아한다) + , who always makes class fun(항상 수업을 재미있게 해주신다). 사람 선행사 → who.'
 ),
 jsonb_build_object(
   'number', 78,
   'question', E'다음 단어들을 알맞은 순서로 배열하여 문장을 완성하시오.\n\n그녀는 그 시험에 불합격했는데, 그것은 그녀에게 큰 충격이었다.\n(the exam, she, which, failed, was, a big shock, to her)',
   'answer', E'She failed the exam, which was a big shock to her.',
-  'similar_answers', jsonb_build_array(),
+  'acceptedAnswers', jsonb_build_array(),
   'explanation', E'She failed the exam(시험에 불합격했다) + , which was a big shock to her(그녀에게 큰 충격이었다). 앞 문장 전체 선행사 → which.'
 ),
 jsonb_build_object(
@@ -690,35 +690,35 @@ jsonb_build_object(
   'number', 91,
   'question', E'[Part 9] 다음 우리말을 영작하시오.\n\n나는 새 이어폰을 샀는데, 그것은 이틀 만에 고장났다.\n(buy, break down)',
   'answer', E'I bought new earphones, which broke down after two days.',
-  'similar_answers', jsonb_build_array(E'I bought new earphones, which broke down in two days.', E'I bought new earphones, which broke down after 2 days.'),
+  'acceptedAnswers', jsonb_build_array(E'I bought new earphones, which broke down in two days.', E'I bought new earphones, which broke down after 2 days.'),
   'explanation', E'I bought new earphones(새 이어폰을 샀다) + , which broke down after two days(이틀 만에 고장났다). 사물 선행사 → which.'
 ),
 jsonb_build_object(
   'number', 92,
   'question', E'다음 우리말을 영작하시오.\n\n우리 선생님은 항상 우리를 응원해 주시는데, 그분은 올해 퇴직하실 예정이다.\n(encourage, retire)',
   'answer', E'Our teacher, who always encourages us, is going to retire this year.',
-  'similar_answers', jsonb_build_array(E'Our teacher, who always encourages us, will retire this year.', E'Our teacher, who always encourages us, is planning to retire this year.'),
+  'acceptedAnswers', jsonb_build_array(E'Our teacher, who always encourages us, will retire this year.', E'Our teacher, who always encourages us, is planning to retire this year.'),
   'explanation', E'Our teacher, who always encourages us(항상 우리를 응원해 주시는 선생님) + is going to retire this year(올해 퇴직 예정). 삽입절 구조의 계속적 용법.'
 ),
 jsonb_build_object(
   'number', 93,
   'question', E'다음 우리말을 영작하시오.\n\n그는 아무 말도 하지 않았는데, 그것이 모두를 더욱 걱정하게 만들었다.\n(say anything, worry)',
   'answer', E'He didn''t say anything, which made everyone even more worried.',
-  'similar_answers', jsonb_build_array(E'He did not say anything, which made everyone even more worried.', E'He didn''t say anything, which made everyone worry even more.'),
+  'acceptedAnswers', jsonb_build_array(E'He did not say anything, which made everyone even more worried.', E'He didn''t say anything, which made everyone worry even more.'),
   'explanation', E'He didn''t say anything(아무 말도 하지 않았다) + , which made everyone even more worried(모두를 더욱 걱정하게 만들었다). 앞 문장 전체 선행사 → which.'
 ),
 jsonb_build_object(
   'number', 94,
   'question', E'다음 우리말을 영작하시오.\n\n그녀는 봉사 활동에 참여했는데, 그것이 그녀의 인생관을 바꿔놓았다.\n(volunteer work, change, outlook on life)',
   'answer', E'She participated in volunteer work, which changed her outlook on life.',
-  'similar_answers', jsonb_build_array(E'She took part in volunteer work, which changed her outlook on life.'),
+  'acceptedAnswers', jsonb_build_array(E'She took part in volunteer work, which changed her outlook on life.'),
   'explanation', E'She participated in volunteer work(봉사 활동에 참여했다) + , which changed her outlook on life(인생관을 바꿔놓았다). 앞 문장 전체 선행사 → which.'
 ),
 jsonb_build_object(
   'number', 95,
   'question', E'다음 우리말을 영작하시오.\n\n우리 팀은 결승전에 진출했는데, 이것이 모든 팬들을 기쁘게 했다.\n(reach the final, please)',
   'answer', E'Our team reached the final, which pleased all the fans.',
-  'similar_answers', jsonb_build_array(E'Our team reached the final, which pleased all of the fans.', E'Our team reached the finals, which pleased all the fans.'),
+  'acceptedAnswers', jsonb_build_array(E'Our team reached the final, which pleased all of the fans.', E'Our team reached the finals, which pleased all the fans.'),
   'explanation', E'Our team reached the final(결승전에 진출했다) + , which pleased all the fans(모든 팬들을 기쁘게 했다). 앞 문장 전체 선행사 → which.'
 ),
 jsonb_build_object(
