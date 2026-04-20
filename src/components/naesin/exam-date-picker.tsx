@@ -47,8 +47,8 @@ export function ExamDatePicker({ textbookId, currentDate, onDateChange }: ExamDa
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button variant="outline" size="sm">
-          <Calendar className="h-4 w-4 mr-1" />
+        <Button variant="outline" size="default" className="shrink-0 font-semibold">
+          <Calendar className="h-5 w-5 mr-1.5" />
           {currentDate ? '시험일 변경' : '시험일 설정'}
         </Button>
       </DialogTrigger>

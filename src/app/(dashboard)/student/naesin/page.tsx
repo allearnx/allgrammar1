@@ -170,6 +170,7 @@ export default async function NaesinPage() {
         <NaesinHome
           textbooks={textbooks || []}
           selectedTextbook={setting?.textbook ? setting.textbook : null}
+          textbookId={setting?.textbook_id || null}
           units={units}
           examDate={examDate}
           examGroups={examGroups}

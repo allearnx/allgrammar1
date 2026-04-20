@@ -11,6 +11,7 @@ import { fetchWithToast } from '@/lib/fetch-with-toast';
 import Link from 'next/link';
 import { LessonCard } from '@/components/naesin/lesson-card';
 import { ExamCountdown } from '@/components/naesin/exam-countdown';
+import { ExamDatePicker } from '@/components/naesin/exam-date-picker';
 import { LearningOrderGuide } from '@/components/naesin/learning-order-guide';
 import { LearningOrderModal } from '@/components/naesin/learning-order-modal';
 import type { NaesinTextbook } from '@/types/database';
@@ -20,6 +21,7 @@ import { TextbookSelector } from './textbook-selector';
 interface NaesinHomeProps {
   textbooks: NaesinTextbook[];
   selectedTextbook: NaesinTextbook | null;
+  textbookId?: string | null;
   units: UnitSummary[];
   examDate?: string | null;
   examGroups?: ExamGroup[];
@@ -29,6 +31,7 @@ interface NaesinHomeProps {
 export function NaesinHome({
   textbooks,
   selectedTextbook,
+  textbookId,
   units,
   examDate: initialExamDate,
   examGroups = [],
@@ -36,6 +39,7 @@ export function NaesinHome({
 }: NaesinHomeProps) {
   const router = useRouter();
   const [saving, setSaving] = useState(false);
+  const [examDate, setExamDate] = useState(initialExamDate);
 
   async function selectTextbook(tbId: string) {
     setSaving(true);
@@ -79,6 +83,24 @@ export function NaesinHome({
           <span>변경 시 선생님 문의</span>
         </div>
       </div>
+
+      {/* 시험일 설정 / D-day */}
+      {textbookId && !hasExamGroups && (
+        <div className="flex items-center gap-3">
+          {examDate ? (
+            <ExamCountdown examDate={examDate} className="flex-1" />
+          ) : (
+            <div className="flex-1 rounded-lg border-2 border-dashed border-muted-foreground/30 p-4 text-center">
+              <p className="text-muted-foreground text-sm mb-2">시험 날짜를 설정하면 D-day가 표시됩니다</p>
+            </div>
+          )}
+          <ExamDatePicker
+            textbookId={textbookId}
+            currentDate={examDate}
+            onDateChange={(d) => setExamDate(d)}
+          />
+        </div>
+      )}
 
       {/* 학습 순서 가이드 (유료만) */}
       {isPaid && <LearningOrderGuide mode="card" />}
@@ -137,8 +159,6 @@ export function NaesinHome({
       ) : (
         <>
           {/* Legacy: flat display when no exam assignments */}
-          {initialExamDate && <ExamCountdown examDate={initialExamDate} />}
-
           {units.length === 0 ? (
             <div className="flex flex-col items-center py-12">
               <ClipboardList className="h-10 w-10 text-muted-foreground/30 mb-2" />
