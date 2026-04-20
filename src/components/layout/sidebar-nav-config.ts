@@ -1,5 +1,6 @@
 import {
   Activity,
+  CalendarDays,
   ClipboardList,
   CreditCard,
   BarChart3,
@@ -82,6 +83,7 @@ export const NAV_CONFIG: Record<string, NavGroup[]> = {
       items: [
         { href: '/teacher/students', label: '학생 관리', icon: Users },
         { href: '/teacher/live', label: '실시간 모니터', icon: Activity },
+        { href: '/teacher/exams', label: '시험 일정', icon: CalendarDays },
         { href: '/teacher/announcements', label: '공지사항', icon: Megaphone },
       ],
     },
@@ -112,6 +114,7 @@ export const NAV_CONFIG: Record<string, NavGroup[]> = {
       items: [
         { href: '/admin/students', label: '학생 관리', icon: Users },
         { href: '/admin/live', label: '실시간 모니터', icon: Activity },
+        { href: '/admin/exams', label: '시험 일정', icon: CalendarDays },
         { href: '/admin/teachers', label: '선생님 관리', icon: GraduationCap },
         { href: '/admin/announcements', label: '공지사항', icon: Megaphone },
       ],
@@ -162,6 +165,7 @@ export const NAV_CONFIG: Record<string, NavGroup[]> = {
         { href: '/boss/users', label: '사용자 관리', icon: Users },
         { href: '/boss/students', label: '학생 관리', icon: Users },
         { href: '/boss/live', label: '실시간 모니터', icon: Activity },
+        { href: '/boss/exams', label: '시험 일정', icon: CalendarDays },
         { href: '/boss/teachers', label: '선생님 관리', icon: GraduationCap },
         { href: '/boss/announcements', label: '공지사항', icon: Megaphone },
       ],

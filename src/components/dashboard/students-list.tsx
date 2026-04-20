@@ -11,8 +11,10 @@ import { StudentsToolbar } from './students-toolbar';
 import { StudentDeleteButton } from './student-delete-button';
 import { StudentSearchInput } from './student-search-input';
 import { AddStudentDialog } from './add-student-dialog';
+import { DDayBadge } from '@/components/ui/dday-badge';
 import { getPlanContext } from '@/lib/billing/get-plan-context';
 import { canUseFeature, isServiceAllowed } from '@/lib/billing/feature-gate';
+import { getDDay } from '@/lib/dashboard/naesin-helpers';
 import type { AuthUser } from '@/types/auth';
 
 interface Props {
@@ -69,7 +71,7 @@ export async function StudentsList({ user, basePath, searchQuery }: Props) {
     .select('id', { count: 'exact', head: true });
 
   const studentIds = students?.map((s) => s.id) || [];
-  const [progressRes, naesinProgressRes] = await Promise.all([
+  const [progressRes, naesinProgressRes, examDatesRes, examAssignmentsRes] = await Promise.all([
     studentIds.length > 0
       ? admin
           .from('student_progress')
@@ -82,7 +84,29 @@ export async function StudentsList({ user, basePath, searchQuery }: Props) {
           .select('student_id, vocab_completed, passage_completed, dialogue_completed, grammar_completed, problem_completed, round2_passage_completed, round2_dialogue_completed')
           .in('student_id', studentIds)
       : Promise.resolve({ data: [] }),
+    studentIds.length > 0
+      ? admin
+          .from('naesin_exam_dates')
+          .select('student_id, exam_date')
+          .in('student_id', studentIds)
+      : Promise.resolve({ data: [] }),
+    studentIds.length > 0
+      ? admin
+          .from('naesin_exam_assignments')
+          .select('student_id, exam_date')
+          .in('student_id', studentIds)
+          .not('exam_date', 'is', null)
+      : Promise.resolve({ data: [] }),
   ]);
+
+  // Build nearest D-day map per student
+  const nearestDDayMap = new Map<string, number>();
+  for (const row of [...(examDatesRes.data || []), ...(examAssignmentsRes.data || [])]) {
+    const d = getDDay(row.exam_date);
+    if (d === null || d < 0) continue;
+    const prev = nearestDDayMap.get(row.student_id);
+    if (prev === undefined || d < prev) nearestDDayMap.set(row.student_id, d);
+  }
 
   // Fetch academy naesinRequiredRounds
   let naesinRequiredRounds = 1;
@@ -215,6 +239,9 @@ export async function StudentsList({ user, basePath, searchQuery }: Props) {
                       >
                         {student.is_active ? '활성' : '비활성'}
                       </Badge>
+                      {nearestDDayMap.has(student.id) && (
+                        <DDayBadge dday={nearestDDayMap.get(student.id)!} className="text-xs" />
+                      )}
                     </div>
                     <p className="text-sm text-muted-foreground truncate">{student.email}</p>
                     {isBoss && (
