@@ -1,12 +1,14 @@
 'use client';
 
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useMemo } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { CheckCircle, XCircle, Undo2, Shuffle } from 'lucide-react';
+import { CheckCircle, XCircle, Undo2, Shuffle, Pin } from 'lucide-react';
 import { cn, shuffle } from '@/lib/utils';
 import { toast } from 'sonner';
+
+const HINT_INTERVAL = 5;
 
 interface DialogueLine {
   original: string;
@@ -32,21 +34,66 @@ export function DialogueLineOrdering({ sentences, onComplete }: DialogueLineOrde
     originalIndex: i,
   }));
 
-  const [bank, setBank] = useState<DialogueLine[]>(() => shuffle([...lines]));
+  // Hint positions: every HINT_INTERVAL (0, 5, 10, ...)
+  const hintSet = useMemo(() => {
+    const set = new Set<number>();
+    for (let i = 0; i < lines.length; i++) {
+      if (i % HINT_INTERVAL === 0) set.add(i);
+    }
+    return set;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [lines.length]);
+
+  const nonHintPositions = useMemo(
+    () => lines.map((_, i) => i).filter((i) => !hintSet.has(i)),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [lines.length, hintSet],
+  );
+
+  const shuffleableLines = useMemo(
+    () => lines.filter((_, i) => !hintSet.has(i)),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [lines.length, hintSet],
+  );
+
+  const [bank, setBank] = useState<DialogueLine[]>(() => shuffle([...shuffleableLines]));
   const [selected, setSelected] = useState<DialogueLine[]>([]);
   const [showResult, setShowResult] = useState(false);
 
-  const selectLine = useCallback((item: DialogueLine) => {
-    if (showResult) return;
-    setBank((prev) => prev.filter((l) => l !== item));
-    setSelected((prev) => [...prev, item]);
-  }, [showResult]);
+  // Build full display order: hints fixed + selected fill gaps
+  const fullOrder = useMemo(() => {
+    const result: (DialogueLine | null)[] = [];
+    let selIdx = 0;
+    for (let i = 0; i < lines.length; i++) {
+      if (hintSet.has(i)) {
+        result.push(lines[i]);
+      } else if (selIdx < selected.length) {
+        result.push(selected[selIdx++]);
+      } else {
+        result.push(null);
+      }
+    }
+    return result;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selected, lines.length, hintSet]);
 
-  const deselectLine = useCallback((item: DialogueLine) => {
-    if (showResult) return;
-    setSelected((prev) => prev.filter((l) => l !== item));
-    setBank((prev) => [...prev, item]);
-  }, [showResult]);
+  const selectLine = useCallback(
+    (item: DialogueLine) => {
+      if (showResult) return;
+      setBank((prev) => prev.filter((l) => l !== item));
+      setSelected((prev) => [...prev, item]);
+    },
+    [showResult],
+  );
+
+  const deselectLine = useCallback(
+    (item: DialogueLine) => {
+      if (showResult) return;
+      setSelected((prev) => prev.filter((l) => l !== item));
+      setBank((prev) => [...prev, item]);
+    },
+    [showResult],
+  );
 
   function handleUndo() {
     if (selected.length === 0 || showResult) return;
@@ -57,18 +104,21 @@ export function DialogueLineOrdering({ sentences, onComplete }: DialogueLineOrde
 
   function handleShuffle() {
     if (showResult) return;
-    setBank(shuffle([...lines]));
+    setBank(shuffle([...shuffleableLines]));
     setSelected([]);
   }
 
   function handleCheck() {
-    if (selected.length !== lines.length) return;
+    if (selected.length !== nonHintPositions.length) return;
     setShowResult(true);
   }
 
-  // 동일한 텍스트+화자 문장은 서로 교환 가능하므로 텍스트 기준 비교
-  const correctCount = selected.filter((item, i) =>
-    item.original === lines[i].original && (item.speaker ?? '') === (lines[i].speaker ?? '')
+  // Score: compare full order (hints always correct)
+  const correctCount = fullOrder.filter(
+    (item, i) =>
+      item !== null &&
+      item.original === lines[i].original &&
+      (item.speaker ?? '') === (lines[i].speaker ?? ''),
   ).length;
   const score = Math.round((correctCount / lines.length) * 100);
   const allCorrect = correctCount === lines.length;
@@ -79,7 +129,7 @@ export function DialogueLineOrdering({ sentences, onComplete }: DialogueLineOrde
       wrongs.push({
         type: 'ordering',
         correctOrder: lines.map((l) => l.original).join(' → '),
-        userOrder: selected.map((l) => l.original).join(' → '),
+        userOrder: fullOrder.map((l) => l?.original ?? '?').join(' → '),
       });
     }
     onComplete(score, wrongs);
@@ -90,7 +140,7 @@ export function DialogueLineOrdering({ sentences, onComplete }: DialogueLineOrde
     return <p className="text-center text-muted-foreground py-4">대화문이 없습니다.</p>;
   }
 
-  const allPlaced = selected.length === lines.length;
+  const allPlaced = selected.length === nonHintPositions.length;
 
   return (
     <div className="space-y-4">
@@ -100,6 +150,11 @@ export function DialogueLineOrdering({ sentences, onComplete }: DialogueLineOrde
           <p className="text-sm text-muted-foreground">
             대화 줄을 올바른 순서대로 탭하여 배열하세요
           </p>
+          {hintSet.size > 0 && (
+            <p className="text-xs mt-0.5 text-blue-600 dark:text-blue-400">
+              힌트 문장 {hintSet.size}개가 고정되어 있습니다
+            </p>
+          )}
         </CardContent>
       </Card>
 
@@ -115,7 +170,8 @@ export function DialogueLineOrdering({ sentences, onComplete }: DialogueLineOrde
               onClick={handleUndo}
               disabled={selected.length === 0 || showResult}
             >
-              <Undo2 className="h-3 w-3 mr-1" />되돌리기
+              <Undo2 className="h-3 w-3 mr-1" />
+              되돌리기
             </Button>
             <Button
               variant="ghost"
@@ -124,7 +180,8 @@ export function DialogueLineOrdering({ sentences, onComplete }: DialogueLineOrde
               onClick={handleShuffle}
               disabled={showResult}
             >
-              <Shuffle className="h-3 w-3 mr-1" />초기화
+              <Shuffle className="h-3 w-3 mr-1" />
+              초기화
             </Button>
           </div>
         </div>
@@ -132,22 +189,56 @@ export function DialogueLineOrdering({ sentences, onComplete }: DialogueLineOrde
         <div
           className={cn(
             'min-h-[4rem] rounded-lg border-2 border-dashed p-2 space-y-1.5 transition-colors',
-            selected.length === 0
-              ? 'border-muted-foreground/20 bg-muted/30'
-              : showResult && allCorrect
+            !showResult
+              ? allPlaced
+                ? 'border-primary/30 bg-primary/5'
+                : 'border-muted-foreground/20 bg-muted/30'
+              : allCorrect
                 ? 'border-green-400 bg-green-50 dark:bg-green-950/20'
-                : showResult && !allCorrect
-                  ? 'border-red-400 bg-red-50 dark:bg-red-950/20'
-                  : 'border-primary/30 bg-primary/5'
+                : 'border-red-400 bg-red-50 dark:bg-red-950/20',
           )}
         >
-          {selected.length === 0 && (
-            <p className="text-xs text-muted-foreground text-center py-4">
-              아래 대화를 탭하여 순서대로 배열하세요
-            </p>
-          )}
-          {selected.map((item, idx) => {
-            const isCorrectPosition = item.original === lines[idx].original && (item.speaker ?? '') === (lines[idx].speaker ?? '');
+          {fullOrder.map((item, i) => {
+            // ── Hint (fixed) ──
+            if (hintSet.has(i)) {
+              const line = lines[i];
+              return (
+                <div
+                  key={`hint-${i}`}
+                  className="w-full text-left rounded-md px-3 py-2 text-sm bg-blue-50 dark:bg-blue-950/40 border border-blue-200 dark:border-blue-800 text-blue-800 dark:text-blue-200"
+                >
+                  <span className="font-medium">{i + 1}.</span>{' '}
+                  <Pin className="inline h-3 w-3 mr-1 text-blue-500" />
+                  {line.speaker && (
+                    <Badge variant="outline" className="mr-1.5 text-[10px] px-1 py-0">
+                      {line.speaker}
+                    </Badge>
+                  )}
+                  {line.original}
+                  <span className="block text-xs text-blue-600/70 dark:text-blue-400/70 mt-0.5 pl-5">
+                    {line.korean}
+                  </span>
+                </div>
+              );
+            }
+
+            // ── Empty slot ──
+            if (!item) {
+              return (
+                <div
+                  key={`empty-${i}`}
+                  className="w-full rounded-md border border-dashed border-muted-foreground/20 px-3 py-2 text-sm text-muted-foreground/40"
+                >
+                  <span className="font-medium">{i + 1}.</span> ...
+                </div>
+              );
+            }
+
+            // ── User-placed item ──
+            const isCorrectPosition =
+              showResult &&
+              item.original === lines[i].original &&
+              (item.speaker ?? '') === (lines[i].speaker ?? '');
             return (
               <button
                 key={`s-${item.originalIndex}`}
@@ -160,10 +251,10 @@ export function DialogueLineOrdering({ sentences, onComplete }: DialogueLineOrde
                     ? isCorrectPosition
                       ? 'bg-green-100 dark:bg-green-900/50 text-green-800 dark:text-green-200'
                       : 'bg-red-100 dark:bg-red-900/50 text-red-800 dark:text-red-200'
-                    : 'bg-primary/10 text-primary border border-primary/20 hover:bg-primary/20 active:scale-[0.99] cursor-pointer'
+                    : 'bg-primary/10 text-primary border border-primary/20 hover:bg-primary/20 active:scale-[0.99] cursor-pointer',
                 )}
               >
-                <span className="font-medium">{idx + 1}.</span>{' '}
+                <span className="font-medium">{i + 1}.</span>{' '}
                 {item.speaker && (
                   <Badge variant="outline" className="mr-1.5 text-[10px] px-1 py-0">
                     {item.speaker}
@@ -205,10 +296,12 @@ export function DialogueLineOrdering({ sentences, onComplete }: DialogueLineOrde
       {/* Result */}
       {showResult && (
         <div className="space-y-2">
-          <div className={cn(
-            'flex items-center gap-2 rounded-lg px-3 py-2.5',
-            allCorrect ? 'bg-green-50 dark:bg-green-950/30' : 'bg-red-50 dark:bg-red-950/30'
-          )}>
+          <div
+            className={cn(
+              'flex items-center gap-2 rounded-lg px-3 py-2.5',
+              allCorrect ? 'bg-green-50 dark:bg-green-950/30' : 'bg-red-50 dark:bg-red-950/30',
+            )}
+          >
             {allCorrect ? (
               <>
                 <CheckCircle className="h-4 w-4 text-green-600 shrink-0" />
@@ -228,7 +321,8 @@ export function DialogueLineOrdering({ sentences, onComplete }: DialogueLineOrde
                   <p className="text-xs text-red-600 dark:text-red-400 font-medium">올바른 순서:</p>
                   {lines.map((line, i) => (
                     <p key={i} className="text-xs text-red-600 dark:text-red-400">
-                      {i + 1}. {line.speaker ? `[${line.speaker}] ` : ''}{line.original}
+                      {i + 1}. {line.speaker ? `[${line.speaker}] ` : ''}
+                      {line.original}
                     </p>
                   ))}
                 </div>
@@ -245,7 +339,7 @@ export function DialogueLineOrdering({ sentences, onComplete }: DialogueLineOrde
       {/* Action button */}
       {!showResult ? (
         <Button onClick={handleCheck} className="w-full" disabled={!allPlaced}>
-          확인 ({selected.length}/{lines.length})
+          확인 ({selected.length}/{nonHintPositions.length})
         </Button>
       ) : (
         <Button onClick={handleComplete} className="w-full">
