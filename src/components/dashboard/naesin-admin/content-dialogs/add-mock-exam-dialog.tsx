@@ -18,6 +18,7 @@ import { FileQuestion, Loader2, Upload, RotateCcw } from 'lucide-react';
 import { toast } from 'sonner';
 import { useFormDialog } from '@/hooks/use-form-dialog';
 import { fetchWithToast } from '@/lib/fetch-with-toast';
+import { parseParentheticalAnswer } from '@/lib/naesin/parse-parenthetical-answer';
 
 interface ExtractedQuestion {
   number: number;
@@ -114,14 +115,25 @@ export function AddMockExamDialog({ unitId, onAdd }: { unitId: string; onAdd: ()
       toast.error('제목을 입력해주세요');
       return;
     }
-    const answerKey = extractedQuestions.map((q) => q.answer);
-    const questions = extractedQuestions.map((q, i) => ({
-      number: i + 1,
-      question: q.question,
-      ...(q.options?.length ? { options: q.options } : {}),
-      answer: q.answer,
-      ...(q.explanation ? { explanation: q.explanation } : {}),
-    }));
+    const questions = extractedQuestions.map((q, i) => {
+      const base: Record<string, unknown> = {
+        number: i + 1,
+        question: q.question,
+        ...(q.options?.length ? { options: q.options } : {}),
+        answer: q.answer,
+        ...(q.explanation ? { explanation: q.explanation } : {}),
+      };
+      // 서술형만 괄호 대안 분리
+      if (!q.options?.length) {
+        const parsed = parseParentheticalAnswer(q.answer);
+        if (parsed) {
+          base.answer = parsed.main;
+          base.acceptedAnswers = parsed.alternatives;
+        }
+      }
+      return base;
+    });
+    const answerKey = questions.map((q) => q.answer);
 
     await handleSubmit(async () => {
       await fetchWithToast('/api/naesin/problems', {
