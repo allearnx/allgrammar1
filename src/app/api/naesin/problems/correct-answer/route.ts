@@ -45,20 +45,25 @@ export const PATCH = createApiHandler(
       throw new NotFoundError('문항 번호가 범위를 벗어났습니다.');
     }
 
-    // 2. 정답 업데이트
+    // 2. questions 배열이 비었으면 (image_answer 모드) 최소 엔트리 생성
+    while (questions.length <= questionIndex) {
+      questions.push({
+        number: questions.length + 1,
+        question: '',
+        answer: answerKey[questions.length] ?? '',
+      });
+    }
+
+    // 3. 정답 업데이트
     if (mode === 'accept') {
-      if (questions[questionIndex]) {
-        const existing = questions[questionIndex].acceptedAnswers ?? [];
-        const newVal = String(newAnswer);
-        if (!existing.includes(newVal)) {
-          questions[questionIndex].acceptedAnswers = [...existing, newVal];
-        }
+      const existing = questions[questionIndex].acceptedAnswers ?? [];
+      const newVal = String(newAnswer);
+      if (!existing.includes(newVal)) {
+        questions[questionIndex].acceptedAnswers = [...existing, newVal];
       }
     } else {
       answerKey[questionIndex] = newAnswer;
-      if (questions[questionIndex]) {
-        questions[questionIndex].answer = newAnswer;
-      }
+      questions[questionIndex].answer = newAnswer;
     }
 
     await admin
@@ -66,7 +71,7 @@ export const PATCH = createApiHandler(
       .update({ answer_key: answerKey, questions })
       .eq('id', sheetId);
 
-    // 3. 원본 템플릿에도 동기화 (source_template_id가 있는 경우)
+    // 4. 원본 템플릿에도 동기화 (source_template_id가 있는 경우)
     const { data: sheetFull } = await admin
       .from('naesin_problem_sheets')
       .select('source_template_id')
@@ -103,7 +108,7 @@ export const PATCH = createApiHandler(
       }
     }
 
-    // 4. 재채점
+    // 5. 재채점
     const result = await regradeSheet(sheetId);
 
     return NextResponse.json({ updated: true, templateSynced, ...result });
