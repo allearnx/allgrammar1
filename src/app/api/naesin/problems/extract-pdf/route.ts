@@ -6,7 +6,7 @@ import { checkRateLimit } from '@/lib/api/rate-limit';
 import Anthropic from '@anthropic-ai/sdk';
 import { requireAiJsonArray } from '@/lib/ai-json';
 
-export const maxDuration = 120;
+export const maxDuration = 300;
 
 const MAX_PDF_SIZE = 10 * 1024 * 1024; // 10MB
 
