@@ -173,7 +173,7 @@ export function AddMockExamDialog({ unitId, onAdd }: { unitId: string; onAdd: ()
           예상문제 추가
         </Button>
       </DialogTrigger>
-      <DialogContent className="max-h-[85vh] overflow-y-auto sm:max-w-lg">
+      <DialogContent className={`max-h-[90vh] overflow-y-auto ${step === 'preview' ? 'sm:max-w-3xl' : 'sm:max-w-lg'}`}>
         <DialogHeader><DialogTitle>예상문제 시트 추가</DialogTitle></DialogHeader>
 
         {/* --- loading 스텝 --- */}
@@ -210,7 +210,7 @@ export function AddMockExamDialog({ unitId, onAdd }: { unitId: string; onAdd: ()
               {subjectiveCount > 0 && <Badge variant="outline">서술형 {subjectiveCount}</Badge>}
             </div>
 
-            <div className="border rounded-md max-h-[40vh] overflow-y-auto">
+            <div className="border rounded-md max-h-[55vh] overflow-y-auto">
               <table className="w-full text-sm">
                 <thead className="bg-muted/50 sticky top-0">
                   <tr>

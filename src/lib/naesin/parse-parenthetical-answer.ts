@@ -32,9 +32,9 @@ function parseSingleLineTrailing(
   const altPart = match[2].trim();
 
   if (/^\d+$/.test(altPart)) return null;
-  if (altPart.length <= 2) return null;
   if (containsKorean(altPart)) return null;
-  if (!isPrimarilyEnglish(altPart)) return null;
+  // 짧은 영어 단어(so, to, at 등)도 대안으로 허용하되, 최소 1글자 영문 필요
+  if (!/[a-zA-Z]/.test(altPart)) return null;
 
   return { main: mainPart, alternatives: [altPart] };
 }
