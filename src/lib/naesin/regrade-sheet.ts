@@ -101,36 +101,35 @@ export async function regradeSheet(
         .from('naesin_problem_attempts')
         .update({ score: newScore, wrong_answers: wrongAnswers })
         .eq('id', attempt.id);
+    }
 
-      // 오답 테이블 갱신: 해당 시트의 problem 오답만 삭제 → 새 오답 삽입
-      await admin
-        .from('naesin_wrong_answers')
-        .delete()
-        .eq('student_id', attempt.student_id)
-        .eq('unit_id', sheet.unit_id)
-        .eq('stage', wrongStage)
-        .eq('sheet_id', sheetId);
+    // 오답 테이블 항상 동기화 (이전 버그로 stage 불일치 레코드가 남아있을 수 있음)
+    // stage='problem'과 'mockExam' 모두 삭제하여 orphan 정리
+    await admin
+      .from('naesin_wrong_answers')
+      .delete()
+      .eq('student_id', attempt.student_id)
+      .eq('sheet_id', sheetId);
 
-      if (wrongAnswers.length > 0) {
-        const wrongRows = wrongAnswers.map((wa) => {
-          const idx = wa.number - 1;
-          const q = questions?.[idx];
-          return {
-            student_id: attempt.student_id,
-            unit_id: sheet.unit_id,
-            stage: wrongStage,
-            source_type: sheet.mode,
-            question_data: {
-              ...wa,
-              ...(q?.options ? { options: q.options } : {}),
-              ...(q?.explanation ? { explanation: q.explanation } : {}),
-              ...(q?.subParts ? { subParts: q.subParts } : {}),
-            },
-            sheet_id: sheetId,
-          };
-        });
-        await admin.from('naesin_wrong_answers').insert(wrongRows);
-      }
+    if (wrongAnswers.length > 0) {
+      const wrongRows = wrongAnswers.map((wa) => {
+        const idx = wa.number - 1;
+        const q = questions?.[idx];
+        return {
+          student_id: attempt.student_id,
+          unit_id: sheet.unit_id,
+          stage: wrongStage,
+          source_type: sheet.mode,
+          question_data: {
+            ...wa,
+            ...(q?.options ? { options: q.options } : {}),
+            ...(q?.explanation ? { explanation: q.explanation } : {}),
+            ...(q?.subParts ? { subParts: q.subParts } : {}),
+          },
+          sheet_id: sheetId,
+        };
+      });
+      await admin.from('naesin_wrong_answers').insert(wrongRows);
     }
   }
 
