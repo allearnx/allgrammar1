@@ -33,9 +33,9 @@ export function AddProblemDialog({ unitId, onAdd }: { unitId: string; onAdd: () 
 
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
-    const answerKey = answerKeyText.split(',').map((s) => s.trim()).filter(Boolean);
+    const answerKey = answerKeyText.split('\n').map((s) => s.trim()).filter(Boolean);
     if (answerKey.length !== Number(totalQuestions)) {
-      toast.error('정답 개수와 문항 수가 일치하지 않습니다');
+      toast.error(`정답 줄 수(${answerKey.length})와 문항 수(${totalQuestions})가 일치하지 않습니다`);
       return;
     }
     await handleSubmit(async () => {
@@ -76,15 +76,18 @@ export function AddProblemDialog({ unitId, onAdd }: { unitId: string; onAdd: () 
             <Input id="problem-total" type="number" value={totalQuestions} onChange={(e) => setTotalQuestions(e.target.value)} placeholder="25" required />
           </div>
           <div>
-            <Label htmlFor="problem-answers">정답 (쉼표 구분)</Label>
+            <Label htmlFor="problem-answers">정답 (한 줄에 하나씩)</Label>
             <Textarea
               id="problem-answers"
               value={answerKeyText}
               onChange={(e) => setAnswerKeyText(e.target.value)}
-              placeholder="3, 1, 5, 2, 4, 1, 3, ..."
-              rows={3}
+              placeholder={"3\n1\n5\n1, 3\n(a) I go (b) They come"}
+              rows={5}
               required
             />
+            <p className="text-xs text-muted-foreground mt-1">
+              줄바꿈으로 문항 구분 · 복수 정답은 쉼표: 1, 3 · 서술형 (a)(b)는 한 줄에 작성
+            </p>
           </div>
           <div>
             <Label htmlFor="problem-pdf">PDF URL (선택)</Label>
