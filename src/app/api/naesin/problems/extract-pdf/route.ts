@@ -97,7 +97,15 @@ JSON 배열 형식:
       });
     } catch (apiError) {
       const apiMsg = apiError instanceof Error ? apiError.message : String(apiError);
-      logger.error('ai.pdf_extract.api_error', { error: apiMsg, fileSize: arrayBuffer.byteLength });
+      const apiStatus = (apiError as { status?: number })?.status;
+      const apiType = (apiError as { error?: { type?: string } })?.error?.type;
+      logger.error('ai.pdf_extract.api_error', {
+        error: apiMsg,
+        status: apiStatus,
+        type: apiType,
+        fileSize: arrayBuffer.byteLength,
+        base64Size: base64Data.length,
+      });
 
       if (apiMsg.includes('too large') || apiMsg.includes('token') || apiMsg.includes('size')) {
         return NextResponse.json(
@@ -106,7 +114,7 @@ JSON 배열 형식:
         );
       }
       return NextResponse.json(
-        { error: 'AI 서버 연결에 실패했습니다. 잠시 후 다시 시도해주세요.' },
+        { error: `AI 서버 연결에 실패했습니다. (${apiStatus ?? 'unknown'}: ${apiType ?? apiMsg.slice(0, 80)})` },
         { status: 502 },
       );
     }
