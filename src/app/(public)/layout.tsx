@@ -37,7 +37,7 @@ export default async function PublicLayout({
         href="http://pf.kakao.com/_iLxcLG/chat"
         target="_blank"
         rel="noopener noreferrer"
-        className="fixed bottom-5 right-5 z-50 flex h-12 w-12 items-center justify-center rounded-full bg-[#FEE500] shadow-lg hover:shadow-xl transition-shadow"
+        className="fixed bottom-20 right-5 z-50 flex h-12 w-12 items-center justify-center rounded-full bg-[#FEE500] shadow-lg hover:shadow-xl transition-shadow"
         aria-label="카카오톡 문의"
       >
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
