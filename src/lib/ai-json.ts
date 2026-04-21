@@ -31,5 +31,10 @@ export function requireAiJsonArray<T = unknown>(message: Anthropic.Message, logT
     logger.warn(`${logTag}.parse_fail`, { raw: cleaned.slice(0, 500) });
     throw new Error('AI 응답에서 JSON을 파싱할 수 없습니다.');
   }
-  return JSON.parse(match[0]);
+  try {
+    return JSON.parse(match[0]);
+  } catch (e) {
+    logger.warn(`${logTag}.json_invalid`, { raw: match[0].slice(0, 500), error: String(e) });
+    throw new Error('AI 응답 JSON 형식이 올바르지 않습니다.');
+  }
 }
