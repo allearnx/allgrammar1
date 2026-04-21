@@ -13,7 +13,8 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
-import { FileQuestion, Loader2, Upload, RotateCcw } from 'lucide-react';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { FileQuestion, Loader2, Upload, RotateCcw, Trash2 } from 'lucide-react';
 import { toast } from 'sonner';
 import { useFormDialog } from '@/hooks/use-form-dialog';
 import { fetchWithToast } from '@/lib/fetch-with-toast';
@@ -111,6 +112,7 @@ export function AddMockExamDialog({ unitId, onAdd }: { unitId: string; onAdd: ()
 
       setExtractedQuestions(questions);
       if (!title) setTitle('PDF 추출 예상문제');
+      setMode('interactive');
       setStep('preview');
     } catch {
       setStep('form');
@@ -146,10 +148,18 @@ export function AddMockExamDialog({ unitId, onAdd }: { unitId: string; onAdd: ()
 
     await handleSubmit(async () => {
       await fetchWithToast('/api/naesin/problems', {
-        body: { unitId, title, mode: 'interactive', questions, answerKey, category: 'mock_exam', pdfUrl: pdfUrl || null },
+        body: { unitId, title, mode, questions, answerKey, category: 'mock_exam', pdfUrl: pdfUrl || null },
         silent: true,
       });
     }, resetAll);
+  }
+
+  function updateQuestion(index: number, field: 'question' | 'answer', value: string) {
+    setExtractedQuestions((prev) => prev.map((q, i) => i === index ? { ...q, [field]: value } : q));
+  }
+
+  function deleteQuestion(index: number) {
+    setExtractedQuestions((prev) => prev.filter((_, i) => i !== index));
   }
 
   const mcqCount = extractedQuestions.filter((q) => q.options?.length > 0).length;
@@ -177,9 +187,21 @@ export function AddMockExamDialog({ unitId, onAdd }: { unitId: string; onAdd: ()
         {/* --- preview 스텝 --- */}
         {step === 'preview' && (
           <div className="space-y-4">
-            <div>
-              <Label htmlFor="preview-title">제목</Label>
-              <Input id="preview-title" value={title} onChange={(e) => setTitle(e.target.value)} placeholder="예상문제 제목" required />
+            <div className="flex gap-3">
+              <div className="flex-1">
+                <Label htmlFor="preview-title">제목</Label>
+                <Input id="preview-title" value={title} onChange={(e) => setTitle(e.target.value)} placeholder="예상문제 제목" required />
+              </div>
+              <div className="w-32">
+                <Label>풀이 방식</Label>
+                <Select value={mode} onValueChange={(v) => setMode(v as 'interactive' | 'image_answer')}>
+                  <SelectTrigger><SelectValue /></SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="interactive">직접 입력</SelectItem>
+                    <SelectItem value="image_answer">OMR 이미지</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
             </div>
 
             <div className="flex gap-2 flex-wrap">
@@ -192,17 +214,42 @@ export function AddMockExamDialog({ unitId, onAdd }: { unitId: string; onAdd: ()
               <table className="w-full text-sm">
                 <thead className="bg-muted/50 sticky top-0">
                   <tr>
-                    <th className="px-2 py-1.5 text-left w-10">#</th>
+                    <th className="px-2 py-1.5 text-left w-8">#</th>
                     <th className="px-2 py-1.5 text-left">문제</th>
-                    <th className="px-2 py-1.5 text-left w-20">정답</th>
+                    <th className="px-2 py-1.5 text-left w-28">정답</th>
+                    <th className="px-2 py-1.5 w-8" />
                   </tr>
                 </thead>
                 <tbody>
                   {extractedQuestions.map((q, i) => (
-                    <tr key={i} className="border-t">
+                    <tr key={i} className="border-t align-top">
                       <td className="px-2 py-1.5 text-muted-foreground">{i + 1}</td>
-                      <td className="px-2 py-1.5 max-w-[280px] truncate">{q.question}</td>
-                      <td className="px-2 py-1.5 font-medium">{q.answer}</td>
+                      <td className="px-1 py-1">
+                        <Textarea
+                          value={q.question}
+                          onChange={(e) => updateQuestion(i, 'question', e.target.value)}
+                          className="min-h-[2rem] text-xs resize-none"
+                          rows={1}
+                        />
+                      </td>
+                      <td className="px-1 py-1">
+                        <Input
+                          value={q.answer}
+                          onChange={(e) => updateQuestion(i, 'answer', e.target.value)}
+                          className="h-8 text-xs"
+                        />
+                      </td>
+                      <td className="px-1 py-1">
+                        <Button
+                          type="button"
+                          variant="ghost"
+                          size="icon"
+                          className="h-7 w-7 text-muted-foreground hover:text-destructive"
+                          onClick={() => deleteQuestion(i)}
+                        >
+                          <Trash2 className="h-3.5 w-3.5" />
+                        </Button>
+                      </td>
                     </tr>
                   ))}
                 </tbody>
@@ -210,7 +257,7 @@ export function AddMockExamDialog({ unitId, onAdd }: { unitId: string; onAdd: ()
             </div>
 
             <div className="flex gap-2">
-              <Button onClick={handleSaveExtracted} className="flex-1" disabled={saving}>
+              <Button onClick={handleSaveExtracted} className="flex-1" disabled={saving || extractedQuestions.length === 0}>
                 {saving ? '저장 중...' : '저장'}
               </Button>
               <Button
