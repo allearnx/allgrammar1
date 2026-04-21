@@ -94,13 +94,14 @@ export async function regradeSheet(
       .map((w) => w.number).sort((a, b) => a - b).join(',');
     const hasChange = newScore !== attempt.score || oldWrongNums !== newWrongNums;
 
+    // JSONB 항상 동기화 (backfill이 stale JSONB에서 오답 재생성하는 것 방지)
+    await admin
+      .from('naesin_problem_attempts')
+      .update({ score: newScore, wrong_answers: wrongAnswers })
+      .eq('id', attempt.id);
+
     if (hasChange) {
       changed++;
-
-      await admin
-        .from('naesin_problem_attempts')
-        .update({ score: newScore, wrong_answers: wrongAnswers })
-        .eq('id', attempt.id);
     }
 
     // 오답 테이블 항상 동기화 (이전 버그로 stage 불일치 레코드가 남아있을 수 있음)
