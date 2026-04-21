@@ -22,12 +22,11 @@ async function autoBackfillForStudent(
 
   if (!attempts || attempts.length === 0) return 0;
 
-  // 2. 이미 naesin_wrong_answers에 있는 sheet_id 집합
+  // 2. 이미 naesin_wrong_answers에 있는 sheet_id 집합 (stage 무관)
   const { data: existing } = await admin
     .from('naesin_wrong_answers')
     .select('sheet_id')
     .eq('student_id', studentId)
-    .eq('stage', 'problem')
     .not('sheet_id', 'is', null);
 
   const existingSet = new Set((existing || []).map((e) => e.sheet_id));
@@ -40,7 +39,7 @@ async function autoBackfillForStudent(
   const sheetIds = [...new Set(missing.map((a) => a.sheet_id))];
   const { data: sheets } = await admin
     .from('naesin_problem_sheets')
-    .select('id, unit_id, mode, questions')
+    .select('id, unit_id, mode, category, questions')
     .in('id', sheetIds);
 
   const sheetMap = new Map((sheets || []).map((s) => [s.id, s]));
@@ -76,7 +75,7 @@ async function autoBackfillForStudent(
       rows.push({
         student_id: studentId,
         unit_id: sheet.unit_id,
-        stage: 'problem',
+        stage: sheet.category === 'mock_exam' ? 'mockExam' : 'problem',
         source_type: sheet.mode || 'interactive',
         question_data: {
           ...wa,
