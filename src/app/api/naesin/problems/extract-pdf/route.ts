@@ -4,13 +4,86 @@ import { requireContentPermission } from '@/lib/api/require-content-permission';
 import { logger } from '@/lib/logger';
 import { checkRateLimit } from '@/lib/api/rate-limit';
 import Anthropic from '@anthropic-ai/sdk';
-import { requireAiJsonArray } from '@/lib/ai-json';
+import { requireAiJsonArray, parseAiJsonArray } from '@/lib/ai-json';
+import { PDFDocument } from 'pdf-lib';
 
 export const maxDuration = 300;
 
 const MAX_PDF_SIZE = 10 * 1024 * 1024; // 10MB
+const PAGES_PER_CHUNK = 3;
 
 const anthropic = new Anthropic();
+
+const EXTRACT_PROMPT = `이 PDF는 중학교 영어 시험 문제지입니다.
+문제, 보기, 정답, 해설을 추출해주세요.
+
+규칙:
+- 각 문제의 번호, 문제 내용, 보기(있는 경우), 정답, 해설을 추출
+- 객관식은 options 배열에 보기를 넣고, answer에 정답 번호를 넣기
+- 주관식은 options를 빈 배열로, answer에 정답 텍스트를 넣기
+- 해설이 없으면 explanation은 빈 문자열
+- 문제 번호(number)는 PDF에 적힌 원래 번호를 그대로 사용
+- 반드시 JSON 배열로만 응답하세요. 앞뒤에 설명이나 마크다운 코드펜스 없이 순수 JSON만 출력
+
+JSON 배열 형식:
+[
+  {
+    "number": 1,
+    "question": "문제 내용",
+    "options": ["1번 보기", "2번 보기", "3번 보기", "4번 보기", "5번 보기"],
+    "answer": "3",
+    "explanation": "해설"
+  }
+]`;
+
+/** PDF를 N페이지씩 청크로 분할하여 각각의 base64 반환 */
+async function splitPdfIntoChunks(pdfBytes: ArrayBuffer, pagesPerChunk: number) {
+  const srcDoc = await PDFDocument.load(pdfBytes);
+  const totalPages = srcDoc.getPageCount();
+
+  if (totalPages <= pagesPerChunk) {
+    return [{ base64: Buffer.from(pdfBytes).toString('base64'), pages: `1-${totalPages}` }];
+  }
+
+  const chunks: { base64: string; pages: string }[] = [];
+  for (let start = 0; start < totalPages; start += pagesPerChunk) {
+    const end = Math.min(start + pagesPerChunk, totalPages);
+    const chunkDoc = await PDFDocument.create();
+    const copiedPages = await chunkDoc.copyPages(srcDoc, Array.from({ length: end - start }, (_, i) => start + i));
+    copiedPages.forEach((page) => chunkDoc.addPage(page));
+    const chunkBytes = await chunkDoc.save();
+    chunks.push({
+      base64: Buffer.from(chunkBytes).toString('base64'),
+      pages: `${start + 1}-${end}`,
+    });
+  }
+
+  return chunks;
+}
+
+/** 단일 청크에 대해 Claude API 호출 */
+async function extractFromChunk(base64Data: string, chunkLabel: string) {
+  const message = await anthropic.messages.create({
+    model: 'claude-sonnet-4-6',
+    max_tokens: 16384,
+    messages: [
+      {
+        role: 'user',
+        content: [
+          {
+            type: 'document',
+            source: { type: 'base64', media_type: 'application/pdf', data: base64Data },
+          },
+          { type: 'text', text: EXTRACT_PROMPT },
+        ],
+      },
+    ],
+  });
+
+  const questions = parseAiJsonArray(message);
+  logger.info('ai.pdf_extract.chunk_done', { chunk: chunkLabel, count: questions.length });
+  return questions;
+}
 
 export async function POST(request: NextRequest) {
   const user = await getUser();
@@ -43,62 +116,31 @@ export async function POST(request: NextRequest) {
     }
 
     const arrayBuffer = await file.arrayBuffer();
-    const base64Data = Buffer.from(arrayBuffer).toString('base64');
+    const chunks = await splitPdfIntoChunks(arrayBuffer, PAGES_PER_CHUNK);
 
     logger.info('ai.pdf_extract.start', {
       userId: user.id,
       fileSize: arrayBuffer.byteLength,
-      base64Size: base64Data.length,
+      totalChunks: chunks.length,
+      pages: chunks.map((c) => c.pages).join(', '),
     });
 
-    let message: Anthropic.Message;
+    let allQuestions: Record<string, unknown>[];
+
     try {
-      message = await anthropic.messages.create({
-        model: 'claude-sonnet-4-6',
-        max_tokens: 16384,
-        messages: [
-          {
-            role: 'user',
-            content: [
-              {
-                type: 'document',
-                source: {
-                  type: 'base64',
-                  media_type: 'application/pdf',
-                  data: base64Data,
-                },
-              },
-              {
-                type: 'text',
-                text: `이 PDF는 중학교 영어 시험 문제지입니다.
-문제, 보기, 정답, 해설을 추출해주세요.
-
-규칙:
-- 각 문제의 번호, 문제 내용, 보기(있는 경우), 정답, 해설을 추출
-- 객관식은 options 배열에 보기를 넣고, answer에 정답 번호를 넣기
-- 주관식은 options를 빈 배열로, answer에 정답 텍스트를 넣기
-- 해설이 없으면 explanation은 빈 문자열
-- 반드시 JSON 배열로만 응답하세요. 앞뒤에 설명이나 마크다운 코드펜스 없이 순수 JSON만 출력
-
-JSON 배열 형식:
-[
-  {
-    "number": 1,
-    "question": "문제 내용",
-    "options": ["1번 보기", "2번 보기", "3번 보기", "4번 보기", "5번 보기"],
-    "answer": "3",
-    "explanation": "해설"
-  }
-]`,
-              },
-            ],
-          },
-        ],
-      });
+      if (chunks.length === 1) {
+        // 3페이지 이하: 단일 호출
+        allQuestions = await extractFromChunk(chunks[0].base64, chunks[0].pages) as Record<string, unknown>[];
+      } else {
+        // 4페이지 이상: 병렬 호출
+        const results = await Promise.all(
+          chunks.map((chunk) => extractFromChunk(chunk.base64, chunk.pages)),
+        );
+        allQuestions = results.flat() as Record<string, unknown>[];
+      }
     } catch (apiError) {
       const apiMsg = apiError instanceof Error ? apiError.message : String(apiError);
       const apiStatus = (apiError as { status?: number })?.status;
-      // console.log으로 Vercel 로그에 확실히 남기기
       console.log(JSON.stringify({
         level: 'error',
         msg: 'ai.pdf_extract.api_error',
@@ -106,7 +148,6 @@ JSON 배열 형식:
         error: apiMsg,
         status: apiStatus,
         fileSize: arrayBuffer.byteLength,
-        raw: String(apiError).slice(0, 500),
       }));
 
       if (apiMsg.includes('too large') || apiMsg.includes('token') || apiMsg.includes('size')) {
@@ -121,7 +162,16 @@ JSON 배열 형식:
       );
     }
 
-    const questions = requireAiJsonArray(message, 'ai.pdf_extract');
+    // 문제 번호순 정렬 + 중복 제거
+    const seen = new Set<number>();
+    const questions = allQuestions
+      .sort((a, b) => (Number(a.number) || 0) - (Number(b.number) || 0))
+      .filter((q) => {
+        const num = Number(q.number);
+        if (seen.has(num)) return false;
+        seen.add(num);
+        return true;
+      });
 
     if (questions.length === 0) {
       return NextResponse.json(
@@ -130,7 +180,7 @@ JSON 배열 형식:
       );
     }
 
-    logger.info('ai.pdf_extract.done', { count: questions.length });
+    logger.info('ai.pdf_extract.done', { count: questions.length, chunks: chunks.length });
     return NextResponse.json({ questions });
   } catch (error) {
     const msg = error instanceof Error ? error.message : String(error);
