@@ -20,6 +20,7 @@ export interface NaesinProgressResult {
     grammar_videos_completed: number;
     grammar_total_videos: number;
     problem_completed: boolean;
+    mock_exam_completed: boolean;
     total_learning_seconds?: number;
     updated_at: string;
     // Round 2
@@ -58,7 +59,7 @@ export async function fetchNaesinProgress(
   const [progressRes, videoRes, fillBlanksRes, sheetsRes, attemptsRes, grammarLessonsRes] = await Promise.all([
     admin
       .from('naesin_student_progress')
-      .select('unit_id, vocab_completed, vocab_quiz_score, vocab_spelling_score, passage_completed, passage_fill_blanks_best, passage_ordering_best, passage_translation_best, passage_grammar_vocab_best, dialogue_ordering_best, dialogue_first_letter_best, dialogue_translation_best, dialogue_completed, grammar_completed, grammar_videos_completed, grammar_total_videos, problem_completed, total_learning_seconds, updated_at, round2_passage_fill_blanks_best, round2_passage_ordering_best, round2_passage_translation_best, round2_passage_grammar_vocab_best, round2_passage_completed, round2_dialogue_ordering_best, round2_dialogue_first_letter_best, round2_dialogue_translation_best, round2_dialogue_completed')
+      .select('unit_id, vocab_completed, vocab_quiz_score, vocab_spelling_score, passage_completed, passage_fill_blanks_best, passage_ordering_best, passage_translation_best, passage_grammar_vocab_best, dialogue_ordering_best, dialogue_first_letter_best, dialogue_translation_best, dialogue_completed, grammar_completed, grammar_videos_completed, grammar_total_videos, problem_completed, mock_exam_completed, total_learning_seconds, updated_at, round2_passage_fill_blanks_best, round2_passage_ordering_best, round2_passage_translation_best, round2_passage_grammar_vocab_best, round2_passage_completed, round2_dialogue_ordering_best, round2_dialogue_first_letter_best, round2_dialogue_translation_best, round2_dialogue_completed')
       .eq('student_id', studentId),
     admin
       .from('naesin_grammar_video_progress')

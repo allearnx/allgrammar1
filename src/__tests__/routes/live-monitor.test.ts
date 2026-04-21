@@ -72,6 +72,7 @@ const naesinProgress = [
     passage_completed: false,
     grammar_completed: false,
     problem_completed: false,
+    mock_exam_completed: false,
   },
   {
     student_id: 'stu-c',
@@ -83,6 +84,7 @@ const naesinProgress = [
     passage_completed: true,
     grammar_completed: true,
     problem_completed: true,
+    mock_exam_completed: true,
   },
 ];
 
@@ -330,15 +332,15 @@ describe('/api/live-monitor', () => {
     const res = await GET(makeRequest());
     const body = await res.json();
 
-    // stu-a: 1 unit × 5 stages, 2 completed (vocab + dialogue)
+    // stu-a: 1 unit × 6 stages, 2 completed (vocab + dialogue)
     const stuA = body.students.find((s: { id: string }) => s.id === 'stu-a');
-    expect(stuA.naesinProgress.total).toBe(5);
+    expect(stuA.naesinProgress.total).toBe(6);
     expect(stuA.naesinProgress.completed).toBe(2);
 
-    // stu-c: 1 unit × 5 stages, all 5 completed
+    // stu-c: 1 unit × 6 stages, all 6 completed
     const stuC = body.students.find((s: { id: string }) => s.id === 'stu-c');
-    expect(stuC.naesinProgress.total).toBe(5);
-    expect(stuC.naesinProgress.completed).toBe(5);
+    expect(stuC.naesinProgress.total).toBe(6);
+    expect(stuC.naesinProgress.completed).toBe(6);
 
     // stu-d: no progress
     const stuD = body.students.find((s: { id: string }) => s.id === 'stu-d');

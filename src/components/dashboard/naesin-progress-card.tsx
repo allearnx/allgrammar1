@@ -1,7 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { format } from 'date-fns';
-import { CheckCircle, Circle, BookOpen, FileText, GraduationCap, ClipboardList, Clock, Settings, MessageSquare } from 'lucide-react';
+import { CheckCircle, Circle, BookOpen, FileText, GraduationCap, ClipboardList, Clock, Settings, MessageSquare, FileQuestion } from 'lucide-react';
 import { scoreChipClass, passageChipClass, progressBorderClass } from '@/lib/utils/progress-styles';
 import { ExamAssignmentManager } from './exam-assignment-manager';
 import { PassageStageManager } from './passage-stage-manager';
@@ -27,6 +27,7 @@ interface NaesinProgressRow {
   grammar_videos_completed: number;
   grammar_total_videos: number;
   problem_completed: boolean;
+  mock_exam_completed?: boolean;
   updated_at: string;
   // Round 2
   round2_passage_fill_blanks_best?: number | null;
@@ -90,13 +91,23 @@ export function NaesinProgressCard({
     if (grammarContentByUnit && !grammarContentByUnit[unitId]) return true; // no grammar content = auto-completed
     return progress?.grammar_completed ?? false;
   };
+  const hasMockExamByUnit = new Map<string, boolean>();
+  if (problemSheetsByUnit) {
+    for (const unit of naesinUnits) {
+      const sheets = problemSheetsByUnit[unit.id] || [];
+      hasMockExamByUnit.set(unit.id, sheets.some((s) => s.category === 'mock_exam'));
+    }
+  }
   const naesinStagesCompleted = naesinUnits.reduce((acc, unit) => {
     const p = naesinProgressMap.get(unit.id);
     const base = (p?.vocab_completed ? 1 : 0) + (p?.passage_completed ? 1 : 0) + (p?.dialogue_completed ? 1 : 0) + (isGrammarCompleted(unit.id, p) ? 1 : 0) + (p?.problem_completed ? 1 : 0);
+    const mockExam = hasMockExamByUnit.get(unit.id) ? (p?.mock_exam_completed ? 1 : 0) : 0;
     const r2 = hasRound2 ? (p?.round2_passage_completed ? 1 : 0) + (p?.round2_dialogue_completed ? 1 : 0) : 0;
-    return acc + base + r2;
+    return acc + base + mockExam + r2;
   }, 0);
-  const naesinTotalStages = naesinUnits.length * stageCount;
+  const naesinTotalStages = naesinUnits.reduce((acc, unit) => {
+    return acc + stageCount + (hasMockExamByUnit.get(unit.id) ? 1 : 0);
+  }, 0);
 
   return (
     <Card className="border-l-4 border-l-green-500">
@@ -169,13 +180,21 @@ export function NaesinProgressCard({
                 ...(hasRound2 ? [{ key: 'dialogue_r2', label: '대화문(2회독)', icon: MessageSquare, completed: progress?.round2_dialogue_completed ?? false, inProgress: !(progress?.round2_dialogue_completed) && !!hasRound2DialogueScore }] : []),
                 { key: 'grammar', label: '문법', icon: GraduationCap, completed: grammarDone, inProgress: !grammarDone && hasGrammarProgress },
                 { key: 'problem', label: '문제', icon: ClipboardList, completed: progress?.problem_completed ?? false, inProgress: !(progress?.problem_completed) && hasSomeSheetAttempts },
+                ...(unitSheets.some((s) => s.category === 'mock_exam') ? [{
+                  key: 'mock_exam',
+                  label: '예상문제',
+                  icon: FileQuestion,
+                  completed: progress?.mock_exam_completed ?? false,
+                  inProgress: !(progress?.mock_exam_completed) && unitSheets.some((s) => s.category === 'mock_exam' && problemAttemptsBySheet?.[s.id]),
+                }] : []),
               ];
               const completedCount = stages.filter((s) => s.completed).length;
+              const unitStageCount = stages.length;
 
               return (
                 <div
                   key={unit.id}
-                  className={`rounded-lg border p-3 ${progressBorderClass(completedCount, stageCount)}`}
+                  className={`rounded-lg border p-3 ${progressBorderClass(completedCount, unitStageCount)}`}
                 >
                   <div className="flex items-center justify-between mb-2">
                     <div className="flex items-center gap-2">
@@ -183,10 +202,10 @@ export function NaesinProgressCard({
                       <span className="text-sm font-medium truncate">{unit.title}</span>
                     </div>
                     <Badge
-                      variant={completedCount === stageCount ? 'default' : 'secondary'}
-                      className={completedCount === stageCount ? 'bg-green-500 text-white shrink-0' : 'shrink-0'}
+                      variant={completedCount === unitStageCount ? 'default' : 'secondary'}
+                      className={completedCount === unitStageCount ? 'bg-green-500 text-white shrink-0' : 'shrink-0'}
                     >
-                      {completedCount}/{stageCount}
+                      {completedCount}/{unitStageCount}
                     </Badge>
                   </div>
                   <div className="flex items-center gap-3">

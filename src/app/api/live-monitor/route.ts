@@ -10,6 +10,7 @@ const STAGE_FIELDS = [
   'passage_completed',
   'grammar_completed',
   'problem_completed',
+  'mock_exam_completed',
 ] as const;
 
 const STAGE_LABELS: Record<string, string> = {
@@ -69,7 +70,7 @@ export const GET = createApiHandler(
     ] = await Promise.all([
       admin
         .from('naesin_student_progress')
-        .select('student_id, unit_id, updated_at, current_stage, current_round, vocab_completed, dialogue_completed, passage_completed, grammar_completed, problem_completed')
+        .select('student_id, unit_id, updated_at, current_stage, current_round, vocab_completed, dialogue_completed, passage_completed, grammar_completed, problem_completed, mock_exam_completed')
         .in('student_id', studentIds),
       admin
         .from('voca_student_progress')
