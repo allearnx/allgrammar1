@@ -22,7 +22,6 @@ async function autoBackfillForStudent(studentId: string) {
     .from('naesin_wrong_answers')
     .select('sheet_id')
     .eq('student_id', studentId)
-    .eq('stage', 'problem')
     .not('sheet_id', 'is', null);
 
   const existingSet = new Set((existing || []).map((e) => e.sheet_id));
@@ -32,7 +31,7 @@ async function autoBackfillForStudent(studentId: string) {
   const sheetIds = [...new Set(missing.map((a) => a.sheet_id))];
   const { data: sheets } = await admin
     .from('naesin_problem_sheets')
-    .select('id, unit_id, mode, questions')
+    .select('id, unit_id, mode, category, questions')
     .in('id', sheetIds);
 
   const sheetMap = new Map((sheets || []).map((s) => [s.id, s]));
@@ -55,7 +54,7 @@ async function autoBackfillForStudent(studentId: string) {
       const q = questions[idx];
       rows.push({
         student_id: studentId, unit_id: sheet.unit_id,
-        stage: 'problem', source_type: sheet.mode || 'interactive',
+        stage: sheet.category === 'mock_exam' ? 'mockExam' : 'problem', source_type: sheet.mode || 'interactive',
         question_data: { ...wa, ...(q?.options ? { options: q.options } : {}), ...(q?.explanation ? { explanation: q.explanation } : {}) },
         sheet_id: attempt.sheet_id,
         round: 1,

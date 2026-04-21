@@ -30,7 +30,6 @@ export const POST = createApiHandler(
     const { data: existing } = await admin
       .from('naesin_wrong_answers')
       .select('student_id, sheet_id')
-      .eq('stage', 'problem')
       .not('sheet_id', 'is', null);
 
     const existingSet = new Set(
@@ -41,7 +40,7 @@ export const POST = createApiHandler(
     const sheetIds = [...new Set(attempts.map((a) => a.sheet_id))];
     const { data: sheets } = await admin
       .from('naesin_problem_sheets')
-      .select('id, unit_id, mode, questions')
+      .select('id, unit_id, mode, category, questions')
       .in('id', sheetIds);
 
     const sheetMap = new Map(
@@ -82,7 +81,7 @@ export const POST = createApiHandler(
         rowsToInsert.push({
           student_id: attempt.student_id,
           unit_id: sheet.unit_id,
-          stage: 'problem',
+          stage: sheet.category === 'mock_exam' ? 'mockExam' : 'problem',
           source_type: sheet.mode || 'interactive',
           question_data: {
             ...wa,

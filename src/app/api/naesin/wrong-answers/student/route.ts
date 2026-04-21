@@ -116,7 +116,7 @@ async function getDraftWrongAnswers(
   const sheetIds = drafts.map((d) => d.sheet_id).filter(Boolean);
   const { data: sheets } = await admin
     .from('naesin_problem_sheets')
-    .select('id, title, unit_id, mode, questions')
+    .select('id, title, unit_id, mode, category, questions')
     .in('id', sheetIds);
 
   const sheetMap = new Map((sheets || []).map((s) => [s.id, s]));
@@ -162,7 +162,7 @@ async function getDraftWrongAnswers(
         id: `draft-${draft.sheet_id}-${wa.number}`,
         student_id: studentId,
         unit_id: unitId,
-        stage: 'problem',
+        stage: sheet?.category === 'mock_exam' ? 'mockExam' : 'problem',
         source_type: sheet?.mode || 'interactive',
         question_data: {
           ...wa,

@@ -173,8 +173,8 @@ describe('타입 검증 (컴파일 타임 + 런타임 구조 확인)', () => {
   });
 
   describe('NaesinWrongAnswer', () => {
-    it('stage 값은 5가지 중 하나', () => {
-      const stages: NaesinWrongAnswer['stage'][] = ['vocab', 'passage', 'grammar', 'problem', 'lastReview'];
+    it('stage 값은 7가지 중 하나', () => {
+      const stages: NaesinWrongAnswer['stage'][] = ['vocab', 'passage', 'dialogue', 'grammar', 'problem', 'mockExam', 'lastReview'];
       stages.forEach((stage) => {
         const wa: NaesinWrongAnswer = {
           id: 'wa-1',
