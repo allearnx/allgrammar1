@@ -94,7 +94,7 @@ export function InteractiveProblemView({
   onComplete,
 }: {
   sheet: NaesinProblemSheet;
-  unitId: string;
+  unitId?: string | null;
   onComplete?: () => void;
 }) {
   const questions = sheet.questions as NaesinProblemQuestion[];

@@ -101,7 +101,7 @@ export const GET = createApiHandler(
 
     // When fetching all (no unitId), enrich with unit/textbook info
     if (!unitId) {
-      const allUnitIds = [...new Set((data as { unit_id: string }[]).map((d) => d.unit_id))];
+      const allUnitIds = [...new Set((data as { unit_id: string | null }[]).map((d) => d.unit_id).filter(Boolean))] as string[];
       if (allUnitIds.length > 0) {
         const { data: units } = await supabase
           .from('naesin_units')
@@ -113,6 +113,22 @@ export const GET = createApiHandler(
           if (unitInfo) {
             item.unit_info = { unit_number: unitInfo.unit_number, title: unitInfo.title };
             item.textbook_info = unitInfo.textbook;
+          }
+        }
+      }
+      // 교과서 레벨 시험 오답: sheet에서 textbook 정보 가져오기
+      const textbookLevelItems = (data as Record<string, unknown>[]).filter((d) => !d.unit_id && d.sheet_id);
+      if (textbookLevelItems.length > 0) {
+        const sheetIds = [...new Set(textbookLevelItems.map((d) => d.sheet_id as string))];
+        const { data: sheets } = await supabase
+          .from('naesin_problem_sheets')
+          .select('id, textbook_id, title, textbook:naesin_textbooks(id, display_name)')
+          .in('id', sheetIds);
+        const sheetMap = new Map((sheets || []).map((s) => [s.id, s]));
+        for (const item of textbookLevelItems) {
+          const sheetInfo = sheetMap.get(item.sheet_id as string);
+          if (sheetInfo?.textbook) {
+            item.textbook_info = sheetInfo.textbook;
           }
         }
       }

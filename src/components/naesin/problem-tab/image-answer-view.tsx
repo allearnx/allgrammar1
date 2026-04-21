@@ -20,7 +20,7 @@ export function ImageAnswerView({
   onComplete,
 }: {
   sheet: NaesinProblemSheet;
-  unitId: string;
+  unitId?: string | null;
   onComplete?: () => void;
 }) {
   const totalQuestions = sheet.answer_key.length;

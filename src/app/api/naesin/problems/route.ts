@@ -10,15 +10,23 @@ export const GET = createApiHandler(
   {},
   async ({ supabase, request }) => {
     const unitId = request.nextUrl.searchParams.get('unitId');
+    const textbookId = request.nextUrl.searchParams.get('textbookId');
     const category = request.nextUrl.searchParams.get('category') || 'problem';
-    if (!unitId) return NextResponse.json({ error: 'Missing unitId' }, { status: 400 });
+    if (!unitId && !textbookId) return NextResponse.json({ error: 'Missing unitId or textbookId' }, { status: 400 });
 
-    const data = dbResult(await supabase
+    let query = supabase
       .from('naesin_problem_sheets')
       .select('*')
-      .eq('unit_id', unitId)
       .eq('category', category)
-      .order('sort_order'));
+      .order('sort_order');
+
+    if (textbookId) {
+      query = query.eq('textbook_id', textbookId);
+    } else {
+      query = query.eq('unit_id', unitId!);
+    }
+
+    const data = dbResult(await query);
     return NextResponse.json(data);
   }
 );
@@ -27,12 +35,13 @@ export const POST = createApiHandler(
   { roles: [...ADMIN_ROLES], schema: problemCreateSchema },
   async ({ body, supabase, user }) => {
     await requireContentPermission(user, supabase);
-    const { unitId, title, mode, questions, pdfUrl, answerKey, category } = body;
+    const { unitId, textbookId, title, mode, questions, pdfUrl, answerKey, category } = body;
 
     const data = dbResult(await supabase
       .from('naesin_problem_sheets')
       .insert({
-        unit_id: unitId,
+        unit_id: unitId || null,
+        textbook_id: textbookId || null,
         title,
         mode,
         questions: questions || [],

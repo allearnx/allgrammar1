@@ -21,7 +21,7 @@ interface LastAttempt {
 
 interface ProblemTabProps {
   sheets: NaesinProblemSheet[];
-  unitId: string;
+  unitId?: string | null;
   onStageComplete?: () => void;
   bestScoreBySheet?: Record<string, number>;
   lastAttemptBySheet?: Record<string, LastAttempt>;

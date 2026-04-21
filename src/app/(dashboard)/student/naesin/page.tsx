@@ -57,6 +57,38 @@ export default async function NaesinPage() {
     examDate = examDateData?.exam_date || null;
   }
 
+  // Fetch textbook-level exam sheets (시험 대비)
+  let textbookExams: { id: string; title: string; bestScore: number | null }[] = [];
+
+  if (setting?.textbook_id) {
+    const [sheetsRes, attemptsRes] = await Promise.all([
+      supabase
+        .from('naesin_problem_sheets')
+        .select('id, title, sort_order')
+        .eq('textbook_id', setting.textbook_id)
+        .eq('category', 'mock_exam')
+        .order('sort_order'),
+      supabase
+        .from('naesin_problem_attempts')
+        .select('sheet_id, score')
+        .eq('student_id', user.id),
+    ]);
+
+    const examSheets = sheetsRes.data || [];
+    const allAttempts = attemptsRes.data || [];
+    const bestBySheet = new Map<string, number>();
+    for (const a of allAttempts) {
+      const prev = bestBySheet.get(a.sheet_id);
+      if (prev == null || a.score > prev) bestBySheet.set(a.sheet_id, a.score);
+    }
+
+    textbookExams = examSheets.map((s) => ({
+      id: s.id,
+      title: s.title,
+      bestScore: bestBySheet.get(s.id) ?? null,
+    }));
+  }
+
   // If student has a textbook selected, get the units with lightweight data only
   let units: UnitSummary[] = [];
   let examGroups: ExamGroup[] = [];
@@ -175,6 +207,7 @@ export default async function NaesinPage() {
           examDate={examDate}
           examGroups={examGroups}
           isPaid={planContext.tier !== 'free'}
+          textbookExams={textbookExams}
         />
       </div>
     </>

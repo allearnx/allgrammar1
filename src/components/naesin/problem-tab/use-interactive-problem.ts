@@ -18,7 +18,7 @@ export function useInteractiveProblem({
 }: {
   sheetId: string;
   questions: NaesinProblemQuestion[];
-  unitId: string;
+  unitId?: string | null;
   onComplete?: () => void;
 }) {
   const { loadDraft, saveDraft, clearDraft, saveServerDraft, loadServerDraft, clearServerDraft } = useProblemDraft(sheetId, questions.length);

@@ -90,7 +90,7 @@ export const POST = createApiHandler(
       .single());
 
     // Save wrong answers to unified table with enriched data
-    if (wrongAnswers.length > 0 && unitId) {
+    if (wrongAnswers.length > 0) {
       // 같은 시트의 이전 오답 정리 (재시도 시 중복 방지)
       dbResult(await supabase
         .from('naesin_wrong_answers')
@@ -103,7 +103,7 @@ export const POST = createApiHandler(
         const q = questions?.[idx];
         return {
           student_id: user.id,
-          unit_id: unitId,
+          unit_id: unitId || null,
           stage: sheet.category === 'mock_exam' ? 'mockExam' : 'problem',
           source_type: sheet.mode,
           question_data: {

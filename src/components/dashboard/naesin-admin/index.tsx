@@ -13,6 +13,7 @@ import { AddUnitDialog, UnitCard } from './unit-section';
 import { ConfirmDialog } from '@/components/shared/confirm-dialog';
 import { WorkbookManager } from './workbook-manager';
 import { TemplateLibraryClient } from './template-library-client';
+import { TextbookExamSection } from './textbook-exam-section';
 import { logger } from '@/lib/logger';
 import { fetchWithToast } from '@/lib/fetch-with-toast';
 
@@ -164,6 +165,12 @@ export function NaesinAdminClient({ textbooks: initialTextbooks, initialTab }: N
                   ))}
                 </div>
               )}
+
+              {/* 시험 대비 섹션 (교과서 레벨) */}
+              <TextbookExamSection
+                textbookId={selectedTextbook.id}
+                textbookName={selectedTextbook.display_name}
+              />
             </div>
           )}
           <ConfirmDialog

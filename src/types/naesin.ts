@@ -297,7 +297,8 @@ export type NaesinProblemCategory = 'problem' | 'last_review' | 'mock_exam' | 'e
 
 export interface NaesinProblemSheet {
   id: string;
-  unit_id: string;
+  unit_id: string | null;
+  textbook_id?: string | null;
   title: string;
   mode: NaesinProblemMode;
   questions: NaesinProblemQuestion[];

@@ -60,7 +60,7 @@ export const problemSubmitSchema = z.object({
 // ── Wrong Answers Schemas ──
 
 export const wrongAnswerCreateSchema = z.object({
-  unitId: ID,
+  unitId: ID.nullish(),
   stage: SHORT,
   sourceType: SHORT,
   wrongAnswers: z.array(z.unknown()).min(1),
@@ -206,14 +206,15 @@ export const textbookVideoCreateSchema = z.object({
 });
 
 export const problemCreateSchema = z.object({
-  unitId: ID,
+  unitId: ID.nullish(),
+  textbookId: ID.nullish(),
   title: SHORT,
   mode: SHORT,
   questions: z.unknown().nullish(),
   pdfUrl: URL_STR.nullish(),
   answerKey: z.unknown().nullish(),
   category: SHORT.nullish(),
-});
+}).refine((d) => d.unitId || d.textbookId, { message: 'unitId 또는 textbookId 필수' });
 
 export const problemPatchSchema = z.object({
   id: ID,

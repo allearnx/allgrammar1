@@ -5,7 +5,9 @@ import { useRouter } from 'next/navigation';
 import { Card, CardContent } from '@/components/ui/card';
 import {
   ClipboardList,
+  FileQuestion,
   Info,
+  CheckCircle2,
 } from 'lucide-react';
 import { fetchWithToast } from '@/lib/fetch-with-toast';
 import Link from 'next/link';
@@ -18,6 +20,12 @@ import type { NaesinTextbook } from '@/types/database';
 import type { UnitSummary, ExamGroup } from '@/lib/naesin/build-unit-summary';
 import { TextbookSelector } from './textbook-selector';
 
+interface TextbookExam {
+  id: string;
+  title: string;
+  bestScore: number | null;
+}
+
 interface NaesinHomeProps {
   textbooks: NaesinTextbook[];
   selectedTextbook: NaesinTextbook | null;
@@ -26,6 +34,7 @@ interface NaesinHomeProps {
   examDate?: string | null;
   examGroups?: ExamGroup[];
   isPaid?: boolean;
+  textbookExams?: TextbookExam[];
 }
 
 export function NaesinHome({
@@ -36,6 +45,7 @@ export function NaesinHome({
   examDate: initialExamDate,
   examGroups = [],
   isPaid = false,
+  textbookExams = [],
 }: NaesinHomeProps) {
   const router = useRouter();
   const [saving, setSaving] = useState(false);
@@ -181,6 +191,33 @@ export function NaesinHome({
             </div>
           )}
         </>
+      )}
+
+      {/* 시험 대비 섹션 (교과서 레벨) */}
+      {textbookExams.length > 0 && (
+        <div className="space-y-3 pt-2 border-t">
+          <div className="flex items-center gap-2">
+            <FileQuestion className="h-5 w-5 text-pink-500" />
+            <h3 className="text-lg font-semibold">시험 대비</h3>
+          </div>
+          {textbookExams.map((exam) => (
+            <Link key={exam.id} href={`/student/naesin/exam/${exam.id}`}>
+              <Card className="hover:shadow-md transition-shadow">
+                <CardContent className="py-3 flex items-center justify-between">
+                  <span className="font-medium text-sm">{exam.title}</span>
+                  {exam.bestScore != null ? (
+                    <div className="flex items-center gap-1.5">
+                      <CheckCircle2 className="h-4 w-4 text-green-500" />
+                      <span className="text-sm font-medium text-green-600">{exam.bestScore}점</span>
+                    </div>
+                  ) : (
+                    <span className="text-xs text-muted-foreground">미응시</span>
+                  )}
+                </CardContent>
+              </Card>
+            </Link>
+          ))}
+        </div>
       )}
 
       {/* 학습 순서 팝업 (유료만, 세션당 1회) */}

@@ -29,7 +29,7 @@ interface ExtractedQuestion {
   explanation: string;
 }
 
-export function AddMockExamDialog({ unitId, onAdd }: { unitId: string; onAdd: () => void }) {
+export function AddMockExamDialog({ unitId, textbookId, onAdd }: { unitId?: string; textbookId?: string; onAdd: () => void }) {
   const { open, setOpen, saving, handleSubmit } = useFormDialog({
     onSuccess: onAdd,
     logContext: 'admin.add_mock_exam',
@@ -69,7 +69,7 @@ export function AddMockExamDialog({ unitId, onAdd }: { unitId: string; onAdd: ()
     }
     await handleSubmit(async () => {
       await fetchWithToast('/api/naesin/problems', {
-        body: { unitId, title, mode, answerKey, category: 'mock_exam', pdfUrl: pdfUrl || null },
+        body: { unitId: unitId || undefined, textbookId: textbookId || undefined, title, mode, answerKey, category: 'mock_exam', pdfUrl: pdfUrl || null },
         silent: true,
       });
     }, resetAll);
@@ -148,7 +148,7 @@ export function AddMockExamDialog({ unitId, onAdd }: { unitId: string; onAdd: ()
 
     await handleSubmit(async () => {
       await fetchWithToast('/api/naesin/problems', {
-        body: { unitId, title, mode, questions, answerKey, category: 'mock_exam', pdfUrl: pdfUrl || null },
+        body: { unitId: unitId || undefined, textbookId: textbookId || undefined, title, mode, questions, answerKey, category: 'mock_exam', pdfUrl: pdfUrl || null },
         silent: true,
       });
     }, resetAll);

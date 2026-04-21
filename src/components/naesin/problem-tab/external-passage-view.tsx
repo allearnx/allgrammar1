@@ -14,7 +14,7 @@ import type { ExternalPassageSentence } from '@/types/naesin';
 
 interface ExternalPassageViewProps {
   sheet: NaesinProblemSheet;
-  unitId: string;
+  unitId?: string | null;
   onComplete?: () => void;
 }
 
