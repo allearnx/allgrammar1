@@ -13,11 +13,13 @@ export async function regradeSheet(
   // 1. 시트 정보 조회
   const { data: sheet } = await admin
     .from('naesin_problem_sheets')
-    .select('id, unit_id, answer_key, questions, mode')
+    .select('id, unit_id, answer_key, questions, mode, category')
     .eq('id', sheetId)
     .single();
 
   if (!sheet) return { total: 0, changed: 0 };
+
+  const wrongStage = sheet.category === 'mock_exam' ? 'mockExam' : 'problem';
 
   // 2. 해당 시트의 모든 시도 조회
   const { data: attempts } = await admin
@@ -106,7 +108,7 @@ export async function regradeSheet(
         .delete()
         .eq('student_id', attempt.student_id)
         .eq('unit_id', sheet.unit_id)
-        .eq('stage', 'problem')
+        .eq('stage', wrongStage)
         .eq('sheet_id', sheetId);
 
       if (wrongAnswers.length > 0) {
@@ -116,7 +118,7 @@ export async function regradeSheet(
           return {
             student_id: attempt.student_id,
             unit_id: sheet.unit_id,
-            stage: 'problem',
+            stage: wrongStage,
             source_type: sheet.mode,
             question_data: {
               ...wa,
