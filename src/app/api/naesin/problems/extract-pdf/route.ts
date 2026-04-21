@@ -98,14 +98,16 @@ JSON 배열 형식:
     } catch (apiError) {
       const apiMsg = apiError instanceof Error ? apiError.message : String(apiError);
       const apiStatus = (apiError as { status?: number })?.status;
-      const apiType = (apiError as { error?: { type?: string } })?.error?.type;
-      logger.error('ai.pdf_extract.api_error', {
+      // console.log으로 Vercel 로그에 확실히 남기기
+      console.log(JSON.stringify({
+        level: 'error',
+        msg: 'ai.pdf_extract.api_error',
+        ts: new Date().toISOString(),
         error: apiMsg,
         status: apiStatus,
-        type: apiType,
         fileSize: arrayBuffer.byteLength,
-        base64Size: base64Data.length,
-      });
+        raw: String(apiError).slice(0, 500),
+      }));
 
       if (apiMsg.includes('too large') || apiMsg.includes('token') || apiMsg.includes('size')) {
         return NextResponse.json(
@@ -114,7 +116,7 @@ JSON 배열 형식:
         );
       }
       return NextResponse.json(
-        { error: `AI 서버 연결에 실패했습니다. (${apiStatus ?? 'unknown'}: ${apiType ?? apiMsg.slice(0, 80)})` },
+        { error: `AI 서버 연결에 실패했습니다. (${apiStatus ?? '?'}: ${apiMsg.slice(0, 120)})` },
         { status: 502 },
       );
     }
