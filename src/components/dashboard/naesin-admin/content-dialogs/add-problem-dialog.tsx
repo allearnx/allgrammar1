@@ -16,6 +16,7 @@ import { ClipboardList } from 'lucide-react';
 import { toast } from 'sonner';
 import { useFormDialog } from '@/hooks/use-form-dialog';
 import { fetchWithToast } from '@/lib/fetch-with-toast';
+import { parseAnswerLines } from '@/lib/naesin/parse-answer-lines';
 
 export function AddProblemDialog({ unitId, onAdd }: { unitId: string; onAdd: () => void }) {
   const { open, setOpen, saving, handleSubmit } = useFormDialog({
@@ -32,9 +33,11 @@ export function AddProblemDialog({ unitId, onAdd }: { unitId: string; onAdd: () 
 
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
-    const answerKey = answerKeyText.split('\n').map((s) => s.trim()).filter(Boolean);
+    const answerKey = parseAnswerLines(answerKeyText);
     if (answerKey.length !== Number(totalQuestions)) {
-      toast.error(`정답 줄 수(${answerKey.length})와 문항 수(${totalQuestions})가 일치하지 않습니다`);
+      toast.error(`정답 수(${answerKey.length})와 문항 수(${totalQuestions})가 일치하지 않습니다`, {
+        description: '서술형 소문항 (1)(2)는 자동으로 합쳐집니다',
+      });
       return;
     }
     await handleSubmit(async () => {
@@ -78,7 +81,7 @@ export function AddProblemDialog({ unitId, onAdd }: { unitId: string; onAdd: () 
               required
             />
             <p className="text-xs text-muted-foreground mt-1">
-              줄바꿈으로 문항 구분 · 복수 정답은 쉼표: 1, 3 · 서술형 (a)(b)는 한 줄에 작성
+              줄바꿈으로 문항 구분 · 복수 정답: 1, 3 · 서술형 (1)(2) 소문항은 줄 나눠도 자동 합침
             </p>
           </div>
           <div>
