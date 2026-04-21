@@ -110,6 +110,7 @@ export const POST = createApiHandler(
             ...wa,
             ...(q?.options ? { options: q.options } : {}),
             ...(q?.explanation ? { explanation: q.explanation } : {}),
+            ...(q?.subParts ? { subParts: q.subParts } : {}),
           },
           sheet_id: sheetId,
         };

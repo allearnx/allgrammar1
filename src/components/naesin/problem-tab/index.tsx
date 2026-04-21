@@ -15,7 +15,7 @@ import type { NaesinProblemSheet } from '@/types/database';
 interface LastAttempt {
   score: number;
   total_questions: number;
-  wrong_answers: { number: number; userAnswer: string | number; correctAnswer: string | number; question?: string }[];
+  wrong_answers: { number: number; userAnswer: string | number; correctAnswer: string | number; question?: string; subParts?: { label: string; answer: string }[] }[];
   created_at: string;
 }
 
@@ -158,8 +158,26 @@ function AttemptSummary({ attempt, onRetry }: { attempt: LastAttempt; onRetry: (
               {wrongList.map((w, i) => (
                 <div key={i} className="text-sm border-b last:border-0 pb-2 space-y-1">
                   <p className="font-medium">#{w.number}. {w.question || ''}</p>
-                  <p className="text-red-500">내 답: {String(w.userAnswer || '-')}</p>
-                  <p className="text-green-600">정답: {extractAnswer(w.correctAnswer)}</p>
+                  {w.subParts?.length ? (
+                    <div className="space-y-0.5">
+                      {w.subParts.map((sp: { label: string; answer: string }, j: number) => {
+                        const userParts = String(w.userAnswer || '').split(' / ');
+                        return (
+                          <div key={j} className="text-xs">
+                            <span className="font-medium">{sp.label}</span>{' '}
+                            <span className="text-red-500">{userParts[j]?.trim() || '-'}</span>
+                            {' → '}
+                            <span className="text-green-600">{sp.answer}</span>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  ) : (
+                    <>
+                      <p className="text-red-500">내 답: {String(w.userAnswer || '-')}</p>
+                      <p className="text-green-600">정답: {extractAnswer(w.correctAnswer)}</p>
+                    </>
+                  )}
                 </div>
               ))}
             </div>

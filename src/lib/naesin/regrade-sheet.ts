@@ -36,6 +36,7 @@ export async function regradeSheet(
     options?: string[];
     acceptedAnswers?: string[];
     explanation?: string;
+    subParts?: { label: string; answer: string; acceptedAnswers?: string[] }[];
   }[];
 
   let changed = 0;
@@ -121,6 +122,7 @@ export async function regradeSheet(
               ...wa,
               ...(q?.options ? { options: q.options } : {}),
               ...(q?.explanation ? { explanation: q.explanation } : {}),
+              ...(q?.subParts ? { subParts: q.subParts } : {}),
             },
             sheet_id: sheetId,
           };

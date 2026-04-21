@@ -44,6 +44,22 @@ describe('matchMcqAnswer', () => {
   it('handles whitespace in answers', () => {
     expect(matchMcqAnswer(' 2 ', ' is ', options)).toBe(true);
   });
+
+  it('matches multi-select answers with different spacing', () => {
+    expect(matchMcqAnswer('1, 3', '1,3')).toBe(true);
+    expect(matchMcqAnswer('1,3', '1, 3')).toBe(true);
+    expect(matchMcqAnswer('1,  3', '1, 3')).toBe(true);
+  });
+
+  it('matches multi-select answers regardless of order', () => {
+    expect(matchMcqAnswer('3, 1', '1, 3')).toBe(true);
+    expect(matchMcqAnswer('5, 2, 1', '1, 2, 5')).toBe(true);
+  });
+
+  it('does not match different multi-select answers', () => {
+    expect(matchMcqAnswer('1, 3', '1, 4')).toBe(false);
+    expect(matchMcqAnswer('1, 2', '1, 2, 3')).toBe(false);
+  });
 });
 
 describe('resolveCorrectIndex', () => {

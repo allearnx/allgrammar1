@@ -21,9 +21,21 @@ export function normalize(s: string): string {
     .replace(/\s+/g, ' ');
 }
 
+/** 복수 정답(예: "1,3" / "1, 3" / "3, 1") 정규화: 공백 제거 + 숫자 정렬 */
+function normalizeMultiSelect(s: string): string {
+  const parts = s.split(',').map((v) => v.trim());
+  if (parts.length <= 1) return s.trim().toLowerCase();
+  // All parts are integers → sort numerically
+  if (parts.every((p) => /^\d+$/.test(p))) {
+    return parts.sort((a, b) => Number(a) - Number(b)).join(', ');
+  }
+  return parts.map((p) => p.toLowerCase()).sort().join(', ');
+}
+
 /**
  * 객관식 정답 매칭: 학생 답(1-indexed 번호)이 정답과 일치하는지 확인.
  * 정답이 번호가 아닌 텍스트로 저장된 경우도 처리한다.
+ * 복수 정답(모두고르기)도 정규화하여 비교한다.
  */
 export function matchMcqAnswer(
   userAnswer: string,
@@ -33,6 +45,12 @@ export function matchMcqAnswer(
   // 1차: 직접 비교 (둘 다 번호이거나 둘 다 텍스트인 경우)
   if (userAnswer.trim().toLowerCase() === correctAnswer.trim().toLowerCase()) {
     return true;
+  }
+  // 1.5차: 복수 정답 정규화 비교 ("1,3" vs "1, 3" vs "3, 1")
+  if (correctAnswer.includes(',') || userAnswer.includes(',')) {
+    if (normalizeMultiSelect(userAnswer) === normalizeMultiSelect(correctAnswer)) {
+      return true;
+    }
   }
   if (!options || options.length === 0) return false;
   // 2차: 학생 답이 번호이고 정답이 텍스트인 경우

@@ -198,8 +198,26 @@ export function WrongAnswerCard({ wrongAnswer, onResolve }: { wrongAnswer: Naesi
             ) : null}
             {data.number && data.type !== 'fill_blank' && data.type !== 'translation' && data.type !== 'ordering' && data.type !== 'first_letter' && data.type !== 'grammar_vocab' ? (
               <>
-                <p className="text-red-500">내 답: {String(data.userAnswer || '-')}</p>
-                <p className="text-green-600">정답: {extractAnswer(data.correctAnswer)}</p>
+                {(data.subParts as { label: string; answer: string }[] | undefined)?.length ? (
+                  <div className="space-y-0.5">
+                    {(data.subParts as { label: string; answer: string }[]).map((sp, i) => {
+                      const userParts = String(data.userAnswer || '').split(' / ');
+                      return (
+                        <div key={i} className="text-xs">
+                          <span className="font-medium">{sp.label}</span>{' '}
+                          <span className="text-red-500">{userParts[i]?.trim() || '-'}</span>
+                          {' → '}
+                          <span className="text-green-600">{sp.answer}</span>
+                        </div>
+                      );
+                    })}
+                  </div>
+                ) : (
+                  <>
+                    <p className="text-red-500">내 답: {String(data.userAnswer || '-')}</p>
+                    <p className="text-green-600">정답: {extractAnswer(data.correctAnswer)}</p>
+                  </>
+                )}
               </>
             ) : null}
             {options && options.length > 0 && (

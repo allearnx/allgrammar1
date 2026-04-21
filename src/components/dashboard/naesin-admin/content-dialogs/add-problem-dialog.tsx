@@ -5,7 +5,6 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import {
   Dialog,
   DialogContent,
@@ -26,7 +25,7 @@ export function AddProblemDialog({ unitId, onAdd }: { unitId: string; onAdd: () 
     errorMessage: '문제풀이 시트 추가 실패',
   });
   const [title, setTitle] = useState('');
-  const [mode, setMode] = useState<'interactive' | 'image_answer'>('interactive');
+  const mode = 'image_answer' as const;
   const [totalQuestions, setTotalQuestions] = useState('');
   const [answerKeyText, setAnswerKeyText] = useState('');
   const [pdfUrl, setPdfUrl] = useState('');
@@ -61,16 +60,9 @@ export function AddProblemDialog({ unitId, onAdd }: { unitId: string; onAdd: () 
             <Label htmlFor="problem-title">제목</Label>
             <Input id="problem-title" value={title} onChange={(e) => setTitle(e.target.value)} placeholder="1과 문제풀이" required />
           </div>
-          <div>
-            <Label htmlFor="problem-mode">풀이 방식</Label>
-            <Select value={mode} onValueChange={(v) => setMode(v as 'interactive' | 'image_answer')}>
-              <SelectTrigger id="problem-mode"><SelectValue /></SelectTrigger>
-              <SelectContent>
-                <SelectItem value="interactive">직접 입력</SelectItem>
-                <SelectItem value="image_answer">OMR 이미지</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
+          <p className="text-xs text-muted-foreground bg-muted rounded-lg px-3 py-2">
+            OMR 이미지 모드로 생성됩니다. 직접 입력 문제는 템플릿에서 가져오기를 이용하세요.
+          </p>
           <div>
             <Label htmlFor="problem-total">총 문항 수</Label>
             <Input id="problem-total" type="number" value={totalQuestions} onChange={(e) => setTotalQuestions(e.target.value)} placeholder="25" required />
