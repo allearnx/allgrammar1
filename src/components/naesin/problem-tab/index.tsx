@@ -103,7 +103,7 @@ export function ProblemTab({ sheets, unitId, onStageComplete, bestScoreBySheet, 
           unitId={unitId}
           onComplete={onStageComplete}
         />
-      ) : activeSheet.mode === 'interactive' ? (
+      ) : activeSheet.mode === 'interactive' && (activeSheet.questions as unknown[])?.length > 0 ? (
         <InteractiveProblemView
           key={activeSheet.id}
           sheet={activeSheet}
