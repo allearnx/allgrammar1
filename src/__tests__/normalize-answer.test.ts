@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { normalize, matchMcqAnswer, resolveCorrectIndex } from '@/lib/naesin/normalize-answer';
+import { normalize, matchMcqAnswer, resolveCorrectIndex, uncircle } from '@/lib/naesin/normalize-answer';
 
 describe('normalize', () => {
   it('trims, lowercases, removes trailing period, collapses spaces', () => {
@@ -59,6 +59,40 @@ describe('matchMcqAnswer', () => {
   it('does not match different multi-select answers', () => {
     expect(matchMcqAnswer('1, 3', '1, 4')).toBe(false);
     expect(matchMcqAnswer('1, 2', '1, 2, 3')).toBe(false);
+  });
+
+  it('matches circled number answers (①②③④⑤)', () => {
+    expect(matchMcqAnswer('3', '③', options)).toBe(true);
+    expect(matchMcqAnswer('1', '①', options)).toBe(true);
+    expect(matchMcqAnswer('5', '⑤', options)).toBe(true);
+  });
+
+  it('matches circled number vs circled number', () => {
+    expect(matchMcqAnswer('③', '③')).toBe(true);
+  });
+
+  it('matches circled multi-select (①③ vs 1,3)', () => {
+    expect(matchMcqAnswer('1, 3', '①③')).toBe(true);
+    expect(matchMcqAnswer('3, 1', '①③')).toBe(true);
+  });
+
+  it('does not match wrong circled number', () => {
+    expect(matchMcqAnswer('2', '③', options)).toBe(false);
+    expect(matchMcqAnswer('4', '①', options)).toBe(false);
+  });
+});
+
+describe('uncircle', () => {
+  it('converts circled numbers to plain numbers', () => {
+    expect(uncircle('③')).toBe('3');
+    expect(uncircle('①②③④⑤')).toBe('1,2,3,4,5');
+    expect(uncircle('④⑤')).toBe('4,5');
+    expect(uncircle('①③')).toBe('1,3');
+  });
+
+  it('leaves plain text unchanged', () => {
+    expect(uncircle('hello')).toBe('hello');
+    expect(uncircle('3')).toBe('3');
   });
 });
 

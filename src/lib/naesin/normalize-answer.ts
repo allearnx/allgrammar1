@@ -12,6 +12,19 @@ export function extractAnswer(val: unknown): string {
   return '';
 }
 
+/** ①②③④⑤ → 1,2,3,4,5 변환 맵 */
+const CIRCLED_TO_NUM: Record<string, string> = {
+  '①': '1', '②': '2', '③': '3', '④': '4', '⑤': '5',
+  '⑥': '6', '⑦': '7', '⑧': '8', '⑨': '9', '⑩': '10',
+};
+
+/** circled number(①②③④⑤)를 plain number로 변환. 연속된 경우 comma 구분 (①③→"1,3") */
+export function uncircle(s: string): string {
+  return s.replace(/[①②③④⑤⑥⑦⑧⑨⑩]+/g, (match) =>
+    [...match].map((ch) => CIRCLED_TO_NUM[ch] ?? ch).join(','),
+  );
+}
+
 /** 정규화: 대소문자 무시, 앞뒤 공백, 끝 마침표, 연속 공백 → 단일 공백 */
 export function normalize(s: string): string {
   return s
@@ -42,28 +55,32 @@ export function matchMcqAnswer(
   correctAnswer: string,
   options?: string[],
 ): boolean {
-  // 1차: 직접 비교 (둘 다 번호이거나 둘 다 텍스트인 경우)
-  if (userAnswer.trim().toLowerCase() === correctAnswer.trim().toLowerCase()) {
+  // 0차: circled number 변환 (①→1, ②→2, ...)
+  const uPlain = uncircle(userAnswer).trim().toLowerCase();
+  const cPlain = uncircle(correctAnswer).trim().toLowerCase();
+
+  // 1차: 직접 비교 (circled number 변환 후)
+  if (uPlain === cPlain) {
     return true;
   }
-  // 1.5차: 복수 정답 정규화 비교 ("1,3" vs "1, 3" vs "3, 1")
-  if (correctAnswer.includes(',') || userAnswer.includes(',')) {
-    if (normalizeMultiSelect(userAnswer) === normalizeMultiSelect(correctAnswer)) {
+  // 1.5차: 복수 정답 정규화 비교 ("1,3" vs "1, 3" vs "3, 1" vs "①③")
+  if (cPlain.includes(',') || uPlain.includes(',')) {
+    if (normalizeMultiSelect(uPlain) === normalizeMultiSelect(cPlain)) {
       return true;
     }
   }
   if (!options || options.length === 0) return false;
   // 2차: 학생 답이 번호이고 정답이 텍스트인 경우
-  const idx = parseInt(userAnswer, 10);
+  const idx = parseInt(uPlain, 10);
   if (!isNaN(idx) && idx >= 1 && idx <= options.length) {
-    if (options[idx - 1].trim().toLowerCase() === correctAnswer.trim().toLowerCase()) {
+    if (options[idx - 1].trim().toLowerCase() === cPlain) {
       return true;
     }
   }
   // 3차: 정답이 번호이고 학생 답이 텍스트인 경우
-  const cidx = parseInt(correctAnswer, 10);
+  const cidx = parseInt(cPlain, 10);
   if (!isNaN(cidx) && cidx >= 1 && cidx <= options.length) {
-    if (options[cidx - 1].trim().toLowerCase() === userAnswer.trim().toLowerCase()) {
+    if (options[cidx - 1].trim().toLowerCase() === uPlain) {
       return true;
     }
   }
@@ -75,8 +92,9 @@ export function matchMcqAnswer(
  * 이미 유효한 번호면 그대로, 텍스트면 매칭되는 옵션 번호를 반환.
  */
 export function resolveCorrectIndex(correctAnswer: string, options: string[]): string {
-  const num = parseInt(correctAnswer, 10);
-  if (!isNaN(num) && num >= 1 && num <= options.length) return correctAnswer;
+  const plain = uncircle(correctAnswer);
+  const num = parseInt(plain, 10);
+  if (!isNaN(num) && num >= 1 && num <= options.length) return plain;
   const idx = options.findIndex(
     (opt) => opt.trim().toLowerCase() === correctAnswer.trim().toLowerCase(),
   );
