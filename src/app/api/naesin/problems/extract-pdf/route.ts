@@ -38,7 +38,7 @@ JSON 배열 형식:
 
 /** PDF를 N페이지씩 청크로 분할하여 각각의 base64 반환 */
 async function splitPdfIntoChunks(pdfBytes: ArrayBuffer, pagesPerChunk: number) {
-  const srcDoc = await PDFDocument.load(pdfBytes);
+  const srcDoc = await PDFDocument.load(pdfBytes, { ignoreEncryption: true });
   const totalPages = srcDoc.getPageCount();
 
   if (totalPages <= pagesPerChunk) {
