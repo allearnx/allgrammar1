@@ -114,6 +114,20 @@ export interface NaesinTextbookVideoProgress {
   updated_at: string;
 }
 
+export interface NaesinEpVideoProgress {
+  id: string;
+  student_id: string;
+  sheet_id: string;
+  watch_percent: number;
+  max_position_reached: number;
+  duration: number;
+  cumulative_watch_seconds: number;
+  last_position: number;
+  completed: boolean;
+  created_at: string;
+  updated_at: string;
+}
+
 export type NaesinGrammarContentType = 'video' | 'text';
 
 export interface NaesinGrammarLesson {
@@ -306,6 +320,7 @@ export interface NaesinProblemSheet {
   answer_key: (string | number)[];
   sort_order: number;
   category: NaesinProblemCategory;
+  video_url?: string | null;
   is_template?: boolean;
   template_topic?: string | null;
   source_template_id?: string | null;

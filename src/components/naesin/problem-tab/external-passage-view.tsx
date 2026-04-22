@@ -1,14 +1,17 @@
 'use client';
 
-import { useState, useCallback, useMemo } from 'react';
+import { useState, useCallback, useMemo, useEffect } from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Badge } from '@/components/ui/badge';
 import { CheckCircle2, ArrowRightLeft, PenLine, TextCursorInput } from 'lucide-react';
 import { OrderingExercise } from '@/components/shared/ordering-exercise';
 import { TranslationExercise, type WrongTranslation } from '@/components/shared/translation-exercise';
 import { FillBlanksExercise } from '@/components/shared/fill-blanks-exercise';
+import { NaesinYouTubePlayerTracked } from '@/components/naesin/grammar-tab/youtube-player';
+import { StageProgressBar } from '@/components/naesin/stage-progress-bar';
 import { fetchWithToast } from '@/lib/fetch-with-toast';
-import type { NaesinProblemSheet } from '@/types/database';
+import { extractVideoId } from '@/lib/utils/youtube';
+import type { NaesinProblemSheet, NaesinEpVideoProgress } from '@/types/database';
 import type { TextbookPassage, SentenceItem, BlankItem } from '@/types/textbook';
 import type { ExternalPassageSentence } from '@/types/naesin';
 
@@ -82,7 +85,31 @@ export function ExternalPassageView({ sheet, unitId, onComplete }: ExternalPassa
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
+  // Video progress state
+  const [videoProgress, setVideoProgress] = useState<NaesinEpVideoProgress | null>(null);
+  const [videoWatchPercent, setVideoWatchPercent] = useState(0);
+  const [videoCompleted, setVideoCompleted] = useState(false);
+
   const passage = useMemo(() => toTextbookPassage(sheet), [sheet]);
+  const youtubeId = useMemo(
+    () => (sheet.video_url ? extractVideoId(sheet.video_url) : null),
+    [sheet.video_url],
+  );
+
+  // Fetch initial video progress for resume playback
+  useEffect(() => {
+    if (!youtubeId) return;
+    fetch(`/api/naesin/external-passage/video-progress?sheetId=${sheet.id}`)
+      .then((r) => r.json())
+      .then((data) => {
+        if (data.progress) {
+          setVideoProgress(data.progress);
+          setVideoWatchPercent(data.progress.watch_percent);
+          setVideoCompleted(data.progress.completed);
+        }
+      })
+      .catch(() => {});
+  }, [youtubeId, sheet.id]);
 
   const handleFillBlanksComplete = useCallback((score: number) => {
     setFillBlanksScore(score);
@@ -149,6 +176,46 @@ export function ExternalPassageView({ sheet, unitId, onComplete }: ExternalPassa
         <h3 className="font-semibold">{sheet.title}</h3>
         <Badge variant="secondary">외부지문</Badge>
       </div>
+
+      {youtubeId && (
+        <div className="space-y-2">
+          <NaesinYouTubePlayerTracked
+            videoId={youtubeId}
+            lessonId={sheet.id}
+            unitId={unitId ?? ''}
+            onVideoProgress={(percent, completed) => {
+              setVideoWatchPercent(percent);
+              if (completed) setVideoCompleted(true);
+            }}
+            initialProgress={
+              videoProgress
+                ? {
+                    id: videoProgress.id,
+                    student_id: videoProgress.student_id,
+                    lesson_id: videoProgress.sheet_id,
+                    watch_percent: videoProgress.watch_percent,
+                    max_position_reached: videoProgress.max_position_reached,
+                    duration: videoProgress.duration,
+                    cumulative_watch_seconds: videoProgress.cumulative_watch_seconds,
+                    last_position: videoProgress.last_position,
+                    completed: videoProgress.completed,
+                    updated_at: videoProgress.updated_at,
+                  }
+                : undefined
+            }
+            progressEndpoint="/api/naesin/external-passage/video-progress"
+          />
+          {!videoCompleted && videoWatchPercent > 0 && (
+            <StageProgressBar label="시청 진도" percent={videoWatchPercent} />
+          )}
+          {videoCompleted && (
+            <Badge className="bg-green-500 text-white">
+              <CheckCircle2 className="h-3 w-3 mr-1" />
+              영상 시청 완료
+            </Badge>
+          )}
+        </div>
+      )}
 
       {submitted && avgScore !== null && (
         <div className="text-center py-4 space-y-2">

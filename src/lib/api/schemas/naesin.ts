@@ -214,6 +214,7 @@ export const problemCreateSchema = z.object({
   pdfUrl: URL_STR.nullish(),
   answerKey: z.unknown().nullish(),
   category: SHORT.nullish(),
+  videoUrl: URL_STR.nullish(),
 }).refine((d) => d.unitId || d.textbookId, { message: 'unitId 또는 textbookId 필수' });
 
 export const problemPatchSchema = z.object({

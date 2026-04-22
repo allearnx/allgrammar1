@@ -35,7 +35,7 @@ export const POST = createApiHandler(
   { roles: [...ADMIN_ROLES], schema: problemCreateSchema },
   async ({ body, supabase, user }) => {
     await requireContentPermission(user, supabase);
-    const { unitId, textbookId, title, mode, questions, pdfUrl, answerKey, category } = body;
+    const { unitId, textbookId, title, mode, questions, pdfUrl, answerKey, category, videoUrl } = body;
 
     const data = dbResult(await supabase
       .from('naesin_problem_sheets')
@@ -48,6 +48,7 @@ export const POST = createApiHandler(
         pdf_url: pdfUrl || null,
         answer_key: answerKey || [],
         category: category || 'problem',
+        video_url: videoUrl || null,
       })
       .select()
       .single());

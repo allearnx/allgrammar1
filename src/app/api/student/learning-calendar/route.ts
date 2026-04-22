@@ -62,6 +62,7 @@ export async function GET(request: NextRequest) {
     vocaQuizActivityRes, vocaMatchingActivityRes,
     naesinVocabActivityRes, naesinProblemActivityRes,
     naesinPassageActivityRes, naesinVideoActivityRes,
+    epVideoActivityRes,
   ] = await Promise.all([
     queryClient.from('voca_quiz_results').select('score, created_at, day_id').eq('student_id', targetStudentId).gte('created_at', ninetyDaysAgo).order('created_at', { ascending: false }).limit(200),
     queryClient.from('voca_matching_submissions').select('score, created_at, day_id').eq('student_id', targetStudentId).gte('created_at', ninetyDaysAgo).order('created_at', { ascending: false }).limit(200),
@@ -69,7 +70,18 @@ export async function GET(request: NextRequest) {
     queryClient.from('naesin_problem_attempts').select('score, total_questions, created_at, unit_id').eq('student_id', targetStudentId).gte('created_at', ninetyDaysAgo).order('created_at', { ascending: false }).limit(200),
     queryClient.from('naesin_passage_attempts').select('created_at, unit_id').eq('student_id', targetStudentId).gte('created_at', ninetyDaysAgo).order('created_at', { ascending: false }).limit(200),
     queryClient.from('naesin_grammar_video_progress').select('created_at, unit_id').eq('student_id', targetStudentId).eq('completed', true).gte('created_at', ninetyDaysAgo).order('created_at', { ascending: false }).limit(200),
+    queryClient.from('naesin_ep_video_progress').select('created_at, sheet_id').eq('student_id', targetStudentId).eq('completed', true).gte('created_at', ninetyDaysAgo).order('created_at', { ascending: false }).limit(200),
   ]);
+
+  // Merge EP video completions into video activity (use sheet_id as unit_id placeholder)
+  const epVideoActivity = (epVideoActivityRes.data || []).map((r) => ({
+    created_at: r.created_at,
+    unit_id: r.sheet_id,
+  }));
+  const mergedVideoActivity = [
+    ...(naesinVideoActivityRes.data || []),
+    ...epVideoActivity,
+  ];
 
   const activities = await computeActivityLog(
     queryClient,
@@ -78,7 +90,7 @@ export async function GET(request: NextRequest) {
     naesinVocabActivityRes.data || [],
     naesinProblemActivityRes.data || [],
     naesinPassageActivityRes.data || [],
-    naesinVideoActivityRes.data || [],
+    mergedVideoActivity,
   );
 
   return NextResponse.json({ dailySeconds, activities });

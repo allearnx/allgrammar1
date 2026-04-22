@@ -2,6 +2,7 @@
  * 전체 시트 일괄 재채점 스크립트
  * - JSONB 동기화
  * - naesin_wrong_answers stage 정리 + orphan 제거
+ * - MCQ acceptedAnswers 체크 포함
  *
  * 실행: node scripts/regrade-all.mjs
  */
@@ -21,38 +22,56 @@ const admin = createClient(supabaseUrl, serviceKey, {
   auth: { autoRefreshToken: false, persistSession: false },
 });
 
-// normalize / matchMcqAnswer / extractAnswer — inline simplified versions
+// === 앱의 normalize-answer.ts와 동일한 로직 ===
+
+const CIRCLED_TO_NUM = { '①': '1', '②': '2', '③': '3', '④': '4', '⑤': '5', '⑥': '6', '⑦': '7', '⑧': '8', '⑨': '9', '⑩': '10' };
+
+function uncircle(s) {
+  return s.replace(/[①②③④⑤⑥⑦⑧⑨⑩]+/g, (match) =>
+    [...match].map((ch) => CIRCLED_TO_NUM[ch] ?? ch).join(','),
+  );
+}
+
 function normalize(s) {
   return String(s ?? '')
     .trim()
     .toLowerCase()
-    .replace(/[\s\u00A0]+/g, ' ')
-    .replace(/[''ʼ`]/g, "'")
-    .replace(/[""]/g, '"')
-    .replace(/\s*([.,!?;:])\s*/g, '$1 ')
-    .replace(/\s+/g, ' ')
-    .trim();
+    .replace(/\.+\s*$/, '')
+    .replace(/\s+/g, ' ');
 }
 
 function extractAnswer(val) {
-  if (val && typeof val === 'object' && 'answer' in val) return String(val.answer);
-  return String(val ?? '');
+  if (val == null) return '';
+  if (typeof val === 'string') return val;
+  if (typeof val === 'number') return String(val);
+  if (typeof val === 'object' && 'answer' in val) return String(val.answer ?? '');
+  return '';
+}
+
+function normalizeMultiSelect(s) {
+  const parts = s.split(',').map((v) => v.trim());
+  if (parts.length <= 1) return s.trim().toLowerCase();
+  if (parts.every((p) => /^\d+$/.test(p))) {
+    return parts.sort((a, b) => Number(a) - Number(b)).join(', ');
+  }
+  return parts.map((p) => p.toLowerCase()).sort().join(', ');
 }
 
 function matchMcqAnswer(userAnswer, correctAnswer, options) {
-  const uNorm = normalize(userAnswer);
-  const cNorm = normalize(correctAnswer);
-  if (uNorm === cNorm) return true;
-  // number-based matching
-  const uNum = parseInt(userAnswer, 10);
-  const cNum = parseInt(correctAnswer, 10);
-  if (!isNaN(uNum) && !isNaN(cNum)) return uNum === cNum;
-  // option text matching
-  if (options && options.length > 0) {
-    const cIdx = !isNaN(cNum) ? cNum - 1 : -1;
-    if (cIdx >= 0 && cIdx < options.length && normalize(options[cIdx]) === uNorm) return true;
-    const uIdx = !isNaN(uNum) ? uNum - 1 : -1;
-    if (uIdx >= 0 && uIdx < options.length && normalize(options[uIdx]) === cNorm) return true;
+  const uPlain = uncircle(userAnswer).trim().toLowerCase();
+  const cPlain = uncircle(correctAnswer).trim().toLowerCase();
+  if (uPlain === cPlain) return true;
+  if (cPlain.includes(',') || uPlain.includes(',')) {
+    if (normalizeMultiSelect(uPlain) === normalizeMultiSelect(cPlain)) return true;
+  }
+  if (!options || options.length === 0) return false;
+  const idx = parseInt(uPlain, 10);
+  if (!isNaN(idx) && idx >= 1 && idx <= options.length) {
+    if (options[idx - 1].trim().toLowerCase() === cPlain) return true;
+  }
+  const cidx = parseInt(cPlain, 10);
+  if (!isNaN(cidx) && cidx >= 1 && cidx <= options.length) {
+    if (options[cidx - 1].trim().toLowerCase() === uPlain) return true;
   }
   return false;
 }
@@ -71,7 +90,8 @@ async function regradeSheet(sheetId) {
   const { data: attempts } = await admin
     .from('naesin_problem_attempts')
     .select('id, student_id, answers, score, total_questions, wrong_answers')
-    .eq('sheet_id', sheetId);
+    .eq('sheet_id', sheetId)
+    .order('created_at', { ascending: true });
 
   if (!attempts || attempts.length === 0) return { total: 0, changed: 0 };
 
@@ -97,6 +117,11 @@ async function regradeSheet(sheetId) {
         isCorrect = candidates.some((c) => normalize(c) === studentNorm);
       } else {
         isCorrect = matchMcqAnswer(userAnswer, correctAnswer, questions[i]?.options);
+        // acceptedAnswers 체크 (정답처리된 답도 정답으로 인정)
+        if (!isCorrect && questions[i]?.acceptedAnswers?.length > 0) {
+          const studentNorm = normalize(userAnswer);
+          isCorrect = questions[i].acceptedAnswers.some((c) => normalize(c) === studentNorm);
+        }
       }
 
       if (isCorrect) {
@@ -124,7 +149,7 @@ async function regradeSheet(sheetId) {
 
     if (hasChange) changed++;
 
-    // ��답 테이��� 항상 동기화
+    // 오답 테이블 항상 동기화
     await admin
       .from('naesin_wrong_answers')
       .delete()
@@ -158,7 +183,7 @@ async function regradeSheet(sheetId) {
 
 // Main
 async function main() {
-  console.log('전��� 시트 일괄 재채점 시작...\n');
+  console.log('전체 시트 일괄 재채점 시작...\n');
 
   const { data: sheetRows } = await admin
     .from('naesin_problem_attempts')

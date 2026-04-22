@@ -38,6 +38,7 @@ export function CreateExternalPassageDialog({ unitId, onAdd }: { unitId: string;
   const [title, setTitle] = useState('');
   const [manualText, setManualText] = useState('');
   const [sentences, setSentences] = useState<SentenceRow[]>([]);
+  const [videoUrl, setVideoUrl] = useState('');
   const [editingIdx, setEditingIdx] = useState<number | null>(null);
   const [editForm, setEditForm] = useState<SentenceRow>({ original: '', korean: '' });
 
@@ -150,6 +151,7 @@ export function CreateExternalPassageDialog({ unitId, onAdd }: { unitId: string;
           questions,
           answerKey,
           category: 'external_passage',
+          videoUrl: videoUrl.trim() || undefined,
         },
         silent: true,
       });
@@ -159,6 +161,7 @@ export function CreateExternalPassageDialog({ unitId, onAdd }: { unitId: string;
   function resetForm() {
     setStep('input');
     setTitle('');
+    setVideoUrl('');
     setManualText('');
     setSentences([]);
     setEditingIdx(null);
@@ -189,6 +192,17 @@ export function CreateExternalPassageDialog({ unitId, onAdd }: { unitId: string;
                 onChange={(e) => setTitle(e.target.value)}
                 placeholder="Lesson 5 외부지문"
               />
+            </div>
+
+            <div>
+              <Label htmlFor="ep-video">YouTube 영상 URL (선택)</Label>
+              <Input
+                id="ep-video"
+                value={videoUrl}
+                onChange={(e) => setVideoUrl(e.target.value)}
+                placeholder="https://www.youtube.com/watch?v=..."
+              />
+              <p className="text-xs text-muted-foreground mt-1">설명 영상이 있으면 학생이 연습 전에 시청할 수 있습니다.</p>
             </div>
 
             <div className="space-y-2">
