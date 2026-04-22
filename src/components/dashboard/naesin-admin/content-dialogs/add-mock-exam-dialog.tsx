@@ -16,6 +16,7 @@ import {
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { FileQuestion, Loader2, Upload, RotateCcw, Trash2, ClipboardPaste } from 'lucide-react';
 import { toast } from 'sonner';
+import Papa from 'papaparse';
 import { useFormDialog } from '@/hooks/use-form-dialog';
 import { fetchWithToast } from '@/lib/fetch-with-toast';
 import { parseParentheticalAnswer } from '@/lib/naesin/parse-parenthetical-answer';
@@ -80,23 +81,21 @@ export function AddMockExamDialog({ unitId, textbookId, onAdd }: { unitId?: stri
   // CSV 텍스트 파싱 → preview
   function handleCsvPreview() {
     if (!csvText.trim()) { toast.error('텍스트를 입력해주세요'); return; }
-    const lines = csvText.trim().split('\n');
+    const parsed = Papa.parse<string[]>(csvText, { skipEmptyLines: true });
+    const rows = parsed.data;
     const questions: ExtractedQuestion[] = [];
     const errors: string[] = [];
 
-    for (let i = 0; i < lines.length; i++) {
-      const line = lines[i].trim();
-      if (!line) continue;
-      // 간이 CSV split (큰따옴표 미지원 — 간단한 콤마 구분)
-      const row = line.split(',').map((s) => s.trim());
-      if (row.length < 2) continue;
-      const first = row[0];
+    for (let i = 0; i < rows.length; i++) {
+      const row = rows[i];
+      if (!row || row.length < 2) continue;
+      const first = (row[0] || '').trim();
       if (!first || first === '번호' || first === '#') continue;
 
       const number = Number(first);
       if (isNaN(number)) { errors.push(`${i + 1}행: 번호 오류 ("${first}")`); continue; }
 
-      const question = row[1] || '';
+      const question = (row[1] || '').trim();
       if (!question) { errors.push(`${i + 1}행: 문제 텍스트 없음`); continue; }
 
       const choices = [row[2], row[3], row[4], row[5], row[6]].map((s) => (s || '').trim()).filter(Boolean);
