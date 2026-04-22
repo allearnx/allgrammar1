@@ -112,8 +112,29 @@ async function getDraftWrongAnswers(
 
   if (!drafts || drafts.length === 0) return [];
 
+  // 이미 제출 완료된 시트의 드래프트는 제외 (제출 후 auto-save로 재생성된 잔여 draft)
+  const draftSheetIds = drafts.map((d) => d.sheet_id).filter(Boolean);
+  const { data: submittedAttempts } = await admin
+    .from('naesin_problem_attempts')
+    .select('sheet_id')
+    .eq('student_id', studentId)
+    .in('sheet_id', draftSheetIds);
+  const submittedSheetIds = new Set((submittedAttempts || []).map((a) => a.sheet_id));
+  const pendingDrafts = drafts.filter((d) => !submittedSheetIds.has(d.sheet_id));
+
+  // 잔여 draft 정리 (제출 후 auto-save로 재생성된 것들)
+  if (submittedSheetIds.size > 0) {
+    const staleDrafts = drafts.filter((d) => submittedSheetIds.has(d.sheet_id));
+    for (const sd of staleDrafts) {
+      admin.from('naesin_problem_drafts').delete()
+        .eq('student_id', studentId).eq('sheet_id', sd.sheet_id).then(() => {});
+    }
+  }
+
+  if (pendingDrafts.length === 0) return [];
+
   // draft_data.wrongList 에서 오답 추출
-  const sheetIds = drafts.map((d) => d.sheet_id).filter(Boolean);
+  const sheetIds = pendingDrafts.map((d) => d.sheet_id).filter(Boolean);
   const { data: sheets } = await admin
     .from('naesin_problem_sheets')
     .select('id, title, unit_id, mode, category, questions')
@@ -122,7 +143,7 @@ async function getDraftWrongAnswers(
   const sheetMap = new Map((sheets || []).map((s) => [s.id, s]));
 
   // unit 정보 조회
-  const unitIds = [...new Set(drafts.map((d) => d.unit_id).filter(Boolean))];
+  const unitIds = [...new Set(pendingDrafts.map((d) => d.unit_id).filter(Boolean))];
   const unitMap = new Map<string, { id: string; unit_number: number; title: string }>();
   if (unitIds.length > 0) {
     const { data: units } = await admin
@@ -134,7 +155,7 @@ async function getDraftWrongAnswers(
 
   const results: Record<string, unknown>[] = [];
 
-  for (const draft of drafts) {
+  for (const draft of pendingDrafts) {
     const dd = draft.draft_data as {
       mode?: string;
       wrongList?: {
