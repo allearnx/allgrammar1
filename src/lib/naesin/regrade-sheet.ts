@@ -64,12 +64,23 @@ export async function regradeSheet(
       let isCorrect: boolean;
 
       if (isSubjective) {
-        const studentNorm = normalize(userAnswer);
-        const candidates = [
-          correctAnswer,
-          ...(questions?.[i]?.acceptedAnswers ?? []),
-        ];
-        isCorrect = candidates.some((c) => normalize(c) === studentNorm);
+        const q = questions?.[i];
+        if (q?.subParts) {
+          // subParts grading: each part must match independently
+          const parts = userAnswer.split(' / ');
+          isCorrect = q.subParts.every((sp, j) => {
+            const studentNorm = normalize(parts[j]?.trim() ?? '');
+            const candidates = [sp.answer, ...(sp.acceptedAnswers ?? [])];
+            return candidates.some((c) => normalize(c) === studentNorm);
+          });
+        } else {
+          const studentNorm = normalize(userAnswer);
+          const candidates = [
+            correctAnswer,
+            ...(q?.acceptedAnswers ?? []),
+          ];
+          isCorrect = candidates.some((c) => normalize(c) === studentNorm);
+        }
       } else {
         isCorrect = matchMcqAnswer(userAnswer, correctAnswer, questions?.[i]?.options);
         // acceptedAnswers 체크 (정답처리된 답도 정답으로 인정)
@@ -174,13 +185,22 @@ export async function regradeSheet(
 
         let isCorrect: boolean;
         if (isSubjective) {
-          const aiResult = aiResultsMap[idxStr];
-          if (aiResult && aiResult.score === 100) {
-            isCorrect = true;
+          if (q?.subParts) {
+            const parts = String(userAnswer).split(' / ');
+            isCorrect = q.subParts.every((sp, j) => {
+              const studentNorm = normalize(parts[j]?.trim() ?? '');
+              const candidates = [sp.answer, ...(sp.acceptedAnswers ?? [])];
+              return candidates.some((c) => normalize(c) === studentNorm);
+            });
           } else {
-            const studentNorm = normalize(String(userAnswer));
-            const candidates = [correctAnswer, ...(q?.acceptedAnswers ?? [])];
-            isCorrect = candidates.some((c) => normalize(c) === studentNorm);
+            const aiResult = aiResultsMap[idxStr];
+            if (aiResult && aiResult.score === 100) {
+              isCorrect = true;
+            } else {
+              const studentNorm = normalize(String(userAnswer));
+              const candidates = [correctAnswer, ...(q?.acceptedAnswers ?? [])];
+              isCorrect = candidates.some((c) => normalize(c) === studentNorm);
+            }
           }
         } else {
           isCorrect = matchMcqAnswer(String(userAnswer), correctAnswer, q?.options);

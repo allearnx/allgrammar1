@@ -112,9 +112,20 @@ async function regradeSheet(sheetId) {
 
       let isCorrect;
       if (isSubjective) {
-        const studentNorm = normalize(userAnswer);
-        const candidates = [correctAnswer, ...(questions[i]?.acceptedAnswers ?? [])];
-        isCorrect = candidates.some((c) => normalize(c) === studentNorm);
+        const q = questions[i];
+        if (q?.subParts) {
+          // subParts grading: each part must match independently
+          const parts = userAnswer.split(' / ');
+          isCorrect = q.subParts.every((sp, j) => {
+            const studentNorm = normalize(parts[j]?.trim() ?? '');
+            const candidates = [sp.answer, ...(sp.acceptedAnswers ?? [])];
+            return candidates.some((c) => normalize(c) === studentNorm);
+          });
+        } else {
+          const studentNorm = normalize(userAnswer);
+          const candidates = [correctAnswer, ...(q?.acceptedAnswers ?? [])];
+          isCorrect = candidates.some((c) => normalize(c) === studentNorm);
+        }
       } else {
         isCorrect = matchMcqAnswer(userAnswer, correctAnswer, questions[i]?.options);
         // acceptedAnswers 체크 (정답처리된 답도 정답으로 인정)
