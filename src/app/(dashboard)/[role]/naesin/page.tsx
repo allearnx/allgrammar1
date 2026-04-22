@@ -17,7 +17,7 @@ export default async function NaesinPage({ params, searchParams }: Props) {
     <>
       <Topbar user={user} title="내신 관리" />
       <div className="p-4 md:p-6">
-        <NaesinAdminClient textbooks={textbooks} initialTab={tab} />
+        <NaesinAdminClient textbooks={textbooks} initialTab={tab} canManageContent={user.role === 'boss' || !!user.can_manage_content} />
       </div>
     </>
   );

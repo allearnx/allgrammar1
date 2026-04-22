@@ -1,9 +1,8 @@
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
-import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { FileQuestion, Trash2 } from 'lucide-react';
+import { FileQuestion } from 'lucide-react';
 import { toast } from 'sonner';
 import { fetchWithToast } from '@/lib/fetch-with-toast';
 import { ConfirmDialog } from '@/components/shared/confirm-dialog';
@@ -14,9 +13,10 @@ import type { NaesinProblemSheet } from '@/types/naesin';
 interface TextbookExamSectionProps {
   textbookId: string;
   textbookName: string;
+  canManageContent?: boolean;
 }
 
-export function TextbookExamSection({ textbookId, textbookName }: TextbookExamSectionProps) {
+export function TextbookExamSection({ textbookId, textbookName, canManageContent = false }: TextbookExamSectionProps) {
   const [sheets, setSheets] = useState<NaesinProblemSheet[]>([]);
   const [deleteId, setDeleteId] = useState<string | null>(null);
 
@@ -46,42 +46,55 @@ export function TextbookExamSection({ textbookId, textbookName }: TextbookExamSe
             <Badge variant="secondary">{sheets.length}개</Badge>
           )}
         </div>
-        <AddMockExamDialog textbookId={textbookId} onAdd={loadSheets} />
+        {canManageContent && (
+          <AddMockExamDialog textbookId={textbookId} onAdd={loadSheets} />
+        )}
       </div>
 
       {sheets.length === 0 ? (
         <p className="text-center text-muted-foreground py-4 text-sm">
-          등록된 시험이 없습니다. 시험을 추가해주세요.
+          {canManageContent ? '등록된 시험이 없습니다. 시험을 추가해주세요.' : '등록된 시험이 없습니다.'}
         </p>
-      ) : (
+      ) : canManageContent ? (
         <UnitProblemList
           sheets={sheets}
           onUpdate={onUpdate}
           onRequestDelete={setDeleteId}
         />
+      ) : (
+        <div className="space-y-1 rounded-lg border p-3">
+          {sheets.map((s) => (
+            <div key={s.id} className="flex items-center justify-between py-1.5 px-2 rounded hover:bg-muted/50">
+              <span className="text-sm">{s.title}</span>
+              <Badge variant="outline" className="text-xs">{(s.questions as unknown[])?.length || s.answer_key?.length || 0}문제</Badge>
+            </div>
+          ))}
+        </div>
       )}
 
-      <ConfirmDialog
-        open={deleteId !== null}
-        onOpenChange={(open) => { if (!open) setDeleteId(null); }}
-        description="이 시험 시트를 삭제하시겠습니까? 관련된 학생 답안도 함께 삭제됩니다."
-        onConfirm={async () => {
-          const id = deleteId;
-          setDeleteId(null);
-          if (!id) return;
-          try {
-            await fetchWithToast('/api/naesin/problems', {
-              method: 'DELETE',
-              body: { id },
-              successMessage: '시험이 삭제되었습니다',
-              errorMessage: '시험 삭제 실패',
-            });
-            setSheets((prev) => prev.filter((s) => s.id !== id));
-          } catch {
-            // fetchWithToast handles toast
-          }
-        }}
-      />
+      {canManageContent && (
+        <ConfirmDialog
+          open={deleteId !== null}
+          onOpenChange={(open) => { if (!open) setDeleteId(null); }}
+          description="이 시험 시트를 삭제하시겠습니까? 관련된 학생 답안도 함께 삭제됩니다."
+          onConfirm={async () => {
+            const id = deleteId;
+            setDeleteId(null);
+            if (!id) return;
+            try {
+              await fetchWithToast('/api/naesin/problems', {
+                method: 'DELETE',
+                body: { id },
+                successMessage: '시험이 삭제되었습니다',
+                errorMessage: '시험 삭제 실패',
+              });
+              setSheets((prev) => prev.filter((s) => s.id !== id));
+            } catch {
+              // fetchWithToast handles toast
+            }
+          }}
+        />
+      )}
     </div>
   );
 }

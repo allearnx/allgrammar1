@@ -20,9 +20,10 @@ import { fetchWithToast } from '@/lib/fetch-with-toast';
 interface NaesinAdminClientProps {
   textbooks: NaesinTextbook[];
   initialTab?: string;
+  canManageContent?: boolean;
 }
 
-export function NaesinAdminClient({ textbooks: initialTextbooks, initialTab }: NaesinAdminClientProps) {
+export function NaesinAdminClient({ textbooks: initialTextbooks, initialTab, canManageContent = false }: NaesinAdminClientProps) {
   const [textbooks, setTextbooks] = useState(initialTextbooks);
   const [selectedTextbook, setSelectedTextbook] = useState<NaesinTextbook | null>(null);
   const [units, setUnits] = useState<NaesinUnit[]>([]);
@@ -170,6 +171,7 @@ export function NaesinAdminClient({ textbooks: initialTextbooks, initialTab }: N
               <TextbookExamSection
                 textbookId={selectedTextbook.id}
                 textbookName={selectedTextbook.display_name}
+                canManageContent={canManageContent}
               />
             </div>
           )}
