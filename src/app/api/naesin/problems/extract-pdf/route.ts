@@ -130,7 +130,7 @@ async function splitPdfIntoChunks(pdfBytes: ArrayBuffer, pagesPerChunk: number) 
 /** 단일 PDF 청크에 대해 Claude API 호출 */
 async function extractFromPdfChunk(base64Data: string, chunkLabel: string, prompt: string) {
   const message = await anthropic.messages.create({
-    model: 'claude-sonnet-4-6',
+    model: 'claude-haiku-4-5-20251001',
     max_tokens: 16384,
     messages: [
       {
@@ -154,7 +154,7 @@ async function extractFromPdfChunk(base64Data: string, chunkLabel: string, promp
 /** 이미지에 대해 Claude API 호출 */
 async function extractFromImage(base64Data: string, mediaType: string, label: string, prompt: string) {
   const message = await anthropic.messages.create({
-    model: 'claude-sonnet-4-6',
+    model: 'claude-haiku-4-5-20251001',
     max_tokens: 16384,
     messages: [
       {
