@@ -92,8 +92,8 @@ export function AddMockExamDialog({ unitId, textbookId, onAdd }: { unitId?: stri
       if (isPdf) hasPdf = true;
       totalSize += f.size;
     }
-    if (totalSize > 10 * 1024 * 1024) {
-      toast.error('전체 파일 크기는 10MB 이하만 가능합니다');
+    if (totalSize > 20 * 1024 * 1024) {
+      toast.error('전체 파일 크기는 20MB 이하만 가능합니다');
       if (fileInputRef.current) fileInputRef.current.value = '';
       return;
     }
@@ -291,7 +291,7 @@ export function AddMockExamDialog({ unitId, textbookId, onAdd }: { unitId?: stri
             <div className="border-2 border-dashed rounded-lg p-4 text-center space-y-2">
               <Upload className="h-6 w-6 mx-auto text-muted-foreground" />
               <p className="text-sm font-medium">AI 자동 추출</p>
-              <p className="text-xs text-muted-foreground">시험 PDF 또는 스크린샷을 업로드하면 AI가 문제와 정답을 자동으로 추출합니다 (10MB 이하)</p>
+              <p className="text-xs text-muted-foreground">시험 PDF 또는 스크린샷을 업로드하면 AI가 문제와 정답을 자동으로 추출합니다 (20MB 이하)</p>
               <input
                 ref={fileInputRef}
                 type="file"

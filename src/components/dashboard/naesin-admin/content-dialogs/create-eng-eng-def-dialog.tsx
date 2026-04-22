@@ -95,8 +95,8 @@ export function CreateEngEngDefDialog({ unitId, onAdd }: { unitId: string; onAdd
       }
       totalSize += f.size;
     }
-    if (totalSize > 10 * 1024 * 1024) {
-      toast.error('전체 파일 크기는 10MB 이하만 가능합니다');
+    if (totalSize > 20 * 1024 * 1024) {
+      toast.error('전체 파일 크기는 20MB 이하만 가능합니다');
       if (fileInputRef.current) fileInputRef.current.value = '';
       return;
     }

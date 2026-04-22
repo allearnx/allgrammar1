@@ -9,7 +9,7 @@ import { PDFDocument } from 'pdf-lib';
 
 export const maxDuration = 300;
 
-const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10MB
+const MAX_FILE_SIZE = 20 * 1024 * 1024; // 20MB
 const PAGES_PER_CHUNK = 3;
 const IMAGE_TYPES = new Set(['image/png', 'image/jpeg', 'image/jpg', 'image/webp', 'image/gif']);
 
