@@ -37,19 +37,21 @@ export const POST = createApiHandler(
     await requireContentPermission(user, supabase);
     const { unitId, textbookId, title, mode, questions, pdfUrl, answerKey, category, videoUrl } = body;
 
+    const insertData: Record<string, unknown> = {
+      unit_id: unitId || null,
+      textbook_id: textbookId || null,
+      title,
+      mode,
+      questions: questions || [],
+      pdf_url: pdfUrl || null,
+      answer_key: answerKey || [],
+      category: category || 'problem',
+    };
+    if (videoUrl) insertData.video_url = videoUrl;
+
     const data = dbResult(await supabase
       .from('naesin_problem_sheets')
-      .insert({
-        unit_id: unitId || null,
-        textbook_id: textbookId || null,
-        title,
-        mode,
-        questions: questions || [],
-        pdf_url: pdfUrl || null,
-        answer_key: answerKey || [],
-        category: category || 'problem',
-        video_url: videoUrl || null,
-      })
+      .insert(insertData)
       .select()
       .single());
     return NextResponse.json(data);
