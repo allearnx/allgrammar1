@@ -75,30 +75,36 @@ export function AddMockExamDialog({ unitId, textbookId, onAdd }: { unitId?: stri
     }, resetAll);
   }
 
-  // PDF/이미지 파일 선택 → 업로드 + AI 추출
+  // PDF/이미지 파일 선택 → 업로드 + AI 추출 (다중 파일 지원)
   async function handleFileExtract(e: React.ChangeEvent<HTMLInputElement>) {
-    const file = e.target.files?.[0];
-    if (!file) return;
-    const isPdf = file.type === 'application/pdf';
-    const isImage = file.type.startsWith('image/');
-    if (!isPdf && !isImage) {
-      toast.error('PDF 또는 이미지 파일만 업로드 가능합니다');
-      return;
+    const selectedFiles = e.target.files;
+    if (!selectedFiles || selectedFiles.length === 0) return;
+
+    let totalSize = 0;
+    let hasPdf = false;
+    for (const f of Array.from(selectedFiles)) {
+      const isPdf = f.type === 'application/pdf';
+      const isImage = f.type.startsWith('image/');
+      if (!isPdf && !isImage) {
+        toast.error('PDF 또는 이미지 파일만 업로드 가능합니다');
+        return;
+      }
+      if (isPdf) hasPdf = true;
+      totalSize += f.size;
     }
-    if (file.size > 10 * 1024 * 1024) {
-      toast.error('파일은 10MB 이하만 가능합니다', {
-        description: '파일 크기를 줄이거나 나눠서 업로드해주세요.',
-      });
+    if (totalSize > 10 * 1024 * 1024) {
+      toast.error('전체 파일 크기는 10MB 이하만 가능합니다');
       if (fileInputRef.current) fileInputRef.current.value = '';
       return;
     }
     setStep('loading');
 
     try {
-      // 1) PDF인 경우 Supabase Storage에 업로드
-      if (isPdf) {
+      // 1) PDF인 경우 첫 번째 PDF를 Supabase Storage에 업로드
+      if (hasPdf) {
+        const pdfFile = Array.from(selectedFiles).find((f) => f.type === 'application/pdf')!;
         const uploadForm = new FormData();
-        uploadForm.append('file', file);
+        uploadForm.append('file', pdfFile);
         const { url } = await fetchWithToast<{ url: string }>('/api/naesin/passages/upload-pdf', {
           body: uploadForm,
           errorMessage: 'PDF 업로드 실패',
@@ -106,16 +112,18 @@ export function AddMockExamDialog({ unitId, textbookId, onAdd }: { unitId?: stri
         setPdfUrl(url);
       }
 
-      // 2) AI 추출 (PDF든 이미지든 같은 API)
+      // 2) AI 추출 (모든 파일을 한 번에 전송)
       const extractForm = new FormData();
-      extractForm.append('file', file);
+      for (const f of Array.from(selectedFiles)) {
+        extractForm.append('file', f);
+      }
       const { questions } = await fetchWithToast<{ questions: ExtractedQuestion[] }>(
         '/api/naesin/problems/extract-pdf',
         { body: extractForm, errorMessage: 'AI 문제 추출 실패' },
       );
 
       setExtractedQuestions(questions);
-      if (!title) setTitle(isPdf ? 'PDF 추출 예상문제' : '이미지 추출 예상문제');
+      if (!title) setTitle(hasPdf ? 'PDF 추출 예상문제' : '이미지 추출 예상문제');
       setMode('interactive');
       setStep('preview');
     } catch {
@@ -288,6 +296,7 @@ export function AddMockExamDialog({ unitId, textbookId, onAdd }: { unitId?: stri
                 ref={fileInputRef}
                 type="file"
                 accept=".pdf,.png,.jpg,.jpeg,.webp"
+                multiple
                 onChange={handleFileExtract}
                 className="hidden"
               />

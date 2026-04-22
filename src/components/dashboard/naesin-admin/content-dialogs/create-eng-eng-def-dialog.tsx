@@ -80,18 +80,23 @@ export function CreateEngEngDefDialog({ unitId, onAdd }: { unitId: string; onAdd
     }
   }
 
-  // PDF/이미지 업로드 → AI 추출
+  // PDF/이미지 업로드 → AI 추출 (다중 파일 지원)
   async function handleFileExtract(e: React.ChangeEvent<HTMLInputElement>) {
-    const file = e.target.files?.[0];
-    if (!file) return;
-    const isPdf = file.type === 'application/pdf';
-    const isImage = file.type.startsWith('image/');
-    if (!isPdf && !isImage) {
-      toast.error('PDF 또는 이미지 파일만 업로드 가능합니다');
-      return;
+    const selectedFiles = e.target.files;
+    if (!selectedFiles || selectedFiles.length === 0) return;
+
+    let totalSize = 0;
+    for (const f of Array.from(selectedFiles)) {
+      const isPdf = f.type === 'application/pdf';
+      const isImage = f.type.startsWith('image/');
+      if (!isPdf && !isImage) {
+        toast.error('PDF 또는 이미지 파일만 업로드 가능합니다');
+        return;
+      }
+      totalSize += f.size;
     }
-    if (file.size > 10 * 1024 * 1024) {
-      toast.error('파일은 10MB 이하만 가능합니다');
+    if (totalSize > 10 * 1024 * 1024) {
+      toast.error('전체 파일 크기는 10MB 이하만 가능합니다');
       if (fileInputRef.current) fileInputRef.current.value = '';
       return;
     }
@@ -99,7 +104,9 @@ export function CreateEngEngDefDialog({ unitId, onAdd }: { unitId: string; onAdd
 
     try {
       const extractForm = new FormData();
-      extractForm.append('file', file);
+      for (const f of Array.from(selectedFiles)) {
+        extractForm.append('file', f);
+      }
       extractForm.append('extractType', 'eng_eng_def');
       const { questions: extracted } = await fetchWithToast<{ questions: NaesinProblemQuestion[] }>(
         '/api/naesin/problems/extract-pdf',
@@ -178,6 +185,7 @@ export function CreateEngEngDefDialog({ unitId, onAdd }: { unitId: string; onAdd
                 ref={fileInputRef}
                 type="file"
                 accept=".pdf,.png,.jpg,.jpeg,.webp"
+                multiple
                 onChange={handleFileExtract}
                 className="hidden"
               />
