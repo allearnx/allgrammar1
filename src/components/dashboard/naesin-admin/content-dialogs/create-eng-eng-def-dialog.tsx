@@ -80,12 +80,11 @@ export function CreateEngEngDefDialog({ unitId, onAdd }: { unitId: string; onAdd
     }
   }
 
-  // PDF/이미지 업로드 → AI 추출 (다중 파일 지원)
+  // PDF/이미지 업로드 → AI 추출 (다중 파일: 각각 전송 후 합침)
   async function handleFileExtract(e: React.ChangeEvent<HTMLInputElement>) {
     const selectedFiles = e.target.files;
     if (!selectedFiles || selectedFiles.length === 0) return;
 
-    let totalSize = 0;
     for (const f of Array.from(selectedFiles)) {
       const isPdf = f.type === 'application/pdf';
       const isImage = f.type.startsWith('image/');
@@ -93,25 +92,31 @@ export function CreateEngEngDefDialog({ unitId, onAdd }: { unitId: string; onAdd
         toast.error('PDF 또는 이미지 파일만 업로드 가능합니다');
         return;
       }
-      totalSize += f.size;
-    }
-    if (totalSize > 20 * 1024 * 1024) {
-      toast.error('전체 파일 크기는 20MB 이하만 가능합니다');
-      if (fileInputRef.current) fileInputRef.current.value = '';
-      return;
     }
     setStep('loading');
 
     try {
-      const extractForm = new FormData();
-      for (const f of Array.from(selectedFiles)) {
-        extractForm.append('file', f);
-      }
-      extractForm.append('extractType', 'eng_eng_def');
-      const { questions: extracted } = await fetchWithToast<{ questions: NaesinProblemQuestion[] }>(
-        '/api/naesin/problems/extract-pdf',
-        { body: extractForm, errorMessage: 'AI 영영풀이 추출 실패' },
+      // 각 파일을 개별 전송 → 결과 합침
+      const results = await Promise.all(
+        Array.from(selectedFiles).map(async (f) => {
+          const form = new FormData();
+          form.append('file', f);
+          form.append('extractType', 'eng_eng_def');
+          const { questions } = await fetchWithToast<{ questions: NaesinProblemQuestion[] }>(
+            '/api/naesin/problems/extract-pdf',
+            { body: form, silent: true },
+          );
+          return questions;
+        }),
       );
+      const extracted = results.flat();
+
+      if (extracted.length === 0) {
+        toast.error('문제를 추출하지 못했습니다. 파일을 확인해주세요.');
+        setStep('input');
+        if (fileInputRef.current) fileInputRef.current.value = '';
+        return;
+      }
 
       setQuestions(extracted.map((q, i) => ({ ...q, number: i + 1 })));
       if (!title) setTitle('영영풀이 (파일 추출)');

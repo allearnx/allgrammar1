@@ -192,63 +192,53 @@ export async function POST(request: NextRequest) {
 
   try {
     const formData = await request.formData();
+    const file = formData.get('file') as File | null;
     const extractType = formData.get('extractType') as string | null;
     const prompt = getPromptForType(extractType);
+    const isPdf = file?.type === 'application/pdf';
+    const isImage = file ? IMAGE_TYPES.has(file.type) : false;
 
-    // 다중 파일 지원: 'file' 키로 여러 파일 전송 가능
-    const files = formData.getAll('file') as File[];
-    if (files.length === 0) {
+    if (!file || (!isPdf && !isImage)) {
       return NextResponse.json({ error: 'PDF 또는 이미지 파일(PNG, JPG)을 업로드해주세요.' }, { status: 400 });
     }
 
-    // 파일 유효성 검사
-    let totalSize = 0;
-    for (const f of files) {
-      const isPdf = f.type === 'application/pdf';
-      const isImg = IMAGE_TYPES.has(f.type);
-      if (!isPdf && !isImg) {
-        return NextResponse.json({ error: `지원하지 않는 파일 형식입니다: ${f.name}` }, { status: 400 });
-      }
-      totalSize += f.size;
-    }
-    if (totalSize > MAX_FILE_SIZE) {
+    if (file.size > MAX_FILE_SIZE) {
       return NextResponse.json(
-        { error: `전체 파일 크기가 너무 큽니다 (${(totalSize / 1024 / 1024).toFixed(1)}MB). 합계 10MB 이하만 가능합니다.` },
+        { error: `파일이 너무 큽니다 (${(file.size / 1024 / 1024).toFixed(1)}MB). 20MB 이하만 가능합니다.` },
         { status: 400 },
       );
     }
 
+    const arrayBuffer = await file.arrayBuffer();
+
     logger.info('ai.extract.start', {
       userId: user.id,
-      fileCount: files.length,
-      fileTypes: files.map((f) => f.type).join(', '),
-      totalSize,
+      fileType: file.type,
+      fileSize: arrayBuffer.byteLength,
     });
 
     let allQuestions: Record<string, unknown>[];
 
     try {
-      // 모든 파일을 병렬로 처리
-      const fileResults = await Promise.all(
-        files.map(async (file) => {
-          const arrayBuffer = await file.arrayBuffer();
-          if (IMAGE_TYPES.has(file.type)) {
-            const base64 = Buffer.from(arrayBuffer).toString('base64');
-            return extractFromImage(base64, file.type, file.name, prompt);
-          } else {
-            // PDF
-            const chunks = await splitPdfIntoChunks(arrayBuffer, PAGES_PER_CHUNK);
-            if (chunks.length === 1) {
-              return extractFromPdfChunk(chunks[0].base64, chunks[0].pages, prompt);
-            }
-            const results = await Promise.all(
-              chunks.map((chunk) => extractFromPdfChunk(chunk.base64, chunk.pages, prompt)),
-            );
-            return results.flat();
-          }
-        }),
-      );
-      allQuestions = fileResults.flat() as Record<string, unknown>[];
+      if (isImage) {
+        const base64 = Buffer.from(arrayBuffer).toString('base64');
+        allQuestions = await extractFromImage(base64, file.type, file.name, prompt) as Record<string, unknown>[];
+      } else {
+        const chunks = await splitPdfIntoChunks(arrayBuffer, PAGES_PER_CHUNK);
+        logger.info('ai.pdf_extract.chunks', {
+          totalChunks: chunks.length,
+          pages: chunks.map((c) => c.pages).join(', '),
+        });
+
+        if (chunks.length === 1) {
+          allQuestions = await extractFromPdfChunk(chunks[0].base64, chunks[0].pages, prompt) as Record<string, unknown>[];
+        } else {
+          const results = await Promise.all(
+            chunks.map((chunk) => extractFromPdfChunk(chunk.base64, chunk.pages, prompt)),
+          );
+          allQuestions = results.flat() as Record<string, unknown>[];
+        }
+      }
     } catch (apiError) {
       const apiMsg = apiError instanceof Error ? apiError.message : String(apiError);
       const apiStatus = (apiError as { status?: number })?.status;
@@ -258,8 +248,8 @@ export async function POST(request: NextRequest) {
         ts: new Date().toISOString(),
         error: apiMsg,
         status: apiStatus,
-        totalSize,
-        fileCount: files.length,
+        fileSize: arrayBuffer.byteLength,
+        fileType: file.type,
       }));
 
       if (apiMsg.includes('too large') || apiMsg.includes('token') || apiMsg.includes('size')) {
@@ -292,7 +282,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    logger.info('ai.extract.done', { count: questions.length, fileCount: files.length });
+    logger.info('ai.extract.done', { count: questions.length, fileType: file.type });
     return NextResponse.json({ questions });
   } catch (error) {
     const msg = error instanceof Error ? error.message : String(error);

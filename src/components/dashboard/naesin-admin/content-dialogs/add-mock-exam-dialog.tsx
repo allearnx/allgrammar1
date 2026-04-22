@@ -75,12 +75,11 @@ export function AddMockExamDialog({ unitId, textbookId, onAdd }: { unitId?: stri
     }, resetAll);
   }
 
-  // PDF/이미지 파일 선택 → 업로드 + AI 추출 (다중 파일 지원)
+  // PDF/이미지 파일 선택 → 업로드 + AI 추출 (다중 파일: 각각 전송 후 합침)
   async function handleFileExtract(e: React.ChangeEvent<HTMLInputElement>) {
     const selectedFiles = e.target.files;
     if (!selectedFiles || selectedFiles.length === 0) return;
 
-    let totalSize = 0;
     let hasPdf = false;
     for (const f of Array.from(selectedFiles)) {
       const isPdf = f.type === 'application/pdf';
@@ -90,12 +89,6 @@ export function AddMockExamDialog({ unitId, textbookId, onAdd }: { unitId?: stri
         return;
       }
       if (isPdf) hasPdf = true;
-      totalSize += f.size;
-    }
-    if (totalSize > 20 * 1024 * 1024) {
-      toast.error('전체 파일 크기는 20MB 이하만 가능합니다');
-      if (fileInputRef.current) fileInputRef.current.value = '';
-      return;
     }
     setStep('loading');
 
@@ -112,17 +105,29 @@ export function AddMockExamDialog({ unitId, textbookId, onAdd }: { unitId?: stri
         setPdfUrl(url);
       }
 
-      // 2) AI 추출 (모든 파일을 한 번에 전송)
-      const extractForm = new FormData();
-      for (const f of Array.from(selectedFiles)) {
-        extractForm.append('file', f);
-      }
-      const { questions } = await fetchWithToast<{ questions: ExtractedQuestion[] }>(
-        '/api/naesin/problems/extract-pdf',
-        { body: extractForm, errorMessage: 'AI 문제 추출 실패' },
+      // 2) 각 파일을 개별 전송 → 결과 합침
+      const allQuestions: ExtractedQuestion[] = [];
+      const results = await Promise.all(
+        Array.from(selectedFiles).map(async (f) => {
+          const form = new FormData();
+          form.append('file', f);
+          const { questions } = await fetchWithToast<{ questions: ExtractedQuestion[] }>(
+            '/api/naesin/problems/extract-pdf',
+            { body: form, silent: true },
+          );
+          return questions;
+        }),
       );
+      for (const qs of results) allQuestions.push(...qs);
 
-      setExtractedQuestions(questions);
+      if (allQuestions.length === 0) {
+        toast.error('문제를 추출하지 못했습니다. 파일을 확인해주세요.');
+        setStep('form');
+        if (fileInputRef.current) fileInputRef.current.value = '';
+        return;
+      }
+
+      setExtractedQuestions(allQuestions);
       if (!title) setTitle(hasPdf ? 'PDF 추출 예상문제' : '이미지 추출 예상문제');
       setMode('interactive');
       setStep('preview');
