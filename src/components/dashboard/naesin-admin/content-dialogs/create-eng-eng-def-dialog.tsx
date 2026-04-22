@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -13,9 +13,10 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
-import { BookA, Loader2, Sparkles, Trash2 } from 'lucide-react';
+import { BookA, Loader2, Sparkles, Trash2, Upload, RotateCcw } from 'lucide-react';
 import { fetchWithToast } from '@/lib/fetch-with-toast';
 import { useFormDialog } from '@/hooks/use-form-dialog';
+import { toast } from 'sonner';
 import type { NaesinProblemQuestion } from '@/types/naesin';
 
 interface WordEntry {
@@ -40,6 +41,7 @@ export function CreateEngEngDefDialog({ unitId, onAdd }: { unitId: string; onAdd
   const [writingCount, setWritingCount] = useState(5);
   const [contextCount, setContextCount] = useState(5);
   const [questions, setQuestions] = useState<NaesinProblemQuestion[]>([]);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   function parseWords(): WordEntry[] {
     return wordsText
@@ -57,6 +59,7 @@ export function CreateEngEngDefDialog({ unitId, onAdd }: { unitId: string; onAdd
       .filter((w) => w.english && w.korean);
   }
 
+  // 단어 입력 → AI 생성
   async function handleGenerate() {
     const words = parseWords();
     if (words.length === 0) return;
@@ -77,7 +80,46 @@ export function CreateEngEngDefDialog({ unitId, onAdd }: { unitId: string; onAdd
     }
   }
 
+  // PDF/이미지 업로드 → AI 추출
+  async function handleFileExtract(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    const isPdf = file.type === 'application/pdf';
+    const isImage = file.type.startsWith('image/');
+    if (!isPdf && !isImage) {
+      toast.error('PDF 또는 이미지 파일만 업로드 가능합니다');
+      return;
+    }
+    if (file.size > 10 * 1024 * 1024) {
+      toast.error('파일은 10MB 이하만 가능합니다');
+      if (fileInputRef.current) fileInputRef.current.value = '';
+      return;
+    }
+    setStep('loading');
+
+    try {
+      const extractForm = new FormData();
+      extractForm.append('file', file);
+      extractForm.append('extractType', 'eng_eng_def');
+      const { questions: extracted } = await fetchWithToast<{ questions: NaesinProblemQuestion[] }>(
+        '/api/naesin/problems/extract-pdf',
+        { body: extractForm, errorMessage: 'AI 영영풀이 추출 실패' },
+      );
+
+      setQuestions(extracted.map((q, i) => ({ ...q, number: i + 1 })));
+      if (!title) setTitle('영영풀이 (파일 추출)');
+      setStep('preview');
+    } catch {
+      setStep('input');
+      if (fileInputRef.current) fileInputRef.current.value = '';
+    }
+  }
+
   async function handleSave() {
+    if (!title.trim()) {
+      toast.error('제목을 입력해주세요');
+      return;
+    }
     const answerKey = questions.map((q) => q.answer);
 
     await handleSubmit(async () => {
@@ -103,6 +145,7 @@ export function CreateEngEngDefDialog({ unitId, onAdd }: { unitId: string; onAdd
     setWritingCount(5);
     setContextCount(5);
     setQuestions([]);
+    if (fileInputRef.current) fileInputRef.current.value = '';
   }
 
   function handleRemoveQuestion(idx: number) {
@@ -110,6 +153,8 @@ export function CreateEngEngDefDialog({ unitId, onAdd }: { unitId: string; onAdd
   }
 
   const words = parseWords();
+  const previewMcq = questions.filter((q) => q.options && q.options.length > 0).length;
+  const previewSubjective = questions.length - previewMcq;
 
   return (
     <Dialog open={open} onOpenChange={(v) => { setOpen(v); if (!v) resetForm(); }}>
@@ -119,11 +164,35 @@ export function CreateEngEngDefDialog({ unitId, onAdd }: { unitId: string; onAdd
           영영풀이 추가
         </Button>
       </DialogTrigger>
-      <DialogContent className="max-w-2xl max-h-[85vh] overflow-y-auto">
+      <DialogContent className={`max-h-[85vh] overflow-y-auto ${step === 'preview' ? 'max-w-2xl' : 'max-w-lg'}`}>
         <DialogHeader><DialogTitle>영영풀이 시트 생성</DialogTitle></DialogHeader>
 
         {step === 'input' && (
           <div className="space-y-4">
+            {/* PDF/이미지 자동 추출 */}
+            <div className="border-2 border-dashed rounded-lg p-4 text-center space-y-2">
+              <Upload className="h-6 w-6 mx-auto text-muted-foreground" />
+              <p className="text-sm font-medium">파일에서 자동 추출</p>
+              <p className="text-xs text-muted-foreground">영영풀이 시험지 PDF/스크린샷을 올리면 AI가 문제를 자동 추출합니다</p>
+              <input
+                ref={fileInputRef}
+                type="file"
+                accept=".pdf,.png,.jpg,.jpeg,.webp"
+                onChange={handleFileExtract}
+                className="hidden"
+              />
+              <Button type="button" variant="outline" size="sm" onClick={() => fileInputRef.current?.click()}>
+                파일 선택 (PDF / 이미지)
+              </Button>
+            </div>
+
+            <div className="relative flex items-center py-1">
+              <div className="flex-1 border-t" />
+              <span className="px-2 text-xs text-muted-foreground">또는 단어로 생성</span>
+              <div className="flex-1 border-t" />
+            </div>
+
+            {/* 기존 단어 입력 생성 */}
             <p className="text-sm text-muted-foreground">
               단어 목록을 입력하면 AI가 영영 풀이 문제를 자동 생성합니다.
             </p>
@@ -214,18 +283,22 @@ export function CreateEngEngDefDialog({ unitId, onAdd }: { unitId: string; onAdd
         {step === 'loading' && (
           <div className="flex flex-col items-center py-12 space-y-4">
             <Loader2 className="h-8 w-8 animate-spin text-primary" />
-            <p className="text-muted-foreground">AI가 영영 풀이 문제를 생성하고 있습니다...</p>
+            <p className="text-muted-foreground">AI가 영영 풀이 문제를 처리하고 있습니다...</p>
             <p className="text-xs text-muted-foreground">최대 2분 소요</p>
           </div>
         )}
 
         {step === 'preview' && (
           <div className="space-y-4">
-            <div className="flex items-center gap-2">
+            <div>
+              <Label htmlFor="preview-eed-title">제목</Label>
+              <Input id="preview-eed-title" value={title} onChange={(e) => setTitle(e.target.value)} placeholder="영영풀이 제목" />
+            </div>
+
+            <div className="flex items-center gap-2 flex-wrap">
               <Badge variant="secondary">총 {questions.length}문제</Badge>
-              <Button size="sm" variant="ghost" onClick={() => setStep('input')}>
-                다시 생성
-              </Button>
+              {previewMcq > 0 && <Badge variant="outline">객관식 {previewMcq}</Badge>}
+              {previewSubjective > 0 && <Badge variant="outline">서술형 {previewSubjective}</Badge>}
             </div>
 
             <div className="rounded-lg border overflow-hidden max-h-[50vh] overflow-y-auto">
@@ -246,7 +319,7 @@ export function CreateEngEngDefDialog({ unitId, onAdd }: { unitId: string; onAdd
                       <td className="p-2 whitespace-pre-line text-xs">{q.question}</td>
                       <td className="p-2">
                         <Badge variant="outline" className="text-xs">
-                          {q.options ? '객관식' : '서술형'}
+                          {q.options && q.options.length > 0 ? '객관식' : '서술형'}
                         </Badge>
                       </td>
                       <td className="p-2 text-xs font-mono">{String(q.answer)}</td>
@@ -266,9 +339,19 @@ export function CreateEngEngDefDialog({ unitId, onAdd }: { unitId: string; onAdd
               </table>
             </div>
 
-            <Button className="w-full" onClick={handleSave} disabled={saving || questions.length === 0}>
-              {saving ? '저장 중...' : `${questions.length}문제 영영풀이 시트 저장`}
-            </Button>
+            <div className="flex gap-2">
+              <Button className="flex-1" onClick={handleSave} disabled={saving || questions.length === 0}>
+                {saving ? '저장 중...' : `${questions.length}문제 영영풀이 시트 저장`}
+              </Button>
+              <Button
+                type="button"
+                variant="outline"
+                onClick={() => { setStep('input'); setQuestions([]); if (fileInputRef.current) fileInputRef.current.value = ''; }}
+              >
+                <RotateCcw className="h-3.5 w-3.5 mr-1" />
+                다시
+              </Button>
+            </div>
           </div>
         )}
       </DialogContent>

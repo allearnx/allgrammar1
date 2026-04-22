@@ -15,7 +15,7 @@ const IMAGE_TYPES = new Set(['image/png', 'image/jpeg', 'image/jpg', 'image/webp
 
 const anthropic = new Anthropic();
 
-const EXTRACT_PROMPT = `이 이미지/문서는 중학교 영어 시험 문제지입니다.
+const EXTRACT_PROMPT_DEFAULT = `이 이미지/문서는 중학교 영어 시험 문제지입니다.
 문제, 보기, 정답, 해설을 추출해주세요.
 
 규칙:
@@ -39,6 +39,68 @@ JSON 배열 형식:
     "explanation": "해설"
   }
 ]`;
+
+const EXTRACT_PROMPT_ENG_ENG_DEF = `이 이미지/문서는 중학교 영어 영영풀이(English-English definition) 문제지입니다.
+문제를 추출하되, 아래 3가지 유형을 정확히 구분해서 추출하세요.
+
+## 유형별 추출 규칙
+
+### 1. 객관식 (MCQ) — 영영 뜻을 보고 단어를 고르는 문제
+- options: 4~5개 영어 단어 배열
+- answer: 정답 번호 (문자열 "1"~"5")
+- 예: "다음 영영 뜻에 해당하는 단어로 알맞은 것은?"
+
+### 2. 서술형 (Writing) — 영영 뜻을 보고 단어를 직접 쓰는 문제
+- options: null (반드시 null)
+- answer: 정답 단어 (소문자)
+- acceptedAnswers: 대소문자 변형, 관사 포함 등 허용 답안 배열
+- 예: "다음 영영 뜻에 해당하는 단어를 쓰시오."
+
+### 3. 문맥 빈칸 (Context) — 문장 속 빈칸에 영영 뜻 힌트가 있는 문제
+- options: null (반드시 null)
+- answer: 정답 단어 (소문자)
+- acceptedAnswers: 대소문자/복수형 변형 배열
+- 문장에서 빈칸(___)과 괄호 안 영영 뜻이 함께 제시됨
+- 예: "The ___ was very impressive. (= the act of performing)"
+
+## 공통 규칙
+- 문제 번호(number)는 원본에 적힌 원래 번호를 그대로 사용
+- explanation: 한국어로 간결한 해설 (영영 뜻 해석 + 정답 설명)
+- 해설이 없으면 explanation은 빈 문자열
+- 객관식이 아닌 문제(서술형/문맥빈칸)는 반드시 options를 null로 설정
+- 반드시 JSON 배열로만 응답하세요. 앞뒤에 설명이나 마크다운 코드펜스 없이 순수 JSON만 출력
+
+JSON 배열 형식:
+[
+  {
+    "number": 1,
+    "question": "다음 영영 뜻에 해당하는 단어로 알맞은 것은?\\n\\"to make something better\\"",
+    "options": ["improve", "remove", "approve", "provide", "involve"],
+    "answer": "1",
+    "explanation": "improve: 개선하다. 'to make something better'에 해당합니다."
+  },
+  {
+    "number": 2,
+    "question": "다음 영영 뜻에 해당하는 단어를 쓰시오.\\n\\"a person who teaches\\"",
+    "options": null,
+    "answer": "teacher",
+    "explanation": "'가르치는 사람'이라는 뜻으로 teacher가 정답입니다.",
+    "acceptedAnswers": ["Teacher"]
+  },
+  {
+    "number": 3,
+    "question": "다음 빈칸에 알맞은 단어를 쓰시오.\\nThe ___ was very impressive. (= the act of performing in front of an audience)",
+    "options": null,
+    "answer": "performance",
+    "explanation": "'관객 앞에서 하는 행위'라는 뜻으로 performance가 정답입니다.",
+    "acceptedAnswers": ["Performance"]
+  }
+]`;
+
+function getPromptForType(extractType: string | null): string {
+  if (extractType === 'eng_eng_def') return EXTRACT_PROMPT_ENG_ENG_DEF;
+  return EXTRACT_PROMPT_DEFAULT;
+}
 
 /** PDF를 N페이지씩 청크로 분할하여 각각의 base64 반환 */
 async function splitPdfIntoChunks(pdfBytes: ArrayBuffer, pagesPerChunk: number) {
@@ -66,7 +128,7 @@ async function splitPdfIntoChunks(pdfBytes: ArrayBuffer, pagesPerChunk: number) 
 }
 
 /** 단일 PDF 청크에 대해 Claude API 호출 */
-async function extractFromPdfChunk(base64Data: string, chunkLabel: string) {
+async function extractFromPdfChunk(base64Data: string, chunkLabel: string, prompt: string) {
   const message = await anthropic.messages.create({
     model: 'claude-sonnet-4-6',
     max_tokens: 16384,
@@ -78,7 +140,7 @@ async function extractFromPdfChunk(base64Data: string, chunkLabel: string) {
             type: 'document',
             source: { type: 'base64', media_type: 'application/pdf', data: base64Data },
           },
-          { type: 'text', text: EXTRACT_PROMPT },
+          { type: 'text', text: prompt },
         ],
       },
     ],
@@ -90,7 +152,7 @@ async function extractFromPdfChunk(base64Data: string, chunkLabel: string) {
 }
 
 /** 이미지에 대해 Claude API 호출 */
-async function extractFromImage(base64Data: string, mediaType: string, label: string) {
+async function extractFromImage(base64Data: string, mediaType: string, label: string, prompt: string) {
   const message = await anthropic.messages.create({
     model: 'claude-sonnet-4-6',
     max_tokens: 16384,
@@ -102,7 +164,7 @@ async function extractFromImage(base64Data: string, mediaType: string, label: st
             type: 'image',
             source: { type: 'base64', media_type: mediaType as 'image/png' | 'image/jpeg' | 'image/webp' | 'image/gif', data: base64Data },
           },
-          { type: 'text', text: EXTRACT_PROMPT },
+          { type: 'text', text: prompt },
         ],
       },
     ],
@@ -131,6 +193,8 @@ export async function POST(request: NextRequest) {
   try {
     const formData = await request.formData();
     const file = formData.get('file') as File | null;
+    const extractType = formData.get('extractType') as string | null;
+    const prompt = getPromptForType(extractType);
     const isPdf = file?.type === 'application/pdf';
     const isImage = file ? IMAGE_TYPES.has(file.type) : false;
 
@@ -159,7 +223,7 @@ export async function POST(request: NextRequest) {
       if (isImage) {
         // 이미지: 단일 호출
         const base64 = Buffer.from(arrayBuffer).toString('base64');
-        allQuestions = await extractFromImage(base64, file.type, file.name) as Record<string, unknown>[];
+        allQuestions = await extractFromImage(base64, file.type, file.name, prompt) as Record<string, unknown>[];
       } else {
         // PDF: 청크 분할 후 병렬 호출
         const chunks = await splitPdfIntoChunks(arrayBuffer, PAGES_PER_CHUNK);
@@ -169,10 +233,10 @@ export async function POST(request: NextRequest) {
         });
 
         if (chunks.length === 1) {
-          allQuestions = await extractFromPdfChunk(chunks[0].base64, chunks[0].pages) as Record<string, unknown>[];
+          allQuestions = await extractFromPdfChunk(chunks[0].base64, chunks[0].pages, prompt) as Record<string, unknown>[];
         } else {
           const results = await Promise.all(
-            chunks.map((chunk) => extractFromPdfChunk(chunk.base64, chunk.pages)),
+            chunks.map((chunk) => extractFromPdfChunk(chunk.base64, chunk.pages, prompt)),
           );
           allQuestions = results.flat() as Record<string, unknown>[];
         }
