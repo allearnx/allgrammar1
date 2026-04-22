@@ -51,9 +51,32 @@ function toTextbookPassage(sheet: NaesinProblemSheet): TextbookPassage {
   };
 }
 
+const DRAFT_KEY = (id: string) => `ext_passage_draft_${id}`;
+
+function loadDraft(sheetId: string): { fillBlanks?: number; ordering?: number } {
+  try {
+    const raw = localStorage.getItem(DRAFT_KEY(sheetId));
+    return raw ? JSON.parse(raw) : {};
+  } catch { return {}; }
+}
+
+function saveDraft(sheetId: string, data: { fillBlanks?: number | null; ordering?: number | null }) {
+  try {
+    const prev = loadDraft(sheetId);
+    if (data.fillBlanks != null) prev.fillBlanks = data.fillBlanks;
+    if (data.ordering != null) prev.ordering = data.ordering;
+    localStorage.setItem(DRAFT_KEY(sheetId), JSON.stringify(prev));
+  } catch { /* ignore */ }
+}
+
+function clearDraft(sheetId: string) {
+  try { localStorage.removeItem(DRAFT_KEY(sheetId)); } catch { /* ignore */ }
+}
+
 export function ExternalPassageView({ sheet, unitId, onComplete }: ExternalPassageViewProps) {
-  const [fillBlanksScore, setFillBlanksScore] = useState<number | null>(null);
-  const [orderingScore, setOrderingScore] = useState<number | null>(null);
+  const draft = useMemo(() => loadDraft(sheet.id), [sheet.id]);
+  const [fillBlanksScore, setFillBlanksScore] = useState<number | null>(draft.fillBlanks ?? null);
+  const [orderingScore, setOrderingScore] = useState<number | null>(draft.ordering ?? null);
   const [translationScore, setTranslationScore] = useState<number | null>(null);
   const [translationWrongs, setTranslationWrongs] = useState<WrongTranslation[]>([]);
   const [submitting, setSubmitting] = useState(false);
@@ -63,11 +86,13 @@ export function ExternalPassageView({ sheet, unitId, onComplete }: ExternalPassa
 
   const handleFillBlanksComplete = useCallback((score: number) => {
     setFillBlanksScore(score);
-  }, []);
+    saveDraft(sheet.id, { fillBlanks: score });
+  }, [sheet.id]);
 
   const handleOrderingComplete = useCallback((score: number) => {
     setOrderingScore(score);
-  }, []);
+    saveDraft(sheet.id, { ordering: score });
+  }, [sheet.id]);
 
   const handleTranslationComplete = useCallback((score: number, wrongs: WrongTranslation[]) => {
     setTranslationScore(score);
@@ -101,6 +126,7 @@ export function ExternalPassageView({ sheet, unitId, onComplete }: ExternalPassa
         },
         silent: true,
       });
+      clearDraft(sheet.id);
       setSubmitted(true);
       onComplete?.();
     } catch {
