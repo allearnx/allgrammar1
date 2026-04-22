@@ -186,14 +186,22 @@ export async function POST(request: NextRequest) {
     const msg = error instanceof Error ? error.message : String(error);
     logger.error('ai.pdf_extract', { error: msg });
 
+    console.log(JSON.stringify({
+      level: 'error',
+      msg: 'ai.pdf_extract.outer_catch',
+      ts: new Date().toISOString(),
+      error: msg,
+      stack: error instanceof Error ? error.stack?.slice(0, 300) : undefined,
+    }));
+
     if (msg.includes('JSON')) {
       return NextResponse.json(
-        { error: 'AI가 문제를 추출했지만 형식 변환에 실패했습니다. PDF를 다시 업로드해주세요.' },
+        { error: `AI가 문제를 추출했지만 형식 변환에 실패했습니다. (${msg.slice(0, 100)})` },
         { status: 500 },
       );
     }
     return NextResponse.json(
-      { error: 'PDF 문제 추출 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요.' },
+      { error: `PDF 문제 추출 중 오류가 발생했습니다. (${msg.slice(0, 120)})` },
       { status: 500 },
     );
   }
