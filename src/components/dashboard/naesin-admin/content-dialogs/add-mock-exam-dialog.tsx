@@ -125,12 +125,13 @@ export function AddMockExamDialog({ unitId, textbookId, onAdd }: { unitId?: stri
     setStep('preview');
   }
 
-  // PDF/이미지 파일 선택 → 업로드 + AI 추출 (다중 파일: 각각 전송 후 합침)
+  // PDF/이미지 파일 선택 → 업로드 + AI 추출
   async function handleFileExtract(e: React.ChangeEvent<HTMLInputElement>) {
     const selectedFiles = e.target.files;
     if (!selectedFiles || selectedFiles.length === 0) return;
 
     let hasPdf = false;
+    const imageFiles: File[] = [];
     for (const f of Array.from(selectedFiles)) {
       const isPdf = f.type === 'application/pdf';
       const isImage = f.type.startsWith('image/');
@@ -139,6 +140,7 @@ export function AddMockExamDialog({ unitId, textbookId, onAdd }: { unitId?: stri
         return;
       }
       if (isPdf) hasPdf = true;
+      else imageFiles.push(f);
     }
     setStep('loading');
 
@@ -155,20 +157,42 @@ export function AddMockExamDialog({ unitId, textbookId, onAdd }: { unitId?: stri
         setPdfUrl(url);
       }
 
-      // 2) 각 파일을 개별 전송 → 결과 합침
       const allQuestions: ExtractedQuestion[] = [];
-      const results = await Promise.all(
-        Array.from(selectedFiles).map(async (f) => {
-          const form = new FormData();
-          form.append('file', f);
-          const { questions } = await fetchWithToast<{ questions: ExtractedQuestion[] }>(
-            '/api/naesin/problems/extract-pdf',
-            { body: form, silent: true },
-          );
-          return questions;
-        }),
-      );
-      for (const qs of results) allQuestions.push(...qs);
+
+      // 2) PDF → 기존 extract-pdf (청크 병렬 처리)
+      if (hasPdf) {
+        const pdfFile = Array.from(selectedFiles).find((f) => f.type === 'application/pdf')!;
+        const form = new FormData();
+        form.append('file', pdfFile);
+        const { questions } = await fetchWithToast<{ questions: ExtractedQuestion[] }>(
+          '/api/naesin/problems/extract-pdf',
+          { body: form, silent: true },
+        );
+        allQuestions.push(...questions);
+      }
+
+      // 3) 이미지 → Storage 업로드 후 배치 추출 (하나의 Claude 호출)
+      if (imageFiles.length > 0) {
+        // 3a) 이미지를 Storage에 병렬 업로드
+        const imageUrls = await Promise.all(
+          imageFiles.map(async (f) => {
+            const form = new FormData();
+            form.append('file', f);
+            const { url } = await fetchWithToast<{ url: string }>('/api/naesin/upload-image', {
+              body: form,
+              silent: true,
+            });
+            return { url, mediaType: f.type };
+          }),
+        );
+
+        // 3b) 모든 이미지를 하나의 Claude 호출로 배치 추출
+        const { questions } = await fetchWithToast<{ questions: ExtractedQuestion[] }>(
+          '/api/naesin/problems/extract-images',
+          { body: { imageUrls }, silent: true },
+        );
+        allQuestions.push(...questions);
+      }
 
       if (allQuestions.length === 0) {
         toast.error('문제를 추출하지 못했습니다. 파일을 확인해주세요.');

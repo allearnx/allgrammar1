@@ -27,8 +27,8 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: '지원하지 않는 파일 형식입니다. (jpg, png, webp, gif만 가능)' }, { status: 400 });
     }
 
-    if (file.size > 5 * 1024 * 1024) {
-      return NextResponse.json({ error: '파일 크기는 5MB 이하만 가능합니다.' }, { status: 400 });
+    if (file.size > 20 * 1024 * 1024) {
+      return NextResponse.json({ error: '파일 크기는 20MB 이하만 가능합니다.' }, { status: 400 });
     }
 
     const ext = file.name.split('.').pop() || 'jpg';
