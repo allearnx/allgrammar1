@@ -71,6 +71,11 @@ export async function regradeSheet(
         isCorrect = candidates.some((c) => normalize(c) === studentNorm);
       } else {
         isCorrect = matchMcqAnswer(userAnswer, correctAnswer, questions?.[i]?.options);
+        // acceptedAnswers 체크 (정답처리된 답도 정답으로 인정)
+        if (!isCorrect && questions?.[i]?.acceptedAnswers?.length) {
+          const studentNorm = normalize(userAnswer);
+          isCorrect = questions[i].acceptedAnswers!.some((c) => normalize(c) === studentNorm);
+        }
       }
 
       if (isCorrect) {
@@ -178,6 +183,10 @@ export async function regradeSheet(
           }
         } else {
           isCorrect = matchMcqAnswer(String(userAnswer), correctAnswer, q?.options);
+          if (!isCorrect && q?.acceptedAnswers?.length) {
+            const studentNorm = normalize(String(userAnswer));
+            isCorrect = q.acceptedAnswers.some((c) => normalize(c) === studentNorm);
+          }
         }
 
         if (isCorrect) {

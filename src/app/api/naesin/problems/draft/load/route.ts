@@ -76,6 +76,10 @@ export const GET = createApiHandler(
         }
       } else {
         isCorrect = matchMcqAnswer(String(userAnswer), correctAnswer, q?.options);
+        if (!isCorrect && q?.acceptedAnswers?.length) {
+          const studentNorm = normalize(String(userAnswer));
+          isCorrect = q.acceptedAnswers.some((c) => normalize(c) === studentNorm);
+        }
       }
 
       if (isCorrect) {
