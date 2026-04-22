@@ -75,17 +75,19 @@ export function AddMockExamDialog({ unitId, textbookId, onAdd }: { unitId?: stri
     }, resetAll);
   }
 
-  // PDF 파일 선택 → 업로드 + AI 추출
-  async function handlePdfExtract(e: React.ChangeEvent<HTMLInputElement>) {
+  // PDF/이미지 파일 선택 → 업로드 + AI 추출
+  async function handleFileExtract(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];
     if (!file) return;
-    if (file.type !== 'application/pdf') {
-      toast.error('PDF 파일만 업로드 가능합니다');
+    const isPdf = file.type === 'application/pdf';
+    const isImage = file.type.startsWith('image/');
+    if (!isPdf && !isImage) {
+      toast.error('PDF 또는 이미지 파일만 업로드 가능합니다');
       return;
     }
     if (file.size > 10 * 1024 * 1024) {
-      toast.error('PDF 파일은 10MB 이하만 가능합니다', {
-        description: '파일 크기를 줄이거나 페이지를 나눠서 업로드해주세요.',
+      toast.error('파일은 10MB 이하만 가능합니다', {
+        description: '파일 크기를 줄이거나 나눠서 업로드해주세요.',
       });
       if (fileInputRef.current) fileInputRef.current.value = '';
       return;
@@ -93,16 +95,18 @@ export function AddMockExamDialog({ unitId, textbookId, onAdd }: { unitId?: stri
     setStep('loading');
 
     try {
-      // 1) Supabase Storage에 PDF 업로드
-      const uploadForm = new FormData();
-      uploadForm.append('file', file);
-      const { url } = await fetchWithToast<{ url: string }>('/api/naesin/passages/upload-pdf', {
-        body: uploadForm,
-        errorMessage: 'PDF 업로드 실패',
-      });
-      setPdfUrl(url);
+      // 1) PDF인 경우 Supabase Storage에 업로드
+      if (isPdf) {
+        const uploadForm = new FormData();
+        uploadForm.append('file', file);
+        const { url } = await fetchWithToast<{ url: string }>('/api/naesin/passages/upload-pdf', {
+          body: uploadForm,
+          errorMessage: 'PDF 업로드 실패',
+        });
+        setPdfUrl(url);
+      }
 
-      // 2) AI 추출
+      // 2) AI 추출 (PDF든 이미지든 같은 API)
       const extractForm = new FormData();
       extractForm.append('file', file);
       const { questions } = await fetchWithToast<{ questions: ExtractedQuestion[] }>(
@@ -111,7 +115,7 @@ export function AddMockExamDialog({ unitId, textbookId, onAdd }: { unitId?: stri
       );
 
       setExtractedQuestions(questions);
-      if (!title) setTitle('PDF 추출 예상문제');
+      if (!title) setTitle(isPdf ? 'PDF 추출 예상문제' : '이미지 추출 예상문제');
       setMode('interactive');
       setStep('preview');
     } catch {
@@ -275,20 +279,20 @@ export function AddMockExamDialog({ unitId, textbookId, onAdd }: { unitId?: stri
         {/* --- form 스텝 (기존 + PDF 업로드) --- */}
         {step === 'form' && (
           <>
-            {/* PDF 자동 추출 섹션 */}
+            {/* PDF/이미지 자동 추출 섹션 */}
             <div className="border-2 border-dashed rounded-lg p-4 text-center space-y-2">
               <Upload className="h-6 w-6 mx-auto text-muted-foreground" />
-              <p className="text-sm font-medium">PDF 자동 추출</p>
-              <p className="text-xs text-muted-foreground">시험 PDF를 업로드하면 AI가 문제와 정답을 자동으로 추출합니다 (10MB 이하)</p>
+              <p className="text-sm font-medium">AI 자동 추출</p>
+              <p className="text-xs text-muted-foreground">시험 PDF 또는 스크린샷을 업로드하면 AI가 문제와 정답을 자동으로 추출합니다 (10MB 이하)</p>
               <input
                 ref={fileInputRef}
                 type="file"
-                accept=".pdf"
-                onChange={handlePdfExtract}
+                accept=".pdf,.png,.jpg,.jpeg,.webp"
+                onChange={handleFileExtract}
                 className="hidden"
               />
               <Button type="button" variant="outline" size="sm" onClick={() => fileInputRef.current?.click()}>
-                PDF 파일 선택
+                파일 선택 (PDF / 이미지)
               </Button>
             </div>
 
