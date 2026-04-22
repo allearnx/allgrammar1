@@ -21,11 +21,12 @@ export async function regradeSheet(
 
   const wrongStage = sheet.category === 'mock_exam' ? 'mockExam' : 'problem';
 
-  // 2. 해당 시트의 모든 시도 조회
+  // 2. 해당 시트의 모든 시도 조회 (created_at 오름차순 → 마지막=최신 시도의 오답이 테이블에 남음)
   const { data: attempts } = await admin
     .from('naesin_problem_attempts')
     .select('id, student_id, answers, score, total_questions, wrong_answers')
-    .eq('sheet_id', sheetId);
+    .eq('sheet_id', sheetId)
+    .order('created_at', { ascending: true });
 
   if (!attempts || attempts.length === 0) {
     return { total: 0, changed: 0 };
