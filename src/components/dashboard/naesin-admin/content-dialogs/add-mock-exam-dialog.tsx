@@ -14,7 +14,7 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { FileQuestion, Loader2, Upload, RotateCcw, Trash2 } from 'lucide-react';
+import { FileQuestion, Loader2, Upload, RotateCcw, Trash2, ClipboardPaste } from 'lucide-react';
 import { toast } from 'sonner';
 import { useFormDialog } from '@/hooks/use-form-dialog';
 import { fetchWithToast } from '@/lib/fetch-with-toast';
@@ -41,6 +41,7 @@ export function AddMockExamDialog({ unitId, textbookId, onAdd }: { unitId?: stri
   const [totalQuestions, setTotalQuestions] = useState('');
   const [answerKeyText, setAnswerKeyText] = useState('');
   const [pdfUrl, setPdfUrl] = useState('');
+  const [csvText, setCsvText] = useState('');
 
   // PDF 추출 관련 state
   const [step, setStep] = useState<'form' | 'loading' | 'preview'>('form');
@@ -52,6 +53,7 @@ export function AddMockExamDialog({ unitId, textbookId, onAdd }: { unitId?: stri
     setTotalQuestions('');
     setAnswerKeyText('');
     setPdfUrl('');
+    setCsvText('');
     setStep('form');
     setExtractedQuestions([]);
     if (fileInputRef.current) fileInputRef.current.value = '';
@@ -73,6 +75,55 @@ export function AddMockExamDialog({ unitId, textbookId, onAdd }: { unitId?: stri
         silent: true,
       });
     }, resetAll);
+  }
+
+  // CSV 텍스트 파싱 → preview
+  function handleCsvPreview() {
+    if (!csvText.trim()) { toast.error('텍스트를 입력해주세요'); return; }
+    const lines = csvText.trim().split('\n');
+    const questions: ExtractedQuestion[] = [];
+    const errors: string[] = [];
+
+    for (let i = 0; i < lines.length; i++) {
+      const line = lines[i].trim();
+      if (!line) continue;
+      // 간이 CSV split (큰따옴표 미지원 — 간단한 콤마 구분)
+      const row = line.split(',').map((s) => s.trim());
+      if (row.length < 2) continue;
+      const first = row[0];
+      if (!first || first === '번호' || first === '#') continue;
+
+      const number = Number(first);
+      if (isNaN(number)) { errors.push(`${i + 1}행: 번호 오류 ("${first}")`); continue; }
+
+      const question = row[1] || '';
+      if (!question) { errors.push(`${i + 1}행: 문제 텍스트 없음`); continue; }
+
+      const choices = [row[2], row[3], row[4], row[5], row[6]].map((s) => (s || '').trim()).filter(Boolean);
+      const answer = (row[7] || '').trim();
+      if (!answer) { errors.push(`${i + 1}행: 정답 없음`); continue; }
+
+      if (choices.length > 0) {
+        const answerNum = Number(answer);
+        if (isNaN(answerNum) || answerNum < 1 || answerNum > choices.length) {
+          errors.push(`${i + 1}행: 정답 번호(${answer})가 보기 수(${choices.length})를 초과`);
+          continue;
+        }
+      }
+
+      const explanation = (row[8] || '').trim();
+      questions.push({ number, question, options: choices.length > 0 ? choices : [], answer, explanation });
+    }
+
+    if (errors.length > 0) {
+      toast.error(`파싱 오류 ${errors.length}건`, { description: errors.slice(0, 3).join('\n') });
+    }
+    if (questions.length === 0) { toast.error('파싱된 문제가 없습니다'); return; }
+
+    setExtractedQuestions(questions);
+    if (!title) setTitle('텍스트 입력 예상문제');
+    setMode('interactive');
+    setStep('preview');
   }
 
   // PDF/이미지 파일 선택 → 업로드 + AI 추출 (다중 파일: 각각 전송 후 합침)
@@ -312,7 +363,38 @@ export function AddMockExamDialog({ unitId, textbookId, onAdd }: { unitId?: stri
 
             <div className="relative flex items-center py-1">
               <div className="flex-1 border-t" />
-              <span className="px-2 text-xs text-muted-foreground">또는 직접 입력</span>
+              <span className="px-2 text-xs text-muted-foreground">또는 텍스트로 입력</span>
+              <div className="flex-1 border-t" />
+            </div>
+
+            {/* 텍스트 일괄 입력 섹션 */}
+            <div className="space-y-2">
+              <div className="flex items-center gap-1.5">
+                <ClipboardPaste className="h-4 w-4 text-muted-foreground" />
+                <Label className="text-sm font-medium">텍스트 일괄 입력</Label>
+              </div>
+              <div>
+                <Label htmlFor="csv-title">제목</Label>
+                <Input id="csv-title" value={title} onChange={(e) => setTitle(e.target.value)} placeholder="예상문제 제목" />
+              </div>
+              <Textarea
+                value={csvText}
+                onChange={(e) => setCsvText(e.target.value)}
+                placeholder={"번호,문제,보기1,보기2,보기3,보기4,보기5,정답,해설\n1,Choose the correct form.,has gone,have gone,had gone,is going,,1,현재완료\n2,빈칸에 알맞은 단어를 쓰시오.,,,,,,running,현재분사"}
+                rows={5}
+                className="font-mono text-xs"
+              />
+              <p className="text-xs text-muted-foreground">
+                콤마(,)로 구분 · 보기가 모두 비어있으면 서술형 · 정답이 숫자면 객관식 번호
+              </p>
+              <Button type="button" variant="outline" size="sm" className="w-full" onClick={handleCsvPreview} disabled={!csvText.trim()}>
+                미리보기
+              </Button>
+            </div>
+
+            <div className="relative flex items-center py-1">
+              <div className="flex-1 border-t" />
+              <span className="px-2 text-xs text-muted-foreground">또는 OMR 모드</span>
               <div className="flex-1 border-t" />
             </div>
 
