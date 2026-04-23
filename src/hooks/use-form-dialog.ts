@@ -24,8 +24,11 @@ export function useFormDialog({ onSuccess, logContext, successMessage, errorMess
         resetFn?.();
         return result;
       } catch (err) {
-        logger.error(logContext, { error: err instanceof Error ? err.message : String(err) });
-        toast.error(errorMessage || (err instanceof Error ? err.message : '요청에 실패했습니다'));
+        const serverError = err instanceof Error ? err.message : String(err);
+        logger.error(logContext, { error: serverError });
+        toast.error(errorMessage || serverError, {
+          description: errorMessage && serverError !== errorMessage ? serverError : undefined,
+        });
         return undefined;
       } finally {
         setSaving(false);
