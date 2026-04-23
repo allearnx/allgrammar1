@@ -221,7 +221,7 @@ export function InteractiveProblemView({
         />
       )}
 
-      {showResult && isSubjective && selectedAnswer !== null && (
+      {showResult && selectedAnswer !== null && (
         <div className="max-w-lg mx-auto space-y-2">
           <div className={cn(
             'text-center text-sm font-medium py-1.5 rounded-md',
@@ -248,7 +248,7 @@ export function InteractiveProblemView({
                 });
               })()}
             </div>
-          ) : !isCurrentCorrect ? (
+          ) : !isCurrentCorrect && isSubjective ? (
             <div className="text-center text-sm text-green-700 bg-green-50 py-1.5 rounded-md">
               정답: {String(question.answer)}
             </div>
