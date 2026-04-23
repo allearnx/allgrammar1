@@ -1,17 +1,9 @@
 import { NextResponse } from 'next/server';
 import { createApiHandler } from '@/lib/api';
 import { createAdminClient } from '@/lib/supabase/admin';
+import { countCompletedStages, STAGE_COMPLETION_COLS } from '@/lib/naesin/progress-queries';
 
 const ACTIVE_THRESHOLD_MS = 2 * 60 * 1000; // 2 minutes
-
-const STAGE_FIELDS = [
-  'vocab_completed',
-  'dialogue_completed',
-  'passage_completed',
-  'grammar_completed',
-  'problem_completed',
-  'mock_exam_completed',
-] as const;
 
 const STAGE_LABELS: Record<string, string> = {
   vocab: '단어 암기',
@@ -70,7 +62,7 @@ export const GET = createApiHandler(
     ] = await Promise.all([
       admin
         .from('naesin_student_progress')
-        .select('student_id, unit_id, updated_at, current_stage, current_round, vocab_completed, dialogue_completed, passage_completed, grammar_completed, problem_completed, mock_exam_completed')
+        .select('student_id, unit_id, updated_at, current_stage, current_round, vocab_completed, passage_completed, dialogue_completed, grammar_completed, problem_completed, mock_exam_completed')
         .in('student_id', studentIds),
       admin
         .from('voca_student_progress')
@@ -189,11 +181,9 @@ export const GET = createApiHandler(
 
       // Count completed stages
       let completedStages = 0;
-      const totalStages = naesinRows.length * STAGE_FIELDS.length;
+      const totalStages = naesinRows.length * STAGE_COMPLETION_COLS.length;
       for (const row of naesinRows) {
-        for (const field of STAGE_FIELDS) {
-          if (row[field]) completedStages++;
-        }
+        completedStages += countCompletedStages(row as unknown as Record<string, unknown>);
       }
 
       return {

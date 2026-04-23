@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import { createApiHandler } from '@/lib/api';
 import { createAdminClient } from '@/lib/supabase/admin';
 import { getDDay } from '@/lib/dashboard/naesin-helpers';
+import { countCompletedStages, totalStagesPerUnit } from '@/lib/naesin/progress-queries';
 
 export interface ExamOverviewItem {
   studentId: string;
@@ -58,7 +59,7 @@ export const GET = createApiHandler(
       admin.from('naesin_textbooks').select('id, title'),
       admin
         .from('naesin_student_progress')
-        .select('student_id, textbook_id, vocab_completed, passage_completed, dialogue_completed, grammar_completed, problem_completed')
+        .select('student_id, textbook_id, vocab_completed, passage_completed, dialogue_completed, grammar_completed, problem_completed, mock_exam_completed')
         .in('student_id', studentIds),
     ]);
 
@@ -69,12 +70,8 @@ export const GET = createApiHandler(
     for (const p of progress || []) {
       const key = `${p.student_id}:${p.textbook_id}`;
       const prev = progressMap.get(key) || { done: 0, total: 0 };
-      prev.total += 5;
-      if (p.vocab_completed) prev.done++;
-      if (p.passage_completed) prev.done++;
-      if (p.dialogue_completed) prev.done++;
-      if (p.grammar_completed) prev.done++;
-      if (p.problem_completed) prev.done++;
+      prev.total += totalStagesPerUnit();
+      prev.done += countCompletedStages(p as unknown as Record<string, unknown>);
       progressMap.set(key, prev);
     }
 

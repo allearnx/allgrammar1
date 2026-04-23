@@ -15,6 +15,7 @@ import { DDayBadge } from '@/components/ui/dday-badge';
 import { getPlanContext } from '@/lib/billing/get-plan-context';
 import { canUseFeature, isServiceAllowed } from '@/lib/billing/feature-gate';
 import { getDDay } from '@/lib/dashboard/naesin-helpers';
+import { countCompletedStages, totalStagesPerUnit } from '@/lib/naesin/progress-queries';
 import type { AuthUser } from '@/types/auth';
 
 interface Props {
@@ -130,14 +131,11 @@ export async function StudentsList({ user, basePath, searchQuery }: Props) {
   });
 
   // Naesin: count completed stages per student
-  const stagesPerUnit = hasRound2 ? 7 : 5;
+  const stagesPerUnit = totalStagesPerUnit(hasRound2);
   const naesinByStudent = new Map<string, { stages: number; units: number }>();
   allNaesinProgress?.forEach((p) => {
     const prev = naesinByStudent.get(p.student_id) || { stages: 0, units: 0 };
-    let stageCount = (p.vocab_completed ? 1 : 0) + (p.passage_completed ? 1 : 0) + (p.dialogue_completed ? 1 : 0) + (p.grammar_completed ? 1 : 0) + (p.problem_completed ? 1 : 0) + (p.mock_exam_completed ? 1 : 0);
-    if (hasRound2) {
-      stageCount += (p.round2_passage_completed ? 1 : 0) + (p.round2_dialogue_completed ? 1 : 0);
-    }
+    const stageCount = countCompletedStages(p as unknown as Record<string, unknown>, hasRound2);
     prev.stages += stageCount;
     if (stageCount === stagesPerUnit) prev.units += 1;
     naesinByStudent.set(p.student_id, prev);

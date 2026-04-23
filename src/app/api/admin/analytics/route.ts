@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { createApiHandler } from '@/lib/api';
 import { createAdminClient } from '@/lib/supabase/admin';
+import { countCompletedStages } from '@/lib/naesin/progress-queries';
 
 type AdminClient = ReturnType<typeof createAdminClient>;
 
@@ -22,12 +23,12 @@ function buildDailyActivity(recentProgress: { updated_at: string }[]) {
 
 function buildRankings(
   students: { id: string; full_name: string }[],
-  completions: { student_id: string; vocab_completed: boolean; passage_completed: boolean; grammar_completed: boolean; problem_completed: boolean }[]
+  completions: Record<string, unknown>[],
 ) {
   const byStudent = new Map<string, number>();
   for (const c of completions) {
-    const count = (c.vocab_completed ? 1 : 0) + (c.passage_completed ? 1 : 0) + (c.grammar_completed ? 1 : 0) + (c.problem_completed ? 1 : 0);
-    byStudent.set(c.student_id, (byStudent.get(c.student_id) || 0) + count);
+    const count = countCompletedStages(c);
+    byStudent.set(c.student_id as string, (byStudent.get(c.student_id as string) || 0) + count);
   }
   return students
     .map((s) => ({ id: s.id, name: s.full_name, completedStages: byStudent.get(s.id) || 0 }))
@@ -74,8 +75,8 @@ export const GET = createApiHandler(
         ? admin.from('naesin_student_progress').select('student_id, updated_at').in('student_id', studentIds).gte('updated_at', weekAgo.toISOString())
         : Promise.resolve({ data: [] as { student_id: string; updated_at: string }[] }),
       studentIds.length > 0
-        ? admin.from('naesin_student_progress').select('student_id, vocab_completed, passage_completed, grammar_completed, problem_completed').in('student_id', studentIds)
-        : Promise.resolve({ data: [] as { student_id: string; vocab_completed: boolean; passage_completed: boolean; grammar_completed: boolean; problem_completed: boolean }[] }),
+        ? admin.from('naesin_student_progress').select('student_id, vocab_completed, passage_completed, dialogue_completed, grammar_completed, problem_completed, mock_exam_completed').in('student_id', studentIds)
+        : Promise.resolve({ data: [] as { student_id: string; vocab_completed: boolean; passage_completed: boolean; dialogue_completed: boolean; grammar_completed: boolean; problem_completed: boolean; mock_exam_completed: boolean }[] }),
     ]);
 
     return NextResponse.json({
