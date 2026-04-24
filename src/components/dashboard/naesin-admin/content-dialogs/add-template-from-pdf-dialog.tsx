@@ -34,7 +34,10 @@ interface Props {
 
 export function AddTemplateFromPdfDialog({ open, onOpenChange, onAdd }: Props) {
   const { saving, handleSubmit } = useFormDialog({
-    onSuccess: onAdd,
+    onSuccess: () => {
+      onAdd();
+      onOpenChange(false);
+    },
     logContext: 'admin.add_template_from_pdf',
     successMessage: '템플릿이 추가되었습니다',
     errorMessage: '템플릿 추가 실패',
