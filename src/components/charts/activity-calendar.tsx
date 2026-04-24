@@ -5,7 +5,6 @@ import {
   ChevronLeft, ChevronRight, PenLine, Keyboard, Link2,
   BookOpen, FileText, Ruler, ClipboardList, Clock,
 } from 'lucide-react';
-import { DOT_COLORS } from '@/lib/utils/brand-colors';
 import type { ActivityRecord } from '@/types/student-report';
 
 interface Props {
@@ -44,12 +43,16 @@ function getFirstDayOfMonth(year: number, month: number) {
   return new Date(year, month, 1).getDay();
 }
 
-function getDotColor(activities: ActivityRecord[]): string {
-  const hasVoca = activities.some((a) => a.type.startsWith('voca_'));
-  const hasNaesin = activities.some((a) => a.type.startsWith('naesin_'));
-  if (hasVoca && hasNaesin) return DOT_COLORS.mixed;
-  if (hasNaesin) return DOT_COLORS.naesin;
-  return DOT_COLORS.voca;
+function getDaySummary(acts: ActivityRecord[], seconds?: number) {
+  if (acts.length === 0 && (!seconds || seconds <= 0)) return null;
+  const n = acts.filter(a => a.type.startsWith('naesin_')).length;
+  const v = acts.filter(a => a.type.startsWith('voca_')).length;
+  const parts: string[] = [];
+  if (n > 0) parts.push(`내${n}`);
+  if (v > 0) parts.push(`보${v}`);
+  const m = seconds ? Math.floor(seconds / 60) : 0;
+  const time = m >= 60 ? `${Math.floor(m / 60)}h` : m > 0 ? `${m}분` : null;
+  return { label: parts.join('·') || null, time };
 }
 
 function getHeatmapBg(seconds: number | undefined): string {
@@ -137,7 +140,7 @@ export function ActivityCalendar({ activities, dailySeconds }: Props) {
 
         {/* Empty cells before first day */}
         {Array.from({ length: firstDay }).map((_, i) => (
-          <div key={`empty-${i}`} className="h-9" />
+          <div key={`empty-${i}`} className="h-14" />
         ))}
 
         {/* Day cells */}
@@ -149,19 +152,14 @@ export function ActivityCalendar({ activities, dailySeconds }: Props) {
           const isSelected = selectedDate === dateStr;
           const isToday = dateStr === `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
 
-          let dotOpacity = 0;
-          if (count >= 5) dotOpacity = 1;
-          else if (count >= 3) dotOpacity = 0.75;
-          else if (count >= 1) dotOpacity = 0.45;
-
-          const dotColor = count > 0 ? getDotColor(dayActivities) : '#7C3AED';
           const heatmapBg = dailySeconds ? getHeatmapBg(dailySeconds[dateStr]) : '';
+          const summary = getDaySummary(dayActivities, dailySeconds?.[dateStr]);
 
           return (
             <button
               key={day}
               onClick={() => setSelectedDate(isSelected ? null : dateStr)}
-              className={`h-9 flex items-center justify-center rounded-md text-xs transition-all relative ${
+              className={`h-14 flex flex-col items-center justify-start pt-1 rounded-md text-xs transition-all ${
                 isSelected
                   ? 'bg-violet-100 ring-2 ring-violet-400'
                   : isToday
@@ -173,11 +171,11 @@ export function ActivityCalendar({ activities, dailySeconds }: Props) {
               <span className={`${isToday ? 'font-bold' : ''} ${count > 0 ? 'text-gray-800' : 'text-gray-400'}`}>
                 {day}
               </span>
-              {count > 0 && (
-                <div
-                  className="absolute bottom-0.5 h-1 w-1 rounded-full"
-                  style={{ background: dotColor, opacity: dotOpacity }}
-                />
+              {summary && (
+                <div className="text-[10px] leading-tight text-gray-500 mt-0.5 text-center">
+                  {summary.label && <div>{summary.label}</div>}
+                  {summary.time && <div>{summary.time}</div>}
+                </div>
               )}
             </button>
           );
