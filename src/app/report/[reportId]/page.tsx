@@ -80,9 +80,9 @@ export default async function PublicReportPage({ params }: Props) {
                 <MetricCard label="퀴즈셋 평균" value={`${report.naesin.quizSetAvgScore ?? '-'}점`} />
               </div>
               <p className="text-sm font-medium mt-2">단계별 완료</p>
-              <div className="grid gap-3 sm:grid-cols-3 lg:grid-cols-5">
-                {(['vocab', 'passage', 'grammar', 'problem', 'lastReview'] as const).map((key) => {
-                  const labels: Record<string, string> = { vocab: '어휘', passage: '지문', grammar: '문법', problem: '문제풀이', lastReview: '직전보강' };
+              <div className="grid gap-3 sm:grid-cols-3 lg:grid-cols-4">
+                {(['vocab', 'passage', 'dialogue', 'grammar', 'problem', 'mockExam', 'lastReview'] as const).map((key) => {
+                  const labels: Record<string, string> = { vocab: '어휘', passage: '지문', dialogue: '대화문', grammar: '문법', problem: '문제풀이', mockExam: '예상문제', lastReview: '직전보강' };
                   return <MetricCard key={key} label={labels[key]} value={report.naesin!.stagesCompleted[key]} sub="단원 완료" />;
                 })}
               </div>

@@ -6,7 +6,7 @@ export async function computeUnitBreakdown(
   hasVoca: boolean,
   hasNaesin: boolean,
   vocaProgressData: { day_id: string; flashcard_completed: boolean; quiz_score: number | null; spelling_score: number | null; matching_score: number | null; matching_completed: boolean; round2_flashcard_completed: boolean; round2_quiz_score: number | null; round2_matching_completed: boolean }[],
-  naesinProgressData: { unit_id: string; vocab_completed: boolean; vocab_quiz_score: number | null; passage_completed: boolean; grammar_completed: boolean; problem_completed: boolean }[],
+  naesinProgressData: { unit_id: string; vocab_completed: boolean; vocab_quiz_score: number | null; passage_completed: boolean; dialogue_completed: boolean; grammar_completed: boolean; problem_completed: boolean; mock_exam_completed: boolean }[],
   naesinProblemHistory: { score: number; total_questions: number; unit_id: string }[],
   naesinPassageAttempts: { unit_id: string; type: string; difficulty: string | null; score: number }[] = [],
 ) {
@@ -66,7 +66,7 @@ export async function computeUnitBreakdown(
 
     for (const p of naesinProgressData) {
       const unitInfo = unitInfoMap[p.unit_id];
-      const stagesCompleted = (p.vocab_completed ? 1 : 0) + (p.passage_completed ? 1 : 0) + (p.grammar_completed ? 1 : 0) + (p.problem_completed ? 1 : 0);
+      const stagesCompleted = (p.vocab_completed ? 1 : 0) + (p.passage_completed ? 1 : 0) + (p.dialogue_completed ? 1 : 0) + (p.grammar_completed ? 1 : 0) + (p.problem_completed ? 1 : 0) + (p.mock_exam_completed ? 1 : 0);
       const unitScores = problemsByUnit[p.unit_id] || [];
       const problemAvg = unitScores.length > 0 ? Math.round(unitScores.reduce((a, b) => a + b, 0) / unitScores.length) : null;
 

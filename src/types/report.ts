@@ -29,8 +29,10 @@ export interface ReportNaesinStats {
   stagesCompleted: {
     vocab: number;
     passage: number;
+    dialogue: number;
     grammar: number;
     problem: number;
+    mockExam: number;
     lastReview: number;
   };
   /** 문제풀이 평균 점수 (0-100) */

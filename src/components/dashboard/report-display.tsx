@@ -127,11 +127,13 @@ export function ReportDisplay({ report, currentReportId, onCopyShareLink }: Repo
               </div>
 
               <h3 className="font-semibold">단계별 완료</h3>
-              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
                 <MetricCard label="어휘" value={report.naesin.stagesCompleted.vocab} sub="단원 완료" />
                 <MetricCard label="지문" value={report.naesin.stagesCompleted.passage} sub="단원 완료" />
+                <MetricCard label="대화문" value={report.naesin.stagesCompleted.dialogue} sub="단원 완료" />
                 <MetricCard label="문법" value={report.naesin.stagesCompleted.grammar} sub="단원 완료" />
                 <MetricCard label="문제풀이" value={report.naesin.stagesCompleted.problem} sub="단원 완료" />
+                <MetricCard label="예상문제" value={report.naesin.stagesCompleted.mockExam} sub="단원 완료" />
                 <MetricCard label="직전보강" value={report.naesin.stagesCompleted.lastReview} sub="단원 완료" />
               </div>
 

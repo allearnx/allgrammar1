@@ -62,7 +62,7 @@ export async function aggregateWeeklyReport({
       .eq('student_id', studentId),
     supabase
       .from('naesin_student_progress')
-      .select('unit_id, vocab_completed, passage_completed, grammar_completed, problem_completed, last_review_unlocked')
+      .select('unit_id, vocab_completed, passage_completed, dialogue_completed, grammar_completed, problem_completed, mock_exam_completed, last_review_unlocked')
       .eq('student_id', studentId),
     supabase
       .from('naesin_problem_attempts')
@@ -151,8 +151,10 @@ export async function aggregateWeeklyReport({
       stagesCompleted: {
         vocab: nProg.filter((p) => p.vocab_completed).length,
         passage: nProg.filter((p) => p.passage_completed).length,
+        dialogue: nProg.filter((p) => p.dialogue_completed).length,
         grammar: nProg.filter((p) => p.grammar_completed).length,
         problem: nProg.filter((p) => p.problem_completed).length,
+        mockExam: nProg.filter((p) => p.mock_exam_completed).length,
         lastReview: nProg.filter((p) => p.last_review_unlocked).length,
       },
       problemAvgScore: avgScore(problemScores),

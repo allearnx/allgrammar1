@@ -4,7 +4,7 @@ import { avgScore } from '@/lib/utils/report-analysis';
 
 export async function computeNaesinStats(
   qc: SupabaseClient, sid: string,
-  naesinProgressData: { unit_id: string; vocab_completed: boolean; vocab_quiz_score: number | null; passage_completed: boolean; grammar_completed: boolean; problem_completed: boolean; last_review_unlocked: boolean }[],
+  naesinProgressData: { unit_id: string; vocab_completed: boolean; vocab_quiz_score: number | null; passage_completed: boolean; dialogue_completed: boolean; grammar_completed: boolean; problem_completed: boolean; mock_exam_completed: boolean; last_review_unlocked: boolean }[],
   naesinProblemData: { score: number; total_questions: number }[],
   naesinWrongData: { resolved: boolean }[],
   naesinVideoData: { completed: boolean; cumulative_watch_seconds: number }[],
@@ -37,8 +37,10 @@ export async function computeNaesinStats(
     stagesCompleted: {
       vocab: naesinProgressData.filter((p) => p.vocab_completed).length,
       passage: naesinProgressData.filter((p) => p.passage_completed).length,
+      dialogue: naesinProgressData.filter((p) => p.dialogue_completed).length,
       grammar: naesinProgressData.filter((p) => p.grammar_completed).length,
       problem: naesinProgressData.filter((p) => p.problem_completed).length,
+      mockExam: naesinProgressData.filter((p) => p.mock_exam_completed).length,
       lastReview: naesinProgressData.filter((p) => p.last_review_unlocked).length,
     },
     problemAvgScore: avgScore(problemScores),
