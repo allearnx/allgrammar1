@@ -5,6 +5,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
 import { Switch } from '@/components/ui/switch';
 import { extractAnswer } from '@/lib/naesin/normalize-answer';
 import {
@@ -230,6 +231,7 @@ function ReadOnlyWrongAnswerCard({
   const data = wrongAnswer.question_data as Record<string, unknown>;
   const [dialogOpen, setDialogOpen] = useState(false);
   const [newAnswer, setNewAnswer] = useState(extractAnswer(data.correctAnswer));
+  const [newExplanation, setNewExplanation] = useState((data.explanation as string) || '');
   const [submitting, setSubmitting] = useState(false);
 
   const options = data.options as string[] | undefined;
@@ -251,6 +253,7 @@ function ReadOnlyWrongAnswerCard({
             sheetId: wrongAnswer.sheet_id,
             questionIndex,
             newAnswer: newAnswer.trim(),
+            newExplanation: newExplanation.trim() || undefined,
           },
           logContext: 'correct_answer',
         }
@@ -425,6 +428,7 @@ function ReadOnlyWrongAnswerCard({
                     className="h-5 px-1.5 text-xs text-muted-foreground"
                     onClick={() => {
                       setNewAnswer(extractAnswer(data.correctAnswer));
+                      setNewExplanation((data.explanation as string) || '');
                       setDialogOpen(true);
                     }}
                   >
@@ -473,6 +477,16 @@ function ReadOnlyWrongAnswerCard({
                 onKeyDown={(e) => {
                   if (e.key === 'Enter' && !submitting) handleCorrectAnswer();
                 }}
+              />
+            </div>
+            <div>
+              <label className="text-sm font-medium">해설 (선택)</label>
+              <Textarea
+                value={newExplanation}
+                onChange={(e) => setNewExplanation(e.target.value)}
+                placeholder="정답에 맞는 해설을 입력하세요"
+                className="mt-1"
+                rows={2}
               />
             </div>
           </div>

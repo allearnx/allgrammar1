@@ -10,6 +10,7 @@ const correctAnswerSchema = z.object({
   questionIndex: z.number().int().min(0),
   newAnswer: z.union([z.string(), z.number()]),
   mode: z.enum(['replace', 'accept']).default('replace'),
+  newExplanation: z.string().optional(),
 });
 
 export const PATCH = createApiHandler(
@@ -19,7 +20,7 @@ export const PATCH = createApiHandler(
       const blocked = await checkPlanGate(user.academy_id, 'naesin:problem');
       if (blocked) return blocked;
     }
-    const { sheetId, questionIndex, newAnswer, mode } = body;
+    const { sheetId, questionIndex, newAnswer, mode, newExplanation } = body;
 
     const admin = createAdminClient();
 
@@ -39,6 +40,7 @@ export const PATCH = createApiHandler(
       options?: string[];
       answer: string | number;
       acceptedAnswers?: string[];
+      explanation?: string;
     }[];
 
     if (questionIndex >= answerKey.length) {
@@ -64,6 +66,11 @@ export const PATCH = createApiHandler(
     } else {
       answerKey[questionIndex] = newAnswer;
       questions[questionIndex].answer = newAnswer;
+    }
+
+    // 해설 업데이트 (정답 수정/정답처리 모두 가능)
+    if (newExplanation !== undefined) {
+      questions[questionIndex].explanation = newExplanation || undefined;
     }
 
     await admin
@@ -97,6 +104,9 @@ export const PATCH = createApiHandler(
             }
           } else {
             tmplQuestions[questionIndex].answer = newAnswer;
+          }
+          if (newExplanation !== undefined) {
+            tmplQuestions[questionIndex].explanation = newExplanation || undefined;
           }
           const tmplAnswerKey = tmplQuestions.map((q) => q.answer);
           await admin
