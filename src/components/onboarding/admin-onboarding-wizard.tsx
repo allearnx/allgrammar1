@@ -89,7 +89,7 @@ export function AdminOnboardingWizard({ inviteCode, autoOpen, onClose }: Props) 
     // 온보딩 완료 처리 — 다시 열리지 않도록
     if (!autoOpen) {
       try {
-        await fetch('/api/admin/onboarding-complete', { method: 'POST' });
+        await fetchWithToast('/api/admin/onboarding-complete', { silent: true, logContext: 'admin.onboarding_close' });
       } catch { /* ignore */ }
       router.refresh();
     }
@@ -104,7 +104,10 @@ export function AdminOnboardingWizard({ inviteCode, autoOpen, onClose }: Props) 
     }
     setSaving(true);
     try {
-      await fetch('/api/admin/onboarding-complete', { method: 'POST' });
+      await fetchWithToast('/api/admin/onboarding-complete', {
+        silent: true,
+        logContext: 'admin.onboarding_complete',
+      });
       setOpen(false);
       onClose?.();
       router.refresh();

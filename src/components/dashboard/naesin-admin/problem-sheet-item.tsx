@@ -3,8 +3,8 @@ import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import { ClipboardList, ChevronDown, ChevronRight, Pencil, Trash2, Loader2, Wand2, Copy, Bookmark, ArrowUp, ArrowDown, RotateCcw } from 'lucide-react';
 import type { NaesinProblemSheet, NaesinProblemQuestion } from '@/types/naesin';
-import { QuestionEditRow, QuestionViewRow } from './content-dialogs/question-table-rows';
-import { toGenerated, type GeneratedQuestion } from './content-dialogs/question-utils';
+import { QuestionEditRow, QuestionViewRow } from './content-dialogs/shared/question-table-rows';
+import { toGenerated, type GeneratedQuestion } from './content-dialogs/shared/question-utils';
 
 interface ProblemSheetItemProps {
   sheet: NaesinProblemSheet;

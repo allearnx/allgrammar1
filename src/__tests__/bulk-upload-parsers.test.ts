@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
-import { parseOmrLines } from '@/components/dashboard/naesin-admin/content-dialogs/bulk-omr-upload-dialog';
-import { parseQuestions } from '@/components/dashboard/naesin-admin/content-dialogs/bulk-problem-upload-dialog';
+import { parseOmrLines } from '@/components/dashboard/naesin-admin/content-dialogs/problem/bulk-omr-upload-dialog';
+import { parseQuestions } from '@/components/dashboard/naesin-admin/content-dialogs/problem/bulk-problem-upload-dialog';
 
 // ─── parseOmrLines ───────────────────────────────────────────────
 

@@ -15,7 +15,7 @@ import {
 import { toast } from 'sonner';
 import { fetchWithToast } from '@/lib/fetch-with-toast';
 import type { NaesinProblemSheet, NaesinTemplate } from '@/types/naesin';
-import { toGenerated, toDbQuestion } from './content-dialogs/question-utils';
+import { toGenerated, toDbQuestion } from './content-dialogs/shared/question-utils';
 import { AiProblemImproveDialog, CopyProblemDialog, TemplateCopiesDialog } from './content-dialogs';
 import { useQuestionEditor } from '@/hooks/use-question-editor';
 import { ProblemSheetItem } from './problem-sheet-item';

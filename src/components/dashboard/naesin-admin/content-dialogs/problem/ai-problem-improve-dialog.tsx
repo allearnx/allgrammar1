@@ -1,6 +1,5 @@
 'use client';
 
-import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Checkbox } from '@/components/ui/checkbox';
@@ -11,30 +10,14 @@ import {
   DialogTitle,
 } from '@/components/ui/dialog';
 import { Loader2, AlertTriangle, CheckCircle2, ArrowRight } from 'lucide-react';
-import { fetchWithToast } from '@/lib/fetch-with-toast';
-import type { NaesinProblemSheet, NaesinProblemQuestion } from '@/types/naesin';
+import { useAiImproveState } from '@/hooks/use-ai-improve-state';
+import type { NaesinProblemSheet } from '@/types/naesin';
 
-interface IssueItem {
-  questionNumber: number;
-  issue: string;
-  severity: 'high' | 'medium' | 'low';
-  suggestion: string;
-  improvedQuestion?: NaesinProblemQuestion;
-}
-
-interface TrapSuggestion {
-  question: NaesinProblemQuestion;
-  reason: string;
-}
-
-interface AnalysisResult {
-  summary: string;
-  score: number;
-  issues: IssueItem[];
-  trapSuggestions: TrapSuggestion[];
-}
-
-type Step = 'idle' | 'analyzing' | 'review';
+const SEVERITY_CONFIG = {
+  high: { label: '심각', variant: 'destructive' as const, className: 'bg-red-100 text-red-800' },
+  medium: { label: '보통', variant: 'secondary' as const, className: 'bg-yellow-100 text-yellow-800' },
+  low: { label: '낮음', variant: 'outline' as const, className: 'bg-gray-100 text-gray-800' },
+};
 
 interface Props {
   sheet: NaesinProblemSheet;
@@ -43,124 +26,20 @@ interface Props {
   onUpdate: (updated: NaesinProblemSheet) => void;
 }
 
-const SEVERITY_CONFIG = {
-  high: { label: '심각', variant: 'destructive' as const, className: 'bg-red-100 text-red-800' },
-  medium: { label: '보통', variant: 'secondary' as const, className: 'bg-yellow-100 text-yellow-800' },
-  low: { label: '낮음', variant: 'outline' as const, className: 'bg-gray-100 text-gray-800' },
-};
-
 export function AiProblemImproveDialog({ sheet, open, onOpenChange, onUpdate }: Props) {
-  const [step, setStep] = useState<Step>('idle');
-  const [analysis, setAnalysis] = useState<AnalysisResult | null>(null);
-  const [selectedIssues, setSelectedIssues] = useState<Set<number>>(new Set());
-  const [selectedTraps, setSelectedTraps] = useState<Set<number>>(new Set());
-  const [applying, setApplying] = useState(false);
-
-  function resetState() {
-    setStep('idle');
-    setAnalysis(null);
-    setSelectedIssues(new Set());
-    setSelectedTraps(new Set());
-    setApplying(false);
-  }
-
-  function handleOpenChange(v: boolean) {
-    onOpenChange(v);
-    if (!v) resetState();
-  }
-
-  async function handleAnalyze() {
-    setStep('analyzing');
-    try {
-      const data = await fetchWithToast<{
-        analysis: AnalysisResult;
-      }>('/api/naesin/problems/ai-improve', {
-        body: { sheetId: sheet.id },
-        errorMessage: 'AI 분석에 실패했습니다.',
-      });
-
-      setAnalysis(data.analysis);
-
-      // Auto-select high severity issues
-      const highIssues = new Set<number>();
-      data.analysis.issues.forEach((issue, i) => {
-        if (issue.severity === 'high' && issue.improvedQuestion) {
-          highIssues.add(i);
-        }
-      });
-      setSelectedIssues(highIssues);
-
-      setStep('review');
-    } catch {
-      setStep('idle');
-    }
-  }
-
-  function toggleIssue(idx: number) {
-    setSelectedIssues((prev) => {
-      const next = new Set(prev);
-      if (next.has(idx)) next.delete(idx); else next.add(idx);
-      return next;
-    });
-  }
-
-  function toggleTrap(idx: number) {
-    setSelectedTraps((prev) => {
-      const next = new Set(prev);
-      if (next.has(idx)) next.delete(idx); else next.add(idx);
-      return next;
-    });
-  }
-
-  async function handleApply() {
-    if (!analysis) return;
-
-    const questions = [...(sheet.questions || [])];
-
-    // Apply selected issue improvements
-    for (const idx of selectedIssues) {
-      const issue = analysis.issues[idx];
-      if (!issue?.improvedQuestion) continue;
-      const qIdx = questions.findIndex((q) => q.number === issue.questionNumber);
-      if (qIdx !== -1) {
-        questions[qIdx] = { ...issue.improvedQuestion, number: questions[qIdx].number };
-      }
-    }
-
-    // Append selected trap suggestions
-    for (const idx of selectedTraps) {
-      const trap = analysis.trapSuggestions[idx];
-      if (!trap?.question) continue;
-      questions.push({
-        ...trap.question,
-        number: questions.length + 1,
-      });
-    }
-
-    // Renumber
-    const renumbered = questions.map((q, i) => ({ ...q, number: i + 1 }));
-    const answerKey = renumbered.map((q) => q.answer);
-
-    setApplying(true);
-    try {
-      const updated = await fetchWithToast<NaesinProblemSheet>('/api/naesin/problems', {
-        method: 'PATCH',
-        body: {
-          id: sheet.id,
-          questions: renumbered,
-          answer_key: answerKey,
-        },
-        successMessage: '개선 사항이 적용되었습니다',
-        errorMessage: '적용 중 오류가 발생했습니다',
-      });
-      onUpdate(updated);
-      handleOpenChange(false);
-    } catch { /* fetchWithToast handles toasts */ } finally {
-      setApplying(false);
-    }
-  }
-
-  const hasSelections = selectedIssues.size > 0 || selectedTraps.size > 0;
+  const {
+    step,
+    analysis,
+    selectedIssues,
+    selectedTraps,
+    applying,
+    hasSelections,
+    handleOpenChange,
+    handleAnalyze,
+    toggleIssue,
+    toggleTrap,
+    handleApply,
+  } = useAiImproveState({ sheet, onOpenChange, onUpdate });
 
   return (
     <Dialog open={open} onOpenChange={handleOpenChange}>

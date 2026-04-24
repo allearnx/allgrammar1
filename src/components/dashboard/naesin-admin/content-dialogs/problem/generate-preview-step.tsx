@@ -4,8 +4,8 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Loader2, ShieldCheck } from 'lucide-react';
 import type { FullValidationResult } from '@/lib/validation';
-import type { GeneratedQuestion } from './question-utils';
-import { QuestionEditRow, QuestionViewRow, ValidationBadgeIcon, QuestionBadge } from './question-table-rows';
+import type { GeneratedQuestion } from '../shared/question-utils';
+import { QuestionEditRow, QuestionViewRow, ValidationBadgeIcon, QuestionBadge } from '../shared/question-table-rows';
 import type { useQuestionEditor } from '@/hooks/use-question-editor';
 
 interface GeneratePreviewStepProps {

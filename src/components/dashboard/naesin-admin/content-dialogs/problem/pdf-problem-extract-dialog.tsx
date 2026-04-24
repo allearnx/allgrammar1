@@ -17,9 +17,9 @@ import { toast } from 'sonner';
 import { fetchWithToast } from '@/lib/fetch-with-toast';
 import type { NaesinProblemQuestion } from '@/types/naesin';
 import type { FullValidationResult } from '@/lib/validation';
-import type { GeneratedQuestion } from './question-utils';
-import { hasOptions, normalizeQuestions } from './question-utils';
-import { QuestionEditRow, QuestionViewRow, ValidationBadgeIcon, QuestionBadge } from './question-table-rows';
+import type { GeneratedQuestion } from '../shared/question-utils';
+import { hasOptions, normalizeQuestions } from '../shared/question-utils';
+import { QuestionEditRow, QuestionViewRow, ValidationBadgeIcon, QuestionBadge } from '../shared/question-table-rows';
 import { useQuestionEditor } from '@/hooks/use-question-editor';
 
 type Step = 'upload' | 'loading' | 'preview';

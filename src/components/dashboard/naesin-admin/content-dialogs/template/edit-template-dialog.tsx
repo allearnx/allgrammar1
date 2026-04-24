@@ -16,8 +16,8 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { toast } from 'sonner';
 import { fetchWithToast } from '@/lib/fetch-with-toast';
 import { useQuestionEditor } from '@/hooks/use-question-editor';
-import { toGenerated, toDbQuestion } from './question-utils';
-import { QuestionEditRow, QuestionViewRow } from './question-table-rows';
+import { toGenerated, toDbQuestion } from '../shared/question-utils';
+import { QuestionEditRow, QuestionViewRow } from '../shared/question-table-rows';
 import type { NaesinProblemQuestion } from '@/types/naesin';
 
 interface EditTemplateDialogProps {

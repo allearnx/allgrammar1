@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import type { GeneratedQuestion } from '@/components/dashboard/naesin-admin/content-dialogs/question-utils';
+import type { GeneratedQuestion } from '@/components/dashboard/naesin-admin/content-dialogs/shared/question-utils';
 
 export function useQuestionEditor(initial: GeneratedQuestion[] = []) {
   const [questions, setQuestions] = useState<GeneratedQuestion[]>(initial);

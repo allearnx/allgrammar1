@@ -14,7 +14,7 @@ import { toast } from 'sonner';
 import { fetchWithToast } from '@/lib/fetch-with-toast';
 import type { NaesinProblemQuestion } from '@/types/naesin';
 import type { FullValidationResult } from '@/lib/validation';
-import { normalizeQuestions } from './question-utils';
+import { normalizeQuestions } from '../shared/question-utils';
 import { useQuestionEditor } from '@/hooks/use-question-editor';
 import { GenerateInputForm } from './generate-input-form';
 import { GeneratePreviewStep } from './generate-preview-step';

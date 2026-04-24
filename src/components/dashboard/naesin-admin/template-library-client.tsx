@@ -7,8 +7,8 @@ import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from '@/
 import { Loader2, Library, ClipboardList, Trash2, Pencil, Search, FileUp } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { fetchWithToast } from '@/lib/fetch-with-toast';
-import { EditTemplateDialog } from './content-dialogs/edit-template-dialog';
-import { AddTemplateFromPdfDialog } from './content-dialogs/add-template-from-pdf-dialog';
+import { EditTemplateDialog } from './content-dialogs/template/edit-template-dialog';
+import { AddTemplateFromPdfDialog } from './content-dialogs/template/add-template-from-pdf-dialog';
 import type { NaesinProblemQuestion } from '@/types/naesin';
 
 interface TemplateItem {

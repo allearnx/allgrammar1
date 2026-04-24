@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { ActivityCalendar } from '@/components/charts/activity-calendar';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { CalendarDays, Loader2 } from 'lucide-react';
+import { fetchWithToast } from '@/lib/fetch-with-toast';
 import type { ActivityRecord } from '@/types/student-report';
 
 interface CalendarData {
@@ -16,8 +17,11 @@ export function LearningCalendarSection() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch('/api/student/learning-calendar')
-      .then((res) => res.json())
+    fetchWithToast<CalendarData>('/api/student/learning-calendar', {
+      method: 'GET',
+      silent: true,
+      logContext: 'student.learning_calendar',
+    })
       .then((json) => setData(json))
       .catch(() => {})
       .finally(() => setLoading(false));

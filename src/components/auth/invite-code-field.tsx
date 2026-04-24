@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { CheckCircle2, XCircle } from 'lucide-react';
+import { fetchWithToast } from '@/lib/fetch-with-toast';
 
 interface InviteCodeFieldProps {
   value: string;
@@ -26,17 +27,17 @@ export function InviteCodeField({ value, onChange, academyName, onAcademyNameCha
     const controller = new AbortController();
     setValidating(true);
 
-    fetch(`/api/auth/validate-invite-code?code=${code}`, { signal: controller.signal })
-      .then(async (res) => {
-        if (res.ok) {
-          const data = await res.json();
-          onAcademyNameChange(data.academyName);
-        } else {
-          setError('유효하지 않은 초대 코드입니다');
-        }
+    fetchWithToast<{ academyName: string }>(`/api/auth/validate-invite-code?code=${code}`, {
+      method: 'GET',
+      silent: true,
+      logContext: 'auth.validate_invite_code',
+      fetchOptions: { signal: controller.signal },
+    })
+      .then((data) => {
+        onAcademyNameChange(data.academyName);
       })
       .catch((err) => {
-        if (err.name !== 'AbortError') setError('검증 중 오류가 발생했습니다');
+        if (err.name !== 'AbortError') setError('유효하지 않은 초대 코드입니다');
       })
       .finally(() => setValidating(false));
 

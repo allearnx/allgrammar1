@@ -2,6 +2,7 @@
 
 import { usePathname, useRouter } from 'next/navigation';
 import { createClient } from '@/lib/supabase/client';
+import { fetchWithToast } from '@/lib/fetch-with-toast';
 import { Button } from '@/components/ui/button';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from '@/components/ui/sheet';
@@ -41,7 +42,7 @@ export function Sidebar({ user, services, naesinTree }: SidebarProps) {
     const supabase = createClient();
     await supabase.auth.signOut();
     // httpOnly 프로필 캐시 쿠키 서버에서 제거
-    await fetch('/api/auth/logout', { method: 'POST' });
+    await fetchWithToast('/api/auth/logout', { silent: true, logContext: 'auth.logout' });
     toast.success('로그아웃되었습니다');
     router.push('/login');
     router.refresh();
