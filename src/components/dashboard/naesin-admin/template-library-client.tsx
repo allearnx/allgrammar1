@@ -4,10 +4,11 @@ import { useState, useEffect, useCallback, useMemo } from 'react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from '@/components/ui/accordion';
-import { Loader2, Library, ClipboardList, Trash2, Pencil, Search } from 'lucide-react';
+import { Loader2, Library, ClipboardList, Trash2, Pencil, Search, FileUp } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { fetchWithToast } from '@/lib/fetch-with-toast';
 import { EditTemplateDialog } from './content-dialogs/edit-template-dialog';
+import { AddTemplateFromPdfDialog } from './content-dialogs/add-template-from-pdf-dialog';
 import type { NaesinProblemQuestion } from '@/types/naesin';
 
 interface TemplateItem {
@@ -24,6 +25,7 @@ export function TemplateLibraryClient() {
   const [deleting, setDeleting] = useState<string | null>(null);
   const [editingTemplate, setEditingTemplate] = useState<TemplateItem | null>(null);
   const [search, setSearch] = useState('');
+  const [pdfDialogOpen, setPdfDialogOpen] = useState(false);
 
   const loadTemplates = useCallback(async () => {
     setLoading(true);
@@ -102,6 +104,10 @@ export function TemplateLibraryClient() {
         <Library className="h-5 w-5 text-violet-500" />
         <h2 className="text-lg font-bold">문제 템플릿 라이브러리</h2>
         <Badge variant="secondary">{totalTemplates}개</Badge>
+        <Button size="sm" variant="outline" onClick={() => setPdfDialogOpen(true)}>
+          <FileUp className="h-3.5 w-3.5 mr-1" />
+          PDF에서 추출
+        </Button>
       </div>
 
       {topics.length === 0 ? (
@@ -215,6 +221,12 @@ export function TemplateLibraryClient() {
           onUpdated={loadTemplates}
         />
       )}
+
+      <AddTemplateFromPdfDialog
+        open={pdfDialogOpen}
+        onOpenChange={setPdfDialogOpen}
+        onAdd={loadTemplates}
+      />
     </div>
   );
 }
