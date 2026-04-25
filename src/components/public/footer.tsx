@@ -17,6 +17,7 @@ export default function PublicFooter() {
             <p className="text-[#424245] text-sm mb-4">주말/공휴일 휴무</p>
             <div className="flex gap-2">
               <Link href="/faq" className="px-4 py-2 bg-[#1d1d1f] text-white text-sm font-medium rounded hover:bg-[#424245] transition-colors">FAQ</Link>
+              <Link href="/blog" className="px-4 py-2 bg-[#1d1d1f] text-white text-sm font-medium rounded hover:bg-[#424245] transition-colors">블로그</Link>
             </div>
           </div>
 

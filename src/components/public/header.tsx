@@ -31,6 +31,7 @@ const menuItems = [
       { label: '리딩', href: '/courses/reading' },
     ]
   },
+  { label: '블로그', href: '/blog', hasDropdown: false },
   { label: '레벨테스트', href: 'https://leveltest.allrounderenglish.co.kr/', hasDropdown: false, isExternal: true },
 ];
 

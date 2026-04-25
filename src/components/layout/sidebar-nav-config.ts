@@ -8,6 +8,7 @@ import {
   LayoutDashboard,
   ListChecks,
   NotebookPen,
+  PenLine,
   Receipt,
   Settings,
   Users,
@@ -197,6 +198,7 @@ export const NAV_CONFIG: Record<string, NavGroup[]> = {
         { href: '/boss/teacher-profiles', label: '선생님 프로필', icon: UserCircle },
         { href: '/boss/reviews', label: '후기 관리', icon: Star },
         { href: '/boss/faqs', label: 'FAQ 관리', icon: HelpCircle },
+        { href: '/boss/blog', label: '블로그', icon: PenLine },
       ],
     },
     {
@@ -228,6 +230,7 @@ export const HOMEPAGE_MANAGER_GROUP: NavGroup = {
     { href: '/boss/teacher-profiles', label: '선생님 프로필', icon: UserCircle },
     { href: '/boss/reviews', label: '후기 관리', icon: Star },
     { href: '/boss/faqs', label: 'FAQ 관리', icon: HelpCircle },
+    { href: '/boss/blog', label: '블로그', icon: PenLine },
   ],
 };
 
