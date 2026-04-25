@@ -17,8 +17,8 @@ function ClassCard({ classItem }: { classItem: ClassItem }) {
           {classItem.tags?.includes('국제학교') && ' · 국제'}
         </span>
       </div>
-      <p className="font-semibold text-[13px] text-[#1d1d1f] leading-snug">{classItem.name}</p>
-      {classItem.subName && <p className="font-medium text-[12px] text-[#424245] leading-snug">{classItem.subName}</p>}
+      <p className="font-semibold text-[13px] text-[#1d1d1f] leading-snug whitespace-nowrap">{classItem.name}</p>
+      {classItem.subName && <p className="font-medium text-[12px] text-[#424245] leading-snug whitespace-nowrap">{classItem.subName}</p>}
       <p className="text-[11px] text-[#86868b] mt-2 font-medium">{classItem.time}</p>
       {classItem.teacher && <p className="text-[11px] text-[#86868b] mt-0.5">{classItem.teacher}</p>}
     </div>
@@ -78,7 +78,7 @@ export default function SchedulePage() {
         <div className="max-w-6xl mx-auto overflow-x-auto">
           <div className="min-w-[1200px] rounded-2xl shadow-lg overflow-hidden border border-gray-200">
             {/* 헤더 */}
-            <div className="grid grid-cols-[100px_60px_1fr_1fr_1fr_1fr_3fr_1fr] bg-[#e8e8ed] border-b border-gray-200">
+            <div className="grid grid-cols-[100px_60px_1fr_1fr_1fr_1fr_2fr_1fr] bg-[#e8e8ed] border-b border-gray-200">
               <div className="p-4 border-r border-gray-100" />
               <div className="p-4 border-r border-gray-100" />
               {days.map((day) => (
@@ -87,7 +87,7 @@ export default function SchedulePage() {
             </div>
 
             {/* 오전반 */}
-            <div className="grid grid-cols-[100px_60px_1fr_1fr_1fr_1fr_3fr_1fr]">
+            <div className="grid grid-cols-[100px_60px_1fr_1fr_1fr_1fr_2fr_1fr]">
               <div className="row-span-3 bg-[#e8e8ed] flex items-center justify-center font-bold text-[#1d1d1f] border-b border-r border-gray-200">
                 <div className="text-center">
                   <p>오전반</p>
@@ -100,7 +100,7 @@ export default function SchedulePage() {
             </div>
 
             {/* 오후반 */}
-            <div className="grid grid-cols-[100px_60px_1fr_1fr_1fr_1fr_3fr_1fr]">
+            <div className="grid grid-cols-[100px_60px_1fr_1fr_1fr_1fr_2fr_1fr]">
               <div className="row-span-4 bg-[#e8e8ed] flex items-center justify-center font-bold text-[#1d1d1f] border-r border-gray-200">
                 <div className="text-center">
                   <p>오후반</p>
