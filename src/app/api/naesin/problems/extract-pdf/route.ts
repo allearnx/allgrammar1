@@ -264,6 +264,19 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    // 정답 원문자(①→1) 정규화 + 중첩 배열 옵션 평탄화
+    const circledToDigit: Record<string, string> = { '①': '1', '②': '2', '③': '3', '④': '4', '⑤': '5', '⑥': '6' };
+    for (const q of allQuestions) {
+      if (typeof q.answer === 'string' && circledToDigit[q.answer]) {
+        q.answer = circledToDigit[q.answer];
+      }
+      if (Array.isArray(q.options)) {
+        q.options = (q.options as unknown[]).map((opt) =>
+          Array.isArray(opt) ? opt.map((item: unknown, i: number) => `(${String.fromCharCode(65 + i)}) ${item}`).join(' — ') : String(opt),
+        );
+      }
+    }
+
     // 문제 번호순 정렬 + 중복 제거
     const seen = new Set<number>();
     const questions = allQuestions

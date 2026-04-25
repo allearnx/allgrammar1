@@ -1,5 +1,12 @@
 import type { NaesinProblemQuestion } from '@/types/naesin';
 
+// ── Constants ──
+
+const CIRCLED_TO_DIGIT: Record<string, string> = {
+  '①': '1', '②': '2', '③': '3', '④': '4', '⑤': '5', '⑥': '6',
+};
+const CIRCLED_PATTERN = /^[①②③④⑤⑥]$/;
+
 // ── Types ──
 
 export type IssueSeverity = 'error' | 'warning';
@@ -120,6 +127,50 @@ export function validateProblemStructure(
     if (!q.explanation || q.explanation.trim() === '') {
       issues.push(issue('warning', n, 'NO_EXPLANATION', `${n}번: 해설이 없습니다.`));
     }
+
+    // Nested array options check
+    if (isMcq && q.options!.some((opt) => Array.isArray(opt))) {
+      issues.push(issue('error', n, 'NESTED_ARRAY_OPTION', `${n}번: 선지에 배열이 포함되어 있습니다. 문자열이어야 합니다.`));
+    }
+
+    // Circled number answer format (⑤ instead of "5")
+    if (typeof q.answer === 'string' && CIRCLED_PATTERN.test(q.answer)) {
+      issues.push(issue('warning', n, 'CIRCLED_ANSWER', `${n}번: 정답이 원문자(${q.answer})입니다. 숫자로 정규화 필요.`));
+    }
+
+    // Circled number options without markers in question text
+    if (isMcq && q.options!.every((opt) => CIRCLED_PATTERN.test(String(opt)))) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const fullText = (q.question || '') + ' ' + ((q as any).passage || '');
+      if (!/[①②③④⑤⑥]/.test(fullText)) {
+        issues.push(issue('error', n, 'CIRCLED_OPTIONS_NO_MARKERS',
+          `${n}번: 선지가 ①②③④⑤인데 지문에 번호 마커가 없습니다.`));
+      }
+    }
+
+    // Answer-explanation mismatch checks
+    if (q.explanation && isMcq) {
+      const exp = q.explanation;
+      const ansStr = String(q.answer);
+
+      // "따라서 N번" — but NOT "N번째" (word position, not answer)
+      const thereforeMatch = exp.match(/따라서\s*(\d)번(?!째)/);
+      if (thereforeMatch && thereforeMatch[1] !== ansStr) {
+        issues.push(issue('warning', n, 'ANSWER_EXP_THEREFORE',
+          `${n}번: 해설 "따라서 ${thereforeMatch[1]}번" ≠ 등록 정답 ${ansStr}`));
+      }
+
+      // "정답은 ①②③④⑤"
+      const circleMap: Record<string, string> = { '①': '1', '②': '2', '③': '3', '④': '4', '⑤': '5' };
+      const circleMatch = exp.match(/정답[은는이가]?\s*[①②③④⑤]/);
+      if (circleMatch) {
+        const expNum = circleMap[circleMatch[0].slice(-1)];
+        if (expNum && expNum !== ansStr) {
+          issues.push(issue('warning', n, 'ANSWER_EXP_CIRCLED',
+            `${n}번: 해설 "정답 ${circleMatch[0].slice(-1)}" ≠ 등록 정답 ${ansStr}`));
+        }
+      }
+    }
   }
 
   // Number sequence check
@@ -160,4 +211,44 @@ export function validateProblemStructure(
     warningCount,
     issues,
   };
+}
+
+// ── Pre-save sanitization ──
+
+/**
+ * Sanitize questions before saving to DB.
+ * - Normalize circled number answers (⑤ → "5")
+ * - Flatten nested array options to strings
+ * - Sync answer_key with questions[].answer
+ * Returns the sanitized questions array and answer_key.
+ */
+export function sanitizeQuestions(
+  questions: NaesinProblemQuestion[],
+  answerKey?: (string | number | null)[],
+): { questions: NaesinProblemQuestion[]; answerKey: (string | number | null)[] } {
+  const sanitized = questions.map((q) => {
+    const out = { ...q };
+
+    // Normalize circled answer → digit
+    if (typeof out.answer === 'string' && CIRCLED_PATTERN.test(out.answer)) {
+      out.answer = CIRCLED_TO_DIGIT[out.answer] ?? out.answer;
+    }
+
+    // Flatten nested array options
+    if (Array.isArray(out.options)) {
+      out.options = out.options.map((opt) => {
+        if (Array.isArray(opt)) {
+          return opt.map((item, i) => `(${String.fromCharCode(65 + i)}) ${item}`).join(' — ');
+        }
+        return String(opt);
+      });
+    }
+
+    return out;
+  });
+
+  // Rebuild answer_key from questions
+  const newAnswerKey = sanitized.map((q) => q.answer ?? null);
+
+  return { questions: sanitized, answerKey: newAnswerKey };
 }

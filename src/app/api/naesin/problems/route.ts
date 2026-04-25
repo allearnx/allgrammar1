@@ -3,6 +3,8 @@ import { createApiHandler, dbResult } from '@/lib/api';
 import { problemCreateSchema, problemPatchSchema, idSchema } from '@/lib/api/schemas';
 import { requireContentPermission } from '@/lib/api/require-content-permission';
 import { regradeSheet } from '@/lib/naesin/regrade-sheet';
+import type { NaesinProblemQuestion } from '@/types/naesin';
+import { sanitizeQuestions } from '@/lib/validation/problem-validator';
 
 const ADMIN_ROLES = ['teacher', 'admin', 'boss'] as const;
 
@@ -35,16 +37,22 @@ export const POST = createApiHandler(
   { roles: [...ADMIN_ROLES], schema: problemCreateSchema },
   async ({ body, supabase, user }) => {
     await requireContentPermission(user, supabase);
-    const { unitId, textbookId, title, mode, questions, pdfUrl, answerKey, category, videoUrl } = body;
+    const { unitId, textbookId, title, mode, questions: rawQuestions, pdfUrl, answerKey: rawAnswerKey, category, videoUrl } = body;
+
+    // Sanitize questions before saving (normalize answers, flatten arrays)
+    const hasQuestions = Array.isArray(rawQuestions) && rawQuestions.length > 0;
+    const { questions: sanitizedQuestions, answerKey: sanitizedAnswerKey } = hasQuestions
+      ? sanitizeQuestions(rawQuestions, rawAnswerKey as (string | number | null)[] | undefined)
+      : { questions: rawQuestions || [], answerKey: rawAnswerKey || [] };
 
     const insertData: Record<string, unknown> = {
       unit_id: unitId || null,
       textbook_id: textbookId || null,
       title,
       mode,
-      questions: questions || [],
+      questions: sanitizedQuestions,
       pdf_url: pdfUrl || null,
-      answer_key: answerKey || [],
+      answer_key: sanitizedAnswerKey,
       category: category || 'problem',
     };
     if (videoUrl) insertData.video_url = videoUrl;
@@ -67,6 +75,16 @@ export const PATCH = createApiHandler(
     // is_template / template_topic 변경은 boss만 가능
     if (('is_template' in updates || 'template_topic' in updates) && user.role !== 'boss') {
       return NextResponse.json({ error: '템플릿 설정은 boss만 가능합니다' }, { status: 403 });
+    }
+
+    // Sanitize questions on update too
+    if ('questions' in updates && Array.isArray(updates.questions) && updates.questions.length > 0) {
+      const { questions: sq, answerKey: sak } = sanitizeQuestions(
+        updates.questions as NaesinProblemQuestion[],
+        updates.answer_key as (string | number | null)[] | undefined,
+      );
+      updates.questions = sq;
+      updates.answer_key = sak;
     }
 
     const data = dbResult(await supabase

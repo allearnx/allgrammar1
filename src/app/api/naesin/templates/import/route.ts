@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import { createApiHandler, dbResult } from '@/lib/api';
 import { requireContentPermission } from '@/lib/api/require-content-permission';
 import { templateImportSchema } from '@/lib/api/schemas';
+import { sanitizeQuestions } from '@/lib/validation/problem-validator';
 
 const ADMIN_ROLES = ['teacher', 'admin', 'boss'] as const;
 
@@ -18,18 +19,24 @@ export const POST = createApiHandler(
       .eq('id', templateId)
       .single());
 
-    // 2. Build rows for each target unit
+    // 2. Sanitize before import
+    const hasQ = Array.isArray(template.questions) && template.questions.length > 0;
+    const { questions: sq, answerKey: sak } = hasQ
+      ? sanitizeQuestions(template.questions, template.answer_key)
+      : { questions: template.questions || [], answerKey: template.answer_key || [] };
+
+    // 3. Build rows for each target unit
     const rows = targetUnitIds.map((unitId: string) => ({
       unit_id: unitId,
       title: template.title,
       mode: template.mode,
-      questions: template.questions || [],
-      answer_key: template.answer_key || [],
+      questions: sq,
+      answer_key: sak,
       category: template.category || 'problem',
       source_template_id: templateId,
     }));
 
-    // 3. Bulk insert into naesin_problem_sheets
+    // 4. Bulk insert into naesin_problem_sheets
     const inserted = dbResult(await supabase
       .from('naesin_problem_sheets')
       .insert(rows)
