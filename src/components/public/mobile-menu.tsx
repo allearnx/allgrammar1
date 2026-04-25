@@ -96,16 +96,6 @@ export function MobileMenu({ menuItems, isLoggedIn, isOpen, onClose }: MobileMen
             )}
           </div>
         ))}
-        {/* 올인내신 강조 버튼 (모바일) */}
-        <Link
-          href="/courses/school_exam"
-          className="relative block mt-3 px-4 py-3 text-base font-bold text-white text-center rounded-full transition-all hover:scale-[1.02]"
-          style={{ background: 'linear-gradient(135deg, #3B82F6 0%, #06B6D4 100%)', boxShadow: '0 4px 20px rgba(59,130,246,0.4)' }}
-          onClick={onClose}
-        >
-          <span className="absolute -top-2 left-1/2 -translate-x-1/2 bg-rose-500 text-white text-[10px] font-black px-2 py-0.5 rounded-full leading-none whitespace-nowrap">NEW</span>
-          ✦ 올인내신
-        </Link>
         {/* 올킬보카 강조 버튼 (모바일) */}
         <Link
           href="/allkill"
