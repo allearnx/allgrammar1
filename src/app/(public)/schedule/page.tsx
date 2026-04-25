@@ -41,8 +41,8 @@ function TimeSlot({ period, hour, hourIdx, totalHours }: { period: string; hour:
             className={`p-2 border-b border-r border-gray-100 last:border-r-0 min-h-[120px] ${dayBgColors[day]} ${isLast ? (period === 'am' ? 'border-b-2 border-b-gray-200' : 'border-b-0') : ''}`}
           >
             {isSaturday ? (
-              <div className="grid grid-cols-3 gap-2 h-full">
-                {[0, 1, 2].map((slotIdx) => (
+              <div className="grid grid-cols-2 gap-3 h-full">
+                {[0, 1].map((slotIdx) => (
                   <div key={slotIdx}>
                     {cell?.classes[slotIdx] && <ClassCard classItem={cell.classes[slotIdx]} />}
                   </div>
