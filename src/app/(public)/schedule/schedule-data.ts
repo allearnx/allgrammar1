@@ -45,16 +45,15 @@ export const scheduleData: Record<string, Record<string, ScheduleCell>> = {
   'am-9': {
     '월': { classes: [] }, '화': { classes: [] }, '수': { classes: [] }, '목': { classes: [] },
     '토': { classes: [
-      { name: '천일문', subName: '기본', time: '8:40-9:50', teacher: '유혜령 T', type: 'hackers' },
-      { name: '리딩 4.0 해외반', time: '9:00-10:20', teacher: '안홍미 T', isNew: true, tags: ['국제학교', '리딩'], type: 'reading' },
-      { name: '구해영', subName: '중학영문법 Level 1', time: '9:00-10:20', teacher: '이다은 T', isNew: true, type: 'guhaeyoung' },
+      { name: '해커스', subName: '중학영문법 2학년', time: '8:40-9:50', teacher: '유혜령 T', type: 'hackers' },
+      { name: '구해영', subName: '중학영문법 Level 2', time: '9:00-10:20', teacher: '이다은 T', isNew: true, type: 'guhaeyoung' },
     ]},
     '일': { classes: [] },
   },
   'am-10': {
     '월': { classes: [] }, '화': { classes: [] }, '수': { classes: [] }, '목': { classes: [] },
     '토': { classes: [
-      { name: '중학 영문법', subName: '3800제 2학년', time: '10:00-11:20', teacher: '유혜령 T', isNew: true, type: 'grammar' },
+      { name: '초등 영문법', subName: '3800제 1권', time: '10:00-11:20', teacher: '유혜령 T', isNew: true, type: 'grammar' },
     ]},
     '일': { classes: [] },
   },
@@ -64,11 +63,9 @@ export const scheduleData: Record<string, Record<string, ScheduleCell>> = {
   },
   'pm-6': {
     '월': { classes: [] },
-    '화': { classes: [
-      { name: '리딩', time: '5:30-6:50', teacher: '안홍미 T', isNew: true, tags: ['리딩'], type: 'reading' },
-    ]},
+    '화': { classes: [] },
     '수': { classes: [
-      { name: '구해영', subName: '중학영문법 Level 0', time: '6:30-7:50', teacher: '', isNew: true, type: 'guhaeyoung' },
+      { name: '구해영', subName: '중학영문법 Level 1', time: '6:30-7:50', teacher: '', isNew: true, type: 'guhaeyoung' },
     ]},
     '목': { classes: [] }, '토': { classes: [] }, '일': { classes: [] },
   },
@@ -90,15 +87,15 @@ export const scheduleData: Record<string, Record<string, ScheduleCell>> = {
   },
   'pm-8': {
     '월': { classes: [
-      { name: 'Grammar Zone', subName: '고등 기본', time: '8:30-9:50', teacher: '안홍미 T', isNew: true, type: 'hackers' },
+      { name: '어법끝', subName: 'Start 실력다지기', time: '8:30-9:50', teacher: '안홍미 T', isNew: true, type: 'grammar' },
     ]},
     '화': { classes: [] },
-    '수': { classes: [
+    '수': { classes: [] },
+    '목': { classes: [
       { name: 'G6 Writing', time: '8:30-9:40', teacher: 'Samuel T', isNew: true, tags: ['국제학교'], type: 'international' },
-    ]},
-    '목': { classes: [] }, '토': { classes: [] },
+    ]}, '토': { classes: [] },
     '일': { classes: [
-      { name: '고2 모의고사', subName: '기출', time: '8:30-9:50', teacher: '황지환 T', isNew: true, type: 'reading' },
+      { name: '2027 수능특강', subName: '영어', time: '8:30-9:50', teacher: '황지환 T', isNew: true, type: 'reading' },
     ]},
   },
   'pm-9': {
