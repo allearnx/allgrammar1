@@ -1,5 +1,6 @@
 'use client';
 
+import { useRef } from 'react';
 import type { Editor } from '@tiptap/react';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
@@ -17,14 +18,18 @@ import {
   Code2,
   Link,
   Image,
+  ImageUp,
   Minus,
 } from 'lucide-react';
 
 interface EditorToolbarProps {
   editor: Editor | null;
+  onUploadImage?: (file: File) => Promise<string | null>;
 }
 
-export function EditorToolbar({ editor }: EditorToolbarProps) {
+export function EditorToolbar({ editor, onUploadImage }: EditorToolbarProps) {
+  const imageInputRef = useRef<HTMLInputElement>(null);
+
   if (!editor) return null;
 
   function addLink() {
@@ -39,11 +44,19 @@ export function EditorToolbar({ editor }: EditorToolbarProps) {
     editor.chain().focus().extendMarkRange('link').setLink({ href: url }).run();
   }
 
-  function addImage() {
+  function addImageByUrl() {
     if (!editor) return;
     const url = window.prompt('이미지 URL을 입력하세요');
     if (!url) return;
     editor.chain().focus().setImage({ src: url }).run();
+  }
+
+  async function handleImageFileChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0];
+    if (!file || !editor || !onUploadImage) return;
+    const url = await onUploadImage(file);
+    if (url) editor.chain().focus().setImage({ src: url }).run();
+    if (imageInputRef.current) imageInputRef.current.value = '';
   }
 
   const items = [
@@ -125,8 +138,14 @@ export function EditorToolbar({ editor }: EditorToolbarProps) {
     },
     {
       icon: Image,
-      label: '이미지',
-      action: addImage,
+      label: '이미지 URL',
+      action: addImageByUrl,
+      isActive: false,
+    },
+    {
+      icon: ImageUp,
+      label: '이미지 업로드',
+      action: () => imageInputRef.current?.click(),
       isActive: false,
     },
     {
@@ -139,6 +158,13 @@ export function EditorToolbar({ editor }: EditorToolbarProps) {
 
   return (
     <div className="flex flex-wrap items-center gap-0.5 rounded-t-md border border-b-0 bg-muted/50 p-1">
+      <input
+        ref={imageInputRef}
+        type="file"
+        accept="image/jpeg,image/png,image/webp,image/gif"
+        className="hidden"
+        onChange={handleImageFileChange}
+      />
       {items.map((item, index) => {
         if ('type' in item && item.type === 'separator') {
           return <Separator key={index} orientation="vertical" className="mx-1 h-6" />;

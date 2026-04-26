@@ -48,6 +48,22 @@ export function BlogEditor({ post }: BlogEditorProps) {
   const [uploading, setUploading] = useState(false);
   const [slugManuallyEdited, setSlugManuallyEdited] = useState(false);
 
+  async function uploadImage(file: File): Promise<string | null> {
+    const formData = new FormData();
+    formData.append('file', file);
+    try {
+      const result = await fetchWithToast<{ url: string }>('/api/boss/upload', {
+        method: 'POST',
+        body: formData,
+        successMessage: '이미지가 업로드되었습니다',
+        errorMessage: '업로드 실패',
+      });
+      return result.url;
+    } catch {
+      return null;
+    }
+  }
+
   const editor = useEditor({
     extensions: [
       StarterKit.configure({
@@ -62,7 +78,7 @@ export function BlogEditor({ post }: BlogEditorProps) {
         HTMLAttributes: { class: 'rounded-md max-w-full' },
       }),
       Placeholder.configure({
-        placeholder: '본문을 작성하세요...',
+        placeholder: '본문을 작성하세요... (이미지를 드래그하거나 붙여넣기할 수 있습니다)',
       }),
     ],
     content: post?.content ?? '',
@@ -70,6 +86,37 @@ export function BlogEditor({ post }: BlogEditorProps) {
       attributes: {
         class:
           'prose prose-sm sm:prose dark:prose-invert max-w-none min-h-[400px] p-4 focus:outline-none',
+      },
+      handleDrop(view, event, _slice, moved) {
+        if (moved || !event.dataTransfer?.files?.length) return false;
+        const file = event.dataTransfer.files[0];
+        if (!file.type.startsWith('image/')) return false;
+        event.preventDefault();
+        const pos = view.posAtCoords({ left: event.clientX, top: event.clientY })?.pos;
+        uploadImage(file).then((url) => {
+          if (!url) return;
+          const node = view.state.schema.nodes.image.create({ src: url });
+          const tr = view.state.tr.insert(pos ?? view.state.selection.anchor, node);
+          view.dispatch(tr);
+        });
+        return true;
+      },
+      handlePaste(_view, event) {
+        const items = event.clipboardData?.items;
+        if (!items) return false;
+        for (const item of items) {
+          if (item.type.startsWith('image/')) {
+            event.preventDefault();
+            const file = item.getAsFile();
+            if (!file) return false;
+            uploadImage(file).then((url) => {
+              if (!url || !editor) return;
+              editor.chain().focus().setImage({ src: url }).run();
+            });
+            return true;
+          }
+        }
+        return false;
       },
     },
   });
@@ -93,24 +140,11 @@ export function BlogEditor({ post }: BlogEditorProps) {
   async function handleThumbnailUpload(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];
     if (!file) return;
-
     setUploading(true);
-    try {
-      const formData = new FormData();
-      formData.append('file', file);
-      const result = await fetchWithToast<{ url: string }>('/api/boss/upload', {
-        method: 'POST',
-        body: formData,
-        successMessage: '이미지가 업로드되었습니다',
-        errorMessage: '업로드 실패',
-      });
-      setThumbnailUrl(result.url);
-    } catch {
-      // error already toasted
-    } finally {
-      setUploading(false);
-      if (fileInputRef.current) fileInputRef.current.value = '';
-    }
+    const url = await uploadImage(file);
+    if (url) setThumbnailUrl(url);
+    setUploading(false);
+    if (fileInputRef.current) fileInputRef.current.value = '';
   }
 
   async function handleSave() {
@@ -272,7 +306,7 @@ export function BlogEditor({ post }: BlogEditorProps) {
       <div className="space-y-2">
         <Label>본문</Label>
         <div className="rounded-md border">
-          <EditorToolbar editor={editor} />
+          <EditorToolbar editor={editor} onUploadImage={uploadImage} />
           <EditorContent editor={editor} />
         </div>
       </div>
