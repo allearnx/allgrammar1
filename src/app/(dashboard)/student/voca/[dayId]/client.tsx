@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { ChevronLeft, Lock } from 'lucide-react';
 import { useRouter } from 'next/navigation';
-import { VocaTab } from '@/components/voca/vocab-tab';
+import { NeonVocaTab } from '@/components/voca/neon';
 import { VocaTab2 } from '@/components/voca/vocab-tab/voca-tab-round2';
 import { cn } from '@/lib/utils';
 import type { VocaDay, VocaVocabulary, VocaStudentProgress } from '@/types/voca';
@@ -24,7 +24,7 @@ interface VocaDayClientProps {
   hasMatchingSubmission?: boolean;
 }
 
-export function VocaDayClient({ day, vocabulary, progress, wrongWords, round2Locked = false, hasMatchingSubmission = false }: VocaDayClientProps) {
+export function VocaDayClient({ day, vocabulary, progress, round2Locked = false }: VocaDayClientProps) {
   const router = useRouter();
   const [round, setRound] = useState<'1' | '2'>('1');
   useLearningSession('voca', day.id);
@@ -71,12 +71,10 @@ export function VocaDayClient({ day, vocabulary, progress, wrongWords, round2Loc
       </div>
 
       {round === '1' ? (
-        <VocaTab
+        <NeonVocaTab
           vocabulary={vocabulary}
           dayId={day.id}
           progress={progress}
-          wrongWords={wrongWords}
-          hasMatchingSubmission={hasMatchingSubmission}
         />
       ) : (
         <VocaTab2

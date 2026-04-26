@@ -27,6 +27,13 @@ export interface VocaIdiom {
   example_ko?: string;
 }
 
+/** 단어별 타임스탬프 (ElevenLabs TTS 동기화) */
+export interface WordTimestamp {
+  word: string;
+  start: number;
+  end: number;
+}
+
 export interface VocaVocabulary {
   id: string;
   day_id: string;
@@ -41,6 +48,9 @@ export interface VocaVocabulary {
   idioms: VocaIdiom[] | null;
   sort_order: number;
   created_at: string;
+  audio_url: string | null;
+  word_timestamps: WordTimestamp[] | null;
+  exam_source: string | null;
 }
 
 export interface VocaStudentProgress {

@@ -16,6 +16,9 @@ function makeVocab(overrides: Partial<VocaVocabulary> & { front_text: string }):
     idioms: null,
     sort_order: 0,
     created_at: '',
+    audio_url: null,
+    word_timestamps: null,
+    exam_source: null,
     ...overrides,
   };
 }

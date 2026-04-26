@@ -6,10 +6,11 @@ import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Textarea } from '@/components/ui/textarea';
-import { BookOpen, Trash2, Pencil, Wand2, Loader2 } from 'lucide-react';
+import { BookOpen, Trash2, Pencil, Wand2, Loader2, Volume2, Mic } from 'lucide-react';
 import { toast } from 'sonner';
 import { ConfirmDialog } from '@/components/shared/confirm-dialog';
 import { fetchWithToast } from '@/lib/fetch-with-toast';
+import { cn } from '@/lib/utils';
 import { useListCrud } from '@/hooks/use-list-crud';
 import { useInlineEdit } from '@/hooks/use-inline-edit';
 import { useConfirmDelete } from '@/hooks/use-confirm-delete';
@@ -20,6 +21,8 @@ export function DayContentManager({ dayId }: { dayId: string }) {
   const [loading, setLoading] = useState(true);
   const [bulkDeleteOpen, setBulkDeleteOpen] = useState(false);
   const [enriching, setEnriching] = useState(false);
+  const [ttsGenerating, setTtsGenerating] = useState(false);
+  const [playingAudio, setPlayingAudio] = useState<string | null>(null);
 
   const vocab = useListCrud<VocaVocabulary>({
     apiEndpoint: '/api/voca/vocabulary',
@@ -113,6 +116,41 @@ export function DayContentManager({ dayId }: { dayId: string }) {
     }
   };
 
+  const ttsCount = vocab.items.filter((v) => !v.audio_url).length;
+
+  const handleTtsBatch = async () => {
+    setTtsGenerating(true);
+    try {
+      const data = await fetchWithToast<{ generated: number; total: number; errors?: string[] }>('/api/voca/tts/batch', {
+        body: { dayId },
+        successMessage: undefined,
+        errorMessage: 'TTS 생성 중 오류가 발생했습니다',
+        logContext: 'voca_admin.tts_batch',
+      });
+      toast.success(`${data.generated}/${data.total}개 TTS 생성 완료`);
+      if (data.errors?.length) {
+        toast.warning(`${data.errors.length}개 실패: ${data.errors[0]}`);
+      }
+      loadVocab();
+    } catch {
+      // fetchWithToast already shows toast
+    } finally {
+      setTtsGenerating(false);
+    }
+  };
+
+  const playAudio = (vocabId: string, audioUrl: string) => {
+    if (playingAudio === vocabId) {
+      setPlayingAudio(null);
+      return;
+    }
+    setPlayingAudio(vocabId);
+    const audio = new Audio(audioUrl);
+    audio.onended = () => setPlayingAudio(null);
+    audio.onerror = () => setPlayingAudio(null);
+    audio.play();
+  };
+
   useEffect(() => { loadVocab(); }, [loadVocab]);
 
   if (loading) return <p className="text-sm text-muted-foreground mt-3">로딩 중...</p>;
@@ -149,6 +187,15 @@ export function DayContentManager({ dayId }: { dayId: string }) {
                   {v.synonyms && <Badge variant="outline" className="text-[10px] h-4 px-1">유</Badge>}
                   {v.antonyms && <Badge variant="outline" className="text-[10px] h-4 px-1">반</Badge>}
                   {v.idioms && v.idioms.length > 0 && <Badge variant="outline" className="text-[10px] h-4 px-1 border-violet-400 text-violet-700">숙</Badge>}
+                  {v.audio_url ? (
+                    <Button variant="ghost" size="icon" className="h-6 w-6" onClick={() => playAudio(v.id, v.audio_url!)}>
+                      <Volume2 className={cn('h-3.5 w-3.5', playingAudio === v.id ? 'text-green-600 animate-pulse' : 'text-green-600')} />
+                    </Button>
+                  ) : (
+                    <span className="h-6 w-6 flex items-center justify-center">
+                      <Mic className="h-3 w-3 text-muted-foreground/40" />
+                    </span>
+                  )}
                   <Button variant="ghost" size="icon" className="h-6 w-6 opacity-0 group-hover:opacity-100" onClick={() => vocabEdit.editingId === v.id ? vocabEdit.cancelEdit() : vocabEdit.startEdit(v)}>
                     <Pencil className="h-3.5 w-3.5" />
                   </Button>
@@ -194,10 +241,16 @@ export function DayContentManager({ dayId }: { dayId: string }) {
         <BulkVocabUpload module="voca" parentId={dayId} onAdd={loadVocab} />
         <PdfVocabExtract module="voca" parentId={dayId} onAdd={loadVocab} />
         {vocab.items.length > 0 && (
-          <Button size="sm" variant="outline" onClick={handleEnrichRound2} disabled={enriching}>
-            {enriching ? <Loader2 className="h-3.5 w-3.5 mr-1 animate-spin" /> : <Wand2 className="h-3.5 w-3.5 mr-1" />}
-            {enriching ? '생성 중...' : vocab.items.some((v) => !v.synonyms && !v.antonyms && !v.example_sentence) ? '데이터 보강' : '데이터 재생성'}
-          </Button>
+          <>
+            <Button size="sm" variant="outline" onClick={handleEnrichRound2} disabled={enriching}>
+              {enriching ? <Loader2 className="h-3.5 w-3.5 mr-1 animate-spin" /> : <Wand2 className="h-3.5 w-3.5 mr-1" />}
+              {enriching ? '생성 중...' : vocab.items.some((v) => !v.synonyms && !v.antonyms && !v.example_sentence) ? '데이터 보강' : '데이터 재생성'}
+            </Button>
+            <Button size="sm" variant="outline" onClick={handleTtsBatch} disabled={ttsGenerating || ttsCount === 0}>
+              {ttsGenerating ? <Loader2 className="h-3.5 w-3.5 mr-1 animate-spin" /> : <Volume2 className="h-3.5 w-3.5 mr-1" />}
+              {ttsGenerating ? 'TTS 생성 중...' : ttsCount > 0 ? `TTS 생성 (${ttsCount}개)` : 'TTS 완료'}
+            </Button>
+          </>
         )}
       </div>
 
