@@ -20,43 +20,77 @@ export function useAudioPlayer({
   const [currentWordIndex, setCurrentWordIndex] = useState(-1);
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const rafRef = useRef<number | null>(null);
-  // Web Speech API 폴백
   const synthRef = useRef<SpeechSynthesis | null>(null);
+  const speechTimersRef = useRef<ReturnType<typeof setTimeout>[]>([]);
 
-  // 하이라이트 추적
+  // Refs for stable RAF callback (no stale closure)
+  const wordTimestampsRef = useRef(wordTimestamps);
+  wordTimestampsRef.current = wordTimestamps;
+  const currentWordIndexRef = useRef(-1);
+  const onWordHighlightRef = useRef(onWordHighlight);
+  onWordHighlightRef.current = onWordHighlight;
+  const onEndRef = useRef(onEnd);
+  onEndRef.current = onEnd;
+
+  // RAF 하이라이트 추적 — ref 기반으로 deps 없음
   const updateHighlight = useCallback(() => {
-    if (!audioRef.current || !wordTimestamps) return;
+    if (!audioRef.current || !wordTimestampsRef.current) return;
     const currentTime = audioRef.current.currentTime;
     let idx = -1;
-    for (let i = 0; i < wordTimestamps.length; i++) {
-      if (currentTime >= wordTimestamps[i].start && currentTime <= wordTimestamps[i].end) {
+    for (let i = 0; i < wordTimestampsRef.current.length; i++) {
+      if (currentTime >= wordTimestampsRef.current[i].start && currentTime <= wordTimestampsRef.current[i].end) {
         idx = i;
         break;
       }
     }
-    if (idx !== currentWordIndex) {
+    if (idx !== currentWordIndexRef.current) {
+      currentWordIndexRef.current = idx;
       setCurrentWordIndex(idx);
-      if (idx >= 0) onWordHighlight?.(idx);
+      if (idx >= 0) onWordHighlightRef.current?.(idx);
     }
     if (audioRef.current && !audioRef.current.paused) {
       rafRef.current = requestAnimationFrame(updateHighlight);
     }
-  }, [wordTimestamps, currentWordIndex, onWordHighlight]);
+  }, []);
+
+  // audioUrl 변경 시 기존 Audio 정리
+  useEffect(() => {
+    if (audioRef.current) {
+      audioRef.current.pause();
+      audioRef.current.onended = null;
+      audioRef.current.onerror = null;
+      audioRef.current = null;
+    }
+    if (rafRef.current) {
+      cancelAnimationFrame(rafRef.current);
+      rafRef.current = null;
+    }
+    setIsPlaying(false);
+    setCurrentWordIndex(-1);
+    currentWordIndexRef.current = -1;
+  }, [audioUrl]);
+
+  const clearSpeechTimers = useCallback(() => {
+    speechTimersRef.current.forEach(clearTimeout);
+    speechTimersRef.current = [];
+  }, []);
 
   const play = useCallback(async (text?: string) => {
-    // ElevenLabs 오디오가 있으면 사용
+    // ElevenLabs 오디오
     if (audioUrl) {
       if (!audioRef.current) {
         audioRef.current = new Audio(audioUrl);
         audioRef.current.onended = () => {
           setIsPlaying(false);
           setCurrentWordIndex(-1);
+          currentWordIndexRef.current = -1;
           if (rafRef.current) cancelAnimationFrame(rafRef.current);
-          onEnd?.();
+          onEndRef.current?.();
         };
         audioRef.current.onerror = () => {
           setIsPlaying(false);
           setCurrentWordIndex(-1);
+          currentWordIndexRef.current = -1;
         };
       }
       audioRef.current.currentTime = 0;
@@ -74,30 +108,32 @@ export function useAudioPlayer({
       utterance.rate = 0.9;
       utterance.onend = () => {
         setIsPlaying(false);
-        onEnd?.();
+        onEndRef.current?.();
       };
       utterance.onerror = () => setIsPlaying(false);
       setIsPlaying(true);
 
-      // 단어별 타이밍 추정 (Web Speech API는 타임스탬프 없음)
-      if (text) {
-        const words = text.split(/\s+/);
-        const avgDuration = (text.length * 0.06) / words.length;
-        words.forEach((_, i) => {
-          setTimeout(() => {
-            setCurrentWordIndex(i);
-            onWordHighlight?.(i);
-          }, i * avgDuration * 1000);
-        });
-        setTimeout(() => setCurrentWordIndex(-1), words.length * avgDuration * 1000);
-      }
+      // 단어별 타이밍 추정
+      clearSpeechTimers();
+      const words = text.split(/\s+/);
+      const avgDuration = (text.length * 0.06) / words.length;
+      words.forEach((_, i) => {
+        const timer = setTimeout(() => {
+          currentWordIndexRef.current = i;
+          setCurrentWordIndex(i);
+          onWordHighlightRef.current?.(i);
+        }, i * avgDuration * 1000);
+        speechTimersRef.current.push(timer);
+      });
+      const endTimer = setTimeout(() => {
+        currentWordIndexRef.current = -1;
+        setCurrentWordIndex(-1);
+      }, words.length * avgDuration * 1000);
+      speechTimersRef.current.push(endTimer);
 
       synthRef.current.speak(utterance);
-      return;
     }
-
-    // 어떤 TTS도 불가 → 아무것도 하지 않음
-  }, [audioUrl, updateHighlight, onEnd, onWordHighlight]);
+  }, [audioUrl, updateHighlight, clearSpeechTimers]);
 
   const stop = useCallback(() => {
     if (audioRef.current) {
@@ -108,11 +144,13 @@ export function useAudioPlayer({
       synthRef.current.cancel();
     }
     if (rafRef.current) cancelAnimationFrame(rafRef.current);
+    clearSpeechTimers();
     setIsPlaying(false);
     setCurrentWordIndex(-1);
-  }, []);
+    currentWordIndexRef.current = -1;
+  }, [clearSpeechTimers]);
 
-  // Cleanup
+  // Cleanup on unmount
   useEffect(() => {
     return () => {
       stop();

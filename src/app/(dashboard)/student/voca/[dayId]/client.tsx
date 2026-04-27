@@ -19,7 +19,7 @@ interface VocaDayClientProps {
   day: VocaDay;
   vocabulary: VocaVocabulary[];
   progress: VocaStudentProgress | null;
-  wrongWords: WrongWordItem[];
+  wrongWords?: WrongWordItem[];
   round2Locked?: boolean;
   hasMatchingSubmission?: boolean;
 }

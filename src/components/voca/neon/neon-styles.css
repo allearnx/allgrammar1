@@ -46,16 +46,6 @@
   border: 1px solid rgba(0, 240, 255, 0.15);
 }
 
-/* 네온 펄스 애니메이션 */
-@keyframes neon-pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.5; }
-}
-
-.neon-pulse {
-  animation: neon-pulse 1s ease-in-out infinite;
-}
-
 /* 가이드 빛 (리듬 스펠링) */
 @keyframes guide-glow {
   0%, 100% {

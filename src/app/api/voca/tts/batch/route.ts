@@ -30,14 +30,18 @@ export const POST = createApiHandler(
     }
 
     if (!vocabs || vocabs.length === 0) {
-      return NextResponse.json({ generated: 0, message: '모든 단어에 TTS가 생성되어 있습니다' });
+      return NextResponse.json({ generated: 0, remaining: 0, message: '모든 단어에 TTS가 생성되어 있습니다' });
     }
+
+    // Vercel 타임아웃 방어: 최대 20개씩 처리
+    const BATCH_LIMIT = 20;
+    const batch = vocabs.slice(0, BATCH_LIMIT);
+    const remaining = Math.max(0, vocabs.length - BATCH_LIMIT);
 
     let generated = 0;
     const errors: string[] = [];
 
-    // 순차 처리 (ElevenLabs rate limit 고려)
-    for (const vocab of vocabs) {
+    for (const vocab of batch) {
       const text = vocab.example_sentence || vocab.front_text;
       try {
         const { audioBuffer, wordTimestamps } =
@@ -63,7 +67,8 @@ export const POST = createApiHandler(
 
     return NextResponse.json({
       generated,
-      total: vocabs.length,
+      total: batch.length,
+      remaining,
       errors: errors.length > 0 ? errors : undefined,
     });
   }

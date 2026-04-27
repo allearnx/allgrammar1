@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useCallback, useMemo } from 'react';
+import { useState, useCallback, useMemo, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { toast } from 'sonner';
 import { fetchWithToast } from '@/lib/fetch-with-toast';
@@ -10,7 +10,6 @@ import { RhythmSpelling } from './rhythm-spelling';
 import { WordMatching } from './word-matching';
 import { QuickQuiz } from './quick-quiz';
 import { EMPTY_VOCA_PROGRESS, type VocaVocabulary, type VocaStudentProgress } from '@/types/voca';
-import './neon-styles.css';
 
 interface NeonVocaTabProps {
   vocabulary: VocaVocabulary[];
@@ -39,6 +38,7 @@ export function NeonVocaTab({ vocabulary, dayId, progress }: NeonVocaTabProps) {
   const initialStep = completedSteps.findIndex((c) => !c);
   const [currentStep, setCurrentStep] = useState(initialStep === -1 ? 0 : initialStep);
   const [celebrateStep, setCelebrateStep] = useState<number | null>(null);
+  const celebrateTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const steps = STEP_LABELS.map((label, i) => ({
     label,
@@ -49,11 +49,10 @@ export function NeonVocaTab({ vocabulary, dayId, progress }: NeonVocaTabProps) {
   const saveProgress = useCallback(async (
     type: 'flashcard' | 'quiz' | 'spelling' | 'matching',
     score?: number,
-    matchingAttempt?: number
   ) => {
     try {
       await fetchWithToast('/api/voca/progress', {
-        body: { dayId, type, score, matchingAttempt },
+        body: { dayId, type, score },
         silent: true,
       });
     } catch { /* swallow */ }
@@ -82,7 +81,7 @@ export function NeonVocaTab({ vocabulary, dayId, progress }: NeonVocaTabProps) {
       setCelebrateStep(stepIndex);
       const nextStep = stepIndex + 1;
 
-      setTimeout(() => {
+      celebrateTimerRef.current = setTimeout(() => {
         setCelebrateStep(null);
         if (nextStep < STEP_LABELS.length) {
           setCurrentStep(nextStep);
@@ -94,6 +93,11 @@ export function NeonVocaTab({ vocabulary, dayId, progress }: NeonVocaTabProps) {
       toast.info('기준 점수에 도달하지 못했습니다. 다시 도전해보세요!');
     }
   }, [saveProgress]);
+
+  // Cleanup timer on unmount
+  useEffect(() => {
+    return () => { if (celebrateTimerRef.current) clearTimeout(celebrateTimerRef.current); };
+  }, []);
 
   if (vocabulary.length === 0) {
     return (
@@ -158,14 +162,7 @@ export function NeonVocaTab({ vocabulary, dayId, progress }: NeonVocaTabProps) {
           )}
           {currentStep === 1 && (
             <RhythmSpelling
-              vocabulary={vocabulary.map((v) => ({
-                id: v.id,
-                front_text: v.front_text,
-                back_text: v.back_text,
-                example_sentence: v.example_sentence,
-                audio_url: v.audio_url,
-                word_timestamps: v.word_timestamps,
-              }))}
+              vocabulary={vocabulary}
               onComplete={(score) => handleStepComplete(1, 'spelling', score)}
             />
           )}

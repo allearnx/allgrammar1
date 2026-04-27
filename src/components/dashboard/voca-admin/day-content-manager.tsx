@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
@@ -23,6 +23,7 @@ export function DayContentManager({ dayId }: { dayId: string }) {
   const [enriching, setEnriching] = useState(false);
   const [ttsGenerating, setTtsGenerating] = useState(false);
   const [playingAudio, setPlayingAudio] = useState<string | null>(null);
+  const audioInstanceRef = useRef<HTMLAudioElement | null>(null);
 
   const vocab = useListCrud<VocaVocabulary>({
     apiEndpoint: '/api/voca/vocabulary',
@@ -120,35 +121,53 @@ export function DayContentManager({ dayId }: { dayId: string }) {
 
   const handleTtsBatch = async () => {
     setTtsGenerating(true);
+    let totalGenerated = 0;
     try {
-      const data = await fetchWithToast<{ generated: number; total: number; errors?: string[] }>('/api/voca/tts/batch', {
-        body: { dayId },
-        successMessage: undefined,
-        errorMessage: 'TTS 생성 중 오류가 발생했습니다',
-        logContext: 'voca_admin.tts_batch',
-      });
-      toast.success(`${data.generated}/${data.total}개 TTS 생성 완료`);
-      if (data.errors?.length) {
-        toast.warning(`${data.errors.length}개 실패: ${data.errors[0]}`);
+      // 20개씩 배치 반복 (remaining > 0이면 자동 재호출)
+      let hasMore = true;
+      while (hasMore) {
+        const data = await fetchWithToast<{ generated: number; total: number; remaining: number; errors?: string[] }>('/api/voca/tts/batch', {
+          body: { dayId },
+          successMessage: undefined,
+          errorMessage: 'TTS 생성 중 오류가 발생했습니다',
+          logContext: 'voca_admin.tts_batch',
+        });
+        totalGenerated += data.generated;
+        if (data.errors?.length) {
+          toast.warning(`${data.errors.length}개 실패: ${data.errors[0]}`);
+        }
+        hasMore = data.remaining > 0 && data.generated > 0;
       }
+      toast.success(`${totalGenerated}개 TTS 생성 완료`);
       loadVocab();
     } catch {
-      // fetchWithToast already shows toast
+      if (totalGenerated > 0) {
+        toast.success(`${totalGenerated}개 생성 후 중단됨`);
+        loadVocab();
+      }
     } finally {
       setTtsGenerating(false);
     }
   };
 
   const playAudio = (vocabId: string, audioUrl: string) => {
+    // 기존 재생 중지
+    if (audioInstanceRef.current) {
+      audioInstanceRef.current.pause();
+      audioInstanceRef.current.onended = null;
+      audioInstanceRef.current.onerror = null;
+      audioInstanceRef.current = null;
+    }
     if (playingAudio === vocabId) {
       setPlayingAudio(null);
       return;
     }
-    setPlayingAudio(vocabId);
     const audio = new Audio(audioUrl);
-    audio.onended = () => setPlayingAudio(null);
-    audio.onerror = () => setPlayingAudio(null);
+    audioInstanceRef.current = audio;
+    audio.onended = () => { setPlayingAudio(null); audioInstanceRef.current = null; };
+    audio.onerror = () => { setPlayingAudio(null); audioInstanceRef.current = null; };
     audio.play();
+    setPlayingAudio(vocabId);
   };
 
   useEffect(() => { loadVocab(); }, [loadVocab]);

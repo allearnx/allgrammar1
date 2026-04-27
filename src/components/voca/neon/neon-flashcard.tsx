@@ -7,6 +7,7 @@ import { Volume2, ChevronLeft, ChevronRight } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useAudioPlayer } from './audio-player-hook';
 import { NeonSentenceDisplay } from './neon-sentence-display';
+import { ProgressDots } from './progress-dots';
 import type { VocaVocabulary } from '@/types/voca';
 import './neon-styles.css';
 
@@ -67,18 +68,7 @@ export function NeonFlashcard({ vocabulary, onComplete }: NeonFlashcardProps) {
         <span className="text-sm text-slate-500">
           {currentIndex + 1} / {vocabulary.length}
         </span>
-        <div className="flex gap-1">
-          {vocabulary.map((_, i) => (
-            <div
-              key={i}
-              className={cn(
-                'w-2 h-2 rounded-full transition-colors',
-                i === currentIndex ? 'bg-cyan-400 shadow-[0_0_6px_rgba(0,240,255,0.5)]' :
-                visited.has(i) ? 'bg-slate-500' : 'bg-slate-700',
-              )}
-            />
-          ))}
-        </div>
+        <ProgressDots total={vocabulary.length} current={currentIndex} visited={visited} />
       </div>
 
       {/* Card */}

@@ -1,9 +1,8 @@
 'use client';
 
-import { useState, useMemo } from 'react';
-import { motion } from 'framer-motion';
-import { cn } from '@/lib/utils';
+import { useState, useMemo, useRef, useEffect } from 'react';
 import { MatchingGameRound, type MatchingGameItem } from '@/components/voca/vocab-tab/matching-game-round';
+import { NeonResultScreen } from './neon-result-screen';
 import type { VocaVocabulary } from '@/types/voca';
 import './neon-styles.css';
 
@@ -21,9 +20,9 @@ export function WordMatching({ vocabulary, onComplete }: WordMatchingProps) {
   const [attempt, setAttempt] = useState(1);
   const [totalWrong, setTotalWrong] = useState(0);
   const [totalPairs, setTotalPairs] = useState(0);
-  const [done, setDone] = useState(false);
+  const [finalScore, setFinalScore] = useState<number | null>(null);
+  const chunkTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  // 5개씩 청크 분할
   const chunks = useMemo(() => {
     const result: VocaVocabulary[][] = [];
     for (let i = 0; i < vocabulary.length; i += CHUNK_SIZE) {
@@ -44,21 +43,16 @@ export function WordMatching({ vocabulary, onComplete }: WordMatchingProps) {
     const newTotalPairs = totalPairs + items.length;
 
     if (currentChunk + 1 < chunks.length) {
-      // 다음 청크
       setTotalWrong(newTotalWrong);
       setTotalPairs(newTotalPairs);
-      setTimeout(() => setCurrentChunk((c) => c + 1), 500);
+      chunkTimerRef.current = setTimeout(() => setCurrentChunk((c) => c + 1), 500);
     } else {
-      // 모든 청크 완료
-      const finalTotal = newTotalPairs;
-      const finalCorrect = finalTotal - newTotalWrong;
-      const score = Math.round((finalCorrect / finalTotal) * 100);
+      const score = Math.round(((newTotalPairs - newTotalWrong) / newTotalPairs) * 100);
 
       if (score >= PASS_SCORE || attempt >= MAX_ATTEMPTS) {
-        setDone(true);
+        setFinalScore(score);
         onComplete(score);
       } else {
-        // 재시도
         setAttempt(2);
         setCurrentChunk(0);
         setTotalWrong(0);
@@ -67,23 +61,18 @@ export function WordMatching({ vocabulary, onComplete }: WordMatchingProps) {
     }
   };
 
-  if (done) {
-    const score = Math.round(((totalPairs - totalWrong) / totalPairs) * 100);
+  useEffect(() => {
+    return () => { if (chunkTimerRef.current) clearTimeout(chunkTimerRef.current); };
+  }, []);
+
+  if (finalScore !== null) {
     return (
-      <div className="neon-container p-6 min-h-[60dvh] flex items-center justify-center">
-        <motion.div
-          initial={{ scale: 0.8, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          className="text-center space-y-4"
-        >
-          <p className={cn('text-5xl font-bold', score >= PASS_SCORE ? 'neon-text-green' : 'neon-text-gold')}>
-            {score}%
-          </p>
-          <p className="text-slate-400">
-            {score >= PASS_SCORE ? '매칭 통과!' : `${score}점 (90% 이상 필요)`}
-          </p>
-        </motion.div>
-      </div>
+      <NeonResultScreen
+        score={finalScore}
+        passThreshold={PASS_SCORE}
+        passMessage="매칭 통과!"
+        failMessage={`${finalScore}점 (90% 이상 필요)`}
+      />
     );
   }
 
