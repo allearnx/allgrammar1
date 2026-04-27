@@ -123,20 +123,42 @@ export function DayContentManager({ dayId }: { dayId: string }) {
     setTtsGenerating(true);
     let totalGenerated = 0;
     try {
-      // 20개씩 배치 반복 (remaining > 0이면 자동 재호출)
       let hasMore = true;
+      let retries = 0;
       while (hasMore) {
-        const data = await fetchWithToast<{ generated: number; total: number; remaining: number; errors?: string[] }>('/api/voca/tts/batch', {
-          body: { dayId },
-          successMessage: undefined,
-          errorMessage: 'TTS 생성 중 오류가 발생했습니다',
-          logContext: 'voca_admin.tts_batch',
-        });
-        totalGenerated += data.generated;
-        if (data.errors?.length) {
-          toast.warning(`${data.errors.length}개 실패: ${data.errors[0]}`);
+        try {
+          const data = await fetchWithToast<{ generated: number; total: number; remaining: number; errors?: string[] }>('/api/voca/tts/batch', {
+            body: { dayId },
+            successMessage: undefined,
+            errorMessage: 'TTS 생성 중 오류가 발생했습니다',
+            logContext: 'voca_admin.tts_batch',
+          });
+          totalGenerated += data.generated;
+          retries = 0;
+          if (data.errors?.length) {
+            // rate limit 에러면 자동 대기 후 재시도
+            const isRateLimit = data.errors.some(e => e.includes('429') || e.includes('rate') || e.includes('quota'));
+            if (isRateLimit && retries < 3) {
+              retries++;
+              toast.info(`속도 제한 — ${30 * retries}초 대기 후 재시도...`);
+              await new Promise(r => setTimeout(r, 30_000 * retries));
+              continue;
+            }
+            toast.warning(`${data.errors.length}개 실패: ${data.errors[0]}`);
+          }
+          hasMore = data.remaining > 0 && data.generated > 0;
+          // 배치 사이 2초 대기 (rate limit 방어)
+          if (hasMore) await new Promise(r => setTimeout(r, 2_000));
+        } catch {
+          // fetchWithToast 자체가 throw한 경우 (rate limit 등)
+          retries++;
+          if (retries <= 3) {
+            toast.info(`오류 발생 — ${30 * retries}초 대기 후 재시도 (${retries}/3)...`);
+            await new Promise(r => setTimeout(r, 30_000 * retries));
+            continue;
+          }
+          throw new Error('재시도 횟수 초과');
         }
-        hasMore = data.remaining > 0 && data.generated > 0;
       }
       toast.success(`${totalGenerated}개 TTS 생성 완료`);
       loadVocab();
