@@ -26,7 +26,7 @@ export default async function StudentVocaDayPage({
 
   if (!assignment) redirect('/student');
 
-  // Get day info
+  // Get day info + sort_order for free limit check
   const { data: day } = await supabase
     .from('voca_days')
     .select('*')
@@ -34,6 +34,17 @@ export default async function StudentVocaDayPage({
     .single();
 
   if (!day) notFound();
+
+  // 무료 플랜: Day 3개까지만 접근 가능
+  const planContext = await getPlanContext(user.academy_id, user.id);
+  if (planContext.tier === 'free') {
+    const { count } = await supabase
+      .from('voca_days')
+      .select('id', { count: 'exact', head: true })
+      .eq('book_id', (day as VocaDay).book_id)
+      .lt('sort_order', (day as VocaDay).sort_order);
+    if ((count ?? 0) >= 3) redirect('/student/voca');
+  }
 
   // Get vocabulary
   const { data: vocabulary } = await supabase
@@ -86,7 +97,6 @@ export default async function StudentVocaDayPage({
   const wrongWords = Array.from(wrongWordsMap.values());
   const hasMatchingSubmission = (matchingSubmissions?.length ?? 0) > 0;
 
-  const planContext = await getPlanContext(user.academy_id, user.id);
   const round2Locked = !assignment?.round2_unlocked && !canUseFeature(planContext.tier, 'voca:round2');
 
   return (

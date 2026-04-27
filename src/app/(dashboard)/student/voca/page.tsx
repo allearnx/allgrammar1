@@ -3,6 +3,7 @@ import { createClient } from '@/lib/supabase/server';
 import { redirect } from 'next/navigation';
 import { Topbar } from '@/components/layout/topbar';
 import { VocaHomeClient } from './client';
+import { getPlanContext } from '@/lib/billing/get-plan-context';
 import type { VocaBook, VocaDay, VocaStudentProgress } from '@/types/voca';
 
 export default async function StudentVocaPage({
@@ -60,6 +61,9 @@ export default async function StudentVocaPage({
     for (const s of submissions || []) submissionStatusMap[s.day_id] = s.status;
   }
 
+  const planContext = await getPlanContext(user.academy_id, user.id);
+  const isFree = planContext.tier === 'free';
+
   return (
     <>
       <Topbar user={user} title="올킬보카" />
@@ -70,6 +74,7 @@ export default async function StudentVocaPage({
           progressList={progressList}
           submissionStatuses={submissionStatusMap}
           initialBookId={initialBookId}
+          freeDayLimit={isFree ? 3 : 0}
         />
       </div>
     </>

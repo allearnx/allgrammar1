@@ -11,7 +11,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { BookOpen, CheckCircle } from 'lucide-react';
+import { BookOpen, CheckCircle, Lock } from 'lucide-react';
 import type { VocaBook, VocaDay, VocaStudentProgress } from '@/types/voca';
 
 interface VocaHomeClientProps {
@@ -20,9 +20,11 @@ interface VocaHomeClientProps {
   progressList: VocaStudentProgress[];
   submissionStatuses?: Record<string, string>;
   initialBookId?: string;
+  /** 무료 유저 Day 제한 (0 = 무제한) */
+  freeDayLimit?: number;
 }
 
-export function VocaHomeClient({ books, days, progressList, submissionStatuses = {}, initialBookId }: VocaHomeClientProps) {
+export function VocaHomeClient({ books, days, progressList, submissionStatuses = {}, initialBookId, freeDayLimit = 0 }: VocaHomeClientProps) {
   const defaultBookId = (initialBookId && books.some((b) => b.id === initialBookId))
     ? initialBookId
     : books[0]?.id || '';
@@ -76,11 +78,28 @@ export function VocaHomeClient({ books, days, progressList, submissionStatuses =
         </p>
       ) : (
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-          {filteredDays.map((day) => {
+          {filteredDays.map((day, index) => {
             const prog = progressMap.get(day.id);
             const completed = prog?.flashcard_completed &&
               (prog.quiz_score ?? 0) >= 80 &&
               (prog.spelling_score ?? 0) >= 80;
+            const locked = freeDayLimit > 0 && index >= freeDayLimit;
+
+            if (locked) {
+              return (
+                <Card key={day.id} className="opacity-60 cursor-not-allowed">
+                  <CardContent className="py-4">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-3">
+                        <BookOpen className="h-5 w-5 text-muted-foreground" />
+                        <p className="font-medium text-muted-foreground">{day.title}</p>
+                      </div>
+                      <Lock className="h-4 w-4 text-muted-foreground" />
+                    </div>
+                  </CardContent>
+                </Card>
+              );
+            }
 
             return (
               <Link key={day.id} href={`/student/voca/${day.id}`}>
@@ -104,6 +123,13 @@ export function VocaHomeClient({ books, days, progressList, submissionStatuses =
             );
           })}
         </div>
+      )}
+
+      {freeDayLimit > 0 && filteredDays.length > freeDayLimit && (
+        <p className="text-center text-sm text-muted-foreground">
+          무료 플랜은 교재당 Day {freeDayLimit}개까지 이용 가능합니다.
+          업그레이드하면 전체 Day를 학습할 수 있어요.
+        </p>
       )}
     </div>
   );
