@@ -16,8 +16,11 @@ const PROMPT = `아래 영어 단어 목록에 대해 유의어, 반의어, 관�
 - 유의어(s): 쉼표로 구분, 없으면 null
 - 반의어(a): 쉼표로 구분, 없으면 null
 - 숙어(i): 관련 숙어 배열, 없으면 null
-- 예문(e): 단어를 포함하는 자연스러운 영어 문장, 없으면 null
-- 중학생 수준에 맞는 쉬운 유의어/반의어/숙어/예문 선택
+- 예문(e): 반드시 모든 단어에 예문을 생성할 것 (null 불가)
+  - 고등학생이 쉽게 이해할 수 있는 짧고 간단한 문장 (10단어 이내)
+  - 일상생활에서 자주 쓰이는 쉬운 단어로 구성
+  - 해당 단어의 뜻이 문맥에서 자연스럽게 드러나야 함
+- 유의어/반의어/숙어도 고등학생 수준에 맞게 선택
 
 JSON 배열로만 응답 (다른 텍스트 없이):
 [{"id":"원본id","s":"유의어1, 유의어2","a":"반의어1","e":"Example sentence.","i":[{"en":"숙어","ko":"뜻","example_en":"예문","example_ko":"해석"}]}]`;
@@ -86,8 +89,8 @@ export const POST = createApiHandler(
           antonyms: item.antonyms,
           idioms: item.idioms,
         };
-        // 예문 없으면 보충
-        if (!orig?.example_sentence && item.example_sentence) {
+        // 예문 항상 업데이트 (기존 어려운 문장도 교체)
+        if (item.example_sentence) {
           updateData.example_sentence = item.example_sentence;
         }
         // 스펠링 데이터 없으면 보충
