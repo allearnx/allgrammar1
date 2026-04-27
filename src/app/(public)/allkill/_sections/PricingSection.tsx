@@ -12,7 +12,7 @@ export default function PricingSection({ vocaCourseId, vocaCoursePrice }: { voca
         <h2 style={{ fontSize: 'clamp(26px, 3.5vw, 48px)', fontWeight: 900, color: C.gray800, lineHeight: 1.3, marginBottom: 14 }}>
           부담 없이 <span style={{ color: C.lavenderDark }}>시작하세요.</span>
         </h2>
-        <p style={{ fontSize: 'clamp(15px, 1.4vw, 18px)', color: C.gray400, lineHeight: 1.8, marginBottom: 56 }}>1회독은 무료! 지금 바로 시작하세요.</p>
+        <p style={{ fontSize: 'clamp(15px, 1.4vw, 18px)', color: C.gray400, lineHeight: 1.8, marginBottom: 56 }}>Day 3개 무료 체험! 지금 바로 시작하세요.</p>
 
         <div className="allkill-price-grid">
 
