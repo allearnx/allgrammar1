@@ -1,7 +1,10 @@
 'use client';
 
-import { AlertTriangle, CreditCard, Clock, Sparkles, ArrowRight } from 'lucide-react';
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { AlertTriangle, CreditCard, Clock, Sparkles, ArrowRight, RefreshCw, Loader2 } from 'lucide-react';
 import Link from 'next/link';
+import { fetchWithToast } from '@/lib/fetch-with-toast';
 import type { SubscriptionStatus } from '@/types/billing';
 import type { Tier } from '@/lib/billing/feature-gate';
 
@@ -23,22 +26,11 @@ const BANNER_STYLES = {
 
 export function SubscriptionBanner({ status, trialDaysLeft, billingPageHref, tier, freeService, isIndividual }: SubscriptionBannerProps) {
   if (tier === 'free') {
-    const serviceLabel = freeService === 'voca' ? '올킬보카' : '올인내신';
-    const description = isIndividual
-      ? `무료 플랜 사용 중 · ${serviceLabel} 1회독`
-      : `무료 플랜 사용 중 · 5명, ${serviceLabel}만 이용 가능`;
-    const s = BANNER_STYLES.free;
-    const Icon = s.icon;
     return (
-      <div className={`${s.bg} border-b ${s.border} px-5 py-3 flex items-center justify-between`}>
-        <div className={`flex items-center gap-2.5 ${s.text} text-[13px] font-medium`}>
-          <Icon className="h-4 w-4" />
-          <span>{description}</span>
-        </div>
-        <Link href="/pricing" className={`flex items-center gap-1 ${s.text} text-[13px] font-semibold hover:opacity-70 transition-opacity`}>
-          업그레이드 <ArrowRight className="h-3.5 w-3.5" />
-        </Link>
-      </div>
+      <FreeBanner
+        freeService={freeService}
+        isIndividual={isIndividual}
+      />
     );
   }
 
@@ -68,6 +60,57 @@ export function SubscriptionBanner({ status, trialDaysLeft, billingPageHref, tie
         {status === 'trialing' && <CreditCard className="h-3.5 w-3.5" />}
         {m.action} <ArrowRight className="h-3.5 w-3.5" />
       </Link>
+    </div>
+  );
+}
+
+function FreeBanner({ freeService, isIndividual }: { freeService?: 'naesin' | 'voca' | null; isIndividual?: boolean }) {
+  const router = useRouter();
+  const [switching, setSwitching] = useState(false);
+
+  const serviceLabel = freeService === 'voca' ? '올킬보카' : '올인내신';
+  const otherService = freeService === 'voca' ? 'naesin' : 'voca';
+  const otherLabel = freeService === 'voca' ? '올인내신' : '올킬보카';
+  const description = isIndividual
+    ? `무료 플랜 사용 중 · ${serviceLabel} 1회독`
+    : `무료 플랜 사용 중 · 5명, ${serviceLabel}만 이용 가능`;
+  const s = BANNER_STYLES.free;
+  const Icon = s.icon;
+
+  const handleSwitch = async () => {
+    if (!confirm(`${otherLabel}(으)로 전환하시겠습니까?\n기존 학습 기록은 유지됩니다.`)) return;
+    setSwitching(true);
+    try {
+      await fetchWithToast('/api/student/select-free-service', {
+        body: { service: otherService },
+        successMessage: `${otherLabel}(으)로 전환되었습니다`,
+        errorMessage: '서비스 전환에 실패했습니다',
+      });
+      router.refresh();
+    } catch { /* fetchWithToast handles toast */ } finally {
+      setSwitching(false);
+    }
+  };
+
+  return (
+    <div className={`${s.bg} border-b ${s.border} px-5 py-3 flex items-center justify-between`}>
+      <div className={`flex items-center gap-2.5 ${s.text} text-[13px] font-medium`}>
+        <Icon className="h-4 w-4" />
+        <span>{description}</span>
+      </div>
+      <div className="flex items-center gap-3">
+        <button
+          onClick={handleSwitch}
+          disabled={switching}
+          className={`flex items-center gap-1 ${s.text} text-[13px] font-medium hover:opacity-70 transition-opacity disabled:opacity-50`}
+        >
+          {switching ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <RefreshCw className="h-3.5 w-3.5" />}
+          {otherLabel}로 전환
+        </button>
+        <Link href="/pricing" className={`flex items-center gap-1 ${s.text} text-[13px] font-semibold hover:opacity-70 transition-opacity`}>
+          업그레이드 <ArrowRight className="h-3.5 w-3.5" />
+        </Link>
+      </div>
     </div>
   );
 }

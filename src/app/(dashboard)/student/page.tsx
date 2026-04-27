@@ -39,7 +39,7 @@ export default async function StudentDashboard() {
 
   // ── Naesin only ──
   if (hasNaesin && !hasVoca) {
-    return <NaesinSection user={user} planContext={planContext} />;
+    return <NaesinSection user={user} planContext={planContext} isIndependent={isIndependent} />;
   }
 
   // ── Both ──

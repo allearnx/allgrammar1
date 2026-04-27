@@ -32,12 +32,32 @@ export async function POST(request: NextRequest) {
 
     switch (eventType) {
       case 'BILLING_STATUS_CHANGED': {
-        // 빌링 상태 변경 처리
         if (data?.billingKey && data?.status === 'EXPIRED') {
-          await supabase
+          // billing_key로 구독 찾기
+          const { data: sub } = await supabase
             .from('subscriptions')
-            .update({ billing_key: null })
-            .eq('billing_key', data.billingKey);
+            .select('id, status')
+            .eq('billing_key', data.billingKey)
+            .single();
+
+          if (sub) {
+            // billing_key 제거 + past_due로 전환 (보스가 수동 판단할 수 있도록)
+            await supabase
+              .from('subscriptions')
+              .update({
+                billing_key: null,
+                status: sub.status === 'active' ? 'past_due' : sub.status,
+                grace_period_end: sub.status === 'active'
+                  ? new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString()
+                  : undefined,
+              })
+              .eq('id', sub.id);
+
+            logger.info('toss.webhook.billing_expired', {
+              subscriptionId: sub.id,
+              previousStatus: sub.status,
+            });
+          }
         }
         break;
       }

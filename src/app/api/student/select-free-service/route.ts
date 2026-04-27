@@ -28,17 +28,24 @@ export const POST = createApiHandler(
       }
     }
 
-    // 이미 서비스가 있는지 확인
-    const { count } = await supabase
+    // 기존 무료 서비스 확인 (subscription 소스는 건드리지 않음)
+    const { data: existing } = await supabase
       .from('service_assignments')
-      .select('id', { count: 'exact', head: true })
-      .eq('student_id', user.id);
+      .select('id, service, source')
+      .eq('student_id', user.id)
+      .is('subscription_id', null);
 
-    if (count && count > 0) {
-      return NextResponse.json(
-        { error: '이미 무료 서비스가 선택되어 있습니다.' },
-        { status: 400 },
-      );
+    // 이미 같은 서비스면 무시
+    if (existing?.some((a) => a.service === body.service)) {
+      return NextResponse.json({ success: true });
+    }
+
+    // 기존 무료 서비스가 있으면 전환 (삭제 후 삽입)
+    if (existing && existing.length > 0) {
+      await supabase
+        .from('service_assignments')
+        .delete()
+        .in('id', existing.map((a) => a.id));
     }
 
     const { error } = await supabase.from('service_assignments').insert({
