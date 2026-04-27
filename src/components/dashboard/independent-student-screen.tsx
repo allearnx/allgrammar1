@@ -35,7 +35,7 @@ const SERVICE_OPTIONS: {
   {
     value: 'voca',
     label: '올킬보카',
-    desc: '최근 4개년 고1·고2·고3 기출 단어 + 26년 고1 3월 단어',
+    desc: '최근 5개년 고1·고2·고3 기출 단어',
     icon: <BookA className="h-6 w-6 text-violet-500" />,
     activeColor: 'border-violet-500 bg-violet-50',
   },
