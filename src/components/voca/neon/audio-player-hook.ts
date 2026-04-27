@@ -25,49 +25,62 @@ export function useAudioPlayer({
 
   // Refs for stable RAF callback (no stale closure)
   const wordTimestampsRef = useRef(wordTimestamps);
-  wordTimestampsRef.current = wordTimestamps;
   const currentWordIndexRef = useRef(-1);
   const onWordHighlightRef = useRef(onWordHighlight);
-  onWordHighlightRef.current = onWordHighlight;
   const onEndRef = useRef(onEnd);
-  onEndRef.current = onEnd;
+  const updateHighlightRef = useRef<() => void>(() => {});
 
-  // RAF 하이라이트 추적 — ref 기반으로 deps 없음
-  const updateHighlight = useCallback(() => {
-    if (!audioRef.current || !wordTimestampsRef.current) return;
-    const currentTime = audioRef.current.currentTime;
-    let idx = -1;
-    for (let i = 0; i < wordTimestampsRef.current.length; i++) {
-      if (currentTime >= wordTimestampsRef.current[i].start && currentTime <= wordTimestampsRef.current[i].end) {
-        idx = i;
-        break;
-      }
-    }
-    if (idx !== currentWordIndexRef.current) {
-      currentWordIndexRef.current = idx;
-      setCurrentWordIndex(idx);
-      if (idx >= 0) onWordHighlightRef.current?.(idx);
-    }
-    if (audioRef.current && !audioRef.current.paused) {
-      rafRef.current = requestAnimationFrame(updateHighlight);
-    }
-  }, []);
-
-  // audioUrl 변경 시 기존 Audio 정리
+  // Sync refs after render
   useEffect(() => {
-    if (audioRef.current) {
-      audioRef.current.pause();
-      audioRef.current.onended = null;
-      audioRef.current.onerror = null;
-      audioRef.current = null;
-    }
-    if (rafRef.current) {
-      cancelAnimationFrame(rafRef.current);
-      rafRef.current = null;
-    }
+    wordTimestampsRef.current = wordTimestamps;
+    onWordHighlightRef.current = onWordHighlight;
+    onEndRef.current = onEnd;
+    updateHighlightRef.current = () => {
+      if (!audioRef.current || !wordTimestampsRef.current) return;
+      const currentTime = audioRef.current.currentTime;
+      let idx = -1;
+      for (let i = 0; i < wordTimestampsRef.current.length; i++) {
+        if (currentTime >= wordTimestampsRef.current[i].start && currentTime <= wordTimestampsRef.current[i].end) {
+          idx = i;
+          break;
+        }
+      }
+      if (idx !== currentWordIndexRef.current) {
+        currentWordIndexRef.current = idx;
+        setCurrentWordIndex(idx);
+        if (idx >= 0) onWordHighlightRef.current?.(idx);
+      }
+      if (audioRef.current && !audioRef.current.paused) {
+        rafRef.current = requestAnimationFrame(() => updateHighlightRef.current());
+      }
+    };
+  });
+
+  const updateHighlight = useCallback(() => updateHighlightRef.current(), []);
+
+  // audioUrl 변경 시 상태 리셋 (React 권장 패턴: render 중 파생 상태 조정)
+  const [prevAudioUrl, setPrevAudioUrl] = useState(audioUrl);
+  if (prevAudioUrl !== audioUrl) {
+    setPrevAudioUrl(audioUrl);
     setIsPlaying(false);
     setCurrentWordIndex(-1);
+  }
+
+  // audioUrl 변경 시 기존 Audio/RAF 정리
+  useEffect(() => {
     currentWordIndexRef.current = -1;
+    return () => {
+      if (audioRef.current) {
+        audioRef.current.pause();
+        audioRef.current.onended = null;
+        audioRef.current.onerror = null;
+        audioRef.current = null;
+      }
+      if (rafRef.current) {
+        cancelAnimationFrame(rafRef.current);
+        rafRef.current = null;
+      }
+    };
   }, [audioUrl]);
 
   const clearSpeechTimers = useCallback(() => {
