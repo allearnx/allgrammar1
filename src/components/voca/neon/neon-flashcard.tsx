@@ -21,6 +21,7 @@ export function NeonFlashcard({ vocabulary, onComplete }: NeonFlashcardProps) {
   const [showMeaning, setShowMeaning] = useState(false);
   const [visited, setVisited] = useState<Set<number>>(new Set([0]));
   const [direction, setDirection] = useState(0); // -1 = left, 1 = right
+  const [isSpeakingWord, setIsSpeakingWord] = useState(false);
 
   const vocab = vocabulary[currentIndex];
 
@@ -37,10 +38,35 @@ export function NeonFlashcard({ vocabulary, onComplete }: NeonFlashcardProps) {
 
   const handlePlay = () => {
     setShowMeaning(false);
-    play(vocab.example_sentence || vocab.front_text);
+
+    // 1) 단어 먼저 읽기 (Web Speech API)
+    if (typeof window !== 'undefined' && window.speechSynthesis) {
+      setIsSpeakingWord(true);
+      window.speechSynthesis.cancel(); // 이전 발화 정리
+      const utterance = new SpeechSynthesisUtterance(vocab.front_text);
+      utterance.lang = 'en-US';
+      utterance.rate = 0.85;
+      utterance.onend = () => {
+        setIsSpeakingWord(false);
+        // 2) 약간의 간격 후 예문 재생
+        setTimeout(() => play(vocab.example_sentence || vocab.front_text), 400);
+      };
+      utterance.onerror = () => {
+        setIsSpeakingWord(false);
+        play(vocab.example_sentence || vocab.front_text);
+      };
+      window.speechSynthesis.speak(utterance);
+    } else {
+      play(vocab.example_sentence || vocab.front_text);
+    }
   };
 
   const goTo = (index: number) => {
+    // 카드 전환 시 진행 중인 단어 발화 중단
+    if (isSpeakingWord && typeof window !== 'undefined' && window.speechSynthesis) {
+      window.speechSynthesis.cancel();
+      setIsSpeakingWord(false);
+    }
     setDirection(index > currentIndex ? 1 : -1);
     setCurrentIndex(index);
     setShowMeaning(false);
@@ -121,7 +147,7 @@ export function NeonFlashcard({ vocabulary, onComplete }: NeonFlashcardProps) {
                     : 'border-gray-200 text-gray-400 hover:border-indigo-300 hover:text-indigo-500 hover:bg-indigo-50/50',
                 )}
                 onClick={handlePlay}
-                disabled={isPlaying}
+                disabled={isPlaying || isSpeakingWord}
               >
                 <Volume2 className={cn('h-6 w-6', isPlaying && 'animate-pulse')} />
               </Button>
@@ -147,7 +173,7 @@ export function NeonFlashcard({ vocabulary, onComplete }: NeonFlashcardProps) {
             </AnimatePresence>
 
             {/* TTS 없으면 탭하여 뜻 보기 */}
-            {!showMeaning && !isPlaying && (
+            {!showMeaning && !isPlaying && !isSpeakingWord && (
               <button
                 className="block mx-auto text-sm text-gray-400 hover:text-gray-600 transition-colors"
                 onClick={() => setShowMeaning(true)}
