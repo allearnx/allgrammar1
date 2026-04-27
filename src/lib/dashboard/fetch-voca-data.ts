@@ -24,7 +24,7 @@ export async function fetchVocaDashboardData(
 
   const { data: booksData } = bookAssignment
     ? await supabase.from('voca_books').select('*').eq('id', bookAssignment.book_id)
-    : await supabase.from('voca_books').select('*').order('created_at');
+    : await supabase.from('voca_books').select('*').eq('is_active', true).order('created_at');
   const books: VocaBook[] = (booksData as VocaBook[]) || [];
 
   // 2. Days

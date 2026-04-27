@@ -27,7 +27,7 @@ export default async function StudentVocaPage({
 
   // 전체 교재 자유 선택
   const { data: books } = await supabase
-    .from('voca_books').select('*').order('created_at');
+    .from('voca_books').select('*').eq('is_active', true).order('created_at');
 
   const bookIds = (books || []).map((b) => b.id);
   let days: VocaDay[] = [];
