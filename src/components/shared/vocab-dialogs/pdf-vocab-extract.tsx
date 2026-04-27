@@ -23,6 +23,7 @@ interface ExtractedWord {
   back_text: string;
   part_of_speech: string | null;
   example_sentence: string | null;
+  example_sentence_ko: string | null;
   synonyms: string | null;
   antonyms: string | null;
   idioms: { en: string; ko: string; example_en?: string; example_ko?: string }[] | null;
@@ -224,8 +225,9 @@ export function PdfVocabExtract({ module, parentId, onAdd }: VocabDialogProps) {
                       <td className="p-1 hidden sm:table-cell">
                         <Input className="h-7 text-sm w-16" value={w.part_of_speech || ''} onChange={(e) => updateWord(i, 'part_of_speech', e.target.value)} />
                       </td>
-                      <td className="p-1 hidden md:table-cell">
+                      <td className="p-1 hidden md:table-cell space-y-1">
                         <Input className="h-7 text-sm" value={w.example_sentence || ''} onChange={(e) => updateWord(i, 'example_sentence', e.target.value)} placeholder="예문 입력" />
+                        <Input className="h-7 text-sm text-muted-foreground" value={w.example_sentence_ko || ''} onChange={(e) => updateWord(i, 'example_sentence_ko', e.target.value)} placeholder="예문 해석" />
                       </td>
                       <td className="p-2">
                         <Button
