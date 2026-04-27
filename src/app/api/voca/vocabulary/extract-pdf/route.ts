@@ -29,19 +29,24 @@ const PROMPT = `이 PDF에서 영어 단어를 추출해주세요.
 - 중학생 수준의 쉬운 문장으로 작성 (15단어 이내)
 - e 필드가 null이면 안 됨
 
+## 예문 한글 해석(ek) 규칙 — 반드시 생성
+- 영어 예문(e)에 대응하는 자연스러운 한국어 해석
+- ek 필드가 null이면 안 됨
+
 ## 유의어(s)·반의어(a)·숙어(i) 규칙
 - 자연스럽게 떠오르는 것만 넣고, 억지로 만들지 않을 것
 - 없으면 null
 
 JSON 배열로만 응답 (다른 텍스트 없이):
-[{"w":"단어","m":"뜻","p":"n.","e":"The example sentence.","s":"유의어1, 유의어2","a":"반의어1","i":[{"en":"숙어","ko":"뜻","example_en":"예문","example_ko":"해석"}]}]
-w=단어, m=뜻, p=품사(n./v./adj./adv./prep./conj.), e=영어 예문(필수!), s=유의어(쉼표 구분, 없으면 null), a=반의어(쉼표 구분, 없으면 null), i=숙어 배열(없으면 null)`;
+[{"w":"단어","m":"뜻","p":"n.","e":"The example sentence.","ek":"예문 해석.","s":"유의어1, 유의어2","a":"반의어1","i":[{"en":"숙어","ko":"뜻","example_en":"예문","example_ko":"해석"}]}]
+w=단어, m=뜻, p=품사(n./v./adj./adv./prep./conj.), e=영어 예문(필수!), ek=예문 한글 해석(필수!), s=유의어(쉼표 구분, 없으면 null), a=반의어(쉼표 구분, 없으면 null), i=숙어 배열(없으면 null)`;
 
 interface VocabExtractItem {
   w: string;
   m: string;
   p?: string;
   e?: string | null;
+  ek?: string | null;
   s?: string | null;
   a?: string | null;
   i?: Array<{ en: string; ko: string; example_en?: string; example_ko?: string }> | null;
@@ -98,6 +103,7 @@ export async function POST(request: NextRequest) {
         back_text: item.m.trim(),
         part_of_speech: item.p?.trim() || null,
         example_sentence: item.e?.trim() || null,
+        example_sentence_ko: item.ek?.trim() || null,
         spelling_hint: item.m.trim() || null,
         spelling_answer: item.w.trim() || null,
         synonyms: item.s?.trim() || null,

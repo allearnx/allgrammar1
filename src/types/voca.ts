@@ -41,6 +41,7 @@ export interface VocaVocabulary {
   back_text: string;
   part_of_speech: string | null;
   example_sentence: string | null;
+  example_sentence_ko: string | null;
   synonyms: string | null;
   antonyms: string | null;
   spelling_hint: string | null;

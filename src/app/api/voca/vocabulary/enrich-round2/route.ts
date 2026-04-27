@@ -20,10 +20,11 @@ const PROMPT = `아래 영어 단어 목록에 대해 유의어, 반의어, 관�
   - 고등학생이 쉽게 이해할 수 있는 짧고 간단한 문장 (10단어 이내)
   - 일상생활에서 자주 쓰이는 쉬운 단어로 구성
   - 해당 단어의 뜻이 문맥에서 자연스럽게 드러나야 함
+- 예문 한글 해석(ek): 영어 예문에 대응하는 자연스러운 한국어 해석 (null 불가)
 - 유의어/반의어/숙어도 고등학생 수준에 맞게 선택
 
 JSON 배열로만 응답 (다른 텍스트 없이):
-[{"id":"원본id","s":"유의어1, 유의어2","a":"반의어1","e":"Example sentence.","i":[{"en":"숙어","ko":"뜻","example_en":"예문","example_ko":"해석"}]}]`;
+[{"id":"원본id","s":"유의어1, 유의어2","a":"반의어1","e":"Example sentence.","ek":"예문 해석.","i":[{"en":"숙어","ko":"뜻","example_en":"예문","example_ko":"해석"}]}]`;
 
 const enrichSchema = z.object({
   items: z.array(z.object({
@@ -39,7 +40,7 @@ const enrichSchema = z.object({
 type EnrichBody = z.infer<typeof enrichSchema>;
 type VocabItem = EnrichBody['items'][number];
 
-interface AiEnrichResult { id: string; s?: string | null; a?: string | null; e?: string | null; i?: unknown[] | null }
+interface AiEnrichResult { id: string; s?: string | null; a?: string | null; e?: string | null; ek?: string | null; i?: unknown[] | null }
 
 async function enrichChunk(items: VocabItem[]) {
   const wordList = items.map((item) => `- id:${item.id} | ${item.front_text} (${item.back_text}, ${item.part_of_speech || ''})`).join('\n');
@@ -56,6 +57,7 @@ async function enrichChunk(items: VocabItem[]) {
     synonyms: item.s || null,
     antonyms: item.a || null,
     example_sentence: item.e || null,
+    example_sentence_ko: item.ek || null,
     idioms: item.i || null,
   }));
 }
@@ -92,6 +94,9 @@ export const POST = createApiHandler(
         // 예문 항상 업데이트 (기존 어려운 문장도 교체)
         if (item.example_sentence) {
           updateData.example_sentence = item.example_sentence;
+        }
+        if (item.example_sentence_ko) {
+          updateData.example_sentence_ko = item.example_sentence_ko;
         }
         // 스펠링 데이터 없으면 보충
         if (!orig?.spelling_answer && orig?.front_text) {

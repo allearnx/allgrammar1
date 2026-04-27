@@ -111,11 +111,16 @@ export function NeonFlashcard({ vocabulary, onComplete }: NeonFlashcardProps) {
           >
             {/* 예문 */}
             {vocab.example_sentence ? (
-              <NeonSentenceDisplay
-                sentence={vocab.example_sentence}
-                targetWord={vocab.front_text}
-                currentWordIndex={currentWordIndex}
-              />
+              <div className="space-y-2">
+                <NeonSentenceDisplay
+                  sentence={vocab.example_sentence}
+                  targetWord={vocab.front_text}
+                  currentWordIndex={currentWordIndex}
+                />
+                {vocab.example_sentence_ko && (
+                  <p className="text-center text-xs text-gray-300">{vocab.example_sentence_ko}</p>
+                )}
+              </div>
             ) : (
               <p className={cn(
                 'text-4xl font-bold text-center transition-all',

@@ -9,6 +9,7 @@ function makeVocab(overrides: Partial<VocaVocabulary> & { front_text: string }):
     back_text: '뜻',
     part_of_speech: null,
     example_sentence: null,
+    example_sentence_ko: null,
     synonyms: null,
     antonyms: null,
     spelling_hint: null,
