@@ -33,8 +33,8 @@ export const POST = createApiHandler(
       return NextResponse.json({ generated: 0, remaining: 0, message: '모든 단어에 TTS가 생성되어 있습니다' });
     }
 
-    // Vercel 타임아웃 방어: 최대 20개씩 처리
-    const BATCH_LIMIT = 20;
+    // Vercel 타임아웃 방어: 최대 5개씩 처리 (각 ~2초, 총 ~10초 이내)
+    const BATCH_LIMIT = 5;
     const batch = vocabs.slice(0, BATCH_LIMIT);
     const remaining = Math.max(0, vocabs.length - BATCH_LIMIT);
 
