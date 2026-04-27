@@ -65,7 +65,7 @@ export function NeonFlashcard({ vocabulary, onComplete }: NeonFlashcardProps) {
     <div className="neon-container p-4 md:p-8 min-h-[60dvh] flex flex-col">
       {/* Progress */}
       <div className="flex items-center justify-between mb-6">
-        <span className="text-sm text-slate-500">
+        <span className="text-sm text-gray-400">
           {currentIndex + 1} / {vocabulary.length}
         </span>
         <ProgressDots total={vocabulary.length} current={currentIndex} visited={visited} />
@@ -92,8 +92,8 @@ export function NeonFlashcard({ vocabulary, onComplete }: NeonFlashcardProps) {
               />
             ) : (
               <p className={cn(
-                'text-3xl font-bold text-center transition-all',
-                currentWordIndex >= 0 ? 'neon-text-gold' : 'text-slate-300',
+                'text-4xl font-bold text-center transition-all',
+                currentWordIndex >= 0 ? 'neon-text-gold' : 'text-gray-800',
               )}>
                 {vocab.front_text}
               </p>
@@ -101,11 +101,11 @@ export function NeonFlashcard({ vocabulary, onComplete }: NeonFlashcardProps) {
 
             {/* 단어 + 품사 */}
             <div className="text-center space-y-1">
-              <p className="text-2xl font-bold neon-text-gold">
+              <p className="text-3xl font-bold neon-text-gold">
                 {vocab.front_text}
               </p>
               {vocab.part_of_speech && (
-                <p className="text-xs text-slate-500">{vocab.part_of_speech}</p>
+                <p className="text-sm text-gray-400">{vocab.part_of_speech}</p>
               )}
             </div>
 
@@ -115,10 +115,10 @@ export function NeonFlashcard({ vocabulary, onComplete }: NeonFlashcardProps) {
                 variant="ghost"
                 size="lg"
                 className={cn(
-                  'rounded-full w-14 h-14 border transition-all',
+                  'rounded-full w-14 h-14 border-2 transition-all',
                   isPlaying
-                    ? 'border-cyan-400/50 text-cyan-400 shadow-[0_0_15px_rgba(0,240,255,0.3)]'
-                    : 'border-slate-600 text-slate-400 hover:border-cyan-400/30 hover:text-cyan-400',
+                    ? 'border-indigo-400 text-indigo-500 bg-indigo-50'
+                    : 'border-gray-200 text-gray-400 hover:border-indigo-300 hover:text-indigo-500 hover:bg-indigo-50/50',
                 )}
                 onClick={handlePlay}
                 disabled={isPlaying}
@@ -136,11 +136,11 @@ export function NeonFlashcard({ vocabulary, onComplete }: NeonFlashcardProps) {
                   exit={{ opacity: 0 }}
                   className="text-center"
                 >
-                  <p className="text-xl text-slate-200 font-medium">
+                  <p className="text-2xl text-gray-700 font-semibold">
                     {vocab.back_text}
                   </p>
                   {vocab.exam_source && (
-                    <p className="text-xs text-slate-600 mt-1">{vocab.exam_source}</p>
+                    <p className="text-xs text-gray-400 mt-1">{vocab.exam_source}</p>
                   )}
                 </motion.div>
               )}
@@ -149,7 +149,7 @@ export function NeonFlashcard({ vocabulary, onComplete }: NeonFlashcardProps) {
             {/* TTS 없으면 탭하여 뜻 보기 */}
             {!showMeaning && !isPlaying && (
               <button
-                className="block mx-auto text-sm text-slate-600 hover:text-slate-400 transition-colors"
+                className="block mx-auto text-sm text-gray-400 hover:text-gray-600 transition-colors"
                 onClick={() => setShowMeaning(true)}
               >
                 {hasTts ? '재생 후 자동 표시' : '탭하여 뜻 보기'}
@@ -160,11 +160,11 @@ export function NeonFlashcard({ vocabulary, onComplete }: NeonFlashcardProps) {
       </div>
 
       {/* Navigation */}
-      <div className="flex items-center justify-between mt-6 pt-4 border-t border-slate-800">
+      <div className="flex items-center justify-between mt-6 pt-4 border-t border-gray-100">
         <Button
           variant="ghost"
           size="sm"
-          className="text-slate-400"
+          className="text-gray-500"
           onClick={goPrev}
           disabled={currentIndex === 0}
         >
@@ -175,7 +175,7 @@ export function NeonFlashcard({ vocabulary, onComplete }: NeonFlashcardProps) {
         {allVisited && currentIndex === vocabulary.length - 1 ? (
           <Button
             size="sm"
-            className="bg-cyan-500/20 border border-cyan-400/50 text-cyan-300 hover:bg-cyan-500/30"
+            className="bg-indigo-600 text-white hover:bg-indigo-700"
             onClick={onComplete}
           >
             완료
@@ -184,7 +184,7 @@ export function NeonFlashcard({ vocabulary, onComplete }: NeonFlashcardProps) {
           <Button
             variant="ghost"
             size="sm"
-            className="text-slate-400"
+            className="text-gray-500"
             onClick={goNext}
           >
             다음

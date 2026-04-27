@@ -79,11 +79,11 @@ export function WordMatching({ vocabulary, onComplete }: WordMatchingProps) {
   return (
     <div className="neon-container p-4 md:p-6 min-h-[60dvh]">
       <div className="flex items-center justify-between mb-4">
-        <span className="text-sm text-slate-500">
+        <span className="text-sm text-gray-400">
           라운드 {currentChunk + 1}/{chunks.length}
-          {attempt > 1 && <span className="ml-2 text-yellow-400">(재시도)</span>}
+          {attempt > 1 && <span className="ml-2 text-amber-500 font-medium">(재시도)</span>}
         </span>
-        <span className="text-xs text-slate-600">
+        <span className="text-xs text-gray-400">
           {attempt}/{MAX_ATTEMPTS} 시도
         </span>
       </div>

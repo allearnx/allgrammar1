@@ -1,50 +1,47 @@
-/* 네온 디자인 시스템 */
+/* 보카 디자인 시스템 — 화이트 테마 */
 :root {
-  --neon-cyan: #00f0ff;
-  --neon-gold: #f0c060;
-  --neon-green: #39ff14;
-  --neon-red: #ff3131;
+  --voca-primary: #4f46e5;   /* 메인 단어 (indigo) */
+  --voca-accent: #2563eb;    /* 하이라이트 (blue) */
+  --voca-green: #16a34a;     /* 정답 */
+  --voca-red: #dc2626;       /* 오답 */
 }
 
-/* 네온 글로우 텍스트 */
+/* 강조 텍스트 */
 .neon-text-cyan {
-  color: var(--neon-cyan);
-  text-shadow:
-    0 0 8px rgba(0, 240, 255, 0.5);
+  color: var(--voca-accent);
+  font-weight: 700;
 }
 
 .neon-text-gold {
-  color: var(--neon-gold);
-  text-shadow:
-    0 0 6px rgba(240, 192, 96, 0.4);
+  color: var(--voca-primary);
+  font-weight: 700;
 }
 
 .neon-text-green {
-  color: var(--neon-green);
-  text-shadow:
-    0 0 8px rgba(57, 255, 20, 0.5);
+  color: var(--voca-green);
+  font-weight: 700;
 }
 
 .neon-text-red {
-  color: var(--neon-red);
-  text-shadow:
-    0 0 8px rgba(255, 49, 49, 0.5);
+  color: var(--voca-red);
+  font-weight: 700;
 }
 
-/* 네온 컨테이너 */
+/* 컨테이너 */
 .neon-container {
-  background: rgb(2 6 23); /* slate-950 */
+  background: white;
   border-radius: 1rem;
-  border: 1px solid rgba(0, 240, 255, 0.15);
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
 }
 
 /* 가이드 빛 (리듬 스펠링) */
 @keyframes guide-glow {
   0%, 100% {
-    box-shadow: 0 0 5px var(--neon-cyan), 0 0 10px var(--neon-cyan);
+    box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.3);
   }
   50% {
-    box-shadow: 0 0 10px var(--neon-cyan), 0 0 20px var(--neon-cyan), 0 0 30px var(--neon-cyan);
+    box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.2), 0 0 12px rgba(79, 70, 229, 0.15);
   }
 }
 
@@ -55,7 +52,7 @@
 /* 정답 플래시 */
 @keyframes correct-flash {
   0% { transform: scale(1); }
-  50% { transform: scale(1.1); }
+  50% { transform: scale(1.05); }
   100% { transform: scale(1); }
 }
 
@@ -76,12 +73,12 @@
 
 /* QWERTY 키보드 스타일 */
 .neon-key {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: 0.375rem;
-  color: rgba(255, 255, 255, 0.8);
-  font-size: 0.875rem;
-  font-weight: 500;
+  background: #f9fafb;
+  border: 1px solid #d1d5db;
+  border-radius: 0.5rem;
+  color: #1f2937;
+  font-size: 0.9rem;
+  font-weight: 600;
   min-width: 2rem;
   min-height: 2.75rem;
   display: flex;
@@ -91,9 +88,11 @@
   -webkit-tap-highlight-color: transparent;
   touch-action: manipulation;
   user-select: none;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
 .neon-key:active {
-  background: rgba(0, 240, 255, 0.2);
-  border-color: var(--neon-cyan);
+  background: #ede9fe;
+  border-color: var(--voca-primary);
+  transform: scale(0.95);
 }

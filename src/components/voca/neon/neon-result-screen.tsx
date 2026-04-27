@@ -28,13 +28,13 @@ export function NeonResultScreen({
         animate={{ scale: 1, opacity: 1 }}
         className="text-center space-y-4"
       >
-        <p className={cn('text-5xl font-bold', passed ? 'neon-text-green' : 'neon-text-gold')}>
+        <p className={cn('text-6xl font-bold', passed ? 'text-green-600' : 'text-indigo-600')}>
           {score}%
         </p>
         {subtitle && (
-          <p className="text-slate-400">{subtitle}</p>
+          <p className="text-gray-500 text-lg">{subtitle}</p>
         )}
-        <p className="text-slate-500 text-sm">
+        <p className="text-gray-400 text-base">
           {passed ? passMessage : failMessage}
         </p>
       </motion.div>

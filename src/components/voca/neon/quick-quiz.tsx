@@ -84,7 +84,7 @@ export function QuickQuiz({ vocabulary, onComplete }: QuickQuizProps) {
   return (
     <div className="neon-container p-4 md:p-6 min-h-[60dvh] flex flex-col">
       <div className="flex items-center justify-between mb-6">
-        <span className="text-sm text-slate-500">
+        <span className="text-sm text-gray-400">
           {currentIndex + 1} / {questions.length}
         </span>
         <ProgressDots total={questions.length} current={currentIndex} />
@@ -100,7 +100,7 @@ export function QuickQuiz({ vocabulary, onComplete }: QuickQuizProps) {
             transition={{ duration: 0.2 }}
             className="w-full max-w-md space-y-8"
           >
-            <p className="text-3xl font-bold text-center neon-text-gold">
+            <p className="text-4xl font-bold text-center neon-text-gold">
               {question.word}
             </p>
 
@@ -117,14 +117,14 @@ export function QuickQuiz({ vocabulary, onComplete }: QuickQuizProps) {
                     onClick={() => handleSelect(i)}
                     disabled={answered}
                     className={cn(
-                      'w-full py-3.5 px-4 rounded-xl border-2 text-left text-base font-medium transition-all',
-                      !answered && 'border-slate-700 text-slate-300 hover:border-cyan-400/50 hover:bg-cyan-400/5 active:bg-cyan-400/10',
-                      showCorrect && 'border-green-500 bg-green-500/10 text-green-400',
-                      showWrong && 'border-red-500 bg-red-500/10 text-red-400 wrong-shake',
-                      answered && !showCorrect && !showWrong && 'border-slate-800 text-slate-600',
+                      'w-full py-4 px-5 rounded-xl border-2 text-left text-lg font-medium transition-all',
+                      !answered && 'border-gray-200 text-gray-700 hover:border-indigo-300 hover:bg-indigo-50/50 active:bg-indigo-50',
+                      showCorrect && 'border-green-500 bg-green-50 text-green-700',
+                      showWrong && 'border-red-500 bg-red-50 text-red-600 wrong-shake',
+                      answered && !showCorrect && !showWrong && 'border-gray-100 text-gray-300',
                     )}
                   >
-                    <span className="mr-3 text-sm opacity-50">{i + 1}</span>
+                    <span className="mr-3 text-sm opacity-40">{i + 1}</span>
                     {option}
                   </button>
                 );

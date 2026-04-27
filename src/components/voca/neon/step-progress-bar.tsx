@@ -26,10 +26,10 @@ export function StepProgressBar({ steps, currentStep, onStepClick }: StepProgres
             disabled={!step.unlocked}
             className={cn(
               'relative flex items-center justify-center w-9 h-9 rounded-full border-2 text-sm font-bold transition-all',
-              step.completed && 'bg-green-500/20 border-green-500 text-green-400',
-              !step.completed && i === currentStep && 'border-cyan-400 text-cyan-400 shadow-[0_0_10px_rgba(0,240,255,0.3)]',
-              !step.completed && i !== currentStep && step.unlocked && 'border-slate-600 text-slate-500 hover:border-slate-400',
-              !step.unlocked && 'border-slate-700 text-slate-700 cursor-not-allowed',
+              step.completed && 'bg-green-50 border-green-500 text-green-600',
+              !step.completed && i === currentStep && 'border-indigo-500 text-indigo-600 bg-indigo-50',
+              !step.completed && i !== currentStep && step.unlocked && 'border-gray-300 text-gray-400 hover:border-gray-400',
+              !step.unlocked && 'border-gray-200 text-gray-300 cursor-not-allowed',
             )}
           >
             {step.completed ? (
@@ -43,9 +43,9 @@ export function StepProgressBar({ steps, currentStep, onStepClick }: StepProgres
           {/* Label */}
           <span className={cn(
             'ml-1.5 text-xs font-medium whitespace-nowrap hidden sm:inline',
-            step.completed && 'text-green-400',
-            !step.completed && i === currentStep && 'text-cyan-400',
-            !step.completed && i !== currentStep && 'text-slate-500',
+            step.completed && 'text-green-600',
+            !step.completed && i === currentStep && 'text-indigo-600',
+            !step.completed && i !== currentStep && 'text-gray-400',
           )}>
             {step.label}
           </span>
@@ -53,7 +53,7 @@ export function StepProgressBar({ steps, currentStep, onStepClick }: StepProgres
           {i < steps.length - 1 && (
             <div className={cn(
               'flex-1 h-0.5 mx-2',
-              step.completed ? 'bg-green-500/40' : 'bg-slate-700',
+              step.completed ? 'bg-green-300' : 'bg-gray-200',
             )} />
           )}
         </div>

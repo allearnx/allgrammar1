@@ -130,7 +130,7 @@ export function NeonVocaTab({ vocabulary, dayId, progress }: NeonVocaTabProps) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black/60"
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/40"
           >
             <motion.div
               initial={{ scale: 0.5 }}
@@ -138,8 +138,8 @@ export function NeonVocaTab({ vocabulary, dayId, progress }: NeonVocaTabProps) {
               exit={{ scale: 0.5 }}
               className="text-center space-y-3"
             >
-              <p className="text-4xl font-bold neon-text-green">CLEAR!</p>
-              <p className="text-slate-400">{STEP_LABELS[celebrateStep]} 완료</p>
+              <p className="text-4xl font-bold text-green-500">CLEAR!</p>
+              <p className="text-white/80">{STEP_LABELS[celebrateStep]} 완료</p>
             </motion.div>
           </motion.div>
         )}
@@ -180,7 +180,7 @@ export function NeonVocaTab({ vocabulary, dayId, progress }: NeonVocaTabProps) {
               />
             ) : (
               <div className="neon-container p-6 text-center">
-                <p className="text-slate-400">퀴즈에는 최소 4개 단어가 필요합니다.</p>
+                <p className="text-gray-400">퀴즈에는 최소 4개 단어가 필요합니다.</p>
               </div>
             )
           )}

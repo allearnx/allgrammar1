@@ -137,17 +137,17 @@ export function RhythmSpelling({ vocabulary, onComplete }: RhythmSpellingProps) 
       />
 
       <div className="flex items-center justify-between mb-4">
-        <span className="text-sm text-slate-500">
+        <span className="text-sm text-gray-400">
           {currentIndex + 1} / {vocabulary.length}
         </span>
         <Button
           variant="ghost"
           size="sm"
-          className="text-slate-400"
+          className="text-gray-400"
           onClick={() => play(vocab.example_sentence || vocab.front_text)}
           disabled={isPlaying}
         >
-          <Volume2 className={cn('h-4 w-4', isPlaying && 'animate-pulse text-cyan-400')} />
+          <Volume2 className={cn('h-4 w-4', isPlaying && 'animate-pulse text-indigo-500')} />
         </Button>
       </div>
 
@@ -160,10 +160,10 @@ export function RhythmSpelling({ vocabulary, onComplete }: RhythmSpellingProps) 
           className="flex-1 flex flex-col items-center justify-center space-y-6"
         >
           {sentenceWithBlank && (
-            <p className="text-lg text-slate-400 text-center px-4">{sentenceWithBlank}</p>
+            <p className="text-xl text-gray-500 text-center px-4">{sentenceWithBlank}</p>
           )}
 
-          <p className="text-base text-slate-500">{vocab.back_text}</p>
+          <p className="text-lg text-gray-600 font-medium">{vocab.back_text}</p>
 
           <div className={cn('flex gap-1.5 justify-center flex-wrap', wrongFlash && 'wrong-shake')}>
             {targetWord.split('').map((_, i) => {
@@ -173,10 +173,10 @@ export function RhythmSpelling({ vocabulary, onComplete }: RhythmSpellingProps) 
                 <div
                   key={i}
                   className={cn(
-                    'w-9 h-12 md:w-11 md:h-14 rounded-lg border-2 flex items-center justify-center text-lg md:text-xl font-bold transition-all',
-                    state === 'correct' && 'border-green-500 text-green-400 bg-green-500/10 correct-flash',
-                    !state && isNext && 'border-cyan-400 guide-glow',
-                    !state && !isNext && 'border-slate-700 text-slate-700',
+                    'w-10 h-13 md:w-12 md:h-15 rounded-lg border-2 flex items-center justify-center text-xl md:text-2xl font-bold transition-all',
+                    state === 'correct' && 'border-green-500 text-green-600 bg-green-50 correct-flash',
+                    !state && isNext && 'border-indigo-400 bg-indigo-50/50 guide-glow',
+                    !state && !isNext && 'border-gray-200 text-gray-300',
                   )}
                 >
                   {state === 'correct' ? typedLetters[i] : isNext ? '_' : ''}

@@ -10,9 +10,9 @@ interface NeonSentenceDisplayProps {
 }
 
 /**
- * 문장을 단어별로 분리해서 네온 하이라이트 렌더링
- * - 현재 재생 중인 단어: cyan 글로우
- * - 타겟 단어 (front_text): gold 글로우
+ * 문장을 단어별로 분리해서 하이라이트 렌더링
+ * - 현재 재생 중인 단어: blue 강조
+ * - 타겟 단어 (front_text): indigo 강조
  */
 export function NeonSentenceDisplay({
   sentence,
@@ -24,7 +24,7 @@ export function NeonSentenceDisplay({
   const targetLower = targetWord.toLowerCase();
 
   return (
-    <p className={cn('text-xl md:text-2xl leading-relaxed font-medium text-center', className)}>
+    <p className={cn('text-2xl md:text-3xl leading-relaxed font-medium text-center', className)}>
       {words.map((word, i) => {
         const isTarget = word.toLowerCase().replace(/[.,!?;:'"()]/g, '') === targetLower
           || word.toLowerCase().replace(/[.,!?;:'"()]/g, '').includes(targetLower);
@@ -37,8 +37,8 @@ export function NeonSentenceDisplay({
               'transition-all duration-200 inline-block',
               isCurrent && isTarget && 'neon-text-gold scale-110',
               isCurrent && !isTarget && 'neon-text-cyan',
-              !isCurrent && isTarget && 'text-yellow-300/80',
-              !isCurrent && !isTarget && 'text-slate-400',
+              !isCurrent && isTarget && 'text-indigo-400 font-bold',
+              !isCurrent && !isTarget && 'text-gray-500',
             )}
           >
             {word}{i < words.length - 1 ? '\u00A0' : ''}
