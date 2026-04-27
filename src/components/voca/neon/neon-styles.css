@@ -1,7 +1,7 @@
 /* 네온 디자인 시스템 */
 :root {
   --neon-cyan: #00f0ff;
-  --neon-gold: #ffd700;
+  --neon-gold: #f0c060;
   --neon-green: #39ff14;
   --neon-red: #ff3131;
 }
@@ -10,33 +10,25 @@
 .neon-text-cyan {
   color: var(--neon-cyan);
   text-shadow:
-    0 0 7px var(--neon-cyan),
-    0 0 10px var(--neon-cyan),
-    0 0 21px var(--neon-cyan);
+    0 0 8px rgba(0, 240, 255, 0.5);
 }
 
 .neon-text-gold {
   color: var(--neon-gold);
   text-shadow:
-    0 0 7px var(--neon-gold),
-    0 0 10px var(--neon-gold),
-    0 0 21px var(--neon-gold);
+    0 0 6px rgba(240, 192, 96, 0.4);
 }
 
 .neon-text-green {
   color: var(--neon-green);
   text-shadow:
-    0 0 7px var(--neon-green),
-    0 0 10px var(--neon-green),
-    0 0 21px var(--neon-green);
+    0 0 8px rgba(57, 255, 20, 0.5);
 }
 
 .neon-text-red {
   color: var(--neon-red);
   text-shadow:
-    0 0 7px var(--neon-red),
-    0 0 10px var(--neon-red),
-    0 0 21px var(--neon-red);
+    0 0 8px rgba(255, 49, 49, 0.5);
 }
 
 /* 네온 컨테이너 */
