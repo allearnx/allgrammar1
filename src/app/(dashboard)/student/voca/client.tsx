@@ -143,7 +143,12 @@ export function VocaHomeClient({ books, days, progressList, submissionStatuses =
               return (
                 <div key={day.id} className="flex items-center gap-4 rounded-xl border border-gray-100 bg-gray-50/60 px-4 py-3.5 opacity-50">
                   <DayBadge index={index} color={bookColor} variant="locked" />
-                  <p className="flex-1 font-medium text-gray-400 text-sm">{day.title}</p>
+                  <p className="flex-1 font-medium text-gray-400 text-sm">
+                    {day.title}
+                    {day.description && (
+                      <span className="ml-2 text-[11px] font-normal text-gray-200">{day.description}</span>
+                    )}
+                  </p>
                   <Lock className="h-4 w-4 text-gray-300" />
                 </div>
               );
@@ -160,6 +165,9 @@ export function VocaHomeClient({ books, days, progressList, submissionStatuses =
                   <div className="flex-1 min-w-0">
                     <p className={`font-semibold text-[15px] truncate ${completed ? 'text-green-700' : 'text-gray-800'}`}>
                       {day.title}
+                      {day.description && (
+                        <span className="ml-2 text-[11px] font-normal text-gray-300">{day.description}</span>
+                      )}
                     </p>
                     {steps > 0 && !completed && (
                       <div className="flex items-center gap-2 mt-1.5">

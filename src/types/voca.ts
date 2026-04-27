@@ -16,6 +16,7 @@ export interface VocaDay {
   book_id: string;
   day_number: number;
   title: string;
+  description: string | null;
   sort_order: number;
   created_at: string;
 }
