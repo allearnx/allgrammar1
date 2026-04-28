@@ -36,7 +36,7 @@ export function DayContentManager({ dayId }: { dayId: string }) {
   });
 
   const vocabEdit = useInlineEdit<VocaVocabulary, {
-    front_text: string; back_text: string; part_of_speech: string; example_sentence: string;
+    front_text: string; back_text: string; part_of_speech: string; example_sentence: string; example_sentence_ko: string;
     synonyms: string; antonyms: string; spelling_hint: string; spelling_answer: string; idioms: string;
   }>({
     apiEndpoint: '/api/voca/vocabulary',
@@ -45,6 +45,7 @@ export function DayContentManager({ dayId }: { dayId: string }) {
       back_text: v.back_text,
       part_of_speech: v.part_of_speech || '',
       example_sentence: v.example_sentence || '',
+      example_sentence_ko: v.example_sentence_ko || '',
       synonyms: v.synonyms || '',
       antonyms: v.antonyms || '',
       spelling_hint: v.spelling_hint || '',
@@ -254,6 +255,7 @@ export function DayContentManager({ dayId }: { dayId: string }) {
                       <Input className="h-7 text-sm" value={vocabEdit.editForm.part_of_speech} onChange={(e) => vocabEdit.setEditForm({ ...vocabEdit.editForm, part_of_speech: e.target.value })} placeholder="품사" />
                       <Input className="h-7 text-sm col-span-2" value={vocabEdit.editForm.example_sentence} onChange={(e) => vocabEdit.setEditForm({ ...vocabEdit.editForm, example_sentence: e.target.value })} placeholder="예문" />
                     </div>
+                    <Input className="h-7 text-sm" value={vocabEdit.editForm.example_sentence_ko} onChange={(e) => vocabEdit.setEditForm({ ...vocabEdit.editForm, example_sentence_ko: e.target.value })} placeholder="예문 해석" />
                     <div className="grid grid-cols-2 gap-2">
                       <Input className="h-7 text-sm" value={vocabEdit.editForm.synonyms} onChange={(e) => vocabEdit.setEditForm({ ...vocabEdit.editForm, synonyms: e.target.value })} placeholder="유의어" />
                       <Input className="h-7 text-sm" value={vocabEdit.editForm.antonyms} onChange={(e) => vocabEdit.setEditForm({ ...vocabEdit.editForm, antonyms: e.target.value })} placeholder="반의어" />
