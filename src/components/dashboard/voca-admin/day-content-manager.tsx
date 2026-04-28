@@ -14,7 +14,7 @@ import { cn } from '@/lib/utils';
 import { useListCrud } from '@/hooks/use-list-crud';
 import { useInlineEdit } from '@/hooks/use-inline-edit';
 import { useConfirmDelete } from '@/hooks/use-confirm-delete';
-import { AddVocabDialog, BulkVocabUpload, PdfVocabExtract } from '@/components/shared/vocab-dialogs';
+import { AddVocabDialog, BulkVocabUpload, PdfVocabExtract, ExamSentenceMatch } from '@/components/shared/vocab-dialogs';
 import type { VocaVocabulary } from '@/types/voca';
 
 export function DayContentManager({ dayId }: { dayId: string }) {
@@ -291,6 +291,7 @@ export function DayContentManager({ dayId }: { dayId: string }) {
               {ttsGenerating ? <Loader2 className="h-3.5 w-3.5 mr-1 animate-spin" /> : <Volume2 className="h-3.5 w-3.5 mr-1" />}
               {ttsGenerating ? 'TTS 생성 중...' : ttsCount > 0 ? `TTS 생성 (${ttsCount}개)` : 'TTS 완료'}
             </Button>
+            <ExamSentenceMatch words={vocab.items} onUpdate={loadVocab} />
           </>
         )}
       </div>
