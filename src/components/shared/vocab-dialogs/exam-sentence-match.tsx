@@ -13,7 +13,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
-import { FileSearch, Loader2, Check } from 'lucide-react';
+import { FileSearch, Loader2, Check, Languages } from 'lucide-react';
 import { toast } from 'sonner';
 import { fetchWithToast } from '@/lib/fetch-with-toast';
 import type { VocaVocabulary } from '@/types/voca';
@@ -39,6 +39,7 @@ export function ExamSentenceMatch({ words, onUpdate }: Props) {
   const [matching, setMatching] = useState(false);
   const [saving, setSaving] = useState(false);
   const [results, setResults] = useState<MatchedWord[]>([]);
+  const [translating, setTranslating] = useState(false);
 
   function reset() {
     setStep(1);
@@ -46,6 +47,7 @@ export function ExamSentenceMatch({ words, onUpdate }: Props) {
     setMatching(false);
     setSaving(false);
     setResults([]);
+    setTranslating(false);
   }
 
   async function handleMatch() {
@@ -133,6 +135,35 @@ export function ExamSentenceMatch({ words, onUpdate }: Props) {
     );
   }
 
+  async function handleRetranslate() {
+    const targets = results.filter((r) => r.matched && r.example_sentence);
+    if (targets.length === 0) return;
+    setTranslating(true);
+    try {
+      const data = await fetchWithToast<{
+        translations: { id: string; ko: string }[];
+      }>('/api/voca/vocabulary/translate-sentences', {
+        body: {
+          sentences: targets.map((r) => ({ id: r.id, sentence: r.example_sentence! })),
+        },
+        errorMessage: '해석 재생성 실패',
+        logContext: 'voca_admin.exam_sentence_match',
+      });
+      const map = new Map(data.translations.map((t) => [t.id, t.ko]));
+      setResults((prev) =>
+        prev.map((r) => {
+          const ko = map.get(r.id);
+          return ko ? { ...r, example_sentence_ko: ko } : r;
+        }),
+      );
+      toast.success('해석이 재생성되었습니다');
+    } catch {
+      // fetchWithToast already shows toast
+    } finally {
+      setTranslating(false);
+    }
+  }
+
   const matchedCount = results.filter((r) => r.matched).length;
   const selectedCount = results.filter((r) => r.selected && r.example_sentence).length;
 
@@ -199,9 +230,15 @@ export function ExamSentenceMatch({ words, onUpdate }: Props) {
                 />
                 전체 선택
               </label>
-              <Button size="sm" variant="outline" onClick={reset}>
-                다시 매칭
-              </Button>
+              <div className="flex gap-2">
+                <Button size="sm" variant="outline" onClick={handleRetranslate} disabled={translating || matchedCount === 0}>
+                  {translating ? <Loader2 className="h-3.5 w-3.5 mr-1 animate-spin" /> : <Languages className="h-3.5 w-3.5 mr-1" />}
+                  {translating ? '번역 중...' : '해석 재생성'}
+                </Button>
+                <Button size="sm" variant="outline" onClick={reset}>
+                  다시 매칭
+                </Button>
+              </div>
             </div>
 
             <div className="max-h-96 overflow-y-auto border rounded-lg">
