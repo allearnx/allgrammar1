@@ -49,6 +49,12 @@ export const POST = createApiHandler(
       .single();
 
     if (error) return NextResponse.json({ error: error.message }, { status: 400 });
+
+    // Log every attempt for history tracking (fire-and-forget)
+    await supabase.from('voca_attempt_log').insert({
+      student_id: user.id, day_id: dayId, step: type, score: score ?? null,
+    });
+
     return NextResponse.json({ success: true, progress: data });
   }
 );

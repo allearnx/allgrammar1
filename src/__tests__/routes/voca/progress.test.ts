@@ -19,12 +19,13 @@ function mockChain(result: { data: unknown; error: unknown }) {
   const chain: Record<string, ReturnType<typeof vi.fn>> = {
     select: vi.fn().mockReturnThis(),
     upsert: vi.fn().mockReturnThis(),
+    insert: vi.fn().mockResolvedValue({ data: null, error: null }),
     eq: vi.fn().mockReturnThis(),
     single: vi.fn().mockResolvedValue(result),
     then: vi.fn((resolve: (v: unknown) => void) => resolve(result)),
   };
   for (const key of Object.keys(chain)) {
-    if (key !== 'single' && key !== 'then') chain[key].mockReturnValue(chain);
+    if (key !== 'single' && key !== 'then' && key !== 'insert') chain[key].mockReturnValue(chain);
   }
   return { from: vi.fn().mockReturnValue(chain), chain };
 }

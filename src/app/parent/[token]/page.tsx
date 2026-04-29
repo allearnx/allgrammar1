@@ -5,7 +5,7 @@ import { ParentProgressTabs } from '@/components/dashboard/parent-progress-tabs'
 import { fetchNaesinExamData } from '@/lib/naesin/fetch-exam-data';
 import { fetchNaesinProgress } from '@/lib/naesin/fetch-naesin-progress';
 import { fetchVocaProgress } from '@/lib/voca/fetch-voca-progress';
-import { Lock, BookA, CheckCircle, Clock, MinusCircle } from 'lucide-react';
+import { Lock, BookA, CheckCircle, Clock, MinusCircle, History } from 'lucide-react';
 
 interface Props {
   params: Promise<{ token: string }>;
@@ -55,7 +55,7 @@ export default async function ParentReportPage({ params, searchParams }: Props) 
 
   // ── Voca Day-specific view (shared link with ?voca_day=xxx) ──
   if (vocaDayId) {
-    const [{ data: dayRow }, { data: progress }] = await Promise.all([
+    const [{ data: dayRow }, { data: progress }, { data: attemptLogs }] = await Promise.all([
       admin
         .from('voca_days')
         .select('id, day_number, title, book:voca_books(title)')
@@ -67,6 +67,12 @@ export default async function ParentReportPage({ params, searchParams }: Props) 
         .eq('student_id', studentId)
         .eq('day_id', vocaDayId)
         .maybeSingle(),
+      admin
+        .from('voca_attempt_log')
+        .select('step, score, created_at')
+        .eq('student_id', studentId)
+        .eq('day_id', vocaDayId)
+        .order('created_at', { ascending: true }),
     ]);
 
     if (dayRow) {
@@ -125,6 +131,10 @@ export default async function ParentReportPage({ params, searchParams }: Props) 
                 </p>
               )}
             </div>
+            {/* ── Attempt History Timeline ── */}
+            {attemptLogs && attemptLogs.length > 0 && (
+              <AttemptTimeline logs={attemptLogs} />
+            )}
           </main>
           <footer className="text-center py-8 text-xs text-gray-300">
             Powered by 올라영 AI 러닝 엔진 &middot; &copy; 2026
@@ -222,6 +232,67 @@ function ScoreItem({ label, value, done }: { label: string; value: string; done:
     <div className={`rounded-lg border p-3 ${done ? 'bg-green-50 border-green-200' : 'bg-gray-50 border-gray-200'}`}>
       <p className="text-xs text-gray-500">{label}</p>
       <p className={`text-lg font-bold ${done ? 'text-green-700' : 'text-gray-400'}`}>{value}</p>
+    </div>
+  );
+}
+
+const STEP_LABEL: Record<string, string> = {
+  flashcard: '플래시카드',
+  quiz: '퀴즈',
+  spelling: '스펠링',
+  matching: '매칭',
+};
+
+/** Group attempt logs into sessions by 30-min gap */
+function AttemptTimeline({ logs }: { logs: { step: string; score: number | null; created_at: string }[] }) {
+  const GAP_MS = 30 * 60 * 1000; // 30 minutes
+  const sessions: { logs: typeof logs; startTime: string }[] = [];
+
+  for (const log of logs) {
+    const last = sessions[sessions.length - 1];
+    if (last) {
+      const lastTime = new Date(last.logs[last.logs.length - 1].created_at).getTime();
+      const curTime = new Date(log.created_at).getTime();
+      if (curTime - lastTime < GAP_MS) {
+        last.logs.push(log);
+        continue;
+      }
+    }
+    sessions.push({ logs: [log], startTime: log.created_at });
+  }
+
+  return (
+    <div className="rounded-xl bg-white border shadow-sm p-5 space-y-3">
+      <div className="flex items-center gap-2">
+        <History className="h-5 w-5 text-violet-500" />
+        <span className="font-semibold text-gray-800">학습 이력</span>
+        <span className="ml-auto text-xs text-gray-400">{sessions.length}회 시도</span>
+      </div>
+      <div className="space-y-3">
+        {sessions.map((session, i) => {
+          const dt = new Date(session.startTime);
+          const dateStr = dt.toLocaleDateString('ko-KR', { month: 'numeric', day: 'numeric' });
+          const timeStr = dt.toLocaleTimeString('ko-KR', { hour: '2-digit', minute: '2-digit', hour12: false });
+          return (
+            <div key={i} className="rounded-lg border border-gray-100 bg-gray-50 p-3">
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-sm font-medium text-gray-700">{i + 1}차 시도</span>
+                <span className="text-xs text-gray-400">{dateStr} {timeStr}</span>
+              </div>
+              <div className="flex flex-wrap gap-2">
+                {session.logs.map((log, j) => (
+                  <span key={j} className="inline-flex items-center gap-1 rounded-full bg-white border px-2.5 py-1 text-xs">
+                    <span className="text-gray-500">{STEP_LABEL[log.step] ?? log.step}</span>
+                    <span className="font-semibold text-gray-700">
+                      {log.step === 'flashcard' ? '완료' : log.score != null ? `${log.score}점` : '—'}
+                    </span>
+                  </span>
+                ))}
+              </div>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 }
