@@ -24,6 +24,9 @@ export const metadata: Metadata = {
   title: '올라영 | 중고등·국제학교 영어 내신·어휘·문법 AI 학습',
   description:
     '중고등·국제학교 영어 완전 정복. 내신·어휘·문법 AI 맞춤 학습 + 25년 경력 원장 직강. 강남 기출 분석 기반으로 1등급 도전하세요.',
+  other: {
+    'theme-color': '#1e1b4b',
+  },
   appleWebApp: {
     capable: true,
     statusBarStyle: 'default',
