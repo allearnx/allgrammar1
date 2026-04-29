@@ -10,7 +10,10 @@ import { RhythmSpelling } from './rhythm-spelling';
 import { WordMatching } from './word-matching';
 import { QuickQuiz } from './quick-quiz';
 import { VocaDayRankCard, type VocaDayRankCardProps } from '@/components/voca/voca-day-rank-card';
+import { PetReaction } from '@/components/voca/pet/pet-reaction';
+import { usePet } from '@/hooks/use-pet';
 import { EMPTY_VOCA_PROGRESS, type VocaVocabulary, type VocaStudentProgress } from '@/types/voca';
+import type { PetFeedResult } from '@/lib/voca/pet-constants';
 
 type RankData = Omit<VocaDayRankCardProps, 'onClose' | 'dayTitle'>;
 
@@ -37,6 +40,8 @@ function getStepStates(p: VocaStudentProgress | null) {
 export function NeonVocaTab({ vocabulary, dayId, progress, dayTitle }: NeonVocaTabProps) {
   const [localProgress, setLocalProgress] = useState(progress);
   const [rankData, setRankData] = useState<RankData | null>(null);
+  const [petReaction, setPetReaction] = useState<PetFeedResult | null>(null);
+  const pet = usePet();
   const completedSteps = useMemo(() => getStepStates(localProgress), [localProgress]);
 
   // 현재 Step: 첫 번째 미완료 Step (모두 완료면 마지막)
@@ -94,7 +99,14 @@ export function NeonVocaTab({ vocabulary, dayId, progress, dayTitle }: NeonVocaT
           // 랭킹 API 호출
           fetch(`/api/voca/day-ranking?dayId=${dayId}`)
             .then((r) => r.json())
-            .then((data) => setRankData(data))
+            .then((data) => {
+              setRankData(data);
+              // 펫 먹이 주기
+              const scores = data.scores as { quiz: number; spelling: number; matching: number };
+              pet.feed(dayId, scores, 0).then((result) => {
+                if (result && result.xpEarned > 0) setPetReaction(result);
+              });
+            })
             .catch(() => toast.success('모든 단계 완료!'));
         }
       }, 1500);
@@ -203,6 +215,11 @@ export function NeonVocaTab({ vocabulary, dayId, progress, dayTitle }: NeonVocaT
           dayTitle={dayTitle}
           onClose={() => setRankData(null)}
         />
+      )}
+
+      {/* Pet Reaction */}
+      {petReaction && (
+        <PetReaction result={petReaction} onClose={() => setPetReaction(null)} />
       )}
     </div>
   );

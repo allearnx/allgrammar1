@@ -4,6 +4,7 @@ import { useState, useMemo } from 'react';
 import Link from 'next/link';
 import { Badge } from '@/components/ui/badge';
 import { CheckCircle, Lock, ChevronRight } from 'lucide-react';
+import { PetWidget } from '@/components/voca/pet/pet-widget';
 import type { VocaBook, VocaDay, VocaStudentProgress } from '@/types/voca';
 
 interface VocaHomeClientProps {
@@ -125,6 +126,9 @@ export function VocaHomeClient({ books, days, progressList, submissionStatuses =
           })}
         </div>
       )}
+
+      {/* Pet widget */}
+      <PetWidget />
 
       {/* Day list */}
       {filteredDays.length === 0 ? (
