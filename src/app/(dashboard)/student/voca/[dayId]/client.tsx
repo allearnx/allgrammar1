@@ -75,6 +75,7 @@ export function VocaDayClient({ day, vocabulary, progress, round2Locked = false 
           vocabulary={vocabulary}
           dayId={day.id}
           progress={progress}
+          dayTitle={day.title}
         />
       ) : (
         <VocaTab2

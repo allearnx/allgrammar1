@@ -9,12 +9,16 @@ import { NeonFlashcard } from './neon-flashcard';
 import { RhythmSpelling } from './rhythm-spelling';
 import { WordMatching } from './word-matching';
 import { QuickQuiz } from './quick-quiz';
+import { VocaDayRankCard, type VocaDayRankCardProps } from '@/components/voca/voca-day-rank-card';
 import { EMPTY_VOCA_PROGRESS, type VocaVocabulary, type VocaStudentProgress } from '@/types/voca';
+
+type RankData = Omit<VocaDayRankCardProps, 'onClose' | 'dayTitle'>;
 
 interface NeonVocaTabProps {
   vocabulary: VocaVocabulary[];
   dayId: string;
   progress: VocaStudentProgress | null;
+  dayTitle: string;
 }
 
 const STEP_LABELS = ['플래시카드', '스펠링', '매칭', '퀴즈'];
@@ -30,8 +34,9 @@ function getStepStates(p: VocaStudentProgress | null) {
   ];
 }
 
-export function NeonVocaTab({ vocabulary, dayId, progress }: NeonVocaTabProps) {
+export function NeonVocaTab({ vocabulary, dayId, progress, dayTitle }: NeonVocaTabProps) {
   const [localProgress, setLocalProgress] = useState(progress);
+  const [rankData, setRankData] = useState<RankData | null>(null);
   const completedSteps = useMemo(() => getStepStates(localProgress), [localProgress]);
 
   // 현재 Step: 첫 번째 미완료 Step (모두 완료면 마지막)
@@ -86,7 +91,11 @@ export function NeonVocaTab({ vocabulary, dayId, progress }: NeonVocaTabProps) {
         if (nextStep < STEP_LABELS.length) {
           setCurrentStep(nextStep);
         } else {
-          toast.success('모든 단계 완료!');
+          // 랭킹 API 호출
+          fetch(`/api/voca/day-ranking?dayId=${dayId}`)
+            .then((r) => r.json())
+            .then((data) => setRankData(data))
+            .catch(() => toast.success('모든 단계 완료!'));
         }
       }, 1500);
     } else {
@@ -186,6 +195,15 @@ export function NeonVocaTab({ vocabulary, dayId, progress }: NeonVocaTabProps) {
           )}
         </motion.div>
       </AnimatePresence>
+
+      {/* Ranking Card */}
+      {rankData && (
+        <VocaDayRankCard
+          {...rankData}
+          dayTitle={dayTitle}
+          onClose={() => setRankData(null)}
+        />
+      )}
     </div>
   );
 }
