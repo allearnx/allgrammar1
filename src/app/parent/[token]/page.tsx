@@ -5,14 +5,16 @@ import { ParentProgressTabs } from '@/components/dashboard/parent-progress-tabs'
 import { fetchNaesinExamData } from '@/lib/naesin/fetch-exam-data';
 import { fetchNaesinProgress } from '@/lib/naesin/fetch-naesin-progress';
 import { fetchVocaProgress } from '@/lib/voca/fetch-voca-progress';
-import { Lock } from 'lucide-react';
+import { Lock, BookA, CheckCircle, Clock, MinusCircle } from 'lucide-react';
 
 interface Props {
   params: Promise<{ token: string }>;
+  searchParams: Promise<{ voca_day?: string }>;
 }
 
-export default async function ParentReportPage({ params }: Props) {
+export default async function ParentReportPage({ params, searchParams }: Props) {
   const { token } = await params;
+  const { voca_day: vocaDayId } = await searchParams;
   const admin = createAdminClient();
 
   // Validate token
@@ -50,6 +52,88 @@ export default async function ParentReportPage({ params }: Props) {
   const services = (svcData || []).map((s) => s.service);
   const hasNaesin = !!naesinData && naesinData.units.length > 0;
   const hasVoca = services.includes('voca');
+
+  // ── Voca Day-specific view (shared link with ?voca_day=xxx) ──
+  if (vocaDayId) {
+    const [{ data: dayRow }, { data: progress }] = await Promise.all([
+      admin
+        .from('voca_days')
+        .select('id, day_number, title, book:voca_books(title)')
+        .eq('id', vocaDayId)
+        .single(),
+      admin
+        .from('voca_student_progress')
+        .select('flashcard_completed, quiz_score, spelling_score, matching_score, matching_completed, updated_at')
+        .eq('student_id', studentId)
+        .eq('day_id', vocaDayId)
+        .maybeSingle(),
+    ]);
+
+    if (dayRow) {
+      const bookArr = dayRow.book as unknown as { title: string }[] | null;
+      const bookTitle = bookArr?.[0]?.title ?? '';
+      const p = progress;
+      const isCompleted = p?.flashcard_completed && p?.quiz_score != null && p?.spelling_score != null && p?.matching_completed;
+      const isStarted = !!p;
+
+      return (
+        <div className="min-h-screen bg-gray-50">
+          <header className="relative overflow-hidden bg-gradient-to-r from-violet-400 to-purple-500 px-4 py-5">
+            <div className="max-w-4xl mx-auto flex items-center gap-3">
+              <div className="h-9 w-9 rounded-lg bg-white/20 backdrop-blur flex items-center justify-center">
+                <span className="text-white font-bold text-sm">OL</span>
+              </div>
+              <span className="font-bold text-white">올라영 AI 러닝 엔진</span>
+            </div>
+          </header>
+          <main className="max-w-md mx-auto p-4 md:p-6 space-y-4">
+            <div className="rounded-xl bg-white border shadow-sm p-5">
+              <h1 className="text-xl font-bold text-gray-800">
+                {student?.full_name || '학생'} 보카 학습 결과
+              </h1>
+              <p className="text-sm text-gray-500 mt-1">
+                {bookTitle} · Day {dayRow.day_number} — {dayRow.title}
+              </p>
+            </div>
+            <div className="rounded-xl bg-white border shadow-sm p-5 space-y-4">
+              <div className="flex items-center gap-2">
+                <BookA className="h-5 w-5 text-violet-500" />
+                <span className="font-semibold text-gray-800">학습 현황</span>
+                {isCompleted ? (
+                  <span className="ml-auto inline-flex items-center gap-1 rounded-full bg-green-100 px-2.5 py-0.5 text-xs font-medium text-green-700">
+                    <CheckCircle className="h-3 w-3" /> 완료
+                  </span>
+                ) : isStarted ? (
+                  <span className="ml-auto inline-flex items-center gap-1 rounded-full bg-amber-100 px-2.5 py-0.5 text-xs font-medium text-amber-700">
+                    <Clock className="h-3 w-3" /> 진행중
+                  </span>
+                ) : (
+                  <span className="ml-auto inline-flex items-center gap-1 rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-500">
+                    <MinusCircle className="h-3 w-3" /> 미시작
+                  </span>
+                )}
+              </div>
+              <div className="grid grid-cols-2 gap-3">
+                <ScoreItem label="플래시카드" value={p?.flashcard_completed ? '완료' : '미완료'} done={!!p?.flashcard_completed} />
+                <ScoreItem label="스펠링" value={p?.spelling_score != null ? `${p.spelling_score}점` : '—'} done={p?.spelling_score != null} />
+                <ScoreItem label="매칭" value={p?.matching_score != null ? `${p.matching_score}점` : '—'} done={!!p?.matching_completed} />
+                <ScoreItem label="퀴즈" value={p?.quiz_score != null ? `${p.quiz_score}점` : '—'} done={p?.quiz_score != null} />
+              </div>
+              {p?.updated_at && (
+                <p className="text-xs text-gray-400 text-right">
+                  마지막 학습: {new Date(p.updated_at).toLocaleDateString('ko-KR')}
+                </p>
+              )}
+            </div>
+          </main>
+          <footer className="text-center py-8 text-xs text-gray-300">
+            Powered by 올라영 AI 러닝 엔진 &middot; &copy; 2026
+          </footer>
+        </div>
+      );
+    }
+    // Invalid dayId → fall through to full report
+  }
 
   // Fetch progress data in parallel via shared helpers
   const [naesinProgressData, vocaProgress, vocaSubRes] = await Promise.all([
@@ -129,6 +213,15 @@ export default async function ParentReportPage({ params }: Props) {
       <footer className="text-center py-8 text-xs text-gray-300">
         Powered by 올라영 AI 러닝 엔진 &middot; &copy; 2026
       </footer>
+    </div>
+  );
+}
+
+function ScoreItem({ label, value, done }: { label: string; value: string; done: boolean }) {
+  return (
+    <div className={`rounded-lg border p-3 ${done ? 'bg-green-50 border-green-200' : 'bg-gray-50 border-gray-200'}`}>
+      <p className="text-xs text-gray-500">{label}</p>
+      <p className={`text-lg font-bold ${done ? 'text-green-700' : 'text-gray-400'}`}>{value}</p>
     </div>
   );
 }
