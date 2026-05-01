@@ -6,10 +6,10 @@ import { AnimatedSection } from './animated-section';
 export function HeroSection({ onScrollToForm }: { onScrollToForm: () => void }) {
   return (
     <>
-      <section className="relative min-h-[55vh] bg-white pt-32 overflow-hidden flex items-end">
+      <section className="relative bg-white pt-32 overflow-hidden flex items-end">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 w-full">
           <div className="flex flex-col lg:flex-row items-end gap-12 lg:gap-16">
-            <div className="flex-[3] text-center lg:text-left self-center pb-12">
+            <div className="flex-[3] text-center lg:text-left self-center pb-4">
               <AnimatedSection>
                 <p className="text-[#86868b] text-lg sm:text-xl lg:text-2xl font-medium tracking-tight mb-6">
                   특목고 입시 전문 · 25년 입시 노하우
