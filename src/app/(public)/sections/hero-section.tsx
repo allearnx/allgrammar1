@@ -6,7 +6,7 @@ import { AnimatedSection } from './animated-section';
 export function HeroSection({ onScrollToForm }: { onScrollToForm: () => void }) {
   return (
     <>
-      <section className="relative min-h-[70vh] bg-white pt-32 overflow-hidden flex items-end">
+      <section className="relative min-h-[55vh] bg-white pt-32 overflow-hidden flex items-end">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 w-full">
           <div className="flex flex-col lg:flex-row items-end gap-12 lg:gap-16">
             <div className="flex-[3] text-center lg:text-left self-center pb-12">
