@@ -11,20 +11,25 @@ export function HeroSection({ onScrollToForm }: { onScrollToForm: () => void }) 
           <div className="flex flex-col lg:flex-row items-end gap-12 lg:gap-16">
             <div className="flex-[3] text-center lg:text-left self-center pb-12">
               <AnimatedSection>
-                <p className="text-[#86868b] text-2xl sm:text-3xl lg:text-4xl font-medium tracking-tight mb-8">
-                  온라인 실시간 수업
+                <p className="text-[#86868b] text-lg sm:text-xl lg:text-2xl font-medium tracking-tight mb-6">
+                  특목고 입시 전문 · 25년 입시 노하우
                 </p>
               </AnimatedSection>
               <AnimatedSection delay={100}>
-                <h1 className="text-5xl sm:text-6xl lg:text-8xl font-bold tracking-tight mb-10">
+                <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold tracking-tight mb-8">
                   <span className="bg-gradient-to-r from-violet-600 via-purple-500 to-cyan-400 bg-clip-text text-transparent">
-                    성적의 한계를<br />뛰어넘다.
+                    중3까지 영어를<br />끝내보세요.
                   </span>
                 </h1>
               </AnimatedSection>
               <AnimatedSection delay={150}>
-                <p className="text-[#1d1d1f] text-2xl sm:text-3xl lg:text-4xl font-semibold tracking-tight">
-                  영어, 이제는 온라인에서 끝내세요.
+                <p className="text-[#1d1d1f] text-2xl sm:text-3xl lg:text-4xl font-semibold tracking-tight mb-4">
+                  내신 1등급, 수능 1등급. 대학이 바뀝니다.
+                </p>
+              </AnimatedSection>
+              <AnimatedSection delay={250}>
+                <p className="text-[#86868b] text-base sm:text-lg lg:text-xl tracking-tight">
+                  내 아이의 빈틈을 시스템으로 메우세요.
                 </p>
               </AnimatedSection>
             </div>
