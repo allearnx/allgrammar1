@@ -42,7 +42,9 @@ async function fetchVocabData(
   const [vocabRes, quizSetsRes, quizSetResultsRes] = await Promise.all([
     supabase.from('naesin_vocabulary').select('*').eq('unit_id', unitId).order('sort_order'),
     supabase.from('naesin_vocab_quiz_sets').select('*').eq('unit_id', unitId).order('set_order'),
-    supabase.from('naesin_vocab_quiz_set_results').select('quiz_set_id, score').eq('student_id', userId),
+    quizSetIds.length > 0
+      ? supabase.from('naesin_vocab_quiz_set_results').select('quiz_set_id, score').eq('student_id', userId).in('quiz_set_id', quizSetIds)
+      : Promise.resolve({ data: [] }),
   ]);
 
   const allResults = quizSetResultsRes.data || [];
@@ -91,54 +93,51 @@ async function fetchDialogueData(supabase: SupabaseClient, userId: string, unitI
 }
 
 async function fetchGrammarData(supabase: SupabaseClient, userId: string, unitId: string) {
-  const [grammarRes, videoProgressRes] = await Promise.all([
-    supabase.from('naesin_grammar_lessons').select('*').eq('unit_id', unitId).order('sort_order'),
-    supabase.from('naesin_grammar_video_progress').select('*').eq('student_id', userId),
-  ]);
-
+  // First get lessons, then filter video progress by lesson IDs
+  const grammarRes = await supabase.from('naesin_grammar_lessons').select('*').eq('unit_id', unitId).order('sort_order');
   const grammarLessons = grammarRes.data || [];
   const lessonIds = grammarLessons.map((l: { id: string }) => l.id);
-  const videoProgress = (videoProgressRes.data || []).filter(
-    (vp: { lesson_id: string }) => lessonIds.includes(vp.lesson_id),
-  );
+
+  const videoProgress = lessonIds.length > 0
+    ? (await supabase.from('naesin_grammar_video_progress').select('*').eq('student_id', userId).in('lesson_id', lessonIds)).data || []
+    : [];
 
   return { grammarLessons, videoProgress };
 }
 
 async function fetchTextbookVideoData(supabase: SupabaseClient, userId: string, unitId: string) {
-  const [videoRes, videoProgressRes] = await Promise.all([
-    supabase.from('naesin_textbook_videos').select('*').eq('unit_id', unitId).order('sort_order'),
-    supabase.from('naesin_textbook_video_progress').select('*').eq('student_id', userId),
-  ]);
-
+  // First get videos, then filter progress by video IDs
+  const videoRes = await supabase.from('naesin_textbook_videos').select('*').eq('unit_id', unitId).order('sort_order');
   const textbookVideos = videoRes.data || [];
   const videoIds = textbookVideos.map((v: { id: string }) => v.id);
-  const textbookVideoProgress = (videoProgressRes.data || []).filter(
-    (vp: { video_id: string }) => videoIds.includes(vp.video_id),
-  );
+
+  const textbookVideoProgress = videoIds.length > 0
+    ? (await supabase.from('naesin_textbook_video_progress').select('*').eq('student_id', userId).in('video_id', videoIds)).data || []
+    : [];
 
   return { textbookVideos, textbookVideoProgress };
 }
 
 async function fetchMockExamData(supabase: SupabaseClient, unitId: string, userId?: string) {
-  const [mockExamRes, attemptsRes] = await Promise.all([
-    supabase
-      .from('naesin_problem_sheets')
-      .select('*')
-      .eq('unit_id', unitId)
-      .eq('category', 'mock_exam')
-      .order('sort_order'),
-    userId
-      ? supabase
-          .from('naesin_problem_attempts')
-          .select('sheet_id, score, total_questions, wrong_answers, created_at')
-          .eq('student_id', userId)
-          .order('created_at', { ascending: false })
-      : Promise.resolve({ data: [] }),
-  ]);
+  // First get sheets, then filter attempts by sheet IDs
+  const mockExamRes = await supabase
+    .from('naesin_problem_sheets')
+    .select('*')
+    .eq('unit_id', unitId)
+    .eq('category', 'mock_exam')
+    .order('sort_order');
 
   const mockExamSheets = mockExamRes.data || [];
   const mockSheetIds = new Set(mockExamSheets.map((s) => s.id));
+
+  const attemptsRes = userId && mockSheetIds.size > 0
+    ? await supabase
+        .from('naesin_problem_attempts')
+        .select('sheet_id, score, total_questions, wrong_answers, created_at')
+        .eq('student_id', userId)
+        .in('sheet_id', [...mockSheetIds])
+        .order('created_at', { ascending: false })
+    : { data: [] };
 
   const bestScoreBySheet: Record<string, number> = {};
   const lastAttemptBySheet: Record<string, {
@@ -167,21 +166,23 @@ async function fetchMockExamData(supabase: SupabaseClient, unitId: string, userI
 }
 
 async function fetchProblemData(supabase: SupabaseClient, unitId: string, userId?: string) {
-  const [problemRes, attemptsRes] = await Promise.all([
-    supabase
-      .from('naesin_problem_sheets')
-      .select('*')
-      .eq('unit_id', unitId)
-      .in('category', ['problem', 'external_passage', 'eng_eng_def'])
-      .order('sort_order'),
-    userId
-      ? supabase
-          .from('naesin_problem_attempts')
-          .select('sheet_id, score, total_questions, wrong_answers, created_at')
-          .eq('student_id', userId)
-          .order('created_at', { ascending: false })
-      : Promise.resolve({ data: [] }),
-  ]);
+  // First get sheets, then filter attempts by sheet IDs
+  const problemRes = await supabase
+    .from('naesin_problem_sheets')
+    .select('*')
+    .eq('unit_id', unitId)
+    .in('category', ['problem', 'external_passage', 'eng_eng_def'])
+    .order('sort_order');
+
+  const sheetIds = (problemRes.data || []).map((s) => s.id);
+  const attemptsRes = userId && sheetIds.length > 0
+    ? await supabase
+        .from('naesin_problem_attempts')
+        .select('sheet_id, score, total_questions, wrong_answers, created_at')
+        .eq('student_id', userId)
+        .in('sheet_id', sheetIds)
+        .order('created_at', { ascending: false })
+    : { data: [] };
 
   // Compute best score + last attempt per sheet
   const bestScoreBySheet: Record<string, number> = {};

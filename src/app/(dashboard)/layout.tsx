@@ -96,8 +96,8 @@ async function fetchNaesinTree(
 
   if (!setting?.textbook_id) return undefined;
 
-  // Fetch assignments, units, and progress in parallel
-  const [assignmentsRes, unitsRes, progressRes, vocabRes, passageRes, dialogueRes, grammarRes, problemRes, lastReviewSheetRes, similarRes, reviewContentRes, quizSetsRes, mockExamRes] = await Promise.all([
+  // Batch 1: assignments + units (need unit IDs first to filter the rest)
+  const [assignmentsRes, unitsRes] = await Promise.all([
     supabase
       .from('naesin_exam_assignments')
       .select('*')
@@ -110,50 +110,66 @@ async function fetchNaesinTree(
       .eq('textbook_id', setting.textbook_id)
       .eq('is_active', true)
       .order('sort_order'),
-    supabase
-      .from('naesin_student_progress')
-      .select('*')
-      .eq('student_id', studentId),
-    supabase
-      .from('naesin_vocabulary')
-      .select('unit_id'),
-    supabase
-      .from('naesin_passages')
-      .select('unit_id'),
-    supabase
-      .from('naesin_dialogues')
-      .select('unit_id'),
-    supabase
-      .from('naesin_grammar_lessons')
-      .select('id, unit_id, content_type'),
-    supabase
-      .from('naesin_problem_sheets')
-      .select('unit_id')
-      .eq('category', 'problem'),
-    supabase
-      .from('naesin_problem_sheets')
-      .select('unit_id')
-      .eq('category', 'last_review'),
-    supabase
-      .from('naesin_similar_problems')
-      .select('unit_id')
-      .eq('status', 'approved'),
-    supabase
-      .from('naesin_last_review_content')
-      .select('unit_id'),
-    supabase
-      .from('naesin_vocab_quiz_sets')
-      .select('id, unit_id'),
-    supabase
-      .from('naesin_problem_sheets')
-      .select('unit_id')
-      .eq('category', 'mock_exam'),
   ]);
 
   const assignments = assignmentsRes.data || [];
   const units = unitsRes.data || [];
 
   if (assignments.length === 0 || units.length === 0) return undefined;
+
+  // Batch 2: content queries filtered by unitIds to avoid full table scans
+  const unitIds = units.map((u) => u.id);
+  const [progressRes, vocabRes, passageRes, dialogueRes, grammarRes, problemRes, lastReviewSheetRes, similarRes, reviewContentRes, quizSetsRes, mockExamRes] = await Promise.all([
+    supabase
+      .from('naesin_student_progress')
+      .select('*')
+      .eq('student_id', studentId)
+      .in('unit_id', unitIds),
+    supabase
+      .from('naesin_vocabulary')
+      .select('unit_id')
+      .in('unit_id', unitIds),
+    supabase
+      .from('naesin_passages')
+      .select('unit_id')
+      .in('unit_id', unitIds),
+    supabase
+      .from('naesin_dialogues')
+      .select('unit_id')
+      .in('unit_id', unitIds),
+    supabase
+      .from('naesin_grammar_lessons')
+      .select('id, unit_id, content_type')
+      .in('unit_id', unitIds),
+    supabase
+      .from('naesin_problem_sheets')
+      .select('unit_id')
+      .eq('category', 'problem')
+      .in('unit_id', unitIds),
+    supabase
+      .from('naesin_problem_sheets')
+      .select('unit_id')
+      .eq('category', 'last_review')
+      .in('unit_id', unitIds),
+    supabase
+      .from('naesin_similar_problems')
+      .select('unit_id')
+      .eq('status', 'approved')
+      .in('unit_id', unitIds),
+    supabase
+      .from('naesin_last_review_content')
+      .select('unit_id')
+      .in('unit_id', unitIds),
+    supabase
+      .from('naesin_vocab_quiz_sets')
+      .select('id, unit_id')
+      .in('unit_id', unitIds),
+    supabase
+      .from('naesin_problem_sheets')
+      .select('unit_id')
+      .eq('category', 'mock_exam')
+      .in('unit_id', unitIds),
+  ]);
 
   // Build lookup maps
   const progressMap = new Map((progressRes.data || []).map((p) => [p.unit_id, p]));

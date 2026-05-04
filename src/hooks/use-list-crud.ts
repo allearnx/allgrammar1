@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, type Dispatch, type SetStateAction } from 'react';
+import { useState, useCallback, useRef, useMemo, type Dispatch, type SetStateAction } from 'react';
 import { toast } from 'sonner';
 import { fetchWithToast } from '@/lib/fetch-with-toast';
 
@@ -15,12 +15,21 @@ export function useListCrud<T extends { id: string }>(options: {
   apiEndpoint: string;
   messages: UseListCrudMessages;
 }) {
-  const { apiEndpoint, messages } = options;
+  const optRef = useRef(options);
+  optRef.current = options;
+
   const [items, setItems] = useState<T[]>([]);
   const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
   const [deleting, setDeleting] = useState(false);
 
-  async function handleDeleteOne(id: string) {
+  // Refs for stable access in callbacks without stale closures
+  const itemsRef = useRef(items);
+  itemsRef.current = items;
+  const selectedIdsRef = useRef(selectedIds);
+  selectedIdsRef.current = selectedIds;
+
+  const handleDeleteOne = useCallback(async (id: string) => {
+    const { apiEndpoint, messages } = optRef.current;
     try {
       await fetchWithToast(apiEndpoint, {
         method: 'DELETE',
@@ -35,14 +44,17 @@ export function useListCrud<T extends { id: string }>(options: {
         return next;
       });
     } catch { /* fetchWithToast handles toasts */ }
-  }
+  }, []);
 
-  async function handleBulkDelete() {
-    if (selectedIds.size === 0) return;
+  const handleBulkDelete = useCallback(async () => {
+    const { apiEndpoint, messages } = optRef.current;
+    const currentIds = selectedIdsRef.current;
+    if (currentIds.size === 0) return;
     setDeleting(true);
+    setSelectedIds(new Set());
     try {
       const results = await Promise.allSettled(
-        Array.from(selectedIds).map((id) =>
+        Array.from(currentIds).map((id) =>
           fetchWithToast(apiEndpoint, {
             method: 'DELETE',
             body: { id },
@@ -51,34 +63,33 @@ export function useListCrud<T extends { id: string }>(options: {
         )
       );
       const successCount = results.filter((r) => r.status === 'fulfilled').length;
-      setItems((prev) => prev.filter((v) => !selectedIds.has(v.id)));
-      setSelectedIds(new Set());
+      setItems((prev) => prev.filter((v) => !currentIds.has(v.id)));
       toast.success(messages.bulkSuccess(successCount));
     } catch {
       toast.error(messages.bulkError);
     } finally {
       setDeleting(false);
     }
-  }
+  }, []);
 
-  function toggleSelect(id: string) {
+  const toggleSelect = useCallback((id: string) => {
     setSelectedIds((prev) => {
       const next = new Set(prev);
       if (next.has(id)) next.delete(id);
       else next.add(id);
       return next;
     });
-  }
+  }, []);
 
-  function toggleSelectAll() {
-    if (selectedIds.size === items.length) {
-      setSelectedIds(new Set());
-    } else {
-      setSelectedIds(new Set(items.map((v) => v.id)));
-    }
-  }
+  const toggleSelectAll = useCallback(() => {
+    const currentItems = itemsRef.current;
+    setSelectedIds((currentIds) => {
+      if (currentIds.size === currentItems.length) return new Set();
+      return new Set(currentItems.map((v) => v.id));
+    });
+  }, []);
 
-  return {
+  return useMemo(() => ({
     items,
     setItems: setItems as Dispatch<SetStateAction<T[]>>,
     selectedIds,
@@ -88,5 +99,5 @@ export function useListCrud<T extends { id: string }>(options: {
     handleBulkDelete,
     toggleSelect,
     toggleSelectAll,
-  };
+  }), [items, selectedIds, deleting, handleDeleteOne, handleBulkDelete, toggleSelect, toggleSelectAll]);
 }
