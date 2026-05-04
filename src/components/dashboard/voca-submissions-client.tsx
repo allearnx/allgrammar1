@@ -216,15 +216,22 @@ function WrongReviewStatusTab() {
   const [students, setStudents] = useState<WrongReviewStudent[]>([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
+  const fetchStatus = useCallback(async () => {
     setLoading(true);
-    fetchWithToast<{ students: WrongReviewStudent[] }>('/api/voca/wrong-review/status', {
-      method: 'GET',
-      silent: true,
-    })
-      .then((res) => setStudents(res.students))
-      .finally(() => setLoading(false));
+    try {
+      const res = await fetchWithToast<{ students: WrongReviewStudent[] }>('/api/voca/wrong-review/status', {
+        method: 'GET',
+        silent: true,
+      });
+      setStudents(res.students);
+    } finally {
+      setLoading(false);
+    }
   }, []);
+
+  useEffect(() => {
+    fetchStatus();
+  }, [fetchStatus]);
 
   if (loading) {
     return (
