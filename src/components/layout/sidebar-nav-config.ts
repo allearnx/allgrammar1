@@ -24,6 +24,7 @@ import {
   HelpCircle,
   Megaphone,
   Library,
+  Swords,
 } from 'lucide-react';
 import type { NaesinStageStatuses } from '@/types/database';
 
@@ -64,6 +65,7 @@ export const NAV_CONFIG: Record<string, NavGroup[]> = {
       items: [
         { href: '/student/naesin', label: '올인내신', icon: BookMarked },
         { href: '/student/voca', label: '올킬보카', icon: BookA },
+        { href: '/student/voca/wrong-review', label: '올킬오답', icon: Swords },
       ],
     },
     {
@@ -266,7 +268,9 @@ export function getNavGroups(role: string, services?: string[], isHomepageManage
     }
     return {
       ...group,
-      items: group.items.filter((item) => serviceHrefs.has(item.href)),
+      items: group.items.filter((item) =>
+        [...serviceHrefs].some((href) => item.href === href || item.href.startsWith(href + '/'))
+      ),
     };
   }).filter((group) => group.items.length > 0);
 }

@@ -2,13 +2,15 @@
 
 import { useCallback, useEffect, useState } from 'react';
 import { format } from 'date-fns';
-import { CheckCircle, ChevronDown, ChevronUp, Loader2 } from 'lucide-react';
+import { CheckCircle, ChevronDown, ChevronUp, Loader2, Swords } from 'lucide-react';
 import { fetchWithToast } from '@/lib/fetch-with-toast';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
+import { Progress } from '@/components/ui/progress';
 import type { VocaMatchingSubmission, VocaMatchingSubmissionStatus, VocaWrongWordType } from '@/types/voca';
 
+type TabMode = 'submissions' | 'wrong-review';
 type FilterStatus = VocaMatchingSubmissionStatus | 'all';
 
 interface SubmissionWithStudent extends VocaMatchingSubmission {
@@ -28,6 +30,7 @@ const FILTER_OPTIONS: { value: FilterStatus; label: string }[] = [
 ];
 
 export function VocaSubmissionsClient() {
+  const [tab, setTab] = useState<TabMode>('submissions');
   const [submissions, setSubmissions] = useState<SubmissionWithStudent[]>([]);
   const [filter, setFilter] = useState<FilterStatus>('pending');
   const [loading, setLoading] = useState(true);
@@ -49,8 +52,8 @@ export function VocaSubmissionsClient() {
   }, [filter]);
 
   useEffect(() => {
-    fetchSubmissions();
-  }, [fetchSubmissions]);
+    if (tab === 'submissions') fetchSubmissions();
+  }, [tab, fetchSubmissions]);
 
   async function handleReview(id: string) {
     setReviewingId(id);
@@ -68,6 +71,28 @@ export function VocaSubmissionsClient() {
 
   return (
     <div className="space-y-4">
+      {/* Tab buttons */}
+      <div className="flex gap-2 border-b pb-2">
+        <Button
+          variant={tab === 'submissions' ? 'default' : 'outline'}
+          size="sm"
+          onClick={() => setTab('submissions')}
+        >
+          오답노트
+        </Button>
+        <Button
+          variant={tab === 'wrong-review' ? 'default' : 'outline'}
+          size="sm"
+          onClick={() => setTab('wrong-review')}
+        >
+          <Swords className="mr-1 h-4 w-4" />
+          올킬오답
+        </Button>
+      </div>
+
+      {tab === 'wrong-review' && <WrongReviewStatusTab />}
+
+      {tab === 'submissions' && <>
       {/* Filter buttons */}
       <div className="flex gap-2">
         {FILTER_OPTIONS.map((opt) => (
@@ -172,6 +197,79 @@ export function VocaSubmissionsClient() {
             </CardContent>
           </Card>
         ))}
+      </>}
+    </div>
+  );
+}
+
+// ──────────── 올킬오답 현황 탭 ────────────
+
+interface WrongReviewStudent {
+  studentId: string;
+  studentName: string;
+  totalWords: number;
+  graduatedCount: number;
+  completedAt: string | null;
+}
+
+function WrongReviewStatusTab() {
+  const [students, setStudents] = useState<WrongReviewStudent[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    setLoading(true);
+    fetchWithToast<{ students: WrongReviewStudent[] }>('/api/voca/wrong-review/status', {
+      method: 'GET',
+      silent: true,
+    })
+      .then((res) => setStudents(res.students))
+      .finally(() => setLoading(false));
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center py-12">
+        <Loader2 className="h-6 w-6 animate-spin text-muted-foreground" />
+      </div>
+    );
+  }
+
+  if (students.length === 0) {
+    return (
+      <div className="flex flex-col items-center justify-center py-16 text-muted-foreground">
+        <Swords className="mb-3 h-12 w-12" />
+        <p className="text-lg font-medium">보카 학생이 없습니다</p>
+      </div>
+    );
+  }
+
+  return (
+    <div className="space-y-3">
+      {students.map((s) => {
+        const pct = s.totalWords > 0 ? Math.round((s.graduatedCount / s.totalWords) * 100) : 0;
+        return (
+          <Card key={s.studentId}>
+            <CardContent className="flex items-center gap-4 py-3">
+              <div className="flex-1 min-w-0">
+                <div className="flex items-center gap-2">
+                  <p className="font-medium truncate">{s.studentName}</p>
+                  {s.completedAt && <Badge variant="secondary">완료</Badge>}
+                </div>
+                {s.totalWords > 0 ? (
+                  <div className="mt-1.5 flex items-center gap-2">
+                    <Progress value={pct} className="h-2 flex-1" />
+                    <span className="text-xs text-muted-foreground whitespace-nowrap">
+                      {s.graduatedCount}/{s.totalWords}
+                    </span>
+                  </div>
+                ) : (
+                  <p className="mt-1 text-xs text-muted-foreground">오답 없음</p>
+                )}
+              </div>
+            </CardContent>
+          </Card>
+        );
+      })}
     </div>
   );
 }
