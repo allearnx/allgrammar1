@@ -44,12 +44,22 @@ export interface ImageAnswerDraft {
   answers: Record<number, string>;
 }
 
-export type ProblemDraft = InteractiveDraft | ImageAnswerDraft;
+export interface PaperTestDraft {
+  version: number;
+  mode: 'paper_test';
+  sheetId: string;
+  questionCount: number;
+  savedAt: string;
+  answersMap: Record<number, string | number>;
+}
+
+export type ProblemDraft = InteractiveDraft | ImageAnswerDraft | PaperTestDraft;
 
 type CommonKeys = 'version' | 'sheetId' | 'questionCount' | 'savedAt';
 type InteractiveDraftInput = Omit<InteractiveDraft, CommonKeys>;
 type ImageAnswerDraftInput = Omit<ImageAnswerDraft, CommonKeys>;
-export type DraftInput = InteractiveDraftInput | ImageAnswerDraftInput;
+type PaperTestDraftInput = Omit<PaperTestDraft, CommonKeys>;
+export type DraftInput = InteractiveDraftInput | ImageAnswerDraftInput | PaperTestDraftInput;
 
 export function useProblemDraft(sheetId: string, questionCount: number) {
   const key = draftKey(sheetId);
@@ -100,8 +110,8 @@ export function useProblemDraft(sheetId: string, questionCount: number) {
         savedAt: new Date().toISOString(),
       } as ProblemDraft;
 
-      const answeredCount = full.mode === 'interactive'
-        ? Object.keys(full.answersMap ?? {}).length
+      const answeredCount = full.mode === 'interactive' || full.mode === 'paper_test'
+        ? Object.keys((full as InteractiveDraft | PaperTestDraft).answersMap ?? {}).length
         : Object.keys((full as ImageAnswerDraft).answers ?? {}).length;
 
       const res = await fetch('/api/naesin/problems/draft/save', {

@@ -10,7 +10,11 @@ import { extractAnswer } from '@/lib/naesin/normalize-answer';
 import { InteractiveProblemView } from './interactive-view';
 import { ImageAnswerView } from './image-answer-view';
 import { ExternalPassageView } from './external-passage-view';
+import { PaperTestView } from './paper-test-view';
 import type { NaesinProblemSheet } from '@/types/database';
+
+type ViewMode = 'interactive' | 'paper_test';
+const VIEW_MODE_KEY = 'naesin-view-mode';
 
 interface LastAttempt {
   score: number;
@@ -31,6 +35,14 @@ interface ProblemTabProps {
 export function ProblemTab({ sheets, unitId, onStageComplete, bestScoreBySheet, lastAttemptBySheet, onActiveSheetChange }: ProblemTabProps) {
   const [activeSheetId, setActiveSheetId] = useState<string | null>(sheets[0]?.id || null);
   const [retrySheetIds, setRetrySheetIds] = useState<Set<string>>(new Set());
+  const [viewMode, setViewMode] = useState<ViewMode>(() => {
+    try { return (localStorage.getItem(VIEW_MODE_KEY) as ViewMode) || 'interactive'; } catch { return 'interactive'; }
+  });
+
+  function handleViewModeChange(mode: ViewMode) {
+    setViewMode(mode);
+    try { localStorage.setItem(VIEW_MODE_KEY, mode); } catch { /* ignore */ }
+  }
 
   const activeSheet = sheets.find((s) => s.id === activeSheetId) || sheets[0];
 
@@ -94,6 +106,37 @@ export function ProblemTab({ sheets, unitId, onStageComplete, bestScoreBySheet, 
         </div>
       )}
 
+      {/* Mode selector: only for interactive + problem/mock_exam */}
+      {!showSummary &&
+        activeSheet.mode === 'interactive' &&
+        ['problem', 'mock_exam'].includes(activeSheet.category) &&
+        (activeSheet.questions as unknown[])?.length > 0 && (
+        <div className="flex justify-center print:hidden">
+          <div className="inline-flex rounded-lg border bg-muted p-0.5 text-sm">
+            <button
+              type="button"
+              onClick={() => handleViewModeChange('interactive')}
+              className={cn(
+                'px-3 py-1 rounded-md transition-colors',
+                viewMode === 'interactive' ? 'bg-background shadow-sm font-medium' : 'text-muted-foreground hover:text-foreground',
+              )}
+            >
+              문제별
+            </button>
+            <button
+              type="button"
+              onClick={() => handleViewModeChange('paper_test')}
+              className={cn(
+                'px-3 py-1 rounded-md transition-colors',
+                viewMode === 'paper_test' ? 'bg-background shadow-sm font-medium' : 'text-muted-foreground hover:text-foreground',
+              )}
+            >
+              시험지
+            </button>
+          </div>
+        </div>
+      )}
+
       {showSummary ? (
         <AttemptSummary attempt={lastAttempt} onRetry={handleRetry} />
       ) : activeSheet.category === 'external_passage' ? (
@@ -104,12 +147,21 @@ export function ProblemTab({ sheets, unitId, onStageComplete, bestScoreBySheet, 
           onComplete={onStageComplete}
         />
       ) : activeSheet.mode === 'interactive' && (activeSheet.questions as unknown[])?.length > 0 ? (
-        <InteractiveProblemView
-          key={activeSheet.id}
-          sheet={activeSheet}
-          unitId={unitId}
-          onComplete={onStageComplete}
-        />
+        viewMode === 'paper_test' ? (
+          <PaperTestView
+            key={`paper-${activeSheet.id}`}
+            sheet={activeSheet}
+            unitId={unitId}
+            onComplete={onStageComplete}
+          />
+        ) : (
+          <InteractiveProblemView
+            key={activeSheet.id}
+            sheet={activeSheet}
+            unitId={unitId}
+            onComplete={onStageComplete}
+          />
+        )
       ) : (
         <ImageAnswerView
           key={activeSheet.id}

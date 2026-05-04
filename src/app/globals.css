@@ -189,3 +189,80 @@
 .marquee-wrapper:hover .marquee-track {
   animation-play-state: paused;
 }
+
+/* ===== Paper Test: Print Styles ===== */
+@media print {
+  /* Hide chrome */
+  nav, header, footer, aside,
+  [data-sidebar], [data-topbar],
+  .print\:hidden { display: none !important; }
+
+  .paper-test-printable {
+    max-width: 100% !important;
+    margin: 0;
+    padding: 0;
+  }
+
+  .paper-test-question {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .paper-test-print-header {
+    display: block !important;
+  }
+
+  /* Input → blank lines for writing */
+  .paper-test-printable textarea {
+    border: none !important;
+    border-bottom: 1pt solid #999 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    min-height: 2em;
+    color: transparent !important;
+  }
+
+  .paper-test-printable input[type="text"] {
+    border: none !important;
+    border-bottom: 1pt solid #999 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    color: transparent !important;
+  }
+
+  /* Radio → empty circle */
+  .paper-test-printable input[type="radio"] {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 12px;
+    height: 12px;
+    border: 1pt solid #666;
+    border-radius: 50%;
+    background: white;
+  }
+
+  .paper-test-printable input[type="checkbox"] {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 12px;
+    height: 12px;
+    border: 1pt solid #666;
+    background: white;
+  }
+
+  /* Remove selection styling */
+  .paper-test-printable label {
+    background: transparent !important;
+    font-weight: normal !important;
+    color: black !important;
+  }
+
+  /* Sticky bar hidden */
+  .sticky { display: none !important; }
+
+  body {
+    background: white !important;
+    color: black !important;
+    font-size: 10pt;
+  }
+}
