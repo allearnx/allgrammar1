@@ -113,7 +113,7 @@ export function NeonVocaTab({ vocabulary, dayId, progress, dayTitle }: NeonVocaT
     } else {
       toast.info('기준 점수에 도달하지 못했습니다. 다시 도전해보세요!');
     }
-  }, [saveProgress]);
+  }, [saveProgress, dayId, pet]);
 
   // Cleanup timer on unmount
   useEffect(() => {
