@@ -287,7 +287,12 @@ export function PaperTestView({
             {unanswered > 0 ? `${unanswered}문제 미답변` : '모두 답변 완료'}
           </span>
           <Button
-            onClick={handleSubmit}
+            onClick={() => {
+              if (unanswered > 0) {
+                if (!confirm(`아직 ${unanswered}문제를 풀지 않았습니다. 그래도 제출할까요?`)) return;
+              }
+              handleSubmit();
+            }}
             disabled={isSubmitting || answeredCount === 0}
             className="min-w-[120px]"
           >
