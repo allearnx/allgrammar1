@@ -1,6 +1,5 @@
 import { Card, CardContent } from '@/components/ui/card';
 import { AlertTriangle } from 'lucide-react';
-import { cn } from '@/lib/utils';
 import { getEncouragement } from '@/lib/naesin/encouragement';
 import { extractAnswer } from '@/lib/naesin/normalize-answer';
 import { FormattedText } from '@/components/shared/formatted-text';
@@ -20,19 +19,13 @@ export function ResultsScreen({
   return (
     <div className="space-y-6 max-w-md mx-auto">
       <div className="text-center space-y-2">
-        <p className={cn(
-          'text-6xl font-bold',
-          pct >= 80 ? 'text-green-600' : pct >= 50 ? 'text-yellow-600' : 'text-red-600'
-        )}>
+        <p className="font-handwriting text-7xl text-red-500 -rotate-2">
           {pct}점
         </p>
         <p className="text-muted-foreground">
           {totalQuestions}문제 중 {score.correct}개 정답
         </p>
-        <p className={cn(
-          'text-sm font-medium mt-1',
-          pct >= 80 ? 'text-green-600' : 'text-orange-600'
-        )}>
+        <p className="text-sm font-medium mt-1 text-muted-foreground">
           {getEncouragement(pct)}
         </p>
       </div>

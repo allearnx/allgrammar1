@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next';
-import { Geist, Geist_Mono, Noto_Sans_KR } from 'next/font/google';
+import { Geist, Geist_Mono, Noto_Sans_KR, Caveat } from 'next/font/google';
 import { Toaster } from 'sonner';
 import { Analytics } from '@vercel/analytics/next';
 import { PwaRegister } from '@/components/pwa-register';
@@ -19,6 +19,11 @@ const notoSansKr = Noto_Sans_KR({
   variable: '--font-noto-sans-kr',
   subsets: ['latin'],
   weight: ['300', '400', '500', '700'],
+});
+
+const caveat = Caveat({
+  variable: '--font-handwriting',
+  subsets: ['latin'],
 });
 
 export const metadata: Metadata = {
@@ -69,7 +74,7 @@ export default function RootLayout({
         <link rel="apple-touch-startup-image" href="/splash/splash-2048x2732.png" media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2)" />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${notoSansKr.variable} font-sans antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${notoSansKr.variable} ${caveat.variable} font-sans antialiased`}
       >
         {children}
         <Toaster position="top-center" richColors />

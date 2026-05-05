@@ -185,19 +185,13 @@ function AttemptSummary({ attempt, onRetry }: { attempt: LastAttempt; onRetry: (
     <div className="space-y-4 max-w-md mx-auto">
       <div className="text-center space-y-2">
         <p className="text-xs text-muted-foreground">{dateStr} 풀이 결과</p>
-        <p className={cn(
-          'text-5xl font-bold',
-          pct >= 80 ? 'text-green-600' : pct >= 50 ? 'text-yellow-600' : 'text-red-600'
-        )}>
+        <p className="font-handwriting text-7xl text-red-500 -rotate-2">
           {pct}점
         </p>
         <p className="text-muted-foreground">
           {attempt.total_questions}문제 중 {correct}개 정답
         </p>
-        <p className={cn(
-          'text-sm font-medium',
-          pct >= 80 ? 'text-green-600' : 'text-orange-600'
-        )}>
+        <p className="text-sm font-medium text-muted-foreground">
           {getEncouragement(pct)}
         </p>
       </div>
