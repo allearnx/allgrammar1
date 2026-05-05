@@ -24,6 +24,8 @@ interface MCQOptionListProps {
   onSubmit?: () => void;
   /** 자동 제출용: 선택해야 할 정답 개수 (설정 시 해당 개수 클릭하면 자동 제출, 제출 버튼 숨김) */
   expectedCount?: number;
+  /** 1차 오답 재시도 시 비활성화할 옵션 값 목록 */
+  disabledOptions?: string[];
 }
 
 export function MCQOptionList({
@@ -39,6 +41,7 @@ export function MCQOptionList({
   onToggle,
   onSubmit,
   expectedCount,
+  disabledOptions = [],
 }: MCQOptionListProps) {
   // 정답이 옵션 번호가 아닌 텍스트인 경우 번호로 변환
   const resolved = resolveCorrectIndex(String(correctAnswer), options);
@@ -94,6 +97,7 @@ export function MCQOptionList({
         // 단일 선택 — resolved를 사용하여 텍스트 정답도 처리
         const isSelected = String(selectedAnswer) === String(value);
         const isCorrectOption = String(value) === String(resolved);
+        const isDisabled = disabledOptions.includes(value);
 
         return (
           <Button
@@ -102,10 +106,11 @@ export function MCQOptionList({
             className={cn(
               'h-auto py-3 px-4 text-left justify-start whitespace-normal',
               showResult && isCorrectOption && 'border-green-500 bg-green-50 text-green-700',
-              showResult && isSelected && !isCorrectOption && 'border-red-500 bg-red-50 text-red-700'
+              showResult && isSelected && !isCorrectOption && 'border-red-500 bg-red-50 text-red-700',
+              isDisabled && !showResult && 'opacity-50 line-through border-red-200',
             )}
             onClick={() => onSelect(value)}
-            disabled={showResult}
+            disabled={showResult || isDisabled}
           >
             <span className="mr-3 shrink-0 font-medium">{label}</span>
             <FormattedText text={option} />

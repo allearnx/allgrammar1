@@ -8,7 +8,7 @@ export const maxDuration = 60;
 export const POST = createApiHandler(
   { schema: problemSubmitSchema },
   async ({ user, body, supabase }) => {
-    const { sheetId, unitId, answers, totalQuestions, aiResults } = body;
+    const { sheetId, unitId, answers, totalQuestions, aiResults, retryCorrectAnswers } = body;
 
     // Fetch answer key
     const { data: sheet } = await supabase
@@ -80,6 +80,15 @@ export const POST = createApiHandler(
 
     const score = Math.round((correctCount / totalQuestions) * 100);
 
+    // Merge retryCorrect items into wrong_answers JSONB for tracking
+    const allWrongAnswers = [
+      ...wrongAnswers,
+      ...(retryCorrectAnswers ?? []).map((rc: { number: number; userAnswer: string | number; correctAnswer: string | number; question?: string }) => ({
+        ...rc,
+        retryCorrect: true,
+      })),
+    ];
+
     // Save attempt
     const attempt = dbResult(await supabase
       .from('naesin_problem_attempts')
@@ -89,7 +98,7 @@ export const POST = createApiHandler(
         answers,
         score,
         total_questions: totalQuestions,
-        wrong_answers: wrongAnswers,
+        wrong_answers: allWrongAnswers,
       })
       .select()
       .single());

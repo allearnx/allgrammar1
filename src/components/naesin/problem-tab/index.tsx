@@ -19,7 +19,7 @@ const VIEW_MODE_KEY = 'naesin-view-mode';
 interface LastAttempt {
   score: number;
   total_questions: number;
-  wrong_answers: { number: number; userAnswer: string | number; correctAnswer: string | number; question?: string; subParts?: { label: string; answer: string }[] }[];
+  wrong_answers: { number: number; userAnswer: string | number; correctAnswer: string | number; question?: string; subParts?: { label: string; answer: string }[]; retryCorrect?: boolean }[];
   created_at: string;
 }
 
@@ -177,7 +177,9 @@ export function ProblemTab({ sheets, unitId, onStageComplete, bestScoreBySheet, 
 function AttemptSummary({ attempt, onRetry }: { attempt: LastAttempt; onRetry: () => void }) {
   const pct = attempt.score;
   const correct = Math.round((pct / 100) * attempt.total_questions);
-  const wrongList = attempt.wrong_answers || [];
+  const allItems = attempt.wrong_answers || [];
+  const genuineWrong = allItems.filter(w => !w.retryCorrect);
+  const retryCorrect = allItems.filter(w => w.retryCorrect);
   const date = new Date(attempt.created_at);
   const dateStr = `${date.getFullYear()}.${date.getMonth() + 1}.${date.getDate()}`;
 
@@ -190,18 +192,36 @@ function AttemptSummary({ attempt, onRetry }: { attempt: LastAttempt; onRetry: (
         </p>
         <p className="text-muted-foreground">
           {attempt.total_questions}문제 중 {correct}개 정답
+          {retryCorrect.length > 0 && (
+            <span className="text-amber-600"> (🔺 {retryCorrect.length}개 포함)</span>
+          )}
         </p>
         <p className="text-sm font-medium text-muted-foreground">
           {getEncouragement(pct)}
         </p>
       </div>
 
-      {wrongList.length > 0 && (
+      {retryCorrect.length > 0 && (
+        <Card className="border-amber-200">
+          <CardContent className="py-4">
+            <p className="font-medium text-amber-600 mb-3">🔺 한 번 틀린 후 맞춘 문제 ({retryCorrect.length}개)</p>
+            <div className="space-y-3">
+              {retryCorrect.map((w, i) => (
+                <div key={i} className="text-sm border-b last:border-0 pb-2">
+                  <p className="font-medium">#{w.number}. {w.question || ''}</p>
+                </div>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+      )}
+
+      {genuineWrong.length > 0 && (
         <Card>
           <CardContent className="py-4">
-            <p className="font-medium text-red-600 mb-3">틀린 문제 ({wrongList.length}개)</p>
+            <p className="font-medium text-red-600 mb-3">❌ 틀린 문제 ({genuineWrong.length}개)</p>
             <div className="space-y-3">
-              {wrongList.map((w, i) => (
+              {genuineWrong.map((w, i) => (
                 <div key={i} className="text-sm border-b last:border-0 pb-2 space-y-1">
                   <p className="font-medium">#{w.number}. {w.question || ''}</p>
                   {w.subParts?.length ? (

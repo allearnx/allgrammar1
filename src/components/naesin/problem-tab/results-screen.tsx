@@ -9,10 +9,12 @@ export function ResultsScreen({
   score,
   totalQuestions,
   wrongList,
+  retryCorrectList = [],
 }: {
   score: { correct: number; wrong: number };
   totalQuestions: number;
   wrongList: WrongItem[];
+  retryCorrectList?: WrongItem[];
 }) {
   const pct = Math.round((score.correct / totalQuestions) * 100);
 
@@ -24,17 +26,42 @@ export function ResultsScreen({
         </p>
         <p className="text-muted-foreground">
           {totalQuestions}문제 중 {score.correct}개 정답
+          {retryCorrectList.length > 0 && (
+            <span className="text-amber-600"> (🔺 {retryCorrectList.length}개 포함)</span>
+          )}
         </p>
         <p className="text-sm font-medium mt-1 text-muted-foreground">
           {getEncouragement(pct)}
         </p>
       </div>
 
+      {/* 🔺 세모 섹션: 2차 정답 (해설만 표시) */}
+      {retryCorrectList.length > 0 && (
+        <Card className="border-amber-200">
+          <CardContent className="py-4">
+            <p className="font-medium text-amber-600 mb-3">🔺 한 번 틀린 후 맞춘 문제 ({retryCorrectList.length}개)</p>
+            <div className="space-y-3">
+              {retryCorrectList.map((w, i) => (
+                <div key={i} className="text-sm border-b last:border-0 pb-2 space-y-1">
+                  <p className="font-medium">#{w.number}. <FormattedText text={w.question} /></p>
+                  {w.explanation && (
+                    <div className="text-sm text-blue-700 bg-blue-50 rounded px-2 py-1">
+                      <span className="font-medium">해설:</span> {w.explanation}
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+      )}
+
+      {/* ❌ 오답 섹션: 정답 + 해설 표시 */}
       {wrongList.length > 0 && (
         <>
           <Card>
             <CardContent className="py-4">
-              <p className="font-medium text-red-600 mb-3">틀린 문제 ({wrongList.length}개)</p>
+              <p className="font-medium text-red-600 mb-3">❌ 틀린 문제 ({wrongList.length}개)</p>
               <div className="space-y-3">
                 {wrongList.map((w, i) => (
                   <div key={i} className="text-sm border-b last:border-0 pb-2 space-y-1">
@@ -71,6 +98,11 @@ export function ResultsScreen({
                             <span className="font-medium">{'①②③④⑤'[oi] ?? `${oi + 1}`}</span>{' '}<FormattedText text={opt} />
                           </p>
                         ))}
+                      </div>
+                    )}
+                    {w.explanation && (
+                      <div className="text-sm text-blue-700 bg-blue-50 rounded px-2 py-1 mt-1">
+                        <span className="font-medium">해설:</span> {w.explanation}
                       </div>
                     )}
                   </div>

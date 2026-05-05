@@ -4,11 +4,9 @@ import { fetchWithToast } from '@/lib/fetch-with-toast';
 import type { NaesinProblemQuestion } from '@/types/database';
 import { useProblemDraft } from '@/hooks/use-problem-draft';
 import type { AiFeedback, WrongItem, InteractiveDraft } from '@/hooks/use-problem-draft';
-import { useQuestionTimer } from '@/hooks/use-question-timer';
 import { matchMcqAnswer, normalize } from '@/lib/naesin/normalize-answer';
 
-export const MCQ_MIN_TIME = 10;
-export const SUBJECTIVE_MIN_TIME = 30;
+export type AnswerStatus = 'correct' | 'retry_correct' | 'wrong';
 
 export function useInteractiveProblem({
   sheetId,
@@ -55,11 +53,20 @@ export function useInteractiveProblem({
     return d?.mode === 'interactive' ? (d.answersMap ?? {}) : {};
   });
 
+  // ── 2차 기회 (Second Chance) 상태 ──
+  const [retryMode, setRetryMode] = useState(false);
+  const [retryCorrectList, setRetryCorrectList] = useState<WrongItem[]>(() => {
+    const d = loadDraft();
+    return d?.mode === 'interactive' ? (d.retryCorrectList ?? []) : [];
+  });
+  const [disabledOptions, setDisabledOptions] = useState<string[]>([]);
+  const [currentAnswerStatus, setCurrentAnswerStatus] = useState<AnswerStatus | null>(null);
+
   // ── Auto-save to server: ref for latest state ──
-  const draftStateRef = useRef({ currentIndex, score, wrongList, aiResultsMap, overtimeQuestions, answersMap });
+  const draftStateRef = useRef({ currentIndex, score, wrongList, aiResultsMap, overtimeQuestions, answersMap, retryCorrectList });
   useEffect(() => {
-    draftStateRef.current = { currentIndex, score, wrongList, aiResultsMap, overtimeQuestions, answersMap };
-  }, [currentIndex, score, wrongList, aiResultsMap, overtimeQuestions, answersMap]);
+    draftStateRef.current = { currentIndex, score, wrongList, aiResultsMap, overtimeQuestions, answersMap, retryCorrectList };
+  }, [currentIndex, score, wrongList, aiResultsMap, overtimeQuestions, answersMap, retryCorrectList]);
 
   // ── Auto-save to server on tab close / visibility hidden ──
   useEffect(() => {
@@ -82,6 +89,7 @@ export function useInteractiveProblem({
           aiResultsMap: state.aiResultsMap,
           answeredUpTo: state.currentIndex,
           overtimeQuestions: state.overtimeQuestions,
+          retryCorrectList: state.retryCorrectList,
           answersMap: state.answersMap,
         },
         answeredCount: answered,
@@ -118,6 +126,7 @@ export function useInteractiveProblem({
         setWrongList(serverDraft.wrongList);
         setAiResultsMap(serverDraft.aiResultsMap);
         setOvertimeQuestions(serverDraft.overtimeQuestions ?? []);
+        setRetryCorrectList(serverDraft.retryCorrectList ?? []);
         setAnswersMap(serverDraft.answersMap ?? {});
       }
     });
@@ -129,8 +138,6 @@ export function useInteractiveProblem({
   const isSubjective = !question?.options || question.options.length === 0;
   const answerHasComma = String(question?.answer).includes(',');
   const isMultiSelect = !isSubjective && (answerHasComma || /모두\s*고르/.test(question?.question ?? ''));
-  const minTime = isSubjective ? SUBJECTIVE_MIN_TIME : MCQ_MIN_TIME;
-  const { remaining, isExpired: isReady, reset: resetTimer, pause: pauseTimer } = useQuestionTimer(minTime);
 
   async function gradeSubjective(studentAnswer: string): Promise<{ score: number } | null> {
     // subParts: client-side exact match grading (no API call needed)
@@ -166,6 +173,7 @@ export function useInteractiveProblem({
     newAiResultsMap: Record<string, AiFeedback>,
     newOvertimeQuestions?: number[],
     newAnswersMap?: Record<number, string | number>,
+    newRetryCorrectList?: WrongItem[],
   ) {
     const draftInput = {
       mode: 'interactive' as const,
@@ -175,6 +183,7 @@ export function useInteractiveProblem({
       aiResultsMap: newAiResultsMap,
       answeredUpTo: currentIndex,
       overtimeQuestions: newOvertimeQuestions ?? overtimeQuestions,
+      retryCorrectList: newRetryCorrectList ?? retryCorrectList,
       answersMap: newAnswersMap ?? answersMap,
     };
     saveDraft(draftInput);
@@ -205,6 +214,7 @@ export function useInteractiveProblem({
       question: q.question,
       ...(q.subParts ? { subParts: q.subParts } : {}),
       ...(q.options && q.options.length > 0 ? { options: q.options } : {}),
+      ...(q.explanation ? { explanation: q.explanation } : {}),
     };
     const newWrongList = [...wrongList, wrongItem];
     setWrongList(newWrongList);
@@ -217,24 +227,26 @@ export function useInteractiveProblem({
     newScore: typeof score,
     newWrongList: WrongItem[],
     aiMap: Record<string, AiFeedback>,
+    newRetryCorrectList?: WrongItem[],
   ) {
     const updatedAnswersMap = { ...answersMap, [currentIndex]: answer };
     setAnswersMap(updatedAnswersMap);
 
     if (isLast) {
       const allAnswers = questions.map((_, i) => updatedAnswersMap[i] ?? '');
-      submitResults(allAnswers, questions.length, aiMap);
+      submitResults(allAnswers, questions.length, aiMap, newRetryCorrectList ?? retryCorrectList);
     } else {
-      saveCurrentDraft(newScore, newWrongList, aiMap, undefined, updatedAnswersMap);
+      saveCurrentDraft(newScore, newWrongList, aiMap, undefined, updatedAnswersMap, newRetryCorrectList);
     }
   }
 
   async function handleSelect(answer: string | number) {
     if (showResult || isGrading) return;
     setSelectedAnswer(answer);
-    pauseTimer();
 
     const isLast = currentIndex === questions.length - 1;
+    let correct: boolean;
+    let newAiMap = aiResultsMap;
 
     if (isSubjective) {
       setIsGrading(true);
@@ -244,24 +256,61 @@ export function useInteractiveProblem({
       if (result) {
         setSubjectiveResult(result);
         const aiFeedback: AiFeedback = { score: result.score };
-        const newAiMap = { ...aiResultsMap, [String(currentIndex)]: aiFeedback };
+        newAiMap = { ...aiResultsMap, [String(currentIndex)]: aiFeedback };
         setAiResultsMap(newAiMap);
-        const correct = result.score === 100;
-        setShowResult(true);
-        const { newScore, newWrongList } = applyResult(correct, answer, question);
-        finishOrSave(isLast, answer, newScore, newWrongList, newAiMap);
+        correct = result.score === 100;
       } else {
         // Fallback: simple string comparison
-        const correct = String(answer).trim().toLowerCase() === String(question.answer).trim().toLowerCase();
-        setShowResult(true);
-        const { newScore, newWrongList } = applyResult(correct, answer, question);
-        finishOrSave(isLast, answer, newScore, newWrongList, aiResultsMap);
+        correct = String(answer).trim().toLowerCase() === String(question.answer).trim().toLowerCase();
       }
     } else {
-      const correct = matchMcqAnswer(String(answer), String(question.answer), question.options);
+      correct = matchMcqAnswer(String(answer), String(question.answer), question.options);
+    }
+
+    // ── 2차 기회 분기 ──
+    if (correct) {
+      const newScore = { ...score, correct: score.correct + 1 };
+      setScore(newScore);
+
+      if (retryMode) {
+        // 2차 정답 → 🔺
+        const item: WrongItem = {
+          number: question.number,
+          userAnswer: answer,
+          correctAnswer: question.answer,
+          question: question.question,
+          ...(question.subParts ? { subParts: question.subParts } : {}),
+          ...(question.options?.length ? { options: question.options } : {}),
+          ...(question.explanation ? { explanation: question.explanation } : {}),
+        };
+        const newRetryList = [...retryCorrectList, item];
+        setRetryCorrectList(newRetryList);
+        setRetryMode(false);
+        setCurrentAnswerStatus('retry_correct');
+        setShowResult(true);
+        finishOrSave(isLast, answer, newScore, wrongList, newAiMap, newRetryList);
+      } else {
+        // 1차 정답 → ✅
+        setCurrentAnswerStatus('correct');
+        setShowResult(true);
+        finishOrSave(isLast, answer, newScore, wrongList, newAiMap);
+      }
+    } else if (retryMode) {
+      // 2차 오답 → ❌
+      setRetryMode(false);
+      setCurrentAnswerStatus('wrong');
       setShowResult(true);
-      const { newScore, newWrongList } = applyResult(correct, answer, question);
-      finishOrSave(isLast, answer, newScore, newWrongList, aiResultsMap);
+      const { newScore, newWrongList } = applyResult(false, answer, question);
+      finishOrSave(isLast, answer, newScore, newWrongList, newAiMap);
+    } else {
+      // 1차 오답 → 재시도 모드
+      setRetryMode(true);
+      if (!isSubjective) {
+        setDisabledOptions(prev => [...prev, String(answer)]);
+      }
+      setSelectedAnswer(null);
+      setMultiSelectedValues([]);
+      setSubjectiveResult(null);
     }
   }
 
@@ -286,14 +335,49 @@ export function useInteractiveProblem({
     const correctParts = String(question.answer).split(',').map((s) => s.trim()).sort((a, b) => Number(a) - Number(b));
     const normalizedCorrect = correctParts.join(', ');
 
-    pauseTimer();
-
     const isLast = currentIndex === questions.length - 1;
     const correct = sortedAnswer === normalizedCorrect;
     setSelectedAnswer(sortedAnswer);
-    setShowResult(true);
-    const { newScore, newWrongList } = applyResult(correct, sortedAnswer, question);
-    finishOrSave(isLast, sortedAnswer, newScore, newWrongList, aiResultsMap);
+
+    if (correct) {
+      const newScore = { ...score, correct: score.correct + 1 };
+      setScore(newScore);
+
+      if (retryMode) {
+        // 2차 정답 → 🔺
+        const item: WrongItem = {
+          number: question.number,
+          userAnswer: sortedAnswer,
+          correctAnswer: question.answer,
+          question: question.question,
+          ...(question.options?.length ? { options: question.options } : {}),
+          ...(question.explanation ? { explanation: question.explanation } : {}),
+        };
+        const newRetryList = [...retryCorrectList, item];
+        setRetryCorrectList(newRetryList);
+        setRetryMode(false);
+        setCurrentAnswerStatus('retry_correct');
+        setShowResult(true);
+        finishOrSave(isLast, sortedAnswer, newScore, wrongList, aiResultsMap, newRetryList);
+      } else {
+        // 1차 정답 → ✅
+        setCurrentAnswerStatus('correct');
+        setShowResult(true);
+        finishOrSave(isLast, sortedAnswer, newScore, wrongList, aiResultsMap);
+      }
+    } else if (retryMode) {
+      // 2차 오답 → ❌
+      setRetryMode(false);
+      setCurrentAnswerStatus('wrong');
+      setShowResult(true);
+      const { newScore, newWrongList } = applyResult(false, sortedAnswer, question);
+      finishOrSave(isLast, sortedAnswer, newScore, newWrongList, aiResultsMap);
+    } else {
+      // 1차 오답 → 재시도 모드
+      setRetryMode(true);
+      setSelectedAnswer(null);
+      setMultiSelectedValues([]);
+    }
   }
 
   function handleMultiSubmit() {
@@ -303,14 +387,14 @@ export function useInteractiveProblem({
 
   function handleNext() {
     if (currentIndex < questions.length - 1) {
-      const nextQ = questions[currentIndex + 1];
-      const nextIsSubjective = !nextQ.options || nextQ.options.length === 0;
       setCurrentIndex(currentIndex + 1);
       setShowResult(false);
       setSelectedAnswer(null);
       setMultiSelectedValues([]);
       setSubjectiveResult(null);
-      resetTimer(nextIsSubjective ? SUBJECTIVE_MIN_TIME : MCQ_MIN_TIME);
+      setRetryMode(false);
+      setDisabledOptions([]);
+      setCurrentAnswerStatus(null);
     }
   }
 
@@ -327,6 +411,7 @@ export function useInteractiveProblem({
         aiResultsMap,
         answeredUpTo: currentIndex,
         overtimeQuestions,
+        retryCorrectList,
         answersMap,
       };
       // Save to both localStorage and server
@@ -346,10 +431,11 @@ export function useInteractiveProblem({
   }
 
   const [submitFailed, setSubmitFailed] = useState(false);
-  const [pendingSubmit, setPendingSubmit] = useState<{ answers: (string | number)[]; total: number; aiResults: Record<string, AiFeedback> } | null>(null);
+  const [pendingSubmit, setPendingSubmit] = useState<{ answers: (string | number)[]; total: number; aiResults: Record<string, AiFeedback>; retryList: WrongItem[] } | null>(null);
 
-  async function submitResults(answers: (string | number)[], total: number, finalAiResults?: Record<string, AiFeedback>) {
+  async function submitResults(answers: (string | number)[], total: number, finalAiResults?: Record<string, AiFeedback>, retryList?: WrongItem[]) {
     const mergedAiResults = finalAiResults ?? aiResultsMap;
+    const mergedRetryList = retryList ?? retryCorrectList;
     setSubmitFailed(false);
     try {
       const data = await fetchWithToast<{ score: number }>('/api/naesin/problems/submit', {
@@ -359,6 +445,7 @@ export function useInteractiveProblem({
           answers,
           totalQuestions: total,
           ...(Object.keys(mergedAiResults).length > 0 ? { aiResults: mergedAiResults } : {}),
+          ...(mergedRetryList.length > 0 ? { retryCorrectAnswers: mergedRetryList } : {}),
         },
         errorMessage: '결과 저장에 실패했습니다',
         logContext: 'naesin.interactive_view',
@@ -374,7 +461,7 @@ export function useInteractiveProblem({
     } catch {
       // 제출 실패 — finished로 전환하지 않고 재시도 가능하게 유지
       setSubmitFailed(true);
-      setPendingSubmit({ answers, total, aiResults: mergedAiResults });
+      setPendingSubmit({ answers, total, aiResults: mergedAiResults, retryList: mergedRetryList });
       // 서버 드래프트에 최종 상태 백업 저장
       saveServerDraft({
         mode: 'interactive',
@@ -384,6 +471,7 @@ export function useInteractiveProblem({
         aiResultsMap: mergedAiResults,
         answeredUpTo: questions.length - 1,
         overtimeQuestions,
+        retryCorrectList: mergedRetryList,
         answersMap,
       }, unitId).catch(() => {});
     }
@@ -391,21 +479,8 @@ export function useInteractiveProblem({
 
   async function retrySubmit() {
     if (!pendingSubmit) return;
-    await submitResults(pendingSubmit.answers, pendingSubmit.total, pendingSubmit.aiResults);
+    await submitResults(pendingSubmit.answers, pendingSubmit.total, pendingSubmit.aiResults, pendingSubmit.retryList);
   }
-
-  // Compute isCurrentCorrect for the view
-  const isCurrentCorrect = showResult && (
-    isSubjective
-      ? (subjectiveResult ? subjectiveResult.score === 100 : false)
-      : isMultiSelect
-        ? (() => {
-            const sel = String(selectedAnswer).split(',').map((s) => s.trim()).sort((a, b) => Number(a) - Number(b)).join(', ');
-            const cor = String(question.answer).split(',').map((s) => s.trim()).sort((a, b) => Number(a) - Number(b)).join(', ');
-            return sel === cor;
-          })()
-        : matchMcqAnswer(String(selectedAnswer), String(question.answer), question.options)
-  );
 
   return {
     currentIndex,
@@ -415,13 +490,14 @@ export function useInteractiveProblem({
     finished,
     wrongList,
     isGrading,
-    isCurrentCorrect,
+    currentAnswerStatus,
     question,
     isSubjective,
     isMultiSelect,
     multiSelectedValues,
-    remaining,
-    isReady,
+    retryMode,
+    retryCorrectList,
+    disabledOptions,
     handleSelect,
     handleMultiToggle,
     handleMultiSubmit,

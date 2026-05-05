@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Badge } from '@/components/ui/badge';
-import { Loader2, Clock, Save, RefreshCw } from 'lucide-react';
+import { Loader2, Save, RefreshCw } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { MCQOptionList } from '@/components/shared/mcq-option-list';
 import { FormattedText } from '@/components/shared/formatted-text';
@@ -17,16 +17,6 @@ import { useInteractiveProblem } from './use-interactive-problem';
 import { ResultsScreen } from './results-screen';
 
 export type { WrongItem };
-
-function MinTimeBadge({ remaining }: { remaining: number }) {
-  if (remaining <= 0) return null;
-  return (
-    <Badge variant="secondary" className="gap-1 tabular-nums">
-      <Clock className="h-3 w-3" />
-      문제를 꼼꼼하게 읽고 푸세요
-    </Badge>
-  );
-}
 
 function SubjectiveInput({ onSubmit, disabled, isGrading }: { onSubmit: (answer: string) => void; disabled: boolean; isGrading: boolean }) {
   const [answer, setAnswer] = useState('');
@@ -100,8 +90,9 @@ export function InteractiveProblemView({
   const questions = sheet.questions as NaesinProblemQuestion[];
   const {
     currentIndex, selectedAnswer, showResult, score, finished,
-    wrongList, isGrading, isCurrentCorrect,
-    question, isSubjective, isMultiSelect, multiSelectedValues, remaining, isReady,
+    wrongList, isGrading, currentAnswerStatus,
+    question, isSubjective, isMultiSelect, multiSelectedValues,
+    retryMode, retryCorrectList, disabledOptions,
     handleSelect, handleMultiToggle, handleMultiSubmit, handleNext, handleMidSave, isMidSaving, answersMap,
     submitFailed, retrySubmit, multiExpectedCount,
   } = useInteractiveProblem({ sheetId: sheet.id, questions, unitId, onComplete });
@@ -112,7 +103,7 @@ export function InteractiveProblemView({
   }
 
   if (finished) {
-    return <ResultsScreen score={score} totalQuestions={questions.length} wrongList={wrongList} />;
+    return <ResultsScreen score={score} totalQuestions={questions.length} wrongList={wrongList} retryCorrectList={retryCorrectList} />;
   }
 
   if (submitFailed) {
@@ -157,7 +148,6 @@ export function InteractiveProblemView({
             )}
             <span className="ml-1 hidden sm:inline">중간 저장</span>
           </Button>
-          {!showResult && <MinTimeBadge remaining={remaining} />}
           <Badge variant="secondary" className="text-green-600">{score.correct} 정답</Badge>
           <Badge variant="secondary" className="text-red-600">{score.wrong} 오답</Badge>
         </div>
@@ -190,6 +180,13 @@ export function InteractiveProblemView({
         </CardContent>
       </Card>
 
+      {/* 재시도 메시지 */}
+      {retryMode && !showResult && (
+        <div className="max-w-lg mx-auto text-center text-sm font-medium py-2 rounded-md bg-amber-100 text-amber-700 border border-amber-200">
+          틀렸습니다. 다시 생각해보세요
+        </div>
+      )}
+
       {question.options && question.options.length > 0 ? (
         <MCQOptionList
           options={question.options}
@@ -203,10 +200,11 @@ export function InteractiveProblemView({
           onToggle={handleMultiToggle}
           onSubmit={handleMultiSubmit}
           expectedCount={multiExpectedCount}
+          disabledOptions={disabledOptions}
         />
       ) : question.subParts ? (
         <MultiPartInput
-          key={currentIndex}
+          key={`${currentIndex}-${retryMode ? 'retry' : ''}`}
           subParts={question.subParts}
           onSubmit={(answer) => handleSelect(answer)}
           disabled={showResult}
@@ -214,45 +212,26 @@ export function InteractiveProblemView({
         />
       ) : (
         <SubjectiveInput
-          key={currentIndex}
+          key={`${currentIndex}-${retryMode ? 'retry' : ''}`}
           onSubmit={(answer) => handleSelect(answer)}
           disabled={showResult}
           isGrading={isGrading}
         />
       )}
 
-      {showResult && selectedAnswer !== null && (
-        <div className="max-w-lg mx-auto space-y-2">
+      {/* 결과 배너: ✅ / 🔺 / ❌ */}
+      {showResult && selectedAnswer !== null && currentAnswerStatus && (
+        <div className="max-w-lg mx-auto">
           <div className={cn(
             'text-center text-sm font-medium py-1.5 rounded-md',
-            isCurrentCorrect ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'
+            currentAnswerStatus === 'correct' && 'bg-green-100 text-green-700',
+            currentAnswerStatus === 'retry_correct' && 'bg-amber-100 text-amber-700',
+            currentAnswerStatus === 'wrong' && 'bg-red-100 text-red-700',
           )}>
-            {isCurrentCorrect ? '정답입니다!' : '오답입니다'}
+            {currentAnswerStatus === 'correct' ? '✅ 정답입니다!' :
+             currentAnswerStatus === 'retry_correct' ? '🔺 맞았지만 한 번 틀렸어요' :
+             '❌ 오답입니다'}
           </div>
-          {!isCurrentCorrect && question.subParts ? (
-            <div className="space-y-1 text-sm rounded-md bg-gray-50 p-3">
-              {(() => {
-                const parts = String(selectedAnswer).split(' / ');
-                return question.subParts.map((sp, i) => {
-                  const studentAns = parts[i]?.trim() ?? '';
-                  const candidates = [sp.answer, ...(sp.acceptedAnswers ?? [])];
-                  const norm = (s: string) => s.trim().toLowerCase().replace(/[.\s]+$/g, '');
-                  const partCorrect = candidates.some(c => norm(c) === norm(studentAns));
-                  return (
-                    <div key={i} className="flex gap-2">
-                      <span className="font-medium w-8 shrink-0">{sp.label}</span>
-                      <span className={partCorrect ? 'text-green-600' : 'text-red-500'}>{studentAns || '(미입력)'}</span>
-                      {!partCorrect && <span className="text-green-600">→ {sp.answer}</span>}
-                    </div>
-                  );
-                });
-              })()}
-            </div>
-          ) : !isCurrentCorrect && isSubjective ? (
-            <div className="text-center text-sm text-green-700 bg-green-50 py-1.5 rounded-md">
-              정답: {String(question.answer)}
-            </div>
-          ) : null}
         </div>
       )}
 
@@ -260,16 +239,6 @@ export function InteractiveProblemView({
         <div className="text-center">
           <Button onClick={handleNext}>다음 문제</Button>
         </div>
-      )}
-
-      {showResult && question.explanation && (
-        <Card className="bg-blue-50 border-blue-200">
-          <CardContent className="py-3">
-            <p className="text-sm text-blue-800">
-              <span className="font-medium">해설:</span> {question.explanation}
-            </p>
-          </CardContent>
-        </Card>
       )}
     </div>
   );

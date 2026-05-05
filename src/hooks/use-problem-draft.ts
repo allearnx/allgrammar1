@@ -18,6 +18,7 @@ export interface WrongItem {
   aiFeedback?: AiFeedback;
   subParts?: { label: string; answer: string; acceptedAnswers?: string[] }[];
   options?: string[];
+  explanation?: string;
 }
 
 export interface InteractiveDraft {
@@ -32,6 +33,7 @@ export interface InteractiveDraft {
   aiResultsMap: Record<string, AiFeedback>;
   answeredUpTo: number;
   overtimeQuestions: number[];
+  retryCorrectList?: WrongItem[];
   answersMap: Record<number, string | number>;
 }
 

@@ -55,6 +55,12 @@ export const problemSubmitSchema = z.object({
     feedback: z.string().optional(),
     correctedAnswer: z.string().optional(),
   })).nullish(),
+  retryCorrectAnswers: z.array(z.object({
+    number: z.number(),
+    userAnswer: z.union([z.string(), z.number()]),
+    correctAnswer: z.union([z.string(), z.number()]),
+    question: z.string(),
+  })).nullish(),
 });
 
 // ── Wrong Answers Schemas ──
