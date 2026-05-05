@@ -1,3 +1,4 @@
+import type { ReactNode } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { format } from 'date-fns';
@@ -224,127 +225,121 @@ export function NaesinProgressCard({
                       </div>
                     ))}
                   </div>
-                  {(progress && (progress.vocab_quiz_score !== null || progress.vocab_spelling_score !== null || progress.passage_fill_blanks_best !== null || progress.passage_ordering_best !== null || progress.passage_translation_best !== null || progress.passage_grammar_vocab_best !== null || progress.dialogue_ordering_best !== null || progress.dialogue_first_letter_best !== null || progress.dialogue_translation_best !== null || progress.grammar_total_videos > 0) || unitSheets.length > 0) && (
-                    <div className="flex gap-2 mt-2 flex-wrap">
-                      {progress?.vocab_quiz_score !== null && progress?.vocab_quiz_score !== undefined && (
-                        <span className={`text-xs px-1.5 py-0.5 rounded ${scoreChipClass(progress.vocab_quiz_score)}`}>
-                          퀴즈 {progress.vocab_quiz_score}점
-                        </span>
-                      )}
-                      {progress?.vocab_spelling_score !== null && progress?.vocab_spelling_score !== undefined && (
-                        <span className={`text-xs px-1.5 py-0.5 rounded ${scoreChipClass(progress.vocab_spelling_score)}`}>
-                          스펠링 {progress.vocab_spelling_score}점
-                        </span>
-                      )}
-                      {progress?.passage_fill_blanks_best !== null && progress?.passage_fill_blanks_best !== undefined && (() => {
-                        const fb = fillBlanksByUnit?.[unit.id];
-                        const DIFF_LABEL: Record<string, string> = { easy: '쉬움', medium: '보통', hard: '어려움' };
-                        if (fb && Object.keys(fb).length > 0) {
-                          return Object.entries(fb).map(([diff, score]) => (
-                            <span key={diff} className={`text-xs px-1.5 py-0.5 rounded ${passageChipClass}`}>
-                              빈칸({DIFF_LABEL[diff] || diff}) {score}점
-                            </span>
-                          ));
-                        }
-                        return (
-                          <span className={`text-xs px-1.5 py-0.5 rounded ${passageChipClass}`}>
-                            빈칸 {progress.passage_fill_blanks_best}점
-                          </span>
-                        );
-                      })()}
-                      {progress?.passage_ordering_best != null && (
-                        <span className={`text-xs px-1.5 py-0.5 rounded ${passageChipClass}`}>
-                          순서 {progress.passage_ordering_best}점
-                        </span>
-                      )}
-                      {progress?.passage_translation_best != null && (
-                        <span className={`text-xs px-1.5 py-0.5 rounded ${passageChipClass}`}>
-                          영작 {progress.passage_translation_best}점
-                        </span>
-                      )}
-                      {progress?.passage_grammar_vocab_best != null && (
-                        <span className={`text-xs px-1.5 py-0.5 rounded ${passageChipClass}`}>
-                          어법/어휘 {progress.passage_grammar_vocab_best}점
-                        </span>
-                      )}
-                      {progress?.dialogue_ordering_best != null && (
-                        <span className={`text-xs px-1.5 py-0.5 rounded ${scoreChipClass(progress.dialogue_ordering_best)}`}>
-                          대화순서 {progress.dialogue_ordering_best}점
-                        </span>
-                      )}
-                      {progress?.dialogue_first_letter_best != null && (
-                        <span className={`text-xs px-1.5 py-0.5 rounded ${scoreChipClass(progress.dialogue_first_letter_best)}`}>
-                          첫글자 {progress.dialogue_first_letter_best}점
-                        </span>
-                      )}
-                      {progress?.dialogue_translation_best != null && (
-                        <span className={`text-xs px-1.5 py-0.5 rounded ${scoreChipClass(progress.dialogue_translation_best)}`}>
-                          대화영작 {progress.dialogue_translation_best}점
-                        </span>
-                      )}
-                      {hasRound2 && progress?.round2_passage_fill_blanks_best != null && (
-                        <span className={`text-xs px-1.5 py-0.5 rounded ${passageChipClass}`}>
-                          빈칸(2회독) {progress.round2_passage_fill_blanks_best}점
-                        </span>
-                      )}
-                      {hasRound2 && progress?.round2_passage_ordering_best != null && (
-                        <span className={`text-xs px-1.5 py-0.5 rounded ${passageChipClass}`}>
-                          순서(2회독) {progress.round2_passage_ordering_best}점
-                        </span>
-                      )}
-                      {hasRound2 && progress?.round2_passage_translation_best != null && (
-                        <span className={`text-xs px-1.5 py-0.5 rounded ${passageChipClass}`}>
-                          영작(2회독) {progress.round2_passage_translation_best}점
-                        </span>
-                      )}
-                      {hasRound2 && progress?.round2_passage_grammar_vocab_best != null && (
-                        <span className={`text-xs px-1.5 py-0.5 rounded ${passageChipClass}`}>
-                          어법/어휘(2회독) {progress.round2_passage_grammar_vocab_best}점
-                        </span>
-                      )}
-                      {hasRound2 && progress?.round2_dialogue_ordering_best != null && (
-                        <span className={`text-xs px-1.5 py-0.5 rounded ${scoreChipClass(progress.round2_dialogue_ordering_best)}`}>
-                          대화순서(2회독) {progress.round2_dialogue_ordering_best}점
-                        </span>
-                      )}
-                      {hasRound2 && progress?.round2_dialogue_first_letter_best != null && (
-                        <span className={`text-xs px-1.5 py-0.5 rounded ${scoreChipClass(progress.round2_dialogue_first_letter_best)}`}>
-                          첫글자(2회독) {progress.round2_dialogue_first_letter_best}점
-                        </span>
-                      )}
-                      {hasRound2 && progress?.round2_dialogue_translation_best != null && (
-                        <span className={`text-xs px-1.5 py-0.5 rounded ${scoreChipClass(progress.round2_dialogue_translation_best)}`}>
-                          대화영작(2회독) {progress.round2_dialogue_translation_best}점
-                        </span>
-                      )}
-                      {(progress?.grammar_total_videos ?? 0) > 0 && progress && (
-                        <span className="text-xs px-1.5 py-0.5 rounded bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-300">
-                          영상 {progress.grammar_videos_completed}/{progress.grammar_total_videos}
-                        </span>
-                      )}
-                      {unitSheets.map((sheet, idx) => {
-                        const attempt = problemAttemptsBySheet?.[sheet.id];
-                        const categoryLabel = sheet.category === 'mock_exam' ? '예상문제'
-                          : sheet.category === 'external_passage' ? '외부지문'
-                          : sheet.category === 'eng_eng_def' ? '영영풀이'
-                          : unitSheets.length > 1 ? `문제${idx + 1}` : '문제';
-                        const fallback = categoryLabel;
-                        const label = sheet.title || fallback;
-                        if (attempt) {
-                          return (
-                            <span key={sheet.id} className={`text-xs px-1.5 py-0.5 rounded ${scoreChipClass(attempt.pct)}`}>
-                              {label} {attempt.pct}점
-                            </span>
-                          );
-                        }
-                        return (
-                          <span key={sheet.id} className="text-xs px-1.5 py-0.5 rounded bg-gray-100 text-gray-500 dark:bg-gray-800 dark:text-gray-400">
-                            {label} 미완료
-                          </span>
-                        );
-                      })}
-                    </div>
-                  )}
+                  {(() => {
+                    const chip = 'text-xs px-1.5 py-0.5 rounded';
+                    const grayChip = `${chip} bg-gray-100 text-gray-500 dark:bg-gray-800 dark:text-gray-400`;
+                    const DIFF_LABEL: Record<string, string> = { easy: '쉬움', medium: '보통', hard: '어려움' };
+
+                    // 1. 단어
+                    const vocabChips: ReactNode[] = [];
+                    if (progress?.vocab_quiz_score != null)
+                      vocabChips.push(<span key="quiz" className={`${chip} ${scoreChipClass(progress.vocab_quiz_score)}`}>퀴즈 {progress.vocab_quiz_score}점</span>);
+                    if (progress?.vocab_spelling_score != null)
+                      vocabChips.push(<span key="spell" className={`${chip} ${scoreChipClass(progress.vocab_spelling_score)}`}>스펠링 {progress.vocab_spelling_score}점</span>);
+
+                    // 2. 교과서
+                    const passChips: ReactNode[] = [];
+                    if (progress?.passage_fill_blanks_best != null) {
+                      const fb = fillBlanksByUnit?.[unit.id];
+                      if (fb && Object.keys(fb).length > 0) {
+                        Object.entries(fb).forEach(([diff, score]) =>
+                          passChips.push(<span key={`fb-${diff}`} className={`${chip} ${passageChipClass}`}>빈칸({DIFF_LABEL[diff] || diff}) {score}점</span>));
+                      } else {
+                        passChips.push(<span key="fb" className={`${chip} ${passageChipClass}`}>빈칸 {progress.passage_fill_blanks_best}점</span>);
+                      }
+                    }
+                    if (progress?.passage_ordering_best != null)
+                      passChips.push(<span key="ord" className={`${chip} ${passageChipClass}`}>순서 {progress.passage_ordering_best}점</span>);
+                    if (progress?.passage_translation_best != null)
+                      passChips.push(<span key="trans" className={`${chip} ${passageChipClass}`}>영작 {progress.passage_translation_best}점</span>);
+                    if (progress?.passage_grammar_vocab_best != null)
+                      passChips.push(<span key="gv" className={`${chip} ${passageChipClass}`}>어법/어휘 {progress.passage_grammar_vocab_best}점</span>);
+
+                    // 3. 대화문
+                    const dlgChips: ReactNode[] = [];
+                    if (progress?.dialogue_ordering_best != null)
+                      dlgChips.push(<span key="do" className={`${chip} ${scoreChipClass(progress.dialogue_ordering_best)}`}>대화순서 {progress.dialogue_ordering_best}점</span>);
+                    if (progress?.dialogue_first_letter_best != null)
+                      dlgChips.push(<span key="df" className={`${chip} ${scoreChipClass(progress.dialogue_first_letter_best)}`}>첫글자 {progress.dialogue_first_letter_best}점</span>);
+                    if (progress?.dialogue_translation_best != null)
+                      dlgChips.push(<span key="dt" className={`${chip} ${scoreChipClass(progress.dialogue_translation_best)}`}>대화영작 {progress.dialogue_translation_best}점</span>);
+
+                    // 4. 2회독 교과서
+                    const r2PassChips: ReactNode[] = [];
+                    if (hasRound2) {
+                      if (progress?.round2_passage_fill_blanks_best != null)
+                        r2PassChips.push(<span key="r2fb" className={`${chip} ${passageChipClass}`}>빈칸 {progress.round2_passage_fill_blanks_best}점</span>);
+                      if (progress?.round2_passage_ordering_best != null)
+                        r2PassChips.push(<span key="r2ord" className={`${chip} ${passageChipClass}`}>순서 {progress.round2_passage_ordering_best}점</span>);
+                      if (progress?.round2_passage_translation_best != null)
+                        r2PassChips.push(<span key="r2tr" className={`${chip} ${passageChipClass}`}>영작 {progress.round2_passage_translation_best}점</span>);
+                      if (progress?.round2_passage_grammar_vocab_best != null)
+                        r2PassChips.push(<span key="r2gv" className={`${chip} ${passageChipClass}`}>어법/어휘 {progress.round2_passage_grammar_vocab_best}점</span>);
+                    }
+
+                    // 5. 2회독 대화문
+                    const r2DlgChips: ReactNode[] = [];
+                    if (hasRound2) {
+                      if (progress?.round2_dialogue_ordering_best != null)
+                        r2DlgChips.push(<span key="r2do" className={`${chip} ${scoreChipClass(progress.round2_dialogue_ordering_best)}`}>대화순서 {progress.round2_dialogue_ordering_best}점</span>);
+                      if (progress?.round2_dialogue_first_letter_best != null)
+                        r2DlgChips.push(<span key="r2df" className={`${chip} ${scoreChipClass(progress.round2_dialogue_first_letter_best)}`}>첫글자 {progress.round2_dialogue_first_letter_best}점</span>);
+                      if (progress?.round2_dialogue_translation_best != null)
+                        r2DlgChips.push(<span key="r2dt" className={`${chip} ${scoreChipClass(progress.round2_dialogue_translation_best)}`}>대화영작 {progress.round2_dialogue_translation_best}점</span>);
+                    }
+
+                    // 6. 문법
+                    const gramChips: ReactNode[] = [];
+                    if ((progress?.grammar_total_videos ?? 0) > 0 && progress)
+                      gramChips.push(<span key="vid" className={`${chip} bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-300`}>영상 {progress.grammar_videos_completed}/{progress.grammar_total_videos}</span>);
+
+                    // 7-9. 시트 분류: 문제 / 예상 / 기타
+                    const probChips: ReactNode[] = [];
+                    const mockChips: ReactNode[] = [];
+                    const otherChips: ReactNode[] = [];
+                    const problemOnly = unitSheets.filter((s) => !s.category || s.category === 'problem' || s.category === 'last_review');
+                    unitSheets.forEach((sheet) => {
+                      const attempt = problemAttemptsBySheet?.[sheet.id];
+                      const isMock = sheet.category === 'mock_exam';
+                      const isOther = sheet.category === 'external_passage' || sheet.category === 'eng_eng_def';
+                      const categoryLabel = isMock ? '예상문제'
+                        : sheet.category === 'external_passage' ? '외부지문'
+                        : sheet.category === 'eng_eng_def' ? '영영풀이'
+                        : problemOnly.length > 1 ? `문제${problemOnly.indexOf(sheet) + 1}` : '문제';
+                      const label = sheet.title || categoryLabel;
+                      const node = attempt
+                        ? <span key={sheet.id} className={`${chip} ${scoreChipClass(attempt.pct)}`}>{label} {attempt.pct}점</span>
+                        : <span key={sheet.id} className={grayChip}>{label} 미완료</span>;
+                      if (isMock) mockChips.push(node);
+                      else if (isOther) otherChips.push(node);
+                      else probChips.push(node);
+                    });
+
+                    const groups = [
+                      { label: '단어', chips: vocabChips },
+                      { label: '교과서', chips: passChips },
+                      { label: '대화문', chips: dlgChips },
+                      { label: '2회독', chips: r2PassChips },
+                      { label: '2회독대화', chips: r2DlgChips },
+                      { label: '문법', chips: gramChips },
+                      { label: '문제', chips: probChips },
+                      { label: '예상', chips: mockChips },
+                      { label: '기타', chips: otherChips },
+                    ].filter((g) => g.chips.length > 0);
+
+                    if (groups.length === 0) return null;
+
+                    return (
+                      <div className="space-y-1 mt-2">
+                        {groups.map((g) => (
+                          <div key={g.label} className="flex items-baseline gap-1.5">
+                            <span className="text-muted-foreground w-14 shrink-0 text-xs">{g.label}</span>
+                            <div className="flex gap-1.5 flex-wrap">{g.chips}</div>
+                          </div>
+                        ))}
+                      </div>
+                    );
+                  })()}
                   {progress?.updated_at && (
                     <p className="text-xs text-muted-foreground mt-1">
                       마지막 학습: {format(new Date(progress.updated_at), 'MM/dd HH:mm')}
