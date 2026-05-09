@@ -17,8 +17,12 @@ interface SentenceMatchProps {
   onFail: (wrongWords: VocaWrongWord[]) => void;
 }
 
+function escapeRegex(str: string) {
+  return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
 function blankOut(sentence: string, word: string): string | null {
-  const regex = new RegExp(`\\b${word}\\b`, 'gi');
+  const regex = new RegExp(`\\b${escapeRegex(word.trim())}\\w*\\b`, 'gi');
   if (!regex.test(sentence)) return null;
   return sentence.replace(regex, '________');
 }
