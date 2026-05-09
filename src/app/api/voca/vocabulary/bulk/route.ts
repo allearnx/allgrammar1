@@ -20,8 +20,8 @@ export const POST = createApiHandler(
 
     const rows = body.items.map((item) => ({
       day_id: body.day_id,
-      front_text: item.front_text.trim(),
-      back_text: item.back_text.trim(),
+      front_text: item.front_text,
+      back_text: item.back_text,
       part_of_speech: item.part_of_speech || null,
       example_sentence: item.example_sentence || null,
       synonyms: item.synonyms || null,
