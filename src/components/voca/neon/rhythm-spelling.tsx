@@ -54,8 +54,8 @@ export function RhythmSpelling({ vocabulary, onComplete }: RhythmSpellingProps) 
   const trimmedFront = vocab.front_text.trim();
   const sentenceWithBlank = vocab.example_sentence
     ? vocab.example_sentence.replace(
-        new RegExp(`\\b${escapeRegex(trimmedFront)}\\b`, 'i'),
-        '_'.repeat(trimmedFront.length)
+        new RegExp(`\\b${escapeRegex(trimmedFront)}\\w*\\b`, 'gi'),
+        (match) => '_'.repeat(match.length)
       )
     : null;
 
