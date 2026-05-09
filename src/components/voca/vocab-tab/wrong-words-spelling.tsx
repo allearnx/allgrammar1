@@ -25,7 +25,7 @@ export function WrongWordsSpelling({ words }: { words: WrongWordItem[] }) {
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (!answer.trim() || showResult) return;
-    const correct = answer.trim().toLowerCase() === item.front_text.toLowerCase();
+    const correct = answer.trim().toLowerCase() === item.front_text.trim().toLowerCase();
     setIsCorrect(correct);
     setShowResult(true);
     if (correct) {

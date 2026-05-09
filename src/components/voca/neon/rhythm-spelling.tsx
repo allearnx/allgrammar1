@@ -43,7 +43,7 @@ export function RhythmSpelling({ vocabulary, onComplete }: RhythmSpellingProps) 
   const wrongLettersRef = useRef<Set<number>>(new Set());
 
   const vocab = vocabulary[currentIndex];
-  const targetWord = vocab.front_text.toLowerCase();
+  const targetWord = vocab.front_text.trim().toLowerCase();
   const currentLetterIdx = typedLetters.length;
 
   const { play, isPlaying } = useAudioPlayer({
@@ -51,10 +51,11 @@ export function RhythmSpelling({ vocabulary, onComplete }: RhythmSpellingProps) 
     wordTimestamps: vocab.word_timestamps,
   });
 
+  const trimmedFront = vocab.front_text.trim();
   const sentenceWithBlank = vocab.example_sentence
     ? vocab.example_sentence.replace(
-        new RegExp(`\\b${escapeRegex(vocab.front_text)}\\b`, 'i'),
-        '_'.repeat(vocab.front_text.length)
+        new RegExp(`\\b${escapeRegex(trimmedFront)}\\b`, 'i'),
+        '_'.repeat(trimmedFront.length)
       )
     : null;
 
