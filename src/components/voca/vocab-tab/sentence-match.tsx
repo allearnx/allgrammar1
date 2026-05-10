@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useMemo } from 'react';
-import { shuffle } from '@/lib/utils';
+import { shuffle, blankOutWord } from '@/lib/utils';
 import { MatchingGameRound } from './matching-game-round';
 import type { VocaVocabulary, VocaWrongWord } from '@/types/voca';
 
@@ -17,14 +17,9 @@ interface SentenceMatchProps {
   onFail: (wrongWords: VocaWrongWord[]) => void;
 }
 
-function escapeRegex(str: string) {
-  return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-}
-
 function blankOut(sentence: string, word: string): string | null {
-  const regex = new RegExp(`\\b${escapeRegex(word.trim())}\\w*\\b`, 'gi');
-  if (!regex.test(sentence)) return null;
-  return sentence.replace(regex, '________');
+  const result = blankOutWord(sentence, word);
+  return result === sentence ? null : result;
 }
 
 function buildPairs(vocabulary: VocaVocabulary[]): SentencePair[] {

@@ -3,7 +3,7 @@
 import { useState, useCallback, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '@/components/ui/button';
-import { cn } from '@/lib/utils';
+import { cn, blankOutWordExact } from '@/lib/utils';
 import { Volume2, Delete } from 'lucide-react';
 import { useAudioPlayer } from './audio-player-hook';
 import { NeonResultScreen } from './neon-result-screen';
@@ -15,10 +15,6 @@ const QWERTY_ROWS = [
   ['a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l'],
   ['z', 'x', 'c', 'v', 'b', 'n', 'm'],
 ];
-
-function escapeRegex(str: string) {
-  return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-}
 
 /** 알파벳이 아닌 문자(공백, 하이픈 등)인지 */
 function isNonLetter(ch: string) {
@@ -59,12 +55,8 @@ export function RhythmSpelling({ vocabulary, onComplete }: RhythmSpellingProps) 
     wordTimestamps: vocab.word_timestamps,
   });
 
-  const trimmedFront = vocab.front_text.trim();
   const sentenceWithBlank = vocab.example_sentence
-    ? vocab.example_sentence.replace(
-        new RegExp(`\\b${escapeRegex(trimmedFront)}\\w*\\b`, 'gi'),
-        (match) => '_'.repeat(match.length)
-      )
+    ? blankOutWordExact(vocab.example_sentence, vocab.front_text)
     : null;
 
   /** 현재 위치부터 연속된 비알파벳 문자를 자동 채움 */

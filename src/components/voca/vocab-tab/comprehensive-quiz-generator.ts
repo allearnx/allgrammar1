@@ -1,9 +1,5 @@
-import { shuffle } from '@/lib/utils';
+import { shuffle, blankOutWord } from '@/lib/utils';
 import type { VocaVocabulary } from '@/types/voca';
-
-function escapeRegex(str: string) {
-  return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-}
 
 // ── Question Types ──
 
@@ -116,9 +112,8 @@ export function generateQuestions(vocabulary: VocaVocabulary[]): Question[] {
     if (fillCount >= 2 || usedWords.has(v.front_text)) continue;
     const sentence = v.example_sentence!;
     const word = v.front_text.trim().toLowerCase();
-    const regex = new RegExp(`\\b${escapeRegex(word)}\\w*\\b`, 'gi');
-    if (!regex.test(sentence)) continue;
-    const blanked = sentence.replace(regex, '________');
+    const blanked = blankOutWord(sentence, word);
+    if (blanked === sentence) continue;
     usedWords.add(v.front_text);
     fillCount++;
     questions.push({
