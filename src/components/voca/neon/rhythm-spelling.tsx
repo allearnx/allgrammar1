@@ -20,6 +20,11 @@ function escapeRegex(str: string) {
   return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
 
+/** 알파벳이 아닌 문자(공백, 하이픈 등)인지 */
+function isNonLetter(ch: string) {
+  return !/[a-zA-Z]/.test(ch);
+}
+
 interface RhythmSpellingProps {
   vocabulary: VocaVocabulary[];
   onComplete: (score: number) => void;
@@ -33,7 +38,7 @@ interface WordResult {
 export function RhythmSpelling({ vocabulary, onComplete }: RhythmSpellingProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [typedLetters, setTypedLetters] = useState<string[]>([]);
-  const [letterStates, setLetterStates] = useState<('correct' | 'wrong')[]>([]);
+  const [letterStates, setLetterStates] = useState<('correct' | 'wrong' | 'auto')[]>([]);
   const [finalScore, setFinalScore] = useState<number | null>(null);
   const [wrongFlash, setWrongFlash] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -45,6 +50,9 @@ export function RhythmSpelling({ vocabulary, onComplete }: RhythmSpellingProps) 
   const vocab = vocabulary[currentIndex];
   const targetWord = vocab.front_text.trim().toLowerCase();
   const currentLetterIdx = typedLetters.length;
+
+  // 알파벳 글자만 카운트 (채점용)
+  const letterCount = targetWord.split('').filter((ch) => !isNonLetter(ch)).length;
 
   const { play, isPlaying } = useAudioPlayer({
     audioUrl: vocab.audio_url,
@@ -59,43 +67,90 @@ export function RhythmSpelling({ vocabulary, onComplete }: RhythmSpellingProps) 
       )
     : null;
 
+  /** 현재 위치부터 연속된 비알파벳 문자를 자동 채움 */
+  const autoFillNonLetters = useCallback((fromIdx: number, letters: string[], states: ('correct' | 'wrong' | 'auto')[]) => {
+    let idx = fromIdx;
+    const newLetters = [...letters];
+    const newStates = [...states];
+    while (idx < targetWord.length && isNonLetter(targetWord[idx])) {
+      newLetters.push(targetWord[idx]);
+      newStates.push('auto');
+      idx++;
+    }
+    return { newLetters, newStates };
+  }, [targetWord]);
+
+  const finishWord = useCallback(() => {
+    resultsRef.current.push({
+      firstTryCorrect: letterCount - wrongLettersRef.current.size,
+      totalLetters: letterCount,
+    });
+
+    advanceTimerRef.current = setTimeout(() => {
+      if (currentIndex + 1 < vocabulary.length) {
+        setCurrentIndex((prev) => prev + 1);
+        setTypedLetters([]);
+        setLetterStates([]);
+        wrongLettersRef.current = new Set();
+      } else {
+        const all = resultsRef.current;
+        const totalCorrect = all.reduce((s, r) => s + r.firstTryCorrect, 0);
+        const totalLetters = all.reduce((s, r) => s + r.totalLetters, 0);
+        const score = Math.round((totalCorrect / totalLetters) * 100);
+        setFinalScore(score);
+        onComplete(score);
+      }
+    }, 600);
+  }, [currentIndex, vocabulary.length, onComplete, letterCount]);
+
   const handleKeyPress = useCallback((key: string) => {
     if (currentLetterIdx >= targetWord.length) return;
 
-    const isCorrect = key.toLowerCase() === targetWord[currentLetterIdx];
+    // 현재 위치가 비알파벳이면 자동 채움 후 진행
+    let effectiveIdx = currentLetterIdx;
+    let currentTyped = typedLetters;
+    let currentStates = letterStates;
+    if (isNonLetter(targetWord[effectiveIdx])) {
+      const { newLetters, newStates } = autoFillNonLetters(effectiveIdx, [...typedLetters], [...letterStates]);
+      currentTyped = newLetters;
+      currentStates = newStates;
+      effectiveIdx = newLetters.length;
+      if (effectiveIdx >= targetWord.length) {
+        setTypedLetters(currentTyped);
+        setLetterStates(currentStates);
+        finishWord();
+        return;
+      }
+    }
+
+    const isCorrect = key.toLowerCase() === targetWord[effectiveIdx];
 
     if (isCorrect) {
-      setTypedLetters((prev) => [...prev, key.toLowerCase()]);
-      setLetterStates((prev) => [...prev, 'correct']);
+      let newLetters = [...currentTyped, key.toLowerCase()];
+      let newStates: ('correct' | 'wrong' | 'auto')[] = [...currentStates, 'correct'];
 
-      if (currentLetterIdx + 1 === targetWord.length) {
-        resultsRef.current.push({
-          firstTryCorrect: targetWord.length - wrongLettersRef.current.size,
-          totalLetters: targetWord.length,
-        });
+      // 다음 위치가 비알파벳이면 자동 채움
+      const filled = autoFillNonLetters(effectiveIdx + 1, newLetters, newStates);
+      newLetters = filled.newLetters;
+      newStates = filled.newStates;
 
-        advanceTimerRef.current = setTimeout(() => {
-          if (currentIndex + 1 < vocabulary.length) {
-            setCurrentIndex((prev) => prev + 1);
-            setTypedLetters([]);
-            setLetterStates([]);
-            wrongLettersRef.current = new Set();
-          } else {
-            const all = resultsRef.current;
-            const totalCorrect = all.reduce((s, r) => s + r.firstTryCorrect, 0);
-            const totalLetters = all.reduce((s, r) => s + r.totalLetters, 0);
-            const score = Math.round((totalCorrect / totalLetters) * 100);
-            setFinalScore(score);
-            onComplete(score);
-          }
-        }, 600);
+      setTypedLetters(newLetters);
+      setLetterStates(newStates);
+
+      if (newLetters.length >= targetWord.length) {
+        finishWord();
       }
     } else {
-      wrongLettersRef.current.add(currentLetterIdx);
+      wrongLettersRef.current.add(effectiveIdx);
       setWrongFlash(true);
       flashTimerRef.current = setTimeout(() => setWrongFlash(false), 400);
+      // state 업데이트 (자동채움 적용)
+      if (currentTyped !== typedLetters) {
+        setTypedLetters(currentTyped);
+        setLetterStates(currentStates);
+      }
     }
-  }, [currentLetterIdx, targetWord, currentIndex, vocabulary.length, onComplete]);
+  }, [currentLetterIdx, targetWord, typedLetters, letterStates, autoFillNonLetters, finishWord]);
 
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
@@ -167,9 +222,25 @@ export function RhythmSpelling({ vocabulary, onComplete }: RhythmSpellingProps) 
           <p className="text-lg text-gray-600 font-medium">{vocab.back_text}</p>
 
           <div className={cn('flex gap-1.5 justify-center flex-wrap', wrongFlash && 'wrong-shake')}>
-            {targetWord.split('').map((_, i) => {
+            {targetWord.split('').map((ch, i) => {
               const state = letterStates[i];
               const isNext = i === currentLetterIdx;
+              const isSeparator = isNonLetter(ch);
+
+              if (isSeparator) {
+                return (
+                  <div
+                    key={i}
+                    className={cn(
+                      'w-4 h-13 md:w-5 md:h-15 flex items-center justify-center text-xl text-gray-300',
+                      state === 'auto' && 'text-green-400',
+                    )}
+                  >
+                    {ch === ' ' ? '' : ch}
+                  </div>
+                );
+              }
+
               return (
                 <div
                   key={i}
