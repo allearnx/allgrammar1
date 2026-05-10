@@ -7,6 +7,8 @@ import {
 } from '@/lib/voca/elevenlabs';
 import { logger } from '@/lib/logger';
 
+export const maxDuration = 60;
+
 const schema = z.object({
   dayId: z.string().uuid(),
 });

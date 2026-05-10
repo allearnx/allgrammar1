@@ -6,6 +6,8 @@ import {
   uploadAudioToStorage,
 } from '@/lib/voca/elevenlabs';
 
+export const maxDuration = 30;
+
 const schema = z.object({
   vocabId: z.string().uuid(),
   text: z.string().min(1).max(500),
