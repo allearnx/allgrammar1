@@ -5,7 +5,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Target, CheckCircle, ArrowRight, ListRestart } from 'lucide-react';
-import { cn, shuffle } from '@/lib/utils';
+import { cn, shuffle, blankOutWord } from '@/lib/utils';
 import { ScoreBadges, ResultCard, NextButton } from '@/components/memory/shared';
 import { QuizCompletionActions } from '@/components/shared/quiz-completion-actions';
 import { useRetryWrong } from '@/hooks/use-retry-wrong';
@@ -14,19 +14,16 @@ import type { MemoryItem, StudentMemoryProgress, NaesinVocabulary } from '@/type
 
 type FlashcardItem = MemoryItem & { progress: StudentMemoryProgress | null };
 
-/** 예문에서 학습 단어를 ______ 으로 마스킹 (활용형·구문 패턴 대응) */
+/** 예문에서 학습 단어를 ________ 으로 마스킹 (활용형·구문 패턴 대응) */
 function maskWordInSentence(sentence: string, word: string): string {
-  const escaped = word.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-  if (new RegExp(escaped, 'i').test(sentence)) {
-    return sentence.replace(new RegExp(escaped, 'gi'), '______');
-  }
+  const blanked = blankOutWord(sentence, word);
+  if (blanked !== sentence) return blanked;
   // 구문 패턴(be filled with, share A with B 등)에서 핵심 단어만 추출 후 활용형 매칭
   const stop = new Set(['a','b','be','to','of','in','on','at','for','from','by','with','up','out']);
   const contentWords = word.split(/\s+/).filter(w => !stop.has(w.toLowerCase()) && w.length > 1);
   let result = sentence;
   for (const cw of contentWords) {
-    const ce = cw.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-    result = result.replace(new RegExp(`\\b${ce}\\w*\\b`, 'gi'), '______');
+    result = blankOutWord(result, cw);
   }
   return result;
 }
