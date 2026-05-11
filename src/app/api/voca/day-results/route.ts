@@ -59,7 +59,33 @@ export const GET = createApiHandler(
       progressMap.set(p.student_id, p);
     }
 
-    // 3. Build response
+    // 3. Fetch wrong words (quiz — latest attempt only, matching)
+    const { data: quizRows } = await admin
+      .from('voca_quiz_results')
+      .select('student_id, wrong_words, attempt_number')
+      .eq('day_id', dayId)
+      .in('student_id', studentIds)
+      .order('attempt_number', { ascending: false });
+
+    const { data: matchingRows } = await admin
+      .from('voca_matching_submissions')
+      .select('student_id, wrong_words')
+      .eq('day_id', dayId)
+      .in('student_id', studentIds);
+
+    const quizWrongMap = new Map<string, unknown[]>();
+    for (const r of quizRows || []) {
+      if (!quizWrongMap.has(r.student_id)) {
+        quizWrongMap.set(r.student_id, (r.wrong_words as unknown[]) || []);
+      }
+    }
+
+    const matchingWrongMap = new Map<string, unknown[]>();
+    for (const r of matchingRows || []) {
+      matchingWrongMap.set(r.student_id, (r.wrong_words as unknown[]) || []);
+    }
+
+    // 4. Build response
     const students = [...studentMap.values()]
       .map((s) => {
         const p = progressMap.get(s.id) || null;
@@ -76,6 +102,10 @@ export const GET = createApiHandler(
                 updated_at: p.updated_at,
               }
             : null,
+          wrongWords: {
+            quiz: quizWrongMap.get(s.id) || [],
+            matching: matchingWrongMap.get(s.id) || [],
+          },
         };
       })
       .sort((a, b) => a.studentName.localeCompare(b.studentName, 'ko'));
