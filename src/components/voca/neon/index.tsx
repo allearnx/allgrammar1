@@ -53,7 +53,7 @@ export function NeonVocaTab({ vocabulary, dayId, progress, dayTitle }: NeonVocaT
   const steps = STEP_LABELS.map((label, i) => ({
     label,
     completed: completedSteps[i],
-    unlocked: i === 0 || completedSteps[i - 1] || completedSteps[i],
+    unlocked: true,
   }));
 
   const saveProgress = useCallback(async (
