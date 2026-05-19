@@ -20,12 +20,19 @@ export async function CombinedSection({ user, planContext }: Props) {
   const supabase = await createClient();
   const settings = await fetchNaesinSettings(supabase, user.id);
 
-  const [vocaData, naesinData] = await Promise.all([
+  const [vocaData, naesinData, vocaAssignment] = await Promise.all([
     fetchVocaDashboardData(supabase, user.id),
     settings.textbook_id
       ? fetchNaesinDashboardData(supabase, user.id, settings.textbook_id)
       : Promise.resolve(EMPTY_NAESIN_DATA),
+    supabase
+      .from('service_assignments')
+      .select('voca_round_mode')
+      .eq('student_id', user.id)
+      .eq('service', 'voca')
+      .single(),
   ]);
+  const vocaRoundMode = (vocaAssignment.data?.voca_round_mode as 'book' | 'day') || 'book';
 
   return (
     <>
@@ -46,6 +53,7 @@ export async function CombinedSection({ user, planContext }: Props) {
         vocaQuizHistory={vocaData.quizHistory}
         naesinQuizHistory={naesinData.quizHistory}
         isPaid={planContext.tier !== 'free'}
+        vocaRoundMode={vocaRoundMode}
       />
     </>
   );

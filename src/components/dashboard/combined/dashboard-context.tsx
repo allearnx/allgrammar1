@@ -43,6 +43,7 @@ export interface DashboardProps {
   vocaQuizHistory?: { date: string; score: number }[];
   naesinQuizHistory?: { date: string; score: number }[];
   isPaid?: boolean;
+  vocaRoundMode?: 'book' | 'day';
 }
 
 // ── Context value ──
@@ -70,6 +71,7 @@ export interface DashboardContextValue {
   nearestDDay: number | null;
 
   // Voca tab
+  vocaRoundMode: 'book' | 'day';
   currentVocaDay: VocaDay | undefined;
   r1Stages: VocaStage[];
   r2Stages: VocaStage[];
@@ -111,6 +113,7 @@ export function DashboardProvider({
       contentMap, vocabQuizSetCounts, grammarVideoCounts,
       enabledStages, wrongWordCounts = {},
       vocaQuizHistory = [], naesinQuizHistory = [],
+      vocaRoundMode: roundMode = 'book',
     } = props;
 
     // ── Voca ──
@@ -119,27 +122,43 @@ export function DashboardProvider({
 
     const sortedDays = [...vocaDays].sort((a, b) => a.sort_order - b.sort_order);
 
-    // 책 단위 회독 판단
+    // 책 단위 1회독 완료 여부
     const bookR1Complete = sortedDays.length > 0 && sortedDays.every((d) => isR1Complete(vocaProgressMap.get(d.id) ?? null));
-    const bookRound: '1' | '2' = bookR1Complete ? '2' : '1';
 
-    const currentVocaDay = sortedDays.find((d) => {
-      const p = vocaProgressMap.get(d.id) ?? null;
-      if (bookRound === '2') return !isR2Complete(p);
-      return !isR1Complete(p);
-    }) ?? sortedDays[0];
+    let currentVocaDay: VocaDay | undefined;
+    let r1Done: boolean;
+    let currentRound: '1' | '2';
+
+    if (roundMode === 'day') {
+      // Day별 완벽 모드: 각 Day의 R1+R2 모두 완료 후 다음 Day
+      currentVocaDay = sortedDays.find((d) => {
+        const p = vocaProgressMap.get(d.id) ?? null;
+        return !isR1Complete(p) || !isR2Complete(p);
+      }) ?? sortedDays[0];
+      const curP = currentVocaDay ? (vocaProgressMap.get(currentVocaDay.id) ?? null) : null;
+      r1Done = isR1Complete(curP);
+      currentRound = r1Done ? '2' : '1';
+    } else {
+      // 책 전체 모드: 전체 Day 1회독 → 전체 Day 2회독
+      currentRound = bookR1Complete ? '2' : '1';
+      currentVocaDay = sortedDays.find((d) => {
+        const p = vocaProgressMap.get(d.id) ?? null;
+        if (currentRound === '2') return !isR2Complete(p);
+        return !isR1Complete(p);
+      }) ?? sortedDays[0];
+      r1Done = bookR1Complete;
+    }
 
     const currentVocaProgress = currentVocaDay ? (vocaProgressMap.get(currentVocaDay.id) ?? null) : null;
     const r1Stages = currentVocaProgress !== undefined ? getR1Stages(currentVocaProgress) : [];
-    const r1Done = bookR1Complete;
-    const r2Stages = bookR1Complete
+    const r2Stages = r1Done
       ? (currentVocaProgress !== undefined ? getR2Stages(currentVocaProgress) : [])
       : (getR2Stages(null));
 
     const vocaActiveR1 = r1Stages.find((s) => s.status === 'active');
     const vocaActiveR2 = r2Stages.find((s) => s.status === 'active');
-    const vocaCtaStage = bookRound === '1' ? vocaActiveR1 : vocaActiveR2;
-    const vocaCtaRound = bookRound;
+    const vocaCtaStage = currentRound === '1' ? vocaActiveR1 : vocaActiveR2;
+    const vocaCtaRound = currentRound;
 
     const { r1CompletedStages, avgQuizScore: vocaAvgScore, wrongWordEntries } =
       computeVocaStats(vocaProgressList, wrongWordCounts);
@@ -198,7 +217,7 @@ export function DashboardProvider({
       sortedUnitsCount: sortedUnits.length,
       r1CompletedStages, naesinCompletedStages,
       vocaAvgScore, naesinCompletedUnits, naesinAvgVocab, nearestDDay,
-      currentVocaDay, r1Stages, r2Stages, r1Done,
+      vocaRoundMode: roundMode, currentVocaDay, r1Stages, r2Stages, r1Done,
       vocaCtaStage, vocaCtaRound, wrongWordEntries, currentBookDays, vocaProgressMap,
       currentUnit, currentNaesinStages, naesinCtaStage,
       sortedUnits, statusesMap, examAssignments, naesinUnits,

@@ -20,7 +20,7 @@ export default async function StudentVocaDayPage({
   // Check service assignment
   const { data: assignment } = await supabase
     .from('service_assignments')
-    .select('id, round2_unlocked')
+    .select('id, round2_unlocked, voca_round_mode')
     .eq('student_id', user.id)
     .eq('service', 'voca')
     .single();
@@ -117,7 +117,18 @@ export default async function StudentVocaDayPage({
   const hasMatchingSubmission = (matchingSubmissions?.length ?? 0) > 0;
 
   const round2Locked = !assignment?.round2_unlocked && !canUseFeature(planContext.tier, 'voca:round2');
-  const currentRound: '1' | '2' = (!round2Locked && bookRound1Complete) ? '2' : '1';
+  const roundMode = (assignment?.voca_round_mode as 'book' | 'day') || 'book';
+
+  let currentRound: '1' | '2' = '1';
+  if (!round2Locked) {
+    if (roundMode === 'day') {
+      // Day별 모드: 이 Day의 1회독 완료 여부로 판단
+      currentRound = isR1Complete((progress as VocaStudentProgress) ?? null) ? '2' : '1';
+    } else {
+      // 책 단위 모드: 전체 Day 1회독 완료 여부로 판단
+      currentRound = bookRound1Complete ? '2' : '1';
+    }
+  }
 
   return (
     <>

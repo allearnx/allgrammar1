@@ -1,12 +1,15 @@
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useTransition } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { Badge } from '@/components/ui/badge';
-import { CheckCircle, Lock, ChevronRight } from 'lucide-react';
+import { CheckCircle, Lock, ChevronRight, BookOpen, BookMarked } from 'lucide-react';
 import { PetWidget } from '@/components/voca/pet/pet-widget';
 import { isR1Complete, isR2Complete } from '@/lib/dashboard/voca-helpers';
 import type { VocaBook, VocaDay, VocaStudentProgress } from '@/types/voca';
+
+type RoundMode = 'book' | 'day';
 
 interface VocaHomeClientProps {
   books: VocaBook[];
@@ -16,6 +19,7 @@ interface VocaHomeClientProps {
   initialBookId?: string;
   freeDayLimit?: number;
   round2Locked?: boolean;
+  roundMode?: RoundMode;
 }
 
 const BOOK_COLORS = [
@@ -45,7 +49,12 @@ function getRound2StepsDone(prog: VocaStudentProgress | undefined): number {
   return done;
 }
 
-export function VocaHomeClient({ books, days, progressList, submissionStatuses = {}, initialBookId, freeDayLimit = 0, round2Locked = false }: VocaHomeClientProps) {
+export function VocaHomeClient({ books, days, progressList, submissionStatuses = {}, initialBookId, freeDayLimit = 0, round2Locked = false, roundMode: initialRoundMode = 'book' }: VocaHomeClientProps) {
+  const router = useRouter();
+  const [isPending, startTransition] = useTransition();
+  const [roundMode, setRoundMode] = useState<RoundMode>(initialRoundMode);
+  const [showModeSelector, setShowModeSelector] = useState(false);
+
   const defaultBookId = (initialBookId && books.some((b) => b.id === initialBookId))
     ? initialBookId
     : books[0]?.id || '';
@@ -64,21 +73,43 @@ export function VocaHomeClient({ books, days, progressList, submissionStatuses =
     return map;
   }, [progressList]);
 
-  // 책 단위 회독 판단: 모든 Day 1회독 완료 → 2회독 모드
+  // 책 단위: 모든 Day 1회독 완료 → 2회독
   const bookRound1Complete = useMemo(() => {
     const targetDays = freeDayLimit > 0 ? filteredDays.slice(0, freeDayLimit) : filteredDays;
     return targetDays.length > 0 && targetDays.every((d) => isR1Complete(progressMap.get(d.id) ?? null));
   }, [filteredDays, progressMap, freeDayLimit]);
-  const currentRound: '1' | '2' = (!round2Locked && bookRound1Complete) ? '2' : '1';
+
+  // 현재 라운드: 모드에 따라 다르게 (book 모드는 전체 기준)
+  const bookCurrentRound: '1' | '2' = (!round2Locked && bookRound1Complete) ? '2' : '1';
 
   const totalDays = freeDayLimit > 0 ? Math.min(filteredDays.length, freeDayLimit) : filteredDays.length;
   const completedCount = useMemo(() => {
     const target = filteredDays.slice(0, freeDayLimit > 0 ? freeDayLimit : undefined);
-    if (currentRound === '2') {
+    if (roundMode === 'day') {
+      // Day 모드: 1회독+2회독 모두 완료한 Day 수
+      return target.filter((d) => {
+        const p = progressMap.get(d.id) ?? null;
+        return isR1Complete(p) && (round2Locked || isR2Complete(p));
+      }).length;
+    }
+    if (bookCurrentRound === '2') {
       return target.filter((day) => isR2Complete(progressMap.get(day.id) ?? null)).length;
     }
     return target.filter((day) => isR1Complete(progressMap.get(day.id) ?? null)).length;
-  }, [filteredDays, progressMap, freeDayLimit, currentRound]);
+  }, [filteredDays, progressMap, freeDayLimit, bookCurrentRound, roundMode, round2Locked]);
+
+  const handleModeChange = async (mode: RoundMode) => {
+    setRoundMode(mode);
+    setShowModeSelector(false);
+    try {
+      await fetch('/api/voca/round-mode', {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ mode }),
+      });
+      startTransition(() => router.refresh());
+    } catch { /* ignore */ }
+  };
 
   const selectedBook = books.find((b) => b.id === selectedBookId);
 
@@ -101,13 +132,21 @@ export function VocaHomeClient({ books, days, progressList, submissionStatuses =
         <div className="relative">
           <div className="flex items-center gap-2 mb-2">
             <p className="text-white/70 text-xs font-semibold tracking-widest uppercase">AllKill Voca</p>
-            <span className={`text-[11px] font-bold px-2 py-0.5 rounded-full ${
-              currentRound === '2'
-                ? 'bg-violet-400/30 text-violet-100'
-                : 'bg-white/20 text-white/80'
-            }`}>
-              {currentRound}회독
-            </span>
+            {roundMode === 'book' && (
+              <span className={`text-[11px] font-bold px-2 py-0.5 rounded-full ${
+                bookCurrentRound === '2'
+                  ? 'bg-violet-400/30 text-violet-100'
+                  : 'bg-white/20 text-white/80'
+              }`}>
+                {bookCurrentRound}회독
+              </span>
+            )}
+            <button
+              onClick={() => setShowModeSelector((v) => !v)}
+              className="text-[11px] font-semibold px-2 py-0.5 rounded-full bg-white/15 text-white/80 hover:bg-white/25 transition-colors"
+            >
+              {roundMode === 'book' ? '책 전체 모드' : 'Day별 완벽 모드'} ▾
+            </button>
           </div>
           <h1 className="text-white text-2xl md:text-3xl font-extrabold leading-tight mb-1">
             {selectedBook?.title || '올킬보카'}
@@ -127,6 +166,60 @@ export function VocaHomeClient({ books, days, progressList, submissionStatuses =
           )}
         </div>
       </div>
+
+      {/* Round mode selector */}
+      {showModeSelector && (
+        <div className="rounded-2xl border border-indigo-100 bg-white p-4 space-y-3 shadow-lg">
+          <p className="text-sm font-bold text-gray-800">학습 방식을 선택하세요</p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <button
+              onClick={() => handleModeChange('book')}
+              disabled={isPending}
+              className={`text-left rounded-xl border-2 p-4 transition-all ${
+                roundMode === 'book'
+                  ? 'border-indigo-500 bg-indigo-50'
+                  : 'border-gray-200 bg-white hover:border-gray-300'
+              }`}
+            >
+              <div className="flex items-center gap-2 mb-2">
+                <BookOpen className="h-5 w-5 text-indigo-500" />
+                <span className="text-sm font-bold text-gray-900">책 전체 모드</span>
+                {roundMode === 'book' && <span className="text-[10px] font-bold text-indigo-600 bg-indigo-100 px-1.5 py-0.5 rounded-full">선택됨</span>}
+              </div>
+              <p className="text-xs text-gray-500 leading-relaxed">
+                전체 Day를 <strong>1회독</strong>으로 한 번 훑은 뒤<br />
+                다시 처음부터 <strong>2회독</strong>으로 반복
+              </p>
+              <p className="text-[11px] text-indigo-500 font-medium mt-2">
+                Day 1 → Day 2 → ... → Day 30 (1회독)<br />
+                Day 1 → Day 2 → ... → Day 30 (2회독)
+              </p>
+            </button>
+            <button
+              onClick={() => handleModeChange('day')}
+              disabled={isPending}
+              className={`text-left rounded-xl border-2 p-4 transition-all ${
+                roundMode === 'day'
+                  ? 'border-violet-500 bg-violet-50'
+                  : 'border-gray-200 bg-white hover:border-gray-300'
+              }`}
+            >
+              <div className="flex items-center gap-2 mb-2">
+                <BookMarked className="h-5 w-5 text-violet-500" />
+                <span className="text-sm font-bold text-gray-900">Day별 완벽 모드</span>
+                {roundMode === 'day' && <span className="text-[10px] font-bold text-violet-600 bg-violet-100 px-1.5 py-0.5 rounded-full">선택됨</span>}
+              </div>
+              <p className="text-xs text-gray-500 leading-relaxed">
+                각 Day를 <strong>1회독+2회독</strong> 완벽히 마치고<br />
+                다음 Day로 넘어가는 방식
+              </p>
+              <p className="text-[11px] text-violet-500 font-medium mt-2">
+                Day 1 (1회독→2회독) → Day 2 (1회독→2회독) → ...
+              </p>
+            </button>
+          </div>
+        </div>
+      )}
 
       {/* Book selector */}
       {books.length > 1 && (
@@ -189,9 +282,36 @@ export function VocaHomeClient({ books, days, progressList, submissionStatuses =
 
             const r2Steps = getRound2StepsDone(prog);
             const r2Completed = isR2Complete(prog ?? null);
-            const isCompleted = currentRound === '2' ? r2Completed : completed;
-            const stepsNow = currentRound === '2' ? r2Steps : steps;
-            const totalSteps = currentRound === '2' ? 3 : 4;
+
+            let isCompleted: boolean;
+            let stepsNow: number;
+            let totalSteps: number;
+            let dayRoundLabel: string | null = null;
+
+            if (roundMode === 'day') {
+              // Day별 모드: 1회독+2회독 모두 완료 = 완료
+              const bothDone = completed && (round2Locked || r2Completed);
+              isCompleted = bothDone;
+              if (!completed) {
+                // 1회독 진행중
+                stepsNow = steps;
+                totalSteps = 4;
+                dayRoundLabel = '1회독';
+              } else if (!round2Locked && !r2Completed) {
+                // 2회독 진행중
+                stepsNow = r2Steps;
+                totalSteps = 3;
+                dayRoundLabel = '2회독';
+              } else {
+                stepsNow = 0;
+                totalSteps = 0;
+              }
+            } else {
+              // 책 단위 모드: 현재 라운드 기준
+              isCompleted = bookCurrentRound === '2' ? r2Completed : completed;
+              stepsNow = bookCurrentRound === '2' ? r2Steps : steps;
+              totalSteps = bookCurrentRound === '2' ? 3 : 4;
+            }
 
             return (
               <Link key={day.id} href={`/student/voca/${day.id}`}>
@@ -210,6 +330,9 @@ export function VocaHomeClient({ books, days, progressList, submissionStatuses =
                     </p>
                     {stepsNow > 0 && !isCompleted && (
                       <div className="flex items-center gap-2 mt-1.5">
+                        {dayRoundLabel && (
+                          <span className="text-[10px] font-bold text-gray-400">{dayRoundLabel}</span>
+                        )}
                         <div className="flex gap-0.5">
                           {Array.from({ length: totalSteps }).map((_, i) => (
                             <div
@@ -226,9 +349,11 @@ export function VocaHomeClient({ books, days, progressList, submissionStatuses =
                       </div>
                     )}
                     {isCompleted && (
-                      <p className="text-[11px] font-medium text-green-600 mt-0.5">{currentRound}회독 완료</p>
+                      <p className="text-[11px] font-medium text-green-600 mt-0.5">
+                        {roundMode === 'day' ? '1+2회독 완료' : `${bookCurrentRound}회독 완료`}
+                      </p>
                     )}
-                    {currentRound === '1' && <ProgressBadges progress={prog} submissionStatus={submissionStatuses[day.id]} />}
+                    {(roundMode === 'day' || bookCurrentRound === '1') && <ProgressBadges progress={prog} submissionStatus={submissionStatuses[day.id]} />}
                   </div>
                   <div className="flex items-center gap-1.5 shrink-0">
                     {isCompleted && <CheckCircle className="h-5 w-5 text-green-500" />}

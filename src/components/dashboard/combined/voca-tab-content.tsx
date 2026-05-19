@@ -27,6 +27,7 @@ export function VocaTabContent() {
     r1Stages, r2Stages, r1Done,
     vocaCtaStage, vocaCtaRound,
     wrongWordEntries, currentBookDays, vocaProgressMap,
+    vocaRoundMode,
   } = useDashboardContext();
 
   return (
@@ -63,7 +64,7 @@ export function VocaTabContent() {
         <div className="rounded-2xl border bg-white p-5 md:p-6 space-y-5 transition-opacity" style={{ opacity: r1Done ? 1 : 0.55 }}>
           <h3 className="text-lg font-bold flex items-center gap-2">
             <BookMarked className="h-4 w-4" /> 2회독
-            {!r1Done && <span className="text-xs font-normal text-gray-400 ml-1">전체 Day 1회독 완료 후 시작됩니다</span>}
+            {!r1Done && <span className="text-xs font-normal text-gray-400 ml-1">{vocaRoundMode === 'day' ? '이 Day 1회독 완료 후 시작됩니다' : '전체 Day 1회독 완료 후 시작됩니다'}</span>}
           </h3>
 
           <div className="flex items-stretch gap-0 overflow-visible">
@@ -126,10 +127,24 @@ export function VocaTabContent() {
                 (p?.round2_flashcard_completed ? 1 : 0) +
                 ((p?.round2_quiz_score ?? 0) >= 80 ? 1 : 0) +
                 (p?.round2_matching_completed ? 1 : 0);
-              const totalSteps = r1Done ? 3 : 4;
-              const stepsNow = r1Done ? r2Steps : r1Steps;
+
+              let totalSteps: number;
+              let stepsNow: number;
+              let isDone: boolean;
+
+              if (vocaRoundMode === 'day') {
+                // Day별 완벽 모드: R1(4) + R2(3) = 7단계
+                totalSteps = 7;
+                stepsNow = r1Steps + r2Steps;
+                isDone = isR1Complete(p) && isR2Complete(p);
+              } else {
+                // 책 전체 모드: 현재 회독의 단계만 표시
+                totalSteps = r1Done ? 3 : 4;
+                stepsNow = r1Done ? r2Steps : r1Steps;
+                isDone = r1Done ? isR2Complete(p) : isR1Complete(p);
+              }
+
               const pct = Math.round((stepsNow / totalSteps) * 100);
-              const isDone = r1Done ? isR2Complete(p) : isR1Complete(p);
 
               return (
                 <Link
