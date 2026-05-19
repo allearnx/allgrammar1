@@ -24,15 +24,15 @@ interface NeonVocaTabProps {
   dayTitle: string;
 }
 
-const STEP_LABELS = ['플래시카드', '스펠링', '매칭', '퀴즈'];
+const STEP_LABELS = ['플래시카드', '매칭', '스펠링', '퀴즈'];
 
 // Step 완료 여부 판단
 function getStepStates(p: VocaStudentProgress | null) {
   const pr = p ?? EMPTY_VOCA_PROGRESS;
   return [
     pr.flashcard_completed || (pr.quiz_score ?? 0) >= 80, // Step 1: 플래시카드
-    (pr.spelling_score ?? 0) >= 80,                         // Step 2: 스펠링
-    pr.matching_completed,                                  // Step 3: 매칭
+    pr.matching_completed,                                  // Step 2: 매칭
+    (pr.spelling_score ?? 0) >= 80,                         // Step 3: 스펠링
     (pr.quiz_score ?? 0) >= 80,                             // Step 4: 퀴즈
   ];
 }
@@ -182,15 +182,15 @@ export function NeonVocaTab({ vocabulary, dayId, progress, dayTitle }: NeonVocaT
             />
           )}
           {currentStep === 1 && (
-            <RhythmSpelling
+            <WordMatching
               vocabulary={vocabulary}
-              onComplete={(score) => handleStepComplete(1, 'spelling', score)}
+              onComplete={(score) => handleStepComplete(1, 'matching', score)}
             />
           )}
           {currentStep === 2 && (
-            <WordMatching
+            <RhythmSpelling
               vocabulary={vocabulary}
-              onComplete={(score) => handleStepComplete(2, 'matching', score)}
+              onComplete={(score) => handleStepComplete(2, 'spelling', score)}
             />
           )}
           {currentStep === 3 && (
