@@ -7,6 +7,7 @@ import { Progress } from '@/components/ui/progress';
 import { Eye, Users, Trash2 } from 'lucide-react';
 import Link from 'next/link';
 import { ServiceAssignmentToggle } from './service-assignment-toggle';
+import { RoundModeToggle } from './round-mode-toggle';
 import { StudentsToolbar } from './students-toolbar';
 import { StudentDeleteButton } from './student-delete-button';
 import { StudentSearchInput } from './student-search-input';
@@ -150,6 +151,20 @@ export async function StudentsList({ user, basePath, searchQuery }: Props) {
   let vocaBooks: { id: string; title: string }[] = [];
   const bookAssignmentMap: Record<string, string> = {};
 
+  // 선생님도 학습 모드 조회 필요
+  if (studentIds.length > 0) {
+    const { data: modeData } = await admin
+      .from('service_assignments')
+      .select('student_id, service, voca_round_mode')
+      .eq('service', 'voca')
+      .in('student_id', studentIds);
+    if (modeData) {
+      for (const a of modeData) {
+        if (a.voca_round_mode === 'day') roundModeMap[a.student_id] = 'day';
+      }
+    }
+  }
+
   if (canManageServices && studentIds.length > 0) {
     const [{ data: assignments }, { data: vocaBooksData }, { data: bookAssignments }] = await Promise.all([
       admin
@@ -276,7 +291,16 @@ export async function StudentsList({ user, basePath, searchQuery }: Props) {
                           round2Unlocked={round2Map[student.id] || false}
                           showRound2Toggle={basePath === '/boss'}
                           vocaRoundMode={roundModeMap[student.id] || 'book'}
-                          showRoundModeToggle={basePath === '/boss'}
+                          showRoundModeToggle
+                        />
+                      </div>
+                    )}
+                    {!canManageServices && (
+                      <div className="mt-3">
+                        <p className="text-xs text-muted-foreground mb-1.5">보카 학습 모드</p>
+                        <RoundModeToggle
+                          studentId={student.id}
+                          mode={roundModeMap[student.id] || 'book'}
                         />
                       </div>
                     )}

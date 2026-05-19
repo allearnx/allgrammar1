@@ -42,7 +42,7 @@ export const POST = createApiHandler(
 
 // PATCH — boss가 2회독 잠금 해제 / 학습 모드 변경
 export const PATCH = createApiHandler(
-  { roles: ['boss'], schema: serviceAssignmentPatchSchema },
+  { roles: ['boss', 'teacher'], schema: serviceAssignmentPatchSchema },
   async ({ user, body }) => {
     const admin = createAdminClient();
     const updates: Record<string, unknown> = {};
