@@ -145,6 +145,7 @@ export async function StudentsList({ user, basePath, searchQuery }: Props) {
   const canManageServices = basePath === '/boss' || basePath === '/admin';
   const serviceMap: Record<string, string[]> = {};
   const round2Map: Record<string, boolean> = {};
+  const roundModeMap: Record<string, 'book' | 'day'> = {};
 
   let vocaBooks: { id: string; title: string }[] = [];
   const bookAssignmentMap: Record<string, string> = {};
@@ -153,7 +154,7 @@ export async function StudentsList({ user, basePath, searchQuery }: Props) {
     const [{ data: assignments }, { data: vocaBooksData }, { data: bookAssignments }] = await Promise.all([
       admin
         .from('service_assignments')
-        .select('student_id, service, round2_unlocked')
+        .select('student_id, service, round2_unlocked, voca_round_mode')
         .in('student_id', studentIds),
       admin
         .from('voca_books')
@@ -170,8 +171,9 @@ export async function StudentsList({ user, basePath, searchQuery }: Props) {
       for (const a of assignments) {
         if (!serviceMap[a.student_id]) serviceMap[a.student_id] = [];
         serviceMap[a.student_id].push(a.service);
-        if (a.service === 'voca' && a.round2_unlocked) {
-          round2Map[a.student_id] = true;
+        if (a.service === 'voca') {
+          if (a.round2_unlocked) round2Map[a.student_id] = true;
+          if (a.voca_round_mode === 'day') roundModeMap[a.student_id] = 'day';
         }
       }
     }
@@ -273,6 +275,8 @@ export async function StudentsList({ user, basePath, searchQuery }: Props) {
                           assignedBookId={bookAssignmentMap[student.id] || null}
                           round2Unlocked={round2Map[student.id] || false}
                           showRound2Toggle={basePath === '/boss'}
+                          vocaRoundMode={roundModeMap[student.id] || 'book'}
+                          showRoundModeToggle={basePath === '/boss'}
                         />
                       </div>
                     )}

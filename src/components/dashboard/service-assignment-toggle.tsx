@@ -13,6 +13,8 @@ interface ServiceAssignmentToggleProps {
   assignedBookId?: string | null;
   round2Unlocked?: boolean;
   showRound2Toggle?: boolean;
+  vocaRoundMode?: 'book' | 'day';
+  showRoundModeToggle?: boolean;
   onUpdate?: () => void;
 }
 
@@ -29,6 +31,8 @@ export function ServiceAssignmentToggle({
   assignedBookId: initialBookId,
   round2Unlocked: initialRound2 = false,
   showRound2Toggle = false,
+  vocaRoundMode: initialRoundMode = 'book',
+  showRoundModeToggle = false,
   onUpdate,
 }: ServiceAssignmentToggleProps) {
   const [assigned, setAssigned] = useState<Set<string>>(new Set(initial));
@@ -37,6 +41,8 @@ export function ServiceAssignmentToggle({
   const [bookLoading, setBookLoading] = useState(false);
   const [round2, setRound2] = useState(initialRound2);
   const [round2Loading, setRound2Loading] = useState(false);
+  const [roundMode, setRoundMode] = useState<'book' | 'day'>(initialRoundMode);
+  const [roundModeLoading, setRoundModeLoading] = useState(false);
 
   async function toggle(service: string) {
     const isAssigned = assigned.has(service);
@@ -116,6 +122,25 @@ export function ServiceAssignmentToggle({
     }
   }
 
+  async function toggleRoundMode() {
+    const next = roundMode === 'book' ? 'day' : 'book';
+    setRoundModeLoading(true);
+    try {
+      await fetchWithToast('/api/service-assignments', {
+        method: 'PATCH',
+        body: { studentId, vocaRoundMode: next },
+        successMessage: next === 'book' ? '책 전체 모드' : 'Day별 완벽 모드',
+        errorMessage: '학습 모드 변경에 실패했습니다',
+      });
+      setRoundMode(next);
+      onUpdate?.();
+    } catch {
+      // fetchWithToast already showed toast
+    } finally {
+      setRoundModeLoading(false);
+    }
+  }
+
   const vocaOn = assigned.has('voca');
   const showBookSelect = vocaOn && vocaBooks && vocaBooks.length > 0;
 
@@ -176,6 +201,22 @@ export function ServiceAssignmentToggle({
         >
           {round2 ? <Check className="h-3.5 w-3.5" /> : <X className="h-3.5 w-3.5" />}
           2회독
+        </button>
+      )}
+      {vocaOn && showRoundModeToggle && (
+        <button
+          type="button"
+          disabled={roundModeLoading}
+          onClick={toggleRoundMode}
+          className={cn(
+            'inline-flex items-center gap-1.5 rounded-full px-4 py-1.5 text-sm font-medium transition-all select-none',
+            roundModeLoading && 'opacity-50 cursor-wait',
+            roundMode === 'day'
+              ? 'bg-violet-500 text-white shadow-sm hover:bg-violet-600'
+              : 'bg-muted text-muted-foreground hover:bg-muted/80 border border-border'
+          )}
+        >
+          {roundMode === 'day' ? 'Day별 완벽' : '책 전체'}
         </button>
       )}
     </div>

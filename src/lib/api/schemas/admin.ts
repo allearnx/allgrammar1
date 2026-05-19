@@ -35,7 +35,8 @@ export const serviceAssignmentDeleteSchema = z.object({
 
 export const serviceAssignmentPatchSchema = z.object({
   studentId: ID,
-  round2Unlocked: z.boolean(),
+  round2Unlocked: z.boolean().optional(),
+  vocaRoundMode: z.enum(['book', 'day']).optional(),
 });
 
 // ── Academy Settings Schemas ──

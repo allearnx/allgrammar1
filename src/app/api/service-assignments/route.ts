@@ -40,14 +40,18 @@ export const POST = createApiHandler(
   }
 );
 
-// PATCH — boss가 2회독 잠금 해제 토글
+// PATCH — boss가 2회독 잠금 해제 / 학습 모드 변경
 export const PATCH = createApiHandler(
   { roles: ['boss'], schema: serviceAssignmentPatchSchema },
   async ({ user, body }) => {
     const admin = createAdminClient();
+    const updates: Record<string, unknown> = {};
+    if (body.round2Unlocked !== undefined) updates.round2_unlocked = body.round2Unlocked;
+    if (body.vocaRoundMode !== undefined) updates.voca_round_mode = body.vocaRoundMode;
+
     const { error } = await admin
       .from('service_assignments')
-      .update({ round2_unlocked: body.round2Unlocked })
+      .update(updates)
       .eq('student_id', body.studentId)
       .eq('service', 'voca');
     if (error) return NextResponse.json({ error: error.message }, { status: 400 });
