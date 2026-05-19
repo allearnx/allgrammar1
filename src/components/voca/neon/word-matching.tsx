@@ -65,6 +65,14 @@ export function WordMatching({ vocabulary, onComplete }: WordMatchingProps) {
     return () => { if (chunkTimerRef.current) clearTimeout(chunkTimerRef.current); };
   }, []);
 
+  function handleRetry() {
+    setCurrentChunk(0);
+    setAttempt(1);
+    setTotalWrong(0);
+    setTotalPairs(0);
+    setFinalScore(null);
+  }
+
   if (finalScore !== null) {
     return (
       <NeonResultScreen
@@ -72,6 +80,7 @@ export function WordMatching({ vocabulary, onComplete }: WordMatchingProps) {
         passThreshold={PASS_SCORE}
         passMessage="매칭 통과!"
         failMessage={`${finalScore}점 (90% 이상 필요)`}
+        onRetry={handleRetry}
       />
     );
   }

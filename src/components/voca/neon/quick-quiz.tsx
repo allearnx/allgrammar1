@@ -77,7 +77,9 @@ function generateQuestions(vocabulary: VocaVocabulary[]): QuizQuestion[] {
 }
 
 export function QuickQuiz({ vocabulary, onComplete }: QuickQuizProps) {
-  const questions = useMemo(() => generateQuestions(vocabulary), [vocabulary]);
+  const [attempt, setAttempt] = useState(0);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const questions = useMemo(() => generateQuestions(vocabulary), [vocabulary, attempt]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const [correct, setCorrect] = useState(0);
@@ -112,6 +114,15 @@ export function QuickQuiz({ vocabulary, onComplete }: QuickQuizProps) {
     return () => { if (timerRef.current) clearTimeout(timerRef.current); };
   }, []);
 
+  function handleRetry() {
+    setAttempt((a) => a + 1);
+    setCurrentIndex(0);
+    setSelectedIndex(null);
+    setCorrect(0);
+    setFinalScore(null);
+    setAnswered(false);
+  }
+
   if (finalScore !== null) {
     return (
       <NeonResultScreen
@@ -120,6 +131,7 @@ export function QuickQuiz({ vocabulary, onComplete }: QuickQuizProps) {
         passMessage="퀴즈 통과!"
         failMessage="80% 이상 필요합니다"
         subtitle={`${correct}/${questions.length} 정답`}
+        onRetry={handleRetry}
       />
     );
   }

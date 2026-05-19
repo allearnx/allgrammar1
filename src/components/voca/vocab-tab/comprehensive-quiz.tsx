@@ -27,7 +27,9 @@ interface ComprehensiveQuizProps {
 
 export function ComprehensiveQuiz({ vocabulary, dayId: _dayId, onComplete }: ComprehensiveQuizProps) {
   const questionRef = useRef<HTMLDivElement>(null);
-  const questions = useMemo(() => generateQuestions(vocabulary), [vocabulary]);
+  const [attempt, setAttempt] = useState(0);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const questions = useMemo(() => generateQuestions(vocabulary), [vocabulary, attempt]);
   const [currentIdx, setCurrentIdx] = useState(0);
   const [answers, setAnswers] = useState<Map<number, string>>(new Map());
   const [results, setResults] = useState<QuestionResult[] | null>(null);
@@ -169,6 +171,7 @@ export function ComprehensiveQuiz({ vocabulary, dayId: _dayId, onComplete }: Com
   }
 
   function handleRestart() {
+    setAttempt((a) => a + 1);
     setCurrentIdx(0);
     setAnswers(new Map());
     setResults(null);
@@ -219,10 +222,12 @@ export function ComprehensiveQuiz({ vocabulary, dayId: _dayId, onComplete }: Com
           ))}
         </div>
 
-        <Button variant="outline" className="w-full" onClick={handleRestart}>
-          <RotateCcw className="h-4 w-4 mr-2" />
-          다시 풀기
-        </Button>
+        {totalScore < 80 && (
+          <Button variant="outline" className="w-full" onClick={handleRestart}>
+            <RotateCcw className="h-4 w-4 mr-2" />
+            새 문제로 다시 풀기
+          </Button>
+        )}
       </div>
     );
   }
