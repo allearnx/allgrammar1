@@ -2,7 +2,7 @@
 
 import { useState, useMemo, useCallback, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { cn, shuffle } from '@/lib/utils';
+import { cn, shuffle, blankOutWord } from '@/lib/utils';
 import { NeonResultScreen } from './neon-result-screen';
 import { ProgressDots } from './progress-dots';
 import type { VocaVocabulary } from '@/types/voca';
@@ -13,20 +13,61 @@ interface QuickQuizProps {
   onComplete: (score: number) => void;
 }
 
+type QuizType = 'en-to-ko' | 'ko-to-en' | 'fill-blank';
+
 interface QuizQuestion {
-  word: string;
+  type: QuizType;
+  prompt: string;
   options: string[];
   correctIndex: number;
 }
 
+function pickType(hasExample: boolean): QuizType {
+  const types: QuizType[] = hasExample
+    ? ['en-to-ko', 'ko-to-en', 'fill-blank']
+    : ['en-to-ko', 'ko-to-en'];
+  return types[Math.floor(Math.random() * types.length)];
+}
+
 function generateQuestions(vocabulary: VocaVocabulary[]): QuizQuestion[] {
   return shuffle([...vocabulary]).map((v) => {
+    const type = pickType(!!v.example_sentence);
+
+    if (type === 'ko-to-en') {
+      const distractors = shuffle(
+        vocabulary.filter((d) => d.id !== v.id).map((d) => d.front_text)
+      ).slice(0, 3);
+      const options = shuffle([v.front_text, ...distractors]);
+      return {
+        type,
+        prompt: v.back_text,
+        options,
+        correctIndex: options.indexOf(v.front_text),
+      };
+    }
+
+    if (type === 'fill-blank') {
+      const blanked = blankOutWord(v.example_sentence!, v.front_text);
+      const distractors = shuffle(
+        vocabulary.filter((d) => d.id !== v.id).map((d) => d.front_text)
+      ).slice(0, 3);
+      const options = shuffle([v.front_text, ...distractors]);
+      return {
+        type,
+        prompt: blanked,
+        options,
+        correctIndex: options.indexOf(v.front_text),
+      };
+    }
+
+    // en-to-ko (기존)
     const distractors = shuffle(
       vocabulary.filter((d) => d.id !== v.id).map((d) => d.back_text)
     ).slice(0, 3);
     const options = shuffle([v.back_text, ...distractors]);
     return {
-      word: v.front_text,
+      type,
+      prompt: v.front_text,
       options,
       correctIndex: options.indexOf(v.back_text),
     };
@@ -100,8 +141,16 @@ export function QuickQuiz({ vocabulary, onComplete }: QuickQuizProps) {
             transition={{ duration: 0.2 }}
             className="w-full max-w-md space-y-8"
           >
-            <p className="text-4xl font-bold text-center neon-text-gold">
-              {question.word}
+            {question.type === 'fill-blank' && (
+              <p className="text-xs font-medium text-center text-indigo-400 mb-1">빈칸에 들어갈 단어는?</p>
+            )}
+            <p
+              className={cn(
+                'font-bold text-center neon-text-gold',
+                question.type === 'fill-blank' ? 'text-xl md:text-2xl leading-relaxed' : 'text-4xl',
+              )}
+            >
+              {question.prompt}
             </p>
 
             <div className="space-y-3">
