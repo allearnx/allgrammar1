@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { ArrowRight, BookOpen, BookMarked, XCircle, TrendingUp } from 'lucide-react';
 import { FlowStep } from './flow-step';
 import { BRAND } from '@/lib/utils/brand-colors';
-import { isR1Complete } from '@/lib/dashboard/voca-helpers';
+import { isR1Complete, isR2Complete } from '@/lib/dashboard/voca-helpers';
 import { useDashboardContext } from './dashboard-context';
 
 const COLORS = {
@@ -66,7 +66,7 @@ export function VocaTabContent() {
         <div className="rounded-2xl border bg-white p-5 md:p-6 space-y-5 transition-opacity" style={{ opacity: r1Done ? 1 : 0.55 }}>
           <h3 className="text-lg font-bold flex items-center gap-2">
             <BookMarked className="h-4 w-4" /> 2회독
-            {!r1Done && <span className="text-xs font-normal text-gray-400 ml-1">1회독을 완료하면 해금됩니다!</span>}
+            {!r1Done && <span className="text-xs font-normal text-gray-400 ml-1">전체 Day 1회독 완료 후 시작됩니다</span>}
           </h3>
 
           <div className="flex items-stretch gap-0 overflow-visible">
@@ -120,13 +120,19 @@ export function VocaTabContent() {
             {currentBookDays.map((day) => {
               const p = vocaProgressMap.get(day.id) ?? null;
               const isCurrent = day.id === currentDay?.id;
-              const stagesComplete =
+              const r1Steps =
                 (p?.flashcard_completed ? 1 : 0) +
                 ((p?.quiz_score ?? 0) >= 80 ? 1 : 0) +
                 ((p?.spelling_score ?? 0) >= 80 ? 1 : 0) +
                 (p?.matching_completed ? 1 : 0);
-              const pct = Math.round((stagesComplete / 4) * 100);
-              const isDone = isR1Complete(p);
+              const r2Steps =
+                (p?.round2_flashcard_completed ? 1 : 0) +
+                ((p?.round2_quiz_score ?? 0) >= 80 ? 1 : 0) +
+                (p?.round2_matching_completed ? 1 : 0);
+              const totalSteps = r1Done ? 3 : 4;
+              const stepsNow = r1Done ? r2Steps : r1Steps;
+              const pct = Math.round((stepsNow / totalSteps) * 100);
+              const isDone = r1Done ? isR2Complete(p) : isR1Complete(p);
 
               return (
                 <Link
@@ -146,7 +152,7 @@ export function VocaTabContent() {
                         </span>
                       )}
                     </span>
-                    <span className="text-xs text-gray-400 shrink-0 ml-2">{stagesComplete}/4</span>
+                    <span className="text-xs text-gray-400 shrink-0 ml-2">{stepsNow}/{totalSteps}</span>
                   </div>
                   <div className="h-2.5 w-full rounded-full bg-gray-200 overflow-hidden">
                     <div
@@ -155,7 +161,7 @@ export function VocaTabContent() {
                         width: `${pct}%`,
                         background: isDone
                           ? `linear-gradient(to right, ${COLORS.progressDone}, #4DD9C0)`
-                          : isCurrent
+                          : stepsNow > 0
                             ? COLORS.progressActive
                             : '#D1D5DB',
                       }}

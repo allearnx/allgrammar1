@@ -118,20 +118,28 @@ export function DashboardProvider({
     vocaProgressList.forEach((p) => vocaProgressMap.set(p.day_id, p));
 
     const sortedDays = [...vocaDays].sort((a, b) => a.sort_order - b.sort_order);
+
+    // 책 단위 회독 판단
+    const bookR1Complete = sortedDays.length > 0 && sortedDays.every((d) => isR1Complete(vocaProgressMap.get(d.id) ?? null));
+    const bookRound: '1' | '2' = bookR1Complete ? '2' : '1';
+
     const currentVocaDay = sortedDays.find((d) => {
       const p = vocaProgressMap.get(d.id) ?? null;
-      return !isR1Complete(p) || !isR2Complete(p);
+      if (bookRound === '2') return !isR2Complete(p);
+      return !isR1Complete(p);
     }) ?? sortedDays[0];
 
     const currentVocaProgress = currentVocaDay ? (vocaProgressMap.get(currentVocaDay.id) ?? null) : null;
     const r1Stages = currentVocaProgress !== undefined ? getR1Stages(currentVocaProgress) : [];
-    const r1Done = isR1Complete(currentVocaProgress);
-    const r2Stages = currentVocaProgress !== undefined ? getR2Stages(currentVocaProgress) : [];
+    const r1Done = bookR1Complete;
+    const r2Stages = bookR1Complete
+      ? (currentVocaProgress !== undefined ? getR2Stages(currentVocaProgress) : [])
+      : (getR2Stages(null));
 
     const vocaActiveR1 = r1Stages.find((s) => s.status === 'active');
     const vocaActiveR2 = r2Stages.find((s) => s.status === 'active');
-    const vocaCtaStage = vocaActiveR1 ?? vocaActiveR2;
-    const vocaCtaRound = vocaActiveR1 ? '1' : '2';
+    const vocaCtaStage = bookRound === '1' ? vocaActiveR1 : vocaActiveR2;
+    const vocaCtaRound = bookRound;
 
     const { r1CompletedStages, avgQuizScore: vocaAvgScore, wrongWordEntries } =
       computeVocaStats(vocaProgressList, wrongWordCounts);

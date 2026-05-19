@@ -62,9 +62,15 @@ export function VocaDashboard({ userName, books, days, progressList, wordCount, 
   progressList.forEach((p) => progressMap.set(p.day_id, p));
 
   const sortedDays = [...days].sort((a, b) => a.sort_order - b.sort_order);
+
+  // 책 단위 회독 판단
+  const bookR1Complete = sortedDays.length > 0 && sortedDays.every((d) => isR1Complete(progressMap.get(d.id) ?? null));
+  const bookRound: '1' | '2' = bookR1Complete ? '2' : '1';
+
   const currentDay = sortedDays.find((d) => {
     const p = progressMap.get(d.id) ?? null;
-    return !isR1Complete(p) || !isR2Complete(p);
+    if (bookRound === '2') return !isR2Complete(p);
+    return !isR1Complete(p);
   }) ?? sortedDays[0];
 
   const currentProgress = currentDay ? (progressMap.get(currentDay.id) ?? null) : null;
@@ -80,15 +86,14 @@ export function VocaDashboard({ userName, books, days, progressList, wordCount, 
 
   // Current day stages
   const r1Stages = getR1Stages(currentProgress);
-  const r2Stages = getR2Stages(currentProgress);
-  const r1Done = isR1Complete(currentProgress);
+  const r2Stages = bookR1Complete ? getR2Stages(currentProgress) : getR2Stages(null);
   const r1AllDone = r1Stages.every((s) => s.status === 'done');
   const r2AllDone = r2Stages.every((s) => s.status === 'done');
 
   const activeR1 = r1Stages.find((s) => s.status === 'active');
   const activeR2 = r2Stages.find((s) => s.status === 'active');
-  const ctaStage = activeR1 ?? activeR2;
-  const ctaRound = activeR1 ? '1' : '2';
+  const ctaStage = bookRound === '1' ? activeR1 : activeR2;
+  const ctaRound = bookRound;
 
   const daysByBook = new Map<string, { book: VocaBook; days: VocaDay[] }>();
   for (const book of books) {
@@ -167,20 +172,20 @@ export function VocaDashboard({ userName, books, days, progressList, wordCount, 
 
       {/* ── Flow Card: Round 2 ── */}
       {currentDay && (
-        <div className={`rounded-2xl border border-gray-200 bg-white p-5 md:p-7 ${!r1Done ? 'opacity-55' : ''}`}>
+        <div className={`rounded-2xl border border-gray-200 bg-white p-5 md:p-7 ${!bookR1Complete ? 'opacity-55' : ''}`}>
           {/* Header */}
           <div className="flex items-center justify-between mb-5">
             <div>
               <div className="text-base font-bold flex items-center gap-1.5"><BookMarked className="h-4 w-4" /> 2회독 — 유의어 · 반의어 · 숙어</div>
               <div className="text-sm text-gray-400 mt-0.5">
-                {r1Done ? '3단계를 모두 통과해야 2회독이 완료됩니다' : '유료 플랜 전용 · 업그레이드는 선생님과 상담하세요'}
+                {bookR1Complete ? '3단계를 모두 통과해야 2회독이 완료됩니다' : '전체 Day 1회독 완료 후 시작됩니다'}
               </div>
             </div>
             <span className="shrink-0 rounded-full px-3.5 py-1 text-xs font-bold" style={{
-              background: r2AllDone ? '#DCFCE7' : !r1Done ? '#F3F4F6' : '#F5F3FF',
-              color: r2AllDone ? COLORS.green : !r1Done ? '#9CA3AF' : '#7C3AED',
+              background: r2AllDone ? '#DCFCE7' : !bookR1Complete ? '#F3F4F6' : '#F5F3FF',
+              color: r2AllDone ? COLORS.green : !bookR1Complete ? '#9CA3AF' : '#7C3AED',
             }}>
-              {r2AllDone ? '완료 ✓' : !r1Done ? '잠김' : '진행 중'}
+              {r2AllDone ? '완료 ✓' : !bookR1Complete ? '잠김' : '진행 중'}
             </span>
           </div>
 
@@ -231,13 +236,19 @@ export function VocaDashboard({ userName, books, days, progressList, wordCount, 
           <div className="space-y-3">
             {sortedDays.map((day) => {
               const p = progressMap.get(day.id) ?? null;
-              const stagesComplete =
+              const r1Steps =
                 (p?.flashcard_completed ? 1 : 0) +
                 ((p?.quiz_score ?? 0) >= 80 ? 1 : 0) +
                 ((p?.spelling_score ?? 0) >= 80 ? 1 : 0) +
                 (p?.matching_completed ? 1 : 0);
-              const pct = Math.round((stagesComplete / 4) * 100);
-              const isDone = isR1Complete(p);
+              const r2Steps =
+                (p?.round2_flashcard_completed ? 1 : 0) +
+                ((p?.round2_quiz_score ?? 0) >= 80 ? 1 : 0) +
+                (p?.round2_matching_completed ? 1 : 0);
+              const totalSteps = bookRound === '2' ? 3 : 4;
+              const stepsNow = bookRound === '2' ? r2Steps : r1Steps;
+              const pct = Math.round((stepsNow / totalSteps) * 100);
+              const isDone = bookRound === '2' ? isR2Complete(p) : isR1Complete(p);
               const isActive = currentDay?.id === day.id;
 
               return (
@@ -250,15 +261,15 @@ export function VocaDashboard({ userName, books, days, progressList, wordCount, 
                           {submissionStatuses[day.id] === 'reviewed' ? '확인됨' : '제출함'}
                         </span>
                       )}
-                      <span className="text-xs" style={{ color: isDone ? COLORS.green : isActive ? '#7C3AED' : '#9CA3AF', fontWeight: isDone || isActive ? 700 : 400 }}>
-                        {isDone ? '100%' : isActive ? '진행 중' : '잠김'}
+                      <span className="text-xs" style={{ color: isDone ? COLORS.green : isActive ? '#7C3AED' : stepsNow > 0 ? '#6B7280' : '#9CA3AF', fontWeight: isDone || isActive ? 700 : 400 }}>
+                        {isDone ? '100%' : isActive ? '진행 중' : stepsNow > 0 ? `${pct}%` : '—'}
                       </span>
                     </span>
                   </div>
                   <div className="h-2 w-full rounded-full bg-gray-100 overflow-hidden">
                     <div className="h-full rounded-full transition-all" style={{
                       width: `${pct}%`,
-                      background: isDone ? `linear-gradient(to right, ${COLORS.progressDone}, #4DD9C0)` : isActive ? COLORS.progressActive : '#E5E7EB',
+                      background: isDone ? `linear-gradient(to right, ${COLORS.progressDone}, #4DD9C0)` : stepsNow > 0 ? COLORS.progressActive : '#E5E7EB',
                     }} />
                   </div>
                 </div>
