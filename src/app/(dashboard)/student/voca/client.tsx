@@ -53,7 +53,6 @@ export function VocaHomeClient({ books, days, progressList, submissionStatuses =
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
   const [roundMode, setRoundMode] = useState<RoundMode>(initialRoundMode);
-  const [showModeSelector, setShowModeSelector] = useState(false);
 
   const defaultBookId = (initialBookId && books.some((b) => b.id === initialBookId))
     ? initialBookId
@@ -100,7 +99,6 @@ export function VocaHomeClient({ books, days, progressList, submissionStatuses =
 
   const handleModeChange = async (mode: RoundMode) => {
     setRoundMode(mode);
-    setShowModeSelector(false);
     try {
       await fetch('/api/voca/round-mode', {
         method: 'PATCH',
@@ -141,12 +139,6 @@ export function VocaHomeClient({ books, days, progressList, submissionStatuses =
                 {bookCurrentRound}회독
               </span>
             )}
-            <button
-              onClick={() => setShowModeSelector((v) => !v)}
-              className="text-[11px] font-semibold px-2 py-0.5 rounded-full bg-white/15 text-white/80 hover:bg-white/25 transition-colors"
-            >
-              {roundMode === 'book' ? '책 전체 모드' : 'Day별 완벽 모드'} ▾
-            </button>
           </div>
           <h1 className="text-white text-2xl md:text-3xl font-extrabold leading-tight mb-1">
             {selectedBook?.title || '올킬보카'}
@@ -167,59 +159,43 @@ export function VocaHomeClient({ books, days, progressList, submissionStatuses =
         </div>
       </div>
 
-      {/* Round mode selector */}
-      {showModeSelector && (
-        <div className="rounded-2xl border border-indigo-100 bg-white p-4 space-y-3 shadow-lg">
-          <p className="text-sm font-bold text-gray-800">학습 방식을 선택하세요</p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+      {/* Round mode toggle */}
+      <div className="rounded-2xl border bg-white p-4 space-y-3">
+        <div className="flex items-center justify-between">
+          <p className="text-sm font-bold text-gray-800">학습 방식</p>
+          <div className="flex rounded-lg border border-gray-200 overflow-hidden">
             <button
               onClick={() => handleModeChange('book')}
-              disabled={isPending}
-              className={`text-left rounded-xl border-2 p-4 transition-all ${
+              disabled={isPending || roundMode === 'book'}
+              className={`flex items-center gap-1.5 px-4 py-2 text-sm font-semibold transition-colors ${
                 roundMode === 'book'
-                  ? 'border-indigo-500 bg-indigo-50'
-                  : 'border-gray-200 bg-white hover:border-gray-300'
+                  ? 'bg-indigo-600 text-white'
+                  : 'bg-white text-gray-500 hover:bg-gray-50'
               }`}
             >
-              <div className="flex items-center gap-2 mb-2">
-                <BookOpen className="h-5 w-5 text-indigo-500" />
-                <span className="text-sm font-bold text-gray-900">책 전체 모드</span>
-                {roundMode === 'book' && <span className="text-[10px] font-bold text-indigo-600 bg-indigo-100 px-1.5 py-0.5 rounded-full">선택됨</span>}
-              </div>
-              <p className="text-xs text-gray-500 leading-relaxed">
-                전체 Day를 <strong>1회독</strong>으로 한 번 훑은 뒤<br />
-                다시 처음부터 <strong>2회독</strong>으로 반복
-              </p>
-              <p className="text-[11px] text-indigo-500 font-medium mt-2">
-                Day 1 → Day 2 → ... → Day 30 (1회독)<br />
-                Day 1 → Day 2 → ... → Day 30 (2회독)
-              </p>
+              <BookOpen className="h-4 w-4" />
+              책 전체
             </button>
             <button
               onClick={() => handleModeChange('day')}
-              disabled={isPending}
-              className={`text-left rounded-xl border-2 p-4 transition-all ${
+              disabled={isPending || roundMode === 'day'}
+              className={`flex items-center gap-1.5 px-4 py-2 text-sm font-semibold transition-colors ${
                 roundMode === 'day'
-                  ? 'border-violet-500 bg-violet-50'
-                  : 'border-gray-200 bg-white hover:border-gray-300'
+                  ? 'bg-violet-600 text-white'
+                  : 'bg-white text-gray-500 hover:bg-gray-50'
               }`}
             >
-              <div className="flex items-center gap-2 mb-2">
-                <BookMarked className="h-5 w-5 text-violet-500" />
-                <span className="text-sm font-bold text-gray-900">Day별 완벽 모드</span>
-                {roundMode === 'day' && <span className="text-[10px] font-bold text-violet-600 bg-violet-100 px-1.5 py-0.5 rounded-full">선택됨</span>}
-              </div>
-              <p className="text-xs text-gray-500 leading-relaxed">
-                각 Day를 <strong>1회독+2회독</strong> 완벽히 마치고<br />
-                다음 Day로 넘어가는 방식
-              </p>
-              <p className="text-[11px] text-violet-500 font-medium mt-2">
-                Day 1 (1회독→2회독) → Day 2 (1회독→2회독) → ...
-              </p>
+              <BookMarked className="h-4 w-4" />
+              Day별 완벽
             </button>
           </div>
         </div>
-      )}
+        <p className="text-xs text-gray-400">
+          {roundMode === 'book'
+            ? '전체 Day를 1회독으로 훑은 뒤, 다시 처음부터 2회독으로 반복합니다.'
+            : '각 Day를 1회독+2회독 완벽히 마치고 다음 Day로 넘어갑니다.'}
+        </p>
+      </div>
 
       {/* Book selector */}
       {books.length > 1 && (
