@@ -52,22 +52,22 @@ export function NeonFlashcard({ vocabulary, onComplete }: NeonFlashcardProps) {
       utterance.rate = 0.85;
       utterance.onend = () => {
         setIsSpeakingWord(false);
+        // 2) 단어 발음 직후 → 뜻 표시
+        setShowMeaning(true);
         if (hasSentence || hasAudio) {
-          // 2) 예문 표시 후 → 예문 재생
-          if (hasSentence) setShowSentence(true);
-          setTimeout(() => play(vocab.example_sentence || vocab.front_text), 400);
-        } else {
-          // 예문/TTS 없으면 단어 발음만으로 완료 → 뜻 표시
-          setShowMeaning(true);
+          // 3) 잠시 후 예문 표시 → 예문 재생
+          setTimeout(() => {
+            if (hasSentence) setShowSentence(true);
+            setTimeout(() => play(vocab.example_sentence || vocab.front_text), 300);
+          }, 600);
         }
       };
       utterance.onerror = () => {
         setIsSpeakingWord(false);
+        setShowMeaning(true);
         if (hasSentence || hasAudio) {
           if (hasSentence) setShowSentence(true);
           play(vocab.example_sentence || vocab.front_text);
-        } else {
-          setShowMeaning(true);
         }
       };
       window.speechSynthesis.speak(utterance);
