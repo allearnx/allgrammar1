@@ -125,13 +125,26 @@ export function DashboardProvider({
     // 책 단위 1회독 완료 여부
     const bookR1Complete = sortedDays.length > 0 && sortedDays.every((d) => isR1Complete(vocaProgressMap.get(d.id) ?? null));
 
+    // 가장 최근 학습한 Day (updated_at 기준)
+    const recentDay = sortedDays
+      .filter((d) => vocaProgressMap.has(d.id))
+      .sort((a, b) => {
+        const pa = vocaProgressMap.get(a.id)!;
+        const pb = vocaProgressMap.get(b.id)!;
+        return pb.updated_at.localeCompare(pa.updated_at);
+      })[0];
+
     let currentVocaDay: VocaDay | undefined;
     let r1Done: boolean;
     let currentRound: '1' | '2';
 
     if (roundMode === 'day') {
-      // Day별 완벽 모드: 각 Day의 R1+R2 모두 완료 후 다음 Day
-      currentVocaDay = sortedDays.find((d) => {
+      // Day별 완벽 모드
+      const recentIncomplete = recentDay && (
+        !isR1Complete(vocaProgressMap.get(recentDay.id) ?? null) ||
+        !isR2Complete(vocaProgressMap.get(recentDay.id) ?? null)
+      );
+      currentVocaDay = (recentDay && recentIncomplete) ? recentDay : sortedDays.find((d) => {
         const p = vocaProgressMap.get(d.id) ?? null;
         return !isR1Complete(p) || !isR2Complete(p);
       }) ?? sortedDays[0];
@@ -139,9 +152,14 @@ export function DashboardProvider({
       r1Done = isR1Complete(curP);
       currentRound = r1Done ? '2' : '1';
     } else {
-      // 책 전체 모드: 전체 Day 1회독 → 전체 Day 2회독
+      // 책 전체 모드
       currentRound = bookR1Complete ? '2' : '1';
-      currentVocaDay = sortedDays.find((d) => {
+      const isRecentIncomplete = recentDay && (
+        currentRound === '2'
+          ? !isR2Complete(vocaProgressMap.get(recentDay.id) ?? null)
+          : !isR1Complete(vocaProgressMap.get(recentDay.id) ?? null)
+      );
+      currentVocaDay = (recentDay && isRecentIncomplete) ? recentDay : sortedDays.find((d) => {
         const p = vocaProgressMap.get(d.id) ?? null;
         if (currentRound === '2') return !isR2Complete(p);
         return !isR1Complete(p);

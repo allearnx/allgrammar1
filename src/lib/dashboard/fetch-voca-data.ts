@@ -59,7 +59,16 @@ export async function fetchVocaDashboardData(
   const allRound1Done = sortedDays.length > 0 && sortedDays.every((d) => {
     return isR1Complete(progressMap.get(d.id) ?? null);
   });
-  const currentDay = sortedDays.find((d) => {
+  // 가장 최근 학습한 Day 우선
+  const recentDay = sortedDays
+    .filter((d) => progressMap.has(d.id))
+    .sort((a, b) => (progressMap.get(b.id)!.updated_at ?? '').localeCompare(progressMap.get(a.id)!.updated_at ?? ''))[0];
+  const isRecentIncomplete = recentDay && (
+    allRound1Done
+      ? !isR2Complete(progressMap.get(recentDay.id) ?? null)
+      : !isR1Complete(progressMap.get(recentDay.id) ?? null)
+  );
+  const currentDay = (recentDay && isRecentIncomplete) ? recentDay : sortedDays.find((d) => {
     const p = progressMap.get(d.id) ?? null;
     if (allRound1Done) return !isR2Complete(p);
     return !isR1Complete(p);
