@@ -72,6 +72,7 @@ export const NAV_CONFIG: Record<string, NavGroup[]> = {
       items: [
         { href: '/student/wrong-answers', label: '오답모음', icon: ListChecks },
         { href: '/student/materials', label: '학습자료', icon: FileDown },
+        { href: '/student/announcements', label: '공지사항', icon: Megaphone },
       ],
     },
   ],

@@ -35,7 +35,7 @@ const roleBadgeColors: Record<string, string> = {
 export function Topbar({ user, title }: TopbarProps) {
   const isPaid = useIsPaid();
   const showNotifications =
-    user.role === 'boss' || (user.role !== 'student' && isPaid !== false);
+    user.role === 'boss' || user.role === 'student' || isPaid !== false;
 
   return (
     <header className={cn(

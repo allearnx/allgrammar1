@@ -4,6 +4,7 @@ import { createClient } from '@/lib/supabase/server';
 import { Sidebar } from '@/components/layout/sidebar';
 import { PaidStatusProvider } from '@/components/layout/paid-status-context';
 import { PresenceTracker } from '@/components/layout/presence-tracker';
+import { AnnouncementBanner } from '@/components/dashboard/announcement-banner';
 import { getPlanContext } from '@/lib/billing/get-plan-context';
 import { calculateStageStatuses } from '@/lib/naesin/stage-unlock';
 import { groupBy } from '@/lib/naesin/build-unit-summary';
@@ -64,6 +65,7 @@ export default async function DashboardLayout({
       <Sidebar user={user} services={services} naesinTree={naesinTree} />
       <main className="flex-1 overflow-y-auto overscroll-contain">
         {children}
+        {user.role === 'student' && <AnnouncementBanner />}
       </main>
       <a
         href="http://pf.kakao.com/_iLxcLG/chat"

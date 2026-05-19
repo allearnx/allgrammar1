@@ -38,6 +38,7 @@ import { ANNOUNCEMENT_TYPE_LABELS } from '@/types/announcement';
 
 const TYPES: AnnouncementType[] = ['info', 'warning', 'important'];
 const TARGET_ROLES = [
+  { value: 'student', label: '학생' },
   { value: 'admin', label: '원장' },
   { value: 'teacher', label: '선생님' },
 ];
@@ -173,7 +174,7 @@ export function AnnouncementsClient({ announcements }: { announcements: Announce
                   <div className="flex gap-1">
                     {a.target_roles.map((r) => (
                       <Badge key={r} variant="outline" className="text-[11px]">
-                        {r === 'admin' ? '원장' : '선생님'}
+                        {r === 'student' ? '학생' : r === 'admin' ? '원장' : '선생님'}
                       </Badge>
                     ))}
                   </div>

@@ -5,7 +5,7 @@ import { dbResult } from '@/lib/api/errors';
 
 // GET: 공개된 공지 + 읽음 여부 조회
 export const GET = createApiHandler(
-  { roles: ['teacher', 'admin', 'boss'], hasBody: false },
+  { roles: ['student', 'teacher', 'admin', 'boss'], hasBody: false },
   async ({ user, supabase }) => {
     // Fetch published announcements where user's role is in target_roles
     const announcements = dbResult(
@@ -46,7 +46,7 @@ export const GET = createApiHandler(
 
 // PATCH: 읽음 처리
 export const PATCH = createApiHandler(
-  { roles: ['teacher', 'admin', 'boss'], schema: announcementReadSchema },
+  { roles: ['student', 'teacher', 'admin', 'boss'], schema: announcementReadSchema },
   async ({ user, body, supabase }) => {
     dbResult(
       await supabase
