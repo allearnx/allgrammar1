@@ -3,6 +3,7 @@ import { createApiHandler, dbResult } from '@/lib/api';
 import { requireContentPermission } from '@/lib/api/require-content-permission';
 import { templateCreateSchema, templatePatchSchema } from '@/lib/api/schemas';
 import { regradeSheet } from '@/lib/naesin/regrade-sheet';
+import { createAdminClient } from '@/lib/supabase/admin';
 
 const ADMIN_ROLES = ['teacher', 'admin', 'boss'] as const;
 
@@ -32,8 +33,9 @@ export const POST = createApiHandler(
   async ({ body, supabase, user }) => {
     await requireContentPermission(user, supabase);
     const { title, templateTopic, questions, answerKey, category, mode } = body;
+    const admin = createAdminClient();
 
-    const inserted = dbResult(await supabase
+    const inserted = dbResult(await admin
       .from('naesin_templates')
       .insert({
         title,
@@ -66,8 +68,9 @@ export const PATCH = createApiHandler(
     if (Object.keys(updates).length === 0) {
       return NextResponse.json({ error: 'nothing to update' }, { status: 400 });
     }
+    const admin = createAdminClient();
 
-    const updated = dbResult(await supabase
+    const updated = dbResult(await admin
       .from('naesin_templates')
       .update(updates)
       .eq('id', id)
@@ -110,8 +113,9 @@ export const DELETE = createApiHandler(
     if (!id) {
       return NextResponse.json({ error: 'id required' }, { status: 400 });
     }
+    const admin = createAdminClient();
 
-    dbResult(await supabase
+    dbResult(await admin
       .from('naesin_templates')
       .delete()
       .eq('id', id));
