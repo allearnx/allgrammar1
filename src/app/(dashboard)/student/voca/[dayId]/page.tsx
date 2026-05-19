@@ -5,6 +5,7 @@ import { Topbar } from '@/components/layout/topbar';
 import { VocaDayClient } from './client';
 import { getPlanContext } from '@/lib/billing/get-plan-context';
 import { canUseFeature } from '@/lib/billing/feature-gate';
+import { isR1Complete } from '@/lib/dashboard/voca-helpers';
 import type { VocaVocabulary, VocaStudentProgress, VocaDay } from '@/types/voca';
 
 export default async function StudentVocaDayPage({
@@ -76,9 +77,7 @@ export default async function StudentVocaDayPage({
     : { data: [] };
   const progMap = new Map((allProgress || []).map((p) => [p.day_id, p]));
   const bookRound1Complete = allDayIds.length > 0 && allDayIds.every((id) => {
-    const p = progMap.get(id);
-    if (!p) return false;
-    return p.flashcard_completed && (p.quiz_score ?? 0) >= 80 && (p.spelling_score ?? 0) >= 80 && p.matching_completed;
+    return isR1Complete((progMap.get(id) as VocaStudentProgress | undefined) ?? null);
   });
 
   // Get wrong words from quiz results and matching submissions

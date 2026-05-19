@@ -1,5 +1,6 @@
 import type { SupabaseClient } from '@supabase/supabase-js';
 import type { VocaBook, VocaDay, VocaStudentProgress } from '@/types/voca';
+import { isR1Complete, isR2Complete } from '@/lib/dashboard/voca-helpers';
 
 export interface VocaDashboardData {
   books: VocaBook[];
@@ -56,19 +57,12 @@ export async function fetchVocaDashboardData(
   const sortedDays = [...days].sort((a, b) => a.sort_order - b.sort_order);
   const progressMap = new Map(progressList.map((p) => [p.day_id, p]));
   const allRound1Done = sortedDays.length > 0 && sortedDays.every((d) => {
-    const p = progressMap.get(d.id);
-    if (!p) return false;
-    return p.flashcard_completed && (p.quiz_score ?? 0) >= 80 && (p.spelling_score ?? 0) >= 80 && p.matching_completed;
+    return isR1Complete(progressMap.get(d.id) ?? null);
   });
   const currentDay = sortedDays.find((d) => {
-    const p = progressMap.get(d.id);
-    if (!p) return true;
-    if (allRound1Done) {
-      // 2회독 모드: 2회독 미완료 Day 찾기
-      return !p.round2_flashcard_completed || (p.round2_quiz_score ?? 0) < 80 || !p.round2_matching_completed;
-    }
-    // 1회독 모드: 1회독 미완료 Day 찾기
-    return !p.flashcard_completed || (p.quiz_score ?? 0) < 80 || (p.spelling_score ?? 0) < 80 || !p.matching_completed;
+    const p = progressMap.get(d.id) ?? null;
+    if (allRound1Done) return !isR2Complete(p);
+    return !isR1Complete(p);
   }) ?? sortedDays[0];
 
   let wordCount = 0;

@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { Badge } from '@/components/ui/badge';
 import { CheckCircle, Lock, ChevronRight } from 'lucide-react';
 import { PetWidget } from '@/components/voca/pet/pet-widget';
+import { isR1Complete, isR2Complete } from '@/lib/dashboard/voca-helpers';
 import type { VocaBook, VocaDay, VocaStudentProgress } from '@/types/voca';
 
 interface VocaHomeClientProps {
@@ -66,7 +67,7 @@ export function VocaHomeClient({ books, days, progressList, submissionStatuses =
   // 책 단위 회독 판단: 모든 Day 1회독 완료 → 2회독 모드
   const bookRound1Complete = useMemo(() => {
     const targetDays = freeDayLimit > 0 ? filteredDays.slice(0, freeDayLimit) : filteredDays;
-    return targetDays.length > 0 && targetDays.every((d) => getStepsDone(progressMap.get(d.id)) === 4);
+    return targetDays.length > 0 && targetDays.every((d) => isR1Complete(progressMap.get(d.id) ?? null));
   }, [filteredDays, progressMap, freeDayLimit]);
   const currentRound: '1' | '2' = (!round2Locked && bookRound1Complete) ? '2' : '1';
 
@@ -74,9 +75,9 @@ export function VocaHomeClient({ books, days, progressList, submissionStatuses =
   const completedCount = useMemo(() => {
     const target = filteredDays.slice(0, freeDayLimit > 0 ? freeDayLimit : undefined);
     if (currentRound === '2') {
-      return target.filter((day) => getRound2StepsDone(progressMap.get(day.id)) === 3).length;
+      return target.filter((day) => isR2Complete(progressMap.get(day.id) ?? null)).length;
     }
-    return target.filter((day) => getStepsDone(progressMap.get(day.id)) === 4).length;
+    return target.filter((day) => isR1Complete(progressMap.get(day.id) ?? null)).length;
   }, [filteredDays, progressMap, freeDayLimit, currentRound]);
 
   const selectedBook = books.find((b) => b.id === selectedBookId);
@@ -168,7 +169,7 @@ export function VocaHomeClient({ books, days, progressList, submissionStatuses =
           {filteredDays.map((day, index) => {
             const prog = progressMap.get(day.id);
             const steps = getStepsDone(prog);
-            const completed = steps === 4;
+            const completed = isR1Complete(prog ?? null);
             const locked = freeDayLimit > 0 && index >= freeDayLimit;
 
             if (locked) {
@@ -187,7 +188,7 @@ export function VocaHomeClient({ books, days, progressList, submissionStatuses =
             }
 
             const r2Steps = getRound2StepsDone(prog);
-            const r2Completed = r2Steps === 3;
+            const r2Completed = isR2Complete(prog ?? null);
             const isCompleted = currentRound === '2' ? r2Completed : completed;
             const stepsNow = currentRound === '2' ? r2Steps : steps;
             const totalSteps = currentRound === '2' ? 3 : 4;
