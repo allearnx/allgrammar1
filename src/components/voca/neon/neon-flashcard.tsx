@@ -39,21 +39,33 @@ export function NeonFlashcard({ vocabulary, onComplete }: NeonFlashcardProps) {
   const handlePlay = () => {
     setShowMeaning(false);
 
+    const hasSentence = !!vocab.example_sentence;
+    const hasAudio = !!vocab.audio_url;
+
     // 1) 단어 먼저 읽기 (Web Speech API)
     if (typeof window !== 'undefined' && window.speechSynthesis) {
       setIsSpeakingWord(true);
-      window.speechSynthesis.cancel(); // 이전 발화 정리
+      window.speechSynthesis.cancel();
       const utterance = new SpeechSynthesisUtterance(vocab.front_text);
       utterance.lang = 'en-US';
       utterance.rate = 0.85;
       utterance.onend = () => {
         setIsSpeakingWord(false);
-        // 2) 약간의 간격 후 예문 재생
-        setTimeout(() => play(vocab.example_sentence || vocab.front_text), 400);
+        if (hasSentence || hasAudio) {
+          // 2) 예문이나 TTS 오디오가 있으면 → 예문 재생
+          setTimeout(() => play(vocab.example_sentence || vocab.front_text), 400);
+        } else {
+          // 예문/TTS 없으면 단어 발음만으로 완료 → 뜻 표시
+          setShowMeaning(true);
+        }
       };
       utterance.onerror = () => {
         setIsSpeakingWord(false);
-        play(vocab.example_sentence || vocab.front_text);
+        if (hasSentence || hasAudio) {
+          play(vocab.example_sentence || vocab.front_text);
+        } else {
+          setShowMeaning(true);
+        }
       };
       window.speechSynthesis.speak(utterance);
     } else {
@@ -123,9 +135,8 @@ export function NeonFlashcard({ vocabulary, onComplete }: NeonFlashcardProps) {
               </div>
             ) : (
               <p className={cn(
-                'text-4xl font-bold text-center transition-all duration-200',
-                isSpeakingWord && 'scale-110',
-                currentWordIndex >= 0 ? 'neon-text-gold' : 'text-gray-800',
+                'text-4xl font-bold text-center transition-all duration-300',
+                (isSpeakingWord || isPlaying) ? 'scale-110 neon-text-cyan' : 'text-gray-800',
               )}>
                 {vocab.front_text}
               </p>
