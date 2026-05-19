@@ -109,20 +109,7 @@ export function NeonFlashcard({ vocabulary, onComplete }: NeonFlashcardProps) {
             transition={{ duration: 0.25 }}
             className="w-full max-w-lg space-y-6"
           >
-            {/* 단어 + 품사 */}
-            <div className="text-center space-y-1">
-              <p className={cn(
-                'text-3xl font-bold neon-text-gold transition-all duration-200',
-                isSpeakingWord && 'scale-110',
-              )}>
-                {vocab.front_text}
-              </p>
-              {vocab.part_of_speech && (
-                <p className="text-sm text-gray-400">{vocab.part_of_speech}</p>
-              )}
-            </div>
-
-            {/* 예문 */}
+            {/* 예문 or 단어 */}
             {vocab.example_sentence ? (
               <div className="space-y-2">
                 <NeonSentenceDisplay
@@ -134,7 +121,20 @@ export function NeonFlashcard({ vocabulary, onComplete }: NeonFlashcardProps) {
                   <p className="text-center text-xs text-gray-300">{vocab.example_sentence_ko}</p>
                 )}
               </div>
-            ) : null}
+            ) : (
+              <p className={cn(
+                'text-4xl font-bold text-center transition-all duration-200',
+                isSpeakingWord && 'scale-110',
+                currentWordIndex >= 0 ? 'neon-text-gold' : 'text-gray-800',
+              )}>
+                {vocab.front_text}
+              </p>
+            )}
+
+            {/* 품사 */}
+            {vocab.part_of_speech && (
+              <p className="text-sm text-gray-400 text-center">{vocab.part_of_speech}</p>
+            )}
 
             {/* TTS 재생 버튼 */}
             <div className="flex justify-center">
