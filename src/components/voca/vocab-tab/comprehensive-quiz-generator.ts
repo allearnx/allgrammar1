@@ -12,7 +12,7 @@ export type QuestionType =
   | 'idiom_en_to_ko'   // 6. 숙어 영→한
   | 'idiom_ko_to_en'   // 7. 숙어 한→영
   | 'idiom_example_translate' // 8. 숙어 예문 해석
-  | 'idiom_writing';   // 9. 숙어 영작
+  | 'word_arrange';    // 9. 단어 배열 영작
 
 export interface BaseQuestion {
   type: QuestionType;
@@ -33,10 +33,15 @@ export interface ShortQuestion extends BaseQuestion {
 }
 
 export interface AIQuestion extends BaseQuestion {
-  type: 'idiom_ko_to_en' | 'idiom_example_translate' | 'idiom_writing';
+  type: 'idiom_ko_to_en' | 'idiom_example_translate';
 }
 
-export type Question = MCQuestion | ShortQuestion | AIQuestion;
+export interface ArrangeQuestion extends BaseQuestion {
+  type: 'word_arrange';
+  scrambledWords: string[];
+}
+
+export type Question = MCQuestion | ShortQuestion | AIQuestion | ArrangeQuestion;
 
 export interface QuestionResult {
   question: Question;
@@ -169,6 +174,25 @@ export function generateQuestions(vocabulary: VocaVocabulary[]): Question[] {
         word: v.front_text,
         prompt: `다음 문장을 한국어로 해석하세요.\n"${idiom.example_en}"`,
         reference: idiom.example_ko!,
+      });
+    }
+  }
+
+  // 5. 단어 배열 영작 (max 1) — 한국어 해석 + 셔플된 영단어 → 올바른 순서로 배열
+  const arrangeCandidates = shuffle(
+    vocabulary.filter((v) => v.example_sentence && v.example_sentence_ko && !usedWords.has(v.front_text))
+  );
+  if (arrangeCandidates.length > 0) {
+    const v = arrangeCandidates[0];
+    const words = v.example_sentence!.replace(/[.!?,"';:]/g, '').split(/\s+/).filter(Boolean);
+    if (words.length >= 3) {
+      usedWords.add(v.front_text);
+      questions.push({
+        type: 'word_arrange',
+        word: v.front_text,
+        prompt: `다음 뜻에 맞게 단어를 배열하세요.\n"${v.example_sentence_ko}"`,
+        reference: v.example_sentence!,
+        scrambledWords: shuffle(words),
       });
     }
   }

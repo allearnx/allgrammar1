@@ -95,6 +95,17 @@ export function ComprehensiveQuiz({ vocabulary, dayId: _dayId, onComplete }: Com
             score: isCorrect ? 100 : 0,
             feedback: isCorrect ? '정답!' : `정답: ${shortQ.reference}`,
           };
+        } else if (q.type === 'word_arrange') {
+          const selected: string[] = answer ? JSON.parse(answer) : [];
+          const studentSentence = selected.join(' ');
+          const refWords = q.reference.replace(/[.!?,"';:]/g, '').split(/\s+/).filter(Boolean);
+          const isCorrect = selected.length === refWords.length && selected.every((w, idx) => w.toLowerCase() === refWords[idx].toLowerCase());
+          questionResults[i] = {
+            question: q,
+            studentAnswer: studentSentence || '(미응답)',
+            score: isCorrect ? 100 : 0,
+            feedback: isCorrect ? '정답!' : `정답: ${q.reference}`,
+          };
         } else {
           // AI question - collect for batch
           aiQuestions.push({ idx: i, question: q as AIQuestion, answer });
