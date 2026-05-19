@@ -2,9 +2,9 @@
 
 import Link from 'next/link';
 
-export default function AllkillPayButton({ courseId, price }: { courseId?: string; price?: number }) {
+export default function AllkillPayButton({ courseId, price, label = '올킬보카 개인 구독' }: { courseId?: string; price?: number; label?: string }) {
   const paymentUrl = courseId && price
-    ? `/payment?courseId=${courseId}&name=${encodeURIComponent('올킬보카 개인 구독')}&price=${price}`
+    ? `/payment?courseId=${courseId}&name=${encodeURIComponent(label)}&price=${price}`
     : '/courses';
 
   return (

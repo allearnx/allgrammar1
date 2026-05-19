@@ -1,10 +1,17 @@
 import Link from 'next/link';
 import AllkillPayButton from '@/components/public/allkill-pay-button';
-import { C, freePlanFeatures, proPlanFeatures, proRoundSteps, academyFeatures } from '../_data';
+import { C, freePlanFeatures, selfStudyPlanFeatures, proPlanFeatures, proRoundSteps, academyFeatures } from '../_data';
 
 const KAKAO_URL = 'http://pf.kakao.com/_iLxcLG/chat';
 
-export default function PricingSection({ vocaCourseId, vocaCoursePrice }: { vocaCourseId?: string; vocaCoursePrice?: number }) {
+interface PricingSectionProps {
+  vocaCourseId?: string;
+  vocaCoursePrice?: number;
+  selfStudyCourseId?: string;
+  selfStudyCoursePrice?: number;
+}
+
+export default function PricingSection({ vocaCourseId, vocaCoursePrice, selfStudyCourseId, selfStudyCoursePrice }: PricingSectionProps) {
   return (
     <section id="price" className="allkill-section" style={{ padding: '96px 60px', background: 'white' }}>
       <div style={{ maxWidth: 1200, margin: '0 auto' }}>
@@ -38,9 +45,40 @@ export default function PricingSection({ vocaCourseId, vocaCoursePrice }: { voca
             </Link>
           </div>
 
+          {/* 셀프 스터디 */}
+          <div className="allkill-price-card" style={{ borderRadius: 20, padding: '40px 36px', border: '2px solid #0891B2', transition: 'transform 0.2s', display: 'flex', flexDirection: 'column' }}>
+            <div className="allkill-price-plan-label" style={{ color: C.gray400 }}>셀프 스터디</div>
+            <div className="allkill-montserrat allkill-price-amount" style={{ color: C.gray800 }}>월 24,000<span className="allkill-price-amount-unit" style={{ color: C.gray400 }}>원</span></div>
+            <div className="allkill-price-subtitle" style={{ color: C.gray400 }}>혼자서도 완벽하게</div>
+            <div className="allkill-price-notice" style={{ background: '#FEF9C3', border: '1px solid #FDE047', color: '#713F12' }}>
+              📚 고1·고2·고3 최근 5개년 모의고사 기출 단어<br />📖 주요 시중 교재 단어집 순차 수록 중
+            </div>
+            <div style={{ height: 1, background: '#F2F0FF', marginBottom: 28 }} />
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 14, marginBottom: 36, flex: 1 }}>
+              {selfStudyPlanFeatures.map((f) => (
+                <div key={f} className="allkill-price-feature" style={{ display: 'flex', alignItems: 'center', gap: 12, color: C.gray600 }}>
+                  <span style={{ color: '#4DD9C0', fontWeight: 700, fontSize: 15, flexShrink: 0 }}>✓</span> {f}
+                </div>
+              ))}
+              <div style={{ background: '#F5F3FF', borderRadius: 10, padding: '12px 16px', marginTop: 4 }}>
+                <div style={{ fontSize: 12, fontWeight: 700, color: C.lavenderDark, marginBottom: 8, letterSpacing: '0.5px' }}>1회독 + 2회독 전체 포함</div>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+                  {proRoundSteps.map((s) => (
+                    <div key={s.step} style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                      <span style={{ fontFamily: 'Montserrat, sans-serif', fontSize: 10, fontWeight: 900, color: 'white', background: s.round === 2 ? C.lavenderDark : '#0891B2', borderRadius: 4, padding: '2px 6px', flexShrink: 0 }}>{s.step}</span>
+                      <span style={{ fontSize: 13, fontWeight: 700, color: C.gray600 }}>{s.name}</span>
+                      <span style={{ fontSize: 11, color: C.gray400, marginLeft: 'auto' }}>{s.note}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+            <AllkillPayButton courseId={selfStudyCourseId} price={selfStudyCoursePrice} label="올킬보카 셀프 스터디" />
+          </div>
+
           {/* 개인 구독 */}
           <div className="allkill-price-card" style={{ borderRadius: 20, padding: '40px 36px', border: `2px solid ${C.lavender}`, boxShadow: '0 16px 48px rgba(167,139,250,0.18)', position: 'relative', transition: 'transform 0.2s', display: 'flex', flexDirection: 'column' }}>
-            <div style={{ position: 'absolute', top: -15, left: '50%', transform: 'translateX(-50%)', background: C.lavender, color: 'white', fontSize: 13, fontWeight: 700, padding: '5px 18px', borderRadius: 100, whiteSpace: 'nowrap' }}>🐣 얼리버드 특가</div>
+            <div style={{ position: 'absolute', top: -15, left: '50%', transform: 'translateX(-50%)', background: C.lavender, color: 'white', fontSize: 13, fontWeight: 700, padding: '5px 18px', borderRadius: 100, whiteSpace: 'nowrap' }}>🔥 가장 인기</div>
             <div className="allkill-price-plan-label" style={{ color: C.gray400 }}>1:1 온라인 관리</div>
             <div className="allkill-montserrat allkill-price-amount" style={{ color: C.gray800 }}>월 66,000<span className="allkill-price-amount-unit" style={{ color: C.gray400 }}>원</span></div>
             <div className="allkill-price-discount" style={{ color: C.gray400 }}>

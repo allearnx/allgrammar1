@@ -21,15 +21,18 @@ export const metadata: Metadata = {
 
 export default async function AllkillPage() {
   const supabase = createAdminClient();
-  const { data: vocaCourse } = await supabase
+  const { data: vocaCourses } = await supabase
     .from('courses')
     .select('id, price, title')
     .eq('category', 'voca')
     .eq('is_active', true)
-    .limit(1)
-    .single();
-  const vocaCourseId = vocaCourse?.id || undefined;
-  const vocaCoursePrice = vocaCourse?.price || undefined;
+    .order('price', { ascending: true });
+  const selfStudyCourse = vocaCourses?.find((c) => c.price <= 30000);
+  const managedCourse = vocaCourses?.find((c) => c.price > 30000);
+  const vocaCourseId = managedCourse?.id || undefined;
+  const vocaCoursePrice = managedCourse?.price || undefined;
+  const selfStudyCourseId = selfStudyCourse?.id || undefined;
+  const selfStudyCoursePrice = selfStudyCourse?.price || undefined;
   return (
     <>
       <style suppressHydrationWarning>{`
@@ -122,8 +125,8 @@ export default async function AllkillPage() {
         .allkill-flow-2 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
         .allkill-parent-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
         .allkill-stats-inner { display: flex; align-items: center; justify-content: space-between; gap: 40px; }
-        .allkill-price-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; align-items: stretch; }
-        @media (max-width: 1024px) { .allkill-price-grid { grid-template-columns: repeat(2, 1fr); } }
+        .allkill-price-grid { display: flex; gap: 24px; align-items: stretch; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; padding-bottom: 8px; padding-top: 20px; }
+        .allkill-price-grid > * { scroll-snap-align: start; flex: 0 0 calc((100% - 48px) / 3); min-width: 260px; }
         .allkill-vocab-bottom { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
 
         .allkill-card:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(167,139,250,0.12); }
@@ -153,7 +156,7 @@ export default async function AllkillPage() {
           .allkill-stats-nums { width: 100%; justify-content: space-between; gap: 10px; }
           .allkill-stat-item { padding: 20px 12px !important; flex: 1; }
           .allkill-stat-num { font-size: 28px !important; }
-          .allkill-price-grid { grid-template-columns: 1fr; max-width: 100%; }
+          .allkill-price-grid > * { flex: 0 0 85%; min-width: 0; }
           .allkill-price-card { padding: 28px 20px !important; }
           .allkill-vocab-bottom { grid-template-columns: 1fr; }
           .allkill-vocab-bottom > div { padding: 24px 20px !important; }
@@ -197,7 +200,7 @@ export default async function AllkillPage() {
         <FlowSection />
         <PersonaSection />
         <StatsSection />
-        <PricingSection vocaCourseId={vocaCourseId} vocaCoursePrice={vocaCoursePrice} />
+        <PricingSection vocaCourseId={vocaCourseId} vocaCoursePrice={vocaCoursePrice} selfStudyCourseId={selfStudyCourseId} selfStudyCoursePrice={selfStudyCoursePrice} />
         <GuideSection />
         <FinalCtaSection vocaCourseId={vocaCourseId} vocaCoursePrice={vocaCoursePrice} />
       </div>
