@@ -22,7 +22,7 @@ export interface BaseQuestion {
 }
 
 export interface MCQuestion extends BaseQuestion {
-  type: 'mc_synonym' | 'mc_antonym';
+  type: 'mc_synonym' | 'mc_antonym' | 'idiom_en_to_ko';
   choices: string[];
   correctIndex: number;
 }
@@ -33,7 +33,7 @@ export interface ShortQuestion extends BaseQuestion {
 }
 
 export interface AIQuestion extends BaseQuestion {
-  type: 'idiom_en_to_ko' | 'idiom_ko_to_en' | 'idiom_example_translate' | 'idiom_writing';
+  type: 'idiom_ko_to_en' | 'idiom_example_translate' | 'idiom_writing';
 }
 
 export type Question = MCQuestion | ShortQuestion | AIQuestion;
@@ -126,6 +126,9 @@ export function generateQuestions(vocabulary: VocaVocabulary[]): Question[] {
   }
 
   // 4. Idiom questions — 1 question per word (max 4), pick one random idiom per word
+  // Collect all idiom Korean meanings for MC distractors
+  const allIdiomKo = withIdioms.flatMap((v) => v.idioms!.map((id) => id.ko));
+
   let idiomCount = 0;
   for (const v of withIdioms) {
     if (idiomCount >= 4 || usedWords.has(v.front_text)) continue;
@@ -138,12 +141,28 @@ export function generateQuestions(vocabulary: VocaVocabulary[]): Question[] {
     const pickedType = types[Math.floor(Math.random() * types.length)];
 
     if (pickedType === 'idiom_en_to_ko') {
-      questions.push({
-        type: 'idiom_en_to_ko',
-        word: v.front_text,
-        prompt: `다음 숙어의 뜻을 한국어로 쓰세요.\n"${idiom.en}"`,
-        reference: idiom.ko,
-      });
+      const distractors = shuffle(allIdiomKo.filter((ko) => ko !== idiom.ko)).slice(0, 4);
+      if (distractors.length >= 4) {
+        const choices = shuffle([idiom.ko, ...distractors]);
+        questions.push({
+          type: 'idiom_en_to_ko',
+          word: v.front_text,
+          prompt: `다음 숙어의 뜻을 고르세요.\n"${idiom.en}"`,
+          reference: idiom.ko,
+          choices,
+          correctIndex: choices.indexOf(idiom.ko),
+        });
+      } else {
+        // 보기가 부족하면 예문 해석으로 대체
+        if (idiom.example_en && idiom.example_ko) {
+          questions.push({
+            type: 'idiom_example_translate',
+            word: v.front_text,
+            prompt: `다음 문장을 한국어로 해석하세요.\n"${idiom.example_en}"`,
+            reference: idiom.example_ko,
+          });
+        }
+      }
     } else {
       questions.push({
         type: 'idiom_example_translate',

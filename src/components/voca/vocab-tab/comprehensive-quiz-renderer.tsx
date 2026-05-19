@@ -17,7 +17,8 @@ export function QuestionRenderer({
 }) {
   switch (question.type) {
     case 'mc_synonym':
-    case 'mc_antonym': {
+    case 'mc_antonym':
+    case 'idiom_en_to_ko': {
       const mcQ = question as MCQuestion;
       return (
         <div className="space-y-3">

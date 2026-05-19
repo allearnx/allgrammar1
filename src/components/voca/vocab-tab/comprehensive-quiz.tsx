@@ -76,7 +76,7 @@ export function ComprehensiveQuiz({ vocabulary, dayId: _dayId, onComplete }: Com
         const q = questions[i];
         const answer = answers.get(i) || '';
 
-        if (q.type === 'mc_synonym' || q.type === 'mc_antonym') {
+        if (q.type === 'mc_synonym' || q.type === 'mc_antonym' || q.type === 'idiom_en_to_ko') {
           const mcQ = q as MCQuestion;
           const isCorrect = answer === String(mcQ.correctIndex);
           questionResults[i] = {
