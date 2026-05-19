@@ -52,15 +52,23 @@ export async function fetchVocaDashboardData(
   }
 
   // 4. Word count for current active day
+  // 책 단위 회독: 모든 Day 1회독 완료 → 2회독 모드
   const sortedDays = [...days].sort((a, b) => a.sort_order - b.sort_order);
   const progressMap = new Map(progressList.map((p) => [p.day_id, p]));
+  const allRound1Done = sortedDays.length > 0 && sortedDays.every((d) => {
+    const p = progressMap.get(d.id);
+    if (!p) return false;
+    return p.flashcard_completed && (p.quiz_score ?? 0) >= 80 && (p.spelling_score ?? 0) >= 80 && p.matching_completed;
+  });
   const currentDay = sortedDays.find((d) => {
     const p = progressMap.get(d.id);
     if (!p) return true;
-    const quizPass = (p.quiz_score ?? 0) >= 80;
-    const r1 = (p.flashcard_completed || quizPass) && quizPass && (p.spelling_score ?? 0) >= 80 && p.matching_completed;
-    const r2 = p.round2_flashcard_completed && (p.round2_quiz_score ?? 0) >= 80 && p.round2_matching_completed;
-    return !r1 || !r2;
+    if (allRound1Done) {
+      // 2회독 모드: 2회독 미완료 Day 찾기
+      return !p.round2_flashcard_completed || (p.round2_quiz_score ?? 0) < 80 || !p.round2_matching_completed;
+    }
+    // 1회독 모드: 1회독 미완료 Day 찾기
+    return !p.flashcard_completed || (p.quiz_score ?? 0) < 80 || (p.spelling_score ?? 0) < 80 || !p.matching_completed;
   }) ?? sortedDays[0];
 
   let wordCount = 0;

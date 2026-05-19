@@ -14,6 +14,7 @@ interface VocaHomeClientProps {
   submissionStatuses?: Record<string, string>;
   initialBookId?: string;
   freeDayLimit?: number;
+  round2Locked?: boolean;
 }
 
 const BOOK_COLORS = [
@@ -34,7 +35,16 @@ function getStepsDone(prog: VocaStudentProgress | undefined): number {
   return done;
 }
 
-export function VocaHomeClient({ books, days, progressList, submissionStatuses = {}, initialBookId, freeDayLimit = 0 }: VocaHomeClientProps) {
+function getRound2StepsDone(prog: VocaStudentProgress | undefined): number {
+  if (!prog) return 0;
+  let done = 0;
+  if (prog.round2_flashcard_completed) done++;
+  if ((prog.round2_quiz_score ?? 0) >= 80) done++;
+  if (prog.round2_matching_completed) done++;
+  return done;
+}
+
+export function VocaHomeClient({ books, days, progressList, submissionStatuses = {}, initialBookId, freeDayLimit = 0, round2Locked = false }: VocaHomeClientProps) {
   const defaultBookId = (initialBookId && books.some((b) => b.id === initialBookId))
     ? initialBookId
     : books[0]?.id || '';
@@ -53,12 +63,21 @@ export function VocaHomeClient({ books, days, progressList, submissionStatuses =
     return map;
   }, [progressList]);
 
+  // 책 단위 회독 판단: 모든 Day 1회독 완료 → 2회독 모드
+  const bookRound1Complete = useMemo(() => {
+    const targetDays = freeDayLimit > 0 ? filteredDays.slice(0, freeDayLimit) : filteredDays;
+    return targetDays.length > 0 && targetDays.every((d) => getStepsDone(progressMap.get(d.id)) === 4);
+  }, [filteredDays, progressMap, freeDayLimit]);
+  const currentRound: '1' | '2' = (!round2Locked && bookRound1Complete) ? '2' : '1';
+
   const totalDays = freeDayLimit > 0 ? Math.min(filteredDays.length, freeDayLimit) : filteredDays.length;
   const completedCount = useMemo(() => {
-    return filteredDays.slice(0, freeDayLimit > 0 ? freeDayLimit : undefined).filter((day) => {
-      return getStepsDone(progressMap.get(day.id)) === 4;
-    }).length;
-  }, [filteredDays, progressMap, freeDayLimit]);
+    const target = filteredDays.slice(0, freeDayLimit > 0 ? freeDayLimit : undefined);
+    if (currentRound === '2') {
+      return target.filter((day) => getRound2StepsDone(progressMap.get(day.id)) === 3).length;
+    }
+    return target.filter((day) => getStepsDone(progressMap.get(day.id)) === 4).length;
+  }, [filteredDays, progressMap, freeDayLimit, currentRound]);
 
   const selectedBook = books.find((b) => b.id === selectedBookId);
 
@@ -79,7 +98,16 @@ export function VocaHomeClient({ books, days, progressList, submissionStatuses =
       >
         <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(circle at 20% 50%, white 1px, transparent 1px), radial-gradient(circle at 80% 20%, white 1px, transparent 1px)', backgroundSize: '60px 60px, 40px 40px' }} />
         <div className="relative">
-          <p className="text-white/70 text-xs font-semibold tracking-widest uppercase mb-2">AllKill Voca</p>
+          <div className="flex items-center gap-2 mb-2">
+            <p className="text-white/70 text-xs font-semibold tracking-widest uppercase">AllKill Voca</p>
+            <span className={`text-[11px] font-bold px-2 py-0.5 rounded-full ${
+              currentRound === '2'
+                ? 'bg-violet-400/30 text-violet-100'
+                : 'bg-white/20 text-white/80'
+            }`}>
+              {currentRound}회독
+            </span>
+          </div>
           <h1 className="text-white text-2xl md:text-3xl font-extrabold leading-tight mb-1">
             {selectedBook?.title || '올킬보카'}
           </h1>
@@ -158,45 +186,51 @@ export function VocaHomeClient({ books, days, progressList, submissionStatuses =
               );
             }
 
+            const r2Steps = getRound2StepsDone(prog);
+            const r2Completed = r2Steps === 3;
+            const isCompleted = currentRound === '2' ? r2Completed : completed;
+            const stepsNow = currentRound === '2' ? r2Steps : steps;
+            const totalSteps = currentRound === '2' ? 3 : 4;
+
             return (
               <Link key={day.id} href={`/student/voca/${day.id}`}>
                 <div className={`group flex items-center gap-4 rounded-xl border px-4 py-3.5 transition-all duration-200 hover:shadow-md active:scale-[0.99] ${
-                  completed
+                  isCompleted
                     ? 'border-green-200 bg-green-50/40'
                     : 'border-gray-200 bg-white hover:border-indigo-200'
                 }`}>
-                  <DayBadge index={index} color={bookColor} variant={completed ? 'done' : 'default'} />
+                  <DayBadge index={index} color={bookColor} variant={isCompleted ? 'done' : 'default'} />
                   <div className="flex-1 min-w-0">
-                    <p className={`font-semibold text-[15px] truncate ${completed ? 'text-green-700' : 'text-gray-800'}`}>
+                    <p className={`font-semibold text-[15px] truncate ${isCompleted ? 'text-green-700' : 'text-gray-800'}`}>
                       {day.title}
                       {day.description && (
                         <span className="ml-2 text-[11px] font-normal text-gray-300">{day.description}</span>
                       )}
                     </p>
-                    {steps > 0 && !completed && (
+                    {stepsNow > 0 && !isCompleted && (
                       <div className="flex items-center gap-2 mt-1.5">
                         <div className="flex gap-0.5">
-                          {[0, 1, 2, 3].map((i) => (
+                          {Array.from({ length: totalSteps }).map((_, i) => (
                             <div
                               key={i}
                               className="h-1 rounded-full transition-all"
                               style={{
-                                width: i < steps ? 16 : 8,
-                                background: i < steps ? bookColor.bg : '#e5e7eb',
+                                width: i < stepsNow ? 16 : 8,
+                                background: i < stepsNow ? bookColor.bg : '#e5e7eb',
                               }}
                             />
                           ))}
                         </div>
-                        <span className="text-[11px] font-medium text-gray-400">{steps}/4</span>
+                        <span className="text-[11px] font-medium text-gray-400">{stepsNow}/{totalSteps}</span>
                       </div>
                     )}
-                    {completed && (
-                      <p className="text-[11px] font-medium text-green-600 mt-0.5">1회독 완료</p>
+                    {isCompleted && (
+                      <p className="text-[11px] font-medium text-green-600 mt-0.5">{currentRound}회독 완료</p>
                     )}
-                    <ProgressBadges progress={prog} submissionStatus={submissionStatuses[day.id]} />
+                    {currentRound === '1' && <ProgressBadges progress={prog} submissionStatus={submissionStatuses[day.id]} />}
                   </div>
                   <div className="flex items-center gap-1.5 shrink-0">
-                    {completed && <CheckCircle className="h-5 w-5 text-green-500" />}
+                    {isCompleted && <CheckCircle className="h-5 w-5 text-green-500" />}
                     <ChevronRight className="h-4 w-4 text-gray-300 group-hover:text-indigo-400 group-hover:translate-x-0.5 transition-all" />
                   </div>
                 </div>

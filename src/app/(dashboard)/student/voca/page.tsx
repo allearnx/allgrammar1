@@ -4,6 +4,7 @@ import { redirect } from 'next/navigation';
 import { Topbar } from '@/components/layout/topbar';
 import { VocaHomeClient } from './client';
 import { getPlanContext } from '@/lib/billing/get-plan-context';
+import { canUseFeature } from '@/lib/billing/feature-gate';
 import type { VocaBook, VocaDay, VocaStudentProgress } from '@/types/voca';
 
 export default async function StudentVocaPage({
@@ -18,7 +19,7 @@ export default async function StudentVocaPage({
   // Check service assignment
   const { data: assignment } = await supabase
     .from('service_assignments')
-    .select('id')
+    .select('id, round2_unlocked')
     .eq('student_id', user.id)
     .eq('service', 'voca')
     .single();
@@ -63,6 +64,7 @@ export default async function StudentVocaPage({
 
   const planContext = await getPlanContext(user.academy_id, user.id);
   const isFree = planContext.tier === 'free';
+  const round2Locked = !assignment?.round2_unlocked && !canUseFeature(planContext.tier, 'voca:round2');
 
   return (
     <>
@@ -75,6 +77,7 @@ export default async function StudentVocaPage({
           submissionStatuses={submissionStatusMap}
           initialBookId={initialBookId}
           freeDayLimit={isFree ? 3 : 0}
+          round2Locked={round2Locked}
         />
       </div>
     </>

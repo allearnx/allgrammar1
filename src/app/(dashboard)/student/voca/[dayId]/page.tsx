@@ -53,13 +53,33 @@ export default async function StudentVocaDayPage({
     .eq('day_id', dayId)
     .order('sort_order');
 
-  // Get student progress
+  // Get student progress for this day
   const { data: progress } = await supabase
     .from('voca_student_progress')
     .select('*')
     .eq('student_id', user.id)
     .eq('day_id', dayId)
     .single();
+
+  // 책 전체 Day의 1회독 완료 여부 판단 → 2회독 모드 결정
+  const { data: allBookDays } = await supabase
+    .from('voca_days')
+    .select('id')
+    .eq('book_id', (day as VocaDay).book_id);
+  const allDayIds = (allBookDays || []).map((d) => d.id);
+  const { data: allProgress } = allDayIds.length > 0
+    ? await supabase
+        .from('voca_student_progress')
+        .select('day_id, flashcard_completed, quiz_score, spelling_score, matching_completed')
+        .eq('student_id', user.id)
+        .in('day_id', allDayIds)
+    : { data: [] };
+  const progMap = new Map((allProgress || []).map((p) => [p.day_id, p]));
+  const bookRound1Complete = allDayIds.length > 0 && allDayIds.every((id) => {
+    const p = progMap.get(id);
+    if (!p) return false;
+    return p.flashcard_completed && (p.quiz_score ?? 0) >= 80 && (p.spelling_score ?? 0) >= 80 && p.matching_completed;
+  });
 
   // Get wrong words from quiz results and matching submissions
   const [{ data: quizResults }, { data: matchingSubmissions }] = await Promise.all([
@@ -98,6 +118,7 @@ export default async function StudentVocaDayPage({
   const hasMatchingSubmission = (matchingSubmissions?.length ?? 0) > 0;
 
   const round2Locked = !assignment?.round2_unlocked && !canUseFeature(planContext.tier, 'voca:round2');
+  const currentRound: '1' | '2' = (!round2Locked && bookRound1Complete) ? '2' : '1';
 
   return (
     <>
@@ -108,7 +129,7 @@ export default async function StudentVocaDayPage({
           vocabulary={(vocabulary as VocaVocabulary[]) || []}
           progress={(progress as VocaStudentProgress) || null}
           wrongWords={wrongWords}
-          round2Locked={round2Locked}
+          currentRound={currentRound}
           hasMatchingSubmission={hasMatchingSubmission}
         />
       </div>
