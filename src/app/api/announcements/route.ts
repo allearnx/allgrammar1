@@ -8,12 +8,15 @@ export const GET = createApiHandler(
   { roles: ['student', 'teacher', 'admin', 'boss'], hasBody: false },
   async ({ user, supabase }) => {
     // Fetch published announcements where user's role is in target_roles
+    // 2주 지난 공지는 자동으로 숨김
+    const twoWeeksAgo = new Date(Date.now() - 14 * 24 * 60 * 60 * 1000).toISOString();
     const announcements = dbResult(
       await supabase
         .from('announcements')
         .select('*')
         .eq('is_published', true)
         .contains('target_roles', [user.role])
+        .gte('published_at', twoWeeksAgo)
         .order('published_at', { ascending: false })
     ) ?? [];
 
