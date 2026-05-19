@@ -128,6 +128,7 @@ export function NeonFlashcard({ vocabulary, onComplete }: NeonFlashcardProps) {
                   sentence={vocab.example_sentence}
                   targetWord={vocab.front_text}
                   currentWordIndex={currentWordIndex}
+                  isSpeakingWord={isSpeakingWord}
                 />
                 {vocab.example_sentence_ko && (
                   <p className="text-center text-xs text-gray-300">{vocab.example_sentence_ko}</p>
