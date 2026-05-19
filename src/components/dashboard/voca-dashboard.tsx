@@ -134,7 +134,6 @@ export function VocaDashboard({ userName, books, days, progressList, wordCount, 
       <div className="rounded-2xl border bg-white p-5 md:p-6">
         <div className="flex items-center justify-between mb-3">
           <h3 className="text-sm font-bold">퀴즈 점수 추이</h3>
-          <span className="text-xs text-gray-400">유료 플랜 전용</span>
         </div>
         <MiniScoreTrend data={quizHistory} color="#7C3AED" height={64} />
       </div>
@@ -145,8 +144,8 @@ export function VocaDashboard({ userName, books, days, progressList, wordCount, 
           {/* Header */}
           <div className="flex items-center justify-between mb-5">
             <div>
-              <div className="text-base font-bold flex items-center gap-1.5"><BookOpen className="h-4 w-4" /> 1회독 — 기본 단어 암기</div>
-              <div className="text-sm text-gray-400 mt-0.5">4단계를 모두 통과해야 1회독이 완료됩니다</div>
+              <div className="text-base font-bold flex items-center gap-1.5"><BookOpen className="h-4 w-4" /> 1회독 — {currentDay.title}</div>
+              <div className="text-sm text-gray-400 mt-0.5">플래시카드 → 퀴즈 → 스펠링 → 매칭 4단계를 통과하세요</div>
             </div>
             <span className="shrink-0 rounded-full px-3.5 py-1 text-xs font-bold" style={{ background: r1AllDone ? '#DCFCE7' : '#F5F3FF', color: r1AllDone ? COLORS.green : '#7C3AED' }}>
               {r1AllDone ? '완료 ✓' : '진행 중'}
@@ -165,7 +164,7 @@ export function VocaDashboard({ userName, books, days, progressList, wordCount, 
 
           {/* CTA */}
           {ctaStage && ctaRound === '1' && (
-            <FlowCta stage={ctaStage} dayId={currentDay.id} />
+            <FlowCta stage={ctaStage} dayId={currentDay.id} dayTitle={currentDay.title} />
           )}
         </div>
       )}
@@ -178,7 +177,7 @@ export function VocaDashboard({ userName, books, days, progressList, wordCount, 
             <div>
               <div className="text-base font-bold flex items-center gap-1.5"><BookMarked className="h-4 w-4" /> 2회독 — 유의어 · 반의어 · 숙어</div>
               <div className="text-sm text-gray-400 mt-0.5">
-                {bookR1Complete ? '3단계를 모두 통과해야 2회독이 완료됩니다' : '전체 Day 1회독 완료 후 시작됩니다'}
+                {bookR1Complete ? '3단계를 모두 통과해야 2회독이 완료됩니다' : `모든 Day의 1회독을 마치면 시작돼요 (${completedDays}/${sortedDays.length})`}
               </div>
             </div>
             <span className="shrink-0 rounded-full px-3.5 py-1 text-xs font-bold" style={{
@@ -201,7 +200,7 @@ export function VocaDashboard({ userName, books, days, progressList, wordCount, 
 
           {/* CTA */}
           {ctaStage && ctaRound === '2' && (
-            <FlowCta stage={ctaStage} dayId={currentDay.id} />
+            <FlowCta stage={ctaStage} dayId={currentDay.id} dayTitle={currentDay.title} />
           )}
         </div>
       )}

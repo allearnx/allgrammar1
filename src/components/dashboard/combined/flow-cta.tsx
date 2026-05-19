@@ -2,8 +2,8 @@ import Link from 'next/link';
 import { getCtaText } from '@/lib/dashboard/voca-helpers';
 import type { VocaStage } from '@/lib/dashboard/voca-helpers';
 
-export function FlowCta({ stage, dayId }: { stage: VocaStage; dayId: string }) {
-  const cta = getCtaText(stage);
+export function FlowCta({ stage, dayId, dayTitle }: { stage: VocaStage; dayId: string; dayTitle?: string }) {
+  const cta = getCtaText(stage, dayTitle);
   return (
     <div className="flex items-center justify-between rounded-xl p-3.5 md:p-4" style={{ background: 'linear-gradient(120deg, #F5F3FF, #EDE9FE)', border: '1px solid rgba(37,99,235,0.08)' }}>
       <div className="mr-3 min-w-0">

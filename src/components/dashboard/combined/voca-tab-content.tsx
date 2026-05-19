@@ -35,10 +35,7 @@ export function VocaTabContent() {
       {currentDay && (
         <div className="rounded-2xl border bg-white p-5 md:p-6 space-y-5">
           <h3 className="text-lg font-bold flex items-center gap-2">
-            <BookOpen className="h-4 w-4" /> 학습 흐름 — 1회독
-            <span className="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-medium" style={{ borderColor: COLORS.stepDone.border }}>
-              {currentDay.title}
-            </span>
+            <BookOpen className="h-4 w-4" /> 1회독 — {currentDay.title}
           </h3>
 
           <div className="flex items-stretch gap-0 overflow-visible">
@@ -52,7 +49,7 @@ export function VocaTabContent() {
 
           {vocaCtaStage && vocaCtaRound === '1' && (
             <div className="flex items-center justify-between rounded-xl px-5 py-3" style={{ background: 'linear-gradient(to right, #F5F3FF, #EDE9FE)' }}>
-              <span className="text-sm font-medium text-gray-700">다음 단계: <strong>{vocaCtaStage.label}</strong></span>
+              <span className="text-sm font-medium text-gray-700">{currentDay.title}: <strong>{vocaCtaStage.label}</strong></span>
               <Link href={`/student/voca/${currentDay.id}`} className="inline-flex items-center gap-1.5 rounded-lg px-4 py-2 text-sm font-semibold text-white transition-colors hover:opacity-90" style={{ background: COLORS.ctaButton }}>
                 {vocaCtaStage.label} 시작하기 <ArrowRight className="h-4 w-4" />
               </Link>
@@ -80,7 +77,7 @@ export function VocaTabContent() {
 
           {vocaCtaStage && vocaCtaRound === '2' && (
             <div className="flex items-center justify-between rounded-xl px-5 py-3" style={{ background: 'linear-gradient(to right, #F5F3FF, #EDE9FE)' }}>
-              <span className="text-sm font-medium text-gray-700">다음 단계: <strong>{vocaCtaStage.label}</strong></span>
+              <span className="text-sm font-medium text-gray-700">{currentDay.title}: <strong>{vocaCtaStage.label}</strong></span>
               <Link href={`/student/voca/${currentDay.id}`} className="inline-flex items-center gap-1.5 rounded-lg px-4 py-2 text-sm font-semibold text-white transition-colors hover:opacity-90" style={{ background: COLORS.ctaButton }}>
                 {vocaCtaStage.label} 시작하기 <ArrowRight className="h-4 w-4" />
               </Link>
