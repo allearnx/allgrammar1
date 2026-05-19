@@ -88,29 +88,60 @@ export function useAudioPlayer({
     speechTimersRef.current = [];
   }, []);
 
+  /** 텍스트 기반 단어별 추정 타이밍 설정 */
+  const setupEstimatedTimers = useCallback((text: string, totalDurationSec: number) => {
+    clearSpeechTimers();
+    const words = text.split(/\s+/);
+    if (words.length === 0) return;
+    const perWord = totalDurationSec / words.length;
+    words.forEach((_, i) => {
+      const timer = setTimeout(() => {
+        currentWordIndexRef.current = i;
+        setCurrentWordIndex(i);
+        onWordHighlightRef.current?.(i);
+      }, i * perWord * 1000);
+      speechTimersRef.current.push(timer);
+    });
+  }, [clearSpeechTimers]);
+
   const play = useCallback(async (text?: string) => {
     // ElevenLabs 오디오
     if (audioUrl) {
-      if (!audioRef.current) {
-        audioRef.current = new Audio(audioUrl);
-        audioRef.current.onended = () => {
-          setIsPlaying(false);
-          setCurrentWordIndex(-1);
-          currentWordIndexRef.current = -1;
-          if (rafRef.current) cancelAnimationFrame(rafRef.current);
-          onEndRef.current?.();
-        };
-        audioRef.current.onerror = () => {
-          setIsPlaying(false);
-          setCurrentWordIndex(-1);
-          currentWordIndexRef.current = -1;
-        };
+      try {
+        if (!audioRef.current) {
+          audioRef.current = new Audio(audioUrl);
+          audioRef.current.onended = () => {
+            setIsPlaying(false);
+            setCurrentWordIndex(-1);
+            currentWordIndexRef.current = -1;
+            if (rafRef.current) cancelAnimationFrame(rafRef.current);
+            clearSpeechTimers();
+            onEndRef.current?.();
+          };
+          audioRef.current.onerror = () => {
+            setIsPlaying(false);
+            setCurrentWordIndex(-1);
+            currentWordIndexRef.current = -1;
+            clearSpeechTimers();
+          };
+        }
+        audioRef.current.currentTime = 0;
+        await audioRef.current.play();
+        setIsPlaying(true);
+
+        if (wordTimestampsRef.current && wordTimestampsRef.current.length > 0) {
+          // 정밀 타임스탬프 기반 하이라이트
+          rafRef.current = requestAnimationFrame(updateHighlight);
+        } else if (text) {
+          // 타임스탬프 없음 — 오디오 길이 기반 추정 타이밍
+          const dur = audioRef.current.duration;
+          const estimatedDur = dur && isFinite(dur) ? dur : text.length * 0.06;
+          setupEstimatedTimers(text, estimatedDur);
+        }
+        return;
+      } catch {
+        // 오디오 재생 실패 → Web Speech 폴백으로 진행
       }
-      audioRef.current.currentTime = 0;
-      await audioRef.current.play();
-      setIsPlaying(true);
-      rafRef.current = requestAnimationFrame(updateHighlight);
-      return;
     }
 
     // Web Speech API 폴백
@@ -121,32 +152,26 @@ export function useAudioPlayer({
       utterance.rate = 0.9;
       utterance.onend = () => {
         setIsPlaying(false);
+        setCurrentWordIndex(-1);
+        currentWordIndexRef.current = -1;
+        clearSpeechTimers();
         onEndRef.current?.();
       };
-      utterance.onerror = () => setIsPlaying(false);
+      utterance.onerror = () => {
+        setIsPlaying(false);
+        setCurrentWordIndex(-1);
+        currentWordIndexRef.current = -1;
+        clearSpeechTimers();
+      };
       setIsPlaying(true);
 
       // 단어별 타이밍 추정
-      clearSpeechTimers();
-      const words = text.split(/\s+/);
-      const avgDuration = (text.length * 0.06) / words.length;
-      words.forEach((_, i) => {
-        const timer = setTimeout(() => {
-          currentWordIndexRef.current = i;
-          setCurrentWordIndex(i);
-          onWordHighlightRef.current?.(i);
-        }, i * avgDuration * 1000);
-        speechTimersRef.current.push(timer);
-      });
-      const endTimer = setTimeout(() => {
-        currentWordIndexRef.current = -1;
-        setCurrentWordIndex(-1);
-      }, words.length * avgDuration * 1000);
-      speechTimersRef.current.push(endTimer);
+      const estimatedDur = text.length * 0.06;
+      setupEstimatedTimers(text, estimatedDur);
 
       synthRef.current.speak(utterance);
     }
-  }, [audioUrl, updateHighlight, clearSpeechTimers]);
+  }, [audioUrl, updateHighlight, clearSpeechTimers, setupEstimatedTimers]);
 
   const stop = useCallback(() => {
     if (audioRef.current) {

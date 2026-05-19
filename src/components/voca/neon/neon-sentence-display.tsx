@@ -34,11 +34,11 @@ export function NeonSentenceDisplay({
           <span
             key={i}
             className={cn(
-              'transition-all duration-200 inline-block',
-              isCurrent && isTarget && 'neon-text-gold scale-110',
-              isCurrent && !isTarget && 'neon-text-cyan',
-              !isCurrent && isTarget && 'text-indigo-400 font-bold',
-              !isCurrent && !isTarget && 'text-gray-500',
+              'transition-all duration-200 inline-block rounded-md px-0.5',
+              isCurrent && isTarget && 'neon-text-gold scale-110 bg-indigo-100',
+              isCurrent && !isTarget && 'neon-text-cyan bg-blue-50',
+              !isCurrent && isTarget && 'text-indigo-500 font-bold',
+              !isCurrent && !isTarget && 'text-gray-400',
             )}
           >
             {word}{i < words.length - 1 ? '\u00A0' : ''}

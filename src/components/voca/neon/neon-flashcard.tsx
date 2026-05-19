@@ -132,7 +132,10 @@ export function NeonFlashcard({ vocabulary, onComplete }: NeonFlashcardProps) {
 
             {/* 단어 + 품사 */}
             <div className="text-center space-y-1">
-              <p className="text-3xl font-bold neon-text-gold">
+              <p className={cn(
+                'text-3xl font-bold neon-text-gold transition-all duration-200',
+                isSpeakingWord && 'scale-110',
+              )}>
                 {vocab.front_text}
               </p>
               {vocab.part_of_speech && (
