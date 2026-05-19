@@ -109,27 +109,6 @@ export function NeonFlashcard({ vocabulary, onComplete }: NeonFlashcardProps) {
             transition={{ duration: 0.25 }}
             className="w-full max-w-lg space-y-6"
           >
-            {/* 예문 */}
-            {vocab.example_sentence ? (
-              <div className="space-y-2">
-                <NeonSentenceDisplay
-                  sentence={vocab.example_sentence}
-                  targetWord={vocab.front_text}
-                  currentWordIndex={currentWordIndex}
-                />
-                {vocab.example_sentence_ko && (
-                  <p className="text-center text-xs text-gray-300">{vocab.example_sentence_ko}</p>
-                )}
-              </div>
-            ) : (
-              <p className={cn(
-                'text-4xl font-bold text-center transition-all',
-                currentWordIndex >= 0 ? 'neon-text-gold' : 'text-gray-800',
-              )}>
-                {vocab.front_text}
-              </p>
-            )}
-
             {/* 단어 + 품사 */}
             <div className="text-center space-y-1">
               <p className={cn(
@@ -142,6 +121,20 @@ export function NeonFlashcard({ vocabulary, onComplete }: NeonFlashcardProps) {
                 <p className="text-sm text-gray-400">{vocab.part_of_speech}</p>
               )}
             </div>
+
+            {/* 예문 */}
+            {vocab.example_sentence ? (
+              <div className="space-y-2">
+                <NeonSentenceDisplay
+                  sentence={vocab.example_sentence}
+                  targetWord={vocab.front_text}
+                  currentWordIndex={currentWordIndex}
+                />
+                {vocab.example_sentence_ko && (
+                  <p className="text-center text-xs text-gray-300">{vocab.example_sentence_ko}</p>
+                )}
+              </div>
+            ) : null}
 
             {/* TTS 재생 버튼 */}
             <div className="flex justify-center">
