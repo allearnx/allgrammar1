@@ -19,6 +19,7 @@ interface NeonFlashcardProps {
 export function NeonFlashcard({ vocabulary, onComplete }: NeonFlashcardProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [showMeaning, setShowMeaning] = useState(false);
+  const [showSentence, setShowSentence] = useState(false);
   const [visited, setVisited] = useState<Set<number>>(new Set([0]));
   const [direction, setDirection] = useState(0); // -1 = left, 1 = right
   const [isSpeakingWord, setIsSpeakingWord] = useState(false);
@@ -52,7 +53,8 @@ export function NeonFlashcard({ vocabulary, onComplete }: NeonFlashcardProps) {
       utterance.onend = () => {
         setIsSpeakingWord(false);
         if (hasSentence || hasAudio) {
-          // 2) 예문이나 TTS 오디오가 있으면 → 예문 재생
+          // 2) 예문 표시 후 → 예문 재생
+          if (hasSentence) setShowSentence(true);
           setTimeout(() => play(vocab.example_sentence || vocab.front_text), 400);
         } else {
           // 예문/TTS 없으면 단어 발음만으로 완료 → 뜻 표시
@@ -62,6 +64,7 @@ export function NeonFlashcard({ vocabulary, onComplete }: NeonFlashcardProps) {
       utterance.onerror = () => {
         setIsSpeakingWord(false);
         if (hasSentence || hasAudio) {
+          if (hasSentence) setShowSentence(true);
           play(vocab.example_sentence || vocab.front_text);
         } else {
           setShowMeaning(true);
@@ -69,6 +72,7 @@ export function NeonFlashcard({ vocabulary, onComplete }: NeonFlashcardProps) {
       };
       window.speechSynthesis.speak(utterance);
     } else {
+      if (hasSentence) setShowSentence(true);
       play(vocab.example_sentence || vocab.front_text);
     }
   };
@@ -82,6 +86,7 @@ export function NeonFlashcard({ vocabulary, onComplete }: NeonFlashcardProps) {
     setDirection(index > currentIndex ? 1 : -1);
     setCurrentIndex(index);
     setShowMeaning(false);
+    setShowSentence(false);
     setVisited((prev) => new Set(prev).add(index));
   };
 
@@ -121,27 +126,35 @@ export function NeonFlashcard({ vocabulary, onComplete }: NeonFlashcardProps) {
             transition={{ duration: 0.25 }}
             className="w-full max-w-lg space-y-6"
           >
-            {/* 예문 or 단어 */}
-            {vocab.example_sentence ? (
-              <div className="space-y-2">
-                <NeonSentenceDisplay
-                  sentence={vocab.example_sentence}
-                  targetWord={vocab.front_text}
-                  currentWordIndex={currentWordIndex}
-                  isSpeakingWord={isSpeakingWord}
-                />
-                {vocab.example_sentence_ko && (
-                  <p className="text-center text-xs text-gray-300">{vocab.example_sentence_ko}</p>
-                )}
-              </div>
-            ) : (
-              <p className={cn(
-                'text-4xl font-bold text-center transition-all duration-300',
-                (isSpeakingWord || isPlaying) ? 'scale-110 neon-text-cyan' : 'text-gray-800',
-              )}>
-                {vocab.front_text}
-              </p>
-            )}
+            {/* 단어 (항상 표시) */}
+            <p className={cn(
+              'text-4xl font-bold text-center transition-all duration-300',
+              isSpeakingWord ? 'scale-110 neon-text-cyan' : 'text-gray-800',
+            )}>
+              {vocab.front_text}
+            </p>
+
+            {/* 예문 (단어 발음 후 등장) */}
+            <AnimatePresence>
+              {showSentence && vocab.example_sentence && (
+                <motion.div
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.3 }}
+                  className="space-y-2"
+                >
+                  <NeonSentenceDisplay
+                    sentence={vocab.example_sentence}
+                    targetWord={vocab.front_text}
+                    currentWordIndex={currentWordIndex}
+                  />
+                  {vocab.example_sentence_ko && (
+                    <p className="text-center text-xs text-gray-300">{vocab.example_sentence_ko}</p>
+                  )}
+                </motion.div>
+              )}
+            </AnimatePresence>
 
             {/* 품사 */}
             {vocab.part_of_speech && (
