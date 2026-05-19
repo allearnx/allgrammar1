@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Volume2, ChevronLeft, ChevronRight } from 'lucide-react';
@@ -23,8 +23,28 @@ export function NeonFlashcard({ vocabulary, onComplete }: NeonFlashcardProps) {
   const [visited, setVisited] = useState<Set<number>>(new Set([0]));
   const [direction, setDirection] = useState(0); // -1 = left, 1 = right
   const [isSpeakingWord, setIsSpeakingWord] = useState(false);
+  const [highlightCharIndex, setHighlightCharIndex] = useState(-1);
+  const charTimersRef = useRef<ReturnType<typeof setTimeout>[]>([]);
 
   const vocab = vocabulary[currentIndex];
+
+  const clearCharTimers = useCallback(() => {
+    charTimersRef.current.forEach(clearTimeout);
+    charTimersRef.current = [];
+    setHighlightCharIndex(-1);
+  }, []);
+
+  /** 글자별 카라오케 타이머 설정 */
+  const startCharHighlight = useCallback((word: string) => {
+    clearCharTimers();
+    const chars = word.length;
+    // 글자당 ~110ms (rate 0.85 기준 추정)
+    const perChar = 110;
+    for (let i = 0; i < chars; i++) {
+      const timer = setTimeout(() => setHighlightCharIndex(i), i * perChar);
+      charTimersRef.current.push(timer);
+    }
+  }, [clearCharTimers]);
 
   const handleAudioEnd = useCallback(() => {
     // TTS 재생 완료 후 뜻 표시
@@ -46,12 +66,14 @@ export function NeonFlashcard({ vocabulary, onComplete }: NeonFlashcardProps) {
     // 1) 단어 먼저 읽기 (Web Speech API)
     if (typeof window !== 'undefined' && window.speechSynthesis) {
       setIsSpeakingWord(true);
+      startCharHighlight(vocab.front_text);
       window.speechSynthesis.cancel();
       const utterance = new SpeechSynthesisUtterance(vocab.front_text);
       utterance.lang = 'en-US';
       utterance.rate = 0.85;
       utterance.onend = () => {
         setIsSpeakingWord(false);
+        clearCharTimers();
         // 2) 단어 발음 직후 → 뜻 표시
         setShowMeaning(true);
         if (hasSentence || hasAudio) {
@@ -64,6 +86,7 @@ export function NeonFlashcard({ vocabulary, onComplete }: NeonFlashcardProps) {
       };
       utterance.onerror = () => {
         setIsSpeakingWord(false);
+        clearCharTimers();
         setShowMeaning(true);
         if (hasSentence || hasAudio) {
           if (hasSentence) setShowSentence(true);
@@ -83,6 +106,7 @@ export function NeonFlashcard({ vocabulary, onComplete }: NeonFlashcardProps) {
       window.speechSynthesis.cancel();
       setIsSpeakingWord(false);
     }
+    clearCharTimers();
     setDirection(index > currentIndex ? 1 : -1);
     setCurrentIndex(index);
     setShowMeaning(false);
@@ -126,12 +150,26 @@ export function NeonFlashcard({ vocabulary, onComplete }: NeonFlashcardProps) {
             transition={{ duration: 0.25 }}
             className="w-full max-w-lg space-y-6"
           >
-            {/* 단어 (항상 표시) */}
-            <p className={cn(
-              'text-4xl font-bold text-center transition-all duration-300',
-              isSpeakingWord ? 'scale-110 neon-text-cyan' : 'text-gray-800',
-            )}>
-              {vocab.front_text}
+            {/* 단어 (항상 표시 — 발음 중 글자별 카라오케) */}
+            <p className="text-4xl font-bold text-center">
+              {isSpeakingWord ? (
+                vocab.front_text.split('').map((char, i) => (
+                  <span
+                    key={i}
+                    className={
+                      i === highlightCharIndex
+                        ? 'char-active'
+                        : i < highlightCharIndex
+                          ? 'char-spoken'
+                          : 'char-pending'
+                    }
+                  >
+                    {char}
+                  </span>
+                ))
+              ) : (
+                <span className="text-gray-800">{vocab.front_text}</span>
+              )}
             </p>
 
             {/* 예문 (단어 발음 후 등장) */}
@@ -150,7 +188,7 @@ export function NeonFlashcard({ vocabulary, onComplete }: NeonFlashcardProps) {
                     currentWordIndex={currentWordIndex}
                   />
                   {vocab.example_sentence_ko && (
-                    <p className="text-center text-xs text-gray-300">{vocab.example_sentence_ko}</p>
+                    <p className="text-center text-sm text-gray-500">{vocab.example_sentence_ko}</p>
                   )}
                 </motion.div>
               )}

@@ -27,6 +27,23 @@
   font-weight: 700;
 }
 
+/* 글자별 카라오케 하이라이트 */
+.char-spoken {
+  color: var(--voca-accent);
+  transition: color 0.08s, text-shadow 0.08s;
+}
+.char-active {
+  color: var(--voca-accent);
+  text-shadow: 0 0 8px rgba(37, 99, 235, 0.5), 0 0 16px rgba(37, 99, 235, 0.25);
+  transform: scale(1.15);
+  display: inline-block;
+  transition: color 0.08s, text-shadow 0.08s, transform 0.1s;
+}
+.char-pending {
+  color: #9ca3af;
+  transition: color 0.08s;
+}
+
 /* 컨테이너 */
 .neon-container {
   background: white;
