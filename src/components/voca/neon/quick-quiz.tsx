@@ -18,6 +18,7 @@ type QuizType = 'en-to-ko' | 'ko-to-en' | 'fill-blank';
 interface QuizQuestion {
   type: QuizType;
   prompt: string;
+  hint?: string;
   options: string[];
   correctIndex: number;
 }
@@ -55,6 +56,7 @@ function generateQuestions(vocabulary: VocaVocabulary[]): QuizQuestion[] {
       return {
         type,
         prompt: blanked,
+        hint: v.example_sentence_ko ?? undefined,
         options,
         correctIndex: options.indexOf(v.front_text),
       };
@@ -152,6 +154,9 @@ export function QuickQuiz({ vocabulary, onComplete }: QuickQuizProps) {
             >
               {question.prompt}
             </p>
+            {question.hint && (
+              <p className="text-sm text-center text-gray-400">{question.hint}</p>
+            )}
 
             <div className="space-y-3">
               {question.options.map((option, i) => {
