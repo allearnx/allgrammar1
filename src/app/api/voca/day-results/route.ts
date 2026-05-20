@@ -22,7 +22,7 @@ export const GET = createApiHandler(
     // 1. Get voca-assigned students (filtered by academy for admin/teacher)
     let studentQuery = admin
       .from('service_assignments')
-      .select('student_id, users!inner(id, full_name, is_active)')
+      .select('student_id, users!service_assignments_student_id_fkey!inner(id, full_name, is_active)')
       .eq('service', 'voca');
 
     if (academyId) {
