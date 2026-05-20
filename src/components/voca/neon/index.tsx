@@ -59,10 +59,11 @@ export function NeonVocaTab({ vocabulary, dayId, progress, dayTitle }: NeonVocaT
   const saveProgress = useCallback(async (
     type: 'flashcard' | 'quiz' | 'spelling' | 'matching',
     score?: number,
+    spellingWrongWords?: { front_text: string; back_text: string }[],
   ) => {
     try {
       await fetchWithToast('/api/voca/progress', {
-        body: { dayId, type, score },
+        body: { dayId, type, score, spellingWrongWords },
         silent: true,
       });
     } catch { /* swallow */ }
@@ -77,8 +78,8 @@ export function NeonVocaTab({ vocabulary, dayId, progress, dayTitle }: NeonVocaT
     });
   }, [dayId]);
 
-  const handleStepComplete = useCallback((stepIndex: number, type: 'flashcard' | 'quiz' | 'spelling' | 'matching', score?: number) => {
-    saveProgress(type, score);
+  const handleStepComplete = useCallback((stepIndex: number, type: 'flashcard' | 'quiz' | 'spelling' | 'matching', score?: number, spellingWrongWords?: { front_text: string; back_text: string }[]) => {
+    saveProgress(type, score, spellingWrongWords);
 
     // 통과 기준 체크
     const passed =
@@ -190,7 +191,7 @@ export function NeonVocaTab({ vocabulary, dayId, progress, dayTitle }: NeonVocaT
           {currentStep === 2 && (
             <RhythmSpelling
               vocabulary={vocabulary}
-              onComplete={(score) => handleStepComplete(2, 'spelling', score)}
+              onComplete={(score, wrongWords) => handleStepComplete(2, 'spelling', score, wrongWords)}
             />
           )}
           {currentStep === 3 && (

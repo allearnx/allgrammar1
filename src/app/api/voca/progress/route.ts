@@ -6,7 +6,7 @@ import { vocaProgressSaveSchema } from '@/lib/api/schemas';
 export const POST = createApiHandler(
   { schema: vocaProgressSaveSchema },
   async ({ user, body, supabase }) => {
-    const { dayId, type, score, matchingAttempt, round } = body;
+    const { dayId, type, score, matchingAttempt, round, spellingWrongWords } = body;
     const isRound2 = round === '2';
 
     // Build update object based on type
@@ -21,6 +21,9 @@ export const POST = createApiHandler(
         break;
       case 'spelling':
         updates.spelling_score = score;
+        if (spellingWrongWords) {
+          updates.spelling_wrong_words = spellingWrongWords;
+        }
         break;
       case 'matching':
         if (isRound2) {

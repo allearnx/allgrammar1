@@ -65,6 +65,10 @@ export const vocaProgressSaveSchema = z.object({
   score: z.number().nullish(),
   matchingAttempt: z.number().nullish(),
   round: z.enum(['1', '2']).default('1'),
+  spellingWrongWords: z.array(z.object({
+    front_text: z.string(),
+    back_text: z.string(),
+  })).nullish(),
 });
 
 export const vocaMatchingSubmissionSchema = z.object({

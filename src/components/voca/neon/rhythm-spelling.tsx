@@ -21,9 +21,14 @@ function isNonLetter(ch: string) {
   return !/[a-zA-Z]/.test(ch);
 }
 
+interface SpellingWrongWord {
+  front_text: string;
+  back_text: string;
+}
+
 interface RhythmSpellingProps {
   vocabulary: VocaVocabulary[];
-  onComplete: (score: number) => void;
+  onComplete: (score: number, wrongWords: SpellingWrongWord[]) => void;
 }
 
 interface WordResult {
@@ -45,6 +50,7 @@ export function RhythmSpelling({ vocabulary, onComplete }: RhythmSpellingProps) 
   const advanceTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const flashTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const resultsRef = useRef<WordResult[]>([]);
+  const wrongWordsRef = useRef<SpellingWrongWord[]>([]);
   const wrongLettersRef = useRef<Set<number>>(new Set());
 
   const vocab = shuffledVocab[currentIndex];
@@ -77,10 +83,17 @@ export function RhythmSpelling({ vocabulary, onComplete }: RhythmSpellingProps) 
   }, [targetWord]);
 
   const finishWord = useCallback(() => {
+    const hadWrong = wrongLettersRef.current.size > 0;
     resultsRef.current.push({
       firstTryCorrect: letterCount - wrongLettersRef.current.size,
       totalLetters: letterCount,
     });
+    if (hadWrong) {
+      wrongWordsRef.current.push({
+        front_text: shuffledVocab[currentIndex].front_text,
+        back_text: shuffledVocab[currentIndex].back_text,
+      });
+    }
 
     advanceTimerRef.current = setTimeout(() => {
       if (currentIndex + 1 < shuffledVocab.length) {
@@ -95,10 +108,10 @@ export function RhythmSpelling({ vocabulary, onComplete }: RhythmSpellingProps) 
         const score = Math.round((totalCorrect / totalLetters) * 100);
         setLastScore(score);
         setFinalScore(score);
-        onComplete(score);
+        onComplete(score, wrongWordsRef.current);
       }
     }, 600);
-  }, [currentIndex, shuffledVocab.length, onComplete, letterCount]);
+  }, [currentIndex, shuffledVocab, onComplete, letterCount]);
 
   const handleKeyPress = useCallback((key: string) => {
     if (currentLetterIdx >= targetWord.length) return;
@@ -174,6 +187,7 @@ export function RhythmSpelling({ vocabulary, onComplete }: RhythmSpellingProps) 
     setLetterStates([]);
     setFinalScore(null);
     resultsRef.current = [];
+    wrongWordsRef.current = [];
     wrongLettersRef.current = new Set();
   }
 

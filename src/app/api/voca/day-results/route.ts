@@ -50,7 +50,7 @@ export const GET = createApiHandler(
     // 2. Fetch progress for this day
     const { data: progressRows } = await admin
       .from('voca_student_progress')
-      .select('student_id, flashcard_completed, quiz_score, spelling_score, matching_score, matching_completed, updated_at')
+      .select('student_id, flashcard_completed, quiz_score, spelling_score, spelling_wrong_words, matching_score, matching_completed, updated_at')
       .eq('day_id', dayId)
       .in('student_id', studentIds);
 
@@ -104,6 +104,7 @@ export const GET = createApiHandler(
             : null,
           wrongWords: {
             quiz: quizWrongMap.get(s.id) || [],
+            spelling: (p as Record<string, unknown>)?.spelling_wrong_words || [],
             matching: matchingWrongMap.get(s.id) || [],
           },
         };

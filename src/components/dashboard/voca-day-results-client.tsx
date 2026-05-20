@@ -20,6 +20,7 @@ interface StudentResult {
   } | null;
   wrongWords: {
     quiz: { front_text: string; back_text: string }[];
+    spelling: { front_text: string; back_text: string }[];
     matching: { word: string; match: string; type: string }[];
   };
 }
@@ -41,7 +42,7 @@ const STATUS_CONFIG: Record<Status, { label: string; className: string }> = {
 };
 
 function hasWrongWords(s: StudentResult) {
-  return s.wrongWords.quiz.length > 0 || s.wrongWords.matching.length > 0;
+  return s.wrongWords.quiz.length > 0 || s.wrongWords.spelling.length > 0 || s.wrongWords.matching.length > 0;
 }
 
 const MATCHING_TYPE_LABEL: Record<string, string> = {
@@ -281,6 +282,18 @@ export function VocaDayResultsClient() {
                                   {s.wrongWords.quiz.map((w, i) => (
                                     <span key={i} className="inline-flex items-center rounded-full bg-red-50 px-2.5 py-1 text-xs text-red-700">
                                       {w.front_text} → {w.back_text}
+                                    </span>
+                                  ))}
+                                </div>
+                              </div>
+                            )}
+                            {s.wrongWords.spelling.length > 0 && (
+                              <div>
+                                <p className="text-xs font-semibold text-gray-500 mb-1">스펠링 오답</p>
+                                <div className="flex flex-wrap gap-1.5">
+                                  {s.wrongWords.spelling.map((w, i) => (
+                                    <span key={i} className="inline-flex items-center rounded-full bg-purple-50 px-2.5 py-1 text-xs text-purple-700">
+                                      {w.front_text}
                                     </span>
                                   ))}
                                 </div>
