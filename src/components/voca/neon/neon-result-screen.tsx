@@ -39,12 +39,17 @@ export function NeonResultScreen({
         <p className="text-gray-400 text-base">
           {passed ? passMessage : failMessage}
         </p>
-        {!passed && onRetry && (
+        {onRetry && (
           <button
             onClick={onRetry}
-            className="mt-4 px-6 py-2.5 rounded-xl border-2 border-indigo-300 text-indigo-600 font-medium hover:bg-indigo-50 transition-colors"
+            className={cn(
+              'mt-4 px-6 py-2.5 rounded-xl border-2 font-medium transition-colors',
+              passed
+                ? 'border-gray-200 text-gray-500 hover:bg-gray-50'
+                : 'border-indigo-300 text-indigo-600 hover:bg-indigo-50',
+            )}
           >
-            새 문제로 다시 풀기
+            {passed ? '다시 풀기' : '새 문제로 다시 풀기'}
           </button>
         )}
       </motion.div>

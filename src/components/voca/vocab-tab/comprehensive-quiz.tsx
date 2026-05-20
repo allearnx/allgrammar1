@@ -222,12 +222,10 @@ export function ComprehensiveQuiz({ vocabulary, dayId: _dayId, onComplete }: Com
           ))}
         </div>
 
-        {totalScore < 80 && (
-          <Button variant="outline" className="w-full" onClick={handleRestart}>
-            <RotateCcw className="h-4 w-4 mr-2" />
-            새 문제로 다시 풀기
-          </Button>
-        )}
+        <Button variant="outline" className="w-full" onClick={handleRestart}>
+          <RotateCcw className="h-4 w-4 mr-2" />
+          {totalScore >= 80 ? '다시 풀기' : '새 문제로 다시 풀기'}
+        </Button>
       </div>
     );
   }

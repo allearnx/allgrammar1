@@ -3,6 +3,7 @@
 import { useState, useMemo, useRef, useEffect } from 'react';
 import { MatchingGameRound, type MatchingGameItem } from '@/components/voca/vocab-tab/matching-game-round';
 import { NeonResultScreen } from './neon-result-screen';
+import { shuffle } from '@/lib/utils';
 import type { VocaVocabulary } from '@/types/voca';
 import './neon-styles.css';
 
@@ -18,18 +19,21 @@ const PASS_SCORE = 90;
 export function WordMatching({ vocabulary, onComplete }: WordMatchingProps) {
   const [currentChunk, setCurrentChunk] = useState(0);
   const [attempt, setAttempt] = useState(1);
+  const [retryCount, setRetryCount] = useState(0);
   const [totalWrong, setTotalWrong] = useState(0);
   const [totalPairs, setTotalPairs] = useState(0);
   const [finalScore, setFinalScore] = useState<number | null>(null);
   const chunkTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const chunks = useMemo(() => {
+    const shuffled = shuffle([...vocabulary]);
     const result: VocaVocabulary[][] = [];
-    for (let i = 0; i < vocabulary.length; i += CHUNK_SIZE) {
-      result.push(vocabulary.slice(i, i + CHUNK_SIZE));
+    for (let i = 0; i < shuffled.length; i += CHUNK_SIZE) {
+      result.push(shuffled.slice(i, i + CHUNK_SIZE));
     }
     return result;
-  }, [vocabulary]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [vocabulary, retryCount]);
 
   const items: MatchingGameItem[] = useMemo(() => {
     return chunks[currentChunk]?.map((v) => ({
@@ -66,6 +70,7 @@ export function WordMatching({ vocabulary, onComplete }: WordMatchingProps) {
   }, []);
 
   function handleRetry() {
+    setRetryCount((c) => c + 1);
     setCurrentChunk(0);
     setAttempt(1);
     setTotalWrong(0);

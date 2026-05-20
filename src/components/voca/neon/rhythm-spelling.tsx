@@ -1,9 +1,9 @@
 'use client';
 
-import { useState, useCallback, useEffect, useRef } from 'react';
+import { useState, useMemo, useCallback, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '@/components/ui/button';
-import { cn, blankOutWordExact } from '@/lib/utils';
+import { cn, shuffle, blankOutWordExact } from '@/lib/utils';
 import { Volume2, Delete } from 'lucide-react';
 import { useAudioPlayer } from './audio-player-hook';
 import { NeonResultScreen } from './neon-result-screen';
@@ -32,6 +32,9 @@ interface WordResult {
 }
 
 export function RhythmSpelling({ vocabulary, onComplete }: RhythmSpellingProps) {
+  const [attempt, setAttempt] = useState(0);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const shuffledVocab = useMemo(() => shuffle([...vocabulary]), [vocabulary, attempt]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [typedLetters, setTypedLetters] = useState<string[]>([]);
   const [letterStates, setLetterStates] = useState<('correct' | 'wrong' | 'auto')[]>([]);
@@ -44,7 +47,7 @@ export function RhythmSpelling({ vocabulary, onComplete }: RhythmSpellingProps) 
   const resultsRef = useRef<WordResult[]>([]);
   const wrongLettersRef = useRef<Set<number>>(new Set());
 
-  const vocab = vocabulary[currentIndex];
+  const vocab = shuffledVocab[currentIndex];
   const targetWord = vocab.front_text.trim().toLowerCase();
   const currentLetterIdx = typedLetters.length;
 
@@ -80,7 +83,7 @@ export function RhythmSpelling({ vocabulary, onComplete }: RhythmSpellingProps) 
     });
 
     advanceTimerRef.current = setTimeout(() => {
-      if (currentIndex + 1 < vocabulary.length) {
+      if (currentIndex + 1 < shuffledVocab.length) {
         setCurrentIndex((prev) => prev + 1);
         setTypedLetters([]);
         setLetterStates([]);
@@ -95,7 +98,7 @@ export function RhythmSpelling({ vocabulary, onComplete }: RhythmSpellingProps) 
         onComplete(score);
       }
     }, 600);
-  }, [currentIndex, vocabulary.length, onComplete, letterCount]);
+  }, [currentIndex, shuffledVocab.length, onComplete, letterCount]);
 
   const handleKeyPress = useCallback((key: string) => {
     if (currentLetterIdx >= targetWord.length) return;
@@ -165,6 +168,7 @@ export function RhythmSpelling({ vocabulary, onComplete }: RhythmSpellingProps) 
   }, []);
 
   function handleRetry() {
+    setAttempt((a) => a + 1);
     setCurrentIndex(0);
     setTypedLetters([]);
     setLetterStates([]);
@@ -198,7 +202,7 @@ export function RhythmSpelling({ vocabulary, onComplete }: RhythmSpellingProps) 
 
       <div className="flex items-center justify-between mb-4">
         <span className="text-sm text-gray-400">
-          {currentIndex + 1} / {vocabulary.length}
+          {currentIndex + 1} / {shuffledVocab.length}
         </span>
         <Button
           variant="ghost"
