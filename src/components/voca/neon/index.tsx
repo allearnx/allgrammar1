@@ -8,7 +8,7 @@ import { StepProgressBar } from './step-progress-bar';
 import { NeonFlashcard } from './neon-flashcard';
 import { RhythmSpelling } from './rhythm-spelling';
 import { WordMatching } from './word-matching';
-import { QuickQuiz } from './quick-quiz';
+import { QuickQuiz, type QuizWrongWord } from './quick-quiz';
 import { VocaDayRankCard, type VocaDayRankCardProps } from '@/components/voca/voca-day-rank-card';
 import { PetReaction } from '@/components/voca/pet/pet-reaction';
 import { usePet } from '@/hooks/use-pet';
@@ -78,8 +78,28 @@ export function NeonVocaTab({ vocabulary, dayId, progress, dayTitle }: NeonVocaT
     });
   }, [dayId]);
 
-  const handleStepComplete = useCallback((stepIndex: number, type: 'flashcard' | 'quiz' | 'spelling' | 'matching', score?: number, spellingWrongWords?: { front_text: string; back_text: string }[]) => {
-    saveProgress(type, score, spellingWrongWords);
+  const saveQuizResult = useCallback(async (score: number, wrongWords: QuizWrongWord[], totalQuestions: number) => {
+    try {
+      await fetchWithToast('/api/voca/quiz-result', {
+        body: {
+          unitId: dayId,
+          score,
+          totalQuestions,
+          correctCount: totalQuestions - wrongWords.length,
+          wrongWords,
+        },
+        silent: true,
+      });
+    } catch { /* swallow */ }
+  }, [dayId]);
+
+  const handleStepComplete = useCallback((stepIndex: number, type: 'flashcard' | 'quiz' | 'spelling' | 'matching', score?: number, wrongWords?: { front_text: string; back_text: string }[]) => {
+    saveProgress(type, score, type === 'spelling' ? wrongWords : undefined);
+
+    // 퀴즈 오답을 voca_quiz_results에 별도 저장
+    if (type === 'quiz' && score !== undefined) {
+      saveQuizResult(score, wrongWords || [], vocabulary.length);
+    }
 
     // 통과 기준 체크
     const passed =
@@ -114,7 +134,7 @@ export function NeonVocaTab({ vocabulary, dayId, progress, dayTitle }: NeonVocaT
     } else {
       toast.info('기준 점수에 도달하지 못했습니다. 다시 도전해보세요!');
     }
-  }, [saveProgress, dayId, pet]);
+  }, [saveProgress, saveQuizResult, dayId, pet, vocabulary.length]);
 
   // Cleanup timer on unmount
   useEffect(() => {
@@ -198,7 +218,7 @@ export function NeonVocaTab({ vocabulary, dayId, progress, dayTitle }: NeonVocaT
             hasEnoughForQuiz ? (
               <QuickQuiz
                 vocabulary={vocabulary}
-                onComplete={(score) => handleStepComplete(3, 'quiz', score)}
+                onComplete={(score, wrongWords) => handleStepComplete(3, 'quiz', score, wrongWords)}
               />
             ) : (
               <div className="neon-container p-6 text-center">

@@ -8,9 +8,14 @@ import { ProgressDots } from './progress-dots';
 import type { VocaVocabulary } from '@/types/voca';
 import './neon-styles.css';
 
+export interface QuizWrongWord {
+  front_text: string;
+  back_text: string;
+}
+
 interface QuickQuizProps {
   vocabulary: VocaVocabulary[];
-  onComplete: (score: number) => void;
+  onComplete: (score: number, wrongWords: QuizWrongWord[]) => void;
 }
 
 type QuizType = 'en-to-ko' | 'ko-to-en' | 'fill-blank';
@@ -21,6 +26,8 @@ interface QuizQuestion {
   hint?: string;
   options: string[];
   correctIndex: number;
+  front_text: string;
+  back_text: string;
 }
 
 function pickType(hasExample: boolean): QuizType {
@@ -44,6 +51,8 @@ function generateQuestions(vocabulary: VocaVocabulary[]): QuizQuestion[] {
         prompt: v.back_text,
         options,
         correctIndex: options.indexOf(v.front_text),
+        front_text: v.front_text,
+        back_text: v.back_text,
       };
     }
 
@@ -59,6 +68,8 @@ function generateQuestions(vocabulary: VocaVocabulary[]): QuizQuestion[] {
         hint: v.example_sentence_ko ?? undefined,
         options,
         correctIndex: options.indexOf(v.front_text),
+        front_text: v.front_text,
+        back_text: v.back_text,
       };
     }
 
@@ -72,6 +83,8 @@ function generateQuestions(vocabulary: VocaVocabulary[]): QuizQuestion[] {
       prompt: v.front_text,
       options,
       correctIndex: options.indexOf(v.back_text),
+      front_text: v.front_text,
+      back_text: v.back_text,
     };
   });
 }
@@ -86,6 +99,7 @@ export function QuickQuiz({ vocabulary, onComplete }: QuickQuizProps) {
   const [finalScore, setFinalScore] = useState<number | null>(null);
   const [answered, setAnswered] = useState(false);
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const wrongWordsRef = useRef<QuizWrongWord[]>([]);
 
   const question = questions[currentIndex];
 
@@ -95,7 +109,11 @@ export function QuickQuiz({ vocabulary, onComplete }: QuickQuizProps) {
     setAnswered(true);
 
     const isCorrect = optionIndex === question.correctIndex;
-    if (isCorrect) setCorrect((c) => c + 1);
+    if (isCorrect) {
+      setCorrect((c) => c + 1);
+    } else {
+      wrongWordsRef.current.push({ front_text: question.front_text, back_text: question.back_text });
+    }
 
     timerRef.current = setTimeout(() => {
       if (currentIndex + 1 < questions.length) {
@@ -105,7 +123,7 @@ export function QuickQuiz({ vocabulary, onComplete }: QuickQuizProps) {
       } else {
         const score = Math.round(((correct + (isCorrect ? 1 : 0)) / questions.length) * 100);
         setFinalScore(score);
-        onComplete(score);
+        onComplete(score, wrongWordsRef.current);
       }
     }, 800);
   }, [answered, question, currentIndex, questions.length, correct, onComplete]);
@@ -121,6 +139,7 @@ export function QuickQuiz({ vocabulary, onComplete }: QuickQuizProps) {
     setCorrect(0);
     setFinalScore(null);
     setAnswered(false);
+    wrongWordsRef.current = [];
   }
 
   if (finalScore !== null) {
