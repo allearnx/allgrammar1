@@ -47,6 +47,7 @@ function prioritizePairs(pairs: MatchPair[], priorityWords: string[], max: numbe
 }
 
 export function MatchingView({ vocabulary, priorityWords = [], onComplete, onFail }: MatchingViewProps) {
+  const [retryCount, setRetryCount] = useState(0);
   const { synonymPairs, antonymPairs } = useMemo(() => buildPairs(vocabulary), [vocabulary]);
 
   const allPairs = useMemo(() => {
@@ -54,7 +55,8 @@ export function MatchingView({ vocabulary, priorityWords = [], onComplete, onFai
     if (synonymPairs.length >= 2) pairs.push(...prioritizePairs(synonymPairs, priorityWords, 5));
     if (antonymPairs.length >= 2) pairs.push(...prioritizePairs(antonymPairs, priorityWords, 5));
     return pairs;
-  }, [synonymPairs, antonymPairs, priorityWords]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [synonymPairs, antonymPairs, priorityWords, retryCount]);
 
   const rounds = useMemo(() => {
     const r: RoundType[] = [];
@@ -72,7 +74,7 @@ export function MatchingView({ vocabulary, priorityWords = [], onComplete, onFai
   const roundPairs = useMemo(() => {
     const source = currentRound === 'synonym' ? synonymPairs : antonymPairs;
     return prioritizePairs(source, priorityWords, 5);
-  }, [currentRound, synonymPairs, antonymPairs, priorityWords, attempt]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [currentRound, synonymPairs, antonymPairs, priorityWords, attempt, retryCount]); // eslint-disable-line react-hooks/exhaustive-deps
 
   if (allPairs.length < 2) {
     return (
