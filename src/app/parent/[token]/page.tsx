@@ -1,3 +1,4 @@
+import type { Metadata } from 'next';
 import { createAdminClient } from '@/lib/supabase/admin';
 import { NaesinProgressCard } from '@/components/dashboard/naesin-progress-card';
 import { VocaProgressCard } from '@/components/dashboard/voca-progress-card';
@@ -10,6 +11,57 @@ import { Lock, BookA, CheckCircle, Clock, MinusCircle, History } from 'lucide-re
 interface Props {
   params: Promise<{ token: string }>;
   searchParams: Promise<{ voca_day?: string }>;
+}
+
+export async function generateMetadata({ params, searchParams }: Props): Promise<Metadata> {
+  const { token } = await params;
+  const { voca_day: vocaDayId } = await searchParams;
+  const admin = createAdminClient();
+
+  const { data: tokenRow } = await admin
+    .from('parent_share_tokens')
+    .select('student_id')
+    .eq('token', token)
+    .eq('is_active', true)
+    .single();
+
+  if (!tokenRow) return { title: '올라영 학습 리포트' };
+
+  const { data: student } = await admin
+    .from('users')
+    .select('full_name')
+    .eq('id', tokenRow.student_id)
+    .single();
+
+  const name = student?.full_name ?? '학생';
+
+  if (vocaDayId) {
+    const { data: dayRow } = await admin
+      .from('voca_days')
+      .select('day_number, title, book:voca_books(title)')
+      .eq('id', vocaDayId)
+      .single();
+
+    if (dayRow) {
+      const bookArr = dayRow.book as unknown as { title: string }[] | null;
+      const bookTitle = bookArr?.[0]?.title ?? '올킬보카';
+      const title = `${name} 올킬보카 성적표`;
+      const description = `${bookTitle} · Day ${dayRow.day_number} — ${dayRow.title}`;
+      return {
+        title,
+        description,
+        openGraph: { title, description },
+      };
+    }
+  }
+
+  const title = `${name} 학습 리포트`;
+  const description = '올라영 AI 러닝 엔진 학습 현황';
+  return {
+    title,
+    description,
+    openGraph: { title, description },
+  };
 }
 
 export default async function ParentReportPage({ params, searchParams }: Props) {
