@@ -7,10 +7,10 @@ import { fetchWithToast } from '@/lib/fetch-with-toast';
 
 interface Props {
   studentId: string;
-  dayId: string;
+  dayId?: string;
 }
 
-export function VocaDayShareButton({ studentId, dayId }: Props) {
+export function VocaDayShareButton({ studentId }: Props) {
   const [loading, setLoading] = useState(false);
   const [copied, setCopied] = useState(false);
 
@@ -34,8 +34,8 @@ export function VocaDayShareButton({ studentId, dayId }: Props) {
         token = created.token;
       }
 
-      // 3. Copy URL with voca_day param
-      const url = `${window.location.origin}/parent/${token}?voca_day=${dayId}`;
+      // 3. Copy URL — 종합 리포트 링크 (오늘 학습 섹션이 자동 표시됨)
+      const url = `${window.location.origin}/parent/${token}`;
       await navigator.clipboard.writeText(url);
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
