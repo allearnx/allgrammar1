@@ -35,7 +35,7 @@ export function VocaDayShareButton({ studentId }: Props) {
       }
 
       // 3. Copy URL — 종합 리포트 링크 (오늘 학습 섹션이 자동 표시됨)
-      const url = `${window.location.origin}/parent/${token}`;
+      const url = `${window.location.origin}/parent/${token}?tab=voca`;
       await navigator.clipboard.writeText(url);
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);

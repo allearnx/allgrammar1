@@ -10,12 +10,12 @@ import { Lock, BookA, CheckCircle, Clock, MinusCircle, History } from 'lucide-re
 
 interface Props {
   params: Promise<{ token: string }>;
-  searchParams: Promise<{ voca_day?: string }>;
+  searchParams: Promise<{ voca_day?: string; tab?: string }>;
 }
 
 export async function generateMetadata({ params, searchParams }: Props): Promise<Metadata> {
   const { token } = await params;
-  const { voca_day: vocaDayId } = await searchParams;
+  const { voca_day: vocaDayId, tab } = await searchParams;
   const admin = createAdminClient();
 
   const { data: tokenRow } = await admin
@@ -53,6 +53,16 @@ export async function generateMetadata({ params, searchParams }: Props): Promise
         openGraph: { title, description },
       };
     }
+  }
+
+  if (tab === 'voca') {
+    const title = `${name} 올킬보카 성적표`;
+    const description = '올킬보카 학습 현황 및 점수';
+    return {
+      title,
+      description,
+      openGraph: { title, description },
+    };
   }
 
   const title = `${name} 학습 리포트`;
