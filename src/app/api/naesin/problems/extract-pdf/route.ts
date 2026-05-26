@@ -10,7 +10,9 @@ import { PDFDocument } from 'pdf-lib';
 export const maxDuration = 300;
 
 const MAX_FILE_SIZE = 20 * 1024 * 1024; // 20MB
-const PAGES_PER_CHUNK = 3;
+// pdf-lib copyPages가 한글 CID 폰트를 제대로 복사하지 못해 한글 깨짐 발생.
+// 시험 문제지는 대부분 20페이지 이하이므로 분할 없이 통째로 Claude에 전달.
+const PAGES_PER_CHUNK = 50;
 const IMAGE_TYPES = new Set(['image/png', 'image/jpeg', 'image/jpg', 'image/webp', 'image/gif']);
 
 const anthropic = new Anthropic();
