@@ -48,14 +48,14 @@ export function CreateExternalPassageDialog({ unitId, onAdd }: { unitId: string;
 
     setStep('extracting');
     try {
-      const formData = new FormData();
-      formData.append('file', file);
+      const { uploadForExtract } = await import('@/lib/upload-for-extract');
+      const { publicUrl, storagePath } = await uploadForExtract(file);
 
       const data = await fetchWithToast<{
         title: string;
         sentences?: { original: string; korean: string }[];
       }>('/api/naesin/passages/extract-text', {
-        body: formData,
+        body: { pdfUrl: publicUrl, storagePath },
         silent: true,
       });
 

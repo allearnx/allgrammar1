@@ -19,20 +19,13 @@ export async function POST(request: NextRequest) {
   if (limited) return limited;
 
   try {
-    const formData = await request.formData();
-    const file = formData.get('file') as File | null;
-    const originalText = formData.get('original_text') as string | null;
-
-    if (!file || file.type !== 'application/pdf') {
-      return NextResponse.json({ error: 'PDF 파일을 업로드해주세요.' }, { status: 400 });
-    }
+    const { parsePdfInput, cleanupStorage } = await import('@/lib/api/pdf-input');
+    const { documentBlock, storagePath, extraFields } = await parsePdfInput(request);
+    const originalText = extraFields.original_text;
 
     if (!originalText?.trim()) {
       return NextResponse.json({ error: '원문 텍스트를 입력해주세요.' }, { status: 400 });
     }
-
-    const arrayBuffer = await file.arrayBuffer();
-    const base64Data = Buffer.from(arrayBuffer).toString('base64');
 
     const message = await anthropic.messages.create({
       model: 'claude-haiku-4-5-20251001',
@@ -41,14 +34,7 @@ export async function POST(request: NextRequest) {
         {
           role: 'user',
           content: [
-            {
-              type: 'document',
-              source: {
-                type: 'base64',
-                media_type: 'application/pdf',
-                data: base64Data,
-              },
-            },
+            documentBlock,
             {
               type: 'text',
               text: `이 PDF는 영어 교과서 빈칸 채우기 학습지입니다.
@@ -101,6 +87,7 @@ JSON 배열로만 응답 (다른 텍스트 없이):
         answer: b.answer,
       }));
 
+    cleanupStorage(storagePath);
     return NextResponse.json({ blanks: validated });
   } catch (error) {
     logger.error('ai.pdf_extract', { error: error instanceof Error ? error.message : String(error) });

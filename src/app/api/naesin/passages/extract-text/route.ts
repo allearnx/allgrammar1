@@ -19,15 +19,8 @@ export async function POST(request: NextRequest) {
   if (limited) return limited;
 
   try {
-    const formData = await request.formData();
-    const file = formData.get('file') as File | null;
-
-    if (!file || file.type !== 'application/pdf') {
-      return NextResponse.json({ error: 'PDF 파일을 업로드해주세요.' }, { status: 400 });
-    }
-
-    const arrayBuffer = await file.arrayBuffer();
-    const base64Data = Buffer.from(arrayBuffer).toString('base64');
+    const { parsePdfInput, cleanupStorage } = await import('@/lib/api/pdf-input');
+    const { documentBlock, storagePath } = await parsePdfInput(request);
 
     const message = await anthropic.messages.create({
       model: 'claude-haiku-4-5-20251001',
@@ -36,14 +29,7 @@ export async function POST(request: NextRequest) {
         {
           role: 'user',
           content: [
-            {
-              type: 'document',
-              source: {
-                type: 'base64',
-                media_type: 'application/pdf',
-                data: base64Data,
-              },
-            },
+            documentBlock,
             {
               type: 'text',
               text: `이 PDF는 중학교 영어 교과서 지문입니다.
@@ -89,6 +75,7 @@ JSON 객체로만 응답 (다른 텍스트 없이):
     if (result.sentences && result.sentences.length > 0) {
       const originalText = result.sentences.map((s) => s.original).join(' ');
       const koreanTranslation = result.sentences.map((s) => s.korean).join(' ');
+      cleanupStorage(storagePath);
       return NextResponse.json({
         title: result.title || '',
         original_text: originalText,
@@ -96,6 +83,8 @@ JSON 객체로만 응답 (다른 텍스트 없이):
         sentences: result.sentences,
       });
     }
+
+    cleanupStorage(storagePath);
 
     // Fallback: legacy format
     return NextResponse.json({

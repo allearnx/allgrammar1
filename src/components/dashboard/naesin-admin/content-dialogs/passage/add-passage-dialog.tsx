@@ -44,11 +44,11 @@ export function AddPassageDialog({ unitId, onAdd }: { unitId: string; onAdd: () 
     if (!file) return;
     setExtractingText(true);
     try {
-      const formData = new FormData();
-      formData.append('file', file);
+      const { uploadForExtract } = await import('@/lib/upload-for-extract');
+      const { publicUrl, storagePath } = await uploadForExtract(file);
       const data = await fetchWithToast<{ title?: string; sentences?: { original: string; korean: string }[]; original_text?: string; korean_translation?: string }>(
         '/api/naesin/passages/extract-text',
-        { body: formData, successMessage: '본문이 추출되었습니다. 문장별로 확인/수정해주세요.', errorMessage: 'PDF 추출 실패' },
+        { body: { pdfUrl: publicUrl, storagePath }, successMessage: '본문이 추출되었습니다. 문장별로 확인/수정해주세요.', errorMessage: 'PDF 추출 실패' },
       );
       if (data.title) setTitle(data.title);
       if (data.sentences && data.sentences.length > 0) {

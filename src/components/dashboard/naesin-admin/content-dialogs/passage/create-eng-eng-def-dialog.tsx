@@ -97,14 +97,13 @@ export function CreateEngEngDefDialog({ unitId, onAdd }: { unitId: string; onAdd
 
     try {
       // 각 파일을 개별 전송 → 결과 합침
+      const { uploadForExtract } = await import('@/lib/upload-for-extract');
       const results = await Promise.all(
         Array.from(selectedFiles).map(async (f) => {
-          const form = new FormData();
-          form.append('file', f);
-          form.append('extractType', 'eng_eng_def');
+          const { publicUrl, storagePath } = await uploadForExtract(f);
           const { questions } = await fetchWithToast<{ questions: NaesinProblemQuestion[] }>(
             '/api/naesin/problems/extract-pdf',
-            { body: form, silent: true },
+            { body: { pdfUrl: publicUrl, storagePath, extractType: 'eng_eng_def' }, silent: true },
           );
           return questions;
         }),

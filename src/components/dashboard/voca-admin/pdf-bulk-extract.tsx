@@ -49,13 +49,13 @@ export function PdfBulkExtract({ bookId, onCreated }: { bookId: string; onCreate
     if (!file) return;
     setExtracting(true);
     try {
-      const formData = new FormData();
-      formData.append('file', file);
+      const { uploadForExtract } = await import('@/lib/upload-for-extract');
+      const { publicUrl, storagePath } = await uploadForExtract(file);
 
       const data = await fetchWithToast<{ items: Omit<ExtractedWord, 'selected'>[] }>(
         '/api/voca/vocabulary/extract-pdf',
         {
-          body: formData,
+          body: { pdfUrl: publicUrl, storagePath },
           errorMessage: 'PDF 단어 추출 실패',
           logContext: 'voca_admin.pdf_bulk',
         },

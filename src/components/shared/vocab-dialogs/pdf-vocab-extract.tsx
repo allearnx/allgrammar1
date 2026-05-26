@@ -51,13 +51,13 @@ export function PdfVocabExtract({ module, parentId, onAdd }: VocabDialogProps) {
     if (!file) return;
     setExtracting(true);
     try {
-      const formData = new FormData();
-      formData.append('file', file);
+      const { uploadForExtract } = await import('@/lib/upload-for-extract');
+      const { publicUrl, storagePath } = await uploadForExtract(file);
 
       const data = await fetchWithToast<{ items: Omit<ExtractedWord, 'selected'>[] }>(
         `${cfg.apiBase}/extract-pdf`,
         {
-          body: formData,
+          body: { pdfUrl: publicUrl, storagePath },
           errorMessage: 'PDF 단어 추출 실패',
           logContext: `${cfg.logPrefix}.pdf_vocab_extract`,
         },

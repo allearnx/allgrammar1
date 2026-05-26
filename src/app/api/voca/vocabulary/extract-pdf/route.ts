@@ -62,17 +62,10 @@ export async function POST(request: NextRequest) {
   if (limited) return limited;
 
   try {
-    const formData = await request.formData();
-    const file = formData.get('file') as File | null;
+    const { parsePdfInput, cleanupStorage } = await import('@/lib/api/pdf-input');
+    const { documentBlock, storagePath } = await parsePdfInput(request);
 
-    if (!file || file.type !== 'application/pdf') {
-      return NextResponse.json({ error: 'PDF 파일을 업로드해주세요.' }, { status: 400 });
-    }
-
-    const arrayBuffer = await file.arrayBuffer();
-    const base64Data = Buffer.from(arrayBuffer).toString('base64');
-
-    logger.info('ai.pdf_extract', { fileSize: arrayBuffer.byteLength });
+    logger.info('ai.pdf_extract', { mode: storagePath ? 'url' : 'formdata' });
 
     const message = await anthropic.messages.create({
       model: 'claude-sonnet-4-6',
@@ -81,14 +74,7 @@ export async function POST(request: NextRequest) {
         {
           role: 'user',
           content: [
-            {
-              type: 'document',
-              source: {
-                type: 'base64',
-                media_type: 'application/pdf',
-                data: base64Data,
-              },
-            },
+            documentBlock,
             { type: 'text', text: PROMPT },
           ],
         },
@@ -120,6 +106,7 @@ export async function POST(request: NextRequest) {
       return true;
     });
 
+    cleanupStorage(storagePath);
     return NextResponse.json({ items });
   } catch (error) {
     logger.error('ai.pdf_extract', { error: error instanceof Error ? error.message : String(error) });

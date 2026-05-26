@@ -145,28 +145,18 @@ export function AddMockExamDialog({ unitId, textbookId, onAdd }: { unitId?: stri
     setStep('loading');
 
     try {
-      // 1) PDF인 경우 첫 번째 PDF를 Supabase Storage에 업로드
-      if (hasPdf) {
-        const pdfFile = Array.from(selectedFiles).find((f) => f.type === 'application/pdf')!;
-        const uploadForm = new FormData();
-        uploadForm.append('file', pdfFile);
-        const { url } = await fetchWithToast<{ url: string }>('/api/naesin/passages/upload-pdf', {
-          body: uploadForm,
-          errorMessage: 'PDF 업로드 실패',
-        });
-        setPdfUrl(url);
-      }
-
       const allQuestions: ExtractedQuestion[] = [];
 
-      // 2) PDF → 기존 extract-pdf (청크 병렬 처리)
+      // 1) PDF → Storage 업로드 후 URL로 추출 (Vercel 4.5MB 제한 우회)
       if (hasPdf) {
         const pdfFile = Array.from(selectedFiles).find((f) => f.type === 'application/pdf')!;
-        const form = new FormData();
-        form.append('file', pdfFile);
+        const { uploadForExtract } = await import('@/lib/upload-for-extract');
+        const { publicUrl, storagePath } = await uploadForExtract(pdfFile);
+        setPdfUrl(publicUrl);
+
         const { questions } = await fetchWithToast<{ questions: ExtractedQuestion[] }>(
           '/api/naesin/problems/extract-pdf',
-          { body: form, silent: true },
+          { body: { pdfUrl: publicUrl, storagePath }, silent: true },
         );
         allQuestions.push(...questions);
       }

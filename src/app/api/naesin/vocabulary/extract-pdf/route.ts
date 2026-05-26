@@ -19,16 +19,8 @@ export async function POST(request: NextRequest) {
   if (limited) return limited;
 
   try {
-    const formData = await request.formData();
-    const file = formData.get('file') as File | null;
-
-    if (!file || file.type !== 'application/pdf') {
-      return NextResponse.json({ error: 'PDF 파일을 업로드해주세요.' }, { status: 400 });
-    }
-
-    // Convert PDF to base64
-    const arrayBuffer = await file.arrayBuffer();
-    const base64Data = Buffer.from(arrayBuffer).toString('base64');
+    const { parsePdfInput, cleanupStorage } = await import('@/lib/api/pdf-input');
+    const { documentBlock, storagePath } = await parsePdfInput(request);
 
     const message = await anthropic.messages.create({
       model: 'claude-sonnet-4-6',
@@ -37,14 +29,7 @@ export async function POST(request: NextRequest) {
         {
           role: 'user',
           content: [
-            {
-              type: 'document',
-              source: {
-                type: 'base64',
-                media_type: 'application/pdf',
-                data: base64Data,
-              },
-            },
+            documentBlock,
             {
               type: 'text',
               text: `이 PDF는 중학교 영어 교과서 페이지입니다.
@@ -81,6 +66,7 @@ JSON 배열로만 응답 (다른 텍스트 없이):
 
     const items = JSON.parse(jsonMatch[0]);
 
+    cleanupStorage(storagePath);
     return NextResponse.json({ items });
   } catch (error) {
     logger.error('ai.pdf_extract', { error: error instanceof Error ? error.message : String(error) });

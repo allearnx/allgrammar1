@@ -56,12 +56,12 @@ export function PdfProblemExtractDialog({ unitId, unitTitle, onAdd }: { unitId: 
     setStep('loading');
 
     try {
-      const arrayBuffer = await file.arrayBuffer();
-      const base64 = Buffer.from(arrayBuffer).toString('base64');
+      const { uploadForExtract } = await import('@/lib/upload-for-extract');
+      const { publicUrl, storagePath } = await uploadForExtract(file);
 
       const data = await fetchWithToast<{ questions?: Record<string, unknown>[]; originalCount?: number; validation?: { structural: FullValidationResult['structural'] } }>(
         '/api/naesin/problems/extract-paraphrase',
-        { body: { unitId, unitTitle: unitTitle || '', pdfBase64: base64, mediaType: 'application/pdf' }, errorMessage: 'AI 문제 생성에 실패했습니다.' },
+        { body: { unitId, unitTitle: unitTitle || '', pdfUrl: publicUrl, storagePath }, errorMessage: 'AI 문제 생성에 실패했습니다.' },
       );
       editor.setQuestions(normalizeQuestions(data.questions || []));
       setOriginalCount(data.originalCount || 0);

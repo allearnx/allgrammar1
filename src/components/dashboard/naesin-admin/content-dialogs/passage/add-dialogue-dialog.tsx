@@ -52,11 +52,11 @@ export function AddDialogueDialog({ unitId, onAdd }: { unitId: string; onAdd: ()
     if (!file) return;
     setExtractingText(true);
     try {
-      const formData = new FormData();
-      formData.append('file', file);
+      const { uploadForExtract } = await import('@/lib/upload-for-extract');
+      const { publicUrl, storagePath } = await uploadForExtract(file);
       const data = await fetchWithToast<{ title?: string; sentences?: { original: string; korean: string; speaker?: string }[] }>(
         '/api/naesin/dialogues/extract-text',
-        { body: formData, successMessage: '대화문이 추출되었습니다. 문장별로 확인/수정해주세요.', errorMessage: 'PDF 추출 실패' },
+        { body: { pdfUrl: publicUrl, storagePath }, successMessage: '대화문이 추출되었습니다. 문장별로 확인/수정해주세요.', errorMessage: 'PDF 추출 실패' },
       );
       if (data.title) setTitle(data.title);
       if (data.sentences && data.sentences.length > 0) {

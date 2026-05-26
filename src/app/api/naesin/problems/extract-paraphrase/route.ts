@@ -85,11 +85,16 @@ export async function POST(request: NextRequest) {
   if (limited) return limited;
 
   try {
-    const { unitId, unitTitle, pdfBase64, mediaType } = await request.json();
+    const { unitId, unitTitle, pdfBase64, mediaType, pdfUrl, storagePath } = await request.json();
 
-    if (!unitId || !pdfBase64 || !mediaType) {
-      return NextResponse.json({ error: 'unitId, pdfBase64, mediaType는 필수입니다.' }, { status: 400 });
+    if (!unitId || (!pdfBase64 && !pdfUrl)) {
+      return NextResponse.json({ error: 'unitId와 pdfBase64 또는 pdfUrl이 필요합니다.' }, { status: 400 });
     }
+
+    // Document source: URL 또는 base64
+    const documentBlock = pdfUrl
+      ? { type: 'document' as const, source: { type: 'url' as const, url: pdfUrl as string } }
+      : { type: 'document' as const, source: { type: 'base64' as const, media_type: 'application/pdf' as const, data: pdfBase64 as string } };
 
     // Step 1: Extract problems from PDF (Haiku — fast OCR, quality-critical paraphrasing stays Sonnet)
     const extractMessage = await anthropic.messages.create({
@@ -99,10 +104,7 @@ export async function POST(request: NextRequest) {
         {
           role: 'user',
           content: [
-            {
-              type: 'document',
-              source: { type: 'base64', media_type: mediaType, data: pdfBase64 },
-            },
+            documentBlock,
             {
               type: 'text',
               text: `이 PDF는 중학교 영어 시험 문제지입니다.
@@ -168,6 +170,13 @@ export async function POST(request: NextRequest) {
 
     // Layer 1: Structural validation (free, instant)
     const structural = validateProblemStructure(questions as NaesinProblemQuestion[], mcqQuestions.length, subjectiveQuestions.length);
+
+    // Storage 임시 파일 삭제
+    if (storagePath) {
+      import('@/lib/supabase/admin').then(({ createAdminClient }) => {
+        createAdminClient().storage.from('public-images').remove([storagePath]).catch(() => {});
+      });
+    }
 
     return NextResponse.json({ questions, originalCount: originalQuestions.length, validation: { structural } });
   } catch (error) {

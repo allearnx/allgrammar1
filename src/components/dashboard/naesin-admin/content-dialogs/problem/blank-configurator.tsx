@@ -45,11 +45,10 @@ export function BlankConfigurator({
 
     setExtracting(true);
     try {
-      const formData = new FormData();
-      formData.append('file', file);
-      formData.append('original_text', originalText);
+      const { uploadForExtract } = await import('@/lib/upload-for-extract');
+      const { publicUrl, storagePath } = await uploadForExtract(file);
       const data = await fetchWithToast<{ blanks: BlankItem[] }>('/api/naesin/passages/extract-blanks', {
-        body: formData,
+        body: { pdfUrl: publicUrl, storagePath, original_text: originalText },
         errorMessage: 'PDF 추출 실패',
       });
       onUpdate(data.blanks);
