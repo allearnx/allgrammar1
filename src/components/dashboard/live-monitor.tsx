@@ -1,8 +1,7 @@
 'use client';
 
-import { useCallback, useEffect, useState } from 'react';
 import Link from 'next/link';
-import { fetchWithToast } from '@/lib/fetch-with-toast';
+import { useQuery } from '@tanstack/react-query';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent } from '@/components/ui/card';
 import { RefreshCw } from 'lucide-react';
@@ -61,34 +60,24 @@ const STATUS_CONFIG: Record<Status, { dot: string; card: string; label: string }
   },
 };
 
-const POLL_INTERVAL = 30_000;
+const POLL_INTERVAL = 60_000;
+
+async function fetchMonitorData(): Promise<MonitorData> {
+  const res = await fetch('/api/live-monitor');
+  if (!res.ok) throw new Error('live-monitor fetch failed');
+  return res.json();
+}
 
 export function LiveMonitorClient({ basePath }: { basePath: string }) {
-  const [data, setData] = useState<MonitorData | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [lastUpdated, setLastUpdated] = useState<Date | null>(null);
+  const { data, isLoading, dataUpdatedAt } = useQuery({
+    queryKey: ['live-monitor'],
+    queryFn: fetchMonitorData,
+    refetchInterval: POLL_INTERVAL,
+    staleTime: POLL_INTERVAL,
+  });
 
-  const fetchData = useCallback(async () => {
-    try {
-      const result = await fetchWithToast<MonitorData>('/api/live-monitor', {
-        method: 'GET',
-        silent: true,
-        logContext: 'live_monitor',
-      });
-      setData(result);
-      setLastUpdated(new Date());
-    } catch {
-      // silently handled
-    } finally {
-      setLoading(false);
-    }
-  }, []);
-
-  useEffect(() => {
-    fetchData();
-    const interval = setInterval(fetchData, POLL_INTERVAL);
-    return () => clearInterval(interval);
-  }, [fetchData]);
+  const lastUpdated = dataUpdatedAt ? new Date(dataUpdatedAt) : null;
+  const loading = isLoading;
 
   if (loading && !data) {
     return (
@@ -130,7 +119,7 @@ export function LiveMonitorClient({ basePath }: { basePath: string }) {
         </div>
         <p className="text-xs text-muted-foreground">
           {lastUpdated && `${formatTime(lastUpdated)} 갱신`}
-          {' · '}30초마다 자동 갱신
+          {' · '}1분마다 자동 갱신
         </p>
       </div>
 

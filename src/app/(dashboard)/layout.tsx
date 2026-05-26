@@ -1,11 +1,14 @@
 import type { Metadata } from 'next';
+import { unstable_cache } from 'next/cache';
 import { requireUser } from '@/lib/auth/helpers';
 import { createClient } from '@/lib/supabase/server';
+import { createAdminClient } from '@/lib/supabase/admin';
 import { Sidebar } from '@/components/layout/sidebar';
 import { PaidStatusProvider } from '@/components/layout/paid-status-context';
 import { PresenceTracker } from '@/components/layout/presence-tracker';
 import { AnnouncementBanner } from '@/components/dashboard/announcement-banner';
-import { getPlanContext } from '@/lib/billing/get-plan-context';
+import { QueryProvider } from '@/components/providers/query-provider';
+import { deriveTier } from '@/lib/billing/feature-gate';
 import { calculateStageStatuses } from '@/lib/naesin/stage-unlock';
 import { groupBy } from '@/lib/naesin/build-unit-summary';
 import type { NaesinStageStatuses } from '@/types/database';
@@ -38,27 +41,23 @@ export default async function DashboardLayout({
   let naesinTree: NaesinSidebarExam[] | undefined;
 
   if (user.role === 'student') {
-    const supabase = await createClient();
-    const { data } = await supabase
-      .from('service_assignments')
-      .select('service')
-      .eq('student_id', user.id);
-    services = data?.map((d) => d.service) || [];
+    services = await getCachedServices(user.id);
 
-    // Fetch naesin sidebar tree if student has naesin service
+    // Fetch naesin sidebar tree if student has naesin service (cached 60s)
     if (services.includes('naesin')) {
-      naesinTree = await fetchNaesinTree(supabase, user.id);
+      naesinTree = (await getCachedNaesinTree(user.id)) ?? undefined;
     }
   }
 
-  // Compute isPaid for Topbar NotificationCenter gating
+  // Compute isPaid for Topbar NotificationCenter gating (cached 5min)
   const isPaid =
     user.role === 'boss' ||
     (user.academy_id
-      ? (await getPlanContext(user.academy_id)).tier !== 'free'
+      ? await getCachedIsPaid(user.academy_id)
       : false);
 
   return (
+    <QueryProvider>
     <PaidStatusProvider isPaid={isPaid}>
     <PresenceTracker />
     <div className="flex h-[100dvh] overflow-hidden">
@@ -80,10 +79,59 @@ export default async function DashboardLayout({
       </a>
     </div>
     </PaidStatusProvider>
+    </QueryProvider>
   );
 }
 
-type SupabaseClient = Awaited<ReturnType<typeof createClient>>;
+/** Cached student services — TTL 5min */
+function getCachedServices(studentId: string) {
+  return unstable_cache(
+    async () => {
+      const admin = createAdminClient();
+      const { data } = await admin
+        .from('service_assignments')
+        .select('service')
+        .eq('student_id', studentId);
+      return data?.map((d) => d.service) || [];
+    },
+    ['student-services', studentId],
+    { revalidate: 300, tags: [`student-services:${studentId}`] },
+  )();
+}
+
+/** Cached isPaid check — TTL 5min */
+function getCachedIsPaid(academyId: string) {
+  return unstable_cache(
+    async () => {
+      const admin = createAdminClient();
+      const { data: sub } = await admin
+        .from('subscriptions')
+        .select('status, tier')
+        .eq('academy_id', academyId)
+        .in('status', ['trialing', 'active', 'past_due'])
+        .order('created_at', { ascending: false })
+        .limit(1)
+        .single();
+      return deriveTier(sub) !== 'free';
+    },
+    ['is-paid', academyId],
+    { revalidate: 300, tags: [`is-paid:${academyId}`] },
+  )();
+}
+
+/** Cached wrapper — reuses fetchNaesinTree with admin client, TTL 60s */
+function getCachedNaesinTree(studentId: string) {
+  return unstable_cache(
+    async () => {
+      const admin = createAdminClient();
+      return (await fetchNaesinTree(admin, studentId)) ?? null;
+    },
+    ['naesin-sidebar', studentId],
+    { revalidate: 60, tags: [`naesin-sidebar:${studentId}`] },
+  )();
+}
+
+type SupabaseClient = Awaited<ReturnType<typeof createClient>> | ReturnType<typeof createAdminClient>;
 
 async function fetchNaesinTree(
   supabase: SupabaseClient,

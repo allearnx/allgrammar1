@@ -3,7 +3,7 @@ import { createApiHandler } from '@/lib/api';
 import { createAdminClient } from '@/lib/supabase/admin';
 import { countCompletedStages, STAGE_COMPLETION_COLS } from '@/lib/naesin/progress-queries';
 
-const ACTIVE_THRESHOLD_MS = 2 * 60 * 1000; // 2 minutes
+const ACTIVE_THRESHOLD_MS = 3 * 60 * 1000; // 3 minutes
 
 const STAGE_LABELS: Record<string, string> = {
   vocab: '단어 암기',

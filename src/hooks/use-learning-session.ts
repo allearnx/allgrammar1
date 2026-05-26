@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from 'react';
 
-const HEARTBEAT_INTERVAL = 30_000; // 30 seconds
+const HEARTBEAT_INTERVAL = 60_000; // 60 seconds
 
 export function useLearningSession(
   contextType: 'naesin' | 'voca',

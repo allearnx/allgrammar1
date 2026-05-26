@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from 'react';
 
-const PRESENCE_INTERVAL = 60_000; // 60 seconds
+const PRESENCE_INTERVAL = 120_000; // 120 seconds
 
 export function PresenceTracker() {
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);

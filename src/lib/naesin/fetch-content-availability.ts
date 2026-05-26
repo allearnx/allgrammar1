@@ -15,76 +15,64 @@ interface ContentAvailabilityResult {
   problemSheetsAttempted: number;
 }
 
+/**
+ * 단일 RPC 호출로 유닛의 콘텐츠 존재 여부 + 학생 진도를 조회.
+ * 기존 14개 병렬 쿼리 → 1개 DB 함수 호출로 통합.
+ */
 export async function fetchContentAvailability(
   supabase: SupabaseClient,
   userId: string,
   unitId: string,
   textbookId: string | null,
 ): Promise<ContentAvailabilityResult> {
-  const [
-    progressRes,
-    vocabCountRes,
-    passageCountRes,
-    dialogueCountRes,
-    grammarRes,
-    textbookVideoCountRes,
-    problemCountRes,
-    mockExamCountRes,
-    lastReviewSheetCountRes,
-    similarProblemCountRes,
-    reviewContentCountRes,
-    examDateRes,
-    quizSetsRes,
-    problemAttemptsRes,
-  ] = await Promise.all([
-    supabase.from('naesin_student_progress').select('*').eq('student_id', userId).eq('unit_id', unitId).single(),
-    supabase.from('naesin_vocabulary').select('id', { count: 'exact', head: true }).eq('unit_id', unitId),
-    supabase.from('naesin_passages').select('id', { count: 'exact', head: true }).eq('unit_id', unitId),
-    supabase.from('naesin_dialogues').select('id', { count: 'exact', head: true }).eq('unit_id', unitId),
-    supabase.from('naesin_grammar_lessons').select('id, content_type').eq('unit_id', unitId),
-    supabase.from('naesin_textbook_videos').select('id', { count: 'exact', head: true }).eq('unit_id', unitId),
-    supabase.from('naesin_problem_sheets').select('id').eq('unit_id', unitId).in('category', ['problem', 'external_passage', 'eng_eng_def']),
-    supabase.from('naesin_problem_sheets').select('id', { count: 'exact', head: true }).eq('unit_id', unitId).eq('category', 'mock_exam'),
-    supabase.from('naesin_problem_sheets').select('id', { count: 'exact', head: true }).eq('unit_id', unitId).eq('category', 'last_review'),
-    supabase.from('naesin_similar_problems').select('id', { count: 'exact', head: true }).eq('unit_id', unitId).eq('status', 'approved'),
-    supabase.from('naesin_last_review_content').select('id', { count: 'exact', head: true }).eq('unit_id', unitId),
-    textbookId
-      ? supabase.from('naesin_exam_dates').select('exam_date').eq('student_id', userId).eq('textbook_id', textbookId).single()
-      : Promise.resolve({ data: null }),
-    supabase.from('naesin_vocab_quiz_sets').select('id').eq('unit_id', unitId),
-    supabase.from('naesin_problem_attempts').select('sheet_id').eq('student_id', userId),
-  ]);
+  const { data, error } = await supabase.rpc('get_unit_content_availability', {
+    p_student_id: userId,
+    p_unit_id: unitId,
+    p_textbook_id: textbookId,
+  });
 
-  const grammarLessonsAll = grammarRes.data || [];
-  const textbookVideoCount = textbookVideoCountRes.count ?? 0;
-  const problemSheets = problemCountRes.data || [];
-  const problemSheetIds = problemSheets.map((s) => s.id);
-  const attemptedSheetIds = new Set((problemAttemptsRes.data || []).map((r) => r.sheet_id));
-  const problemSheetsAttempted = problemSheetIds.filter((id) => attemptedSheetIds.has(id)).length;
-  const hasLastReviewContent =
-    (lastReviewSheetCountRes.count ?? 0) > 0 ||
-    (similarProblemCountRes.count ?? 0) > 0 ||
-    (reviewContentCountRes.count ?? 0) > 0;
+  if (error || !data) {
+    return {
+      progress: null,
+      contentAvailability: {
+        hasVocab: false,
+        hasPassage: false,
+        hasDialogue: false,
+        hasTextbookVideo: false,
+        hasGrammar: false,
+        hasProblem: false,
+        hasMockExam: false,
+        hasLastReview: false,
+      },
+      videoLessons: [],
+      textbookVideoCount: 0,
+      quizSetIds: [],
+      examDate: null,
+      problemSheetCount: 0,
+      problemSheetsAttempted: 0,
+    };
+  }
 
-  const examDate = examDateRes.data?.exam_date || null;
+  const d = data as Record<string, unknown>;
+  const grammarLessons = (d.grammar_lessons as { id: string; content_type: string }[]) || [];
 
   return {
-    progress: progressRes.data,
+    progress: (d.progress as NaesinStudentProgress) ?? null,
     contentAvailability: {
-      hasVocab: (vocabCountRes.count ?? 0) > 0,
-      hasPassage: (passageCountRes.count ?? 0) > 0,
-      hasDialogue: (dialogueCountRes.count ?? 0) > 0,
-      hasTextbookVideo: textbookVideoCount > 0,
-      hasGrammar: grammarLessonsAll.length > 0,
-      hasProblem: problemSheetIds.length > 0,
-      hasMockExam: (mockExamCountRes.count ?? 0) > 0,
-      hasLastReview: hasLastReviewContent || !!examDate,
+      hasVocab: d.has_vocab as boolean,
+      hasPassage: d.has_passage as boolean,
+      hasDialogue: d.has_dialogue as boolean,
+      hasTextbookVideo: d.has_textbook_video as boolean,
+      hasGrammar: d.has_grammar as boolean,
+      hasProblem: d.has_problem as boolean,
+      hasMockExam: d.has_mock_exam as boolean,
+      hasLastReview: d.has_last_review as boolean,
     },
-    videoLessons: grammarLessonsAll.filter((l) => l.content_type === 'video'),
-    textbookVideoCount,
-    quizSetIds: (quizSetsRes.data || []).map((s) => s.id),
-    examDate,
-    problemSheetCount: problemSheetIds.length,
-    problemSheetsAttempted,
+    videoLessons: grammarLessons.filter((l) => l.content_type === 'video'),
+    textbookVideoCount: d.textbook_video_count as number,
+    quizSetIds: (d.quiz_set_ids as string[]) || [],
+    examDate: (d.exam_date as string) ?? null,
+    problemSheetCount: d.problem_sheet_count as number,
+    problemSheetsAttempted: d.problem_sheets_attempted as number,
   };
 }
