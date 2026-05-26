@@ -126,7 +126,8 @@ export function AddTemplateFromPdfDialog({ open, onOpenChange, onAdd }: Props) {
       setExtractedQuestions(allQuestions);
       if (!title) setTitle(hasPdf ? 'PDF 추출 템플릿' : '이미지 추출 템플릿');
       setStep('preview');
-    } catch {
+    } catch (err) {
+      toast.error('문제 추출 실패', { description: err instanceof Error ? err.message : '파일을 확인 후 다시 시도해주세요.' });
       setStep('form');
       if (fileInputRef.current) fileInputRef.current.value = '';
     }
