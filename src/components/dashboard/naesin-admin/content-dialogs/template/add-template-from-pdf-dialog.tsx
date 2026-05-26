@@ -83,14 +83,33 @@ export function AddTemplateFromPdfDialog({ open, onOpenChange, onAdd }: Props) {
     try {
       const allQuestions: ExtractedQuestion[] = [];
 
-      // PDF → extract-pdf (청크 병렬 처리)
+      // PDF → Storage 업로드 후 URL로 추출 (Vercel 4.5MB 본문 제한 우회)
       if (hasPdf) {
         const pdfFile = Array.from(selectedFiles).find((f) => f.type === 'application/pdf')!;
-        const form = new FormData();
-        form.append('file', pdfFile);
+
+        if (pdfFile.size > 20 * 1024 * 1024) {
+          toast.error('PDF 파일은 20MB 이하만 가능합니다.');
+          setStep('form');
+          return;
+        }
+
+        // 1. 서명된 업로드 URL 발급
+        const { signedUrl, publicUrl, path } = await fetchWithToast<{
+          signedUrl: string; publicUrl: string; path: string;
+        }>('/api/naesin/get-upload-url', { body: {}, silent: true });
+
+        // 2. PDF를 Supabase Storage에 직접 업로드 (Vercel 우회)
+        const uploadRes = await fetch(signedUrl, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/pdf' },
+          body: pdfFile,
+        });
+        if (!uploadRes.ok) throw new Error('PDF 업로드에 실패했습니다. 다시 시도해주세요.');
+
+        // 3. URL로 문제 추출
         const { questions } = await fetchWithToast<{ questions: ExtractedQuestion[] }>(
           '/api/naesin/problems/extract-pdf',
-          { body: form, silent: true },
+          { body: { pdfUrl: publicUrl, storagePath: path }, silent: true },
         );
         allQuestions.push(...questions);
       }

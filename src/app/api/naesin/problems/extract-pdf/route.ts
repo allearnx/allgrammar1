@@ -177,6 +177,30 @@ async function extractFromImage(base64Data: string, mediaType: string, label: st
   return questions;
 }
 
+/** URL 기반 PDF에 대해 Claude API 호출 (Vercel 본문 제한 우회) */
+async function extractFromPdfUrl(pdfUrl: string, prompt: string) {
+  const message = await anthropic.messages.create({
+    model: 'claude-haiku-4-5-20251001',
+    max_tokens: 16384,
+    messages: [
+      {
+        role: 'user',
+        content: [
+          {
+            type: 'document',
+            source: { type: 'url', url: pdfUrl },
+          },
+          { type: 'text', text: prompt },
+        ],
+      },
+    ],
+  });
+
+  const questions = parseAiJsonArray(message);
+  logger.info('ai.pdf_extract.url_done', { count: questions.length });
+  return questions;
+}
+
 export async function POST(request: NextRequest) {
   const user = await getUser();
   if (!user || !['teacher', 'admin', 'boss'].includes(user.role)) {
@@ -193,77 +217,114 @@ export async function POST(request: NextRequest) {
   if (limited) return limited;
 
   try {
-    const formData = await request.formData();
-    const file = formData.get('file') as File | null;
-    const extractType = formData.get('extractType') as string | null;
-    const prompt = getPromptForType(extractType);
-    const isPdf = file?.type === 'application/pdf';
-    const isImage = file ? IMAGE_TYPES.has(file.type) : false;
-
-    if (!file || (!isPdf && !isImage)) {
-      return NextResponse.json({ error: 'PDF 또는 이미지 파일(PNG, JPG)을 업로드해주세요.' }, { status: 400 });
-    }
-
-    if (file.size > MAX_FILE_SIZE) {
-      return NextResponse.json(
-        { error: `파일이 너무 큽니다 (${(file.size / 1024 / 1024).toFixed(1)}MB). 20MB 이하만 가능합니다.` },
-        { status: 400 },
-      );
-    }
-
-    const arrayBuffer = await file.arrayBuffer();
-
-    logger.info('ai.extract.start', {
-      userId: user.id,
-      fileType: file.type,
-      fileSize: arrayBuffer.byteLength,
-    });
-
+    const contentType = request.headers.get('content-type') || '';
     let allQuestions: Record<string, unknown>[];
+    let storagePath: string | undefined;
 
-    try {
-      if (isImage) {
-        const base64 = Buffer.from(arrayBuffer).toString('base64');
-        allQuestions = await extractFromImage(base64, file.type, file.name, prompt) as Record<string, unknown>[];
-      } else {
-        const chunks = await splitPdfIntoChunks(arrayBuffer, PAGES_PER_CHUNK);
-        logger.info('ai.pdf_extract.chunks', {
-          totalChunks: chunks.length,
-          pages: chunks.map((c) => c.pages).join(', '),
-        });
+    if (contentType.includes('application/json')) {
+      // === URL 기반 추출 (Vercel 4.5MB 본문 제한 우회) ===
+      const body = await request.json();
+      const pdfUrl: string = body.pdfUrl;
+      storagePath = body.storagePath;
+      const extractType: string | null = body.extractType || null;
+      const prompt = getPromptForType(extractType);
 
-        if (chunks.length === 1) {
-          allQuestions = await extractFromPdfChunk(chunks[0].base64, chunks[0].pages, prompt) as Record<string, unknown>[];
-        } else {
-          const results = await Promise.all(
-            chunks.map((chunk) => extractFromPdfChunk(chunk.base64, chunk.pages, prompt)),
-          );
-          allQuestions = results.flat() as Record<string, unknown>[];
-        }
+      if (!pdfUrl) {
+        return NextResponse.json({ error: 'pdfUrl이 필요합니다.' }, { status: 400 });
       }
-    } catch (apiError) {
-      const apiMsg = apiError instanceof Error ? apiError.message : String(apiError);
-      const apiStatus = (apiError as { status?: number })?.status;
-      console.log(JSON.stringify({
-        level: 'error',
-        msg: 'ai.extract.api_error',
-        ts: new Date().toISOString(),
-        error: apiMsg,
-        status: apiStatus,
-        fileSize: arrayBuffer.byteLength,
-        fileType: file.type,
-      }));
 
-      if (apiMsg.includes('too large') || apiMsg.includes('token') || apiMsg.includes('size')) {
+      logger.info('ai.extract.start', { userId: user.id, mode: 'url' });
+
+      try {
+        allQuestions = await extractFromPdfUrl(pdfUrl, prompt) as Record<string, unknown>[];
+      } catch (apiError) {
+        const apiMsg = apiError instanceof Error ? apiError.message : String(apiError);
+        const apiStatus = (apiError as { status?: number })?.status;
+        logger.error('ai.extract.api_error', { error: apiMsg, status: apiStatus, mode: 'url' });
+
+        if (apiMsg.includes('too large') || apiMsg.includes('token') || apiMsg.includes('size')) {
+          return NextResponse.json(
+            { error: '파일이 너무 크거나 내용이 많습니다. 파일을 나눠서 다시 시도해주세요.' },
+            { status: 400 },
+          );
+        }
         return NextResponse.json(
-          { error: '파일이 너무 크거나 내용이 많습니다. 파일을 나눠서 다시 시도해주세요.' },
+          { error: `AI 서버 연결에 실패했습니다. (${apiStatus ?? '?'}: ${apiMsg.slice(0, 120)})` },
+          { status: 502 },
+        );
+      }
+    } else {
+      // === FormData 기반 추출 (기존 방식, 4.5MB 이하 파일) ===
+      const formData = await request.formData();
+      const file = formData.get('file') as File | null;
+      const extractType = formData.get('extractType') as string | null;
+      const prompt = getPromptForType(extractType);
+      const isPdf = file?.type === 'application/pdf';
+      const isImage = file ? IMAGE_TYPES.has(file.type) : false;
+
+      if (!file || (!isPdf && !isImage)) {
+        return NextResponse.json({ error: 'PDF 또는 이미지 파일(PNG, JPG)을 업로드해주세요.' }, { status: 400 });
+      }
+
+      if (file.size > MAX_FILE_SIZE) {
+        return NextResponse.json(
+          { error: `파일이 너무 큽니다 (${(file.size / 1024 / 1024).toFixed(1)}MB). 20MB 이하만 가능합니다.` },
           { status: 400 },
         );
       }
-      return NextResponse.json(
-        { error: `AI 서버 연결에 실패했습니다. (${apiStatus ?? '?'}: ${apiMsg.slice(0, 120)})` },
-        { status: 502 },
-      );
+
+      const arrayBuffer = await file.arrayBuffer();
+
+      logger.info('ai.extract.start', {
+        userId: user.id,
+        fileType: file.type,
+        fileSize: arrayBuffer.byteLength,
+      });
+
+      try {
+        if (isImage) {
+          const base64 = Buffer.from(arrayBuffer).toString('base64');
+          allQuestions = await extractFromImage(base64, file.type, file.name, prompt) as Record<string, unknown>[];
+        } else {
+          const chunks = await splitPdfIntoChunks(arrayBuffer, PAGES_PER_CHUNK);
+          logger.info('ai.pdf_extract.chunks', {
+            totalChunks: chunks.length,
+            pages: chunks.map((c) => c.pages).join(', '),
+          });
+
+          if (chunks.length === 1) {
+            allQuestions = await extractFromPdfChunk(chunks[0].base64, chunks[0].pages, prompt) as Record<string, unknown>[];
+          } else {
+            const results = await Promise.all(
+              chunks.map((chunk) => extractFromPdfChunk(chunk.base64, chunk.pages, prompt)),
+            );
+            allQuestions = results.flat() as Record<string, unknown>[];
+          }
+        }
+      } catch (apiError) {
+        const apiMsg = apiError instanceof Error ? apiError.message : String(apiError);
+        const apiStatus = (apiError as { status?: number })?.status;
+        console.log(JSON.stringify({
+          level: 'error',
+          msg: 'ai.extract.api_error',
+          ts: new Date().toISOString(),
+          error: apiMsg,
+          status: apiStatus,
+          fileSize: arrayBuffer.byteLength,
+          fileType: file.type,
+        }));
+
+        if (apiMsg.includes('too large') || apiMsg.includes('token') || apiMsg.includes('size')) {
+          return NextResponse.json(
+            { error: '파일이 너무 크거나 내용이 많습니다. 파일을 나눠서 다시 시도해주세요.' },
+            { status: 400 },
+          );
+        }
+        return NextResponse.json(
+          { error: `AI 서버 연결에 실패했습니다. (${apiStatus ?? '?'}: ${apiMsg.slice(0, 120)})` },
+          { status: 502 },
+        );
+      }
     }
 
     // 정답 원문자(①→1) 정규화 + 중첩 배열 옵션 평탄화
@@ -297,7 +358,14 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    logger.info('ai.extract.done', { count: questions.length, fileType: file.type });
+    // Storage 임시 파일 삭제
+    if (storagePath) {
+      import('@/lib/supabase/admin').then(({ createAdminClient }) => {
+        createAdminClient().storage.from('public-images').remove([storagePath!]).catch(() => {});
+      });
+    }
+
+    logger.info('ai.extract.done', { count: questions.length });
     return NextResponse.json({ questions });
   } catch (error) {
     const msg = error instanceof Error ? error.message : String(error);
