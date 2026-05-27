@@ -76,7 +76,7 @@ export async function generateMetadata({ params, searchParams }: Props): Promise
 
 export default async function ParentReportPage({ params, searchParams }: Props) {
   const { token } = await params;
-  const { voca_day: vocaDayId } = await searchParams;
+  const { voca_day: vocaDayId, tab } = await searchParams;
   const admin = createAdminClient();
 
   // Validate token
@@ -276,6 +276,7 @@ export default async function ParentReportPage({ params, searchParams }: Props) 
             hasVoca={hasVoca}
             naesinCard={naesinCard}
             vocaCard={vocaCard}
+            defaultTab={tab === 'voca' ? 'voca' : undefined}
           />
         )}
 
