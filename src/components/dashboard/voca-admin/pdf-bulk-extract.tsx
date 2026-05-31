@@ -15,6 +15,7 @@ import {
 import { FileText, Loader2, Check, X as XIcon } from 'lucide-react';
 import { toast } from 'sonner';
 import { fetchWithToast } from '@/lib/fetch-with-toast';
+import type { VocaVocabulary } from '@/types/voca';
 
 interface ExtractedWord {
   front_text: string;
@@ -82,6 +83,45 @@ export function PdfBulkExtract({ bookId, onCreated }: { bookId: string; onCreate
     dayChunks.push(selectedWords.slice(i, i + wordsPerDay));
   }
 
+  async function autoEnrichDays(dayIds: string[]) {
+    const toastId = toast.loading(`2회독 데이터 자동 생성 중... (0/${dayIds.length})`);
+    let done = 0;
+
+    for (const dayId of dayIds) {
+      try {
+        const vocab = await fetchWithToast<VocaVocabulary[]>(
+          `/api/voca/vocabulary?dayId=${dayId}`,
+          { method: 'GET', silent: true, logContext: 'voca_admin.auto_enrich' },
+        );
+        const needsEnrich = (vocab || []).filter(
+          (v) => !v.synonyms && !v.antonyms && !v.example_sentence,
+        );
+        if (needsEnrich.length > 0) {
+          await fetchWithToast('/api/voca/vocabulary/enrich-round2', {
+            body: {
+              items: needsEnrich.map((v) => ({
+                id: v.id,
+                front_text: v.front_text,
+                back_text: v.back_text,
+                part_of_speech: v.part_of_speech,
+                example_sentence: v.example_sentence,
+                spelling_answer: v.spelling_answer,
+              })),
+            },
+            silent: true,
+            logContext: 'voca_admin.auto_enrich',
+          });
+        }
+      } catch {
+        // enrichment 실패해도 Day 생성에는 영향 없음
+      }
+      done++;
+      toast.loading(`2회독 데이터 자동 생성 중... (${done}/${dayIds.length})`, { id: toastId });
+    }
+
+    toast.success(`${done}개 Day의 2회독 데이터가 자동 생성되었습니다`, { id: toastId });
+  }
+
   async function handleSave() {
     if (selectedWords.length === 0) {
       toast.error('저장할 단어를 선택해주세요.');
@@ -94,7 +134,7 @@ export function PdfBulkExtract({ bookId, onCreated }: { bookId: string; onCreate
         spelling_answer: rest.front_text,
       }));
 
-      const data = await fetchWithToast<{ days: unknown[]; totalWords: number }>(
+      const data = await fetchWithToast<{ days: { id: string }[]; totalWords: number }>(
         '/api/voca/days-with-vocabulary',
         {
           body: { book_id: bookId, words_per_day: wordsPerDay, items },
@@ -103,10 +143,13 @@ export function PdfBulkExtract({ bookId, onCreated }: { bookId: string; onCreate
         },
       );
 
+      toast.success(`${data.days.length}개 Day, ${data.totalWords}개 단어가 생성되었습니다`);
       onCreated();
       setOpen(false);
       reset();
-      toast.success(`${data.days.length}개 Day, ${data.totalWords}개 단어가 생성되었습니다`);
+
+      // Day 저장 후 자동으로 2회독 데이터 보강 실행
+      autoEnrichDays(data.days.map((d) => d.id));
     } catch {
       // fetchWithToast already shows toast
     } finally {
