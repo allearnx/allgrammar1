@@ -62,6 +62,16 @@ export async function POST(request: NextRequest) {
   if (limited) return limited;
 
   try {
+    // FormData 업로드 시 PDF 파일 타입 검증
+    const ct = request.headers.get('content-type') || '';
+    if (!ct.includes('application/json')) {
+      const formData = await request.clone().formData();
+      const file = formData.get('file') as File | null;
+      if (file && file.type !== 'application/pdf') {
+        return NextResponse.json({ error: 'PDF 파일만 지원합니다.' }, { status: 400 });
+      }
+    }
+
     const { parsePdfInput, cleanupStorage } = await import('@/lib/api/pdf-input');
     const { documentBlock, storagePath } = await parsePdfInput(request);
 
