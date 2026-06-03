@@ -1,11 +1,12 @@
 'use client';
 
+import { useMemo } from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { toast } from 'sonner';
 import { fetchWithToast } from '@/lib/fetch-with-toast';
 import { cn } from '@/lib/utils';
 import { Download, FileText, Lock } from 'lucide-react';
-import { passageToTextbookPassage } from '@/lib/naesin/adapters';
+import { passageToTextbookPassage, augmentPassageStages } from '@/lib/naesin/adapters';
 import { NaesinFillBlanksView } from './fill-blanks-view';
 import { NaesinOrderingView } from './ordering-view';
 import { NaesinTranslationView } from './translation-view';
@@ -28,7 +29,12 @@ interface PassageTabProps {
 }
 
 export function PassageTab({ passages, unitId, onStageComplete, requiredStages, translationSentencesPerPage, naesinRequiredRounds, round1Completed }: PassageTabProps) {
-  const s = usePassageTabState({ requiredStages, naesinRequiredRounds, round1Completed });
+  const augmentedStages = useMemo(
+    () => augmentPassageStages(requiredStages, passages),
+    [requiredStages, passages],
+  );
+
+  const s = usePassageTabState({ requiredStages: augmentedStages, naesinRequiredRounds, round1Completed });
 
   if (passages.length === 0) {
     return (

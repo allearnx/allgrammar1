@@ -4,6 +4,7 @@ import type {
   TextbookPassage,
   NaesinVocabulary,
   NaesinPassage,
+  GrammarVocabItem,
 } from '@/types/database';
 import type { SentenceItem } from '@/types/textbook';
 
@@ -49,6 +50,28 @@ function mergeParagraphNumbers(sentences: SentenceItem[]): SentenceItem[] {
   }
 
   return result;
+}
+
+/**
+ * 설정(requiredStages)에 빠져 있더라도 passage 데이터가 실제로 존재하면 자동으로 탭을 추가한다.
+ * 예: grammar_vocab_items 데이터가 있으면 grammar_vocab 탭을 자동 노출.
+ */
+export const DEFAULT_PASSAGE_STAGES: string[] = ['fill_blanks', 'translation'];
+
+export function augmentPassageStages(
+  requiredStages: string[] | undefined | null,
+  passages: Pick<NaesinPassage, 'grammar_vocab_items'>[],
+): string[] {
+  const stages = [...(requiredStages ?? DEFAULT_PASSAGE_STAGES)];
+
+  if (!stages.includes('grammar_vocab')) {
+    const hasGV = passages.some(
+      (p) => ((p.grammar_vocab_items ?? []) as GrammarVocabItem[]).length > 0,
+    );
+    if (hasGV) stages.push('grammar_vocab');
+  }
+
+  return stages;
 }
 
 /**
