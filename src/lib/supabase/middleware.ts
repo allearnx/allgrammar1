@@ -146,15 +146,14 @@ export async function updateSession(request: NextRequest) {
     supabaseResponse.headers.getSetCookie().forEach((cookie) => {
       response.headers.append('set-cookie', cookie);
     });
-    if (!cacheHit) {
-      response.cookies.set('x-user-profile', JSON.stringify(profile), {
-        httpOnly: true,
-        secure: process.env.NODE_ENV === 'production',
-        sameSite: 'lax',
-        maxAge: 300,
-        path: '/',
-      });
-    }
+    // Always refresh cookie (sliding expiration)
+    response.cookies.set('x-user-profile', JSON.stringify(profile), {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'lax',
+      maxAge: 3600,
+      path: '/',
+    });
     return response;
   }
 
@@ -187,16 +186,14 @@ export async function updateSession(request: NextRequest) {
   supabaseResponse.headers.getSetCookie().forEach((cookie) => {
     response.headers.append('set-cookie', cookie);
   });
-  // Cache profile in cookie for subsequent navigations (5 min TTL)
-  if (!cacheHit) {
-    response.cookies.set('x-user-profile', JSON.stringify(profile), {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-      sameSite: 'lax',
-      maxAge: 300,
-      path: '/',
-    });
-  }
+  // Always refresh cookie (sliding expiration — extends on every navigation)
+  response.cookies.set('x-user-profile', JSON.stringify(profile), {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === 'production',
+    sameSite: 'lax',
+    maxAge: 3600,
+    path: '/',
+  });
   return response;
 }
 
