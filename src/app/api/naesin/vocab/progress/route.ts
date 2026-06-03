@@ -25,9 +25,9 @@ export const POST = createApiHandler(
     if (type === 'flashcard') {
       updates.vocab_flashcard_count = totalItems || (existing?.vocab_flashcard_count ?? 0);
     } else if (type === 'quiz') {
-      updates.vocab_quiz_score = score;
+      updates.vocab_quiz_score = Math.max(score, existing?.vocab_quiz_score ?? 0);
     } else if (type === 'spelling') {
-      updates.vocab_spelling_score = score;
+      updates.vocab_spelling_score = Math.max(score, existing?.vocab_spelling_score ?? 0);
     }
 
     // Check if vocab stage should be completed (quiz 80+ AND spelling 80+)

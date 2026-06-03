@@ -10,17 +10,27 @@ export const POST = createApiHandler(
     const isRound2 = round === '2';
 
     // Build update object based on type
+    // Fetch existing progress for best-score logic
+    const { data: existing } = await supabase
+      .from('voca_student_progress')
+      .select('*')
+      .eq('student_id', user.id)
+      .eq('day_id', dayId)
+      .single();
+
     const updates: Record<string, unknown> = { updated_at: new Date().toISOString() };
 
     switch (type) {
       case 'flashcard':
         updates[isRound2 ? 'round2_flashcard_completed' : 'flashcard_completed'] = true;
         break;
-      case 'quiz':
-        updates[isRound2 ? 'round2_quiz_score' : 'quiz_score'] = score;
+      case 'quiz': {
+        const col = isRound2 ? 'round2_quiz_score' : 'quiz_score';
+        updates[col] = Math.max(score ?? 0, existing?.[col] ?? 0);
         break;
+      }
       case 'spelling':
-        updates.spelling_score = score;
+        updates.spelling_score = Math.max(score ?? 0, existing?.spelling_score ?? 0);
         if (spellingWrongWords) {
           updates.spelling_wrong_words = spellingWrongWords;
         }
