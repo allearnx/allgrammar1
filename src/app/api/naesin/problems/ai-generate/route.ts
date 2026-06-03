@@ -6,6 +6,7 @@ import { aiProblemGenerateSchema } from '@/lib/api/schemas';
 import Anthropic from '@anthropic-ai/sdk';
 import { requireAiJsonArray } from '@/lib/ai-json';
 import { validateProblemStructure } from '@/lib/validation';
+import { autoFixAnswers } from '@/lib/validation/problem-validator';
 import type { NaesinProblemQuestion } from '@/types/naesin';
 
 export const maxDuration = 120;
@@ -62,6 +63,12 @@ GOOD (문법 이해 필요):
 ### 4. 해설
 각 문제의 정답 이유와 오답 이유를 간결하게 한국어로 작성하세요.
 
+### 5. 정답 자가 검증 (CRITICAL)
+모든 문제를 생성한 뒤, 각 문제에 대해 다음을 반드시 확인하세요:
+- answer 필드의 번호(1~5)가 options 배열에서 실제 정답 텍스트의 위치(1-indexed)와 일치하는지
+- 예: options가 ["A", "B", "C", "D", "E"]이고 정답이 "C"이면 answer는 반드시 "3"
+- 해설에서 설명하는 정답과 answer 번호가 가리키는 보기가 동일한지
+
 ## 출력 형식
 JSON 배열로만 응답하세요. 다른 텍스트는 포함하지 마세요.
 
@@ -71,7 +78,7 @@ JSON 배열로만 응답하세요. 다른 텍스트는 포함하지 마세요.
     "question": "다음 빈칸에 들어갈 말로 알맞은 것은?\\nHe decided ___ the guitar after school.",
     "options": ["to play", "to playing", "for play", "to played", "for playing"],
     "answer": "1",
-    "explanation": "decide는 to부정사를 목적어로 취하는 동사이므로 to play가 정답. to playing/for playing은 전치사+동명사 형태로 decide와 어울리지 않음."
+    "explanation": "decide는 to부정사를 목적어로 취하는 동사이므로 ①to play가 정답. to playing/for playing은 전치사+동명사 형태로 decide와 어울리지 않음."
   }
 ]`;
 }
@@ -110,6 +117,7 @@ ${focusPoints ? `## 출제 포인트\n${focusPoints}\n` : ''}
 2. 각 조합 보기가 그럴듯하게 보여야 합니다 (오답 조합에도 정답 일부 포함).
 3. 정답 번호를 1~5에 균등 배분하세요.
 4. 해설에서 각 문장의 용법/구분을 설명하세요.
+5. **정답 자가 검증**: answer 번호가 options 배열에서 실제 정답 조합의 위치(1-indexed)와 일치하는지 반드시 확인하세요.
 
 ## 출력 형식
 JSON 배열로만 응답하세요.
@@ -226,25 +234,29 @@ export const POST = createApiHandler(
         throw new Error('AI 문제 생성 결과가 비어있습니다.');
       }
 
+      // Auto-fix answer mismatches (explanation says ③ but answer is "2" → fix to "3")
+      const { questions: fixedQuestions, fixCount } = autoFixAnswers(allQuestions);
+
       // Layer 1 structural validation
-      const structural = validateProblemStructure(allQuestions);
+      const structural = validateProblemStructure(fixedQuestions);
 
       logger.info('ai.generate_problems', {
         userId: user.id,
         unitId,
         grammarTopic,
-        totalGenerated: allQuestions.length,
+        totalGenerated: fixedQuestions.length,
+        autoFixed: fixCount,
         structuralValid: structural.valid,
       });
 
       return NextResponse.json({
-        questions: allQuestions,
+        questions: fixedQuestions,
         title,
         validation: {
           structural,
           badge: structural.valid ? 'pass' : 'fail',
           summary: structural.valid
-            ? `구조 검증 통과 (${allQuestions.length}문제)`
+            ? `구조 검증 통과 (${fixedQuestions.length}문제${fixCount > 0 ? `, 정답 자동교정 ${fixCount}건` : ''})`
             : `구조 오류 ${structural.errorCount}건`,
         },
       });

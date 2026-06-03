@@ -213,6 +213,71 @@ export function validateProblemStructure(
   };
 }
 
+// ── Post-generation auto-fix ──
+
+/**
+ * 해설(explanation)에서 정답 번호를 추출하여 answer 필드와 불일치하면 자동 교정.
+ * AI가 "정답은 ③" 또는 "따라서 3번"이라고 썼는데 answer가 "2"인 경우 → answer를 "3"으로 수정.
+ */
+export function autoFixAnswers(
+  questions: NaesinProblemQuestion[],
+): { questions: NaesinProblemQuestion[]; fixCount: number } {
+  let fixCount = 0;
+  const fixed = questions.map((q) => {
+    // Only auto-fix MCQ (has options)
+    if (!Array.isArray(q.options) || q.options.length === 0) return q;
+    if (!q.explanation) return q;
+
+    const ansStr = String(q.answer ?? '');
+    const exp = q.explanation;
+
+    // Extract answer number from explanation patterns
+    const inferredAnswer = inferAnswerFromExplanation(exp, q.options);
+    if (!inferredAnswer || inferredAnswer === ansStr) return q;
+
+    // Validate inferred answer is a valid option index
+    const idx = parseInt(inferredAnswer, 10);
+    if (isNaN(idx) || idx < 1 || idx > q.options.length) return q;
+
+    fixCount++;
+    return { ...q, answer: inferredAnswer };
+  });
+
+  return { questions: fixed, fixCount };
+}
+
+/** 해설 텍스트에서 정답 번호를 추론 */
+function inferAnswerFromExplanation(explanation: string, options: string[]): string | null {
+  const CIRCLE_MAP: Record<string, string> = {
+    '①': '1', '②': '2', '③': '3', '④': '4', '⑤': '5',
+  };
+
+  // Pattern 1: "따라서 N번" (but not "N번째")
+  const therefore = explanation.match(/따라서\s*(\d)번(?!째)/);
+  if (therefore) return therefore[1];
+
+  // Pattern 2: "정답은 ①②③④⑤"
+  const circled = explanation.match(/정답[은는이가]?\s*([①②③④⑤])/);
+  if (circled) return CIRCLE_MAP[circled[1]] ?? null;
+
+  // Pattern 3: "정답은 N번"
+  const answerNum = explanation.match(/정답[은는이가]?\s*(\d)번/);
+  if (answerNum) return answerNum[1];
+
+  // Pattern 4: explanation mentions a specific option text as correct
+  // Find "~이(가) 정답" or "~이(가) 올바" pattern and match against options
+  for (let i = 0; i < options.length; i++) {
+    const optText = options[i].trim();
+    if (optText.length < 2) continue;
+    // Check if explanation explicitly mentions this option as the answer
+    const escaped = optText.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const pattern = new RegExp(`${escaped}[이가은는]?\\s*(정답|올바|맞|적절)`);
+    if (pattern.test(explanation)) return String(i + 1);
+  }
+
+  return null;
+}
+
 // ── Pre-save sanitization ──
 
 /**
