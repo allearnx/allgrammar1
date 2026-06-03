@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { createApiHandler } from '@/lib/api/handler';
 import { vocaProgressSaveSchema } from '@/lib/api/schemas';
+import { buildVocaQuizUpdate, buildVocaSpellingUpdate } from '@/lib/progress-helpers';
 
 // POST — 학생 진도 저장
 export const POST = createApiHandler(
@@ -9,7 +10,6 @@ export const POST = createApiHandler(
     const { dayId, type, score, matchingAttempt, round, spellingWrongWords } = body;
     const isRound2 = round === '2';
 
-    // Build update object based on type
     // Fetch existing progress for best-score logic
     const { data: existing } = await supabase
       .from('voca_student_progress')
@@ -24,13 +24,11 @@ export const POST = createApiHandler(
       case 'flashcard':
         updates[isRound2 ? 'round2_flashcard_completed' : 'flashcard_completed'] = true;
         break;
-      case 'quiz': {
-        const col = isRound2 ? 'round2_quiz_score' : 'quiz_score';
-        updates[col] = Math.max(score ?? 0, existing?.[col] ?? 0);
+      case 'quiz':
+        Object.assign(updates, buildVocaQuizUpdate(score ?? 0, isRound2, existing));
         break;
-      }
       case 'spelling':
-        updates.spelling_score = Math.max(score ?? 0, existing?.spelling_score ?? 0);
+        Object.assign(updates, buildVocaSpellingUpdate(score ?? 0, existing));
         if (spellingWrongWords) {
           updates.spelling_wrong_words = spellingWrongWords;
         }
