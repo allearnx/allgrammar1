@@ -43,14 +43,12 @@ export const POST = createApiHandler(
       ? sanitizeQuestions(rawQuestions as NaesinProblemQuestion[], rawAnswerKey as (string | number | null)[] | undefined)
       : { questions: rawQuestions || [], answerKey: rawAnswerKey || [] };
 
+    // 템플릿은 교사 작업 공간이므로 검증 오류를 경고로만 반환 (저장은 허용)
+    // 학생용 시트로 배포(import) 시에만 엄격히 차단
+    let validationWarnings: unknown[] = [];
     if (hasQ) {
       const validation = validateBeforeSave(questions as NaesinProblemQuestion[]);
-      if (!validation.valid) {
-        return NextResponse.json(
-          { error: '템플릿 데이터에 오류가 있습니다.', issues: validation.errors },
-          { status: 422 },
-        );
-      }
+      validationWarnings = [...validation.errors, ...validation.warnings];
     }
 
     const inserted = dbResult(await admin
@@ -67,7 +65,10 @@ export const POST = createApiHandler(
       .select()
       .single());
 
-    return NextResponse.json(inserted, { status: 201 });
+    return NextResponse.json(
+      { ...inserted, ...(validationWarnings.length > 0 ? { validationWarnings } : {}) },
+      { status: 201 },
+    );
   }
 );
 
@@ -78,6 +79,7 @@ export const PATCH = createApiHandler(
     const { id, title, templateTopic, questions, answerKey, syncCopies } = body;
 
     const updates: Record<string, unknown> = {};
+    let patchWarnings: unknown[] = [];
     if (title != null) updates.title = title;
     if (templateTopic != null) updates.template_topic = templateTopic;
 
@@ -90,12 +92,10 @@ export const PATCH = createApiHandler(
       updates.questions = sq;
       updates.answer_key = sak;
 
+      // 템플릿 수정도 저장 허용 — 경고만 반환
       const validation = validateBeforeSave(sq);
-      if (!validation.valid) {
-        return NextResponse.json(
-          { error: '템플릿 데이터에 오류가 있습니다.', issues: validation.errors },
-          { status: 422 },
-        );
+      if (validation.errors.length > 0 || validation.warnings.length > 0) {
+        patchWarnings = [...validation.errors, ...validation.warnings];
       }
     } else {
       if (questions != null) updates.questions = questions;
@@ -135,7 +135,11 @@ export const PATCH = createApiHandler(
       }
     }
 
-    return NextResponse.json({ ...updated, syncedCount });
+    return NextResponse.json({
+      ...updated,
+      syncedCount,
+      ...(patchWarnings.length > 0 ? { validationWarnings: patchWarnings } : {}),
+    });
   }
 );
 

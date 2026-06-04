@@ -178,7 +178,7 @@ export function AddTemplateFromPdfDialog({ open, onOpenChange, onAdd }: Props) {
     const answerKey = questions.map((q) => q.answer);
 
     await handleSubmit(async () => {
-      await fetchWithToast('/api/naesin/templates', {
+      const res = await fetchWithToast<{ validationWarnings?: { message: string }[] }>('/api/naesin/templates', {
         body: {
           title,
           templateTopic,
@@ -189,6 +189,13 @@ export function AddTemplateFromPdfDialog({ open, onOpenChange, onAdd }: Props) {
         },
         silent: true,
       });
+      if (res.validationWarnings?.length) {
+        const count = res.validationWarnings.length;
+        toast.warning(`검증 경고 ${count}건`, {
+          description: res.validationWarnings.slice(0, 3).map((w) => w.message).join('\n'),
+          duration: 8000,
+        });
+      }
     }, resetAll);
   }
 
