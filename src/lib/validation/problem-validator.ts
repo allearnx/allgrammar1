@@ -3,9 +3,11 @@ import type { NaesinProblemQuestion } from '@/types/naesin';
 // ── Constants ──
 
 const CIRCLED_TO_DIGIT: Record<string, string> = {
-  '①': '1', '②': '2', '③': '3', '④': '4', '⑤': '5', '⑥': '6',
+  '①': '1', '②': '2', '③': '3', '④': '4', '⑤': '5',
+  '⑥': '6', '⑦': '7', '⑧': '8', '⑨': '9', '⑩': '10',
 };
-const CIRCLED_PATTERN = /^[①②③④⑤⑥]$/;
+const CIRCLED_PATTERN = /^[①②③④⑤⑥⑦⑧⑨⑩]$/;
+const CIRCLED_GLOBAL = /[①②③④⑤⑥⑦⑧⑨⑩]/g;
 
 // ── Types ──
 
@@ -282,10 +284,16 @@ function inferAnswerFromExplanation(explanation: string, options: string[]): str
 
 /**
  * Sanitize questions before saving to DB.
- * - Normalize circled number answers (⑤ → "5")
- * - Flatten nested array options to strings
- * - Sync answer_key with questions[].answer
- * Returns the sanitized questions array and answer_key.
+ * Step 7 검증 게이트: 자동 정규화 + 저장 전 차단.
+ *
+ * Auto-fix rules:
+ * 1. ①-⑩ 원형숫자 → "1"-"10" 변환
+ * 2. 배열 정답 (multi-select) → "1, 3" 콤마구분 문자열
+ * 3. 객관식 텍스트 정답 → 선택지 번호로 자동 변환
+ * 4. "N번 텍스트" 패턴에서 번호 추출
+ * 5. 연속 원형숫자 ("①③") → "1, 3"
+ * 6. 중첩 배열 선지 → 문자열로 평탄화
+ * 7. answer_key를 questions[].answer에서 재구축
  */
 export function sanitizeQuestions(
   questions: NaesinProblemQuestion[],
@@ -293,13 +301,9 @@ export function sanitizeQuestions(
 ): { questions: NaesinProblemQuestion[]; answerKey: (string | number | null)[] } {
   const sanitized = questions.map((q) => {
     const out = { ...q };
+    const isMcq = Array.isArray(out.options) && out.options.length > 0;
 
-    // Normalize circled answer → digit
-    if (typeof out.answer === 'string' && CIRCLED_PATTERN.test(out.answer)) {
-      out.answer = CIRCLED_TO_DIGIT[out.answer] ?? out.answer;
-    }
-
-    // Flatten nested array options
+    // Flatten nested array options first (needed for text→number matching)
     if (Array.isArray(out.options)) {
       out.options = out.options.map((opt) => {
         if (Array.isArray(opt)) {
@@ -309,6 +313,59 @@ export function sanitizeQuestions(
       });
     }
 
+    // Rule 2: Array answer (multi-select) → comma-separated string "1, 3"
+    if (Array.isArray(out.answer)) {
+      const parts = (out.answer as (string | number)[]).map((v) => {
+        const s = String(v);
+        return CIRCLED_PATTERN.test(s) ? (CIRCLED_TO_DIGIT[s] ?? s) : s;
+      });
+      out.answer = parts.join(', ');
+    }
+
+    if (typeof out.answer === 'string') {
+      // Rule 5: Consecutive circled numbers "①③" → "1, 3"
+      if (CIRCLED_GLOBAL.test(out.answer) && out.answer.length > 1) {
+        out.answer = out.answer.replace(CIRCLED_GLOBAL, (ch) => CIRCLED_TO_DIGIT[ch] ?? ch);
+        // If multiple digits were produced, separate with ", "
+        if (/^\d+$/.test(out.answer) && out.answer.length > 1) {
+          out.answer = [...out.answer].join(', ');
+        }
+      }
+      // Rule 1: Single circled number → digit
+      if (CIRCLED_PATTERN.test(out.answer)) {
+        out.answer = CIRCLED_TO_DIGIT[out.answer] ?? out.answer;
+      }
+    }
+
+    if (isMcq && typeof out.answer === 'string') {
+      const ansStr = out.answer.trim();
+      const ansNum = Number(ansStr);
+
+      // Rule 4: "N번 텍스트" or "N. 텍스트" pattern → extract N
+      const numPrefixMatch = ansStr.match(/^(\d+)\s*[번.)]\s*.+/);
+      if (numPrefixMatch) {
+        const n = parseInt(numPrefixMatch[1], 10);
+        if (n >= 1 && n <= out.options!.length) {
+          out.answer = String(n);
+        }
+      }
+
+      // Rule 3: Text answer → option number (when answer is text, not a valid number)
+      if (isNaN(ansNum) || ansNum < 1 || ansNum > out.options!.length) {
+        const matchIdx = out.options!.findIndex(
+          (opt) => opt.trim().toLowerCase() === out.answer.toString().trim().toLowerCase(),
+        );
+        if (matchIdx !== -1) {
+          out.answer = String(matchIdx + 1);
+        }
+      }
+    }
+
+    // Ensure numeric answer is stored as string for consistency
+    if (typeof out.answer === 'number') {
+      out.answer = String(out.answer);
+    }
+
     return out;
   });
 
@@ -316,4 +373,91 @@ export function sanitizeQuestions(
   const newAnswerKey = sanitized.map((q) => q.answer ?? null);
 
   return { questions: sanitized, answerKey: newAnswerKey };
+}
+
+// ── Pre-save validation gate ──
+
+export interface SaveValidationResult {
+  valid: boolean;
+  errors: ValidationIssue[];
+  warnings: ValidationIssue[];
+}
+
+/**
+ * Validate questions AFTER sanitization, BEFORE saving to DB.
+ * Returns blocking errors and non-blocking warnings.
+ * Called by POST/PATCH endpoints to reject invalid data.
+ */
+export function validateBeforeSave(
+  questions: NaesinProblemQuestion[],
+): SaveValidationResult {
+  const errors: ValidationIssue[] = [];
+  const warnings: ValidationIssue[] = [];
+
+  if (!questions || questions.length === 0) {
+    return { valid: true, errors: [], warnings: [] }; // empty sheet is ok (PDF-only mode)
+  }
+
+  for (const q of questions) {
+    const n = q.number;
+    if (n == null) continue;
+
+    const isMcq = Array.isArray(q.options) && q.options.length > 0;
+    const hasQuestion = q.question && typeof q.question === 'string' && q.question.trim() !== '';
+
+    // ERROR: question text exists but answer is empty
+    if (hasQuestion && (q.answer == null || (typeof q.answer === 'string' && q.answer.trim() === ''))) {
+      errors.push(issue('error', n, 'EMPTY_ANSWER', `${n}번: 문제는 있는데 정답이 비어있습니다.`));
+    }
+
+    if (isMcq && q.answer != null) {
+      const ansStr = String(q.answer).trim();
+
+      // Multi-select check (comma-separated)
+      if (ansStr.includes(',')) {
+        const parts = ansStr.split(',').map((p) => p.trim());
+        for (const p of parts) {
+          const num = parseInt(p, 10);
+          if (isNaN(num) || num < 1 || num > q.options!.length) {
+            errors.push(issue('error', n, 'MCQ_RANGE', `${n}번: 복수정답 "${p}"이(가) 선택지 범위(1-${q.options!.length})를 벗어납니다.`));
+          }
+        }
+      } else {
+        // Single answer
+        const ansNum = Number(ansStr);
+        if (!isNaN(ansNum)) {
+          // ERROR: MCQ answer out of range
+          if (ansNum < 1 || ansNum > q.options!.length) {
+            errors.push(issue('error', n, 'MCQ_RANGE', `${n}번: 정답 ${ansNum}이(가) 선택지 범위(1-${q.options!.length})를 벗어납니다.`));
+          }
+        } else {
+          // Text answer that wasn't converted → can't grade this MCQ
+          const matchIdx = q.options!.findIndex(
+            (opt) => opt.trim().toLowerCase() === ansStr.toLowerCase(),
+          );
+          if (matchIdx === -1) {
+            errors.push(issue('error', n, 'TEXT_NOT_IN_OPTIONS', `${n}번: 텍스트 정답 "${ansStr.slice(0, 30)}"이(가) 어떤 선택지와도 일치하지 않습니다.`));
+          }
+        }
+      }
+
+      // WARNING: empty options
+      for (let oi = 0; oi < q.options!.length; oi++) {
+        if (!q.options![oi] || q.options![oi].trim() === '') {
+          warnings.push(issue('warning', n, 'EMPTY_OPTION', `${n}번: ${oi + 1}번 보기가 비어있습니다.`));
+        }
+      }
+    }
+
+    // WARNING: no explanation
+    if (hasQuestion && (!q.explanation || q.explanation.trim() === '')) {
+      warnings.push(issue('warning', n, 'NO_EXPLANATION', `${n}번: 해설이 없습니다.`));
+    }
+  }
+
+  return {
+    valid: errors.length === 0,
+    errors,
+    warnings,
+  };
 }

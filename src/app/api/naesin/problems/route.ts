@@ -4,7 +4,7 @@ import { problemCreateSchema, problemPatchSchema, idSchema } from '@/lib/api/sch
 import { requireContentPermission } from '@/lib/api/require-content-permission';
 import { regradeSheet } from '@/lib/naesin/regrade-sheet';
 import type { NaesinProblemQuestion } from '@/types/naesin';
-import { sanitizeQuestions } from '@/lib/validation/problem-validator';
+import { sanitizeQuestions, validateBeforeSave } from '@/lib/validation/problem-validator';
 
 const ADMIN_ROLES = ['teacher', 'admin', 'boss'] as const;
 
@@ -44,6 +44,17 @@ export const POST = createApiHandler(
     const { questions: sanitizedQuestions, answerKey: sanitizedAnswerKey } = hasQuestions
       ? sanitizeQuestions(rawQuestions, rawAnswerKey as (string | number | null)[] | undefined)
       : { questions: rawQuestions || [], answerKey: rawAnswerKey || [] };
+
+    // Validate: block save if critical errors exist (empty answers, out-of-range MCQ, etc.)
+    if (hasQuestions) {
+      const validation = validateBeforeSave(sanitizedQuestions as NaesinProblemQuestion[]);
+      if (!validation.valid) {
+        return NextResponse.json(
+          { error: '문제 데이터에 오류가 있습니다.', issues: validation.errors },
+          { status: 422 },
+        );
+      }
+    }
 
     const insertData: Record<string, unknown> = {
       unit_id: unitId || null,
@@ -85,6 +96,15 @@ export const PATCH = createApiHandler(
       );
       updates.questions = sq;
       updates.answer_key = sak;
+
+      // Validate: block save if critical errors exist
+      const validation = validateBeforeSave(sq);
+      if (!validation.valid) {
+        return NextResponse.json(
+          { error: '문제 데이터에 오류가 있습니다.', issues: validation.errors },
+          { status: 422 },
+        );
+      }
     }
 
     const data = dbResult(await supabase

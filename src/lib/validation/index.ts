@@ -97,8 +97,8 @@ export async function runFullValidation(
 }
 
 // Re-export everything
-export { validateProblemStructure } from './problem-validator';
-export type { StructuralValidationResult, ValidationIssue, IssueSeverity } from './problem-validator';
+export { validateProblemStructure, sanitizeQuestions, validateBeforeSave } from './problem-validator';
+export type { StructuralValidationResult, SaveValidationResult, ValidationIssue, IssueSeverity } from './problem-validator';
 export { crossCheckAnswers } from './problem-answer-check';
 export type { AnswerCheckBatchResult, AnswerCheckResult, AnswerCheckConfidence } from './problem-answer-check';
 export { scoreQuality } from './problem-quality-score';

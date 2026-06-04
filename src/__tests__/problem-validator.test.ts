@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { validateProblemStructure } from '@/lib/validation/problem-validator';
+import { validateProblemStructure, sanitizeQuestions, validateBeforeSave } from '@/lib/validation/problem-validator';
 import type { NaesinProblemQuestion } from '@/types/naesin';
 
 function makeMcq(n: number, answer: number = (n % 5) + 1): NaesinProblemQuestion {
@@ -162,6 +162,169 @@ describe('validateProblemStructure', () => {
       const questions = [makeSubjective(1)];
       const result = validateProblemStructure(questions, undefined, 3);
       expect(result.issues.some((i) => i.code === 'SUBJECTIVE_COUNT_MISMATCH')).toBe(true);
+    });
+  });
+});
+
+describe('sanitizeQuestions', () => {
+  describe('원형숫자 변환', () => {
+    it('①-⑤ 단일 원형숫자 → 숫자 변환', () => {
+      const q: NaesinProblemQuestion = { number: 1, question: 'test', answer: '③', options: ['a', 'b', 'c', 'd', 'e'] };
+      const { questions } = sanitizeQuestions([q]);
+      expect(questions[0].answer).toBe('3');
+    });
+
+    it('⑦⑧⑨⑩ 확장 원형숫자 변환', () => {
+      const q: NaesinProblemQuestion = { number: 1, question: 'test', answer: '⑧' };
+      const { questions } = sanitizeQuestions([q]);
+      expect(questions[0].answer).toBe('8');
+    });
+
+    it('연속 원형숫자 "①③" → "1, 3" 변환', () => {
+      const q: NaesinProblemQuestion = { number: 1, question: 'test', answer: '①③', options: ['a', 'b', 'c', 'd', 'e'] };
+      const { questions } = sanitizeQuestions([q]);
+      expect(questions[0].answer).toBe('1, 3');
+    });
+  });
+
+  describe('배열 정답 변환', () => {
+    it('배열 ["2","4"] → "2, 4" 콤마구분 변환', () => {
+      const q: NaesinProblemQuestion = { number: 1, question: 'test', answer: ['2', '4'] as unknown as string, options: ['a', 'b', 'c', 'd', 'e'] };
+      const { questions } = sanitizeQuestions([q]);
+      expect(questions[0].answer).toBe('2, 4');
+    });
+
+    it('배열 내 원형숫자도 변환', () => {
+      const q: NaesinProblemQuestion = { number: 1, question: 'test', answer: ['①', '③'] as unknown as string, options: ['a', 'b', 'c', 'd', 'e'] };
+      const { questions } = sanitizeQuestions([q]);
+      expect(questions[0].answer).toBe('1, 3');
+    });
+  });
+
+  describe('텍스트 정답 → 번호 변환', () => {
+    it('객관식 텍스트 정답이 선택지와 일치하면 번호로 변환', () => {
+      const q: NaesinProblemQuestion = {
+        number: 1,
+        question: 'Choose',
+        answer: 'ran',
+        options: ['run', 'ran', 'running', 'runs', 'to run'],
+      };
+      const { questions } = sanitizeQuestions([q]);
+      expect(questions[0].answer).toBe('2');
+    });
+
+    it('"N번 텍스트" 패턴에서 번호 추출', () => {
+      const q: NaesinProblemQuestion = {
+        number: 1,
+        question: 'Choose',
+        answer: '3번 running',
+        options: ['run', 'ran', 'running', 'runs', 'to run'],
+      };
+      const { questions } = sanitizeQuestions([q]);
+      expect(questions[0].answer).toBe('3');
+    });
+  });
+
+  describe('answer_key 동기화', () => {
+    it('answer_key가 questions[].answer에서 재구축됨', () => {
+      const questions: NaesinProblemQuestion[] = [
+        { number: 1, question: 'Q1', answer: '③', options: ['a', 'b', 'c', 'd', 'e'] },
+        { number: 2, question: 'Q2', answer: 'hello' },
+      ];
+      const { answerKey } = sanitizeQuestions(questions);
+      expect(answerKey).toEqual(['3', 'hello']);
+    });
+  });
+
+  describe('숫자형 정답 문자열 변환', () => {
+    it('number 타입 정답 → string으로 변환', () => {
+      const q: NaesinProblemQuestion = { number: 1, question: 'test', answer: 3, options: ['a', 'b', 'c', 'd', 'e'] };
+      const { questions } = sanitizeQuestions([q]);
+      expect(questions[0].answer).toBe('3');
+      expect(typeof questions[0].answer).toBe('string');
+    });
+  });
+});
+
+describe('validateBeforeSave', () => {
+  describe('빈 정답 차단', () => {
+    it('문제 텍스트가 있고 정답이 비어있으면 에러', () => {
+      const q: NaesinProblemQuestion = { number: 1, question: 'Choose the best answer.', answer: '' };
+      const result = validateBeforeSave([q]);
+      expect(result.valid).toBe(false);
+      expect(result.errors.some((e) => e.code === 'EMPTY_ANSWER')).toBe(true);
+    });
+
+    it('문제와 정답 모두 있으면 통과', () => {
+      const q: NaesinProblemQuestion = { number: 1, question: 'Choose', answer: '3', options: ['a', 'b', 'c', 'd', 'e'] };
+      const result = validateBeforeSave([q]);
+      expect(result.valid).toBe(true);
+    });
+  });
+
+  describe('객관식 범위 검증', () => {
+    it('정답이 선택지 범위를 벗어나면 에러', () => {
+      const q: NaesinProblemQuestion = { number: 1, question: 'test', answer: '7', options: ['a', 'b', 'c', 'd', 'e'] };
+      const result = validateBeforeSave([q]);
+      expect(result.valid).toBe(false);
+      expect(result.errors.some((e) => e.code === 'MCQ_RANGE')).toBe(true);
+    });
+
+    it('정답 0은 범위 밖 에러', () => {
+      const q: NaesinProblemQuestion = { number: 1, question: 'test', answer: '0', options: ['a', 'b', 'c', 'd', 'e'] };
+      const result = validateBeforeSave([q]);
+      expect(result.valid).toBe(false);
+    });
+
+    it('정답 1-5는 통과', () => {
+      const q: NaesinProblemQuestion = { number: 1, question: 'test', answer: '3', options: ['a', 'b', 'c', 'd', 'e'] };
+      const result = validateBeforeSave([q]);
+      expect(result.valid).toBe(true);
+    });
+  });
+
+  describe('복수정답 범위 검증', () => {
+    it('"1, 3"은 5개 선택지에서 통과', () => {
+      const q: NaesinProblemQuestion = { number: 1, question: 'test', answer: '1, 3', options: ['a', 'b', 'c', 'd', 'e'] };
+      const result = validateBeforeSave([q]);
+      expect(result.valid).toBe(true);
+    });
+
+    it('"1, 7"은 5개 선택지에서 에러', () => {
+      const q: NaesinProblemQuestion = { number: 1, question: 'test', answer: '1, 7', options: ['a', 'b', 'c', 'd', 'e'] };
+      const result = validateBeforeSave([q]);
+      expect(result.valid).toBe(false);
+      expect(result.errors.some((e) => e.code === 'MCQ_RANGE')).toBe(true);
+    });
+  });
+
+  describe('텍스트 정답 불일치', () => {
+    it('선택지와 일치하지 않는 텍스트 정답 → 에러', () => {
+      const q: NaesinProblemQuestion = {
+        number: 1,
+        question: 'Choose',
+        answer: 'xyz',
+        options: ['run', 'ran', 'running', 'runs', 'to run'],
+      };
+      const result = validateBeforeSave([q]);
+      expect(result.valid).toBe(false);
+      expect(result.errors.some((e) => e.code === 'TEXT_NOT_IN_OPTIONS')).toBe(true);
+    });
+  });
+
+  describe('빈 시험지 허용', () => {
+    it('문제가 없는 빈 배열은 허용 (PDF 모드)', () => {
+      const result = validateBeforeSave([]);
+      expect(result.valid).toBe(true);
+    });
+  });
+
+  describe('서술형 경고', () => {
+    it('해설 없으면 경고 (에러 아님)', () => {
+      const q: NaesinProblemQuestion = { number: 1, question: 'Write a sentence.', answer: 'The cat sat.' };
+      const result = validateBeforeSave([q]);
+      expect(result.valid).toBe(true);
+      expect(result.warnings.some((w) => w.code === 'NO_EXPLANATION')).toBe(true);
     });
   });
 });

@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import { createApiHandler, dbResult } from '@/lib/api';
 import { problemCopySchema } from '@/lib/api/schemas';
 import { requireContentPermission } from '@/lib/api/require-content-permission';
-import { sanitizeQuestions } from '@/lib/validation/problem-validator';
+import { sanitizeQuestions, validateBeforeSave } from '@/lib/validation/problem-validator';
 
 const ADMIN_ROLES = ['teacher', 'admin', 'boss'] as const;
 
@@ -24,6 +24,16 @@ export const POST = createApiHandler(
     const { questions: sq, answerKey: sak } = hasQ
       ? sanitizeQuestions(source.questions, source.answer_key)
       : { questions: source.questions || [], answerKey: source.answer_key || [] };
+
+    if (hasQ) {
+      const validation = validateBeforeSave(sq);
+      if (!validation.valid) {
+        return NextResponse.json(
+          { error: '원본 시험지에 오류가 있어 복사할 수 없습니다.', issues: validation.errors },
+          { status: 422 },
+        );
+      }
+    }
 
     // 3. Build rows for each target unit
     const rows = targetUnitIds.map((unitId: string) => ({

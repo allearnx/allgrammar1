@@ -4,6 +4,8 @@ import { requireContentPermission } from '@/lib/api/require-content-permission';
 import { templateCreateSchema, templatePatchSchema } from '@/lib/api/schemas';
 import { regradeSheet } from '@/lib/naesin/regrade-sheet';
 import { createAdminClient } from '@/lib/supabase/admin';
+import { sanitizeQuestions, validateBeforeSave } from '@/lib/validation/problem-validator';
+import type { NaesinProblemQuestion } from '@/types/naesin';
 
 const ADMIN_ROLES = ['teacher', 'admin', 'boss'] as const;
 
@@ -32,8 +34,24 @@ export const POST = createApiHandler(
   { roles: [...ADMIN_ROLES], schema: templateCreateSchema },
   async ({ body, supabase, user }) => {
     await requireContentPermission(user, supabase);
-    const { title, templateTopic, questions, answerKey, category, mode } = body;
+    const { title, templateTopic, questions: rawQuestions, answerKey: rawAnswerKey, category, mode } = body;
     const admin = createAdminClient();
+
+    // Sanitize + validate
+    const hasQ = Array.isArray(rawQuestions) && rawQuestions.length > 0;
+    const { questions, answerKey } = hasQ
+      ? sanitizeQuestions(rawQuestions as NaesinProblemQuestion[], rawAnswerKey as (string | number | null)[] | undefined)
+      : { questions: rawQuestions || [], answerKey: rawAnswerKey || [] };
+
+    if (hasQ) {
+      const validation = validateBeforeSave(questions as NaesinProblemQuestion[]);
+      if (!validation.valid) {
+        return NextResponse.json(
+          { error: '템플릿 데이터에 오류가 있습니다.', issues: validation.errors },
+          { status: 422 },
+        );
+      }
+    }
 
     const inserted = dbResult(await admin
       .from('naesin_templates')
@@ -62,8 +80,27 @@ export const PATCH = createApiHandler(
     const updates: Record<string, unknown> = {};
     if (title != null) updates.title = title;
     if (templateTopic != null) updates.template_topic = templateTopic;
-    if (questions != null) updates.questions = questions;
-    if (answerKey != null) updates.answer_key = answerKey;
+
+    // Sanitize + validate questions on update
+    if (questions != null && Array.isArray(questions) && questions.length > 0) {
+      const { questions: sq, answerKey: sak } = sanitizeQuestions(
+        questions as NaesinProblemQuestion[],
+        answerKey as (string | number | null)[] | undefined,
+      );
+      updates.questions = sq;
+      updates.answer_key = sak;
+
+      const validation = validateBeforeSave(sq);
+      if (!validation.valid) {
+        return NextResponse.json(
+          { error: '템플릿 데이터에 오류가 있습니다.', issues: validation.errors },
+          { status: 422 },
+        );
+      }
+    } else {
+      if (questions != null) updates.questions = questions;
+      if (answerKey != null) updates.answer_key = answerKey;
+    }
 
     if (Object.keys(updates).length === 0) {
       return NextResponse.json({ error: 'nothing to update' }, { status: 400 });

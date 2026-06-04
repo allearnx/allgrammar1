@@ -47,14 +47,16 @@ export const POST = createApiHandler(
             return candidates.some((c) => normalize(c) === studentNorm);
           });
         } else {
-          // 규칙 기반 정규화 채점: aiResults가 있으면 score === 100, 없으면 정규화 비교
-          const aiResult = aiResults?.[String(i)];
-          if (aiResult) {
-            isCorrect = aiResult.score === 100;
+          // 규칙 기반 정규화 채점: 먼저 정규화 비교, AI는 보조
+          const studentNorm = normalize(userAnswer);
+          const candidates = [correctAnswer, ...(q?.acceptedAnswers ?? [])];
+          const exactMatch = candidates.some((c) => normalize(c) === studentNorm);
+
+          if (exactMatch) {
+            isCorrect = true;
           } else {
-            const studentNorm = normalize(userAnswer);
-            const candidates = [correctAnswer, ...(q?.acceptedAnswers ?? [])];
-            isCorrect = candidates.some((c) => normalize(c) === studentNorm);
+            const aiResult = aiResults?.[String(i)];
+            isCorrect = aiResult ? aiResult.score === 100 : false;
           }
         }
       } else {
