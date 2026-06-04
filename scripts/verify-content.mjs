@@ -84,7 +84,7 @@ ${prompt}`);
 
     if (issues.length > 0) {
       for (const i of issues) {
-        console.log(`  ⚠️ [${i.index}] ${i.english.substring(0, 50)}... → ${i.issue}`);
+        console.log(`  ⚠️ [${i.index}] ${(i.english || '').substring(0, 50)}... → ${i.issue}`);
       }
     }
     console.log(`  ${d.title} 배치 ${bi + 1}/${batches.length}: ${issues.length}건 의심`);
@@ -119,7 +119,7 @@ ${prompt}`);
 
     if (issues.length > 0) {
       for (const i of issues) {
-        console.log(`  ⚠️ [${i.index}] ${i.english.substring(0, 50)}... → ${i.issue}`);
+        console.log(`  ⚠️ [${i.index}] ${(i.english || '').substring(0, 50)}... → ${i.issue}`);
       }
     }
     console.log(`  ${p.title} 배치 ${bi + 1}/${batches.length}: ${issues.length}건 의심`);

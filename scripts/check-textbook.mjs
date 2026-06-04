@@ -7,8 +7,8 @@ const sb = createClient(
   process.env.SUPABASE_SERVICE_ROLE_KEY,
 );
 
-const TEXTBOOK_NAME = '비상';
-const UNIT_NUMBERS = [3, 4];
+const TEXTBOOK_NAME = 'YBM박';
+const UNIT_NUMBERS = [1, 2, 3, 4];
 const GRADE = 2;
 
 // Step 1: Find textbook
