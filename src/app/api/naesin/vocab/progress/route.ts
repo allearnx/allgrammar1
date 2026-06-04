@@ -16,7 +16,7 @@ export const POST = createApiHandler(
       .eq('unit_id', unitId)
       .single();
 
-    const { updates, vocabCompleted } = buildVocabProgressUpdates(type, score, totalItems, existing);
+    const { updates, vocabCompleted } = buildVocabProgressUpdates(type, score ?? 0, totalItems ?? undefined, existing);
 
     dbResult(await supabase
       .from('naesin_student_progress')
