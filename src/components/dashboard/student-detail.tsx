@@ -166,6 +166,7 @@ export async function StudentDetail({ user, studentId, naesinData }: Props) {
             problemAttemptsBySheet={problemAttemptsBySheet}
             grammarContentByUnit={grammarContentByUnit}
             naesinRequiredRounds={naesinRequiredRounds}
+            canEditProgress={user.role === 'teacher' || user.role === 'admin' || user.role === 'boss'}
           />
         )}
 

@@ -7,6 +7,7 @@ import { scoreChipClass, passageChipClass, progressBorderClass } from '@/lib/uti
 import { ExamAssignmentManager } from './exam-assignment-manager';
 import { PassageStageManager } from './passage-stage-manager';
 import { EnabledStagesManager } from './enabled-stages-manager';
+import { ManualProgressToggle } from './manual-progress-toggle';
 import type { NaesinExamAssignment, NaesinUnit } from '@/types/database';
 import type { Tier } from '@/lib/billing/feature-gate';
 
@@ -65,6 +66,8 @@ interface Props {
   grammarContentByUnit?: Record<string, boolean>;
   naesinRequiredRounds?: number;
   hideSettings?: boolean;
+  /** 선생님이 수동으로 진도를 체크할 수 있는지 여부 */
+  canEditProgress?: boolean;
 }
 
 export function NaesinProgressCard({
@@ -83,6 +86,7 @@ export function NaesinProgressCard({
   grammarContentByUnit,
   naesinRequiredRounds,
   hideSettings,
+  canEditProgress,
 }: Props) {
   const hasRound2 = (naesinRequiredRounds ?? 1) >= 2;
   const naesinUnits = naesinData.units;
@@ -211,18 +215,30 @@ export function NaesinProgressCard({
                   </div>
                   <div className="flex items-center gap-3">
                     {stages.map((stage) => (
-                      <div key={stage.key} className="flex items-center gap-1">
-                        {stage.completed ? (
-                          <CheckCircle className="h-3.5 w-3.5 text-green-500" />
-                        ) : stage.inProgress ? (
-                          <Circle className="h-3.5 w-3.5 text-amber-500 fill-amber-200 dark:fill-amber-900" />
-                        ) : (
-                          <Circle className="h-3.5 w-3.5 text-muted-foreground/40" />
-                        )}
-                        <span className={`text-xs ${stage.completed ? 'text-foreground' : stage.inProgress ? 'text-amber-600 font-medium dark:text-amber-400' : 'text-muted-foreground'}`}>
-                          {stage.label}
-                        </span>
-                      </div>
+                      canEditProgress ? (
+                        <ManualProgressToggle
+                          key={stage.key}
+                          studentId={studentId}
+                          unitId={unit.id}
+                          stageKey={stage.key}
+                          label={stage.label}
+                          completed={stage.completed}
+                          inProgress={stage.inProgress}
+                        />
+                      ) : (
+                        <div key={stage.key} className="flex items-center gap-1">
+                          {stage.completed ? (
+                            <CheckCircle className="h-3.5 w-3.5 text-green-500" />
+                          ) : stage.inProgress ? (
+                            <Circle className="h-3.5 w-3.5 text-amber-500 fill-amber-200 dark:fill-amber-900" />
+                          ) : (
+                            <Circle className="h-3.5 w-3.5 text-muted-foreground/40" />
+                          )}
+                          <span className={`text-xs ${stage.completed ? 'text-foreground' : stage.inProgress ? 'text-amber-600 font-medium dark:text-amber-400' : 'text-muted-foreground'}`}>
+                            {stage.label}
+                          </span>
+                        </div>
+                      )
                     ))}
                   </div>
                   {(() => {
