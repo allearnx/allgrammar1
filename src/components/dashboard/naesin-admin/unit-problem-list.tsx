@@ -123,13 +123,35 @@ export function UnitProblemList({ sheets, onUpdate, onRequestDelete }: UnitProbl
     try {
       const questions = editor.questions.map(toDbQuestion);
       const answerKey = editor.questions.map((q) => q.answer);
-      const updated = await fetchWithToast<NaesinProblemSheet>('/api/naesin/problems', {
+      const updated = await fetchWithToast<NaesinProblemSheet & {
+        templateSync?: { templateSynced: boolean; copiesSynced: number };
+        aiWarnings?: { questionNumber: number; aiAnswer: string | number; expectedAnswer: string | number; reason?: string }[];
+      }>('/api/naesin/problems', {
         method: 'PATCH',
         body: { id: editingSheetId, title: editTitle.trim(), questions, answer_key: answerKey },
         successMessage: '문제 시트가 수정되었습니다',
         errorMessage: '문제 시트 수정 중 오류가 발생했습니다',
         logContext: 'unit.save_problem_sheet',
       });
+
+      // 템플릿 동기화 알림
+      if (updated.templateSync?.copiesSynced) {
+        toast.success(`템플릿 + 복사본 ${updated.templateSync.copiesSynced}개 자동 동기화됨`);
+      } else if (updated.templateSync?.templateSynced) {
+        toast.success('원본 템플릿 자동 동기화됨');
+      }
+
+      // AI 오답 의심 경고
+      if (updated.aiWarnings && updated.aiWarnings.length > 0) {
+        const desc = updated.aiWarnings.map((w) =>
+          `Q${w.questionNumber}: AI정답 "${w.aiAnswer}" ≠ 등록정답 "${w.expectedAnswer}"${w.reason ? ` (${w.reason})` : ''}`,
+        ).join('\n');
+        toast.warning(`AI 오답 의심 ${updated.aiWarnings.length}건`, {
+          description: desc,
+          duration: 10000,
+        });
+      }
+
       onUpdate(updated);
       cancelEdit();
     } catch { /* fetchWithToast handles toasts/logging */ } finally {

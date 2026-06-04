@@ -125,7 +125,48 @@ async function checkBatch(
   return results;
 }
 
+// ── Helpers ──
+
+function shuffle<T>(arr: T[]): T[] {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
 // ── Public API ──
+
+const SPOT_CHECK_SIZE = 5;
+
+/**
+ * 저장 시점 스팟체크: MCQ 최대 5개를 AI가 풀어서 오답 의심 경고 반환.
+ * 저장을 차단하지 않으며, 불일치 + 높은 확신(high)인 것만 반환.
+ */
+export async function spotCheckMcqAnswers(
+  questions: NaesinProblemQuestion[],
+  anthropic: Anthropic,
+): Promise<AnswerCheckResult[]> {
+  const mcqs = questions.filter(
+    (q) => Array.isArray(q.options) && q.options.length > 0 && q.answer != null,
+  );
+  if (mcqs.length === 0) return [];
+
+  const sample = mcqs.length <= SPOT_CHECK_SIZE
+    ? mcqs
+    : shuffle(mcqs).slice(0, SPOT_CHECK_SIZE);
+
+  try {
+    const results = await checkBatch(sample, anthropic);
+    return results.filter((r) => !r.match && r.confidence === 'high');
+  } catch (err) {
+    logger.error('validation.spot_check', {
+      error: err instanceof Error ? err.message : String(err),
+    });
+    return [];
+  }
+}
 
 export async function crossCheckAnswers(
   questions: NaesinProblemQuestion[],

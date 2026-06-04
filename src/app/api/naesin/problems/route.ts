@@ -3,8 +3,16 @@ import { createApiHandler, dbResult } from '@/lib/api';
 import { problemCreateSchema, problemPatchSchema, idSchema } from '@/lib/api/schemas';
 import { requireContentPermission } from '@/lib/api/require-content-permission';
 import { regradeSheet } from '@/lib/naesin/regrade-sheet';
+import { syncSheetToTemplate } from '@/lib/naesin/sync-template';
 import type { NaesinProblemQuestion } from '@/types/naesin';
 import { sanitizeQuestions, validateBeforeSave } from '@/lib/validation/problem-validator';
+import { spotCheckMcqAnswers } from '@/lib/validation/problem-answer-check';
+import Anthropic from '@anthropic-ai/sdk';
+import { logger } from '@/lib/logger';
+
+const anthropic = new Anthropic();
+
+export const maxDuration = 30;
 
 const ADMIN_ROLES = ['teacher', 'admin', 'boss'] as const;
 
@@ -73,7 +81,24 @@ export const POST = createApiHandler(
       .insert(insertData)
       .select()
       .single());
-    return NextResponse.json(data);
+
+    // AI 정답 스팟체크 (새 시트 생성 시)
+    const extras: Record<string, unknown> = {};
+    if (hasQuestions) {
+      try {
+        const aiWarnings = await spotCheckMcqAnswers(
+          sanitizedQuestions as NaesinProblemQuestion[],
+          anthropic,
+        );
+        if (aiWarnings.length > 0) extras.aiWarnings = aiWarnings;
+      } catch (err) {
+        logger.error('problems.post.spot_check', {
+          error: err instanceof Error ? err.message : String(err),
+        });
+      }
+    }
+
+    return NextResponse.json({ ...data, ...extras });
   }
 );
 
@@ -114,12 +139,39 @@ export const PATCH = createApiHandler(
       .select()
       .single());
 
-    // questions 또는 answer_key 변경 시 자동 재채점
-    if ('questions' in updates || 'answer_key' in updates) {
+    // questions 또는 answer_key 변경 시 자동 재채점 + 템플릿 동기화 + AI 스팟체크
+    const questionsChanged = 'questions' in updates || 'answer_key' in updates;
+    const extras: Record<string, unknown> = {};
+
+    if (questionsChanged) {
+      // 재채점
       await regradeSheet(id as string);
+
+      // 템플릿 + 복사본 자동 동기화
+      const templateSync = await syncSheetToTemplate(
+        id as string,
+        data.questions,
+        data.answer_key,
+      );
+      if (templateSync.templateSynced) extras.templateSync = templateSync;
+
+      // AI 정답 스팟체크 (non-blocking: 실패해도 저장은 완료)
+      if (Array.isArray(data.questions) && data.questions.length > 0) {
+        try {
+          const aiWarnings = await spotCheckMcqAnswers(
+            data.questions as NaesinProblemQuestion[],
+            anthropic,
+          );
+          if (aiWarnings.length > 0) extras.aiWarnings = aiWarnings;
+        } catch (err) {
+          logger.error('problems.patch.spot_check', {
+            error: err instanceof Error ? err.message : String(err),
+          });
+        }
+      }
     }
 
-    return NextResponse.json(data);
+    return NextResponse.json({ ...data, ...extras });
   }
 );
 

@@ -114,12 +114,12 @@ export const PATCH = createApiHandler(
       .select()
       .single());
 
-    // 복사본 일괄 업데이트
+    // 복사본 일괄 업데이트 (sanitized 값 사용)
     let syncedCount = 0;
-    if (syncCopies && (questions != null || answerKey != null)) {
+    if (syncCopies && ('questions' in updates || 'answer_key' in updates)) {
       const sheetUpdates: Record<string, unknown> = {};
-      if (questions != null) sheetUpdates.questions = questions;
-      if (answerKey != null) sheetUpdates.answer_key = answerKey;
+      if (updates.questions != null) sheetUpdates.questions = updates.questions;
+      if (updates.answer_key != null) sheetUpdates.answer_key = updates.answer_key;
 
       const { data: synced } = await supabase
         .from('naesin_problem_sheets')
@@ -131,9 +131,7 @@ export const PATCH = createApiHandler(
 
       // synced 시트 자동 재채점
       if (synced && synced.length > 0) {
-        for (const s of synced) {
-          await regradeSheet(s.id);
-        }
+        await Promise.all(synced.map((s) => regradeSheet(s.id)));
       }
     }
 
