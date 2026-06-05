@@ -6,7 +6,8 @@ import { getPlanContext } from '@/lib/billing/get-plan-context';
 import { mergeEnabledStages } from '@/lib/billing/feature-gate';
 import { groupBy, buildUnitSummary } from '@/lib/naesin/build-unit-summary';
 import type { UnitSummary, ExamGroup } from '@/lib/naesin/build-unit-summary';
-import type { NaesinExamAssignment } from '@/types/database';
+import type { NaesinExamAssignment, NaesinStudentProgress } from '@/types/database';
+import { PROGRESS_SUMMARY_COLUMNS } from '@/types/naesin';
 
 export default async function NaesinPage() {
   const user = await requireRole(['student']);
@@ -138,7 +139,7 @@ export default async function NaesinPage() {
         supabase.from('naesin_problem_sheets').select('unit_id').eq('category', 'last_review').in('unit_id', unitIds),
         supabase.from('naesin_similar_problems').select('unit_id').eq('status', 'approved').in('unit_id', unitIds),
         supabase.from('naesin_last_review_content').select('unit_id').in('unit_id', unitIds),
-        supabase.from('naesin_student_progress').select('*').eq('student_id', user.id).in('unit_id', unitIds),
+        supabase.from('naesin_student_progress').select(PROGRESS_SUMMARY_COLUMNS).eq('student_id', user.id).in('unit_id', unitIds),
         supabase.from('naesin_vocab_quiz_sets').select('id, unit_id').in('unit_id', unitIds),
         supabase.from('naesin_problem_attempts').select('sheet_id').eq('student_id', user.id),
       ]);
@@ -165,7 +166,7 @@ export default async function NaesinPage() {
         lastReviewSheetUnitIds: new Set((lastReviewSheetCountRes.data || []).map((r) => r.unit_id)),
         similarProblemUnitIds: new Set((similarProblemCountRes.data || []).map((r) => r.unit_id)),
         reviewContentUnitIds: new Set((reviewContentCountRes.data || []).map((r) => r.unit_id)),
-        progressMap: new Map((progressRes.data || []).map((p) => [p.unit_id, p])),
+        progressMap: new Map(((progressRes.data as unknown as NaesinStudentProgress[]) || []).map((p) => [p.unit_id, p])),
         quizSetsByUnit: groupBy(quizSetsCountRes.data || [], 'unit_id'),
         problemSheetIdsByUnit,
         attemptedSheetIds,

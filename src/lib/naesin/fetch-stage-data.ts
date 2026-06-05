@@ -95,7 +95,7 @@ async function fetchDialogueData(supabase: SupabaseClient, userId: string, unitI
 
 async function fetchGrammarData(supabase: SupabaseClient, userId: string, unitId: string) {
   // First get lessons, then filter video progress by lesson IDs
-  const grammarRes = await supabase.from('naesin_grammar_lessons').select('*').eq('unit_id', unitId).order('sort_order');
+  const grammarRes = await supabase.from('naesin_grammar_lessons').select('id, title, content_type, youtube_video_id, text_content, sort_order').eq('unit_id', unitId).order('sort_order');
   const grammarLessons = grammarRes.data || [];
   const lessonIds = grammarLessons.map((l: { id: string }) => l.id);
 
@@ -108,7 +108,7 @@ async function fetchGrammarData(supabase: SupabaseClient, userId: string, unitId
 
 async function fetchTextbookVideoData(supabase: SupabaseClient, userId: string, unitId: string) {
   // First get videos, then filter progress by video IDs
-  const videoRes = await supabase.from('naesin_textbook_videos').select('*').eq('unit_id', unitId).order('sort_order');
+  const videoRes = await supabase.from('naesin_textbook_videos').select('id, title, youtube_video_id, sort_order').eq('unit_id', unitId).order('sort_order');
   const textbookVideos = videoRes.data || [];
   const videoIds = textbookVideos.map((v: { id: string }) => v.id);
 
@@ -215,8 +215,8 @@ async function fetchProblemData(supabase: SupabaseClient, unitId: string, userId
 async function fetchLastReviewData(supabase: SupabaseClient, unitId: string) {
   const [sheetsRes, similarRes, contentRes] = await Promise.all([
     supabase.from('naesin_problem_sheets').select(SHEET_LITE_COLUMNS).eq('unit_id', unitId).eq('category', 'last_review').order('sort_order'),
-    supabase.from('naesin_similar_problems').select('*').eq('unit_id', unitId).eq('status', 'approved'),
-    supabase.from('naesin_last_review_content').select('*').eq('unit_id', unitId).order('sort_order'),
+    supabase.from('naesin_similar_problems').select('id, grammar_tag, question_data').eq('unit_id', unitId).eq('status', 'approved'),
+    supabase.from('naesin_last_review_content').select('id, content_type, title, youtube_video_id, pdf_url, text_content').eq('unit_id', unitId).order('sort_order'),
   ]);
   return {
     lastReviewProblemSheets: sheetsRes.data || [],

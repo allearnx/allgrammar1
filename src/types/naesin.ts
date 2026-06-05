@@ -336,6 +336,9 @@ export const SHEET_LITE_COLUMNS = 'id, unit_id, textbook_id, title, mode, pdf_ur
 /** Admin lite: includes answer_key for question count, excludes heavy questions JSONB */
 export const SHEET_ADMIN_LITE_COLUMNS = SHEET_LITE_COLUMNS + ', answer_key';
 
+/** Student progress columns needed for unit summary (17/40 columns — excludes unused best scores, round2 details, legacy flags) */
+export const PROGRESS_SUMMARY_COLUMNS = 'unit_id, vocab_completed, vocab_quiz_score, vocab_spelling_score, vocab_quiz_sets_completed, passage_completed, passage_fill_blanks_best, passage_translation_best, round2_passage_completed, dialogue_completed, round2_dialogue_completed, textbook_video_completed, textbook_videos_completed, grammar_completed, grammar_videos_completed, problem_completed, mock_exam_completed';
+
 export interface NaesinTemplate {
   id: string;
   title: string;
