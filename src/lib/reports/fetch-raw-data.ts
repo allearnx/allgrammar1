@@ -9,7 +9,7 @@ export async function fetchRawData(qc: SupabaseClient, sid: string, ninetyDaysAg
     // Naesin
     qc.from('naesin_student_progress').select('unit_id, vocab_completed, vocab_quiz_score, passage_completed, dialogue_completed, grammar_completed, problem_completed, mock_exam_completed, last_review_unlocked').eq('student_id', sid),
     qc.from('naesin_problem_attempts').select('score, total_questions, created_at, unit_id, sheet_id').eq('student_id', sid).order('created_at', { ascending: false }).limit(50),
-    qc.from('naesin_wrong_answers').select('id, resolved, stage, unit_id').eq('student_id', sid),
+    qc.from('naesin_wrong_answers').select('id, resolved, stage, unit_id').eq('student_id', sid).limit(1000),
     qc.from('naesin_grammar_video_progress').select('completed, cumulative_watch_seconds, created_at, unit_id').eq('student_id', sid),
     qc.from('naesin_vocab_quiz_set_results').select('score, created_at, unit_id').eq('student_id', sid).order('created_at', { ascending: false }).limit(50),
 
@@ -19,9 +19,9 @@ export async function fetchRawData(qc: SupabaseClient, sid: string, ninetyDaysAg
     // Trends
     qc.from('voca_quiz_results').select('score, created_at, wrong_words, day_id').eq('student_id', sid).order('created_at', { ascending: false }).limit(50),
 
-    // Wrong words
-    qc.from('voca_quiz_results').select('wrong_words').eq('student_id', sid),
-    qc.from('voca_matching_submissions').select('wrong_words').eq('student_id', sid),
+    // Wrong words (recent 500 — enough for frequency analysis)
+    qc.from('voca_quiz_results').select('wrong_words').eq('student_id', sid).order('created_at', { ascending: false }).limit(500),
+    qc.from('voca_matching_submissions').select('wrong_words').eq('student_id', sid).order('created_at', { ascending: false }).limit(500),
 
     // Activity log (last 90 days)
     qc.from('voca_quiz_results').select('score, created_at, day_id').eq('student_id', sid).gte('created_at', ninetyDaysAgo).order('created_at', { ascending: false }).limit(200),
@@ -31,10 +31,10 @@ export async function fetchRawData(qc: SupabaseClient, sid: string, ninetyDaysAg
     qc.from('naesin_passage_attempts').select('created_at, unit_id, type, difficulty, score').eq('student_id', sid).gte('created_at', ninetyDaysAgo).order('created_at', { ascending: false }).limit(200),
     qc.from('naesin_grammar_video_progress').select('created_at, unit_id').eq('student_id', sid).eq('completed', true).gte('created_at', ninetyDaysAgo).order('created_at', { ascending: false }).limit(200),
 
-    // Passage attempts for unit breakdown (all-time best scores)
-    qc.from('naesin_passage_attempts').select('unit_id, type, difficulty, score').eq('student_id', sid),
+    // Passage attempts for unit breakdown (all-time best scores, cap at 500)
+    qc.from('naesin_passage_attempts').select('unit_id, type, difficulty, score').eq('student_id', sid).order('created_at', { ascending: false }).limit(500),
 
-    // Topic accuracy: all problem attempts (no limit)
-    qc.from('naesin_problem_attempts').select('score, total_questions, created_at, unit_id, sheet_id').eq('student_id', sid).order('created_at', { ascending: false }),
+    // Topic accuracy: recent 500 problem attempts
+    qc.from('naesin_problem_attempts').select('score, total_questions, created_at, unit_id, sheet_id').eq('student_id', sid).order('created_at', { ascending: false }).limit(500),
   ]);
 }

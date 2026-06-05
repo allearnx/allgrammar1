@@ -9,7 +9,8 @@ export const GET = createApiHandler(
       .from('naesin_problem_attempts')
       .select('score, total_questions, created_at, unit_id, sheet_id')
       .eq('student_id', user.id)
-      .order('created_at', { ascending: false });
+      .order('created_at', { ascending: false })
+      .limit(500);
 
     const topicAccuracy = await computeTopicAccuracy(supabase, attempts || []);
     return NextResponse.json(topicAccuracy);
