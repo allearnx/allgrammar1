@@ -247,7 +247,7 @@ describe('draft/save route', () => {
         answeredCount: 50,
       })
     );
-    expect(res.status).toBe(500);
+    expect(res.status).toBe(409);
   });
 });
 
