@@ -8,6 +8,7 @@ import { toGenerated, type GeneratedQuestion } from './content-dialogs/shared/qu
 
 interface ProblemSheetItemProps {
   sheet: NaesinProblemSheet;
+  isLoadingFull?: boolean;
   sheetIdx: number;
   sheetsLength: number;
   isExpanded: boolean;
@@ -44,6 +45,7 @@ interface ProblemSheetItemProps {
 
 export function ProblemSheetItem({
   sheet,
+  isLoadingFull,
   sheetIdx,
   sheetsLength,
   isExpanded,
@@ -78,8 +80,10 @@ export function ProblemSheetItem({
   regrading,
 }: ProblemSheetItemProps) {
   const questions: NaesinProblemQuestion[] = sheet.questions || [];
-  const mcqCount = questions.filter((q) => q.options && q.options.length > 0).length;
-  const subCount = questions.length - mcqCount;
+  const hasFullData = questions.length > 0;
+  const totalCount = hasFullData ? questions.length : (sheet.answer_key?.length ?? 0);
+  const mcqCount = hasFullData ? questions.filter((q) => q.options && q.options.length > 0).length : 0;
+  const subCount = hasFullData ? questions.length - mcqCount : 0;
 
   return (
     <div className="rounded hover:bg-muted/50">
@@ -108,7 +112,7 @@ export function ProblemSheetItem({
         {isExpanded ? <ChevronDown className="h-3 w-3 shrink-0" /> : <ChevronRight className="h-3 w-3 shrink-0" />}
         <ClipboardList className="h-3.5 w-3.5 text-red-500 shrink-0" />
         <span className="text-sm flex-1 truncate">{sheet.title}</span>
-        <Badge variant="secondary" className="text-[11px]">{questions.length}문제</Badge>
+        <Badge variant="secondary" className="text-[11px]">{totalCount}문제</Badge>
         {mcqCount > 0 && <Badge variant="outline" className="text-[11px]">객관식 {mcqCount}</Badge>}
         {subCount > 0 && <Badge variant="outline" className="text-[11px]">서술형 {subCount}</Badge>}
         <Button
@@ -177,65 +181,76 @@ export function ProblemSheetItem({
 
       {isExpanded && (
         <div className="px-2 pb-3">
-          {isEditing && (
-            <div className="mb-2">
-              <Input
-                className="h-8 text-sm"
-                value={editTitle}
-                onChange={(e) => onSetEditTitle(e.target.value)}
-                placeholder="시트 제목"
-              />
+          {isLoadingFull ? (
+            <div className="flex items-center justify-center py-6">
+              <Loader2 className="h-5 w-5 animate-spin text-muted-foreground" />
+              <span className="ml-2 text-sm text-muted-foreground">문제를 불러오는 중...</span>
             </div>
-          )}
+          ) : !hasFullData ? (
+            <p className="text-center text-sm text-muted-foreground py-6">문제 데이터를 불러오지 못했습니다.</p>
+          ) : (
+            <>
+              {isEditing && (
+                <div className="mb-2">
+                  <Input
+                    className="h-8 text-sm"
+                    value={editTitle}
+                    onChange={(e) => onSetEditTitle(e.target.value)}
+                    placeholder="시트 제목"
+                  />
+                </div>
+              )}
 
-          <div className="rounded-lg border overflow-hidden max-h-[50vh] overflow-y-auto">
-            <table className="w-full text-sm">
-              <thead className="bg-muted/50 sticky top-0">
-                <tr>
-                  <th className="text-left p-2 w-10">#</th>
-                  <th className="text-left p-2">문제</th>
-                  <th className="text-left p-2 w-16">유형</th>
-                  <th className="text-left p-2 w-20">정답</th>
-                  <th className="text-left p-2 w-16">편집</th>
-                </tr>
-              </thead>
-              <tbody>
-                {(isEditing ? editQuestions : questions.map(toGenerated)).map((q, i) => (
-                  <tr key={i} className="border-t">
-                    {isEditing && editingIdx === i ? (
-                      <QuestionEditRow
-                        question={q}
-                        onUpdate={(field, value) => onEditQuestion(field, i, value)}
-                        onUpdateOption={(optIdx, value) => onEditOption(i, optIdx, value)}
-                        onToggleType={() => onToggleQuestionType(i)}
-                        onDone={onDoneEditing}
-                        onUpdateAcceptedAnswers={(answers) => onUpdateAcceptedAnswers(i, answers)}
-                        onGenerateAcceptedAnswers={() => onGenerateAcceptedAnswers(i)}
-                      />
-                    ) : (
-                      <QuestionViewRow
-                        question={q}
-                        onEdit={() => {
-                          if (!isEditing) onStartEdit();
-                          onSetEditingIdx(i);
-                        }}
-                        onDelete={isEditing ? () => onDeleteQuestion(i) : undefined}
-                      />
-                    )}
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+              <div className="rounded-lg border overflow-hidden max-h-[50vh] overflow-y-auto">
+                <table className="w-full text-sm">
+                  <thead className="bg-muted/50 sticky top-0">
+                    <tr>
+                      <th className="text-left p-2 w-10">#</th>
+                      <th className="text-left p-2">문제</th>
+                      <th className="text-left p-2 w-16">유형</th>
+                      <th className="text-left p-2 w-20">정답</th>
+                      <th className="text-left p-2 w-16">편집</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {(isEditing ? editQuestions : questions.map(toGenerated)).map((q, i) => (
+                      <tr key={i} className="border-t">
+                        {isEditing && editingIdx === i ? (
+                          <QuestionEditRow
+                            question={q}
+                            onUpdate={(field, value) => onEditQuestion(field, i, value)}
+                            onUpdateOption={(optIdx, value) => onEditOption(i, optIdx, value)}
+                            onToggleType={() => onToggleQuestionType(i)}
+                            onDone={onDoneEditing}
+                            onUpdateAcceptedAnswers={(answers) => onUpdateAcceptedAnswers(i, answers)}
+                            onGenerateAcceptedAnswers={() => onGenerateAcceptedAnswers(i)}
+                          />
+                        ) : (
+                          <QuestionViewRow
+                            question={q}
+                            onEdit={() => {
+                              if (!isEditing) onStartEdit();
+                              onSetEditingIdx(i);
+                            }}
+                            onDelete={isEditing ? () => onDeleteQuestion(i) : undefined}
+                          />
+                        )}
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
 
-          {isEditing && (
-            <div className="flex gap-2 justify-end mt-2">
-              <Button size="sm" variant="outline" className="h-7" onClick={onCancelEdit}>취소</Button>
-              <Button size="sm" className="h-7" onClick={onSaveEdit} disabled={saving || !editTitle.trim()}>
-                {saving && <Loader2 className="h-3.5 w-3.5 mr-1 animate-spin" />}
-                저장
-              </Button>
-            </div>
+              {isEditing && (
+                <div className="flex gap-2 justify-end mt-2">
+                  <Button size="sm" variant="outline" className="h-7" onClick={onCancelEdit}>취소</Button>
+                  <Button size="sm" className="h-7" onClick={onSaveEdit} disabled={saving || !editTitle.trim()}>
+                    {saving && <Loader2 className="h-3.5 w-3.5 mr-1 animate-spin" />}
+                    저장
+                  </Button>
+                </div>
+              )}
+            </>
           )}
         </div>
       )}

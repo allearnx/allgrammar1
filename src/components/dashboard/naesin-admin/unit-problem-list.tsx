@@ -24,9 +24,11 @@ interface UnitProblemListProps {
   sheets: NaesinProblemSheet[];
   onUpdate: (updated: NaesinProblemSheet) => void;
   onRequestDelete: (id: string) => void;
+  loadFullSheet?: (id: string) => Promise<NaesinProblemSheet | null>;
+  loadingSheetId?: string | null;
 }
 
-export function UnitProblemList({ sheets, onUpdate, onRequestDelete }: UnitProblemListProps) {
+export function UnitProblemList({ sheets, onUpdate, onRequestDelete, loadFullSheet, loadingSheetId }: UnitProblemListProps) {
   const pathname = usePathname();
   const isBoss = pathname.startsWith('/boss/');
   const [expandedId, setExpandedId] = useState<string | null>(null);
@@ -69,12 +71,30 @@ export function UnitProblemList({ sheets, onUpdate, onRequestDelete }: UnitProbl
     }
   }
 
-  function startEdit(sheet: NaesinProblemSheet) {
-    setEditingSheetId(sheet.id);
-    setEditTitle(sheet.title);
-    editor.setQuestions((sheet.questions || []).map(toGenerated));
+  async function handleToggleExpand(sheetId: string) {
+    if (expandedId === sheetId) {
+      setExpandedId(null);
+      return;
+    }
+    setExpandedId(sheetId);
+    const sheet = sheets.find(s => s.id === sheetId);
+    if (sheet && !sheet.questions && loadFullSheet) {
+      await loadFullSheet(sheetId);
+    }
+  }
+
+  async function startEdit(sheet: NaesinProblemSheet) {
+    // Ensure full data is loaded before editing
+    let fullSheet = sheet;
+    if (!sheet.questions && loadFullSheet) {
+      const loaded = await loadFullSheet(sheet.id);
+      if (loaded) fullSheet = loaded;
+    }
+    setEditingSheetId(fullSheet.id);
+    setEditTitle(fullSheet.title);
+    editor.setQuestions((fullSheet.questions || []).map(toGenerated));
     editor.setEditingIdx(null);
-    if (expandedId !== sheet.id) setExpandedId(sheet.id);
+    if (expandedId !== fullSheet.id) setExpandedId(fullSheet.id);
   }
 
   function cancelEdit() {
@@ -92,8 +112,13 @@ export function UnitProblemList({ sheets, onUpdate, onRequestDelete }: UnitProbl
 
   async function saveTemplate() {
     if (!templateDialogId || !templateTopic.trim()) return;
-    const sheet = sheets.find((s) => s.id === templateDialogId);
+    let sheet = sheets.find((s) => s.id === templateDialogId);
     if (!sheet) return;
+    // Ensure full data is loaded for template
+    if (!sheet.questions && loadFullSheet) {
+      const loaded = await loadFullSheet(sheet.id);
+      if (loaded) sheet = loaded;
+    }
     setSavingTemplate(true);
     try {
       await fetchWithToast<NaesinTemplate>('/api/naesin/templates', {
@@ -184,6 +209,7 @@ export function UnitProblemList({ sheets, onUpdate, onRequestDelete }: UnitProbl
         <ProblemSheetItem
           key={sheet.id}
           sheet={sheet}
+          isLoadingFull={loadingSheetId === sheet.id}
           sheetIdx={sheetIdx}
           sheetsLength={sheets.length}
           isExpanded={expandedId === sheet.id}
@@ -195,16 +221,16 @@ export function UnitProblemList({ sheets, onUpdate, onRequestDelete }: UnitProbl
           editTitle={editTitle}
           editQuestions={editor.questions}
           editingIdx={editor.editingIdx}
-          onToggleExpand={() => setExpandedId(expandedId === sheet.id ? null : sheet.id)}
+          onToggleExpand={() => handleToggleExpand(sheet.id)}
           onSetEditTitle={setEditTitle}
           onStartEdit={() => startEdit(sheet)}
           onCancelEdit={cancelEdit}
           onSaveEdit={saveEdit}
           onMoveSheet={moveSheet}
           onSaveTemplate={handleSaveTemplate}
-          onCopy={(id) => setCopySheetId(id)}
+          onCopy={async (id) => { if (loadFullSheet) await loadFullSheet(id); setCopySheetId(id); }}
           onCopies={(templateId, title) => { setCopiesTemplateId(templateId); setCopiesTemplateTitle(title); }}
-          onImprove={(id) => setImproveSheetId(id)}
+          onImprove={async (id) => { if (loadFullSheet) await loadFullSheet(id); setImproveSheetId(id); }}
           onRequestDelete={onRequestDelete}
           onEditQuestion={(field, idx, value) => editor.updateQuestion(idx, field, value)}
           onEditOption={editor.updateOption}

@@ -57,6 +57,7 @@ export function UnitContentManager({ unitId }: { unitId: string }) {
     problemList, setProblemList, problemDelete,
     textbookVideoList, textbookVideoDelete,
     mockExamList, setMockExamList, mockExamDelete,
+    loadFullSheet, loadingSheetId,
     refresh,
     regenerateGrammarVocab,
   } = useUnitContentData(unitId);
@@ -160,6 +161,8 @@ export function UnitContentManager({ unitId }: { unitId: string }) {
           sheets={problemList}
           onUpdate={onUpdateProblem}
           onRequestDelete={problemDelete.requestDelete}
+          loadFullSheet={loadFullSheet}
+          loadingSheetId={loadingSheetId}
         />
       )}
 
@@ -168,6 +171,8 @@ export function UnitContentManager({ unitId }: { unitId: string }) {
           sheets={mockExamList}
           onUpdate={onUpdateMockExam}
           onRequestDelete={mockExamDelete.requestDelete}
+          loadFullSheet={loadFullSheet}
+          loadingSheetId={loadingSheetId}
         />
       )}
 

@@ -19,6 +19,22 @@ interface TextbookExamSectionProps {
 export function TextbookExamSection({ textbookId, textbookName, canManageContent = false }: TextbookExamSectionProps) {
   const [sheets, setSheets] = useState<NaesinProblemSheet[]>([]);
   const [deleteId, setDeleteId] = useState<string | null>(null);
+  const [loadingSheetId, setLoadingSheetId] = useState<string | null>(null);
+
+  const loadFullSheet = useCallback(async (sheetId: string): Promise<NaesinProblemSheet | null> => {
+    const existing = sheets.find(s => s.id === sheetId);
+    if (existing?.questions) return existing;
+    setLoadingSheetId(sheetId);
+    try {
+      const res = await fetch(`/api/naesin/problems/sheet?id=${sheetId}`);
+      if (!res.ok) return null;
+      const full: NaesinProblemSheet = await res.json();
+      setSheets(prev => prev.map(s => s.id === sheetId ? full : s));
+      return full;
+    } catch { return null; } finally {
+      setLoadingSheetId(null);
+    }
+  }, [sheets]);
 
   const loadSheets = useCallback(async () => {
     try {
@@ -60,6 +76,8 @@ export function TextbookExamSection({ textbookId, textbookName, canManageContent
           sheets={sheets}
           onUpdate={onUpdate}
           onRequestDelete={setDeleteId}
+          loadFullSheet={loadFullSheet}
+          loadingSheetId={loadingSheetId}
         />
       ) : (
         <div className="space-y-1 rounded-lg border p-3">

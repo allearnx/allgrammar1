@@ -5,6 +5,7 @@ import { requireContentPermission } from '@/lib/api/require-content-permission';
 import { regradeSheet } from '@/lib/naesin/regrade-sheet';
 import { syncSheetToTemplate } from '@/lib/naesin/sync-template';
 import type { NaesinProblemQuestion } from '@/types/naesin';
+import { SHEET_ADMIN_LITE_COLUMNS } from '@/types/naesin';
 import { sanitizeQuestions, validateBeforeSave } from '@/lib/validation/problem-validator';
 import { spotCheckMcqAnswers } from '@/lib/validation/problem-answer-check';
 import Anthropic from '@anthropic-ai/sdk';
@@ -26,7 +27,7 @@ export const GET = createApiHandler(
 
     let query = supabase
       .from('naesin_problem_sheets')
-      .select('*')
+      .select(SHEET_ADMIN_LITE_COLUMNS)
       .eq('category', category)
       .order('sort_order');
 

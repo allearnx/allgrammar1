@@ -6,6 +6,7 @@ import { logger } from '@/lib/logger';
 import { fetchWithToast } from '@/lib/fetch-with-toast';
 import type { NaesinVocabulary, NaesinGrammarLesson, NaesinPassage } from '@/types/database';
 import type { NaesinDialogue, NaesinProblemSheet, NaesinTextbookVideo } from '@/types/naesin';
+import { SHEET_ADMIN_LITE_COLUMNS } from '@/types/naesin';
 import { useListCrud } from '@/hooks/use-list-crud';
 import { useInlineEdit } from '@/hooks/use-inline-edit';
 import { useConfirmDelete } from '@/hooks/use-confirm-delete';
@@ -127,19 +128,19 @@ export function useUnitContentData(unitId: string) {
         supabase.from('naesin_dialogues').select('*').eq('unit_id', unitId).order('created_at'),
         supabase.from('naesin_grammar_lessons').select('*').eq('unit_id', unitId).order('sort_order'),
         supabase.from('naesin_omr_sheets').select('*', { count: 'exact', head: true }).eq('unit_id', unitId),
-        supabase.from('naesin_problem_sheets').select('*').eq('unit_id', unitId).in('category', ['problem', 'external_passage', 'eng_eng_def']).order('sort_order'),
+        supabase.from('naesin_problem_sheets').select(SHEET_ADMIN_LITE_COLUMNS).eq('unit_id', unitId).in('category', ['problem', 'external_passage', 'eng_eng_def']).order('sort_order'),
         supabase.from('naesin_last_review_content').select('*', { count: 'exact', head: true }).eq('unit_id', unitId),
         supabase.from('naesin_textbook_videos').select('*').eq('unit_id', unitId).order('sort_order'),
-        supabase.from('naesin_problem_sheets').select('*').eq('unit_id', unitId).eq('category', 'mock_exam').order('sort_order'),
+        supabase.from('naesin_problem_sheets').select(SHEET_ADMIN_LITE_COLUMNS).eq('unit_id', unitId).eq('category', 'mock_exam').order('sort_order'),
       ]);
       vocab.setItems((v.data as NaesinVocabulary[]) || []);
       setPassageList((p.data as NaesinPassage[]) || []);
       setDialogueList((dlg.data as NaesinDialogue[]) || []);
       dispatchCM({ type: 'SET_COUNTS', omrCount: o.count ?? 0, lastReviewCount: lr.count ?? 0 });
       setGrammarList((g.data as NaesinGrammarLesson[]) || []);
-      setProblemList((prob.data as NaesinProblemSheet[]) || []);
+      setProblemList((prob.data as unknown as NaesinProblemSheet[]) || []);
       setTextbookVideoList((tbv.data as NaesinTextbookVideo[]) || []);
-      setMockExamList((mock.data as NaesinProblemSheet[]) || []);
+      setMockExamList((mock.data as unknown as NaesinProblemSheet[]) || []);
       vocab.setSelectedIds(new Set());
     } catch (err) {
       logger.error('unit.load_counts', { error: err instanceof Error ? err.message : String(err) });
@@ -150,6 +151,31 @@ export function useUnitContentData(unitId: string) {
   useEffect(() => {
     loadCounts();
   }, [loadCounts]);
+
+  const [loadingSheetId, setLoadingSheetId] = useState<string | null>(null);
+
+  const loadFullSheet = useCallback(async (sheetId: string): Promise<NaesinProblemSheet | null> => {
+    // Check if already full (has questions)
+    const inProblems = problemList.find(s => s.id === sheetId);
+    if (inProblems?.questions) return inProblems;
+    const inMockExams = mockExamList.find(s => s.id === sheetId);
+    if (inMockExams?.questions) return inMockExams;
+
+    setLoadingSheetId(sheetId);
+    try {
+      const res = await fetch(`/api/naesin/problems/sheet?id=${sheetId}`);
+      if (!res.ok) return null;
+      const full: NaesinProblemSheet = await res.json();
+      // Update the list with full data
+      setProblemList(prev => prev.map(s => s.id === sheetId ? full : s));
+      setMockExamList(prev => prev.map(s => s.id === sheetId ? full : s));
+      return full;
+    } catch {
+      return null;
+    } finally {
+      setLoadingSheetId(null);
+    }
+  }, [problemList, mockExamList]);
 
   async function regenerateGrammarVocab(passage: NaesinPassage) {
     if (!passage.sentences || passage.sentences.length === 0) {
@@ -185,6 +211,7 @@ export function useUnitContentData(unitId: string) {
     problemList, setProblemList, problemDelete,
     textbookVideoList, textbookVideoDelete,
     mockExamList, setMockExamList, mockExamDelete,
+    loadFullSheet, loadingSheetId,
     refresh: loadCounts,
     regenerateGrammarVocab,
   };
