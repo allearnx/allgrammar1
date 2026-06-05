@@ -1,13 +1,14 @@
 import { NextResponse } from 'next/server';
-import { createApiHandler, dbResult } from '@/lib/api';
+import { createApiHandler } from '@/lib/api';
 import { problemDraftSaveSchema } from '@/lib/api/schemas';
+import { logger } from '@/lib/logger';
 
 export const POST = createApiHandler(
   { schema: problemDraftSaveSchema },
   async ({ user, body, supabase }) => {
     const { sheetId, unitId, draftData, answeredCount } = body;
 
-    const row = dbResult(await supabase
+    const { data, error } = await supabase
       .from('naesin_problem_drafts')
       .upsert(
         {
@@ -21,8 +22,17 @@ export const POST = createApiHandler(
         { onConflict: 'student_id,sheet_id' }
       )
       .select()
-      .single());
+      .single();
 
-    return NextResponse.json(row);
+    if (error) {
+      // Draft save is best-effort — return 409 instead of 500 to avoid noisy alerts
+      logger.warn('draft.save_failed', { sheetId, userId: user.id, error: error.message });
+      return NextResponse.json(
+        { error: '임시 저장에 실패했습니다.', detail: error.message },
+        { status: 409 },
+      );
+    }
+
+    return NextResponse.json(data);
   }
 );

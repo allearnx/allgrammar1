@@ -18,6 +18,13 @@ export const POST = createApiHandler(
   { roles: [...ADMIN_ROLES], schema: passageCreateSchema },
   async ({ body, supabase, user }) => {
     await requireContentPermission(user, supabase);
+
+    // Auto-generate blanks if not provided but original_text exists
+    const text = body.original_text;
+    const blanksEasy = body.blanks_easy || (text ? generateAutoBlanks(text, AUTO_INTERVAL.easy) : null);
+    const blanksMedium = body.blanks_medium || (text ? generateAutoBlanks(text, AUTO_INTERVAL.medium) : null);
+    const blanksHard = body.blanks_hard || (text ? generateAutoBlanks(text, AUTO_INTERVAL.hard) : null);
+
     const data = dbResult(await supabase
       .from('naesin_passages')
       .insert({
@@ -25,9 +32,9 @@ export const POST = createApiHandler(
         title: body.title,
         original_text: body.original_text,
         korean_translation: body.korean_translation,
-        blanks_easy: body.blanks_easy || null,
-        blanks_medium: body.blanks_medium || null,
-        blanks_hard: body.blanks_hard || null,
+        blanks_easy: blanksEasy,
+        blanks_medium: blanksMedium,
+        blanks_hard: blanksHard,
         sentences: body.sentences || null,
         grammar_vocab_items: body.grammar_vocab_items || null,
         pdf_url: body.pdf_url || null,

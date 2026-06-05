@@ -77,9 +77,9 @@ export function FillBlanksExercise({ passage, onComplete, showWrongAlert: _showW
     <div className="space-y-4">
       <Tabs value={s.difficulty} onValueChange={(v) => s.changeDifficulty(v as Difficulty)}>
         <TabsList className="grid w-full grid-cols-3">
-          <TabsTrigger value="easy" disabled={s.retryMode}>쉬움</TabsTrigger>
-          <TabsTrigger value="medium" disabled={!passage.blanks_medium || s.retryMode}>보통</TabsTrigger>
-          <TabsTrigger value="hard" disabled={!passage.blanks_hard || s.retryMode}>어려움</TabsTrigger>
+          <TabsTrigger value="easy">쉬움</TabsTrigger>
+          <TabsTrigger value="medium" disabled={!passage.blanks_medium}>보통</TabsTrigger>
+          <TabsTrigger value="hard" disabled={!passage.blanks_hard}>어려움</TabsTrigger>
         </TabsList>
       </Tabs>
 
