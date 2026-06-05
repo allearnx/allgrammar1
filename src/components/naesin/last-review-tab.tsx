@@ -9,12 +9,12 @@ import { FileText, PlayCircle, BookOpen, Brain } from 'lucide-react';
 import { MCQOptionList } from '@/components/shared/mcq-option-list';
 import { ProblemTab } from './problem-tab';
 import { WrongAnswerReview } from './wrong-answer-review';
-import type { NaesinProblemSheet, NaesinSimilarProblem, NaesinLastReviewContent, NaesinProblemQuestion } from '@/types/database';
+import type { NaesinProblemSheet, NaesinProblemSheetLite, NaesinSimilarProblem, NaesinLastReviewContent, NaesinProblemQuestion } from '@/types/database';
 import { isSafeIframeSrc } from '@/lib/utils/safe-url';
 
 interface LastReviewTabProps {
   unitId: string;
-  problemSheets: NaesinProblemSheet[];
+  problemSheets: (NaesinProblemSheet | NaesinProblemSheetLite)[];
   similarProblems: NaesinSimilarProblem[];
   reviewContent: NaesinLastReviewContent[];
 }

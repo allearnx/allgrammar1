@@ -1,7 +1,7 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { ClipboardList, RotateCcw } from 'lucide-react';
+import { useState, useEffect, useCallback } from 'react';
+import { ClipboardList, RotateCcw, Loader2 } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
@@ -11,7 +11,7 @@ import { InteractiveProblemView } from './interactive-view';
 import { ImageAnswerView } from './image-answer-view';
 import { ExternalPassageView } from './external-passage-view';
 import { PaperTestView } from './paper-test-view';
-import type { NaesinProblemSheet } from '@/types/database';
+import type { NaesinProblemSheet, NaesinProblemSheetLite } from '@/types/naesin';
 
 type ViewMode = 'interactive' | 'paper_test';
 const VIEW_MODE_KEY = 'naesin-view-mode';
@@ -24,12 +24,16 @@ interface LastAttempt {
 }
 
 interface ProblemTabProps {
-  sheets: NaesinProblemSheet[];
+  sheets: (NaesinProblemSheet | NaesinProblemSheetLite)[];
   unitId?: string | null;
   onStageComplete?: () => void;
   bestScoreBySheet?: Record<string, number>;
   lastAttemptBySheet?: Record<string, LastAttempt>;
   onActiveSheetChange?: (category: string) => void;
+}
+
+function isFullSheet(sheet: NaesinProblemSheet | NaesinProblemSheetLite): sheet is NaesinProblemSheet {
+  return 'questions' in sheet;
 }
 
 export function ProblemTab({ sheets, unitId, onStageComplete, bestScoreBySheet, lastAttemptBySheet, onActiveSheetChange }: ProblemTabProps) {
@@ -39,12 +43,48 @@ export function ProblemTab({ sheets, unitId, onStageComplete, bestScoreBySheet, 
     try { return (localStorage.getItem(VIEW_MODE_KEY) as ViewMode) || 'interactive'; } catch { return 'interactive'; }
   });
 
+  // Cache for full sheet data (lazy-loaded)
+  const [fullSheetCache, setFullSheetCache] = useState<Record<string, NaesinProblemSheet>>({});
+  const [loadingSheetId, setLoadingSheetId] = useState<string | null>(null);
+
   function handleViewModeChange(mode: ViewMode) {
     setViewMode(mode);
     try { localStorage.setItem(VIEW_MODE_KEY, mode); } catch { /* ignore */ }
   }
 
   const activeSheet = sheets.find((s) => s.id === activeSheetId) || sheets[0];
+
+  // Get full sheet: from cache, from props (if already full), or null (needs fetch)
+  const fullActiveSheet: NaesinProblemSheet | null = activeSheet
+    ? fullSheetCache[activeSheet.id] ?? (isFullSheet(activeSheet) ? activeSheet : null)
+    : null;
+
+  const fetchFullSheet = useCallback(async (sheetId: string) => {
+    if (fullSheetCache[sheetId]) return;
+    setLoadingSheetId(sheetId);
+    try {
+      const res = await fetch(`/api/naesin/problems/sheet?id=${sheetId}`);
+      if (res.ok) {
+        const data = await res.json();
+        setFullSheetCache((prev) => ({ ...prev, [sheetId]: data }));
+      }
+    } finally {
+      setLoadingSheetId(null);
+    }
+  }, [fullSheetCache]);
+
+  // Lazy-load full sheet when active sheet changes (and we don't have it yet)
+  useEffect(() => {
+    if (!activeSheet) return;
+    const hasCompleted = bestScoreBySheet?.[activeSheet.id] != null;
+    const lastAttempt = lastAttemptBySheet?.[activeSheet.id];
+    const showSummary = hasCompleted && lastAttempt && !retrySheetIds.has(activeSheet.id);
+    // Don't fetch if showing summary (no need for questions)
+    if (showSummary) return;
+    if (!fullSheetCache[activeSheet.id] && !isFullSheet(activeSheet)) {
+      fetchFullSheet(activeSheet.id);
+    }
+  }, [activeSheet, fullSheetCache, fetchFullSheet, bestScoreBySheet, lastAttemptBySheet, retrySheetIds]);
 
   useEffect(() => {
     if (activeSheet && onActiveSheetChange) {
@@ -66,14 +106,23 @@ export function ProblemTab({ sheets, unitId, onStageComplete, bestScoreBySheet, 
   const lastAttempt = lastAttemptBySheet?.[activeSheet.id];
   const hasCompleted = bestScoreBySheet?.[activeSheet.id] != null;
   const showSummary = hasCompleted && lastAttempt && !retrySheetIds.has(activeSheet.id);
+  const isLoading = loadingSheetId === activeSheet.id;
 
   function handleRetry() {
     setRetrySheetIds((prev) => new Set(prev).add(activeSheet.id));
+    // Ensure full sheet is loaded for retry
+    if (!fullSheetCache[activeSheet.id] && !isFullSheet(activeSheet)) {
+      fetchFullSheet(activeSheet.id);
+    }
   }
 
   function handleSelectSheet(sheetId: string) {
     setActiveSheetId(sheetId);
   }
+
+  // Use full sheet for rendering problem views, fall back to lite for list/summary
+  const sheetForView = fullActiveSheet;
+  const hasQuestions = sheetForView ? (sheetForView.questions as unknown[])?.length > 0 : false;
 
   return (
     <div className="space-y-4">
@@ -110,7 +159,7 @@ export function ProblemTab({ sheets, unitId, onStageComplete, bestScoreBySheet, 
       {!showSummary &&
         activeSheet.mode === 'interactive' &&
         ['problem', 'mock_exam'].includes(activeSheet.category) &&
-        (activeSheet.questions as unknown[])?.length > 0 && (
+        hasQuestions && (
         <div className="flex justify-center print:hidden">
           <div className="inline-flex rounded-lg border bg-muted p-0.5 text-sm">
             <button
@@ -139,25 +188,30 @@ export function ProblemTab({ sheets, unitId, onStageComplete, bestScoreBySheet, 
 
       {showSummary ? (
         <AttemptSummary attempt={lastAttempt} onRetry={handleRetry} />
+      ) : isLoading || !sheetForView ? (
+        <div className="flex flex-col items-center py-12">
+          <Loader2 className="h-8 w-8 animate-spin text-muted-foreground" />
+          <p className="text-sm text-muted-foreground mt-2">문제를 불러오는 중...</p>
+        </div>
       ) : activeSheet.category === 'external_passage' ? (
         <ExternalPassageView
           key={activeSheet.id}
-          sheet={activeSheet}
+          sheet={sheetForView}
           unitId={unitId}
           onComplete={onStageComplete}
         />
-      ) : activeSheet.mode === 'interactive' && (activeSheet.questions as unknown[])?.length > 0 ? (
+      ) : activeSheet.mode === 'interactive' && hasQuestions ? (
         viewMode === 'paper_test' ? (
           <PaperTestView
             key={`paper-${activeSheet.id}`}
-            sheet={activeSheet}
+            sheet={sheetForView}
             unitId={unitId}
             onComplete={onStageComplete}
           />
         ) : (
           <InteractiveProblemView
             key={activeSheet.id}
-            sheet={activeSheet}
+            sheet={sheetForView}
             unitId={unitId}
             onComplete={onStageComplete}
           />
@@ -165,7 +219,7 @@ export function ProblemTab({ sheets, unitId, onStageComplete, bestScoreBySheet, 
       ) : (
         <ImageAnswerView
           key={activeSheet.id}
-          sheet={activeSheet}
+          sheet={sheetForView}
           unitId={unitId}
           onComplete={onStageComplete}
         />

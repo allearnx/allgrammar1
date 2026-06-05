@@ -327,6 +327,12 @@ export interface NaesinProblemSheet {
   created_at: string;
 }
 
+/** Lightweight sheet without heavy JSONB (questions, answer_key) — for list views */
+export type NaesinProblemSheetLite = Omit<NaesinProblemSheet, 'questions' | 'answer_key'>;
+
+/** Supabase select columns for lite sheet queries */
+export const SHEET_LITE_COLUMNS = 'id, unit_id, textbook_id, title, mode, pdf_url, sort_order, category, video_url, is_template, template_topic, source_template_id, created_at';
+
 export interface NaesinTemplate {
   id: string;
   title: string;

@@ -84,3 +84,25 @@
 - answer_key 형식 통일 필요: 일부 시트는 string[], 일부는 {answer, explanation}[]
 - multi-select 답안 (q.answer가 배열)은 저장 시 answer_key에도 자동 동기화 필요
 - 시트 추가 시 해당 유닛의 학생 진도(problem_completed/mock_exam_completed)를 false로 리셋 필요
+
+---
+
+# Supabase GRANT 마이그레이션 — 단계적 전환 (마감: 2026-10-30)
+
+2026-05-30부터 신규 프로젝트는 public 스키마 테이블에 명시적 GRANT 필요.
+기존 프로젝트(우리)는 2026-10-30까지 현행 유지. 단계적으로 진행.
+
+## 현황
+- 현재 GRANT가 있는 테이블: `users` (071_fix_anon_users_grant.sql — anon SELECT만)
+- 나머지 전체 테이블: 암묵적 권한에 의존 중 (10월 이후 접근 불가 위험)
+
+## 계획 (단계적)
+- [ ] 1단계: 전체 테이블 목록 + 필요 권한(anon/authenticated/service_role) 정리
+- [ ] 2단계: 핵심 테이블부터 GRANT 마이그레이션 작성 (naesin_*, users, services 등)
+- [ ] 3단계: 나머지 테이블 GRANT 추가
+- [ ] 4단계: 스테이징에서 테스트 후 프로덕션 적용
+- [ ] 5단계: 기본 권한 비활성화 (10월 전 완료)
+
+## 참고
+- RLS는 이미 전 테이블에 활성화되어 있으므로 GRANT 추가해도 보안 문제 없음
+- 새 테이블 생성 시 GRANT 포함하는 습관 필요

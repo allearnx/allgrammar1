@@ -1,5 +1,6 @@
 import type { createClient } from '@/lib/supabase/server';
 import type { NaesinStudentProgress } from '@/types/naesin';
+import { SHEET_LITE_COLUMNS } from '@/types/naesin';
 
 type SupabaseClient = Awaited<ReturnType<typeof createClient>>;
 type StageKey = 'vocab' | 'passage' | 'dialogue' | 'textbookVideo' | 'grammar' | 'problem' | 'mockExam' | 'lastReview';
@@ -122,7 +123,7 @@ async function fetchMockExamData(supabase: SupabaseClient, unitId: string, userI
   // First get sheets, then filter attempts by sheet IDs
   const mockExamRes = await supabase
     .from('naesin_problem_sheets')
-    .select('*')
+    .select(SHEET_LITE_COLUMNS)
     .eq('unit_id', unitId)
     .eq('category', 'mock_exam')
     .order('sort_order');
@@ -169,7 +170,7 @@ async function fetchProblemData(supabase: SupabaseClient, unitId: string, userId
   // First get sheets, then filter attempts by sheet IDs
   const problemRes = await supabase
     .from('naesin_problem_sheets')
-    .select('*')
+    .select(SHEET_LITE_COLUMNS)
     .eq('unit_id', unitId)
     .in('category', ['problem', 'external_passage', 'eng_eng_def'])
     .order('sort_order');
@@ -213,7 +214,7 @@ async function fetchProblemData(supabase: SupabaseClient, unitId: string, userId
 
 async function fetchLastReviewData(supabase: SupabaseClient, unitId: string) {
   const [sheetsRes, similarRes, contentRes] = await Promise.all([
-    supabase.from('naesin_problem_sheets').select('*').eq('unit_id', unitId).eq('category', 'last_review').order('sort_order'),
+    supabase.from('naesin_problem_sheets').select(SHEET_LITE_COLUMNS).eq('unit_id', unitId).eq('category', 'last_review').order('sort_order'),
     supabase.from('naesin_similar_problems').select('*').eq('unit_id', unitId).eq('status', 'approved'),
     supabase.from('naesin_last_review_content').select('*').eq('unit_id', unitId).order('sort_order'),
   ]);

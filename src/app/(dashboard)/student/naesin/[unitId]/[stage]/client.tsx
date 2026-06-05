@@ -32,11 +32,10 @@ import type {
   NaesinGrammarVideoProgress,
   NaesinTextbookVideo,
   NaesinTextbookVideoProgress,
-  NaesinProblemSheet,
   NaesinSimilarProblem,
   NaesinLastReviewContent,
 } from '@/types/database';
-import type { NaesinDialogue } from '@/types/naesin';
+import type { NaesinDialogue, NaesinProblemSheet, NaesinProblemSheetLite } from '@/types/naesin';
 import Link from 'next/link';
 import { useLearningSession } from '@/hooks/use-learning-session';
 import { StageNavBar } from './stage-nav-bar';
@@ -73,7 +72,7 @@ interface StageData {
   textbookVideoProgress?: NaesinTextbookVideoProgress[];
   grammarLessons?: NaesinGrammarLesson[];
   videoProgress?: NaesinGrammarVideoProgress[];
-  problemSheets?: NaesinProblemSheet[];
+  problemSheets?: (NaesinProblemSheet | NaesinProblemSheetLite)[];
   bestScoreBySheet?: Record<string, number>;
   lastAttemptBySheet?: Record<string, {
     score: number;
@@ -81,8 +80,8 @@ interface StageData {
     wrong_answers: { number: number; userAnswer: string | number; correctAnswer: string | number; question?: string }[];
     created_at: string;
   }>;
-  mockExamSheets?: NaesinProblemSheet[];
-  lastReviewProblemSheets?: NaesinProblemSheet[];
+  mockExamSheets?: (NaesinProblemSheet | NaesinProblemSheetLite)[];
+  lastReviewProblemSheets?: (NaesinProblemSheet | NaesinProblemSheetLite)[];
   similarProblems?: NaesinSimilarProblem[];
   reviewContent?: NaesinLastReviewContent[];
   naesinRequiredRounds?: number;
