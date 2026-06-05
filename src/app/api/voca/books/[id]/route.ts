@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import { createApiHandler } from '@/lib/api/handler';
 import { vocaBookPatchSchema } from '@/lib/api/schemas';
 import { requireContentPermission } from '@/lib/api/require-content-permission';
+import { invalidateVocaBooks } from '@/lib/cache/invalidate';
 
 // PATCH — 교재 수정
 export const PATCH = createApiHandler(
@@ -17,6 +18,7 @@ export const PATCH = createApiHandler(
       .select()
       .single();
     if (error) return NextResponse.json({ error: error.message }, { status: 400 });
+    invalidateVocaBooks();
     return NextResponse.json(data);
   }
 );
@@ -31,6 +33,7 @@ export const DELETE = createApiHandler(
       .delete()
       .eq('id', params.id);
     if (error) return NextResponse.json({ error: error.message }, { status: 400 });
+    invalidateVocaBooks();
     return NextResponse.json({ success: true });
   }
 );

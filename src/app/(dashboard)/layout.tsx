@@ -1,8 +1,9 @@
 import type { Metadata } from 'next';
-import { unstable_cache } from 'next/cache';
 import { requireUser } from '@/lib/auth/helpers';
 import { createClient } from '@/lib/supabase/server';
 import { createAdminClient } from '@/lib/supabase/admin';
+import { cached, TTL } from '@/lib/cache/server-cache';
+import { cacheTags } from '@/lib/cache/tags';
 import { Sidebar } from '@/components/layout/sidebar';
 import { PaidStatusProvider } from '@/components/layout/paid-status-context';
 import { PresenceTracker } from '@/components/layout/presence-tracker';
@@ -83,53 +84,50 @@ export default async function DashboardLayout({
   );
 }
 
-/** Cached student services — TTL 5min */
-function getCachedServices(studentId: string) {
-  return unstable_cache(
-    async () => {
-      const admin = createAdminClient();
-      const { data } = await admin
-        .from('service_assignments')
-        .select('service')
-        .eq('student_id', studentId);
-      return data?.map((d) => d.service) || [];
-    },
-    ['student-services', studentId],
-    { revalidate: 300, tags: [`student-services:${studentId}`] },
-  )();
-}
+/** Cached student services — TTL 5min (SESSION) */
+const getCachedServices = cached(
+  async (studentId: string) => {
+    const admin = createAdminClient();
+    const { data } = await admin
+      .from('service_assignments')
+      .select('service')
+      .eq('student_id', studentId);
+    return data?.map((d) => d.service) || [];
+  },
+  'student-services',
+  TTL.SESSION,
+  (studentId) => [cacheTags.studentServices(studentId)],
+);
 
-/** Cached isPaid check — TTL 5min */
-function getCachedIsPaid(academyId: string) {
-  return unstable_cache(
-    async () => {
-      const admin = createAdminClient();
-      const { data: sub } = await admin
-        .from('subscriptions')
-        .select('status, tier')
-        .eq('academy_id', academyId)
-        .in('status', ['trialing', 'active', 'past_due'])
-        .order('created_at', { ascending: false })
-        .limit(1)
-        .single();
-      return deriveTier(sub) !== 'free';
-    },
-    ['is-paid', academyId],
-    { revalidate: 300, tags: [`is-paid:${academyId}`] },
-  )();
-}
+/** Cached isPaid check — TTL 5min (SESSION) */
+const getCachedIsPaid = cached(
+  async (academyId: string) => {
+    const admin = createAdminClient();
+    const { data: sub } = await admin
+      .from('subscriptions')
+      .select('status, tier')
+      .eq('academy_id', academyId)
+      .in('status', ['trialing', 'active', 'past_due'])
+      .order('created_at', { ascending: false })
+      .limit(1)
+      .single();
+    return deriveTier(sub) !== 'free';
+  },
+  'is-paid',
+  TTL.SESSION,
+  (academyId) => [cacheTags.isPaid(academyId)],
+);
 
-/** Cached wrapper — reuses fetchNaesinTree with admin client, TTL 60s */
-function getCachedNaesinTree(studentId: string) {
-  return unstable_cache(
-    async () => {
-      const admin = createAdminClient();
-      return (await fetchNaesinTree(admin, studentId)) ?? null;
-    },
-    ['naesin-sidebar', studentId],
-    { revalidate: 60, tags: [`naesin-sidebar:${studentId}`] },
-  )();
-}
+/** Cached naesin sidebar tree — TTL 60s (LIVE) */
+const getCachedNaesinTree = cached(
+  async (studentId: string) => {
+    const admin = createAdminClient();
+    return (await fetchNaesinTree(admin, studentId)) ?? null;
+  },
+  'naesin-sidebar',
+  TTL.LIVE,
+  (studentId) => [cacheTags.naesinSidebar(studentId)],
+);
 
 type SupabaseClient = Awaited<ReturnType<typeof createClient>> | ReturnType<typeof createAdminClient>;
 

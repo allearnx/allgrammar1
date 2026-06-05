@@ -26,6 +26,15 @@ vi.mock('@/lib/utils/invite-code', () => ({
   generateInviteCode: () => 'TESTCODE',
 }));
 
+vi.mock('@/lib/supabase/admin', () => ({
+  createAdminClient: () => ({ from: vi.fn() }),
+}));
+
+vi.mock('next/cache', () => ({
+  unstable_cache: (fn: Function) => fn,
+  revalidateTag: vi.fn(),
+}));
+
 // ── Helpers ──
 
 function makeRequest(

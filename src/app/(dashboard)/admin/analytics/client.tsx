@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
 import { fetchWithToast } from '@/lib/fetch-with-toast';
 import { Users, Activity, TrendingUp, BookMarked, BookA } from 'lucide-react';
 import {
@@ -26,18 +26,14 @@ interface AnalyticsData {
 import { StatCard } from '@/components/shared/stat-card';
 
 export function AdminAnalyticsClient() {
-  const [data, setData] = useState<AnalyticsData | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(false);
+  const { data, isLoading, isError } = useQuery({
+    queryKey: ['admin-analytics'],
+    queryFn: () =>
+      fetchWithToast<AnalyticsData>('/api/admin/analytics', { method: 'GET', silent: true }),
+    staleTime: 5 * 60_000, // 5min
+  });
 
-  useEffect(() => {
-    fetchWithToast<AnalyticsData>('/api/admin/analytics', { method: 'GET', silent: true })
-      .then(setData)
-      .catch(() => setError(true))
-      .finally(() => setLoading(false));
-  }, []);
-
-  if (loading) {
+  if (isLoading) {
     return (
       <div className="space-y-5">
         <div className="grid gap-3 grid-cols-2 lg:grid-cols-3">
@@ -57,7 +53,7 @@ export function AdminAnalyticsClient() {
     );
   }
 
-  if (error) {
+  if (isError) {
     return <p className="text-center text-rose-500 py-8">통계 데이터를 불러올 수 없습니다.</p>;
   }
   if (!data) return null;

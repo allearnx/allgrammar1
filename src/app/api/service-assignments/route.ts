@@ -4,6 +4,7 @@ import { serviceAssignmentCreateSchema, serviceAssignmentDeleteSchema, serviceAs
 import { checkServiceGate } from '@/lib/billing/check-plan-api';
 import { requireAcademyScope } from '@/lib/api/require-academy-scope';
 import { createAdminClient } from '@/lib/supabase/admin';
+import { invalidateStudentServices } from '@/lib/cache/invalidate';
 
 // GET — 학생 본인의 배정 목록
 export const GET = createApiHandler({ hasBody: false }, async ({ user, supabase }) => {
@@ -36,6 +37,7 @@ export const POST = createApiHandler(
       .select()
       .single();
     if (error) return NextResponse.json({ error: error.message }, { status: 400 });
+    invalidateStudentServices(body.studentId);
     return NextResponse.json(data);
   }
 );
@@ -93,6 +95,7 @@ export const PATCH = createApiHandler(
           .eq('naesin_memorize_only', true);
         if (error) return NextResponse.json({ error: error.message }, { status: 400 });
       }
+      invalidateStudentServices(body.studentId);
       return NextResponse.json({ success: true });
     }
 
@@ -107,6 +110,7 @@ export const PATCH = createApiHandler(
       .eq('student_id', body.studentId)
       .eq('service', 'voca');
     if (error) return NextResponse.json({ error: error.message }, { status: 400 });
+    invalidateStudentServices(body.studentId);
     return NextResponse.json({ success: true });
   }
 );
@@ -123,6 +127,7 @@ export const DELETE = createApiHandler(
       .eq('student_id', body.studentId)
       .eq('service', body.service);
     if (error) return NextResponse.json({ error: error.message }, { status: 400 });
+    invalidateStudentServices(body.studentId);
     return NextResponse.json({ success: true });
   }
 );

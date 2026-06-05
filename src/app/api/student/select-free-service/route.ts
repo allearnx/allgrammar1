@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { z } from 'zod';
 import { createApiHandler } from '@/lib/api/handler';
+import { invalidateStudentServices } from '@/lib/cache/invalidate';
 
 const selectFreeServiceSchema = z.object({
   service: z.enum(['voca', 'naesin']),
@@ -61,6 +62,7 @@ export const POST = createApiHandler(
       );
     }
 
+    invalidateStudentServices(user.id);
     return NextResponse.json({ success: true });
   },
 );

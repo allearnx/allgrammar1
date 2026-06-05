@@ -1,6 +1,7 @@
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState } from 'react';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { Button } from '@/components/ui/button';
 import { CheckCircle, AlertTriangle, ChevronDown, ChevronRight } from 'lucide-react';
 import { fetchWithToast } from '@/lib/fetch-with-toast';
@@ -23,14 +24,13 @@ const STAGE_LABELS: Record<string, string> = {
 };
 
 export function WrongAnswersClient() {
-  const [wrongAnswers, setWrongAnswers] = useState<EnrichedWrongAnswer[]>([]);
-  const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState<'all' | 'unresolved'>('unresolved');
   const [expandedGroups, setExpandedGroups] = useState<Set<string>>(new Set());
+  const queryClient = useQueryClient();
 
-  const loadWrongAnswers = useCallback(async () => {
-    setLoading(true);
-    try {
+  const { data: wrongAnswers = [], isLoading: loading } = useQuery({
+    queryKey: ['wrong-answers', filter],
+    queryFn: async () => {
       const params = new URLSearchParams();
       if (filter === 'unresolved') params.set('resolved', 'false');
       const data = await fetchWithToast<EnrichedWrongAnswer[]>(`/api/naesin/wrong-answers?${params}`, {
@@ -39,20 +39,12 @@ export function WrongAnswersClient() {
         logContext: 'wrong_answers_page',
       });
       const items = Array.isArray(data) ? data : [];
-      setWrongAnswers(items);
       // Auto-expand all textbook groups
-      const groups = new Set(items.map((wa) => wa.textbook_info?.display_name || '기타'));
-      setExpandedGroups(groups);
-    } catch {
-      // silently handled
-    } finally {
-      setLoading(false);
-    }
-  }, [filter]);
-
-  useEffect(() => {
-    loadWrongAnswers();
-  }, [loadWrongAnswers]);
+      setExpandedGroups(new Set(items.map((wa) => wa.textbook_info?.display_name || '기타')));
+      return items;
+    },
+    staleTime: 60_000, // 1min
+  });
 
   async function markResolved(id: string) {
     try {
@@ -63,7 +55,11 @@ export function WrongAnswersClient() {
         errorMessage: '업데이트 실패',
         logContext: 'wrong_answers_page',
       });
-      setWrongAnswers((prev) => prev.filter((wa) => wa.id !== id));
+      // Optimistic update: remove from local cache
+      queryClient.setQueryData<EnrichedWrongAnswer[]>(
+        ['wrong-answers', filter],
+        (prev) => prev?.filter((wa) => wa.id !== id),
+      );
     } catch {
       // error already toasted
     }

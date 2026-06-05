@@ -8,6 +8,7 @@ import type { NaesinProblemQuestion } from '@/types/naesin';
 import { SHEET_ADMIN_LITE_COLUMNS } from '@/types/naesin';
 import { sanitizeQuestions, validateBeforeSave } from '@/lib/validation/problem-validator';
 import { spotCheckMcqAnswers } from '@/lib/validation/problem-answer-check';
+import { invalidateUnitContent } from '@/lib/cache/invalidate';
 import Anthropic from '@anthropic-ai/sdk';
 import { logger } from '@/lib/logger';
 
@@ -99,6 +100,7 @@ export const POST = createApiHandler(
       }
     }
 
+    if (unitId) invalidateUnitContent(unitId);
     return NextResponse.json({ ...data, ...extras });
   }
 );
@@ -172,6 +174,7 @@ export const PATCH = createApiHandler(
       }
     }
 
+    if (data.unit_id) invalidateUnitContent(data.unit_id);
     return NextResponse.json({ ...data, ...extras });
   }
 );

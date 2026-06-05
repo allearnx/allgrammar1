@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import { createApiHandler, dbResult } from '@/lib/api';
 import { examAssignmentUpsertSchema, examAssignmentDeleteSchema } from '@/lib/api/schemas';
 import { requireAcademyScope } from '@/lib/api/require-academy-scope';
+import { invalidateStudent } from '@/lib/cache/invalidate';
 
 export const GET = createApiHandler(
   {},
@@ -56,6 +57,7 @@ export const POST = createApiHandler(
       )
       .select()
       .single());
+    invalidateStudent(studentId);
     return NextResponse.json({ assignment: data });
   }
 );
@@ -73,6 +75,7 @@ export const DELETE = createApiHandler(
       .eq('student_id', studentId)
       .eq('textbook_id', textbookId)
       .eq('exam_round', examRound));
+    invalidateStudent(studentId);
     return NextResponse.json({ success: true });
   }
 );

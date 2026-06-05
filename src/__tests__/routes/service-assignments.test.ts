@@ -25,6 +25,10 @@ vi.mock('@/lib/billing/check-plan-api', () => ({
 vi.mock('@/lib/api/require-academy-scope', () => ({
   requireAcademyScope: vi.fn().mockResolvedValue(undefined),
 }));
+vi.mock('next/cache', () => ({
+  unstable_cache: (fn: Function) => fn,
+  revalidateTag: vi.fn(),
+}));
 
 function mockSupabaseChain(result: { data: unknown; error: unknown }) {
   const chain: Record<string, ReturnType<typeof vi.fn>> = {

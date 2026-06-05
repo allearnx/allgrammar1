@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
 import { ActivityCalendar } from '@/components/charts/activity-calendar';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { CalendarDays, Loader2 } from 'lucide-react';
@@ -13,19 +13,16 @@ interface CalendarData {
 }
 
 export function LearningCalendarSection() {
-  const [data, setData] = useState<CalendarData | null>(null);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    fetchWithToast<CalendarData>('/api/student/learning-calendar', {
-      method: 'GET',
-      silent: true,
-      logContext: 'student.learning_calendar',
-    })
-      .then((json) => setData(json))
-      .catch(() => {})
-      .finally(() => setLoading(false));
-  }, []);
+  const { data, isLoading } = useQuery({
+    queryKey: ['learning-calendar'],
+    queryFn: () =>
+      fetchWithToast<CalendarData>('/api/student/learning-calendar', {
+        method: 'GET',
+        silent: true,
+        logContext: 'student.learning_calendar',
+      }),
+    staleTime: 5 * 60_000, // 5min — 캘린더 데이터는 자주 안 바뀜
+  });
 
   return (
     <Card>
@@ -34,7 +31,7 @@ export function LearningCalendarSection() {
         <CardTitle className="text-lg font-semibold tracking-tight">학습 캘린더</CardTitle>
       </CardHeader>
       <CardContent>
-        {loading ? (
+        {isLoading ? (
           <div className="flex items-center justify-center py-8">
             <Loader2 className="h-5 w-5 animate-spin text-violet-400" />
           </div>

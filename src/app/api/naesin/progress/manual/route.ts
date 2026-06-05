@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import { createApiHandler, dbResult } from '@/lib/api';
 import { createAdminClient } from '@/lib/supabase/admin';
 import { requireAcademyScope } from '@/lib/api/require-academy-scope';
+import { invalidateStudent } from '@/lib/cache/invalidate';
 import { z } from 'zod';
 
 const TOGGLEABLE_FIELDS = [
@@ -37,6 +38,7 @@ export const PATCH = createApiHandler(
         { onConflict: 'student_id,unit_id' },
       ));
 
+    invalidateStudent(studentId);
     return NextResponse.json({ success: true, field, value });
   },
 );

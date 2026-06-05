@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
 import { fetchWithToast } from '@/lib/fetch-with-toast';
 import { Building2, Users, TrendingUp } from 'lucide-react';
 import {
@@ -51,18 +51,14 @@ const SUB_STATUS_COLORS: Record<string, string> = {
 };
 
 export function BossAnalyticsClient() {
-  const [data, setData] = useState<BossAnalyticsData | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(false);
+  const { data, isLoading, isError } = useQuery({
+    queryKey: ['boss-analytics'],
+    queryFn: () =>
+      fetchWithToast<BossAnalyticsData>('/api/boss/analytics', { method: 'GET', silent: true }),
+    staleTime: 5 * 60_000, // 5min
+  });
 
-  useEffect(() => {
-    fetchWithToast<BossAnalyticsData>('/api/boss/analytics', { method: 'GET', silent: true })
-      .then(setData)
-      .catch(() => setError(true))
-      .finally(() => setLoading(false));
-  }, []);
-
-  if (loading) {
+  if (isLoading) {
     return (
       <div className="space-y-5">
         <div className="grid gap-3 grid-cols-2 lg:grid-cols-3">
@@ -96,7 +92,7 @@ export function BossAnalyticsClient() {
     );
   }
 
-  if (error) {
+  if (isError) {
     return <p className="text-center text-gray-500 py-8">통계 데이터를 불러올 수 없습니다.</p>;
   }
   if (!data) return null;
