@@ -215,7 +215,7 @@ async function fetchProblemData(supabase: SupabaseClient, unitId: string, userId
 async function fetchLastReviewData(supabase: SupabaseClient, unitId: string) {
   const [sheetsRes, similarRes, contentRes] = await Promise.all([
     supabase.from('naesin_problem_sheets').select(SHEET_LITE_COLUMNS).eq('unit_id', unitId).eq('category', 'last_review').order('sort_order'),
-    supabase.from('naesin_similar_problems').select('id, grammar_tag, question_data').eq('unit_id', unitId).eq('status', 'approved'),
+    supabase.from('naesin_similar_problems').select('id, grammar_tag, question_data, status').eq('unit_id', unitId).eq('status', 'approved'),
     supabase.from('naesin_last_review_content').select('id, content_type, title, youtube_video_id, pdf_url, text_content').eq('unit_id', unitId).order('sort_order'),
   ]);
   return {
