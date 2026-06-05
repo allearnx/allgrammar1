@@ -3,7 +3,6 @@ import { z } from 'zod';
 import { createApiHandler, dbResult } from '@/lib/api';
 import { requireAcademyScope } from '@/lib/api/require-academy-scope';
 import { createAdminClient } from '@/lib/supabase/admin';
-import { enrichWrongAnswersFromSheet } from '@/lib/naesin/enrich-wrong-answers';
 
 /**
  * naesin_problem_attempts에는 있지만 naesin_wrong_answers에 없는
@@ -67,6 +66,7 @@ async function autoBackfillForStudent(
     const questions = (sheet.questions || []) as {
       options?: string[];
       explanation?: string;
+      imageUrl?: string;
     }[];
 
     for (const wa of wrongAnswers) {
@@ -81,6 +81,7 @@ async function autoBackfillForStudent(
           ...wa,
           ...(q?.options ? { options: q.options } : {}),
           ...(q?.explanation ? { explanation: q.explanation } : {}),
+          ...(q?.imageUrl ? { imageUrl: q.imageUrl } : {}),
         },
         sheet_id: attempt.sheet_id,
       });
@@ -172,7 +173,7 @@ async function getDraftWrongAnswers(
 
     const sheet = sheetMap.get(draft.sheet_id);
     const unitId = draft.unit_id || sheet?.unit_id;
-    const questions = (sheet?.questions || []) as { options?: string[]; explanation?: string }[];
+    const questions = (sheet?.questions || []) as { options?: string[]; explanation?: string; imageUrl?: string }[];
     const answeredCount = dd.answersMap ? Object.keys(dd.answersMap).length : 0;
     const totalCount = questions.length || 0;
 
@@ -189,9 +190,10 @@ async function getDraftWrongAnswers(
           ...wa,
           ...(q?.options ? { options: q.options } : {}),
           ...(q?.explanation ? { explanation: q.explanation } : {}),
+          ...(q?.imageUrl ? { imageUrl: q.imageUrl } : {}),
         },
         sheet_id: draft.sheet_id,
-        sheet: sheet ? { id: sheet.id, title: sheet.title, questions: sheet.questions } : null,
+        sheet: sheet ? { id: sheet.id, title: sheet.title } : null,
         unit: unitId ? unitMap.get(unitId) ?? null : null,
         resolved: false,
         created_at: draft.updated_at,
@@ -223,12 +225,10 @@ export const GET = createApiHandler(
     const data = dbResult(
       await admin
         .from('naesin_wrong_answers')
-        .select('*, sheet:naesin_problem_sheets(id, title, questions), unit:naesin_units(id, unit_number, title)')
+        .select('*, sheet:naesin_problem_sheets(id, title), unit:naesin_units(id, unit_number, title)')
         .eq('student_id', studentId)
         .order('created_at', { ascending: false })
     );
-
-    enrichWrongAnswersFromSheet(data as Record<string, unknown>[]);
 
     // 풀이 중(draft) 오답도 포함
     const draftWrongAnswers = await getDraftWrongAnswers(admin, studentId);

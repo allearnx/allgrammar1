@@ -1,7 +1,6 @@
 import { NextResponse } from 'next/server';
 import { createApiHandler, dbResult } from '@/lib/api';
 import { wrongAnswerCreateSchema, wrongAnswerPatchSchema } from '@/lib/api/schemas';
-import { enrichWrongAnswersFromSheet } from '@/lib/naesin/enrich-wrong-answers';
 import { createAdminClient } from '@/lib/supabase/admin';
 
 /**
@@ -48,14 +47,14 @@ async function autoBackfillForStudent(studentId: string) {
       correctAnswer: string | number; question?: string;
     }[];
     if (!wrongAnswers || wrongAnswers.length === 0) continue;
-    const questions = (sheet.questions || []) as { options?: string[]; explanation?: string }[];
+    const questions = (sheet.questions || []) as { options?: string[]; explanation?: string; imageUrl?: string }[];
     for (const wa of wrongAnswers) {
       const idx = wa.number - 1;
       const q = questions[idx];
       rows.push({
         student_id: studentId, unit_id: sheet.unit_id,
         stage: sheet.category === 'mock_exam' ? 'mockExam' : 'problem', source_type: sheet.mode || 'interactive',
-        question_data: { ...wa, ...(q?.options ? { options: q.options } : {}), ...(q?.explanation ? { explanation: q.explanation } : {}) },
+        question_data: { ...wa, ...(q?.options ? { options: q.options } : {}), ...(q?.explanation ? { explanation: q.explanation } : {}), ...(q?.imageUrl ? { imageUrl: q.imageUrl } : {}) },
         sheet_id: attempt.sheet_id,
         round: 1,
       });
@@ -80,7 +79,7 @@ export const GET = createApiHandler(
 
     let query = supabase
       .from('naesin_wrong_answers')
-      .select('*, sheet:naesin_problem_sheets(id, title, questions)')
+      .select('*, sheet:naesin_problem_sheets(id, title)')
       .eq('student_id', user.id)
       .order('created_at', { ascending: false });
 
@@ -95,9 +94,6 @@ export const GET = createApiHandler(
     }
 
     const data = dbResult(await query);
-
-    // Enrich problem wrong answers with missing options/explanation from sheet
-    enrichWrongAnswersFromSheet(data as Record<string, unknown>[]);
 
     // When fetching all (no unitId), enrich with unit/textbook info
     if (!unitId) {
