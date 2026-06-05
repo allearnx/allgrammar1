@@ -86,6 +86,8 @@ export const freePlanFeatures = ['교재당 Day 3개 체험', '플래시카드',
 
 export const selfStudyPlanFeatures = ['오답 관리 & 틀린 단어 복습', '1회독 + 2회독 전체 포함', 'AI 서술형 채점'];
 
+export const selfStudyExclusions = ['선생님 1:1 관리', '주 2회 온라인 시험', '학부모 리포트'];
+
 export const proPlanFeatures = ['선생님과 주 2회 온라인 시험', '개별 진도 관리 (90점 통과 시스템)', '오답 관리 & 틀린 단어 복습', '1회독 + 2회독 전체 포함', 'AI 서술형 채점', '학부모 리포트 공유'];
 
 export const proRoundSteps = [

@@ -42,7 +42,7 @@ const SERVICE_OPTIONS: {
   {
     value: 'naesin',
     label: '올인내신',
-    desc: '내신대비의 최강자! 교과서 암기부터 기출문제 풀이까지!',
+    desc: '1개 단원 체험 (단어·교과서·대화문 암기)',
     icon: <BookMarked className="h-6 w-6 text-emerald-500" />,
     activeColor: 'border-emerald-500 bg-emerald-50',
   },

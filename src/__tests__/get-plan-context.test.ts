@@ -46,7 +46,7 @@ describe('getPlanContext', () => {
   it('no academyId, no studentId → free tier, null freeService', async () => {
     const { getPlanContext } = await import('@/lib/billing/get-plan-context');
     const result = await getPlanContext(null);
-    expect(result).toEqual({ tier: 'free', freeService: null });
+    expect(result).toEqual({ tier: 'free', freeService: null, naesinMemorizeOnly: false });
   });
 
   // ── 독립 학생: voca 배정 있음 ──
@@ -62,7 +62,7 @@ describe('getPlanContext', () => {
     const { getPlanContext } = await import('@/lib/billing/get-plan-context');
     const result = await getPlanContext(null, 'student-1');
 
-    expect(result).toEqual({ tier: 'free', freeService: 'voca' });
+    expect(result).toEqual({ tier: 'free', freeService: 'voca', naesinMemorizeOnly: false });
     expect(supabase.from).toHaveBeenCalledWith('service_assignments');
   });
 
@@ -79,7 +79,7 @@ describe('getPlanContext', () => {
     const { getPlanContext } = await import('@/lib/billing/get-plan-context');
     const result = await getPlanContext(null, 'student-2');
 
-    expect(result).toEqual({ tier: 'free', freeService: 'naesin' });
+    expect(result).toEqual({ tier: 'free', freeService: 'naesin', naesinMemorizeOnly: false });
   });
 
   // ── 독립 학생: 둘 다 배정 (voca 우선) ──
@@ -95,7 +95,7 @@ describe('getPlanContext', () => {
     const { getPlanContext } = await import('@/lib/billing/get-plan-context');
     const result = await getPlanContext(null, 'student-both');
 
-    expect(result).toEqual({ tier: 'free', freeService: 'voca' });
+    expect(result).toEqual({ tier: 'free', freeService: 'voca', naesinMemorizeOnly: false });
   });
 
   // ── 독립 학생: 배정 없음 ──
@@ -108,7 +108,7 @@ describe('getPlanContext', () => {
     const { getPlanContext } = await import('@/lib/billing/get-plan-context');
     const result = await getPlanContext(null, 'student-no-assign');
 
-    expect(result).toEqual({ tier: 'free', freeService: null });
+    expect(result).toEqual({ tier: 'free', freeService: null, naesinMemorizeOnly: false });
   });
 
   // ── 독립 학생: data가 null ──
@@ -121,7 +121,7 @@ describe('getPlanContext', () => {
     const { getPlanContext } = await import('@/lib/billing/get-plan-context');
     const result = await getPlanContext(null, 'student-null');
 
-    expect(result).toEqual({ tier: 'free', freeService: null });
+    expect(result).toEqual({ tier: 'free', freeService: null, naesinMemorizeOnly: false });
   });
 
   // ── 학원: academies.free_service 컬럼으로 freeService 판단 ──
@@ -134,7 +134,7 @@ describe('getPlanContext', () => {
     const { getPlanContext } = await import('@/lib/billing/get-plan-context');
     const result = await getPlanContext('academy-1');
 
-    expect(result).toEqual({ tier: 'free', freeService: 'voca' });
+    expect(result).toEqual({ tier: 'free', freeService: 'voca', naesinMemorizeOnly: false });
   });
 
   it('academyId with free_service=naesin → free tier, naesin', async () => {
@@ -146,7 +146,7 @@ describe('getPlanContext', () => {
     const { getPlanContext } = await import('@/lib/billing/get-plan-context');
     const result = await getPlanContext('academy-2');
 
-    expect(result).toEqual({ tier: 'free', freeService: 'naesin' });
+    expect(result).toEqual({ tier: 'free', freeService: 'naesin', naesinMemorizeOnly: false });
   });
 
   it('academyId with no free_service → free tier, null', async () => {
@@ -158,7 +158,7 @@ describe('getPlanContext', () => {
     const { getPlanContext } = await import('@/lib/billing/get-plan-context');
     const result = await getPlanContext('academy-3');
 
-    expect(result).toEqual({ tier: 'free', freeService: null });
+    expect(result).toEqual({ tier: 'free', freeService: null, naesinMemorizeOnly: false });
   });
 
   // ── 구독 tier 조회 테스트 ──
@@ -173,7 +173,7 @@ describe('getPlanContext', () => {
     const { getPlanContext } = await import('@/lib/billing/get-plan-context');
     const result = await getPlanContext('academy-paid');
 
-    expect(result).toEqual({ tier: 'paid', freeService: 'naesin' });
+    expect(result).toEqual({ tier: 'paid', freeService: 'naesin', naesinMemorizeOnly: false });
   });
 
   it('trialing paid subscription → tier: trialing', async () => {
@@ -186,7 +186,7 @@ describe('getPlanContext', () => {
     const { getPlanContext } = await import('@/lib/billing/get-plan-context');
     const result = await getPlanContext('academy-trial');
 
-    expect(result).toEqual({ tier: 'trialing', freeService: 'naesin' });
+    expect(result).toEqual({ tier: 'trialing', freeService: 'naesin', naesinMemorizeOnly: false });
   });
 
   it('active free subscription → tier: free', async () => {
@@ -199,7 +199,7 @@ describe('getPlanContext', () => {
     const { getPlanContext } = await import('@/lib/billing/get-plan-context');
     const result = await getPlanContext('academy-free-sub');
 
-    expect(result).toEqual({ tier: 'free', freeService: 'voca' });
+    expect(result).toEqual({ tier: 'free', freeService: 'voca', naesinMemorizeOnly: false });
   });
 
   it('past_due paid subscription → tier: paid', async () => {
@@ -212,7 +212,7 @@ describe('getPlanContext', () => {
     const { getPlanContext } = await import('@/lib/billing/get-plan-context');
     const result = await getPlanContext('academy-pastdue');
 
-    expect(result).toEqual({ tier: 'paid', freeService: 'naesin' });
+    expect(result).toEqual({ tier: 'paid', freeService: 'naesin', naesinMemorizeOnly: false });
   });
 
   it('no subscription → tier: free', async () => {
@@ -225,6 +225,6 @@ describe('getPlanContext', () => {
     const { getPlanContext } = await import('@/lib/billing/get-plan-context');
     const result = await getPlanContext('academy-nosub');
 
-    expect(result).toEqual({ tier: 'free', freeService: 'voca' });
+    expect(result).toEqual({ tier: 'free', freeService: 'voca', naesinMemorizeOnly: false });
   });
 });

@@ -5,6 +5,8 @@ import type { Tier } from './feature-gate';
 export interface PlanContext {
   tier: Tier;
   freeService: 'naesin' | 'voca' | null;
+  /** 올킬보카 학생에게 올인내신 암기 스테이지만 할당된 경우 */
+  naesinMemorizeOnly: boolean;
 }
 
 /** Fetch the plan context (tier + free service) for the user's academy or individual student */
@@ -30,30 +32,33 @@ export async function getPlanContext(
       if (sub) {
         const tier = deriveTier(sub);
         if (tier === 'paid' || tier === 'trialing') {
-          return { tier, freeService: null };
+          return { tier, freeService: null, naesinMemorizeOnly: false };
         }
       }
 
       // Free tier 또는 구독 없음: service_assignments로 판단
       const { data: assignments } = await supabase
         .from('service_assignments')
-        .select('service, source')
+        .select('service, source, naesin_memorize_only')
         .eq('student_id', studentId);
 
       const services = assignments ?? [];
       const hasPaidAssignment = services.some((a) => a.source === 'payment');
+      const memorizeOnly = services.some(
+        (a) => a.service === 'naesin' && a.naesin_memorize_only,
+      );
 
       if (services.length > 0) {
         if (hasPaidAssignment) {
-          return { tier: 'paid', freeService: null };
+          return { tier: 'paid', freeService: null, naesinMemorizeOnly: false };
         }
         const freeService = services.some((a) => a.service === 'voca') ? 'voca' as const
           : services.some((a) => a.service === 'naesin') ? 'naesin' as const
           : null;
-        return { tier: 'free', freeService };
+        return { tier: 'free', freeService, naesinMemorizeOnly: memorizeOnly };
       }
     }
-    return { tier: 'free', freeService: null };
+    return { tier: 'free', freeService: null, naesinMemorizeOnly: false };
   }
 
   const supabase = await createClient();
@@ -72,31 +77,39 @@ export async function getPlanContext(
 
   const tier: Tier = deriveTier(sub ?? null);
 
-  // Free tier 학원: 학생 개인 service_assignments 기반으로 freeService 결정
-  if (tier === 'free' && studentId) {
+  // 학생 개별 service_assignments 조회 (naesin_memorize_only 포함)
+  let memorizeOnly = false;
+  if (studentId) {
     const { data: studentAssignments } = await supabase
       .from('service_assignments')
-      .select('service, source')
+      .select('service, source, naesin_memorize_only')
       .eq('student_id', studentId);
 
     const studentServices = studentAssignments ?? [];
-    if (studentServices.length > 0) {
-      if (studentServices.some((a) => a.source === 'payment')) {
-        return { tier: 'paid', freeService: null };
+    memorizeOnly = studentServices.some(
+      (a) => a.service === 'naesin' && a.naesin_memorize_only,
+    );
+
+    // Free tier 학원: 학생 개인 service_assignments 기반으로 freeService 결정
+    if (tier === 'free') {
+      if (studentServices.length > 0) {
+        if (studentServices.some((a) => a.source === 'payment')) {
+          return { tier: 'paid', freeService: null, naesinMemorizeOnly: false };
+        }
+        const studentFreeService = studentServices.some((a) => a.service === 'voca') ? 'voca' as const
+          : studentServices.some((a) => a.service === 'naesin') ? 'naesin' as const
+          : null;
+        return { tier, freeService: studentFreeService, naesinMemorizeOnly: memorizeOnly };
       }
-      const studentFreeService = studentServices.some((a) => a.service === 'voca') ? 'voca' as const
-        : studentServices.some((a) => a.service === 'naesin') ? 'naesin' as const
-        : null;
-      return { tier, freeService: studentFreeService };
+      // 학생 개인 선택 없으면 academy.free_service 폴백
+      const freeService: 'naesin' | 'voca' | null =
+        (academy?.free_service as 'naesin' | 'voca') ?? null;
+      return { tier, freeService, naesinMemorizeOnly: false };
     }
-    // 학생 개인 선택 없으면 academy.free_service 폴백
-    const freeService: 'naesin' | 'voca' | null =
-      (academy?.free_service as 'naesin' | 'voca') ?? null;
-    return { tier, freeService };
   }
 
   const freeService: 'naesin' | 'voca' | null =
     (academy?.free_service as 'naesin' | 'voca') ?? null;
 
-  return { tier, freeService };
+  return { tier, freeService, naesinMemorizeOnly: memorizeOnly };
 }

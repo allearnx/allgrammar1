@@ -37,6 +37,7 @@ export const serviceAssignmentPatchSchema = z.object({
   studentId: ID,
   round2Unlocked: z.boolean().optional(),
   vocaRoundMode: z.enum(['book', 'day']).optional(),
+  naesinMemorizeOnly: z.boolean().optional(),
 });
 
 // ── Academy Settings Schemas ──
@@ -77,6 +78,7 @@ export const studentBulkAssignSchema = z.object({
   studentIds: z.array(ID).min(1).max(100),
   services: z.array(z.enum(['naesin', 'voca'])).min(1),
   action: z.enum(['assign', 'revoke']),
+  naesinMemorizeOnly: z.boolean().optional(),
 });
 
 // ── 학원 만들기 (교사->원장 전환) ──

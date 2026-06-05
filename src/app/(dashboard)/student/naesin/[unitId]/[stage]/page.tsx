@@ -1,11 +1,11 @@
 import { requireRole } from '@/lib/auth/helpers';
 import { createClient } from '@/lib/supabase/server';
 import { Topbar } from '@/components/layout/topbar';
-import { notFound } from 'next/navigation';
+import { notFound, redirect } from 'next/navigation';
 import { NaesinStageView } from './client';
 import { calculateStageStatuses } from '@/lib/naesin/stage-unlock';
 import { getPlanContext } from '@/lib/billing/get-plan-context';
-import { mergeEnabledStages } from '@/lib/billing/feature-gate';
+import { mergeEnabledStages, getNaesinUnitLimit } from '@/lib/billing/feature-gate';
 import { fetchContentAvailability } from '@/lib/naesin/fetch-content-availability';
 import { fetchStageData } from '@/lib/naesin/fetch-stage-data';
 
@@ -60,7 +60,20 @@ export default async function NaesinStagePage({ params }: Props) {
   const enabledStages = mergeEnabledStages(
     planContext.tier,
     studentSettings?.enabled_stages as string[] | null,
+    planContext.naesinMemorizeOnly,
   );
+
+  // 무료 체험 단원 제한: sort_order 기준으로 제한 초과 시 리다이렉트
+  const unitLimit = getNaesinUnitLimit(planContext.tier, planContext.naesinMemorizeOnly);
+  if (unitLimit > 0 && textbookId) {
+    const { count } = await supabase
+      .from('naesin_units')
+      .select('id', { count: 'exact', head: true })
+      .eq('textbook_id', textbookId)
+      .eq('is_active', true)
+      .lt('sort_order', unit.sort_order);
+    if ((count ?? 0) >= unitLimit) redirect('/student/naesin');
+  }
 
   const stageStatuses = calculateStageStatuses({
     progress,

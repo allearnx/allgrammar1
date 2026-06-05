@@ -14,7 +14,10 @@ export type Feature =
 export type Tier = 'free' | 'paid' | 'trialing';
 
 const ALL_NAESIN_STAGES = ['vocab', 'passage', 'dialogue', 'textbookVideo', 'grammar', 'problem', 'mockExam', 'lastReview'];
-const FREE_NAESIN_STAGES = ['vocab', 'passage', 'dialogue'];
+const MEMORIZE_STAGES = ['vocab', 'passage', 'dialogue'];
+
+/** 무료 체험 시 올인내신 단원 제한 (1개만) */
+export const FREE_NAESIN_UNIT_LIMIT = 1;
 
 const PAID_ONLY_FEATURES: ReadonlySet<Feature> = new Set([
   'naesin:grammar',
@@ -44,10 +47,14 @@ export function canUseFeature(tier: Tier, feature: Feature): boolean {
   return !PAID_ONLY_FEATURES.has(feature);
 }
 
-/** Get naesin stages allowed for the tier. Free = vocab + passage only */
-export function getAllowedNaesinStages(tier: Tier): string[] {
+/** Get naesin stages allowed for the tier.
+ *  Free / memorize-only = vocab + passage + dialogue only.
+ *  Paid / trialing = all 8 stages.
+ */
+export function getAllowedNaesinStages(tier: Tier, naesinMemorizeOnly = false): string[] {
+  if (naesinMemorizeOnly) return MEMORIZE_STAGES;
   if (tier === 'paid' || tier === 'trialing') return ALL_NAESIN_STAGES;
-  return FREE_NAESIN_STAGES;
+  return MEMORIZE_STAGES;
 }
 
 /**
@@ -57,10 +64,19 @@ export function getAllowedNaesinStages(tier: Tier): string[] {
 export function mergeEnabledStages(
   tier: Tier,
   teacherStages: string[] | null | undefined,
+  naesinMemorizeOnly = false,
 ): string[] {
-  const planStages = getAllowedNaesinStages(tier);
+  const planStages = getAllowedNaesinStages(tier, naesinMemorizeOnly);
   if (!teacherStages) return planStages;
   return teacherStages.filter((s) => planStages.includes(s));
+}
+
+/** 올인내신 단원 제한 수. 0 = 무제한 */
+export function getNaesinUnitLimit(tier: Tier, naesinMemorizeOnly: boolean): number {
+  // 유료 or 암기 전용 할당: 무제한
+  if (tier === 'paid' || tier === 'trialing' || naesinMemorizeOnly) return 0;
+  // 무료 체험: 1개 단원만
+  return FREE_NAESIN_UNIT_LIMIT;
 }
 
 export type FreeService = 'naesin' | 'voca';

@@ -3,7 +3,7 @@ import { createClient } from '@/lib/supabase/server';
 import { Topbar } from '@/components/layout/topbar';
 import { NaesinHome } from './client';
 import { getPlanContext } from '@/lib/billing/get-plan-context';
-import { mergeEnabledStages } from '@/lib/billing/feature-gate';
+import { mergeEnabledStages, getNaesinUnitLimit } from '@/lib/billing/feature-gate';
 import { groupBy, buildUnitSummary } from '@/lib/naesin/build-unit-summary';
 import type { UnitSummary, ExamGroup } from '@/lib/naesin/build-unit-summary';
 import type { NaesinExamAssignment, NaesinStudentProgress } from '@/types/database';
@@ -25,7 +25,9 @@ export default async function NaesinPage() {
   const enabledStages = mergeEnabledStages(
     planContext.tier,
     setting?.enabled_stages as string[] | null,
+    planContext.naesinMemorizeOnly,
   );
+  const freeUnitLimit = getNaesinUnitLimit(planContext.tier, planContext.naesinMemorizeOnly);
 
   // Fetch academy-level naesin_required_rounds
   let naesinRequiredRounds = 1;
@@ -207,8 +209,9 @@ export default async function NaesinPage() {
           units={units}
           examDate={examDate}
           examGroups={examGroups}
-          isPaid={planContext.tier !== 'free'}
+          isPaid={planContext.tier !== 'free' || planContext.naesinMemorizeOnly}
           textbookExams={textbookExams}
+          freeUnitLimit={freeUnitLimit}
         />
       </div>
     </>

@@ -8,6 +8,11 @@ import {
   FileQuestion,
   Info,
   CheckCircle2,
+  Lock,
+  Sparkles,
+  GraduationCap,
+  Users,
+  ArrowRight,
 } from 'lucide-react';
 import { fetchWithToast } from '@/lib/fetch-with-toast';
 import Link from 'next/link';
@@ -35,6 +40,8 @@ interface NaesinHomeProps {
   examGroups?: ExamGroup[];
   isPaid?: boolean;
   textbookExams?: TextbookExam[];
+  /** 무료 체험 시 단원 제한 수 (0 = 무제한) */
+  freeUnitLimit?: number;
 }
 
 export function NaesinHome({
@@ -46,6 +53,7 @@ export function NaesinHome({
   examGroups = [],
   isPaid = false,
   textbookExams = [],
+  freeUnitLimit = 0,
 }: NaesinHomeProps) {
   const router = useRouter();
   const [saving, setSaving] = useState(false);
@@ -178,16 +186,109 @@ export function NaesinHome({
             </div>
           ) : (
             <div className="space-y-3">
-              {units.map((unit) => (
-                <LessonCard
-                  key={unit.id}
-                  unitId={unit.id}
-                  unitNumber={unit.unit_number}
-                  title={unit.title}
-                  stages={unit.stageStatuses}
-                  stageProgress={unit.stageProgress}
-                />
-              ))}
+              {units.map((unit, index) => {
+                const locked = freeUnitLimit > 0 && index >= freeUnitLimit;
+                if (locked) {
+                  return (
+                    <Card key={unit.id} className="opacity-40 pointer-events-none">
+                      <CardContent className="py-4 flex items-center gap-3">
+                        <div className="flex items-center justify-center h-10 w-10 rounded-full bg-muted text-muted-foreground font-bold shrink-0">
+                          {unit.unit_number}
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <h3 className="font-medium text-sm text-muted-foreground">{unit.title}</h3>
+                        </div>
+                        <Lock className="h-5 w-5 text-muted-foreground shrink-0" />
+                      </CardContent>
+                    </Card>
+                  );
+                }
+                return (
+                  <LessonCard
+                    key={unit.id}
+                    unitId={unit.id}
+                    unitNumber={unit.unit_number}
+                    title={unit.title}
+                    stages={unit.stageStatuses}
+                    stageProgress={unit.stageProgress}
+                  />
+                );
+              })}
+
+              {/* 무료 체험 종료 안내 + 플랜 소개 */}
+              {freeUnitLimit > 0 && units.length > freeUnitLimit && (
+                <div className="mt-6 space-y-4">
+                  {/* 헤더 카드 */}
+                  <div className="rounded-2xl overflow-hidden">
+                    <div className="bg-gradient-to-r from-violet-600 to-indigo-600 px-5 py-6 text-center text-white">
+                      <div className="flex justify-center mb-3">
+                        <div className="rounded-full bg-white/20 p-3">
+                          <Sparkles className="h-6 w-6" />
+                        </div>
+                      </div>
+                      <h3 className="text-lg font-bold mb-1">
+                        무료 체험 {freeUnitLimit}단원을 완료했어요!
+                      </h3>
+                      <p className="text-sm text-violet-100 leading-relaxed">
+                        나머지 단원을 학습하려면 아래 방법 중 하나를 선택하세요
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* 플랜 카드 2개 */}
+                  <div className="grid grid-cols-1 gap-3">
+                    {/* 학원 수업 */}
+                    <div className="rounded-xl border-2 border-violet-200 bg-gradient-to-br from-violet-50 to-white p-5">
+                      <div className="flex items-start gap-3">
+                        <div className="rounded-lg bg-violet-100 p-2 shrink-0">
+                          <GraduationCap className="h-5 w-5 text-violet-600" />
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <div className="flex items-center gap-2 mb-1">
+                            <h4 className="font-bold text-violet-900">학원에서 배정받기</h4>
+                            <span className="text-[10px] font-bold bg-violet-600 text-white px-2 py-0.5 rounded-full">추천</span>
+                          </div>
+                          <p className="text-xs text-violet-700 leading-relaxed mb-3">
+                            학원에서 올인내신 서비스를 배정받으면<br />
+                            선생님 관리 + 전체 단원 + 시험 대비까지 한 번에!
+                          </p>
+                          <div className="flex flex-wrap gap-1.5">
+                            {['전체 단원 해금', '선생님 진도 관리', '시험 대비 문제'].map((tag) => (
+                              <span key={tag} className="text-[11px] bg-violet-100 text-violet-700 px-2 py-0.5 rounded-full font-medium">{tag}</span>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* 개인 결제 */}
+                    <Link href="/courses/school_exam" className="block group">
+                      <div className="rounded-xl border border-gray-200 bg-white p-5 transition-all group-hover:border-indigo-300 group-hover:shadow-md">
+                        <div className="flex items-start gap-3">
+                          <div className="rounded-lg bg-indigo-50 p-2 shrink-0">
+                            <Users className="h-5 w-5 text-indigo-500" />
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <h4 className="font-bold text-gray-900 mb-1">개인 결제하기</h4>
+                            <p className="text-xs text-gray-500 leading-relaxed mb-3">
+                              학원 없이도 직접 결제해서 전체 단원을 학습할 수 있어요.
+                            </p>
+                            <div className="flex items-center gap-1.5 text-xs font-semibold text-indigo-600">
+                              플랜 보러가기
+                              <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </Link>
+                  </div>
+
+                  {/* 도움말 */}
+                  <p className="text-center text-xs text-gray-400">
+                    학원에 소속되어 있다면 선생님께 &ldquo;올인내신 배정&rdquo;을 요청해보세요!
+                  </p>
+                </div>
+              )}
             </div>
           )}
         </>

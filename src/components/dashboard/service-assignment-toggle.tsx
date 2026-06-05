@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { cn } from '@/lib/utils';
 import { Check, X } from 'lucide-react';
 import { fetchWithToast } from '@/lib/fetch-with-toast';
@@ -15,6 +16,8 @@ interface ServiceAssignmentToggleProps {
   showRound2Toggle?: boolean;
   vocaRoundMode?: 'book' | 'day';
   showRoundModeToggle?: boolean;
+  naesinMemorizeOnly?: boolean;
+  showMemorizeToggle?: boolean;
   onUpdate?: () => void;
 }
 
@@ -33,8 +36,11 @@ export function ServiceAssignmentToggle({
   showRound2Toggle = false,
   vocaRoundMode: initialRoundMode = 'book',
   showRoundModeToggle = false,
+  naesinMemorizeOnly: initialMemorize = false,
+  showMemorizeToggle = false,
   onUpdate,
 }: ServiceAssignmentToggleProps) {
+  const router = useRouter();
   const [assigned, setAssigned] = useState<Set<string>>(new Set(initial));
   const [loading, setLoading] = useState<string | null>(null);
   const [bookId, setBookId] = useState<string | null>(initialBookId ?? null);
@@ -43,6 +49,8 @@ export function ServiceAssignmentToggle({
   const [round2Loading, setRound2Loading] = useState(false);
   const [roundMode, setRoundMode] = useState<'book' | 'day'>(initialRoundMode);
   const [roundModeLoading, setRoundModeLoading] = useState(false);
+  const [memorize, setMemorize] = useState(initialMemorize);
+  const [memorizeLoading, setMemorizeLoading] = useState(false);
 
   async function toggle(service: string) {
     const isAssigned = assigned.has(service);
@@ -141,6 +149,25 @@ export function ServiceAssignmentToggle({
     }
   }
 
+  async function toggleMemorize() {
+    setMemorizeLoading(true);
+    try {
+      await fetchWithToast('/api/service-assignments', {
+        method: 'PATCH',
+        body: { studentId, naesinMemorizeOnly: !memorize },
+        successMessage: memorize ? '내신 암기 해제' : '내신 암기 할당',
+        errorMessage: '내신 암기 변경에 실패했습니다',
+      });
+      setMemorize(!memorize);
+      onUpdate?.();
+      router.refresh();
+    } catch {
+      // fetchWithToast already showed toast
+    } finally {
+      setMemorizeLoading(false);
+    }
+  }
+
   const vocaOn = assigned.has('voca');
   const showBookSelect = vocaOn && vocaBooks && vocaBooks.length > 0;
 
@@ -217,6 +244,23 @@ export function ServiceAssignmentToggle({
           )}
         >
           {roundMode === 'day' ? 'Day별 완벽' : '책 전체'}
+        </button>
+      )}
+      {showMemorizeToggle && (
+        <button
+          type="button"
+          disabled={memorizeLoading}
+          onClick={toggleMemorize}
+          className={cn(
+            'inline-flex items-center gap-1.5 rounded-full px-4 py-1.5 text-sm font-medium transition-all select-none',
+            memorizeLoading && 'opacity-50 cursor-wait',
+            memorize
+              ? 'bg-emerald-500 text-white shadow-sm hover:bg-emerald-600'
+              : 'bg-muted text-muted-foreground hover:bg-muted/80 border border-border'
+          )}
+        >
+          {memorize ? <Check className="h-3.5 w-3.5" /> : <X className="h-3.5 w-3.5" />}
+          내신 암기
         </button>
       )}
     </div>

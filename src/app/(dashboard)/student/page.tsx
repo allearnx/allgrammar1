@@ -16,19 +16,24 @@ export default async function StudentDashboard() {
 
   const { data: assignments } = await supabase
     .from('service_assignments')
-    .select('service')
+    .select('service, naesin_memorize_only')
     .eq('student_id', user.id);
 
   const rawServices = assignments?.map((a) => a.service) ?? [];
+  const hasMemorizeOnly = assignments?.some(
+    (a) => a.service === 'naesin' && a.naesin_memorize_only,
+  ) ?? false;
   const isIndependent = !user.academy_id;
 
   // 플랜에 맞지 않는 서비스 필터링 (무료 플랜: 1개만 허용)
+  // naesin_memorize_only인 경우 서비스 게이트 우회 (보스/선생님이 명시적으로 할당)
   const planContext = await getPlanContext(user.academy_id, user.id);
-  const services = rawServices.filter((s) =>
-    s === 'naesin' || s === 'voca'
+  const services = rawServices.filter((s) => {
+    if (s === 'naesin' && hasMemorizeOnly) return true;
+    return s === 'naesin' || s === 'voca'
       ? isServiceAllowed(planContext.tier, planContext.freeService, s)
-      : true,
-  );
+      : true;
+  });
   const hasVoca = services.includes('voca');
   const hasNaesin = services.includes('naesin');
 

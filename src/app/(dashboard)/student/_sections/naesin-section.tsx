@@ -17,7 +17,7 @@ interface Props {
 export async function NaesinSection({ user, planContext, isIndependent = false }: Props) {
   const supabase = await createClient();
   const settings = await fetchNaesinSettings(supabase, user.id);
-  const enabledStages = mergeEnabledStages(planContext.tier, settings.enabled_stages);
+  const enabledStages = mergeEnabledStages(planContext.tier, settings.enabled_stages, planContext.naesinMemorizeOnly);
 
   const freeBanner = planContext.tier === 'free' && (
     <SubscriptionBanner
@@ -56,7 +56,7 @@ export async function NaesinSection({ user, planContext, isIndependent = false }
         grammarVideoCounts={data.grammarVideoCounts}
         enabledStages={enabledStages}
         quizHistory={data.quizHistory}
-        isPaid={planContext.tier !== 'free'}
+        isPaid={planContext.tier !== 'free' || planContext.naesinMemorizeOnly}
       />
     </>
   );

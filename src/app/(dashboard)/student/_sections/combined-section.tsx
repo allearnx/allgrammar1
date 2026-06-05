@@ -48,11 +48,11 @@ export async function CombinedSection({ user, planContext }: Props) {
         contentMap={naesinData.contentMap}
         vocabQuizSetCounts={naesinData.vocabQuizSetCounts}
         grammarVideoCounts={naesinData.grammarVideoCounts}
-        enabledStages={mergeEnabledStages(planContext.tier, settings.enabled_stages)}
+        enabledStages={mergeEnabledStages(planContext.tier, settings.enabled_stages, planContext.naesinMemorizeOnly)}
         wrongWordCounts={vocaData.wrongWordCounts}
         vocaQuizHistory={vocaData.quizHistory}
         naesinQuizHistory={naesinData.quizHistory}
-        isPaid={planContext.tier !== 'free'}
+        isPaid={planContext.tier !== 'free' || planContext.naesinMemorizeOnly}
         vocaRoundMode={vocaRoundMode}
       />
     </>

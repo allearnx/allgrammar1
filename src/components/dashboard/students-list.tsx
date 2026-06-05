@@ -8,10 +8,13 @@ import { Eye, Users, Trash2 } from 'lucide-react';
 import Link from 'next/link';
 import { ServiceAssignmentToggle } from './service-assignment-toggle';
 import { RoundModeToggle } from './round-mode-toggle';
+import { MemorizeToggle } from './memorize-toggle';
 import { StudentsToolbar } from './students-toolbar';
 import { StudentDeleteButton } from './student-delete-button';
 import { StudentSearchInput } from './student-search-input';
 import { AddStudentDialog } from './add-student-dialog';
+import { StudentSelectionProvider } from './student-selection-context';
+import { StudentCheckbox } from './student-checkbox';
 import { DDayBadge } from '@/components/ui/dday-badge';
 import { getPlanContext } from '@/lib/billing/get-plan-context';
 import { canUseFeature, isServiceAllowed } from '@/lib/billing/feature-gate';
@@ -147,20 +150,21 @@ export async function StudentsList({ user, basePath, searchQuery }: Props) {
   const serviceMap: Record<string, string[]> = {};
   const round2Map: Record<string, boolean> = {};
   const roundModeMap: Record<string, 'book' | 'day'> = {};
+  const memorizeMap: Record<string, boolean> = {};
 
   let vocaBooks: { id: string; title: string }[] = [];
   const bookAssignmentMap: Record<string, string> = {};
 
-  // 선생님도 학습 모드 조회 필요
+  // 선생님도 학습 모드 + 내신 암기 조회 필요
   if (studentIds.length > 0) {
     const { data: modeData } = await admin
       .from('service_assignments')
-      .select('student_id, service, voca_round_mode')
-      .eq('service', 'voca')
+      .select('student_id, service, voca_round_mode, naesin_memorize_only')
       .in('student_id', studentIds);
     if (modeData) {
       for (const a of modeData) {
-        if (a.voca_round_mode === 'day') roundModeMap[a.student_id] = 'day';
+        if (a.service === 'voca' && a.voca_round_mode === 'day') roundModeMap[a.student_id] = 'day';
+        if (a.service === 'naesin' && a.naesin_memorize_only) memorizeMap[a.student_id] = true;
       }
     }
   }
@@ -169,7 +173,7 @@ export async function StudentsList({ user, basePath, searchQuery }: Props) {
     const [{ data: assignments }, { data: vocaBooksData }, { data: bookAssignments }] = await Promise.all([
       admin
         .from('service_assignments')
-        .select('student_id, service, round2_unlocked, voca_round_mode')
+        .select('student_id, service, round2_unlocked, voca_round_mode, naesin_memorize_only')
         .in('student_id', studentIds),
       admin
         .from('voca_books')
@@ -190,6 +194,9 @@ export async function StudentsList({ user, basePath, searchQuery }: Props) {
           if (a.round2_unlocked) round2Map[a.student_id] = true;
           if (a.voca_round_mode === 'day') roundModeMap[a.student_id] = 'day';
         }
+        if (a.service === 'naesin' && a.naesin_memorize_only) {
+          memorizeMap[a.student_id] = true;
+        }
       }
     }
 
@@ -207,12 +214,14 @@ export async function StudentsList({ user, basePath, searchQuery }: Props) {
   );
 
   return (
+    <StudentSelectionProvider allStudentIds={studentIds}>
     <div className="p-4 md:p-6 space-y-4">
       {canManageServices && (
         <StudentsToolbar
           studentIds={studentIds}
           studentCount={students?.length || 0}
           bulkAllowed={bulkAllowed}
+          showMemorizeAssign={isBoss || basePath === '/admin'}
         />
       )}
       {!canManageServices && (
@@ -247,6 +256,7 @@ export async function StudentsList({ user, basePath, searchQuery }: Props) {
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2 mb-1">
+                      {canManageServices && <StudentCheckbox studentId={student.id} />}
                       <span className="font-medium truncate">{student.full_name}</span>
                       <Badge
                         variant={student.is_active ? 'default' : 'secondary'}
@@ -283,8 +293,11 @@ export async function StudentsList({ user, basePath, searchQuery }: Props) {
                       <div className="mt-3">
                         <p className="text-xs text-muted-foreground mb-1.5">서비스 배정</p>
                         <ServiceAssignmentToggle
+                          key={`${student.id}-${(serviceMap[student.id] || []).join(',')}-${round2Map[student.id] || false}-${roundModeMap[student.id] || 'book'}-${memorizeMap[student.id] || false}`}
                           studentId={student.id}
-                          assignedServices={serviceMap[student.id] || []}
+                          assignedServices={(serviceMap[student.id] || []).filter(
+                            (s) => !(s === 'naesin' && memorizeMap[student.id]),
+                          )}
                           allowedServices={allowedServices}
                           vocaBooks={vocaBooks}
                           assignedBookId={bookAssignmentMap[student.id] || null}
@@ -292,16 +305,26 @@ export async function StudentsList({ user, basePath, searchQuery }: Props) {
                           showRound2Toggle={basePath === '/boss'}
                           vocaRoundMode={roundModeMap[student.id] || 'book'}
                           showRoundModeToggle
+                          naesinMemorizeOnly={memorizeMap[student.id] || false}
+                          showMemorizeToggle={isBoss || basePath === '/admin'}
                         />
                       </div>
                     )}
                     {!canManageServices && (
                       <div className="mt-3">
-                        <p className="text-xs text-muted-foreground mb-1.5">보카 학습 모드</p>
-                        <RoundModeToggle
-                          studentId={student.id}
-                          mode={roundModeMap[student.id] || 'book'}
-                        />
+                        <p className="text-xs text-muted-foreground mb-1.5">학습 설정</p>
+                        <div className="flex flex-wrap items-center gap-2">
+                          <RoundModeToggle
+                            key={`rm-${student.id}-${roundModeMap[student.id] || 'book'}`}
+                            studentId={student.id}
+                            mode={roundModeMap[student.id] || 'book'}
+                          />
+                          <MemorizeToggle
+                            key={`mem-${student.id}-${memorizeMap[student.id] || false}`}
+                            studentId={student.id}
+                            active={memorizeMap[student.id] || false}
+                          />
+                        </div>
                       </div>
                     )}
                   </div>
@@ -344,5 +367,6 @@ export async function StudentsList({ user, basePath, searchQuery }: Props) {
         )}
       </div>
     </div>
+    </StudentSelectionProvider>
   );
 }

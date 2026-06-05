@@ -4,7 +4,7 @@ import { useState, useMemo, useTransition } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { Badge } from '@/components/ui/badge';
-import { CheckCircle, Lock, ChevronRight, BookOpen, BookMarked } from 'lucide-react';
+import { CheckCircle, Lock, ChevronRight, BookOpen, BookMarked, Sparkles, GraduationCap, Users, ArrowRight } from 'lucide-react';
 import { PetWidget } from '@/components/voca/pet/pet-widget';
 import { isR1Complete, isR2Complete } from '@/lib/dashboard/voca-helpers';
 import type { VocaBook, VocaDay, VocaStudentProgress } from '@/types/voca';
@@ -344,13 +344,92 @@ export function VocaHomeClient({ books, days, progressList, submissionStatuses =
 
       {/* Free limit notice */}
       {freeDayLimit > 0 && filteredDays.length > freeDayLimit && (
-        <div className="relative overflow-hidden rounded-xl border border-dashed border-gray-300 p-5 text-center" style={{ background: 'rgba(71,85,105,0.04)' }}>
-          <p className="text-sm font-bold text-indigo-600">
-            무료 체험은 교재당 Day {freeDayLimit}개까지
-          </p>
-          <p className="text-xs text-gray-400 mt-1">
-            업그레이드하면 전체 {filteredDays.length}개 Day를 학습할 수 있어요
-          </p>
+        <div className="mt-6 space-y-4">
+          {/* 헤더 카드 */}
+          <div className="rounded-2xl overflow-hidden">
+            <div className="px-5 py-6 text-center text-white" style={{ background: 'linear-gradient(135deg, #0891B2, #6366F1)' }}>
+              <div className="flex justify-center mb-3">
+                <div className="rounded-full bg-white/20 p-3">
+                  <Sparkles className="h-6 w-6" />
+                </div>
+              </div>
+              <h3 className="text-lg font-bold mb-1">
+                무료 체험 Day {freeDayLimit}개를 완료했어요!
+              </h3>
+              <p className="text-sm text-cyan-100 leading-relaxed">
+                전체 {filteredDays.length}개 Day를 학습하려면 아래 방법 중 하나를 선택하세요
+              </p>
+            </div>
+          </div>
+
+          {/* 플랜 카드 */}
+          <div className="grid grid-cols-1 gap-3">
+            {/* 셀프 스터디 */}
+            <Link href="/allkill#price" className="block group">
+              <div className="rounded-xl border-2 border-cyan-200 bg-gradient-to-br from-cyan-50 to-white p-5 transition-all group-hover:border-cyan-400 group-hover:shadow-md">
+                <div className="flex items-start gap-3">
+                  <div className="rounded-lg bg-cyan-100 p-2 shrink-0">
+                    <BookOpen className="h-5 w-5 text-cyan-600" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-2 mb-1">
+                      <h4 className="font-bold text-cyan-900">셀프 스터디</h4>
+                      <span className="text-[10px] font-bold bg-cyan-600 text-white px-2 py-0.5 rounded-full">월 24,000원</span>
+                    </div>
+                    <p className="text-xs text-cyan-700 leading-relaxed mb-3">
+                      혼자서도 전체 Day + 1회독·2회독 완벽 학습!<br />
+                      오답 관리와 AI 서술형 채점까지 포함
+                    </p>
+                    <div className="flex items-center gap-1.5 text-xs font-semibold text-cyan-600">
+                      플랜 보러가기
+                      <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </Link>
+
+            {/* 1:1 온라인 관리 */}
+            <Link href="/allkill#price" className="block group">
+              <div className="rounded-xl border-2 border-violet-200 bg-gradient-to-br from-violet-50 to-white p-5 transition-all group-hover:border-violet-400 group-hover:shadow-md">
+                <div className="flex items-start gap-3">
+                  <div className="rounded-lg bg-violet-100 p-2 shrink-0">
+                    <Users className="h-5 w-5 text-violet-600" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-2 mb-1">
+                      <h4 className="font-bold text-violet-900">1:1 온라인 관리</h4>
+                      <span className="text-[10px] font-bold bg-violet-600 text-white px-2 py-0.5 rounded-full">추천</span>
+                    </div>
+                    <p className="text-xs text-violet-700 leading-relaxed mb-3">
+                      선생님이 주 2회 시험 + 진도 관리해줘요.<br />
+                      학부모 리포트까지 제공!
+                    </p>
+                    <div className="flex flex-wrap gap-1.5">
+                      {['선생님 관리', '주 2회 시험', '학부모 리포트'].map((tag) => (
+                        <span key={tag} className="text-[11px] bg-violet-100 text-violet-700 px-2 py-0.5 rounded-full font-medium">{tag}</span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </Link>
+
+            {/* 학원 배정 */}
+            <div className="rounded-xl border border-gray-200 bg-white p-5">
+              <div className="flex items-start gap-3">
+                <div className="rounded-lg bg-gray-100 p-2 shrink-0">
+                  <GraduationCap className="h-5 w-5 text-gray-500" />
+                </div>
+                <div className="flex-1 min-w-0">
+                  <h4 className="font-bold text-gray-900 mb-1">학원에서 배정받기</h4>
+                  <p className="text-xs text-gray-500 leading-relaxed">
+                    학원에 소속되어 있다면 선생님께 &ldquo;올킬보카 배정&rdquo;을 요청해보세요!
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       )}
     </div>
