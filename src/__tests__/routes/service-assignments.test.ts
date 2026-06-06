@@ -26,7 +26,7 @@ vi.mock('@/lib/api/require-academy-scope', () => ({
   requireAcademyScope: vi.fn().mockResolvedValue(undefined),
 }));
 vi.mock('next/cache', () => ({
-  unstable_cache: (fn: Function) => fn,
+  unstable_cache: (fn: (...args: any[]) => any) => fn,
   revalidateTag: vi.fn(),
 }));
 

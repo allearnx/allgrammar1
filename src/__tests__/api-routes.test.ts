@@ -31,7 +31,7 @@ vi.mock('@/lib/supabase/admin', () => ({
 }));
 
 vi.mock('next/cache', () => ({
-  unstable_cache: (fn: Function) => fn,
+  unstable_cache: (fn: (...args: any[]) => any) => fn,
   revalidateTag: vi.fn(),
 }));
 

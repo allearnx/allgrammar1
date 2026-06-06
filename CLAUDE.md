@@ -87,6 +87,43 @@
 
 ---
 
+# select('*') → 컬럼 명시 전환 (egress 절감)
+
+ESLint `supabase/no-select-wildcard` 규칙 적용 중 (warn).
+현재 117건 경고. 테이블별로 컬럼 상수를 만들고 일괄 교체.
+
+## 기존 컬럼 상수 (src/types/naesin.ts)
+- `SHEET_LITE_COLUMNS` — 문제 시트 목록용 (13컬럼, questions/answer_key 제외)
+- `SHEET_ADMIN_LITE_COLUMNS` — 관리자 목록용 (+ answer_key)
+- `PROGRESS_SUMMARY_COLUMNS` — 학생 진도 요약용 (17컬럼)
+
+## 정리 우선순위
+
+### 1순위: 고 egress (38+ 컬럼, 매 페이지 로드)
+- [ ] `naesin_student_progress` — 7개 파일, `PROGRESS_SUMMARY_COLUMNS` 활용
+  - src/app/(dashboard)/layout.tsx (fetchNaesinTree)
+  - src/lib/naesin/fetch-stage-data.ts
+  - src/lib/dashboard/fetch-naesin-data.ts
+  - src/app/api/naesin/progress/manual/route.ts
+  - src/components/dashboard/naesin-admin/use-unit-content-data.ts
+
+### 2순위: JSONB 포함 콘텐츠 테이블
+- [ ] `naesin_vocabulary` — 컬럼 상수 생성 필요 (front_text, back_text 등)
+  - src/lib/naesin/fetch-stage-data.ts
+  - src/components/dashboard/naesin-admin/use-unit-content-data.ts
+- [ ] `naesin_passages` — 컬럼 상수 생성 필요 (sentences JSONB 제외 가능)
+- [ ] `naesin_dialogues` — 컬럼 상수 생성 필요
+
+### 3순위: 보카 테이블
+- [ ] `voca_student_progress` — 4개 파일
+- [ ] `voca_vocabulary` — 3개 파일
+
+### 보류: 소규모 admin 테이블 (영향 적음)
+- academies, courses, reviews, faqs, announcements, teacher_profiles
+- CRUD 폼에서 전체 레코드 필요 → select('*') 유지 가능
+
+---
+
 # Supabase GRANT 마이그레이션 — 단계적 전환 (마감: 2026-10-30)
 
 2026-05-30부터 신규 프로젝트는 public 스키마 테이블에 명시적 GRANT 필요.
