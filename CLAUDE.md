@@ -143,3 +143,57 @@ ESLint `supabase/no-select-wildcard` 규칙 적용 중 (warn).
 ## 참고
 - RLS는 이미 전 테이블에 활성화되어 있으므로 GRANT 추가해도 보안 문제 없음
 - 새 테이블 생성 시 GRANT 포함하는 습관 필요
+
+---
+
+# Egress 최적화 작업 로그 (2026-06-05)
+
+## 배경
+Supabase egress 과다 문제 해결 후, 재발 방지를 위해 캐시 레이어 + ESLint 규칙 도입.
+
+## 커밋 이력
+
+### 381ebf4 — 캐시 레이어 도입 (20파일, +363/-137)
+**서버 캐시 인프라 (src/lib/cache/)**
+- `tags.ts` — 캐시 태그 생성 함수 7개 (student-services, is-paid, naesin-sidebar, student-progress, unit-content, voca-content, voca-books)
+- `server-cache.ts` — `cached()` 래퍼 + TTL 프리셋 (STATIC 1h, CONTENT 5m, SESSION 5m, LIVE 60s)
+- `invalidate.ts` — 무효화 헬퍼 6개 (Next.js 16 revalidateTag 'max' 호환)
+
+**layout.tsx 리팩터**
+- 인라인 unstable_cache 3개 → cached() 래퍼로 전환 (동작 동일)
+
+**mutation 라우트 무효화 연결 (10개)**
+- service-assignments POST/PATCH/DELETE → invalidateStudentServices
+- student/select-free-service POST → invalidateStudentServices
+- naesin/exam-assignments POST/DELETE → invalidateStudent
+- naesin/progress/manual PATCH → invalidateStudent
+- naesin/problems POST/PATCH → invalidateUnitContent
+- naesin/textbook-videos POST/DELETE → invalidateUnitContent
+- naesin/similar-problems PATCH/DELETE → invalidateUnitContent
+- voca/books POST + [id] PATCH/DELETE → invalidateVocaBooks
+- voca/days POST/DELETE → invalidateVocaContent
+
+**고빈도 GET 라우트 서버 캐시 적용 (4개)**
+- GET /api/naesin/textbook-videos → CONTENT (5min), tag: unit-content:{unitId}
+- GET /api/voca/books → CONTENT (5min), tag: voca-books
+- GET /api/voca/days → CONTENT (5min), tag: voca-content:{bookId}
+- GET /api/naesin/similar-problems → LIVE (60s), tag: unit-content:{unitId}
+
+**React Query 전환 (4개 컴포넌트)**
+- LearningCalendarSection — useEffect→useQuery, staleTime 5min
+- AdminAnalyticsClient — useEffect+useState→useQuery, staleTime 5min
+- BossAnalyticsClient — useEffect+useState→useQuery, staleTime 5min
+- WrongAnswersClient — useCallback+useEffect→useQuery + optimistic update, staleTime 1min
+
+### f748e38 — ESLint select('*') 경고 규칙 (6파일, +98/-2)
+- src/eslint/no-select-wildcard.mjs — .select('*') 감지 규칙
+- src/eslint/plugin.mjs — 플러그인 래퍼
+- eslint.config.mjs — supabase/no-select-wildcard: warn, 테스트 파일 제외
+- CLAUDE.md — 테이블별 정리 우선순위 기록
+- 현재 경고 117건 (warn only, 빌드 차단 없음)
+
+## 검증 결과
+- TypeScript: 에러 0건
+- 빌드: 성공
+- 테스트: 748/748 통과
+- ESLint: 에러 0건
