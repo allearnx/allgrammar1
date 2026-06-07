@@ -2,6 +2,8 @@ import { NextResponse } from 'next/server';
 import { createApiHandler, dbResult } from '@/lib/api';
 import { settingsSchema } from '@/lib/api/schemas';
 import { requireAcademyScope } from '@/lib/api/require-academy-scope';
+import { createAdminClient } from '@/lib/supabase/admin';
+import { invalidateStudent } from '@/lib/cache/invalidate';
 
 export const POST = createApiHandler(
   { schema: settingsSchema },
@@ -37,6 +39,32 @@ export const POST = createApiHandler(
         { student_id: targetId, textbook_id: textbookId },
         { onConflict: 'student_id' }
       ));
+
+    // Auto-create default exam assignment with all active units
+    const admin = createAdminClient();
+    const { data: units } = await admin
+      .from('naesin_units')
+      .select('id')
+      .eq('textbook_id', textbookId)
+      .eq('is_active', true)
+      .order('sort_order');
+
+    if (units && units.length > 0) {
+      await admin
+        .from('naesin_exam_assignments')
+        .upsert(
+          {
+            student_id: targetId,
+            textbook_id: textbookId,
+            exam_round: 1,
+            exam_label: '1차 시험',
+            unit_ids: units.map((u) => u.id),
+          },
+          { onConflict: 'student_id,textbook_id,exam_round' }
+        );
+      invalidateStudent(targetId);
+    }
+
     return NextResponse.json({ success: true });
   }
 );
