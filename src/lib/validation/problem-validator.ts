@@ -366,6 +366,34 @@ export function sanitizeQuestions(
       out.answer = String(out.answer);
     }
 
+    // Auto-generate acceptedAnswers for common format variants (서술형만)
+    if (!isMcq && typeof out.answer === 'string' && out.answer.length > 0) {
+      const answer = out.answer;
+      const accepted = out.acceptedAnswers ? [...out.acceptedAnswers] : [];
+
+      // Variant: without trailing period
+      if (answer.endsWith('.')) {
+        const noPeriod = answer.slice(0, -1);
+        if (!accepted.includes(noPeriod)) accepted.push(noPeriod);
+      }
+
+      // Variant: slash spacing ("A / B" ↔ "A/B")
+      if (answer.includes(' / ')) {
+        const noSlashSpace = answer.replace(/ \/ /g, '/');
+        if (!accepted.includes(noSlashSpace)) accepted.push(noSlashSpace);
+      }
+
+      // Variant: parenthesis spacing ("(1) text" ↔ "(1)text")
+      if (/\(\d+\)\s/.test(answer)) {
+        const noParenSpace = answer.replace(/\((\d+)\)\s/g, '($1)');
+        if (!accepted.includes(noParenSpace)) accepted.push(noParenSpace);
+      }
+
+      if (accepted.length > (out.acceptedAnswers?.length ?? 0)) {
+        out.acceptedAnswers = accepted;
+      }
+    }
+
     return out;
   });
 
@@ -452,6 +480,27 @@ export function validateBeforeSave(
     // WARNING: no explanation
     if (hasQuestion && (!q.explanation || q.explanation.trim() === '')) {
       warnings.push(issue('warning', n, 'NO_EXPLANATION', `${n}번: 해설이 없습니다.`));
+    }
+
+    // ERROR: subParts with empty answers
+    if (q.subParts && Array.isArray(q.subParts)) {
+      for (const sp of q.subParts) {
+        if (!sp.answer) {
+          errors.push(issue('error', n, 'EMPTY_SUBPART_ANSWER', `${n}번: subPart "${sp.label}" 정답이 비어있습니다.`));
+        }
+      }
+    }
+
+    // WARNING: subjective without format hint (서술형인데 답안 형식 안내 없음)
+    if (!isMcq && hasQuestion && q.answer && typeof q.answer === 'string') {
+      const answer = q.answer;
+      const questionText = q.question || '';
+      // Multi-part answers (슬래시/쉼표 구분) without format hint
+      const isMultiPart = answer.includes(' / ') || (answer.includes(',') && !/^\d+(,\s*\d+)*$/.test(answer));
+      const hasFormatHint = /※|형식|구분|슬래시|쉼표/.test(questionText);
+      if (isMultiPart && !hasFormatHint) {
+        warnings.push(issue('warning', n, 'NO_FORMAT_HINT', `${n}번: 서술형 복합 답안인데 형식 안내(※)가 없습니다.`));
+      }
     }
   }
 

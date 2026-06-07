@@ -28,11 +28,14 @@ export function uncircle(s: string): string {
 /** 정규화: 대소문자 무시, 앞뒤 공백, 끝 마침표, 연속 공백 → 단일 공백 */
 export function normalize(s: string): string {
   return s
+    .replace(/[\r\n\t]/g, ' ')           // 개행/탭 → 공백
     .trim()
     .toLowerCase()
-    .replace(/\.+\s*$/, '')
+    .replace(/\.+\s*$/, '')              // 끝 마침표 제거
     .replace(/\((\d+)\)\s*/g, '($1) ')   // (1)that → (1) that 통일
-    .replace(/\s+/g, ' ');
+    .replace(/\s*\/\s*/g, ' / ')         // A/B, A /B → A / B 통일
+    .replace(/\s+/g, ' ')               // 연속 공백 → 단일
+    .trim();                             // 슬래시 정규화 후 trim 재적용
 }
 
 /** 복수 정답(예: "1,3" / "1, 3" / "3, 1") 정규화: 공백 제거 + 숫자 정렬 */
@@ -112,6 +115,13 @@ export function isSubstringMatch(student: string, correct: string): boolean {
   // 정답이 학생 답의 prefix 또는 suffix (학생이 더 많이 쓴 경우)
   if (s.startsWith(c) || s.endsWith(c)) {
     return cWords.length / sWords.length >= 0.35;
+  }
+
+  // 번호 접두사를 제거한 비교: "(1) that (2) it" → "that / it" vs "that it that"
+  const sNoBrackets = s.replace(/\(\d+\)\s*/g, '').replace(/\s*\/\s*/g, ' ').replace(/\s+/g, ' ').trim();
+  const cNoBrackets = c.replace(/\(\d+\)\s*/g, '').replace(/\s*\/\s*/g, ' ').replace(/\s+/g, ' ').trim();
+  if (sNoBrackets === cNoBrackets && sNoBrackets.split(' ').length >= 2) {
+    return true;
   }
 
   return false;

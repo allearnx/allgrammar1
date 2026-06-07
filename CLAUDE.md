@@ -76,9 +76,18 @@
   - Stale progress 4건 수정 (새 시트 추가 후 완료 상태 미갱신)
   - 원인: 시트 추가 시 기존 progress 미업데이트
 
+- [x] 7단계: 저장 시점 검증 게이트 구현
+  - sanitizeQuestions: 원형숫자 변환, 배열→문자열, 텍스트→번호, answer_key 재구축
+  - sanitizeQuestions: 서술형 답안 형식 변형 acceptedAnswers 자동 생성 (슬래시/마침표/괄호 공백)
+  - validateBeforeSave: 빈 정답 차단, MCQ 범위 검증, 텍스트 불일치 차단, subParts 검증
+  - 서술형 복합 답안 형식 안내 미비 경고 (NO_FORMAT_HINT)
+  - normalize-answer.ts 강화: 개행/탭→공백, 슬래시 공백 통일, 번호 접두사 제거 비교
+- [x] 전수 조사: 중1/중2/중3 문법 템플릿 (총 387개 시트, 25,000+문항)
+  - 정답 오류 수정: 중1 10건, 중2 61건, 중3 73건
+  - 형식 차이 오채점 전체 재채점: 69건 점수 상승
+
 ### 진행 중
 - [ ] A: 외부지문 빈 정답 (88건) — 맨 마지막
-- [ ] 7단계: 저장 시점 검증 게이트 구현 (이 파일의 규칙 적용)
 
 ### 검증 규칙 추가
 - answer_key 형식 통일 필요: 일부 시트는 string[], 일부는 {answer, explanation}[]
