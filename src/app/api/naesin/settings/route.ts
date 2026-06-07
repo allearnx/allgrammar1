@@ -40,29 +40,50 @@ export const POST = createApiHandler(
         { onConflict: 'student_id' }
       ));
 
-    // Auto-create default exam assignment with all active units
+    // Auto-create default exam assignment (paid academies only)
     const admin = createAdminClient();
-    const { data: units } = await admin
-      .from('naesin_units')
-      .select('id')
-      .eq('textbook_id', textbookId)
-      .eq('is_active', true)
-      .order('sort_order');
+    const { data: student } = await admin
+      .from('users')
+      .select('academy_id')
+      .eq('id', targetId)
+      .single();
 
-    if (units && units.length > 0) {
-      await admin
-        .from('naesin_exam_assignments')
-        .upsert(
-          {
-            student_id: targetId,
-            textbook_id: textbookId,
-            exam_round: 1,
-            exam_label: '1차 시험',
-            unit_ids: units.map((u) => u.id),
-          },
-          { onConflict: 'student_id,textbook_id,exam_round' }
-        );
-      invalidateStudent(targetId);
+    if (student?.academy_id) {
+      const { data: sub } = await admin
+        .from('subscriptions')
+        .select('status, tier')
+        .eq('academy_id', student.academy_id)
+        .in('status', ['trialing', 'active', 'past_due'])
+        .order('created_at', { ascending: false })
+        .limit(1)
+        .single();
+
+      const isPaid = sub && sub.tier !== 'free';
+
+      if (isPaid) {
+        const { data: units } = await admin
+          .from('naesin_units')
+          .select('id')
+          .eq('textbook_id', textbookId)
+          .eq('is_active', true)
+          .order('sort_order');
+
+        if (units && units.length > 0) {
+          await admin
+            .from('naesin_exam_assignments')
+            .upsert(
+              {
+                student_id: targetId,
+                textbook_id: textbookId,
+                exam_round: 1,
+                exam_label: '1차 시험',
+                unit_ids: units.map((u) => u.id),
+              },
+              { onConflict: 'student_id,textbook_id,exam_round' }
+            );
+          invalidateStudent(targetId);
+        }
+      }
     }
 
     return NextResponse.json({ success: true });
