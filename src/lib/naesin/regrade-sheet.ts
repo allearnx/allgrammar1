@@ -1,5 +1,5 @@
 import { createAdminClient } from '@/lib/supabase/admin';
-import { normalize, matchMcqAnswer, extractAnswer } from '@/lib/naesin/normalize-answer';
+import { normalize, matchMcqAnswer, extractAnswer, isSubstringMatch } from '@/lib/naesin/normalize-answer';
 
 /**
  * 시트 1개를 재채점하고 오답 테이블을 갱신한다.
@@ -80,6 +80,10 @@ export async function regradeSheet(
             ...(q?.acceptedAnswers ?? []),
           ];
           isCorrect = candidates.some((c) => normalize(c) === studentNorm);
+          // 배열 문제 등 부분 일치 (prefix/suffix)
+          if (!isCorrect) {
+            isCorrect = candidates.some((c) => isSubstringMatch(userAnswer, c));
+          }
         }
       } else {
         isCorrect = matchMcqAnswer(userAnswer, correctAnswer, questions?.[i]?.options);
@@ -200,6 +204,10 @@ export async function regradeSheet(
               const studentNorm = normalize(String(userAnswer));
               const candidates = [correctAnswer, ...(q?.acceptedAnswers ?? [])];
               isCorrect = candidates.some((c) => normalize(c) === studentNorm);
+              // 배열 문제 등 부분 일치 (prefix/suffix)
+              if (!isCorrect) {
+                isCorrect = candidates.some((c) => isSubstringMatch(String(userAnswer), c));
+              }
             }
           }
         } else {

@@ -31,6 +31,7 @@ export function normalize(s: string): string {
     .trim()
     .toLowerCase()
     .replace(/\.+\s*$/, '')
+    .replace(/\((\d+)\)\s*/g, '($1) ')   // (1)that → (1) that 통일
     .replace(/\s+/g, ' ');
 }
 
@@ -84,6 +85,35 @@ export function matchMcqAnswer(
       return true;
     }
   }
+  return false;
+}
+
+/**
+ * 서술형 부분 일치: 학생 답이 정답의 앞부분/뒷부분과 일치하면 정답 처리.
+ * 배열 문제에서 괄호 안 단어만 배열하고 나머지 고정 텍스트를 생략한 경우를 커버.
+ * 조건: 학생 답 3단어 이상 + 정답 단어 수의 35% 이상.
+ */
+export function isSubstringMatch(student: string, correct: string): boolean {
+  const s = normalize(student);
+  const c = normalize(correct);
+
+  if (s === c) return true;
+
+  const sWords = s.split(' ');
+  const cWords = c.split(' ');
+
+  if (sWords.length < 3) return false;
+
+  // 학생 답이 정답의 prefix 또는 suffix
+  if (c.startsWith(s) || c.endsWith(s)) {
+    return sWords.length / cWords.length >= 0.35;
+  }
+
+  // 정답이 학생 답의 prefix 또는 suffix (학생이 더 많이 쓴 경우)
+  if (s.startsWith(c) || s.endsWith(c)) {
+    return cWords.length / sWords.length >= 0.35;
+  }
+
   return false;
 }
 
