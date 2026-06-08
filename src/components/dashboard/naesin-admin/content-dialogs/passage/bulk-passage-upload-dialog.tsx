@@ -151,8 +151,11 @@ export function BulkPassageUploadDialog({ unitId, onAdd }: { unitId: string; onA
         const originalText = builtSentences.map((s) => s.original).join(' ');
         const koreanTranslation = builtSentences.map((s) => s.korean).join(' ');
         const words = originalText.split(/\s+/);
+        const HAS_LETTER = /[a-zA-Z0-9\uAC00-\uD7AF]/;
         const makeBlanks = (interval: number) =>
-          words.map((w, wi) => ({ index: wi, answer: w })).filter((_, wi) => wi % interval === interval - 1);
+          words.map((w, wi) => ({ index: wi, answer: w }))
+            .filter((_, wi) => wi % interval === interval - 1)
+            .filter((b) => HAS_LETTER.test(b.answer));
 
         const result = await fetchWithToast<{ id: string }>('/api/naesin/passages', {
           body: {

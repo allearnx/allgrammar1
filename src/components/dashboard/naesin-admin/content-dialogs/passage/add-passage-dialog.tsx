@@ -82,8 +82,11 @@ export function AddPassageDialog({ unitId, onAdd }: { unitId: string; onAdd: () 
       const koreanTranslation = builtSentences.map((s) => s.korean).join(' ');
 
       const words = originalText.split(/\s+/);
+      const HAS_LETTER = /[a-zA-Z0-9\uAC00-\uD7AF]/;
       const makeBlanks = (interval: number) =>
-        words.map((w, i) => ({ index: i, answer: w })).filter((_, i) => i % interval === interval - 1);
+        words.map((w, i) => ({ index: i, answer: w }))
+          .filter((_, i) => i % interval === interval - 1)
+          .filter((b) => HAS_LETTER.test(b.answer));
 
       const passageData = await fetchWithToast<{ id: string }>('/api/naesin/passages', {
         body: {

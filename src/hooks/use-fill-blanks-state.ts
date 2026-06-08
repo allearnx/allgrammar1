@@ -93,7 +93,12 @@ export function useFillBlanksState({ passage, onComplete }: UseFillBlanksStateOp
         return;
       }
 
-      const normalize = (s: string) => s.trim().toLowerCase().replace(/[.,!?;:'"()]/g, '');
+      const normalize = (s: string) =>
+        s.trim().toLowerCase()
+          .replace(/[\u2018\u2019\u0060\u00B4]/g, "'") // curly quotes/backtick/acute → straight
+          .replace(/[\u201C\u201D]/g, '"')   // curly double quotes → straight
+          .replace(/[\u2013\u2014\u2212]/g, '-') // en-dash/em-dash/minus → hyphen
+          .replace(/[.,!?;:'"()]/g, '');     // remove punctuation (keep hyphens)
       const userAnswer = normalize(answers[blank.index] || '');
       const isCorrect = userAnswer === normalize(blank.answer);
       newResults[blank.index] = isCorrect;

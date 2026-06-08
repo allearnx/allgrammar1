@@ -7,11 +7,15 @@ import { requireContentPermission } from '@/lib/api/require-content-permission';
 const ADMIN_ROLES = ['teacher', 'admin', 'boss'] as const;
 const AUTO_INTERVAL = { easy: 5, medium: 3, hard: 2 } as const;
 
+/** 글자(영문/한글/숫자)가 하나라도 있어야 빈칸 대상 */
+const HAS_LETTER = /[a-zA-Z0-9\uAC00-\uD7AF]/;
+
 function generateAutoBlanks(text: string, interval: number) {
   const words = text.trim().split(/\s+/);
   return words
     .map((w, i) => ({ index: i, answer: w }))
-    .filter((_, i) => i % interval === interval - 1);
+    .filter((_, i) => i % interval === interval - 1)
+    .filter((b) => HAS_LETTER.test(b.answer));
 }
 
 export const POST = createApiHandler(
