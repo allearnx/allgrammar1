@@ -33,8 +33,8 @@ export const GET = createApiHandler(
     if (!unitId) {
       const allUnitIds = [...new Set((data as { unit_id: string | null }[]).map((d) => d.unit_id).filter(Boolean))] as string[];
       if (allUnitIds.length > 0) {
-        // unit/textbook 정보 + 학생 진도를 병렬 조회
-        const [unitsResult, progressResult] = await Promise.all([
+        // unit/textbook 정보 + 학생 진도 + 시험 배정을 병렬 조회
+        const [unitsResult, progressResult, examResult] = await Promise.all([
           supabase
             .from('naesin_units')
             .select('id, unit_number, title, textbook:naesin_textbooks(id, display_name)')
@@ -44,10 +44,28 @@ export const GET = createApiHandler(
             .select('unit_id, problem_completed, mock_exam_completed')
             .eq('student_id', user.id)
             .in('unit_id', allUnitIds),
+          supabase
+            .from('naesin_exam_assignments')
+            .select('unit_ids')
+            .eq('student_id', user.id),
         ]);
 
         const unitMap = new Map((unitsResult.data || []).map((u) => [u.id, u]));
         const progressMap = new Map((progressResult.data || []).map((p) => [p.unit_id, p]));
+
+        // 시험차수별 unit_ids 그룹 → 같은 시험 범위의 과가 전부 완료돼야 completed
+        const examRounds = (examResult.data || []).map((e) => e.unit_ids as string[]).filter(Boolean);
+        const completedUnitIds = new Set<string>();
+
+        for (const roundUnitIds of examRounds) {
+          const allDone = roundUnitIds.every((uid) => {
+            const p = progressMap.get(uid);
+            return p?.problem_completed && p?.mock_exam_completed;
+          });
+          if (allDone) {
+            for (const uid of roundUnitIds) completedUnitIds.add(uid);
+          }
+        }
 
         for (const item of data as Record<string, unknown>[]) {
           const uid = item.unit_id as string;
@@ -56,10 +74,7 @@ export const GET = createApiHandler(
             item.unit_info = { unit_number: unitInfo.unit_number, title: unitInfo.title };
             item.textbook_info = unitInfo.textbook;
           }
-          const progress = progressMap.get(uid);
-          if (progress) {
-            item.unit_completed = !!(progress.problem_completed && progress.mock_exam_completed);
-          }
+          item.unit_completed = completedUnitIds.has(uid);
         }
       }
       // 교과서 레벨 시험 오답: sheet에서 textbook 정보 가져오기
