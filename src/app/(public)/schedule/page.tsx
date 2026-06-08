@@ -9,7 +9,12 @@ import {
 
 function ClassCard({ classItem }: { classItem: ClassItem }) {
   return (
-    <div className={`bg-white rounded-xl shadow-sm border border-gray-100 border-l-4 ${typeColors[classItem.type]} p-3 h-full hover:shadow-md transition-shadow`}>
+    <div className={`relative bg-white rounded-xl shadow-sm border border-gray-100 border-l-4 ${typeColors[classItem.type]} p-3 h-full hover:shadow-md transition-shadow ${classItem.isClosed ? 'opacity-60' : ''}`}>
+      {classItem.isClosed && (
+        <span className="absolute -top-2 -right-2 px-2 py-0.5 text-[10px] font-bold text-white bg-red-500 rounded-full shadow-sm">
+          마감
+        </span>
+      )}
       <div className="flex items-center gap-2 mb-2">
         {classItem.isNew && <span className="w-2 h-2 rounded-full bg-violet-500 animate-pulse" />}
         <span className="text-[10px] font-medium text-[#86868b] uppercase tracking-wider">
@@ -126,6 +131,10 @@ export default function SchedulePage() {
             <div className="flex items-center gap-2">
               <div className="w-2 h-2 rounded-full bg-violet-500 animate-pulse" />
               <span className="text-sm text-[#424245]">신규 개설</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="px-1.5 py-0.5 text-[10px] font-bold text-white bg-red-500 rounded-full">마감</span>
+              <span className="text-sm text-[#424245]">모집 마감</span>
             </div>
           </div>
         </div>
