@@ -11,8 +11,10 @@ function ClassCard({ classItem }: { classItem: ClassItem }) {
   return (
     <div className={`relative bg-white rounded-xl shadow-sm border border-gray-100 border-l-4 ${typeColors[classItem.type]} p-3 h-full hover:shadow-md transition-shadow ${classItem.isClosed ? 'opacity-60' : ''}`}>
       {classItem.isClosed && (
-        <span className="absolute -top-2 -right-2 px-2 py-0.5 text-[10px] font-bold text-white bg-red-500 rounded-full shadow-sm">
-          마감
+        <span className="absolute inset-0 flex items-center justify-center pointer-events-none">
+          <span className="text-2xl font-black text-red-500/80 border-[3px] border-red-500/80 rounded-full px-4 py-1 -rotate-12 tracking-widest" style={{ textShadow: '0 0 1px rgba(239,68,68,0.3)' }}>
+            마감
+          </span>
         </span>
       )}
       <div className="flex items-center gap-2 mb-2">
