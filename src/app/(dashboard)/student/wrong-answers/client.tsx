@@ -3,7 +3,8 @@
 import { useState } from 'react';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { Button } from '@/components/ui/button';
-import { CheckCircle, AlertTriangle, ChevronDown, ChevronRight } from 'lucide-react';
+import { Badge } from '@/components/ui/badge';
+import { CheckCircle, AlertTriangle, ChevronDown, ChevronRight, Archive } from 'lucide-react';
 import { fetchWithToast } from '@/lib/fetch-with-toast';
 import { WrongAnswerCard } from '@/components/naesin/wrong-answer-review';
 import type { NaesinWrongAnswer } from '@/types/database';
@@ -11,6 +12,7 @@ import type { NaesinWrongAnswer } from '@/types/database';
 interface EnrichedWrongAnswer extends NaesinWrongAnswer {
   unit_info?: { unit_number: number; title: string };
   textbook_info?: { id: string; display_name: string } | null;
+  unit_completed?: boolean;
 }
 
 const STAGE_LABELS: Record<string, string> = {
@@ -25,10 +27,11 @@ const STAGE_LABELS: Record<string, string> = {
 
 export function WrongAnswersClient() {
   const [filter, setFilter] = useState<'all' | 'unresolved'>('unresolved');
+  const [showCompleted, setShowCompleted] = useState(false);
   const [expandedGroups, setExpandedGroups] = useState<Set<string>>(new Set());
   const queryClient = useQueryClient();
 
-  const { data: wrongAnswers = [], isLoading: loading } = useQuery({
+  const { data: allWrongAnswers = [], isLoading: loading } = useQuery({
     queryKey: ['wrong-answers', filter],
     queryFn: async () => {
       const params = new URLSearchParams();
@@ -43,8 +46,15 @@ export function WrongAnswersClient() {
       setExpandedGroups(new Set(items.map((wa) => wa.textbook_info?.display_name || '기타')));
       return items;
     },
-    staleTime: 60_000, // 1min
+    staleTime: 60_000,
   });
+
+  // 완료된 단원 필터링
+  const wrongAnswers = showCompleted
+    ? allWrongAnswers
+    : allWrongAnswers.filter((wa) => !wa.unit_completed);
+
+  const completedCount = allWrongAnswers.filter((wa) => wa.unit_completed).length;
 
   async function markResolved(id: string) {
     try {
@@ -55,7 +65,6 @@ export function WrongAnswersClient() {
         errorMessage: '업데이트 실패',
         logContext: 'wrong_answers_page',
       });
-      // Optimistic update: remove from local cache
       queryClient.setQueryData<EnrichedWrongAnswer[]>(
         ['wrong-answers', filter],
         (prev) => prev?.filter((wa) => wa.id !== id),
@@ -95,10 +104,15 @@ export function WrongAnswersClient() {
 
   return (
     <div className="space-y-4">
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between flex-wrap gap-2">
         <div className="flex items-center gap-2">
           <AlertTriangle className="h-4 w-4 text-red-500" />
-          <span className="text-sm font-medium">전체 오답 ({wrongAnswers.length}개)</span>
+          <span className="text-sm font-medium">
+            오답 {wrongAnswers.length}개
+            {!showCompleted && completedCount > 0 && (
+              <span className="text-muted-foreground font-normal"> (완료 단원 {completedCount}개 숨김)</span>
+            )}
+          </span>
         </div>
         <div className="flex gap-1">
           <Button
@@ -117,6 +131,17 @@ export function WrongAnswersClient() {
           >
             전체
           </Button>
+          {completedCount > 0 && (
+            <Button
+              size="sm"
+              variant={showCompleted ? 'secondary' : 'outline'}
+              onClick={() => setShowCompleted(!showCompleted)}
+              className="h-7 text-xs"
+            >
+              <Archive className="h-3 w-3 mr-1" />
+              {showCompleted ? '완료 단원 숨기기' : '완료 단원 보기'}
+            </Button>
+          )}
         </div>
       </div>
 
@@ -124,7 +149,11 @@ export function WrongAnswersClient() {
         <div className="text-center py-12">
           <CheckCircle className="h-12 w-12 text-green-500 mx-auto mb-2" />
           <p className="text-muted-foreground">
-            {filter === 'unresolved' ? '미해결 오답이 없습니다!' : '오답이 없습니다!'}
+            {filter === 'unresolved'
+              ? completedCount > 0
+                ? '진행 중인 단원에 미해결 오답이 없습니다!'
+                : '미해결 오답이 없습니다!'
+              : '오답이 없습니다!'}
           </p>
         </div>
       ) : (
@@ -152,27 +181,38 @@ export function WrongAnswersClient() {
 
             {expandedGroups.has(tbName) && (
               <div className="p-3 space-y-4">
-                {Object.entries(units).map(([unitKey, stages]) => (
-                  <div key={unitKey}>
-                    <p className="text-sm font-medium mb-2">{unitKey}</p>
-                    {Object.entries(stages).map(([stageLabel, items]) => (
-                      <div key={stageLabel} className="ml-2 mb-3">
-                        <p className="text-xs text-muted-foreground mb-1.5">
-                          {stageLabel} ({items.length}개)
-                        </p>
-                        <div className="space-y-2">
-                          {items.map((wa) => (
-                            <WrongAnswerCard
-                              key={wa.id}
-                              wrongAnswer={wa}
-                              onResolve={() => markResolved(wa.id)}
-                            />
-                          ))}
-                        </div>
+                {Object.entries(units).map(([unitKey, stages]) => {
+                  const firstItem = Object.values(stages).flat()[0];
+                  const isCompleted = firstItem?.unit_completed;
+                  return (
+                    <div key={unitKey} className={isCompleted ? 'opacity-60' : ''}>
+                      <div className="flex items-center gap-2 mb-2">
+                        <p className="text-sm font-medium">{unitKey}</p>
+                        {isCompleted && (
+                          <Badge variant="secondary" className="text-xs">
+                            완료
+                          </Badge>
+                        )}
                       </div>
-                    ))}
-                  </div>
-                ))}
+                      {Object.entries(stages).map(([stageLabel, items]) => (
+                        <div key={stageLabel} className="ml-2 mb-3">
+                          <p className="text-xs text-muted-foreground mb-1.5">
+                            {stageLabel} ({items.length}개)
+                          </p>
+                          <div className="space-y-2">
+                            {items.map((wa) => (
+                              <WrongAnswerCard
+                                key={wa.id}
+                                wrongAnswer={wa}
+                                onResolve={() => markResolved(wa.id)}
+                              />
+                            ))}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  );
+                })}
               </div>
             )}
           </div>

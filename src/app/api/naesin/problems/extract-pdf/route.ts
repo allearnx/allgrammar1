@@ -4,7 +4,7 @@ import { requireContentPermission } from '@/lib/api/require-content-permission';
 import { logger } from '@/lib/logger';
 import { checkRateLimit } from '@/lib/api/rate-limit';
 import Anthropic from '@anthropic-ai/sdk';
-import { parseAiJsonArray } from '@/lib/ai-json';
+import { parseAiJsonArray, parseAiJsonObject } from '@/lib/ai-json';
 import { PDFDocument } from 'pdf-lib';
 
 export const maxDuration = 300;
@@ -104,6 +104,21 @@ function getPromptForType(extractType: string | null): string {
   return EXTRACT_PROMPT_DEFAULT;
 }
 
+// ── 정답표(Answer Key) 전용 추출 프롬프트 ──
+const ANSWER_KEY_PROMPT = `이 문서의 뒷부분에 정답표(정답, 정답지, 답안, Answer Key)가 있는지 확인하세요.
+
+규칙:
+- 문서 뒷부분에서 정답표/정답지 섹션을 찾으세요 (보통 마지막 페이지에 있음)
+- 정답표가 있으면 {문제번호: 정답} 형태의 JSON 객체로 반환
+- 정답표가 없으면 빈 객체 {} 를 반환
+- 객관식 정답은 숫자 문자열로 ("1", "2", "3" 등)
+- 원문자(①②③④⑤)는 숫자로 변환 (①→"1", ②→"2" 등)
+- 서술형 정답은 텍스트 그대로
+- 반드시 JSON 객체로만 응답하세요. 설명이나 마크다운 없이 순수 JSON만.
+
+예시 출력:
+{"1": "3", "2": "1", "3": "4", "4": "swimming", "5": "2"}`;
+
 /** PDF를 N페이지씩 청크로 분할하여 각각의 base64 반환 */
 async function splitPdfIntoChunks(pdfBytes: ArrayBuffer, pagesPerChunk: number) {
   const srcDoc = await PDFDocument.load(pdfBytes, { ignoreEncryption: true });
@@ -177,6 +192,71 @@ async function extractFromImage(base64Data: string, mediaType: string, label: st
   return questions;
 }
 
+/** PDF base64에서 정답표만 추출 (병렬 호출용) */
+async function extractAnswerKeyFromPdfChunk(base64Data: string): Promise<Record<string, string>> {
+  try {
+    const message = await anthropic.messages.create({
+      model: 'claude-haiku-4-5-20251001',
+      max_tokens: 4096,
+      messages: [
+        {
+          role: 'user',
+          content: [
+            { type: 'document', source: { type: 'base64', media_type: 'application/pdf', data: base64Data } },
+            { type: 'text', text: ANSWER_KEY_PROMPT },
+          ],
+        },
+      ],
+    });
+    return parseAiJsonObject<Record<string, string>>(message) ?? {};
+  } catch (e) {
+    logger.warn('ai.answer_key_extract.failed', { error: String(e) });
+    return {};
+  }
+}
+
+/** URL 기반 PDF에서 정답표만 추출 (병렬 호출용) */
+async function extractAnswerKeyFromPdfUrl(pdfUrl: string): Promise<Record<string, string>> {
+  try {
+    const message = await anthropic.messages.create({
+      model: 'claude-haiku-4-5-20251001',
+      max_tokens: 4096,
+      messages: [
+        {
+          role: 'user',
+          content: [
+            { type: 'document', source: { type: 'url', url: pdfUrl } },
+            { type: 'text', text: ANSWER_KEY_PROMPT },
+          ],
+        },
+      ],
+    });
+    return parseAiJsonObject<Record<string, string>>(message) ?? {};
+  } catch (e) {
+    logger.warn('ai.answer_key_extract.failed', { error: String(e) });
+    return {};
+  }
+}
+
+/** 정답표 결과를 추출된 문제에 머지. 정답표 답이 우선. */
+function mergeAnswerKey(
+  questions: Record<string, unknown>[],
+  answerKey: Record<string, string>,
+): number {
+  const keyCount = Object.keys(answerKey).length;
+  if (keyCount === 0) return 0;
+
+  let merged = 0;
+  for (const q of questions) {
+    const num = String(q.number);
+    if (num in answerKey && answerKey[num] !== '') {
+      q.answer = answerKey[num];
+      merged++;
+    }
+  }
+  return merged;
+}
+
 /** URL 기반 PDF에 대해 Claude API 호출 (Vercel 본문 제한 우회) */
 async function extractFromPdfUrl(pdfUrl: string, prompt: string) {
   const message = await anthropic.messages.create({
@@ -219,6 +299,7 @@ export async function POST(request: NextRequest) {
   try {
     const contentType = request.headers.get('content-type') || '';
     let allQuestions: Record<string, unknown>[];
+    let answerKey: Record<string, string> = {};
     let storagePath: string | undefined;
 
     if (contentType.includes('application/json')) {
@@ -236,7 +317,13 @@ export async function POST(request: NextRequest) {
       logger.info('ai.extract.start', { userId: user.id, mode: 'url' });
 
       try {
-        allQuestions = await extractFromPdfUrl(pdfUrl, prompt) as Record<string, unknown>[];
+        // 문제 추출 + 정답표 추출 병렬 실행
+        const [urlQuestions, urlAnswerKey] = await Promise.all([
+          extractFromPdfUrl(pdfUrl, prompt),
+          extractAnswerKeyFromPdfUrl(pdfUrl),
+        ]);
+        allQuestions = urlQuestions as Record<string, unknown>[];
+        answerKey = urlAnswerKey;
       } catch (apiError) {
         const apiMsg = apiError instanceof Error ? apiError.message : String(apiError);
         const apiStatus = (apiError as { status?: number })?.status;
@@ -286,6 +373,10 @@ export async function POST(request: NextRequest) {
           const base64 = Buffer.from(arrayBuffer).toString('base64');
           allQuestions = await extractFromImage(base64, file.type, file.name, prompt) as Record<string, unknown>[];
         } else {
+          const fullBase64 = Buffer.from(arrayBuffer).toString('base64');
+          // 정답표 추출을 문제 추출과 병렬로 시작
+          const answerKeyPromise = extractAnswerKeyFromPdfChunk(fullBase64);
+
           const chunks = await splitPdfIntoChunks(arrayBuffer, PAGES_PER_CHUNK);
           logger.info('ai.pdf_extract.chunks', {
             totalChunks: chunks.length,
@@ -300,6 +391,8 @@ export async function POST(request: NextRequest) {
             );
             allQuestions = results.flat() as Record<string, unknown>[];
           }
+
+          answerKey = await answerKeyPromise;
         }
       } catch (apiError) {
         const apiMsg = apiError instanceof Error ? apiError.message : String(apiError);
@@ -325,6 +418,13 @@ export async function POST(request: NextRequest) {
           { status: 502 },
         );
       }
+    }
+
+    // 정답표에서 가져온 답을 문제에 머지 (정답표가 source of truth)
+    const answerKeyCount = Object.keys(answerKey).length;
+    const mergedCount = mergeAnswerKey(allQuestions, answerKey);
+    if (answerKeyCount > 0) {
+      logger.info('ai.answer_key_extract.merged', { keyCount: answerKeyCount, mergedCount, questionCount: allQuestions.length });
     }
 
     // 정답 원문자(①→1) 정규화 + 중첩 배열 옵션 평탄화
@@ -365,8 +465,11 @@ export async function POST(request: NextRequest) {
       });
     }
 
-    logger.info('ai.extract.done', { count: questions.length });
-    return NextResponse.json({ questions });
+    logger.info('ai.extract.done', { count: questions.length, answerKeyFound: answerKeyCount > 0, mergedCount });
+    return NextResponse.json({
+      questions,
+      ...(answerKeyCount > 0 && { answerKeyFound: true, answerKeyMerged: mergedCount }),
+    });
   } catch (error) {
     const msg = error instanceof Error ? error.message : String(error);
     logger.error('ai.pdf_extract', { error: msg });
