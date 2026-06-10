@@ -193,7 +193,7 @@ export function InteractiveProblemView({
               className="max-w-full rounded-lg border mb-3"
             />
           )}
-          <p className="text-lg font-medium whitespace-pre-wrap">
+          <div className="text-lg font-medium whitespace-pre-wrap">
             {(() => {
               const q = question.question.replace(/\\n/g, '\n');
               if (/^\[.+?\]/.test(q)) {
@@ -206,7 +206,7 @@ export function InteractiveProblemView({
               }
               return <FormattedText text={q} />;
             })()}
-          </p>
+          </div>
         </CardContent>
       </Card>
 

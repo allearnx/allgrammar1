@@ -43,7 +43,7 @@ export function ResultsScreen({
             <div className="space-y-3">
               {retryCorrectList.map((w, i) => (
                 <div key={i} className="text-sm border-b last:border-0 pb-2 space-y-1">
-                  <p className="font-medium">#{w.number}. <FormattedText text={w.question} /></p>
+                  <div className="font-medium">#{w.number}. <FormattedText text={w.question} /></div>
                   {w.explanation && (
                     <div className="text-sm text-blue-700 bg-blue-50 rounded px-2 py-1">
                       <span className="font-medium">해설:</span> {w.explanation}
@@ -65,7 +65,7 @@ export function ResultsScreen({
               <div className="space-y-3">
                 {wrongList.map((w, i) => (
                   <div key={i} className="text-sm border-b last:border-0 pb-2 space-y-1">
-                    <p className="font-medium">#{w.number}. <FormattedText text={w.question} /></p>
+                    <div className="font-medium">#{w.number}. <FormattedText text={w.question} /></div>
                     {w.subParts ? (() => {
                       const parts = String(w.userAnswer).split(' / ');
                       const norm = (s: string) => s.trim().toLowerCase().replace(/[.\s]+$/g, '');

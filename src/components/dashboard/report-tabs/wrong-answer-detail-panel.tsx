@@ -322,7 +322,7 @@ function ReadOnlyWrongAnswerCard({
       <Card className={wrongAnswer.resolved ? 'opacity-60' : ''}>
         <CardContent className="py-3">
           <div className="text-sm space-y-1">
-            {data.question ? <p className="font-medium"><FormattedText text={String(data.question)} /></p> : null}
+            {data.question ? <div className="font-medium"><FormattedText text={String(data.question)} /></div> : null}
             {data.type === 'fill_blank' ? (
               <>
                 <p className="text-red-500">학생 답: {String(data.userAnswer || '-')}</p>
@@ -465,7 +465,7 @@ function ReadOnlyWrongAnswerCard({
           </DialogHeader>
           <div className="space-y-3">
             {data.question ? (
-              <p className="text-sm text-muted-foreground"><FormattedText text={String(data.question)} /></p>
+              <div className="text-sm text-muted-foreground"><FormattedText text={String(data.question)} /></div>
             ) : null}
             <div>
               <label className="text-sm font-medium">새 정답</label>

@@ -208,7 +208,7 @@ export function WrongAnswerCard({ wrongAnswer, onResolve }: { wrongAnswer: Naesi
                 className="max-w-full max-h-48 rounded border mb-2"
               />
             ) : null}
-            {data.question ? <p className="font-medium"><FormattedText text={String(data.question)} /></p> : null}
+            {data.question ? <div className="font-medium"><FormattedText text={String(data.question)} /></div> : null}
 
             {/* ── 유형별 내 답 + 정답 표시 (재풀이 중엔 정답 숨김) ── */}
             {data.type === 'fill_blank' ? (
