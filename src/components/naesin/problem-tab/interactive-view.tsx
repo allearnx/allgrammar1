@@ -13,7 +13,7 @@ import { FormattedText } from '@/components/shared/formatted-text';
 import type { NaesinProblemSheet, NaesinProblemQuestion } from '@/types/database';
 import type { SubPart } from '@/types/naesin';
 import type { WrongItem } from '@/hooks/use-problem-draft';
-import { useInteractiveProblem } from './use-interactive-problem';
+import { useInteractiveProblem, CHUNK_SIZE } from './use-interactive-problem';
 import { ResultsScreen } from './results-screen';
 
 export type { WrongItem };
@@ -95,6 +95,7 @@ export function InteractiveProblemView({
     retryMode, retryCorrectList, disabledOptions,
     handleSelect, handleMultiToggle, handleMultiSubmit, handleNext, handleMidSave, isMidSaving, answersMap,
     submitFailed, retrySubmit, multiExpectedCount,
+    chunkPaused, handleContinueChunk,
   } = useInteractiveProblem({ sheetId: sheet.id, questions, unitId, onComplete });
   const [isRetrying, setIsRetrying] = useState(false);
 
@@ -126,6 +127,35 @@ export function InteractiveProblemView({
         <div className="text-xs text-muted-foreground pt-4">
           점수: {score.correct}개 정답 / {questions.length}문제 ({Math.round((score.correct / questions.length) * 100)}점)
         </div>
+      </div>
+    );
+  }
+
+  if (chunkPaused) {
+    const completedCount = currentIndex;
+    const totalChunks = Math.ceil(questions.length / CHUNK_SIZE);
+    const chunkNumber = Math.floor(completedCount / CHUNK_SIZE);
+    const remaining = questions.length - completedCount;
+    return (
+      <div className="space-y-4 max-w-md mx-auto py-8 text-center">
+        <div className="text-2xl font-bold text-green-600">{completedCount}문제 완료!</div>
+        <div className="w-full bg-muted rounded-full h-2.5">
+          <div
+            className="bg-green-500 h-2.5 rounded-full transition-all"
+            style={{ width: `${(completedCount / questions.length) * 100}%` }}
+          />
+        </div>
+        <p className="text-sm text-muted-foreground">
+          {completedCount} / {questions.length}문제 ({chunkNumber}/{totalChunks} 묶음)
+        </p>
+        <div className="flex justify-center gap-3">
+          <Badge variant="secondary" className="text-green-600">{score.correct} 정답</Badge>
+          <Badge variant="secondary" className="text-red-600">{score.wrong} 오답</Badge>
+        </div>
+        <p className="text-xs text-muted-foreground">진행 상황이 자동 저장되었습니다.</p>
+        <Button onClick={handleContinueChunk} size="lg" className="mt-2">
+          나머지 {remaining}문제 계속하기
+        </Button>
       </div>
     );
   }

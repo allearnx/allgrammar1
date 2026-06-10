@@ -8,6 +8,8 @@ import { matchMcqAnswer, normalize } from '@/lib/naesin/normalize-answer';
 
 export type AnswerStatus = 'correct' | 'retry_correct' | 'wrong';
 
+export const CHUNK_SIZE = 25;
+
 export function useInteractiveProblem({
   sheetId,
   questions,
@@ -387,7 +389,8 @@ export function useInteractiveProblem({
 
   function handleNext() {
     if (currentIndex < questions.length - 1) {
-      setCurrentIndex(currentIndex + 1);
+      const nextIndex = currentIndex + 1;
+      setCurrentIndex(nextIndex);
       setShowResult(false);
       setSelectedAnswer(null);
       setMultiSelectedValues([]);
@@ -395,7 +398,29 @@ export function useInteractiveProblem({
       setRetryMode(false);
       setDisabledOptions([]);
       setCurrentAnswerStatus(null);
+
+      // Chunk boundary: pause and force save
+      if (nextIndex > 0 && nextIndex % CHUNK_SIZE === 0) {
+        setChunkPaused(true);
+        const draftInput = {
+          mode: 'interactive' as const,
+          currentIndex: nextIndex,
+          score,
+          wrongList,
+          aiResultsMap,
+          answeredUpTo: nextIndex - 1,
+          overtimeQuestions,
+          retryCorrectList,
+          answersMap,
+        };
+        saveDraft(draftInput);
+        saveServerDraft(draftInput, unitId);
+      }
     }
+  }
+
+  function handleContinueChunk() {
+    setChunkPaused(false);
   }
 
   async function handleMidSave() {
@@ -432,6 +457,7 @@ export function useInteractiveProblem({
 
   const [submitFailed, setSubmitFailed] = useState(false);
   const [pendingSubmit, setPendingSubmit] = useState<{ answers: (string | number)[]; total: number; aiResults: Record<string, AiFeedback>; retryList: WrongItem[] } | null>(null);
+  const [chunkPaused, setChunkPaused] = useState(false);
 
   async function submitResults(answers: (string | number)[], total: number, finalAiResults?: Record<string, AiFeedback>, retryList?: WrongItem[]) {
     const mergedAiResults = finalAiResults ?? aiResultsMap;
@@ -509,5 +535,7 @@ export function useInteractiveProblem({
     submitFailed,
     retrySubmit,
     multiExpectedCount,
+    chunkPaused,
+    handleContinueChunk,
   };
 }
