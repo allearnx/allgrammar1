@@ -135,6 +135,25 @@
 - 영향 범위: 12개 템플릿, 32개 시트, 256개 문항
 - 원인: 학생 안지훈 — to부정사의 명사적 용법 Step1에서 표가 깨져 보임
 
+### 40878cc — 슬래시 복합 답안 자동 subParts 변환 (재발 방지)
+- sanitizeQuestions: 서술형 답안에 " / "가 포함되면 자동으로 subParts 생성
+  - "A / B / C" → subParts: [{label:"(1)", answer:"A"}, {label:"(2)", answer:"B"}, ...]
+  - 기존 subParts가 있으면 덮어쓰지 않음, 객관식은 대상 아님
+- 테스트 5건 추가 (problem-validator.test.ts): 41 tests 전체 통과
+- 원인: 수동태 step2 같은 복합 서술형을 새로 만들면 subParts 없이 저장되어 빈칸별 독립 채점 불가
+
+## 재발 방지 정리
+
+| 문제 | 일회성 수정 | 시스템적 재발 방지 |
+|------|:-:|:-:|
+| 네트워크 유실 | - | fetchWithToast retry 내장 |
+| 100문항 중간 유실 | - | CHUNK_SIZE=25 자동 저장 |
+| 유니코드 오채점 | - | normalize-answer.ts 정규화 |
+| 수동태 채점 오류 | 특정 시트 수정 | subParts fallback + 자동 subParts 생성 |
+| 타이포그래피 문자 | - | 저장 시 자동 변환 |
+| 테이블 깨짐 | - | FormattedText 테이블 파싱 |
+| 복합 답안 subParts 누락 | - | sanitizeQuestions 자동 분할 |
+
 ### 검증 규칙 추가
 - answer_key 형식 통일 필요: 일부 시트는 string[], 일부는 {answer, explanation}[]
 - multi-select 답안 (q.answer가 배열)은 저장 시 answer_key에도 자동 동기화 필요
