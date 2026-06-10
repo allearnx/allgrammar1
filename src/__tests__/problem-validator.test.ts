@@ -236,6 +236,66 @@ describe('sanitizeQuestions', () => {
     });
   });
 
+  describe('슬래시 복합 답안 자동 subParts 변환', () => {
+    it('"A / B / C" → subParts 3개 자동 생성', () => {
+      const q: NaesinProblemQuestion = {
+        number: 1,
+        question: 'Write the answers.',
+        answer: 'was made / were built / is called',
+      };
+      const { questions } = sanitizeQuestions([q]);
+      expect(questions[0].subParts).toEqual([
+        { label: '(1)', answer: 'was made' },
+        { label: '(2)', answer: 'were built' },
+        { label: '(3)', answer: 'is called' },
+      ]);
+    });
+
+    it('"A / B" 2파트도 subParts 생성', () => {
+      const q: NaesinProblemQuestion = {
+        number: 1,
+        question: 'Write the answers.',
+        answer: 'had left / arrived',
+      };
+      const { questions } = sanitizeQuestions([q]);
+      expect(questions[0].subParts).toHaveLength(2);
+      expect(questions[0].subParts![0].answer).toBe('had left');
+      expect(questions[0].subParts![1].answer).toBe('arrived');
+    });
+
+    it('이미 subParts가 있으면 덮어쓰지 않음', () => {
+      const q: NaesinProblemQuestion = {
+        number: 1,
+        question: 'Write the answers.',
+        answer: 'A / B',
+        subParts: [{ label: '①', answer: 'A' }, { label: '②', answer: 'B' }],
+      };
+      const { questions } = sanitizeQuestions([q]);
+      expect(questions[0].subParts![0].label).toBe('①'); // 기존 유지
+    });
+
+    it('객관식은 subParts 변환하지 않음', () => {
+      const q: NaesinProblemQuestion = {
+        number: 1,
+        question: 'Choose',
+        answer: '1 / 3',
+        options: ['a', 'b', 'c', 'd', 'e'],
+      };
+      const { questions } = sanitizeQuestions([q]);
+      expect(questions[0].subParts).toBeUndefined();
+    });
+
+    it('슬래시 없는 서술형은 subParts 생성 안 함', () => {
+      const q: NaesinProblemQuestion = {
+        number: 1,
+        question: 'Write the answer.',
+        answer: 'The cat is on the mat.',
+      };
+      const { questions } = sanitizeQuestions([q]);
+      expect(questions[0].subParts).toBeUndefined();
+    });
+  });
+
   describe('숫자형 정답 문자열 변환', () => {
     it('number 타입 정답 → string으로 변환', () => {
       const q: NaesinProblemQuestion = { number: 1, question: 'test', answer: 3, options: ['a', 'b', 'c', 'd', 'e'] };

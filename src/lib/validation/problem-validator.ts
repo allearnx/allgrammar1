@@ -392,6 +392,18 @@ export function sanitizeQuestions(
       if (accepted.length > (out.acceptedAnswers?.length ?? 0)) {
         out.acceptedAnswers = accepted;
       }
+
+      // Auto-subParts: 슬래시 구분 복합 답안 → subParts 자동 분할
+      // "A / B / C" → subParts: [{label:"(1)", answer:"A"}, {label:"(2)", answer:"B"}, ...]
+      if (answer.includes(' / ') && !out.subParts?.length) {
+        const parts = answer.split(' / ').map((p) => p.trim()).filter(Boolean);
+        if (parts.length >= 2) {
+          out.subParts = parts.map((part, idx) => ({
+            label: `(${idx + 1})`,
+            answer: part,
+          }));
+        }
+      }
     }
 
     return out;
