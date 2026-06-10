@@ -73,6 +73,12 @@ export async function regradeSheet(
             const candidates = [sp.answer, ...(sp.acceptedAnswers ?? [])];
             return candidates.some((c) => normalize(c) === studentNorm);
           });
+          // Fallback: 기존 제출은 subParts UI 없이 작성 → 전체 문자열 비교
+          if (!isCorrect) {
+            const studentNorm = normalize(userAnswer);
+            const candidates = [correctAnswer, ...(q?.acceptedAnswers ?? [])];
+            isCorrect = candidates.some((c) => normalize(c) === studentNorm);
+          }
         } else {
           const studentNorm = normalize(userAnswer);
           const candidates = [
