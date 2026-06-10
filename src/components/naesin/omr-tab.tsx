@@ -121,6 +121,7 @@ function OmrSheetView({ sheet, unitId, onStageComplete }: OmrSheetViewProps) {
         },
         errorMessage: '제출 중 오류가 발생했습니다',
         logContext: 'naesin.omr_tab',
+        retry: 2,
       });
       if (data.omrCompleted) {
         toast.success('OMR 시트 단계를 완료했습니다!');

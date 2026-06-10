@@ -181,6 +181,7 @@ export function usePaperTest({
         },
         errorMessage: '결과 저장에 실패했습니다',
         logContext: 'naesin.paper_test',
+        retry: 2,
       });
 
       clearDraft();

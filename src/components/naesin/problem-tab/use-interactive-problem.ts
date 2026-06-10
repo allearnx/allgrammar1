@@ -449,6 +449,7 @@ export function useInteractiveProblem({
         },
         errorMessage: '결과 저장에 실패했습니다',
         logContext: 'naesin.interactive_view',
+        retry: 2,
       });
       clearDraft();
       clearServerDraft();

@@ -152,6 +152,7 @@ export function ExternalPassageView({ sheet, unitId, onComplete }: ExternalPassa
           wrongSentences,
         },
         silent: true,
+        retry: 2,
       });
       clearDraft(sheet.id);
       setSubmitted(true);

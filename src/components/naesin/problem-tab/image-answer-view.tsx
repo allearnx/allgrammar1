@@ -47,6 +47,7 @@ export function ImageAnswerView({
         },
         errorMessage: '제출 중 오류가 발생했습니다',
         logContext: 'naesin.image_answer_view',
+        retry: 2,
       });
       clearDraft();
       setResults({ score: data.score, wrongAnswers: data.wrongAnswers });

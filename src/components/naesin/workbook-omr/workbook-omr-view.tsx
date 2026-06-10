@@ -50,6 +50,7 @@ export function WorkbookOmrView({ sheet, onSubmitComplete }: WorkbookOmrViewProp
         successMessage: '채점 완료!',
         errorMessage: '제출 중 오류가 발생했습니다',
         logContext: 'workbook_omr.view',
+        retry: 2,
       });
 
       // Show results with answer key from server
