@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { createApiHandler, NotFoundError, dbResult } from '@/lib/api';
 import { problemSubmitSchema } from '@/lib/api/schemas';
-import { normalize, matchMcqAnswer, extractAnswer, isSubstringMatch } from '@/lib/naesin/normalize-answer';
+import { normalize, normalizeSeparators, matchMcqAnswer, extractAnswer, isSubstringMatch } from '@/lib/naesin/normalize-answer';
 
 export const maxDuration = 60;
 
@@ -53,6 +53,9 @@ export const POST = createApiHandler(
           const exactMatch = candidates.some((c) => normalize(c) === studentNorm);
 
           if (exactMatch) {
+            isCorrect = true;
+          } else if (candidates.some((c) => normalizeSeparators(userAnswer) === normalizeSeparators(c))) {
+            // 구분자(쉼표/슬래시) 무시 비교
             isCorrect = true;
           } else if (candidates.some((c) => isSubstringMatch(userAnswer, c))) {
             // 배열 문제 등 부분 일치 (prefix/suffix)
