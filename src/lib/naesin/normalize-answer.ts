@@ -29,6 +29,9 @@ export function uncircle(s: string): string {
 export function normalize(s: string): string {
   return s
     .replace(/[\r\n\t]/g, ' ')           // 개행/탭 → 공백
+    .replace(/[\u2018\u2019\u0060\u00B4]/g, "'") // 곡선 작은따옴표 → 직선
+    .replace(/[\u201C\u201D]/g, '"')     // 곡선 큰따옴표 → 직선
+    .replace(/[\u2013\u2014\u2212]/g, '-') // 엔대시/엠대시 → 하이픈
     .trim()
     .toLowerCase()
     .replace(/\.+\s*$/, '')              // 끝 마침표 제거
@@ -36,6 +39,14 @@ export function normalize(s: string): string {
     .replace(/\s*\/\s*/g, ' / ')         // A/B, A /B → A / B 통일
     .replace(/\s+/g, ' ')               // 연속 공백 → 단일
     .trim();                             // 슬래시 정규화 후 trim 재적용
+}
+
+/** 구분자(쉼표, 슬래시) 무시 비교용 정규화 */
+export function normalizeSeparators(s: string): string {
+  return normalize(s)
+    .replace(/\s*[,/]\s*/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
 }
 
 /** 복수 정답(예: "1,3" / "1, 3" / "3, 1") 정규화: 공백 제거 + 숫자 정렬 */

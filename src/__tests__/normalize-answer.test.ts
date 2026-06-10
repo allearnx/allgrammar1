@@ -1,10 +1,38 @@
 import { describe, it, expect } from 'vitest';
-import { normalize, matchMcqAnswer, resolveCorrectIndex, uncircle } from '@/lib/naesin/normalize-answer';
+import { normalize, normalizeSeparators, matchMcqAnswer, resolveCorrectIndex, uncircle } from '@/lib/naesin/normalize-answer';
 
 describe('normalize', () => {
   it('trims, lowercases, removes trailing period, collapses spaces', () => {
     expect(normalize('  Hello World.  ')).toBe('hello world');
     expect(normalize('Test   Multiple   Spaces')).toBe('test multiple spaces');
+  });
+
+  it('normalizes curly quotes to straight quotes', () => {
+    expect(normalize('she\u2019s')).toBe("she's");
+    expect(normalize('don\u2019t')).toBe("don't");
+    expect(normalize('\u201CHello\u201D')).toBe('"hello"');
+  });
+
+  it('normalizes en-dash and em-dash to hyphen', () => {
+    expect(normalize('A \u2013 B')).toBe('a - b');
+    expect(normalize('A\u2014B')).toBe('a-b');
+  });
+});
+
+describe('normalizeSeparators', () => {
+  it('treats comma and slash as equivalent separators', () => {
+    expect(normalizeSeparators('beauty contest, possible'))
+      .toBe(normalizeSeparators('beauty contest / possible'));
+  });
+
+  it('handles multiple separators', () => {
+    expect(normalizeSeparators('A, B, C'))
+      .toBe(normalizeSeparators('A / B / C'));
+  });
+
+  it('handles spacing differences around separators', () => {
+    expect(normalizeSeparators('answer one,answer two'))
+      .toBe(normalizeSeparators('answer one / answer two'));
   });
 });
 
