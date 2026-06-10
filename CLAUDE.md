@@ -89,6 +89,52 @@
 ### 진행 중
 - [ ] A: 외부지문 빈 정답 (88건) — 맨 마지막
 
+---
+
+# 학생 UX 안정화 작업 로그 (2026-06-08~10)
+
+## 커밋 이력
+
+### db22e53 — 문제 제출 네트워크 오류 자동 재시도
+- `fetchWithToast`에 `retry` 옵션 추가 (exponential backoff: 1s, 2s, 4s)
+- TypeError(네트워크 끊김) + 5xx 서버 에러만 재시도, 4xx는 즉시 실패
+- 6개 제출 call site에 `retry: 2` 적용:
+  - use-interactive-problem.ts, use-paper-test.ts, omr-tab.tsx
+  - workbook-omr-view.tsx, external-passage-view.tsx, image-answer-view.tsx
+- 원인: 학생 정아인이 네트워크 오류로 3번 넘게 재풀이
+
+### 7116ad4 — 인터랙티브 모드 25문항 묶음 자동 저장
+- `CHUNK_SIZE = 25` 상수 + `chunkPaused` 상태 추가 (use-interactive-problem.ts)
+- 25문항마다 자동 서버 저장 + 쉬어가기 화면 표시 (interactive-view.tsx)
+- 진행률 바, 점수 배지, "나머지 N문제 계속하기" 버튼
+- 100문항 시트에서 중간 유실 방지 (순수 UI 변경, 채점/제출 로직 미변경)
+
+### 0d424e5 — 빈칸 채우기 유니코드 오채점 수정
+- normalize-answer.ts: 유니코드 특수 공백/하이픈/따옴표 → ASCII 정규화
+- 부호 빈칸(___) 제거 비교 추가
+
+### 667b0a2 — 수동태 step2 시트 서술형 채점 개선 + subParts 변환
+- 수동태 step2 템플릿(cac534f0) + 3개 복사본 수정:
+  - 23개 빈칸 채우기 문제에 "※ 빈칸에 들어갈 말만 쓰시오" 안내 추가
+  - 16개 복합 답안 문제를 subParts로 변환 (독립 채점)
+  - 엣지 케이스 acceptedAnswers 추가 (쉼표/슬래시 변형, 수동태만 기재 등)
+- regrade-sheet.ts: subParts 채점 실패 시 전체 문자열 비교 fallback 추가
+- 결과: 윤지율 66→71점 (+5점 상승), 강무성/김민서 드래프트 재채점
+- scripts/fix-sudontae-step2.mjs: 일회성 마이그레이션 + 재채점 스크립트
+
+### e2f028a — 지문 저장 시 타이포그래피 문자 자동 정규화
+- 저장 시 스마트 따옴표/대시 등 자동 변환
+
+### 527fa6a — 마크다운 파이프 테이블 HTML 렌더링
+- FormattedText 컴포넌트에 마크다운 표 파싱 추가:
+  - 텍스트를 블록 단위(table vs text)로 분류
+  - 파이프 테이블 → `<table>` + `<thead>`/`<tbody>` 렌더링
+  - 구분선(`|---|---|`) 자동 필터링, 셀 내 `<u>` 인라인 마크업 지원
+- 테이블 포함 래퍼 `<p>` → `<div>` 변경 (5개 파일):
+  - interactive-view.tsx, results-screen.tsx, wrong-answer-review.tsx, wrong-answer-detail-panel.tsx
+- 영향 범위: 12개 템플릿, 32개 시트, 256개 문항
+- 원인: 학생 안지훈 — to부정사의 명사적 용법 Step1에서 표가 깨져 보임
+
 ### 검증 규칙 추가
 - answer_key 형식 통일 필요: 일부 시트는 string[], 일부는 {answer, explanation}[]
 - multi-select 답안 (q.answer가 배열)은 저장 시 answer_key에도 자동 동기화 필요
