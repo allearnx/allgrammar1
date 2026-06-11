@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import {
   ArrowLeft,
+  ArrowRight,
   Lock,
   Crown,
   BookOpen,
@@ -15,6 +16,7 @@ import {
   ClipboardList,
   FileQuestion,
   Brain,
+  CheckCircle,
 } from 'lucide-react';
 import { VocabTab } from '@/components/naesin/vocab-tab';
 import { PassageTab } from '@/components/naesin/passage-tab';
@@ -228,6 +230,13 @@ export function NaesinStageView({
   const currentConfig = STAGE_CONFIG.find((s) => s.key === currentStage);
   const renderStage = STAGE_RENDERERS[currentStage];
 
+  // 현재 스테이지가 완료되었으면 다음 available 스테이지 찾기
+  const nextStage = localStatuses[currentStage] === 'completed'
+    ? STAGE_CONFIG.find(
+        (s) => s.key !== currentStage && localStatuses[s.key] === 'available'
+      )
+    : null;
+
   return (
     <div className="space-y-6">
       <Button variant="ghost" size="sm" asChild className="-ml-2">
@@ -243,6 +252,21 @@ export function NaesinStageView({
         currentStage={currentStage}
         unitId={unit.id}
       />
+
+      {nextStage && (
+        <div className="flex items-center justify-between gap-3 rounded-lg border border-green-200 bg-green-50 dark:bg-green-950/30 dark:border-green-800 px-4 py-3">
+          <div className="flex items-center gap-2 text-sm text-green-700 dark:text-green-300">
+            <CheckCircle className="h-4 w-4 shrink-0" />
+            <span><span className="font-medium">{currentConfig?.label}</span> 완료!</span>
+          </div>
+          <Button size="sm" asChild>
+            <Link href={`/student/naesin/${unit.id}/${nextStage.key}`}>
+              {nextStage.label} 시작하기
+              <ArrowRight className="h-4 w-4 ml-1" />
+            </Link>
+          </Button>
+        </div>
+      )}
 
       <div>
         {currentStageHidden ? (

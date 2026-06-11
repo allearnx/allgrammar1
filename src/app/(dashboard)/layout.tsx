@@ -135,14 +135,31 @@ async function fetchNaesinTree(
   supabase: SupabaseClient,
   studentId: string
 ): Promise<NaesinSidebarExam[] | undefined> {
-  // Get student textbook setting
-  const { data: setting } = await supabase
-    .from('naesin_student_settings')
-    .select('textbook_id')
-    .eq('student_id', studentId)
-    .single();
+  // Get student textbook setting + academy's naesin_required_rounds
+  const [{ data: setting }, { data: studentRow }] = await Promise.all([
+    supabase
+      .from('naesin_student_settings')
+      .select('textbook_id')
+      .eq('student_id', studentId)
+      .single(),
+    supabase
+      .from('users')
+      .select('academy_id')
+      .eq('id', studentId)
+      .single(),
+  ]);
 
   if (!setting?.textbook_id) return undefined;
+
+  let naesinRequiredRounds = 1;
+  if (studentRow?.academy_id) {
+    const { data: academy } = await supabase
+      .from('academies')
+      .select('naesin_required_rounds')
+      .eq('id', studentRow.academy_id)
+      .single();
+    naesinRequiredRounds = academy?.naesin_required_rounds ?? 1;
+  }
 
   // Batch 1: assignments + units (need unit IDs first to filter the rest)
   const [assignmentsRes, unitsRes] = await Promise.all([
@@ -261,6 +278,7 @@ async function fetchNaesinTree(
           vocabQuizSetCount: unitQuizSets.length,
           grammarVideoCount: videoLessons.length,
           examDate: a.exam_date,
+          naesinRequiredRounds,
         });
 
         return {
