@@ -16,9 +16,10 @@ interface UsePassageTabStateOptions {
   requiredStages?: string[];
   naesinRequiredRounds?: number;
   round1Completed?: boolean;
+  subStageBests?: Record<string, number | null>;
 }
 
-export function usePassageTabState({ requiredStages, naesinRequiredRounds, round1Completed }: UsePassageTabStateOptions) {
+export function usePassageTabState({ requiredStages, naesinRequiredRounds, round1Completed, subStageBests }: UsePassageTabStateOptions) {
   const hasRound2 = (naesinRequiredRounds ?? 1) >= 2;
   const [currentRound, setCurrentRound] = useState<1 | 2>(1);
 
@@ -37,8 +38,18 @@ export function usePassageTabState({ requiredStages, naesinRequiredRounds, round
     return counts;
   }, [stages]);
 
-  const firstTabValue = uniqueStages.length > 0 ? STAGE_TAB_MAP[uniqueStages[0]].value : 'fill-blanks';
-  const [activeTab, setActiveTab] = useState(firstTabValue);
+  // 이미 통과(80점+)한 서브 단계는 건너뛰고 첫 번째 미통과 탭에서 시작
+  const initialTab = useMemo(() => {
+    if (subStageBests && uniqueStages.length > 0) {
+      const firstUnpassed = uniqueStages.find(
+        (s) => (subStageBests[s] ?? 0) < 80
+      );
+      if (firstUnpassed) return STAGE_TAB_MAP[firstUnpassed].value;
+    }
+    return uniqueStages.length > 0 ? STAGE_TAB_MAP[uniqueStages[0]].value : 'fill-blanks';
+  }, [subStageBests, uniqueStages]);
+
+  const [activeTab, setActiveTab] = useState(initialTab);
   const [currentPassageIndex, setCurrentPassageIndex] = useState(0);
   const [showOnboarding, setShowOnboarding] = useState(false);
   const [stageDirection, setStageDirection] = useState<PassageStageType | null>(null);

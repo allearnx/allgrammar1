@@ -26,15 +26,16 @@ interface PassageTabProps {
   translationSentencesPerPage?: number;
   naesinRequiredRounds?: number;
   round1Completed?: boolean;
+  subStageBests?: Record<string, number | null>;
 }
 
-export function PassageTab({ passages, unitId, onStageComplete, requiredStages, translationSentencesPerPage, naesinRequiredRounds, round1Completed }: PassageTabProps) {
+export function PassageTab({ passages, unitId, onStageComplete, requiredStages, translationSentencesPerPage, naesinRequiredRounds, round1Completed, subStageBests }: PassageTabProps) {
   const augmentedStages = useMemo(
     () => augmentPassageStages(requiredStages, passages),
     [requiredStages, passages],
   );
 
-  const s = usePassageTabState({ requiredStages: augmentedStages, naesinRequiredRounds, round1Completed });
+  const s = usePassageTabState({ requiredStages: augmentedStages, naesinRequiredRounds, round1Completed, subStageBests });
 
   if (passages.length === 0) {
     return (

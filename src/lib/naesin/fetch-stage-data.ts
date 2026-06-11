@@ -72,13 +72,20 @@ async function fetchPassageData(supabase: SupabaseClient, userId: string, unitId
   const [passageRes, settingsRes, progressRes] = await Promise.all([
     supabase.from('naesin_passages').select('*').eq('unit_id', unitId).order('sort_order'),
     supabase.from('naesin_student_settings').select('passage_required_stages, translation_sentences_per_page').eq('student_id', userId).single(),
-    supabase.from('naesin_student_progress').select('passage_completed').eq('student_id', userId).eq('unit_id', unitId).single(),
+    supabase.from('naesin_student_progress').select('passage_completed, passage_fill_blanks_best, passage_ordering_best, passage_translation_best, passage_grammar_vocab_best').eq('student_id', userId).eq('unit_id', unitId).single(),
   ]);
+  const p = progressRes.data;
   return {
     passages: passageRes.data || [],
     passageRequiredStages: (settingsRes.data?.passage_required_stages as string[] | null) ?? ['fill_blanks', 'translation'],
     translationSentencesPerPage: (settingsRes.data?.translation_sentences_per_page as number | null) ?? 10,
-    passageRound1Completed: progressRes.data?.passage_completed ?? false,
+    passageRound1Completed: p?.passage_completed ?? false,
+    passageSubStageBests: {
+      fill_blanks: (p?.passage_fill_blanks_best as number | null) ?? null,
+      ordering: (p?.passage_ordering_best as number | null) ?? null,
+      translation: (p?.passage_translation_best as number | null) ?? null,
+      grammar_vocab: (p?.passage_grammar_vocab_best as number | null) ?? null,
+    },
   };
 }
 

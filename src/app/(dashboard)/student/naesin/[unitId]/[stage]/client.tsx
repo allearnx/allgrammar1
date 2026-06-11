@@ -88,6 +88,7 @@ interface StageData {
   reviewContent?: NaesinLastReviewContent[];
   naesinRequiredRounds?: number;
   passageRound1Completed?: boolean;
+  passageSubStageBests?: Record<string, number | null>;
   dialogueRound1Completed?: boolean;
 }
 
@@ -130,6 +131,7 @@ const STAGE_RENDERERS: Record<StageKey, StageRenderer> = {
       translationSentencesPerPage={stageData.translationSentencesPerPage}
       naesinRequiredRounds={stageData.naesinRequiredRounds}
       round1Completed={stageData.passageRound1Completed}
+      subStageBests={stageData.passageSubStageBests}
     />
   ),
   dialogue: ({ stageData, unitId, onStageComplete }) => (
