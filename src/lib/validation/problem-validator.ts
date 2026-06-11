@@ -9,6 +9,10 @@ const CIRCLED_TO_DIGIT: Record<string, string> = {
 const CIRCLED_PATTERN = /^[①②③④⑤⑥⑦⑧⑨⑩]$/;
 const CIRCLED_GLOBAL = /[①②③④⑤⑥⑦⑧⑨⑩]/g;
 
+// PDF 추출 아티팩트
+const SUPERSCRIPT_NUMBERS = /[⁰¹²³⁴⁵⁶⁷⁸⁹]+[⁾)]\s*/g;
+const FFFD_CHAR = /\ufffd/g;
+
 // ── Types ──
 
 export type IssueSeverity = 'error' | 'warning';
@@ -299,8 +303,30 @@ export function sanitizeQuestions(
   questions: NaesinProblemQuestion[],
   answerKey?: (string | number | null)[],
 ): { questions: NaesinProblemQuestion[]; answerKey: (string | number | null)[] } {
-  const sanitized = questions.map((q) => {
+  const sanitized = questions.map((q, qi) => {
     const out = { ...q };
+
+    // PDF artifact cleanup: superscript numbering (¹⁾ ²⁵⁾) and U+FFFD replacement chars
+    if (typeof out.question === 'string') {
+      out.question = out.question.replace(SUPERSCRIPT_NUMBERS, '').replace(FFFD_CHAR, '');
+    }
+    if (typeof out.explanation === 'string') {
+      out.explanation = out.explanation.replace(SUPERSCRIPT_NUMBERS, '').replace(FFFD_CHAR, '');
+    }
+    if (Array.isArray(out.options)) {
+      out.options = out.options.map((opt) =>
+        typeof opt === 'string' ? opt.replace(SUPERSCRIPT_NUMBERS, '').replace(FFFD_CHAR, '') : opt,
+      );
+    }
+
+    // Backfill empty answer from answerKey (PDF extraction sometimes splits answer into answer_key only)
+    if (answerKey && (!out.answer || (typeof out.answer === 'string' && out.answer.trim() === ''))) {
+      const akVal = answerKey[qi];
+      if (akVal != null && String(akVal).trim() !== '') {
+        out.answer = String(akVal);
+      }
+    }
+
     const isMcq = Array.isArray(out.options) && out.options.length > 0;
 
     // Flatten nested array options first (needed for text→number matching)
@@ -501,6 +527,12 @@ export function validateBeforeSave(
           errors.push(issue('error', n, 'EMPTY_SUBPART_ANSWER', `${n}번: subPart "${sp.label}" 정답이 비어있습니다.`));
         }
       }
+    }
+
+    // WARNING: U+FFFD replacement character (PDF 추출 깨진 문자)
+    const fullJson = JSON.stringify(q);
+    if (fullJson.includes('\ufffd')) {
+      warnings.push(issue('warning', n, 'FFFD_CHAR', `${n}번: 깨진 문자(U+FFFD)가 포함되어 있습니다. PDF 추출 오류일 수 있습니다.`));
     }
 
     // WARNING: subjective without format hint (서술형인데 답안 형식 안내 없음)

@@ -304,6 +304,68 @@ describe('sanitizeQuestions', () => {
       expect(typeof questions[0].answer).toBe('string');
     });
   });
+
+  describe('PDF 추출 아티팩트 제거', () => {
+    it('위첨자 번호 (¹⁾, ²⁵⁾) 제거', () => {
+      const q: NaesinProblemQuestion = {
+        number: 1,
+        question: '¹⁾ 다음 문장을 해석하시오.\n²⁾ She is a teacher.',
+        answer: 'She is a teacher.',
+        explanation: '¹⁾ 해석: 그녀는 선생님이다.',
+      };
+      const { questions } = sanitizeQuestions([q]);
+      expect(questions[0].question).toBe('다음 문장을 해석하시오.\nShe is a teacher.');
+      expect(questions[0].explanation).toBe('해석: 그녀는 선생님이다.');
+    });
+
+    it('U+FFFD 깨진 문자 제거', () => {
+      const q: NaesinProblemQuestion = {
+        number: 1,
+        question: 'test',
+        answer: '2',
+        options: ['a', 'b', 'c', 'd', 'e'],
+        explanation: '③은 틀\ufffd렸고 ⑤는 올바릅니다.',
+      };
+      const { questions } = sanitizeQuestions([q]);
+      expect(questions[0].explanation).toBe('③은 틀렸고 ⑤는 올바릅니다.');
+    });
+
+    it('선택지 내 위첨자/FFFD도 제거', () => {
+      const q: NaesinProblemQuestion = {
+        number: 1,
+        question: 'test',
+        answer: '1',
+        options: ['¹⁾ run', 'ran\ufffd', 'running', 'runs', 'to run'],
+      };
+      const { questions } = sanitizeQuestions([q]);
+      expect(questions[0].options![0]).toBe('run');
+      expect(questions[0].options![1]).toBe('ran');
+    });
+  });
+
+  describe('빈 정답 answer_key 복구', () => {
+    it('answer가 비어있고 answerKey에 값이 있으면 복사', () => {
+      const q: NaesinProblemQuestion = {
+        number: 1,
+        question: '빈칸에 들어갈 말을 고르시오.',
+        answer: '',
+        options: ['a', 'b', 'c', 'd', 'e'],
+      };
+      const { questions } = sanitizeQuestions([q], ['3']);
+      expect(questions[0].answer).toBe('3');
+    });
+
+    it('answer가 이미 있으면 answerKey로 덮어쓰지 않음', () => {
+      const q: NaesinProblemQuestion = {
+        number: 1,
+        question: 'test',
+        answer: '2',
+        options: ['a', 'b', 'c', 'd', 'e'],
+      };
+      const { questions } = sanitizeQuestions([q], ['3']);
+      expect(questions[0].answer).toBe('2');
+    });
+  });
 });
 
 describe('validateBeforeSave', () => {
@@ -385,6 +447,20 @@ describe('validateBeforeSave', () => {
       const result = validateBeforeSave([q]);
       expect(result.valid).toBe(true);
       expect(result.warnings.some((w) => w.code === 'NO_EXPLANATION')).toBe(true);
+    });
+  });
+
+  describe('U+FFFD 경고', () => {
+    it('깨진 문자가 포함되면 경고', () => {
+      const q: NaesinProblemQuestion = {
+        number: 1,
+        question: 'test',
+        answer: '2',
+        options: ['a', 'b', 'c', 'd', 'e'],
+        explanation: '틀\ufffd렸고',
+      };
+      const result = validateBeforeSave([q]);
+      expect(result.warnings.some((w) => w.code === 'FFFD_CHAR')).toBe(true);
     });
   });
 });
