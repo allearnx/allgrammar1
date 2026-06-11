@@ -194,11 +194,17 @@ export function NaesinStageView({
 }: NaesinStageViewProps) {
   const router = useRouter();
   const [refinedStage, setRefinedStage] = useState<string>(currentStage);
+  const [localStatuses, setLocalStatuses] = useState<NaesinStageStatuses>(stageStatuses);
 
-  // Reset refinedStage when navigating to a different stage
+  // Reset refinedStage and sync statuses when navigating to a different stage
   useEffect(() => {
     setRefinedStage(currentStage);
   }, [currentStage]);
+
+  // Sync server → local when props change (e.g. page navigation)
+  useEffect(() => {
+    setLocalStatuses(stageStatuses);
+  }, [stageStatuses]);
 
   const handleActiveSheetChange = useCallback((category: string) => {
     if (category === 'external_passage' || category === 'eng_eng_def') {
@@ -210,10 +216,14 @@ export function NaesinStageView({
 
   useLearningSession('naesin', unit.id, refinedStage);
 
-  function handleStageComplete() {
+  const handleStageComplete = useCallback(() => {
     // router.refresh()를 즉시 호출하면 채점 결과 등 클라이언트 state가 날아감.
-    // 다음 스테이지로 이동하면 서버에서 최신 데이터를 가져오므로 별도 refresh 불필요.
-  }
+    // 대신 로컬 상태만 갱신하여 네비게이션 바에 완료 체크가 즉시 표시되도록 한다.
+    setLocalStatuses((prev) => ({
+      ...prev,
+      [currentStage]: 'completed' as const,
+    }));
+  }, [currentStage]);
 
   const currentConfig = STAGE_CONFIG.find((s) => s.key === currentStage);
   const renderStage = STAGE_RENDERERS[currentStage];
@@ -229,7 +239,7 @@ export function NaesinStageView({
 
       <StageNavBar
         stages={STAGE_CONFIG}
-        stageStatuses={stageStatuses}
+        stageStatuses={localStatuses}
         currentStage={currentStage}
         unitId={unit.id}
       />
