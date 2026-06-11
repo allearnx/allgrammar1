@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo } from 'react';
+import { useMemo, useCallback, useRef } from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { toast } from 'sonner';
 import { fetchWithToast } from '@/lib/fetch-with-toast';
@@ -57,6 +57,21 @@ export function PassageTab({ passages, unitId, onStageComplete, requiredStages, 
   const grammarVocabItems = (passage.grammar_vocab_items ?? []) as GrammarVocabItem[];
   const hasGrammarVocab = grammarVocabItems.length > 0;
 
+  // 통과한 서브 단계 추적 (80점 이상)
+  const passedSubStages = useRef(new Set<string>());
+
+  const advanceToNextTab = useCallback((currentType: string) => {
+    const idx = s.uniqueStages.indexOf(currentType as typeof s.uniqueStages[number]);
+    if (idx >= 0 && idx < s.uniqueStages.length - 1) {
+      const next = s.uniqueStages[idx + 1];
+      const nextTab = STAGE_TAB_MAP[next];
+      if (nextTab && !passedSubStages.current.has(next)) {
+        s.handleTabChange(nextTab.value);
+        toast.success(`다음 단계: ${nextTab.label}`, { duration: 3000 });
+      }
+    }
+  }, [s]);
+
   async function savePassageProgress(type: 'fill_blanks' | 'ordering' | 'translation' | 'grammar_vocab', score: number, difficulty?: string) {
     try {
       const data = await fetchWithToast<{ passageCompleted?: boolean }>('/api/naesin/passage/progress', {
@@ -71,6 +86,10 @@ export function PassageTab({ passages, unitId, onStageComplete, requiredStages, 
           toast.success('교과서 암기 단계를 완료했습니다!');
         }
         onStageComplete();
+      } else if (score >= 80) {
+        // 서브 단계 통과 → 다음 탭으로 자동 전환
+        passedSubStages.current.add(type);
+        advanceToNextTab(type);
       }
     } catch {
       // error already toasted by fetchWithToast
