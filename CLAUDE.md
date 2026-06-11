@@ -142,6 +142,13 @@
 - 테스트 5건 추가 (problem-validator.test.ts): 41 tests 전체 통과
 - 원인: 수동태 step2 같은 복합 서술형을 새로 만들면 subParts 없이 저장되어 빈칸별 독립 채점 불가
 
+### 41aa130 — 스테이지 완료 시 네비게이션 바 즉시 갱신
+- `handleStageComplete`가 비어있어 완료해도 상단 nav bar에 반영 안 되던 문제 수정
+- `stageStatuses`를 `useState`로 로컬 관리, 완료 시 해당 스테이지를 'completed'로 갱신
+- `router.refresh()` 없이 클라이언트 상태만 업데이트하여 채점 결과 등 기존 state 유지
+- 서버 props 변경 시(페이지 이동) `useEffect`로 자동 동기화
+- 원인: 학생 이서하(올라영) — 단어 암기 완료 후 "다음으로 넘어가기"가 안 보임
+
 ## 재발 방지 정리
 
 | 문제 | 일회성 수정 | 시스템적 재발 방지 |
@@ -153,6 +160,7 @@
 | 타이포그래피 문자 | - | 저장 시 자동 변환 |
 | 테이블 깨짐 | - | FormattedText 테이블 파싱 |
 | 복합 답안 subParts 누락 | - | sanitizeQuestions 자동 분할 |
+| 스테이지 완료 미반영 | - | handleStageComplete 로컬 상태 갱신 |
 
 ### 검증 규칙 추가
 - answer_key 형식 통일 필요: 일부 시트는 string[], 일부는 {answer, explanation}[]
