@@ -8,15 +8,14 @@ const schema = z.object({
 });
 
 export const POST = createApiHandler(
-  { roles: ['boss'], schema },
-  async ({ body, request }) => {
+  { roles: ['boss', 'admin', 'teacher'], schema },
+  async ({ body, request, user }) => {
     const { studentId } = body;
     const adminClient = createAdminClient();
 
-    // boss는 모든 학원 학생 조회 가능
     const { data: student } = await adminClient
       .from('users')
-      .select('id, email, role')
+      .select('id, email, role, academy_id')
       .eq('id', studentId)
       .single();
 
@@ -28,7 +27,12 @@ export const POST = createApiHandler(
       return NextResponse.json({ error: '학생 계정만 대리 로그인할 수 있습니다.' }, { status: 400 });
     }
 
-    // 2. Magic link 생성
+    // admin은 같은 학원 학생만 조회 가능
+    if (user.role !== 'boss' && student.academy_id !== user.academy_id) {
+      return NextResponse.json({ error: '다른 학원의 학생은 조회할 수 없습니다.' }, { status: 403 });
+    }
+
+    // Magic link 생성
     const { data: linkData, error } = await adminClient.auth.admin.generateLink({
       type: 'magiclink',
       email: student.email,

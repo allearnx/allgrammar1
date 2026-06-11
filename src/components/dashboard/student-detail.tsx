@@ -136,7 +136,7 @@ export async function StudentDetail({ user, studentId, naesinData }: Props) {
                 <p className="text-muted-foreground">{student.email}</p>
               </div>
               <div className="flex items-center gap-2">
-                {user.role === 'boss' && <ImpersonateButton studentId={studentId} />}
+                {user.role !== 'student' && <ImpersonateButton studentId={studentId} />}
                 <ParentShareButton studentId={studentId} />
                 <Badge variant={student.is_active ? 'default' : 'secondary'}>
                   {student.is_active ? '활성' : '비활성'}
