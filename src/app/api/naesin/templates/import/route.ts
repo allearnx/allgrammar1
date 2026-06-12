@@ -25,13 +25,14 @@ export const POST = createApiHandler(
       ? sanitizeQuestions(template.questions, template.answer_key)
       : { questions: template.questions || [], answerKey: template.answer_key || [] };
 
+    // 템플릿 import는 검증 오류가 있어도 차단하지 않음 (sanitize만 적용)
+    // 기존 템플릿에 빈 정답 등 이슈가 있을 수 있으므로 경고만 기록
+    let validationWarnings: string[] = [];
     if (hasQ) {
       const validation = validateBeforeSave(sq);
       if (!validation.valid) {
-        return NextResponse.json(
-          { error: '템플릿 데이터에 오류가 있습니다.', issues: validation.errors },
-          { status: 422 },
-        );
+        validationWarnings = validation.errors.map((e) => e.message);
+        console.warn(`[template-import] ${template.title}: ${validationWarnings.join(', ')}`);
       }
     }
 
@@ -52,6 +53,6 @@ export const POST = createApiHandler(
       .insert(rows)
       .select()) ?? [];
 
-    return NextResponse.json({ count: inserted.length, sheets: inserted });
+    return NextResponse.json({ count: inserted.length, sheets: inserted, ...(validationWarnings.length > 0 && { warnings: validationWarnings }) });
   }
 );
