@@ -17,7 +17,7 @@ export const POST = createApiHandler(
     // Get session
     const { data: session } = await supabase
       .from('naesin_grammar_chat_sessions')
-      .select('*')
+      .select('id, student_id, lesson_id, messages, turn_count, max_turns, is_complete, current_question_id, questions_used')
       .eq('id', sessionId)
       .eq('student_id', user.id)
       .single();
@@ -34,7 +34,7 @@ export const POST = createApiHandler(
     const { data: currentQuestion } = session.current_question_id
       ? await supabase
           .from('naesin_grammar_chat_questions')
-          .select('*')
+          .select('id, question_text, grammar_concept, hint, expected_answer_keywords, sort_order')
           .eq('id', session.current_question_id)
           .single()
       : { data: null };
@@ -56,7 +56,7 @@ export const POST = createApiHandler(
     // Get all questions to find the next one
     const { data: allQuestions } = await supabase
       .from('naesin_grammar_chat_questions')
-      .select('*')
+      .select('id, question_text, grammar_concept, hint, expected_answer_keywords, sort_order')
       .eq('lesson_id', session.lesson_id)
       .order('sort_order');
 

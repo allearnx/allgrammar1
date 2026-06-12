@@ -9,7 +9,7 @@ export const POST = createApiHandler(
 
     const { data: existing } = await supabase
       .from('naesin_student_progress')
-      .select('*')
+      .select('grammar_video_completed, grammar_text_read')
       .eq('student_id', user.id)
       .eq('unit_id', unitId)
       .single();

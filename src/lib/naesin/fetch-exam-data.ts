@@ -1,5 +1,6 @@
 import { createAdminClient } from '@/lib/supabase/admin';
 import type { NaesinExamAssignment, NaesinUnit } from '@/types/database';
+import { NAESIN_EXAM_ASSIGNMENTS_COLUMNS } from '@/types/naesin';
 
 export interface NaesinExamData {
   textbookId: string;
@@ -30,7 +31,7 @@ export async function fetchNaesinExamData(studentId: string): Promise<NaesinExam
       .order('sort_order'),
     admin
       .from('naesin_exam_assignments')
-      .select('*')
+      .select(NAESIN_EXAM_ASSIGNMENTS_COLUMNS)
       .eq('student_id', studentId)
       .eq('textbook_id', setting.textbook_id)
       .order('exam_round'),

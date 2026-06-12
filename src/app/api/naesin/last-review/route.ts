@@ -12,7 +12,7 @@ export const GET = createApiHandler(
 
     const data = dbResult(await supabase
       .from('naesin_last_review_content')
-      .select('*')
+      .select('id, unit_id, content_type, title, youtube_url, youtube_video_id, pdf_url, text_content, sort_order, created_at')
       .eq('unit_id', unitId)
       .order('sort_order'));
     return NextResponse.json(data);

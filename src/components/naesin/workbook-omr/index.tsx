@@ -53,7 +53,7 @@ export function WorkbookOmrClient({ workbooks }: WorkbookOmrClientProps) {
       const supabase = createClient();
       const { data } = await supabase
         .from('naesin_workbook_omr_attempts')
-        .select('*')
+        .select('id, omr_sheet_id, student_answers, correct_count, total_questions, score_percent, created_at')
         .eq('omr_sheet_id', sheetId)
         .order('created_at', { ascending: false });
       setAttempts((data || []) as NaesinWorkbookOmrAttempt[]);

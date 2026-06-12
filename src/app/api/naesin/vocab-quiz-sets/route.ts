@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { createApiHandler, dbResult } from '@/lib/api';
 import { vocabQuizSetCreateSchema, idSchema } from '@/lib/api/schemas';
+import { NAESIN_VOCAB_QUIZ_SETS_COLUMNS } from '@/types/naesin';
 
 const ADMIN_ROLES = ['teacher', 'admin', 'boss'] as const;
 
@@ -12,7 +13,7 @@ export const GET = createApiHandler(
 
     const data = dbResult(await supabase
       .from('naesin_vocab_quiz_sets')
-      .select('*')
+      .select(NAESIN_VOCAB_QUIZ_SETS_COLUMNS)
       .eq('unit_id', unitId)
       .order('set_order'));
     return NextResponse.json(data);

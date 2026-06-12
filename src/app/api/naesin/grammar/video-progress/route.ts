@@ -13,7 +13,7 @@ export const POST = createApiHandler(
     // Get existing progress
     const { data: existing } = await supabase
       .from('naesin_grammar_video_progress')
-      .select('*')
+      .select('max_position_reached, duration, cumulative_watch_seconds, last_position')
       .eq('student_id', user.id)
       .eq('lesson_id', lessonId)
       .single();

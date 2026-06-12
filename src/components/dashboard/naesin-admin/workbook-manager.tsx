@@ -35,7 +35,7 @@ export function WorkbookManager() {
       const supabase = createClient();
       const { data } = await supabase
         .from('naesin_workbooks')
-        .select('*')
+        .select('id, title, publisher, grade, cover_image_url, sort_order, is_active, created_at')
         .order('grade')
         .order('sort_order');
       setWorkbooks((data || []) as NaesinWorkbook[]);

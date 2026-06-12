@@ -35,7 +35,7 @@ export default async function PublicReportPage({ params }: Props) {
 
   const { data: row } = await supabase
     .from('weekly_reports')
-    .select('*')
+    .select('id, student_id, week_start, week_end, stats, created_at')
     .eq('id', reportId)
     .single();
 

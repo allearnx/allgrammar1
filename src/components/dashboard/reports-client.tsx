@@ -73,7 +73,7 @@ export function ReportsClient({ students }: ReportsClientProps) {
       const supabase = createClient();
       const { data, error } = await supabase
         .from('weekly_reports')
-        .select('*')
+        .select('id, student_id, week_start, week_end, stats, created_at')
         .eq('student_id', selectedStudent)
         .order('week_start', { ascending: false })
         .limit(10);

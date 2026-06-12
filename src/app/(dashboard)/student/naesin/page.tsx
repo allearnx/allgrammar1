@@ -43,7 +43,7 @@ export default async function NaesinPage() {
   // Get all active textbooks
   const { data: textbooks } = await supabase
     .from('naesin_textbooks')
-    .select('*')
+    .select('id, display_name, publisher, grade, sort_order, cover_image_url, is_active, created_at')
     .eq('is_active', true)
     .order('grade')
     .order('sort_order');

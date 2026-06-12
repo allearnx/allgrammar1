@@ -34,7 +34,7 @@ export const POST = createApiHandler(
     // Get questions for this lesson
     let { data: questions } = await supabase
       .from('naesin_grammar_chat_questions')
-      .select('*')
+      .select('id, question_text, grammar_concept, hint, expected_answer_keywords, sort_order')
       .eq('lesson_id', lessonId)
       .order('sort_order');
 
@@ -124,7 +124,7 @@ ${lesson.text_content ? `레슨 내용:\n${lesson.text_content}` : ''}
         // Re-fetch the inserted questions
         const { data: newQuestions } = await supabase
           .from('naesin_grammar_chat_questions')
-          .select('*')
+          .select('id, question_text, grammar_concept, hint, expected_answer_keywords, sort_order')
           .eq('lesson_id', lessonId)
           .order('sort_order');
 

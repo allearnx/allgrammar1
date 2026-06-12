@@ -47,7 +47,7 @@ export async function StudentsList({ user, basePath, searchQuery }: Props) {
 
   const query = admin
     .from('users')
-    .select('*')
+    .select('id, full_name, email, is_active, academy_id, created_at')
     .eq('role', 'student')
     .order('full_name');
 

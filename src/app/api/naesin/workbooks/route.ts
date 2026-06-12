@@ -9,7 +9,7 @@ export const GET = createApiHandler(
   async ({ supabase }) => {
     const data = dbResult(await supabase
       .from('naesin_workbooks')
-      .select('*')
+      .select('id, title, publisher, grade, cover_image_url, sort_order, is_active, created_at')
       .eq('is_active', true)
       .order('grade')
       .order('sort_order'));

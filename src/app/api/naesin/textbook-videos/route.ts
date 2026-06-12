@@ -7,6 +7,7 @@ import { createAdminClient } from '@/lib/supabase/admin';
 import { cached, TTL } from '@/lib/cache/server-cache';
 import { cacheTags } from '@/lib/cache/tags';
 import { invalidateUnitContent } from '@/lib/cache/invalidate';
+import { NAESIN_TEXTBOOK_VIDEOS_COLUMNS } from '@/types/naesin';
 
 const ADMIN_ROLES = ['teacher', 'admin', 'boss'] as const;
 
@@ -15,7 +16,7 @@ const getCachedTextbookVideos = cached(
     const admin = createAdminClient();
     const { data } = await admin
       .from('naesin_textbook_videos')
-      .select('*')
+      .select(NAESIN_TEXTBOOK_VIDEOS_COLUMNS)
       .eq('unit_id', unitId)
       .order('sort_order');
     return data || [];

@@ -10,7 +10,7 @@ export const GET = createApiHandler(
 
     const { data } = await supabase
       .from('naesin_exam_dates')
-      .select('*')
+      .select('id, student_id, textbook_id, exam_date, created_at, updated_at')
       .eq('student_id', user.id)
       .eq('textbook_id', textbookId)
       .single();

@@ -21,7 +21,7 @@ export const POST = createApiHandler(
 
     const { data: existing } = await supabase
       .from('naesin_student_progress')
-      .select('*')
+      .select('passage_fill_blanks_best, passage_ordering_best, passage_translation_best, passage_grammar_vocab_best, round2_passage_fill_blanks_best, round2_passage_ordering_best, round2_passage_translation_best, round2_passage_grammar_vocab_best')
       .eq('student_id', user.id)
       .eq('unit_id', unitId)
       .single();

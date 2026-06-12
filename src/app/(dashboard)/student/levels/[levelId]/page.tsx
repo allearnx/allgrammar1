@@ -19,7 +19,7 @@ export default async function LevelDetailPage({ params }: Props) {
 
   const { data: level } = await supabase
     .from('levels')
-    .select('*')
+    .select('id, level_number, title, title_ko, description')
     .eq('id', levelId)
     .single();
 
@@ -27,7 +27,7 @@ export default async function LevelDetailPage({ params }: Props) {
 
   const { data: grammars } = await supabase
     .from('grammars')
-    .select('*')
+    .select('id, title, description, youtube_video_id, sort_order')
     .eq('level_id', levelId)
     .order('sort_order');
 

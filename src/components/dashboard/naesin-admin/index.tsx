@@ -47,7 +47,7 @@ export function NaesinAdminClient({ textbooks: initialTextbooks, initialTab, can
       const supabase = createClient();
       const { data } = await supabase
         .from('naesin_units')
-        .select('*')
+        .select('id, textbook_id, unit_number, title, sort_order, is_active, created_at')
         .eq('textbook_id', textbookId)
         .order('sort_order');
       setUnits(data || []);

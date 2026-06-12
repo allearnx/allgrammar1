@@ -12,7 +12,7 @@ export const POST = createApiHandler(
 
     const { data: existing } = await supabase
       .from('naesin_ep_video_progress')
-      .select('*')
+      .select('max_position_reached, duration, cumulative_watch_seconds, last_position')
       .eq('student_id', user.id)
       .eq('sheet_id', sheetId)
       .single();
@@ -58,7 +58,7 @@ export const GET = createApiHandler(
 
     const { data } = await supabase
       .from('naesin_ep_video_progress')
-      .select('*')
+      .select('id, watch_percent, max_position_reached, duration, cumulative_watch_seconds, last_position, completed')
       .eq('student_id', user.id)
       .eq('sheet_id', sheetId)
       .single();

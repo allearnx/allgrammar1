@@ -11,7 +11,7 @@ export const POST = createApiHandler(
     // Get or create progress
     const { data: existing } = await supabase
       .from('naesin_student_progress')
-      .select('*')
+      .select('vocab_flashcard_count, vocab_quiz_score, vocab_spelling_score')
       .eq('student_id', user.id)
       .eq('unit_id', unitId)
       .single();

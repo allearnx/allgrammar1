@@ -13,7 +13,7 @@ const getCachedSimilarProblems = cached(
     const admin = createAdminClient();
     let query = admin
       .from('naesin_similar_problems')
-      .select('*')
+      .select('id, unit_id, grammar_tag, question_data, status, reviewed_by, rejection_reason, created_at, updated_at')
       .eq('unit_id', unitId)
       .order('created_at', { ascending: false });
 

@@ -3,6 +3,7 @@ import { createApiHandler, dbResult } from '@/lib/api';
 import { examAssignmentUpsertSchema, examAssignmentDeleteSchema } from '@/lib/api/schemas';
 import { requireAcademyScope } from '@/lib/api/require-academy-scope';
 import { invalidateStudent } from '@/lib/cache/invalidate';
+import { NAESIN_EXAM_ASSIGNMENTS_COLUMNS } from '@/types/naesin';
 
 export const GET = createApiHandler(
   {},
@@ -26,7 +27,7 @@ export const GET = createApiHandler(
 
     const data = dbResult(await supabase
       .from('naesin_exam_assignments')
-      .select('*')
+      .select(NAESIN_EXAM_ASSIGNMENTS_COLUMNS)
       .eq('student_id', studentId)
       .eq('textbook_id', textbookId)
       .order('exam_round'));

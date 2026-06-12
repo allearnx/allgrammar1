@@ -17,7 +17,7 @@ export const GET = createApiHandler(
 
     const data = dbResult(await supabase
       .from('naesin_workbook_omr_sheets')
-      .select('*')
+      .select('id, workbook_id, title, total_questions, answer_key, sort_order, created_by, created_at')
       .eq('workbook_id', workbookId)
       .order('sort_order'));
     return NextResponse.json(data);
