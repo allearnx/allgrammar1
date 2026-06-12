@@ -1,6 +1,50 @@
 # Changelog — 올라영 (AllGrammar)
 
-총 750+ 커밋 | 2026-03-01 ~ 현재
+총 820+ 커밋 | 2026-03-01 ~ 현재
+
+---
+
+## 2026-06-08 ~ 06-12
+
+### 학생 UX 안정화 (8건)
+- **네트워크 오류 자동 재시도**: fetchWithToast에 retry 옵션 추가 (exponential backoff), 6개 제출 경로 적용
+- **25문항 묶음 자동 저장**: 인터랙티브 모드에서 100문항 시트 중간 유실 방지
+- **유니코드 오채점 수정**: 특수 공백/하이픈/따옴표 → ASCII 정규화
+- **수동태 step2 채점 개선**: subParts 변환 + acceptedAnswers 추가 (윤지율 +5점)
+- **타이포그래피 문자 정규화**: 저장 시 스마트 따옴표/대시 자동 변환
+- **마크다운 테이블 렌더링**: FormattedText에 파이프 테이블 → HTML 테이블 파싱 추가
+- **복합 답안 자동 subParts 변환**: 슬래시(" / ") 구분 서술형 답안 자동 분할
+- **스테이지 완료 즉시 갱신**: 네비게이션 바 + "다음 단계로 이동" 배너 표시
+
+### 학생 네비게이션 수정
+- 교과서 암기 서브 단계 자동 전환 (통과 시 다음 탭)
+- 이미 통과한 서브 단계 건너뛰기
+- 학생 화면 보기 버튼을 admin/teacher에도 표시
+
+### Supabase GRANT 마이그레이션
+- 전체 71개 테이블 명시적 GRANT 일괄 적용 (10/30 기한 대응)
+
+### 검증 게이트 안정화
+- validateBeforeSave 완전 제거 → sanitizeQuestions(자동 정규화)만 유지
+- 이미지 참조 문항 자동 삭제: 인라인 설명 없는 "다음 그림을 보고" 문항 93건 삭제 + 재발 방지
+
+### 자동 헬스체크
+- 매일 새벽 3시 cron 기반 Supabase/API 상태 점검 + 텔레그램 알림
+
+### select('*') → 명시적 컬럼 전환 (egress 절감)
+- ESLint `supabase/no-select-wildcard` 규칙 기반 일괄 전환
+- Group 1-2: naesin/voca 고빈도 학생 페이지 (32건)
+- Group 3-4: naesin API + 대시보드/공개 페이지 (33건)
+- Group 5-6: 공개 페이지 + boss 관리 + 결제 (29파일)
+- 컬럼 상수: types/naesin.ts, types/voca.ts, types/public.ts, types/billing.ts
+
+### 기타
+- retryCorrectAnswers Zod 스키마 완화 (100점인데 결과 저장 실패 수정)
+- 재채점 로직 normalizeSeparators 누락 수정
+- 일회성 진단/수정 스크립트 62개 정리
+- 오답 아카이브 기준을 시험차수 단위로 변경
+- PDF 정답표 병렬 추출 + 오답 재풀이/자동 아카이브
+- 시간표 페이지 업데이트, 마감 배지 도장 스타일 변경
 
 ---
 
@@ -280,4 +324,4 @@
 
 ---
 
-*총 750+ 커밋 | 3개월 간 1인 개발 + Claude Code*
+*총 820+ 커밋 | 3.5개월 간 1인 개발 + Claude Code*
