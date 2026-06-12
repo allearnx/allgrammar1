@@ -6,7 +6,7 @@ import { regradeSheet } from '@/lib/naesin/regrade-sheet';
 import { syncSheetToTemplate } from '@/lib/naesin/sync-template';
 import type { NaesinProblemQuestion } from '@/types/naesin';
 import { SHEET_ADMIN_LITE_COLUMNS } from '@/types/naesin';
-import { sanitizeQuestions, validateBeforeSave } from '@/lib/validation/problem-validator';
+import { sanitizeQuestions } from '@/lib/validation/problem-validator';
 import { spotCheckMcqAnswers } from '@/lib/validation/problem-answer-check';
 import { invalidateUnitContent } from '@/lib/cache/invalidate';
 import Anthropic from '@anthropic-ai/sdk';
@@ -55,17 +55,6 @@ export const POST = createApiHandler(
       ? sanitizeQuestions(rawQuestions, rawAnswerKey as (string | number | null)[] | undefined)
       : { questions: rawQuestions || [], answerKey: rawAnswerKey || [] };
 
-    // Validate: log warnings but don't block save
-    const extras: Record<string, unknown> = {};
-    if (hasQuestions) {
-      const validation = validateBeforeSave(sanitizedQuestions as NaesinProblemQuestion[]);
-      if (!validation.valid) {
-        const msgs = validation.errors.map((e) => e.message);
-        console.warn(`[problems.post] ${title}: ${msgs.join(', ')}`);
-        extras.validationWarnings = msgs;
-      }
-    }
-
     const insertData: Record<string, unknown> = {
       unit_id: unitId || null,
       textbook_id: textbookId || null,
@@ -85,6 +74,7 @@ export const POST = createApiHandler(
       .single());
 
     // AI 정답 스팟체크 (새 시트 생성 시)
+    const extras: Record<string, unknown> = {};
     if (hasQuestions) {
       try {
         const aiWarnings = await spotCheckMcqAnswers(
@@ -124,12 +114,6 @@ export const PATCH = createApiHandler(
       updates.questions = sq;
       updates.answer_key = sak;
 
-      // Validate: log warnings but don't block save
-      const validation = validateBeforeSave(sq);
-      if (!validation.valid) {
-        const msgs = validation.errors.map((e) => e.message);
-        console.warn(`[problems.patch] ${id}: ${msgs.join(', ')}`);
-      }
     }
 
     const data = dbResult(await supabase
