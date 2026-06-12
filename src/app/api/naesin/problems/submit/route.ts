@@ -91,7 +91,7 @@ export const POST = createApiHandler(
     // Merge retryCorrect items into wrong_answers JSONB for tracking
     const allWrongAnswers = [
       ...wrongAnswers,
-      ...(retryCorrectAnswers ?? []).map((rc: { number: number; userAnswer: string | number; correctAnswer: string | number; question?: string }) => ({
+      ...(retryCorrectAnswers ?? []).map((rc) => ({
         ...rc,
         retryCorrect: true,
       })),

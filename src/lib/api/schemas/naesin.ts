@@ -57,9 +57,9 @@ export const problemSubmitSchema = z.object({
   })).nullish(),
   retryCorrectAnswers: z.array(z.object({
     number: z.number(),
-    userAnswer: z.union([z.string(), z.number()]),
-    correctAnswer: z.union([z.string(), z.number()]),
-    question: z.string(),
+    userAnswer: z.union([z.string(), z.number()]).nullable(),
+    correctAnswer: z.unknown(),
+    question: z.string().optional(),
   })).nullish(),
 });
 
