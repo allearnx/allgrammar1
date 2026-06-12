@@ -149,6 +149,31 @@
 - 서버 props 변경 시(페이지 이동) `useEffect`로 자동 동기화
 - 원인: 학생 이서하(올라영) — 단어 암기 완료 후 "다음으로 넘어가기"가 안 보임
 
+### 91d0833 — 다음 단계 이동 배너 + 사이드바 naesinRequiredRounds 수정
+- 스테이지 완료 시 "다음 단계로 이동" 초록색 배너 표시 (client.tsx)
+- 사이드바 fetchNaesinTree에서 academy의 naesin_required_rounds를 가져와 calculateStageStatuses에 전달
+- 원인: 학생 이서하(올라영) — 교과서 암기 완료 후 다음 단계로 가는 방법을 모름
+
+### b2194ec — 교과서 암기 서브 단계 자동 전환
+- 서브 단계(빈칸 채우기, 영작 등) 80점 이상 통과 시 다음 탭으로 자동 전환
+- passedSubStages ref로 이미 통과한 탭은 건너뜀
+- 원인: 학생 이서하 — 빈칸 채우기만 반복하고 영작 탭을 못 찾음
+
+### 9911346 — 교과서 암기 이미 통과한 서브 단계 건너뛰기
+- fetch-stage-data.ts에서 passage_fill_blanks_best, passage_ordering_best 등 서브 단계 최고 점수 조회
+- usePassageTabState에서 initialTab을 첫 번째 미통과 탭으로 설정 (80점 미만)
+- 원인: 이미 빈칸 채우기 100점인데 페이지 로드마다 빈칸 탭에서 시작
+
+### 9b5718a — 학생 화면 보기 버튼을 admin/teacher 역할에도 표시
+- ImpersonateButton이 boss만 보이던 것을 admin, teacher에도 표시
+- API에서도 admin/teacher 허용, 비-boss는 같은 학원 학생만 접근 가능 (academy_id 검증)
+- 원인: 선생님이 "학생 화면 확인하는 창이 안 보입니다"
+
+### 1598021 — 저장 경로에서 validateBeforeSave 제거
+- 템플릿 import, 문제 시트 POST/PATCH에서 validateBeforeSave 완전 제거
+- sanitizeQuestions(자동 정규화)만 유지
+- 원인: PDF/템플릿 원본을 고칠 수 없으므로 검증 차단이 무의미 — import/생성 실패만 유발
+
 ## 재발 방지 정리
 
 | 문제 | 일회성 수정 | 시스템적 재발 방지 |
