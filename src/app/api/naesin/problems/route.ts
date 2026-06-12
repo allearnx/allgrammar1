@@ -55,14 +55,14 @@ export const POST = createApiHandler(
       ? sanitizeQuestions(rawQuestions, rawAnswerKey as (string | number | null)[] | undefined)
       : { questions: rawQuestions || [], answerKey: rawAnswerKey || [] };
 
-    // Validate: block save if critical errors exist (empty answers, out-of-range MCQ, etc.)
+    // Validate: log warnings but don't block save
+    const extras: Record<string, unknown> = {};
     if (hasQuestions) {
       const validation = validateBeforeSave(sanitizedQuestions as NaesinProblemQuestion[]);
       if (!validation.valid) {
-        return NextResponse.json(
-          { error: '문제 데이터에 오류가 있습니다.', issues: validation.errors },
-          { status: 422 },
-        );
+        const msgs = validation.errors.map((e) => e.message);
+        console.warn(`[problems.post] ${title}: ${msgs.join(', ')}`);
+        extras.validationWarnings = msgs;
       }
     }
 
@@ -85,7 +85,6 @@ export const POST = createApiHandler(
       .single());
 
     // AI 정답 스팟체크 (새 시트 생성 시)
-    const extras: Record<string, unknown> = {};
     if (hasQuestions) {
       try {
         const aiWarnings = await spotCheckMcqAnswers(
@@ -125,13 +124,11 @@ export const PATCH = createApiHandler(
       updates.questions = sq;
       updates.answer_key = sak;
 
-      // Validate: block save if critical errors exist
+      // Validate: log warnings but don't block save
       const validation = validateBeforeSave(sq);
       if (!validation.valid) {
-        return NextResponse.json(
-          { error: '문제 데이터에 오류가 있습니다.', issues: validation.errors },
-          { status: 422 },
-        );
+        const msgs = validation.errors.map((e) => e.message);
+        console.warn(`[problems.patch] ${id}: ${msgs.join(', ')}`);
       }
     }
 
