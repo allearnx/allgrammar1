@@ -3,6 +3,7 @@ import { createClient } from '@/lib/supabase/server';
 import { Topbar } from '@/components/layout/topbar';
 import { VocaAdminClient } from '@/components/dashboard/voca-admin';
 import { getRoleConfig } from '@/lib/auth/role-page-config';
+import { VOCA_BOOKS_COLUMNS } from '@/types/voca';
 
 interface Props {
   params: Promise<{ role: string }>;
@@ -16,7 +17,7 @@ export default async function VocaPage({ params }: Props) {
 
   const { data: books } = await supabase
     .from('voca_books')
-    .select('*')
+    .select(VOCA_BOOKS_COLUMNS)
     .order('sort_order');
 
   return (

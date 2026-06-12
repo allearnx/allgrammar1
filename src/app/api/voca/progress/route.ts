@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import { createApiHandler } from '@/lib/api/handler';
 import { vocaProgressSaveSchema } from '@/lib/api/schemas';
 import { buildVocaQuizUpdate, buildVocaSpellingUpdate } from '@/lib/progress-helpers';
+import { VOCA_STUDENT_PROGRESS_COLUMNS } from '@/types/voca';
 
 // POST — 학생 진도 저장
 export const POST = createApiHandler(
@@ -13,7 +14,7 @@ export const POST = createApiHandler(
     // Fetch existing progress for best-score logic
     const { data: existing } = await supabase
       .from('voca_student_progress')
-      .select('*')
+      .select(VOCA_STUDENT_PROGRESS_COLUMNS)
       .eq('student_id', user.id)
       .eq('day_id', dayId)
       .single();

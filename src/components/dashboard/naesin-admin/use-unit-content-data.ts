@@ -6,7 +6,7 @@ import { logger } from '@/lib/logger';
 import { fetchWithToast } from '@/lib/fetch-with-toast';
 import type { NaesinVocabulary, NaesinGrammarLesson, NaesinPassage } from '@/types/database';
 import type { NaesinDialogue, NaesinProblemSheet, NaesinTextbookVideo } from '@/types/naesin';
-import { SHEET_ADMIN_LITE_COLUMNS } from '@/types/naesin';
+import { SHEET_ADMIN_LITE_COLUMNS, NAESIN_VOCABULARY_COLUMNS, NAESIN_PASSAGES_COLUMNS, NAESIN_DIALOGUES_COLUMNS, NAESIN_GRAMMAR_LESSONS_COLUMNS, NAESIN_TEXTBOOK_VIDEOS_COLUMNS } from '@/types/naesin';
 import { useListCrud } from '@/hooks/use-list-crud';
 import { useInlineEdit } from '@/hooks/use-inline-edit';
 import { useConfirmDelete } from '@/hooks/use-confirm-delete';
@@ -123,14 +123,14 @@ export function useUnitContentData(unitId: string) {
       const { createClient } = await import('@/lib/supabase/client');
       const supabase = createClient();
       const [v, p, dlg, g, o, prob, lr, tbv, mock] = await Promise.all([
-        supabase.from('naesin_vocabulary').select('*').eq('unit_id', unitId).order('sort_order'),
-        supabase.from('naesin_passages').select('*').eq('unit_id', unitId).order('created_at'),
-        supabase.from('naesin_dialogues').select('*').eq('unit_id', unitId).order('created_at'),
-        supabase.from('naesin_grammar_lessons').select('*').eq('unit_id', unitId).order('sort_order'),
-        supabase.from('naesin_omr_sheets').select('*', { count: 'exact', head: true }).eq('unit_id', unitId),
+        supabase.from('naesin_vocabulary').select(NAESIN_VOCABULARY_COLUMNS).eq('unit_id', unitId).order('sort_order'),
+        supabase.from('naesin_passages').select(NAESIN_PASSAGES_COLUMNS).eq('unit_id', unitId).order('created_at'),
+        supabase.from('naesin_dialogues').select(NAESIN_DIALOGUES_COLUMNS).eq('unit_id', unitId).order('created_at'),
+        supabase.from('naesin_grammar_lessons').select(NAESIN_GRAMMAR_LESSONS_COLUMNS).eq('unit_id', unitId).order('sort_order'),
+        supabase.from('naesin_omr_sheets').select('id', { count: 'exact', head: true }).eq('unit_id', unitId),
         supabase.from('naesin_problem_sheets').select(SHEET_ADMIN_LITE_COLUMNS).eq('unit_id', unitId).in('category', ['problem', 'external_passage', 'eng_eng_def']).order('sort_order'),
-        supabase.from('naesin_last_review_content').select('*', { count: 'exact', head: true }).eq('unit_id', unitId),
-        supabase.from('naesin_textbook_videos').select('*').eq('unit_id', unitId).order('sort_order'),
+        supabase.from('naesin_last_review_content').select('id', { count: 'exact', head: true }).eq('unit_id', unitId),
+        supabase.from('naesin_textbook_videos').select(NAESIN_TEXTBOOK_VIDEOS_COLUMNS).eq('unit_id', unitId).order('sort_order'),
         supabase.from('naesin_problem_sheets').select(SHEET_ADMIN_LITE_COLUMNS).eq('unit_id', unitId).eq('category', 'mock_exam').order('sort_order'),
       ]);
       vocab.setItems((v.data as NaesinVocabulary[]) || []);

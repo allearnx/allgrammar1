@@ -1,5 +1,6 @@
 import type { SupabaseClient } from '@supabase/supabase-js';
 import type { VocaBook, VocaDay, VocaStudentProgress } from '@/types/voca';
+import { VOCA_BOOKS_COLUMNS, VOCA_DAYS_COLUMNS, VOCA_STUDENT_PROGRESS_COLUMNS } from '@/types/voca';
 import { isR1Complete, isR2Complete } from '@/lib/dashboard/voca-helpers';
 
 export interface VocaDashboardData {
@@ -24,8 +25,8 @@ export async function fetchVocaDashboardData(
     .single();
 
   const { data: booksData } = bookAssignment
-    ? await supabase.from('voca_books').select('*').eq('id', bookAssignment.book_id)
-    : await supabase.from('voca_books').select('*').eq('is_active', true).order('created_at');
+    ? await supabase.from('voca_books').select(VOCA_BOOKS_COLUMNS).eq('id', bookAssignment.book_id)
+    : await supabase.from('voca_books').select(VOCA_BOOKS_COLUMNS).eq('is_active', true).order('created_at');
   const books: VocaBook[] = (booksData as VocaBook[]) || [];
 
   // 2. Days
@@ -34,7 +35,7 @@ export async function fetchVocaDashboardData(
   if (bookIds.length > 0) {
     const { data } = await supabase
       .from('voca_days')
-      .select('*')
+      .select(VOCA_DAYS_COLUMNS)
       .in('book_id', bookIds)
       .order('sort_order');
     days = data || [];
@@ -46,7 +47,7 @@ export async function fetchVocaDashboardData(
   if (dayIds.length > 0) {
     const { data } = await supabase
       .from('voca_student_progress')
-      .select('*')
+      .select(VOCA_STUDENT_PROGRESS_COLUMNS)
       .eq('student_id', userId)
       .in('day_id', dayIds);
     progressList = data || [];

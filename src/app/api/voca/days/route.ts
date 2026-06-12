@@ -6,13 +6,14 @@ import { createAdminClient } from '@/lib/supabase/admin';
 import { cached, TTL } from '@/lib/cache/server-cache';
 import { cacheTags } from '@/lib/cache/tags';
 import { invalidateVocaContent } from '@/lib/cache/invalidate';
+import { VOCA_DAYS_COLUMNS } from '@/types/voca';
 
 const getCachedVocaDays = cached(
   async (bookId: string) => {
     const admin = createAdminClient();
     const { data } = await admin
       .from('voca_days')
-      .select('*')
+      .select(VOCA_DAYS_COLUMNS)
       .eq('book_id', bookId)
       .order('sort_order');
     return data || [];

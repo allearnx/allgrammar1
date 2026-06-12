@@ -7,6 +7,7 @@ import { getPlanContext } from '@/lib/billing/get-plan-context';
 import { canUseFeature } from '@/lib/billing/feature-gate';
 import { isR1Complete } from '@/lib/dashboard/voca-helpers';
 import type { VocaVocabulary, VocaStudentProgress, VocaDay } from '@/types/voca';
+import { VOCA_DAYS_COLUMNS, VOCA_VOCABULARY_COLUMNS, VOCA_STUDENT_PROGRESS_COLUMNS } from '@/types/voca';
 
 export default async function StudentVocaDayPage({
   params,
@@ -30,7 +31,7 @@ export default async function StudentVocaDayPage({
   // Get day info + sort_order for free limit check
   const { data: day } = await supabase
     .from('voca_days')
-    .select('*')
+    .select(VOCA_DAYS_COLUMNS)
     .eq('id', dayId)
     .single();
 
@@ -50,14 +51,14 @@ export default async function StudentVocaDayPage({
   // Get vocabulary
   const { data: vocabulary } = await supabase
     .from('voca_vocabulary')
-    .select('*')
+    .select(VOCA_VOCABULARY_COLUMNS)
     .eq('day_id', dayId)
     .order('sort_order');
 
   // Get student progress for this day
   const { data: progress } = await supabase
     .from('voca_student_progress')
-    .select('*')
+    .select(VOCA_STUDENT_PROGRESS_COLUMNS)
     .eq('student_id', user.id)
     .eq('day_id', dayId)
     .single();

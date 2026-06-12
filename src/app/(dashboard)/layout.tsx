@@ -13,6 +13,8 @@ import { deriveTier } from '@/lib/billing/feature-gate';
 import { calculateStageStatuses } from '@/lib/naesin/stage-unlock';
 import { groupBy } from '@/lib/naesin/build-unit-summary';
 import type { NaesinStageStatuses } from '@/types/database';
+import type { NaesinStudentProgress } from '@/types/naesin';
+import { NAESIN_EXAM_ASSIGNMENTS_COLUMNS, PROGRESS_SUMMARY_COLUMNS } from '@/types/naesin';
 
 export const metadata: Metadata = {
   robots: { index: false, follow: false },
@@ -165,7 +167,7 @@ async function fetchNaesinTree(
   const [assignmentsRes, unitsRes] = await Promise.all([
     supabase
       .from('naesin_exam_assignments')
-      .select('*')
+      .select(NAESIN_EXAM_ASSIGNMENTS_COLUMNS)
       .eq('student_id', studentId)
       .eq('textbook_id', setting.textbook_id)
       .order('exam_round'),
@@ -187,7 +189,7 @@ async function fetchNaesinTree(
   const [progressRes, vocabRes, passageRes, dialogueRes, grammarRes, problemRes, lastReviewSheetRes, similarRes, reviewContentRes, quizSetsRes, mockExamRes] = await Promise.all([
     supabase
       .from('naesin_student_progress')
-      .select('*')
+      .select(PROGRESS_SUMMARY_COLUMNS)
       .eq('student_id', studentId)
       .in('unit_id', unitIds),
     supabase
@@ -237,7 +239,7 @@ async function fetchNaesinTree(
   ]);
 
   // Build lookup maps
-  const progressMap = new Map((progressRes.data || []).map((p) => [p.unit_id, p]));
+  const progressMap = new Map((progressRes.data || []).map((p) => [p.unit_id, p as NaesinStudentProgress]));
   const vocabUnitIds = new Set((vocabRes.data || []).map((r) => r.unit_id));
   const passageUnitIds = new Set((passageRes.data || []).map((r) => r.unit_id));
   const dialogueUnitIds = new Set((dialogueRes.data || []).map((r) => r.unit_id));

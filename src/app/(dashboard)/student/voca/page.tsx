@@ -6,6 +6,7 @@ import { VocaHomeClient } from './client';
 import { getPlanContext } from '@/lib/billing/get-plan-context';
 import { canUseFeature } from '@/lib/billing/feature-gate';
 import type { VocaBook, VocaDay, VocaStudentProgress } from '@/types/voca';
+import { VOCA_BOOKS_COLUMNS, VOCA_DAYS_COLUMNS, VOCA_STUDENT_PROGRESS_COLUMNS } from '@/types/voca';
 
 export default async function StudentVocaPage({
   searchParams,
@@ -28,14 +29,14 @@ export default async function StudentVocaPage({
 
   // 전체 교재 자유 선택
   const { data: books } = await supabase
-    .from('voca_books').select('*').eq('is_active', true).order('created_at');
+    .from('voca_books').select(VOCA_BOOKS_COLUMNS).eq('is_active', true).order('created_at');
 
   const bookIds = (books || []).map((b) => b.id);
   let days: VocaDay[] = [];
   if (bookIds.length > 0) {
     const { data } = await supabase
       .from('voca_days')
-      .select('*')
+      .select(VOCA_DAYS_COLUMNS)
       .in('book_id', bookIds)
       .order('sort_order');
     days = data || [];
@@ -49,7 +50,7 @@ export default async function StudentVocaPage({
     const [{ data }, { data: submissions }] = await Promise.all([
       supabase
         .from('voca_student_progress')
-        .select('*')
+        .select(VOCA_STUDENT_PROGRESS_COLUMNS)
         .eq('student_id', user.id)
         .in('day_id', dayIds),
       supabase

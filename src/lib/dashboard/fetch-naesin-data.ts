@@ -5,6 +5,7 @@ import type {
   NaesinExamAssignment,
   NaesinContentAvailability,
 } from '@/types/naesin';
+import { NAESIN_UNITS_COLUMNS, NAESIN_EXAM_ASSIGNMENTS_COLUMNS, PROGRESS_SUMMARY_COLUMNS } from '@/types/naesin';
 
 export interface NaesinDashboardData {
   textbookName: string;
@@ -56,8 +57,8 @@ export async function fetchNaesinDashboardData(
   // 1. Textbook name + units + exams in parallel
   const [textbookRes, unitsRes, examsRes] = await Promise.all([
     supabase.from('naesin_textbooks').select('display_name').eq('id', textbookId).single(),
-    supabase.from('naesin_units').select('*').eq('textbook_id', textbookId).eq('is_active', true).order('sort_order'),
-    supabase.from('naesin_exam_assignments').select('*').eq('student_id', userId).eq('textbook_id', textbookId),
+    supabase.from('naesin_units').select(NAESIN_UNITS_COLUMNS).eq('textbook_id', textbookId).eq('is_active', true).order('sort_order'),
+    supabase.from('naesin_exam_assignments').select(NAESIN_EXAM_ASSIGNMENTS_COLUMNS).eq('student_id', userId).eq('textbook_id', textbookId),
   ]);
 
   const textbookName = textbookRes.data?.display_name || '교과서';
@@ -70,10 +71,10 @@ export async function fetchNaesinDashboardData(
   if (unitIds.length > 0) {
     const { data } = await supabase
       .from('naesin_student_progress')
-      .select('*')
+      .select(PROGRESS_SUMMARY_COLUMNS)
       .eq('student_id', userId)
       .in('unit_id', unitIds);
-    progressList = data || [];
+    progressList = (data || []) as NaesinStudentProgress[];
   }
 
   // 3. Content availability + quiz set counts + grammar video counts

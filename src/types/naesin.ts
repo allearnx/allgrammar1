@@ -339,6 +339,25 @@ export const SHEET_ADMIN_LITE_COLUMNS = SHEET_LITE_COLUMNS + ', answer_key';
 /** Student progress columns needed for unit summary (17/40 columns — excludes unused best scores, round2 details, legacy flags) */
 export const PROGRESS_SUMMARY_COLUMNS = 'unit_id, vocab_completed, vocab_quiz_score, vocab_spelling_score, vocab_quiz_sets_completed, passage_completed, passage_fill_blanks_best, passage_translation_best, round2_passage_completed, dialogue_completed, round2_dialogue_completed, textbook_video_completed, textbook_videos_completed, grammar_completed, grammar_videos_completed, problem_completed, mock_exam_completed';
 
+// ── 내신 콘텐츠 테이블 컬럼 상수 ──
+
+export const NAESIN_VOCABULARY_COLUMNS = 'id, unit_id, front_text, back_text, part_of_speech, example_sentence, synonyms, antonyms, spelling_hint, spelling_answer, sort_order, created_at';
+
+export const NAESIN_PASSAGES_COLUMNS = 'id, unit_id, title, original_text, korean_translation, blanks_easy, blanks_medium, blanks_hard, sentences, sort_order, created_at, grammar_vocab_items, pdf_url';
+
+export const NAESIN_DIALOGUES_COLUMNS = 'id, unit_id, title, sentences, sort_order, created_at';
+
+export const NAESIN_GRAMMAR_LESSONS_COLUMNS = 'id, unit_id, title, content_type, youtube_url, youtube_video_id, video_duration_seconds, text_content, sort_order, created_at';
+
+export const NAESIN_TEXTBOOK_VIDEOS_COLUMNS = 'id, unit_id, title, youtube_url, youtube_video_id, video_duration_seconds, sort_order, created_at';
+
+export const NAESIN_UNITS_COLUMNS = 'id, textbook_id, unit_number, title, sort_order, is_active, created_at';
+
+export const NAESIN_EXAM_ASSIGNMENTS_COLUMNS = 'id, student_id, textbook_id, exam_round, exam_label, exam_date, unit_ids, created_at, updated_at';
+
+export const NAESIN_VOCAB_QUIZ_SETS_COLUMNS = 'id, unit_id, title, set_order, vocab_ids, created_at';
+
+
 export interface NaesinTemplate {
   id: string;
   title: string;

@@ -187,6 +187,12 @@
 - 재채점: stale 시도 7건 처리, 6건 점수 조정 (1~2점 차이), 이미지 오답 2건 제거
 - 오답 테이블(naesin_wrong_answers) 재생성
 
+### c7bc63b — sanitizeQuestions에 이미지 참조 문항 자동 삭제 추가
+- 저장 시 인라인 설명 없는 이미지 참조 문항을 자동 삭제 + 번호 재정리
+- 판별 로직: IMAGE_INSTRUCTION(다음 그림을 보고 등) && !HAS_INLINE_DESC && !CONTENT_USAGE
+- 테스트 3건 추가 (50 tests 통과)
+- 재발 방지: 새 문제 시트 import/생성 시 이미지 없는 그림 문항이 학생에게 노출되지 않음
+
 ## 재발 방지 정리
 
 | 문제 | 일회성 수정 | 시스템적 재발 방지 |
@@ -199,6 +205,7 @@
 | 테이블 깨짐 | - | FormattedText 테이블 파싱 |
 | 복합 답안 subParts 누락 | - | sanitizeQuestions 자동 분할 |
 | 스테이지 완료 미반영 | - | handleStageComplete 로컬 상태 갱신 |
+| 이미지 없는 그림 문항 | 93문항 삭제 + 재채점 | sanitizeQuestions 자동 삭제 |
 
 ### 검증 규칙 추가
 - answer_key 형식 통일 필요: 일부 시트는 string[], 일부는 {answer, explanation}[]

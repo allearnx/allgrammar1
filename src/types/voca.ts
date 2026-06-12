@@ -144,6 +144,16 @@ export interface VocaProgressRow {
 // 서비스 배정
 // ============================================
 
+// ── 컬럼 상수 (select('*') → 명시적 컬럼) ──
+
+export const VOCA_BOOKS_COLUMNS = 'id, title, description, sort_order, is_active, created_at';
+
+export const VOCA_DAYS_COLUMNS = 'id, book_id, day_number, title, sort_order, created_at, description';
+
+export const VOCA_VOCABULARY_COLUMNS = 'id, day_id, front_text, back_text, part_of_speech, example_sentence, synonyms, antonyms, spelling_hint, spelling_answer, sort_order, created_at, idioms, example_sentence_ko, audio_url, word_timestamps, exam_source';
+
+export const VOCA_STUDENT_PROGRESS_COLUMNS = 'id, student_id, day_id, flashcard_completed, quiz_score, spelling_score, matching_score, matching_attempt, matching_completed, created_at, updated_at, round2_flashcard_completed, round2_quiz_score, round2_matching_score, round2_matching_attempt, round2_matching_completed';
+
 export type ServiceType = 'naesin' | 'voca';
 
 export interface ServiceAssignment {

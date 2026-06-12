@@ -6,13 +6,14 @@ import { createAdminClient } from '@/lib/supabase/admin';
 import { cached, TTL } from '@/lib/cache/server-cache';
 import { cacheTags } from '@/lib/cache/tags';
 import { invalidateVocaBooks } from '@/lib/cache/invalidate';
+import { VOCA_BOOKS_COLUMNS } from '@/types/voca';
 
 const getCachedVocaBooks = cached(
   async () => {
     const admin = createAdminClient();
     const { data } = await admin
       .from('voca_books')
-      .select('*')
+      .select(VOCA_BOOKS_COLUMNS)
       .order('sort_order');
     return data || [];
   },

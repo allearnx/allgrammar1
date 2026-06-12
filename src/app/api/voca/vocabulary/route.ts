@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import { createApiHandler } from '@/lib/api/handler';
 import { vocaVocabCreateSchema, vocaVocabPatchSchema, idSchema } from '@/lib/api/schemas';
 import { requireContentPermission } from '@/lib/api/require-content-permission';
+import { VOCA_VOCABULARY_COLUMNS } from '@/types/voca';
 
 // GET — 단어 목록 (dayId 쿼리 파라미터)
 export const GET = createApiHandler({ hasBody: false }, async ({ request, supabase }) => {
@@ -11,7 +12,7 @@ export const GET = createApiHandler({ hasBody: false }, async ({ request, supaba
 
   const { data } = await supabase
     .from('voca_vocabulary')
-    .select('*')
+    .select(VOCA_VOCABULARY_COLUMNS)
     .eq('day_id', dayId)
     .order('sort_order');
   return NextResponse.json(data || []);
