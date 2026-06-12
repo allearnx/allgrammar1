@@ -9,7 +9,7 @@ export const GET = createApiHandler(
     const data = dbResult(
       await supabase
         .from('announcements')
-        .select('*')
+        .select('id, title, content, type, target_roles, is_published, published_at, updated_at, created_at')
         .order('created_at', { ascending: false })
     );
     return NextResponse.json(data);

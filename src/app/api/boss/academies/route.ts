@@ -8,7 +8,7 @@ export const GET = createApiHandler(
   async ({ supabase }) => {
     const data = dbResult(await supabase
       .from('academies')
-      .select('*')
+      .select('id, name, owner_id, max_students, services, invite_code, free_service, created_at')
       .order('created_at', { ascending: false }));
 
     return NextResponse.json(data);

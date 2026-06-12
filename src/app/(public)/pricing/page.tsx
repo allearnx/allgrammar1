@@ -1,6 +1,6 @@
 import { createClient } from '@/lib/supabase/server';
 import { getUser } from '@/lib/auth/helpers';
-import type { SubscriptionPlan } from '@/types/billing';
+import { SUBSCRIPTION_PLAN_COLUMNS, type SubscriptionPlan } from '@/types/billing';
 import { PricingPageContent } from './_components/pricing-page-content';
 
 export const metadata = {
@@ -13,7 +13,7 @@ export default async function PricingPage() {
 
   const { data: plans } = await supabase
     .from('subscription_plans')
-    .select('*')
+    .select(SUBSCRIPTION_PLAN_COLUMNS)
     .eq('target', 'academy')
     .eq('is_active', true)
     .order('sort_order', { ascending: true });

@@ -9,7 +9,7 @@ export const GET = createApiHandler(
     const data = dbResult(
       await supabase
         .from('consultations')
-        .select('*')
+        .select('id, student_name, grade, parent_phone, interest_course_ids, status, memo, created_at')
         .order('created_at', { ascending: false })
     );
 

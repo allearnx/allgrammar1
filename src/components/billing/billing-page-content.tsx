@@ -10,7 +10,7 @@ import { PaymentHistoryCard } from '@/components/billing/payment-history-card';
 import { PlanComparison } from '@/components/billing/plan-comparison';
 import { requestTossCardAuth, cancelSubscription, calcTrialDaysLeft } from '@/lib/billing/toss-helpers';
 import { deriveTier } from '@/lib/billing/feature-gate';
-import type { Subscription, PaymentHistory, SubscriptionPlan, Order } from '@/types/billing';
+import { SUBSCRIPTION_PLAN_COLUMNS, ORDER_COLUMNS, PAYMENT_HISTORY_COLUMNS, type Subscription, type PaymentHistory, type SubscriptionPlan, type Order } from '@/types/billing';
 import type { Tier, FreeService } from '@/lib/billing/feature-gate';
 
 interface SubscriptionWithPlan extends Subscription {
@@ -87,7 +87,7 @@ export function BillingPageContent({ mode }: BillingPageContentProps) {
 
       const { data: hist } = await supabase
         .from('payment_history')
-        .select('*')
+        .select(PAYMENT_HISTORY_COLUMNS)
         .eq('subscription_id', sub.id)
         .order('created_at', { ascending: false });
       setPayments((hist as PaymentHistory[]) || []);
@@ -97,7 +97,7 @@ export function BillingPageContent({ mode }: BillingPageContentProps) {
     if (mode === 'student') {
       const { data: orderRows } = await supabase
         .from('orders')
-        .select('*')
+        .select(ORDER_COLUMNS)
         .eq('user_id', user.id)
         .order('created_at', { ascending: false });
       setOrders((orderRows as Order[]) || []);
@@ -112,7 +112,7 @@ export function BillingPageContent({ mode }: BillingPageContentProps) {
     if (mode === 'academy') {
       const { data: planRows } = await supabase
         .from('subscription_plans')
-        .select('*')
+        .select(SUBSCRIPTION_PLAN_COLUMNS)
         .eq('target', 'academy')
         .eq('is_active', true)
         .order('sort_order', { ascending: true });

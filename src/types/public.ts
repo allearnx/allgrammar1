@@ -1,5 +1,10 @@
 // 공개 홍보 페이지 타입 정의
 
+export const COURSE_COLUMNS = 'id, title, category, description, price, thumbnail_url, detail_image_url, teacher_id, is_active, sort_order, created_at';
+export const TEACHER_PROFILE_COLUMNS = 'id, user_id, display_name, bio, image_url, image_position, is_visible, sort_order, created_at';
+export const REVIEW_COLUMNS = 'id, content, achievement, student_grade, course_name, display_order, is_visible, created_at';
+export const FAQ_COLUMNS = 'id, question, answer, category, display_order, is_visible, created_at';
+
 export type CourseCategory = 'grammar' | 'school_exam' | 'international' | 'voca' | 'reading';
 
 export interface Course {

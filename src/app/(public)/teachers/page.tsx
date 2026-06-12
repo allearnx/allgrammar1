@@ -1,13 +1,13 @@
 import Link from 'next/link';
 import { createClient } from '@/lib/supabase/server';
 import ConsultationLink from '@/components/public/consultation-link';
-import type { TeacherProfile } from '@/types/public';
+import { TEACHER_PROFILE_COLUMNS, type TeacherProfile } from '@/types/public';
 
 export default async function TeachersPage() {
   const supabase = await createClient();
   const { data: teachers } = await supabase
     .from('teacher_profiles')
-    .select('*')
+    .select(TEACHER_PROFILE_COLUMNS)
     .eq('is_visible', true)
     .order('sort_order', { ascending: true });
 

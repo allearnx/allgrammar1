@@ -19,7 +19,7 @@ const getPost = cache(async (slug: string): Promise<BlogPost | null> => {
   const admin = createAdminClient();
   const { data } = await admin
     .from('blog_posts')
-    .select('*')
+    .select('id, slug, title, excerpt, content, thumbnail_url, category, published_at, created_at, updated_at, meta_title, meta_description, view_count, is_published')
     .eq('slug', slug)
     .eq('is_published', true)
     .single();

@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { createApiHandler } from '@/lib/api/handler';
 import { subscriptionPlanCreateSchema, subscriptionPlanPatchSchema } from '@/lib/api/schemas';
+import { SUBSCRIPTION_PLAN_COLUMNS } from '@/types/billing';
 
 // 모든 요금제 조회
 export const GET = createApiHandler(
@@ -8,7 +9,7 @@ export const GET = createApiHandler(
   async ({ supabase }) => {
     const { data, error } = await supabase
       .from('subscription_plans')
-      .select('*')
+      .select(SUBSCRIPTION_PLAN_COLUMNS)
       .order('sort_order');
 
     if (error) return NextResponse.json({ error: error.message }, { status: 500 });

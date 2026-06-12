@@ -9,7 +9,7 @@ export default async function BossAcademiesPage() {
 
   const { data: academies } = await admin
     .from('academies')
-    .select('*')
+    .select('id, name, owner_id, max_students, services, invite_code, free_service, created_at')
     .order('created_at', { ascending: false });
 
   // Get user counts and teacher info per academy

@@ -1,3 +1,7 @@
+export const SUBSCRIPTION_PLAN_COLUMNS = 'id, name, target, services, price_per_unit, min_students, description, is_active, sort_order, created_at';
+export const ORDER_COLUMNS = 'id, user_id, course_id, order_name, amount, status, toss_order_id, toss_payment_key, receipt_url, failure_code, failure_message, paid_at, created_at';
+export const PAYMENT_HISTORY_COLUMNS = 'id, subscription_id, toss_payment_key, toss_order_id, amount, status, failure_code, failure_message, receipt_url, paid_at, created_at';
+
 export type PlanTarget = 'academy' | 'individual';
 export type SubscriptionStatus = 'trialing' | 'active' | 'past_due' | 'canceled' | 'expired';
 export type SubscriptionTier = 'free' | 'paid';

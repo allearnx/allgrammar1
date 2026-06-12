@@ -4,6 +4,7 @@ import { upgradePlanSchema } from '@/lib/api/schemas';
 import { confirmPayment, cancelPayment, TossPaymentError } from '@/lib/payments/toss';
 import { createAdminClient } from '@/lib/supabase/admin';
 import { auditLog } from '@/lib/api/audit';
+import { SUBSCRIPTION_PLAN_COLUMNS } from '@/types/billing';
 import { logger } from '@/lib/logger';
 import { sendTelegram } from '@/lib/telegram';
 
@@ -15,11 +16,15 @@ export const POST = createApiHandler(
     // ── 1. 대상 플랜 조회 ──
     const plan = dbResult(await supabase
       .from('subscription_plans')
-      .select('*')
+      .select(SUBSCRIPTION_PLAN_COLUMNS)
       .eq('id', planId)
       .eq('is_active', true)
       .eq('target', 'academy')
       .single());
+
+    if (!plan) {
+      return NextResponse.json({ error: '요금제를 찾을 수 없습니다.' }, { status: 404 });
+    }
 
     if (plan.price_per_unit !== amount) {
       return NextResponse.json(

@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import { createApiHandler } from '@/lib/api/handler';
 import { teacherProfileCreateSchema, teacherProfilePatchSchema, idSchema } from '@/lib/api/schemas';
 import { dbResult } from '@/lib/api/errors';
+import { TEACHER_PROFILE_COLUMNS } from '@/types/public';
 
 export const GET = createApiHandler(
   { roles: ['boss'], allowHomepageManager: true, hasBody: false },
@@ -9,7 +10,7 @@ export const GET = createApiHandler(
     const data = dbResult(
       await supabase
         .from('teacher_profiles')
-        .select('*')
+        .select(TEACHER_PROFILE_COLUMNS)
         .order('sort_order', { ascending: true })
     );
     return NextResponse.json(data);

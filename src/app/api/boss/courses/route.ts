@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import { createApiHandler } from '@/lib/api/handler';
 import { courseCreateSchema, coursePatchSchema, idSchema } from '@/lib/api/schemas';
 import { dbResult } from '@/lib/api/errors';
+import { COURSE_COLUMNS } from '@/types/public';
 
 export const GET = createApiHandler(
   { roles: ['boss'], allowHomepageManager: true, hasBody: false },
@@ -9,7 +10,7 @@ export const GET = createApiHandler(
     const courses = dbResult(
       await supabase
         .from('courses')
-        .select('*')
+        .select(COURSE_COLUMNS)
         .order('sort_order', { ascending: true })
     );
 

@@ -7,6 +7,7 @@ import {
   type TeacherProfile,
   CATEGORY_PAGE_CONFIG,
   CATEGORY_LABELS,
+  COURSE_COLUMNS,
   formatPrice,
 } from '@/types/public';
 import PublicFooter from './footer';
@@ -17,7 +18,7 @@ export default async function CourseCategoryPage({ category }: { category: Cours
 
   const { data: courses, error } = await supabase
     .from('courses')
-    .select('*')
+    .select(COURSE_COLUMNS)
     .eq('category', category)
     .eq('is_active', true)
     .order('sort_order');
@@ -30,7 +31,7 @@ export default async function CourseCategoryPage({ category }: { category: Cours
   if (teacherIds.length > 0) {
     const { data: teachers } = await supabase
       .from('teacher_profiles')
-      .select('*')
+      .select('id, display_name, image_url, image_position')
       .in('id', teacherIds);
     if (teachers) {
       teacherMap = Object.fromEntries(

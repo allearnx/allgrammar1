@@ -1,12 +1,12 @@
 import { createClient } from '@/lib/supabase/server';
 import ConsultationLink from '@/components/public/consultation-link';
-import type { Review } from '@/types/public';
+import { REVIEW_COLUMNS, type Review } from '@/types/public';
 
 export default async function ReviewsPage() {
   const supabase = await createClient();
   const { data: reviews } = await supabase
     .from('reviews')
-    .select('*')
+    .select(REVIEW_COLUMNS)
     .eq('is_visible', true)
     .order('display_order', { ascending: true });
 

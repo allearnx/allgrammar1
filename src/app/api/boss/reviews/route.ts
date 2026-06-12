@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import { createApiHandler } from '@/lib/api/handler';
 import { reviewCreateSchema, reviewPatchSchema, idSchema } from '@/lib/api/schemas';
 import { dbResult } from '@/lib/api/errors';
+import { REVIEW_COLUMNS } from '@/types/public';
 
 export const GET = createApiHandler(
   { roles: ['boss'], allowHomepageManager: true, hasBody: false },
@@ -9,7 +10,7 @@ export const GET = createApiHandler(
     const data = dbResult(
       await supabase
         .from('reviews')
-        .select('*')
+        .select(REVIEW_COLUMNS)
         .order('display_order', { ascending: true })
     );
     return NextResponse.json(data);

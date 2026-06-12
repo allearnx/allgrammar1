@@ -2,6 +2,7 @@ import { redirect } from 'next/navigation';
 import { requireUser } from '@/lib/auth/helpers';
 import { createAdminClient } from '@/lib/supabase/admin';
 import { Topbar } from '@/components/layout/topbar';
+import { REVIEW_COLUMNS } from '@/types/public';
 import { ReviewsClient } from './client';
 
 export default async function BossReviewsPage() {
@@ -11,7 +12,7 @@ export default async function BossReviewsPage() {
 
   const { data: reviews } = await admin
     .from('reviews')
-    .select('*')
+    .select(REVIEW_COLUMNS)
     .order('display_order', { ascending: true });
 
   return (

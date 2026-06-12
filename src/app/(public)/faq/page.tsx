@@ -3,8 +3,7 @@
 import { useEffect, useState } from 'react';
 import { createBrowserClient } from '@supabase/ssr';
 import ConsultationLink from '@/components/public/consultation-link';
-import type { FAQ, FAQCategory } from '@/types/public';
-import { FAQ_CATEGORY_LABELS } from '@/types/public';
+import { FAQ_COLUMNS, FAQ_CATEGORY_LABELS, type FAQ, type FAQCategory } from '@/types/public';
 
 export default function FAQPage() {
   const [faqs, setFaqs] = useState<FAQ[]>([]);
@@ -19,7 +18,7 @@ export default function FAQPage() {
     );
     supabase
       .from('faqs')
-      .select('*')
+      .select(FAQ_COLUMNS)
       .eq('is_visible', true)
       .order('display_order', { ascending: true })
       .then(({ data }) => {

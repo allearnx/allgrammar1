@@ -11,7 +11,7 @@ export default async function BossAnnouncementsPage() {
 
   const { data: announcements } = await admin
     .from('announcements')
-    .select('*')
+    .select('id, title, content, type, target_roles, is_published, published_at, updated_at, created_at')
     .order('created_at', { ascending: false });
 
   return (

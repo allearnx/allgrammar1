@@ -2,7 +2,7 @@ import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { createAdminClient } from '@/lib/supabase/admin';
 import ConsultationLink from '@/components/public/consultation-link';
-import { CATEGORY_LABELS, formatPrice, type Course, type TeacherProfile } from '@/types/public';
+import { CATEGORY_LABELS, COURSE_COLUMNS, TEACHER_PROFILE_COLUMNS, formatPrice, type Course, type TeacherProfile } from '@/types/public';
 
 function getCategoryColor(category: string) {
   switch (category) {
@@ -25,7 +25,7 @@ export default async function CourseDetailPage({
 
   const { data: course } = await supabase
     .from('courses')
-    .select('*')
+    .select(COURSE_COLUMNS)
     .eq('id', id)
     .eq('is_active', true)
     .returns<Course[]>()
@@ -42,7 +42,7 @@ export default async function CourseDetailPage({
   if (c.teacher_id) {
     const { data } = await supabase
       .from('teacher_profiles')
-      .select('*')
+      .select(TEACHER_PROFILE_COLUMNS)
       .eq('id', c.teacher_id)
       .single();
     teacher = data as TeacherProfile | null;

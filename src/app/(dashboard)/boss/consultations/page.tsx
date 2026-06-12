@@ -11,7 +11,7 @@ export default async function BossConsultationsPage() {
 
   const { data: consultations } = await admin
     .from('consultations')
-    .select('*')
+    .select('id, student_name, grade, parent_phone, interest_course_ids, status, memo, created_at')
     .order('created_at', { ascending: false });
 
   // Resolve course names

@@ -2,6 +2,7 @@ import { redirect } from 'next/navigation';
 import { requireUser } from '@/lib/auth/helpers';
 import { createAdminClient } from '@/lib/supabase/admin';
 import { Topbar } from '@/components/layout/topbar';
+import { TEACHER_PROFILE_COLUMNS } from '@/types/public';
 import { TeacherProfilesClient } from './client';
 
 export default async function BossTeacherProfilesPage() {
@@ -11,7 +12,7 @@ export default async function BossTeacherProfilesPage() {
 
   const { data: profiles } = await admin
     .from('teacher_profiles')
-    .select('*')
+    .select(TEACHER_PROFILE_COLUMNS)
     .order('sort_order', { ascending: true });
 
   return (

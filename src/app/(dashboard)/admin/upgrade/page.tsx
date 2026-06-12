@@ -5,7 +5,7 @@ import { useSearchParams, useRouter } from 'next/navigation';
 import { ChevronLeft, CreditCard, ShieldCheck, Crown } from 'lucide-react';
 import { toast } from 'sonner';
 import { createClient } from '@/lib/supabase/client';
-import type { SubscriptionPlan } from '@/types/billing';
+import { SUBSCRIPTION_PLAN_COLUMNS, type SubscriptionPlan } from '@/types/billing';
 
 export default function UpgradePage() {
   const router = useRouter();
@@ -27,7 +27,7 @@ export default function UpgradePage() {
       const supabase = createClient();
       const { data } = await supabase
         .from('subscription_plans')
-        .select('*')
+        .select(SUBSCRIPTION_PLAN_COLUMNS)
         .eq('id', planId)
         .eq('is_active', true)
         .eq('target', 'academy')

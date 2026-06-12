@@ -2,6 +2,7 @@ import { redirect } from 'next/navigation';
 import { requireUser } from '@/lib/auth/helpers';
 import { createAdminClient } from '@/lib/supabase/admin';
 import { Topbar } from '@/components/layout/topbar';
+import { FAQ_COLUMNS } from '@/types/public';
 import { FaqsClient } from './client';
 
 export default async function BossFaqsPage() {
@@ -11,7 +12,7 @@ export default async function BossFaqsPage() {
 
   const { data: faqs } = await admin
     .from('faqs')
-    .select('*')
+    .select(FAQ_COLUMNS)
     .order('display_order', { ascending: true });
 
   return (
