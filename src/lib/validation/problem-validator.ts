@@ -284,6 +284,24 @@ function inferAnswerFromExplanation(explanation: string, options: string[]): str
   return null;
 }
 
+// ── Image reference detection ──
+
+/** 이미지를 참조하는 지시문 패턴 (학생이 그림을 봐야 하는 경우) */
+const IMAGE_INSTRUCTION = /다음 그림|그림을 보고|그림을 참고|그림에 대한|그림과 일치|그림의 내용|그림이 의미|그림의 상황|그림을 설명|그림에 맞|그림을 묘사|그림을 표현|그림의 표현|그림과 주어진|그림 정보|사진을 보고|사진 속|표지판을 보고|표지판이 지시/;
+/** 인라인 설명이 있으면 이미지 없이도 풀 수 있음 */
+const HAS_INLINE_DESC = /\(그림[:\s：]|（그림[:\s：]|\[그림[:\s：]|\[이미지[:\s：]|그림 \d+[:\s：]|그림:\s|그림\s*\d+\s*:\s/;
+/** "그림"이 내용의 일부인 경우 (제거하면 안 됨) */
+const CONTENT_USAGE = /그림을 그리|그림을 잘|그린 그림|그림들을|그림이 있는|그림들의|그림 그리기|그림을 좋아|사진을 찍|사진을 올|그 사진/;
+
+/** 이미지 없이 풀 수 없는 문항인지 판별 */
+function isUnanswerableImageQuestion(text: string): boolean {
+  if (!IMAGE_INSTRUCTION.test(text)) return false;
+  if (CONTENT_USAGE.test(text) && !text.startsWith('다음 그림')) return false;
+  if (HAS_INLINE_DESC.test(text)) return false;
+  if (/\([^)]*그림\)|\([^)]*표시\)|\([^)]*장면\)|\([^)]*모습\)/.test(text)) return false;
+  return true;
+}
+
 // ── Pre-save sanitization ──
 
 /**
@@ -298,6 +316,7 @@ function inferAnswerFromExplanation(explanation: string, options: string[]): str
  * 5. 연속 원형숫자 ("①③") → "1, 3"
  * 6. 중첩 배열 선지 → 문자열로 평탄화
  * 7. answer_key를 questions[].answer에서 재구축
+ * 8. 이미지 참조 문항 자동 삭제 (인라인 설명 없는 경우)
  */
 export function sanitizeQuestions(
   questions: NaesinProblemQuestion[],
@@ -435,10 +454,19 @@ export function sanitizeQuestions(
     return out;
   });
 
-  // Rebuild answer_key from questions
-  const newAnswerKey = sanitized.map((q) => q.answer ?? null);
+  // Rule 8: Remove unanswerable image-referencing questions (no inline description)
+  const filtered = sanitized.filter((q) => {
+    const text = q.question || '';
+    return !isUnanswerableImageQuestion(text);
+  });
 
-  return { questions: sanitized, answerKey: newAnswerKey };
+  // Renumber after filtering
+  const renumbered = filtered.map((q, i) => ({ ...q, number: i + 1 }));
+
+  // Rebuild answer_key from questions
+  const newAnswerKey = renumbered.map((q) => q.answer ?? null);
+
+  return { questions: renumbered, answerKey: newAnswerKey };
 }
 
 // ── Pre-save validation gate ──

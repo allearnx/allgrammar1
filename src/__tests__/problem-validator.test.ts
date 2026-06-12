@@ -450,6 +450,37 @@ describe('validateBeforeSave', () => {
     });
   });
 
+  describe('이미지 참조 문항 자동 삭제', () => {
+    it('"다음 그림을 보고" 문항은 삭제됨', () => {
+      const qs: NaesinProblemQuestion[] = [
+        { number: 1, question: 'Choose the correct one.', answer: '2', options: ['a', 'b', 'c', 'd', 'e'] },
+        { number: 2, question: '다음 그림을 보고 대화를 완성하시오.', answer: 'test' },
+        { number: 3, question: 'Fill in the blank.', answer: 'word' },
+      ];
+      const { questions } = sanitizeQuestions(qs);
+      expect(questions.length).toBe(2);
+      expect(questions[0].question).toBe('Choose the correct one.');
+      expect(questions[1].question).toBe('Fill in the blank.');
+      expect(questions[1].number).toBe(2); // renumbered
+    });
+
+    it('인라인 설명 있는 그림 문항은 유지', () => {
+      const qs: NaesinProblemQuestion[] = [
+        { number: 1, question: '다음 그림을 보고 답하시오.\n(그림: 소녀가 자전거를 타고 있음)', answer: 'ride a bike' },
+      ];
+      const { questions } = sanitizeQuestions(qs);
+      expect(questions.length).toBe(1);
+    });
+
+    it('"그림을 그리다" 등 내용 용법은 유지', () => {
+      const qs: NaesinProblemQuestion[] = [
+        { number: 1, question: '나는 그림을 잘 그린다를 영작하시오.', answer: 'I draw well' },
+      ];
+      const { questions } = sanitizeQuestions(qs);
+      expect(questions.length).toBe(1);
+    });
+  });
+
   describe('U+FFFD 경고', () => {
     it('깨진 문자가 포함되면 경고', () => {
       const q: NaesinProblemQuestion = {
