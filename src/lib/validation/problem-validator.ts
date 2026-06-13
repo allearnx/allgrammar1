@@ -8,6 +8,8 @@ const CIRCLED_TO_DIGIT: Record<string, string> = {
 };
 const CIRCLED_PATTERN = /^[①②③④⑤⑥⑦⑧⑨⑩]$/;
 const CIRCLED_GLOBAL = /[①②③④⑤⑥⑦⑧⑨⑩]/g;
+// 비전역(stateless) — .test() 루프에서 lastIndex 부작용 없이 "원형숫자 포함 여부" 판별용
+const CIRCLED_ANYWHERE = /[①②③④⑤⑥⑦⑧⑨⑩]/;
 
 // PDF 추출 아티팩트
 const SUPERSCRIPT_NUMBERS = /[⁰¹²³⁴⁵⁶⁷⁸⁹]+[⁾)]\s*/g;
@@ -572,6 +574,35 @@ export function validateBeforeSave(
       const hasFormatHint = /※|형식|구분|슬래시|쉼표/.test(questionText);
       if (isMultiPart && !hasFormatHint) {
         warnings.push(issue('warning', n, 'NO_FORMAT_HINT', `${n}번: 서술형 복합 답안인데 형식 안내(※)가 없습니다.`));
+      }
+    }
+
+    // ERROR: 선택지는 있는데 문제 텍스트가 비어있음 (04-16 "선지만 있고 문제가 없어요")
+    if (isMcq && !hasQuestion) {
+      errors.push(issue('error', n, 'MISSING_QUESTION_TEXT', `${n}번: 선택지는 있는데 문제 텍스트가 비어있습니다.`));
+    }
+
+    // ERROR: 정답에 원형숫자(①②③)가 남아있음 → 학생은 "1"을 보내므로 채점 실패 (sanitize 누락 데이터)
+    if (q.answer != null && CIRCLED_ANYWHERE.test(String(q.answer))) {
+      errors.push(issue('error', n, 'CIRCLED_NUMBER', `${n}번: 정답에 원형숫자(①②③)가 남아있습니다. 숫자로 변환해야 채점됩니다.`));
+    }
+
+    // WARNING: 리터럴 "\n"(역슬래시+n 2글자)이 표시 필드에 포함 — 줄바꿈이 깨져 보임 (04-10 make Q25)
+    //   실제 개행(U+000A)이 아니라 2글자 시퀀스만 탐지하므로 JSON.stringify를 쓰지 않음(개행도 \n으로 이스케이프되어 오탐)
+    const displayFields = [q.question, q.explanation, ...(q.options ?? [])];
+    if (displayFields.some((t) => typeof t === 'string' && t.includes('\\n'))) {
+      warnings.push(issue('warning', n, 'LITERAL_BACKSLASH_N', `${n}번: 리터럴 "\\n"(2글자)이 포함되어 줄바꿈이 깨져 보일 수 있습니다.`));
+    }
+
+    // WARNING: 빈칸(___) 문제인데 정답이 문장 전체로 보임 (04-20 "전체 문장으로 답이 들어가 있어요")
+    //   보수적 휴리스틱: 빈칸 마커 + 정답이 대문자 시작 + 마침표/물음표/느낌표 종료 + 4단어 이상
+    if (!isMcq && hasQuestion && typeof q.answer === 'string' && !q.subParts) {
+      const ans = q.answer.trim();
+      const hasBlank = /_{2,}/.test(q.question);
+      const wordCount = ans.split(/\s+/).filter(Boolean).length;
+      const looksLikeFullSentence = /^[A-Z]/.test(ans) && /[.?!]$/.test(ans) && wordCount >= 4;
+      if (hasBlank && looksLikeFullSentence) {
+        warnings.push(issue('warning', n, 'BLANK_FULL_SENTENCE', `${n}번: 빈칸 문제인데 정답이 문장 전체로 보입니다. 빈칸 부분만 정답으로 두어야 학생 답이 맞게 채점됩니다.`));
       }
     }
   }

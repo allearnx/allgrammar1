@@ -494,4 +494,90 @@ describe('validateBeforeSave', () => {
       expect(result.warnings.some((w) => w.code === 'FFFD_CHAR')).toBe(true);
     });
   });
+
+  describe('문제 텍스트 누락 (선지만 있고 문제 없음)', () => {
+    it('선택지는 있는데 문제 텍스트가 비어있으면 에러', () => {
+      const q: NaesinProblemQuestion = { number: 1, question: '', answer: '2', options: ['a', 'b', 'c', 'd', 'e'] };
+      const result = validateBeforeSave([q]);
+      expect(result.valid).toBe(false);
+      expect(result.errors.some((e) => e.code === 'MISSING_QUESTION_TEXT')).toBe(true);
+    });
+
+    it('문제 텍스트가 있으면 통과', () => {
+      const q: NaesinProblemQuestion = { number: 1, question: 'Choose', answer: '2', options: ['a', 'b', 'c', 'd', 'e'] };
+      const result = validateBeforeSave([q]);
+      expect(result.errors.some((e) => e.code === 'MISSING_QUESTION_TEXT')).toBe(false);
+    });
+  });
+
+  describe('정답 원형숫자 잔존', () => {
+    it('정답에 ③이 남아있으면 에러', () => {
+      const q: NaesinProblemQuestion = { number: 1, question: 'Choose', answer: '③', options: ['a', 'b', 'c', 'd', 'e'] };
+      const result = validateBeforeSave([q]);
+      expect(result.valid).toBe(false);
+      expect(result.errors.some((e) => e.code === 'CIRCLED_NUMBER')).toBe(true);
+    });
+
+    it('숫자 정답은 통과', () => {
+      const q: NaesinProblemQuestion = { number: 1, question: 'Choose', answer: '3', options: ['a', 'b', 'c', 'd', 'e'] };
+      const result = validateBeforeSave([q]);
+      expect(result.errors.some((e) => e.code === 'CIRCLED_NUMBER')).toBe(false);
+    });
+  });
+
+  describe('리터럴 백슬래시n 깨짐', () => {
+    it('선택지에 리터럴 백슬래시n이 있으면 경고', () => {
+      const q: NaesinProblemQuestion = {
+        number: 1,
+        question: 'Choose',
+        answer: '2',
+        options: ['a', 'A:\\nB:', 'c', 'd', 'e'],
+      };
+      const result = validateBeforeSave([q]);
+      expect(result.warnings.some((w) => w.code === 'LITERAL_BACKSLASH_N')).toBe(true);
+    });
+
+    it('실제 개행은 오탐하지 않음', () => {
+      const q: NaesinProblemQuestion = {
+        number: 1,
+        question: 'A:\nB:',
+        answer: '2',
+        options: ['a', 'b', 'c', 'd', 'e'],
+      };
+      const result = validateBeforeSave([q]);
+      expect(result.warnings.some((w) => w.code === 'LITERAL_BACKSLASH_N')).toBe(false);
+    });
+  });
+
+  describe('빈칸 문제 정답이 문장 전체', () => {
+    it('빈칸 + 문장 전체 정답이면 경고', () => {
+      const q: NaesinProblemQuestion = {
+        number: 1,
+        question: 'Amy ___ to the concert. (빈칸을 채우시오)',
+        answer: 'Amy wants to go to the concert.',
+      };
+      const result = validateBeforeSave([q]);
+      expect(result.warnings.some((w) => w.code === 'BLANK_FULL_SENTENCE')).toBe(true);
+    });
+
+    it('빈칸 부분만 정답이면 통과', () => {
+      const q: NaesinProblemQuestion = {
+        number: 1,
+        question: 'Amy ___ to the concert.',
+        answer: 'wants to go',
+      };
+      const result = validateBeforeSave([q]);
+      expect(result.warnings.some((w) => w.code === 'BLANK_FULL_SENTENCE')).toBe(false);
+    });
+
+    it('빈칸 없는 영작 문제는 오탐하지 않음', () => {
+      const q: NaesinProblemQuestion = {
+        number: 1,
+        question: '다음을 영작하시오: 그녀는 콘서트에 가고 싶어한다.',
+        answer: 'She wants to go to the concert.',
+      };
+      const result = validateBeforeSave([q]);
+      expect(result.warnings.some((w) => w.code === 'BLANK_FULL_SENTENCE')).toBe(false);
+    });
+  });
 });
