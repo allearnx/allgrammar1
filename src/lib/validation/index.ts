@@ -100,6 +100,8 @@ export async function runFullValidation(
 export { validateProblemStructure, sanitizeQuestions, validateBeforeSave, validateAnswerKey } from './problem-validator';
 export type { StructuralValidationResult, SaveValidationResult, ValidationIssue, IssueSeverity } from './problem-validator';
 export { crossCheckAnswers, spotCheckMcqAnswers } from './problem-answer-check';
+export { runContentScan, scanRow, aggregate } from './content-scan';
+export type { ContentScanResult, ContentScanIssue, ScanRow, IssueCategory } from './content-scan';
 export type { AnswerCheckBatchResult, AnswerCheckResult, AnswerCheckConfidence } from './problem-answer-check';
 export { scoreQuality } from './problem-quality-score';
 export type { QualityBatchResult, QuestionQualityScore, QualityFlag } from './problem-quality-score';
