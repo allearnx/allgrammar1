@@ -7,6 +7,7 @@ import { syncSheetToTemplate } from '@/lib/naesin/sync-template';
 import type { NaesinProblemQuestion } from '@/types/naesin';
 import { SHEET_ADMIN_LITE_COLUMNS } from '@/types/naesin';
 import { sanitizeQuestions } from '@/lib/validation/problem-validator';
+import { scanRow } from '@/lib/validation';
 import { spotCheckMcqAnswers } from '@/lib/validation/problem-answer-check';
 import { invalidateUnitContent } from '@/lib/cache/invalidate';
 import Anthropic from '@anthropic-ai/sdk';
@@ -87,6 +88,13 @@ export const POST = createApiHandler(
           error: err instanceof Error ? err.message : String(err),
         });
       }
+
+      // 저장 시점 콘텐츠 검사 (비차단) — 방금 저장한 시트만 검사
+      const scanWarnings = scanRow('sheet', {
+        id: data.id, title, questions: sanitizedQuestions as NaesinProblemQuestion[],
+        answer_key: sanitizedAnswerKey as (string | number | null)[],
+      }).filter((i) => i.category === 'correctness');
+      if (scanWarnings.length > 0) extras.scanWarnings = scanWarnings;
     }
 
     if (unitId) invalidateUnitContent(unitId);
@@ -152,6 +160,12 @@ export const PATCH = createApiHandler(
             error: err instanceof Error ? err.message : String(err),
           });
         }
+
+        // 저장 시점 콘텐츠 검사 (비차단) — 방금 저장한 시트만 검사
+        const scanWarnings = scanRow('sheet', {
+          id: data.id, title: data.title, questions: data.questions, answer_key: data.answer_key,
+        }).filter((i) => i.category === 'correctness');
+        if (scanWarnings.length > 0) extras.scanWarnings = scanWarnings;
       }
     }
 

@@ -4,7 +4,8 @@ import { requireContentPermission } from '@/lib/api/require-content-permission';
 import { templateCreateSchema, templatePatchSchema } from '@/lib/api/schemas';
 import { regradeSheet } from '@/lib/naesin/regrade-sheet';
 import { createAdminClient } from '@/lib/supabase/admin';
-import { sanitizeQuestions, validateBeforeSave } from '@/lib/validation/problem-validator';
+import { sanitizeQuestions } from '@/lib/validation/problem-validator';
+import { scanRow } from '@/lib/validation';
 import type { NaesinProblemQuestion } from '@/types/naesin';
 
 const ADMIN_ROLES = ['teacher', 'admin', 'boss'] as const;
@@ -47,8 +48,11 @@ export const POST = createApiHandler(
     // 학생용 시트로 배포(import) 시에만 엄격히 차단
     let validationWarnings: unknown[] = [];
     if (hasQ) {
-      const validation = validateBeforeSave(questions as NaesinProblemQuestion[]);
-      validationWarnings = [...validation.errors, ...validation.warnings];
+      // 저장 시점 검사 — correctness만 (품질 노이즈 NO_EXPLANATION 등 제외)
+      validationWarnings = scanRow('template', {
+        id: '', title, questions: questions as NaesinProblemQuestion[],
+        answer_key: answerKey as (string | number | null)[],
+      }).filter((i) => i.category === 'correctness');
     }
 
     const inserted = dbResult(await admin
@@ -92,11 +96,11 @@ export const PATCH = createApiHandler(
       updates.questions = sq;
       updates.answer_key = sak;
 
-      // 템플릿 수정도 저장 허용 — 경고만 반환
-      const validation = validateBeforeSave(sq);
-      if (validation.errors.length > 0 || validation.warnings.length > 0) {
-        patchWarnings = [...validation.errors, ...validation.warnings];
-      }
+      // 템플릿 수정도 저장 허용 — correctness 경고만 반환
+      patchWarnings = scanRow('template', {
+        id: id as string, title: (title as string) ?? '', questions: sq,
+        answer_key: sak as (string | number | null)[],
+      }).filter((i) => i.category === 'correctness');
     } else {
       if (questions != null) updates.questions = questions;
       if (answerKey != null) updates.answer_key = answerKey;

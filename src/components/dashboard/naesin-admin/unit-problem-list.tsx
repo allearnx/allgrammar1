@@ -151,6 +151,7 @@ export function UnitProblemList({ sheets, onUpdate, onRequestDelete, loadFullShe
       const updated = await fetchWithToast<NaesinProblemSheet & {
         templateSync?: { templateSynced: boolean; copiesSynced: number };
         aiWarnings?: { questionNumber: number; aiAnswer: string | number; expectedAnswer: string | number; reason?: string }[];
+        scanWarnings?: { code: string; questionNumber: number | null; message: string }[];
       }>('/api/naesin/problems', {
         method: 'PATCH',
         body: { id: editingSheetId, title: editTitle.trim(), questions, answer_key: answerKey },
@@ -174,6 +175,14 @@ export function UnitProblemList({ sheets, onUpdate, onRequestDelete, loadFullShe
         toast.warning(`AI 오답 의심 ${updated.aiWarnings.length}건`, {
           description: desc,
           duration: 10000,
+        });
+      }
+
+      // 저장 시점 콘텐츠 검사 경고 (학생 채점에 영향 주는 진짜 오류)
+      if (updated.scanWarnings && updated.scanWarnings.length > 0) {
+        toast.warning(`⚠️ 콘텐츠 오류 ${updated.scanWarnings.length}건 — 학생 채점에 영향`, {
+          description: updated.scanWarnings.slice(0, 5).map((w) => w.message).join('\n'),
+          duration: 12000,
         });
       }
 
