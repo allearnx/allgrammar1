@@ -253,6 +253,36 @@ blast radius: 영향 학생 2명(시트 d6a024bd 1명·2b897d6d 1명), 나머지
 사람 규칙은 template-rules.md 규칙 1(2026-04-08)에 이미 존재. **BLANK_FULL_SENTENCE를
 validateBeforeSave에 검사로 재추가 금지**(노이즈).
 
+## TEXT_NOT_IN_OPTIONS — DB 직접 수정 (학생 시트 0 달성)
+
+선지(options)는 있는데 정답이 어떤 선지와도 안 맞는 텍스트 → 라디오버튼인데 글자 정답 → 무조건 오답.
+**스캔 166건 중 160건은 원형숫자 정답("③")의 가짜 경보** — matchMcqAnswer가 원형숫자를 처리하고
+sanitize가 "③"→"3" 변환하므로 학생 무영향. **스캔이 sanitize를 안 거쳐 과보고**한 것(→ 스캐너는
+sanitize→validate 순서로 돌려야 함). 진짜는 6종:
+- **손상 4 (현재완료진행 Step3)**: answer 필드만 엉뚱한 문장으로 덮였고 `acceptedAnswers`에 정답이
+  살아있음 → acceptedAnswers와 맞는 선지 번호로 복구 (Q6→2, Q7→1, Q8→1, Q10→2).
+- **word-bank 2 (과거완료 step1/step2, 부사절 Step3)**: 보기를 options에 넣은 서술형 → options 제거
+  (서술형 전환, 보기는 문제 텍스트에 유지). C패턴3 선례 동일.
+
+## EMPTY_OPTION / EMPTY_ANSWER — DB 직접 수정
+
+**EMPTY_OPTION은 "빈 보기"만이 아니라 정답까지 틀린 경우가 많음**(명령문/감탄문 Step2). 옵션만 복원하면
+오답인 채 답하게 되니 **반드시 다시 풀어 옵션 복원 + 정답 검증**.
+- Type A(끝자리 빈 보기 패딩) → trim. Type B(보기 전부 ∅, 문제에 ①~⑤ 인라인) → options를 ①~⑤로 복원.
+- 학생 시트 5문항 + 템플릿 14문항 수정. 정답 교정 포함(감탄문 Q5·Q6 4→3, 명령문 Q12 4→2/Q13 2→3 등).
+- EMPTY_ANSWER: 의문사의문문 Q15(옵션 분리+정답), 조동사 Step1 Q45(맥락 유실 복원 불가 → **삭제**:
+  복사본·학생 시도 0 확인 후 문항+answer_key 제거 + 뒤 번호 당김).
+
+→ **결과: 학생 시트는 MCQ_RANGE·TEXT_NOT_IN_OPTIONS·EMPTY_OPTION·EMPTY_ANSWER 전부 0.**
+
+## 스캐너 원칙 + 품질 노이즈 처리 (NO_FORMAT_HINT / NO_EXPLANATION)
+
+향후 `runContentScan`은 검사를 **correctness(오탐0, 🔴 알림) vs quality(기본 숨김, 🟡)** 두 통으로 분리하고
+**sanitize→validate 순서**로 돌릴 것 — "🔴=무조건 진짜 버그" 신뢰 유지가 핵심.
+- **NO_FORMAT_HINT (2,484)**: 서술형 형식 안내 가족 → 이미 forward 규칙으로 처리. **추가 작업 없음, 스캐너 제외(quality).**
+- **NO_EXPLANATION (10,169)**: 해설 없음 = 채점 0 영향, 버그 아님. **블랭킷 AI 생성 비추**(오정보 주입 위험).
+  필요 시 "오답 빈출 문항 한정 + 검증" 소규모 배치만. **스캐너 제외(quality).**
+
 ---
 
 # select('*') → 컬럼 명시 전환 (egress 절감)
