@@ -388,6 +388,16 @@ export function sanitizeQuestions(
       const ansStr = out.answer.trim();
       const ansNum = Number(ansStr);
 
+      // Rule 6: 콤마 누락 복수정답 ("45" 선지5개) → 쉼표 삽입 ("4, 5")
+      //   통째 숫자가 범위 밖이고 각 자릿수가 모두 유효 선지일 때만 (단일정답 "12"=12번 선지 오인 방지)
+      //   쉼표가 있어야 학생 UI가 복수선택(두 개 클릭)으로 렌더됨 — answerHasComma 판정
+      if (/^\d{2,}$/.test(ansStr) && (ansNum < 1 || ansNum > out.options!.length)) {
+        const digits = [...ansStr].map(Number);
+        if (digits.every((d) => d >= 1 && d <= out.options!.length)) {
+          out.answer = digits.join(', ');
+        }
+      }
+
       // Rule 4: "N번 텍스트" or "N. 텍스트" pattern → extract N
       const numPrefixMatch = ansStr.match(/^(\d+)\s*[번.)]\s*.+/);
       if (numPrefixMatch) {

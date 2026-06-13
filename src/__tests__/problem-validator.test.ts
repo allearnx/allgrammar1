@@ -225,6 +225,41 @@ describe('sanitizeQuestions', () => {
     });
   });
 
+  describe('콤마 누락 복수정답 자동수정 (Rule 6)', () => {
+    const opts5 = ['a', 'b', 'c', 'd', 'e'];
+
+    it('"45" (선지 5개) → "4, 5"', () => {
+      const q: NaesinProblemQuestion = { number: 1, question: '두 개 고르면?', answer: '45', options: opts5 };
+      const { questions } = sanitizeQuestions([q]);
+      expect(questions[0].answer).toBe('4, 5');
+    });
+
+    it('"23" (선지 5개) → "2, 3"', () => {
+      const q: NaesinProblemQuestion = { number: 1, question: '두 개 고르면?', answer: '23', options: opts5 };
+      const { questions } = sanitizeQuestions([q]);
+      expect(questions[0].answer).toBe('2, 3');
+    });
+
+    it('범위 안 숫자 "12" + 선지 15개 → 그대로 (12번 선지 오인 방지)', () => {
+      const opts15 = Array.from({ length: 15 }, (_, i) => `opt${i + 1}`);
+      const q: NaesinProblemQuestion = { number: 1, question: 'Choose', answer: '12', options: opts15 };
+      const { questions } = sanitizeQuestions([q]);
+      expect(questions[0].answer).toBe('12');
+    });
+
+    it('자릿수에 0 포함 "10" (선지 5개) → 그대로 (0은 유효 선지 아님)', () => {
+      const q: NaesinProblemQuestion = { number: 1, question: 'Choose', answer: '10', options: opts5 };
+      const { questions } = sanitizeQuestions([q]);
+      expect(questions[0].answer).toBe('10');
+    });
+
+    it('단일 정답 "3"은 건드리지 않음', () => {
+      const q: NaesinProblemQuestion = { number: 1, question: 'Choose', answer: '3', options: opts5 };
+      const { questions } = sanitizeQuestions([q]);
+      expect(questions[0].answer).toBe('3');
+    });
+  });
+
   describe('answer_key 동기화', () => {
     it('answer_key가 questions[].answer에서 재구축됨', () => {
       const questions: NaesinProblemQuestion[] = [
