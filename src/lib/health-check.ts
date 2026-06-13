@@ -1,22 +1,9 @@
 import { createAdminClient } from '@/lib/supabase/admin';
-import { runContentScan } from '@/lib/validation';
 
 export interface HealthIssue {
   code: string;
   severity: 'error' | 'warning';
   message: string;
-}
-
-// ── 1. 콘텐츠 헬스 스캔 (빈정답·MCQ범위·텍스트불일치·answer_key 길이 등 통합) ──
-//   runContentScan은 sanitize→validate 순서라 원형숫자 등 자동수정 대상은 과보고 안 함.
-//   correctness(진짜 버그)만. 기존 checkEmptyAnswers/checkFffd/checkMcqRange 대체.
-async function checkContentScan(admin: ReturnType<typeof createAdminClient>): Promise<HealthIssue[]> {
-  const result = await runContentScan(admin, { correctnessOnly: true });
-  return result.issues.map((i) => ({
-    code: i.code,
-    severity: i.severity,
-    message: `[${i.source === 'sheet' ? '시트' : '템플릿'}] "${i.title}"${i.questionNumber != null ? ` Q${i.questionNumber}` : ''} — ${i.message}`,
-  }));
 }
 
 // ── 2. answer ↔ answer_key 불일치 ──
@@ -167,12 +154,14 @@ async function checkLowScoreCluster(admin: ReturnType<typeof createAdminClient>)
 export async function runHealthCheck(): Promise<HealthIssue[]> {
   const admin = createAdminClient();
 
+  // 전수 콘텐츠 스캔은 야간에서 제외 — 저장 시점 검사(A)가 새/수정 콘텐츠를 잡고,
+  // 학생-신호 검사(특히 LOW_SCORE_CLUSTER)가 실제 학생을 때리는 버그를 싸게 잡음.
+  // 전수 스캔이 필요하면 관리자 "콘텐츠 검사" 버튼(온디맨드)으로.
   const results = await Promise.all([
-    checkContentScan(admin),      // 콘텐츠 버그 (빈정답·MCQ범위·텍스트불일치·answer_key 길이 등, sanitize-first)
-    checkAnswerKeyMismatch(admin), // answer↔answer_key 값 불일치 (stale drift — scanRow 미포함)
-    checkZeroScores(admin),       // 학생 신호
-    checkWrongAnswerSync(admin),
-    checkLowScoreCluster(admin),
+    checkAnswerKeyMismatch(admin), // answer↔answer_key 값 불일치
+    checkZeroScores(admin),        // 학생 신호: 0점
+    checkWrongAnswerSync(admin),   // 학생 신호: 오답 테이블 동기화
+    checkLowScoreCluster(admin),   // 학생 신호: 동일 시트 다수 저점 (콘텐츠 버그 간접 탐지)
   ]);
 
   return results.flat();

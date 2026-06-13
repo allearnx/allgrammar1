@@ -1,8 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { runHealthCheck, sendTelegramAlert } from '@/lib/health-check';
 
-// 콘텐츠 전수 스캔(runContentScan) 포함 → 기본 타임아웃보다 여유 필요
-export const maxDuration = 300;
+// 학생-신호 검사 + answer_key 불일치만 (전수 콘텐츠 스캔은 제외 → 온디맨드 버튼으로)
+export const maxDuration = 60;
 
 export async function GET(request: NextRequest) {
   const authHeader = request.headers.get('authorization');
