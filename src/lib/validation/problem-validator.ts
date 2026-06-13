@@ -615,3 +615,33 @@ export function validateBeforeSave(
     warnings,
   };
 }
+
+// ── 시트 레벨 검사: answer_key 길이 ──
+// validateBeforeSave는 questions[]만 보므로 answer_key 길이 불일치는 못 잡는다.
+// sanitizeQuestions는 저장 시 answer_key를 풀 길이로 재구축하므로 정상 경로로는 발생 불가 —
+// 이 검사는 sanitize를 우회한 stale/직접삽입 데이터를 잡는 용도 (RAW 데이터에 적용해야 의미 있음).
+// 채점(submit)은 raw answer_key를 그대로 쓰고, 폴백은 answer_key가 "완전히 빈" 경우만 작동하므로
+// answer_key가 부분적으로만 채워지면 뒤쪽 문항이 전원 오답 처리된다(박서윤 0점 버그 변종).
+export function validateAnswerKey(
+  questions: NaesinProblemQuestion[],
+  answerKey: (string | number | null)[] | null | undefined,
+): ValidationIssue[] {
+  const issues: ValidationIssue[] = [];
+  if (!questions?.length || !Array.isArray(answerKey)) return issues;
+
+  // 완전히 빈 answer_key([])는 submit이 questions[].answer로 폴백 → 버그 아님
+  if (answerKey.length > 0 && answerKey.length < questions.length) {
+    const atRisk = questions
+      .slice(answerKey.length)
+      .filter((q) => q.answer != null && String(q.answer).trim() !== '').length;
+    issues.push(
+      issue(
+        'error',
+        null,
+        'PARTIAL_ANSWER_KEY',
+        `answer_key가 ${answerKey.length}개로 문항 수(${questions.length})보다 짧습니다. 뒤쪽 ${atRisk}개 문항이 전원 오답 처리됩니다.`,
+      ),
+    );
+  }
+  return issues;
+}

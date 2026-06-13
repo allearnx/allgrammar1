@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { validateProblemStructure, sanitizeQuestions, validateBeforeSave } from '@/lib/validation/problem-validator';
+import { validateProblemStructure, sanitizeQuestions, validateBeforeSave, validateAnswerKey } from '@/lib/validation/problem-validator';
 import type { NaesinProblemQuestion } from '@/types/naesin';
 
 function makeMcq(n: number, answer: number = (n % 5) + 1): NaesinProblemQuestion {
@@ -584,4 +584,31 @@ describe('validateBeforeSave', () => {
     });
   });
 
+});
+
+describe('validateAnswerKey', () => {
+  const qs = (n: number): NaesinProblemQuestion[] =>
+    Array.from({ length: n }, (_, i) => ({ number: i + 1, question: `Q${i + 1}`, answer: '3', options: ['a', 'b', 'c', 'd', 'e'] }));
+
+  it('answer_key가 문항보다 짧으면 PARTIAL_ANSWER_KEY 에러', () => {
+    const issues = validateAnswerKey(qs(10), ['3', '3', '3', '3', '3']); // 10문항인데 5개
+    expect(issues.some((i) => i.code === 'PARTIAL_ANSWER_KEY')).toBe(true);
+    expect(issues[0].severity).toBe('error');
+  });
+
+  it('완전히 빈 answer_key([])는 폴백 처리 → 에러 아님', () => {
+    expect(validateAnswerKey(qs(10), [])).toHaveLength(0);
+  });
+
+  it('answer_key 길이가 문항과 같으면 통과', () => {
+    expect(validateAnswerKey(qs(5), ['1', '2', '3', '4', '5'])).toHaveLength(0);
+  });
+
+  it('answer_key가 더 길어도 PARTIAL 아님', () => {
+    expect(validateAnswerKey(qs(3), ['1', '2', '3', '4', '5'])).toHaveLength(0);
+  });
+
+  it('answer_key가 배열이 아니면(null) 통과', () => {
+    expect(validateAnswerKey(qs(5), null)).toHaveLength(0);
+  });
 });
