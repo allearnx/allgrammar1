@@ -51,6 +51,8 @@ export interface ClassifyResult {
   choicesAreMarkers?: boolean;
   /** options 추출 등 후속 변환 필요 (괄호선택) */
   needsOptionExtraction?: boolean;
+  /** 정답 문자열을 parts로 분리 필요 (다중빈칸 (1)(2)…) */
+  needsPartSplit?: boolean;
   /** 분류 자신 없음 → Phase 1 step 4 수동 리뷰 대상 */
   uncertain?: boolean;
 }
@@ -77,6 +79,11 @@ export function classifyQuestionType(q: Partial<NaesinProblemQuestion>): Classif
     if (multi) return { type: 'multi_choice', tag: '복수정답' };
     if (allMarker || inlineQ) return { type: 'single_choice', tag: '인라인마커', choicesAreMarkers: true };
     return { type: 'single_choice', tag: '단일' };
+  }
+
+  // 다중 빈칸을 정답에 (1)(2)…로 욱여넣은 것 → multi_part (subParts 없이). 마이그레이션에서 parts 분리.
+  if (/\(\s*1\s*\)/.test(a) && /\(\s*2\s*\)/.test(a)) {
+    return { type: 'multi_part', tag: '다중빈칸', needsPartSplit: true };
   }
 
   // 괄호선택 (A / B) → single_choice (결정1). options는 마이그레이션에서 괄호 파싱.

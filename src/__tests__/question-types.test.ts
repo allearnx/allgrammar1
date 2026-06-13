@@ -74,4 +74,10 @@ describe('classifyQuestionType', () => {
     const r = classifyQuestionType(q({ question: 'Write the past tense of go', answer: 'went' }));
     expect(r.type).toBe('short_answer');
   });
+
+  it('다중빈칸 (1)(2) 정답 (subParts 없음) → multi_part', () => {
+    const r = classifyQuestionType(q({ question: '빈칸 (1),(2)를 완성하시오', answer: '(1) who invented the light bulb (2) who paints pictures' }));
+    expect(r.type).toBe('multi_part');
+    expect(r.needsPartSplit).toBe(true);
+  });
 });
