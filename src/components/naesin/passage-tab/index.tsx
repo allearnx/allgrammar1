@@ -37,6 +37,21 @@ export function PassageTab({ passages, unitId, onStageComplete, requiredStages, 
 
   const s = usePassageTabState({ requiredStages: augmentedStages, naesinRequiredRounds, round1Completed, subStageBests });
 
+  // 통과한 서브 단계 추적 (80점 이상) — 훅은 early return 앞에서 무조건 호출 (rules-of-hooks)
+  const passedSubStages = useRef(new Set<string>());
+
+  const advanceToNextTab = useCallback((currentType: string) => {
+    const idx = s.uniqueStages.indexOf(currentType as typeof s.uniqueStages[number]);
+    if (idx >= 0 && idx < s.uniqueStages.length - 1) {
+      const next = s.uniqueStages[idx + 1];
+      const nextTab = STAGE_TAB_MAP[next];
+      if (nextTab && !passedSubStages.current.has(next)) {
+        s.handleTabChange(nextTab.value);
+        toast.success(`다음 단계: ${nextTab.label}`, { duration: 3000 });
+      }
+    }
+  }, [s]);
+
   if (passages.length === 0) {
     return (
       <div className="flex flex-col items-center py-12">
@@ -57,21 +72,6 @@ export function PassageTab({ passages, unitId, onStageComplete, requiredStages, 
   const hasSentences = Array.isArray(passage.sentences) && passage.sentences.length > 0;
   const grammarVocabItems = (passage.grammar_vocab_items ?? []) as GrammarVocabItem[];
   const hasGrammarVocab = grammarVocabItems.length > 0;
-
-  // 통과한 서브 단계 추적 (80점 이상)
-  const passedSubStages = useRef(new Set<string>());
-
-  const advanceToNextTab = useCallback((currentType: string) => {
-    const idx = s.uniqueStages.indexOf(currentType as typeof s.uniqueStages[number]);
-    if (idx >= 0 && idx < s.uniqueStages.length - 1) {
-      const next = s.uniqueStages[idx + 1];
-      const nextTab = STAGE_TAB_MAP[next];
-      if (nextTab && !passedSubStages.current.has(next)) {
-        s.handleTabChange(nextTab.value);
-        toast.success(`다음 단계: ${nextTab.label}`, { duration: 3000 });
-      }
-    }
-  }, [s]);
 
   async function savePassageProgress(type: 'fill_blanks' | 'ordering' | 'translation' | 'grammar_vocab', score: number, difficulty?: string) {
     try {
