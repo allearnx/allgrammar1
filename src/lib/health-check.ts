@@ -1,4 +1,5 @@
 import { createAdminClient } from '@/lib/supabase/admin';
+import { runContentScan } from '@/lib/validation';
 
 export interface HealthIssue {
   code: string;
@@ -6,33 +7,16 @@ export interface HealthIssue {
   message: string;
 }
 
-// ── 1. 빈 정답 ──
-async function checkEmptyAnswers(admin: ReturnType<typeof createAdminClient>): Promise<HealthIssue[]> {
-  const { data: sheets } = await admin
-    .from('naesin_problem_sheets')
-    .select('id, title, questions, answer_key');
-
-  const issues: HealthIssue[] = [];
-  for (const sheet of sheets || []) {
-    const qs = sheet.questions as { question?: string; answer?: string }[];
-    if (!qs?.length) continue;
-
-    const emptyNums: number[] = [];
-    for (let i = 0; i < qs.length; i++) {
-      const q = qs[i];
-      const hasQuestion = q.question && q.question.trim();
-      const emptyAnswer = !q.answer || (typeof q.answer === 'string' && q.answer.trim() === '');
-      if (hasQuestion && emptyAnswer) emptyNums.push(i + 1);
-    }
-    if (emptyNums.length > 0) {
-      issues.push({
-        code: 'EMPTY_ANSWER',
-        severity: 'error',
-        message: `"${sheet.title}" — Q${emptyNums.join(', Q')} 빈 정답`,
-      });
-    }
-  }
-  return issues;
+// ── 1. 콘텐츠 헬스 스캔 (빈정답·MCQ범위·텍스트불일치·answer_key 길이 등 통합) ──
+//   runContentScan은 sanitize→validate 순서라 원형숫자 등 자동수정 대상은 과보고 안 함.
+//   correctness(진짜 버그)만. 기존 checkEmptyAnswers/checkFffd/checkMcqRange 대체.
+async function checkContentScan(admin: ReturnType<typeof createAdminClient>): Promise<HealthIssue[]> {
+  const result = await runContentScan(admin, { correctnessOnly: true });
+  return result.issues.map((i) => ({
+    code: i.code,
+    severity: i.severity,
+    message: `[${i.source === 'sheet' ? '시트' : '템플릿'}] "${i.title}"${i.questionNumber != null ? ` Q${i.questionNumber}` : ''} — ${i.message}`,
+  }));
 }
 
 // ── 2. answer ↔ answer_key 불일치 ──
@@ -62,63 +46,6 @@ async function checkAnswerKeyMismatch(admin: ReturnType<typeof createAdminClient
         code: 'ANSWER_KEY_MISMATCH',
         severity: 'error',
         message: `"${sheet.title}" — Q${mismatched.join(', Q')} answer≠answer_key`,
-      });
-    }
-  }
-  return issues;
-}
-
-// ── 3. U+FFFD 깨진 문자 ──
-async function checkFffd(admin: ReturnType<typeof createAdminClient>): Promise<HealthIssue[]> {
-  const { data: sheets } = await admin
-    .from('naesin_problem_sheets')
-    .select('id, title, questions');
-
-  const issues: HealthIssue[] = [];
-  for (const sheet of sheets || []) {
-    const qs = sheet.questions as Record<string, unknown>[];
-    if (!qs?.length) continue;
-
-    const fffdNums: number[] = [];
-    for (let i = 0; i < qs.length; i++) {
-      if (JSON.stringify(qs[i]).includes('\ufffd')) fffdNums.push(i + 1);
-    }
-    if (fffdNums.length > 0) {
-      issues.push({
-        code: 'FFFD_CHAR',
-        severity: 'warning',
-        message: `"${sheet.title}" — Q${fffdNums.join(', Q')} 깨진 문자(U+FFFD)`,
-      });
-    }
-  }
-  return issues;
-}
-
-// ── 4. 객관식 정답 범위 초과 ──
-async function checkMcqRange(admin: ReturnType<typeof createAdminClient>): Promise<HealthIssue[]> {
-  const { data: sheets } = await admin
-    .from('naesin_problem_sheets')
-    .select('id, title, questions');
-
-  const issues: HealthIssue[] = [];
-  for (const sheet of sheets || []) {
-    const qs = sheet.questions as { answer?: string; options?: string[] }[];
-    if (!qs?.length) continue;
-
-    const outOfRange: number[] = [];
-    for (let i = 0; i < qs.length; i++) {
-      const q = qs[i];
-      if (!q.options?.length || !q.answer) continue;
-      const nums = String(q.answer).split(',').map(s => parseInt(s.trim(), 10)).filter(n => !isNaN(n));
-      for (const n of nums) {
-        if (n < 1 || n > q.options.length) { outOfRange.push(i + 1); break; }
-      }
-    }
-    if (outOfRange.length > 0) {
-      issues.push({
-        code: 'MCQ_RANGE',
-        severity: 'error',
-        message: `"${sheet.title}" — Q${outOfRange.join(', Q')} 정답 범위 초과`,
       });
     }
   }
@@ -241,11 +168,9 @@ export async function runHealthCheck(): Promise<HealthIssue[]> {
   const admin = createAdminClient();
 
   const results = await Promise.all([
-    checkEmptyAnswers(admin),
-    checkAnswerKeyMismatch(admin),
-    checkFffd(admin),
-    checkMcqRange(admin),
-    checkZeroScores(admin),
+    checkContentScan(admin),      // 콘텐츠 버그 (빈정답·MCQ범위·텍스트불일치·answer_key 길이 등, sanitize-first)
+    checkAnswerKeyMismatch(admin), // answer↔answer_key 값 불일치 (stale drift — scanRow 미포함)
+    checkZeroScores(admin),       // 학생 신호
     checkWrongAnswerSync(admin),
     checkLowScoreCluster(admin),
   ]);
