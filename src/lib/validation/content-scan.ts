@@ -86,7 +86,7 @@ export function aggregate(issues: ContentScanIssue[], rowsScanned: number): Cont
 interface ScanDb {
   from(table: string): {
     select(cols: string): {
-      range(from: number, to: number): Promise<{ data: ScanRow[] | null; error: { message: string } | null }>;
+      range(from: number, to: number): PromiseLike<{ data: ScanRow[] | null; error: { message: string } | null }>;
     };
   };
 }

@@ -9,6 +9,7 @@ import { Input } from '@/components/ui/input';
 import { fetchWithToast } from '@/lib/fetch-with-toast';
 import { EditTemplateDialog } from './content-dialogs/template/edit-template-dialog';
 import { AddTemplateFromPdfDialog } from './content-dialogs/template/add-template-from-pdf-dialog';
+import { ContentScanButton } from './content-scan-button';
 import type { NaesinProblemQuestion } from '@/types/naesin';
 
 interface TemplateItem {
@@ -108,6 +109,9 @@ export function TemplateLibraryClient() {
           <FileUp className="h-3.5 w-3.5 mr-1" />
           PDF에서 추출
         </Button>
+        <div className="ml-auto">
+          <ContentScanButton />
+        </div>
       </div>
 
       {topics.length === 0 ? (
