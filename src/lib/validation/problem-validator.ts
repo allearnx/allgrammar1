@@ -594,17 +594,9 @@ export function validateBeforeSave(
       warnings.push(issue('warning', n, 'LITERAL_BACKSLASH_N', `${n}번: 리터럴 "\\n"(2글자)이 포함되어 줄바꿈이 깨져 보일 수 있습니다.`));
     }
 
-    // WARNING: 빈칸(___) 문제인데 정답이 문장 전체로 보임 (04-20 "전체 문장으로 답이 들어가 있어요")
-    //   보수적 휴리스틱: 빈칸 마커 + 정답이 대문자 시작 + 마침표/물음표/느낌표 종료 + 4단어 이상
-    if (!isMcq && hasQuestion && typeof q.answer === 'string' && !q.subParts) {
-      const ans = q.answer.trim();
-      const hasBlank = /_{2,}/.test(q.question);
-      const wordCount = ans.split(/\s+/).filter(Boolean).length;
-      const looksLikeFullSentence = /^[A-Z]/.test(ans) && /[.?!]$/.test(ans) && wordCount >= 4;
-      if (hasBlank && looksLikeFullSentence) {
-        warnings.push(issue('warning', n, 'BLANK_FULL_SENTENCE', `${n}번: 빈칸 문제인데 정답이 문장 전체로 보입니다. 빈칸 부분만 정답으로 두어야 학생 답이 맞게 채점됩니다.`));
-      }
-    }
+    // 참고: "빈칸 문제인데 정답이 문장 전체" 패턴은 검사로 두지 않음.
+    //   한국어 지시문 변주(영작/배열/합치/전환/고쳐쓰기…)를 키워드로 못 갈라 오탐이 큼.
+    //   → 대신 추출 프롬프트(extract-pdf/images/paraphrase)에서 생성 시점에 출력 형식을 명시하도록 강제 (forward 규칙).
   }
 
   return {

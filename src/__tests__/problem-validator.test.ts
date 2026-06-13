@@ -549,35 +549,4 @@ describe('validateBeforeSave', () => {
     });
   });
 
-  describe('빈칸 문제 정답이 문장 전체', () => {
-    it('빈칸 + 문장 전체 정답이면 경고', () => {
-      const q: NaesinProblemQuestion = {
-        number: 1,
-        question: 'Amy ___ to the concert. (빈칸을 채우시오)',
-        answer: 'Amy wants to go to the concert.',
-      };
-      const result = validateBeforeSave([q]);
-      expect(result.warnings.some((w) => w.code === 'BLANK_FULL_SENTENCE')).toBe(true);
-    });
-
-    it('빈칸 부분만 정답이면 통과', () => {
-      const q: NaesinProblemQuestion = {
-        number: 1,
-        question: 'Amy ___ to the concert.',
-        answer: 'wants to go',
-      };
-      const result = validateBeforeSave([q]);
-      expect(result.warnings.some((w) => w.code === 'BLANK_FULL_SENTENCE')).toBe(false);
-    });
-
-    it('빈칸 없는 영작 문제는 오탐하지 않음', () => {
-      const q: NaesinProblemQuestion = {
-        number: 1,
-        question: '다음을 영작하시오: 그녀는 콘서트에 가고 싶어한다.',
-        answer: 'She wants to go to the concert.',
-      };
-      const result = validateBeforeSave([q]);
-      expect(result.warnings.some((w) => w.code === 'BLANK_FULL_SENTENCE')).toBe(false);
-    });
-  });
 });
