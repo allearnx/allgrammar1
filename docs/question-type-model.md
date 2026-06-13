@@ -108,3 +108,30 @@ type ↔ 필드 정합성 검사 — 불일치 시 차단/플래그:
 - 풀 QTI / XML / 채점 DSL / 60타입 / 시험 조립 엔진 — 전부 제외(불필요).
 - 한 번에 전체 마이그레이션 — 금지(Phase 분리).
 - 이미지를 타입으로 — 안 함(base 필드).
+
+## 8. 실행 체크리스트 (잘게 쪼갬)
+각 번호 = 독립 배포 단위. 🟢안전(non-breaking) / 🟡채점건드림 / 🔴학생대면.
+
+### Phase 1 — 타입 백필 (전부 non-breaking, type 추가만)
+1. 🟢 타입 정의 + `classifyQuestionType()` 코드화 + 테스트 (아무도 안 씀) → 배포
+2. 🟢 백필 DRY-RUN — 2.5만 문항 분류 리포트(쓰기 X), 분포·이상치 검토
+3. 🟢 백필 적용 — questions JSONB 각 문항에 `type` 추가(괄호선택 파싱 포함), 백업. options/answer 불변 → 배포
+4. 🟢 불확실 케이스 리뷰 — 분류 헷갈림 + type↔현재필드 불일치 목록 수동 확인
+
+### Phase 2 — 정답 구조화 (🟡 신중, 이중읽기)
+5. 🟢 `parseAnswer(type, raw)` 헬퍼 + 테스트 (안 씀) → 배포
+6. 🟡 채점기 이중 읽기(구조 우선, flat 폴백) + "구조vsflat 동일점수" 테스트 → 배포
+7. 🟡 구조화 정답 백필 — DRY-RUN(차이 0 확인) → 적용
+8. 🟡 회귀 검증 — 샘플 재채점, 점수 변동 0
+
+### Phase 3 — 신규 엄격 + prevention by design (🔴)
+9. 🟡 sanitize가 저장 시 type+구조화 정답 생성 (born-typed)
+10. 🟡 게이트가 type↔필드 검증 (scanRow 확장)
+11. 🔴 추출 프롬프트 2단계화(분류→채움) + 게이트
+12. 🔴 작성 에디터 타입 피커 + 유형별 칸 (prevention by design, 최대 효과)
+
+### Phase 4 — 정리 (🟡)
+13. 🟡 채점기 type dispatch 전환 (`isSubjective=!options` 추론 제거)
+14. 🟢 flat 폴백·죽은 추론 코드 제거
+
+> 진행: 1~4 지금 당장 안전. 5~8이 answer 과부하 해결. 9~12가 "다신 안 생김"(특히 12). 한 번에 하나씩.
