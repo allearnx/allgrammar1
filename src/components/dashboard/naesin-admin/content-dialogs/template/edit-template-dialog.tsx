@@ -11,7 +11,7 @@ import {
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
-import { Loader2, RefreshCw } from 'lucide-react';
+import { Loader2, RefreshCw, Sparkles } from 'lucide-react';
 import { Checkbox } from '@/components/ui/checkbox';
 import { toast } from 'sonner';
 import { fetchWithToast } from '@/lib/fetch-with-toast';
@@ -38,6 +38,39 @@ export function EditTemplateDialog({ template, open, onOpenChange, onUpdated }: 
   const [saving, setSaving] = useState(false);
   const [syncCopies, setSyncCopies] = useState(false);
   const editor = useQuestionEditor();
+  const [generatingExpl, setGeneratingExpl] = useState(false);
+
+  // 빈 해설만 AI로 생성 → 편집칸에 채움 (자동 저장 X, 검토 후 저장)
+  async function handleGenerateExplanations() {
+    const emptyCount = editor.questions.filter((q) => !q.explanation || !q.explanation.trim()).length;
+    if (emptyCount === 0) return;
+    setGeneratingExpl(true);
+    try {
+      const res = await fetchWithToast<{ explanations: Record<string, string>; generated: number }>(
+        '/api/naesin/problems/generate-explanations',
+        {
+          body: {
+            questions: editor.questions.map((q) => ({
+              number: q.number, question: q.question, options: q.options, answer: q.answer, explanation: q.explanation,
+            })),
+          },
+          errorMessage: '해설 생성에 실패했습니다',
+          logContext: 'template.generate_explanations',
+        },
+      );
+      const map = res.explanations || {};
+      editor.setQuestions((prev) =>
+        prev.map((q) =>
+          (!q.explanation || !q.explanation.trim()) && map[String(q.number)]
+            ? { ...q, explanation: map[String(q.number)] }
+            : q,
+        ),
+      );
+      toast.success(`해설 ${res.generated}개 생성됨 — 검토 후 저장하세요`);
+    } finally {
+      setGeneratingExpl(false);
+    }
+  }
 
   useEffect(() => {
     if (open) {
@@ -107,6 +140,22 @@ export function EditTemplateDialog({ template, open, onOpenChange, onUpdated }: 
           <Badge variant="secondary" className="text-[11px]">{editor.questions.length}문제</Badge>
           {mcqCount > 0 && <Badge variant="outline" className="text-[11px]">객관식 {mcqCount}</Badge>}
           {subCount > 0 && <Badge variant="outline" className="text-[11px]">서술형 {subCount}</Badge>}
+          {(() => {
+            const emptyExpl = editor.questions.filter((q) => !q.explanation || !q.explanation.trim()).length;
+            return (
+              <Button
+                size="sm"
+                variant="outline"
+                className="ml-auto h-7"
+                onClick={handleGenerateExplanations}
+                disabled={generatingExpl || emptyExpl === 0}
+                title={emptyExpl === 0 ? '빈 해설이 없습니다' : `해설 없는 ${emptyExpl}문항에 AI 해설 생성`}
+              >
+                {generatingExpl ? <Loader2 className="h-3.5 w-3.5 mr-1 animate-spin" /> : <Sparkles className="h-3.5 w-3.5 mr-1" />}
+                해설 생성{emptyExpl > 0 ? ` (빈 ${emptyExpl})` : ''}
+              </Button>
+            );
+          })()}
         </div>
 
         <div className="flex-1 min-h-0 overflow-y-auto rounded-lg border">
