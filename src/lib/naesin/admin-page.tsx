@@ -7,7 +7,8 @@ export async function getNaesinPageData(roles: UserRole[]) {
   const supabase = await createClient();
   const { data: textbooks } = await supabase
     .from('naesin_textbooks')
-    .select('id, display_name, publisher, grade, sort_order, cover_image_url, is_active, created_at')
+    // naesin_textbooks에 cover_image_url 컬럼 없음 — select에 넣으면 쿼리 에러로 교과서 전체가 빈 목록이 됨
+    .select('id, display_name, publisher, grade, sort_order, is_active, created_at')
     .order('grade')
     .order('sort_order');
   return { user, textbooks: textbooks || [] };
