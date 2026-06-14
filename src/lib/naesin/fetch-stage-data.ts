@@ -107,7 +107,7 @@ async function fetchGrammarData(supabase: SupabaseClient, userId: string, unitId
   const lessonIds = grammarLessons.map((l: { id: string }) => l.id);
 
   const videoProgress = lessonIds.length > 0
-    ? (await supabase.from('naesin_grammar_video_progress').select('id, lesson_id, completed, watch_seconds').eq('student_id', userId).in('lesson_id', lessonIds)).data || []
+    ? (await supabase.from('naesin_grammar_video_progress').select('id, lesson_id, completed').eq('student_id', userId).in('lesson_id', lessonIds)).data || []
     : [];
 
   return { grammarLessons, videoProgress };
@@ -120,7 +120,7 @@ async function fetchTextbookVideoData(supabase: SupabaseClient, userId: string, 
   const videoIds = textbookVideos.map((v: { id: string }) => v.id);
 
   const textbookVideoProgress = videoIds.length > 0
-    ? (await supabase.from('naesin_textbook_video_progress').select('id, video_id, completed, watch_seconds').eq('student_id', userId).in('video_id', videoIds)).data || []
+    ? (await supabase.from('naesin_textbook_video_progress').select('id, video_id, completed').eq('student_id', userId).in('video_id', videoIds)).data || []
     : [];
 
   return { textbookVideos, textbookVideoProgress };

@@ -56,7 +56,7 @@ export const GET = createApiHandler(
         .select('student_id, textbook_id, exam_date, exam_label')
         .in('student_id', studentIds)
         .not('exam_date', 'is', null),
-      admin.from('naesin_textbooks').select('id, title'),
+      admin.from('naesin_textbooks').select('id, title:display_name'),
       admin
         .from('naesin_student_progress')
         .select('student_id, textbook_id, vocab_completed, passage_completed, dialogue_completed, grammar_completed, problem_completed, mock_exam_completed')

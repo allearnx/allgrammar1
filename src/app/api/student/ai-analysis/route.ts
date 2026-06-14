@@ -47,9 +47,9 @@ export const POST = createApiHandler(
         .limit(30),
       admin
         .from('learning_daily_log')
-        .select('log_date, total_seconds')
+        .select('log_date:date, total_seconds:seconds')
         .eq('student_id', studentId)
-        .order('log_date', { ascending: false })
+        .order('date', { ascending: false })
         .limit(14),
       admin
         .from('naesin_units')

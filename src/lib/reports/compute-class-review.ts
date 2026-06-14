@@ -31,7 +31,7 @@ export async function computeClassReview(
   // 1. Students assigned to naesin in this academy
   const { data: students } = await supabase
     .from('users')
-    .select('id, name')
+    .select('id, name:full_name')
     .eq('academy_id', academyId)
     .eq('role', 'student');
 

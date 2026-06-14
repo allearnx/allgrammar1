@@ -36,7 +36,7 @@ export const POST = createApiHandler(
     if (user.academy_id) {
       const { data: members, count } = await adminClient
         .from('users')
-        .select('id, name, email, role', { count: 'exact' })
+        .select('id, name:full_name, email, role', { count: 'exact' })
         .eq('academy_id', user.academy_id)
         .eq('is_active', true)
         .neq('id', user.id)
