@@ -49,6 +49,32 @@ export function AddMockExamDialog({ unitId, textbookId, onAdd }: { unitId?: stri
   const [extractedQuestions, setExtractedQuestions] = useState<ExtractedQuestion[]>([]);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
+  // OMR 모드 PDF 파일 업로드 (추출 없이 첨부만)
+  const omrPdfInputRef = useRef<HTMLInputElement>(null);
+  const [uploadingPdf, setUploadingPdf] = useState(false);
+
+  async function handleOmrPdfUpload(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    if (file.type !== 'application/pdf') {
+      toast.error('PDF 파일만 업로드할 수 있습니다');
+      if (omrPdfInputRef.current) omrPdfInputRef.current.value = '';
+      return;
+    }
+    setUploadingPdf(true);
+    try {
+      const { uploadForExtract } = await import('@/lib/upload-for-extract');
+      const { publicUrl } = await uploadForExtract(file);
+      setPdfUrl(publicUrl);
+      toast.success('PDF가 업로드되었습니다');
+    } catch (err) {
+      toast.error(err instanceof Error ? err.message : 'PDF 업로드에 실패했습니다');
+    } finally {
+      setUploadingPdf(false);
+      if (omrPdfInputRef.current) omrPdfInputRef.current.value = '';
+    }
+  }
+
   function resetAll() {
     setTitle('');
     setTotalQuestions('');
@@ -439,8 +465,16 @@ export function AddMockExamDialog({ unitId, textbookId, onAdd }: { unitId?: stri
                 </p>
               </div>
               <div>
-                <Label htmlFor="mock-pdf">PDF URL (선택)</Label>
-                <Input id="mock-pdf" value={pdfUrl} onChange={(e) => setPdfUrl(e.target.value)} placeholder="https://..." />
+                <Label htmlFor="mock-pdf">문제 PDF (선택)</Label>
+                <div className="flex gap-2">
+                  <Input id="mock-pdf" value={pdfUrl} onChange={(e) => setPdfUrl(e.target.value)} placeholder="파일 업로드 또는 URL 붙여넣기" />
+                  <input ref={omrPdfInputRef} type="file" accept="application/pdf" className="hidden" onChange={handleOmrPdfUpload} />
+                  <Button type="button" variant="outline" className="shrink-0" onClick={() => omrPdfInputRef.current?.click()} disabled={uploadingPdf}>
+                    {uploadingPdf ? <Loader2 className="h-4 w-4 animate-spin" /> : <Upload className="h-4 w-4" />}
+                    <span className="ml-1">PDF 업로드</span>
+                  </Button>
+                </div>
+                {pdfUrl && <p className="mt-1 truncate text-xs text-green-600">✓ 첨부됨: {pdfUrl}</p>}
               </div>
               <Button type="submit" className="w-full" disabled={saving}>
                 {saving ? '저장 중...' : '추가'}
