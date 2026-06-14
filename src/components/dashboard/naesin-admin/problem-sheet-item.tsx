@@ -181,7 +181,36 @@ export function ProblemSheetItem({
 
       {isExpanded && (
         <div className="px-2 pb-3">
-          {isLoadingFull ? (
+          {sheet.mode === 'image_answer' ? (
+            // OMR/이미지 답안 시트: 인터랙티브 문제 없이 PDF + 정답표로만 동작 (questions 비어있는 게 정상)
+            <div className="space-y-3 py-2">
+              <div className="flex items-center gap-2 text-sm">
+                <span className="rounded bg-muted px-2 py-0.5 text-[11px] text-muted-foreground">OMR / 이미지 답안 시트</span>
+                {sheet.pdf_url && (
+                  <a href={sheet.pdf_url} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
+                    문제 PDF 열기 ↗
+                  </a>
+                )}
+              </div>
+              {(sheet.answer_key?.length ?? 0) > 0 ? (
+                <div className="rounded-lg border p-3">
+                  <p className="mb-2 text-xs font-medium text-muted-foreground">정답 ({sheet.answer_key!.length}문항)</p>
+                  <div className="grid grid-cols-5 gap-1.5 sm:grid-cols-10">
+                    {sheet.answer_key!.map((a, i) => {
+                      const ans = (typeof a === 'string' || typeof a === 'number') ? String(a) : ((a as { answer?: string })?.answer ?? '');
+                      return (
+                        <div key={i} className="rounded border bg-muted/40 px-1.5 py-1 text-center text-xs">
+                          <span className="text-muted-foreground">{i + 1}.</span> <span className="font-medium">{ans}</span>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              ) : (
+                <p className="py-3 text-center text-sm text-muted-foreground">등록된 정답이 없습니다.</p>
+              )}
+            </div>
+          ) : isLoadingFull ? (
             <div className="flex items-center justify-center py-6">
               <Loader2 className="h-5 w-5 animate-spin text-muted-foreground" />
               <span className="ml-2 text-sm text-muted-foreground">문제를 불러오는 중...</span>
