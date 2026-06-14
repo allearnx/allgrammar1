@@ -146,7 +146,11 @@ export function useUnitContentData(unitId: string) {
       logger.error('unit.load_counts', { error: err instanceof Error ? err.message : String(err) });
       toast.error('데이터를 불러오지 못했습니다');
     }
-  }, [unitId, vocab]);
+    // deps: vocab 객체는 매 렌더 새로 생성돼 무한 루프(loadCounts 반복 호출 →
+    // 목록 쿼리 폭주 + 펼친 시트의 questions가 매번 lite로 덮여 사라짐)를 유발한다.
+    // 실제로 쓰는 안정적인 useState setter만 의존한다. (vocab 전체 넣지 말 것)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [unitId, vocab.setItems, vocab.setSelectedIds]);
 
   useEffect(() => {
     loadCounts();
