@@ -11,7 +11,7 @@ import {
   DialogTitle,
   DialogDescription,
 } from '@/components/ui/dialog';
-import { CheckCircle, AlertTriangle, Trophy, RotateCcw, PenLine, ListRestart } from 'lucide-react';
+import { CheckCircle, AlertTriangle, Trophy, RotateCcw, PenLine, ListRestart, ArrowRight } from 'lucide-react';
 import { getEncouragement } from '@/lib/naesin/encouragement';
 import { useFillBlanksState } from '@/hooks/use-fill-blanks-state';
 import type { TextbookPassage, BlankItem } from '@/types/database';
@@ -30,9 +30,12 @@ interface FillBlanksExerciseProps {
   passage: TextbookPassage;
   onComplete: (score: number, wrongAnswers: WrongBlank[], difficulty: Difficulty) => void;
   showWrongAlert?: boolean;
+  /** 통과 시 결과 모달에 "다음 단계로" 버튼 노출 (있으면) */
+  onNext?: () => void;
+  nextLabel?: string;
 }
 
-export function FillBlanksExercise({ passage, onComplete, showWrongAlert: _showWrongAlert }: FillBlanksExerciseProps) {
+export function FillBlanksExercise({ passage, onComplete, showWrongAlert: _showWrongAlert, onNext, nextLabel }: FillBlanksExerciseProps) {
   const s = useFillBlanksState({ passage, onComplete });
 
   function renderWord(idx: number) {
@@ -164,6 +167,8 @@ export function FillBlanksExercise({ passage, onComplete, showWrongAlert: _showW
               onClose={() => s.setResultModal(null)}
               onRetryWrong={() => { s.setResultModal(null); s.handleRetryWrong(); }}
               onReset={() => { s.setResultModal(null); s.handleReset(); }}
+              onNext={onNext}
+              nextLabel={nextLabel}
             />
           )}
         </>
@@ -178,12 +183,16 @@ function FillBlanksResultDialog({
   onClose,
   onRetryWrong,
   onReset,
+  onNext,
+  nextLabel,
 }: {
   result: { score: number; correct: number; total: number };
   wrongCount: number;
   onClose: () => void;
   onRetryWrong: () => void;
   onReset: () => void;
+  onNext?: () => void;
+  nextLabel?: string;
 }) {
   const passed = result.score >= 80;
 
@@ -212,7 +221,14 @@ function FillBlanksResultDialog({
                   오답만 다시 풀기
                 </Button>
               )}
-              <Button onClick={onClose} className="w-full">확인</Button>
+              {onNext && nextLabel ? (
+                <Button onClick={() => { onClose(); onNext(); }} className="w-full bg-green-600 hover:bg-green-700">
+                  다음 단계: {nextLabel}
+                  <ArrowRight className="h-4 w-4 ml-1" />
+                </Button>
+              ) : (
+                <Button onClick={onClose} className="w-full">확인</Button>
+              )}
             </div>
           </>
         ) : (

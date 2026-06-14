@@ -41,17 +41,14 @@ export function PassageTab({ passages, unitId, onStageComplete, requiredStages, 
   // (훅은 early return 앞에서 무조건 호출 — rules-of-hooks)
   const [passedSet, setPassedSet] = useState<Set<string>>(new Set());
 
-  const advanceToNextTab = useCallback((currentType: string) => {
-    const idx = s.uniqueStages.indexOf(currentType as typeof s.uniqueStages[number]);
-    if (idx >= 0 && idx < s.uniqueStages.length - 1) {
-      const next = s.uniqueStages[idx + 1];
-      const nextTab = STAGE_TAB_MAP[next];
-      if (nextTab && !passedSet.has(next)) {
-        s.handleTabChange(nextTab.value);
-        toast.success(`다음 단계: ${nextTab.label}`, { duration: 3000 });
-      }
-    }
-  }, [s, passedSet]);
+  // 현재 단계 다음의 탭 정보 (없으면 null). 결과 모달/배너의 "다음 단계로" 버튼용.
+  // 제출 시 자동 탭 전환은 결과 모달과 충돌(경쟁)하므로 제거하고,
+  // 학생이 결과를 확인하고 "다음 단계" 버튼을 누를 때만 전환한다.
+  const nextTabFor = useCallback((stage: string) => {
+    const idx = s.uniqueStages.indexOf(stage as typeof s.uniqueStages[number]);
+    if (idx < 0 || idx >= s.uniqueStages.length - 1) return null;
+    return STAGE_TAB_MAP[s.uniqueStages[idx + 1]] ?? null;
+  }, [s]);
 
   if (passages.length === 0) {
     return (
@@ -89,9 +86,8 @@ export function PassageTab({ passages, unitId, onStageComplete, requiredStages, 
         }
         onStageComplete();
       } else if (score >= 80) {
-        // 서브 단계 통과 → 다음 탭으로 자동 전환 + "다음 단계" 배너 노출
+        // 서브 단계 통과 → 결과 모달의 "다음 단계" 버튼 + 배너 노출 (자동 전환은 모달 확인 시)
         setPassedSet((prev) => new Set(prev).add(type));
-        advanceToNextTab(type);
       }
     } catch {
       // error already toasted by fetchWithToast
@@ -255,6 +251,8 @@ export function PassageTab({ passages, unitId, onStageComplete, requiredStages, 
                     savePassageProgress('fill_blanks', score, difficulty);
                     if (wrongs && wrongs.length > 0) saveWrongAnswers(wrongs);
                   }}
+                  nextStageLabel={nextTabFor('fill_blanks')?.label}
+                  onNextStage={() => { const t = nextTabFor('fill_blanks'); if (t) s.handleTabChange(t.value); }}
                 />
               </TabsContent>
             )}
