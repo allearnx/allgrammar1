@@ -1,11 +1,11 @@
 'use client';
 
-import { useMemo, useCallback, useRef } from 'react';
+import { useMemo, useCallback, useState } from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { toast } from 'sonner';
 import { fetchWithToast } from '@/lib/fetch-with-toast';
 import { cn } from '@/lib/utils';
-import { Download, FileText, Lock } from 'lucide-react';
+import { Download, FileText, Lock, ArrowRight } from 'lucide-react';
 import { passageToTextbookPassage, augmentPassageStages } from '@/lib/naesin/adapters';
 import { NaesinFillBlanksView } from './fill-blanks-view';
 import { NaesinOrderingView } from './ordering-view';
@@ -37,20 +37,21 @@ export function PassageTab({ passages, unitId, onStageComplete, requiredStages, 
 
   const s = usePassageTabState({ requiredStages: augmentedStages, naesinRequiredRounds, round1Completed, subStageBests });
 
-  // 통과한 서브 단계 추적 (80점 이상) — 훅은 early return 앞에서 무조건 호출 (rules-of-hooks)
-  const passedSubStages = useRef(new Set<string>());
+  // 통과한 서브 단계 추적 (80점 이상) — state 로 두어 통과 즉시 "다음 단계" 배너가 뜨게 함
+  // (훅은 early return 앞에서 무조건 호출 — rules-of-hooks)
+  const [passedSet, setPassedSet] = useState<Set<string>>(new Set());
 
   const advanceToNextTab = useCallback((currentType: string) => {
     const idx = s.uniqueStages.indexOf(currentType as typeof s.uniqueStages[number]);
     if (idx >= 0 && idx < s.uniqueStages.length - 1) {
       const next = s.uniqueStages[idx + 1];
       const nextTab = STAGE_TAB_MAP[next];
-      if (nextTab && !passedSubStages.current.has(next)) {
+      if (nextTab && !passedSet.has(next)) {
         s.handleTabChange(nextTab.value);
         toast.success(`다음 단계: ${nextTab.label}`, { duration: 3000 });
       }
     }
-  }, [s]);
+  }, [s, passedSet]);
 
   if (passages.length === 0) {
     return (
@@ -88,8 +89,8 @@ export function PassageTab({ passages, unitId, onStageComplete, requiredStages, 
         }
         onStageComplete();
       } else if (score >= 80) {
-        // 서브 단계 통과 → 다음 탭으로 자동 전환
-        passedSubStages.current.add(type);
+        // 서브 단계 통과 → 다음 탭으로 자동 전환 + "다음 단계" 배너 노출
+        setPassedSet((prev) => new Set(prev).add(type));
         advanceToNextTab(type);
       }
     } catch {
@@ -203,6 +204,29 @@ export function PassageTab({ passages, unitId, onStageComplete, requiredStages, 
               onClose={s.dismissStageDirection}
             />
           )}
+
+          {(() => {
+            // 현재 탭의 단계를 통과(80점+)했고 다음 단계가 있으면 "다음 단계로" 버튼 노출.
+            // (결과 모달에 다음 버튼이 없어 학생이 멈추던 문제 해결)
+            const currentStage = s.uniqueStages.find((st) => STAGE_TAB_MAP[st]?.value === s.activeTab);
+            if (!currentStage) return null;
+            const isPassed = passedSet.has(currentStage) || (subStageBests?.[currentStage] ?? 0) >= 80;
+            if (!isPassed) return null;
+            const idx = s.uniqueStages.indexOf(currentStage);
+            const next = s.uniqueStages[idx + 1];
+            const nextTab = next ? STAGE_TAB_MAP[next] : null;
+            if (!nextTab) return null;
+            return (
+              <button
+                type="button"
+                onClick={() => s.handleTabChange(nextTab.value)}
+                className="flex w-full items-center justify-center gap-2 rounded-lg bg-green-600 px-4 py-3 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-green-700"
+              >
+                ✅ {STAGE_TAB_MAP[currentStage].label} 완료! 다음 단계 「{nextTab.label}」(으)로 넘어가기
+                <ArrowRight className="h-4 w-4" />
+              </button>
+            );
+          })()}
 
           <Tabs value={s.activeTab} onValueChange={s.handleTabChange}>
             <TabsList className={cn('grid w-full', s.gridCols)}>
