@@ -290,6 +290,20 @@ sanitize→validate 순서로 돌려야 함). 진짜는 6종:
 ESLint `supabase/no-select-wildcard` 규칙 적용 중 (warn).
 현재 117건 경고. 테이블별로 컬럼 상수를 만들고 일괄 교체.
 
+## ⚠️ 유령 컬럼 주의 — 이 리팩터의 반복 사고
+`select('*')`를 명시 컬럼으로 바꿀 때 **실제 스키마에 없는 컬럼**을 적으면 그 쿼리가
+런타임에 통째로 에러난다. 빈 데이터/빈 목록으로 조용히 망가져 학생/관리자에게 노출됨.
+- 사고 이력: `naesin_textbooks.cover_image_url`(교과서 전체 안 보임, 6/12) + 19건
+  (분석/리포트: problem_attempts.unit_id, grammar_video_progress.created_at/unit_id,
+  vocab_quiz_set_results.unit_id, voca_matching_submissions.score,
+  student_progress.textbook_id, grammar_chat_questions.is_auto_generated).
+- 흔한 함정: 시도/진도 테이블엔 `unit_id`가 없고 `sheet_id`/`lesson_id`/`quiz_set_id`만
+  있음 → 조인으로 유도해야 함. 영상진도 시각은 `created_at`이 아니라 `updated_at`.
+- **재발 방지**: `npm run check:columns` (scripts/check-select-columns.mjs) — PostgREST
+  OpenAPI 스키마와 코드의 모든 `.from().select()`를 대조. `build` 체인에 포함되어
+  Vercel 배포 시(실 자격증명) 게이트. CI(placeholder)/네트워크 실패는 graceful skip.
+  컬럼 추가/변경 후 반드시 한 번 돌릴 것.
+
 ## 기존 컬럼 상수 (src/types/naesin.ts)
 - `SHEET_LITE_COLUMNS` — 문제 시트 목록용 (13컬럼, questions/answer_key 제외)
 - `SHEET_ADMIN_LITE_COLUMNS` — 관리자 목록용 (+ answer_key)
