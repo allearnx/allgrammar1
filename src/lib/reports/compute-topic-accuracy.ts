@@ -5,7 +5,6 @@ interface Attempt {
   score: number;
   total_questions: number;
   created_at: string;
-  unit_id: string;
   sheet_id: string | null;
 }
 
@@ -29,18 +28,22 @@ export async function computeTopicAccuracy(
 ): Promise<TopicAccuracyItem[]> {
   if (attempts.length === 0) return [];
 
-  // 1. Collect unique sheet_ids and unit_ids
+  // 1. sheet_id 수집 (attempts 엔 sheet_id 만 있음 — unit_id 는 시트로 유도)
   const sheetIds = [...new Set(attempts.map((a) => a.sheet_id).filter(Boolean))] as string[];
-  const unitIds = [...new Set(attempts.map((a) => a.unit_id))];
 
-  // 2. sheet → template_topic via naesin_problem_sheets + naesin_templates
+  // 2. sheet → template_topic + sheet → unit_id
   const sheetTopicMap = new Map<string, string>();
+  const sheetUnitMap = new Map<string, string>();
 
   if (sheetIds.length > 0) {
     const { data: sheets } = await qc
       .from('naesin_problem_sheets')
-      .select('id, source_template_id')
+      .select('id, source_template_id, unit_id')
       .in('id', sheetIds);
+
+    for (const s of sheets || []) {
+      if (s.unit_id) sheetUnitMap.set(s.id, s.unit_id);
+    }
 
     const templateIds = [...new Set((sheets || []).map((s) => s.source_template_id).filter(Boolean))] as string[];
 
@@ -63,15 +66,15 @@ export async function computeTopicAccuracy(
     }
   }
 
-  // 3. unit → title (fallback)
-  const { data: units } = await qc
-    .from('naesin_units')
-    .select('id, title')
-    .in('id', unitIds);
-
+  // 3. unit → title (sheet 로 유도한 unit_id 기준, fallback 용)
+  const unitIds = [...new Set([...sheetUnitMap.values()])];
   const unitTitleMap = new Map<string, string>();
-  for (const u of units || []) {
-    unitTitleMap.set(u.id, u.title);
+  if (unitIds.length > 0) {
+    const { data: units } = await qc
+      .from('naesin_units')
+      .select('id, title')
+      .in('id', unitIds);
+    for (const u of units || []) unitTitleMap.set(u.id, u.title);
   }
 
   // 4. Resolve topic for each attempt
@@ -83,9 +86,10 @@ export async function computeTopicAccuracy(
   const topicMap = new Map<string, Acc>();
 
   for (const a of attempts) {
+    const unitId = a.sheet_id ? sheetUnitMap.get(a.sheet_id) : undefined;
     let topic = a.sheet_id ? sheetTopicMap.get(a.sheet_id) : undefined;
     if (!topic) {
-      const unitTitle = unitTitleMap.get(a.unit_id);
+      const unitTitle = unitId ? unitTitleMap.get(unitId) : undefined;
       topic = unitTitle ? extractTopic(unitTitle) : '기타';
     }
 
@@ -99,8 +103,10 @@ export async function computeTopicAccuracy(
     acc.count += 1;
 
     // Track latest attempt per unit
-    const prev = acc.unitLatest.get(a.unit_id);
-    if (!prev || a.created_at > prev) acc.unitLatest.set(a.unit_id, a.created_at);
+    if (unitId) {
+      const prev = acc.unitLatest.get(unitId);
+      if (!prev || a.created_at > prev) acc.unitLatest.set(unitId, a.created_at);
+    }
 
     const wk = isoWeek(a.created_at);
     const wAcc = acc.weekly.get(wk) ?? { correct: 0, total: 0 };

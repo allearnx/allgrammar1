@@ -4,9 +4,10 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "node scripts/db-push.mjs && next build",
+    "build": "node scripts/db-push.mjs && node scripts/check-select-columns.mjs && next build",
     "start": "next start",
     "lint": "eslint",
+    "check:columns": "node scripts/check-select-columns.mjs",
     "test": "vitest run",
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",

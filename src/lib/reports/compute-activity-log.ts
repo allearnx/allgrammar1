@@ -5,11 +5,11 @@ import type { ActivityRecord } from '@/types/student-report';
 export async function computeActivityLog(
   qc: SupabaseClient,
   vocaQuizActivity: { score: number; created_at: string; day_id: string }[],
-  vocaMatchingActivity: { score: number; created_at: string; day_id: string }[],
-  naesinVocabActivity: { score: number; created_at: string; unit_id: string }[],
-  naesinProblemActivity: { score: number; total_questions: number; created_at: string; unit_id: string }[],
-  naesinPassageActivity: { created_at: string; unit_id: string; type?: string; difficulty?: string | null; score?: number | null }[],
-  naesinVideoActivity: { created_at: string; unit_id: string }[],
+  vocaMatchingActivity: { created_at: string; day_id: string; score?: number | null }[],
+  naesinVocabActivity: { score: number; created_at: string; unit_id?: string }[],
+  naesinProblemActivity: { score: number; total_questions: number; created_at: string; unit_id?: string }[],
+  naesinPassageActivity: { created_at: string; unit_id?: string; type?: string; difficulty?: string | null; score?: number | null }[],
+  naesinVideoActivity: { created_at: string; unit_id?: string }[],
 ): Promise<ActivityRecord[]> {
   // Fetch labels
   const vocaDayIds = [...new Set([...vocaQuizActivity.map((r) => r.day_id), ...vocaMatchingActivity.map((r) => r.day_id)])];
@@ -24,7 +24,7 @@ export async function computeActivityLog(
     ...naesinProblemActivity.map((r) => r.unit_id),
     ...naesinPassageActivity.map((r) => r.unit_id),
     ...naesinVideoActivity.map((r) => r.unit_id),
-  ])];
+  ].filter(Boolean) as string[])];
   const unitMap: Record<string, string> = {};
   if (naesinUnitIds.length > 0) {
     const { data } = await qc.from('naesin_units').select('id, title').in('id', naesinUnitIds);
@@ -37,22 +37,22 @@ export async function computeActivityLog(
     log.push({ date: format(new Date(r.created_at), 'yyyy-MM-dd'), type: 'voca_quiz', label: `보카 ${dayMap[r.day_id] || 'Day'} 퀴즈`, score: r.score, maxScore: 100 });
   }
   for (const r of vocaMatchingActivity) {
-    log.push({ date: format(new Date(r.created_at), 'yyyy-MM-dd'), type: 'voca_matching', label: `보카 ${dayMap[r.day_id] || 'Day'} 매칭`, score: r.score, maxScore: 100 });
+    log.push({ date: format(new Date(r.created_at), 'yyyy-MM-dd'), type: 'voca_matching', label: `보카 ${dayMap[r.day_id] || 'Day'} 매칭`, score: r.score ?? null, maxScore: r.score != null ? 100 : null });
   }
   for (const r of naesinVocabActivity) {
-    log.push({ date: format(new Date(r.created_at), 'yyyy-MM-dd'), type: 'naesin_vocab', label: `내신 ${unitMap[r.unit_id] || 'Unit'} 단어 퀴즈`, score: r.score, maxScore: 100 });
+    log.push({ date: format(new Date(r.created_at), 'yyyy-MM-dd'), type: 'naesin_vocab', label: `내신 ${(r.unit_id ? unitMap[r.unit_id] : undefined) || 'Unit'} 단어 퀴즈`, score: r.score, maxScore: 100 });
   }
   for (const r of naesinProblemActivity) {
-    log.push({ date: format(new Date(r.created_at), 'yyyy-MM-dd'), type: 'naesin_problem', label: `내신 ${unitMap[r.unit_id] || 'Unit'} 문제풀이`, score: r.total_questions > 0 ? Math.round((r.score / r.total_questions) * 100) : null, maxScore: 100 });
+    log.push({ date: format(new Date(r.created_at), 'yyyy-MM-dd'), type: 'naesin_problem', label: `내신 ${(r.unit_id ? unitMap[r.unit_id] : undefined) || 'Unit'} 문제풀이`, score: r.total_questions > 0 ? Math.round((r.score / r.total_questions) * 100) : null, maxScore: 100 });
   }
   for (const r of naesinPassageActivity) {
     const typeLabel = r.type === 'fill_blanks' ? '빈칸' : r.type === 'ordering' ? '순서배열' : r.type === 'translation' ? '영작' : r.type === 'grammar_vocab' ? '어법/어휘' : '지문 학습';
     const diffMap: Record<string, string> = { easy: '쉬움', medium: '보통', hard: '어려움' };
     const diffLabel = r.difficulty ? ` (${diffMap[r.difficulty] || r.difficulty})` : '';
-    log.push({ date: format(new Date(r.created_at), 'yyyy-MM-dd'), type: 'naesin_passage', label: `내신 ${unitMap[r.unit_id] || 'Unit'} ${typeLabel}${diffLabel}`, score: r.score ?? null, maxScore: r.score != null ? 100 : null });
+    log.push({ date: format(new Date(r.created_at), 'yyyy-MM-dd'), type: 'naesin_passage', label: `내신 ${(r.unit_id ? unitMap[r.unit_id] : undefined) || 'Unit'} ${typeLabel}${diffLabel}`, score: r.score ?? null, maxScore: r.score != null ? 100 : null });
   }
   for (const r of naesinVideoActivity) {
-    log.push({ date: format(new Date(r.created_at), 'yyyy-MM-dd'), type: 'naesin_video', label: `내신 ${unitMap[r.unit_id] || 'Unit'} 문법영상`, score: null, maxScore: null });
+    log.push({ date: format(new Date(r.created_at), 'yyyy-MM-dd'), type: 'naesin_video', label: `내신 ${(r.unit_id ? unitMap[r.unit_id] : undefined) || 'Unit'} 문법영상`, score: null, maxScore: null });
   }
 
   log.sort((a, b) => b.date.localeCompare(a.date));

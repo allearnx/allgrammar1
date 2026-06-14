@@ -41,7 +41,7 @@ export const POST = createApiHandler(
         .limit(100),
       admin
         .from('naesin_problem_attempts')
-        .select('score, total_questions, created_at, unit_id')
+        .select('score, total_questions, created_at, sheet_id')
         .eq('student_id', studentId)
         .order('created_at', { ascending: false })
         .limit(30),
@@ -65,6 +65,17 @@ export const POST = createApiHandler(
     // 단원 ID → 이름 매핑
     const unitMap = new Map(units.map((u) => [u.id, `${u.unit_number}단원 ${u.title}`]));
 
+    // 문제풀이 시도엔 sheet_id 만 있음 — 시트로 unit_id 유도
+    const attemptSheetIds = [...new Set(attempts.map((a) => a.sheet_id).filter(Boolean))] as string[];
+    const sheetUnitMap = new Map<string, string>();
+    if (attemptSheetIds.length > 0) {
+      const { data: aSheets } = await admin
+        .from('naesin_problem_sheets')
+        .select('id, unit_id')
+        .in('id', attemptSheetIds);
+      for (const s of aSheets || []) if (s.unit_id) sheetUnitMap.set(s.id, s.unit_id);
+    }
+
     // 데이터 요약 텍스트 생성
     const progressSummary = progress.map((p) => {
       const name = unitMap.get(p.unit_id) || p.unit_id;
@@ -87,7 +98,8 @@ export const POST = createApiHandler(
     }).join('\n');
 
     const attemptsSummary = attempts.map((a) => {
-      const name = unitMap.get(a.unit_id) || '';
+      const unitId = a.sheet_id ? sheetUnitMap.get(a.sheet_id) : undefined;
+      const name = (unitId ? unitMap.get(unitId) : '') || '';
       const pct = a.total_questions > 0 ? Math.round((a.score / a.total_questions) * 100) : 0;
       return `- ${name}: ${a.score}/${a.total_questions} (${pct}%) [${a.created_at}]`;
     }).join('\n');

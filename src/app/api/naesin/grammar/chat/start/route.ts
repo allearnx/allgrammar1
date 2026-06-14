@@ -99,7 +99,6 @@ ${lesson.text_content ? `레슨 내용:\n${lesson.text_content}` : ''}
               ? q.expected_answer_keywords.filter((k): k is string => typeof k === 'string')
               : [],
             sort_order: i,
-            is_auto_generated: true,
           }));
 
         if (rows.length === 0) {

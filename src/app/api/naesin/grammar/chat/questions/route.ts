@@ -17,7 +17,7 @@ export async function GET(request: Request) {
 
   const { data, error } = await supabase
     .from('naesin_grammar_chat_questions')
-    .select('id, lesson_id, question_text, grammar_concept, hint, expected_answer_keywords, sort_order, is_auto_generated, created_at')
+    .select('id, lesson_id, question_text, grammar_concept, hint, expected_answer_keywords, sort_order, created_at')
     .eq('lesson_id', lessonId)
     .order('sort_order');
 

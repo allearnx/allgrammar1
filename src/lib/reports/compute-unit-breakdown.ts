@@ -7,7 +7,7 @@ export async function computeUnitBreakdown(
   hasNaesin: boolean,
   vocaProgressData: { day_id: string; flashcard_completed: boolean; quiz_score: number | null; spelling_score: number | null; matching_score: number | null; matching_completed: boolean; round2_flashcard_completed: boolean; round2_quiz_score: number | null; round2_matching_completed: boolean }[],
   naesinProgressData: { unit_id: string; vocab_completed: boolean; vocab_quiz_score: number | null; passage_completed: boolean; dialogue_completed: boolean; grammar_completed: boolean; problem_completed: boolean; mock_exam_completed: boolean }[],
-  naesinProblemHistory: { score: number; total_questions: number; unit_id: string }[],
+  naesinProblemHistory: { score: number; total_questions: number; unit_id?: string }[],
   naesinPassageAttempts: { unit_id: string; type: string; difficulty: string | null; score: number }[] = [],
 ) {
   const vocaDays: StudentReportData['unitBreakdown']['vocaDays'] = [];
@@ -52,6 +52,7 @@ export async function computeUnitBreakdown(
 
     const problemsByUnit: Record<string, number[]> = {};
     for (const p of naesinProblemHistory) {
+      if (!p.unit_id) continue; // 교과서 단위(단원 없는) 시험지 시도는 단원 분석 제외
       if (!problemsByUnit[p.unit_id]) problemsByUnit[p.unit_id] = [];
       if (p.total_questions > 0) problemsByUnit[p.unit_id].push(Math.round((p.score / p.total_questions) * 100));
     }

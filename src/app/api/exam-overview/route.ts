@@ -46,6 +46,7 @@ export const GET = createApiHandler(
       { data: examAssignments },
       { data: textbooks },
       { data: progress },
+      { data: units },
     ] = await Promise.all([
       admin
         .from('naesin_exam_dates')
@@ -57,18 +58,23 @@ export const GET = createApiHandler(
         .in('student_id', studentIds)
         .not('exam_date', 'is', null),
       admin.from('naesin_textbooks').select('id, title:display_name'),
+      // 진도는 단원(unit)별로 저장됨 — textbook_id 컬럼 없음. unit_id 로 받아 교과서로 합산.
       admin
         .from('naesin_student_progress')
-        .select('student_id, textbook_id, vocab_completed, passage_completed, dialogue_completed, grammar_completed, problem_completed, mock_exam_completed')
+        .select('student_id, unit_id, vocab_completed, passage_completed, dialogue_completed, grammar_completed, problem_completed, mock_exam_completed')
         .in('student_id', studentIds),
+      admin.from('naesin_units').select('id, textbook_id'),
     ]);
 
     const textbookMap = new Map((textbooks || []).map((t) => [t.id, t.title]));
+    const unitTextbookMap = new Map((units || []).map((u) => [u.id, u.textbook_id]));
 
-    // Progress: count completed stages per (student, textbook)
+    // Progress: count completed stages per (student, textbook) — unit → textbook 로 합산
     const progressMap = new Map<string, { done: number; total: number }>();
     for (const p of progress || []) {
-      const key = `${p.student_id}:${p.textbook_id}`;
+      const textbookId = unitTextbookMap.get(p.unit_id);
+      if (!textbookId) continue;
+      const key = `${p.student_id}:${textbookId}`;
       const prev = progressMap.get(key) || { done: 0, total: 0 };
       prev.total += totalStagesPerUnit();
       prev.done += countCompletedStages(p as unknown as Record<string, unknown>);

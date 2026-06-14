@@ -7,7 +7,7 @@ export const GET = createApiHandler(
   async ({ user, supabase }) => {
     const { data: attempts } = await supabase
       .from('naesin_problem_attempts')
-      .select('score, total_questions, created_at, unit_id, sheet_id')
+      .select('score, total_questions, created_at, sheet_id')
       .eq('student_id', user.id)
       .order('created_at', { ascending: false })
       .limit(500);
