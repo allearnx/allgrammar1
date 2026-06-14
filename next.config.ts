@@ -7,6 +7,9 @@ const isDev = process.env.NODE_ENV === "development";
 // - unsafe-inline: Next.js 인라인 스크립트/Tailwind 인라인 스타일에 필요
 // - unsafe-eval: Next.js HMR(개발 모드 전용)에 필요
 // - frame-src https:: PDF iframe이 외부 URL일 수 있어 https 전체 허용
+// - object-src: Chrome은 iframe 속 PDF를 내부 embed/plugin으로 렌더하므로
+//   'none' 이면 "Chrome에서 차단된 페이지"로 막힌다. 우리 스토리지(Supabase)만
+//   허용 (임의 <object>/<embed> 플러그인 주입은 여전히 차단).
 const cspDirectives = [
   "default-src 'self'",
   `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ""} https://www.youtube.com https://*.tosspayments.com`,
@@ -16,7 +19,7 @@ const cspDirectives = [
   "frame-src https://www.youtube.com https://*.tosspayments.com https:",
   "connect-src 'self' https://*.supabase.co https://*.sentry.io https://*.tosspayments.com",
   "worker-src 'self' blob:",
-  "object-src 'none'",
+  "object-src 'self' https://*.supabase.co",
   "base-uri 'self'",
   "form-action 'self'",
   "frame-ancestors 'none'",
