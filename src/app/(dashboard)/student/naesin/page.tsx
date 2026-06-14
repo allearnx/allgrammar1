@@ -43,7 +43,8 @@ export default async function NaesinPage() {
   // Get all active textbooks
   const { data: textbooks } = await supabase
     .from('naesin_textbooks')
-    .select('id, display_name, publisher, grade, sort_order, cover_image_url, is_active, created_at')
+    // cover_image_url 컬럼 없음 — 넣으면 쿼리 에러로 학생 교과서 목록이 빈 채로 나옴
+    .select('id, display_name, publisher, grade, sort_order, is_active, created_at')
     .eq('is_active', true)
     .order('grade')
     .order('sort_order');
