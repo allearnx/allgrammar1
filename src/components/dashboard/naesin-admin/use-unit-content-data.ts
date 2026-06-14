@@ -163,14 +163,31 @@ export function useUnitContentData(unitId: string) {
 
     setLoadingSheetId(sheetId);
     try {
-      const res = await fetch(`/api/naesin/problems/sheet?id=${sheetId}`);
-      if (!res.ok) return null;
-      const full: NaesinProblemSheet = await res.json();
+      // 리스트 로드와 동일한 브라우저 클라이언트로 직접 조회.
+      // 서버 라우트(쿠키 인증)를 거치지 않아 인증 표면이 줄고, 리스트가 이미
+      // 작동하는 RLS 경로를 그대로 재사용한다.
+      const { createClient } = await import('@/lib/supabase/client');
+      const supabase = createClient();
+      const { data: full, error } = await supabase
+        .from('naesin_problem_sheets')
+        .select(SHEET_ADMIN_LITE_COLUMNS + ', questions')
+        .eq('id', sheetId)
+        .single();
+
+      if (error || !full) {
+        logger.error('unit.load_full_sheet', { sheetId, error: error?.message ?? 'no row' });
+        toast.error('문제 데이터를 불러오지 못했습니다');
+        return null;
+      }
+
+      const fullSheet = full as unknown as NaesinProblemSheet;
       // Update the list with full data
-      setProblemList(prev => prev.map(s => s.id === sheetId ? full : s));
-      setMockExamList(prev => prev.map(s => s.id === sheetId ? full : s));
-      return full;
-    } catch {
+      setProblemList(prev => prev.map(s => s.id === sheetId ? fullSheet : s));
+      setMockExamList(prev => prev.map(s => s.id === sheetId ? fullSheet : s));
+      return fullSheet;
+    } catch (err) {
+      logger.error('unit.load_full_sheet', { sheetId, error: err instanceof Error ? err.message : String(err) });
+      toast.error('문제 데이터를 불러오지 못했습니다');
       return null;
     } finally {
       setLoadingSheetId(null);

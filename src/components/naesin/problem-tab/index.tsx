@@ -5,13 +5,14 @@ import { ClipboardList, RotateCcw, Loader2 } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
+import { logger } from '@/lib/logger';
 import { getEncouragement } from '@/lib/naesin/encouragement';
 import { extractAnswer } from '@/lib/naesin/normalize-answer';
 import { InteractiveProblemView } from './interactive-view';
 import { ImageAnswerView } from './image-answer-view';
 import { ExternalPassageView } from './external-passage-view';
 import { PaperTestView } from './paper-test-view';
-import type { NaesinProblemSheet, NaesinProblemSheetLite } from '@/types/naesin';
+import { SHEET_ADMIN_LITE_COLUMNS, type NaesinProblemSheet, type NaesinProblemSheetLite } from '@/types/naesin';
 
 type ViewMode = 'interactive' | 'paper_test';
 const VIEW_MODE_KEY = 'naesin-view-mode';
@@ -46,6 +47,7 @@ export function ProblemTab({ sheets, unitId, onStageComplete, bestScoreBySheet, 
   // Cache for full sheet data (lazy-loaded)
   const [fullSheetCache, setFullSheetCache] = useState<Record<string, NaesinProblemSheet>>({});
   const [loadingSheetId, setLoadingSheetId] = useState<string | null>(null);
+  const [failedSheetId, setFailedSheetId] = useState<string | null>(null);
 
   function handleViewModeChange(mode: ViewMode) {
     setViewMode(mode);
@@ -62,12 +64,27 @@ export function ProblemTab({ sheets, unitId, onStageComplete, bestScoreBySheet, 
   const fetchFullSheet = useCallback(async (sheetId: string) => {
     if (fullSheetCache[sheetId]) return;
     setLoadingSheetId(sheetId);
+    setFailedSheetId(null);
     try {
-      const res = await fetch(`/api/naesin/problems/sheet?id=${sheetId}`);
-      if (res.ok) {
-        const data = await res.json();
-        setFullSheetCache((prev) => ({ ...prev, [sheetId]: data }));
+      // 시트 목록과 동일한 브라우저 클라이언트로 직접 조회한다. 서버 라우트
+      // (쿠키 인증)를 거치지 않아 인증 실패 표면이 줄고, 목록 로드가 이미
+      // 통과한 RLS 경로를 그대로 재사용해 학생이 무한 로딩에 빠지지 않는다.
+      const { createClient } = await import('@/lib/supabase/client');
+      const supabase = createClient();
+      const { data, error } = await supabase
+        .from('naesin_problem_sheets')
+        .select(SHEET_ADMIN_LITE_COLUMNS + ', questions')
+        .eq('id', sheetId)
+        .single();
+      if (error || !data) {
+        logger.error('problem_tab.load_full_sheet', { sheetId, error: error?.message ?? 'no row' });
+        setFailedSheetId(sheetId);
+        return;
       }
+      setFullSheetCache((prev) => ({ ...prev, [sheetId]: data as unknown as NaesinProblemSheet }));
+    } catch (err) {
+      logger.error('problem_tab.load_full_sheet', { sheetId, error: err instanceof Error ? err.message : String(err) });
+      setFailedSheetId(sheetId);
     } finally {
       setLoadingSheetId(null);
     }
@@ -188,6 +205,19 @@ export function ProblemTab({ sheets, unitId, onStageComplete, bestScoreBySheet, 
 
       {showSummary ? (
         <AttemptSummary attempt={lastAttempt} onRetry={handleRetry} />
+      ) : failedSheetId === activeSheet.id && !sheetForView ? (
+        <div className="flex flex-col items-center py-12 gap-3">
+          <p className="text-sm text-muted-foreground">문제를 불러오지 못했습니다. 잠시 후 다시 시도해주세요.</p>
+          <Button
+            type="button"
+            variant="outline"
+            size="sm"
+            onClick={() => { setFailedSheetId(null); fetchFullSheet(activeSheet.id); }}
+          >
+            <RotateCcw className="h-4 w-4 mr-1.5" />
+            다시 불러오기
+          </Button>
+        </div>
       ) : isLoading || !sheetForView ? (
         <div className="flex flex-col items-center py-12">
           <Loader2 className="h-8 w-8 animate-spin text-muted-foreground" />

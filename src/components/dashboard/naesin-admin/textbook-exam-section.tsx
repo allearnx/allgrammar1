@@ -8,7 +8,8 @@ import { fetchWithToast } from '@/lib/fetch-with-toast';
 import { ConfirmDialog } from '@/components/shared/confirm-dialog';
 import { AddMockExamDialog } from './content-dialogs';
 import { UnitProblemList } from './unit-problem-list';
-import type { NaesinProblemSheet } from '@/types/naesin';
+import { logger } from '@/lib/logger';
+import { SHEET_ADMIN_LITE_COLUMNS, type NaesinProblemSheet } from '@/types/naesin';
 
 interface TextbookExamSectionProps {
   textbookId: string;
@@ -26,12 +27,27 @@ export function TextbookExamSection({ textbookId, textbookName, canManageContent
     if (existing?.questions) return existing;
     setLoadingSheetId(sheetId);
     try {
-      const res = await fetch(`/api/naesin/problems/sheet?id=${sheetId}`);
-      if (!res.ok) return null;
-      const full: NaesinProblemSheet = await res.json();
-      setSheets(prev => prev.map(s => s.id === sheetId ? full : s));
-      return full;
-    } catch { return null; } finally {
+      // 브라우저 클라이언트 직접 조회 — 서버 쿠키 인증 표면 제거 (목록 RLS 경로 재사용)
+      const { createClient } = await import('@/lib/supabase/client');
+      const supabase = createClient();
+      const { data: full, error } = await supabase
+        .from('naesin_problem_sheets')
+        .select(SHEET_ADMIN_LITE_COLUMNS + ', questions')
+        .eq('id', sheetId)
+        .single();
+      if (error || !full) {
+        logger.error('textbook_exam.load_full_sheet', { sheetId, error: error?.message ?? 'no row' });
+        toast.error('문제 데이터를 불러오지 못했습니다');
+        return null;
+      }
+      const fullSheet = full as unknown as NaesinProblemSheet;
+      setSheets(prev => prev.map(s => s.id === sheetId ? fullSheet : s));
+      return fullSheet;
+    } catch (err) {
+      logger.error('textbook_exam.load_full_sheet', { sheetId, error: err instanceof Error ? err.message : String(err) });
+      toast.error('문제 데이터를 불러오지 못했습니다');
+      return null;
+    } finally {
       setLoadingSheetId(null);
     }
   }, [sheets]);
