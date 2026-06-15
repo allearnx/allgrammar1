@@ -7,6 +7,7 @@ import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from '@/
 import { Loader2, Library, ClipboardList, Trash2, Pencil, Search, FileUp } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { fetchWithToast } from '@/lib/fetch-with-toast';
+import { toast } from 'sonner';
 import { EditTemplateDialog } from './content-dialogs/template/edit-template-dialog';
 import { AddTemplateFromPdfDialog } from './content-dialogs/template/add-template-from-pdf-dialog';
 import { ContentScanButton } from './content-scan-button';
@@ -46,14 +47,15 @@ export function TemplateLibraryClient() {
   useEffect(() => { loadTemplates(); }, [loadTemplates]);
 
   async function handleDelete(templateId: string) {
-    if (!window.confirm('이 템플릿을 삭제하시겠습니까?')) return;
+    if (!window.confirm('이 템플릿을 삭제하시겠습니까?\n\n이 템플릿에서 가져온(import) 복사본 문제들도 모두 함께 삭제됩니다.')) return;
     setDeleting(templateId);
     try {
-      await fetchWithToast(`/api/naesin/templates?id=${templateId}`, {
+      const res = await fetchWithToast<{ copiesDeleted?: number }>(`/api/naesin/templates?id=${templateId}`, {
         method: 'DELETE',
-        successMessage: '템플릿 삭제됨',
         logContext: 'template_library.delete',
       });
+      const n = res?.copiesDeleted ?? 0;
+      toast.success(n > 0 ? `템플릿 삭제됨 (복사본 ${n}부 함께 삭제)` : '템플릿 삭제됨');
       setGrouped((prev) => {
         const next: Record<string, TemplateItem[]> = {};
         for (const [topic, items] of Object.entries(prev)) {

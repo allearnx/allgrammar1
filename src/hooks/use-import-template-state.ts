@@ -105,12 +105,12 @@ export function useImportTemplateState(unitId: string, onAdd: () => void) {
   }
 
   async function handleDeleteTemplate(templateId: string) {
-    if (!window.confirm('이 템플릿을 삭제하시겠습니까?')) return;
+    if (!window.confirm('이 템플릿을 삭제하시겠습니까?\n\n이 템플릿에서 가져온(import) 복사본 문제들도 모두 함께 삭제됩니다.')) return;
     setDeleting(templateId);
     try {
       await fetchWithToast(`/api/naesin/templates?id=${templateId}`, {
         method: 'DELETE',
-        successMessage: '템플릿 삭제됨',
+        successMessage: '템플릿 및 복사본 삭제됨',
         errorMessage: '템플릿 삭제 실패',
         logContext: 'import_template.delete',
       });

@@ -158,11 +158,20 @@ export const DELETE = createApiHandler(
     }
     const admin = createAdminClient();
 
+    // 원본 템플릿 삭제 시, 이 템플릿에서 가져온(import) 복사본 시트도 함께 삭제.
+    // 복사본의 학생 시도/드래프트/오답은 sheet_id FK ON DELETE CASCADE 로 자동 정리됨.
+    const copyResult = await admin
+      .from('naesin_problem_sheets')
+      .delete({ count: 'exact' })
+      .eq('source_template_id', id);
+    dbResult(copyResult);
+    const copiesDeleted = copyResult.count ?? 0;
+
     dbResult(await admin
       .from('naesin_templates')
       .delete()
       .eq('id', id));
 
-    return NextResponse.json({ ok: true });
+    return NextResponse.json({ ok: true, copiesDeleted });
   }
 );
