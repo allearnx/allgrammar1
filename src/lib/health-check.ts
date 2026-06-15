@@ -81,16 +81,17 @@ async function checkWrongAnswerSync(admin: ReturnType<typeof createAdminClient>)
   const { data: recentAttempts } = await admin
     .from('naesin_problem_attempts')
     .select('id, student_id, sheet_id, wrong_answers')
-    .gte('created_at', sevenDaysAgo);
+    .gte('created_at', sevenDaysAgo)
+    .order('created_at', { ascending: true });
 
   if (!recentAttempts?.length) return [];
 
   const issues: HealthIssue[] = [];
-  // 최신 시도만 (student+sheet 기준)
+  // 최신 시도만 (student+sheet 기준) — created_at 오름차순이라 마지막 set이 최신
   const latestMap = new Map<string, typeof recentAttempts[0]>();
   for (const a of recentAttempts) {
     const key = `${a.student_id}:${a.sheet_id}`;
-    latestMap.set(key, a); // created_at 오름차순 → 마지막이 최신
+    latestMap.set(key, a);
   }
 
   for (const [, attempt] of latestMap) {
