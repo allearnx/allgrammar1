@@ -29,7 +29,7 @@ export const POST = createApiHandler(
       .select(colBest)
       .eq('student_id', user.id)
       .eq('unit_id', unitId)
-      .single();
+      .single<Record<string, number | null>>();
 
     const currentBest = (existing?.[colBest] as number | null) ?? 0;
     const newBest = Math.max(currentBest, score);
