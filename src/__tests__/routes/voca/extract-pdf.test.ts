@@ -40,7 +40,7 @@ describe('voca/vocabulary/extract-pdf', () => {
     vi.resetModules();
   });
 
-  it('PDF를 Sonnet에 직접 전송하여 유의어/반의어/숙어 포함 추출', async () => {
+  it('PDF를 Opus에 직접 전송하여 유의어/반의어/숙어 포함 추출', async () => {
     mockGetUser.mockResolvedValue(testTeacher);
     mockCreate.mockResolvedValue({
       content: [{ type: 'text', text: JSON.stringify([
@@ -76,10 +76,10 @@ describe('voca/vocabulary/extract-pdf', () => {
     expect(body.items[2].antonyms).toBeNull();
     expect(body.items[2].idioms).toBeNull();
 
-    // Sonnet 모델로 PDF document 전송 확인
+    // Opus 모델로 PDF document 전송 확인
     expect(mockCreate).toHaveBeenCalledTimes(1);
     const callArgs = mockCreate.mock.calls[0][0];
-    expect(callArgs.model).toBe('claude-sonnet-4-6');
+    expect(callArgs.model).toBe('claude-opus-4-8');
     expect(callArgs.messages[0].content[0].type).toBe('document');
   });
 

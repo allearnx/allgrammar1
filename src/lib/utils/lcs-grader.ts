@@ -2,6 +2,12 @@
 
 export function normalize(text: string): string {
   return text
+    // 타이포그래피 문자를 "변환"(제거 아님): 곡선 작은따옴표가 제거되면
+    // "don't"(곡선 ’) → "dont" 가 되어 직선 '를 쓴 학생 답과 토큰이 어긋난다.
+    // normalize-answer.ts 의 표준 정규화와 동일한 매핑을 LCS 토큰화 전에 적용.
+    .replace(/[‘’`´]/g, "'") // 곡선 작은따옴표 → 직선
+    .replace(/[“”]/g, '"')             // 곡선 큰따옴표 → 직선
+    .replace(/[–—−]/g, '-')       // 엔/엠 대시 → 하이픈
     .toLowerCase()
     .replace(/[^a-z0-9'\s]/g, '')
     .replace(/\s+/g, ' ')

@@ -188,7 +188,7 @@ export const POST = createApiHandler(
       if (mcqCount > 0) {
         calls.push(
           anthropic.messages.create({
-            model: 'claude-sonnet-4-6',
+            model: 'claude-opus-4-8',
             max_tokens: 8192,
             messages: [{ role: 'user', content: buildMcqPrompt(grammarTopic, focusPoints ?? null, grade, mcqCount, trapPercent) }],
           }).then((msg) => requireAiJsonArray<NaesinProblemQuestion>(msg, 'ai.generate_mcq'))
@@ -200,7 +200,7 @@ export const POST = createApiHandler(
       if (selectAllCount > 0) {
         calls.push(
           anthropic.messages.create({
-            model: 'claude-sonnet-4-6',
+            model: 'claude-opus-4-8',
             max_tokens: 8192,
             messages: [{ role: 'user', content: buildSelectAllPrompt(grammarTopic, focusPoints ?? null, grade, selectAllCount) }],
           }).then((msg) => requireAiJsonArray<NaesinProblemQuestion>(msg, 'ai.generate_select_all'))
@@ -212,7 +212,7 @@ export const POST = createApiHandler(
       if (subjectiveCount > 0) {
         calls.push(
           anthropic.messages.create({
-            model: 'claude-sonnet-4-6',
+            model: 'claude-opus-4-8',
             max_tokens: 4096,
             messages: [{ role: 'user', content: buildSubjectivePrompt(grammarTopic, focusPoints ?? null, grade, subjectiveCount) }],
           }).then((msg) => requireAiJsonArray<NaesinProblemQuestion>(msg, 'ai.generate_subjective'))

@@ -22,6 +22,18 @@ describe('normalize', () => {
   it('returns empty string for empty input', () => {
     expect(normalize('')).toBe('');
   });
+
+  it('converts curly apostrophe to straight before stripping', () => {
+    // 곡선 ’(U+2019) 이 제거되어 "dont" 가 되던 버그 회귀 방지
+    expect(normalize('I don’t know')).toBe("i don't know");
+    // 곡선/직선 모두 동일하게 정규화 → 토큰 일치
+    expect(normalize('don’t')).toBe(normalize("don't"));
+  });
+
+  it('normalizes curly double quotes and dashes consistently', () => {
+    expect(normalize('“well-known”')).toBe(normalize('"well-known"'));
+    expect(normalize('New York—a city')).toBe(normalize('New York-a city'));
+  });
 });
 
 describe('lcsLength', () => {
@@ -60,6 +72,12 @@ describe('gradeAnswerLCS', () => {
 
   it('returns 0 for completely different answer', () => {
     expect(gradeAnswerLCS('hello world', 'foo bar')).toBe(0);
+  });
+
+  it('scores curly vs straight apostrophe as a full match', () => {
+    // 원문은 곡선 ’, 학생은 직선 ' → 100점이어야 함 (회귀 방지)
+    expect(gradeAnswerLCS('I don’t know it', "I don't know it")).toBe(100);
+    expect(gradeAnswerLCS("It's a cat", 'It’s a cat')).toBe(100);
   });
 
   it('returns 0 for empty original', () => {

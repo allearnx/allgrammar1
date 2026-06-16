@@ -98,7 +98,7 @@ export async function POST(request: NextRequest) {
       ? { type: 'document' as const, source: { type: 'url' as const, url: pdfUrl as string } }
       : { type: 'document' as const, source: { type: 'base64' as const, media_type: 'application/pdf' as const, data: pdfBase64 as string } };
 
-    // Step 1: Extract problems from PDF (Haiku — fast OCR, quality-critical paraphrasing stays Sonnet)
+    // Step 1: Extract problems from PDF (Haiku — fast OCR, quality-critical paraphrasing uses Opus)
     const extractMessage = await anthropic.messages.create({
       model: 'claude-haiku-4-5-20251001',
       max_tokens: 8192,
@@ -144,14 +144,14 @@ export async function POST(request: NextRequest) {
     // Step 2: Paraphrase — 객관식 32문제 + 서술형 18문제 동시 생성
     const [mcqMessage, subjectiveMessage] = await Promise.all([
       anthropic.messages.create({
-        model: 'claude-sonnet-4-6',
+        model: 'claude-opus-4-8',
         max_tokens: 16384,
         messages: [
           { role: 'user', content: buildParaphrasePrompt(originalQuestions, unitTitle, MCQ_DISTRIBUTION, 'mcq') },
         ],
       }),
       anthropic.messages.create({
-        model: 'claude-sonnet-4-6',
+        model: 'claude-opus-4-8',
         max_tokens: 8192,
         messages: [
           { role: 'user', content: buildParaphrasePrompt(originalQuestions, unitTitle, SUBJECTIVE_DISTRIBUTION, 'subjective') },

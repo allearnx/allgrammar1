@@ -78,7 +78,7 @@ export async function POST(request: NextRequest) {
     logger.info('ai.pdf_extract', { mode: storagePath ? 'url' : 'formdata' });
 
     const message = await anthropic.messages.create({
-      model: 'claude-sonnet-4-6',
+      model: 'claude-opus-4-8',
       max_tokens: 16384,
       messages: [
         {

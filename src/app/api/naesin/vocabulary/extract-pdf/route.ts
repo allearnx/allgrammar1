@@ -23,7 +23,7 @@ export async function POST(request: NextRequest) {
     const { documentBlock, storagePath } = await parsePdfInput(request);
 
     const message = await anthropic.messages.create({
-      model: 'claude-sonnet-4-6',
+      model: 'claude-opus-4-8',
       max_tokens: 16384,
       messages: [
         {
