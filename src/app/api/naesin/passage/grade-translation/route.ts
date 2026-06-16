@@ -2,9 +2,19 @@ import { NextResponse } from 'next/server';
 import { z } from 'zod';
 import { createApiHandler } from '@/lib/api';
 import { logger } from '@/lib/logger';
+import { normalize } from '@/lib/naesin/normalize-answer';
 import Anthropic from '@anthropic-ai/sdk';
 
 const anthropic = new Anthropic();
+
+/** 구두점까지 무시한 느슨한 비교용 */
+const looseNormalize = (s: string) =>
+  normalize(s).replace(/[^\w\s']/g, '').replace(/\s+/g, ' ').trim();
+
+/** 암기 채점: 대소문자/곡선따옴표/끝마침표·물음표 등 사소한 차이는 정답으로 본다 */
+function isMemorizationMatch(a: string, b: string): boolean {
+  return normalize(a) === normalize(b) || looseNormalize(a) === looseNormalize(b);
+}
 
 const schema = z.object({
   sentences: z.array(z.object({
@@ -24,10 +34,8 @@ export const POST = createApiHandler(
     type ResultItem = { score: number; feedback: string; correctedSentence: string };
     const results: (ResultItem | null)[] = sentences.map((s) => {
       const trimmed = s.studentAnswer.trim();
-      if (trimmed === s.originalText) {
-        return { score: 100, feedback: '정답!', correctedSentence: s.originalText };
-      }
-      if (s.acceptedAnswers?.some((ans: string) => trimmed === ans)) {
+      const candidates = [s.originalText, ...(s.acceptedAnswers ?? [])];
+      if (candidates.some((c) => isMemorizationMatch(trimmed, c))) {
         return { score: 100, feedback: '정답!', correctedSentence: s.originalText };
       }
       return null; // needs AI grading

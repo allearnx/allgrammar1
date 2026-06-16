@@ -7,6 +7,7 @@ import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 import { CheckCircle, XCircle } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { normalize } from '@/lib/naesin/normalize-answer';
 import { toast } from 'sonner';
 
 interface FirstLetterSentence {
@@ -51,18 +52,18 @@ function buildHintString(original: string): string {
   return original.split(/\s+/).map(makeHint).join(' ');
 }
 
-/** Normalize for comparison: lowercase, strip punctuation except apostrophes */
-function normalize(s: string): string {
-  return s
-    .toLowerCase()
-    .replace(/['']/g, "'")
-    .replace(/[^\w\s']/g, '')
-    .replace(/\s+/g, ' ')
-    .trim();
+/** 구두점까지 무시한 느슨한 비교용 (끝물음표·쉼표 등 사소한 차이 허용) */
+function looseNormalize(s: string): string {
+  return normalize(s).replace(/[^\w\s']/g, '').replace(/\s+/g, ' ').trim();
 }
 
 function compareWords(userAnswer: string, correctAnswer: string): boolean {
-  return normalize(userAnswer) === normalize(correctAnswer);
+  // 표준 normalize: 대소문자/곡선따옴표/대시/끝마침표/공백 통일.
+  // 추가로 구두점 무시 비교까지 → "What's next?" vs "What's next" 등 사소한 차이 정답 처리.
+  return (
+    normalize(userAnswer) === normalize(correctAnswer) ||
+    looseNormalize(userAnswer) === looseNormalize(correctAnswer)
+  );
 }
 
 export function FirstLetterExercise({ sentences, onComplete }: FirstLetterExerciseProps) {
