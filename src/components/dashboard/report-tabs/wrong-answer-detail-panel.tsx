@@ -125,6 +125,24 @@ export function WrongAnswerDetailPanel({ studentId, onRefresh }: Props) {
     return items;
   }, [wrongAnswers, stageFilter, unitFilter, resolveFilter]);
 
+  // Faceted count: 다른 필터들을 반영한 건수.
+  // (예: 과별로 L3을 고르면 유형 칩 숫자도 L3 기준으로 표시)
+  // 각 칩은 "그 값으로 바꿨을 때 보일 건수"라서, 자기 자신 차원은 인자로 받은 값만 적용.
+  const countFor = useCallback(
+    (opts: { stage?: NaesinWrongAnswerStage | 'all'; unit?: string; resolve?: 'all' | 'unresolved' | 'resolved' }) => {
+      const st = opts.stage ?? stageFilter;
+      const un = opts.unit ?? unitFilter;
+      const rs = opts.resolve ?? resolveFilter;
+      return wrongAnswers.filter(
+        (wa) =>
+          (st === 'all' || wa.stage === st) &&
+          (un === 'all' || (wa.unit_id || 'none') === un) &&
+          (rs === 'all' || (rs === 'resolved' ? wa.resolved : !wa.resolved)),
+      ).length;
+    },
+    [wrongAnswers, stageFilter, unitFilter, resolveFilter],
+  );
+
   // Group: stage → unit
   const grouped = useMemo(() => {
     const map: Record<string, Record<string, { unitLabel: string; items: NaesinWrongAnswer[] }>> = {};
@@ -144,7 +162,6 @@ export function WrongAnswerDetailPanel({ studentId, onRefresh }: Props) {
 
   const totalCount = wrongAnswers.length;
   const unresolvedCount = wrongAnswers.filter((wa) => !wa.resolved).length;
-  const resolvedCount = totalCount - unresolvedCount;
 
   if (loading) {
     return (
@@ -205,7 +222,7 @@ export function WrongAnswerDetailPanel({ studentId, onRefresh }: Props) {
                 )}
                 onClick={() => setUnitFilter(u.id)}
               >
-                {u.label} {u.count}
+                {u.label} {countFor({ unit: u.id })}
               </button>
             ))}
           </div>
@@ -226,7 +243,7 @@ export function WrongAnswerDetailPanel({ studentId, onRefresh }: Props) {
             전체
           </button>
           {availableStages.map((s) => {
-            const count = wrongAnswers.filter((wa) => wa.stage === s).length;
+            const count = countFor({ stage: s });
             return (
               <button
                 key={s}
@@ -247,9 +264,9 @@ export function WrongAnswerDetailPanel({ studentId, onRefresh }: Props) {
         {/* Resolve status segmented filter */}
         <div className="inline-flex rounded-lg border p-0.5 gap-0.5">
           {([
-            ['all', `전체 ${totalCount}`],
-            ['unresolved', `미해결 ${unresolvedCount}`],
-            ['resolved', `해결 ${resolvedCount}`],
+            ['all', `전체 ${countFor({ resolve: 'all' })}`],
+            ['unresolved', `미해결 ${countFor({ resolve: 'unresolved' })}`],
+            ['resolved', `해결 ${countFor({ resolve: 'resolved' })}`],
           ] as const).map(([key, label]) => (
             <button
               key={key}
