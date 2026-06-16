@@ -42,6 +42,7 @@ export function WrongAnswerDetailPanel({ studentId, onRefresh }: Props) {
   const [wrongAnswers, setWrongAnswers] = useState<NaesinWrongAnswer[]>([]);
   const [loading, setLoading] = useState(true);
   const [stageFilter, setStageFilter] = useState<NaesinWrongAnswerStage | 'all'>('all');
+  const [unitFilter, setUnitFilter] = useState<string>('all');
   const [resolveFilter, setResolveFilter] = useState<'all' | 'unresolved' | 'resolved'>('all');
   const [bulkSubmitting, setBulkSubmitting] = useState(false);
 
@@ -97,14 +98,32 @@ export function WrongAnswerDetailPanel({ studentId, onRefresh }: Props) {
     return STAGE_ORDER.filter((s) => set.has(s));
   }, [wrongAnswers]);
 
+  // Derive available units (과별 필터) from data — 단원번호 순 정렬
+  const availableUnits = useMemo(() => {
+    const map = new Map<string, { id: string; label: string; unitNumber: number; count: number }>();
+    for (const wa of wrongAnswers) {
+      const id = wa.unit_id || 'none';
+      const existing = map.get(id);
+      if (existing) { existing.count++; continue; }
+      map.set(id, {
+        id,
+        label: wa.unit ? `L${wa.unit.unit_number} ${wa.unit.title}` : '기타',
+        unitNumber: wa.unit?.unit_number ?? 9999,
+        count: 1,
+      });
+    }
+    return [...map.values()].sort((a, b) => a.unitNumber - b.unitNumber);
+  }, [wrongAnswers]);
+
   // Filter
   const filtered = useMemo(() => {
     let items = wrongAnswers;
     if (stageFilter !== 'all') items = items.filter((wa) => wa.stage === stageFilter);
+    if (unitFilter !== 'all') items = items.filter((wa) => (wa.unit_id || 'none') === unitFilter);
     if (resolveFilter === 'unresolved') items = items.filter((wa) => !wa.resolved);
     else if (resolveFilter === 'resolved') items = items.filter((wa) => wa.resolved);
     return items;
-  }, [wrongAnswers, stageFilter, resolveFilter]);
+  }, [wrongAnswers, stageFilter, unitFilter, resolveFilter]);
 
   // Group: stage → unit
   const grouped = useMemo(() => {
@@ -160,8 +179,41 @@ export function WrongAnswerDetailPanel({ studentId, onRefresh }: Props) {
 
       {/* Filters */}
       <div className="space-y-2">
+        {/* Unit (과별) filter chips — 단원이 2개 이상일 때만 */}
+        {availableUnits.length > 1 && (
+          <div className="flex flex-wrap items-center gap-1.5">
+            <span className="text-xs font-semibold text-muted-foreground mr-0.5">과별</span>
+            <button
+              className={cn(
+                'px-2.5 py-1 rounded-full text-xs font-medium transition-colors',
+                unitFilter === 'all'
+                  ? 'bg-violet-600 text-white'
+                  : 'bg-muted text-muted-foreground hover:bg-muted/80'
+              )}
+              onClick={() => setUnitFilter('all')}
+            >
+              전체
+            </button>
+            {availableUnits.map((u) => (
+              <button
+                key={u.id}
+                className={cn(
+                  'px-2.5 py-1 rounded-full text-xs font-medium transition-colors',
+                  unitFilter === u.id
+                    ? 'bg-violet-600 text-white'
+                    : 'bg-muted text-muted-foreground hover:bg-muted/80'
+                )}
+                onClick={() => setUnitFilter(u.id)}
+              >
+                {u.label} {u.count}
+              </button>
+            ))}
+          </div>
+        )}
+
         {/* Stage filter chips */}
-        <div className="flex flex-wrap gap-1.5">
+        <div className="flex flex-wrap items-center gap-1.5">
+          <span className="text-xs font-semibold text-muted-foreground mr-0.5">유형</span>
           <button
             className={cn(
               'px-2.5 py-1 rounded-full text-xs font-medium transition-colors',
@@ -220,7 +272,7 @@ export function WrongAnswerDetailPanel({ studentId, onRefresh }: Props) {
       </div>
 
       {/* Filtered count */}
-      {(stageFilter !== 'all' || resolveFilter !== 'all') && (
+      {(stageFilter !== 'all' || unitFilter !== 'all' || resolveFilter !== 'all') && (
         <p className="text-xs text-muted-foreground">
           필터 결과: {filtered.length}개
         </p>
