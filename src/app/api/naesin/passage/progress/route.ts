@@ -78,7 +78,10 @@ export const POST = createApiHandler(
         : (existing?.[colGrammarVocab] ?? 0),
     };
 
-    const passageCompleted = uniqueRequired.every((s) => (scoreMap[s] ?? 0) >= PASS_THRESHOLD);
+    // 영작 게이트 제거(2026-06-15): translation은 진급 조건에서 제외(점수로 막지 않음).
+    // 빈칸채우기 등 나머지 필수 단계는 그대로 80점 기준 유지.
+    const gateStages = uniqueRequired.filter((s) => s !== 'translation');
+    const passageCompleted = gateStages.every((s) => (scoreMap[s] ?? 0) >= PASS_THRESHOLD);
     updates[colCompleted] = passageCompleted;
 
     updates.current_round = isRound2 ? 2 : 1;

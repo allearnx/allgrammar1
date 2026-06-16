@@ -2,8 +2,6 @@ import { NextResponse } from 'next/server';
 import { z } from 'zod';
 import { createApiHandler, dbResult } from '@/lib/api';
 
-const PASS_THRESHOLD = 80;
-
 const dialogueProgressSchema = z.object({
   unitId: z.string().max(100),
   score: z.number(),
@@ -26,12 +24,9 @@ export const POST = createApiHandler(
     const colBest = isRound2 ? COL_MAP[type].r2 : COL_MAP[type].r1;
     const colCompleted = isRound2 ? 'round2_dialogue_completed' : 'dialogue_completed';
 
-    // Fetch existing scores for both translation best (for completion check) and current type best
-    const selectCols = 'dialogue_translation_best, round2_dialogue_translation_best, dialogue_ordering_best, dialogue_first_letter_best, round2_dialogue_ordering_best, round2_dialogue_first_letter_best';
-
     const { data: existing } = await supabase
       .from('naesin_student_progress')
-      .select(selectCols)
+      .select(colBest)
       .eq('student_id', user.id)
       .eq('unit_id', unitId)
       .single();
@@ -39,12 +34,10 @@ export const POST = createApiHandler(
     const currentBest = (existing?.[colBest] as number | null) ?? 0;
     const newBest = Math.max(currentBest, score);
 
-    // Completion is based on translation score only (ordering/first_letter are warmup)
-    const translationBestCol = isRound2 ? 'round2_dialogue_translation_best' : 'dialogue_translation_best';
-    const translationBest = type === 'translation'
-      ? Math.max((existing?.[translationBestCol] as number | null) ?? 0, score)
-      : (existing?.[translationBestCol] as number | null) ?? 0;
-    const dialogueCompleted = translationBest >= PASS_THRESHOLD;
+    // 영작 게이트 제거(2026-06-15): 영작 점수로 진급을 막지 않는다.
+    // ordering/first_letter는 원래 워밍업, translation도 더 이상 게이트가 아니므로
+    // 대화문 단계는 어떤 연습이든 수행하면(=이 POST 도달) 완료로 본다.
+    const dialogueCompleted = true;
 
     dbResult(await supabase
       .from('naesin_student_progress')
