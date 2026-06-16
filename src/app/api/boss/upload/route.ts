@@ -17,16 +17,14 @@ export async function POST(request: NextRequest) {
     }
 
     // Validate file type
-    const imageTypes = ['image/jpeg', 'image/png', 'image/webp', 'image/gif'];
-    const isPdf = file.type === 'application/pdf';
-    if (!imageTypes.includes(file.type) && !isPdf) {
-      return NextResponse.json({ error: '지원하지 않는 파일 형식입니다. (이미지 jpg/png/webp/gif 또는 pdf)' }, { status: 400 });
+    const allowedTypes = ['image/jpeg', 'image/png', 'image/webp', 'image/gif'];
+    if (!allowedTypes.includes(file.type)) {
+      return NextResponse.json({ error: '지원하지 않는 파일 형식입니다. (jpg, png, webp, gif만 가능)' }, { status: 400 });
     }
 
-    // 이미지 5MB / PDF 20MB
-    const maxBytes = isPdf ? 20 * 1024 * 1024 : 5 * 1024 * 1024;
-    if (file.size > maxBytes) {
-      return NextResponse.json({ error: `파일 크기는 ${isPdf ? '20' : '5'}MB 이하만 가능합니다.` }, { status: 400 });
+    // Max 5MB
+    if (file.size > 5 * 1024 * 1024) {
+      return NextResponse.json({ error: '파일 크기는 5MB 이하만 가능합니다.' }, { status: 400 });
     }
 
     const ext = file.name.split('.').pop() || 'jpg';

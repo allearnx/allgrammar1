@@ -18,7 +18,7 @@ import { fetchWithToast } from '@/lib/fetch-with-toast';
 import type { BlogPost, BlogCategory } from '@/types/blog';
 import { BLOG_CATEGORY_LABELS } from '@/types/blog';
 
-type BlogListItem = Omit<BlogPost, 'content' | 'meta_title' | 'meta_description' | 'author_id' | 'attachments'>;
+type BlogListItem = Omit<BlogPost, 'content' | 'meta_title' | 'meta_description' | 'author_id'>;
 
 const categoryBadgeColors: Record<BlogCategory, string> = {
   grammar_tip: 'bg-violet-100 text-violet-700 dark:bg-violet-950 dark:text-violet-300',

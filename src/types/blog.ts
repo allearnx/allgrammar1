@@ -19,13 +19,6 @@ export const BLOG_CATEGORIES: BlogCategory[] = [
 /** Lightweight type for list/card views (no content or SEO fields) */
 export type BlogPostSummary = Pick<BlogPost, 'id' | 'slug' | 'title' | 'excerpt' | 'thumbnail_url' | 'category' | 'published_at' | 'view_count'>;
 
-/** 블로그 글 첨부파일 (PDF 등) */
-export interface BlogAttachment {
-  name: string;
-  url: string;
-  size: number;
-}
-
 export interface BlogPost {
   id: string;
   slug: string;
@@ -41,7 +34,6 @@ export interface BlogPost {
   author_id: string;
   view_count: number;
   sort_order: number;
-  attachments: BlogAttachment[];
   created_at: string;
   updated_at: string;
 }

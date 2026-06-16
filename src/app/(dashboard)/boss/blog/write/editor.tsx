@@ -20,29 +20,21 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { Upload, ArrowLeft, Paperclip, FileText, X, Loader2 } from 'lucide-react';
-import { toast } from 'sonner';
+import { Upload, ArrowLeft } from 'lucide-react';
 import { fetchWithToast } from '@/lib/fetch-with-toast';
 import { generateSlug } from '@/lib/blog/generate-slug';
 import { EditorToolbar } from './editor-toolbar';
-import type { BlogPost, BlogCategory, BlogAttachment } from '@/types/blog';
+import type { BlogPost, BlogCategory } from '@/types/blog';
 import { BLOG_CATEGORIES, BLOG_CATEGORY_LABELS } from '@/types/blog';
 
 interface BlogEditorProps {
   post: BlogPost | null;
 }
 
-function formatBytes(bytes: number): string {
-  if (bytes < 1024) return `${bytes} B`;
-  if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(0)} KB`;
-  return `${(bytes / 1024 / 1024).toFixed(1)} MB`;
-}
-
 export function BlogEditor({ post }: BlogEditorProps) {
   const router = useRouter();
   const isEdit = !!post;
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const attachInputRef = useRef<HTMLInputElement>(null);
 
   const [title, setTitle] = useState(post?.title ?? '');
   const [slug, setSlug] = useState(post?.slug ?? '');
@@ -52,10 +44,8 @@ export function BlogEditor({ post }: BlogEditorProps) {
   const [metaTitle, setMetaTitle] = useState(post?.meta_title ?? '');
   const [metaDescription, setMetaDescription] = useState(post?.meta_description ?? '');
   const [isPublished, setIsPublished] = useState(post?.is_published ?? false);
-  const [attachments, setAttachments] = useState<BlogAttachment[]>(post?.attachments ?? []);
   const [saving, setSaving] = useState(false);
   const [uploading, setUploading] = useState(false);
-  const [attaching, setAttaching] = useState(false);
   const [slugManuallyEdited, setSlugManuallyEdited] = useState(false);
 
   async function uploadImage(file: File): Promise<string | null> {
@@ -157,37 +147,6 @@ export function BlogEditor({ post }: BlogEditorProps) {
     if (fileInputRef.current) fileInputRef.current.value = '';
   }
 
-  async function handleAttachmentUpload(e: React.ChangeEvent<HTMLInputElement>) {
-    const file = e.target.files?.[0];
-    if (!file) return;
-    if (file.type !== 'application/pdf') {
-      toast.error('PDF 파일만 첨부할 수 있습니다');
-      if (attachInputRef.current) attachInputRef.current.value = '';
-      return;
-    }
-    setAttaching(true);
-    const formData = new FormData();
-    formData.append('file', file);
-    try {
-      const result = await fetchWithToast<{ url: string }>('/api/boss/upload', {
-        method: 'POST',
-        body: formData,
-        successMessage: '파일이 첨부되었습니다',
-        errorMessage: '첨부 실패',
-      });
-      setAttachments((prev) => [...prev, { name: file.name, url: result.url, size: file.size }]);
-    } catch {
-      // error already toasted
-    } finally {
-      setAttaching(false);
-      if (attachInputRef.current) attachInputRef.current.value = '';
-    }
-  }
-
-  function removeAttachment(url: string) {
-    setAttachments((prev) => prev.filter((a) => a.url !== url));
-  }
-
   async function handleSave() {
     if (!title.trim()) return;
     if (!editor) return;
@@ -206,7 +165,6 @@ export function BlogEditor({ post }: BlogEditorProps) {
         meta_title: metaTitle.trim() || null,
         meta_description: metaDescription.trim() || null,
         is_published: isPublished,
-        attachments,
       };
 
       if (isEdit) {
@@ -351,65 +309,6 @@ export function BlogEditor({ post }: BlogEditorProps) {
           <EditorToolbar editor={editor} onUploadImage={uploadImage} />
           <EditorContent editor={editor} />
         </div>
-      </div>
-
-      {/* 첨부 파일 (PDF) */}
-      <div className="space-y-2">
-        <Label>첨부 파일 (PDF)</Label>
-        <p className="text-xs text-muted-foreground">
-          시험지·학습자료 등 PDF를 첨부하면 글 하단에 다운로드 링크로 표시됩니다. (최대 20MB)
-        </p>
-        {attachments.length > 0 && (
-          <ul className="space-y-1.5">
-            {attachments.map((att) => (
-              <li
-                key={att.url}
-                className="flex items-center gap-2 rounded-md border bg-muted/30 px-3 py-2 text-sm"
-              >
-                <FileText className="h-4 w-4 shrink-0 text-violet-500" />
-                <a
-                  href={att.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex-1 min-w-0 truncate hover:underline"
-                >
-                  {att.name}
-                </a>
-                <span className="shrink-0 text-xs text-muted-foreground">{formatBytes(att.size)}</span>
-                <Button
-                  type="button"
-                  variant="ghost"
-                  size="icon"
-                  className="h-6 w-6 shrink-0"
-                  onClick={() => removeAttachment(att.url)}
-                >
-                  <X className="h-3.5 w-3.5 text-destructive" />
-                </Button>
-              </li>
-            ))}
-          </ul>
-        )}
-        <input
-          ref={attachInputRef}
-          type="file"
-          accept="application/pdf"
-          className="hidden"
-          onChange={handleAttachmentUpload}
-        />
-        <Button
-          type="button"
-          variant="outline"
-          size="sm"
-          disabled={attaching}
-          onClick={() => attachInputRef.current?.click()}
-        >
-          {attaching ? (
-            <Loader2 className="h-4 w-4 mr-1.5 animate-spin" />
-          ) : (
-            <Paperclip className="h-4 w-4 mr-1.5" />
-          )}
-          PDF 첨부
-        </Button>
       </div>
 
       {/* SEO */}

@@ -19,7 +19,7 @@ const getPost = cache(async (slug: string): Promise<BlogPost | null> => {
   const admin = createAdminClient();
   const { data } = await admin
     .from('blog_posts')
-    .select('id, slug, title, excerpt, content, thumbnail_url, category, published_at, created_at, updated_at, meta_title, meta_description, view_count, is_published, attachments')
+    .select('id, slug, title, excerpt, content, thumbnail_url, category, published_at, created_at, updated_at, meta_title, meta_description, view_count, is_published')
     .eq('slug', slug)
     .eq('is_published', true)
     .single();
@@ -166,41 +166,9 @@ export default async function BlogDetailPage({ params }: Props) {
       </section>
 
       {/* 본문 */}
-      <section className="max-w-3xl mx-auto px-4 pb-8">
+      <section className="max-w-3xl mx-auto px-4 pb-16">
         <BlogArticle content={post.content} slug={post.slug} />
       </section>
-
-      {/* 첨부 파일 다운로드 */}
-      {post.attachments && post.attachments.length > 0 && (
-        <section className="max-w-3xl mx-auto px-4 pb-16">
-          <div className="rounded-2xl border border-violet-100 bg-violet-50/50 p-5">
-            <h2 className="text-sm font-bold text-slate-700 mb-3">첨부 자료</h2>
-            <ul className="space-y-2">
-              {post.attachments.map((att) => (
-                <li key={att.url}>
-                  <a
-                    href={att.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    download={att.name}
-                    className="flex items-center gap-3 rounded-xl bg-white border border-slate-200 px-4 py-3 hover:border-violet-300 hover:shadow-sm transition-all group"
-                  >
-                    <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-violet-100 text-violet-600">
-                      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                      </svg>
-                    </span>
-                    <span className="flex-1 min-w-0">
-                      <span className="block truncate text-sm font-medium text-slate-700 group-hover:text-violet-700">{att.name}</span>
-                      <span className="block text-xs text-slate-400">{att.size < 1024 * 1024 ? `${Math.round(att.size / 1024)} KB` : `${(att.size / 1024 / 1024).toFixed(1)} MB`} · 다운로드</span>
-                    </span>
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </section>
-      )}
 
       {/* 관련 글 */}
       {relatedPosts.length > 0 && (
