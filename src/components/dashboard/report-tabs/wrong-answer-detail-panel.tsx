@@ -6,7 +6,6 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import { Switch } from '@/components/ui/switch';
 import { extractAnswer } from '@/lib/naesin/normalize-answer';
 import {
   Dialog,
@@ -39,13 +38,12 @@ interface Props {
   onRefresh?: () => void;
 }
 
-const TEXTBOOK_STAGES = new Set(['passage', 'dialogue', 'vocab']);
-
 export function WrongAnswerDetailPanel({ studentId, onRefresh }: Props) {
   const [wrongAnswers, setWrongAnswers] = useState<NaesinWrongAnswer[]>([]);
   const [loading, setLoading] = useState(true);
   const [stageFilter, setStageFilter] = useState<NaesinWrongAnswerStage | 'all'>('all');
-  const [unresolvedOnly, setUnresolvedOnly] = useState(false);
+  const [resolveFilter, setResolveFilter] = useState<'all' | 'unresolved' | 'resolved'>('all');
+  const [bulkSubmitting, setBulkSubmitting] = useState(false);
 
   const fetchWrongAnswers = useCallback(async () => {
     try {
@@ -60,6 +58,29 @@ export function WrongAnswerDetailPanel({ studentId, onRefresh }: Props) {
       setLoading(false);
     }
   }, [studentId]);
+
+  // 해결/미해결 일괄 토글 (단원 그룹 "모두 해결" 등)
+  const resolveMany = useCallback(async (ids: string[], resolved: boolean) => {
+    if (ids.length === 0) return;
+    setBulkSubmitting(true);
+    try {
+      await fetchWithToast(
+        '/api/naesin/wrong-answers/student',
+        {
+          method: 'PATCH',
+          body: { wrongAnswerIds: ids, studentId, resolved },
+          successMessage: resolved ? `${ids.length}개 해결 처리됨` : `${ids.length}개 미해결로 되돌림`,
+          logContext: 'resolve_wrong_answers_bulk',
+        }
+      );
+      await fetchWrongAnswers();
+      onRefresh?.();
+    } catch {
+      // handled by fetchWithToast
+    } finally {
+      setBulkSubmitting(false);
+    }
+  }, [studentId, fetchWrongAnswers, onRefresh]);
 
   useEffect(() => {
     let cancelled = false;
@@ -80,9 +101,10 @@ export function WrongAnswerDetailPanel({ studentId, onRefresh }: Props) {
   const filtered = useMemo(() => {
     let items = wrongAnswers;
     if (stageFilter !== 'all') items = items.filter((wa) => wa.stage === stageFilter);
-    if (unresolvedOnly) items = items.filter((wa) => !wa.resolved);
+    if (resolveFilter === 'unresolved') items = items.filter((wa) => !wa.resolved);
+    else if (resolveFilter === 'resolved') items = items.filter((wa) => wa.resolved);
     return items;
-  }, [wrongAnswers, stageFilter, unresolvedOnly]);
+  }, [wrongAnswers, stageFilter, resolveFilter]);
 
   // Group: stage → unit
   const grouped = useMemo(() => {
@@ -103,6 +125,7 @@ export function WrongAnswerDetailPanel({ studentId, onRefresh }: Props) {
 
   const totalCount = wrongAnswers.length;
   const unresolvedCount = wrongAnswers.filter((wa) => !wa.resolved).length;
+  const resolvedCount = totalCount - unresolvedCount;
 
   if (loading) {
     return (
@@ -169,15 +192,35 @@ export function WrongAnswerDetailPanel({ studentId, onRefresh }: Props) {
           })}
         </div>
 
-        {/* Unresolved toggle */}
-        <label className="flex items-center gap-2 cursor-pointer">
-          <Switch checked={unresolvedOnly} onCheckedChange={setUnresolvedOnly} />
-          <span className="text-xs text-muted-foreground">미해결만 보기</span>
-        </label>
+        {/* Resolve status segmented filter */}
+        <div className="inline-flex rounded-lg border p-0.5 gap-0.5">
+          {([
+            ['all', `전체 ${totalCount}`],
+            ['unresolved', `미해결 ${unresolvedCount}`],
+            ['resolved', `해결 ${resolvedCount}`],
+          ] as const).map(([key, label]) => (
+            <button
+              key={key}
+              className={cn(
+                'px-3 py-1 rounded-md text-xs font-medium transition-colors',
+                resolveFilter === key
+                  ? key === 'unresolved'
+                    ? 'bg-red-500 text-white'
+                    : key === 'resolved'
+                      ? 'bg-green-600 text-white'
+                      : 'bg-primary text-primary-foreground'
+                  : 'text-muted-foreground hover:bg-muted'
+              )}
+              onClick={() => setResolveFilter(key)}
+            >
+              {label}
+            </button>
+          ))}
+        </div>
       </div>
 
       {/* Filtered count */}
-      {(stageFilter !== 'all' || unresolvedOnly) && (
+      {(stageFilter !== 'all' || resolveFilter !== 'all') && (
         <p className="text-xs text-muted-foreground">
           필터 결과: {filtered.length}개
         </p>
@@ -197,11 +240,27 @@ export function WrongAnswerDetailPanel({ studentId, onRefresh }: Props) {
             </h4>
             {Object.entries(grouped[stage])
               .sort(([, a], [, b]) => a.unitLabel.localeCompare(b.unitLabel, 'ko'))
-              .map(([unitKey, { unitLabel, items }]) => (
+              .map(([unitKey, { unitLabel, items }]) => {
+                const unresolvedIds = items.filter((wa) => !wa.resolved && !wa.isDraft).map((wa) => wa.id);
+                return (
                 <div key={unitKey} className="space-y-2">
-                  <p className="text-xs font-medium text-muted-foreground pl-1">
-                    {unitLabel} ({items.length}개)
-                  </p>
+                  <div className="flex items-center gap-2 pl-1">
+                    <p className="text-xs font-medium text-muted-foreground">
+                      {unitLabel} ({items.length}개)
+                    </p>
+                    {unresolvedIds.length > 0 && (
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        className="h-5 px-1.5 text-xs text-blue-600 hover:text-blue-700"
+                        onClick={() => resolveMany(unresolvedIds, true)}
+                        disabled={bulkSubmitting}
+                      >
+                        {bulkSubmitting ? <Loader2 className="h-3 w-3 animate-spin mr-0.5" /> : <Check className="h-3 w-3 mr-0.5" />}
+                        모두 해결 ({unresolvedIds.length})
+                      </Button>
+                    )}
+                  </div>
                   {items.map((wa) => (
                     <ReadOnlyWrongAnswerCard
                       key={wa.id}
@@ -211,7 +270,8 @@ export function WrongAnswerDetailPanel({ studentId, onRefresh }: Props) {
                     />
                   ))}
                 </div>
-              ))}
+                );
+              })}
           </div>
         ))
       )}
@@ -237,7 +297,6 @@ function ReadOnlyWrongAnswerCard({
   const options = data.options as string[] | undefined;
   const explanation = data.explanation as string | undefined;
   const isProblemStage = (wrongAnswer.stage === 'problem' || wrongAnswer.stage === 'mockExam') && wrongAnswer.sheet_id;
-  const isTextbookStage = TEXTBOOK_STAGES.has(wrongAnswer.stage);
   const isDraft = wrongAnswer.isDraft;
   const questionIndex = data.number ? Number(data.number) - 1 : -1;
 
@@ -293,8 +352,8 @@ function ReadOnlyWrongAnswerCard({
     }
   };
 
-  // 교과서 암기 오답 정답처리 (resolved=true)
-  const handleResolve = async () => {
+  // 오답 해결/미해결 토글 — 점수는 변하지 않고 오답 목록엔 남되 '해결'로 분류
+  const handleResolve = async (resolved: boolean) => {
     setSubmitting(true);
     try {
       await fetchWithToast(
@@ -302,10 +361,11 @@ function ReadOnlyWrongAnswerCard({
         {
           method: 'PATCH',
           body: {
-            wrongAnswerId: wrongAnswer.id,
+            wrongAnswerIds: [wrongAnswer.id],
             studentId,
+            resolved,
           },
-          successMessage: '정답처리 완료',
+          successMessage: resolved ? '해결 처리됨' : '미해결로 되돌림',
           logContext: 'resolve_wrong_answer',
         }
       );
@@ -410,44 +470,64 @@ function ReadOnlyWrongAnswerCard({
                   해결됨
                 </Badge>
               )}
-              {!isDraft && isProblemStage && questionIndex >= 0 && (
+              {!isDraft && (
                 <div className="flex gap-1 ml-auto">
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    className="h-5 px-1.5 text-xs text-green-600"
-                    onClick={handleAcceptAnswer}
-                    disabled={submitting || !String(data.userAnswer || '')}
-                  >
-                    {submitting ? <Loader2 className="h-3 w-3 animate-spin mr-0.5" /> : <Check className="h-3 w-3 mr-0.5" />}
-                    정답처리
-                  </Button>
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    className="h-5 px-1.5 text-xs text-muted-foreground"
-                    onClick={() => {
-                      setNewAnswer(extractAnswer(data.correctAnswer));
-                      setNewExplanation((data.explanation as string) || '');
-                      setDialogOpen(true);
-                    }}
-                  >
-                    <Pencil className="h-3 w-3 mr-0.5" />
-                    정답 수정
-                  </Button>
+                  {/* 정답처리 = 이 답을 실제 정답으로 인정(점수 오름) — 문제풀이/예상문제만 */}
+                  {isProblemStage && questionIndex >= 0 && !wrongAnswer.resolved && (
+                    <>
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        className="h-5 px-1.5 text-xs text-green-600"
+                        onClick={handleAcceptAnswer}
+                        disabled={submitting || !String(data.userAnswer || '')}
+                        title="이 답을 정답으로 인정하고 재채점 (점수 오름)"
+                      >
+                        {submitting ? <Loader2 className="h-3 w-3 animate-spin mr-0.5" /> : <Check className="h-3 w-3 mr-0.5" />}
+                        정답처리
+                      </Button>
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        className="h-5 px-1.5 text-xs text-muted-foreground"
+                        onClick={() => {
+                          setNewAnswer(extractAnswer(data.correctAnswer));
+                          setNewExplanation((data.explanation as string) || '');
+                          setDialogOpen(true);
+                        }}
+                      >
+                        <Pencil className="h-3 w-3 mr-0.5" />
+                        정답 수정
+                      </Button>
+                    </>
+                  )}
+                  {/* 해결 = 오답이지만 확인 완료(철자 실수·이해함) — 점수 변동 없음, 목록엔 '해결'로 남음 */}
+                  {wrongAnswer.resolved ? (
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      className="h-5 px-1.5 text-xs text-muted-foreground"
+                      onClick={() => handleResolve(false)}
+                      disabled={submitting}
+                      title="미해결로 되돌리기"
+                    >
+                      {submitting ? <Loader2 className="h-3 w-3 animate-spin mr-0.5" /> : null}
+                      되돌리기
+                    </Button>
+                  ) : (
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      className="h-5 px-1.5 text-xs text-blue-600"
+                      onClick={() => handleResolve(true)}
+                      disabled={submitting}
+                      title="오답이지만 확인 완료 처리 (점수 변동 없음)"
+                    >
+                      {submitting ? <Loader2 className="h-3 w-3 animate-spin mr-0.5" /> : <Check className="h-3 w-3 mr-0.5" />}
+                      해결
+                    </Button>
+                  )}
                 </div>
-              )}
-              {!isDraft && isTextbookStage && !wrongAnswer.resolved && (
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  className="h-5 px-1.5 text-xs text-green-600 ml-auto"
-                  onClick={handleResolve}
-                  disabled={submitting}
-                >
-                  {submitting ? <Loader2 className="h-3 w-3 animate-spin mr-0.5" /> : <Check className="h-3 w-3 mr-0.5" />}
-                  정답처리
-                </Button>
               )}
             </div>
           </div>

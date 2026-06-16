@@ -34,16 +34,18 @@ export const GET = createApiHandler(
   }
 );
 
-// 선생님/원장이 학생의 오답을 정답처리 (resolved=true)
+// 선생님/원장이 학생의 오답을 해결/미해결 처리 (resolved 토글, 단건·다건 모두 지원)
+// 해결(resolved=true) = 오답이지만 확인 완료(철자 실수·이해함). 점수는 변하지 않고 오답 목록엔 남되 '해결'로 분류.
 const resolveSchema = z.object({
-  wrongAnswerId: z.string().uuid(),
+  wrongAnswerIds: z.array(z.string().uuid()).min(1).max(500),
   studentId: z.string().uuid(),
+  resolved: z.boolean().default(true),
 });
 
 export const PATCH = createApiHandler(
   { schema: resolveSchema, roles: ['teacher', 'admin', 'boss'] },
   async ({ user, body, supabase }) => {
-    const { wrongAnswerId, studentId } = body;
+    const { wrongAnswerIds, studentId, resolved } = body;
 
     await requireAcademyScope(user, studentId, supabase);
 
@@ -52,11 +54,11 @@ export const PATCH = createApiHandler(
     dbResult(
       await admin
         .from('naesin_wrong_answers')
-        .update({ resolved: true })
-        .eq('id', wrongAnswerId)
+        .update({ resolved })
+        .in('id', wrongAnswerIds)
         .eq('student_id', studentId)
     );
 
-    return NextResponse.json({ success: true });
+    return NextResponse.json({ success: true, count: wrongAnswerIds.length });
   }
 );
