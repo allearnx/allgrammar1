@@ -113,12 +113,12 @@ export function DialogueLineOrdering({ sentences, onComplete }: DialogueLineOrde
     setShowResult(true);
   }
 
-  // Score: compare full order (hints always correct)
+  // Score: compare by VISIBLE text only (화자 제외).
+  // 같은 대사("Thanks." 등)가 화자만 다르게 두 번 나오면 학생 눈엔 구분이 안 되는데,
+  // 화자까지 비교하면 텍스트가 완벽히 맞아도 오답 처리됨 → "정답인데 틀림" 버그.
+  // 학생이 볼 수 있는 정보(텍스트)로만 채점한다.
   const correctCount = fullOrder.filter(
-    (item, i) =>
-      item !== null &&
-      item.original === lines[i].original &&
-      (item.speaker ?? '') === (lines[i].speaker ?? ''),
+    (item, i) => item !== null && item.original === lines[i].original,
   ).length;
   const score = Math.round((correctCount / lines.length) * 100);
   const allCorrect = correctCount === lines.length;
@@ -236,9 +236,7 @@ export function DialogueLineOrdering({ sentences, onComplete }: DialogueLineOrde
 
             // ── User-placed item ──
             const isCorrectPosition =
-              showResult &&
-              item.original === lines[i].original &&
-              (item.speaker ?? '') === (lines[i].speaker ?? '');
+              showResult && item.original === lines[i].original;
             return (
               <button
                 key={`s-${item.originalIndex}`}
