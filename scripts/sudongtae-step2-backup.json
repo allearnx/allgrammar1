@@ -1,0 +1,3955 @@
+{
+  "template_cac534f0-5d4e-475f-87f3-30fdc65d645d": {
+    "questions": [
+      {
+        "tag": "오류수정",
+        "type": "sentence",
+        "answer": "Where was Ron born?",
+        "number": 1,
+        "question": "다음 밑줄 친 부분을 바르게 고쳐 쓰시오. \n\nA: Where *did* Ron born?\nB: He was born in Fantasy Village."
+      },
+      {
+        "tag": "오류수정",
+        "type": "sentence",
+        "answer": "Was the letter delivered by Mr. Smith?",
+        "number": 2,
+        "question": "다음 밑줄 친 부분을 바르게 고쳐 쓰시오. \n\nA: *Did* the letter deliver by Mr. Smith?\nB: No, it *didn't*. It was delivered by a bird.",
+        "acceptedAnswers": [
+          "Was the letter delivered by Mr. Smith?\nNo, it wasn't. It was delivered by a bird",
+          "Was the letter delivered by Mr. Smith? No, it wasn't. It was delivered by a bird."
+        ]
+      },
+      {
+        "tag": "오류수정",
+        "type": "sentence",
+        "answer": "Ron was invited to Wonka Magic School.",
+        "number": 3,
+        "question": "다음 밑줄 친 부분을 바르게 고쳐 쓰시오. \n\nA: What was written in the letter?\nB: Ron *invited* to Wonka Magic School."
+      },
+      {
+        "tag": "빈칸",
+        "type": "short_answer",
+        "answer": "is interested in",
+        "number": 4,
+        "question": "위의 <보기>에서 알맞은 표현을 골라 <보기>에서 알맞은 표현을 골라 적절한 형태로 고쳐 문장을 완성하시오. \n\n<보기>\nbe satisfied / be scared / be made / be interested\n\nJoy takes piano and violin lesson these days. She _______ _______ _______ music.\n\n※ 빈칸에 들어갈 말만 쓰시오."
+      },
+      {
+        "tag": "빈칸",
+        "type": "short_answer",
+        "answer": "is scared of",
+        "number": 5,
+        "question": "위의 <보기>에서 알맞은 표현을 골라 <보기>에서 알맞은 표현을 골라 적절한 형태로 고쳐 문장을 완성하시오. \n\n<보기>\nbe satisfied / be scared / be made / be interested\n\n\nWe leave a light on in our son's bedroom at night because he _______ _______ _______ the dark.\n\n※ 빈칸에 들어갈 말만 쓰시오."
+      },
+      {
+        "tag": "영작",
+        "type": "sentence",
+        "answer": "was completely destroyed by the car",
+        "number": 6,
+        "question": "다음 두 문장이 같은 뜻이 되도록 빈칸에 알맞은 문장을 쓰시오. \n\nThe car completely destroyed my motorbike.\n= My motorbike _______________________\n\n※ 빈칸에 들어갈 말만 쓰시오."
+      },
+      {
+        "tag": "영작",
+        "type": "sentence",
+        "answer": "was awarded the second prize",
+        "number": 7,
+        "question": "다음 두 문장이 같은 뜻이 되도록 빈칸에 알맞은 문장을 쓰시오. \n\nSecond prize was awarded to an unknown author from Patras.\n= An unknown author from Patras _______ _______ _______\n\n※ 빈칸에 들어갈 말만 쓰시오."
+      },
+      {
+        "tag": "영작",
+        "type": "sentence",
+        "answer": "Many polar bears were killed by a hunter.",
+        "number": 8,
+        "question": "A hunter killed many polar bears.\n\n위 문장을 수동태로 알맞게 전환하시오."
+      },
+      {
+        "tag": "영작",
+        "type": "sentence",
+        "answer": "A lot of disasters are caused by global warming.",
+        "number": 9,
+        "question": "The global warming causes a lot of disasters.\n\n위 문장을 수동태로 알맞게 전환하시오."
+      },
+      {
+        "tag": "빈칸",
+        "type": "short_answer",
+        "answer": "were made",
+        "number": 10,
+        "question": "다음 각 문장의 밑줄 친 부분을 주어로 하여 아래의 문장을 완성해 봅시다.\nJane made *these cookies.* \nEric broke *the window.*\nMina wrote *this letter.*\nThe Wright brothers invented *the airplane.* \n\nThese cookies _______ _______ by Jane.\n\n※ 빈칸에 들어갈 말만 쓰시오."
+      },
+      {
+        "tag": "빈칸",
+        "type": "short_answer",
+        "answer": "was broken",
+        "number": 11,
+        "question": "다음 각 문장의 밑줄 친 부분을 주어로 하여 아래의 문장을 완성해 봅시다.\nJane made *these cookies.* \nEric broke *the window.*\nMina wrote *this letter.*\nThe Wright brothers invented *the airplane.* \n\nThe window _______ _______ by Eric.\n\n※ 빈칸에 들어갈 말만 쓰시오."
+      },
+      {
+        "tag": "빈칸",
+        "type": "short_answer",
+        "answer": "was written",
+        "number": 12,
+        "question": "다음 각 문장의 밑줄 친 부분을 주어로 하여 아래의 문장을 완성해 봅시다.\nJane made *these cookies.* \nEric broke *the window.*\nMina wrote *this letter.*\nThe Wright brothers invented *the airplane.* \n\nThis letter _______ _______ by Mina.\n\n※ 빈칸에 들어갈 말만 쓰시오."
+      },
+      {
+        "tag": "빈칸",
+        "type": "short_answer",
+        "answer": "was invented",
+        "number": 13,
+        "question": "다음 각 문장의 밑줄 친 부분을 주어로 하여 아래의 문장을 완성해 봅시다.\nJane made *these cookies.* \nEric broke *the window.*\nMina wrote *this letter.*\nThe Wright brothers invented *the airplane.* \n\nThe airplane _______ _______ by the Wright brothers.\n\n※ 빈칸에 들어갈 말만 쓰시오."
+      },
+      {
+        "tag": "subParts",
+        "type": "multi_part",
+        "answer": "was born / Korea / 1962 / was loved / many Sudanese people / Sudan / was called / the Schweizer of Sudan",
+        "number": 14,
+        "question": "다음 인물을 소개하는 글이 되도록 주어진 정보와 괄호 안에 단어를 이용하여 빈칸을 완성하시오. \n\nLee Taeseok\n\nBorn: Korea, 1962\nHe did volunteer work in Sudan. Many Sudanese people loved him. People call him, 'the Schweizer of Sudan.'\n\nHe ________(bear) in ________ in ________.\nHe ________(love) by ________ in __________.\nHe worked as hard as other volunteers in Sudan. He ________(call) .",
+        "subParts": [
+          {
+            "label": "(1) bear→",
+            "answer": "was born"
+          },
+          {
+            "label": "(2) 나라",
+            "answer": "Korea"
+          },
+          {
+            "label": "(3) 년도",
+            "answer": "1962"
+          },
+          {
+            "label": "(4) love→",
+            "answer": "was loved"
+          },
+          {
+            "label": "(5) 누구에게",
+            "answer": "many Sudanese people"
+          },
+          {
+            "label": "(6) 어디서",
+            "answer": "Sudan"
+          },
+          {
+            "label": "(7) call→",
+            "answer": "was called"
+          },
+          {
+            "label": "(8) 별명",
+            "answer": "the Schweizer of Sudan",
+            "acceptedAnswers": [
+              "'the Schweizer of Sudan'",
+              "\"the Schweizer of Sudan\""
+            ]
+          }
+        ]
+      },
+      {
+        "tag": "subParts",
+        "type": "multi_part",
+        "answer": "created / read / sent / taught / Harry Potter",
+        "number": 15,
+        "question": "다음 빈칸에 알맞은 말을 골라 글을 완성하고, 누구에 관한 설명인지 추측하시오.\n\n<보기> read / send / create / teach\n\nThis character was _______ by J. K. Rowling. The books about him have been _______ by many people all over the world. He was _______ to a magic school. He was _______ how to fly and how to use magic.\n\nGuess who? _______",
+        "subParts": [
+          {
+            "label": "(1) create",
+            "answer": "created"
+          },
+          {
+            "label": "(2) read",
+            "answer": "read"
+          },
+          {
+            "label": "(3) send",
+            "answer": "sent"
+          },
+          {
+            "label": "(4) teach",
+            "answer": "taught"
+          },
+          {
+            "label": "(5) 인물",
+            "answer": "Harry Potter"
+          }
+        ]
+      },
+      {
+        "tag": "빈칸",
+        "type": "short_answer",
+        "answer": "is interested in",
+        "number": 16,
+        "question": "다음 괄호 안의 단어와 그에 어울리는 전치사를 이용하여 문장을 완성하시오. (단, by 제외)\n\nJohn _______ _______ education. (interest)\n\n※ 빈칸에 들어갈 말만 쓰시오."
+      },
+      {
+        "tag": "빈칸",
+        "type": "short_answer",
+        "answer": "was satisfied with",
+        "number": 17,
+        "question": "다음 괄호 안의 단어와 그에 어울리는 전치사를 이용하여 문장을 완성하시오. (단, by 제외)\n\nI _______ _______ _______ the result. (satisfy)\n\n※ 빈칸에 들어갈 말만 쓰시오."
+      },
+      {
+        "tag": "빈칸",
+        "type": "short_answer",
+        "answer": "were covered with",
+        "number": 18,
+        "question": "다음 괄호 안의 단어와 그에 어울리는 전치사를 이용하여 문장을 완성하시오. (단, by 제외)\n\nThe roads were very dangerous, because they _______ _______ _______ ice. (cover)\n\n※ 빈칸에 들어갈 말만 쓰시오."
+      },
+      {
+        "tag": "영작",
+        "type": "sentence",
+        "answer": "was pleased to receive",
+        "number": 19,
+        "question": "다음 괄호 안의 단어와 그에 어울리는 전치사를 이용하여 문장을 완성하시오. (단, by 제외)\n\nI _______ _______ _______ your letter yesterday. (please)\n\n※ 빈칸에 들어갈 말만 쓰시오."
+      },
+      {
+        "tag": "단어배열",
+        "type": "sentence",
+        "answer": "I was asked the way three times.",
+        "number": 20,
+        "question": "다음 <보기>와 같이 문장에서 밑줄 친 낱말을 생략하여 수동태 문장으로 다시 쓰시오. \n<보기> *You* have to fill in  an application form.\n→ An application form has to be filled in.\n\n*People* asked me the way three times.\n→ _______________________________",
+        "acceptedAnswers": []
+      },
+      {
+        "tag": "단어배열",
+        "type": "sentence",
+        "answer": "The apples are picked early in the morning.",
+        "number": 21,
+        "question": "다음 <보기>와 같이 문장에서 밑줄 친 낱말을 생략하여 수동태 문장으로 다시 쓰시오. \n<보기> You have to fill in  an application form.\n→ An application form has to be filled in.\n\n*The fruit-pickers* pick the apples early in the morning.\n→ _______________________________"
+      },
+      {
+        "tag": "빈칸",
+        "type": "short_answer",
+        "answer": "was written",
+        "number": 22,
+        "question": "다음 빈칸에 괄호 안에 주어진 단어를 이용하여 알맞게 각각 고쳐 쓰시오. \n\nThere is a book on the desk. The book _______ _______ by Shakespeare. (write)\n\n※ 빈칸에 들어갈 말만 쓰시오."
+      },
+      {
+        "tag": "빈칸",
+        "type": "short_answer",
+        "answer": "was drawn",
+        "number": 23,
+        "question": "다음 빈칸에 괄호 안에 주어진 단어를 이용하여 알맞게 각각 고쳐 쓰시오. \n\nThere is a picture on the wall. It _______ _______ by Andy Warhol. (draw)\n\n※ 빈칸에 들어갈 말만 쓰시오."
+      },
+      {
+        "tag": "단어배열",
+        "type": "sentence",
+        "answer": "was painted by Vincent van Gogh",
+        "number": 24,
+        "question": "다음 <보기>를 참고하여 질문에 답하시오.\n<보기> \nTitle: The Starry Night\nArtist: Vincent van Gogh (1853~1890)\nPainted in 1889\n\nWho painted The Starry Night?\n→ The Starry Night _______________________\n\n※ 빈칸에 들어갈 말만 쓰시오."
+      },
+      {
+        "tag": "단어배열",
+        "type": "sentence",
+        "answer": "was born in 1853",
+        "number": 25,
+        "question": "다음 <보기>를 참고하여 질문에 답하시오.\n<보기> \nTitle: The Starry Night\nArtist: Vincent van Gogh (1853~1890)\nPainted in 1889\n\nWhen was Vincent van Gogh born?\n→ He _______________________\n\n※ 빈칸에 들어갈 말만 쓰시오."
+      },
+      {
+        "tag": "단어배열",
+        "type": "sentence",
+        "answer": "was painted in 1889",
+        "number": 26,
+        "question": "다음 <보기>를 참고하여 질문에 답하시오.\n<보기> \nTitle: The Starry Night\nArtist: Vincent van Gogh (1853~1890)\nPainted in 1889\n\nWhen did he paint The Starry Night?\n→ The Starry Night _______________________\n\n※ 빈칸에 들어갈 말만 쓰시오."
+      },
+      {
+        "tag": "기타",
+        "type": "sentence",
+        "answer": "was won by Claude Jennings",
+        "number": 27,
+        "question": "다음 괄호 안에 있는 단어들을 이용하여 지시된 시제로 알맞게 쓰시오.\n\nDid you hear about the quiz competition?\nIt (Claude Jennings / win: 과거)"
+      },
+      {
+        "tag": "기타",
+        "type": "sentence",
+        "answer": "did a parachute jump last week",
+        "number": 28,
+        "question": "다음 괄호 안에 있는 단어들을 이용하여 지시된 시제로 알맞게 쓰시오.\n\nYou know Mrs. Miles?\nShe (do / a parachute jump / last week: 과거)"
+      },
+      {
+        "tag": "단어",
+        "type": "short_answer",
+        "answer": "likes Jessica",
+        "number": 29,
+        "question": "다음 괄호 안에 있는 단어들을 이용하여 지시된 시제로 알맞게 쓰시오.\n\nDid I tell you about Andrew?\nHe (like / Jessica: 현재)"
+      },
+      {
+        "tag": "기타",
+        "type": "sentence",
+        "answer": "was seen by five people",
+        "number": 30,
+        "question": "다음 괄호 안에 있는 단어들을 이용하여 지시된 시제로 알맞게 쓰시오.\n\nDid you hear about the ghost?\nIt (five people / see: 과거)"
+      },
+      {
+        "tag": "기타",
+        "type": "sentence",
+        "answer": "went to Florida last month",
+        "number": 31,
+        "question": "다음 괄호 안에 있는 단어들을 이용하여 지시된 시제로 알맞게 쓰시오.\n\nYou remember Claire?\nShe (go / to Florida / last month: 과거)"
+      },
+      {
+        "tag": "단어배열",
+        "type": "sentence",
+        "answer": "When was the Eiffel Tower built?",
+        "number": 32,
+        "question": "다음 우리말에 맞도록 괄호 안의 단어를 순서대로 배열하시오. (필요시 형태를 변형할 것)\n\n에펠탑은 언제 지어졌나?\n(Eiffel Tower / when / built / was / the)"
+      },
+      {
+        "tag": "단어배열",
+        "type": "sentence",
+        "answer": "The movie has been loved by many people.",
+        "number": 33,
+        "question": "다음 우리말에 맞도록 괄호 안의 단어를 순서대로 배열하시오. (필요시 형태를 변형할 것)\n\n그 영화는 많은 사람들에 의해 사랑받아오고 있다.\n(the / love / movie / by / have / people / be / many)"
+      },
+      {
+        "tag": "단어배열",
+        "type": "sentence",
+        "answer": "A lot of trees are cut down to make paper.",
+        "number": 34,
+        "question": "다음 우리말에 맞도록 괄호 안의 단어를 순서대로 배열하시오. (필요시 형태를 변형할 것)\n\n많은 나무들이 종이를 만들기 위해 베어진다.\n(a / to / make / trees / of / are / cut / lot / down / paper)"
+      },
+      {
+        "tag": "단어배열",
+        "type": "sentence",
+        "answer": "The window was broken by Junsu.",
+        "number": 35,
+        "question": "다음 밑줄 친 부분으로 시작하여 문장을 다시 쓰시오.\n<보기> \nThe Wright invented *the airplane.*\n→ The airplane was invented by the Wright brothers.\n\nJunsu broke *the window.*\n→  ________________________________________"
+      },
+      {
+        "tag": "단어배열",
+        "type": "sentence",
+        "answer": "These cookies were made by Ann.",
+        "number": 36,
+        "question": "다음 밑줄 친 부분으로 시작하여 문장을 다시 쓰시오.\n<보기> \nThe Wright invented *the airplane.*\n→ The airplane was invented by the Wright brothers.\n\nAnn made *these cookies.*\n→  ________________________________________"
+      },
+      {
+        "tag": "단어배열",
+        "type": "sentence",
+        "answer": "This letter was written by Cathy.",
+        "number": 37,
+        "question": "다음 밑줄 친 부분으로 시작하여 문장을 다시 쓰시오.\n<보기> \nThe Wright invented *the airplane.*\n→ The airplane was invented by the Wright brothers.\n\nCathy wrote *this letter.*\n→  ________________________________________"
+      },
+      {
+        "tag": "영작",
+        "type": "sentence",
+        "answer": "Hanguel was made by King Sejong the Great in 1443.",
+        "number": 38,
+        "question": "Complete the sentence with the given words as shown in the example below.\n\n<Example>\n(the Taj Mahal, build, Shah Jahan)\n→ The Taj Mahal was built by Shah Jahan. \n\n(King Sejong the Great, make, Hanguel, 1443)\n→  _______________________________________ "
+      },
+      {
+        "tag": "영작",
+        "type": "sentence",
+        "answer": "The novel was written by him.",
+        "number": 39,
+        "question": "Rewrite the sentences that begin with the underlined parts as shown in the example below.\n<Example>\nThe Wright brothers invented *the airplane.*\n→ The airplan was invented by the Wright brothers. \n\nHe wrote *the novel.*\n→  ________________________________________\n"
+      },
+      {
+        "tag": "영작",
+        "type": "sentence",
+        "answer": "The library could be easily found by Ann.",
+        "number": 40,
+        "question": "Rewrite the sentences that begin with the underlined parts as shown in the example below.\n<Example>\nThe Wright brothers invented *the airplane.*\n→ The airplan was invented by the Wright brothers. \n\n\nAnn could easily find *the library.*\n→  ________________________________________"
+      },
+      {
+        "tag": "영작",
+        "type": "sentence",
+        "answer": "An old article was shown to me by her.",
+        "number": 41,
+        "question": "Rewrite the sentences that begin with the underlined parts as shown in the example below.\n<Example>\nThe Wright brothers invented *the airplane.*\n→ The airplan was invented by the Wright brothers. \n\n\nShe showed me *an old article.*\n→  ________________________________________"
+      },
+      {
+        "tag": "subParts",
+        "type": "multi_part",
+        "answer": "is played / are cleaned / are baked",
+        "number": 42,
+        "question": "다음 글의 빈칸 ①~③ 괄호 안에 주어진 단어를 이용하여 알맞게 각각 고쳐 쓰시오.\n\nEverything is strange in this world. The music ①(play) by the birds. The windows ②(clean) by the elephant. Cookies ③(bake) by the bear.",
+        "subParts": [
+          {
+            "label": "①",
+            "answer": "is played"
+          },
+          {
+            "label": "②",
+            "answer": "are cleaned"
+          },
+          {
+            "label": "③",
+            "answer": "are baked"
+          }
+        ]
+      },
+      {
+        "tag": "subParts",
+        "type": "multi_part",
+        "answer": "The fairy's dress was taken by the man / The bird's leg was broken in an accident",
+        "number": 43,
+        "question": "다음 전래동화에 관한 글을 읽고, 어법상 어색한 문장을 2개 찾아 바르게 고쳐 문장을 전체를 다시 쓰시오. (단, 정답은 고친문장만 이어서 쓸 것) ex) This song is loved by many people, The window was broken.\n\n(a) Kongjwi wasn't invited to the party.\n(b) The fairy's dress was took by the man.\n(c) The turtle was tricked by the rabbit.\n(d) The bird's leg was break in an accident.\n\n(1) 고친 문장:  ________________________________________\t\n\n(2) 고친 문장:  ________________________________________\t",
+        "subParts": [
+          {
+            "label": "(1)",
+            "answer": "The fairy's dress was taken by the man"
+          },
+          {
+            "label": "(2)",
+            "answer": "The bird's leg was broken in an accident"
+          }
+        ],
+        "acceptedAnswers": [
+          "The fairy's dress was taken by the man, The bird's leg was broken in an accident"
+        ]
+      },
+      {
+        "tag": "subParts",
+        "type": "multi_part",
+        "answer": "His car was stopped by the police last night / The play lasted for more than two hours",
+        "number": 44,
+        "question": "다음 <보기>에서 어법상 어색한 부분을 2개 찾아 기호를 쓰고 바르게 고쳐 문장 전체를 다시 쓰시오. (단, 정답은 고친문장만 이어서 쓸 것) ex) This song is loved by many people, The window was broken.\n\n<보기>\n(a) His car is stopped by the police last night.\n(b) The play was lasted for more than two hours.\n(c) He has been elected president by people.\n(d) Christina's dogs will be taken good care of.\n(e) Those gentlemen were met by beautiful ladies.\n\n(1) 고친 문장:  ________________________________________\t\n\n(2) 고친 문장:  ________________________________________\t",
+        "subParts": [
+          {
+            "label": "(1)",
+            "answer": "His car was stopped by the police last night"
+          },
+          {
+            "label": "(2)",
+            "answer": "The play lasted for more than two hours"
+          }
+        ],
+        "acceptedAnswers": [
+          "His car was stopped by the police last night., The play lasted for more than two hours",
+          "His car was stopped by the police last night, The play lasted for more than two hours"
+        ]
+      },
+      {
+        "tag": "subParts",
+        "type": "multi_part",
+        "answer": "was invented by / is used by",
+        "number": 45,
+        "question": "다음 우리말과 일치하도록 괄호 안에 주어진 단어를 이용하여 문장을 완성하시오. \n(필요시 단어의 형태를 바꾸며 시제에 유의할 것) \n\n(1) 전구는 Thomas Edison에 의해 발명되었다.\n→ The light bulb _______ _______ _______ Thomas Edison. (invent)\n\n(2) 그것은 세계의 많은 사람들에 의해 사용된다.\n→ It _______ _______ _______ many people in the world. (use)",
+        "subParts": [
+          {
+            "label": "(1)",
+            "answer": "was invented by"
+          },
+          {
+            "label": "(2)",
+            "answer": "is used by"
+          }
+        ]
+      },
+      {
+        "tag": "subParts",
+        "type": "multi_part",
+        "answer": "was thrown / wasn't broken / she / cuts the grass",
+        "number": 46,
+        "question": "다음 두 문장의 의미가 같도록 할 때, 빈칸에 들어갈 알맞은 말을 쓰시오.\n\n(1) The cat threw the mouse.\n→ The mouse _______ _______ by the cat.\n\n(2) She didn't break the window.\n→ The window _______ _______ by _______.\n\n(3) The grass is cut by him once a week.\n→ He _______ _______ _______ once a week.",
+        "subParts": [
+          {
+            "label": "(1)",
+            "answer": "was thrown"
+          },
+          {
+            "label": "(2)-빈칸",
+            "answer": "wasn't broken",
+            "acceptedAnswers": [
+              "was not broken"
+            ]
+          },
+          {
+            "label": "(2)-by 뒤",
+            "answer": "she"
+          },
+          {
+            "label": "(3)",
+            "answer": "cuts the grass"
+          }
+        ]
+      },
+      {
+        "tag": "빈칸",
+        "type": "short_answer",
+        "answer": "written",
+        "number": 47,
+        "question": "다음 두 문장의 의미가 같도록 우리말과 일치하는 빈칸에 들어갈 알맞은 말을 쓰시오.\n\nCathy wrote a letter.\n→ A letter was _______ by Cathy.\n(번지가 Cathy에 의해서 쓰여 졌다.)\n\n※ 빈칸에 들어갈 말만 쓰시오."
+      },
+      {
+        "tag": "빈칸",
+        "type": "short_answer",
+        "answer": "was painted by",
+        "number": 48,
+        "question": "다음 우리말과 일치하도록 빈칸에 들어갈 알맞은 말을 쓰시오.\n\nA: Who painted the picture?\nB: The picture _______ _______ _______ Vincent van Gogh.\n(그 그림은 반센트 반 고흐에 의해 그려졌다.)\n\n※ 빈칸에 들어갈 말만 쓰시오."
+      },
+      {
+        "tag": "빈칸",
+        "type": "short_answer",
+        "answer": "were written by",
+        "number": 49,
+        "question": "다음 우리말과 일치하도록 빈칸에 들어갈 알맞은 말을 쓰시오.\n\nA: Who wrote Harry potter series?\nB: The books _______ _______ J. K. Rowling.\n(그 책들은 J. K. Rowling에 의해 쓰였다.)\n\n※ 빈칸에 들어갈 말만 쓰시오."
+      },
+      {
+        "tag": "단어배열",
+        "type": "sentence",
+        "answer": "was written by Mark Twain.",
+        "number": 50,
+        "question": "다음 문장을 <보기>와 같은 형태로 바꿔 쓰시오.\n\n<보기>\nEverybody loved Mario.\n→ Mario was loved by everybody.\n\nMark Twain wrote the book.\n→ The book _______________________________.\n\n※ 빈칸에 들어갈 말만 쓰시오."
+      },
+      {
+        "tag": "subParts",
+        "type": "multi_part",
+        "answer": "We should recycle cans and plastic bottles / Cans and plastic bottles should be recycled by us",
+        "number": 51,
+        "question": "다음 <보기>에 주어진 단어들을 사용하여 수동태 문장을 만드시오. \n(필요시 단어를 추가하거나 형태를 변형할 것)\n\n<보기>\nwe / recycle / cans and plastic bottles / should",
+        "subParts": [
+          {
+            "label": "능동태",
+            "answer": "We should recycle cans and plastic bottles"
+          },
+          {
+            "label": "수동태",
+            "answer": "Cans and plastic bottles should be recycled by us"
+          }
+        ],
+        "acceptedAnswers": [
+          "Cans and plastic bottles should be recycled by us",
+          "Cans and plastic bottles should be recycled"
+        ]
+      },
+      {
+        "tag": "오류수정",
+        "type": "sentence",
+        "answer": "was built in 1930",
+        "number": 52,
+        "question": "다음 문장을 주어진 낱말로 시작하는 문장으로 고쳐 쓰시오.\n\nSomebody built this house in 1930.\n→ This house _______________.\n\n※ 빈칸에 들어갈 말만 쓰시오."
+      },
+      {
+        "tag": "subParts",
+        "type": "multi_part",
+        "answer": "were taken by my mother / was broken by / was made",
+        "number": 53,
+        "question": "다음 빈칸에 들어갈 알맞은 말을 수동태를 사용하여 쓰시오.\n\n(1) My mother took these pictures.\n→ These pictures _______________.\n\n(2) A: Who broke the window?\nB: It _______________ Jim.\n\n(3) A: Who made the cake?\nB: It _______________ by Mim.",
+        "subParts": [
+          {
+            "label": "(1)",
+            "answer": "were taken by my mother"
+          },
+          {
+            "label": "(2)",
+            "answer": "was broken by"
+          },
+          {
+            "label": "(3)",
+            "answer": "was made"
+          }
+        ]
+      },
+      {
+        "tag": "단어배열",
+        "type": "sentence",
+        "answer": "The early worm is caught by the early bird.",
+        "number": 54,
+        "question": "다음 <보기>를 참고하여 주어진 우리말과 일치하도록 영작하시오.\n\n<보기>\n일찍 일어나는 새가 벌레를 잡는다.\n→ The early bird catches the worm.\n\n일찍 일어나는 벌레는 일찍 일어나는 새에게 먹힌다.\n\n→ _______________ (9단어)"
+      },
+      {
+        "tag": "subParts",
+        "type": "multi_part",
+        "answer": "was written / broke / could be built",
+        "number": 55,
+        "question": "다음 두 문장이 같은 의미가 되도록 괄호 안의 지시에 따라 바꾸시오.\n\n(1) She wrote Harry potter. (수동태로)\n→ Harry potter _______________ by her.\n\n(2) The window is broken by Tom. (능동태로)\n→ Tom _______________ the window.\n\n(3) They could build the school. (수동태로)\n→ The school _______________ by them.",
+        "subParts": [
+          {
+            "label": "(1)",
+            "answer": "was written"
+          },
+          {
+            "label": "(2)",
+            "answer": "broke"
+          },
+          {
+            "label": "(3)",
+            "answer": "could be built"
+          }
+        ]
+      },
+      {
+        "tag": "subParts",
+        "type": "multi_part",
+        "answer": "is made / was woken up / will be caught by the police",
+        "number": 56,
+        "question": "다음 주어진 문장의 주어를 바꿔 쓸 때, 빈칸에 들어갈 알맞은 말을 쓰시오.\n\n(1) Tom makes a robot.\n→ A robot _______________ by Tom.\n\n(2) A loud noise woke me up in the morning.\n→ I _______________ in the morning.\n\n(3) The police will catch the man.\n→ The man _______________.",
+        "subParts": [
+          {
+            "label": "(1)",
+            "answer": "is made"
+          },
+          {
+            "label": "(2)",
+            "answer": "was woken up"
+          },
+          {
+            "label": "(3)",
+            "answer": "will be caught by the police",
+            "acceptedAnswers": [
+              "will be caught"
+            ]
+          }
+        ]
+      },
+      {
+        "tag": "단어배열",
+        "type": "sentence",
+        "answer": "Many kinds of fish are caught by fishermen.",
+        "number": 57,
+        "question": "다음 문장을 <보기>와 같은 형태로 바꿔 쓰시오.\n\n<보기>\nThe girl opens the window.\n→ The window is opened by the girl.\n\nFishermen catch many kinds of fish.\n→ _______________\n\n*fishermen: 어부들"
+      },
+      {
+        "tag": "단어배열",
+        "type": "sentence",
+        "answer": "Hamlet and King Lear were written by him.",
+        "number": 58,
+        "question": "다음 문장을 <보기>와 같은 형태로 바꿔 쓰시오.\n\n<보기>\nJames took the picture.\n→ The picture was taken by James.\n\nHe wrote Hamlet and King Lear.\n→ _______________"
+      },
+      {
+        "tag": "단어배열",
+        "type": "sentence",
+        "answer": "He was heard to sing by us.",
+        "number": 59,
+        "question": "다음 문장을 <보기>와 같은 형태로 바꿔 쓰시오.\n\n<보기>\nI saw a boy play the piano.\n→ A boy was seen to play the piano by me.\n\nWe heard him sing.\n→ _______________"
+      },
+      {
+        "tag": "subParts",
+        "type": "multi_part",
+        "answer": "The magazine is read by my cousin / Mark Chagall painted I and the Village in 1911 / This book was not written by Shakespeare",
+        "number": 60,
+        "question": "다음 문장을 지시에 맞게 바꿔 쓰시오.\n\n(1) My cousin reads the magazine. (수동태)\n→ _______________\n\n(2) I and the Village was painted by Mark Chagall in 1911. (능동태)\n→ _______________\n\n(3) Shakespeare wrote this book. (부정 수동태)\n→ _______________",
+        "subParts": [
+          {
+            "label": "(1) 수동태",
+            "answer": "The magazine is read by my cousin"
+          },
+          {
+            "label": "(2) 능동태",
+            "answer": "Mark Chagall painted I and the Village in 1911"
+          },
+          {
+            "label": "(3) 부정 수동태",
+            "answer": "This book was not written by Shakespeare",
+            "acceptedAnswers": [
+              "This book wasn't written by Shakespeare"
+            ]
+          }
+        ]
+      },
+      {
+        "tag": "subParts",
+        "type": "multi_part",
+        "answer": "Dad made the soup / The soup was made by dad",
+        "number": 61,
+        "question": "다음 우리말과 일치하도록 괄호 안의 말을 사용하여 어법상 맞게 영작하시오.\n\n그 수프는 아빠가 만들었다. (make, dad)\n\n(능동태) _______________\n\n(수동태) _______________",
+        "subParts": [
+          {
+            "label": "능동태",
+            "answer": "Dad made the soup"
+          },
+          {
+            "label": "수동태",
+            "answer": "The soup was made by dad"
+          }
+        ]
+      },
+      {
+        "tag": "영작",
+        "type": "sentence",
+        "answer": "are cut down to make paper",
+        "number": 62,
+        "question": "다음 우리말과 일치하도록 괄호 안에 주어진 단어를 모두 사용하여 영작하시오. (필요시 단어를 변형할 것)\n\n많은 나무가 종이를 만들기 위해 베어집니다.\n(cut down, to, paper, make, be)\n\n→ Many trees _______________.\n\n※ 빈칸에 들어갈 말만 쓰시오.",
+        "acceptedAnswers": [
+          "are cut down to be made into paper"
+        ]
+      },
+      {
+        "tag": "subParts",
+        "type": "multi_part",
+        "answer": "was built by the Romans / was caught by the policeman",
+        "number": 63,
+        "question": "다음 우리말과 일치하도록 <조건>에 맞게 문장을 완성하시오.\n\n<조건>\n1. 주어진 단어를 모두 완성할 것\n2. 수동태 구문으로 완성할 것\n\n(1) 콜로세움은 로마인들에 의해 지어졌다.\nColosseum _______________.\n(was, build, the Romans)\n\n(2) 그 도둑은 경찰에 의해 잡혔다.\nThe thief _______________.\n(was, catch, the policeman)",
+        "subParts": [
+          {
+            "label": "(1)",
+            "answer": "was built by the Romans"
+          },
+          {
+            "label": "(2)",
+            "answer": "was caught by the policeman"
+          }
+        ]
+      },
+      {
+        "tag": "subParts",
+        "type": "multi_part",
+        "answer": "built the house / was built by my father",
+        "number": 64,
+        "question": "다음 <보기>와 같이 질문에 맞는 답을 쓰시오.\n\n<보기>\nA: Who invented the light bulb?\nB: (1) Thomas Edison invented the light bulb.\n   (2) The light bulb was invented by Thomas Edison.\n\nA: Who built the house?\nB: (1) My father _______________.\n   (2) The house _______________.",
+        "subParts": [
+          {
+            "label": "(1)",
+            "answer": "built the house"
+          },
+          {
+            "label": "(2)",
+            "answer": "was built by my father"
+          }
+        ]
+      },
+      {
+        "tag": "subParts",
+        "type": "multi_part",
+        "answer": "are collected / are given",
+        "number": 65,
+        "question": "다음 글의 괄호 ①, ②안의 단어를 어법에 맞게 고치시오. (현재형으로 쓸 것)\n\n<Used Clothes Wanted>\nDo you think you are too big to wear your old clothes? Don't throw them away! Donate your clothes. Used clothes ①(collect) at our center. Then they ②(give) to children who are too poor to buy clothes.\n\n① (collect) → _______________\n\n② (give) → _______________",
+        "subParts": [
+          {
+            "label": "①",
+            "answer": "are collected"
+          },
+          {
+            "label": "②",
+            "answer": "are given"
+          }
+        ]
+      },
+      {
+        "tag": "영작",
+        "type": "sentence",
+        "answer": "The yard was cleaned by a mouse yesterday.",
+        "number": 66,
+        "question": "다음 주어진 그림의 상황을 수동태 문장으로 표현하시오.(단, 주어진 단어를 반드시 활용할 것)\n(그림: 마당을 청소하고 있는 쥐) \n\n→ The yard _______________ (a mouse, clean, be, yesterday)"
+      },
+      {
+        "tag": "영작",
+        "type": "sentence",
+        "answer": "It was directed by Steven Spielberg.",
+        "number": 67,
+        "question": "다음 대화를 읽고 물음에 대한 답을 It으로 시작하는 완전한 수동태 문장으로 쓰시오.\n\nA: What is your favorite movie?\nB: My favorite movie is Jurassic Park.\nA: Oh, I've seen it before. Steven Spielberg directed it, didn't he?\nB: Yes, he did. I want to see all of his movies someday.\n\nA: Who directed Jurassic Park?\nB: It ___ ___ ___ ___ ___"
+      }
+    ]
+  },
+  "sheet_765105d0-6c5f-44c7-ad60-53053d234187": {
+    "questions": [
+      {
+        "tag": "오류수정",
+        "type": "sentence",
+        "answer": "Where was Ron born?",
+        "number": 1,
+        "question": "다음 밑줄 친 부분을 바르게 고쳐 쓰시오. \n\nA: Where *did* Ron born?\nB: He was born in Fantasy Village."
+      },
+      {
+        "tag": "오류수정",
+        "type": "sentence",
+        "answer": "Was the letter delivered by Mr. Smith?",
+        "number": 2,
+        "question": "다음 밑줄 친 부분을 바르게 고쳐 쓰시오. \n\nA: *Did* the letter deliver by Mr. Smith?\nB: No, it *didn't*. It was delivered by a bird.",
+        "acceptedAnswers": [
+          "Was the letter delivered by Mr. Smith?\nNo, it wasn't. It was delivered by a bird",
+          "Was the letter delivered by Mr. Smith? No, it wasn't. It was delivered by a bird."
+        ]
+      },
+      {
+        "tag": "오류수정",
+        "type": "sentence",
+        "answer": "Ron was invited to Wonka Magic School.",
+        "number": 3,
+        "question": "다음 밑줄 친 부분을 바르게 고쳐 쓰시오. \n\nA: What was written in the letter?\nB: Ron *invited* to Wonka Magic School.",
+        "acceptedAnswers": [
+          "Ron was invited to Wonka Magic School"
+        ]
+      },
+      {
+        "tag": "빈칸",
+        "type": "short_answer",
+        "answer": "is interested in",
+        "number": 4,
+        "question": "위의 <보기>에서 알맞은 표현을 골라 <보기>에서 알맞은 표현을 골라 적절한 형태로 고쳐 문장을 완성하시오. \n\n<보기>\nbe satisfied / be scared / be made / be interested\n\nJoy takes piano and violin lesson these days. She _______ _______ _______ music.\n\n※ 빈칸에 들어갈 말만 쓰시오."
+      },
+      {
+        "tag": "빈칸",
+        "type": "short_answer",
+        "answer": "is scared of",
+        "number": 5,
+        "question": "위의 <보기>에서 알맞은 표현을 골라 <보기>에서 알맞은 표현을 골라 적절한 형태로 고쳐 문장을 완성하시오. \n\n<보기>\nbe satisfied / be scared / be made / be interested\n\n\nWe leave a light on in our son's bedroom at night because he _______ _______ _______ the dark.\n\n※ 빈칸에 들어갈 말만 쓰시오."
+      },
+      {
+        "tag": "영작",
+        "type": "sentence",
+        "answer": "was completely destroyed by the car",
+        "number": 6,
+        "question": "다음 두 문장이 같은 뜻이 되도록 빈칸에 알맞은 문장을 쓰시오. \n\nThe car completely destroyed my motorbike.\n= My motorbike _______________________\n\n※ 빈칸에 들어갈 말만 쓰시오."
+      },
+      {
+        "tag": "영작",
+        "type": "sentence",
+        "answer": "was awarded the second prize",
+        "number": 7,
+        "question": "다음 두 문장이 같은 뜻이 되도록 빈칸에 알맞은 문장을 쓰시오. \n\nSecond prize was awarded to an unknown author from Patras.\n= An unknown author from Patras _______ _______ _______\n\n※ 빈칸에 들어갈 말만 쓰시오."
+      },
+      {
+        "tag": "영작",
+        "type": "sentence",
+        "answer": "Many polar bears were killed by a hunter.",
+        "number": 8,
+        "question": "A hunter killed many polar bears.\n\n위 문장을 수동태로 알맞게 전환하시오.",
+        "acceptedAnswers": [
+          "Many polar bears were killed by a hunter"
+        ]
+      },
+      {
+        "tag": "영작",
+        "type": "sentence",
+        "answer": "A lot of disasters are caused by global warming.",
+        "number": 9,
+        "question": "The global warming causes a lot of disasters.\n\n위 문장을 수동태로 알맞게 전환하시오.",
+        "acceptedAnswers": [
+          "A lot of disasters are caused by global warming"
+        ]
+      },
+      {
+        "tag": "빈칸",
+        "type": "short_answer",
+        "answer": "were made",
+        "number": 10,
+        "question": "다음 각 문장의 밑줄 친 부분을 주어로 하여 아래의 문장을 완성해 봅시다.\nJane made *these cookies.* \nEric broke *the window.*\nMina wrote *this letter.*\nThe Wright brothers invented *the airplane.* \n\nThese cookies _______ _______ by Jane.\n\n※ 빈칸에 들어갈 말만 쓰시오."
+      },
+      {
+        "tag": "빈칸",
+        "type": "short_answer",
+        "answer": "was broken",
+        "number": 11,
+        "question": "다음 각 문장의 밑줄 친 부분을 주어로 하여 아래의 문장을 완성해 봅시다.\nJane made *these cookies.* \nEric broke *the window.*\nMina wrote *this letter.*\nThe Wright brothers invented *the airplane.* \n\nThe window _______ _______ by Eric.\n\n※ 빈칸에 들어갈 말만 쓰시오."
+      },
+      {
+        "tag": "빈칸",
+        "type": "short_answer",
+        "answer": "was written",
+        "number": 12,
+        "question": "다음 각 문장의 밑줄 친 부분을 주어로 하여 아래의 문장을 완성해 봅시다.\nJane made *these cookies.* \nEric broke *the window.*\nMina wrote *this letter.*\nThe Wright brothers invented *the airplane.* \n\nThis letter _______ _______ by Mina.\n\n※ 빈칸에 들어갈 말만 쓰시오."
+      },
+      {
+        "tag": "빈칸",
+        "type": "short_answer",
+        "answer": "was invented",
+        "number": 13,
+        "question": "다음 각 문장의 밑줄 친 부분을 주어로 하여 아래의 문장을 완성해 봅시다.\nJane made *these cookies.* \nEric broke *the window.*\nMina wrote *this letter.*\nThe Wright brothers invented *the airplane.* \n\nThe airplane _______ _______ by the Wright brothers.\n\n※ 빈칸에 들어갈 말만 쓰시오."
+      },
+      {
+        "tag": "subParts",
+        "type": "multi_part",
+        "answer": "was born / Korea / 1962 / was loved / many Sudanese people / Sudan / was called / the Schweizer of Sudan",
+        "number": 14,
+        "question": "다음 인물을 소개하는 글이 되도록 주어진 정보와 괄호 안에 단어를 이용하여 빈칸을 완성하시오. \n\nLee Taeseok\n\nBorn: Korea, 1962\nHe did volunteer work in Sudan. Many Sudanese people loved him. People call him, 'the Schweizer of Sudan.'\n\nHe ________(bear) in ________ in ________.\nHe ________(love) by ________ in __________.\nHe worked as hard as other volunteers in Sudan. He ________(call) .",
+        "subParts": [
+          {
+            "label": "(1) bear→",
+            "answer": "was born"
+          },
+          {
+            "label": "(2) 나라",
+            "answer": "Korea"
+          },
+          {
+            "label": "(3) 년도",
+            "answer": "1962"
+          },
+          {
+            "label": "(4) love→",
+            "answer": "was loved"
+          },
+          {
+            "label": "(5) 누구에게",
+            "answer": "many Sudanese people"
+          },
+          {
+            "label": "(6) 어디서",
+            "answer": "Sudan"
+          },
+          {
+            "label": "(7) call→",
+            "answer": "was called"
+          },
+          {
+            "label": "(8) 별명",
+            "answer": "the Schweizer of Sudan",
+            "acceptedAnswers": [
+              "'the Schweizer of Sudan'",
+              "\"the Schweizer of Sudan\""
+            ]
+          }
+        ]
+      },
+      {
+        "tag": "subParts",
+        "type": "multi_part",
+        "answer": "created / read / sent / taught / Harry Potter",
+        "number": 15,
+        "question": "다음 빈칸에 알맞은 말을 골라 글을 완성하고, 누구에 관한 설명인지 추측하시오.\n\n<보기> read / send / create / teach\n\nThis character was _______ by J. K. Rowling. The books about him have been _______ by many people all over the world. He was _______ to a magic school. He was _______ how to fly and how to use magic.\n\nGuess who? _______",
+        "subParts": [
+          {
+            "label": "(1) create",
+            "answer": "created"
+          },
+          {
+            "label": "(2) read",
+            "answer": "read"
+          },
+          {
+            "label": "(3) send",
+            "answer": "sent"
+          },
+          {
+            "label": "(4) teach",
+            "answer": "taught"
+          },
+          {
+            "label": "(5) 인물",
+            "answer": "Harry Potter"
+          }
+        ]
+      },
+      {
+        "tag": "빈칸",
+        "type": "short_answer",
+        "answer": "is interested in",
+        "number": 16,
+        "question": "다음 괄호 안의 단어와 그에 어울리는 전치사를 이용하여 문장을 완성하시오. (단, by 제외)\n\nJohn _______ _______ education. (interest)\n\n※ 빈칸에 들어갈 말만 쓰시오."
+      },
+      {
+        "tag": "빈칸",
+        "type": "short_answer",
+        "answer": "was satisfied with",
+        "number": 17,
+        "question": "다음 괄호 안의 단어와 그에 어울리는 전치사를 이용하여 문장을 완성하시오. (단, by 제외)\n\nI _______ _______ _______ the result. (satisfy)\n\n※ 빈칸에 들어갈 말만 쓰시오."
+      },
+      {
+        "tag": "빈칸",
+        "type": "short_answer",
+        "answer": "were covered with",
+        "number": 18,
+        "question": "다음 괄호 안의 단어와 그에 어울리는 전치사를 이용하여 문장을 완성하시오. (단, by 제외)\n\nThe roads were very dangerous, because they _______ _______ _______ ice. (cover)\n\n※ 빈칸에 들어갈 말만 쓰시오."
+      },
+      {
+        "tag": "영작",
+        "type": "sentence",
+        "answer": "was pleased to receive",
+        "number": 19,
+        "question": "다음 괄호 안의 단어와 그에 어울리는 전치사를 이용하여 문장을 완성하시오. (단, by 제외)\n\nI _______ _______ _______ your letter yesterday. (please)\n\n※ 빈칸에 들어갈 말만 쓰시오."
+      },
+      {
+        "tag": "단어배열",
+        "type": "sentence",
+        "answer": "I was asked the way three times.",
+        "number": 20,
+        "question": "다음 <보기>와 같이 문장에서 밑줄 친 낱말을 생략하여 수동태 문장으로 다시 쓰시오. \n<보기> *You* have to fill in  an application form.\n→ An application form has to be filled in.\n\n*People* asked me the way three times.\n→ _______________________________",
+        "acceptedAnswers": [
+          "I was asked the way three times"
+        ]
+      },
+      {
+        "tag": "단어배열",
+        "type": "sentence",
+        "answer": "The apples are picked early in the morning.",
+        "number": 21,
+        "question": "다음 <보기>와 같이 문장에서 밑줄 친 낱말을 생략하여 수동태 문장으로 다시 쓰시오. \n<보기> You have to fill in  an application form.\n→ An application form has to be filled in.\n\n*The fruit-pickers* pick the apples early in the morning.\n→ _______________________________",
+        "acceptedAnswers": [
+          "The apples are picked early in the morning"
+        ]
+      },
+      {
+        "tag": "빈칸",
+        "type": "short_answer",
+        "answer": "was written",
+        "number": 22,
+        "question": "다음 빈칸에 괄호 안에 주어진 단어를 이용하여 알맞게 각각 고쳐 쓰시오. \n\nThere is a book on the desk. The book _______ _______ by Shakespeare. (write)\n\n※ 빈칸에 들어갈 말만 쓰시오."
+      },
+      {
+        "tag": "빈칸",
+        "type": "short_answer",
+        "answer": "was drawn",
+        "number": 23,
+        "question": "다음 빈칸에 괄호 안에 주어진 단어를 이용하여 알맞게 각각 고쳐 쓰시오. \n\nThere is a picture on the wall. It _______ _______ by Andy Warhol. (draw)\n\n※ 빈칸에 들어갈 말만 쓰시오."
+      },
+      {
+        "tag": "단어배열",
+        "type": "sentence",
+        "answer": "was painted by Vincent van Gogh",
+        "number": 24,
+        "question": "다음 <보기>를 참고하여 질문에 답하시오.\n<보기> \nTitle: The Starry Night\nArtist: Vincent van Gogh (1853~1890)\nPainted in 1889\n\nWho painted The Starry Night?\n→ The Starry Night _______________________\n\n※ 빈칸에 들어갈 말만 쓰시오."
+      },
+      {
+        "tag": "단어배열",
+        "type": "sentence",
+        "answer": "was born in 1853",
+        "number": 25,
+        "question": "다음 <보기>를 참고하여 질문에 답하시오.\n<보기> \nTitle: The Starry Night\nArtist: Vincent van Gogh (1853~1890)\nPainted in 1889\n\nWhen was Vincent van Gogh born?\n→ He _______________________\n\n※ 빈칸에 들어갈 말만 쓰시오."
+      },
+      {
+        "tag": "단어배열",
+        "type": "sentence",
+        "answer": "was painted in 1889",
+        "number": 26,
+        "question": "다음 <보기>를 참고하여 질문에 답하시오.\n<보기> \nTitle: The Starry Night\nArtist: Vincent van Gogh (1853~1890)\nPainted in 1889\n\nWhen did he paint The Starry Night?\n→ The Starry Night _______________________\n\n※ 빈칸에 들어갈 말만 쓰시오."
+      },
+      {
+        "tag": "기타",
+        "type": "sentence",
+        "answer": "was won by Claude Jennings",
+        "number": 27,
+        "question": "다음 괄호 안에 있는 단어들을 이용하여 지시된 시제로 알맞게 쓰시오.\n\nDid you hear about the quiz competition?\nIt (Claude Jennings / win: 과거)"
+      },
+      {
+        "tag": "기타",
+        "type": "sentence",
+        "answer": "did a parachute jump last week",
+        "number": 28,
+        "question": "다음 괄호 안에 있는 단어들을 이용하여 지시된 시제로 알맞게 쓰시오.\n\nYou know Mrs. Miles?\nShe (do / a parachute jump / last week: 과거)"
+      },
+      {
+        "tag": "단어",
+        "type": "short_answer",
+        "answer": "likes Jessica",
+        "number": 29,
+        "question": "다음 괄호 안에 있는 단어들을 이용하여 지시된 시제로 알맞게 쓰시오.\n\nDid I tell you about Andrew?\nHe (like / Jessica: 현재)"
+      },
+      {
+        "tag": "기타",
+        "type": "sentence",
+        "answer": "was seen by five people",
+        "number": 30,
+        "question": "다음 괄호 안에 있는 단어들을 이용하여 지시된 시제로 알맞게 쓰시오.\n\nDid you hear about the ghost?\nIt (five people / see: 과거)"
+      },
+      {
+        "tag": "기타",
+        "type": "sentence",
+        "answer": "went to Florida last month",
+        "number": 31,
+        "question": "다음 괄호 안에 있는 단어들을 이용하여 지시된 시제로 알맞게 쓰시오.\n\nYou remember Claire?\nShe (go / to Florida / last month: 과거)"
+      },
+      {
+        "tag": "단어배열",
+        "type": "sentence",
+        "answer": "When was the Eiffel Tower built?",
+        "number": 32,
+        "question": "다음 우리말에 맞도록 괄호 안의 단어를 순서대로 배열하시오. (필요시 형태를 변형할 것)\n\n에펠탑은 언제 지어졌나?\n(Eiffel Tower / when / built / was / the)"
+      },
+      {
+        "tag": "단어배열",
+        "type": "sentence",
+        "answer": "The movie has been loved by many people.",
+        "number": 33,
+        "question": "다음 우리말에 맞도록 괄호 안의 단어를 순서대로 배열하시오. (필요시 형태를 변형할 것)\n\n그 영화는 많은 사람들에 의해 사랑받아오고 있다.\n(the / love / movie / by / have / people / be / many)",
+        "acceptedAnswers": [
+          "The movie has been loved by many people"
+        ]
+      },
+      {
+        "tag": "단어배열",
+        "type": "sentence",
+        "answer": "A lot of trees are cut down to make paper.",
+        "number": 34,
+        "question": "다음 우리말에 맞도록 괄호 안의 단어를 순서대로 배열하시오. (필요시 형태를 변형할 것)\n\n많은 나무들이 종이를 만들기 위해 베어진다.\n(a / to / make / trees / of / are / cut / lot / down / paper)",
+        "acceptedAnswers": [
+          "A lot of trees are cut down to make paper"
+        ]
+      },
+      {
+        "tag": "단어배열",
+        "type": "sentence",
+        "answer": "The window was broken by Junsu.",
+        "number": 35,
+        "question": "다음 밑줄 친 부분으로 시작하여 문장을 다시 쓰시오.\n<보기> \nThe Wright invented *the airplane.*\n→ The airplane was invented by the Wright brothers.\n\nJunsu broke *the window.*\n→  ________________________________________",
+        "acceptedAnswers": [
+          "The window was broken by Junsu"
+        ]
+      },
+      {
+        "tag": "단어배열",
+        "type": "sentence",
+        "answer": "These cookies were made by Ann.",
+        "number": 36,
+        "question": "다음 밑줄 친 부분으로 시작하여 문장을 다시 쓰시오.\n<보기> \nThe Wright invented *the airplane.*\n→ The airplane was invented by the Wright brothers.\n\nAnn made *these cookies.*\n→  ________________________________________",
+        "acceptedAnswers": [
+          "These cookies were made by Ann"
+        ]
+      },
+      {
+        "tag": "단어배열",
+        "type": "sentence",
+        "answer": "This letter was written by Cathy.",
+        "number": 37,
+        "question": "다음 밑줄 친 부분으로 시작하여 문장을 다시 쓰시오.\n<보기> \nThe Wright invented *the airplane.*\n→ The airplane was invented by the Wright brothers.\n\nCathy wrote *this letter.*\n→  ________________________________________",
+        "acceptedAnswers": [
+          "This letter was written by Cathy"
+        ]
+      },
+      {
+        "tag": "영작",
+        "type": "sentence",
+        "answer": "Hanguel was made by King Sejong the Great in 1443.",
+        "number": 38,
+        "question": "Complete the sentence with the given words as shown in the example below.\n\n<Example>\n(the Taj Mahal, build, Shah Jahan)\n→ The Taj Mahal was built by Shah Jahan. \n\n(King Sejong the Great, make, Hanguel, 1443)\n→  _______________________________________ ",
+        "acceptedAnswers": [
+          "Hanguel was made by King Sejong the Great in 1443"
+        ]
+      },
+      {
+        "tag": "영작",
+        "type": "sentence",
+        "answer": "The novel was written by him.",
+        "number": 39,
+        "question": "Rewrite the sentences that begin with the underlined parts as shown in the example below.\n<Example>\nThe Wright brothers invented *the airplane.*\n→ The airplan was invented by the Wright brothers. \n\nHe wrote *the novel.*\n→  ________________________________________\n",
+        "acceptedAnswers": [
+          "The novel was written by him"
+        ]
+      },
+      {
+        "tag": "영작",
+        "type": "sentence",
+        "answer": "The library could be easily found by Ann.",
+        "number": 40,
+        "question": "Rewrite the sentences that begin with the underlined parts as shown in the example below.\n<Example>\nThe Wright brothers invented *the airplane.*\n→ The airplan was invented by the Wright brothers. \n\n\nAnn could easily find *the library.*\n→  ________________________________________",
+        "acceptedAnswers": [
+          "The library could be easily found by Ann"
+        ]
+      },
+      {
+        "tag": "영작",
+        "type": "sentence",
+        "answer": "An old article was shown to me by her.",
+        "number": 41,
+        "question": "Rewrite the sentences that begin with the underlined parts as shown in the example below.\n<Example>\nThe Wright brothers invented *the airplane.*\n→ The airplan was invented by the Wright brothers. \n\n\nShe showed me *an old article.*\n→  ________________________________________",
+        "acceptedAnswers": [
+          "An old article was shown to me by her"
+        ]
+      },
+      {
+        "tag": "subParts",
+        "type": "multi_part",
+        "answer": "is played / are cleaned / are baked",
+        "number": 42,
+        "question": "다음 글의 빈칸 ①~③ 괄호 안에 주어진 단어를 이용하여 알맞게 각각 고쳐 쓰시오.\n\nEverything is strange in this world. The music ①(play) by the birds. The windows ②(clean) by the elephant. Cookies ③(bake) by the bear.",
+        "subParts": [
+          {
+            "label": "①",
+            "answer": "is played"
+          },
+          {
+            "label": "②",
+            "answer": "are cleaned"
+          },
+          {
+            "label": "③",
+            "answer": "are baked"
+          }
+        ]
+      },
+      {
+        "tag": "subParts",
+        "type": "multi_part",
+        "answer": "The fairy's dress was taken by the man / The bird's leg was broken in an accident",
+        "number": 43,
+        "question": "다음 전래동화에 관한 글을 읽고, 어법상 어색한 문장을 2개 찾아 바르게 고쳐 문장을 전체를 다시 쓰시오. (단, 정답은 고친문장만 이어서 쓸 것) ex) This song is loved by many people, The window was broken.\n\n(a) Kongjwi wasn't invited to the party.\n(b) The fairy's dress was took by the man.\n(c) The turtle was tricked by the rabbit.\n(d) The bird's leg was break in an accident.\n\n(1) 고친 문장:  ________________________________________\t\n\n(2) 고친 문장:  ________________________________________\t",
+        "subParts": [
+          {
+            "label": "(1)",
+            "answer": "The fairy's dress was taken by the man"
+          },
+          {
+            "label": "(2)",
+            "answer": "The bird's leg was broken in an accident"
+          }
+        ],
+        "acceptedAnswers": [
+          "The fairy's dress was taken by the man, The bird's leg was broken in an accident"
+        ]
+      },
+      {
+        "tag": "subParts",
+        "type": "multi_part",
+        "answer": "His car was stopped by the police last night / The play lasted for more than two hours",
+        "number": 44,
+        "question": "다음 <보기>에서 어법상 어색한 부분을 2개 찾아 기호를 쓰고 바르게 고쳐 문장 전체를 다시 쓰시오. (단, 정답은 고친문장만 이어서 쓸 것) ex) This song is loved by many people, The window was broken.\n\n<보기>\n(a) His car is stopped by the police last night.\n(b) The play was lasted for more than two hours.\n(c) He has been elected president by people.\n(d) Christina's dogs will be taken good care of.\n(e) Those gentlemen were met by beautiful ladies.\n\n(1) 고친 문장:  ________________________________________\t\n\n(2) 고친 문장:  ________________________________________\t",
+        "subParts": [
+          {
+            "label": "(1)",
+            "answer": "His car was stopped by the police last night"
+          },
+          {
+            "label": "(2)",
+            "answer": "The play lasted for more than two hours"
+          }
+        ],
+        "acceptedAnswers": [
+          "His car was stopped by the police last night., The play lasted for more than two hours",
+          "His car was stopped by the police last night, The play lasted for more than two hours"
+        ]
+      },
+      {
+        "tag": "subParts",
+        "type": "multi_part",
+        "answer": "was invented by / is used by",
+        "number": 45,
+        "question": "다음 우리말과 일치하도록 괄호 안에 주어진 단어를 이용하여 문장을 완성하시오. \n(필요시 단어의 형태를 바꾸며 시제에 유의할 것) \n\n(1) 전구는 Thomas Edison에 의해 발명되었다.\n→ The light bulb _______ _______ _______ Thomas Edison. (invent)\n\n(2) 그것은 세계의 많은 사람들에 의해 사용된다.\n→ It _______ _______ _______ many people in the world. (use)",
+        "subParts": [
+          {
+            "label": "(1)",
+            "answer": "was invented by"
+          },
+          {
+            "label": "(2)",
+            "answer": "is used by"
+          }
+        ]
+      },
+      {
+        "tag": "subParts",
+        "type": "multi_part",
+        "answer": "was thrown / wasn't broken / she / cuts the grass",
+        "number": 46,
+        "question": "다음 두 문장의 의미가 같도록 할 때, 빈칸에 들어갈 알맞은 말을 쓰시오.\n\n(1) The cat threw the mouse.\n→ The mouse _______ _______ by the cat.\n\n(2) She didn't break the window.\n→ The window _______ _______ by _______.\n\n(3) The grass is cut by him once a week.\n→ He _______ _______ _______ once a week.",
+        "subParts": [
+          {
+            "label": "(1)",
+            "answer": "was thrown"
+          },
+          {
+            "label": "(2)-빈칸",
+            "answer": "wasn't broken",
+            "acceptedAnswers": [
+              "was not broken"
+            ]
+          },
+          {
+            "label": "(2)-by 뒤",
+            "answer": "she"
+          },
+          {
+            "label": "(3)",
+            "answer": "cuts the grass"
+          }
+        ],
+        "acceptedAnswers": [
+          "was thrown / was not broken / she / cuts the grass"
+        ]
+      },
+      {
+        "tag": "빈칸",
+        "type": "short_answer",
+        "answer": "written",
+        "number": 47,
+        "question": "다음 두 문장의 의미가 같도록 우리말과 일치하는 빈칸에 들어갈 알맞은 말을 쓰시오.\n\nCathy wrote a letter.\n→ A letter was _______ by Cathy.\n(번지가 Cathy에 의해서 쓰여 졌다.)\n\n※ 빈칸에 들어갈 말만 쓰시오."
+      },
+      {
+        "tag": "빈칸",
+        "type": "short_answer",
+        "answer": "was painted by",
+        "number": 48,
+        "question": "다음 우리말과 일치하도록 빈칸에 들어갈 알맞은 말을 쓰시오.\n\nA: Who painted the picture?\nB: The picture _______ _______ _______ Vincent van Gogh.\n(그 그림은 반센트 반 고흐에 의해 그려졌다.)\n\n※ 빈칸에 들어갈 말만 쓰시오."
+      },
+      {
+        "tag": "빈칸",
+        "type": "short_answer",
+        "answer": "were written by",
+        "number": 49,
+        "question": "다음 우리말과 일치하도록 빈칸에 들어갈 알맞은 말을 쓰시오.\n\nA: Who wrote Harry potter series?\nB: The books _______ _______ J. K. Rowling.\n(그 책들은 J. K. Rowling에 의해 쓰였다.)\n\n※ 빈칸에 들어갈 말만 쓰시오."
+      },
+      {
+        "tag": "단어배열",
+        "type": "sentence",
+        "answer": "was written by Mark Twain.",
+        "number": 50,
+        "question": "다음 문장을 <보기>와 같은 형태로 바꿔 쓰시오.\n\n<보기>\nEverybody loved Mario.\n→ Mario was loved by everybody.\n\nMark Twain wrote the book.\n→ The book _______________________________.\n\n※ 빈칸에 들어갈 말만 쓰시오.",
+        "acceptedAnswers": [
+          "was written by Mark Twain"
+        ]
+      },
+      {
+        "tag": "subParts",
+        "type": "multi_part",
+        "answer": "We should recycle cans and plastic bottles / Cans and plastic bottles should be recycled by us",
+        "number": 51,
+        "question": "다음 <보기>에 주어진 단어들을 사용하여 수동태 문장을 만드시오. \n(필요시 단어를 추가하거나 형태를 변형할 것)\n\n<보기>\nwe / recycle / cans and plastic bottles / should",
+        "subParts": [
+          {
+            "label": "능동태",
+            "answer": "We should recycle cans and plastic bottles"
+          },
+          {
+            "label": "수동태",
+            "answer": "Cans and plastic bottles should be recycled by us"
+          }
+        ],
+        "acceptedAnswers": [
+          "Cans and plastic bottles should be recycled by us",
+          "Cans and plastic bottles should be recycled"
+        ]
+      },
+      {
+        "tag": "오류수정",
+        "type": "sentence",
+        "answer": "was built in 1930",
+        "number": 52,
+        "question": "다음 문장을 주어진 낱말로 시작하는 문장으로 고쳐 쓰시오.\n\nSomebody built this house in 1930.\n→ This house _______________.\n\n※ 빈칸에 들어갈 말만 쓰시오."
+      },
+      {
+        "tag": "subParts",
+        "type": "multi_part",
+        "answer": "were taken by my mother / was broken by / was made",
+        "number": 53,
+        "question": "다음 빈칸에 들어갈 알맞은 말을 수동태를 사용하여 쓰시오.\n\n(1) My mother took these pictures.\n→ These pictures _______________.\n\n(2) A: Who broke the window?\nB: It _______________ Jim.\n\n(3) A: Who made the cake?\nB: It _______________ by Mim.",
+        "subParts": [
+          {
+            "label": "(1)",
+            "answer": "were taken by my mother"
+          },
+          {
+            "label": "(2)",
+            "answer": "was broken by"
+          },
+          {
+            "label": "(3)",
+            "answer": "was made"
+          }
+        ]
+      },
+      {
+        "tag": "단어배열",
+        "type": "sentence",
+        "answer": "The early worm is caught by the early bird.",
+        "number": 54,
+        "question": "다음 <보기>를 참고하여 주어진 우리말과 일치하도록 영작하시오.\n\n<보기>\n일찍 일어나는 새가 벌레를 잡는다.\n→ The early bird catches the worm.\n\n일찍 일어나는 벌레는 일찍 일어나는 새에게 먹힌다.\n\n→ _______________ (9단어)",
+        "acceptedAnswers": [
+          "The early worm is caught by the early bird"
+        ]
+      },
+      {
+        "tag": "subParts",
+        "type": "multi_part",
+        "answer": "was written / broke / could be built",
+        "number": 55,
+        "question": "다음 두 문장이 같은 의미가 되도록 괄호 안의 지시에 따라 바꾸시오.\n\n(1) She wrote Harry potter. (수동태로)\n→ Harry potter _______________ by her.\n\n(2) The window is broken by Tom. (능동태로)\n→ Tom _______________ the window.\n\n(3) They could build the school. (수동태로)\n→ The school _______________ by them.",
+        "subParts": [
+          {
+            "label": "(1)",
+            "answer": "was written"
+          },
+          {
+            "label": "(2)",
+            "answer": "broke"
+          },
+          {
+            "label": "(3)",
+            "answer": "could be built"
+          }
+        ]
+      },
+      {
+        "tag": "subParts",
+        "type": "multi_part",
+        "answer": "is made / was woken up / will be caught by the police",
+        "number": 56,
+        "question": "다음 주어진 문장의 주어를 바꿔 쓸 때, 빈칸에 들어갈 알맞은 말을 쓰시오.\n\n(1) Tom makes a robot.\n→ A robot _______________ by Tom.\n\n(2) A loud noise woke me up in the morning.\n→ I _______________ in the morning.\n\n(3) The police will catch the man.\n→ The man _______________.",
+        "subParts": [
+          {
+            "label": "(1)",
+            "answer": "is made"
+          },
+          {
+            "label": "(2)",
+            "answer": "was woken up"
+          },
+          {
+            "label": "(3)",
+            "answer": "will be caught by the police",
+            "acceptedAnswers": [
+              "will be caught"
+            ]
+          }
+        ]
+      },
+      {
+        "tag": "단어배열",
+        "type": "sentence",
+        "answer": "Many kinds of fish are caught by fishermen.",
+        "number": 57,
+        "question": "다음 문장을 <보기>와 같은 형태로 바꿔 쓰시오.\n\n<보기>\nThe girl opens the window.\n→ The window is opened by the girl.\n\nFishermen catch many kinds of fish.\n→ _______________\n\n*fishermen: 어부들",
+        "acceptedAnswers": [
+          "Many kinds of fish are caught by fishermen"
+        ]
+      },
+      {
+        "tag": "단어배열",
+        "type": "sentence",
+        "answer": "Hamlet and King Lear were written by him.",
+        "number": 58,
+        "question": "다음 문장을 <보기>와 같은 형태로 바꿔 쓰시오.\n\n<보기>\nJames took the picture.\n→ The picture was taken by James.\n\nHe wrote Hamlet and King Lear.\n→ _______________",
+        "acceptedAnswers": [
+          "Hamlet and King Lear were written by him"
+        ]
+      },
+      {
+        "tag": "단어배열",
+        "type": "sentence",
+        "answer": "He was heard to sing by us.",
+        "number": 59,
+        "question": "다음 문장을 <보기>와 같은 형태로 바꿔 쓰시오.\n\n<보기>\nI saw a boy play the piano.\n→ A boy was seen to play the piano by me.\n\nWe heard him sing.\n→ _______________",
+        "acceptedAnswers": [
+          "He was heard to sing by us"
+        ]
+      },
+      {
+        "tag": "subParts",
+        "type": "multi_part",
+        "answer": "The magazine is read by my cousin / Mark Chagall painted I and the Village in 1911 / This book was not written by Shakespeare",
+        "number": 60,
+        "question": "다음 문장을 지시에 맞게 바꿔 쓰시오.\n\n(1) My cousin reads the magazine. (수동태)\n→ _______________\n\n(2) I and the Village was painted by Mark Chagall in 1911. (능동태)\n→ _______________\n\n(3) Shakespeare wrote this book. (부정 수동태)\n→ _______________",
+        "subParts": [
+          {
+            "label": "(1) 수동태",
+            "answer": "The magazine is read by my cousin"
+          },
+          {
+            "label": "(2) 능동태",
+            "answer": "Mark Chagall painted I and the Village in 1911"
+          },
+          {
+            "label": "(3) 부정 수동태",
+            "answer": "This book was not written by Shakespeare",
+            "acceptedAnswers": [
+              "This book wasn't written by Shakespeare"
+            ]
+          }
+        ],
+        "acceptedAnswers": [
+          "The magazine is read by my cousin / Mark Chagall painted I and the Village in 1911 / This book wasn't written by Shakespeare"
+        ]
+      },
+      {
+        "tag": "subParts",
+        "type": "multi_part",
+        "answer": "Dad made the soup / The soup was made by dad",
+        "number": 61,
+        "question": "다음 우리말과 일치하도록 괄호 안의 말을 사용하여 어법상 맞게 영작하시오.\n\n그 수프는 아빠가 만들었다. (make, dad)\n\n(능동태) _______________\n\n(수동태) _______________",
+        "subParts": [
+          {
+            "label": "능동태",
+            "answer": "Dad made the soup"
+          },
+          {
+            "label": "수동태",
+            "answer": "The soup was made by dad"
+          }
+        ]
+      },
+      {
+        "tag": "영작",
+        "type": "sentence",
+        "answer": "are cut down to make paper",
+        "number": 62,
+        "question": "다음 우리말과 일치하도록 괄호 안에 주어진 단어를 모두 사용하여 영작하시오. (필요시 단어를 변형할 것)\n\n많은 나무가 종이를 만들기 위해 베어집니다.\n(cut down, to, paper, make, be)\n\n→ Many trees _______________.\n\n※ 빈칸에 들어갈 말만 쓰시오.",
+        "acceptedAnswers": [
+          "are cut down to be made into paper"
+        ]
+      },
+      {
+        "tag": "subParts",
+        "type": "multi_part",
+        "answer": "was built by the Romans / was caught by the policeman",
+        "number": 63,
+        "question": "다음 우리말과 일치하도록 <조건>에 맞게 문장을 완성하시오.\n\n<조건>\n1. 주어진 단어를 모두 완성할 것\n2. 수동태 구문으로 완성할 것\n\n(1) 콜로세움은 로마인들에 의해 지어졌다.\nColosseum _______________.\n(was, build, the Romans)\n\n(2) 그 도둑은 경찰에 의해 잡혔다.\nThe thief _______________.\n(was, catch, the policeman)",
+        "subParts": [
+          {
+            "label": "(1)",
+            "answer": "was built by the Romans"
+          },
+          {
+            "label": "(2)",
+            "answer": "was caught by the policeman"
+          }
+        ]
+      },
+      {
+        "tag": "subParts",
+        "type": "multi_part",
+        "answer": "built the house / was built by my father",
+        "number": 64,
+        "question": "다음 <보기>와 같이 질문에 맞는 답을 쓰시오.\n\n<보기>\nA: Who invented the light bulb?\nB: (1) Thomas Edison invented the light bulb.\n   (2) The light bulb was invented by Thomas Edison.\n\nA: Who built the house?\nB: (1) My father _______________.\n   (2) The house _______________.",
+        "subParts": [
+          {
+            "label": "(1)",
+            "answer": "built the house"
+          },
+          {
+            "label": "(2)",
+            "answer": "was built by my father"
+          }
+        ]
+      },
+      {
+        "tag": "subParts",
+        "type": "multi_part",
+        "answer": "are collected / are given",
+        "number": 65,
+        "question": "다음 글의 괄호 ①, ②안의 단어를 어법에 맞게 고치시오. (현재형으로 쓸 것)\n\n<Used Clothes Wanted>\nDo you think you are too big to wear your old clothes? Don't throw them away! Donate your clothes. Used clothes ①(collect) at our center. Then they ②(give) to children who are too poor to buy clothes.\n\n① (collect) → _______________\n\n② (give) → _______________",
+        "subParts": [
+          {
+            "label": "①",
+            "answer": "are collected"
+          },
+          {
+            "label": "②",
+            "answer": "are given"
+          }
+        ]
+      },
+      {
+        "tag": "영작",
+        "type": "sentence",
+        "answer": "The yard was cleaned by a mouse yesterday.",
+        "number": 66,
+        "question": "다음 주어진 그림의 상황을 수동태 문장으로 표현하시오.(단, 주어진 단어를 반드시 활용할 것)\n(그림: 마당을 청소하고 있는 쥐) \n\n→ The yard _______________ (a mouse, clean, be, yesterday)",
+        "acceptedAnswers": [
+          "The yard was cleaned by a mouse yesterday"
+        ]
+      },
+      {
+        "tag": "영작",
+        "type": "sentence",
+        "answer": "It was directed by Steven Spielberg.",
+        "number": 67,
+        "question": "다음 대화를 읽고 물음에 대한 답을 It으로 시작하는 완전한 수동태 문장으로 쓰시오.\n\nA: What is your favorite movie?\nB: My favorite movie is Jurassic Park.\nA: Oh, I've seen it before. Steven Spielberg directed it, didn't he?\nB: Yes, he did. I want to see all of his movies someday.\n\nA: Who directed Jurassic Park?\nB: It ___ ___ ___ ___ ___",
+        "acceptedAnswers": [
+          "It was directed by Steven Spielberg"
+        ]
+      }
+    ]
+  },
+  "sheet_7e00c2fa-d5ea-43ea-affa-e41397a5ff13": {
+    "questions": [
+      {
+        "tag": "오류수정",
+        "type": "sentence",
+        "answer": "Where was Ron born?",
+        "number": 1,
+        "question": "다음 밑줄 친 부분을 바르게 고쳐 쓰시오. \n\nA: Where *did* Ron born?\nB: He was born in Fantasy Village."
+      },
+      {
+        "tag": "오류수정",
+        "type": "sentence",
+        "answer": "Was the letter delivered by Mr. Smith?",
+        "number": 2,
+        "question": "다음 밑줄 친 부분을 바르게 고쳐 쓰시오. \n\nA: *Did* the letter deliver by Mr. Smith?\nB: No, it *didn't*. It was delivered by a bird.",
+        "acceptedAnswers": [
+          "Was the letter delivered by Mr. Smith?\nNo, it wasn't. It was delivered by a bird",
+          "Was the letter delivered by Mr. Smith? No, it wasn't. It was delivered by a bird."
+        ]
+      },
+      {
+        "tag": "오류수정",
+        "type": "sentence",
+        "answer": "Ron was invited to Wonka Magic School.",
+        "number": 3,
+        "question": "다음 밑줄 친 부분을 바르게 고쳐 쓰시오. \n\nA: What was written in the letter?\nB: Ron *invited* to Wonka Magic School.",
+        "acceptedAnswers": [
+          "Ron was invited to Wonka Magic School"
+        ]
+      },
+      {
+        "tag": "빈칸",
+        "type": "short_answer",
+        "answer": "is interested in",
+        "number": 4,
+        "question": "위의 <보기>에서 알맞은 표현을 골라 <보기>에서 알맞은 표현을 골라 적절한 형태로 고쳐 문장을 완성하시오. \n\n<보기>\nbe satisfied / be scared / be made / be interested\n\nJoy takes piano and violin lesson these days. She _______ _______ _______ music.\n\n※ 빈칸에 들어갈 말만 쓰시오."
+      },
+      {
+        "tag": "빈칸",
+        "type": "short_answer",
+        "answer": "is scared of",
+        "number": 5,
+        "question": "위의 <보기>에서 알맞은 표현을 골라 <보기>에서 알맞은 표현을 골라 적절한 형태로 고쳐 문장을 완성하시오. \n\n<보기>\nbe satisfied / be scared / be made / be interested\n\n\nWe leave a light on in our son's bedroom at night because he _______ _______ _______ the dark.\n\n※ 빈칸에 들어갈 말만 쓰시오."
+      },
+      {
+        "tag": "영작",
+        "type": "sentence",
+        "answer": "was completely destroyed by the car",
+        "number": 6,
+        "question": "다음 두 문장이 같은 뜻이 되도록 빈칸에 알맞은 문장을 쓰시오. \n\nThe car completely destroyed my motorbike.\n= My motorbike _______________________\n\n※ 빈칸에 들어갈 말만 쓰시오."
+      },
+      {
+        "tag": "영작",
+        "type": "sentence",
+        "answer": "was awarded the second prize",
+        "number": 7,
+        "question": "다음 두 문장이 같은 뜻이 되도록 빈칸에 알맞은 문장을 쓰시오. \n\nSecond prize was awarded to an unknown author from Patras.\n= An unknown author from Patras _______ _______ _______\n\n※ 빈칸에 들어갈 말만 쓰시오."
+      },
+      {
+        "tag": "영작",
+        "type": "sentence",
+        "answer": "Many polar bears were killed by a hunter.",
+        "number": 8,
+        "question": "A hunter killed many polar bears.\n\n위 문장을 수동태로 알맞게 전환하시오.",
+        "acceptedAnswers": [
+          "Many polar bears were killed by a hunter"
+        ]
+      },
+      {
+        "tag": "영작",
+        "type": "sentence",
+        "answer": "A lot of disasters are caused by global warming.",
+        "number": 9,
+        "question": "The global warming causes a lot of disasters.\n\n위 문장을 수동태로 알맞게 전환하시오.",
+        "acceptedAnswers": [
+          "A lot of disasters are caused by global warming"
+        ]
+      },
+      {
+        "tag": "빈칸",
+        "type": "short_answer",
+        "answer": "were made",
+        "number": 10,
+        "question": "다음 각 문장의 밑줄 친 부분을 주어로 하여 아래의 문장을 완성해 봅시다.\nJane made *these cookies.* \nEric broke *the window.*\nMina wrote *this letter.*\nThe Wright brothers invented *the airplane.* \n\nThese cookies _______ _______ by Jane.\n\n※ 빈칸에 들어갈 말만 쓰시오."
+      },
+      {
+        "tag": "빈칸",
+        "type": "short_answer",
+        "answer": "was broken",
+        "number": 11,
+        "question": "다음 각 문장의 밑줄 친 부분을 주어로 하여 아래의 문장을 완성해 봅시다.\nJane made *these cookies.* \nEric broke *the window.*\nMina wrote *this letter.*\nThe Wright brothers invented *the airplane.* \n\nThe window _______ _______ by Eric.\n\n※ 빈칸에 들어갈 말만 쓰시오."
+      },
+      {
+        "tag": "빈칸",
+        "type": "short_answer",
+        "answer": "was written",
+        "number": 12,
+        "question": "다음 각 문장의 밑줄 친 부분을 주어로 하여 아래의 문장을 완성해 봅시다.\nJane made *these cookies.* \nEric broke *the window.*\nMina wrote *this letter.*\nThe Wright brothers invented *the airplane.* \n\nThis letter _______ _______ by Mina.\n\n※ 빈칸에 들어갈 말만 쓰시오."
+      },
+      {
+        "tag": "빈칸",
+        "type": "short_answer",
+        "answer": "was invented",
+        "number": 13,
+        "question": "다음 각 문장의 밑줄 친 부분을 주어로 하여 아래의 문장을 완성해 봅시다.\nJane made *these cookies.* \nEric broke *the window.*\nMina wrote *this letter.*\nThe Wright brothers invented *the airplane.* \n\nThe airplane _______ _______ by the Wright brothers.\n\n※ 빈칸에 들어갈 말만 쓰시오."
+      },
+      {
+        "tag": "subParts",
+        "type": "multi_part",
+        "answer": "was born / Korea / 1962 / was loved / many Sudanese people / Sudan / was called / the Schweizer of Sudan",
+        "number": 14,
+        "question": "다음 인물을 소개하는 글이 되도록 주어진 정보와 괄호 안에 단어를 이용하여 빈칸을 완성하시오. \n\nLee Taeseok\n\nBorn: Korea, 1962\nHe did volunteer work in Sudan. Many Sudanese people loved him. People call him, 'the Schweizer of Sudan.'\n\nHe ________(bear) in ________ in ________.\nHe ________(love) by ________ in __________.\nHe worked as hard as other volunteers in Sudan. He ________(call) .",
+        "subParts": [
+          {
+            "label": "(1) bear→",
+            "answer": "was born"
+          },
+          {
+            "label": "(2) 나라",
+            "answer": "Korea"
+          },
+          {
+            "label": "(3) 년도",
+            "answer": "1962"
+          },
+          {
+            "label": "(4) love→",
+            "answer": "was loved"
+          },
+          {
+            "label": "(5) 누구에게",
+            "answer": "many Sudanese people"
+          },
+          {
+            "label": "(6) 어디서",
+            "answer": "Sudan"
+          },
+          {
+            "label": "(7) call→",
+            "answer": "was called"
+          },
+          {
+            "label": "(8) 별명",
+            "answer": "the Schweizer of Sudan",
+            "acceptedAnswers": [
+              "'the Schweizer of Sudan'",
+              "\"the Schweizer of Sudan\""
+            ]
+          }
+        ],
+        "acceptedAnswers": [
+          "was born/Korea/1962/was loved/many Sudanese people/Sudan/was called/the Schweizer of Sudan"
+        ]
+      },
+      {
+        "tag": "subParts",
+        "type": "multi_part",
+        "answer": "created / read / sent / taught / Harry Potter",
+        "number": 15,
+        "question": "다음 빈칸에 알맞은 말을 골라 글을 완성하고, 누구에 관한 설명인지 추측하시오.\n\n<보기> read / send / create / teach\n\nThis character was _______ by J. K. Rowling. The books about him have been _______ by many people all over the world. He was _______ to a magic school. He was _______ how to fly and how to use magic.\n\nGuess who? _______",
+        "subParts": [
+          {
+            "label": "(1) create",
+            "answer": "created"
+          },
+          {
+            "label": "(2) read",
+            "answer": "read"
+          },
+          {
+            "label": "(3) send",
+            "answer": "sent"
+          },
+          {
+            "label": "(4) teach",
+            "answer": "taught"
+          },
+          {
+            "label": "(5) 인물",
+            "answer": "Harry Potter"
+          }
+        ],
+        "acceptedAnswers": [
+          "created/read/sent/taught/Harry Potter"
+        ]
+      },
+      {
+        "tag": "빈칸",
+        "type": "short_answer",
+        "answer": "is interested in",
+        "number": 16,
+        "question": "다음 괄호 안의 단어와 그에 어울리는 전치사를 이용하여 문장을 완성하시오. (단, by 제외)\n\nJohn _______ _______ education. (interest)\n\n※ 빈칸에 들어갈 말만 쓰시오."
+      },
+      {
+        "tag": "빈칸",
+        "type": "short_answer",
+        "answer": "was satisfied with",
+        "number": 17,
+        "question": "다음 괄호 안의 단어와 그에 어울리는 전치사를 이용하여 문장을 완성하시오. (단, by 제외)\n\nI _______ _______ _______ the result. (satisfy)\n\n※ 빈칸에 들어갈 말만 쓰시오."
+      },
+      {
+        "tag": "빈칸",
+        "type": "short_answer",
+        "answer": "were covered with",
+        "number": 18,
+        "question": "다음 괄호 안의 단어와 그에 어울리는 전치사를 이용하여 문장을 완성하시오. (단, by 제외)\n\nThe roads were very dangerous, because they _______ _______ _______ ice. (cover)\n\n※ 빈칸에 들어갈 말만 쓰시오."
+      },
+      {
+        "tag": "영작",
+        "type": "sentence",
+        "answer": "was pleased to receive",
+        "number": 19,
+        "question": "다음 괄호 안의 단어와 그에 어울리는 전치사를 이용하여 문장을 완성하시오. (단, by 제외)\n\nI _______ _______ _______ your letter yesterday. (please)\n\n※ 빈칸에 들어갈 말만 쓰시오."
+      },
+      {
+        "tag": "단어배열",
+        "type": "sentence",
+        "answer": "I was asked the way three times.",
+        "number": 20,
+        "question": "다음 <보기>와 같이 문장에서 밑줄 친 낱말을 생략하여 수동태 문장으로 다시 쓰시오. \n<보기> *You* have to fill in  an application form.\n→ An application form has to be filled in.\n\n*People* asked me the way three times.\n→ _______________________________",
+        "acceptedAnswers": [
+          "I was asked the way three times"
+        ]
+      },
+      {
+        "tag": "단어배열",
+        "type": "sentence",
+        "answer": "The apples are picked early in the morning.",
+        "number": 21,
+        "question": "다음 <보기>와 같이 문장에서 밑줄 친 낱말을 생략하여 수동태 문장으로 다시 쓰시오. \n<보기> You have to fill in  an application form.\n→ An application form has to be filled in.\n\n*The fruit-pickers* pick the apples early in the morning.\n→ _______________________________",
+        "acceptedAnswers": [
+          "The apples are picked early in the morning"
+        ]
+      },
+      {
+        "tag": "빈칸",
+        "type": "short_answer",
+        "answer": "was written",
+        "number": 22,
+        "question": "다음 빈칸에 괄호 안에 주어진 단어를 이용하여 알맞게 각각 고쳐 쓰시오. \n\nThere is a book on the desk. The book _______ _______ by Shakespeare. (write)\n\n※ 빈칸에 들어갈 말만 쓰시오."
+      },
+      {
+        "tag": "빈칸",
+        "type": "short_answer",
+        "answer": "was drawn",
+        "number": 23,
+        "question": "다음 빈칸에 괄호 안에 주어진 단어를 이용하여 알맞게 각각 고쳐 쓰시오. \n\nThere is a picture on the wall. It _______ _______ by Andy Warhol. (draw)\n\n※ 빈칸에 들어갈 말만 쓰시오."
+      },
+      {
+        "tag": "단어배열",
+        "type": "sentence",
+        "answer": "was painted by Vincent van Gogh",
+        "number": 24,
+        "question": "다음 <보기>를 참고하여 질문에 답하시오.\n<보기> \nTitle: The Starry Night\nArtist: Vincent van Gogh (1853~1890)\nPainted in 1889\n\nWho painted The Starry Night?\n→ The Starry Night _______________________\n\n※ 빈칸에 들어갈 말만 쓰시오."
+      },
+      {
+        "tag": "단어배열",
+        "type": "sentence",
+        "answer": "was born in 1853",
+        "number": 25,
+        "question": "다음 <보기>를 참고하여 질문에 답하시오.\n<보기> \nTitle: The Starry Night\nArtist: Vincent van Gogh (1853~1890)\nPainted in 1889\n\nWhen was Vincent van Gogh born?\n→ He _______________________\n\n※ 빈칸에 들어갈 말만 쓰시오."
+      },
+      {
+        "tag": "단어배열",
+        "type": "sentence",
+        "answer": "was painted in 1889",
+        "number": 26,
+        "question": "다음 <보기>를 참고하여 질문에 답하시오.\n<보기> \nTitle: The Starry Night\nArtist: Vincent van Gogh (1853~1890)\nPainted in 1889\n\nWhen did he paint The Starry Night?\n→ The Starry Night _______________________\n\n※ 빈칸에 들어갈 말만 쓰시오."
+      },
+      {
+        "tag": "기타",
+        "type": "sentence",
+        "answer": "was won by Claude Jennings",
+        "number": 27,
+        "question": "다음 괄호 안에 있는 단어들을 이용하여 지시된 시제로 알맞게 쓰시오.\n\nDid you hear about the quiz competition?\nIt (Claude Jennings / win: 과거)"
+      },
+      {
+        "tag": "기타",
+        "type": "sentence",
+        "answer": "did a parachute jump last week",
+        "number": 28,
+        "question": "다음 괄호 안에 있는 단어들을 이용하여 지시된 시제로 알맞게 쓰시오.\n\nYou know Mrs. Miles?\nShe (do / a parachute jump / last week: 과거)"
+      },
+      {
+        "tag": "단어",
+        "type": "short_answer",
+        "answer": "likes Jessica",
+        "number": 29,
+        "question": "다음 괄호 안에 있는 단어들을 이용하여 지시된 시제로 알맞게 쓰시오.\n\nDid I tell you about Andrew?\nHe (like / Jessica: 현재)"
+      },
+      {
+        "tag": "기타",
+        "type": "sentence",
+        "answer": "was seen by five people",
+        "number": 30,
+        "question": "다음 괄호 안에 있는 단어들을 이용하여 지시된 시제로 알맞게 쓰시오.\n\nDid you hear about the ghost?\nIt (five people / see: 과거)"
+      },
+      {
+        "tag": "기타",
+        "type": "sentence",
+        "answer": "went to Florida last month",
+        "number": 31,
+        "question": "다음 괄호 안에 있는 단어들을 이용하여 지시된 시제로 알맞게 쓰시오.\n\nYou remember Claire?\nShe (go / to Florida / last month: 과거)"
+      },
+      {
+        "tag": "단어배열",
+        "type": "sentence",
+        "answer": "When was the Eiffel Tower built?",
+        "number": 32,
+        "question": "다음 우리말에 맞도록 괄호 안의 단어를 순서대로 배열하시오. (필요시 형태를 변형할 것)\n\n에펠탑은 언제 지어졌나?\n(Eiffel Tower / when / built / was / the)"
+      },
+      {
+        "tag": "단어배열",
+        "type": "sentence",
+        "answer": "The movie has been loved by many people.",
+        "number": 33,
+        "question": "다음 우리말에 맞도록 괄호 안의 단어를 순서대로 배열하시오. (필요시 형태를 변형할 것)\n\n그 영화는 많은 사람들에 의해 사랑받아오고 있다.\n(the / love / movie / by / have / people / be / many)",
+        "acceptedAnswers": [
+          "The movie has been loved by many people"
+        ]
+      },
+      {
+        "tag": "단어배열",
+        "type": "sentence",
+        "answer": "A lot of trees are cut down to make paper.",
+        "number": 34,
+        "question": "다음 우리말에 맞도록 괄호 안의 단어를 순서대로 배열하시오. (필요시 형태를 변형할 것)\n\n많은 나무들이 종이를 만들기 위해 베어진다.\n(a / to / make / trees / of / are / cut / lot / down / paper)",
+        "acceptedAnswers": [
+          "A lot of trees are cut down to make paper"
+        ]
+      },
+      {
+        "tag": "단어배열",
+        "type": "sentence",
+        "answer": "The window was broken by Junsu.",
+        "number": 35,
+        "question": "다음 밑줄 친 부분으로 시작하여 문장을 다시 쓰시오.\n<보기> \nThe Wright invented *the airplane.*\n→ The airplane was invented by the Wright brothers.\n\nJunsu broke *the window.*\n→  ________________________________________",
+        "acceptedAnswers": [
+          "The window was broken by Junsu"
+        ]
+      },
+      {
+        "tag": "단어배열",
+        "type": "sentence",
+        "answer": "These cookies were made by Ann.",
+        "number": 36,
+        "question": "다음 밑줄 친 부분으로 시작하여 문장을 다시 쓰시오.\n<보기> \nThe Wright invented *the airplane.*\n→ The airplane was invented by the Wright brothers.\n\nAnn made *these cookies.*\n→  ________________________________________",
+        "acceptedAnswers": [
+          "These cookies were made by Ann"
+        ]
+      },
+      {
+        "tag": "단어배열",
+        "type": "sentence",
+        "answer": "This letter was written by Cathy.",
+        "number": 37,
+        "question": "다음 밑줄 친 부분으로 시작하여 문장을 다시 쓰시오.\n<보기> \nThe Wright invented *the airplane.*\n→ The airplane was invented by the Wright brothers.\n\nCathy wrote *this letter.*\n→  ________________________________________",
+        "acceptedAnswers": [
+          "This letter was written by Cathy"
+        ]
+      },
+      {
+        "tag": "영작",
+        "type": "sentence",
+        "answer": "Hanguel was made by King Sejong the Great in 1443.",
+        "number": 38,
+        "question": "Complete the sentence with the given words as shown in the example below.\n\n<Example>\n(the Taj Mahal, build, Shah Jahan)\n→ The Taj Mahal was built by Shah Jahan. \n\n(King Sejong the Great, make, Hanguel, 1443)\n→  _______________________________________ ",
+        "acceptedAnswers": [
+          "Hanguel was made by King Sejong the Great in 1443"
+        ]
+      },
+      {
+        "tag": "영작",
+        "type": "sentence",
+        "answer": "The novel was written by him.",
+        "number": 39,
+        "question": "Rewrite the sentences that begin with the underlined parts as shown in the example below.\n<Example>\nThe Wright brothers invented *the airplane.*\n→ The airplan was invented by the Wright brothers. \n\nHe wrote *the novel.*\n→  ________________________________________\n",
+        "acceptedAnswers": [
+          "The novel was written by him"
+        ]
+      },
+      {
+        "tag": "영작",
+        "type": "sentence",
+        "answer": "The library could be easily found by Ann.",
+        "number": 40,
+        "question": "Rewrite the sentences that begin with the underlined parts as shown in the example below.\n<Example>\nThe Wright brothers invented *the airplane.*\n→ The airplan was invented by the Wright brothers. \n\n\nAnn could easily find *the library.*\n→  ________________________________________",
+        "acceptedAnswers": [
+          "The library could be easily found by Ann"
+        ]
+      },
+      {
+        "tag": "영작",
+        "type": "sentence",
+        "answer": "An old article was shown to me by her.",
+        "number": 41,
+        "question": "Rewrite the sentences that begin with the underlined parts as shown in the example below.\n<Example>\nThe Wright brothers invented *the airplane.*\n→ The airplan was invented by the Wright brothers. \n\n\nShe showed me *an old article.*\n→  ________________________________________",
+        "acceptedAnswers": [
+          "An old article was shown to me by her"
+        ]
+      },
+      {
+        "tag": "subParts",
+        "type": "multi_part",
+        "answer": "is played / are cleaned / are baked",
+        "number": 42,
+        "question": "다음 글의 빈칸 ①~③ 괄호 안에 주어진 단어를 이용하여 알맞게 각각 고쳐 쓰시오.\n\nEverything is strange in this world. The music ①(play) by the birds. The windows ②(clean) by the elephant. Cookies ③(bake) by the bear.",
+        "subParts": [
+          {
+            "label": "①",
+            "answer": "is played"
+          },
+          {
+            "label": "②",
+            "answer": "are cleaned"
+          },
+          {
+            "label": "③",
+            "answer": "are baked"
+          }
+        ],
+        "acceptedAnswers": [
+          "is played/are cleaned/are baked"
+        ]
+      },
+      {
+        "tag": "subParts",
+        "type": "multi_part",
+        "answer": "The fairy's dress was taken by the man / The bird's leg was broken in an accident",
+        "number": 43,
+        "question": "다음 전래동화에 관한 글을 읽고, 어법상 어색한 문장을 2개 찾아 바르게 고쳐 문장을 전체를 다시 쓰시오. (단, 정답은 고친문장만 이어서 쓸 것) ex) This song is loved by many people, The window was broken.\n\n(a) Kongjwi wasn't invited to the party.\n(b) The fairy's dress was took by the man.\n(c) The turtle was tricked by the rabbit.\n(d) The bird's leg was break in an accident.\n\n(1) 고친 문장:  ________________________________________\t\n\n(2) 고친 문장:  ________________________________________\t",
+        "subParts": [
+          {
+            "label": "(1)",
+            "answer": "The fairy's dress was taken by the man"
+          },
+          {
+            "label": "(2)",
+            "answer": "The bird's leg was broken in an accident"
+          }
+        ],
+        "acceptedAnswers": [
+          "The fairy's dress was taken by the man, The bird's leg was broken in an accident",
+          "The fairy's dress was taken by the man/The bird's leg was broken in an accident"
+        ]
+      },
+      {
+        "tag": "subParts",
+        "type": "multi_part",
+        "answer": "His car was stopped by the police last night / The play lasted for more than two hours",
+        "number": 44,
+        "question": "다음 <보기>에서 어법상 어색한 부분을 2개 찾아 기호를 쓰고 바르게 고쳐 문장 전체를 다시 쓰시오. (단, 정답은 고친문장만 이어서 쓸 것) ex) This song is loved by many people, The window was broken.\n\n<보기>\n(a) His car is stopped by the police last night.\n(b) The play was lasted for more than two hours.\n(c) He has been elected president by people.\n(d) Christina's dogs will be taken good care of.\n(e) Those gentlemen were met by beautiful ladies.\n\n(1) 고친 문장:  ________________________________________\t\n\n(2) 고친 문장:  ________________________________________\t",
+        "subParts": [
+          {
+            "label": "(1)",
+            "answer": "His car was stopped by the police last night"
+          },
+          {
+            "label": "(2)",
+            "answer": "The play lasted for more than two hours"
+          }
+        ],
+        "acceptedAnswers": [
+          "His car was stopped by the police last night., The play lasted for more than two hours",
+          "His car was stopped by the police last night, The play lasted for more than two hours",
+          "His car was stopped by the police last night/The play lasted for more than two hours"
+        ]
+      },
+      {
+        "tag": "subParts",
+        "type": "multi_part",
+        "answer": "was invented by / is used by",
+        "number": 45,
+        "question": "다음 우리말과 일치하도록 괄호 안에 주어진 단어를 이용하여 문장을 완성하시오. \n(필요시 단어의 형태를 바꾸며 시제에 유의할 것) \n\n(1) 전구는 Thomas Edison에 의해 발명되었다.\n→ The light bulb _______ _______ _______ Thomas Edison. (invent)\n\n(2) 그것은 세계의 많은 사람들에 의해 사용된다.\n→ It _______ _______ _______ many people in the world. (use)",
+        "subParts": [
+          {
+            "label": "(1)",
+            "answer": "was invented by"
+          },
+          {
+            "label": "(2)",
+            "answer": "is used by"
+          }
+        ],
+        "acceptedAnswers": [
+          "was invented by/is used by"
+        ]
+      },
+      {
+        "tag": "subParts",
+        "type": "multi_part",
+        "answer": "was thrown / wasn't broken / she / cuts the grass",
+        "number": 46,
+        "question": "다음 두 문장의 의미가 같도록 할 때, 빈칸에 들어갈 알맞은 말을 쓰시오.\n\n(1) The cat threw the mouse.\n→ The mouse _______ _______ by the cat.\n\n(2) She didn't break the window.\n→ The window _______ _______ by _______.\n\n(3) The grass is cut by him once a week.\n→ He _______ _______ _______ once a week.",
+        "subParts": [
+          {
+            "label": "(1)",
+            "answer": "was thrown"
+          },
+          {
+            "label": "(2)-빈칸",
+            "answer": "wasn't broken",
+            "acceptedAnswers": [
+              "was not broken"
+            ]
+          },
+          {
+            "label": "(2)-by 뒤",
+            "answer": "she"
+          },
+          {
+            "label": "(3)",
+            "answer": "cuts the grass"
+          }
+        ],
+        "acceptedAnswers": [
+          "was thrown/wasn't broken/she/cuts the grass"
+        ]
+      },
+      {
+        "tag": "빈칸",
+        "type": "short_answer",
+        "answer": "written",
+        "number": 47,
+        "question": "다음 두 문장의 의미가 같도록 우리말과 일치하는 빈칸에 들어갈 알맞은 말을 쓰시오.\n\nCathy wrote a letter.\n→ A letter was _______ by Cathy.\n(번지가 Cathy에 의해서 쓰여 졌다.)\n\n※ 빈칸에 들어갈 말만 쓰시오."
+      },
+      {
+        "tag": "빈칸",
+        "type": "short_answer",
+        "answer": "was painted by",
+        "number": 48,
+        "question": "다음 우리말과 일치하도록 빈칸에 들어갈 알맞은 말을 쓰시오.\n\nA: Who painted the picture?\nB: The picture _______ _______ _______ Vincent van Gogh.\n(그 그림은 반센트 반 고흐에 의해 그려졌다.)\n\n※ 빈칸에 들어갈 말만 쓰시오."
+      },
+      {
+        "tag": "빈칸",
+        "type": "short_answer",
+        "answer": "were written by",
+        "number": 49,
+        "question": "다음 우리말과 일치하도록 빈칸에 들어갈 알맞은 말을 쓰시오.\n\nA: Who wrote Harry potter series?\nB: The books _______ _______ J. K. Rowling.\n(그 책들은 J. K. Rowling에 의해 쓰였다.)\n\n※ 빈칸에 들어갈 말만 쓰시오."
+      },
+      {
+        "tag": "단어배열",
+        "type": "sentence",
+        "answer": "was written by Mark Twain.",
+        "number": 50,
+        "question": "다음 문장을 <보기>와 같은 형태로 바꿔 쓰시오.\n\n<보기>\nEverybody loved Mario.\n→ Mario was loved by everybody.\n\nMark Twain wrote the book.\n→ The book _______________________________.\n\n※ 빈칸에 들어갈 말만 쓰시오.",
+        "acceptedAnswers": [
+          "was written by Mark Twain"
+        ]
+      },
+      {
+        "tag": "subParts",
+        "type": "multi_part",
+        "answer": "We should recycle cans and plastic bottles / Cans and plastic bottles should be recycled by us",
+        "number": 51,
+        "question": "다음 <보기>에 주어진 단어들을 사용하여 수동태 문장을 만드시오. \n(필요시 단어를 추가하거나 형태를 변형할 것)\n\n<보기>\nwe / recycle / cans and plastic bottles / should",
+        "subParts": [
+          {
+            "label": "능동태",
+            "answer": "We should recycle cans and plastic bottles"
+          },
+          {
+            "label": "수동태",
+            "answer": "Cans and plastic bottles should be recycled by us"
+          }
+        ],
+        "acceptedAnswers": [
+          "Cans and plastic bottles should be recycled by us",
+          "Cans and plastic bottles should be recycled",
+          "We should recycle cans and plastic bottles/Cans and plastic bottles should be recycled by us"
+        ]
+      },
+      {
+        "tag": "오류수정",
+        "type": "sentence",
+        "answer": "was built in 1930",
+        "number": 52,
+        "question": "다음 문장을 주어진 낱말로 시작하는 문장으로 고쳐 쓰시오.\n\nSomebody built this house in 1930.\n→ This house _______________.\n\n※ 빈칸에 들어갈 말만 쓰시오."
+      },
+      {
+        "tag": "subParts",
+        "type": "multi_part",
+        "answer": "were taken by my mother / was broken by / was made",
+        "number": 53,
+        "question": "다음 빈칸에 들어갈 알맞은 말을 수동태를 사용하여 쓰시오.\n\n(1) My mother took these pictures.\n→ These pictures _______________.\n\n(2) A: Who broke the window?\nB: It _______________ Jim.\n\n(3) A: Who made the cake?\nB: It _______________ by Mim.",
+        "subParts": [
+          {
+            "label": "(1)",
+            "answer": "were taken by my mother"
+          },
+          {
+            "label": "(2)",
+            "answer": "was broken by"
+          },
+          {
+            "label": "(3)",
+            "answer": "was made"
+          }
+        ],
+        "acceptedAnswers": [
+          "were taken by my mother/was broken by/was made"
+        ]
+      },
+      {
+        "tag": "단어배열",
+        "type": "sentence",
+        "answer": "The early worm is caught by the early bird.",
+        "number": 54,
+        "question": "다음 <보기>를 참고하여 주어진 우리말과 일치하도록 영작하시오.\n\n<보기>\n일찍 일어나는 새가 벌레를 잡는다.\n→ The early bird catches the worm.\n\n일찍 일어나는 벌레는 일찍 일어나는 새에게 먹힌다.\n\n→ _______________ (9단어)",
+        "acceptedAnswers": [
+          "The early worm is caught by the early bird"
+        ]
+      },
+      {
+        "tag": "subParts",
+        "type": "multi_part",
+        "answer": "was written / broke / could be built",
+        "number": 55,
+        "question": "다음 두 문장이 같은 의미가 되도록 괄호 안의 지시에 따라 바꾸시오.\n\n(1) She wrote Harry potter. (수동태로)\n→ Harry potter _______________ by her.\n\n(2) The window is broken by Tom. (능동태로)\n→ Tom _______________ the window.\n\n(3) They could build the school. (수동태로)\n→ The school _______________ by them.",
+        "subParts": [
+          {
+            "label": "(1)",
+            "answer": "was written"
+          },
+          {
+            "label": "(2)",
+            "answer": "broke"
+          },
+          {
+            "label": "(3)",
+            "answer": "could be built"
+          }
+        ],
+        "acceptedAnswers": [
+          "was written/broke/could be built"
+        ]
+      },
+      {
+        "tag": "subParts",
+        "type": "multi_part",
+        "answer": "is made / was woken up / will be caught by the police",
+        "number": 56,
+        "question": "다음 주어진 문장의 주어를 바꿔 쓸 때, 빈칸에 들어갈 알맞은 말을 쓰시오.\n\n(1) Tom makes a robot.\n→ A robot _______________ by Tom.\n\n(2) A loud noise woke me up in the morning.\n→ I _______________ in the morning.\n\n(3) The police will catch the man.\n→ The man _______________.",
+        "subParts": [
+          {
+            "label": "(1)",
+            "answer": "is made"
+          },
+          {
+            "label": "(2)",
+            "answer": "was woken up"
+          },
+          {
+            "label": "(3)",
+            "answer": "will be caught by the police",
+            "acceptedAnswers": [
+              "will be caught"
+            ]
+          }
+        ],
+        "acceptedAnswers": [
+          "is made/was woken up/will be caught by the police"
+        ]
+      },
+      {
+        "tag": "단어배열",
+        "type": "sentence",
+        "answer": "Many kinds of fish are caught by fishermen.",
+        "number": 57,
+        "question": "다음 문장을 <보기>와 같은 형태로 바꿔 쓰시오.\n\n<보기>\nThe girl opens the window.\n→ The window is opened by the girl.\n\nFishermen catch many kinds of fish.\n→ _______________\n\n*fishermen: 어부들",
+        "acceptedAnswers": [
+          "Many kinds of fish are caught by fishermen"
+        ]
+      },
+      {
+        "tag": "단어배열",
+        "type": "sentence",
+        "answer": "Hamlet and King Lear were written by him.",
+        "number": 58,
+        "question": "다음 문장을 <보기>와 같은 형태로 바꿔 쓰시오.\n\n<보기>\nJames took the picture.\n→ The picture was taken by James.\n\nHe wrote Hamlet and King Lear.\n→ _______________",
+        "acceptedAnswers": [
+          "Hamlet and King Lear were written by him"
+        ]
+      },
+      {
+        "tag": "단어배열",
+        "type": "sentence",
+        "answer": "He was heard to sing by us.",
+        "number": 59,
+        "question": "다음 문장을 <보기>와 같은 형태로 바꿔 쓰시오.\n\n<보기>\nI saw a boy play the piano.\n→ A boy was seen to play the piano by me.\n\nWe heard him sing.\n→ _______________",
+        "acceptedAnswers": [
+          "He was heard to sing by us"
+        ]
+      },
+      {
+        "tag": "subParts",
+        "type": "multi_part",
+        "answer": "The magazine is read by my cousin / Mark Chagall painted I and the Village in 1911 / This book was not written by Shakespeare",
+        "number": 60,
+        "question": "다음 문장을 지시에 맞게 바꿔 쓰시오.\n\n(1) My cousin reads the magazine. (수동태)\n→ _______________\n\n(2) I and the Village was painted by Mark Chagall in 1911. (능동태)\n→ _______________\n\n(3) Shakespeare wrote this book. (부정 수동태)\n→ _______________",
+        "subParts": [
+          {
+            "label": "(1) 수동태",
+            "answer": "The magazine is read by my cousin"
+          },
+          {
+            "label": "(2) 능동태",
+            "answer": "Mark Chagall painted I and the Village in 1911"
+          },
+          {
+            "label": "(3) 부정 수동태",
+            "answer": "This book was not written by Shakespeare",
+            "acceptedAnswers": [
+              "This book wasn't written by Shakespeare"
+            ]
+          }
+        ],
+        "acceptedAnswers": [
+          "The magazine is read by my cousin/Mark Chagall painted I and the Village in 1911/This book was not written by Shakespeare"
+        ]
+      },
+      {
+        "tag": "subParts",
+        "type": "multi_part",
+        "answer": "Dad made the soup / The soup was made by dad",
+        "number": 61,
+        "question": "다음 우리말과 일치하도록 괄호 안의 말을 사용하여 어법상 맞게 영작하시오.\n\n그 수프는 아빠가 만들었다. (make, dad)\n\n(능동태) _______________\n\n(수동태) _______________",
+        "subParts": [
+          {
+            "label": "능동태",
+            "answer": "Dad made the soup"
+          },
+          {
+            "label": "수동태",
+            "answer": "The soup was made by dad"
+          }
+        ],
+        "acceptedAnswers": [
+          "Dad made the soup/The soup was made by dad"
+        ]
+      },
+      {
+        "tag": "영작",
+        "type": "sentence",
+        "answer": "are cut down to make paper",
+        "number": 62,
+        "question": "다음 우리말과 일치하도록 괄호 안에 주어진 단어를 모두 사용하여 영작하시오. (필요시 단어를 변형할 것)\n\n많은 나무가 종이를 만들기 위해 베어집니다.\n(cut down, to, paper, make, be)\n\n→ Many trees _______________.\n\n※ 빈칸에 들어갈 말만 쓰시오.",
+        "acceptedAnswers": [
+          "are cut down to be made into paper"
+        ]
+      },
+      {
+        "tag": "subParts",
+        "type": "multi_part",
+        "answer": "was built by the Romans / was caught by the policeman",
+        "number": 63,
+        "question": "다음 우리말과 일치하도록 <조건>에 맞게 문장을 완성하시오.\n\n<조건>\n1. 주어진 단어를 모두 완성할 것\n2. 수동태 구문으로 완성할 것\n\n(1) 콜로세움은 로마인들에 의해 지어졌다.\nColosseum _______________.\n(was, build, the Romans)\n\n(2) 그 도둑은 경찰에 의해 잡혔다.\nThe thief _______________.\n(was, catch, the policeman)",
+        "subParts": [
+          {
+            "label": "(1)",
+            "answer": "was built by the Romans"
+          },
+          {
+            "label": "(2)",
+            "answer": "was caught by the policeman"
+          }
+        ],
+        "acceptedAnswers": [
+          "was built by the Romans/was caught by the policeman"
+        ]
+      },
+      {
+        "tag": "subParts",
+        "type": "multi_part",
+        "answer": "built the house / was built by my father",
+        "number": 64,
+        "question": "다음 <보기>와 같이 질문에 맞는 답을 쓰시오.\n\n<보기>\nA: Who invented the light bulb?\nB: (1) Thomas Edison invented the light bulb.\n   (2) The light bulb was invented by Thomas Edison.\n\nA: Who built the house?\nB: (1) My father _______________.\n   (2) The house _______________.",
+        "subParts": [
+          {
+            "label": "(1)",
+            "answer": "built the house"
+          },
+          {
+            "label": "(2)",
+            "answer": "was built by my father"
+          }
+        ],
+        "acceptedAnswers": [
+          "built the house/was built by my father"
+        ]
+      },
+      {
+        "tag": "subParts",
+        "type": "multi_part",
+        "answer": "are collected / are given",
+        "number": 65,
+        "question": "다음 글의 괄호 ①, ②안의 단어를 어법에 맞게 고치시오. (현재형으로 쓸 것)\n\n<Used Clothes Wanted>\nDo you think you are too big to wear your old clothes? Don't throw them away! Donate your clothes. Used clothes ①(collect) at our center. Then they ②(give) to children who are too poor to buy clothes.\n\n① (collect) → _______________\n\n② (give) → _______________",
+        "subParts": [
+          {
+            "label": "①",
+            "answer": "are collected"
+          },
+          {
+            "label": "②",
+            "answer": "are given"
+          }
+        ],
+        "acceptedAnswers": [
+          "are collected/are given"
+        ]
+      },
+      {
+        "tag": "영작",
+        "type": "sentence",
+        "answer": "The yard was cleaned by a mouse yesterday.",
+        "number": 66,
+        "question": "다음 주어진 그림의 상황을 수동태 문장으로 표현하시오.(단, 주어진 단어를 반드시 활용할 것)\n(그림: 마당을 청소하고 있는 쥐) \n\n→ The yard _______________ (a mouse, clean, be, yesterday)",
+        "acceptedAnswers": [
+          "The yard was cleaned by a mouse yesterday"
+        ]
+      },
+      {
+        "tag": "영작",
+        "type": "sentence",
+        "answer": "It was directed by Steven Spielberg.",
+        "number": 67,
+        "question": "다음 대화를 읽고 물음에 대한 답을 It으로 시작하는 완전한 수동태 문장으로 쓰시오.\n\nA: What is your favorite movie?\nB: My favorite movie is Jurassic Park.\nA: Oh, I've seen it before. Steven Spielberg directed it, didn't he?\nB: Yes, he did. I want to see all of his movies someday.\n\nA: Who directed Jurassic Park?\nB: It ___ ___ ___ ___ ___",
+        "acceptedAnswers": [
+          "It was directed by Steven Spielberg"
+        ]
+      }
+    ]
+  },
+  "sheet_abf2d199-2be5-4008-b2e9-4958649dd965": {
+    "questions": [
+      {
+        "tag": "오류수정",
+        "type": "sentence",
+        "answer": "Where was Ron born?",
+        "number": 1,
+        "question": "다음 밑줄 친 부분을 바르게 고쳐 쓰시오. \n\nA: Where *did* Ron born?\nB: He was born in Fantasy Village."
+      },
+      {
+        "tag": "오류수정",
+        "type": "sentence",
+        "answer": "Was the letter delivered by Mr. Smith?",
+        "number": 2,
+        "question": "다음 밑줄 친 부분을 바르게 고쳐 쓰시오. \n\nA: *Did* the letter deliver by Mr. Smith?\nB: No, it *didn't*. It was delivered by a bird.",
+        "acceptedAnswers": [
+          "Was the letter delivered by Mr. Smith?\nNo, it wasn't. It was delivered by a bird",
+          "Was the letter delivered by Mr. Smith? No, it wasn't. It was delivered by a bird."
+        ]
+      },
+      {
+        "tag": "오류수정",
+        "type": "sentence",
+        "answer": "Ron was invited to Wonka Magic School.",
+        "number": 3,
+        "question": "다음 밑줄 친 부분을 바르게 고쳐 쓰시오. \n\nA: What was written in the letter?\nB: Ron *invited* to Wonka Magic School.",
+        "acceptedAnswers": [
+          "Ron was invited to Wonka Magic School"
+        ]
+      },
+      {
+        "tag": "빈칸",
+        "type": "short_answer",
+        "answer": "is interested in",
+        "number": 4,
+        "question": "위의 <보기>에서 알맞은 표현을 골라 <보기>에서 알맞은 표현을 골라 적절한 형태로 고쳐 문장을 완성하시오. \n\n<보기>\nbe satisfied / be scared / be made / be interested\n\nJoy takes piano and violin lesson these days. She _______ _______ _______ music.\n\n※ 빈칸에 들어갈 말만 쓰시오."
+      },
+      {
+        "tag": "빈칸",
+        "type": "short_answer",
+        "answer": "is scared of",
+        "number": 5,
+        "question": "위의 <보기>에서 알맞은 표현을 골라 <보기>에서 알맞은 표현을 골라 적절한 형태로 고쳐 문장을 완성하시오. \n\n<보기>\nbe satisfied / be scared / be made / be interested\n\n\nWe leave a light on in our son's bedroom at night because he _______ _______ _______ the dark.\n\n※ 빈칸에 들어갈 말만 쓰시오."
+      },
+      {
+        "tag": "영작",
+        "type": "sentence",
+        "answer": "was completely destroyed by the car",
+        "number": 6,
+        "question": "다음 두 문장이 같은 뜻이 되도록 빈칸에 알맞은 문장을 쓰시오. \n\nThe car completely destroyed my motorbike.\n= My motorbike _______________________\n\n※ 빈칸에 들어갈 말만 쓰시오."
+      },
+      {
+        "tag": "영작",
+        "type": "sentence",
+        "answer": "was awarded the second prize",
+        "number": 7,
+        "question": "다음 두 문장이 같은 뜻이 되도록 빈칸에 알맞은 문장을 쓰시오. \n\nSecond prize was awarded to an unknown author from Patras.\n= An unknown author from Patras _______ _______ _______\n\n※ 빈칸에 들어갈 말만 쓰시오."
+      },
+      {
+        "tag": "영작",
+        "type": "sentence",
+        "answer": "Many polar bears were killed by a hunter.",
+        "number": 8,
+        "question": "A hunter killed many polar bears.\n\n위 문장을 수동태로 알맞게 전환하시오.",
+        "acceptedAnswers": [
+          "Many polar bears were killed by a hunter"
+        ]
+      },
+      {
+        "tag": "영작",
+        "type": "sentence",
+        "answer": "A lot of disasters are caused by global warming.",
+        "number": 9,
+        "question": "The global warming causes a lot of disasters.\n\n위 문장을 수동태로 알맞게 전환하시오.",
+        "acceptedAnswers": [
+          "A lot of disasters are caused by global warming"
+        ]
+      },
+      {
+        "tag": "빈칸",
+        "type": "short_answer",
+        "answer": "were made",
+        "number": 10,
+        "question": "다음 각 문장의 밑줄 친 부분을 주어로 하여 아래의 문장을 완성해 봅시다.\nJane made *these cookies.* \nEric broke *the window.*\nMina wrote *this letter.*\nThe Wright brothers invented *the airplane.* \n\nThese cookies _______ _______ by Jane.\n\n※ 빈칸에 들어갈 말만 쓰시오."
+      },
+      {
+        "tag": "빈칸",
+        "type": "short_answer",
+        "answer": "was broken",
+        "number": 11,
+        "question": "다음 각 문장의 밑줄 친 부분을 주어로 하여 아래의 문장을 완성해 봅시다.\nJane made *these cookies.* \nEric broke *the window.*\nMina wrote *this letter.*\nThe Wright brothers invented *the airplane.* \n\nThe window _______ _______ by Eric.\n\n※ 빈칸에 들어갈 말만 쓰시오."
+      },
+      {
+        "tag": "빈칸",
+        "type": "short_answer",
+        "answer": "was written",
+        "number": 12,
+        "question": "다음 각 문장의 밑줄 친 부분을 주어로 하여 아래의 문장을 완성해 봅시다.\nJane made *these cookies.* \nEric broke *the window.*\nMina wrote *this letter.*\nThe Wright brothers invented *the airplane.* \n\nThis letter _______ _______ by Mina.\n\n※ 빈칸에 들어갈 말만 쓰시오."
+      },
+      {
+        "tag": "빈칸",
+        "type": "short_answer",
+        "answer": "was invented",
+        "number": 13,
+        "question": "다음 각 문장의 밑줄 친 부분을 주어로 하여 아래의 문장을 완성해 봅시다.\nJane made *these cookies.* \nEric broke *the window.*\nMina wrote *this letter.*\nThe Wright brothers invented *the airplane.* \n\nThe airplane _______ _______ by the Wright brothers.\n\n※ 빈칸에 들어갈 말만 쓰시오."
+      },
+      {
+        "tag": "subParts",
+        "type": "multi_part",
+        "answer": "was born / Korea / 1962 / was loved / many Sudanese people / Sudan / was called / the Schweizer of Sudan",
+        "number": 14,
+        "question": "다음 인물을 소개하는 글이 되도록 주어진 정보와 괄호 안에 단어를 이용하여 빈칸을 완성하시오. \n\nLee Taeseok\n\nBorn: Korea, 1962\nHe did volunteer work in Sudan. Many Sudanese people loved him. People call him, 'the Schweizer of Sudan.'\n\nHe ________(bear) in ________ in ________.\nHe ________(love) by ________ in __________.\nHe worked as hard as other volunteers in Sudan. He ________(call) .",
+        "subParts": [
+          {
+            "label": "(1) bear→",
+            "answer": "was born"
+          },
+          {
+            "label": "(2) 나라",
+            "answer": "Korea"
+          },
+          {
+            "label": "(3) 년도",
+            "answer": "1962"
+          },
+          {
+            "label": "(4) love→",
+            "answer": "was loved"
+          },
+          {
+            "label": "(5) 누구에게",
+            "answer": "many Sudanese people"
+          },
+          {
+            "label": "(6) 어디서",
+            "answer": "Sudan"
+          },
+          {
+            "label": "(7) call→",
+            "answer": "was called"
+          },
+          {
+            "label": "(8) 별명",
+            "answer": "the Schweizer of Sudan",
+            "acceptedAnswers": [
+              "'the Schweizer of Sudan'",
+              "\"the Schweizer of Sudan\""
+            ]
+          }
+        ]
+      },
+      {
+        "tag": "subParts",
+        "type": "multi_part",
+        "answer": "created / read / sent / taught / Harry Potter",
+        "number": 15,
+        "question": "다음 빈칸에 알맞은 말을 골라 글을 완성하고, 누구에 관한 설명인지 추측하시오.\n\n<보기> read / send / create / teach\n\nThis character was _______ by J. K. Rowling. The books about him have been _______ by many people all over the world. He was _______ to a magic school. He was _______ how to fly and how to use magic.\n\nGuess who? _______",
+        "subParts": [
+          {
+            "label": "(1) create",
+            "answer": "created"
+          },
+          {
+            "label": "(2) read",
+            "answer": "read"
+          },
+          {
+            "label": "(3) send",
+            "answer": "sent"
+          },
+          {
+            "label": "(4) teach",
+            "answer": "taught"
+          },
+          {
+            "label": "(5) 인물",
+            "answer": "Harry Potter"
+          }
+        ]
+      },
+      {
+        "tag": "빈칸",
+        "type": "short_answer",
+        "answer": "is interested in",
+        "number": 16,
+        "question": "다음 괄호 안의 단어와 그에 어울리는 전치사를 이용하여 문장을 완성하시오. (단, by 제외)\n\nJohn _______ _______ education. (interest)\n\n※ 빈칸에 들어갈 말만 쓰시오."
+      },
+      {
+        "tag": "빈칸",
+        "type": "short_answer",
+        "answer": "was satisfied with",
+        "number": 17,
+        "question": "다음 괄호 안의 단어와 그에 어울리는 전치사를 이용하여 문장을 완성하시오. (단, by 제외)\n\nI _______ _______ _______ the result. (satisfy)\n\n※ 빈칸에 들어갈 말만 쓰시오."
+      },
+      {
+        "tag": "빈칸",
+        "type": "short_answer",
+        "answer": "were covered with",
+        "number": 18,
+        "question": "다음 괄호 안의 단어와 그에 어울리는 전치사를 이용하여 문장을 완성하시오. (단, by 제외)\n\nThe roads were very dangerous, because they _______ _______ _______ ice. (cover)\n\n※ 빈칸에 들어갈 말만 쓰시오."
+      },
+      {
+        "tag": "영작",
+        "type": "sentence",
+        "answer": "was pleased to receive",
+        "number": 19,
+        "question": "다음 괄호 안의 단어와 그에 어울리는 전치사를 이용하여 문장을 완성하시오. (단, by 제외)\n\nI _______ _______ _______ your letter yesterday. (please)\n\n※ 빈칸에 들어갈 말만 쓰시오."
+      },
+      {
+        "tag": "단어배열",
+        "type": "sentence",
+        "answer": "I was asked the way three times.",
+        "number": 20,
+        "question": "다음 <보기>와 같이 문장에서 밑줄 친 낱말을 생략하여 수동태 문장으로 다시 쓰시오. \n<보기> *You* have to fill in  an application form.\n→ An application form has to be filled in.\n\n*People* asked me the way three times.\n→ _______________________________",
+        "acceptedAnswers": [
+          "I was asked the way three times"
+        ]
+      },
+      {
+        "tag": "단어배열",
+        "type": "sentence",
+        "answer": "The apples are picked early in the morning.",
+        "number": 21,
+        "question": "다음 <보기>와 같이 문장에서 밑줄 친 낱말을 생략하여 수동태 문장으로 다시 쓰시오. \n<보기> You have to fill in  an application form.\n→ An application form has to be filled in.\n\n*The fruit-pickers* pick the apples early in the morning.\n→ _______________________________",
+        "acceptedAnswers": [
+          "The apples are picked early in the morning"
+        ]
+      },
+      {
+        "tag": "빈칸",
+        "type": "short_answer",
+        "answer": "was written",
+        "number": 22,
+        "question": "다음 빈칸에 괄호 안에 주어진 단어를 이용하여 알맞게 각각 고쳐 쓰시오. \n\nThere is a book on the desk. The book _______ _______ by Shakespeare. (write)\n\n※ 빈칸에 들어갈 말만 쓰시오."
+      },
+      {
+        "tag": "빈칸",
+        "type": "short_answer",
+        "answer": "was drawn",
+        "number": 23,
+        "question": "다음 빈칸에 괄호 안에 주어진 단어를 이용하여 알맞게 각각 고쳐 쓰시오. \n\nThere is a picture on the wall. It _______ _______ by Andy Warhol. (draw)\n\n※ 빈칸에 들어갈 말만 쓰시오."
+      },
+      {
+        "tag": "단어배열",
+        "type": "sentence",
+        "answer": "was painted by Vincent van Gogh",
+        "number": 24,
+        "question": "다음 <보기>를 참고하여 질문에 답하시오.\n<보기> \nTitle: The Starry Night\nArtist: Vincent van Gogh (1853~1890)\nPainted in 1889\n\nWho painted The Starry Night?\n→ The Starry Night _______________________\n\n※ 빈칸에 들어갈 말만 쓰시오."
+      },
+      {
+        "tag": "단어배열",
+        "type": "sentence",
+        "answer": "was born in 1853",
+        "number": 25,
+        "question": "다음 <보기>를 참고하여 질문에 답하시오.\n<보기> \nTitle: The Starry Night\nArtist: Vincent van Gogh (1853~1890)\nPainted in 1889\n\nWhen was Vincent van Gogh born?\n→ He _______________________\n\n※ 빈칸에 들어갈 말만 쓰시오."
+      },
+      {
+        "tag": "단어배열",
+        "type": "sentence",
+        "answer": "was painted in 1889",
+        "number": 26,
+        "question": "다음 <보기>를 참고하여 질문에 답하시오.\n<보기> \nTitle: The Starry Night\nArtist: Vincent van Gogh (1853~1890)\nPainted in 1889\n\nWhen did he paint The Starry Night?\n→ The Starry Night _______________________\n\n※ 빈칸에 들어갈 말만 쓰시오."
+      },
+      {
+        "tag": "기타",
+        "type": "sentence",
+        "answer": "was won by Claude Jennings",
+        "number": 27,
+        "question": "다음 괄호 안에 있는 단어들을 이용하여 지시된 시제로 알맞게 쓰시오.\n\nDid you hear about the quiz competition?\nIt (Claude Jennings / win: 과거)"
+      },
+      {
+        "tag": "기타",
+        "type": "sentence",
+        "answer": "did a parachute jump last week",
+        "number": 28,
+        "question": "다음 괄호 안에 있는 단어들을 이용하여 지시된 시제로 알맞게 쓰시오.\n\nYou know Mrs. Miles?\nShe (do / a parachute jump / last week: 과거)"
+      },
+      {
+        "tag": "단어",
+        "type": "short_answer",
+        "answer": "likes Jessica",
+        "number": 29,
+        "question": "다음 괄호 안에 있는 단어들을 이용하여 지시된 시제로 알맞게 쓰시오.\n\nDid I tell you about Andrew?\nHe (like / Jessica: 현재)"
+      },
+      {
+        "tag": "기타",
+        "type": "sentence",
+        "answer": "was seen by five people",
+        "number": 30,
+        "question": "다음 괄호 안에 있는 단어들을 이용하여 지시된 시제로 알맞게 쓰시오.\n\nDid you hear about the ghost?\nIt (five people / see: 과거)"
+      },
+      {
+        "tag": "기타",
+        "type": "sentence",
+        "answer": "went to Florida last month",
+        "number": 31,
+        "question": "다음 괄호 안에 있는 단어들을 이용하여 지시된 시제로 알맞게 쓰시오.\n\nYou remember Claire?\nShe (go / to Florida / last month: 과거)"
+      },
+      {
+        "tag": "단어배열",
+        "type": "sentence",
+        "answer": "When was the Eiffel Tower built?",
+        "number": 32,
+        "question": "다음 우리말에 맞도록 괄호 안의 단어를 순서대로 배열하시오. (필요시 형태를 변형할 것)\n\n에펠탑은 언제 지어졌나?\n(Eiffel Tower / when / built / was / the)"
+      },
+      {
+        "tag": "단어배열",
+        "type": "sentence",
+        "answer": "The movie has been loved by many people.",
+        "number": 33,
+        "question": "다음 우리말에 맞도록 괄호 안의 단어를 순서대로 배열하시오. (필요시 형태를 변형할 것)\n\n그 영화는 많은 사람들에 의해 사랑받아오고 있다.\n(the / love / movie / by / have / people / be / many)",
+        "acceptedAnswers": [
+          "The movie has been loved by many people"
+        ]
+      },
+      {
+        "tag": "단어배열",
+        "type": "sentence",
+        "answer": "A lot of trees are cut down to make paper.",
+        "number": 34,
+        "question": "다음 우리말에 맞도록 괄호 안의 단어를 순서대로 배열하시오. (필요시 형태를 변형할 것)\n\n많은 나무들이 종이를 만들기 위해 베어진다.\n(a / to / make / trees / of / are / cut / lot / down / paper)",
+        "acceptedAnswers": [
+          "A lot of trees are cut down to make paper"
+        ]
+      },
+      {
+        "tag": "단어배열",
+        "type": "sentence",
+        "answer": "The window was broken by Junsu.",
+        "number": 35,
+        "question": "다음 밑줄 친 부분으로 시작하여 문장을 다시 쓰시오.\n<보기> \nThe Wright invented *the airplane.*\n→ The airplane was invented by the Wright brothers.\n\nJunsu broke *the window.*\n→  ________________________________________",
+        "acceptedAnswers": [
+          "The window was broken by Junsu"
+        ]
+      },
+      {
+        "tag": "단어배열",
+        "type": "sentence",
+        "answer": "These cookies were made by Ann.",
+        "number": 36,
+        "question": "다음 밑줄 친 부분으로 시작하여 문장을 다시 쓰시오.\n<보기> \nThe Wright invented *the airplane.*\n→ The airplane was invented by the Wright brothers.\n\nAnn made *these cookies.*\n→  ________________________________________",
+        "acceptedAnswers": [
+          "These cookies were made by Ann"
+        ]
+      },
+      {
+        "tag": "단어배열",
+        "type": "sentence",
+        "answer": "This letter was written by Cathy.",
+        "number": 37,
+        "question": "다음 밑줄 친 부분으로 시작하여 문장을 다시 쓰시오.\n<보기> \nThe Wright invented *the airplane.*\n→ The airplane was invented by the Wright brothers.\n\nCathy wrote *this letter.*\n→  ________________________________________",
+        "acceptedAnswers": [
+          "This letter was written by Cathy"
+        ]
+      },
+      {
+        "tag": "영작",
+        "type": "sentence",
+        "answer": "Hanguel was made by King Sejong the Great in 1443.",
+        "number": 38,
+        "question": "Complete the sentence with the given words as shown in the example below.\n\n<Example>\n(the Taj Mahal, build, Shah Jahan)\n→ The Taj Mahal was built by Shah Jahan. \n\n(King Sejong the Great, make, Hanguel, 1443)\n→  _______________________________________ ",
+        "acceptedAnswers": [
+          "Hanguel was made by King Sejong the Great in 1443"
+        ]
+      },
+      {
+        "tag": "영작",
+        "type": "sentence",
+        "answer": "The novel was written by him.",
+        "number": 39,
+        "question": "Rewrite the sentences that begin with the underlined parts as shown in the example below.\n<Example>\nThe Wright brothers invented *the airplane.*\n→ The airplan was invented by the Wright brothers. \n\nHe wrote *the novel.*\n→  ________________________________________\n",
+        "acceptedAnswers": [
+          "The novel was written by him"
+        ]
+      },
+      {
+        "tag": "영작",
+        "type": "sentence",
+        "answer": "The library could be easily found by Ann.",
+        "number": 40,
+        "question": "Rewrite the sentences that begin with the underlined parts as shown in the example below.\n<Example>\nThe Wright brothers invented *the airplane.*\n→ The airplan was invented by the Wright brothers. \n\n\nAnn could easily find *the library.*\n→  ________________________________________",
+        "acceptedAnswers": [
+          "The library could be easily found by Ann"
+        ]
+      },
+      {
+        "tag": "영작",
+        "type": "sentence",
+        "answer": "An old article was shown to me by her.",
+        "number": 41,
+        "question": "Rewrite the sentences that begin with the underlined parts as shown in the example below.\n<Example>\nThe Wright brothers invented *the airplane.*\n→ The airplan was invented by the Wright brothers. \n\n\nShe showed me *an old article.*\n→  ________________________________________",
+        "acceptedAnswers": [
+          "An old article was shown to me by her"
+        ]
+      },
+      {
+        "tag": "subParts",
+        "type": "multi_part",
+        "answer": "is played / are cleaned / are baked",
+        "number": 42,
+        "question": "다음 글의 빈칸 ①~③ 괄호 안에 주어진 단어를 이용하여 알맞게 각각 고쳐 쓰시오.\n\nEverything is strange in this world. The music ①(play) by the birds. The windows ②(clean) by the elephant. Cookies ③(bake) by the bear.",
+        "subParts": [
+          {
+            "label": "①",
+            "answer": "is played"
+          },
+          {
+            "label": "②",
+            "answer": "are cleaned"
+          },
+          {
+            "label": "③",
+            "answer": "are baked"
+          }
+        ]
+      },
+      {
+        "tag": "subParts",
+        "type": "multi_part",
+        "answer": "The fairy's dress was taken by the man / The bird's leg was broken in an accident",
+        "number": 43,
+        "question": "다음 전래동화에 관한 글을 읽고, 어법상 어색한 문장을 2개 찾아 바르게 고쳐 문장을 전체를 다시 쓰시오. (단, 정답은 고친문장만 이어서 쓸 것) ex) This song is loved by many people, The window was broken.\n\n(a) Kongjwi wasn't invited to the party.\n(b) The fairy's dress was took by the man.\n(c) The turtle was tricked by the rabbit.\n(d) The bird's leg was break in an accident.\n\n(1) 고친 문장:  ________________________________________\t\n\n(2) 고친 문장:  ________________________________________\t",
+        "subParts": [
+          {
+            "label": "(1)",
+            "answer": "The fairy's dress was taken by the man"
+          },
+          {
+            "label": "(2)",
+            "answer": "The bird's leg was broken in an accident"
+          }
+        ],
+        "acceptedAnswers": [
+          "The fairy's dress was taken by the man, The bird's leg was broken in an accident"
+        ]
+      },
+      {
+        "tag": "subParts",
+        "type": "multi_part",
+        "answer": "His car was stopped by the police last night / The play lasted for more than two hours",
+        "number": 44,
+        "question": "다음 <보기>에서 어법상 어색한 부분을 2개 찾아 기호를 쓰고 바르게 고쳐 문장 전체를 다시 쓰시오. (단, 정답은 고친문장만 이어서 쓸 것) ex) This song is loved by many people, The window was broken.\n\n<보기>\n(a) His car is stopped by the police last night.\n(b) The play was lasted for more than two hours.\n(c) He has been elected president by people.\n(d) Christina's dogs will be taken good care of.\n(e) Those gentlemen were met by beautiful ladies.\n\n(1) 고친 문장:  ________________________________________\t\n\n(2) 고친 문장:  ________________________________________\t",
+        "subParts": [
+          {
+            "label": "(1)",
+            "answer": "His car was stopped by the police last night"
+          },
+          {
+            "label": "(2)",
+            "answer": "The play lasted for more than two hours"
+          }
+        ],
+        "acceptedAnswers": [
+          "His car was stopped by the police last night., The play lasted for more than two hours",
+          "His car was stopped by the police last night, The play lasted for more than two hours"
+        ]
+      },
+      {
+        "tag": "subParts",
+        "type": "multi_part",
+        "answer": "was invented by / is used by",
+        "number": 45,
+        "question": "다음 우리말과 일치하도록 괄호 안에 주어진 단어를 이용하여 문장을 완성하시오. \n(필요시 단어의 형태를 바꾸며 시제에 유의할 것) \n\n(1) 전구는 Thomas Edison에 의해 발명되었다.\n→ The light bulb _______ _______ _______ Thomas Edison. (invent)\n\n(2) 그것은 세계의 많은 사람들에 의해 사용된다.\n→ It _______ _______ _______ many people in the world. (use)",
+        "subParts": [
+          {
+            "label": "(1)",
+            "answer": "was invented by"
+          },
+          {
+            "label": "(2)",
+            "answer": "is used by"
+          }
+        ]
+      },
+      {
+        "tag": "subParts",
+        "type": "multi_part",
+        "answer": "was thrown / wasn't broken / she / cuts the grass",
+        "number": 46,
+        "question": "다음 두 문장의 의미가 같도록 할 때, 빈칸에 들어갈 알맞은 말을 쓰시오.\n\n(1) The cat threw the mouse.\n→ The mouse _______ _______ by the cat.\n\n(2) She didn't break the window.\n→ The window _______ _______ by _______.\n\n(3) The grass is cut by him once a week.\n→ He _______ _______ _______ once a week.",
+        "subParts": [
+          {
+            "label": "(1)",
+            "answer": "was thrown"
+          },
+          {
+            "label": "(2)-빈칸",
+            "answer": "wasn't broken",
+            "acceptedAnswers": [
+              "was not broken"
+            ]
+          },
+          {
+            "label": "(2)-by 뒤",
+            "answer": "she"
+          },
+          {
+            "label": "(3)",
+            "answer": "cuts the grass"
+          }
+        ],
+        "acceptedAnswers": [
+          "was thrown / was not broken / she / cuts the grass"
+        ]
+      },
+      {
+        "tag": "빈칸",
+        "type": "short_answer",
+        "answer": "written",
+        "number": 47,
+        "question": "다음 두 문장의 의미가 같도록 우리말과 일치하는 빈칸에 들어갈 알맞은 말을 쓰시오.\n\nCathy wrote a letter.\n→ A letter was _______ by Cathy.\n(번지가 Cathy에 의해서 쓰여 졌다.)\n\n※ 빈칸에 들어갈 말만 쓰시오."
+      },
+      {
+        "tag": "빈칸",
+        "type": "short_answer",
+        "answer": "was painted by",
+        "number": 48,
+        "question": "다음 우리말과 일치하도록 빈칸에 들어갈 알맞은 말을 쓰시오.\n\nA: Who painted the picture?\nB: The picture _______ _______ _______ Vincent van Gogh.\n(그 그림은 반센트 반 고흐에 의해 그려졌다.)\n\n※ 빈칸에 들어갈 말만 쓰시오."
+      },
+      {
+        "tag": "빈칸",
+        "type": "short_answer",
+        "answer": "were written by",
+        "number": 49,
+        "question": "다음 우리말과 일치하도록 빈칸에 들어갈 알맞은 말을 쓰시오.\n\nA: Who wrote Harry potter series?\nB: The books _______ _______ J. K. Rowling.\n(그 책들은 J. K. Rowling에 의해 쓰였다.)\n\n※ 빈칸에 들어갈 말만 쓰시오."
+      },
+      {
+        "tag": "단어배열",
+        "type": "sentence",
+        "answer": "was written by Mark Twain.",
+        "number": 50,
+        "question": "다음 문장을 <보기>와 같은 형태로 바꿔 쓰시오.\n\n<보기>\nEverybody loved Mario.\n→ Mario was loved by everybody.\n\nMark Twain wrote the book.\n→ The book _______________________________.\n\n※ 빈칸에 들어갈 말만 쓰시오.",
+        "acceptedAnswers": [
+          "was written by Mark Twain"
+        ]
+      },
+      {
+        "tag": "subParts",
+        "type": "multi_part",
+        "answer": "We should recycle cans and plastic bottles / Cans and plastic bottles should be recycled by us",
+        "number": 51,
+        "question": "다음 <보기>에 주어진 단어들을 사용하여 수동태 문장을 만드시오. \n(필요시 단어를 추가하거나 형태를 변형할 것)\n\n<보기>\nwe / recycle / cans and plastic bottles / should",
+        "subParts": [
+          {
+            "label": "능동태",
+            "answer": "We should recycle cans and plastic bottles"
+          },
+          {
+            "label": "수동태",
+            "answer": "Cans and plastic bottles should be recycled by us"
+          }
+        ],
+        "acceptedAnswers": [
+          "Cans and plastic bottles should be recycled by us",
+          "Cans and plastic bottles should be recycled"
+        ]
+      },
+      {
+        "tag": "오류수정",
+        "type": "sentence",
+        "answer": "was built in 1930",
+        "number": 52,
+        "question": "다음 문장을 주어진 낱말로 시작하는 문장으로 고쳐 쓰시오.\n\nSomebody built this house in 1930.\n→ This house _______________.\n\n※ 빈칸에 들어갈 말만 쓰시오."
+      },
+      {
+        "tag": "subParts",
+        "type": "multi_part",
+        "answer": "were taken by my mother / was broken by / was made",
+        "number": 53,
+        "question": "다음 빈칸에 들어갈 알맞은 말을 수동태를 사용하여 쓰시오.\n\n(1) My mother took these pictures.\n→ These pictures _______________.\n\n(2) A: Who broke the window?\nB: It _______________ Jim.\n\n(3) A: Who made the cake?\nB: It _______________ by Mim.",
+        "subParts": [
+          {
+            "label": "(1)",
+            "answer": "were taken by my mother"
+          },
+          {
+            "label": "(2)",
+            "answer": "was broken by"
+          },
+          {
+            "label": "(3)",
+            "answer": "was made"
+          }
+        ]
+      },
+      {
+        "tag": "단어배열",
+        "type": "sentence",
+        "answer": "The early worm is caught by the early bird.",
+        "number": 54,
+        "question": "다음 <보기>를 참고하여 주어진 우리말과 일치하도록 영작하시오.\n\n<보기>\n일찍 일어나는 새가 벌레를 잡는다.\n→ The early bird catches the worm.\n\n일찍 일어나는 벌레는 일찍 일어나는 새에게 먹힌다.\n\n→ _______________ (9단어)",
+        "acceptedAnswers": [
+          "The early worm is caught by the early bird"
+        ]
+      },
+      {
+        "tag": "subParts",
+        "type": "multi_part",
+        "answer": "was written / broke / could be built",
+        "number": 55,
+        "question": "다음 두 문장이 같은 의미가 되도록 괄호 안의 지시에 따라 바꾸시오.\n\n(1) She wrote Harry potter. (수동태로)\n→ Harry potter _______________ by her.\n\n(2) The window is broken by Tom. (능동태로)\n→ Tom _______________ the window.\n\n(3) They could build the school. (수동태로)\n→ The school _______________ by them.",
+        "subParts": [
+          {
+            "label": "(1)",
+            "answer": "was written"
+          },
+          {
+            "label": "(2)",
+            "answer": "broke"
+          },
+          {
+            "label": "(3)",
+            "answer": "could be built"
+          }
+        ]
+      },
+      {
+        "tag": "subParts",
+        "type": "multi_part",
+        "answer": "is made / was woken up / will be caught by the police",
+        "number": 56,
+        "question": "다음 주어진 문장의 주어를 바꿔 쓸 때, 빈칸에 들어갈 알맞은 말을 쓰시오.\n\n(1) Tom makes a robot.\n→ A robot _______________ by Tom.\n\n(2) A loud noise woke me up in the morning.\n→ I _______________ in the morning.\n\n(3) The police will catch the man.\n→ The man _______________.",
+        "subParts": [
+          {
+            "label": "(1)",
+            "answer": "is made"
+          },
+          {
+            "label": "(2)",
+            "answer": "was woken up"
+          },
+          {
+            "label": "(3)",
+            "answer": "will be caught by the police",
+            "acceptedAnswers": [
+              "will be caught"
+            ]
+          }
+        ]
+      },
+      {
+        "tag": "단어배열",
+        "type": "sentence",
+        "answer": "Many kinds of fish are caught by fishermen.",
+        "number": 57,
+        "question": "다음 문장을 <보기>와 같은 형태로 바꿔 쓰시오.\n\n<보기>\nThe girl opens the window.\n→ The window is opened by the girl.\n\nFishermen catch many kinds of fish.\n→ _______________\n\n*fishermen: 어부들",
+        "acceptedAnswers": [
+          "Many kinds of fish are caught by fishermen"
+        ]
+      },
+      {
+        "tag": "단어배열",
+        "type": "sentence",
+        "answer": "Hamlet and King Lear were written by him.",
+        "number": 58,
+        "question": "다음 문장을 <보기>와 같은 형태로 바꿔 쓰시오.\n\n<보기>\nJames took the picture.\n→ The picture was taken by James.\n\nHe wrote Hamlet and King Lear.\n→ _______________",
+        "acceptedAnswers": [
+          "Hamlet and King Lear were written by him"
+        ]
+      },
+      {
+        "tag": "단어배열",
+        "type": "sentence",
+        "answer": "He was heard to sing by us.",
+        "number": 59,
+        "question": "다음 문장을 <보기>와 같은 형태로 바꿔 쓰시오.\n\n<보기>\nI saw a boy play the piano.\n→ A boy was seen to play the piano by me.\n\nWe heard him sing.\n→ _______________",
+        "acceptedAnswers": [
+          "He was heard to sing by us"
+        ]
+      },
+      {
+        "tag": "subParts",
+        "type": "multi_part",
+        "answer": "The magazine is read by my cousin / Mark Chagall painted I and the Village in 1911 / This book was not written by Shakespeare",
+        "number": 60,
+        "question": "다음 문장을 지시에 맞게 바꿔 쓰시오.\n\n(1) My cousin reads the magazine. (수동태)\n→ _______________\n\n(2) I and the Village was painted by Mark Chagall in 1911. (능동태)\n→ _______________\n\n(3) Shakespeare wrote this book. (부정 수동태)\n→ _______________",
+        "subParts": [
+          {
+            "label": "(1) 수동태",
+            "answer": "The magazine is read by my cousin"
+          },
+          {
+            "label": "(2) 능동태",
+            "answer": "Mark Chagall painted I and the Village in 1911"
+          },
+          {
+            "label": "(3) 부정 수동태",
+            "answer": "This book was not written by Shakespeare",
+            "acceptedAnswers": [
+              "This book wasn't written by Shakespeare"
+            ]
+          }
+        ],
+        "acceptedAnswers": [
+          "The magazine is read by my cousin / Mark Chagall painted I and the Village in 1911 / This book wasn't written by Shakespeare"
+        ]
+      },
+      {
+        "tag": "subParts",
+        "type": "multi_part",
+        "answer": "Dad made the soup / The soup was made by dad",
+        "number": 61,
+        "question": "다음 우리말과 일치하도록 괄호 안의 말을 사용하여 어법상 맞게 영작하시오.\n\n그 수프는 아빠가 만들었다. (make, dad)\n\n(능동태) _______________\n\n(수동태) _______________",
+        "subParts": [
+          {
+            "label": "능동태",
+            "answer": "Dad made the soup"
+          },
+          {
+            "label": "수동태",
+            "answer": "The soup was made by dad"
+          }
+        ]
+      },
+      {
+        "tag": "영작",
+        "type": "sentence",
+        "answer": "are cut down to make paper",
+        "number": 62,
+        "question": "다음 우리말과 일치하도록 괄호 안에 주어진 단어를 모두 사용하여 영작하시오. (필요시 단어를 변형할 것)\n\n많은 나무가 종이를 만들기 위해 베어집니다.\n(cut down, to, paper, make, be)\n\n→ Many trees _______________.\n\n※ 빈칸에 들어갈 말만 쓰시오.",
+        "acceptedAnswers": [
+          "are cut down to be made into paper"
+        ]
+      },
+      {
+        "tag": "subParts",
+        "type": "multi_part",
+        "answer": "was built by the Romans / was caught by the policeman",
+        "number": 63,
+        "question": "다음 우리말과 일치하도록 <조건>에 맞게 문장을 완성하시오.\n\n<조건>\n1. 주어진 단어를 모두 완성할 것\n2. 수동태 구문으로 완성할 것\n\n(1) 콜로세움은 로마인들에 의해 지어졌다.\nColosseum _______________.\n(was, build, the Romans)\n\n(2) 그 도둑은 경찰에 의해 잡혔다.\nThe thief _______________.\n(was, catch, the policeman)",
+        "subParts": [
+          {
+            "label": "(1)",
+            "answer": "was built by the Romans"
+          },
+          {
+            "label": "(2)",
+            "answer": "was caught by the policeman"
+          }
+        ]
+      },
+      {
+        "tag": "subParts",
+        "type": "multi_part",
+        "answer": "built the house / was built by my father",
+        "number": 64,
+        "question": "다음 <보기>와 같이 질문에 맞는 답을 쓰시오.\n\n<보기>\nA: Who invented the light bulb?\nB: (1) Thomas Edison invented the light bulb.\n   (2) The light bulb was invented by Thomas Edison.\n\nA: Who built the house?\nB: (1) My father _______________.\n   (2) The house _______________.",
+        "subParts": [
+          {
+            "label": "(1)",
+            "answer": "built the house"
+          },
+          {
+            "label": "(2)",
+            "answer": "was built by my father"
+          }
+        ]
+      },
+      {
+        "tag": "subParts",
+        "type": "multi_part",
+        "answer": "are collected / are given",
+        "number": 65,
+        "question": "다음 글의 괄호 ①, ②안의 단어를 어법에 맞게 고치시오. (현재형으로 쓸 것)\n\n<Used Clothes Wanted>\nDo you think you are too big to wear your old clothes? Don't throw them away! Donate your clothes. Used clothes ①(collect) at our center. Then they ②(give) to children who are too poor to buy clothes.\n\n① (collect) → _______________\n\n② (give) → _______________",
+        "subParts": [
+          {
+            "label": "①",
+            "answer": "are collected"
+          },
+          {
+            "label": "②",
+            "answer": "are given"
+          }
+        ]
+      },
+      {
+        "tag": "영작",
+        "type": "sentence",
+        "answer": "The yard was cleaned by a mouse yesterday.",
+        "number": 66,
+        "question": "다음 주어진 그림의 상황을 수동태 문장으로 표현하시오.(단, 주어진 단어를 반드시 활용할 것)\n(그림: 마당을 청소하고 있는 쥐) \n\n→ The yard _______________ (a mouse, clean, be, yesterday)",
+        "acceptedAnswers": [
+          "The yard was cleaned by a mouse yesterday"
+        ]
+      },
+      {
+        "tag": "영작",
+        "type": "sentence",
+        "answer": "It was directed by Steven Spielberg.",
+        "number": 67,
+        "question": "다음 대화를 읽고 물음에 대한 답을 It으로 시작하는 완전한 수동태 문장으로 쓰시오.\n\nA: What is your favorite movie?\nB: My favorite movie is Jurassic Park.\nA: Oh, I've seen it before. Steven Spielberg directed it, didn't he?\nB: Yes, he did. I want to see all of his movies someday.\n\nA: Who directed Jurassic Park?\nB: It ___ ___ ___ ___ ___",
+        "acceptedAnswers": [
+          "It was directed by Steven Spielberg"
+        ]
+      }
+    ]
+  },
+  "sheet_eceb5976-827b-4054-affc-4c4efecf620f": {
+    "questions": [
+      {
+        "tag": "오류수정",
+        "type": "sentence",
+        "answer": "Where was Ron born?",
+        "number": 1,
+        "question": "다음 밑줄 친 부분을 바르게 고쳐 쓰시오. \n\nA: Where *did* Ron born?\nB: He was born in Fantasy Village."
+      },
+      {
+        "tag": "오류수정",
+        "type": "sentence",
+        "answer": "Was the letter delivered by Mr. Smith?",
+        "number": 2,
+        "question": "다음 밑줄 친 부분을 바르게 고쳐 쓰시오. \n\nA: *Did* the letter deliver by Mr. Smith?\nB: No, it *didn't*. It was delivered by a bird.",
+        "acceptedAnswers": [
+          "Was the letter delivered by Mr. Smith?\nNo, it wasn't. It was delivered by a bird",
+          "Was the letter delivered by Mr. Smith? No, it wasn't. It was delivered by a bird."
+        ]
+      },
+      {
+        "tag": "오류수정",
+        "type": "sentence",
+        "answer": "Ron was invited to Wonka Magic School.",
+        "number": 3,
+        "question": "다음 밑줄 친 부분을 바르게 고쳐 쓰시오. \n\nA: What was written in the letter?\nB: Ron *invited* to Wonka Magic School.",
+        "acceptedAnswers": [
+          "Ron was invited to Wonka Magic School"
+        ]
+      },
+      {
+        "tag": "빈칸",
+        "type": "short_answer",
+        "answer": "is interested in",
+        "number": 4,
+        "question": "위의 <보기>에서 알맞은 표현을 골라 <보기>에서 알맞은 표현을 골라 적절한 형태로 고쳐 문장을 완성하시오. \n\n<보기>\nbe satisfied / be scared / be made / be interested\n\nJoy takes piano and violin lesson these days. She _______ _______ _______ music.\n\n※ 빈칸에 들어갈 말만 쓰시오."
+      },
+      {
+        "tag": "빈칸",
+        "type": "short_answer",
+        "answer": "is scared of",
+        "number": 5,
+        "question": "위의 <보기>에서 알맞은 표현을 골라 <보기>에서 알맞은 표현을 골라 적절한 형태로 고쳐 문장을 완성하시오. \n\n<보기>\nbe satisfied / be scared / be made / be interested\n\n\nWe leave a light on in our son's bedroom at night because he _______ _______ _______ the dark.\n\n※ 빈칸에 들어갈 말만 쓰시오."
+      },
+      {
+        "tag": "영작",
+        "type": "sentence",
+        "answer": "was completely destroyed by the car",
+        "number": 6,
+        "question": "다음 두 문장이 같은 뜻이 되도록 빈칸에 알맞은 문장을 쓰시오. \n\nThe car completely destroyed my motorbike.\n= My motorbike _______________________\n\n※ 빈칸에 들어갈 말만 쓰시오."
+      },
+      {
+        "tag": "영작",
+        "type": "sentence",
+        "answer": "was awarded the second prize",
+        "number": 7,
+        "question": "다음 두 문장이 같은 뜻이 되도록 빈칸에 알맞은 문장을 쓰시오. \n\nSecond prize was awarded to an unknown author from Patras.\n= An unknown author from Patras _______ _______ _______\n\n※ 빈칸에 들어갈 말만 쓰시오."
+      },
+      {
+        "tag": "영작",
+        "type": "sentence",
+        "answer": "Many polar bears were killed by a hunter.",
+        "number": 8,
+        "question": "A hunter killed many polar bears.\n\n위 문장을 수동태로 알맞게 전환하시오.",
+        "acceptedAnswers": [
+          "Many polar bears were killed by a hunter"
+        ]
+      },
+      {
+        "tag": "영작",
+        "type": "sentence",
+        "answer": "A lot of disasters are caused by global warming.",
+        "number": 9,
+        "question": "The global warming causes a lot of disasters.\n\n위 문장을 수동태로 알맞게 전환하시오.",
+        "acceptedAnswers": [
+          "A lot of disasters are caused by global warming"
+        ]
+      },
+      {
+        "tag": "빈칸",
+        "type": "short_answer",
+        "answer": "were made",
+        "number": 10,
+        "question": "다음 각 문장의 밑줄 친 부분을 주어로 하여 아래의 문장을 완성해 봅시다.\nJane made *these cookies.* \nEric broke *the window.*\nMina wrote *this letter.*\nThe Wright brothers invented *the airplane.* \n\nThese cookies _______ _______ by Jane.\n\n※ 빈칸에 들어갈 말만 쓰시오."
+      },
+      {
+        "tag": "빈칸",
+        "type": "short_answer",
+        "answer": "was broken",
+        "number": 11,
+        "question": "다음 각 문장의 밑줄 친 부분을 주어로 하여 아래의 문장을 완성해 봅시다.\nJane made *these cookies.* \nEric broke *the window.*\nMina wrote *this letter.*\nThe Wright brothers invented *the airplane.* \n\nThe window _______ _______ by Eric.\n\n※ 빈칸에 들어갈 말만 쓰시오."
+      },
+      {
+        "tag": "빈칸",
+        "type": "short_answer",
+        "answer": "was written",
+        "number": 12,
+        "question": "다음 각 문장의 밑줄 친 부분을 주어로 하여 아래의 문장을 완성해 봅시다.\nJane made *these cookies.* \nEric broke *the window.*\nMina wrote *this letter.*\nThe Wright brothers invented *the airplane.* \n\nThis letter _______ _______ by Mina.\n\n※ 빈칸에 들어갈 말만 쓰시오."
+      },
+      {
+        "tag": "빈칸",
+        "type": "short_answer",
+        "answer": "was invented",
+        "number": 13,
+        "question": "다음 각 문장의 밑줄 친 부분을 주어로 하여 아래의 문장을 완성해 봅시다.\nJane made *these cookies.* \nEric broke *the window.*\nMina wrote *this letter.*\nThe Wright brothers invented *the airplane.* \n\nThe airplane _______ _______ by the Wright brothers.\n\n※ 빈칸에 들어갈 말만 쓰시오."
+      },
+      {
+        "tag": "subParts",
+        "type": "multi_part",
+        "answer": "was born / Korea / 1962 / was loved / many Sudanese people / Sudan / was called / the Schweizer of Sudan",
+        "number": 14,
+        "question": "다음 인물을 소개하는 글이 되도록 주어진 정보와 괄호 안에 단어를 이용하여 빈칸을 완성하시오. \n\nLee Taeseok\n\nBorn: Korea, 1962\nHe did volunteer work in Sudan. Many Sudanese people loved him. People call him, 'the Schweizer of Sudan.'\n\nHe ________(bear) in ________ in ________.\nHe ________(love) by ________ in __________.\nHe worked as hard as other volunteers in Sudan. He ________(call) .",
+        "subParts": [
+          {
+            "label": "(1) bear→",
+            "answer": "was born"
+          },
+          {
+            "label": "(2) 나라",
+            "answer": "Korea"
+          },
+          {
+            "label": "(3) 년도",
+            "answer": "1962"
+          },
+          {
+            "label": "(4) love→",
+            "answer": "was loved"
+          },
+          {
+            "label": "(5) 누구에게",
+            "answer": "many Sudanese people"
+          },
+          {
+            "label": "(6) 어디서",
+            "answer": "Sudan"
+          },
+          {
+            "label": "(7) call→",
+            "answer": "was called"
+          },
+          {
+            "label": "(8) 별명",
+            "answer": "the Schweizer of Sudan",
+            "acceptedAnswers": [
+              "'the Schweizer of Sudan'",
+              "\"the Schweizer of Sudan\""
+            ]
+          }
+        ]
+      },
+      {
+        "tag": "subParts",
+        "type": "multi_part",
+        "answer": "created / read / sent / taught / Harry Potter",
+        "number": 15,
+        "question": "다음 빈칸에 알맞은 말을 골라 글을 완성하고, 누구에 관한 설명인지 추측하시오.\n\n<보기> read / send / create / teach\n\nThis character was _______ by J. K. Rowling. The books about him have been _______ by many people all over the world. He was _______ to a magic school. He was _______ how to fly and how to use magic.\n\nGuess who? _______",
+        "subParts": [
+          {
+            "label": "(1) create",
+            "answer": "created"
+          },
+          {
+            "label": "(2) read",
+            "answer": "read"
+          },
+          {
+            "label": "(3) send",
+            "answer": "sent"
+          },
+          {
+            "label": "(4) teach",
+            "answer": "taught"
+          },
+          {
+            "label": "(5) 인물",
+            "answer": "Harry Potter"
+          }
+        ]
+      },
+      {
+        "tag": "빈칸",
+        "type": "short_answer",
+        "answer": "is interested in",
+        "number": 16,
+        "question": "다음 괄호 안의 단어와 그에 어울리는 전치사를 이용하여 문장을 완성하시오. (단, by 제외)\n\nJohn _______ _______ education. (interest)\n\n※ 빈칸에 들어갈 말만 쓰시오."
+      },
+      {
+        "tag": "빈칸",
+        "type": "short_answer",
+        "answer": "was satisfied with",
+        "number": 17,
+        "question": "다음 괄호 안의 단어와 그에 어울리는 전치사를 이용하여 문장을 완성하시오. (단, by 제외)\n\nI _______ _______ _______ the result. (satisfy)\n\n※ 빈칸에 들어갈 말만 쓰시오."
+      },
+      {
+        "tag": "빈칸",
+        "type": "short_answer",
+        "answer": "were covered with",
+        "number": 18,
+        "question": "다음 괄호 안의 단어와 그에 어울리는 전치사를 이용하여 문장을 완성하시오. (단, by 제외)\n\nThe roads were very dangerous, because they _______ _______ _______ ice. (cover)\n\n※ 빈칸에 들어갈 말만 쓰시오."
+      },
+      {
+        "tag": "영작",
+        "type": "sentence",
+        "answer": "was pleased to receive",
+        "number": 19,
+        "question": "다음 괄호 안의 단어와 그에 어울리는 전치사를 이용하여 문장을 완성하시오. (단, by 제외)\n\nI _______ _______ _______ your letter yesterday. (please)\n\n※ 빈칸에 들어갈 말만 쓰시오."
+      },
+      {
+        "tag": "단어배열",
+        "type": "sentence",
+        "answer": "I was asked the way three times.",
+        "number": 20,
+        "question": "다음 <보기>와 같이 문장에서 밑줄 친 낱말을 생략하여 수동태 문장으로 다시 쓰시오. \n<보기> *You* have to fill in  an application form.\n→ An application form has to be filled in.\n\n*People* asked me the way three times.\n→ _______________________________",
+        "acceptedAnswers": [
+          "I was asked the way three times"
+        ]
+      },
+      {
+        "tag": "단어배열",
+        "type": "sentence",
+        "answer": "The apples are picked early in the morning.",
+        "number": 21,
+        "question": "다음 <보기>와 같이 문장에서 밑줄 친 낱말을 생략하여 수동태 문장으로 다시 쓰시오. \n<보기> You have to fill in  an application form.\n→ An application form has to be filled in.\n\n*The fruit-pickers* pick the apples early in the morning.\n→ _______________________________",
+        "acceptedAnswers": [
+          "The apples are picked early in the morning"
+        ]
+      },
+      {
+        "tag": "빈칸",
+        "type": "short_answer",
+        "answer": "was written",
+        "number": 22,
+        "question": "다음 빈칸에 괄호 안에 주어진 단어를 이용하여 알맞게 각각 고쳐 쓰시오. \n\nThere is a book on the desk. The book _______ _______ by Shakespeare. (write)\n\n※ 빈칸에 들어갈 말만 쓰시오."
+      },
+      {
+        "tag": "빈칸",
+        "type": "short_answer",
+        "answer": "was drawn",
+        "number": 23,
+        "question": "다음 빈칸에 괄호 안에 주어진 단어를 이용하여 알맞게 각각 고쳐 쓰시오. \n\nThere is a picture on the wall. It _______ _______ by Andy Warhol. (draw)\n\n※ 빈칸에 들어갈 말만 쓰시오."
+      },
+      {
+        "tag": "단어배열",
+        "type": "sentence",
+        "answer": "was painted by Vincent van Gogh",
+        "number": 24,
+        "question": "다음 <보기>를 참고하여 질문에 답하시오.\n<보기> \nTitle: The Starry Night\nArtist: Vincent van Gogh (1853~1890)\nPainted in 1889\n\nWho painted The Starry Night?\n→ The Starry Night _______________________\n\n※ 빈칸에 들어갈 말만 쓰시오."
+      },
+      {
+        "tag": "단어배열",
+        "type": "sentence",
+        "answer": "was born in 1853",
+        "number": 25,
+        "question": "다음 <보기>를 참고하여 질문에 답하시오.\n<보기> \nTitle: The Starry Night\nArtist: Vincent van Gogh (1853~1890)\nPainted in 1889\n\nWhen was Vincent van Gogh born?\n→ He _______________________\n\n※ 빈칸에 들어갈 말만 쓰시오."
+      },
+      {
+        "tag": "단어배열",
+        "type": "sentence",
+        "answer": "was painted in 1889",
+        "number": 26,
+        "question": "다음 <보기>를 참고하여 질문에 답하시오.\n<보기> \nTitle: The Starry Night\nArtist: Vincent van Gogh (1853~1890)\nPainted in 1889\n\nWhen did he paint The Starry Night?\n→ The Starry Night _______________________\n\n※ 빈칸에 들어갈 말만 쓰시오."
+      },
+      {
+        "tag": "기타",
+        "type": "sentence",
+        "answer": "was won by Claude Jennings",
+        "number": 27,
+        "question": "다음 괄호 안에 있는 단어들을 이용하여 지시된 시제로 알맞게 쓰시오.\n\nDid you hear about the quiz competition?\nIt (Claude Jennings / win: 과거)"
+      },
+      {
+        "tag": "기타",
+        "type": "sentence",
+        "answer": "did a parachute jump last week",
+        "number": 28,
+        "question": "다음 괄호 안에 있는 단어들을 이용하여 지시된 시제로 알맞게 쓰시오.\n\nYou know Mrs. Miles?\nShe (do / a parachute jump / last week: 과거)"
+      },
+      {
+        "tag": "단어",
+        "type": "short_answer",
+        "answer": "likes Jessica",
+        "number": 29,
+        "question": "다음 괄호 안에 있는 단어들을 이용하여 지시된 시제로 알맞게 쓰시오.\n\nDid I tell you about Andrew?\nHe (like / Jessica: 현재)"
+      },
+      {
+        "tag": "기타",
+        "type": "sentence",
+        "answer": "was seen by five people",
+        "number": 30,
+        "question": "다음 괄호 안에 있는 단어들을 이용하여 지시된 시제로 알맞게 쓰시오.\n\nDid you hear about the ghost?\nIt (five people / see: 과거)"
+      },
+      {
+        "tag": "기타",
+        "type": "sentence",
+        "answer": "went to Florida last month",
+        "number": 31,
+        "question": "다음 괄호 안에 있는 단어들을 이용하여 지시된 시제로 알맞게 쓰시오.\n\nYou remember Claire?\nShe (go / to Florida / last month: 과거)"
+      },
+      {
+        "tag": "단어배열",
+        "type": "sentence",
+        "answer": "When was the Eiffel Tower built?",
+        "number": 32,
+        "question": "다음 우리말에 맞도록 괄호 안의 단어를 순서대로 배열하시오. (필요시 형태를 변형할 것)\n\n에펠탑은 언제 지어졌나?\n(Eiffel Tower / when / built / was / the)"
+      },
+      {
+        "tag": "단어배열",
+        "type": "sentence",
+        "answer": "The movie has been loved by many people.",
+        "number": 33,
+        "question": "다음 우리말에 맞도록 괄호 안의 단어를 순서대로 배열하시오. (필요시 형태를 변형할 것)\n\n그 영화는 많은 사람들에 의해 사랑받아오고 있다.\n(the / love / movie / by / have / people / be / many)",
+        "acceptedAnswers": [
+          "The movie has been loved by many people"
+        ]
+      },
+      {
+        "tag": "단어배열",
+        "type": "sentence",
+        "answer": "A lot of trees are cut down to make paper.",
+        "number": 34,
+        "question": "다음 우리말에 맞도록 괄호 안의 단어를 순서대로 배열하시오. (필요시 형태를 변형할 것)\n\n많은 나무들이 종이를 만들기 위해 베어진다.\n(a / to / make / trees / of / are / cut / lot / down / paper)",
+        "acceptedAnswers": [
+          "A lot of trees are cut down to make paper"
+        ]
+      },
+      {
+        "tag": "단어배열",
+        "type": "sentence",
+        "answer": "The window was broken by Junsu.",
+        "number": 35,
+        "question": "다음 밑줄 친 부분으로 시작하여 문장을 다시 쓰시오.\n<보기> \nThe Wright invented *the airplane.*\n→ The airplane was invented by the Wright brothers.\n\nJunsu broke *the window.*\n→  ________________________________________",
+        "acceptedAnswers": [
+          "The window was broken by Junsu"
+        ]
+      },
+      {
+        "tag": "단어배열",
+        "type": "sentence",
+        "answer": "These cookies were made by Ann.",
+        "number": 36,
+        "question": "다음 밑줄 친 부분으로 시작하여 문장을 다시 쓰시오.\n<보기> \nThe Wright invented *the airplane.*\n→ The airplane was invented by the Wright brothers.\n\nAnn made *these cookies.*\n→  ________________________________________",
+        "acceptedAnswers": [
+          "These cookies were made by Ann"
+        ]
+      },
+      {
+        "tag": "단어배열",
+        "type": "sentence",
+        "answer": "This letter was written by Cathy.",
+        "number": 37,
+        "question": "다음 밑줄 친 부분으로 시작하여 문장을 다시 쓰시오.\n<보기> \nThe Wright invented *the airplane.*\n→ The airplane was invented by the Wright brothers.\n\nCathy wrote *this letter.*\n→  ________________________________________",
+        "acceptedAnswers": [
+          "This letter was written by Cathy"
+        ]
+      },
+      {
+        "tag": "영작",
+        "type": "sentence",
+        "answer": "Hanguel was made by King Sejong the Great in 1443.",
+        "number": 38,
+        "question": "Complete the sentence with the given words as shown in the example below.\n\n<Example>\n(the Taj Mahal, build, Shah Jahan)\n→ The Taj Mahal was built by Shah Jahan. \n\n(King Sejong the Great, make, Hanguel, 1443)\n→  _______________________________________ ",
+        "acceptedAnswers": [
+          "Hanguel was made by King Sejong the Great in 1443"
+        ]
+      },
+      {
+        "tag": "영작",
+        "type": "sentence",
+        "answer": "The novel was written by him.",
+        "number": 39,
+        "question": "Rewrite the sentences that begin with the underlined parts as shown in the example below.\n<Example>\nThe Wright brothers invented *the airplane.*\n→ The airplan was invented by the Wright brothers. \n\nHe wrote *the novel.*\n→  ________________________________________\n",
+        "acceptedAnswers": [
+          "The novel was written by him"
+        ]
+      },
+      {
+        "tag": "영작",
+        "type": "sentence",
+        "answer": "The library could be easily found by Ann.",
+        "number": 40,
+        "question": "Rewrite the sentences that begin with the underlined parts as shown in the example below.\n<Example>\nThe Wright brothers invented *the airplane.*\n→ The airplan was invented by the Wright brothers. \n\n\nAnn could easily find *the library.*\n→  ________________________________________",
+        "acceptedAnswers": [
+          "The library could be easily found by Ann"
+        ]
+      },
+      {
+        "tag": "영작",
+        "type": "sentence",
+        "answer": "An old article was shown to me by her.",
+        "number": 41,
+        "question": "Rewrite the sentences that begin with the underlined parts as shown in the example below.\n<Example>\nThe Wright brothers invented *the airplane.*\n→ The airplan was invented by the Wright brothers. \n\n\nShe showed me *an old article.*\n→  ________________________________________",
+        "acceptedAnswers": [
+          "An old article was shown to me by her"
+        ]
+      },
+      {
+        "tag": "subParts",
+        "type": "multi_part",
+        "answer": "is played / are cleaned / are baked",
+        "number": 42,
+        "question": "다음 글의 빈칸 ①~③ 괄호 안에 주어진 단어를 이용하여 알맞게 각각 고쳐 쓰시오.\n\nEverything is strange in this world. The music ①(play) by the birds. The windows ②(clean) by the elephant. Cookies ③(bake) by the bear.",
+        "subParts": [
+          {
+            "label": "①",
+            "answer": "is played"
+          },
+          {
+            "label": "②",
+            "answer": "are cleaned"
+          },
+          {
+            "label": "③",
+            "answer": "are baked"
+          }
+        ]
+      },
+      {
+        "tag": "subParts",
+        "type": "multi_part",
+        "answer": "The fairy's dress was taken by the man / The bird's leg was broken in an accident",
+        "number": 43,
+        "question": "다음 전래동화에 관한 글을 읽고, 어법상 어색한 문장을 2개 찾아 바르게 고쳐 문장을 전체를 다시 쓰시오. (단, 정답은 고친문장만 이어서 쓸 것) ex) This song is loved by many people, The window was broken.\n\n(a) Kongjwi wasn't invited to the party.\n(b) The fairy's dress was took by the man.\n(c) The turtle was tricked by the rabbit.\n(d) The bird's leg was break in an accident.\n\n(1) 고친 문장:  ________________________________________\t\n\n(2) 고친 문장:  ________________________________________\t",
+        "subParts": [
+          {
+            "label": "(1)",
+            "answer": "The fairy's dress was taken by the man"
+          },
+          {
+            "label": "(2)",
+            "answer": "The bird's leg was broken in an accident"
+          }
+        ],
+        "acceptedAnswers": [
+          "The fairy's dress was taken by the man, The bird's leg was broken in an accident"
+        ]
+      },
+      {
+        "tag": "subParts",
+        "type": "multi_part",
+        "answer": "His car was stopped by the police last night / The play lasted for more than two hours",
+        "number": 44,
+        "question": "다음 <보기>에서 어법상 어색한 부분을 2개 찾아 기호를 쓰고 바르게 고쳐 문장 전체를 다시 쓰시오. (단, 정답은 고친문장만 이어서 쓸 것) ex) This song is loved by many people, The window was broken.\n\n<보기>\n(a) His car is stopped by the police last night.\n(b) The play was lasted for more than two hours.\n(c) He has been elected president by people.\n(d) Christina's dogs will be taken good care of.\n(e) Those gentlemen were met by beautiful ladies.\n\n(1) 고친 문장:  ________________________________________\t\n\n(2) 고친 문장:  ________________________________________\t",
+        "subParts": [
+          {
+            "label": "(1)",
+            "answer": "His car was stopped by the police last night"
+          },
+          {
+            "label": "(2)",
+            "answer": "The play lasted for more than two hours"
+          }
+        ],
+        "acceptedAnswers": [
+          "His car was stopped by the police last night., The play lasted for more than two hours",
+          "His car was stopped by the police last night, The play lasted for more than two hours"
+        ]
+      },
+      {
+        "tag": "subParts",
+        "type": "multi_part",
+        "answer": "was invented by / is used by",
+        "number": 45,
+        "question": "다음 우리말과 일치하도록 괄호 안에 주어진 단어를 이용하여 문장을 완성하시오. \n(필요시 단어의 형태를 바꾸며 시제에 유의할 것) \n\n(1) 전구는 Thomas Edison에 의해 발명되었다.\n→ The light bulb _______ _______ _______ Thomas Edison. (invent)\n\n(2) 그것은 세계의 많은 사람들에 의해 사용된다.\n→ It _______ _______ _______ many people in the world. (use)",
+        "subParts": [
+          {
+            "label": "(1)",
+            "answer": "was invented by"
+          },
+          {
+            "label": "(2)",
+            "answer": "is used by"
+          }
+        ]
+      },
+      {
+        "tag": "subParts",
+        "type": "multi_part",
+        "answer": "was thrown / wasn't broken / she / cuts the grass",
+        "number": 46,
+        "question": "다음 두 문장의 의미가 같도록 할 때, 빈칸에 들어갈 알맞은 말을 쓰시오.\n\n(1) The cat threw the mouse.\n→ The mouse _______ _______ by the cat.\n\n(2) She didn't break the window.\n→ The window _______ _______ by _______.\n\n(3) The grass is cut by him once a week.\n→ He _______ _______ _______ once a week.",
+        "subParts": [
+          {
+            "label": "(1)",
+            "answer": "was thrown"
+          },
+          {
+            "label": "(2)-빈칸",
+            "answer": "wasn't broken",
+            "acceptedAnswers": [
+              "was not broken"
+            ]
+          },
+          {
+            "label": "(2)-by 뒤",
+            "answer": "she"
+          },
+          {
+            "label": "(3)",
+            "answer": "cuts the grass"
+          }
+        ],
+        "acceptedAnswers": [
+          "was thrown / was not broken / she / cuts the grass"
+        ]
+      },
+      {
+        "tag": "빈칸",
+        "type": "short_answer",
+        "answer": "written",
+        "number": 47,
+        "question": "다음 두 문장의 의미가 같도록 우리말과 일치하는 빈칸에 들어갈 알맞은 말을 쓰시오.\n\nCathy wrote a letter.\n→ A letter was _______ by Cathy.\n(번지가 Cathy에 의해서 쓰여 졌다.)\n\n※ 빈칸에 들어갈 말만 쓰시오."
+      },
+      {
+        "tag": "빈칸",
+        "type": "short_answer",
+        "answer": "was painted by",
+        "number": 48,
+        "question": "다음 우리말과 일치하도록 빈칸에 들어갈 알맞은 말을 쓰시오.\n\nA: Who painted the picture?\nB: The picture _______ _______ _______ Vincent van Gogh.\n(그 그림은 반센트 반 고흐에 의해 그려졌다.)\n\n※ 빈칸에 들어갈 말만 쓰시오."
+      },
+      {
+        "tag": "빈칸",
+        "type": "short_answer",
+        "answer": "were written by",
+        "number": 49,
+        "question": "다음 우리말과 일치하도록 빈칸에 들어갈 알맞은 말을 쓰시오.\n\nA: Who wrote Harry potter series?\nB: The books _______ _______ J. K. Rowling.\n(그 책들은 J. K. Rowling에 의해 쓰였다.)\n\n※ 빈칸에 들어갈 말만 쓰시오."
+      },
+      {
+        "tag": "단어배열",
+        "type": "sentence",
+        "answer": "was written by Mark Twain.",
+        "number": 50,
+        "question": "다음 문장을 <보기>와 같은 형태로 바꿔 쓰시오.\n\n<보기>\nEverybody loved Mario.\n→ Mario was loved by everybody.\n\nMark Twain wrote the book.\n→ The book _______________________________.\n\n※ 빈칸에 들어갈 말만 쓰시오.",
+        "acceptedAnswers": [
+          "was written by Mark Twain"
+        ]
+      },
+      {
+        "tag": "subParts",
+        "type": "multi_part",
+        "answer": "We should recycle cans and plastic bottles / Cans and plastic bottles should be recycled by us",
+        "number": 51,
+        "question": "다음 <보기>에 주어진 단어들을 사용하여 수동태 문장을 만드시오. \n(필요시 단어를 추가하거나 형태를 변형할 것)\n\n<보기>\nwe / recycle / cans and plastic bottles / should",
+        "subParts": [
+          {
+            "label": "능동태",
+            "answer": "We should recycle cans and plastic bottles"
+          },
+          {
+            "label": "수동태",
+            "answer": "Cans and plastic bottles should be recycled by us"
+          }
+        ],
+        "acceptedAnswers": [
+          "Cans and plastic bottles should be recycled by us",
+          "Cans and plastic bottles should be recycled"
+        ]
+      },
+      {
+        "tag": "오류수정",
+        "type": "sentence",
+        "answer": "was built in 1930",
+        "number": 52,
+        "question": "다음 문장을 주어진 낱말로 시작하는 문장으로 고쳐 쓰시오.\n\nSomebody built this house in 1930.\n→ This house _______________.\n\n※ 빈칸에 들어갈 말만 쓰시오."
+      },
+      {
+        "tag": "subParts",
+        "type": "multi_part",
+        "answer": "were taken by my mother / was broken by / was made",
+        "number": 53,
+        "question": "다음 빈칸에 들어갈 알맞은 말을 수동태를 사용하여 쓰시오.\n\n(1) My mother took these pictures.\n→ These pictures _______________.\n\n(2) A: Who broke the window?\nB: It _______________ Jim.\n\n(3) A: Who made the cake?\nB: It _______________ by Mim.",
+        "subParts": [
+          {
+            "label": "(1)",
+            "answer": "were taken by my mother"
+          },
+          {
+            "label": "(2)",
+            "answer": "was broken by"
+          },
+          {
+            "label": "(3)",
+            "answer": "was made"
+          }
+        ]
+      },
+      {
+        "tag": "단어배열",
+        "type": "sentence",
+        "answer": "The early worm is caught by the early bird.",
+        "number": 54,
+        "question": "다음 <보기>를 참고하여 주어진 우리말과 일치하도록 영작하시오.\n\n<보기>\n일찍 일어나는 새가 벌레를 잡는다.\n→ The early bird catches the worm.\n\n일찍 일어나는 벌레는 일찍 일어나는 새에게 먹힌다.\n\n→ _______________ (9단어)",
+        "acceptedAnswers": [
+          "The early worm is caught by the early bird"
+        ]
+      },
+      {
+        "tag": "subParts",
+        "type": "multi_part",
+        "answer": "was written / broke / could be built",
+        "number": 55,
+        "question": "다음 두 문장이 같은 의미가 되도록 괄호 안의 지시에 따라 바꾸시오.\n\n(1) She wrote Harry potter. (수동태로)\n→ Harry potter _______________ by her.\n\n(2) The window is broken by Tom. (능동태로)\n→ Tom _______________ the window.\n\n(3) They could build the school. (수동태로)\n→ The school _______________ by them.",
+        "subParts": [
+          {
+            "label": "(1)",
+            "answer": "was written"
+          },
+          {
+            "label": "(2)",
+            "answer": "broke"
+          },
+          {
+            "label": "(3)",
+            "answer": "could be built"
+          }
+        ]
+      },
+      {
+        "tag": "subParts",
+        "type": "multi_part",
+        "answer": "is made / was woken up / will be caught by the police",
+        "number": 56,
+        "question": "다음 주어진 문장의 주어를 바꿔 쓸 때, 빈칸에 들어갈 알맞은 말을 쓰시오.\n\n(1) Tom makes a robot.\n→ A robot _______________ by Tom.\n\n(2) A loud noise woke me up in the morning.\n→ I _______________ in the morning.\n\n(3) The police will catch the man.\n→ The man _______________.",
+        "subParts": [
+          {
+            "label": "(1)",
+            "answer": "is made"
+          },
+          {
+            "label": "(2)",
+            "answer": "was woken up"
+          },
+          {
+            "label": "(3)",
+            "answer": "will be caught by the police",
+            "acceptedAnswers": [
+              "will be caught"
+            ]
+          }
+        ]
+      },
+      {
+        "tag": "단어배열",
+        "type": "sentence",
+        "answer": "Many kinds of fish are caught by fishermen.",
+        "number": 57,
+        "question": "다음 문장을 <보기>와 같은 형태로 바꿔 쓰시오.\n\n<보기>\nThe girl opens the window.\n→ The window is opened by the girl.\n\nFishermen catch many kinds of fish.\n→ _______________\n\n*fishermen: 어부들",
+        "acceptedAnswers": [
+          "Many kinds of fish are caught by fishermen"
+        ]
+      },
+      {
+        "tag": "단어배열",
+        "type": "sentence",
+        "answer": "Hamlet and King Lear were written by him.",
+        "number": 58,
+        "question": "다음 문장을 <보기>와 같은 형태로 바꿔 쓰시오.\n\n<보기>\nJames took the picture.\n→ The picture was taken by James.\n\nHe wrote Hamlet and King Lear.\n→ _______________",
+        "acceptedAnswers": [
+          "Hamlet and King Lear were written by him"
+        ]
+      },
+      {
+        "tag": "단어배열",
+        "type": "sentence",
+        "answer": "He was heard to sing by us.",
+        "number": 59,
+        "question": "다음 문장을 <보기>와 같은 형태로 바꿔 쓰시오.\n\n<보기>\nI saw a boy play the piano.\n→ A boy was seen to play the piano by me.\n\nWe heard him sing.\n→ _______________",
+        "acceptedAnswers": [
+          "He was heard to sing by us"
+        ]
+      },
+      {
+        "tag": "subParts",
+        "type": "multi_part",
+        "answer": "The magazine is read by my cousin / Mark Chagall painted I and the Village in 1911 / This book was not written by Shakespeare",
+        "number": 60,
+        "question": "다음 문장을 지시에 맞게 바꿔 쓰시오.\n\n(1) My cousin reads the magazine. (수동태)\n→ _______________\n\n(2) I and the Village was painted by Mark Chagall in 1911. (능동태)\n→ _______________\n\n(3) Shakespeare wrote this book. (부정 수동태)\n→ _______________",
+        "subParts": [
+          {
+            "label": "(1) 수동태",
+            "answer": "The magazine is read by my cousin"
+          },
+          {
+            "label": "(2) 능동태",
+            "answer": "Mark Chagall painted I and the Village in 1911"
+          },
+          {
+            "label": "(3) 부정 수동태",
+            "answer": "This book was not written by Shakespeare",
+            "acceptedAnswers": [
+              "This book wasn't written by Shakespeare"
+            ]
+          }
+        ],
+        "acceptedAnswers": [
+          "The magazine is read by my cousin / Mark Chagall painted I and the Village in 1911 / This book wasn't written by Shakespeare"
+        ]
+      },
+      {
+        "tag": "subParts",
+        "type": "multi_part",
+        "answer": "Dad made the soup / The soup was made by dad",
+        "number": 61,
+        "question": "다음 우리말과 일치하도록 괄호 안의 말을 사용하여 어법상 맞게 영작하시오.\n\n그 수프는 아빠가 만들었다. (make, dad)\n\n(능동태) _______________\n\n(수동태) _______________",
+        "subParts": [
+          {
+            "label": "능동태",
+            "answer": "Dad made the soup"
+          },
+          {
+            "label": "수동태",
+            "answer": "The soup was made by dad"
+          }
+        ]
+      },
+      {
+        "tag": "영작",
+        "type": "sentence",
+        "answer": "are cut down to make paper",
+        "number": 62,
+        "question": "다음 우리말과 일치하도록 괄호 안에 주어진 단어를 모두 사용하여 영작하시오. (필요시 단어를 변형할 것)\n\n많은 나무가 종이를 만들기 위해 베어집니다.\n(cut down, to, paper, make, be)\n\n→ Many trees _______________.\n\n※ 빈칸에 들어갈 말만 쓰시오.",
+        "acceptedAnswers": [
+          "are cut down to be made into paper"
+        ]
+      },
+      {
+        "tag": "subParts",
+        "type": "multi_part",
+        "answer": "was built by the Romans / was caught by the policeman",
+        "number": 63,
+        "question": "다음 우리말과 일치하도록 <조건>에 맞게 문장을 완성하시오.\n\n<조건>\n1. 주어진 단어를 모두 완성할 것\n2. 수동태 구문으로 완성할 것\n\n(1) 콜로세움은 로마인들에 의해 지어졌다.\nColosseum _______________.\n(was, build, the Romans)\n\n(2) 그 도둑은 경찰에 의해 잡혔다.\nThe thief _______________.\n(was, catch, the policeman)",
+        "subParts": [
+          {
+            "label": "(1)",
+            "answer": "was built by the Romans"
+          },
+          {
+            "label": "(2)",
+            "answer": "was caught by the policeman"
+          }
+        ]
+      },
+      {
+        "tag": "subParts",
+        "type": "multi_part",
+        "answer": "built the house / was built by my father",
+        "number": 64,
+        "question": "다음 <보기>와 같이 질문에 맞는 답을 쓰시오.\n\n<보기>\nA: Who invented the light bulb?\nB: (1) Thomas Edison invented the light bulb.\n   (2) The light bulb was invented by Thomas Edison.\n\nA: Who built the house?\nB: (1) My father _______________.\n   (2) The house _______________.",
+        "subParts": [
+          {
+            "label": "(1)",
+            "answer": "built the house"
+          },
+          {
+            "label": "(2)",
+            "answer": "was built by my father"
+          }
+        ]
+      },
+      {
+        "tag": "subParts",
+        "type": "multi_part",
+        "answer": "are collected / are given",
+        "number": 65,
+        "question": "다음 글의 괄호 ①, ②안의 단어를 어법에 맞게 고치시오. (현재형으로 쓸 것)\n\n<Used Clothes Wanted>\nDo you think you are too big to wear your old clothes? Don't throw them away! Donate your clothes. Used clothes ①(collect) at our center. Then they ②(give) to children who are too poor to buy clothes.\n\n① (collect) → _______________\n\n② (give) → _______________",
+        "subParts": [
+          {
+            "label": "①",
+            "answer": "are collected"
+          },
+          {
+            "label": "②",
+            "answer": "are given"
+          }
+        ]
+      },
+      {
+        "tag": "영작",
+        "type": "sentence",
+        "answer": "The yard was cleaned by a mouse yesterday.",
+        "number": 66,
+        "question": "다음 주어진 그림의 상황을 수동태 문장으로 표현하시오.(단, 주어진 단어를 반드시 활용할 것)\n(그림: 마당을 청소하고 있는 쥐) \n\n→ The yard _______________ (a mouse, clean, be, yesterday)",
+        "acceptedAnswers": [
+          "The yard was cleaned by a mouse yesterday"
+        ]
+      },
+      {
+        "tag": "영작",
+        "type": "sentence",
+        "answer": "It was directed by Steven Spielberg.",
+        "number": 67,
+        "question": "다음 대화를 읽고 물음에 대한 답을 It으로 시작하는 완전한 수동태 문장으로 쓰시오.\n\nA: What is your favorite movie?\nB: My favorite movie is Jurassic Park.\nA: Oh, I've seen it before. Steven Spielberg directed it, didn't he?\nB: Yes, he did. I want to see all of his movies someday.\n\nA: Who directed Jurassic Park?\nB: It ___ ___ ___ ___ ___",
+        "acceptedAnswers": [
+          "It was directed by Steven Spielberg"
+        ]
+      }
+    ]
+  }
+}

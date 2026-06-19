@@ -1,0 +1,809 @@
+{
+  "questions": [
+    {
+      "tag": "인라인마커",
+      "type": "single_choice",
+      "answer": "1",
+      "number": 1,
+      "options": [
+        "① was arrested / was found / be built\n② arrested / was found / be built\n③ was arrested / was found / build\n④ arrested / found / be built\n⑤ was arrested / found / build",
+        "① was arrested\n② arrested\n③ was arrested\n④ arrested\n⑤ was arrested",
+        "① was found\n② was found\n③ was found\n④ found\n⑤ found",
+        "① be built\n② be built\n③ build\n④ be built\n⑤ build"
+      ],
+      "question": "Which is the pair of the right words for the blanks ⓐ~ⓒ?\n• The thief ⓐ________ by the police officers.\n• The ring ⓑ________ under the sofa.\n• The market will ⓒ________ in the town square.",
+      "explanation": "수동태 문장 구조에서 ⓐ는 'was caught'(과거 수동태), ⓑ는 'was found'(과거 수동태), ⓒ는 'be opened'(미래 수동태)가 되어야 합니다.",
+      "choicesAreMarkers": true
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "1",
+      "number": 2,
+      "options": [
+        "① were designed / excite / invent\n② designed / be excited / was invented\n③ were designed / excite / is invented\n④ designed / be excited / invents\n⑤ were designed / be excited / invented",
+        "① were designed\n② designed\n③ were designed\n④ designed\n⑤ were designed",
+        "① excite\n② be excited\n③ excite\n④ be excited\n⑤ be excited",
+        "① invent\n② was invented\n③ is invented\n④ invents\n⑤ invented"
+      ],
+      "question": "다음 괄호 ⓐ, ⓑ, ⓒ에 주어진 동사의 알맞은 형태가 가지어진 것은?\n• Seat belts ⓐ(design) to be uncomfortable.\n• She must ⓑ(excite) about something.\n• Nikolaus ⓒ(invent) a gas engine in 1894.",
+      "explanation": "ⓐ는 'are not designed'(현재 수동태 부정), ⓑ는 'be excited'(조동사 뒤 수동태), ⓒ는 'invented'(과거 능동태)가 올바른 형태입니다."
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "1",
+      "number": 3,
+      "options": [
+        "① with",
+        "② of",
+        "③ from",
+        "④ at",
+        "⑤ in"
+      ],
+      "question": "다음 빈칸에 공통으로 들어갈 말로 알맞은 것은?\n• The mountains are covered _______ snow.\n• He is very satisfied _______ his new cell phone.",
+      "explanation": "'be covered with'와 'be satisfied with'는 고정된 전치사 구문으로, 둘 다 'with'를 사용합니다."
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "3",
+      "number": 4,
+      "options": [
+        "The bridge was built _______ my father.",
+        "The cheese cake was made _______ Angelina.",
+        "The bulletin board was covered _______ messages.",
+        "This movie was directed _______ Steven Spielberg.",
+        "The Mona Lisa was painted _______ Leonardo da Vinci."
+      ],
+      "question": "다음 중 빈칸에 들어갈 말이 나머지 것은?",
+      "explanation": "③번은 'covered with messages'로 전치사 'with'을 사용하고, 나머지는 모두 'by'를 사용하여 동작의 행위자를 나타낸다."
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "5",
+      "number": 5,
+      "options": [
+        "① Your bed is covered _____ toys.",
+        "② I was pleased _____ his proposal.",
+        "③ He was satisfied _____ my test result.",
+        "④ The square is crowded _____ many people.",
+        "⑤ His teacher was worried _____ his class leader."
+      ],
+      "question": "Which blank has the different word from others?",
+      "explanation": "①, ②, ③, ④는 모두 'with'을 사용하고, ⑤번은 'about'을 사용한다."
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "1",
+      "number": 6,
+      "options": [
+        "① He was interested _____ literature.",
+        "② The movie was directed _____ him.",
+        "③ The child was followed _____ the dog.",
+        "④ The Internet is used _____ many people.",
+        "⑤ They were invited to the party _____ Amy."
+      ],
+      "question": "Choose the sentence that has the different word from others in each blank.",
+      "explanation": "①, ③, ④, ⑤는 'by'를 사용하고, ②번은 'in'을 사용한다."
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "3",
+      "number": 7,
+      "options": [
+        "① I was surprised at the news.",
+        "② She is worried about her final exam.",
+        "③ The Eiffel Tower is known for everyone.",
+        "④ The bus was crowded with passengers.",
+        "⑤ We were pleased with our new place."
+      ],
+      "question": "Which one is incorrect?",
+      "explanation": "③번은 'is known to everyone' 또는 'is known by everyone'이 맞다. 'known for'는 '~으로 유명한'의 의미로 사용되며, 사람을 나타낼 때는 'to'나 'by'를 사용해야 한다."
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "5",
+      "number": 8,
+      "options": [
+        "① The letter was written by Tom.",
+        "② This bread was baked by my mom.",
+        "③ My life was changed by this book.",
+        "④ The house was built by Mr. Johnson.",
+        "⑤ Chinese is spoken in China by people."
+      ],
+      "question": "다음 말을 친 부분 중 생략할 수 있는 것은?",
+      "explanation": "⑤번의 'by people'은 일반적으로 알려진 사실이므로 생략할 수 있다. 'Chinese is spoken in China'로 표현 가능하다."
+    },
+    {
+      "tag": "복수정답",
+      "type": "multi_choice",
+      "answer": "2, 5",
+      "number": 9,
+      "options": [
+        "① She wasn't given a ring by Jake.",
+        "② My bike was stolen by someone.",
+        "③ They were helped by an old rich lady.",
+        "④ My parents were satisfied with the deal.",
+        "⑤ English is spoken in Australia by Australian."
+      ],
+      "question": "다음 말을 친 부분 중 생략할 수 있는 것은? (정답 2개)",
+      "explanation": "수동태에서 관계대명사나 'be동사 + 과거분사' 구조에서 일부 요소가 생략 가능한지를 묻는 문제입니다."
+    },
+    {
+      "tag": "복수정답",
+      "type": "multi_choice",
+      "answer": "2",
+      "number": 10,
+      "options": [
+        "① She wasn't given a ring by Jake.",
+        "② My bike was stolen by someone.",
+        "③ They were helped by an old rich woman.",
+        "④ A soccer ball was bought for me by my mother.",
+        "⑤ English is spoken in Australia by people."
+      ],
+      "question": "다음 중 말을 친 부분을 생략할 수 있는 것 모두 고르면?",
+      "explanation": "수동태 구문에서 문맥상 명확할 때 생략 가능한 부분을 찾는 문제로, 주로 관계대명사나 be동사 생략과 관련됩니다."
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "1",
+      "number": 11,
+      "options": [
+        "① My pen was stealed yesterday.\n→ My pen was stolen yesterday.",
+        "② Hangeul invent by King Sejong.\n→ Hangeul invented by King Sejong.",
+        "③ Mr. Kim was painted by this picture.\n→ This picture is painting by Mr. Kim.",
+        "④ Did the letter deliver by a bird?\n→ Was the letter deliver by a bird?",
+        "⑤ The glasses were broken not by the dog.\n→ The glasses was not broken by the dog."
+      ],
+      "question": "다음 중 어법에 맞도록 고친 것은?",
+      "explanation": "①번이 올바른 수정이다. 'stealed'는 틀린 과거분사형이고 'stolen'이 맞다."
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "4",
+      "number": 12,
+      "options": [
+        "① The card is design by Amy.",
+        "② His homework must done by him.",
+        "③ These magazines are sell at most bookstores.",
+        "④ English is spoken by many parts of the world.",
+        "⑤ Cinderella was tolded the news by her sisters."
+      ],
+      "question": "다음 말을 친 부분 중 어법상 옳은 것은?",
+      "explanation": "④번이 문법적으로 옳다. ①은 'is designed', ②는 'must be done', ③은 'are sold', ⑤는 'was told'가 되어야 한다."
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "5",
+      "number": 13,
+      "options": [
+        "① Many cars are made in Korea.",
+        "② This music was made by Beethoven.",
+        "③ This picture was painted by a Korean.",
+        "④ Romeo and Juliet was written by Shakespeare.",
+        "⑤ Leonardo da Vinci was painted by the Mona Lisa."
+      ],
+      "question": "다음 말을 친 부분 중 어법상 어색한 것은?",
+      "explanation": "⑤번은 주술관계가 반대이다. 'The Mona Lisa was painted by Leonardo da Vinci'가 올바른 표현이다."
+    },
+    {
+      "tag": "복수정답",
+      "type": "multi_choice",
+      "answer": "2, 5",
+      "number": 14,
+      "options": [
+        "① My house was buildi by my father.",
+        "② The house was made with gum.",
+        "③ The house will be blew down.",
+        "④ The garden was watering by Tony.",
+        "⑤ The book was read by everyone."
+      ],
+      "question": "다음 말을 친 부분 중 어법상 옳은 것은? (정답2개)",
+      "explanation": "수동태의 올바른 문법 형태를 묻는 문제로, be동사 + 과거분사의 정확한 사용을 확인해야 합니다."
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "5",
+      "number": 15,
+      "options": [
+        "① Alexander Graham Bell invented the telephone.",
+        "② This message was given to the lady by a man.",
+        "③ Many children were killed in the war.",
+        "④ Were you invited to the party?",
+        "⑤ This furniture were made in Korea."
+      ],
+      "question": "다음 중 말을 친 부분이 어법상 어색한 것은?",
+      "explanation": "⑤번은 'furniture'는 단수형이므로 'was'를 사용해야 한다. 'This furniture was made in Korea'가 올바르다."
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "3",
+      "number": 16,
+      "options": [
+        "① This work can be done by Mark.",
+        "② Hangeul was invented by King Sejong.",
+        "③ This comic book is readed by many teens.",
+        "④ The novel was written by F.S. Fitzgerald.",
+        "⑤ The classroom is cleaned every day by student."
+      ],
+      "question": "다음 중 어법상 어색한 문장은?",
+      "explanation": "③번은 'is readed'가 틀렸다. 'is read'가 올바른 표현이다. 'read'의 과거분사는 'read'이다."
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "2",
+      "number": 17,
+      "options": [
+        "① Where does coffee produce?",
+        "② What is this word called in Canada?",
+        "③ This bread has made by my sister.",
+        "④ The story spoke in England.",
+        "⑤ Did your book found under the desk?"
+      ],
+      "question": "다음 중 어법상 옳은 문장은?",
+      "explanation": "②번이 올바르다. ①은 'is produced', ③은 'was made', ④는 'was spoken', ⑤는 'Was your book found'가 되어야 한다."
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "1",
+      "number": 18,
+      "options": [
+        "① Where was his wallet founded?",
+        "② Portuguese is spoken in Brazil.",
+        "③ My bike was stolen last Sunday.",
+        "④ Were you invited to the meeting?",
+        "⑤ The vase did not broken by the dog."
+      ],
+      "question": "다음 중 어법상 어색한 문장은?",
+      "explanation": "①번은 'founded'가 틀렸다. 'Where was his wallet found?'가 올바르다. 'find'의 과거분사는 'found'이지만 여기서는 'was found'가 맞다."
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "3",
+      "number": 19,
+      "options": [
+        "① The book was written J.K. Rowling.",
+        "② Blue jeans invented Levi Strauss.",
+        "③ The tower was designed by Alexandre Gustave Eiffel.",
+        "④ This picture is painted by Vincent van Gogh in 1880.",
+        "⑤ The movie 'Avatar' directs by James Cameron."
+      ],
+      "question": "다음 중 어법상 옳은 문장은?",
+      "explanation": "③번이 올바르다. ①은 'by J.K. Rowling', ②는 'were invented by', ④는 'was painted', ⑤는 'is directed'가 되어야 한다."
+    },
+    {
+      "tag": "복수정답",
+      "type": "multi_choice",
+      "answer": "4, 5",
+      "number": 20,
+      "options": [
+        "① The dinner was cooked by my sister.",
+        "② The painting wasn't painted by Picasso.",
+        "③ His books are read by many people.",
+        "④ The car was not drove by her yesterday.",
+        "⑤ Did the house designed by Chris?"
+      ],
+      "question": "다음 중 어법상 어색한 것을 모두 고르면?",
+      "explanation": "수동태에서 시제 일치, 과거분사 형태, 전치사 사용 등의 오류를 찾는 문제입니다."
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "2",
+      "number": 21,
+      "options": [
+        "① A lot of trees are cut down.",
+        "② The letter was wrote by Jason.",
+        "③ This room is not used very often.",
+        "④ The glass was thrown away by Mr. Kim.",
+        "⑤ This project will be finished by Group A."
+      ],
+      "question": "다음 중 어법상 어색한 문장은?",
+      "explanation": "②번은 'was wrote'가 틀렸다. 'was written'이 올바르다. 'write'의 과거분사는 'written'이다."
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "5",
+      "number": 22,
+      "options": [
+        "① Everybody is loved by the movie.",
+        "② My sister is cooked by this pizza.",
+        "③ The bike cleaned by Linda yesterday.",
+        "④ The tower built by French engineers.",
+        "⑤ The light bulb was invented by Edison."
+      ],
+      "question": "다음 중 어법상 옳은 문장은?",
+      "explanation": "⑤번이 올바르다. ①은 'The movie is loved by everybody', ②는 'This pizza was cooked by my sister', ③은 'was cleaned', ④는 'was built'이 되어야 한다."
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "4",
+      "number": 23,
+      "options": [
+        "① The soldier was killed in the war.",
+        "② The work will be finished by her tomorrow.",
+        "③ The star has been loved for 5 years.",
+        "④ The letter is sent to me yesterday.",
+        "⑤ Her name wasn't forgotten by him."
+      ],
+      "question": "다음 중 어법상 어색한 문장은?",
+      "explanation": "④번은 'is sent'와 'yesterday'가 어울리지 않는다. 'The letter was sent to me yesterday'가 올바르다."
+    },
+    {
+      "tag": "복수정답",
+      "type": "multi_choice",
+      "answer": "1, 3",
+      "number": 24,
+      "options": [
+        "① Whom was that poem written?",
+        "② The roof was covered with snow.",
+        "③ Was the picture painting by Picasso?",
+        "④ When was the car bought by him?",
+        "⑤ Many plants are grown by my sister."
+      ],
+      "question": "다음 중 어법상 어색한 것을 모두 고르면?",
+      "explanation": "수동태 구문에서 문법적으로 부정확한 표현들을 식별하는 문제로, 주로 동사 형태나 어순 오류를 다룹니다."
+    },
+    {
+      "tag": "복수정답",
+      "type": "multi_choice",
+      "answer": "3, 5",
+      "number": 25,
+      "options": [
+        "① The fish didn't cooked by him.",
+        "② The dog is hit by a car yesterday.",
+        "③ The Giving Tree is loved by children.",
+        "④ I will allowed to go camping by Mom.",
+        "⑤ Was his money stolen by Tom and Jane?"
+      ],
+      "question": "다음 중 어법상 옳은 문장은? (정답2개)",
+      "explanation": "올바른 수동태 문장 구조를 가진 문장들을 선택하는 문제로, be동사와 과거분사의 정확한 결합을 확인합니다."
+    },
+    {
+      "tag": "복수정답",
+      "type": "multi_choice",
+      "answer": "4, 5",
+      "number": 26,
+      "options": [
+        "① How many languages are speaking in your country?",
+        "② When was invented the light bulb?",
+        "③ Did the letter deliver to you by Mr. Smith?",
+        "④ Now soccer is played in most countries of the world.",
+        "⑤ She really wanted to be invited to his birthday party."
+      ],
+      "question": "Which is grammatically right? (정답2개)",
+      "explanation": "문법적으로 올바른 수동태 문장을 찾는 문제로, 시제와 과거분사 형태의 정확성을 평가합니다."
+    },
+    {
+      "tag": "복수정답",
+      "type": "multi_choice",
+      "answer": "3, 5",
+      "number": 27,
+      "options": [
+        "① The window was broken by he.",
+        "② She was found my book on the desk.",
+        "③ Bottles can be recycled.",
+        "④ This novel is readed by many people.",
+        "⑤ Was the picture drawn by your sister?"
+      ],
+      "question": "다음 중 어법상 옳은 문장을 모두 고르면?",
+      "explanation": "수동태의 올바른 문법 구조를 가진 모든 문장을 선택하는 문제로, 각 문장의 문법적 정확성을 종합적으로 판단해야 합니다."
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "3",
+      "number": 28,
+      "options": [
+        "① This road does not use much by the villagers.",
+        "② When did antibiotics discovered?",
+        "③ In Korea, elections for president are held every 5 years.",
+        "④ Sometimes it's quite noisy living here, but it's not a problem for me. I am bothered not by it.",
+        "⑤ How is mountains formed?"
+      ],
+      "question": "다음 중 어법상 옳은 문장은?",
+      "explanation": "③번이 올바르다. ①은 'is not used', ②는 'were discovered', ④는 'I am not bothered by it', ⑤는 'are mountains formed'가 되어야 한다."
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "3",
+      "number": 29,
+      "options": [
+        "ⓐ Leonardo da Vinci painted the Mona Lisa.",
+        "ⓑ Hangeul was made by King Sejong the Great.",
+        "ⓒ Romeo and Juliet wrote Shakespeare.",
+        "ⓓ The light bulb invented by Edison.",
+        "ⓔ The Starry Night is painted by van Gogh.",
+        "① ⓐ, ⓑ",
+        "② ⓑ, ⓔ",
+        "③ ⓐ, ⓑ, ⓔ",
+        "④ ⓑ, ⓒ, ⓓ",
+        "⑤ ⓐ, ⓑ, ⓒ, ⓓ, ⓔ"
+      ],
+      "question": "다음 중 어법상 옳은 문장을 모두 골라 짝지은 것은?",
+      "explanation": "ⓐ, ⓑ, ⓔ가 올바르다. ⓒ는 'Romeo and Juliet was written by Shakespeare', ⓓ는 'The light bulb was invented by Edison'이 되어야 한다."
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "3",
+      "number": 30,
+      "options": [
+        "1개",
+        "2개",
+        "3개",
+        "4개",
+        "5개"
+      ],
+      "question": "다음 중 어떤상 역채를 것의 중 개수는?82)\n(a) Did the meeting held this morning?\n(b) The bike is fixed not in the store.\n(c) He will be invited to my wedding yesterday.\n(d) He was taken to a hospital by them.\n(e) Her purse was stolen last night.",
+      "explanation": "(a) 'Was the meeting held', (b) 'is not fixed', (c) 시제 불일치 오류가 있어 3개의 문장에 오류가 있습니다."
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "1",
+      "number": 31,
+      "options": [
+        "1개",
+        "2개",
+        "3개",
+        "4개",
+        "5개"
+      ],
+      "question": "다음 중 어법상 올은 문장의 중 개수는?83)\n(a) English is spoke in Australia.\n(b) Andre Kim was designed his dress.\n(c) The baby were taken care of by him.\n(d) The library in the town built in 1897.\n(e) The books are read by a lot of people.\n(f) The thief is caught by the police yesterday.",
+      "explanation": "(e)만이 올바른 수동태 구조를 가지고 있으며, 나머지는 모두 동사 형태나 구조상 오류가 있습니다."
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "2",
+      "number": 32,
+      "options": [
+        "1개",
+        "2개",
+        "3개",
+        "4개",
+        "5개"
+      ],
+      "question": "다음 중 어법상 올은 문장의 중 개수는?84)\n• I was waken by a loud noise.\n• The mouse was cought by a cat.\n• The cat was carried away by a dog.\n• The white dress was made of Andre Kim.\n• The Eiffel Tower was build by Alexandre Gustave Eiffel.\n• The Old Man and the Sea was written by Ernest Hemingway.",
+      "explanation": "'was carried away'와 'was written by'만이 올바른 수동태 형태이며, 나머지는 과거분사 오류나 전치사 오류가 있습니다."
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "2",
+      "number": 33,
+      "options": [
+        "(A), (C), (D)",
+        "(C), (D), (F)",
+        "(B), (E)",
+        "(C), (D), (E), (F)",
+        "(A), (B), (D), (E)"
+      ],
+      "question": "Choose the sentences which are grammatically incorrect.85)\n(A) The roof was covered with snow.\n(B) By whom was America discovered?\n(C) The kites fly in the field by children yesterday.\n(D) The room cleaned by him.\n(E) A letter should be sent to her by Mr. Smith.\n(F) The movie is loved by many people last year.",
+      "explanation": "(C)와 (F)는 수동태 구조가 잘못되었고, (D)는 be동사가 누락된 문법 오류가 있습니다."
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "4",
+      "number": 34,
+      "question": "다음 능동태 문장을 수동태로 전환했을 때 가장 적절한 것은?86)\n① The students read the book.\n→ The book was reading by the students.\n② My sister planted the tree.\n→ The tree is planted by my sister.\n③ Jimin wrote the story yesterday.\n→ The story was wrote by Jimin yesterday.\n④ Anna invited Tom to her birthday party.\n→ Tom was invited by Anna to her birthday party.\n⑤ Jane will wash the dishes after work.\n→ The dishes will washed by Jane after work.",
+      "explanation": "④번만이 올바른 수동태 전환으로, 'Tom was invited to her birthday party by Anna'가 정확한 구조입니다."
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "3",
+      "number": 35,
+      "question": "다음 능동태 문장을 수동태로 전환했을 때 가장 적절한 것은?87)\n① Dave took the picture.\n→ The picture was took by Dave.\n② My mom baked these cookies.\n→ These cookies was baked by my mom.\n③ King Sejong invented Hangeul.\n→ Hangeul was invented by King Sejong.\n④ Shakespeare wrote Romeo and Juliet.\n→ Romeo and Juliet were written by Shakespeare.\n⑤ Lisa invited us to her birthday party.\n→ Her birthday party was invited us by Lisa.",
+      "explanation": "③번이 정답으로 'Hangeul was invented by King Sejong'은 과거 수동태의 올바른 형태입니다."
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "1",
+      "number": 36,
+      "question": "다음 능동태 문장을 수동태로 전환했을 때 가장 적절한 것은?88)\n① Everyone in this city knows him.\n→ He is known to everyone in this city.\n② Yuri will invite the boy to her birthday party.\n→ Her birthday party will be invited to the boy.\n③ Korean history interests me.\n→ I am interested by Korean history.\n④ Smoke filled the room.\n→ The room is filled with smoke.\n⑤ We will always love our children.\n→ Our children are always loved by us.",
+      "explanation": "①번 'He is known to everyone'이 올바른 수동태 전환으로, 'know' 동사의 특별한 수동태 구조입니다."
+    },
+    {
+      "tag": "subParts",
+      "type": "multi_part",
+      "answer": "2, 5",
+      "number": 37,
+      "question": "다음 중 수동태로 바르게 전환한 것이 아닌 것을 모두 고르면?89)\n① What do they call this in English?\n→ What is this called in English?\n② Judy can teach us music.\n→ Music can taught to us by Judy.\n③ We painted our house green.\n→ Our house was painted green by us.\n④ Did Brian solve the puzzle?\n→ Was the puzzle solved by Brian?\n⑤ The police captured the pickpocket.\n→ The pickpocket has captured by the police.",
+      "subParts": [
+        {
+          "label": "(1)",
+          "answer": "2"
+        },
+        {
+          "label": "(2)",
+          "answer": "5"
+        }
+      ],
+      "explanation": "②번은 'can be taught', ⑤번은 'was captured'가 되어야 하므로 두 문장 모두 수동태 전환에 오류가 있습니다."
+    },
+    {
+      "tag": "subParts",
+      "type": "multi_part",
+      "answer": "1, 5",
+      "number": 38,
+      "question": "다음 중 수동태로 전환한 문장이 어색한 것을 모두 고르면?90)\n① The bad boy laughed at me.\n→ I was laughed at the bad boy.\n② Sally gave me a cute doll.\n→ A cute doll was given to me by Sally.\n③ He must finish the work in time.\n→ The work must be finished in time by him.\n④ Do plenty of people speak Chinese?\n→ Is Chinese spoken by plenty of people?\n⑤ Scientists are discovering new animals and plants.\n→ New animals and plants are being discovering by scientist.",
+      "subParts": [
+        {
+          "label": "(1)",
+          "answer": "1"
+        },
+        {
+          "label": "(2)",
+          "answer": "5"
+        }
+      ],
+      "explanation": "①번은 'I was laughed at by the bad boy', ⑤번은 'are being discovered'가 되어야 올바른 수동태입니다."
+    },
+    {
+      "tag": "subParts",
+      "type": "multi_part",
+      "answer": "1, 3",
+      "number": 39,
+      "question": "다음 중 능동태를 수동태로 전환한 문장이 어색한 것을 모두 고르면?91)\n① She took care of her baby.\n→ Her baby was taken care of her.\n② The news surprised her.\n→ She was surprised at the news.\n③ They will build a new school.\n→ A new school will be build by them.\n④ Jack gave me these books.\n→ These books were given to me by Jack.\n⑤ Where did he buy the hat?\n→ Where was the hat bought by him?",
+      "subParts": [
+        {
+          "label": "(1)",
+          "answer": "1"
+        },
+        {
+          "label": "(2)",
+          "answer": "3"
+        }
+      ],
+      "explanation": "①번은 'by her' 삭제, ③번은 'will be built'가 되어야 하므로 두 문장에 수동태 전환 오류가 있습니다."
+    },
+    {
+      "tag": "subParts",
+      "type": "multi_part",
+      "answer": "2, 3",
+      "number": 40,
+      "question": "다음 능동태 문장을 수동태로 전환했을 때 가장 적절한 것은?92)\n① My dad will build a house.\n→ A house will built by my dad.\n② He broke the cup.\n→ The cup was broken by him.\n③ I found the wallet.\n→ The wallet was found by me.\n④ My mom cooks dinner.\n→ Dinner was cooked by my mom.\n⑤ Marc Chagall painted I and the Village.\n→ I and the Village were painted by Marc Chagall.",
+      "subParts": [
+        {
+          "label": "(1)",
+          "answer": "2"
+        },
+        {
+          "label": "(2)",
+          "answer": "3"
+        }
+      ],
+      "explanation": "②번과 ③번이 모두 올바른 수동태 전환으로, 과거 능동태를 과거 수동태로 정확히 변환했습니다."
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "2",
+      "number": 41,
+      "question": "다음 능동태 문장을 수동태로 전환했을 때 가장 적절한 것은?93)\n① Ms. Kim loved Hyun Bin.\n→ Hyun Bin is loved by Ms. Kim.\n② Shakespeare wrote this book.\n→ This book was written by Shakespeare.\n③ The carpenters make the house.\n→ The house was made by the carpenters.\n④ The police did not find the robbers.\n→ The robbers are not found by the police.\n⑤ My little brother breaks the window.\n→ The window was broken by my little brother.",
+      "explanation": "②번만이 올바른 수동태 전환으로, 과거 시제를 일치시켜 'was written'을 정확히 사용했습니다."
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "4",
+      "number": 42,
+      "question": "다음 능동태 문장을 수동태로 전환했을 때 가장 적절한 것은?94)\n① I make an airplane.\n→ An airplane is maded from me.\n② He grows some plants.\n→ Some plants are growing by him.\n③ She didn't open it.\n→ It didn't be opened by her.\n④ They broke the window.\n→ The window was broken by them.\n⑤ Min-su invited John to the party.\n→ Min-su was invited to the party by John.",
+      "explanation": "④번만이 올바른 수동태 전환으로, 'The window was broken by them'이 정확한 과거 수동태 구조입니다."
+    },
+    {
+      "tag": "오류수정",
+      "type": "sentence",
+      "answer": "2",
+      "number": 43,
+      "question": "다음 수동태 문장을 능동태로 전환했을 때 어색한 것은?95)\n① Sora was invited to the party by John.\n→ John invited Sora to the party.\n② The mirror was broken by Tom.\n→ Tom broken the mirror.\n③ These cookies were made by Mike.\n→ Mike made these cookies.\n④ Our house was built by my grandfather.\n→ My grandfather built our house.\n⑤ Computers are used by many people.\n→ Many people use computers.",
+      "explanation": "②번은 'Tom broke the mirror'가 되어야 하는데, 'broken'으로 잘못 표기되어 능동태 전환이 어색합니다."
+    },
+    {
+      "tag": "오류수정",
+      "type": "sentence",
+      "answer": "4",
+      "number": 44,
+      "question": "다음 능동태 문장을 수동태로 전환했을 때 어색한 것은?96)\n① We see the moon at night.\n→ The moon is seen at night by us.\n② John made the delicious cheese cake.\n→ The delicious cheese cake was made by John.\n③ My father gave me a present.\n→ I was given a present by my father.\n④ You must not leave the door open.\n→ The door must not left open.\n⑤ Mr. Park built this beautiful house.\n→ This beautiful house was built by Mr. Park.",
+      "explanation": "④번이 어색합니다. 조동사가 포함된 수동태는 'must not be left'가 되어야 하는데, be동사가 빠져있습니다. 조동사 + be + 과거분사 형태를 지켜야 합니다."
+    },
+    {
+      "tag": "오류수정",
+      "type": "sentence",
+      "answer": "4",
+      "number": 45,
+      "question": "다음 능동태 문장을 수동태로 전환했을 때 어색한 것은?97)\n① Tom broke the window.\n→ The window was broken by Tom.\n② Children love the story Cinderella\n→ The story Cinderella is loved by children.\n③ Mom gave me some old pictures.\n→ Some old pictures were given to me by mom.\n④ The police caught the thieves.\n→ The thieves was caught by the police.\n⑤ An old woman bought the book.\n→ The book was bought by an old woman.",
+      "explanation": "④번이 어색합니다. 주어 'The thieves'는 복수형이므로 be동사는 'were'를 사용해야 하는데, 'was'가 잘못 사용되었습니다. 주어와 동사의 수일치를 맞춰야 합니다."
+    },
+    {
+      "tag": "오류수정",
+      "type": "sentence",
+      "answer": "5",
+      "number": 46,
+      "question": "다음 능동태 문장을 수동태로 전환했을 때 어색한 것은?98)\n① He didn't pay the bill.\n→ The bill wasn't paid by him.\n② My brother broke the chair.\n→ The chair was broken by my brother.\n③ I took this photo last night.\n→ This photo was taken last night by me.\n④ My sister wore the skirt.\n→ The skirt was worn by my sister.\n⑤ She sold two hats at the flea market.\n→ The flea market was sold by her two hats at.",
+      "explanation": "⑤번이 어색합니다. 능동태에서 목적어가 'two hats'이므로 수동태의 주어도 'Two hats were sold'가 되어야 합니다. 전체 문장 구조가 잘못되어 어순이 뒤바뀌었습니다."
+    },
+    {
+      "tag": "오류수정",
+      "type": "sentence",
+      "answer": "3",
+      "number": 47,
+      "question": "다음 능동태 문장을 수동태로 전환했을 때 어색한 것은?99)\n① J.K Rowling wrote 'Harry Potter.'\n→ 'Harry Potter' was written by J.K. Rowling.\n② She drew the pictures.\n→ The pictures were drawn by her.\n③ We called her Little Kim Yeona.\n→ Little Kim Yeona was called by us.\n④ Beatles sang 'Yesterday.'\n→ 'Yesterday' was sung by Beatles.\n⑤ The best teacher teaches us English.\n→ We are taught English by the best teacher.",
+      "explanation": "③번이 어색합니다. 'call A B'(A를 B라고 부르다) 구문에서 수동태는 'She was called Little Kim Yeona by us'가 되어야 합니다. 목적격 보어를 포함한 5형식 문장의 수동태 전환 규칙을 따라야 합니다."
+    },
+    {
+      "tag": "단어",
+      "type": "short_answer",
+      "answer": "1",
+      "number": 48,
+      "question": "Which of the following does NOT have the closest meaning to each other?100)\n① I take care of the baby.\n= The baby is taken care of me.\n② An artist painted the picture in 1889.\n= The picture was painted in 1889.\n③ They speak English in Canada.\n= English is spoken in Canada.\n④ Your son broke my kitchen window.\n= My kitchen window was broken by your son.\n⑤ The fire destroyed my house.\n= My house was destroyed by the fire.",
+      "explanation": "①번이 의미가 다릅니다. 'take care of'는 구동사이므로 수동태에서 전치사를 유지해야 하며, 'The baby is taken care of by me'가 올바른 형태입니다. 구동사의 수동태에서는 전치사를 분리하면 안 됩니다."
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "5",
+      "number": 49,
+      "options": [
+        "Jessica took these photos. → These photos were taken by Jessica.",
+        "They didn't break the windows. → The windows were not broken by them.",
+        "The secretary writes all the letters. → All the letters are written by the secretary.",
+        "Judy will play the piano. → The piano will be played by Judy.",
+        "A French family found the missing child. → The missing child was founded by a French family."
+      ],
+      "question": "다음 능동태 문장을 수동태로 전환했을 때 어색한 것은?",
+      "explanation": "문제 내용이 제공되지 않아 구체적인 해설을 작성할 수 없습니다. 수동태 전환 시 시제, 주어-동사 일치, be동사 사용 등을 확인해야 합니다."
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "5",
+      "number": 50,
+      "options": [
+        "He delivered the box. = The box was delivered by him.",
+        "Did Junsu finish the work? = Was the work finished by Junsu?",
+        "They built a beautiful house last year. = A beautiful house was built by them last year.",
+        "He will bring the cart tomorrow. = The cart will be brought by him tomorrow.",
+        "He may forget her name. = Her name was forgotten by him."
+      ],
+      "question": "Which of the following does NOT have the same meaning to each other?",
+      "explanation": "문제 내용이 제공되지 않아 구체적인 해설을 작성할 수 없습니다. 능동태와 수동태의 의미가 동일한지 확인하는 문제로 보입니다."
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "4",
+      "number": 51,
+      "options": [
+        "David accepted his proposal. = His proposal was accepted by David.",
+        "Minho moved his chair. = His chair was moved by Minho.",
+        "Did she check the e-mail? = Was the e-mail checked by her?",
+        "My uncle doesn't grow trees. = Trees weren't grow by my uncle.",
+        "He will bring the book tomorrow. = The book will be brought by him tomorrow."
+      ],
+      "question": "Which of the following is not correct conversion from the active to the passive voice?",
+      "explanation": "문제 내용이 제공되지 않아 구체적인 해설을 작성할 수 없습니다. 능동태에서 수동태로의 올바른 전환 규칙을 확인하는 문제입니다."
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "5",
+      "number": 52,
+      "options": [
+        "They don't like him. → He is not liked by them.",
+        "I saw her dance in the room. → She was seen to dance in the room by me.",
+        "I have finished the homework. → The homework has been finished by me.",
+        "We are making a big kite. → A big kite is being made by us.",
+        "We called him Jack. → Jack was called him by us."
+      ],
+      "question": "다음 중 수동태의 전환이 어색한 것은?",
+      "explanation": "문제 내용이 제공되지 않아 구체적인 해설을 작성할 수 없습니다. 수동태 전환이 부자연스러운 선택지를 찾는 문제로 보입니다."
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "2",
+      "number": 53,
+      "options": [
+        "She takes care of the children. → The children is taken care of by her.",
+        "People speak English in New Zealand. → English is spoken in New Zealand.",
+        "We elected him our president. → Our president was elected him by us.",
+        "She teaches us English. → English is taught for us by her.",
+        "My little brother broke the window. → The window was broken by my little brother."
+      ],
+      "question": "다음 중 능동태 문장을 수동태로 바꾸게 바꾼 것 중에 잘지어진 것은?",
+      "explanation": "문제 내용이 제공되지 않아 구체적인 해설을 작성할 수 없습니다. 올바르게 전환된 수동태 문장을 선택하는 문제입니다."
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "3",
+      "number": 54,
+      "options": [
+        "(the cookies, baked, Jane) → The cookies were baked by Jane.",
+        "(the watch, find, he) → The watch was found by him.",
+        "(the bus, stop, the policeman) → The bus was stop by the policeman.",
+        "(the letter, write, she) → The letter was written by her.",
+        "(the ball, hit, Chan-ho) → The ball was hit by Chan-ho."
+      ],
+      "question": "다음 <보기>와 같이 괄호 안의 말을 담아들 이용하여 문장을 완성할 때 어색한 어색한 것은?",
+      "explanation": "문제 내용이 제공되지 않아 구체적인 해설을 작성할 수 없습니다. 주어진 단어를 이용해 수동태 문장을 완성하는 문제입니다."
+    }
+  ],
+  "answer_key": [
+    "1",
+    "1",
+    "1",
+    "3",
+    "5",
+    "1",
+    "3",
+    "5",
+    "2, 5",
+    "2",
+    "1",
+    "4",
+    "5",
+    "2, 5",
+    "5",
+    "3",
+    "2",
+    "1",
+    "3",
+    "4, 5",
+    "2",
+    "5",
+    "4",
+    "1, 3",
+    "3, 5",
+    "4, 5",
+    "3, 5",
+    "3",
+    "3",
+    "3",
+    "1",
+    "2",
+    "2",
+    "4",
+    "3",
+    "1",
+    "2, 5",
+    "1, 5",
+    "1, 3",
+    "2, 3",
+    "2",
+    "4",
+    "2",
+    "4",
+    "4",
+    "5",
+    "3",
+    "1",
+    "5",
+    "5",
+    "4",
+    "5",
+    "2",
+    "3"
+  ]
+}

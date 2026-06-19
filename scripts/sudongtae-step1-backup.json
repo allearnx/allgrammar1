@@ -1,0 +1,3942 @@
+{
+  "template_1d3d85a9-a01f-4572-a990-2124d2b0ee3c": {
+    "questions": [
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "4",
+        "number": 1,
+        "options": [
+          "ate",
+          "eat",
+          "was ate",
+          "was eaten",
+          "was eating"
+        ],
+        "question": "다음 우리말과 일치하도록 빈 칸에 알맞은 말로 가장 적절한 것은?\n그 치즈는 쥐에게 먹혔다.\n→ The cheese __________ by the mouse.",
+        "explanation": "수동태 구조로 '먹혔다'는 과거 수동태 'was eaten'이 맞다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "5",
+        "number": 2,
+        "options": [
+          "wrote",
+          "writes",
+          "written",
+          "was written",
+          "were written"
+        ],
+        "question": "다음 빈칸에 들어갈 말로 가장 적절한 것은?\nSherlock Holmes stories __________ by Arthur Conan Doyle.",
+        "explanation": "복수명사 'stories'에 대한 과거 수동태는 'were written'이다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "2",
+        "number": 3,
+        "options": [
+          "stole",
+          "read",
+          "written",
+          "bought",
+          "published"
+        ],
+        "question": "다음 빈칸에 들어갈 말로 알맞은 것은?\nThe book was __________ by him yesterday.",
+        "explanation": "과거 수동태 구조 'was + 과거분사'에서 'read'가 적절하다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "5",
+        "number": 4,
+        "options": [
+          "held",
+          "is held",
+          "were held",
+          "are held",
+          "was held"
+        ],
+        "question": "다음 빈칸에 들어갈 말로 알맞은 것을 고르면?\nThe first World Cup __________ in Uruguay in 1930.",
+        "explanation": "단수명사 'Cup'에 대한 과거 수동태는 'was held'이다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "5",
+        "number": 5,
+        "options": [
+          "bore",
+          "bears",
+          "is born",
+          "be born",
+          "was born"
+        ],
+        "question": "다음 빈칸에 들어갈 말로 알맞은 것은?\nMy father is fifty-nine years old. He __________ in 1956.",
+        "explanation": "'1956년에 태어났다'는 과거 수동태 'was born'이 맞다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "1",
+        "number": 6,
+        "options": [
+          "broke - was broken",
+          "break - break",
+          "break - is breaking",
+          "broke - broke",
+          "was broken - broke"
+        ],
+        "question": "다음 대화의 빈칸 ①, ⑥에 들어갈 말로 바르게 연결된 것은?\nA: Who ①__________ the window?\nB: It ⑥__________ by Thomas.",
+        "explanation": "A는 과거 능동태 'broke'이고, B는 과거 수동태 'was broken'이다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "3",
+        "number": 7,
+        "options": [
+          "treated",
+          "was treating",
+          "was treated",
+          "treats",
+          "has been treated"
+        ],
+        "question": "다음 빈칸에 들어갈 말로 알맞은 것은?\nHis mother __________ for a high fever yesterday.",
+        "explanation": "'어제 고열로 치료를 받았다'는 과거 수동태 'was treated'이다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "2",
+        "number": 8,
+        "options": [
+          "founded",
+          "was found",
+          "was finding",
+          "to find",
+          "was founded"
+        ],
+        "question": "다음 대화의 빈칸에 들어갈 말로 알맞은 것은?\nA: Did you find your dog which was missing?\nB: Yes, it __________ on the 5th street by one of my neighbors.",
+        "explanation": "'발견되었다'는 과거 수동태 'was found'이다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "4",
+        "number": 9,
+        "options": [
+          "built",
+          "are built",
+          "was built",
+          "were built",
+          "are building"
+        ],
+        "question": "다음 대화의 빈칸에 들어갈 말로 알맞은 것은?\nA: What happened in that new area?\nB: New buildings __________ over there last year.",
+        "explanation": "복수명사 'buildings'에 대한 과거 수동태는 'were built'이다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "3",
+        "number": 10,
+        "options": [
+          "was",
+          "find",
+          "found",
+          "finds",
+          "was founded"
+        ],
+        "question": "다음 문장을 능동태로 전환할 때, 빈칸에 들어갈 말로 가장 적절한 것은?\nMy cup was found under the table by Sora.\n→ Sora __________ my cup under the table.",
+        "explanation": "과거 수동태를 과거 능동태로 변환하면 'Sora found my cup under the table.'이다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "3",
+        "number": 11,
+        "options": [
+          "has cleaned",
+          "is clean",
+          "was cleaned",
+          "was cleaning",
+          "is cleaned"
+        ],
+        "question": "다음 문장을 능동태로 전환할 때, 빈칸에 들어갈 말로 가장 적절한 것은?\nMom cleaned the family car.\n→ The family car __________ by mom.",
+        "explanation": "과거 능동태를 과거 수동태로 변환하면 'The family car was cleaned by mom.'이다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "2",
+        "number": 12,
+        "options": [
+          "was giving to me",
+          "was given to me",
+          "was given for me",
+          "did given me",
+          "did given to me"
+        ],
+        "question": "다음 문장을 능동태로 전환할 때, 빈칸에 들어갈 말로 가장 적절한 것은?\nShe gave me today's newspaper.\n→ Today's newspaper __________ by her.",
+        "explanation": "3형식 동사를 수동태로 만들 때 'was given to me'가 올바른 형태이다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "5",
+        "number": 13,
+        "options": [
+          "to grow - she",
+          "is growing - she",
+          "is growing - her",
+          "is grown - she",
+          "is grown - her"
+        ],
+        "question": "다음과 같이 문장을 바꿀 때 빈칸에 들어갈 말로 올바른 것은?\nShe grows a tree in the garden.\n→ A tree __________ in the garden by __________.",
+        "explanation": "'나무가 자라다'는 현재 수동태 'is grown'이 맞지만, 주체는 'she'이어야 한다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "5",
+        "number": 14,
+        "options": [
+          "is selling - they",
+          "sells - us",
+          "is sold - they",
+          "sold - them",
+          "is sold - them"
+        ],
+        "question": "다음과 같이 문장을 바꿀 때 빈칸에 들어갈 말이 차례대로 짝지어진 것은?\nThey sell sugar at the shop.\n→ Sugar __________ at the shop by __________."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "4",
+        "number": 15,
+        "options": [
+          "Do - by",
+          "Does - for",
+          "Did - to",
+          "Was - by",
+          "Were - to"
+        ],
+        "question": "다음 빈칸에 들어갈 말로 바르게 연결된 것은?\n• __________ this pen made by Japan?\n• The vase was broken __________ the cat.",
+        "explanation": "첫 번째는 수동태 의문문 'Was this pen made by Japan?', 두 번째는 수동태의 행위자 'by the cat'이다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "5",
+        "number": 16,
+        "options": [
+          "sent - he",
+          "is sent - him",
+          "was sent - he",
+          "sent - him",
+          "was sent - him"
+        ],
+        "question": "다음과 같이 문장을 바꿀 때 빈칸에 들어갈 말이 차례대로 짝지어진 것은?\nHe sent the present yesterday.\n= The present __________ by __________ yesterday."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "4",
+        "number": 17,
+        "options": [
+          "wrote - he",
+          "is written - him",
+          "writes - he",
+          "was written - him",
+          "was writing - his"
+        ],
+        "question": "다음 문장을 수동태로 전환할 때, 빈칸에 들어갈 말로 바르게 연결된 것은?\nHe wrote the letter last night.\n→ The letter __________ last night by __________.",
+        "explanation": "과거 수동태 'was written'이고, 주체는 'him'이다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "3",
+        "number": 18,
+        "options": [
+          "was take good care of",
+          "was taken good care of",
+          "is taken good care of",
+          "is being took good care of",
+          "takes good care of"
+        ],
+        "question": "다음 문장을 수동태로 전환할 때, 빈칸에 들어갈 말로 가장 적절한 것은?\nMary takes good care of her grandma.\n→ Her grandma __________ by Mary.",
+        "explanation": "현재 수동태로 'is taken good care of'가 올바른 형태이다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "5",
+        "number": 19,
+        "options": [
+          "was took - he",
+          "takes - her",
+          "is taking - him",
+          "is taken - her",
+          "was taken - him"
+        ],
+        "question": "다음과 같이 문장을 바꿀 때 빈칸에 들어갈 말이 차례대로 짝지어진 것은?\nHe took Mike to Jane's birthday party yesterday.\n= Mike __________ to Jane's birthday party by __________ yesterday.",
+        "explanation": "과거 수동태는 'was taken'이므로 'was took'는 틀렸다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "5",
+        "number": 20,
+        "options": [
+          "Did Casa Mila made by Gaudi?",
+          "Did Gaudi made by Casa Mila?",
+          "Was Gaudi made by Casa Mila?",
+          "Was Casa Mila made Gaudi?",
+          "Was Casa Mila made by Gaudi?"
+        ],
+        "question": "다음 문장을 수동태로 알맞게 바꾼 것은?\nDid Gaudi make Casa Mila?",
+        "explanation": "수동태 의문문을 능동태로 변환하면 'Did Gaudi make Casa Mila?'이다. 2번이 가장 가까운 의문형이다."
+      },
+      {
+        "tag": "복수정답",
+        "type": "multi_choice",
+        "answer": "5",
+        "number": 21,
+        "options": [
+          "The fairy tale was written Andersen.",
+          "Andersen wrote the fairy tale.",
+          "The fairy tale wrote by Andersen.",
+          "Andersen writes the fairy tale.",
+          "The fairy tale was written by Andersen."
+        ],
+        "question": "다음 우리말을 바르게 영작한 것 모두 고르면?\n이 동화는 안데르센이 썼다.",
+        "explanation": "과거 수동태 'The fairy tale was written by Andersen.'이 올바른 표현이다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "3",
+        "number": 22,
+        "options": [
+          "The cookies were made on yesterday by her.",
+          "The cookies were made for her yesterday.",
+          "The cookies were made yesterday by her.",
+          "The cookies was made yesterday by her.",
+          "The cookies was made for her yesterday."
+        ],
+        "question": "다음 문장을 수동태로 전환할 때, 바르게 연결된 것은?\nShe made the cookies yesterday.",
+        "explanation": "복수명사 'cookies'에 대한 과거 수동태는 'were made yesterday by her.'이다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "4",
+        "number": 23,
+        "options": [
+          "The window is broken by he.",
+          "The window is broken by him.",
+          "The window was broken by he.",
+          "The window was broken by him.",
+          "The window was broken to him."
+        ],
+        "question": "다음 문장을 수동태로 바꿀 때 알맞은 것은?\nHe broke the window.",
+        "explanation": "과거 수동태 'The window was broken by him.'이 올바른 표현이다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "1",
+        "number": 24,
+        "options": [
+          "Did the room clean by Cathy?",
+          "Did Cathy cleaned by the room?",
+          "Was Cathy cleaned by the room?",
+          "Was the room cleaned Cathy?",
+          "Was the room cleaned by Cathy?"
+        ],
+        "question": "다음 문장을 수동태로 바꿀 때 알맞은 것은?\nDid Cathy clean the room?",
+        "explanation": "능동태 의문문 'Did Cathy clean the room?'을 수동태 의문문으로 변환하면 'Did the room clean by Cathy?'이다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "3",
+        "number": 25,
+        "options": [
+          "The room is filled by colorful balloons.",
+          "The room was filled by colorful balloons.",
+          "The room is filled with colorful balloons.",
+          "The room was filled with colorful balloons.",
+          "The room was filled of colorful balloons."
+        ],
+        "question": "다음 문장을 수동태로 바꿀 때 알맞은 것은?\nColorful balloons fills the room.",
+        "explanation": "'채우다'의 의미로 'fill with'를 사용하므로 현재 수동태 'is filled with'가 맞다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "3",
+        "number": 26,
+        "options": [
+          "My life made him special.",
+          "My life made me special by him.",
+          "My life was made special by him.",
+          "My life was making special by him.",
+          "My life didn't make me special by him."
+        ],
+        "question": "다음 문장을 수동태로 바꿀 때 알맞은 것은?\nHe made my life special.",
+        "explanation": "과거 수동태 'My life was made special by him.'이 올바른 표현이다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "4",
+        "number": 27,
+        "options": [
+          "The picture is taken by Mina.",
+          "The picture is taking by Mina.",
+          "The picture has taken by Mina.",
+          "The picture was taken by Mina.",
+          "The picture was taking by Mina."
+        ],
+        "question": "다음 문장을 수동태로 바꿀 때 알맞은 것은?\nMina took the picture.",
+        "explanation": "과거 수동태 'The picture was taken by Mina.'이 올바른 표현이다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "5",
+        "number": 28,
+        "options": [
+          "I am respecting my parents.",
+          "I was respected by my parents.",
+          "My parents is respected by me.",
+          "My parents respected by me.",
+          "My parents are respected by me."
+        ],
+        "question": "다음 문장을 수동태로 바꿀 때 알맞은 것은?\nI respect my parents.",
+        "explanation": "현재 수동태로 복수명사 'parents'를 주어로 하면 'My parents are respected by me.'이다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "3",
+        "number": 29,
+        "options": [
+          "The team leader was chose by us.",
+          "We were choosing the team leader.",
+          "The team leader was chosen by us.",
+          "We were chosen by the team leader.",
+          "The team leader chose us."
+        ],
+        "question": "다음 문장을 수동태로 바꿀 때 알맞은 것은?\n\nWe chose the team leader."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "5",
+        "number": 30,
+        "options": [
+          "The walls painted by the students.",
+          "The students have painted the walls.",
+          "The students were painted the walls.",
+          "The walls are painted by the students.",
+          "The walls were painted by the students."
+        ],
+        "question": "다음 문장을 수동태로 바꾸게 바꾼 것은?\n\nThe students painted the walls."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "1",
+        "number": 31,
+        "options": [
+          "Our president's birthday is not celebrated by us.",
+          "Our president's birthday was not celebrated by us.",
+          "Our president's birthday will not be celebrated by us.",
+          "Our president's birthday is not celebrate by us.",
+          "Our president's birthday can not be celebrated by us."
+        ],
+        "question": "다음 문장을 변형한 것 중 그 의미를 가장 잘 나타낸 것은?\n\nWe do not celebrate our president's birthday."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "5",
+        "number": 32,
+        "options": [
+          "The fairy took the man's dress.",
+          "The fairy's dress took by the man.",
+          "The man was took the fairy's dress.",
+          "The man was taken the fairy's dress.",
+          "The fairy's dress was taken by the man."
+        ],
+        "question": "다음 그림에 대한 설명으로 가장 적절한 것은?\n(그림: 선녀의 옷을 훔쳐가는 나무꾼) "
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "2",
+        "number": 33,
+        "options": [
+          "was broken - fixed",
+          "was broken - was fixed",
+          "broke - were fixed",
+          "were broken - fixed",
+          "broken - was fixed"
+        ],
+        "question": "다음 괄호 ㉠, ㉡에 주어진 동사의 알맞은 형태가 짝지어진 것은?\n\nMy bike ㉠(break) and it ㉡(fix) by my father."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "3",
+        "number": 34,
+        "options": [
+          "(A) were put - (B) was added",
+          "(A) was put - (B) were added",
+          "(A) were put - (B) were added",
+          "(A) were put - (B) were add",
+          "(A) were putted - (B) were added"
+        ],
+        "question": "다음 문장을 수동태로 전환할 때 빈칸 (A), (B)에 들어갈 알맞 가장 적절한 것은?\n\n• Some people put their eyeglasses on the desk.\n→ The eyeglasses (A)________ on the desk.\n• Later, somebody added arms to them.\n→ Later, arms (B)________ to them."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "1",
+        "number": 35,
+        "options": [
+          "(A) will be sent - (B) are cut - (C) was written",
+          "(A) will be sent - (B) cut - (C) was written",
+          "(A) will sent - (B) cuts - (C) wrote",
+          "(A) is sent - (B) are cutted - (C) was written",
+          "(A) was sent - (B) will be cut - (C) was wrote"
+        ],
+        "question": "다음 문장의 빈칸 (A), (B), (C)에 들어갈 알맞 가장 적절한 것은?\n\n• Tom (A)________ to the camp in a week.\n• Roses (B)________ every day.\n• \"Hamlet\" (C)________ by W. Shakespeare."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "4",
+        "number": 36,
+        "options": [
+          "㉠ speak - ㉡ build - ㉢ kept",
+          "㉠ spoke - ㉡ built - ㉢ was keep",
+          "㉠ spoken - ㉡ builded - ㉢ were kept",
+          "㉠ spoken - ㉡ built - ㉢ were kept",
+          "㉠ spoke - ㉡ builded - ㉢ was kept"
+        ],
+        "question": "다음 빈칸에 들어갈 알맞게 짝지어진 것은?\n\n• Spanish and English are ㉠________ in that country.\n• That old building was ㉡________ by Brady at first.\n• The blue boxes ㉢________ in a cabinet."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "5",
+        "number": 37,
+        "options": [
+          "(A) laid - (B) put",
+          "(A) lay - (B) survived",
+          "(A) survived - (B) lifted",
+          "(A) raised - (B) destroyed",
+          "(A) survive - (B) destroyed"
+        ],
+        "question": "다음 문장의 빈칸 (A), (B)에 들어갈 말로 가장 적절한 것은?\n\n• Fish can't (A)________ outside water.\n• The building was (B)________ by fire."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "2",
+        "number": 38,
+        "options": [
+          "㉠ build - ㉡ built",
+          "㉠ built - ㉡ was built",
+          "㉠ built - ㉡ is built",
+          "㉠ is built - ㉡ build",
+          "㉠ was built - ㉡ was building"
+        ],
+        "question": "다음 대화의 괄호 ㉠, ㉡에 우어진 단어가 올바른 형태로 연결된 것은?\n\nA: Who ㉠(build) this house?\nB: It ㉡(build) by my grandfather in 1975."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "1",
+        "number": 39,
+        "options": [
+          "㉠ was not cooked - ㉡ was found",
+          "㉠ was not cook - ㉡ was found",
+          "㉠ did not cook - ㉡ found",
+          "㉠ was not cook - ㉡ found",
+          "㉠ was not cooked - ㉡ found"
+        ],
+        "question": "Which pair is the most appropriate for the blanks?\n\n• The soup ㉠__________ by me.\n• The missing child ㉡__________ last night."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "4",
+        "number": 40,
+        "options": [
+          "㉣ steal - ㉤ built - ㉢ speak",
+          "㉣ is stolen - ㉤ is built - ㉢ is spoken",
+          "㉣ stole - ㉤ build - ㉢ spoke",
+          "㉣ was stolen - ㉤ built - ㉢ is spoken",
+          "㉣ was stole - ㉤ was built - ㉢ spoke"
+        ],
+        "question": "다음 괄호 ㉣, ㉤, ㉢에 주어진 단어가 올바른 형태로 짝지어진 것은?\n\n• My watch ㉣(steal) last week.\n• My grandfather ㉤(build) the house in 1978.\n• English ㉢(speak) in many countries."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "1",
+        "number": 41,
+        "options": [
+          "(A) was built - (B) were bought - (C) Was",
+          "(A) was built - (B) were bought - (C) Did",
+          "(A) was built - (B) was bought - (C) Was",
+          "(A) built - (B) were bought - (C) Was",
+          "(A) built - (B) was bought - (C) Did"
+        ],
+        "question": "다음 문장의 괄호 (A), (B), (C) 안에서 어법에 맞는 표현으로 가장 적절한 것은?\n\n(A) The Eiffel Tower [built / was built] in 1889.\n(B) The flowers [was bought / were bought] by me.\n(C) [Did / Was] the room cleaned by her?"
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "5",
+        "number": 42,
+        "options": [
+          "(A) stolen - (B) catch - (C) invite",
+          "(A) stole - (B) catches - (C) invites",
+          "(A) stealed - (B) catched - (C) invited",
+          "(A) stealed - (B) caught - (C) invited",
+          "(A) stolen - (B) caught - (C) invited"
+        ],
+        "question": "다음 문장의 밑줄 친 (A), (B), (C)를 어법상 가장 적절한 형태로 바꾼 것은?\n\n• The bag was (A)steal yesterday.\n• The thief was (B)catch by the police.\n• She is (C)invite to the party every year."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "4",
+        "number": 43,
+        "options": [
+          "㉠ throws - ㉡ speaks - ㉢ flew",
+          "㉠ threw - ㉡ was spoke - ㉢ flown",
+          "㉠ was thrown - ㉡ spoken - ㉢ is flown",
+          "㉠ threw - ㉡ is spoken - ㉢ are flown",
+          "㉠ was thrown - ㉡ spoke - ㉢ fly"
+        ],
+        "question": "다음 괄호 ㉠, ㉡, ㉢에 주어진 단어가 올바른 형태로 짝지어진 것은?\n\n• My father ㉠(throw) me the ball.\n• English ㉡(speak) in many countries.\n• The kites ㉢(fly) in the park by them."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "1",
+        "number": 44,
+        "options": [
+          "㉠ hurt - ㉡ broke - ㉢ be mailed",
+          "㉠ hurt - ㉡ broken - ㉢ mail",
+          "㉠ hurted - ㉡ broke - ㉢ mail",
+          "㉠ hurted - ㉡ broken - ㉢ be mailed",
+          "㉠ hurting - ㉡ broken - ㉢ be mailed"
+        ],
+        "question": "다음 괄호에 주어진 동사의 알맞은 형태를 차례대로 작지은 것은?\n\n• She was ㉠(hurt) by his words.\n• My brother ㉡(break) the vase yesterday.\n• This letter will ㉢(mail) to John."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "1",
+        "number": 45,
+        "options": [
+          "① is produced  ② has been used  ③ was held",
+          "① produces  ② has been used  ③ is held",
+          "③ is produced  ② has used  ③ holds",
+          "④ produces  ② is used  ③ holds",
+          "⑤ is produced  ② has used  ③ is held"
+        ],
+        "question": "다음 문장의 빈칸에 알맞은 말을 자리대로 바르게 짝지은 것은?\n• A lot of sugar ①__________ in Brazil.\n• Ann ②__________ this cell phone for 2 years.\n• The meeting ③__________ every Monday by Mr. Park.",
+        "explanation": "첫 번째 문장은 수동태 현재 단순형(is produced), 두 번째는 현재완료 수동태(has been used), 세 번째는 과거 단순형 수동태(was held)가 필요합니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "1",
+        "number": 46,
+        "options": [
+          "① made  ② buy  ③ was painted",
+          "② making  ② bought  ③ painted",
+          "③ made  ② bought  ③ painted",
+          "④ making  ② buy  ③ was painted",
+          "⑤ made  ② buy  ③ painted"
+        ],
+        "question": "다음 괄호 ①, ②, ③에 주어진 동사의 알맞은 형태가 차례대로 짝지어진 것은?\n• Is this coat ①(make) in Korea?\n• Where did he ②(buy) the camera?\n• The wall ③(paint) by Tom.",
+        "explanation": "첫 번째는 의문문 수동태(made), 두 번째는 과거 일반동사(buy), 세 번째는 수동태(was painted)가 올바른 형태입니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "2",
+        "number": 47,
+        "options": [
+          "① sent  ② was given  ③ held",
+          "② was sent  ② was given  ③ held",
+          "③ is sent  ③ gave  ③ was held",
+          "④ sent  ④ gave  ④ was held",
+          "⑤ was sent  ⑤ was given to  ⑤ held"
+        ],
+        "question": "다음 빈칸에 알맞은 단어를 고르시오.\n• The letter (A)__________ by my mother.\n• The present (B)__________ me by my aunt.\n• Germany (C)__________ the 2006 World Cup.",
+        "explanation": "(A) 과거 수동태 'was sent', (B) 과거 수동태 'was given', (C) 과거 일반동사 'held'가 올바른 형태입니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "1",
+        "number": 48,
+        "options": [
+          "① is driven  ② was given to  ③ are invented",
+          "② drives  ② was given  ③ invented",
+          "③ was driven  ③ gave  ③ are invented",
+          "④ drove  ④ gives  ④ was invented",
+          "⑤ was driven  ⑤ was given to  ⑤ invented"
+        ],
+        "question": "다음 빈칸에 알맞은 단어를 고르시오.\n• The new car (A)__________ by my friend, David.\n• The present (B)__________ me by my brother.\n• They (C)__________ the first airplane.",
+        "explanation": "(A) 과거 수동태 'is driven' (현재완료 또는 최근), (B) 과거 수동태 'was given to', (C) 과거 능동태 또는 수동태 'are invented'가 올바른 형태입니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "1",
+        "number": 49,
+        "options": [
+          "① is spoken  ② was cleaned  ③ was baked",
+          "② speak  ② cleaned  ③ baked",
+          "③ is spoken  ③ is cleaned  ③ is baked",
+          "④ is spoken  ④ was cleaned  ④ is baking",
+          "⑤ speak  ⑤ is cleaning  ⑤ will be baked"
+        ],
+        "question": "다음 빈칸에 알맞은 단어를 고르시오.\n• Korean (A)__________ in Korea.\n• The room (B)__________ by Ann yesterday.\n• My mother (C)__________ cookies for me.",
+        "explanation": "(A) 현재 수동태 'is spoken', (B) 과거 수동태 'was cleaned', (C) 과거 능동태 'baked'가 올바른 형태입니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "1",
+        "number": 50,
+        "options": [
+          "① was given to  ② was given  ③ invented",
+          "② was driven  ② was given  ③ invented",
+          "③ is driven  ③ gave  ③ is invented",
+          "④ drove  ④ gives  ④ was invented",
+          "⑤ was driven  ⑤ was given to  ⑤ invented"
+        ],
+        "question": "다음 빈칸에 알맞은 단어를 고르시오.\n• A blue car (A)__________ by my brother.\n• The present (B)__________ me by my aunt.\n• Nikolaus (C)__________ a gas engine in 1894.",
+        "explanation": "(A) 과거 수동태 'was given to', (B) 과거 수동태 'was given', (C) 과거 능동태 'invented'가 올바른 형태입니다."
+      }
+    ],
+    "answer_key": [
+      "4",
+      "5",
+      "2",
+      "5",
+      "5",
+      "1",
+      "3",
+      "2",
+      "4",
+      "3",
+      "3",
+      "2",
+      "5",
+      "5",
+      "4",
+      "5",
+      "4",
+      "3",
+      "5",
+      "5",
+      "5",
+      "3",
+      "4",
+      "1",
+      "3",
+      "3",
+      "4",
+      "5",
+      "3",
+      "5",
+      "1",
+      "5",
+      "2",
+      "3",
+      "1",
+      "4",
+      "5",
+      "2",
+      "1",
+      "4",
+      "1",
+      "5",
+      "4",
+      "1",
+      "1",
+      "1",
+      "2",
+      "1",
+      "1",
+      "1"
+    ]
+  },
+  "sheet_eb1d8db5-a078-405f-9bd0-0481255a7006": {
+    "questions": [
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "4",
+        "number": 1,
+        "options": [
+          "ate",
+          "eat",
+          "was ate",
+          "was eaten",
+          "was eating"
+        ],
+        "question": "다음 우리말과 일치하도록 빈 칸에 알맞은 말로 가장 적절한 것은?\n그 치즈는 쥐에게 먹혔다.\n→ The cheese __________ by the mouse.",
+        "explanation": "수동태 구조로 '먹혔다'는 과거 수동태 'was eaten'이 맞다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "5",
+        "number": 2,
+        "options": [
+          "wrote",
+          "writes",
+          "written",
+          "was written",
+          "were written"
+        ],
+        "question": "다음 빈칸에 들어갈 말로 가장 적절한 것은?\nSherlock Holmes stories __________ by Arthur Conan Doyle.",
+        "explanation": "복수명사 'stories'에 대한 과거 수동태는 'were written'이다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "2",
+        "number": 3,
+        "options": [
+          "stole",
+          "read",
+          "written",
+          "bought",
+          "published"
+        ],
+        "question": "다음 빈칸에 들어갈 말로 알맞은 것은?\nThe book was __________ by him yesterday.",
+        "explanation": "과거 수동태 구조 'was + 과거분사'에서 'read'가 적절하다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "5",
+        "number": 4,
+        "options": [
+          "held",
+          "is held",
+          "were held",
+          "are held",
+          "was held"
+        ],
+        "question": "다음 빈칸에 들어갈 말로 알맞은 것을 고르면?\nThe first World Cup __________ in Uruguay in 1930.",
+        "explanation": "단수명사 'Cup'에 대한 과거 수동태는 'was held'이다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "5",
+        "number": 5,
+        "options": [
+          "bore",
+          "bears",
+          "is born",
+          "be born",
+          "was born"
+        ],
+        "question": "다음 빈칸에 들어갈 말로 알맞은 것은?\nMy father is fifty-nine years old. He __________ in 1956.",
+        "explanation": "'1956년에 태어났다'는 과거 수동태 'was born'이 맞다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "1",
+        "number": 6,
+        "options": [
+          "broke - was broken",
+          "break - break",
+          "break - is breaking",
+          "broke - broke",
+          "was broken - broke"
+        ],
+        "question": "다음 대화의 빈칸 ①, ⑥에 들어갈 말로 바르게 연결된 것은?\nA: Who ①__________ the window?\nB: It ⑥__________ by Thomas.",
+        "explanation": "A는 과거 능동태 'broke'이고, B는 과거 수동태 'was broken'이다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "3",
+        "number": 7,
+        "options": [
+          "treated",
+          "was treating",
+          "was treated",
+          "treats",
+          "has been treated"
+        ],
+        "question": "다음 빈칸에 들어갈 말로 알맞은 것은?\nHis mother __________ for a high fever yesterday.",
+        "explanation": "'어제 고열로 치료를 받았다'는 과거 수동태 'was treated'이다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "2",
+        "number": 8,
+        "options": [
+          "founded",
+          "was found",
+          "was finding",
+          "to find",
+          "was founded"
+        ],
+        "question": "다음 대화의 빈칸에 들어갈 말로 알맞은 것은?\nA: Did you find your dog which was missing?\nB: Yes, it __________ on the 5th street by one of my neighbors.",
+        "explanation": "'발견되었다'는 과거 수동태 'was found'이다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "4",
+        "number": 9,
+        "options": [
+          "built",
+          "are built",
+          "was built",
+          "were built",
+          "are building"
+        ],
+        "question": "다음 대화의 빈칸에 들어갈 말로 알맞은 것은?\nA: What happened in that new area?\nB: New buildings __________ over there last year.",
+        "explanation": "복수명사 'buildings'에 대한 과거 수동태는 'were built'이다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "3",
+        "number": 10,
+        "options": [
+          "was",
+          "find",
+          "found",
+          "finds",
+          "was founded"
+        ],
+        "question": "다음 문장을 능동태로 전환할 때, 빈칸에 들어갈 말로 가장 적절한 것은?\nMy cup was found under the table by Sora.\n→ Sora __________ my cup under the table.",
+        "explanation": "과거 수동태를 과거 능동태로 변환하면 'Sora found my cup under the table.'이다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "3",
+        "number": 11,
+        "options": [
+          "has cleaned",
+          "is clean",
+          "was cleaned",
+          "was cleaning",
+          "is cleaned"
+        ],
+        "question": "다음 문장을 능동태로 전환할 때, 빈칸에 들어갈 말로 가장 적절한 것은?\nMom cleaned the family car.\n→ The family car __________ by mom.",
+        "explanation": "과거 능동태를 과거 수동태로 변환하면 'The family car was cleaned by mom.'이다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "2",
+        "number": 12,
+        "options": [
+          "was giving to me",
+          "was given to me",
+          "was given for me",
+          "did given me",
+          "did given to me"
+        ],
+        "question": "다음 문장을 능동태로 전환할 때, 빈칸에 들어갈 말로 가장 적절한 것은?\nShe gave me today's newspaper.\n→ Today's newspaper __________ by her.",
+        "explanation": "3형식 동사를 수동태로 만들 때 'was given to me'가 올바른 형태이다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "5",
+        "number": 13,
+        "options": [
+          "to grow - she",
+          "is growing - she",
+          "is growing - her",
+          "is grown - she",
+          "is grown - her"
+        ],
+        "question": "다음과 같이 문장을 바꿀 때 빈칸에 들어갈 말로 올바른 것은?\nShe grows a tree in the garden.\n→ A tree __________ in the garden by __________.",
+        "explanation": "'나무가 자라다'는 현재 수동태 'is grown'이 맞지만, 주체는 'she'이어야 한다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "5",
+        "number": 14,
+        "options": [
+          "is selling - they",
+          "sells - us",
+          "is sold - they",
+          "sold - them",
+          "is sold - them"
+        ],
+        "question": "다음과 같이 문장을 바꿀 때 빈칸에 들어갈 말이 차례대로 짝지어진 것은?\nThey sell sugar at the shop.\n→ Sugar __________ at the shop by __________."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "4",
+        "number": 15,
+        "options": [
+          "Do - by",
+          "Does - for",
+          "Did - to",
+          "Was - by",
+          "Were - to"
+        ],
+        "question": "다음 빈칸에 들어갈 말로 바르게 연결된 것은?\n• __________ this pen made by Japan?\n• The vase was broken __________ the cat.",
+        "explanation": "첫 번째는 수동태 의문문 'Was this pen made by Japan?', 두 번째는 수동태의 행위자 'by the cat'이다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "5",
+        "number": 16,
+        "options": [
+          "sent - he",
+          "is sent - him",
+          "was sent - he",
+          "sent - him",
+          "was sent - him"
+        ],
+        "question": "다음과 같이 문장을 바꿀 때 빈칸에 들어갈 말이 차례대로 짝지어진 것은?\nHe sent the present yesterday.\n= The present __________ by __________ yesterday."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "4",
+        "number": 17,
+        "options": [
+          "wrote - he",
+          "is written - him",
+          "writes - he",
+          "was written - him",
+          "was writing - his"
+        ],
+        "question": "다음 문장을 수동태로 전환할 때, 빈칸에 들어갈 말로 바르게 연결된 것은?\nHe wrote the letter last night.\n→ The letter __________ last night by __________.",
+        "explanation": "과거 수동태 'was written'이고, 주체는 'him'이다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "3",
+        "number": 18,
+        "options": [
+          "was take good care of",
+          "was taken good care of",
+          "is taken good care of",
+          "is being took good care of",
+          "takes good care of"
+        ],
+        "question": "다음 문장을 수동태로 전환할 때, 빈칸에 들어갈 말로 가장 적절한 것은?\nMary takes good care of her grandma.\n→ Her grandma __________ by Mary.",
+        "explanation": "현재 수동태로 'is taken good care of'가 올바른 형태이다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "5",
+        "number": 19,
+        "options": [
+          "was took - he",
+          "takes - her",
+          "is taking - him",
+          "is taken - her",
+          "was taken - him"
+        ],
+        "question": "다음과 같이 문장을 바꿀 때 빈칸에 들어갈 말이 차례대로 짝지어진 것은?\nHe took Mike to Jane's birthday party yesterday.\n= Mike __________ to Jane's birthday party by __________ yesterday.",
+        "explanation": "과거 수동태는 'was taken'이므로 'was took'는 틀렸다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "5",
+        "number": 20,
+        "options": [
+          "Did Casa Mila made by Gaudi?",
+          "Did Gaudi made by Casa Mila?",
+          "Was Gaudi made by Casa Mila?",
+          "Was Casa Mila made Gaudi?",
+          "Was Casa Mila made by Gaudi?"
+        ],
+        "question": "다음 문장을 수동태로 알맞게 바꾼 것은?\nDid Gaudi make Casa Mila?",
+        "explanation": "수동태 의문문을 능동태로 변환하면 'Did Gaudi make Casa Mila?'이다. 2번이 가장 가까운 의문형이다."
+      },
+      {
+        "tag": "복수정답",
+        "type": "multi_choice",
+        "answer": "5",
+        "number": 21,
+        "options": [
+          "The fairy tale was written Andersen.",
+          "Andersen wrote the fairy tale.",
+          "The fairy tale wrote by Andersen.",
+          "Andersen writes the fairy tale.",
+          "The fairy tale was written by Andersen."
+        ],
+        "question": "다음 우리말을 바르게 영작한 것 모두 고르면?\n이 동화는 안데르센이 썼다.",
+        "explanation": "과거 수동태 'The fairy tale was written by Andersen.'이 올바른 표현이다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "3",
+        "number": 22,
+        "options": [
+          "The cookies were made on yesterday by her.",
+          "The cookies were made for her yesterday.",
+          "The cookies were made yesterday by her.",
+          "The cookies was made yesterday by her.",
+          "The cookies was made for her yesterday."
+        ],
+        "question": "다음 문장을 수동태로 전환할 때, 바르게 연결된 것은?\nShe made the cookies yesterday.",
+        "explanation": "복수명사 'cookies'에 대한 과거 수동태는 'were made yesterday by her.'이다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "4",
+        "number": 23,
+        "options": [
+          "The window is broken by he.",
+          "The window is broken by him.",
+          "The window was broken by he.",
+          "The window was broken by him.",
+          "The window was broken to him."
+        ],
+        "question": "다음 문장을 수동태로 바꿀 때 알맞은 것은?\nHe broke the window.",
+        "explanation": "과거 수동태 'The window was broken by him.'이 올바른 표현이다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "1",
+        "number": 24,
+        "options": [
+          "Did the room clean by Cathy?",
+          "Did Cathy cleaned by the room?",
+          "Was Cathy cleaned by the room?",
+          "Was the room cleaned Cathy?",
+          "Was the room cleaned by Cathy?"
+        ],
+        "question": "다음 문장을 수동태로 바꿀 때 알맞은 것은?\nDid Cathy clean the room?",
+        "explanation": "능동태 의문문 'Did Cathy clean the room?'을 수동태 의문문으로 변환하면 'Did the room clean by Cathy?'이다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "3",
+        "number": 25,
+        "options": [
+          "The room is filled by colorful balloons.",
+          "The room was filled by colorful balloons.",
+          "The room is filled with colorful balloons.",
+          "The room was filled with colorful balloons.",
+          "The room was filled of colorful balloons."
+        ],
+        "question": "다음 문장을 수동태로 바꿀 때 알맞은 것은?\nColorful balloons fills the room.",
+        "explanation": "'채우다'의 의미로 'fill with'를 사용하므로 현재 수동태 'is filled with'가 맞다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "3",
+        "number": 26,
+        "options": [
+          "My life made him special.",
+          "My life made me special by him.",
+          "My life was made special by him.",
+          "My life was making special by him.",
+          "My life didn't make me special by him."
+        ],
+        "question": "다음 문장을 수동태로 바꿀 때 알맞은 것은?\nHe made my life special.",
+        "explanation": "과거 수동태 'My life was made special by him.'이 올바른 표현이다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "4",
+        "number": 27,
+        "options": [
+          "The picture is taken by Mina.",
+          "The picture is taking by Mina.",
+          "The picture has taken by Mina.",
+          "The picture was taken by Mina.",
+          "The picture was taking by Mina."
+        ],
+        "question": "다음 문장을 수동태로 바꿀 때 알맞은 것은?\nMina took the picture.",
+        "explanation": "과거 수동태 'The picture was taken by Mina.'이 올바른 표현이다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "5",
+        "number": 28,
+        "options": [
+          "I am respecting my parents.",
+          "I was respected by my parents.",
+          "My parents is respected by me.",
+          "My parents respected by me.",
+          "My parents are respected by me."
+        ],
+        "question": "다음 문장을 수동태로 바꿀 때 알맞은 것은?\nI respect my parents.",
+        "explanation": "현재 수동태로 복수명사 'parents'를 주어로 하면 'My parents are respected by me.'이다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "3",
+        "number": 29,
+        "options": [
+          "The team leader was chose by us.",
+          "We were choosing the team leader.",
+          "The team leader was chosen by us.",
+          "We were chosen by the team leader.",
+          "The team leader chose us."
+        ],
+        "question": "다음 문장을 수동태로 바꿀 때 알맞은 것은?\n\nWe chose the team leader."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "5",
+        "number": 30,
+        "options": [
+          "The walls painted by the students.",
+          "The students have painted the walls.",
+          "The students were painted the walls.",
+          "The walls are painted by the students.",
+          "The walls were painted by the students."
+        ],
+        "question": "다음 문장을 수동태로 바꾸게 바꾼 것은?\n\nThe students painted the walls."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "1",
+        "number": 31,
+        "options": [
+          "Our president's birthday is not celebrated by us.",
+          "Our president's birthday was not celebrated by us.",
+          "Our president's birthday will not be celebrated by us.",
+          "Our president's birthday is not celebrate by us.",
+          "Our president's birthday can not be celebrated by us."
+        ],
+        "question": "다음 문장을 변형한 것 중 그 의미를 가장 잘 나타낸 것은?\n\nWe do not celebrate our president's birthday."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "5",
+        "number": 32,
+        "options": [
+          "The fairy took the man's dress.",
+          "The fairy's dress took by the man.",
+          "The man was took the fairy's dress.",
+          "The man was taken the fairy's dress.",
+          "The fairy's dress was taken by the man."
+        ],
+        "question": "다음 그림에 대한 설명으로 가장 적절한 것은?\n(그림: 선녀의 옷을 훔쳐가는 나무꾼) "
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "2",
+        "number": 33,
+        "options": [
+          "was broken - fixed",
+          "was broken - was fixed",
+          "broke - were fixed",
+          "were broken - fixed",
+          "broken - was fixed"
+        ],
+        "question": "다음 괄호 ㉠, ㉡에 주어진 동사의 알맞은 형태가 짝지어진 것은?\n\nMy bike ㉠(break) and it ㉡(fix) by my father."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "3",
+        "number": 34,
+        "options": [
+          "(A) were put - (B) was added",
+          "(A) was put - (B) were added",
+          "(A) were put - (B) were added",
+          "(A) were put - (B) were add",
+          "(A) were putted - (B) were added"
+        ],
+        "question": "다음 문장을 수동태로 전환할 때 빈칸 (A), (B)에 들어갈 알맞 가장 적절한 것은?\n\n• Some people put their eyeglasses on the desk.\n→ The eyeglasses (A)________ on the desk.\n• Later, somebody added arms to them.\n→ Later, arms (B)________ to them."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "1",
+        "number": 35,
+        "options": [
+          "(A) will be sent - (B) are cut - (C) was written",
+          "(A) will be sent - (B) cut - (C) was written",
+          "(A) will sent - (B) cuts - (C) wrote",
+          "(A) is sent - (B) are cutted - (C) was written",
+          "(A) was sent - (B) will be cut - (C) was wrote"
+        ],
+        "question": "다음 문장의 빈칸 (A), (B), (C)에 들어갈 알맞 가장 적절한 것은?\n\n• Tom (A)________ to the camp in a week.\n• Roses (B)________ every day.\n• \"Hamlet\" (C)________ by W. Shakespeare."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "4",
+        "number": 36,
+        "options": [
+          "㉠ speak - ㉡ build - ㉢ kept",
+          "㉠ spoke - ㉡ built - ㉢ was keep",
+          "㉠ spoken - ㉡ builded - ㉢ were kept",
+          "㉠ spoken - ㉡ built - ㉢ were kept",
+          "㉠ spoke - ㉡ builded - ㉢ was kept"
+        ],
+        "question": "다음 빈칸에 들어갈 알맞게 짝지어진 것은?\n\n• Spanish and English are ㉠________ in that country.\n• That old building was ㉡________ by Brady at first.\n• The blue boxes ㉢________ in a cabinet."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "5",
+        "number": 37,
+        "options": [
+          "(A) laid - (B) put",
+          "(A) lay - (B) survived",
+          "(A) survived - (B) lifted",
+          "(A) raised - (B) destroyed",
+          "(A) survive - (B) destroyed"
+        ],
+        "question": "다음 문장의 빈칸 (A), (B)에 들어갈 말로 가장 적절한 것은?\n\n• Fish can't (A)________ outside water.\n• The building was (B)________ by fire."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "2",
+        "number": 38,
+        "options": [
+          "㉠ build - ㉡ built",
+          "㉠ built - ㉡ was built",
+          "㉠ built - ㉡ is built",
+          "㉠ is built - ㉡ build",
+          "㉠ was built - ㉡ was building"
+        ],
+        "question": "다음 대화의 괄호 ㉠, ㉡에 우어진 단어가 올바른 형태로 연결된 것은?\n\nA: Who ㉠(build) this house?\nB: It ㉡(build) by my grandfather in 1975."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "1",
+        "number": 39,
+        "options": [
+          "㉠ was not cooked - ㉡ was found",
+          "㉠ was not cook - ㉡ was found",
+          "㉠ did not cook - ㉡ found",
+          "㉠ was not cook - ㉡ found",
+          "㉠ was not cooked - ㉡ found"
+        ],
+        "question": "Which pair is the most appropriate for the blanks?\n\n• The soup ㉠__________ by me.\n• The missing child ㉡__________ last night."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "4",
+        "number": 40,
+        "options": [
+          "㉣ steal - ㉤ built - ㉢ speak",
+          "㉣ is stolen - ㉤ is built - ㉢ is spoken",
+          "㉣ stole - ㉤ build - ㉢ spoke",
+          "㉣ was stolen - ㉤ built - ㉢ is spoken",
+          "㉣ was stole - ㉤ was built - ㉢ spoke"
+        ],
+        "question": "다음 괄호 ㉣, ㉤, ㉢에 주어진 단어가 올바른 형태로 짝지어진 것은?\n\n• My watch ㉣(steal) last week.\n• My grandfather ㉤(build) the house in 1978.\n• English ㉢(speak) in many countries."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "1",
+        "number": 41,
+        "options": [
+          "(A) was built - (B) were bought - (C) Was",
+          "(A) was built - (B) were bought - (C) Did",
+          "(A) was built - (B) was bought - (C) Was",
+          "(A) built - (B) were bought - (C) Was",
+          "(A) built - (B) was bought - (C) Did"
+        ],
+        "question": "다음 문장의 괄호 (A), (B), (C) 안에서 어법에 맞는 표현으로 가장 적절한 것은?\n\n(A) The Eiffel Tower [built / was built] in 1889.\n(B) The flowers [was bought / were bought] by me.\n(C) [Did / Was] the room cleaned by her?"
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "5",
+        "number": 42,
+        "options": [
+          "(A) stolen - (B) catch - (C) invite",
+          "(A) stole - (B) catches - (C) invites",
+          "(A) stealed - (B) catched - (C) invited",
+          "(A) stealed - (B) caught - (C) invited",
+          "(A) stolen - (B) caught - (C) invited"
+        ],
+        "question": "다음 문장의 밑줄 친 (A), (B), (C)를 어법상 가장 적절한 형태로 바꾼 것은?\n\n• The bag was (A)steal yesterday.\n• The thief was (B)catch by the police.\n• She is (C)invite to the party every year."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "4",
+        "number": 43,
+        "options": [
+          "㉠ throws - ㉡ speaks - ㉢ flew",
+          "㉠ threw - ㉡ was spoke - ㉢ flown",
+          "㉠ was thrown - ㉡ spoken - ㉢ is flown",
+          "㉠ threw - ㉡ is spoken - ㉢ are flown",
+          "㉠ was thrown - ㉡ spoke - ㉢ fly"
+        ],
+        "question": "다음 괄호 ㉠, ㉡, ㉢에 주어진 단어가 올바른 형태로 짝지어진 것은?\n\n• My father ㉠(throw) me the ball.\n• English ㉡(speak) in many countries.\n• The kites ㉢(fly) in the park by them."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "1",
+        "number": 44,
+        "options": [
+          "㉠ hurt - ㉡ broke - ㉢ be mailed",
+          "㉠ hurt - ㉡ broken - ㉢ mail",
+          "㉠ hurted - ㉡ broke - ㉢ mail",
+          "㉠ hurted - ㉡ broken - ㉢ be mailed",
+          "㉠ hurting - ㉡ broken - ㉢ be mailed"
+        ],
+        "question": "다음 괄호에 주어진 동사의 알맞은 형태를 차례대로 작지은 것은?\n\n• She was ㉠(hurt) by his words.\n• My brother ㉡(break) the vase yesterday.\n• This letter will ㉢(mail) to John."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "1",
+        "number": 45,
+        "options": [
+          "① is produced  ② has been used  ③ was held",
+          "① produces  ② has been used  ③ is held",
+          "③ is produced  ② has used  ③ holds",
+          "④ produces  ② is used  ③ holds",
+          "⑤ is produced  ② has used  ③ is held"
+        ],
+        "question": "다음 문장의 빈칸에 알맞은 말을 자리대로 바르게 짝지은 것은?\n• A lot of sugar ①__________ in Brazil.\n• Ann ②__________ this cell phone for 2 years.\n• The meeting ③__________ every Monday by Mr. Park.",
+        "explanation": "첫 번째 문장은 수동태 현재 단순형(is produced), 두 번째는 현재완료 수동태(has been used), 세 번째는 과거 단순형 수동태(was held)가 필요합니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "1",
+        "number": 46,
+        "options": [
+          "① made  ② buy  ③ was painted",
+          "② making  ② bought  ③ painted",
+          "③ made  ② bought  ③ painted",
+          "④ making  ② buy  ③ was painted",
+          "⑤ made  ② buy  ③ painted"
+        ],
+        "question": "다음 괄호 ①, ②, ③에 주어진 동사의 알맞은 형태가 차례대로 짝지어진 것은?\n• Is this coat ①(make) in Korea?\n• Where did he ②(buy) the camera?\n• The wall ③(paint) by Tom.",
+        "explanation": "첫 번째는 의문문 수동태(made), 두 번째는 과거 일반동사(buy), 세 번째는 수동태(was painted)가 올바른 형태입니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "2",
+        "number": 47,
+        "options": [
+          "① sent  ② was given  ③ held",
+          "② was sent  ② was given  ③ held",
+          "③ is sent  ③ gave  ③ was held",
+          "④ sent  ④ gave  ④ was held",
+          "⑤ was sent  ⑤ was given to  ⑤ held"
+        ],
+        "question": "다음 빈칸에 알맞은 단어를 고르시오.\n• The letter (A)__________ by my mother.\n• The present (B)__________ me by my aunt.\n• Germany (C)__________ the 2006 World Cup.",
+        "explanation": "(A) 과거 수동태 'was sent', (B) 과거 수동태 'was given', (C) 과거 일반동사 'held'가 올바른 형태입니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "1",
+        "number": 48,
+        "options": [
+          "① is driven  ② was given to  ③ are invented",
+          "② drives  ② was given  ③ invented",
+          "③ was driven  ③ gave  ③ are invented",
+          "④ drove  ④ gives  ④ was invented",
+          "⑤ was driven  ⑤ was given to  ⑤ invented"
+        ],
+        "question": "다음 빈칸에 알맞은 단어를 고르시오.\n• The new car (A)__________ by my friend, David.\n• The present (B)__________ me by my brother.\n• They (C)__________ the first airplane.",
+        "explanation": "(A) 과거 수동태 'is driven' (현재완료 또는 최근), (B) 과거 수동태 'was given to', (C) 과거 능동태 또는 수동태 'are invented'가 올바른 형태입니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "1",
+        "number": 49,
+        "options": [
+          "① is spoken  ② was cleaned  ③ was baked",
+          "② speak  ② cleaned  ③ baked",
+          "③ is spoken  ③ is cleaned  ③ is baked",
+          "④ is spoken  ④ was cleaned  ④ is baking",
+          "⑤ speak  ⑤ is cleaning  ⑤ will be baked"
+        ],
+        "question": "다음 빈칸에 알맞은 단어를 고르시오.\n• Korean (A)__________ in Korea.\n• The room (B)__________ by Ann yesterday.\n• My mother (C)__________ cookies for me.",
+        "explanation": "(A) 현재 수동태 'is spoken', (B) 과거 수동태 'was cleaned', (C) 과거 능동태 'baked'가 올바른 형태입니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "1",
+        "number": 50,
+        "options": [
+          "① was given to  ② was given  ③ invented",
+          "② was driven  ② was given  ③ invented",
+          "③ is driven  ③ gave  ③ is invented",
+          "④ drove  ④ gives  ④ was invented",
+          "⑤ was driven  ⑤ was given to  ⑤ invented"
+        ],
+        "question": "다음 빈칸에 알맞은 단어를 고르시오.\n• A blue car (A)__________ by my brother.\n• The present (B)__________ me by my aunt.\n• Nikolaus (C)__________ a gas engine in 1894.",
+        "explanation": "(A) 과거 수동태 'was given to', (B) 과거 수동태 'was given', (C) 과거 능동태 'invented'가 올바른 형태입니다."
+      }
+    ],
+    "answer_key": [
+      "4",
+      "5",
+      "2",
+      "5",
+      "5",
+      "1",
+      "3",
+      "2",
+      "4",
+      "3",
+      "3",
+      "2",
+      "5",
+      "5",
+      "4",
+      "5",
+      "4",
+      "3",
+      "5",
+      "5",
+      "5",
+      "3",
+      "4",
+      "1",
+      "3",
+      "3",
+      "4",
+      "5",
+      "3",
+      "5",
+      "1",
+      "5",
+      "2",
+      "3",
+      "1",
+      "4",
+      "5",
+      "2",
+      "1",
+      "4",
+      "1",
+      "5",
+      "4",
+      "1",
+      "1",
+      "1",
+      "2",
+      "1",
+      "1",
+      "1"
+    ]
+  },
+  "sheet_55e8890f-9813-4a24-a8d3-f22e94ea306d": {
+    "questions": [
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "4",
+        "number": 1,
+        "options": [
+          "ate",
+          "eat",
+          "was ate",
+          "was eaten",
+          "was eating"
+        ],
+        "question": "다음 우리말과 일치하도록 빈 칸에 알맞은 말로 가장 적절한 것은?\n그 치즈는 쥐에게 먹혔다.\n→ The cheese __________ by the mouse.",
+        "explanation": "수동태 구조로 '먹혔다'는 과거 수동태 'was eaten'이 맞다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "5",
+        "number": 2,
+        "options": [
+          "wrote",
+          "writes",
+          "written",
+          "was written",
+          "were written"
+        ],
+        "question": "다음 빈칸에 들어갈 말로 가장 적절한 것은?\nSherlock Holmes stories __________ by Arthur Conan Doyle.",
+        "explanation": "복수명사 'stories'에 대한 과거 수동태는 'were written'이다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "2",
+        "number": 3,
+        "options": [
+          "stole",
+          "read",
+          "written",
+          "bought",
+          "published"
+        ],
+        "question": "다음 빈칸에 들어갈 말로 알맞은 것은?\nThe book was __________ by him yesterday.",
+        "explanation": "과거 수동태 구조 'was + 과거분사'에서 'read'가 적절하다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "5",
+        "number": 4,
+        "options": [
+          "held",
+          "is held",
+          "were held",
+          "are held",
+          "was held"
+        ],
+        "question": "다음 빈칸에 들어갈 말로 알맞은 것을 고르면?\nThe first World Cup __________ in Uruguay in 1930.",
+        "explanation": "단수명사 'Cup'에 대한 과거 수동태는 'was held'이다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "5",
+        "number": 5,
+        "options": [
+          "bore",
+          "bears",
+          "is born",
+          "be born",
+          "was born"
+        ],
+        "question": "다음 빈칸에 들어갈 말로 알맞은 것은?\nMy father is fifty-nine years old. He __________ in 1956.",
+        "explanation": "'1956년에 태어났다'는 과거 수동태 'was born'이 맞다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "1",
+        "number": 6,
+        "options": [
+          "broke - was broken",
+          "break - break",
+          "break - is breaking",
+          "broke - broke",
+          "was broken - broke"
+        ],
+        "question": "다음 대화의 빈칸 ①, ⑥에 들어갈 말로 바르게 연결된 것은?\nA: Who ①__________ the window?\nB: It ⑥__________ by Thomas.",
+        "explanation": "A는 과거 능동태 'broke'이고, B는 과거 수동태 'was broken'이다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "3",
+        "number": 7,
+        "options": [
+          "treated",
+          "was treating",
+          "was treated",
+          "treats",
+          "has been treated"
+        ],
+        "question": "다음 빈칸에 들어갈 말로 알맞은 것은?\nHis mother __________ for a high fever yesterday.",
+        "explanation": "'어제 고열로 치료를 받았다'는 과거 수동태 'was treated'이다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "2",
+        "number": 8,
+        "options": [
+          "founded",
+          "was found",
+          "was finding",
+          "to find",
+          "was founded"
+        ],
+        "question": "다음 대화의 빈칸에 들어갈 말로 알맞은 것은?\nA: Did you find your dog which was missing?\nB: Yes, it __________ on the 5th street by one of my neighbors.",
+        "explanation": "'발견되었다'는 과거 수동태 'was found'이다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "4",
+        "number": 9,
+        "options": [
+          "built",
+          "are built",
+          "was built",
+          "were built",
+          "are building"
+        ],
+        "question": "다음 대화의 빈칸에 들어갈 말로 알맞은 것은?\nA: What happened in that new area?\nB: New buildings __________ over there last year.",
+        "explanation": "복수명사 'buildings'에 대한 과거 수동태는 'were built'이다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "3",
+        "number": 10,
+        "options": [
+          "was",
+          "find",
+          "found",
+          "finds",
+          "was founded"
+        ],
+        "question": "다음 문장을 능동태로 전환할 때, 빈칸에 들어갈 말로 가장 적절한 것은?\nMy cup was found under the table by Sora.\n→ Sora __________ my cup under the table.",
+        "explanation": "과거 수동태를 과거 능동태로 변환하면 'Sora found my cup under the table.'이다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "3",
+        "number": 11,
+        "options": [
+          "has cleaned",
+          "is clean",
+          "was cleaned",
+          "was cleaning",
+          "is cleaned"
+        ],
+        "question": "다음 문장을 능동태로 전환할 때, 빈칸에 들어갈 말로 가장 적절한 것은?\nMom cleaned the family car.\n→ The family car __________ by mom.",
+        "explanation": "과거 능동태를 과거 수동태로 변환하면 'The family car was cleaned by mom.'이다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "2",
+        "number": 12,
+        "options": [
+          "was giving to me",
+          "was given to me",
+          "was given for me",
+          "did given me",
+          "did given to me"
+        ],
+        "question": "다음 문장을 능동태로 전환할 때, 빈칸에 들어갈 말로 가장 적절한 것은?\nShe gave me today's newspaper.\n→ Today's newspaper __________ by her.",
+        "explanation": "3형식 동사를 수동태로 만들 때 'was given to me'가 올바른 형태이다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "5",
+        "number": 13,
+        "options": [
+          "to grow - she",
+          "is growing - she",
+          "is growing - her",
+          "is grown - she",
+          "is grown - her"
+        ],
+        "question": "다음과 같이 문장을 바꿀 때 빈칸에 들어갈 말로 올바른 것은?\nShe grows a tree in the garden.\n→ A tree __________ in the garden by __________.",
+        "explanation": "'나무가 자라다'는 현재 수동태 'is grown'이 맞지만, 주체는 'she'이어야 한다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "5",
+        "number": 14,
+        "options": [
+          "is selling - they",
+          "sells - us",
+          "is sold - they",
+          "sold - them",
+          "is sold - them"
+        ],
+        "question": "다음과 같이 문장을 바꿀 때 빈칸에 들어갈 말이 차례대로 짝지어진 것은?\nThey sell sugar at the shop.\n→ Sugar __________ at the shop by __________."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "4",
+        "number": 15,
+        "options": [
+          "Do - by",
+          "Does - for",
+          "Did - to",
+          "Was - by",
+          "Were - to"
+        ],
+        "question": "다음 빈칸에 들어갈 말로 바르게 연결된 것은?\n• __________ this pen made by Japan?\n• The vase was broken __________ the cat.",
+        "explanation": "첫 번째는 수동태 의문문 'Was this pen made by Japan?', 두 번째는 수동태의 행위자 'by the cat'이다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "5",
+        "number": 16,
+        "options": [
+          "sent - he",
+          "is sent - him",
+          "was sent - he",
+          "sent - him",
+          "was sent - him"
+        ],
+        "question": "다음과 같이 문장을 바꿀 때 빈칸에 들어갈 말이 차례대로 짝지어진 것은?\nHe sent the present yesterday.\n= The present __________ by __________ yesterday."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "4",
+        "number": 17,
+        "options": [
+          "wrote - he",
+          "is written - him",
+          "writes - he",
+          "was written - him",
+          "was writing - his"
+        ],
+        "question": "다음 문장을 수동태로 전환할 때, 빈칸에 들어갈 말로 바르게 연결된 것은?\nHe wrote the letter last night.\n→ The letter __________ last night by __________.",
+        "explanation": "과거 수동태 'was written'이고, 주체는 'him'이다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "3",
+        "number": 18,
+        "options": [
+          "was take good care of",
+          "was taken good care of",
+          "is taken good care of",
+          "is being took good care of",
+          "takes good care of"
+        ],
+        "question": "다음 문장을 수동태로 전환할 때, 빈칸에 들어갈 말로 가장 적절한 것은?\nMary takes good care of her grandma.\n→ Her grandma __________ by Mary.",
+        "explanation": "현재 수동태로 'is taken good care of'가 올바른 형태이다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "5",
+        "number": 19,
+        "options": [
+          "was took - he",
+          "takes - her",
+          "is taking - him",
+          "is taken - her",
+          "was taken - him"
+        ],
+        "question": "다음과 같이 문장을 바꿀 때 빈칸에 들어갈 말이 차례대로 짝지어진 것은?\nHe took Mike to Jane's birthday party yesterday.\n= Mike __________ to Jane's birthday party by __________ yesterday.",
+        "explanation": "과거 수동태는 'was taken'이므로 'was took'는 틀렸다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "5",
+        "number": 20,
+        "options": [
+          "Did Casa Mila made by Gaudi?",
+          "Did Gaudi made by Casa Mila?",
+          "Was Gaudi made by Casa Mila?",
+          "Was Casa Mila made Gaudi?",
+          "Was Casa Mila made by Gaudi?"
+        ],
+        "question": "다음 문장을 수동태로 알맞게 바꾼 것은?\nDid Gaudi make Casa Mila?",
+        "explanation": "수동태 의문문을 능동태로 변환하면 'Did Gaudi make Casa Mila?'이다. 2번이 가장 가까운 의문형이다."
+      },
+      {
+        "tag": "복수정답",
+        "type": "multi_choice",
+        "answer": "5",
+        "number": 21,
+        "options": [
+          "The fairy tale was written Andersen.",
+          "Andersen wrote the fairy tale.",
+          "The fairy tale wrote by Andersen.",
+          "Andersen writes the fairy tale.",
+          "The fairy tale was written by Andersen."
+        ],
+        "question": "다음 우리말을 바르게 영작한 것 모두 고르면?\n이 동화는 안데르센이 썼다.",
+        "explanation": "과거 수동태 'The fairy tale was written by Andersen.'이 올바른 표현이다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "3",
+        "number": 22,
+        "options": [
+          "The cookies were made on yesterday by her.",
+          "The cookies were made for her yesterday.",
+          "The cookies were made yesterday by her.",
+          "The cookies was made yesterday by her.",
+          "The cookies was made for her yesterday."
+        ],
+        "question": "다음 문장을 수동태로 전환할 때, 바르게 연결된 것은?\nShe made the cookies yesterday.",
+        "explanation": "복수명사 'cookies'에 대한 과거 수동태는 'were made yesterday by her.'이다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "4",
+        "number": 23,
+        "options": [
+          "The window is broken by he.",
+          "The window is broken by him.",
+          "The window was broken by he.",
+          "The window was broken by him.",
+          "The window was broken to him."
+        ],
+        "question": "다음 문장을 수동태로 바꿀 때 알맞은 것은?\nHe broke the window.",
+        "explanation": "과거 수동태 'The window was broken by him.'이 올바른 표현이다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "1",
+        "number": 24,
+        "options": [
+          "Did the room clean by Cathy?",
+          "Did Cathy cleaned by the room?",
+          "Was Cathy cleaned by the room?",
+          "Was the room cleaned Cathy?",
+          "Was the room cleaned by Cathy?"
+        ],
+        "question": "다음 문장을 수동태로 바꿀 때 알맞은 것은?\nDid Cathy clean the room?",
+        "explanation": "능동태 의문문 'Did Cathy clean the room?'을 수동태 의문문으로 변환하면 'Did the room clean by Cathy?'이다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "3",
+        "number": 25,
+        "options": [
+          "The room is filled by colorful balloons.",
+          "The room was filled by colorful balloons.",
+          "The room is filled with colorful balloons.",
+          "The room was filled with colorful balloons.",
+          "The room was filled of colorful balloons."
+        ],
+        "question": "다음 문장을 수동태로 바꿀 때 알맞은 것은?\nColorful balloons fills the room.",
+        "explanation": "'채우다'의 의미로 'fill with'를 사용하므로 현재 수동태 'is filled with'가 맞다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "3",
+        "number": 26,
+        "options": [
+          "My life made him special.",
+          "My life made me special by him.",
+          "My life was made special by him.",
+          "My life was making special by him.",
+          "My life didn't make me special by him."
+        ],
+        "question": "다음 문장을 수동태로 바꿀 때 알맞은 것은?\nHe made my life special.",
+        "explanation": "과거 수동태 'My life was made special by him.'이 올바른 표현이다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "4",
+        "number": 27,
+        "options": [
+          "The picture is taken by Mina.",
+          "The picture is taking by Mina.",
+          "The picture has taken by Mina.",
+          "The picture was taken by Mina.",
+          "The picture was taking by Mina."
+        ],
+        "question": "다음 문장을 수동태로 바꿀 때 알맞은 것은?\nMina took the picture.",
+        "explanation": "과거 수동태 'The picture was taken by Mina.'이 올바른 표현이다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "5",
+        "number": 28,
+        "options": [
+          "I am respecting my parents.",
+          "I was respected by my parents.",
+          "My parents is respected by me.",
+          "My parents respected by me.",
+          "My parents are respected by me."
+        ],
+        "question": "다음 문장을 수동태로 바꿀 때 알맞은 것은?\nI respect my parents.",
+        "explanation": "현재 수동태로 복수명사 'parents'를 주어로 하면 'My parents are respected by me.'이다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "3",
+        "number": 29,
+        "options": [
+          "The team leader was chose by us.",
+          "We were choosing the team leader.",
+          "The team leader was chosen by us.",
+          "We were chosen by the team leader.",
+          "The team leader chose us."
+        ],
+        "question": "다음 문장을 수동태로 바꿀 때 알맞은 것은?\n\nWe chose the team leader."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "5",
+        "number": 30,
+        "options": [
+          "The walls painted by the students.",
+          "The students have painted the walls.",
+          "The students were painted the walls.",
+          "The walls are painted by the students.",
+          "The walls were painted by the students."
+        ],
+        "question": "다음 문장을 수동태로 바꾸게 바꾼 것은?\n\nThe students painted the walls."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "1",
+        "number": 31,
+        "options": [
+          "Our president's birthday is not celebrated by us.",
+          "Our president's birthday was not celebrated by us.",
+          "Our president's birthday will not be celebrated by us.",
+          "Our president's birthday is not celebrate by us.",
+          "Our president's birthday can not be celebrated by us."
+        ],
+        "question": "다음 문장을 변형한 것 중 그 의미를 가장 잘 나타낸 것은?\n\nWe do not celebrate our president's birthday."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "5",
+        "number": 32,
+        "options": [
+          "The fairy took the man's dress.",
+          "The fairy's dress took by the man.",
+          "The man was took the fairy's dress.",
+          "The man was taken the fairy's dress.",
+          "The fairy's dress was taken by the man."
+        ],
+        "question": "다음 그림에 대한 설명으로 가장 적절한 것은?\n(그림: 선녀의 옷을 훔쳐가는 나무꾼) "
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "2",
+        "number": 33,
+        "options": [
+          "was broken - fixed",
+          "was broken - was fixed",
+          "broke - were fixed",
+          "were broken - fixed",
+          "broken - was fixed"
+        ],
+        "question": "다음 괄호 ㉠, ㉡에 주어진 동사의 알맞은 형태가 짝지어진 것은?\n\nMy bike ㉠(break) and it ㉡(fix) by my father."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "3",
+        "number": 34,
+        "options": [
+          "(A) were put - (B) was added",
+          "(A) was put - (B) were added",
+          "(A) were put - (B) were added",
+          "(A) were put - (B) were add",
+          "(A) were putted - (B) were added"
+        ],
+        "question": "다음 문장을 수동태로 전환할 때 빈칸 (A), (B)에 들어갈 알맞 가장 적절한 것은?\n\n• Some people put their eyeglasses on the desk.\n→ The eyeglasses (A)________ on the desk.\n• Later, somebody added arms to them.\n→ Later, arms (B)________ to them."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "1",
+        "number": 35,
+        "options": [
+          "(A) will be sent - (B) are cut - (C) was written",
+          "(A) will be sent - (B) cut - (C) was written",
+          "(A) will sent - (B) cuts - (C) wrote",
+          "(A) is sent - (B) are cutted - (C) was written",
+          "(A) was sent - (B) will be cut - (C) was wrote"
+        ],
+        "question": "다음 문장의 빈칸 (A), (B), (C)에 들어갈 알맞 가장 적절한 것은?\n\n• Tom (A)________ to the camp in a week.\n• Roses (B)________ every day.\n• \"Hamlet\" (C)________ by W. Shakespeare."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "4",
+        "number": 36,
+        "options": [
+          "㉠ speak - ㉡ build - ㉢ kept",
+          "㉠ spoke - ㉡ built - ㉢ was keep",
+          "㉠ spoken - ㉡ builded - ㉢ were kept",
+          "㉠ spoken - ㉡ built - ㉢ were kept",
+          "㉠ spoke - ㉡ builded - ㉢ was kept"
+        ],
+        "question": "다음 빈칸에 들어갈 알맞게 짝지어진 것은?\n\n• Spanish and English are ㉠________ in that country.\n• That old building was ㉡________ by Brady at first.\n• The blue boxes ㉢________ in a cabinet."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "5",
+        "number": 37,
+        "options": [
+          "(A) laid - (B) put",
+          "(A) lay - (B) survived",
+          "(A) survived - (B) lifted",
+          "(A) raised - (B) destroyed",
+          "(A) survive - (B) destroyed"
+        ],
+        "question": "다음 문장의 빈칸 (A), (B)에 들어갈 말로 가장 적절한 것은?\n\n• Fish can't (A)________ outside water.\n• The building was (B)________ by fire."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "2",
+        "number": 38,
+        "options": [
+          "㉠ build - ㉡ built",
+          "㉠ built - ㉡ was built",
+          "㉠ built - ㉡ is built",
+          "㉠ is built - ㉡ build",
+          "㉠ was built - ㉡ was building"
+        ],
+        "question": "다음 대화의 괄호 ㉠, ㉡에 우어진 단어가 올바른 형태로 연결된 것은?\n\nA: Who ㉠(build) this house?\nB: It ㉡(build) by my grandfather in 1975."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "1",
+        "number": 39,
+        "options": [
+          "㉠ was not cooked - ㉡ was found",
+          "㉠ was not cook - ㉡ was found",
+          "㉠ did not cook - ㉡ found",
+          "㉠ was not cook - ㉡ found",
+          "㉠ was not cooked - ㉡ found"
+        ],
+        "question": "Which pair is the most appropriate for the blanks?\n\n• The soup ㉠__________ by me.\n• The missing child ㉡__________ last night."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "4",
+        "number": 40,
+        "options": [
+          "㉣ steal - ㉤ built - ㉢ speak",
+          "㉣ is stolen - ㉤ is built - ㉢ is spoken",
+          "㉣ stole - ㉤ build - ㉢ spoke",
+          "㉣ was stolen - ㉤ built - ㉢ is spoken",
+          "㉣ was stole - ㉤ was built - ㉢ spoke"
+        ],
+        "question": "다음 괄호 ㉣, ㉤, ㉢에 주어진 단어가 올바른 형태로 짝지어진 것은?\n\n• My watch ㉣(steal) last week.\n• My grandfather ㉤(build) the house in 1978.\n• English ㉢(speak) in many countries."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "1",
+        "number": 41,
+        "options": [
+          "(A) was built - (B) were bought - (C) Was",
+          "(A) was built - (B) were bought - (C) Did",
+          "(A) was built - (B) was bought - (C) Was",
+          "(A) built - (B) were bought - (C) Was",
+          "(A) built - (B) was bought - (C) Did"
+        ],
+        "question": "다음 문장의 괄호 (A), (B), (C) 안에서 어법에 맞는 표현으로 가장 적절한 것은?\n\n(A) The Eiffel Tower [built / was built] in 1889.\n(B) The flowers [was bought / were bought] by me.\n(C) [Did / Was] the room cleaned by her?"
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "5",
+        "number": 42,
+        "options": [
+          "(A) stolen - (B) catch - (C) invite",
+          "(A) stole - (B) catches - (C) invites",
+          "(A) stealed - (B) catched - (C) invited",
+          "(A) stealed - (B) caught - (C) invited",
+          "(A) stolen - (B) caught - (C) invited"
+        ],
+        "question": "다음 문장의 밑줄 친 (A), (B), (C)를 어법상 가장 적절한 형태로 바꾼 것은?\n\n• The bag was (A)steal yesterday.\n• The thief was (B)catch by the police.\n• She is (C)invite to the party every year."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "4",
+        "number": 43,
+        "options": [
+          "㉠ throws - ㉡ speaks - ㉢ flew",
+          "㉠ threw - ㉡ was spoke - ㉢ flown",
+          "㉠ was thrown - ㉡ spoken - ㉢ is flown",
+          "㉠ threw - ㉡ is spoken - ㉢ are flown",
+          "㉠ was thrown - ㉡ spoke - ㉢ fly"
+        ],
+        "question": "다음 괄호 ㉠, ㉡, ㉢에 주어진 단어가 올바른 형태로 짝지어진 것은?\n\n• My father ㉠(throw) me the ball.\n• English ㉡(speak) in many countries.\n• The kites ㉢(fly) in the park by them."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "1",
+        "number": 44,
+        "options": [
+          "㉠ hurt - ㉡ broke - ㉢ be mailed",
+          "㉠ hurt - ㉡ broken - ㉢ mail",
+          "㉠ hurted - ㉡ broke - ㉢ mail",
+          "㉠ hurted - ㉡ broken - ㉢ be mailed",
+          "㉠ hurting - ㉡ broken - ㉢ be mailed"
+        ],
+        "question": "다음 괄호에 주어진 동사의 알맞은 형태를 차례대로 작지은 것은?\n\n• She was ㉠(hurt) by his words.\n• My brother ㉡(break) the vase yesterday.\n• This letter will ㉢(mail) to John."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "1",
+        "number": 45,
+        "options": [
+          "① is produced  ② has been used  ③ was held",
+          "① produces  ② has been used  ③ is held",
+          "③ is produced  ② has used  ③ holds",
+          "④ produces  ② is used  ③ holds",
+          "⑤ is produced  ② has used  ③ is held"
+        ],
+        "question": "다음 문장의 빈칸에 알맞은 말을 자리대로 바르게 짝지은 것은?\n• A lot of sugar ①__________ in Brazil.\n• Ann ②__________ this cell phone for 2 years.\n• The meeting ③__________ every Monday by Mr. Park.",
+        "explanation": "첫 번째 문장은 수동태 현재 단순형(is produced), 두 번째는 현재완료 수동태(has been used), 세 번째는 과거 단순형 수동태(was held)가 필요합니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "1",
+        "number": 46,
+        "options": [
+          "① made  ② buy  ③ was painted",
+          "② making  ② bought  ③ painted",
+          "③ made  ② bought  ③ painted",
+          "④ making  ② buy  ③ was painted",
+          "⑤ made  ② buy  ③ painted"
+        ],
+        "question": "다음 괄호 ①, ②, ③에 주어진 동사의 알맞은 형태가 차례대로 짝지어진 것은?\n• Is this coat ①(make) in Korea?\n• Where did he ②(buy) the camera?\n• The wall ③(paint) by Tom.",
+        "explanation": "첫 번째는 의문문 수동태(made), 두 번째는 과거 일반동사(buy), 세 번째는 수동태(was painted)가 올바른 형태입니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "2",
+        "number": 47,
+        "options": [
+          "① sent  ② was given  ③ held",
+          "② was sent  ② was given  ③ held",
+          "③ is sent  ③ gave  ③ was held",
+          "④ sent  ④ gave  ④ was held",
+          "⑤ was sent  ⑤ was given to  ⑤ held"
+        ],
+        "question": "다음 빈칸에 알맞은 단어를 고르시오.\n• The letter (A)__________ by my mother.\n• The present (B)__________ me by my aunt.\n• Germany (C)__________ the 2006 World Cup.",
+        "explanation": "(A) 과거 수동태 'was sent', (B) 과거 수동태 'was given', (C) 과거 일반동사 'held'가 올바른 형태입니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "1",
+        "number": 48,
+        "options": [
+          "① is driven  ② was given to  ③ are invented",
+          "② drives  ② was given  ③ invented",
+          "③ was driven  ③ gave  ③ are invented",
+          "④ drove  ④ gives  ④ was invented",
+          "⑤ was driven  ⑤ was given to  ⑤ invented"
+        ],
+        "question": "다음 빈칸에 알맞은 단어를 고르시오.\n• The new car (A)__________ by my friend, David.\n• The present (B)__________ me by my brother.\n• They (C)__________ the first airplane.",
+        "explanation": "(A) 과거 수동태 'is driven' (현재완료 또는 최근), (B) 과거 수동태 'was given to', (C) 과거 능동태 또는 수동태 'are invented'가 올바른 형태입니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "1",
+        "number": 49,
+        "options": [
+          "① is spoken  ② was cleaned  ③ was baked",
+          "② speak  ② cleaned  ③ baked",
+          "③ is spoken  ③ is cleaned  ③ is baked",
+          "④ is spoken  ④ was cleaned  ④ is baking",
+          "⑤ speak  ⑤ is cleaning  ⑤ will be baked"
+        ],
+        "question": "다음 빈칸에 알맞은 단어를 고르시오.\n• Korean (A)__________ in Korea.\n• The room (B)__________ by Ann yesterday.\n• My mother (C)__________ cookies for me.",
+        "explanation": "(A) 현재 수동태 'is spoken', (B) 과거 수동태 'was cleaned', (C) 과거 능동태 'baked'가 올바른 형태입니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "1",
+        "number": 50,
+        "options": [
+          "① was given to  ② was given  ③ invented",
+          "② was driven  ② was given  ③ invented",
+          "③ is driven  ③ gave  ③ is invented",
+          "④ drove  ④ gives  ④ was invented",
+          "⑤ was driven  ⑤ was given to  ⑤ invented"
+        ],
+        "question": "다음 빈칸에 알맞은 단어를 고르시오.\n• A blue car (A)__________ by my brother.\n• The present (B)__________ me by my aunt.\n• Nikolaus (C)__________ a gas engine in 1894.",
+        "explanation": "(A) 과거 수동태 'was given to', (B) 과거 수동태 'was given', (C) 과거 능동태 'invented'가 올바른 형태입니다."
+      }
+    ],
+    "answer_key": [
+      "4",
+      "5",
+      "2",
+      "5",
+      "5",
+      "1",
+      "3",
+      "2",
+      "4",
+      "3",
+      "3",
+      "2",
+      "5",
+      "5",
+      "4",
+      "5",
+      "4",
+      "3",
+      "5",
+      "5",
+      "5",
+      "3",
+      "4",
+      "1",
+      "3",
+      "3",
+      "4",
+      "5",
+      "3",
+      "5",
+      "1",
+      "5",
+      "2",
+      "3",
+      "1",
+      "4",
+      "5",
+      "2",
+      "1",
+      "4",
+      "1",
+      "5",
+      "4",
+      "1",
+      "1",
+      "1",
+      "2",
+      "1",
+      "1",
+      "1"
+    ]
+  },
+  "sheet_756504a2-be07-4836-8dbb-238ccb6048c9": {
+    "questions": [
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "4",
+        "number": 1,
+        "options": [
+          "ate",
+          "eat",
+          "was ate",
+          "was eaten",
+          "was eating"
+        ],
+        "question": "다음 우리말과 일치하도록 빈 칸에 알맞은 말로 가장 적절한 것은?\n그 치즈는 쥐에게 먹혔다.\n→ The cheese __________ by the mouse.",
+        "explanation": "수동태 구조로 '먹혔다'는 과거 수동태 'was eaten'이 맞다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "5",
+        "number": 2,
+        "options": [
+          "wrote",
+          "writes",
+          "written",
+          "was written",
+          "were written"
+        ],
+        "question": "다음 빈칸에 들어갈 말로 가장 적절한 것은?\nSherlock Holmes stories __________ by Arthur Conan Doyle.",
+        "explanation": "복수명사 'stories'에 대한 과거 수동태는 'were written'이다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "2",
+        "number": 3,
+        "options": [
+          "stole",
+          "read",
+          "written",
+          "bought",
+          "published"
+        ],
+        "question": "다음 빈칸에 들어갈 말로 알맞은 것은?\nThe book was __________ by him yesterday.",
+        "explanation": "과거 수동태 구조 'was + 과거분사'에서 'read'가 적절하다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "5",
+        "number": 4,
+        "options": [
+          "held",
+          "is held",
+          "were held",
+          "are held",
+          "was held"
+        ],
+        "question": "다음 빈칸에 들어갈 말로 알맞은 것을 고르면?\nThe first World Cup __________ in Uruguay in 1930.",
+        "explanation": "단수명사 'Cup'에 대한 과거 수동태는 'was held'이다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "5",
+        "number": 5,
+        "options": [
+          "bore",
+          "bears",
+          "is born",
+          "be born",
+          "was born"
+        ],
+        "question": "다음 빈칸에 들어갈 말로 알맞은 것은?\nMy father is fifty-nine years old. He __________ in 1956.",
+        "explanation": "'1956년에 태어났다'는 과거 수동태 'was born'이 맞다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "1",
+        "number": 6,
+        "options": [
+          "broke - was broken",
+          "break - break",
+          "break - is breaking",
+          "broke - broke",
+          "was broken - broke"
+        ],
+        "question": "다음 대화의 빈칸 ①, ⑥에 들어갈 말로 바르게 연결된 것은?\nA: Who ①__________ the window?\nB: It ⑥__________ by Thomas.",
+        "explanation": "A는 과거 능동태 'broke'이고, B는 과거 수동태 'was broken'이다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "3",
+        "number": 7,
+        "options": [
+          "treated",
+          "was treating",
+          "was treated",
+          "treats",
+          "has been treated"
+        ],
+        "question": "다음 빈칸에 들어갈 말로 알맞은 것은?\nHis mother __________ for a high fever yesterday.",
+        "explanation": "'어제 고열로 치료를 받았다'는 과거 수동태 'was treated'이다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "2",
+        "number": 8,
+        "options": [
+          "founded",
+          "was found",
+          "was finding",
+          "to find",
+          "was founded"
+        ],
+        "question": "다음 대화의 빈칸에 들어갈 말로 알맞은 것은?\nA: Did you find your dog which was missing?\nB: Yes, it __________ on the 5th street by one of my neighbors.",
+        "explanation": "'발견되었다'는 과거 수동태 'was found'이다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "4",
+        "number": 9,
+        "options": [
+          "built",
+          "are built",
+          "was built",
+          "were built",
+          "are building"
+        ],
+        "question": "다음 대화의 빈칸에 들어갈 말로 알맞은 것은?\nA: What happened in that new area?\nB: New buildings __________ over there last year.",
+        "explanation": "복수명사 'buildings'에 대한 과거 수동태는 'were built'이다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "3",
+        "number": 10,
+        "options": [
+          "was",
+          "find",
+          "found",
+          "finds",
+          "was founded"
+        ],
+        "question": "다음 문장을 능동태로 전환할 때, 빈칸에 들어갈 말로 가장 적절한 것은?\nMy cup was found under the table by Sora.\n→ Sora __________ my cup under the table.",
+        "explanation": "과거 수동태를 과거 능동태로 변환하면 'Sora found my cup under the table.'이다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "3",
+        "number": 11,
+        "options": [
+          "has cleaned",
+          "is clean",
+          "was cleaned",
+          "was cleaning",
+          "is cleaned"
+        ],
+        "question": "다음 문장을 능동태로 전환할 때, 빈칸에 들어갈 말로 가장 적절한 것은?\nMom cleaned the family car.\n→ The family car __________ by mom.",
+        "explanation": "과거 능동태를 과거 수동태로 변환하면 'The family car was cleaned by mom.'이다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "2",
+        "number": 12,
+        "options": [
+          "was giving to me",
+          "was given to me",
+          "was given for me",
+          "did given me",
+          "did given to me"
+        ],
+        "question": "다음 문장을 능동태로 전환할 때, 빈칸에 들어갈 말로 가장 적절한 것은?\nShe gave me today's newspaper.\n→ Today's newspaper __________ by her.",
+        "explanation": "3형식 동사를 수동태로 만들 때 'was given to me'가 올바른 형태이다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "5",
+        "number": 13,
+        "options": [
+          "to grow - she",
+          "is growing - she",
+          "is growing - her",
+          "is grown - she",
+          "is grown - her"
+        ],
+        "question": "다음과 같이 문장을 바꿀 때 빈칸에 들어갈 말로 올바른 것은?\nShe grows a tree in the garden.\n→ A tree __________ in the garden by __________.",
+        "explanation": "'나무가 자라다'는 현재 수동태 'is grown'이 맞지만, 주체는 'she'이어야 한다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "5",
+        "number": 14,
+        "options": [
+          "is selling - they",
+          "sells - us",
+          "is sold - they",
+          "sold - them",
+          "is sold - them"
+        ],
+        "question": "다음과 같이 문장을 바꿀 때 빈칸에 들어갈 말이 차례대로 짝지어진 것은?\nThey sell sugar at the shop.\n→ Sugar __________ at the shop by __________."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "4",
+        "number": 15,
+        "options": [
+          "Do - by",
+          "Does - for",
+          "Did - to",
+          "Was - by",
+          "Were - to"
+        ],
+        "question": "다음 빈칸에 들어갈 말로 바르게 연결된 것은?\n• __________ this pen made by Japan?\n• The vase was broken __________ the cat.",
+        "explanation": "첫 번째는 수동태 의문문 'Was this pen made by Japan?', 두 번째는 수동태의 행위자 'by the cat'이다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "5",
+        "number": 16,
+        "options": [
+          "sent - he",
+          "is sent - him",
+          "was sent - he",
+          "sent - him",
+          "was sent - him"
+        ],
+        "question": "다음과 같이 문장을 바꿀 때 빈칸에 들어갈 말이 차례대로 짝지어진 것은?\nHe sent the present yesterday.\n= The present __________ by __________ yesterday."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "4",
+        "number": 17,
+        "options": [
+          "wrote - he",
+          "is written - him",
+          "writes - he",
+          "was written - him",
+          "was writing - his"
+        ],
+        "question": "다음 문장을 수동태로 전환할 때, 빈칸에 들어갈 말로 바르게 연결된 것은?\nHe wrote the letter last night.\n→ The letter __________ last night by __________.",
+        "explanation": "과거 수동태 'was written'이고, 주체는 'him'이다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "3",
+        "number": 18,
+        "options": [
+          "was take good care of",
+          "was taken good care of",
+          "is taken good care of",
+          "is being took good care of",
+          "takes good care of"
+        ],
+        "question": "다음 문장을 수동태로 전환할 때, 빈칸에 들어갈 말로 가장 적절한 것은?\nMary takes good care of her grandma.\n→ Her grandma __________ by Mary.",
+        "explanation": "현재 수동태로 'is taken good care of'가 올바른 형태이다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "5",
+        "number": 19,
+        "options": [
+          "was took - he",
+          "takes - her",
+          "is taking - him",
+          "is taken - her",
+          "was taken - him"
+        ],
+        "question": "다음과 같이 문장을 바꿀 때 빈칸에 들어갈 말이 차례대로 짝지어진 것은?\nHe took Mike to Jane's birthday party yesterday.\n= Mike __________ to Jane's birthday party by __________ yesterday.",
+        "explanation": "과거 수동태는 'was taken'이므로 'was took'는 틀렸다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "5",
+        "number": 20,
+        "options": [
+          "Did Casa Mila made by Gaudi?",
+          "Did Gaudi made by Casa Mila?",
+          "Was Gaudi made by Casa Mila?",
+          "Was Casa Mila made Gaudi?",
+          "Was Casa Mila made by Gaudi?"
+        ],
+        "question": "다음 문장을 수동태로 알맞게 바꾼 것은?\nDid Gaudi make Casa Mila?",
+        "explanation": "수동태 의문문을 능동태로 변환하면 'Did Gaudi make Casa Mila?'이다. 2번이 가장 가까운 의문형이다."
+      },
+      {
+        "tag": "복수정답",
+        "type": "multi_choice",
+        "answer": "5",
+        "number": 21,
+        "options": [
+          "The fairy tale was written Andersen.",
+          "Andersen wrote the fairy tale.",
+          "The fairy tale wrote by Andersen.",
+          "Andersen writes the fairy tale.",
+          "The fairy tale was written by Andersen."
+        ],
+        "question": "다음 우리말을 바르게 영작한 것 모두 고르면?\n이 동화는 안데르센이 썼다.",
+        "explanation": "과거 수동태 'The fairy tale was written by Andersen.'이 올바른 표현이다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "3",
+        "number": 22,
+        "options": [
+          "The cookies were made on yesterday by her.",
+          "The cookies were made for her yesterday.",
+          "The cookies were made yesterday by her.",
+          "The cookies was made yesterday by her.",
+          "The cookies was made for her yesterday."
+        ],
+        "question": "다음 문장을 수동태로 전환할 때, 바르게 연결된 것은?\nShe made the cookies yesterday.",
+        "explanation": "복수명사 'cookies'에 대한 과거 수동태는 'were made yesterday by her.'이다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "4",
+        "number": 23,
+        "options": [
+          "The window is broken by he.",
+          "The window is broken by him.",
+          "The window was broken by he.",
+          "The window was broken by him.",
+          "The window was broken to him."
+        ],
+        "question": "다음 문장을 수동태로 바꿀 때 알맞은 것은?\nHe broke the window.",
+        "explanation": "과거 수동태 'The window was broken by him.'이 올바른 표현이다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "1",
+        "number": 24,
+        "options": [
+          "Did the room clean by Cathy?",
+          "Did Cathy cleaned by the room?",
+          "Was Cathy cleaned by the room?",
+          "Was the room cleaned Cathy?",
+          "Was the room cleaned by Cathy?"
+        ],
+        "question": "다음 문장을 수동태로 바꿀 때 알맞은 것은?\nDid Cathy clean the room?",
+        "explanation": "능동태 의문문 'Did Cathy clean the room?'을 수동태 의문문으로 변환하면 'Did the room clean by Cathy?'이다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "3",
+        "number": 25,
+        "options": [
+          "The room is filled by colorful balloons.",
+          "The room was filled by colorful balloons.",
+          "The room is filled with colorful balloons.",
+          "The room was filled with colorful balloons.",
+          "The room was filled of colorful balloons."
+        ],
+        "question": "다음 문장을 수동태로 바꿀 때 알맞은 것은?\nColorful balloons fills the room.",
+        "explanation": "'채우다'의 의미로 'fill with'를 사용하므로 현재 수동태 'is filled with'가 맞다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "3",
+        "number": 26,
+        "options": [
+          "My life made him special.",
+          "My life made me special by him.",
+          "My life was made special by him.",
+          "My life was making special by him.",
+          "My life didn't make me special by him."
+        ],
+        "question": "다음 문장을 수동태로 바꿀 때 알맞은 것은?\nHe made my life special.",
+        "explanation": "과거 수동태 'My life was made special by him.'이 올바른 표현이다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "4",
+        "number": 27,
+        "options": [
+          "The picture is taken by Mina.",
+          "The picture is taking by Mina.",
+          "The picture has taken by Mina.",
+          "The picture was taken by Mina.",
+          "The picture was taking by Mina."
+        ],
+        "question": "다음 문장을 수동태로 바꿀 때 알맞은 것은?\nMina took the picture.",
+        "explanation": "과거 수동태 'The picture was taken by Mina.'이 올바른 표현이다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "5",
+        "number": 28,
+        "options": [
+          "I am respecting my parents.",
+          "I was respected by my parents.",
+          "My parents is respected by me.",
+          "My parents respected by me.",
+          "My parents are respected by me."
+        ],
+        "question": "다음 문장을 수동태로 바꿀 때 알맞은 것은?\nI respect my parents.",
+        "explanation": "현재 수동태로 복수명사 'parents'를 주어로 하면 'My parents are respected by me.'이다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "3",
+        "number": 29,
+        "options": [
+          "The team leader was chose by us.",
+          "We were choosing the team leader.",
+          "The team leader was chosen by us.",
+          "We were chosen by the team leader.",
+          "The team leader chose us."
+        ],
+        "question": "다음 문장을 수동태로 바꿀 때 알맞은 것은?\n\nWe chose the team leader."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "5",
+        "number": 30,
+        "options": [
+          "The walls painted by the students.",
+          "The students have painted the walls.",
+          "The students were painted the walls.",
+          "The walls are painted by the students.",
+          "The walls were painted by the students."
+        ],
+        "question": "다음 문장을 수동태로 바꾸게 바꾼 것은?\n\nThe students painted the walls."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "1",
+        "number": 31,
+        "options": [
+          "Our president's birthday is not celebrated by us.",
+          "Our president's birthday was not celebrated by us.",
+          "Our president's birthday will not be celebrated by us.",
+          "Our president's birthday is not celebrate by us.",
+          "Our president's birthday can not be celebrated by us."
+        ],
+        "question": "다음 문장을 변형한 것 중 그 의미를 가장 잘 나타낸 것은?\n\nWe do not celebrate our president's birthday."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "5",
+        "number": 32,
+        "options": [
+          "The fairy took the man's dress.",
+          "The fairy's dress took by the man.",
+          "The man was took the fairy's dress.",
+          "The man was taken the fairy's dress.",
+          "The fairy's dress was taken by the man."
+        ],
+        "question": "다음 그림에 대한 설명으로 가장 적절한 것은?\n(그림: 선녀의 옷을 훔쳐가는 나무꾼) "
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "2",
+        "number": 33,
+        "options": [
+          "was broken - fixed",
+          "was broken - was fixed",
+          "broke - were fixed",
+          "were broken - fixed",
+          "broken - was fixed"
+        ],
+        "question": "다음 괄호 ㉠, ㉡에 주어진 동사의 알맞은 형태가 짝지어진 것은?\n\nMy bike ㉠(break) and it ㉡(fix) by my father."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "3",
+        "number": 34,
+        "options": [
+          "(A) were put - (B) was added",
+          "(A) was put - (B) were added",
+          "(A) were put - (B) were added",
+          "(A) were put - (B) were add",
+          "(A) were putted - (B) were added"
+        ],
+        "question": "다음 문장을 수동태로 전환할 때 빈칸 (A), (B)에 들어갈 알맞 가장 적절한 것은?\n\n• Some people put their eyeglasses on the desk.\n→ The eyeglasses (A)________ on the desk.\n• Later, somebody added arms to them.\n→ Later, arms (B)________ to them."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "1",
+        "number": 35,
+        "options": [
+          "(A) will be sent - (B) are cut - (C) was written",
+          "(A) will be sent - (B) cut - (C) was written",
+          "(A) will sent - (B) cuts - (C) wrote",
+          "(A) is sent - (B) are cutted - (C) was written",
+          "(A) was sent - (B) will be cut - (C) was wrote"
+        ],
+        "question": "다음 문장의 빈칸 (A), (B), (C)에 들어갈 알맞 가장 적절한 것은?\n\n• Tom (A)________ to the camp in a week.\n• Roses (B)________ every day.\n• \"Hamlet\" (C)________ by W. Shakespeare."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "4",
+        "number": 36,
+        "options": [
+          "㉠ speak - ㉡ build - ㉢ kept",
+          "㉠ spoke - ㉡ built - ㉢ was keep",
+          "㉠ spoken - ㉡ builded - ㉢ were kept",
+          "㉠ spoken - ㉡ built - ㉢ were kept",
+          "㉠ spoke - ㉡ builded - ㉢ was kept"
+        ],
+        "question": "다음 빈칸에 들어갈 알맞게 짝지어진 것은?\n\n• Spanish and English are ㉠________ in that country.\n• That old building was ㉡________ by Brady at first.\n• The blue boxes ㉢________ in a cabinet."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "5",
+        "number": 37,
+        "options": [
+          "(A) laid - (B) put",
+          "(A) lay - (B) survived",
+          "(A) survived - (B) lifted",
+          "(A) raised - (B) destroyed",
+          "(A) survive - (B) destroyed"
+        ],
+        "question": "다음 문장의 빈칸 (A), (B)에 들어갈 말로 가장 적절한 것은?\n\n• Fish can't (A)________ outside water.\n• The building was (B)________ by fire."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "2",
+        "number": 38,
+        "options": [
+          "㉠ build - ㉡ built",
+          "㉠ built - ㉡ was built",
+          "㉠ built - ㉡ is built",
+          "㉠ is built - ㉡ build",
+          "㉠ was built - ㉡ was building"
+        ],
+        "question": "다음 대화의 괄호 ㉠, ㉡에 우어진 단어가 올바른 형태로 연결된 것은?\n\nA: Who ㉠(build) this house?\nB: It ㉡(build) by my grandfather in 1975."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "1",
+        "number": 39,
+        "options": [
+          "㉠ was not cooked - ㉡ was found",
+          "㉠ was not cook - ㉡ was found",
+          "㉠ did not cook - ㉡ found",
+          "㉠ was not cook - ㉡ found",
+          "㉠ was not cooked - ㉡ found"
+        ],
+        "question": "Which pair is the most appropriate for the blanks?\n\n• The soup ㉠__________ by me.\n• The missing child ㉡__________ last night."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "4",
+        "number": 40,
+        "options": [
+          "㉣ steal - ㉤ built - ㉢ speak",
+          "㉣ is stolen - ㉤ is built - ㉢ is spoken",
+          "㉣ stole - ㉤ build - ㉢ spoke",
+          "㉣ was stolen - ㉤ built - ㉢ is spoken",
+          "㉣ was stole - ㉤ was built - ㉢ spoke"
+        ],
+        "question": "다음 괄호 ㉣, ㉤, ㉢에 주어진 단어가 올바른 형태로 짝지어진 것은?\n\n• My watch ㉣(steal) last week.\n• My grandfather ㉤(build) the house in 1978.\n• English ㉢(speak) in many countries."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "1",
+        "number": 41,
+        "options": [
+          "(A) was built - (B) were bought - (C) Was",
+          "(A) was built - (B) were bought - (C) Did",
+          "(A) was built - (B) was bought - (C) Was",
+          "(A) built - (B) were bought - (C) Was",
+          "(A) built - (B) was bought - (C) Did"
+        ],
+        "question": "다음 문장의 괄호 (A), (B), (C) 안에서 어법에 맞는 표현으로 가장 적절한 것은?\n\n(A) The Eiffel Tower [built / was built] in 1889.\n(B) The flowers [was bought / were bought] by me.\n(C) [Did / Was] the room cleaned by her?"
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "5",
+        "number": 42,
+        "options": [
+          "(A) stolen - (B) catch - (C) invite",
+          "(A) stole - (B) catches - (C) invites",
+          "(A) stealed - (B) catched - (C) invited",
+          "(A) stealed - (B) caught - (C) invited",
+          "(A) stolen - (B) caught - (C) invited"
+        ],
+        "question": "다음 문장의 밑줄 친 (A), (B), (C)를 어법상 가장 적절한 형태로 바꾼 것은?\n\n• The bag was (A)steal yesterday.\n• The thief was (B)catch by the police.\n• She is (C)invite to the party every year."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "4",
+        "number": 43,
+        "options": [
+          "㉠ throws - ㉡ speaks - ㉢ flew",
+          "㉠ threw - ㉡ was spoke - ㉢ flown",
+          "㉠ was thrown - ㉡ spoken - ㉢ is flown",
+          "㉠ threw - ㉡ is spoken - ㉢ are flown",
+          "㉠ was thrown - ㉡ spoke - ㉢ fly"
+        ],
+        "question": "다음 괄호 ㉠, ㉡, ㉢에 주어진 단어가 올바른 형태로 짝지어진 것은?\n\n• My father ㉠(throw) me the ball.\n• English ㉡(speak) in many countries.\n• The kites ㉢(fly) in the park by them."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "1",
+        "number": 44,
+        "options": [
+          "㉠ hurt - ㉡ broke - ㉢ be mailed",
+          "㉠ hurt - ㉡ broken - ㉢ mail",
+          "㉠ hurted - ㉡ broke - ㉢ mail",
+          "㉠ hurted - ㉡ broken - ㉢ be mailed",
+          "㉠ hurting - ㉡ broken - ㉢ be mailed"
+        ],
+        "question": "다음 괄호에 주어진 동사의 알맞은 형태를 차례대로 작지은 것은?\n\n• She was ㉠(hurt) by his words.\n• My brother ㉡(break) the vase yesterday.\n• This letter will ㉢(mail) to John."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "1",
+        "number": 45,
+        "options": [
+          "① is produced  ② has been used  ③ was held",
+          "① produces  ② has been used  ③ is held",
+          "③ is produced  ② has used  ③ holds",
+          "④ produces  ② is used  ③ holds",
+          "⑤ is produced  ② has used  ③ is held"
+        ],
+        "question": "다음 문장의 빈칸에 알맞은 말을 자리대로 바르게 짝지은 것은?\n• A lot of sugar ①__________ in Brazil.\n• Ann ②__________ this cell phone for 2 years.\n• The meeting ③__________ every Monday by Mr. Park.",
+        "explanation": "첫 번째 문장은 수동태 현재 단순형(is produced), 두 번째는 현재완료 수동태(has been used), 세 번째는 과거 단순형 수동태(was held)가 필요합니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "1",
+        "number": 46,
+        "options": [
+          "① made  ② buy  ③ was painted",
+          "② making  ② bought  ③ painted",
+          "③ made  ② bought  ③ painted",
+          "④ making  ② buy  ③ was painted",
+          "⑤ made  ② buy  ③ painted"
+        ],
+        "question": "다음 괄호 ①, ②, ③에 주어진 동사의 알맞은 형태가 차례대로 짝지어진 것은?\n• Is this coat ①(make) in Korea?\n• Where did he ②(buy) the camera?\n• The wall ③(paint) by Tom.",
+        "explanation": "첫 번째는 의문문 수동태(made), 두 번째는 과거 일반동사(buy), 세 번째는 수동태(was painted)가 올바른 형태입니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "2",
+        "number": 47,
+        "options": [
+          "① sent  ② was given  ③ held",
+          "② was sent  ② was given  ③ held",
+          "③ is sent  ③ gave  ③ was held",
+          "④ sent  ④ gave  ④ was held",
+          "⑤ was sent  ⑤ was given to  ⑤ held"
+        ],
+        "question": "다음 빈칸에 알맞은 단어를 고르시오.\n• The letter (A)__________ by my mother.\n• The present (B)__________ me by my aunt.\n• Germany (C)__________ the 2006 World Cup.",
+        "explanation": "(A) 과거 수동태 'was sent', (B) 과거 수동태 'was given', (C) 과거 일반동사 'held'가 올바른 형태입니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "1",
+        "number": 48,
+        "options": [
+          "① is driven  ② was given to  ③ are invented",
+          "② drives  ② was given  ③ invented",
+          "③ was driven  ③ gave  ③ are invented",
+          "④ drove  ④ gives  ④ was invented",
+          "⑤ was driven  ⑤ was given to  ⑤ invented"
+        ],
+        "question": "다음 빈칸에 알맞은 단어를 고르시오.\n• The new car (A)__________ by my friend, David.\n• The present (B)__________ me by my brother.\n• They (C)__________ the first airplane.",
+        "explanation": "(A) 과거 수동태 'is driven' (현재완료 또는 최근), (B) 과거 수동태 'was given to', (C) 과거 능동태 또는 수동태 'are invented'가 올바른 형태입니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "1",
+        "number": 49,
+        "options": [
+          "① is spoken  ② was cleaned  ③ was baked",
+          "② speak  ② cleaned  ③ baked",
+          "③ is spoken  ③ is cleaned  ③ is baked",
+          "④ is spoken  ④ was cleaned  ④ is baking",
+          "⑤ speak  ⑤ is cleaning  ⑤ will be baked"
+        ],
+        "question": "다음 빈칸에 알맞은 단어를 고르시오.\n• Korean (A)__________ in Korea.\n• The room (B)__________ by Ann yesterday.\n• My mother (C)__________ cookies for me.",
+        "explanation": "(A) 현재 수동태 'is spoken', (B) 과거 수동태 'was cleaned', (C) 과거 능동태 'baked'가 올바른 형태입니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "1",
+        "number": 50,
+        "options": [
+          "① was given to  ② was given  ③ invented",
+          "② was driven  ② was given  ③ invented",
+          "③ is driven  ③ gave  ③ is invented",
+          "④ drove  ④ gives  ④ was invented",
+          "⑤ was driven  ⑤ was given to  ⑤ invented"
+        ],
+        "question": "다음 빈칸에 알맞은 단어를 고르시오.\n• A blue car (A)__________ by my brother.\n• The present (B)__________ me by my aunt.\n• Nikolaus (C)__________ a gas engine in 1894.",
+        "explanation": "(A) 과거 수동태 'was given to', (B) 과거 수동태 'was given', (C) 과거 능동태 'invented'가 올바른 형태입니다."
+      }
+    ],
+    "answer_key": [
+      "4",
+      "5",
+      "2",
+      "5",
+      "5",
+      "1",
+      "3",
+      "2",
+      "4",
+      "3",
+      "3",
+      "2",
+      "5",
+      "5",
+      "4",
+      "5",
+      "4",
+      "3",
+      "5",
+      "5",
+      "5",
+      "3",
+      "4",
+      "1",
+      "3",
+      "3",
+      "4",
+      "5",
+      "3",
+      "5",
+      "1",
+      "5",
+      "2",
+      "3",
+      "1",
+      "4",
+      "5",
+      "2",
+      "1",
+      "4",
+      "1",
+      "5",
+      "4",
+      "1",
+      "1",
+      "1",
+      "2",
+      "1",
+      "1",
+      "1"
+    ]
+  },
+  "sheet_f9ca01ac-5e2c-489f-a0aa-ba40150602d4": {
+    "questions": [
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "4",
+        "number": 1,
+        "options": [
+          "ate",
+          "eat",
+          "was ate",
+          "was eaten",
+          "was eating"
+        ],
+        "question": "다음 우리말과 일치하도록 빈 칸에 알맞은 말로 가장 적절한 것은?\n그 치즈는 쥐에게 먹혔다.\n→ The cheese __________ by the mouse.",
+        "explanation": "수동태 구조로 '먹혔다'는 과거 수동태 'was eaten'이 맞다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "5",
+        "number": 2,
+        "options": [
+          "wrote",
+          "writes",
+          "written",
+          "was written",
+          "were written"
+        ],
+        "question": "다음 빈칸에 들어갈 말로 가장 적절한 것은?\nSherlock Holmes stories __________ by Arthur Conan Doyle.",
+        "explanation": "복수명사 'stories'에 대한 과거 수동태는 'were written'이다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "2",
+        "number": 3,
+        "options": [
+          "stole",
+          "read",
+          "written",
+          "bought",
+          "published"
+        ],
+        "question": "다음 빈칸에 들어갈 말로 알맞은 것은?\nThe book was __________ by him yesterday.",
+        "explanation": "과거 수동태 구조 'was + 과거분사'에서 'read'가 적절하다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "5",
+        "number": 4,
+        "options": [
+          "held",
+          "is held",
+          "were held",
+          "are held",
+          "was held"
+        ],
+        "question": "다음 빈칸에 들어갈 말로 알맞은 것을 고르면?\nThe first World Cup __________ in Uruguay in 1930.",
+        "explanation": "단수명사 'Cup'에 대한 과거 수동태는 'was held'이다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "5",
+        "number": 5,
+        "options": [
+          "bore",
+          "bears",
+          "is born",
+          "be born",
+          "was born"
+        ],
+        "question": "다음 빈칸에 들어갈 말로 알맞은 것은?\nMy father is fifty-nine years old. He __________ in 1956.",
+        "explanation": "'1956년에 태어났다'는 과거 수동태 'was born'이 맞다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "1",
+        "number": 6,
+        "options": [
+          "broke - was broken",
+          "break - break",
+          "break - is breaking",
+          "broke - broke",
+          "was broken - broke"
+        ],
+        "question": "다음 대화의 빈칸 ①, ⑥에 들어갈 말로 바르게 연결된 것은?\nA: Who ①__________ the window?\nB: It ⑥__________ by Thomas.",
+        "explanation": "A는 과거 능동태 'broke'이고, B는 과거 수동태 'was broken'이다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "3",
+        "number": 7,
+        "options": [
+          "treated",
+          "was treating",
+          "was treated",
+          "treats",
+          "has been treated"
+        ],
+        "question": "다음 빈칸에 들어갈 말로 알맞은 것은?\nHis mother __________ for a high fever yesterday.",
+        "explanation": "'어제 고열로 치료를 받았다'는 과거 수동태 'was treated'이다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "2",
+        "number": 8,
+        "options": [
+          "founded",
+          "was found",
+          "was finding",
+          "to find",
+          "was founded"
+        ],
+        "question": "다음 대화의 빈칸에 들어갈 말로 알맞은 것은?\nA: Did you find your dog which was missing?\nB: Yes, it __________ on the 5th street by one of my neighbors.",
+        "explanation": "'발견되었다'는 과거 수동태 'was found'이다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "4",
+        "number": 9,
+        "options": [
+          "built",
+          "are built",
+          "was built",
+          "were built",
+          "are building"
+        ],
+        "question": "다음 대화의 빈칸에 들어갈 말로 알맞은 것은?\nA: What happened in that new area?\nB: New buildings __________ over there last year.",
+        "explanation": "복수명사 'buildings'에 대한 과거 수동태는 'were built'이다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "3",
+        "number": 10,
+        "options": [
+          "was",
+          "find",
+          "found",
+          "finds",
+          "was founded"
+        ],
+        "question": "다음 문장을 능동태로 전환할 때, 빈칸에 들어갈 말로 가장 적절한 것은?\nMy cup was found under the table by Sora.\n→ Sora __________ my cup under the table.",
+        "explanation": "과거 수동태를 과거 능동태로 변환하면 'Sora found my cup under the table.'이다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "3",
+        "number": 11,
+        "options": [
+          "has cleaned",
+          "is clean",
+          "was cleaned",
+          "was cleaning",
+          "is cleaned"
+        ],
+        "question": "다음 문장을 능동태로 전환할 때, 빈칸에 들어갈 말로 가장 적절한 것은?\nMom cleaned the family car.\n→ The family car __________ by mom.",
+        "explanation": "과거 능동태를 과거 수동태로 변환하면 'The family car was cleaned by mom.'이다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "2",
+        "number": 12,
+        "options": [
+          "was giving to me",
+          "was given to me",
+          "was given for me",
+          "did given me",
+          "did given to me"
+        ],
+        "question": "다음 문장을 능동태로 전환할 때, 빈칸에 들어갈 말로 가장 적절한 것은?\nShe gave me today's newspaper.\n→ Today's newspaper __________ by her.",
+        "explanation": "3형식 동사를 수동태로 만들 때 'was given to me'가 올바른 형태이다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "5",
+        "number": 13,
+        "options": [
+          "to grow - she",
+          "is growing - she",
+          "is growing - her",
+          "is grown - she",
+          "is grown - her"
+        ],
+        "question": "다음과 같이 문장을 바꿀 때 빈칸에 들어갈 말로 올바른 것은?\nShe grows a tree in the garden.\n→ A tree __________ in the garden by __________.",
+        "explanation": "'나무가 자라다'는 현재 수동태 'is grown'이 맞지만, 주체는 'she'이어야 한다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "5",
+        "number": 14,
+        "options": [
+          "is selling - they",
+          "sells - us",
+          "is sold - they",
+          "sold - them",
+          "is sold - them"
+        ],
+        "question": "다음과 같이 문장을 바꿀 때 빈칸에 들어갈 말이 차례대로 짝지어진 것은?\nThey sell sugar at the shop.\n→ Sugar __________ at the shop by __________."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "4",
+        "number": 15,
+        "options": [
+          "Do - by",
+          "Does - for",
+          "Did - to",
+          "Was - by",
+          "Were - to"
+        ],
+        "question": "다음 빈칸에 들어갈 말로 바르게 연결된 것은?\n• __________ this pen made by Japan?\n• The vase was broken __________ the cat.",
+        "explanation": "첫 번째는 수동태 의문문 'Was this pen made by Japan?', 두 번째는 수동태의 행위자 'by the cat'이다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "5",
+        "number": 16,
+        "options": [
+          "sent - he",
+          "is sent - him",
+          "was sent - he",
+          "sent - him",
+          "was sent - him"
+        ],
+        "question": "다음과 같이 문장을 바꿀 때 빈칸에 들어갈 말이 차례대로 짝지어진 것은?\nHe sent the present yesterday.\n= The present __________ by __________ yesterday."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "4",
+        "number": 17,
+        "options": [
+          "wrote - he",
+          "is written - him",
+          "writes - he",
+          "was written - him",
+          "was writing - his"
+        ],
+        "question": "다음 문장을 수동태로 전환할 때, 빈칸에 들어갈 말로 바르게 연결된 것은?\nHe wrote the letter last night.\n→ The letter __________ last night by __________.",
+        "explanation": "과거 수동태 'was written'이고, 주체는 'him'이다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "3",
+        "number": 18,
+        "options": [
+          "was take good care of",
+          "was taken good care of",
+          "is taken good care of",
+          "is being took good care of",
+          "takes good care of"
+        ],
+        "question": "다음 문장을 수동태로 전환할 때, 빈칸에 들어갈 말로 가장 적절한 것은?\nMary takes good care of her grandma.\n→ Her grandma __________ by Mary.",
+        "explanation": "현재 수동태로 'is taken good care of'가 올바른 형태이다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "5",
+        "number": 19,
+        "options": [
+          "was took - he",
+          "takes - her",
+          "is taking - him",
+          "is taken - her",
+          "was taken - him"
+        ],
+        "question": "다음과 같이 문장을 바꿀 때 빈칸에 들어갈 말이 차례대로 짝지어진 것은?\nHe took Mike to Jane's birthday party yesterday.\n= Mike __________ to Jane's birthday party by __________ yesterday.",
+        "explanation": "과거 수동태는 'was taken'이므로 'was took'는 틀렸다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "5",
+        "number": 20,
+        "options": [
+          "Did Casa Mila made by Gaudi?",
+          "Did Gaudi made by Casa Mila?",
+          "Was Gaudi made by Casa Mila?",
+          "Was Casa Mila made Gaudi?",
+          "Was Casa Mila made by Gaudi?"
+        ],
+        "question": "다음 문장을 수동태로 알맞게 바꾼 것은?\nDid Gaudi make Casa Mila?",
+        "explanation": "수동태 의문문을 능동태로 변환하면 'Did Gaudi make Casa Mila?'이다. 2번이 가장 가까운 의문형이다."
+      },
+      {
+        "tag": "복수정답",
+        "type": "multi_choice",
+        "answer": "5",
+        "number": 21,
+        "options": [
+          "The fairy tale was written Andersen.",
+          "Andersen wrote the fairy tale.",
+          "The fairy tale wrote by Andersen.",
+          "Andersen writes the fairy tale.",
+          "The fairy tale was written by Andersen."
+        ],
+        "question": "다음 우리말을 바르게 영작한 것 모두 고르면?\n이 동화는 안데르센이 썼다.",
+        "explanation": "과거 수동태 'The fairy tale was written by Andersen.'이 올바른 표현이다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "3",
+        "number": 22,
+        "options": [
+          "The cookies were made on yesterday by her.",
+          "The cookies were made for her yesterday.",
+          "The cookies were made yesterday by her.",
+          "The cookies was made yesterday by her.",
+          "The cookies was made for her yesterday."
+        ],
+        "question": "다음 문장을 수동태로 전환할 때, 바르게 연결된 것은?\nShe made the cookies yesterday.",
+        "explanation": "복수명사 'cookies'에 대한 과거 수동태는 'were made yesterday by her.'이다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "4",
+        "number": 23,
+        "options": [
+          "The window is broken by he.",
+          "The window is broken by him.",
+          "The window was broken by he.",
+          "The window was broken by him.",
+          "The window was broken to him."
+        ],
+        "question": "다음 문장을 수동태로 바꿀 때 알맞은 것은?\nHe broke the window.",
+        "explanation": "과거 수동태 'The window was broken by him.'이 올바른 표현이다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "1",
+        "number": 24,
+        "options": [
+          "Did the room clean by Cathy?",
+          "Did Cathy cleaned by the room?",
+          "Was Cathy cleaned by the room?",
+          "Was the room cleaned Cathy?",
+          "Was the room cleaned by Cathy?"
+        ],
+        "question": "다음 문장을 수동태로 바꿀 때 알맞은 것은?\nDid Cathy clean the room?",
+        "explanation": "능동태 의문문 'Did Cathy clean the room?'을 수동태 의문문으로 변환하면 'Did the room clean by Cathy?'이다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "3",
+        "number": 25,
+        "options": [
+          "The room is filled by colorful balloons.",
+          "The room was filled by colorful balloons.",
+          "The room is filled with colorful balloons.",
+          "The room was filled with colorful balloons.",
+          "The room was filled of colorful balloons."
+        ],
+        "question": "다음 문장을 수동태로 바꿀 때 알맞은 것은?\nColorful balloons fills the room.",
+        "explanation": "'채우다'의 의미로 'fill with'를 사용하므로 현재 수동태 'is filled with'가 맞다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "3",
+        "number": 26,
+        "options": [
+          "My life made him special.",
+          "My life made me special by him.",
+          "My life was made special by him.",
+          "My life was making special by him.",
+          "My life didn't make me special by him."
+        ],
+        "question": "다음 문장을 수동태로 바꿀 때 알맞은 것은?\nHe made my life special.",
+        "explanation": "과거 수동태 'My life was made special by him.'이 올바른 표현이다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "4",
+        "number": 27,
+        "options": [
+          "The picture is taken by Mina.",
+          "The picture is taking by Mina.",
+          "The picture has taken by Mina.",
+          "The picture was taken by Mina.",
+          "The picture was taking by Mina."
+        ],
+        "question": "다음 문장을 수동태로 바꿀 때 알맞은 것은?\nMina took the picture.",
+        "explanation": "과거 수동태 'The picture was taken by Mina.'이 올바른 표현이다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "5",
+        "number": 28,
+        "options": [
+          "I am respecting my parents.",
+          "I was respected by my parents.",
+          "My parents is respected by me.",
+          "My parents respected by me.",
+          "My parents are respected by me."
+        ],
+        "question": "다음 문장을 수동태로 바꿀 때 알맞은 것은?\nI respect my parents.",
+        "explanation": "현재 수동태로 복수명사 'parents'를 주어로 하면 'My parents are respected by me.'이다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "3",
+        "number": 29,
+        "options": [
+          "The team leader was chose by us.",
+          "We were choosing the team leader.",
+          "The team leader was chosen by us.",
+          "We were chosen by the team leader.",
+          "The team leader chose us."
+        ],
+        "question": "다음 문장을 수동태로 바꿀 때 알맞은 것은?\n\nWe chose the team leader."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "5",
+        "number": 30,
+        "options": [
+          "The walls painted by the students.",
+          "The students have painted the walls.",
+          "The students were painted the walls.",
+          "The walls are painted by the students.",
+          "The walls were painted by the students."
+        ],
+        "question": "다음 문장을 수동태로 바꾸게 바꾼 것은?\n\nThe students painted the walls."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "1",
+        "number": 31,
+        "options": [
+          "Our president's birthday is not celebrated by us.",
+          "Our president's birthday was not celebrated by us.",
+          "Our president's birthday will not be celebrated by us.",
+          "Our president's birthday is not celebrate by us.",
+          "Our president's birthday can not be celebrated by us."
+        ],
+        "question": "다음 문장을 변형한 것 중 그 의미를 가장 잘 나타낸 것은?\n\nWe do not celebrate our president's birthday."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "5",
+        "number": 32,
+        "options": [
+          "The fairy took the man's dress.",
+          "The fairy's dress took by the man.",
+          "The man was took the fairy's dress.",
+          "The man was taken the fairy's dress.",
+          "The fairy's dress was taken by the man."
+        ],
+        "question": "다음 그림에 대한 설명으로 가장 적절한 것은?\n(그림: 선녀의 옷을 훔쳐가는 나무꾼) "
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "2",
+        "number": 33,
+        "options": [
+          "was broken - fixed",
+          "was broken - was fixed",
+          "broke - were fixed",
+          "were broken - fixed",
+          "broken - was fixed"
+        ],
+        "question": "다음 괄호 ㉠, ㉡에 주어진 동사의 알맞은 형태가 짝지어진 것은?\n\nMy bike ㉠(break) and it ㉡(fix) by my father."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "3",
+        "number": 34,
+        "options": [
+          "(A) were put - (B) was added",
+          "(A) was put - (B) were added",
+          "(A) were put - (B) were added",
+          "(A) were put - (B) were add",
+          "(A) were putted - (B) were added"
+        ],
+        "question": "다음 문장을 수동태로 전환할 때 빈칸 (A), (B)에 들어갈 알맞 가장 적절한 것은?\n\n• Some people put their eyeglasses on the desk.\n→ The eyeglasses (A)________ on the desk.\n• Later, somebody added arms to them.\n→ Later, arms (B)________ to them."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "1",
+        "number": 35,
+        "options": [
+          "(A) will be sent - (B) are cut - (C) was written",
+          "(A) will be sent - (B) cut - (C) was written",
+          "(A) will sent - (B) cuts - (C) wrote",
+          "(A) is sent - (B) are cutted - (C) was written",
+          "(A) was sent - (B) will be cut - (C) was wrote"
+        ],
+        "question": "다음 문장의 빈칸 (A), (B), (C)에 들어갈 알맞 가장 적절한 것은?\n\n• Tom (A)________ to the camp in a week.\n• Roses (B)________ every day.\n• \"Hamlet\" (C)________ by W. Shakespeare."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "4",
+        "number": 36,
+        "options": [
+          "㉠ speak - ㉡ build - ㉢ kept",
+          "㉠ spoke - ㉡ built - ㉢ was keep",
+          "㉠ spoken - ㉡ builded - ㉢ were kept",
+          "㉠ spoken - ㉡ built - ㉢ were kept",
+          "㉠ spoke - ㉡ builded - ㉢ was kept"
+        ],
+        "question": "다음 빈칸에 들어갈 알맞게 짝지어진 것은?\n\n• Spanish and English are ㉠________ in that country.\n• That old building was ㉡________ by Brady at first.\n• The blue boxes ㉢________ in a cabinet."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "5",
+        "number": 37,
+        "options": [
+          "(A) laid - (B) put",
+          "(A) lay - (B) survived",
+          "(A) survived - (B) lifted",
+          "(A) raised - (B) destroyed",
+          "(A) survive - (B) destroyed"
+        ],
+        "question": "다음 문장의 빈칸 (A), (B)에 들어갈 말로 가장 적절한 것은?\n\n• Fish can't (A)________ outside water.\n• The building was (B)________ by fire."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "2",
+        "number": 38,
+        "options": [
+          "㉠ build - ㉡ built",
+          "㉠ built - ㉡ was built",
+          "㉠ built - ㉡ is built",
+          "㉠ is built - ㉡ build",
+          "㉠ was built - ㉡ was building"
+        ],
+        "question": "다음 대화의 괄호 ㉠, ㉡에 우어진 단어가 올바른 형태로 연결된 것은?\n\nA: Who ㉠(build) this house?\nB: It ㉡(build) by my grandfather in 1975."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "1",
+        "number": 39,
+        "options": [
+          "㉠ was not cooked - ㉡ was found",
+          "㉠ was not cook - ㉡ was found",
+          "㉠ did not cook - ㉡ found",
+          "㉠ was not cook - ㉡ found",
+          "㉠ was not cooked - ㉡ found"
+        ],
+        "question": "Which pair is the most appropriate for the blanks?\n\n• The soup ㉠__________ by me.\n• The missing child ㉡__________ last night."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "4",
+        "number": 40,
+        "options": [
+          "㉣ steal - ㉤ built - ㉢ speak",
+          "㉣ is stolen - ㉤ is built - ㉢ is spoken",
+          "㉣ stole - ㉤ build - ㉢ spoke",
+          "㉣ was stolen - ㉤ built - ㉢ is spoken",
+          "㉣ was stole - ㉤ was built - ㉢ spoke"
+        ],
+        "question": "다음 괄호 ㉣, ㉤, ㉢에 주어진 단어가 올바른 형태로 짝지어진 것은?\n\n• My watch ㉣(steal) last week.\n• My grandfather ㉤(build) the house in 1978.\n• English ㉢(speak) in many countries."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "1",
+        "number": 41,
+        "options": [
+          "(A) was built - (B) were bought - (C) Was",
+          "(A) was built - (B) were bought - (C) Did",
+          "(A) was built - (B) was bought - (C) Was",
+          "(A) built - (B) were bought - (C) Was",
+          "(A) built - (B) was bought - (C) Did"
+        ],
+        "question": "다음 문장의 괄호 (A), (B), (C) 안에서 어법에 맞는 표현으로 가장 적절한 것은?\n\n(A) The Eiffel Tower [built / was built] in 1889.\n(B) The flowers [was bought / were bought] by me.\n(C) [Did / Was] the room cleaned by her?"
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "5",
+        "number": 42,
+        "options": [
+          "(A) stolen - (B) catch - (C) invite",
+          "(A) stole - (B) catches - (C) invites",
+          "(A) stealed - (B) catched - (C) invited",
+          "(A) stealed - (B) caught - (C) invited",
+          "(A) stolen - (B) caught - (C) invited"
+        ],
+        "question": "다음 문장의 밑줄 친 (A), (B), (C)를 어법상 가장 적절한 형태로 바꾼 것은?\n\n• The bag was (A)steal yesterday.\n• The thief was (B)catch by the police.\n• She is (C)invite to the party every year."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "4",
+        "number": 43,
+        "options": [
+          "㉠ throws - ㉡ speaks - ㉢ flew",
+          "㉠ threw - ㉡ was spoke - ㉢ flown",
+          "㉠ was thrown - ㉡ spoken - ㉢ is flown",
+          "㉠ threw - ㉡ is spoken - ㉢ are flown",
+          "㉠ was thrown - ㉡ spoke - ㉢ fly"
+        ],
+        "question": "다음 괄호 ㉠, ㉡, ㉢에 주어진 단어가 올바른 형태로 짝지어진 것은?\n\n• My father ㉠(throw) me the ball.\n• English ㉡(speak) in many countries.\n• The kites ㉢(fly) in the park by them."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "1",
+        "number": 44,
+        "options": [
+          "㉠ hurt - ㉡ broke - ㉢ be mailed",
+          "㉠ hurt - ㉡ broken - ㉢ mail",
+          "㉠ hurted - ㉡ broke - ㉢ mail",
+          "㉠ hurted - ㉡ broken - ㉢ be mailed",
+          "㉠ hurting - ㉡ broken - ㉢ be mailed"
+        ],
+        "question": "다음 괄호에 주어진 동사의 알맞은 형태를 차례대로 작지은 것은?\n\n• She was ㉠(hurt) by his words.\n• My brother ㉡(break) the vase yesterday.\n• This letter will ㉢(mail) to John."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "1",
+        "number": 45,
+        "options": [
+          "① is produced  ② has been used  ③ was held",
+          "① produces  ② has been used  ③ is held",
+          "③ is produced  ② has used  ③ holds",
+          "④ produces  ② is used  ③ holds",
+          "⑤ is produced  ② has used  ③ is held"
+        ],
+        "question": "다음 문장의 빈칸에 알맞은 말을 자리대로 바르게 짝지은 것은?\n• A lot of sugar ①__________ in Brazil.\n• Ann ②__________ this cell phone for 2 years.\n• The meeting ③__________ every Monday by Mr. Park.",
+        "explanation": "첫 번째 문장은 수동태 현재 단순형(is produced), 두 번째는 현재완료 수동태(has been used), 세 번째는 과거 단순형 수동태(was held)가 필요합니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "1",
+        "number": 46,
+        "options": [
+          "① made  ② buy  ③ was painted",
+          "② making  ② bought  ③ painted",
+          "③ made  ② bought  ③ painted",
+          "④ making  ② buy  ③ was painted",
+          "⑤ made  ② buy  ③ painted"
+        ],
+        "question": "다음 괄호 ①, ②, ③에 주어진 동사의 알맞은 형태가 차례대로 짝지어진 것은?\n• Is this coat ①(make) in Korea?\n• Where did he ②(buy) the camera?\n• The wall ③(paint) by Tom.",
+        "explanation": "첫 번째는 의문문 수동태(made), 두 번째는 과거 일반동사(buy), 세 번째는 수동태(was painted)가 올바른 형태입니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "2",
+        "number": 47,
+        "options": [
+          "① sent  ② was given  ③ held",
+          "② was sent  ② was given  ③ held",
+          "③ is sent  ③ gave  ③ was held",
+          "④ sent  ④ gave  ④ was held",
+          "⑤ was sent  ⑤ was given to  ⑤ held"
+        ],
+        "question": "다음 빈칸에 알맞은 단어를 고르시오.\n• The letter (A)__________ by my mother.\n• The present (B)__________ me by my aunt.\n• Germany (C)__________ the 2006 World Cup.",
+        "explanation": "(A) 과거 수동태 'was sent', (B) 과거 수동태 'was given', (C) 과거 일반동사 'held'가 올바른 형태입니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "1",
+        "number": 48,
+        "options": [
+          "① is driven  ② was given to  ③ are invented",
+          "② drives  ② was given  ③ invented",
+          "③ was driven  ③ gave  ③ are invented",
+          "④ drove  ④ gives  ④ was invented",
+          "⑤ was driven  ⑤ was given to  ⑤ invented"
+        ],
+        "question": "다음 빈칸에 알맞은 단어를 고르시오.\n• The new car (A)__________ by my friend, David.\n• The present (B)__________ me by my brother.\n• They (C)__________ the first airplane.",
+        "explanation": "(A) 과거 수동태 'is driven' (현재완료 또는 최근), (B) 과거 수동태 'was given to', (C) 과거 능동태 또는 수동태 'are invented'가 올바른 형태입니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "1",
+        "number": 49,
+        "options": [
+          "① is spoken  ② was cleaned  ③ was baked",
+          "② speak  ② cleaned  ③ baked",
+          "③ is spoken  ③ is cleaned  ③ is baked",
+          "④ is spoken  ④ was cleaned  ④ is baking",
+          "⑤ speak  ⑤ is cleaning  ⑤ will be baked"
+        ],
+        "question": "다음 빈칸에 알맞은 단어를 고르시오.\n• Korean (A)__________ in Korea.\n• The room (B)__________ by Ann yesterday.\n• My mother (C)__________ cookies for me.",
+        "explanation": "(A) 현재 수동태 'is spoken', (B) 과거 수동태 'was cleaned', (C) 과거 능동태 'baked'가 올바른 형태입니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "1",
+        "number": 50,
+        "options": [
+          "① was given to  ② was given  ③ invented",
+          "② was driven  ② was given  ③ invented",
+          "③ is driven  ③ gave  ③ is invented",
+          "④ drove  ④ gives  ④ was invented",
+          "⑤ was driven  ⑤ was given to  ⑤ invented"
+        ],
+        "question": "다음 빈칸에 알맞은 단어를 고르시오.\n• A blue car (A)__________ by my brother.\n• The present (B)__________ me by my aunt.\n• Nikolaus (C)__________ a gas engine in 1894.",
+        "explanation": "(A) 과거 수동태 'was given to', (B) 과거 수동태 'was given', (C) 과거 능동태 'invented'가 올바른 형태입니다."
+      }
+    ],
+    "answer_key": [
+      "4",
+      "5",
+      "2",
+      "5",
+      "5",
+      "1",
+      "3",
+      "2",
+      "4",
+      "3",
+      "3",
+      "2",
+      "5",
+      "5",
+      "4",
+      "5",
+      "4",
+      "3",
+      "5",
+      "5",
+      "5",
+      "3",
+      "4",
+      "1",
+      "3",
+      "3",
+      "4",
+      "5",
+      "3",
+      "5",
+      "1",
+      "5",
+      "2",
+      "3",
+      "1",
+      "4",
+      "5",
+      "2",
+      "1",
+      "4",
+      "1",
+      "5",
+      "4",
+      "1",
+      "1",
+      "1",
+      "2",
+      "1",
+      "1",
+      "1"
+    ]
+  }
+}
