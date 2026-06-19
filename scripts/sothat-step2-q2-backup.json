@@ -1,0 +1,4852 @@
+{
+  "naesin_templates_68d46c5a-3b05-4f2e-92ec-7cbf3af39327": {
+    "questions": [
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "3",
+        "number": 1,
+        "options": [
+          "because",
+          "when",
+          "so that",
+          "although",
+          "if"
+        ],
+        "question": "[Part 1] 다음 빈칸에 들어갈 말로 가장 적절한 것은?\nHe exercises every day _______ he can stay healthy.",
+        "explanation": "\"건강을 유지할 수 있도록\"은 목적을 나타내므로 so that이 적절합니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "1",
+        "number": 2,
+        "options": [
+          "so that",
+          "in order to",
+          "so as to",
+          "to",
+          "for the purpose of"
+        ],
+        "question": "다음 빈칸에 들어갈 말로 적절하지 않은 것은?\nI went to a bookstore _______ buy some books.",
+        "explanation": "so that 뒤에는 주어 + 조동사 + 동사 구조가 와야 합니다. \"so that buy\"는 주어와 조동사가 없어 불가합니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "1",
+        "number": 3,
+        "options": [
+          "could",
+          "must",
+          "should",
+          "am",
+          "was"
+        ],
+        "question": "다음 대화의 빈칸에 들어갈 말로 가장 적절한 것은?\nA: Why did you save money?\nB: I saved money so that I _______ buy a new bike.",
+        "explanation": "주절이 과거(saved)이므로 so that절에도 과거형 조동사 could를 사용합니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "4",
+        "number": 4,
+        "options": [
+          "then",
+          "enough",
+          "so",
+          "so that",
+          "completely"
+        ],
+        "question": "다음 문장의 빈칸에 들어갈 말로 가장 적절한 것은?\nPlease turn off the light _______ I can sleep.",
+        "explanation": "\"내가 잠잘 수 있도록\"은 목적을 나타내므로 so that + 주어 + can이 적절합니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "3",
+        "number": 5,
+        "options": [
+          "because",
+          "in order to",
+          "so that",
+          "so as to",
+          "enough to"
+        ],
+        "question": "다음 두 문장을 한 문장으로 연결할 때 빈칸에 가장 적절한 것은?\nKing Sejong invented Hangeul. He wanted all Koreans to read and write easily.\n→ King Sejong invented Hangeul _______ all Koreans could read and write easily.",
+        "explanation": "빈칸 뒤에 주어(all Koreans) + 조동사(could)가 있으므로 절을 이끄는 접속사 so that이 필요합니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "5",
+        "number": 6,
+        "options": [
+          "we can see you",
+          "we won't be late",
+          "we can get well",
+          "we won't get sick",
+          "we can understand you"
+        ],
+        "question": "다음 문장의 빈칸에 들어갈 말로 가장 적절한 것은?\nPlease speak slowly so that _______.",
+        "explanation": "\"천천히 말하다\"와 연결되는 목적은 \"이해할 수 있도록\"이므로 ⑤가 적절합니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "4",
+        "number": 7,
+        "options": [
+          "to buy a new car",
+          "so as to travel",
+          "in order to start a business",
+          "so that I can help others",
+          "for the purpose of taking a trip"
+        ],
+        "question": "다음 빈칸에 들어갈 말로 알맞지 않은 것은?\nI saved money _______.",
+        "explanation": "주절이 과거(saved)인데 ④의 so that절에 현재형 can이 와서 시제가 불일치합니다. could가 와야 합니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "5",
+        "number": 8,
+        "options": [
+          "I could keep in shape",
+          "I could travel to Europe",
+          "I could water the flowers",
+          "I could catch the bus",
+          "I could focus on reading"
+        ],
+        "question": "다음 문장의 빈칸에 들어갈 말로 가장 적절한 것은?\nI turned off the radio so that _______.",
+        "explanation": "\"라디오를 껐다\"와 연결되는 목적은 \"독서에 집중하기 위해\"이므로 ⑤가 적절합니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "1",
+        "number": 9,
+        "options": [
+          "(A) so that - (B) could",
+          "(A) in order to - (B) can",
+          "(A) so - (B) will",
+          "(A) that - (B) is",
+          "(A) because - (B) takes"
+        ],
+        "question": "다음 빈칸에 들어갈 말이 순서대로 바르게 연결된 것은?\nHe quit his job (A) _______ he (B) _______ take care of his baby.",
+        "explanation": "주절이 과거(quit)이므로 so that + 주어 + could가 적절합니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "5",
+        "number": 10,
+        "options": [
+          "buy a new bike",
+          "get a good grade",
+          "read and write easily",
+          "go to other places quickly",
+          "talk to other people in different places"
+        ],
+        "question": "다음 문장의 빈칸에 들어갈 말로 가장 적절한 것은?\nBell invented the telephone so that we can _______.",
+        "explanation": "전화기의 목적은 \"다른 곳에 있는 사람들과 대화할 수 있도록\"이므로 ⑤가 적절합니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "4",
+        "number": 11,
+        "options": [
+          "if",
+          "after",
+          "although",
+          "so that",
+          "while"
+        ],
+        "question": "다음 빈칸에 공통으로 들어갈 접속사는?\n• I'll go to the park _______ I can ride a bike.\n• Turn on the light _______ you can see better.",
+        "explanation": "두 문장 모두 목적을 나타내는 so that이 공통으로 들어갑니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "2",
+        "number": 12,
+        "options": [
+          "can",
+          "could",
+          "will",
+          "is",
+          "are"
+        ],
+        "question": "다음 중 문맥상 빈칸에 가장 적절한 조동사는?\nThe guide walked slowly so that everybody _______ follow him.",
+        "explanation": "주절이 과거(walked)이므로 so that절의 조동사도 과거형 could를 사용해야 시제가 일치합니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "4",
+        "number": 13,
+        "options": [
+          "so that",
+          "in order that",
+          "so as that",
+          "in order to",
+          "that"
+        ],
+        "question": "다음 빈칸에 들어갈 말로 적절하지 않은 것은?\nI went to America _______ I could speak English well.",
+        "explanation": "in order to는 뒤에 동사원형만 올 수 있으므로 \"in order to I could speak\"는 틀립니다. so as that도 올바른 표현이 아닙니다.",
+        "acceptedAnswers": [
+          "4",
+          "3"
+        ]
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "2",
+        "number": 14,
+        "options": [
+          "because",
+          "so that",
+          "such that",
+          "even if",
+          "whether"
+        ],
+        "question": "다음 중 빈칸에 들어갈 말로 가장 적절한 것은?\nTurn in your report _______ I can comment on it.",
+        "explanation": "\"내가 코멘트할 수 있도록\" 목적을 나타내므로 so that이 적절합니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "1",
+        "number": 15,
+        "options": [
+          "so that",
+          "when",
+          "although",
+          "because",
+          "before"
+        ],
+        "question": "다음 빈칸에 알맞은 말을 고르시오.\nHe often walks his dog _______ it can stay healthy.",
+        "explanation": "\"건강을 유지할 수 있도록\" 목적을 나타내므로 so that이 적절합니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "2",
+        "number": 16,
+        "options": [
+          "so as not to",
+          "in order to",
+          "as long as",
+          "such as",
+          "in spite of"
+        ],
+        "question": "[Part 2] 다음 두 문장이 같은 의미가 되도록 빈칸에 알맞은 것은?\nShe donated money so as to help the poor.\n= She donated money _______ help the poor.",
+        "explanation": "\"so as to\"와 같은 의미의 목적 표현은 \"in order to\"입니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "1",
+        "number": 17,
+        "options": [
+          "He reads many books about writing.",
+          "He reads many books to be a writer.",
+          "He reads many books so as to be a writer.",
+          "He reads many books in order to be a writer.",
+          "He reads many books so that he can be a writer."
+        ],
+        "question": "다음 중 의미가 나머지 넷과 다른 하나는?",
+        "explanation": "①은 \"글쓰기에 관한 책\"으로 내용을 나타내고, ②~⑤는 \"작가가 되기 위해\"라는 목적을 나타냅니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "3",
+        "number": 18,
+        "options": [
+          "I exercise so hard what I can lose weight.",
+          "I exercise so hard that I can lose weight.",
+          "I exercise hard so that I can lose weight.",
+          "I lose weight so that I can exercise hard.",
+          "I lose weight in order to exercise hard."
+        ],
+        "question": "다음 문장을 'so that' 구문으로 바르게 영작한 것은?\n\"나는 살을 빼기 위해 열심히 운동한다.\"",
+        "explanation": "\"so that + 주어 + can\" 목적 구문입니다. ②는 \"so hard that\"으로 결과 구문이며, ④⑤는 의미가 반대입니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "3",
+        "number": 19,
+        "options": [
+          "I studied so hard what I passed the test.",
+          "I studied so hard that I passed the test.",
+          "I studied hard so that I could pass the test.",
+          "I passed the test so that I could study hard.",
+          "I passed the test in order to study hard."
+        ],
+        "question": "다음 문장을 'so that' 구문으로 바르게 영작한 것은?\n\"나는 시험에 합격하기 위해 열심히 공부했다.\"",
+        "explanation": "주절이 과거(studied)이므로 so that + could. ②는 \"so hard that\"으로 결과 구문이며, ④⑤는 의미가 반대입니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "3",
+        "number": 20,
+        "options": [
+          "He studies hard to pass the exam.",
+          "He studies hard so as to pass the exam.",
+          "He studied so hard that he could pass the exam.",
+          "He studies hard in order to pass the exam.",
+          "He studies hard in order that he can pass the exam."
+        ],
+        "question": "다음 중 의미가 나머지 넷과 다른 하나는?",
+        "explanation": "③은 \"so + 부사 + that\"(결과 구문: 너무 열심히 공부해서 합격할 수 있었다)이며, 나머지는 모두 목적(\"합격하기 위해\")을 나타냅니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "5",
+        "number": 21,
+        "options": [
+          "I finished my job quickly so as to go home early.",
+          "I finished my job quickly to go home early.",
+          "I finished my job quickly so that I could go home early.",
+          "I finished my job quickly in order that I could go home early.",
+          "I finished my job quickly because I went home early."
+        ],
+        "question": "다음 중 의미가 나머지 넷과 다른 하나는?",
+        "explanation": "⑤는 because(이유)를 나타내고, 나머지는 모두 \"일찍 집에 가기 위해\"라는 목적을 나타냅니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "5",
+        "number": 22,
+        "options": [
+          "I hurried so that I would not be late. = I hurried so as not to be late.",
+          "She exercised to be healthy. = She exercised so that she could be healthy.",
+          "I tried hard so that I could pass. = I tried hard to pass.",
+          "Rachel studies hard so that she can get a prize. = Rachel studies hard so as to get a prize.",
+          "I left early to avoid the rush. = I left early, so I could avoid the rush."
+        ],
+        "question": "다음 중 문장 전환이 어색한 것은?",
+        "explanation": "⑤에서 콤마 + so는 결과를 나타내므로 목적의 to avoid와 의미가 달라집니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "5",
+        "number": 23,
+        "options": [
+          "He saved money to buy a bike.",
+          "He saved money so as to buy a bike.",
+          "He saved money in order to buy a bike.",
+          "He saved money so that he could buy a bike.",
+          "He saved so much money that he couldn't buy a bike."
+        ],
+        "question": "다음 중 의미가 나머지 넷과 다른 하나는?",
+        "explanation": "⑤는 \"so much...that\"(결과 구문: 돈을 너무 많이 모아서 자전거를 살 수 없었다)이며 의미가 다릅니다. 나머지는 모두 \"자전거를 사기 위해\"라는 목적입니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "4",
+        "number": 24,
+        "options": [
+          "② only",
+          "⑤ only",
+          "②④",
+          "②⑤",
+          "④⑤"
+        ],
+        "question": "다음 문장과 의미가 같은 것을 <u>모두</u> 고르면?\n\nShe turned on the TV to watch the news.\n\n① She turned on the TV in order watch the news.\n② She turned on the TV so as to watch the news.\n③ She turned on the TV in order not to watch the news.\n④ She turned on the TV so that she can watch the news.\n⑤ She turned on the TV so that she could watch the news.",
+        "explanation": "② so as to watch = 목적 표현으로 올바릅니다. ⑤ so that she could watch = 과거 시제 일치가 올바릅니다. ① in order 뒤 to 누락, ③ not이 붙어 반대 의미, ④ can은 turned(과거)와 시제 불일치입니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "5",
+        "number": 25,
+        "options": [
+          "We'll do our best so that winning the game.",
+          "We'll do our best so that can win the game.",
+          "We'll do our best in order to we win the game.",
+          "We'll do our best in order to can win the game.",
+          "We'll do our best so that we can win the game."
+        ],
+        "question": "다음 중 우리말을 영작한 것으로 가장 적절한 것은?\n\n\"우리는 게임을 이기기 위해서 최선을 다할 것이다.\"",
+        "explanation": "so that + 주어(we) + 조동사(can) + 동사원형(win)이 올바릅니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "3",
+        "number": 26,
+        "options": [
+          "I woke up early not to miss the bus.",
+          "I woke up early so that I wouldn't miss the bus.",
+          "I woke up so early that I didn't miss the bus.",
+          "I woke up early so as not to miss the bus.",
+          "I woke up early in order that I wouldn't miss the bus."
+        ],
+        "question": "다음 중 의미가 나머지 넷과 다른 하나는?",
+        "explanation": "③은 \"so + 부사 + that\"(결과 구문: 너무 일찍 일어나서 버스를 놓치지 않았다)이며, 나머지는 모두 목적(\"놓치지 않기 위해\")을 나타냅니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "3",
+        "number": 27,
+        "options": [
+          "He practiced hard so that he could learn difficult tricks.",
+          "He practiced hard in order that he could learn difficult tricks.",
+          "He practiced too hard to learn difficult tricks.",
+          "He practiced hard so as to learn difficult tricks.",
+          "He practiced hard to learn difficult tricks."
+        ],
+        "question": "다음 중 의미가 나머지 넷과 다른 하나는?",
+        "explanation": "③은 \"too...to\"(너무 ~해서 ...할 수 없다)로 부정적 결과를 나타냅니다. 나머지는 모두 \"어려운 기술을 배우기 위해\"라는 목적입니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "4",
+        "number": 28,
+        "options": [
+          "① only",
+          "⑤ only",
+          "①③",
+          "①⑤",
+          "③⑤"
+        ],
+        "question": "다음 문장의 밑줄 친 부분과 의미가 같은 것은? (정답 2개)\n\nWe saved money <u>to take a vacation</u>.\n\n① in order to take a long vacation.\n② so as not to take a long vacation.\n③ in order that to take a long vacation.\n④ in order to we can take a long vacation.\n⑤ in order that we could take a long vacation.",
+        "explanation": "① in order to + V원형 = 목적 표현으로 올바릅니다. ⑤ in order that + 주어 + could = 목적절로 올바릅니다. ② not이 붙어 반대 의미, ③ in order that 뒤에 to가 불필요, ④ in order to 뒤에 주어+조동사 불가입니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "1",
+        "number": 29,
+        "options": [
+          "He turned down the radio so that I could sleep. = He turned down the radio in order to sleep.",
+          "Jim turned on TV so that he could watch news. = Jim turned on TV in order to watch news.",
+          "He goes to bed early so that he can sleep. = He goes to bed early to sleep.",
+          "Brian practiced hard so that he could be a dancer. = Brian practiced hard so as to be a dancer.",
+          "I took my umbrella so that I could share it. = I took my umbrella so as to share it."
+        ],
+        "question": "다음 중 문장의 의미가 서로 다른 것은?",
+        "explanation": "①에서 \"so that I could sleep\"(나의 목적)과 \"in order to sleep\"(그의 목적)은 주어가 달라 의미가 다릅니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "4",
+        "number": 30,
+        "options": [
+          "(A) went",
+          "(D) invented",
+          "(E) talk",
+          "(B) wait",
+          "(C) could"
+        ],
+        "question": "다음 빈칸 (A)~(E)에 들어갈 단어로 적절하지 않은 것은?\n\n• Andy (A) _______ to bed early in order that he (B) _______ wake up early.\n• Bell (D) _______ the telephone in order that we (C) _______ (E) _______ to others.",
+        "explanation": "(B) 위치에는 \"could\"와 같은 조동사가 와야 합니다. \"wait\"은 조동사가 아니므로 \"he wait wake up\"은 성립하지 않습니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "1",
+        "number": 31,
+        "options": [
+          "I was nervous, so that I could hardly speak.",
+          "Speak louder so that everyone can hear you.",
+          "She ran so that she could get there on time.",
+          "I jog every day so that I can stay healthy.",
+          "He drinks milk so that he can grow taller."
+        ],
+        "question": "[Part 3] 다음 중 밑줄 친 so that의 쓰임이 나머지 넷과 다른 하나는?",
+        "explanation": "①은 콤마 + so that으로 결과(긴장해서 말을 거의 못 했다)를 나타냅니다. ②~⑤는 모두 목적(~할 수 있도록)을 나타냅니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "4",
+        "number": 32,
+        "options": [
+          "③ only",
+          "⑤ only",
+          "③④",
+          "③⑤",
+          "④⑤"
+        ],
+        "question": "다음 우리말에 맞게 영작한 것을 <u>모두</u> 고르면?\n\n\"Sam은 그 기차를 놓치지 않기 위해 일찍 일어났다.\"\n\n① Sam woke up early to not miss the train.\n② Sam woke up early in order to miss the train.\n③ Sam woke up early so as not to miss the train.\n④ Sam woke up so early that he could not miss the train.\n⑤ Sam woke up early so that he would not miss the train.",
+        "explanation": "③ so as not to + V원형 = 올바른 부정 목적 표현입니다. ⑤ so that + would not = 올바른 목적절입니다. ① to not(비표준 어순), ② in order to miss(긍정=놓치려고), ④ so early that(결과 구문)입니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "2",
+        "number": 33,
+        "options": [
+          "He took a taxi so that he wouldn't be late.",
+          "I gave him a knife so that he couldn't peel the fruit.",
+          "He tried his best so that he could win the contest.",
+          "This flower opens up so that it can get sunlight.",
+          "I turned off the TV so that my brother could study."
+        ],
+        "question": "다음 중 의미상 어색한 문장은?",
+        "explanation": "②에서 칼을 줬는데 \"couldn't peel\"(과일을 깎을 수 없도록)은 의미상 어색합니다. \"could peel\"이 되어야 합니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "2",
+        "number": 34,
+        "options": [
+          "Please move to one side so that we can all see.",
+          "Turn the fish carefully so as to it won't burn.",
+          "I drink coffee so that I can concentrate on my work.",
+          "He exercises every day in order that he can stay healthy.",
+          "Please speak louder so that all of us can hear you."
+        ],
+        "question": "다음 중 어법상 어색한 문장은?",
+        "explanation": "② \"so as to\" 뒤에는 동사원형만 올 수 있으므로 \"so as to it won't burn\"은 틀립니다. \"so that it won't burn\"이 올바릅니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "1",
+        "number": 35,
+        "options": [
+          "Watch out so as not to falling.",
+          "I study English so as to travel abroad.",
+          "I practiced hard so as to win the game.",
+          "I got up early so as not to miss the train.",
+          "I went to the market so as to buy some food."
+        ],
+        "question": "다음 중 어법상 어색한 문장을 고르면?",
+        "explanation": "\"so as not to\" 뒤에는 동사원형이 와야 합니다. \"falling\" → \"fall\"이 올바릅니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "3",
+        "number": 36,
+        "options": [
+          "I listen to radio so that I can improve my skills.",
+          "He worked hard so that he could make money.",
+          "Please leave your number so that she can't call you.",
+          "We use public transport so that we can save energy.",
+          "Miran hurried so that she could see her friend."
+        ],
+        "question": "다음 중 의미가 어색한 문장은?",
+        "explanation": "③에서 전화번호를 남기는데 \"can't call\"(전화할 수 없도록)은 의미상 어색합니다. \"can call\"이 되어야 합니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "2",
+        "number": 37,
+        "options": [
+          "Eunyoung set the alarm not in order to oversleep.",
+          "Many parents ask their children not to hang out with bad friends.",
+          "Take off your wet clothes so as to catch a cold.",
+          "Handong studied so hard in order to fail the test.",
+          "Nuri told lies so as to not hurt my feeling."
+        ],
+        "question": "다음 중 어법 및 의미가 자연스러운 문장은?",
+        "explanation": "② ask + 목적어 + not to V = 올바른 부정 부탁 표현입니다. ① not in order to → in order not to, ③ so as to catch a cold(감기 걸리려고?) → so as not to, ④ in order to fail(시험 떨어지려고?) → 의미 이상, ⑤ so as to not → so as not to."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "5",
+        "number": 38,
+        "options": [
+          "She studied hard to get 'A' in English.",
+          "They work together for the championship.",
+          "I came early so that I could get a better seat.",
+          "I did the dishes so that my mom could get rest.",
+          "He ran to the bus stop in order to he could catch it."
+        ],
+        "question": "다음 중 어법상 어색한 문장은?",
+        "explanation": "\"in order to\" 뒤에는 동사원형만 올 수 있으므로 \"in order to he could catch\"는 틀립니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "3",
+        "number": 39,
+        "options": [
+          "① only",
+          "② only",
+          "①②",
+          "①④",
+          "②④"
+        ],
+        "question": "다음 중 어법상 어색한 문장은? (정답 2개)\n\n① I woke up early so that I will not be late.\n② He was so wisdom that he was able to solve it.\n③ I took a taxi so that I could get there on time.\n④ I've saved money to buy a computer.\n⑤ I took my umbrella for my mother.",
+        "explanation": "① woke up(과거)인데 will(현재/미래) = 시제 불일치. would not이 와야 합니다. ② wisdom은 명사이므로 \"so wisdom\"은 틀립니다. \"so wise\"(형용사)가 올바릅니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "4",
+        "number": 40,
+        "options": [
+          "Our teacher brought a DVD so that we could watch a movie.",
+          "Giho made cookies so that we could eat them.",
+          "Hajin took pictures so that we could remember the day.",
+          "Tom couldn't get in so that he had left his ticket.",
+          "We sang a song so that she would know we loved her."
+        ],
+        "question": "다음 중 밑줄 친 so that의 쓰임이 흐름상 어색한 것은?",
+        "explanation": "④에서 \"so that he had left his ticket\"은 의미상 어색합니다. \"들어갈 수 없었다\"의 이유는 because이지 so that(목적)이 아닙니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "2",
+        "number": 41,
+        "options": [
+          "(A), (B)",
+          "(A), (D)",
+          "(C), (D)",
+          "(A), (C)",
+          "(B), (D)"
+        ],
+        "question": "다음 중 어법상 옳은 문장끼리 짝지어진 것은?\n\n(A) She is so wise that everyone respects her.\n(B) He tried his best so that he can win the race.\n(C) Speak too clearly that they can understand you.\n(D) She was very careful so that she wouldn't drop the egg.",
+        "explanation": "(A) so + 형용사 + that = 결과 구문으로 올바릅니다. (D) so that + wouldn't = 목적절로 올바릅니다. (B) tried(과거) + can(현재) = 시제 불일치, (C) too → so가 되어야 합니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "2",
+        "number": 42,
+        "options": [
+          "in order that get a good seat",
+          "so as to get a good seat",
+          "in order to they could get a good seat",
+          "so as to they could get a good seat",
+          "to they could get a good seat"
+        ],
+        "question": "다음 문장의 밑줄 친 부분과 의미가 같은 것은?\n\nThey started early <u>so that they could get a good seat</u>.",
+        "explanation": "\"so as to + 동사원형\"은 목적을 나타내는 올바른 표현입니다. 나머지는 to/so as to 뒤에 주어+조동사가 와서 틀립니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "3",
+        "number": 43,
+        "options": [
+          "I went to the store so as to buy some milk.",
+          "He studies hard in order that he can succeed.",
+          "I hurry so that I wouldn't miss the train.",
+          "She works hard so that her family can live in comfort.",
+          "Speak loudly so that everybody can hear you."
+        ],
+        "question": "다음 중 어법상 어색한 곳이 있는 문장은?",
+        "explanation": "③ hurry(현재)인데 wouldn't(과거) = 시제 불일치. \"won't\"이 와야 합니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "3",
+        "number": 44,
+        "options": [
+          "I study hard <u>so that</u> I can pass.",
+          "He ran fast <u>so that</u> he could catch the bus.",
+          "I was <u>so</u> tired <u>that</u> I couldn't walk.",
+          "She saves money <u>so that</u> she can travel.",
+          "We use public transport <u>so that</u> we can save energy."
+        ],
+        "question": "다음 중 밑줄 친 부분의 쓰임이 나머지와 다른 것은?",
+        "explanation": "③은 \"so + 형용사 + that\"(결과 구문)이며, 나머지는 모두 \"so that\"(목적 구문)입니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "3",
+        "number": 45,
+        "options": [
+          "He was so wisdom that he solved it.",
+          "I drove fast so that he can get there.",
+          "The kids practiced hard so as to win.",
+          "Jack skipped dinner in order that fit in jeans.",
+          "She's staying in US so that she can improves her English."
+        ],
+        "question": "다음 중 어법상 옳은 문장을 고르시오.",
+        "explanation": "③ \"so as to + 동사원형(win)\"은 올바릅니다. ① wisdom → wise(형용사), ② drove(과거) + can(현재) = 시제 불일치, ④ in order that 뒤 주어 누락, ⑤ can + improves → can + improve."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "5",
+        "number": 46,
+        "options": [
+          "Soyun was so careful that she wouldn't drop the egg.",
+          "Soyun was so careful but she wouldn't drop the egg.",
+          "Soyun was very careful so that she would drop the egg.",
+          "Soyun was so careful and she wouldn't drop the egg.",
+          "Soyun was very careful so that she wouldn't drop the egg."
+        ],
+        "question": "[Part 4] 다음 우리말을 바르게 영작한 것은?\n\n\"소윤이는 계란을 떨어트리지 않기 위해 매우 조심했다.\"",
+        "explanation": "\"~하기 위해\"는 목적이므로 \"so that + wouldn't\"(⑤)가 올바릅니다. ① \"so...that\"은 결과 구문, ② but은 역접, ③ \"would drop\"은 긍정(떨어트리도록)으로 의미 반대, ④ and는 단순 연결입니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "5",
+        "number": 47,
+        "options": [
+          "나는 살을 빼기 위해 달린다. → I run so that I can lose weight.",
+          "그는 잊지 않기 위해 적었다. → He wrote it down so that he wouldn't forget.",
+          "그녀는 책을 읽기 위해 TV를 껐다. → She turned off the TV to read a book.",
+          "우리는 전망을 보기 위해 높이 올라갔다. → We went up high in order to see the view.",
+          "나는 그를 만나기 위해 여기 왔다. → I came here because I could meet him."
+        ],
+        "question": "다음 중 영작이 바르지 않은 것은?",
+        "explanation": "\"만나기 위해\"는 목적이므로 because(이유)가 아닌 to/so that이 와야 합니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "1",
+        "number": 48,
+        "options": [
+          "I will change you so that you can meet the prince.",
+          "You will change I so that you can meet the prince.",
+          "I will change you so that the prince can meet you.",
+          "You will change so that I can meet the prince.",
+          "I will change the prince so that you can meet him."
+        ],
+        "question": "다음 단어들을 바르게 배열하여 문장을 완성하시오.\n\n(change, can, that, meet, I, will, you, so, the prince, you)",
+        "explanation": "\"I will change you so that you can meet the prince.\"가 주어진 단어로 만들 수 있는 올바른 문장입니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "1",
+        "number": 49,
+        "options": [
+          "Turn the light on so that I can see you.",
+          "Turn on the light so that you can see I.",
+          "I can see you so that turn the light on.",
+          "So that I can see you turn the light on.",
+          "Light turn on the so that I can see you."
+        ],
+        "question": "다음 단어들을 바르게 배열하여 문장을 완성하시오.\n\n(can, I, light, on, that, the, turn, see, so, you)",
+        "explanation": "\"Turn the light on so that I can see you.\"가 올바른 배열입니다. ② \"see I\" → \"see me\"(목적격 오류)."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "2",
+        "number": 50,
+        "options": [
+          "Mom prepared breakfast so that I could rest.",
+          "I prepared breakfast so that Mom could rest.",
+          "So that Mom could rest I prepared breakfast.",
+          "Breakfast was prepared so that I could rest Mom.",
+          "I could rest so that Mom prepared breakfast."
+        ],
+        "question": "다음 단어들을 바르게 배열하여 문장을 완성하시오.\n\n(I, could, rest, prepared, so, Mom, breakfast, that)",
+        "explanation": "\"I prepared breakfast so that Mom could rest.\"가 가장 자연스러운 문장입니다. 내가 아침을 준비해서 엄마가 쉴 수 있도록."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "1",
+        "number": 51,
+        "options": [
+          "can",
+          "could",
+          "will",
+          "would",
+          "must"
+        ],
+        "question": "다음 우리말을 영어로 옮길 때 빈칸에 알맞은 조동사는?\n\n\"사막여우의 발은 뜨거운 모래 위를 걸을 수 있도록 털로 덮여 있다.\"\n\nThe fennec fox's feet are covered with fur so that it _______ walk on hot sand.",
+        "explanation": "주절이 현재(are covered)이므로 so that절에도 현재형 조동사 can을 사용합니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "1",
+        "number": 52,
+        "options": [
+          "I studied hard so that I could pass the exam.",
+          "I studied so hard that I could pass the exam.",
+          "So that I could pass the exam I studied hard.",
+          "I could pass the exam so that I studied hard.",
+          "I studied hard in order that pass the exam."
+        ],
+        "question": "다음 단어들을 바르게 배열하여 문장을 완성하시오.\n\n(studied, so, I, could, that, hard, I, the exam, pass)",
+        "explanation": "\"I studied hard so that I could pass the exam.\"이 목적을 나타내는 올바른 배열입니다. ②는 \"so hard that\"(결과 구문)으로 의미가 다릅니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "5",
+        "number": 53,
+        "options": [
+          "I pressed the button to turn on the computer.",
+          "Sora bought the book so that she could study English.",
+          "Junho turned off the light so that he could sleep well.",
+          "He went to India so that he could help the poor.",
+          "We should develop habits so that we live happy."
+        ],
+        "question": "다음 중 영작이 어색한 것을 고르시오.",
+        "explanation": "⑤ \"so that\" 뒤에 조동사(can)가 없고, \"happy\" → \"happily\"(부사) 또는 \"live a happy life\"가 되어야 합니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "4",
+        "number": 54,
+        "options": [
+          "I go jogging to keep healthy.",
+          "I go jogging so as to keep healthy.",
+          "I go jogging in order to keep healthy.",
+          "I go jogging enough to keep healthy.",
+          "I go jogging so that I can keep healthy."
+        ],
+        "question": "다음 중 의미가 나머지 넷과 다른 하나는?",
+        "explanation": "④ \"enough to\"는 \"~할 만큼 충분히\"라는 정도를 나타내며, 나머지는 모두 \"건강을 유지하기 위해\"라는 목적을 나타냅니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "2",
+        "number": 55,
+        "options": [
+          "(A)-(B)-(C)-(D)",
+          "(C)-(A)-(B)-(D)",
+          "(B)-(D)-(A)-(C)",
+          "(C)-(D)-(A)-(B)",
+          "(A)-(C)-(D)-(B)"
+        ],
+        "question": "다음 빈칸 (가)~(라)에 들어갈 말을 <보기>에서 골라 순서대로 나열한 것은?\n\n• Jenny is saving her money (가).\n• He watches American movies (나).\n• He went out the back door (다).\n• She will go abroad (라).\n\n<보기>\n(A) so that he can improve listening\n(B) so that nobody could see him\n(C) so that she can fix her bike\n(D) so that she can study art",
+        "explanation": "(가) saving money → fix her bike (C), (나) watches movies → improve listening (A), (다) went out back door → nobody could see (B), (라) go abroad → study art (D). 순서: C-A-B-D."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "4",
+        "number": 56,
+        "options": [
+          "① only",
+          "③ only",
+          "①②",
+          "①③",
+          "②③"
+        ],
+        "question": "다음 중 문장 전환이 바른 것을 <u>모두</u> 고르면?\n\n① I studied hard to pass. = I studied hard so that I could pass.\n② He ran to catch the bus. = He ran so that he catch the bus.\n③ She came early for us to start. = She came early so that we could start.\n④ Turn on the light to see. = Turn on the light so that you see.\n⑤ I woke up early not to be late. = I woke up early so that I won't be late.",
+        "explanation": "① studied(과거) → so that I could pass 올바릅니다. ③ for us to start → so that we could start 올바릅니다. ② catch → could catch(조동사 누락), ④ you see → you can see(조동사 누락), ⑤ won't → wouldn't(woke up은 과거이므로 시제 불일치)."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "1",
+        "number": 57,
+        "options": [
+          "(A) so that - (B) could",
+          "(A) to - (B) could",
+          "(A) in order to - (B) can",
+          "(A) so that - (B) is",
+          "(A) because - (B) could"
+        ],
+        "question": "다음 빈칸 (A), (B)에 들어갈 말이 바르게 짝지어진 것은?\n\nHe spoke slowly (A) _______ others (B) _______ understand him.",
+        "explanation": "주절이 과거(spoke)이므로 so that + 주어 + could가 적절합니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "3",
+        "number": 58,
+        "options": [
+          "I use a map so that I won't get lost.",
+          "She wears a coat so that she won't get cold.",
+          "He hurried so that he would miss the train.",
+          "I turned off the light so that I could sleep.",
+          "We save water so that we can protect nature."
+        ],
+        "question": "다음 중 의미가 어색한 문장은?",
+        "explanation": "③ \"he would miss the train\"(기차를 놓치도록)은 의미상 어색합니다. \"wouldn't miss\"(놓치지 않도록)가 되어야 합니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "2",
+        "number": 59,
+        "options": [
+          "I'll wait here in order that you could find me.",
+          "He invented the phone in order that we can talk.",
+          "I went to bed early in order that I can wake up.",
+          "She studied hard in order that she passed the exam.",
+          "They ran fast in order that they can catch the bus."
+        ],
+        "question": "다음 중 어법상 옳은 문장은?",
+        "explanation": "② 발명(과거)의 목적이 현재까지 지속되므로 can이 허용됩니다. ① will + could = 시제 혼용, ③ went(과거) + can(현재) = 불일치, ④ in order that + 과거형 동사(passed) = 조동사 필요, ⑤ ran(과거) + can(현재) = 불일치."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "5",
+        "number": 60,
+        "options": [
+          "I exercise _______ stay healthy.",
+          "He ran fast _______ catch the bus.",
+          "I study hard _______ pass the test.",
+          "She went to the store _______ buy milk.",
+          "I save money _______ I can buy a car."
+        ],
+        "question": "다음 중 빈칸에 들어갈 말이 나머지 넷과 다른 하나는?",
+        "explanation": "①~④는 \"to/in order to/so as to + 동사원형\" 형태이지만, ⑤는 주어(I) + 조동사(can)가 있으므로 \"so that\"이 필요합니다."
+      }
+    ],
+    "answer_key": [
+      "3",
+      "1",
+      "1",
+      "4",
+      "3",
+      "5",
+      "4",
+      "5",
+      "1",
+      "5",
+      "4",
+      "2",
+      "4",
+      "2",
+      "1",
+      "2",
+      "1",
+      "3",
+      "3",
+      "3",
+      "5",
+      "5",
+      "5",
+      "4",
+      "5",
+      "3",
+      "3",
+      "4",
+      "1",
+      "4",
+      "1",
+      "4",
+      "2",
+      "2",
+      "1",
+      "3",
+      "2",
+      "5",
+      "3",
+      "4",
+      "2",
+      "2",
+      "3",
+      "3",
+      "3",
+      "5",
+      "5",
+      "1",
+      "1",
+      "2",
+      "1",
+      "1",
+      "5",
+      "4",
+      "2",
+      "4",
+      "1",
+      "3",
+      "2",
+      "5"
+    ]
+  },
+  "naesin_problem_sheets_86a8af0c-97c5-4b03-a8da-91ec3a489117": {
+    "questions": [
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "3",
+        "number": 1,
+        "options": [
+          "because",
+          "when",
+          "so that",
+          "although",
+          "if"
+        ],
+        "question": "[Part 1] 다음 빈칸에 들어갈 말로 가장 적절한 것은?\nHe exercises every day _______ he can stay healthy.",
+        "explanation": "\"건강을 유지할 수 있도록\"은 목적을 나타내므로 so that이 적절합니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "1",
+        "number": 2,
+        "options": [
+          "so that",
+          "in order to",
+          "so as to",
+          "to",
+          "for the purpose of"
+        ],
+        "question": "다음 빈칸에 들어갈 말로 적절하지 않은 것은?\nI went to a bookstore _______ buy some books.",
+        "explanation": "so that 뒤에는 주어 + 조동사 + 동사 구조가 와야 합니다. \"so that buy\"는 주어와 조동사가 없어 불가합니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "1",
+        "number": 3,
+        "options": [
+          "could",
+          "must",
+          "should",
+          "am",
+          "was"
+        ],
+        "question": "다음 대화의 빈칸에 들어갈 말로 가장 적절한 것은?\nA: Why did you save money?\nB: I saved money so that I _______ buy a new bike.",
+        "explanation": "주절이 과거(saved)이므로 so that절에도 과거형 조동사 could를 사용합니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "4",
+        "number": 4,
+        "options": [
+          "then",
+          "enough",
+          "so",
+          "so that",
+          "completely"
+        ],
+        "question": "다음 문장의 빈칸에 들어갈 말로 가장 적절한 것은?\nPlease turn off the light _______ I can sleep.",
+        "explanation": "\"내가 잠잘 수 있도록\"은 목적을 나타내므로 so that + 주어 + can이 적절합니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "3",
+        "number": 5,
+        "options": [
+          "because",
+          "in order to",
+          "so that",
+          "so as to",
+          "enough to"
+        ],
+        "question": "다음 두 문장을 한 문장으로 연결할 때 빈칸에 가장 적절한 것은?\nKing Sejong invented Hangeul. He wanted all Koreans to read and write easily.\n→ King Sejong invented Hangeul _______ all Koreans could read and write easily.",
+        "explanation": "빈칸 뒤에 주어(all Koreans) + 조동사(could)가 있으므로 절을 이끄는 접속사 so that이 필요합니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "5",
+        "number": 6,
+        "options": [
+          "we can see you",
+          "we won't be late",
+          "we can get well",
+          "we won't get sick",
+          "we can understand you"
+        ],
+        "question": "다음 문장의 빈칸에 들어갈 말로 가장 적절한 것은?\nPlease speak slowly so that _______.",
+        "explanation": "\"천천히 말하다\"와 연결되는 목적은 \"이해할 수 있도록\"이므로 ⑤가 적절합니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "4",
+        "number": 7,
+        "options": [
+          "to buy a new car",
+          "so as to travel",
+          "in order to start a business",
+          "so that I can help others",
+          "for the purpose of taking a trip"
+        ],
+        "question": "다음 빈칸에 들어갈 말로 알맞지 않은 것은?\nI saved money _______.",
+        "explanation": "주절이 과거(saved)인데 ④의 so that절에 현재형 can이 와서 시제가 불일치합니다. could가 와야 합니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "5",
+        "number": 8,
+        "options": [
+          "I could keep in shape",
+          "I could travel to Europe",
+          "I could water the flowers",
+          "I could catch the bus",
+          "I could focus on reading"
+        ],
+        "question": "다음 문장의 빈칸에 들어갈 말로 가장 적절한 것은?\nI turned off the radio so that _______.",
+        "explanation": "\"라디오를 껐다\"와 연결되는 목적은 \"독서에 집중하기 위해\"이므로 ⑤가 적절합니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "1",
+        "number": 9,
+        "options": [
+          "(A) so that - (B) could",
+          "(A) in order to - (B) can",
+          "(A) so - (B) will",
+          "(A) that - (B) is",
+          "(A) because - (B) takes"
+        ],
+        "question": "다음 빈칸에 들어갈 말이 순서대로 바르게 연결된 것은?\nHe quit his job (A) _______ he (B) _______ take care of his baby.",
+        "explanation": "주절이 과거(quit)이므로 so that + 주어 + could가 적절합니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "5",
+        "number": 10,
+        "options": [
+          "buy a new bike",
+          "get a good grade",
+          "read and write easily",
+          "go to other places quickly",
+          "talk to other people in different places"
+        ],
+        "question": "다음 문장의 빈칸에 들어갈 말로 가장 적절한 것은?\nBell invented the telephone so that we can _______.",
+        "explanation": "전화기의 목적은 \"다른 곳에 있는 사람들과 대화할 수 있도록\"이므로 ⑤가 적절합니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "4",
+        "number": 11,
+        "options": [
+          "if",
+          "after",
+          "although",
+          "so that",
+          "while"
+        ],
+        "question": "다음 빈칸에 공통으로 들어갈 접속사는?\n• I'll go to the park _______ I can ride a bike.\n• Turn on the light _______ you can see better.",
+        "explanation": "두 문장 모두 목적을 나타내는 so that이 공통으로 들어갑니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "2",
+        "number": 12,
+        "options": [
+          "can",
+          "could",
+          "will",
+          "is",
+          "are"
+        ],
+        "question": "다음 중 문맥상 빈칸에 가장 적절한 조동사는?\nThe guide walked slowly so that everybody _______ follow him.",
+        "explanation": "주절이 과거(walked)이므로 so that절의 조동사도 과거형 could를 사용해야 시제가 일치합니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "4",
+        "number": 13,
+        "options": [
+          "so that",
+          "in order that",
+          "so as that",
+          "in order to",
+          "that"
+        ],
+        "question": "다음 빈칸에 들어갈 말로 적절하지 않은 것은?\nI went to America _______ I could speak English well.",
+        "explanation": "in order to는 뒤에 동사원형만 올 수 있으므로 \"in order to I could speak\"는 틀립니다. so as that도 올바른 표현이 아닙니다.",
+        "acceptedAnswers": [
+          "4",
+          "3"
+        ]
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "2",
+        "number": 14,
+        "options": [
+          "because",
+          "so that",
+          "such that",
+          "even if",
+          "whether"
+        ],
+        "question": "다음 중 빈칸에 들어갈 말로 가장 적절한 것은?\nTurn in your report _______ I can comment on it.",
+        "explanation": "\"내가 코멘트할 수 있도록\" 목적을 나타내므로 so that이 적절합니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "1",
+        "number": 15,
+        "options": [
+          "so that",
+          "when",
+          "although",
+          "because",
+          "before"
+        ],
+        "question": "다음 빈칸에 알맞은 말을 고르시오.\nHe often walks his dog _______ it can stay healthy.",
+        "explanation": "\"건강을 유지할 수 있도록\" 목적을 나타내므로 so that이 적절합니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "2",
+        "number": 16,
+        "options": [
+          "so as not to",
+          "in order to",
+          "as long as",
+          "such as",
+          "in spite of"
+        ],
+        "question": "[Part 2] 다음 두 문장이 같은 의미가 되도록 빈칸에 알맞은 것은?\nShe donated money so as to help the poor.\n= She donated money _______ help the poor.",
+        "explanation": "\"so as to\"와 같은 의미의 목적 표현은 \"in order to\"입니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "1",
+        "number": 17,
+        "options": [
+          "He reads many books about writing.",
+          "He reads many books to be a writer.",
+          "He reads many books so as to be a writer.",
+          "He reads many books in order to be a writer.",
+          "He reads many books so that he can be a writer."
+        ],
+        "question": "다음 중 의미가 나머지 넷과 다른 하나는?",
+        "explanation": "①은 \"글쓰기에 관한 책\"으로 내용을 나타내고, ②~⑤는 \"작가가 되기 위해\"라는 목적을 나타냅니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "3",
+        "number": 18,
+        "options": [
+          "I exercise so hard what I can lose weight.",
+          "I exercise so hard that I can lose weight.",
+          "I exercise hard so that I can lose weight.",
+          "I lose weight so that I can exercise hard.",
+          "I lose weight in order to exercise hard."
+        ],
+        "question": "다음 문장을 'so that' 구문으로 바르게 영작한 것은?\n\"나는 살을 빼기 위해 열심히 운동한다.\"",
+        "explanation": "\"so that + 주어 + can\" 목적 구문입니다. ②는 \"so hard that\"으로 결과 구문이며, ④⑤는 의미가 반대입니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "3",
+        "number": 19,
+        "options": [
+          "I studied so hard what I passed the test.",
+          "I studied so hard that I passed the test.",
+          "I studied hard so that I could pass the test.",
+          "I passed the test so that I could study hard.",
+          "I passed the test in order to study hard."
+        ],
+        "question": "다음 문장을 'so that' 구문으로 바르게 영작한 것은?\n\"나는 시험에 합격하기 위해 열심히 공부했다.\"",
+        "explanation": "주절이 과거(studied)이므로 so that + could. ②는 \"so hard that\"으로 결과 구문이며, ④⑤는 의미가 반대입니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "3",
+        "number": 20,
+        "options": [
+          "He studies hard to pass the exam.",
+          "He studies hard so as to pass the exam.",
+          "He studied so hard that he could pass the exam.",
+          "He studies hard in order to pass the exam.",
+          "He studies hard in order that he can pass the exam."
+        ],
+        "question": "다음 중 의미가 나머지 넷과 다른 하나는?",
+        "explanation": "③은 \"so + 부사 + that\"(결과 구문: 너무 열심히 공부해서 합격할 수 있었다)이며, 나머지는 모두 목적(\"합격하기 위해\")을 나타냅니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "5",
+        "number": 21,
+        "options": [
+          "I finished my job quickly so as to go home early.",
+          "I finished my job quickly to go home early.",
+          "I finished my job quickly so that I could go home early.",
+          "I finished my job quickly in order that I could go home early.",
+          "I finished my job quickly because I went home early."
+        ],
+        "question": "다음 중 의미가 나머지 넷과 다른 하나는?",
+        "explanation": "⑤는 because(이유)를 나타내고, 나머지는 모두 \"일찍 집에 가기 위해\"라는 목적을 나타냅니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "5",
+        "number": 22,
+        "options": [
+          "I hurried so that I would not be late. = I hurried so as not to be late.",
+          "She exercised to be healthy. = She exercised so that she could be healthy.",
+          "I tried hard so that I could pass. = I tried hard to pass.",
+          "Rachel studies hard so that she can get a prize. = Rachel studies hard so as to get a prize.",
+          "I left early to avoid the rush. = I left early, so I could avoid the rush."
+        ],
+        "question": "다음 중 문장 전환이 어색한 것은?",
+        "explanation": "⑤에서 콤마 + so는 결과를 나타내므로 목적의 to avoid와 의미가 달라집니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "5",
+        "number": 23,
+        "options": [
+          "He saved money to buy a bike.",
+          "He saved money so as to buy a bike.",
+          "He saved money in order to buy a bike.",
+          "He saved money so that he could buy a bike.",
+          "He saved so much money that he couldn't buy a bike."
+        ],
+        "question": "다음 중 의미가 나머지 넷과 다른 하나는?",
+        "explanation": "⑤는 \"so much...that\"(결과 구문: 돈을 너무 많이 모아서 자전거를 살 수 없었다)이며 의미가 다릅니다. 나머지는 모두 \"자전거를 사기 위해\"라는 목적입니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "4",
+        "number": 24,
+        "options": [
+          "② only",
+          "⑤ only",
+          "②④",
+          "②⑤",
+          "④⑤"
+        ],
+        "question": "다음 문장과 의미가 같은 것을 <u>모두</u> 고르면?\n\nShe turned on the TV to watch the news.\n\n① She turned on the TV in order watch the news.\n② She turned on the TV so as to watch the news.\n③ She turned on the TV in order not to watch the news.\n④ She turned on the TV so that she can watch the news.\n⑤ She turned on the TV so that she could watch the news.",
+        "explanation": "② so as to watch = 목적 표현으로 올바릅니다. ⑤ so that she could watch = 과거 시제 일치가 올바릅니다. ① in order 뒤 to 누락, ③ not이 붙어 반대 의미, ④ can은 turned(과거)와 시제 불일치입니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "5",
+        "number": 25,
+        "options": [
+          "We'll do our best so that winning the game.",
+          "We'll do our best so that can win the game.",
+          "We'll do our best in order to we win the game.",
+          "We'll do our best in order to can win the game.",
+          "We'll do our best so that we can win the game."
+        ],
+        "question": "다음 중 우리말을 영작한 것으로 가장 적절한 것은?\n\n\"우리는 게임을 이기기 위해서 최선을 다할 것이다.\"",
+        "explanation": "so that + 주어(we) + 조동사(can) + 동사원형(win)이 올바릅니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "3",
+        "number": 26,
+        "options": [
+          "I woke up early not to miss the bus.",
+          "I woke up early so that I wouldn't miss the bus.",
+          "I woke up so early that I didn't miss the bus.",
+          "I woke up early so as not to miss the bus.",
+          "I woke up early in order that I wouldn't miss the bus."
+        ],
+        "question": "다음 중 의미가 나머지 넷과 다른 하나는?",
+        "explanation": "③은 \"so + 부사 + that\"(결과 구문: 너무 일찍 일어나서 버스를 놓치지 않았다)이며, 나머지는 모두 목적(\"놓치지 않기 위해\")을 나타냅니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "3",
+        "number": 27,
+        "options": [
+          "He practiced hard so that he could learn difficult tricks.",
+          "He practiced hard in order that he could learn difficult tricks.",
+          "He practiced too hard to learn difficult tricks.",
+          "He practiced hard so as to learn difficult tricks.",
+          "He practiced hard to learn difficult tricks."
+        ],
+        "question": "다음 중 의미가 나머지 넷과 다른 하나는?",
+        "explanation": "③은 \"too...to\"(너무 ~해서 ...할 수 없다)로 부정적 결과를 나타냅니다. 나머지는 모두 \"어려운 기술을 배우기 위해\"라는 목적입니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "4",
+        "number": 28,
+        "options": [
+          "① only",
+          "⑤ only",
+          "①③",
+          "①⑤",
+          "③⑤"
+        ],
+        "question": "다음 문장의 밑줄 친 부분과 의미가 같은 것은? (정답 2개)\n\nWe saved money <u>to take a vacation</u>.\n\n① in order to take a long vacation.\n② so as not to take a long vacation.\n③ in order that to take a long vacation.\n④ in order to we can take a long vacation.\n⑤ in order that we could take a long vacation.",
+        "explanation": "① in order to + V원형 = 목적 표현으로 올바릅니다. ⑤ in order that + 주어 + could = 목적절로 올바릅니다. ② not이 붙어 반대 의미, ③ in order that 뒤에 to가 불필요, ④ in order to 뒤에 주어+조동사 불가입니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "1",
+        "number": 29,
+        "options": [
+          "He turned down the radio so that I could sleep. = He turned down the radio in order to sleep.",
+          "Jim turned on TV so that he could watch news. = Jim turned on TV in order to watch news.",
+          "He goes to bed early so that he can sleep. = He goes to bed early to sleep.",
+          "Brian practiced hard so that he could be a dancer. = Brian practiced hard so as to be a dancer.",
+          "I took my umbrella so that I could share it. = I took my umbrella so as to share it."
+        ],
+        "question": "다음 중 문장의 의미가 서로 다른 것은?",
+        "explanation": "①에서 \"so that I could sleep\"(나의 목적)과 \"in order to sleep\"(그의 목적)은 주어가 달라 의미가 다릅니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "4",
+        "number": 30,
+        "options": [
+          "(A) went",
+          "(D) invented",
+          "(E) talk",
+          "(B) wait",
+          "(C) could"
+        ],
+        "question": "다음 빈칸 (A)~(E)에 들어갈 단어로 적절하지 않은 것은?\n\n• Andy (A) _______ to bed early in order that he (B) _______ wake up early.\n• Bell (D) _______ the telephone in order that we (C) _______ (E) _______ to others.",
+        "explanation": "(B) 위치에는 \"could\"와 같은 조동사가 와야 합니다. \"wait\"은 조동사가 아니므로 \"he wait wake up\"은 성립하지 않습니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "1",
+        "number": 31,
+        "options": [
+          "I was nervous, so that I could hardly speak.",
+          "Speak louder so that everyone can hear you.",
+          "She ran so that she could get there on time.",
+          "I jog every day so that I can stay healthy.",
+          "He drinks milk so that he can grow taller."
+        ],
+        "question": "[Part 3] 다음 중 밑줄 친 so that의 쓰임이 나머지 넷과 다른 하나는?",
+        "explanation": "①은 콤마 + so that으로 결과(긴장해서 말을 거의 못 했다)를 나타냅니다. ②~⑤는 모두 목적(~할 수 있도록)을 나타냅니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "4",
+        "number": 32,
+        "options": [
+          "③ only",
+          "⑤ only",
+          "③④",
+          "③⑤",
+          "④⑤"
+        ],
+        "question": "다음 우리말에 맞게 영작한 것을 <u>모두</u> 고르면?\n\n\"Sam은 그 기차를 놓치지 않기 위해 일찍 일어났다.\"\n\n① Sam woke up early to not miss the train.\n② Sam woke up early in order to miss the train.\n③ Sam woke up early so as not to miss the train.\n④ Sam woke up so early that he could not miss the train.\n⑤ Sam woke up early so that he would not miss the train.",
+        "explanation": "③ so as not to + V원형 = 올바른 부정 목적 표현입니다. ⑤ so that + would not = 올바른 목적절입니다. ① to not(비표준 어순), ② in order to miss(긍정=놓치려고), ④ so early that(결과 구문)입니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "2",
+        "number": 33,
+        "options": [
+          "He took a taxi so that he wouldn't be late.",
+          "I gave him a knife so that he couldn't peel the fruit.",
+          "He tried his best so that he could win the contest.",
+          "This flower opens up so that it can get sunlight.",
+          "I turned off the TV so that my brother could study."
+        ],
+        "question": "다음 중 의미상 어색한 문장은?",
+        "explanation": "②에서 칼을 줬는데 \"couldn't peel\"(과일을 깎을 수 없도록)은 의미상 어색합니다. \"could peel\"이 되어야 합니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "2",
+        "number": 34,
+        "options": [
+          "Please move to one side so that we can all see.",
+          "Turn the fish carefully so as to it won't burn.",
+          "I drink coffee so that I can concentrate on my work.",
+          "He exercises every day in order that he can stay healthy.",
+          "Please speak louder so that all of us can hear you."
+        ],
+        "question": "다음 중 어법상 어색한 문장은?",
+        "explanation": "② \"so as to\" 뒤에는 동사원형만 올 수 있으므로 \"so as to it won't burn\"은 틀립니다. \"so that it won't burn\"이 올바릅니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "1",
+        "number": 35,
+        "options": [
+          "Watch out so as not to falling.",
+          "I study English so as to travel abroad.",
+          "I practiced hard so as to win the game.",
+          "I got up early so as not to miss the train.",
+          "I went to the market so as to buy some food."
+        ],
+        "question": "다음 중 어법상 어색한 문장을 고르면?",
+        "explanation": "\"so as not to\" 뒤에는 동사원형이 와야 합니다. \"falling\" → \"fall\"이 올바릅니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "3",
+        "number": 36,
+        "options": [
+          "I listen to radio so that I can improve my skills.",
+          "He worked hard so that he could make money.",
+          "Please leave your number so that she can't call you.",
+          "We use public transport so that we can save energy.",
+          "Miran hurried so that she could see her friend."
+        ],
+        "question": "다음 중 의미가 어색한 문장은?",
+        "explanation": "③에서 전화번호를 남기는데 \"can't call\"(전화할 수 없도록)은 의미상 어색합니다. \"can call\"이 되어야 합니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "2",
+        "number": 37,
+        "options": [
+          "Eunyoung set the alarm not in order to oversleep.",
+          "Many parents ask their children not to hang out with bad friends.",
+          "Take off your wet clothes so as to catch a cold.",
+          "Handong studied so hard in order to fail the test.",
+          "Nuri told lies so as to not hurt my feeling."
+        ],
+        "question": "다음 중 어법 및 의미가 자연스러운 문장은?",
+        "explanation": "② ask + 목적어 + not to V = 올바른 부정 부탁 표현입니다. ① not in order to → in order not to, ③ so as to catch a cold(감기 걸리려고?) → so as not to, ④ in order to fail(시험 떨어지려고?) → 의미 이상, ⑤ so as to not → so as not to."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "5",
+        "number": 38,
+        "options": [
+          "She studied hard to get 'A' in English.",
+          "They work together for the championship.",
+          "I came early so that I could get a better seat.",
+          "I did the dishes so that my mom could get rest.",
+          "He ran to the bus stop in order to he could catch it."
+        ],
+        "question": "다음 중 어법상 어색한 문장은?",
+        "explanation": "\"in order to\" 뒤에는 동사원형만 올 수 있으므로 \"in order to he could catch\"는 틀립니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "3",
+        "number": 39,
+        "options": [
+          "① only",
+          "② only",
+          "①②",
+          "①④",
+          "②④"
+        ],
+        "question": "다음 중 어법상 어색한 문장은? (정답 2개)\n\n① I woke up early so that I will not be late.\n② He was so wisdom that he was able to solve it.\n③ I took a taxi so that I could get there on time.\n④ I've saved money to buy a computer.\n⑤ I took my umbrella for my mother.",
+        "explanation": "① woke up(과거)인데 will(현재/미래) = 시제 불일치. would not이 와야 합니다. ② wisdom은 명사이므로 \"so wisdom\"은 틀립니다. \"so wise\"(형용사)가 올바릅니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "4",
+        "number": 40,
+        "options": [
+          "Our teacher brought a DVD so that we could watch a movie.",
+          "Giho made cookies so that we could eat them.",
+          "Hajin took pictures so that we could remember the day.",
+          "Tom couldn't get in so that he had left his ticket.",
+          "We sang a song so that she would know we loved her."
+        ],
+        "question": "다음 중 밑줄 친 so that의 쓰임이 흐름상 어색한 것은?",
+        "explanation": "④에서 \"so that he had left his ticket\"은 의미상 어색합니다. \"들어갈 수 없었다\"의 이유는 because이지 so that(목적)이 아닙니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "2",
+        "number": 41,
+        "options": [
+          "(A), (B)",
+          "(A), (D)",
+          "(C), (D)",
+          "(A), (C)",
+          "(B), (D)"
+        ],
+        "question": "다음 중 어법상 옳은 문장끼리 짝지어진 것은?\n\n(A) She is so wise that everyone respects her.\n(B) He tried his best so that he can win the race.\n(C) Speak too clearly that they can understand you.\n(D) She was very careful so that she wouldn't drop the egg.",
+        "explanation": "(A) so + 형용사 + that = 결과 구문으로 올바릅니다. (D) so that + wouldn't = 목적절로 올바릅니다. (B) tried(과거) + can(현재) = 시제 불일치, (C) too → so가 되어야 합니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "2",
+        "number": 42,
+        "options": [
+          "in order that get a good seat",
+          "so as to get a good seat",
+          "in order to they could get a good seat",
+          "so as to they could get a good seat",
+          "to they could get a good seat"
+        ],
+        "question": "다음 문장의 밑줄 친 부분과 의미가 같은 것은?\n\nThey started early <u>so that they could get a good seat</u>.",
+        "explanation": "\"so as to + 동사원형\"은 목적을 나타내는 올바른 표현입니다. 나머지는 to/so as to 뒤에 주어+조동사가 와서 틀립니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "3",
+        "number": 43,
+        "options": [
+          "I went to the store so as to buy some milk.",
+          "He studies hard in order that he can succeed.",
+          "I hurry so that I wouldn't miss the train.",
+          "She works hard so that her family can live in comfort.",
+          "Speak loudly so that everybody can hear you."
+        ],
+        "question": "다음 중 어법상 어색한 곳이 있는 문장은?",
+        "explanation": "③ hurry(현재)인데 wouldn't(과거) = 시제 불일치. \"won't\"이 와야 합니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "3",
+        "number": 44,
+        "options": [
+          "I study hard <u>so that</u> I can pass.",
+          "He ran fast <u>so that</u> he could catch the bus.",
+          "I was <u>so</u> tired <u>that</u> I couldn't walk.",
+          "She saves money <u>so that</u> she can travel.",
+          "We use public transport <u>so that</u> we can save energy."
+        ],
+        "question": "다음 중 밑줄 친 부분의 쓰임이 나머지와 다른 것은?",
+        "explanation": "③은 \"so + 형용사 + that\"(결과 구문)이며, 나머지는 모두 \"so that\"(목적 구문)입니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "3",
+        "number": 45,
+        "options": [
+          "He was so wisdom that he solved it.",
+          "I drove fast so that he can get there.",
+          "The kids practiced hard so as to win.",
+          "Jack skipped dinner in order that fit in jeans.",
+          "She's staying in US so that she can improves her English."
+        ],
+        "question": "다음 중 어법상 옳은 문장을 고르시오.",
+        "explanation": "③ \"so as to + 동사원형(win)\"은 올바릅니다. ① wisdom → wise(형용사), ② drove(과거) + can(현재) = 시제 불일치, ④ in order that 뒤 주어 누락, ⑤ can + improves → can + improve."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "5",
+        "number": 46,
+        "options": [
+          "Soyun was so careful that she wouldn't drop the egg.",
+          "Soyun was so careful but she wouldn't drop the egg.",
+          "Soyun was very careful so that she would drop the egg.",
+          "Soyun was so careful and she wouldn't drop the egg.",
+          "Soyun was very careful so that she wouldn't drop the egg."
+        ],
+        "question": "[Part 4] 다음 우리말을 바르게 영작한 것은?\n\n\"소윤이는 계란을 떨어트리지 않기 위해 매우 조심했다.\"",
+        "explanation": "\"~하기 위해\"는 목적이므로 \"so that + wouldn't\"(⑤)가 올바릅니다. ① \"so...that\"은 결과 구문, ② but은 역접, ③ \"would drop\"은 긍정(떨어트리도록)으로 의미 반대, ④ and는 단순 연결입니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "5",
+        "number": 47,
+        "options": [
+          "나는 살을 빼기 위해 달린다. → I run so that I can lose weight.",
+          "그는 잊지 않기 위해 적었다. → He wrote it down so that he wouldn't forget.",
+          "그녀는 책을 읽기 위해 TV를 껐다. → She turned off the TV to read a book.",
+          "우리는 전망을 보기 위해 높이 올라갔다. → We went up high in order to see the view.",
+          "나는 그를 만나기 위해 여기 왔다. → I came here because I could meet him."
+        ],
+        "question": "다음 중 영작이 바르지 않은 것은?",
+        "explanation": "\"만나기 위해\"는 목적이므로 because(이유)가 아닌 to/so that이 와야 합니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "1",
+        "number": 48,
+        "options": [
+          "I will change you so that you can meet the prince.",
+          "You will change I so that you can meet the prince.",
+          "I will change you so that the prince can meet you.",
+          "You will change so that I can meet the prince.",
+          "I will change the prince so that you can meet him."
+        ],
+        "question": "다음 단어들을 바르게 배열하여 문장을 완성하시오.\n\n(change, can, that, meet, I, will, you, so, the prince, you)",
+        "explanation": "\"I will change you so that you can meet the prince.\"가 주어진 단어로 만들 수 있는 올바른 문장입니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "1",
+        "number": 49,
+        "options": [
+          "Turn the light on so that I can see you.",
+          "Turn on the light so that you can see I.",
+          "I can see you so that turn the light on.",
+          "So that I can see you turn the light on.",
+          "Light turn on the so that I can see you."
+        ],
+        "question": "다음 단어들을 바르게 배열하여 문장을 완성하시오.\n\n(can, I, light, on, that, the, turn, see, so, you)",
+        "explanation": "\"Turn the light on so that I can see you.\"가 올바른 배열입니다. ② \"see I\" → \"see me\"(목적격 오류)."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "2",
+        "number": 50,
+        "options": [
+          "Mom prepared breakfast so that I could rest.",
+          "I prepared breakfast so that Mom could rest.",
+          "So that Mom could rest I prepared breakfast.",
+          "Breakfast was prepared so that I could rest Mom.",
+          "I could rest so that Mom prepared breakfast."
+        ],
+        "question": "다음 단어들을 바르게 배열하여 문장을 완성하시오.\n\n(I, could, rest, prepared, so, Mom, breakfast, that)",
+        "explanation": "\"I prepared breakfast so that Mom could rest.\"가 가장 자연스러운 문장입니다. 내가 아침을 준비해서 엄마가 쉴 수 있도록."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "1",
+        "number": 51,
+        "options": [
+          "can",
+          "could",
+          "will",
+          "would",
+          "must"
+        ],
+        "question": "다음 우리말을 영어로 옮길 때 빈칸에 알맞은 조동사는?\n\n\"사막여우의 발은 뜨거운 모래 위를 걸을 수 있도록 털로 덮여 있다.\"\n\nThe fennec fox's feet are covered with fur so that it _______ walk on hot sand.",
+        "explanation": "주절이 현재(are covered)이므로 so that절에도 현재형 조동사 can을 사용합니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "1",
+        "number": 52,
+        "options": [
+          "I studied hard so that I could pass the exam.",
+          "I studied so hard that I could pass the exam.",
+          "So that I could pass the exam I studied hard.",
+          "I could pass the exam so that I studied hard.",
+          "I studied hard in order that pass the exam."
+        ],
+        "question": "다음 단어들을 바르게 배열하여 문장을 완성하시오.\n\n(studied, so, I, could, that, hard, I, the exam, pass)",
+        "explanation": "\"I studied hard so that I could pass the exam.\"이 목적을 나타내는 올바른 배열입니다. ②는 \"so hard that\"(결과 구문)으로 의미가 다릅니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "5",
+        "number": 53,
+        "options": [
+          "I pressed the button to turn on the computer.",
+          "Sora bought the book so that she could study English.",
+          "Junho turned off the light so that he could sleep well.",
+          "He went to India so that he could help the poor.",
+          "We should develop habits so that we live happy."
+        ],
+        "question": "다음 중 영작이 어색한 것을 고르시오.",
+        "explanation": "⑤ \"so that\" 뒤에 조동사(can)가 없고, \"happy\" → \"happily\"(부사) 또는 \"live a happy life\"가 되어야 합니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "4",
+        "number": 54,
+        "options": [
+          "I go jogging to keep healthy.",
+          "I go jogging so as to keep healthy.",
+          "I go jogging in order to keep healthy.",
+          "I go jogging enough to keep healthy.",
+          "I go jogging so that I can keep healthy."
+        ],
+        "question": "다음 중 의미가 나머지 넷과 다른 하나는?",
+        "explanation": "④ \"enough to\"는 \"~할 만큼 충분히\"라는 정도를 나타내며, 나머지는 모두 \"건강을 유지하기 위해\"라는 목적을 나타냅니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "2",
+        "number": 55,
+        "options": [
+          "(A)-(B)-(C)-(D)",
+          "(C)-(A)-(B)-(D)",
+          "(B)-(D)-(A)-(C)",
+          "(C)-(D)-(A)-(B)",
+          "(A)-(C)-(D)-(B)"
+        ],
+        "question": "다음 빈칸 (가)~(라)에 들어갈 말을 <보기>에서 골라 순서대로 나열한 것은?\n\n• Jenny is saving her money (가).\n• He watches American movies (나).\n• He went out the back door (다).\n• She will go abroad (라).\n\n<보기>\n(A) so that he can improve listening\n(B) so that nobody could see him\n(C) so that she can fix her bike\n(D) so that she can study art",
+        "explanation": "(가) saving money → fix her bike (C), (나) watches movies → improve listening (A), (다) went out back door → nobody could see (B), (라) go abroad → study art (D). 순서: C-A-B-D."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "4",
+        "number": 56,
+        "options": [
+          "① only",
+          "③ only",
+          "①②",
+          "①③",
+          "②③"
+        ],
+        "question": "다음 중 문장 전환이 바른 것을 <u>모두</u> 고르면?\n\n① I studied hard to pass. = I studied hard so that I could pass.\n② He ran to catch the bus. = He ran so that he catch the bus.\n③ She came early for us to start. = She came early so that we could start.\n④ Turn on the light to see. = Turn on the light so that you see.\n⑤ I woke up early not to be late. = I woke up early so that I won't be late.",
+        "explanation": "① studied(과거) → so that I could pass 올바릅니다. ③ for us to start → so that we could start 올바릅니다. ② catch → could catch(조동사 누락), ④ you see → you can see(조동사 누락), ⑤ won't → wouldn't(woke up은 과거이므로 시제 불일치)."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "1",
+        "number": 57,
+        "options": [
+          "(A) so that - (B) could",
+          "(A) to - (B) could",
+          "(A) in order to - (B) can",
+          "(A) so that - (B) is",
+          "(A) because - (B) could"
+        ],
+        "question": "다음 빈칸 (A), (B)에 들어갈 말이 바르게 짝지어진 것은?\n\nHe spoke slowly (A) _______ others (B) _______ understand him.",
+        "explanation": "주절이 과거(spoke)이므로 so that + 주어 + could가 적절합니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "3",
+        "number": 58,
+        "options": [
+          "I use a map so that I won't get lost.",
+          "She wears a coat so that she won't get cold.",
+          "He hurried so that he would miss the train.",
+          "I turned off the light so that I could sleep.",
+          "We save water so that we can protect nature."
+        ],
+        "question": "다음 중 의미가 어색한 문장은?",
+        "explanation": "③ \"he would miss the train\"(기차를 놓치도록)은 의미상 어색합니다. \"wouldn't miss\"(놓치지 않도록)가 되어야 합니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "2",
+        "number": 59,
+        "options": [
+          "I'll wait here in order that you could find me.",
+          "He invented the phone in order that we can talk.",
+          "I went to bed early in order that I can wake up.",
+          "She studied hard in order that she passed the exam.",
+          "They ran fast in order that they can catch the bus."
+        ],
+        "question": "다음 중 어법상 옳은 문장은?",
+        "explanation": "② 발명(과거)의 목적이 현재까지 지속되므로 can이 허용됩니다. ① will + could = 시제 혼용, ③ went(과거) + can(현재) = 불일치, ④ in order that + 과거형 동사(passed) = 조동사 필요, ⑤ ran(과거) + can(현재) = 불일치."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "5",
+        "number": 60,
+        "options": [
+          "I exercise _______ stay healthy.",
+          "He ran fast _______ catch the bus.",
+          "I study hard _______ pass the test.",
+          "She went to the store _______ buy milk.",
+          "I save money _______ I can buy a car."
+        ],
+        "question": "다음 중 빈칸에 들어갈 말이 나머지 넷과 다른 하나는?",
+        "explanation": "①~④는 \"to/in order to/so as to + 동사원형\" 형태이지만, ⑤는 주어(I) + 조동사(can)가 있으므로 \"so that\"이 필요합니다."
+      }
+    ],
+    "answer_key": [
+      "3",
+      "1",
+      "1",
+      "4",
+      "3",
+      "5",
+      "4",
+      "5",
+      "1",
+      "5",
+      "4",
+      "2",
+      "4",
+      "2",
+      "1",
+      "2",
+      "1",
+      "3",
+      "3",
+      "3",
+      "5",
+      "5",
+      "5",
+      "4",
+      "5",
+      "3",
+      "3",
+      "4",
+      "1",
+      "4",
+      "1",
+      "4",
+      "2",
+      "2",
+      "1",
+      "3",
+      "2",
+      "5",
+      "3",
+      "4",
+      "2",
+      "2",
+      "3",
+      "3",
+      "3",
+      "5",
+      "5",
+      "1",
+      "1",
+      "2",
+      "1",
+      "1",
+      "5",
+      "4",
+      "2",
+      "4",
+      "1",
+      "3",
+      "2",
+      "5"
+    ]
+  },
+  "naesin_problem_sheets_18fc4ca9-d4f1-4c68-87ee-241ad36f3ce6": {
+    "questions": [
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "3",
+        "number": 1,
+        "options": [
+          "because",
+          "when",
+          "so that",
+          "although",
+          "if"
+        ],
+        "question": "[Part 1] 다음 빈칸에 들어갈 말로 가장 적절한 것은?\nHe exercises every day _______ he can stay healthy.",
+        "explanation": "\"건강을 유지할 수 있도록\"은 목적을 나타내므로 so that이 적절합니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "1",
+        "number": 2,
+        "options": [
+          "so that",
+          "in order to",
+          "so as to",
+          "to",
+          "for the purpose of"
+        ],
+        "question": "다음 빈칸에 들어갈 말로 적절하지 않은 것은?\nI went to a bookstore _______ buy some books.",
+        "explanation": "so that 뒤에는 주어 + 조동사 + 동사 구조가 와야 합니다. \"so that buy\"는 주어와 조동사가 없어 불가합니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "1",
+        "number": 3,
+        "options": [
+          "could",
+          "must",
+          "should",
+          "am",
+          "was"
+        ],
+        "question": "다음 대화의 빈칸에 들어갈 말로 가장 적절한 것은?\nA: Why did you save money?\nB: I saved money so that I _______ buy a new bike.",
+        "explanation": "주절이 과거(saved)이므로 so that절에도 과거형 조동사 could를 사용합니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "4",
+        "number": 4,
+        "options": [
+          "then",
+          "enough",
+          "so",
+          "so that",
+          "completely"
+        ],
+        "question": "다음 문장의 빈칸에 들어갈 말로 가장 적절한 것은?\nPlease turn off the light _______ I can sleep.",
+        "explanation": "\"내가 잠잘 수 있도록\"은 목적을 나타내므로 so that + 주어 + can이 적절합니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "3",
+        "number": 5,
+        "options": [
+          "because",
+          "in order to",
+          "so that",
+          "so as to",
+          "enough to"
+        ],
+        "question": "다음 두 문장을 한 문장으로 연결할 때 빈칸에 가장 적절한 것은?\nKing Sejong invented Hangeul. He wanted all Koreans to read and write easily.\n→ King Sejong invented Hangeul _______ all Koreans could read and write easily.",
+        "explanation": "빈칸 뒤에 주어(all Koreans) + 조동사(could)가 있으므로 절을 이끄는 접속사 so that이 필요합니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "5",
+        "number": 6,
+        "options": [
+          "we can see you",
+          "we won't be late",
+          "we can get well",
+          "we won't get sick",
+          "we can understand you"
+        ],
+        "question": "다음 문장의 빈칸에 들어갈 말로 가장 적절한 것은?\nPlease speak slowly so that _______.",
+        "explanation": "\"천천히 말하다\"와 연결되는 목적은 \"이해할 수 있도록\"이므로 ⑤가 적절합니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "4",
+        "number": 7,
+        "options": [
+          "to buy a new car",
+          "so as to travel",
+          "in order to start a business",
+          "so that I can help others",
+          "for the purpose of taking a trip"
+        ],
+        "question": "다음 빈칸에 들어갈 말로 알맞지 않은 것은?\nI saved money _______.",
+        "explanation": "주절이 과거(saved)인데 ④의 so that절에 현재형 can이 와서 시제가 불일치합니다. could가 와야 합니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "5",
+        "number": 8,
+        "options": [
+          "I could keep in shape",
+          "I could travel to Europe",
+          "I could water the flowers",
+          "I could catch the bus",
+          "I could focus on reading"
+        ],
+        "question": "다음 문장의 빈칸에 들어갈 말로 가장 적절한 것은?\nI turned off the radio so that _______.",
+        "explanation": "\"라디오를 껐다\"와 연결되는 목적은 \"독서에 집중하기 위해\"이므로 ⑤가 적절합니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "1",
+        "number": 9,
+        "options": [
+          "(A) so that - (B) could",
+          "(A) in order to - (B) can",
+          "(A) so - (B) will",
+          "(A) that - (B) is",
+          "(A) because - (B) takes"
+        ],
+        "question": "다음 빈칸에 들어갈 말이 순서대로 바르게 연결된 것은?\nHe quit his job (A) _______ he (B) _______ take care of his baby.",
+        "explanation": "주절이 과거(quit)이므로 so that + 주어 + could가 적절합니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "5",
+        "number": 10,
+        "options": [
+          "buy a new bike",
+          "get a good grade",
+          "read and write easily",
+          "go to other places quickly",
+          "talk to other people in different places"
+        ],
+        "question": "다음 문장의 빈칸에 들어갈 말로 가장 적절한 것은?\nBell invented the telephone so that we can _______.",
+        "explanation": "전화기의 목적은 \"다른 곳에 있는 사람들과 대화할 수 있도록\"이므로 ⑤가 적절합니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "4",
+        "number": 11,
+        "options": [
+          "if",
+          "after",
+          "although",
+          "so that",
+          "while"
+        ],
+        "question": "다음 빈칸에 공통으로 들어갈 접속사는?\n• I'll go to the park _______ I can ride a bike.\n• Turn on the light _______ you can see better.",
+        "explanation": "두 문장 모두 목적을 나타내는 so that이 공통으로 들어갑니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "2",
+        "number": 12,
+        "options": [
+          "can",
+          "could",
+          "will",
+          "is",
+          "are"
+        ],
+        "question": "다음 중 문맥상 빈칸에 가장 적절한 조동사는?\nThe guide walked slowly so that everybody _______ follow him.",
+        "explanation": "주절이 과거(walked)이므로 so that절의 조동사도 과거형 could를 사용해야 시제가 일치합니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "4",
+        "number": 13,
+        "options": [
+          "so that",
+          "in order that",
+          "so as that",
+          "in order to",
+          "that"
+        ],
+        "question": "다음 빈칸에 들어갈 말로 적절하지 않은 것은?\nI went to America _______ I could speak English well.",
+        "explanation": "in order to는 뒤에 동사원형만 올 수 있으므로 \"in order to I could speak\"는 틀립니다. so as that도 올바른 표현이 아닙니다.",
+        "acceptedAnswers": [
+          "4",
+          "3"
+        ]
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "2",
+        "number": 14,
+        "options": [
+          "because",
+          "so that",
+          "such that",
+          "even if",
+          "whether"
+        ],
+        "question": "다음 중 빈칸에 들어갈 말로 가장 적절한 것은?\nTurn in your report _______ I can comment on it.",
+        "explanation": "\"내가 코멘트할 수 있도록\" 목적을 나타내므로 so that이 적절합니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "1",
+        "number": 15,
+        "options": [
+          "so that",
+          "when",
+          "although",
+          "because",
+          "before"
+        ],
+        "question": "다음 빈칸에 알맞은 말을 고르시오.\nHe often walks his dog _______ it can stay healthy.",
+        "explanation": "\"건강을 유지할 수 있도록\" 목적을 나타내므로 so that이 적절합니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "2",
+        "number": 16,
+        "options": [
+          "so as not to",
+          "in order to",
+          "as long as",
+          "such as",
+          "in spite of"
+        ],
+        "question": "[Part 2] 다음 두 문장이 같은 의미가 되도록 빈칸에 알맞은 것은?\nShe donated money so as to help the poor.\n= She donated money _______ help the poor.",
+        "explanation": "\"so as to\"와 같은 의미의 목적 표현은 \"in order to\"입니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "1",
+        "number": 17,
+        "options": [
+          "He reads many books about writing.",
+          "He reads many books to be a writer.",
+          "He reads many books so as to be a writer.",
+          "He reads many books in order to be a writer.",
+          "He reads many books so that he can be a writer."
+        ],
+        "question": "다음 중 의미가 나머지 넷과 다른 하나는?",
+        "explanation": "①은 \"글쓰기에 관한 책\"으로 내용을 나타내고, ②~⑤는 \"작가가 되기 위해\"라는 목적을 나타냅니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "3",
+        "number": 18,
+        "options": [
+          "I exercise so hard what I can lose weight.",
+          "I exercise so hard that I can lose weight.",
+          "I exercise hard so that I can lose weight.",
+          "I lose weight so that I can exercise hard.",
+          "I lose weight in order to exercise hard."
+        ],
+        "question": "다음 문장을 'so that' 구문으로 바르게 영작한 것은?\n\"나는 살을 빼기 위해 열심히 운동한다.\"",
+        "explanation": "\"so that + 주어 + can\" 목적 구문입니다. ②는 \"so hard that\"으로 결과 구문이며, ④⑤는 의미가 반대입니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "3",
+        "number": 19,
+        "options": [
+          "I studied so hard what I passed the test.",
+          "I studied so hard that I passed the test.",
+          "I studied hard so that I could pass the test.",
+          "I passed the test so that I could study hard.",
+          "I passed the test in order to study hard."
+        ],
+        "question": "다음 문장을 'so that' 구문으로 바르게 영작한 것은?\n\"나는 시험에 합격하기 위해 열심히 공부했다.\"",
+        "explanation": "주절이 과거(studied)이므로 so that + could. ②는 \"so hard that\"으로 결과 구문이며, ④⑤는 의미가 반대입니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "3",
+        "number": 20,
+        "options": [
+          "He studies hard to pass the exam.",
+          "He studies hard so as to pass the exam.",
+          "He studied so hard that he could pass the exam.",
+          "He studies hard in order to pass the exam.",
+          "He studies hard in order that he can pass the exam."
+        ],
+        "question": "다음 중 의미가 나머지 넷과 다른 하나는?",
+        "explanation": "③은 \"so + 부사 + that\"(결과 구문: 너무 열심히 공부해서 합격할 수 있었다)이며, 나머지는 모두 목적(\"합격하기 위해\")을 나타냅니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "5",
+        "number": 21,
+        "options": [
+          "I finished my job quickly so as to go home early.",
+          "I finished my job quickly to go home early.",
+          "I finished my job quickly so that I could go home early.",
+          "I finished my job quickly in order that I could go home early.",
+          "I finished my job quickly because I went home early."
+        ],
+        "question": "다음 중 의미가 나머지 넷과 다른 하나는?",
+        "explanation": "⑤는 because(이유)를 나타내고, 나머지는 모두 \"일찍 집에 가기 위해\"라는 목적을 나타냅니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "5",
+        "number": 22,
+        "options": [
+          "I hurried so that I would not be late. = I hurried so as not to be late.",
+          "She exercised to be healthy. = She exercised so that she could be healthy.",
+          "I tried hard so that I could pass. = I tried hard to pass.",
+          "Rachel studies hard so that she can get a prize. = Rachel studies hard so as to get a prize.",
+          "I left early to avoid the rush. = I left early, so I could avoid the rush."
+        ],
+        "question": "다음 중 문장 전환이 어색한 것은?",
+        "explanation": "⑤에서 콤마 + so는 결과를 나타내므로 목적의 to avoid와 의미가 달라집니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "5",
+        "number": 23,
+        "options": [
+          "He saved money to buy a bike.",
+          "He saved money so as to buy a bike.",
+          "He saved money in order to buy a bike.",
+          "He saved money so that he could buy a bike.",
+          "He saved so much money that he couldn't buy a bike."
+        ],
+        "question": "다음 중 의미가 나머지 넷과 다른 하나는?",
+        "explanation": "⑤는 \"so much...that\"(결과 구문: 돈을 너무 많이 모아서 자전거를 살 수 없었다)이며 의미가 다릅니다. 나머지는 모두 \"자전거를 사기 위해\"라는 목적입니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "4",
+        "number": 24,
+        "options": [
+          "② only",
+          "⑤ only",
+          "②④",
+          "②⑤",
+          "④⑤"
+        ],
+        "question": "다음 문장과 의미가 같은 것을 <u>모두</u> 고르면?\n\nShe turned on the TV to watch the news.\n\n① She turned on the TV in order watch the news.\n② She turned on the TV so as to watch the news.\n③ She turned on the TV in order not to watch the news.\n④ She turned on the TV so that she can watch the news.\n⑤ She turned on the TV so that she could watch the news.",
+        "explanation": "② so as to watch = 목적 표현으로 올바릅니다. ⑤ so that she could watch = 과거 시제 일치가 올바릅니다. ① in order 뒤 to 누락, ③ not이 붙어 반대 의미, ④ can은 turned(과거)와 시제 불일치입니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "5",
+        "number": 25,
+        "options": [
+          "We'll do our best so that winning the game.",
+          "We'll do our best so that can win the game.",
+          "We'll do our best in order to we win the game.",
+          "We'll do our best in order to can win the game.",
+          "We'll do our best so that we can win the game."
+        ],
+        "question": "다음 중 우리말을 영작한 것으로 가장 적절한 것은?\n\n\"우리는 게임을 이기기 위해서 최선을 다할 것이다.\"",
+        "explanation": "so that + 주어(we) + 조동사(can) + 동사원형(win)이 올바릅니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "3",
+        "number": 26,
+        "options": [
+          "I woke up early not to miss the bus.",
+          "I woke up early so that I wouldn't miss the bus.",
+          "I woke up so early that I didn't miss the bus.",
+          "I woke up early so as not to miss the bus.",
+          "I woke up early in order that I wouldn't miss the bus."
+        ],
+        "question": "다음 중 의미가 나머지 넷과 다른 하나는?",
+        "explanation": "③은 \"so + 부사 + that\"(결과 구문: 너무 일찍 일어나서 버스를 놓치지 않았다)이며, 나머지는 모두 목적(\"놓치지 않기 위해\")을 나타냅니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "3",
+        "number": 27,
+        "options": [
+          "He practiced hard so that he could learn difficult tricks.",
+          "He practiced hard in order that he could learn difficult tricks.",
+          "He practiced too hard to learn difficult tricks.",
+          "He practiced hard so as to learn difficult tricks.",
+          "He practiced hard to learn difficult tricks."
+        ],
+        "question": "다음 중 의미가 나머지 넷과 다른 하나는?",
+        "explanation": "③은 \"too...to\"(너무 ~해서 ...할 수 없다)로 부정적 결과를 나타냅니다. 나머지는 모두 \"어려운 기술을 배우기 위해\"라는 목적입니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "4",
+        "number": 28,
+        "options": [
+          "① only",
+          "⑤ only",
+          "①③",
+          "①⑤",
+          "③⑤"
+        ],
+        "question": "다음 문장의 밑줄 친 부분과 의미가 같은 것은? (정답 2개)\n\nWe saved money <u>to take a vacation</u>.\n\n① in order to take a long vacation.\n② so as not to take a long vacation.\n③ in order that to take a long vacation.\n④ in order to we can take a long vacation.\n⑤ in order that we could take a long vacation.",
+        "explanation": "① in order to + V원형 = 목적 표현으로 올바릅니다. ⑤ in order that + 주어 + could = 목적절로 올바릅니다. ② not이 붙어 반대 의미, ③ in order that 뒤에 to가 불필요, ④ in order to 뒤에 주어+조동사 불가입니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "1",
+        "number": 29,
+        "options": [
+          "He turned down the radio so that I could sleep. = He turned down the radio in order to sleep.",
+          "Jim turned on TV so that he could watch news. = Jim turned on TV in order to watch news.",
+          "He goes to bed early so that he can sleep. = He goes to bed early to sleep.",
+          "Brian practiced hard so that he could be a dancer. = Brian practiced hard so as to be a dancer.",
+          "I took my umbrella so that I could share it. = I took my umbrella so as to share it."
+        ],
+        "question": "다음 중 문장의 의미가 서로 다른 것은?",
+        "explanation": "①에서 \"so that I could sleep\"(나의 목적)과 \"in order to sleep\"(그의 목적)은 주어가 달라 의미가 다릅니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "4",
+        "number": 30,
+        "options": [
+          "(A) went",
+          "(D) invented",
+          "(E) talk",
+          "(B) wait",
+          "(C) could"
+        ],
+        "question": "다음 빈칸 (A)~(E)에 들어갈 단어로 적절하지 않은 것은?\n\n• Andy (A) _______ to bed early in order that he (B) _______ wake up early.\n• Bell (D) _______ the telephone in order that we (C) _______ (E) _______ to others.",
+        "explanation": "(B) 위치에는 \"could\"와 같은 조동사가 와야 합니다. \"wait\"은 조동사가 아니므로 \"he wait wake up\"은 성립하지 않습니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "1",
+        "number": 31,
+        "options": [
+          "I was nervous, so that I could hardly speak.",
+          "Speak louder so that everyone can hear you.",
+          "She ran so that she could get there on time.",
+          "I jog every day so that I can stay healthy.",
+          "He drinks milk so that he can grow taller."
+        ],
+        "question": "[Part 3] 다음 중 밑줄 친 so that의 쓰임이 나머지 넷과 다른 하나는?",
+        "explanation": "①은 콤마 + so that으로 결과(긴장해서 말을 거의 못 했다)를 나타냅니다. ②~⑤는 모두 목적(~할 수 있도록)을 나타냅니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "4",
+        "number": 32,
+        "options": [
+          "③ only",
+          "⑤ only",
+          "③④",
+          "③⑤",
+          "④⑤"
+        ],
+        "question": "다음 우리말에 맞게 영작한 것을 <u>모두</u> 고르면?\n\n\"Sam은 그 기차를 놓치지 않기 위해 일찍 일어났다.\"\n\n① Sam woke up early to not miss the train.\n② Sam woke up early in order to miss the train.\n③ Sam woke up early so as not to miss the train.\n④ Sam woke up so early that he could not miss the train.\n⑤ Sam woke up early so that he would not miss the train.",
+        "explanation": "③ so as not to + V원형 = 올바른 부정 목적 표현입니다. ⑤ so that + would not = 올바른 목적절입니다. ① to not(비표준 어순), ② in order to miss(긍정=놓치려고), ④ so early that(결과 구문)입니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "2",
+        "number": 33,
+        "options": [
+          "He took a taxi so that he wouldn't be late.",
+          "I gave him a knife so that he couldn't peel the fruit.",
+          "He tried his best so that he could win the contest.",
+          "This flower opens up so that it can get sunlight.",
+          "I turned off the TV so that my brother could study."
+        ],
+        "question": "다음 중 의미상 어색한 문장은?",
+        "explanation": "②에서 칼을 줬는데 \"couldn't peel\"(과일을 깎을 수 없도록)은 의미상 어색합니다. \"could peel\"이 되어야 합니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "2",
+        "number": 34,
+        "options": [
+          "Please move to one side so that we can all see.",
+          "Turn the fish carefully so as to it won't burn.",
+          "I drink coffee so that I can concentrate on my work.",
+          "He exercises every day in order that he can stay healthy.",
+          "Please speak louder so that all of us can hear you."
+        ],
+        "question": "다음 중 어법상 어색한 문장은?",
+        "explanation": "② \"so as to\" 뒤에는 동사원형만 올 수 있으므로 \"so as to it won't burn\"은 틀립니다. \"so that it won't burn\"이 올바릅니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "1",
+        "number": 35,
+        "options": [
+          "Watch out so as not to falling.",
+          "I study English so as to travel abroad.",
+          "I practiced hard so as to win the game.",
+          "I got up early so as not to miss the train.",
+          "I went to the market so as to buy some food."
+        ],
+        "question": "다음 중 어법상 어색한 문장을 고르면?",
+        "explanation": "\"so as not to\" 뒤에는 동사원형이 와야 합니다. \"falling\" → \"fall\"이 올바릅니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "3",
+        "number": 36,
+        "options": [
+          "I listen to radio so that I can improve my skills.",
+          "He worked hard so that he could make money.",
+          "Please leave your number so that she can't call you.",
+          "We use public transport so that we can save energy.",
+          "Miran hurried so that she could see her friend."
+        ],
+        "question": "다음 중 의미가 어색한 문장은?",
+        "explanation": "③에서 전화번호를 남기는데 \"can't call\"(전화할 수 없도록)은 의미상 어색합니다. \"can call\"이 되어야 합니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "2",
+        "number": 37,
+        "options": [
+          "Eunyoung set the alarm not in order to oversleep.",
+          "Many parents ask their children not to hang out with bad friends.",
+          "Take off your wet clothes so as to catch a cold.",
+          "Handong studied so hard in order to fail the test.",
+          "Nuri told lies so as to not hurt my feeling."
+        ],
+        "question": "다음 중 어법 및 의미가 자연스러운 문장은?",
+        "explanation": "② ask + 목적어 + not to V = 올바른 부정 부탁 표현입니다. ① not in order to → in order not to, ③ so as to catch a cold(감기 걸리려고?) → so as not to, ④ in order to fail(시험 떨어지려고?) → 의미 이상, ⑤ so as to not → so as not to."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "5",
+        "number": 38,
+        "options": [
+          "She studied hard to get 'A' in English.",
+          "They work together for the championship.",
+          "I came early so that I could get a better seat.",
+          "I did the dishes so that my mom could get rest.",
+          "He ran to the bus stop in order to he could catch it."
+        ],
+        "question": "다음 중 어법상 어색한 문장은?",
+        "explanation": "\"in order to\" 뒤에는 동사원형만 올 수 있으므로 \"in order to he could catch\"는 틀립니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "3",
+        "number": 39,
+        "options": [
+          "① only",
+          "② only",
+          "①②",
+          "①④",
+          "②④"
+        ],
+        "question": "다음 중 어법상 어색한 문장은? (정답 2개)\n\n① I woke up early so that I will not be late.\n② He was so wisdom that he was able to solve it.\n③ I took a taxi so that I could get there on time.\n④ I've saved money to buy a computer.\n⑤ I took my umbrella for my mother.",
+        "explanation": "① woke up(과거)인데 will(현재/미래) = 시제 불일치. would not이 와야 합니다. ② wisdom은 명사이므로 \"so wisdom\"은 틀립니다. \"so wise\"(형용사)가 올바릅니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "4",
+        "number": 40,
+        "options": [
+          "Our teacher brought a DVD so that we could watch a movie.",
+          "Giho made cookies so that we could eat them.",
+          "Hajin took pictures so that we could remember the day.",
+          "Tom couldn't get in so that he had left his ticket.",
+          "We sang a song so that she would know we loved her."
+        ],
+        "question": "다음 중 밑줄 친 so that의 쓰임이 흐름상 어색한 것은?",
+        "explanation": "④에서 \"so that he had left his ticket\"은 의미상 어색합니다. \"들어갈 수 없었다\"의 이유는 because이지 so that(목적)이 아닙니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "2",
+        "number": 41,
+        "options": [
+          "(A), (B)",
+          "(A), (D)",
+          "(C), (D)",
+          "(A), (C)",
+          "(B), (D)"
+        ],
+        "question": "다음 중 어법상 옳은 문장끼리 짝지어진 것은?\n\n(A) She is so wise that everyone respects her.\n(B) He tried his best so that he can win the race.\n(C) Speak too clearly that they can understand you.\n(D) She was very careful so that she wouldn't drop the egg.",
+        "explanation": "(A) so + 형용사 + that = 결과 구문으로 올바릅니다. (D) so that + wouldn't = 목적절로 올바릅니다. (B) tried(과거) + can(현재) = 시제 불일치, (C) too → so가 되어야 합니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "2",
+        "number": 42,
+        "options": [
+          "in order that get a good seat",
+          "so as to get a good seat",
+          "in order to they could get a good seat",
+          "so as to they could get a good seat",
+          "to they could get a good seat"
+        ],
+        "question": "다음 문장의 밑줄 친 부분과 의미가 같은 것은?\n\nThey started early <u>so that they could get a good seat</u>.",
+        "explanation": "\"so as to + 동사원형\"은 목적을 나타내는 올바른 표현입니다. 나머지는 to/so as to 뒤에 주어+조동사가 와서 틀립니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "3",
+        "number": 43,
+        "options": [
+          "I went to the store so as to buy some milk.",
+          "He studies hard in order that he can succeed.",
+          "I hurry so that I wouldn't miss the train.",
+          "She works hard so that her family can live in comfort.",
+          "Speak loudly so that everybody can hear you."
+        ],
+        "question": "다음 중 어법상 어색한 곳이 있는 문장은?",
+        "explanation": "③ hurry(현재)인데 wouldn't(과거) = 시제 불일치. \"won't\"이 와야 합니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "3",
+        "number": 44,
+        "options": [
+          "I study hard <u>so that</u> I can pass.",
+          "He ran fast <u>so that</u> he could catch the bus.",
+          "I was <u>so</u> tired <u>that</u> I couldn't walk.",
+          "She saves money <u>so that</u> she can travel.",
+          "We use public transport <u>so that</u> we can save energy."
+        ],
+        "question": "다음 중 밑줄 친 부분의 쓰임이 나머지와 다른 것은?",
+        "explanation": "③은 \"so + 형용사 + that\"(결과 구문)이며, 나머지는 모두 \"so that\"(목적 구문)입니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "3",
+        "number": 45,
+        "options": [
+          "He was so wisdom that he solved it.",
+          "I drove fast so that he can get there.",
+          "The kids practiced hard so as to win.",
+          "Jack skipped dinner in order that fit in jeans.",
+          "She's staying in US so that she can improves her English."
+        ],
+        "question": "다음 중 어법상 옳은 문장을 고르시오.",
+        "explanation": "③ \"so as to + 동사원형(win)\"은 올바릅니다. ① wisdom → wise(형용사), ② drove(과거) + can(현재) = 시제 불일치, ④ in order that 뒤 주어 누락, ⑤ can + improves → can + improve."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "5",
+        "number": 46,
+        "options": [
+          "Soyun was so careful that she wouldn't drop the egg.",
+          "Soyun was so careful but she wouldn't drop the egg.",
+          "Soyun was very careful so that she would drop the egg.",
+          "Soyun was so careful and she wouldn't drop the egg.",
+          "Soyun was very careful so that she wouldn't drop the egg."
+        ],
+        "question": "[Part 4] 다음 우리말을 바르게 영작한 것은?\n\n\"소윤이는 계란을 떨어트리지 않기 위해 매우 조심했다.\"",
+        "explanation": "\"~하기 위해\"는 목적이므로 \"so that + wouldn't\"(⑤)가 올바릅니다. ① \"so...that\"은 결과 구문, ② but은 역접, ③ \"would drop\"은 긍정(떨어트리도록)으로 의미 반대, ④ and는 단순 연결입니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "5",
+        "number": 47,
+        "options": [
+          "나는 살을 빼기 위해 달린다. → I run so that I can lose weight.",
+          "그는 잊지 않기 위해 적었다. → He wrote it down so that he wouldn't forget.",
+          "그녀는 책을 읽기 위해 TV를 껐다. → She turned off the TV to read a book.",
+          "우리는 전망을 보기 위해 높이 올라갔다. → We went up high in order to see the view.",
+          "나는 그를 만나기 위해 여기 왔다. → I came here because I could meet him."
+        ],
+        "question": "다음 중 영작이 바르지 않은 것은?",
+        "explanation": "\"만나기 위해\"는 목적이므로 because(이유)가 아닌 to/so that이 와야 합니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "1",
+        "number": 48,
+        "options": [
+          "I will change you so that you can meet the prince.",
+          "You will change I so that you can meet the prince.",
+          "I will change you so that the prince can meet you.",
+          "You will change so that I can meet the prince.",
+          "I will change the prince so that you can meet him."
+        ],
+        "question": "다음 단어들을 바르게 배열하여 문장을 완성하시오.\n\n(change, can, that, meet, I, will, you, so, the prince, you)",
+        "explanation": "\"I will change you so that you can meet the prince.\"가 주어진 단어로 만들 수 있는 올바른 문장입니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "1",
+        "number": 49,
+        "options": [
+          "Turn the light on so that I can see you.",
+          "Turn on the light so that you can see I.",
+          "I can see you so that turn the light on.",
+          "So that I can see you turn the light on.",
+          "Light turn on the so that I can see you."
+        ],
+        "question": "다음 단어들을 바르게 배열하여 문장을 완성하시오.\n\n(can, I, light, on, that, the, turn, see, so, you)",
+        "explanation": "\"Turn the light on so that I can see you.\"가 올바른 배열입니다. ② \"see I\" → \"see me\"(목적격 오류)."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "2",
+        "number": 50,
+        "options": [
+          "Mom prepared breakfast so that I could rest.",
+          "I prepared breakfast so that Mom could rest.",
+          "So that Mom could rest I prepared breakfast.",
+          "Breakfast was prepared so that I could rest Mom.",
+          "I could rest so that Mom prepared breakfast."
+        ],
+        "question": "다음 단어들을 바르게 배열하여 문장을 완성하시오.\n\n(I, could, rest, prepared, so, Mom, breakfast, that)",
+        "explanation": "\"I prepared breakfast so that Mom could rest.\"가 가장 자연스러운 문장입니다. 내가 아침을 준비해서 엄마가 쉴 수 있도록."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "1",
+        "number": 51,
+        "options": [
+          "can",
+          "could",
+          "will",
+          "would",
+          "must"
+        ],
+        "question": "다음 우리말을 영어로 옮길 때 빈칸에 알맞은 조동사는?\n\n\"사막여우의 발은 뜨거운 모래 위를 걸을 수 있도록 털로 덮여 있다.\"\n\nThe fennec fox's feet are covered with fur so that it _______ walk on hot sand.",
+        "explanation": "주절이 현재(are covered)이므로 so that절에도 현재형 조동사 can을 사용합니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "1",
+        "number": 52,
+        "options": [
+          "I studied hard so that I could pass the exam.",
+          "I studied so hard that I could pass the exam.",
+          "So that I could pass the exam I studied hard.",
+          "I could pass the exam so that I studied hard.",
+          "I studied hard in order that pass the exam."
+        ],
+        "question": "다음 단어들을 바르게 배열하여 문장을 완성하시오.\n\n(studied, so, I, could, that, hard, I, the exam, pass)",
+        "explanation": "\"I studied hard so that I could pass the exam.\"이 목적을 나타내는 올바른 배열입니다. ②는 \"so hard that\"(결과 구문)으로 의미가 다릅니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "5",
+        "number": 53,
+        "options": [
+          "I pressed the button to turn on the computer.",
+          "Sora bought the book so that she could study English.",
+          "Junho turned off the light so that he could sleep well.",
+          "He went to India so that he could help the poor.",
+          "We should develop habits so that we live happy."
+        ],
+        "question": "다음 중 영작이 어색한 것을 고르시오.",
+        "explanation": "⑤ \"so that\" 뒤에 조동사(can)가 없고, \"happy\" → \"happily\"(부사) 또는 \"live a happy life\"가 되어야 합니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "4",
+        "number": 54,
+        "options": [
+          "I go jogging to keep healthy.",
+          "I go jogging so as to keep healthy.",
+          "I go jogging in order to keep healthy.",
+          "I go jogging enough to keep healthy.",
+          "I go jogging so that I can keep healthy."
+        ],
+        "question": "다음 중 의미가 나머지 넷과 다른 하나는?",
+        "explanation": "④ \"enough to\"는 \"~할 만큼 충분히\"라는 정도를 나타내며, 나머지는 모두 \"건강을 유지하기 위해\"라는 목적을 나타냅니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "2",
+        "number": 55,
+        "options": [
+          "(A)-(B)-(C)-(D)",
+          "(C)-(A)-(B)-(D)",
+          "(B)-(D)-(A)-(C)",
+          "(C)-(D)-(A)-(B)",
+          "(A)-(C)-(D)-(B)"
+        ],
+        "question": "다음 빈칸 (가)~(라)에 들어갈 말을 <보기>에서 골라 순서대로 나열한 것은?\n\n• Jenny is saving her money (가).\n• He watches American movies (나).\n• He went out the back door (다).\n• She will go abroad (라).\n\n<보기>\n(A) so that he can improve listening\n(B) so that nobody could see him\n(C) so that she can fix her bike\n(D) so that she can study art",
+        "explanation": "(가) saving money → fix her bike (C), (나) watches movies → improve listening (A), (다) went out back door → nobody could see (B), (라) go abroad → study art (D). 순서: C-A-B-D."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "4",
+        "number": 56,
+        "options": [
+          "① only",
+          "③ only",
+          "①②",
+          "①③",
+          "②③"
+        ],
+        "question": "다음 중 문장 전환이 바른 것을 <u>모두</u> 고르면?\n\n① I studied hard to pass. = I studied hard so that I could pass.\n② He ran to catch the bus. = He ran so that he catch the bus.\n③ She came early for us to start. = She came early so that we could start.\n④ Turn on the light to see. = Turn on the light so that you see.\n⑤ I woke up early not to be late. = I woke up early so that I won't be late.",
+        "explanation": "① studied(과거) → so that I could pass 올바릅니다. ③ for us to start → so that we could start 올바릅니다. ② catch → could catch(조동사 누락), ④ you see → you can see(조동사 누락), ⑤ won't → wouldn't(woke up은 과거이므로 시제 불일치)."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "1",
+        "number": 57,
+        "options": [
+          "(A) so that - (B) could",
+          "(A) to - (B) could",
+          "(A) in order to - (B) can",
+          "(A) so that - (B) is",
+          "(A) because - (B) could"
+        ],
+        "question": "다음 빈칸 (A), (B)에 들어갈 말이 바르게 짝지어진 것은?\n\nHe spoke slowly (A) _______ others (B) _______ understand him.",
+        "explanation": "주절이 과거(spoke)이므로 so that + 주어 + could가 적절합니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "3",
+        "number": 58,
+        "options": [
+          "I use a map so that I won't get lost.",
+          "She wears a coat so that she won't get cold.",
+          "He hurried so that he would miss the train.",
+          "I turned off the light so that I could sleep.",
+          "We save water so that we can protect nature."
+        ],
+        "question": "다음 중 의미가 어색한 문장은?",
+        "explanation": "③ \"he would miss the train\"(기차를 놓치도록)은 의미상 어색합니다. \"wouldn't miss\"(놓치지 않도록)가 되어야 합니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "2",
+        "number": 59,
+        "options": [
+          "I'll wait here in order that you could find me.",
+          "He invented the phone in order that we can talk.",
+          "I went to bed early in order that I can wake up.",
+          "She studied hard in order that she passed the exam.",
+          "They ran fast in order that they can catch the bus."
+        ],
+        "question": "다음 중 어법상 옳은 문장은?",
+        "explanation": "② 발명(과거)의 목적이 현재까지 지속되므로 can이 허용됩니다. ① will + could = 시제 혼용, ③ went(과거) + can(현재) = 불일치, ④ in order that + 과거형 동사(passed) = 조동사 필요, ⑤ ran(과거) + can(현재) = 불일치."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "5",
+        "number": 60,
+        "options": [
+          "I exercise _______ stay healthy.",
+          "He ran fast _______ catch the bus.",
+          "I study hard _______ pass the test.",
+          "She went to the store _______ buy milk.",
+          "I save money _______ I can buy a car."
+        ],
+        "question": "다음 중 빈칸에 들어갈 말이 나머지 넷과 다른 하나는?",
+        "explanation": "①~④는 \"to/in order to/so as to + 동사원형\" 형태이지만, ⑤는 주어(I) + 조동사(can)가 있으므로 \"so that\"이 필요합니다."
+      }
+    ],
+    "answer_key": [
+      "3",
+      "1",
+      "1",
+      "4",
+      "3",
+      "5",
+      "4",
+      "5",
+      "1",
+      "5",
+      "4",
+      "2",
+      "4",
+      "2",
+      "1",
+      "2",
+      "1",
+      "3",
+      "3",
+      "3",
+      "5",
+      "5",
+      "5",
+      "4",
+      "5",
+      "3",
+      "3",
+      "4",
+      "1",
+      "4",
+      "1",
+      "4",
+      "2",
+      "2",
+      "1",
+      "3",
+      "2",
+      "5",
+      "3",
+      "4",
+      "2",
+      "2",
+      "3",
+      "3",
+      "3",
+      "5",
+      "5",
+      "1",
+      "1",
+      "2",
+      "1",
+      "1",
+      "5",
+      "4",
+      "2",
+      "4",
+      "1",
+      "3",
+      "2",
+      "5"
+    ]
+  },
+  "naesin_problem_sheets_d863aae1-c77c-436c-b6a2-ca1ae4b20d66": {
+    "questions": [
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "3",
+        "number": 1,
+        "options": [
+          "because",
+          "when",
+          "so that",
+          "although",
+          "if"
+        ],
+        "question": "[Part 1] 다음 빈칸에 들어갈 말로 가장 적절한 것은?\nHe exercises every day _______ he can stay healthy.",
+        "explanation": "\"건강을 유지할 수 있도록\"은 목적을 나타내므로 so that이 적절합니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "1",
+        "number": 2,
+        "options": [
+          "so that",
+          "in order to",
+          "so as to",
+          "to",
+          "for the purpose of"
+        ],
+        "question": "다음 빈칸에 들어갈 말로 적절하지 않은 것은?\nI went to a bookstore _______ buy some books.",
+        "explanation": "so that 뒤에는 주어 + 조동사 + 동사 구조가 와야 합니다. \"so that buy\"는 주어와 조동사가 없어 불가합니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "1",
+        "number": 3,
+        "options": [
+          "could",
+          "must",
+          "should",
+          "am",
+          "was"
+        ],
+        "question": "다음 대화의 빈칸에 들어갈 말로 가장 적절한 것은?\nA: Why did you save money?\nB: I saved money so that I _______ buy a new bike.",
+        "explanation": "주절이 과거(saved)이므로 so that절에도 과거형 조동사 could를 사용합니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "4",
+        "number": 4,
+        "options": [
+          "then",
+          "enough",
+          "so",
+          "so that",
+          "completely"
+        ],
+        "question": "다음 문장의 빈칸에 들어갈 말로 가장 적절한 것은?\nPlease turn off the light _______ I can sleep.",
+        "explanation": "\"내가 잠잘 수 있도록\"은 목적을 나타내므로 so that + 주어 + can이 적절합니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "3",
+        "number": 5,
+        "options": [
+          "because",
+          "in order to",
+          "so that",
+          "so as to",
+          "enough to"
+        ],
+        "question": "다음 두 문장을 한 문장으로 연결할 때 빈칸에 가장 적절한 것은?\nKing Sejong invented Hangeul. He wanted all Koreans to read and write easily.\n→ King Sejong invented Hangeul _______ all Koreans could read and write easily.",
+        "explanation": "빈칸 뒤에 주어(all Koreans) + 조동사(could)가 있으므로 절을 이끄는 접속사 so that이 필요합니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "5",
+        "number": 6,
+        "options": [
+          "we can see you",
+          "we won't be late",
+          "we can get well",
+          "we won't get sick",
+          "we can understand you"
+        ],
+        "question": "다음 문장의 빈칸에 들어갈 말로 가장 적절한 것은?\nPlease speak slowly so that _______.",
+        "explanation": "\"천천히 말하다\"와 연결되는 목적은 \"이해할 수 있도록\"이므로 ⑤가 적절합니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "4",
+        "number": 7,
+        "options": [
+          "to buy a new car",
+          "so as to travel",
+          "in order to start a business",
+          "so that I can help others",
+          "for the purpose of taking a trip"
+        ],
+        "question": "다음 빈칸에 들어갈 말로 알맞지 않은 것은?\nI saved money _______.",
+        "explanation": "주절이 과거(saved)인데 ④의 so that절에 현재형 can이 와서 시제가 불일치합니다. could가 와야 합니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "5",
+        "number": 8,
+        "options": [
+          "I could keep in shape",
+          "I could travel to Europe",
+          "I could water the flowers",
+          "I could catch the bus",
+          "I could focus on reading"
+        ],
+        "question": "다음 문장의 빈칸에 들어갈 말로 가장 적절한 것은?\nI turned off the radio so that _______.",
+        "explanation": "\"라디오를 껐다\"와 연결되는 목적은 \"독서에 집중하기 위해\"이므로 ⑤가 적절합니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "1",
+        "number": 9,
+        "options": [
+          "(A) so that - (B) could",
+          "(A) in order to - (B) can",
+          "(A) so - (B) will",
+          "(A) that - (B) is",
+          "(A) because - (B) takes"
+        ],
+        "question": "다음 빈칸에 들어갈 말이 순서대로 바르게 연결된 것은?\nHe quit his job (A) _______ he (B) _______ take care of his baby.",
+        "explanation": "주절이 과거(quit)이므로 so that + 주어 + could가 적절합니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "5",
+        "number": 10,
+        "options": [
+          "buy a new bike",
+          "get a good grade",
+          "read and write easily",
+          "go to other places quickly",
+          "talk to other people in different places"
+        ],
+        "question": "다음 문장의 빈칸에 들어갈 말로 가장 적절한 것은?\nBell invented the telephone so that we can _______.",
+        "explanation": "전화기의 목적은 \"다른 곳에 있는 사람들과 대화할 수 있도록\"이므로 ⑤가 적절합니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "4",
+        "number": 11,
+        "options": [
+          "if",
+          "after",
+          "although",
+          "so that",
+          "while"
+        ],
+        "question": "다음 빈칸에 공통으로 들어갈 접속사는?\n• I'll go to the park _______ I can ride a bike.\n• Turn on the light _______ you can see better.",
+        "explanation": "두 문장 모두 목적을 나타내는 so that이 공통으로 들어갑니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "2",
+        "number": 12,
+        "options": [
+          "can",
+          "could",
+          "will",
+          "is",
+          "are"
+        ],
+        "question": "다음 중 문맥상 빈칸에 가장 적절한 조동사는?\nThe guide walked slowly so that everybody _______ follow him.",
+        "explanation": "주절이 과거(walked)이므로 so that절의 조동사도 과거형 could를 사용해야 시제가 일치합니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "4",
+        "number": 13,
+        "options": [
+          "so that",
+          "in order that",
+          "so as that",
+          "in order to",
+          "that"
+        ],
+        "question": "다음 빈칸에 들어갈 말로 적절하지 않은 것은?\nI went to America _______ I could speak English well.",
+        "explanation": "in order to는 뒤에 동사원형만 올 수 있으므로 \"in order to I could speak\"는 틀립니다. so as that도 올바른 표현이 아닙니다.",
+        "acceptedAnswers": [
+          "4",
+          "3"
+        ]
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "2",
+        "number": 14,
+        "options": [
+          "because",
+          "so that",
+          "such that",
+          "even if",
+          "whether"
+        ],
+        "question": "다음 중 빈칸에 들어갈 말로 가장 적절한 것은?\nTurn in your report _______ I can comment on it.",
+        "explanation": "\"내가 코멘트할 수 있도록\" 목적을 나타내므로 so that이 적절합니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "1",
+        "number": 15,
+        "options": [
+          "so that",
+          "when",
+          "although",
+          "because",
+          "before"
+        ],
+        "question": "다음 빈칸에 알맞은 말을 고르시오.\nHe often walks his dog _______ it can stay healthy.",
+        "explanation": "\"건강을 유지할 수 있도록\" 목적을 나타내므로 so that이 적절합니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "2",
+        "number": 16,
+        "options": [
+          "so as not to",
+          "in order to",
+          "as long as",
+          "such as",
+          "in spite of"
+        ],
+        "question": "[Part 2] 다음 두 문장이 같은 의미가 되도록 빈칸에 알맞은 것은?\nShe donated money so as to help the poor.\n= She donated money _______ help the poor.",
+        "explanation": "\"so as to\"와 같은 의미의 목적 표현은 \"in order to\"입니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "1",
+        "number": 17,
+        "options": [
+          "He reads many books about writing.",
+          "He reads many books to be a writer.",
+          "He reads many books so as to be a writer.",
+          "He reads many books in order to be a writer.",
+          "He reads many books so that he can be a writer."
+        ],
+        "question": "다음 중 의미가 나머지 넷과 다른 하나는?",
+        "explanation": "①은 \"글쓰기에 관한 책\"으로 내용을 나타내고, ②~⑤는 \"작가가 되기 위해\"라는 목적을 나타냅니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "3",
+        "number": 18,
+        "options": [
+          "I exercise so hard what I can lose weight.",
+          "I exercise so hard that I can lose weight.",
+          "I exercise hard so that I can lose weight.",
+          "I lose weight so that I can exercise hard.",
+          "I lose weight in order to exercise hard."
+        ],
+        "question": "다음 문장을 'so that' 구문으로 바르게 영작한 것은?\n\"나는 살을 빼기 위해 열심히 운동한다.\"",
+        "explanation": "\"so that + 주어 + can\" 목적 구문입니다. ②는 \"so hard that\"으로 결과 구문이며, ④⑤는 의미가 반대입니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "3",
+        "number": 19,
+        "options": [
+          "I studied so hard what I passed the test.",
+          "I studied so hard that I passed the test.",
+          "I studied hard so that I could pass the test.",
+          "I passed the test so that I could study hard.",
+          "I passed the test in order to study hard."
+        ],
+        "question": "다음 문장을 'so that' 구문으로 바르게 영작한 것은?\n\"나는 시험에 합격하기 위해 열심히 공부했다.\"",
+        "explanation": "주절이 과거(studied)이므로 so that + could. ②는 \"so hard that\"으로 결과 구문이며, ④⑤는 의미가 반대입니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "3",
+        "number": 20,
+        "options": [
+          "He studies hard to pass the exam.",
+          "He studies hard so as to pass the exam.",
+          "He studied so hard that he could pass the exam.",
+          "He studies hard in order to pass the exam.",
+          "He studies hard in order that he can pass the exam."
+        ],
+        "question": "다음 중 의미가 나머지 넷과 다른 하나는?",
+        "explanation": "③은 \"so + 부사 + that\"(결과 구문: 너무 열심히 공부해서 합격할 수 있었다)이며, 나머지는 모두 목적(\"합격하기 위해\")을 나타냅니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "5",
+        "number": 21,
+        "options": [
+          "I finished my job quickly so as to go home early.",
+          "I finished my job quickly to go home early.",
+          "I finished my job quickly so that I could go home early.",
+          "I finished my job quickly in order that I could go home early.",
+          "I finished my job quickly because I went home early."
+        ],
+        "question": "다음 중 의미가 나머지 넷과 다른 하나는?",
+        "explanation": "⑤는 because(이유)를 나타내고, 나머지는 모두 \"일찍 집에 가기 위해\"라는 목적을 나타냅니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "5",
+        "number": 22,
+        "options": [
+          "I hurried so that I would not be late. = I hurried so as not to be late.",
+          "She exercised to be healthy. = She exercised so that she could be healthy.",
+          "I tried hard so that I could pass. = I tried hard to pass.",
+          "Rachel studies hard so that she can get a prize. = Rachel studies hard so as to get a prize.",
+          "I left early to avoid the rush. = I left early, so I could avoid the rush."
+        ],
+        "question": "다음 중 문장 전환이 어색한 것은?",
+        "explanation": "⑤에서 콤마 + so는 결과를 나타내므로 목적의 to avoid와 의미가 달라집니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "5",
+        "number": 23,
+        "options": [
+          "He saved money to buy a bike.",
+          "He saved money so as to buy a bike.",
+          "He saved money in order to buy a bike.",
+          "He saved money so that he could buy a bike.",
+          "He saved so much money that he couldn't buy a bike."
+        ],
+        "question": "다음 중 의미가 나머지 넷과 다른 하나는?",
+        "explanation": "⑤는 \"so much...that\"(결과 구문: 돈을 너무 많이 모아서 자전거를 살 수 없었다)이며 의미가 다릅니다. 나머지는 모두 \"자전거를 사기 위해\"라는 목적입니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "4",
+        "number": 24,
+        "options": [
+          "② only",
+          "⑤ only",
+          "②④",
+          "②⑤",
+          "④⑤"
+        ],
+        "question": "다음 문장과 의미가 같은 것을 <u>모두</u> 고르면?\n\nShe turned on the TV to watch the news.\n\n① She turned on the TV in order watch the news.\n② She turned on the TV so as to watch the news.\n③ She turned on the TV in order not to watch the news.\n④ She turned on the TV so that she can watch the news.\n⑤ She turned on the TV so that she could watch the news.",
+        "explanation": "② so as to watch = 목적 표현으로 올바릅니다. ⑤ so that she could watch = 과거 시제 일치가 올바릅니다. ① in order 뒤 to 누락, ③ not이 붙어 반대 의미, ④ can은 turned(과거)와 시제 불일치입니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "5",
+        "number": 25,
+        "options": [
+          "We'll do our best so that winning the game.",
+          "We'll do our best so that can win the game.",
+          "We'll do our best in order to we win the game.",
+          "We'll do our best in order to can win the game.",
+          "We'll do our best so that we can win the game."
+        ],
+        "question": "다음 중 우리말을 영작한 것으로 가장 적절한 것은?\n\n\"우리는 게임을 이기기 위해서 최선을 다할 것이다.\"",
+        "explanation": "so that + 주어(we) + 조동사(can) + 동사원형(win)이 올바릅니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "3",
+        "number": 26,
+        "options": [
+          "I woke up early not to miss the bus.",
+          "I woke up early so that I wouldn't miss the bus.",
+          "I woke up so early that I didn't miss the bus.",
+          "I woke up early so as not to miss the bus.",
+          "I woke up early in order that I wouldn't miss the bus."
+        ],
+        "question": "다음 중 의미가 나머지 넷과 다른 하나는?",
+        "explanation": "③은 \"so + 부사 + that\"(결과 구문: 너무 일찍 일어나서 버스를 놓치지 않았다)이며, 나머지는 모두 목적(\"놓치지 않기 위해\")을 나타냅니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "3",
+        "number": 27,
+        "options": [
+          "He practiced hard so that he could learn difficult tricks.",
+          "He practiced hard in order that he could learn difficult tricks.",
+          "He practiced too hard to learn difficult tricks.",
+          "He practiced hard so as to learn difficult tricks.",
+          "He practiced hard to learn difficult tricks."
+        ],
+        "question": "다음 중 의미가 나머지 넷과 다른 하나는?",
+        "explanation": "③은 \"too...to\"(너무 ~해서 ...할 수 없다)로 부정적 결과를 나타냅니다. 나머지는 모두 \"어려운 기술을 배우기 위해\"라는 목적입니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "4",
+        "number": 28,
+        "options": [
+          "① only",
+          "⑤ only",
+          "①③",
+          "①⑤",
+          "③⑤"
+        ],
+        "question": "다음 문장의 밑줄 친 부분과 의미가 같은 것은? (정답 2개)\n\nWe saved money <u>to take a vacation</u>.\n\n① in order to take a long vacation.\n② so as not to take a long vacation.\n③ in order that to take a long vacation.\n④ in order to we can take a long vacation.\n⑤ in order that we could take a long vacation.",
+        "explanation": "① in order to + V원형 = 목적 표현으로 올바릅니다. ⑤ in order that + 주어 + could = 목적절로 올바릅니다. ② not이 붙어 반대 의미, ③ in order that 뒤에 to가 불필요, ④ in order to 뒤에 주어+조동사 불가입니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "1",
+        "number": 29,
+        "options": [
+          "He turned down the radio so that I could sleep. = He turned down the radio in order to sleep.",
+          "Jim turned on TV so that he could watch news. = Jim turned on TV in order to watch news.",
+          "He goes to bed early so that he can sleep. = He goes to bed early to sleep.",
+          "Brian practiced hard so that he could be a dancer. = Brian practiced hard so as to be a dancer.",
+          "I took my umbrella so that I could share it. = I took my umbrella so as to share it."
+        ],
+        "question": "다음 중 문장의 의미가 서로 다른 것은?",
+        "explanation": "①에서 \"so that I could sleep\"(나의 목적)과 \"in order to sleep\"(그의 목적)은 주어가 달라 의미가 다릅니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "4",
+        "number": 30,
+        "options": [
+          "(A) went",
+          "(D) invented",
+          "(E) talk",
+          "(B) wait",
+          "(C) could"
+        ],
+        "question": "다음 빈칸 (A)~(E)에 들어갈 단어로 적절하지 않은 것은?\n\n• Andy (A) _______ to bed early in order that he (B) _______ wake up early.\n• Bell (D) _______ the telephone in order that we (C) _______ (E) _______ to others.",
+        "explanation": "(B) 위치에는 \"could\"와 같은 조동사가 와야 합니다. \"wait\"은 조동사가 아니므로 \"he wait wake up\"은 성립하지 않습니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "1",
+        "number": 31,
+        "options": [
+          "I was nervous, so that I could hardly speak.",
+          "Speak louder so that everyone can hear you.",
+          "She ran so that she could get there on time.",
+          "I jog every day so that I can stay healthy.",
+          "He drinks milk so that he can grow taller."
+        ],
+        "question": "[Part 3] 다음 중 밑줄 친 so that의 쓰임이 나머지 넷과 다른 하나는?",
+        "explanation": "①은 콤마 + so that으로 결과(긴장해서 말을 거의 못 했다)를 나타냅니다. ②~⑤는 모두 목적(~할 수 있도록)을 나타냅니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "4",
+        "number": 32,
+        "options": [
+          "③ only",
+          "⑤ only",
+          "③④",
+          "③⑤",
+          "④⑤"
+        ],
+        "question": "다음 우리말에 맞게 영작한 것을 <u>모두</u> 고르면?\n\n\"Sam은 그 기차를 놓치지 않기 위해 일찍 일어났다.\"\n\n① Sam woke up early to not miss the train.\n② Sam woke up early in order to miss the train.\n③ Sam woke up early so as not to miss the train.\n④ Sam woke up so early that he could not miss the train.\n⑤ Sam woke up early so that he would not miss the train.",
+        "explanation": "③ so as not to + V원형 = 올바른 부정 목적 표현입니다. ⑤ so that + would not = 올바른 목적절입니다. ① to not(비표준 어순), ② in order to miss(긍정=놓치려고), ④ so early that(결과 구문)입니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "2",
+        "number": 33,
+        "options": [
+          "He took a taxi so that he wouldn't be late.",
+          "I gave him a knife so that he couldn't peel the fruit.",
+          "He tried his best so that he could win the contest.",
+          "This flower opens up so that it can get sunlight.",
+          "I turned off the TV so that my brother could study."
+        ],
+        "question": "다음 중 의미상 어색한 문장은?",
+        "explanation": "②에서 칼을 줬는데 \"couldn't peel\"(과일을 깎을 수 없도록)은 의미상 어색합니다. \"could peel\"이 되어야 합니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "2",
+        "number": 34,
+        "options": [
+          "Please move to one side so that we can all see.",
+          "Turn the fish carefully so as to it won't burn.",
+          "I drink coffee so that I can concentrate on my work.",
+          "He exercises every day in order that he can stay healthy.",
+          "Please speak louder so that all of us can hear you."
+        ],
+        "question": "다음 중 어법상 어색한 문장은?",
+        "explanation": "② \"so as to\" 뒤에는 동사원형만 올 수 있으므로 \"so as to it won't burn\"은 틀립니다. \"so that it won't burn\"이 올바릅니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "1",
+        "number": 35,
+        "options": [
+          "Watch out so as not to falling.",
+          "I study English so as to travel abroad.",
+          "I practiced hard so as to win the game.",
+          "I got up early so as not to miss the train.",
+          "I went to the market so as to buy some food."
+        ],
+        "question": "다음 중 어법상 어색한 문장을 고르면?",
+        "explanation": "\"so as not to\" 뒤에는 동사원형이 와야 합니다. \"falling\" → \"fall\"이 올바릅니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "3",
+        "number": 36,
+        "options": [
+          "I listen to radio so that I can improve my skills.",
+          "He worked hard so that he could make money.",
+          "Please leave your number so that she can't call you.",
+          "We use public transport so that we can save energy.",
+          "Miran hurried so that she could see her friend."
+        ],
+        "question": "다음 중 의미가 어색한 문장은?",
+        "explanation": "③에서 전화번호를 남기는데 \"can't call\"(전화할 수 없도록)은 의미상 어색합니다. \"can call\"이 되어야 합니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "2",
+        "number": 37,
+        "options": [
+          "Eunyoung set the alarm not in order to oversleep.",
+          "Many parents ask their children not to hang out with bad friends.",
+          "Take off your wet clothes so as to catch a cold.",
+          "Handong studied so hard in order to fail the test.",
+          "Nuri told lies so as to not hurt my feeling."
+        ],
+        "question": "다음 중 어법 및 의미가 자연스러운 문장은?",
+        "explanation": "② ask + 목적어 + not to V = 올바른 부정 부탁 표현입니다. ① not in order to → in order not to, ③ so as to catch a cold(감기 걸리려고?) → so as not to, ④ in order to fail(시험 떨어지려고?) → 의미 이상, ⑤ so as to not → so as not to."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "5",
+        "number": 38,
+        "options": [
+          "She studied hard to get 'A' in English.",
+          "They work together for the championship.",
+          "I came early so that I could get a better seat.",
+          "I did the dishes so that my mom could get rest.",
+          "He ran to the bus stop in order to he could catch it."
+        ],
+        "question": "다음 중 어법상 어색한 문장은?",
+        "explanation": "\"in order to\" 뒤에는 동사원형만 올 수 있으므로 \"in order to he could catch\"는 틀립니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "3",
+        "number": 39,
+        "options": [
+          "① only",
+          "② only",
+          "①②",
+          "①④",
+          "②④"
+        ],
+        "question": "다음 중 어법상 어색한 문장은? (정답 2개)\n\n① I woke up early so that I will not be late.\n② He was so wisdom that he was able to solve it.\n③ I took a taxi so that I could get there on time.\n④ I've saved money to buy a computer.\n⑤ I took my umbrella for my mother.",
+        "explanation": "① woke up(과거)인데 will(현재/미래) = 시제 불일치. would not이 와야 합니다. ② wisdom은 명사이므로 \"so wisdom\"은 틀립니다. \"so wise\"(형용사)가 올바릅니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "4",
+        "number": 40,
+        "options": [
+          "Our teacher brought a DVD so that we could watch a movie.",
+          "Giho made cookies so that we could eat them.",
+          "Hajin took pictures so that we could remember the day.",
+          "Tom couldn't get in so that he had left his ticket.",
+          "We sang a song so that she would know we loved her."
+        ],
+        "question": "다음 중 밑줄 친 so that의 쓰임이 흐름상 어색한 것은?",
+        "explanation": "④에서 \"so that he had left his ticket\"은 의미상 어색합니다. \"들어갈 수 없었다\"의 이유는 because이지 so that(목적)이 아닙니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "2",
+        "number": 41,
+        "options": [
+          "(A), (B)",
+          "(A), (D)",
+          "(C), (D)",
+          "(A), (C)",
+          "(B), (D)"
+        ],
+        "question": "다음 중 어법상 옳은 문장끼리 짝지어진 것은?\n\n(A) She is so wise that everyone respects her.\n(B) He tried his best so that he can win the race.\n(C) Speak too clearly that they can understand you.\n(D) She was very careful so that she wouldn't drop the egg.",
+        "explanation": "(A) so + 형용사 + that = 결과 구문으로 올바릅니다. (D) so that + wouldn't = 목적절로 올바릅니다. (B) tried(과거) + can(현재) = 시제 불일치, (C) too → so가 되어야 합니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "2",
+        "number": 42,
+        "options": [
+          "in order that get a good seat",
+          "so as to get a good seat",
+          "in order to they could get a good seat",
+          "so as to they could get a good seat",
+          "to they could get a good seat"
+        ],
+        "question": "다음 문장의 밑줄 친 부분과 의미가 같은 것은?\n\nThey started early <u>so that they could get a good seat</u>.",
+        "explanation": "\"so as to + 동사원형\"은 목적을 나타내는 올바른 표현입니다. 나머지는 to/so as to 뒤에 주어+조동사가 와서 틀립니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "3",
+        "number": 43,
+        "options": [
+          "I went to the store so as to buy some milk.",
+          "He studies hard in order that he can succeed.",
+          "I hurry so that I wouldn't miss the train.",
+          "She works hard so that her family can live in comfort.",
+          "Speak loudly so that everybody can hear you."
+        ],
+        "question": "다음 중 어법상 어색한 곳이 있는 문장은?",
+        "explanation": "③ hurry(현재)인데 wouldn't(과거) = 시제 불일치. \"won't\"이 와야 합니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "3",
+        "number": 44,
+        "options": [
+          "I study hard <u>so that</u> I can pass.",
+          "He ran fast <u>so that</u> he could catch the bus.",
+          "I was <u>so</u> tired <u>that</u> I couldn't walk.",
+          "She saves money <u>so that</u> she can travel.",
+          "We use public transport <u>so that</u> we can save energy."
+        ],
+        "question": "다음 중 밑줄 친 부분의 쓰임이 나머지와 다른 것은?",
+        "explanation": "③은 \"so + 형용사 + that\"(결과 구문)이며, 나머지는 모두 \"so that\"(목적 구문)입니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "3",
+        "number": 45,
+        "options": [
+          "He was so wisdom that he solved it.",
+          "I drove fast so that he can get there.",
+          "The kids practiced hard so as to win.",
+          "Jack skipped dinner in order that fit in jeans.",
+          "She's staying in US so that she can improves her English."
+        ],
+        "question": "다음 중 어법상 옳은 문장을 고르시오.",
+        "explanation": "③ \"so as to + 동사원형(win)\"은 올바릅니다. ① wisdom → wise(형용사), ② drove(과거) + can(현재) = 시제 불일치, ④ in order that 뒤 주어 누락, ⑤ can + improves → can + improve."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "5",
+        "number": 46,
+        "options": [
+          "Soyun was so careful that she wouldn't drop the egg.",
+          "Soyun was so careful but she wouldn't drop the egg.",
+          "Soyun was very careful so that she would drop the egg.",
+          "Soyun was so careful and she wouldn't drop the egg.",
+          "Soyun was very careful so that she wouldn't drop the egg."
+        ],
+        "question": "[Part 4] 다음 우리말을 바르게 영작한 것은?\n\n\"소윤이는 계란을 떨어트리지 않기 위해 매우 조심했다.\"",
+        "explanation": "\"~하기 위해\"는 목적이므로 \"so that + wouldn't\"(⑤)가 올바릅니다. ① \"so...that\"은 결과 구문, ② but은 역접, ③ \"would drop\"은 긍정(떨어트리도록)으로 의미 반대, ④ and는 단순 연결입니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "5",
+        "number": 47,
+        "options": [
+          "나는 살을 빼기 위해 달린다. → I run so that I can lose weight.",
+          "그는 잊지 않기 위해 적었다. → He wrote it down so that he wouldn't forget.",
+          "그녀는 책을 읽기 위해 TV를 껐다. → She turned off the TV to read a book.",
+          "우리는 전망을 보기 위해 높이 올라갔다. → We went up high in order to see the view.",
+          "나는 그를 만나기 위해 여기 왔다. → I came here because I could meet him."
+        ],
+        "question": "다음 중 영작이 바르지 않은 것은?",
+        "explanation": "\"만나기 위해\"는 목적이므로 because(이유)가 아닌 to/so that이 와야 합니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "1",
+        "number": 48,
+        "options": [
+          "I will change you so that you can meet the prince.",
+          "You will change I so that you can meet the prince.",
+          "I will change you so that the prince can meet you.",
+          "You will change so that I can meet the prince.",
+          "I will change the prince so that you can meet him."
+        ],
+        "question": "다음 단어들을 바르게 배열하여 문장을 완성하시오.\n\n(change, can, that, meet, I, will, you, so, the prince, you)",
+        "explanation": "\"I will change you so that you can meet the prince.\"가 주어진 단어로 만들 수 있는 올바른 문장입니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "1",
+        "number": 49,
+        "options": [
+          "Turn the light on so that I can see you.",
+          "Turn on the light so that you can see I.",
+          "I can see you so that turn the light on.",
+          "So that I can see you turn the light on.",
+          "Light turn on the so that I can see you."
+        ],
+        "question": "다음 단어들을 바르게 배열하여 문장을 완성하시오.\n\n(can, I, light, on, that, the, turn, see, so, you)",
+        "explanation": "\"Turn the light on so that I can see you.\"가 올바른 배열입니다. ② \"see I\" → \"see me\"(목적격 오류)."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "2",
+        "number": 50,
+        "options": [
+          "Mom prepared breakfast so that I could rest.",
+          "I prepared breakfast so that Mom could rest.",
+          "So that Mom could rest I prepared breakfast.",
+          "Breakfast was prepared so that I could rest Mom.",
+          "I could rest so that Mom prepared breakfast."
+        ],
+        "question": "다음 단어들을 바르게 배열하여 문장을 완성하시오.\n\n(I, could, rest, prepared, so, Mom, breakfast, that)",
+        "explanation": "\"I prepared breakfast so that Mom could rest.\"가 가장 자연스러운 문장입니다. 내가 아침을 준비해서 엄마가 쉴 수 있도록."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "1",
+        "number": 51,
+        "options": [
+          "can",
+          "could",
+          "will",
+          "would",
+          "must"
+        ],
+        "question": "다음 우리말을 영어로 옮길 때 빈칸에 알맞은 조동사는?\n\n\"사막여우의 발은 뜨거운 모래 위를 걸을 수 있도록 털로 덮여 있다.\"\n\nThe fennec fox's feet are covered with fur so that it _______ walk on hot sand.",
+        "explanation": "주절이 현재(are covered)이므로 so that절에도 현재형 조동사 can을 사용합니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "1",
+        "number": 52,
+        "options": [
+          "I studied hard so that I could pass the exam.",
+          "I studied so hard that I could pass the exam.",
+          "So that I could pass the exam I studied hard.",
+          "I could pass the exam so that I studied hard.",
+          "I studied hard in order that pass the exam."
+        ],
+        "question": "다음 단어들을 바르게 배열하여 문장을 완성하시오.\n\n(studied, so, I, could, that, hard, I, the exam, pass)",
+        "explanation": "\"I studied hard so that I could pass the exam.\"이 목적을 나타내는 올바른 배열입니다. ②는 \"so hard that\"(결과 구문)으로 의미가 다릅니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "5",
+        "number": 53,
+        "options": [
+          "I pressed the button to turn on the computer.",
+          "Sora bought the book so that she could study English.",
+          "Junho turned off the light so that he could sleep well.",
+          "He went to India so that he could help the poor.",
+          "We should develop habits so that we live happy."
+        ],
+        "question": "다음 중 영작이 어색한 것을 고르시오.",
+        "explanation": "⑤ \"so that\" 뒤에 조동사(can)가 없고, \"happy\" → \"happily\"(부사) 또는 \"live a happy life\"가 되어야 합니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "4",
+        "number": 54,
+        "options": [
+          "I go jogging to keep healthy.",
+          "I go jogging so as to keep healthy.",
+          "I go jogging in order to keep healthy.",
+          "I go jogging enough to keep healthy.",
+          "I go jogging so that I can keep healthy."
+        ],
+        "question": "다음 중 의미가 나머지 넷과 다른 하나는?",
+        "explanation": "④ \"enough to\"는 \"~할 만큼 충분히\"라는 정도를 나타내며, 나머지는 모두 \"건강을 유지하기 위해\"라는 목적을 나타냅니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "2",
+        "number": 55,
+        "options": [
+          "(A)-(B)-(C)-(D)",
+          "(C)-(A)-(B)-(D)",
+          "(B)-(D)-(A)-(C)",
+          "(C)-(D)-(A)-(B)",
+          "(A)-(C)-(D)-(B)"
+        ],
+        "question": "다음 빈칸 (가)~(라)에 들어갈 말을 <보기>에서 골라 순서대로 나열한 것은?\n\n• Jenny is saving her money (가).\n• He watches American movies (나).\n• He went out the back door (다).\n• She will go abroad (라).\n\n<보기>\n(A) so that he can improve listening\n(B) so that nobody could see him\n(C) so that she can fix her bike\n(D) so that she can study art",
+        "explanation": "(가) saving money → fix her bike (C), (나) watches movies → improve listening (A), (다) went out back door → nobody could see (B), (라) go abroad → study art (D). 순서: C-A-B-D."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "4",
+        "number": 56,
+        "options": [
+          "① only",
+          "③ only",
+          "①②",
+          "①③",
+          "②③"
+        ],
+        "question": "다음 중 문장 전환이 바른 것을 <u>모두</u> 고르면?\n\n① I studied hard to pass. = I studied hard so that I could pass.\n② He ran to catch the bus. = He ran so that he catch the bus.\n③ She came early for us to start. = She came early so that we could start.\n④ Turn on the light to see. = Turn on the light so that you see.\n⑤ I woke up early not to be late. = I woke up early so that I won't be late.",
+        "explanation": "① studied(과거) → so that I could pass 올바릅니다. ③ for us to start → so that we could start 올바릅니다. ② catch → could catch(조동사 누락), ④ you see → you can see(조동사 누락), ⑤ won't → wouldn't(woke up은 과거이므로 시제 불일치)."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "1",
+        "number": 57,
+        "options": [
+          "(A) so that - (B) could",
+          "(A) to - (B) could",
+          "(A) in order to - (B) can",
+          "(A) so that - (B) is",
+          "(A) because - (B) could"
+        ],
+        "question": "다음 빈칸 (A), (B)에 들어갈 말이 바르게 짝지어진 것은?\n\nHe spoke slowly (A) _______ others (B) _______ understand him.",
+        "explanation": "주절이 과거(spoke)이므로 so that + 주어 + could가 적절합니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "3",
+        "number": 58,
+        "options": [
+          "I use a map so that I won't get lost.",
+          "She wears a coat so that she won't get cold.",
+          "He hurried so that he would miss the train.",
+          "I turned off the light so that I could sleep.",
+          "We save water so that we can protect nature."
+        ],
+        "question": "다음 중 의미가 어색한 문장은?",
+        "explanation": "③ \"he would miss the train\"(기차를 놓치도록)은 의미상 어색합니다. \"wouldn't miss\"(놓치지 않도록)가 되어야 합니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "2",
+        "number": 59,
+        "options": [
+          "I'll wait here in order that you could find me.",
+          "He invented the phone in order that we can talk.",
+          "I went to bed early in order that I can wake up.",
+          "She studied hard in order that she passed the exam.",
+          "They ran fast in order that they can catch the bus."
+        ],
+        "question": "다음 중 어법상 옳은 문장은?",
+        "explanation": "② 발명(과거)의 목적이 현재까지 지속되므로 can이 허용됩니다. ① will + could = 시제 혼용, ③ went(과거) + can(현재) = 불일치, ④ in order that + 과거형 동사(passed) = 조동사 필요, ⑤ ran(과거) + can(현재) = 불일치."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "5",
+        "number": 60,
+        "options": [
+          "I exercise _______ stay healthy.",
+          "He ran fast _______ catch the bus.",
+          "I study hard _______ pass the test.",
+          "She went to the store _______ buy milk.",
+          "I save money _______ I can buy a car."
+        ],
+        "question": "다음 중 빈칸에 들어갈 말이 나머지 넷과 다른 하나는?",
+        "explanation": "①~④는 \"to/in order to/so as to + 동사원형\" 형태이지만, ⑤는 주어(I) + 조동사(can)가 있으므로 \"so that\"이 필요합니다."
+      }
+    ],
+    "answer_key": [
+      "3",
+      "1",
+      "1",
+      "4",
+      "3",
+      "5",
+      "4",
+      "5",
+      "1",
+      "5",
+      "4",
+      "2",
+      "4",
+      "2",
+      "1",
+      "2",
+      "1",
+      "3",
+      "3",
+      "3",
+      "5",
+      "5",
+      "5",
+      "4",
+      "5",
+      "3",
+      "3",
+      "4",
+      "1",
+      "4",
+      "1",
+      "4",
+      "2",
+      "2",
+      "1",
+      "3",
+      "2",
+      "5",
+      "3",
+      "4",
+      "2",
+      "2",
+      "3",
+      "3",
+      "3",
+      "5",
+      "5",
+      "1",
+      "1",
+      "2",
+      "1",
+      "1",
+      "5",
+      "4",
+      "2",
+      "4",
+      "1",
+      "3",
+      "2",
+      "5"
+    ]
+  },
+  "naesin_problem_sheets_7d1d9bf2-68c4-45f0-bcda-7d4e3dd010c5": {
+    "questions": [
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "3",
+        "number": 1,
+        "options": [
+          "because",
+          "when",
+          "so that",
+          "although",
+          "if"
+        ],
+        "question": "[Part 1] 다음 빈칸에 들어갈 말로 가장 적절한 것은?\nHe exercises every day _______ he can stay healthy.",
+        "explanation": "\"건강을 유지할 수 있도록\"은 목적을 나타내므로 so that이 적절합니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "1",
+        "number": 2,
+        "options": [
+          "so that",
+          "in order to",
+          "so as to",
+          "to",
+          "for the purpose of"
+        ],
+        "question": "다음 빈칸에 들어갈 말로 적절하지 않은 것은?\nI went to a bookstore _______ buy some books.",
+        "explanation": "so that 뒤에는 주어 + 조동사 + 동사 구조가 와야 합니다. \"so that buy\"는 주어와 조동사가 없어 불가합니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "1",
+        "number": 3,
+        "options": [
+          "could",
+          "must",
+          "should",
+          "am",
+          "was"
+        ],
+        "question": "다음 대화의 빈칸에 들어갈 말로 가장 적절한 것은?\nA: Why did you save money?\nB: I saved money so that I _______ buy a new bike.",
+        "explanation": "주절이 과거(saved)이므로 so that절에도 과거형 조동사 could를 사용합니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "4",
+        "number": 4,
+        "options": [
+          "then",
+          "enough",
+          "so",
+          "so that",
+          "completely"
+        ],
+        "question": "다음 문장의 빈칸에 들어갈 말로 가장 적절한 것은?\nPlease turn off the light _______ I can sleep.",
+        "explanation": "\"내가 잠잘 수 있도록\"은 목적을 나타내므로 so that + 주어 + can이 적절합니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "3",
+        "number": 5,
+        "options": [
+          "because",
+          "in order to",
+          "so that",
+          "so as to",
+          "enough to"
+        ],
+        "question": "다음 두 문장을 한 문장으로 연결할 때 빈칸에 가장 적절한 것은?\nKing Sejong invented Hangeul. He wanted all Koreans to read and write easily.\n→ King Sejong invented Hangeul _______ all Koreans could read and write easily.",
+        "explanation": "빈칸 뒤에 주어(all Koreans) + 조동사(could)가 있으므로 절을 이끄는 접속사 so that이 필요합니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "5",
+        "number": 6,
+        "options": [
+          "we can see you",
+          "we won't be late",
+          "we can get well",
+          "we won't get sick",
+          "we can understand you"
+        ],
+        "question": "다음 문장의 빈칸에 들어갈 말로 가장 적절한 것은?\nPlease speak slowly so that _______.",
+        "explanation": "\"천천히 말하다\"와 연결되는 목적은 \"이해할 수 있도록\"이므로 ⑤가 적절합니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "4",
+        "number": 7,
+        "options": [
+          "to buy a new car",
+          "so as to travel",
+          "in order to start a business",
+          "so that I can help others",
+          "for the purpose of taking a trip"
+        ],
+        "question": "다음 빈칸에 들어갈 말로 알맞지 않은 것은?\nI saved money _______.",
+        "explanation": "주절이 과거(saved)인데 ④의 so that절에 현재형 can이 와서 시제가 불일치합니다. could가 와야 합니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "5",
+        "number": 8,
+        "options": [
+          "I could keep in shape",
+          "I could travel to Europe",
+          "I could water the flowers",
+          "I could catch the bus",
+          "I could focus on reading"
+        ],
+        "question": "다음 문장의 빈칸에 들어갈 말로 가장 적절한 것은?\nI turned off the radio so that _______.",
+        "explanation": "\"라디오를 껐다\"와 연결되는 목적은 \"독서에 집중하기 위해\"이므로 ⑤가 적절합니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "1",
+        "number": 9,
+        "options": [
+          "(A) so that - (B) could",
+          "(A) in order to - (B) can",
+          "(A) so - (B) will",
+          "(A) that - (B) is",
+          "(A) because - (B) takes"
+        ],
+        "question": "다음 빈칸에 들어갈 말이 순서대로 바르게 연결된 것은?\nHe quit his job (A) _______ he (B) _______ take care of his baby.",
+        "explanation": "주절이 과거(quit)이므로 so that + 주어 + could가 적절합니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "5",
+        "number": 10,
+        "options": [
+          "buy a new bike",
+          "get a good grade",
+          "read and write easily",
+          "go to other places quickly",
+          "talk to other people in different places"
+        ],
+        "question": "다음 문장의 빈칸에 들어갈 말로 가장 적절한 것은?\nBell invented the telephone so that we can _______.",
+        "explanation": "전화기의 목적은 \"다른 곳에 있는 사람들과 대화할 수 있도록\"이므로 ⑤가 적절합니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "4",
+        "number": 11,
+        "options": [
+          "if",
+          "after",
+          "although",
+          "so that",
+          "while"
+        ],
+        "question": "다음 빈칸에 공통으로 들어갈 접속사는?\n• I'll go to the park _______ I can ride a bike.\n• Turn on the light _______ you can see better.",
+        "explanation": "두 문장 모두 목적을 나타내는 so that이 공통으로 들어갑니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "2",
+        "number": 12,
+        "options": [
+          "can",
+          "could",
+          "will",
+          "is",
+          "are"
+        ],
+        "question": "다음 중 문맥상 빈칸에 가장 적절한 조동사는?\nThe guide walked slowly so that everybody _______ follow him.",
+        "explanation": "주절이 과거(walked)이므로 so that절의 조동사도 과거형 could를 사용해야 시제가 일치합니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "4",
+        "number": 13,
+        "options": [
+          "so that",
+          "in order that",
+          "so as that",
+          "in order to",
+          "that"
+        ],
+        "question": "다음 빈칸에 들어갈 말로 적절하지 않은 것은?\nI went to America _______ I could speak English well.",
+        "explanation": "in order to는 뒤에 동사원형만 올 수 있으므로 \"in order to I could speak\"는 틀립니다. so as that도 올바른 표현이 아닙니다.",
+        "acceptedAnswers": [
+          "4",
+          "3"
+        ]
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "2",
+        "number": 14,
+        "options": [
+          "because",
+          "so that",
+          "such that",
+          "even if",
+          "whether"
+        ],
+        "question": "다음 중 빈칸에 들어갈 말로 가장 적절한 것은?\nTurn in your report _______ I can comment on it.",
+        "explanation": "\"내가 코멘트할 수 있도록\" 목적을 나타내므로 so that이 적절합니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "1",
+        "number": 15,
+        "options": [
+          "so that",
+          "when",
+          "although",
+          "because",
+          "before"
+        ],
+        "question": "다음 빈칸에 알맞은 말을 고르시오.\nHe often walks his dog _______ it can stay healthy.",
+        "explanation": "\"건강을 유지할 수 있도록\" 목적을 나타내므로 so that이 적절합니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "2",
+        "number": 16,
+        "options": [
+          "so as not to",
+          "in order to",
+          "as long as",
+          "such as",
+          "in spite of"
+        ],
+        "question": "[Part 2] 다음 두 문장이 같은 의미가 되도록 빈칸에 알맞은 것은?\nShe donated money so as to help the poor.\n= She donated money _______ help the poor.",
+        "explanation": "\"so as to\"와 같은 의미의 목적 표현은 \"in order to\"입니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "1",
+        "number": 17,
+        "options": [
+          "He reads many books about writing.",
+          "He reads many books to be a writer.",
+          "He reads many books so as to be a writer.",
+          "He reads many books in order to be a writer.",
+          "He reads many books so that he can be a writer."
+        ],
+        "question": "다음 중 의미가 나머지 넷과 다른 하나는?",
+        "explanation": "①은 \"글쓰기에 관한 책\"으로 내용을 나타내고, ②~⑤는 \"작가가 되기 위해\"라는 목적을 나타냅니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "3",
+        "number": 18,
+        "options": [
+          "I exercise so hard what I can lose weight.",
+          "I exercise so hard that I can lose weight.",
+          "I exercise hard so that I can lose weight.",
+          "I lose weight so that I can exercise hard.",
+          "I lose weight in order to exercise hard."
+        ],
+        "question": "다음 문장을 'so that' 구문으로 바르게 영작한 것은?\n\"나는 살을 빼기 위해 열심히 운동한다.\"",
+        "explanation": "\"so that + 주어 + can\" 목적 구문입니다. ②는 \"so hard that\"으로 결과 구문이며, ④⑤는 의미가 반대입니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "3",
+        "number": 19,
+        "options": [
+          "I studied so hard what I passed the test.",
+          "I studied so hard that I passed the test.",
+          "I studied hard so that I could pass the test.",
+          "I passed the test so that I could study hard.",
+          "I passed the test in order to study hard."
+        ],
+        "question": "다음 문장을 'so that' 구문으로 바르게 영작한 것은?\n\"나는 시험에 합격하기 위해 열심히 공부했다.\"",
+        "explanation": "주절이 과거(studied)이므로 so that + could. ②는 \"so hard that\"으로 결과 구문이며, ④⑤는 의미가 반대입니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "3",
+        "number": 20,
+        "options": [
+          "He studies hard to pass the exam.",
+          "He studies hard so as to pass the exam.",
+          "He studied so hard that he could pass the exam.",
+          "He studies hard in order to pass the exam.",
+          "He studies hard in order that he can pass the exam."
+        ],
+        "question": "다음 중 의미가 나머지 넷과 다른 하나는?",
+        "explanation": "③은 \"so + 부사 + that\"(결과 구문: 너무 열심히 공부해서 합격할 수 있었다)이며, 나머지는 모두 목적(\"합격하기 위해\")을 나타냅니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "5",
+        "number": 21,
+        "options": [
+          "I finished my job quickly so as to go home early.",
+          "I finished my job quickly to go home early.",
+          "I finished my job quickly so that I could go home early.",
+          "I finished my job quickly in order that I could go home early.",
+          "I finished my job quickly because I went home early."
+        ],
+        "question": "다음 중 의미가 나머지 넷과 다른 하나는?",
+        "explanation": "⑤는 because(이유)를 나타내고, 나머지는 모두 \"일찍 집에 가기 위해\"라는 목적을 나타냅니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "5",
+        "number": 22,
+        "options": [
+          "I hurried so that I would not be late. = I hurried so as not to be late.",
+          "She exercised to be healthy. = She exercised so that she could be healthy.",
+          "I tried hard so that I could pass. = I tried hard to pass.",
+          "Rachel studies hard so that she can get a prize. = Rachel studies hard so as to get a prize.",
+          "I left early to avoid the rush. = I left early, so I could avoid the rush."
+        ],
+        "question": "다음 중 문장 전환이 어색한 것은?",
+        "explanation": "⑤에서 콤마 + so는 결과를 나타내므로 목적의 to avoid와 의미가 달라집니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "5",
+        "number": 23,
+        "options": [
+          "He saved money to buy a bike.",
+          "He saved money so as to buy a bike.",
+          "He saved money in order to buy a bike.",
+          "He saved money so that he could buy a bike.",
+          "He saved so much money that he couldn't buy a bike."
+        ],
+        "question": "다음 중 의미가 나머지 넷과 다른 하나는?",
+        "explanation": "⑤는 \"so much...that\"(결과 구문: 돈을 너무 많이 모아서 자전거를 살 수 없었다)이며 의미가 다릅니다. 나머지는 모두 \"자전거를 사기 위해\"라는 목적입니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "4",
+        "number": 24,
+        "options": [
+          "② only",
+          "⑤ only",
+          "②④",
+          "②⑤",
+          "④⑤"
+        ],
+        "question": "다음 문장과 의미가 같은 것을 <u>모두</u> 고르면?\n\nShe turned on the TV to watch the news.\n\n① She turned on the TV in order watch the news.\n② She turned on the TV so as to watch the news.\n③ She turned on the TV in order not to watch the news.\n④ She turned on the TV so that she can watch the news.\n⑤ She turned on the TV so that she could watch the news.",
+        "explanation": "② so as to watch = 목적 표현으로 올바릅니다. ⑤ so that she could watch = 과거 시제 일치가 올바릅니다. ① in order 뒤 to 누락, ③ not이 붙어 반대 의미, ④ can은 turned(과거)와 시제 불일치입니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "5",
+        "number": 25,
+        "options": [
+          "We'll do our best so that winning the game.",
+          "We'll do our best so that can win the game.",
+          "We'll do our best in order to we win the game.",
+          "We'll do our best in order to can win the game.",
+          "We'll do our best so that we can win the game."
+        ],
+        "question": "다음 중 우리말을 영작한 것으로 가장 적절한 것은?\n\n\"우리는 게임을 이기기 위해서 최선을 다할 것이다.\"",
+        "explanation": "so that + 주어(we) + 조동사(can) + 동사원형(win)이 올바릅니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "3",
+        "number": 26,
+        "options": [
+          "I woke up early not to miss the bus.",
+          "I woke up early so that I wouldn't miss the bus.",
+          "I woke up so early that I didn't miss the bus.",
+          "I woke up early so as not to miss the bus.",
+          "I woke up early in order that I wouldn't miss the bus."
+        ],
+        "question": "다음 중 의미가 나머지 넷과 다른 하나는?",
+        "explanation": "③은 \"so + 부사 + that\"(결과 구문: 너무 일찍 일어나서 버스를 놓치지 않았다)이며, 나머지는 모두 목적(\"놓치지 않기 위해\")을 나타냅니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "3",
+        "number": 27,
+        "options": [
+          "He practiced hard so that he could learn difficult tricks.",
+          "He practiced hard in order that he could learn difficult tricks.",
+          "He practiced too hard to learn difficult tricks.",
+          "He practiced hard so as to learn difficult tricks.",
+          "He practiced hard to learn difficult tricks."
+        ],
+        "question": "다음 중 의미가 나머지 넷과 다른 하나는?",
+        "explanation": "③은 \"too...to\"(너무 ~해서 ...할 수 없다)로 부정적 결과를 나타냅니다. 나머지는 모두 \"어려운 기술을 배우기 위해\"라는 목적입니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "4",
+        "number": 28,
+        "options": [
+          "① only",
+          "⑤ only",
+          "①③",
+          "①⑤",
+          "③⑤"
+        ],
+        "question": "다음 문장의 밑줄 친 부분과 의미가 같은 것은? (정답 2개)\n\nWe saved money <u>to take a vacation</u>.\n\n① in order to take a long vacation.\n② so as not to take a long vacation.\n③ in order that to take a long vacation.\n④ in order to we can take a long vacation.\n⑤ in order that we could take a long vacation.",
+        "explanation": "① in order to + V원형 = 목적 표현으로 올바릅니다. ⑤ in order that + 주어 + could = 목적절로 올바릅니다. ② not이 붙어 반대 의미, ③ in order that 뒤에 to가 불필요, ④ in order to 뒤에 주어+조동사 불가입니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "1",
+        "number": 29,
+        "options": [
+          "He turned down the radio so that I could sleep. = He turned down the radio in order to sleep.",
+          "Jim turned on TV so that he could watch news. = Jim turned on TV in order to watch news.",
+          "He goes to bed early so that he can sleep. = He goes to bed early to sleep.",
+          "Brian practiced hard so that he could be a dancer. = Brian practiced hard so as to be a dancer.",
+          "I took my umbrella so that I could share it. = I took my umbrella so as to share it."
+        ],
+        "question": "다음 중 문장의 의미가 서로 다른 것은?",
+        "explanation": "①에서 \"so that I could sleep\"(나의 목적)과 \"in order to sleep\"(그의 목적)은 주어가 달라 의미가 다릅니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "4",
+        "number": 30,
+        "options": [
+          "(A) went",
+          "(D) invented",
+          "(E) talk",
+          "(B) wait",
+          "(C) could"
+        ],
+        "question": "다음 빈칸 (A)~(E)에 들어갈 단어로 적절하지 않은 것은?\n\n• Andy (A) _______ to bed early in order that he (B) _______ wake up early.\n• Bell (D) _______ the telephone in order that we (C) _______ (E) _______ to others.",
+        "explanation": "(B) 위치에는 \"could\"와 같은 조동사가 와야 합니다. \"wait\"은 조동사가 아니므로 \"he wait wake up\"은 성립하지 않습니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "1",
+        "number": 31,
+        "options": [
+          "I was nervous, so that I could hardly speak.",
+          "Speak louder so that everyone can hear you.",
+          "She ran so that she could get there on time.",
+          "I jog every day so that I can stay healthy.",
+          "He drinks milk so that he can grow taller."
+        ],
+        "question": "[Part 3] 다음 중 밑줄 친 so that의 쓰임이 나머지 넷과 다른 하나는?",
+        "explanation": "①은 콤마 + so that으로 결과(긴장해서 말을 거의 못 했다)를 나타냅니다. ②~⑤는 모두 목적(~할 수 있도록)을 나타냅니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "4",
+        "number": 32,
+        "options": [
+          "③ only",
+          "⑤ only",
+          "③④",
+          "③⑤",
+          "④⑤"
+        ],
+        "question": "다음 우리말에 맞게 영작한 것을 <u>모두</u> 고르면?\n\n\"Sam은 그 기차를 놓치지 않기 위해 일찍 일어났다.\"\n\n① Sam woke up early to not miss the train.\n② Sam woke up early in order to miss the train.\n③ Sam woke up early so as not to miss the train.\n④ Sam woke up so early that he could not miss the train.\n⑤ Sam woke up early so that he would not miss the train.",
+        "explanation": "③ so as not to + V원형 = 올바른 부정 목적 표현입니다. ⑤ so that + would not = 올바른 목적절입니다. ① to not(비표준 어순), ② in order to miss(긍정=놓치려고), ④ so early that(결과 구문)입니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "2",
+        "number": 33,
+        "options": [
+          "He took a taxi so that he wouldn't be late.",
+          "I gave him a knife so that he couldn't peel the fruit.",
+          "He tried his best so that he could win the contest.",
+          "This flower opens up so that it can get sunlight.",
+          "I turned off the TV so that my brother could study."
+        ],
+        "question": "다음 중 의미상 어색한 문장은?",
+        "explanation": "②에서 칼을 줬는데 \"couldn't peel\"(과일을 깎을 수 없도록)은 의미상 어색합니다. \"could peel\"이 되어야 합니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "2",
+        "number": 34,
+        "options": [
+          "Please move to one side so that we can all see.",
+          "Turn the fish carefully so as to it won't burn.",
+          "I drink coffee so that I can concentrate on my work.",
+          "He exercises every day in order that he can stay healthy.",
+          "Please speak louder so that all of us can hear you."
+        ],
+        "question": "다음 중 어법상 어색한 문장은?",
+        "explanation": "② \"so as to\" 뒤에는 동사원형만 올 수 있으므로 \"so as to it won't burn\"은 틀립니다. \"so that it won't burn\"이 올바릅니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "1",
+        "number": 35,
+        "options": [
+          "Watch out so as not to falling.",
+          "I study English so as to travel abroad.",
+          "I practiced hard so as to win the game.",
+          "I got up early so as not to miss the train.",
+          "I went to the market so as to buy some food."
+        ],
+        "question": "다음 중 어법상 어색한 문장을 고르면?",
+        "explanation": "\"so as not to\" 뒤에는 동사원형이 와야 합니다. \"falling\" → \"fall\"이 올바릅니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "3",
+        "number": 36,
+        "options": [
+          "I listen to radio so that I can improve my skills.",
+          "He worked hard so that he could make money.",
+          "Please leave your number so that she can't call you.",
+          "We use public transport so that we can save energy.",
+          "Miran hurried so that she could see her friend."
+        ],
+        "question": "다음 중 의미가 어색한 문장은?",
+        "explanation": "③에서 전화번호를 남기는데 \"can't call\"(전화할 수 없도록)은 의미상 어색합니다. \"can call\"이 되어야 합니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "2",
+        "number": 37,
+        "options": [
+          "Eunyoung set the alarm not in order to oversleep.",
+          "Many parents ask their children not to hang out with bad friends.",
+          "Take off your wet clothes so as to catch a cold.",
+          "Handong studied so hard in order to fail the test.",
+          "Nuri told lies so as to not hurt my feeling."
+        ],
+        "question": "다음 중 어법 및 의미가 자연스러운 문장은?",
+        "explanation": "② ask + 목적어 + not to V = 올바른 부정 부탁 표현입니다. ① not in order to → in order not to, ③ so as to catch a cold(감기 걸리려고?) → so as not to, ④ in order to fail(시험 떨어지려고?) → 의미 이상, ⑤ so as to not → so as not to."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "5",
+        "number": 38,
+        "options": [
+          "She studied hard to get 'A' in English.",
+          "They work together for the championship.",
+          "I came early so that I could get a better seat.",
+          "I did the dishes so that my mom could get rest.",
+          "He ran to the bus stop in order to he could catch it."
+        ],
+        "question": "다음 중 어법상 어색한 문장은?",
+        "explanation": "\"in order to\" 뒤에는 동사원형만 올 수 있으므로 \"in order to he could catch\"는 틀립니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "3",
+        "number": 39,
+        "options": [
+          "① only",
+          "② only",
+          "①②",
+          "①④",
+          "②④"
+        ],
+        "question": "다음 중 어법상 어색한 문장은? (정답 2개)\n\n① I woke up early so that I will not be late.\n② He was so wisdom that he was able to solve it.\n③ I took a taxi so that I could get there on time.\n④ I've saved money to buy a computer.\n⑤ I took my umbrella for my mother.",
+        "explanation": "① woke up(과거)인데 will(현재/미래) = 시제 불일치. would not이 와야 합니다. ② wisdom은 명사이므로 \"so wisdom\"은 틀립니다. \"so wise\"(형용사)가 올바릅니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "4",
+        "number": 40,
+        "options": [
+          "Our teacher brought a DVD so that we could watch a movie.",
+          "Giho made cookies so that we could eat them.",
+          "Hajin took pictures so that we could remember the day.",
+          "Tom couldn't get in so that he had left his ticket.",
+          "We sang a song so that she would know we loved her."
+        ],
+        "question": "다음 중 밑줄 친 so that의 쓰임이 흐름상 어색한 것은?",
+        "explanation": "④에서 \"so that he had left his ticket\"은 의미상 어색합니다. \"들어갈 수 없었다\"의 이유는 because이지 so that(목적)이 아닙니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "2",
+        "number": 41,
+        "options": [
+          "(A), (B)",
+          "(A), (D)",
+          "(C), (D)",
+          "(A), (C)",
+          "(B), (D)"
+        ],
+        "question": "다음 중 어법상 옳은 문장끼리 짝지어진 것은?\n\n(A) She is so wise that everyone respects her.\n(B) He tried his best so that he can win the race.\n(C) Speak too clearly that they can understand you.\n(D) She was very careful so that she wouldn't drop the egg.",
+        "explanation": "(A) so + 형용사 + that = 결과 구문으로 올바릅니다. (D) so that + wouldn't = 목적절로 올바릅니다. (B) tried(과거) + can(현재) = 시제 불일치, (C) too → so가 되어야 합니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "2",
+        "number": 42,
+        "options": [
+          "in order that get a good seat",
+          "so as to get a good seat",
+          "in order to they could get a good seat",
+          "so as to they could get a good seat",
+          "to they could get a good seat"
+        ],
+        "question": "다음 문장의 밑줄 친 부분과 의미가 같은 것은?\n\nThey started early <u>so that they could get a good seat</u>.",
+        "explanation": "\"so as to + 동사원형\"은 목적을 나타내는 올바른 표현입니다. 나머지는 to/so as to 뒤에 주어+조동사가 와서 틀립니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "3",
+        "number": 43,
+        "options": [
+          "I went to the store so as to buy some milk.",
+          "He studies hard in order that he can succeed.",
+          "I hurry so that I wouldn't miss the train.",
+          "She works hard so that her family can live in comfort.",
+          "Speak loudly so that everybody can hear you."
+        ],
+        "question": "다음 중 어법상 어색한 곳이 있는 문장은?",
+        "explanation": "③ hurry(현재)인데 wouldn't(과거) = 시제 불일치. \"won't\"이 와야 합니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "3",
+        "number": 44,
+        "options": [
+          "I study hard <u>so that</u> I can pass.",
+          "He ran fast <u>so that</u> he could catch the bus.",
+          "I was <u>so</u> tired <u>that</u> I couldn't walk.",
+          "She saves money <u>so that</u> she can travel.",
+          "We use public transport <u>so that</u> we can save energy."
+        ],
+        "question": "다음 중 밑줄 친 부분의 쓰임이 나머지와 다른 것은?",
+        "explanation": "③은 \"so + 형용사 + that\"(결과 구문)이며, 나머지는 모두 \"so that\"(목적 구문)입니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "3",
+        "number": 45,
+        "options": [
+          "He was so wisdom that he solved it.",
+          "I drove fast so that he can get there.",
+          "The kids practiced hard so as to win.",
+          "Jack skipped dinner in order that fit in jeans.",
+          "She's staying in US so that she can improves her English."
+        ],
+        "question": "다음 중 어법상 옳은 문장을 고르시오.",
+        "explanation": "③ \"so as to + 동사원형(win)\"은 올바릅니다. ① wisdom → wise(형용사), ② drove(과거) + can(현재) = 시제 불일치, ④ in order that 뒤 주어 누락, ⑤ can + improves → can + improve."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "5",
+        "number": 46,
+        "options": [
+          "Soyun was so careful that she wouldn't drop the egg.",
+          "Soyun was so careful but she wouldn't drop the egg.",
+          "Soyun was very careful so that she would drop the egg.",
+          "Soyun was so careful and she wouldn't drop the egg.",
+          "Soyun was very careful so that she wouldn't drop the egg."
+        ],
+        "question": "[Part 4] 다음 우리말을 바르게 영작한 것은?\n\n\"소윤이는 계란을 떨어트리지 않기 위해 매우 조심했다.\"",
+        "explanation": "\"~하기 위해\"는 목적이므로 \"so that + wouldn't\"(⑤)가 올바릅니다. ① \"so...that\"은 결과 구문, ② but은 역접, ③ \"would drop\"은 긍정(떨어트리도록)으로 의미 반대, ④ and는 단순 연결입니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "5",
+        "number": 47,
+        "options": [
+          "나는 살을 빼기 위해 달린다. → I run so that I can lose weight.",
+          "그는 잊지 않기 위해 적었다. → He wrote it down so that he wouldn't forget.",
+          "그녀는 책을 읽기 위해 TV를 껐다. → She turned off the TV to read a book.",
+          "우리는 전망을 보기 위해 높이 올라갔다. → We went up high in order to see the view.",
+          "나는 그를 만나기 위해 여기 왔다. → I came here because I could meet him."
+        ],
+        "question": "다음 중 영작이 바르지 않은 것은?",
+        "explanation": "\"만나기 위해\"는 목적이므로 because(이유)가 아닌 to/so that이 와야 합니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "1",
+        "number": 48,
+        "options": [
+          "I will change you so that you can meet the prince.",
+          "You will change I so that you can meet the prince.",
+          "I will change you so that the prince can meet you.",
+          "You will change so that I can meet the prince.",
+          "I will change the prince so that you can meet him."
+        ],
+        "question": "다음 단어들을 바르게 배열하여 문장을 완성하시오.\n\n(change, can, that, meet, I, will, you, so, the prince, you)",
+        "explanation": "\"I will change you so that you can meet the prince.\"가 주어진 단어로 만들 수 있는 올바른 문장입니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "1",
+        "number": 49,
+        "options": [
+          "Turn the light on so that I can see you.",
+          "Turn on the light so that you can see I.",
+          "I can see you so that turn the light on.",
+          "So that I can see you turn the light on.",
+          "Light turn on the so that I can see you."
+        ],
+        "question": "다음 단어들을 바르게 배열하여 문장을 완성하시오.\n\n(can, I, light, on, that, the, turn, see, so, you)",
+        "explanation": "\"Turn the light on so that I can see you.\"가 올바른 배열입니다. ② \"see I\" → \"see me\"(목적격 오류)."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "2",
+        "number": 50,
+        "options": [
+          "Mom prepared breakfast so that I could rest.",
+          "I prepared breakfast so that Mom could rest.",
+          "So that Mom could rest I prepared breakfast.",
+          "Breakfast was prepared so that I could rest Mom.",
+          "I could rest so that Mom prepared breakfast."
+        ],
+        "question": "다음 단어들을 바르게 배열하여 문장을 완성하시오.\n\n(I, could, rest, prepared, so, Mom, breakfast, that)",
+        "explanation": "\"I prepared breakfast so that Mom could rest.\"가 가장 자연스러운 문장입니다. 내가 아침을 준비해서 엄마가 쉴 수 있도록."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "1",
+        "number": 51,
+        "options": [
+          "can",
+          "could",
+          "will",
+          "would",
+          "must"
+        ],
+        "question": "다음 우리말을 영어로 옮길 때 빈칸에 알맞은 조동사는?\n\n\"사막여우의 발은 뜨거운 모래 위를 걸을 수 있도록 털로 덮여 있다.\"\n\nThe fennec fox's feet are covered with fur so that it _______ walk on hot sand.",
+        "explanation": "주절이 현재(are covered)이므로 so that절에도 현재형 조동사 can을 사용합니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "1",
+        "number": 52,
+        "options": [
+          "I studied hard so that I could pass the exam.",
+          "I studied so hard that I could pass the exam.",
+          "So that I could pass the exam I studied hard.",
+          "I could pass the exam so that I studied hard.",
+          "I studied hard in order that pass the exam."
+        ],
+        "question": "다음 단어들을 바르게 배열하여 문장을 완성하시오.\n\n(studied, so, I, could, that, hard, I, the exam, pass)",
+        "explanation": "\"I studied hard so that I could pass the exam.\"이 목적을 나타내는 올바른 배열입니다. ②는 \"so hard that\"(결과 구문)으로 의미가 다릅니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "5",
+        "number": 53,
+        "options": [
+          "I pressed the button to turn on the computer.",
+          "Sora bought the book so that she could study English.",
+          "Junho turned off the light so that he could sleep well.",
+          "He went to India so that he could help the poor.",
+          "We should develop habits so that we live happy."
+        ],
+        "question": "다음 중 영작이 어색한 것을 고르시오.",
+        "explanation": "⑤ \"so that\" 뒤에 조동사(can)가 없고, \"happy\" → \"happily\"(부사) 또는 \"live a happy life\"가 되어야 합니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "4",
+        "number": 54,
+        "options": [
+          "I go jogging to keep healthy.",
+          "I go jogging so as to keep healthy.",
+          "I go jogging in order to keep healthy.",
+          "I go jogging enough to keep healthy.",
+          "I go jogging so that I can keep healthy."
+        ],
+        "question": "다음 중 의미가 나머지 넷과 다른 하나는?",
+        "explanation": "④ \"enough to\"는 \"~할 만큼 충분히\"라는 정도를 나타내며, 나머지는 모두 \"건강을 유지하기 위해\"라는 목적을 나타냅니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "2",
+        "number": 55,
+        "options": [
+          "(A)-(B)-(C)-(D)",
+          "(C)-(A)-(B)-(D)",
+          "(B)-(D)-(A)-(C)",
+          "(C)-(D)-(A)-(B)",
+          "(A)-(C)-(D)-(B)"
+        ],
+        "question": "다음 빈칸 (가)~(라)에 들어갈 말을 <보기>에서 골라 순서대로 나열한 것은?\n\n• Jenny is saving her money (가).\n• He watches American movies (나).\n• He went out the back door (다).\n• She will go abroad (라).\n\n<보기>\n(A) so that he can improve listening\n(B) so that nobody could see him\n(C) so that she can fix her bike\n(D) so that she can study art",
+        "explanation": "(가) saving money → fix her bike (C), (나) watches movies → improve listening (A), (다) went out back door → nobody could see (B), (라) go abroad → study art (D). 순서: C-A-B-D."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "4",
+        "number": 56,
+        "options": [
+          "① only",
+          "③ only",
+          "①②",
+          "①③",
+          "②③"
+        ],
+        "question": "다음 중 문장 전환이 바른 것을 <u>모두</u> 고르면?\n\n① I studied hard to pass. = I studied hard so that I could pass.\n② He ran to catch the bus. = He ran so that he catch the bus.\n③ She came early for us to start. = She came early so that we could start.\n④ Turn on the light to see. = Turn on the light so that you see.\n⑤ I woke up early not to be late. = I woke up early so that I won't be late.",
+        "explanation": "① studied(과거) → so that I could pass 올바릅니다. ③ for us to start → so that we could start 올바릅니다. ② catch → could catch(조동사 누락), ④ you see → you can see(조동사 누락), ⑤ won't → wouldn't(woke up은 과거이므로 시제 불일치)."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "1",
+        "number": 57,
+        "options": [
+          "(A) so that - (B) could",
+          "(A) to - (B) could",
+          "(A) in order to - (B) can",
+          "(A) so that - (B) is",
+          "(A) because - (B) could"
+        ],
+        "question": "다음 빈칸 (A), (B)에 들어갈 말이 바르게 짝지어진 것은?\n\nHe spoke slowly (A) _______ others (B) _______ understand him.",
+        "explanation": "주절이 과거(spoke)이므로 so that + 주어 + could가 적절합니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "3",
+        "number": 58,
+        "options": [
+          "I use a map so that I won't get lost.",
+          "She wears a coat so that she won't get cold.",
+          "He hurried so that he would miss the train.",
+          "I turned off the light so that I could sleep.",
+          "We save water so that we can protect nature."
+        ],
+        "question": "다음 중 의미가 어색한 문장은?",
+        "explanation": "③ \"he would miss the train\"(기차를 놓치도록)은 의미상 어색합니다. \"wouldn't miss\"(놓치지 않도록)가 되어야 합니다."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "2",
+        "number": 59,
+        "options": [
+          "I'll wait here in order that you could find me.",
+          "He invented the phone in order that we can talk.",
+          "I went to bed early in order that I can wake up.",
+          "She studied hard in order that she passed the exam.",
+          "They ran fast in order that they can catch the bus."
+        ],
+        "question": "다음 중 어법상 옳은 문장은?",
+        "explanation": "② 발명(과거)의 목적이 현재까지 지속되므로 can이 허용됩니다. ① will + could = 시제 혼용, ③ went(과거) + can(현재) = 불일치, ④ in order that + 과거형 동사(passed) = 조동사 필요, ⑤ ran(과거) + can(현재) = 불일치."
+      },
+      {
+        "tag": "단일",
+        "type": "single_choice",
+        "answer": "5",
+        "number": 60,
+        "options": [
+          "I exercise _______ stay healthy.",
+          "He ran fast _______ catch the bus.",
+          "I study hard _______ pass the test.",
+          "She went to the store _______ buy milk.",
+          "I save money _______ I can buy a car."
+        ],
+        "question": "다음 중 빈칸에 들어갈 말이 나머지 넷과 다른 하나는?",
+        "explanation": "①~④는 \"to/in order to/so as to + 동사원형\" 형태이지만, ⑤는 주어(I) + 조동사(can)가 있으므로 \"so that\"이 필요합니다."
+      }
+    ],
+    "answer_key": [
+      "3",
+      "1",
+      "1",
+      "4",
+      "3",
+      "5",
+      "4",
+      "5",
+      "1",
+      "5",
+      "4",
+      "2",
+      "4",
+      "2",
+      "1",
+      "2",
+      "1",
+      "3",
+      "3",
+      "3",
+      "5",
+      "5",
+      "5",
+      "4",
+      "5",
+      "3",
+      "3",
+      "4",
+      "1",
+      "4",
+      "1",
+      "4",
+      "2",
+      "2",
+      "1",
+      "3",
+      "2",
+      "5",
+      "3",
+      "4",
+      "2",
+      "2",
+      "3",
+      "3",
+      "3",
+      "5",
+      "5",
+      "1",
+      "1",
+      "2",
+      "1",
+      "1",
+      "5",
+      "4",
+      "2",
+      "4",
+      "1",
+      "3",
+      "2",
+      "5"
+    ]
+  }
+}
