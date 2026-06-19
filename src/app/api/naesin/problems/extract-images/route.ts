@@ -5,7 +5,8 @@ import { logger } from '@/lib/logger';
 import { checkRateLimit } from '@/lib/api/rate-limit';
 import Anthropic from '@anthropic-ai/sdk';
 import { parseAiJsonArray } from '@/lib/ai-json';
-import { isUnanswerableImageQuestion } from '@/lib/validation/problem-validator';
+import { isUnanswerableImageQuestion, backfillSharedPassages } from '@/lib/validation/problem-validator';
+import type { NaesinProblemQuestion } from '@/types/naesin';
 
 export const maxDuration = 300;
 
@@ -158,9 +159,12 @@ export async function POST(request: NextRequest) {
         return true;
       });
 
+    // 공통 지문 자동 복제: "위 글/위 대화" 후속 문항에 앞 지문을 복사(첫 문항에만 지문 넣는 경우 보정).
+    const passaged = backfillSharedPassages(dedup as unknown as NaesinProblemQuestion[]) as unknown as Record<string, unknown>[];
+
     // 그림·사진·지도·그래프 의존 문항은 미리보기에 노출하지 않고 추출 단계에서 제거(표는 유지).
-    const before = dedup.length;
-    const questions = dedup.filter((q) => !isUnanswerableImageQuestion(String(q.question ?? '')));
+    const before = passaged.length;
+    const questions = passaged.filter((q) => !isUnanswerableImageQuestion(String(q.question ?? '')));
     questions.forEach((q, i) => { q.number = i + 1; });
     const removedImageCount = before - questions.length;
 

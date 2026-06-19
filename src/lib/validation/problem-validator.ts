@@ -329,6 +329,51 @@ export function isUnanswerableImageQuestion(text: string): boolean {
   return true;
 }
 
+// ── 공통 지문 자동 복제 ──
+// "[N~M] 다음 글을 읽고…"처럼 여러 문항이 한 지문을 공유하면, 추출 모델(Haiku)이 지문을
+// 세트의 첫 문항에만 넣고 "위 글/위 대화" 후속 문항엔 빠뜨리는 경우가 많다(프롬프트 규칙을
+// 확률적으로만 따름). 후속 문항에 바로 앞 지문 보유 문항의 본문을 결정적으로 복사해 보정한다.
+const REFERS_PASSAGE_ABOVE = /위\s*글|위\s*대화|윗글/;
+/** 영어 단어 수(2글자+ 알파벳 토큰) */
+function englishWordCount(text: string): number {
+  return (text.match(/[A-Za-z]{2,}/g) || []).length;
+}
+/** 자체 지문(긴 영어 본문) 보유 여부 — 지문은 보통 40단어+, 후속 문항 stem은 30단어 미만 */
+function hasOwnPassage(text: string): boolean {
+  return englishWordCount(text) >= 40;
+}
+/** 지문 보유 문항에서 영어 본문 블록만 추출(선두 한국어 지시문 제외) */
+function extractPassageBlock(text: string): string | null {
+  const lines = text.split('\n');
+  const start = lines.findIndex((l) => englishWordCount(l) >= 6);
+  if (start === -1) return null;
+  return lines.slice(start).join('\n').trim() || null;
+}
+
+/**
+ * 공통 지문 자동 복제. "위 글/위 대화"를 가리키는데 지문이 없는 문항에,
+ * 직전(최근 LOOKBACK개 이내) 지문 보유 문항의 본문을 복사해 앞에 붙인다.
+ * 이미 지문이 있으면(40단어+) 건드리지 않으므로 멱등.
+ */
+export function backfillSharedPassages(
+  questions: NaesinProblemQuestion[],
+): NaesinProblemQuestion[] {
+  const LOOKBACK = 8;
+  return questions.map((q, i) => {
+    const text = q.question;
+    if (typeof text !== 'string' || !REFERS_PASSAGE_ABOVE.test(text) || hasOwnPassage(text)) return q;
+    for (let j = i - 1; j >= 0 && j >= i - LOOKBACK; j--) {
+      const src = questions[j].question;
+      if (typeof src === 'string' && hasOwnPassage(src)) {
+        const passage = extractPassageBlock(src);
+        if (passage) return { ...q, question: `${passage}\n\n${text}` };
+        break;
+      }
+    }
+    return q;
+  });
+}
+
 // ── Pre-save sanitization ──
 
 /**
@@ -491,8 +536,11 @@ export function sanitizeQuestions(
     return out;
   });
 
+  // Rule 9: 공통 지문 자동 복제 (LLM이 후속 문항에 지문을 안 넣은 경우 보정)
+  const withPassages = backfillSharedPassages(sanitized);
+
   // Rule 8: Remove unanswerable image-referencing questions (no inline description)
-  const filtered = sanitized.filter((q) => {
+  const filtered = withPassages.filter((q) => {
     const text = q.question || '';
     return !isUnanswerableImageQuestion(text);
   });

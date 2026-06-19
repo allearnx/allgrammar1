@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { validateProblemStructure, sanitizeQuestions, validateBeforeSave, validateAnswerKey } from '@/lib/validation/problem-validator';
+import { validateProblemStructure, sanitizeQuestions, validateBeforeSave, validateAnswerKey, backfillSharedPassages } from '@/lib/validation/problem-validator';
 import type { NaesinProblemQuestion } from '@/types/naesin';
 
 function makeMcq(n: number, answer: number = (n % 5) + 1): NaesinProblemQuestion {
@@ -595,6 +595,48 @@ describe('validateBeforeSave', () => {
       ];
       const { questions } = sanitizeQuestions(qs);
       expect(questions.length).toBe(1);
+    });
+  });
+
+  describe('공통 지문 자동 복제 (backfillSharedPassages)', () => {
+    const PASSAGE = 'Do you have any money worries? You may think you are a smart shopper, but hold on. There are various marketing strategies which influence your decisions every single day. Learning about them will help you become a smarter shopper who spends money wisely and saves more for the future, so let us look at three common examples together right now.';
+    it('"위 글" 후속 문항에 앞 지문을 복사', () => {
+      const qs: NaesinProblemQuestion[] = [
+        { number: 1, question: `다음 글을 읽고 물음에 답하시오.\n\n${PASSAGE}`, answer: '1', options: ['a', 'b', 'c', 'd', 'e'] },
+        { number: 2, question: '윗글의 요지로 알맞은 것은?', answer: '2', options: ['a', 'b', 'c', 'd', 'e'] },
+        { number: 3, question: '위 글의 내용과 일치하는 것은?', answer: '3', options: ['a', 'b', 'c', 'd', 'e'] },
+      ];
+      const out = backfillSharedPassages(qs);
+      expect(out[1].question).toContain('marketing strategies');
+      expect(out[2].question).toContain('marketing strategies');
+      // 후속 문항의 원래 stem도 보존
+      expect(out[1].question).toContain('윗글의 요지');
+    });
+
+    it('이미 지문이 있는 문항은 건드리지 않음 (멱등)', () => {
+      const qs: NaesinProblemQuestion[] = [
+        { number: 1, question: `다음 글을 읽고 물음에 답하시오.\n\n${PASSAGE}`, answer: '1' },
+        { number: 2, question: `${PASSAGE}\n\n윗글의 주제는?`, answer: '2' },
+      ];
+      const out = backfillSharedPassages(qs);
+      expect(out[1].question).toBe(qs[1].question); // 변화 없음
+    });
+
+    it('앞에 지문 보유 문항이 없으면 그대로 둠', () => {
+      const qs: NaesinProblemQuestion[] = [
+        { number: 1, question: '위 대화의 내용과 일치하는 것은?', answer: '1', options: ['a', 'b', 'c', 'd', 'e'] },
+      ];
+      const out = backfillSharedPassages(qs);
+      expect(out[0].question).toBe('위 대화의 내용과 일치하는 것은?');
+    });
+
+    it('지문 미참조 문항은 영향 없음', () => {
+      const qs: NaesinProblemQuestion[] = [
+        { number: 1, question: `다음 글을 읽고 물음에 답하시오.\n\n${PASSAGE}`, answer: '1' },
+        { number: 2, question: '다음 중 어법상 어색한 것은?', answer: '2', options: ['a', 'b', 'c', 'd', 'e'] },
+      ];
+      const out = backfillSharedPassages(qs);
+      expect(out[1].question).toBe('다음 중 어법상 어색한 것은?');
     });
   });
 
