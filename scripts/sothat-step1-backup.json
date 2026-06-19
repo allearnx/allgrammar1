@@ -1,0 +1,5023 @@
+{
+  "naesin_templates_82f980ac-8383-4295-b5fc-2f94bcdf4a22": [
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "2",
+      "number": 1,
+      "options": [
+        "can",
+        "could"
+      ],
+      "question": "[Part 1] 괄호 안에서 알맞은 표현을 고르시오.\n\nI studied hard so that I (can / could) pass the exam.",
+      "explanation": "주절이 과거(studied)이므로 종속절도 could"
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "1",
+      "number": 2,
+      "options": [
+        "can",
+        "will"
+      ],
+      "question": "Speak slowly so that others (can / will) understand you.",
+      "explanation": "명령문은 현재 시제이므로 can"
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "1",
+      "number": 3,
+      "options": [
+        "order",
+        "so"
+      ],
+      "question": "We went early in (order / so) that we could get good seats.",
+      "explanation": "in order that = so that (목적)"
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "1",
+      "number": 4,
+      "options": [
+        "as",
+        "that"
+      ],
+      "question": "He married her so (as / that) to be with her forever.",
+      "explanation": "so as to + 동사원형 = ~하기 위해"
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "2",
+      "number": 5,
+      "options": [
+        "will",
+        "would"
+      ],
+      "question": "I hurried so that I (will / would) not miss the train.",
+      "explanation": "주절이 과거(hurried)이므로 would"
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "1",
+      "number": 6,
+      "options": [
+        "can",
+        "could"
+      ],
+      "question": "Turn the music down so that I (can / could) read the book.",
+      "explanation": "명령문은 현재 시제이므로 can"
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "1",
+      "number": 7,
+      "options": [
+        "can",
+        "could"
+      ],
+      "question": "I will bring the map so that we (can / could) find the way easily.",
+      "explanation": "주절이 미래(will)이므로 can"
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "2",
+      "number": 8,
+      "options": [
+        "can",
+        "could"
+      ],
+      "question": "The Wright brothers invented the airplane so that we (can / could) go to other places quickly.",
+      "explanation": "주절이 과거(invented)이므로 could"
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "1",
+      "number": 9,
+      "options": [
+        "so that",
+        "because"
+      ],
+      "question": "I go for a walk every morning (so that / because) I can stay healthy.",
+      "explanation": "건강 유지를 위해(목적) → so that. because는 이유."
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "1",
+      "number": 10,
+      "options": [
+        "can",
+        "will"
+      ],
+      "question": "Gwen goes jogging so that she (can / will) stay in shape.",
+      "explanation": "주절이 현재(goes)이므로 can"
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "2",
+      "number": 11,
+      "options": [
+        "can",
+        "could"
+      ],
+      "question": "Rachel bought a swimsuit so that she (can / could) swim in the pool.",
+      "explanation": "주절이 과거(bought)이므로 could"
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "1",
+      "number": 12,
+      "options": [
+        "can",
+        "will"
+      ],
+      "question": "Justin studies hard so that he (can / will) be a lawyer.",
+      "explanation": "주절이 현재(studies)이므로 can"
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "2",
+      "number": 13,
+      "options": [
+        "can",
+        "could"
+      ],
+      "question": "I called Tiffany so that I (can / could) invite her to my party.",
+      "explanation": "주절이 과거(called)이므로 could"
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "1",
+      "number": 14,
+      "options": [
+        "can",
+        "could"
+      ],
+      "question": "He practices running so that he (can / could) finish the marathon.",
+      "explanation": "주절이 현재(practices)이므로 can"
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "1",
+      "number": 15,
+      "options": [
+        "can",
+        "could"
+      ],
+      "question": "Jiho is making a cake so that he (can / could) make his mom happy.",
+      "explanation": "주절이 현재진행(is making)이므로 can"
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "1",
+      "number": 16,
+      "options": [
+        "don't",
+        "didn't"
+      ],
+      "question": "Leave early so that you (don't / didn't) miss the bus.",
+      "explanation": "명령문은 현재 시제이므로 don't"
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "2",
+      "number": 17,
+      "options": [
+        "can",
+        "could"
+      ],
+      "question": "I went to Canada so that I (can / could) learn English.",
+      "explanation": "주절이 과거(went)이므로 could"
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "1",
+      "number": 18,
+      "options": [
+        "can",
+        "could"
+      ],
+      "question": "Step forward so that you (can / could) take a closer look.",
+      "explanation": "명령문은 현재 시제이므로 can"
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "1",
+      "number": 19,
+      "options": [
+        "can",
+        "could"
+      ],
+      "question": "I'll leave the door open so that you (can / could) come in.",
+      "explanation": "주절이 미래(will)이므로 can"
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "1",
+      "number": 20,
+      "options": [
+        "can",
+        "will"
+      ],
+      "question": "Please speak louder so that all of us (can / will) hear you.",
+      "explanation": "명령문은 현재 시제이므로 can"
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "2",
+      "number": 21,
+      "options": [
+        "can",
+        "could"
+      ],
+      "question": "We climbed higher so that we (can / could) get a better view.",
+      "explanation": "주절이 과거(climbed)이므로 could"
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "1",
+      "number": 22,
+      "options": [
+        "can",
+        "could"
+      ],
+      "question": "Switch the light off so that we (can / could) sleep well.",
+      "explanation": "명령문은 현재 시제이므로 can"
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "2",
+      "number": 23,
+      "options": [
+        "can",
+        "could"
+      ],
+      "question": "I gave her my phone number so that she (can / could) keep in touch.",
+      "explanation": "주절이 과거(gave)이므로 could"
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "1",
+      "number": 24,
+      "options": [
+        "I",
+        "can"
+      ],
+      "question": "I often stop working so that (I / can) can take a rest.",
+      "explanation": "so that 뒤에 주어+조동사 필수. so that I can"
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "1",
+      "number": 25,
+      "options": [
+        "that",
+        "what"
+      ],
+      "question": "She made a cake so (that / what) she could give it to her boyfriend.",
+      "explanation": "so that + 주어 + 조동사. what은 불가."
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "He ran so that he might become a champion.",
+      "number": 26,
+      "question": "[Part 2] 다음 문장을 so that 구문으로 바꿔 쓰시오.\n\nHe ran to become a champion.",
+      "explanation": "to부정사 목적을 so that + 주어 + 조동사로 전환. 과거이므로 might/could 사용.",
+      "acceptedAnswers": [
+        "He ran so that he might become a champion",
+        "He ran so that he could become a champion.",
+        "He ran so that he could become a champion"
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "I went to America so that I could speak English well.",
+      "number": 27,
+      "question": "다음 문장을 so that 구문으로 바꿔 쓰시오.\n\nI went to America to speak English well.",
+      "explanation": "to부정사 목적을 so that I could로 전환. 과거 시제이므로 could.",
+      "acceptedAnswers": [
+        "I went to America so that I could speak English well",
+        "I went to America so that I might speak English well.",
+        "I went to America so that I might speak English well"
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "Let's start early so that we may arrive before dark.",
+      "number": 28,
+      "question": "다음 문장을 so that 구문으로 바꿔 쓰시오.\n\nLet's start early to arrive before dark.",
+      "explanation": "Let's 제안문에서 to부정사를 so that we may/can으로 전환.",
+      "acceptedAnswers": [
+        "Let's start early so that we may arrive before dark",
+        "Let's start early so that we can arrive before dark.",
+        "Let's start early so that we can arrive before dark"
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "Jane ran out so that she could catch a taxi.",
+      "number": 29,
+      "question": "다음 문장을 so that 구문으로 바꿔 쓰시오.\n\nJane ran out to catch a taxi.",
+      "explanation": "to부정사 목적을 so that she could로 전환. 과거 시제.",
+      "acceptedAnswers": [
+        "Jane ran out so that she could catch a taxi"
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "I'll walk fast so that I can get there in time.",
+      "number": 30,
+      "question": "다음 문장을 so that 구문으로 바꿔 쓰시오.\n\nI'll walk fast to get there in time.",
+      "explanation": "미래 시제이므로 so that I can.",
+      "acceptedAnswers": [
+        "I'll walk fast so that I can get there in time"
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "She exercises every day so that she can lose weight.",
+      "number": 31,
+      "question": "다음 문장을 so that 구문으로 바꿔 쓰시오.\n\nShe exercises every day to lose weight.",
+      "explanation": "현재 시제의 습관이므로 so that she can.",
+      "acceptedAnswers": [
+        "She exercises every day so that she can lose weight"
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "They went to bed early so that they could get up early.",
+      "number": 32,
+      "question": "다음 문장을 so that 구문으로 바꿔 쓰시오.\n\nThey went to bed early to get up early.",
+      "explanation": "과거 시제이므로 so that they could.",
+      "acceptedAnswers": [
+        "They went to bed early so that they could get up early"
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "He stepped aside so that I could pass by.",
+      "number": 33,
+      "question": "다음 문장을 so that 구문으로 바꿔 쓰시오.\n\nHe stepped aside for me to pass by.",
+      "explanation": "for me to → so that I could. 의미상 주어 me가 절의 주어 I로 변환.",
+      "acceptedAnswers": [
+        "He stepped aside so that I could pass by"
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "You must work hard so that you wouldn't fail.",
+      "number": 34,
+      "question": "다음 문장을 so that 구문으로 바꿔 쓰시오.\n\nYou must work hard so as not to fail.",
+      "explanation": "so as not to → so that + 주어 + 부정 조동사.",
+      "acceptedAnswers": [
+        "You must work hard so that you wouldn't fail",
+        "You must work hard so that you won't fail.",
+        "You must work hard so that you won't fail",
+        "You must work hard so that you will not fail.",
+        "You must work hard so that you will not fail",
+        "You must work hard so that you don't fail.",
+        "You must work hard so that you don't fail"
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "They left home early so that they can get there on time.",
+      "number": 35,
+      "question": "다음 문장을 so that 구문으로 바꿔 쓰시오.\n\nThey left home early in order that they can get there on time.",
+      "explanation": "in order that → so that. 나머지 동일.",
+      "acceptedAnswers": [
+        "They left home early so that they can get there on time",
+        "They left home early so that they could get there on time.",
+        "They left home early so that they could get there on time"
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "I go for a walk so that I can stay healthy.",
+      "number": 36,
+      "question": "다음 문장을 so that 구문으로 바꿔 쓰시오.\n\nI go for a walk in order to stay healthy.",
+      "explanation": "in order to → so that I can. 현재 시제이므로 can.",
+      "acceptedAnswers": [
+        "I go for a walk so that I can stay healthy"
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "Turn off the light so that the baby can sleep well.",
+      "number": 37,
+      "question": "다음 문장을 so that 구문으로 바꿔 쓰시오.\n\nTurn off the light for the baby to sleep well.",
+      "explanation": "for + 명사 + to부정사 → so that + 주어 + can. 명령문이므로 can.",
+      "acceptedAnswers": [
+        "Turn off the light so that the baby can sleep well"
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "He took a taxi so that he wouldn't be late.",
+      "number": 38,
+      "question": "다음 문장을 so that 구문으로 바꿔 쓰시오.\n\nHe took a taxi not to be late.",
+      "explanation": "not to → so that + wouldn't. 부정 목적 표현.",
+      "acceptedAnswers": [
+        "He took a taxi so that he wouldn't be late",
+        "He took a taxi so that he would not be late.",
+        "He took a taxi so that he would not be late"
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "I want to sit by the window so that I can see outside.",
+      "number": 39,
+      "question": "다음 문장을 so that 구문으로 바꿔 쓰시오.\n\nI want to sit by the window to see outside.",
+      "explanation": "to부정사 목적을 so that I can으로 전환.",
+      "acceptedAnswers": [
+        "I want to sit by the window so that I can see outside"
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "She took my bag so that I could walk comfortably.",
+      "number": 40,
+      "question": "다음 문장을 so that 구문으로 바꿔 쓰시오.\n\nShe took my bag for me to walk comfortably.",
+      "explanation": "for me to → so that I could. 과거 시제.",
+      "acceptedAnswers": [
+        "She took my bag so that I could walk comfortably"
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "The man broke the door so that they could get out.",
+      "number": 41,
+      "question": "다음 문장을 so that 구문으로 바꿔 쓰시오.\n\nThe man broke the door for them to get out.",
+      "explanation": "for them to → so that they could. 과거 시제.",
+      "acceptedAnswers": [
+        "The man broke the door so that they could get out"
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "I prepared breakfast so that she could rest.",
+      "number": 42,
+      "question": "다음 문장을 so that 구문으로 바꿔 쓰시오.\n\nI prepared breakfast for her to rest.",
+      "explanation": "for her to → so that she could. 과거 시제.",
+      "acceptedAnswers": [
+        "I prepared breakfast so that she could rest"
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "She cleaned the house so that the visitors could feel comfortable.",
+      "number": 43,
+      "question": "다음 문장을 so that 구문으로 바꿔 쓰시오.\n\nShe cleaned the house for the visitors to feel comfortable.",
+      "explanation": "for the visitors to → so that the visitors could. 과거 시제.",
+      "acceptedAnswers": [
+        "She cleaned the house so that the visitors could feel comfortable"
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "I don't take showers long so that I may not waste water.",
+      "number": 44,
+      "question": "다음 문장을 so that 구문으로 바꿔 쓰시오.\n\nI don't take showers long in order not to waste water.",
+      "explanation": "in order not to → so that + may not/won't. 부정 목적 표현.",
+      "acceptedAnswers": [
+        "I don't take showers long so that I may not waste water",
+        "I don't take showers long so that I won't waste water.",
+        "I don't take showers long so that I won't waste water",
+        "I don't take showers long so that I don't waste water.",
+        "I don't take showers long so that I don't waste water",
+        "I don't take showers long so that I will not waste water.",
+        "I don't take showers long so that I will not waste water"
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "I studied very hard so that I wouldn't fail.",
+      "number": 45,
+      "question": "다음 문장을 so that 구문으로 바꿔 쓰시오.\n\nI studied very hard in order not to fail.",
+      "explanation": "in order not to → so that I wouldn't. 과거 시제.",
+      "acceptedAnswers": [
+        "I studied very hard so that I wouldn't fail",
+        "I studied very hard so that I would not fail.",
+        "I studied very hard so that I would not fail"
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "She practiced skating so that she could be good at it.",
+      "number": 46,
+      "question": "다음 문장을 so that 구문으로 바꿔 쓰시오.\n\nShe practiced skating in order to be good at it.",
+      "explanation": "in order to → so that she could. 과거 시제.",
+      "acceptedAnswers": [
+        "She practiced skating so that she could be good at it"
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "I took off my shoes so that I wouldn't make any noise.",
+      "number": 47,
+      "question": "다음 문장을 so that 구문으로 바꿔 쓰시오.\n\nI took off my shoes in order not to make noise.",
+      "explanation": "in order not to → so that I wouldn't. 부정문에서 any 추가 가능.",
+      "acceptedAnswers": [
+        "I took off my shoes so that I wouldn't make any noise",
+        "I took off my shoes so that I would not make any noise.",
+        "I took off my shoes so that I would not make any noise",
+        "I took off my shoes so that I wouldn't make noise.",
+        "I took off my shoes so that I wouldn't make noise",
+        "I took off my shoes so that I would not make noise.",
+        "I took off my shoes so that I would not make noise"
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "I made vocabulary cards so that I could remember them.",
+      "number": 48,
+      "question": "다음 문장을 so that 구문으로 바꿔 쓰시오.\n\nI made vocabulary cards to remember them.",
+      "explanation": "to부정사 목적을 so that I can으로 전환. 시제가 현재로 바뀌는 점에 주의.",
+      "acceptedAnswers": [
+        "I make vocabulary cards so that I can remember them",
+        "I made vocabulary cards so that I could remember them.",
+        "I made vocabulary cards so that I could remember them"
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "He cut the bread in half so that he could share it.",
+      "number": 49,
+      "question": "다음 문장을 so that 구문으로 바꿔 쓰시오.\n\nHe cut the bread in half to share it.",
+      "explanation": "to부정사 목적을 so that he could로 전환. 과거 시제.",
+      "acceptedAnswers": [
+        "He cut the bread in half so that he could share it"
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "I left my name card so that he could contact me.",
+      "number": 50,
+      "question": "다음 문장을 so that 구문으로 바꿔 쓰시오.\n\nI left my name card for him to contact me.",
+      "explanation": "for him to → so that he could. 과거 시제.",
+      "acceptedAnswers": [
+        "I left my name card so that he could contact me"
+      ]
+    },
+    {
+      "tag": "오류수정",
+      "type": "sentence",
+      "answer": "Mr. Kim is so kind that his students like him.",
+      "number": 51,
+      "question": "[Part 3] 다음 문장에서 틀린 부분을 찾아 올바른 문장 전체를 고쳐 쓰시오.\n\nMr. Kim is so kind that his students like.",
+      "explanation": "목적어 him 누락. like는 타동사이므로 목적어가 필요합니다.",
+      "acceptedAnswers": [
+        "Mr. Kim is so kind that his students like him"
+      ]
+    },
+    {
+      "tag": "오류수정",
+      "type": "sentence",
+      "answer": "The place was so beautiful that they wanted to live there.",
+      "number": 52,
+      "question": "다음 문장에서 틀린 부분을 찾아 올바른 문장 전체를 고쳐 쓰시오.\n\nThe place was beautiful so that they wanted to live there.",
+      "explanation": "so ~ that 결과 구문의 어순: so + 형용사 + that. \"so that\"(목적)과 \"so...that\"(결과) 구분.",
+      "acceptedAnswers": [
+        "The place was so beautiful that they wanted to live there"
+      ]
+    },
+    {
+      "tag": "오류수정",
+      "type": "sentence",
+      "answer": "I often stop working so that I can take a rest.",
+      "number": 53,
+      "question": "다음 문장에서 틀린 부분을 찾아 올바른 문장 전체를 고쳐 쓰시오.\n\nI often stop working so that can take a rest.",
+      "explanation": "so that 뒤에 주어 I가 누락. so that + 주어 + 조동사 + 동사원형.",
+      "acceptedAnswers": [
+        "I often stop working so that I can take a rest"
+      ]
+    },
+    {
+      "tag": "오류수정",
+      "type": "sentence",
+      "answer": "The boy saved money so that he could buy his brother's present.",
+      "number": 54,
+      "question": "다음 문장에서 틀린 부분을 찾아 올바른 문장 전체를 고쳐 쓰시오.\n\nThe boy saved money so that he can buy his brother's present.",
+      "explanation": "주절이 과거(saved)이므로 can → could.",
+      "acceptedAnswers": [
+        "The boy saved money so that he could buy his brother's present"
+      ]
+    },
+    {
+      "tag": "오류수정",
+      "type": "sentence",
+      "answer": "She went to the cafe so that she could meet her dad.",
+      "number": 55,
+      "question": "다음 문장에서 틀린 부분을 찾아 올바른 문장 전체를 고쳐 쓰시오.\n\nShe went to the cafe so that she can meet her dad.",
+      "explanation": "주절이 과거(went)이므로 can → could.",
+      "acceptedAnswers": [
+        "She went to the cafe so that she could meet her dad",
+        "She went to the café so that she could meet her dad.",
+        "She went to the café so that she could meet her dad"
+      ]
+    },
+    {
+      "tag": "오류수정",
+      "type": "sentence",
+      "answer": "They will get together so that they can watch a movie.",
+      "number": 56,
+      "question": "다음 문장에서 틀린 부분을 찾아 올바른 문장 전체를 고쳐 쓰시오.\n\nThey will get together so that can they watch a movie.",
+      "explanation": "so that 뒤 어순: 주어 + 조동사. can they(도치) → they can.",
+      "acceptedAnswers": [
+        "They will get together so that they can watch a movie"
+      ]
+    },
+    {
+      "tag": "오류수정",
+      "type": "sentence",
+      "answer": "I brought an umbrella in order not to get wet.",
+      "number": 57,
+      "question": "다음 문장에서 틀린 부분을 찾아 올바른 문장 전체를 고쳐 쓰시오.\n\nI brought an umbrella in order to not get wet.",
+      "explanation": "부정 어순: in order not to. \"to not\"은 틀린 어순.",
+      "acceptedAnswers": [
+        "I brought an umbrella in order not to get wet"
+      ]
+    },
+    {
+      "tag": "오류수정",
+      "type": "sentence",
+      "answer": "I called the bookstore in order to place an order.",
+      "number": 58,
+      "question": "다음 문장에서 틀린 부분을 찾아 올바른 문장 전체를 고쳐 쓰시오.\n\nI called the bookstore so that to place an order.",
+      "explanation": "\"so that to\"는 불가. in order to / so as to + 동사원형 또는 so that + 주어 + 조동사.",
+      "acceptedAnswers": [
+        "I called the bookstore in order to place an order",
+        "I called the bookstore so as to place an order.",
+        "I called the bookstore so as to place an order",
+        "I called the bookstore so that I could place an order.",
+        "I called the bookstore so that I could place an order"
+      ]
+    },
+    {
+      "tag": "오류수정",
+      "type": "sentence",
+      "answer": "I was so surprised that I couldn't say anything.",
+      "number": 59,
+      "question": "다음 문장에서 틀린 부분을 찾아 올바른 문장 전체를 고쳐 쓰시오.\n\nI was surprised so that I couldn't say anything.",
+      "explanation": "so ~ that 결과 구문: so + 형용사 + that. \"so that\"(목적)이 아님.",
+      "acceptedAnswers": [
+        "I was so surprised that I couldn't say anything",
+        "I was so surprised that I could not say anything.",
+        "I was so surprised that I could not say anything"
+      ]
+    },
+    {
+      "tag": "오류수정",
+      "type": "sentence",
+      "answer": "Gwen reads a lot of books so that she can be a writer.",
+      "number": 60,
+      "question": "다음 문장에서 틀린 부분을 찾아 올바른 문장 전체를 고쳐 쓰시오.\n\nGwen reads a lot of books so that she could be a writer.",
+      "explanation": "주절이 현재(reads)이므로 could → can.",
+      "acceptedAnswers": [
+        "Gwen reads a lot of books so that she can be a writer"
+      ]
+    },
+    {
+      "tag": "오류수정",
+      "type": "sentence",
+      "answer": "I should exercise every day so that I can be healthy.",
+      "number": 61,
+      "question": "다음 문장에서 틀린 부분을 찾아 올바른 문장 전체를 고쳐 쓰시오.\n\nI should exercise every day in order to I can be healthy.",
+      "explanation": "\"in order to + 동사원형\" 또는 \"so that + 주어 + 조동사\". \"in order to I can\"은 두 구문 혼동.",
+      "acceptedAnswers": [
+        "I should exercise every day so that I can be healthy",
+        "I should exercise every day in order to be healthy.",
+        "I should exercise every day in order to be healthy"
+      ]
+    },
+    {
+      "tag": "오류수정",
+      "type": "sentence",
+      "answer": "He came early to take a good seat.",
+      "number": 62,
+      "question": "다음 문장에서 틀린 부분을 찾아 올바른 문장 전체를 고쳐 쓰시오.\n\nHe came early so that to take a good seat.",
+      "explanation": "\"so that to\"는 불가. to부정사 단독 또는 in order to 사용.",
+      "acceptedAnswers": [
+        "He came early to take a good seat",
+        "He came early in order to take a good seat.",
+        "He came early in order to take a good seat",
+        "He came early so that he could take a good seat.",
+        "He came early so that he could take a good seat"
+      ]
+    },
+    {
+      "tag": "오류수정",
+      "type": "sentence",
+      "answer": "Make a shopping list so that you can spend your money wisely.",
+      "number": 63,
+      "question": "다음 문장에서 틀린 부분을 찾아 올바른 문장 전체를 고쳐 쓰시오.\n\nMake a shopping list so that spend your money wisely.",
+      "explanation": "so that 뒤에 주어(you) + 조동사(can) 필수.",
+      "acceptedAnswers": [
+        "Make a shopping list so that you can spend your money wisely"
+      ]
+    },
+    {
+      "tag": "오류수정",
+      "type": "sentence",
+      "answer": "She made a cake so that she could give it to her boyfriend.",
+      "number": 64,
+      "question": "다음 문장에서 틀린 부분을 찾아 올바른 문장 전체를 고쳐 쓰시오.\n\nShe made a cake so what she could give it to her boyfriend.",
+      "explanation": "접속사 so that. so what은 틀림.",
+      "acceptedAnswers": [
+        "She made a cake so that she could give it to her boyfriend"
+      ]
+    },
+    {
+      "tag": "오류수정",
+      "type": "sentence",
+      "answer": "I left my name card so that he could contact me.",
+      "number": 65,
+      "question": "다음 문장에서 틀린 부분을 찾아 올바른 문장 전체를 고쳐 쓰시오.\n\nI left my name card so which he could contact me.",
+      "explanation": "접속사 so that. so which는 틀림.",
+      "acceptedAnswers": [
+        "I left my name card so that he could contact me"
+      ]
+    },
+    {
+      "tag": "단어배열",
+      "type": "sentence",
+      "answer": "I will change you so that you can meet the prince!",
+      "number": 66,
+      "question": "[Part 4] 주어진 단어를 올바른 순서로 배열하시오.\n\n(change / can / that / meet / I / will / you / so / the prince / you)",
+      "explanation": "so that + 주어 + 조동사 구문.",
+      "acceptedAnswers": [
+        "I will change you so that you can meet the prince!",
+        "I will change you so that you can meet the prince.",
+        "I will change you so that you can meet the prince"
+      ]
+    },
+    {
+      "tag": "단어배열",
+      "type": "sentence",
+      "answer": "Turn on the light so that I can see you.",
+      "number": 67,
+      "question": "주어진 단어를 올바른 순서로 배열하시오.\n\n(can / I / light / on / that / the / turn / see / so / you)",
+      "explanation": "Turn on the light so that I can see you. 명령문 + so that.",
+      "acceptedAnswers": [
+        "Turn on the light so that I can see you",
+        "Turn the light on so that I can see you.",
+        "Turn the light on so that I can see you"
+      ]
+    },
+    {
+      "tag": "단어배열",
+      "type": "sentence",
+      "answer": "I prepared breakfast so that Mom could rest.",
+      "number": 68,
+      "question": "주어진 단어를 올바른 순서로 배열하시오.\n\n(I / could / rest / prepared / so / Mom / breakfast / that)",
+      "explanation": "주절이 과거이므로 so that 절에 could.",
+      "acceptedAnswers": [
+        "I prepared breakfast so that Mom could rest"
+      ]
+    },
+    {
+      "tag": "단어배열",
+      "type": "sentence",
+      "answer": "I gave my email address to Judy so that she could contact me.",
+      "number": 69,
+      "question": "주어진 단어를 올바른 순서로 배열하시오.\n\n(that / she / Judy / I / email / me / could / so / to / address / my / gave / contact)",
+      "explanation": "4형식/3형식 전환과 so that 구문 결합.",
+      "acceptedAnswers": [
+        "I gave my email address to Judy so that she could contact me"
+      ]
+    },
+    {
+      "tag": "단어배열",
+      "type": "sentence",
+      "answer": "I read English comic books so that I can learn new idioms.",
+      "number": 70,
+      "question": "주어진 단어를 올바른 순서로 배열하시오.\n\n(new / I / idioms / so / that / books / can / learn / comic / read / English / I)",
+      "explanation": "현재 시제이므로 so that I can.",
+      "acceptedAnswers": [
+        "I read English comic books so that I can learn new idioms"
+      ]
+    },
+    {
+      "tag": "단어배열",
+      "type": "sentence",
+      "answer": "The fennec fox's feet are covered with fur so that it can walk on the hot sand.",
+      "number": 71,
+      "question": "주어진 단어를 올바른 순서로 배열하시오.\n\n(that / on / the fennec fox's / with / the / fur / covered / can / sand / walk / it / are / hot / feet / so)",
+      "explanation": "수동태 + so that 구문.",
+      "acceptedAnswers": [
+        "The fennec fox's feet are covered with fur so that it can walk on the hot sand"
+      ]
+    },
+    {
+      "tag": "단어배열",
+      "type": "sentence",
+      "answer": "I studied hard so that I could pass the exam.",
+      "number": 72,
+      "question": "주어진 단어를 올바른 순서로 배열하시오.\n\n(studied / so / I / could / that / hard / I / the exam / pass)",
+      "explanation": "주절이 과거이므로 so that 절에 could.",
+      "acceptedAnswers": [
+        "I studied hard so that I could pass the exam"
+      ]
+    },
+    {
+      "tag": "단어배열",
+      "type": "sentence",
+      "answer": "We went up to the top floor so that we could see the view.",
+      "number": 73,
+      "question": "주어진 단어를 올바른 순서로 배열하시오.\n\n(the / that / we / view / went / floor / so / top / the / could / see / up / to / we)",
+      "explanation": "주절이 과거이므로 so that we could.",
+      "acceptedAnswers": [
+        "We went up to the top floor so that we could see the view"
+      ]
+    },
+    {
+      "tag": "단어배열",
+      "type": "sentence",
+      "answer": "Yuna tried hard so that she could win the gold medal.",
+      "number": 74,
+      "question": "주어진 단어를 올바른 순서로 배열하시오.\n\n(win / hard / she / Yuna / medal / so / gold / the / could / that / tried)",
+      "explanation": "주절이 과거이므로 so that she could.",
+      "acceptedAnswers": [
+        "Yuna tried hard so that she could win the gold medal"
+      ]
+    },
+    {
+      "tag": "단어배열",
+      "type": "sentence",
+      "answer": "Switch the light off so that we can sleep well.",
+      "number": 75,
+      "question": "주어진 단어를 올바른 순서로 배열하시오.\n\n(that / off / can / we / switch / well / light / so / sleep / the)",
+      "explanation": "명령문이므로 so that we can. Switch off도 가능.",
+      "acceptedAnswers": [
+        "Switch the light off so that we can sleep well",
+        "Switch off the light so that we can sleep well.",
+        "Switch off the light so that we can sleep well"
+      ]
+    },
+    {
+      "tag": "단어배열",
+      "type": "sentence",
+      "answer": "We are here so that we can study air and ocean currents.",
+      "number": 76,
+      "question": "주어진 단어를 올바른 순서로 배열하시오.\n\n(we / ocean / we / currents / here / are / study / that / can / air / so / and)",
+      "explanation": "현재 시제이므로 so that we can.",
+      "acceptedAnswers": [
+        "We are here so that we can study air and ocean currents"
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "I pressed the button so that I could turn on the computer.",
+      "number": 77,
+      "question": "다음 우리말을 영어로 쓰시오.\n\n나는 컴퓨터를 켜기 위해서 버튼을 눌렀다.",
+      "explanation": "\"~하기 위해서\"는 so that + 주어 + 조동사. 주절이 과거(pressed)이므로 could.",
+      "acceptedAnswers": [
+        "I pressed the button so that I could turn on the computer",
+        "I pushed the button so that I could turn on the computer.",
+        "I pushed the button so that I could turn on the computer",
+        "I pressed a button so that I could turn on the computer.",
+        "I pressed a button so that I could turn on the computer",
+        "I pushed a button so that I could turn on the computer.",
+        "I pushed a button so that I could turn on the computer",
+        "I pressed the button so that I could switch on the computer.",
+        "I pressed the button so that I could switch on the computer",
+        "I pressed the button so that I could turn the computer on.",
+        "I pressed the button so that I could turn the computer on"
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "Sora bought the book so that she could study English hard.",
+      "number": 78,
+      "question": "다음 우리말을 영어로 쓰시오.\n\n소라는 영어를 열심히 공부하기 위해 책을 샀다.",
+      "explanation": "\"~하기 위해\"는 so that + 주어 + 조동사. 주절이 과거(bought)이므로 could.",
+      "acceptedAnswers": [
+        "Sora bought the book so that she could study English hard",
+        "Sora bought a book so that she could study English hard.",
+        "Sora bought a book so that she could study English hard",
+        "Sora bought the book so that she could study English.",
+        "Sora bought the book so that she could study English",
+        "Sora bought a book so that she could study English.",
+        "Sora bought a book so that she could study English",
+        "Sora bought books so that she could study English hard.",
+        "Sora bought books so that she could study English hard",
+        "Sora bought books so that she could study English.",
+        "Sora bought books so that she could study English"
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "Junho turned off the light so that he could sleep well.",
+      "number": 79,
+      "question": "다음 우리말을 영어로 쓰시오.\n\n준호는 잘 자기 위해 불을 껐다.",
+      "explanation": "\"~하기 위해\"는 so that + 주어 + 조동사. 주절이 과거(turned off)이므로 could.",
+      "acceptedAnswers": [
+        "Junho turned off the light so that he could sleep well",
+        "Junho turned off the lights so that he could sleep well.",
+        "Junho turned off the lights so that he could sleep well",
+        "Junho switched off the light so that he could sleep well.",
+        "Junho switched off the light so that he could sleep well",
+        "Junho turned the light off so that he could sleep well.",
+        "Junho turned the light off so that he could sleep well",
+        "Junho turned the lights off so that he could sleep well.",
+        "Junho turned the lights off so that he could sleep well",
+        "Junho switched off the lights so that he could sleep well.",
+        "Junho switched off the lights so that he could sleep well"
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "He went to India so that he could help the poor.",
+      "number": 80,
+      "question": "다음 우리말을 영어로 쓰시오.\n\n그는 가난한 사람들을 돕기 위해 인도로 갔다.",
+      "explanation": "\"~하기 위해\"는 so that + 주어 + 조동사. \"the poor\"는 가난한 사람들.",
+      "acceptedAnswers": [
+        "He went to India so that he could help the poor",
+        "He went to India so that he could help poor people.",
+        "He went to India so that he could help poor people",
+        "He went to India so that he could help the poor people.",
+        "He went to India so that he could help the poor people",
+        "He traveled to India so that he could help the poor.",
+        "He traveled to India so that he could help the poor",
+        "He travelled to India so that he could help the poor.",
+        "He travelled to India so that he could help the poor"
+      ]
+    }
+  ],
+  "naesin_problem_sheets_0c05ab19-0006-4e20-997a-75ee49a5fbb6": [
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "2",
+      "number": 1,
+      "options": [
+        "can",
+        "could"
+      ],
+      "question": "[Part 1] 괄호 안에서 알맞은 표현을 고르시오.\n\nI studied hard so that I (can / could) pass the exam.",
+      "explanation": "주절이 과거(studied)이므로 종속절도 could"
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "1",
+      "number": 2,
+      "options": [
+        "can",
+        "will"
+      ],
+      "question": "Speak slowly so that others (can / will) understand you.",
+      "explanation": "명령문은 현재 시제이므로 can"
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "1",
+      "number": 3,
+      "options": [
+        "order",
+        "so"
+      ],
+      "question": "We went early in (order / so) that we could get good seats.",
+      "explanation": "in order that = so that (목적)"
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "1",
+      "number": 4,
+      "options": [
+        "as",
+        "that"
+      ],
+      "question": "He married her so (as / that) to be with her forever.",
+      "explanation": "so as to + 동사원형 = ~하기 위해"
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "2",
+      "number": 5,
+      "options": [
+        "will",
+        "would"
+      ],
+      "question": "I hurried so that I (will / would) not miss the train.",
+      "explanation": "주절이 과거(hurried)이므로 would"
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "1",
+      "number": 6,
+      "options": [
+        "can",
+        "could"
+      ],
+      "question": "Turn the music down so that I (can / could) read the book.",
+      "explanation": "명령문은 현재 시제이므로 can"
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "1",
+      "number": 7,
+      "options": [
+        "can",
+        "could"
+      ],
+      "question": "I will bring the map so that we (can / could) find the way easily.",
+      "explanation": "주절이 미래(will)이므로 can"
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "2",
+      "number": 8,
+      "options": [
+        "can",
+        "could"
+      ],
+      "question": "The Wright brothers invented the airplane so that we (can / could) go to other places quickly.",
+      "explanation": "주절이 과거(invented)이므로 could"
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "1",
+      "number": 9,
+      "options": [
+        "so that",
+        "because"
+      ],
+      "question": "I go for a walk every morning (so that / because) I can stay healthy.",
+      "explanation": "건강 유지를 위해(목적) → so that. because는 이유."
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "1",
+      "number": 10,
+      "options": [
+        "can",
+        "will"
+      ],
+      "question": "Gwen goes jogging so that she (can / will) stay in shape.",
+      "explanation": "주절이 현재(goes)이므로 can"
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "2",
+      "number": 11,
+      "options": [
+        "can",
+        "could"
+      ],
+      "question": "Rachel bought a swimsuit so that she (can / could) swim in the pool.",
+      "explanation": "주절이 과거(bought)이므로 could"
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "1",
+      "number": 12,
+      "options": [
+        "can",
+        "will"
+      ],
+      "question": "Justin studies hard so that he (can / will) be a lawyer.",
+      "explanation": "주절이 현재(studies)이므로 can"
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "2",
+      "number": 13,
+      "options": [
+        "can",
+        "could"
+      ],
+      "question": "I called Tiffany so that I (can / could) invite her to my party.",
+      "explanation": "주절이 과거(called)이므로 could"
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "1",
+      "number": 14,
+      "options": [
+        "can",
+        "could"
+      ],
+      "question": "He practices running so that he (can / could) finish the marathon.",
+      "explanation": "주절이 현재(practices)이므로 can"
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "1",
+      "number": 15,
+      "options": [
+        "can",
+        "could"
+      ],
+      "question": "Jiho is making a cake so that he (can / could) make his mom happy.",
+      "explanation": "주절이 현재진행(is making)이므로 can"
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "1",
+      "number": 16,
+      "options": [
+        "don't",
+        "didn't"
+      ],
+      "question": "Leave early so that you (don't / didn't) miss the bus.",
+      "explanation": "명령문은 현재 시제이므로 don't"
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "2",
+      "number": 17,
+      "options": [
+        "can",
+        "could"
+      ],
+      "question": "I went to Canada so that I (can / could) learn English.",
+      "explanation": "주절이 과거(went)이므로 could"
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "1",
+      "number": 18,
+      "options": [
+        "can",
+        "could"
+      ],
+      "question": "Step forward so that you (can / could) take a closer look.",
+      "explanation": "명령문은 현재 시제이므로 can"
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "1",
+      "number": 19,
+      "options": [
+        "can",
+        "could"
+      ],
+      "question": "I'll leave the door open so that you (can / could) come in.",
+      "explanation": "주절이 미래(will)이므로 can"
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "1",
+      "number": 20,
+      "options": [
+        "can",
+        "will"
+      ],
+      "question": "Please speak louder so that all of us (can / will) hear you.",
+      "explanation": "명령문은 현재 시제이므로 can"
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "2",
+      "number": 21,
+      "options": [
+        "can",
+        "could"
+      ],
+      "question": "We climbed higher so that we (can / could) get a better view.",
+      "explanation": "주절이 과거(climbed)이므로 could"
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "1",
+      "number": 22,
+      "options": [
+        "can",
+        "could"
+      ],
+      "question": "Switch the light off so that we (can / could) sleep well.",
+      "explanation": "명령문은 현재 시제이므로 can"
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "2",
+      "number": 23,
+      "options": [
+        "can",
+        "could"
+      ],
+      "question": "I gave her my phone number so that she (can / could) keep in touch.",
+      "explanation": "주절이 과거(gave)이므로 could"
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "1",
+      "number": 24,
+      "options": [
+        "I",
+        "can"
+      ],
+      "question": "I often stop working so that (I / can) can take a rest.",
+      "explanation": "so that 뒤에 주어+조동사 필수. so that I can"
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "1",
+      "number": 25,
+      "options": [
+        "that",
+        "what"
+      ],
+      "question": "She made a cake so (that / what) she could give it to her boyfriend.",
+      "explanation": "so that + 주어 + 조동사. what은 불가."
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "He ran so that he might become a champion.",
+      "number": 26,
+      "question": "[Part 2] 다음 문장을 so that 구문으로 바꿔 쓰시오.\n\nHe ran to become a champion.",
+      "explanation": "to부정사 목적을 so that + 주어 + 조동사로 전환. 과거이므로 might/could 사용.",
+      "acceptedAnswers": [
+        "He ran so that he might become a champion",
+        "He ran so that he could become a champion.",
+        "He ran so that he could become a champion"
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "I went to America so that I could speak English well.",
+      "number": 27,
+      "question": "다음 문장을 so that 구문으로 바꿔 쓰시오.\n\nI went to America to speak English well.",
+      "explanation": "to부정사 목적을 so that I could로 전환. 과거 시제이므로 could.",
+      "acceptedAnswers": [
+        "I went to America so that I could speak English well",
+        "I went to America so that I might speak English well.",
+        "I went to America so that I might speak English well"
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "Let's start early so that we may arrive before dark.",
+      "number": 28,
+      "question": "다음 문장을 so that 구문으로 바꿔 쓰시오.\n\nLet's start early to arrive before dark.",
+      "explanation": "Let's 제안문에서 to부정사를 so that we may/can으로 전환.",
+      "acceptedAnswers": [
+        "Let's start early so that we may arrive before dark",
+        "Let's start early so that we can arrive before dark.",
+        "Let's start early so that we can arrive before dark",
+        "Let us start early so that we may arrive before dark."
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "Jane ran out so that she could catch a taxi.",
+      "number": 29,
+      "question": "다음 문장을 so that 구문으로 바꿔 쓰시오.\n\nJane ran out to catch a taxi.",
+      "explanation": "to부정사 목적을 so that she could로 전환. 과거 시제.",
+      "acceptedAnswers": [
+        "Jane ran out so that she could catch a taxi"
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "I'll walk fast so that I can get there in time.",
+      "number": 30,
+      "question": "다음 문장을 so that 구문으로 바꿔 쓰시오.\n\nI'll walk fast to get there in time.",
+      "explanation": "미래 시제이므로 so that I can.",
+      "acceptedAnswers": [
+        "I'll walk fast so that I can get there in time",
+        "I will walk fast so that I can get there in time."
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "She exercises every day so that she can lose weight.",
+      "number": 31,
+      "question": "다음 문장을 so that 구문으로 바꿔 쓰시오.\n\nShe exercises every day to lose weight.",
+      "explanation": "현재 시제의 습관이므로 so that she can.",
+      "acceptedAnswers": [
+        "She exercises every day so that she can lose weight"
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "They went to bed early so that they could get up early.",
+      "number": 32,
+      "question": "다음 문장을 so that 구문으로 바꿔 쓰시오.\n\nThey went to bed early to get up early.",
+      "explanation": "과거 시제이므로 so that they could.",
+      "acceptedAnswers": [
+        "They went to bed early so that they could get up early"
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "He stepped aside so that I could pass by.",
+      "number": 33,
+      "question": "다음 문장을 so that 구문으로 바꿔 쓰시오.\n\nHe stepped aside for me to pass by.",
+      "explanation": "for me to → so that I could. 의미상 주어 me가 절의 주어 I로 변환.",
+      "acceptedAnswers": [
+        "He stepped aside so that I could pass by"
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "You must work hard so that you wouldn't fail.",
+      "number": 34,
+      "question": "다음 문장을 so that 구문으로 바꿔 쓰시오.\n\nYou must work hard so as not to fail.",
+      "explanation": "so as not to → so that + 주어 + 부정 조동사.",
+      "acceptedAnswers": [
+        "You must work hard so that you wouldn't fail",
+        "You must work hard so that you won't fail.",
+        "You must work hard so that you won't fail",
+        "You must work hard so that you will not fail.",
+        "You must work hard so that you will not fail",
+        "You must work hard so that you don't fail.",
+        "You must work hard so that you don't fail",
+        "You must work hard so that you would not fail."
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "They left home early so that they can get there on time.",
+      "number": 35,
+      "question": "다음 문장을 so that 구문으로 바꿔 쓰시오.\n\nThey left home early in order that they can get there on time.",
+      "explanation": "in order that → so that. 나머지 동일.",
+      "acceptedAnswers": [
+        "They left home early so that they can get there on time",
+        "They left home early so that they could get there on time.",
+        "They left home early so that they could get there on time"
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "I go for a walk so that I can stay healthy.",
+      "number": 36,
+      "question": "다음 문장을 so that 구문으로 바꿔 쓰시오.\n\nI go for a walk in order to stay healthy.",
+      "explanation": "in order to → so that I can. 현재 시제이므로 can.",
+      "acceptedAnswers": [
+        "I go for a walk so that I can stay healthy"
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "Turn off the light so that the baby can sleep well.",
+      "number": 37,
+      "question": "다음 문장을 so that 구문으로 바꿔 쓰시오.\n\nTurn off the light for the baby to sleep well.",
+      "explanation": "for + 명사 + to부정사 → so that + 주어 + can. 명령문이므로 can.",
+      "acceptedAnswers": [
+        "Turn off the light so that the baby can sleep well"
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "He took a taxi so that he wouldn't be late.",
+      "number": 38,
+      "question": "다음 문장을 so that 구문으로 바꿔 쓰시오.\n\nHe took a taxi not to be late.",
+      "explanation": "not to → so that + wouldn't. 부정 목적 표현.",
+      "acceptedAnswers": [
+        "He took a taxi so that he wouldn't be late",
+        "He took a taxi so that he would not be late.",
+        "He took a taxi so that he would not be late"
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "I want to sit by the window so that I can see outside.",
+      "number": 39,
+      "question": "다음 문장을 so that 구문으로 바꿔 쓰시오.\n\nI want to sit by the window to see outside.",
+      "explanation": "to부정사 목적을 so that I can으로 전환.",
+      "acceptedAnswers": [
+        "I want to sit by the window so that I can see outside"
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "She took my bag so that I could walk comfortably.",
+      "number": 40,
+      "question": "다음 문장을 so that 구문으로 바꿔 쓰시오.\n\nShe took my bag for me to walk comfortably.",
+      "explanation": "for me to → so that I could. 과거 시제.",
+      "acceptedAnswers": [
+        "She took my bag so that I could walk comfortably"
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "The man broke the door so that they could get out.",
+      "number": 41,
+      "question": "다음 문장을 so that 구문으로 바꿔 쓰시오.\n\nThe man broke the door for them to get out.",
+      "explanation": "for them to → so that they could. 과거 시제.",
+      "acceptedAnswers": [
+        "The man broke the door so that they could get out"
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "I prepared breakfast so that she could rest.",
+      "number": 42,
+      "question": "다음 문장을 so that 구문으로 바꿔 쓰시오.\n\nI prepared breakfast for her to rest.",
+      "explanation": "for her to → so that she could. 과거 시제.",
+      "acceptedAnswers": [
+        "I prepared breakfast so that she could rest"
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "She cleaned the house so that the visitors could feel comfortable.",
+      "number": 43,
+      "question": "다음 문장을 so that 구문으로 바꿔 쓰시오.\n\nShe cleaned the house for the visitors to feel comfortable.",
+      "explanation": "for the visitors to → so that the visitors could. 과거 시제.",
+      "acceptedAnswers": [
+        "She cleaned the house so that the visitors could feel comfortable"
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "I don't take showers long so that I may not waste water.",
+      "number": 44,
+      "question": "다음 문장을 so that 구문으로 바꿔 쓰시오.\n\nI don't take showers long in order not to waste water.",
+      "explanation": "in order not to → so that + may not/won't. 부정 목적 표현.",
+      "acceptedAnswers": [
+        "I don't take showers long so that I may not waste water",
+        "I don't take showers long so that I won't waste water.",
+        "I don't take showers long so that I won't waste water",
+        "I don't take showers long so that I don't waste water.",
+        "I don't take showers long so that I don't waste water",
+        "I don't take showers long so that I will not waste water.",
+        "I don't take showers long so that I will not waste water",
+        "I do not take showers long so that I may not waste water."
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "I studied very hard so that I wouldn't fail.",
+      "number": 45,
+      "question": "다음 문장을 so that 구문으로 바꿔 쓰시오.\n\nI studied very hard in order not to fail.",
+      "explanation": "in order not to → so that I wouldn't. 과거 시제.",
+      "acceptedAnswers": [
+        "I studied very hard so that I wouldn't fail",
+        "I studied very hard so that I would not fail.",
+        "I studied very hard so that I would not fail",
+        "I studied very hard so that I'dn't fail."
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "She practiced skating so that she could be good at it.",
+      "number": 46,
+      "question": "다음 문장을 so that 구문으로 바꿔 쓰시오.\n\nShe practiced skating in order to be good at it.",
+      "explanation": "in order to → so that she could. 과거 시제.",
+      "acceptedAnswers": [
+        "She practiced skating so that she could be good at it"
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "I took off my shoes so that I wouldn't make any noise.",
+      "number": 47,
+      "question": "다음 문장을 so that 구문으로 바꿔 쓰시오.\n\nI took off my shoes in order not to make noise.",
+      "explanation": "in order not to → so that I wouldn't. 부정문에서 any 추가 가능.",
+      "acceptedAnswers": [
+        "I took off my shoes so that I wouldn't make any noise",
+        "I took off my shoes so that I would not make any noise.",
+        "I took off my shoes so that I would not make any noise",
+        "I took off my shoes so that I wouldn't make noise.",
+        "I took off my shoes so that I wouldn't make noise",
+        "I took off my shoes so that I would not make noise.",
+        "I took off my shoes so that I would not make noise",
+        "I took off my shoes so that I'dn't make any noise."
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "I made vocabulary cards so that I could remember them.",
+      "number": 48,
+      "question": "다음 문장을 so that 구문으로 바꿔 쓰시오.\n\nI made vocabulary cards to remember them.",
+      "explanation": "to부정사 목적을 so that I can으로 전환. 시제가 현재로 바뀌는 점에 주의.",
+      "acceptedAnswers": [
+        "I make vocabulary cards so that I can remember them",
+        "I made vocabulary cards so that I could remember them.",
+        "I made vocabulary cards so that I could remember them"
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "He cut the bread in half so that he could share it.",
+      "number": 49,
+      "question": "다음 문장을 so that 구문으로 바꿔 쓰시오.\n\nHe cut the bread in half to share it.",
+      "explanation": "to부정사 목적을 so that he could로 전환. 과거 시제.",
+      "acceptedAnswers": [
+        "He cut the bread in half so that he could share it"
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "I left my name card so that he could contact me.",
+      "number": 50,
+      "question": "다음 문장을 so that 구문으로 바꿔 쓰시오.\n\nI left my name card for him to contact me.",
+      "explanation": "for him to → so that he could. 과거 시제.",
+      "acceptedAnswers": [
+        "I left my name card so that he could contact me"
+      ]
+    },
+    {
+      "tag": "오류수정",
+      "type": "sentence",
+      "answer": "Mr. Kim is so kind that his students like him.",
+      "number": 51,
+      "question": "[Part 3] 다음 문장에서 틀린 부분을 찾아 올바른 문장 전체를 고쳐 쓰시오.\n\nMr. Kim is so kind that his students like.",
+      "explanation": "목적어 him 누락. like는 타동사이므로 목적어가 필요합니다.",
+      "acceptedAnswers": [
+        "Mr. Kim is so kind that his students like him"
+      ]
+    },
+    {
+      "tag": "오류수정",
+      "type": "sentence",
+      "answer": "The place was so beautiful that they wanted to live there.",
+      "number": 52,
+      "question": "다음 문장에서 틀린 부분을 찾아 올바른 문장 전체를 고쳐 쓰시오.\n\nThe place was beautiful so that they wanted to live there.",
+      "explanation": "so ~ that 결과 구문의 어순: so + 형용사 + that. \"so that\"(목적)과 \"so...that\"(결과) 구분.",
+      "acceptedAnswers": [
+        "The place was so beautiful that they wanted to live there"
+      ]
+    },
+    {
+      "tag": "오류수정",
+      "type": "sentence",
+      "answer": "I often stop working so that I can take a rest.",
+      "number": 53,
+      "question": "다음 문장에서 틀린 부분을 찾아 올바른 문장 전체를 고쳐 쓰시오.\n\nI often stop working so that can take a rest.",
+      "explanation": "so that 뒤에 주어 I가 누락. so that + 주어 + 조동사 + 동사원형.",
+      "acceptedAnswers": [
+        "I often stop working so that I can take a rest"
+      ]
+    },
+    {
+      "tag": "오류수정",
+      "type": "sentence",
+      "answer": "The boy saved money so that he could buy his brother's present.",
+      "number": 54,
+      "question": "다음 문장에서 틀린 부분을 찾아 올바른 문장 전체를 고쳐 쓰시오.\n\nThe boy saved money so that he can buy his brother's present.",
+      "explanation": "주절이 과거(saved)이므로 can → could.",
+      "acceptedAnswers": [
+        "The boy saved money so that he could buy his brother's present"
+      ]
+    },
+    {
+      "tag": "오류수정",
+      "type": "sentence",
+      "answer": "She went to the cafe so that she could meet her dad.",
+      "number": 55,
+      "question": "다음 문장에서 틀린 부분을 찾아 올바른 문장 전체를 고쳐 쓰시오.\n\nShe went to the cafe so that she can meet her dad.",
+      "explanation": "주절이 과거(went)이므로 can → could.",
+      "acceptedAnswers": [
+        "She went to the cafe so that she could meet her dad",
+        "She went to the café so that she could meet her dad.",
+        "She went to the café so that she could meet her dad"
+      ]
+    },
+    {
+      "tag": "오류수정",
+      "type": "sentence",
+      "answer": "They will get together so that they can watch a movie.",
+      "number": 56,
+      "question": "다음 문장에서 틀린 부분을 찾아 올바른 문장 전체를 고쳐 쓰시오.\n\nThey will get together so that can they watch a movie.",
+      "explanation": "so that 뒤 어순: 주어 + 조동사. can they(도치) → they can.",
+      "acceptedAnswers": [
+        "They will get together so that they can watch a movie",
+        "They'll get together so that they can watch a movie."
+      ]
+    },
+    {
+      "tag": "오류수정",
+      "type": "sentence",
+      "answer": "I brought an umbrella in order not to get wet.",
+      "number": 57,
+      "question": "다음 문장에서 틀린 부분을 찾아 올바른 문장 전체를 고쳐 쓰시오.\n\nI brought an umbrella in order to not get wet.",
+      "explanation": "부정 어순: in order not to. \"to not\"은 틀린 어순.",
+      "acceptedAnswers": [
+        "I brought an umbrella in order not to get wet"
+      ]
+    },
+    {
+      "tag": "오류수정",
+      "type": "sentence",
+      "answer": "I called the bookstore in order to place an order.",
+      "number": 58,
+      "question": "다음 문장에서 틀린 부분을 찾아 올바른 문장 전체를 고쳐 쓰시오.\n\nI called the bookstore so that to place an order.",
+      "explanation": "\"so that to\"는 불가. in order to / so as to + 동사원형 또는 so that + 주어 + 조동사.",
+      "acceptedAnswers": [
+        "I called the bookstore in order to place an order",
+        "I called the bookstore so as to place an order.",
+        "I called the bookstore so as to place an order",
+        "I called the bookstore so that I could place an order.",
+        "I called the bookstore so that I could place an order"
+      ]
+    },
+    {
+      "tag": "오류수정",
+      "type": "sentence",
+      "answer": "I was so surprised that I couldn't say anything.",
+      "number": 59,
+      "question": "다음 문장에서 틀린 부분을 찾아 올바른 문장 전체를 고쳐 쓰시오.\n\nI was surprised so that I couldn't say anything.",
+      "explanation": "so ~ that 결과 구문: so + 형용사 + that. \"so that\"(목적)이 아님.",
+      "acceptedAnswers": [
+        "I was so surprised that I couldn't say anything",
+        "I was so surprised that I could not say anything.",
+        "I was so surprised that I could not say anything"
+      ]
+    },
+    {
+      "tag": "오류수정",
+      "type": "sentence",
+      "answer": "Gwen reads a lot of books so that she can be a writer.",
+      "number": 60,
+      "question": "다음 문장에서 틀린 부분을 찾아 올바른 문장 전체를 고쳐 쓰시오.\n\nGwen reads a lot of books so that she could be a writer.",
+      "explanation": "주절이 현재(reads)이므로 could → can.",
+      "acceptedAnswers": [
+        "Gwen reads a lot of books so that she can be a writer"
+      ]
+    },
+    {
+      "tag": "오류수정",
+      "type": "sentence",
+      "answer": "I should exercise every day so that I can be healthy.",
+      "number": 61,
+      "question": "다음 문장에서 틀린 부분을 찾아 올바른 문장 전체를 고쳐 쓰시오.\n\nI should exercise every day in order to I can be healthy.",
+      "explanation": "\"in order to + 동사원형\" 또는 \"so that + 주어 + 조동사\". \"in order to I can\"은 두 구문 혼동.",
+      "acceptedAnswers": [
+        "I should exercise every day so that I can be healthy",
+        "I should exercise every day in order to be healthy.",
+        "I should exercise every day in order to be healthy"
+      ]
+    },
+    {
+      "tag": "오류수정",
+      "type": "sentence",
+      "answer": "He came early to take a good seat.",
+      "number": 62,
+      "question": "다음 문장에서 틀린 부분을 찾아 올바른 문장 전체를 고쳐 쓰시오.\n\nHe came early so that to take a good seat.",
+      "explanation": "\"so that to\"는 불가. to부정사 단독 또는 in order to 사용.",
+      "acceptedAnswers": [
+        "He came early to take a good seat",
+        "He came early in order to take a good seat.",
+        "He came early in order to take a good seat",
+        "He came early so that he could take a good seat.",
+        "He came early so that he could take a good seat"
+      ]
+    },
+    {
+      "tag": "오류수정",
+      "type": "sentence",
+      "answer": "Make a shopping list so that you can spend your money wisely.",
+      "number": 63,
+      "question": "다음 문장에서 틀린 부분을 찾아 올바른 문장 전체를 고쳐 쓰시오.\n\nMake a shopping list so that spend your money wisely.",
+      "explanation": "so that 뒤에 주어(you) + 조동사(can) 필수.",
+      "acceptedAnswers": [
+        "Make a shopping list so that you can spend your money wisely"
+      ]
+    },
+    {
+      "tag": "오류수정",
+      "type": "sentence",
+      "answer": "She made a cake so that she could give it to her boyfriend.",
+      "number": 64,
+      "question": "다음 문장에서 틀린 부분을 찾아 올바른 문장 전체를 고쳐 쓰시오.\n\nShe made a cake so what she could give it to her boyfriend.",
+      "explanation": "접속사 so that. so what은 틀림.",
+      "acceptedAnswers": [
+        "She made a cake so that she could give it to her boyfriend"
+      ]
+    },
+    {
+      "tag": "오류수정",
+      "type": "sentence",
+      "answer": "I left my name card so that he could contact me.",
+      "number": 65,
+      "question": "다음 문장에서 틀린 부분을 찾아 올바른 문장 전체를 고쳐 쓰시오.\n\nI left my name card so which he could contact me.",
+      "explanation": "접속사 so that. so which는 틀림.",
+      "acceptedAnswers": [
+        "I left my name card so that he could contact me"
+      ]
+    },
+    {
+      "tag": "단어배열",
+      "type": "sentence",
+      "answer": "I will change you so that you can meet the prince!",
+      "number": 66,
+      "question": "[Part 4] 주어진 단어를 올바른 순서로 배열하시오.\n\n(change / can / that / meet / I / will / you / so / the prince / you)",
+      "explanation": "so that + 주어 + 조동사 구문.",
+      "acceptedAnswers": [
+        "I will change you so that you can meet the prince!",
+        "I will change you so that you can meet the prince.",
+        "I will change you so that you can meet the prince",
+        "I'll change you so that you can meet the prince!"
+      ]
+    },
+    {
+      "tag": "단어배열",
+      "type": "sentence",
+      "answer": "Turn on the light so that I can see you.",
+      "number": 67,
+      "question": "주어진 단어를 올바른 순서로 배열하시오.\n\n(can / I / light / on / that / the / turn / see / so / you)",
+      "explanation": "Turn on the light so that I can see you. 명령문 + so that.",
+      "acceptedAnswers": [
+        "Turn on the light so that I can see you",
+        "Turn the light on so that I can see you.",
+        "Turn the light on so that I can see you"
+      ]
+    },
+    {
+      "tag": "단어배열",
+      "type": "sentence",
+      "answer": "I prepared breakfast so that Mom could rest.",
+      "number": 68,
+      "question": "주어진 단어를 올바른 순서로 배열하시오.\n\n(I / could / rest / prepared / so / Mom / breakfast / that)",
+      "explanation": "주절이 과거이므로 so that 절에 could.",
+      "acceptedAnswers": [
+        "I prepared breakfast so that Mom could rest"
+      ]
+    },
+    {
+      "tag": "단어배열",
+      "type": "sentence",
+      "answer": "I gave my email address to Judy so that she could contact me.",
+      "number": 69,
+      "question": "주어진 단어를 올바른 순서로 배열하시오.\n\n(that / she / Judy / I / email / me / could / so / to / address / my / gave / contact)",
+      "explanation": "4형식/3형식 전환과 so that 구문 결합.",
+      "acceptedAnswers": [
+        "I gave my email address to Judy so that she could contact me"
+      ]
+    },
+    {
+      "tag": "단어배열",
+      "type": "sentence",
+      "answer": "I read English comic books so that I can learn new idioms.",
+      "number": 70,
+      "question": "주어진 단어를 올바른 순서로 배열하시오.\n\n(new / I / idioms / so / that / books / can / learn / comic / read / English / I)",
+      "explanation": "현재 시제이므로 so that I can.",
+      "acceptedAnswers": [
+        "I read English comic books so that I can learn new idioms"
+      ]
+    },
+    {
+      "tag": "단어배열",
+      "type": "sentence",
+      "answer": "The fennec fox's feet are covered with fur so that it can walk on the hot sand.",
+      "number": 71,
+      "question": "주어진 단어를 올바른 순서로 배열하시오.\n\n(that / on / the fennec fox's / with / the / fur / covered / can / sand / walk / it / are / hot / feet / so)",
+      "explanation": "수동태 + so that 구문.",
+      "acceptedAnswers": [
+        "The fennec fox's feet are covered with fur so that it can walk on the hot sand"
+      ]
+    },
+    {
+      "tag": "단어배열",
+      "type": "sentence",
+      "answer": "I studied hard so that I could pass the exam.",
+      "number": 72,
+      "question": "주어진 단어를 올바른 순서로 배열하시오.\n\n(studied / so / I / could / that / hard / I / the exam / pass)",
+      "explanation": "주절이 과거이므로 so that 절에 could.",
+      "acceptedAnswers": [
+        "I studied hard so that I could pass the exam"
+      ]
+    },
+    {
+      "tag": "단어배열",
+      "type": "sentence",
+      "answer": "We went up to the top floor so that we could see the view.",
+      "number": 73,
+      "question": "주어진 단어를 올바른 순서로 배열하시오.\n\n(the / that / we / view / went / floor / so / top / the / could / see / up / to / we)",
+      "explanation": "주절이 과거이므로 so that we could.",
+      "acceptedAnswers": [
+        "We went up to the top floor so that we could see the view"
+      ]
+    },
+    {
+      "tag": "단어배열",
+      "type": "sentence",
+      "answer": "Yuna tried hard so that she could win the gold medal.",
+      "number": 74,
+      "question": "주어진 단어를 올바른 순서로 배열하시오.\n\n(win / hard / she / Yuna / medal / so / gold / the / could / that / tried)",
+      "explanation": "주절이 과거이므로 so that she could.",
+      "acceptedAnswers": [
+        "Yuna tried hard so that she could win the gold medal"
+      ]
+    },
+    {
+      "tag": "단어배열",
+      "type": "sentence",
+      "answer": "Switch the light off so that we can sleep well.",
+      "number": 75,
+      "question": "주어진 단어를 올바른 순서로 배열하시오.\n\n(that / off / can / we / switch / well / light / so / sleep / the)",
+      "explanation": "명령문이므로 so that we can. Switch off도 가능.",
+      "acceptedAnswers": [
+        "Switch the light off so that we can sleep well",
+        "Switch off the light so that we can sleep well.",
+        "Switch off the light so that we can sleep well"
+      ]
+    },
+    {
+      "tag": "단어배열",
+      "type": "sentence",
+      "answer": "We are here so that we can study air and ocean currents.",
+      "number": 76,
+      "question": "주어진 단어를 올바른 순서로 배열하시오.\n\n(we / ocean / we / currents / here / are / study / that / can / air / so / and)",
+      "explanation": "현재 시제이므로 so that we can.",
+      "acceptedAnswers": [
+        "We are here so that we can study air and ocean currents",
+        "We're here so that we can study air and ocean currents."
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "I pressed the button so that I could turn on the computer.",
+      "number": 77,
+      "question": "다음 우리말을 영어로 쓰시오.\n\n나는 컴퓨터를 켜기 위해서 버튼을 눌렀다.",
+      "explanation": "\"~하기 위해서\"는 so that + 주어 + 조동사. 주절이 과거(pressed)이므로 could.",
+      "acceptedAnswers": [
+        "I pressed the button so that I could turn on the computer",
+        "I pushed the button so that I could turn on the computer.",
+        "I pushed the button so that I could turn on the computer",
+        "I pressed a button so that I could turn on the computer.",
+        "I pressed a button so that I could turn on the computer",
+        "I pushed a button so that I could turn on the computer.",
+        "I pushed a button so that I could turn on the computer",
+        "I pressed the button so that I could switch on the computer.",
+        "I pressed the button so that I could switch on the computer",
+        "I pressed the button so that I could turn the computer on.",
+        "I pressed the button so that I could turn the computer on"
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "Sora bought the book so that she could study English hard.",
+      "number": 78,
+      "question": "다음 우리말을 영어로 쓰시오.\n\n소라는 영어를 열심히 공부하기 위해 책을 샀다.",
+      "explanation": "\"~하기 위해\"는 so that + 주어 + 조동사. 주절이 과거(bought)이므로 could.",
+      "acceptedAnswers": [
+        "Sora bought the book so that she could study English hard",
+        "Sora bought a book so that she could study English hard.",
+        "Sora bought a book so that she could study English hard",
+        "Sora bought the book so that she could study English.",
+        "Sora bought the book so that she could study English",
+        "Sora bought a book so that she could study English.",
+        "Sora bought a book so that she could study English",
+        "Sora bought books so that she could study English hard.",
+        "Sora bought books so that she could study English hard",
+        "Sora bought books so that she could study English.",
+        "Sora bought books so that she could study English"
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "Junho turned off the light so that he could sleep well.",
+      "number": 79,
+      "question": "다음 우리말을 영어로 쓰시오.\n\n준호는 잘 자기 위해 불을 껐다.",
+      "explanation": "\"~하기 위해\"는 so that + 주어 + 조동사. 주절이 과거(turned off)이므로 could.",
+      "acceptedAnswers": [
+        "Junho turned off the light so that he could sleep well",
+        "Junho turned off the lights so that he could sleep well.",
+        "Junho turned off the lights so that he could sleep well",
+        "Junho switched off the light so that he could sleep well.",
+        "Junho switched off the light so that he could sleep well",
+        "Junho turned the light off so that he could sleep well.",
+        "Junho turned the light off so that he could sleep well",
+        "Junho turned the lights off so that he could sleep well.",
+        "Junho turned the lights off so that he could sleep well",
+        "Junho switched off the lights so that he could sleep well.",
+        "Junho switched off the lights so that he could sleep well"
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "He went to India so that he could help the poor.",
+      "number": 80,
+      "question": "다음 우리말을 영어로 쓰시오.\n\n그는 가난한 사람들을 돕기 위해 인도로 갔다.",
+      "explanation": "\"~하기 위해\"는 so that + 주어 + 조동사. \"the poor\"는 가난한 사람들.",
+      "acceptedAnswers": [
+        "He went to India so that he could help the poor",
+        "He went to India so that he could help poor people.",
+        "He went to India so that he could help poor people",
+        "He went to India so that he could help the poor people.",
+        "He went to India so that he could help the poor people",
+        "He traveled to India so that he could help the poor.",
+        "He traveled to India so that he could help the poor",
+        "He travelled to India so that he could help the poor.",
+        "He travelled to India so that he could help the poor"
+      ]
+    }
+  ],
+  "naesin_problem_sheets_f19ea3f4-7ddc-47eb-ab4c-c6c74d83f994": [
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "2",
+      "number": 1,
+      "options": [
+        "can",
+        "could"
+      ],
+      "question": "[Part 1] 괄호 안에서 알맞은 표현을 고르시오.\n\nI studied hard so that I (can / could) pass the exam.",
+      "explanation": "주절이 과거(studied)이므로 종속절도 could"
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "1",
+      "number": 2,
+      "options": [
+        "can",
+        "will"
+      ],
+      "question": "Speak slowly so that others (can / will) understand you.",
+      "explanation": "명령문은 현재 시제이므로 can"
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "1",
+      "number": 3,
+      "options": [
+        "order",
+        "so"
+      ],
+      "question": "We went early in (order / so) that we could get good seats.",
+      "explanation": "in order that = so that (목적)"
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "1",
+      "number": 4,
+      "options": [
+        "as",
+        "that"
+      ],
+      "question": "He married her so (as / that) to be with her forever.",
+      "explanation": "so as to + 동사원형 = ~하기 위해"
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "2",
+      "number": 5,
+      "options": [
+        "will",
+        "would"
+      ],
+      "question": "I hurried so that I (will / would) not miss the train.",
+      "explanation": "주절이 과거(hurried)이므로 would"
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "1",
+      "number": 6,
+      "options": [
+        "can",
+        "could"
+      ],
+      "question": "Turn the music down so that I (can / could) read the book.",
+      "explanation": "명령문은 현재 시제이므로 can"
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "1",
+      "number": 7,
+      "options": [
+        "can",
+        "could"
+      ],
+      "question": "I will bring the map so that we (can / could) find the way easily.",
+      "explanation": "주절이 미래(will)이므로 can"
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "2",
+      "number": 8,
+      "options": [
+        "can",
+        "could"
+      ],
+      "question": "The Wright brothers invented the airplane so that we (can / could) go to other places quickly.",
+      "explanation": "주절이 과거(invented)이므로 could"
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "1",
+      "number": 9,
+      "options": [
+        "so that",
+        "because"
+      ],
+      "question": "I go for a walk every morning (so that / because) I can stay healthy.",
+      "explanation": "건강 유지를 위해(목적) → so that. because는 이유."
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "1",
+      "number": 10,
+      "options": [
+        "can",
+        "will"
+      ],
+      "question": "Gwen goes jogging so that she (can / will) stay in shape.",
+      "explanation": "주절이 현재(goes)이므로 can"
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "2",
+      "number": 11,
+      "options": [
+        "can",
+        "could"
+      ],
+      "question": "Rachel bought a swimsuit so that she (can / could) swim in the pool.",
+      "explanation": "주절이 과거(bought)이므로 could"
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "1",
+      "number": 12,
+      "options": [
+        "can",
+        "will"
+      ],
+      "question": "Justin studies hard so that he (can / will) be a lawyer.",
+      "explanation": "주절이 현재(studies)이므로 can"
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "2",
+      "number": 13,
+      "options": [
+        "can",
+        "could"
+      ],
+      "question": "I called Tiffany so that I (can / could) invite her to my party.",
+      "explanation": "주절이 과거(called)이므로 could"
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "1",
+      "number": 14,
+      "options": [
+        "can",
+        "could"
+      ],
+      "question": "He practices running so that he (can / could) finish the marathon.",
+      "explanation": "주절이 현재(practices)이므로 can"
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "1",
+      "number": 15,
+      "options": [
+        "can",
+        "could"
+      ],
+      "question": "Jiho is making a cake so that he (can / could) make his mom happy.",
+      "explanation": "주절이 현재진행(is making)이므로 can"
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "1",
+      "number": 16,
+      "options": [
+        "don't",
+        "didn't"
+      ],
+      "question": "Leave early so that you (don't / didn't) miss the bus.",
+      "explanation": "명령문은 현재 시제이므로 don't"
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "2",
+      "number": 17,
+      "options": [
+        "can",
+        "could"
+      ],
+      "question": "I went to Canada so that I (can / could) learn English.",
+      "explanation": "주절이 과거(went)이므로 could"
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "1",
+      "number": 18,
+      "options": [
+        "can",
+        "could"
+      ],
+      "question": "Step forward so that you (can / could) take a closer look.",
+      "explanation": "명령문은 현재 시제이므로 can"
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "1",
+      "number": 19,
+      "options": [
+        "can",
+        "could"
+      ],
+      "question": "I'll leave the door open so that you (can / could) come in.",
+      "explanation": "주절이 미래(will)이므로 can"
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "1",
+      "number": 20,
+      "options": [
+        "can",
+        "will"
+      ],
+      "question": "Please speak louder so that all of us (can / will) hear you.",
+      "explanation": "명령문은 현재 시제이므로 can"
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "2",
+      "number": 21,
+      "options": [
+        "can",
+        "could"
+      ],
+      "question": "We climbed higher so that we (can / could) get a better view.",
+      "explanation": "주절이 과거(climbed)이므로 could"
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "1",
+      "number": 22,
+      "options": [
+        "can",
+        "could"
+      ],
+      "question": "Switch the light off so that we (can / could) sleep well.",
+      "explanation": "명령문은 현재 시제이므로 can"
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "2",
+      "number": 23,
+      "options": [
+        "can",
+        "could"
+      ],
+      "question": "I gave her my phone number so that she (can / could) keep in touch.",
+      "explanation": "주절이 과거(gave)이므로 could"
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "1",
+      "number": 24,
+      "options": [
+        "I",
+        "can"
+      ],
+      "question": "I often stop working so that (I / can) can take a rest.",
+      "explanation": "so that 뒤에 주어+조동사 필수. so that I can"
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "1",
+      "number": 25,
+      "options": [
+        "that",
+        "what"
+      ],
+      "question": "She made a cake so (that / what) she could give it to her boyfriend.",
+      "explanation": "so that + 주어 + 조동사. what은 불가."
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "He ran so that he might become a champion.",
+      "number": 26,
+      "question": "[Part 2] 다음 문장을 so that 구문으로 바꿔 쓰시오.\n\nHe ran to become a champion.",
+      "explanation": "to부정사 목적을 so that + 주어 + 조동사로 전환. 과거이므로 might/could 사용.",
+      "acceptedAnswers": [
+        "He ran so that he might become a champion",
+        "He ran so that he could become a champion.",
+        "He ran so that he could become a champion"
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "I went to America so that I could speak English well.",
+      "number": 27,
+      "question": "다음 문장을 so that 구문으로 바꿔 쓰시오.\n\nI went to America to speak English well.",
+      "explanation": "to부정사 목적을 so that I could로 전환. 과거 시제이므로 could.",
+      "acceptedAnswers": [
+        "I went to America so that I could speak English well",
+        "I went to America so that I might speak English well.",
+        "I went to America so that I might speak English well"
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "Let's start early so that we may arrive before dark.",
+      "number": 28,
+      "question": "다음 문장을 so that 구문으로 바꿔 쓰시오.\n\nLet's start early to arrive before dark.",
+      "explanation": "Let's 제안문에서 to부정사를 so that we may/can으로 전환.",
+      "acceptedAnswers": [
+        "Let's start early so that we may arrive before dark",
+        "Let's start early so that we can arrive before dark.",
+        "Let's start early so that we can arrive before dark",
+        "Let us start early so that we may arrive before dark."
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "Jane ran out so that she could catch a taxi.",
+      "number": 29,
+      "question": "다음 문장을 so that 구문으로 바꿔 쓰시오.\n\nJane ran out to catch a taxi.",
+      "explanation": "to부정사 목적을 so that she could로 전환. 과거 시제.",
+      "acceptedAnswers": [
+        "Jane ran out so that she could catch a taxi"
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "I'll walk fast so that I can get there in time.",
+      "number": 30,
+      "question": "다음 문장을 so that 구문으로 바꿔 쓰시오.\n\nI'll walk fast to get there in time.",
+      "explanation": "미래 시제이므로 so that I can.",
+      "acceptedAnswers": [
+        "I'll walk fast so that I can get there in time",
+        "I will walk fast so that I can get there in time."
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "She exercises every day so that she can lose weight.",
+      "number": 31,
+      "question": "다음 문장을 so that 구문으로 바꿔 쓰시오.\n\nShe exercises every day to lose weight.",
+      "explanation": "현재 시제의 습관이므로 so that she can.",
+      "acceptedAnswers": [
+        "She exercises every day so that she can lose weight"
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "They went to bed early so that they could get up early.",
+      "number": 32,
+      "question": "다음 문장을 so that 구문으로 바꿔 쓰시오.\n\nThey went to bed early to get up early.",
+      "explanation": "과거 시제이므로 so that they could.",
+      "acceptedAnswers": [
+        "They went to bed early so that they could get up early"
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "He stepped aside so that I could pass by.",
+      "number": 33,
+      "question": "다음 문장을 so that 구문으로 바꿔 쓰시오.\n\nHe stepped aside for me to pass by.",
+      "explanation": "for me to → so that I could. 의미상 주어 me가 절의 주어 I로 변환.",
+      "acceptedAnswers": [
+        "He stepped aside so that I could pass by"
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "You must work hard so that you wouldn't fail.",
+      "number": 34,
+      "question": "다음 문장을 so that 구문으로 바꿔 쓰시오.\n\nYou must work hard so as not to fail.",
+      "explanation": "so as not to → so that + 주어 + 부정 조동사.",
+      "acceptedAnswers": [
+        "You must work hard so that you wouldn't fail",
+        "You must work hard so that you won't fail.",
+        "You must work hard so that you won't fail",
+        "You must work hard so that you will not fail.",
+        "You must work hard so that you will not fail",
+        "You must work hard so that you don't fail.",
+        "You must work hard so that you don't fail",
+        "You must work hard so that you would not fail."
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "They left home early so that they can get there on time.",
+      "number": 35,
+      "question": "다음 문장을 so that 구문으로 바꿔 쓰시오.\n\nThey left home early in order that they can get there on time.",
+      "explanation": "in order that → so that. 나머지 동일.",
+      "acceptedAnswers": [
+        "They left home early so that they can get there on time",
+        "They left home early so that they could get there on time.",
+        "They left home early so that they could get there on time"
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "I go for a walk so that I can stay healthy.",
+      "number": 36,
+      "question": "다음 문장을 so that 구문으로 바꿔 쓰시오.\n\nI go for a walk in order to stay healthy.",
+      "explanation": "in order to → so that I can. 현재 시제이므로 can.",
+      "acceptedAnswers": [
+        "I go for a walk so that I can stay healthy"
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "Turn off the light so that the baby can sleep well.",
+      "number": 37,
+      "question": "다음 문장을 so that 구문으로 바꿔 쓰시오.\n\nTurn off the light for the baby to sleep well.",
+      "explanation": "for + 명사 + to부정사 → so that + 주어 + can. 명령문이므로 can.",
+      "acceptedAnswers": [
+        "Turn off the light so that the baby can sleep well"
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "He took a taxi so that he wouldn't be late.",
+      "number": 38,
+      "question": "다음 문장을 so that 구문으로 바꿔 쓰시오.\n\nHe took a taxi not to be late.",
+      "explanation": "not to → so that + wouldn't. 부정 목적 표현.",
+      "acceptedAnswers": [
+        "He took a taxi so that he wouldn't be late",
+        "He took a taxi so that he would not be late.",
+        "He took a taxi so that he would not be late"
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "I want to sit by the window so that I can see outside.",
+      "number": 39,
+      "question": "다음 문장을 so that 구문으로 바꿔 쓰시오.\n\nI want to sit by the window to see outside.",
+      "explanation": "to부정사 목적을 so that I can으로 전환.",
+      "acceptedAnswers": [
+        "I want to sit by the window so that I can see outside"
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "She took my bag so that I could walk comfortably.",
+      "number": 40,
+      "question": "다음 문장을 so that 구문으로 바꿔 쓰시오.\n\nShe took my bag for me to walk comfortably.",
+      "explanation": "for me to → so that I could. 과거 시제.",
+      "acceptedAnswers": [
+        "She took my bag so that I could walk comfortably"
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "The man broke the door so that they could get out.",
+      "number": 41,
+      "question": "다음 문장을 so that 구문으로 바꿔 쓰시오.\n\nThe man broke the door for them to get out.",
+      "explanation": "for them to → so that they could. 과거 시제.",
+      "acceptedAnswers": [
+        "The man broke the door so that they could get out"
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "I prepared breakfast so that she could rest.",
+      "number": 42,
+      "question": "다음 문장을 so that 구문으로 바꿔 쓰시오.\n\nI prepared breakfast for her to rest.",
+      "explanation": "for her to → so that she could. 과거 시제.",
+      "acceptedAnswers": [
+        "I prepared breakfast so that she could rest"
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "She cleaned the house so that the visitors could feel comfortable.",
+      "number": 43,
+      "question": "다음 문장을 so that 구문으로 바꿔 쓰시오.\n\nShe cleaned the house for the visitors to feel comfortable.",
+      "explanation": "for the visitors to → so that the visitors could. 과거 시제.",
+      "acceptedAnswers": [
+        "She cleaned the house so that the visitors could feel comfortable"
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "I don't take showers long so that I may not waste water.",
+      "number": 44,
+      "question": "다음 문장을 so that 구문으로 바꿔 쓰시오.\n\nI don't take showers long in order not to waste water.",
+      "explanation": "in order not to → so that + may not/won't. 부정 목적 표현.",
+      "acceptedAnswers": [
+        "I don't take showers long so that I may not waste water",
+        "I don't take showers long so that I won't waste water.",
+        "I don't take showers long so that I won't waste water",
+        "I don't take showers long so that I don't waste water.",
+        "I don't take showers long so that I don't waste water",
+        "I don't take showers long so that I will not waste water.",
+        "I don't take showers long so that I will not waste water",
+        "I do not take showers long so that I may not waste water."
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "I studied very hard so that I wouldn't fail.",
+      "number": 45,
+      "question": "다음 문장을 so that 구문으로 바꿔 쓰시오.\n\nI studied very hard in order not to fail.",
+      "explanation": "in order not to → so that I wouldn't. 과거 시제.",
+      "acceptedAnswers": [
+        "I studied very hard so that I wouldn't fail",
+        "I studied very hard so that I would not fail.",
+        "I studied very hard so that I would not fail",
+        "I studied very hard so that I'dn't fail."
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "She practiced skating so that she could be good at it.",
+      "number": 46,
+      "question": "다음 문장을 so that 구문으로 바꿔 쓰시오.\n\nShe practiced skating in order to be good at it.",
+      "explanation": "in order to → so that she could. 과거 시제.",
+      "acceptedAnswers": [
+        "She practiced skating so that she could be good at it"
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "I took off my shoes so that I wouldn't make any noise.",
+      "number": 47,
+      "question": "다음 문장을 so that 구문으로 바꿔 쓰시오.\n\nI took off my shoes in order not to make noise.",
+      "explanation": "in order not to → so that I wouldn't. 부정문에서 any 추가 가능.",
+      "acceptedAnswers": [
+        "I took off my shoes so that I wouldn't make any noise",
+        "I took off my shoes so that I would not make any noise.",
+        "I took off my shoes so that I would not make any noise",
+        "I took off my shoes so that I wouldn't make noise.",
+        "I took off my shoes so that I wouldn't make noise",
+        "I took off my shoes so that I would not make noise.",
+        "I took off my shoes so that I would not make noise",
+        "I took off my shoes so that I'dn't make any noise."
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "I made vocabulary cards so that I could remember them.",
+      "number": 48,
+      "question": "다음 문장을 so that 구문으로 바꿔 쓰시오.\n\nI made vocabulary cards to remember them.",
+      "explanation": "to부정사 목적을 so that I can으로 전환. 시제가 현재로 바뀌는 점에 주의.",
+      "acceptedAnswers": [
+        "I make vocabulary cards so that I can remember them",
+        "I made vocabulary cards so that I could remember them.",
+        "I made vocabulary cards so that I could remember them"
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "He cut the bread in half so that he could share it.",
+      "number": 49,
+      "question": "다음 문장을 so that 구문으로 바꿔 쓰시오.\n\nHe cut the bread in half to share it.",
+      "explanation": "to부정사 목적을 so that he could로 전환. 과거 시제.",
+      "acceptedAnswers": [
+        "He cut the bread in half so that he could share it"
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "I left my name card so that he could contact me.",
+      "number": 50,
+      "question": "다음 문장을 so that 구문으로 바꿔 쓰시오.\n\nI left my name card for him to contact me.",
+      "explanation": "for him to → so that he could. 과거 시제.",
+      "acceptedAnswers": [
+        "I left my name card so that he could contact me"
+      ]
+    },
+    {
+      "tag": "오류수정",
+      "type": "sentence",
+      "answer": "Mr. Kim is so kind that his students like him.",
+      "number": 51,
+      "question": "[Part 3] 다음 문장에서 틀린 부분을 찾아 올바른 문장 전체를 고쳐 쓰시오.\n\nMr. Kim is so kind that his students like.",
+      "explanation": "목적어 him 누락. like는 타동사이므로 목적어가 필요합니다.",
+      "acceptedAnswers": [
+        "Mr. Kim is so kind that his students like him"
+      ]
+    },
+    {
+      "tag": "오류수정",
+      "type": "sentence",
+      "answer": "The place was so beautiful that they wanted to live there.",
+      "number": 52,
+      "question": "다음 문장에서 틀린 부분을 찾아 올바른 문장 전체를 고쳐 쓰시오.\n\nThe place was beautiful so that they wanted to live there.",
+      "explanation": "so ~ that 결과 구문의 어순: so + 형용사 + that. \"so that\"(목적)과 \"so...that\"(결과) 구분.",
+      "acceptedAnswers": [
+        "The place was so beautiful that they wanted to live there"
+      ]
+    },
+    {
+      "tag": "오류수정",
+      "type": "sentence",
+      "answer": "I often stop working so that I can take a rest.",
+      "number": 53,
+      "question": "다음 문장에서 틀린 부분을 찾아 올바른 문장 전체를 고쳐 쓰시오.\n\nI often stop working so that can take a rest.",
+      "explanation": "so that 뒤에 주어 I가 누락. so that + 주어 + 조동사 + 동사원형.",
+      "acceptedAnswers": [
+        "I often stop working so that I can take a rest"
+      ]
+    },
+    {
+      "tag": "오류수정",
+      "type": "sentence",
+      "answer": "The boy saved money so that he could buy his brother's present.",
+      "number": 54,
+      "question": "다음 문장에서 틀린 부분을 찾아 올바른 문장 전체를 고쳐 쓰시오.\n\nThe boy saved money so that he can buy his brother's present.",
+      "explanation": "주절이 과거(saved)이므로 can → could.",
+      "acceptedAnswers": [
+        "The boy saved money so that he could buy his brother's present"
+      ]
+    },
+    {
+      "tag": "오류수정",
+      "type": "sentence",
+      "answer": "She went to the cafe so that she could meet her dad.",
+      "number": 55,
+      "question": "다음 문장에서 틀린 부분을 찾아 올바른 문장 전체를 고쳐 쓰시오.\n\nShe went to the cafe so that she can meet her dad.",
+      "explanation": "주절이 과거(went)이므로 can → could.",
+      "acceptedAnswers": [
+        "She went to the cafe so that she could meet her dad",
+        "She went to the café so that she could meet her dad.",
+        "She went to the café so that she could meet her dad"
+      ]
+    },
+    {
+      "tag": "오류수정",
+      "type": "sentence",
+      "answer": "They will get together so that they can watch a movie.",
+      "number": 56,
+      "question": "다음 문장에서 틀린 부분을 찾아 올바른 문장 전체를 고쳐 쓰시오.\n\nThey will get together so that can they watch a movie.",
+      "explanation": "so that 뒤 어순: 주어 + 조동사. can they(도치) → they can.",
+      "acceptedAnswers": [
+        "They will get together so that they can watch a movie",
+        "They'll get together so that they can watch a movie."
+      ]
+    },
+    {
+      "tag": "오류수정",
+      "type": "sentence",
+      "answer": "I brought an umbrella in order not to get wet.",
+      "number": 57,
+      "question": "다음 문장에서 틀린 부분을 찾아 올바른 문장 전체를 고쳐 쓰시오.\n\nI brought an umbrella in order to not get wet.",
+      "explanation": "부정 어순: in order not to. \"to not\"은 틀린 어순.",
+      "acceptedAnswers": [
+        "I brought an umbrella in order not to get wet"
+      ]
+    },
+    {
+      "tag": "오류수정",
+      "type": "sentence",
+      "answer": "I called the bookstore in order to place an order.",
+      "number": 58,
+      "question": "다음 문장에서 틀린 부분을 찾아 올바른 문장 전체를 고쳐 쓰시오.\n\nI called the bookstore so that to place an order.",
+      "explanation": "\"so that to\"는 불가. in order to / so as to + 동사원형 또는 so that + 주어 + 조동사.",
+      "acceptedAnswers": [
+        "I called the bookstore in order to place an order",
+        "I called the bookstore so as to place an order.",
+        "I called the bookstore so as to place an order",
+        "I called the bookstore so that I could place an order.",
+        "I called the bookstore so that I could place an order"
+      ]
+    },
+    {
+      "tag": "오류수정",
+      "type": "sentence",
+      "answer": "I was so surprised that I couldn't say anything.",
+      "number": 59,
+      "question": "다음 문장에서 틀린 부분을 찾아 올바른 문장 전체를 고쳐 쓰시오.\n\nI was surprised so that I couldn't say anything.",
+      "explanation": "so ~ that 결과 구문: so + 형용사 + that. \"so that\"(목적)이 아님.",
+      "acceptedAnswers": [
+        "I was so surprised that I couldn't say anything",
+        "I was so surprised that I could not say anything.",
+        "I was so surprised that I could not say anything"
+      ]
+    },
+    {
+      "tag": "오류수정",
+      "type": "sentence",
+      "answer": "Gwen reads a lot of books so that she can be a writer.",
+      "number": 60,
+      "question": "다음 문장에서 틀린 부분을 찾아 올바른 문장 전체를 고쳐 쓰시오.\n\nGwen reads a lot of books so that she could be a writer.",
+      "explanation": "주절이 현재(reads)이므로 could → can.",
+      "acceptedAnswers": [
+        "Gwen reads a lot of books so that she can be a writer"
+      ]
+    },
+    {
+      "tag": "오류수정",
+      "type": "sentence",
+      "answer": "I should exercise every day so that I can be healthy.",
+      "number": 61,
+      "question": "다음 문장에서 틀린 부분을 찾아 올바른 문장 전체를 고쳐 쓰시오.\n\nI should exercise every day in order to I can be healthy.",
+      "explanation": "\"in order to + 동사원형\" 또는 \"so that + 주어 + 조동사\". \"in order to I can\"은 두 구문 혼동.",
+      "acceptedAnswers": [
+        "I should exercise every day so that I can be healthy",
+        "I should exercise every day in order to be healthy.",
+        "I should exercise every day in order to be healthy"
+      ]
+    },
+    {
+      "tag": "오류수정",
+      "type": "sentence",
+      "answer": "He came early to take a good seat.",
+      "number": 62,
+      "question": "다음 문장에서 틀린 부분을 찾아 올바른 문장 전체를 고쳐 쓰시오.\n\nHe came early so that to take a good seat.",
+      "explanation": "\"so that to\"는 불가. to부정사 단독 또는 in order to 사용.",
+      "acceptedAnswers": [
+        "He came early to take a good seat",
+        "He came early in order to take a good seat.",
+        "He came early in order to take a good seat",
+        "He came early so that he could take a good seat.",
+        "He came early so that he could take a good seat"
+      ]
+    },
+    {
+      "tag": "오류수정",
+      "type": "sentence",
+      "answer": "Make a shopping list so that you can spend your money wisely.",
+      "number": 63,
+      "question": "다음 문장에서 틀린 부분을 찾아 올바른 문장 전체를 고쳐 쓰시오.\n\nMake a shopping list so that spend your money wisely.",
+      "explanation": "so that 뒤에 주어(you) + 조동사(can) 필수.",
+      "acceptedAnswers": [
+        "Make a shopping list so that you can spend your money wisely"
+      ]
+    },
+    {
+      "tag": "오류수정",
+      "type": "sentence",
+      "answer": "She made a cake so that she could give it to her boyfriend.",
+      "number": 64,
+      "question": "다음 문장에서 틀린 부분을 찾아 올바른 문장 전체를 고쳐 쓰시오.\n\nShe made a cake so what she could give it to her boyfriend.",
+      "explanation": "접속사 so that. so what은 틀림.",
+      "acceptedAnswers": [
+        "She made a cake so that she could give it to her boyfriend"
+      ]
+    },
+    {
+      "tag": "오류수정",
+      "type": "sentence",
+      "answer": "I left my name card so that he could contact me.",
+      "number": 65,
+      "question": "다음 문장에서 틀린 부분을 찾아 올바른 문장 전체를 고쳐 쓰시오.\n\nI left my name card so which he could contact me.",
+      "explanation": "접속사 so that. so which는 틀림.",
+      "acceptedAnswers": [
+        "I left my name card so that he could contact me"
+      ]
+    },
+    {
+      "tag": "단어배열",
+      "type": "sentence",
+      "answer": "I will change you so that you can meet the prince!",
+      "number": 66,
+      "question": "[Part 4] 주어진 단어를 올바른 순서로 배열하시오.\n\n(change / can / that / meet / I / will / you / so / the prince / you)",
+      "explanation": "so that + 주어 + 조동사 구문.",
+      "acceptedAnswers": [
+        "I will change you so that you can meet the prince!",
+        "I will change you so that you can meet the prince.",
+        "I will change you so that you can meet the prince",
+        "I'll change you so that you can meet the prince!"
+      ]
+    },
+    {
+      "tag": "단어배열",
+      "type": "sentence",
+      "answer": "Turn on the light so that I can see you.",
+      "number": 67,
+      "question": "주어진 단어를 올바른 순서로 배열하시오.\n\n(can / I / light / on / that / the / turn / see / so / you)",
+      "explanation": "Turn on the light so that I can see you. 명령문 + so that.",
+      "acceptedAnswers": [
+        "Turn on the light so that I can see you",
+        "Turn the light on so that I can see you.",
+        "Turn the light on so that I can see you"
+      ]
+    },
+    {
+      "tag": "단어배열",
+      "type": "sentence",
+      "answer": "I prepared breakfast so that Mom could rest.",
+      "number": 68,
+      "question": "주어진 단어를 올바른 순서로 배열하시오.\n\n(I / could / rest / prepared / so / Mom / breakfast / that)",
+      "explanation": "주절이 과거이므로 so that 절에 could.",
+      "acceptedAnswers": [
+        "I prepared breakfast so that Mom could rest"
+      ]
+    },
+    {
+      "tag": "단어배열",
+      "type": "sentence",
+      "answer": "I gave my email address to Judy so that she could contact me.",
+      "number": 69,
+      "question": "주어진 단어를 올바른 순서로 배열하시오.\n\n(that / she / Judy / I / email / me / could / so / to / address / my / gave / contact)",
+      "explanation": "4형식/3형식 전환과 so that 구문 결합.",
+      "acceptedAnswers": [
+        "I gave my email address to Judy so that she could contact me"
+      ]
+    },
+    {
+      "tag": "단어배열",
+      "type": "sentence",
+      "answer": "I read English comic books so that I can learn new idioms.",
+      "number": 70,
+      "question": "주어진 단어를 올바른 순서로 배열하시오.\n\n(new / I / idioms / so / that / books / can / learn / comic / read / English / I)",
+      "explanation": "현재 시제이므로 so that I can.",
+      "acceptedAnswers": [
+        "I read English comic books so that I can learn new idioms"
+      ]
+    },
+    {
+      "tag": "단어배열",
+      "type": "sentence",
+      "answer": "The fennec fox's feet are covered with fur so that it can walk on the hot sand.",
+      "number": 71,
+      "question": "주어진 단어를 올바른 순서로 배열하시오.\n\n(that / on / the fennec fox's / with / the / fur / covered / can / sand / walk / it / are / hot / feet / so)",
+      "explanation": "수동태 + so that 구문.",
+      "acceptedAnswers": [
+        "The fennec fox's feet are covered with fur so that it can walk on the hot sand"
+      ]
+    },
+    {
+      "tag": "단어배열",
+      "type": "sentence",
+      "answer": "I studied hard so that I could pass the exam.",
+      "number": 72,
+      "question": "주어진 단어를 올바른 순서로 배열하시오.\n\n(studied / so / I / could / that / hard / I / the exam / pass)",
+      "explanation": "주절이 과거이므로 so that 절에 could.",
+      "acceptedAnswers": [
+        "I studied hard so that I could pass the exam"
+      ]
+    },
+    {
+      "tag": "단어배열",
+      "type": "sentence",
+      "answer": "We went up to the top floor so that we could see the view.",
+      "number": 73,
+      "question": "주어진 단어를 올바른 순서로 배열하시오.\n\n(the / that / we / view / went / floor / so / top / the / could / see / up / to / we)",
+      "explanation": "주절이 과거이므로 so that we could.",
+      "acceptedAnswers": [
+        "We went up to the top floor so that we could see the view"
+      ]
+    },
+    {
+      "tag": "단어배열",
+      "type": "sentence",
+      "answer": "Yuna tried hard so that she could win the gold medal.",
+      "number": 74,
+      "question": "주어진 단어를 올바른 순서로 배열하시오.\n\n(win / hard / she / Yuna / medal / so / gold / the / could / that / tried)",
+      "explanation": "주절이 과거이므로 so that she could.",
+      "acceptedAnswers": [
+        "Yuna tried hard so that she could win the gold medal"
+      ]
+    },
+    {
+      "tag": "단어배열",
+      "type": "sentence",
+      "answer": "Switch the light off so that we can sleep well.",
+      "number": 75,
+      "question": "주어진 단어를 올바른 순서로 배열하시오.\n\n(that / off / can / we / switch / well / light / so / sleep / the)",
+      "explanation": "명령문이므로 so that we can. Switch off도 가능.",
+      "acceptedAnswers": [
+        "Switch the light off so that we can sleep well",
+        "Switch off the light so that we can sleep well.",
+        "Switch off the light so that we can sleep well"
+      ]
+    },
+    {
+      "tag": "단어배열",
+      "type": "sentence",
+      "answer": "We are here so that we can study air and ocean currents.",
+      "number": 76,
+      "question": "주어진 단어를 올바른 순서로 배열하시오.\n\n(we / ocean / we / currents / here / are / study / that / can / air / so / and)",
+      "explanation": "현재 시제이므로 so that we can.",
+      "acceptedAnswers": [
+        "We are here so that we can study air and ocean currents",
+        "We're here so that we can study air and ocean currents."
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "I pressed the button so that I could turn on the computer.",
+      "number": 77,
+      "question": "다음 우리말을 영어로 쓰시오.\n\n나는 컴퓨터를 켜기 위해서 버튼을 눌렀다.",
+      "explanation": "\"~하기 위해서\"는 so that + 주어 + 조동사. 주절이 과거(pressed)이므로 could.",
+      "acceptedAnswers": [
+        "I pressed the button so that I could turn on the computer",
+        "I pushed the button so that I could turn on the computer.",
+        "I pushed the button so that I could turn on the computer",
+        "I pressed a button so that I could turn on the computer.",
+        "I pressed a button so that I could turn on the computer",
+        "I pushed a button so that I could turn on the computer.",
+        "I pushed a button so that I could turn on the computer",
+        "I pressed the button so that I could switch on the computer.",
+        "I pressed the button so that I could switch on the computer",
+        "I pressed the button so that I could turn the computer on.",
+        "I pressed the button so that I could turn the computer on"
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "Sora bought the book so that she could study English hard.",
+      "number": 78,
+      "question": "다음 우리말을 영어로 쓰시오.\n\n소라는 영어를 열심히 공부하기 위해 책을 샀다.",
+      "explanation": "\"~하기 위해\"는 so that + 주어 + 조동사. 주절이 과거(bought)이므로 could.",
+      "acceptedAnswers": [
+        "Sora bought the book so that she could study English hard",
+        "Sora bought a book so that she could study English hard.",
+        "Sora bought a book so that she could study English hard",
+        "Sora bought the book so that she could study English.",
+        "Sora bought the book so that she could study English",
+        "Sora bought a book so that she could study English.",
+        "Sora bought a book so that she could study English",
+        "Sora bought books so that she could study English hard.",
+        "Sora bought books so that she could study English hard",
+        "Sora bought books so that she could study English.",
+        "Sora bought books so that she could study English"
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "Junho turned off the light so that he could sleep well.",
+      "number": 79,
+      "question": "다음 우리말을 영어로 쓰시오.\n\n준호는 잘 자기 위해 불을 껐다.",
+      "explanation": "\"~하기 위해\"는 so that + 주어 + 조동사. 주절이 과거(turned off)이므로 could.",
+      "acceptedAnswers": [
+        "Junho turned off the light so that he could sleep well",
+        "Junho turned off the lights so that he could sleep well.",
+        "Junho turned off the lights so that he could sleep well",
+        "Junho switched off the light so that he could sleep well.",
+        "Junho switched off the light so that he could sleep well",
+        "Junho turned the light off so that he could sleep well.",
+        "Junho turned the light off so that he could sleep well",
+        "Junho turned the lights off so that he could sleep well.",
+        "Junho turned the lights off so that he could sleep well",
+        "Junho switched off the lights so that he could sleep well.",
+        "Junho switched off the lights so that he could sleep well"
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "He went to India so that he could help the poor.",
+      "number": 80,
+      "question": "다음 우리말을 영어로 쓰시오.\n\n그는 가난한 사람들을 돕기 위해 인도로 갔다.",
+      "explanation": "\"~하기 위해\"는 so that + 주어 + 조동사. \"the poor\"는 가난한 사람들.",
+      "acceptedAnswers": [
+        "He went to India so that he could help the poor",
+        "He went to India so that he could help poor people.",
+        "He went to India so that he could help poor people",
+        "He went to India so that he could help the poor people.",
+        "He went to India so that he could help the poor people",
+        "He traveled to India so that he could help the poor.",
+        "He traveled to India so that he could help the poor",
+        "He travelled to India so that he could help the poor.",
+        "He travelled to India so that he could help the poor"
+      ]
+    }
+  ],
+  "naesin_problem_sheets_32a52379-b4f4-4f1a-ae47-0efa483bcd16": [
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "2",
+      "number": 1,
+      "options": [
+        "can",
+        "could"
+      ],
+      "question": "[Part 1] 괄호 안에서 알맞은 표현을 고르시오.\n\nI studied hard so that I (can / could) pass the exam.",
+      "explanation": "주절이 과거(studied)이므로 종속절도 could"
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "1",
+      "number": 2,
+      "options": [
+        "can",
+        "will"
+      ],
+      "question": "Speak slowly so that others (can / will) understand you.",
+      "explanation": "명령문은 현재 시제이므로 can"
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "1",
+      "number": 3,
+      "options": [
+        "order",
+        "so"
+      ],
+      "question": "We went early in (order / so) that we could get good seats.",
+      "explanation": "in order that = so that (목적)"
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "1",
+      "number": 4,
+      "options": [
+        "as",
+        "that"
+      ],
+      "question": "He married her so (as / that) to be with her forever.",
+      "explanation": "so as to + 동사원형 = ~하기 위해"
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "2",
+      "number": 5,
+      "options": [
+        "will",
+        "would"
+      ],
+      "question": "I hurried so that I (will / would) not miss the train.",
+      "explanation": "주절이 과거(hurried)이므로 would"
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "1",
+      "number": 6,
+      "options": [
+        "can",
+        "could"
+      ],
+      "question": "Turn the music down so that I (can / could) read the book.",
+      "explanation": "명령문은 현재 시제이므로 can"
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "1",
+      "number": 7,
+      "options": [
+        "can",
+        "could"
+      ],
+      "question": "I will bring the map so that we (can / could) find the way easily.",
+      "explanation": "주절이 미래(will)이므로 can"
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "2",
+      "number": 8,
+      "options": [
+        "can",
+        "could"
+      ],
+      "question": "The Wright brothers invented the airplane so that we (can / could) go to other places quickly.",
+      "explanation": "주절이 과거(invented)이므로 could"
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "1",
+      "number": 9,
+      "options": [
+        "so that",
+        "because"
+      ],
+      "question": "I go for a walk every morning (so that / because) I can stay healthy.",
+      "explanation": "건강 유지를 위해(목적) → so that. because는 이유."
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "1",
+      "number": 10,
+      "options": [
+        "can",
+        "will"
+      ],
+      "question": "Gwen goes jogging so that she (can / will) stay in shape.",
+      "explanation": "주절이 현재(goes)이므로 can"
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "2",
+      "number": 11,
+      "options": [
+        "can",
+        "could"
+      ],
+      "question": "Rachel bought a swimsuit so that she (can / could) swim in the pool.",
+      "explanation": "주절이 과거(bought)이므로 could"
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "1",
+      "number": 12,
+      "options": [
+        "can",
+        "will"
+      ],
+      "question": "Justin studies hard so that he (can / will) be a lawyer.",
+      "explanation": "주절이 현재(studies)이므로 can"
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "2",
+      "number": 13,
+      "options": [
+        "can",
+        "could"
+      ],
+      "question": "I called Tiffany so that I (can / could) invite her to my party.",
+      "explanation": "주절이 과거(called)이므로 could"
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "1",
+      "number": 14,
+      "options": [
+        "can",
+        "could"
+      ],
+      "question": "He practices running so that he (can / could) finish the marathon.",
+      "explanation": "주절이 현재(practices)이므로 can"
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "1",
+      "number": 15,
+      "options": [
+        "can",
+        "could"
+      ],
+      "question": "Jiho is making a cake so that he (can / could) make his mom happy.",
+      "explanation": "주절이 현재진행(is making)이므로 can"
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "1",
+      "number": 16,
+      "options": [
+        "don't",
+        "didn't"
+      ],
+      "question": "Leave early so that you (don't / didn't) miss the bus.",
+      "explanation": "명령문은 현재 시제이므로 don't"
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "2",
+      "number": 17,
+      "options": [
+        "can",
+        "could"
+      ],
+      "question": "I went to Canada so that I (can / could) learn English.",
+      "explanation": "주절이 과거(went)이므로 could"
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "1",
+      "number": 18,
+      "options": [
+        "can",
+        "could"
+      ],
+      "question": "Step forward so that you (can / could) take a closer look.",
+      "explanation": "명령문은 현재 시제이므로 can"
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "1",
+      "number": 19,
+      "options": [
+        "can",
+        "could"
+      ],
+      "question": "I'll leave the door open so that you (can / could) come in.",
+      "explanation": "주절이 미래(will)이므로 can"
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "1",
+      "number": 20,
+      "options": [
+        "can",
+        "will"
+      ],
+      "question": "Please speak louder so that all of us (can / will) hear you.",
+      "explanation": "명령문은 현재 시제이므로 can"
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "2",
+      "number": 21,
+      "options": [
+        "can",
+        "could"
+      ],
+      "question": "We climbed higher so that we (can / could) get a better view.",
+      "explanation": "주절이 과거(climbed)이므로 could"
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "1",
+      "number": 22,
+      "options": [
+        "can",
+        "could"
+      ],
+      "question": "Switch the light off so that we (can / could) sleep well.",
+      "explanation": "명령문은 현재 시제이므로 can"
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "2",
+      "number": 23,
+      "options": [
+        "can",
+        "could"
+      ],
+      "question": "I gave her my phone number so that she (can / could) keep in touch.",
+      "explanation": "주절이 과거(gave)이므로 could"
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "1",
+      "number": 24,
+      "options": [
+        "I",
+        "can"
+      ],
+      "question": "I often stop working so that (I / can) can take a rest.",
+      "explanation": "so that 뒤에 주어+조동사 필수. so that I can"
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "1",
+      "number": 25,
+      "options": [
+        "that",
+        "what"
+      ],
+      "question": "She made a cake so (that / what) she could give it to her boyfriend.",
+      "explanation": "so that + 주어 + 조동사. what은 불가."
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "He ran so that he might become a champion.",
+      "number": 26,
+      "question": "[Part 2] 다음 문장을 so that 구문으로 바꿔 쓰시오.\n\nHe ran to become a champion.",
+      "explanation": "to부정사 목적을 so that + 주어 + 조동사로 전환. 과거이므로 might/could 사용.",
+      "acceptedAnswers": [
+        "He ran so that he might become a champion",
+        "He ran so that he could become a champion.",
+        "He ran so that he could become a champion"
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "I went to America so that I could speak English well.",
+      "number": 27,
+      "question": "다음 문장을 so that 구문으로 바꿔 쓰시오.\n\nI went to America to speak English well.",
+      "explanation": "to부정사 목적을 so that I could로 전환. 과거 시제이므로 could.",
+      "acceptedAnswers": [
+        "I went to America so that I could speak English well",
+        "I went to America so that I might speak English well.",
+        "I went to America so that I might speak English well"
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "Let's start early so that we may arrive before dark.",
+      "number": 28,
+      "question": "다음 문장을 so that 구문으로 바꿔 쓰시오.\n\nLet's start early to arrive before dark.",
+      "explanation": "Let's 제안문에서 to부정사를 so that we may/can으로 전환.",
+      "acceptedAnswers": [
+        "Let's start early so that we may arrive before dark",
+        "Let's start early so that we can arrive before dark.",
+        "Let's start early so that we can arrive before dark",
+        "Let us start early so that we may arrive before dark."
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "Jane ran out so that she could catch a taxi.",
+      "number": 29,
+      "question": "다음 문장을 so that 구문으로 바꿔 쓰시오.\n\nJane ran out to catch a taxi.",
+      "explanation": "to부정사 목적을 so that she could로 전환. 과거 시제.",
+      "acceptedAnswers": [
+        "Jane ran out so that she could catch a taxi"
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "I'll walk fast so that I can get there in time.",
+      "number": 30,
+      "question": "다음 문장을 so that 구문으로 바꿔 쓰시오.\n\nI'll walk fast to get there in time.",
+      "explanation": "미래 시제이므로 so that I can.",
+      "acceptedAnswers": [
+        "I'll walk fast so that I can get there in time",
+        "I will walk fast so that I can get there in time."
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "She exercises every day so that she can lose weight.",
+      "number": 31,
+      "question": "다음 문장을 so that 구문으로 바꿔 쓰시오.\n\nShe exercises every day to lose weight.",
+      "explanation": "현재 시제의 습관이므로 so that she can.",
+      "acceptedAnswers": [
+        "She exercises every day so that she can lose weight"
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "They went to bed early so that they could get up early.",
+      "number": 32,
+      "question": "다음 문장을 so that 구문으로 바꿔 쓰시오.\n\nThey went to bed early to get up early.",
+      "explanation": "과거 시제이므로 so that they could.",
+      "acceptedAnswers": [
+        "They went to bed early so that they could get up early"
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "He stepped aside so that I could pass by.",
+      "number": 33,
+      "question": "다음 문장을 so that 구문으로 바꿔 쓰시오.\n\nHe stepped aside for me to pass by.",
+      "explanation": "for me to → so that I could. 의미상 주어 me가 절의 주어 I로 변환.",
+      "acceptedAnswers": [
+        "He stepped aside so that I could pass by"
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "You must work hard so that you wouldn't fail.",
+      "number": 34,
+      "question": "다음 문장을 so that 구문으로 바꿔 쓰시오.\n\nYou must work hard so as not to fail.",
+      "explanation": "so as not to → so that + 주어 + 부정 조동사.",
+      "acceptedAnswers": [
+        "You must work hard so that you wouldn't fail",
+        "You must work hard so that you won't fail.",
+        "You must work hard so that you won't fail",
+        "You must work hard so that you will not fail.",
+        "You must work hard so that you will not fail",
+        "You must work hard so that you don't fail.",
+        "You must work hard so that you don't fail",
+        "You must work hard so that you would not fail."
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "They left home early so that they can get there on time.",
+      "number": 35,
+      "question": "다음 문장을 so that 구문으로 바꿔 쓰시오.\n\nThey left home early in order that they can get there on time.",
+      "explanation": "in order that → so that. 나머지 동일.",
+      "acceptedAnswers": [
+        "They left home early so that they can get there on time",
+        "They left home early so that they could get there on time.",
+        "They left home early so that they could get there on time"
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "I go for a walk so that I can stay healthy.",
+      "number": 36,
+      "question": "다음 문장을 so that 구문으로 바꿔 쓰시오.\n\nI go for a walk in order to stay healthy.",
+      "explanation": "in order to → so that I can. 현재 시제이므로 can.",
+      "acceptedAnswers": [
+        "I go for a walk so that I can stay healthy"
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "Turn off the light so that the baby can sleep well.",
+      "number": 37,
+      "question": "다음 문장을 so that 구문으로 바꿔 쓰시오.\n\nTurn off the light for the baby to sleep well.",
+      "explanation": "for + 명사 + to부정사 → so that + 주어 + can. 명령문이므로 can.",
+      "acceptedAnswers": [
+        "Turn off the light so that the baby can sleep well"
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "He took a taxi so that he wouldn't be late.",
+      "number": 38,
+      "question": "다음 문장을 so that 구문으로 바꿔 쓰시오.\n\nHe took a taxi not to be late.",
+      "explanation": "not to → so that + wouldn't. 부정 목적 표현.",
+      "acceptedAnswers": [
+        "He took a taxi so that he wouldn't be late",
+        "He took a taxi so that he would not be late.",
+        "He took a taxi so that he would not be late"
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "I want to sit by the window so that I can see outside.",
+      "number": 39,
+      "question": "다음 문장을 so that 구문으로 바꿔 쓰시오.\n\nI want to sit by the window to see outside.",
+      "explanation": "to부정사 목적을 so that I can으로 전환.",
+      "acceptedAnswers": [
+        "I want to sit by the window so that I can see outside"
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "She took my bag so that I could walk comfortably.",
+      "number": 40,
+      "question": "다음 문장을 so that 구문으로 바꿔 쓰시오.\n\nShe took my bag for me to walk comfortably.",
+      "explanation": "for me to → so that I could. 과거 시제.",
+      "acceptedAnswers": [
+        "She took my bag so that I could walk comfortably"
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "The man broke the door so that they could get out.",
+      "number": 41,
+      "question": "다음 문장을 so that 구문으로 바꿔 쓰시오.\n\nThe man broke the door for them to get out.",
+      "explanation": "for them to → so that they could. 과거 시제.",
+      "acceptedAnswers": [
+        "The man broke the door so that they could get out"
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "I prepared breakfast so that she could rest.",
+      "number": 42,
+      "question": "다음 문장을 so that 구문으로 바꿔 쓰시오.\n\nI prepared breakfast for her to rest.",
+      "explanation": "for her to → so that she could. 과거 시제.",
+      "acceptedAnswers": [
+        "I prepared breakfast so that she could rest"
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "She cleaned the house so that the visitors could feel comfortable.",
+      "number": 43,
+      "question": "다음 문장을 so that 구문으로 바꿔 쓰시오.\n\nShe cleaned the house for the visitors to feel comfortable.",
+      "explanation": "for the visitors to → so that the visitors could. 과거 시제.",
+      "acceptedAnswers": [
+        "She cleaned the house so that the visitors could feel comfortable"
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "I don't take showers long so that I may not waste water.",
+      "number": 44,
+      "question": "다음 문장을 so that 구문으로 바꿔 쓰시오.\n\nI don't take showers long in order not to waste water.",
+      "explanation": "in order not to → so that + may not/won't. 부정 목적 표현.",
+      "acceptedAnswers": [
+        "I don't take showers long so that I may not waste water",
+        "I don't take showers long so that I won't waste water.",
+        "I don't take showers long so that I won't waste water",
+        "I don't take showers long so that I don't waste water.",
+        "I don't take showers long so that I don't waste water",
+        "I don't take showers long so that I will not waste water.",
+        "I don't take showers long so that I will not waste water",
+        "I do not take showers long so that I may not waste water."
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "I studied very hard so that I wouldn't fail.",
+      "number": 45,
+      "question": "다음 문장을 so that 구문으로 바꿔 쓰시오.\n\nI studied very hard in order not to fail.",
+      "explanation": "in order not to → so that I wouldn't. 과거 시제.",
+      "acceptedAnswers": [
+        "I studied very hard so that I wouldn't fail",
+        "I studied very hard so that I would not fail.",
+        "I studied very hard so that I would not fail",
+        "I studied very hard so that I'dn't fail."
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "She practiced skating so that she could be good at it.",
+      "number": 46,
+      "question": "다음 문장을 so that 구문으로 바꿔 쓰시오.\n\nShe practiced skating in order to be good at it.",
+      "explanation": "in order to → so that she could. 과거 시제.",
+      "acceptedAnswers": [
+        "She practiced skating so that she could be good at it"
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "I took off my shoes so that I wouldn't make any noise.",
+      "number": 47,
+      "question": "다음 문장을 so that 구문으로 바꿔 쓰시오.\n\nI took off my shoes in order not to make noise.",
+      "explanation": "in order not to → so that I wouldn't. 부정문에서 any 추가 가능.",
+      "acceptedAnswers": [
+        "I took off my shoes so that I wouldn't make any noise",
+        "I took off my shoes so that I would not make any noise.",
+        "I took off my shoes so that I would not make any noise",
+        "I took off my shoes so that I wouldn't make noise.",
+        "I took off my shoes so that I wouldn't make noise",
+        "I took off my shoes so that I would not make noise.",
+        "I took off my shoes so that I would not make noise",
+        "I took off my shoes so that I'dn't make any noise."
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "I made vocabulary cards so that I could remember them.",
+      "number": 48,
+      "question": "다음 문장을 so that 구문으로 바꿔 쓰시오.\n\nI made vocabulary cards to remember them.",
+      "explanation": "to부정사 목적을 so that I can으로 전환. 시제가 현재로 바뀌는 점에 주의.",
+      "acceptedAnswers": [
+        "I make vocabulary cards so that I can remember them",
+        "I made vocabulary cards so that I could remember them.",
+        "I made vocabulary cards so that I could remember them"
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "He cut the bread in half so that he could share it.",
+      "number": 49,
+      "question": "다음 문장을 so that 구문으로 바꿔 쓰시오.\n\nHe cut the bread in half to share it.",
+      "explanation": "to부정사 목적을 so that he could로 전환. 과거 시제.",
+      "acceptedAnswers": [
+        "He cut the bread in half so that he could share it"
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "I left my name card so that he could contact me.",
+      "number": 50,
+      "question": "다음 문장을 so that 구문으로 바꿔 쓰시오.\n\nI left my name card for him to contact me.",
+      "explanation": "for him to → so that he could. 과거 시제.",
+      "acceptedAnswers": [
+        "I left my name card so that he could contact me"
+      ]
+    },
+    {
+      "tag": "오류수정",
+      "type": "sentence",
+      "answer": "Mr. Kim is so kind that his students like him.",
+      "number": 51,
+      "question": "[Part 3] 다음 문장에서 틀린 부분을 찾아 올바른 문장 전체를 고쳐 쓰시오.\n\nMr. Kim is so kind that his students like.",
+      "explanation": "목적어 him 누락. like는 타동사이므로 목적어가 필요합니다.",
+      "acceptedAnswers": [
+        "Mr. Kim is so kind that his students like him"
+      ]
+    },
+    {
+      "tag": "오류수정",
+      "type": "sentence",
+      "answer": "The place was so beautiful that they wanted to live there.",
+      "number": 52,
+      "question": "다음 문장에서 틀린 부분을 찾아 올바른 문장 전체를 고쳐 쓰시오.\n\nThe place was beautiful so that they wanted to live there.",
+      "explanation": "so ~ that 결과 구문의 어순: so + 형용사 + that. \"so that\"(목적)과 \"so...that\"(결과) 구분.",
+      "acceptedAnswers": [
+        "The place was so beautiful that they wanted to live there"
+      ]
+    },
+    {
+      "tag": "오류수정",
+      "type": "sentence",
+      "answer": "I often stop working so that I can take a rest.",
+      "number": 53,
+      "question": "다음 문장에서 틀린 부분을 찾아 올바른 문장 전체를 고쳐 쓰시오.\n\nI often stop working so that can take a rest.",
+      "explanation": "so that 뒤에 주어 I가 누락. so that + 주어 + 조동사 + 동사원형.",
+      "acceptedAnswers": [
+        "I often stop working so that I can take a rest"
+      ]
+    },
+    {
+      "tag": "오류수정",
+      "type": "sentence",
+      "answer": "The boy saved money so that he could buy his brother's present.",
+      "number": 54,
+      "question": "다음 문장에서 틀린 부분을 찾아 올바른 문장 전체를 고쳐 쓰시오.\n\nThe boy saved money so that he can buy his brother's present.",
+      "explanation": "주절이 과거(saved)이므로 can → could.",
+      "acceptedAnswers": [
+        "The boy saved money so that he could buy his brother's present"
+      ]
+    },
+    {
+      "tag": "오류수정",
+      "type": "sentence",
+      "answer": "She went to the cafe so that she could meet her dad.",
+      "number": 55,
+      "question": "다음 문장에서 틀린 부분을 찾아 올바른 문장 전체를 고쳐 쓰시오.\n\nShe went to the cafe so that she can meet her dad.",
+      "explanation": "주절이 과거(went)이므로 can → could.",
+      "acceptedAnswers": [
+        "She went to the cafe so that she could meet her dad",
+        "She went to the café so that she could meet her dad.",
+        "She went to the café so that she could meet her dad"
+      ]
+    },
+    {
+      "tag": "오류수정",
+      "type": "sentence",
+      "answer": "They will get together so that they can watch a movie.",
+      "number": 56,
+      "question": "다음 문장에서 틀린 부분을 찾아 올바른 문장 전체를 고쳐 쓰시오.\n\nThey will get together so that can they watch a movie.",
+      "explanation": "so that 뒤 어순: 주어 + 조동사. can they(도치) → they can.",
+      "acceptedAnswers": [
+        "They will get together so that they can watch a movie",
+        "They'll get together so that they can watch a movie."
+      ]
+    },
+    {
+      "tag": "오류수정",
+      "type": "sentence",
+      "answer": "I brought an umbrella in order not to get wet.",
+      "number": 57,
+      "question": "다음 문장에서 틀린 부분을 찾아 올바른 문장 전체를 고쳐 쓰시오.\n\nI brought an umbrella in order to not get wet.",
+      "explanation": "부정 어순: in order not to. \"to not\"은 틀린 어순.",
+      "acceptedAnswers": [
+        "I brought an umbrella in order not to get wet"
+      ]
+    },
+    {
+      "tag": "오류수정",
+      "type": "sentence",
+      "answer": "I called the bookstore in order to place an order.",
+      "number": 58,
+      "question": "다음 문장에서 틀린 부분을 찾아 올바른 문장 전체를 고쳐 쓰시오.\n\nI called the bookstore so that to place an order.",
+      "explanation": "\"so that to\"는 불가. in order to / so as to + 동사원형 또는 so that + 주어 + 조동사.",
+      "acceptedAnswers": [
+        "I called the bookstore in order to place an order",
+        "I called the bookstore so as to place an order.",
+        "I called the bookstore so as to place an order",
+        "I called the bookstore so that I could place an order.",
+        "I called the bookstore so that I could place an order"
+      ]
+    },
+    {
+      "tag": "오류수정",
+      "type": "sentence",
+      "answer": "I was so surprised that I couldn't say anything.",
+      "number": 59,
+      "question": "다음 문장에서 틀린 부분을 찾아 올바른 문장 전체를 고쳐 쓰시오.\n\nI was surprised so that I couldn't say anything.",
+      "explanation": "so ~ that 결과 구문: so + 형용사 + that. \"so that\"(목적)이 아님.",
+      "acceptedAnswers": [
+        "I was so surprised that I couldn't say anything",
+        "I was so surprised that I could not say anything.",
+        "I was so surprised that I could not say anything"
+      ]
+    },
+    {
+      "tag": "오류수정",
+      "type": "sentence",
+      "answer": "Gwen reads a lot of books so that she can be a writer.",
+      "number": 60,
+      "question": "다음 문장에서 틀린 부분을 찾아 올바른 문장 전체를 고쳐 쓰시오.\n\nGwen reads a lot of books so that she could be a writer.",
+      "explanation": "주절이 현재(reads)이므로 could → can.",
+      "acceptedAnswers": [
+        "Gwen reads a lot of books so that she can be a writer"
+      ]
+    },
+    {
+      "tag": "오류수정",
+      "type": "sentence",
+      "answer": "I should exercise every day so that I can be healthy.",
+      "number": 61,
+      "question": "다음 문장에서 틀린 부분을 찾아 올바른 문장 전체를 고쳐 쓰시오.\n\nI should exercise every day in order to I can be healthy.",
+      "explanation": "\"in order to + 동사원형\" 또는 \"so that + 주어 + 조동사\". \"in order to I can\"은 두 구문 혼동.",
+      "acceptedAnswers": [
+        "I should exercise every day so that I can be healthy",
+        "I should exercise every day in order to be healthy.",
+        "I should exercise every day in order to be healthy"
+      ]
+    },
+    {
+      "tag": "오류수정",
+      "type": "sentence",
+      "answer": "He came early to take a good seat.",
+      "number": 62,
+      "question": "다음 문장에서 틀린 부분을 찾아 올바른 문장 전체를 고쳐 쓰시오.\n\nHe came early so that to take a good seat.",
+      "explanation": "\"so that to\"는 불가. to부정사 단독 또는 in order to 사용.",
+      "acceptedAnswers": [
+        "He came early to take a good seat",
+        "He came early in order to take a good seat.",
+        "He came early in order to take a good seat",
+        "He came early so that he could take a good seat.",
+        "He came early so that he could take a good seat"
+      ]
+    },
+    {
+      "tag": "오류수정",
+      "type": "sentence",
+      "answer": "Make a shopping list so that you can spend your money wisely.",
+      "number": 63,
+      "question": "다음 문장에서 틀린 부분을 찾아 올바른 문장 전체를 고쳐 쓰시오.\n\nMake a shopping list so that spend your money wisely.",
+      "explanation": "so that 뒤에 주어(you) + 조동사(can) 필수.",
+      "acceptedAnswers": [
+        "Make a shopping list so that you can spend your money wisely"
+      ]
+    },
+    {
+      "tag": "오류수정",
+      "type": "sentence",
+      "answer": "She made a cake so that she could give it to her boyfriend.",
+      "number": 64,
+      "question": "다음 문장에서 틀린 부분을 찾아 올바른 문장 전체를 고쳐 쓰시오.\n\nShe made a cake so what she could give it to her boyfriend.",
+      "explanation": "접속사 so that. so what은 틀림.",
+      "acceptedAnswers": [
+        "She made a cake so that she could give it to her boyfriend"
+      ]
+    },
+    {
+      "tag": "오류수정",
+      "type": "sentence",
+      "answer": "I left my name card so that he could contact me.",
+      "number": 65,
+      "question": "다음 문장에서 틀린 부분을 찾아 올바른 문장 전체를 고쳐 쓰시오.\n\nI left my name card so which he could contact me.",
+      "explanation": "접속사 so that. so which는 틀림.",
+      "acceptedAnswers": [
+        "I left my name card so that he could contact me"
+      ]
+    },
+    {
+      "tag": "단어배열",
+      "type": "sentence",
+      "answer": "I will change you so that you can meet the prince!",
+      "number": 66,
+      "question": "[Part 4] 주어진 단어를 올바른 순서로 배열하시오.\n\n(change / can / that / meet / I / will / you / so / the prince / you)",
+      "explanation": "so that + 주어 + 조동사 구문.",
+      "acceptedAnswers": [
+        "I will change you so that you can meet the prince!",
+        "I will change you so that you can meet the prince.",
+        "I will change you so that you can meet the prince",
+        "I'll change you so that you can meet the prince!"
+      ]
+    },
+    {
+      "tag": "단어배열",
+      "type": "sentence",
+      "answer": "Turn on the light so that I can see you.",
+      "number": 67,
+      "question": "주어진 단어를 올바른 순서로 배열하시오.\n\n(can / I / light / on / that / the / turn / see / so / you)",
+      "explanation": "Turn on the light so that I can see you. 명령문 + so that.",
+      "acceptedAnswers": [
+        "Turn on the light so that I can see you",
+        "Turn the light on so that I can see you.",
+        "Turn the light on so that I can see you"
+      ]
+    },
+    {
+      "tag": "단어배열",
+      "type": "sentence",
+      "answer": "I prepared breakfast so that Mom could rest.",
+      "number": 68,
+      "question": "주어진 단어를 올바른 순서로 배열하시오.\n\n(I / could / rest / prepared / so / Mom / breakfast / that)",
+      "explanation": "주절이 과거이므로 so that 절에 could.",
+      "acceptedAnswers": [
+        "I prepared breakfast so that Mom could rest"
+      ]
+    },
+    {
+      "tag": "단어배열",
+      "type": "sentence",
+      "answer": "I gave my email address to Judy so that she could contact me.",
+      "number": 69,
+      "question": "주어진 단어를 올바른 순서로 배열하시오.\n\n(that / she / Judy / I / email / me / could / so / to / address / my / gave / contact)",
+      "explanation": "4형식/3형식 전환과 so that 구문 결합.",
+      "acceptedAnswers": [
+        "I gave my email address to Judy so that she could contact me"
+      ]
+    },
+    {
+      "tag": "단어배열",
+      "type": "sentence",
+      "answer": "I read English comic books so that I can learn new idioms.",
+      "number": 70,
+      "question": "주어진 단어를 올바른 순서로 배열하시오.\n\n(new / I / idioms / so / that / books / can / learn / comic / read / English / I)",
+      "explanation": "현재 시제이므로 so that I can.",
+      "acceptedAnswers": [
+        "I read English comic books so that I can learn new idioms"
+      ]
+    },
+    {
+      "tag": "단어배열",
+      "type": "sentence",
+      "answer": "The fennec fox's feet are covered with fur so that it can walk on the hot sand.",
+      "number": 71,
+      "question": "주어진 단어를 올바른 순서로 배열하시오.\n\n(that / on / the fennec fox's / with / the / fur / covered / can / sand / walk / it / are / hot / feet / so)",
+      "explanation": "수동태 + so that 구문.",
+      "acceptedAnswers": [
+        "The fennec fox's feet are covered with fur so that it can walk on the hot sand"
+      ]
+    },
+    {
+      "tag": "단어배열",
+      "type": "sentence",
+      "answer": "I studied hard so that I could pass the exam.",
+      "number": 72,
+      "question": "주어진 단어를 올바른 순서로 배열하시오.\n\n(studied / so / I / could / that / hard / I / the exam / pass)",
+      "explanation": "주절이 과거이므로 so that 절에 could.",
+      "acceptedAnswers": [
+        "I studied hard so that I could pass the exam"
+      ]
+    },
+    {
+      "tag": "단어배열",
+      "type": "sentence",
+      "answer": "We went up to the top floor so that we could see the view.",
+      "number": 73,
+      "question": "주어진 단어를 올바른 순서로 배열하시오.\n\n(the / that / we / view / went / floor / so / top / the / could / see / up / to / we)",
+      "explanation": "주절이 과거이므로 so that we could.",
+      "acceptedAnswers": [
+        "We went up to the top floor so that we could see the view"
+      ]
+    },
+    {
+      "tag": "단어배열",
+      "type": "sentence",
+      "answer": "Yuna tried hard so that she could win the gold medal.",
+      "number": 74,
+      "question": "주어진 단어를 올바른 순서로 배열하시오.\n\n(win / hard / she / Yuna / medal / so / gold / the / could / that / tried)",
+      "explanation": "주절이 과거이므로 so that she could.",
+      "acceptedAnswers": [
+        "Yuna tried hard so that she could win the gold medal"
+      ]
+    },
+    {
+      "tag": "단어배열",
+      "type": "sentence",
+      "answer": "Switch the light off so that we can sleep well.",
+      "number": 75,
+      "question": "주어진 단어를 올바른 순서로 배열하시오.\n\n(that / off / can / we / switch / well / light / so / sleep / the)",
+      "explanation": "명령문이므로 so that we can. Switch off도 가능.",
+      "acceptedAnswers": [
+        "Switch the light off so that we can sleep well",
+        "Switch off the light so that we can sleep well.",
+        "Switch off the light so that we can sleep well"
+      ]
+    },
+    {
+      "tag": "단어배열",
+      "type": "sentence",
+      "answer": "We are here so that we can study air and ocean currents.",
+      "number": 76,
+      "question": "주어진 단어를 올바른 순서로 배열하시오.\n\n(we / ocean / we / currents / here / are / study / that / can / air / so / and)",
+      "explanation": "현재 시제이므로 so that we can.",
+      "acceptedAnswers": [
+        "We are here so that we can study air and ocean currents",
+        "We're here so that we can study air and ocean currents."
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "I pressed the button so that I could turn on the computer.",
+      "number": 77,
+      "question": "다음 우리말을 영어로 쓰시오.\n\n나는 컴퓨터를 켜기 위해서 버튼을 눌렀다.",
+      "explanation": "\"~하기 위해서\"는 so that + 주어 + 조동사. 주절이 과거(pressed)이므로 could.",
+      "acceptedAnswers": [
+        "I pressed the button so that I could turn on the computer",
+        "I pushed the button so that I could turn on the computer.",
+        "I pushed the button so that I could turn on the computer",
+        "I pressed a button so that I could turn on the computer.",
+        "I pressed a button so that I could turn on the computer",
+        "I pushed a button so that I could turn on the computer.",
+        "I pushed a button so that I could turn on the computer",
+        "I pressed the button so that I could switch on the computer.",
+        "I pressed the button so that I could switch on the computer",
+        "I pressed the button so that I could turn the computer on.",
+        "I pressed the button so that I could turn the computer on"
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "Sora bought the book so that she could study English hard.",
+      "number": 78,
+      "question": "다음 우리말을 영어로 쓰시오.\n\n소라는 영어를 열심히 공부하기 위해 책을 샀다.",
+      "explanation": "\"~하기 위해\"는 so that + 주어 + 조동사. 주절이 과거(bought)이므로 could.",
+      "acceptedAnswers": [
+        "Sora bought the book so that she could study English hard",
+        "Sora bought a book so that she could study English hard.",
+        "Sora bought a book so that she could study English hard",
+        "Sora bought the book so that she could study English.",
+        "Sora bought the book so that she could study English",
+        "Sora bought a book so that she could study English.",
+        "Sora bought a book so that she could study English",
+        "Sora bought books so that she could study English hard.",
+        "Sora bought books so that she could study English hard",
+        "Sora bought books so that she could study English.",
+        "Sora bought books so that she could study English"
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "Junho turned off the light so that he could sleep well.",
+      "number": 79,
+      "question": "다음 우리말을 영어로 쓰시오.\n\n준호는 잘 자기 위해 불을 껐다.",
+      "explanation": "\"~하기 위해\"는 so that + 주어 + 조동사. 주절이 과거(turned off)이므로 could.",
+      "acceptedAnswers": [
+        "Junho turned off the light so that he could sleep well",
+        "Junho turned off the lights so that he could sleep well.",
+        "Junho turned off the lights so that he could sleep well",
+        "Junho switched off the light so that he could sleep well.",
+        "Junho switched off the light so that he could sleep well",
+        "Junho turned the light off so that he could sleep well.",
+        "Junho turned the light off so that he could sleep well",
+        "Junho turned the lights off so that he could sleep well.",
+        "Junho turned the lights off so that he could sleep well",
+        "Junho switched off the lights so that he could sleep well.",
+        "Junho switched off the lights so that he could sleep well"
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "He went to India so that he could help the poor.",
+      "number": 80,
+      "question": "다음 우리말을 영어로 쓰시오.\n\n그는 가난한 사람들을 돕기 위해 인도로 갔다.",
+      "explanation": "\"~하기 위해\"는 so that + 주어 + 조동사. \"the poor\"는 가난한 사람들.",
+      "acceptedAnswers": [
+        "He went to India so that he could help the poor",
+        "He went to India so that he could help poor people.",
+        "He went to India so that he could help poor people",
+        "He went to India so that he could help the poor people.",
+        "He went to India so that he could help the poor people",
+        "He traveled to India so that he could help the poor.",
+        "He traveled to India so that he could help the poor",
+        "He travelled to India so that he could help the poor.",
+        "He travelled to India so that he could help the poor"
+      ]
+    }
+  ],
+  "naesin_problem_sheets_4ec6acb3-752c-4323-9c6f-3882dcce2b10": [
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "2",
+      "number": 1,
+      "options": [
+        "can",
+        "could"
+      ],
+      "question": "[Part 1] 괄호 안에서 알맞은 표현을 고르시오.\n\nI studied hard so that I (can / could) pass the exam.",
+      "explanation": "주절이 과거(studied)이므로 종속절도 could"
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "1",
+      "number": 2,
+      "options": [
+        "can",
+        "will"
+      ],
+      "question": "Speak slowly so that others (can / will) understand you.",
+      "explanation": "명령문은 현재 시제이므로 can"
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "1",
+      "number": 3,
+      "options": [
+        "order",
+        "so"
+      ],
+      "question": "We went early in (order / so) that we could get good seats.",
+      "explanation": "in order that = so that (목적)"
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "1",
+      "number": 4,
+      "options": [
+        "as",
+        "that"
+      ],
+      "question": "He married her so (as / that) to be with her forever.",
+      "explanation": "so as to + 동사원형 = ~하기 위해"
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "2",
+      "number": 5,
+      "options": [
+        "will",
+        "would"
+      ],
+      "question": "I hurried so that I (will / would) not miss the train.",
+      "explanation": "주절이 과거(hurried)이므로 would"
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "1",
+      "number": 6,
+      "options": [
+        "can",
+        "could"
+      ],
+      "question": "Turn the music down so that I (can / could) read the book.",
+      "explanation": "명령문은 현재 시제이므로 can"
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "1",
+      "number": 7,
+      "options": [
+        "can",
+        "could"
+      ],
+      "question": "I will bring the map so that we (can / could) find the way easily.",
+      "explanation": "주절이 미래(will)이므로 can"
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "2",
+      "number": 8,
+      "options": [
+        "can",
+        "could"
+      ],
+      "question": "The Wright brothers invented the airplane so that we (can / could) go to other places quickly.",
+      "explanation": "주절이 과거(invented)이므로 could"
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "1",
+      "number": 9,
+      "options": [
+        "so that",
+        "because"
+      ],
+      "question": "I go for a walk every morning (so that / because) I can stay healthy.",
+      "explanation": "건강 유지를 위해(목적) → so that. because는 이유."
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "1",
+      "number": 10,
+      "options": [
+        "can",
+        "will"
+      ],
+      "question": "Gwen goes jogging so that she (can / will) stay in shape.",
+      "explanation": "주절이 현재(goes)이므로 can"
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "2",
+      "number": 11,
+      "options": [
+        "can",
+        "could"
+      ],
+      "question": "Rachel bought a swimsuit so that she (can / could) swim in the pool.",
+      "explanation": "주절이 과거(bought)이므로 could"
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "1",
+      "number": 12,
+      "options": [
+        "can",
+        "will"
+      ],
+      "question": "Justin studies hard so that he (can / will) be a lawyer.",
+      "explanation": "주절이 현재(studies)이므로 can"
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "2",
+      "number": 13,
+      "options": [
+        "can",
+        "could"
+      ],
+      "question": "I called Tiffany so that I (can / could) invite her to my party.",
+      "explanation": "주절이 과거(called)이므로 could"
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "1",
+      "number": 14,
+      "options": [
+        "can",
+        "could"
+      ],
+      "question": "He practices running so that he (can / could) finish the marathon.",
+      "explanation": "주절이 현재(practices)이므로 can"
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "1",
+      "number": 15,
+      "options": [
+        "can",
+        "could"
+      ],
+      "question": "Jiho is making a cake so that he (can / could) make his mom happy.",
+      "explanation": "주절이 현재진행(is making)이므로 can"
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "1",
+      "number": 16,
+      "options": [
+        "don't",
+        "didn't"
+      ],
+      "question": "Leave early so that you (don't / didn't) miss the bus.",
+      "explanation": "명령문은 현재 시제이므로 don't"
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "2",
+      "number": 17,
+      "options": [
+        "can",
+        "could"
+      ],
+      "question": "I went to Canada so that I (can / could) learn English.",
+      "explanation": "주절이 과거(went)이므로 could"
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "1",
+      "number": 18,
+      "options": [
+        "can",
+        "could"
+      ],
+      "question": "Step forward so that you (can / could) take a closer look.",
+      "explanation": "명령문은 현재 시제이므로 can"
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "1",
+      "number": 19,
+      "options": [
+        "can",
+        "could"
+      ],
+      "question": "I'll leave the door open so that you (can / could) come in.",
+      "explanation": "주절이 미래(will)이므로 can"
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "1",
+      "number": 20,
+      "options": [
+        "can",
+        "will"
+      ],
+      "question": "Please speak louder so that all of us (can / will) hear you.",
+      "explanation": "명령문은 현재 시제이므로 can"
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "2",
+      "number": 21,
+      "options": [
+        "can",
+        "could"
+      ],
+      "question": "We climbed higher so that we (can / could) get a better view.",
+      "explanation": "주절이 과거(climbed)이므로 could"
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "1",
+      "number": 22,
+      "options": [
+        "can",
+        "could"
+      ],
+      "question": "Switch the light off so that we (can / could) sleep well.",
+      "explanation": "명령문은 현재 시제이므로 can"
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "2",
+      "number": 23,
+      "options": [
+        "can",
+        "could"
+      ],
+      "question": "I gave her my phone number so that she (can / could) keep in touch.",
+      "explanation": "주절이 과거(gave)이므로 could"
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "1",
+      "number": 24,
+      "options": [
+        "I",
+        "can"
+      ],
+      "question": "I often stop working so that (I / can) can take a rest.",
+      "explanation": "so that 뒤에 주어+조동사 필수. so that I can"
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "1",
+      "number": 25,
+      "options": [
+        "that",
+        "what"
+      ],
+      "question": "She made a cake so (that / what) she could give it to her boyfriend.",
+      "explanation": "so that + 주어 + 조동사. what은 불가."
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "He ran so that he might become a champion.",
+      "number": 26,
+      "question": "[Part 2] 다음 문장을 so that 구문으로 바꿔 쓰시오.\n\nHe ran to become a champion.",
+      "explanation": "to부정사 목적을 so that + 주어 + 조동사로 전환. 과거이므로 might/could 사용.",
+      "acceptedAnswers": [
+        "He ran so that he might become a champion",
+        "He ran so that he could become a champion.",
+        "He ran so that he could become a champion"
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "I went to America so that I could speak English well.",
+      "number": 27,
+      "question": "다음 문장을 so that 구문으로 바꿔 쓰시오.\n\nI went to America to speak English well.",
+      "explanation": "to부정사 목적을 so that I could로 전환. 과거 시제이므로 could.",
+      "acceptedAnswers": [
+        "I went to America so that I could speak English well",
+        "I went to America so that I might speak English well.",
+        "I went to America so that I might speak English well"
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "Let's start early so that we may arrive before dark.",
+      "number": 28,
+      "question": "다음 문장을 so that 구문으로 바꿔 쓰시오.\n\nLet's start early to arrive before dark.",
+      "explanation": "Let's 제안문에서 to부정사를 so that we may/can으로 전환.",
+      "acceptedAnswers": [
+        "Let's start early so that we may arrive before dark",
+        "Let's start early so that we can arrive before dark.",
+        "Let's start early so that we can arrive before dark",
+        "Let us start early so that we may arrive before dark."
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "Jane ran out so that she could catch a taxi.",
+      "number": 29,
+      "question": "다음 문장을 so that 구문으로 바꿔 쓰시오.\n\nJane ran out to catch a taxi.",
+      "explanation": "to부정사 목적을 so that she could로 전환. 과거 시제.",
+      "acceptedAnswers": [
+        "Jane ran out so that she could catch a taxi"
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "I'll walk fast so that I can get there in time.",
+      "number": 30,
+      "question": "다음 문장을 so that 구문으로 바꿔 쓰시오.\n\nI'll walk fast to get there in time.",
+      "explanation": "미래 시제이므로 so that I can.",
+      "acceptedAnswers": [
+        "I'll walk fast so that I can get there in time",
+        "I will walk fast so that I can get there in time."
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "She exercises every day so that she can lose weight.",
+      "number": 31,
+      "question": "다음 문장을 so that 구문으로 바꿔 쓰시오.\n\nShe exercises every day to lose weight.",
+      "explanation": "현재 시제의 습관이므로 so that she can.",
+      "acceptedAnswers": [
+        "She exercises every day so that she can lose weight"
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "They went to bed early so that they could get up early.",
+      "number": 32,
+      "question": "다음 문장을 so that 구문으로 바꿔 쓰시오.\n\nThey went to bed early to get up early.",
+      "explanation": "과거 시제이므로 so that they could.",
+      "acceptedAnswers": [
+        "They went to bed early so that they could get up early"
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "He stepped aside so that I could pass by.",
+      "number": 33,
+      "question": "다음 문장을 so that 구문으로 바꿔 쓰시오.\n\nHe stepped aside for me to pass by.",
+      "explanation": "for me to → so that I could. 의미상 주어 me가 절의 주어 I로 변환.",
+      "acceptedAnswers": [
+        "He stepped aside so that I could pass by"
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "You must work hard so that you wouldn't fail.",
+      "number": 34,
+      "question": "다음 문장을 so that 구문으로 바꿔 쓰시오.\n\nYou must work hard so as not to fail.",
+      "explanation": "so as not to → so that + 주어 + 부정 조동사.",
+      "acceptedAnswers": [
+        "You must work hard so that you wouldn't fail",
+        "You must work hard so that you won't fail.",
+        "You must work hard so that you won't fail",
+        "You must work hard so that you will not fail.",
+        "You must work hard so that you will not fail",
+        "You must work hard so that you don't fail.",
+        "You must work hard so that you don't fail",
+        "You must work hard so that you would not fail."
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "They left home early so that they can get there on time.",
+      "number": 35,
+      "question": "다음 문장을 so that 구문으로 바꿔 쓰시오.\n\nThey left home early in order that they can get there on time.",
+      "explanation": "in order that → so that. 나머지 동일.",
+      "acceptedAnswers": [
+        "They left home early so that they can get there on time",
+        "They left home early so that they could get there on time.",
+        "They left home early so that they could get there on time"
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "I go for a walk so that I can stay healthy.",
+      "number": 36,
+      "question": "다음 문장을 so that 구문으로 바꿔 쓰시오.\n\nI go for a walk in order to stay healthy.",
+      "explanation": "in order to → so that I can. 현재 시제이므로 can.",
+      "acceptedAnswers": [
+        "I go for a walk so that I can stay healthy"
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "Turn off the light so that the baby can sleep well.",
+      "number": 37,
+      "question": "다음 문장을 so that 구문으로 바꿔 쓰시오.\n\nTurn off the light for the baby to sleep well.",
+      "explanation": "for + 명사 + to부정사 → so that + 주어 + can. 명령문이므로 can.",
+      "acceptedAnswers": [
+        "Turn off the light so that the baby can sleep well"
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "He took a taxi so that he wouldn't be late.",
+      "number": 38,
+      "question": "다음 문장을 so that 구문으로 바꿔 쓰시오.\n\nHe took a taxi not to be late.",
+      "explanation": "not to → so that + wouldn't. 부정 목적 표현.",
+      "acceptedAnswers": [
+        "He took a taxi so that he wouldn't be late",
+        "He took a taxi so that he would not be late.",
+        "He took a taxi so that he would not be late"
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "I want to sit by the window so that I can see outside.",
+      "number": 39,
+      "question": "다음 문장을 so that 구문으로 바꿔 쓰시오.\n\nI want to sit by the window to see outside.",
+      "explanation": "to부정사 목적을 so that I can으로 전환.",
+      "acceptedAnswers": [
+        "I want to sit by the window so that I can see outside"
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "She took my bag so that I could walk comfortably.",
+      "number": 40,
+      "question": "다음 문장을 so that 구문으로 바꿔 쓰시오.\n\nShe took my bag for me to walk comfortably.",
+      "explanation": "for me to → so that I could. 과거 시제.",
+      "acceptedAnswers": [
+        "She took my bag so that I could walk comfortably"
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "The man broke the door so that they could get out.",
+      "number": 41,
+      "question": "다음 문장을 so that 구문으로 바꿔 쓰시오.\n\nThe man broke the door for them to get out.",
+      "explanation": "for them to → so that they could. 과거 시제.",
+      "acceptedAnswers": [
+        "The man broke the door so that they could get out"
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "I prepared breakfast so that she could rest.",
+      "number": 42,
+      "question": "다음 문장을 so that 구문으로 바꿔 쓰시오.\n\nI prepared breakfast for her to rest.",
+      "explanation": "for her to → so that she could. 과거 시제.",
+      "acceptedAnswers": [
+        "I prepared breakfast so that she could rest"
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "She cleaned the house so that the visitors could feel comfortable.",
+      "number": 43,
+      "question": "다음 문장을 so that 구문으로 바꿔 쓰시오.\n\nShe cleaned the house for the visitors to feel comfortable.",
+      "explanation": "for the visitors to → so that the visitors could. 과거 시제.",
+      "acceptedAnswers": [
+        "She cleaned the house so that the visitors could feel comfortable"
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "I don't take showers long so that I may not waste water.",
+      "number": 44,
+      "question": "다음 문장을 so that 구문으로 바꿔 쓰시오.\n\nI don't take showers long in order not to waste water.",
+      "explanation": "in order not to → so that + may not/won't. 부정 목적 표현.",
+      "acceptedAnswers": [
+        "I don't take showers long so that I may not waste water",
+        "I don't take showers long so that I won't waste water.",
+        "I don't take showers long so that I won't waste water",
+        "I don't take showers long so that I don't waste water.",
+        "I don't take showers long so that I don't waste water",
+        "I don't take showers long so that I will not waste water.",
+        "I don't take showers long so that I will not waste water",
+        "I do not take showers long so that I may not waste water."
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "I studied very hard so that I wouldn't fail.",
+      "number": 45,
+      "question": "다음 문장을 so that 구문으로 바꿔 쓰시오.\n\nI studied very hard in order not to fail.",
+      "explanation": "in order not to → so that I wouldn't. 과거 시제.",
+      "acceptedAnswers": [
+        "I studied very hard so that I wouldn't fail",
+        "I studied very hard so that I would not fail.",
+        "I studied very hard so that I would not fail",
+        "I studied very hard so that I'dn't fail."
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "She practiced skating so that she could be good at it.",
+      "number": 46,
+      "question": "다음 문장을 so that 구문으로 바꿔 쓰시오.\n\nShe practiced skating in order to be good at it.",
+      "explanation": "in order to → so that she could. 과거 시제.",
+      "acceptedAnswers": [
+        "She practiced skating so that she could be good at it"
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "I took off my shoes so that I wouldn't make any noise.",
+      "number": 47,
+      "question": "다음 문장을 so that 구문으로 바꿔 쓰시오.\n\nI took off my shoes in order not to make noise.",
+      "explanation": "in order not to → so that I wouldn't. 부정문에서 any 추가 가능.",
+      "acceptedAnswers": [
+        "I took off my shoes so that I wouldn't make any noise",
+        "I took off my shoes so that I would not make any noise.",
+        "I took off my shoes so that I would not make any noise",
+        "I took off my shoes so that I wouldn't make noise.",
+        "I took off my shoes so that I wouldn't make noise",
+        "I took off my shoes so that I would not make noise.",
+        "I took off my shoes so that I would not make noise",
+        "I took off my shoes so that I'dn't make any noise."
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "I made vocabulary cards so that I could remember them.",
+      "number": 48,
+      "question": "다음 문장을 so that 구문으로 바꿔 쓰시오.\n\nI made vocabulary cards to remember them.",
+      "explanation": "to부정사 목적을 so that I can으로 전환. 시제가 현재로 바뀌는 점에 주의.",
+      "acceptedAnswers": [
+        "I make vocabulary cards so that I can remember them",
+        "I made vocabulary cards so that I could remember them.",
+        "I made vocabulary cards so that I could remember them"
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "He cut the bread in half so that he could share it.",
+      "number": 49,
+      "question": "다음 문장을 so that 구문으로 바꿔 쓰시오.\n\nHe cut the bread in half to share it.",
+      "explanation": "to부정사 목적을 so that he could로 전환. 과거 시제.",
+      "acceptedAnswers": [
+        "He cut the bread in half so that he could share it"
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "I left my name card so that he could contact me.",
+      "number": 50,
+      "question": "다음 문장을 so that 구문으로 바꿔 쓰시오.\n\nI left my name card for him to contact me.",
+      "explanation": "for him to → so that he could. 과거 시제.",
+      "acceptedAnswers": [
+        "I left my name card so that he could contact me"
+      ]
+    },
+    {
+      "tag": "오류수정",
+      "type": "sentence",
+      "answer": "Mr. Kim is so kind that his students like him.",
+      "number": 51,
+      "question": "[Part 3] 다음 문장에서 틀린 부분을 찾아 올바른 문장 전체를 고쳐 쓰시오.\n\nMr. Kim is so kind that his students like.",
+      "explanation": "목적어 him 누락. like는 타동사이므로 목적어가 필요합니다.",
+      "acceptedAnswers": [
+        "Mr. Kim is so kind that his students like him"
+      ]
+    },
+    {
+      "tag": "오류수정",
+      "type": "sentence",
+      "answer": "The place was so beautiful that they wanted to live there.",
+      "number": 52,
+      "question": "다음 문장에서 틀린 부분을 찾아 올바른 문장 전체를 고쳐 쓰시오.\n\nThe place was beautiful so that they wanted to live there.",
+      "explanation": "so ~ that 결과 구문의 어순: so + 형용사 + that. \"so that\"(목적)과 \"so...that\"(결과) 구분.",
+      "acceptedAnswers": [
+        "The place was so beautiful that they wanted to live there"
+      ]
+    },
+    {
+      "tag": "오류수정",
+      "type": "sentence",
+      "answer": "I often stop working so that I can take a rest.",
+      "number": 53,
+      "question": "다음 문장에서 틀린 부분을 찾아 올바른 문장 전체를 고쳐 쓰시오.\n\nI often stop working so that can take a rest.",
+      "explanation": "so that 뒤에 주어 I가 누락. so that + 주어 + 조동사 + 동사원형.",
+      "acceptedAnswers": [
+        "I often stop working so that I can take a rest"
+      ]
+    },
+    {
+      "tag": "오류수정",
+      "type": "sentence",
+      "answer": "The boy saved money so that he could buy his brother's present.",
+      "number": 54,
+      "question": "다음 문장에서 틀린 부분을 찾아 올바른 문장 전체를 고쳐 쓰시오.\n\nThe boy saved money so that he can buy his brother's present.",
+      "explanation": "주절이 과거(saved)이므로 can → could.",
+      "acceptedAnswers": [
+        "The boy saved money so that he could buy his brother's present"
+      ]
+    },
+    {
+      "tag": "오류수정",
+      "type": "sentence",
+      "answer": "She went to the cafe so that she could meet her dad.",
+      "number": 55,
+      "question": "다음 문장에서 틀린 부분을 찾아 올바른 문장 전체를 고쳐 쓰시오.\n\nShe went to the cafe so that she can meet her dad.",
+      "explanation": "주절이 과거(went)이므로 can → could.",
+      "acceptedAnswers": [
+        "She went to the cafe so that she could meet her dad",
+        "She went to the café so that she could meet her dad.",
+        "She went to the café so that she could meet her dad"
+      ]
+    },
+    {
+      "tag": "오류수정",
+      "type": "sentence",
+      "answer": "They will get together so that they can watch a movie.",
+      "number": 56,
+      "question": "다음 문장에서 틀린 부분을 찾아 올바른 문장 전체를 고쳐 쓰시오.\n\nThey will get together so that can they watch a movie.",
+      "explanation": "so that 뒤 어순: 주어 + 조동사. can they(도치) → they can.",
+      "acceptedAnswers": [
+        "They will get together so that they can watch a movie",
+        "They'll get together so that they can watch a movie."
+      ]
+    },
+    {
+      "tag": "오류수정",
+      "type": "sentence",
+      "answer": "I brought an umbrella in order not to get wet.",
+      "number": 57,
+      "question": "다음 문장에서 틀린 부분을 찾아 올바른 문장 전체를 고쳐 쓰시오.\n\nI brought an umbrella in order to not get wet.",
+      "explanation": "부정 어순: in order not to. \"to not\"은 틀린 어순.",
+      "acceptedAnswers": [
+        "I brought an umbrella in order not to get wet"
+      ]
+    },
+    {
+      "tag": "오류수정",
+      "type": "sentence",
+      "answer": "I called the bookstore in order to place an order.",
+      "number": 58,
+      "question": "다음 문장에서 틀린 부분을 찾아 올바른 문장 전체를 고쳐 쓰시오.\n\nI called the bookstore so that to place an order.",
+      "explanation": "\"so that to\"는 불가. in order to / so as to + 동사원형 또는 so that + 주어 + 조동사.",
+      "acceptedAnswers": [
+        "I called the bookstore in order to place an order",
+        "I called the bookstore so as to place an order.",
+        "I called the bookstore so as to place an order",
+        "I called the bookstore so that I could place an order.",
+        "I called the bookstore so that I could place an order"
+      ]
+    },
+    {
+      "tag": "오류수정",
+      "type": "sentence",
+      "answer": "I was so surprised that I couldn't say anything.",
+      "number": 59,
+      "question": "다음 문장에서 틀린 부분을 찾아 올바른 문장 전체를 고쳐 쓰시오.\n\nI was surprised so that I couldn't say anything.",
+      "explanation": "so ~ that 결과 구문: so + 형용사 + that. \"so that\"(목적)이 아님.",
+      "acceptedAnswers": [
+        "I was so surprised that I couldn't say anything",
+        "I was so surprised that I could not say anything.",
+        "I was so surprised that I could not say anything"
+      ]
+    },
+    {
+      "tag": "오류수정",
+      "type": "sentence",
+      "answer": "Gwen reads a lot of books so that she can be a writer.",
+      "number": 60,
+      "question": "다음 문장에서 틀린 부분을 찾아 올바른 문장 전체를 고쳐 쓰시오.\n\nGwen reads a lot of books so that she could be a writer.",
+      "explanation": "주절이 현재(reads)이므로 could → can.",
+      "acceptedAnswers": [
+        "Gwen reads a lot of books so that she can be a writer"
+      ]
+    },
+    {
+      "tag": "오류수정",
+      "type": "sentence",
+      "answer": "I should exercise every day so that I can be healthy.",
+      "number": 61,
+      "question": "다음 문장에서 틀린 부분을 찾아 올바른 문장 전체를 고쳐 쓰시오.\n\nI should exercise every day in order to I can be healthy.",
+      "explanation": "\"in order to + 동사원형\" 또는 \"so that + 주어 + 조동사\". \"in order to I can\"은 두 구문 혼동.",
+      "acceptedAnswers": [
+        "I should exercise every day so that I can be healthy",
+        "I should exercise every day in order to be healthy.",
+        "I should exercise every day in order to be healthy"
+      ]
+    },
+    {
+      "tag": "오류수정",
+      "type": "sentence",
+      "answer": "He came early to take a good seat.",
+      "number": 62,
+      "question": "다음 문장에서 틀린 부분을 찾아 올바른 문장 전체를 고쳐 쓰시오.\n\nHe came early so that to take a good seat.",
+      "explanation": "\"so that to\"는 불가. to부정사 단독 또는 in order to 사용.",
+      "acceptedAnswers": [
+        "He came early to take a good seat",
+        "He came early in order to take a good seat.",
+        "He came early in order to take a good seat",
+        "He came early so that he could take a good seat.",
+        "He came early so that he could take a good seat"
+      ]
+    },
+    {
+      "tag": "오류수정",
+      "type": "sentence",
+      "answer": "Make a shopping list so that you can spend your money wisely.",
+      "number": 63,
+      "question": "다음 문장에서 틀린 부분을 찾아 올바른 문장 전체를 고쳐 쓰시오.\n\nMake a shopping list so that spend your money wisely.",
+      "explanation": "so that 뒤에 주어(you) + 조동사(can) 필수.",
+      "acceptedAnswers": [
+        "Make a shopping list so that you can spend your money wisely"
+      ]
+    },
+    {
+      "tag": "오류수정",
+      "type": "sentence",
+      "answer": "She made a cake so that she could give it to her boyfriend.",
+      "number": 64,
+      "question": "다음 문장에서 틀린 부분을 찾아 올바른 문장 전체를 고쳐 쓰시오.\n\nShe made a cake so what she could give it to her boyfriend.",
+      "explanation": "접속사 so that. so what은 틀림.",
+      "acceptedAnswers": [
+        "She made a cake so that she could give it to her boyfriend"
+      ]
+    },
+    {
+      "tag": "오류수정",
+      "type": "sentence",
+      "answer": "I left my name card so that he could contact me.",
+      "number": 65,
+      "question": "다음 문장에서 틀린 부분을 찾아 올바른 문장 전체를 고쳐 쓰시오.\n\nI left my name card so which he could contact me.",
+      "explanation": "접속사 so that. so which는 틀림.",
+      "acceptedAnswers": [
+        "I left my name card so that he could contact me"
+      ]
+    },
+    {
+      "tag": "단어배열",
+      "type": "sentence",
+      "answer": "I will change you so that you can meet the prince!",
+      "number": 66,
+      "question": "[Part 4] 주어진 단어를 올바른 순서로 배열하시오.\n\n(change / can / that / meet / I / will / you / so / the prince / you)",
+      "explanation": "so that + 주어 + 조동사 구문.",
+      "acceptedAnswers": [
+        "I will change you so that you can meet the prince!",
+        "I will change you so that you can meet the prince.",
+        "I will change you so that you can meet the prince",
+        "I'll change you so that you can meet the prince!"
+      ]
+    },
+    {
+      "tag": "단어배열",
+      "type": "sentence",
+      "answer": "Turn on the light so that I can see you.",
+      "number": 67,
+      "question": "주어진 단어를 올바른 순서로 배열하시오.\n\n(can / I / light / on / that / the / turn / see / so / you)",
+      "explanation": "Turn on the light so that I can see you. 명령문 + so that.",
+      "acceptedAnswers": [
+        "Turn on the light so that I can see you",
+        "Turn the light on so that I can see you.",
+        "Turn the light on so that I can see you"
+      ]
+    },
+    {
+      "tag": "단어배열",
+      "type": "sentence",
+      "answer": "I prepared breakfast so that Mom could rest.",
+      "number": 68,
+      "question": "주어진 단어를 올바른 순서로 배열하시오.\n\n(I / could / rest / prepared / so / Mom / breakfast / that)",
+      "explanation": "주절이 과거이므로 so that 절에 could.",
+      "acceptedAnswers": [
+        "I prepared breakfast so that Mom could rest"
+      ]
+    },
+    {
+      "tag": "단어배열",
+      "type": "sentence",
+      "answer": "I gave my email address to Judy so that she could contact me.",
+      "number": 69,
+      "question": "주어진 단어를 올바른 순서로 배열하시오.\n\n(that / she / Judy / I / email / me / could / so / to / address / my / gave / contact)",
+      "explanation": "4형식/3형식 전환과 so that 구문 결합.",
+      "acceptedAnswers": [
+        "I gave my email address to Judy so that she could contact me"
+      ]
+    },
+    {
+      "tag": "단어배열",
+      "type": "sentence",
+      "answer": "I read English comic books so that I can learn new idioms.",
+      "number": 70,
+      "question": "주어진 단어를 올바른 순서로 배열하시오.\n\n(new / I / idioms / so / that / books / can / learn / comic / read / English / I)",
+      "explanation": "현재 시제이므로 so that I can.",
+      "acceptedAnswers": [
+        "I read English comic books so that I can learn new idioms"
+      ]
+    },
+    {
+      "tag": "단어배열",
+      "type": "sentence",
+      "answer": "The fennec fox's feet are covered with fur so that it can walk on the hot sand.",
+      "number": 71,
+      "question": "주어진 단어를 올바른 순서로 배열하시오.\n\n(that / on / the fennec fox's / with / the / fur / covered / can / sand / walk / it / are / hot / feet / so)",
+      "explanation": "수동태 + so that 구문.",
+      "acceptedAnswers": [
+        "The fennec fox's feet are covered with fur so that it can walk on the hot sand"
+      ]
+    },
+    {
+      "tag": "단어배열",
+      "type": "sentence",
+      "answer": "I studied hard so that I could pass the exam.",
+      "number": 72,
+      "question": "주어진 단어를 올바른 순서로 배열하시오.\n\n(studied / so / I / could / that / hard / I / the exam / pass)",
+      "explanation": "주절이 과거이므로 so that 절에 could.",
+      "acceptedAnswers": [
+        "I studied hard so that I could pass the exam"
+      ]
+    },
+    {
+      "tag": "단어배열",
+      "type": "sentence",
+      "answer": "We went up to the top floor so that we could see the view.",
+      "number": 73,
+      "question": "주어진 단어를 올바른 순서로 배열하시오.\n\n(the / that / we / view / went / floor / so / top / the / could / see / up / to / we)",
+      "explanation": "주절이 과거이므로 so that we could.",
+      "acceptedAnswers": [
+        "We went up to the top floor so that we could see the view"
+      ]
+    },
+    {
+      "tag": "단어배열",
+      "type": "sentence",
+      "answer": "Yuna tried hard so that she could win the gold medal.",
+      "number": 74,
+      "question": "주어진 단어를 올바른 순서로 배열하시오.\n\n(win / hard / she / Yuna / medal / so / gold / the / could / that / tried)",
+      "explanation": "주절이 과거이므로 so that she could.",
+      "acceptedAnswers": [
+        "Yuna tried hard so that she could win the gold medal"
+      ]
+    },
+    {
+      "tag": "단어배열",
+      "type": "sentence",
+      "answer": "Switch the light off so that we can sleep well.",
+      "number": 75,
+      "question": "주어진 단어를 올바른 순서로 배열하시오.\n\n(that / off / can / we / switch / well / light / so / sleep / the)",
+      "explanation": "명령문이므로 so that we can. Switch off도 가능.",
+      "acceptedAnswers": [
+        "Switch the light off so that we can sleep well",
+        "Switch off the light so that we can sleep well.",
+        "Switch off the light so that we can sleep well"
+      ]
+    },
+    {
+      "tag": "단어배열",
+      "type": "sentence",
+      "answer": "We are here so that we can study air and ocean currents.",
+      "number": 76,
+      "question": "주어진 단어를 올바른 순서로 배열하시오.\n\n(we / ocean / we / currents / here / are / study / that / can / air / so / and)",
+      "explanation": "현재 시제이므로 so that we can.",
+      "acceptedAnswers": [
+        "We are here so that we can study air and ocean currents",
+        "We're here so that we can study air and ocean currents."
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "I pressed the button so that I could turn on the computer.",
+      "number": 77,
+      "question": "다음 우리말을 영어로 쓰시오.\n\n나는 컴퓨터를 켜기 위해서 버튼을 눌렀다.",
+      "explanation": "\"~하기 위해서\"는 so that + 주어 + 조동사. 주절이 과거(pressed)이므로 could.",
+      "acceptedAnswers": [
+        "I pressed the button so that I could turn on the computer",
+        "I pushed the button so that I could turn on the computer.",
+        "I pushed the button so that I could turn on the computer",
+        "I pressed a button so that I could turn on the computer.",
+        "I pressed a button so that I could turn on the computer",
+        "I pushed a button so that I could turn on the computer.",
+        "I pushed a button so that I could turn on the computer",
+        "I pressed the button so that I could switch on the computer.",
+        "I pressed the button so that I could switch on the computer",
+        "I pressed the button so that I could turn the computer on.",
+        "I pressed the button so that I could turn the computer on"
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "Sora bought the book so that she could study English hard.",
+      "number": 78,
+      "question": "다음 우리말을 영어로 쓰시오.\n\n소라는 영어를 열심히 공부하기 위해 책을 샀다.",
+      "explanation": "\"~하기 위해\"는 so that + 주어 + 조동사. 주절이 과거(bought)이므로 could.",
+      "acceptedAnswers": [
+        "Sora bought the book so that she could study English hard",
+        "Sora bought a book so that she could study English hard.",
+        "Sora bought a book so that she could study English hard",
+        "Sora bought the book so that she could study English.",
+        "Sora bought the book so that she could study English",
+        "Sora bought a book so that she could study English.",
+        "Sora bought a book so that she could study English",
+        "Sora bought books so that she could study English hard.",
+        "Sora bought books so that she could study English hard",
+        "Sora bought books so that she could study English.",
+        "Sora bought books so that she could study English"
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "Junho turned off the light so that he could sleep well.",
+      "number": 79,
+      "question": "다음 우리말을 영어로 쓰시오.\n\n준호는 잘 자기 위해 불을 껐다.",
+      "explanation": "\"~하기 위해\"는 so that + 주어 + 조동사. 주절이 과거(turned off)이므로 could.",
+      "acceptedAnswers": [
+        "Junho turned off the light so that he could sleep well",
+        "Junho turned off the lights so that he could sleep well.",
+        "Junho turned off the lights so that he could sleep well",
+        "Junho switched off the light so that he could sleep well.",
+        "Junho switched off the light so that he could sleep well",
+        "Junho turned the light off so that he could sleep well.",
+        "Junho turned the light off so that he could sleep well",
+        "Junho turned the lights off so that he could sleep well.",
+        "Junho turned the lights off so that he could sleep well",
+        "Junho switched off the lights so that he could sleep well.",
+        "Junho switched off the lights so that he could sleep well"
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "He went to India so that he could help the poor.",
+      "number": 80,
+      "question": "다음 우리말을 영어로 쓰시오.\n\n그는 가난한 사람들을 돕기 위해 인도로 갔다.",
+      "explanation": "\"~하기 위해\"는 so that + 주어 + 조동사. \"the poor\"는 가난한 사람들.",
+      "acceptedAnswers": [
+        "He went to India so that he could help the poor",
+        "He went to India so that he could help poor people.",
+        "He went to India so that he could help poor people",
+        "He went to India so that he could help the poor people.",
+        "He went to India so that he could help the poor people",
+        "He traveled to India so that he could help the poor.",
+        "He traveled to India so that he could help the poor",
+        "He travelled to India so that he could help the poor.",
+        "He travelled to India so that he could help the poor"
+      ]
+    }
+  ]
+}
