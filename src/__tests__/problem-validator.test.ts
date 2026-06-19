@@ -576,6 +576,26 @@ describe('validateBeforeSave', () => {
       const { questions } = sanitizeQuestions(qs);
       expect(questions.length).toBe(1);
     });
+
+    it('지도·그래프·차트 의존 문항도 삭제됨', () => {
+      const qs: NaesinProblemQuestion[] = [
+        { number: 1, question: '다음 지도를 보고 길을 안내하시오.', answer: 'x' },
+        { number: 2, question: '다음 그래프를 보고 물음에 답하시오.', answer: 'y' },
+        { number: 3, question: '위 차트를 참고하여 빈칸을 채우시오.', answer: 'z' },
+        { number: 4, question: 'Fill in the blank.', answer: 'word' },
+      ];
+      const { questions } = sanitizeQuestions(qs);
+      expect(questions.length).toBe(1);
+      expect(questions[0].question).toBe('Fill in the blank.');
+    });
+
+    it('표(table)를 보는 문항은 유지 (마크다운 표로 재현 가능)', () => {
+      const qs: NaesinProblemQuestion[] = [
+        { number: 1, question: '다음 표를 보고 물음에 답하시오.\n\n| 이름 | 나이 |\n| --- | --- |\n| Tom | 14 |', answer: 'Tom' },
+      ];
+      const { questions } = sanitizeQuestions(qs);
+      expect(questions.length).toBe(1);
+    });
   });
 
   describe('U+FFFD 경고', () => {
