@@ -1,0 +1,740 @@
+{
+  "3f5bec17": {
+    "questions": [
+      {
+        "answer": "3",
+        "number": 1,
+        "options": [
+          "buy - sell",
+          "high - low",
+          "influence - affect",
+          "cheap - expensive",
+          "hungry - full"
+        ],
+        "question": "다음 중 짝지어진 단어의 관계가 나머지 넷과 다른 것은?",
+        "explanation": "③ '영향을 주다 - 영향을 주다'는 유의어 관계이고 나머지는 반의어 관계이다."
+      },
+      {
+        "answer": "5",
+        "number": 2,
+        "options": [
+          "fall for: to be tricked into believing something that is not true",
+          "spread: to become known about or used by more and more people",
+          "similar: like someone or something but not exactly the same",
+          "rely on: to need or depend on somebody or something",
+          "limited: having the greatest possible amount, number, or level"
+        ],
+        "question": "다음 중 영영풀이가 알맞지 않은 것은?",
+        "explanation": "limited는 '제한된'이라는 뜻이므로, 주어진 영영풀이인 '가능한 한 가장 많은 양, 수, 또는 수준을 지닌'이라는 뜻은 적절하지 않다. 'not very great in amount or extent(양과 정도에 있어 매우 많지 않은)'로 고쳐야 한다."
+      },
+      {
+        "answer": "4",
+        "number": 3,
+        "options": [
+          "ⓑ-ⓐ-ⓒ-ⓓ",
+          "ⓑ-ⓐ-ⓓ-ⓒ",
+          "ⓒ-ⓐ-ⓑ-ⓓ",
+          "ⓓ-ⓒ-ⓐ-ⓑ",
+          "ⓓ-ⓒ-ⓑ-ⓐ"
+        ],
+        "question": "다음 빈칸 (A)~(D)에 들어갈 단어가 차례대로 연결된 것은?\n\n• If you want to save money, you should make a (A)___________ first.\n• The children showed a (B)___________ for new learning.\n• I bought unique key rings as a (C)___________ for my family.\n• We need a good (D)___________ to win this game.\n\n<보기>\nⓐ souvenir ⓑ strategy ⓒ hunger ⓓ budget",
+        "explanation": "(A) ⓓ budget (B) ⓒ hunger (C) ⓐ souvenir (D) ⓑ strategy"
+      },
+      {
+        "answer": "3",
+        "number": 4,
+        "options": [
+          "1개",
+          "2개",
+          "3개",
+          "4개",
+          "5개"
+        ],
+        "question": "다음 중 어법상 어색한 문장의 개수는?\n\nⓐ Save your file if you don't want to lose the data.\nⓑ He is the painter who painted The Starry Night.\nⓒ If she won't put on a coat, she will catch a cold.\nⓓ I should take the first bus that go to Seoul.\nⓔ We can catch the first bus if leave now.",
+        "explanation": "어법상 어색한 것은 총 3개이다. ⓒ won't → doesn't (조건의 부사절에서는 현재시제를 쓰므로 won't 제거), ⓓ go → goes (선행사 the first bus와 수일치), ⓔ leave → we leave (if 다음에 완전한 절이 필요)"
+      },
+      {
+        "answer": "3, 5",
+        "number": 5,
+        "options": [
+          "I'd like to see some other kinds.",
+          "Can I get a discount?",
+          "I'll go with this one.",
+          "It's a little expensive.",
+          "I'll take it."
+        ],
+        "question": "다음 대화의 빈칸에 들어갈 말로 알맞은 것을 모두 고르면?\n\nW: Can I help you?\nB: Yes. I'm looking for a souvenir for my friend.\nW: How about this key ring? It's only 5,000 won.\nB: Perfect. _________________________",
+        "explanation": "친구를 위한 기념품을 찾고 있는 소년에게 여자가 열쇠고리를 보여주며 5천원이라고 말하자 소년이 딱 좋다고 말하고 있으므로 그것을 사겠다는 표현이 들어가야 한다. ③ '그것으로 하겠습니다'와 ⑤ '그것을 살게요'가 적절하다."
+      },
+      {
+        "answer": "2, 5",
+        "number": 6,
+        "options": [
+          "I'm just looking around.",
+          "I want to buy a present.",
+          "I'm just window shopping.",
+          "I'd like to exchange this souvenir.",
+          "I'm looking for a traditional Korean souvenir."
+        ],
+        "question": "다음 대화를 읽고 물음에 답하시오.\n\nM: Hi, can I help you?\nG: Yes. ________________________________________ It's for my dad.\nM: How about this fan? It is really popular.\nG: Hmm ... can you show me something else?\nM: How about this hat, then? This is a gat, a traditional Korean hat for men.\nG: Oh, it's unique. I love it. How much is it?\nM: It's 30,000 won.\nG: That's a little expensive.\nM: We can give you a discount if you buy two. It'll be 25,000 won each.\nG: That's perfect! I'll get two hats, then.\n\n위 대화의 빈칸에 들어갈 말로 알맞은 것을 모두 고르면?",
+        "explanation": "남자가 '도와드릴까요?'라고 말하자 소녀는 그렇다고 말하고 있고 뒤에서 그것은 아빠를 위한 것이라고 말하고 있으며 남성용 한국 전통 모자인 갓을 구입하는 내용이 이어지므로 빈칸에는 원하는 물건을 찾는 표현이 들어가야 한다. ②와 ⑤가 적절하다."
+      },
+      {
+        "answer": "5",
+        "number": 7,
+        "options": [
+          "At first, the man recommends a popular traditional Korean scarf to the girl.",
+          "The gat is a traditional Korean hat for women.",
+          "The girl thinks the original price of the gat is reasonable.",
+          "The man says he will give a 5,000 won discount for just one gat.",
+          "The girl will buy two gats and pay 50,000 won."
+        ],
+        "question": "위 대화의 내용과 일치하는 것은?",
+        "explanation": "남자는 갓을 두 개 사면 개당 2만 5천원으로 할인해 드릴 수 있다고 말하고 있고 소녀는 모자를 두 개 사겠다고 답하고 있으므로 소녀가 5만원에 갓을 두 개 살 것임을 알 수 있다."
+      },
+      {
+        "answer": "5",
+        "number": 8,
+        "options": [
+          "(A)-(B)-(D)-(C)",
+          "(C)-(A)-(B)-(D)",
+          "(C)-(A)-(D)-(B)",
+          "(D)-(A)-(B)-(C)",
+          "(D)-(A)-(C)-(B)"
+        ],
+        "question": "다음 주어진 대화에 이어질 순서로 알맞은 것은?\n\nB: Hi, I'm looking for a gift for my younger sister. She's twelve.\n\n(A) Well, can you show me something else?\n(B) Oh, they're so pretty! I'll take two of them.\n(C) How about these hairpins, then?\n(D) How about this small bag?",
+        "explanation": "여동생에게 줄 선물을 찾고 있고, 그녀는 12살이라는 소년의 말에 이어 작은 가방을 권하는 (D), 다른 것을 보여 달라고 말하는 (A), 그럼 머리핀이 어떤지 묻는 (C), 정말 예쁘다고 말하면서 두 개를 사겠다고 말하는 (B)로 이어지는 것이 자연스럽다."
+      },
+      {
+        "answer": "2, 5",
+        "number": 9,
+        "options": [
+          "ⓐ",
+          "ⓑ",
+          "ⓒ",
+          "ⓓ",
+          "ⓔ"
+        ],
+        "question": "다음 글을 읽고 물음에 답하시오.\n\nDo you think you are a smart shopper? Well, you may think you are, but hold on! There are various marketing strategies which ⓐinfluences your decisions. ⓑLearning about them will make you a smarter shopper.\n\nHunger Marketing\nJunho: What? The sale ends in two hours? If I don't buy the sneakers now, I will have ⓒto buying them at a higher price.\nStop, Junho! You're buying the sneakers just ⓓbecause of you don't want to miss the sale. You're falling for a hunger marketing strategy.\nIf people can buy a product only for a limited time, they often feel \"hungry\" for it and want to buy it. About ⓔmissing the sale, don't worry, Junho. You'll soon see a similar sale again.\n\n윗글의 밑줄 친 ⓐ~ⓔ 중, 어법상 알맞은 것을 모두 고르면?",
+        "explanation": "ⓑ Learning about them will make you a smarter shopper. (동사구 will make의 주어 자리이며, 동명사 Learning은 적절함) ⓔ About missing the sale (전치사 About의 목적어로 동명사 missing은 적절함)"
+      },
+      {
+        "answer": "4",
+        "number": 10,
+        "options": [
+          "How can we become smarter shoppers?",
+          "What does Junho want to buy?",
+          "When does the sale on the sneakers end?",
+          "How much are the sneakers on sale for?",
+          "What kind of marketing strategy is Junho falling for?"
+        ],
+        "question": "윗글을 읽고 답할 수 없는 질문은?",
+        "explanation": "준호는 지금 운동화를 사지 않아 세일을 놓치면 더 비싼 가격에 그것을 사야 할 것이라고 생각하고 있으나 운동화가 얼마나 할인을 하는지에 대한 언급은 없으므로 '운동화는 얼마에 할인 판매 중인가?'는 답할 수 없는 질문이다."
+      },
+      {
+        "answer": "5",
+        "number": 11,
+        "options": [
+          "it / which / which",
+          "them / who / that",
+          "them / which / which",
+          "it / who / which",
+          "it / who / that"
+        ],
+        "question": "다음 글의 괄호 (A), (B), (C)에서 어법상 알맞은 말로 바르게 연결된 것은?\n\nYuna: That's the hottest dress on social media now. Lots of people are wearing it. I have to get that dress, too!\nWait, Yuna! You only want the dress because you saw (A)[it / them] again and again on social media. It isn't just you. There are a lot of people (B)[which / who] fall for a viral marketing strategy. Why?\nInformation about a product can spread quickly and widely on the Internet, just like a \"virus.\" If a product becomes hot on social media, people naturally want to have it. Yuna, just remember (C)[that / which] a popular product isn't always right for you.",
+        "explanation": "(A) 동사 saw의 목적어 자리로, 앞에서 언급된 단수명사구 the dress를 가리키므로 it / (B) 주어가 없는 절을 이끌어 사람인 선행사를 수식하는 주격 관계대명사 who / (C) 명사절 접속사 that"
+      },
+      {
+        "answer": "4",
+        "number": 12,
+        "options": [
+          "Popular products are usually the best choice.",
+          "Don't trust the advertisements on social media.",
+          "Follow trends to become a smart and stylish shopper.",
+          "Be careful of viral marketing and choose the right product for yourself.",
+          "Through viral marketing, a new product can become popular very quickly."
+        ],
+        "question": "윗글의 요지로 알맞은 것은?",
+        "explanation": "소셜 미디어에서 가장 인기 있는 원피스이기 때문에 구매하려고 하는 유나에게 바이럴 마케팅에 속지 않도록 조언을 하면서 인기 있는 제품이 항상 너에게 적합한 것은 아님을 기억하라고 말하고 있다."
+      },
+      {
+        "answer": "5",
+        "number": 13,
+        "options": [
+          "A: Welcome to Mina's Fashion World. How may I help you? / B: I'm looking for a T-shirt.",
+          "A: How about these brown pants? / B: Great. I'll take them.",
+          "A: Can you show me something else? / B: How about this water bottle, then?",
+          "A: How much are they? / B: We're having a sale, so this box is 8,000 won.",
+          "A: I'm looking for a cap. / B: I'm sorry, but we have many different kinds."
+        ],
+        "question": "다음 중 짝지어진 대화가 어색한 것은?",
+        "explanation": "모자를 찾고 있다는 A의 말에 B가 죄송하다고 말한 후에 다양한 종류의 모자가 많다고 말하는 흐름은 어색하다. 모자를 팔지 않는다는 흐름이 되도록 'I'm sorry, but we don't have caps.'로 고쳐야 한다."
+      },
+      {
+        "answer": "4",
+        "number": 14,
+        "options": [
+          "more expensive / basis",
+          "more expensive / budget",
+          "cheaper / discount",
+          "reasonable / basis",
+          "reasonable / budget"
+        ],
+        "question": "다음 글을 아래와 같이 요약할 때, 빈칸 ⓐ, ⓑ에 들어갈 말로 알맞게 연결된 것은?\n\nSomi: I'm looking for a lipstick for my mom.\nSalesperson: How about this?\nSomi: Expensive! I thought I could buy a lipstick for 30 dollars.\nSalesperson: This is also popular.\nSomi: That's better!\nHold on, Somi! Your budget is 30 dollars, but you are buying a 40-dollar lipstick. The 40-dollar lipstick sounds cheap only because the salesperson showed you a 50-dollar lipstick first. This is an example of the anchoring effect.\nUsually, the first piece of information becomes an \"anchor\" and influences the shopper's decision. In your case, the 50-dollar lipstick was the anchor. Somi, don't just rely on the first piece of information that is given to you.\n\nWe should be careful not to make the mistake of thinking other products are ⓐ__________ to buy by using the first product as the ⓑ__________.",
+        "explanation": "소미는 첫 번째 본 50달러짜리 립스틱을 기준으로 40달러짜리 립스틱이 싸게 여겨 예산이 30달러였음에도 40달러짜리 립스틱을 구매하고 있는 사례를 통해, 첫 번째 정보가 '닻'이 되어 구매자의 결정에 영향을 미치는 것을 설명하고 있다. 따라서 ⓐ에는 '합리적인'을 뜻하는 reasonable, ⓑ에는 '기준'을 뜻하는 basis가 적절하다."
+      },
+      {
+        "answer": "2",
+        "number": 15,
+        "options": [
+          "Everyone has the right to learn.",
+          "You should find the right size.",
+          "Raise your right hand, please.",
+          "Turn right at the corner.",
+          "I'll be right back."
+        ],
+        "question": "다음 글의 밑줄 친 ⓐright와 뜻이 같은 것은?\n\nYuna: That's the hottest dress on social media now. Lots of people are wearing it. I have to get that dress, too!\nWait, Yuna! You only want the dress because you saw it again and again on social media. It isn't just you. There are a lot of people who fall for a viral marketing strategy. Why?\nInformation about a product can spread quickly and widely on the Internet, just like a \"virus.\" If a product becomes hot on social media, people naturally want to have it. Yuna, just remember that a popular product isn't always ⓐright for you.",
+        "explanation": "ⓐ의 right는 '적합한'이라는 뜻의 형용사이므로 ② '너는 적합한 사이즈를 찾아야 한다.'의 right가 같은 의미로 쓰였다."
+      },
+      {
+        "answer": "quickly[widely] and widely[quickly], a virus",
+        "number": 16,
+        "question": "윗글을 읽고 다음 질문에 대한 알맞은 대답이 되도록 빈칸을 완성하시오. (각 빈칸에 한 단어로 쓸 것)\n\nQ. How can information about a product spread online?\n→ It can spread _____________ _____________ _____________\nlike _____________ _____________ online.",
+        "explanation": "제품에 대한 정보는 온라인에서 바이러스처럼 빠르게 널리 퍼질 수 있다는 내용에서 It can spread quickly and widely like a virus online."
+      },
+      {
+        "answer": "2, 4",
+        "number": 17,
+        "options": [
+          "Yuna wants to buy the dress on social media because she thinks it is suitable for her.",
+          "Yuna saw the dress many times on social media, so she wants it.",
+          "Only a few people fall for viral marketing strategies.",
+          "People tend to want to have items that gain popularity on social media.",
+          "According to the writer, Yuna has to choose popular products."
+        ],
+        "question": "윗글의 내용과 일치하는 것을 모두 고르면?",
+        "explanation": "글쓴이는 유나에게 소셜 미디어에서 그 원피스를 계속 봤기 때문에 그것을 원하는 것뿐이라고 말하고 있으므로 ②가 일치한다. 또한 어떤 제품이 소셜 미디어에서 인기를 끌게 되면 사람들은 자연스럽게 그것을 갖고 싶어 한다고 했으므로 ④도 일치한다."
+      },
+      {
+        "answer": "3, 4",
+        "number": 18,
+        "options": [
+          "ⓐ",
+          "ⓑ",
+          "ⓒ",
+          "ⓓ",
+          "ⓔ"
+        ],
+        "question": "다음 글의 밑줄 친 ⓐ~ⓔ 중, 어법상 어색한 것을 모두 고르면?\n\nSomi: I'm looking for a lipstick for my mom.\nSalesperson: How about this?\nSomi: Expensive! I thought I ⓐcould buy a lipstick for 30 dollars.\nSalesperson: This is also popular.\nSomi: That's better!\nHold on, Somi! Your budget is 30 dollars, but you are ⓑbuying a 40-dollar lipstick. The 40-dollar lipstick sounds ⓒcheaply only because the salesperson showed you a 50-dollar lipstick first. This is an example of the anchoring effect.\nUsually, the first piece of information becomes an \"anchor\" and ⓓinfluence the shopper's decision. In your case, the 50-dollar lipstick was the anchor. Somi, don't just rely on the first piece of information ⓔthat is given to you.",
+        "explanation": "ⓒ cheaply → cheap (감각동사 sound 뒤에는 형용사가 와야 함) / ⓓ influence → influences (주어 the first piece of information에 수일치)"
+      },
+      {
+        "answer": "First Piece of Information",
+        "number": 19,
+        "question": "윗글의 제목을 다음과 같이 쓸 때 빈칸에 들어갈 알맞은 말을 쓰시오. (첫 철자는 대문자로 쓸 것)\n\nDon't Depend on the _____________ _____________ _____________ _____________ for Wise Shopping",
+        "explanation": "원문 제목의 의미는 현명한 쇼핑을 위해서는 첫 번째 정보에만 의지하지 말라는 뜻이므로 First Piece of Information이 적절하다."
+      },
+      {
+        "answer": "3, 5",
+        "number": 20,
+        "options": [
+          "Somi wants to buy a lipstick for her mom.",
+          "The salesperson recommends a 50-dollar lipstick at first.",
+          "Somi thinks the 50-dollar lipstick is good although her budget is 30 dollars.",
+          "The anchoring effect affects Somi's decision.",
+          "The writer says that Somi should use the 50-dollar lipstick as an anchor to choose a lipstick."
+        ],
+        "question": "윗글의 내용과 일치하지 않는 것을 모두 고르면?",
+        "explanation": "소미는 50달러짜리 립스틱이 비싸다고 말하고 있으며, 글쓴이는 소미에게 주어진 첫 번째 정보에만 의존하지 말라고 말하고 있으므로 ③과 ⑤는 글의 내용과 일치하지 않는다."
+      },
+      {
+        "answer": "5",
+        "number": 21,
+        "options": [
+          "giving free gifts to customers",
+          "comparing prices on various websites",
+          "showing the process of making products",
+          "advertising new products through social media",
+          "creating the desire for purchase through limited-time sales"
+        ],
+        "question": "What is a hunger marketing strategy?\n\nHunger Marketing\nJunho: What? The sale ends in two hours? If I don't buy the sneakers now, I will have to buy them at a higher price.\nStop, Junho! You're buying the sneakers just because you don't want to miss the sale. You're falling for a hunger marketing strategy.\nIf people can buy a product only for a limited time, they often feel \"hungry\" for it and want to buy it. About missing the sale, don't worry, Junho. You'll soon see a similar sale again.",
+        "explanation": "준호는 두 시간 후에 운동화 세일이 끝나서 당장 사지 않으면 세일을 놓칠 거라고 생각하게 만드는 헝거 마케팅에 속아 운동화를 구매하고자 하며, 만약 사람들이 한정된 시간 동안만 제품을 살 수 있다면 사람들은 종종 그 제품에 대해 배고프다고 느끼고 그것을 사고 싶어 한다고 했으므로 ⑤가 적절하다."
+      },
+      {
+        "answer": "4",
+        "number": 22,
+        "options": [
+          "(A)",
+          "(B)",
+          "(C)",
+          "(D)",
+          "(E)"
+        ],
+        "question": "다음 글의 (A)~(E) 중, 주어진 문장이 들어갈 알맞은 곳은?\n\n주어진 문장: In your case, the 50-dollar lipstick was the anchor.\n\nAnchoring Effect\nSomi: I'm looking for a lipstick for my mom.\nSalesperson: How about this?\nSomi: Expensive! I thought I could buy a lipstick for 30 dollars.\nSalesperson: This is also popular.\nSomi: That's better!\nHold on, Somi! (A) Your budget is 30 dollars, but you are buying a 40-dollar lipstick. (B) The 40-dollar lipstick sounds cheap only because the salesperson showed you a 50-dollar lipstick first. This is an example of the anchoring effect. (C)\nUsually, the first piece of information becomes an \"anchor\" and influences the shopper's decision. (D) Somi, don't just rely on the first piece of information that is given to you. (E)",
+        "explanation": "주어진 문장은 '너의 경우에는 50달러짜리 립스틱이 닻이었어.'라는 뜻으로, 앵커링 효과에서 보통 첫 번째 정보가 구매자의 결정에 영향을 미치는 '닻'이라는 설명 뒤에 들어가 소미의 경우에 닻이 무엇인지를 말하며 소미에게 첫 번째 정보에 의존하지 말라고 조언하는 것이 자연스럽다. 따라서 (D)에 들어가는 것이 적절하다."
+      },
+      {
+        "answer": "(1) who are picking up trash are (2) which has long ears",
+        "number": 23,
+        "question": "다음 그림을 보고 <조건>에 맞게 빈칸에 알맞은 말을 쓰시오.\n\n[그림: 1번 - 쓰레기를 줍고 있는 학생들, 2번 - 긴 귀를 가진 토끼]\n\n(1) The students ______________ ______________ ______________ ______________ ______________ ______________ my best friends.\n(2) This is an animal ______________ ______________ ______________ ______________.\n\n<조건>\n• 적절한 주격 관계대명사를 사용할 것 (단, that은 사용하지 말 것)\n• <보기>의 단어 및 표현을 모두 사용할 것 (중복 사용 가능하며 필요시 변형할 것)\n• 각 빈칸에 한 단어씩 쓸 것\n\n<보기>\nlong ears, trash, be, pick up, have",
+        "explanation": "(1) 쓰레기를 줍고 있는 학생들은 나의 가장 친한 친구들이다. / (2) 이것은 긴 귀를 가진 동물이다.",
+        "acceptedAnswers": [
+          "(1)who are picking up trash are (2)which has long ears"
+        ]
+      },
+      {
+        "answer": "(A) If people can buy a product only for a limited time (B) There are a lot of people who[that] fall for a viral marketing strategy.",
+        "number": 24,
+        "question": "다음 글의 밑줄 친 (A), (B)의 우리말을 주어진 <조건>에 알맞게 영작하시오.\n\nHunger Marketing\nJunho: What? The sale ends in two hours? If I don't buy the sneakers now, I will have to buy them at a higher price.\nStop, Junho! You're buying the sneakers just because you don't want to miss the sale. You're falling for a hunger marketing strategy.\n(A)만약 사람들이 한정된 시간 동안만 제품을 살 수 있다면, they often feel \"hungry\" for it and want to buy it. About missing the sale, don't worry, Junho. You'll soon see a similar sale again.\n\nViral Marketing\nYuna: That's the hottest dress on social media now. Lots of people are wearing it. I have to get that dress, too!\nWait, Yuna! You only want the dress because you saw it again and again on social media. It isn't just you. (B)바이럴 마케팅 전략에 속는 많은 사람들이 있다. Why?\nInformation about a product can spread quickly and widely on the Internet, just like a \"virus.\" If a product becomes hot on social media, people naturally want to have it. Yuna, just remember that a popular product isn't always right for you.\n\n<조건>\n• (A)에는 적절한 접속사를 사용할 것\n• (B)에는 적절한 주격 관계대명사를 사용할 것\n• <보기>의 단어 및 표현을 사용할 것\n• (A)는 11단어, (B)는 13단어로 영작할 것\n\n<보기>\n(A): only for, a product, limited, buy\n(B): a lot of, fall for, there",
+        "explanation": "(A) 만약 ~라면을 뜻하는 조건의 접속사 If를 사용하고, if 뒤에는 주어와 동사를 갖춘 완전한 절이 이어진다. (B) '~이 있다'라는 뜻의 'there+be동사+주어' 구문을 사용하며 주격 관계대명사를 포함한다.",
+        "acceptedAnswers": [
+          "(A) If people can buy a product only for a limited time (B) There are a lot of people who[that] fall for a viral marketing strategy"
+        ]
+      },
+      {
+        "answer": "Because the salesperson showed her a 50-dollar lipstick first.",
+        "number": 25,
+        "question": "윗글을 읽고 다음 질문에 대한 답을 <조건>에 알맞게 쓰시오.\n\nQ. Why does the 40-dollar lipstick sound cheap to Somi?\n\n<조건>\n• Because로 시작할 것\n• her를 사용해 9단어로 영작할 것",
+        "explanation": "판매원이 그녀에게 50달러짜리 립스틱을 먼저 보여 줬기 때문이다.",
+        "acceptedAnswers": [
+          "Because the salesperson showed her a 50-dollar lipstick first"
+        ]
+      },
+      {
+        "answer": "5",
+        "number": 26,
+        "options": [
+          "to show good points of marketing strategies",
+          "to teach people how to set a proper budget",
+          "to advise readers to check out false advertisements online",
+          "to explain the progress of making marketing strategies",
+          "to give advice on shopping wisely by dealing with marketing strategies"
+        ],
+        "question": "윗글의 목적으로 알맞은 것은?",
+        "explanation": "헝거 마케팅, 바이럴 마케팅, 그리고 앵커링 효과를 소개하여 독자들이 마케팅 전략들에 속지 않고 현명한 구매를 하도록 도와주는 내용이므로 글의 목적으로 ⑤가 적절하다."
+      },
+      {
+        "answer": "(1) run faster if you gain blue shoes (2) If you use red coins, get more power",
+        "number": 27,
+        "question": "다음은 게임에 사용되는 아이템과 그 효과에 대해 보여 주는 표이다. 이 표를 보고 접속사 if와 괄호 안의 동사를 사용해 문장을 완성하시오.\n\nTips for the Game\nITEM | EFFECT\n(1) blue shoes | run faster\n(2) red coins | get more power\n\n(1) You will _________________________________________\n___________________________________. (gain)\n(2) __________________________________________, you will __________________________. (use)",
+        "explanation": "당신이 파란색 신발을 얻는다면, 당신은 더 빠르게 달릴 것이다. / 당신이 빨간색 동전을 사용한다면, 당신은 더 많은 힘을 얻을 것이다.",
+        "acceptedAnswers": [
+          "(1)run faster if you gain blue shoes (2)If you use red coins, get more power"
+        ]
+      },
+      {
+        "answer": "quickly[widely], widely[quickly], social media, right",
+        "number": 28,
+        "question": "다음 글을 아래와 같이 요약하고자 할 때, 빈칸에 들어갈 알맞은 말을 각각 찾아 쓰시오. (각 빈칸에 한 단어씩 쓸 것)\n\nYuna: That's the hottest dress on social media now. Lots of people are wearing it. I have to get that dress, too!\nWait, Yuna! You only want the dress because you saw it again and again on social media. It isn't just you. There are a lot of people who fall for a viral marketing strategy. Why?\nInformation about a product can spread quickly and widely on the Internet, just like a \"virus.\" If a product becomes hot on social media, people naturally want to have it. Yuna, just remember that a popular product isn't always right for you.\n\nViral marketing spreads information about a product _____________ and _____________ online. When people repeatedly see this on _____________ _____________, they want to buy it. However, a popular product is not always _____________ for everyone.",
+        "explanation": "바이럴 마케팅은 제품에 대한 정보를 온라인에서 빠르게 널리 퍼뜨린다. 사람들이 소셜 미디어에서 그것을 반복해서 보았을 때, 그들은 그것을 사고 싶어 한다. 그러나 인기 있는 제품이 항상 모두에게 적합한 것은 아니다."
+      }
+    ],
+    "answer_key": [
+      "3",
+      "5",
+      "4",
+      "3",
+      "3, 5",
+      "2, 5",
+      "5",
+      "5",
+      "2, 5",
+      "4",
+      "5",
+      "4",
+      "5",
+      "4",
+      "2",
+      "quickly[widely] and widely[quickly], a virus",
+      "2, 4",
+      "3, 4",
+      "First Piece of Information",
+      "3, 5",
+      "5",
+      "4",
+      "(1) who are picking up trash are (2) which has long ears",
+      "(A) If people can buy a product only for a limited time (B) There are a lot of people who[that] fall for a viral marketing strategy.",
+      "Because the salesperson showed her a 50-dollar lipstick first.",
+      "5",
+      "(1) run faster if you gain blue shoes (2) If you use red coins, get more power",
+      "quickly[widely], widely[quickly], social media, right"
+    ]
+  },
+  "c02a4ad1": {
+    "questions": [
+      {
+        "answer": "4",
+        "number": 1,
+        "options": [
+          "decide : decision = remember : remembrance",
+          "strategic : strategy = unique : uniqueness",
+          "perfect : imperfect = similar : different",
+          "limited : unlimited = popular : hot",
+          "natural : naturally = wide : widely"
+        ],
+        "question": "다음 중 짝지어진 단어의 관계가 어색한 것은?",
+        "explanation": "④는 '제한된 : 무제한의'의 반의어 관계 ≠ '인기 있는 : 인기 있는'의 유의어 관계이다. ①동사-명사 관계, ②형용사-명사 관계, ③반의어 관계, ⑤형용사-부사 관계로 적절하다."
+      },
+      {
+        "answer": "2",
+        "number": 2,
+        "options": [
+          "The weather can ___________ our mood.",
+          "He doesn't ___________ such a simple lie.",
+          "I ___________ my best friend when I'm in trouble.",
+          "Bad news tends to ___________ much faster than good news.",
+          "If you don't hurry up, you will ___________ the chance to see your favorite singer."
+        ],
+        "question": "다음 중 <보기>의 단어 및 표현이 들어갈 수 없는 것은?\n<보기> rely on, influence, spread, miss, end",
+        "explanation": "②는 '그는 그런 단순한 거짓말에 속지 않는다'는 뜻으로 fall for 또는 believe 같은 표현이 들어가야 하며, <보기>의 end(마치다)는 들어갈 곳이 없다."
+      },
+      {
+        "answer": "4",
+        "number": 3,
+        "options": [
+          "ⓐ, ⓒ",
+          "ⓑ, ⓓ",
+          "ⓒ, ⓔ",
+          "ⓐ, ⓒ, ⓔ",
+          "ⓑ, ⓓ, ⓔ"
+        ],
+        "question": "다음 <보기>의 영영풀이가 알맞지 않은 것을 모두 골라 짝지은 것은?\n<보기>\nⓐ shopper: someone who sells something\nⓑ effect: a change that is caused by an event, action etc.\nⓒ souvenir: a piece of paper with information about your payment\nⓓ product: a thing that someone grows, produces, or creates to sell\nⓔ budget: the amount of money you have to pay for something",
+        "explanation": "ⓐ shopper는 '구매자'인데 정의가 '파는 사람'(seller)이므로 오답. ⓒ souvenir는 '기념품'인데 정의가 '영수증'(receipt)이므로 오답. ⓔ budget은 '예산'인데 정의가 '지불해야 할 금액'(price)이므로 오답. ⓑ, ⓓ는 정확하다."
+      },
+      {
+        "answer": "3",
+        "number": 4,
+        "options": [
+          "1개",
+          "2개",
+          "3개",
+          "4개",
+          "5개"
+        ],
+        "question": "다음 중 어법상 어색한 문장의 개수는?\nⓐ Look at the woman and her dog which are playing happily in the yard.\nⓑ You may feel sick if you eat too much fast food.\nⓒ He made a robot dog which can rescue people.\nⓓ If you will not listen to me, you will regret it.\nⓔ We saw something that glow in the dark.\nⓕ I don't know if it will snow tomorrow.",
+        "explanation": "어법상 어색한 것은 3개이다. ⓐ which → that (선행사가 '사람+동물'일 때는 that 사용). ⓓ will not → do not (조건절에서 미래는 현재시제 사용). ⓔ glow → glows (주격 관계대명사 that의 동사는 선행사에 수일치)."
+      },
+      {
+        "answer": "1",
+        "number": 5,
+        "options": [
+          "ⓐ, ⓒ",
+          "ⓑ, ⓕ",
+          "ⓓ, ⓔ",
+          "ⓐ, ⓑ, ⓒ",
+          "ⓓ, ⓔ, ⓕ"
+        ],
+        "question": "다음 중 밑줄 친 that의 쓰임이 같은 것을 모두 골라 짝지은 것은?\nⓐ The library has many storybooks that have pretty pictures.\nⓑ Do you know that girl who is standing by the door?\nⓒ The boy that is wearing a yellow jacket is my nephew.\nⓓ The weather of Jeju is warmer than that of Seoul.\nⓔ She said that she was busy with her homework.\nⓕ I believe that he will pass the English exam.",
+        "explanation": "ⓐ는 주격 관계대명사(불완전한 절을 수식), ⓒ도 주격 관계대명사이다. 따라서 ⓐ, ⓒ의 쓰임이 같다. ⓑ는 지시형용사, ⓓ는 지시대명사, ⓔⓕ는 명사절 접속사이다."
+      },
+      {
+        "answer": "2, 4",
+        "number": 6,
+        "options": [
+          "Are these candies on sale?",
+          "Do you have any fruit candies?",
+          "Can I get a refund on this candy box?",
+          "I'm looking for traditional Korean cookies.",
+          "I want to know the recipe for these cookies."
+        ],
+        "question": "다음 대화의 빈칸에 들어갈 말로 알맞은 것을 모두 고르면?\nW: Oh, we have many different kinds. Here, try one of these.\nB: It's sweet and delicious. How much are they?\nW: We're having a sale, so this box is 8,000 won.\nB: OK, I'll take it.",
+        "explanation": "W가 다양한 종류가 많다고 하면서 하나 드셔 보시라고 권하고 있으므로 빈칸에는 어떤 먹거리를 찾고 있는 표현이 들어가야 한다. ②'과일 사탕이 있나요?'와 ④'한국 전통 과자를 찾고 있어요.'가 적절하다."
+      },
+      {
+        "answer": "4",
+        "number": 7,
+        "options": [
+          "1개",
+          "2개",
+          "3개",
+          "4개",
+          "5개"
+        ],
+        "question": "위 대화의 빈칸에 들어갈 말로 알맞은 것의 개수는?\nM: Hi, can I help you?\nG: Yes. I'm looking for a traditional Korean souvenir. It's for my dad.\nM: How about this fan? It is really popular.\nG: Hmm ... _____________________________________?\nM: How about this hat, then? This is a gat, a traditional Korean hat for men.\nG: Oh, it's unique. I love it. How much is it?\nM: It's 30,000 won.\nG: That's a little expensive.\nM: We can give you a discount if you buy two. It'll be 25,000 won each.\nG: That's perfect! I'll get two hats, then.\n\nⓐ can I bring this back if he doesn't like it\nⓑ can you show me something else\nⓒ is there anything more unique\nⓓ would you show me another\nⓔ do you have anything else\nⓕ how much is this fan\nⓖ can I try this hat on",
+        "explanation": "부채를 보여 준 남자가 소녀의 말에 다른 기념품인 갓을 보여주고 있으므로, 빈칸에는 다른 상품을 요청하는 표현이 들어가야 한다. ⓑ, ⓒ, ⓓ, ⓔ 총 4개의 표현이 적절하다."
+      },
+      {
+        "answer": "2, 5",
+        "number": 8,
+        "options": [
+          "㉠",
+          "㉡",
+          "㉢",
+          "㉣",
+          "㉤"
+        ],
+        "question": "위 대화를 다음과 같이 요약할 때, 밑줄 친 ㉠~㉤ 중, 알맞지 않은 것을 모두 고르면?\nThe girl ㉠wants to buy a traditional Korean souvenir for her dad. ㉡She likes a gat better than Hahoe mask. But ㉢she thinks it is a little expensive. ㉣The man offers a discount if she buys two hats, and ㉤she decides to buy two for 40,000 won in total.",
+        "explanation": "㉡에서 하회탈(Hahoe mask)은 대화에 언급되지 않았다. ㉤에서 1개에 30,000원이고 할인 후 각각 25,000원씩이므로 총 50,000원이어야 하는데, 40,000원은 오답이다."
+      },
+      {
+        "answer": "5",
+        "number": 9,
+        "options": [
+          "Who is the boy looking for a gift for?",
+          "What does the woman suggest first?",
+          "What does the boy think about the hairpins?",
+          "How many hairpins will the boy buy?",
+          "How much should the boy pay in total?"
+        ],
+        "question": "다음 대화를 읽고 답할 수 없는 질문은?\nB: Hi, I'm looking for a gift for my younger sister. She's twelve.\nW: How about this small bag?\nB: Well, can you show me something else?\nW: How about these hairpins, then?\nB: Oh, they're so pretty! I'll take two of them.",
+        "explanation": "머리핀의 가격이 언급되지 않았으므로 ⑤ '소년은 총 얼마를 지불해야 하는가?'는 답할 수 없는 질문이다."
+      },
+      {
+        "answer": "because he doesn't really like blue",
+        "number": 10,
+        "question": "다음 대화를 읽고 아래 질문에 대한 답이 되도록 주어진 <조건>에 맞게 빈칸에 알맞은 말을 쓰시오.\nB: Hi. I'm looking for a phone case.\nW: We have a few different colors here. How do you like this case?\nB: I don't really like blue. Can you show me something else?\nW: Then, how about this yellow case?\nB: Oh, that will do. I'll take it.\n\nQ. Why does the boy refuse the first phone case?\n<조건>\n• because, he를 사용할 것\n• 빈칸에 6단어로 영작할 것",
+        "explanation": "소년이 첫 번째 휴대폰 케이스를 거절한 이유는 파란색을 별로 좋아하지 않기 때문이다."
+      },
+      {
+        "answer": "3",
+        "number": 11,
+        "options": [
+          "ⓐ: 뒤에 a smart shopper가 생략되었다.",
+          "ⓑ: various marketing strategies를 선행사로 하는 주격 관계대명사로, that으로 바꿔 쓸 수 있다.",
+          "ⓒ: '~에게 …을 만들어주다'라는 뜻의 'make+간접목적어+직접목적어' 구문의 직접목적어 자리에 쓰인 명사구이다.",
+          "ⓓ: '만약 ~라면'이라는 뜻의 조건을 나타내는 접속사로, 뒤에 완전한 절이 이어진다.",
+          "ⓔ: '걱정하지 마'라는 뜻으로, 'don't+동사원형' 형태로 쓰인 부정명령문이다."
+        ],
+        "question": "다음 글을 읽고 물음에 답하시오.\nDo you think you are a smart shopper? Well, you may think ⓐyou are, but hold on! There are various marketing strategies ⓑwhich influence your decisions. Learning about them will make you ⓒa smarter shopper. Hunger Marketing\nJunho: What? The sale ends in two hours? If I don't buy the sneakers now, I will have to buy them at a higher price.\nStop, Junho! You're buying the sneakers just because you don't want to miss the sale. You're falling for a hunger marketing strategy.\nⓓIf people can buy a product only for a limited time, they often feel \"hungry\" for it and want to buy it. About missing the sale, ⓔdon't worry, Junho. You'll soon see a similar sale again.\n\n윗글의 밑줄 친 ⓐ~ⓔ에 대한 설명으로 알맞지 않은 것은?",
+        "explanation": "ⓒ는 'make+직접목적어+목적격보어' 구문의 목적격보어 자리에 쓰인 명사구이다. 간접목적어가 아니라 직접목적어 앞에 오는 것이므로 설명이 부정확하다."
+      },
+      {
+        "answer": "2",
+        "number": 12,
+        "options": [
+          "T-T-F",
+          "T-F-F",
+          "T-F-T",
+          "F-T-T",
+          "F-F-F"
+        ],
+        "question": "윗글의 내용과 (A)~(C)가 일치하면 T, 일치하지 않으면 F를 쓸 때, 순서대로 연결된 것은?\n(A) By learning about marketing strategies, we can become better shoppers. (T/F)\n(B) Junho tries to buy the sneakers because there is a limited number of them. (T/F)\n(C) Through hunger marketing, people feel that they may purchase a product at any time. (T/F)",
+        "explanation": "(A) 마케팅 전략을 배움으로써 더 나은 구매자가 될 수 있다. (T 일치). (B) 준호는 제한된 개수 때문이 아니라 세일 시간이 제한되었기 때문에 산다. (F 불일치). (C) 헝거 마케팅을 통해 사람들은 언제든지(제한된 시간에만이 아니라) 구매할 수 있을 것이라고 느낀다. (F 불일치)."
+      },
+      {
+        "answer": "3",
+        "number": 13,
+        "options": [
+          "ⓐ: hotest → hottest",
+          "ⓑ: to getting → to get",
+          "ⓒ: falling → falls",
+          "ⓓ: them → it",
+          "ⓔ: what → that"
+        ],
+        "question": "다음 글을 읽고 물음에 답하시오.\nYuna: That's the ⓐhotest dress on social media now. Lots of people are wearing it. I have ⓑto getting that dress, too!\nWait, Yuna! You only want the dress because you saw it again and again on social media. It isn't just you. There are a lot of people who ⓒfalling for a viral marketing strategy. Why?\nInformation about a product can spread quickly and widely on the Internet, just like a \"virus.\" If a product becomes hot on social media, people naturally want to have ⓓthem. Yuna, just remember ⓔwhat a popular product isn't always right for you.\n\n윗글의 밑줄 친 ⓐ~ⓔ 중, 어색한 부분을 바르게 고치지 못한 것은?",
+        "explanation": "ⓒ 'There are a lot of people'이 완전한 절을 이루므로 who 이하는 관계사절이고, falling을 falling → fall로 고쳐야 한다는 것은 틀렸다. 정확히는 'There are a lot of people who are falling for...' 형태이거나 'falling → falls'가 아니라 '복수동사로 fall'이어야 한다."
+      },
+      {
+        "answer": "2",
+        "number": 14,
+        "options": [
+          "advertising products through TV or newspapers",
+          "making people see a product many times online",
+          "making only one product that respects a specific personal taste",
+          "spreading information about a product through computer viruses",
+          "giving consumers points for good reviews of a product"
+        ],
+        "question": "What does a viral marketing strategy mean?",
+        "explanation": "소셜 미디어에서 제품이 인기를 끌게 되면 사람들이 그것을 사고 싶어 하도록 만드는 전략이므로 '온라인에서 제품을 여러 번 보게 만드는 것'이 맞다."
+      },
+      {
+        "answer": "that a popular product isn't always right for her",
+        "number": 15,
+        "question": "윗글을 읽고 다음 질문에 대한 알맞은 대답이 되도록 주어진 <조건>에 맞게 빈칸을 완성하시오.\nQ. What advice does the writer give to Yuna?\n<조건>\n• that, product를 사용할 것\n• 각 빈칸에 한 단어씩 쓸 것",
+        "explanation": "글쓴이는 유나에게 인기 있는 제품이 항상 그녀에게 적합한 것은 아니라고 조언한다."
+      },
+      {
+        "answer": "2",
+        "number": 16,
+        "options": [
+          "1개",
+          "2개",
+          "3개",
+          "4개",
+          "5개"
+        ],
+        "question": "다음 글을 읽고 물음에 답하시오.\nSomi: I'm ⓐlooking for a lipstick for my mom.\nSalesperson: How about this?\nSomi: Expensive! I thought ⓑwhich I could buy a lipstick for 30 dollars.\nSalesperson: This is also popular.\nSomi: That's better!\nHold on, Somi! Your budget is 30 dollars, but you are buying a 40-dollar lipstick. The 40-dollar lipstick sounds ⓒcheap only because the salesperson showed ⓓto you a 50-dollar lipstick first. This is an example of the anchoring effect.\nUsually, the first piece of information becomes an \"anchor\" and ⓔinfluences the shopper's decision. In your case, the 50-dollar lipstick was the anchor. Somi, don't just ⓕrely on the first piece of information that is given to you.\n\n윗글의 밑줄 친 ⓐ~ⓕ 중, 어법상 어색한 것의 개수는?",
+        "explanation": "어법상 어색한 것은 2개이다. ⓑ which → that (명사절 접속사). ⓓ to you → you (4형식 구문에서 전치사 제거)."
+      },
+      {
+        "answer": "seems cheap, 50-dollar one",
+        "number": 17,
+        "question": "윗글을 읽고 다음 질문에 대한 알맞은 대답이 되도록 주어진 <조건>에 맞게 빈칸을 완성하시오.\nQ. Why is Somi buying a 40-dollar lipstick despite her 30-dollar budget?\n<조건>\n• seems, one을 사용할 것\n• 각 빈칸에 한 단어씩 쓸 것",
+        "explanation": "40달러 립스틱이 50달러짜리와 비교하여 싸게 보이기 때문이다."
+      },
+      {
+        "answer": "5",
+        "number": 18,
+        "options": [
+          "the origin of the anchoring effect",
+          "good points of the anchoring effect",
+          "factors that affect shoppers' decisions",
+          "tips for finding a good \"anchor\" during shopping",
+          "the effect of the first information on buyers' choices"
+        ],
+        "question": "윗글의 주제로 알맞은 것은?",
+        "explanation": "소미의 경우 첫 번째 정보인 50달러짜리 립스틱이 닻이 되어 구매 결정에 영향을 미쳤다는 내용이므로, 글의 주제는 '구매자들의 선택에 첫 번째 정보가 미치는 영향'이다."
+      },
+      {
+        "answer": "miss, sale, limited time",
+        "number": 19,
+        "question": "다음 글을 읽고 물음에 답하시오.\nJunho: What? The sale ends in two hours? If I don't buy the sneakers now, I will have to buy them at a higher price.\nStop, Junho! You're buying the sneakers just because you don't want to miss the sale. You're falling for a hunger marketing strategy.\nIf people can buy a product only for a limited time, they often feel \"hungry\" for it and want to buy it. About missing the sale, don't worry, Junho. You'll soon see a similar sale again.\n\n윗글을 다음과 같이 요약하고자 할 때, 빈칸에 들어갈 알맞은 말을 각각 찾아 쓰시오. (각 빈칸에 한 단어씩 쓸 것)\nPeople tend to buy a product quickly when they think they may ____________ the chance to get it at a low price. Hunger marketing uses this shopping habit by putting products on ____________ for a ____________ ____________ only.",
+        "explanation": "사람들은 제품을 싸게 얻을 기회를 놓칠 수도 있다고 생각할 때 제품을 빠르게 구매한다. 헝거 마케팅은 오직 제한된 시간 동안만 제품을 세일함으로써 이러한 쇼핑 습관을 이용한다."
+      },
+      {
+        "answer": "5",
+        "number": 20,
+        "options": [
+          "to make more money through hunger marketing",
+          "to teach people how to make a shopping list within their budget",
+          "to explain the advantages of buying things during a sale period",
+          "to inform people that sales happen repeatedly at certain times",
+          "to prevent people from making unnecessary purchases because of hunger marketing"
+        ],
+        "question": "윗글의 목적으로 알맞은 것은?",
+        "explanation": "글쓴이가 준호에게 헝거 마케팅 전략을 설명하며 그 전략에 속아 운동화를 구매하지 않도록 조언하고 있으므로, 글의 목적은 헝거 마케팅 때문에 사람들이 불필요한 구매를 하는 것을 막기 위해서이다."
+      },
+      {
+        "answer": "4",
+        "number": 21,
+        "options": [
+          "want to buy the product at the lowest price",
+          "try to buy as many products as possible",
+          "want to eat something after shopping",
+          "strongly want to own the product",
+          "lose interest in the product"
+        ],
+        "question": "다음 글을 읽고 물음에 답하시오.\nHunger Marketing\nJunho: What? The sale ends in two hours? If I don't buy the sneakers now, I will have to buy them at a higher price.\nStop, Junho! You're buying the sneakers just because you don't want to miss the sale. You're falling for a hunger marketing strategy.\nIf people can buy a product only for a limited time, they often (A)feel \"hungry\" for it and want to buy it. About missing the sale, don't worry, Junho. You'll soon see a similar sale again.\n\n윗글의 밑줄 친 (A)의 의미로 알맞은 것은?",
+        "explanation": "제한된 시간에만 제품을 살 수 있는 상황이며 뒤로 그 제품을 사길 원한다는 내용이 이어지므로, 그것을 소유하길 몹시 원한다는 뜻이다."
+      },
+      {
+        "answer": "2",
+        "number": 22,
+        "options": [
+          "you want to get popular among your friends",
+          "you were repeatedly exposed to it online",
+          "your favorite celebrity wore it",
+          "its design matches your taste",
+          "it is on sale for a short time"
+        ],
+        "question": "다음 글을 읽고 물음에 답하시오.\nViral Marketing\nYuna: That's the hottest dress on social media now. Lots of people are wearing it. I have to get that dress, too!\nWait, Yuna! You only want the dress because (B)_________________________________. It isn't just you. There are a lot of people who fall for a viral marketing strategy. Why?\nInformation about a product can spread quickly and widely on the Internet, just like a \"virus.\" If a product becomes hot on social media, people naturally want to have it. Yuna, just remember that a popular product isn't always right for you.\n\n윗글의 빈칸 (B)에 들어갈 말로 알맞은 것은?",
+        "explanation": "유나가 소셜 미디어에서 가장 인기 있는 원피스를 사고 싶은 이유는 온라인에서 반복해서 그것에 노출되었기 때문이다."
+      },
+      {
+        "answer": "don't just rely on the first piece of information that is given to you",
+        "number": 23,
+        "question": "다음 글을 읽고 물음에 답하시오.\nAnchoring Effect\nSomi: I'm looking for a lipstick for my mom.\nSalesperson: How about this?\nSomi: Expensive! I thought I could buy a lipstick for 30 dollars.\nSalesperson: This is also popular.\nSomi: That's better!\nHold on, Somi! Your budget is 30 dollars, but you are buying a 40-dollar lipstick. The 40-dollar lipstick sounds cheap only because the salesperson showed you a 50-dollar lipstick first. This is an example of the anchoring effect.\nUsually, the first piece of information becomes an \"anchor\" and influences the shopper's decision. In your case, the 50-dollar lipstick was the anchor. Somi, (C)너에게 주어진 첫 번째 정보에만 의존하지 마.\n\n윗글의 밑줄 친 (C)의 우리말을 주어진 <조건>에 알맞게 영작하시오.\n<조건>\n• 주격 관계대명사 that을 사용할 것\n• <보기>의 단어 및 표현을 사용할 것 (필요시 변형할 것)\n• 14단어로 영작할 것\n<보기> to you, piece of, give, just rely, don't",
+        "explanation": "'의존하지 마'라는 뜻의 부정명령문, 'rely on'은 '~에 의존하다', 'the first piece of information'은 선행사, 주격 관계대명사 'that'을 사용하여 수동태를 이룬다."
+      },
+      {
+        "answer": "2",
+        "number": 24,
+        "options": [
+          "What marketing strategy is Junho falling for?",
+          "How often does the sale on the sneakers happen?",
+          "What does Yuna want to buy?",
+          "What are the characteristics of the Internet?",
+          "What is Somi's budget for the lipstick?"
+        ],
+        "question": "다음 글을 읽고 답할 수 없는 질문은?\nHunger Marketing\nJunho: What? The sale ends in two hours? If I don't buy the sneakers now, I will have to buy them at a higher price.\nStop, Junho! You're buying the sneakers just because you don't want to miss the sale. You're falling for a hunger marketing strategy.\nIf people can buy a product only for a limited time, they often feel \"hungry\" for it and want to buy it. About missing the sale, don't worry, Junho. You'll soon see a similar sale again.\nViral Marketing\nYuna: That's the hottest dress on social media now. Lots of people are wearing it. I have to get that dress, too!\nWait, Yuna! You only want the dress because you saw it again and again on social media. It isn't just you. There are a lot of people who fall for a viral marketing strategy. Why?\nInformation about a product can spread quickly and widely on the Internet, just like a \"virus.\" If a product becomes hot on social media, people naturally want to have it. Yuna, just remember that a popular product isn't always right for you.\nAnchoring Effect\nSomi: I'm looking for a lipstick for my mom.\nSalesperson: How about this?\nSomi: Expensive! I thought I could buy a lipstick for 30 dollars.\nSalesperson: This is also popular.\nSomi: That's better!\nHold on, Somi! Your budget is 30 dollars, but you are buying a 40-dollar lipstick. The 40-dollar lipstick sounds cheap only because the salesperson showed you a 50-dollar lipstick first. This is an example of the anchoring effect.\nUsually, the first piece of information becomes an \"anchor\" and influences the shopper's decision. In your case, the 50-dollar lipstick was the anchor. Somi, don't just rely on the first piece of information that is given to you.",
+        "explanation": "글쓴이가 준호에게 비슷한 세일을 다시 볼 것이라고 했을 뿐, 그 세일의 빈도가 언급된 것은 아니므로 ② '그 운동화 세일은 얼마나 자주 생기는가?'는 답할 수 없는 질문이다."
+      },
+      {
+        "answer": "5",
+        "number": 25,
+        "options": [
+          "lower, quickly, 50-dollar",
+          "higher, quickly, 40-dollar",
+          "lower, slowly, 50-dollar",
+          "higher, slowly, 40-dollar",
+          "higher, quickly, 50-dollar"
+        ],
+        "question": "다음 글을 읽고 물음에 답하시오.\nHunger Marketing\nJunho: What? The sale ends in two hours? If I don't buy the sneakers now, I will have to buy them at a (A)[lower / higher] price.\nStop, Junho! You're buying the sneakers just because you don't want to miss the sale. You're falling for a hunger marketing strategy.\nIf people can buy a product only for a limited time, they often feel \"hungry\" for it and want to buy it. About missing the sale, don't worry, Junho. You'll soon see a similar sale again.\nViral Marketing\nYuna: That's the hottest dress on social media now. Lots of people are wearing it. I have to get that dress, too!\nWait, Yuna! You only want the dress because you saw it again and again on social media. It isn't just you. There are a lot of people who fall for a viral marketing strategy. Why?\nInformation about a product can spread (B)[quickly / slowly] and widely on the Internet, just like a \"virus.\" If a product becomes hot on social media, people naturally want to have it. Yuna, just remember that a popular product isn't always right for you.\nAnchoring Effect\nSomi: I'm looking for a lipstick for my mom.\nSalesperson: How about this?\nSomi: Expensive! I thought I could buy a lipstick for 30 dollars.\nSalesperson: This is also popular.\nSomi: That's better!\nHold on, Somi! Your budget is 30 dollars, but you are buying a 40-dollar lipstick. The 40-dollar lipstick sounds cheap only because the salesperson showed you a 50-dollar lipstick first. This is an example of the anchoring effect.\nUsually, the first piece of information becomes an \"anchor\" and influences the shopper's decision. In your case, the (C)[40-dollar / 50-dollar] lipstick was the anchor. Somi, don't just rely on the first piece of information that is given to you.\n\n윗글의 괄호 (A), (B), (C)에서 흐름상 알맞은 말로 바르게 연결된 것은?",
+        "explanation": "(A) 두 시간 후에 종료되는 세일이므로 더 높은 가격에 사야 할 것 → higher. (B) 인터넷에서 정보가 바이러스처럼 퍼진다 → quickly. (C) 판매원이 먼저 보여준 50달러짜리가 닻 → 50-dollar."
+      },
+      {
+        "answer": "5",
+        "number": 26,
+        "options": [
+          "For smart shopping, you should not miss sales periods.",
+          "Companies should find good marketing strategies to increase sales.",
+          "You should never buy the second product that is shown by salespeople.",
+          "You should check product reviews when you buy products on social media.",
+          "To become a wise shopper, you should try not to be easily influenced by marketing strategies."
+        ],
+        "question": "윗글의 시사점으로 알맞은 것은?",
+        "explanation": "헝거 마케팅, 바이럴 마케팅, 앵커링 효과의 마케팅 전략을 설명하고 이 전략에 속아 불필요한 구매를 늘리지 않기 위한 조언을 하는 내용이므로, 시사점은 현명한 소비자가 되기 위해 마케팅 전략에 쉽게 영향받지 않도록 해야 한다는 것이다."
+      },
+      {
+        "answer": "3",
+        "number": 27,
+        "options": [
+          "1개",
+          "2개",
+          "3개",
+          "4개",
+          "5개"
+        ],
+        "question": "윗글의 내용과 일치하지 않는 것의 개수는?\n㉠ When Junho knew that the sale would end in two hours, he felt \"hungry\" for the sneakers.\n㉡ Yuna saw the dress only once on social media but she wanted to buy it.\n㉢ Viral marketing uses the Internet to spread information quickly.\n㉣ Though a product is popular online, you should check if it is suitable for you.\n㉤ Somi bought a 40-dollar lipstick that fit her budget.\n㉥ Somi did not use the 50-dollar lipstick as her basis for purchase.",
+        "explanation": "㉡ 유나가 원피스를 자주 봤기 때문 → 불일치. ㉤ 예산은 30달러인데 40달러짜리 구매 → 불일치. ㉥ 50달러짜리를 기준으로 40달러짜리 구매 → 불일치. 총 3개 불일치."
+      },
+      {
+        "answer": "3",
+        "number": 28,
+        "options": [
+          "Jimin, Minho",
+          "Sehwa, Yuri",
+          "Minho, Mira",
+          "Jimin, Sehwa, Yuri",
+          "Minho, Yuri, Mira"
+        ],
+        "question": "다음 글을 읽고 바르게 이해한 사람을 <보기>에서 모두 골라 짝지은 것은?\nHunger Marketing\nJunho: What? The sale ends in two hours? If I don't buy the sneakers now, I will have to buy them at a higher price.\nStop, Junho! You're buying the sneakers just because you don't want to miss the sale. You're falling for a hunger marketing strategy.\nIf people can buy a product only for a limited time, they often feel \"hungry\" for it and want to buy it. About missing the sale, don't worry, Junho. You'll soon see a similar sale again.\nViral Marketing\nYuna: That's the hottest dress on social media now. Lots of people are wearing it. I have to get that dress, too!\nWait, Yuna! You only want the dress because you saw it again and again on social media. It isn't just you. There are a lot of people who fall for a viral marketing strategy. Why?\nInformation about a product can spread quickly and widely on the Internet, just like a \"virus.\" If a product becomes hot on social media, people naturally want to have it. Yuna, just remember that a popular product isn't always right for you.\nAnchoring Effect\nSomi: I'm looking for a lipstick for my mom.\nSalesperson: How about this?\nSomi: Expensive! I thought I could buy a lipstick for 30 dollars.\nSalesperson: This is also popular.\nSomi: That's better!\nHold on, Somi! Your budget is 30 dollars, but you are buying a 40-dollar lipstick. The 40-dollar lipstick sounds cheap only because the salesperson showed you a 50-dollar lipstick first. This is an example of the anchoring effect.\nUsually, the first piece of information becomes an \"anchor\" and influences the shopper's decision. In your case, the 50-dollar lipstick was the anchor. Somi, don't just rely on the first piece of information that is given to you.\n\n<보기>\nJimin: If we don't want to buy a product at a higher price, we should buy it right away when there is a time sale.\nMinho: I saw an advertisement for a phone case that was on sale for just one day, and I suddenly bought it. I think I was tricked by a hunger marketing strategy.\nSehwa: I spend a lot of time on social media to find the most popular items. I think the trendiest products suit everyone well.\nYuri: The clerk first showed me a 10,000-won key ring, and I bought a 7,000-won one. It was over my budget, but I was a smart shopper because I bought a cheaper one than the first one.\nMira: I heard salespeople often show us the most expensive products first. We shouldn't use them as an anchor for our purchases.",
+        "explanation": "민호는 헝거 마케팅 전략에 속았다고 올바르게 이해했다. 미라는 판매자가 가장 비싼 제품을 먼저 보여주는데 그것을 닻으로 삼으면 안 된다고 올바르게 이해했다. 따라서 민호와 미라가 바르게 이해한 사람이다."
+      },
+      {
+        "answer": "who are wearing uniforms, which are eating leaves, which is walking, has",
+        "number": 29,
+        "question": "다음 그림을 보고 <조건>에 맞게 빈칸에 알맞은 말을 넣어 문장을 완성하시오.\n[그림: 아이들이 동물원에서 동물들을 보고 있는 장면]\n(1) The children _____________ _____________ _____________ _____________ are looking at animals.\n(2) There are two giraffes _____________ _____________ _____________ _____________ from the tree.\n(3) The elephant _____________ _____________ _____________ slowly _____________ a long nose.\n<조건>\n• 적절한 주격 관계대명사를 각각 사용할 것 (that은 제외할 것)\n• 각각 현재진행형 시제를 사용할 것\n• leaves, wear, walk, uniforms, eat, have를 한 번씩 사용할 것 (필요시 변형할 것)",
+        "explanation": "(1) 아이들(사람)을 수식하는 주격 관계대명사 who, 현재진행형 are wearing uniforms (교복을 입고 있는). (2) 기린들(동물/사물)을 수식하는 주격 관계대명사 which, 현재진행형 are eating leaves (나뭇잎을 먹고 있는). (3) 코끼리(동물/사물)를 수식하는 주격 관계대명사 which, 현재진행형 is walking (천천히 걷고 있는), have를 has로 변형하여 is walking, has a long nose."
+      },
+      {
+        "answer": "If Kevin goes straight one block and turns right, will start washing the dishes if, presses the blue button",
+        "number": 30,
+        "question": "다음 대화를 읽고 접속사 if를 사용하여 아래 빈칸을 완성하시오. (각 빈칸에 한 단어씩 쓸 것)\n(1) Kevin: Where is the ABC bakery?\nJiho: Go straight one block and turn right. You'll find it on the left.\n→ _____________ _____________ _____________ _____________ _____________ _____________ _____________ _____________ _____________, he will find the ABC bakery on the left.\n(2) Mina: What is the blue button for?\nSeho: Press it. The robot will start washing the dishes.\n→ The robot _____________ _____________ _____________ _____________ _____________ _____________ Mina _____________ _____________ _____________ _____________.",
+        "explanation": "(1) 조건의 부사절은 'if Kevin goes straight one block and turns right(Kevin이 한 블록 직진해서 오른쪽으로 돈다면)'이 되며, 조건절에서는 미래를 현재시제로 나타낸다. (2) 주절은 'The robot will start washing the dishes'이고, 명사절 접속사 if가 이끄는 절은 'if Mina presses the blue button(미나가 파란 버튼을 누르면)'이 되어 'The robot will start washing the dishes if Mina presses the blue button.'이 완성된다."
+      }
+    ],
+    "answer_key": [
+      "4",
+      "2",
+      "4",
+      "3",
+      "1",
+      "2, 4",
+      "4",
+      "2, 5",
+      "5",
+      "because he doesn't really like blue",
+      "3",
+      "2",
+      "3",
+      "2",
+      "that a popular product isn't always right for her",
+      "2",
+      "seems cheap, 50-dollar one",
+      "5",
+      "miss, sale, limited time",
+      "5",
+      "4",
+      "2",
+      "don't just rely on the first piece of information that is given to you",
+      "2",
+      "5",
+      "5",
+      "3",
+      "3",
+      "who are wearing uniforms, which are eating leaves, which is walking, has",
+      "If Kevin goes straight one block and turns right, will start washing the dishes if, presses the blue button"
+    ]
+  }
+}
