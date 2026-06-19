@@ -82,6 +82,7 @@ export function AddTemplateFromPdfDialog({ open, onOpenChange, onAdd }: Props) {
 
     try {
       const allQuestions: ExtractedQuestion[] = [];
+      let removedImageTotal = 0;
 
       // PDF → Storage 업로드 후 URL로 추출 (Vercel 4.5MB 본문 제한 우회)
       if (hasPdf) {
@@ -107,11 +108,12 @@ export function AddTemplateFromPdfDialog({ open, onOpenChange, onAdd }: Props) {
         if (!uploadRes.ok) throw new Error('PDF 업로드에 실패했습니다. 다시 시도해주세요.');
 
         // 3. URL로 문제 추출
-        const { questions } = await fetchWithToast<{ questions: ExtractedQuestion[] }>(
+        const { questions, removedImageCount } = await fetchWithToast<{ questions: ExtractedQuestion[]; removedImageCount?: number }>(
           '/api/naesin/problems/extract-pdf',
           { body: { pdfUrl: publicUrl, storagePath: path }, silent: true },
         );
         allQuestions.push(...questions);
+        removedImageTotal += removedImageCount ?? 0;
       }
 
       // 이미지 → Storage 업로드 후 배치 추출
@@ -128,11 +130,12 @@ export function AddTemplateFromPdfDialog({ open, onOpenChange, onAdd }: Props) {
           }),
         );
 
-        const { questions } = await fetchWithToast<{ questions: ExtractedQuestion[] }>(
+        const { questions, removedImageCount } = await fetchWithToast<{ questions: ExtractedQuestion[]; removedImageCount?: number }>(
           '/api/naesin/problems/extract-images',
           { body: { imageUrls }, silent: true },
         );
         allQuestions.push(...questions);
+        removedImageTotal += removedImageCount ?? 0;
       }
 
       if (allQuestions.length === 0) {
@@ -143,6 +146,9 @@ export function AddTemplateFromPdfDialog({ open, onOpenChange, onAdd }: Props) {
       }
 
       setExtractedQuestions(allQuestions);
+      if (removedImageTotal > 0) {
+        toast.info(`그림·사진 의존 문항 ${removedImageTotal}개는 제외했습니다 (표는 유지)`);
+      }
       if (!title) setTitle(hasPdf ? 'PDF 추출 템플릿' : '이미지 추출 템플릿');
       setStep('preview');
     } catch (err) {

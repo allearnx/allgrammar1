@@ -6,6 +6,7 @@ import { checkRateLimit } from '@/lib/api/rate-limit';
 import Anthropic from '@anthropic-ai/sdk';
 import { parseAiJsonArray, parseAiJsonObject } from '@/lib/ai-json';
 import { PDFDocument } from 'pdf-lib';
+import { isUnanswerableImageQuestion } from '@/lib/validation/problem-validator';
 
 export const maxDuration = 300;
 
@@ -455,7 +456,7 @@ export async function POST(request: NextRequest) {
 
     // 문제 번호순 정렬 + 중복 제거
     const seen = new Set<number>();
-    const questions = allQuestions
+    const dedup = allQuestions
       .sort((a, b) => (Number(a.number) || 0) - (Number(b.number) || 0))
       .filter((q) => {
         const num = Number(q.number);
@@ -463,6 +464,13 @@ export async function POST(request: NextRequest) {
         seen.add(num);
         return true;
       });
+
+    // 그림·사진·지도·그래프 의존 문항은 미리보기에 노출하지 않고 추출 단계에서 제거(표는 마크다운 재현되어 유지).
+    // 제거 개수는 응답에 담아 UI가 "그림 문항 N개 제외" 안내 — 조용한 누락 방지.
+    const before = dedup.length;
+    const questions = dedup.filter((q) => !isUnanswerableImageQuestion(String(q.question ?? '')));
+    questions.forEach((q, i) => { q.number = i + 1; });
+    const removedImageCount = before - questions.length;
 
     if (questions.length === 0) {
       return NextResponse.json(
@@ -478,9 +486,10 @@ export async function POST(request: NextRequest) {
       });
     }
 
-    logger.info('ai.extract.done', { count: questions.length, answerKeyFound: answerKeyCount > 0, mergedCount });
+    logger.info('ai.extract.done', { count: questions.length, answerKeyFound: answerKeyCount > 0, mergedCount, removedImageCount });
     return NextResponse.json({
       questions,
+      ...(removedImageCount > 0 && { removedImageCount }),
       ...(answerKeyCount > 0 && { answerKeyFound: true, answerKeyMerged: mergedCount }),
     });
   } catch (error) {

@@ -172,6 +172,7 @@ export function AddMockExamDialog({ unitId, textbookId, onAdd }: { unitId?: stri
 
     try {
       const allQuestions: ExtractedQuestion[] = [];
+      let removedImageTotal = 0;
 
       // 1) PDF → Storage 업로드 후 URL로 추출 (Vercel 4.5MB 제한 우회)
       if (hasPdf) {
@@ -180,11 +181,12 @@ export function AddMockExamDialog({ unitId, textbookId, onAdd }: { unitId?: stri
         const { publicUrl, storagePath } = await uploadForExtract(pdfFile);
         setPdfUrl(publicUrl);
 
-        const { questions } = await fetchWithToast<{ questions: ExtractedQuestion[] }>(
+        const { questions, removedImageCount } = await fetchWithToast<{ questions: ExtractedQuestion[]; removedImageCount?: number }>(
           '/api/naesin/problems/extract-pdf',
           { body: { pdfUrl: publicUrl, storagePath }, silent: true },
         );
         allQuestions.push(...questions);
+        removedImageTotal += removedImageCount ?? 0;
       }
 
       // 3) 이미지 → Storage 업로드 후 배치 추출 (하나의 Claude 호출)
@@ -203,11 +205,12 @@ export function AddMockExamDialog({ unitId, textbookId, onAdd }: { unitId?: stri
         );
 
         // 3b) 모든 이미지를 하나의 Claude 호출로 배치 추출
-        const { questions } = await fetchWithToast<{ questions: ExtractedQuestion[] }>(
+        const { questions, removedImageCount } = await fetchWithToast<{ questions: ExtractedQuestion[]; removedImageCount?: number }>(
           '/api/naesin/problems/extract-images',
           { body: { imageUrls }, silent: true },
         );
         allQuestions.push(...questions);
+        removedImageTotal += removedImageCount ?? 0;
       }
 
       if (allQuestions.length === 0) {
@@ -218,6 +221,9 @@ export function AddMockExamDialog({ unitId, textbookId, onAdd }: { unitId?: stri
       }
 
       setExtractedQuestions(allQuestions);
+      if (removedImageTotal > 0) {
+        toast.info(`그림·사진 의존 문항 ${removedImageTotal}개는 제외했습니다 (표는 유지)`);
+      }
       if (!title) setTitle(hasPdf ? 'PDF 추출 예상문제' : '이미지 추출 예상문제');
       setMode('interactive');
       setStep('preview');

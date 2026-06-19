@@ -320,8 +320,8 @@ const HAS_INLINE_DESC = /\(그림[:\s：]|（그림[:\s：]|\[그림[:\s：]|\[�
 /** "그림"이 내용의 일부인 경우 (제거하면 안 됨) */
 const CONTENT_USAGE = /그림을 그리|그림을 잘|그린 그림|그림들을|그림이 있는|그림들의|그림 그리기|그림을 좋아|사진을 찍|사진을 올|그 사진/;
 
-/** 이미지 없이 풀 수 없는 문항인지 판별 */
-function isUnanswerableImageQuestion(text: string): boolean {
+/** 이미지 없이 풀 수 없는 문항인지 판별 (추출 미리보기 사전 필터에서도 재사용) */
+export function isUnanswerableImageQuestion(text: string): boolean {
   if (!IMAGE_INSTRUCTION.test(text)) return false;
   if (CONTENT_USAGE.test(text) && !text.startsWith('다음 그림')) return false;
   if (HAS_INLINE_DESC.test(text)) return false;

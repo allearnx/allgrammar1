@@ -5,6 +5,7 @@ import { logger } from '@/lib/logger';
 import { checkRateLimit } from '@/lib/api/rate-limit';
 import Anthropic from '@anthropic-ai/sdk';
 import { parseAiJsonArray } from '@/lib/ai-json';
+import { isUnanswerableImageQuestion } from '@/lib/validation/problem-validator';
 
 export const maxDuration = 300;
 
@@ -145,7 +146,7 @@ export async function POST(request: NextRequest) {
 
     // 문제 번호순 정렬 + 중복 제거
     const seen = new Set<number>();
-    const questions = allQuestions
+    const dedup = allQuestions
       .sort((a, b) => (Number(a.number) || 0) - (Number(b.number) || 0))
       .filter((q) => {
         const num = Number(q.number);
@@ -154,6 +155,12 @@ export async function POST(request: NextRequest) {
         return true;
       });
 
+    // 그림·사진·지도·그래프 의존 문항은 미리보기에 노출하지 않고 추출 단계에서 제거(표는 유지).
+    const before = dedup.length;
+    const questions = dedup.filter((q) => !isUnanswerableImageQuestion(String(q.question ?? '')));
+    questions.forEach((q, i) => { q.number = i + 1; });
+    const removedImageCount = before - questions.length;
+
     if (questions.length === 0) {
       return NextResponse.json(
         { error: '이미지에서 문제를 찾을 수 없습니다. 이미지를 확인해주세요.' },
@@ -161,8 +168,8 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    logger.info('ai.extract_images.done', { count: questions.length });
-    return NextResponse.json({ questions });
+    logger.info('ai.extract_images.done', { count: questions.length, removedImageCount });
+    return NextResponse.json({ questions, ...(removedImageCount > 0 && { removedImageCount }) });
   } catch (error) {
     const msg = error instanceof Error ? error.message : String(error);
     const apiStatus = (error as { status?: number })?.status;
