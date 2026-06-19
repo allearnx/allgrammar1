@@ -1,0 +1,1079 @@
+{
+  "step1": {
+    "id": "28bef186-a016-416d-81ba-507597cc0de2",
+    "questions": [
+      {
+        "answer": "3",
+        "number": 1,
+        "options": [
+          "shape",
+          "prize",
+          "discovery",
+          "device",
+          "controller"
+        ],
+        "question": "다음 밑줄 친 단어와 바꾸어 쓸 수 있는 것은?\n\nIt was a surprising finding."
+      },
+      {
+        "answer": "1",
+        "number": 2,
+        "options": [
+          "dough",
+          "accident",
+          "piece",
+          "flask",
+          "liquid"
+        ],
+        "question": "다음 영영풀이에 해당하는 단어로 알맞은 것은?\n\na mixture of flour and water ready to be baked into bread, pastry etc"
+      },
+      {
+        "answer": "4",
+        "number": 3,
+        "options": [
+          "broke",
+          "put",
+          "happened",
+          "remained",
+          "mixed"
+        ],
+        "question": "다음 빈칸에 공통으로 들어갈 말로 알맞은 것은?\n\n• He __________ calm during the test.\n• Only one slice of cake __________ after they ate."
+      },
+      {
+        "answer": "2",
+        "number": 4,
+        "options": [
+          "invent / bake",
+          "invent / melt",
+          "press / bake",
+          "press / melt",
+          "pass / cut"
+        ],
+        "question": "다음 빈칸 ⓐ, ⓑ에 들어갈 말로 알맞게 연결된 것은?\n\n• He wants to ⓐ__________ a flying car in the future.\n• First, ⓑ__________ butter slowly over low heat."
+      },
+      {
+        "answer": "5",
+        "number": 5,
+        "options": [
+          "This kitchen knife is very sharp. (날카로운)",
+          "The kid spilled milk on the table. (쏟았다)",
+          "I accidentally found an old postcard. (우연히)",
+          "Bad habits can lead to health problems. (~(의 결과)에 이르다)",
+          "He experimented many times to get exact results. (경험했다)"
+        ],
+        "question": "다음 중 밑줄 친 부분의 우리말 뜻이 어색한 것은?"
+      },
+      {
+        "answer": "connection",
+        "number": 6,
+        "question": "다음 짝지어진 단어의 관계를 고려하여 빈칸에 들어갈 알맞은 단어를 쓰시오.\n\nact : action = connect : ____________"
+      },
+      {
+        "answer": "(1) spot (2) factory (3) secret",
+        "number": 7,
+        "question": "다음 빈칸에 들어갈 단어를 <보기>에서 골라 알맞은 형태로 쓰시오.\n\n<보기>\nsecret / spot / factory\n\n(1) I found a dirty ____________ on his pants.\n(2) She works in a ____________ near her house.\n(3) They promised not to tell the ____________ to anyone.",
+        "acceptedAnswers": [
+          "(1)spot (2)factory (3)secret"
+        ]
+      },
+      {
+        "answer": "1",
+        "number": 8,
+        "options": [
+          "Although",
+          "Because",
+          "Since",
+          "After",
+          "Before"
+        ],
+        "question": "다음 문장의 빈칸에 들어갈 말로 알맞은 것은?\n\n___________ Tom didn't practice, he played well in the game."
+      },
+      {
+        "answer": "5",
+        "number": 9,
+        "options": [
+          "wrote",
+          "write",
+          "was written",
+          "were writing",
+          "were written"
+        ],
+        "question": "다음 문장의 빈칸에 들어갈 말로 알맞은 것은?\n\nThe books ________________ by J.K. Rowling."
+      },
+      {
+        "answer": "2",
+        "number": 10,
+        "options": [
+          "soccer",
+          "despite",
+          "rained",
+          "played",
+          "it"
+        ],
+        "question": "다음 우리말을 영작할 때 필요하지 않은 단어는?\n\n비록 비가 왔지만, 우리는 축구를 했다."
+      },
+      {
+        "answer": "4",
+        "number": 11,
+        "options": [
+          "caught / damaged",
+          "was caught / damaged",
+          "was caught / was damaged",
+          "caught / were damaged",
+          "were caught / were damaged"
+        ],
+        "question": "다음 빈칸 ⓐ, ⓑ에 들어갈 말로 알맞게 연결된 것은?\n\n• The cat ⓐ___________ the fish.\n• The houses ⓑ____________ by the storm."
+      },
+      {
+        "answer": "1, 5",
+        "number": 12,
+        "options": [
+          "English is spoke in many countries.",
+          "This book is sold all over the world.",
+          "The kiss was painted by Gustav Klimt.",
+          "Although the test was difficult, Jane passed it.",
+          "Although Judy scared, she rode the roller coaster."
+        ],
+        "question": "다음 중 어법상 알맞지 않은 것을 모두 고르면?"
+      },
+      {
+        "answer": "3",
+        "number": 13,
+        "options": [
+          "is baked - her",
+          "is baked - she",
+          "was baked - her",
+          "was baked - she",
+          "were baked - her"
+        ],
+        "question": "다음과 같이 문장을 바꿔 쓸 때, 빈칸에 들어갈 말이 차례대로 짝지어진 것은?\n\nShe baked the cake yesterday.\n= The cake _____________ by ____________ yesterday."
+      },
+      {
+        "answer": "4",
+        "number": 14,
+        "options": [
+          "everyone was already in the classroom",
+          "her friends were talking quietly",
+          "she could not join the meeting",
+          "she helped us with homework",
+          "she missed the class"
+        ],
+        "question": "다음 빈칸에 들어갈 말로 알맞은 것은?\n\nAlthough she came late, ____________________________."
+      },
+      {
+        "answer": "Although[Though] the book is boring, I will finish reading it.",
+        "number": 15,
+        "question": "다음 주어진 우리말을 <보기>의 단어를 차례대로 사용하여 10단어로 영작하시오. (필요시 변형할 것)\n\n비록 그 책이 지루하긴 하지만, 나는 그것을 다 읽을 것이다.\n\n<보기>\nboring, finish, read",
+        "acceptedAnswers": [
+          "Although[Though] the book is boring, I will finish reading it"
+        ]
+      },
+      {
+        "answer": "was invented by the Wright brothers",
+        "number": 16,
+        "question": "다음 대화의 빈칸에 들어갈 말이 되도록 괄호 안의 주어진 단어 및 표현을 알맞게 배열하시오. (필요시 변형할 것)\n\nA: Who invented the airplane?\nB: It ___________________________________________.\n→ ______________________________________________________\n (by / invent / the Wright brothers / be)"
+      },
+      {
+        "answer": "(1) was repaired by my father (2) be painted by the local artists",
+        "number": 17,
+        "question": "다음 두 문장의 의미가 일치하도록 빈칸에 알맞은 단어를 쓰시오. (각 빈칸에 한 단어씩 쓸 것)\n\n(1) My father repaired the bike last week.\n→ The bike ____________ ____________ ____________ ____________ ____________ last week.\n\n(2) The local artists will paint the wall.\n→ The wall will ____________ ____________ ____________ ____________ ____________ ____________.",
+        "acceptedAnswers": [
+          "(1)was repaired by my father (2)be painted by the local artists"
+        ]
+      },
+      {
+        "answer": "Although I was very tired, I finished the project.",
+        "number": 18,
+        "question": "다음 문장을 접속사 although를 사용하여 바꿔 쓰시오.\n\nI was very tired, but I finished the project.\n→ ______________________________________________________",
+        "acceptedAnswers": [
+          "Although I was very tired, I finished the project"
+        ]
+      },
+      {
+        "answer": "(1) (B): be cleaned (2) (E): although[though]",
+        "number": 19,
+        "question": "다음 밑줄 친 부분 중 어색한 것 두 개를 찾아 기호를 쓴 후 어색한 부분을 바르게 고쳐 쓰시오.\n\n(A) The house was built in 1990.\n(B) The park will clean by the students.\n(C) The robot was made by a little girl.\n(D) Although the mountain is high, we will reach the top.\n(E) The restaurant was still open despite it was late at night.\n\n(1) _________: __________________________________________\n(2) _________: __________________________________________",
+        "acceptedAnswers": [
+          "(1)(B): be cleaned (2)(E): although[though]"
+        ]
+      },
+      {
+        "answer": "4",
+        "number": 20,
+        "options": [
+          "How was the movie?",
+          "Why is the movie famous?",
+          "Do you like that kind of movie?",
+          "Could you explain more about it?",
+          "Is it okay if I go to see the movie?"
+        ],
+        "question": "다음 대화의 빈칸에 들어갈 말로 알맞은 것은?\n\nA: Did you see the movie The Martian?\nB: Yes. It's a famous movie.\nA: _________________________________________________\nB: Sure. It's about a space man who is left alone one Mars."
+      },
+      {
+        "answer": "5",
+        "number": 21,
+        "options": [
+          "I'm unsure if",
+          "I'm wondering if",
+          "I doubt if",
+          "I heard that",
+          "I'm sure that"
+        ],
+        "question": "다음 대화의 빈칸에 들어갈 말로 알맞은 것은?\n\nB: Look! People are trying to fly air rockets!\nG: Which rocket will go the highest?\nB: _____________________ the red rocket will go the highest.\nG: Why do you think so?\nB: Its head looks different.\nG: Oh, you're right! The red rocket is sharper than the other rockets."
+      },
+      {
+        "answer": "2",
+        "number": 22,
+        "options": [
+          "(B)-(D)-(A)-(C)",
+          "(B)-(D)-(C)-(A)",
+          "(C)-(A)-(B)-(D)",
+          "(C)-(A)-(D)-(B)",
+          "(D)-(C)-(A)-(B)"
+        ],
+        "question": "다음 주어진 대화에 이어질 순서로 알맞은 것은?\n\nB: What is that woman doing there?\nW: She is experiencing VR car racing.\n(A) Then stand in line there.\n(B) Could you explain more about it?\n(C) That sounds fun. I'd like to try it.\n(D) With a VR device, you can be a car racer."
+      },
+      {
+        "answer": "1",
+        "number": 23,
+        "options": [
+          "proud",
+          "aware",
+          "sure",
+          "ashamed",
+          "afraid"
+        ],
+        "question": "다음 대화의 빈칸 ⓐ에 들어갈 말로 알맞은 것은?\n\nReporter: Juwon, you won the special prize in the invention contest. Great Job!\nJuwon: Thank you. I'm ⓐ___________ of my invention.\nReporter: What's your invention?\nJuwon: It's a recorder which doesn't bother other people.\nReporter: ⓑ_________________ Could you explain more about it?\nJuwon: I connected headphones to the recorder with a simple device. The device sends the sound from the recorder to the headphones.\nReporter: That's cool. When you wear the headphones, only you can hear the sound.\nJuwon: Right. People can play the recorder any time. ⓒI'm sure that this invention will be very helpful."
+      },
+      {
+        "answer": "2",
+        "number": 24,
+        "options": [
+          "What is it for?",
+          "How does it work?",
+          "What are you interested in?",
+          "Why did you want to make it?",
+          "When did you come up with the idea?"
+        ],
+        "question": "다음 대화의 빈칸 ⓑ에 들어갈 말로 알맞은 것은?\n\nReporter: Juwon, you won the special prize in the invention contest. Great Job!\nJuwon: Thank you. I'm ⓐ___________ of my invention.\nReporter: What's your invention?\nJuwon: It's a recorder which doesn't bother other people.\nReporter: ⓑ_________________ Could you explain more about it?\nJuwon: I connected headphones to the recorder with a simple device. The device sends the sound from the recorder to the headphones.\nReporter: That's cool. When you wear the headphones, only you can hear the sound.\nJuwon: Right. People can play the recorder any time. ⓒI'm sure that this invention will be very helpful."
+      },
+      {
+        "answer": "5",
+        "number": 25,
+        "options": [
+          "궁금증 표현하기",
+          "계획 말하기",
+          "약속 정하기",
+          "당부하기",
+          "확실성 정도 표현하기"
+        ],
+        "question": "다음 대화의 밑줄 친 ⓒ의 의도로 알맞은 것은?\n\nReporter: Juwon, you won the special prize in the invention contest. Great Job!\nJuwon: Thank you. I'm ⓐ___________ of my invention.\nReporter: What's your invention?\nJuwon: It's a recorder which doesn't bother other people.\nReporter: ⓑ_________________ Could you explain more about it?\nJuwon: I connected headphones to the recorder with a simple device. The device sends the sound from the recorder to the headphones.\nReporter: That's cool. When you wear the headphones, only you can hear the sound.\nJuwon: Right. People can play the recorder any time. ⓒI'm sure that this invention will be very helpful."
+      },
+      {
+        "answer": "4",
+        "number": 26,
+        "options": [
+          "how to play the recorder",
+          "tips to become an inventor",
+          "a solution to the noise problem",
+          "Juwon's silent recorder invention",
+          "Juwon's motivation for the invention"
+        ],
+        "question": "다음 대화의 주제로 알맞은 것은?\n\nReporter: Juwon, you won the special prize in the invention contest. Great Job!\nJuwon: Thank you. I'm ⓐ___________ of my invention.\nReporter: What's your invention?\nJuwon: It's a recorder which doesn't bother other people.\nReporter: ⓑ_________________ Could you explain more about it?\nJuwon: I connected headphones to the recorder with a simple device. The device sends the sound from the recorder to the headphones.\nReporter: That's cool. When you wear the headphones, only you can hear the sound.\nJuwon: Right. People can play the recorder any time. ⓒI'm sure that this invention will be very helpful."
+      },
+      {
+        "answer": "2",
+        "number": 27,
+        "options": [
+          "ⓐ",
+          "ⓑ",
+          "ⓒ",
+          "ⓓ",
+          "ⓔ"
+        ],
+        "question": "다음 대화의 밑줄 친 ⓐ~ⓔ 중, 흐름상 어색한 것은?\n\nG: I saw that your drone passed through the rings. That was cool!\nM: Thanks. ⓐDo you want to try it?\nG: I'd love to. ⓑWhere can I fly the drone?\nM: You can use this controller.\nG: ⓒCould you explain more about it?\nM: Press the green button, and the drone goes up.\nG: I see. ⓓWhat's next?\nM: Press the red button, and it goes down.\nG: ⓔIt works! Thank you so much."
+      },
+      {
+        "answer": "4",
+        "number": 28,
+        "options": [
+          "Isabel is sure listeners will know the right answer.",
+          "The Eiffel Tower grows taller during the summer.",
+          "Hot summer weather affects the height of the Eiffel Tower.",
+          "In summer, the Eiffel Tower is around 330 meters high.",
+          "In winter, the Eiffel Tower becomes shorter because the metal cools down."
+        ],
+        "question": "다음 글의 내용과 일치하지 않는 것은?\n\nW: Welcome to my science quiz show! I'm Isabel. Here is the first question. I'm sure that you can find the right answer. The Eiffel Tower gets taller during the summer. Is this true or false? 3, 2, 1. The answer is true! The Eiffel Tower is 330 m. In summer, the temperature of the Eiffel Tower goes up. When the metal gets hot, it becomes bigger. So, the height of the tower becomes about 15 cm taller. In winter, the metal cools down, and the height of the tower becomes shorter. Now, let's answer another question together!"
+      },
+      {
+        "answer": "2",
+        "number": 29,
+        "options": [
+          "(A)",
+          "(B)",
+          "(C)",
+          "(D)",
+          "(E)"
+        ],
+        "question": "[지문]\nReporter: Juwon, you won the special prize in the invention contest. Great Job!\nJuwon: Thank you. I'm proud of my invention.\nReporter: What's your invention?\nJuwon: It's a recorder which doesn't bother other people. (A)\nReporter: How does it work? (B)\nJuwon: I connected headphones to the recorder with a simple device. The device sends the sound from the recorder to the headphones. (C)\nReporter: That's cool. When you wear the headphones, only you can hear the sound. (D)\nJuwon: Right. People can play the recorder any time. (E) I'm sure that this invention will be very helpful.\n\n위 대화의 (A)~(E) 중, 주어진 문장이 들어갈 알맞은 곳은?\n\nCould you explain more about it?"
+      },
+      {
+        "answer": "2, 3",
+        "number": 30,
+        "options": [
+          "① 주원은 발명 대회에서 1등상을 받았다.",
+          "② 주원은 자신의 발명을 자랑스럽게 여긴다.",
+          "③ 주원은 다른 사람에게 방해가 되지 않는 리코더를 발명했다.",
+          "④ 주원은 헤드폰을 변형해 리코더와 연결했다.",
+          "⑤ 주원의 리코더는 헤드폰을 쓴 사람들끼리만 소리를 들을 수 있다."
+        ],
+        "question": "[지문]\nReporter: Juwon, you won the special prize in the invention contest. Great Job!\nJuwon: Thank you. I'm proud of my invention.\nReporter: What's your invention?\nJuwon: It's a recorder which doesn't bother other people. (A)\nReporter: How does it work? (B)\nJuwon: I connected headphones to the recorder with a simple device. The device sends the sound from the recorder to the headphones. (C)\nReporter: That's cool. When you wear the headphones, only you can hear the sound. (D)\nJuwon: Right. People can play the recorder any time. (E) I'm sure that this invention will be very helpful.\n\n위 대화의 내용과 일치하는 것을 모두 고르면?"
+      },
+      {
+        "answer": "you explain",
+        "number": 31,
+        "question": "다음 두 문장의 의미가 같도록 빈칸에 알맞은 말을 쓰시오. (각 빈칸에 한 단어씩 쓸 것)\n\nPlease tell me more about it.\n= Could _____________ _____________ more about it?"
+      },
+      {
+        "answer": "Could you explain more about it?",
+        "number": 32,
+        "question": "[지문]\nReporter: Juwon, you won the special prize in the invention contest. Great Job!\nJuwon: Thank you. I'm proud of my invention.\nReporter: What's your invention?\nJuwon: It's a recorder which doesn't bother other people.\nReporter: How does it work? (A)______________________\n_______________\nJuwon: I connected headphones to the recorder with a simple device. The device sends the sound from the recorder to the headphones.\nReporter: That's cool. When you wear the headphones, only you can hear the sound.\nJuwon: Right. People can play the recorder any time. (B)저는 이 발명이 아주 유용할 것이라고 확신해요.\n\n위 대화의 빈칸 (A)에 들어갈 말이 되도록 주어진 단어 및 표현을 알맞게 배열하시오.\n\nexplain more / you / it / could / ? / about"
+      },
+      {
+        "answer": "I'm sure that this invention will be very helpful.",
+        "number": 33,
+        "question": "[지문]\nReporter: Juwon, you won the special prize in the invention contest. Great Job!\nJuwon: Thank you. I'm proud of my invention.\nReporter: What's your invention?\nJuwon: It's a recorder which doesn't bother other people.\nReporter: How does it work? (A)______________________\n_______________\nJuwon: I connected headphones to the recorder with a simple device. The device sends the sound from the recorder to the headphones.\nReporter: That's cool. When you wear the headphones, only you can hear the sound.\nJuwon: Right. People can play the recorder any time. (B)저는 이 발명이 아주 유용할 것이라고 확신해요.\n\n위 대화의 밑줄 친 (B)의 우리말을 주어진 단어를 사용하여 9단어로 알맞게 영작하시오.\n\nhelpful, sure, be, very, I'm",
+        "acceptedAnswers": [
+          "I'm sure that this invention will be very helpful"
+        ]
+      },
+      {
+        "answer": "I'm sure that you'll like it.",
+        "number": 34,
+        "question": "다음 대화의 빈칸에 들어갈 말이 되도록 주어진 단어를 알맞게 배열하시오.\n\nA: Did you see the movie Frozen?\nB: Yes. It's a famous movie.\nA: What is it about?\nB: It's about two sisters and ice magic.\nA: Sounds interesting.\nB: ____________________________________________\n\nthat / you'll / sure / it / I'm / like",
+        "acceptedAnswers": [
+          "I'm sure that you'll like it"
+        ]
+      },
+      {
+        "answer": "3",
+        "number": 35,
+        "options": [
+          "was / baking",
+          "were / baking",
+          "was / to bake",
+          "were / to bake",
+          "is / to bake"
+        ],
+        "question": "[지문]\nA New Cookie Star: Chocolate Chip Cookies\n\nIn America, there ⓐ(be) a famous cook, Ms. Wakefield. One day in 1938, she wanted ⓑ(bake) chocolate cookies. (A)_________, she didn't have enough time to melt chocolate. \"Aha!\" So, she cut a chocolate bar into small chips. (B)_________, she mixed them with her dough and put the cookie dough into the oven. When Ms. Wakefield opened the oven, she found that the chips were not melted into the dough. \"Oh, no!\" Although the chips remained in the cookies, (C)____________________. Her new cookies were so delicious. She invented chocolate CHIP cookies!\n\n윗글의 괄호 ⓐ, ⓑ에 주어진 단어의 알맞은 형태가 바르게 연결된 것은?"
+      },
+      {
+        "answer": "1",
+        "number": 36,
+        "options": [
+          "However / Then",
+          "However / Moreover",
+          "Therefore / Then",
+          "Therefore / Moreover",
+          "Moreover / However"
+        ],
+        "question": "[지문]\nA New Cookie Star: Chocolate Chip Cookies\n\nIn America, there ⓐ(be) a famous cook, Ms. Wakefield. One day in 1938, she wanted ⓑ(bake) chocolate cookies. (A)_________, she didn't have enough time to melt chocolate. \"Aha!\" So, she cut a chocolate bar into small chips. (B)_________, she mixed them with her dough and put the cookie dough into the oven. When Ms. Wakefield opened the oven, she found that the chips were not melted into the dough. \"Oh, no!\" Although the chips remained in the cookies, (C)____________________. Her new cookies were so delicious. She invented chocolate CHIP cookies!\n\n윗글의 빈칸 (A), (B)에 들어갈 알맞은 말로 연결된 것은?"
+      },
+      {
+        "answer": "2",
+        "number": 37,
+        "options": [
+          "she was not pleased",
+          "she was not disappointed",
+          "the cookies were too sweet",
+          "the cookies were not popular",
+          "she had to make the cookies again"
+        ],
+        "question": "[지문]\nA New Cookie Star: Chocolate Chip Cookies\n\nIn America, there ⓐ(be) a famous cook, Ms. Wakefield. One day in 1938, she wanted ⓑ(bake) chocolate cookies. (A)_________, she didn't have enough time to melt chocolate. \"Aha!\" So, she cut a chocolate bar into small chips. (B)_________, she mixed them with her dough and put the cookie dough into the oven. When Ms. Wakefield opened the oven, she found that the chips were not melted into the dough. \"Oh, no!\" Although the chips remained in the cookies, (C)____________________. Her new cookies were so delicious. She invented chocolate CHIP cookies!\n\n윗글의 빈칸 (C)에 들어갈 말로 알맞은 것은?"
+      },
+      {
+        "answer": "4",
+        "number": 38,
+        "options": [
+          "(A)",
+          "(B)",
+          "(C)",
+          "(D)",
+          "(E)"
+        ],
+        "question": "다음 글의 (A)~(E) 중, 주어진 문장이 들어갈 알맞은 곳은?\n\nFor example, it is used for car windows.\n\nIn 1903, a French scientist, Mr. Bénédictus, was experimenting with liquid plastic in a glass flask. He accidentally hit the glass flask, and it fell on the floor. \"Oops!\" Although the glass flask was broken into pieces, they still held together in the shape of the flask! How could this happen? (A) The secret was the liquid plastic in the flask. (B) This finding led to his invention of safety glass. (C) These days, we can find safety glass everywhere. (D) If there is a car accident, people are safer from sharp pieces of glass. (E)"
+      },
+      {
+        "answer": "5",
+        "number": 39,
+        "options": [
+          "to clean / were cleaned",
+          "cleaning / cleaned",
+          "cleans / was cleaned",
+          "cleans / cleaned",
+          "to clean / was cleaned"
+        ],
+        "question": "[지문]\nCan you clean your clothes without water? The answer is \"yes.\" Dry cleaning uses oil (A)(clean) clothes. There's an interesting story about dry cleaning. In the 1800s, a factory worker in France spilled lamp oil on a tablecloth. The factory manager, Mr. Jolly, looked at the tablecloth and found something. \"Wow!\" The dirty spot on the tablecloth (B)(clean) by the lamp oil! His discovery led to a new way of cleaning clothes. Now, dry cleaning is widely used around the world.\n\n윗글의 괄호 (A), (B)에 주어진 단어의 알맞은 형태가 바르게 연결된 것은?"
+      },
+      {
+        "answer": "2",
+        "number": 40,
+        "options": [
+          "옷 세탁의 역사",
+          "드라이클리닝의 발견",
+          "드라이클리닝이 널리 사용되는 이유",
+          "드라이클리닝에 적합한 기름의 발견",
+          "세탁의 새로운 방법을 발견하기 위한 노력들"
+        ],
+        "question": "[지문]\nCan you clean your clothes without water? The answer is \"yes.\" Dry cleaning uses oil (A)(clean) clothes. There's an interesting story about dry cleaning. In the 1800s, a factory worker in France spilled lamp oil on a tablecloth. The factory manager, Mr. Jolly, looked at the tablecloth and found something. \"Wow!\" The dirty spot on the tablecloth (B)(clean) by the lamp oil! His discovery led to a new way of cleaning clothes. Now, dry cleaning is widely used around the world.\n\n윗글의 주제로 알맞은 것은?"
+      },
+      {
+        "answer": "4",
+        "number": 41,
+        "options": [
+          "If",
+          "Despite",
+          "Because of",
+          "Although",
+          "Because"
+        ],
+        "question": "[지문]\nFinding Safety in Glass: Safety Glass\nIn 1903, a French scientist, Mr. Bénédictus, was experimenting with liquid plastic in a glass flask. He accidentally hit the glass flask, and it fell on the floor. \"Oops!\" (A)___________ the glass flask was ⓐ(break) into pieces, they still held together in the shape of the flask! How could this happen? The secret was the liquid plastic in the flask. This finding led to his (B)__________ of safety glass. These days, we can find safety glass everywhere. For example, it ⓑ(use) for car windows. If there is a car accident, people are (C)__________ from sharp pieces of glass.\n\n윗글의 빈칸 (A)에 들어갈 말로 알맞은 것은?"
+      },
+      {
+        "answer": "2",
+        "number": 42,
+        "options": [
+          "breaking / used",
+          "broken / is used",
+          "breaking / was used",
+          "broken / used",
+          "break / is used"
+        ],
+        "question": "[지문]\nFinding Safety in Glass: Safety Glass\nIn 1903, a French scientist, Mr. Bénédictus, was experimenting with liquid plastic in a glass flask. He accidentally hit the glass flask, and it fell on the floor. \"Oops!\" (A)___________ the glass flask was ⓐ(break) into pieces, they still held together in the shape of the flask! How could this happen? The secret was the liquid plastic in the flask. This finding led to his (B)__________ of safety glass. These days, we can find safety glass everywhere. For example, it ⓑ(use) for car windows. If there is a car accident, people are (C)__________ from sharp pieces of glass.\n\n윗글의 괄호 ⓐ, ⓑ에 주어진 단어의 알맞은 형태가 바르게 연결된 것은?"
+      },
+      {
+        "answer": "5",
+        "number": 43,
+        "options": [
+          "achievement",
+          "success",
+          "invitation",
+          "failure",
+          "invention"
+        ],
+        "question": "[지문]\nFinding Safety in Glass: Safety Glass\nIn 1903, a French scientist, Mr. Bénédictus, was experimenting with liquid plastic in a glass flask. He accidentally hit the glass flask, and it fell on the floor. \"Oops!\" (A)___________ the glass flask was ⓐ(break) into pieces, they still held together in the shape of the flask! How could this happen? The secret was the liquid plastic in the flask. This finding led to his (B)__________ of safety glass. These days, we can find safety glass everywhere. For example, it ⓑ(use) for car windows. If there is a car accident, people are (C)__________ from sharp pieces of glass.\n\n윗글의 빈칸 (B)에 들어갈 알맞은 단어를 다음 영영풀이를 참고하여 고르면?\n\nthe act of making something new for the first time"
+      },
+      {
+        "answer": "3",
+        "number": 44,
+        "options": [
+          "rescued",
+          "relieved",
+          "safer",
+          "injured",
+          "riskier"
+        ],
+        "question": "[지문]\nFinding Safety in Glass: Safety Glass\nIn 1903, a French scientist, Mr. Bénédictus, was experimenting with liquid plastic in a glass flask. He accidentally hit the glass flask, and it fell on the floor. \"Oops!\" (A)___________ the glass flask was ⓐ(break) into pieces, they still held together in the shape of the flask! How could this happen? The secret was the liquid plastic in the flask. This finding led to his (B)__________ of safety glass. These days, we can find safety glass everywhere. For example, it ⓑ(use) for car windows. If there is a car accident, people are (C)__________ from sharp pieces of glass.\n\n윗글의 빈칸 (C)에 들어갈 말로 알맞은 것은?"
+      },
+      {
+        "answer": "4, 5",
+        "number": 45,
+        "options": [
+          "Bénédictus 씨는 미국 출신의 과학자였다.",
+          "Bénédictus 씨는 실험 중, 일부러 유리 플라스크를 바닥에 떨어뜨렸다.",
+          "떨어진 유리 플라스크는 그 안의 액체 플라스틱 때문에 깨지지 않았다.",
+          "Bénédictus 씨의 발견은 안전유리의 발명으로 이어졌다.",
+          "우리는 자동차 창문에서 안전유리를 찾을 수 있다."
+        ],
+        "question": "[지문]\nFinding Safety in Glass: Safety Glass\nIn 1903, a French scientist, Mr. Bénédictus, was experimenting with liquid plastic in a glass flask. He accidentally hit the glass flask, and it fell on the floor. \"Oops!\" (A)___________ the glass flask was ⓐ(break) into pieces, they still held together in the shape of the flask! How could this happen? The secret was the liquid plastic in the flask. This finding led to his (B)__________ of safety glass. These days, we can find safety glass everywhere. For example, it ⓑ(use) for car windows. If there is a car accident, people are (C)__________ from sharp pieces of glass.\n\n윗글의 내용과 일치하는 것을 모두 고르면?"
+      },
+      {
+        "answer": "4",
+        "number": 46,
+        "options": [
+          "ⓐ: 테이블보",
+          "ⓑ: 발견",
+          "ⓒ: 방법",
+          "ⓓ: 시행착오로",
+          "ⓔ: 잘못 되다"
+        ],
+        "question": "[지문]\nCleaning Clothes Without Water: Dry Cleaning\nCan you clean your clothes without water? The answer is \"yes.\" Dry cleaning uses oil to clean clothes. There's an interesting story about dry cleaning. In the 1800s, a factory worker in France spilled lamp oil on a tablecloth. The factory manager, Mr. Jolly, looked at the ⓐtablecloth and found something. \"Wow!\" The dirty spot on the tablecloth was cleaned by the lamp oil! His ⓑdiscovery led to a new ⓒway of cleaning clothes. Now, (A)드라이클리닝은 전 세계에서 널리 사용된다.\nThese wonderful inventions came ⓓby chance. When things ⓔgo wrong, don't be disappointed. Maybe you can be the next amazing inventor.\n\n윗글의 밑줄 친 ⓐ~ⓔ 중, 우리말 뜻이 어색한 것은?"
+      },
+      {
+        "answer": "4",
+        "number": 47,
+        "options": [
+          "around",
+          "is",
+          "widely",
+          "using",
+          "world"
+        ],
+        "question": "[지문]\nCleaning Clothes Without Water: Dry Cleaning\nCan you clean your clothes without water? The answer is \"yes.\" Dry cleaning uses oil to clean clothes. There's an interesting story about dry cleaning. In the 1800s, a factory worker in France spilled lamp oil on a tablecloth. The factory manager, Mr. Jolly, looked at the ⓐtablecloth and found something. \"Wow!\" The dirty spot on the tablecloth was cleaned by the lamp oil! His ⓑdiscovery led to a new ⓒway of cleaning clothes. Now, (A)드라이클리닝은 전 세계에서 널리 사용된다.\nThese wonderful inventions came ⓓby chance. When things ⓔgo wrong, don't be disappointed. Maybe you can be the next amazing inventor.\n\n윗글의 밑줄 친 (A)의 우리말을 영작할 때 필요하지 않은 단어는?"
+      },
+      {
+        "answer": "1, 2",
+        "number": 48,
+        "options": [
+          "Water is used in dry cleaning to wash clothes.",
+          "A factory worker spilled lamp oil on a handkerchief.",
+          "Mr. Jolly found the oil removed the dirty spot.",
+          "Dry cleaning started from Mr. Jolly's discovery.",
+          "Some inventions were made accidentally."
+        ],
+        "question": "[지문]\nCleaning Clothes Without Water: Dry Cleaning\nCan you clean your clothes without water? The answer is \"yes.\" Dry cleaning uses oil to clean clothes. There's an interesting story about dry cleaning. In the 1800s, a factory worker in France spilled lamp oil on a tablecloth. The factory manager, Mr. Jolly, looked at the ⓐtablecloth and found something. \"Wow!\" The dirty spot on the tablecloth was cleaned by the lamp oil! His ⓑdiscovery led to a new ⓒway of cleaning clothes. Now, (A)드라이클리닝은 전 세계에서 널리 사용된다.\nThese wonderful inventions came ⓓby chance. When things ⓔgo wrong, don't be disappointed. Maybe you can be the next amazing inventor.\n\n윗글의 내용과 일치하지 않는 것을 모두 고르면?"
+      },
+      {
+        "answer": "1, 4",
+        "number": 49,
+        "options": [
+          "My uncle is a very good cook.",
+          "I sometimes cook simple food.",
+          "Who is going to cook breakfast?",
+          "He is hired as a cook in the restaurant.",
+          "She will cook dinner for her family today."
+        ],
+        "question": "[지문]\nIn America, there was a famous (A)cook, Ms. Wakefield. One day in 1938, she wanted to bake chocolate cookies. However, she didn't have enough time to melt chocolate. \"Aha!\" So, she cut a chocolate bar into small chips. Then, she mixed them with her dough and put the cookie dough into the oven. When Ms. Wakefield opened the oven, she found that the chips (B)______________ into the dough. \"Oh, no!\" Although the chips remained in the cookies, she was not disappointed. Her new cookies were so delicious. She invented chocolate CHIP cookies!\n\n윗글의 밑줄 친 (A)cook과 뜻이 같은 것을 모두 고르면?"
+      },
+      {
+        "answer": "2",
+        "number": 50,
+        "options": [
+          "didn't be melted",
+          "were not melted",
+          "was not melted",
+          "does not melt",
+          "do not melt"
+        ],
+        "question": "[지문]\nIn America, there was a famous (A)cook, Ms. Wakefield. One day in 1938, she wanted to bake chocolate cookies. However, she didn't have enough time to melt chocolate. \"Aha!\" So, she cut a chocolate bar into small chips. Then, she mixed them with her dough and put the cookie dough into the oven. When Ms. Wakefield opened the oven, she found that the chips (B)______________ into the dough. \"Oh, no!\" Although the chips remained in the cookies, she was not disappointed. Her new cookies were so delicious. She invented chocolate CHIP cookies!\n\n윗글의 빈칸 (B)에 들어갈 말로 알맞은 것은?"
+      },
+      {
+        "answer": "5",
+        "number": 51,
+        "options": [
+          "The Popularity of Chocolate Chip Cookies",
+          "The Inventions of the Chef, Ms. Wakefield",
+          "Be Creative to Become a Famous Chef",
+          "How to Make Chocolate Chip Cookies",
+          "The Birth of Chocolate Chip Cookies"
+        ],
+        "question": "[지문]\nIn America, there was a famous (A)cook, Ms. Wakefield. One day in 1938, she wanted to bake chocolate cookies. However, she didn't have enough time to melt chocolate. \"Aha!\" So, she cut a chocolate bar into small chips. Then, she mixed them with her dough and put the cookie dough into the oven. When Ms. Wakefield opened the oven, she found that the chips (B)______________ into the dough. \"Oh, no!\" Although the chips remained in the cookies, she was not disappointed. Her new cookies were so delicious. She invented chocolate CHIP cookies!\n\n윗글의 제목으로 알맞은 것은?"
+      },
+      {
+        "answer": "ⓐ experimenting ⓑ happen",
+        "number": 52,
+        "question": "[지문]\nIn 1903, a French scientist, Mr. Bénédictus, was ⓐ(experiment) with liquid plastic in a glass flask. He accidentally hit the glass flask, and it fell on the floor. \"Oops!\" Although the glass flask was broken into pieces, (A)they still held together in the shape of the flask! How could this ⓑ(happen)? The secret was the liquid plastic in the flask. This finding led to his invention of safety glass. These days, we can find safety glass everywhere. For example, it is used for car windows. (B)만약 자동차 사고가 있다면, 사람들은 날카로운 유리 조각들로부터 더 안전하다.\n\n윗글의 괄호 ⓐ, ⓑ에 주어진 동사를 어법상 알맞은 형태로 각각 쓰시오."
+      },
+      {
+        "answer": "깨진 유리 플라스크의 조각들",
+        "number": 53,
+        "question": "[지문]\nIn 1903, a French scientist, Mr. Bénédictus, was ⓐ(experiment) with liquid plastic in a glass flask. He accidentally hit the glass flask, and it fell on the floor. \"Oops!\" Although the glass flask was broken into pieces, (A)they still held together in the shape of the flask! How could this ⓑ(happen)? The secret was the liquid plastic in the flask. This finding led to his invention of safety glass. These days, we can find safety glass everywhere. For example, it is used for car windows. (B)만약 자동차 사고가 있다면, 사람들은 날카로운 유리 조각들로부터 더 안전하다.\n\n윗글의 밑줄 친 (A)they가 구체적으로 의미하는 바를 본문에서 찾아 우리말로 쓰시오."
+      },
+      {
+        "answer": "If there is a car accident, people are safer from sharp pieces of glass.",
+        "number": 54,
+        "question": "[지문]\nIn 1903, a French scientist, Mr. Bénédictus, was ⓐ(experiment) with liquid plastic in a glass flask. He accidentally hit the glass flask, and it fell on the floor. \"Oops!\" Although the glass flask was broken into pieces, (A)they still held together in the shape of the flask! How could this ⓑ(happen)? The secret was the liquid plastic in the flask. This finding led to his invention of safety glass. These days, we can find safety glass everywhere. For example, it is used for car windows. (B)만약 자동차 사고가 있다면, 사람들은 날카로운 유리 조각들로부터 더 안전하다.\n\n윗글의 밑줄 친 (B)의 우리말과 같은 뜻이 되도록 <보기>의 단어 및 표현을 알맞게 배열하시오. (단, 조건의 접속사로 시작할 것)\n\n<보기>\nthere / people / safer / sharp / glass / if / is / from / a car accident / are / pieces of",
+        "acceptedAnswers": [
+          "If there is a car accident, people are safer from sharp pieces of glass"
+        ]
+      },
+      {
+        "answer": "Invention, Safety Glass",
+        "number": 55,
+        "question": "[지문]\nIn 1903, a French scientist, Mr. Bénédictus, was ⓐ(experiment) with liquid plastic in a glass flask. He accidentally hit the glass flask, and it fell on the floor. \"Oops!\" Although the glass flask was broken into pieces, (A)they still held together in the shape of the flask! How could this ⓑ(happen)? The secret was the liquid plastic in the flask. This finding led to his invention of safety glass. These days, we can find safety glass everywhere. For example, it is used for car windows. (B)만약 자동차 사고가 있다면, 사람들은 날카로운 유리 조각들로부터 더 안전하다.\n\n윗글의 제목을 다음과 같이 쓸 때 빈칸에 들어갈 알맞은 말을 쓰시오. (첫 철자는 대문자로 쓸 것)\n\nUnexpected Finding That Led to the _____________ of _____________ _____________"
+      },
+      {
+        "answer": "accidentally hit it",
+        "number": 56,
+        "question": "[지문]\nIn 1903, a French scientist, Mr. Bénédictus, was ⓐ(experiment) with liquid plastic in a glass flask. He accidentally hit the glass flask, and it fell on the floor. \"Oops!\" Although the glass flask was broken into pieces, (A)they still held together in the shape of the flask! How could this ⓑ(happen)? The secret was the liquid plastic in the flask. This finding led to his invention of safety glass. These days, we can find safety glass everywhere. For example, it is used for car windows. (B)만약 자동차 사고가 있다면, 사람들은 날카로운 유리 조각들로부터 더 안전하다.\n\n윗글을 읽고 다음 질문에 알맞은 대답이 되도록 빈칸을 완성하시오. (각 빈칸에 한 단어씩 쓸 것)\n\nQ. Why did the glass flask fall on the floor?\n→ Because Mr. Bénédictus _____________ _____________ _____________."
+      },
+      {
+        "answer": "without",
+        "number": 57,
+        "question": "[지문]\nCleaning Clothes Without Water: Dry Cleaning\nCan you clean your clothes (A)_________ water? The answer is \"yes.\" Dry cleaning uses oil to clean clothes. There's an interesting story about dry cleaning. In the 1800s, a factory worker in France spilled lamp oil on a tablecloth. The factory manager, Mr. Jolly, looked at the tablecloth and ⓐ(find) something. \"Wow!\" The dirty spot on the tablecloth was cleaned by the lamp oil! His discovery led to a new way of cleaning clothes. Now, dry cleaning is widely used around the world.\n\nThese wonderful inventions came by chance. When things go wrong, don't ⓑ(be) disappointed. Maybe you can be the next ⓒ(amaze) inventor.\n\n윗글의 빈칸 (A)에 흐름상 알맞은 전치사 한 단어를 쓰시오."
+      },
+      {
+        "answer": "ⓐ found ⓑ be ⓒ amazing",
+        "number": 58,
+        "question": "[지문]\nCleaning Clothes Without Water: Dry Cleaning\nCan you clean your clothes (A)_________ water? The answer is \"yes.\" Dry cleaning uses oil to clean clothes. There's an interesting story about dry cleaning. In the 1800s, a factory worker in France spilled lamp oil on a tablecloth. The factory manager, Mr. Jolly, looked at the tablecloth and ⓐ(find) something. \"Wow!\" The dirty spot on the tablecloth was cleaned by the lamp oil! His discovery led to a new way of cleaning clothes. Now, dry cleaning is widely used around the world.\n\nThese wonderful inventions came by chance. When things go wrong, don't ⓑ(be) disappointed. Maybe you can be the next ⓒ(amaze) inventor.\n\n윗글의 괄호 ⓐ, ⓑ, ⓒ에 주어진 동사를 어법상 알맞은 형태로 각각 쓰시오."
+      },
+      {
+        "answer": "uses oil",
+        "number": 59,
+        "question": "[지문]\nCleaning Clothes Without Water: Dry Cleaning\nCan you clean your clothes (A)_________ water? The answer is \"yes.\" Dry cleaning uses oil to clean clothes. There's an interesting story about dry cleaning. In the 1800s, a factory worker in France spilled lamp oil on a tablecloth. The factory manager, Mr. Jolly, looked at the tablecloth and ⓐ(find) something. \"Wow!\" The dirty spot on the tablecloth was cleaned by the lamp oil! His discovery led to a new way of cleaning clothes. Now, dry cleaning is widely used around the world.\n\nThese wonderful inventions came by chance. When things go wrong, don't ⓑ(be) disappointed. Maybe you can be the next ⓒ(amaze) inventor.\n\n윗글을 읽고 다음 질문에 알맞은 대답이 되도록 빈칸을 완성하시오.\n\nQ. What does dry cleaning use to clean clothes?\n→ It ______________ ______________ to clean clothes."
+      },
+      {
+        "answer": "ⓐ to melt ⓑ put",
+        "number": 60,
+        "question": "[지문]\nA New Cookie Star: Chocolate Chip Cookies\nIn America, there was a famous cook, Ms. Wakefield. One day in 1938, she wanted to bake chocolate cookies. However, she didn't have enough time ⓐ(melt) chocolate. \"Aha!\" (A)________, she cut a chocolate bar into small chips. Then, she mixed them with her dough and ⓑ(put) the cookie dough into the oven. When Ms. Wakefield opened the oven, she found (B)________ the chips were not melted into the dough. \"Oh, no!\" (C)비록 그 조각들이 쿠키들에 남아 있긴 했지만, she was not disappointed. Her new cookies were so delicious. She invented chocolate CHIP cookies!\n\n윗글의 괄호 ⓐ, ⓑ에 주어진 동사를 어법상 알맞은 형태로 각각 쓰시오."
+      },
+      {
+        "answer": "(A) So (B) that",
+        "number": 61,
+        "question": "[지문]\nA New Cookie Star: Chocolate Chip Cookies\nIn America, there was a famous cook, Ms. Wakefield. One day in 1938, she wanted to bake chocolate cookies. However, she didn't have enough time ⓐ(melt) chocolate. \"Aha!\" (A)________, she cut a chocolate bar into small chips. Then, she mixed them with her dough and ⓑ(put) the cookie dough into the oven. When Ms. Wakefield opened the oven, she found (B)________ the chips were not melted into the dough. \"Oh, no!\" (C)비록 그 조각들이 쿠키들에 남아 있긴 했지만, she was not disappointed. Her new cookies were so delicious. She invented chocolate CHIP cookies!\n\n윗글의 빈칸 (A), (B)에 들어갈 접속사를 각각 한 단어로 쓰시오."
+      },
+      {
+        "answer": "Although[Though] the chips remained in the cookies",
+        "number": 62,
+        "question": "[지문]\nA New Cookie Star: Chocolate Chip Cookies\nIn America, there was a famous cook, Ms. Wakefield. One day in 1938, she wanted to bake chocolate cookies. However, she didn't have enough time ⓐ(melt) chocolate. \"Aha!\" (A)________, she cut a chocolate bar into small chips. Then, she mixed them with her dough and ⓑ(put) the cookie dough into the oven. When Ms. Wakefield opened the oven, she found (B)________ the chips were not melted into the dough. \"Oh, no!\" (C)비록 그 조각들이 쿠키들에 남아 있긴 했지만, she was not disappointed. Her new cookies were so delicious. She invented chocolate CHIP cookies!\n\n윗글의 밑줄 친 (C)의 우리말을 <보기>의 단어를 사용하여 7단어로 알맞게 영작하시오.\n\n<보기> remain, the chips"
+      },
+      {
+        "answer": "She[Ms. Wakefield] wanted to bake chocolate cookies (one day in 1938).",
+        "number": 63,
+        "question": "[지문]\nA New Cookie Star: Chocolate Chip Cookies\nIn America, there was a famous cook, Ms. Wakefield. One day in 1938, she wanted to bake chocolate cookies. However, she didn't have enough time ⓐ(melt) chocolate. \"Aha!\" (A)________, she cut a chocolate bar into small chips. Then, she mixed them with her dough and ⓑ(put) the cookie dough into the oven. When Ms. Wakefield opened the oven, she found (B)________ the chips were not melted into the dough. \"Oh, no!\" (C)비록 그 조각들이 쿠키들에 남아 있긴 했지만, she was not disappointed. Her new cookies were so delicious. She invented chocolate CHIP cookies!\n\n윗글을 읽고 다음 질문에 알맞은 대답을 완전한 영문으로 쓰시오. ※ 완전한 문장으로 쓰시오.\n\nQ. What did Ms. Wakefield want to do one day in 1938?",
+        "acceptedAnswers": [
+          "She[Ms. Wakefield] wanted to bake chocolate cookies (one day in 1938)"
+        ]
+      }
+    ],
+    "answer_key": [
+      "3",
+      "1",
+      "4",
+      "2",
+      "5",
+      "connection",
+      "(1) spot (2) factory (3) secret",
+      "1",
+      "5",
+      "2",
+      "4",
+      "1, 5",
+      "3",
+      "4",
+      "Although[Though] the book is boring, I will finish reading it.",
+      "was invented by the Wright brothers",
+      "(1) was repaired by my father (2) be painted by the local artists",
+      "Although I was very tired, I finished the project.",
+      "(1) (B): be cleaned (2) (E): although[though]",
+      "4",
+      "5",
+      "2",
+      "1",
+      "2",
+      "5",
+      "4",
+      "2",
+      "4",
+      "2",
+      "2, 3",
+      "you explain",
+      "Could you explain more about it?",
+      "I'm sure that this invention will be very helpful.",
+      "I'm sure that you'll like it.",
+      "3",
+      "1",
+      "2",
+      "4",
+      "5",
+      "2",
+      "4",
+      "2",
+      "5",
+      "3",
+      "4, 5",
+      "4",
+      "4",
+      "1, 2",
+      "1, 4",
+      "2",
+      "5",
+      "ⓐ experimenting ⓑ happen",
+      "깨진 유리 플라스크의 조각들",
+      "If there is a car accident, people are safer from sharp pieces of glass.",
+      "Invention, Safety Glass",
+      "accidentally hit it",
+      "without",
+      "ⓐ found ⓑ be ⓒ amazing",
+      "uses oil",
+      "ⓐ to melt ⓑ put",
+      "(A) So (B) that",
+      "Although[Though] the chips remained in the cookies",
+      "She[Ms. Wakefield] wanted to bake chocolate cookies (one day in 1938)."
+    ]
+  },
+  "step2": {
+    "id": "ec2e68cf-4edd-40cd-9218-c9c8389a8ef6",
+    "questions": [
+      {
+        "answer": "3",
+        "number": 1,
+        "options": [
+          "accidental : accidentally = wide : widely",
+          "invent : inventor = manage : manager",
+          "fame : famous = discovery : discover",
+          "danger : safety = dirty : clean",
+          "spot : stain = shape : form"
+        ],
+        "question": "다음 중 짝지어진 단어의 관계가 어색한 것은?",
+        "explanation": "③은 '명성 : 유명한'(명사-형용사 관계) ≠ '발견 : 발견하다'(명사-동사 관계)로 어색하다."
+      },
+      {
+        "answer": "4",
+        "number": 2,
+        "options": [
+          "How did the accident ____________ yesterday?",
+          "They want to ____________ with new technology.",
+          "Don't ____________ your juice on the new carpet.",
+          "We need to ____________ the wax to make a candle.",
+          "You should ____________ the flour with water to make the dough."
+        ],
+        "question": "다음 중 <보기>의 단어가 들어갈 수 없는 것은?\n\n<보기>\nspill, happen, experiment, remain, mix",
+        "explanation": "④번 문장에는 remain(남다)이 들어갈 수 없다. 'We need to melt the wax'가 되어야 한다."
+      },
+      {
+        "answer": "3",
+        "number": 3,
+        "options": [
+          "Suddenly, a good idea hit me. / She hit the table with her hand.",
+          "I found my lost puppy at last. / He will found a charity for sick children.",
+          "Water is a liquid, but ice is a solid. / This bottle was filled with a green liquid.",
+          "The window is made of glass. / Dad wears glasses when he reads books.",
+          "Can you keep a secret? / Hard work is the secret of success."
+        ],
+        "question": "다음 밑줄 친 단어가 같은 의미로 쓰인 것은?",
+        "explanation": "③번에서 liquid는 모두 '액체'라는 뜻의 명사로 같은 의미로 쓰였다."
+      },
+      {
+        "answer": "2",
+        "number": 4,
+        "options": [
+          "The song is loved by many people.",
+          "The mountain was covered with snow.",
+          "The foods did not make by my sister.",
+          "Although the rain, I went out to take a walk.",
+          "He didn't wear a coat although it was very cold."
+        ],
+        "question": "다음 중 어법상 어색한 문장의 개수는?",
+        "explanation": "ⓒ did not make → were not made (주어 The foods는 수동태 필요), ⓓ Although → Despite[In spite of] (전치사 필요)"
+      },
+      {
+        "answer": "3",
+        "number": 5,
+        "options": [
+          "People plant many trees to protect the Earth. → Many trees are plant to protect the Earth.",
+          "She cannot finish the report by Friday. → The report cannot finished by her by Friday.",
+          "Did the boys break the window? → Was the window broken by the boys?",
+          "They served various desserts. → Various desserts are served by them.",
+          "Tom gave Olivia a ring. → A ring was given Olivia by Tom."
+        ],
+        "question": "다음 능동태 문장을 수동태로 전환한 것으로 알맞은 것은?",
+        "explanation": "③번이 올바른 수동태 전환이다. 나머지는 모두 오류가 있다."
+      },
+      {
+        "answer": "5",
+        "number": 6,
+        "options": [
+          "Is it okay if I ask for more details?",
+          "Could you explain more about it?",
+          "Can you give me more details?",
+          "I'd like to know more about it.",
+          "Shall I explain it to you?"
+        ],
+        "question": "다음 대화의 빈칸에 들어갈 말로 알맞지 않은 것은?\n\nB: What is that woman doing there?\nW: She is experiencing VR car racing.\nB: _____________________________________________\nW: With a VR device, you can be a car racer.\nB: That sounds fun. I'd like to try it.\nW: Then stand in line there.",
+        "explanation": "⑤ '제가 당신에게 그것을 설명해도 될까요?'는 더 자세한 설명을 요청하는 상황에 알맞지 않다."
+      },
+      {
+        "answer": "are going to play soccer at school although it's going to rain",
+        "number": 7,
+        "question": "다음 대화를 읽고 접속사 although를 사용하여 빈칸에 알맞은 말을 넣어 문장을 완성하시오. (각 빈칸에 한 단어씩 쓸 것)\n\nB: My friends and I are going to play soccer at school this Saturday.\nW: I heard it's going to rain this Saturday. Why don't you cancel it?\nB: I know. But we decided to play regardless of the weather.\n→ The boy and his friends _____________ _____________ _____________ _____________ _____________ _____________ _____________ _____________ _____________ _____________ _____________ _____________ this Saturday.",
+        "explanation": "제시문의 내용을 접속사 although를 사용하여 '소년과 그의 친구들은 비가 올지라도 토요일에 학교에서 축구를 할 것이다'라는 의미로 영작한 것이다."
+      },
+      {
+        "answer": "5",
+        "number": 8,
+        "options": [
+          "ⓐ, ⓒ",
+          "ⓑ, ⓕ",
+          "ⓓ, ⓔ",
+          "ⓐ, ⓑ, ⓒ",
+          "ⓓ, ⓔ, ⓕ"
+        ],
+        "question": "위 대화의 밑줄 친 (A)와 바꾸어 쓸 수 있는 것을 모두 골라 짝지은 것은?\n\nReporter: Juwon, you won the special prize in the invention contest. Great Job!\nJuwon: Thank you. I'm proud of my invention.\nReporter: What's your invention?\nJuwon: It's a recorder which doesn't bother other people.\nReporter: How does it work? Could you explain more about it?\nJuwon: I connected headphones to the recorder with a simple device. The device sends the sound from the recorder to the headphones.\nReporter: That's cool. When you wear the headphones, only you can hear the sound.\nJuwon: Right. People can play the recorder any time. (A)I'm sure that this invention will be very helpful.",
+        "explanation": "'I'm sure that ~'은 자신의 생각에 대한 확신을 강조하는 표현으로, 'I'm certain that ~', 'I'm confident that ~', 'There's no doubt that ~'과 같은 의미이다."
+      },
+      {
+        "answer": "2",
+        "number": 9,
+        "options": [
+          "㉠",
+          "㉡",
+          "㉢",
+          "㉣",
+          "㉤"
+        ],
+        "question": "위 대화를 아래와 같이 요약할 때, 밑줄 친 ㉠~㉤ 중, 알맞지 않은 것을 모두 고르면?\n\nJuwon won a ㉠special prize for his invention. He added ㉡a complicated device to a recorder and connected ㉢earphones to it. Only the player can hear the sound, so it ㉣doesn't bother others. Juwon believes that this recorder will be ㉤very useful.",
+        "explanation": "㉡의 'complicated device(복잡한 장치)'와 ㉢의 'earphones(이어폰)'는 대화의 'simple device'와 'headphones'와 다르므로 일치하지 않는다."
+      },
+      {
+        "answer": "the green button, is pressed",
+        "number": 10,
+        "question": "다음 대화를 읽고 아래 질문에 대한 답이 되도록 주어진 <조건>에 맞게 빈칸에 알맞은 말을 쓰시오.\n\nG: I saw that your drone passed through the rings. That was cool!\nM: Thanks. Do you want to try it?\nG: I'd love to. How can I fly the drone?\nM: You can use this controller.\nG: Could you explain more about it?\nM: Press the green button, and the drone goes up.\nG: I see. What's next?\nM: Press the red button, and it goes down.\nG: It works! Thank you so much.\n\nQ. How can the drone go up?\n\n<조건>\n수동태를 사용하고 각 빈칸에 한 단어씩 쓸 것",
+        "explanation": "드론은 조종 장치에 있는 초록색 버튼이 눌러질 때 올라갈 수 있다는 뜻으로 수동태를 사용하여 영작한 것이다."
+      },
+      {
+        "answer": "3",
+        "number": 11,
+        "options": [
+          "Because the ground goes down in winter.",
+          "Because the tower is too old to stand still.",
+          "Because temperature affects the size of metals.",
+          "Because more people visit it during the summer.",
+          "Because the strong wind pushes the tower up in summer."
+        ],
+        "question": "Why does the height of the Eiffel Tower change with the seasons?\n\nW: Welcome to my science quiz show! I'm Isabel. Here is the first question. I'm sure that you can find the right answer. The Eiffel Tower gets taller during the summer. Is this true or false? 3, 2, 1. The answer is true! The Eiffel Tower is 330 m. In summer, the temperature of the Eiffel Tower goes up. When the metal gets hot, it becomes bigger. So, the height of the tower becomes about 15 cm taller. In winter, the metal cools down, and the height of the tower becomes shorter. Now, let's answer another question together!",
+        "explanation": "여름에는 온도가 올라가 금속이 뜨거워지면서 크기가 커지고, 겨울에는 금속이 식어 크기가 작아진다고 했으므로 온도가 금속의 크기에 영향을 준다는 것이 답이다."
+      },
+      {
+        "answer": "4",
+        "number": 12,
+        "options": [
+          "1개",
+          "2개",
+          "3개",
+          "4개",
+          "5개"
+        ],
+        "question": "윗글의 밑줄 친 ⓐ~ⓕ 중, 어법상 어색한 것의 개수는?\n\nIn America, there ⓐwas a famous cook, Ms. Wakefield. One day in 1938, she wanted ⓑbaking chocolate cookies. However, she didn't have enough time ⓒto melt chocolate. \"Aha!\" So, she cut a chocolate bar into small chips. Then, she mixed ⓓit with her dough and put the cookie dough into the oven. When Ms. Wakefield opened the oven, she found that the chips were not melted into the dough. \"Oh, no!\" ⓔDespite the chips remained in the cookies, she was not ⓕdisappointing. Her new cookies were so delicious. She invented chocolate CHIP cookies!",
+        "explanation": "ⓑ baking → to bake, ⓓ it → them, ⓔ Despite → Although, ⓕ disappointing → disappointed"
+      },
+      {
+        "answer": "4",
+        "number": 13,
+        "options": [
+          "to show the steps of making chocolate chip cookies",
+          "to talk about the ingredients of dough for cookies",
+          "to introduce the life of Ms. Wakefield as a cook",
+          "to explain the origin of chocolate chip cookies",
+          "to sell people new chocolate chip cookies"
+        ],
+        "question": "윗글의 목적으로 알맞은 것은?",
+        "explanation": "글은 우연한 계기로 Wakefield 씨에 의해 초콜릿 칩 쿠키가 발명되었음을 설명하고 있으므로 그 기원을 설명하기 위함이다."
+      },
+      {
+        "answer": "were not melted into the dough, remained in the cookies",
+        "number": 14,
+        "question": "윗글을 읽고 다음 질문에 대한 알맞은 대답이 되도록 주어진 <조건>에 맞게 빈칸을 완성하시오.\n\nQ. What was the state of the chips when the oven was opened?\n\n<조건>\nbe, melt, remain을 사용할 것 (필요시 변형할 것)\n각 빈칸에 한 단어씩 쓸 것",
+        "explanation": "조각들이 반죽에 녹아들지 않고 쿠키에 남아 있었다는 의미로 주어진 단어들을 사용하여 영작한 것이다."
+      },
+      {
+        "answer": "5",
+        "number": 15,
+        "options": [
+          "ⓐ: 과거 특정 시점에 '실험 중인' 것을 나타내는 과거진행형이다.",
+          "ⓑ: '비록 ~에도 불구하고'라는 뜻의 접속사로 완전한 절(the glass ~ pieces)이 이어진다.",
+          "ⓒ: '일어나다'라는 뜻으로, 수동태를 만들 수 없는 동사이다.",
+          "ⓓ: 주어 it(=safety glass)이 '사용되는' 대상이므로 쓰인 수동태이다.",
+          "ⓔ: '거기에'라는 뜻의 부사로, 강조하기 위해 문장 앞에 쓰였다."
+        ],
+        "question": "윗글의 밑줄 친 ⓐ~ⓔ에 대한 설명으로 알맞지 않은 것은?\n\nIn 1903, a French scientist, Mr. Bénédictus, ⓐwas experimenting with liquid plastic in a glass flask. He accidentally hit the glass flask, and it fell on the floor. \"Oops!\" ⓑAlthough the glass flask was broken into pieces, they still held together in the shape of the flask! How could this ⓒhappen? The secret was the liquid plastic in the flask. This finding led to his invention of safety glass. These days, we can find safety glass everywhere. For example, it ⓓis used for car windows. If ⓔthere is a car accident, people are safer from sharp pieces of glass.",
+        "explanation": "ⓔ의 there는 '~이 있다'라는 뜻의 'there+be동사+주어' 구문을 이루는 유도부사로, 아무 뜻이 없이 사용되는 문법적 요소이다."
+      },
+      {
+        "answer": "pieces, broken flask held together, original shape",
+        "number": 16,
+        "question": "윗글을 읽고 다음 질문에 대한 알맞은 대답이 되도록 주어진 <조건>에 맞게 빈칸을 완성하시오.\n\nQ. What happened after the glass flask fell on the floor?\n\n<조건>\nbroken flask, hold, original을 사용할 것 (필요시 변형할 것)\n각 빈칸에 한 단어씩 쓸 것",
+        "explanation": "깨진 플라스크 조각들이 그것들의 원래 모양으로 함께 붙어 있었다는 의미로 주어진 단어들을 사용하여 영작한 것이다."
+      },
+      {
+        "answer": "2",
+        "number": 17,
+        "options": [
+          "ⓐ: cleans → to clean",
+          "ⓑ: cleaned → were cleaned",
+          "ⓒ: clean → cleaning",
+          "ⓓ: widely uses → is widely used",
+          "ⓔ: amazed → amazing"
+        ],
+        "question": "윗글의 밑줄 친 ⓐ~ⓔ 중, 어색한 부분을 바르게 고치지 못한 것은?\n\nCan you clean your clothes without water? The answer is \"yes.\" Dry cleaning uses oil ⓐcleans clothes. There's an interesting story about dry cleaning. In the 1800s, a factory worker in France spilled lamp oil on a tablecloth. The factory manager, Mr. Jolly, looked at the tablecloth and found something. \"Wow!\" The dirty spot on the tablecloth ⓑcleaned by the lamp oil! His discovery led to a new way of ⓒclean clothes. Now, dry cleaning ⓓwidely uses around the world. These wonderful inventions came by chance. When things go wrong, don't be disappointed. Maybe you can be the next ⓔamazed inventor.",
+        "explanation": "ⓑ는 원래 'was cleaned by the lamp oil'로 쓰여야 하므로 'cleaned → was cleaned'로 고쳐야 한다."
+      },
+      {
+        "answer": "4",
+        "number": 18,
+        "options": [
+          "Who was Mr. Jolly?",
+          "When was dry cleaning created?",
+          "What did the factory worker spill on the tablecloth?",
+          "How long did Mr. Jolly study dry cleaning?",
+          "How were the wonderful inventions invented?"
+        ],
+        "question": "윗글을 읽고 대답할 수 없는 질문은?",
+        "explanation": "글에서 Jolly 씨가 드라이클리닝을 연구한 기간에 대해 언급하지 않았으므로 이 질문에는 답할 수 없다."
+      },
+      {
+        "answer": "3",
+        "number": 19,
+        "options": [
+          "Famous Inventors and Their Experiments",
+          "Amazing Technologies in Modern Society",
+          "Surprising Inventions from Lucky Mistakes",
+          "Creative Ideas That Changed Our Daily Life",
+          "A Lot of Valuable Challenges Despite Failure"
+        ],
+        "question": "윗글의 제목으로 알맞은 것은?",
+        "explanation": "글은 우연한 계기로 발명된 드라이클리닝을 소개하며 훌륭한 발명품들이 운 좋은 실수에서 비롯되었음을 강조하고 있다."
+      },
+      {
+        "answer": "bake chocolate cookies, melt chocolate, cut, small chips, delicious",
+        "number": 20,
+        "question": "다음 글을 읽고 Ms. Wakefield와의 인터뷰를 아래와 같이 구성할 때, 빈칸에 알맞은 단어를 본문에서 찾아 쓰시오.\n\nA New Cookie Star: Chocolate Chip Cookies\nIn America, there was a famous cook, Ms. Wakefield. One day in 1938, she wanted to bake chocolate cookies. However, she didn't have enough time to melt chocolate. \"Aha!\" So, she cut a chocolate bar into small chips. Then, she mixed them with her dough and put the cookie dough into the oven. When Ms. Wakefield opened the oven, she found that the chips were not melted into the dough. \"Oh, no!\" Although the chips remained in the cookies, she was not disappointed. Her new cookies were so delicious. She invented chocolate CHIP cookies!\n\nReporter: Hello, Ms. Wakefield! Welcome to our school news.\nMs. Wakefield: Hello! Nice to meet you.\nReporter: I heard you made a new kind of cookie. Can you tell us about it?\nMs. Wakefield: Sure! One day, I wanted to _____________ _____________ _____________. But I was too busy, so I couldn't _____________ _____________.\nReporter: So, what did you do?\nMs. Wakefiled: I had a good idea. I _____________ a chocolate bar into _____________ _____________ to put them in the dough.\nReporter: Oh, you planned to melt them in the oven.\nMs. Wakefiled: That's right. But when I opened the oven, the chips were still there. I tasted the cookies, and they were _____________.\nReporter: Aha, chocolate chip cookies were born by chance! Thank you for the interview.",
+        "explanation": "본문에서 해당하는 표현을 찾아 인터뷰 문맥에 맞게 채운 것이다."
+      },
+      {
+        "answer": "Although[Though] the glass flask was broken into pieces, they still held together in the shape of the flask!",
+        "number": 21,
+        "question": "윗글의 밑줄 친 (A)의 우리말을 주어진 <조건>에 알맞게 각각 영작하시오.\n\nIn 1903, a French scientist, Mr. Bénédictus, was experimenting with liquid plastic in a glass flask. He accidentally hit the glass flask, and it fell on the floor. \"Oops!\" (A)비록 유리 플라스크가 깨져서 조각나긴 했지만 그것들은 플라스크 모양으로 여전히 함께 붙어 있었다!\n\n<조건>\n알맞은 접속사로 시작할 것\n수동태를 사용할 것\n<보기>의 단어 및 표현을 사용할 것 (필요시 변형할 것)\n18단어로 영작할 것\n<보기>\nbreak, the glass flask, the shape, still, into pieces, of, hold together",
+        "explanation": "양보의 접속사 Although를 사용하여 수동태(was broken)로 영작하고, 부사절과 주절을 연결하여 18단어로 작성한 것이다."
+      },
+      {
+        "answer": "3",
+        "number": 22,
+        "options": [
+          "still remained there",
+          "changed into a strange pattern",
+          "disappeared even without water",
+          "burned because the oil was too hot",
+          "became dirtier because of the lamp oil"
+        ],
+        "question": "윗글의 빈칸 (B)에 들어갈 말로 알맞은 것은?\n\nCan you clean your clothes without water? The answer is \"yes.\" Dry cleaning uses oil to clean clothes. There's an interesting story about dry cleaning. In the 1800s, a factory worker in France spilled lamp oil on a tablecloth. The factory manager, Mr. Jolly, looked at the tablecloth and found something. \"Wow!\" The dirty spot on the tablecloth (B)_____________________________________! His discovery led to a new way of cleaning clothes. Now, dry cleaning is widely used around the world.",
+        "explanation": "더러운 얼룩이 등유에 의해 제거되었으므로 '물 없이도 사라졌다'가 알맞은 표현이다."
+      },
+      {
+        "answer": "4",
+        "number": 23,
+        "options": [
+          "Scientific experiments are necessary for invention.",
+          "We should avoid making a mistake for invention.",
+          "Trial and error is needed to become an inventor.",
+          "Great inventions can come from unexpected situations.",
+          "To become an inventor, we need to observe our surroundings carefully."
+        ],
+        "question": "윗글의 요지로 알맞은 것은?",
+        "explanation": "초콜릿 칩 쿠키, 안전유리, 드라이클리닝 모두 우연한 상황에서 발명되었으므로, 훌륭한 발명품들이 예상치 못한 상황에서 나올 수 있다는 것이 글의 주요 내용이다."
+      },
+      {
+        "answer": "5",
+        "number": 24,
+        "options": [
+          "What kind of cookies did Ms. Wakefield plan to bake first?",
+          "Why did Ms. Wakefield use small chocolate chips?",
+          "What is safety glass used for?",
+          "What mistake did a factory worker make?",
+          "Why is dry cleaning used around the world?"
+        ],
+        "question": "윗글을 읽고 대답할 수 없는 질문은?",
+        "explanation": "드라이클리닝이 지금 널리 사용되고 있다고 했을 뿐, 그 이유에 대해서는 글에서 언급하지 않았다."
+      },
+      {
+        "answer": "5",
+        "number": 25,
+        "options": [
+          "ⓐ, ⓒ",
+          "ⓑ, ⓓ",
+          "ⓒ, ⓔ",
+          "ⓐ, ⓒ, ⓔ",
+          "ⓑ, ⓓ, ⓔ"
+        ],
+        "question": "윗글의 밑줄 친 ⓐ~ⓔ의 영영풀이로 알맞은 것을 모두 골라 짝지은 것은?\n\nA New Cookie Star: Chocolate Chip Cookies\nIn America, there was a famous cook, Ms. Wakefield. One day in 1938, she wanted to bake chocolate cookies. However, she didn't have enough time to ⓐmelt chocolate. \"Aha!\" So, she cut a chocolate bar into small chips. Then, she mixed them with her dough and put the cookie dough into the oven. When Ms. Wakefield opened the oven, she found that the chips were not melted into the dough. \"Oh, no!\" Although the chips ⓑremained in the cookies, she was not disappointed. Her new cookies were so delicious. She invented chocolate CHIP cookies!\n\nFinding Safety in Glass: Safety Glass\nIn 1903, a French scientist, Mr. Bénédictus, was experimenting with liquid plastic in a glass flask. He accidentally hit the glass flask, and it fell on the floor. \"Oops!\" Although the glass flask was broken into pieces, they still held together in the shape of the flask! How could this happen? The secret was the liquid plastic in the flask. This finding led to his invention of safety glass. These days, we can find safety glass everywhere. For example, it is used for car windows. If there is a car ⓒaccident, people are safer from ⓓsharp pieces of glass.\n\nCleaning Clothes Without Water: Dry Cleaning\nCan you clean your clothes without water? The answer is \"yes.\" Dry cleaning uses oil to clean clothes. There's an interesting story about dry cleaning. In the 1800s, a factory worker in France ⓔspilled lamp oil on a tablecloth. The factory manager, Mr. Jolly, looked at the tablecloth and found something. \"Wow!\" The dirty spot on the tablecloth was cleaned by the lamp oil! His discovery led to a new way of cleaning clothes. Now, dry cleaning is widely used around the world.\n\n<보기>\nⓐ to make something become hard or often turn into ice\nⓑ to still be present after the other parts have been removed, used, etc.\nⓒ something that happens without anyone planning it\nⓓ having a very thin edge or point that can cut things easily\nⓔ to flow over the edge of a container by chance",
+        "explanation": "ⓑ는 remain(남다), ⓓ는 sharp(날카로운), ⓔ는 spill(쏟다)의 영영풀이와 일치한다."
+      },
+      {
+        "answer": "4",
+        "number": 26,
+        "options": [
+          "㉠",
+          "㉡",
+          "㉢",
+          "㉣",
+          "㉤"
+        ],
+        "question": "윗글의 내용을 다음과 같이 정리할 때, ㉠~㉤ 중 일치하지 않는 것을 모두 고르면?\n\nWonderful Inventions by Chance\n\nChocolate Chip Cookies\n• By Ms. Wakefield\n• ㉠She added small chocolate pieces to the cookie dough because of time.\n• ㉡The chips did not melt and remained in the cookies.\n\nSafety Glass\n• By Mr. Bénédictus\n• ㉢He broke a glass flask by mistake.\n• ㉣He found that the broken pieces held their shape because of solid plastic in it.\n\nDry Cleaning\n• By Mr. Jolly\n• ㉤He found that after a factory worker spilled water on a tablecloth, a dirty stain was removed.",
+        "explanation": "㉣은 '액체' 플라스틱이고, ㉤은 '등유(oil)'를 쏟았으며 '물'이 아니다."
+      },
+      {
+        "answer": "1",
+        "number": 27,
+        "options": [
+          "accidentally, discovery, disappointed",
+          "purposely, discovery, disappointed",
+          "purposely, mistake, pleased",
+          "accidentally, mistake, pleased",
+          "accidentally, discovery, pleased"
+        ],
+        "question": "윗글의 괄호 (A), (B), (C)에서 흐름상 알맞은 말로 바르게 연결된 것은?\n\nFinding Safety in Glass: Safety Glass\nIn 1903, a French scientist, Mr. Bénédictus, was experimenting with liquid plastic in a glass flask. He (A)[accidentally / purposely] hit the glass flask, and it fell on the floor. \"Oops!\" Although the glass flask was broken into pieces, they still held together in the shape of the flask! How could this happen? The secret was the liquid plastic in the flask. This finding led to his invention of safety glass. These days, we can find safety glass everywhere. For example, it is used for car windows. If there is a car accident, people are safer from sharp pieces of glass.\n\nCleaning Clothes Without Water: Dry Cleaning\nCan you clean your clothes without water? The answer is \"yes.\" Dry cleaning uses oil to clean clothes. There's an interesting story about dry cleaning. In the 1800s, a factory worker in France spilled lamp oil on a tablecloth. The factory manager, Mr. Jolly, looked at the tablecloth and found something. \"Wow!\" The dirty spot on the tablecloth was cleaned by the lamp oil! His (B)[discovery / mistake] led to a new way of cleaning clothes. Now, dry cleaning is widely used around the world.\n\nThese wonderful inventions came by chance. When things go wrong, don't be (C)[disappointed / pleased]. Maybe you can be the next amazing inventor.",
+        "explanation": "(A) 실수로 유리 플라스크를 쳤으므로 accidentally, (B) 우연한 발견이 새로운 방법으로 이어졌으므로 discovery, (C) 일이 잘못될 때 실망하지 말라는 흐름이므로 disappointed"
+      },
+      {
+        "answer": "3",
+        "number": 28,
+        "options": [
+          "Mr. Bénédictus was trying to invent safety glass and intentionally dropped a glass flask. (F)",
+          "The liquid plastic stopped the broken pieces of the flask from scattering. (T)",
+          "Dry cleaning is a way to use both water and oil to remove dirty stains on clothes. (T)",
+          "Through an experiment, Mr. Jolly found that lamp oil could clean the dirty spot on a tablecloth. (F)",
+          "According to the writer, amazing inventions can come from accidental discoveries. (T)"
+        ],
+        "question": "윗글의 내용과 일치하면 T, 일치하지 않으면 F일 때, 알맞지 않은 것은?",
+        "explanation": "③번은 드라이클리닝은 물이 아닌 기름만을 사용하므로 (T)가 아니라 (F)이다."
+      },
+      {
+        "answer": "cutting a chocolate bar into small chips, mixing them with her dough",
+        "number": 29,
+        "question": "다음 글을 읽고 아래 질문에 대한 알맞은 대답이 되도록 주어진 <조건>에 맞게 빈칸을 완성하시오.\n\nIn America, there was a famous cook, Ms. Wakefield. One day in 1938, she wanted to bake chocolate cookies. However, she didn't have enough time to melt chocolate. \"Aha!\" So, she cut a chocolate bar into small chips. Then, she mixed them with her dough and put the cookie dough into the oven. When Ms. Wakefield opened the oven, she found that the chips were not melted into the dough. \"Oh, no!\" Although the chips remained in the cookies, she was not disappointed. Her new cookies were so delicious. She invented chocolate CHIP cookies!\n\nQ. How did Ms. Wakefield solve the problem of melting chocolate?\n\n<조건>\n(1)은 7단어, (2)는 5단어로 어법에 맞게 쓰시오.",
+        "explanation": "Wakefield 씨는 초콜릿 바를 작은 조각으로 잘라 반죽에 섞어서 초콜릿을 녹이는 문제를 해결했다."
+      },
+      {
+        "answer": "was designed by, was used, carry heavy things more easily, built Suwon Hwaseong",
+        "number": 30,
+        "question": "다음은 우리나라의 발명품인 유형거에 관해 조사한 메모이다. 메모를 보고 <보기>에서 적절한 단어를 골라 주어진 글을 완성하시오. (단어는 모두 한 번씩 사용하고 필요시 변형할 것)\n\nThe Yuhyeonggeo was a kind of cart. It _____________ _____________ _____________ Jung Yakyong in 1792. It _____________ _____________ in order to _____________ _____________ _____________ _____________ _____________. Thanks to it, people _____________ _____________ _____________ faster than expected.\n\n<보기> use, design, build",
+        "explanation": "유형거는 1792년에 정약용에 의해 고안되었고, 무거운 물건들을 더 쉽게 나르기 위해 사용되었으며, 덕분에 수원화성을 더 빠르게 지을 수 있었다는 의미로 채운 것이다."
+      },
+      {
+        "answer": "4",
+        "number": 31,
+        "options": [
+          "T-T-F",
+          "F-T-T",
+          "T-F-T",
+          "F-F-T",
+          "F-F-F"
+        ],
+        "question": "다음 글의 내용과 (A)~(C)가 일치하면 T, 일치하지 않으면 F를 쓸 때, 순서대로 연결된 것은?\n\nIn 1903, a French scientist, Mr. Bénédictus, was experimenting with liquid plastic in a glass flask. He accidentally hit the glass flask, and it fell on the floor. \"Oops!\" Although the glass flask was broken into pieces, they still held together in the shape of the flask! How could this happen? The secret was the liquid plastic in the flask. This finding led to his invention of safety glass. These days, we can find safety glass everywhere. For example, it is used for car windows. If there is a car accident, people are safer from sharp pieces of glass.\n\n(A) Mr. Bénédictus wondered about the result of hitting the glass flask during the experiment. (T/F)\n(B) The broken glass pieces scattered all over the floor. (T/F)\n(C) Safety glass protects people from sharp pieces during an accident. (T/F)",
+        "explanation": "(A) 실험 중에 우연히 플라스크를 쳤으므로 F, (B) 조각들이 플라스크 모양으로 붙어 있었으므로 F, (C) 안전유리는 사고 중에 날카로운 조각으로부터 사람들을 보호하므로 T"
+      }
+    ],
+    "answer_key": [
+      "3",
+      "4",
+      "3",
+      "2",
+      "3",
+      "5",
+      "are going to play soccer at school although it's going to rain",
+      "5",
+      "2",
+      "the green button, is pressed",
+      "3",
+      "4",
+      "4",
+      "were not melted into the dough, remained in the cookies",
+      "5",
+      "pieces, broken flask held together, original shape",
+      "2",
+      "4",
+      "3",
+      "bake chocolate cookies, melt chocolate, cut, small chips, delicious",
+      "Although[Though] the glass flask was broken into pieces, they still held together in the shape of the flask!",
+      "3",
+      "4",
+      "5",
+      "5",
+      "4",
+      "1",
+      "3",
+      "cutting a chocolate bar into small chips, mixing them with her dough",
+      "was designed by, was used, carry heavy things more easily, built Suwon Hwaseong",
+      "4"
+    ]
+  }
+}
