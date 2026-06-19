@@ -445,31 +445,41 @@ describe('validateBeforeSave', () => {
     it('명시 개수 "(정답 2개)"인데 1개만 저장 → 에러', () => {
       const q: NaesinProblemQuestion = { number: 1, question: '알맞은 것을 모두 고르면? (정답 2개)', answer: '3', options: opts };
       const result = validateBeforeSave([q]);
-      expect(result.errors.some((e) => e.code === 'MULTI_ANSWER_UNDERCOUNT')).toBe(true);
+      expect(result.warnings.some((e) => e.code === 'MULTI_ANSWER_UNDERCOUNT')).toBe(true);
     });
     it('"2개 고르시오"인데 1개만 → 에러', () => {
       const q: NaesinProblemQuestion = { number: 1, question: '다음 중 어색한 것을 2개 고르시오.', answer: '4', options: opts };
-      expect(validateBeforeSave([q]).errors.some((e) => e.code === 'MULTI_ANSWER_UNDERCOUNT')).toBe(true);
+      expect(validateBeforeSave([q]).warnings.some((e) => e.code === 'MULTI_ANSWER_UNDERCOUNT')).toBe(true);
     });
     it('명시 개수 충족 시 통과', () => {
       const q: NaesinProblemQuestion = { number: 1, question: '알맞은 것을 모두 고르면? (정답 2개)', answer: '3, 5', options: opts };
-      expect(validateBeforeSave([q]).errors.some((e) => e.code === 'MULTI_ANSWER_UNDERCOUNT')).toBe(false);
+      expect(validateBeforeSave([q]).warnings.some((e) => e.code === 'MULTI_ANSWER_UNDERCOUNT')).toBe(false);
     });
     it('"모두 고르면" + 정답 1개 + 해설이 선택지 2개 지목 → 에러', () => {
       const q: NaesinProblemQuestion = { number: 1, question: '알맞지 않은 것을 모두 고르면?', answer: '3', options: opts, explanation: '③과 ⑤는 문맥에 맞지 않습니다.' };
-      expect(validateBeforeSave([q]).errors.some((e) => e.code === 'MULTI_ANSWER_UNDERCOUNT')).toBe(true);
+      expect(validateBeforeSave([q]).warnings.some((e) => e.code === 'MULTI_ANSWER_UNDERCOUNT')).toBe(true);
     });
     it('"모두 고르면"이지만 해설이 1개만 지목 → 통과(단일정답 가능)', () => {
       const q: NaesinProblemQuestion = { number: 1, question: '옳은 것을 모두 고르면?', answer: '3', options: opts, explanation: '③만 올바른 표현입니다.' };
-      expect(validateBeforeSave([q]).errors.some((e) => e.code === 'MULTI_ANSWER_UNDERCOUNT')).toBe(false);
+      expect(validateBeforeSave([q]).warnings.some((e) => e.code === 'MULTI_ANSWER_UNDERCOUNT')).toBe(false);
     });
     it('"모두 고르면" + 해설이 5개 보기 다 설명(단일정답) → 통과(오탐 방지)', () => {
       const q: NaesinProblemQuestion = { number: 1, question: '알맞지 않은 것을 모두 고르면?', answer: '3', options: opts, explanation: '③이 정답이다. ①②④⑤는 모두 본문과 일치한다.' };
-      expect(validateBeforeSave([q]).errors.some((e) => e.code === 'MULTI_ANSWER_UNDERCOUNT')).toBe(false);
+      expect(validateBeforeSave([q]).warnings.some((e) => e.code === 'MULTI_ANSWER_UNDERCOUNT')).toBe(false);
+    });
+    it('조합형 보기("①,④" 등) "2개 고르면"은 단일정답이 옳음 → 통과(오탐 방지)', () => {
+      const q: NaesinProblemQuestion = { number: 1, question: '어법상 어색한 문장을 2개 고르면?', answer: '4',
+        options: ['①, ④', '②, ③', '③, ⑤', '②, ④', '①, ②'], explanation: '② finish→finished, ④ went→gone' };
+      expect(validateBeforeSave([q]).warnings.some((e) => e.code === 'MULTI_ANSWER_UNDERCOUNT')).toBe(false);
+    });
+    it('개별 보기(문장) "2개 고르면"인데 단일정답 → 에러(진짜 누락은 유지)', () => {
+      const q: NaesinProblemQuestion = { number: 1, question: '알맞지 않은 것을 모두 고르면?', answer: '3',
+        options: ['It is fine.', 'She runs.', 'Do not touch it.', 'He can see.', 'You should not touch it.'], explanation: '③과 ⑤는 주의사항이라 부적절' };
+      expect(validateBeforeSave([q]).warnings.some((e) => e.code === 'MULTI_ANSWER_UNDERCOUNT')).toBe(true);
     });
     it('복수정답 류 표현 없는 단일정답 문항은 통과', () => {
       const q: NaesinProblemQuestion = { number: 1, question: '가장 알맞은 것은?', answer: '3', options: opts, explanation: '③이 정답이고 ①②④⑤는 오답입니다.' };
-      expect(validateBeforeSave([q]).errors.some((e) => e.code === 'MULTI_ANSWER_UNDERCOUNT')).toBe(false);
+      expect(validateBeforeSave([q]).warnings.some((e) => e.code === 'MULTI_ANSWER_UNDERCOUNT')).toBe(false);
     });
   });
 
