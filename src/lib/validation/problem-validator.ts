@@ -44,6 +44,19 @@ function issue(
   return { severity, questionNumber, code, message };
 }
 
+// 복수정답 누락 탐지: 해설에 등장하는 선택지 라벨(①-⑩, ⓐ-ⓩ, ㉠-㉤)
+const OPTION_MARKER_RE = /[①-⑩ⓐ-ⓩ㉠-㉤]/g;
+/** 문제 텍스트에서 "정답 N개"류 명시 개수를 추출. 없으면 null. */
+function detectExpectedAnswerCount(qtext: string): number | null {
+  let m: RegExpMatchArray | null;
+  if ((m = qtext.match(/정답\s*(\d+)\s*개/))) return Number(m[1]);
+  if ((m = qtext.match(/\(\s*(?:정답\s*)?(\d+)\s*개\s*\)/))) return Number(m[1]);
+  if ((m = qtext.match(/(\d+)\s*개\s*(?:이상\s*)?(?:고르|선택|찾)/))) return Number(m[1]);
+  if (/(?:^|[^가-힣\d])두\s*개/.test(qtext)) return 2;
+  if (/(?:^|[^가-힣\d])세\s*개/.test(qtext)) return 3;
+  return null;
+}
+
 // ── Main ──
 
 export function validateProblemStructure(
@@ -543,6 +556,26 @@ export function validateBeforeSave(
           );
           if (matchIdx === -1) {
             errors.push(issue('error', n, 'TEXT_NOT_IN_OPTIONS', `${n}번: 텍스트 정답 "${ansStr.slice(0, 30)}"이(가) 어떤 선택지와도 일치하지 않습니다.`));
+          }
+        }
+      }
+
+      // ERROR: 복수정답 문항("모두 고르면"/"정답 N개")인데 정답 개수 부족
+      //   PDF 추출이 반복적으로 정답을 1개만 저장하던 패턴(Lesson3·Step3·Lesson4 등 다수).
+      //   신호1: 문제에 명시 개수("정답 2개" 등) → 정답수가 그보다 적으면 오탐0 확정.
+      //   신호2: "모두 고르면" + 정답 1개 + 해설이 선택지 라벨 2개 이상 지목 → 교차검증.
+      {
+        const numAns = ansStr.split(',').map((p) => p.trim()).filter((p) => /^\d+$/.test(p)).length;
+        const qtext = q.question || '';
+        const expected = detectExpectedAnswerCount(qtext);
+        if (expected != null && expected >= 2 && numAns < expected) {
+          errors.push(issue('error', n, 'MULTI_ANSWER_UNDERCOUNT', `${n}번: '정답 ${expected}개' 문항인데 정답이 ${numAns}개만 저장되어 있습니다.`));
+        } else if (numAns === 1 && /모두\s*고르|모두\s*골|all that apply/i.test(qtext)) {
+          // 해설이 "정확히 2개"의 선택지 라벨을 지목 → 2-정답 누락. (4~5개 지목은 보통
+          // 단일정답인데 해설이 모든 보기를 설명하는 경우라 제외 — 오탐 방지.)
+          const markers = new Set((q.explanation || '').match(OPTION_MARKER_RE) || []);
+          if (markers.size === 2) {
+            errors.push(issue('error', n, 'MULTI_ANSWER_UNDERCOUNT', `${n}번: '모두 고르면' 문항인데 정답이 1개입니다. 해설이 선택지 2개(${[...markers].join('·')})를 지목하고 있어 복수정답 누락이 의심됩니다.`));
           }
         }
       }
