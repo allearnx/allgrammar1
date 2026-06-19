@@ -1,0 +1,917 @@
+{
+  "auto": [
+    {
+      "rootId": "3944cb2d-55c7-439c-8d49-86d66edb7e10",
+      "title": "조동사가 포함된 수동태 Step 2",
+      "number": 25,
+      "trigger": "모두+해설2",
+      "expect": 2,
+      "curAnswer": "2",
+      "markerNums": [
+        2,
+        4
+      ],
+      "derived": "2, 4",
+      "autoFix": true
+    },
+    {
+      "rootId": "50cf4d28-6820-4178-ad4d-471850f270f2",
+      "title": "want+목적어+to부정사 Step 2",
+      "number": 69,
+      "trigger": "모두+해설2",
+      "expect": 2,
+      "curAnswer": "3",
+      "markerNums": [
+        3,
+        5
+      ],
+      "derived": "3, 5",
+      "autoFix": true
+    },
+    {
+      "rootId": "50cf4d28-6820-4178-ad4d-471850f270f2",
+      "title": "want+목적어+to부정사 Step 2",
+      "number": 83,
+      "trigger": "모두+해설2",
+      "expect": 2,
+      "curAnswer": "5",
+      "markerNums": [
+        1,
+        5
+      ],
+      "derived": "1, 5",
+      "autoFix": true
+    },
+    {
+      "rootId": "50cf4d28-6820-4178-ad4d-471850f270f2",
+      "title": "want+목적어+to부정사 Step 2",
+      "number": 87,
+      "trigger": "모두+해설2",
+      "expect": 2,
+      "curAnswer": "2",
+      "markerNums": [
+        2,
+        3
+      ],
+      "derived": "2, 3",
+      "autoFix": true
+    },
+    {
+      "rootId": "a098e833-cbd8-49e2-8056-a5c8905a567d",
+      "title": "간접의문문 Step 2",
+      "number": 12,
+      "trigger": "모두+해설2",
+      "expect": 2,
+      "curAnswer": "2",
+      "markerNums": [
+        2,
+        4
+      ],
+      "derived": "2, 4",
+      "autoFix": true
+    },
+    {
+      "rootId": "a098e833-cbd8-49e2-8056-a5c8905a567d",
+      "title": "간접의문문 Step 2",
+      "number": 15,
+      "trigger": "모두+해설2",
+      "expect": 2,
+      "curAnswer": "4",
+      "markerNums": [
+        4,
+        5
+      ],
+      "derived": "4, 5",
+      "autoFix": true
+    },
+    {
+      "rootId": "a098e833-cbd8-49e2-8056-a5c8905a567d",
+      "title": "간접의문문 Step 2",
+      "number": 71,
+      "trigger": "모두+해설2",
+      "expect": 2,
+      "curAnswer": "2",
+      "markerNums": [
+        2,
+        4
+      ],
+      "derived": "2, 4",
+      "autoFix": true
+    },
+    {
+      "rootId": "a098e833-cbd8-49e2-8056-a5c8905a567d",
+      "title": "간접의문문 Step 2",
+      "number": 72,
+      "trigger": "모두+해설2",
+      "expect": 2,
+      "curAnswer": "3",
+      "markerNums": [
+        3,
+        5
+      ],
+      "derived": "3, 5",
+      "autoFix": true
+    },
+    {
+      "rootId": "a098e833-cbd8-49e2-8056-a5c8905a567d",
+      "title": "간접의문문 Step 2",
+      "number": 73,
+      "trigger": "모두+해설2",
+      "expect": 2,
+      "curAnswer": "4",
+      "markerNums": [
+        4,
+        5
+      ],
+      "derived": "4, 5",
+      "autoFix": true
+    },
+    {
+      "rootId": "a098e833-cbd8-49e2-8056-a5c8905a567d",
+      "title": "간접의문문 Step 2",
+      "number": 74,
+      "trigger": "모두+해설2",
+      "expect": 2,
+      "curAnswer": "3",
+      "markerNums": [
+        3,
+        5
+      ],
+      "derived": "3, 5",
+      "autoFix": true
+    },
+    {
+      "rootId": "a098e833-cbd8-49e2-8056-a5c8905a567d",
+      "title": "간접의문문 Step 2",
+      "number": 75,
+      "trigger": "모두+해설2",
+      "expect": 2,
+      "curAnswer": "3",
+      "markerNums": [
+        3,
+        5
+      ],
+      "derived": "3, 5",
+      "autoFix": true
+    },
+    {
+      "rootId": "a098e833-cbd8-49e2-8056-a5c8905a567d",
+      "title": "간접의문문 Step 2",
+      "number": 76,
+      "trigger": "모두+해설2",
+      "expect": 2,
+      "curAnswer": "1",
+      "markerNums": [
+        1,
+        4
+      ],
+      "derived": "1, 4",
+      "autoFix": true
+    },
+    {
+      "rootId": "a098e833-cbd8-49e2-8056-a5c8905a567d",
+      "title": "간접의문문 Step 2",
+      "number": 85,
+      "trigger": "모두+해설2",
+      "expect": 2,
+      "curAnswer": "1",
+      "markerNums": [
+        1,
+        4
+      ],
+      "derived": "1, 4",
+      "autoFix": true
+    },
+    {
+      "rootId": "1c4b7de0-5535-4fe6-9f1e-a0d8c9ff5f5c",
+      "title": "현재완료 Step 2",
+      "number": 39,
+      "trigger": "명시2개",
+      "expect": 2,
+      "curAnswer": "4",
+      "markerNums": [
+        2,
+        4
+      ],
+      "derived": "2, 4",
+      "autoFix": true
+    },
+    {
+      "rootId": "1c4b7de0-5535-4fe6-9f1e-a0d8c9ff5f5c",
+      "title": "현재완료 Step 2",
+      "number": 43,
+      "trigger": "명시2개",
+      "expect": 2,
+      "curAnswer": "4",
+      "markerNums": [
+        3,
+        4
+      ],
+      "derived": "3, 4",
+      "autoFix": true
+    },
+    {
+      "rootId": "b34a6bee-2727-4e39-bf6c-4a9e9ea6dc70",
+      "title": "be동사 Step 1",
+      "number": 30,
+      "trigger": "모두+해설2",
+      "expect": 2,
+      "curAnswer": "②",
+      "markerNums": [
+        2,
+        4
+      ],
+      "derived": "2, 4",
+      "autoFix": true
+    },
+    {
+      "rootId": "4ce87815-a230-4775-b453-8e4785f4ac96",
+      "title": "Lesson 1 예상문제 Step 5",
+      "number": 19,
+      "trigger": "모두+해설2",
+      "expect": 2,
+      "curAnswer": "3",
+      "markerNums": [
+        2,
+        3
+      ],
+      "derived": "2, 3",
+      "autoFix": true
+    },
+    {
+      "rootId": "5f8d993d-642d-45e6-b979-8047386ed38b",
+      "title": "Lesson 3 예상문제 Step 2",
+      "number": 8,
+      "trigger": "모두+해설2",
+      "expect": 2,
+      "curAnswer": "5",
+      "markerNums": [
+        4,
+        5
+      ],
+      "derived": "4, 5",
+      "autoFix": true
+    },
+    {
+      "rootId": "9e72b70e-40bf-4c95-ae6d-bb9f3b5da453",
+      "title": "Lesson 1 예상문제 Step 5",
+      "number": 2,
+      "trigger": "모두+해설2",
+      "expect": 2,
+      "curAnswer": "2",
+      "markerNums": [
+        2,
+        4
+      ],
+      "derived": "2, 4",
+      "autoFix": true
+    },
+    {
+      "rootId": "c29ab3ae-84f3-4da8-a471-ec87feda38b5",
+      "title": "Lesson 2 예상문제 Step 2",
+      "number": 10,
+      "trigger": "모두+해설2",
+      "expect": 2,
+      "curAnswer": "5",
+      "markerNums": [
+        2,
+        5
+      ],
+      "derived": "2, 5",
+      "autoFix": true
+    },
+    {
+      "rootId": "af29a066-bbb2-49a7-b76e-ca2ce7694eb4",
+      "title": "Lesson 4 예상문제 Step 3",
+      "number": 6,
+      "trigger": "모두+해설2",
+      "expect": 2,
+      "curAnswer": "1",
+      "markerNums": [
+        1,
+        4
+      ],
+      "derived": "1, 4",
+      "autoFix": true
+    },
+    {
+      "rootId": "fac7853c-ef7a-4044-9901-a57d8f4ee712",
+      "title": "중2 능률김 2과 예상문제 4차(변형)",
+      "number": 12,
+      "trigger": "모두+해설2",
+      "expect": 2,
+      "curAnswer": "3",
+      "markerNums": [
+        3,
+        5
+      ],
+      "derived": "3, 5",
+      "autoFix": true
+    },
+    {
+      "rootId": "99799020-9fb9-444b-9938-74d6894e0063",
+      "title": "Lesson 1 예상문제 Step 5",
+      "number": 25,
+      "trigger": "명시2개",
+      "expect": 2,
+      "curAnswer": "5",
+      "markerNums": [
+        1,
+        5
+      ],
+      "derived": "1, 5",
+      "autoFix": true
+    },
+    {
+      "rootId": "74c4f4cc-c1fa-4f73-b5e8-16025fc0e5f2",
+      "title": "Lesson 2 예상문제 Step 5",
+      "number": 17,
+      "trigger": "모두+해설2",
+      "expect": 2,
+      "curAnswer": "3",
+      "markerNums": [
+        3,
+        4
+      ],
+      "derived": "3, 4",
+      "autoFix": true
+    },
+    {
+      "rootId": "0f0cda99-55f4-4382-9dd0-0b947a6ae752",
+      "title": "Lesson 3 예상문제 Step 3",
+      "number": 6,
+      "trigger": "모두+해설2",
+      "expect": 2,
+      "curAnswer": "1",
+      "markerNums": [
+        1,
+        3
+      ],
+      "derived": "1, 3",
+      "autoFix": true
+    },
+    {
+      "rootId": "15418df4-6c88-42aa-b5a3-9199680aa789",
+      "title": "Lesson 4 예상문제 Step 3",
+      "number": 10,
+      "trigger": "모두+해설2",
+      "expect": 2,
+      "curAnswer": "5",
+      "markerNums": [
+        4,
+        5
+      ],
+      "derived": "4, 5",
+      "autoFix": true
+    },
+    {
+      "rootId": "dd781440-b2f1-4f56-959d-335376035a47",
+      "title": "Lesson 3 예상문제 Step 2",
+      "number": 4,
+      "trigger": "모두+해설2",
+      "expect": 2,
+      "curAnswer": "1",
+      "markerNums": [
+        1,
+        5
+      ],
+      "derived": "1, 5",
+      "autoFix": true
+    },
+    {
+      "rootId": "dd781440-b2f1-4f56-959d-335376035a47",
+      "title": "Lesson 3 예상문제 Step 2",
+      "number": 5,
+      "trigger": "모두+해설2",
+      "expect": 2,
+      "curAnswer": "1",
+      "markerNums": [
+        1,
+        4
+      ],
+      "derived": "1, 4",
+      "autoFix": true
+    },
+    {
+      "rootId": "dd781440-b2f1-4f56-959d-335376035a47",
+      "title": "Lesson 3 예상문제 Step 2",
+      "number": 7,
+      "trigger": "모두+해설2",
+      "expect": 2,
+      "curAnswer": "4",
+      "markerNums": [
+        4,
+        5
+      ],
+      "derived": "4, 5",
+      "autoFix": true
+    },
+    {
+      "rootId": "dd781440-b2f1-4f56-959d-335376035a47",
+      "title": "Lesson 3 예상문제 Step 2",
+      "number": 11,
+      "trigger": "모두+해설2",
+      "expect": 2,
+      "curAnswer": "3",
+      "markerNums": [
+        3,
+        5
+      ],
+      "derived": "3, 5",
+      "autoFix": true
+    },
+    {
+      "rootId": "dd781440-b2f1-4f56-959d-335376035a47",
+      "title": "Lesson 3 예상문제 Step 2",
+      "number": 20,
+      "trigger": "모두+해설2",
+      "expect": 2,
+      "curAnswer": "2",
+      "markerNums": [
+        2,
+        5
+      ],
+      "derived": "2, 5",
+      "autoFix": true
+    },
+    {
+      "rootId": "dd781440-b2f1-4f56-959d-335376035a47",
+      "title": "Lesson 3 예상문제 Step 2",
+      "number": 23,
+      "trigger": "모두+해설2",
+      "expect": 2,
+      "curAnswer": "1",
+      "markerNums": [
+        1,
+        2
+      ],
+      "derived": "1, 2",
+      "autoFix": true
+    },
+    {
+      "rootId": "dd781440-b2f1-4f56-959d-335376035a47",
+      "title": "Lesson 3 예상문제 Step 2",
+      "number": 25,
+      "trigger": "모두+해설2",
+      "expect": 2,
+      "curAnswer": "1",
+      "markerNums": [
+        1,
+        5
+      ],
+      "derived": "1, 5",
+      "autoFix": true
+    },
+    {
+      "rootId": "8bf250f5-128d-45bc-b6f7-564132211a6b",
+      "title": "Lesson 3 예상문제 Step 3",
+      "number": 5,
+      "trigger": "모두+해설2",
+      "expect": 2,
+      "curAnswer": "2",
+      "markerNums": [
+        2,
+        5
+      ],
+      "derived": "2, 5",
+      "autoFix": true
+    },
+    {
+      "rootId": "8bf250f5-128d-45bc-b6f7-564132211a6b",
+      "title": "Lesson 3 예상문제 Step 3",
+      "number": 7,
+      "trigger": "모두+해설2",
+      "expect": 2,
+      "curAnswer": "3",
+      "markerNums": [
+        3,
+        5
+      ],
+      "derived": "3, 5",
+      "autoFix": true
+    },
+    {
+      "rootId": "8bf250f5-128d-45bc-b6f7-564132211a6b",
+      "title": "Lesson 3 예상문제 Step 3",
+      "number": 8,
+      "trigger": "모두+해설2",
+      "expect": 2,
+      "curAnswer": "4",
+      "markerNums": [
+        4,
+        5
+      ],
+      "derived": "4, 5",
+      "autoFix": true
+    },
+    {
+      "rootId": "8bf250f5-128d-45bc-b6f7-564132211a6b",
+      "title": "Lesson 3 예상문제 Step 3",
+      "number": 19,
+      "trigger": "모두+해설2",
+      "expect": 2,
+      "curAnswer": "1",
+      "markerNums": [
+        1,
+        5
+      ],
+      "derived": "1, 5",
+      "autoFix": true
+    },
+    {
+      "rootId": "36d9497b-ea6c-4a35-8b13-e1dc1d0e1a1f",
+      "title": "Lesson 3 예상문제 Step 2",
+      "number": 4,
+      "trigger": "모두+해설2",
+      "expect": 2,
+      "curAnswer": "2",
+      "markerNums": [
+        2,
+        4
+      ],
+      "derived": "2, 4",
+      "autoFix": true
+    },
+    {
+      "rootId": "36d9497b-ea6c-4a35-8b13-e1dc1d0e1a1f",
+      "title": "Lesson 3 예상문제 Step 2",
+      "number": 8,
+      "trigger": "모두+해설2",
+      "expect": 2,
+      "curAnswer": "4",
+      "markerNums": [
+        4,
+        5
+      ],
+      "derived": "4, 5",
+      "autoFix": true
+    },
+    {
+      "rootId": "36d9497b-ea6c-4a35-8b13-e1dc1d0e1a1f",
+      "title": "Lesson 3 예상문제 Step 2",
+      "number": 14,
+      "trigger": "모두+해설2",
+      "expect": 2,
+      "curAnswer": "4",
+      "markerNums": [
+        4,
+        5
+      ],
+      "derived": "4, 5",
+      "autoFix": true
+    },
+    {
+      "rootId": "36d9497b-ea6c-4a35-8b13-e1dc1d0e1a1f",
+      "title": "Lesson 3 예상문제 Step 2",
+      "number": 15,
+      "trigger": "모두+해설2",
+      "expect": 2,
+      "curAnswer": "4",
+      "markerNums": [
+        4,
+        5
+      ],
+      "derived": "4, 5",
+      "autoFix": true
+    },
+    {
+      "rootId": "36d9497b-ea6c-4a35-8b13-e1dc1d0e1a1f",
+      "title": "Lesson 3 예상문제 Step 2",
+      "number": 23,
+      "trigger": "모두+해설2",
+      "expect": 2,
+      "curAnswer": "1",
+      "markerNums": [
+        1,
+        5
+      ],
+      "derived": "1, 5",
+      "autoFix": true
+    },
+    {
+      "rootId": "36d9497b-ea6c-4a35-8b13-e1dc1d0e1a1f",
+      "title": "Lesson 3 예상문제 Step 2",
+      "number": 27,
+      "trigger": "모두+해설2",
+      "expect": 2,
+      "curAnswer": "3",
+      "markerNums": [
+        3,
+        5
+      ],
+      "derived": "3, 5",
+      "autoFix": true
+    }
+  ],
+  "manual": [
+    {
+      "rootId": "29fa28d5-75a4-45a4-92f6-9e5cce345aa7",
+      "title": "사역동사 Step 2",
+      "number": 34,
+      "trigger": "명시2개",
+      "expect": 2,
+      "curAnswer": "1",
+      "markerNums": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "derived": "1, 2, 3, 4, 5",
+      "autoFix": false
+    },
+    {
+      "rootId": "a098e833-cbd8-49e2-8056-a5c8905a567d",
+      "title": "간접의문문 Step 2",
+      "number": 59,
+      "trigger": "모두+해설2",
+      "expect": 2,
+      "curAnswer": "2",
+      "markerNums": [
+        1,
+        3
+      ],
+      "derived": "1, 3",
+      "autoFix": false
+    },
+    {
+      "rootId": "68d46c5a-3b05-4f2e-92ec-7cbf3af39327",
+      "title": "so that Step 2",
+      "number": 28,
+      "trigger": "명시2개",
+      "expect": 2,
+      "curAnswer": "4",
+      "markerNums": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "derived": "1, 2, 3, 4, 5",
+      "autoFix": false
+    },
+    {
+      "rootId": "68d46c5a-3b05-4f2e-92ec-7cbf3af39327",
+      "title": "so that Step 2",
+      "number": 39,
+      "trigger": "명시2개",
+      "expect": 2,
+      "curAnswer": "3",
+      "markerNums": [
+        1,
+        2
+      ],
+      "derived": "1, 2",
+      "autoFix": false
+    },
+    {
+      "rootId": "1c4b7de0-5535-4fe6-9f1e-a0d8c9ff5f5c",
+      "title": "현재완료 Step 2",
+      "number": 38,
+      "trigger": "명시2개",
+      "expect": 2,
+      "curAnswer": "3",
+      "markerNums": [
+        2,
+        4
+      ],
+      "derived": "2, 4",
+      "autoFix": false
+    },
+    {
+      "rootId": "1c4b7de0-5535-4fe6-9f1e-a0d8c9ff5f5c",
+      "title": "현재완료 Step 2",
+      "number": 40,
+      "trigger": "명시2개",
+      "expect": 2,
+      "curAnswer": "1",
+      "markerNums": [
+        2,
+        4
+      ],
+      "derived": "2, 4",
+      "autoFix": false
+    },
+    {
+      "rootId": "1c4b7de0-5535-4fe6-9f1e-a0d8c9ff5f5c",
+      "title": "현재완료 Step 2",
+      "number": 41,
+      "trigger": "명시2개",
+      "expect": 2,
+      "curAnswer": "5",
+      "markerNums": [
+        3,
+        4
+      ],
+      "derived": "3, 4",
+      "autoFix": false
+    },
+    {
+      "rootId": "1c4b7de0-5535-4fe6-9f1e-a0d8c9ff5f5c",
+      "title": "현재완료 Step 2",
+      "number": 42,
+      "trigger": "명시2개",
+      "expect": 2,
+      "curAnswer": "2",
+      "markerNums": [
+        3,
+        5
+      ],
+      "derived": "3, 5",
+      "autoFix": false
+    },
+    {
+      "rootId": "1c4b7de0-5535-4fe6-9f1e-a0d8c9ff5f5c",
+      "title": "현재완료 Step 2",
+      "number": 44,
+      "trigger": "명시2개",
+      "expect": 2,
+      "curAnswer": "1",
+      "markerNums": [
+        3,
+        5
+      ],
+      "derived": "3, 5",
+      "autoFix": false
+    },
+    {
+      "rootId": "1c4b7de0-5535-4fe6-9f1e-a0d8c9ff5f5c",
+      "title": "현재완료 Step 2",
+      "number": 45,
+      "trigger": "명시2개",
+      "expect": 2,
+      "curAnswer": "3",
+      "markerNums": [
+        2,
+        4
+      ],
+      "derived": "2, 4",
+      "autoFix": false
+    },
+    {
+      "rootId": "aa026294-d5f0-48ab-850b-5484922e3b72",
+      "title": "관계부사 Step1",
+      "number": 8,
+      "trigger": "명시2개",
+      "expect": 2,
+      "curAnswer": "3",
+      "markerNums": [],
+      "derived": "",
+      "autoFix": false
+    },
+    {
+      "rootId": "c9b332f6-b798-4a64-b96d-4da0187b9ab6",
+      "title": "the+비교급,the+비교급 Step1",
+      "number": 33,
+      "trigger": "명시2개",
+      "expect": 2,
+      "curAnswer": "1",
+      "markerNums": [],
+      "derived": "",
+      "autoFix": false
+    },
+    {
+      "rootId": "c51ce5f8-f34d-4ade-a000-cadfc772d3ee",
+      "title": "Lesson 1 예상문제 Step 4",
+      "number": 22,
+      "trigger": "모두+해설2",
+      "expect": 2,
+      "curAnswer": "4",
+      "markerNums": [
+        1,
+        5
+      ],
+      "derived": "1, 5",
+      "autoFix": false
+    },
+    {
+      "rootId": "dd1c31a4-92a2-4eeb-990c-c496f6137338",
+      "title": "Lesson 1 예상문제 Step 2",
+      "number": 22,
+      "trigger": "명시2개",
+      "expect": 2,
+      "curAnswer": "2",
+      "markerNums": [
+        1
+      ],
+      "derived": "1",
+      "autoFix": false
+    },
+    {
+      "rootId": "4ce87815-a230-4775-b453-8e4785f4ac96",
+      "title": "Lesson 1 예상문제 Step 5",
+      "number": 13,
+      "trigger": "모두+해설2",
+      "expect": 2,
+      "curAnswer": "3",
+      "markerNums": [
+        2,
+        5
+      ],
+      "derived": "2, 5",
+      "autoFix": false
+    },
+    {
+      "rootId": "6b790360-7c26-4403-9dee-b2a05b99cfeb",
+      "title": "Lesson 2 예상문제 Step 2",
+      "number": 24,
+      "trigger": "명시2개",
+      "expect": 2,
+      "curAnswer": "5",
+      "markerNums": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "derived": "1, 2, 3, 4, 5",
+      "autoFix": false
+    },
+    {
+      "rootId": "6f9cf886-cefd-40e7-861f-33301ad7485d",
+      "title": "Lesson 2 예상문제 Step 4",
+      "number": 21,
+      "trigger": "명시2개",
+      "expect": 2,
+      "curAnswer": "3",
+      "markerNums": [],
+      "derived": "",
+      "autoFix": false
+    },
+    {
+      "rootId": "7ff816ad-3b1f-4baa-8da3-03b4a78ab8b0",
+      "title": "Lesson 1 예상문제 Step 3",
+      "number": 13,
+      "trigger": "명시2개",
+      "expect": 2,
+      "curAnswer": "2",
+      "markerNums": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "derived": "1, 2, 3, 4, 5",
+      "autoFix": false
+    },
+    {
+      "rootId": "c1d7c975-5228-4059-96d0-c8bc6563dc60",
+      "title": "Lesson 3 예상문제 Step 2",
+      "number": 23,
+      "trigger": "모두+해설2",
+      "expect": 2,
+      "curAnswer": "4",
+      "markerNums": [
+        2,
+        5
+      ],
+      "derived": "2, 5",
+      "autoFix": false
+    },
+    {
+      "rootId": "af29a066-bbb2-49a7-b76e-ca2ce7694eb4",
+      "title": "Lesson 4 예상문제 Step 3",
+      "number": 12,
+      "trigger": "명시2개",
+      "expect": 2,
+      "curAnswer": "2",
+      "markerNums": [
+        1,
+        2,
+        3,
+        3
+      ],
+      "derived": "1, 2, 3, 3",
+      "autoFix": false
+    },
+    {
+      "rootId": "ecc052aa-3355-45bf-8c27-a566e31e0ca4",
+      "title": "Lesson 3 예상문제 Step 4",
+      "number": 10,
+      "trigger": "명시2개",
+      "expect": 2,
+      "curAnswer": "1",
+      "markerNums": [],
+      "derived": "",
+      "autoFix": false
+    },
+    {
+      "rootId": "f37cd27a-a739-44ea-b478-63e96153c3e3",
+      "title": "Lesson 3 예상문제 Step 2",
+      "number": 3,
+      "trigger": "모두+해설2",
+      "expect": 2,
+      "curAnswer": "2",
+      "markerNums": [
+        1,
+        4
+      ],
+      "derived": "1, 4",
+      "autoFix": false
+    }
+  ]
+}
