@@ -440,6 +440,25 @@ describe('validateBeforeSave', () => {
     });
   });
 
+  describe('밑줄 유실 (UNDERLINE_MISSING)', () => {
+    it('"밑줄 친 단어" 묻는데 <u> 없음 → 경고', () => {
+      const q: NaesinProblemQuestion = { number: 1, question: '다음 밑줄 친 단어와 바꾸어 쓸 수 있는 것은?\nIt was a surprising finding.', answer: '3', options: ['a', 'b', 'discovery', 'd', 'e'] };
+      expect(validateBeforeSave([q]).warnings.some((e) => e.code === 'UNDERLINE_MISSING')).toBe(true);
+    });
+    it('<u>가 있으면 통과', () => {
+      const q: NaesinProblemQuestion = { number: 1, question: '다음 밑줄 친 단어는?\nIt was a surprising <u>finding</u>.', answer: '3', options: ['a', 'b', 'c', 'd', 'e'] };
+      expect(validateBeforeSave([q]).warnings.some((e) => e.code === 'UNDERLINE_MISSING')).toBe(false);
+    });
+    it('지문에 ⓐ~ⓔ 마커가 있으면 면제(통과)', () => {
+      const q: NaesinProblemQuestion = { number: 1, question: '밑줄 친 ⓐ~ⓔ 중 어색한 것은?\nⓐwas ⓑdoing ...', answer: '3', options: ['ⓐ', 'ⓑ', 'ⓒ', 'ⓓ', 'ⓔ'] };
+      expect(validateBeforeSave([q]).warnings.some((e) => e.code === 'UNDERLINE_MISSING')).toBe(false);
+    });
+    it('"밑줄" 언급 없으면 검사 안 함', () => {
+      const q: NaesinProblemQuestion = { number: 1, question: '다음 빈칸에 알맞은 것은?', answer: '3', options: ['a', 'b', 'c', 'd', 'e'] };
+      expect(validateBeforeSave([q]).warnings.some((e) => e.code === 'UNDERLINE_MISSING')).toBe(false);
+    });
+  });
+
   describe('복수정답 누락 (MULTI_ANSWER_UNDERCOUNT)', () => {
     const opts = ['a', 'b', 'c', 'd', 'e'];
     it('명시 개수 "(정답 2개)"인데 1개만 저장 → 에러', () => {

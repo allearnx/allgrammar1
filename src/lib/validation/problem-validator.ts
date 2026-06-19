@@ -648,6 +648,16 @@ export function validateBeforeSave(
       warnings.push(issue('warning', n, 'LITERAL_BACKSLASH_N', `${n}번: 리터럴 "\\n"(2글자)이 포함되어 줄바꿈이 깨져 보일 수 있습니다.`));
     }
 
+    // WARNING(quality): "밑줄 친"을 묻는데 <u> 표시가 없음 → 학생이 어디가 밑줄인지 모름.
+    //   단, 지문에 ⓐ~ⓩ/(A)~(E)/㉠~㉤ 기호 마커가 있으면 그게 밑줄 표시 역할이라 면제(오탐 방지).
+    if (hasQuestion && /밑줄\s*친|underlin/i.test(q.question!)) {
+      const blob = (q.question || '') + ' ' + (q.options ?? []).join(' ');
+      const hasMarker = /[ⓐ-ⓩ㉠-㉤]|\([A-E]\)/.test(q.question!);
+      if (!/<u>/i.test(blob) && !hasMarker) {
+        warnings.push(issue('warning', n, 'UNDERLINE_MISSING', `${n}번: "밑줄 친"을 묻는데 <u> 표시가 없습니다. 밑줄 대상을 <u>로 감싸야 학생이 풀 수 있습니다.`));
+      }
+    }
+
     // 참고: "빈칸 문제인데 정답이 문장 전체" 패턴은 검사로 두지 않음.
     //   한국어 지시문 변주(영작/배열/합치/전환/고쳐쓰기…)를 키워드로 못 갈라 오탐이 큼.
     //   → 대신 추출 프롬프트(extract-pdf/images/paraphrase)에서 생성 시점에 출력 형식을 명시하도록 강제 (forward 규칙).
