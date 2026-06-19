@@ -10,6 +10,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Badge } from '@/components/ui/badge';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Plus, ChevronDown, ChevronRight, BookOpen, FileText, Video } from 'lucide-react';
+import { extractVideoId } from '@/lib/utils/youtube';
 import { createClient } from '@/lib/supabase/client';
 import { toast } from 'sonner';
 
@@ -43,11 +44,6 @@ export function ContentClient({ levels }: ContentClientProps) {
   const [grammarDescription, setGrammarDescription] = useState('');
   const [youtubeUrl, setYoutubeUrl] = useState('');
   const [saving, setSaving] = useState(false);
-
-  function extractVideoId(url: string): string | null {
-    const match = url.match(/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))([^&?\s]+)/);
-    return match?.[1] || null;
-  }
 
   async function handleAddGrammar(e: React.FormEvent) {
     e.preventDefault();
