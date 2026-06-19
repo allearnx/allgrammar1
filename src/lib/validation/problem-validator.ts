@@ -49,10 +49,11 @@ const OPTION_MARKER_RE = /[①-⑩ⓐ-ⓩ㉠-㉤]/g;
 /** 조합형 보기 판별: 옵션이 "ⓐ, ⓒ"/"①, ④"처럼 마커 묶음만으로 된 경우.
  *  이런 문항은 "2개 고르면"이라도 정답이 단일 번호(맞는 쌍)이므로 누락이 아니다. */
 function isComboOptionQuestion(options: string[]): boolean {
+  // 마커: 원형숫자①-⑩, 원형영문ⓐ-ⓩ, 원형한글㉠-㉤, 한글자모ㄱ-ㅎ(보기 라벨 ㄱ.ㄴ.ㄷ.ㄹ.)
   const combo = options.filter((o) => {
-    // 옵션이 순수 마커(+구분자)로만 구성되고 마커가 2개 이상 — "①③" "ⓐ, ⓒ" 둘 다 포함(구분자 유무 무관)
-    if (!/^[\s①-⑩ⓐ-ⓩ㉠-㉤,，·]+$/.test(o)) return false;
-    return (o.match(/[①-⑩ⓐ-ⓩ㉠-㉤]/g) || []).length >= 2;
+    // 옵션이 순수 마커(+구분자)로만 구성되고 마커가 2개 이상 — "①③" "ⓐ, ⓒ" "ㄷ,ㄹ" 포함(구분자 유무 무관)
+    if (!/^[\s①-⑩ⓐ-ⓩ㉠-㉤ㄱ-ㅎ,，·]+$/.test(o)) return false;
+    return (o.match(/[①-⑩ⓐ-ⓩ㉠-㉤ㄱ-ㅎ]/g) || []).length >= 2;
   }).length;
   return combo >= Math.ceil(options.length / 2);
 }
