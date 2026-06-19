@@ -1,0 +1,722 @@
+{
+  "step2_36d9497b-ea6c-4a35-8b13-e1dc1d0e1a1f": {
+    "questions": [
+      {
+        "answer": "4",
+        "number": 1,
+        "options": [
+          "strong - weak",
+          "fake - original",
+          "strange - normal",
+          "helpful - useful",
+          "popular - unpopular"
+        ],
+        "question": "다음 중 짝지어진 단어의 관계가 나머지 넷과 다른 것은?",
+        "explanation": "④: '도움이 되는 : 유용한'은 유의어 관계이고 나머지는 반의어 관계이다."
+      },
+      {
+        "answer": "5",
+        "number": 2,
+        "options": [
+          "reporter: a person who collects and reports news for newspapers, radio, or television",
+          "fair: an event at which people, businesses, etc. show and sell their goods",
+          "source: a thing, place, activity, etc. that you get something from",
+          "trick: something you do to surprise someone and to make other people laugh",
+          "personal: relating to all the ordinary people in a country"
+        ],
+        "question": "다음 중 영영풀이가 알맞지 않은 것은?",
+        "explanation": "personal은 '개인의'라는 뜻이며, 주어진 영영풀이인 '한 나라의 모든 평범한 사람들과 관련된'은 public(대중의)의 풀이에 해당한다. 'relating to one particular person, rather than to other people'로 고쳐야 한다."
+      },
+      {
+        "answer": "3",
+        "number": 3,
+        "options": [
+          "ⓑ-ⓓ-ⓐ-ⓒ",
+          "ⓑ-ⓓ-ⓒ-ⓐ",
+          "ⓒ-ⓑ-ⓓ-ⓐ",
+          "ⓓ-ⓑ-ⓐ-ⓒ",
+          "ⓓ-ⓑ-ⓒ-ⓐ"
+        ],
+        "question": "다음 빈칸 (A)~(D)에 들어갈 단어가 차례대로 연결된 것은?\n• We should not (A)__________ other people's ideas.\n• Drinking too much soda can (B)___________ many health problems.\n• The police will (C)__________ the problem at school tomorrow.\n• My family gathered at a nice restaurant to (D)____________ my birthday.",
+        "explanation": "(A) ⓒ steal (B) ⓑ cause (C) ⓓ look into (D) ⓐ celebrate"
+      },
+      {
+        "type": "multi_choice",
+        "answer": "2, 4",
+        "number": 4,
+        "options": [
+          "We don't have to go there. = We must not go there.",
+          "You don't need to bring anything. = You need not bring anything.",
+          "We need to protect the environment. = We are able to protect the environment.",
+          "This is an app which can help your English study. = This is an app and it can help your English study.",
+          "She was seeing a picture of my little brother which was on the wall. = She was seeing a picture of my little brother but it was on the wall."
+        ],
+        "question": "다음 중 짝지어진 두 문장의 의미가 서로 같은 것을 모두 고르면?",
+        "explanation": "② 일반동사 need를 사용한 'need+to부정사'의 부정형과 조동사 need의 부정형은 같은 의미다. ④ 관계대명사는 두 절을 연결하므로 which를 and it으로 바꿀 수 있다."
+      },
+      {
+        "answer": "4",
+        "number": 5,
+        "options": [
+          "We have to share the news on the school website",
+          "You had better ask your friends about it again",
+          "I think we should go to the teachers' office",
+          "We need to check the school website",
+          "Let's read the post on social media"
+        ],
+        "question": "B: Did you hear about our summer vacation? It's going to be three months long!\nG: Really? That sounds strange. Where did you hear that?\nB: I saw a post on social media last night. Everyone's sharing it, and my friends are so happy about it.\nG: Hmm, I can't believe it. __________________________ to make sure it's true.\nB: There's no information about a long summer vacation on the website. But I'm still not sure.\nG: Then, why don't we ask our homeroom teacher?\nB: Oh, that's a good idea! Let's go to the teacher's office tomorrow!\nG: Sounds great!\n\n위 대화의 빈칸에 들어갈 말로 알맞은 것은?",
+        "explanation": "소녀가 소식이 사실인지 확인하기 위해 학교 웹사이트를 보자는 흐름이므로, '우리는 학교 웹사이트를 확인해 볼 필요가 있어'가 적절하다."
+      },
+      {
+        "answer": "3",
+        "number": 6,
+        "options": [
+          "The boy saw a post which says that the summer vacation will be two months long.",
+          "The boy and his friends don't believe the news about a long summer vacation.",
+          "The girl thinks that the news about a long summer vacation may be fake.",
+          "The boy can find the information about the long summer vacation on the school website.",
+          "The boy and the girl will ask their principal about the long summer vacation news."
+        ],
+        "question": "위 대화의 내용과 일치하는 것은?",
+        "explanation": "여름방학이 세 달이라는 소식에 대해 소녀는 그건 좀 이상하다고 하면서 믿기지 않는다고 말하고 있으므로 소녀는 그 소식이 가짜일지도 모른다고 생각한다."
+      },
+      {
+        "answer": "5",
+        "number": 7,
+        "options": [
+          "(B)-(D)-(A)-(C)",
+          "(C)-(B)-(A)-(D)",
+          "(C)-(B)-(D)-(A)",
+          "(D)-(A)-(B)-(C)",
+          "(D)-(A)-(C)-(B)"
+        ],
+        "question": "다음 대화의 순서를 알맞게 배열한 것은?\n(A) No, what is it?\n(B) It sounds fun! I'll try it.\n(C) You can play the piano on the screen.\n(D) Did you hear about the new app for learning piano?",
+        "explanation": "피아노를 배우는 새로운 앱에 대해 알고 있는지 묻는 (D), 모른다고 답하며 그것이 무엇인지 묻는 (A), 그 앱에 대해 구체적으로 설명하는 (C), 그 앱을 흥미로워하며 해 봐야겠다고 말하는 (B)로 이어지는 것이 자연스럽다."
+      },
+      {
+        "type": "multi_choice",
+        "answer": "4, 5",
+        "number": 8,
+        "options": [
+          "How do you like \"Chat Together\"?",
+          "What about using \"Chat Together\"?",
+          "Why don't you use \"Chat Together\"?",
+          "Did you hear about \"Chat Together\"?",
+          "Do you know about \"Chat Together\"?"
+        ],
+        "question": "다음 대화의 빈칸에 들어갈 말로 알맞은 것을 모두 고르면?\nG: I'm not sure how to start my science group project.\nB: ____________________________________________\nG: No, what is it?\nB: It's an app for group chat. With this app, you can easily share ideas with your group.\nG: That sounds very helpful!",
+        "explanation": "과학 모둠 프로젝트를 어떻게 시작해야 할지 모르겠다는 소녀의 말에 대한 답변이며, 뒤에서 소녀가 모른다고 답하며 그것이 무엇인지 묻고 있으므로 어떤 앱에 대해 알고 있는지 묻는 표현인 ④와 ⑤가 적절하다."
+      },
+      {
+        "answer": "5",
+        "number": 9,
+        "options": [
+          "A: Did you hear about digital literacy?\nB: No, I didn't. What is it?",
+          "A: Let's go to the theater today.\nB: Sorry, I need to finish my homework for tomorrow.",
+          "A: You know about digital citizenship, don't you?\nB: Sure. It is about using the Internet safely, kindly, and responsibly.",
+          "A: We'll have no exam this semester!\nB: Hmm, I can't believe it. We need to check the facts.",
+          "A: Did you hear about the apps for checking fake news?\nB: Of course. What do they do?"
+        ],
+        "question": "다음 중 짝지어진 대화가 어색한 것은?",
+        "explanation": "A가 가짜 뉴스를 확인해주는 앱에 대해 들어봤는지 묻자, B가 들어봤다고 답한 후에 그게 뭘 하는지 기능을 묻는 것은 어색한 흐름이다. 'No, I didn't.'로 고쳐야 한다."
+      },
+      {
+        "answer": "4",
+        "number": 10,
+        "options": [
+          "ⓐ",
+          "ⓑ",
+          "ⓒ",
+          "ⓓ",
+          "ⓔ"
+        ],
+        "question": "Grong: a school news reporter\nAcky: a curious student\n\nStudent 1: You know what? Next week, our lunch is going to be all chocolate!\nStudent 2: Yes, that's right. Chocolate fries, chocolate burgers, and chocolate salads.\nGrong: Well, everyone is talking about the chocolate menu. But doesn't the news sound ⓐstrange? I need ⓑto check this out.\nAcky: Yes, Grong. You are a school news reporter. You have ⓒto write a true story about this.\nGrong: News that ⓓcause strong feelings can be fake. Why don't we ⓔlook into it together, Acky?\nAcky: That's a good idea.\n\n윗글의 밑줄 친 ⓐ~ⓔ 중, 어법상 어색한 것은?",
+        "explanation": "cause → causes (주격 관계대명사 that이 이끄는 관계사절의 동사로, 선행사 News는 단수 취급되므로 단수동사 causes 필요)"
+      },
+      {
+        "answer": "4",
+        "number": 11,
+        "options": [
+          "Why Do Students Like Chocolate?",
+          "A School News Reporter's Right",
+          "How to Make Chocolate Foods",
+          "Is the News Real or Fake?",
+          "Creative Chocolate Foods"
+        ],
+        "question": "윗글의 제목으로 알맞은 것은?",
+        "explanation": "Grong과 Acky는 학교에 초콜릿 점심 메뉴가 나온다는 뉴스가 좀 이상하다고 생각하고 그 진위를 조사해 보기로 했으므로 글의 제목으로 '그 뉴스는 진짜일까 아니면 가짜일까?'가 적절하다."
+      },
+      {
+        "answer": "the students' lunch is going to be all chocolate next week",
+        "number": 12,
+        "question": "윗글을 읽고 다음 질문에 대한 알맞은 대답이 되도록 빈칸을 완성하시오.\n<조건>\n• the students'를 사용할 것\n• 시간의 부사구를 문장 맨 끝에 쓸 것\n• 빈칸에 11단어를 쓸 것\n\nQ. What is the rumor in the school?\n→ The rumor is that _________________________________\n_____________________________________.  ※ 완전한 문장으로 쓰시오.",
+        "explanation": "그 소문은 다음 주에 학생들의 점심이 전부 초콜릿이라는 것이다."
+      },
+      {
+        "answer": "3",
+        "number": 13,
+        "options": [
+          "(A)",
+          "(B)",
+          "(C)",
+          "(D)",
+          "(E)"
+        ],
+        "question": "다음 글의 (A)~(E) 중, 주어진 문장이 들어갈 알맞은 곳은?\n\n주어진 문장: By the way, are those photos real?\n\nAcky: Let's see. Where did this rumor start?\nGrong: This type of news usually has an online source. We need to search online with our smartphones! (A) Look, here are many photos of chocolate burgers and fries. (B) They come from the social media sites that are popular among our school students!\nAcky: Exactly. We need to be careful about news on social media — it's not always reliable! (C) Fake news often copies images.\nGrong: Let's check them out. (D) We can upload the images to a reverse image search engine and find their original source. (E)",
+        "explanation": "Grong이 사진들을 발견한 후 (B 이후), Acky가 그 사진들이 진짜인지 묻는 것이 자연스러우며, 그 다음에 Grong이 검색해보자고 말하는 것으로 이어진다."
+      },
+      {
+        "type": "multi_choice",
+        "answer": "4, 5",
+        "number": 14,
+        "options": [
+          "She wore a wig to fool her friends.",
+          "Don't try to fool me with your lies.",
+          "The fake news fooled many people.",
+          "Only a fool would believe that story.",
+          "I felt like a fool when I made a mistake."
+        ],
+        "question": "Acky: Ah, these photos are from a food fair! Someone who stole them is trying to (A)fool us!\nGrong: You are right. The news seems fake. But we need to check different sources once more.\nAcky: Then, let's ask the cafeteria manager about it through the live chat.\nAcky: Hello, Mr. Aristo. There are rumors about a chocolate menu for next week. Are they true?\nMr. Aristo: No, there's no chocolate on our menu next week. But guess what? Every year around this time, I hear stories like this.\n\n윗글의 밑줄 친 (A)fool과 뜻이 다른 것을 모두 고르면?",
+        "explanation": "지문의 (A)는 '속이다'라는 뜻의 동사이나, ④와 ⑤의 fool은 '어리석은 사람'이라는 뜻의 명사이므로 뜻이 다르다."
+      },
+      {
+        "type": "multi_choice",
+        "answer": "4, 5",
+        "number": 15,
+        "options": [
+          "Acky finds out the original source of the photos.",
+          "Acky thinks that someone stole the images to trick the students.",
+          "Grong wants to check more than one source to make sure that the news is true.",
+          "Acky writes an email to Mr. Aristo to check the rumors about a chocolate menu.",
+          "Mr. Aristo says that the menu for next week includes one type of chocolate food."
+        ],
+        "question": "윗글의 내용과 일치하지 않는 것을 모두 고르면?",
+        "explanation": "④ Acky가 실시간 채팅으로 Aristo 선생님에게 연락했으므로 이메일이 아니다. ⑤ Aristo 선생님은 다음 주에 초콜릿 메뉴가 없다고 했다."
+      },
+      {
+        "answer": "5",
+        "number": 16,
+        "options": [
+          "them, who, are",
+          "it, who, is",
+          "them, which, are",
+          "it, which, are",
+          "it, which, is"
+        ],
+        "question": "Grong: Ah, this fake news is not actually 'new' this time.\nAcky: Why do we have (A)[them / it] every year?\nGrong: We can look up similar news and try to guess.\nAcky: Oh, there are many similar stories (B)[who / which] celebrate Spring Joke Day and most of them come from humor websites.\nGrong: Now I get it. Next week, it'll be Spring Joke Day! Every Spring Joke Day, we get similar rumors! We need to be extra careful during the joke season.\nThe next day...\nSchool News\nThe Truth About Our Cafeteria Rumor\nBy Grong\nNo Chocolate on the Menu Next Week!\nThe fake news about the chocolate foods (C)[are / is] a trick for Spring Joke Day!\n↳ Oops! I already shared this story.\n\n윗글의 괄호 (A), (B), (C)에서 어법상 알맞은 말로 바르게 연결된 것은?",
+        "explanation": "(A) it (앞의 이야기를 가리키는 단수대명사) (B) which (선행사가 사물) (C) is (선행사 fake news는 단수)"
+      },
+      {
+        "answer": "careful, fake",
+        "number": 17,
+        "question": "윗글의 요지를 다음과 같이 쓸 때 빈칸에 들어갈 알맞은 말을 찾아 쓰시오.\n\nWe should be more ____________ about ____________ news during the joke season.  ※ 완전한 문장으로 쓰시오.",
+        "explanation": "장난이 많은 시기에는 가짜 뉴스에 대해 더 조심해야 한다."
+      },
+      {
+        "answer": "3",
+        "number": 18,
+        "options": [
+          "ⓐ",
+          "ⓑ",
+          "ⓒ",
+          "ⓓ",
+          "ⓔ"
+        ],
+        "question": "Acky: Let's see. Where did this rumor start?\nGrong: This type of news usually has an online source. We need to search online with our smartphones! Look, here ⓐis many photos of chocolate burgers and fries. They come from the social media sites that ⓑis popular among our school students!\nAcky: Exactly. We need to be careful about news on social media — it's not always reliable! By the way, are those photos real? Fake news often copies images.\nGrong: Let's check ⓒthem out. We can upload the images to a reverse image search engine and find their original source.\nAcky: Ah, these photos are from a food fair! Someone ⓓwhich stole them is trying to fool us!\nGrong: You are right. The news seems ⓔfake. But we (A)________________________________________.\nAcky: Then, let's ask the cafeteria manager about it through the live chat.\n\n윗글의 밑줄 친 ⓐ~ⓔ 중, 어법상 알맞은 것을 모두 고르면?",
+        "explanation": "ⓐ is → are (주어가 복수), ⓑ is → are (선행사가 복수), ⓒ them은 올바름 (구동사 check out의 목적어), ⓓ which → who (선행사가 사람), ⓔ fake는 올바름 (형용사)"
+      },
+      {
+        "answer": "3",
+        "number": 19,
+        "options": [
+          "should ignore the news",
+          "need not look into it anymore",
+          "need to check different sources once more",
+          "have to post the truth on the school website",
+          "don't need to share the photos with other students"
+        ],
+        "question": "윗글의 빈칸 (A)에 들어갈 말로 알맞은 것은?",
+        "explanation": "가짜 같으나 다른 확인이 더 필요하다는 흐름으로 '한 번 더 다른 출처를 확인할 필요가 있어'가 적절하다."
+      },
+      {
+        "answer": "there are many similar stories which[that] celebrate Spring Joke Day",
+        "number": 20,
+        "question": "윗글의 밑줄 친 (B)의 우리말을 주어진 <조건>에 알맞게 영작하시오.\n\n(B)'봄 장난의 날'을 기념하는 많은 유사한 이야기들이 있어\n\n<조건>\n• 'there+be동사' 구문을 어법에 맞게 사용할 것\n• 적절한 주격 관계대명사를 사용할 것\n• <보기>의 단어 및 표현을 사용할 것 (필요시 변형할 것)\n• 10단어로 영작할 것\n\n<보기>\nsimilar, celebrate, story, Spring Joke Day, many  ※ 완전한 문장으로 쓰시오.",
+        "explanation": "'~이 있다'라는 뜻의 'there+be동사+주어' 구문을 사용하고, many similar stories를 선행사로 하는 관계사절을 만든다."
+      },
+      {
+        "answer": "5",
+        "number": 21,
+        "options": [
+          "to announce Spring Joke Day events",
+          "to promote new kinds of chocolate food",
+          "to prevent students from making fake news",
+          "to explain how to use a reverse image search engine",
+          "to emphasize the importance of checking the truth when the news seems fake"
+        ],
+        "question": "윗글의 목적으로 알맞은 것은?",
+        "explanation": "Grong과 Acky가 소문의 진위를 조사해 확인하고 이를 기사로 나타낸 내용이므로, 글의 목적은 뉴스가 가짜인 것처럼 보일 때 그 진실을 확인하는 것의 중요성을 강조하는 것이다."
+      },
+      {
+        "answer": "2",
+        "number": 22,
+        "options": [
+          "What does Grong use to find the original source of the photos of chocolate foods?",
+          "When did the rumor about the chocolate menu start?",
+          "Where do the photos of chocolate foods actually come from?",
+          "How does Acky talk to the cafeteria manager?",
+          "During which season should we be extra careful about fake news?"
+        ],
+        "question": "윗글을 읽고 답할 수 없는 질문은?",
+        "explanation": "Acky와 Grong은 어디에서 초콜릿 메뉴에 대한 소문이 시작되었는지 추적하고 있으나 언제 그 소문이 시작되었는지에 대해서는 언급이 없다."
+      },
+      {
+        "type": "multi_choice",
+        "answer": "1, 5",
+        "number": 23,
+        "options": [
+          "The bag that lay on the bench is hers.",
+          "I heard that the new movie is very exciting.",
+          "The news was that our team won the game.",
+          "We learned that the earth goes around the sun.",
+          "There are many people that use AI programs to learn English."
+        ],
+        "question": "Acky: Let's see. Where did this rumor start?\nGrong: This type of news usually has an online source. We need to search online with our smartphones! Look, here are many photos of chocolate burgers and fries. They come from the social media sites (A)that are popular among our school students!\nAcky: Exactly. We need to be careful about news on social media — it's not always reliable! By the way, are those photos real? Fake news often copies images.\nGrong: Let's check them out. We can upload the images to a reverse image search engine and find their original source.\n\n윗글의 밑줄 친 (A)that과 쓰임이 같은 것을 모두 고르면?",
+        "explanation": "밑줄 친 (A)의 that은 주어가 없는 불완전한 절을 이끌어 선행사를 수식하는 주격 관계대명사이다. 마찬가지로 ①과 ⑤의 that도 주격 관계대명사로 쓰였다."
+      },
+      {
+        "answer": "Because it's not always reliable.",
+        "number": 24,
+        "question": "윗글을 읽고 다음 질문에 대한 답을 <조건>에 알맞게 쓰시오.\n\nQ. According to Acky, why should they be careful about news on social media?\n\n<조건>\n• Because로 시작할 것\n• 5단어의 완전한 문장으로 쓸 것  ※ 완전한 문장으로 쓰시오.",
+        "explanation": "Acky에 따르면 소셜 미디어의 뉴스는 항상 믿을 수 있는 것이 아니기 때문에 조심해야 한다.",
+        "acceptedAnswers": [
+          "Because it's not always reliable"
+        ]
+      },
+      {
+        "answer": "chocolate, social media sites, copies, original",
+        "number": 25,
+        "question": "윗글을 다음과 같이 요약하고자 할 때, 빈칸에 들어갈 알맞은 말을 각각 본문에서 찾아 쓰시오. (각 빈칸에 한 단어씩 쓸 것)\n\nGrong and Acky discover that the photos of _____________ foods on popular _____________ _____________ _____________ are the start of the rumor. Because fake news often _____________ images, they decide to find the _____________ source of the photos with a reverse search engine.",
+        "explanation": "Grong과 Acky는 인기 있는 소셜 미디어 사이트들에 있는 초콜릿 음식 사진들이 소문의 시작인 것을 발견한다. 가짜 뉴스는 종종 이미지를 복사하기 때문에, 그들은 이미지 검색 엔진을 이용해 사진의 원래 출처를 찾기로 결정한다."
+      },
+      {
+        "answer": "3",
+        "number": 26,
+        "options": [
+          "real, forget",
+          "fake, examine",
+          "real, examine",
+          "fake, forget",
+          "true, ignore"
+        ],
+        "question": "다음 글을 아래와 같이 요약할 때, 빈칸 (A), (B)에 들어갈 말로 알맞게 연결된 것은?\n\nStudent 1: You know what? Next week, our lunch is going to be all chocolate!\nStudent 2: Yes, that's right. Chocolate fries, chocolate burgers, and chocolate salads.\nGrong: Well, everyone is talking about the chocolate menu. But doesn't the news sound strange? I need to check this out.\nAcky: Yes, Grong. You are a school news reporter. You have to write a true story about this.\nGrong: News that causes strong feelings can be fake. Why don't we look into it together, Acky?\nAcky: That's a good idea.\n\nGrong thinks that the rumor about the chocolate menu cannot be (A)_________ because it causes strong emotions. So Grong decides to (B)_________ it with Acky.",
+        "explanation": "Grong은 초콜릿 메뉴에 대한 소문이 강한 감정을 불러일으키기 때문에 진짜일 리가 없다고 생각하며, Acky와 함께 그것을 조사하기로 결정한다."
+      },
+      {
+        "type": "multi_choice",
+        "answer": "3, 5",
+        "number": 27,
+        "options": [
+          "Grong and Acky experience this fake news about a chocolate menu for the first time this year.",
+          "Every year, similar fake news starts from school websites.",
+          "Grong finds out that the rumor about chocolate foods is a trick for Spring Joke Day.",
+          "There is an article on the local news about the fake rumor.",
+          "A student already shared this fake news before checking the truth."
+        ],
+        "question": "다음 글의 내용과 일치하는 것을 모두 고르면?\n\nGrong: Ah, this fake news is not actually 'new' this time.\nAcky: Why do we have it every year?\nGrong: We can look up similar news and try to guess.\nAcky: Oh, there are many similar stories which celebrate Spring Joke Day and most of them come from humor websites.\nGrong: Now I get it. Next week, it'll be Spring Joke Day! Every Spring Joke Day, we get similar rumors! We need to be extra careful during the joke season.\nThe next day...\nSchool News\nThe Truth About Our Cafeteria Rumor\nBy Grong\nNo Chocolate on the Menu Next Week!\nThe fake news about the chocolate foods is a trick for Spring Joke Day!\n↳ Oops! I already shared this story.",
+        "explanation": "③ Grong은 초콜릿 음식에 대한 소문이 '봄 장난의 날'을 위한 장난인 것을 알아낸다. ⑤ Grong이 쓴 기사 댓글로 한 학생이 이미 이 이야기를 공유했다고 쓰고 있다."
+      }
+    ],
+    "answer_key": [
+      "4",
+      "5",
+      "3",
+      "2, 4",
+      "4",
+      "3",
+      "5",
+      "4, 5",
+      "5",
+      "4",
+      "4",
+      "the students' lunch is going to be all chocolate next week",
+      "3",
+      "4, 5",
+      "4, 5",
+      "5",
+      "careful, fake",
+      "3",
+      "3",
+      "there are many similar stories which[that] celebrate Spring Joke Day",
+      "5",
+      "2",
+      "1, 5",
+      "Because it's not always reliable.",
+      "chocolate, social media sites, copies, original",
+      "3",
+      "3, 5"
+    ]
+  },
+  "step3_a3e5c36f-7f2d-482a-9bd0-f3ccbbf69d0a": {
+    "questions": [
+      {
+        "answer": "5",
+        "number": 1,
+        "options": [
+          "safe : safely = actual : actually",
+          "truth : true = curiosity : curious",
+          "report : reporter = manage : manager",
+          "protect : protection = celebrate : celebration",
+          "reliable : trustworthy = responsible : irresponsible"
+        ],
+        "question": "다음 중 짝지어진 단어의 관계가 어색한 것은?",
+        "explanation": "⑤는 '믿을 수 있는 : 믿을 수 있는' 유의어 관계 ≠ '책임이 있는 : 무책임한' 반의어 관계입니다. ①은 형용사-부사 관계, ②는 명사-형용사 관계, ③은 동사-(사람) 명사 관계, ④는 동사-명사 관계입니다."
+      },
+      {
+        "answer": "3",
+        "number": 2,
+        "options": [
+          "Every __________ has the right to vote.",
+          "Do you know the __________ of this news?",
+          "A bad __________ spread quickly through the town.",
+          "Students can learn about different jobs at the career __________.",
+          "We planned a __________ for April Fool's Day."
+        ],
+        "question": "다음 중 <보기>의 단어가 들어갈 수 없는 것은? <보기> source, trick, humor, citizen, fair",
+        "explanation": "③의 '나쁜 소문이 마을 전체에 빠르게 퍼졌다.'라는 흐름으로 빈칸에는 '소문'이라는 뜻의 rumor 같은 명사가 들어가야 자연스러우며, <보기>의 '유머, 농담'이라는 뜻의 명사 humor가 들어갈 문장이 없습니다."
+      },
+      {
+        "answer": "5",
+        "number": 3,
+        "options": [
+          "You should look up the word in the dictionary. / The girl looked up at the stars in the night sky.",
+          "She decided to fake a illness to avoid the test. / We use fake money for the board game.",
+          "The boy has many original ideas for the project. / The original plan was to go to the beach.",
+          "He made copies of the photos for his family. / Please copy both sides of the paper.",
+          "He was hungry, so he stole a piece of bread. / A thief tried to steal the woman's bag."
+        ],
+        "question": "다음 밑줄 친 단어가 같은 의미로 쓰인 것은?",
+        "explanation": "⑤의 'steal'은 둘 다 '훔치다'라는 뜻의 동사로 같은 의미로 쓰였습니다. ①은 '찾아보다'와 '올려다보다', ②는 '~인 체하다'와 '가짜의', ③은 '독창적인'과 '원래의', ④는 '복사(본)'과 '복사하다'로 다른 의미입니다."
+      },
+      {
+        "answer": "1",
+        "number": 4,
+        "options": [
+          "ⓐ, ⓒ",
+          "ⓑ, ⓕ",
+          "ⓓ, ⓔ",
+          "ⓐ, ⓑ, ⓒ",
+          "ⓓ, ⓔ, ⓕ"
+        ],
+        "question": "다음 중 밑줄 친 that의 쓰임이 같은 것을 모두 골라 짝지은 것은?",
+        "explanation": "ⓐ와 ⓒ는 모두 주어가 없는 불완전한 절을 이끌어 선행사를 수식하는 주격 관계대명사입니다. ⓑ는 지시형용사, ⓓ는 지시대명사, ⓔ와 ⓕ는 명사절 접속사입니다."
+      },
+      {
+        "answer": "4",
+        "number": 5,
+        "options": [
+          "ⓐ, ⓒ",
+          "ⓑ, ⓕ",
+          "ⓓ, ⓔ",
+          "ⓐ, ⓒ, ⓔ",
+          "ⓓ, ⓔ, ⓕ"
+        ],
+        "question": "위 대화의 밑줄 친 (A)와 바꾸어 쓸 수 있는 것을 모두 골라 짝지은 것은?",
+        "explanation": "밑줄 친 (A) 'Did you hear about our summer vacation?'은 '우리 여름 방학에 대해 들었어?'라는 뜻으로, ⓐ '우리 여름 방학에 대해 알고 있니(인지하고 있니)?', ⓒ '우리 여름방학에 대해 들어본 적 있어?', ⓔ '우리 여름방학에 대한 뉴스를 알고 있니?'가 바꾸어 쓸 수 있습니다."
+      },
+      {
+        "answer": "3, 5",
+        "number": 6,
+        "options": [
+          "㉠",
+          "㉡",
+          "㉢",
+          "㉣",
+          "㉤"
+        ],
+        "question": "위 대화를 다음과 같이 요약할 때, 밑줄 친 ㉠~㉤ 중, 알맞지 않은 것을 모두 고르면?",
+        "explanation": "소녀는 긴 여름방학에 대한 소식을 확인하기 위해 학교 웹사이트를 확인할 필요가 있다고 하였으므로 ㉢ '학급 게시판'은 대화의 내용과 일치하지 않습니다. 또한 담임 선생님께 여쭤보는 것을 제안하고 내일 같이 교무실에 가기로 했으므로 ㉤ '학급 반장'도 대화의 내용과 일치하지 않습니다."
+      },
+      {
+        "answer": "2",
+        "number": 7,
+        "options": [
+          "to advertise a new digital device",
+          "to give advice on being a good digital citizen",
+          "to explain the importance of protecting personal information",
+          "to introduce popular websites for good digital citizens",
+          "to complain about the bad manners of some Internet users"
+        ],
+        "question": "다음 담화의 목적으로 알맞은 것은?",
+        "explanation": "디지털 시민의식을 정의하고 좋은 디지털 시민이 되기 위해 따라야 할 규칙들을 설명하고 있으므로, 글의 목적으로 '좋은 디지털 시민이 되는 것에 대해 조언하기 위해'가 적절합니다."
+      },
+      {
+        "answer": "4",
+        "number": 8,
+        "options": [
+          "ⓐ, ⓑ",
+          "ⓒ, ⓔ",
+          "ⓓ, ⓔ",
+          "ⓐ, ⓑ, ⓒ",
+          "ⓑ, ⓓ, ⓔ"
+        ],
+        "question": "다음 대화의 빈칸에 들어갈 말로 알맞은 것을 모두 골라 짝지은 것은?",
+        "explanation": "소년이 믿기지 않으며 뒤에서 학교 홈페이지를 확인하자고 말하므로 빈칸에는 '~해야 한다'라는 뜻의 'should+동사원형', 'have+to부정사', 'need+to부정사'가 들어갑니다. ⓐ, ⓑ, ⓒ가 적절합니다."
+      },
+      {
+        "answer": "Because she can easily share ideas with her group by using the app.",
+        "number": 9,
+        "question": "다음 대화를 읽고 아래 질문에 대한 답을 <조건>에 알맞게 쓰시오.\n\nG: I'm not sure how to start my science group project.\nB: Did you hear about \"Chat Together\"?\nG: No, what is it?\nB: It's an app for group chat. With this app, you can easily share ideas with your group.\nG: That sounds very helpful!\n\nQ. Why does the boy think the app \"Chat Together\" is good for the girl?\n\n<조건>\n• Because로 시작할 것\n• she, with, by, use, the app을 차례대로 사용할 것 (필요시 변형할 것)\n• 13단어로 쓸 것",
+        "explanation": "이 앱을 사용함으로써 그녀는 그녀의 모둠원들과 아이디어를 쉽게 공유할 수 있기 때문입니다. ※ 완전한 문장으로 쓰시오.",
+        "acceptedAnswers": [
+          "Because she can easily share ideas with her group by using the app"
+        ]
+      },
+      {
+        "answer": "4",
+        "number": 10,
+        "options": [
+          "ⓐ: being → be",
+          "ⓑ: strangely → strange",
+          "ⓒ: writing → write",
+          "ⓓ: what → who",
+          "ⓔ: them → it"
+        ],
+        "question": "Student 1: You know what? Next week, our lunch is going to ⓐbeing all chocolate!\nStudent 2: Yes, that's right. Chocolate fries, chocolate burgers, and chocolate salads.\nGrong: Well, everyone is talking about the chocolate menu. But doesn't the news sound ⓑstrangely?\nI need to check this out.\nAcky: Yes, Grong. You are a school news reporter. You have to ⓒwriting a true story about this.\nGrong: News ⓓwhat causes strong feelings can be fake. Why don't we look into ⓔthem together, Acky?\nAcky: That's a good idea.\n\n윗글의 밑줄 친 ⓐ~ⓔ 중, 어색한 부분을 바르게 고치지 못한 것은?",
+        "explanation": "ⓓ what → that 또는 which가 정답입니다. 주어가 없는 불완전한 절(causes strong feelings)을 이끌어, 선행사 News를 수식하는 관계사절을 이루어야 하므로 주격 관계대명사가 와야 합니다. 선행사 News는 사물이므로 what을 that으로 고치거나 which로 고쳐야 합니다."
+      },
+      {
+        "answer": "5",
+        "number": 11,
+        "options": [
+          "the improvement of the school lunch menu",
+          "the ways to write a good news article",
+          "the effects of chocolate on our health",
+          "the process of spreading fake news",
+          "the suspicious school news"
+        ],
+        "question": "윗글의 주제로 알맞은 것은?",
+        "explanation": "다음 주에 점심이 전부 초콜릿으로 나온다는 소문을 Grong은 이상하다고 생각하고 가짜 뉴스인지 확인해 보기로 결정하는 내용이므로 글의 주제로 '의심스러운 학교 뉴스'가 적절합니다."
+      },
+      {
+        "answer": "3",
+        "number": 12,
+        "options": [
+          "T-T-F",
+          "T-F-T",
+          "T-F-F",
+          "F-F-T",
+          "F-F-F"
+        ],
+        "question": "윗글의 내용과 (A)~(C)가 일치하면 T, 일치하지 않으면 F를 쓸 때, 순서대로 연결된 것은?\n\n(A) Many students believe that they will have chocolate burgers and salads next week. (T/F)\n(B) Grong thinks the news about a chocolate menu is true because everyone is talking about it. (T/F)\n(C) Acky does not agree to check the news about chocolate food. (T/F)",
+        "explanation": "(A) 많은 학생들이 다음 주에 초콜릿 버거와 샐러드를 먹게 될 것이라고 믿는다. (T) 일치\n(B) Grong은 모든 사람이 이야기하고 있기 때문에 초콜릿 메뉴에 관한 뉴스가 진짜라고 생각한다. (F) 불일치 - 모든 사람이 이야기 하고 있음에도 초콜릿 메뉴에 관한 뉴스가 진짜인지 의심합니다.\n(C) Acky는 초콜릿 음식에 관한 뉴스를 확인하는 것에 동의하지 않는다. (F) 불일치 - 동의합니다."
+      },
+      {
+        "answer": "3",
+        "number": 13,
+        "options": [
+          "1개",
+          "2개",
+          "3개",
+          "4개",
+          "5개"
+        ],
+        "question": "다음 글을 읽고 물음에 답하시오.\n\nAcky: Ah, these photos are from a food fair! Someone who stole them ⓐare trying to fool us!\nGrong: You are right. The news seems fake. But we need to check different sources once more.\nAcky: Then, let's ⓑasking the cafeteria manager about it through the live chat.\nAcky: Hello, Mr. Aristo. There ⓒare rumors about a chocolate menu for next week. Are they true?\nMr. Aristo: No, there's no chocolate on our menu next week. But guess what? Every year around this time, I hear stories like this.\nGrong: Ah, this fake news is not actually 'new' this time.\nAcky: Why do we have ⓓit every year?\nGrong: We can look up similar news and try ⓔto guess.\nAcky: Oh, there are many similar stories which celebrate Spring Joke Day and most of them come from humor websites.\nGrong: Now I get it. Next week, it'll be Spring Joke Day! Every Spring Joke Day, we get similar rumors! We need ⓕbeing extra careful during the joke season.\n\n윗글의 밑줄 친 ⓐ~ⓕ 중, 어법상 어색한 것의 개수는?",
+        "explanation": "어법상 어색한 것은 ⓐ(are→is), ⓑ(asking→ask), ⓕ(being→to be) 총 3개입니다."
+      },
+      {
+        "answer": "come from humor websites to celebrate Spring Joke Day",
+        "number": 14,
+        "question": "다음 글을 읽고 다음 질문에 알맞은 대답이 되도록 주어진 <조건>에 맞게 빈칸을 완성하시오.\n\nAcky: Ah, these photos are from a food fair! Someone who stole them are trying to fool us!\nGrong: You are right. The news seems fake. But we need to check different sources once more.\nAcky: Then, let's ask the cafeteria manager about it through the live chat.\nAcky: Hello, Mr. Aristo. There are rumors about a chocolate menu for next week. Are they true?\nMr. Aristo: No, there's no chocolate on our menu next week. But guess what? Every year around this time, I hear stories like this.\nGrong: Ah, this fake news is not actually 'new' this time.\nAcky: Why do we have it every year?\nGrong: We can look up similar news and try to guess.\nAcky: Oh, there are many similar stories which celebrate Spring Joke Day and most of them come from humor websites.\nGrong: Now I get it. Next week, it'll be Spring Joke Day! Every Spring Joke Day, we get similar rumors! We need being extra careful during the joke season.\n\nQ. Why do Grong and Acky think similar rumors appear every year?\n\n<조건>\n• 부사적 용법의 to부정사를 사용할 것\n• come, celebrate를 사용할 것\n• 빈칸에 9단어로 쓸 것\n\n→ Because most of the similar stories ______________\n______________________________________________________.",
+        "explanation": "대부분의 비슷한 이야기들이 '봄 장난의 날'을 기념하기 위해 유머 사이트로부터 나오기 때문입니다. ※ 완전한 문장으로 쓰시오."
+      },
+      {
+        "answer": "3, 4",
+        "number": 15,
+        "options": [
+          "ⓐ: '보통, 대개'라는 뜻의 빈도부사이므로 일반동사 has 앞에 위치한다.",
+          "ⓑ: the social media sites를 선행사로 하는 주격 관계대명사로 which와 바꿔 쓸 수 있다.",
+          "ⓒ: '그것은 항상 믿을 수 없다.'라는 뜻이다.",
+          "ⓓ: check out them으로 바꿔 쓸 수 있다.",
+          "ⓔ: 조동사 can에 이어지는 동사원형 upload와 접속사 and에 의해 병렬구조를 이루는 동사원형이다."
+        ],
+        "question": "다음 글을 읽고 물음에 답하시오.\n\nAcky: Let's see. Where did this rumor start?\nGrong: This type of news ⓐusually has an online source. We need to search online with our smartphones! Look, here are many photos of chocolate burgers and fries. They come from the social media sites ⓑthat are popular among our school students!\nAcky: Exactly. We need to be careful about news on social media — ⓒit's not always reliable! By the way, are those photos real? Fake news often copies images.\nGrong: Let's ⓓcheck them out. We can upload the images to a reverse image search engine and ⓔfind their original source.\n\n윗글의 밑줄 친 ⓐ~ⓔ에 대한 설명으로 알맞지 않은 것을 모두 고르면?",
+        "explanation": "ⓒ '그것은 항상 믿을 수 있는 것은 아니다.'라는 뜻이므로 선택지 ③은 틀렸습니다. ⓓ check out은 '타동사+부사'로 이루어진 구동사이므로, 목적어가 대명사일 때는 반드시 타동사와 부사 사이에 목적어가 위치해야 하므로 check out them으로 바꿀 수 없습니다."
+      },
+      {
+        "answer": "4",
+        "number": 16,
+        "options": [
+          "What do Grong and Acky use to search for an online source of the rumor?",
+          "What photos do Grong and Acky find on social media sites?",
+          "What is Acky's reason for being careful about social media news?",
+          "In what ways does fake news copy images?",
+          "How can Grong find the original source of the photos?"
+        ],
+        "question": "윗글을 읽고 답할 수 없는 질문은?",
+        "explanation": "Acky가 가짜 뉴스가 종종 이미지를 복사한다고 말하고 있으나 어떤 방식으로 복사하는지에 대한 언급은 없으므로 ④ '가짜 뉴스는 어떤 방식들로 이미지를 복사하는가?'는 답할 수 없는 질문입니다."
+      },
+      {
+        "answer": "They come from the social media sites that[which] are popular among our school students!",
+        "number": 17,
+        "question": "다음 글을 읽고 물음에 답하시오.\n\nAcky: Let's see. Where did this rumor start?\nGrong: This type of news usually has an online source. We need to search online with our smartphones! Look, here are many photos of chocolate burgers and fries. (A)그것들은 우리 학교 학생들 사이에 인기 있는 소셜 미디어 사이트들에서 나왔어!\nAcky: Exactly. We need to be careful about news on social media — it's not always reliable! By the way, are those photos real? Fake news often copies images.\nGrong: Let's check them out. We can upload the images to a reverse image search engine and find their original source.\nAcky: Ah, these photos are from a food fair! Someone who stole them is trying to fool us!\nGrong: You are right. The news seems fake. But we need to check different sources once more.\nAcky: Then, let's ask the cafeteria manager about it through the live chat.\nAcky: Hello, Mr. Aristo. There are rumors about a chocolate menu for next week. Are they true?\nMr. Aristo: No, there's no chocolate on our menu next week. But guess what? Every year around this time, I hear stories like this.\n\n윗글의 밑줄 친 (A)의 우리말을 주어진 <조건>에 알맞게 영작하시오.\n\n<조건>\n• 적절한 주격 관계대명사를 사용할 것\n• <보기>의 단어를 사용할 것\n• 14단어의 완전한 문장으로 영작할 것\n\n<보기>\ncome, among, popular, the",
+        "explanation": "※ 완전한 문장으로 쓰시오."
+      },
+      {
+        "answer": "3",
+        "number": 18,
+        "options": [
+          "Differences Between Genuine News and Fake News",
+          "Ask the Teacher: The Best Way to Check News",
+          "How Did We Check the Truth of the News?",
+          "Social Media: The Origin of Fake News",
+          "The Dangers of Creating Fake News"
+        ],
+        "question": "윗글의 제목으로 알맞은 것은?",
+        "explanation": "Grong과 Acky가 소문이 진짜인지를 확인해 가는 과정을 보여주고 있는 내용이므로 글의 제목으로 '우리는 어떻게 뉴스의 진실을 확인했는가?'가 적절합니다."
+      },
+      {
+        "answer": "to ask the cafeteria manger, rumors, chocolate menu, live chat",
+        "number": 19,
+        "question": "윗글을 읽고 다음 질문에 대한 알맞은 대답이 되도록 빈칸을 완성하시오.\n\nAcky: Hello, Mr. Aristo. There are rumors about a chocolate menu for next week. Are they true?\nMr. Aristo: No, there's no chocolate on our menu next week. But guess what? Every year around this time, I hear stories like this.\n\nQ. What is Grong and Acky's another way to confirm that the news is fake?\n\n<조건>\n• to부정사를 사용할 것\n• rumors, menu를 사용하여 각 빈칸에 한 단어씩 쓸 것\n\n→ It's ____________ ____________ ____________ ____________ ____________, Mr. Aristo, about the ____________ about a ____________ ____________ for next week through the ____________ ____________.",
+        "explanation": "그 뉴스가 가짜라는 것을 확인하기 위한 Grong과 Acky의 또 다른 방법은 실시간 채팅을 통해 식당 관리자인 Aristo 선생님께 다음 주 초콜릿 메뉴에 대한 소문에 대해 물어보는 것입니다. ※ 완전한 문장으로 쓰시오."
+      },
+      {
+        "answer": "5",
+        "number": 20,
+        "options": [
+          "Grong and Acky use their laptops to find the online source of the rumor. (F)",
+          "Acky thinks that all news and photos on social media are always reliable. (F)",
+          "The photos of chocolate burgers and fries were originally from a food fair. (T)",
+          "Mr. Aristo tells Grong and Acky that the chocolate menu is a real plan for next week. (F)",
+          "Mr. Aristo says that rumors like the chocolate menu are common around this time every year. (F)"
+        ],
+        "question": "윗글의 내용과 일치하면 T, 일치하지 않으면 F일 때, 알맞지 않은 것은?",
+        "explanation": "⑤ 'Aristo 선생님은 초콜릿 메뉴 같은 소문이 매년 이맘때쯤 흔하다고 말한다.'는 글의 내용과 일치합니다. 따라서 (F)를 (T)로 고쳐야 합니다."
+      },
+      {
+        "answer": "4",
+        "number": 21,
+        "options": [
+          "strange / real / overlook",
+          "ordinary / real / celebrate",
+          "ordinary / fake / celebrate",
+          "strange / fake / celebrate",
+          "strange / fake / overlook"
+        ],
+        "question": "다음 글을 읽고 물음에 답하시오.\n\nStudent 1: You know what? Next week, our lunch is going to be all chocolate!\nStudent 2: Yes, that's right. Chocolate fries, chocolate burgers, and chocolate salads.\nGrong: Well, everyone is talking about the chocolate menu. But doesn't the news sound (A)[strange / ordinary]? I need to check this out.\nAcky: Yes, Grong. You are a school news reporter. You have to write a true story about this.\nGrong: News that causes strong feelings can be fake. Why don't we look into it together, Acky?\nAcky: That's a good idea.\n\nAcky: Let's see. Where did this rumor start?\nGrong: This type of news usually has an online source. We need to search online with our smartphones! Look, here are many photos of chocolate burgers and fries. They come from the social media sites that are popular among our school students!\nAcky: Exactly. We need to be careful about news on social media — it's not always reliable! By the way, are those photos real? Fake news often copies images.\nGrong: Let's check them out. We can upload the images to a reverse image search engine and find their original source.\nAcky: Ah, these photos are from a food fair! Someone who stole them is trying to fool us!\nGrong: You are right. The news seems (B)[real / fake]. But we need to check different sources once more.\nAcky: Then, let's ask the cafeteria manager about it through the live chat.\n\nAcky: Hello, Mr. Aristo. There are rumors about a chocolate menu for next week. Are they true?\nMr. Aristo: No, there's no chocolate on our menu next week. But guess what? Every year around this time, I hear stories like this.\nGrong: Ah, this fake news is not actually 'new' this time.\nAcky: Why do we have it every year?\nGrong: We can look up similar news and try to guess.\nAcky: Oh, there are many similar stories which (C)[overlook / celebrate] Spring Joke Day and most of them come from humor websites.\nGrong: Now I get it. Next week, it'll be Spring Joke Day! Every Spring Joke Day, we get similar rumors! We need to be extra careful during the joke season.\n\n윗글의 괄호 (A), (B), (C)에서 흐름상 알맞은 말로 바르게 연결된 것은?",
+        "explanation": "(A) 모든 사람이 다음 주 점심 메뉴가 모두 초콜릿이라는 소문을 이야기하고 있지만, 그것을 확인해 봐야겠다고 말하므로 'strange(이상한)'. (B) 학생들에게 인기 있는 소셜 미디어 사이트에서 찾은 사진들의 본래 출처가 음식 박람회였으므로 'fake(가짜의)'. (C) 다음 주가 '봄 장난의 날'이며 그때마다 유사한 소문들이 돈다는 내용이므로 'celebrate(기념하다)'."
+      },
+      {
+        "answer": "5",
+        "number": 22,
+        "options": [
+          "Leo, Mina",
+          "Mina, Seojun",
+          "Joy, Jiho",
+          "Leo, Seojun, Jiho",
+          "Seojun, Joy, Jiho"
+        ],
+        "question": "윗글을 읽고 바르게 이해하고 있는 사람을 <보기>에서 모두 골라 짝지은 것은?\n\n<보기>\nLeo: Because news that arouses strong emotions is always false, there's not reason to check its truth.\nMina: Because everyone uses social media today, I think the information there is trustworthy.\nSeojun: Because fake news often steals images, I think we must be careful about photos on social media.\nJoy: To avoid fake news, we should check different sources, like looking up online sources or asking a teacher.\nJiho: During the joke season, we need to look more closely to see if the news is fake.",
+        "explanation": "서준은 가짜 뉴스는 종종 이미지를 도용하기 때문에 소셜 미디어의 사진에 대해 조심해야 한다는 내용이 글과 일치합니다. Joy는 가짜 뉴스를 피하기 위해 온라인 출처 검색이나 선생님께 묻는 것 같이 다양한 출처들을 확인해야 한다는 내용이 글과 일치합니다. 지호는 장난이 많은 시기에 뉴스가 가짜인지 더 자세하게 살필 필요가 있다는 내용이 글과 일치합니다."
+      },
+      {
+        "answer": "5",
+        "number": 23,
+        "options": [
+          "ⓐ, ⓒ",
+          "ⓑ, ⓓ",
+          "ⓒ, ⓔ",
+          "ⓐ, ⓒ, ⓔ",
+          "ⓑ, ⓓ, ⓔ"
+        ],
+        "question": "다음 글을 읽고 물음에 답하시오.\n\nAcky: Let's see. Where did this rumor start?\nGrong: This type of news usually has an online source. We need to search online with our smartphones! Look, here are many photos of chocolate burgers and fries. They come from the social media sites that are popular among our school students!\nAcky: Exactly. We need to be careful about news on social media — it's not always ⓐreliable! By the way, are those photos real? Fake news often copies images.\nGrong: Let's check them out. We can upload the images to a ⓑreverse image search engine and find their ⓒoriginal source.\nAcky: Ah, these photos are from a food fair! Someone who stole them is trying to fool us!\nGrong: You are right. The news seems fake. But we need to check different sources once more.\nAcky: Then, let's ask the cafeteria manager about it through the live chat.\nAcky: Hello, Mr. Aristo. There are rumors about a chocolate menu for next week. Are they true?\nMr. Aristo: No, there's no chocolate on our menu next week. But guess what? Every year around this time, I hear stories like this.\nGrong: Ah, this fake news is not actually 'new' this time.\nAcky: Why do we have it every year?\nGrong: We can ⓓlook up similar news and try to guess.\nAcky: Oh, there are many similar stories which ⓔcelebrate Spring Joke Day and most of them come from humor websites.\nGrong: Now I get it. Next week, it'll be Spring Joke Day! Every Spring Joke Day, we get similar rumors! We need to be extra careful during the joke season.\n\n윗글의 밑줄 친 ⓐ~ⓔ의 영영풀이로 알맞은 것을 모두 골라 짝지은 것은?\n\n<보기> ⓐ unable to be trusted or depended on\nⓑ opposite to the usual way\nⓒ completely new and different from anything\nⓓ to try to find information in a book, on a computer etc.\nⓔ to show that a day or an event is important by doing something special on it",
+        "explanation": "ⓑ reverse는 '반대의: 일반적인 방식과 반대인'. ⓓ look up은 '검색하다: 책, 컴퓨터 등에서 정보를 찾기 위해 애쓰다'. ⓔ celebrate는 '기념하다: 어떤 날 또는 행사에서 특별한 무언가를 함으로써 그것이 중요하다는 것을 보여주다'입니다."
+      },
+      {
+        "answer": "4",
+        "number": 24,
+        "options": [
+          "We should strictly punish people who make fake news.",
+          "News has a strong and fast influence because of social media.",
+          "Fake news is a negative effect of technology development.",
+          "We should accept information wisely by checking its sources.",
+          "We should practice digital citizenship when we use social media."
+        ],
+        "question": "윗글의 시사점으로 알맞은 것은?",
+        "explanation": "온라인 출처를 확인하고, 담당 선생님에게 직접 확인해 초콜릿 메뉴의 소문이 가짜임을 확인하는 내용이므로 글의 시사점으로 '우리는 정보의 출처를 확인함으로써 지혜롭게 정보를 받아들여야 한다.'가 적절합니다."
+      },
+      {
+        "answer": "2",
+        "number": 25,
+        "options": [
+          "Where are the photos of chocolate food from originally?",
+          "What is the specific name of the social media sites that are popular among students?",
+          "Who did Acky and Grong talk to through the live chat?",
+          "What is the truth about next week's cafeteria menu?",
+          "Where do most of the similar fake stories come from?"
+        ],
+        "question": "윗글을 읽고 답할 수 없는 질문은?",
+        "explanation": "초콜릿 버거랑 튀김 사진들이 학교 학생들 사이에 인기 있는 소셜 미디어 사이트에서 나왔다고 했으나 그 사이트들의 구체적인 이름은 언급되지 않았으므로 ② '학생들 사이에 인기 있는 소셜 미디어 사이트들의 구체적인 이름은 무엇인가?'는 답할 수 없는 질문입니다."
+      },
+      {
+        "answer": "look up, tricks, careful, fake",
+        "number": 26,
+        "question": "다음 글을 아래와 같이 요약하고자 할 때, 빈칸에 들어갈 알맞은 말을 각각 찾아 쓰시오. (필요시 변형하고 각 빈칸에 한 단어씩 쓸 것)\n\nGrong: Ah, this fake news is not actually 'new' this time.\nAcky: Why do we have it every year?\nGrong: We can look up similar news and try to guess.\nAcky: Oh, there are many similar stories which celebrate Spring Joke Day and most of them come from humor websites.\nGrong: Now I get it. Next week, it'll be Spring Joke Day! Every Spring Joke Day, we get similar rumors! We need to be extra careful during the joke season.\n\nThe next day...\nSchool News\nThe Truth About Our Cafeteria Rumor\nBy Grong\n\nNo Chocolate on the Menu Next Week!\nThe fake news about the chocolate foods is a trick for Spring Joke Day!\n↳ Oops! I already shared this story.\n\nGrong and Acky _____________ _____________ similar news to find the truth. They find that the rumors were just _____________ for Spring Joke Day and realize that they should be especially _____________ during the joke season. Grong writes a school news report to tell students that the chocolate menu news is _____________.",
+        "explanation": "요약문: Grong과 Acky는 진실을 찾기 위해 비슷한 뉴스들을 검색한다. 그들은 그 소문들이 단지 '봄 장난의 날'을 위한 장난이었다는 것을 발견하고, 장난이 많은 기간 동안에는 특히 조심해야 한다는 것을 깨닫는다. Grong은 학생들에게 초콜릿 메뉴 뉴스가 가짜라는 것을 알리기 위해 학교 신문 기사를 쓴다."
+      },
+      {
+        "answer": "2",
+        "number": 27,
+        "options": [
+          "need to believe every photo on the Internet",
+          "should not trust everything on social media",
+          "have to share the news as fast as possible",
+          "can make our own story on social media",
+          "don't need to check online sources"
+        ],
+        "question": "다음 글의 빈칸에 들어갈 말로 알맞은 것은?\n\nAcky: Let's see. Where did this rumor start?\nGrong: This type of news usually has an online source. We need to search online with our smartphones! Look, here are many photos of chocolate burgers and fries. They come from the social media sites that are popular among our school students!\nAcky: Exactly. We ____________________________________ — it's not always reliable! By the way, are those photos real? Fake news often copies images.\nGrong: Let's check them out. We can upload the images to a reverse image search engine and find their original source.",
+        "explanation": "Grong이 스마트폰을 사용해 학생들에게 인기 있는 소셜 미디어 사이트가 그 소문의 온라인 출처인 것을 확인한 것에 대한 Acky의 말로, 뒤에서 그것은 항상 믿을 수 있는 것은 아니라고 말하고 있으므로 빈칸에는 소셜 미디어에 있는 정보에 대한 불신의 표현이 와야 자연스럽습니다. 따라서 ② '소셜 미디어에 있는 모든 것을 믿어서는 안 돼'가 적절합니다."
+      },
+      {
+        "answer": "(1) doesn't need to go to school (2) needs to care for her puppy",
+        "number": 28,
+        "question": "다음 대화를 읽고 <조건>에 맞게 빈칸에 알맞은 말을 넣어 문장을 완성하시오.\n\n(1)\nA: Why are you in such a hurry?\nB: I woke up too late. I'm late for school.\nA: Kevin, calm down. Today is Sunday.\n→ Kevin _____________ _____________ _____________ _____________ _____________ _____________ because today is Sunday.\n\n(2)\nA: Judy, why don't we go to the ABC mall after school?\nB: I'd love to, but I can't. My puppy is alone.\n→ Judy can't go to the ABC mall because she _____________ _____________ _____________ _____________ _____________ _____________.\n\n<조건>\n• 'need+to부정사'를 어법에 맞게 사용할 것\n• care for, go를 한 번씩 사용할 것\n• 각 빈칸에 한 단어씩 쓸 것",
+        "explanation": "※ 완전한 문장으로 쓰시오.",
+        "acceptedAnswers": [
+          "(1)doesn't need to go to school (2)needs to care for her puppy"
+        ]
+      }
+    ],
+    "answer_key": [
+      "5",
+      "3",
+      "5",
+      "1",
+      "4",
+      "3, 5",
+      "2",
+      "4",
+      "Because she can easily share ideas with her group by using the app.",
+      "4",
+      "5",
+      "3",
+      "3",
+      "come from humor websites to celebrate Spring Joke Day",
+      "3, 4",
+      "4",
+      "They come from the social media sites that[which] are popular among our school students!",
+      "3",
+      "to ask the cafeteria manger, rumors, chocolate menu, live chat",
+      "5",
+      "4",
+      "5",
+      "5",
+      "4",
+      "2",
+      "look up, tricks, careful, fake",
+      "2",
+      "(1) doesn't need to go to school (2) needs to care for her puppy"
+    ]
+  }
+}
