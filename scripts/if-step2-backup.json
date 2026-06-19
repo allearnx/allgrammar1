@@ -1,0 +1,2014 @@
+{
+  "naesin_templates_889bf578-efe4-4c61-bfe9-d11d56931f13": [
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "③",
+      "number": 1,
+      "options": [
+        "① Although",
+        "② Until",
+        "③ If",
+        "④ What",
+        "⑤ So"
+      ],
+      "question": "[빈칸 채우기] 다음 문장의 빈칸에 들어갈 말로 가장 적절한 것은?\n________ you drink enough water every day, your skin will look better.",
+      "explanation": "'만약 ~한다면'의 조건절을 이끄는 접속사는 If입니다. Although(비록), Until(~까지), What(무엇), So(그래서)는 문맥상 적절하지 않습니다."
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "④",
+      "number": 2,
+      "options": [
+        "① go well",
+        "② do good",
+        "③ make better",
+        "④ go bad",
+        "⑤ do fine"
+      ],
+      "question": "[빈칸 채우기] 다음 문장의 빈칸에 들어갈 말로 가장 적절한 것은?\nIf you stay up too late every night, your health will ________.",
+      "explanation": "'go bad'는 '나빠지다'라는 의미로 건강이 악화된다는 문맥에 가장 적절합니다. 'go well'은 '잘 되다', 'do good'은 '좋은 일을 하다'의 의미입니다."
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "⑤",
+      "number": 3,
+      "options": [
+        "① If you miss the bus",
+        "② If you skip lunch",
+        "③ If you fail the test",
+        "④ If you turn left here",
+        "⑤ If you take a cold shower"
+      ],
+      "question": "[빈칸 채우기] 다음 문장의 빈칸에 들어갈 말로 가장 적절한 것은?\n__________________, you will feel refreshed.",
+      "explanation": "'기분이 상쾌해진다'는 결과와 논리적으로 연결되는 조건은 '차가운 샤워를 하면'입니다. 나머지 보기들은 결과와 자연스럽게 연결되지 않습니다."
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "③",
+      "number": 4,
+      "options": [
+        "① so",
+        "② because",
+        "③ if",
+        "④ although",
+        "⑤ unless"
+      ],
+      "question": "[빈칸 채우기] 다음 두 문장의 빈칸에 공통으로 들어갈 말로 가장 적절한 것은?\n• ________ you keep trying, you will succeed.\n• She will call me ________ she arrives at the station.",
+      "explanation": "두 문장 모두 '만약 ~한다면'이라는 조건의 의미가 필요합니다. 'if'가 두 문장 모두에 자연스럽게 들어맞습니다."
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "②",
+      "number": 5,
+      "options": [
+        "① (A) is (B) ride",
+        "② (A) is (B) will ride",
+        "③ (A) will be (B) ride",
+        "④ (A) will be (B) will ride",
+        "⑤ (A) was (B) will ride"
+      ],
+      "question": "[빈칸 채우기] 다음 우리말을 영어로 옮길 때 빈칸 (A), (B)에 들어갈 말로 가장 적절한 것은?\n만약 내일 날씨가 맑으면, 우리는 자전거를 탈 것이다.\n→ If the weather (A)________ clear tomorrow, we (B)________ bikes.",
+      "explanation": "조건절(if절)에는 현재시제를 쓰고, 주절에는 미래시제(will+동사원형)를 씁니다. 따라서 (A)는 is, (B)는 will ride가 적절합니다."
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "④",
+      "number": 6,
+      "options": [
+        "① (A) practice (B) becomes",
+        "② (A) practices (B) becomes",
+        "③ (A) will practice (B) will become",
+        "④ (A) practices (B) will become",
+        "⑤ (A) will practice (B) becomes"
+      ],
+      "question": "[빈칸 채우기] 다음 우리말을 영어로 옮길 때 빈칸 (A), (B)에 들어갈 말로 가장 적절한 것은?\n만약 그녀가 매일 피아노 연습을 한다면, 그녀는 훌륭한 피아니스트가 될 것이다.\n→ If she (A)________ the piano every day, she (B)________ a great pianist.",
+      "explanation": "조건절(if절)에서는 현재시제(practices)를 쓰고, 주절에서는 미래시제(will become)를 씁니다."
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "①",
+      "number": 7,
+      "options": [
+        "① (A) snows (B) will cancel",
+        "② (A) will snow (B) cancel",
+        "③ (A) snowed (B) will cancel",
+        "④ (A) will snow (B) will cancel",
+        "⑤ (A) snow (B) cancel"
+      ],
+      "question": "[빈칸 채우기] 다음 문장의 빈칸 (A), (B)에 들어갈 말로 가장 적절한 것은?\nIf it (A)________ on the weekend, we (B)________ the outdoor concert.",
+      "explanation": "조건절(if절)에는 현재시제(snows)를 쓰고, 주절에는 미래시제(will cancel)를 씁니다."
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "④",
+      "number": 8,
+      "options": [
+        "① after school",
+        "② with her best friend",
+        "③ if she needs books",
+        "④ if she doesn't have a library card",
+        "⑤ when she has free time"
+      ],
+      "question": "[빈칸 채우기] 다음 문장의 빈칸에 들어갈 수 없는 것은?\nMina goes to the library ______________.",
+      "explanation": "'도서관에 간다'는 행동과 '도서관 카드가 없으면'이라는 조건은 논리적으로 모순됩니다. 도서관 카드가 없으면 도서관 이용이 어렵기 때문에 ④는 문장에 들어갈 수 없습니다."
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "①",
+      "number": 9,
+      "options": [
+        "① (A) have (B) won't (C) don't",
+        "② (A) will have (B) will (C) won't",
+        "③ (A) have (B) can (C) won't",
+        "④ (A) to have (B) won't (C) can't",
+        "⑤ (A) will have (B) won't (C) don't"
+      ],
+      "question": "[빈칸 채우기] 다음 문장의 빈칸 (A), (B), (C)에 들어갈 말로 가장 적절한 것은?\n• If I (A)________ time this evening, I will call you.\n• If you drink too much coffee, you (B)________ sleep well.\n• If you (C)________ hurry up, you will miss the train.",
+      "explanation": "(A) 조건절이므로 현재시제 have, (B) 커피를 많이 마시면 잠을 '못 잘 것이다'이므로 won't, (C) Unless가 아닌 If이므로 '서두르지 않으면'을 표현하려면 don't가 적절합니다."
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "④",
+      "number": 10,
+      "options": [
+        "① Study",
+        "② You study",
+        "③ You'll study",
+        "④ If you study",
+        "⑤ If you'll study"
+      ],
+      "question": "[빈칸 채우기] 다음 두 문장이 같은 뜻이 되도록 빈칸에 들어갈 알맞은 말로 가장 적절한 것은?\nStudy hard, and you will pass the exam.\n= ________ hard, you will pass the exam.",
+      "explanation": "'명령문 + and + 주어 + will'은 'If + 주어 + 현재동사'로 바꿔 쓸 수 있습니다. 'Study hard, and you will ~' = 'If you study hard, you will ~'입니다."
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "①",
+      "number": 11,
+      "options": [
+        "① If you sleep regularly, you will be healthier.",
+        "② If you sleep regularly, you will healthier.",
+        "③ If you will sleep regularly, you will be healthier.",
+        "④ If you sleep regularly, you are healthier.",
+        "⑤ You will be healthier if you will sleep regularly."
+      ],
+      "question": "[영작 선택] 다음 우리말을 바르게 영작한 것은?\n만약 네가 규칙적으로 잠을 자면, 너는 더 건강해질 것이다.",
+      "explanation": "조건절(if절)에는 현재시제(sleep)를 쓰고, 주절에는 'will be'를 씁니다. ②는 be동사 누락, ③⑤는 if절에 will 사용 오류, ④는 미래시제가 아닌 현재시제 사용 오류입니다."
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "③",
+      "number": 12,
+      "options": [
+        "① If it do not blow tomorrow, we will fly a kite in the park.",
+        "② If it will not blow tomorrow, we will fly a kite in the park.",
+        "③ If it does not blow tomorrow, we will fly a kite in the park.",
+        "④ We fly a kite in the park if it does not blow tomorrow.",
+        "⑤ We will fly a kite in the park if it will not blow tomorrow."
+      ],
+      "question": "[영작 선택] 다음 우리말과 일치하도록 어법에 맞게 영작한 것은?\n만약 내일 바람이 불지 않는다면, 우리는 공원에서 연을 날릴 것이다.",
+      "explanation": "조건절에서 부정은 'does not + 동사원형'을 씁니다. ①은 'do not'으로 3인칭 단수 오류, ②⑤는 if절에 will 사용 오류, ④는 주절에 미래시제 누락입니다."
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "②",
+      "number": 13,
+      "options": [
+        "① I help you with your homework if you want.",
+        "② I can help you with your homework if you want.",
+        "③ I can help you with your homework if you will want.",
+        "④ I will help you with your homework if you can want.",
+        "⑤ I will help you with your homework if you will want."
+      ],
+      "question": "[영작 선택] 다음 우리말을 바르게 영작한 것은?\n만약 네가 원한다면 나는 너의 숙제를 도와줄 수 있어.",
+      "explanation": "'도와줄 수 있어'는 'can help'로 표현하고, 조건절(if절)에는 현재시제(want)를 씁니다. ③④⑤는 if절에 will 또는 can 사용 오류입니다."
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "①",
+      "number": 14,
+      "options": [
+        "① 만약 내가 복권에 당첨되면 새 집을 살 것이다. → If I win the lottery, I'll buy a new house.",
+        "② 만약 네가 지금 출발하지 않으면 너는 버스를 놓칠 것이다. → If you won't leave now, you'll miss the bus.",
+        "③ 만약 내일 눈이 내린다면, 나는 스키를 타러 갈 것이다. → If it snow tomorrow, I'll go skiing.",
+        "④ 만약 그녀가 열심히 공부하지 않는다면, 그녀는 시험에 떨어질 것이다. → She fails the test if she doesn't study hard.",
+        "⑤ 만약 그가 내일 아침 일찍 일어나지 않는다면, 그는 학교에 지각할 것이다. → He is late for school if he doesn't get up early tomorrow morning."
+      ],
+      "question": "[영작 선택] 다음 중 우리말을 영어로 바르게 옮긴 것은?",
+      "explanation": "①은 if절에 현재시제(win), 주절에 미래시제(will buy)를 올바르게 사용했습니다. ②는 if절에 won't 사용 오류, ③은 snow(3인칭 단수 snows 필요), ④⑤는 주절에 미래시제 누락입니다."
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "②",
+      "number": 15,
+      "options": [
+        "① (A) If (B) will gain",
+        "② (A) Unless (B) will gain",
+        "③ (A) Unless (B) won't gain",
+        "④ (A) If (B) won't gain",
+        "⑤ (A) Unless (B) will lose"
+      ],
+      "question": "[영작 선택] 다음 우리말을 영어로 옮길 때 빈칸 (A), (B)에 들어갈 말로 가장 적절한 것은?\n만약 네가 규칙적으로 운동하지 않는다면, 너는 살이 찔 것이다.\n→ (A)______ you exercise regularly, you (B)______ weight.",
+      "explanation": "'운동하지 않으면'을 Unless를 써서 표현하면 'Unless you exercise'가 되고, '살이 찔 것이다'는 'will gain weight'입니다. Unless = If ~ not이므로 부정의 의미가 포함됩니다."
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "③",
+      "number": 16,
+      "options": [
+        "① If you eat breakfast, you will do better in class.",
+        "② She will come to the party if she finishes her work.",
+        "③ I wonder if he knows the answer.",
+        "④ If it is warm tomorrow, we'll go to the beach.",
+        "⑤ If you turn right, you'll see the post office."
+      ],
+      "question": "[용법 구별] 다음 중 밑줄 친 if의 쓰임이 나머지 넷과 다른 하나는?",
+      "explanation": "③의 if는 '~인지 어떤지'의 의미로 명사절을 이끄는 접속사입니다. 나머지 ①②④⑤의 if는 모두 '만약 ~한다면'의 의미로 조건의 부사절을 이끕니다."
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "②",
+      "number": 17,
+      "options": [
+        "① If the store is open, I'll buy some snacks.",
+        "② Can you check if the door is locked?",
+        "③ We'll go hiking if the weather is nice.",
+        "④ If you need help, just ask me.",
+        "⑤ You will feel better if you take some rest."
+      ],
+      "question": "[용법 구별] 다음 중 밑줄 친 if의 쓰임이 나머지 넷과 다른 하나는?",
+      "explanation": "②의 if는 '~인지 어떤지'를 뜻하는 명사절 접속사로 쓰였습니다. 나머지는 모두 '만약 ~한다면'의 조건의 부사절을 이끄는 접속사입니다."
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "①",
+      "number": 18,
+      "options": [
+        "① I don't know if she will accept the offer.",
+        "② If you practice every day, you will improve.",
+        "③ If he calls me, I'll let you know.",
+        "④ If the bus is late, we'll take a taxi.",
+        "⑤ If you study tonight, you'll do well on the test."
+      ],
+      "question": "[용법 구별] 다음 중 밑줄 친 if의 쓰임이 나머지 넷과 다른 하나는?",
+      "explanation": "①의 if는 '~인지 어떤지'의 명사절을 이끄는 접속사입니다. ②③④⑤의 if는 조건의 부사절을 이끄는 접속사입니다."
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "③",
+      "number": 19,
+      "options": [
+        "① If you hurry, you can catch the train.",
+        "② If she is tired, she should take a break.",
+        "③ He asked me if I wanted some coffee.",
+        "④ If I win first prize, I'll buy a new phone.",
+        "⑤ We'll have a picnic if it doesn't rain."
+      ],
+      "question": "[용법 구별] 다음 중 밑줄 친 if의 쓰임이 나머지 넷과 다른 하나는?",
+      "explanation": "③의 if는 간접의문문으로 '~인지 어떤지'라는 뜻의 명사절을 이끕니다. 나머지는 모두 조건을 나타내는 부사절 접속사입니다."
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "①",
+      "number": 20,
+      "options": [
+        "① I'm not sure if the movie starts at 7.",
+        "② If you are kind, people will like you.",
+        "③ If she sings well, she'll become famous.",
+        "④ If it gets cold, I'll wear a jacket.",
+        "⑤ If you go to bed early, you'll feel energetic."
+      ],
+      "question": "[용법 구별] 다음 중 밑줄 친 if의 쓰임이 나머지 넷과 다른 하나는?",
+      "explanation": "①의 if는 '~인지 어떤지'를 뜻하는 명사절 접속사입니다. ②③④⑤는 '만약 ~한다면'의 조건 부사절 접속사입니다."
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "③",
+      "number": 21,
+      "options": [
+        "① If you mix blue and yellow, you get green.",
+        "② If you read a lot, you'll become smarter.",
+        "③ They told me if the concert was canceled.",
+        "④ If it rains, the match will be postponed.",
+        "⑤ If you eat slowly, you'll enjoy the food more."
+      ],
+      "question": "[용법 구별] 다음 중 밑줄 친 if의 쓰임이 나머지 넷과 다른 하나는?",
+      "explanation": "③의 if는 '~인지 어떤지'라는 명사절을 이끕니다. ①②④⑤의 if는 조건의 부사절을 이끄는 접속사입니다."
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "②",
+      "number": 22,
+      "options": [
+        "① If you lend me the book, I'll return it tomorrow.",
+        "② Do you know if she passed the driving test?",
+        "③ If we leave early, we'll arrive on time.",
+        "④ If you press this button, the machine will start.",
+        "⑤ I'll help you if you need me."
+      ],
+      "question": "[용법 구별] 다음 중 밑줄 친 if의 쓰임이 나머지 넷과 다른 하나는?",
+      "explanation": "②의 if는 '~인지 어떤지'의 의미로 명사절을 이끕니다. 나머지는 '만약 ~한다면'의 조건 부사절입니다."
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "②",
+      "number": 23,
+      "options": [
+        "① If you visit Jeju Island, you'll see beautiful scenery.",
+        "② She wants to know if I can come to her birthday party.",
+        "③ If you save money, you can buy what you want.",
+        "④ If he apologizes, she will forgive him.",
+        "⑤ If it is windy, let's fly a kite."
+      ],
+      "question": "[용법 구별] 다음 중 밑줄 친 if의 쓰임이 나머지 넷과 다른 하나는?",
+      "explanation": "②의 if는 간접의문문으로 '~인지 어떤지'의 명사절을 이끕니다. 나머지는 조건의 부사절 접속사로 쓰였습니다."
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "④",
+      "number": 24,
+      "options": [
+        "① I asked him if he could help me.",
+        "② Tell me if you know the answer.",
+        "③ We're not sure if the shop is still open.",
+        "④ If you listen carefully, you'll understand.",
+        "⑤ She wondered if it would snow today."
+      ],
+      "question": "[용법 구별] 다음 중 밑줄 친 if의 쓰임이 <보기>와 같은 것은?\n<보기> If you touch the fire, you will get burned.",
+      "explanation": "<보기>의 if는 조건의 부사절을 이끕니다. ④도 '만약 ~한다면'의 조건 부사절입니다. ①③⑤는 명사절, ②는 '~이면 알려줘'로 조건절이지만 명령문과 함께 쓰여 의미가 다릅니다. 실제로 ②도 조건절이지만 보기와 가장 유사한 것은 ④입니다."
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "③",
+      "number": 25,
+      "options": [
+        "① If you drink warm milk before bed, you'll sleep better.",
+        "② If she studies hard, she'll get into a good school.",
+        "③ He doesn't know if the train has already left.",
+        "④ If you exercise daily, you'll stay healthy.",
+        "⑤ If the weather is good on Sunday, we'll go for a walk."
+      ],
+      "question": "[용법 구별] 다음 중 밑줄 친 if의 쓰임이 나머지 넷과 다른 하나는?",
+      "explanation": "③의 if는 '~인지 어떤지'를 뜻하는 명사절 접속사입니다. ①②④⑤는 모두 '만약 ~한다면'의 조건 부사절 접속사입니다."
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "②",
+      "number": 26,
+      "options": [
+        "① If she will finish her homework, she can watch TV.",
+        "② If it rains this afternoon, we will cancel the game.",
+        "③ If he come to school late, the teacher will be angry.",
+        "④ We go to the museum if it is not crowded.",
+        "⑤ If I will see Tom, I tell him you called."
+      ],
+      "question": "[어법 판단] 다음 중 어법상 옳은 문장은?",
+      "explanation": "②는 if절에 현재시제(rains), 주절에 미래시제(will cancel)를 올바르게 사용했습니다. ①은 if절에 will 사용 오류, ③은 come → comes, ④는 주절에 미래시제 누락, ⑤는 if절에 will 사용 오류입니다."
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "③",
+      "number": 27,
+      "options": [
+        "① If you mix salt into water, it dissolves.",
+        "② If the library is open, I'll borrow some books.",
+        "③ If you will be careful, you won't make mistakes.",
+        "④ If he doesn't call me back, I'll visit him.",
+        "⑤ If she gets enough sleep, she will feel energetic."
+      ],
+      "question": "[어법 판단] 다음 중 어법상 어색한 문장은?",
+      "explanation": "③은 조건절(if절)에 'will be'를 쓴 것이 오류입니다. 조건절에는 현재시제를 써야 하므로 'If you are careful'이 올바른 표현입니다."
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "③",
+      "number": 28,
+      "options": [
+        "① If you will study hard, you can get a good grade.",
+        "② Unless she doesn't hurry, she'll miss the bus.",
+        "③ If James leaves early tomorrow, he will catch the first train.",
+        "④ If they will play outside, they will have fun.",
+        "⑤ You feel better if you will take the medicine."
+      ],
+      "question": "[어법 판단] 다음 중 어법상 옳은 문장은?",
+      "explanation": "③은 if절에 현재시제(leaves), 주절에 미래시제(will catch)를 올바르게 사용했습니다. ①④⑤는 if절에 will 사용 오류, ②는 Unless에 not을 함께 쓰는 이중부정 오류입니다."
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "②",
+      "number": 29,
+      "options": [
+        "① If you are free this weekend, let's go cycling.",
+        "② If he will finish work early, we'll have dinner together.",
+        "③ If it snows tomorrow, the children will build a snowman.",
+        "④ Unless you hurry, you'll be late for school.",
+        "⑤ If she takes vitamins daily, she will stay healthy."
+      ],
+      "question": "[어법 판단] 다음 중 어법상 어색한 문장은?",
+      "explanation": "②는 if절에 'will finish'를 쓴 것이 어법상 어색합니다. 조건절에는 현재시제를 써야 하므로 'If he finishes work early'가 올바릅니다."
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "④",
+      "number": 30,
+      "options": [
+        "① If you don't get up now, you will missed the bus.",
+        "② If it will be cold tomorrow, I wear a heavy coat.",
+        "③ Unless you practice more, you can improve quickly.",
+        "④ If you water the plants every day, they will grow well.",
+        "⑤ If she studies hard, she passed the exam next time."
+      ],
+      "question": "[어법 판단] 다음 중 어법상 옳은 문장은?",
+      "explanation": "④는 if절에 현재시제(water), 주절에 미래시제(will grow)를 올바르게 사용했습니다. ①은 'will missed' 오류, ②는 if절에 will 오류, ③은 Unless + 긍정이므로 의미 오류, ⑤는 주절에 과거시제(passed) 오류입니다."
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "④",
+      "number": 31,
+      "options": [
+        "① If it is foggy outside, drive carefully.",
+        "② If I find your keys, I will bring them to you.",
+        "③ Unless he apologizes, she will not forgive him.",
+        "④ If she will join our club, we will be very glad.",
+        "⑤ If you eat less junk food, you will be healthier."
+      ],
+      "question": "[어법 판단] 다음 중 어법상 어색한 문장은?",
+      "explanation": "④는 if절에 'will join'을 쓴 것이 어법상 어색합니다. 조건절에는 현재시제를 써야 하므로 'If she joins our club'이 올바릅니다."
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "④",
+      "number": 32,
+      "options": [
+        "① If you are honest, people will trust you.",
+        "② He will be happy if she comes to his concert.",
+        "③ If we take the express bus, we will arrive faster.",
+        "④ Unless you will bring an umbrella, you'll get wet.",
+        "⑤ If I have enough money, I'll travel around the world."
+      ],
+      "question": "[어법 판단] 다음 중 어법상 어색한 문장은?",
+      "explanation": "④는 unless절에 'will bring'을 쓴 것이 어법상 어색합니다. 조건절(unless절 포함)에는 현재시제를 써야 하므로 'Unless you bring an umbrella'가 올바릅니다."
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "If it is sunny tomorrow, we will play soccer.",
+      "number": 33,
+      "question": "[서술형-영작] 다음 우리말을 영어로 쓰시오.\n만약 내일 날씨가 맑다면, 우리는 축구를 할 것이다.",
+      "explanation": "조건절(if절)에는 현재시제를 쓰고, 주절에는 'will + 동사원형'을 씁니다. 'If it is sunny tomorrow, we will play soccer.'가 올바른 표현입니다."
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "If you don't sleep enough, you will feel tired.",
+      "number": 34,
+      "question": "[서술형-영작] 다음 우리말을 영어로 쓰시오.\n만약 네가 충분히 잠을 자지 않는다면, 너는 피곤함을 느낄 것이다.",
+      "explanation": "조건절에서 부정문은 'don't/doesn't + 동사원형'을 사용하고, if절에는 will을 쓰지 않습니다. 주절에는 'will + 동사원형'을 씁니다."
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "If she practices hard, she can win the piano contest.",
+      "number": 35,
+      "question": "[서술형-영작] 다음 우리말을 영어로 쓰시오.\n만약 그녀가 열심히 연습한다면, 그녀는 피아노 대회에서 우승할 수 있다.",
+      "explanation": "조건절(if절)에는 현재시제를 사용하고, 주절에는 'will' 또는 'can + 동사원형'을 씁니다. if절에 will을 쓰지 않도록 주의합니다."
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "Unless you leave now, you will miss the train.",
+      "number": 36,
+      "question": "[서술형-영작] 다음 우리말을 영어로 쓰시오.\n만약 네가 지금 출발하지 않으면, 너는 기차를 놓칠 것이다.\n(unless를 사용하여 쓰시오.)",
+      "explanation": "'Unless'는 'If ~ not'과 같은 의미로 '~하지 않으면'을 뜻합니다. unless절에도 현재시제를 사용합니다. 'Unless you leave now, you will miss the train.'이 올바른 표현입니다."
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "If he arrives at school early tomorrow, he will read a book in the library.",
+      "number": 37,
+      "question": "[서술형-영작] 다음 우리말을 영어로 쓰시오.\n만약 그가 내일 학교에 일찍 도착한다면, 그는 도서관에서 책을 읽을 것이다.",
+      "explanation": "조건절(if절)에는 현재시제를 쓰고, 주절에는 'will + 동사원형'을 씁니다. 미래의 일이더라도 if절에서는 현재시제를 사용해야 합니다."
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "If I pass the exam, my parents will be very happy.",
+      "number": 38,
+      "question": "[서술형-영작] 다음 우리말을 영어로 쓰시오.\n만약 내가 그 시험에 합격한다면, 나의 부모님은 매우 기뻐하실 것이다.",
+      "explanation": "조건의 if절에는 현재시제, 주절에는 'will + 동사원형'을 씁니다. 'If I pass the exam, my parents will be very happy.'가 올바른 표현입니다."
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "If you drink enough water, you will stay healthy.",
+      "number": 39,
+      "question": "[서술형-영작] 다음 두 문장을 'If'를 사용하여 한 문장으로 쓰시오.\nDrink enough water. You will stay healthy.",
+      "explanation": "'명령문, and + 주어 + will ~' 구조는 'If + 주어 + 동사, 주어 + will ~'로 바꿀 수 있습니다. if절에는 현재시제를 씁니다."
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "If you study every day, you will get a good grade.",
+      "number": 40,
+      "question": "[서술형-영작] 다음 두 문장을 'If'를 사용하여 한 문장으로 쓰시오.\nStudy every day. You will get a good grade.",
+      "explanation": "'명령문, and + 주어 + will ~' 구조를 'If + 주어 + 현재동사, 주어 + will ~'로 바꿉니다. if절에는 현재시제를 사용해야 하며, will을 쓰지 않습니다."
+    },
+    {
+      "tag": "단어배열",
+      "type": "sentence",
+      "answer": "If it rains tomorrow, we will stay home.",
+      "number": 41,
+      "question": "[서술형-어순 배열] 다음 주어진 단어들을 올바른 순서로 배열하여 문장을 완성하시오.\n( it / rains / will / we / if / tomorrow / stay / home )",
+      "explanation": "조건절 'If it rains tomorrow'를 앞에 쓰고, 주절 'we will stay home'을 뒤에 씁니다. if절에는 현재시제(rains)를 사용합니다."
+    },
+    {
+      "tag": "단어배열",
+      "type": "sentence",
+      "answer": "If you study hard, you will pass the test.",
+      "number": 42,
+      "question": "[서술형-어순 배열] 다음 주어진 단어들을 올바른 순서로 배열하여 문장을 완성하시오.\n( will / you / if / hard / you / the / pass / test / study )",
+      "explanation": "조건절 'If you study hard'를 앞에, 주절 'you will pass the test'를 뒤에 씁니다. if절에는 현재시제(study)를 쓰고, 주절에 will을 씁니다."
+    },
+    {
+      "tag": "단어배열",
+      "type": "sentence",
+      "answer": "Unless she leaves now, she will be late.",
+      "number": 43,
+      "question": "[서술형-어순 배열] 다음 주어진 단어들을 올바른 순서로 배열하여 문장을 완성하시오.\n( she / will / doesn't / unless / now / she / leave / late / be )",
+      "explanation": "'Unless'는 '~하지 않으면'의 의미로, unless절에는 현재시제를 씁니다. 'Unless she leaves now, she will be late.'가 올바른 순서입니다."
+    },
+    {
+      "tag": "단어배열",
+      "type": "sentence",
+      "answer": "I don't know if he will come to the party.",
+      "number": 44,
+      "question": "[서술형-어순 배열] 다음 주어진 단어들을 올바른 순서로 배열하여 문장을 완성하시오.\n( know / I / if / don't / come / will / he / to / party / the )",
+      "explanation": "이 문장에서 if는 '~인지 아닌지'의 의미로 명사절을 이끄는 접속사입니다. 간접의문문에서는 if절에 will을 쓸 수 있습니다."
+    },
+    {
+      "tag": "단어배열",
+      "type": "sentence",
+      "answer": "If he takes the subway, he will be on time.",
+      "number": 45,
+      "question": "[서술형-어순 배열] 다음 주어진 단어들을 올바른 순서로 배열하여 문장을 완성하시오.\n( takes / if / the / he / subway / on / time / be / will / he )",
+      "explanation": "조건절 'If he takes the subway'를 앞에 쓰고, 주절 'he will be on time'을 뒤에 씁니다. if절에는 현재시제(takes)를 사용합니다."
+    },
+    {
+      "tag": "오류수정",
+      "type": "sentence",
+      "answer": "If it snows tomorrow, we will build a snowman.",
+      "number": 46,
+      "question": "[서술형-오류 수정] 다음 문장에서 어법상 어색한 부분을 찾아 바르게 고쳐 쓰시오.\nIf it will snow tomorrow, we will build a snowman.",
+      "explanation": "조건절(if절)에는 미래의 일이라도 will을 쓰지 않고 현재시제를 사용합니다. 'will snow'를 'snows'로 고쳐야 합니다."
+    },
+    {
+      "tag": "오류수정",
+      "type": "sentence",
+      "answer": "Unless you study harder, you won't improve your English.",
+      "number": 47,
+      "question": "[서술형-오류 수정] 다음 문장에서 어법상 어색한 부분을 찾아 바르게 고쳐 쓰시오.\nUnless you will study harder, you won't improve your English.",
+      "explanation": "unless절도 조건절이므로 will을 쓰지 않고 현재시제를 사용합니다. 'will study'를 'study'로 고쳐야 합니다."
+    },
+    {
+      "tag": "오류수정",
+      "type": "sentence",
+      "answer": "If she finishes her homework early, she can watch TV.",
+      "number": 48,
+      "question": "[서술형-오류 수정] 다음 문장에서 어법상 어색한 부분을 찾아 바르게 고쳐 쓰시오.\nIf she will finish her homework early, she can watch TV.",
+      "explanation": "if절에는 현재시제를 사용해야 합니다. 'will finish'를 'finishes'로 고쳐야 합니다. 주어가 3인칭 단수이므로 finishes를 씁니다."
+    },
+    {
+      "tag": "오류수정",
+      "type": "sentence",
+      "answer": "If you don't eat breakfast, you will feel hungry during class.",
+      "number": 49,
+      "question": "[서술형-오류 수정] 다음 문장에서 어법상 어색한 부분을 찾아 바르게 고쳐 쓰시오.\nIf you don't will eat breakfast, you will feel hungry during class.",
+      "explanation": "if절의 부정문은 'don't/doesn't + 동사원형'을 사용합니다. 'don't will eat'은 잘못된 표현이며, 'don't eat'으로 고쳐야 합니다."
+    },
+    {
+      "tag": "오류수정",
+      "type": "sentence",
+      "answer": "If Tom comes back home tonight, I will cook dinner for him.",
+      "number": 50,
+      "question": "[서술형-오류 수정] 다음 문장에서 어법상 어색한 부분을 찾아 바르게 고쳐 쓰시오.\nIf Tom come back home tonight, I will cook dinner for him.",
+      "explanation": "if절의 주어 Tom은 3인칭 단수이므로 동사에 -(e)s를 붙여야 합니다. 'come'을 'comes'로 고쳐야 합니다."
+    }
+  ],
+  "naesin_problem_sheets_9f903801-6814-445f-bce9-69426e1e98de": [
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "3",
+      "number": 1,
+      "options": [
+        "① Although",
+        "② Until",
+        "③ If",
+        "④ What",
+        "⑤ So"
+      ],
+      "question": "[빈칸 채우기] 다음 문장의 빈칸에 들어갈 말로 가장 적절한 것은?\n________ you drink enough water every day, your skin will look better.",
+      "explanation": "'만약 ~한다면'의 조건절을 이끄는 접속사는 If입니다. Although(비록), Until(~까지), What(무엇), So(그래서)는 문맥상 적절하지 않습니다."
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "4",
+      "number": 2,
+      "options": [
+        "① go well",
+        "② do good",
+        "③ make better",
+        "④ go bad",
+        "⑤ do fine"
+      ],
+      "question": "[빈칸 채우기] 다음 문장의 빈칸에 들어갈 말로 가장 적절한 것은?\nIf you stay up too late every night, your health will ________.",
+      "explanation": "'go bad'는 '나빠지다'라는 의미로 건강이 악화된다는 문맥에 가장 적절합니다. 'go well'은 '잘 되다', 'do good'은 '좋은 일을 하다'의 의미입니다."
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "5",
+      "number": 3,
+      "options": [
+        "① If you miss the bus",
+        "② If you skip lunch",
+        "③ If you fail the test",
+        "④ If you turn left here",
+        "⑤ If you take a cold shower"
+      ],
+      "question": "[빈칸 채우기] 다음 문장의 빈칸에 들어갈 말로 가장 적절한 것은?\n__________________, you will feel refreshed.",
+      "explanation": "'기분이 상쾌해진다'는 결과와 논리적으로 연결되는 조건은 '차가운 샤워를 하면'입니다. 나머지 보기들은 결과와 자연스럽게 연결되지 않습니다."
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "3",
+      "number": 4,
+      "options": [
+        "① so",
+        "② because",
+        "③ if",
+        "④ although",
+        "⑤ unless"
+      ],
+      "question": "[빈칸 채우기] 다음 두 문장의 빈칸에 공통으로 들어갈 말로 가장 적절한 것은?\n• ________ you keep trying, you will succeed.\n• She will call me ________ she arrives at the station.",
+      "explanation": "두 문장 모두 '만약 ~한다면'이라는 조건의 의미가 필요합니다. 'if'가 두 문장 모두에 자연스럽게 들어맞습니다."
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "2",
+      "number": 5,
+      "options": [
+        "① (A) is (B) ride",
+        "② (A) is (B) will ride",
+        "③ (A) will be (B) ride",
+        "④ (A) will be (B) will ride",
+        "⑤ (A) was (B) will ride"
+      ],
+      "question": "[빈칸 채우기] 다음 우리말을 영어로 옮길 때 빈칸 (A), (B)에 들어갈 말로 가장 적절한 것은?\n만약 내일 날씨가 맑으면, 우리는 자전거를 탈 것이다.\n→ If the weather (A)________ clear tomorrow, we (B)________ bikes.",
+      "explanation": "조건절(if절)에는 현재시제를 쓰고, 주절에는 미래시제(will+동사원형)를 씁니다. 따라서 (A)는 is, (B)는 will ride가 적절합니다."
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "4",
+      "number": 6,
+      "options": [
+        "① (A) practice (B) becomes",
+        "② (A) practices (B) becomes",
+        "③ (A) will practice (B) will become",
+        "④ (A) practices (B) will become",
+        "⑤ (A) will practice (B) becomes"
+      ],
+      "question": "[빈칸 채우기] 다음 우리말을 영어로 옮길 때 빈칸 (A), (B)에 들어갈 말로 가장 적절한 것은?\n만약 그녀가 매일 피아노 연습을 한다면, 그녀는 훌륭한 피아니스트가 될 것이다.\n→ If she (A)________ the piano every day, she (B)________ a great pianist.",
+      "explanation": "조건절(if절)에서는 현재시제(practices)를 쓰고, 주절에서는 미래시제(will become)를 씁니다."
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "1",
+      "number": 7,
+      "options": [
+        "① (A) snows (B) will cancel",
+        "② (A) will snow (B) cancel",
+        "③ (A) snowed (B) will cancel",
+        "④ (A) will snow (B) will cancel",
+        "⑤ (A) snow (B) cancel"
+      ],
+      "question": "[빈칸 채우기] 다음 문장의 빈칸 (A), (B)에 들어갈 말로 가장 적절한 것은?\nIf it (A)________ on the weekend, we (B)________ the outdoor concert.",
+      "explanation": "조건절(if절)에는 현재시제(snows)를 쓰고, 주절에는 미래시제(will cancel)를 씁니다."
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "4",
+      "number": 8,
+      "options": [
+        "① after school",
+        "② with her best friend",
+        "③ if she needs books",
+        "④ if she doesn't have a library card",
+        "⑤ when she has free time"
+      ],
+      "question": "[빈칸 채우기] 다음 문장의 빈칸에 들어갈 수 없는 것은?\nMina goes to the library ______________.",
+      "explanation": "'도서관에 간다'는 행동과 '도서관 카드가 없으면'이라는 조건은 논리적으로 모순됩니다. 도서관 카드가 없으면 도서관 이용이 어렵기 때문에 ④는 문장에 들어갈 수 없습니다."
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "1",
+      "number": 9,
+      "options": [
+        "① (A) have (B) won't (C) don't",
+        "② (A) will have (B) will (C) won't",
+        "③ (A) have (B) can (C) won't",
+        "④ (A) to have (B) won't (C) can't",
+        "⑤ (A) will have (B) won't (C) don't"
+      ],
+      "question": "[빈칸 채우기] 다음 문장의 빈칸 (A), (B), (C)에 들어갈 말로 가장 적절한 것은?\n• If I (A)________ time this evening, I will call you.\n• If you drink too much coffee, you (B)________ sleep well.\n• If you (C)________ hurry up, you will miss the train.",
+      "explanation": "(A) 조건절이므로 현재시제 have, (B) 커피를 많이 마시면 잠을 '못 잘 것이다'이므로 won't, (C) Unless가 아닌 If이므로 '서두르지 않으면'을 표현하려면 don't가 적절합니다."
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "4",
+      "number": 10,
+      "options": [
+        "① Study",
+        "② You study",
+        "③ You'll study",
+        "④ If you study",
+        "⑤ If you'll study"
+      ],
+      "question": "[빈칸 채우기] 다음 두 문장이 같은 뜻이 되도록 빈칸에 들어갈 알맞은 말로 가장 적절한 것은?\nStudy hard, and you will pass the exam.\n= ________ hard, you will pass the exam.",
+      "explanation": "'명령문 + and + 주어 + will'은 'If + 주어 + 현재동사'로 바꿔 쓸 수 있습니다. 'Study hard, and you will ~' = 'If you study hard, you will ~'입니다."
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "1",
+      "number": 11,
+      "options": [
+        "① If you sleep regularly, you will be healthier.",
+        "② If you sleep regularly, you will healthier.",
+        "③ If you will sleep regularly, you will be healthier.",
+        "④ If you sleep regularly, you are healthier.",
+        "⑤ You will be healthier if you will sleep regularly."
+      ],
+      "question": "[영작 선택] 다음 우리말을 바르게 영작한 것은?\n만약 네가 규칙적으로 잠을 자면, 너는 더 건강해질 것이다.",
+      "explanation": "조건절(if절)에는 현재시제(sleep)를 쓰고, 주절에는 'will be'를 씁니다. ②는 be동사 누락, ③⑤는 if절에 will 사용 오류, ④는 미래시제가 아닌 현재시제 사용 오류입니다."
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "3",
+      "number": 12,
+      "options": [
+        "① If it do not blow tomorrow, we will fly a kite in the park.",
+        "② If it will not blow tomorrow, we will fly a kite in the park.",
+        "③ If it does not blow tomorrow, we will fly a kite in the park.",
+        "④ We fly a kite in the park if it does not blow tomorrow.",
+        "⑤ We will fly a kite in the park if it will not blow tomorrow."
+      ],
+      "question": "[영작 선택] 다음 우리말과 일치하도록 어법에 맞게 영작한 것은?\n만약 내일 바람이 불지 않는다면, 우리는 공원에서 연을 날릴 것이다.",
+      "explanation": "조건절에서 부정은 'does not + 동사원형'을 씁니다. ①은 'do not'으로 3인칭 단수 오류, ②⑤는 if절에 will 사용 오류, ④는 주절에 미래시제 누락입니다."
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "2",
+      "number": 13,
+      "options": [
+        "① I help you with your homework if you want.",
+        "② I can help you with your homework if you want.",
+        "③ I can help you with your homework if you will want.",
+        "④ I will help you with your homework if you can want.",
+        "⑤ I will help you with your homework if you will want."
+      ],
+      "question": "[영작 선택] 다음 우리말을 바르게 영작한 것은?\n만약 네가 원한다면 나는 너의 숙제를 도와줄 수 있어.",
+      "explanation": "'도와줄 수 있어'는 'can help'로 표현하고, 조건절(if절)에는 현재시제(want)를 씁니다. ③④⑤는 if절에 will 또는 can 사용 오류입니다."
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "1",
+      "number": 14,
+      "options": [
+        "① 만약 내가 복권에 당첨되면 새 집을 살 것이다. → If I win the lottery, I'll buy a new house.",
+        "② 만약 네가 지금 출발하지 않으면 너는 버스를 놓칠 것이다. → If you won't leave now, you'll miss the bus.",
+        "③ 만약 내일 눈이 내린다면, 나는 스키를 타러 갈 것이다. → If it snow tomorrow, I'll go skiing.",
+        "④ 만약 그녀가 열심히 공부하지 않는다면, 그녀는 시험에 떨어질 것이다. → She fails the test if she doesn't study hard.",
+        "⑤ 만약 그가 내일 아침 일찍 일어나지 않는다면, 그는 학교에 지각할 것이다. → He is late for school if he doesn't get up early tomorrow morning."
+      ],
+      "question": "[영작 선택] 다음 중 우리말을 영어로 바르게 옮긴 것은?",
+      "explanation": "①은 if절에 현재시제(win), 주절에 미래시제(will buy)를 올바르게 사용했습니다. ②는 if절에 won't 사용 오류, ③은 snow(3인칭 단수 snows 필요), ④⑤는 주절에 미래시제 누락입니다."
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "2",
+      "number": 15,
+      "options": [
+        "① (A) If (B) will gain",
+        "② (A) Unless (B) will gain",
+        "③ (A) Unless (B) won't gain",
+        "④ (A) If (B) won't gain",
+        "⑤ (A) Unless (B) will lose"
+      ],
+      "question": "[영작 선택] 다음 우리말을 영어로 옮길 때 빈칸 (A), (B)에 들어갈 말로 가장 적절한 것은?\n만약 네가 규칙적으로 운동하지 않는다면, 너는 살이 찔 것이다.\n→ (A)______ you exercise regularly, you (B)______ weight.",
+      "explanation": "'운동하지 않으면'을 Unless를 써서 표현하면 'Unless you exercise'가 되고, '살이 찔 것이다'는 'will gain weight'입니다. Unless = If ~ not이므로 부정의 의미가 포함됩니다."
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "3",
+      "number": 16,
+      "options": [
+        "① If you eat breakfast, you will do better in class.",
+        "② She will come to the party if she finishes her work.",
+        "③ I wonder if he knows the answer.",
+        "④ If it is warm tomorrow, we'll go to the beach.",
+        "⑤ If you turn right, you'll see the post office."
+      ],
+      "question": "[용법 구별] 다음 중 밑줄 친 if의 쓰임이 나머지 넷과 다른 하나는?",
+      "explanation": "③의 if는 '~인지 어떤지'의 의미로 명사절을 이끄는 접속사입니다. 나머지 ①②④⑤의 if는 모두 '만약 ~한다면'의 의미로 조건의 부사절을 이끕니다."
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "2",
+      "number": 17,
+      "options": [
+        "① If the store is open, I'll buy some snacks.",
+        "② Can you check if the door is locked?",
+        "③ We'll go hiking if the weather is nice.",
+        "④ If you need help, just ask me.",
+        "⑤ You will feel better if you take some rest."
+      ],
+      "question": "[용법 구별] 다음 중 밑줄 친 if의 쓰임이 나머지 넷과 다른 하나는?",
+      "explanation": "②의 if는 '~인지 어떤지'를 뜻하는 명사절 접속사로 쓰였습니다. 나머지는 모두 '만약 ~한다면'의 조건의 부사절을 이끄는 접속사입니다."
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "1",
+      "number": 18,
+      "options": [
+        "① I don't know if she will accept the offer.",
+        "② If you practice every day, you will improve.",
+        "③ If he calls me, I'll let you know.",
+        "④ If the bus is late, we'll take a taxi.",
+        "⑤ If you study tonight, you'll do well on the test."
+      ],
+      "question": "[용법 구별] 다음 중 밑줄 친 if의 쓰임이 나머지 넷과 다른 하나는?",
+      "explanation": "①의 if는 '~인지 어떤지'의 명사절을 이끄는 접속사입니다. ②③④⑤의 if는 조건의 부사절을 이끄는 접속사입니다."
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "3",
+      "number": 19,
+      "options": [
+        "① If you hurry, you can catch the train.",
+        "② If she is tired, she should take a break.",
+        "③ He asked me if I wanted some coffee.",
+        "④ If I win first prize, I'll buy a new phone.",
+        "⑤ We'll have a picnic if it doesn't rain."
+      ],
+      "question": "[용법 구별] 다음 중 밑줄 친 if의 쓰임이 나머지 넷과 다른 하나는?",
+      "explanation": "③의 if는 간접의문문으로 '~인지 어떤지'라는 뜻의 명사절을 이끕니다. 나머지는 모두 조건을 나타내는 부사절 접속사입니다."
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "1",
+      "number": 20,
+      "options": [
+        "① I'm not sure if the movie starts at 7.",
+        "② If you are kind, people will like you.",
+        "③ If she sings well, she'll become famous.",
+        "④ If it gets cold, I'll wear a jacket.",
+        "⑤ If you go to bed early, you'll feel energetic."
+      ],
+      "question": "[용법 구별] 다음 중 밑줄 친 if의 쓰임이 나머지 넷과 다른 하나는?",
+      "explanation": "①의 if는 '~인지 어떤지'를 뜻하는 명사절 접속사입니다. ②③④⑤는 '만약 ~한다면'의 조건 부사절 접속사입니다."
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "3",
+      "number": 21,
+      "options": [
+        "① If you mix blue and yellow, you get green.",
+        "② If you read a lot, you'll become smarter.",
+        "③ They told me if the concert was canceled.",
+        "④ If it rains, the match will be postponed.",
+        "⑤ If you eat slowly, you'll enjoy the food more."
+      ],
+      "question": "[용법 구별] 다음 중 밑줄 친 if의 쓰임이 나머지 넷과 다른 하나는?",
+      "explanation": "③의 if는 '~인지 어떤지'라는 명사절을 이끕니다. ①②④⑤의 if는 조건의 부사절을 이끄는 접속사입니다."
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "2",
+      "number": 22,
+      "options": [
+        "① If you lend me the book, I'll return it tomorrow.",
+        "② Do you know if she passed the driving test?",
+        "③ If we leave early, we'll arrive on time.",
+        "④ If you press this button, the machine will start.",
+        "⑤ I'll help you if you need me."
+      ],
+      "question": "[용법 구별] 다음 중 밑줄 친 if의 쓰임이 나머지 넷과 다른 하나는?",
+      "explanation": "②의 if는 '~인지 어떤지'의 의미로 명사절을 이끕니다. 나머지는 '만약 ~한다면'의 조건 부사절입니다."
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "2",
+      "number": 23,
+      "options": [
+        "① If you visit Jeju Island, you'll see beautiful scenery.",
+        "② She wants to know if I can come to her birthday party.",
+        "③ If you save money, you can buy what you want.",
+        "④ If he apologizes, she will forgive him.",
+        "⑤ If it is windy, let's fly a kite."
+      ],
+      "question": "[용법 구별] 다음 중 밑줄 친 if의 쓰임이 나머지 넷과 다른 하나는?",
+      "explanation": "②의 if는 간접의문문으로 '~인지 어떤지'의 명사절을 이끕니다. 나머지는 조건의 부사절 접속사로 쓰였습니다."
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "4",
+      "number": 24,
+      "options": [
+        "① I asked him if he could help me.",
+        "② Tell me if you know the answer.",
+        "③ We're not sure if the shop is still open.",
+        "④ If you listen carefully, you'll understand.",
+        "⑤ She wondered if it would snow today."
+      ],
+      "question": "[용법 구별] 다음 중 밑줄 친 if의 쓰임이 <보기>와 같은 것은?\n<보기> If you touch the fire, you will get burned.",
+      "explanation": "<보기>의 if는 조건의 부사절을 이끕니다. ④도 '만약 ~한다면'의 조건 부사절입니다. ①③⑤는 명사절, ②는 '~이면 알려줘'로 조건절이지만 명령문과 함께 쓰여 의미가 다릅니다. 실제로 ②도 조건절이지만 보기와 가장 유사한 것은 ④입니다."
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "3",
+      "number": 25,
+      "options": [
+        "① If you drink warm milk before bed, you'll sleep better.",
+        "② If she studies hard, she'll get into a good school.",
+        "③ He doesn't know if the train has already left.",
+        "④ If you exercise daily, you'll stay healthy.",
+        "⑤ If the weather is good on Sunday, we'll go for a walk."
+      ],
+      "question": "[용법 구별] 다음 중 밑줄 친 if의 쓰임이 나머지 넷과 다른 하나는?",
+      "explanation": "③의 if는 '~인지 어떤지'를 뜻하는 명사절 접속사입니다. ①②④⑤는 모두 '만약 ~한다면'의 조건 부사절 접속사입니다."
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "2",
+      "number": 26,
+      "options": [
+        "① If she will finish her homework, she can watch TV.",
+        "② If it rains this afternoon, we will cancel the game.",
+        "③ If he come to school late, the teacher will be angry.",
+        "④ We go to the museum if it is not crowded.",
+        "⑤ If I will see Tom, I tell him you called."
+      ],
+      "question": "[어법 판단] 다음 중 어법상 옳은 문장은?",
+      "explanation": "②는 if절에 현재시제(rains), 주절에 미래시제(will cancel)를 올바르게 사용했습니다. ①은 if절에 will 사용 오류, ③은 come → comes, ④는 주절에 미래시제 누락, ⑤는 if절에 will 사용 오류입니다."
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "3",
+      "number": 27,
+      "options": [
+        "① If you mix salt into water, it dissolves.",
+        "② If the library is open, I'll borrow some books.",
+        "③ If you will be careful, you won't make mistakes.",
+        "④ If he doesn't call me back, I'll visit him.",
+        "⑤ If she gets enough sleep, she will feel energetic."
+      ],
+      "question": "[어법 판단] 다음 중 어법상 어색한 문장은?",
+      "explanation": "③은 조건절(if절)에 'will be'를 쓴 것이 오류입니다. 조건절에는 현재시제를 써야 하므로 'If you are careful'이 올바른 표현입니다."
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "3",
+      "number": 28,
+      "options": [
+        "① If you will study hard, you can get a good grade.",
+        "② Unless she doesn't hurry, she'll miss the bus.",
+        "③ If James leaves early tomorrow, he will catch the first train.",
+        "④ If they will play outside, they will have fun.",
+        "⑤ You feel better if you will take the medicine."
+      ],
+      "question": "[어법 판단] 다음 중 어법상 옳은 문장은?",
+      "explanation": "③은 if절에 현재시제(leaves), 주절에 미래시제(will catch)를 올바르게 사용했습니다. ①④⑤는 if절에 will 사용 오류, ②는 Unless에 not을 함께 쓰는 이중부정 오류입니다."
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "2",
+      "number": 29,
+      "options": [
+        "① If you are free this weekend, let's go cycling.",
+        "② If he will finish work early, we'll have dinner together.",
+        "③ If it snows tomorrow, the children will build a snowman.",
+        "④ Unless you hurry, you'll be late for school.",
+        "⑤ If she takes vitamins daily, she will stay healthy."
+      ],
+      "question": "[어법 판단] 다음 중 어법상 어색한 문장은?",
+      "explanation": "②는 if절에 'will finish'를 쓴 것이 어법상 어색합니다. 조건절에는 현재시제를 써야 하므로 'If he finishes work early'가 올바릅니다."
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "4",
+      "number": 30,
+      "options": [
+        "① If you don't get up now, you will missed the bus.",
+        "② If it will be cold tomorrow, I wear a heavy coat.",
+        "③ Unless you practice more, you can improve quickly.",
+        "④ If you water the plants every day, they will grow well.",
+        "⑤ If she studies hard, she passed the exam next time."
+      ],
+      "question": "[어법 판단] 다음 중 어법상 옳은 문장은?",
+      "explanation": "④는 if절에 현재시제(water), 주절에 미래시제(will grow)를 올바르게 사용했습니다. ①은 'will missed' 오류, ②는 if절에 will 오류, ③은 Unless + 긍정이므로 의미 오류, ⑤는 주절에 과거시제(passed) 오류입니다."
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "4",
+      "number": 31,
+      "options": [
+        "① If it is foggy outside, drive carefully.",
+        "② If I find your keys, I will bring them to you.",
+        "③ Unless he apologizes, she will not forgive him.",
+        "④ If she will join our club, we will be very glad.",
+        "⑤ If you eat less junk food, you will be healthier."
+      ],
+      "question": "[어법 판단] 다음 중 어법상 어색한 문장은?",
+      "explanation": "④는 if절에 'will join'을 쓴 것이 어법상 어색합니다. 조건절에는 현재시제를 써야 하므로 'If she joins our club'이 올바릅니다."
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "4",
+      "number": 32,
+      "options": [
+        "① If you are honest, people will trust you.",
+        "② He will be happy if she comes to his concert.",
+        "③ If we take the express bus, we will arrive faster.",
+        "④ Unless you will bring an umbrella, you'll get wet.",
+        "⑤ If I have enough money, I'll travel around the world."
+      ],
+      "question": "[어법 판단] 다음 중 어법상 어색한 문장은?",
+      "explanation": "④는 unless절에 'will bring'을 쓴 것이 어법상 어색합니다. 조건절(unless절 포함)에는 현재시제를 써야 하므로 'Unless you bring an umbrella'가 올바릅니다."
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "If it is sunny tomorrow, we will play soccer.",
+      "number": 33,
+      "question": "[서술형-영작] 다음 우리말을 영어로 쓰시오.\n만약 내일 날씨가 맑다면, 우리는 축구를 할 것이다.",
+      "explanation": "조건절(if절)에는 현재시제를 쓰고, 주절에는 'will + 동사원형'을 씁니다. 'If it is sunny tomorrow, we will play soccer.'가 올바른 표현입니다.",
+      "acceptedAnswers": [
+        "If it is sunny tomorrow, we will play soccer",
+        "If it's sunny tomorrow, we will play soccer.",
+        "If it is sunny tomorrow, we'll play soccer."
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "If you don't sleep enough, you will feel tired.",
+      "number": 34,
+      "question": "[서술형-영작] 다음 우리말을 영어로 쓰시오.\n만약 네가 충분히 잠을 자지 않는다면, 너는 피곤함을 느낄 것이다.",
+      "explanation": "조건절에서 부정문은 'don't/doesn't + 동사원형'을 사용하고, if절에는 will을 쓰지 않습니다. 주절에는 'will + 동사원형'을 씁니다.",
+      "acceptedAnswers": [
+        "If you don't sleep enough, you will feel tired",
+        "If you do not sleep enough, you will feel tired."
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "If she practices hard, she can win the piano contest.",
+      "number": 35,
+      "question": "[서술형-영작] 다음 우리말을 영어로 쓰시오.\n만약 그녀가 열심히 연습한다면, 그녀는 피아노 대회에서 우승할 수 있다.",
+      "explanation": "조건절(if절)에는 현재시제를 사용하고, 주절에는 'will' 또는 'can + 동사원형'을 씁니다. if절에 will을 쓰지 않도록 주의합니다.",
+      "acceptedAnswers": [
+        "If she practices hard, she can win the piano contest"
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "Unless you leave now, you will miss the train.",
+      "number": 36,
+      "question": "[서술형-영작] 다음 우리말을 영어로 쓰시오.\n만약 네가 지금 출발하지 않으면, 너는 기차를 놓칠 것이다.\n(unless를 사용하여 쓰시오.)",
+      "explanation": "'Unless'는 'If ~ not'과 같은 의미로 '~하지 않으면'을 뜻합니다. unless절에도 현재시제를 사용합니다. 'Unless you leave now, you will miss the train.'이 올바른 표현입니다.",
+      "acceptedAnswers": [
+        "Unless you leave now, you will miss the train"
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "If he arrives at school early tomorrow, he will read a book in the library.",
+      "number": 37,
+      "question": "[서술형-영작] 다음 우리말을 영어로 쓰시오.\n만약 그가 내일 학교에 일찍 도착한다면, 그는 도서관에서 책을 읽을 것이다.",
+      "explanation": "조건절(if절)에는 현재시제를 쓰고, 주절에는 'will + 동사원형'을 씁니다. 미래의 일이더라도 if절에서는 현재시제를 사용해야 합니다.",
+      "acceptedAnswers": [
+        "If he arrives at school early tomorrow, he will read a book in the library",
+        "If he arrives at school early tomorrow, he'll read a book in the library."
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "If I pass the exam, my parents will be very happy.",
+      "number": 38,
+      "question": "[서술형-영작] 다음 우리말을 영어로 쓰시오.\n만약 내가 그 시험에 합격한다면, 나의 부모님은 매우 기뻐하실 것이다.",
+      "explanation": "조건의 if절에는 현재시제, 주절에는 'will + 동사원형'을 씁니다. 'If I pass the exam, my parents will be very happy.'가 올바른 표현입니다.",
+      "acceptedAnswers": [
+        "If I pass the exam, my parents will be very happy"
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "If you drink enough water, you will stay healthy.",
+      "number": 39,
+      "question": "[서술형-영작] 다음 두 문장을 'If'를 사용하여 한 문장으로 쓰시오.\nDrink enough water. You will stay healthy.",
+      "explanation": "'명령문, and + 주어 + will ~' 구조는 'If + 주어 + 동사, 주어 + will ~'로 바꿀 수 있습니다. if절에는 현재시제를 씁니다.",
+      "acceptedAnswers": [
+        "If you drink enough water, you will stay healthy"
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "If you study every day, you will get a good grade.",
+      "number": 40,
+      "question": "[서술형-영작] 다음 두 문장을 'If'를 사용하여 한 문장으로 쓰시오.\nStudy every day. You will get a good grade.",
+      "explanation": "'명령문, and + 주어 + will ~' 구조를 'If + 주어 + 현재동사, 주어 + will ~'로 바꿉니다. if절에는 현재시제를 사용해야 하며, will을 쓰지 않습니다.",
+      "acceptedAnswers": [
+        "If you study every day, you will get a good grade"
+      ]
+    },
+    {
+      "tag": "단어배열",
+      "type": "sentence",
+      "answer": "If it rains tomorrow, we will stay home.",
+      "number": 41,
+      "question": "[서술형-어순 배열] 다음 주어진 단어들을 올바른 순서로 배열하여 문장을 완성하시오.\n( it / rains / will / we / if / tomorrow / stay / home )",
+      "explanation": "조건절 'If it rains tomorrow'를 앞에 쓰고, 주절 'we will stay home'을 뒤에 씁니다. if절에는 현재시제(rains)를 사용합니다.",
+      "acceptedAnswers": [
+        "If it rains tomorrow, we will stay home",
+        "If it rains tomorrow, we'll stay home."
+      ]
+    },
+    {
+      "tag": "단어배열",
+      "type": "sentence",
+      "answer": "If you study hard, you will pass the test.",
+      "number": 42,
+      "question": "[서술형-어순 배열] 다음 주어진 단어들을 올바른 순서로 배열하여 문장을 완성하시오.\n( will / you / if / hard / you / the / pass / test / study )",
+      "explanation": "조건절 'If you study hard'를 앞에, 주절 'you will pass the test'를 뒤에 씁니다. if절에는 현재시제(study)를 쓰고, 주절에 will을 씁니다.",
+      "acceptedAnswers": [
+        "If you study hard, you will pass the test"
+      ]
+    },
+    {
+      "tag": "단어배열",
+      "type": "sentence",
+      "answer": "Unless she leaves now, she will be late.",
+      "number": 43,
+      "question": "[서술형-어순 배열] 다음 주어진 단어들을 올바른 순서로 배열하여 문장을 완성하시오.\n( she / will / doesn't / unless / now / she / leave / late / be )",
+      "explanation": "'Unless'는 '~하지 않으면'의 의미로, unless절에는 현재시제를 씁니다. 'Unless she leaves now, she will be late.'가 올바른 순서입니다.",
+      "acceptedAnswers": [
+        "Unless she leaves now, she will be late",
+        "Unless she leaves now, she'll be late."
+      ]
+    },
+    {
+      "tag": "단어배열",
+      "type": "sentence",
+      "answer": "I don't know if he will come to the party.",
+      "number": 44,
+      "question": "[서술형-어순 배열] 다음 주어진 단어들을 올바른 순서로 배열하여 문장을 완성하시오.\n( know / I / if / don't / come / will / he / to / party / the )",
+      "explanation": "이 문장에서 if는 '~인지 아닌지'의 의미로 명사절을 이끄는 접속사입니다. 간접의문문에서는 if절에 will을 쓸 수 있습니다.",
+      "acceptedAnswers": [
+        "I don't know if he will come to the party",
+        "I do not know if he will come to the party.",
+        "I don't know if he'll come to the party."
+      ]
+    },
+    {
+      "tag": "단어배열",
+      "type": "sentence",
+      "answer": "If he takes the subway, he will be on time.",
+      "number": 45,
+      "question": "[서술형-어순 배열] 다음 주어진 단어들을 올바른 순서로 배열하여 문장을 완성하시오.\n( takes / if / the / he / subway / on / time / be / will / he )",
+      "explanation": "조건절 'If he takes the subway'를 앞에 쓰고, 주절 'he will be on time'을 뒤에 씁니다. if절에는 현재시제(takes)를 사용합니다.",
+      "acceptedAnswers": [
+        "If he takes the subway, he will be on time",
+        "If he takes the subway, he'll be on time."
+      ]
+    },
+    {
+      "tag": "오류수정",
+      "type": "sentence",
+      "answer": "If it snows tomorrow, we will build a snowman.",
+      "number": 46,
+      "question": "[서술형-오류 수정] 다음 문장에서 어법상 어색한 부분을 찾아 바르게 고쳐 쓰시오.\nIf it will snow tomorrow, we will build a snowman.",
+      "explanation": "조건절(if절)에는 미래의 일이라도 will을 쓰지 않고 현재시제를 사용합니다. 'will snow'를 'snows'로 고쳐야 합니다.",
+      "acceptedAnswers": [
+        "If it snows tomorrow, we will build a snowman",
+        "If it snows tomorrow, we'll build a snowman."
+      ]
+    },
+    {
+      "tag": "오류수정",
+      "type": "sentence",
+      "answer": "Unless you study harder, you won't improve your English.",
+      "number": 47,
+      "question": "[서술형-오류 수정] 다음 문장에서 어법상 어색한 부분을 찾아 바르게 고쳐 쓰시오.\nUnless you will study harder, you won't improve your English.",
+      "explanation": "unless절도 조건절이므로 will을 쓰지 않고 현재시제를 사용합니다. 'will study'를 'study'로 고쳐야 합니다.",
+      "acceptedAnswers": [
+        "Unless you study harder, you won't improve your English",
+        "Unless you study harder, you will not improve your English."
+      ]
+    },
+    {
+      "tag": "오류수정",
+      "type": "sentence",
+      "answer": "If she finishes her homework early, she can watch TV.",
+      "number": 48,
+      "question": "[서술형-오류 수정] 다음 문장에서 어법상 어색한 부분을 찾아 바르게 고쳐 쓰시오.\nIf she will finish her homework early, she can watch TV.",
+      "explanation": "if절에는 현재시제를 사용해야 합니다. 'will finish'를 'finishes'로 고쳐야 합니다. 주어가 3인칭 단수이므로 finishes를 씁니다.",
+      "acceptedAnswers": [
+        "If she finishes her homework early, she can watch TV"
+      ]
+    },
+    {
+      "tag": "오류수정",
+      "type": "sentence",
+      "answer": "If you don't eat breakfast, you will feel hungry during class.",
+      "number": 49,
+      "question": "[서술형-오류 수정] 다음 문장에서 어법상 어색한 부분을 찾아 바르게 고쳐 쓰시오.\nIf you don't will eat breakfast, you will feel hungry during class.",
+      "explanation": "if절의 부정문은 'don't/doesn't + 동사원형'을 사용합니다. 'don't will eat'은 잘못된 표현이며, 'don't eat'으로 고쳐야 합니다.",
+      "acceptedAnswers": [
+        "If you don't eat breakfast, you will feel hungry during class",
+        "If you do not eat breakfast, you will feel hungry during class."
+      ]
+    },
+    {
+      "tag": "오류수정",
+      "type": "sentence",
+      "answer": "If Tom comes back home tonight, I will cook dinner for him.",
+      "number": 50,
+      "question": "[서술형-오류 수정] 다음 문장에서 어법상 어색한 부분을 찾아 바르게 고쳐 쓰시오.\nIf Tom come back home tonight, I will cook dinner for him.",
+      "explanation": "if절의 주어 Tom은 3인칭 단수이므로 동사에 -(e)s를 붙여야 합니다. 'come'을 'comes'로 고쳐야 합니다.",
+      "acceptedAnswers": [
+        "If Tom comes back home tonight, I will cook dinner for him",
+        "If Tom comes back home tonight, I'll cook dinner for him."
+      ]
+    }
+  ],
+  "naesin_problem_sheets_8de8b79d-3ed8-4674-92ff-2cbf79fc9883": [
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "3",
+      "number": 1,
+      "options": [
+        "① Although",
+        "② Until",
+        "③ If",
+        "④ What",
+        "⑤ So"
+      ],
+      "question": "[빈칸 채우기] 다음 문장의 빈칸에 들어갈 말로 가장 적절한 것은?\n________ you drink enough water every day, your skin will look better.",
+      "explanation": "'만약 ~한다면'의 조건절을 이끄는 접속사는 If입니다. Although(비록), Until(~까지), What(무엇), So(그래서)는 문맥상 적절하지 않습니다."
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "4",
+      "number": 2,
+      "options": [
+        "① go well",
+        "② do good",
+        "③ make better",
+        "④ go bad",
+        "⑤ do fine"
+      ],
+      "question": "[빈칸 채우기] 다음 문장의 빈칸에 들어갈 말로 가장 적절한 것은?\nIf you stay up too late every night, your health will ________.",
+      "explanation": "'go bad'는 '나빠지다'라는 의미로 건강이 악화된다는 문맥에 가장 적절합니다. 'go well'은 '잘 되다', 'do good'은 '좋은 일을 하다'의 의미입니다."
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "5",
+      "number": 3,
+      "options": [
+        "① If you miss the bus",
+        "② If you skip lunch",
+        "③ If you fail the test",
+        "④ If you turn left here",
+        "⑤ If you take a cold shower"
+      ],
+      "question": "[빈칸 채우기] 다음 문장의 빈칸에 들어갈 말로 가장 적절한 것은?\n__________________, you will feel refreshed.",
+      "explanation": "'기분이 상쾌해진다'는 결과와 논리적으로 연결되는 조건은 '차가운 샤워를 하면'입니다. 나머지 보기들은 결과와 자연스럽게 연결되지 않습니다."
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "3",
+      "number": 4,
+      "options": [
+        "① so",
+        "② because",
+        "③ if",
+        "④ although",
+        "⑤ unless"
+      ],
+      "question": "[빈칸 채우기] 다음 두 문장의 빈칸에 공통으로 들어갈 말로 가장 적절한 것은?\n• ________ you keep trying, you will succeed.\n• She will call me ________ she arrives at the station.",
+      "explanation": "두 문장 모두 '만약 ~한다면'이라는 조건의 의미가 필요합니다. 'if'가 두 문장 모두에 자연스럽게 들어맞습니다."
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "2",
+      "number": 5,
+      "options": [
+        "① (A) is (B) ride",
+        "② (A) is (B) will ride",
+        "③ (A) will be (B) ride",
+        "④ (A) will be (B) will ride",
+        "⑤ (A) was (B) will ride"
+      ],
+      "question": "[빈칸 채우기] 다음 우리말을 영어로 옮길 때 빈칸 (A), (B)에 들어갈 말로 가장 적절한 것은?\n만약 내일 날씨가 맑으면, 우리는 자전거를 탈 것이다.\n→ If the weather (A)________ clear tomorrow, we (B)________ bikes.",
+      "explanation": "조건절(if절)에는 현재시제를 쓰고, 주절에는 미래시제(will+동사원형)를 씁니다. 따라서 (A)는 is, (B)는 will ride가 적절합니다."
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "4",
+      "number": 6,
+      "options": [
+        "① (A) practice (B) becomes",
+        "② (A) practices (B) becomes",
+        "③ (A) will practice (B) will become",
+        "④ (A) practices (B) will become",
+        "⑤ (A) will practice (B) becomes"
+      ],
+      "question": "[빈칸 채우기] 다음 우리말을 영어로 옮길 때 빈칸 (A), (B)에 들어갈 말로 가장 적절한 것은?\n만약 그녀가 매일 피아노 연습을 한다면, 그녀는 훌륭한 피아니스트가 될 것이다.\n→ If she (A)________ the piano every day, she (B)________ a great pianist.",
+      "explanation": "조건절(if절)에서는 현재시제(practices)를 쓰고, 주절에서는 미래시제(will become)를 씁니다."
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "1",
+      "number": 7,
+      "options": [
+        "① (A) snows (B) will cancel",
+        "② (A) will snow (B) cancel",
+        "③ (A) snowed (B) will cancel",
+        "④ (A) will snow (B) will cancel",
+        "⑤ (A) snow (B) cancel"
+      ],
+      "question": "[빈칸 채우기] 다음 문장의 빈칸 (A), (B)에 들어갈 말로 가장 적절한 것은?\nIf it (A)________ on the weekend, we (B)________ the outdoor concert.",
+      "explanation": "조건절(if절)에는 현재시제(snows)를 쓰고, 주절에는 미래시제(will cancel)를 씁니다."
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "4",
+      "number": 8,
+      "options": [
+        "① after school",
+        "② with her best friend",
+        "③ if she needs books",
+        "④ if she doesn't have a library card",
+        "⑤ when she has free time"
+      ],
+      "question": "[빈칸 채우기] 다음 문장의 빈칸에 들어갈 수 없는 것은?\nMina goes to the library ______________.",
+      "explanation": "'도서관에 간다'는 행동과 '도서관 카드가 없으면'이라는 조건은 논리적으로 모순됩니다. 도서관 카드가 없으면 도서관 이용이 어렵기 때문에 ④는 문장에 들어갈 수 없습니다."
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "1",
+      "number": 9,
+      "options": [
+        "① (A) have (B) won't (C) don't",
+        "② (A) will have (B) will (C) won't",
+        "③ (A) have (B) can (C) won't",
+        "④ (A) to have (B) won't (C) can't",
+        "⑤ (A) will have (B) won't (C) don't"
+      ],
+      "question": "[빈칸 채우기] 다음 문장의 빈칸 (A), (B), (C)에 들어갈 말로 가장 적절한 것은?\n• If I (A)________ time this evening, I will call you.\n• If you drink too much coffee, you (B)________ sleep well.\n• If you (C)________ hurry up, you will miss the train.",
+      "explanation": "(A) 조건절이므로 현재시제 have, (B) 커피를 많이 마시면 잠을 '못 잘 것이다'이므로 won't, (C) Unless가 아닌 If이므로 '서두르지 않으면'을 표현하려면 don't가 적절합니다."
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "4",
+      "number": 10,
+      "options": [
+        "① Study",
+        "② You study",
+        "③ You'll study",
+        "④ If you study",
+        "⑤ If you'll study"
+      ],
+      "question": "[빈칸 채우기] 다음 두 문장이 같은 뜻이 되도록 빈칸에 들어갈 알맞은 말로 가장 적절한 것은?\nStudy hard, and you will pass the exam.\n= ________ hard, you will pass the exam.",
+      "explanation": "'명령문 + and + 주어 + will'은 'If + 주어 + 현재동사'로 바꿔 쓸 수 있습니다. 'Study hard, and you will ~' = 'If you study hard, you will ~'입니다."
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "1",
+      "number": 11,
+      "options": [
+        "① If you sleep regularly, you will be healthier.",
+        "② If you sleep regularly, you will healthier.",
+        "③ If you will sleep regularly, you will be healthier.",
+        "④ If you sleep regularly, you are healthier.",
+        "⑤ You will be healthier if you will sleep regularly."
+      ],
+      "question": "[영작 선택] 다음 우리말을 바르게 영작한 것은?\n만약 네가 규칙적으로 잠을 자면, 너는 더 건강해질 것이다.",
+      "explanation": "조건절(if절)에는 현재시제(sleep)를 쓰고, 주절에는 'will be'를 씁니다. ②는 be동사 누락, ③⑤는 if절에 will 사용 오류, ④는 미래시제가 아닌 현재시제 사용 오류입니다."
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "3",
+      "number": 12,
+      "options": [
+        "① If it do not blow tomorrow, we will fly a kite in the park.",
+        "② If it will not blow tomorrow, we will fly a kite in the park.",
+        "③ If it does not blow tomorrow, we will fly a kite in the park.",
+        "④ We fly a kite in the park if it does not blow tomorrow.",
+        "⑤ We will fly a kite in the park if it will not blow tomorrow."
+      ],
+      "question": "[영작 선택] 다음 우리말과 일치하도록 어법에 맞게 영작한 것은?\n만약 내일 바람이 불지 않는다면, 우리는 공원에서 연을 날릴 것이다.",
+      "explanation": "조건절에서 부정은 'does not + 동사원형'을 씁니다. ①은 'do not'으로 3인칭 단수 오류, ②⑤는 if절에 will 사용 오류, ④는 주절에 미래시제 누락입니다."
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "2",
+      "number": 13,
+      "options": [
+        "① I help you with your homework if you want.",
+        "② I can help you with your homework if you want.",
+        "③ I can help you with your homework if you will want.",
+        "④ I will help you with your homework if you can want.",
+        "⑤ I will help you with your homework if you will want."
+      ],
+      "question": "[영작 선택] 다음 우리말을 바르게 영작한 것은?\n만약 네가 원한다면 나는 너의 숙제를 도와줄 수 있어.",
+      "explanation": "'도와줄 수 있어'는 'can help'로 표현하고, 조건절(if절)에는 현재시제(want)를 씁니다. ③④⑤는 if절에 will 또는 can 사용 오류입니다."
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "1",
+      "number": 14,
+      "options": [
+        "① 만약 내가 복권에 당첨되면 새 집을 살 것이다. → If I win the lottery, I'll buy a new house.",
+        "② 만약 네가 지금 출발하지 않으면 너는 버스를 놓칠 것이다. → If you won't leave now, you'll miss the bus.",
+        "③ 만약 내일 눈이 내린다면, 나는 스키를 타러 갈 것이다. → If it snow tomorrow, I'll go skiing.",
+        "④ 만약 그녀가 열심히 공부하지 않는다면, 그녀는 시험에 떨어질 것이다. → She fails the test if she doesn't study hard.",
+        "⑤ 만약 그가 내일 아침 일찍 일어나지 않는다면, 그는 학교에 지각할 것이다. → He is late for school if he doesn't get up early tomorrow morning."
+      ],
+      "question": "[영작 선택] 다음 중 우리말을 영어로 바르게 옮긴 것은?",
+      "explanation": "①은 if절에 현재시제(win), 주절에 미래시제(will buy)를 올바르게 사용했습니다. ②는 if절에 won't 사용 오류, ③은 snow(3인칭 단수 snows 필요), ④⑤는 주절에 미래시제 누락입니다."
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "2",
+      "number": 15,
+      "options": [
+        "① (A) If (B) will gain",
+        "② (A) Unless (B) will gain",
+        "③ (A) Unless (B) won't gain",
+        "④ (A) If (B) won't gain",
+        "⑤ (A) Unless (B) will lose"
+      ],
+      "question": "[영작 선택] 다음 우리말을 영어로 옮길 때 빈칸 (A), (B)에 들어갈 말로 가장 적절한 것은?\n만약 네가 규칙적으로 운동하지 않는다면, 너는 살이 찔 것이다.\n→ (A)______ you exercise regularly, you (B)______ weight.",
+      "explanation": "'운동하지 않으면'을 Unless를 써서 표현하면 'Unless you exercise'가 되고, '살이 찔 것이다'는 'will gain weight'입니다. Unless = If ~ not이므로 부정의 의미가 포함됩니다."
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "3",
+      "number": 16,
+      "options": [
+        "① If you eat breakfast, you will do better in class.",
+        "② She will come to the party if she finishes her work.",
+        "③ I wonder if he knows the answer.",
+        "④ If it is warm tomorrow, we'll go to the beach.",
+        "⑤ If you turn right, you'll see the post office."
+      ],
+      "question": "[용법 구별] 다음 중 밑줄 친 if의 쓰임이 나머지 넷과 다른 하나는?",
+      "explanation": "③의 if는 '~인지 어떤지'의 의미로 명사절을 이끄는 접속사입니다. 나머지 ①②④⑤의 if는 모두 '만약 ~한다면'의 의미로 조건의 부사절을 이끕니다."
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "2",
+      "number": 17,
+      "options": [
+        "① If the store is open, I'll buy some snacks.",
+        "② Can you check if the door is locked?",
+        "③ We'll go hiking if the weather is nice.",
+        "④ If you need help, just ask me.",
+        "⑤ You will feel better if you take some rest."
+      ],
+      "question": "[용법 구별] 다음 중 밑줄 친 if의 쓰임이 나머지 넷과 다른 하나는?",
+      "explanation": "②의 if는 '~인지 어떤지'를 뜻하는 명사절 접속사로 쓰였습니다. 나머지는 모두 '만약 ~한다면'의 조건의 부사절을 이끄는 접속사입니다."
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "1",
+      "number": 18,
+      "options": [
+        "① I don't know if she will accept the offer.",
+        "② If you practice every day, you will improve.",
+        "③ If he calls me, I'll let you know.",
+        "④ If the bus is late, we'll take a taxi.",
+        "⑤ If you study tonight, you'll do well on the test."
+      ],
+      "question": "[용법 구별] 다음 중 밑줄 친 if의 쓰임이 나머지 넷과 다른 하나는?",
+      "explanation": "①의 if는 '~인지 어떤지'의 명사절을 이끄는 접속사입니다. ②③④⑤의 if는 조건의 부사절을 이끄는 접속사입니다."
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "3",
+      "number": 19,
+      "options": [
+        "① If you hurry, you can catch the train.",
+        "② If she is tired, she should take a break.",
+        "③ He asked me if I wanted some coffee.",
+        "④ If I win first prize, I'll buy a new phone.",
+        "⑤ We'll have a picnic if it doesn't rain."
+      ],
+      "question": "[용법 구별] 다음 중 밑줄 친 if의 쓰임이 나머지 넷과 다른 하나는?",
+      "explanation": "③의 if는 간접의문문으로 '~인지 어떤지'라는 뜻의 명사절을 이끕니다. 나머지는 모두 조건을 나타내는 부사절 접속사입니다."
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "1",
+      "number": 20,
+      "options": [
+        "① I'm not sure if the movie starts at 7.",
+        "② If you are kind, people will like you.",
+        "③ If she sings well, she'll become famous.",
+        "④ If it gets cold, I'll wear a jacket.",
+        "⑤ If you go to bed early, you'll feel energetic."
+      ],
+      "question": "[용법 구별] 다음 중 밑줄 친 if의 쓰임이 나머지 넷과 다른 하나는?",
+      "explanation": "①의 if는 '~인지 어떤지'를 뜻하는 명사절 접속사입니다. ②③④⑤는 '만약 ~한다면'의 조건 부사절 접속사입니다."
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "3",
+      "number": 21,
+      "options": [
+        "① If you mix blue and yellow, you get green.",
+        "② If you read a lot, you'll become smarter.",
+        "③ They told me if the concert was canceled.",
+        "④ If it rains, the match will be postponed.",
+        "⑤ If you eat slowly, you'll enjoy the food more."
+      ],
+      "question": "[용법 구별] 다음 중 밑줄 친 if의 쓰임이 나머지 넷과 다른 하나는?",
+      "explanation": "③의 if는 '~인지 어떤지'라는 명사절을 이끕니다. ①②④⑤의 if는 조건의 부사절을 이끄는 접속사입니다."
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "2",
+      "number": 22,
+      "options": [
+        "① If you lend me the book, I'll return it tomorrow.",
+        "② Do you know if she passed the driving test?",
+        "③ If we leave early, we'll arrive on time.",
+        "④ If you press this button, the machine will start.",
+        "⑤ I'll help you if you need me."
+      ],
+      "question": "[용법 구별] 다음 중 밑줄 친 if의 쓰임이 나머지 넷과 다른 하나는?",
+      "explanation": "②의 if는 '~인지 어떤지'의 의미로 명사절을 이끕니다. 나머지는 '만약 ~한다면'의 조건 부사절입니다."
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "2",
+      "number": 23,
+      "options": [
+        "① If you visit Jeju Island, you'll see beautiful scenery.",
+        "② She wants to know if I can come to her birthday party.",
+        "③ If you save money, you can buy what you want.",
+        "④ If he apologizes, she will forgive him.",
+        "⑤ If it is windy, let's fly a kite."
+      ],
+      "question": "[용법 구별] 다음 중 밑줄 친 if의 쓰임이 나머지 넷과 다른 하나는?",
+      "explanation": "②의 if는 간접의문문으로 '~인지 어떤지'의 명사절을 이끕니다. 나머지는 조건의 부사절 접속사로 쓰였습니다."
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "4",
+      "number": 24,
+      "options": [
+        "① I asked him if he could help me.",
+        "② Tell me if you know the answer.",
+        "③ We're not sure if the shop is still open.",
+        "④ If you listen carefully, you'll understand.",
+        "⑤ She wondered if it would snow today."
+      ],
+      "question": "[용법 구별] 다음 중 밑줄 친 if의 쓰임이 <보기>와 같은 것은?\n<보기> If you touch the fire, you will get burned.",
+      "explanation": "<보기>의 if는 조건의 부사절을 이끕니다. ④도 '만약 ~한다면'의 조건 부사절입니다. ①③⑤는 명사절, ②는 '~이면 알려줘'로 조건절이지만 명령문과 함께 쓰여 의미가 다릅니다. 실제로 ②도 조건절이지만 보기와 가장 유사한 것은 ④입니다."
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "3",
+      "number": 25,
+      "options": [
+        "① If you drink warm milk before bed, you'll sleep better.",
+        "② If she studies hard, she'll get into a good school.",
+        "③ He doesn't know if the train has already left.",
+        "④ If you exercise daily, you'll stay healthy.",
+        "⑤ If the weather is good on Sunday, we'll go for a walk."
+      ],
+      "question": "[용법 구별] 다음 중 밑줄 친 if의 쓰임이 나머지 넷과 다른 하나는?",
+      "explanation": "③의 if는 '~인지 어떤지'를 뜻하는 명사절 접속사입니다. ①②④⑤는 모두 '만약 ~한다면'의 조건 부사절 접속사입니다."
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "2",
+      "number": 26,
+      "options": [
+        "① If she will finish her homework, she can watch TV.",
+        "② If it rains this afternoon, we will cancel the game.",
+        "③ If he come to school late, the teacher will be angry.",
+        "④ We go to the museum if it is not crowded.",
+        "⑤ If I will see Tom, I tell him you called."
+      ],
+      "question": "[어법 판단] 다음 중 어법상 옳은 문장은?",
+      "explanation": "②는 if절에 현재시제(rains), 주절에 미래시제(will cancel)를 올바르게 사용했습니다. ①은 if절에 will 사용 오류, ③은 come → comes, ④는 주절에 미래시제 누락, ⑤는 if절에 will 사용 오류입니다."
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "3",
+      "number": 27,
+      "options": [
+        "① If you mix salt into water, it dissolves.",
+        "② If the library is open, I'll borrow some books.",
+        "③ If you will be careful, you won't make mistakes.",
+        "④ If he doesn't call me back, I'll visit him.",
+        "⑤ If she gets enough sleep, she will feel energetic."
+      ],
+      "question": "[어법 판단] 다음 중 어법상 어색한 문장은?",
+      "explanation": "③은 조건절(if절)에 'will be'를 쓴 것이 오류입니다. 조건절에는 현재시제를 써야 하므로 'If you are careful'이 올바른 표현입니다."
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "3",
+      "number": 28,
+      "options": [
+        "① If you will study hard, you can get a good grade.",
+        "② Unless she doesn't hurry, she'll miss the bus.",
+        "③ If James leaves early tomorrow, he will catch the first train.",
+        "④ If they will play outside, they will have fun.",
+        "⑤ You feel better if you will take the medicine."
+      ],
+      "question": "[어법 판단] 다음 중 어법상 옳은 문장은?",
+      "explanation": "③은 if절에 현재시제(leaves), 주절에 미래시제(will catch)를 올바르게 사용했습니다. ①④⑤는 if절에 will 사용 오류, ②는 Unless에 not을 함께 쓰는 이중부정 오류입니다."
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "2",
+      "number": 29,
+      "options": [
+        "① If you are free this weekend, let's go cycling.",
+        "② If he will finish work early, we'll have dinner together.",
+        "③ If it snows tomorrow, the children will build a snowman.",
+        "④ Unless you hurry, you'll be late for school.",
+        "⑤ If she takes vitamins daily, she will stay healthy."
+      ],
+      "question": "[어법 판단] 다음 중 어법상 어색한 문장은?",
+      "explanation": "②는 if절에 'will finish'를 쓴 것이 어법상 어색합니다. 조건절에는 현재시제를 써야 하므로 'If he finishes work early'가 올바릅니다."
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "4",
+      "number": 30,
+      "options": [
+        "① If you don't get up now, you will missed the bus.",
+        "② If it will be cold tomorrow, I wear a heavy coat.",
+        "③ Unless you practice more, you can improve quickly.",
+        "④ If you water the plants every day, they will grow well.",
+        "⑤ If she studies hard, she passed the exam next time."
+      ],
+      "question": "[어법 판단] 다음 중 어법상 옳은 문장은?",
+      "explanation": "④는 if절에 현재시제(water), 주절에 미래시제(will grow)를 올바르게 사용했습니다. ①은 'will missed' 오류, ②는 if절에 will 오류, ③은 Unless + 긍정이므로 의미 오류, ⑤는 주절에 과거시제(passed) 오류입니다."
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "4",
+      "number": 31,
+      "options": [
+        "① If it is foggy outside, drive carefully.",
+        "② If I find your keys, I will bring them to you.",
+        "③ Unless he apologizes, she will not forgive him.",
+        "④ If she will join our club, we will be very glad.",
+        "⑤ If you eat less junk food, you will be healthier."
+      ],
+      "question": "[어법 판단] 다음 중 어법상 어색한 문장은?",
+      "explanation": "④는 if절에 'will join'을 쓴 것이 어법상 어색합니다. 조건절에는 현재시제를 써야 하므로 'If she joins our club'이 올바릅니다."
+    },
+    {
+      "tag": "단일",
+      "type": "single_choice",
+      "answer": "4",
+      "number": 32,
+      "options": [
+        "① If you are honest, people will trust you.",
+        "② He will be happy if she comes to his concert.",
+        "③ If we take the express bus, we will arrive faster.",
+        "④ Unless you will bring an umbrella, you'll get wet.",
+        "⑤ If I have enough money, I'll travel around the world."
+      ],
+      "question": "[어법 판단] 다음 중 어법상 어색한 문장은?",
+      "explanation": "④는 unless절에 'will bring'을 쓴 것이 어법상 어색합니다. 조건절(unless절 포함)에는 현재시제를 써야 하므로 'Unless you bring an umbrella'가 올바릅니다."
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "If it is sunny tomorrow, we will play soccer.",
+      "number": 33,
+      "question": "[서술형-영작] 다음 우리말을 영어로 쓰시오.\n만약 내일 날씨가 맑다면, 우리는 축구를 할 것이다.",
+      "explanation": "조건절(if절)에는 현재시제를 쓰고, 주절에는 'will + 동사원형'을 씁니다. 'If it is sunny tomorrow, we will play soccer.'가 올바른 표현입니다.",
+      "acceptedAnswers": [
+        "If it is sunny tomorrow, we will play soccer",
+        "If it's sunny tomorrow, we will play soccer.",
+        "If it is sunny tomorrow, we'll play soccer."
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "If you don't sleep enough, you will feel tired.",
+      "number": 34,
+      "question": "[서술형-영작] 다음 우리말을 영어로 쓰시오.\n만약 네가 충분히 잠을 자지 않는다면, 너는 피곤함을 느낄 것이다.",
+      "explanation": "조건절에서 부정문은 'don't/doesn't + 동사원형'을 사용하고, if절에는 will을 쓰지 않습니다. 주절에는 'will + 동사원형'을 씁니다.",
+      "acceptedAnswers": [
+        "If you don't sleep enough, you will feel tired",
+        "If you do not sleep enough, you will feel tired."
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "If she practices hard, she can win the piano contest.",
+      "number": 35,
+      "question": "[서술형-영작] 다음 우리말을 영어로 쓰시오.\n만약 그녀가 열심히 연습한다면, 그녀는 피아노 대회에서 우승할 수 있다.",
+      "explanation": "조건절(if절)에는 현재시제를 사용하고, 주절에는 'will' 또는 'can + 동사원형'을 씁니다. if절에 will을 쓰지 않도록 주의합니다.",
+      "acceptedAnswers": [
+        "If she practices hard, she can win the piano contest"
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "Unless you leave now, you will miss the train.",
+      "number": 36,
+      "question": "[서술형-영작] 다음 우리말을 영어로 쓰시오.\n만약 네가 지금 출발하지 않으면, 너는 기차를 놓칠 것이다.\n(unless를 사용하여 쓰시오.)",
+      "explanation": "'Unless'는 'If ~ not'과 같은 의미로 '~하지 않으면'을 뜻합니다. unless절에도 현재시제를 사용합니다. 'Unless you leave now, you will miss the train.'이 올바른 표현입니다.",
+      "acceptedAnswers": [
+        "Unless you leave now, you will miss the train"
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "If he arrives at school early tomorrow, he will read a book in the library.",
+      "number": 37,
+      "question": "[서술형-영작] 다음 우리말을 영어로 쓰시오.\n만약 그가 내일 학교에 일찍 도착한다면, 그는 도서관에서 책을 읽을 것이다.",
+      "explanation": "조건절(if절)에는 현재시제를 쓰고, 주절에는 'will + 동사원형'을 씁니다. 미래의 일이더라도 if절에서는 현재시제를 사용해야 합니다.",
+      "acceptedAnswers": [
+        "If he arrives at school early tomorrow, he will read a book in the library",
+        "If he arrives at school early tomorrow, he'll read a book in the library."
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "If I pass the exam, my parents will be very happy.",
+      "number": 38,
+      "question": "[서술형-영작] 다음 우리말을 영어로 쓰시오.\n만약 내가 그 시험에 합격한다면, 나의 부모님은 매우 기뻐하실 것이다.",
+      "explanation": "조건의 if절에는 현재시제, 주절에는 'will + 동사원형'을 씁니다. 'If I pass the exam, my parents will be very happy.'가 올바른 표현입니다.",
+      "acceptedAnswers": [
+        "If I pass the exam, my parents will be very happy"
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "If you drink enough water, you will stay healthy.",
+      "number": 39,
+      "question": "[서술형-영작] 다음 두 문장을 'If'를 사용하여 한 문장으로 쓰시오.\nDrink enough water. You will stay healthy.",
+      "explanation": "'명령문, and + 주어 + will ~' 구조는 'If + 주어 + 동사, 주어 + will ~'로 바꿀 수 있습니다. if절에는 현재시제를 씁니다.",
+      "acceptedAnswers": [
+        "If you drink enough water, you will stay healthy"
+      ]
+    },
+    {
+      "tag": "영작",
+      "type": "sentence",
+      "answer": "If you study every day, you will get a good grade.",
+      "number": 40,
+      "question": "[서술형-영작] 다음 두 문장을 'If'를 사용하여 한 문장으로 쓰시오.\nStudy every day. You will get a good grade.",
+      "explanation": "'명령문, and + 주어 + will ~' 구조를 'If + 주어 + 현재동사, 주어 + will ~'로 바꿉니다. if절에는 현재시제를 사용해야 하며, will을 쓰지 않습니다.",
+      "acceptedAnswers": [
+        "If you study every day, you will get a good grade"
+      ]
+    },
+    {
+      "tag": "단어배열",
+      "type": "sentence",
+      "answer": "If it rains tomorrow, we will stay home.",
+      "number": 41,
+      "question": "[서술형-어순 배열] 다음 주어진 단어들을 올바른 순서로 배열하여 문장을 완성하시오.\n( it / rains / will / we / if / tomorrow / stay / home )",
+      "explanation": "조건절 'If it rains tomorrow'를 앞에 쓰고, 주절 'we will stay home'을 뒤에 씁니다. if절에는 현재시제(rains)를 사용합니다.",
+      "acceptedAnswers": [
+        "If it rains tomorrow, we will stay home",
+        "If it rains tomorrow, we'll stay home."
+      ]
+    },
+    {
+      "tag": "단어배열",
+      "type": "sentence",
+      "answer": "If you study hard, you will pass the test.",
+      "number": 42,
+      "question": "[서술형-어순 배열] 다음 주어진 단어들을 올바른 순서로 배열하여 문장을 완성하시오.\n( will / you / if / hard / you / the / pass / test / study )",
+      "explanation": "조건절 'If you study hard'를 앞에, 주절 'you will pass the test'를 뒤에 씁니다. if절에는 현재시제(study)를 쓰고, 주절에 will을 씁니다.",
+      "acceptedAnswers": [
+        "If you study hard, you will pass the test"
+      ]
+    },
+    {
+      "tag": "단어배열",
+      "type": "sentence",
+      "answer": "Unless she leaves now, she will be late.",
+      "number": 43,
+      "question": "[서술형-어순 배열] 다음 주어진 단어들을 올바른 순서로 배열하여 문장을 완성하시오.\n( she / will / doesn't / unless / now / she / leave / late / be )",
+      "explanation": "'Unless'는 '~하지 않으면'의 의미로, unless절에는 현재시제를 씁니다. 'Unless she leaves now, she will be late.'가 올바른 순서입니다.",
+      "acceptedAnswers": [
+        "Unless she leaves now, she will be late",
+        "Unless she leaves now, she'll be late."
+      ]
+    },
+    {
+      "tag": "단어배열",
+      "type": "sentence",
+      "answer": "I don't know if he will come to the party.",
+      "number": 44,
+      "question": "[서술형-어순 배열] 다음 주어진 단어들을 올바른 순서로 배열하여 문장을 완성하시오.\n( know / I / if / don't / come / will / he / to / party / the )",
+      "explanation": "이 문장에서 if는 '~인지 아닌지'의 의미로 명사절을 이끄는 접속사입니다. 간접의문문에서는 if절에 will을 쓸 수 있습니다.",
+      "acceptedAnswers": [
+        "I don't know if he will come to the party",
+        "I do not know if he will come to the party.",
+        "I don't know if he'll come to the party."
+      ]
+    },
+    {
+      "tag": "단어배열",
+      "type": "sentence",
+      "answer": "If he takes the subway, he will be on time.",
+      "number": 45,
+      "question": "[서술형-어순 배열] 다음 주어진 단어들을 올바른 순서로 배열하여 문장을 완성하시오.\n( takes / if / the / he / subway / on / time / be / will / he )",
+      "explanation": "조건절 'If he takes the subway'를 앞에 쓰고, 주절 'he will be on time'을 뒤에 씁니다. if절에는 현재시제(takes)를 사용합니다.",
+      "acceptedAnswers": [
+        "If he takes the subway, he will be on time",
+        "If he takes the subway, he'll be on time."
+      ]
+    },
+    {
+      "tag": "오류수정",
+      "type": "sentence",
+      "answer": "If it snows tomorrow, we will build a snowman.",
+      "number": 46,
+      "question": "[서술형-오류 수정] 다음 문장에서 어법상 어색한 부분을 찾아 바르게 고쳐 쓰시오.\nIf it will snow tomorrow, we will build a snowman.",
+      "explanation": "조건절(if절)에는 미래의 일이라도 will을 쓰지 않고 현재시제를 사용합니다. 'will snow'를 'snows'로 고쳐야 합니다.",
+      "acceptedAnswers": [
+        "If it snows tomorrow, we will build a snowman",
+        "If it snows tomorrow, we'll build a snowman."
+      ]
+    },
+    {
+      "tag": "오류수정",
+      "type": "sentence",
+      "answer": "Unless you study harder, you won't improve your English.",
+      "number": 47,
+      "question": "[서술형-오류 수정] 다음 문장에서 어법상 어색한 부분을 찾아 바르게 고쳐 쓰시오.\nUnless you will study harder, you won't improve your English.",
+      "explanation": "unless절도 조건절이므로 will을 쓰지 않고 현재시제를 사용합니다. 'will study'를 'study'로 고쳐야 합니다.",
+      "acceptedAnswers": [
+        "Unless you study harder, you won't improve your English",
+        "Unless you study harder, you will not improve your English."
+      ]
+    },
+    {
+      "tag": "오류수정",
+      "type": "sentence",
+      "answer": "If she finishes her homework early, she can watch TV.",
+      "number": 48,
+      "question": "[서술형-오류 수정] 다음 문장에서 어법상 어색한 부분을 찾아 바르게 고쳐 쓰시오.\nIf she will finish her homework early, she can watch TV.",
+      "explanation": "if절에는 현재시제를 사용해야 합니다. 'will finish'를 'finishes'로 고쳐야 합니다. 주어가 3인칭 단수이므로 finishes를 씁니다.",
+      "acceptedAnswers": [
+        "If she finishes her homework early, she can watch TV"
+      ]
+    },
+    {
+      "tag": "오류수정",
+      "type": "sentence",
+      "answer": "If you don't eat breakfast, you will feel hungry during class.",
+      "number": 49,
+      "question": "[서술형-오류 수정] 다음 문장에서 어법상 어색한 부분을 찾아 바르게 고쳐 쓰시오.\nIf you don't will eat breakfast, you will feel hungry during class.",
+      "explanation": "if절의 부정문은 'don't/doesn't + 동사원형'을 사용합니다. 'don't will eat'은 잘못된 표현이며, 'don't eat'으로 고쳐야 합니다.",
+      "acceptedAnswers": [
+        "If you don't eat breakfast, you will feel hungry during class",
+        "If you do not eat breakfast, you will feel hungry during class."
+      ]
+    },
+    {
+      "tag": "오류수정",
+      "type": "sentence",
+      "answer": "If Tom comes back home tonight, I will cook dinner for him.",
+      "number": 50,
+      "question": "[서술형-오류 수정] 다음 문장에서 어법상 어색한 부분을 찾아 바르게 고쳐 쓰시오.\nIf Tom come back home tonight, I will cook dinner for him.",
+      "explanation": "if절의 주어 Tom은 3인칭 단수이므로 동사에 -(e)s를 붙여야 합니다. 'come'을 'comes'로 고쳐야 합니다.",
+      "acceptedAnswers": [
+        "If Tom comes back home tonight, I will cook dinner for him",
+        "If Tom comes back home tonight, I'll cook dinner for him."
+      ]
+    }
+  ]
+}
