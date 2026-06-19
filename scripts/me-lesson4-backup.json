@@ -1,0 +1,739 @@
+{
+  "A": {
+    "questions": [
+      {
+        "answer": "2",
+        "number": 1,
+        "options": [
+          "Russia",
+          "China",
+          "Korea",
+          "America",
+          "Mongolia"
+        ],
+        "question": "다음 <보기>와 같이 형용사형을 만들 수 없는 것은?\n<보기> Hawaii - Hawaiian",
+        "explanation": "나라나 지역 이름의 명사에 접미사 -(a)n을 붙여 형용사를 만들 수 있다. Hawaii - Hawaiian, Russia - Russian, Korea - Korean, America - American, Mongolia - Mongolian으로 변화한다. 그러나 China는 Chinese(중국의, 중국인)로 변화하므로 <보기>의 규칙과 다르다."
+      },
+      {
+        "answer": "4",
+        "number": 2,
+        "options": [
+          "pass down: to give or teach something to your children or people younger than you",
+          "movement: an act of moving the body or part of the body",
+          "generation: all the people who were born at about the same time",
+          "continue: to stop doing, producing, or providing something",
+          "circle: a completely round flat shape"
+        ],
+        "question": "다음 중 영영풀이가 알맞지 않은 것은?",
+        "explanation": "continue는 '잇다, 계속하다'라는 뜻이므로, 주어진 영영풀이인 '무언가를 하는 것, 생산하는 것 또는 제공하는 것을 멈추다'는 알맞지 않다. 'to keep existing or happening without stopping'이 올바른 정의이다."
+      },
+      {
+        "answer": "5",
+        "number": 3,
+        "options": [
+          "ⓑ-ⓐ-ⓒ-ⓓ",
+          "ⓑ-ⓐ-ⓓ-ⓒ",
+          "ⓒ-ⓑ-ⓐ-ⓓ",
+          "ⓒ-ⓓ-ⓐ-ⓑ",
+          "ⓒ-ⓓ-ⓑ-ⓐ"
+        ],
+        "question": "다음 빈칸 (A)~(D)에 들어갈 단어가 차례대로 연결된 것은?\n• He had to (A)____________ his gloves to use his phone.\n• Please (B)____________ your hands to cheer for the players.\n• Don't (C)____________ your head too much when you use your smartphone.\n• You should (D)____________ carefully on the wet floor after you swim.",
+        "explanation": "(A) take off (장갑을 벗다) (B) wave (손을 흔들다) (C) bend (고개를 구부리다) (D) step (발을 내딛다)"
+      },
+      {
+        "answer": "4",
+        "number": 4,
+        "options": [
+          "1개",
+          "2개",
+          "3개",
+          "4개",
+          "5개"
+        ],
+        "question": "다음 중 어법상 어색한 문장의 개수는?\nⓐ When have you seen him?\nⓑ Have you be to Korea before?\nⓒ He has lost his phone in the library.\nⓓ I've known Olivia since I was 8 years old.\nⓔ The engineers have made the device in 1880.\nⓕ The singers don't have arrived at the airport yet.",
+        "explanation": "어법상 어색한 것은 ⓐ, ⓑ, ⓔ, ⓕ 총 4개이다. ⓐ have you seen → did you see (의문사 When은 특정 시점을 묻는 것이므로 현재완료와 함께 쓸 수 없음) ⓑ be → been (현재완료의 의문문은 'Have[Has]+주어+과거분사' 형태) ⓔ have made → made ('in 1880'이라는 명확한 과거를 나타내는 표현과 현재완료는 함께 쓸 수 없음) ⓕ don't have → haven't (현재완료의 부정형은 haven't/hasn't 형태)"
+      },
+      {
+        "answer": "3, 5",
+        "number": 5,
+        "options": [
+          "I follow you.",
+          "Can I try this?",
+          "I beg your pardon?",
+          "Do you know about a pretzel?",
+          "Could you say that again, please?"
+        ],
+        "question": "다음 대화의 빈칸에 들어갈 말로 알맞은 것을 모두 고르면?\nG: Excuse me. Why are you standing in line?\nM: Ah, I'm waiting to buy a pretzel.\nG: Pret... ____________________________________\nM: I said a pretzel. It is a salty type of bread with a unique shape.\nG: Oh, I see.",
+        "explanation": "남자가 프레첼을 사려고 기다리고 있다고 답했으나 여자가 비슷하게 듣지 못해 반복을 요청하는 상황이다. 따라서 빈칸에는 다시 한 번 말해달라는 표현인 'I beg your pardon?'(3번)과 'Could you say that again, please?'(5번)이 모두 적절하다."
+      },
+      {
+        "answer": "4",
+        "number": 6,
+        "options": [
+          "Let's see the fantastic view.",
+          "I like seeing the fantastic view.",
+          "I'm interested in the fantastic view.",
+          "It's well-known for the fantastic view.",
+          "I've never seen the fantastic view there."
+        ],
+        "question": "다음 대화에서 밑줄 친 (A)와 바꾸어 쓸 수 있는 것은?\nMia: Ben, I can't believe we're in New York!\nBen: Yeah. This is my first time here.\nMia: Me, too. There are many places to visit. Where should we start?\nBen: How about the Statue of Liberty?\nMia: Pardon?\nBen: The Statue of Liberty. You know the big green statue of a woman.\nMia: Of course. It's a landmark of New York. Let's visit there first.\nBen: Good. After that, maybe we can go to the Empire State Building. (A)It's famous for the fantastic view. Mia: That sounds great!",
+        "explanation": "'be famous for ~'는 '~으로 유명하다'라는 뜻으로, 'be well-known for ~'로 바꾸어 쓸 수 있다. ④ 'It's well-known for the fantastic view.'는 같은 의미를 전달한다."
+      },
+      {
+        "answer": "2",
+        "number": 7,
+        "options": [
+          "Both Mia and Ben have visited New York before.",
+          "When Ben suggests the Statue of Liberty, Mia doesn't understand him right away.",
+          "Mia has never heard of the Statue of Liberty.",
+          "The Statue of Liberty was decided as the second place for Mia and Ben to visit in New York.",
+          "Mia isn't interested in visiting the Empire State Building."
+        ],
+        "question": "다음 대화의 내용과 일치하는 것은?\nMia: Ben, I can't believe we're in New York!\nBen: Yeah. This is my first time here.\nMia: Me, too. There are many places to visit. Where should we start?\nBen: How about the Statue of Liberty?\nMia: Pardon?\nBen: The Statue of Liberty. You know the big green statue of a woman.\nMia: Of course. It's a landmark of New York. Let's visit there first.\nBen: Good. After that, maybe we can go to the Empire State Building. (A)It's famous for the fantastic view. Mia: That sounds great!",
+        "explanation": "Ben이 자유의 여신상을 제안했을 때, Mia는 'Pardon?(다시 말해줄래?)'이라고 답하고 있으므로, Mia는 처음에 그를 바로 이해하지 못했다."
+      },
+      {
+        "answer": "3",
+        "number": 8,
+        "options": [
+          "What season is it in Australia when it is summer in Korea?",
+          "What wild animals is the woman introducing?",
+          "What kind of food will we have in Australia?",
+          "What famous place will we visit in Australia?",
+          "How can we make a reservation for this trip?"
+        ],
+        "question": "다음 담화를 읽고 답할 수 없는 질문은?\nW: Welcome back to our home shopping channel. Are you tired from the summer heat these days? We have the perfect solution for you, a trip to Australia! It's summer here in Korea, but it's winter in Australia now. This country is famous for its unique wild animals. Look! You'll meet these cute koalas. Then you'll also visit the famous Sydney Opera House, too. Don't miss this chance! Call us and book now. Winter in Australia is waiting for you.",
+        "explanation": "여자는 호주 여행 상품을 소개하면서 우리가 무엇을 할 수 있는지는 설명하고 있으나, 무엇을 먹을 것인지는 언급이 없으므로 ③은 답할 수 없는 질문이다."
+      },
+      {
+        "answer": "4",
+        "number": 9,
+        "options": [
+          "(A)-(C)-(B)",
+          "(B)-(A)-(C)",
+          "(B)-(C)-(A)",
+          "(C)-(A)-(B)",
+          "(C)-(B)-(A)"
+        ],
+        "question": "다음 주어진 글에 이어질 순서로 알맞은 것은?\nLet's start with the hand gestures. Every gesture in hula has a meaning.\n(A) Hawaiians make a circle with their arms above their heads. That's ka lā, the \"sun.\" These gestures are so simple that you can easily remember them.\n(B) Next, bend your knees a little and step from side to side. While you step to the side, move your hips naturally. Now move your hands with your hips and feet!\n(C) Wave your fingers while you move your arms up and down. This gesture is called ua in the Hawaiian language, and it means \"rain.\" What about the sun?",
+        "explanation": "손동작부터 시작하는 주어진 글에 이어 '비'를 의미하는 동작을 설명하는 (C), '태양'은 어떤 동작일지 질문하는 (C)의 마지막 문장에 이어 훌라의 '태양' 동작을 설명하는 (A), 그 다음 손동작이 아닌 다리 동작을 설명하는 (B)가 이어지는 것이 자연스럽다."
+      },
+      {
+        "answer": "4, 5",
+        "number": 10,
+        "options": [
+          "ⓐ",
+          "ⓑ",
+          "ⓒ",
+          "ⓓ",
+          "ⓔ"
+        ],
+        "question": "[지문]\nAloha! Welcome to Hawaii! Aloha means \"hello\" or \"goodbye\" in the Hawaiian language. I'm Malia, and I'm your hula teacher for today. ⓐDo you heard of hula before? ⓑHow many do you know about hula? Before we start our lesson, I want ⓒtelling you about it.\n\nHula is a traditional dance from Hawaii, and it ⓓhas been a part of Hawaiian life for a long time. The early Hawaiians didn't have a writing system, so they used hula ⓔto tell stories. Hula is a language through body movements, and it has passed down stories from one generation to the next.\n\n윗글의 밑줄 친 ⓐ~ⓔ 중, 어법상 알맞은 것을 모두 고르면?",
+        "explanation": "ⓐ Do → Have (현재완료 의문문 형태) ⓑ How many → How much (셀 수 없는 지식에 관해 물을 때) ⓒ telling → to tell (동사 want는 to부정사를 목적어로 취함) ⓓ has been은 부사구 'for a long time'과 함께 과거부터 현재까지 '계속'을 나타내는 현재완료로 적절 ⓔ to tell은 '목적'을 나타내는 부사적 용법의 to부정사로 적절"
+      },
+      {
+        "answer": "They have passed down stories, through hula",
+        "number": 11,
+        "question": "[지문]\nHula is a traditional dance from Hawaii, and it has been a part of Hawaiian life for a long time. The early Hawaiians didn't have a writing system, so they used hula to tell stories. Hula is a language through body movements, and it has passed down stories from one generation to the next.\n\n윗글을 읽고 다음 질문에 대한 알맞은 대답이 되도록 주어진 <조건>에 맞게 빈칸을 완성하시오.\nQ. How have Hawaiian people passed down stories from one generation to the next?\n<조건>\n• 적절한 인칭대명사로 시작할 것\n• through, stories를 사용할 것\n• 각 빈칸에 한 단어씩 쓸 것\n→ _____________ _____________ _____________ _____________ _____________ from one generation to the next _____________ _____________.",
+        "explanation": "인칭대명사 They로 시작하여 현재완료 형태(have passed down)를 사용하고, through와 stories를 포함하는 완전한 문장으로 작성해야 한다."
+      },
+      {
+        "answer": "5",
+        "number": 12,
+        "options": [
+          "We can use Aloha in Hawaiian only when we say \"hello.\"",
+          "Malia is a student who will take part in the hula lesson today.",
+          "Hula is a Hawaiian dance that has become popular recently.",
+          "The early Hawaiians recorded their stories with a writing system.",
+          "Hula is a language that is shown by body movements."
+        ],
+        "question": "[지문]\nAloha! Welcome to Hawaii! Aloha means \"hello\" or \"goodbye\" in the Hawaiian language. I'm Malia, and I'm your hula teacher for today. Have you heard of hula before? How much do you know about hula? Before we start our lesson, I want to tell you about it.\n\nHula is a traditional dance from Hawaii, and it has been a part of Hawaiian life for a long time. The early Hawaiians didn't have a writing system, so they used hula to tell stories. Hula is a language through body movements, and it has passed down stories from one generation to the next.\n\n윗글의 내용과 일치하는 것은?",
+        "explanation": "훌라는 몸의 움직임을 통한 언어라고 명시되어 있으므로 ⑤가 일치한다. ①은 Aloha는 '안녕하세요'와 '안녕히 계세요' 모두에서 사용, ②는 Malia는 선생님, ③은 전통춤, ④는 문자 체계가 없어서 훌라를 사용했다."
+      },
+      {
+        "answer": "4, 5",
+        "number": 13,
+        "options": [
+          "ⓐ",
+          "ⓑ",
+          "ⓒ",
+          "ⓓ",
+          "ⓔ"
+        ],
+        "question": "[지문]\nNow it's time ⓐto dance! Remember that you become a storyteller when you dance hula. You tell a story with your hands, feet, and hips. Oh, you need ⓑto take off your shoes and socks! Hula is always done barefoot.\n\nLet's start with the hand gestures. Every ⓒgesture in hula has a meaning. Wave your fingers while you move your arms up and down. This gesture ⓓcalls ua in the Hawaiian language, and it means \"rain.\" What about the sun? Hawaiians make a circle with their arms above their heads. That's ka lā, the \"sun.\" These gestures are ⓔvery simple that you can easily remember them.\n\n윗글의 밑줄 친 ⓐ~ⓔ 중, 어법상 어색한 것을 모두 고르면?",
+        "explanation": "ⓓ calls → is called (수동태로 '불리다'의 의미) ⓔ very → so (결과절을 이끌기 위해 'so+형용사+that' 구문 필요)"
+      },
+      {
+        "answer": "2",
+        "number": 14,
+        "options": [
+          "When do we become a storyteller?",
+          "Why do Hawaiians dance hula barefoot?",
+          "What do all the gestures in hula have?",
+          "What does ua in Hawaiian mean?",
+          "How do Hawaiians express the \"sun\" in hula?"
+        ],
+        "question": "[지문]\nNow it's time to dance! Remember that you become a storyteller when you dance hula. You tell a story with your hands, feet, and hips. Oh, you need to take off your shoes and socks! Hula is always done barefoot.\n\nLet's start with the hand gestures. Every gesture in hula has a meaning. Wave your fingers while you move your arms up and down. This gesture is called ua in the Hawaiian language, and it means \"rain.\" What about the sun? Hawaiians make a circle with their arms above their heads. That's ka lā, the \"sun.\" These gestures are very simple that you can easily remember them.\n\n윗글을 읽고 답할 수 없는 질문은?",
+        "explanation": "훌라를 출 때 신발과 양말을 벗어야 하며, 훌라는 항상 맨발로 한다고 했을 뿐, 하와이인들이 왜 그렇게 하는지에 대한 언급은 없다."
+      },
+      {
+        "answer": "Story, Gestures, Meaning",
+        "number": 15,
+        "question": "[지문]\nNow it's time to dance! Remember that you become a storyteller when you dance hula. You tell a story with your hands, feet, and hips. Oh, you need to take off your shoes and socks! Hula is always done barefoot.\n\nLet's start with the hand gestures. Every gesture in hula has a meaning. Wave your fingers while you move your arms up and down. This gesture is called ua in the Hawaiian language, and it means \"rain.\" What about the sun? Hawaiians make a circle with their arms above their heads. That's ka lā, the \"sun.\" These gestures are very simple that you can easily remember them.\n\n윗글의 제목을 다음과 같이 쓸 때 빈칸에 들어갈 알맞은 말을 쓰시오. (첫 철자는 대문자로 쓰고 필요시 변형할 것)\nHula: Telling a _____________ with Hand _____________ That Have a _____________",
+        "explanation": "글의 내용을 요약하면 훌라는 의미를 갖는 손동작으로 이야기를 말하는 것이다. 첫 번째 빈칸은 Story, 두 번째는 Gestures, 세 번째는 Meaning이 들어간다."
+      },
+      {
+        "answer": "1",
+        "number": 16,
+        "options": [
+          "bend / that / is",
+          "bend / which / are",
+          "bend / that / are",
+          "bending / which / are",
+          "bending / that / is"
+        ],
+        "question": "[지문]\nNext, (A)[bend / bending] your knees a little and step from side to side. While you ㉠step to the side, move your hips naturally. Now move your hands with your hips and feet!\n\nWell, time's up! That's all for today. Remember (B)[that / which] hula is not just a dance. Hula is a language and a way of storytelling, so it is important to Hawaiians. As a hula teacher, I always try to continue the history and culture of Hawaii. If you want to learn more, come to my next class. Everyone (C)[are / is] welcome. Aloha!\n\n윗글의 괄호 (A), (B), (C)에서 어법상 알맞은 말로 바르게 연결된 것은?",
+        "explanation": "(A) 등위접속사 and에 의해 step과 병렬구조를 이루므로 동사원형 bend 사용 (B) 명사절 접속사 that으로 Remember의 목적어인 명사절을 이끔 (C) Everyone은 단수 취급하므로 단수동사 is 사용"
+      },
+      {
+        "answer": "2, 3",
+        "number": 17,
+        "options": [
+          "My daughter took her first steps today.",
+          "He'll step into the room for his speech.",
+          "Step back behind the line for your safety.",
+          "What is the next step after beating eggs?",
+          "We should follow these steps to solve the math problem."
+        ],
+        "question": "[지문]\nNext, bend your knees a little and step from side to side. While you ㉠step to the side, move your hips naturally. Now move your hands with your hips and feet!\n\nWell, time's up! That's all for today. Remember that hula is not just a dance. Hula is a language and a way of storytelling, so it is important to Hawaiians. As a hula teacher, I always try to continue the history and culture of Hawaii. If you want to learn more, come to my next class. Everyone is welcome. Aloha!\n\n윗글의 밑줄 친 ㉠step과 뜻이 같은 것을 모두 고르면?",
+        "explanation": "㉠의 step은 '(발을) 내딛다, 디디다'의 동사로 쓰였으므로, ②의 step into(들어가다)와 ③의 Step back(물러나다)이 같은 뜻으로 쓰였다."
+      },
+      {
+        "answer": "a language, a way of storytelling, just a dance",
+        "number": 18,
+        "question": "[지문]\nNext, bend your knees a little and step from side to side. While you step to the side, move your hips naturally. Now move your hands with your hips and feet!\n\nWell, time's up! That's all for today. Remember that hula is not just a dance. Hula is a language and a way of storytelling, so it is important to Hawaiians. As a hula teacher, I always try to continue the history and culture of Hawaii. If you want to learn more, come to my next class. Everyone is welcome. Aloha!\n\n윗글을 읽고 다음 질문에 대한 알맞은 대답이 되도록 빈칸을 완성하시오. ※ 완전한 문장으로 쓰시오.\nQ. According to the teacher, what is hula? → It's _____________ _____________ and _____________ _____________ _____________, not _____________ _____________ _____________.",
+        "explanation": "선생님은 훌라가 단순한 춤이 아니라 언어이자 이야기하기의 한 방법이라고 설명하고 있다."
+      },
+      {
+        "answer": "meaning, remember, simple",
+        "number": 19,
+        "question": "[지문]\nLet's start with the hand gestures. Every gesture in hula has a meaning. Wave your fingers while you move your arms up and down. This gesture is called ua in the Hawaiian language, and it means \"rain.\" What about the sun? Hawaiians make a circle with their arms above their heads. That's ka lā, the \"sun.\" These gestures are so simple that you can easily remember them.\n\n다음 글을 아래와 같이 요약하고자 할 때 빈칸에 들어갈 알맞은 말을 각각 찾아 쓰시오.\nEach hand movement in hula shows a ____________, such as rain and the sun. These movements are easy to ____________ because they are _____________.",
+        "explanation": "훌라에 있는 각각의 손동작은 비와 태양 같은 의미를 보여주며, 이런 동작들은 단순해서 기억하기에 쉽다는 내용을 요약한 것이다."
+      },
+      {
+        "answer": "4",
+        "number": 20,
+        "options": [
+          "A: Look! There are many musicals. B: Yeah. New York is famous for Broadway musicals.",
+          "A: Do you know Hamburger Town? B: What did you say? A: I said Hamburger Town.",
+          "A: Excuse me. How can I get to Times Square? B: I beg your pardon?",
+          "A: I want to visit Spain. B: Pardon me? A: That's okay.",
+          "A: What is France famous for? B: It's famous for the Eiffel Tower."
+        ],
+        "question": "다음 중 짝지어진 대화가 어색한 것은?",
+        "explanation": "A가 스페인을 방문하고 싶다고 말하자, B가 다시 말해달라는 의미로 'Pardon me?'라고 하는데, A가 '괜찮아.'라고 답하는 것은 어색하다. 'I said I want to visit Spain.'과 같이 앞에서 했던 말을 다시 반복하는 것이 자연스럽다."
+      },
+      {
+        "answer": "4",
+        "number": 21,
+        "options": [
+          "My uncle has gone to Hawaii.",
+          "He has never played the guitar.",
+          "We have been to Jejudo three times.",
+          "I have exercised regularly since last month.",
+          "She has just finished her English homework."
+        ],
+        "question": "[지문]\nAloha! Welcome to Hawaii! Aloha means \"hello\" or \"goodbye\" in the Hawaiian language. I'm Malia, and I'm your hula teacher for today. Have you heard of hula before? How much do you know about hula? Before we start our lesson, I want to tell you about it.\n\nHula is a traditional dance from Hawaii, and it (A)has been a part of Hawaiian life for a long time. The early Hawaiians didn't have a writing system, so they used hula to tell stories. Hula is a language through body movements, and it has passed down stories from one generation to the next.\n\nNow it's time to dance! Remember that you become a storyteller when you dance hula. You tell a story with your hands, feet, and hips. Oh, you need to take off your shoes and socks! Hula is always done barefoot.\n\nLet's start with the hand gestures. Every gesture in hula (B)_____________. Wave your fingers while you move your arms up and down. This gesture is called ua in the Hawaiian language, and it means \"rain.\" What about the sun? Hawaiians make a circle with their arms above their heads. That's ka lā, the \"sun.\" (C)이 손동작들은 매우 단순해서 당신은 그것들을 쉽게 기억할 수 있어요.\n\nNext, bend your knees a little and step from side to side. While you step to the side, move your hips naturally. Now move your hands with your hips and feet!\n\nWell, time's up! That's all for today. Remember that hula is not just a dance. Hula is a language and a way of storytelling, so it is important to Hawaiians. As a hula teacher, I always try to continue the history and culture of Hawaii. If you want to learn more, come to my next class. Everyone is welcome. Aloha!\n\n윗글의 밑줄 친 (A)has been과 용법이 같은 것은?",
+        "explanation": "(A)의 has been은 부사구 'for a long time'과 함께 과거부터 현재까지 '계속'을 나타내는 현재완료이다. ④ 'I have exercised regularly since last month'도 과거부터 현재까지 '계속' 운동해오고 있음을 나타내므로 같은 용법이다."
+      },
+      {
+        "answer": "5",
+        "number": 22,
+        "options": [
+          "doesn't follow any rules",
+          "shows various emotions",
+          "repeats one movement",
+          "is part of a ritual",
+          "has a meaning"
+        ],
+        "question": "[지문]\nLet's start with the hand gestures. Every gesture in hula (B)_____________. Wave your fingers while you move your arms up and down. This gesture is called ua in the Hawaiian language, and it means \"rain.\" What about the sun? Hawaiians make a circle with their arms above their heads. That's ka lā, the \"sun.\"\n\n윗글의 빈칸 (B)에 들어갈 말로 알맞은 것은?",
+        "explanation": "훌라의 손동작으로 시작하자고 말한 후, 구체적인 손동작을 제시하고 그것이 각각 '비'와 '태양'을 의미함을 말하고 있으므로 훌라의 모든 손동작에 의미가 있음을 알 수 있다."
+      },
+      {
+        "answer": "These gestures are so simple that you can easily remember them.",
+        "number": 23,
+        "question": "[지문]\nThese gestures are very simple that you can easily remember them.\n\n윗글의 밑줄 친 (C)의 우리말을 주어진 <조건>에 알맞게 영작하시오.\n<조건>\nŸ 'so ~ that …' 구문을 사용할 것\nŸ <보기>의 단어 및 표현을 사용할 것\nŸ 11단어의 완전한 문장으로 쓸 것\n<보기> simple, these gestures, easily remember",
+        "explanation": "'so ~ that …' 구문을 사용하여 '이 손동작들은 매우 단순해서 당신은 그것들을 쉽게 기억할 수 있다'는 뜻의 영문을 만들어야 한다.",
+        "acceptedAnswers": [
+          "These gestures are so simple that you can easily remember them"
+        ]
+      },
+      {
+        "answer": "3",
+        "number": 24,
+        "options": [
+          "Things That Are Needed for a Hula Class",
+          "How to Write the Hawaiian Language",
+          "Hula: A Dance That Tells Stories",
+          "Various Styles of Hula Dance",
+          "Religious Features of Hula"
+        ],
+        "question": "[지문]\nAloha! Welcome to Hawaii! Aloha means \"hello\" or \"goodbye\" in the Hawaiian language. I'm Malia, and I'm your hula teacher for today. Have you heard of hula before? How much do you know about hula? Before we start our lesson, I want to tell you about it.\n\nHula is a traditional dance from Hawaii, and it has been a part of Hawaiian life for a long time. The early Hawaiians didn't have a writing system, so they used hula to tell stories. Hula is a language through body movements, and it has passed down stories from one generation to the next.\n\nNow it's time to dance! Remember that you become a storyteller when you dance hula. You tell a story with your hands, feet, and hips. Oh, you need to take off your shoes and socks! Hula is always done barefoot.\n\nLet's start with the hand gestures. Every gesture in hula has a meaning. Wave your fingers while you move your arms up and down. This gesture is called ua in the Hawaiian language, and it means \"rain.\" What about the sun? Hawaiians make a circle with their arms above their heads. That's ka lā, the \"sun.\" These gestures are so simple that you can easily remember them.\n\nNext, bend your knees a little and step from side to side. While you step to the side, move your hips naturally. Now move your hands with your hips and feet!\n\nWell, time's up! That's all for today. Remember that hula is not just a dance. Hula is a language and a way of storytelling, so it is important to Hawaiians. As a hula teacher, I always try to continue the history and culture of Hawaii. If you want to learn more, come to my next class. Everyone is welcome. Aloha!\n\n윗글의 제목으로 알맞은 것은?",
+        "explanation": "글의 내용은 훌라가 무엇인지, 왜 생겨났는지, 그리고 어떤 역할을 해 왔는지를 설명하고 있으므로 ③ '훌라: 이야기를 말하는 춤'이 가장 적절하다."
+      },
+      {
+        "answer": "3, 4",
+        "number": 25,
+        "options": [
+          "Hula is a way to tell stories with our hands, feet, and hips.",
+          "We don't have to wear any shoes or socks during hula dance.",
+          "To show the rain in hula, we should make a circle with our arms above our heads.",
+          "To dance hula, we should straighten our knees and move our feet from side to side.",
+          "Through hula, the teacher wants to preserve the history and culture of Hawaii."
+        ],
+        "question": "[지문]\nAloha! Welcome to Hawaii! Aloha means \"hello\" or \"goodbye\" in the Hawaiian language. I'm Malia, and I'm your hula teacher for today. Have you heard of hula before? How much do you know about hula? Before we start our lesson, I want to tell you about it.\n\nHula is a traditional dance from Hawaii, and it has been a part of Hawaiian life for a long time. The early Hawaiians didn't have a writing system, so they used hula to tell stories. Hula is a language through body movements, and it has passed down stories from one generation to the next.\n\nNow it's time to dance! Remember that you become a storyteller when you dance hula. You tell a story with your hands, feet, and hips. Oh, you need to take off your shoes and socks! Hula is always done barefoot.\n\nLet's start with the hand gestures. Every gesture in hula has a meaning. Wave your fingers while you move your arms up and down. This gesture is called ua in the Hawaiian language, and it means \"rain.\" What about the sun? Hawaiians make a circle with their arms above their heads. That's ka lā, the \"sun.\" These gestures are so simple that you can easily remember them.\n\nNext, bend your knees a little and step from side to side. While you step to the side, move your hips naturally. Now move your hands with your hips and feet!\n\nWell, time's up! That's all for today. Remember that hula is not just a dance. Hula is a language and a way of storytelling, so it is important to Hawaiians. As a hula teacher, I always try to continue the history and culture of Hawaii. If you want to learn more, come to my next class. Everyone is welcome. Aloha!\n\n윗글의 내용과 일치하지 않는 것을 모두 고르면?",
+        "explanation": "③팔을 위아래로 움직이는 동안 손가락을 흔드는 동작이 '비'를 의미하고, 머리 위로 팔을 올려 원을 만드는 동작이 '태양'을 의미한다고 했으므로 거짓이다. ④무릎을 '구부려야' 하는데 '펴야 한다'고 했으므로 거짓이다."
+      },
+      {
+        "answer": "2",
+        "number": 26,
+        "options": [
+          "to advertise hula classes",
+          "to introduce hula to people",
+          "to show the movements of hula",
+          "to explain the Hawaiian writing system",
+          "to tell about the life of the early Hawaiians"
+        ],
+        "question": "[지문]\nHula is a traditional dance from Hawaii, and it has been a part of Hawaiian life for a long time. The early Hawaiians didn't have a writing system, so they used hula to tell stories. Hula is a language through body movements, and it has passed down stories from one generation to the next.\n\n윗글의 목적으로 알맞은 것은?",
+        "explanation": "글은 훌라가 무엇인지, 왜 생겨났는지, 그리고 어떤 역할을 해 왔는지를 설명하고 있으므로 글의 목적은 '훌라를 사람들에게 소개하기 위해'이다."
+      },
+      {
+        "answer": "3",
+        "number": 27,
+        "options": [
+          "write down / written",
+          "write down / symbolic",
+          "hand down / written",
+          "hand down / symbolic",
+          "pass down / spoken"
+        ],
+        "question": "[지문]\nHula is a traditional dance from Hawaii, and it has been a part of Hawaiian life for a long time. The early Hawaiians didn't have a writing system, so they used hula to tell stories. Hula is a language through body movements, and it has passed down stories from one generation to the next.\n\n윗글을 다음과 같이 요약할 때, 빈칸 (A), (B)에 들어갈 말로 알맞게 연결된 것은?\nHula is a traditional Hawaiian dance that was used to tell and (A)___________ stories because there was no (B)__________ language in the early days.",
+        "explanation": "훌라는 한 세대에서 다음 세대로 이야기를 물려주는(hand down) 방법이었으며, 초기에는 문자 체계(written language)가 없었다."
+      },
+      {
+        "answer": "(1) has done yoga, (2) has ridden a bike for",
+        "number": 28,
+        "question": "[지문]\n[도표: 2015년부터 do yoga 시작, 2020년부터 ride a bike 시작, 현재는 2026년]\n\n다음 Olivia의 활동을 나타내는 도표를 보고, 알맞은 시제를 사용하여 문장을 완성하시오. ※ 완전한 문장으로 쓰시오.\n(1) She _____________ ______________ ______________ since 2015.\n(2) She _____________ _____________ _____________ _____________ _____________ six years.",
+        "explanation": "(1) 2015년 이후로 요가를 계속해오고 있으므로 현재완료의 '계속' 용법 사용. (2) 6년 동안 자전거를 타왔으므로 현재완료의 '계속' 용법에서 for를 사용.",
+        "acceptedAnswers": [
+          "(1)has done yoga, (2)has ridden a bike for"
+        ]
+      },
+      {
+        "answer": "(1) so tall that he can reach, (2) so small that she cannot[can't] reach",
+        "number": 29,
+        "question": "[지문]\n[그림 설명: 아버지가 선반의 꼭대기에 있는 책을 잡고 있고, 딸이 잡으려고 팔을 들고 있음]\n\n다음 그림의 내용과 일치하도록 <보기>에서 단어를 골라 'so ~ that …' 구문을 사용하여 문장을 완성하시오. (중복 사용 가능) ※ 완전한 문장으로 쓰시오.\n(1) He is ___________ ___________ ___________ ___________ ___________ ___________ the book on the top shelf.\n(2) His sister is ___________ ___________ ___________ ___________ ___________ ___________ the book on the top shelf.\n<보기> reach, tall, small, can",
+        "explanation": "아버지는 키가 매우 커서 책에 닿을 수 있고, 여동생은 키가 매우 작아서 책에 닿을 수 없다는 'so ~ that' 구문을 만들어야 한다.",
+        "acceptedAnswers": [
+          "(1)so tall that he can reach, (2)so small that she cannot[can't] reach"
+        ]
+      }
+    ],
+    "answer_key": [
+      "2",
+      "4",
+      "5",
+      "4",
+      "3, 5",
+      "4",
+      "2",
+      "3",
+      "4",
+      "4, 5",
+      "They have passed down stories, through hula",
+      "5",
+      "4, 5",
+      "2",
+      "Story, Gestures, Meaning",
+      "1",
+      "2, 3",
+      "a language, a way of storytelling, just a dance",
+      "meaning, remember, simple",
+      "4",
+      "4",
+      "5",
+      "These gestures are so simple that you can easily remember them.",
+      "3",
+      "3, 4",
+      "2",
+      "3",
+      "(1) has done yoga, (2) has ridden a bike for",
+      "(1) so tall that he can reach, (2) so small that she cannot[can't] reach"
+    ]
+  },
+  "B": {
+    "questions": [
+      {
+        "answer": "4",
+        "number": 1,
+        "options": [
+          "take off : put on = continue : stop",
+          "natural : naturally = simple : simply",
+          "move : movement = mean : meaning",
+          "unique : uniqueness = solve : solution",
+          "important : importance = traditional : tradition"
+        ],
+        "question": "다음 중 짝지어진 단어의 관계가 어색한 것은?",
+        "explanation": "④는 '독특한 : 독특함'이 형용사-명사 관계인 반면, 'solve : solution'은 동사-명사 관계이므로 대응이 맞지 않습니다. ①은 반의어 관계, ②③⑤는 모두 형용사-명사 또는 형용사-부사의 일관된 관계를 보입니다."
+      },
+      {
+        "answer": "2",
+        "number": 2,
+        "options": [
+          "Moving your head from side to side is the ____________ that means \"no.\"",
+          "I learn English because it's an international ______________.",
+          "The ____________ told a funny story to the children.",
+          "We saw a famous ____________ in the museum.",
+          "Each ____________ has its own culture."
+        ],
+        "question": "다음 중 <보기>의 단어가 들어갈 수 없는 것은?\n\n<보기> gesture, generation, hip, statue, storyteller",
+        "explanation": "②는 '언어'를 뜻하는 명사 'language'가 들어가야 합니다. <보기>의 'hip(엉덩이)'은 이 문장에 들어갈 수 없습니다. ①gesture(몸짓), ③storyteller(이야기꾼), ④statue(조각상), ⑤generation(세대)은 각각 맞습니다."
+      },
+      {
+        "answer": "5",
+        "number": 3,
+        "options": [
+          "I had to step carefully because the glass was broken. / This is the first step in the project.",
+          "The girl started to draw a circle on the paper. / Please circle the correct answer.",
+          "The story gave me a lesson about kindness. / The next lesson starts in 10 minutes.",
+          "He waved his arms to get people's attention. / We couldn't swim because of big waves.",
+          "My grandfather stood barefoot in the yard. / She danced barefoot on the stage."
+        ],
+        "question": "다음 밑줄 친 단어가 같은 의미로 쓰인 것은?",
+        "explanation": "⑤의 barefoot은 두 문장 모두에서 '맨발로'라는 뜻의 부사로 같은 의미로 쓰였습니다. ①step은 동사와 명사로 다른 의미, ②circle은 명사와 동사로 다른 의미, ③lesson은 명사지만 '교훈'과 '수업'으로 다른 의미, ④wave는 동사와 명사로 다른 의미입니다."
+      },
+      {
+        "answer": "2",
+        "number": 4,
+        "options": [
+          "ⓐ, ⓑ",
+          "ⓑ, ⓓ",
+          "ⓒ, ⓔ",
+          "ⓐ, ⓒ, ⓓ",
+          "ⓑ, ⓓ, ⓔ"
+        ],
+        "question": "다음 우리말을 바르게 영작한 것을 모두 골라 짝지은 것은?\n\n그녀는 너무 어려서 운전을 할 수 없었다.\n\nⓐ She was so young to drive a car.\nⓑ She was too young to drive a car.\nⓒ She was so young that she can't drive a car.\nⓓ She was so young that she couldn't drive a car.\nⓔ She was too young that she couldn't drive a car.",
+        "explanation": "'매우[너무] ~해서 ….할 수 없다'는 'too+형용사/부사+to부정사' 또는 'so+형용사/부사+that+주어+can't+동사원형'으로 표현합니다. ⓑ(too young to drive)와 ⓓ(so young that she couldn't drive)가 올바릅니다. ⓐ는 so with to부정사 구조가 아니고, ⓒ는 시제 일치 오류(was vs can't), ⓔ는 too와 that을 함께 쓸 수 없습니다."
+      },
+      {
+        "answer": "3",
+        "number": 5,
+        "options": [
+          "He has worked for this company for 20 years. / I have been tired since yesterday.",
+          "I have met my favorite singer once. / She has never eaten Mexican food.",
+          "How long have you lived in this city? / Have you ever seen the movie Frozen?",
+          "She has just received your present. / The class has already started.",
+          "He has gone to Italy to study opera. / I have lost my wallet on the subway."
+        ],
+        "question": "다음 중 짝지어진 문장의 현재완료 용법이 서로 다른 것은?",
+        "explanation": "③에서 'How long have you lived ~'는 '계속'의 용법이지만 'Have you ever seen ~'는 '경험'의 용법으로 서로 다릅니다. ①④⑤는 같은 용법의 문장들을 짝지었고, ②도 모두 '경험'의 용법입니다."
+      },
+      {
+        "answer": "3",
+        "number": 6,
+        "options": [
+          "It's noted for the Mona Lisa.",
+          "It's famous for the Mona Lisa.",
+          "Don't touch the Mona Lisa there.",
+          "You can see the Mona Lisa there.",
+          "You should not touch the Mona Lisa there."
+        ],
+        "question": "다음 대화의 빈칸에 들어갈 말로 알맞지 않은 것을 모두 고르면?\n\nA: I can't believe I'm in Paris. Look! That's the Louvre Museum!\nB: I beg your pardon?\nA: I said the Louvre Museum. ________________________\nB: Oh, right! I've always wanted to see it. Let's visit there!\nA: Sounds great!",
+        "explanation": "A는 B가 잘 알아듣지 못한 말을 다시 설명한 후 박물관에 대한 정보를 제공해야 합니다. ③과 ⑤는 박물관에서의 주의사항을 말하는 것으로 문맥에 맞지 않습니다. ①②④는 박물관의 특징을 설명하는 적절한 표현입니다."
+      },
+      {
+        "answer": "4",
+        "number": 7,
+        "options": [
+          "ⓐ, ⓓ",
+          "ⓑ, ⓒ",
+          "ⓓ, ⓔ",
+          "ⓐ, ⓓ, ⓔ",
+          "ⓑ, ⓒ, ⓔ"
+        ],
+        "question": "위 대화의 밑줄 친 (A)와 바꾸어 쓸 수 있는 것을 모두 골라 짝지은 것은?\n\n대화:\nMia: Ben, I can't believe we're in New York!\nBen: Yeah. This is my first time here.\nMia: Me, too. There are many places to visit. Where should we start?\nBen: How about the Statue of Liberty?\nMia: (A)Pardon?\nBen: The Statue of Liberty. You know the big green statue of a woman.",
+        "explanation": "'Pardon?'은 상대방이 한 말을 잘 알아듣지 못해 반복을 요청할 때 쓰는 표현입니다. ⓐ 'Sorry?(뭐라고?)', ⓓ 'Can you repeat that, please?(다시 말해 줄래?)', ⓔ 'Would you mind saying that again?(다시 말해 줄래?)'로 바꾸어 쓸 수 있습니다. ⓑ 'Is that clear?'와 ⓒ 'Are you with me?'는 맥락이 맞지 않습니다."
+      },
+      {
+        "answer": "Statue of Liberty, landmarks, Empire State Building, view",
+        "number": 8,
+        "question": "위 대화를 다음과 같이 요약할 때, 빈칸에 들어갈 알맞은 말을 찾아 쓰시오.\n\nMia and Ben are visiting New York for the first time. They decide to see the _____________ _____________ _____________, one of the city's _____________, and then go to the _____________ _____________ _____________ for its amazing _____________.\n\n※ 필요시 변형할 것",
+        "explanation": "대화에서 Mia와 Ben이 자유의 여신상(Statue of Liberty)을 보고 싶어 하고, 그것이 뉴욕의 랜드마크(landmarks)라고 언급하며, 그 다음 엠파이어 스테이트 빌딩(Empire State Building)에 가서 멋진 전망(fantastic view)을 감상하려고 계획합니다."
+      },
+      {
+        "answer": "is going to stand in line to try a pretzel",
+        "number": 9,
+        "question": "다음 대화를 읽고 아래 질문에 대한 답이 되도록 주어진 <조건>에 맞게 빈칸에 알맞은 말을 쓰시오.\n\nG: Excuse me. Why are you standing in line?\nM: Ah, I'm waiting to buy a pretzel.\nG: Pret... I beg your pardon?\nM: I said a pretzel. It is a salty type of bread with a unique shape.\nG: Oh, I see.\nM: It's delicious. Give it a try!\nG: Okay. I'll join the line then. Thank you.\n\nQ. What is the girl going to do after the conversation?\n\n<조건>\nŸ '목적'을 나타내는 부사적 용법의 to부정사를 쓸 것\nŸ stand in line, try, a를 사용할 것\nŸ 빈칸에 10단어로 쓸 것\n\n→ She _________________________________________________.\n\n※ 10단어의 완전한 문장으로 쓰시오.",
+        "explanation": "대화에서 소녀가 '좋아, 그럼 나도 줄에 설게'라고 말했으므로, 그녀의 행동은 '프레첼을 맛보기 위해 줄을 설 것'입니다. 목적을 나타내는 to부정사(to try)를 사용하여 표현합니다."
+      },
+      {
+        "answer": "4",
+        "number": 10,
+        "options": [
+          "T-T-F",
+          "F-T-F",
+          "T-F-T",
+          "F-F-T",
+          "F-F-F"
+        ],
+        "question": "다음 글의 내용과 (A)~(C)가 일치하면 T, 일치하지 않으면 F를 쓸 때, 순서대로 연결된 것은?\n\nAloha! Welcome to Hawaii! Aloha means \"hello\" or \"goodbye\" in the Hawaiian language. I'm Malia, and I'm your hula teacher for today. Have you heard of hula before? How much do you know about hula? Before we start our lesson, I want to tell you about it.\n\nHula is a traditional dance from Hawaii, and it has been a part of Hawaiian life for a long time. The early Hawaiians didn't have a writing system, so they used hula to tell stories. Hula is a language through body movements, and it has passed down stories from one generation to the next.\n\n(A) Malia is a student who wants to learn how to dance hula. (T/F)\n(B) Hawaiian people in the early days had their own letters to write stories. (T/F)\n(C) Hula was used to tell stories and share them with later generations. (T/F)",
+        "explanation": "(A) Malia는 '훌라 선생님(your hula teacher)'이지, 배우려는 학생이 아닙니다. (F)\n(B) 초기 하와이인들은 '문자 체계가 없었다(didn't have a writing system)'고 명시되어 있습니다. (F)\n(C) 훌라는 '이야기를 말하고(tell stories)' '한 세대에서 다음 세대로 이야기를 전해 왔다(passed down stories from one generation to the next)'고 나와 있습니다. (T)"
+      },
+      {
+        "answer": "3",
+        "number": 11,
+        "options": [
+          "ⓐ: 과거부터 현재까지의 경험 여부를 묻는 '경험' 의 현재완료 시제가 쓰인 의문문이다.",
+          "ⓑ: 동사 want의 목적어 자리에 쓰인 명사적 용법의 to부정사이다.",
+          "ⓒ: 과거의 일이 현재의 결과를 가져왔음을 나타내는 '결과'의 현재완료 시제가 쓰였다.",
+          "ⓓ: '~을 말하기 위해'라는 뜻으로, '목적'을 나타내는 부사적 용법의 to부정사이다.",
+          "ⓔ: the next 뒤에 generation이 생략되었다."
+        ],
+        "question": "다음 글의 밑줄 친 ⓐ~ⓔ에 대한 설명으로 알맞지 않은 것은?\n\nAloha! Welcome to Hawaii! Aloha means \"hello\" or \"goodbye\" in the Hawaiian language. I'm Malia, and I'm your hula teacher for today. ⓐHave you heard of hula before? How much do you know about hula? Before we start our lesson, I want ⓑto tell you about it.\n\nHula is a traditional dance from Hawaii, and it ⓒhas been a part of Hawaiian life for a long time. The early Hawaiians didn't have a writing system, so they used hula ⓓto tell stories. Hula is a language through body movements, and it has passed down stories from one generation to ⓔthe next.",
+        "explanation": "ⓒ의 'has been'은 '계속'의 현재완료 시제입니다. '과거부터 현재까지 오랫동안 하와이 생활의 일부였다'는 시간의 경과를 나타내므로 '결과'가 아닙니다. ⓐ는 경험, ⓑ는 명사적 용법, ⓓ는 목적의 부사적 용법, ⓔ는 생략된 명사에 대한 설명이 모두 올바릅니다."
+      },
+      {
+        "answer": "Because they had no writing system.",
+        "number": 12,
+        "question": "윗글을 읽고 아래 질문에 대한 답을 <조건>에 알맞게 쓰시오.\n\nQ. Why did the early Hawaiians tell stories through hula?\n\n<조건>\n• Because로 시작할 것\n• no, they를 사용할 것\n• 6단어의 완전한 문장으로 쓸 것\n\n※ 6단어의 완전한 문장으로 쓰시오.",
+        "explanation": "글에서 'The early Hawaiians didn't have a writing system, so they used hula to tell stories'라고 명시되어 있으므로, 초기 하와이인들이 훌라를 통해 이야기한 이유는 문자 체계가 없었기 때문입니다. 조건에 맞게 Because로 시작하고 no writing system을 포함하여 6단어로 표현합니다.",
+        "acceptedAnswers": [
+          "Because they had no writing system"
+        ]
+      },
+      {
+        "answer": "4",
+        "number": 13,
+        "options": [
+          "traditional dances to connect generations",
+          "looking for students for a hula class",
+          "the importance of a writing system",
+          "the value of hula as a language",
+          "the origin of the word \"hula\""
+        ],
+        "question": "윗글의 주제로 알맞은 것은?",
+        "explanation": "글은 Malia가 훌라가 단순한 춤이 아니라 문자 체계 없이 이야기를 전하기 위한 언어로 사용되었으며, 한 세대에서 다음 세대로 문화를 전승하는 역할을 했다는 점을 강조합니다. 따라서 주제는 '언어로서 훌라의 가치'입니다."
+      },
+      {
+        "answer": "4",
+        "number": 14,
+        "options": [
+          "remove, complicated, unimportant",
+          "wear, complicated, important",
+          "wear, simple, important",
+          "remove, simple, important",
+          "remove, simple, unimportant"
+        ],
+        "question": "다음 글의 괄호 (A), (B), (C)에서 흐름상 알맞은 말로 바르게 연결된 것은?\n\nNow it's time to dance! Remember that you become a storyteller when you dance hula. You tell a story with your hands, feet, and hips. Oh, you need to (A)[remove / wear] your shoes and socks! Hula is always done barefoot.\n\nLet's start with the hand gestures. Every gesture in hula has a meaning. Wave your fingers while you move your arms up and down. This gesture is called ua in the Hawaiian language, and it means \"rain.\" What about the sun? Hawaiians make a circle with their arms above their heads. That's ka lā, the \"sun.\" These gestures are so (B)[complicated / simple] that you can easily remember them.\n\nNext, bend your knees a little and step from side to side. While you step to the side, move your hips naturally. Now move your hands with your hips and feet!\n\nWell, time's up! That's all for today. Remember that hula is not just a dance. Hula is a language and a way of storytelling, so it is (C)[unimportant / important] to Hawaiians. As a hula teacher, I always try to continue the history and culture of Hawaii. If you want to learn more, come to my next class. Everyone is welcome. Aloha!",
+        "explanation": "(A) 훌라는 항상 맨발로 한다고 했으므로 신발과 양말을 '벗어야(remove)' 합니다. (B) 쉽게 기억할 수 있다고 했으므로 손동작들이 '단순하다(simple)'는 흐름이 맞습니다. (C) 훌라가 언어이며 이야기하는 방식이라고 했으므로 하와이인들에게 '중요하다(important)'는 흐름이 맞습니다."
+      },
+      {
+        "answer": "2",
+        "number": 15,
+        "options": [
+          "1개",
+          "2개",
+          "3개",
+          "4개",
+          "5개"
+        ],
+        "question": "다음 글의 밑줄 친 ⓐ~ⓕ 중, 어법상 어색한 것의 개수는?\n\nNow it's time to dance! ⓐRemember that you become a storyteller when you dance hula. You tell a story with your hands, feet, and hips. Oh, you need to take off your shoes and socks! Hula ⓑis always done barefoot.\n\nLet's ⓒstart with the hand gestures. Every gesture in hula ⓓhave a meaning. Wave your fingers while you move your arms up and down. This gesture ⓔis called ua in the Hawaiian language, and it means \"rain.\" What about the sun? Hawaiians make a circle with their arms above their heads. That's ka lā, the \"sun.\" These gestures are so ⓕsimply that you can easily remember them.",
+        "explanation": "어법상 어색한 것은 2개입니다.\n- ⓓ have → has (주어 Every gesture가 단수이므로 단수동사 has를 사용해야 함)\n- ⓕ simply → simple ('so+형용사+that+주어+동사' 구문에서 be동사 뒤의 보어는 형용사여야 함)"
+      },
+      {
+        "answer": "waving our fingers while we move our arms up and down",
+        "number": 16,
+        "question": "윗글을 읽고 아래 질문에 대한 알맞은 대답이 되도록 주어진 <조건>에 맞게 빈칸을 완성하시오.\n\nQ. How do we make the gesture for \"rain\" in hula?\n\n<조건>\n• wave, our를 사용할 것 (중복 사용 가능하며, 필요시 변형할 것)\n• 빈칸에 11단어로 쓸 것\n\n→ We make it by ____________________________________\n________________________.\n\n※ 11단어로 쓰시오.",
+        "explanation": "글에서 'Wave your fingers while you move your arms up and down. This gesture is called ua in the Hawaiian language, and it means \"rain.\"'라고 설명되어 있습니다. 이를 'We make it by + -ing' 형태로 바꾸면 'waving our fingers while we move our arms up and down'이 되며, 이는 정확히 11단어입니다."
+      },
+      {
+        "answer": "3",
+        "number": 17,
+        "options": [
+          "When we dance hula, we become both dancers and storytellers. (T)",
+          "Dancers in hula should use only their hands to tell a story. (F)",
+          "In hula, some hand gestures have meanings, but others do not. (T)",
+          "If hula dancers make a circle with their arms above their heads, the gesture means the \"moon.\" (F)",
+          "Hand gestures in hula are difficult to remember because they are very complex. (F)"
+        ],
+        "question": "윗글의 내용과 일치하면 T, 일치하지 않으면 F일 때, 알맞지 않은 것은?\n\n글의 내용:\nNow it's time to dance! Remember that you become a storyteller when you dance hula. You tell a story with your hands, feet, and hips. Oh, you need to take off your shoes and socks! Hula is always done barefoot.\n\nLet's start with the hand gestures. Every gesture in hula has a meaning. Wave your fingers while you move your arms up and down. This gesture is called ua in the Hawaiian language, and it means \"rain.\" What about the sun? Hawaiians make a circle with their arms above their heads. That's ka lā, the \"sun.\" These gestures are so simple that you can easily remember them.",
+        "explanation": "③은 '훌라에서 어떤 손동작들은 의미가 있지만, 다른 동작들은 의미가 없다'고 하는데, 글에서는 'Every gesture in hula has a meaning(훌라의 모든 손동작은 의미가 있다)'라고 명시되어 있으므로 불일치합니다. 따라서 T가 아닌 F로 고쳐야 합니다."
+      },
+      {
+        "answer": "2",
+        "number": 18,
+        "options": [
+          "ⓐ: natural → naturally",
+          "ⓑ: what → which",
+          "ⓒ: continue → to continue",
+          "ⓓ: coming → come",
+          "ⓔ: are → were"
+        ],
+        "question": "다음 글의 밑줄 친 ⓐ~ⓔ 중, 어색한 부분을 바르게 고치지 못한 것을 모두 고르면?\n\nNext, bend your knees a little and step from side to side. While you step to the side, move your hips ⓐnatural. Now move your hands with your hips and feet!\n\nWell, time's up! That's all for today. Remember ⓑwhat hula is not just a dance. Hula is a language and a way of storytelling, so it is important to Hawaiians. As a hula teacher, I always try ⓒcontinue the history and culture of Hawaii. If you want to learn more, ⓓcoming to my next class. Everyone ⓔare welcome. Aloha!",
+        "explanation": "②는 ⓑ의 오류를 잘못 고쳤습니다. 'what'이 아닌 'that'으로 고쳐야 합니다(명사절 접속사). 'which'는 관계대명사이므로 틀렸습니다.\n⑤는 ⓔ의 오류를 잘못 고쳤습니다. 주어 Everyone은 단수 취급하므로 'is'로 고쳐야 하며, 'were'은 틀렸습니다."
+      },
+      {
+        "answer": "3",
+        "number": 19,
+        "options": [
+          "uses their hands, feet, and hips together",
+          "has changed their history and culture",
+          "is used as a tool for storytelling",
+          "plays a role as a language",
+          "is loved by everybody"
+        ],
+        "question": "윗글을 읽고 다음 질문에 대한 대답을 완성할 때, 빈칸에 들어갈 알맞은 표현을 모두 고르면?\n\nQ: Why is hula important to Hawaiian people?\nA: Because it _________________________________ and _________________________________.",
+        "explanation": "글에서 'Hula is a language and a way of storytelling, so it is important to Hawaiians'라고 명시되어 있습니다. ③ '이야기하기를 위한 도구로 사용된다'와 ④ '언어로서 역할을 한다'가 훌라가 중요한 이유를 설명합니다."
+      },
+      {
+        "answer": "(A) it has been a part of Hawaiian life for a long time (B) This gesture is called ua in the Hawaiian language",
+        "number": 20,
+        "question": "윗글의 밑줄 친 (A), (B)의 우리말을 주어진 <조건>에 알맞게 각각 영작하시오.\n\nAloha! Welcome to Hawaii! Aloha means \"hello\" or \"goodbye\" in the Hawaiian language. I'm Malia, and I'm your hula teacher for today. Have you heard of hula before? How much do you know about hula? Before we start our lesson, I want to tell you about it.\n\nHula is a traditional dance from Hawaii, and (A)그것은 오랫동안 하와이 생활의 일부였어요. The early Hawaiians didn't have a writing system, so they used hula to tell stories. Hula is a language through body movements, and it has passed down stories from one generation to the next.\n\nNow it's time to dance! Remember that you become a storyteller when you dance hula. You tell a story with your hands, feet, and hips. Oh, you need to take off your shoes and socks! Hula is always done barefoot.\n\nLet's start with the hand gestures. Every gesture in hula has a meaning. Wave your fingers while you move your arms up and down. (B)이 손동작은 하와이어로 ua라고 불린다, and it means \"rain.\" What about the sun? Hawaiians make a circle with their arms above their heads. That's ka lā, the \"sun.\" These gestures are so simple that you can easily remember them.\n\n<조건>\nŸ (A)는 it, (B)는 This로 시작할 것\nŸ <보기>의 단어 및 표현을 모두 포함시킬 것 (필요시 추가 및 변형할 것)\nŸ (A)는 12단어, (B)는 9단어로 각각 쓸 것\n\n<보기> a part, time, call, Hawaiian life, ua, the Hawaiian language, of, have, gesture\n\n(A) ____________________________________________________\n(B) _____________________________________________________\n\n※ (A)는 12단어, (B)는 9단어로 쓰시오.",
+        "explanation": "(A) '그것은 오랫동안 하와이 생활의 일부였어요'는 과거부터 현재까지 계속된 상태를 나타내므로 현재완료로 표현합니다. 'it has been + a part of + Hawaiian life + for a long time'으로 12단어를 정확히 맞춥니다.\n(B) 주어인 '이 손동작'이 '불리는' 대상이므로 수동태를 사용합니다. 'This gesture is called ua in the Hawaiian language'로 9단어를 정확히 맞춥니다."
+      },
+      {
+        "answer": "4",
+        "number": 21,
+        "options": [
+          "ⓐ, ⓒ",
+          "ⓑ, ⓓ",
+          "ⓒ, ⓔ",
+          "ⓐ, ⓒ, ⓔ",
+          "ⓑ, ⓓ, ⓔ"
+        ],
+        "question": "윗글의 밑줄 친 ⓐ~ⓔ의 영영풀이로 알맞은 것을 모두 골라 짝지은 것은?\n\n글의 내용:\nNow it's time to dance! Remember that you become a ⓐstoryteller when you dance hula. You tell a story with your hands, feet, and hips. Oh, you need to ⓑtake off your shoes and socks! Hula is always done barefoot.\n\nLet's start with the hand gestures. Every gesture in hula has a meaning. ⓒWave your fingers while you move your arms up and down. This gesture is called ua in the Hawaiian language, and it means \"rain.\" What about the sun? Hawaiians make a circle with their arms above their heads. That's ka lā, the \"sun.\" These gestures are so simple that you can easily remember them.\n\nNext, bend your ⓓknees a little and step from side to side. While you ⓔstep to the side, move your hips naturally. Now move your hands with your hips and feet!\n\n<보기>\nⓐ a person who tells or writes stories\nⓑ to leave the ground and begin to fly\nⓒ to move your hand or arm from side to side in the air\nⓓ the part in the middle of your arm where it bends\nⓔ to lift your foot and move it in a particular direction",
+        "explanation": "ⓐ storyteller는 '이야기를 말하거나 쓰는 사람' (O)\nⓑ take off는 '(옷 등을) 벗다'이지, '땅을 떠나 날기 시작하다'는 아닙니다. (X)\nⓒ Wave는 '(손이나 팔을) 흔들다' (O)\nⓓ knees는 '무릎'이지, '팔의 가운데 부분(팔꿈치)'이 아닙니다. (X)\nⓔ step은 '(발을) 내딛다' (O)\n따라서 정답은 ⓐ, ⓒ, ⓔ입니다."
+      },
+      {
+        "answer": "5",
+        "number": 22,
+        "options": [
+          "requires the movement of the entire body",
+          "has nothing to do with Hawaiian culture",
+          "is simpler to learn than modern dance",
+          "is just a dance without any meaning",
+          "is more than just a dance"
+        ],
+        "question": "윗글의 빈칸 (C)에 들어갈 말로 알맞은 것은?\n\n글의 내용:\nWell, time's up! That's all for today. Remember that hula (C)____________________________. Hula is a language and a way of storytelling, so it is important to Hawaiians. As a hula teacher, I always try to continue the history and culture of Hawaii. If you want to learn more, come to my next class. Everyone is welcome. Aloha!",
+        "explanation": "글에서 '훌라는 단순한 춤이 아니라 언어이며 이야기하기의 한 방법이고, 하와이인들에게 중요하다'고 강조하고 있으므로, (C)에는 '단순한 춤 이상이다'라는 의미의 ⑤ 'is more than just a dance'가 알맞습니다."
+      },
+      {
+        "answer": "3",
+        "number": 23,
+        "options": [
+          "What does Malia want to do before the lesson?",
+          "What has hula passed down from one generation to the next?",
+          "How do Hawaiians show the wave in hula?",
+          "Why can we easily remember hula's hand gestures?",
+          "How should we move our hips while we step to the side?"
+        ],
+        "question": "윗글을 읽고 대답할 수 없는 질문은?\n\n글의 내용:\nAloha! Welcome to Hawaii! Aloha means \"hello\" or \"goodbye\" in the Hawaiian language. I'm Malia, and I'm your hula teacher for today. Have you heard of hula before? How much do you know about hula? Before we start our lesson, I want to tell you about it.\n\nHula is a traditional dance from Hawaii, and it has been a part of Hawaiian life for a long time. The early Hawaiians didn't have a writing system, so they used hula to tell stories. Hula is a language through body movements, and it has passed down stories from one generation to the next.\n\nNow it's time to dance! Remember that you become a storyteller when you dance hula. You tell a story with your hands, feet, and hips. Oh, you need to take off your shoes and socks! Hula is always done barefoot.\n\nLet's start with the hand gestures. Every gesture in hula has a meaning. Wave your fingers while you move your arms up and down. This gesture is called ua in the Hawaiian language, and it means \"rain.\" What about the sun? Hawaiians make a circle with their arms above their heads. That's ka lā, the \"sun.\" These gestures are so simple that you can easily remember them.",
+        "explanation": "①은 '수업 전에 훌라에 대해 말하길 원한다'고 답할 수 있고, ②는 '이야기를 전해 왔다'고 답할 수 있으며, ④는 '손동작들이 매우 단순해서'라고 답할 수 있고, ⑤는 '자연스럽게 움직여야 한다'고 답할 수 있습니다. 그러나 ③ '하와이인들은 훌라에서 어떻게 \"파도\"를 보여주는가'는 글에서 비와 태양의 손동작만 설명되고 파도에 대해서는 언급이 없으므로 답할 수 없습니다."
+      },
+      {
+        "answer": "Shoes[Socks] or socks[shoes] are not needed for hula.",
+        "number": 24,
+        "question": "윗글을 읽고 다음 질문에 대한 답을 <조건>에 알맞게 쓰시오.\n\n글의 내용:\nNow it's time to dance! Remember that you become a storyteller when you dance hula. You tell a story with your hands, feet, and hips. Oh, you need to take off your shoes and socks! Hula is always done barefoot.\n\nLet's start with the hand gestures. Every gesture in hula has a meaning. Wave your fingers while you move your arms up and down. This gesture is called ua in the Hawaiian language, and it means \"rain.\" What about the sun? Hawaiians make a circle with their arms above their heads. That's ka lā, the \"sun.\" These gestures are so simple that you can easily remember them.\n\nQ. What is not needed for hula?\n\n<조건>\n• 수동태를 사용할 것\n• hula를 사용하여 8단어의 완전한 문장으로 쓸 것\n\n※ 8단어의 완전한 문장으로 쓰시오.",
+        "explanation": "글에서 '훌라는 항상 맨발로 한다'고 했으므로 신발과 양말이 필요하지 않습니다. 조건에 맞게 수동태를 사용하여 'are not needed'로 표현하고, hula를 포함하여 8단어의 완전한 문장으로 작성합니다.",
+        "acceptedAnswers": [
+          "Shoes[Socks] or socks[shoes] are not needed for hula"
+        ]
+      },
+      {
+        "answer": "meaning, rain, wave your fingers, circle, sun, simple",
+        "number": 25,
+        "question": "윗글을 읽고 Malia와 Lisa가 아래와 같이 대화를 나눌 때, 빈칸에 들어갈 알맞은 단어를 본문에서 찾아 쓰시오.\n\nW: Lisa, today we're going to practice some hand gestures of hula. Each one has a ___________.\nG: Really? That sounds interesting.\nW: Let's learn ua. It means \"___________\" Move your arms up and down and ___________ ___________ ___________ at the same time.\nG: Like this?\nW: That's right. Next, raise your arms and make a ___________ above your head. Hawaiians call it ka lā, and it means \"___________\"\nG: I see. I can learn these movements quickly because they're ___________.",
+        "explanation": "본문에서 '모든 손동작은 의미가 있다(Each gesture has a meaning)', 'ua는 비를 의미한다(it means rain)', '팔을 위아래로 움직이면서 손가락을 흔드세요(Wave your fingers while you move your arms up and down)', '머리 위에 원을 만드세요(make a circle above your head)', 'ka lā는 태양을 의미한다(it means sun)', '손동작들이 단순해서 빠르게 배울 수 있다(so simple that you can easily remember them)'는 내용이 포함되어 있습니다."
+      },
+      {
+        "answer": "(1) so slowly that, reach, too slowly to reach (2) so strong that, win, strong enough to win",
+        "number": 26,
+        "question": "'so ~ that …' 구문을 사용하여 <보기>에서 단어를 골라 문장을 완성하시오. \n\n<보기> win, reach, slowly, strong, too, enough\n\n[문장 1] 달팽이가 매우 느려서 바다에 도착할 수 없었다. \n[문장 2] 그 팀이 매우 강해서 결승전에서 우승할 수 있었다.\n\n(1) The snail moved _____________ _____________ _____________\nit couldn't _____________ the sea.\n= The snail moved _____________ _____________ _____________ _____________ the sea.\n\n(2) The team was _____________ _____________ _____________\nthey could _____________ the final match.\n= The team was _____________ _____________ _____________ _____________ the final match.\n\n<보기> win, reach, slowly, strong, too, enough\n\n※ 빈칸을 모두 채우시오.",
+        "explanation": "(1) '달팽이는 너무 느려서 바다에 도착할 수 없었다'는 'so slowly that it couldn't reach'로 표현하고, 'too slowly to reach'로 바꿔 쓸 수 있습니다.\n(2) '그 팀은 너무 강해서 결승전에서 우승할 수 있었다'는 'so strong that they could win'으로 표현하고, 'strong enough to win'으로 바꿔 쓸 수 있습니다.",
+        "acceptedAnswers": [
+          "(1)so slowly that, reach, too slowly to reach (2)so strong that, win, strong enough to win"
+        ]
+      },
+      {
+        "answer": "3",
+        "number": 27,
+        "options": [
+          "We want to make a robot that can help people.",
+          "They didn't know that the earth is round.",
+          "The novel was so sad that I cried a lot.",
+          "This computer is faster than that one.",
+          "I have a friend that lives in Paris."
+        ],
+        "question": "윗글의 밑줄 친 (A)that과 쓰임이 같은 것은?\n\n글의 내용:\nNow it's time to dance! Remember that you become a storyteller when you dance hula. You tell a story with your hands, feet, and hips. Oh, you need to take off your shoes and socks! Hula is always done barefoot.\n\nLet's start with the hand gestures. Every gesture in hula has a meaning. Wave your fingers while you move your arms up and down. This gesture is called ua in the Hawaiian language, and it means \"rain.\" What about the sun? Hawaiians make a circle with their arms above their heads. That's ka lā, the \"sun.\" These gestures are so simple (A)that you can easily remember them.",
+        "explanation": "글의 (A)는 'so simple that ~'에서 '결과'를 나타내는 부사절 접속사 that입니다. ③ 'The novel was so sad that I cried a lot'의 that도 같은 용법으로, '너무 슬픈 결과로 많이 울었다'는 의미의 결과 부사절을 이끕니다."
+      },
+      {
+        "answer": "1",
+        "number": 28,
+        "options": [
+          "to explain how to dance hula",
+          "to talk about the benefits of hula",
+          "to give tips for becoming a hula teacher",
+          "to give information about clothes for hula",
+          "to teach us how to write the Hawaiian language"
+        ],
+        "question": "윗글의 목적으로 알맞은 것은?",
+        "explanation": "글은 손, 발, 무릎, 엉덩이를 사용한 구체적인 동작과 손동작의 의미를 설명하며, 춤을 출 시간이라고 말하고 있으므로 훌라를 추는 방법을 설명하는 것이 글의 목적입니다."
+      },
+      {
+        "answer": "1",
+        "number": 29,
+        "options": [
+          "ⓐ",
+          "ⓑ",
+          "ⓒ",
+          "ⓓ",
+          "ⓔ"
+        ],
+        "question": "윗글의 내용을 다음과 같이 정리할 때, ⓐ~ⓔ 중 일치하지 않은 것을 모두 고르면?\n\n글의 내용:\nNow it's time to dance! Remember that you become a storyteller when you dance hula. You tell a story with your hands, feet, and hips. Oh, you need to take off your shoes and socks! Hula is always done barefoot.\n\nLet's start with the hand gestures. Every gesture in hula has a meaning. Wave your fingers while you move your arms up and down. This gesture is called ua in the Hawaiian language, and it means \"rain.\" What about the sun? Hawaiians make a circle with their arms above their heads. That's ka lā, the \"sun.\" These gestures are so simple that you can easily remember them.\n\nNext, bend your knees a little and step from side to side. While you step to the side, move your hips naturally. Now move your hands with your hips and feet!\n\n요약:\n뭐라도 배우자\nGet Ready\n• Please, dance hula in bare feet.\n• ⓐPlease, become a storyteller by speaking out loud and dancing hula at the same time.\n\nLearn Hand Gestures\n• ua(rain): ⓑWhile you move your arms up and down, wave your fingers.\n• ka lā(sun): ⓒMake a cone shape above your head.\n\nMove feet and hips\n• Bend your knees a little.\n• ⓓStep from side to side and move your hips naturally.\n\n⇩\nⓔMove your hands, feet, and hips all at once!",
+        "explanation": "ⓐ는 글에서 '큰 소리로 말하면서(speaking out loud)' 춤을 춘다는 내용이 없으므로 불일치합니다.\nⓒ는 글에서 '원(circle)'을 만들라고 했지, '고깔 모양(cone shape)'을 만들라고 하지 않았으므로 불일치합니다.\nⓑ, ⓓ, ⓔ는 모두 글의 내용과 일치합니다."
+      }
+    ],
+    "answer_key": [
+      "4",
+      "2",
+      "5",
+      "2",
+      "3",
+      "3",
+      "4",
+      "Statue of Liberty, landmarks, Empire State Building, view",
+      "is going to stand in line to try a pretzel",
+      "4",
+      "3",
+      "Because they had no writing system.",
+      "4",
+      "4",
+      "2",
+      "waving our fingers while we move our arms up and down",
+      "3",
+      "2",
+      "3",
+      "(A) it has been a part of Hawaiian life for a long time (B) This gesture is called ua in the Hawaiian language",
+      "4",
+      "5",
+      "3",
+      "Shoes[Socks] or socks[shoes] are not needed for hula.",
+      "meaning, rain, wave your fingers, circle, sun, simple",
+      "(1) so slowly that, reach, too slowly to reach (2) so strong that, win, strong enough to win",
+      "3",
+      "1",
+      "1"
+    ]
+  }
+}
