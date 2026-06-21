@@ -95,22 +95,14 @@ export default async function StudentVocaDayPage({
       .eq('day_id', dayId),
   ]);
 
-  // Merge wrong words from both sources, deduplicate by front_text
+  // 오답 단어 = 퀴즈(시험)에서 틀린 것만. 매칭/스펠링 자가수정 슬립은 제외.
+  // (matchingSubmissions는 아래 hasMatchingSubmission 게이트용으로만 사용)
   const wrongWordsMap = new Map<string, { front_text: string; back_text: string }>();
 
   for (const row of quizResults || []) {
     const words = (row.wrong_words || []) as Array<{ front_text: string; back_text: string }>;
     for (const w of words) {
       if (w.front_text) wrongWordsMap.set(w.front_text.toLowerCase(), w);
-    }
-  }
-
-  for (const row of matchingSubmissions || []) {
-    const words = (row.wrong_words || []) as Array<{ word: string; match: string; type: string }>;
-    for (const w of words) {
-      if (w.word && !wrongWordsMap.has(w.word.toLowerCase())) {
-        wrongWordsMap.set(w.word.toLowerCase(), { front_text: w.word, back_text: w.match });
-      }
     }
   }
 

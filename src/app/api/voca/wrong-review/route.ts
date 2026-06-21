@@ -34,21 +34,14 @@ export const GET = createApiHandler(
     const weekStart = getCurrentMonday();
     const windowStart = getThreeWeeksAgo(weekStart);
 
-    // 1. quiz wrong_words (최근 3주)
+    // 오답 = 퀴즈(시험)에서 틀린 단어만. 매칭/스펠링은 자가수정 연습이라 제외.
     const { data: quizRows } = await supabase
       .from('voca_quiz_results')
       .select('wrong_words, day_id')
       .eq('student_id', user.id)
       .gte('created_at', windowStart + 'T00:00:00Z');
 
-    // 2. matching wrong_words (최근 3주)
-    const { data: matchingRows } = await supabase
-      .from('voca_matching_submissions')
-      .select('wrong_words, day_id')
-      .eq('student_id', user.id)
-      .gte('created_at', windowStart + 'T00:00:00Z');
-
-    // 3. Merge + deduplicate by lowercase front_text
+    // 단어별 중복 제거 (lowercase front_text)
     const wordMap = new Map<string, { front_text: string; back_text: string }>();
     const dayIds = new Set<string>();
 
@@ -57,13 +50,6 @@ export const GET = createApiHandler(
       for (const w of (row.wrong_words || []) as Array<{ front_text: string; back_text: string }>) {
         const key = w.front_text.toLowerCase();
         if (!wordMap.has(key)) wordMap.set(key, { front_text: w.front_text, back_text: w.back_text });
-      }
-    }
-    for (const row of matchingRows || []) {
-      if (row.day_id) dayIds.add(row.day_id);
-      for (const w of (row.wrong_words || []) as Array<{ word: string; match: string }>) {
-        const key = w.word.toLowerCase();
-        if (!wordMap.has(key)) wordMap.set(key, { front_text: w.word, back_text: w.match });
       }
     }
 
