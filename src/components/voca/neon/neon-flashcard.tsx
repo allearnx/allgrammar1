@@ -138,6 +138,11 @@ export function NeonFlashcard({ vocabulary, onComplete }: NeonFlashcardProps) {
         <ProgressDots total={vocabulary.length} current={currentIndex} visited={visited} />
       </div>
 
+      {/* 사용법 안내 */}
+      <p className="text-xs text-center text-gray-400 mb-4">
+        단어 발음을 듣고 뜻·예문을 확인한 뒤 <span className="font-medium text-gray-500">다음</span>을 누르세요. 모든 단어를 보면 완료할 수 있어요.
+      </p>
+
       {/* Card */}
       <div className="flex-1 flex items-center justify-center">
         <AnimatePresence mode="wait" custom={direction}>
