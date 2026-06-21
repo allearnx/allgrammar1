@@ -16,6 +16,44 @@ const CHUNK_SIZE = 5;
 const MAX_ATTEMPTS = 2;
 const PASS_SCORE = 90;
 
+/**
+ * 같은 뜻(back_text)의 단어가 한 셋트에 들어가지 않도록 청크 분배.
+ * 셋트 개수는 ceil(n/size) 유지. 한 뜻이 셋트 수보다 많이 나오면(회피 불가)
+ * 남는 건 빈 자리에 채움 — 그 경우는 매칭 게임의 텍스트 비교가 공정 처리.
+ */
+function chunkAvoidingDuplicateMeaning(vocabulary: VocaVocabulary[], size: number): VocaVocabulary[][] {
+  const shuffled = shuffle([...vocabulary]);
+  const numChunks = Math.max(1, Math.ceil(shuffled.length / size));
+  const chunks: VocaVocabulary[][] = Array.from({ length: numChunks }, () => []);
+  const meanings: Set<string>[] = Array.from({ length: numChunks }, () => new Set());
+  const overflow: VocaVocabulary[] = [];
+
+  for (const w of shuffled) {
+    const key = (w.back_text || '').trim();
+    // 공간 있고 같은 뜻 없는 셋트 중 가장 적게 찬 것에 배정(균형)
+    let best = -1;
+    for (let i = 0; i < numChunks; i++) {
+      if (chunks[i].length >= size) continue;
+      if (key && meanings[i].has(key)) continue;
+      if (best === -1 || chunks[i].length < chunks[best].length) best = i;
+    }
+    if (best === -1) { overflow.push(w); continue; }
+    chunks[best].push(w);
+    if (key) meanings[best].add(key);
+  }
+  // 회피 불가분(같은 뜻이 셋트 수보다 많음)은 빈 자리에 채움
+  for (const w of overflow) {
+    let best = -1;
+    for (let i = 0; i < chunks.length; i++) {
+      if (chunks[i].length >= size) continue;
+      if (best === -1 || chunks[i].length < chunks[best].length) best = i;
+    }
+    if (best === -1) chunks.push([w]);
+    else chunks[best].push(w);
+  }
+  return chunks.filter((c) => c.length > 0);
+}
+
 export function WordMatching({ vocabulary, onComplete }: WordMatchingProps) {
   const [currentChunk, setCurrentChunk] = useState(0);
   const [attempt, setAttempt] = useState(1);
@@ -26,12 +64,7 @@ export function WordMatching({ vocabulary, onComplete }: WordMatchingProps) {
   const chunkTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const chunks = useMemo(() => {
-    const shuffled = shuffle([...vocabulary]);
-    const result: VocaVocabulary[][] = [];
-    for (let i = 0; i < shuffled.length; i += CHUNK_SIZE) {
-      result.push(shuffled.slice(i, i + CHUNK_SIZE));
-    }
-    return result;
+    return chunkAvoidingDuplicateMeaning(vocabulary, CHUNK_SIZE);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [vocabulary, retryCount]);
 
