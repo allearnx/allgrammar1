@@ -133,7 +133,9 @@ export function usePaperTest({
       // Build answers array in question order
       const answers: (string | number)[] = questions.map((_, i) => answersMap[i] ?? '');
 
-      // Grade subjective questions via AI (parallel)
+      // Grade subjective questions via AI — 동시 6개 제한 + 각 25초 타임아웃.
+      // (서술형 많은 시험지에서 수십 개를 한 번에 병렬 호출하면 일부가 매달려
+      //  Promise.all이 영영 안 끝나 제출 버튼이 무한 로딩되던 버그 방지.)
       const aiResults: Record<string, AiFeedback> = {};
       const subjectiveIndices = questions
         .map((q, i) => ({ q, i }))
@@ -142,7 +144,9 @@ export function usePaperTest({
         .filter(({ i }) => String(answers[i]).trim() !== '');
 
       if (subjectiveIndices.length > 0) {
-        const gradePromises = subjectiveIndices.map(async ({ q, i }) => {
+        const gradeOne = async ({ q, i }: { q: typeof questions[number]; i: number }) => {
+          const ctrl = new AbortController();
+          const timer = setTimeout(() => ctrl.abort(), 25000); // 25초 후 강제 중단(매달림 방지)
           try {
             const result = await fetchWithToast<{ score: number; feedback?: string; correctedAnswer?: string }>(
               '/api/naesin/problems/grade-subjective',
@@ -153,8 +157,9 @@ export function usePaperTest({
                   studentAnswer: String(answers[i]),
                   acceptedAnswers: q.acceptedAnswers,
                 },
-                errorMessage: '채점 오류',
+                silent: true, // 토스트 폭주 방지 — 실패 문항은 제출 라우트가 규칙채점/오답 처리
                 logContext: 'naesin.paper_test',
+                fetchOptions: { signal: ctrl.signal },
               },
             );
             if (result) {
@@ -162,9 +167,23 @@ export function usePaperTest({
             }
           } catch {
             // Fallback: skip AI grading for this question
+          } finally {
+            clearTimeout(timer);
           }
-        });
-        await Promise.all(gradePromises);
+        };
+        // 동시 6개 워커가 큐에서 순차 처리. 전체 90초 예산 초과 시 남은 문항은
+        // 미채점으로 두고 제출 진행 — 제출은 어떤 경우에도 멈추지 않고 완료된다.
+        const queue = [...subjectiveIndices];
+        const CONCURRENCY = 6;
+        const deadline = Date.now() + 90000;
+        await Promise.all(
+          Array.from({ length: Math.min(CONCURRENCY, queue.length) }, async () => {
+            for (let item = queue.shift(); item; item = queue.shift()) {
+              if (Date.now() > deadline) break;
+              await gradeOne(item);
+            }
+          }),
+        );
       }
 
       // Submit via existing API
