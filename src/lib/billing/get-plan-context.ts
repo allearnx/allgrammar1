@@ -43,7 +43,8 @@ export async function getPlanContext(
         .eq('student_id', studentId);
 
       const services = assignments ?? [];
-      const hasPaidAssignment = services.some((a) => a.source === 'payment');
+      // 'payment'(개인결제) + 'subscription'(학원/구독) 둘 다 유료. subscription 누락이 b58e270 버그의 잔여.
+      const hasPaidAssignment = services.some((a) => a.source === 'payment' || a.source === 'subscription');
       const memorizeOnly = services.some(
         (a) => a.service === 'naesin' && a.naesin_memorize_only,
       );
@@ -93,7 +94,7 @@ export async function getPlanContext(
     // Free tier 학원: 학생 개인 service_assignments 기반으로 freeService 결정
     if (tier === 'free') {
       if (studentServices.length > 0) {
-        if (studentServices.some((a) => a.source === 'payment')) {
+        if (studentServices.some((a) => a.source === 'payment' || a.source === 'subscription')) {
           return { tier: 'paid', freeService: null, naesinMemorizeOnly: false };
         }
         const studentFreeService = studentServices.some((a) => a.service === 'voca') ? 'voca' as const
