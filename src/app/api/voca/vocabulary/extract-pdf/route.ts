@@ -58,7 +58,8 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
-  const limited = await checkRateLimit(user.id, 'voca/vocabulary/extract-pdf', 10);
+  // 단어 교재를 여러 이미지로 만들 때 이미지 1장당 1회 → 콘텐츠 제작용이라 넉넉히 100/시간
+  const limited = await checkRateLimit(user.id, 'voca/vocabulary/extract-pdf', 100);
   if (limited) return limited;
 
   try {
