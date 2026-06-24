@@ -33,46 +33,63 @@ interface ExtractedWord {
 export function PdfVocabExtract({ module, parentId, onAdd }: VocabDialogProps) {
   const [open, setOpen] = useState(false);
   const [step, setStep] = useState<1 | 2>(1);
-  const [file, setFile] = useState<File | null>(null);
+  const [files, setFiles] = useState<File[]>([]);
   const [extracting, setExtracting] = useState(false);
+  const [progress, setProgress] = useState<{ done: number; total: number } | null>(null);
   const [saving, setSaving] = useState(false);
   const [words, setWords] = useState<ExtractedWord[]>([]);
   const cfg = getVocabConfig(module);
 
   function reset() {
     setStep(1);
-    setFile(null);
+    setFiles([]);
     setExtracting(false);
+    setProgress(null);
     setSaving(false);
     setWords([]);
   }
 
   async function handleExtract() {
-    if (!file) return;
+    if (files.length === 0) return;
     setExtracting(true);
+    setProgress({ done: 0, total: files.length });
     try {
       const { uploadForExtract } = await import('@/lib/upload-for-extract');
-      const { publicUrl, storagePath } = await uploadForExtract(file);
-      const isImage = file.type.startsWith('image/');
+      // front_text(소문자) 기준 중복 제거하며 여러 장을 순차 추출 → 합치기.
+      const merged: Omit<ExtractedWord, 'selected'>[] = [];
+      const seen = new Set<string>();
+      let anySucceeded = false;
 
-      const data = await fetchWithToast<{ items: Omit<ExtractedWord, 'selected'>[] }>(
-        `${cfg.apiBase}/extract-pdf`,
-        {
-          body: { ...(isImage ? { imageUrl: publicUrl } : { pdfUrl: publicUrl }), storagePath },
-          errorMessage: '단어 추출 실패',
-          logContext: `${cfg.logPrefix}.pdf_vocab_extract`,
-        },
-      );
+      for (let idx = 0; idx < files.length; idx++) {
+        const file = files[idx];
+        try {
+          const { publicUrl, storagePath } = await uploadForExtract(file);
+          const isImage = file.type.startsWith('image/');
+          const data = await fetchWithToast<{ items: Omit<ExtractedWord, 'selected'>[] }>(
+            `${cfg.apiBase}/extract-pdf`,
+            {
+              body: { ...(isImage ? { imageUrl: publicUrl } : { pdfUrl: publicUrl }), storagePath },
+              errorMessage: `${idx + 1}번째 파일 단어 추출 실패`,
+              logContext: `${cfg.logPrefix}.pdf_vocab_extract`,
+            },
+          );
+          anySucceeded = true;
+          for (const item of data.items) {
+            const key = item.front_text?.toLowerCase().trim();
+            if (!key || seen.has(key)) continue;
+            seen.add(key);
+            merged.push(item);
+          }
+        } catch {
+          // 개별 파일 실패는 토스트로 안내됨 — 나머지 파일은 계속 진행
+        } finally {
+          setProgress({ done: idx + 1, total: files.length });
+        }
+      }
 
-      setWords(
-        data.items.map((item) => ({
-          ...item,
-          selected: true,
-        }))
-      );
+      if (!anySucceeded) return; // 전부 실패 → step1 유지
+      setWords(merged.map((item) => ({ ...item, selected: true })));
       setStep(2);
-    } catch {
-      // fetchWithToast already shows toast
     } finally {
       setExtracting(false);
     }
@@ -151,26 +168,33 @@ export function PdfVocabExtract({ module, parentId, onAdd }: VocabDialogProps) {
         {step === 1 && (
           <div className="space-y-4">
             <div>
-              <Label>PDF 또는 이미지 파일 선택</Label>
+              <Label>PDF 또는 이미지 파일 선택 (여러 장 가능)</Label>
               <Input
                 type="file"
+                multiple
                 accept="application/pdf,image/png,image/jpeg,image/webp,image/gif"
-                onChange={(e) => setFile(e.target.files?.[0] || null)}
+                onChange={(e) => setFiles(Array.from(e.target.files ?? []))}
               />
+              {files.length > 0 && (
+                <p className="mt-1 text-xs text-muted-foreground">{files.length}개 파일 선택됨</p>
+              )}
             </div>
             <p className="text-xs text-muted-foreground">
               {pdfLabel} 또는 <strong>단어 목록 사진/이미지</strong>를 올리면 AI가 단어를 읽어
-              뜻·품사·예문·해석·유의어·반의어까지 자동 생성합니다.
+              뜻·품사·예문·해석·유의어·반의어까지 자동 생성합니다. 여러 장은 순서대로 처리해
+              중복 단어를 합칩니다.
             </p>
             <Button
               className="w-full"
               onClick={handleExtract}
-              disabled={!file || extracting}
+              disabled={files.length === 0 || extracting}
             >
               {extracting ? (
                 <>
                   <Loader2 className="h-4 w-4 mr-2 animate-spin" />
-                  추출 중... (30초~1분 소요)
+                  {progress && progress.total > 1
+                    ? `추출 중... (${progress.done}/${progress.total}장)`
+                    : '추출 중... (30초~1분 소요)'}
                 </>
               ) : (
                 '단어 추출'
