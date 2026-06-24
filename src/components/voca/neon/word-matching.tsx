@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useMemo, useRef, useEffect } from 'react';
+import { useState, useMemo } from 'react';
 import { MatchingGameRound, type MatchingGameItem } from '@/components/voca/vocab-tab/matching-game-round';
 import { NeonResultScreen } from './neon-result-screen';
 import { shuffle } from '@/lib/utils';
@@ -61,7 +61,8 @@ export function WordMatching({ vocabulary, onComplete }: WordMatchingProps) {
   const [totalWrong, setTotalWrong] = useState(0);
   const [totalPairs, setTotalPairs] = useState(0);
   const [finalScore, setFinalScore] = useState<number | null>(null);
-  const chunkTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  // 셋트 완료 후 "다음 세트" 안내 화면 (다 맞췄다는 신호) — null이면 푸는 중
+  const [setDone, setSetDone] = useState<{ correct: number; total: number } | null>(null);
 
   const chunks = useMemo(() => {
     return chunkAvoidingDuplicateMeaning(vocabulary, CHUNK_SIZE);
@@ -82,7 +83,8 @@ export function WordMatching({ vocabulary, onComplete }: WordMatchingProps) {
     if (currentChunk + 1 < chunks.length) {
       setTotalWrong(newTotalWrong);
       setTotalPairs(newTotalPairs);
-      chunkTimerRef.current = setTimeout(() => setCurrentChunk((c) => c + 1), 500);
+      // 자동으로 넘기지 않고 "완료!" 신호 + 다음 세트 버튼을 보여준다.
+      setSetDone({ correct: items.length - wrongIndices.length, total: items.length });
     } else {
       const score = Math.round(((newTotalPairs - newTotalWrong) / newTotalPairs) * 100);
 
@@ -98,9 +100,10 @@ export function WordMatching({ vocabulary, onComplete }: WordMatchingProps) {
     }
   };
 
-  useEffect(() => {
-    return () => { if (chunkTimerRef.current) clearTimeout(chunkTimerRef.current); };
-  }, []);
+  function goNextChunk() {
+    setSetDone(null);
+    setCurrentChunk((c) => c + 1);
+  }
 
   function handleRetry() {
     setRetryCount((c) => c + 1);
@@ -109,6 +112,7 @@ export function WordMatching({ vocabulary, onComplete }: WordMatchingProps) {
     setTotalWrong(0);
     setTotalPairs(0);
     setFinalScore(null);
+    setSetDone(null);
   }
 
   if (finalScore !== null) {
@@ -120,6 +124,33 @@ export function WordMatching({ vocabulary, onComplete }: WordMatchingProps) {
         failMessage={`${finalScore}점 (90% 이상 필요)`}
         onRetry={handleRetry}
       />
+    );
+  }
+
+  // 셋트 완료 신호 — 다 맞췄음을 알리고, 학생이 직접 다음 세트로 넘어가게 한다.
+  if (setDone !== null) {
+    const allCorrect = setDone.correct === setDone.total;
+    return (
+      <div className="neon-container p-4 md:p-6 min-h-[60dvh] flex flex-col items-center justify-center text-center">
+        <div className="text-5xl mb-4">{allCorrect ? '🎉' : '✅'}</div>
+        <h2 className="text-2xl font-bold text-gray-800 mb-1">
+          세트 {currentChunk + 1} 완료!
+        </h2>
+        <p className="text-base text-gray-500 mb-1">
+          {allCorrect
+            ? '5개 모두 맞췄어요!'
+            : `${setDone.total}개 중 ${setDone.correct}개를 한 번에 맞췄어요`}
+        </p>
+        <p className="text-sm text-gray-400 mb-8">
+          다음: 세트 {currentChunk + 2}/{chunks.length}
+        </p>
+        <button
+          onClick={goNextChunk}
+          className="rounded-xl bg-indigo-600 px-8 py-3.5 text-base font-bold text-white shadow-lg transition-all hover:bg-indigo-700 active:scale-[0.98]"
+        >
+          다음 세트로 →
+        </button>
+      </div>
     );
   }
 
