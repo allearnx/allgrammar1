@@ -53,12 +53,13 @@ export function PdfVocabExtract({ module, parentId, onAdd }: VocabDialogProps) {
     try {
       const { uploadForExtract } = await import('@/lib/upload-for-extract');
       const { publicUrl, storagePath } = await uploadForExtract(file);
+      const isImage = file.type.startsWith('image/');
 
       const data = await fetchWithToast<{ items: Omit<ExtractedWord, 'selected'>[] }>(
         `${cfg.apiBase}/extract-pdf`,
         {
-          body: { pdfUrl: publicUrl, storagePath },
-          errorMessage: 'PDF 단어 추출 실패',
+          body: { ...(isImage ? { imageUrl: publicUrl } : { pdfUrl: publicUrl }), storagePath },
+          errorMessage: '단어 추출 실패',
           logContext: `${cfg.logPrefix}.pdf_vocab_extract`,
         },
       );
@@ -137,28 +138,29 @@ export function PdfVocabExtract({ module, parentId, onAdd }: VocabDialogProps) {
       <DialogTrigger asChild>
         <Button size="sm" variant="outline">
           <FileText className="h-3.5 w-3.5 mr-1" />
-          PDF 단어 추출
+          PDF·이미지 단어 추출
         </Button>
       </DialogTrigger>
       <DialogContent className="max-w-3xl max-h-[85vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle>
-            {step === 1 ? 'PDF 단어 추출' : `추출 결과 (${selectedCount}/${words.length}개 선택)`}
+            {step === 1 ? 'PDF·이미지 단어 추출' : `추출 결과 (${selectedCount}/${words.length}개 선택)`}
           </DialogTitle>
         </DialogHeader>
 
         {step === 1 && (
           <div className="space-y-4">
             <div>
-              <Label>PDF 파일 선택</Label>
+              <Label>PDF 또는 이미지 파일 선택</Label>
               <Input
                 type="file"
-                accept="application/pdf"
+                accept="application/pdf,image/png,image/jpeg,image/webp,image/gif"
                 onChange={(e) => setFile(e.target.files?.[0] || null)}
               />
             </div>
             <p className="text-xs text-muted-foreground">
-              {pdfLabel}를 업로드하면 AI가 핵심 단어를 자동으로 추출합니다.
+              {pdfLabel} 또는 <strong>단어 목록 사진/이미지</strong>를 올리면 AI가 단어를 읽어
+              뜻·품사·예문·해석·유의어·반의어까지 자동 생성합니다.
             </p>
             <Button
               className="w-full"

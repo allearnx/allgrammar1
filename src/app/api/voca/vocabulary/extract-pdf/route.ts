@@ -9,7 +9,7 @@ export const maxDuration = 120;
 
 const anthropic = new Anthropic();
 
-const PROMPT = `이 PDF에서 영어 단어를 추출해주세요.
+const PROMPT = `이 이미지/PDF에서 영어 단어를 추출해주세요. (단어 목록 사진·스캔·표 등 무엇이든 보이는 영어 단어를 읽어낼 것)
 
 ## 필수 규칙
 - 중복 없이 핵심 단어만 선별
@@ -17,14 +17,14 @@ const PROMPT = `이 PDF에서 영어 단어를 추출해주세요.
 - 고유명사 제외
 
 ## 품사(p) 규칙
-- PDF에 품사가 표기되어 있으면 그대로 따라갈 것
-- PDF에 같은 단어가 품사별로 나뉘어 있으면 (예: run n. / run v.) 별도 항목으로 분리
-- PDF에 품사 구분 없이 한 단어로만 있으면 하나의 항목으로 합쳐서 p에 "n. v." 형태로 표기
-- PDF에 품사 자체가 없으면 가장 대표적인 품사 1개를 넣을 것
+- 이미지·PDF에 품사가 표기되어 있으면 그대로 따라갈 것
+- 이미지·PDF에 같은 단어가 품사별로 나뉘어 있으면 (예: run n. / run v.) 별도 항목으로 분리
+- 이미지·PDF에 품사 구분 없이 한 단어로만 있으면 하나의 항목으로 합쳐서 p에 "n. v." 형태로 표기
+- 이미지·PDF에 품사 자체가 없으면 가장 대표적인 품사 1개를 넣을 것
 
 ## 예문(e) 규칙 — 반드시 생성
-- PDF에 예문이 있으면 그대로 사용
-- PDF에 예문이 없으면 반드시 자연스러운 영어 예문을 만들어서 넣을 것
+- 원본에 예문이 있으면 그대로 사용
+- 예문이 없으면 반드시 자연스러운 영어 예문을 만들어서 넣을 것
 - 예문에 해당 단어가 반드시 포함되어야 함
 - 중학생 수준의 쉬운 문장으로 작성 (15단어 이내)
 - e 필드가 null이면 안 됨
@@ -62,20 +62,21 @@ export async function POST(request: NextRequest) {
   if (limited) return limited;
 
   try {
-    // FormData 업로드 시 PDF 파일 타입 검증
+    // FormData 업로드 시 PDF/이미지만 허용
     const ct = request.headers.get('content-type') || '';
     if (!ct.includes('application/json')) {
       const formData = await request.clone().formData();
       const file = formData.get('file') as File | null;
-      if (file && file.type !== 'application/pdf') {
-        return NextResponse.json({ error: 'PDF 파일만 지원합니다.' }, { status: 400 });
+      const ALLOWED = ['application/pdf', 'image/png', 'image/jpeg', 'image/jpg', 'image/webp', 'image/gif'];
+      if (file && !ALLOWED.includes(file.type)) {
+        return NextResponse.json({ error: 'PDF 또는 이미지(PNG/JPG) 파일만 지원합니다.' }, { status: 400 });
       }
     }
 
-    const { parsePdfInput, cleanupStorage } = await import('@/lib/api/pdf-input');
-    const { documentBlock, storagePath } = await parsePdfInput(request);
+    const { parseDocOrImageInput, cleanupStorage } = await import('@/lib/api/pdf-input');
+    const { block, storagePath } = await parseDocOrImageInput(request);
 
-    logger.info('ai.pdf_extract', { mode: storagePath ? 'url' : 'formdata' });
+    logger.info('ai.voca_extract', { mode: storagePath ? 'url' : 'formdata', blockType: block.type });
 
     const message = await anthropic.messages.create({
       model: 'claude-opus-4-8',
@@ -84,7 +85,7 @@ export async function POST(request: NextRequest) {
         {
           role: 'user',
           content: [
-            documentBlock,
+            block as Anthropic.Messages.ContentBlockParam,
             { type: 'text', text: PROMPT },
           ],
         },
