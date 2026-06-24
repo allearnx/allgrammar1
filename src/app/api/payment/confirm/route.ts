@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import { createApiHandler } from '@/lib/api/handler';
 import { paymentConfirmSchema } from '@/lib/api/schemas';
 import { confirmPayment, cancelPayment, TossPaymentError } from '@/lib/payments/toss';
+import { createAdminClient } from '@/lib/supabase/admin';
 import { logger } from '@/lib/logger';
 import { sendTelegram } from '@/lib/telegram';
 
@@ -114,7 +115,11 @@ export const POST = createApiHandler(
       const service = course ? CATEGORY_TO_SERVICE[course.category] : null;
 
       if (service) {
-        const { error: assignErr } = await supabase
+        // 결제 후 서비스 부여는 신뢰된 서버 작업 — admin client로 RLS 우회.
+        // (user-scoped client는 학생 UPDATE 정책이 없어, 이미 무료로 가진 서비스를
+        //  유료로 업그레이드하는 upsert의 ON CONFLICT DO UPDATE에서 RLS에 막힘.)
+        const admin = createAdminClient();
+        const { error: assignErr } = await admin
           .from('service_assignments')
           .upsert(
             {
