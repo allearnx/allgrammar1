@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useMemo, useTransition } from 'react';
+import { useState, useMemo, useTransition, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { Badge } from '@/components/ui/badge';
@@ -58,6 +58,26 @@ export function VocaHomeClient({ books, days, progressList, submissionStatuses =
     ? initialBookId
     : books[0]?.id || '';
   const [selectedBookId, setSelectedBookId] = useState<string>(defaultBookId);
+
+  // 마지막으로 보던 교재 복원 — 뒤로가기/사이드바로 돌아와도 선택이 유지되도록.
+  // (URL에 bookId가 명시돼 있으면 그걸 우선, 없을 때만 localStorage 복원)
+  useEffect(() => {
+    if (initialBookId) return;
+    try {
+      const saved = window.localStorage.getItem('voca:selectedBookId');
+      if (saved && books.some((b) => b.id === saved)) setSelectedBookId(saved);
+    } catch { /* ignore */ }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const selectBook = (id: string) => {
+    setSelectedBookId(id);
+    try {
+      window.localStorage.setItem('voca:selectedBookId', id);
+      // 새로고침/공유 시에도 같은 교재가 열리도록 URL 동기화 (재요청 없이).
+      window.history.replaceState(null, '', `/student/voca?bookId=${id}`);
+    } catch { /* ignore */ }
+  };
   const selectedIndex = Math.max(0, books.findIndex((b) => b.id === selectedBookId));
   const bookColor = BOOK_COLORS[selectedIndex % BOOK_COLORS.length];
 
@@ -206,7 +226,7 @@ export function VocaHomeClient({ books, days, progressList, submissionStatuses =
             return (
               <button
                 key={book.id}
-                onClick={() => setSelectedBookId(book.id)}
+                onClick={() => selectBook(book.id)}
                 className="shrink-0 px-4 py-2.5 rounded-xl text-sm font-bold transition-all duration-200"
                 style={isSelected ? {
                   background: color.bg,
