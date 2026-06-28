@@ -39,11 +39,44 @@ export const PATCH = createApiHandler(
       .update(updates)
       .eq('id', params.id));
 
+    // 무소속(academy_id=null) 전환 시 학원 플랜으로 받았던 서비스 배정 정리.
+    // 학원 소속이면 서비스가 source='subscription'(학원 유료 플랜 기준)으로 배정되는데,
+    // 무소속이 되면 getPlanContext가 이를 유료로 오인한다(무료 계정이 유료처럼 열림).
+    // → 본인 개인 구독/결제가 전혀 없을 때만, 학원에서 받은 subscription 배정을 삭제한다.
+    //   (개인 결제/구독자는 그대로 유지 — 접근을 잘못 끊지 않는 쪽으로 안전하게)
+    let clearedServices = 0;
+    const movingToNoAcademy =
+      'academy_id' in body && (body.academy_id === null || body.academy_id === undefined);
+    if (movingToNoAcademy) {
+      const admin = createAdminClient();
+      const [{ count: subCount }, { count: paidOrderCount }] = await Promise.all([
+        admin
+          .from('subscriptions')
+          .select('id', { count: 'exact', head: true })
+          .eq('student_id', params.id)
+          .in('status', ['trialing', 'active', 'past_due']),
+        admin
+          .from('orders')
+          .select('id', { count: 'exact', head: true })
+          .eq('user_id', params.id)
+          .eq('status', 'paid'),
+      ]);
+      if ((subCount ?? 0) === 0 && (paidOrderCount ?? 0) === 0) {
+        const { data: removed } = await admin
+          .from('service_assignments')
+          .delete()
+          .eq('student_id', params.id)
+          .eq('source', 'subscription')
+          .select('id');
+        clearedServices = removed?.length ?? 0;
+      }
+    }
+
     await auditLog(supabase, user.id, 'user.role_change', {
-      type: 'user', id: params.id, details: updates,
+      type: 'user', id: params.id, details: { ...updates, clearedServices },
     });
 
-    return NextResponse.json({ success: true });
+    return NextResponse.json({ success: true, clearedServices });
   }
 );
 
