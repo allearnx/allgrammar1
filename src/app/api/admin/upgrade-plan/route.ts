@@ -3,6 +3,7 @@ import { createApiHandler, dbResult } from '@/lib/api';
 import { upgradePlanSchema } from '@/lib/api/schemas';
 import { confirmPayment, cancelPayment, TossPaymentError } from '@/lib/payments/toss';
 import { createAdminClient } from '@/lib/supabase/admin';
+import { invalidatePayment } from '@/lib/cache/invalidate';
 import { auditLog } from '@/lib/api/audit';
 import { SUBSCRIPTION_PLAN_COLUMNS } from '@/types/billing';
 import { logger } from '@/lib/logger';
@@ -141,6 +142,9 @@ export const POST = createApiHandler(
 
     // 4-4. 학생 서비스 자동배정
     await admin.rpc('sync_subscription_services', { sub_id: sub.id });
+
+    // 업그레이드 즉시 반영 — 학원 단위 plan context 캐시 갱신
+    invalidatePayment(user.academy_id);
 
     // ── 5. audit log + 텔레그램 ──
     await auditLog(supabase, user.id, 'subscription.upgrade', {

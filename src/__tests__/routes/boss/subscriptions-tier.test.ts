@@ -21,6 +21,10 @@ vi.mock('@/lib/api/rate-limit', () => ({
 vi.mock('@/lib/api/audit', () => ({
   auditLog: vi.fn(),
 }));
+vi.mock('next/cache', () => ({
+  unstable_cache: (fn: (...args: unknown[]) => unknown) => fn,
+  revalidateTag: vi.fn(),
+}));
 
 /** Create a chainable Supabase mock that resolves to `result` */
 function mockChain(result: { data: unknown; error: unknown }) {

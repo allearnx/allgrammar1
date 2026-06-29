@@ -2,6 +2,7 @@ import { z } from 'zod';
 import { NextResponse } from 'next/server';
 import { createApiHandler, dbResult } from '@/lib/api';
 import { createAdminClient } from '@/lib/supabase/admin';
+import { invalidatePayment } from '@/lib/cache/invalidate';
 import { auditLog } from '@/lib/api/audit';
 
 const tierChangeSchema = z.object({
@@ -82,6 +83,9 @@ export const PATCH = createApiHandler(
           .eq('source', 'subscription');
       }
     }
+
+    // tier 변경 즉시 반영 — 학원 단위 plan context 캐시 갱신
+    if (sub.academy_id) invalidatePayment(sub.academy_id);
 
     await auditLog(supabase, user.id, 'subscription.tier_change', {
       type: 'subscription',

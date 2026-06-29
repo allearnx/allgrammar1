@@ -3,6 +3,7 @@ import { createApiHandler } from '@/lib/api/handler';
 import { paymentConfirmSchema } from '@/lib/api/schemas';
 import { confirmPayment, cancelPayment, TossPaymentError } from '@/lib/payments/toss';
 import { createAdminClient } from '@/lib/supabase/admin';
+import { invalidateStudentServices } from '@/lib/cache/invalidate';
 import { logger } from '@/lib/logger';
 import { sendTelegram } from '@/lib/telegram';
 
@@ -146,6 +147,8 @@ export const POST = createApiHandler(
           );
         } else {
           serviceActivated = service;
+          // 결제 즉시 접근 반영 — 캐시된 plan context/서비스 목록 갱신
+          invalidateStudentServices(user.id);
         }
       }
     }

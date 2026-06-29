@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { createApiHandler } from '@/lib/api';
 import { createAdminClient } from '@/lib/supabase/admin';
+import { invalidateStudentServices } from '@/lib/cache/invalidate';
 import { studentBulkAssignSchema } from '@/lib/api/schemas';
 import { checkPlanGate, checkServiceGate } from '@/lib/billing/check-plan-api';
 
@@ -40,6 +41,10 @@ export const POST = createApiHandler(
         );
       }
     }
+
+    // 서비스 배정/해제가 곧 일어나므로 대상 학생들의 plan context 캐시를 갱신
+    // (모든 분기 공통. 에러로 변경이 없더라도 캐시 미스만 발생해 무해)
+    body.studentIds.forEach((id) => invalidateStudentServices(id));
 
     // ── 내신 암기 전용 할당 ──
     if (body.action === 'assign' && body.naesinMemorizeOnly) {
