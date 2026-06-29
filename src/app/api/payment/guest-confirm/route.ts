@@ -13,7 +13,7 @@ const schema = z.object({
   orderId: z.string().min(1).max(64),
   amount: z.number().int().positive(),
   orderName: z.string().min(1).max(200),
-  courseId: z.string().uuid().optional(),
+  courseId: z.string().uuid(), // 게스트 결제는 코스 가격 대조를 위해 필수
   guestName: z.string().trim().min(1).max(50),
   guestPhone: z.string().trim().min(8).max(20),
 });
@@ -33,6 +33,18 @@ export async function POST(request: NextRequest) {
 
   const { paymentKey, orderId, amount, orderName, courseId, guestName, guestPhone } = body;
   const admin = createAdminClient();
+
+  // ── 0. 코스 가격 위변조 방어 (공개 엔드포인트 — 클라 금액을 신뢰하지 않음) ──
+  // 승인(capture) 전에 차단하므로, 불일치 시 실제 청구는 일어나지 않는다.
+  const { data: course } = await admin
+    .from('courses')
+    .select('price, is_active')
+    .eq('id', courseId)
+    .single();
+  if (!course || course.is_active === false || course.price !== amount) {
+    logger.error('payment.guest_price_mismatch', { courseId, amount, coursePrice: course?.price });
+    return NextResponse.json({ error: '결제 정보가 올바르지 않습니다.' }, { status: 400 });
+  }
 
   // ── 1. 토스 결제 승인 ──
   let result;
