@@ -10,6 +10,8 @@ import type { Order, OrderStatus } from '@/types/billing';
 interface OrderWithJoins extends Order {
   user: { full_name: string; email: string; phone: string | null } | null;
   course: { title: string } | null;
+  guest_name?: string | null;
+  guest_phone?: string | null;
 }
 
 interface OrdersClientProps {
@@ -131,10 +133,15 @@ export function OrdersClient({ orders }: OrdersClientProps) {
                 {filtered.map((order) => (
                   <tr key={order.id} className="hover:bg-gray-50/50 transition-colors">
                     <td className="px-5 py-3">
-                      <div className="font-medium text-gray-900">{order.user?.full_name || '-'}</div>
-                      <div className="text-xs text-gray-400">{order.user?.email || '-'}</div>
-                      {order.user?.phone && (
-                        <div className="text-xs text-gray-400">{order.user.phone}</div>
+                      <div className="font-medium text-gray-900">
+                        {order.user?.full_name || order.guest_name || '-'}
+                        {!order.user && order.guest_name && (
+                          <span className="ml-1.5 rounded bg-amber-100 px-1.5 py-0.5 text-[10px] font-medium text-amber-700">비회원</span>
+                        )}
+                      </div>
+                      <div className="text-xs text-gray-400">{order.user?.email || (order.guest_name ? '비회원 결제' : '-')}</div>
+                      {(order.user?.phone || order.guest_phone) && (
+                        <div className="text-xs text-gray-400">{order.user?.phone || order.guest_phone}</div>
                       )}
                     </td>
                     <td className="px-5 py-3">
