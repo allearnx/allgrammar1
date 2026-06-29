@@ -27,7 +27,8 @@ interface NeonVocaTabProps {
   dayTitle: string;
 }
 
-const STEP_LABELS = ['플래시카드', '매칭', '스펠링', '퀴즈', '시험'];
+// 핵심 4단계 (완료 판정 대상). 시험은 보너스라 여기 포함하지 않는다.
+const STEP_LABELS = ['플래시카드', '매칭', '스펠링', '퀴즈'];
 
 // Step 완료 여부 판단
 function getStepStates(p: VocaStudentProgress | null) {
@@ -37,7 +38,6 @@ function getStepStates(p: VocaStudentProgress | null) {
     pr.matching_completed,                                  // Step 2: 매칭
     (pr.spelling_score ?? 0) >= 80,                         // Step 3: 스펠링
     (pr.quiz_score ?? 0) >= 80,                             // Step 4: 퀴즈
-    (pr.exam_score ?? 0) >= EXAM_PASS,                      // Step 5: 표제어 스펠링 시험
   ];
 }
 
@@ -55,6 +55,9 @@ export function NeonVocaTab({ vocabulary, dayId, progress, dayTitle }: NeonVocaT
   const [currentStep, setCurrentStep] = useState(initialStep === -1 ? 0 : initialStep);
   const [celebrateStep, setCelebrateStep] = useState<number | null>(null);
   const celebrateTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  // 보너스 시험 (선택) — 핵심 4단계 완료와 무관
+  const [inExam, setInExam] = useState(false);
+  const examBest = localProgress?.exam_score ?? null;
 
   const steps = STEP_LABELS.map((label, i) => ({
     label,
@@ -100,8 +103,8 @@ export function NeonVocaTab({ vocabulary, dayId, progress, dayTitle }: NeonVocaT
     } catch { /* swallow */ }
   }, [dayId]);
 
-  const handleStepComplete = useCallback((stepIndex: number, type: 'flashcard' | 'quiz' | 'spelling' | 'matching' | 'exam', score?: number, wrongWords?: { front_text: string; back_text: string }[]) => {
-    saveProgress(type, score, (type === 'spelling' || type === 'exam') ? wrongWords : undefined);
+  const handleStepComplete = useCallback((stepIndex: number, type: 'flashcard' | 'quiz' | 'spelling' | 'matching', score?: number, wrongWords?: { front_text: string; back_text: string }[]) => {
+    saveProgress(type, score, type === 'spelling' ? wrongWords : undefined);
 
     // 퀴즈 오답을 voca_quiz_results에 별도 저장
     if (type === 'quiz' && score !== undefined) {
@@ -113,8 +116,7 @@ export function NeonVocaTab({ vocabulary, dayId, progress, dayTitle }: NeonVocaT
       (type === 'flashcard') ||
       (type === 'spelling' && (score ?? 0) >= 80) ||
       (type === 'matching' && (score ?? 0) >= 90) ||
-      (type === 'quiz' && (score ?? 0) >= 80) ||
-      (type === 'exam' && (score ?? 0) >= EXAM_PASS);
+      (type === 'quiz' && (score ?? 0) >= 80);
 
     if (passed) {
       setCelebrateStep(stepIndex);
@@ -144,6 +146,17 @@ export function NeonVocaTab({ vocabulary, dayId, progress, dayTitle }: NeonVocaT
     }
   }, [saveProgress, saveQuizResult, dayId, pet, vocabulary.length]);
 
+  // 보너스 시험 완료 — 점수만 기록(최고점), 4단계 완료/랭킹에는 영향 없음
+  const handleExamComplete = useCallback((score: number, wrongWords?: { front_text: string; back_text: string }[]) => {
+    saveProgress('exam', score, wrongWords);
+    setInExam(false);
+    if (score >= EXAM_PASS) {
+      toast.success(`🎉 보너스 시험 통과! ${score}점`);
+    } else {
+      toast.info(`보너스 시험 ${score}점 — ${EXAM_PASS}점 넘으면 통과예요. 또 도전해보세요!`);
+    }
+  }, [saveProgress]);
+
   // Cleanup timer on unmount
   useEffect(() => {
     return () => { if (celebrateTimerRef.current) clearTimeout(celebrateTimerRef.current); };
@@ -159,6 +172,22 @@ export function NeonVocaTab({ vocabulary, dayId, progress, dayTitle }: NeonVocaT
 
   // 퀴즈 최소 4개 필요
   const hasEnoughForQuiz = vocabulary.length >= 4;
+
+  // 보너스 시험 진행 화면 (선택)
+  if (inExam) {
+    return (
+      <div className="space-y-3">
+        <button onClick={() => setInExam(false)} className="text-sm font-medium text-gray-500 hover:text-gray-700">
+          ← 돌아가기
+        </button>
+        <div className="rounded-xl border border-rose-200 bg-rose-50 px-4 py-3 text-center">
+          <p className="text-lg font-extrabold text-rose-600">📝 표제어 스펠링 시험 (보너스)</p>
+          <p className="mt-0.5 text-xs text-rose-500">{EXAM_PASS}점 넘으면 통과! 순서는 매번 섞여요. 안 봐도 진도엔 영향 없어요.</p>
+        </div>
+        <RhythmSpelling vocabulary={examVocab} onComplete={handleExamComplete} />
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-4">
@@ -234,20 +263,28 @@ export function NeonVocaTab({ vocabulary, dayId, progress, dayTitle }: NeonVocaT
               </div>
             )
           )}
-          {currentStep === 4 && (
-            <div className="space-y-3">
-              <div className="rounded-xl bg-rose-50 border border-rose-200 px-4 py-3 text-center">
-                <p className="text-lg font-extrabold text-rose-600">📝 표제어 스펠링 시험</p>
-                <p className="text-xs text-rose-500 mt-0.5">{EXAM_PASS}점 이상이면 통과예요. 표제어 순서는 매번 섞입니다.</p>
-              </div>
-              <RhythmSpelling
-                vocabulary={examVocab}
-                onComplete={(score, wrongWords) => handleStepComplete(4, 'exam', score, wrongWords)}
-              />
-            </div>
-          )}
         </motion.div>
       </AnimatePresence>
+
+      {/* 🎁 보너스: 표제어 스펠링 시험 (선택 — 진도에 영향 없음) */}
+      <button
+        onClick={() => setInExam(true)}
+        className="w-full rounded-2xl border-2 border-dashed border-rose-200 bg-rose-50/50 px-4 py-3 text-left transition-colors hover:border-rose-300 hover:bg-rose-50"
+      >
+        <div className="flex items-center justify-between gap-3">
+          <div className="min-w-0">
+            <p className="font-bold text-rose-600">🎁 보너스: 표제어 스펠링 시험</p>
+            <p className="mt-0.5 text-xs text-rose-400">선택! 도전하면 점수가 기록돼요 ({EXAM_PASS}점 통과 · 순서 매번 셔플)</p>
+          </div>
+          {examBest != null ? (
+            <span className={`shrink-0 rounded-full px-3 py-1 text-sm font-bold ${examBest >= EXAM_PASS ? 'bg-green-100 text-green-700' : 'bg-amber-100 text-amber-700'}`}>
+              최고 {examBest}점
+            </span>
+          ) : (
+            <span className="shrink-0 rounded-full bg-rose-100 px-3 py-1 text-sm font-bold text-rose-600">도전하기 →</span>
+          )}
+        </div>
+      </button>
 
       {/* Ranking Card */}
       {rankData && (
