@@ -61,7 +61,7 @@ export const vocaVocabBulkSchema = z.object({
 
 export const vocaProgressSaveSchema = z.object({
   dayId: ID,
-  type: z.enum(['flashcard', 'quiz', 'spelling', 'matching']),
+  type: z.enum(['flashcard', 'quiz', 'spelling', 'matching', 'exam']),
   score: z.number().nullish(),
   matchingAttempt: z.number().nullish(),
   round: z.enum(['1', '2']).default('1'),

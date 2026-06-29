@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { createApiHandler } from '@/lib/api/handler';
 import { vocaProgressSaveSchema } from '@/lib/api/schemas';
-import { buildVocaQuizUpdate, buildVocaSpellingUpdate } from '@/lib/progress-helpers';
+import { buildVocaQuizUpdate, buildVocaSpellingUpdate, buildVocaExamUpdate } from '@/lib/progress-helpers';
 import { VOCA_STUDENT_PROGRESS_COLUMNS } from '@/types/voca';
 
 // POST — 학생 진도 저장
@@ -32,6 +32,13 @@ export const POST = createApiHandler(
         Object.assign(updates, buildVocaSpellingUpdate(score ?? 0, existing));
         if (spellingWrongWords) {
           updates.spelling_wrong_words = spellingWrongWords;
+        }
+        break;
+      case 'exam':
+        // 표제어 스펠링 시험 — 최고점만 기록, 최고점 회차 오답 보관
+        Object.assign(updates, buildVocaExamUpdate(score ?? 0, existing));
+        if (spellingWrongWords && score != null && score >= ((existing?.exam_score as number) ?? 0)) {
+          updates.exam_wrong_words = spellingWrongWords;
         }
         break;
       case 'matching':

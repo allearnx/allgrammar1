@@ -66,3 +66,11 @@ export function buildVocaSpellingUpdate(
 ): Record<string, unknown> {
   return { spelling_score: keepBestScore(score, (existing?.spelling_score as number) ?? 0) };
 }
+
+/** 표제어 스펠링 시험 — 최고 점수만 기록 */
+export function buildVocaExamUpdate(
+  score: number,
+  existing: Record<string, unknown> | null,
+): Record<string, unknown> {
+  return { exam_score: keepBestScore(score, (existing?.exam_score as number) ?? 0) };
+}

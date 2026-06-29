@@ -14,6 +14,9 @@ import { PetReaction } from '@/components/voca/pet/pet-reaction';
 import { usePet } from '@/hooks/use-pet';
 import { EMPTY_VOCA_PROGRESS, type VocaVocabulary, type VocaStudentProgress } from '@/types/voca';
 import type { PetFeedResult } from '@/lib/voca/pet-constants';
+import { shuffle } from '@/lib/utils';
+
+const EXAM_PASS = 90;
 
 type RankData = Omit<VocaDayRankCardProps, 'onClose' | 'dayTitle'>;
 
@@ -24,7 +27,7 @@ interface NeonVocaTabProps {
   dayTitle: string;
 }
 
-const STEP_LABELS = ['플래시카드', '매칭', '스펠링', '퀴즈'];
+const STEP_LABELS = ['플래시카드', '매칭', '스펠링', '퀴즈', '시험'];
 
 // Step 완료 여부 판단
 function getStepStates(p: VocaStudentProgress | null) {
@@ -34,6 +37,7 @@ function getStepStates(p: VocaStudentProgress | null) {
     pr.matching_completed,                                  // Step 2: 매칭
     (pr.spelling_score ?? 0) >= 80,                         // Step 3: 스펠링
     (pr.quiz_score ?? 0) >= 80,                             // Step 4: 퀴즈
+    (pr.exam_score ?? 0) >= EXAM_PASS,                      // Step 5: 표제어 스펠링 시험
   ];
 }
 
@@ -43,6 +47,8 @@ export function NeonVocaTab({ vocabulary, dayId, progress, dayTitle }: NeonVocaT
   const [petReaction, setPetReaction] = useState<PetFeedResult | null>(null);
   const pet = usePet();
   const completedSteps = useMemo(() => getStepStates(localProgress), [localProgress]);
+  // 시험은 표제어를 항상 셔플해서 출제 (연습 단계와 순서를 다르게)
+  const examVocab = useMemo(() => shuffle([...vocabulary]), [vocabulary]);
 
   // 현재 Step: 첫 번째 미완료 Step (모두 완료면 마지막)
   const initialStep = completedSteps.findIndex((c) => !c);
@@ -57,7 +63,7 @@ export function NeonVocaTab({ vocabulary, dayId, progress, dayTitle }: NeonVocaT
   }));
 
   const saveProgress = useCallback(async (
-    type: 'flashcard' | 'quiz' | 'spelling' | 'matching',
+    type: 'flashcard' | 'quiz' | 'spelling' | 'matching' | 'exam',
     score?: number,
     spellingWrongWords?: { front_text: string; back_text: string }[],
   ) => {
@@ -74,6 +80,7 @@ export function NeonVocaTab({ vocabulary, dayId, progress, dayTitle }: NeonVocaT
       if (type === 'spelling') return { ...base, spelling_score: score ?? 0 };
       if (type === 'matching') return { ...base, matching_completed: (score ?? 0) >= 90, matching_score: score ?? 0 };
       if (type === 'quiz') return { ...base, quiz_score: score ?? 0 };
+      if (type === 'exam') return { ...base, exam_score: Math.max(score ?? 0, base.exam_score ?? 0) };
       return base;
     });
   }, [dayId]);
@@ -93,8 +100,8 @@ export function NeonVocaTab({ vocabulary, dayId, progress, dayTitle }: NeonVocaT
     } catch { /* swallow */ }
   }, [dayId]);
 
-  const handleStepComplete = useCallback((stepIndex: number, type: 'flashcard' | 'quiz' | 'spelling' | 'matching', score?: number, wrongWords?: { front_text: string; back_text: string }[]) => {
-    saveProgress(type, score, type === 'spelling' ? wrongWords : undefined);
+  const handleStepComplete = useCallback((stepIndex: number, type: 'flashcard' | 'quiz' | 'spelling' | 'matching' | 'exam', score?: number, wrongWords?: { front_text: string; back_text: string }[]) => {
+    saveProgress(type, score, (type === 'spelling' || type === 'exam') ? wrongWords : undefined);
 
     // 퀴즈 오답을 voca_quiz_results에 별도 저장
     if (type === 'quiz' && score !== undefined) {
@@ -106,7 +113,8 @@ export function NeonVocaTab({ vocabulary, dayId, progress, dayTitle }: NeonVocaT
       (type === 'flashcard') ||
       (type === 'spelling' && (score ?? 0) >= 80) ||
       (type === 'matching' && (score ?? 0) >= 90) ||
-      (type === 'quiz' && (score ?? 0) >= 80);
+      (type === 'quiz' && (score ?? 0) >= 80) ||
+      (type === 'exam' && (score ?? 0) >= EXAM_PASS);
 
     if (passed) {
       setCelebrateStep(stepIndex);
@@ -225,6 +233,18 @@ export function NeonVocaTab({ vocabulary, dayId, progress, dayTitle }: NeonVocaT
                 <p className="text-gray-400">퀴즈에는 최소 4개 단어가 필요합니다.</p>
               </div>
             )
+          )}
+          {currentStep === 4 && (
+            <div className="space-y-3">
+              <div className="rounded-xl bg-rose-50 border border-rose-200 px-4 py-3 text-center">
+                <p className="text-lg font-extrabold text-rose-600">📝 표제어 스펠링 시험</p>
+                <p className="text-xs text-rose-500 mt-0.5">{EXAM_PASS}점 이상이면 통과예요. 표제어 순서는 매번 섞입니다.</p>
+              </div>
+              <RhythmSpelling
+                vocabulary={examVocab}
+                onComplete={(score, wrongWords) => handleStepComplete(4, 'exam', score, wrongWords)}
+              />
+            </div>
           )}
         </motion.div>
       </AnimatePresence>

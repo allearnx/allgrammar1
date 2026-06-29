@@ -62,6 +62,7 @@ export interface VocaStudentProgress {
   flashcard_completed: boolean;
   quiz_score: number | null;
   spelling_score: number | null;
+  exam_score: number | null;
   matching_score: number | null;
   matching_attempt: number;
   matching_completed: boolean;
@@ -81,6 +82,7 @@ export const EMPTY_VOCA_PROGRESS: VocaStudentProgress = {
   flashcard_completed: false,
   quiz_score: null,
   spelling_score: null,
+  exam_score: null,
   matching_score: null,
   matching_attempt: 0,
   matching_completed: false,
@@ -152,7 +154,7 @@ export const VOCA_DAYS_COLUMNS = 'id, book_id, day_number, title, sort_order, cr
 
 export const VOCA_VOCABULARY_COLUMNS = 'id, day_id, front_text, back_text, part_of_speech, example_sentence, synonyms, antonyms, spelling_hint, spelling_answer, sort_order, created_at, idioms, example_sentence_ko, audio_url, word_timestamps, exam_source';
 
-export const VOCA_STUDENT_PROGRESS_COLUMNS = 'id, student_id, day_id, flashcard_completed, quiz_score, spelling_score, matching_score, matching_attempt, matching_completed, created_at, updated_at, round2_flashcard_completed, round2_quiz_score, round2_matching_score, round2_matching_attempt, round2_matching_completed';
+export const VOCA_STUDENT_PROGRESS_COLUMNS = 'id, student_id, day_id, flashcard_completed, quiz_score, spelling_score, exam_score, matching_score, matching_attempt, matching_completed, created_at, updated_at, round2_flashcard_completed, round2_quiz_score, round2_matching_score, round2_matching_attempt, round2_matching_completed';
 
 export type ServiceType = 'naesin' | 'voca';
 

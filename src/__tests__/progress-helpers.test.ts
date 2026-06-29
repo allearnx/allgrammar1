@@ -5,6 +5,7 @@ import {
   buildVocabProgressUpdates,
   buildVocaQuizUpdate,
   buildVocaSpellingUpdate,
+  buildVocaExamUpdate,
 } from '@/lib/progress-helpers';
 
 describe('keepBestScore', () => {
@@ -124,5 +125,17 @@ describe('buildVocaSpellingUpdate (올킬보카)', () => {
     const existing = { spelling_score: 70 };
     const updates = buildVocaSpellingUpdate(95, existing);
     expect(updates.spelling_score).toBe(95);
+  });
+});
+
+describe('buildVocaExamUpdate', () => {
+  it('기존 점수가 없으면 새 점수를 기록한다', () => {
+    expect(buildVocaExamUpdate(85, null)).toEqual({ exam_score: 85 });
+  });
+  it('새 점수가 더 높으면 갱신한다', () => {
+    expect(buildVocaExamUpdate(95, { exam_score: 80 })).toEqual({ exam_score: 95 });
+  });
+  it('기존 최고점이 더 높으면 유지한다', () => {
+    expect(buildVocaExamUpdate(70, { exam_score: 95 })).toEqual({ exam_score: 95 });
   });
 });
