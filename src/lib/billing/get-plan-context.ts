@@ -1,4 +1,6 @@
-import { createClient } from '@/lib/supabase/server';
+import { createAdminClient } from '@/lib/supabase/admin';
+import { cached, TTL } from '@/lib/cache/server-cache';
+import { cacheTags } from '@/lib/cache/tags';
 import { deriveTier } from './feature-gate';
 import type { Tier } from './feature-gate';
 
@@ -9,16 +11,17 @@ export interface PlanContext {
   naesinMemorizeOnly: boolean;
 }
 
-/** Fetch the plan context (tier + free service) for the user's academy or individual student */
-export async function getPlanContext(
+type AdminClient = ReturnType<typeof createAdminClient>;
+
+/** 실제 plan context 계산 (academies + subscriptions + service_assignments 조회) */
+async function computePlanContext(
+  supabase: AdminClient,
   academyId: string | null,
   studentId?: string,
 ): Promise<PlanContext> {
   if (!academyId) {
     // 독립 학생: 구독 테이블 먼저 확인, 없으면 service_assignments로 판단
     if (studentId) {
-      const supabase = await createClient();
-
       // 구독이 있으면 (유료 업그레이드한 학생) 구독 기반으로 판단
       const { data: sub } = await supabase
         .from('subscriptions')
@@ -61,8 +64,6 @@ export async function getPlanContext(
     }
     return { tier: 'free', freeService: null, naesinMemorizeOnly: false };
   }
-
-  const supabase = await createClient();
 
   const [{ data: academy }, { data: sub }] = await Promise.all([
     supabase.from('academies').select('free_service').eq('id', academyId).single(),
@@ -113,4 +114,33 @@ export async function getPlanContext(
     (academy?.free_service as 'naesin' | 'voca') ?? null;
 
   return { tier, freeService, naesinMemorizeOnly: memorizeOnly };
+}
+
+/**
+ * 캐시된 plan context — TTL 5분(SESSION).
+ * academies/subscriptions/service_assignments를 매 페이지 렌더마다 재조회하던 것을 캐싱
+ * (egress·compute 절감). 서비스 배정/결제 변경 시 기존 무효화 헬퍼
+ * (invalidateStudentServices / invalidatePayment)가 태그로 즉시 갱신한다.
+ */
+const getCachedPlanContext = cached(
+  async (academyId: string | null, studentId: string | undefined) => {
+    const admin = createAdminClient();
+    return computePlanContext(admin, academyId, studentId);
+  },
+  'plan-context',
+  TTL.SESSION,
+  (academyId, studentId) => {
+    const tags: string[] = [];
+    if (studentId) tags.push(cacheTags.studentServices(studentId));
+    if (academyId) tags.push(cacheTags.isPaid(academyId));
+    return tags;
+  },
+);
+
+/** Fetch the plan context (tier + free service) for the user's academy or individual student */
+export async function getPlanContext(
+  academyId: string | null,
+  studentId?: string,
+): Promise<PlanContext> {
+  return getCachedPlanContext(academyId, studentId);
 }

@@ -4,8 +4,14 @@ import { describe, it, expect, vi, beforeEach } from 'vitest';
 
 const mockCreateClient = vi.fn();
 
-vi.mock('@/lib/supabase/server', () => ({
-  createClient: (...args: unknown[]) => mockCreateClient(...args),
+vi.mock('@/lib/supabase/admin', () => ({
+  createAdminClient: (...args: unknown[]) => mockCreateClient(...args),
+}));
+
+// cached()는 단위 테스트에서 패스스루 (unstable_cache 우회)
+vi.mock('@/lib/cache/server-cache', () => ({
+  TTL: { STATIC: 3600, CONTENT: 300, SESSION: 300, LIVE: 60 },
+  cached: (fn: (...a: unknown[]) => unknown) => (...a: unknown[]) => fn(...a),
 }));
 
 // ── Helpers ──
@@ -57,7 +63,7 @@ describe('getPlanContext', () => {
         error: null,
       },
     });
-    mockCreateClient.mockResolvedValue(supabase);
+    mockCreateClient.mockReturnValue(supabase);
 
     const { getPlanContext } = await import('@/lib/billing/get-plan-context');
     const result = await getPlanContext(null, 'student-1');
@@ -74,7 +80,7 @@ describe('getPlanContext', () => {
         error: null,
       },
     });
-    mockCreateClient.mockResolvedValue(supabase);
+    mockCreateClient.mockReturnValue(supabase);
 
     const { getPlanContext } = await import('@/lib/billing/get-plan-context');
     const result = await getPlanContext(null, 'student-2');
@@ -90,7 +96,7 @@ describe('getPlanContext', () => {
         error: null,
       },
     });
-    mockCreateClient.mockResolvedValue(supabase);
+    mockCreateClient.mockReturnValue(supabase);
 
     const { getPlanContext } = await import('@/lib/billing/get-plan-context');
     const result = await getPlanContext(null, 'student-both');
@@ -103,7 +109,7 @@ describe('getPlanContext', () => {
     const supabase = mockSupabaseMultiTable({
       service_assignments: { data: [], error: null },
     });
-    mockCreateClient.mockResolvedValue(supabase);
+    mockCreateClient.mockReturnValue(supabase);
 
     const { getPlanContext } = await import('@/lib/billing/get-plan-context');
     const result = await getPlanContext(null, 'student-no-assign');
@@ -116,7 +122,7 @@ describe('getPlanContext', () => {
     const supabase = mockSupabaseMultiTable({
       service_assignments: { data: null, error: { code: 'PGRST116' } },
     });
-    mockCreateClient.mockResolvedValue(supabase);
+    mockCreateClient.mockReturnValue(supabase);
 
     const { getPlanContext } = await import('@/lib/billing/get-plan-context');
     const result = await getPlanContext(null, 'student-null');
@@ -129,7 +135,7 @@ describe('getPlanContext', () => {
     const supabase = mockSupabaseMultiTable({
       academies: { data: { free_service: 'voca' }, error: null },
     });
-    mockCreateClient.mockResolvedValue(supabase);
+    mockCreateClient.mockReturnValue(supabase);
 
     const { getPlanContext } = await import('@/lib/billing/get-plan-context');
     const result = await getPlanContext('academy-1');
@@ -141,7 +147,7 @@ describe('getPlanContext', () => {
     const supabase = mockSupabaseMultiTable({
       academies: { data: { free_service: 'naesin' }, error: null },
     });
-    mockCreateClient.mockResolvedValue(supabase);
+    mockCreateClient.mockReturnValue(supabase);
 
     const { getPlanContext } = await import('@/lib/billing/get-plan-context');
     const result = await getPlanContext('academy-2');
@@ -153,7 +159,7 @@ describe('getPlanContext', () => {
     const supabase = mockSupabaseMultiTable({
       academies: { data: { free_service: null }, error: null },
     });
-    mockCreateClient.mockResolvedValue(supabase);
+    mockCreateClient.mockReturnValue(supabase);
 
     const { getPlanContext } = await import('@/lib/billing/get-plan-context');
     const result = await getPlanContext('academy-3');
@@ -168,7 +174,7 @@ describe('getPlanContext', () => {
       academies: { data: { free_service: 'naesin' }, error: null },
       subscriptions: { data: { status: 'active', tier: 'paid' }, error: null },
     });
-    mockCreateClient.mockResolvedValue(supabase);
+    mockCreateClient.mockReturnValue(supabase);
 
     const { getPlanContext } = await import('@/lib/billing/get-plan-context');
     const result = await getPlanContext('academy-paid');
@@ -181,7 +187,7 @@ describe('getPlanContext', () => {
       academies: { data: { free_service: 'naesin' }, error: null },
       subscriptions: { data: { status: 'trialing', tier: 'paid' }, error: null },
     });
-    mockCreateClient.mockResolvedValue(supabase);
+    mockCreateClient.mockReturnValue(supabase);
 
     const { getPlanContext } = await import('@/lib/billing/get-plan-context');
     const result = await getPlanContext('academy-trial');
@@ -194,7 +200,7 @@ describe('getPlanContext', () => {
       academies: { data: { free_service: 'voca' }, error: null },
       subscriptions: { data: { status: 'active', tier: 'free' }, error: null },
     });
-    mockCreateClient.mockResolvedValue(supabase);
+    mockCreateClient.mockReturnValue(supabase);
 
     const { getPlanContext } = await import('@/lib/billing/get-plan-context');
     const result = await getPlanContext('academy-free-sub');
@@ -207,7 +213,7 @@ describe('getPlanContext', () => {
       academies: { data: { free_service: 'naesin' }, error: null },
       subscriptions: { data: { status: 'past_due', tier: 'paid' }, error: null },
     });
-    mockCreateClient.mockResolvedValue(supabase);
+    mockCreateClient.mockReturnValue(supabase);
 
     const { getPlanContext } = await import('@/lib/billing/get-plan-context');
     const result = await getPlanContext('academy-pastdue');
@@ -220,7 +226,7 @@ describe('getPlanContext', () => {
       academies: { data: { free_service: 'voca' }, error: null },
       subscriptions: { data: null, error: { code: 'PGRST116' } },
     });
-    mockCreateClient.mockResolvedValue(supabase);
+    mockCreateClient.mockReturnValue(supabase);
 
     const { getPlanContext } = await import('@/lib/billing/get-plan-context');
     const result = await getPlanContext('academy-nosub');

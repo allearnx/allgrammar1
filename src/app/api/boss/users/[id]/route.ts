@@ -3,6 +3,7 @@ import { createApiHandler, dbResult, NotFoundError, ValidationError, ForbiddenEr
 import { auditLog } from '@/lib/api/audit';
 import { userPatchSchema } from '@/lib/api/schemas';
 import { createAdminClient } from '@/lib/supabase/admin';
+import { invalidateStudentServices } from '@/lib/cache/invalidate';
 
 export const PATCH = createApiHandler(
   { roles: ['boss'], schema: userPatchSchema },
@@ -70,6 +71,8 @@ export const PATCH = createApiHandler(
           .select('id');
         clearedServices = removed?.length ?? 0;
       }
+      // 학원/서비스가 바뀌었으니 캐시된 plan context·서비스 목록을 즉시 갱신
+      invalidateStudentServices(params.id);
     }
 
     await auditLog(supabase, user.id, 'user.role_change', {
