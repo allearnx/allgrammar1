@@ -8,6 +8,7 @@ import { Sidebar } from '@/components/layout/sidebar';
 import { PaidStatusProvider } from '@/components/layout/paid-status-context';
 import { PresenceTracker } from '@/components/layout/presence-tracker';
 import { AnnouncementBanner } from '@/components/dashboard/announcement-banner';
+import { UpdateBanner } from '@/components/layout/update-banner';
 import { QueryProvider } from '@/components/providers/query-provider';
 import { deriveTier } from '@/lib/billing/feature-gate';
 import { calculateStageStatuses } from '@/lib/naesin/stage-unlock';
@@ -66,6 +67,7 @@ export default async function DashboardLayout({
     <div className="flex h-[100dvh] overflow-hidden">
       <Sidebar user={user} services={services} naesinTree={naesinTree} />
       <main className="flex-1 overflow-y-auto overscroll-contain">
+        <UpdateBanner />
         {children}
         {user.role === 'student' && <AnnouncementBanner />}
       </main>

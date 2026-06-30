@@ -25,6 +25,7 @@ import {
   Megaphone,
   Library,
   Swords,
+  Sparkles,
 } from 'lucide-react';
 import type { NaesinStageStatuses } from '@/types/database';
 
@@ -73,6 +74,7 @@ export const NAV_CONFIG: Record<string, NavGroup[]> = {
         { href: '/student/wrong-answers', label: '오답모음', icon: ListChecks },
         { href: '/student/materials', label: '학습자료', icon: FileDown },
         { href: '/student/announcements', label: '공지사항', icon: Megaphone },
+        { href: '/updates', label: '업데이트·사용법', icon: Sparkles },
       ],
     },
   ],
@@ -89,6 +91,7 @@ export const NAV_CONFIG: Record<string, NavGroup[]> = {
         { href: '/teacher/live', label: '실시간 모니터', icon: Activity },
         { href: '/teacher/exams', label: '시험 일정', icon: CalendarDays },
         { href: '/teacher/announcements', label: '공지사항', icon: Megaphone },
+        { href: '/updates', label: '업데이트·사용법', icon: Sparkles },
       ],
     },
     {
@@ -123,6 +126,7 @@ export const NAV_CONFIG: Record<string, NavGroup[]> = {
         { href: '/admin/exams', label: '시험 일정', icon: CalendarDays },
         { href: '/admin/teachers', label: '선생님 관리', icon: GraduationCap },
         { href: '/admin/announcements', label: '공지사항', icon: Megaphone },
+        { href: '/updates', label: '업데이트·사용법', icon: Sparkles },
       ],
     },
     {
@@ -176,6 +180,7 @@ export const NAV_CONFIG: Record<string, NavGroup[]> = {
         { href: '/boss/exams', label: '시험 일정', icon: CalendarDays },
         { href: '/boss/teachers', label: '선생님 관리', icon: GraduationCap },
         { href: '/boss/announcements', label: '공지사항', icon: Megaphone },
+        { href: '/updates', label: '업데이트·사용법', icon: Sparkles },
       ],
     },
     {
