@@ -71,6 +71,17 @@ export const vocaProgressSaveSchema = z.object({
   })).nullish(),
 });
 
+// 묶음 보너스 시험 (Day 1~3개) 결과 저장
+export const vocaExamSaveSchema = z.object({
+  bookId: ID,
+  dayIds: z.array(ID).min(1).max(3),
+  score: z.number().int().min(0).max(100),
+  wrongWords: z.array(z.object({
+    front_text: z.string(),
+    back_text: z.string(),
+  })).nullish(),
+});
+
 export const vocaMatchingSubmissionSchema = z.object({
   dayId: ID,
   wrongWords: z.array(z.object({
