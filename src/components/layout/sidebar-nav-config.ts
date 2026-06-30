@@ -98,6 +98,7 @@ export const NAV_CONFIG: Record<string, NavGroup[]> = {
         { href: '/teacher/voca', label: '올킬보카 관리', icon: BookA },
         { href: '/teacher/voca/submissions', label: '오답노트 확인', icon: FileCheck },
         { href: '/teacher/voca/results', label: 'Day별 결과', icon: BarChart3 },
+        { href: '/teacher/voca/exams', label: '보카 시험 결과', icon: PenLine },
         { href: '/teacher/naesin?tab=templates', label: '문제 템플릿', icon: Library, requireContentPermission: true },
       ],
     },
@@ -131,6 +132,7 @@ export const NAV_CONFIG: Record<string, NavGroup[]> = {
         { href: '/admin/voca', label: '올킬보카 관리', icon: BookA },
         { href: '/admin/voca/submissions', label: '오답노트 확인', icon: FileCheck },
         { href: '/admin/voca/results', label: 'Day별 결과', icon: BarChart3 },
+        { href: '/admin/voca/exams', label: '보카 시험 결과', icon: PenLine },
       ],
     },
     {
@@ -185,6 +187,7 @@ export const NAV_CONFIG: Record<string, NavGroup[]> = {
         { href: '/boss/voca', label: '올킬보카 관리', icon: BookA },
         { href: '/boss/voca/submissions', label: '오답노트 확인', icon: FileCheck },
         { href: '/boss/voca/results', label: 'Day별 결과', icon: BarChart3 },
+        { href: '/boss/voca/exams', label: '보카 시험 결과', icon: PenLine },
         { href: '/boss/naesin?tab=templates', label: '문제 템플릿', icon: Library },
       ],
     },
