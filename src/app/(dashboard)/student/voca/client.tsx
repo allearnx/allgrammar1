@@ -7,6 +7,7 @@ import { Badge } from '@/components/ui/badge';
 import { CheckCircle, Lock, ChevronRight, ChevronDown, Search, BookOpen, BookMarked, Sparkles, GraduationCap, Users, ArrowRight } from 'lucide-react';
 import { PetWidget } from '@/components/voca/pet/pet-widget';
 import { BonusExam } from '@/components/voca/bonus-exam';
+import { AssignedExams } from '@/components/voca/assigned-exams';
 import { isR1Complete, isR2Complete } from '@/lib/dashboard/voca-helpers';
 import type { VocaBook, VocaDay, VocaStudentProgress } from '@/types/voca';
 
@@ -339,6 +340,9 @@ export function VocaHomeClient({ books, days, progressList, submissionStatuses =
           })}
         </div>
       )}
+
+      {/* 📋 선생님이 배정한 시험 */}
+      <AssignedExams />
 
       {/* 🎁 묶음 보너스 시험 (Day 1~3개 선택) — 무료 학생은 열린 Day만 */}
       {selectedBookId && (

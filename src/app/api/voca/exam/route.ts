@@ -7,7 +7,7 @@ import { vocaExamSaveSchema } from '@/lib/api/schemas';
 export const POST = createApiHandler(
   { schema: vocaExamSaveSchema },
   async ({ user, body, supabase }) => {
-    const { bookId, dayIds, score, wrongWords } = body;
+    const { bookId, dayIds, score, wrongWords, assignmentId } = body;
     const sortedDayIds = [...dayIds].sort();
     const rangeKey = sortedDayIds.join(',');
 
@@ -28,6 +28,7 @@ export const POST = createApiHandler(
       attempt_number: attemptNumber,
       score,
       wrong_words: wrongWords ?? [],
+      assignment_id: assignmentId ?? null,
     });
 
     if (error) return NextResponse.json({ error: error.message }, { status: 400 });

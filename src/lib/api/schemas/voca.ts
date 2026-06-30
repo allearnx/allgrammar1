@@ -80,6 +80,19 @@ export const vocaExamSaveSchema = z.object({
     front_text: z.string(),
     back_text: z.string(),
   })).nullish(),
+  assignmentId: ID.nullish(), // 선생님 배정 시험이면 연결
+});
+
+// 선생님 배정형 시험 생성 (학생들에게 Day 묶음 시험 배정)
+export const vocaExamAssignmentCreateSchema = z.object({
+  bookId: ID,
+  dayIds: z.array(ID).min(1).max(3),
+  studentIds: z.array(ID).min(1).max(200),
+  title: z.string().trim().max(100).nullish(),
+});
+
+export const vocaExamAssignmentDeleteSchema = z.object({
+  id: ID,
 });
 
 export const vocaMatchingSubmissionSchema = z.object({
