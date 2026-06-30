@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useState } from 'react';
 import { fetchWithToast } from '@/lib/fetch-with-toast';
+import { VocaDayShareButton } from '@/components/dashboard/voca-day-share-button';
 import type { VocaBook } from '@/types/voca';
 import { Inbox, Loader2, ChevronDown } from 'lucide-react';
 
@@ -12,11 +13,14 @@ interface ExamGroup {
   attempts: number;
   bestScore: number;
   wrongWords: WrongWord[];
+  isToday: boolean;
+  lastAttemptAt: string;
 }
 interface StudentExams {
   studentId: string;
   studentName: string;
   exams: ExamGroup[];
+  hasToday: boolean;
 }
 
 const PASS = 90;
@@ -95,22 +99,33 @@ export function VocaExamResultsClient() {
         <div className="space-y-2">
           {students.map((s) => (
             <div key={s.studentId} className="rounded-xl border bg-white">
-              <button
-                onClick={() => setExpanded(expanded === s.studentId ? null : s.studentId)}
-                className="flex w-full items-center justify-between px-4 py-3 text-left"
-              >
-                <span className="font-medium text-gray-900">{s.studentName}</span>
+              <div className="flex items-center justify-between px-4 py-3">
+                <button
+                  onClick={() => setExpanded(expanded === s.studentId ? null : s.studentId)}
+                  className="flex flex-1 items-center gap-2 text-left"
+                >
+                  <span className="font-medium text-gray-900">{s.studentName}</span>
+                  {s.hasToday && (
+                    <span className="rounded-full bg-rose-100 px-2 py-0.5 text-[11px] font-bold text-rose-600">오늘 응시</span>
+                  )}
+                </button>
                 <span className="flex items-center gap-2 text-xs text-gray-400">
+                  <VocaDayShareButton studentId={s.studentId} />
                   시험 {s.exams.length}건
-                  <ChevronDown className={`h-4 w-4 transition-transform ${expanded === s.studentId ? 'rotate-180' : ''}`} />
+                  <button onClick={() => setExpanded(expanded === s.studentId ? null : s.studentId)} aria-label="펼치기">
+                    <ChevronDown className={`h-4 w-4 transition-transform ${expanded === s.studentId ? 'rotate-180' : ''}`} />
+                  </button>
                 </span>
-              </button>
+              </div>
               {expanded === s.studentId && (
                 <div className="border-t px-4 py-3 space-y-3">
                   {s.exams.map((ex) => (
                     <div key={ex.rangeKey} className="rounded-lg bg-gray-50 px-3 py-2">
                       <div className="flex items-center justify-between gap-2">
-                        <span className="text-sm font-medium text-gray-800">{rangeLabel(ex.dayIds)}</span>
+                        <span className="flex items-center gap-1.5 text-sm font-medium text-gray-800">
+                          {ex.isToday && <span className="rounded bg-rose-500 px-1.5 py-0.5 text-[10px] font-bold text-white">오늘</span>}
+                          {rangeLabel(ex.dayIds)}
+                        </span>
                         <span className="flex items-center gap-2 shrink-0">
                           <span className={`rounded-full px-2.5 py-0.5 text-xs font-bold ${ex.bestScore >= PASS ? 'bg-green-100 text-green-700' : 'bg-amber-100 text-amber-700'}`}>
                             최고 {ex.bestScore}점

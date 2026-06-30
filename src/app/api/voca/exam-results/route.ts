@@ -1,25 +1,7 @@
 import { NextResponse } from 'next/server';
 import { createApiHandler } from '@/lib/api/handler';
 import { createAdminClient } from '@/lib/supabase/admin';
-
-type WrongWord = { front_text: string; back_text: string };
-interface ExamRow {
-  student_id: string;
-  book_id: string | null;
-  day_ids: string[];
-  range_key: string;
-  attempt_number: number;
-  score: number;
-  wrong_words: WrongWord[] | null;
-  created_at: string;
-}
-interface ExamGroup {
-  rangeKey: string;
-  dayIds: string[];
-  attempts: number;
-  bestScore: number;
-  wrongWords: WrongWord[];
-}
+import { fetchVocaExamGroups } from '@/lib/voca/fetch-exam-results';
 
 // GET — 선생님/보스: 묶음 보너스 시험 결과 (검수 가시성)
 //   학생별로 Day 조합(range)마다 최고점·재응시 횟수·최고점 회차 오답을 집계해 반환.
@@ -52,46 +34,20 @@ export const GET = createApiHandler(
     const studentIds = [...studentNames.keys()];
     if (studentIds.length === 0) return NextResponse.json({ students: [], dayTitles: {} });
 
-    // 2. 시험 결과
-    let examQuery = admin
-      .from('voca_exam_results')
-      .select('student_id, book_id, day_ids, range_key, attempt_number, score, wrong_words, created_at')
-      .in('student_id', studentIds)
-      .order('created_at', { ascending: false });
-    if (bookId) examQuery = examQuery.eq('book_id', bookId);
-    const { data: rowsRaw } = await examQuery;
-    const rows = (rowsRaw as ExamRow[] | null) ?? [];
+    // 2. 시험 결과 집계 (오늘 본 게 학생별로 맨 위)
+    const { groups, dayTitles } = await fetchVocaExamGroups(admin, studentIds, bookId);
 
-    // 3. Day 제목 매핑
-    const allDayIds = new Set<string>();
-    for (const r of rows) for (const d of r.day_ids || []) allDayIds.add(d);
-    const dayTitles: Record<string, string> = {};
-    if (allDayIds.size > 0) {
-      const { data: days } = await admin.from('voca_days').select('id, title').in('id', [...allDayIds]);
-      for (const d of days || []) dayTitles[d.id] = d.title;
-    }
-
-    // 4. 학생 + range_key별 집계 (최고점·재응시 횟수·최고점 회차 오답)
-    const byStudent = new Map<string, Map<string, ExamGroup>>();
-    for (const r of rows) {
-      if (!byStudent.has(r.student_id)) byStudent.set(r.student_id, new Map());
-      const ranges = byStudent.get(r.student_id)!;
-      const ex = ranges.get(r.range_key) ?? { rangeKey: r.range_key, dayIds: r.day_ids, attempts: 0, bestScore: -1, wrongWords: [] };
-      ex.attempts += 1;
-      if (r.score > ex.bestScore) {
-        ex.bestScore = r.score;
-        ex.wrongWords = r.wrong_words || [];
-      }
-      ranges.set(r.range_key, ex);
-    }
-
-    const students = [...byStudent.entries()]
-      .map(([studentId, ranges]) => ({
-        studentId,
-        studentName: studentNames.get(studentId) ?? '-',
-        exams: [...ranges.values()].sort((a, b) => b.dayIds.length - a.dayIds.length),
+    // 응시한 학생만, 오늘 응시한 학생이 맨 위로
+    const students = groups
+      .filter((g) => g.exams.length > 0)
+      .map((g) => ({
+        studentId: g.studentId,
+        studentName: studentNames.get(g.studentId) ?? '-',
+        exams: g.exams,
+        latestAt: g.exams[0]?.lastAttemptAt ?? '',
+        hasToday: g.exams.some((e) => e.isToday),
       }))
-      .sort((a, b) => a.studentName.localeCompare(b.studentName));
+      .sort((a, b) => (a.latestAt < b.latestAt ? 1 : a.latestAt > b.latestAt ? -1 : 0));
 
     return NextResponse.json({ students, dayTitles });
   }
