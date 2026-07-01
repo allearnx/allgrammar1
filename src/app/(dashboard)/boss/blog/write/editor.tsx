@@ -58,20 +58,40 @@ export function BlogEditor({ post }: BlogEditorProps) {
   const [attaching, setAttaching] = useState(false);
   const [slugManuallyEdited, setSlugManuallyEdited] = useState(false);
 
-  async function uploadImage(file: File): Promise<string | null> {
-    const formData = new FormData();
-    formData.append('file', file);
+  // Supabase Storage에 직접 업로드 (Vercel 4.5MB 본문 제한 우회 — 큰 사진도 OK)
+  async function uploadToStorage(file: File): Promise<string | null> {
+    const ext = file.name.split('.').pop() || (file.type === 'application/pdf' ? 'pdf' : 'jpg');
     try {
-      const result = await fetchWithToast<{ url: string }>('/api/boss/upload', {
-        method: 'POST',
-        body: formData,
-        successMessage: '이미지가 업로드되었습니다',
-        errorMessage: '업로드 실패',
+      const { signedUrl, publicUrl } = await fetchWithToast<{ signedUrl: string; publicUrl: string }>(
+        '/api/boss/blog-upload-url',
+        { body: { ext, contentType: file.type }, errorMessage: '업로드 준비 실패' },
+      );
+      const res = await fetch(signedUrl, {
+        method: 'PUT',
+        headers: { 'Content-Type': file.type },
+        body: file,
       });
-      return result.url;
+      if (!res.ok) throw new Error('storage upload failed');
+      return publicUrl;
     } catch {
       return null;
     }
+  }
+
+  async function uploadImage(file: File): Promise<string | null> {
+    const imageTypes = ['image/jpeg', 'image/png', 'image/webp', 'image/gif'];
+    if (!imageTypes.includes(file.type)) {
+      toast.error('이미지는 jpg/png/webp/gif만 가능합니다. (아이폰 HEIC 사진은 지원 안 돼요)');
+      return null;
+    }
+    if (file.size > 15 * 1024 * 1024) {
+      toast.error('이미지 크기는 15MB 이하만 가능합니다.');
+      return null;
+    }
+    const url = await uploadToStorage(file);
+    if (url) toast.success('이미지가 업로드되었습니다');
+    else toast.error('업로드 실패. 다시 시도해주세요.');
+    return url;
   }
 
   const editor = useEditor({
@@ -165,19 +185,20 @@ export function BlogEditor({ post }: BlogEditorProps) {
       if (attachInputRef.current) attachInputRef.current.value = '';
       return;
     }
+    if (file.size > 20 * 1024 * 1024) {
+      toast.error('PDF는 20MB 이하만 첨부할 수 있습니다.');
+      if (attachInputRef.current) attachInputRef.current.value = '';
+      return;
+    }
     setAttaching(true);
-    const formData = new FormData();
-    formData.append('file', file);
     try {
-      const result = await fetchWithToast<{ url: string }>('/api/boss/upload', {
-        method: 'POST',
-        body: formData,
-        successMessage: '파일이 첨부되었습니다',
-        errorMessage: '첨부 실패',
-      });
-      setAttachments((prev) => [...prev, { name: file.name, url: result.url, size: file.size }]);
-    } catch {
-      // error already toasted
+      const url = await uploadToStorage(file);
+      if (url) {
+        setAttachments((prev) => [...prev, { name: file.name, url, size: file.size }]);
+        toast.success('파일이 첨부되었습니다');
+      } else {
+        toast.error('첨부 실패. 다시 시도해주세요.');
+      }
     } finally {
       setAttaching(false);
       if (attachInputRef.current) attachInputRef.current.value = '';
