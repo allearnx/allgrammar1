@@ -32,6 +32,7 @@ export const metadata: Metadata = {
     '중고등·국제학교 영어 완전 정복. 내신·어휘·문법 AI 맞춤 학습 + 25년 경력 원장 직강. 강남 기출 분석 기반으로 1등급 도전하세요.',
   other: {
     'theme-color': '#1e1b4b',
+    'naver-site-verification': '75c187631508f7f3118ba5bc914fb88c2d9f691a',
   },
   appleWebApp: {
     capable: true,
