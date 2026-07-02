@@ -44,7 +44,6 @@ export function RhythmSpelling({ vocabulary, onComplete }: RhythmSpellingProps) 
   const [typedLetters, setTypedLetters] = useState<string[]>([]);
   const [letterStates, setLetterStates] = useState<('correct' | 'wrong' | 'auto')[]>([]);
   const [finalScore, setFinalScore] = useState<number | null>(null);
-  const [lastScore, setLastScore] = useState(0);
   const [wrongFlash, setWrongFlash] = useState(false);
   const advanceTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const flashTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -105,7 +104,6 @@ export function RhythmSpelling({ vocabulary, onComplete }: RhythmSpellingProps) 
         const totalCorrect = all.reduce((s, r) => s + r.firstTryCorrect, 0);
         const totalLetters = all.reduce((s, r) => s + r.totalLetters, 0);
         const score = Math.round((totalCorrect / totalLetters) * 100);
-        setLastScore(score);
         setFinalScore(score);
         onComplete(score, wrongWordsRef.current);
       }
