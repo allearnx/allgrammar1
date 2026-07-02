@@ -104,12 +104,13 @@ export function NeonVocaTab({ vocabulary, dayId, progress, dayTitle }: NeonVocaT
   }, [dayId]);
 
   const handleStepComplete = useCallback((stepIndex: number, type: 'flashcard' | 'quiz' | 'spelling' | 'matching', score?: number, wrongWords?: { front_text: string; back_text: string }[]) => {
-    saveProgress(type, score, type === 'spelling' ? wrongWords : undefined);
+    // 저장 프로미스를 잡아둔다 — 마지막 단계에서 랭킹 조회 전에 저장 완료를 보장하기 위해
+    const savePromise = saveProgress(type, score, type === 'spelling' ? wrongWords : undefined);
 
     // 퀴즈 오답을 voca_quiz_results에 별도 저장
-    if (type === 'quiz' && score !== undefined) {
-      saveQuizResult(score, wrongWords || [], vocabulary.length);
-    }
+    const quizSavePromise = (type === 'quiz' && score !== undefined)
+      ? saveQuizResult(score, wrongWords || [], vocabulary.length)
+      : Promise.resolve();
 
     // 통과 기준 체크
     const passed =
@@ -127,8 +128,9 @@ export function NeonVocaTab({ vocabulary, dayId, progress, dayTitle }: NeonVocaT
         if (nextStep < STEP_LABELS.length) {
           setCurrentStep(nextStep);
         } else {
-          // 랭킹 API 호출
-          fetch(`/api/voca/day-ranking?dayId=${dayId}`)
+          // ⭐ 마지막 단계 점수가 서버에 반영된 뒤 랭킹 조회 (안 그러면 총점 0으로 뜸)
+          Promise.all([savePromise, quizSavePromise])
+            .then(() => fetch(`/api/voca/day-ranking?dayId=${dayId}`))
             .then((r) => r.json())
             .then((data) => {
               setRankData(data);
