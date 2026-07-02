@@ -18,6 +18,7 @@ export interface VocaDayRankCardProps {
   totalStudents: number;
   totalScore: number;
   scores: { quiz: number; spelling: number; matching: number };
+  examScore?: number | null;
   topStudents: TopStudent[];
   onClose: () => void;
 }
@@ -72,6 +73,7 @@ export function VocaDayRankCard({
   totalStudents,
   totalScore,
   scores,
+  examScore,
   topStudents,
   onClose,
 }: VocaDayRankCardProps) {
@@ -136,6 +138,18 @@ export function VocaDayRankCard({
                 <ScoreBar label="퀴즈" score={scores.quiz} />
                 <ScoreBar label="스펠링" score={scores.spelling} />
                 <ScoreBar label="매칭" score={scores.matching} />
+              </div>
+
+              {/* 🎁 보너스 시험 (별도 — 총점 300에는 미포함) */}
+              <div className="border-t border-slate-700/60 pt-2.5 flex items-center justify-between">
+                <span className="text-sm text-rose-300">🎁 보너스 시험</span>
+                {examScore != null ? (
+                  <span className={cn('text-sm font-bold', examScore >= 90 ? 'text-emerald-400' : 'text-amber-300')}>
+                    {examScore}점
+                  </span>
+                ) : (
+                  <span className="text-sm text-slate-500">미응시</span>
+                )}
               </div>
             </div>
 

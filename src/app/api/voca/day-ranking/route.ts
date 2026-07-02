@@ -18,7 +18,7 @@ export const GET = createApiHandler(
     if (!academyId) {
       const { data: myProgress } = await admin
         .from('voca_student_progress')
-        .select('quiz_score, spelling_score, matching_score')
+        .select('quiz_score, spelling_score, matching_score, exam_score')
         .eq('student_id', user.id)
         .eq('day_id', dayId)
         .single();
@@ -32,6 +32,7 @@ export const GET = createApiHandler(
         totalStudents: 1,
         totalScore: quiz + spelling + matching,
         scores: { quiz, spelling, matching },
+        examScore: myProgress?.exam_score ?? null,
         topStudents: [{ name: user.full_name, score: quiz + spelling + matching, rank: 1 }],
       });
     }
@@ -68,7 +69,7 @@ export const GET = createApiHandler(
     // 해당 Day progress 조회
     const { data: progressRows } = await admin
       .from('voca_student_progress')
-      .select('student_id, quiz_score, spelling_score, matching_score, updated_at')
+      .select('student_id, quiz_score, spelling_score, matching_score, exam_score, updated_at')
       .eq('day_id', dayId)
       .in('student_id', studentIds);
 
@@ -80,6 +81,7 @@ export const GET = createApiHandler(
       quiz: number;
       spelling: number;
       matching: number;
+      exam: number | null;
       updatedAt: string;
       rank: number;
     }
@@ -97,6 +99,7 @@ export const GET = createApiHandler(
           quiz,
           spelling,
           matching,
+          exam: p?.exam_score ?? null,
           updatedAt: p?.updated_at ?? '9999-12-31',
           rank: 0,
         };
@@ -126,6 +129,7 @@ export const GET = createApiHandler(
         spelling: me?.spelling ?? 0,
         matching: me?.matching ?? 0,
       },
+      examScore: me?.exam ?? null,
       topStudents,
     });
   }
