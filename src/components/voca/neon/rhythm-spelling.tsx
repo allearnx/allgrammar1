@@ -46,7 +46,6 @@ export function RhythmSpelling({ vocabulary, onComplete }: RhythmSpellingProps) 
   const [finalScore, setFinalScore] = useState<number | null>(null);
   const [lastScore, setLastScore] = useState(0);
   const [wrongFlash, setWrongFlash] = useState(false);
-  const inputRef = useRef<HTMLInputElement>(null);
   const advanceTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const flashTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const resultsRef = useRef<WordResult[]>([]);
@@ -164,14 +163,25 @@ export function RhythmSpelling({ vocabulary, onComplete }: RhythmSpellingProps) 
 
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
-      if (finalScore !== null || e.key === 'Backspace') return;
-      if (/^[a-zA-Z]$/.test(e.key)) handleKeyPress(e.key);
+      if (finalScore !== null) return;
+      if (e.isComposing || e.key === 'Process') return; // 한글 IME 조합 중 무시
+      if (e.key === 'Backspace') return;
+      // 물리 키(e.code) 기준으로 판정 — 한글 IME가 켜져 있어도 영문 스펠링 입력 가능.
+      // (숨은 입력창에 IME 조합이 들어가면 e.key가 자모/'Process'가 되어 안 먹던 문제 해결)
+      const codeMatch = /^Key([A-Z])$/.exec(e.code);
+      const letter = codeMatch
+        ? codeMatch[1].toLowerCase()
+        : /^[a-zA-Z]$/.test(e.key)
+          ? e.key.toLowerCase()
+          : null;
+      if (letter) {
+        e.preventDefault();
+        handleKeyPress(letter);
+      }
     };
     window.addEventListener('keydown', handler);
     return () => window.removeEventListener('keydown', handler);
   }, [handleKeyPress, finalScore]);
-
-  useEffect(() => { inputRef.current?.focus(); }, [currentIndex]);
 
   useEffect(() => {
     return () => {
@@ -205,15 +215,6 @@ export function RhythmSpelling({ vocabulary, onComplete }: RhythmSpellingProps) 
 
   return (
     <div className="neon-container p-4 md:p-6 min-h-[60dvh] flex flex-col">
-      <input
-        ref={inputRef}
-        className="absolute opacity-0 w-0 h-0"
-        autoCapitalize="off"
-        autoCorrect="off"
-        autoComplete="off"
-        inputMode="none"
-      />
-
       <div className="flex items-center justify-between mb-4">
         <span className="text-sm text-gray-400">
           {currentIndex + 1} / {shuffledVocab.length}
