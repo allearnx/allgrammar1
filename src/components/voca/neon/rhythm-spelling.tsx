@@ -63,9 +63,14 @@ export function RhythmSpelling({ vocabulary, onComplete }: RhythmSpellingProps) 
     wordTimestamps: vocab.word_timestamps,
   });
 
-  const sentenceWithBlank = vocab.example_sentence
-    ? blankOutWordExact(vocab.example_sentence, vocab.front_text)
-    : null;
+  // 예문 힌트는 표제어가 예문에 실제로 있어 빈칸 처리된 경우에만 보여준다.
+  // (froze↔freeze 같은 불규칙 활용형이나 예문 자리에 품사만 있는 불량 데이터일 때
+  //  표제어와 안 맞는 문장을 띄우면 오히려 헷갈리므로 숨김)
+  const sentenceWithBlank = (() => {
+    if (!vocab.example_sentence) return null;
+    const blanked = blankOutWordExact(vocab.example_sentence, vocab.front_text);
+    return blanked !== vocab.example_sentence ? blanked : null;
+  })();
 
   /** 현재 위치부터 연속된 비알파벳 문자를 자동 채움 */
   const autoFillNonLetters = useCallback((fromIdx: number, letters: string[], states: ('correct' | 'wrong' | 'auto')[]) => {
