@@ -1,0 +1,1928 @@
+[
+  {
+    "id": "4e581006-efe4-4763-bfe6-b8572647bf60",
+    "front_text": "frequently",
+    "example_sentence": "adv.",
+    "reason": "pos"
+  },
+  {
+    "id": "a5c73655-6879-4359-b726-b63ceca88ca4",
+    "front_text": "exist",
+    "example_sentence": "v.",
+    "reason": "pos"
+  },
+  {
+    "id": "f84df9e9-bab4-4702-b2f9-9c396a546858",
+    "front_text": "instance",
+    "example_sentence": "n.",
+    "reason": "pos"
+  },
+  {
+    "id": "14d80b59-848e-4ea0-aaf7-b68ea2e89004",
+    "front_text": "develop",
+    "example_sentence": "v.",
+    "reason": "pos"
+  },
+  {
+    "id": "cfb6edfe-70de-4058-8e64-13f745f686e9",
+    "front_text": "notion",
+    "example_sentence": "n.",
+    "reason": "pos"
+  },
+  {
+    "id": "d9fb0ce0-18e3-4542-ab92-573a13d61179",
+    "front_text": "quantity",
+    "example_sentence": "n.",
+    "reason": "pos"
+  },
+  {
+    "id": "a6b9a4eb-f0db-47f5-8167-1d2c507310e6",
+    "front_text": "reveal",
+    "example_sentence": "v.",
+    "reason": "pos"
+  },
+  {
+    "id": "274d3a55-0bfd-4ebd-9df0-c6fdba20a921",
+    "front_text": "figure out",
+    "example_sentence": "v.",
+    "reason": "pos"
+  },
+  {
+    "id": "8be12237-4f8a-4316-8dbe-e3924cf8d723",
+    "front_text": "pile",
+    "example_sentence": "n.",
+    "reason": "pos"
+  },
+  {
+    "id": "dad3f255-cfea-41cd-90fa-3e3b15264933",
+    "front_text": "mention",
+    "example_sentence": "v.",
+    "reason": "pos"
+  },
+  {
+    "id": "6c9f15fd-aa49-40a7-947c-e91a90338a97",
+    "front_text": "connect",
+    "example_sentence": "v.",
+    "reason": "pos"
+  },
+  {
+    "id": "c43c7aec-2fa4-4fcc-81a7-0bf69249fa54",
+    "front_text": "goods",
+    "example_sentence": "n.",
+    "reason": "pos"
+  },
+  {
+    "id": "597dd6a2-7398-4ff1-a2e4-fe4abe1c6376",
+    "front_text": "household",
+    "example_sentence": "n.",
+    "reason": "pos"
+  },
+  {
+    "id": "d69df676-e6e4-45b5-a303-712407191679",
+    "front_text": "period",
+    "example_sentence": "n.",
+    "reason": "pos"
+  },
+  {
+    "id": "14e08f43-2637-4a94-8f7e-c938f88c55b5",
+    "front_text": "excellent",
+    "example_sentence": "adj.",
+    "reason": "pos"
+  },
+  {
+    "id": "4017da93-4782-4b65-bdd7-63462f324eda",
+    "front_text": "publish",
+    "example_sentence": "출판하다",
+    "reason": "word"
+  },
+  {
+    "id": "c1986d95-6021-47c6-94ea-335c05dd6d4a",
+    "front_text": "defense",
+    "example_sentence": "n.",
+    "reason": "pos"
+  },
+  {
+    "id": "3b531f59-c73e-479b-bbb2-783e249d921b",
+    "front_text": "participation",
+    "example_sentence": "n.",
+    "reason": "pos"
+  },
+  {
+    "id": "fdc26ffe-ff61-43f5-a4f0-74708cf81445",
+    "front_text": "trap",
+    "example_sentence": "trap",
+    "reason": "word"
+  },
+  {
+    "id": "bf579364-8d0a-46ff-adc9-1c8b6fe31797",
+    "front_text": "distract",
+    "example_sentence": "distract",
+    "reason": "word"
+  },
+  {
+    "id": "7504dc13-20a2-4c56-bf50-9f2f32998b75",
+    "front_text": "chaos",
+    "example_sentence": "chaos",
+    "reason": "word"
+  },
+  {
+    "id": "f337e9d8-e237-4137-b48e-e74729db3925",
+    "front_text": "balance",
+    "example_sentence": "balance",
+    "reason": "word"
+  },
+  {
+    "id": "a5e084a2-b8fd-4533-93e6-5fb7f8a1b100",
+    "front_text": "highlight",
+    "example_sentence": "highlight",
+    "reason": "word"
+  },
+  {
+    "id": "e7fd8582-40fc-4449-9597-fe619cb8a7f7",
+    "front_text": "overshadow",
+    "example_sentence": "overshadow",
+    "reason": "word"
+  },
+  {
+    "id": "003d3e7e-57aa-43ff-9fe0-7ea12e6bc6a1",
+    "front_text": "assume",
+    "example_sentence": "assume",
+    "reason": "word"
+  },
+  {
+    "id": "2978970f-e49a-4a7a-bd7d-a8baf174c3e4",
+    "front_text": "prove",
+    "example_sentence": "prove",
+    "reason": "word"
+  },
+  {
+    "id": "3952d4a7-86a1-4976-a9c5-735633f85137",
+    "front_text": "effective",
+    "example_sentence": "effective",
+    "reason": "word"
+  },
+  {
+    "id": "ce740587-fff7-4e11-8970-f741216d1069",
+    "front_text": "logical",
+    "example_sentence": "logical",
+    "reason": "word"
+  },
+  {
+    "id": "afd17428-54a7-495f-9380-74b5c6709310",
+    "front_text": "preferable",
+    "example_sentence": "preferable",
+    "reason": "word"
+  },
+  {
+    "id": "dfb8c0e8-bf57-4f07-9ec0-9677d146ddaf",
+    "front_text": "correct",
+    "example_sentence": "correct",
+    "reason": "word"
+  },
+  {
+    "id": "ca35afd5-0265-4389-8154-97a1d1e133fa",
+    "front_text": "stage",
+    "example_sentence": "stage",
+    "reason": "word"
+  },
+  {
+    "id": "46a4b265-a430-4d4b-ab7d-74951003656f",
+    "front_text": "transform",
+    "example_sentence": "transform",
+    "reason": "word"
+  },
+  {
+    "id": "091967ac-dc16-48a1-9063-13673e6be322",
+    "front_text": "certainly",
+    "example_sentence": "certainly",
+    "reason": "word"
+  },
+  {
+    "id": "a6de4c4b-7c09-460b-b4d8-9355aa771b52",
+    "front_text": "temptation",
+    "example_sentence": "temptation",
+    "reason": "word"
+  },
+  {
+    "id": "3d8eafec-7af9-4b8a-8abc-46a38e12bb9d",
+    "front_text": "upgrade",
+    "example_sentence": "upgrade",
+    "reason": "word"
+  },
+  {
+    "id": "48f18f7e-d252-46b5-a639-37ab648c8ac4",
+    "front_text": "superior",
+    "example_sentence": "superior",
+    "reason": "word"
+  },
+  {
+    "id": "a4667125-3368-44a2-8563-e8f559eb0e80",
+    "front_text": "unborn",
+    "example_sentence": "unborn",
+    "reason": "word"
+  },
+  {
+    "id": "4d7788e3-4f93-4f59-902d-38b910a00917",
+    "front_text": "lower",
+    "example_sentence": "lower",
+    "reason": "word"
+  },
+  {
+    "id": "d3bfdad1-c358-4184-9144-c0a0fca18830",
+    "front_text": "risk",
+    "example_sentence": "risk",
+    "reason": "word"
+  },
+  {
+    "id": "344fea21-1dac-4fc6-baeb-292d906cb7ec",
+    "front_text": "beneficial",
+    "example_sentence": "beneficial",
+    "reason": "word"
+  },
+  {
+    "id": "6a877291-2bb0-4ff4-8436-6437bc28a030",
+    "front_text": "feature",
+    "example_sentence": "feature",
+    "reason": "word"
+  },
+  {
+    "id": "93eb5b11-da26-4897-a725-ad6b2d590075",
+    "front_text": "physical",
+    "example_sentence": "physical",
+    "reason": "word"
+  },
+  {
+    "id": "465881b4-70ce-4305-871e-23c461a80cfb",
+    "front_text": "pursuit",
+    "example_sentence": "pursuit",
+    "reason": "word"
+  },
+  {
+    "id": "0cce9416-3aea-4da3-bafa-ca41b9c90efb",
+    "front_text": "perfection",
+    "example_sentence": "perfection",
+    "reason": "word"
+  },
+  {
+    "id": "eff56557-3154-459a-a16f-21e53d5eab85",
+    "front_text": "slippery",
+    "example_sentence": "slippery",
+    "reason": "word"
+  },
+  {
+    "id": "b6a12aa0-ed49-4276-994c-07d8e9032785",
+    "front_text": "slope",
+    "example_sentence": "slope",
+    "reason": "word"
+  },
+  {
+    "id": "5005a85e-c887-42f8-a103-0f28b479a921",
+    "front_text": "collection",
+    "example_sentence": "collection",
+    "reason": "word"
+  },
+  {
+    "id": "85e6546f-b34e-4b6f-a160-2b89579530fd",
+    "front_text": "certainty",
+    "example_sentence": "certainty",
+    "reason": "word"
+  },
+  {
+    "id": "15fccef5-cc03-49c2-8ea0-07dcfdd79176",
+    "front_text": "organism",
+    "example_sentence": "organism",
+    "reason": "word"
+  },
+  {
+    "id": "8ec4f2b4-aa6e-4383-825a-f874d0d39ed2",
+    "front_text": "realization",
+    "example_sentence": "realize",
+    "reason": "word"
+  },
+  {
+    "id": "9c6c6e08-e57c-447b-9437-ea2cc75646e1",
+    "front_text": "succession",
+    "example_sentence": "succession",
+    "reason": "word"
+  },
+  {
+    "id": "cc755121-7b4a-488b-9047-f1512485f866",
+    "front_text": "unforgettable",
+    "example_sentence": "adj.",
+    "reason": "pos"
+  },
+  {
+    "id": "28e5d8c6-1753-472b-92bd-98a01613c870",
+    "front_text": "nearby",
+    "example_sentence": "adj.",
+    "reason": "pos"
+  },
+  {
+    "id": "6a2625cd-770f-472d-8c78-7e4bdb9592ff",
+    "front_text": "characteristic",
+    "example_sentence": "characteristic",
+    "reason": "word"
+  },
+  {
+    "id": "f38f85f2-2200-4aa5-8759-13e1fbe05e65",
+    "front_text": "per",
+    "example_sentence": "prep.",
+    "reason": "pos"
+  },
+  {
+    "id": "77446308-4bac-4582-b957-3cce0ee6cfdc",
+    "front_text": "notice",
+    "example_sentence": "n.",
+    "reason": "pos"
+  },
+  {
+    "id": "d4fed62c-7a12-4dba-b032-4dd3582fba17",
+    "front_text": "allow",
+    "example_sentence": "v.",
+    "reason": "pos"
+  },
+  {
+    "id": "71002667-bdc4-4b19-8665-cbf2609b0ec5",
+    "front_text": "deny",
+    "example_sentence": "v.",
+    "reason": "pos"
+  },
+  {
+    "id": "f1a61b46-6318-4f10-b926-29ffff1568c4",
+    "front_text": "missing",
+    "example_sentence": "adj.",
+    "reason": "pos"
+  },
+  {
+    "id": "62aed33e-7c35-459b-a0de-4ed15c7de463",
+    "front_text": "deceive",
+    "example_sentence": "v.",
+    "reason": "pos"
+  },
+  {
+    "id": "e0bb68cd-8558-46ed-9056-b0ec598f2f80",
+    "front_text": "treat",
+    "example_sentence": "v.",
+    "reason": "pos"
+  },
+  {
+    "id": "de4e5ee2-5933-4df6-8fce-ef616d652a01",
+    "front_text": "room for ~",
+    "example_sentence": "n.",
+    "reason": "pos"
+  },
+  {
+    "id": "6b428652-806c-4309-9e1a-684f9bfe1cce",
+    "front_text": "overall",
+    "example_sentence": "Overall",
+    "reason": "word"
+  },
+  {
+    "id": "8594f6ad-e8c3-40f0-adde-11800eb47624",
+    "front_text": "sensible",
+    "example_sentence": "합리적인",
+    "reason": "word"
+  },
+  {
+    "id": "b1356ce4-b2b1-408b-9281-379959f3c623",
+    "front_text": "separate",
+    "example_sentence": "adj.",
+    "reason": "pos"
+  },
+  {
+    "id": "af3dd4fa-fe8e-42c1-be49-6c4deee36e5f",
+    "front_text": "distraction",
+    "example_sentence": "n.",
+    "reason": "pos"
+  },
+  {
+    "id": "c5505f41-0afe-4c6a-ae13-50f95f740fc7",
+    "front_text": "professional",
+    "example_sentence": "adj.",
+    "reason": "pos"
+  },
+  {
+    "id": "4bd435cf-d5ec-4a3f-9a11-07489f949f05",
+    "front_text": "allow",
+    "example_sentence": "v.",
+    "reason": "pos"
+  },
+  {
+    "id": "7bc5d25b-f19d-4517-bf11-298f9e069b7b",
+    "front_text": "determine",
+    "example_sentence": "v.",
+    "reason": "pos"
+  },
+  {
+    "id": "b51a3c84-67ef-4606-ab14-3c4a25f24307",
+    "front_text": "encourage",
+    "example_sentence": "v.",
+    "reason": "pos"
+  },
+  {
+    "id": "f66ec2b4-5f6c-48a9-8cf6-90a05d622d6a",
+    "front_text": "unpaid",
+    "example_sentence": "adj.",
+    "reason": "pos"
+  },
+  {
+    "id": "07786c03-4d8e-45b2-bb7d-734bea0cef69",
+    "front_text": "demand",
+    "example_sentence": "v.",
+    "reason": "pos"
+  },
+  {
+    "id": "176a71d8-f178-4866-93a1-67cfb9f74e08",
+    "front_text": "superior",
+    "example_sentence": "adj.",
+    "reason": "pos"
+  },
+  {
+    "id": "340b61db-64f1-42a9-a9ab-990cad42c094",
+    "front_text": "receptor",
+    "example_sentence": "n.",
+    "reason": "pos"
+  },
+  {
+    "id": "334e8007-7681-42c9-9310-5971a3625c80",
+    "front_text": "rare",
+    "example_sentence": "adj.",
+    "reason": "pos"
+  },
+  {
+    "id": "83a1d43c-11ab-4822-ab52-3efb7e018877",
+    "front_text": "remote",
+    "example_sentence": "adj.",
+    "reason": "pos"
+  },
+  {
+    "id": "076f6e6d-d859-4607-88ef-6f8653e358f2",
+    "front_text": "medium",
+    "example_sentence": "n.",
+    "reason": "pos"
+  },
+  {
+    "id": "aac08428-6cab-4d03-8104-77a5103ae3a5",
+    "front_text": "exhibit",
+    "example_sentence": "v.",
+    "reason": "pos"
+  },
+  {
+    "id": "dc739c2b-7163-4087-9579-c8de4b4fef72",
+    "front_text": "associate",
+    "example_sentence": "v.",
+    "reason": "pos"
+  },
+  {
+    "id": "167be55d-d646-461c-9d6c-7febb118dff2",
+    "front_text": "represent",
+    "example_sentence": "v.",
+    "reason": "pos"
+  },
+  {
+    "id": "83966993-e270-437c-b370-3182a87f46e3",
+    "front_text": "sociable",
+    "example_sentence": "adj.",
+    "reason": "pos"
+  },
+  {
+    "id": "030940dd-aa2e-4f2c-ab5e-d67e12adef97",
+    "front_text": "attract",
+    "example_sentence": "v.",
+    "reason": "pos"
+  },
+  {
+    "id": "c7a33c4f-db1d-44e1-8fdd-a5f049402893",
+    "front_text": "responsive",
+    "example_sentence": "adj.",
+    "reason": "pos"
+  },
+  {
+    "id": "55120a18-2994-438f-a2e0-adf2a91180bb",
+    "front_text": "exist",
+    "example_sentence": "v.",
+    "reason": "pos"
+  },
+  {
+    "id": "1dfbe50b-3607-4c26-9f5a-bc91a80eb627",
+    "front_text": "myth",
+    "example_sentence": "n.",
+    "reason": "pos"
+  },
+  {
+    "id": "8d5c90b5-7c06-4c93-8052-dc97819e31da",
+    "front_text": "tread",
+    "example_sentence": "n.",
+    "reason": "pos"
+  },
+  {
+    "id": "6b714220-a2ac-4b5b-8458-41e50f90b840",
+    "front_text": "volunteer",
+    "example_sentence": "n.",
+    "reason": "pos"
+  },
+  {
+    "id": "14adc6d8-018b-4e3f-b947-32df58c72b0d",
+    "front_text": "author",
+    "example_sentence": "n.",
+    "reason": "pos"
+  },
+  {
+    "id": "f4864551-ca5a-4dfc-be14-da7832493d25",
+    "front_text": "reduce",
+    "example_sentence": "v.",
+    "reason": "pos"
+  },
+  {
+    "id": "19af453c-d025-4f12-a415-dc8526cb3e45",
+    "front_text": "call off",
+    "example_sentence": "v.",
+    "reason": "pos"
+  },
+  {
+    "id": "7b1aa70c-699c-47f1-b240-afe63148609a",
+    "front_text": "average",
+    "example_sentence": "adj.",
+    "reason": "pos"
+  },
+  {
+    "id": "9146803f-2e94-4797-8516-20ae2ed89d42",
+    "front_text": "publish",
+    "example_sentence": "v.",
+    "reason": "pos"
+  },
+  {
+    "id": "8c5dbd72-323b-489d-aa67-fce98570f430",
+    "front_text": "population",
+    "example_sentence": "n.",
+    "reason": "pos"
+  },
+  {
+    "id": "6aaa5570-ada0-466f-a0ea-ef6d32947bec",
+    "front_text": "urgency",
+    "example_sentence": "n.",
+    "reason": "pos"
+  },
+  {
+    "id": "9c5d6448-ce98-4009-9f29-f152e0c09a3c",
+    "front_text": "enjoy oneself",
+    "example_sentence": "v.",
+    "reason": "pos"
+  },
+  {
+    "id": "f5ab21bf-bd32-4d6d-840b-35238176d3c7",
+    "front_text": "educated",
+    "example_sentence": "adj.",
+    "reason": "pos"
+  },
+  {
+    "id": "ddbac779-a084-44da-9efa-457f85c4d0d1",
+    "front_text": "financial",
+    "example_sentence": "adj.",
+    "reason": "pos"
+  },
+  {
+    "id": "af137d2d-42f9-4eea-81b4-cec9913ab008",
+    "front_text": "unfortunately",
+    "example_sentence": "Unfortunately",
+    "reason": "word"
+  },
+  {
+    "id": "3a024883-76ba-4318-8692-b73015036991",
+    "front_text": "harsh",
+    "example_sentence": "adj.",
+    "reason": "pos"
+  },
+  {
+    "id": "bb6ad31d-db73-4d42-9a1d-f62422cf4cd5",
+    "front_text": "carnival",
+    "example_sentence": "n.",
+    "reason": "pos"
+  },
+  {
+    "id": "3d002f9b-35f6-4628-b790-74cd5b008dbb",
+    "front_text": "suddenly",
+    "example_sentence": "Suddenly",
+    "reason": "word"
+  },
+  {
+    "id": "fc6aa186-99f6-47e2-8d51-7c5c44b1366f",
+    "front_text": "texture",
+    "example_sentence": "n.",
+    "reason": "pos"
+  },
+  {
+    "id": "34176689-19a3-4509-b23a-5d2225d7b2ad",
+    "front_text": "exposure",
+    "example_sentence": "n.",
+    "reason": "pos"
+  },
+  {
+    "id": "acb8f0cd-b7b8-4b24-ab07-0b51d448e097",
+    "front_text": "attach",
+    "example_sentence": "v.",
+    "reason": "pos"
+  },
+  {
+    "id": "d729c0f6-b425-4fa3-9fa1-f2c2ec6e2418",
+    "front_text": "endure",
+    "example_sentence": "v.",
+    "reason": "pos"
+  },
+  {
+    "id": "482d3953-806e-47a7-bc00-c2aabcea1afb",
+    "front_text": "similarly",
+    "example_sentence": "Similarly",
+    "reason": "word"
+  },
+  {
+    "id": "57f13731-5f9c-46a2-a0e7-d212c573de99",
+    "front_text": "spectrum",
+    "example_sentence": "n.",
+    "reason": "pos"
+  },
+  {
+    "id": "ca9917a3-c161-4130-a6d2-01c5f187169d",
+    "front_text": "discussion",
+    "example_sentence": "n.",
+    "reason": "pos"
+  },
+  {
+    "id": "cf18a026-170b-4045-a009-0907664528b0",
+    "front_text": "band",
+    "example_sentence": "n.",
+    "reason": "pos"
+  },
+  {
+    "id": "fe155d58-5ee2-4e80-8a6c-5c270a4c5d6b",
+    "front_text": "code",
+    "example_sentence": "규율",
+    "reason": "word"
+  },
+  {
+    "id": "eb68d977-b543-4061-9d79-f5f22473a73e",
+    "front_text": "at will",
+    "example_sentence": "adv.",
+    "reason": "pos"
+  },
+  {
+    "id": "8be60056-95e4-4728-9b8a-0bb54e1502f9",
+    "front_text": "attach",
+    "example_sentence": "v.",
+    "reason": "pos"
+  },
+  {
+    "id": "7ccfdd12-03ae-4814-a3d3-8ba56418277f",
+    "front_text": "commitment",
+    "example_sentence": "n.",
+    "reason": "pos"
+  },
+  {
+    "id": "e1668da1-020b-4c08-8576-48776c3ead00",
+    "front_text": "flourish",
+    "example_sentence": "v.",
+    "reason": "pos"
+  },
+  {
+    "id": "6d6c09c9-2a77-44bc-ba0a-20c98dba6632",
+    "front_text": "extract",
+    "example_sentence": "v.",
+    "reason": "pos"
+  },
+  {
+    "id": "f9178cf5-fd6e-4c77-8614-db1c845bf156",
+    "front_text": "apparently",
+    "example_sentence": "Apparently",
+    "reason": "word"
+  },
+  {
+    "id": "37d30b5f-c6da-4dce-8702-15f728b30d94",
+    "front_text": "recently",
+    "example_sentence": "Recently",
+    "reason": "word"
+  },
+  {
+    "id": "51c67717-5da7-4d89-a1a8-4547aecde43a",
+    "front_text": "comment",
+    "example_sentence": "n.",
+    "reason": "pos"
+  },
+  {
+    "id": "16575d65-d2f4-457a-981a-008403beab7b",
+    "front_text": "specifically",
+    "example_sentence": "Specifically",
+    "reason": "word"
+  },
+  {
+    "id": "e9ba2a9c-e3df-41e6-91dc-175d8e9d055a",
+    "front_text": "fallibility",
+    "example_sentence": "n.",
+    "reason": "pos"
+  },
+  {
+    "id": "2a257590-3683-442b-9d77-71ede030e333",
+    "front_text": "foreseeable",
+    "example_sentence": "adj.",
+    "reason": "pos"
+  },
+  {
+    "id": "caac062d-34fc-4237-a9ac-f8a0c0b694f7",
+    "front_text": "association",
+    "example_sentence": "n.",
+    "reason": "pos"
+  },
+  {
+    "id": "0348595a-671b-42f5-a0a9-b6f98658132f",
+    "front_text": "monitor",
+    "example_sentence": "v.",
+    "reason": "pos"
+  },
+  {
+    "id": "c2b92722-3392-4707-9681-1ae3fca3136c",
+    "front_text": "emerging",
+    "example_sentence": "adj.",
+    "reason": "pos"
+  },
+  {
+    "id": "15cf1d12-7b0d-42c4-bdb1-02b6fec6b698",
+    "front_text": "pretense",
+    "example_sentence": "n.",
+    "reason": "pos"
+  },
+  {
+    "id": "3e5a4cf4-836e-4ab8-b32c-ae165e13b5b9",
+    "front_text": "silhouette",
+    "example_sentence": "n.",
+    "reason": "pos"
+  },
+  {
+    "id": "86d84d54-f64c-41ba-85f6-0caf7828e896",
+    "front_text": "established",
+    "example_sentence": "adj.",
+    "reason": "pos"
+  },
+  {
+    "id": "773cbd22-4bb5-4219-8400-489fc6ccd5ac",
+    "front_text": "representation",
+    "example_sentence": "n.",
+    "reason": "pos"
+  },
+  {
+    "id": "ea298e16-28ee-4ec4-9c96-8e8f45403190",
+    "front_text": "imply",
+    "example_sentence": "v.",
+    "reason": "pos"
+  },
+  {
+    "id": "e16bdfb6-3440-44d7-9527-d783cb30c526",
+    "front_text": "ongoing",
+    "example_sentence": "adj.",
+    "reason": "pos"
+  },
+  {
+    "id": "b5578504-7a6d-4e7a-9f39-cea4b98fefb0",
+    "front_text": "conduct",
+    "example_sentence": "v.",
+    "reason": "pos"
+  },
+  {
+    "id": "9401bc26-dfde-47a6-bb44-04e3e3baf122",
+    "front_text": "share",
+    "example_sentence": "n.",
+    "reason": "pos"
+  },
+  {
+    "id": "1286438e-8397-42ac-8622-3f6b3422c61a",
+    "front_text": "public figure",
+    "example_sentence": "n.",
+    "reason": "pos"
+  },
+  {
+    "id": "4f5fa830-c290-4f39-8d51-9494fe0609b0",
+    "front_text": "mature",
+    "example_sentence": "adj.",
+    "reason": "pos"
+  },
+  {
+    "id": "a3ca6898-14cb-402f-bbe3-63a99730c286",
+    "front_text": "drop out of",
+    "example_sentence": "v.",
+    "reason": "pos"
+  },
+  {
+    "id": "13e67a6c-f257-4e0e-9c00-3f7fe538b439",
+    "front_text": "outstanding",
+    "example_sentence": "adj.",
+    "reason": "pos"
+  },
+  {
+    "id": "ee0c7a2c-19a9-44ad-b8cc-a4c91bb766b5",
+    "front_text": "statue",
+    "example_sentence": "n.",
+    "reason": "pos"
+  },
+  {
+    "id": "14957302-864b-4271-bd1b-908697689081",
+    "front_text": "unfortunately",
+    "example_sentence": "Unfortunately",
+    "reason": "word"
+  },
+  {
+    "id": "62535e95-67ed-43f3-afec-99e5cd4f4057",
+    "front_text": "requirement",
+    "example_sentence": "n.",
+    "reason": "pos"
+  },
+  {
+    "id": "31340517-308e-4567-87d1-85ed00ba29ab",
+    "front_text": "apply",
+    "example_sentence": "v.",
+    "reason": "pos"
+  },
+  {
+    "id": "859da556-9c97-4d24-ba72-a15557841e91",
+    "front_text": "caretaker",
+    "example_sentence": "n.",
+    "reason": "pos"
+  },
+  {
+    "id": "533f6333-bfc9-46bb-992d-0818da01742c",
+    "front_text": "examine",
+    "example_sentence": "v.",
+    "reason": "pos"
+  },
+  {
+    "id": "f60e1937-2309-4eba-b6d1-77c87797c0b8",
+    "front_text": "coastal",
+    "example_sentence": "adj.",
+    "reason": "pos"
+  },
+  {
+    "id": "0756e55e-379d-4daf-ae94-2cb48a97ef96",
+    "front_text": "operant",
+    "example_sentence": "adj.",
+    "reason": "pos"
+  },
+  {
+    "id": "c44cee58-7178-45c8-9e69-0eecbe0faf55",
+    "front_text": "incentive",
+    "example_sentence": "n.",
+    "reason": "pos"
+  },
+  {
+    "id": "c6f9abdf-a790-4767-bda6-9f163c8538be",
+    "front_text": "cultivate",
+    "example_sentence": "v.",
+    "reason": "pos"
+  },
+  {
+    "id": "2b73900d-d532-43ca-a296-ef20ee7cc32e",
+    "front_text": "medium",
+    "example_sentence": "매체들",
+    "reason": "word"
+  },
+  {
+    "id": "3f01258f-2d5f-49b7-beed-872aa3e5ee12",
+    "front_text": "alternatively",
+    "example_sentence": "Alternatively",
+    "reason": "word"
+  },
+  {
+    "id": "b4e44e26-f2e0-4833-bba2-97e57bbc79bd",
+    "front_text": "consequently",
+    "example_sentence": "Consequently",
+    "reason": "word"
+  },
+  {
+    "id": "70988eec-30cb-45fc-82e8-aba68cd92a70",
+    "front_text": "subsequently",
+    "example_sentence": "Subsequently",
+    "reason": "word"
+  },
+  {
+    "id": "da531850-eccc-402a-b2c8-fac347623ecb",
+    "front_text": "institution",
+    "example_sentence": "n.",
+    "reason": "pos"
+  },
+  {
+    "id": "ec5dab1a-2d08-4f25-a092-55efc570b08d",
+    "front_text": "manipulate",
+    "example_sentence": "v.",
+    "reason": "pos"
+  },
+  {
+    "id": "f4d5f972-f393-436c-a59f-4dd5805bcece",
+    "front_text": "uniformity",
+    "example_sentence": "n.",
+    "reason": "pos"
+  },
+  {
+    "id": "a663cf69-910f-48e9-8fab-536c6852688b",
+    "front_text": "initially",
+    "example_sentence": "Initially",
+    "reason": "word"
+  },
+  {
+    "id": "9b5727b6-57a9-4e94-9606-3c34b7cee96f",
+    "front_text": "fortunately",
+    "example_sentence": "Fortunately",
+    "reason": "word"
+  },
+  {
+    "id": "bfe31c36-0884-4901-9e66-3b61f8b6f637",
+    "front_text": "poorly",
+    "example_sentence": "adv.",
+    "reason": "pos"
+  },
+  {
+    "id": "be68cd80-afc0-4141-94c2-0221c0225d41",
+    "front_text": "function",
+    "example_sentence": "v.",
+    "reason": "pos"
+  },
+  {
+    "id": "c0aecd38-ef01-4408-9e9f-609f8e061127",
+    "front_text": "stimulate",
+    "example_sentence": "v.",
+    "reason": "pos"
+  },
+  {
+    "id": "c58c5ab8-1bd8-422d-b2d0-c7aa8e116bf1",
+    "front_text": "organizational",
+    "example_sentence": "adj.",
+    "reason": "pos"
+  },
+  {
+    "id": "d93d38fd-129a-4b8b-a5f6-60d742dcef17",
+    "front_text": "dramatically",
+    "example_sentence": "adv.",
+    "reason": "pos"
+  },
+  {
+    "id": "146f8d38-40df-4729-82b7-e42bcf618bcc",
+    "front_text": "eventually",
+    "example_sentence": "Eventually",
+    "reason": "word"
+  },
+  {
+    "id": "530cad5a-7afb-4ff3-a87d-fd866f9c1225",
+    "front_text": "capture",
+    "example_sentence": "v.",
+    "reason": "pos"
+  },
+  {
+    "id": "c8b72498-7d81-472a-a6af-07cdab899da9",
+    "front_text": "incentive",
+    "example_sentence": "n.",
+    "reason": "pos"
+  },
+  {
+    "id": "017e658d-b6ff-4c5e-bc6e-a8addafcb427",
+    "front_text": "residual",
+    "example_sentence": "adj.",
+    "reason": "pos"
+  },
+  {
+    "id": "06a04b61-7733-48dd-ade1-27c99a696fea",
+    "front_text": "measurement",
+    "example_sentence": "n.",
+    "reason": "pos"
+  },
+  {
+    "id": "9b648c13-95d9-4937-aa2e-b7d47e0f181e",
+    "front_text": "taxation",
+    "example_sentence": "n.",
+    "reason": "pos"
+  },
+  {
+    "id": "35c0f71b-224c-4dd3-84a7-73b15b01724a",
+    "front_text": "discharge",
+    "example_sentence": "n.",
+    "reason": "pos"
+  },
+  {
+    "id": "489fa004-acf9-483f-abc2-4e085324198e",
+    "front_text": "trade-off",
+    "example_sentence": "n.",
+    "reason": "pos"
+  },
+  {
+    "id": "59606873-6457-4fe6-b767-d59920ecdca8",
+    "front_text": "disquieting",
+    "example_sentence": "adj.",
+    "reason": "pos"
+  },
+  {
+    "id": "45043354-8828-4169-b89f-a8e8291af7bb",
+    "front_text": "conventional",
+    "example_sentence": "adj.",
+    "reason": "pos"
+  },
+  {
+    "id": "5e0a2e37-16cb-4176-9713-3d992732faf3",
+    "front_text": "appreciate",
+    "example_sentence": "v.",
+    "reason": "pos"
+  },
+  {
+    "id": "65903c7f-0f44-4498-81fa-affd652b9bca",
+    "front_text": "involvement",
+    "example_sentence": "n.",
+    "reason": "pos"
+  },
+  {
+    "id": "78c27769-eb7a-4dc8-b647-193062455aa7",
+    "front_text": "ultimately",
+    "example_sentence": "Ultimately",
+    "reason": "word"
+  },
+  {
+    "id": "e2207a00-63d3-445b-a13e-4dd767de8980",
+    "front_text": "describe",
+    "example_sentence": "v.",
+    "reason": "pos"
+  },
+  {
+    "id": "7d22722b-bffa-4241-9059-36a6708ab79d",
+    "front_text": "access",
+    "example_sentence": "접근",
+    "reason": "word"
+  },
+  {
+    "id": "c905d1f0-b8a7-4898-b3fe-635e769f0a28",
+    "front_text": "selection",
+    "example_sentence": "n.",
+    "reason": "pos"
+  },
+  {
+    "id": "15c2f00e-4952-4847-bdfd-02d17e51cf99",
+    "front_text": "beat",
+    "example_sentence": "v.",
+    "reason": "pos"
+  },
+  {
+    "id": "e4dab160-0c8e-4d1b-a0f5-d373e1260173",
+    "front_text": "grade",
+    "example_sentence": "n.",
+    "reason": "pos"
+  },
+  {
+    "id": "c9bbc6bb-6048-47c7-a930-e1936adebf5d",
+    "front_text": "emerge",
+    "example_sentence": "v.",
+    "reason": "pos"
+  },
+  {
+    "id": "6e460f6b-cf85-4435-b319-095efc720e49",
+    "front_text": "fantasy",
+    "example_sentence": "n.",
+    "reason": "pos"
+  },
+  {
+    "id": "a6b75faf-9bda-4738-af0f-509cbcf0f455",
+    "front_text": "disorderly",
+    "example_sentence": "adj.",
+    "reason": "pos"
+  },
+  {
+    "id": "823bf86a-853c-4f58-a1df-6053c08806c3",
+    "front_text": "disorganized",
+    "example_sentence": "adj.",
+    "reason": "pos"
+  },
+  {
+    "id": "b3410ad8-b797-455e-84b0-0c2767138a1b",
+    "front_text": "tidy",
+    "example_sentence": "v.",
+    "reason": "pos"
+  },
+  {
+    "id": "99455d81-d9a4-441b-80f9-59b9f8d6fe54",
+    "front_text": "arrange",
+    "example_sentence": "v.",
+    "reason": "pos"
+  },
+  {
+    "id": "9e9b1eee-3ed4-4f96-a50d-9ab46e3a3c35",
+    "front_text": "achieve",
+    "example_sentence": "v.",
+    "reason": "pos"
+  },
+  {
+    "id": "4496590f-69bb-4687-8ce6-5d2b09e94e36",
+    "front_text": "nutrient",
+    "example_sentence": "n.",
+    "reason": "pos"
+  },
+  {
+    "id": "33eb7e37-1a06-45ac-bbd9-34cfb6485104",
+    "front_text": "condition",
+    "example_sentence": "n.",
+    "reason": "pos"
+  },
+  {
+    "id": "e7422c12-7c74-49b7-bb08-8615bc0cc08f",
+    "front_text": "desire",
+    "example_sentence": "v.",
+    "reason": "pos"
+  },
+  {
+    "id": "5f331ea6-4994-422f-b82a-f5857847b95f",
+    "front_text": "indication",
+    "example_sentence": "나타남",
+    "reason": "word"
+  },
+  {
+    "id": "3f959df5-e34a-4093-920a-d05b461f962a",
+    "front_text": "revival",
+    "example_sentence": "n.",
+    "reason": "pos"
+  },
+  {
+    "id": "0b3aa9da-ccd9-4c4b-9473-cd6195e003f3",
+    "front_text": "diversification",
+    "example_sentence": "n.",
+    "reason": "pos"
+  },
+  {
+    "id": "a354e3d3-888d-407a-8078-7affba6c8fc3",
+    "front_text": "voter",
+    "example_sentence": "n.",
+    "reason": "pos"
+  },
+  {
+    "id": "c9413f15-3f53-46df-a4c6-cf0baf97d91e",
+    "front_text": "simply",
+    "example_sentence": "adv.",
+    "reason": "pos"
+  },
+  {
+    "id": "a1bb5757-bb44-4150-88de-8998ba183dfa",
+    "front_text": "collection",
+    "example_sentence": "n.",
+    "reason": "pos"
+  },
+  {
+    "id": "48e0bf67-919a-4c45-9fd8-1377ca3d8e4d",
+    "front_text": "profound",
+    "example_sentence": "엄청난",
+    "reason": "word"
+  },
+  {
+    "id": "2389b6bd-829d-469f-bd40-ba4cc859e43b",
+    "front_text": "propulsion",
+    "example_sentence": "n.",
+    "reason": "pos"
+  },
+  {
+    "id": "87892d2c-ab3f-4788-b0cb-505275b424e8",
+    "front_text": "gourmet",
+    "example_sentence": "adj.",
+    "reason": "pos"
+  },
+  {
+    "id": "eba4b21d-6dee-4ddb-a4b0-710a3c4d4501",
+    "front_text": "recipe",
+    "example_sentence": "n.",
+    "reason": "pos"
+  },
+  {
+    "id": "4899e7e3-db8d-4ab8-80d4-d5f676e2dfb7",
+    "front_text": "registration",
+    "example_sentence": "n.",
+    "reason": "pos"
+  },
+  {
+    "id": "63e4359d-461d-413e-886f-432a49d5e0ca",
+    "front_text": "domesticate",
+    "example_sentence": "v.",
+    "reason": "pos"
+  },
+  {
+    "id": "0eb4f8d2-33d3-4ece-9802-d7619eab93c9",
+    "front_text": "remains",
+    "example_sentence": "n.",
+    "reason": "pos"
+  },
+  {
+    "id": "d13b110d-8c25-442f-a222-427d993f11da",
+    "front_text": "reveal",
+    "example_sentence": "v.",
+    "reason": "pos"
+  },
+  {
+    "id": "8840360c-e4ad-48b0-a823-d34444e75459",
+    "front_text": "present",
+    "example_sentence": "n.",
+    "reason": "pos"
+  },
+  {
+    "id": "7d66c9b4-2fc7-4ed3-952b-2445360dd5ea",
+    "front_text": "occasion",
+    "example_sentence": "n.",
+    "reason": "pos"
+  },
+  {
+    "id": "1ca7356e-8248-4533-a715-240771f6335e",
+    "front_text": "prematurely",
+    "example_sentence": "adv.",
+    "reason": "pos"
+  },
+  {
+    "id": "b1599992-6ec9-4edc-9f12-5cd0dfe5503c",
+    "front_text": "generally",
+    "example_sentence": "Generally",
+    "reason": "word"
+  },
+  {
+    "id": "5c9a6c11-fb4a-46f3-be31-a26e7e2a72d9",
+    "front_text": "reshaping",
+    "example_sentence": "n.",
+    "reason": "pos"
+  },
+  {
+    "id": "df192698-d8de-4bbc-9e0f-c48299acdec8",
+    "front_text": "mechanism",
+    "example_sentence": "n.",
+    "reason": "pos"
+  },
+  {
+    "id": "2f205f31-0f35-4bc3-bd03-73c3d825a0f1",
+    "front_text": "advantage",
+    "example_sentence": "n.",
+    "reason": "pos"
+  },
+  {
+    "id": "40c9cc13-5c76-4363-b3e8-70dabfd525ce",
+    "front_text": "identification",
+    "example_sentence": "n.",
+    "reason": "pos"
+  },
+  {
+    "id": "11e40e7a-fbaf-4486-b98a-b2701fd31184",
+    "front_text": "assume",
+    "example_sentence": "v.",
+    "reason": "pos"
+  },
+  {
+    "id": "951ee248-5ffc-41e7-8a05-8d22cb66f1c9",
+    "front_text": "consequently",
+    "example_sentence": "Consequently",
+    "reason": "word"
+  },
+  {
+    "id": "b91ba0a6-d774-4c02-843f-dc500959f56a",
+    "front_text": "prescribe",
+    "example_sentence": "v.",
+    "reason": "pos"
+  },
+  {
+    "id": "0730ea95-9f32-4069-86bc-4eac0fdc4c55",
+    "front_text": "gray",
+    "example_sentence": "adj.",
+    "reason": "pos"
+  },
+  {
+    "id": "42d00cac-06c0-4e0c-acbe-6156b8334a25",
+    "front_text": "arise",
+    "example_sentence": "v.",
+    "reason": "pos"
+  },
+  {
+    "id": "f7fe7572-fe62-45ed-9cad-349a1ba770fe",
+    "front_text": "introduce",
+    "example_sentence": "v.",
+    "reason": "pos"
+  },
+  {
+    "id": "75c88c28-a097-41e3-9c1f-4f475d53de38",
+    "front_text": "adapt",
+    "example_sentence": "v.",
+    "reason": "pos"
+  },
+  {
+    "id": "4c3c9e47-8f5f-4788-8c23-801af60ef861",
+    "front_text": "varied",
+    "example_sentence": "adj.",
+    "reason": "pos"
+  },
+  {
+    "id": "24daa319-eafd-4981-8337-a2e42d9a78dc",
+    "front_text": "rehearsal",
+    "example_sentence": "n.",
+    "reason": "pos"
+  },
+  {
+    "id": "4333e24b-96a5-459e-9115-321ddcb20949",
+    "front_text": "shorten",
+    "example_sentence": "v.",
+    "reason": "pos"
+  },
+  {
+    "id": "02fc943a-fd42-43de-8967-4d29acd414bb",
+    "front_text": "ultimately",
+    "example_sentence": "Ultimately",
+    "reason": "word"
+  },
+  {
+    "id": "619487c9-2bb5-4e29-b54b-dcfb133f6774",
+    "front_text": "meanwhile",
+    "example_sentence": "Meanwhile",
+    "reason": "word"
+  },
+  {
+    "id": "a190752f-3f0e-40a7-a022-5dea450071cd",
+    "front_text": "unforgettable",
+    "example_sentence": "adj.",
+    "reason": "pos"
+  },
+  {
+    "id": "4ca184eb-3b6b-46ab-a20c-5cd6261d0ba5",
+    "front_text": "nearby",
+    "example_sentence": "adj.",
+    "reason": "pos"
+  },
+  {
+    "id": "3c12ba2c-59aa-428b-809f-0c9c3edcbe32",
+    "front_text": "sensible",
+    "example_sentence": "합리적인",
+    "reason": "word"
+  },
+  {
+    "id": "7bf9ce09-d5e2-4137-8c58-e7a1f6b9fbf2",
+    "front_text": "separate",
+    "example_sentence": "adj.",
+    "reason": "pos"
+  },
+  {
+    "id": "666fe6d1-ccf3-42ce-b93d-72111043e9a1",
+    "front_text": "distraction",
+    "example_sentence": "n.",
+    "reason": "pos"
+  },
+  {
+    "id": "55bbd25c-2d58-4393-9b42-b781e89c99b8",
+    "front_text": "professional",
+    "example_sentence": "adj.",
+    "reason": "pos"
+  },
+  {
+    "id": "471786f9-d05c-4350-bd38-2dfeba5377d6",
+    "front_text": "allow",
+    "example_sentence": "v.",
+    "reason": "pos"
+  },
+  {
+    "id": "e67a3034-793a-4eaf-966a-127f3e1bca11",
+    "front_text": "determine",
+    "example_sentence": "v.",
+    "reason": "pos"
+  },
+  {
+    "id": "8cefccd3-f65a-4b86-9b80-1f5c72bd14f9",
+    "front_text": "encourage",
+    "example_sentence": "v.",
+    "reason": "pos"
+  },
+  {
+    "id": "742ddc5a-6eff-4a9d-ae1b-84716c6b2c3d",
+    "front_text": "unpaid",
+    "example_sentence": "adj.",
+    "reason": "pos"
+  },
+  {
+    "id": "8dec2c01-4d25-4126-944e-3fcc44cd3a3d",
+    "front_text": "ongoing",
+    "example_sentence": "adj.",
+    "reason": "pos"
+  },
+  {
+    "id": "ddcf79e9-72c6-43a2-9b9e-0652f73ed5c4",
+    "front_text": "average",
+    "example_sentence": "adj.",
+    "reason": "pos"
+  },
+  {
+    "id": "4a6beb91-5d4b-4d4d-ad80-91912447d249",
+    "front_text": "publish",
+    "example_sentence": "v.",
+    "reason": "pos"
+  },
+  {
+    "id": "90242f3f-2d6d-4eff-81ba-7b635918c4fe",
+    "front_text": "population",
+    "example_sentence": "n.",
+    "reason": "pos"
+  },
+  {
+    "id": "a4d90a2f-217a-4c13-9153-dd7c786f5f6c",
+    "front_text": "urgency",
+    "example_sentence": "n.",
+    "reason": "pos"
+  },
+  {
+    "id": "ef0b8b5e-2b7a-4502-9f42-a37f33015d96",
+    "front_text": "enjoy oneself",
+    "example_sentence": "v.",
+    "reason": "pos"
+  },
+  {
+    "id": "400fb368-32c0-47d7-a682-011f26ef648c",
+    "front_text": "educated",
+    "example_sentence": "adj.",
+    "reason": "pos"
+  },
+  {
+    "id": "32d18ca1-3c7d-4416-925b-31187a092e52",
+    "front_text": "financial",
+    "example_sentence": "adj.",
+    "reason": "pos"
+  },
+  {
+    "id": "595f0d1c-6564-45c4-acb1-cc6ec2e98117",
+    "front_text": "endure",
+    "example_sentence": "v.",
+    "reason": "pos"
+  },
+  {
+    "id": "753c796d-9e3e-41c6-bb8e-ad24f7951ce6",
+    "front_text": "task",
+    "example_sentence": "n.",
+    "reason": "pos"
+  },
+  {
+    "id": "5bd4ac98-e6f4-497b-998a-112b69c9f472",
+    "front_text": "similarly",
+    "example_sentence": "Similarly",
+    "reason": "word"
+  },
+  {
+    "id": "906a85dc-1252-49fb-bb22-9d23adaaf86b",
+    "front_text": "conduct",
+    "example_sentence": "v.",
+    "reason": "pos"
+  },
+  {
+    "id": "f01edcff-1f73-4b25-8332-4c711acf49cc",
+    "front_text": "outstanding",
+    "example_sentence": "adj.",
+    "reason": "pos"
+  },
+  {
+    "id": "4000d6c0-2980-4f70-a893-b75938486a75",
+    "front_text": "statue",
+    "example_sentence": "n.",
+    "reason": "pos"
+  },
+  {
+    "id": "3e23d406-8b76-4715-9f45-213860d9a6c4",
+    "front_text": "coastal",
+    "example_sentence": "adj.",
+    "reason": "pos"
+  },
+  {
+    "id": "1d579e33-daf6-4712-bdce-87f9037e78ac",
+    "front_text": "consequently",
+    "example_sentence": "Consequently",
+    "reason": "word"
+  },
+  {
+    "id": "88155a5d-a720-47c2-ac68-e0beb0e23381",
+    "front_text": "similarly",
+    "example_sentence": "Similarly",
+    "reason": "word"
+  },
+  {
+    "id": "11a87125-77b7-42a1-90b0-5c1f7dc74cde",
+    "front_text": "primacy",
+    "example_sentence": "n.",
+    "reason": "pos"
+  },
+  {
+    "id": "b6c353af-c355-4a89-a740-87bab4b8958e",
+    "front_text": "volume",
+    "example_sentence": "n.",
+    "reason": "pos"
+  },
+  {
+    "id": "09888355-4500-4d6e-99c2-87741e1b385d",
+    "front_text": "manufacture",
+    "example_sentence": "v.",
+    "reason": "pos"
+  },
+  {
+    "id": "3695fa6b-baaa-4b64-a55f-bac9b899373c",
+    "front_text": "surplus",
+    "example_sentence": "n.",
+    "reason": "pos"
+  },
+  {
+    "id": "fb07a690-6619-41bc-a8c0-21a485168db8",
+    "front_text": "conversely",
+    "example_sentence": "Conversely",
+    "reason": "word"
+  },
+  {
+    "id": "74895536-01d2-4ef0-bf8d-05a6ac45223b",
+    "front_text": "typically",
+    "example_sentence": "Typically",
+    "reason": "word"
+  },
+  {
+    "id": "5882bc5c-549e-49e4-ad33-ab4375f11588",
+    "front_text": "chieftain",
+    "example_sentence": "n.",
+    "reason": "pos"
+  },
+  {
+    "id": "05ae5295-4b95-4323-ae4d-497a00c765ac",
+    "front_text": "initially",
+    "example_sentence": "Initially",
+    "reason": "word"
+  },
+  {
+    "id": "59c44942-d161-4601-a410-d6ec422820a2",
+    "front_text": "concern",
+    "example_sentence": "v.",
+    "reason": "pos"
+  },
+  {
+    "id": "06df9189-d961-42b3-b70d-e187d9af8bd4",
+    "front_text": "positions",
+    "example_sentence": "n.",
+    "reason": "pos"
+  },
+  {
+    "id": "9078bed2-3812-490d-999d-dc8880e92cf1",
+    "front_text": "shoreline",
+    "example_sentence": "n.",
+    "reason": "pos"
+  },
+  {
+    "id": "aa68b35c-f567-42c2-9696-d916d5f7101f",
+    "front_text": "suddenly",
+    "example_sentence": "Suddenly",
+    "reason": "word"
+  },
+  {
+    "id": "4f4d98cc-262f-4025-9193-b2937187965b",
+    "front_text": "tense",
+    "example_sentence": "adj.",
+    "reason": "pos"
+  },
+  {
+    "id": "635f4081-2ed0-47b1-aabc-965c273cde47",
+    "front_text": "illusion",
+    "example_sentence": "n.",
+    "reason": "pos"
+  },
+  {
+    "id": "8be1ad46-2579-4fc6-ab7f-f68d0bb461d8",
+    "front_text": "mastered",
+    "example_sentence": "v.",
+    "reason": "pos"
+  },
+  {
+    "id": "3044b4f6-fb5f-4125-8be9-304ca3b8dcf1",
+    "front_text": "grounded",
+    "example_sentence": "adj.",
+    "reason": "pos"
+  },
+  {
+    "id": "6df7026b-c7c8-44c4-80fa-4b5b3f0a114f",
+    "front_text": "admittedly",
+    "example_sentence": "adv.",
+    "reason": "pos"
+  },
+  {
+    "id": "59744773-95e7-46ef-afab-70345f79526c",
+    "front_text": "impose",
+    "example_sentence": "v.",
+    "reason": "pos"
+  },
+  {
+    "id": "856547aa-8918-487e-aa74-b2278d18d699",
+    "front_text": "basis",
+    "example_sentence": "n.",
+    "reason": "pos"
+  },
+  {
+    "id": "12d53888-dc38-4472-8e12-8978c735ea20",
+    "front_text": "distinct",
+    "example_sentence": "adj.",
+    "reason": "pos"
+  },
+  {
+    "id": "40d6a41b-624a-4971-900a-8137122ad985",
+    "front_text": "directed",
+    "example_sentence": "v.",
+    "reason": "pos"
+  },
+  {
+    "id": "e142642f-5c70-4db8-bcb1-0b18e97b3eaa",
+    "front_text": "closeness",
+    "example_sentence": "n.",
+    "reason": "pos"
+  },
+  {
+    "id": "eb228d13-f905-4837-9c6a-90ce8df44c34",
+    "front_text": "audience",
+    "example_sentence": "n.",
+    "reason": "pos"
+  },
+  {
+    "id": "3702d4be-55c6-46fe-8da9-00db320149b7",
+    "front_text": "resonates",
+    "example_sentence": "v.",
+    "reason": "pos"
+  },
+  {
+    "id": "96496abe-0ccc-4737-b052-82a3fbaa1a10",
+    "front_text": "alien",
+    "example_sentence": "adj.",
+    "reason": "pos"
+  },
+  {
+    "id": "91703856-fa8e-468b-8a53-ee238dc21936",
+    "front_text": "cultivating",
+    "example_sentence": "n.",
+    "reason": "pos"
+  },
+  {
+    "id": "13b644a2-4558-4f40-bdb4-0d668e5ebeec",
+    "front_text": "presumably",
+    "example_sentence": "Presumably",
+    "reason": "word"
+  },
+  {
+    "id": "78aab9a7-7e35-432c-8704-fc51f433227b",
+    "front_text": "expend",
+    "example_sentence": "v.",
+    "reason": "pos"
+  },
+  {
+    "id": "5421398b-486f-46f8-8cf4-703bfb2a7045",
+    "front_text": "account",
+    "example_sentence": "n.",
+    "reason": "pos"
+  },
+  {
+    "id": "044b3cb4-34ac-44bf-93ac-2803694520d7",
+    "front_text": "ordinance",
+    "example_sentence": "n.",
+    "reason": "pos"
+  },
+  {
+    "id": "cfb89a5a-040c-4cab-9638-323273950e3c",
+    "front_text": "beginnings",
+    "example_sentence": "n.",
+    "reason": "pos"
+  },
+  {
+    "id": "d03baa76-eae6-4fd1-9500-5d597db5c0c2",
+    "front_text": "variations",
+    "example_sentence": "n.",
+    "reason": "pos"
+  },
+  {
+    "id": "4c8b1aaa-0585-44bd-84c4-09a129b7ca94",
+    "front_text": "appreciation",
+    "example_sentence": "n.",
+    "reason": "pos"
+  },
+  {
+    "id": "c7b6a874-f771-4d3c-9005-f6921301f923",
+    "front_text": "reasoned",
+    "example_sentence": "adj.",
+    "reason": "pos"
+  },
+  {
+    "id": "2efff76e-0d8d-409b-a145-21dbb2fe4972",
+    "front_text": "genuine",
+    "example_sentence": "adj.",
+    "reason": "pos"
+  },
+  {
+    "id": "549e9545-2b4c-4c3c-978e-91c160a030c0",
+    "front_text": "well-being",
+    "example_sentence": "n.",
+    "reason": "pos"
+  },
+  {
+    "id": "bc45d431-fdbe-484b-8b79-77032f545f88",
+    "front_text": "chaos",
+    "example_sentence": "n.",
+    "reason": "pos"
+  },
+  {
+    "id": "43ee250e-2ba3-40fd-b1b9-b2965506f7a5",
+    "front_text": "release",
+    "example_sentence": "v.",
+    "reason": "pos"
+  },
+  {
+    "id": "e680aa69-f292-45a8-a6d9-cbfdeb3d7aec",
+    "front_text": "pattern",
+    "example_sentence": "n.",
+    "reason": "pos"
+  },
+  {
+    "id": "9ebda304-a4fa-4edd-b0f5-e000c8fe6b7a",
+    "front_text": "spectacularly",
+    "example_sentence": "adv.",
+    "reason": "pos"
+  },
+  {
+    "id": "972d6f50-249b-4698-b862-a76b7580608e",
+    "front_text": "extent",
+    "example_sentence": "n.",
+    "reason": "pos"
+  },
+  {
+    "id": "6a08522d-b546-4c3d-a476-0a789b84a6da",
+    "front_text": "visceral",
+    "example_sentence": "adj.",
+    "reason": "pos"
+  },
+  {
+    "id": "e71ed835-a896-489d-a747-c9303db57eee",
+    "front_text": "elicit",
+    "example_sentence": "v.",
+    "reason": "pos"
+  },
+  {
+    "id": "50c4bdb3-fbb3-47e5-9265-cf1154922508",
+    "front_text": "sophistication",
+    "example_sentence": "n.",
+    "reason": "pos"
+  },
+  {
+    "id": "1447af23-5616-4fa6-96d9-c1bf36c2b689",
+    "front_text": "arithmetic",
+    "example_sentence": "n.",
+    "reason": "pos"
+  },
+  {
+    "id": "273903f1-a8c5-4131-b478-75d43363b70c",
+    "front_text": "disturbing",
+    "example_sentence": "adj.",
+    "reason": "pos"
+  },
+  {
+    "id": "56adf740-c7a5-4a18-8fbf-569fda18c259",
+    "front_text": "longstanding",
+    "example_sentence": "adj.",
+    "reason": "pos"
+  },
+  {
+    "id": "130d1f9f-2016-405a-9726-b2f6128f59ab",
+    "front_text": "arrangement",
+    "example_sentence": "n.",
+    "reason": "pos"
+  },
+  {
+    "id": "949ac1c5-fbd7-406c-aa93-795bf2e034c3",
+    "front_text": "hollowed out",
+    "example_sentence": "v.",
+    "reason": "pos"
+  },
+  {
+    "id": "79e46a38-aaa7-4e8d-ba95-63ed1725f761",
+    "front_text": "seamlessness",
+    "example_sentence": "n.",
+    "reason": "pos"
+  },
+  {
+    "id": "a0c50959-fa8b-4a0a-8651-d5c2652b9836",
+    "front_text": "blend",
+    "example_sentence": "v.",
+    "reason": "pos"
+  },
+  {
+    "id": "3b04458a-e29b-4ccb-bf47-4cbfbf2f016d",
+    "front_text": "paradoxically",
+    "example_sentence": "Paradoxically",
+    "reason": "word"
+  },
+  {
+    "id": "3c5c9d73-6d2c-423e-ac87-a5a8cf7a5032",
+    "front_text": "naturally",
+    "example_sentence": "Naturally",
+    "reason": "word"
+  },
+  {
+    "id": "08b5141c-ba73-40ce-a111-7fdafa40a4b7",
+    "front_text": "meanwhile",
+    "example_sentence": "Meanwhile",
+    "reason": "word"
+  },
+  {
+    "id": "832b8d44-13da-46c8-838c-ac5b53ad0102",
+    "front_text": "ultimately",
+    "example_sentence": "Ultimately",
+    "reason": "word"
+  },
+  {
+    "id": "f7ba8661-fbcc-4439-b9ac-28a912523bba",
+    "front_text": "check",
+    "example_sentence": "v.",
+    "reason": "pos"
+  },
+  {
+    "id": "ba2f90db-0113-40b0-afd3-7e1a05bc680e",
+    "front_text": "sink",
+    "example_sentence": "v.",
+    "reason": "pos"
+  },
+  {
+    "id": "5e6ba92e-5102-4e9c-a127-669ff1d35b61",
+    "front_text": "creative",
+    "example_sentence": "adj.",
+    "reason": "pos"
+  },
+  {
+    "id": "a10e88f8-6b84-47a3-bab1-4e0a7c1e7360",
+    "front_text": "useful",
+    "example_sentence": "adj.",
+    "reason": "pos"
+  },
+  {
+    "id": "0b9d7bd8-800e-4d34-b39e-ca20ebacf24c",
+    "front_text": "participate",
+    "example_sentence": "참여하다",
+    "reason": "word"
+  },
+  {
+    "id": "0c7c1b72-a9c5-4976-89e3-0ee6043b1f16",
+    "front_text": "principle",
+    "example_sentence": "n.",
+    "reason": "pos"
+  },
+  {
+    "id": "7b80a3ed-cb15-4ff3-a672-68565917c804",
+    "front_text": "various",
+    "example_sentence": "adj.",
+    "reason": "pos"
+  },
+  {
+    "id": "d9784b33-d808-4bb1-9e90-39b4f6075016",
+    "front_text": "matter",
+    "example_sentence": "v.",
+    "reason": "pos"
+  },
+  {
+    "id": "0432a9dd-f703-4949-8446-d0256f49847c",
+    "front_text": "quite",
+    "example_sentence": "adv.",
+    "reason": "pos"
+  },
+  {
+    "id": "7ed13aa4-8bd6-4324-823e-04791871a31b",
+    "front_text": "severe",
+    "example_sentence": "adj.",
+    "reason": "pos"
+  },
+  {
+    "id": "cdb29f83-3f07-4cc6-ae57-29ac7b15d4d9",
+    "front_text": "agreement",
+    "example_sentence": "n.",
+    "reason": "pos"
+  },
+  {
+    "id": "239082e5-fbe4-46e3-a539-a1313e414877",
+    "front_text": "attention",
+    "example_sentence": "n.",
+    "reason": "pos"
+  },
+  {
+    "id": "ae241d3a-1679-413e-ab82-2337f803e726",
+    "front_text": "source",
+    "example_sentence": "n.",
+    "reason": "pos"
+  },
+  {
+    "id": "35350c50-9a29-4f86-8abd-485c93036ee4",
+    "front_text": "behavior",
+    "example_sentence": "n.",
+    "reason": "pos"
+  },
+  {
+    "id": "06af1c26-1869-4c22-8ca7-228c81b6b86c",
+    "front_text": "reflect",
+    "example_sentence": "v.",
+    "reason": "pos"
+  },
+  {
+    "id": "b0465c25-97d9-499b-8f59-2df4baf4f12d",
+    "front_text": "eventually",
+    "example_sentence": "Eventually",
+    "reason": "word"
+  },
+  {
+    "id": "cfdd05b9-c308-471f-80e2-fb201f6aad03",
+    "front_text": "새로 주신 단어 30개를 요청하신 형식(<영어",
+    "example_sentence": "예문",
+    "reason": "word"
+  }
+]
