@@ -230,6 +230,11 @@ export function RhythmSpelling({ vocabulary, onComplete }: RhythmSpellingProps) 
         </Button>
       </div>
 
+      {/* 답 형태 안내 — 예문이 활용형(과거형/복수형 등)일 수 있으므로 */}
+      <p className="text-xs text-center text-gray-400 mb-2">
+        💡 답은 단어의 <span className="font-medium text-gray-500">기본형</span>으로 쓰세요
+      </p>
+
       <AnimatePresence mode="wait">
         <motion.div
           key={currentIndex}
