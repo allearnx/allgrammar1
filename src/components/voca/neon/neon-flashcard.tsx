@@ -66,11 +66,16 @@ export function NeonFlashcard({ vocabulary, onComplete }: NeonFlashcardProps) {
     // 1) 단어 먼저 읽기 (Web Speech API)
     if (typeof window !== 'undefined' && window.speechSynthesis) {
       setIsSpeakingWord(true);
-      startCharHighlight(vocab.front_text);
       window.speechSynthesis.cancel();
       const utterance = new SpeechSynthesisUtterance(vocab.front_text);
       utterance.lang = 'en-US';
       utterance.rate = 0.85;
+      // 브라우저 음성 엔진은 speak() 호출 후 실제 발화까지 지연이 있음 —
+      // 하이라이트를 speak() 직후가 아니라 실제 발화 시작 시점(onstart)에 맞춰야
+      // 파란 글자 표시와 음성이 어긋나지 않는다.
+      utterance.onstart = () => {
+        startCharHighlight(vocab.front_text);
+      };
       utterance.onend = () => {
         setIsSpeakingWord(false);
         clearCharTimers();
