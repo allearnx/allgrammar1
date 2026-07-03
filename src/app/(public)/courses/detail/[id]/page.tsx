@@ -1,4 +1,4 @@
-import { notFound } from 'next/navigation';
+import { notFound, redirect } from 'next/navigation';
 import Link from 'next/link';
 import { createAdminClient } from '@/lib/supabase/admin';
 import ConsultationLink from '@/components/public/consultation-link';
@@ -36,6 +36,11 @@ export default async function CourseDetailPage({
   }
 
   const c = course;
+
+  // 올킬보카 판매 진입로 통합: voca 코스 상세 → /allkill 하나로 (66,000 개별판매 페이지 노출 차단)
+  if (c.category === 'voca') {
+    redirect('/allkill');
+  }
 
   // Fetch teacher profile if teacher_id exists
   let teacher: TeacherProfile | null = null;
