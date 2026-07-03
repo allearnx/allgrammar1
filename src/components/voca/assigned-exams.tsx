@@ -80,7 +80,7 @@ export function AssignedExams() {
           <p className="text-lg font-extrabold text-indigo-600">📋 선생님이 낸 시험</p>
           <p className="mt-0.5 text-xs text-indigo-500">{rangeLabel(active)} · {vocab.length}단어 · {PASS}점 통과</p>
         </div>
-        <RhythmSpelling vocabulary={vocab} onComplete={handleComplete} />
+        <RhythmSpelling vocabulary={vocab} onComplete={handleComplete} examMode />
       </div>
     );
   }

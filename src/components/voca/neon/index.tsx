@@ -186,7 +186,7 @@ export function NeonVocaTab({ vocabulary, dayId, progress, dayTitle }: NeonVocaT
           <p className="text-lg font-extrabold text-rose-600">📝 표제어 스펠링 시험 (보너스)</p>
           <p className="mt-0.5 text-xs text-rose-500">{EXAM_PASS}점 넘으면 통과! 순서는 매번 섞여요. 안 봐도 진도엔 영향 없어요.</p>
         </div>
-        <RhythmSpelling vocabulary={examVocab} onComplete={handleExamComplete} />
+        <RhythmSpelling vocabulary={examVocab} onComplete={handleExamComplete} examMode />
       </div>
     );
   }

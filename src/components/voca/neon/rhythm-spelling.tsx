@@ -29,6 +29,8 @@ interface SpellingWrongWord {
 interface RhythmSpellingProps {
   vocabulary: VocaVocabulary[];
   onComplete: (score: number, wrongWords: SpellingWrongWord[]) => void;
+  /** 시험 모드 — 발음 힌트(스피커) 숨김 */
+  examMode?: boolean;
 }
 
 interface WordResult {
@@ -36,7 +38,7 @@ interface WordResult {
   totalLetters: number;
 }
 
-export function RhythmSpelling({ vocabulary, onComplete }: RhythmSpellingProps) {
+export function RhythmSpelling({ vocabulary, onComplete, examMode = false }: RhythmSpellingProps) {
   const [attempt, setAttempt] = useState(0);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const shuffledVocab = useMemo(() => shuffle([...vocabulary]), [vocabulary, attempt]);
@@ -219,15 +221,18 @@ export function RhythmSpelling({ vocabulary, onComplete }: RhythmSpellingProps) 
         <span className="text-sm text-gray-400">
           {currentIndex + 1} / {shuffledVocab.length}
         </span>
-        <Button
-          variant="ghost"
-          size="sm"
-          className="text-gray-400"
-          onClick={() => play(vocab.example_sentence || vocab.front_text)}
-          disabled={isPlaying}
-        >
-          <Volume2 className={cn('h-4 w-4', isPlaying && 'animate-pulse text-indigo-500')} />
-        </Button>
+        {/* 시험 모드에선 발음 힌트(스피커) 숨김 — 순수 철자 시험 */}
+        {!examMode && (
+          <Button
+            variant="ghost"
+            size="sm"
+            className="text-gray-400"
+            onClick={() => play(vocab.example_sentence || vocab.front_text)}
+            disabled={isPlaying}
+          >
+            <Volume2 className={cn('h-4 w-4', isPlaying && 'animate-pulse text-indigo-500')} />
+          </Button>
+        )}
       </div>
 
       {/* 답 형태 안내 — 예문이 활용형(과거형/복수형 등)일 수 있으므로 */}
