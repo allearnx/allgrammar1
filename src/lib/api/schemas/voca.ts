@@ -6,6 +6,7 @@ import { ID, SHORT, MEDIUM } from './_shared';
 export const vocaBookCreateSchema = z.object({
   title: SHORT,
   description: MEDIUM.nullish(),
+  cover_image_url: z.string().url().nullish(),
   sort_order: z.number().nullish(),
 });
 

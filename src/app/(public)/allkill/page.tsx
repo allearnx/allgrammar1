@@ -7,6 +7,7 @@ import FlowSection from './_sections/FlowSection';
 import PersonaSection from './_sections/PersonaSection';
 import StatsSection from './_sections/StatsSection';
 import PricingSection from './_sections/PricingSection';
+import BookCarouselSection from './_sections/BookCarouselSection';
 import GuideSection from './_sections/GuideSection';
 import FinalCtaSection from './_sections/FinalCtaSection';
 import { C } from './_data';
@@ -33,6 +34,18 @@ export default async function AllkillPage() {
   const vocaCoursePrice = managedCourse?.price || undefined;
   const selfStudyCourseId = selfStudyCourse?.id || undefined;
   const selfStudyCoursePrice = selfStudyCourse?.price || undefined;
+
+  // 보유 교재 로테이션 카드 — 표지 등록된 활성 교재만 노출
+  const { data: vocaBooks } = await supabase
+    .from('voca_books')
+    .select('id, title, cover_image_url')
+    .eq('is_active', true)
+    .not('cover_image_url', 'is', null)
+    .order('sort_order');
+  const carouselBooks = (vocaBooks ?? []).filter(
+    (b): b is { id: string; title: string; cover_image_url: string } => !!b.cover_image_url,
+  );
+
   return (
     <>
       <style suppressHydrationWarning>{`
@@ -191,6 +204,16 @@ export default async function AllkillPage() {
           .allkill-stat-item { min-width: 0 !important; }
           .allkill-bento-report { display: none !important; }
         }
+
+        /* 보유 교재 마퀴 */
+        @keyframes allkill-book-scroll {
+          from { transform: translateX(0); }
+          to { transform: translateX(-50%); }
+        }
+        .allkill-book-marquee:hover .allkill-book-track { animation-play-state: paused; }
+        @media (prefers-reduced-motion: reduce) {
+          .allkill-book-track { animation: none !important; }
+        }
       `}</style>
 
       <div style={{ fontFamily: "'Pretendard', sans-serif", background: '#ffffff', color: C.gray800, overflowX: 'hidden', ['--font-montserrat' as string]: montserrat.style.fontFamily }}>
@@ -200,6 +223,7 @@ export default async function AllkillPage() {
         <FlowSection />
         <PersonaSection />
         <StatsSection />
+        <BookCarouselSection books={carouselBooks} />
         <PricingSection vocaCourseId={vocaCourseId} vocaCoursePrice={vocaCoursePrice} selfStudyCourseId={selfStudyCourseId} selfStudyCoursePrice={selfStudyCoursePrice} />
         <GuideSection />
         <FinalCtaSection vocaCourseId={vocaCourseId} vocaCoursePrice={vocaCoursePrice} />

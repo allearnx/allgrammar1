@@ -6,6 +6,7 @@ export interface VocaBook {
   id: string;
   title: string;
   description: string | null;
+  cover_image_url: string | null;
   sort_order: number;
   is_active: boolean;
   created_at: string;
@@ -148,7 +149,7 @@ export interface VocaProgressRow {
 
 // ── 컬럼 상수 (select('*') → 명시적 컬럼) ──
 
-export const VOCA_BOOKS_COLUMNS = 'id, title, description, sort_order, is_active, created_at';
+export const VOCA_BOOKS_COLUMNS = 'id, title, description, cover_image_url, sort_order, is_active, created_at';
 
 export const VOCA_DAYS_COLUMNS = 'id, book_id, day_number, title, sort_order, created_at, description';
 
