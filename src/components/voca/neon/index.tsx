@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useCallback, useMemo, useRef, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { toast } from 'sonner';
 import { fetchWithToast } from '@/lib/fetch-with-toast';
@@ -42,6 +43,7 @@ function getStepStates(p: VocaStudentProgress | null) {
 }
 
 export function NeonVocaTab({ vocabulary, dayId, progress, dayTitle }: NeonVocaTabProps) {
+  const router = useRouter();
   const [localProgress, setLocalProgress] = useState(progress);
   const [rankData, setRankData] = useState<RankData | null>(null);
   const [petReaction, setPetReaction] = useState<PetFeedResult | null>(null);
@@ -58,6 +60,14 @@ export function NeonVocaTab({ vocabulary, dayId, progress, dayTitle }: NeonVocaT
   // 보너스 시험 (선택) — 핵심 4단계 완료와 무관
   const [inExam, setInExam] = useState(false);
   const examBest = localProgress?.exam_score ?? null;
+  // 4단계 모두 완료했는지 (보너스 카드는 이때만 노출 → 단계 진행 중 이탈로 초기화되는 것 방지)
+  const allStepsDone = completedSteps.every(Boolean);
+
+  // Day 완료 후 홈으로 이동 + 새로고침 (완료 상태가 목록에 바로 반영되도록)
+  const goHome = useCallback(() => {
+    router.push('/student/voca');
+    router.refresh();
+  }, [router]);
 
   const steps = STEP_LABELS.map((label, i) => ({
     label,
@@ -268,32 +278,34 @@ export function NeonVocaTab({ vocabulary, dayId, progress, dayTitle }: NeonVocaT
         </motion.div>
       </AnimatePresence>
 
-      {/* 🎁 보너스: 표제어 스펠링 시험 (선택 — 진도에 영향 없음) */}
-      <button
-        onClick={() => setInExam(true)}
-        className="w-full rounded-2xl border-2 border-dashed border-rose-200 bg-rose-50/50 px-4 py-3 text-left transition-colors hover:border-rose-300 hover:bg-rose-50"
-      >
-        <div className="flex items-center justify-between gap-3">
-          <div className="min-w-0">
-            <p className="font-bold text-rose-600">🎁 보너스: 표제어 스펠링 시험</p>
-            <p className="mt-0.5 text-xs text-rose-400">선택! 도전하면 점수가 기록돼요 ({EXAM_PASS}점 통과 · 순서 매번 셔플)</p>
+      {/* 🎁 보너스: 표제어 스펠링 시험 — 4단계 완료 후에만 노출 (진행 중 이탈로 초기화 방지) */}
+      {allStepsDone && (
+        <button
+          onClick={() => setInExam(true)}
+          className="w-full rounded-2xl border-2 border-dashed border-rose-200 bg-rose-50/50 px-4 py-3 text-left transition-colors hover:border-rose-300 hover:bg-rose-50"
+        >
+          <div className="flex items-center justify-between gap-3">
+            <div className="min-w-0">
+              <p className="font-bold text-rose-600">🎁 보너스: 표제어 스펠링 시험</p>
+              <p className="mt-0.5 text-xs text-rose-400">선택! 도전하면 점수가 기록돼요 ({EXAM_PASS}점 통과 · 순서 매번 셔플)</p>
+            </div>
+            {examBest != null ? (
+              <span className={`shrink-0 rounded-full px-3 py-1 text-sm font-bold ${examBest >= EXAM_PASS ? 'bg-green-100 text-green-700' : 'bg-amber-100 text-amber-700'}`}>
+                최고 {examBest}점
+              </span>
+            ) : (
+              <span className="shrink-0 rounded-full bg-rose-100 px-3 py-1 text-sm font-bold text-rose-600">도전하기 →</span>
+            )}
           </div>
-          {examBest != null ? (
-            <span className={`shrink-0 rounded-full px-3 py-1 text-sm font-bold ${examBest >= EXAM_PASS ? 'bg-green-100 text-green-700' : 'bg-amber-100 text-amber-700'}`}>
-              최고 {examBest}점
-            </span>
-          ) : (
-            <span className="shrink-0 rounded-full bg-rose-100 px-3 py-1 text-sm font-bold text-rose-600">도전하기 →</span>
-          )}
-        </div>
-      </button>
+        </button>
+      )}
 
-      {/* Ranking Card */}
+      {/* Ranking Card — 닫으면 홈으로 (완료 반영) */}
       {rankData && (
         <VocaDayRankCard
           {...rankData}
           dayTitle={dayTitle}
-          onClose={() => setRankData(null)}
+          onClose={goHome}
         />
       )}
 
