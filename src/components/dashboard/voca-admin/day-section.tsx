@@ -42,6 +42,7 @@ export function DaySection({ book, days, expandedDay, onToggleDay, onAddDay, onD
             <DayCard
               key={day.id}
               day={day}
+              definitionLang={book.definition_lang}
               expanded={expandedDay === day.id}
               onToggle={() => onToggleDay(day.id)}
               onDelete={() => onDeleteDay(day.id)}
@@ -55,11 +56,13 @@ export function DaySection({ book, days, expandedDay, onToggleDay, onAddDay, onD
 
 function DayCard({
   day,
+  definitionLang,
   expanded,
   onToggle,
   onDelete,
 }: {
   day: VocaDay;
+  definitionLang: 'ko' | 'en';
   expanded: boolean;
   onToggle: () => void;
   onDelete: () => void;
@@ -79,7 +82,7 @@ function DayCard({
           </Button>
         </div>
 
-        {expanded && <DayContentManager dayId={day.id} />}
+        {expanded && <DayContentManager dayId={day.id} definitionLang={definitionLang} />}
       </CardContent>
 
       <ConfirmDialog

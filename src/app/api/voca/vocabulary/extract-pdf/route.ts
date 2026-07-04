@@ -119,16 +119,29 @@ export async function POST(request: NextRequest) {
     const { parseDocOrImageInput, cleanupStorage } = await import('@/lib/api/pdf-input');
     const { block, storagePath, extraFields } = await parseDocOrImageInput(request);
 
-    // 교재 정의 언어에 따라 프롬프트 자동 분기 (bookId 없거나 조회 실패 시 영한 기본)
+    // 교재 정의 언어에 따라 프롬프트 자동 분기 — bookId 또는 dayId(→교재 역추적).
+    // 못 찾으면 영한 기본
     let definitionLang: 'ko' | 'en' = 'ko';
-    if (extraFields.bookId) {
+    if (extraFields.bookId || extraFields.dayId) {
       const { createAdminClient } = await import('@/lib/supabase/admin');
-      const { data: book } = await createAdminClient()
-        .from('voca_books')
-        .select('definition_lang')
-        .eq('id', extraFields.bookId)
-        .single();
-      if (book?.definition_lang === 'en') definitionLang = 'en';
+      const admin = createAdminClient();
+      let bookId = extraFields.bookId || null;
+      if (!bookId && extraFields.dayId) {
+        const { data: day } = await admin
+          .from('voca_days')
+          .select('book_id')
+          .eq('id', extraFields.dayId)
+          .single();
+        bookId = day?.book_id ?? null;
+      }
+      if (bookId) {
+        const { data: book } = await admin
+          .from('voca_books')
+          .select('definition_lang')
+          .eq('id', bookId)
+          .single();
+        if (book?.definition_lang === 'en') definitionLang = 'en';
+      }
     }
 
     logger.info('ai.voca_extract', { mode: storagePath ? 'url' : 'formdata', blockType: block.type, definitionLang });

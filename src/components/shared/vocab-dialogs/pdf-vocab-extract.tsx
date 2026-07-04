@@ -30,7 +30,7 @@ interface ExtractedWord {
   selected: boolean;
 }
 
-export function PdfVocabExtract({ module, parentId, onAdd }: VocabDialogProps) {
+export function PdfVocabExtract({ module, parentId, onAdd, definitionLang }: VocabDialogProps & { definitionLang?: 'ko' | 'en' }) {
   const [open, setOpen] = useState(false);
   const [step, setStep] = useState<1 | 2>(1);
   const [files, setFiles] = useState<File[]>([]);
@@ -68,7 +68,12 @@ export function PdfVocabExtract({ module, parentId, onAdd }: VocabDialogProps) {
           const data = await fetchWithToast<{ items: Omit<ExtractedWord, 'selected'>[] }>(
             `${cfg.apiBase}/extract-pdf`,
             {
-              body: { ...(isImage ? { imageUrl: publicUrl } : { pdfUrl: publicUrl }), storagePath },
+              body: {
+                ...(isImage ? { imageUrl: publicUrl } : { pdfUrl: publicUrl }),
+                storagePath,
+                // voca: 교재 정의 언어(영한/영영) 자동 분기용 (API가 day→교재 역추적)
+                ...(module === 'voca' ? { dayId: parentId } : {}),
+              },
               errorMessage: `${idx + 1}번째 파일 단어 추출 실패`,
               logContext: `${cfg.logPrefix}.pdf_vocab_extract`,
             },
@@ -167,6 +172,16 @@ export function PdfVocabExtract({ module, parentId, onAdd }: VocabDialogProps) {
 
         {step === 1 && (
           <div className="space-y-4">
+            {/* 교재 정의 언어 확인 — 잘못 설정된 채 추출하는 실수 방지 (voca 전용) */}
+            {module === 'voca' && definitionLang && (
+              <div className={`rounded-lg px-3 py-2 text-xs font-semibold ${
+                definitionLang === 'en' ? 'bg-indigo-50 text-indigo-700' : 'bg-gray-50 text-gray-600'
+              }`}>
+                {definitionLang === 'en'
+                  ? '🌐 이 교재는 영영(영어 정의) 모드예요 — 뜻이 영어로 생성되고 한글 해석은 만들지 않아요.'
+                  : '🇰🇷 이 교재는 영한(한글 뜻) 모드예요 — 국제학교·유학생용 영영 교재라면 추출 전에 교재 수정에서 바꿔주세요.'}
+              </div>
+            )}
             <div>
               <Label>PDF 또는 이미지 파일 선택 (여러 장 가능)</Label>
               <Input

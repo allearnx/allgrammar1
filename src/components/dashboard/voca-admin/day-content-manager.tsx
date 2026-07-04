@@ -17,7 +17,7 @@ import { useConfirmDelete } from '@/hooks/use-confirm-delete';
 import { AddVocabDialog, BulkVocabUpload, PdfVocabExtract, ExamSentenceMatch } from '@/components/shared/vocab-dialogs';
 import type { VocaVocabulary } from '@/types/voca';
 
-export function DayContentManager({ dayId }: { dayId: string }) {
+export function DayContentManager({ dayId, definitionLang }: { dayId: string; definitionLang?: 'ko' | 'en' }) {
   const [loading, setLoading] = useState(true);
   const [bulkDeleteOpen, setBulkDeleteOpen] = useState(false);
   const [enriching, setEnriching] = useState(false);
@@ -283,7 +283,7 @@ export function DayContentManager({ dayId }: { dayId: string }) {
       <div className="flex flex-wrap gap-2">
         <AddVocabDialog module="voca" parentId={dayId} onAdd={loadVocab} />
         <BulkVocabUpload module="voca" parentId={dayId} onAdd={loadVocab} />
-        <PdfVocabExtract module="voca" parentId={dayId} onAdd={loadVocab} />
+        <PdfVocabExtract module="voca" parentId={dayId} onAdd={loadVocab} definitionLang={definitionLang} />
         {vocab.items.length > 0 && (
           <>
             <Button size="sm" variant="outline" onClick={handleEnrichRound2} disabled={enriching}>
