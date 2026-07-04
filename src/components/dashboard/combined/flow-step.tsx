@@ -22,14 +22,14 @@ export function FlowStep({ stage, dayId, linkPrefix }: { stage: Stage; dayId: st
   const isActive = stage.status === 'active';
   const isLocked = stage.status === 'locked';
 
-  const green = '#22C55E';
+  const green = '#34A853';
 
   const card = (
     <div
       className="relative text-center transition-all flex flex-col items-center h-full"
       style={{
-        background: isDone ? '#D9F7FC' : isActive ? 'white' : '#D9F7FC',
-        border: isDone ? '1.5px solid #4DD9C0' : isActive ? '2px solid #1A73E8' : '1.5px solid #CCFAF4',
+        background: isDone ? '#E6F4EA' : isActive ? 'white' : '#F1F3F4',
+        border: isDone ? '1.5px solid #81C995' : isActive ? '2px solid #1A73E8' : '1.5px solid #DADCE0',
         borderRadius: isActive ? 16 : 14,
         padding: isActive ? '28px 10px 24px' : '24px 8px 20px',
         boxShadow: isActive ? '0 8px 24px rgba(124,58,237,0.08)' : 'none',

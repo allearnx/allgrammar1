@@ -56,7 +56,7 @@ const COLORS = {
   statMint: BRAND.mint,
   statPurple: BRAND.violet,
   statAmber: BRAND.amber,
-  statSky: BRAND.cyan,
+  statSky: '#EA4335', // 구글 4색 로테이션의 red 슬롯
   stepDone: { bg: BRAND.step.defaultBg, border: BRAND.step.doneBorder },
   progressDone: BRAND.progress.done,
   progressActive: BRAND.progress.active,
@@ -128,12 +128,9 @@ export function NaesinDashboard({
   return (
     <div className="p-4 md:p-6 space-y-6">
       {/* ── Header Banner ── */}
-      <div
-        className="relative overflow-hidden rounded-2xl p-6 md:p-8 text-white"
-        style={{ background: COLORS.header }}
-      >
-        <h2 className="text-2xl md:text-3xl font-bold">안녕하세요, {userName}님!</h2>
-        <p className="mt-1 text-white/80">내신 시험을 완벽하게 준비해볼까요?</p>
+      <div className="relative overflow-hidden rounded-2xl border bg-white p-6 md:p-8">
+        <h2 className="text-2xl md:text-3xl font-bold text-gray-900">안녕하세요, {userName}님!</h2>
+        <p className="mt-1 text-gray-500">내신 시험을 완벽하게 준비해볼까요?</p>
 
         <div className="mt-4 flex flex-wrap gap-3">
           <BannerBadge>{textbookName}</BannerBadge>

@@ -50,7 +50,7 @@ const COLORS = {
   statMint: BRAND.mint,
   statPurple: BRAND.violet,
   statAmber: BRAND.amber,
-  statSky: BRAND.cyan,
+  statSky: '#EA4335', // 구글 4색 로테이션의 red 슬롯
   green: BRAND.green,
   progressDone: BRAND.progress.done,
   progressActive: BRAND.progress.active,
