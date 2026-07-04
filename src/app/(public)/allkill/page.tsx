@@ -35,11 +35,11 @@ export default async function AllkillPage() {
   const selfStudyCourseId = selfStudyCourse?.id || undefined;
   const selfStudyCoursePrice = selfStudyCourse?.price || undefined;
 
-  // 보유 교재 로테이션 카드 — 표지 등록된 활성 교재만 노출
+  // 보유 교재 로테이션 카드 — 표지 = 홍보 노출, is_active = 학생 노출 (별개 규칙).
+  // 콘텐츠 준비 중(is_active=false) 교재도 표지만 있으면 라인업으로 보여준다.
   const { data: vocaBooks } = await supabase
     .from('voca_books')
     .select('id, title, cover_image_url')
-    .eq('is_active', true)
     .not('cover_image_url', 'is', null)
     .order('sort_order');
   const carouselBooks = (vocaBooks ?? []).filter(
