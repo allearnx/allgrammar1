@@ -4,6 +4,7 @@ import { Topbar } from '@/components/layout/topbar';
 import { VocaDashboard } from '@/components/dashboard/voca-dashboard';
 import { SubscriptionBanner } from '@/components/billing/subscription-banner';
 import { fetchVocaDashboardData } from '@/lib/dashboard/fetch-voca-data';
+import { canUseFeature } from '@/lib/billing/feature-gate';
 import type { AuthUser } from '@/types/auth';
 import type { PlanContext } from '@/lib/billing/get-plan-context';
 import type { VocaBook } from '@/types/voca';
@@ -24,6 +25,16 @@ export async function VocaSection({ user, planContext, isIndependent }: Props) {
   if (data.progressList.length === 0 && !data.hasBookAssignment) {
     redirect('/student/voca');
   }
+
+  // 2회독 플랜 잠금 — 보카 홈과 동일 규칙 (boss 수동 해제 or 유료 플랜)
+  const { data: vocaAssignment } = await supabase
+    .from('service_assignments')
+    .select('round2_unlocked')
+    .eq('student_id', user.id)
+    .eq('service', 'voca')
+    .single();
+  const round2PlanLocked =
+    !vocaAssignment?.round2_unlocked && !canUseFeature(planContext.tier, 'voca:round2');
 
   return (
     <>
@@ -46,6 +57,8 @@ export async function VocaSection({ user, planContext, isIndependent }: Props) {
         wrongWordCounts={data.wrongWordCounts}
         quizHistory={data.quizHistory}
         submissionStatuses={data.submissionStatuses}
+        round2PlanLocked={round2PlanLocked}
+        upgradeHref={isIndependent ? '/allkill#price' : null}
       />
     </>
   );

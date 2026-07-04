@@ -36,6 +36,10 @@ interface Props {
   wrongWordCounts?: Record<string, number>;
   quizHistory?: { date: string; score: number }[];
   submissionStatuses?: Record<string, string>;
+  /** 플랜 때문에 2회독 잠김 (무료 플랜) — 업셀 티저 표시 */
+  round2PlanLocked?: boolean;
+  /** 업그레이드 CTA 링크 — 개인 학생만 (학원 학생은 null → 원장 문의 안내) */
+  upgradeHref?: string | null;
 }
 
 // ── Colors ──
@@ -59,7 +63,7 @@ const COLORS = {
 
 // ── Component ──
 
-export function VocaDashboard({ userName, books, days, progressList, wordCount, wrongWordCounts = {}, quizHistory = [], submissionStatuses = {} }: Props) {
+export function VocaDashboard({ userName, books, days, progressList, wordCount, wrongWordCounts = {}, quizHistory = [], submissionStatuses = {}, round2PlanLocked = false, upgradeHref = null }: Props) {
   const progressMap = new Map<string, VocaStudentProgress>();
   progressList.forEach((p) => progressMap.set(p.day_id, p));
 
@@ -189,25 +193,27 @@ export function VocaDashboard({ userName, books, days, progressList, wordCount, 
 
       {/* ── Flow Card: Round 2 ── */}
       {currentDay && (
-        <div className={`rounded-2xl border border-gray-200 bg-white p-5 md:p-7 ${!bookR1Complete ? 'opacity-55' : ''}`}>
+        <div className={`rounded-2xl border border-gray-200 bg-white p-5 md:p-7 ${(round2PlanLocked || !bookR1Complete) ? 'opacity-90' : ''}`}>
           {/* Header */}
           <div className="flex items-center justify-between mb-5">
             <div>
               <div className="text-base font-bold flex items-center gap-1.5"><BookMarked className="h-4 w-4" /> 2회독 — 유의어 · 반의어 · 숙어</div>
               <div className="text-sm text-gray-400 mt-0.5">
-                {bookR1Complete ? '3단계를 모두 통과해야 2회독이 완료됩니다' : `모든 Day의 1회독을 마치면 시작돼요 (${completedDays}/${sortedDays.length})`}
+                {round2PlanLocked
+                  ? '유료 플랜에서 열리는 심화 과정이에요'
+                  : bookR1Complete ? '3단계를 모두 통과해야 2회독이 완료됩니다' : `모든 Day의 1회독을 마치면 시작돼요 (${completedDays}/${sortedDays.length})`}
               </div>
             </div>
             <span className="shrink-0 rounded-full px-3.5 py-1 text-xs font-bold" style={{
-              background: r2AllDone ? '#DCFCE7' : !bookR1Complete ? '#F3F4F6' : '#F5F3FF',
-              color: r2AllDone ? COLORS.green : !bookR1Complete ? '#9CA3AF' : '#7C3AED',
+              background: r2AllDone ? '#DCFCE7' : (round2PlanLocked || !bookR1Complete) ? '#F3F4F6' : '#F5F3FF',
+              color: r2AllDone ? COLORS.green : (round2PlanLocked || !bookR1Complete) ? '#9CA3AF' : '#7C3AED',
             }}>
-              {r2AllDone ? '완료 ✓' : !bookR1Complete ? '잠김' : '진행 중'}
+              {r2AllDone ? '완료 ✓' : round2PlanLocked ? '유료 전용' : !bookR1Complete ? '잠김' : '진행 중'}
             </span>
           </div>
 
           {/* Steps */}
-          <div className="flex items-stretch gap-0 mb-5 overflow-visible">
+          <div className={`flex items-stretch gap-0 mb-5 overflow-visible ${(round2PlanLocked || !bookR1Complete) ? 'opacity-55' : ''}`}>
             {r2Stages.map((stage, i) => (
               <div key={stage.key} className="contents">
                 {i > 0 && <div className="flex items-center justify-center self-center px-1 md:px-1.5 text-gray-300 text-sm shrink-0">→</div>}
@@ -216,8 +222,34 @@ export function VocaDashboard({ userName, books, days, progressList, wordCount, 
             ))}
           </div>
 
+          {/* 무료 플랜 업셀 티저 — 왜 잠겼는지 + 풀면 뭐가 좋은지 */}
+          {round2PlanLocked && (
+            <div className="rounded-xl p-4 md:p-5" style={{ background: 'linear-gradient(135deg, #F5F3FF, #ECFEFF)' }}>
+              <p className="text-sm font-bold text-gray-800">
+                🔓 2회독을 열면 &lsquo;외운 단어&rsquo;가 &lsquo;시험에서 쓰는 단어&rsquo;가 돼요
+              </p>
+              <ul className="mt-2 space-y-1 text-xs text-gray-500">
+                <li>· 유의어 · 반의어 · 숙어까지 묶어서 한 번 더 암기</li>
+                <li>· 9가지 유형 종합 문제 + AI 서술형 채점</li>
+                <li>· 고난도 심화 매칭으로 헷갈리는 단어 완전 정리</li>
+              </ul>
+              {upgradeHref ? (
+                <Link
+                  href={upgradeHref}
+                  className="mt-3 inline-flex items-center gap-1 rounded-xl bg-violet-600 px-4 py-2 text-xs font-bold text-white transition-colors hover:bg-violet-700"
+                >
+                  업그레이드하고 2회독 열기 →
+                </Link>
+              ) : (
+                <p className="mt-3 text-xs font-semibold text-violet-600">
+                  선생님 · 원장님께 플랜 업그레이드를 문의해보세요
+                </p>
+              )}
+            </div>
+          )}
+
           {/* CTA */}
-          {ctaStage && ctaRound === '2' && (
+          {!round2PlanLocked && ctaStage && ctaRound === '2' && (
             <FlowCta stage={ctaStage} dayId={currentDay.id} dayTitle={currentDay.title} />
           )}
         </div>
