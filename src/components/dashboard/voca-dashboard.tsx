@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import {
   CheckCircle,
   BookOpen,
@@ -8,6 +9,7 @@ import {
   Sparkles,
   TrendingUp,
   XCircle,
+  Repeat,
 } from 'lucide-react';
 import { BRAND } from '@/lib/utils/brand-colors';
 import {
@@ -103,6 +105,9 @@ export function VocaDashboard({ userName, books, days, progressList, wordCount, 
     daysByBook.get(day.book_id)?.days.push(day);
   }
 
+  // 지금 공부 중인 교재 — 현재 Day가 속한 교재 (스코프된 경우 books[0])
+  const currentBook = books.find((b) => b.id === currentDay?.book_id) ?? books[0];
+
   return (
     <div className="p-4 md:p-6 space-y-5">
       {/* ── Header Banner ── */}
@@ -110,6 +115,19 @@ export function VocaDashboard({ userName, books, days, progressList, wordCount, 
         className="relative overflow-hidden rounded-2xl p-6 md:p-8 text-white"
         style={{ background: COLORS.header }}
       >
+        {currentBook && (
+          <div className="mb-2 flex flex-wrap items-center gap-2">
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-white/20 px-3 py-1 text-sm font-bold text-white">
+              <BookOpen className="h-3.5 w-3.5" /> {currentBook.title}
+            </span>
+            <Link
+              href="/student/voca"
+              className="inline-flex items-center gap-1 rounded-full border border-white/40 px-3 py-1 text-xs font-semibold text-white/90 transition-colors hover:bg-white/15"
+            >
+              <Repeat className="h-3 w-3" /> 교재 변경
+            </Link>
+          </div>
+        )}
         <h2 className="text-2xl md:text-3xl font-bold">안녕하세요, {userName}님!</h2>
         <p className="mt-1 text-white/80">오늘도 단어를 정복해볼까요?</p>
 

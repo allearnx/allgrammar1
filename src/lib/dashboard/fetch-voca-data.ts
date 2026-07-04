@@ -11,6 +11,8 @@ export interface VocaDashboardData {
   wrongWordCounts: Record<string, number>;
   quizHistory: { date: string; score: number }[];
   submissionStatuses: Record<string, string>;
+  /** 선생님이 교재를 고정 배정했는지 (미배정+진도0 → 교재 선택 가이드로) */
+  hasBookAssignment: boolean;
 }
 
 export async function fetchVocaDashboardData(
@@ -133,5 +135,5 @@ export async function fetchVocaDashboardData(
     score: r.score,
   }));
 
-  return { books, days, progressList, wordCount, wrongWordCounts, quizHistory, submissionStatuses };
+  return { books, days, progressList, wordCount, wrongWordCounts, quizHistory, submissionStatuses, hasBookAssignment: !!bookAssignment };
 }

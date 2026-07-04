@@ -18,9 +18,10 @@ export async function VocaSection({ user, planContext, isIndependent }: Props) {
   const supabase = await createClient();
   const data = await fetchVocaDashboardData(supabase, user.id);
 
-  // 개인(독립) 학생이 학습 기록 0 = 결제 직후 첫 진입 → 대시보드(빈 통계) 대신
+  // 학습 기록 0 + 교재 미배정 = 첫 진입(결제 직후 등) → 대시보드(빈 통계) 대신
   // 보카 홈으로 보내 학년→교재 가이드부터 시작하게 한다.
-  if (isIndependent && data.progressList.length === 0) {
+  // (선생님이 교재를 배정한 학생은 배정 교재 대시보드 그대로)
+  if (data.progressList.length === 0 && !data.hasBookAssignment) {
     redirect('/student/voca');
   }
 

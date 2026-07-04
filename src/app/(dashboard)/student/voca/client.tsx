@@ -245,7 +245,12 @@ export function VocaHomeClient({ books, days, progressList, submissionStatuses =
 
       {/* Book selector */}
       {books.length > 1 && (
-        <BookSelector books={books} selectedBookId={selectedBookId} onSelect={selectBook} />
+        <div className="space-y-1.5">
+          <p className="text-xs font-semibold text-gray-400 px-1">
+            📚 교재 선택 — 아래를 눌러 다른 교재로 바꿀 수 있어요
+          </p>
+          <BookSelector books={books} selectedBookId={selectedBookId} onSelect={selectBook} />
+        </div>
       )}
 
       {/* Pet widget */}
