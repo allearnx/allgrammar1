@@ -23,7 +23,7 @@ export function DashboardBanner({ greeting, subtitle, roleBadge, chips, variant 
   if (variant === 'white') {
     return (
       <FadeIn>
-        <div className="rounded-2xl bg-brand-50 px-6 py-8 md:px-8 md:py-10">
+        <div className="rounded-2xl border bg-white px-6 py-8 md:px-8 md:py-10">
           <h2 className="text-2xl md:text-3xl font-bold text-gray-900">{greeting}</h2>
           <p className="mt-1.5 text-gray-500">{subtitle}</p>
 

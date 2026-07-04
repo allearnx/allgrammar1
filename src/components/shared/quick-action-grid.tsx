@@ -7,16 +7,16 @@ export interface QuickAction {
   title: string;
   description: string;
   href: string;
-  color: 'indigo' | 'blue' | 'purple' | 'emerald' | 'violet';
+  /** 구글 4색 — 카드마다 다른 색을 돌려 단색 도배를 피한다 */
+  color: 'blue' | 'green' | 'yellow' | 'red';
   icon: LucideIcon;
 }
 
-const COLOR_STYLES: Record<string, { bg: string; text: string; hoverBg: string; hoverBorder: string }> = {
-  indigo: { bg: 'bg-brand-50', text: 'text-brand-600', hoverBg: 'group-hover:bg-brand-100', hoverBorder: 'hover:border-brand-300' },
-  blue: { bg: 'bg-blue-50', text: 'text-blue-600', hoverBg: 'group-hover:bg-blue-100', hoverBorder: 'hover:border-blue-300' },
-  purple: { bg: 'bg-brand-50', text: 'text-brand-600', hoverBg: 'group-hover:bg-brand-100', hoverBorder: 'hover:border-brand-300' },
-  emerald: { bg: 'bg-emerald-50', text: 'text-emerald-600', hoverBg: 'group-hover:bg-emerald-100', hoverBorder: 'hover:border-emerald-300' },
-  violet: { bg: 'bg-brand-50', text: 'text-brand-600', hoverBg: 'group-hover:bg-brand-100', hoverBorder: 'hover:border-brand-300' },
+const COLOR_STYLES: Record<QuickAction['color'], { bg: string; text: string; hoverBg: string; hoverBorder: string }> = {
+  blue: { bg: 'bg-[#E8F0FE]', text: 'text-[#1A73E8]', hoverBg: 'group-hover:bg-[#D2E3FC]', hoverBorder: 'hover:border-[#AECBFA]' },
+  green: { bg: 'bg-[#E6F4EA]', text: 'text-[#188038]', hoverBg: 'group-hover:bg-[#CEEAD6]', hoverBorder: 'hover:border-[#A8DAB5]' },
+  yellow: { bg: 'bg-[#FEF7E0]', text: 'text-[#B06000]', hoverBg: 'group-hover:bg-[#FEEFC3]', hoverBorder: 'hover:border-[#FDE293]' },
+  red: { bg: 'bg-[#FCE8E6]', text: 'text-[#C5221F]', hoverBg: 'group-hover:bg-[#FAD2CF]', hoverBorder: 'hover:border-[#F6AEA9]' },
 };
 
 export function QuickActionGrid({ actions }: { actions: readonly QuickAction[] }) {

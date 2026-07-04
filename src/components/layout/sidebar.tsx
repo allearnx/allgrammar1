@@ -29,14 +29,9 @@ export function Sidebar({ user, services, naesinTree }: SidebarProps) {
   const router = useRouter();
   const [open, setOpen] = useState(false);
   const navGroups = getNavGroups(user.role, services, user.is_homepage_manager, user.can_manage_content);
-  const sidebarBgMap: Record<string, string> = {
-    boss: 'bg-brand-100',
-    teacher: 'bg-sky-100',
-    admin: 'bg-brand-100',
-    student: 'bg-slate-200',
-  };
-  const hasCustomBg = user.role in sidebarBgMap;
-  const sidebarBg = sidebarBgMap[user.role] ?? 'bg-sidebar';
+  // 구글 스타일: 모든 역할 화이트 사이드바 (색 배경은 절제 원칙 위반)
+  const hasCustomBg = false;
+  const sidebarBg = 'bg-sidebar border-r border-sidebar-border';
 
   async function handleLogout() {
     const supabase = createClient();

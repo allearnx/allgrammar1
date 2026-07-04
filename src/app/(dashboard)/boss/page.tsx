@@ -10,10 +10,10 @@ import { BossAnalyticsClient } from './analytics/client';
 import { Users, Building2, GraduationCap, BookOpen, UserCog } from 'lucide-react';
 
 const QUICK_ACTIONS: QuickAction[] = [
-  { title: '학원 관리', description: '학원 추가, 수정, 삭제', href: '/boss/academies', color: 'violet', icon: Building2 },
-  { title: '사용자 관리', description: '역할 변경, 학원 배정, 상태 관리', href: '/boss/users', color: 'violet', icon: UserCog },
-  { title: '콘텐츠 관리', description: '레벨, 문법, 영상 관리', href: '/boss/content', color: 'violet', icon: BookOpen },
-  { title: '학생 관리', description: '학생 진도, 성적 확인', href: '/boss/students', color: 'violet', icon: Users },
+  { title: '학원 관리', description: '학원 추가, 수정, 삭제', href: '/boss/academies', color: 'blue', icon: Building2 },
+  { title: '사용자 관리', description: '역할 변경, 학원 배정, 상태 관리', href: '/boss/users', color: 'green', icon: UserCog },
+  { title: '콘텐츠 관리', description: '레벨, 문법, 영상 관리', href: '/boss/content', color: 'yellow', icon: BookOpen },
+  { title: '학생 관리', description: '학생 진도, 성적 확인', href: '/boss/students', color: 'red', icon: Users },
 ];
 
 export default async function BossDashboard() {
@@ -46,16 +46,16 @@ export default async function BossDashboard() {
 
         <StaggerContainer className="grid gap-3 grid-cols-2 lg:grid-cols-4">
           <StaggerItem>
-            <StatCard label="학원 수" value={academyCount} sub="등록된 학원" color="#4285F4" icon={<Building2 className="h-5 w-5" />} />
+            <StatCard label="학원 수" value={academyCount} sub="등록된 학원" color="#1A73E8" icon={<Building2 className="h-5 w-5" />} />
           </StaggerItem>
           <StaggerItem>
-            <StatCard label="전체 사용자" value={totalUserCount} sub="모든 역할 포함" color="#4285F4" icon={<Users className="h-5 w-5" />} />
+            <StatCard label="전체 사용자" value={totalUserCount} sub="모든 역할 포함" color="#34A853" icon={<Users className="h-5 w-5" />} />
           </StaggerItem>
           <StaggerItem>
-            <StatCard label="학생 수" value={studentCount} sub="등록된 학생" color="#8AB4F8" icon={<Users className="h-5 w-5" />} />
+            <StatCard label="학생 수" value={studentCount} sub="등록된 학생" color="#F9AB00" icon={<Users className="h-5 w-5" />} />
           </StaggerItem>
           <StaggerItem>
-            <StatCard label="선생님 수" value={teacherCount} sub="등록된 선생님" color="#AECBFA" icon={<GraduationCap className="h-5 w-5" />} />
+            <StatCard label="선생님 수" value={teacherCount} sub="등록된 선생님" color="#EA4335" icon={<GraduationCap className="h-5 w-5" />} />
           </StaggerItem>
         </StaggerContainer>
 

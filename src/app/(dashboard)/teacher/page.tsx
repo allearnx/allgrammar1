@@ -60,10 +60,10 @@ export default async function ManagerDashboard() {
         )}
 
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          <StatCard label="총 학생 수" value={studentCount} color="#3B82F6" icon={<Users className="h-5 w-5" />} />
-          <StatCard label="문법 주제" value={grammarRes.count || 0} color="#4285F4" icon={<BookOpen className="h-5 w-5" />} />
-          <StatCard label="암기 항목" value={memoryRes.count || 0} color="#22C55E" icon={<FileText className="h-5 w-5" />} />
-          <StatCard label="교과서 지문" value={textbookRes.count || 0} color="#A855F7" icon={<BookMarked className="h-5 w-5" />} />
+          <StatCard label="총 학생 수" value={studentCount} color="#1A73E8" icon={<Users className="h-5 w-5" />} />
+          <StatCard label="문법 주제" value={grammarRes.count || 0} color="#34A853" icon={<BookOpen className="h-5 w-5" />} />
+          <StatCard label="암기 항목" value={memoryRes.count || 0} color="#F9AB00" icon={<FileText className="h-5 w-5" />} />
+          <StatCard label="교과서 지문" value={textbookRes.count || 0} color="#EA4335" icon={<BookMarked className="h-5 w-5" />} />
         </div>
 
         {studentCount === 0 && (

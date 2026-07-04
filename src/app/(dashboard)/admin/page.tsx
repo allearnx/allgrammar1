@@ -9,10 +9,10 @@ import { AcademySetupChecklist } from '@/components/shared/academy-setup-checkli
 import { Users, BookOpen, FileText, GraduationCap, BarChart3, Settings } from 'lucide-react';
 
 const QUICK_ACTIONS: QuickAction[] = [
-  { title: '학생 관리', description: '학생 목록 및 진도 확인', href: '/admin/students', color: 'indigo', icon: Users },
-  { title: '선생님 관리', description: '선생님 목록 및 상태 관리', href: '/admin/teachers', color: 'blue', icon: GraduationCap },
-  { title: '학원 통계', description: '학습 현황 분석', href: '/admin/analytics', color: 'purple', icon: BarChart3 },
-  { title: '학원 설정', description: '학원 정보 및 초대 코드', href: '/admin/settings', color: 'emerald', icon: Settings },
+  { title: '학생 관리', description: '학생 목록 및 진도 확인', href: '/admin/students', color: 'blue', icon: Users },
+  { title: '선생님 관리', description: '선생님 목록 및 상태 관리', href: '/admin/teachers', color: 'green', icon: GraduationCap },
+  { title: '학원 통계', description: '학습 현황 분석', href: '/admin/analytics', color: 'yellow', icon: BarChart3 },
+  { title: '학원 설정', description: '학원 정보 및 초대 코드', href: '/admin/settings', color: 'red', icon: Settings },
 ];
 
 export default async function AdminDashboard() {
@@ -50,9 +50,9 @@ export default async function AdminDashboard() {
 
         <div className="grid gap-3 grid-cols-2 lg:grid-cols-4">
           <StatCard label="학생 수" value={studentCount} sub="등록된 학생" color="#1A73E8" icon={<Users className="h-5 w-5" />} />
-          <StatCard label="선생님 수" value={teacherRes.count || 0} sub="등록된 선생님" color="#06B6D4" icon={<GraduationCap className="h-5 w-5" />} />
-          <StatCard label="문법 주제" value={grammarRes.count || 0} sub="전체 콘텐츠" color="#56C9A0" icon={<BookOpen className="h-5 w-5" />} />
-          <StatCard label="암기 항목" value={memoryRes.count || 0} sub="전체 콘텐츠" color="#F59E0B" icon={<FileText className="h-5 w-5" />} />
+          <StatCard label="선생님 수" value={teacherRes.count || 0} sub="등록된 선생님" color="#34A853" icon={<GraduationCap className="h-5 w-5" />} />
+          <StatCard label="문법 주제" value={grammarRes.count || 0} sub="전체 콘텐츠" color="#F9AB00" icon={<BookOpen className="h-5 w-5" />} />
+          <StatCard label="암기 항목" value={memoryRes.count || 0} sub="전체 콘텐츠" color="#EA4335" icon={<FileText className="h-5 w-5" />} />
         </div>
 
         {maxStudents && (
