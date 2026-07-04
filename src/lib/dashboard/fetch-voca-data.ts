@@ -27,7 +27,7 @@ export async function fetchVocaDashboardData(
   const { data: booksData } = bookAssignment
     ? await supabase.from('voca_books').select(VOCA_BOOKS_COLUMNS).eq('id', bookAssignment.book_id)
     : await supabase.from('voca_books').select(VOCA_BOOKS_COLUMNS).eq('is_active', true).order('created_at');
-  const books: VocaBook[] = (booksData as VocaBook[]) || [];
+  let books: VocaBook[] = (booksData as VocaBook[]) || [];
 
   // 2. Days
   const bookIds = books.map((b) => b.id);
@@ -42,16 +42,33 @@ export async function fetchVocaDashboardData(
   }
 
   // 3. Progress
-  const dayIds = days.map((d) => d.id);
   let progressList: VocaStudentProgress[] = [];
-  if (dayIds.length > 0) {
+  if (days.length > 0) {
     const { data } = await supabase
       .from('voca_student_progress')
       .select(VOCA_STUDENT_PROGRESS_COLUMNS)
       .eq('student_id', userId)
-      .in('day_id', dayIds);
+      .in('day_id', days.map((d) => d.id));
     progressList = data || [];
   }
+
+  // 3-1. 교재 미배정(개인) 학생: 가장 최근 학습한 교재로 대시보드 범위 한정.
+  // (미배정이면 전 교재의 Day가 한 덩어리로 섞여 현재 Day·진행률·통계가 엉킨다)
+  if (!bookAssignment && progressList.length > 0) {
+    const dayBookMap = new Map(days.map((d) => [d.id, d.book_id]));
+    const recent = [...progressList].sort(
+      (a, b) => (b.updated_at ?? '').localeCompare(a.updated_at ?? ''),
+    )[0];
+    const recentBookId = dayBookMap.get(recent.day_id);
+    if (recentBookId) {
+      books = books.filter((b) => b.id === recentBookId);
+      days = days.filter((d) => d.book_id === recentBookId);
+      const scopedDayIds = new Set(days.map((d) => d.id));
+      progressList = progressList.filter((p) => scopedDayIds.has(p.day_id));
+    }
+  }
+
+  const dayIds = days.map((d) => d.id);
 
   // 4. Word count for current active day
   // 책 단위 회독: 모든 Day 1회독 완료 → 2회독 모드

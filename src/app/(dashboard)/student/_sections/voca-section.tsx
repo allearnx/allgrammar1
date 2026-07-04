@@ -1,3 +1,4 @@
+import { redirect } from 'next/navigation';
 import { createClient } from '@/lib/supabase/server';
 import { Topbar } from '@/components/layout/topbar';
 import { VocaDashboard } from '@/components/dashboard/voca-dashboard';
@@ -16,6 +17,12 @@ interface Props {
 export async function VocaSection({ user, planContext, isIndependent }: Props) {
   const supabase = await createClient();
   const data = await fetchVocaDashboardData(supabase, user.id);
+
+  // 개인(독립) 학생이 학습 기록 0 = 결제 직후 첫 진입 → 대시보드(빈 통계) 대신
+  // 보카 홈으로 보내 학년→교재 가이드부터 시작하게 한다.
+  if (isIndependent && data.progressList.length === 0) {
+    redirect('/student/voca');
+  }
 
   return (
     <>

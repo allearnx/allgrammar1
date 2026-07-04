@@ -8,6 +8,7 @@ import { CheckCircle, Lock, ChevronRight, ChevronDown, Search, BookOpen, BookMar
 import { PetWidget } from '@/components/voca/pet/pet-widget';
 import { BonusExam } from '@/components/voca/bonus-exam';
 import { AssignedExams } from '@/components/voca/assigned-exams';
+import { BookGuidePicker } from '@/components/voca/book-guide-picker';
 import { isR1Complete, isR2Complete } from '@/lib/dashboard/voca-helpers';
 import type { VocaBook, VocaDay, VocaStudentProgress } from '@/types/voca';
 
@@ -22,6 +23,8 @@ interface VocaHomeClientProps {
   freeDayLimit?: number;
   round2Locked?: boolean;
   roundMode?: RoundMode;
+  /** 학습 기록이 하나도 없는 첫 진입 — 학년→교재 가이드 표시 */
+  firstTimeGuide?: boolean;
 }
 
 const BOOK_COLORS = [
@@ -51,10 +54,11 @@ function getRound2StepsDone(prog: VocaStudentProgress | undefined): number {
   return done;
 }
 
-export function VocaHomeClient({ books, days, progressList, submissionStatuses = {}, initialBookId, freeDayLimit = 0, round2Locked = false, roundMode: initialRoundMode = 'book' }: VocaHomeClientProps) {
+export function VocaHomeClient({ books, days, progressList, submissionStatuses = {}, initialBookId, freeDayLimit = 0, round2Locked = false, roundMode: initialRoundMode = 'book', firstTimeGuide = false }: VocaHomeClientProps) {
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
   const [roundMode, setRoundMode] = useState<RoundMode>(initialRoundMode);
+  const [guideOpen, setGuideOpen] = useState(false);
 
   const defaultBookId = (initialBookId && books.some((b) => b.id === initialBookId))
     ? initialBookId
@@ -62,12 +66,20 @@ export function VocaHomeClient({ books, days, progressList, submissionStatuses =
   const [selectedBookId, setSelectedBookId] = useState<string>(defaultBookId);
 
   // 마지막으로 보던 교재 복원 — 뒤로가기/사이드바로 돌아와도 선택이 유지되도록.
-  // (URL에 bookId가 명시돼 있으면 그걸 우선, 없을 때만 localStorage 복원)
+  // (URL에 bookId가 명시돼 있으면 그걸 우선 + 저장, 없을 때만 localStorage 복원)
   useEffect(() => {
-    if (initialBookId) return;
+    if (initialBookId) {
+      try { window.localStorage.setItem('voca:selectedBookId', initialBookId); } catch { /* ignore */ }
+      return;
+    }
     try {
       const saved = window.localStorage.getItem('voca:selectedBookId');
-      if (saved && books.some((b) => b.id === saved)) setSelectedBookId(saved);
+      if (saved && books.some((b) => b.id === saved)) {
+        setSelectedBookId(saved);
+      } else if (firstTimeGuide) {
+        // 학습 기록도, 저장된 교재 선택도 없는 진짜 첫 진입 → 학년 가이드
+        setGuideOpen(true); // eslint-disable-line react-hooks/set-state-in-effect -- localStorage는 클라이언트에서만 읽을 수 있음
+      }
     } catch { /* ignore */ }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -138,6 +150,18 @@ export function VocaHomeClient({ books, days, progressList, submissionStatuses =
       <div className="flex flex-col items-center justify-center py-20">
         <p className="text-2xl font-bold text-gray-300">등록된 교재가 없습니다</p>
       </div>
+    );
+  }
+
+  // 첫 진입 가이드: 학년 → 추천 교재 (골라야 학습 시작)
+  if (guideOpen) {
+    return (
+      <BookGuidePicker
+        books={books}
+        days={days}
+        onSelect={(id) => { selectBook(id); setGuideOpen(false); }}
+        onSkip={() => setGuideOpen(false)}
+      />
     );
   }
 

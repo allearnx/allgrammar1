@@ -80,6 +80,7 @@ export default async function StudentVocaPage({
           freeDayLimit={isFree ? 3 : 0}
           round2Locked={round2Locked}
           roundMode={(assignment?.voca_round_mode as 'book' | 'day') || 'book'}
+          firstTimeGuide={progressList.length === 0}
         />
       </div>
     </>
