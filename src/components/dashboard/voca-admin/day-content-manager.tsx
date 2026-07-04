@@ -104,6 +104,7 @@ export function DayContentManager({ dayId }: { dayId: string }) {
             example_sentence: v.example_sentence,
             spelling_answer: v.spelling_answer,
           })),
+          dayId, // 교재 정의 언어(영한/영영) 자동 분기용 (API가 교재 역추적)
         },
         successMessage: undefined,
         errorMessage: '2회독 데이터 생성 중 오류가 발생했습니다',

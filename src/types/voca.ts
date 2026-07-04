@@ -7,6 +7,8 @@ export interface VocaBook {
   title: string;
   description: string | null;
   cover_image_url: string | null;
+  /** 정의 언어 — 'ko': 한글 뜻, 'en': 영어 정의(국제학교·유학생용). 추출 프롬프트 자동 분기 */
+  definition_lang: 'ko' | 'en';
   sort_order: number;
   is_active: boolean;
   created_at: string;
@@ -149,7 +151,7 @@ export interface VocaProgressRow {
 
 // ── 컬럼 상수 (select('*') → 명시적 컬럼) ──
 
-export const VOCA_BOOKS_COLUMNS = 'id, title, description, cover_image_url, sort_order, is_active, created_at';
+export const VOCA_BOOKS_COLUMNS = 'id, title, description, cover_image_url, definition_lang, sort_order, is_active, created_at';
 
 export const VOCA_DAYS_COLUMNS = 'id, book_id, day_number, title, sort_order, created_at, description';
 

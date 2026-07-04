@@ -9,9 +9,7 @@ export const maxDuration = 120;
 
 const anthropic = new Anthropic();
 
-const PROMPT = `이 이미지/PDF에서 영어 단어를 추출해주세요. (단어 목록 사진·스캔·표 등 무엇이든 보이는 영어 단어를 읽어낼 것)
-
-## 필수 규칙
+const COMMON_RULES = `## 필수 규칙
 - 중복 없이 핵심 단어만 선별
 - 관사(a, the), 전치사(in, on), 대명사(I, you) 등 기본 단어 제외
 - 고유명사 제외
@@ -33,17 +31,44 @@ const PROMPT = `이 이미지/PDF에서 영어 단어를 추출해주세요. (�
 - 중학생 수준의 쉬운 문장으로 작성 (15단어 이내)
 - e 필드가 null이면 안 됨
 
+## 유의어(s)·반의어(a)·숙어(i) 규칙
+- 자연스럽게 떠오르는 것만 넣고, 억지로 만들지 않을 것
+- 없으면 null`;
+
+// 영한 교재 (definition_lang='ko'): 한글 뜻 + 예문 한글 해석
+const PROMPT_KO = `이 이미지/PDF에서 영어 단어를 추출해주세요. (단어 목록 사진·스캔·표 등 무엇이든 보이는 영어 단어를 읽어낼 것)
+
+${COMMON_RULES}
+
 ## 예문 한글 해석(ek) 규칙 — 반드시 생성
 - 영어 예문(e)에 대응하는 자연스러운 한국어 해석
 - ek 필드가 null이면 안 됨
 
-## 유의어(s)·반의어(a)·숙어(i) 규칙
-- 자연스럽게 떠오르는 것만 넣고, 억지로 만들지 않을 것
-- 없으면 null
-
 JSON 배열로만 응답 (다른 텍스트 없이):
 [{"w":"단어","m":"뜻","p":"n.","e":"The example sentence.","ek":"예문 해석.","s":"유의어1, 유의어2","a":"반의어1","i":[{"en":"숙어","ko":"뜻","example_en":"예문","example_ko":"해석"}]}]
-w=단어, m=뜻, p=품사(n./v./adj./adv./prep./conj.), e=영어 예문(필수!), ek=예문 한글 해석(필수!), s=유의어(쉼표 구분, 없으면 null), a=반의어(쉼표 구분, 없으면 null), i=숙어 배열(없으면 null)`;
+w=단어, m=한글 뜻, p=품사(n./v./adj./adv./prep./conj.), e=영어 예문(필수!), ek=예문 한글 해석(필수!), s=유의어(쉼표 구분, 없으면 null), a=반의어(쉼표 구분, 없으면 null), i=숙어 배열(없으면 null)`;
+
+// 영영 교재 (definition_lang='en'): 영어 정의, 한글 해석 없음 — 국제학교·유학생용
+const PROMPT_EN = `이 이미지/PDF에서 영어 단어를 추출해주세요. (단어 목록 사진·스캔·표 등 무엇이든 보이는 영어 단어를 읽어낼 것)
+이 교재는 국제학교·유학생용 **영영(EN-EN) 단어장**입니다. 뜻(m)을 한국어가 아닌 영어 정의로 만드세요.
+
+${COMMON_RULES}
+
+## 영어 정의(m) 규칙 — 반드시 영어로
+- 원본에 영어 정의가 있으면 그대로 사용
+- 없으면 학습자 수준의 쉬운 영어로 간결한 정의를 만들 것 (예: abundant → "existing in large amounts; more than enough")
+- 정의 안에 표제어(w) 자체를 쓰지 말 것 (circular definition 금지)
+- 한국어를 섞지 말 것
+
+## 한글 해석(ek) — 만들지 말 것
+- 영영 교재이므로 ek는 항상 null
+
+## 숙어(i) 규칙 추가
+- 숙어의 뜻(ko 필드)도 영어 정의로 쓸 것
+
+JSON 배열로만 응답 (다른 텍스트 없이):
+[{"w":"단어","m":"easy English definition","p":"n.","e":"The example sentence.","ek":null,"s":"유의어1, 유의어2","a":"반의어1","i":[{"en":"숙어","ko":"English meaning","example_en":"예문","example_ko":null}]}]
+w=단어, m=영어 정의(필수!), p=품사(n./v./adj./adv./prep./conj.), e=영어 예문(필수!), ek=null 고정, s=유의어(쉼표 구분, 없으면 null), a=반의어(쉼표 구분, 없으면 null), i=숙어 배열(없으면 null)`;
 
 interface VocabExtractItem {
   w: string;
@@ -79,9 +104,21 @@ export async function POST(request: NextRequest) {
     }
 
     const { parseDocOrImageInput, cleanupStorage } = await import('@/lib/api/pdf-input');
-    const { block, storagePath } = await parseDocOrImageInput(request);
+    const { block, storagePath, extraFields } = await parseDocOrImageInput(request);
 
-    logger.info('ai.voca_extract', { mode: storagePath ? 'url' : 'formdata', blockType: block.type });
+    // 교재 정의 언어에 따라 프롬프트 자동 분기 (bookId 없거나 조회 실패 시 영한 기본)
+    let definitionLang: 'ko' | 'en' = 'ko';
+    if (extraFields.bookId) {
+      const { createAdminClient } = await import('@/lib/supabase/admin');
+      const { data: book } = await createAdminClient()
+        .from('voca_books')
+        .select('definition_lang')
+        .eq('id', extraFields.bookId)
+        .single();
+      if (book?.definition_lang === 'en') definitionLang = 'en';
+    }
+
+    logger.info('ai.voca_extract', { mode: storagePath ? 'url' : 'formdata', blockType: block.type, definitionLang });
 
     const message = await anthropic.messages.create({
       model: 'claude-opus-4-8',
@@ -91,7 +128,7 @@ export async function POST(request: NextRequest) {
           role: 'user',
           content: [
             block as Anthropic.Messages.ContentBlockParam,
-            { type: 'text', text: PROMPT },
+            { type: 'text', text: definitionLang === 'en' ? PROMPT_EN : PROMPT_KO },
           ],
         },
       ],

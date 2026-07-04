@@ -33,6 +33,7 @@ export function BookFormDialog({ mode, book, open: controlledOpen, onOpenChange,
   const [title, setTitle] = useState(book?.title ?? '');
   const [description, setDescription] = useState(book?.description ?? '');
   const [coverUrl, setCoverUrl] = useState(book?.cover_image_url ?? '');
+  const [definitionLang, setDefinitionLang] = useState<'ko' | 'en'>(book?.definition_lang ?? 'ko');
   const [saving, setSaving] = useState(false);
   const [uploading, setUploading] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -64,7 +65,7 @@ export function BookFormDialog({ mode, book, open: controlledOpen, onOpenChange,
     try {
       if (mode === 'add') {
         const data = await fetchWithToast<VocaBook>('/api/voca/books', {
-          body: { title: title.trim(), description: description.trim() || null, cover_image_url: coverUrl || null },
+          body: { title: title.trim(), description: description.trim() || null, cover_image_url: coverUrl || null, definition_lang: definitionLang },
           successMessage: '교재가 추가되었습니다',
           errorMessage: '교재 추가 중 오류가 발생했습니다',
           logContext: 'voca_admin.index',
@@ -77,7 +78,7 @@ export function BookFormDialog({ mode, book, open: controlledOpen, onOpenChange,
       } else {
         const data = await fetchWithToast<VocaBook>(`/api/voca/books/${book!.id}`, {
           method: 'PATCH',
-          body: { id: book!.id, title: title.trim(), description: description.trim() || null, cover_image_url: coverUrl || null },
+          body: { id: book!.id, title: title.trim(), description: description.trim() || null, cover_image_url: coverUrl || null, definition_lang: definitionLang },
           successMessage: '교재가 수정되었습니다',
           errorMessage: '교재 수정 중 오류가 발생했습니다',
           logContext: 'voca_admin.index',
@@ -119,6 +120,37 @@ export function BookFormDialog({ mode, book, open: controlledOpen, onOpenChange,
               onChange={(e) => setDescription(e.target.value)}
               placeholder={mode === 'add' ? '교재 설명' : undefined}
             />
+          </div>
+          <div>
+            <Label>정의 언어</Label>
+            <p className="text-xs text-muted-foreground mb-2">
+              이 교재에 단어를 추출할 때 뜻을 어떤 언어로 만들지 정합니다. (교재당 한 번만 설정)
+            </p>
+            <div className="flex gap-2">
+              <button
+                type="button"
+                onClick={() => setDefinitionLang('ko')}
+                className={`flex-1 rounded-lg border-2 px-3 py-2 text-sm font-semibold transition-colors ${
+                  definitionLang === 'ko' ? 'border-indigo-500 bg-indigo-50 text-indigo-700' : 'border-gray-200 text-gray-500 hover:bg-gray-50'
+                }`}
+              >
+                영한 (한글 뜻)
+              </button>
+              <button
+                type="button"
+                onClick={() => setDefinitionLang('en')}
+                className={`flex-1 rounded-lg border-2 px-3 py-2 text-sm font-semibold transition-colors ${
+                  definitionLang === 'en' ? 'border-indigo-500 bg-indigo-50 text-indigo-700' : 'border-gray-200 text-gray-500 hover:bg-gray-50'
+                }`}
+              >
+                영영 (영어 정의)
+              </button>
+            </div>
+            {definitionLang === 'en' && (
+              <p className="mt-1.5 text-xs text-indigo-500">
+                국제학교·유학생용 — 뜻이 쉬운 영어 정의로 생성되고, 예문 한글 해석은 만들지 않아요.
+              </p>
+            )}
           </div>
           <div>
             <Label>표지 이미지 (선택)</Label>

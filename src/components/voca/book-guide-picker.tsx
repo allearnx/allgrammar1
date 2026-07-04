@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { ArrowLeft, BookOpen, Star } from 'lucide-react';
 import type { VocaBook, VocaDay } from '@/types/voca';
 
-type GradeKey = 'elementary' | 'middle' | 'high1' | 'high2' | 'high3';
+type GradeKey = 'elementary' | 'middle' | 'high1' | 'high2' | 'high3' | 'intl';
 
 const GRADES: { key: GradeKey; label: string; sub: string }[] = [
   { key: 'elementary', label: '초등학생', sub: '초1 ~ 초6' },
@@ -13,24 +13,27 @@ const GRADES: { key: GradeKey; label: string; sub: string }[] = [
   { key: 'high1', label: '고1', sub: '고등 1학년' },
   { key: 'high2', label: '고2', sub: '고등 2학년' },
   { key: 'high3', label: '고3', sub: '고등 3학년' },
+  { key: 'intl', label: '국제학교·유학생', sub: '영영 단어장' },
 ];
 
-function matchesGrade(title: string, grade: GradeKey): boolean {
-  const t = title.normalize('NFC');
+function matchesGrade(book: VocaBook, grade: GradeKey): boolean {
+  const t = book.title.normalize('NFC');
   switch (grade) {
     case 'elementary': return /주니어|초등/.test(t);
     case 'middle': return /중등|중학/.test(t);
     case 'high1': return /고1/.test(t);
     case 'high2': return /고2/.test(t);
     case 'high3': return /고3/.test(t);
+    case 'intl': return book.definition_lang === 'en'; // 영영 교재는 자동 분류
   }
 }
 
-/** 학년별 기본 추천: 초등=주니어, 중등=필수, 고등=3월 모고(첫 시험 대비) */
-function isRecommended(title: string, grade: GradeKey): boolean {
-  const t = title.normalize('NFC');
+/** 학년별 기본 추천: 초등=주니어, 중등=필수, 고등=3월 모고(첫 시험 대비), 국제=단어 많은 순 */
+function isRecommended(book: VocaBook, grade: GradeKey): boolean {
+  const t = book.title.normalize('NFC');
   if (grade === 'elementary') return /주니어/.test(t);
   if (grade === 'middle') return /중등 ?필수/.test(t);
+  if (grade === 'intl') return false; // Day 수 많은 순 정렬에 맡김
   return /3월/.test(t);
 }
 
@@ -82,11 +85,11 @@ export function BookGuidePicker({ books, days, onSelect, onSkip }: BookGuidePick
   }
 
   // ── 화면 2: 해당 학년 교재 (추천 우선) ──
-  const matched = books.filter((b) => matchesGrade(b.title, grade));
-  const others = books.filter((b) => !matchesGrade(b.title, grade));
+  const matched = books.filter((b) => matchesGrade(b, grade));
+  const others = books.filter((b) => !matchesGrade(b, grade));
   const sorted = [...matched].sort((a, b) => {
-    const ra = isRecommended(a.title, grade) ? 0 : 1;
-    const rb = isRecommended(b.title, grade) ? 0 : 1;
+    const ra = isRecommended(a, grade) ? 0 : 1;
+    const rb = isRecommended(b, grade) ? 0 : 1;
     if (ra !== rb) return ra - rb;
     return (dayCountByBook.get(b.id) ?? 0) - (dayCountByBook.get(a.id) ?? 0);
   });
@@ -142,7 +145,7 @@ export function BookGuidePicker({ books, days, onSelect, onSkip }: BookGuidePick
 
       {sorted.length > 0 ? (
         <div className="space-y-3">
-          {sorted.map((b) => renderCard(b, isRecommended(b.title, grade)))}
+          {sorted.map((b) => renderCard(b, isRecommended(b, grade)))}
         </div>
       ) : (
         <p className="rounded-xl bg-gray-50 p-6 text-center text-sm text-gray-400">

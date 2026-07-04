@@ -56,7 +56,7 @@ export function PdfBulkExtract({ bookId, onCreated }: { bookId: string; onCreate
       const data = await fetchWithToast<{ items: Omit<ExtractedWord, 'selected'>[] }>(
         '/api/voca/vocabulary/extract-pdf',
         {
-          body: { pdfUrl: publicUrl, storagePath },
+          body: { pdfUrl: publicUrl, storagePath, bookId }, // 교재 정의 언어(영한/영영) 자동 분기용
           errorMessage: 'PDF 단어 추출 실패',
           logContext: 'voca_admin.pdf_bulk',
         },
@@ -107,6 +107,7 @@ export function PdfBulkExtract({ bookId, onCreated }: { bookId: string; onCreate
                 example_sentence: v.example_sentence,
                 spelling_answer: v.spelling_answer,
               })),
+              bookId, // 교재 정의 언어(영한/영영) 자동 분기용
             },
             silent: true,
             logContext: 'voca_admin.auto_enrich',

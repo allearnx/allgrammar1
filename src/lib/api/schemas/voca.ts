@@ -7,6 +7,7 @@ export const vocaBookCreateSchema = z.object({
   title: SHORT,
   description: MEDIUM.nullish(),
   cover_image_url: z.string().url().nullish(),
+  definition_lang: z.enum(['ko', 'en']).optional(), // null 불가 — DB not null (default 'ko')
   sort_order: z.number().nullish(),
 });
 
