@@ -15,10 +15,10 @@ export function StatCard({ label, value, sub, color, icon }: StatCardProps) {
     <div
       className="group relative overflow-hidden rounded-xl border bg-white p-4 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md"
     >
-      {/* top accent gradient */}
+      {/* top accent bar — 구글 스타일: 솔리드 컬러바 */}
       <div
         className="absolute inset-x-0 top-0 h-1 rounded-t-xl"
-        style={{ background: `linear-gradient(90deg, ${color}, ${color}88)` }}
+        style={{ background: color }}
       />
 
       <div className="flex items-center justify-between mb-2">

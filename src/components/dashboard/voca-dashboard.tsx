@@ -114,30 +114,27 @@ export function VocaDashboard({ userName, books, days, progressList, wordCount, 
 
   return (
     <div className="p-4 md:p-6 space-y-5">
-      {/* ── Header Banner ── */}
-      <div
-        className="relative overflow-hidden rounded-2xl p-6 md:p-8 text-white"
-        style={{ background: COLORS.header }}
-      >
+      {/* ── Header Banner — 구글 스타일: 흰 카드 + 다크 텍스트 + 블루 포인트 ── */}
+      <div className="relative overflow-hidden rounded-2xl border bg-white p-6 md:p-8">
         {currentBook && (
           <div className="mb-2 flex flex-wrap items-center gap-2">
-            <span className="inline-flex items-center gap-1.5 rounded-full bg-white/20 px-3 py-1 text-sm font-bold text-white">
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-accent px-3 py-1 text-sm font-bold text-primary">
               <BookOpen className="h-3.5 w-3.5" /> {currentBook.title}
             </span>
             <Link
               href="/student/voca"
-              className="inline-flex items-center gap-1 rounded-full border border-white/40 px-3 py-1 text-xs font-semibold text-white/90 transition-colors hover:bg-white/15"
+              className="inline-flex items-center gap-1 rounded-full border px-3 py-1 text-xs font-semibold text-primary transition-colors hover:bg-accent"
             >
               <Repeat className="h-3 w-3" /> 교재 변경
             </Link>
           </div>
         )}
-        <h2 className="text-2xl md:text-3xl font-bold">안녕하세요, {userName}님!</h2>
-        <p className="mt-1 text-white/80">오늘도 단어를 정복해볼까요?</p>
+        <h2 className="text-2xl md:text-3xl font-bold text-gray-900">안녕하세요, {userName}님!</h2>
+        <p className="mt-1 text-gray-500">오늘도 단어를 정복해볼까요?</p>
 
         <div className="mt-4 flex flex-wrap gap-3">
           {[`학습 단어 ${wordCount}개`, `완료 단계 ${r1CompletedStages}`, currentDay ? `현재: ${currentDay.title}` : ''].filter(Boolean).map((text) => (
-            <span key={text} className="inline-flex items-center rounded-full px-3 py-1 text-sm font-semibold text-gray-800" style={{ background: 'white' }}>
+            <span key={text} className="inline-flex items-center rounded-full border bg-muted px-3 py-1 text-sm font-semibold text-gray-700">
               {text}
             </span>
           ))}
@@ -224,7 +221,7 @@ export function VocaDashboard({ userName, books, days, progressList, wordCount, 
 
           {/* 무료 플랜 업셀 티저 — 왜 잠겼는지 + 풀면 뭐가 좋은지 */}
           {round2PlanLocked && (
-            <div className="rounded-xl p-4 md:p-5" style={{ background: 'linear-gradient(135deg, #F5F3FF, #ECFEFF)' }}>
+            <div className="rounded-xl bg-accent p-4 md:p-5">
               <p className="text-sm font-bold text-gray-800">
                 🔓 2회독을 열면 &lsquo;외운 단어&rsquo;가 &lsquo;시험에서 쓰는 단어&rsquo;가 돼요
               </p>
@@ -236,12 +233,12 @@ export function VocaDashboard({ userName, books, days, progressList, wordCount, 
               {upgradeHref ? (
                 <Link
                   href={upgradeHref}
-                  className="mt-3 inline-flex items-center gap-1 rounded-xl bg-violet-600 px-4 py-2 text-xs font-bold text-white transition-colors hover:bg-violet-700"
+                  className="mt-3 inline-flex items-center gap-1 rounded-xl bg-primary px-4 py-2 text-xs font-bold text-white transition-colors hover:bg-primary/90"
                 >
                   업그레이드하고 2회독 열기 →
                 </Link>
               ) : (
-                <p className="mt-3 text-xs font-semibold text-violet-600">
+                <p className="mt-3 text-xs font-semibold text-primary">
                   선생님 · 원장님께 플랜 업그레이드를 문의해보세요
                 </p>
               )}

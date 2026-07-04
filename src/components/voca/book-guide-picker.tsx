@@ -69,7 +69,7 @@ export function BookGuidePicker({ books, days, onSelect, onSkip }: BookGuidePick
             <button
               key={g.key}
               onClick={() => setGrade(g.key)}
-              className="rounded-2xl border-2 border-gray-200 bg-white p-6 text-center transition-all hover:border-indigo-400 hover:shadow-md active:scale-[0.98]"
+              className="rounded-2xl border-2 border-gray-200 bg-white p-6 text-center transition-all hover:border-primary hover:shadow-md active:scale-[0.98]"
             >
               <p className="text-lg font-extrabold text-gray-800">{g.label}</p>
               <p className="mt-0.5 text-xs text-gray-400">{g.sub}</p>
@@ -102,7 +102,7 @@ export function BookGuidePicker({ books, days, onSelect, onSkip }: BookGuidePick
         key={book.id}
         onClick={() => onSelect(book.id)}
         className={`flex w-full items-center gap-4 rounded-2xl border-2 bg-white p-4 text-left transition-all hover:shadow-md active:scale-[0.99] ${
-          recommended ? 'border-indigo-400 ring-2 ring-indigo-100' : 'border-gray-200 hover:border-indigo-300'
+          recommended ? 'border-primary ring-2 ring-accent' : 'border-gray-200 hover:border-[#d2e3fc]'
         }`}
       >
         {book.cover_image_url ? (
@@ -112,20 +112,20 @@ export function BookGuidePicker({ books, days, onSelect, onSkip }: BookGuidePick
             className="h-20 w-[60px] shrink-0 rounded-lg border object-cover"
           />
         ) : (
-          <div className="flex h-20 w-[60px] shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-indigo-100 to-violet-100">
-            <BookOpen className="h-6 w-6 text-indigo-400" />
+          <div className="flex h-20 w-[60px] shrink-0 items-center justify-center rounded-lg bg-accent">
+            <BookOpen className="h-6 w-6 text-primary/70" />
           </div>
         )}
         <div className="min-w-0 flex-1">
           {recommended && (
-            <span className="mb-1 inline-flex items-center gap-1 rounded-full bg-indigo-600 px-2 py-0.5 text-[11px] font-bold text-white">
+            <span className="mb-1 inline-flex items-center gap-1 rounded-full bg-primary px-2 py-0.5 text-[11px] font-bold text-white">
               <Star className="h-3 w-3 fill-current" /> 추천
             </span>
           )}
           <p className="truncate font-bold text-gray-800">{book.title}</p>
           {dayCount > 0 && <p className="mt-0.5 text-xs text-gray-400">Day {dayCount}개 구성</p>}
         </div>
-        <span className="shrink-0 rounded-xl bg-indigo-600 px-4 py-2 text-sm font-bold text-white">
+        <span className="shrink-0 rounded-xl bg-primary px-4 py-2 text-sm font-bold text-white">
           시작
         </span>
       </button>

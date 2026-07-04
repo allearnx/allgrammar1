@@ -27,12 +27,9 @@ interface VocaHomeClientProps {
   firstTimeGuide?: boolean;
 }
 
+// 구글 스타일: 교재별 색면 대신 단일 블루 포인트 (색은 절제, 흰 카드가 바탕)
 const BOOK_COLORS = [
-  { bg: '#546478', light: 'rgba(84,100,120,0.06)', border: 'rgba(84,100,120,0.15)' },
-  { bg: '#4872a3', light: 'rgba(72,114,163,0.06)', border: 'rgba(72,114,163,0.15)' },
-  { bg: '#7a6a82', light: 'rgba(122,106,130,0.06)', border: 'rgba(122,106,130,0.15)' },
-  { bg: '#587650', light: 'rgba(88,118,80,0.06)', border: 'rgba(88,118,80,0.15)' },
-  { bg: '#8a7362', light: 'rgba(138,115,98,0.06)', border: 'rgba(138,115,98,0.15)' },
+  { bg: '#1A73E8', light: '#E8F0FE', border: '#D2E3FC' },
 ];
 
 function getStepsDone(prog: VocaStudentProgress | undefined): number {
@@ -167,20 +164,16 @@ export function VocaHomeClient({ books, days, progressList, submissionStatuses =
 
   return (
     <div className="space-y-6 pb-8">
-      {/* Hero banner */}
-      <div
-        className="relative overflow-hidden rounded-2xl p-6 md:p-8"
-        style={{ background: bookColor.bg }}
-      >
-        <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(circle at 20% 50%, white 1px, transparent 1px), radial-gradient(circle at 80% 20%, white 1px, transparent 1px)', backgroundSize: '60px 60px, 40px 40px' }} />
+      {/* Hero banner — 구글 스타일: 흰 카드 + 블루 포인트 */}
+      <div className="relative overflow-hidden rounded-2xl border bg-white p-6 md:p-8">
         <div className="relative">
           <div className="flex items-center gap-2 mb-2">
-            <p className="text-white/70 text-xs font-semibold tracking-widest uppercase">AllKill Voca</p>
+            <p className="text-primary text-xs font-bold tracking-widest uppercase">AllKill Voca</p>
             {roundMode === 'book' && (
               <span className={`text-[11px] font-bold px-2 py-0.5 rounded-full ${
                 bookCurrentRound === '2'
-                  ? 'bg-violet-400/30 text-violet-100'
-                  : 'bg-white/20 text-white/80'
+                  ? 'bg-accent text-primary'
+                  : 'bg-muted text-gray-500'
               }`}>
                 {bookCurrentRound}회독
               </span>
@@ -188,24 +181,24 @@ export function VocaHomeClient({ books, days, progressList, submissionStatuses =
             {books.length > 1 && (
               <button
                 onClick={() => setGuideOpen(true)}
-                className="ml-auto inline-flex items-center gap-1 rounded-full border border-white/40 px-3 py-1 text-xs font-semibold text-white/90 transition-colors hover:bg-white/15"
+                className="ml-auto inline-flex items-center gap-1 rounded-full border px-3 py-1 text-xs font-semibold text-primary transition-colors hover:bg-accent"
               >
                 <BookOpen className="h-3 w-3" /> 교재 바꾸기
               </button>
             )}
           </div>
-          <h1 className="text-white text-2xl md:text-3xl font-extrabold leading-tight mb-1">
+          <h1 className="text-gray-900 text-2xl md:text-3xl font-extrabold leading-tight mb-1">
             {selectedBook?.title || '올킬보카'}
           </h1>
           {totalDays > 0 && (
             <div className="flex items-center gap-3 mt-4">
-              <div className="flex-1 h-2 rounded-full bg-white/20 overflow-hidden">
+              <div className="flex-1 h-2 rounded-full bg-accent overflow-hidden">
                 <div
-                  className="h-full rounded-full bg-white/90 transition-all duration-500"
+                  className="h-full rounded-full bg-primary transition-all duration-500"
                   style={{ width: `${totalDays > 0 ? (completedCount / totalDays) * 100 : 0}%` }}
                 />
               </div>
-              <span className="text-white/90 text-sm font-bold tabular-nums">
+              <span className="text-primary text-sm font-bold tabular-nums">
                 {completedCount}/{totalDays}
               </span>
             </div>
@@ -223,7 +216,7 @@ export function VocaHomeClient({ books, days, progressList, submissionStatuses =
               disabled={isPending || roundMode === 'book'}
               className={`flex items-center gap-1.5 px-4 py-2 text-sm font-semibold transition-colors ${
                 roundMode === 'book'
-                  ? 'bg-indigo-600 text-white'
+                  ? 'bg-primary text-white'
                   : 'bg-white text-gray-500 hover:bg-gray-50'
               }`}
             >
@@ -235,7 +228,7 @@ export function VocaHomeClient({ books, days, progressList, submissionStatuses =
               disabled={isPending || roundMode === 'day'}
               className={`flex items-center gap-1.5 px-4 py-2 text-sm font-semibold transition-colors ${
                 roundMode === 'day'
-                  ? 'bg-violet-600 text-white'
+                  ? 'bg-primary text-white'
                   : 'bg-white text-gray-500 hover:bg-gray-50'
               }`}
             >
@@ -330,7 +323,7 @@ export function VocaHomeClient({ books, days, progressList, submissionStatuses =
                 <div className={`group flex items-center gap-4 rounded-xl border px-4 py-3.5 transition-all duration-200 hover:shadow-md active:scale-[0.99] ${
                   isCompleted
                     ? 'border-green-200 bg-green-50/40'
-                    : 'border-gray-200 bg-white hover:border-indigo-200'
+                    : 'border-gray-200 bg-white hover:border-[#d2e3fc]'
                 }`}>
                   <DayBadge index={index} color={bookColor} variant={isCompleted ? 'done' : 'default'} />
                   <div className="flex-1 min-w-0">
@@ -369,7 +362,7 @@ export function VocaHomeClient({ books, days, progressList, submissionStatuses =
                   </div>
                   <div className="flex items-center gap-1.5 shrink-0">
                     {isCompleted && <CheckCircle className="h-5 w-5 text-green-500" />}
-                    <ChevronRight className="h-4 w-4 text-gray-300 group-hover:text-indigo-400 group-hover:translate-x-0.5 transition-all" />
+                    <ChevronRight className="h-4 w-4 text-gray-300 group-hover:text-primary/70 group-hover:translate-x-0.5 transition-all" />
                   </div>
                 </div>
               </Link>
@@ -438,23 +431,23 @@ export function VocaHomeClient({ books, days, progressList, submissionStatuses =
 
             {/* 1:1 온라인 관리 */}
             <Link href="/allkill#price" className="block group">
-              <div className="rounded-xl border-2 border-violet-200 bg-gradient-to-br from-violet-50 to-white p-5 transition-all group-hover:border-violet-400 group-hover:shadow-md">
+              <div className="rounded-xl border-2 border-[#d2e3fc] bg-gradient-to-br from-[#e8f0fe] to-white p-5 transition-all group-hover:border-primary group-hover:shadow-md">
                 <div className="flex items-start gap-3">
-                  <div className="rounded-lg bg-violet-100 p-2 shrink-0">
-                    <Users className="h-5 w-5 text-violet-600" />
+                  <div className="rounded-lg bg-accent p-2 shrink-0">
+                    <Users className="h-5 w-5 text-primary" />
                   </div>
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2 mb-1">
-                      <h4 className="font-bold text-violet-900">1:1 온라인 관리</h4>
-                      <span className="text-[10px] font-bold bg-violet-600 text-white px-2 py-0.5 rounded-full">추천</span>
+                      <h4 className="font-bold text-[#174ea6]">1:1 온라인 관리</h4>
+                      <span className="text-[10px] font-bold bg-primary text-white px-2 py-0.5 rounded-full">추천</span>
                     </div>
-                    <p className="text-xs text-violet-700 leading-relaxed mb-3">
+                    <p className="text-xs text-[#174ea6] leading-relaxed mb-3">
                       선생님이 주 2회 시험 + 진도 관리해줘요.<br />
                       학부모 리포트까지 제공!
                     </p>
                     <div className="flex flex-wrap gap-1.5">
                       {['선생님 관리', '주 2회 시험', '학부모 리포트'].map((tag) => (
-                        <span key={tag} className="text-[11px] bg-violet-100 text-violet-700 px-2 py-0.5 rounded-full font-medium">{tag}</span>
+                        <span key={tag} className="text-[11px] bg-accent text-[#174ea6] px-2 py-0.5 rounded-full font-medium">{tag}</span>
                       ))}
                     </div>
                   </div>
@@ -527,7 +520,7 @@ function BookSelector({ books, selectedBookId, onSelect }: { books: VocaBook[]; 
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}
                   placeholder="교재 검색"
-                  className="w-full rounded-lg border border-gray-200 py-2 pl-8 pr-3 text-sm outline-none focus:border-indigo-300"
+                  className="w-full rounded-lg border border-gray-200 py-2 pl-8 pr-3 text-sm outline-none focus:border-[#d2e3fc]"
                 />
               </div>
             </div>
@@ -542,10 +535,10 @@ function BookSelector({ books, selectedBookId, onSelect }: { books: VocaBook[]; 
                   <button
                     key={book.id}
                     onClick={() => { onSelect(book.id); setOpen(false); setQuery(''); }}
-                    className={`flex w-full items-center justify-between gap-2 px-4 py-2.5 text-left text-sm transition-colors hover:bg-gray-50 ${isSel ? 'font-bold text-indigo-600' : 'text-gray-700'}`}
+                    className={`flex w-full items-center justify-between gap-2 px-4 py-2.5 text-left text-sm transition-colors hover:bg-gray-50 ${isSel ? 'font-bold text-primary' : 'text-gray-700'}`}
                   >
                     <span className="truncate">{book.title}</span>
-                    {isSel && <CheckCircle className="h-4 w-4 shrink-0 text-indigo-500" />}
+                    {isSel && <CheckCircle className="h-4 w-4 shrink-0 text-primary" />}
                   </button>
                 );
               })
