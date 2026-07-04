@@ -185,6 +185,14 @@ export function VocaHomeClient({ books, days, progressList, submissionStatuses =
                 {bookCurrentRound}회독
               </span>
             )}
+            {books.length > 1 && (
+              <button
+                onClick={() => setGuideOpen(true)}
+                className="ml-auto inline-flex items-center gap-1 rounded-full border border-white/40 px-3 py-1 text-xs font-semibold text-white/90 transition-colors hover:bg-white/15"
+              >
+                <BookOpen className="h-3 w-3" /> 교재 바꾸기
+              </button>
+            )}
           </div>
           <h1 className="text-white text-2xl md:text-3xl font-extrabold leading-tight mb-1">
             {selectedBook?.title || '올킬보카'}

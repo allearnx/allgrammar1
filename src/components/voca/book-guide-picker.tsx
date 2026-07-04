@@ -5,9 +5,10 @@ import { useState } from 'react';
 import { ArrowLeft, BookOpen, Star } from 'lucide-react';
 import type { VocaBook, VocaDay } from '@/types/voca';
 
-type GradeKey = 'middle' | 'high1' | 'high2' | 'high3';
+type GradeKey = 'elementary' | 'middle' | 'high1' | 'high2' | 'high3';
 
 const GRADES: { key: GradeKey; label: string; sub: string }[] = [
+  { key: 'elementary', label: '초등학생', sub: '초1 ~ 초6' },
   { key: 'middle', label: '중학생', sub: '중1 ~ 중3' },
   { key: 'high1', label: '고1', sub: '고등 1학년' },
   { key: 'high2', label: '고2', sub: '고등 2학년' },
@@ -17,16 +18,18 @@ const GRADES: { key: GradeKey; label: string; sub: string }[] = [
 function matchesGrade(title: string, grade: GradeKey): boolean {
   const t = title.normalize('NFC');
   switch (grade) {
-    case 'middle': return /중등|중학|주니어/.test(t);
+    case 'elementary': return /주니어|초등/.test(t);
+    case 'middle': return /중등|중학/.test(t);
     case 'high1': return /고1/.test(t);
     case 'high2': return /고2/.test(t);
     case 'high3': return /고3/.test(t);
   }
 }
 
-/** 학년별 기본 추천: 중등=필수, 고등=3월 모고(첫 시험 대비) */
+/** 학년별 기본 추천: 초등=주니어, 중등=필수, 고등=3월 모고(첫 시험 대비) */
 function isRecommended(title: string, grade: GradeKey): boolean {
   const t = title.normalize('NFC');
+  if (grade === 'elementary') return /주니어/.test(t);
   if (grade === 'middle') return /중등 ?필수/.test(t);
   return /3월/.test(t);
 }

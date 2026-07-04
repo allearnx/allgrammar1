@@ -67,12 +67,13 @@ export const NAV_CONFIG: Record<string, NavGroup[]> = {
         { href: '/student/naesin', label: '올인내신', icon: BookMarked },
         { href: '/student/voca', label: '올킬보카', icon: BookA },
         { href: '/student/voca/wrong-review', label: '올킬오답', icon: Swords },
+        { href: '/student/wrong-answers', label: '오답모음', icon: ListChecks },
+        { href: '/student/materials', label: '학습자료', icon: FileDown },
       ],
     },
     {
+      label: '안내',
       items: [
-        { href: '/student/wrong-answers', label: '오답모음', icon: ListChecks },
-        { href: '/student/materials', label: '학습자료', icon: FileDown },
         { href: '/student/announcements', label: '공지사항', icon: Megaphone },
         { href: '/updates', label: '업데이트·사용법', icon: Sparkles },
       ],
