@@ -120,6 +120,7 @@ export function VocaAdminClient({ books: initialBooks }: VocaAdminClientProps) {
                     )}
                   </div>
                   <div className="flex items-center gap-1">
+                    {book.definition_lang === 'en' && <Badge className="bg-indigo-100 text-indigo-700 hover:bg-indigo-100">영영</Badge>}
                     {!book.is_active && <Badge variant="secondary">비활성</Badge>}
                     <Button
                       variant="ghost"

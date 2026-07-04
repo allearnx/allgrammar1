@@ -27,7 +27,7 @@ export function DaySection({ book, days, expandedDay, onToggleDay, onAddDay, onD
       <div className="flex items-center justify-between">
         <h3 className="text-lg font-semibold">{book.title} - Day 목록</h3>
         <div className="flex items-center gap-2">
-          <PdfBulkExtract bookId={book.id} onCreated={onDaysCreated} />
+          <PdfBulkExtract bookId={book.id} definitionLang={book.definition_lang} onCreated={onDaysCreated} />
           <AddDayDialog bookId={book.id} nextDayNumber={days.length + 1} onAdd={onAddDay} />
         </div>
       </div>

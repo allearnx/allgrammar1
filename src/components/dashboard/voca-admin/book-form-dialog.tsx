@@ -33,7 +33,10 @@ export function BookFormDialog({ mode, book, open: controlledOpen, onOpenChange,
   const [title, setTitle] = useState(book?.title ?? '');
   const [description, setDescription] = useState(book?.description ?? '');
   const [coverUrl, setCoverUrl] = useState(book?.cover_image_url ?? '');
-  const [definitionLang, setDefinitionLang] = useState<'ko' | 'en'>(book?.definition_lang ?? 'ko');
+  // 추가 모드는 기본값 없음 — 반드시 직접 선택해야 저장 가능 (모르고 지나치는 것 방지)
+  const [definitionLang, setDefinitionLang] = useState<'ko' | 'en' | null>(
+    mode === 'edit' ? (book?.definition_lang ?? 'ko') : null,
+  );
   const [saving, setSaving] = useState(false);
   const [uploading, setUploading] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -60,7 +63,7 @@ export function BookFormDialog({ mode, book, open: controlledOpen, onOpenChange,
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    if (!title.trim()) return;
+    if (!title.trim() || !definitionLang) return;
     setSaving(true);
     try {
       if (mode === 'add') {
@@ -122,7 +125,7 @@ export function BookFormDialog({ mode, book, open: controlledOpen, onOpenChange,
             />
           </div>
           <div>
-            <Label>정의 언어</Label>
+            <Label>정의 언어 <span className="text-rose-500">*</span></Label>
             <p className="text-xs text-muted-foreground mb-2">
               이 교재에 단어를 추출할 때 뜻을 어떤 언어로 만들지 정합니다. (교재당 한 번만 설정)
             </p>
@@ -149,6 +152,11 @@ export function BookFormDialog({ mode, book, open: controlledOpen, onOpenChange,
             {definitionLang === 'en' && (
               <p className="mt-1.5 text-xs text-indigo-500">
                 국제학교·유학생용 — 뜻이 쉬운 영어 정의로 생성되고, 예문 한글 해석은 만들지 않아요.
+              </p>
+            )}
+            {definitionLang === null && (
+              <p className="mt-1.5 text-xs text-rose-500">
+                하나를 선택해야 저장할 수 있어요. 국내 학생용이면 영한을 선택하세요.
               </p>
             )}
           </div>
@@ -190,7 +198,7 @@ export function BookFormDialog({ mode, book, open: controlledOpen, onOpenChange,
               onChange={handleCoverUpload}
             />
           </div>
-          <Button type="submit" className="w-full" disabled={saving || uploading || !title.trim()}>
+          <Button type="submit" className="w-full" disabled={saving || uploading || !title.trim() || !definitionLang}>
             {saving ? '저장 중...' : mode === 'add' ? '추가' : '저장'}
           </Button>
         </form>

@@ -28,7 +28,7 @@ interface ExtractedWord {
   selected: boolean;
 }
 
-export function PdfBulkExtract({ bookId, onCreated }: { bookId: string; onCreated: () => void }) {
+export function PdfBulkExtract({ bookId, definitionLang = 'ko', onCreated }: { bookId: string; definitionLang?: 'ko' | 'en'; onCreated: () => void }) {
   const [open, setOpen] = useState(false);
   const [step, setStep] = useState<1 | 2>(1);
   const [file, setFile] = useState<File | null>(null);
@@ -200,6 +200,14 @@ export function PdfBulkExtract({ bookId, onCreated }: { bookId: string; onCreate
 
         {step === 1 && (
           <div className="space-y-4">
+            {/* 교재 정의 언어 확인 — 잘못 설정된 채 추출하는 실수 방지 */}
+            <div className={`rounded-lg px-3 py-2 text-xs font-semibold ${
+              definitionLang === 'en' ? 'bg-indigo-50 text-indigo-700' : 'bg-gray-50 text-gray-600'
+            }`}>
+              {definitionLang === 'en'
+                ? '🌐 이 교재는 영영(영어 정의) 모드예요 — 뜻이 영어로 생성되고 한글 해석은 만들지 않아요.'
+                : '🇰🇷 이 교재는 영한(한글 뜻) 모드예요 — 국제학교·유학생용 영영 교재라면 추출 전에 교재 수정에서 바꿔주세요.'}
+            </div>
             <div>
               <Label>PDF 파일 선택</Label>
               <Input
