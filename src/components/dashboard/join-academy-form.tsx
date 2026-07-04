@@ -71,8 +71,8 @@ export function JoinAcademyForm({ compact = false }: { compact?: boolean } = {})
     <div className={compact ? '' : 'flex items-center justify-center min-h-[60vh] p-4'}>
       <Card className={compact ? 'w-full' : 'w-full max-w-md'}>
         <CardHeader className="text-center">
-          <div className="mx-auto rounded-full bg-violet-100 p-3 dark:bg-violet-950 mb-2">
-            <Building2 className="h-8 w-8 text-violet-600 dark:text-violet-400" />
+          <div className="mx-auto rounded-full bg-brand-100 p-3 dark:bg-brand-950 mb-2">
+            <Building2 className="h-8 w-8 text-brand-600 dark:text-brand-400" />
           </div>
           <CardTitle className="text-xl">학원 연결</CardTitle>
           <p className="text-sm text-muted-foreground mt-1">

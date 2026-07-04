@@ -118,7 +118,7 @@ export function StudentsToolbar({ studentIds, studentCount, bulkAllowed = true, 
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <button
-                className="inline-flex items-center rounded-lg border bg-white px-3 py-1.5 text-sm font-medium text-gray-700 transition-all hover:shadow-sm hover:border-violet-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="inline-flex items-center rounded-lg border bg-white px-3 py-1.5 text-sm font-medium text-gray-700 transition-all hover:shadow-sm hover:border-brand-300 disabled:opacity-50 disabled:cursor-not-allowed"
                 disabled={assigning || targetIds.length === 0 || !bulkAllowed}
               >
                 <UserPlus className="h-4 w-4 mr-1.5 text-gray-400" />
@@ -187,7 +187,7 @@ export function StudentsToolbar({ studentIds, studentCount, bulkAllowed = true, 
             disabled={!bulkAllowed}
             className={`inline-flex items-center rounded-lg border bg-white px-3 py-1.5 text-sm font-medium transition-all ${
               bulkAllowed
-                ? 'text-gray-700 hover:shadow-sm hover:border-violet-300'
+                ? 'text-gray-700 hover:shadow-sm hover:border-brand-300'
                 : 'text-gray-400 opacity-50 cursor-not-allowed'
             }`}
           >
@@ -220,7 +220,7 @@ export function StudentsToolbar({ studentIds, studentCount, bulkAllowed = true, 
           )}
         </button>
         {hasSelection && (
-          <span className="text-xs text-violet-600 font-medium">
+          <span className="text-xs text-brand-600 font-medium">
             {selectedCount}명 선택됨
           </span>
         )}

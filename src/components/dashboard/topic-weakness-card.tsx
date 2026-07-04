@@ -55,7 +55,7 @@ export function TopicWeaknessCard() {
     return (
       <div className="rounded-2xl border bg-white p-5 md:p-6">
         <div className="flex items-center gap-2 mb-3">
-          <Target className="h-4 w-4 text-violet-500" />
+          <Target className="h-4 w-4 text-brand-500" />
           <h3 className="text-sm font-bold">나의 취약 토픽</h3>
         </div>
         <div className="flex items-center justify-center rounded-lg border border-dashed py-6">
@@ -73,7 +73,7 @@ export function TopicWeaknessCard() {
   return (
     <div className="rounded-2xl border bg-white p-5 md:p-6">
       <div className="flex items-center gap-2 mb-4">
-        <Target className="h-4 w-4 text-violet-500" />
+        <Target className="h-4 w-4 text-brand-500" />
         <h3 className="text-sm font-bold">나의 취약 토픽</h3>
       </div>
 

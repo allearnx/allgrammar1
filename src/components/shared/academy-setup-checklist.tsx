@@ -81,14 +81,14 @@ export function AcademySetupChecklist() {
       <button
         onClick={toggle}
         className="w-full flex items-center justify-between px-5 py-4"
-        style={{ background: 'linear-gradient(135deg, #F5F3FF 0%, #EDE9FE 100%)' }}
+        style={{ background: 'linear-gradient(135deg, #E8F0FE 0%, #D2E3FC 100%)' }}
       >
         <div className="flex items-center gap-2.5">
-          <Map className="h-5 w-5 text-violet-600" />
-          <span className="font-semibold text-violet-900">학원 셋업 가이드</span>
+          <Map className="h-5 w-5 text-brand-600" />
+          <span className="font-semibold text-brand-900">학원 셋업 가이드</span>
         </div>
         <ChevronDown
-          className="h-5 w-5 text-violet-500 transition-transform duration-200"
+          className="h-5 w-5 text-brand-500 transition-transform duration-200"
           style={{ transform: expanded ? 'rotate(0deg)' : 'rotate(-90deg)' }}
         />
       </button>
@@ -109,17 +109,17 @@ export function AcademySetupChecklist() {
                   <Link
                     key={item.title}
                     href={item.href}
-                    className="group flex items-center gap-3 rounded-xl px-3 py-2.5 transition-colors hover:bg-violet-50"
+                    className="group flex items-center gap-3 rounded-xl px-3 py-2.5 transition-colors hover:bg-brand-50"
                   >
-                    <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-violet-100 text-xs font-bold text-violet-700">
+                    <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-brand-100 text-xs font-bold text-brand-700">
                       {counter}
                     </span>
-                    <Icon className="h-4.5 w-4.5 shrink-0 text-gray-400 group-hover:text-violet-600 transition-colors" />
+                    <Icon className="h-4.5 w-4.5 shrink-0 text-gray-400 group-hover:text-brand-600 transition-colors" />
                     <div className="flex-1 min-w-0">
                       <p className="text-sm font-medium text-gray-800 leading-tight">{item.title}</p>
                       <p className="text-xs text-gray-400 leading-tight">{item.description}</p>
                     </div>
-                    <ArrowRight className="h-4 w-4 shrink-0 text-gray-300 group-hover:text-violet-500 transition-colors" />
+                    <ArrowRight className="h-4 w-4 shrink-0 text-gray-300 group-hover:text-brand-500 transition-colors" />
                   </Link>
                 );
               })}

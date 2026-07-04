@@ -73,7 +73,7 @@ export function TopicAccuracyTab({ topicAccuracy, role }: Props) {
                       <span className="text-gray-500">{t.attemptCount}회 시도</span>
                       <span className="font-bold text-red-500">{t.accuracy}%</span>
                       {href && (
-                        <Link href={href} className="flex items-center gap-0.5 text-xs font-semibold text-violet-600 hover:text-violet-700">
+                        <Link href={href} className="flex items-center gap-0.5 text-xs font-semibold text-brand-600 hover:text-brand-700">
                           연습하기
                           <ArrowRight className="h-3 w-3" />
                         </Link>
@@ -125,7 +125,7 @@ export function TopicAccuracyTab({ topicAccuracy, role }: Props) {
                       <div className="flex items-center gap-3 text-sm shrink-0 ml-3">
                         <span className="text-xs text-gray-400">{r.daysSince}일 전</span>
                         {href && (
-                          <Link href={href} className="flex items-center gap-0.5 text-xs font-semibold text-violet-600 hover:text-violet-700">
+                          <Link href={href} className="flex items-center gap-0.5 text-xs font-semibold text-brand-600 hover:text-brand-700">
                             연습하기
                             <ArrowRight className="h-3 w-3" />
                           </Link>

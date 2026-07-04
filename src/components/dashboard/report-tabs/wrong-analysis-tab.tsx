@@ -97,7 +97,7 @@ export function WrongAnalysisTab({ data, hasVoca, hasNaesin, studentId, role, on
         <Suspense
           fallback={
             <div className="flex items-center justify-center py-8">
-              <Loader2 className="h-5 w-5 animate-spin text-violet-500" />
+              <Loader2 className="h-5 w-5 animate-spin text-brand-500" />
               <span className="ml-2 text-sm text-gray-500">로딩 중...</span>
             </div>
           }
@@ -108,7 +108,7 @@ export function WrongAnalysisTab({ data, hasVoca, hasNaesin, studentId, role, on
 
       {data.wrongAnalysis.vocaTopWrong.length === 0 && data.wrongAnalysis.naesinWrongByStage.length === 0 && (
         <div className="rounded-xl border border-dashed p-8 text-center">
-          <PartyPopper className="h-8 w-8 text-violet-400 mb-2" />
+          <PartyPopper className="h-8 w-8 text-brand-400 mb-2" />
           <p className="text-sm text-gray-500 font-medium">오답 없음! 완벽해요!</p>
         </div>
       )}

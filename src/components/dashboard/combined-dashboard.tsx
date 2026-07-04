@@ -95,7 +95,7 @@ function DashboardContent() {
           onClick={() => setActiveTab('voca')}
           className={`flex-1 py-3 text-center text-sm font-medium transition-colors ${
             activeTab === 'voca'
-              ? 'text-[#7C3AED] font-bold border-b-2 border-[#7C3AED]'
+              ? 'text-[#1A73E8] font-bold border-b-2 border-[#1A73E8]'
               : 'text-gray-500 hover:text-gray-700'
           }`}
         >
@@ -106,7 +106,7 @@ function DashboardContent() {
           onClick={() => setActiveTab('naesin')}
           className={`flex-1 py-3 text-center text-sm font-medium transition-colors ${
             activeTab === 'naesin'
-              ? 'text-[#7C3AED] font-bold border-b-2 border-[#7C3AED]'
+              ? 'text-[#1A73E8] font-bold border-b-2 border-[#1A73E8]'
               : 'text-gray-500 hover:text-gray-700'
           }`}
         >
@@ -118,14 +118,14 @@ function DashboardContent() {
       <div className="rounded-2xl border bg-white p-5 md:p-6">
         <div className="flex items-center justify-between mb-3">
           <h3 className="text-sm font-bold">점수 추이</h3>
-          <Link href="/student/my-report" className="inline-flex items-center gap-1 text-xs font-medium text-violet-600 hover:underline">
+          <Link href="/student/my-report" className="inline-flex items-center gap-1 text-xs font-medium text-brand-600 hover:underline">
             자세히 보기 <ArrowRight className="h-3 w-3" />
           </Link>
         </div>
         <div className="grid gap-4 sm:grid-cols-2">
           <div>
             <p className="text-xs text-gray-500 mb-1">보카 퀴즈</p>
-            <MiniScoreTrend data={vocaQuizHistory} color="#7C3AED" height={56} />
+            <MiniScoreTrend data={vocaQuizHistory} color="#1A73E8" height={56} />
           </div>
           <div>
             <p className="text-xs text-gray-500 mb-1">내신 문제풀이</p>

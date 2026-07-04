@@ -175,7 +175,7 @@ export function QuickQuiz({ vocabulary, onComplete }: QuickQuizProps) {
             className="w-full max-w-md space-y-8"
           >
             {question.type === 'fill-blank' && (
-              <p className="text-xs font-medium text-center text-indigo-400 mb-1">빈칸에 들어갈 단어는?</p>
+              <p className="text-xs font-medium text-center text-brand-400 mb-1">빈칸에 들어갈 단어는?</p>
             )}
             <p
               className={cn(
@@ -203,7 +203,7 @@ export function QuickQuiz({ vocabulary, onComplete }: QuickQuizProps) {
                     disabled={answered}
                     className={cn(
                       'w-full py-4 px-5 rounded-xl border-2 text-left text-lg font-medium transition-all',
-                      !answered && 'border-gray-200 text-gray-700 hover:border-indigo-300 hover:bg-indigo-50/50 active:bg-indigo-50',
+                      !answered && 'border-gray-200 text-gray-700 hover:border-brand-300 hover:bg-brand-50/50 active:bg-brand-50',
                       showCorrect && 'border-green-500 bg-green-50 text-green-700',
                       showWrong && 'border-red-500 bg-red-50 text-red-600 wrong-shake',
                       answered && !showCorrect && !showWrong && 'border-gray-100 text-gray-300',

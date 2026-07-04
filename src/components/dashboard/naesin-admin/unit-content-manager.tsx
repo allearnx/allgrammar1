@@ -72,10 +72,10 @@ export function UnitContentManager({ unitId }: { unitId: string }) {
   const sections: ContentSection[] = [
     { label: '단어', icon: BookOpen, count: vocab.items.length, color: 'text-blue-500', toggle: () => dispatchCM({ type: 'TOGGLE_SECTION', section: 'vocab' }), expanded: cm.showVocabList },
     { label: '교과서 지문', icon: FileText, count: passageList.length, color: 'text-orange-500', toggle: () => dispatchCM({ type: 'TOGGLE_SECTION', section: 'passage' }), expanded: cm.showPassageList },
-    { label: '대화문', icon: MessageSquare, count: dialogueList.length, color: 'text-violet-500', toggle: () => dispatchCM({ type: 'TOGGLE_SECTION', section: 'dialogue' }), expanded: cm.showDialogueList },
+    { label: '대화문', icon: MessageSquare, count: dialogueList.length, color: 'text-brand-500', toggle: () => dispatchCM({ type: 'TOGGLE_SECTION', section: 'dialogue' }), expanded: cm.showDialogueList },
     { label: '본문 설명 영상', icon: PlayCircle, count: textbookVideoList.length, color: 'text-cyan-500', toggle: () => dispatchCM({ type: 'TOGGLE_SECTION', section: 'textbookVideo' }), expanded: cm.showTextbookVideoList },
     { label: '문법 설명', icon: GraduationCap, count: grammarList.length, color: 'text-green-500', toggle: () => dispatchCM({ type: 'TOGGLE_SECTION', section: 'grammar' }), expanded: cm.showGrammarList },
-    { label: 'OMR 시트', icon: ClipboardList, count: cm.omrCount, color: 'text-indigo-500' },
+    { label: 'OMR 시트', icon: ClipboardList, count: cm.omrCount, color: 'text-brand-500' },
     { label: '문제풀이', icon: ClipboardList, count: problemList.length, color: 'text-red-500', toggle: () => dispatchCM({ type: 'TOGGLE_SECTION', section: 'problem' }), expanded: cm.showProblemList },
     { label: '예상문제', icon: FileQuestion, count: mockExamList.length, color: 'text-pink-500', toggle: () => dispatchCM({ type: 'TOGGLE_SECTION', section: 'mockExam' }), expanded: cm.showMockExamList },
     { label: '직전보강', icon: Brain, count: cm.lastReviewCount, color: 'text-amber-500' },

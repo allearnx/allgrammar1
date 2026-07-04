@@ -117,22 +117,22 @@ export default async function ProgressPage() {
               </div>
             </CardContent>
           </Card>
-          <Card className="border-l-4 border-l-indigo-500">
+          <Card className="border-l-4 border-l-brand-500">
             <CardHeader className="flex flex-row items-center justify-between pb-2">
               <CardTitle className="text-xs font-medium uppercase tracking-wider text-muted-foreground">암기 마스터</CardTitle>
-              <div className="rounded-full bg-indigo-100 p-2 dark:bg-indigo-950">
-                <BookOpen className="h-4 w-4 text-indigo-600 dark:text-indigo-400" />
+              <div className="rounded-full bg-brand-100 p-2 dark:bg-brand-950">
+                <BookOpen className="h-4 w-4 text-brand-600 dark:text-brand-400" />
               </div>
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold tracking-tight">{totalMastered}/{totalMemory}</div>
             </CardContent>
           </Card>
-          <Card className="border-l-4 border-l-purple-500">
+          <Card className="border-l-4 border-l-brand-500">
             <CardHeader className="flex flex-row items-center justify-between pb-2">
               <CardTitle className="text-xs font-medium uppercase tracking-wider text-muted-foreground">퀴즈 정답률</CardTitle>
-              <div className="rounded-full bg-purple-100 p-2 dark:bg-purple-950">
-                <BarChart3 className="h-4 w-4 text-purple-600 dark:text-purple-400" />
+              <div className="rounded-full bg-brand-100 p-2 dark:bg-brand-950">
+                <BarChart3 className="h-4 w-4 text-brand-600 dark:text-brand-400" />
               </div>
             </CardHeader>
             <CardContent>

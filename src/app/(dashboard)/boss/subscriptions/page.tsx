@@ -71,7 +71,7 @@ export default function BossSubscriptionsPage() {
       {/* ── 그라데이션 헤더 ── */}
       <div
         className="relative overflow-hidden rounded-2xl p-6 text-white"
-        style={{ background: 'linear-gradient(135deg, #A78BFA 0%, #7C3AED 50%, #6D28D9 100%)' }}
+        style={{ background: 'linear-gradient(135deg, #4285F4 0%, #1A73E8 50%, #174EA6 100%)' }}
       >
         <div className="flex items-center gap-3">
           <div className="inline-flex rounded-xl p-2.5" style={{ background: 'rgba(255,255,255,0.15)' }}>
@@ -86,10 +86,10 @@ export default function BossSubscriptionsPage() {
 
       {/* ── 스탯 카드 ── */}
       <div className="grid gap-3 grid-cols-2 lg:grid-cols-4">
-        <StatCard label="전체 구독" value={totalCount} sub="등록된 구독" color="#A78BFA" icon={<Users className="h-5 w-5" />} />
-        <StatCard label="유료 구독" value={paidCount} sub="프리미엄 사용 중" color="#7C3AED" icon={<Crown className="h-5 w-5" />} />
-        <StatCard label="무료 구독" value={freeCount} sub="무료 플랜" color="#C4B5FD" icon={<Zap className="h-5 w-5" />} />
-        <StatCard label="활성 구독" value={activeCount} sub="활성 + 체험 중" color="#DDD6FE" icon={<CreditCard className="h-5 w-5" />} />
+        <StatCard label="전체 구독" value={totalCount} sub="등록된 구독" color="#4285F4" icon={<Users className="h-5 w-5" />} />
+        <StatCard label="유료 구독" value={paidCount} sub="프리미엄 사용 중" color="#1A73E8" icon={<Crown className="h-5 w-5" />} />
+        <StatCard label="무료 구독" value={freeCount} sub="무료 플랜" color="#8AB4F8" icon={<Zap className="h-5 w-5" />} />
+        <StatCard label="활성 구독" value={activeCount} sub="활성 + 체험 중" color="#AECBFA" icon={<CreditCard className="h-5 w-5" />} />
       </div>
 
       {/* ── 필터 + 테이블 ── */}
@@ -115,9 +115,9 @@ export default function BossSubscriptionsPage() {
           <div className="px-5 py-16 text-center">
             <div
               className="inline-flex rounded-full p-4 mb-3"
-              style={{ background: 'linear-gradient(120deg, #F5F3FF, #EDE9FE)' }}
+              style={{ background: 'linear-gradient(120deg, #E8F0FE, #D2E3FC)' }}
             >
-              <Inbox className="h-7 w-7 text-violet-400" />
+              <Inbox className="h-7 w-7 text-brand-400" />
             </div>
             <p className="text-sm font-medium text-gray-700">구독 내역이 없습니다</p>
             <p className="text-xs text-gray-400 mt-1">새 학원을 등록하면 자동으로 생성됩니다</p>

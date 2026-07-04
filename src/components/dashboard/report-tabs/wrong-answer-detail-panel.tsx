@@ -166,7 +166,7 @@ export function WrongAnswerDetailPanel({ studentId, onRefresh }: Props) {
   if (loading) {
     return (
       <div className="flex items-center justify-center py-8">
-        <Loader2 className="h-5 w-5 animate-spin text-violet-500" />
+        <Loader2 className="h-5 w-5 animate-spin text-brand-500" />
         <span className="ml-2 text-sm text-gray-500">오답 상세 로딩 중...</span>
       </div>
     );
@@ -204,7 +204,7 @@ export function WrongAnswerDetailPanel({ studentId, onRefresh }: Props) {
               className={cn(
                 'px-2.5 py-1 rounded-full text-xs font-medium transition-colors',
                 unitFilter === 'all'
-                  ? 'bg-violet-600 text-white'
+                  ? 'bg-brand-600 text-white'
                   : 'bg-muted text-muted-foreground hover:bg-muted/80'
               )}
               onClick={() => setUnitFilter('all')}
@@ -217,7 +217,7 @@ export function WrongAnswerDetailPanel({ studentId, onRefresh }: Props) {
                 className={cn(
                   'px-2.5 py-1 rounded-full text-xs font-medium transition-colors',
                   unitFilter === u.id
-                    ? 'bg-violet-600 text-white'
+                    ? 'bg-brand-600 text-white'
                     : 'bg-muted text-muted-foreground hover:bg-muted/80'
                 )}
                 onClick={() => setUnitFilter(u.id)}

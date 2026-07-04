@@ -139,7 +139,7 @@ export function NaesinProgressCard({
           <div className="rounded-lg border p-4">
             <div className="flex items-center justify-between mb-1">
               <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">완료 단원</p>
-              <BookOpen className="h-4 w-4 text-indigo-600 dark:text-indigo-400" />
+              <BookOpen className="h-4 w-4 text-brand-600 dark:text-brand-400" />
             </div>
             <div className="text-2xl font-bold tracking-tight">
               {naesinUnits.filter((unit) => {

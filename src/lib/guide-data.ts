@@ -31,7 +31,7 @@ export const GUIDE_ENTRIES: Record<string, GuideEntry> = {
     title: '학생 등록',
     description: '초대코드를 공유하거나 직접 등록하여 학생을 추가하세요',
     icon: UserPlus,
-    color: '#8B5CF6',
+    color: '#4285F4',
     steps: [
       {
         title: '초대코드 공유',
@@ -115,7 +115,7 @@ export const GUIDE_ENTRIES: Record<string, GuideEntry> = {
     title: '학습 현황 확인',
     description: '학생 진도 및 성적을 분석하세요',
     icon: BarChart3,
-    color: '#6366F1',
+    color: '#4285F4',
     steps: [
       {
         title: '대시보드 → 학원 통계 클릭',

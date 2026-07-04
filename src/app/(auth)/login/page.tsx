@@ -79,7 +79,7 @@ function LoginForm() {
         {/* 로고 + 타이틀 */}
         <div className="text-center mb-8">
           <Link href="/">
-            <Image src="/logo.png" alt="올라영" width={80} height={80} className="mx-auto rounded-2xl shadow-lg shadow-violet-200/50" />
+            <Image src="/logo.png" alt="올라영" width={80} height={80} className="mx-auto rounded-2xl shadow-lg shadow-brand-200/50" />
           </Link>
           <h1 className="mt-5 text-2xl font-black text-[#1d1d1f] tracking-tight">
             로그인
@@ -105,7 +105,7 @@ function LoginForm() {
                 required
                 autoComplete="email"
                 disabled={loading}
-                className="w-full px-5 py-4 border-2 border-gray-200 rounded-2xl focus:ring-4 focus:ring-violet-100 focus:border-violet-400 transition-all text-slate-800 placeholder:text-slate-400 font-medium bg-white/80 outline-none"
+                className="w-full px-5 py-4 border-2 border-gray-200 rounded-2xl focus:ring-4 focus:ring-brand-100 focus:border-brand-400 transition-all text-slate-800 placeholder:text-slate-400 font-medium bg-white/80 outline-none"
               />
             </div>
             <div>
@@ -122,14 +122,14 @@ function LoginForm() {
                 minLength={6}
                 autoComplete="current-password"
                 disabled={loading}
-                className="w-full px-5 py-4 border-2 border-gray-200 rounded-2xl focus:ring-4 focus:ring-violet-100 focus:border-violet-400 transition-all text-slate-800 placeholder:text-slate-400 font-medium bg-white/80 outline-none"
+                className="w-full px-5 py-4 border-2 border-gray-200 rounded-2xl focus:ring-4 focus:ring-brand-100 focus:border-brand-400 transition-all text-slate-800 placeholder:text-slate-400 font-medium bg-white/80 outline-none"
               />
             </div>
 
             <button
               type="submit"
               disabled={loading}
-              className="w-full py-4 bg-[#A78BFA] hover:bg-[#9171f0] text-white text-lg font-bold rounded-2xl transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-[#A78BFA]/30"
+              className="w-full py-4 bg-[#4285F4] hover:bg-[#9171f0] text-white text-lg font-bold rounded-2xl transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-[#4285F4]/30"
             >
               {loading ? (
                 <span className="flex items-center justify-center gap-2">
@@ -144,11 +144,11 @@ function LoginForm() {
           </form>
 
           <div className="mt-6 flex justify-center gap-4 text-sm">
-            <Link href="/find-email" className="text-[#86868b] hover:text-violet-600 transition-colors">
+            <Link href="/find-email" className="text-[#86868b] hover:text-brand-600 transition-colors">
               이메일 찾기
             </Link>
             <span className="text-gray-300">|</span>
-            <Link href="/forgot-password" className="text-[#86868b] hover:text-violet-600 transition-colors">
+            <Link href="/forgot-password" className="text-[#86868b] hover:text-brand-600 transition-colors">
               비밀번호 찾기
             </Link>
           </div>
@@ -157,14 +157,14 @@ function LoginForm() {
         {/* 회원가입 안내 */}
         <p className="mt-6 text-center text-sm text-[#86868b]">
           계정이 없으신가요?{' '}
-          <Link href={signupHref} className="text-violet-600 font-bold hover:text-violet-700 transition-colors">
+          <Link href={signupHref} className="text-brand-600 font-bold hover:text-brand-700 transition-colors">
             회원가입
           </Link>
         </p>
 
         {/* 홈으로 돌아가기 */}
         <p className="mt-3 text-center">
-          <Link href="/" className="text-sm text-[#86868b] hover:text-violet-600 transition-colors">
+          <Link href="/" className="text-sm text-[#86868b] hover:text-brand-600 transition-colors">
             &larr; 홈으로 돌아가기
           </Link>
         </p>

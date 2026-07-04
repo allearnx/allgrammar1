@@ -74,7 +74,7 @@ export function AdminAnalyticsClient() {
           label="총 학생"
           value={data.totalStudents}
           sub={`활성 ${data.activeStudents}명`}
-          color="#7C3AED"
+          color="#1A73E8"
           icon={<Users className="h-5 w-5" />}
         />
         <StatCard
@@ -97,10 +97,10 @@ export function AdminAnalyticsClient() {
       <div className="grid gap-3 grid-cols-2">
         <div
           className="rounded-xl p-4"
-          style={{ background: 'linear-gradient(120deg, #F5F3FF, #EDE9FE)' }}
+          style={{ background: 'linear-gradient(120deg, #E8F0FE, #D2E3FC)' }}
         >
           <div className="flex items-center gap-2 mb-2">
-            <BookMarked className="h-4 w-4 text-violet-500" />
+            <BookMarked className="h-4 w-4 text-brand-500" />
             <span className="text-sm font-semibold text-gray-700">올인내신</span>
           </div>
           <div className="text-2xl font-bold tracking-tight">{data.naesinCount}명</div>
@@ -153,7 +153,7 @@ export function AdminAnalyticsClient() {
                   return `${d.getFullYear()}.${d.getMonth() + 1}.${d.getDate()}`;
                 }}
               />
-              <Bar dataKey="count" fill="#7C3AED" radius={[6, 6, 0, 0]} name="활동 수" />
+              <Bar dataKey="count" fill="#1A73E8" radius={[6, 6, 0, 0]} name="활동 수" />
             </BarChart>
           </ResponsiveContainer>
         </div>
@@ -189,8 +189,8 @@ export function AdminAnalyticsClient() {
                   <span
                     className="inline-flex rounded-full px-2.5 py-0.5 text-xs font-semibold"
                     style={{
-                      background: r.completedStages > 0 ? '#F5F3FF' : '#F3F4F6',
-                      color: r.completedStages > 0 ? '#7C3AED' : '#9CA3AF',
+                      background: r.completedStages > 0 ? '#E8F0FE' : '#F3F4F6',
+                      color: r.completedStages > 0 ? '#1A73E8' : '#9CA3AF',
                     }}
                   >
                     {r.completedStages}단계

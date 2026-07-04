@@ -18,7 +18,7 @@ interface Props {
   height?: number;
 }
 
-export function ScoreTrendChart({ data, title, color = '#7C3AED', height = 280 }: Props) {
+export function ScoreTrendChart({ data, title, color = '#1A73E8', height = 280 }: Props) {
   if (data.length === 0) {
     return (
       <div className="flex flex-col items-center justify-center rounded-xl border border-dashed p-8" style={{ height }}>

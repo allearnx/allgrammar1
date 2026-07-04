@@ -130,7 +130,7 @@ export function AdminOnboardingWizard({ inviteCode, autoOpen, onClose }: Props) 
         {/* Header with step indicator */}
         <div
           className="relative overflow-hidden px-6 pt-5 pb-4 text-white"
-          style={{ background: 'linear-gradient(135deg, #A78BFA 0%, #7C3AED 50%, #6D28D9 100%)' }}
+          style={{ background: 'linear-gradient(135deg, #4285F4 0%, #1A73E8 50%, #174EA6 100%)' }}
         >
           <div className="flex items-center gap-1.5 mb-3">
             {[1, 2, 3].map((s) => (
@@ -170,7 +170,7 @@ export function AdminOnboardingWizard({ inviteCode, autoOpen, onClose }: Props) 
                   onChange={(e) => setFullName(e.target.value)}
                   placeholder="홍길동"
                   autoFocus
-                  className="w-full rounded-lg border px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-violet-300"
+                  className="w-full rounded-lg border px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-300"
                 />
               </div>
               <div className="space-y-2">
@@ -185,7 +185,7 @@ export function AdminOnboardingWizard({ inviteCode, autoOpen, onClose }: Props) 
                   onKeyDown={(e) => {
                     if (e.key === 'Enter' && fullName.trim() && email.trim()) handleAddStudent();
                   }}
-                  className="w-full rounded-lg border px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-violet-300"
+                  className="w-full rounded-lg border px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-300"
                 />
                 <p className="text-xs text-gray-400">
                   실제 이메일이 아니어도 됩니다. 학생이 로그인할 때 사용합니다.
@@ -196,7 +196,7 @@ export function AdminOnboardingWizard({ inviteCode, autoOpen, onClose }: Props) 
                   onClick={handleAddStudent}
                   disabled={submitting || !fullName.trim() || !email.trim()}
                   className="flex-1 rounded-[10px] py-2.5 text-sm font-bold text-white transition-all disabled:opacity-50"
-                  style={{ background: '#7C3AED', boxShadow: '0 4px 12px rgba(124,58,237,0.25)' }}
+                  style={{ background: '#1A73E8', boxShadow: '0 4px 12px rgba(124,58,237,0.25)' }}
                 >
                   {submitting ? '추가 중...' : '학생 추가'}
                 </button>
@@ -223,8 +223,8 @@ export function AdminOnboardingWizard({ inviteCode, autoOpen, onClose }: Props) 
                 </p>
               </div>
 
-              <div className="rounded-xl border-2 border-violet-200 bg-violet-50/30 p-4 space-y-3">
-                <p className="text-xs font-semibold uppercase tracking-wider text-violet-700">
+              <div className="rounded-xl border-2 border-brand-200 bg-brand-50/30 p-4 space-y-3">
+                <p className="text-xs font-semibold uppercase tracking-wider text-brand-700">
                   학생 로그인 정보
                 </p>
                 <div>
@@ -235,7 +235,7 @@ export function AdminOnboardingWizard({ inviteCode, autoOpen, onClose }: Props) 
                     </code>
                     <button
                       onClick={() => copyText(result.student.email, 'email')}
-                      className="shrink-0 text-violet-600 hover:text-violet-800"
+                      className="shrink-0 text-brand-600 hover:text-brand-800"
                     >
                       {copiedField === 'email' ? (
                         <Check className="h-4 w-4" />
@@ -248,12 +248,12 @@ export function AdminOnboardingWizard({ inviteCode, autoOpen, onClose }: Props) 
                 <div>
                   <div className="text-xs text-gray-500 mb-0.5">임시 비밀번호</div>
                   <div className="flex items-center justify-between gap-2 rounded-lg bg-white border px-3 py-2">
-                    <code className="text-base font-mono font-bold text-violet-700 tracking-wider break-all">
+                    <code className="text-base font-mono font-bold text-brand-700 tracking-wider break-all">
                       {result.tempPassword}
                     </code>
                     <button
                       onClick={() => copyText(result.tempPassword, 'password')}
-                      className="shrink-0 text-violet-600 hover:text-violet-800"
+                      className="shrink-0 text-brand-600 hover:text-brand-800"
                     >
                       {copiedField === 'password' ? (
                         <Check className="h-4 w-4" />
@@ -268,7 +268,7 @@ export function AdminOnboardingWizard({ inviteCode, autoOpen, onClose }: Props) 
               <button
                 onClick={copyFullMessage}
                 className="w-full rounded-[10px] py-2.5 text-sm font-bold text-white transition-all"
-                style={{ background: '#7C3AED', boxShadow: '0 4px 12px rgba(124,58,237,0.25)' }}
+                style={{ background: '#1A73E8', boxShadow: '0 4px 12px rgba(124,58,237,0.25)' }}
               >
                 {copiedField === 'all' ? (
                   <span className="inline-flex items-center gap-1.5">
@@ -296,11 +296,11 @@ export function AdminOnboardingWizard({ inviteCode, autoOpen, onClose }: Props) 
               <div className="flex flex-col items-center gap-4 py-2">
                 <div
                   className="rounded-2xl px-8 py-5"
-                  style={{ background: 'linear-gradient(120deg, #F5F3FF, #EDE9FE)' }}
+                  style={{ background: 'linear-gradient(120deg, #E8F0FE, #D2E3FC)' }}
                 >
                   <code
                     className="text-3xl font-mono font-bold tracking-[0.3em]"
-                    style={{ color: '#7C3AED' }}
+                    style={{ color: '#1A73E8' }}
                   >
                     {inviteCode}
                   </code>
@@ -308,7 +308,7 @@ export function AdminOnboardingWizard({ inviteCode, autoOpen, onClose }: Props) 
                 <button
                   onClick={() => copyText(inviteCode, 'invite')}
                   className="inline-flex items-center rounded-full px-4 py-2 text-xs font-semibold text-white transition-all"
-                  style={{ background: '#7C3AED', boxShadow: '0 4px 12px rgba(124,58,237,0.25)' }}
+                  style={{ background: '#1A73E8', boxShadow: '0 4px 12px rgba(124,58,237,0.25)' }}
                 >
                   {copiedField === 'invite' ? (
                     <Check className="h-3.5 w-3.5 mr-1.5" />
@@ -328,7 +328,7 @@ export function AdminOnboardingWizard({ inviteCode, autoOpen, onClose }: Props) 
                 onClick={handleComplete}
                 disabled={saving}
                 className="w-full rounded-[10px] py-2.5 text-sm font-bold text-white transition-all disabled:opacity-50"
-                style={{ background: '#7C3AED', boxShadow: '0 4px 12px rgba(124,58,237,0.25)' }}
+                style={{ background: '#1A73E8', boxShadow: '0 4px 12px rgba(124,58,237,0.25)' }}
               >
                 {saving ? '저장 중...' : '시작하기'}
               </button>

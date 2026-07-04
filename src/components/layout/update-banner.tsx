@@ -30,16 +30,16 @@ export function UpdateBanner() {
   };
 
   return (
-    <div className="flex items-center gap-2 border-b border-indigo-100 bg-gradient-to-r from-indigo-50 to-violet-50 px-4 py-2">
-      <Sparkles className="h-4 w-4 shrink-0 text-indigo-500" />
-      <span className="shrink-0 rounded-full bg-indigo-600 px-2 py-0.5 text-[10px] font-bold text-white">새 업데이트</span>
-      <Link href="/updates" className="min-w-0 flex-1 truncate text-sm font-medium text-indigo-800 hover:underline">
+    <div className="flex items-center gap-2 border-b border-brand-100 bg-gradient-to-r from-brand-50 to-brand-50 px-4 py-2">
+      <Sparkles className="h-4 w-4 shrink-0 text-brand-500" />
+      <span className="shrink-0 rounded-full bg-brand-600 px-2 py-0.5 text-[10px] font-bold text-white">새 업데이트</span>
+      <Link href="/updates" className="min-w-0 flex-1 truncate text-sm font-medium text-brand-800 hover:underline">
         {latest.title}
       </Link>
-      <Link href="/updates" className="hidden shrink-0 text-xs font-semibold text-indigo-500 hover:underline sm:inline">
+      <Link href="/updates" className="hidden shrink-0 text-xs font-semibold text-brand-500 hover:underline sm:inline">
         자세히 보기
       </Link>
-      <button onClick={dismiss} aria-label="닫기" className="shrink-0 rounded p-1 text-indigo-400 hover:bg-indigo-100 hover:text-indigo-600">
+      <button onClick={dismiss} aria-label="닫기" className="shrink-0 rounded p-1 text-brand-400 hover:bg-brand-100 hover:text-brand-600">
         <X className="h-4 w-4" />
       </button>
     </div>

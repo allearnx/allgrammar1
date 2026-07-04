@@ -61,7 +61,7 @@ export default async function ManagerDashboard() {
 
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           <StatCard label="총 학생 수" value={studentCount} color="#3B82F6" icon={<Users className="h-5 w-5" />} />
-          <StatCard label="문법 주제" value={grammarRes.count || 0} color="#6366F1" icon={<BookOpen className="h-5 w-5" />} />
+          <StatCard label="문법 주제" value={grammarRes.count || 0} color="#4285F4" icon={<BookOpen className="h-5 w-5" />} />
           <StatCard label="암기 항목" value={memoryRes.count || 0} color="#22C55E" icon={<FileText className="h-5 w-5" />} />
           <StatCard label="교과서 지문" value={textbookRes.count || 0} color="#A855F7" icon={<BookMarked className="h-5 w-5" />} />
         </div>
@@ -78,11 +78,11 @@ export default async function ManagerDashboard() {
           {NAV_CARDS.map((card) => {
             const Icon = card.icon;
             return (
-              <Card key={card.href} className={`hover:shadow-md transition-shadow ${card.primary ? 'border-indigo-200 bg-indigo-50/30 dark:border-indigo-800 dark:bg-indigo-950/20' : ''}`}>
+              <Card key={card.href} className={`hover:shadow-md transition-shadow ${card.primary ? 'border-brand-200 bg-brand-50/30 dark:border-brand-800 dark:bg-brand-950/20' : ''}`}>
                 <CardContent className="pt-6">
                   <div className="flex flex-col items-center text-center gap-3">
-                    <div className={`rounded-full p-3 ${card.primary ? 'bg-indigo-100 dark:bg-indigo-950' : 'bg-muted'}`}>
-                      <Icon className={`h-8 w-8 ${card.primary ? 'text-indigo-600 dark:text-indigo-400' : 'text-muted-foreground'}`} />
+                    <div className={`rounded-full p-3 ${card.primary ? 'bg-brand-100 dark:bg-brand-950' : 'bg-muted'}`}>
+                      <Icon className={`h-8 w-8 ${card.primary ? 'text-brand-600 dark:text-brand-400' : 'text-muted-foreground'}`} />
                     </div>
                     <h3 className="font-semibold">{card.title}</h3>
                     <p className="text-sm text-muted-foreground">{card.description}</p>

@@ -6,6 +6,18 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
+  /* 구글 블루 스케일 — 구 violet/indigo/purple 클래스의 매핑 대상 (bg-brand-600 등) */
+  --color-brand-50: #e8f0fe;
+  --color-brand-100: #d2e3fc;
+  --color-brand-200: #aecbfa;
+  --color-brand-300: #8ab4f8;
+  --color-brand-400: #669df6;
+  --color-brand-500: #4285f4;
+  --color-brand-600: #1a73e8;
+  --color-brand-700: #1967d2;
+  --color-brand-800: #185abc;
+  --color-brand-900: #174ea6;
+  --color-brand-950: #0d3064;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-noto-sans-kr), var(--font-geist-sans);

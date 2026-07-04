@@ -53,7 +53,7 @@ export function ClassReviewOverview({ basePath }: Props) {
     <div className="rounded-2xl border bg-white p-5 md:p-6 mb-6">
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-2">
-          <Bell className="h-4 w-4 text-violet-500" />
+          <Bell className="h-4 w-4 text-brand-500" />
           <h3 className="text-sm font-bold">학급 복습 현황</h3>
         </div>
         <span className="text-xs text-gray-400">망각 곡선 기반</span>

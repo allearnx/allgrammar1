@@ -37,10 +37,10 @@ export function NeonSentenceDisplay({
             key={i}
             className={cn(
               'transition-all duration-200 inline-block rounded-md px-0.5',
-              isCurrent && isTarget && 'neon-text-gold scale-110 bg-indigo-100',
+              isCurrent && isTarget && 'neon-text-gold scale-110 bg-brand-100',
               isCurrent && !isTarget && 'neon-text-cyan bg-blue-50',
               !isCurrent && isTarget && isSpeakingWord && 'neon-text-cyan scale-110 bg-blue-50',
-              !isCurrent && isTarget && !isSpeakingWord && 'text-indigo-500 font-bold',
+              !isCurrent && isTarget && !isSpeakingWord && 'text-brand-500 font-bold',
               !isCurrent && !isTarget && 'text-gray-400',
             )}
           >

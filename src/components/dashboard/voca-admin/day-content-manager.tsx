@@ -201,7 +201,7 @@ export function DayContentManager({ dayId, definitionLang }: { dayId: string; de
   return (
     <div className="mt-4 space-y-3 border-t pt-3">
       <div className="flex items-center gap-2 p-2 rounded-lg bg-muted/50">
-        <BookOpen className="h-4 w-4 text-violet-600" />
+        <BookOpen className="h-4 w-4 text-brand-600" />
         <span className="text-sm">단어</span>
         <Badge variant="secondary" className="ml-auto">{vocab.items.length}개</Badge>
       </div>
@@ -229,7 +229,7 @@ export function DayContentManager({ dayId, definitionLang }: { dayId: string; de
                   <span className="text-sm text-muted-foreground truncate max-w-[120px]">{v.back_text}</span>
                   {v.synonyms && <Badge variant="outline" className="text-[10px] h-4 px-1">유</Badge>}
                   {v.antonyms && <Badge variant="outline" className="text-[10px] h-4 px-1">반</Badge>}
-                  {v.idioms && v.idioms.length > 0 && <Badge variant="outline" className="text-[10px] h-4 px-1 border-violet-400 text-violet-700">숙</Badge>}
+                  {v.idioms && v.idioms.length > 0 && <Badge variant="outline" className="text-[10px] h-4 px-1 border-brand-400 text-brand-700">숙</Badge>}
                   {v.audio_url ? (
                     <Button variant="ghost" size="icon" className="h-6 w-6" onClick={() => playAudio(v.id, v.audio_url!)}>
                       <Volume2 className={cn('h-3.5 w-3.5', playingAudio === v.id ? 'text-green-600 animate-pulse' : 'text-green-600')} />

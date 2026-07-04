@@ -16,7 +16,7 @@ export function InviteCodeCard({ code, academyName }: { code: string; academyNam
   return (
     <div
       className="relative overflow-hidden rounded-2xl p-5 text-white"
-      style={{ background: 'linear-gradient(135deg, #A78BFA 0%, #7C3AED 50%, #6D28D9 100%)' }}
+      style={{ background: 'linear-gradient(135deg, #4285F4 0%, #1A73E8 50%, #174EA6 100%)' }}
     >
       <span className="text-xs font-semibold uppercase tracking-wider text-white/70">
         {academyName} · 초대 코드

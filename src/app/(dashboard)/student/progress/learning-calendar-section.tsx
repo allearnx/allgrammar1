@@ -27,13 +27,13 @@ export function LearningCalendarSection() {
   return (
     <Card>
       <CardHeader className="flex flex-row items-center gap-2 pb-2">
-        <CalendarDays className="h-5 w-5 text-violet-500" />
+        <CalendarDays className="h-5 w-5 text-brand-500" />
         <CardTitle className="text-lg font-semibold tracking-tight">학습 캘린더</CardTitle>
       </CardHeader>
       <CardContent>
         {isLoading ? (
           <div className="flex items-center justify-center py-8">
-            <Loader2 className="h-5 w-5 animate-spin text-violet-400" />
+            <Loader2 className="h-5 w-5 animate-spin text-brand-400" />
           </div>
         ) : data ? (
           <ActivityCalendar activities={data.activities} dailySeconds={data.dailySeconds} />

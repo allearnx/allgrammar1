@@ -39,7 +39,7 @@ export function LearningFlowSection({ currentUnit, currentStages, ctaStage, curr
       {ctaStage && (
         <div
           className="flex items-center justify-between rounded-xl px-5 py-3"
-          style={{ background: 'linear-gradient(to right, #F5F3FF, #EDE9FE)' }}
+          style={{ background: 'linear-gradient(to right, #E8F0FE, #D2E3FC)' }}
         >
           <span className="text-sm font-medium text-gray-700">
             다음 단계: <strong>{ctaStage.label}</strong>

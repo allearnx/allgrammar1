@@ -14,7 +14,7 @@ type FreeService = 'naesin' | 'voca';
 
 const SERVICE_OPTIONS: { value: FreeService; label: string; desc: string; activeColor: string }[] = [
   { value: 'naesin', label: '올인내신', desc: '단어암기 + 교과서암기', activeColor: 'border-cyan-500 bg-cyan-50' },
-  { value: 'voca', label: '올킬보카', desc: '1회독 단어 학습', activeColor: 'border-violet-500 bg-violet-50' },
+  { value: 'voca', label: '올킬보카', desc: '1회독 단어 학습', activeColor: 'border-brand-500 bg-brand-50' },
 ];
 
 export default function CreateAcademyPage() {
@@ -57,8 +57,8 @@ export default function CreateAcademyPage() {
               돌아가기
             </Link>
           </Button>
-          <div className="mx-auto rounded-full bg-violet-100 p-3 dark:bg-violet-950 mb-2">
-            <Building2 className="h-8 w-8 text-violet-600 dark:text-violet-400" />
+          <div className="mx-auto rounded-full bg-brand-100 p-3 dark:bg-brand-950 mb-2">
+            <Building2 className="h-8 w-8 text-brand-600 dark:text-brand-400" />
           </div>
           <CardTitle className="text-xl">학원 만들기</CardTitle>
           <p className="text-sm text-muted-foreground mt-1">

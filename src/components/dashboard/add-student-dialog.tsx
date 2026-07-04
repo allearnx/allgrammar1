@@ -108,7 +108,7 @@ export function AddStudentDialog({ variant = 'primary', label = '학생 추가' 
       : 'inline-flex items-center rounded-lg px-3 py-1.5 text-sm font-bold text-white transition-all hover:shadow-md';
 
   const buttonStyle = {
-    background: '#7C3AED',
+    background: '#1A73E8',
     boxShadow: '0 4px 12px rgba(124,58,237,0.25)',
   };
 
@@ -124,7 +124,7 @@ export function AddStudentDialog({ variant = 'primary', label = '학생 추가' 
           {/* 헤더 */}
           <div
             className="px-6 pt-5 pb-4 text-white"
-            style={{ background: 'linear-gradient(135deg, #A78BFA 0%, #7C3AED 50%, #6D28D9 100%)' }}
+            style={{ background: 'linear-gradient(135deg, #4285F4 0%, #1A73E8 50%, #174EA6 100%)' }}
           >
             <DialogHeader>
               <DialogTitle className="flex items-center gap-2 text-white">
@@ -154,7 +154,7 @@ export function AddStudentDialog({ variant = 'primary', label = '학생 추가' 
                     onChange={(e) => setFullName(e.target.value)}
                     placeholder="홍길동"
                     autoFocus
-                    className="w-full rounded-lg border px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-violet-300"
+                    className="w-full rounded-lg border px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-300"
                   />
                 </div>
 
@@ -168,7 +168,7 @@ export function AddStudentDialog({ variant = 'primary', label = '학생 추가' 
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="student@example.com"
-                    className="w-full rounded-lg border px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-violet-300"
+                    className="w-full rounded-lg border px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-300"
                   />
                   <p className="text-xs text-gray-400">실제 이메일이 아니어도 됩니다. 학생이 로그인할 때 사용합니다.</p>
                 </div>
@@ -183,7 +183,7 @@ export function AddStudentDialog({ variant = 'primary', label = '학생 추가' 
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
                     placeholder="010-1234-5678"
-                    className="w-full rounded-lg border px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-violet-300"
+                    className="w-full rounded-lg border px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-300"
                   />
                 </div>
 
@@ -222,7 +222,7 @@ export function AddStudentDialog({ variant = 'primary', label = '학생 추가' 
                   onClick={handleSubmit}
                   disabled={submitting || !fullName.trim() || !email.trim()}
                   className="w-full rounded-[10px] py-2.5 text-sm font-bold text-white transition-all disabled:opacity-50"
-                  style={{ background: '#7C3AED', boxShadow: '0 4px 12px rgba(124,58,237,0.25)' }}
+                  style={{ background: '#1A73E8', boxShadow: '0 4px 12px rgba(124,58,237,0.25)' }}
                 >
                   {submitting ? '추가 중...' : '학생 추가'}
                 </button>
@@ -241,8 +241,8 @@ export function AddStudentDialog({ variant = 'primary', label = '학생 추가' 
                 </div>
 
                 {/* 로그인 정보 박스 */}
-                <div className="rounded-xl border-2 border-violet-200 bg-violet-50/30 p-4 space-y-3">
-                  <p className="text-xs font-semibold uppercase tracking-wider text-violet-700">
+                <div className="rounded-xl border-2 border-brand-200 bg-brand-50/30 p-4 space-y-3">
+                  <p className="text-xs font-semibold uppercase tracking-wider text-brand-700">
                     학생 로그인 정보
                   </p>
 
@@ -252,7 +252,7 @@ export function AddStudentDialog({ variant = 'primary', label = '학생 추가' 
                       <code className="text-sm font-mono text-gray-800 break-all">{result.student.email}</code>
                       <button
                         onClick={() => copyToClipboard(result.student.email, 'email')}
-                        className="shrink-0 inline-flex items-center text-xs text-violet-600 hover:text-violet-800"
+                        className="shrink-0 inline-flex items-center text-xs text-brand-600 hover:text-brand-800"
                       >
                         {copiedField === 'email' ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
                       </button>
@@ -262,12 +262,12 @@ export function AddStudentDialog({ variant = 'primary', label = '학생 추가' 
                   <div>
                     <div className="text-xs text-gray-500 mb-0.5">임시 비밀번호</div>
                     <div className="flex items-center justify-between gap-2 rounded-lg bg-white border px-3 py-2">
-                      <code className="text-base font-mono font-bold text-violet-700 tracking-wider break-all">
+                      <code className="text-base font-mono font-bold text-brand-700 tracking-wider break-all">
                         {result.tempPassword}
                       </code>
                       <button
                         onClick={() => copyToClipboard(result.tempPassword, 'password')}
-                        className="shrink-0 inline-flex items-center text-xs text-violet-600 hover:text-violet-800"
+                        className="shrink-0 inline-flex items-center text-xs text-brand-600 hover:text-brand-800"
                       >
                         {copiedField === 'password' ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
                       </button>
@@ -279,7 +279,7 @@ export function AddStudentDialog({ variant = 'primary', label = '학생 추가' 
                 <button
                   onClick={copyFullMessage}
                   className="w-full rounded-[10px] py-2.5 text-sm font-bold text-white transition-all"
-                  style={{ background: '#7C3AED', boxShadow: '0 4px 12px rgba(124,58,237,0.25)' }}
+                  style={{ background: '#1A73E8', boxShadow: '0 4px 12px rgba(124,58,237,0.25)' }}
                 >
                   {copiedField === 'all' ? (
                     <span className="inline-flex items-center gap-1.5">
@@ -301,7 +301,7 @@ export function AddStudentDialog({ variant = 'primary', label = '학생 추가' 
                       setPhone('');
                       setServices([]);
                     }}
-                    className="flex-1 rounded-[10px] border border-violet-200 bg-white py-2 text-sm font-semibold text-violet-700 hover:bg-violet-50 transition-colors"
+                    className="flex-1 rounded-[10px] border border-brand-200 bg-white py-2 text-sm font-semibold text-brand-700 hover:bg-brand-50 transition-colors"
                   >
                     다른 학생 추가
                   </button>

@@ -122,7 +122,7 @@ export default function UpgradePage() {
         {/* 선택한 플랜 */}
         <section className="rounded-2xl bg-white p-5">
           <div className="flex items-center gap-2 mb-4">
-            <Crown className="h-5 w-5 text-violet-600" />
+            <Crown className="h-5 w-5 text-brand-600" />
             <h2 className="text-[15px] font-semibold text-gray-900">선택한 요금제</h2>
           </div>
           <div className="flex items-center justify-between">

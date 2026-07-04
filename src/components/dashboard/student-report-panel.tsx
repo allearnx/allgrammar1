@@ -29,7 +29,7 @@ export function StudentReportPanel({ studentId, services: servicesProp, token, r
   if (loading) {
     return (
       <div className="flex items-center justify-center py-16">
-        <Loader2 className="h-6 w-6 animate-spin text-violet-500" />
+        <Loader2 className="h-6 w-6 animate-spin text-brand-500" />
         <span className="ml-2 text-sm text-gray-500">리포트 로딩 중...</span>
       </div>
     );
@@ -53,7 +53,7 @@ export function StudentReportPanel({ studentId, services: servicesProp, token, r
   return (
     <div className="rounded-2xl overflow-hidden border bg-white">
       {/* ── Purple Banner Header ── */}
-      <div className="relative overflow-hidden bg-gradient-to-r from-violet-400 to-purple-500 p-6 text-white">
+      <div className="relative overflow-hidden bg-gradient-to-r from-brand-400 to-brand-500 p-6 text-white">
         <div className="flex items-center gap-3">
           <BarChart3 className="h-6 w-6" />
           <h2 className="text-lg font-bold">상세 리포트</h2>
@@ -119,7 +119,7 @@ export function StudentReportPanel({ studentId, services: servicesProp, token, r
               <ScoreTrendChart
                 data={data.trends.vocaQuizScores}
                 title="보카 퀴즈 점수 추이"
-                color="#7C3AED"
+                color="#1A73E8"
               />
             )}
             {hasNaesin && (
@@ -152,7 +152,7 @@ export function StudentReportPanel({ studentId, services: servicesProp, token, r
                   스펠링: d.spellingScore ?? 0,
                 }))}
                 bars={[
-                  { dataKey: '퀴즈', name: '퀴즈', color: '#7C3AED' },
+                  { dataKey: '퀴즈', name: '퀴즈', color: '#1A73E8' },
                   { dataKey: '스펠링', name: '스펠링', color: '#06B6D4' },
                 ]}
               />

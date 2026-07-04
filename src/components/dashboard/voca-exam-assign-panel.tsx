@@ -90,16 +90,16 @@ export function VocaExamAssignPanel() {
   const rangeLabel = (a: Assignment) => a.title?.trim() || a.dayIds.map((d) => dayTitles[d] ?? '?').join(' + ');
 
   return (
-    <div className="rounded-2xl border border-indigo-200 bg-indigo-50/40 p-4 space-y-3">
+    <div className="rounded-2xl border border-brand-200 bg-brand-50/40 p-4 space-y-3">
       <div className="flex items-center justify-between gap-2">
-        <p className="font-bold text-indigo-700">📋 시험 배정</p>
+        <p className="font-bold text-brand-700">📋 시험 배정</p>
         <select value={bookId} onChange={(e) => setBookId(e.target.value)} className="rounded-lg border border-gray-200 px-2 py-1.5 text-sm">
           {books.map((b) => <option key={b.id} value={b.id}>{b.title}</option>)}
         </select>
       </div>
 
       {!open ? (
-        <button onClick={() => setOpen(true)} className="flex items-center gap-1.5 rounded-xl bg-indigo-600 px-4 py-2 text-sm font-bold text-white hover:bg-indigo-700">
+        <button onClick={() => setOpen(true)} className="flex items-center gap-1.5 rounded-xl bg-brand-600 px-4 py-2 text-sm font-bold text-white hover:bg-brand-700">
           <Plus className="h-4 w-4" /> 새 시험 배정하기
         </button>
       ) : (
@@ -112,7 +112,7 @@ export function VocaExamAssignPanel() {
                 const dis = !on && selDays.length >= MAX_DAYS;
                 return (
                   <button key={d.id} onClick={() => toggleDay(d.id)} disabled={dis}
-                    className={`rounded-lg px-2.5 py-1 text-sm font-semibold ${on ? 'bg-indigo-600 text-white' : dis ? 'bg-gray-100 text-gray-300' : 'bg-gray-50 text-indigo-600 border border-indigo-200'}`}>
+                    className={`rounded-lg px-2.5 py-1 text-sm font-semibold ${on ? 'bg-brand-600 text-white' : dis ? 'bg-gray-100 text-gray-300' : 'bg-gray-50 text-brand-600 border border-brand-200'}`}>
                     {d.title}
                   </button>
                 );
@@ -138,7 +138,7 @@ export function VocaExamAssignPanel() {
             className="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm" maxLength={100} />
           <div className="flex gap-2">
             <button onClick={assign} disabled={saving || selDays.length === 0 || selStudents.length === 0}
-              className="flex-1 rounded-xl bg-indigo-600 py-2.5 text-sm font-bold text-white hover:bg-indigo-700 disabled:bg-gray-300">
+              className="flex-1 rounded-xl bg-brand-600 py-2.5 text-sm font-bold text-white hover:bg-brand-700 disabled:bg-gray-300">
               {saving ? '배정 중...' : `${selStudents.length}명에게 배정`}
             </button>
             <button onClick={() => setOpen(false)} className="rounded-xl border border-gray-200 px-4 text-sm font-bold text-gray-500">취소</button>

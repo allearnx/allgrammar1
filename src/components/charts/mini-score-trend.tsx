@@ -13,7 +13,7 @@ interface Props {
   height?: number;
 }
 
-export function MiniScoreTrend({ data, color = '#7C3AED', height = 64 }: Props) {
+export function MiniScoreTrend({ data, color = '#1A73E8', height = 64 }: Props) {
   if (data.length === 0) {
     return (
       <div className="flex items-center justify-center rounded-lg border border-dashed" style={{ height }}>

@@ -154,7 +154,7 @@ export function VocaDashboard({ userName, books, days, progressList, wordCount, 
         <div className="flex items-center justify-between mb-3">
           <h3 className="text-sm font-bold">퀴즈 점수 추이</h3>
         </div>
-        <MiniScoreTrend data={quizHistory} color="#7C3AED" height={64} />
+        <MiniScoreTrend data={quizHistory} color="#1A73E8" height={64} />
       </div>
 
       {/* ── Flow Card: Round 1 ── */}
@@ -166,7 +166,7 @@ export function VocaDashboard({ userName, books, days, progressList, wordCount, 
               <div className="text-base font-bold flex items-center gap-1.5"><BookOpen className="h-4 w-4" /> 1회독 — {currentDay.title}</div>
               <div className="text-sm text-gray-400 mt-0.5">플래시카드 → 퀴즈 → 스펠링 → 매칭 4단계를 통과하세요</div>
             </div>
-            <span className="shrink-0 rounded-full px-3.5 py-1 text-xs font-bold" style={{ background: r1AllDone ? '#DCFCE7' : '#F5F3FF', color: r1AllDone ? COLORS.green : '#7C3AED' }}>
+            <span className="shrink-0 rounded-full px-3.5 py-1 text-xs font-bold" style={{ background: r1AllDone ? '#DCFCE7' : '#E8F0FE', color: r1AllDone ? COLORS.green : '#1A73E8' }}>
               {r1AllDone ? '완료 ✓' : '진행 중'}
             </span>
           </div>
@@ -202,8 +202,8 @@ export function VocaDashboard({ userName, books, days, progressList, wordCount, 
               </div>
             </div>
             <span className="shrink-0 rounded-full px-3.5 py-1 text-xs font-bold" style={{
-              background: r2AllDone ? '#DCFCE7' : (round2PlanLocked || !bookR1Complete) ? '#F3F4F6' : '#F5F3FF',
-              color: r2AllDone ? COLORS.green : (round2PlanLocked || !bookR1Complete) ? '#9CA3AF' : '#7C3AED',
+              background: r2AllDone ? '#DCFCE7' : (round2PlanLocked || !bookR1Complete) ? '#F3F4F6' : '#E8F0FE',
+              color: r2AllDone ? COLORS.green : (round2PlanLocked || !bookR1Complete) ? '#9CA3AF' : '#1A73E8',
             }}>
               {r2AllDone ? '완료 ✓' : round2PlanLocked ? '유료 전용' : !bookR1Complete ? '잠김' : '진행 중'}
             </span>
@@ -307,7 +307,7 @@ export function VocaDashboard({ userName, books, days, progressList, wordCount, 
                           {submissionStatuses[day.id] === 'reviewed' ? '확인됨' : '제출함'}
                         </span>
                       )}
-                      <span className="text-xs" style={{ color: isDone ? COLORS.green : isActive ? '#7C3AED' : stepsNow > 0 ? '#6B7280' : '#9CA3AF', fontWeight: isDone || isActive ? 700 : 400 }}>
+                      <span className="text-xs" style={{ color: isDone ? COLORS.green : isActive ? '#1A73E8' : stepsNow > 0 ? '#6B7280' : '#9CA3AF', fontWeight: isDone || isActive ? 700 : 400 }}>
                         {isDone ? '100%' : isActive ? '진행 중' : stepsNow > 0 ? `${pct}%` : '—'}
                       </span>
                     </span>

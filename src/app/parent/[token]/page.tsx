@@ -148,7 +148,7 @@ export default async function ParentReportPage({ params, searchParams }: Props) 
 
       return (
         <div className="min-h-screen bg-gray-50">
-          <header className="relative overflow-hidden bg-gradient-to-r from-violet-400 to-purple-500 px-4 py-5">
+          <header className="relative overflow-hidden bg-gradient-to-r from-brand-400 to-brand-500 px-4 py-5">
             <div className="max-w-4xl mx-auto flex items-center gap-3">
               <div className="h-9 w-9 rounded-lg bg-white/20 backdrop-blur flex items-center justify-center">
                 <span className="text-white font-bold text-sm">OL</span>
@@ -167,7 +167,7 @@ export default async function ParentReportPage({ params, searchParams }: Props) 
             </div>
             <div className="rounded-xl bg-white border shadow-sm p-5 space-y-4">
               <div className="flex items-center gap-2">
-                <BookA className="h-5 w-5 text-violet-500" />
+                <BookA className="h-5 w-5 text-brand-500" />
                 <span className="font-semibold text-gray-800">학습 현황</span>
                 {isCompleted ? (
                   <span className="ml-auto inline-flex items-center gap-1 rounded-full bg-green-100 px-2.5 py-0.5 text-xs font-medium text-green-700">
@@ -261,7 +261,7 @@ export default async function ParentReportPage({ params, searchParams }: Props) 
   return (
     <div className="min-h-screen bg-gray-50">
       {/* ── Purple Hero Banner ── */}
-      <header className="relative overflow-hidden bg-gradient-to-r from-violet-400 to-purple-500 px-4 py-5">
+      <header className="relative overflow-hidden bg-gradient-to-r from-brand-400 to-brand-500 px-4 py-5">
         <div className="max-w-4xl mx-auto flex items-center gap-3">
           <div className="h-9 w-9 rounded-lg bg-white/20 backdrop-blur flex items-center justify-center">
             <span className="text-white font-bold text-sm">OL</span>
@@ -338,7 +338,7 @@ function AttemptTimeline({ logs }: { logs: { step: string; score: number | null;
   return (
     <div className="rounded-xl bg-white border shadow-sm p-5 space-y-3">
       <div className="flex items-center gap-2">
-        <History className="h-5 w-5 text-violet-500" />
+        <History className="h-5 w-5 text-brand-500" />
         <span className="font-semibold text-gray-800">학습 이력</span>
         <span className="ml-auto text-xs text-gray-400">{sessions.length}회 시도</span>
       </div>

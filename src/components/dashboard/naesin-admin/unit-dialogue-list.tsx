@@ -21,7 +21,7 @@ export function UnitDialogueList({ dialogues, onUpdate, onRequestDelete }: UnitD
       {dialogues.map((dialogue) => (
         <div key={dialogue.id} className="rounded hover:bg-muted/50">
           <div className="flex items-center gap-2 py-1.5 px-2 group">
-            <MessageSquare className="h-3.5 w-3.5 text-violet-500 shrink-0" />
+            <MessageSquare className="h-3.5 w-3.5 text-brand-500 shrink-0" />
             <span className="text-sm flex-1 truncate">{dialogue.title}</span>
             <span className="text-xs text-muted-foreground shrink-0">{dialogue.sentences.length}문장</span>
             <Button

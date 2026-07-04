@@ -94,7 +94,7 @@ export function TemplateLibraryClient() {
   if (loading) {
     return (
       <div className="flex items-center justify-center py-16">
-        <Loader2 className="h-6 w-6 animate-spin text-violet-500" />
+        <Loader2 className="h-6 w-6 animate-spin text-brand-500" />
         <span className="ml-2 text-sm text-gray-500">템플릿 로딩 중...</span>
       </div>
     );
@@ -104,7 +104,7 @@ export function TemplateLibraryClient() {
     <div className="space-y-4">
       {/* Header */}
       <div className="flex items-center gap-3">
-        <Library className="h-5 w-5 text-violet-500" />
+        <Library className="h-5 w-5 text-brand-500" />
         <h2 className="text-lg font-bold">문제 템플릿 라이브러리</h2>
         <Badge variant="secondary">{totalTemplates}개</Badge>
         <Button size="sm" variant="outline" onClick={() => setPdfDialogOpen(true)}>
@@ -170,7 +170,7 @@ export function TemplateLibraryClient() {
                               key={tmpl.id}
                               className="flex items-center gap-3 rounded-md px-3 py-2 hover:bg-muted/50 transition-colors"
                             >
-                              <ClipboardList className="h-4 w-4 text-violet-500 shrink-0" />
+                              <ClipboardList className="h-4 w-4 text-brand-500 shrink-0" />
                               <div className="flex-1 min-w-0">
                                 <p className="text-sm font-medium truncate">{tmpl.title}</p>
                               </div>

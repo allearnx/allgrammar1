@@ -379,7 +379,7 @@ function ConquestMode({ data, onBack }: { data: ReviewData; onBack: () => void }
                     disabled={answered}
                     className={cn(
                       'w-full py-4 px-5 rounded-xl border-2 text-left text-lg font-medium transition-all',
-                      !answered && 'border-gray-200 text-gray-700 hover:border-indigo-300 hover:bg-indigo-50/50 active:bg-indigo-50',
+                      !answered && 'border-gray-200 text-gray-700 hover:border-brand-300 hover:bg-brand-50/50 active:bg-brand-50',
                       showCorrect && 'border-green-500 bg-green-50 text-green-700',
                       showWrong && 'border-red-500 bg-red-50 text-red-600 wrong-shake',
                       answered && !showCorrect && !showWrong && 'border-gray-100 text-gray-300',

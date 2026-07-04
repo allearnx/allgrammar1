@@ -387,7 +387,7 @@ export function VocaHomeClient({ books, days, progressList, submissionStatuses =
         <div className="mt-6 space-y-4">
           {/* 헤더 카드 */}
           <div className="rounded-2xl overflow-hidden">
-            <div className="px-5 py-6 text-center text-white" style={{ background: 'linear-gradient(135deg, #0891B2, #6366F1)' }}>
+            <div className="px-5 py-6 text-center text-white" style={{ background: 'linear-gradient(135deg, #0891B2, #4285F4)' }}>
               <div className="flex justify-center mb-3">
                 <div className="rounded-full bg-white/20 p-3">
                   <Sparkles className="h-6 w-6" />

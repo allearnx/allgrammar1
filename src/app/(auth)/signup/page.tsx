@@ -99,7 +99,7 @@ function SignUpForm() {
           {/* 로고 + 타이틀 */}
           <div className="text-center mb-8">
             <Link href="/">
-              <Image src="/logo.png" alt="올라영" width={80} height={80} className="mx-auto rounded-2xl shadow-lg shadow-violet-200/50" />
+              <Image src="/logo.png" alt="올라영" width={80} height={80} className="mx-auto rounded-2xl shadow-lg shadow-brand-200/50" />
             </Link>
             <h1 className="mt-5 text-2xl font-black text-[#1d1d1f] tracking-tight">회원가입</h1>
             <p className="mt-2 text-[#86868b]">올라영 AI 러닝 엔진에 가입하세요</p>
@@ -110,19 +110,19 @@ function SignUpForm() {
             <form onSubmit={handleSignUp} className="space-y-5">
               <div>
                 <label htmlFor="fullName" className="block text-sm font-bold text-slate-700 mb-2">이름</label>
-                <Input id="fullName" type="text" placeholder="홍길동" value={fullName} onChange={(e) => setFullName(e.target.value)} required autoComplete="name" className="rounded-2xl py-4 px-5 border-2 border-gray-200 focus:ring-4 focus:ring-violet-100 focus:border-violet-400" />
+                <Input id="fullName" type="text" placeholder="홍길동" value={fullName} onChange={(e) => setFullName(e.target.value)} required autoComplete="name" className="rounded-2xl py-4 px-5 border-2 border-gray-200 focus:ring-4 focus:ring-brand-100 focus:border-brand-400" />
               </div>
               <div>
                 <label htmlFor="phone" className="block text-sm font-bold text-slate-700 mb-2">전화번호</label>
-                <Input id="phone" type="tel" placeholder="010-0000-0000" value={phone} onChange={(e) => setPhone(e.target.value)} autoComplete="tel" className="rounded-2xl py-4 px-5 border-2 border-gray-200 focus:ring-4 focus:ring-violet-100 focus:border-violet-400" />
+                <Input id="phone" type="tel" placeholder="010-0000-0000" value={phone} onChange={(e) => setPhone(e.target.value)} autoComplete="tel" className="rounded-2xl py-4 px-5 border-2 border-gray-200 focus:ring-4 focus:ring-brand-100 focus:border-brand-400" />
               </div>
               <div>
                 <label htmlFor="email" className="block text-sm font-bold text-slate-700 mb-2">이메일</label>
-                <Input id="email" type="email" placeholder="email@example.com" value={email} onChange={(e) => setEmail(e.target.value)} required autoComplete="email" className="rounded-2xl py-4 px-5 border-2 border-gray-200 focus:ring-4 focus:ring-violet-100 focus:border-violet-400" />
+                <Input id="email" type="email" placeholder="email@example.com" value={email} onChange={(e) => setEmail(e.target.value)} required autoComplete="email" className="rounded-2xl py-4 px-5 border-2 border-gray-200 focus:ring-4 focus:ring-brand-100 focus:border-brand-400" />
               </div>
               <div>
                 <label htmlFor="password" className="block text-sm font-bold text-slate-700 mb-2">비밀번호</label>
-                <Input id="password" type="password" placeholder="6자 이상 입력하세요" value={password} onChange={(e) => setPassword(e.target.value)} required minLength={6} autoComplete="new-password" className="rounded-2xl py-4 px-5 border-2 border-gray-200 focus:ring-4 focus:ring-violet-100 focus:border-violet-400" />
+                <Input id="password" type="password" placeholder="6자 이상 입력하세요" value={password} onChange={(e) => setPassword(e.target.value)} required minLength={6} autoComplete="new-password" className="rounded-2xl py-4 px-5 border-2 border-gray-200 focus:ring-4 focus:ring-brand-100 focus:border-brand-400" />
               </div>
               <div>
                 <label htmlFor="role" className="block text-sm font-bold text-slate-700 mb-2">역할</label>
@@ -155,7 +155,7 @@ function SignUpForm() {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full py-4 bg-gradient-to-r from-violet-500 to-purple-500 hover:from-violet-600 hover:to-purple-600 text-white text-lg font-bold rounded-2xl transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-violet-300/30"
+                className="w-full py-4 bg-gradient-to-r from-brand-500 to-brand-500 hover:from-brand-600 hover:to-brand-600 text-white text-lg font-bold rounded-2xl transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-brand-300/30"
               >
                 {loading ? '가입 중...' : '회원가입'}
               </button>
@@ -165,13 +165,13 @@ function SignUpForm() {
               이미 계정이 있으신가요?{' '}
               <Link
                 href={nextParam && isSafeRedirect(nextParam) ? `/login?next=${encodeURIComponent(nextParam)}` : '/login'}
-                className="text-violet-600 font-bold hover:text-violet-700 transition-colors"
+                className="text-brand-600 font-bold hover:text-brand-700 transition-colors"
               >로그인</Link>
             </p>
           </div>
 
           <p className="mt-3 text-center">
-            <Link href="/" className="text-sm text-[#86868b] hover:text-violet-600 transition-colors">&larr; 홈으로 돌아가기</Link>
+            <Link href="/" className="text-sm text-[#86868b] hover:text-brand-600 transition-colors">&larr; 홈으로 돌아가기</Link>
           </p>
         </div>
 

@@ -34,8 +34,8 @@ export function VocabOnboardingModal({
       title: '2단계: 퀴즈',
       desc: '영어 단어를 보고 뜻을 맞추는 사지선다 퀴즈!',
       tip: '80점 이상이면 통과!',
-      color: 'text-indigo-600',
-      bg: 'bg-indigo-50 dark:bg-indigo-950/30',
+      color: 'text-brand-600',
+      bg: 'bg-brand-50 dark:bg-brand-950/30',
     },
     ...(hasSpelling
       ? [

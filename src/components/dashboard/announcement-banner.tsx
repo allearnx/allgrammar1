@@ -48,25 +48,25 @@ export function AnnouncementBanner() {
         {visible.map((a) => (
           <div
             key={a.id}
-            className="flex items-center gap-3 rounded-xl border border-indigo-200 bg-indigo-50 px-4 py-3 shadow-sm"
+            className="flex items-center gap-3 rounded-xl border border-brand-200 bg-brand-50 px-4 py-3 shadow-sm"
           >
-            <div className="flex h-8 w-8 items-center justify-center rounded-full bg-indigo-100 shrink-0">
-              <Bell className="h-4 w-4 text-indigo-600" />
+            <div className="flex h-8 w-8 items-center justify-center rounded-full bg-brand-100 shrink-0">
+              <Bell className="h-4 w-4 text-brand-600" />
             </div>
             <div className="flex-1 min-w-0">
-              <p className="text-sm font-semibold text-indigo-900 truncate">{a.title}</p>
-              <p className="text-xs text-indigo-600 line-clamp-1">{a.content}</p>
+              <p className="text-sm font-semibold text-brand-900 truncate">{a.title}</p>
+              <p className="text-xs text-brand-600 line-clamp-1">{a.content}</p>
             </div>
             <Link
               href="/student/announcements"
-              className="shrink-0 text-xs text-indigo-600 hover:text-indigo-800 font-medium flex items-center gap-0.5"
+              className="shrink-0 text-xs text-brand-600 hover:text-brand-800 font-medium flex items-center gap-0.5"
             >
               보기
               <ChevronRight className="h-3 w-3" />
             </Link>
             <button
               onClick={() => dismiss(a.id)}
-              className="shrink-0 p-1 rounded hover:bg-indigo-100 text-indigo-400 hover:text-indigo-600"
+              className="shrink-0 p-1 rounded hover:bg-brand-100 text-brand-400 hover:text-brand-600"
             >
               <X className="h-3.5 w-3.5" />
             </button>

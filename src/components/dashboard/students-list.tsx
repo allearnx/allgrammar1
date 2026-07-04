@@ -247,7 +247,7 @@ export async function StudentsList({ user, basePath, searchQuery }: Props) {
             percent >= 80
               ? '[&>[data-slot=progress-indicator]]:bg-green-500'
               : percent >= 40
-                ? '[&>[data-slot=progress-indicator]]:bg-indigo-500'
+                ? '[&>[data-slot=progress-indicator]]:bg-brand-500'
                 : '[&>[data-slot=progress-indicator]]:bg-slate-400';
 
           return (
@@ -351,10 +351,10 @@ export async function StudentsList({ user, basePath, searchQuery }: Props) {
         {(!students || students.length === 0) && (
           <div
             className="flex flex-col items-center py-12 px-4 rounded-2xl"
-            style={{ background: 'linear-gradient(120deg, #F5F3FF, #EDE9FE)' }}
+            style={{ background: 'linear-gradient(120deg, #E8F0FE, #D2E3FC)' }}
           >
             <div className="rounded-full bg-white/60 p-4 mb-3">
-              <Users className="h-8 w-8 text-violet-500" />
+              <Users className="h-8 w-8 text-brand-500" />
             </div>
             <p className="text-center text-gray-700 font-semibold mb-1">
               아직 등록된 학생이 없습니다

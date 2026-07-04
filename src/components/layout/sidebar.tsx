@@ -30,9 +30,9 @@ export function Sidebar({ user, services, naesinTree }: SidebarProps) {
   const [open, setOpen] = useState(false);
   const navGroups = getNavGroups(user.role, services, user.is_homepage_manager, user.can_manage_content);
   const sidebarBgMap: Record<string, string> = {
-    boss: 'bg-violet-100',
+    boss: 'bg-brand-100',
     teacher: 'bg-sky-100',
-    admin: 'bg-indigo-100',
+    admin: 'bg-brand-100',
     student: 'bg-slate-200',
   };
   const hasCustomBg = user.role in sidebarBgMap;
@@ -51,7 +51,7 @@ export function Sidebar({ user, services, naesinTree }: SidebarProps) {
   const sidebarContent = (
     <div className="flex h-full flex-col">
       <div className="flex h-14 items-center border-b border-sidebar-border px-4">
-        <span className="flex items-center gap-2 font-bold text-violet-600">
+        <span className="flex items-center gap-2 font-bold text-brand-600">
           <GraduationCap className="h-5 w-5" />
           <span>올라영</span>
         </span>

@@ -21,7 +21,7 @@ export function GuidePageContent({ slug }: Props) {
       {/* ── 뒤로가기 ── */}
       <Link
         href="/admin"
-        className="inline-flex items-center gap-1.5 text-sm text-gray-500 hover:text-violet-600 transition-colors"
+        className="inline-flex items-center gap-1.5 text-sm text-gray-500 hover:text-brand-600 transition-colors"
       >
         <ArrowLeft className="h-4 w-4" />
         대시보드

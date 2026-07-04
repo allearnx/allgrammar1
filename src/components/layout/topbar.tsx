@@ -21,15 +21,15 @@ const roleLabels: Record<string, string> = {
 const roleBorderColors: Record<string, string> = {
   student: 'border-t-cyan-500',
   teacher: 'border-t-sky-500',
-  admin: 'border-t-indigo-500',
-  boss: 'border-t-violet-500',
+  admin: 'border-t-brand-500',
+  boss: 'border-t-brand-500',
 };
 
 const roleBadgeColors: Record<string, string> = {
   student: 'bg-cyan-100 text-cyan-700 dark:bg-cyan-950 dark:text-cyan-300',
   teacher: 'bg-sky-100 text-sky-700 dark:bg-sky-950 dark:text-sky-300',
-  admin: 'bg-indigo-100 text-indigo-700 dark:bg-indigo-950 dark:text-indigo-300',
-  boss: 'bg-violet-100 text-violet-700 dark:bg-violet-950 dark:text-violet-300',
+  admin: 'bg-brand-100 text-brand-700 dark:bg-brand-950 dark:text-brand-300',
+  boss: 'bg-brand-100 text-brand-700 dark:bg-brand-950 dark:text-brand-300',
 };
 
 export function Topbar({ user, title }: TopbarProps) {

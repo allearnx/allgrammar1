@@ -163,13 +163,13 @@ export function VocaDayRankCard({
                       key={i}
                       className={cn(
                         'flex items-center gap-2 px-2 py-1.5 rounded-lg text-sm',
-                        isMe ? 'bg-indigo-500/20 ring-1 ring-indigo-400/30' : ''
+                        isMe ? 'bg-brand-500/20 ring-1 ring-brand-400/30' : ''
                       )}
                     >
                       <span className="w-8 text-center">{RankEmoji({ rank: s.rank })}</span>
                       <span className={cn('flex-1 truncate', isMe ? 'text-white font-semibold' : 'text-slate-300')}>
                         {s.name}
-                        {isMe && <span className="text-indigo-300 ml-1 text-xs">나</span>}
+                        {isMe && <span className="text-brand-300 ml-1 text-xs">나</span>}
                       </span>
                       <span className={cn('font-medium', isMe ? 'text-white' : 'text-slate-400')}>
                         {s.score}점
@@ -183,7 +183,7 @@ export function VocaDayRankCard({
             {/* Confirm Button */}
             <Button
               onClick={onClose}
-              className="w-full bg-indigo-600 hover:bg-indigo-700 text-white"
+              className="w-full bg-brand-600 hover:bg-brand-700 text-white"
               size="lg"
             >
               확인

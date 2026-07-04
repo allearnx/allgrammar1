@@ -59,19 +59,19 @@ export default function ResetPasswordPage() {
         <div className="w-full max-w-md">
           <div className="text-center mb-8">
             <Link href="/">
-              <Image src="/logo.png" alt="올라영" width={80} height={80} className="mx-auto rounded-2xl shadow-lg shadow-violet-200/50" />
+              <Image src="/logo.png" alt="올라영" width={80} height={80} className="mx-auto rounded-2xl shadow-lg shadow-brand-200/50" />
             </Link>
             <h1 className="mt-5 text-2xl font-black text-[#1d1d1f] tracking-tight">비밀번호 재설정</h1>
             <p className="mt-2 text-[#86868b]">링크를 확인하고 있습니다...</p>
           </div>
           <div className="rounded-3xl p-8 bg-white/70 backdrop-blur-xl border border-gray-200/50 shadow-xl shadow-gray-200/50 text-center">
-            <svg className="animate-spin h-8 w-8 text-violet-500 mx-auto mb-4" viewBox="0 0 24 24">
+            <svg className="animate-spin h-8 w-8 text-brand-500 mx-auto mb-4" viewBox="0 0 24 24">
               <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
               <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
             </svg>
             <p className="text-[#86868b]">
               잠시만 기다려주세요. 링크가 유효하지 않으면{' '}
-              <Link href="/forgot-password" className="text-violet-600 font-bold hover:text-violet-700 transition-colors">
+              <Link href="/forgot-password" className="text-brand-600 font-bold hover:text-brand-700 transition-colors">
                 다시 요청
               </Link>
               해주세요.
@@ -87,7 +87,7 @@ export default function ResetPasswordPage() {
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
           <Link href="/">
-            <Image src="/logo.png" alt="올라영" width={80} height={80} className="mx-auto rounded-2xl shadow-lg shadow-violet-200/50" />
+            <Image src="/logo.png" alt="올라영" width={80} height={80} className="mx-auto rounded-2xl shadow-lg shadow-brand-200/50" />
           </Link>
           <h1 className="mt-5 text-2xl font-black text-[#1d1d1f] tracking-tight">비밀번호 재설정</h1>
           <p className="mt-2 text-[#86868b]">새 비밀번호를 설정해주세요</p>
@@ -107,7 +107,7 @@ export default function ResetPasswordPage() {
                 minLength={6}
                 autoComplete="new-password"
                 disabled={loading}
-                className="w-full px-5 py-4 border-2 border-gray-200 rounded-2xl focus:ring-4 focus:ring-violet-100 focus:border-violet-400 transition-all text-slate-800 placeholder:text-slate-400 font-medium bg-white/80 outline-none"
+                className="w-full px-5 py-4 border-2 border-gray-200 rounded-2xl focus:ring-4 focus:ring-brand-100 focus:border-brand-400 transition-all text-slate-800 placeholder:text-slate-400 font-medium bg-white/80 outline-none"
               />
             </div>
             <div>
@@ -122,13 +122,13 @@ export default function ResetPasswordPage() {
                 minLength={6}
                 autoComplete="new-password"
                 disabled={loading}
-                className="w-full px-5 py-4 border-2 border-gray-200 rounded-2xl focus:ring-4 focus:ring-violet-100 focus:border-violet-400 transition-all text-slate-800 placeholder:text-slate-400 font-medium bg-white/80 outline-none"
+                className="w-full px-5 py-4 border-2 border-gray-200 rounded-2xl focus:ring-4 focus:ring-brand-100 focus:border-brand-400 transition-all text-slate-800 placeholder:text-slate-400 font-medium bg-white/80 outline-none"
               />
             </div>
             <button
               type="submit"
               disabled={loading}
-              className="w-full py-4 bg-gradient-to-r from-violet-500 to-purple-500 hover:from-violet-600 hover:to-purple-600 text-white text-lg font-bold rounded-2xl transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-violet-300/30"
+              className="w-full py-4 bg-gradient-to-r from-brand-500 to-brand-500 hover:from-brand-600 hover:to-brand-600 text-white text-lg font-bold rounded-2xl transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-brand-300/30"
             >
               {loading ? '변경 중...' : '비밀번호 변경'}
             </button>

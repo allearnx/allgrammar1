@@ -16,8 +16,8 @@ const Pill = ({ children, active = false }: { children: React.ReactNode; active?
 
 const StudentRow = ({ name, sub, tag }: { name: string; sub?: string; tag?: React.ReactNode }) => (
   <div className="flex items-center gap-2.5 px-3 py-2 border-b border-gray-100 last:border-0">
-    <div className="h-7 w-7 rounded-full bg-violet-100 flex items-center justify-center">
-      <User className="h-3.5 w-3.5 text-violet-600" />
+    <div className="h-7 w-7 rounded-full bg-brand-100 flex items-center justify-center">
+      <User className="h-3.5 w-3.5 text-brand-600" />
     </div>
     <div className="flex-1 min-w-0">
       <p className="text-xs font-medium text-gray-700 truncate">{name}</p>
@@ -34,10 +34,10 @@ export function StudentsStepIllustration({ step }: { step: number }) {
       <Card>
         <div className="p-3 space-y-2">
           <p className="text-[10px] font-semibold text-gray-400">초대코드</p>
-          <div className="flex items-center gap-2 rounded-lg bg-violet-50 px-3 py-2">
-            <span className="text-sm font-mono font-bold text-violet-700 tracking-wider">ABC-1234</span>
-            <button className="ml-auto p-1 rounded hover:bg-violet-100">
-              <Copy className="h-3.5 w-3.5 text-violet-500" />
+          <div className="flex items-center gap-2 rounded-lg bg-brand-50 px-3 py-2">
+            <span className="text-sm font-mono font-bold text-brand-700 tracking-wider">ABC-1234</span>
+            <button className="ml-auto p-1 rounded hover:bg-brand-100">
+              <Copy className="h-3.5 w-3.5 text-brand-500" />
             </button>
           </div>
           <p className="text-[10px] text-gray-400">이 코드를 학생에게 공유하세요</p>
@@ -50,7 +50,7 @@ export function StudentsStepIllustration({ step }: { step: number }) {
       <Card>
         <div className="p-3 space-y-2.5">
           <div className="flex items-center gap-2">
-            <Plus className="h-3.5 w-3.5 text-violet-600" />
+            <Plus className="h-3.5 w-3.5 text-brand-600" />
             <p className="text-xs font-semibold text-gray-700">학생 추가</p>
           </div>
           <div className="space-y-1.5">
@@ -63,7 +63,7 @@ export function StudentsStepIllustration({ step }: { step: number }) {
               <p className="text-xs text-gray-700">student@email.com</p>
             </div>
           </div>
-          <div className="rounded-lg bg-violet-600 text-white text-center py-1.5 text-xs font-medium">등록</div>
+          <div className="rounded-lg bg-brand-600 text-white text-center py-1.5 text-xs font-medium">등록</div>
         </div>
       </Card>
     );
@@ -279,10 +279,10 @@ export function AnalyticsStepIllustration({ step }: { step: number }) {
     return (
       <Card>
         <div className="p-3 space-y-2">
-          <div className="flex items-center gap-2 rounded-lg bg-indigo-50 px-3 py-2">
-            <BarChart3 className="h-3.5 w-3.5 text-indigo-600" />
-            <span className="text-xs font-medium text-indigo-700">학원 통계</span>
-            <span className="ml-auto text-[10px] text-indigo-400">클릭 →</span>
+          <div className="flex items-center gap-2 rounded-lg bg-brand-50 px-3 py-2">
+            <BarChart3 className="h-3.5 w-3.5 text-brand-600" />
+            <span className="text-xs font-medium text-brand-700">학원 통계</span>
+            <span className="ml-auto text-[10px] text-brand-400">클릭 →</span>
           </div>
           <div className="rounded-lg border border-gray-200 px-3 py-1.5 text-xs text-gray-400">학생 관리</div>
           <div className="rounded-lg border border-gray-200 px-3 py-1.5 text-xs text-gray-400">결제 관리</div>
@@ -302,7 +302,7 @@ export function AnalyticsStepIllustration({ step }: { step: number }) {
           {['김학생 — 82%', '이학생 — 91%', '박학생 — 67%'].map((t) => (
             <div key={t} className="flex items-center gap-2 text-[10px]">
               <div className="h-1.5 flex-1 rounded-full bg-gray-100 overflow-hidden">
-                <div className="h-full rounded-full bg-indigo-400" style={{ width: t.split('— ')[1] }} />
+                <div className="h-full rounded-full bg-brand-400" style={{ width: t.split('— ')[1] }} />
               </div>
               <span className="text-gray-500 w-20 text-right">{t}</span>
             </div>
@@ -318,9 +318,9 @@ export function AnalyticsCompletedIllustration() {
     <Card>
       <div className="p-3 space-y-2.5">
         <div className="grid grid-cols-2 gap-2">
-          <div className="rounded-lg bg-indigo-50 p-2 text-center">
-            <p className="text-lg font-bold text-indigo-700">24</p>
-            <p className="text-[10px] text-indigo-500">전체 학생</p>
+          <div className="rounded-lg bg-brand-50 p-2 text-center">
+            <p className="text-lg font-bold text-brand-700">24</p>
+            <p className="text-[10px] text-brand-500">전체 학생</p>
           </div>
           <div className="rounded-lg bg-green-50 p-2 text-center">
             <p className="text-lg font-bold text-green-700">78%</p>
@@ -329,7 +329,7 @@ export function AnalyticsCompletedIllustration() {
         </div>
         <div className="flex items-end gap-1 h-10 px-1">
           {[40, 65, 55, 80, 70, 90, 85].map((h, i) => (
-            <div key={i} className="flex-1 rounded-t bg-indigo-300" style={{ height: `${h}%` }} />
+            <div key={i} className="flex-1 rounded-t bg-brand-300" style={{ height: `${h}%` }} />
           ))}
         </div>
       </div>

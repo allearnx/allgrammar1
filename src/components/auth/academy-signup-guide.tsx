@@ -7,12 +7,12 @@ export function AcademySignupGuide() {
   ];
 
   return (
-    <div className="rounded-2xl overflow-hidden border border-indigo-100 bg-gradient-to-b from-indigo-50/60 to-white text-center">
-      <div className="h-1 bg-gradient-to-r from-indigo-400 via-amber-400 to-indigo-400" />
+    <div className="rounded-2xl overflow-hidden border border-brand-100 bg-gradient-to-b from-brand-50/60 to-white text-center">
+      <div className="h-1 bg-gradient-to-r from-brand-400 via-amber-400 to-brand-400" />
 
       <div className="p-6 space-y-6">
         {/* Header */}
-        <p className="text-base font-semibold tracking-wide text-indigo-900">
+        <p className="text-base font-semibold tracking-wide text-brand-900">
           <span className="text-amber-500">✦</span>{' '}학원 가입 안내
         </p>
 
@@ -20,17 +20,17 @@ export function AcademySignupGuide() {
         <div className="space-y-4">
           {steps.map((s) => (
             <div key={s.num} className="flex flex-col items-center gap-1">
-              <span className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-indigo-100 text-xs font-bold text-indigo-600">
+              <span className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-brand-100 text-xs font-bold text-brand-600">
                 {s.num}
               </span>
-              <p className="text-sm font-medium text-indigo-900">{s.title}</p>
+              <p className="text-sm font-medium text-brand-900">{s.title}</p>
               <p className="text-xs text-slate-500">{s.desc}</p>
             </div>
           ))}
         </div>
 
         {/* Divider */}
-        <div className="mx-auto h-px w-16 bg-indigo-200" />
+        <div className="mx-auto h-px w-16 bg-brand-200" />
 
         {/* Free trial card */}
         <div className="rounded-xl border border-amber-200 bg-amber-50/50 p-4 space-y-2">

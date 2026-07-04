@@ -38,7 +38,7 @@ export function VocaDayClient({ day, vocabulary, progress, currentRound }: VocaD
             <p className="text-sm text-muted-foreground">{vocabulary.length}개 단어</p>
             <span className={`text-xs font-bold px-2 py-0.5 rounded-full ${
               currentRound === '2'
-                ? 'bg-violet-100 text-violet-700'
+                ? 'bg-brand-100 text-brand-700'
                 : 'bg-cyan-100 text-cyan-700'
             }`}>
               {currentRound}회독

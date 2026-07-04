@@ -146,7 +146,7 @@ export function WordMatching({ vocabulary, onComplete }: WordMatchingProps) {
         </p>
         <button
           onClick={goNextChunk}
-          className="rounded-xl bg-indigo-600 px-8 py-3.5 text-base font-bold text-white shadow-lg transition-all hover:bg-indigo-700 active:scale-[0.98]"
+          className="rounded-xl bg-brand-600 px-8 py-3.5 text-base font-bold text-white shadow-lg transition-all hover:bg-brand-700 active:scale-[0.98]"
         >
           다음 세트로 →
         </button>

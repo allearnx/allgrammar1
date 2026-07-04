@@ -46,16 +46,16 @@ export default async function BossDashboard() {
 
         <StaggerContainer className="grid gap-3 grid-cols-2 lg:grid-cols-4">
           <StaggerItem>
-            <StatCard label="학원 수" value={academyCount} sub="등록된 학원" color="#A78BFA" icon={<Building2 className="h-5 w-5" />} />
+            <StatCard label="학원 수" value={academyCount} sub="등록된 학원" color="#4285F4" icon={<Building2 className="h-5 w-5" />} />
           </StaggerItem>
           <StaggerItem>
-            <StatCard label="전체 사용자" value={totalUserCount} sub="모든 역할 포함" color="#8B5CF6" icon={<Users className="h-5 w-5" />} />
+            <StatCard label="전체 사용자" value={totalUserCount} sub="모든 역할 포함" color="#4285F4" icon={<Users className="h-5 w-5" />} />
           </StaggerItem>
           <StaggerItem>
-            <StatCard label="학생 수" value={studentCount} sub="등록된 학생" color="#C4B5FD" icon={<Users className="h-5 w-5" />} />
+            <StatCard label="학생 수" value={studentCount} sub="등록된 학생" color="#8AB4F8" icon={<Users className="h-5 w-5" />} />
           </StaggerItem>
           <StaggerItem>
-            <StatCard label="선생님 수" value={teacherCount} sub="등록된 선생님" color="#DDD6FE" icon={<GraduationCap className="h-5 w-5" />} />
+            <StatCard label="선생님 수" value={teacherCount} sub="등록된 선생님" color="#AECBFA" icon={<GraduationCap className="h-5 w-5" />} />
           </StaggerItem>
         </StaggerContainer>
 

@@ -26,9 +26,9 @@ const TYPE_ICONS: Record<string, React.ReactNode> = {
 
 
 const BORDER_COLORS: Record<string, string> = {
-  voca_quiz: '#7C3AED',
-  voca_spelling: '#7C3AED',
-  voca_matching: '#7C3AED',
+  voca_quiz: '#1A73E8',
+  voca_spelling: '#1A73E8',
+  voca_matching: '#1A73E8',
   naesin_vocab: '#06B6D4',
   naesin_passage: '#06B6D4',
   naesin_problem: '#06B6D4',
@@ -161,10 +161,10 @@ export function ActivityCalendar({ activities, dailySeconds }: Props) {
               onClick={() => setSelectedDate(isSelected ? null : dateStr)}
               className={`h-14 flex flex-col items-center justify-start pt-1 rounded-md text-xs transition-all ${
                 isSelected
-                  ? 'bg-violet-100 ring-2 ring-violet-400'
+                  ? 'bg-brand-100 ring-2 ring-brand-400'
                   : isToday
-                    ? 'bg-violet-50 ring-1 ring-violet-300'
-                    : 'hover:bg-violet-50'
+                    ? 'bg-brand-50 ring-1 ring-brand-300'
+                    : 'hover:bg-brand-50'
               }`}
               style={!isSelected && !isToday && heatmapBg ? { backgroundColor: heatmapBg } : undefined}
             >
@@ -200,7 +200,7 @@ export function ActivityCalendar({ activities, dailySeconds }: Props) {
             <p className="text-xs text-gray-400 py-2">이 날은 학습 기록이 없어요</p>
           ) : (
             selectedActivities.map((a, i) => {
-              const borderColor = BORDER_COLORS[a.type] || '#7C3AED';
+              const borderColor = BORDER_COLORS[a.type] || '#1A73E8';
               return (
                 <div key={i} className="flex items-center justify-between rounded-lg border px-3 py-2" style={{ borderLeft: `3px solid ${borderColor}` }}>
                   <div className="flex items-center gap-2">

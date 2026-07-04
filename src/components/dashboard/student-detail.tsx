@@ -193,14 +193,14 @@ export async function StudentDetail({ user, studentId, naesinData }: Props) {
                 <div className="rounded-lg border p-4">
                   <div className="flex items-center justify-between mb-1">
                     <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">암기 마스터</p>
-                    <BookOpen className="h-4 w-4 text-indigo-600 dark:text-indigo-400" />
+                    <BookOpen className="h-4 w-4 text-brand-600 dark:text-brand-400" />
                   </div>
                   <div className="text-2xl font-bold tracking-tight">{masteredMemory}/{memoryProgress.length}</div>
                 </div>
                 <div className="rounded-lg border p-4">
                   <div className="flex items-center justify-between mb-1">
                     <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">교과서 진행</p>
-                    <FileText className="h-4 w-4 text-purple-600 dark:text-purple-400" />
+                    <FileText className="h-4 w-4 text-brand-600 dark:text-brand-400" />
                   </div>
                   <div className="text-2xl font-bold tracking-tight">{textbookProgress.length}</div>
                 </div>

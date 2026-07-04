@@ -115,7 +115,7 @@ export function BulkImportDialog() {
     <Dialog open={open} onOpenChange={handleClose}>
       <button
         onClick={() => setOpen(true)}
-        className="inline-flex items-center rounded-lg border bg-white px-3 py-1.5 text-sm font-medium text-gray-700 transition-all hover:shadow-sm hover:border-violet-300"
+        className="inline-flex items-center rounded-lg border bg-white px-3 py-1.5 text-sm font-medium text-gray-700 transition-all hover:shadow-sm hover:border-brand-300"
       >
         <Upload className="h-4 w-4 mr-1.5 text-gray-400" />
         CSV 일괄 등록
@@ -124,11 +124,11 @@ export function BulkImportDialog() {
         {/* 헤더 */}
         <div
           className="px-6 pt-5 pb-4"
-          style={{ background: 'linear-gradient(120deg, #F5F3FF, #EDE9FE)' }}
+          style={{ background: 'linear-gradient(120deg, #E8F0FE, #D2E3FC)' }}
         >
           <DialogHeader>
             <DialogTitle className="flex items-center gap-2">
-              <FileSpreadsheet className="h-5 w-5 text-violet-500" />
+              <FileSpreadsheet className="h-5 w-5 text-brand-500" />
               학생 일괄 등록
             </DialogTitle>
             <DialogDescription className="text-gray-500 text-sm">
@@ -146,12 +146,12 @@ export function BulkImportDialog() {
             </p>
             <button
               onClick={() => fileRef.current?.click()}
-              className="w-full rounded-xl border-2 border-dashed border-gray-200 p-6 text-center transition-all hover:border-violet-300 hover:bg-violet-50/30"
+              className="w-full rounded-xl border-2 border-dashed border-gray-200 p-6 text-center transition-all hover:border-brand-300 hover:bg-brand-50/30"
             >
               <Upload className="h-8 w-8 mx-auto text-gray-300 mb-2" />
               <span className="text-sm text-gray-500">파일을 선택하세요</span>
               {students.length > 0 && (
-                <span className="block mt-1 text-sm font-semibold" style={{ color: '#7C3AED' }}>
+                <span className="block mt-1 text-sm font-semibold" style={{ color: '#1A73E8' }}>
                   {students.length}명 감지됨
                 </span>
               )}
@@ -214,7 +214,7 @@ export function BulkImportDialog() {
                 onClick={handleImport}
                 disabled={importing}
                 className="w-full rounded-[10px] py-2.5 text-sm font-bold text-white transition-all disabled:opacity-50"
-                style={{ background: '#7C3AED', boxShadow: '0 4px 12px rgba(124,58,237,0.25)' }}
+                style={{ background: '#1A73E8', boxShadow: '0 4px 12px rgba(124,58,237,0.25)' }}
               >
                 {importing ? '등록 중...' : `${students.length}명 등록하기`}
               </button>

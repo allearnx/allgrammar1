@@ -23,7 +23,7 @@ const STAGE_ITEMS = [
 function StageIcon({ status }: { status: NaesinStageStatus }) {
   if (status === 'completed') return <CheckCircle className="h-3 w-3 text-green-500 shrink-0" />;
   if (status === 'locked') return <Lock className="h-3 w-3 text-muted-foreground shrink-0" />;
-  return <div className="h-3 w-3 rounded-full border-2 border-indigo-500 shrink-0" />;
+  return <div className="h-3 w-3 rounded-full border-2 border-brand-500 shrink-0" />;
 }
 
 function getDDayLabel(examDate: string | null): string | null {
@@ -129,7 +129,7 @@ export function NaesinTree({ exams, pathname, onNavigate }: { exams: NaesinSideb
                         {unitCompleted ? (
                           <CheckCircle className="h-3 w-3 text-green-500 shrink-0" />
                         ) : (
-                          <div className="h-3 w-3 rounded-full border-2 border-indigo-500 shrink-0" />
+                          <div className="h-3 w-3 rounded-full border-2 border-brand-500 shrink-0" />
                         )}
                       </button>
 
@@ -152,7 +152,7 @@ export function NaesinTree({ exams, pathname, onNavigate }: { exams: NaesinSideb
                                   isLocked
                                     ? 'opacity-40'
                                     : isActive
-                                      ? 'bg-indigo-50 text-indigo-600 font-medium'
+                                      ? 'bg-brand-50 text-brand-600 font-medium'
                                       : 'hover:bg-slate-100 text-slate-500'
                                 )}
                               >

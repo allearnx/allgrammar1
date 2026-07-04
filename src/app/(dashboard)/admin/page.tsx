@@ -49,7 +49,7 @@ export default async function AdminDashboard() {
         <AcademySetupChecklist />
 
         <div className="grid gap-3 grid-cols-2 lg:grid-cols-4">
-          <StatCard label="학생 수" value={studentCount} sub="등록된 학생" color="#7C3AED" icon={<Users className="h-5 w-5" />} />
+          <StatCard label="학생 수" value={studentCount} sub="등록된 학생" color="#1A73E8" icon={<Users className="h-5 w-5" />} />
           <StatCard label="선생님 수" value={teacherRes.count || 0} sub="등록된 선생님" color="#06B6D4" icon={<GraduationCap className="h-5 w-5" />} />
           <StatCard label="문법 주제" value={grammarRes.count || 0} sub="전체 콘텐츠" color="#56C9A0" icon={<BookOpen className="h-5 w-5" />} />
           <StatCard label="암기 항목" value={memoryRes.count || 0} sub="전체 콘텐츠" color="#F59E0B" icon={<FileText className="h-5 w-5" />} />

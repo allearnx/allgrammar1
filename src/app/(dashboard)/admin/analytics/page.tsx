@@ -18,7 +18,7 @@ export default async function AdminAnalyticsPage() {
         {/* ── 헤더 ── */}
         <div
           className="relative overflow-hidden rounded-2xl p-6 text-white"
-          style={{ background: '#A78BFA' }}
+          style={{ background: '#4285F4' }}
         >
           <div className="flex items-center gap-3">
             <div className="inline-flex rounded-xl p-2.5" style={{ background: 'rgba(255,255,255,0.15)' }}>

@@ -13,7 +13,7 @@ export function NoServicesScreen({ userName }: NoServicesScreenProps) {
       <div className="pointer-events-none select-none blur-[6px] opacity-50 saturate-[1.2]">
         <div className="p-4 md:p-6 space-y-5">
           {/* Banner - matching project's premium header pattern */}
-          <div className="relative overflow-hidden rounded-2xl p-6 md:p-8 text-white" style={{ background: 'linear-gradient(135deg, #A78BFA 0%, #7C3AED 50%, #6D28D9 100%)' }}>
+          <div className="relative overflow-hidden rounded-2xl p-6 md:p-8 text-white" style={{ background: 'linear-gradient(135deg, #4285F4 0%, #1A73E8 50%, #174EA6 100%)' }}>
             <h2 className="text-xl font-bold">안녕하세요, {userName}님!</h2>
             <p className="mt-1 text-sm" style={{ color: 'rgba(255,255,255,0.8)' }}>오늘도 열심히 공부해봐요</p>
             <div className="mt-3 inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold" style={{ background: 'rgba(255,255,255,0.15)', backdropFilter: 'blur(8px)' }}>
@@ -24,7 +24,7 @@ export function NoServicesScreen({ userName }: NoServicesScreenProps) {
           {/* Stat cards - matching project's border-l-4 pattern */}
           <div className="grid gap-3 grid-cols-2 lg:grid-cols-3">
             {[
-              { label: '평균 점수', value: '85점', color: '#7C3AED', bg: '#F5F3FF' },
+              { label: '평균 점수', value: '85점', color: '#1A73E8', bg: '#E8F0FE' },
               { label: '학습 진도', value: '12/20 Day', color: '#06B6D4', bg: '#ECFEFF' },
               { label: '연속 학습', value: '5일', color: '#F59E0B', bg: '#FFFBEB' },
               { label: '완료 단어', value: '240개', color: '#22C55E', bg: '#F0FDF4' },
@@ -40,7 +40,7 @@ export function NoServicesScreen({ userName }: NoServicesScreenProps) {
 
           {/* Tab bar */}
           <div className="flex gap-2">
-            <div className="rounded-full px-4 py-1.5 text-sm font-semibold text-violet-700" style={{ background: '#EDE9FE' }}>올킬보카</div>
+            <div className="rounded-full px-4 py-1.5 text-sm font-semibold text-brand-700" style={{ background: '#D2E3FC' }}>올킬보카</div>
             <div className="rounded-full bg-gray-100 px-4 py-1.5 text-sm font-medium text-gray-400">내신대비</div>
           </div>
 
@@ -49,7 +49,7 @@ export function NoServicesScreen({ userName }: NoServicesScreenProps) {
             <p className="text-sm font-semibold text-gray-700 mb-4">점수 추이</p>
             <div className="flex items-end gap-1.5 h-24">
               {[45, 60, 55, 70, 65, 80, 75, 85, 90, 88, 92, 95].map((h, i) => (
-                <div key={i} className="flex-1 rounded-t" style={{ height: `${h}%`, background: `linear-gradient(to top, #A78BFA, #C4B5FD)`, opacity: 0.7 + (i * 0.025) }} />
+                <div key={i} className="flex-1 rounded-t" style={{ height: `${h}%`, background: `linear-gradient(to top, #4285F4, #8AB4F8)`, opacity: 0.7 + (i * 0.025) }} />
               ))}
             </div>
           </div>
@@ -91,8 +91,8 @@ export function NoServicesScreen({ userName }: NoServicesScreenProps) {
                 {[
                   { day: 1, pct: 100, color: '#56C9A0' },
                   { day: 2, pct: 85, color: '#56C9A0' },
-                  { day: 3, pct: 60, color: '#7C3AED' },
-                  { day: 4, pct: 30, color: '#C4B5FD' },
+                  { day: 3, pct: 60, color: '#1A73E8' },
+                  { day: 4, pct: 30, color: '#8AB4F8' },
                   { day: 5, pct: 0, color: '#E5E7EB' },
                 ].map(({ day, pct, color }) => (
                   <div key={day} className="flex items-center gap-3">
@@ -119,17 +119,17 @@ export function NoServicesScreen({ userName }: NoServicesScreenProps) {
           style={{ animation: 'waitingFadeUp 0.6s ease-out both, waitingGlow 4s ease-in-out infinite 0.6s' }}
         >
           {/* Gradient border wrapper */}
-          <div className="rounded-[20px] p-[1.5px]" style={{ background: 'linear-gradient(135deg, #A78BFA 0%, #7C3AED 30%, #06B6D4 70%, #4DD9C0 100%)' }}>
+          <div className="rounded-[20px] p-[1.5px]" style={{ background: 'linear-gradient(135deg, #4285F4 0%, #1A73E8 30%, #06B6D4 70%, #4DD9C0 100%)' }}>
             <div className="rounded-[19px] bg-white/95 backdrop-blur-xl p-8">
 
               {/* Animated lock icon with pulse ring */}
               <div className="relative mx-auto mb-5 h-16 w-16">
-                <div className="absolute inset-0 rounded-full" style={{ background: 'linear-gradient(135deg, #EDE9FE, #F5F3FF)', animation: 'waitingPulseRing 3s ease-in-out infinite' }} />
+                <div className="absolute inset-0 rounded-full" style={{ background: 'linear-gradient(135deg, #D2E3FC, #E8F0FE)', animation: 'waitingPulseRing 3s ease-in-out infinite' }} />
                 <div
                   className="relative flex h-16 w-16 items-center justify-center rounded-full"
-                  style={{ background: 'linear-gradient(135deg, #F5F3FF 0%, #EDE9FE 100%)', animation: 'waitingFloat 3s ease-in-out infinite' }}
+                  style={{ background: 'linear-gradient(135deg, #E8F0FE 0%, #D2E3FC 100%)', animation: 'waitingFloat 3s ease-in-out infinite' }}
                 >
-                  <Lock className="h-7 w-7 text-violet-500" />
+                  <Lock className="h-7 w-7 text-brand-500" />
                 </div>
               </div>
 
@@ -143,11 +143,11 @@ export function NoServicesScreen({ userName }: NoServicesScreenProps) {
               {/* Service cards with shimmer */}
               <div className="mt-7 grid grid-cols-2 gap-3">
                 {/* 올킬보카 */}
-                <div className="group relative overflow-hidden rounded-xl p-4" style={{ border: '1.5px solid #E5E7EB', background: 'linear-gradient(135deg, #FAFAFA 0%, #F5F3FF 100%)' }}>
+                <div className="group relative overflow-hidden rounded-xl p-4" style={{ border: '1.5px solid #E5E7EB', background: 'linear-gradient(135deg, #FAFAFA 0%, #E8F0FE 100%)' }}>
                   <div className="absolute inset-0 opacity-30" style={{ background: 'linear-gradient(90deg, transparent 30%, rgba(167,139,250,0.15) 50%, transparent 70%)', backgroundSize: '200% 100%', animation: 'waitingShimmer 3s ease-in-out infinite' }} />
                   <div className="relative">
-                    <div className="mx-auto mb-2.5 flex h-11 w-11 items-center justify-center rounded-full" style={{ background: 'linear-gradient(135deg, #EDE9FE 0%, #DDD6FE 100%)' }}>
-                      <BookA className="h-5 w-5 text-violet-500" />
+                    <div className="mx-auto mb-2.5 flex h-11 w-11 items-center justify-center rounded-full" style={{ background: 'linear-gradient(135deg, #D2E3FC 0%, #AECBFA 100%)' }}>
+                      <BookA className="h-5 w-5 text-brand-500" />
                     </div>
                     <p className="text-sm font-semibold text-gray-700">올킬보카</p>
                     <div className="mt-1.5 mx-auto flex h-5 w-5 items-center justify-center rounded-full bg-gray-100">

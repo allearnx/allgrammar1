@@ -134,7 +134,7 @@ export function BookFormDialog({ mode, book, open: controlledOpen, onOpenChange,
                 type="button"
                 onClick={() => setDefinitionLang('ko')}
                 className={`flex-1 rounded-lg border-2 px-3 py-2 text-sm font-semibold transition-colors ${
-                  definitionLang === 'ko' ? 'border-indigo-500 bg-indigo-50 text-indigo-700' : 'border-gray-200 text-gray-500 hover:bg-gray-50'
+                  definitionLang === 'ko' ? 'border-brand-500 bg-brand-50 text-brand-700' : 'border-gray-200 text-gray-500 hover:bg-gray-50'
                 }`}
               >
                 영한 (한글 뜻)
@@ -143,14 +143,14 @@ export function BookFormDialog({ mode, book, open: controlledOpen, onOpenChange,
                 type="button"
                 onClick={() => setDefinitionLang('en')}
                 className={`flex-1 rounded-lg border-2 px-3 py-2 text-sm font-semibold transition-colors ${
-                  definitionLang === 'en' ? 'border-indigo-500 bg-indigo-50 text-indigo-700' : 'border-gray-200 text-gray-500 hover:bg-gray-50'
+                  definitionLang === 'en' ? 'border-brand-500 bg-brand-50 text-brand-700' : 'border-gray-200 text-gray-500 hover:bg-gray-50'
                 }`}
               >
                 영영 (영어 정의)
               </button>
             </div>
             {definitionLang === 'en' && (
-              <p className="mt-1.5 text-xs text-indigo-500">
+              <p className="mt-1.5 text-xs text-brand-500">
                 국제학교·유학생용 — 뜻이 쉬운 영어 정의로 생성되고, 예문 한글 해석은 만들지 않아요.
               </p>
             )}

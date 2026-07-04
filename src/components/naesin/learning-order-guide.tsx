@@ -50,8 +50,8 @@ function StepItem({
 }) {
   const colors = {
     purple: {
-      numBg: 'bg-violet-100 text-violet-700 dark:bg-violet-900 dark:text-violet-300',
-      icon: 'text-violet-500',
+      numBg: 'bg-brand-100 text-brand-700 dark:bg-brand-900 dark:text-brand-300',
+      icon: 'text-brand-500',
     },
     orange: {
       numBg: 'bg-orange-100 text-orange-700 dark:bg-orange-900 dark:text-orange-300',
@@ -94,7 +94,7 @@ function PhaseSection({
       <h4
         className={cn(
           'text-sm font-bold mb-0.5',
-          color === 'purple' ? 'text-violet-700 dark:text-violet-300' : 'text-orange-700 dark:text-orange-300',
+          color === 'purple' ? 'text-brand-700 dark:text-brand-300' : 'text-orange-700 dark:text-orange-300',
         )}
       >
         {title}
@@ -117,7 +117,7 @@ function GuideContent() {
         subtitle="단원별로 순서대로 진행 (1과 → 2과 → 3과...)"
         steps={PHASE1_STEPS}
         color="purple"
-        bgClass="bg-violet-50 dark:bg-violet-950/30"
+        bgClass="bg-brand-50 dark:bg-brand-950/30"
       />
       <PhaseSection
         title="Phase 2 — 2회독 + 시험대비"

@@ -50,11 +50,11 @@ export function VocaProgressCard({ vocaProgress, submissionStatuses = {} }: Prop
   });
 
   return (
-    <Card className="border-l-4 border-l-violet-500">
+    <Card className="border-l-4 border-l-brand-500">
       <CardHeader className="pb-4">
         <div className="flex items-center gap-2">
-          <div className="rounded-full bg-violet-100 p-2 dark:bg-violet-950">
-            <BookOpen className="h-5 w-5 text-violet-600 dark:text-violet-400" />
+          <div className="rounded-full bg-brand-100 p-2 dark:bg-brand-950">
+            <BookOpen className="h-5 w-5 text-brand-600 dark:text-brand-400" />
           </div>
           <CardTitle className="text-lg">올킬보카</CardTitle>
         </div>
@@ -62,11 +62,11 @@ export function VocaProgressCard({ vocaProgress, submissionStatuses = {} }: Prop
       <CardContent className="space-y-6">
         {/* 오늘 학습 */}
         {todayDays.length > 0 && (
-          <div className="rounded-xl border-2 border-violet-200 bg-violet-50/50 p-4 dark:border-violet-800 dark:bg-violet-950/30">
+          <div className="rounded-xl border-2 border-brand-200 bg-brand-50/50 p-4 dark:border-brand-800 dark:bg-brand-950/30">
             <div className="flex items-center gap-2 mb-3">
-              <CalendarCheck className="h-5 w-5 text-violet-600 dark:text-violet-400" />
-              <h4 className="text-sm font-bold text-violet-700 dark:text-violet-300">오늘 학습</h4>
-              <span className="ml-auto text-xs text-violet-500">{format(todayKST, 'M월 d일')}</span>
+              <CalendarCheck className="h-5 w-5 text-brand-600 dark:text-brand-400" />
+              <h4 className="text-sm font-bold text-brand-700 dark:text-brand-300">오늘 학습</h4>
+              <span className="ml-auto text-xs text-brand-500">{format(todayKST, 'M월 d일')}</span>
             </div>
             <div className="space-y-2">
               {todayDays.map((vp) => (
@@ -81,7 +81,7 @@ export function VocaProgressCard({ vocaProgress, submissionStatuses = {} }: Prop
           <div className="rounded-lg border p-4">
             <div className="flex items-center justify-between mb-1">
               <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">완료 Day</p>
-              <CheckCircle className="h-4 w-4 text-violet-600 dark:text-violet-400" />
+              <CheckCircle className="h-4 w-4 text-brand-600 dark:text-brand-400" />
             </div>
             <div className="text-2xl font-bold tracking-tight">{vocaCompletedDays}/{vocaTotalDays}</div>
             <p className="text-xs text-muted-foreground">모든 단계 완료된 Day</p>

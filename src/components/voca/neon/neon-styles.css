@@ -1,6 +1,6 @@
 /* 보카 디자인 시스템 — 화이트 테마 */
 :root {
-  --voca-primary: #4f46e5;   /* 메인 단어 (indigo) */
+  --voca-primary: #1a73e8;   /* 메인 단어 (indigo) */
   --voca-accent: #2563eb;    /* 하이라이트 (blue) */
   --voca-green: #16a34a;     /* 정답 */
   --voca-red: #dc2626;       /* 오답 */
@@ -109,7 +109,7 @@
 }
 
 .neon-key:active {
-  background: #ede9fe;
+  background: #d2e3fc;
   border-color: var(--voca-primary);
   transform: scale(0.95);
 }

@@ -12,11 +12,11 @@ export interface QuickAction {
 }
 
 const COLOR_STYLES: Record<string, { bg: string; text: string; hoverBg: string; hoverBorder: string }> = {
-  indigo: { bg: 'bg-indigo-50', text: 'text-indigo-600', hoverBg: 'group-hover:bg-indigo-100', hoverBorder: 'hover:border-indigo-300' },
+  indigo: { bg: 'bg-brand-50', text: 'text-brand-600', hoverBg: 'group-hover:bg-brand-100', hoverBorder: 'hover:border-brand-300' },
   blue: { bg: 'bg-blue-50', text: 'text-blue-600', hoverBg: 'group-hover:bg-blue-100', hoverBorder: 'hover:border-blue-300' },
-  purple: { bg: 'bg-purple-50', text: 'text-purple-600', hoverBg: 'group-hover:bg-purple-100', hoverBorder: 'hover:border-purple-300' },
+  purple: { bg: 'bg-brand-50', text: 'text-brand-600', hoverBg: 'group-hover:bg-brand-100', hoverBorder: 'hover:border-brand-300' },
   emerald: { bg: 'bg-emerald-50', text: 'text-emerald-600', hoverBg: 'group-hover:bg-emerald-100', hoverBorder: 'hover:border-emerald-300' },
-  violet: { bg: 'bg-violet-50', text: 'text-violet-600', hoverBg: 'group-hover:bg-violet-100', hoverBorder: 'hover:border-violet-300' },
+  violet: { bg: 'bg-brand-50', text: 'text-brand-600', hoverBg: 'group-hover:bg-brand-100', hoverBorder: 'hover:border-brand-300' },
 };
 
 export function QuickActionGrid({ actions }: { actions: readonly QuickAction[] }) {

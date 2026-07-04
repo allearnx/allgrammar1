@@ -53,9 +53,9 @@ export function ExamOverviewClient({ basePath }: Props) {
     return (
       <div className="p-4 md:p-6">
         <div className="flex flex-col items-center py-12 px-4 rounded-2xl"
-          style={{ background: 'linear-gradient(120deg, #F5F3FF, #EDE9FE)' }}>
+          style={{ background: 'linear-gradient(120deg, #E8F0FE, #D2E3FC)' }}>
           <div className="rounded-full bg-white/60 p-4 mb-3">
-            <CalendarDays className="h-8 w-8 text-violet-500" />
+            <CalendarDays className="h-8 w-8 text-brand-500" />
           </div>
           <p className="text-center text-gray-700 font-semibold mb-1">
             예정된 시험이 없습니다

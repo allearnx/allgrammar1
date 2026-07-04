@@ -4,7 +4,7 @@ import { UPDATES, TAG_LABEL } from '@/lib/updates';
 import { Sparkles } from 'lucide-react';
 
 const TAG_STYLE: Record<string, string> = {
-  new: 'bg-indigo-600 text-white',
+  new: 'bg-brand-600 text-white',
   improve: 'bg-emerald-100 text-emerald-700',
   guide: 'bg-amber-100 text-amber-700',
 };
@@ -17,7 +17,7 @@ export default async function UpdatesPage() {
       <Topbar user={user} title="업데이트·사용법" />
       <div className="mx-auto max-w-3xl p-4 md:p-6">
         <div className="mb-5 flex items-center gap-2">
-          <Sparkles className="h-5 w-5 text-indigo-500" />
+          <Sparkles className="h-5 w-5 text-brand-500" />
           <h1 className="text-lg font-bold text-gray-800">새로운 기능과 사용법</h1>
         </div>
 

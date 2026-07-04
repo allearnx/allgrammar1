@@ -30,7 +30,7 @@ export function NeonResultScreen({
         animate={{ scale: 1, opacity: 1 }}
         className="text-center space-y-4"
       >
-        <p className={cn('text-6xl font-bold', passed ? 'text-green-600' : 'text-indigo-600')}>
+        <p className={cn('text-6xl font-bold', passed ? 'text-green-600' : 'text-brand-600')}>
           {score}%
         </p>
         {subtitle && (
@@ -46,7 +46,7 @@ export function NeonResultScreen({
               'mt-4 px-6 py-2.5 rounded-xl border-2 font-medium transition-colors',
               passed
                 ? 'border-gray-200 text-gray-500 hover:bg-gray-50'
-                : 'border-indigo-300 text-indigo-600 hover:bg-indigo-50',
+                : 'border-brand-300 text-brand-600 hover:bg-brand-50',
             )}
           >
             {passed ? '다시 풀기' : '새 문제로 다시 풀기'}

@@ -49,7 +49,7 @@ export function VocaTabContent() {
           </div>
 
           {vocaCtaStage && vocaCtaRound === '1' && (
-            <div className="flex items-center justify-between rounded-xl px-5 py-3" style={{ background: 'linear-gradient(to right, #F5F3FF, #EDE9FE)' }}>
+            <div className="flex items-center justify-between rounded-xl px-5 py-3" style={{ background: 'linear-gradient(to right, #E8F0FE, #D2E3FC)' }}>
               <span className="text-sm font-medium text-gray-700">{currentDay.title}: <strong>{vocaCtaStage.label}</strong></span>
               <Link href={`/student/voca/${currentDay.id}`} className="inline-flex items-center gap-1.5 rounded-lg px-4 py-2 text-sm font-semibold text-white transition-colors hover:opacity-90" style={{ background: COLORS.ctaButton }}>
                 {vocaCtaStage.label} 시작하기 <ArrowRight className="h-4 w-4" />
@@ -77,7 +77,7 @@ export function VocaTabContent() {
           </div>
 
           {vocaCtaStage && vocaCtaRound === '2' && (
-            <div className="flex items-center justify-between rounded-xl px-5 py-3" style={{ background: 'linear-gradient(to right, #F5F3FF, #EDE9FE)' }}>
+            <div className="flex items-center justify-between rounded-xl px-5 py-3" style={{ background: 'linear-gradient(to right, #E8F0FE, #D2E3FC)' }}>
               <span className="text-sm font-medium text-gray-700">{currentDay.title}: <strong>{vocaCtaStage.label}</strong></span>
               <Link href={`/student/voca/${currentDay.id}`} className="inline-flex items-center gap-1.5 rounded-lg px-4 py-2 text-sm font-semibold text-white transition-colors hover:opacity-90" style={{ background: COLORS.ctaButton }}>
                 {vocaCtaStage.label} 시작하기 <ArrowRight className="h-4 w-4" />

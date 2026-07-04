@@ -36,8 +36,8 @@ const SERVICE_OPTIONS: {
     value: 'voca',
     label: '올킬보카',
     desc: '최근 5개년 고1·고2·고3 기출 단어',
-    icon: <BookA className="h-6 w-6 text-violet-500" />,
-    activeColor: 'border-violet-500 bg-violet-50',
+    icon: <BookA className="h-6 w-6 text-brand-500" />,
+    activeColor: 'border-brand-500 bg-brand-50',
   },
   {
     value: 'naesin',
@@ -63,15 +63,15 @@ interface IndependentStudentScreenProps {
 }
 
 const CATEGORY_ICON: Record<string, React.ReactNode> = {
-  voca: <BookA className="h-5 w-5 text-violet-500" />,
+  voca: <BookA className="h-5 w-5 text-brand-500" />,
   school_exam: <BookMarked className="h-5 w-5 text-emerald-500" />,
 };
 
 const CATEGORY_STYLE: Record<string, { border: string; bg: string; badge: string }> = {
   voca: {
-    border: 'border-violet-200 hover:border-violet-400',
-    bg: 'bg-violet-50',
-    badge: 'bg-violet-100 text-violet-700',
+    border: 'border-brand-200 hover:border-brand-400',
+    bg: 'bg-brand-50',
+    badge: 'bg-brand-100 text-brand-700',
   },
   school_exam: {
     border: 'border-emerald-200 hover:border-emerald-400',

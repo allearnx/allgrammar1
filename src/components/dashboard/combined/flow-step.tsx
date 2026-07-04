@@ -29,7 +29,7 @@ export function FlowStep({ stage, dayId, linkPrefix }: { stage: Stage; dayId: st
       className="relative text-center transition-all flex flex-col items-center h-full"
       style={{
         background: isDone ? '#D9F7FC' : isActive ? 'white' : '#D9F7FC',
-        border: isDone ? '1.5px solid #4DD9C0' : isActive ? '2px solid #7C3AED' : '1.5px solid #CCFAF4',
+        border: isDone ? '1.5px solid #4DD9C0' : isActive ? '2px solid #1A73E8' : '1.5px solid #CCFAF4',
         borderRadius: isActive ? 16 : 14,
         padding: isActive ? '28px 10px 24px' : '24px 8px 20px',
         boxShadow: isActive ? '0 8px 24px rgba(124,58,237,0.08)' : 'none',
@@ -39,14 +39,14 @@ export function FlowStep({ stage, dayId, linkPrefix }: { stage: Stage; dayId: st
     >
       {/* Active label */}
       {isActive && (
-        <div className="absolute -top-3 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full px-2.5 py-0.5 text-xs font-bold tracking-wide text-white" style={{ background: '#7C3AED' }}>
+        <div className="absolute -top-3 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full px-2.5 py-0.5 text-xs font-bold tracking-wide text-white" style={{ background: '#1A73E8' }}>
           지금 여기!
         </div>
       )}
 
       {/* Status icon — top right circle */}
       <div className="absolute -top-2 -right-2 flex h-[24px] w-[24px] items-center justify-center rounded-full border-2 border-white text-xs font-bold" style={{
-        background: isDone ? green : isActive ? '#7C3AED' : '#E5E7EB',
+        background: isDone ? green : isActive ? '#1A73E8' : '#E5E7EB',
         color: isDone || isActive ? 'white' : '#9CA3AF',
       }}>
         {isDone ? '✓' : isActive ? '▶' : <Lock className="h-3 w-3" />}
@@ -57,7 +57,7 @@ export function FlowStep({ stage, dayId, linkPrefix }: { stage: Stage; dayId: st
         width: isActive ? 58 : 48,
         height: isActive ? 58 : 48,
         background: isDone ? 'rgba(124,58,237,0.08)' : 'white',
-        color: isDone ? green : isActive ? '#7C3AED' : '#9CA3AF',
+        color: isDone ? green : isActive ? '#1A73E8' : '#9CA3AF',
       }}>
         {stage.icon}
       </div>
@@ -65,7 +65,7 @@ export function FlowStep({ stage, dayId, linkPrefix }: { stage: Stage; dayId: st
       {/* Name */}
       <div className="font-bold leading-tight" style={{
         fontSize: isActive ? 17 : 14,
-        color: isDone ? green : isActive ? '#7C3AED' : '#4B5563',
+        color: isDone ? green : isActive ? '#1A73E8' : '#4B5563',
       }}>
         {stage.label}
       </div>
@@ -82,7 +82,7 @@ export function FlowStep({ stage, dayId, linkPrefix }: { stage: Stage; dayId: st
       <div className="mt-3 inline-block rounded-full font-bold" style={{
         fontSize: isActive ? 14 : 13,
         padding: isActive ? '4px 12px' : '3px 10px',
-        background: isDone ? green : isActive ? '#7C3AED' : '#E5E7EB',
+        background: isDone ? green : isActive ? '#1A73E8' : '#E5E7EB',
         color: isDone || isActive ? 'white' : '#9CA3AF',
       }}>
         {isDone ? (stage.actualScore || '완료') : stage.scoreRequirement}

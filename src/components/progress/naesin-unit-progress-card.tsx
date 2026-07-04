@@ -63,7 +63,7 @@ export function NaesinUnitProgressCard({ unit, progress, hasGrammarContent }: Pr
   const percent = Math.round((completedCount / 4) * 100);
   const progressColor =
     percent >= 80 ? '[&>[data-slot=progress-indicator]]:bg-green-500' :
-    percent >= 40 ? '[&>[data-slot=progress-indicator]]:bg-indigo-500' :
+    percent >= 40 ? '[&>[data-slot=progress-indicator]]:bg-brand-500' :
     '[&>[data-slot=progress-indicator]]:bg-slate-400';
 
   const visibleChips = progress

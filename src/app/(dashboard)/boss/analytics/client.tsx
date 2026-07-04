@@ -43,9 +43,9 @@ const SUB_STATUS_LABELS: Record<string, string> = {
 };
 
 const SUB_STATUS_COLORS: Record<string, string> = {
-  trialing: '#C4B5FD',
-  active: '#A78BFA',
-  past_due: '#7C3AED',
+  trialing: '#8AB4F8',
+  active: '#4285F4',
+  past_due: '#1A73E8',
   canceled: '#9CA3AF',
   expired: '#6B7280',
 };
@@ -108,7 +108,7 @@ export function BossAnalyticsClient() {
             label="총 학원"
             value={data.totalAcademies}
             sub="등록된 학원"
-            color="#A78BFA"
+            color="#4285F4"
             icon={<Building2 className="h-5 w-5" />}
           />
         </StaggerItem>
@@ -117,7 +117,7 @@ export function BossAnalyticsClient() {
             label="총 학생"
             value={data.totalStudents}
             sub={`활성 ${data.totalActive}명`}
-            color="#8B5CF6"
+            color="#4285F4"
             icon={<Users className="h-5 w-5" />}
           />
         </StaggerItem>
@@ -126,7 +126,7 @@ export function BossAnalyticsClient() {
             label="총 구독"
             value={totalSubs}
             sub={totalSubs > 0 ? `활성 ${data.subscriptionDistribution.active || 0}건` : '구독 없음'}
-            color="#C4B5FD"
+            color="#8AB4F8"
             icon={<TrendingUp className="h-5 w-5" />}
           />
         </StaggerItem>
@@ -186,7 +186,7 @@ export function BossAnalyticsClient() {
                 <Tooltip
                   contentStyle={{ borderRadius: 10, border: '1px solid #E5E7EB', boxShadow: '0 4px 12px rgba(0,0,0,0.05)' }}
                 />
-                <Bar dataKey="count" fill="#A78BFA" radius={[6, 6, 0, 0]} name="신규 학생" />
+                <Bar dataKey="count" fill="#4285F4" radius={[6, 6, 0, 0]} name="신규 학생" />
               </BarChart>
             </ResponsiveContainer>
           </div>
@@ -215,7 +215,7 @@ export function BossAnalyticsClient() {
                   {data.academyHealth.map((a) => {
                     const seatPct = a.maxStudents ? Math.round((a.students / a.maxStudents) * 100) : null;
                     return (
-                      <tr key={a.id} className="border-b last:border-0 transition-colors hover:bg-violet-50/50">
+                      <tr key={a.id} className="border-b last:border-0 transition-colors hover:bg-brand-50/50">
                         <td className="py-3 font-medium">{a.name}</td>
                         <td className="py-3 text-right text-gray-600">{a.students}</td>
                         <td className="py-3 text-right text-gray-600">{a.activeStudents}</td>
@@ -230,7 +230,7 @@ export function BossAnalyticsClient() {
                                   className="block h-full rounded-full transition-all duration-500"
                                   style={{
                                     width: `${Math.min(seatPct!, 100)}%`,
-                                    background: seatPct! >= 90 ? '#7C3AED' : '#C4B5FD',
+                                    background: seatPct! >= 90 ? '#1A73E8' : '#8AB4F8',
                                   }}
                                 />
                               </span>
@@ -243,8 +243,8 @@ export function BossAnalyticsClient() {
                           <span
                             className="inline-flex rounded-full px-2.5 py-0.5 text-xs font-semibold"
                             style={{
-                              background: a.weeklyActive > 0 ? '#F5F3FF' : '#F3F4F6',
-                              color: a.weeklyActive > 0 ? '#A78BFA' : '#9CA3AF',
+                              background: a.weeklyActive > 0 ? '#E8F0FE' : '#F3F4F6',
+                              color: a.weeklyActive > 0 ? '#4285F4' : '#9CA3AF',
                             }}
                           >
                             {a.weeklyActive}명

@@ -34,21 +34,21 @@ export function PremiumGate({ allowed, feature, role, children }: PremiumGatePro
         <div className="max-w-sm w-[90%] text-center">
           <div
             className="rounded-2xl p-[1.5px]"
-            style={{ background: 'linear-gradient(135deg, #A78BFA 0%, #7C3AED 50%, #06B6D4 100%)' }}
+            style={{ background: 'linear-gradient(135deg, #4285F4 0%, #1A73E8 50%, #06B6D4 100%)' }}
           >
             <div className="rounded-[15px] bg-white/95 backdrop-blur-xl p-7">
               <div
                 className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full"
-                style={{ background: 'linear-gradient(135deg, #F5F3FF, #EDE9FE)' }}
+                style={{ background: 'linear-gradient(135deg, #E8F0FE, #D2E3FC)' }}
               >
-                <Lock className="h-6 w-6 text-violet-500" />
+                <Lock className="h-6 w-6 text-brand-500" />
               </div>
 
               <h3 className="text-lg font-bold text-gray-900">
                 {isAdmin ? '프리미엄 기능입니다' : '프리미엄 기능이에요'}
               </h3>
               <p className="mt-1.5 text-sm text-gray-500">
-                <span className="font-medium text-violet-600">{feature}</span>
+                <span className="font-medium text-brand-600">{feature}</span>
                 {isAdmin
                   ? '은(는) 유료 플랜에서 사용할 수 있습니다.'
                   : '은(는) 프리미엄 기능이에요. 관리자에게 업그레이드를 요청하세요.'}
@@ -58,7 +58,7 @@ export function PremiumGate({ allowed, feature, role, children }: PremiumGatePro
                 <Link
                   href="/pricing"
                   className="mt-5 inline-flex items-center gap-1.5 rounded-lg px-5 py-2.5 text-sm font-semibold text-white transition-all hover:opacity-90"
-                  style={{ background: 'linear-gradient(135deg, #7C3AED, #6D28D9)' }}
+                  style={{ background: 'linear-gradient(135deg, #1A73E8, #174EA6)' }}
                 >
                   <Sparkles className="h-4 w-4" />
                   요금제 보기

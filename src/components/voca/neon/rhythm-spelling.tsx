@@ -230,7 +230,7 @@ export function RhythmSpelling({ vocabulary, onComplete, examMode = false }: Rhy
             onClick={() => play(vocab.example_sentence || vocab.front_text)}
             disabled={isPlaying}
           >
-            <Volume2 className={cn('h-4 w-4', isPlaying && 'animate-pulse text-indigo-500')} />
+            <Volume2 className={cn('h-4 w-4', isPlaying && 'animate-pulse text-brand-500')} />
           </Button>
         )}
       </div>
@@ -280,7 +280,7 @@ export function RhythmSpelling({ vocabulary, onComplete, examMode = false }: Rhy
                   className={cn(
                     'w-10 h-13 md:w-12 md:h-15 rounded-lg border-2 flex items-center justify-center text-xl md:text-2xl font-bold transition-all',
                     state === 'correct' && 'border-green-500 text-green-600 bg-green-50 correct-flash',
-                    !state && isNext && 'border-indigo-400 bg-indigo-50/50 guide-glow',
+                    !state && isNext && 'border-brand-400 bg-brand-50/50 guide-glow',
                     !state && !isNext && 'border-gray-200 text-gray-300',
                   )}
                 >

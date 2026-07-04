@@ -21,7 +21,7 @@ import { BLOG_CATEGORY_LABELS } from '@/types/blog';
 type BlogListItem = Omit<BlogPost, 'content' | 'meta_title' | 'meta_description' | 'author_id' | 'attachments'>;
 
 const categoryBadgeColors: Record<BlogCategory, string> = {
-  grammar_tip: 'bg-violet-100 text-violet-700 dark:bg-violet-950 dark:text-violet-300',
+  grammar_tip: 'bg-brand-100 text-brand-700 dark:bg-brand-950 dark:text-brand-300',
   study_method: 'bg-emerald-100 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-300',
   exam_prep: 'bg-orange-100 text-orange-700 dark:bg-orange-950 dark:text-orange-300',
   news: 'bg-blue-100 text-blue-700 dark:bg-blue-950 dark:text-blue-300',

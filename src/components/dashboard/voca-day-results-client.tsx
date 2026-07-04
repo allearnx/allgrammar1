@@ -148,7 +148,7 @@ export function VocaDayResultsClient() {
         <select
           value={selectedBookId}
           onChange={(e) => setSelectedBookId(e.target.value)}
-          className="rounded-md border border-gray-300 bg-white px-3 py-2 text-sm shadow-sm focus:border-violet-500 focus:outline-none focus:ring-1 focus:ring-violet-500"
+          className="rounded-md border border-gray-300 bg-white px-3 py-2 text-sm shadow-sm focus:border-brand-500 focus:outline-none focus:ring-1 focus:ring-brand-500"
         >
           {books.map((b) => (
             <option key={b.id} value={b.id}>{b.title}</option>
@@ -159,7 +159,7 @@ export function VocaDayResultsClient() {
           value={selectedDayId}
           onChange={(e) => setSelectedDayId(e.target.value)}
           disabled={loadingDays || days.length === 0}
-          className="rounded-md border border-gray-300 bg-white px-3 py-2 text-sm shadow-sm focus:border-violet-500 focus:outline-none focus:ring-1 focus:ring-violet-500 disabled:opacity-50"
+          className="rounded-md border border-gray-300 bg-white px-3 py-2 text-sm shadow-sm focus:border-brand-500 focus:outline-none focus:ring-1 focus:ring-brand-500 disabled:opacity-50"
         >
           {loadingDays ? (
             <option>로딩 중...</option>
@@ -292,7 +292,7 @@ export function VocaDayResultsClient() {
                                 <p className="text-xs font-semibold text-gray-500 mb-1">스펠링 오답</p>
                                 <div className="flex flex-wrap gap-1.5">
                                   {s.wrongWords.spelling.map((w, i) => (
-                                    <span key={i} className="inline-flex items-center rounded-full bg-purple-50 px-2.5 py-1 text-xs text-purple-700">
+                                    <span key={i} className="inline-flex items-center rounded-full bg-brand-50 px-2.5 py-1 text-xs text-brand-700">
                                       {w.front_text}
                                     </span>
                                   ))}

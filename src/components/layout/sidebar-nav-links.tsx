@@ -65,13 +65,13 @@ export function NavLinks({
                   className={cn(
                     'flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-colors relative',
                     isActive
-                      ? 'bg-indigo-50 text-indigo-600 border-l-[3px] border-indigo-600 pl-[9px]'
+                      ? 'bg-brand-50 text-brand-600 border-l-[3px] border-brand-600 pl-[9px]'
                       : hoverWhite
                         ? 'text-slate-500 hover:bg-white hover:text-slate-900'
                         : 'text-slate-500 hover:bg-slate-100 hover:text-slate-900'
                   )}
                 >
-                  <item.icon className={cn('h-4 w-4 shrink-0', isActive ? 'text-indigo-600' : 'text-slate-400')} />
+                  <item.icon className={cn('h-4 w-4 shrink-0', isActive ? 'text-brand-600' : 'text-slate-400')} />
                   {item.label}
                 </Link>
                 {/* Naesin tree navigation below the 내신 대비 link */}

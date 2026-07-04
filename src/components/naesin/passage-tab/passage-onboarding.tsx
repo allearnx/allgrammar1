@@ -26,8 +26,8 @@ export const ALL_STEPS = [
     title: '순서 배열',
     desc: '한글 뜻을 보고 영어 단어를 올바른 순서로 배열해요.',
     tip: '드래그해서 순서를 바꿀 수 있어요!',
-    color: 'text-indigo-600',
-    bg: 'bg-indigo-50 dark:bg-indigo-950/30',
+    color: 'text-brand-600',
+    bg: 'bg-brand-50 dark:bg-brand-950/30',
   },
   {
     key: 'translation' as const,

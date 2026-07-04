@@ -166,7 +166,7 @@ export function ProblemSheetItem({
           aria-label="AI 개선"
           title="AI 개선"
         >
-          <Wand2 className="h-3.5 w-3.5 text-violet-500" />
+          <Wand2 className="h-3.5 w-3.5 text-brand-500" />
         </Button>
         <Button
           variant="ghost"

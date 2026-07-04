@@ -101,7 +101,7 @@ export function AcademySettingsClient({ academy, currentStudents }: Props) {
       {/* 초대 코드 */}
       <div
         className="relative overflow-hidden rounded-2xl p-6 text-white"
-        style={{ background: 'linear-gradient(135deg, #A78BFA 0%, #7C3AED 50%, #6D28D9 100%)' }}
+        style={{ background: 'linear-gradient(135deg, #4285F4 0%, #1A73E8 50%, #174EA6 100%)' }}
       >
         <div>
           <span className="text-xs font-semibold uppercase tracking-wider text-white/70">초대 코드</span>
@@ -127,8 +127,8 @@ export function AcademySettingsClient({ academy, currentStudents }: Props) {
       {/* 학원 정보 */}
       <div className="rounded-xl border bg-white p-5">
         <div className="flex items-center gap-2 mb-5">
-          <div className="inline-flex rounded-lg bg-indigo-50 p-2">
-            <Building2 className="h-5 w-5 text-indigo-600" />
+          <div className="inline-flex rounded-lg bg-brand-50 p-2">
+            <Building2 className="h-5 w-5 text-brand-600" />
           </div>
           <h3 className="font-semibold">학원 정보</h3>
         </div>
@@ -223,7 +223,7 @@ export function AcademySettingsClient({ academy, currentStudents }: Props) {
             type="submit"
             disabled={saving}
             className="rounded-[10px] px-6 py-2.5 text-sm font-bold text-white transition-all disabled:opacity-50"
-            style={{ background: '#7C3AED', boxShadow: '0 4px 12px rgba(124,58,237,0.25)' }}
+            style={{ background: '#1A73E8', boxShadow: '0 4px 12px rgba(124,58,237,0.25)' }}
           >
             {saving ? '저장 중...' : '설정 저장'}
           </button>

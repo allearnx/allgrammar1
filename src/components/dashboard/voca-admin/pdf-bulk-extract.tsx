@@ -202,7 +202,7 @@ export function PdfBulkExtract({ bookId, definitionLang = 'ko', onCreated }: { b
           <div className="space-y-4">
             {/* 교재 정의 언어 확인 — 잘못 설정된 채 추출하는 실수 방지 */}
             <div className={`rounded-lg px-3 py-2 text-xs font-semibold ${
-              definitionLang === 'en' ? 'bg-indigo-50 text-indigo-700' : 'bg-gray-50 text-gray-600'
+              definitionLang === 'en' ? 'bg-brand-50 text-brand-700' : 'bg-gray-50 text-gray-600'
             }`}>
               {definitionLang === 'en'
                 ? '🌐 이 교재는 영영(영어 정의) 모드예요 — 뜻이 영어로 생성되고 한글 해석은 만들지 않아요.'
@@ -253,7 +253,7 @@ export function PdfBulkExtract({ bookId, definitionLang = 'ko', onCreated }: { b
               </div>
               <div className="flex flex-wrap gap-1.5 text-xs">
                 {dayChunks.map((chunk, i) => (
-                  <span key={i} className="px-2 py-0.5 bg-violet-100 text-violet-700 rounded-full">
+                  <span key={i} className="px-2 py-0.5 bg-brand-100 text-brand-700 rounded-full">
                     Day {i + 1} ({chunk.length}단어)
                   </span>
                 ))}

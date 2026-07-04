@@ -27,7 +27,7 @@ export function StepProgressBar({ steps, currentStep, onStepClick }: StepProgres
             className={cn(
               'relative flex items-center justify-center w-9 h-9 rounded-full border-2 text-sm font-bold transition-all',
               step.completed && 'bg-green-50 border-green-500 text-green-600',
-              !step.completed && i === currentStep && 'border-indigo-500 text-indigo-600 bg-indigo-50',
+              !step.completed && i === currentStep && 'border-brand-500 text-brand-600 bg-brand-50',
               !step.completed && i !== currentStep && step.unlocked && 'border-gray-300 text-gray-400 hover:border-gray-400',
               !step.unlocked && 'border-gray-200 text-gray-300 cursor-not-allowed',
             )}
@@ -44,7 +44,7 @@ export function StepProgressBar({ steps, currentStep, onStepClick }: StepProgres
           <span className={cn(
             'ml-1.5 text-xs font-medium whitespace-nowrap hidden sm:inline',
             step.completed && 'text-green-600',
-            !step.completed && i === currentStep && 'text-indigo-600',
+            !step.completed && i === currentStep && 'text-brand-600',
             !step.completed && i !== currentStep && 'text-gray-400',
           )}>
             {step.label}

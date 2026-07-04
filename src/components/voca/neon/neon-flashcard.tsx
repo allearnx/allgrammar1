@@ -217,8 +217,8 @@ export function NeonFlashcard({ vocabulary, onComplete }: NeonFlashcardProps) {
                 className={cn(
                   'rounded-full w-14 h-14 border-2 transition-all',
                   isPlaying
-                    ? 'border-indigo-400 text-indigo-500 bg-indigo-50'
-                    : 'border-gray-200 text-gray-400 hover:border-indigo-300 hover:text-indigo-500 hover:bg-indigo-50/50',
+                    ? 'border-brand-400 text-brand-500 bg-brand-50'
+                    : 'border-gray-200 text-gray-400 hover:border-brand-300 hover:text-brand-500 hover:bg-brand-50/50',
                 )}
                 onClick={handlePlay}
                 disabled={isPlaying || isSpeakingWord}
@@ -275,7 +275,7 @@ export function NeonFlashcard({ vocabulary, onComplete }: NeonFlashcardProps) {
         {allVisited && currentIndex === vocabulary.length - 1 ? (
           <Button
             size="sm"
-            className="bg-indigo-600 text-white hover:bg-indigo-700"
+            className="bg-brand-600 text-white hover:bg-brand-700"
             onClick={onComplete}
           >
             완료

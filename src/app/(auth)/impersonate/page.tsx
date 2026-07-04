@@ -52,7 +52,7 @@ export default function ImpersonatePage() {
 
   return (
     <div className="flex min-h-screen items-center justify-center gap-3">
-      <Loader2 className="h-5 w-5 animate-spin text-violet-500" />
+      <Loader2 className="h-5 w-5 animate-spin text-brand-500" />
       <p className="text-muted-foreground">학생 계정으로 로그인 중...</p>
     </div>
   );

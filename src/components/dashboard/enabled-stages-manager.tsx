@@ -122,7 +122,7 @@ export function EnabledStagesManager({ studentId, initialStages, tier = 'paid' }
         {isFree && (
           <Link
             href="/boss/billing"
-            className="flex items-center gap-2 rounded-lg bg-violet-50 px-3 py-2.5 text-sm text-violet-700 hover:bg-violet-100 transition-colors dark:bg-violet-950/40 dark:text-violet-300 dark:hover:bg-violet-950/60"
+            className="flex items-center gap-2 rounded-lg bg-brand-50 px-3 py-2.5 text-sm text-brand-700 hover:bg-brand-100 transition-colors dark:bg-brand-950/40 dark:text-brand-300 dark:hover:bg-brand-950/60"
           >
             <ArrowUpRight className="h-4 w-4 shrink-0" />
             <span>문법, 문제풀이 등 전체 단계를 <strong>Pro 플랜</strong>으로 이용해 보세요</span>

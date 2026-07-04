@@ -7,7 +7,7 @@ type FreeService = 'naesin' | 'voca';
 
 const SERVICE_OPTIONS: { value: FreeService; label: string; desc: string; activeColor: string }[] = [
   { value: 'naesin', label: '올인내신', desc: '단어암기 + 교과서암기', activeColor: 'border-cyan-500 bg-cyan-50' },
-  { value: 'voca', label: '올킬보카', desc: '1회독 단어 학습', activeColor: 'border-violet-500 bg-violet-50' },
+  { value: 'voca', label: '올킬보카', desc: '1회독 단어 학습', activeColor: 'border-brand-500 bg-brand-50' },
 ];
 
 interface AdminSignupFieldsProps {

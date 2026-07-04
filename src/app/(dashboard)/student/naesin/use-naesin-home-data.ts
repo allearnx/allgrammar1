@@ -6,7 +6,7 @@ const PUBLISHER_PALETTES = [
   { bg: 'linear-gradient(135deg, #FCE7F3 0%, #FBCFE8 100%)', spine: '#EC4899', text: '#BE185D' },
   { bg: 'linear-gradient(135deg, #D1FAE5 0%, #A7F3D0 100%)', spine: '#10B981', text: '#065F46' },
   { bg: 'linear-gradient(135deg, #FEF3C7 0%, #FDE68A 100%)', spine: '#F59E0B', text: '#92400E' },
-  { bg: 'linear-gradient(135deg, #E0E7FF 0%, #C7D2FE 100%)', spine: '#6366F1', text: '#3730A3' },
+  { bg: 'linear-gradient(135deg, #E0E7FF 0%, #C7D2FE 100%)', spine: '#4285F4', text: '#3730A3' },
   { bg: 'linear-gradient(135deg, #FFE4E6 0%, #FECDD3 100%)', spine: '#F43F5E', text: '#9F1239' },
   { bg: 'linear-gradient(135deg, #CCFBF1 0%, #99F6E4 100%)', spine: '#14B8A6', text: '#115E59' },
   { bg: 'linear-gradient(135deg, #FEE2E2 0%, #FECACA 100%)', spine: '#EF4444', text: '#991B1B' },

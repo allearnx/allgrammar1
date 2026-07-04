@@ -107,7 +107,7 @@ export function VocaAdminClient({ books: initialBooks }: VocaAdminClientProps) {
             <Card
               key={book.id}
               className={`cursor-pointer transition-shadow hover:shadow-md ${
-                state.selectedBook?.id === book.id ? 'ring-2 ring-violet-600' : ''
+                state.selectedBook?.id === book.id ? 'ring-2 ring-brand-600' : ''
               }`}
               onClick={() => dispatch({ type: 'SELECT_BOOK', book })}
             >
@@ -120,7 +120,7 @@ export function VocaAdminClient({ books: initialBooks }: VocaAdminClientProps) {
                     )}
                   </div>
                   <div className="flex items-center gap-1">
-                    {book.definition_lang === 'en' && <Badge className="bg-indigo-100 text-indigo-700 hover:bg-indigo-100">영영</Badge>}
+                    {book.definition_lang === 'en' && <Badge className="bg-brand-100 text-brand-700 hover:bg-brand-100">영영</Badge>}
                     {!book.is_active && <Badge variant="secondary">비활성</Badge>}
                     <Button
                       variant="ghost"

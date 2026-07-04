@@ -41,7 +41,7 @@ export function RoundModeToggle({ studentId, mode: initial }: RoundModeTogglePro
         'inline-flex items-center gap-1.5 rounded-full px-4 py-1.5 text-sm font-medium transition-all select-none',
         loading && 'opacity-50 cursor-wait',
         mode === 'day'
-          ? 'bg-violet-500 text-white shadow-sm hover:bg-violet-600'
+          ? 'bg-brand-500 text-white shadow-sm hover:bg-brand-600'
           : 'bg-muted text-muted-foreground hover:bg-muted/80 border border-border',
       )}
     >

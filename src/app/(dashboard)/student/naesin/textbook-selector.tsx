@@ -7,7 +7,7 @@ import { useNaesinHomeData } from './use-naesin-home-data';
 
 const GRADE_COLORS = [
   { accent: '#06B6D4', light: '#ECFEFF', mid: '#CFFAFE', text: '#0891B2' },
-  { accent: '#8B5CF6', light: '#F5F3FF', mid: '#EDE9FE', text: '#7C3AED' },
+  { accent: '#4285F4', light: '#E8F0FE', mid: '#D2E3FC', text: '#1A73E8' },
   { accent: '#F59E0B', light: '#FFFBEB', mid: '#FEF3C7', text: '#D97706' },
 ];
 

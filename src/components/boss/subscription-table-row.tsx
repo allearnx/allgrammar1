@@ -40,9 +40,9 @@ function SubscriberCell({ academy, student }: Pick<SubscriptionRow, 'academy' | 
       <div className="flex items-center gap-2.5">
         <div
           className="flex items-center justify-center h-8 w-8 rounded-lg shrink-0"
-          style={{ background: 'linear-gradient(120deg, #F5F3FF, #EDE9FE)' }}
+          style={{ background: 'linear-gradient(120deg, #E8F0FE, #D2E3FC)' }}
         >
-          <Building2 className="h-4 w-4 text-violet-500" />
+          <Building2 className="h-4 w-4 text-brand-500" />
         </div>
         <div className="min-w-0">
           <span className="font-medium text-gray-900 truncate block">{academy.name}</span>
@@ -84,7 +84,7 @@ function TierBadge({ isFree }: { isFree: boolean }) {
   ) : (
     <span
       className="inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 text-xs font-semibold"
-      style={{ background: '#F5F3FF', color: '#7C3AED' }}
+      style={{ background: '#E8F0FE', color: '#1A73E8' }}
     >
       <Crown className="h-3 w-3" />
       유료

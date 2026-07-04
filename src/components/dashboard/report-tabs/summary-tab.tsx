@@ -90,7 +90,7 @@ export function SummaryTab({ data, hasVoca, hasNaesin }: { data: StudentReportDa
 
       {data.current.weaknesses.length === 0 && data.current.recommendations.length === 0 && (
         <div className="rounded-xl border border-dashed p-8 text-center">
-          <PartyPopper className="h-8 w-8 text-violet-400 mb-2" />
+          <PartyPopper className="h-8 w-8 text-brand-400 mb-2" />
           <p className="text-sm text-gray-500 font-medium">약점이 없습니다! 잘하고 있어요!</p>
         </div>
       )}

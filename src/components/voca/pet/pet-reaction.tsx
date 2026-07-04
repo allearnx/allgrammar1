@@ -68,7 +68,7 @@ export function PetReaction({ result, onClose }: PetReactionProps) {
                 transition={{ delay: 0.6 }}
                 className="space-y-1"
               >
-                <p className="text-lg font-bold text-indigo-600">진화!</p>
+                <p className="text-lg font-bold text-brand-600">진화!</p>
                 <p className="text-sm text-gray-600">
                   {STAGE_NAMES[pet.stage]}(으)로 성장했어요!
                 </p>
