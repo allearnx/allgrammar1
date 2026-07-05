@@ -188,7 +188,9 @@ export function ServiceAssignmentToggle({
               loading === s.key && 'opacity-50 cursor-wait',
               blocked && 'opacity-40 cursor-not-allowed',
               active
-                ? 'bg-primary text-primary-foreground shadow-sm hover:bg-primary/90'
+                ? s.key === 'voca'
+                  ? 'bg-[#E8F0FE] text-[#1A73E8] font-bold'
+                  : 'bg-[#E6F4EA] text-[#188038] font-bold'
                 : 'bg-muted text-muted-foreground hover:bg-muted/80 border border-border'
             )}
           >
@@ -222,7 +224,7 @@ export function ServiceAssignmentToggle({
             'inline-flex items-center gap-1.5 rounded-full px-4 py-1.5 text-sm font-medium transition-all select-none',
             round2Loading && 'opacity-50 cursor-wait',
             round2
-              ? 'bg-amber-500 text-white shadow-sm hover:bg-amber-600'
+              ? 'bg-[#FEF7E0] text-[#B06000] font-bold'
               : 'bg-muted text-muted-foreground hover:bg-muted/80 border border-border'
           )}
         >
@@ -239,7 +241,7 @@ export function ServiceAssignmentToggle({
             'inline-flex items-center gap-1.5 rounded-full px-4 py-1.5 text-sm font-medium transition-all select-none',
             roundModeLoading && 'opacity-50 cursor-wait',
             roundMode === 'day'
-              ? 'bg-brand-500 text-white shadow-sm hover:bg-brand-600'
+              ? 'bg-[#E8F0FE] text-[#1A73E8] font-bold'
               : 'bg-muted text-muted-foreground hover:bg-muted/80 border border-border'
           )}
         >
@@ -255,7 +257,7 @@ export function ServiceAssignmentToggle({
             'inline-flex items-center gap-1.5 rounded-full px-4 py-1.5 text-sm font-medium transition-all select-none',
             memorizeLoading && 'opacity-50 cursor-wait',
             memorize
-              ? 'bg-emerald-500 text-white shadow-sm hover:bg-emerald-600'
+              ? 'bg-[#E6F4EA] text-[#188038] font-bold'
               : 'bg-muted text-muted-foreground hover:bg-muted/80 border border-border'
           )}
         >

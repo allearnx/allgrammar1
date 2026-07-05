@@ -40,7 +40,7 @@ export function MemorizeToggle({ studentId, active: initial }: MemorizeTogglePro
         'inline-flex items-center gap-1.5 rounded-full px-4 py-1.5 text-sm font-medium transition-all select-none',
         loading && 'opacity-50 cursor-wait',
         active
-          ? 'bg-emerald-500 text-white shadow-sm hover:bg-emerald-600'
+          ? 'bg-[#E6F4EA] text-[#188038] font-bold'
           : 'bg-muted text-muted-foreground hover:bg-muted/80 border border-border',
       )}
     >

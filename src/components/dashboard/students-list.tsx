@@ -259,8 +259,8 @@ export async function StudentsList({ user, basePath, searchQuery }: Props) {
                       {canManageServices && <StudentCheckbox studentId={student.id} />}
                       <span className="font-medium truncate">{student.full_name}</span>
                       <Badge
-                        variant={student.is_active ? 'default' : 'secondary'}
-                        className="text-xs"
+                        variant="secondary"
+                        className={`text-xs ${student.is_active ? 'bg-[#E6F4EA] text-[#188038]' : ''}`}
                       >
                         {student.is_active ? '활성' : '비활성'}
                       </Badge>
