@@ -139,7 +139,15 @@ export function LiveMonitorClient({ basePath }: { basePath: string }) {
                     <p className="truncate font-medium">{student.name}</p>
                     {student.status === 'learning' && student.currentActivity ? (
                       <div className="mt-0.5 flex flex-wrap items-center gap-1.5">
-                        <Badge variant={student.currentActivity.type === 'naesin' ? 'default' : 'secondary'} className="text-[11px]">
+                        {/* 서비스 색 규칙: 보카=블루, 내신=그린 (학생 관리·캘린더와 동일) */}
+                        <Badge
+                          variant="secondary"
+                          className={`text-[11px] ${
+                            student.currentActivity.type === 'naesin'
+                              ? 'bg-[#E6F4EA] text-[#188038]'
+                              : 'bg-[#E8F0FE] text-[#1A73E8]'
+                          }`}
+                        >
                           {student.currentActivity.type === 'naesin' ? '내신' : '보카'}
                         </Badge>
                         <span className="truncate text-xs text-muted-foreground">
