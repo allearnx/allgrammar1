@@ -227,9 +227,10 @@ export function DayContentManager({ dayId, definitionLang }: { dayId: string; de
                   <Checkbox checked={vocab.selectedIds.has(v.id)} onCheckedChange={() => vocab.toggleSelect(v.id)} />
                   <span className="text-sm font-medium flex-1 truncate">{v.front_text}</span>
                   <span className="text-sm text-muted-foreground truncate max-w-[120px]">{v.back_text}</span>
-                  {v.synonyms && <Badge variant="outline" className="text-[10px] h-4 px-1">유</Badge>}
-                  {v.antonyms && <Badge variant="outline" className="text-[10px] h-4 px-1">반</Badge>}
-                  {v.idioms && v.idioms.length > 0 && <Badge variant="outline" className="text-[10px] h-4 px-1 border-brand-400 text-brand-700">숙</Badge>}
+                  {/* 의미 색 규칙: 유의어=그린, 반의어=옐로, 숙어=블루 (오답노트 페이지와 동일) */}
+                  {v.synonyms && <Badge variant="secondary" className="text-[10px] h-4 px-1 bg-[#E6F4EA] text-[#188038]">유</Badge>}
+                  {v.antonyms && <Badge variant="secondary" className="text-[10px] h-4 px-1 bg-[#FEF7E0] text-[#B06000]">반</Badge>}
+                  {v.idioms && v.idioms.length > 0 && <Badge variant="secondary" className="text-[10px] h-4 px-1 bg-[#E8F0FE] text-[#1A73E8]">숙</Badge>}
                   {v.audio_url ? (
                     <Button variant="ghost" size="icon" className="h-6 w-6" onClick={() => playAudio(v.id, v.audio_url!)}>
                       <Volume2 className={cn('h-3.5 w-3.5', playingAudio === v.id ? 'text-green-600 animate-pulse' : 'text-green-600')} />
