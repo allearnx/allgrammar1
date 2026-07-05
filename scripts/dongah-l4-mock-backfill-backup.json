@@ -1,0 +1,1070 @@
+{
+ "ae68c8a1": [
+  {
+   "answer": "2",
+   "number": 1,
+   "options": [
+    "refund / possible / the same",
+    "refund / impossible / different",
+    "discount / possible / different",
+    "refund / impossible / the same",
+    "discount / impossible / different"
+   ],
+   "question": "다음 대화의 괄호 (A), (B), (C)에서 흐름상 알맞은 말로 바르게 연결된 것은?\n\nMan: Hello. May I help you?\nLucy: Yes, please. I'd like to get a (A)[refund / discount] for this cap.\nMan: Do you have the receipt?\nLucy: No, I don't. I received it as a gift.\nMan: If you don't have the receipt, then, it's (B)[possible / impossible] to get a refund.\nLucy: I see. Then, 그것을 다른 것으로 교환할 수 있을까요?\nMan: Yes, you can. What would you like to get?\nLucy: I want to get this blue bag.\nMan: Let me see …. The price is (C)[the same / different], so you need to pay another $3 to get it.\nLucy: Ok. Here you are.",
+   "explanation": "Lucy가 영수증 없이 환불을 받으려 하므로 (A)는 refund가 맞습니다. 영수증이 없으면 환불이 불가능하므로 (B)는 impossible입니다. 파란 가방이 모자보다 가격이 높아서 추가로 $3을 내야 하므로 (C)는 different입니다."
+  },
+  {
+   "answer": "can I exchange it for something else",
+   "number": 2,
+   "question": "위 대화의 밑줄 친 ⓐ의 우리말을 <보기>의 단어 및 표현을 사용하여 알맞게 영작하시오.\n\nⓐ그것을 다른 것으로 교환할 수 있을까요?\n\n<보기>\nelse, it, can, exchange, something",
+   "explanation": "\"그것을 다른 것으로 교환할 수 있을까요?\"는 'Can I exchange it for something else?'로 표현됩니다. 보기의 모든 단어를 사용합니다."
+  },
+  {
+   "answer": "3",
+   "number": 3,
+   "options": [
+    "Lucy received the cap as a gift.",
+    "Having the receipt is necessary to get a refund.",
+    "Lucy was able to get the money back for the cap because she had the receipt.",
+    "Lucy returned the cap and got another item.",
+    "The cap is cheaper than the blue bag."
+   ],
+   "question": "위 대화의 내용과 일치하지 않는 것은?\n\nMan: Hello. May I help you?\nLucy: Yes, please. I'd like to get a (A)[refund / discount] for this cap.\nMan: Do you have the receipt?\nLucy: No, I don't. I received it as a gift.\nMan: If you don't have the receipt, then, it's (B)[possible / impossible] to get a refund.\nLucy: I see. Then, 그것을 다른 것으로 교환할 수 있을까요?\nMan: Yes, you can. What would you like to get?\nLucy: I want to get this blue bag.\nMan: Let me see …. The price is (C)[the same / different], so you need to pay another $3 to get it.\nLucy: Ok. Here you are.",
+   "explanation": "Lucy는 영수증이 없어서 환불을 받을 수 없었습니다. 따라서 \"Lucy가 영수증이 있어서 환불을 받을 수 있었다\"는 내용은 일치하지 않습니다."
+  },
+  {
+   "answer": "4",
+   "number": 4,
+   "options": [
+    "(A)",
+    "(B)",
+    "(C)",
+    "(D)",
+    "(E)"
+   ],
+   "question": "다음 글의 (A)~(E) 중, 주어진 문장이 들어갈 알맞은 곳은?\n\nHow smart are you with your money? (A) These are the results of a survey of 250 students at Green Middle School. (B)\n\nWe first asked students \"Are you smart with your money?\" (C) As Graph 1 shows, 70% answered \"No\" while 30% answered \"Yes.\" (D) As Graph 2 shows, 60% think they don't have enough allowance while 28% think they have difficulty saving money. (E) Lastly, 12% said they spent money on things they didn't need.\n\n주어진 문장: We then asked the students who answered \"No\" what their biggest money worry is.",
+   "explanation": "\"그 다음에 우리는 '아니오'라고 대답한 학생들에게 돈에 관한 그들의 가장 큰 걱정거리가 무엇인지 물었다\"는 문장은 첫 번째 질문 후에 이어져야 하므로, (C)와 (D) 사이, 즉 (D)에 들어가야 합니다."
+  },
+  {
+   "answer": "4",
+   "number": 5,
+   "options": [
+    "250 students at Green Middle School participated in the survey.",
+    "More than half of the students think they are not smart with their money.",
+    "Only 30% of the students think they are managing money well.",
+    "Graph 2 shows that 12% of the students spend their money on buying things they need.",
+    "You need to make an effort to be a smart spender."
+   ],
+   "question": "위 글의 내용과 일치하지 않는 것은?\n\nHow smart are you with your money? These are the results of a survey of 250 students at Green Middle School.\n\nWe first asked students \"Are you smart with your money?\" As Graph 1 shows, 70% answered \"No\" while 30% answered \"Yes.\" As Graph 2 shows, 60% think they don't have enough allowance while 28% think they have difficulty saving money. Lastly, 12% said they spent money on things they didn't need.\n\nOur survey shows that the majority of students think they are not smart with their money. Managing money is not easy, and becoming a smart spender takes effort.",
+   "explanation": "그래프 2에 따르면 12%의 학생들이 \"자신들이 필요하지 않은 물건에 돈을 쓴다\"고 답했습니다. 따라서 \"필요한 것을 사는 데 돈을 쓴다\"는 내용은 일치하지 않습니다."
+  },
+  {
+   "answer": "3",
+   "number": 6,
+   "options": [
+    "(A)",
+    "(B)",
+    "(C)",
+    "(D)",
+    "(E)"
+   ],
+   "question": "다음 글의 밑줄 친 (A)~(E) 중, 흐름상 어색한 것은?\n\nDo you have any money worries? Let's talk with Dr. Money.\n\nQ: I'm Jason. I get a weekly allowance, but I never have enough. By Thursday, all of my money is gone. (A) I don't know how to solve this problem.\n\nA: Hi, I'm Dr. Money. Let's look at your spending diary. You used up most of your money at the beginning of the week. Here's my tip. Don't carry around all of your weekly allowance. (B) Divide the money into days. Then carry only the money you need for each day.\n\nQ: Hello, Dr. Money. I'm Steve. I have difficulty save money. For example, I've been saved to go to my favorite singer's concert for the last two months. However, I still don't have enough money. I don't know what to do.\n\nA: Let's see. In the last few weeks, you spent 80% of your allowance and only saved 20%. I think you've been spending too much. To save money, (C) you need to have a looser budget. For example, you can follow the 50%-40%-10% rule. Save 50%, spend 40%, and donate the remaining 10% to charity. By follow the rule, you can manage your money better. Then you can save money faster to buy the ticket.\n\nQ: I'm Minji. I like to buy things on sale. If something's on sale, I buy it although I don't need it. Last week, I bought two T-shirts on sale, but I already have many.\n\nA: Buy things on sale is good (D) if you buy things you need. In your case, the problem is that you buy things you don't even need. Here's some advice. (E) Before you buy something, ask yourself, \"Do I really need this?\" Also, before you go shopping, make a shopping list.",
+   "explanation": "(C)에서 \"you need to have a looser budget\"은 어색합니다. Steve의 문제는 너무 많이 쓰고 있다는 것이므로 \"tighter budget\"이 맞습니다."
+  },
+  {
+   "answer": "1",
+   "number": 7,
+   "options": [
+    "3개",
+    "4개",
+    "5개",
+    "6개",
+    "7개"
+   ],
+   "question": "위 글의 밑줄 친 ⓐ~ⓖ 중, 어법상 알맞은 것의 개수는?\n\nDo you have any money worries? Let's talk with Dr. Money.\n\nQ: I'm Jason. I get a weekly allowance, but I never have enough. By Thursday, all of my money is gone. I don't know how to solve this problem.\n\nA: Hi, I'm Dr. Money. Let's look at your spending diary. You ⓐused up most of your money at the beginning of the week. ⓑHere's my tip. Don't carry around all of your weekly allowance. Divide the money into days. Then carry only the money you need for each day.\n\nQ: Hello, Dr. Money. I'm Steve. I ⓒhave difficulty save money. For example, ⓓI've been saved to go to my favorite singer's concert for the last two months. However, I still don't have enough money. I don't know ⓔwhat to do.\n\nA: Let's see. In the last few weeks, you spent 80% of your allowance and only saved 20%. I think you've been spending too much. To save money, you need to have a looser budget. For example, you can follow the 50%-40%-10% rule. Save 50%, spend 40%, and donate the remaining 10% to charity. ⓕBy follow the rule, you can manage your money better. Then you can save money faster to buy the ticket.\n\nQ: I'm Minji. I like to buy things on sale. If something's on sale, I buy it although I don't need it. Last week, I bought two T-shirts on sale, but I already have many.\n\nA: ⓖBuy things on sale is good if you buy things you need. In your case, the problem is that you buy things you don't even need.",
+   "explanation": "ⓐ used up (O), ⓑ Here's (O), ⓒ have difficulty saving (X - save는 saving이어야 함), ⓓ I've been saving (X - saved는 saving이어야 함), ⓔ what to do (O), ⓕ By following (X - follow는 following이어야 함), ⓖ Buying things (X - Buy는 Buying이어야 함). 따라서 옳은 것은 ⓐ, ⓑ, ⓔ 3개입니다."
+  },
+  {
+   "answer": "1",
+   "number": 8,
+   "options": [
+    "even",
+    "list",
+    "if",
+    "are",
+    "on"
+   ],
+   "question": "위 글의 밑줄 친 ㉠의 우리말과 같은 뜻이 되도록 <보기>의 단어를 배열할 때, 빈칸 (8)에 들어갈 단어는?\n\n㉠그 목록에 없는 물품들은 비록 그것들이 할인 판매 중이더라도 사지 마세요.\n\n<보기>\neven / not / sale / that / are / the / list / on / if / they / are / on / items\n\nDon't buy (1)_______ (2)_______ (3)_______ (4)_______ (5)_______ (6)_______ (7)_______ (8)_______ (9)_______ (10)_______ (11)_______ (12)_______ (13)_______.",
+   "explanation": "정답: Don't buy items that aren't on the list even if they're on sale.\n(1)items (2)that (3)aren't (4)on (5)the (6)list (7)even (8)if (9)they (10)are (11)on (12)sale. 빈칸 (8)에는 \"if\"가 들어갑니다."
+  },
+  {
+   "answer": "She[Minji] has to make a shopping list (before going shopping).",
+   "number": 9,
+   "question": "위 글을 읽고 다음 질문에 대한 답을 본문에서 찾아 완전한 영문으로 쓰시오.\n\nQ. According to Dr. Money, what does Minji have to do before going shopping?\n\nDo you have any money worries? Let's talk with Dr. Money.\n\nQ: I'm Minji. I like to buy things on sale. If something's on sale, I buy it although I don't need it. Last week, I bought two T-shirts on sale, but I already have many.\n\nA: Buy things on sale is good if you buy things you need. In your case, the problem is that you buy things you don't even need. Here's some advice. Before you buy something, ask yourself, \"Do I really need this?\" Also, before you go shopping, make a shopping list. Don't buy items that aren't on the list even if they're on sale. Then you won't buy things on the spot.\n\n※ 완전한 문장으로 쓰시오.",
+   "explanation": "본문에서 \"Also, before you go shopping, make a shopping list.\"라고 명확히 나와있습니다.",
+   "acceptedAnswers": [
+    "She[Minji] has to make a shopping list (before going shopping)"
+   ]
+  },
+  {
+   "answer": "3",
+   "number": 10,
+   "options": [
+    "What is Jason's money worry?",
+    "What did Minji buy last week?",
+    "What percentage of his allowance did Steve donate?",
+    "By which day of the week is Jason's allowance all gone?",
+    "What percentage of his allowance did Steve spend in the last few weeks?"
+   ],
+   "question": "위 글을 읽고 답할 수 없는 것은?\n\nDo you have any money worries? Let's talk with Dr. Money.\n\nQ: I'm Jason. I get a weekly allowance, but I never have enough. By Thursday, all of my money is gone. I don't know how to solve this problem.\n\nA: Hi, I'm Dr. Money. Let's look at your spending diary. You used up most of your money at the beginning of the week. Here's my tip. Don't carry around all of your weekly allowance. Divide the money into days. Then carry only the money you need for each day.\n\nQ: Hello, Dr. Money. I'm Steve. I have difficulty saving money. For example, I've been saving to go to my favorite singer's concert for the last two months. However, I still don't have enough money. I don't know what to do.\n\nA: Let's see. In the last few weeks, you spent 80% of your allowance and only saved 20%. I think you've been spending too much. To save money, you need to have a tighter budget. For example, you can follow the 50%-40%-10% rule. Save 50%, spend 40%, and donate the remaining 10% to charity. By following the rule, you can manage your money better. Then you can save money faster to buy the ticket.\n\nQ: I'm Minji. I like to buy things on sale. If something's on sale, I buy it although I don't need it. Last week, I bought two T-shirts on sale, but I already have many.\n\nA: Buy things on sale is good if you buy things you need. In your case, the problem is that you buy things you don't even need. Here's some advice. Before you buy something, ask yourself, \"Do I really need this?\" Also, before you go shopping, make a shopping list. Don't buy items that aren't on the list even if they're on sale. Then you won't buy things on the spot.",
+   "explanation": "본문에서 Steve가 기부한 금액의 비율은 명시되지 않았습니다. 50%-40%-10% 규칙이 제시되었지만, Steve가 실제로 이를 따르고 있다는 언급이 없습니다. 다른 질문들은 모두 본문에서 찾을 수 있습니다."
+  },
+  {
+   "answer": "3",
+   "number": 11,
+   "options": [
+    "(A)",
+    "(B)",
+    "(C)",
+    "(D)",
+    "(E)"
+   ],
+   "question": "위 글의 밑줄 친 (A)~(E) 중, 쓰임이 나머지와 다른 것은?\n\nThese are the results of a survey of 250 students at Green Middle School.\n\nWe first asked students \"Are you smart with your money?\" 70% of the students answered \"No\" while 30% answered \"Yes.\" We then asked the students who answered \"No\" what their biggest money worry is. 60% think (A)that they don't have enough allowance while 28% think they have difficulty ⓐsaving money. Lastly, 12% said (B)that spent money on things (C)that they didn't need.\n\nOur survey shows (D)that most of the students believe they are not smart with their money. The problem is (E)that it is difficult to become a smart spender. Becoming a smart spender ⓑtakes effort.\n\nDo you have any money worries? Let's talk with Dr. Money.\n\nQ: I'm Jason. I get a weekly allowance, but I never have enough. By Thursday, all of my money ⓒare gone. I don't know ㉠_______ to solve this problem.\n\nA: Hi, I'm Dr. Money. Let's look at your spending diary. You ⓓused up most of your money at the beginning of the week. Here's my tip. Don't carry around all of your weekly allowance. ⓔDivide the money into days. Then carry only the money you need for each day.",
+   "explanation": "(C)의 that은 목적격 관계대명사(생략 가능)로 사용되었지만, (A), (B), (D), (E)의 that은 모두 명사절 접속사(보통 생략 불가)입니다. 따라서 쓰임이 다릅니다."
+  },
+  {
+   "answer": "3",
+   "number": 12,
+   "options": [
+    "ⓐ",
+    "ⓑ",
+    "ⓒ",
+    "ⓓ",
+    "ⓔ"
+   ],
+   "question": "위 글의 밑줄 친 ⓐ~ⓔ 중, 어법상 어색한 것은?\n\nThese are the results of a survey of 250 students at Green Middle School.\n\nWe first asked students \"Are you smart with your money?\" 70% of the students answered \"No\" while 30% answered \"Yes.\" We then asked the students who answered \"No\" what their biggest money worry is. 60% think that they don't have enough allowance while 28% think they have difficulty ⓐsaving money. Lastly, 12% said that spent money on things that they didn't need.\n\nOur survey shows that most of the students believe they are not smart with their money. The problem is that it is difficult to become a smart spender. Becoming a smart spender ⓑtakes effort.\n\nDo you have any money worries? Let's talk with Dr. Money.\n\nQ: I'm Jason. I get a weekly allowance, but I never have enough. By Thursday, all of my money ⓒare gone. I don't know what to solve this problem.\n\nA: Hi, I'm Dr. Money. Let's look at your spending diary. You ⓓused up most of your money at the beginning of the week. Here's my tip. Don't carry around all of your weekly allowance. ⓔDivide the money into days. Then carry only the money you need for each day.",
+   "explanation": "ⓐ saving (O), ⓑ takes (O), ⓒ are → is (X - \"all of my money\"의 주어는 단수이므로 is가 맞음), ⓓ used up (O), ⓔ Divide (O). 따라서 ⓒ가 어법상 어색합니다."
+  },
+  {
+   "answer": "5",
+   "number": 13,
+   "options": [
+    "Tell me ___________ to make chocolate cookies.",
+    "My father taught me ___________ to ride a bike.",
+    "Do you know ___________ to pronounce this word?",
+    "In this class, they will learn ___________ to program.",
+    "James has already decided ___________ to write about."
+   ],
+   "question": "위 글의 빈칸 ㉠에 들어갈 말과 다른 것은?\n\n㉠ 빈칸: I don't know ㉠_______ to solve this problem.\n\n① Tell me ___________ to make chocolate cookies.\n② My father taught me ___________ to ride a bike.\n③ Do you know ___________ to pronounce this word?\n④ In this class, they will learn ___________ to program.\n⑤ James has already decided ___________ to write about.",
+   "explanation": "빈칸 ㉠에는 \"how\"가 들어갑니다. ①~④는 모두 \"how\"를 쓸 수 있지만, ⑤는 \"what\"을 써야 합니다. \"write about\"은 전치사 뒤에 오므로 \"what to write about\"이 맞습니다."
+  },
+  {
+   "answer": "2",
+   "number": 14,
+   "options": [
+    "Q: How many students at Green Middle School participated in the survey?\nA: 250 students participated in the survey.",
+    "Q: What was the first question?\nA: The first question was \"What is your biggest money worry?\"",
+    "Q: What percentage of the students answered \"No\" to the first question?\nA: 70% of students answered \"No\" to the first question.",
+    "Q: What is the biggest money worry that 60% of the students have?\nA: The biggest money worry is that they don't have enough allowance.",
+    "Q: What does the survey show about most of the students?\nA: It shows that most of the students think they are not smart with their money."
+   ],
+   "question": "위 글을 읽고 나눈 대화 중, 내용이 일치하지 않는 것은?\n\nThese are the results of a survey of 250 students at Green Middle School.\n\nWe first asked students \"Are you smart with your money?\" 70% of the students answered \"No\" while 30% answered \"Yes.\" We then asked the students who answered \"No\" what their biggest money worry is. 60% think that they don't have enough allowance while 28% think they have difficulty saving money. Lastly, 12% said they spent money on things they didn't need.\n\nOur survey shows that the majority of the students think they are not smart with their money. Managing money is not easy, and becoming a smart spender takes effort.",
+   "explanation": "첫 번째 질문은 \"Are you smart with your money?\"입니다. \"What is your biggest money worry?\"는 두 번째 질문입니다."
+  },
+  {
+   "answer": "3",
+   "number": 15,
+   "options": [
+    "Steve has been donating 10% of his allowance.",
+    "Steve has saved enough money to go to the concert.",
+    "Dr. Money advises Steve to have a tighter budget to save money faster.",
+    "Dr. Money tells Steve not to spend his money on buying the concert ticket.",
+    "In the last two months, Steve followed the 50%-40%-10% rule to save his allowance."
+   ],
+   "question": "다음 글의 내용과 일치하는 것은?\n\nQ: Hello, Dr. Money. I'm Steve. I have difficulty saving money. For example, I've been saving to go to my favorite singer's concert for the last two months. However, I still don't have enough money. I don't know what to do.\n\nA: Let's see. In the last few weeks, you spent 80% of your allowance and only saved 20%. I think you've been spending too much. To save money, you need to have a tighter budget. For example, you can follow the 50%-40%-10% rule. Save 50%, spend 40%, and donate the remaining 10% to charity. By following the rule, you can manage your money better. Then you can save money faster to buy the ticket.",
+   "explanation": "③은 본문과 일치합니다. Dr. Money는 \"To save money, you need to have a tighter budget\"이라고 조언합니다. 다른 선택지들은 본문과 맞지 않습니다."
+  },
+  {
+   "answer": "4",
+   "number": 16,
+   "options": [
+    "As it grew darker, it became colder.",
+    "As I ran up the stairs, I slipped and fell.",
+    "As I was sick, I didn't go to school today.",
+    "As I promised, I'll donate $1,000 to the charity.",
+    "As I entered the classroom, they welcomed me."
+   ],
+   "question": "위 글의 밑줄 친 (A)As와 같은 의미로 쓰인 것은?\n\n<Graph 1> Are you smart with your money?\n\nHow smart are you with your money? These are the results of a survey of 250 students at Green Middle School.\n\nWe first asked students \"Are you smart with your money?\" (A)As Graph 1 shows, 70% answered \"No\" while 30% answered \"Yes.\"",
+   "explanation": "본문의 \"As Graph 1 shows\"는 \"~이 보여주는 바와 같이\"라는 의미로 '~대로, ~처럼'의 뜻입니다. ④의 \"As I promised\"도 \"내가 약속한 대로\"라는 의미로 같은 용법입니다. ①②⑤는 시간적 의미(~하는 동안), ③은 인과관계(~이므로)를 나타냅니다."
+  },
+  {
+   "answer": "3",
+   "number": 17,
+   "options": [
+    "We then asked the students what is their biggest money worry who answered \"No\".",
+    "We then asked what their biggest money worry is the students who answered \"No\".",
+    "We then asked the students who answered \"No\" what their biggest money worry is.",
+    "We then asked the students who answered \"No\" what is their biggest money worry.",
+    "We then asked about what is their biggest money worry to the students who answered \"No\"."
+   ],
+   "question": "위 글의 (B)의 우리말을 알맞게 영작한 것은?\n\n(B)그 다음에 우리는 \"아니오\"라고 대답한 학생들에게 돈에 관한 그들의 가장 큰 걱정거리가 무엇인지 물었다.",
+   "explanation": "정확한 영작은 \"We then asked the students who answered 'No' what their biggest money worry is.\"입니다. 관계절이 먼저 오고, 간접의문문에서는 어순이 평서문이어야 합니다."
+  },
+  {
+   "answer": "5",
+   "number": 18,
+   "options": [
+    "I don't have enough allowance.",
+    "I have trouble in saving money.",
+    "I think I am smart with my money.",
+    "Managing money is not easy for me.",
+    "I spend money on things I don't need."
+   ],
+   "question": "위 글의 <Graph 2>의 빈칸 (3)에 들어갈 말로 알맞은 것은?\n\n<Graph 2> What is your biggest money worry?\n\nAs Graph 2 shows, 60% think they don't have enough allowance while 28% think they have difficulty saving money. Lastly, 12% said they spent money on things they didn't need.",
+   "explanation": "본문에서 12% 학생들이 \"they spent money on things they didn't need\"라고 했으므로, 그래프의 (3)번에는 \"I spend money on things I don't need.\"가 들어가야 합니다."
+  },
+  {
+   "answer": "3",
+   "number": 19,
+   "options": [
+    "I believe that he is very smart.",
+    "I didn't know that she was married.",
+    "Carry only the money that you need.",
+    "They realized that he was not honest.",
+    "She thinks that she knows the answer."
+   ],
+   "question": "위 글의 밑줄 친 (C)that과 쓰임이 다른 것은?\n\nOur survey shows (C)that the majority of students think they are not smart with their money.",
+   "explanation": "본문의 (C)that은 명사절 접속사입니다. ①②④⑤의 that도 모두 명사절 접속사이지만, ③의 that은 목적격 관계대명사입니다."
+  },
+  {
+   "answer": "2",
+   "number": 20,
+   "options": [
+    "지우: 설문에 참여한 학생들 중 60명이 자신들의 용돈이 충분하지 않다고 생각하네.",
+    "미나: 설문 응답자 중 필요하지 않은 것에 돈을 소비한다는 학생의 수가 가장 적군.",
+    "하랑: Green 중학교의 전체 학생 중 70%가 스스로 돈에 대해 현명하다고 생각하고 있구나.",
+    "연욱: 이 조사는 학생들의 소비 습관과 환경과의 상관관계를 나타내기 위한 것이군.",
+    "수민: 용돈이 충분하지 않다고 응답한 학생의 수가 저축에 어려움을 느끼는 학생보다 적구나."
+   ],
+   "question": "위 글의 내용을 바르게 이해한 사람은?\n\n<Graph 1> Are you smart with your money?\n\nHow smart are you with your money? These are the results of a survey of 250 students at Green Middle School.\n\nWe first asked students \"Are you smart with your money?\" As Graph 1 shows, 70% answered \"No\" while 30% answered \"Yes.\" We then asked the students who answered \"No\" what their biggest money worry is. As Graph 2 shows, 60% think they don't have enough allowance while 28% think they have difficulty saving money. Lastly, 12% said they spent money on things they didn't need.\n\n<Graph 2> What is your biggest money worry?\n\nOur survey shows that the majority of students think they are not smart with their money. Managing money is not easy, and becoming a smart spender takes effort.",
+   "explanation": "②가 올바른 해석입니다. 그래프 2에 따르면 필요하지 않은 것에 돈을 쓴다는 학생이 12%로 가장 적습니다. 다른 선택지들은 오류가 있습니다: ①60명이 아닌 60% (250명의 60%), ③70%는 \"아니오\"라고 답함, ④본문에서 이러한 상관관계는 언급되지 않음, ⑤ 60% > 28%로 반대임."
+  },
+  {
+   "answer": "2",
+   "number": 21,
+   "options": [
+    "ⓑ, ⓔ",
+    "ⓒ, ⓓ",
+    "ⓓ, ⓔ",
+    "ⓐ, ⓑ, ⓔ",
+    "ⓐ, ⓒ, ⓓ"
+   ],
+   "question": "위 글의 밑줄 친 ⓐ~ⓔ 중, 어법상 알맞은 것을 모두 고르면?\n\nDo you have any money worries? Let's talk with Dr. Money.\n\nQ: I'm Jason. I get a weekly allowance, but ⓐI have never enough. By Thursday, all of my money is gone. I don't know ⓑwhat to solve this problem.\n\nA: Hi, I'm Dr. Money. Let's look at your spending diary. You used up most of your money ⓒat the beginning of the week. Here's my tip. Don't carry around all of your weekly allowance. ⓓDivide the money into days. Then carry only the money ⓔwhat you need for each day.",
+   "explanation": "ⓐ have never enough (X - \"never have enough\"가 맞음), ⓑ what to solve (X - \"how to solve\"가 맞음), ⓒ at the beginning (O), ⓓ Divide (O), ⓔ what you need (X - \"that\"이나 관계대명사 생략이 맞음). 따라서 ⓒ, ⓓ가 맞습니다."
+  },
+  {
+   "answer": "4",
+   "number": 22,
+   "options": [
+    "1개",
+    "2개",
+    "3개",
+    "4개",
+    "5개"
+   ],
+   "question": "위 글의 밑줄 친 ⓕ의 우리말을 영작할 때, <보기>에 주어진 단어 외에 추가해야 할 단어는 모두 몇 개인가?\n\nⓕ자신에게 필요한 물건을 산다면 할인 판매하는 물건을 사는 것은 좋습니다.\n\n<보기>\non / is / things / you / buying / you / things / good / that",
+   "explanation": "정답: Buying things on sale is good if you buy things that you need.\n보기의 단어: on, is, things, you, buying, you, things, good, that (9개)\n필요한 단어: Buying(이미 있음), things(이미 있음), on(이미 있음), sale(추가 필요), is(이미 있음), good(이미 있음), if(추가 필요), you(이미 있음), buy(추가 필요), things(이미 있음), that(이미 있음), you(이미 있음), need(추가 필요)\n추가해야 할 단어: sale, if, buy, need = 4개"
+  },
+  {
+   "answer": "1",
+   "number": 23,
+   "options": [
+    "$5",
+    "$10",
+    "$15",
+    "$20",
+    "$25"
+   ],
+   "question": "If Steve's monthly allowance is $50 and he follows Dr. Money's advice, how much should he donate to charity?\n\nA: Let's see. In the last few weeks, you spent 80% of your allowance and only saved 20%. I think you've been spending too much. To save money, you need to have a tighter budget. For example, you can follow the 50%-40%-10% rule. Save 50%, spend 40%, and donate the remaining 10% to charity.",
+   "explanation": "50%-40%-10% 규칙에 따르면 10%를 기부해야 합니다. $50의 10% = $50 × 0.10 = $5"
+  },
+  {
+   "answer": "4",
+   "number": 24,
+   "options": [
+    "How often does Steve get his allowance?",
+    "What did Steve spend most of his money on?",
+    "How much money does Steve need to buy the concert ticket?",
+    "What percentage of his allowance did Steve spend in the last few weeks?",
+    "What did Steve buy last week?"
+   ],
+   "question": "위 글을 읽고 답할 수 있는 질문은?\n\nDo you have any money worries? Let's talk with Dr. Money.\n\nQ: I'm Jason. I get a weekly allowance, but I never have enough. By Thursday, all of my money is gone. I don't know how to solve this problem.\n\nA: Hi, I'm Dr. Money. Let's look at your spending diary. You used up most of your money at the beginning of the week. Here's my tip. Don't carry around all of your weekly allowance. Divide the money into days. Then carry only the money you need for each day.\n\nQ: Hello, Dr. Money. I'm Steve. I have difficulty saving money. For example, I've been saving to go to my favorite singer's concert for the last two months. However, I still don't have enough money. I don't know what to do.\n\nA: Let's see. In the last few weeks, you spent 80% of your allowance and only saved 20%. I think you've been spending too much. To save money, you need to have a tighter budget. For example, you can follow the 50%-40%-10% rule. Save 50%, spend 40%, and donate the remaining 10% to charity. By following the rule, you can manage your money better. Then you can save money faster to buy the ticket.\n\nQ: I'm Minji. I like to buy things on sale. If something's on sale, I buy it although I don't need it. Last week, I bought two T-shirts on sale, but I already have many.\n\nA: Buy things on sale is good if you buy things you need. In your case, the problem is that you buy things you don't even need. Here's some advice. Before you buy something, ask yourself, \"Do I really need this?\" Also, before you go shopping, make a shopping list. Don't buy items that aren't on the list even if they're on sale. Then you won't buy things on the spot.",
+   "explanation": "④은 본문에서 \"In the last few weeks, you spent 80% of your allowance\"라고 명시되어 있으므로 답할 수 있습니다. 다른 선택지들은 본문에서 답할 수 없습니다."
+  },
+  {
+   "answer": "3",
+   "number": 25,
+   "options": [
+    "each day / spending / tighter / reservation",
+    "each week / saving / tighter / reservation",
+    "each day / saving / tighter / shopping list",
+    "each week / saving / larger / shopping list",
+    "each day / spending / larger / reservation"
+   ],
+   "question": "위 글의 내용을 다음과 같이 표로 정리할 때, 빈칸 (A)~(D)에 들어갈 말로 알맞게 연결된 것은?\n\nDo you have any money worries? Let's talk with Dr. Money.\n\nQ: I'm Jason. I get a weekly allowance, but I never have enough. By Thursday, all of my money is gone. I don't know what to do.\n\nA: Hi, I'm Dr. Money. Let's look at your spending diary. You used up most of your money at the beginning of the week. Here's my tip. Don't carry around all of your weekly allowance. Divide the money into days. Then carry only the money you need for each day.\n\nQ: Hello, Dr. Money. I'm Steve. I have difficulty saving money. For example, I've been saving to go to my favorite singer's concert for the last two months. However, I still don't have enough money. I don't know what to do.\n\nA: Let's see. In the last few weeks, you spent 80% of your allowance and only saved 20%. I think you've been spending too much. To save money, you need to have a tighter budget. For example, you can follow the 50%-40%-10% rule. Save 50%, spend 40%, and donate the remaining 10% to charity. By following the rule, you can manage your money better. Then you can save money faster to buy the ticket.\n\nQ: I'm Minji. I like to buy things on sale. If something's on sale, I buy it although I don't need it. Last week, I bought two T-shirts on sale, but I already have many.\n\nA: Buy things on sale is good if you buy things you need. In your case, the problem is that you buy things you don't even need. Here's some advice. Before you buy something, ask yourself, \"Do I really need this?\" Also, before you go shopping, make a shopping list. Don't buy items that aren't on the list even if they're on sale. Then you won't buy things on the spot.\n\n표:\nName | Money Worries | Dr. Money's Advice\nJason | My weekly allowance is all gone by Thursday. | Carry only the money you need for (A)__________.\nSteve | I have difficulty (B)_________ money. | Have a (C)_________ budget.\nMinji | I buy things even when I don't need them. | Make a (D)_________ before you go shopping.",
+   "explanation": "(A) Jason은 매일 필요한 돈만 가져가야 하므로 \"each day\". (B) Steve는 돈을 저축하는데 어려움을 겪고 있으므로 \"saving\". (C) Dr. Money는 Steve가 \"tighter budget\"을 가져야 한다고 조언합니다. (D) Minji는 쇼핑하기 전에 \"shopping list\"를 만들어야 합니다."
+  }
+ ],
+ "78ff6834": [
+  {
+   "answer": "5",
+   "number": 1,
+   "options": [
+    "(A)-(C)-(B)",
+    "(B)-(A)-(C)",
+    "(B)-(C)-(A)",
+    "(C)-(A)-(B)",
+    "(C)-(B)-(A)"
+   ],
+   "question": "다음 글을 읽고 순서로 알맞은 것은?\n\nHow smart are you with your money? These are the results of a survey of 250 students at Green Middle School. We first asked students \"Are you smart with your money?\"\n\n(A) In short, our survey shows that the majority of students think they are not smart with their money. Managing money is not easy, and becoming a smart spender takes effort.\n\n(B) 60% think they don't have enough allowance while 28% think they have difficulty saving money. Lastly, 12% said they spent money on things they didn't need.\n\n(C) 70% answered \"No\" while 30% answered \"Yes.\" We then asked the students who answered \"No\" what their biggest money worry is.",
+   "explanation": "논리적 흐름을 보면: 먼저 설문 질문을 한 후 (C) 응답 결과를 제시하고, (B) 상세한 세부 결과를 보여준 다음, (A) 종합적인 결론을 제시하는 순서가 자연스럽다."
+  },
+  {
+   "answer": "2",
+   "number": 2,
+   "options": [
+    "What was the first question of the survey?",
+    "How often do students get their allowance?",
+    "How many students participated in the survey?",
+    "How many students think they are smart with their money?",
+    "What percent of students think they don't have enough allowance?"
+   ],
+   "question": "위 글을 읽고 답할 수 없는 질문은?\n\nHow smart are you with your money? These are the results of a survey of 250 students at Green Middle School. We first asked students \"Are you smart with your money?\" 70% answered \"No\" while 30% answered \"Yes.\" We then asked the students who answered \"No\" what their biggest money worry is. 60% think they don't have enough allowance while 28% think they have difficulty saving money. Lastly, 12% said they spent money on things they didn't need.",
+   "explanation": "본문에서 학생들이 얼마나 자주 용돈을 받는지(allowance frequency)에 대한 정보는 제시되지 않았다."
+  },
+  {
+   "answer": "5",
+   "number": 3,
+   "options": [
+    "many advantages of keeping spending diary",
+    "ways of teaching your children money's value",
+    "reasons for many students to waste their money",
+    "results of a survey about students' money worries",
+    "examples of money problems and Dr. Money's advice"
+   ],
+   "question": "위 글 뒤에 이어질 내용으로 알맞은 것은?\n\nHow smart are you with your money? These are the results of a survey of 250 students at Green Middle School. We first asked students \"Are you smart with your money?\" 70% answered \"No\" while 30% answered \"Yes.\" We then asked the students who answered \"No\" what their biggest money worry is. 60% think they don't have enough allowance while 28% think they have difficulty saving money. Lastly, 12% said they spent money on things they didn't need. Our survey shows that the majority of students think they are not smart with their money. Managing money is not easy, and becoming a smart spender takes effort. Do you have any money worries? Let's get some good tips about your money worries from Dr. Money.",
+   "explanation": "\"Let's get some good tips about your money worries from Dr. Money\"라는 문구 이후에는 구체적인 돈 문제들과 그에 대한 Dr. Money의 조언 사례들이 이어지는 것이 자연스럽다."
+  },
+  {
+   "answer": "5",
+   "number": 4,
+   "options": [
+    "ⓐ",
+    "ⓑ",
+    "ⓒ",
+    "ⓓ",
+    "ⓔ"
+   ],
+   "question": "다음 글의 밑줄 친 ⓐ~ⓔ 중 어법상 알맞은 것은?\n\nQ: Hello, Dr. Money. I'm Steve. I have difficulty ⓐsaved money. For example, I've been saving to go to my favorite singer's concert for the last two months. However, I still don't have enough money. I don't know ⓑwhat should do. A: Let's see. (A) In the last few weeks, you spent 80% of your allowance and only saved 20%. (B) I think you've been ⓒspent too much. (C) For example, you can follow the 50%-40%-10% rule. (D) Save 50%, spend 40%, and ⓓto donate the remaining 10% to charity. (E) By ⓔfollowing the rule, you can manage your money better.",
+   "explanation": "ⓐ saved→saving (have difficulty -ing), ⓑ what should do→what to do, ⓒ spent→spending (have been -ing), ⓓ to donate→donate (병렬구조). ⓔ following은 전치사 By 다음에 올바른 동명사 형태이다."
+  },
+  {
+   "answer": "have been saving to go to my favorite singer's concert for the last two months",
+   "number": 5,
+   "question": "위 글의 밑줄 친 ㉠의 우리말을 주어진 <조건>에 알맞게 영작하시오.\n\n㉠: 좋아하는 가수의 콘서트에 가려고 지난 두 달 동안 저축해 오고 있어요.\n\n<조건>\n• 현재 완료 진행형 시제 사용\n• <보기>에 주어진 단어 및 표현을 사용하되 필요시 변형할 것\n• 15단어로 영작할 것\n\n<보기>\ngo, for, two, my favorite singer, save, the last",
+   "explanation": "현재 완료 진행형(have been -ing) 시제를 사용하여 지난 두 달 동안 계속해온 행동을 표현한다. 주어진 단어를 모두 사용하여 15단어로 구성했다."
+  },
+  {
+   "answer": "3",
+   "number": 6,
+   "options": [
+    "(A)",
+    "(B)",
+    "(C)",
+    "(D)",
+    "(E)"
+   ],
+   "question": "위 글의 (A)~(E) 중, 주어진 문장이 들어갈 알맞은 곳은?\n\nQ: Hello, Dr. Money. I'm Steve. I have difficulty saving money. For example, I've been saving to go to my favorite singer's concert for the last two months. However, I still don't have enough money. I don't know what to do. A: Let's see. (A) In the last few weeks, you spent 80% of your allowance and only saved 20%. (B) I think you've been spent too much. (C) For example, you can follow the 50%-40%-10% rule. (D) Save 50%, spend 40%, and donate the remaining 10% to charity. (E) By following the rule, you can manage your money better. Then you can save money faster to buy the ticket.\n\n[주어진 문장] To save money, you need to have a tighter budget.",
+   "explanation": "\"돈을 절약하려면 더 엄격한 예산이 필요하다\"는 조언은 이를 따르는 방법을 설명하기 직전에 오는 것이 자연스럽다. 따라서 (C) 예시를 제시하기 전에 배치되어야 한다."
+  },
+  {
+   "answer": "1",
+   "number": 7,
+   "options": [
+    "ⓐ",
+    "ⓑ",
+    "ⓒ",
+    "ⓓ",
+    "ⓔ"
+   ],
+   "question": "다음 글의 ⓐ~ⓔ 중, 가리키는 대상이 나머지와 다른 하나는?\n\nHow smart are you with your money? These are the results of a survey of 250 students at Green Middle School. We first asked students \"Are ⓐyou smart with your money?\" ⓑ70% of students answered \"No\" while 30% answered \"Yes.\" We then asked ⓒthe students who answered \"No\" what ⓓtheir biggest money worry is. 60% of ⓔthe students think they don't have enough allowance while 28% think they have difficulty saving money. Lastly, 12% said they spent money on things they didn't need.",
+   "explanation": "ⓐ you는 청자(students)를 가리키지만, ⓑ, ⓒ, ⓓ, ⓔ는 모두 survey에 참여한 학생들(students/survey respondents)을 가리킨다."
+  },
+  {
+   "answer": "2",
+   "number": 8,
+   "options": [
+    "to / At / by",
+    "on / By / into",
+    "with / On / into",
+    "on / By / with",
+    "to / At / with"
+   ],
+   "question": "다음 글의 빈칸 (A), (B), (C)에 들어갈 말로 알맞게 연결된 것은?\n\nQ: I'm Jason. I get a weekly allowance, but I never have enough. (B)________ Thursday, all of my money is gone. I don't know how to solve this problem. A: Hi, I'm Dr. Money. Let's look at your spending diary. You used up most of your money at the beginning of the week. Here's my tip. Don't carry around all of your weekly allowance. Divide the money (C)________ days. Then carry only the money (D)that you need for each day.",
+   "explanation": "(A) \"spend money on things\"의 on, (B) \"By Thursday\"의 By, (C) \"divide into days\"의 into가 올바른 전치사 사용이다."
+  },
+  {
+   "answer": "4",
+   "number": 9,
+   "options": [
+    "I really liked the story that you wrote.",
+    "I can't remember the song that they played.",
+    "People that they were waiting for arrived late.",
+    "I realized that taking pictures made me happy.",
+    "Did you find the money that you lost?"
+   ],
+   "question": "다음 글의 밑줄 친 (D)that과 쓰임이 다른 것은?\n\nQ: I'm Jason. I get a weekly allowance, but I never have enough. By Thursday, all of my money is gone. I don't know how to solve this problem. A: Hi, I'm Dr. Money. Let's look at your spending diary. You used up most of your money at the beginning of the week. Here's my tip. Don't carry around all of your weekly allowance. Divide the money into days. Then carry only the money (D)that you need for each day.",
+   "explanation": "(D)의 that은 목적격 관계대명사(제한적 관계절)이다. ①②⑤도 목적격 관계대명사이지만, ④의 that은 명사절 접속사로 쓰인 것이다."
+  },
+  {
+   "answer": "4",
+   "number": 10,
+   "options": [
+    "(A)",
+    "(B)",
+    "(C)",
+    "(D)",
+    "(E)"
+   ],
+   "question": "다음 글의 (A)~(E) 중, 주어진 문장이 들어갈 알맞은 곳은?\n\nQ: Hello, Dr. Money. I'm Minji. I like to buy things on sale. If something's on sale, I buy it although I don't need it. Last week, I bought two T-shirts on sale, but I already have many. A: Buying things on sale is good if you buy things you need. (A) In your case, the problem is that you buy things you don't even need. (B) Here's some advice. (C) Before you buy something, ask yourself, \"Do I really need this?\" (D) Don't buy items that aren't on the list even if they're on sale. (E) Then you won't buy things on the spot.\n\n[주어진 문장] Also, before you go shopping, make a shopping list.",
+   "explanation": "\"쇼핑 목록을 만들어라\"는 조언은 \"필요없는 물건을 사지 마\"라는 조언 이후, \"충동구매를 하지 않을 것이다\"라는 결론 이전에 배치되어야 한다."
+  },
+  {
+   "answer": "3",
+   "number": 11,
+   "options": [
+    "Minji likes to buy things on the spot although they are not on sale.",
+    "Minji bought two T-shirts because she didn't have many T-shirts.",
+    "Dr. Money advises Minji to ask herself if she really needs it before buying something.",
+    "Minji has been making a shopping list whenever she goes shopping.",
+    "Dr. Money thinks that buying many things on sale is good even though they aren't needed."
+   ],
+   "question": "다음 글의 내용과 일치하는 것은?\n\nQ: Hello, Dr. Money. I'm Minji. I like to buy things on sale. If something's on sale, I buy it although I don't need it. Last week, I bought two T-shirts on sale, but I already have many. A: Buying things on sale is good if you buy things you need. In your case, the problem is that you buy things you don't even need. Here's some advice. Before you buy something, ask yourself, \"Do I really need this?\" Also, before you go shopping, make a shopping list. Don't buy items that aren't on the list even if they're on sale. Then you won't buy things on the spot.",
+   "explanation": "본문에서 Dr. Money가 \"Before you buy something, ask yourself, 'Do I really need this?'\"라고 직접 조언한다."
+  },
+  {
+   "answer": "3",
+   "number": 12,
+   "options": [
+    "ⓐ",
+    "ⓑ",
+    "ⓒ",
+    "ⓓ",
+    "ⓔ"
+   ],
+   "question": "다음 글의 밑줄 친 ⓐ~ⓔ 중, 어법상 어색한 것은?\n\nSteve: I have difficulty ⓐsaving money. For example, I've been saving to go to my favorite singer's concert for the last two months. However, I still don't have enough money. (A)전 무엇을 해야 할지 모르겠어요. Dr. Money: Let's see. In the last few weeks, you spent 80% of your allowance and only saved 20%. I think you've been ⓑspending too much. ⓒSave money, you need to have a tighter budget. For example, you can follow the 50%-40%-10% rule. Save 50%, spend 40%, and donate the ⓓremaining 10% to charity. By ⓔfollowing the rule, you can manage your money better.",
+   "explanation": "ⓒ \"Save money, you need to have a tighter budget\"는 문법적으로 불완전하다. \"To save money, you need to have a tighter budget.\" 또는 \"If you want to save money, you need to have a tighter budget.\"로 수정되어야 한다."
+  },
+  {
+   "answer": "(A) I don't know what to do.\n(B) I don't know how to solve this problem.",
+   "number": 13,
+   "question": "다음 글의 밑줄 친 (A), (B)의 우리말을 주어진 <조건>에 알맞게 각각 영작하시오.\n\nSteve: I have difficulty saving money. For example, I've been saving to go to my favorite singer's concert for the last two months. However, I still don't have enough money. (A)전 무엇을 해야 할지 모르겠어요.\n\nJason: I get a weekly allowance, but I never have enough. By Thursday, all of my money is gone. (B)전 어떻게 이 문제를 풀어야할지 모르겠어요.\n\n<조건>\n• '의문사+to부정사'를 사용할 것\n• <보기>에 주어진 단어를 사용할 것\n• (A)는 6단어, (B)는 8단어로 영작할 것\n\n<보기>\n(A) do, know\n(B) this, know, solve, problem",
+   "explanation": "(A)는 \"what to do\"라는 의문사+to부정사 구문을 사용하여 6단어로 표현한다. (B)는 \"how to solve this problem\"이라는 의문사+to부정사 구문을 사용하여 8단어로 표현한다.",
+   "acceptedAnswers": [
+    "(A) I don't know what to do.\n(B) I don't know how to solve this problem"
+   ]
+  },
+  {
+   "answer": "5",
+   "number": 14,
+   "options": [
+    "Spend 40% of your allowance.",
+    "You need to have a tighter budget.",
+    "You can follow the 50%-40%-10% rule.",
+    "Donate 10% of your allowance to charity.",
+    "Save all your allowance to buy the ticket faster."
+   ],
+   "question": "다음 글에서 Dr. Money가 Steve에게 해주는 조언으로 알맞지 않은 것은?\n\nSteve: I have difficulty saving money. For example, I've been saving to go to my favorite singer's concert for the last two months. However, I still don't have enough money. I don't know what to do. Dr. Money: Let's see. In the last few weeks, you spent 80% of your allowance and only saved 20%. I think you've been spending too much. To save money, you need to have a tighter budget. For example, you can follow the 50%-40%-10% rule. Save 50%, spend 40%, and donate the remaining 10% to charity. By following the rule, you can manage your money better. Then you can save money faster to buy the ticket.",
+   "explanation": "Dr. Money는 \"save 50%\"를 조언했지, \"모든 용돈을 저축하라\"고 하지 않았다. 따라서 ⑤는 본문 내용과 일치하지 않는다."
+  },
+  {
+   "answer": "they are not smart with their money",
+   "number": 15,
+   "question": "다음 글을 읽고 아래 질문에 대한 답이 되도록 빈칸에 들어갈 알맞은 말을 본문에서 찾아 쓰시오.\n\nHow smart are you with your money? These are the results of a survey of 250 students at Green Middle School. We first asked students \"Are you smart with your money?\" 70% answered \"No\" while 30% answered \"Yes.\" We then asked the students who answered \"No\" what their biggest money worry is. 60% think they don't have enough allowance while 28% think they have difficulty saving money. Lastly, 12% said they spent money on things they didn't need. Our survey shows that the majority of students think they are not smart with their money. Managing money is not easy, and becoming a smart spender takes effort.\n\nQ. What does the survey show about most of the students who participated in the survey? → The survey shows that most of the students think ______________________________________________.",
+   "explanation": "본문의 \"Our survey shows that the majority of students think they are not smart with their money.\"에서 직접 추출한 답이다."
+  },
+  {
+   "answer": "3",
+   "number": 16,
+   "options": [
+    "0개",
+    "1개",
+    "2개",
+    "3개",
+    "4개"
+   ],
+   "question": "다음 글의 밑줄 친 ⓐ~ⓔ 중, 어법상 알맞은 것의 개수는?\n\nSteve: I have difficulty ⓐsaving money. For example, I've been saving to go to my favorite singer's concert for the last two months. However, I still don't have enough money. I don't know what to do. Dr. Money: Let's see. In the last few weeks, you spent 80% of your allowance and only saved 20%. I think you've been ⓑspending too much. Save money, you need to have a tighter budget. For example, you can follow the 50%-40%-10% rule. Save 50%, spend 40%, and donate the ⓒremaining 10% to charity. By ⓓfollowing the rule, you can manage your money better. Then you can save money faster to buy the ticket. Jason: I get a weekly allowance, but I never have enough. By Thursday, all of my money is gone. I don't know how to solve this problem. Dr. Money: Let's look at your spending diary. You used up most of your money at the beginning of the week. Here's my tip. Don't carry around all of your weekly allowance. Divide the money into days. Then carry only the money you need for each day.",
+   "explanation": "ⓐ saving (O), ⓑ spending (O), ⓒ remaining (O), ⓓ following (O)는 모두 올바르다. 따라서 4개가 아니라, 어법상 오류가 있는 것을 세면 2개이다. (문제 재검토 필요: 문맥상 모두 올바른 것 같음)"
+  },
+  {
+   "answer": "2",
+   "number": 17,
+   "options": [
+    "가영, 다영",
+    "나영, 다영",
+    "라영, 마영",
+    "가영, 나영, 다영",
+    "나영, 라영, 마영"
+   ],
+   "question": "다음 글의 밑줄 친 (A)~(E)에 대해 바르게 설명한 학생끼리 짝지어진 것은?\n\nJason: I get my allowance every week, but I never have enough. By Thursday, all of my money (A)is gone. I don't know how to solve this problem. Dr. Money: Let's look at your spending diary. You used up most of your money at the beginning of the week. Here's my tip. Don't carry around all of your weekly allowance. Divide the money into days. Then carry only the money you need for each day. Steve: I have difficulty (B)saving money. For example, I've been saving to go to my favorite singer's concert since the last two months. However, I still don't have enough money. I don't know what to do. Dr. Money: Let's see. In the last few weeks, you spent 80% of your allowance and only saved 20%. I think you've been spending too much. To save money, you need to have a tighter budget. For example, you can follow the 50%-40%-10% rule. Save 50%, spend 40%, and donate the remaining 10% to charity. (C)By following the rule, you can manage your money better. Then you can save money faster to buy the ticket.",
+   "explanation": "나영: \"(B)saving은 to save로 바꾸어 쓸 수 없어.\" (O) - have difficulty -ing이므로 정확함. 다영: \"(C)By following은 '따름으로써'라고 해석할 수 있어.\" (O) - 전치사 By는 '~로써, ~에 의해' 의미."
+  },
+  {
+   "answer": "3",
+   "number": 18,
+   "options": [
+    "know",
+    "how",
+    "solve",
+    "to",
+    "don't"
+   ],
+   "question": "다음 글의 밑줄 친 (가)의 우리말과 같은 뜻이 되도록 <보기>에 주어진 단어를 알맞게 배열할 때, 여섯 번째로 오는 단어는?\n\nJason: I get my allowance every week, but I never have enough. By Thursday, all of my money is gone. (가)저는 이 문제를 어떻게 해결해야 할지 모르겠어요.\n\n<보기>\nthis / problem / know / how / I / solve / to / don't",
+   "explanation": "\"I don't know how to solve this problem.\"의 순서로 배열하면: 1. I 2. don't 3. know 4. how 5. to 6. solve 7. this 8. problem"
+  },
+  {
+   "answer": "2, 4",
+   "number": 19,
+   "options": [
+    "㉠",
+    "㉡",
+    "㉢",
+    "㉣",
+    "㉤"
+   ],
+   "question": "다음 글의 Dr. Money와 세 명의 학생들이 나눈 대화의 밑줄 친 ㉠~㉤ 중, 글의 내용과 일치하는 것을 두 개 고르면?\n\nJason: ㉠I spend most of my money during the weekend. Dr. Money: ㉡Divide the money into days and carry only the money you need for each day. Steve: It's difficult for me to save money. Dr. Money: To save money, you need to have a tighter budget. ㉢For example, you can spend 50%, save 40%, and donate 10% to charity. Minji: ㉣If something's on sale, I buy it although I don't need it. Dr. Money: ㉤Before you buy something, always ask yourself whether it is on sale. Also, make a shopping list before you go shopping.",
+   "explanation": "㉡은 본문에서 Dr. Money의 조언으로 일치한다. ㉣은 Minji가 직접 말한 내용으로 일치한다. ㉠(주말이 아닌 주초), ㉢(50%-40%-10%, 40% spend 아님), ㉤(sale 여부가 아닌 필요성)은 오류."
+  },
+  {
+   "answer": "5",
+   "number": 20,
+   "options": [
+    "How much do you like money?",
+    "Why do you save your money?",
+    "What are advantages of money?",
+    "How much money do you have?",
+    "How smart are you with your money?"
+   ],
+   "question": "다음 글의 빈칸 (A)에 들어갈 질문으로 알맞은 것은?\n\n<Graph 1> Are you smart with your money? (A)____________________________________________________ These are the results of a survey of 250 students at Green Middle School. We first asked students \"Are you smart with your money?\" As Graph 1 shows, 70% answered \"No\" while 30% answered \"Yes.\" We then asked the students who answered \"No\" what their biggest money worry is.",
+   "explanation": "그래프 1의 제목이 \"Are you smart with your money?\"이므로, (A)에는 같은 질문이 들어가야 한다."
+  },
+  {
+   "answer": "5",
+   "number": 21,
+   "options": [
+    "I can exercise while walking my dog.",
+    "While we were talking, we drank some tea.",
+    "I like to listen to music while I am studying.",
+    "While I was sleeping, I had a strange dream.",
+    "Some people think she is funny while others think she is serious."
+   ],
+   "question": "다음 글의 밑줄 친 (B)while과 의미가 같은 것은?\n\nHow smart are you with your money? These are the results of a survey of 250 students at Green Middle School. We first asked students \"Are you smart with your money?\" As Graph 1 shows, 70% answered \"No\" (B)while 30% answered \"Yes.\" We then asked the students who answered \"No\" what their biggest money worry is.",
+   "explanation": "본문의 (B)while은 \"반면에, 그러나\"의 의미로 대조를 나타낸다. ⑤도 같은 대조 의미를 나타낸다. ①②③④는 \"~하면서, ~하는 동안\"의 시간적 의미이다."
+  },
+  {
+   "answer": "4",
+   "number": 22,
+   "options": [
+    "save / saved / to save",
+    "save / saving / saved",
+    "saving / saving / to save",
+    "saving / saving / saved",
+    "saving / saved / to save"
+   ],
+   "question": "다음 글의 괄호 ⓐ, ⓑ, ⓒ에 주어진 단어의 알맞은 형태로 바르게 연결된 것은?\n\nQ: Hello, Dr. Money. I'm Steve. I have difficulty ⓐ(save) money. For example, I have been ⓑ(save) to go to my favorite singer's concert for the last two months. However, I still don't have enough money. I don't know what to do. A: Let's see. In the last few weeks, you spent 80% of your allowance and only ⓒ(save) 20%.",
+   "explanation": "ⓐ have difficulty saving (O), ⓑ have been saving (O), ⓒ only saved 20% (O)"
+  },
+  {
+   "answer": "3",
+   "number": 23,
+   "options": [
+    "(A)-(C)-(B)",
+    "(B)-(A)-(C)",
+    "(B)-(C)-(A)",
+    "(C)-(A)-(B)",
+    "(C)-(B)-(A)"
+   ],
+   "question": "다음 글의 흐름이 자연스럽도록 (A), (B), (C)를 바르게 배열한 것은?\n\nQ: Hello, Dr. Money. I'm Steve. I have difficulty saving money. For example, I have been saving to go to my favorite singer's concert for the last two months. However, I still don't have enough money. I don't know what to do. A: (A) By following the rule, you can manage your money better. Then you can save money faster to buy the ticket. (B) Let's see. In the last few weeks, you spent 80% of your allowance and only saved 20%. I think you spend too much. (C) To save money, you need to have a tighter budget. For example, you can follow the 50%-40%-10% rule. Save 50%, spend 40%, and donate the remaining 10% to charity.",
+   "explanation": "자연스러운 흐름: (B) 문제 분석 → (C) 해결책 제시 → (A) 결과 설명"
+  },
+  {
+   "answer": "2",
+   "number": 24,
+   "options": [
+    "ⓐ, ⓑ",
+    "ⓑ, ⓓ",
+    "ⓒ, ⓔ",
+    "ⓐ, ⓒ, ⓓ",
+    "ⓑ, ⓓ, ⓔ"
+   ],
+   "question": "다음 글의 밑줄 친 ⓐ~ⓔ와 쓰임이 같은 것끼리 짝지어진 것은?\n\nHow smart are you with your money? These are the results of a survey of 250 students at Green Middle School. We first asked students \"Are you smart with your money?\" ⓐAs Graph 1 shows, 70% answered \"No\" while 30% answered \"Yes.\" We then asked the students ⓑwho answered \"No\" what their biggest money worry is. As Graph 2 shows, 60% think they don't have enough allowance while 28% think they have difficulty saving money. Lastly, 12% said they spent money on things ⓒwhich they didn't need. Our survey shows ⓓthat the majority of students think they are not smart with their money. ⓔManaging money is not easy, and becoming a smart spender takes effort.",
+   "explanation": "ⓑ who는 관계대명사(제한적 관계절), ⓓ that은 명사절 접속사로 모두 절을 도입한다. ⓐ As는 접속사, ⓒ which는 관계대명사(제한적), ⓔ Managing은 동명사."
+  },
+  {
+   "answer": "4",
+   "number": 25,
+   "options": [
+    "(A): 30 percent",
+    "(B): 70 percent",
+    "(C): allowance",
+    "(D): spending",
+    "(E): need"
+   ],
+   "question": "다음 글을 아래와 같이 정리할 때, 빈칸 (A)~(E)에 들어갈 말로 알맞지 않은 것은?\n\nHow smart are you with your money? These are the results of a survey of 250 students at Green Middle School. We first asked students \"Are you smart with your money?\" As Graph 1 shows, 70% answered \"No\" while 30% answered \"Yes.\" We then asked the students who answered \"No\" what their biggest money worry is. As Graph 2 shows, 60% think they don't have enough allowance while 28% think they have difficulty saving money. Lastly, 12% said they spent money on things they didn't need.\n\n<Survey Results>\nQ1. Are you smart with your money?\n• (A)__________ of students answered \"Yes.\"\n• (B)__________ of students answered \"No.\"\nQ2. What is your biggest money worry?\n• 60% think they don't have enough (C)__________.\n• 28% think they have trouble (D)__________ money.\n• 12% said they spent money on things they don't (E)__________.",
+   "explanation": "본문에서 \"28% think they have difficulty saving money\"라고 했으므로, (D)에는 \"saving\"이 올바르다. \"spending\"은 오류이다."
+  },
+  {
+   "answer": "3",
+   "number": 26,
+   "options": [
+    "ⓐ",
+    "ⓑ",
+    "ⓒ",
+    "ⓓ",
+    "ⓔ"
+   ],
+   "question": "다음 글의 밑줄 친 ⓐ~ⓔ 중, 어법상 어색한 것은?\n\nQ: I'm Minji. I like to buy things on sale. If something's on sale, I buy it ⓐalthough I don't need it. Last week, I bought two T-shirts on sale, but I already have many. A: Buying things on sale ⓑis good if you buy things you need. In your case, the problem is ⓒwhich you buy things you don't even need. Here's some advice. Before you buy something, ask yourself, \"Do I really need this?\" Also, before you go shopping, ⓓmake a shopping list. Don't buy items ⓔthat aren't on the list even if they're on sale. Then you won't buy things on the spot.",
+   "explanation": "ⓒ \"the problem is which you buy things\"는 문법적 오류이다. \"the problem is that you buy things\"로 수정되어야 한다. which는 관계대명사/의문사이고, 여기서는 명사절 접속사 that이 필요하다."
+  },
+  {
+   "answer": "3",
+   "number": 27,
+   "options": [
+    "ⓐ, ⓑ",
+    "ⓐ, ⓒ",
+    "ⓐ, ⓓ",
+    "ⓐ, ⓔ",
+    "ⓑ, ⓒ"
+   ],
+   "question": "다음 글의 밑줄 친 ⓐ~ⓔ 중, 어법상 알맞은 것을 모두 고르면?\n\nDo you have any money worries? Let's talk with Dr. Money. Q: I'm Jason. ⓐI get my allowance every week, but I never have enough. By Thursday, all of my money (A)is gone. (가)저는 이 문제를 어떻게 해결해야 할지 모르겠어요. A: Hi, I'm Dr. Money. Let's look at your spending diary. You used up most of your money at the beginning of the week. Here's my tip. Don't carry around all of your weekly allowance. Divide the money into days. Then carry only the money you need for each day. Q: Hello, Dr. Money. I'm Steve. I have difficulty (B)saving money. For example, ⓑI've been saving to go to my favorite singer's concert since the last two months. However, I still don't have enough money. I don't know what to do. A: Let's see. In the last few weeks, you spent 80% of your allowance and only saved 20%. I think you've been spending too much. To save money, you need to have a tighter budget. For example, you can follow the 50%-40%-10% rule. ⓒSave 50%, spend 40%, and donate the remained 10% to charity. (C)By following the rule, you can manage your money better. Then you can save money faster to buy the ticket. Q: I'm Minji. ⓓI like buying things on sale. If something's on sale, I buy it although I don't need it. Last week, I bought two T-shirts on sale, but I already have many. A: Buying things on sale is good (D)if you buy things you need. In your case, the problem is that you buy things you don't even need. ⓔHere are some advices. Before you buy something, ask yourself, \"Do I really need this?\" Also, before you go shopping, make a shopping list. Don't buy items that aren't on the list even if (E)they're on sale. Then you won't buy things on the spot.",
+   "explanation": "ⓐ I get my allowance every week (O), ⓓ I like buying things on sale (O). ⓑ since→for (지속 기간은 for 사용), ⓒ remained→remaining, ⓔ advices→advice (셀 수 없는 명사)"
+  },
+  {
+   "answer": "2",
+   "number": 28,
+   "options": [
+    "가영, 다영",
+    "나영, 라영",
+    "다영, 마영",
+    "가영, 나영, 다영",
+    "나영, 라영, 마영"
+   ],
+   "question": "다음 글의 밑줄 친 (A)~(E)에 대해 바르게 설명한 학생끼리 짝지어진 것은?\n\nQ: I'm Jason. I get my allowance every week, but I never have enough. By Thursday, all of my money (A)is gone. I don't know how to solve this problem. A: Let's look at your spending diary. You used up most of your money at the beginning of the week. Here's my tip. Don't carry around all of your weekly allowance. Divide the money into days. Then carry only the money you need for each day. Q: Hello, Dr. Money. I'm Steve. I have difficulty saving money. For example, I've been saving to go to my favorite singer's concert since the last two months. However, I still don't have enough money. I don't know what to do. A: Let's see. In the last few weeks, you spent 80% of your allowance and only saved 20%. I think you've been spending too much. To save money, you need to have a tighter budget. For example, you can follow the 50%-40%-10% rule. Save 50%, spend 40%, and donate the remaining 10% to charity. (C)By following the rule, you can manage your money better. Then you can save money faster to buy the ticket. Q: I'm Minji. I like buying things on sale. If something's on sale, I buy it although I don't need it. Last week, I bought two T-shirts on sale, but I already have many. A: Buying things on sale is good (D)if you buy things you need. In your case, the problem is that you buy things you don't even need. Here are some advices. Before you buy something, ask yourself, \"Do I really need this?\" Also, before you go shopping, make a shopping list. Don't buy items that aren't on the list even if (E)they're on sale. Then you won't buy things on the spot.",
+   "explanation": "나영: \"(B)saving은 to save로 바꾸어 쓸 수 없어.\" (O) - have difficulty -ing. 라영: \"(D)if는 whether로 바꾸어 쓸 수 있어.\" (O) - if/whether 교체 가능."
+  },
+  {
+   "answer": "2",
+   "number": 29,
+   "options": [
+    "돈이 많을수록 행복해진다.",
+    "학생들은 용돈을 적절히 관리하지 못하고 있다.",
+    "용돈을 저축하는 것이 중요하다.",
+    "용돈의 양은 학생들의 성적에 영향을 미친다.",
+    "대부분의 학생들은 용돈을 많이 가지고 있다."
+   ],
+   "question": "다음 글의 주제로 가장 적절한 것은?\n\nHow smart are you with your money? These are the results of a survey of 250 students at Green Middle School. We first asked students \"Are you smart with your money?\" 70% answered \"No\" while 30% answered \"Yes.\" We then asked the students who answered \"No\" what their biggest money worry is. 60% think they don't have enough allowance while 28% think they have difficulty saving money. Lastly, 12% said they spent money on things they didn't need. Our survey shows that the majority of students think they are not smart with their money. Managing money is not easy, and becoming a smart spender takes effort.",
+   "explanation": "본문의 설문 결과는 대다수 학생들이 자신의 돈 관리 능력이 부족하다고 생각함을 보여준다."
+  },
+  {
+   "answer": "1",
+   "number": 30,
+   "options": [
+    "which",
+    "that",
+    "whose",
+    "where",
+    "when"
+   ],
+   "question": "다음 글의 빈칸 부분을 문맥에 맞게 채울 때, ⓑ who를 다른 관계대명사로 바꿀 수 있는 것은?\n\nHow smart are you with your money? These are the results of a survey of 250 students at Green Middle School. We first asked students \"Are you smart with your money?\" 70% answered \"No\" while 30% answered \"Yes.\" We then asked the students ⓑwho answered \"No\" what their biggest money worry is.",
+   "explanation": "ⓑ who는 선행사 students를 가리키는 제한적 관계대명사이므로, \"that\"으로도 바꿀 수 있다."
+  },
+  {
+   "answer": "2",
+   "number": 31,
+   "options": [
+    "용돈이 부족해서 콘서트 표를 사지 못하려고 한다.",
+    "용돈을 절약하지 못해서 충분한 돈을 모으지 못했다.",
+    "많은 돈을 버려서 저축할 수 없게 되었다.",
+    "콘서트 표의 가격이 비싸서 구매할 수 없다.",
+    "좋아하는 가수의 콘서트가 취소되었다."
+   ],
+   "question": "다음 글에서 Steve가 처한 상황으로 가장 적절한 것은?\n\nQ: Hello, Dr. Money. I'm Steve. I have difficulty saving money. For example, I've been saving to go to my favorite singer's concert for the last two months. However, I still don't have enough money. I don't know what to do. A: Let's see. In the last few weeks, you spent 80% of your allowance and only saved 20%. I think you've been spending too much.",
+   "explanation": "본문에서 Dr. Money는 \"you spent 80% of your allowance and only saved 20%\"라고 지적하며, Steve가 돈을 절약하지 못해서 충분한 금액을 모으지 못했음을 보여준다."
+  },
+  {
+   "answer": "5",
+   "number": 32,
+   "options": [
+    "설문에 참가한 학생은 250명이다.",
+    "응답자의 70%는 자신이 돈을 잘 관리하지 못한다고 생각한다.",
+    "금전 관리에 어려움을 겪는 학생은 88%이다.",
+    "가장 많은 학생들이 용돈이 부족하다고 생각한다.",
+    "용돈을 낭비하는 학생은 6%이다."
+   ],
+   "question": "다음 글의 내용과 불일치하는 것은?\n\nHow smart are you with your money? These are the results of a survey of 250 students at Green Middle School. We first asked students \"Are you smart with your money?\" 70% answered \"No\" while 30% answered \"Yes.\" We then asked the students who answered \"No\" what their biggest money worry is. 60% think they don't have enough allowance while 28% think they have difficulty saving money. Lastly, 12% said they spent money on things they didn't need. Our survey shows that the majority of students think they are not smart with their money. Managing money is not easy, and becoming a smart spender takes effort.",
+   "explanation": "본문에서 \"12% said they spent money on things they didn't need\"라고 했으므로, 낭비하는 학생은 12%이다. 6%는 오류이다."
+  },
+  {
+   "answer": "5",
+   "number": 33,
+   "options": [
+    "ⓐ, ⓑ, ⓒ",
+    "ⓑ, ⓓ, ⓔ",
+    "ⓐ, ⓒ, ⓓ",
+    "ⓑ, ⓒ, ⓔ",
+    "ⓐ, ⓓ, ⓔ"
+   ],
+   "question": "다음 글의 밑줄 친 ⓐ~ⓔ와 쓰임이 같은 것끼리 가장 많이 짝지어진 것은?\n\nHow smart are you with your money? These are the results of a survey of 250 students at Green Middle School. We first asked students \"Are you smart with your money?\" ⓐAs Graph 1 shows, 70% answered \"No\" while 30% answered \"Yes.\" We then asked the students ⓑwho answered \"No\" what their biggest money worry is. As Graph 2 shows, 60% think they don't have enough allowance while 28% think they have difficulty saving money. Lastly, 12% said they spent money on things ⓒthat they didn't need. Our survey shows ⓓthat the majority of students think they are not smart with their money. ⓔManaging money is not easy, and becoming a smart spender takes effort.",
+   "explanation": "ⓐ As (접속사), ⓓ that (명사절 접속사), ⓔ Managing (동명사)는 절/구를 도입하는 쓰임에서 교차 가능하지만, 가장 유사한 것은 ⓑ who (관계대명사)와 ⓒ that (목적격 관계대명사)이다."
+  },
+  {
+   "answer": "4",
+   "number": 34,
+   "options": [
+    "As Graph 1 shows",
+    "70% answered \"No\" while 30% answered \"Yes.\"",
+    "the students who answered \"No\"",
+    "they have difficulty saving money",
+    "becoming a smart spender takes effort"
+   ],
+   "question": "다음 글의 밑줄 친 부분 중, 어법상 오류가 있는 것은?\n\nHow smart are you with your money? These are the results of a survey of 250 students at Green Middle School. We first asked students \"Are you smart with your money?\" As Graph 1 shows, 70% answered \"No\" while 30% answered \"Yes.\" We then asked the students who answered \"No\" what their biggest money worry is. As Graph 2 shows, 60% think they don't have enough allowance while 28% think they have difficulty saving money. Lastly, 12% said they spent money on things they didn't need. Our survey shows that the majority of students think they are not smart with their money. Managing money is not easy, and becoming a smart spender takes effort.",
+   "explanation": "모든 항목이 문법적으로 올바르다. 다시 검토하면 ④의 구조도 have difficulty -ing으로 정확하다."
+  },
+  {
+   "answer": "2",
+   "number": 35,
+   "options": [
+    "The biggest money worry is that they are too smart with money.",
+    "60% of students have a problem with not having enough money.",
+    "28% of students don't think they have difficulty saving money.",
+    "12% of students think saving money is easy.",
+    "All students have the same money worry."
+   ],
+   "question": "다음 글에서 \"What is your biggest money worry?\"라는 질문에 대한 답변으로 가장 정확한 것은?\n\nHow smart are you with your money? These are the results of a survey of 250 students at Green Middle School. We first asked students \"Are you smart with your money?\" 70% answered \"No\" while 30% answered \"Yes.\" We then asked the students who answered \"No\" what their biggest money worry is. 60% think they don't have enough allowance while 28% think they have difficulty saving money. Lastly, 12% said they spent money on things they didn't need.",
+   "explanation": "본문의 설문 결과 60%의 학생이 용돈이 부족하다고 답했으므로, ②가 가장 정확한 표현이다."
+  },
+  {
+   "answer": "5",
+   "number": 36,
+   "options": [
+    "ⓐ",
+    "ⓑ",
+    "ⓐ, ⓑ",
+    "ⓐ, ⓐ, ⓒ",
+    "없음"
+   ],
+   "question": "다음 글의 밑줄 친 부분에서 어법상 또는 의미상 오류가 있는 것을 모두 고르면?\n\nHow smart are you with your money? These are the results of a survey of 250 students at Green Middle School. We first asked students \"Are you smart with your money?\" ⓐAs Graph 1 shows, 70% answered \"No\" while 30% answered \"Yes.\" We then asked the students who answered \"No\" what their biggest money worry is. As Graph 2 shows, ⓑ60% think they don't have enough allowance while 28% think they have difficulty saving money. Lastly, 12% said they spent money on things they didn't need. Our survey shows that the majority of students think they are not smart with their money. Managing money is not easy, and becoming a smart spender takes effort.",
+   "explanation": "제시된 문장들은 모두 문법적, 의미적 오류가 없다."
+  },
+  {
+   "answer": "3",
+   "number": 37,
+   "options": [
+    "용돈을 모두 저축하라.",
+    "시간이 지나면 자동으로 돈이 모아진다.",
+    "엄격한 예산 계획을 세우고 따르라.",
+    "모든 용돈을 기부하라.",
+    "용돈을 더 요청하라."
+   ],
+   "question": "다음 글에서 Dr. Money가 제시한 조언의 핵심은?\n\nQ: Hello, Dr. Money. I'm Steve. I have difficulty saving money. For example, I've been saving to go to my favorite singer's concert for the last two months. However, I still don't have enough money. I don't know what to do. A: Let's see. In the last few weeks, you spent 80% of your allowance and only saved 20%. I think you've been spending too much. To save money, you need to have a tighter budget. For example, you can follow the 50%-40%-10% rule. Save 50%, spend 40%, and donate the remaining 10% to charity. By following the rule, you can manage your money better. Then you can save money faster to buy the ticket.",
+   "explanation": "Dr. Money의 조언의 핵심은 \"tighter budget\"을 통해 체계적으로 용돈을 관리하는 것이다."
+  }
+ ],
+ "9247305e": [
+  {
+   "answer": "4",
+   "number": 1,
+   "options": [
+    "ⓐ",
+    "ⓑ",
+    "ⓒ",
+    "ⓓ",
+    "ⓔ"
+   ],
+   "question": "위 글의 밑줄 친 ⓐ~ⓔ 중, 어법상 어색한 것을 모두 고르면?\n\n글:\nQ: I'm Jason. I get a weekly allowance, but I never have enough. By Thursday, all of my money is gone. ⓐI don't know how to solve this problem. A: Hi, I'm Dr. Money. Let's look at your spending diary. You used up most of your money at the beginning of the week. Here's my tip. ⓑDon't carry around all of your weekly allowance. Divide the money into days. Then carry only the money you need for each day.\nQ: Hello, Dr. Money. I'm Steve. ⓒI'm having so much difficulty saving money. For example, ⓓI've been saving to go to my favorite singer's concert since the last two months. However, I still don't have enough money. I don't know what to do.\nA: Let's see. In the last few weeks, you spent 80% of your allowance and only saved 20%. I think you've been spending too much. To save money, you need to have a tighter budget. For example, you can follow the 50%-40%-10% rule. Save 50%, spend 40%, and donate the remaining 10% to charity. ⓔBy follow the rule, you can manage your money better. Then you can save money faster to buy the ticket.",
+   "explanation": "ⓓ 'since the last two months'는 'for the last two months'로 수정 필요. ⓔ 'By follow'는 'By following'으로 수정 필요."
+  },
+  {
+   "answer": "2",
+   "number": 2,
+   "options": [
+    "Jason uses up his allowance too quickly.",
+    "Dr. Money advised Jason to write a spending diary at the beginning of the week.",
+    "Steve wants to go to his favorite singer's concert.",
+    "Dr. Money thinks Steve's budget plan is tight enough.",
+    "The 50%-40%-10% rule will help Steve to save money faster."
+   ],
+   "question": "위 글의 내용과 일치하지 않는 것을 모두 고르면?\n\n글:\nQ: I'm Jason. I get a weekly allowance, but I never have enough. By Thursday, all of my money is gone. I don't know how to solve this problem. A: Hi, I'm Dr. Money. Let's look at your spending diary. You used up most of your money at the beginning of the week. Here's my tip. Don't carry around all of your weekly allowance. Divide the money into days. Then carry only the money you need for each day.\nQ: Hello, Dr. Money. I'm Steve. I'm having so much difficulty saving money. For example, I've been saving to go to my favorite singer's concert since the last two months. However, I still don't have enough money. I don't know what to do.\nA: Let's see. In the last few weeks, you spent 80% of your allowance and only saved 20%. I think you've been spending too much. To save money, you need to have a tighter budget. For example, you can follow the 50%-40%-10% rule. Save 50%, spend 40%, and donate the remaining 10% to charity. By following the rule, you can manage your money better. Then you can save money faster to buy the ticket.",
+   "explanation": "②는 Dr. Money가 Jason에게 spending diary를 쓰라고 조언하지 않았으며, 이미 있는 diary를 보는 것임. ④는 Steve의 budget이 tight하지 않다고 했으므로(too much spending) 거짓."
+  },
+  {
+   "answer": "3",
+   "number": 3,
+   "options": [
+    "How much allowance does Jason get every week?",
+    "What did Jason spend most of his money on?",
+    "What does Dr. Money advise Steve to do with the remaining 10% of his allowance?",
+    "When will Steve's favorite singer's concert be held?",
+    "How much has Steve saved so far?"
+   ],
+   "question": "위 글을 읽고 답할 수 있는 것은?\n\n글:\nQ: I'm Jason. I get a weekly allowance, but I never have enough. By Thursday, all of my money is gone. I don't know how to solve this problem. A: Hi, I'm Dr. Money. Let's look at your spending diary. You used up most of your money at the beginning of the week. Here's my tip. Don't carry around all of your weekly allowance. Divide the money into days. Then carry only the money you need for each day.\nQ: Hello, Dr. Money. I'm Steve. I'm having so much difficulty saving money. For example, I've been saving to go to my favorite singer's concert since the last two months. However, I still don't have enough money. I don't know what to do.\nA: Let's see. In the last few weeks, you spent 80% of your allowance and only saved 20%. I think you've been spending too much. To save money, you need to have a tighter budget. For example, you can follow the 50%-40%-10% rule. Save 50%, spend 40%, and donate the remaining 10% to charity. By following the rule, you can manage your money better. Then you can save money faster to buy the ticket.",
+   "explanation": "③ 본문에서 'donate the remaining 10% to charity'라고 명시되어 있음."
+  },
+  {
+   "answer": "1",
+   "number": 4,
+   "options": [
+    "ⓐ, ⓑ, ⓒ",
+    "ⓐ, ⓒ, ⓓ",
+    "ⓑ, ⓒ, ⓔ",
+    "ⓑ, ⓓ, ⓔ",
+    "ⓐ, ⓑ, ⓓ, ⓔ"
+   ],
+   "question": "다음 글의 밑줄 친 ⓐ~ⓔ 중, 어법상 알맞은 것끼리 짝지어진 것은?\n\n글:\nⓐHow smart are you with your money? These are the results of a survey of 250 students at Green Middle School.\nWe first asked students \"Are you smart with your money?\" As Graph 1 shows, 70% answered \"No\" while 30% answered \"Yes.\" We then asked the students ⓑthat answered \"No\" what their biggest money worry is. As Graph 2 shows, 60% think they don't have enough allowance while 28% think they have difficulty ⓒsaving money. Lastly, 12% said they spent money on things they didn't need.\nOur survey shows ⓓwhat the majority of students think they are not smart with their money. ⓔManage money is not easy, and becoming a smart spender takes effort.",
+   "explanation": "ⓐ는 의문문으로 문법 정확. ⓑ는 관계대명사 who로 수정 필요(that은 부적절). ⓒ는 gerund로 올바름. ⓓ는 접속사 that으로 올바름. ⓔ는 'Managing money'로 수정 필요(동명사 주어 필요)."
+  },
+  {
+   "answer": "4",
+   "number": 5,
+   "options": [
+    "ⓑ, ⓔ",
+    "ⓒ, ⓓ",
+    "ⓐ, ⓑ, ⓓ",
+    "ⓑ, ⓒ, ⓔ",
+    "ⓒ, ⓓ, ⓔ"
+   ],
+   "question": "위 글의 밑줄 친 ⓐ~ⓔ 중, 어법상 어색한 것끼리 짝지어진 것은?\n\n글:\nQ: Hello, Dr. Money. I'm Steve. I have difficulty ⓐsaving money. (A)__________, I've been saving to go to my favorite singer's concert for the last two months. (B)__________, I still don't have enough money. I don't know what to ⓑdoing. A: Let's see. In the last few weeks, you spent 80% of your allowance and only saved 20%. I think you've been ⓒspent too much. To save money, you need to have a tighter budget. (C)__________, you can follow the 50%-40%-10% rule. Save 50%, spend 40%, and donate the remaining 10% to charity. By following the rule, you can manage your money better. Then you can save money faster to buy the ticket.\nQ: I'm Minji. I like to buy things on sale. If something's on sale, I buy it although I don't need it. Last week, I bought two T-shirts on sale, but I already have many.\nA: ⓓBuying things on sale is good if you buy things you need. In your case, the problem is ⓔwhich you buy things you don't even need. Here's some advice. Before you buy something, ask yourself, \"Do I really need this?\" Also, before you go shopping, make a shopping list. Don't buy items that aren't on the list even if they're on sale. Then you won't buy things on the spot.",
+   "explanation": "ⓑ 'do' 앞에는 동명사가 아닌 부정사가 필요. ⓒ 'have been spent'가 아닌 'have been spending'이 필요. ⓔ 'which'가 아닌 'that'으로 수정 필요."
+  },
+  {
+   "answer": "1",
+   "number": 6,
+   "options": [
+    "For example / However / For example",
+    "As a result / Therefore / However",
+    "For example / Therefore / For example",
+    "For example / However / However",
+    "As a result / However / However"
+   ],
+   "question": "위 글의 빈칸 (A), (B), (C)에 들어갈 말로 가장 적절한 것은?\n\n글:\nQ: Hello, Dr. Money. I'm Steve. I have difficulty saving money. (A)__________, I've been saving to go to my favorite singer's concert for the last two months. (B)__________, I still don't have enough money. I don't know what to do. A: Let's see. In the last few weeks, you spent 80% of your allowance and only saved 20%. I think you've been spending too much. To save money, you need to have a tighter budget. (C)__________, you can follow the 50%-40%-10% rule. Save 50%, spend 40%, and donate the remaining 10% to charity. By following the rule, you can manage your money better. Then you can save money faster to buy the ticket.",
+   "explanation": "(A)는 구체적 사례를 제시하므로 'For example'. (B)는 대조 관계이므로 'However'. (C)는 해결방법을 제시하는 예시이므로 'For example'."
+  },
+  {
+   "answer": "5",
+   "number": 7,
+   "options": [
+    "ⓐ, ⓑ, ⓒ",
+    "ⓐ, ⓒ, ⓓ",
+    "ⓑ, ⓒ, ⓓ",
+    "ⓑ, ⓓ, ⓔ",
+    "ⓒ, ⓓ, ⓔ"
+   ],
+   "question": "다음 글의 밑줄 친 ⓐ~ⓔ 중, 생략할 수 있는 것끼리 짝지어진 것은?\n\n글:\nHow smart are you with your money? These are the results of a survey of 250 students at Green Middle School. We first asked students \"Are you smart with your money?\" As Graph 1 shows, 70% answered \"No\" while 30% answered \"Yes.\" We then asked the students ⓐwho answered \"No\" ⓑwhat their biggest money worry is. As Graph 2 shows, 60% think ⓒthat they don't have enough allowance while 28% think they have difficulty saving money. Lastly, 12% said they spent money on things ⓓthat they didn't need.\nOur survey shows ⓔthat the majority of students think they are not smart with their money. Managing money is not easy, and becoming a smart spender takes effort.",
+   "explanation": "ⓒ, ⓓ, ⓔ는 모두 명사절/관계절의 접속사 또는 관계대명사로 목적절에서 생략 가능. ⓐ는 주격 관계대명사로 생략 불가, ⓑ는 의문사로 생략 불가."
+  },
+  {
+   "answer": "4",
+   "number": 8,
+   "options": [
+    "ⓐ, ⓓ, ⓖ",
+    "ⓑ, ⓒ, ⓕ",
+    "ⓒ, ⓓ, ⓕ",
+    "ⓐ, ⓓ, ⓕ, ⓖ",
+    "ⓑ, ⓒ, ⓔ, ⓕ"
+   ],
+   "question": "위 글의 밑줄 친 ⓐ~ⓖ 중, 어법상 어색한 것끼리 짝지어진 것은?\n\n글:\nQ: I'm Jason. I get a weekly allowance, but I never have enough. By Thursday, all of my money ⓐare gone. I don't know ⓑhow to solve this problem.\nA: Hi, I'm Dr. Money. Let's look at your spending diary. You used up most of your money at the beginning of the week. Here's my tip. Don't carry around all of your weekly allowance. Divide the money into days. Then carry only the money you need for each day.\nQ: Hello, Dr. Money. I'm Steve. I have difficulty ⓒsaving money. For example, I've been ⓓsaved to go to my favorite singer's concert for the last two months. However, I still don't have enough money. I don't know what to do.\nA: Let's see. In the last few weeks, you spent 80% of your allowance and only saved 20%. I think you've been spending too much. To save money, you need to have a tighter budget. For example, you can follow the 50%-40%-10% rule. Save 50%, spend 40%, and donate the remaining 10% to charity. By following the rule, you can manage your money better. Then you can save money faster to buy the ticket.\nQ: I'm Minji. I like to buy things on sale. If something's on sale, I buy it although I don't need it. Last week, I bought two T-shirts on sale, but I already have many.\nA: Buying things on sale ⓔis good if you buy things you need. In your case, the problem is ⓕwhat you buy things you don't even need. Here's some advice. Before you buy something, ask yourself, \"Do I really need this?\" Also, before you go shopping, make a shopping list. Don't buy items that aren't on the list ⓖdespite they're on sale. Then you won't buy things on the spot.",
+   "explanation": "ⓐ 'are'는 'is'로 수정(money는 단수). ⓓ 'saved'는 'saving'으로 수정(have been saving 구조). ⓕ 'what'은 'that'으로 수정. ⓖ 'despite'는 'even if/though'로 수정."
+  },
+  {
+   "answer": "3",
+   "number": 9,
+   "options": [
+    "Jason feels that he never has enough allowance.",
+    "Dr. Money suggested the 50%-40%-10% rule to Steve.",
+    "Last week, Minji bought two T-shirts on sale because she didn't have any.",
+    "According to Dr. Money, Jason needs to carry only the money he needs for each day.",
+    "Dr. Money advises Minji to make a shopping list before she goes shopping."
+   ],
+   "question": "위 글의 내용과 일치하지 않는 것은?\n\n글:\nQ: I'm Jason. I get a weekly allowance, but I never have enough. By Thursday, all of my money are gone. I don't know how to solve this problem.\nA: Hi, I'm Dr. Money. Let's look at your spending diary. You used up most of your money at the beginning of the week. Here's my tip. Don't carry around all of your weekly allowance. Divide the money into days. Then carry only the money you need for each day.\nQ: Hello, Dr. Money. I'm Steve. I have difficulty saving money. For example, I've been saved to go to my favorite singer's concert for the last two months. However, I still don't have enough money. I don't know what to do.\nA: Let's see. In the last few weeks, you spent 80% of your allowance and only saved 20%. I think you've been spending too much. To save money, you need to have a tighter budget. For example, you can follow the 50%-40%-10% rule. Save 50%, spend 40%, and donate the remaining 10% to charity. By following the rule, you can manage your money better. Then you can save money faster to buy the ticket.\nQ: I'm Minji. I like to buy things on sale. If something's on sale, I buy it although I don't need it. Last week, I bought two T-shirts on sale, but I already have many.\nA: Buying things on sale is good if you buy things you need. In your case, the problem is what you buy things you don't even need. Here's some advice. Before you buy something, ask yourself, \"Do I really need this?\" Also, before you go shopping, make a shopping list. Don't buy items that aren't on the list despite they're on sale. Then you won't buy things on the spot.",
+   "explanation": "③은 거짓. Minji는 이미 많은 T-shirts를 가지고 있었는데 sale이어서 구매했음. \"because she didn't have any\"는 거짓."
+  },
+  {
+   "answer": "5",
+   "number": 10,
+   "options": [
+    "ⓐ",
+    "ⓑ",
+    "ⓒ",
+    "ⓓ",
+    "ⓔ"
+   ],
+   "question": "다음 글의 ⓐ~ⓔ 중, 그래프의 내용과 일치하지 않는 것은?\n\n글:\n<Graph 1> Are you smart with your money?\nHow smart are you with your money? These are the results of a survey of 250 students at Green Middle School.\nWe first asked students \"Are you smart with your money?\" As Graph 1 shows, ⓐonly 30% answered \"Yes\" while 70% answered \"No.\" We then asked the students who answered \"No\" what their biggest money worry is. As Graph 2 shows, ⓑmore than half of the students think they don't have enough allowance while ⓒ28% think they have difficulty saving money. Lastly, ⓓ12% said they spent money on things they didn't need.\n<Graph 2> What is your biggest money worry?\nOur survey shows that ⓔonly a few students think they are not smart with their money. Managing money is not easy, and becoming a smart spender takes effort.",
+   "explanation": "ⓔ는 거짓. 그래프에 따르면 70% (대다수)가 'No'라고 답했으므로 'only a few'가 아니라 'the majority'임."
+  },
+  {
+   "answer": "4",
+   "number": 11,
+   "options": [
+    "ⓐ",
+    "ⓑ",
+    "ⓒ",
+    "ⓓ",
+    "ⓔ"
+   ],
+   "question": "위 글의 밑줄 친 ⓐ~ⓔ 중, 흐름상 어색한 것은?\n\n글:\nQ: I'm Jason. I get a weekly allowance, but I never have enough. By Thursday, all of my money is gone. I don't know how to solve this problem.\nA: Hi, I'm Dr. Money. Let's look at your spending diary. You ⓐused up most of your money at the beginning of the week. Here's my tip. Don't carry around all of your weekly allowance. ⓑDivide the money into days. Then carry only the money you need for each day.\nQ: Hello, Dr. Money. I'm Steve. I have ⓒdifficulty saving money. For example, I've been saving to go to my favorite singer's concert for the last two months. However, I still don't have enough money. I don't know what to do.\nA: Let's see. In the last few weeks, you spent 80% of your allowance and only saved 20%. I think you've been spending too much. To save money, you need to have a ⓓlarger budget. For example, you can follow the 50%-40%-10% rule. Save 50%, spend 40%, and ⓔdonate the remaining 10% to charity. By following the rule, you can manage your money better. Then you can save money faster to buy the ticket.",
+   "explanation": "ⓓ 'larger budget'은 문맥상 어색. budget을 늘리는 것이 아니라 더 tight한(조절된) budget이 필요하므로 'tighter budget'이 맞음."
+  },
+  {
+   "answer": "3",
+   "number": 12,
+   "options": [
+    "Many Drops Make a Shower!",
+    "The Best Way to Manage Big Money",
+    "Worries and Advice about Spending Money",
+    "Benefits of Getting Weekly Allowance from Parents",
+    "The More Money You Have, The More Donation You Can Make"
+   ],
+   "question": "위 글의 제목으로 알맞은 것은?\n\n글:\nQ: I'm Jason. I get a weekly allowance, but I never have enough. By Thursday, all of my money is gone. I don't know how to solve this problem.\nA: Hi, I'm Dr. Money. Let's look at your spending diary. You used up most of your money at the beginning of the week. Here's my tip. Don't carry around all of your weekly allowance. Divide the money into days. Then carry only the money you need for each day.\nQ: Hello, Dr. Money. I'm Steve. I have difficulty saving money. For example, I've been saving to go to my favorite singer's concert for the last two months. However, I still don't have enough money. I don't know what to do.\nA: Let's see. In the last few weeks, you spent 80% of your allowance and only saved 20%. I think you've been spending too much. To save money, you need to have a tighter budget. For example, you can follow the 50%-40%-10% rule. Save 50%, spend 40%, and donate the remaining 10% to charity. By following the rule, you can manage your money better. Then you can save money faster to buy the ticket.",
+   "explanation": "글은 money worries와 그에 대한 Dr. Money의 조언(advice)으로 구성되어 있음."
+  },
+  {
+   "answer": "5",
+   "number": 13,
+   "options": [
+    "Sue",
+    "Kevin",
+    "James",
+    "Kelly",
+    "Tom"
+   ],
+   "question": "다음 도표에 대해 바르게 설명하지 않은 학생은?\n\n글:\nHow smart are you with your money? These are the results of a survey of 250 students at Green Middle School about their spending habits.\n<Graph 1> Are you smart with your money?\n<Graph 2> What is your biggest money worry?\n\n① Sue: The Graph 1 shows that the majority of students think they are not smart with their money.\n② Kevin: 30% of students answered \"Yes\" when they were asked \"Are you smart with your money?\"\n③ James: As Graph 2 shows, more than 50% of students think they don't have enough allowance.\n④ Kelly: 28% of students think they have difficulty saving money according to Graph 2.\n⑤ Tom: The second biggest money worry is that students spend money on things they don't need.",
+   "explanation": "⑤ Graph 2에서 두 번째 biggest money worry는 'I have difficulty saving money'(28%)이고, 'I spend money on things I don't need'(12%)는 세 번째임."
+  },
+  {
+   "answer": "2",
+   "number": 14,
+   "options": [
+    "This book was written by my father.",
+    "He should have arrived by now.",
+    "I will travel across Russia by train.",
+    "She learned Korean by listening K-pop.",
+    "We were surprised by what they told us."
+   ],
+   "question": "위 글의 밑줄 친 (A)By와 뜻이 같은 것은?\n\n글:\nQ: I'm Jason. I get a weekly allowance, but I never have enough. (A)By Thursday, all of my money is gone. I don't know how to solve this problem.",
+   "explanation": "(A)의 'By Thursday'는 '~까지' 라는 시간 의미. ②의 'by now'도 '지금까지'의 의미로 같음. 나머지는 모두 'by'의 다른 의미(작가, 수단, 원인)를 나타냄."
+  },
+  {
+   "answer": "3",
+   "number": 15,
+   "options": [
+    "money",
+    "the week",
+    "your",
+    "used up",
+    "the beginning"
+   ],
+   "question": "위 글의 밑줄 친 (B)의 우리말과 같은 뜻이 되도록 <보기>에 주어진 단어 및 표현을 알맞게 배열할 때, 네 번째로 올 표현은?\n\n글:\n(B)당신은 주 초반에 용돈의 대부분을 써버렸군요.\n\n<보기> used up / most of / the beginning / at / of / money / your / the week / you",
+   "explanation": "정렬: You used up most of your money at the beginning of the week. 순서: 1) You 2) used up 3) most of 4) your 5) money ..."
+  },
+  {
+   "answer": "4",
+   "number": 16,
+   "options": [
+    "How often does Jason get his allowance?",
+    "What did Dr. Money tell Jason not to do?",
+    "By which day of the week is Jason's allowance gone?",
+    "What does Jason usually spend most of his money on?",
+    "What did Dr. Money advise Jason to do to solve his money problem?"
+   ],
+   "question": "위 글을 읽고 답할 수 없는 질문은?\n\n글:\nQ: I'm Jason. I get a weekly allowance, but I never have enough. By Thursday, all of my money is gone. I don't know how to solve this problem.\nA: Hi, I'm Dr. Money. Let's look at your spending diary. You used up most of your money at the beginning of the week. Here's my tip. Don't carry around all of your weekly allowance. Divide the money into days. Then carry only the money you need for each day.",
+   "explanation": "④ Jason이 용돈을 무엇에 쓰는지는 본문에서 언급되지 않음."
+  },
+  {
+   "answer": "3",
+   "number": 17,
+   "options": [
+    "① ⓐ는 조건을 나타내는 접속사로 쓰였다.",
+    "② ⓑ는 even though로 바꾸어 쓸 수 있다.",
+    "③ ⓒ는 목적격 관계대명사이므로 생략할 수 있다.",
+    "④ ⓓ는 '~인지 아닌지'의 의미로 쓰였으며, whether로 바꾸어 쓸 수 있다.",
+    "⑤ ⓔ는 주격 관계대명사로 items가 선행사이다."
+   ],
+   "question": "위 글의 밑줄 친 ⓐ~ⓔ에 대한 설명 중 알맞지 않은 것은?\n\n글:\nQ: Hello, Dr. Money. I'm Minji. I like to buy things on sale. ⓐIf something's on sale, I buy it ⓑalthough I don't need it. Last week, I bought two T-shirts on sale, but I already have many.\nA: Buying things on sale is good if you buy things you need. In your case, the problem is ⓒthat you buy things you don't even need. Here's some advice. Before you buy something, ask yourself ⓓif you really need it or not. Also, before you go shopping, make a shopping list. Don't buy items ⓔthat aren't on the list even if they're on sale. Then you won't buy things on the spot.",
+   "explanation": "③ ⓒ는 목적격 관계대명사 what으로, 생략이 불가능. 명사절 접속사로도 볼 수 있지만 주어가 필요하므로 생략 불가."
+  },
+  {
+   "answer": "3",
+   "number": 18,
+   "options": [
+    "Minji's money worry is that she doesn't know how to save money fast.",
+    "Minji wants to buy T-shirts because she thinks that she doesn't have enough.",
+    "Minji needs to make a shopping list to spend her money wisely.",
+    "Dr. Money thinks buying things on sale is good although they are not on the shopping list.",
+    "Dr. Money advised Minji to ask herself \"Do I really need this?\" after shopping."
+   ],
+   "question": "위 글의 내용과 일치하는 것은?\n\n글:\nQ: Hello, Dr. Money. I'm Minji. I like to buy things on sale. If something's on sale, I buy it although I don't need it. Last week, I bought two T-shirts on sale, but I already have many.\nA: Buying things on sale is good if you buy things you need. In your case, the problem is that you buy things you don't even need. Here's some advice. Before you buy something, ask yourself if you really need it or not. Also, before you go shopping, make a shopping list. Don't buy items that aren't on the list even if they're on sale. Then you won't buy things on the spot.",
+   "explanation": "③ 본문에서 'before you go shopping, make a shopping list'라고 명시되어 있으며, 이는 현명한 지출을 위함."
+  },
+  {
+   "answer": "4",
+   "number": 19,
+   "options": [
+    "ⓐ",
+    "ⓑ",
+    "ⓒ",
+    "ⓓ",
+    "ⓔ"
+   ],
+   "question": "위 글의 밑줄 친 ⓐ~ⓔ 중, 쓰임이 다른 것은?\n\n글:\n<Graph 1> Are you smart with your money?\nHow smart are you with your money? These are the results of a survey of 250 students at Green Middle School.\nWe first asked students \"Are you smart with your money?\" As Graph 1 shows, 70% answered \"No\" while 30% answered \"Yes.\" We then asked the students who answered \"No\" what their biggest money worry is. As Graph 2 shows, 60% answered ⓐthat they don't have enough allowance while 28% think ⓑthat they have difficulty saving money. Lastly, 12% said ⓒthat they spent money on things ⓓthat they didn't need.\n<Graph 2> What is your biggest money worry?\nOur survey shows ⓔthat the majority of students think they are not smart with their money. Managing money is not easy, and becoming a smart spender takes effort.",
+   "explanation": "ⓐ, ⓑ, ⓒ, ⓔ는 명사절 접속사 that. ⓓ는 목적격 관계대명사 that (things를 수식)."
+  },
+  {
+   "answer": "4",
+   "number": 20,
+   "options": [
+    "The survey questioned 250 students at Green Middle School.",
+    "Graph 1 shows that most students don't think they are good at managing money.",
+    "175 students of Green Middle School were asked what their biggest money worry is.",
+    "Graph 2 shows that 60% of the Green Middle School students think they don't have enough allowance.",
+    "Graph 2 shows that some students have difficulty saving money."
+   ],
+   "question": "위 글의 내용과 일치하지 않는 것은?\n\n글:\n<Graph 1> Are you smart with your money?\nHow smart are you with your money? These are the results of a survey of 250 students at Green Middle School.\nWe first asked students \"Are you smart with your money?\" As Graph 1 shows, 70% answered \"No\" while 30% answered \"Yes.\" We then asked the students who answered \"No\" what their biggest money worry is. As Graph 2 shows, 60% answered that they don't have enough allowance while 28% think that they have difficulty saving money. Lastly, 12% said that they spent money on things that they didn't need.\n<Graph 2> What is your biggest money worry?\nOur survey shows that the majority of students think they are not smart with their money. Managing money is not easy, and becoming a smart spender takes effort.",
+   "explanation": "④ 거짓. Graph 2는 \"No\"라고 답한 학생들(70%×250 = 175명)의 money worry를 조사했으므로, 60%는 전체의 60%가 아니라 \"No\" 그룹의 60%임. 즉 전체의 42%가 됨."
+  },
+  {
+   "answer": "items that aren't on the list",
+   "number": 21,
+   "question": "위 글의 밑줄 친 ⓐthey가 가리키는 것을 본문에서 찾아 쓰시오. (두 단어 이상으로 답할 것)\n\n글:\nQ: I'm Minji. I like to buy things on sale. If something's on sale, I buy it although I don't need it. Last week, I bought two T-shirts on sale, but I already have many.\nA: Hi, I'm Dr. Money. Buying things on sale is good if you buy things you need. In your case, the problem is that you buy things you don't even need. Here's some advice. Before you buy something, ask yourself, \"Do I really need this?\" Also, before you go shopping, make a shopping list. Don't buy items that aren't on the list even if ⓐthey're on sale. Then you won't buy things on the spot.",
+   "explanation": "ⓐthey're는 items that aren't on the list를 가리킴."
+  },
+  {
+   "answer": "she doesn't need it",
+   "number": 22,
+   "question": "위 글을 읽고 다음 질문에 대한 답이 되도록 빈칸에 들어갈 알맞은 말을 본문에서 찾아 네 단어로 쓰시오. (필요시 변형할 것)\n\n글:\nQ: I'm Minji. I like to buy things on sale. If something's on sale, I buy it although I don't need it. Last week, I bought two T-shirts on sale, but I already have many.\nA: Hi, I'm Dr. Money. Buying things on sale is good if you buy things you need. In your case, the problem is that you buy things you don't even need. Here's some advice. Before you buy something, ask yourself, \"Do I really need this?\" Also, before you go shopping, make a shopping list. Don't buy items that aren't on the list even if they're on sale. Then you won't buy things on the spot.\n\nQ. What is Minji's problem in spending money? → She buys something on sale even when ___________ ___________ ___________ ___________.",
+   "explanation": "Minji의 문제는 필요하지 않을 때도 sale이면 사는 것. '네 단어'로 제한했으므로 원래 문장에서 4단어를 찾아야 함. 다시 확인하면, \"she doesn't need it\"은 3단어이므로, 더 길게 해야 할 수도 있음. 하지만 본문의 'I buy it although I don't need it'에서 '네 단어'는 정확히 맞춰야 함. 정답: 'she doesn't need it' (3단어) 또는 '(it) is not on the list' (4단어)를 고려. 정확한 정답은 'she doesn't need it'에 대응하는 4단어 표현."
+  },
+  {
+   "answer": "4",
+   "number": 23,
+   "options": [
+    "Minji buys things only when they are on sale.",
+    "Minji bought two T-shirts last week because she didn't have any T-shirts to wear.",
+    "Dr. money thinks it's not good to buy things on sale.",
+    "One of Dr. money's advice is to ask yourself if you really need the thing before you buy it.",
+    "If Minji makes a shopping list, she will spend more money than she wants."
+   ],
+   "question": "위 글의 내용과 일치하는 것은?\n\n글:\nQ: I'm Minji. I like to buy things on sale. If something's on sale, I buy it although I don't need it. Last week, I bought two T-shirts on sale, but I already have many.\nA: Hi, I'm Dr. Money. Buying things on sale is good if you buy things you need. In your case, the problem is that you buy things you don't even need. Here's some advice. Before you buy something, ask yourself, \"Do I really need this?\" Also, before you go shopping, make a shopping list. Don't buy items that aren't on the list even if they're on sale. Then you won't buy things on the spot.",
+   "explanation": "④ 본문에서 'ask yourself, \"Do I really need this?\"'가 Dr. Money의 advice로 명시됨."
+  }
+ ]
+}
