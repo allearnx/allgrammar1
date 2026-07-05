@@ -301,8 +301,9 @@ sanitize→validate 순서로 돌려야 함). 진짜는 6종:
   클라이언트 노출 에러 메시지는 전부 보존. 833 테스트 통과(live-monitor 400→403 기대값 갱신).
   ▸ 남은 것: extract-* 7개 + match-exam-sentences는 ③에서 함께. my-report/parent-share는
   토큰 기반 특수 인증이라 수동 유지(정당). 나머지 수동 라우트(health/cron/webhook/auth/public)도 정당.
-- [ ] ③ extract-pdf 라우트 분리 (525줄) — AI 호출부(청크 분할+Claude 3모드)와 정답표
-  병합/정규화를 lib으로 추출. 콘텐츠 파이프라인 북극성 진행 시 같이 하면 효율적.
+- [x] ③ extract-pdf 라우트 분리 — AI 호출부 lib/ai/(extract-problems + prompts),
+  정규화 lib/naesin/normalize-extracted-questions.ts로 추출. extract 라우트 9종
+  createApiHandler 통일 (roles/rateLimit/콘텐츠 권한 보존). 2026-07-06 완료 (18aa7dc).
   이때 extract-* 7개 + match-exam-sentences의 createApiHandler 이관도 함께.
 - [ ] ④ naesin↔voca 학습 컴포넌트 중복 통합 — 플래시카드/퀴즈/스펠링 상태 관리 훅 공유
   (quiz-view↔quick-quiz, flashcard-view↔neon-flashcard, spelling-view↔rhythm-spelling).
