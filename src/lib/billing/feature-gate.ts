@@ -83,14 +83,14 @@ export type FreeService = 'naesin' | 'voca';
 
 /**
  * Check if a service is accessible for the given plan.
- * Free tier: only the selected freeService. Paid/trialing: both.
+ * 2026-07 정책 변경: 무료도 양쪽 서비스 접근 허용 (왔다갔다 가능).
+ * 대신 서비스별 무료 한도가 각자 적용된다 — 보카 Day 3개, 내신 1단원·암기 3종.
+ * (freeService 파라미터는 하위 호환용으로 유지)
  */
 export function isServiceAllowed(
-  tier: Tier,
-  freeService: FreeService | null,
-  service: 'naesin' | 'voca',
+  _tier: Tier,
+  _freeService: FreeService | null,
+  _service: 'naesin' | 'voca',
 ): boolean {
-  if (tier === 'paid' || tier === 'trialing') return true;
-  // Free tier: only the chosen service
-  return freeService === service;
+  return true;
 }

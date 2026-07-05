@@ -4,7 +4,7 @@ import { redirect, notFound } from 'next/navigation';
 import { Topbar } from '@/components/layout/topbar';
 import { VocaDayClient } from './client';
 import { getPlanContext } from '@/lib/billing/get-plan-context';
-import { canUseFeature, isServiceAllowed } from '@/lib/billing/feature-gate';
+import { canUseFeature } from '@/lib/billing/feature-gate';
 import { isR1Complete } from '@/lib/dashboard/voca-helpers';
 import type { VocaVocabulary, VocaStudentProgress, VocaDay } from '@/types/voca';
 import { VOCA_DAYS_COLUMNS, VOCA_VOCABULARY_COLUMNS, VOCA_STUDENT_PROGRESS_COLUMNS } from '@/types/voca';
@@ -26,7 +26,9 @@ export default async function StudentVocaDayPage({
     .eq('service', 'voca')
     .single();
 
-  if (!assignment) redirect('/student');
+  // 무료 플랜은 배정 없어도 체험(3 Day) 접근 허용
+  const planForGate = await getPlanContext(user.academy_id, user.id);
+  if (!assignment && planForGate.tier !== 'free') redirect('/student');
 
   // Get day info + sort_order for free limit check
   const { data: day } = await supabase
@@ -38,8 +40,7 @@ export default async function StudentVocaDayPage({
   if (!day) notFound();
 
   // 무료 플랜: Day 3개까지만 접근 가능
-  const planContext = await getPlanContext(user.academy_id, user.id);
-  if (!isServiceAllowed(planContext.tier, planContext.freeService, 'voca')) redirect('/student'); // 무료 택1 게이트
+  const planContext = planForGate;
   if (planContext.tier === 'free') {
     const { count } = await supabase
       .from('voca_days')

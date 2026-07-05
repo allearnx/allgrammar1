@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { requireUser } from '@/lib/auth/helpers';
+import { getPlanContext } from '@/lib/billing/get-plan-context';
 import { createClient } from '@/lib/supabase/server';
 import { createAdminClient } from '@/lib/supabase/admin';
 import { cached, TTL } from '@/lib/cache/server-cache';
@@ -46,6 +47,15 @@ export default async function DashboardLayout({
 
   if (user.role === 'student') {
     services = await getCachedServices(user.id);
+
+    // 무료 개인 학생: 보카·내신 왔다갔다 허용 — 사이드바에 두 메뉴 모두 노출
+    // (각 서비스의 무료 한도는 페이지에서 적용: 보카 3 Day, 내신 1단원·암기 3종)
+    if (!user.academy_id && services.length > 0) {
+      const planContext = await getPlanContext(user.academy_id, user.id);
+      if (planContext.tier === 'free') {
+        services = [...new Set([...services, 'naesin', 'voca'])];
+      }
+    }
 
     // Fetch naesin sidebar tree if student has naesin service (cached 60s)
     if (services.includes('naesin')) {

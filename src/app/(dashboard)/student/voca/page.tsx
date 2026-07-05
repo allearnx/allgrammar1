@@ -4,7 +4,7 @@ import { redirect } from 'next/navigation';
 import { Topbar } from '@/components/layout/topbar';
 import { VocaHomeClient } from './client';
 import { getPlanContext } from '@/lib/billing/get-plan-context';
-import { canUseFeature, isServiceAllowed } from '@/lib/billing/feature-gate';
+import { canUseFeature } from '@/lib/billing/feature-gate';
 import type { VocaBook, VocaDay, VocaStudentProgress } from '@/types/voca';
 import { VOCA_BOOKS_COLUMNS, VOCA_DAYS_COLUMNS, VOCA_STUDENT_PROGRESS_COLUMNS } from '@/types/voca';
 
@@ -25,7 +25,9 @@ export default async function StudentVocaPage({
     .eq('service', 'voca')
     .single();
 
-  if (!assignment) redirect('/student');
+  // 무료 플랜은 배정 없어도 체험(3 Day) 접근 허용 — 내신과 왔다갔다 가능
+  const planForGate = await getPlanContext(user.academy_id, user.id);
+  if (!assignment && planForGate.tier !== 'free') redirect('/student');
 
   // 전체 교재 자유 선택
   const { data: books } = await supabase
@@ -63,9 +65,7 @@ export default async function StudentVocaPage({
     for (const s of submissions || []) submissionStatusMap[s.day_id] = s.status;
   }
 
-  const planContext = await getPlanContext(user.academy_id, user.id);
-  // 무료 택1: 내신을 선택한 학생이 보카 URL로 직접 접근하는 것 차단
-  if (!isServiceAllowed(planContext.tier, planContext.freeService, 'voca')) redirect('/student');
+  const planContext = planForGate;
   const isFree = planContext.tier === 'free';
   const round2Locked = !assignment?.round2_unlocked && !canUseFeature(planContext.tier, 'voca:round2');
 
