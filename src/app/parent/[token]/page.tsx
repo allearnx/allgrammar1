@@ -8,6 +8,7 @@ import { fetchVocaExamGroups } from '@/lib/voca/fetch-exam-results';
 import { fetchNaesinExamData } from '@/lib/naesin/fetch-exam-data';
 import { fetchNaesinProgress } from '@/lib/naesin/fetch-naesin-progress';
 import { fetchVocaProgress } from '@/lib/voca/fetch-voca-progress';
+import { ParentWeeklySummary } from '@/components/dashboard/parent-weekly-summary';
 import { Lock, BookA, CheckCircle, Clock, MinusCircle, History } from 'lucide-react';
 
 interface Props {
@@ -277,8 +278,11 @@ export default async function ParentReportPage({ params, searchParams }: Props) 
           <h1 className="text-xl font-bold text-gray-800">
             {student?.full_name || '학생'} 학습 리포트
           </h1>
-          <p className="text-sm text-gray-500 mt-1">실시간 학습 현황</p>
+          <p className="text-sm text-gray-500 mt-1">실시간 학습 현황 — 열 때마다 최신 내용으로 갱신돼요</p>
         </div>
+
+        {/* 이번 주 요약 — 엄마가 매주 열 이유 */}
+        <ParentWeeklySummary studentId={studentId} />
 
         {/* Progress tabs: 올인내신 / 올킬보카 */}
         {(hasNaesin || hasVoca) && (

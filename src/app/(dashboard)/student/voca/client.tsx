@@ -9,6 +9,7 @@ import { PetWidget } from '@/components/voca/pet/pet-widget';
 import { BonusExam } from '@/components/voca/bonus-exam';
 import { AssignedExams } from '@/components/voca/assigned-exams';
 import { BookGuidePicker } from '@/components/voca/book-guide-picker';
+import { ParentLinkButton } from '@/components/voca/parent-link-button';
 import { isR1Complete, isR2Complete } from '@/lib/dashboard/voca-helpers';
 import type { VocaBook, VocaDay, VocaStudentProgress } from '@/types/voca';
 
@@ -281,14 +282,17 @@ export function VocaHomeClient({ books, days, progressList, submissionStatuses =
                 2회독 🔒 유료
               </span>
             )}
-            {books.length > 1 && (
-              <button
-                onClick={() => setGuideOpen(true)}
-                className="ml-auto inline-flex items-center gap-1 rounded-full border px-3 py-1 text-xs font-semibold text-primary transition-colors hover:bg-accent"
-              >
-                <BookOpen className="h-3 w-3" /> 교재 바꾸기
-              </button>
-            )}
+            <div className="ml-auto flex items-center gap-1.5">
+              <ParentLinkButton />
+              {books.length > 1 && (
+                <button
+                  onClick={() => setGuideOpen(true)}
+                  className="inline-flex items-center gap-1 rounded-full border px-3 py-1 text-xs font-semibold text-primary transition-colors hover:bg-accent"
+                >
+                  <BookOpen className="h-3 w-3" /> 교재 바꾸기
+                </button>
+              )}
+            </div>
           </div>
           <h1 className="text-gray-900 text-2xl md:text-3xl font-extrabold leading-tight mb-1">
             {selectedBook?.title || '올킬보카'}
