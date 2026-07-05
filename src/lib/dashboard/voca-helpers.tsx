@@ -91,7 +91,9 @@ export function getR2Stages(p: VocaStudentProgress | null): VocaStage[] {
   ];
 }
 
-export function isR1Complete(p: VocaStudentProgress | null): boolean {
+export function isR1Complete(
+  p: Pick<VocaStudentProgress, 'flashcard_completed' | 'quiz_score' | 'spelling_score' | 'matching_completed'> | null,
+): boolean {
   if (!p) return false;
   const quizPass = (p.quiz_score ?? 0) >= 80;
   const fcDone = p.flashcard_completed || quizPass;

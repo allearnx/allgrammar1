@@ -10,6 +10,7 @@ import { BonusExam } from '@/components/voca/bonus-exam';
 import { AssignedExams } from '@/components/voca/assigned-exams';
 import { BookGuidePicker } from '@/components/voca/book-guide-picker';
 import { ParentLinkButton } from '@/components/voca/parent-link-button';
+import { CoverageGauge } from '@/components/voca/coverage-gauge';
 import { isR1Complete, isR2Complete } from '@/lib/dashboard/voca-helpers';
 import type { VocaBook, VocaDay, VocaStudentProgress } from '@/types/voca';
 
@@ -310,6 +311,8 @@ export function VocaHomeClient({ books, days, progressList, submissionStatuses =
               </span>
             </div>
           )}
+          {/* 시험 커버리지 — 진도율과 별개: 아는 단어 기준으로 이 시험이 몇 % 읽히는지 */}
+          {selectedBookId && <CoverageGauge bookId={selectedBookId} />}
         </div>
       </div>
 
