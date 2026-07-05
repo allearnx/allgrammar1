@@ -2,7 +2,7 @@ import { requireRole } from '@/lib/auth/helpers';
 import { createClient } from '@/lib/supabase/server';
 import { Topbar } from '@/components/layout/topbar';
 import { NaesinHome } from './client';
-import { getPlanContext } from '@/lib/billing/get-plan-context';
+import { requireNaesinAccess } from '@/lib/naesin/require-naesin-access';
 import { mergeEnabledStages, getNaesinUnitLimit } from '@/lib/billing/feature-gate';
 import { groupBy, buildUnitSummary } from '@/lib/naesin/build-unit-summary';
 import type { UnitSummary, ExamGroup } from '@/lib/naesin/build-unit-summary';
@@ -21,7 +21,7 @@ export default async function NaesinPage() {
     .single();
 
   // Merge teacher-configured stages with plan-based restrictions
-  const planContext = await getPlanContext(user.academy_id, user.id);
+  const planContext = await requireNaesinAccess(user); // 서비스 게이트 (무료 택1 포함)
   const enabledStages = mergeEnabledStages(
     planContext.tier,
     setting?.enabled_stages as string[] | null,

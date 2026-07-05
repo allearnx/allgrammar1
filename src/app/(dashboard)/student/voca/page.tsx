@@ -4,7 +4,7 @@ import { redirect } from 'next/navigation';
 import { Topbar } from '@/components/layout/topbar';
 import { VocaHomeClient } from './client';
 import { getPlanContext } from '@/lib/billing/get-plan-context';
-import { canUseFeature } from '@/lib/billing/feature-gate';
+import { canUseFeature, isServiceAllowed } from '@/lib/billing/feature-gate';
 import type { VocaBook, VocaDay, VocaStudentProgress } from '@/types/voca';
 import { VOCA_BOOKS_COLUMNS, VOCA_DAYS_COLUMNS, VOCA_STUDENT_PROGRESS_COLUMNS } from '@/types/voca';
 
@@ -64,6 +64,8 @@ export default async function StudentVocaPage({
   }
 
   const planContext = await getPlanContext(user.academy_id, user.id);
+  // 무료 택1: 내신을 선택한 학생이 보카 URL로 직접 접근하는 것 차단
+  if (!isServiceAllowed(planContext.tier, planContext.freeService, 'voca')) redirect('/student');
   const isFree = planContext.tier === 'free';
   const round2Locked = !assignment?.round2_unlocked && !canUseFeature(planContext.tier, 'voca:round2');
 

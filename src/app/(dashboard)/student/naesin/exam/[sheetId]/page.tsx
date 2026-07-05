@@ -1,4 +1,5 @@
 import { requireRole } from '@/lib/auth/helpers';
+import { requireNaesinAccess } from '@/lib/naesin/require-naesin-access';
 import { createClient } from '@/lib/supabase/server';
 import { Topbar } from '@/components/layout/topbar';
 import { notFound } from 'next/navigation';
@@ -11,6 +12,7 @@ interface Props {
 export default async function ExamPage({ params }: Props) {
   const { sheetId } = await params;
   const user = await requireRole(['student']);
+  await requireNaesinAccess(user); // 서비스 게이트 (무료 택1 포함)
   const supabase = await createClient();
 
   // Fetch the sheet with textbook info

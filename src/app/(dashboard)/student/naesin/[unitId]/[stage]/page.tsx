@@ -1,10 +1,10 @@
 import { requireRole } from '@/lib/auth/helpers';
+import { requireNaesinAccess } from '@/lib/naesin/require-naesin-access';
 import { createClient } from '@/lib/supabase/server';
 import { Topbar } from '@/components/layout/topbar';
 import { notFound, redirect } from 'next/navigation';
 import { NaesinStageView } from './client';
 import { calculateStageStatuses } from '@/lib/naesin/stage-unlock';
-import { getPlanContext } from '@/lib/billing/get-plan-context';
 import { mergeEnabledStages, getNaesinUnitLimit } from '@/lib/billing/feature-gate';
 import { fetchContentAvailability } from '@/lib/naesin/fetch-content-availability';
 import { fetchStageData } from '@/lib/naesin/fetch-stage-data';
@@ -56,7 +56,7 @@ export default async function NaesinStagePage({ params }: Props) {
     naesinRequiredRounds = academy?.naesin_required_rounds ?? 1;
   }
 
-  const planContext = await getPlanContext(user.academy_id, user.id);
+  const planContext = await requireNaesinAccess(user); // 서비스 게이트 (무료 택1 포함)
   const enabledStages = mergeEnabledStages(
     planContext.tier,
     studentSettings?.enabled_stages as string[] | null,
