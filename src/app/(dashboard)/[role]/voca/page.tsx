@@ -1,3 +1,4 @@
+import { redirect } from 'next/navigation';
 import { requireRole } from '@/lib/auth/helpers';
 import { createClient } from '@/lib/supabase/server';
 import { Topbar } from '@/components/layout/topbar';
@@ -13,6 +14,12 @@ export default async function VocaPage({ params }: Props) {
   const { role } = await params;
   const { allowedRoles } = getRoleConfig(role);
   const user = await requireRole(allowedRoles);
+
+  // 교재·단어는 전역 공유 콘텐츠 — 콘텐츠 권한 학원(올라영)+보스만 편집 화면 접근
+  if (user.role !== 'boss' && !user.can_manage_content) {
+    redirect(`/${role}`);
+  }
+
   const supabase = await createClient();
 
   const { data: books } = await supabase

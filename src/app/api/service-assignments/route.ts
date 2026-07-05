@@ -17,7 +17,7 @@ export const GET = createApiHandler({ hasBody: false }, async ({ user, supabase 
 
 // POST — boss/admin이 서비스 배정
 export const POST = createApiHandler(
-  { roles: ['boss', 'admin'], schema: serviceAssignmentCreateSchema },
+  { roles: ['boss', 'admin', 'teacher'], schema: serviceAssignmentCreateSchema },
   async ({ user, body, supabase }) => {
     await requireAcademyScope(user, body.studentId, supabase);
     // boss는 최고관리자이므로 서비스 게이트 우회
@@ -117,7 +117,7 @@ export const PATCH = createApiHandler(
 
 // DELETE — boss/admin이 서비스 배정 해제
 export const DELETE = createApiHandler(
-  { roles: ['boss', 'admin'], schema: serviceAssignmentDeleteSchema, hasBody: true },
+  { roles: ['boss', 'admin', 'teacher'], schema: serviceAssignmentDeleteSchema, hasBody: true },
   async ({ user, body, supabase }) => {
     await requireAcademyScope(user, body.studentId, supabase);
     const client = user.role === 'boss' ? createAdminClient() : supabase;

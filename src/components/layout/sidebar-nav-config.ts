@@ -99,7 +99,7 @@ export const NAV_CONFIG: Record<string, NavGroup[]> = {
       label: '콘텐츠',
       items: [
         { href: '/teacher/naesin', label: '내신 관리', icon: ClipboardList },
-        { href: '/teacher/voca', label: '올킬보카 관리', icon: BookA },
+        { href: '/teacher/voca', label: '올킬보카 관리', icon: BookA, requireContentPermission: true },
         { href: '/teacher/voca/submissions', label: '오답노트 확인', icon: FileCheck },
         { href: '/teacher/voca/results', label: 'Day별 결과', icon: BarChart3 },
         { href: '/teacher/voca/exams', label: '보카 시험 결과', icon: PenLine },
@@ -134,7 +134,7 @@ export const NAV_CONFIG: Record<string, NavGroup[]> = {
       label: '콘텐츠',
       items: [
         { href: '/admin/naesin', label: '내신 관리', icon: ClipboardList },
-        { href: '/admin/voca', label: '올킬보카 관리', icon: BookA },
+        { href: '/admin/voca', label: '올킬보카 관리', icon: BookA, requireContentPermission: true },
         { href: '/admin/voca/submissions', label: '오답노트 확인', icon: FileCheck },
         { href: '/admin/voca/results', label: 'Day별 결과', icon: BarChart3 },
         { href: '/admin/voca/exams', label: '보카 시험 결과', icon: PenLine },

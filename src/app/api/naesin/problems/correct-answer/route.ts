@@ -4,6 +4,7 @@ import { createApiHandler, NotFoundError } from '@/lib/api';
 import { createAdminClient } from '@/lib/supabase/admin';
 import { checkPlanGate } from '@/lib/billing/check-plan-api';
 import { regradeSheet } from '@/lib/naesin/regrade-sheet';
+import { requireContentPermission } from '@/lib/api/require-content-permission';
 
 const correctAnswerSchema = z.object({
   sheetId: z.string().uuid(),
@@ -16,6 +17,8 @@ const correctAnswerSchema = z.object({
 export const PATCH = createApiHandler(
   { schema: correctAnswerSchema, roles: ['teacher', 'admin', 'boss'] },
   async ({ user, body, supabase }) => {
+    // 정답처리는 전역 공유 시트·템플릿을 수정 → 콘텐츠 권한 학원(올라영)+보스만 (2026-07-05 결정)
+    await requireContentPermission(user, supabase);
     if (user.role !== 'boss') {
       const blocked = await checkPlanGate(user.academy_id, 'naesin:problem');
       if (blocked) return blocked;

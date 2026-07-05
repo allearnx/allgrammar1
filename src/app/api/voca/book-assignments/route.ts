@@ -5,7 +5,7 @@ import { requireAcademyScope } from '@/lib/api/require-academy-scope';
 
 // POST — boss/admin이 학생에게 교재 배정 (upsert)
 export const POST = createApiHandler(
-  { roles: ['boss', 'admin'], schema: vocaBookAssignmentSchema },
+  { roles: ['boss', 'admin', 'teacher'], schema: vocaBookAssignmentSchema },
   async ({ user, body, supabase }) => {
     await requireAcademyScope(user, body.studentId, supabase);
     const { data, error } = await supabase
@@ -23,7 +23,7 @@ export const POST = createApiHandler(
 
 // DELETE — boss/admin이 교재 배정 해제
 export const DELETE = createApiHandler(
-  { roles: ['boss', 'admin'], schema: vocaBookAssignmentDeleteSchema, hasBody: true },
+  { roles: ['boss', 'admin', 'teacher'], schema: vocaBookAssignmentDeleteSchema, hasBody: true },
   async ({ user, body, supabase }) => {
     await requireAcademyScope(user, body.studentId, supabase);
     const { error } = await supabase
