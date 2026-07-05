@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { createApiHandler, dbResult } from '@/lib/api';
+import { createApiHandler, dbResult, ForbiddenError } from '@/lib/api';
 import { createAdminClient } from '@/lib/supabase/admin';
 import { academySettingsSchema } from '@/lib/api/schemas';
 
@@ -7,7 +7,7 @@ export const GET = createApiHandler(
   { roles: ['admin', 'boss'], hasBody: false },
   async ({ user }) => {
     if (!user.academy_id) {
-      return NextResponse.json({ error: '학원에 소속되어 있지 않습니다.' }, { status: 400 });
+      throw new ForbiddenError('학원에 소속되어 있지 않습니다.');
     }
     const admin = createAdminClient();
     const data = dbResult(await admin
@@ -32,7 +32,7 @@ export const PATCH = createApiHandler(
   { roles: ['admin', 'boss'], schema: academySettingsSchema },
   async ({ user, body }) => {
     if (!user.academy_id) {
-      return NextResponse.json({ error: '학원에 소속되어 있지 않습니다.' }, { status: 400 });
+      throw new ForbiddenError('학원에 소속되어 있지 않습니다.');
     }
     const admin = createAdminClient();
     const updates: Record<string, unknown> = { updated_at: new Date().toISOString() };

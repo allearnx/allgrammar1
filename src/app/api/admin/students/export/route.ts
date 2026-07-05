@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { createApiHandler } from '@/lib/api';
+import { createApiHandler, ForbiddenError } from '@/lib/api';
 import { createAdminClient } from '@/lib/supabase/admin';
 import { checkPlanGate } from '@/lib/billing/check-plan-api';
 
@@ -14,7 +14,7 @@ export const GET = createApiHandler(
   { roles: ['admin', 'boss'], hasBody: false },
   async ({ user }) => {
     if (!user.academy_id) {
-      return NextResponse.json({ error: '학원에 소속되어 있지 않습니다.' }, { status: 400 });
+      throw new ForbiddenError('학원에 소속되어 있지 않습니다.');
     }
 
     const blocked = await checkPlanGate(user.academy_id, 'bulk:export');

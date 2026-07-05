@@ -293,12 +293,17 @@ sanitize→validate 순서로 돌려야 함). 진짜는 6종:
 - [x] ① 즉시 정리 — 미사용 의존성 3개(@dnd-kit/helpers, @dnd-kit/react, unpdf) 제거
   + voca/vocab-tab/index-legacy.tsx 삭제. tsc 0에러 + 833 테스트 통과.
   ⚠️ "주석 죽은 코드 3블록" 보고는 오탐(실제 살아있는 JSX)이라 미삭제 — 삭제류는 반드시 직접 확인.
-- [ ] ② API 라우트 정리 — 165개 중 수동 구현 28개의 에러 응답을 errorResponse()/ApiError로 통일
-  (권한 오류가 400으로 나가는 곳 있음: admin/settings 등), 테넌트-바운드 라우트에
-  requireAcademyScope() 명시 적용, schema 없는 POST/PATCH 중 부당한 것 Zod 추가.
-  보안 가치 있음(멀티테넌트 크로스 접근 방어). 공통 헬퍼는 이미 존재(lib/api/).
+- [x] ② API 라우트 정리 (2026-07-05) — (a) "학원 미소속" 400 반환 13곳 → ForbiddenError(403)
+  통일 (teacher/create-academy "이미 소속"은 상태 충돌이라 400 유지). 프론트는 상태코드 분기
+  없음 확인(fetchWithToast는 5xx/204만 구분). (b) 수동 라우트 7개 createApiHandler 이관:
+  learning-materials, learning-calendar(requireAcademyScope 적용), get-upload-url, upload-image,
+  passages/upload-pdf, boss/upload, blog-upload-url. formData 라우트는 hasBody:false + 내부 파싱.
+  클라이언트 노출 에러 메시지는 전부 보존. 833 테스트 통과(live-monitor 400→403 기대값 갱신).
+  ▸ 남은 것: extract-* 7개 + match-exam-sentences는 ③에서 함께. my-report/parent-share는
+  토큰 기반 특수 인증이라 수동 유지(정당). 나머지 수동 라우트(health/cron/webhook/auth/public)도 정당.
 - [ ] ③ extract-pdf 라우트 분리 (525줄) — AI 호출부(청크 분할+Claude 3모드)와 정답표
   병합/정규화를 lib으로 추출. 콘텐츠 파이프라인 북극성 진행 시 같이 하면 효율적.
+  이때 extract-* 7개 + match-exam-sentences의 createApiHandler 이관도 함께.
 - [ ] ④ naesin↔voca 학습 컴포넌트 중복 통합 — 플래시카드/퀴즈/스펠링 상태 관리 훅 공유
   (quiz-view↔quick-quiz, flashcard-view↔neon-flashcard, spelling-view↔rhythm-spelling).
   ⚠️ 잘 돌아가는 학생 화면이므로 해당 화면 수정할 일 생길 때 같이. 급하지 않음.

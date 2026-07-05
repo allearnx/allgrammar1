@@ -1,27 +1,23 @@
-import { NextRequest, NextResponse } from 'next/server';
-import { getUser } from '@/lib/auth/helpers';
+import { NextResponse } from 'next/server';
+import { ApiError, ValidationError, createApiHandler } from '@/lib/api';
 import { createAdminClient } from '@/lib/supabase/admin';
 import { logger } from '@/lib/logger';
 
-export async function POST(request: NextRequest) {
-  const user = await getUser();
-  if (!user || !['teacher', 'admin', 'boss'].includes(user.role)) {
-    return NextResponse.json({ error: '접근 권한이 없습니다.' }, { status: 403 });
-  }
-
-  try {
+export const POST = createApiHandler(
+  { roles: ['teacher', 'admin', 'boss'], hasBody: false },
+  async ({ request }) => {
     const formData = await request.formData();
     const file = formData.get('file') as File | null;
     if (!file) {
-      return NextResponse.json({ error: '파일이 없습니다.' }, { status: 400 });
+      throw new ValidationError('파일이 없습니다.');
     }
 
     if (file.type !== 'application/pdf') {
-      return NextResponse.json({ error: 'PDF 파일만 업로드 가능합니다.' }, { status: 400 });
+      throw new ValidationError('PDF 파일만 업로드 가능합니다.');
     }
 
     if (file.size > 20 * 1024 * 1024) {
-      return NextResponse.json({ error: '파일 크기는 20MB 이하만 가능합니다.' }, { status: 400 });
+      throw new ValidationError('파일 크기는 20MB 이하만 가능합니다.');
     }
 
     const fileName = `passages/${Date.now()}-${Math.random().toString(36).slice(2, 8)}.pdf`;
@@ -37,7 +33,7 @@ export async function POST(request: NextRequest) {
 
     if (error) {
       logger.error('upload.passage_pdf', { error: error.message });
-      return NextResponse.json({ error: '업로드 실패: ' + error.message }, { status: 500 });
+      throw new ApiError(500, '업로드 실패: ' + error.message);
     }
 
     const { data: urlData } = admin.storage
@@ -45,8 +41,5 @@ export async function POST(request: NextRequest) {
       .getPublicUrl(fileName);
 
     return NextResponse.json({ url: urlData.publicUrl });
-  } catch (err) {
-    logger.error('upload.passage_pdf', { error: err instanceof Error ? err.message : String(err) });
-    return NextResponse.json({ error: '서버 오류가 발생했습니다.' }, { status: 500 });
   }
-}
+);

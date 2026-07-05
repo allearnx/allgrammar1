@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { createApiHandler } from '@/lib/api';
+import { createApiHandler, ForbiddenError } from '@/lib/api';
 import { createAdminClient } from '@/lib/supabase/admin';
 import { invalidateStudentServices } from '@/lib/cache/invalidate';
 import { studentBulkAssignSchema } from '@/lib/api/schemas';
@@ -26,7 +26,7 @@ export const POST = createApiHandler(
     // Verify all students belong to admin's academy
     if (user.role === 'admin') {
       if (!user.academy_id) {
-        return NextResponse.json({ error: '학원에 소속되어 있지 않습니다.' }, { status: 400 });
+        throw new ForbiddenError('학원에 소속되어 있지 않습니다.');
       }
       const { data: students } = await admin
         .from('users')

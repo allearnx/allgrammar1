@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { createApiHandler } from '@/lib/api/handler';
+import { createApiHandler, ForbiddenError } from '@/lib/api';
 import { createAdminClient } from '@/lib/supabase/admin';
 import { fetchVocaExamGroups } from '@/lib/voca/fetch-exam-results';
 
@@ -14,7 +14,7 @@ export const GET = createApiHandler(
     const admin = createAdminClient();
     const academyId = user.academy_id;
     if (!academyId && user.role !== 'boss') {
-      return NextResponse.json({ error: '학원에 소속되어 있지 않습니다.' }, { status: 400 });
+      throw new ForbiddenError('학원에 소속되어 있지 않습니다.');
     }
 
     // 1. voca 배정 학생 (학원 범위)

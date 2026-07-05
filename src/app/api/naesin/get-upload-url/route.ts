@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { getUser } from '@/lib/auth/helpers';
+import { ApiError, createApiHandler } from '@/lib/api';
 import { createAdminClient } from '@/lib/supabase/admin';
 import { logger } from '@/lib/logger';
 
@@ -8,13 +8,9 @@ import { logger } from '@/lib/logger';
  * Supabase Storage 서명된 업로드 URL을 반환합니다.
  * 클라이언트가 이 URL로 파일을 직접 Supabase에 업로드합니다.
  */
-export async function POST() {
-  const user = await getUser();
-  if (!user || !['teacher', 'admin', 'boss'].includes(user.role)) {
-    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-  }
-
-  try {
+export const POST = createApiHandler(
+  { roles: ['teacher', 'admin', 'boss'], hasBody: false },
+  async () => {
     const path = `temp-extract/${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
     const admin = createAdminClient();
 
@@ -24,7 +20,7 @@ export async function POST() {
 
     if (error) {
       logger.error('get-upload-url.failed', { error: error.message });
-      return NextResponse.json({ error: '업로드 URL 생성 실패' }, { status: 500 });
+      throw new ApiError(500, '업로드 URL 생성 실패');
     }
 
     const { data: urlData } = admin.storage
@@ -36,8 +32,5 @@ export async function POST() {
       publicUrl: urlData.publicUrl,
       path,
     });
-  } catch (err) {
-    logger.error('get-upload-url.error', { error: err instanceof Error ? err.message : String(err) });
-    return NextResponse.json({ error: '서버 오류' }, { status: 500 });
   }
-}
+);

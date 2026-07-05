@@ -1,33 +1,28 @@
-import { NextRequest, NextResponse } from 'next/server';
-import { getUser } from '@/lib/auth/helpers';
+import { NextResponse } from 'next/server';
+import { ApiError, ForbiddenError, NotFoundError, ValidationError, createApiHandler } from '@/lib/api';
 import { createAdminClient } from '@/lib/supabase/admin';
-import { createClient } from '@/lib/supabase/server';
 import { logger } from '@/lib/logger';
 
 // ── POST: PDF 업로드 (boss, teacher, admin) ──
-export async function POST(request: NextRequest) {
-  const user = await getUser();
-  if (!user || !['teacher', 'admin', 'boss'].includes(user.role)) {
-    return NextResponse.json({ error: '접근 권한이 없습니다.' }, { status: 403 });
-  }
-
-  try {
+export const POST = createApiHandler(
+  { roles: ['teacher', 'admin', 'boss'], hasBody: false },
+  async ({ user, request }) => {
     const formData = await request.formData();
     const file = formData.get('file') as File | null;
     const title = formData.get('title') as string | null;
     const description = (formData.get('description') as string) || null;
 
     if (!file) {
-      return NextResponse.json({ error: '파일이 없습니다.' }, { status: 400 });
+      throw new ValidationError('파일이 없습니다.');
     }
     if (!title?.trim()) {
-      return NextResponse.json({ error: '제목을 입력해주세요.' }, { status: 400 });
+      throw new ValidationError('제목을 입력해주세요.');
     }
     if (file.type !== 'application/pdf') {
-      return NextResponse.json({ error: 'PDF 파일만 업로드 가능합니다.' }, { status: 400 });
+      throw new ValidationError('PDF 파일만 업로드 가능합니다.');
     }
     if (file.size > 20 * 1024 * 1024) {
-      return NextResponse.json({ error: '파일 크기는 20MB 이하만 가능합니다.' }, { status: 400 });
+      throw new ValidationError('파일 크기는 20MB 이하만 가능합니다.');
     }
 
     const fileName = `materials/${Date.now()}-${Math.random().toString(36).slice(2, 8)}.pdf`;
@@ -40,7 +35,7 @@ export async function POST(request: NextRequest) {
 
     if (uploadError) {
       logger.error('upload.material_pdf', { error: uploadError.message });
-      return NextResponse.json({ error: '업로드 실패: ' + uploadError.message }, { status: 500 });
+      throw new ApiError(500, '업로드 실패: ' + uploadError.message);
     }
 
     const { data: urlData } = admin.storage.from('public-images').getPublicUrl(fileName);
@@ -60,26 +55,17 @@ export async function POST(request: NextRequest) {
 
     if (insertError) {
       logger.error('insert.learning_material', { error: insertError.message });
-      return NextResponse.json({ error: '저장 실패' }, { status: 500 });
+      throw new ApiError(500, '저장 실패');
     }
 
     return NextResponse.json(data);
-  } catch (err) {
-    logger.error('upload.material', { error: err instanceof Error ? err.message : String(err) });
-    return NextResponse.json({ error: '서버 오류가 발생했습니다.' }, { status: 500 });
   }
-}
+);
 
 // ── GET: 자료 목록 (all authenticated) ──
-export async function GET() {
-  const user = await getUser();
-  if (!user) {
-    return NextResponse.json({ error: '로그인이 필요합니다.' }, { status: 401 });
-  }
-
-  try {
-    const supabase = await createClient();
-
+export const GET = createApiHandler(
+  { hasBody: false },
+  async ({ supabase }) => {
     // RLS handles filtering — just select all accessible rows
     const { data, error } = await supabase
       .from('learning_materials')
@@ -88,27 +74,20 @@ export async function GET() {
 
     if (error) {
       logger.error('fetch.learning_materials', { error: error.message });
-      return NextResponse.json({ error: '조회 실패' }, { status: 500 });
+      throw new ApiError(500, '조회 실패');
     }
 
     return NextResponse.json(data ?? []);
-  } catch (err) {
-    logger.error('fetch.learning_materials', { error: err instanceof Error ? err.message : String(err) });
-    return NextResponse.json({ error: '서버 오류가 발생했습니다.' }, { status: 500 });
   }
-}
+);
 
 // ── DELETE: 자료 삭제 (업로더 본인 or boss) ──
-export async function DELETE(request: NextRequest) {
-  const user = await getUser();
-  if (!user || !['teacher', 'admin', 'boss'].includes(user.role)) {
-    return NextResponse.json({ error: '접근 권한이 없습니다.' }, { status: 403 });
-  }
-
-  try {
-    const { id } = await request.json();
+export const DELETE = createApiHandler(
+  { roles: ['teacher', 'admin', 'boss'], hasBody: true },
+  async ({ user, body }) => {
+    const { id } = (body ?? {}) as { id?: string };
     if (!id) {
-      return NextResponse.json({ error: 'id가 필요합니다.' }, { status: 400 });
+      throw new ValidationError('id가 필요합니다.');
     }
 
     const admin = createAdminClient();
@@ -121,12 +100,12 @@ export async function DELETE(request: NextRequest) {
       .single();
 
     if (fetchError || !material) {
-      return NextResponse.json({ error: '자료를 찾을 수 없습니다.' }, { status: 404 });
+      throw new NotFoundError('자료를 찾을 수 없습니다.');
     }
 
     // Only uploader or boss can delete
     if (user.role !== 'boss' && material.uploaded_by !== user.id) {
-      return NextResponse.json({ error: '삭제 권한이 없습니다.' }, { status: 403 });
+      throw new ForbiddenError('삭제 권한이 없습니다.');
     }
 
     // Delete from storage
@@ -144,12 +123,9 @@ export async function DELETE(request: NextRequest) {
 
     if (deleteError) {
       logger.error('delete.learning_material', { error: deleteError.message });
-      return NextResponse.json({ error: '삭제 실패' }, { status: 500 });
+      throw new ApiError(500, '삭제 실패');
     }
 
     return NextResponse.json({ success: true });
-  } catch (err) {
-    logger.error('delete.learning_material', { error: err instanceof Error ? err.message : String(err) });
-    return NextResponse.json({ error: '서버 오류가 발생했습니다.' }, { status: 500 });
   }
-}
+);

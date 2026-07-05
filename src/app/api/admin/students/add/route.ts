@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { randomInt } from 'crypto';
-import { createApiHandler } from '@/lib/api';
+import { createApiHandler, ForbiddenError } from '@/lib/api';
 import { createAdminClient } from '@/lib/supabase/admin';
 import { studentAddSchema } from '@/lib/api/schemas';
 import { checkServiceGate } from '@/lib/billing/check-plan-api';
@@ -17,7 +17,7 @@ export const POST = createApiHandler(
   { roles: ['admin', 'boss'], schema: studentAddSchema, rateLimit: { max: 30, windowMs: 60_000 } },
   async ({ user, body }) => {
     if (!user.academy_id) {
-      return NextResponse.json({ error: '학원에 소속되어 있지 않습니다.' }, { status: 400 });
+      throw new ForbiddenError('학원에 소속되어 있지 않습니다.');
     }
 
     // 무료/유료 플랜 모두 허용 — 단일 학생 추가는 번들 가입과 동일한 권한

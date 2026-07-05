@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { createApiHandler } from '@/lib/api';
+import { createApiHandler, ForbiddenError } from '@/lib/api';
 import { createAdminClient } from '@/lib/supabase/admin';
 import { countCompletedStages } from '@/lib/naesin/progress-queries';
 
@@ -49,7 +49,7 @@ export const GET = createApiHandler(
   { roles: ['admin', 'boss'], hasBody: false, rateLimit: { max: 30, windowMs: 60_000 } },
   async ({ user }) => {
     if (!user.academy_id) {
-      return NextResponse.json({ error: '학원에 소속되어 있지 않습니다.' }, { status: 400 });
+      throw new ForbiddenError('학원에 소속되어 있지 않습니다.');
     }
     const admin = createAdminClient();
     const academyId = user.academy_id;

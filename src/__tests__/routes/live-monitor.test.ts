@@ -171,11 +171,11 @@ describe('/api/live-monitor', () => {
     expect(res.status).toBe(200);
   });
 
-  it('academy_id 없으면 400', async () => {
+  it('academy_id 없으면 403', async () => {
     mockGetUser.mockResolvedValue({ ...testTeacher, academy_id: null });
     const { GET } = await import('@/app/api/live-monitor/route');
     const res = await GET(makeRequest());
-    expect(res.status).toBe(400);
+    expect(res.status).toBe(403);
   });
 
   // ── Empty state ──

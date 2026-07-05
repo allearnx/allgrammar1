@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { createApiHandler } from '@/lib/api/handler';
+import { createApiHandler, ForbiddenError } from '@/lib/api';
 import { createAdminClient } from '@/lib/supabase/admin';
 
 export const GET = createApiHandler(
@@ -16,7 +16,7 @@ export const GET = createApiHandler(
 
     // boss without academy → fetch all students; admin/teacher require academy
     if (!academyId && user.role !== 'boss') {
-      return NextResponse.json({ error: '학원에 소속되어 있지 않습니다.' }, { status: 400 });
+      throw new ForbiddenError('학원에 소속되어 있지 않습니다.');
     }
 
     // 1. Get voca-assigned students (filtered by academy for admin/teacher)
