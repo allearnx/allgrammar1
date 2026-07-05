@@ -240,7 +240,9 @@ export function NeonFlashcard({ vocabulary, onComplete }: NeonFlashcardProps) {
                     {vocab.back_text}
                   </p>
                   {vocab.exam_source && (
-                    <p className="text-xs text-gray-400 mt-1">{vocab.exam_source}</p>
+                    <span className="mt-1.5 inline-flex items-center gap-1 rounded-full bg-[#E8F0FE] px-2.5 py-0.5 text-[11px] font-bold text-[#1A73E8]">
+                      📄 {vocab.exam_source} 기출 문장
+                    </span>
                   )}
                 </motion.div>
               )}

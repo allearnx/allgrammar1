@@ -24,6 +24,7 @@ interface ReviewData {
   distractorPool: string[];
   wordDistractorPool: string[];
   exampleMap: Record<string, string>;
+  examSourceMap: Record<string, string>;
   coverageDelta: { bookTitle: string; now: number; after: number } | null;
 }
 
@@ -202,7 +203,7 @@ interface QuizQuestion {
 }
 
 function ConquestMode({ data, onBack }: { data: ReviewData; onBack: () => void }) {
-  const { words, distractorPool, wordDistractorPool, exampleMap } = data;
+  const { words, distractorPool, wordDistractorPool, exampleMap, examSourceMap } = data;
   const [progress, setProgress] = useState<Record<string, number>>({ ...data.progress });
   const [questionIndex, setQuestionIndex] = useState(0);
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
@@ -418,6 +419,13 @@ function ConquestMode({ data, onBack }: { data: ReviewData; onBack: () => void }
                   🔥 졸업 문제 — 빈칸에 알맞은 단어는?
                 </p>
                 <p className="text-xl font-medium text-center leading-relaxed">{question.prompt}</p>
+                {examSourceMap[question.word.toLowerCase()] && (
+                  <p className="text-center">
+                    <span className="inline-flex items-center gap-1 rounded-full bg-[#E8F0FE] px-2.5 py-0.5 text-[11px] font-bold text-[#1A73E8]">
+                      📄 {examSourceMap[question.word.toLowerCase()]} 기출 문장
+                    </span>
+                  </p>
+                )}
               </div>
             ) : (
               <p className="text-4xl font-bold text-center">{question.word}</p>

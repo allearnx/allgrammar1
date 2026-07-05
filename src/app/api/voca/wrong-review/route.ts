@@ -23,10 +23,11 @@ export const GET = createApiHandler(
     let distractorPool: string[] = [];
     let wordDistractorPool: string[] = [];
     const exampleMap: Record<string, string> = {};
+    const examSourceMap: Record<string, string> = {};
     if (pool.dayIds.size > 0) {
       const { data: vocabRows } = await supabase
         .from('voca_vocabulary')
-        .select('front_text, back_text, example_sentence')
+        .select('front_text, back_text, example_sentence, exam_source')
         .in('day_id', [...pool.dayIds]);
       distractorPool = (vocabRows || []).map((v) => v.back_text);
       wordDistractorPool = (vocabRows || []).map((v) => v.front_text);
@@ -34,6 +35,7 @@ export const GET = createApiHandler(
         const key = v.front_text.toLowerCase();
         if (v.example_sentence && pool.wordMap.has(key) && !exampleMap[key]) {
           exampleMap[key] = v.example_sentence;
+          if (v.exam_source) examSourceMap[key] = v.exam_source;
         }
       }
     }
@@ -74,6 +76,7 @@ export const GET = createApiHandler(
       distractorPool,
       wordDistractorPool,
       exampleMap,
+      examSourceMap,
       coverageDelta,
     });
   },

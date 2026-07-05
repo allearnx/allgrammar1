@@ -40,6 +40,7 @@ export function ExamSentenceMatch({ words, onUpdate }: Props) {
   const [saving, setSaving] = useState(false);
   const [results, setResults] = useState<MatchedWord[]>([]);
   const [translating, setTranslating] = useState(false);
+  const [examLabel, setExamLabel] = useState('');
 
   function reset() {
     setStep(1);
@@ -48,6 +49,7 @@ export function ExamSentenceMatch({ words, onUpdate }: Props) {
     setSaving(false);
     setResults([]);
     setTranslating(false);
+    setExamLabel('');
   }
 
   async function handleMatch() {
@@ -99,6 +101,8 @@ export function ExamSentenceMatch({ words, onUpdate }: Props) {
               id: w.id,
               example_sentence: w.example_sentence,
               example_sentence_ko: w.example_sentence_ko,
+              // 출처 라벨 — 학생 화면 "기출 뱃지"의 근거
+              exam_source: examLabel.trim() || null,
             },
             silent: true,
             logContext: 'voca_admin.exam_sentence_match',
@@ -192,6 +196,17 @@ export function ExamSentenceMatch({ words, onUpdate }: Props) {
 
         {step === 1 && (
           <div className="space-y-4">
+            <div>
+              <Label>시험명 (출처 표시용)</Label>
+              <Input
+                value={examLabel}
+                onChange={(e) => setExamLabel(e.target.value)}
+                placeholder="예: 2026년 3월 고1 모의고사"
+              />
+              <p className="mt-1 text-xs text-muted-foreground">
+                학생 화면 예문에 &ldquo;📄 {examLabel.trim() || '시험명'} 기출&rdquo; 뱃지로 표시돼요.
+              </p>
+            </div>
             <div>
               <Label>기출 지문 PDF</Label>
               <Input

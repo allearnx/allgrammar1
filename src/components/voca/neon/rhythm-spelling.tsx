@@ -249,7 +249,14 @@ export function RhythmSpelling({ vocabulary, onComplete, examMode = false }: Rhy
           className="flex-1 flex flex-col items-center justify-center space-y-6"
         >
           {sentenceWithBlank && (
-            <p className="text-xl text-gray-500 text-center px-4">{sentenceWithBlank}</p>
+            <div className="space-y-1.5 text-center px-4">
+              <p className="text-xl text-gray-500">{sentenceWithBlank}</p>
+              {vocab.exam_source && (
+                <span className="inline-flex items-center gap-1 rounded-full bg-[#E8F0FE] px-2.5 py-0.5 text-[11px] font-bold text-[#1A73E8]">
+                  📄 {vocab.exam_source} 기출 문장
+                </span>
+              )}
+            </div>
           )}
 
           <p className="text-lg text-gray-600 font-medium">{vocab.back_text}</p>
