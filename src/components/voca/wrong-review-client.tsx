@@ -3,7 +3,7 @@
 import { useState, useEffect, useCallback, useRef, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Loader2, Swords, Trophy, PartyPopper } from 'lucide-react';
-import { cn, shuffle } from '@/lib/utils';
+import { cn, shuffle, blankOutWordExact } from '@/lib/utils';
 import { fetchWithToast } from '@/lib/fetch-with-toast';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -22,6 +22,9 @@ interface ReviewData {
   weekLabel: string;
   weekStart: string;
   distractorPool: string[];
+  wordDistractorPool: string[];
+  exampleMap: Record<string, string>;
+  coverageDelta: { bookTitle: string; now: number; after: number } | null;
 }
 
 const GRADUATE_THRESHOLD = 3;
@@ -116,6 +119,19 @@ function ListView({ data, onStart }: { data: ReviewData; onStart: () => void }) 
 
       <Progress value={words.length > 0 ? (graduated / words.length) * 100 : 0} className="h-2" />
 
+      {/* 오답 = 커버리지 올리는 지름길 (부족함이 아니라 기회로 프레이밍) */}
+      {data.coverageDelta && (
+        <div className="rounded-xl bg-[#E8F0FE] p-4">
+          <p className="text-sm font-bold text-gray-800">
+            🎯 이 단어들을 정복하면 <span className="text-[#1A73E8]">{data.coverageDelta.bookTitle}</span> 커버리지가
+          </p>
+          <p className="mt-1 text-lg font-extrabold tabular-nums text-[#1A73E8]">
+            {data.coverageDelta.now}% → {data.coverageDelta.after}%
+          </p>
+          <p className="mt-0.5 text-[11px] text-gray-500">오답 복습이 시험 점수로 가는 가장 빠른 길이에요</p>
+        </div>
+      )}
+
       {completedAt ? (
         <Card className="border-green-200 bg-green-50">
           <CardContent className="flex items-center gap-3 py-4">
@@ -178,13 +194,15 @@ function StatCard({ label, value, className }: { label: string; value: number; c
 
 interface QuizQuestion {
   word: string;
-  correctAnswer: string;
+  /** meaning: 뜻 고르기 / context: 문장 빈칸에 알맞은 단어 고르기 (마지막 관문) */
+  type: 'meaning' | 'context';
+  prompt: string; // meaning: 영단어 / context: 빈칸 문장
   options: string[];
   correctIndex: number;
 }
 
 function ConquestMode({ data, onBack }: { data: ReviewData; onBack: () => void }) {
-  const { words, distractorPool } = data;
+  const { words, distractorPool, wordDistractorPool, exampleMap } = data;
   const [progress, setProgress] = useState<Record<string, number>>({ ...data.progress });
   const [questionIndex, setQuestionIndex] = useState(0);
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
@@ -201,27 +219,59 @@ function ConquestMode({ data, onBack }: { data: ReviewData; onBack: () => void }
     [words, Object.values(progress).filter((v) => v >= GRADUATE_THRESHOLD).length],
   );
 
-  // Generate questions for active words (reshuffled each time activeWords changes)
-  const questions: QuizQuestion[] = useMemo(() => {
+  // 출제 순서만 셔플로 고정하고, 문제 내용은 (단어 × 현재 스트릭)으로 동적 생성
+  const questionOrder = useMemo(() => shuffle([...activeWords]), [activeWords]);
+  const currentWord = questionOrder[questionIndex] || questionOrder[0];
+
+  const question: QuizQuestion | undefined = useMemo(() => {
+    if (!currentWord) return undefined;
+    const key = currentWord.front_text.toLowerCase();
+    const streak = progress[key] ?? 0;
+
+    // 마지막 관문(3번째): 문장 빈칸에 알맞은 단어 고르기 — 예문이 있고
+    // 표제어가 문장에 실제로 등장할 때만 (활용형/예문 없음 → 뜻 고르기 폴백)
+    const example = exampleMap[key];
+    const blanked = example ? blankOutWordExact(example, currentWord.front_text) : null;
+    const contextReady = !!blanked && blanked !== example;
+
+    if (streak === GRADUATE_THRESHOLD - 1 && contextReady) {
+      const seen = new Set([key]);
+      const wordChoices: string[] = [];
+      // 보기: 같은 오답 풀 단어 우선, 부족하면 해당 Day들의 단어로 채움 (총 5지)
+      for (const w of shuffle(words.map((x) => x.front_text))) {
+        if (wordChoices.length >= 4) break;
+        if (!seen.has(w.toLowerCase())) { seen.add(w.toLowerCase()); wordChoices.push(w); }
+      }
+      for (const w of shuffle(wordDistractorPool)) {
+        if (wordChoices.length >= 4) break;
+        if (!seen.has(w.toLowerCase())) { seen.add(w.toLowerCase()); wordChoices.push(w); }
+      }
+      const options = shuffle([currentWord.front_text, ...wordChoices]);
+      return {
+        word: currentWord.front_text,
+        type: 'context',
+        prompt: blanked!,
+        options,
+        correctIndex: options.indexOf(currentWord.front_text),
+      };
+    }
+
+    // 기본: 뜻 고르기 (4지)
     const allBackTexts = new Set(distractorPool);
     words.forEach((w) => allBackTexts.add(w.back_text));
-
-    return shuffle([...activeWords]).map((w) => {
-      // Distractors: other words' back_text, excluding current
-      const others = [...allBackTexts].filter((t) => t !== w.back_text);
-      const distractors = shuffle(others).slice(0, 3);
-      const options = shuffle([w.back_text, ...distractors]);
-      return {
-        word: w.front_text,
-        correctAnswer: w.back_text,
-        options,
-        correctIndex: options.indexOf(w.back_text),
-      };
-    });
-  }, [activeWords, words, distractorPool]);
-
-  // Clamp index
-  const question = questions[questionIndex] || questions[0];
+    const others = [...allBackTexts].filter((t) => t !== currentWord.back_text);
+    const distractors = shuffle(others).slice(0, 3);
+    const options = shuffle([currentWord.back_text, ...distractors]);
+    return {
+      word: currentWord.front_text,
+      type: 'meaning',
+      prompt: currentWord.front_text,
+      options,
+      correctIndex: options.indexOf(currentWord.back_text),
+    };
+    // 스트릭이 바뀌면(정답/오답 후) 다음 렌더에서 형식이 갱신되도록 progress 의존
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentWord, questionIndex, progress[currentWord?.front_text.toLowerCase() ?? ''] ?? 0]);
   const totalActive = activeWords.length;
   const totalGraduated = words.length - totalActive;
 
@@ -338,7 +388,7 @@ function ConquestMode({ data, onBack }: { data: ReviewData; onBack: () => void }
       <div className="flex-1 flex flex-col items-center justify-center">
         <AnimatePresence mode="wait">
           <motion.div
-            key={`${question.word}-${questionIndex}`}
+            key={`${question.word}-${questionIndex}-${question.type}`}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
@@ -361,8 +411,17 @@ function ConquestMode({ data, onBack }: { data: ReviewData; onBack: () => void }
               </span>
             </div>
 
-            {/* Word */}
-            <p className="text-4xl font-bold text-center">{question.word}</p>
+            {/* Prompt: 뜻 고르기=단어 / 졸업 문제=빈칸 문장 */}
+            {question.type === 'context' ? (
+              <div className="space-y-2">
+                <p className="text-center text-xs font-bold text-[#1A73E8]">
+                  🔥 졸업 문제 — 빈칸에 알맞은 단어는?
+                </p>
+                <p className="text-xl font-medium text-center leading-relaxed">{question.prompt}</p>
+              </div>
+            ) : (
+              <p className="text-4xl font-bold text-center">{question.word}</p>
+            )}
 
             {/* Options */}
             <div className="space-y-3">

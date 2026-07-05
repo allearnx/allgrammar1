@@ -1,23 +1,8 @@
 import { NextResponse } from 'next/server';
 import { z } from 'zod';
 import { createApiHandler } from '@/lib/api/handler';
-
-// 현재 주 월요일 (UTC 기준)
-function getCurrentMonday(): string {
-  const now = new Date();
-  const day = now.getUTCDay(); // 0=Sun, 1=Mon, ...
-  const diff = day === 0 ? 6 : day - 1;
-  const monday = new Date(now);
-  monday.setUTCDate(monday.getUTCDate() - diff);
-  return monday.toISOString().slice(0, 10);
-}
-
-// 3주 전 월요일
-function getThreeWeeksAgo(mondayStr: string): string {
-  const d = new Date(mondayStr + 'T00:00:00Z');
-  d.setUTCDate(d.getUTCDate() - 14);
-  return d.toISOString().slice(0, 10);
-}
+import { fetchWrongPool, activeWrongKeys, getCurrentMonday } from '@/lib/voca/wrong-pool';
+import { computeVocaCoverage } from '@/lib/voca/coverage';
 
 function formatWeekLabel(from: string, to: string): string {
   const f = new Date(from + 'T00:00:00Z');
@@ -27,61 +12,69 @@ function formatWeekLabel(from: string, to: string): string {
   return `${fmt(f)} ~ ${fmt(t)}`;
 }
 
-// GET: 오답 목록 + 진행 상태
+// GET: 오답 목록 + 진행 상태 + 문맥 문제 재료 + 커버리지 델타
 export const GET = createApiHandler(
   { hasBody: false },
   async ({ user, supabase }) => {
-    const weekStart = getCurrentMonday();
-    const windowStart = getThreeWeeksAgo(weekStart);
+    const pool = await fetchWrongPool(supabase, user.id);
+    const words = Array.from(pool.wordMap.values());
 
-    // 오답 = 퀴즈(시험)에서 틀린 단어만. 매칭/스펠링은 자가수정 연습이라 제외.
-    const { data: quizRows } = await supabase
-      .from('voca_quiz_results')
-      .select('wrong_words, day_id')
-      .eq('student_id', user.id)
-      .gte('created_at', windowStart + 'T00:00:00Z');
-
-    // 단어별 중복 제거 (lowercase front_text)
-    const wordMap = new Map<string, { front_text: string; back_text: string }>();
-    const dayIds = new Set<string>();
-
-    for (const row of quizRows || []) {
-      if (row.day_id) dayIds.add(row.day_id);
-      for (const w of (row.wrong_words || []) as Array<{ front_text: string; back_text: string }>) {
-        const key = w.front_text.toLowerCase();
-        if (!wordMap.has(key)) wordMap.set(key, { front_text: w.front_text, back_text: w.back_text });
+    // 보기 풀 + 문맥형(빈칸 문장) 재료: 오답이 나온 Day들의 단어
+    let distractorPool: string[] = [];
+    let wordDistractorPool: string[] = [];
+    const exampleMap: Record<string, string> = {};
+    if (pool.dayIds.size > 0) {
+      const { data: vocabRows } = await supabase
+        .from('voca_vocabulary')
+        .select('front_text, back_text, example_sentence')
+        .in('day_id', [...pool.dayIds]);
+      distractorPool = (vocabRows || []).map((v) => v.back_text);
+      wordDistractorPool = (vocabRows || []).map((v) => v.front_text);
+      for (const v of vocabRows || []) {
+        const key = v.front_text.toLowerCase();
+        if (v.example_sentence && pool.wordMap.has(key) && !exampleMap[key]) {
+          exampleMap[key] = v.example_sentence;
+        }
       }
     }
 
-    const words = Array.from(wordMap.values());
-
-    // 4. Load existing progress for this week
-    const { data: review } = await supabase
-      .from('voca_wrong_review')
-      .select('progress, completed_at')
-      .eq('student_id', user.id)
-      .eq('week_start', weekStart)
-      .single();
-
-    const progress: Record<string, number> = (review?.progress as Record<string, number>) || {};
-
-    // 5. Distractor pool: back_text from related days' vocabulary
-    let distractorPool: string[] = [];
-    if (dayIds.size > 0) {
-      const { data: vocabRows } = await supabase
-        .from('voca_vocabulary')
-        .select('back_text')
-        .in('day_id', [...dayIds]);
-      distractorPool = (vocabRows || []).map((v) => v.back_text);
+    // 커버리지 델타: 최근 공부한 교재 기준 "다 정복하면 +X%p"
+    let coverageDelta: { bookTitle: string; now: number; after: number } | null = null;
+    if (activeWrongKeys(pool).size > 0) {
+      const { data: recentProg } = await supabase
+        .from('voca_student_progress')
+        .select('day_id')
+        .eq('student_id', user.id)
+        .order('updated_at', { ascending: false })
+        .limit(1)
+        .maybeSingle();
+      if (recentProg?.day_id) {
+        const { data: recentDay } = await supabase
+          .from('voca_days')
+          .select('book_id, book:voca_books(title)')
+          .eq('id', recentProg.day_id)
+          .single();
+        if (recentDay?.book_id) {
+          const cov = await computeVocaCoverage(supabase, user.id, recentDay.book_id);
+          if (cov.coverage !== null && cov.coverageAfterConquest !== null && cov.coverageAfterConquest > cov.coverage) {
+            const bookRel = recentDay.book as unknown as { title: string } | { title: string }[] | null;
+            const bookTitle = Array.isArray(bookRel) ? (bookRel[0]?.title ?? '현재 교재') : (bookRel?.title ?? '현재 교재');
+            coverageDelta = { bookTitle, now: cov.coverage, after: cov.coverageAfterConquest };
+          }
+        }
+      }
     }
 
     return NextResponse.json({
       words,
-      progress,
-      completedAt: review?.completed_at || null,
-      weekLabel: formatWeekLabel(windowStart, weekStart),
-      weekStart,
+      progress: pool.progress,
+      completedAt: pool.completedAt,
+      weekLabel: formatWeekLabel(pool.windowStart, pool.weekStart),
+      weekStart: pool.weekStart,
       distractorPool,
+      wordDistractorPool,
+      exampleMap,
+      coverageDelta,
     });
   },
 );
