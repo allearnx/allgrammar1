@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { createApiHandler, dbResult } from '@/lib/api';
+import { requireAcademyScope } from '@/lib/api/require-academy-scope';
 import { createAdminClient } from '@/lib/supabase/admin';
 import { z } from 'zod';
 
@@ -12,10 +13,13 @@ const updateSchema = z.object({
 // GET: Fetch student's passage stages
 export const GET = createApiHandler(
   { roles: ['teacher', 'admin', 'boss'] },
-  async ({ request }) => {
+  async ({ request, user, supabase }) => {
     const { searchParams } = new URL(request.url);
     const studentId = searchParams.get('studentId');
     if (!studentId) return NextResponse.json({ error: 'studentId required' }, { status: 400 });
+
+    // 타 학원 학생 설정 조회 차단 (admin 클라이언트 사용 전 필수)
+    await requireAcademyScope(user, studentId, supabase);
 
     const admin = createAdminClient();
     const { data } = await admin
@@ -34,8 +38,12 @@ export const GET = createApiHandler(
 // POST: Update student's passage stages
 export const POST = createApiHandler(
   { roles: ['teacher', 'admin', 'boss'], schema: updateSchema },
-  async ({ body }) => {
+  async ({ body, user, supabase }) => {
     const { studentId, stages, translationSentencesPerPage } = body;
+
+    // 타 학원 학생 설정 수정 차단 (admin 클라이언트 사용 전 필수)
+    await requireAcademyScope(user, studentId, supabase);
+
     const admin = createAdminClient();
 
     const updatePayload: Record<string, unknown> = { passage_required_stages: stages };

@@ -63,16 +63,28 @@ export async function GET(request: NextRequest) {
   const studentId = searchParams.get('studentId');
   if (!unitId) return NextResponse.json({ error: 'unitId required' }, { status: 400 });
 
-  // Teachers/admins can view any student's results
+  // 스태프는 자기 학원 학생 결과만 조회 (boss는 전체)
   const { data: currentUser } = await supabase
     .from('users')
-    .select('role')
+    .select('role, academy_id')
     .eq('id', user.id)
     .single();
 
-  const targetStudentId = ['teacher', 'admin', 'boss'].includes(currentUser?.role || '')
-    ? (studentId || user.id)
-    : user.id;
+  const isStaff = ['teacher', 'admin', 'boss'].includes(currentUser?.role || '');
+  let targetStudentId = user.id;
+  if (isStaff && studentId && studentId !== user.id) {
+    if (currentUser?.role !== 'boss') {
+      const { data: target } = await supabase
+        .from('users')
+        .select('academy_id')
+        .eq('id', studentId)
+        .single();
+      if (!target || !currentUser?.academy_id || target.academy_id !== currentUser.academy_id) {
+        return NextResponse.json({ error: '해당 학생에 대한 접근 권한이 없습니다.' }, { status: 403 });
+      }
+    }
+    targetStudentId = studentId;
+  }
 
   const data = dbResult(await supabase
     .from('naesin_vocab_quiz_results')
