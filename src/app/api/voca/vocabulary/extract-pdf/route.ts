@@ -136,7 +136,13 @@ export const POST = createApiHandler(
       }
     }
 
-    logger.info('ai.voca_extract', { mode: storagePath ? 'url' : 'formdata', blockType: block.type, definitionLang });
+    // 기출 모드: 업로드 문서가 실제 기출 지문이면 예문을 문서 원문 문장으로 강제
+    const examSource = (extraFields.examSource || '').trim();
+    const examAddon = examSource
+      ? `\n\n## ⭐ 기출 모드 (최우선)\n이 문서는 실제 시험(${examSource}) 지문입니다.\n- 예문(e)은 반드시 이 문서 안에서 해당 단어가 포함된 **실제 문장을 원문 그대로** 사용하세요 (활용형이어도 바꾸지 말 것)\n- 문서에 그 단어가 포함된 문장이 없을 때만 새 예문을 만드세요`
+      : '';
+
+    logger.info('ai.voca_extract', { mode: storagePath ? 'url' : 'formdata', blockType: block.type, definitionLang, examMode: !!examSource });
 
     const message = await anthropic.messages.create({
       model: 'claude-opus-4-8',
@@ -146,7 +152,7 @@ export const POST = createApiHandler(
           role: 'user',
           content: [
             block as Anthropic.Messages.ContentBlockParam,
-            { type: 'text', text: definitionLang === 'en' ? PROMPT_EN : PROMPT_KO },
+            { type: 'text', text: (definitionLang === 'en' ? PROMPT_EN : PROMPT_KO) + examAddon },
           ],
         },
       ],

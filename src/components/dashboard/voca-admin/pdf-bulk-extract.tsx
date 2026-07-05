@@ -36,6 +36,7 @@ export function PdfBulkExtract({ bookId, definitionLang = 'ko', onCreated }: { b
   const [saving, setSaving] = useState(false);
   const [words, setWords] = useState<ExtractedWord[]>([]);
   const [wordsPerDay, setWordsPerDay] = useState(30);
+  const [examLabel, setExamLabel] = useState('');
 
   function reset() {
     setStep(1);
@@ -44,6 +45,7 @@ export function PdfBulkExtract({ bookId, definitionLang = 'ko', onCreated }: { b
     setSaving(false);
     setWords([]);
     setWordsPerDay(30);
+    setExamLabel('');
   }
 
   async function handleExtract() {
@@ -56,7 +58,7 @@ export function PdfBulkExtract({ bookId, definitionLang = 'ko', onCreated }: { b
       const data = await fetchWithToast<{ items: Omit<ExtractedWord, 'selected'>[] }>(
         '/api/voca/vocabulary/extract-pdf',
         {
-          body: { pdfUrl: publicUrl, storagePath, bookId }, // 교재 정의 언어(영한/영영) 자동 분기용
+          body: { pdfUrl: publicUrl, storagePath, bookId, examSource: examLabel.trim() || undefined }, // 정의 언어 분기 + 기출 모드
           errorMessage: 'PDF 단어 추출 실패',
           logContext: 'voca_admin.pdf_bulk',
         },
@@ -138,7 +140,11 @@ export function PdfBulkExtract({ bookId, definitionLang = 'ko', onCreated }: { b
       const data = await fetchWithToast<{ days: { id: string }[]; totalWords: number }>(
         '/api/voca/days-with-vocabulary',
         {
-          body: { book_id: bookId, words_per_day: wordsPerDay, items },
+          body: {
+            book_id: bookId,
+            words_per_day: wordsPerDay,
+            items: items.map((it) => ({ ...it, exam_source: examLabel.trim() || null })),
+          },
           errorMessage: '저장 실패',
           logContext: 'voca_admin.pdf_bulk',
         },
@@ -207,6 +213,17 @@ export function PdfBulkExtract({ bookId, definitionLang = 'ko', onCreated }: { b
               {definitionLang === 'en'
                 ? '🌐 이 교재는 영영(영어 정의) 모드예요 — 뜻이 영어로 생성되고 한글 해석은 만들지 않아요.'
                 : '🇰🇷 이 교재는 영한(한글 뜻) 모드예요 — 국제학교·유학생용 영영 교재라면 추출 전에 교재 수정에서 바꿔주세요.'}
+            </div>
+            <div>
+              <Label>기출 시험명 (선택)</Label>
+              <Input
+                value={examLabel}
+                onChange={(e) => setExamLabel(e.target.value)}
+                placeholder="예: 2026년 3월 고1 모의고사 — 기출 지문 PDF일 때만 입력"
+              />
+              <p className="mt-1 text-xs text-muted-foreground">
+                입력하면 예문을 지문의 실제 문장으로 추출하고, 학생 화면에 &ldquo;📄 기출&rdquo; 뱃지가 붙어요.
+              </p>
             </div>
             <div>
               <Label>PDF 파일 선택</Label>

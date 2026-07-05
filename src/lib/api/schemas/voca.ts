@@ -52,6 +52,7 @@ export const vocaVocabBulkSchema = z.object({
     antonyms: SHORT.nullish(),
     spelling_hint: SHORT.nullish(),
     spelling_answer: SHORT.nullish(),
+    exam_source: SHORT.nullish(), // 기출 지문에서 추출 시 출처 라벨
     idioms: z.array(z.object({
       en: z.string(),
       ko: z.string(),
@@ -128,6 +129,7 @@ export const vocaDaysWithVocabSchema = z.object({
     antonyms: SHORT.nullish(),
     spelling_hint: SHORT.nullish(),
     spelling_answer: SHORT.nullish(),
+    exam_source: SHORT.nullish(), // 기출 지문에서 추출 시 출처 라벨
     idioms: z.array(z.object({
       en: z.string(),
       ko: z.string(),

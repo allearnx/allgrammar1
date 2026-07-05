@@ -38,6 +38,7 @@ export function PdfVocabExtract({ module, parentId, onAdd, definitionLang }: Voc
   const [progress, setProgress] = useState<{ done: number; total: number } | null>(null);
   const [saving, setSaving] = useState(false);
   const [words, setWords] = useState<ExtractedWord[]>([]);
+  const [examLabel, setExamLabel] = useState('');
   const cfg = getVocabConfig(module);
 
   function reset() {
@@ -47,6 +48,7 @@ export function PdfVocabExtract({ module, parentId, onAdd, definitionLang }: Voc
     setProgress(null);
     setSaving(false);
     setWords([]);
+    setExamLabel('');
   }
 
   async function handleExtract() {
@@ -72,7 +74,7 @@ export function PdfVocabExtract({ module, parentId, onAdd, definitionLang }: Voc
                 ...(isImage ? { imageUrl: publicUrl } : { pdfUrl: publicUrl }),
                 storagePath,
                 // voca: 교재 정의 언어(영한/영영) 자동 분기용 (API가 day→교재 역추적)
-                ...(module === 'voca' ? { dayId: parentId } : {}),
+                ...(module === 'voca' ? { dayId: parentId, examSource: examLabel.trim() || undefined } : {}),
               },
               errorMessage: `${idx + 1}번째 파일 단어 추출 실패`,
               logContext: `${cfg.logPrefix}.pdf_vocab_extract`,
@@ -111,6 +113,7 @@ export function PdfVocabExtract({ module, parentId, onAdd, definitionLang }: Voc
       const items = selectedWords.map(({ selected: _selected, ...rest }) => ({
         ...rest,
         spelling_answer: rest.front_text,
+        ...(module === 'voca' && examLabel.trim() ? { exam_source: examLabel.trim() } : {}),
       }));
 
       const data = await fetchWithToast<{ count: number }>(`${cfg.apiBase}/bulk`, {
@@ -180,6 +183,19 @@ export function PdfVocabExtract({ module, parentId, onAdd, definitionLang }: Voc
                 {definitionLang === 'en'
                   ? '🌐 이 교재는 영영(영어 정의) 모드예요 — 뜻이 영어로 생성되고 한글 해석은 만들지 않아요.'
                   : '🇰🇷 이 교재는 영한(한글 뜻) 모드예요 — 국제학교·유학생용 영영 교재라면 추출 전에 교재 수정에서 바꿔주세요.'}
+              </div>
+            )}
+            {module === 'voca' && (
+              <div>
+                <Label>기출 시험명 (선택)</Label>
+                <Input
+                  value={examLabel}
+                  onChange={(e) => setExamLabel(e.target.value)}
+                  placeholder="예: 2026년 3월 고1 모의고사 — 기출 지문일 때만 입력"
+                />
+                <p className="mt-1 text-xs text-muted-foreground">
+                  입력하면 예문을 지문의 실제 문장으로 추출하고, 학생 화면에 &ldquo;📄 기출&rdquo; 뱃지가 붙어요.
+                </p>
               </div>
             )}
             <div>

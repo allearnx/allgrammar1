@@ -25,6 +25,7 @@ export const POST = createApiHandler(
       part_of_speech: item.part_of_speech || null,
       example_sentence: item.example_sentence || null,
       example_sentence_ko: item.example_sentence_ko || null,
+      exam_source: item.exam_source || null,
       synonyms: item.synonyms || null,
       antonyms: item.antonyms || null,
       spelling_hint: item.spelling_hint || null,
