@@ -11,6 +11,7 @@ import { AssignedExams } from '@/components/voca/assigned-exams';
 import { BookGuidePicker } from '@/components/voca/book-guide-picker';
 import { ParentLinkButton } from '@/components/voca/parent-link-button';
 import { CoverageGauge } from '@/components/voca/coverage-gauge';
+import { WrongMissionCard } from '@/components/voca/wrong-mission-card';
 import { isR1Complete, isR2Complete } from '@/lib/dashboard/voca-helpers';
 import type { VocaBook, VocaDay, VocaStudentProgress } from '@/types/voca';
 
@@ -315,6 +316,9 @@ export function VocaHomeClient({ books, days, progressList, submissionStatuses =
           {selectedBookId && <CoverageGauge bookId={selectedBookId} />}
         </div>
       </div>
+
+      {/* 주간 올킬 미션 — 금·토 예고, 일요일 미션 데이 */}
+      <WrongMissionCard />
 
       {/* 무료 체험 완료 → 업그레이드 안내를 최상단에 */}
       {freeTrialDone && freeUpgradeNotice}
