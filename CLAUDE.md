@@ -285,7 +285,34 @@ sanitize→validate 순서로 돌려야 함). 진짜는 6종:
 
 ---
 
-# select('*') → 컬럼 명시 전환 (egress 절감)
+# 리팩토링 백로그 (2026-07-05 전수 스캔 결과)
+
+4개 병렬 에이전트 스캔(중복 로직/API 보일러플레이트/대형 컴포넌트/죽은 코드) 후 확정.
+순서대로 진행 예정.
+
+- [x] ① 즉시 정리 — 미사용 의존성 3개(@dnd-kit/helpers, @dnd-kit/react, unpdf) 제거
+  + voca/vocab-tab/index-legacy.tsx 삭제. tsc 0에러 + 833 테스트 통과.
+  ⚠️ "주석 죽은 코드 3블록" 보고는 오탐(실제 살아있는 JSX)이라 미삭제 — 삭제류는 반드시 직접 확인.
+- [ ] ② API 라우트 정리 — 165개 중 수동 구현 28개의 에러 응답을 errorResponse()/ApiError로 통일
+  (권한 오류가 400으로 나가는 곳 있음: admin/settings 등), 테넌트-바운드 라우트에
+  requireAcademyScope() 명시 적용, schema 없는 POST/PATCH 중 부당한 것 Zod 추가.
+  보안 가치 있음(멀티테넌트 크로스 접근 방어). 공통 헬퍼는 이미 존재(lib/api/).
+- [ ] ③ extract-pdf 라우트 분리 (525줄) — AI 호출부(청크 분할+Claude 3모드)와 정답표
+  병합/정규화를 lib으로 추출. 콘텐츠 파이프라인 북극성 진행 시 같이 하면 효율적.
+- [ ] ④ naesin↔voca 학습 컴포넌트 중복 통합 — 플래시카드/퀴즈/스펠링 상태 관리 훅 공유
+  (quiz-view↔quick-quiz, flashcard-view↔neon-flashcard, spelling-view↔rhythm-spelling).
+  ⚠️ 잘 돌아가는 학생 화면이므로 해당 화면 수정할 일 생길 때 같이. 급하지 않음.
+- 대형 컴포넌트 분리는 대부분 "응집도 높음, 그대로 둠" 판정. 예외: wrong-answer-detail-panel.tsx(655줄,
+  필터/그룹화를 use-wrong-answer-state.ts로) — ②~④ 하는 김에 여유 있으면.
+- 죽은 코드: TODO/FIXME 0, 미사용 shadcn 0. scripts/ 백업 JSON 26개(4MB)는 감사용 보관.
+
+---
+
+# select('*') → 컬럼 명시 전환 (egress 절감) — ⏸️ 보류 (2026-07-05)
+
+**보류 결정**: 과거 유령 컬럼 사고로 기존 기능 다수 파손 이력. 이익(egress) 대비
+리스크(학생 화면 조용한 파손)가 커서 사용자가 보류 결정. 재개 시 반드시:
+스키마 먼저 조회(추측 금지) → 테이블 하나씩 커밋 → `check:columns`+테스트+화면 확인.
 
 ESLint `supabase/no-select-wildcard` 규칙 적용 중 (warn).
 현재 117건 경고. 테이블별로 컬럼 상수를 만들고 일괄 교체.
