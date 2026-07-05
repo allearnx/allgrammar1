@@ -21,7 +21,7 @@ const GROUPS: Group[] = [
   {
     category: '기본',
     rows: [
-      { label: '학생 수', free: '5명', paid: '최대 150명' },
+      { label: '학생 수', free: '5명', paid: '최대 180명' },
       { label: '서비스', free: '둘 다 체험 (보카 3 Day · 내신 1단원)', paid: '올인내신 + 올킬보카 전체' },
     ],
   },

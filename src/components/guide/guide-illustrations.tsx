@@ -420,7 +420,7 @@ export function BillingStepIllustration({ step }: { step: number }) {
     <Card>
       <div className="p-3 space-y-2">
         <div className="rounded-lg border border-pink-200 bg-pink-50 p-2 text-center">
-          <p className="text-xs font-bold text-pink-700">Pro 40</p>
+          <p className="text-xs font-bold text-pink-700">Pro 50</p>
           <p className="text-[10px] text-pink-500">월 84,000원</p>
         </div>
         <div className="rounded-lg bg-pink-500 text-white text-center py-1.5 text-xs font-medium flex items-center justify-center gap-1.5">
@@ -437,7 +437,7 @@ export function BillingCompletedIllustration() {
     <Card>
       <div className="p-3 space-y-2">
         <div className="flex items-center justify-between">
-          <span className="text-xs font-bold text-gray-700">Pro 40</span>
+          <span className="text-xs font-bold text-gray-700">Pro 50</span>
           <Pill active>구독 중</Pill>
         </div>
         <div className="h-1.5 rounded-full bg-gray-100 overflow-hidden">
