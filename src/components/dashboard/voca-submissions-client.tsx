@@ -23,6 +23,19 @@ const TYPE_LABELS: Record<VocaWrongWordType, string> = {
   sentence: '예문',
 };
 
+// 뱃지 의미 색 — 유형 구분은 정보라서 색을 준다 (유의어=그린, 반의어=옐로, 예문=블루)
+const TYPE_BADGE_STYLES: Record<VocaWrongWordType, string> = {
+  synonym: 'bg-[#E6F4EA] text-[#188038]',
+  antonym: 'bg-[#FEF7E0] text-[#B06000]',
+  sentence: 'bg-[#E8F0FE] text-[#1A73E8]',
+};
+
+// 탭·필터는 틴트 칩 — 솔리드 블루는 주 액션(확인 완료)에만 (위계)
+const chipClass = (active: boolean) =>
+  active
+    ? 'rounded-full bg-accent px-4 py-1.5 text-sm font-bold text-primary'
+    : 'rounded-full border px-4 py-1.5 text-sm font-medium text-gray-500 transition-colors hover:bg-muted';
+
 const FILTER_OPTIONS: { value: FilterStatus; label: string }[] = [
   { value: 'pending', label: '미확인' },
   { value: 'reviewed', label: '확인완료' },
@@ -73,21 +86,13 @@ export function VocaSubmissionsClient() {
     <div className="space-y-4">
       {/* Tab buttons */}
       <div className="flex gap-2 border-b pb-2">
-        <Button
-          variant={tab === 'submissions' ? 'default' : 'outline'}
-          size="sm"
-          onClick={() => setTab('submissions')}
-        >
+        <button className={chipClass(tab === 'submissions')} onClick={() => setTab('submissions')}>
           오답노트
-        </Button>
-        <Button
-          variant={tab === 'wrong-review' ? 'default' : 'outline'}
-          size="sm"
-          onClick={() => setTab('wrong-review')}
-        >
+        </button>
+        <button className={`${chipClass(tab === 'wrong-review')} inline-flex items-center`} onClick={() => setTab('wrong-review')}>
           <Swords className="mr-1 h-4 w-4" />
           올킬오답
-        </Button>
+        </button>
       </div>
 
       {tab === 'wrong-review' && <WrongReviewStatusTab />}
@@ -96,14 +101,9 @@ export function VocaSubmissionsClient() {
       {/* Filter buttons */}
       <div className="flex gap-2">
         {FILTER_OPTIONS.map((opt) => (
-          <Button
-            key={opt.value}
-            variant={filter === opt.value ? 'default' : 'outline'}
-            size="sm"
-            onClick={() => setFilter(opt.value)}
-          >
+          <button key={opt.value} className={chipClass(filter === opt.value)} onClick={() => setFilter(opt.value)}>
             {opt.label}
-          </Button>
+          </button>
         ))}
       </div>
 
@@ -158,9 +158,9 @@ export function VocaSubmissionsClient() {
                     <span className="font-medium">{w.word}</span>
                     <span className="text-muted-foreground">&rarr;</span>
                     <span>{w.match}</span>
-                    <Badge variant="outline" className="ml-1 text-xs">
+                    <span className={`ml-1 rounded-full px-2 py-0.5 text-xs font-semibold ${TYPE_BADGE_STYLES[w.type]}`}>
                       {TYPE_LABELS[w.type]}
-                    </Badge>
+                    </span>
                   </div>
                 ))}
               </div>
