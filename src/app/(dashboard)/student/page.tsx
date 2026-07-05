@@ -74,7 +74,7 @@ export default async function StudentDashboard() {
 
   // 학원 학생: tier 확인 후 분기
   if (planContext.tier === 'free') {
-    // 무료 학원 학생: 서비스 택1 선택 화면
+    // 무료 학원 학생: 주 서비스 선택 화면 (둘 다 체험 가능)
     return (
       <>
         <Topbar user={user} title="대시보드" />

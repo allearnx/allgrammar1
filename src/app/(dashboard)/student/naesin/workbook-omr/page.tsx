@@ -7,7 +7,7 @@ import type { NaesinWorkbook } from '@/types/naesin';
 
 export default async function WorkbookOmrPage() {
   const user = await requireRole(['student']);
-  await requireNaesinAccess(user); // 서비스 게이트 (무료 택1 포함)
+  await requireNaesinAccess(user); // 서비스 게이트 (무료는 체험 범위로 통과)
   const supabase = await createClient();
 
   const { data: workbooks } = await supabase

@@ -21,7 +21,7 @@ export default async function NaesinPage() {
     .single();
 
   // Merge teacher-configured stages with plan-based restrictions
-  const planContext = await requireNaesinAccess(user); // 서비스 게이트 (무료 택1 포함)
+  const planContext = await requireNaesinAccess(user); // 서비스 게이트 (무료는 체험 범위로 통과)
   const enabledStages = mergeEnabledStages(
     planContext.tier,
     setting?.enabled_stages as string[] | null,

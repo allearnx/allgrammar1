@@ -14,7 +14,7 @@ export const POST = createApiHandler(
       if (blocked) return blocked;
     }
 
-    // 서비스 제한은 모든 역할에 적용 (무료 플랜: 1개 서비스만)
+    // 서비스 제한 게이트 (2026-07 무료 양쪽 개방 후 상시 통과 — 택1 복원 대비 구조 유지)
     // naesinMemorizeOnly 할당은 서비스 게이트 우회 (보스/관리자가 명시적으로 할당)
     if (body.action === 'assign' && !body.naesinMemorizeOnly) {
       const serviceBlocked = await checkServiceGate(user.academy_id, body.services);

@@ -228,7 +228,7 @@ export function BillingPageContent({ mode }: BillingPageContentProps) {
 /* ─────── PlanCard (Toss-style) ─────── */
 
 const FEATURES_BY_PLAN: Record<string, string[]> = {
-  '무료': ['학생 5명', '서비스 1개 택1', '기본 통계'],
+  '무료': ['학생 5명', '보카·내신 둘 다 체험 (보카 3 Day · 내신 1단원)', '기본 통계'],
   'Pro 8': ['학생 8명', '올인내신 + 올킬보카', '차트 + 랭킹', '학생 리포트'],
   'Pro 40': ['학생 40명', '올인내신 + 올킬보카', '차트 + 랭킹', '대량 관리', '학생 리포트'],
   'Pro 80': ['학생 80명', '올인내신 + 올킬보카', '차트 + 랭킹', '대량 관리', '학생 리포트'],

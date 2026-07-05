@@ -1,7 +1,7 @@
 export function AcademySignupGuide() {
   const steps = [
     { num: '01', title: '학원 정보 입력', desc: '학원명과 연락처를 입력하세요.' },
-    { num: '02', title: '무료 서비스 선택', desc: '올인내신 또는 올킬보카 중 하나를 선택합니다.' },
+    { num: '02', title: '무료 체험 시작', desc: '올킬보카와 올인내신을 모두 체험할 수 있어요.' },
     { num: '03', title: '초대코드 자동 발급', desc: '가입 즉시 6자리 초대코드가 생성됩니다.' },
     { num: '04', title: '학생·선생님 초대', desc: '코드를 공유하면 바로 학습을 시작할 수 있습니다.' },
   ];
@@ -39,7 +39,7 @@ export function AcademySignupGuide() {
           </p>
           <ul className="space-y-0.5 text-xs text-slate-600">
             <li>학생 5명까지 무료</li>
-            <li>서비스 1개 (내신 or 보카)</li>
+            <li>보카 3 Day + 내신 1단원 체험</li>
             <li>유료 전환 시 전체 해금</li>
           </ul>
         </div>

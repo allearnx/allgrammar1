@@ -56,7 +56,7 @@ export default async function NaesinStagePage({ params }: Props) {
     naesinRequiredRounds = academy?.naesin_required_rounds ?? 1;
   }
 
-  const planContext = await requireNaesinAccess(user); // 서비스 게이트 (무료 택1 포함)
+  const planContext = await requireNaesinAccess(user); // 서비스 게이트 (무료는 체험 범위로 통과)
   const enabledStages = mergeEnabledStages(
     planContext.tier,
     studentSettings?.enabled_stages as string[] | null,
