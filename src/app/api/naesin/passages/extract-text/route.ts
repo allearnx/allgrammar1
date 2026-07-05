@@ -1,7 +1,6 @@
-import { NextRequest, NextResponse } from 'next/server';
-import { getUser } from '@/lib/auth/helpers';
+import { NextResponse } from 'next/server';
+import { createApiHandler } from '@/lib/api';
 import { logger } from '@/lib/logger';
-import { checkRateLimit } from '@/lib/api/rate-limit';
 import Anthropic from '@anthropic-ai/sdk';
 import { extractAiText, parseAiJsonObject } from '@/lib/ai-json';
 
@@ -9,30 +8,24 @@ export const maxDuration = 120;
 
 const anthropic = new Anthropic();
 
-export async function POST(request: NextRequest) {
-  const user = await getUser();
-  if (!user || !['teacher', 'admin', 'boss'].includes(user.role)) {
-    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-  }
+export const POST = createApiHandler(
+  { roles: ['teacher', 'admin', 'boss'], hasBody: false, rateLimit: { max: 50 } },
+  async ({ request }) => {
+    try {
+      const { parsePdfInput, cleanupStorage } = await import('@/lib/api/pdf-input');
+      const { documentBlock, storagePath } = await parsePdfInput(request);
 
-  const limited = await checkRateLimit(user.id, 'naesin/passages/extract-text', 50);
-  if (limited) return limited;
-
-  try {
-    const { parsePdfInput, cleanupStorage } = await import('@/lib/api/pdf-input');
-    const { documentBlock, storagePath } = await parsePdfInput(request);
-
-    const message = await anthropic.messages.create({
-      model: 'claude-haiku-4-5-20251001',
-      max_tokens: 4096,
-      messages: [
-        {
-          role: 'user',
-          content: [
-            documentBlock,
-            {
-              type: 'text',
-              text: `이 PDF는 중학교 영어 교과서 지문입니다.
+      const message = await anthropic.messages.create({
+        model: 'claude-haiku-4-5-20251001',
+        max_tokens: 4096,
+        messages: [
+          {
+            role: 'user',
+            content: [
+              documentBlock,
+              {
+                type: 'text',
+                text: `이 PDF는 중학교 영어 교과서 지문입니다.
 영어 원문과 한국어 해석을 **문장 단위로 짝지어서** 추출해주세요.
 
 규칙:
@@ -51,52 +44,53 @@ JSON 객체로만 응답 (다른 텍스트 없이):
     { "original": "English sentence 2.", "korean": "한국어 번역 2." }
   ]
 }`,
-            },
-          ],
-        },
-      ],
-    });
+              },
+            ],
+          },
+        ],
+      });
 
-    interface ExtractResult {
-      title?: string;
-      sentences?: { original: string; korean: string }[];
-      // Legacy fields (backward compat)
-      original_text?: string;
-      korean_translation?: string;
-    }
+      interface ExtractResult {
+        title?: string;
+        sentences?: { original: string; korean: string }[];
+        // Legacy fields (backward compat)
+        original_text?: string;
+        korean_translation?: string;
+      }
 
-    const result = parseAiJsonObject<ExtractResult>(message);
-    if (!result) {
-      logger.warn('ai.parse_fail', { raw: extractAiText(message).slice(0, 500) });
-      throw new Error('AI 응답에서 JSON을 파싱할 수 없습니다.');
-    }
+      const result = parseAiJsonObject<ExtractResult>(message);
+      if (!result) {
+        logger.warn('ai.parse_fail', { raw: extractAiText(message).slice(0, 500) });
+        throw new Error('AI 응답에서 JSON을 파싱할 수 없습니다.');
+      }
 
-    // If AI returned sentences array, build original_text/korean_translation from it
-    if (result.sentences && result.sentences.length > 0) {
-      const originalText = result.sentences.map((s) => s.original).join(' ');
-      const koreanTranslation = result.sentences.map((s) => s.korean).join(' ');
+      // If AI returned sentences array, build original_text/korean_translation from it
+      if (result.sentences && result.sentences.length > 0) {
+        const originalText = result.sentences.map((s) => s.original).join(' ');
+        const koreanTranslation = result.sentences.map((s) => s.korean).join(' ');
+        cleanupStorage(storagePath);
+        return NextResponse.json({
+          title: result.title || '',
+          original_text: originalText,
+          korean_translation: koreanTranslation,
+          sentences: result.sentences,
+        });
+      }
+
       cleanupStorage(storagePath);
+
+      // Fallback: legacy format
       return NextResponse.json({
         title: result.title || '',
-        original_text: originalText,
-        korean_translation: koreanTranslation,
-        sentences: result.sentences,
+        original_text: result.original_text || '',
+        korean_translation: result.korean_translation || '',
       });
+    } catch (error) {
+      logger.error('ai.pdf_extract', { error: error instanceof Error ? error.message : String(error) });
+      return NextResponse.json(
+        { error: error instanceof Error ? error.message : 'PDF에서 본문 추출 중 오류가 발생했습니다.' },
+        { status: 500 }
+      );
     }
-
-    cleanupStorage(storagePath);
-
-    // Fallback: legacy format
-    return NextResponse.json({
-      title: result.title || '',
-      original_text: result.original_text || '',
-      korean_translation: result.korean_translation || '',
-    });
-  } catch (error) {
-    logger.error('ai.pdf_extract', { error: error instanceof Error ? error.message : String(error) });
-    return NextResponse.json(
-      { error: error instanceof Error ? error.message : 'PDF에서 본문 추출 중 오류가 발생했습니다.' },
-      { status: 500 }
-    );
   }
-}
+);

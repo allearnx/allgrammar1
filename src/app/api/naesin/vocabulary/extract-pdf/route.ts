@@ -1,7 +1,6 @@
-import { NextRequest, NextResponse } from 'next/server';
-import { getUser } from '@/lib/auth/helpers';
+import { NextResponse } from 'next/server';
+import { createApiHandler } from '@/lib/api';
 import { logger } from '@/lib/logger';
-import { checkRateLimit } from '@/lib/api/rate-limit';
 import Anthropic from '@anthropic-ai/sdk';
 import { extractAiText } from '@/lib/ai-json';
 
@@ -9,30 +8,24 @@ export const maxDuration = 120;
 
 const anthropic = new Anthropic();
 
-export async function POST(request: NextRequest) {
-  const user = await getUser();
-  if (!user || !['teacher', 'admin', 'boss'].includes(user.role)) {
-    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-  }
+export const POST = createApiHandler(
+  { roles: ['teacher', 'admin', 'boss'], hasBody: false, rateLimit: { max: 50 } },
+  async ({ request }) => {
+    try {
+      const { parsePdfInput, cleanupStorage } = await import('@/lib/api/pdf-input');
+      const { documentBlock, storagePath } = await parsePdfInput(request);
 
-  const limited = await checkRateLimit(user.id, 'naesin/vocabulary/extract-pdf', 50);
-  if (limited) return limited;
-
-  try {
-    const { parsePdfInput, cleanupStorage } = await import('@/lib/api/pdf-input');
-    const { documentBlock, storagePath } = await parsePdfInput(request);
-
-    const message = await anthropic.messages.create({
-      model: 'claude-opus-4-8',
-      max_tokens: 16384,
-      messages: [
-        {
-          role: 'user',
-          content: [
-            documentBlock,
-            {
-              type: 'text',
-              text: `이 PDF는 중학교 영어 교과서 페이지입니다.
+      const message = await anthropic.messages.create({
+        model: 'claude-opus-4-8',
+        max_tokens: 16384,
+        messages: [
+          {
+            role: 'user',
+            content: [
+              documentBlock,
+              {
+                type: 'text',
+                text: `이 PDF는 중학교 영어 교과서 페이지입니다.
 시험에 출제될 핵심 영어 단어를 추출해주세요.
 
 규칙:
@@ -51,29 +44,30 @@ JSON 배열로만 응답 (다른 텍스트 없이):
     "antonyms": "반의어 (없으면 null)"
   }
 ]`,
-            },
-          ],
-        },
-      ],
-    });
+              },
+            ],
+          },
+        ],
+      });
 
-    const cleaned = extractAiText(message);
-    const jsonMatch = cleaned.match(/\[[\s\S]*\]/);
-    if (!jsonMatch) {
-      logger.warn('ai.parse_fail', { raw: cleaned.slice(0, 500) });
-      throw new Error('AI 응답에서 JSON을 파싱할 수 없습니다.');
+      const cleaned = extractAiText(message);
+      const jsonMatch = cleaned.match(/\[[\s\S]*\]/);
+      if (!jsonMatch) {
+        logger.warn('ai.parse_fail', { raw: cleaned.slice(0, 500) });
+        throw new Error('AI 응답에서 JSON을 파싱할 수 없습니다.');
+      }
+
+      const items = JSON.parse(jsonMatch[0]);
+
+      cleanupStorage(storagePath);
+      return NextResponse.json({ items });
+    } catch (error) {
+      logger.error('ai.pdf_extract', { error: error instanceof Error ? error.message : String(error) });
+      const message = error instanceof Error ? error.message : 'Unknown error';
+      return NextResponse.json(
+        { error: `PDF 단어 추출 중 오류: ${message}` },
+        { status: 500 }
+      );
     }
-
-    const items = JSON.parse(jsonMatch[0]);
-
-    cleanupStorage(storagePath);
-    return NextResponse.json({ items });
-  } catch (error) {
-    logger.error('ai.pdf_extract', { error: error instanceof Error ? error.message : String(error) });
-    const message = error instanceof Error ? error.message : 'Unknown error';
-    return NextResponse.json(
-      { error: `PDF 단어 추출 중 오류: ${message}` },
-      { status: 500 }
-    );
   }
-}
+);

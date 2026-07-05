@@ -1,8 +1,7 @@
-import { NextRequest, NextResponse } from 'next/server';
-import { getUser } from '@/lib/auth/helpers';
+import { NextResponse } from 'next/server';
+import { createApiHandler } from '@/lib/api';
 import { requireContentPermission } from '@/lib/api/require-content-permission';
 import { logger } from '@/lib/logger';
-import { checkRateLimit } from '@/lib/api/rate-limit';
 import Anthropic from '@anthropic-ai/sdk';
 import { requireAiJsonArray } from '@/lib/ai-json';
 import { validateProblemStructure } from '@/lib/validation';
@@ -73,20 +72,10 @@ ${typeRules}
 - number는 분배표의 번호 범위에 맞춰서 순서대로`;
 }
 
-export async function POST(request: NextRequest) {
-  const user = await getUser();
-  if (!user || !['teacher', 'admin', 'boss'].includes(user.role)) {
-    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-  }
-
-  const { createClient } = await import('@/lib/supabase/server');
-  const supabase = await createClient();
-  try { await requireContentPermission(user, supabase); } catch {
-    return NextResponse.json({ error: '콘텐츠 관리 권한이 없습니다.' }, { status: 403 });
-  }
-
-  const limited = await checkRateLimit(user.id, 'naesin/problems/extract-paraphrase', 30);
-  if (limited) return limited;
+export const POST = createApiHandler(
+  { roles: ['teacher', 'admin', 'boss'], hasBody: false, rateLimit: { max: 30 } },
+  async ({ user, supabase, request }) => {
+  await requireContentPermission(user, supabase);
 
   try {
     const { unitId, unitTitle, pdfBase64, mediaType, pdfUrl, storagePath } = await request.json();
@@ -192,4 +181,5 @@ export async function POST(request: NextRequest) {
       { status: 500 }
     );
   }
-}
+  }
+);

@@ -1,7 +1,6 @@
-import { NextRequest, NextResponse } from 'next/server';
-import { getUser } from '@/lib/auth/helpers';
+import { NextResponse } from 'next/server';
+import { createApiHandler } from '@/lib/api';
 import { logger } from '@/lib/logger';
-import { checkRateLimit } from '@/lib/api/rate-limit';
 import Anthropic from '@anthropic-ai/sdk';
 import { extractAiText } from '@/lib/ai-json';
 
@@ -9,35 +8,29 @@ export const maxDuration = 120;
 
 const anthropic = new Anthropic();
 
-export async function POST(request: NextRequest) {
-  const user = await getUser();
-  if (!user || !['teacher', 'admin', 'boss'].includes(user.role)) {
-    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-  }
+export const POST = createApiHandler(
+  { roles: ['teacher', 'admin', 'boss'], hasBody: false, rateLimit: { max: 50 } },
+  async ({ request }) => {
+    try {
+      const { parsePdfInput, cleanupStorage } = await import('@/lib/api/pdf-input');
+      const { documentBlock, storagePath, extraFields } = await parsePdfInput(request);
+      const originalText = extraFields.original_text;
 
-  const limited = await checkRateLimit(user.id, 'naesin/passages/extract-blanks', 50);
-  if (limited) return limited;
+      if (!originalText?.trim()) {
+        return NextResponse.json({ error: '원문 텍스트를 입력해주세요.' }, { status: 400 });
+      }
 
-  try {
-    const { parsePdfInput, cleanupStorage } = await import('@/lib/api/pdf-input');
-    const { documentBlock, storagePath, extraFields } = await parsePdfInput(request);
-    const originalText = extraFields.original_text;
-
-    if (!originalText?.trim()) {
-      return NextResponse.json({ error: '원문 텍스트를 입력해주세요.' }, { status: 400 });
-    }
-
-    const message = await anthropic.messages.create({
-      model: 'claude-haiku-4-5-20251001',
-      max_tokens: 4096,
-      messages: [
-        {
-          role: 'user',
-          content: [
-            documentBlock,
-            {
-              type: 'text',
-              text: `이 PDF는 영어 교과서 빈칸 채우기 학습지입니다.
+      const message = await anthropic.messages.create({
+        model: 'claude-haiku-4-5-20251001',
+        max_tokens: 4096,
+        messages: [
+          {
+            role: 'user',
+            content: [
+              documentBlock,
+              {
+                type: 'text',
+                text: `이 PDF는 영어 교과서 빈칸 채우기 학습지입니다.
 PDF에서 빈칸(_____, ( ), 밑줄, 괄호 등)으로 표시된 위치를 찾아주세요.
 
 아래는 빈칸이 없는 원본 영어 텍스트입니다:
@@ -61,39 +54,40 @@ JSON 배열로만 응답 (다른 텍스트 없이):
   { "index": 2, "answer": "world" },
   { "index": 7, "answer": "example," }
 ]`,
-            },
-          ],
-        },
-      ],
-    });
+              },
+            ],
+          },
+        ],
+      });
 
-    const cleaned = extractAiText(message);
-    const jsonMatch = cleaned.match(/\[[\s\S]*\]/);
-    if (!jsonMatch) {
-      logger.warn('ai.parse_fail', { raw: cleaned.slice(0, 500) });
-      throw new Error('AI 응답에서 JSON을 파싱할 수 없습니다.');
+      const cleaned = extractAiText(message);
+      const jsonMatch = cleaned.match(/\[[\s\S]*\]/);
+      if (!jsonMatch) {
+        logger.warn('ai.parse_fail', { raw: cleaned.slice(0, 500) });
+        throw new Error('AI 응답에서 JSON을 파싱할 수 없습니다.');
+      }
+
+      const blanks = JSON.parse(jsonMatch[0]);
+
+      // Validate structure
+      const words = originalText.trim().split(/\s+/);
+      const validated = blanks
+        .filter((b: { index: number; answer: string }) =>
+          typeof b.index === 'number' && b.index >= 0 && b.index < words.length && typeof b.answer === 'string'
+        )
+        .map((b: { index: number; answer: string }) => ({
+          index: b.index,
+          answer: b.answer,
+        }));
+
+      cleanupStorage(storagePath);
+      return NextResponse.json({ blanks: validated });
+    } catch (error) {
+      logger.error('ai.pdf_extract', { error: error instanceof Error ? error.message : String(error) });
+      return NextResponse.json(
+        { error: error instanceof Error ? error.message : 'PDF에서 빈칸 추출 중 오류가 발생했습니다.' },
+        { status: 500 }
+      );
     }
-
-    const blanks = JSON.parse(jsonMatch[0]);
-
-    // Validate structure
-    const words = originalText.trim().split(/\s+/);
-    const validated = blanks
-      .filter((b: { index: number; answer: string }) =>
-        typeof b.index === 'number' && b.index >= 0 && b.index < words.length && typeof b.answer === 'string'
-      )
-      .map((b: { index: number; answer: string }) => ({
-        index: b.index,
-        answer: b.answer,
-      }));
-
-    cleanupStorage(storagePath);
-    return NextResponse.json({ blanks: validated });
-  } catch (error) {
-    logger.error('ai.pdf_extract', { error: error instanceof Error ? error.message : String(error) });
-    return NextResponse.json(
-      { error: error instanceof Error ? error.message : 'PDF에서 빈칸 추출 중 오류가 발생했습니다.' },
-      { status: 500 }
-    );
   }
-}
+);

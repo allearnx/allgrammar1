@@ -1,7 +1,6 @@
-import { NextRequest, NextResponse } from 'next/server';
-import { getUser } from '@/lib/auth/helpers';
+import { NextResponse } from 'next/server';
+import { createApiHandler } from '@/lib/api';
 import { logger } from '@/lib/logger';
-import { checkRateLimit } from '@/lib/api/rate-limit';
 import Anthropic from '@anthropic-ai/sdk';
 import { parseAiJsonArray } from '@/lib/ai-json';
 
@@ -94,16 +93,9 @@ interface VocabExtractItem {
   i?: Array<{ en: string; ko: string; example_en?: string; example_ko?: string }> | null;
 }
 
-export async function POST(request: NextRequest) {
-  const user = await getUser();
-  if (!user || !['teacher', 'admin', 'boss'].includes(user.role)) {
-    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-  }
-
-  // 단어 교재를 여러 이미지로 만들 때 이미지 1장당 1회 → 콘텐츠 제작용이라 넉넉히 100/시간
-  const limited = await checkRateLimit(user.id, 'voca/vocabulary/extract-pdf', 100);
-  if (limited) return limited;
-
+export const POST = createApiHandler(
+  { roles: ['teacher', 'admin', 'boss'], hasBody: false, rateLimit: { max: 100 } },
+  async ({ request }) => {
   try {
     // FormData 업로드 시 PDF/이미지만 허용
     const ct = request.headers.get('content-type') || '';
@@ -195,4 +187,5 @@ export async function POST(request: NextRequest) {
       { status: 500 }
     );
   }
-}
+  }
+);

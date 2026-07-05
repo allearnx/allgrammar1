@@ -3,15 +3,20 @@ import { NextRequest } from 'next/server';
 import { testTeacher, testStudent } from '../../helpers/fixtures';
 
 const mockGetUser = vi.fn();
+const mockCreateClient = vi.fn();
 
 vi.mock('@/lib/auth/helpers', () => ({
   getUser: (...args: unknown[]) => mockGetUser(...args),
+}));
+// createApiHandler 임포트 체인이 supabase/server(→env 검증)를 끌고 오므로 차단
+vi.mock('@/lib/supabase/server', () => ({
+  createClient: (...args: unknown[]) => mockCreateClient(...args),
 }));
 vi.mock('@/lib/api/rate-limit', () => ({
   checkRateLimit: () => null,
 }));
 vi.mock('@/lib/logger', () => ({
-  logger: { info: vi.fn(), error: vi.fn() },
+  logger: { info: vi.fn(), warn: vi.fn(), error: vi.fn() },
 }));
 
 // Mock Anthropic — now uses messages.create (not stream)
@@ -90,7 +95,8 @@ describe('voca/vocabulary/extract-pdf', () => {
     const pdfBlob = new Blob(['fake pdf'], { type: 'application/pdf' });
     const pdfFile = new File([pdfBlob], 'test.pdf', { type: 'application/pdf' });
     const res = await POST(makeFormRequest(pdfFile));
-    expect(res.status).toBe(401);
+    // createApiHandler 전환: 로그인은 됐지만 역할 불일치 → 403 (구 라우트는 401)
+    expect(res.status).toBe(403);
   });
 
   it('PDF 아닌 파일 거부', async () => {

@@ -1,7 +1,6 @@
-import { NextRequest, NextResponse } from 'next/server';
-import { getUser } from '@/lib/auth/helpers';
+import { NextResponse } from 'next/server';
+import { createApiHandler } from '@/lib/api';
 import { logger } from '@/lib/logger';
-import { checkRateLimit } from '@/lib/api/rate-limit';
 import Anthropic from '@anthropic-ai/sdk';
 import { requireAiJsonArray } from '@/lib/ai-json';
 
@@ -36,15 +35,9 @@ interface MatchResult {
   example_sentence_ko: string | null;
 }
 
-export async function POST(request: NextRequest) {
-  const user = await getUser();
-  if (!user || !['teacher', 'admin', 'boss'].includes(user.role)) {
-    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-  }
-
-  const limited = await checkRateLimit(user.id, 'voca/vocabulary/match-exam-sentences', 5);
-  if (limited) return limited;
-
+export const POST = createApiHandler(
+  { roles: ['teacher', 'admin', 'boss'], hasBody: false, rateLimit: { max: 5 } },
+  async ({ request }) => {
   try {
     const formData = await request.formData();
     const file = formData.get('file') as File | null;
@@ -109,4 +102,5 @@ export async function POST(request: NextRequest) {
     const msg = error instanceof Error ? error.message : 'Unknown error';
     return NextResponse.json({ error: `기출 예문 매칭 중 오류: ${msg}` }, { status: 500 });
   }
-}
+  }
+);
