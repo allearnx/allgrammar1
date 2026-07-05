@@ -35,14 +35,14 @@ const SERVICE_OPTIONS: {
   {
     value: 'voca',
     label: '올킬보카',
-    desc: '최근 5개년 고1·고2·고3 기출 단어',
+    desc: 'Day 3개 무료 체험 · 교과서·모의고사 기출 단어',
     icon: <BookA className="h-6 w-6 text-brand-500" />,
     activeColor: 'border-brand-500 bg-brand-50',
   },
   {
     value: 'naesin',
     label: '올인내신',
-    desc: '1개 단원 체험 (단어·교과서·대화문 암기)',
+    desc: '첫 단원 무료 체험 (어휘·지문·대화문 암기)',
     icon: <BookMarked className="h-6 w-6 text-emerald-500" />,
     activeColor: 'border-emerald-500 bg-emerald-50',
   },
@@ -116,16 +116,16 @@ export function IndependentStudentScreen({ userName, courses, isAcademy = false 
             환영합니다, {userName}님!
           </h1>
           <p className="mt-1 text-sm text-muted-foreground">
-            무료 서비스를 선택하여 학습을 시작하세요.
+            올킬보카와 올인내신, 무료로 <b>둘 다</b> 체험할 수 있어요.
           </p>
         </div>
 
         {/* Section 1: Free Service Selection */}
         <Card>
           <CardHeader className="text-center pb-4">
-            <CardTitle className="text-lg">무료 서비스 선택</CardTitle>
+            <CardTitle className="text-lg">어떤 학습부터 시작할까요?</CardTitle>
             <p className="text-sm text-muted-foreground mt-1">
-              아래 서비스 중 하나를 선택하세요.
+              주로 쓸 서비스를 골라주세요 — 선택하지 않은 쪽도 사이드 메뉴에서 언제든 체험할 수 있어요.
             </p>
           </CardHeader>
           <CardContent className="space-y-4">
