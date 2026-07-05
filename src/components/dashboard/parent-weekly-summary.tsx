@@ -1,5 +1,6 @@
 import { createAdminClient } from '@/lib/supabase/admin';
-import { CalendarCheck, Flame, Sparkles } from 'lucide-react';
+import { CalendarCheck, Flame, Sparkles, Target } from 'lucide-react';
+import { computeVocaCoverage } from '@/lib/voca/coverage';
 
 /** KST 기준 오늘 날짜 문자열 (YYYY-MM-DD) */
 function kstDateStr(d: Date): string {
@@ -108,6 +109,31 @@ export async function ParentWeeklySummary({ studentId }: { studentId: string }) 
 
   const petStage = petRes.data?.stage ? (PET_LABEL[petRes.data.stage] ?? null) : null;
 
+  // 시험 커버리지 — 가장 최근에 공부한 교재 기준 (열 때마다 실시간 재계산)
+  let coverageInfo: { bookTitle: string; coverage: number; knownInBook: number; totalWords: number } | null = null;
+  const { data: recentProg } = await admin
+    .from('voca_student_progress')
+    .select('day_id, updated_at')
+    .eq('student_id', studentId)
+    .order('updated_at', { ascending: false })
+    .limit(1)
+    .maybeSingle();
+  if (recentProg?.day_id) {
+    const { data: recentDay } = await admin
+      .from('voca_days')
+      .select('book_id, book:voca_books(title)')
+      .eq('id', recentProg.day_id)
+      .single();
+    if (recentDay?.book_id) {
+      const cov = await computeVocaCoverage(admin, studentId, recentDay.book_id);
+      if (cov.coverage !== null) {
+        const bookRel = recentDay.book as unknown as { title: string } | { title: string }[] | null;
+        const bookTitle = Array.isArray(bookRel) ? (bookRel[0]?.title ?? '현재 교재') : (bookRel?.title ?? '현재 교재');
+        coverageInfo = { bookTitle, coverage: cov.coverage, knownInBook: cov.knownInBook, totalWords: cov.totalWords };
+      }
+    }
+  }
+
   const [ws, we] = [weekDays[0].date, weekDays[6].date];
   const fmt = (s: string) => `${Number(s.slice(5, 7))}.${Number(s.slice(8, 10))}`;
 
@@ -159,6 +185,27 @@ export async function ParentWeeklySummary({ studentId }: { studentId: string }) 
           <p className="text-[11px] text-gray-500">이번 주 평균 점수</p>
         </div>
       </div>
+
+      {/* 시험 커버리지 — 아이가 지금 공부 중인 시험(교재)이 몇 % 읽히는지 */}
+      {coverageInfo && (
+        <div className="rounded-lg bg-[#E8F0FE] p-3">
+          <div className="flex items-baseline justify-between gap-2">
+            <span className="inline-flex items-center gap-1 text-xs font-bold text-gray-700">
+              <Target className="h-3.5 w-3.5 text-[#1A73E8]" />
+              {coverageInfo.bookTitle} 커버리지
+            </span>
+            <span className="text-base font-extrabold tabular-nums text-[#1A73E8]">{coverageInfo.coverage}%</span>
+          </div>
+          <div className="mt-1.5 h-1.5 overflow-hidden rounded-full bg-white">
+            <div className="h-full rounded-full bg-[#1A73E8]" style={{ width: `${coverageInfo.coverage}%` }} />
+          </div>
+          <p className="mt-1.5 text-[11px] text-gray-500">
+            이 시험 단어 {coverageInfo.totalWords.toLocaleString()}개 중{' '}
+            <b className="text-gray-700">{coverageInfo.knownInBook.toLocaleString()}개</b>를 알고 있어요
+            — 다른 교재에서 외운 단어도 포함
+          </p>
+        </div>
+      )}
 
       {/* 오답 극복 + 펫 */}
       {(wrongTotal > 0 || petStage) && (
