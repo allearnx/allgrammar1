@@ -64,9 +64,10 @@ export function AssignedExams() {
     try {
       await fetchWithToast('/api/voca/exam', {
         body: { bookId: a.bookId, dayIds: a.dayIds, score, wrongWords, assignmentId: a.id },
-        silent: true,
+        retry: 2, // 네트워크 순단 자동 재시도
+        errorMessage: '⚠️ 시험 결과 저장에 실패했어요 — 점수가 기록되지 않았습니다. 네트워크 확인 후 다시 응시해주세요.',
       });
-    } catch { /* swallow */ }
+    } catch { return; } // 저장 실패 시 통과 토스트를 띄우지 않음
     if (score >= PASS) toast.success(`🎉 시험 통과! ${score}점`);
     else toast.info(`${score}점 — ${PASS}점 넘으면 통과예요.`);
     load();

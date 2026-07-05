@@ -62,9 +62,10 @@ export function BonusExam({ days, bookId }: { days: VocaDay[]; bookId: string })
     try {
       await fetchWithToast('/api/voca/exam', {
         body: { bookId, dayIds: selected, score: s, wrongWords },
-        silent: true,
+        retry: 2, // 네트워크 순단 자동 재시도
+        errorMessage: '⚠️ 시험 결과 저장에 실패했어요 — 점수가 기록되지 않았습니다.',
       });
-    } catch { /* swallow — 점수 표시는 그대로 */ }
+    } catch { /* 에러 토스트는 fetchWithToast가 표시 — 점수 화면은 유지 */ }
     if (s >= PASS) toast.success(`🎉 보너스 시험 통과! ${s}점`);
   }
 
