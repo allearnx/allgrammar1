@@ -15,8 +15,17 @@ export const C = {
   redLight: '#FCE8E6',
 };
 
-// 히어로 롤링 워드 — "OO 단어, 이제 올킬"
+// 히어로 롤링 워드 — "OO 단어, 이제 올킬" (원비온다 패밀리: 구글 4색 순환)
 export const rollingWords = ['중간고사', '기말고사', '모의고사', '수능'];
+export const wordColors = ['#1A73E8', '#D93025', '#F9AB00', '#188038'];
+
+// 히어로 아래 구글 4색 숫자 밴드 (원비온다 스타일)
+export const statBand = [
+  { num: '7단계', label: '통과 못 하면 못 넘어가요', color: '#1A73E8' },
+  { num: '90점', label: '매칭 통과 기준', color: '#188038' },
+  { num: '3번', label: '연속 정답해야 오답 졸업', color: '#F9AB00' },
+  { num: '5개년', label: '모의고사·수능 기출 수록', color: '#D93025' },
+];
 
 // 7단계 (랜딩에서 딱 한 번 보여주는 곳)
 export const flowSteps1 = [

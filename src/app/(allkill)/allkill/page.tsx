@@ -1,4 +1,5 @@
 import HeroSection from './_sections/HeroSection';
+import StatBandSection from './_sections/StatBandSection';
 import FlowSection from './_sections/FlowSection';
 import FeatureSection from './_sections/FeatureSection';
 import BookCarouselSection from './_sections/BookCarouselSection';
@@ -38,7 +39,7 @@ export default async function AllkillPage() {
     <>
       <style suppressHydrationWarning>{`
         /* 버튼 2종 — 큰 문(노랑) / 가벼운 문(흰색) */
-        .ak-btn { display: inline-flex; align-items: center; justify-content: center; padding: 17px 36px; border-radius: 16px; font-size: 17px; font-weight: 800; text-decoration: none; transition: transform 0.15s, box-shadow 0.15s; box-sizing: border-box; }
+        .ak-btn { display: inline-flex; align-items: center; justify-content: center; padding: 18px 44px; border-radius: 100px; font-size: 17px; font-weight: 800; text-decoration: none; transition: transform 0.15s, box-shadow 0.15s; box-sizing: border-box; }
         .ak-btn:hover { transform: translateY(-2px); }
         .ak-btn-primary { background: ${C.yellow}; color: ${C.ink}; box-shadow: 0 6px 20px rgba(253,214,99,0.5); }
         .ak-btn-ghost { background: white; color: ${C.ink}; border: 1.5px solid ${C.line}; box-shadow: 0 4px 16px rgba(31,31,31,0.06); }
@@ -47,6 +48,12 @@ export default async function AllkillPage() {
         .ak-badge { display: inline-block; background: ${C.blueLight}; color: ${C.blueDark}; font-size: 13px; font-weight: 800; padding: 6px 16px; border-radius: 100px; margin-bottom: 18px; }
         .ak-h2 { font-size: clamp(28px, 3.8vw, 46px); font-weight: 900; line-height: 1.3; letter-spacing: -0.5px; word-break: keep-all; }
         .ak-sub { font-size: clamp(15px, 1.6vw, 19px); line-height: 1.8; margin-top: 16px; word-break: keep-all; }
+
+        /* 숫자 밴드 (원비온다 스타일) */
+        .ak-statband { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+        @media (max-width: 768px) {
+          .ak-statband { grid-template-columns: repeat(2, 1fr); gap: 32px 16px; }
+        }
 
         /* 7단계 */
         .ak-flow-grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
@@ -98,6 +105,7 @@ export default async function AllkillPage() {
 
       <div style={{ fontFamily: "'Pretendard', sans-serif", background: 'white', color: C.ink, overflowX: 'hidden' }}>
         <HeroSection />
+        <StatBandSection />
         <FlowSection />
         <FeatureSection />
         <BookCarouselSection books={carouselBooks} />

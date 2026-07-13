@@ -32,8 +32,12 @@ export default function AllkillLayout({ children }: { children: React.ReactNode 
         }}
       >
         <div style={{ maxWidth: 1200, margin: '0 auto', padding: '14px 20px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-          <Link href="/allkill" style={{ fontSize: 22, fontWeight: 900, color: '#1F1F1F', letterSpacing: '-0.5px', textDecoration: 'none' }}>
-            올킬<span style={{ color: '#1A73E8' }}>보카</span>
+          {/* 원비온다 패밀리 멀티컬러 워드마크 */}
+          <Link href="/allkill" style={{ fontSize: 22, fontWeight: 900, letterSpacing: '-0.5px', textDecoration: 'none' }}>
+            <span style={{ color: '#1A73E8' }}>올</span>
+            <span style={{ color: '#D93025' }}>킬</span>
+            <span style={{ color: '#F9AB00' }}>보</span>
+            <span style={{ color: '#188038' }}>카</span>
           </Link>
           <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
             <a
