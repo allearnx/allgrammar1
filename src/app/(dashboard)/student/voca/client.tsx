@@ -27,6 +27,8 @@ interface VocaHomeClientProps {
   roundMode?: RoundMode;
   /** 학습 기록이 하나도 없는 첫 진입 — 학년→교재 가이드 표시 */
   firstTimeGuide?: boolean;
+  /** 개인 결제 이용권 만료 시각 (null = 무기한/무료) */
+  expiresAt?: string | null;
 }
 
 // 구글 스타일: 교재별 색면 대신 단일 블루 포인트 (색은 절제, 흰 카드가 바탕)
@@ -53,11 +55,23 @@ function getRound2StepsDone(prog: VocaStudentProgress | undefined): number {
   return done;
 }
 
-export function VocaHomeClient({ books, days, progressList, submissionStatuses = {}, initialBookId, freeDayLimit = 0, round2Locked = false, roundMode: initialRoundMode = 'book', firstTimeGuide = false }: VocaHomeClientProps) {
+export function VocaHomeClient({ books, days, progressList, submissionStatuses = {}, initialBookId, freeDayLimit = 0, round2Locked = false, roundMode: initialRoundMode = 'book', firstTimeGuide = false, expiresAt = null }: VocaHomeClientProps) {
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
   const [roundMode, setRoundMode] = useState<RoundMode>(initialRoundMode);
   const [guideOpen, setGuideOpen] = useState(false);
+
+  // 이용권 만료 표시 — D-7 이내면 경고 톤 + 연장 링크
+  const expiryInfo = useMemo(() => {
+    if (!expiresAt) return null;
+    const exp = new Date(expiresAt);
+    const daysLeft = Math.ceil((exp.getTime() - Date.now()) / 86_400_000);
+    if (daysLeft < 0) return null; // 이미 만료 — 조회 시점 정리 대기 중
+    return {
+      label: `${exp.getMonth() + 1}월 ${exp.getDate()}일까지${daysLeft <= 30 ? ` (D-${daysLeft})` : ''}`,
+      urgent: daysLeft <= 7,
+    };
+  }, [expiresAt]);
 
   const defaultBookId = (initialBookId && books.some((b) => b.id === initialBookId))
     ? initialBookId
@@ -267,7 +281,7 @@ export function VocaHomeClient({ books, days, progressList, submissionStatuses =
       {/* Hero banner — 구글 스타일: 흰 카드 + 블루 포인트 */}
       <div className="relative overflow-hidden rounded-2xl border bg-white p-6 md:p-8">
         <div className="relative">
-          <div className="flex items-center gap-2 mb-2">
+          <div className="flex flex-wrap items-center gap-2 mb-2">
             <p className="text-primary text-xs font-bold tracking-widest uppercase">AllKill Voca</p>
             {roundMode === 'book' && (
               <span className={`text-[11px] font-bold px-2 py-0.5 rounded-full ${
@@ -277,6 +291,18 @@ export function VocaHomeClient({ books, days, progressList, submissionStatuses =
               }`}>
                 {bookCurrentRound}회독
               </span>
+            )}
+            {expiryInfo && (
+              <span className={`text-[11px] font-bold px-2 py-0.5 rounded-full ${
+                expiryInfo.urgent ? 'bg-[#FCE8E6] text-[#A50E0E]' : 'bg-muted text-gray-500'
+              }`}>
+                이용권 {expiryInfo.label}
+              </span>
+            )}
+            {expiryInfo?.urgent && (
+              <Link href="/allkill#price" className="text-[11px] font-bold text-primary underline underline-offset-2">
+                연장하기
+              </Link>
             )}
             {roundMode === 'book' && round2Locked && freeDayLimit > 0 && (
               <span className="text-[11px] font-bold px-2 py-0.5 rounded-full bg-muted text-gray-400">

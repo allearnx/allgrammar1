@@ -20,7 +20,7 @@ export default async function StudentVocaPage({
   // Check service assignment
   const { data: assignment } = await supabase
     .from('service_assignments')
-    .select('id, round2_unlocked, voca_round_mode')
+    .select('id, round2_unlocked, voca_round_mode, expires_at')
     .eq('student_id', user.id)
     .eq('service', 'voca')
     .single();
@@ -83,6 +83,7 @@ export default async function StudentVocaPage({
           round2Locked={round2Locked}
           roundMode={(assignment?.voca_round_mode as 'book' | 'day') || 'book'}
           firstTimeGuide={progressList.length === 0}
+          expiresAt={assignment?.expires_at ?? null}
         />
       </div>
     </>

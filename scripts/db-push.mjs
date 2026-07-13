@@ -16,15 +16,23 @@ if (!token || !projectId || !dbPassword) {
   process.exit(0);
 }
 
+// 최신 supabase CLI는 db push에 --project-ref 플래그가 없음 → link 후 --linked로 push
+const opts = {
+  stdio: 'inherit',
+  env: { ...process.env, SUPABASE_ACCESS_TOKEN: token },
+  timeout: 120_000,
+};
+
 try {
+  console.log('[db-push] 프로젝트 링크 중...');
+  execSync(
+    `npx -y supabase link --project-ref "${projectId}" --password "${dbPassword}"`,
+    opts,
+  );
   console.log('[db-push] 마이그레이션 적용 중...');
   execSync(
-    `npx -y supabase db push --project-ref "${projectId}" --password "${dbPassword}" --yes`,
-    {
-      stdio: 'inherit',
-      env: { ...process.env, SUPABASE_ACCESS_TOKEN: token },
-      timeout: 120_000,
-    }
+    `npx -y supabase db push --linked --password "${dbPassword}" --yes`,
+    opts,
   );
   console.log('[db-push] 완료');
 } catch (err) {
