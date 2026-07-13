@@ -48,7 +48,7 @@ export function Sidebar({ user, services, naesinTree }: SidebarProps) {
     <div className="flex h-full flex-col">
       <div className="flex h-14 items-center border-b border-sidebar-border px-4">
         <span className="flex items-center gap-2 font-bold text-slate-900">
-          <Image src="/logo.png" alt="올라영" width={28} height={28} className="rounded-lg" />
+          <Image src="/logo.png" alt="올라영" width={36} height={36} className="h-9 w-9 shrink-0 rounded-lg object-contain" />
           <span>올라영</span>
         </span>
       </div>
