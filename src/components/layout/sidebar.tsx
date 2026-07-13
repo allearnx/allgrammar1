@@ -3,10 +3,11 @@
 import { usePathname, useRouter } from 'next/navigation';
 import { createClient } from '@/lib/supabase/client';
 import { fetchWithToast } from '@/lib/fetch-with-toast';
+import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from '@/components/ui/sheet';
-import { GraduationCap, LogOut, Menu } from 'lucide-react';
+import { LogOut, Menu } from 'lucide-react';
 import { useState } from 'react';
 import { toast } from 'sonner';
 import { getNavGroups } from './sidebar-nav-config';
@@ -46,8 +47,8 @@ export function Sidebar({ user, services, naesinTree }: SidebarProps) {
   const sidebarContent = (
     <div className="flex h-full flex-col">
       <div className="flex h-14 items-center border-b border-sidebar-border px-4">
-        <span className="flex items-center gap-2 font-bold text-brand-600">
-          <GraduationCap className="h-5 w-5" />
+        <span className="flex items-center gap-2 font-bold text-slate-900">
+          <Image src="/logo.png" alt="올라영" width={28} height={28} className="rounded-lg" />
           <span>올라영</span>
         </span>
       </div>

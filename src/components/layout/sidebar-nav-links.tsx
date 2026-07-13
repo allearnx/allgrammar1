@@ -3,7 +3,6 @@
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import { cn } from '@/lib/utils';
-import { Lock } from 'lucide-react';
 import type { NavGroup, NaesinSidebarExam } from './sidebar-nav-config';
 import { NaesinTree } from './sidebar-naesin-tree';
 
@@ -44,13 +43,14 @@ export function NavLinks({
               : pathname === item.href || (!isExactOnly && pathname.startsWith(item.href + '/'));
 
             if (item.disabled) {
+              // 서비스 선택 전 — 자물쇠 벽 대신 실제 아이콘을 옅게 미리보기 (부드럽게)
               return (
                 <div key={item.href}>
                   <span
                     aria-disabled="true"
-                    className="flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium opacity-40 pointer-events-none cursor-default text-slate-400"
+                    className="flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium pointer-events-none cursor-default text-slate-300"
                   >
-                    <Lock className="h-4 w-4 shrink-0" />
+                    <item.icon className="h-4 w-4 shrink-0 text-slate-300" />
                     {item.label}
                   </span>
                 </div>
