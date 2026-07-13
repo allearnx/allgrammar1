@@ -203,7 +203,7 @@ export function VocaHomeClient({ books, days, progressList, submissionStatuses =
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2 mb-1">
                       <h4 className="font-bold text-cyan-900">셀프 스터디</h4>
-                      <span className="text-[10px] font-bold bg-cyan-600 text-white px-2 py-0.5 rounded-full">월 24,000원</span>
+                      <span className="text-[10px] font-bold bg-cyan-600 text-white px-2 py-0.5 rounded-full">월 19,900원</span>
                     </div>
                     <p className="text-xs text-cyan-700 leading-relaxed mb-3">
                       혼자서도 전체 Day + 1회독·2회독 완벽 학습!<br />

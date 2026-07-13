@@ -9,6 +9,8 @@ interface PricingSectionProps {
   vocaCoursePrice?: number;
   selfStudyCourseId?: string;
   selfStudyCoursePrice?: number;
+  passCourseId?: string;
+  passCoursePrice?: number;
 }
 
 function FeatureList({ items, checkColor }: { items: string[]; checkColor: string }) {
@@ -23,7 +25,7 @@ function FeatureList({ items, checkColor }: { items: string[]; checkColor: strin
   );
 }
 
-export default function PricingSection({ vocaCourseId, vocaCoursePrice, selfStudyCourseId, selfStudyCoursePrice }: PricingSectionProps) {
+export default function PricingSection({ vocaCourseId, vocaCoursePrice, selfStudyCourseId, selfStudyCoursePrice, passCourseId, passCoursePrice }: PricingSectionProps) {
   return (
     <section id="price" className="ak-section" style={{ padding: '96px 24px', background: C.sky }}>
       <div style={{ maxWidth: 1080, margin: '0 auto', textAlign: 'center' }}>
@@ -50,15 +52,21 @@ export default function PricingSection({ vocaCourseId, vocaCoursePrice, selfStud
             </Link>
           </div>
 
-          {/* 셀프 스터디 */}
+          {/* 셀프 스터디 — 월 / 6개월 패스 두 옵션 */}
           <div className="ak-price-card">
             <div className="ak-price-head">
               <div style={{ fontSize: 15, fontWeight: 800, color: C.blue, marginBottom: 12 }}>셀프 스터디</div>
-              <div className="ak-price-amount" style={{ color: C.ink }}>월 24,000<span className="ak-price-unit">원</span></div>
+              <div className="ak-price-amount" style={{ color: C.ink }}>월 19,900<span className="ak-price-unit">원</span></div>
               <div style={{ fontSize: 14, color: C.grayLight }}>선생님 없이 혼자서 완벽하게</div>
             </div>
             <FeatureList items={selfStudyPlanFeatures} checkColor={C.blue} />
-            <AllkillPayButton courseId={selfStudyCourseId} price={selfStudyCoursePrice} label="올킬보카 셀프 스터디" variant="outline" />
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+              <AllkillPayButton courseId={selfStudyCourseId} price={selfStudyCoursePrice} label="올킬보카 셀프학습" variant="outline" text="월 19,900원 시작하기" />
+              <AllkillPayButton courseId={passCourseId} price={passCoursePrice} label="올킬보카 셀프학습 6개월 패스" variant="outline" text="6개월 패스 99,000원" />
+              <p style={{ fontSize: 13, color: C.blue, fontWeight: 700, textAlign: 'center', margin: 0 }}>
+                6개월 패스는 월 16,500원꼴 — 20,400원 아껴요
+              </p>
+            </div>
           </div>
 
           {/* 1:1 온라인 관리 */}

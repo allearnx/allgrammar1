@@ -7,11 +7,13 @@ export default function AllkillPayButton({
   price,
   label = '올킬보카 개인 구독',
   variant = 'primary',
+  text = '지금 시작하기 →',
 }: {
   courseId?: string;
   price?: number;
   label?: string;
   variant?: 'primary' | 'outline';
+  text?: string;
 }) {
   const paymentUrl = courseId && price
     ? `/payment?courseId=${courseId}&name=${encodeURIComponent(label)}&price=${price}`
@@ -27,7 +29,7 @@ export default function AllkillPayButton({
       className="inline-flex w-full h-[58px] items-center justify-center rounded-full font-bold text-[17px] transition-all duration-200 hover:opacity-90 hover:scale-[1.02]"
       style={style}
     >
-      지금 시작하기 &rarr;
+      {text}
     </Link>
   );
 }

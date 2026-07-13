@@ -17,12 +17,15 @@ export default async function AllkillPage() {
     .eq('category', 'voca')
     .eq('is_active', true)
     .order('price', { ascending: true });
+  const passCourse = vocaCourses?.find((c) => c.title.includes('6개월'));
   const selfStudyCourse = vocaCourses?.find((c) => c.price <= 30000);
-  const managedCourse = vocaCourses?.find((c) => c.price > 30000);
+  const managedCourse = vocaCourses?.find((c) => c.price > 30000 && !c.title.includes('6개월'));
   const vocaCourseId = managedCourse?.id || undefined;
   const vocaCoursePrice = managedCourse?.price || undefined;
   const selfStudyCourseId = selfStudyCourse?.id || undefined;
   const selfStudyCoursePrice = selfStudyCourse?.price || undefined;
+  const passCourseId = passCourse?.id || undefined;
+  const passCoursePrice = passCourse?.price || undefined;
 
   // 보유 교재 로테이션 카드 — 표지 = 홍보 노출, is_active = 학생 노출 (별개 규칙).
   // 콘텐츠 준비 중(is_active=false) 교재도 표지만 있으면 라인업으로 보여준다.
@@ -117,7 +120,7 @@ export default async function AllkillPage() {
         <FeatureSection />
         <BookCarouselSection books={carouselBooks} />
         <ParentSection />
-        <PricingSection vocaCourseId={vocaCourseId} vocaCoursePrice={vocaCoursePrice} selfStudyCourseId={selfStudyCourseId} selfStudyCoursePrice={selfStudyCoursePrice} />
+        <PricingSection vocaCourseId={vocaCourseId} vocaCoursePrice={vocaCoursePrice} selfStudyCourseId={selfStudyCourseId} selfStudyCoursePrice={selfStudyCoursePrice} passCourseId={passCourseId} passCoursePrice={passCoursePrice} />
         <FinalCtaSection />
       </div>
     </>
