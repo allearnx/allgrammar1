@@ -1,21 +1,24 @@
 import { cache } from 'react';
-import { headers } from 'next/headers';
+import { cookies, headers } from 'next/headers';
 import { createClient } from '@/lib/supabase/server';
 import { redirect } from 'next/navigation';
 import type { AuthUser } from '@/types/auth';
 import type { UserRole } from '@/types/database';
 import { logger } from '@/lib/logger';
+import { hashAuthCookies, verifyProfileToken } from '@/lib/auth/profile-cache';
 
 export const getUser = cache(async (): Promise<AuthUser | null> => {
   // Fast path: read profile cached by middleware (avoids 2 redundant network calls)
+  // HMAC 서명 + 현재 인증 쿠키 해시가 일치할 때만 신뢰 — 위조 헤더·다른 세션의
+  // 잔여 캐시는 검증 실패로 아래 Supabase 직접 조회 경로로 떨어진다.
   const headersList = await headers();
   const profileHeader = headersList.get('x-user-profile');
   if (profileHeader) {
-    try {
-      return JSON.parse(Buffer.from(profileHeader, 'base64').toString('utf-8')) as AuthUser;
-    } catch {
-      // Fall through to normal path
-    }
+    const cookieStore = await cookies();
+    const sessionHash = await hashAuthCookies(cookieStore.getAll());
+    const profile = await verifyProfileToken(profileHeader, sessionHash);
+    if (profile) return profile as AuthUser;
+    // Fall through to normal path
   }
 
   // Fallback: fetch from Supabase directly

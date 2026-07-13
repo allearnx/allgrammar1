@@ -2,6 +2,12 @@ import { createServerClient } from '@supabase/ssr';
 import { createClient } from '@supabase/supabase-js';
 import { NextResponse, type NextRequest } from 'next/server';
 import { isSafeRedirect } from '@/lib/auth/redirect';
+import {
+  hashAuthCookies,
+  signProfileToken,
+  verifyProfileToken,
+  type CachedProfile,
+} from '@/lib/auth/profile-cache';
 
 type UserRole = 'student' | 'teacher' | 'admin' | 'boss';
 
@@ -19,8 +25,13 @@ export async function updateSession(request: NextRequest) {
     throw new Error('NEXT_PUBLIC_SUPABASE_URL 또는 NEXT_PUBLIC_SUPABASE_ANON_KEY가 설정되지 않았습니다');
   }
 
+  // 클라이언트가 보낸 x-user-profile 헤더는 절대 신뢰하지 않는다 — 미들웨어가
+  // 검증 후 직접 셋팅하는 값만 서버로 전달 (스푸핑 차단)
+  const sanitizedHeaders = new Headers(request.headers);
+  sanitizedHeaders.delete('x-user-profile');
+
   let supabaseResponse = NextResponse.next({
-    request,
+    request: { headers: sanitizedHeaders },
   });
 
   const supabase = createServerClient(
@@ -36,7 +47,7 @@ export async function updateSession(request: NextRequest) {
             request.cookies.set(name, value)
           );
           supabaseResponse = NextResponse.next({
-            request,
+            request: { headers: sanitizedHeaders },
           });
           cookiesToSet.forEach(({ name, value, options }) =>
             supabaseResponse.cookies.set(name, value, options)
@@ -58,16 +69,15 @@ export async function updateSession(request: NextRequest) {
   const isPublicRoute = pathname === '/' || publicRoutes.some((route) => pathname.startsWith(route));
 
   // Try cached profile from cookie first (avoids DB + auth call on every navigation)
-  let profile: { id: string; email: string; full_name: string; role: string; academy_id: string | null; is_homepage_manager?: boolean; can_manage_content?: boolean } | null = null;
+  // 캐시는 HMAC 서명 + 현재 인증 쿠키 해시 바인딩을 통과해야만 신뢰한다.
+  // 다른 계정으로 재로그인하면 sb-* 쿠키가 바뀌어 해시가 불일치 → 자동 캐시 미스.
+  let profile: CachedProfile | null = null;
   let cacheHit = false;
-  const cachedProfileStr = request.cookies.get('x-user-profile')?.value;
-  if (cachedProfileStr) {
-    try {
-      profile = JSON.parse(cachedProfileStr);
-      cacheHit = true;
-    } catch {
-      // Invalid cache, will re-verify
-    }
+  let sessionHash = await hashAuthCookies(request.cookies.getAll());
+  const cachedToken = request.cookies.get('x-user-profile')?.value;
+  if (cachedToken) {
+    profile = await verifyProfileToken(cachedToken, sessionHash);
+    cacheHit = profile !== null;
   }
 
   // Cache miss: verify JWT via getUser() (server-side signature check)
@@ -122,6 +132,12 @@ export async function updateSession(request: NextRequest) {
   // Authenticated from here
   const role = (profile.role || 'student') as UserRole;
 
+  // getUser()가 토큰을 갱신했을 수 있으므로 해시 재계산 후 서명 토큰 생성
+  if (!cacheHit) {
+    sessionHash = await hashAuthCookies(request.cookies.getAll());
+  }
+  const profileToken = await signProfileToken(profile, sessionHash);
+
   // Public routes that stay accessible even when authenticated (no redirect)
   // reset-password: 이메일 링크의 복구 세션(PASSWORD_RECOVERY)이 인증 상태라 대시보드로 튕기면 안 됨
   const noRedirectRoutes = [
@@ -140,16 +156,15 @@ export async function updateSession(request: NextRequest) {
 
   // For no-redirect routes (public pages), pass through with profile headers
   if (isNoRedirectRoute) {
-    const requestHeaders = new Headers(request.headers);
-    requestHeaders.set('x-user-profile', Buffer.from(JSON.stringify(profile)).toString('base64'));
+    sanitizedHeaders.set('x-user-profile', profileToken);
     const response = NextResponse.next({
-      request: { headers: requestHeaders },
+      request: { headers: sanitizedHeaders },
     });
     supabaseResponse.headers.getSetCookie().forEach((cookie) => {
       response.headers.append('set-cookie', cookie);
     });
     // Always refresh cookie (sliding expiration)
-    response.cookies.set('x-user-profile', JSON.stringify(profile), {
+    response.cookies.set('x-user-profile', profileToken, {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
       sameSite: 'lax',
@@ -180,16 +195,15 @@ export async function updateSession(request: NextRequest) {
   }
 
   // Pass user profile to server components via request header
-  const requestHeaders = new Headers(request.headers);
-  requestHeaders.set('x-user-profile', Buffer.from(JSON.stringify(profile)).toString('base64'));
+  sanitizedHeaders.set('x-user-profile', profileToken);
   const response = NextResponse.next({
-    request: { headers: requestHeaders },
+    request: { headers: sanitizedHeaders },
   });
   supabaseResponse.headers.getSetCookie().forEach((cookie) => {
     response.headers.append('set-cookie', cookie);
   });
   // Always refresh cookie (sliding expiration — extends on every navigation)
-  response.cookies.set('x-user-profile', JSON.stringify(profile), {
+  response.cookies.set('x-user-profile', profileToken, {
     httpOnly: true,
     secure: process.env.NODE_ENV === 'production',
     sameSite: 'lax',
