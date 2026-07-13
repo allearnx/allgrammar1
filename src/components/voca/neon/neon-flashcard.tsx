@@ -161,7 +161,7 @@ export function NeonFlashcard({ vocabulary, onComplete }: NeonFlashcardProps) {
             className="w-full max-w-lg space-y-6"
           >
             {/* 단어 (항상 표시 — 발음 중 글자별 카라오케) */}
-            <p className="text-4xl font-bold text-center">
+            <p className="voca-display text-4xl text-center" style={{ fontWeight: 700 }}>
               {isSpeakingWord ? (
                 vocab.front_text.split('').map((char, i) => (
                   <span
@@ -236,7 +236,7 @@ export function NeonFlashcard({ vocabulary, onComplete }: NeonFlashcardProps) {
                   exit={{ opacity: 0 }}
                   className="text-center"
                 >
-                  <p className="text-2xl text-gray-700 font-semibold">
+                  <p className="voca-display text-2xl text-gray-700" style={{ fontWeight: 700 }}>
                     {vocab.back_text}
                   </p>
                   {vocab.exam_source && (

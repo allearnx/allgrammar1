@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { toast } from 'sonner';
 import { fetchWithToast } from '@/lib/fetch-with-toast';
 import { StepProgressBar } from './step-progress-bar';
+import { VocaBrandStyle } from '@/components/voca/voca-brand';
 import { NeonFlashcard } from './neon-flashcard';
 import { RhythmSpelling } from './rhythm-spelling';
 import { WordMatching } from './word-matching';
@@ -193,6 +194,7 @@ export function NeonVocaTab({ vocabulary, dayId, progress, dayTitle }: NeonVocaT
 
   return (
     <div className="space-y-4">
+      <VocaBrandStyle />
       {/* Step Progress Bar */}
       <div className="neon-container px-3 py-1">
         <StepProgressBar
