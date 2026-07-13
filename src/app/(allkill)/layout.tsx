@@ -15,6 +15,14 @@ export const metadata: Metadata = {
     locale: 'ko_KR',
     type: 'website',
   },
+  icons: {
+    // 올킬보카 전용 4색 파비콘 (히어로 롤링 워드 점 인디케이터 모티프)
+    icon: [
+      { url: '/allkill-icon-192.png', type: 'image/png', sizes: '192x192' },
+      { url: '/allkill-icon-512.png', type: 'image/png', sizes: '512x512' },
+    ],
+    apple: '/allkill-icon-192.png',
+  },
 };
 
 /**
