@@ -78,6 +78,7 @@ export default async function StudentVocaPage({
           days={days}
           progressList={progressList}
           submissionStatuses={submissionStatusMap}
+          studentId={user.id}
           initialBookId={initialBookId}
           freeDayLimit={isFree ? 3 : 0}
           round2Locked={round2Locked}

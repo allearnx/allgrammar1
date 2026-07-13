@@ -3,6 +3,7 @@
 /* eslint-disable @next/next/no-img-element -- Supabase Storage 외부 URL 표지 */
 import { useState } from 'react';
 import { ArrowLeft, BookOpen, Star } from 'lucide-react';
+import { VocaBrandStyle, VocaHeroLetters, VOCA_STEP_THEMES, VOCA_COLORS } from '@/components/voca/voca-brand';
 import type { VocaBook, VocaDay } from '@/types/voca';
 
 type GradeKey = 'elementary' | 'middle' | 'high1' | 'high2' | 'high3' | 'intl';
@@ -47,6 +48,7 @@ interface BookGuidePickerProps {
 /**
  * 첫 진입(학습 기록 0) 학생용 가이드 — 학년을 고르면 맞는 교재를 추천.
  * "교재를 안 고르고 바로 시작"을 구조적으로 막는다.
+ * 디자인: /allkill 랜딩 톤 (파스텔 하늘 + 알파벳 카펫 + GmarketSans + 구글 4색)
  */
 export function BookGuidePicker({ books, days, onSelect, onSkip }: BookGuidePickerProps) {
   const [grade, setGrade] = useState<GradeKey | null>(null);
@@ -57,29 +59,50 @@ export function BookGuidePicker({ books, days, onSelect, onSkip }: BookGuidePick
   // ── 화면 1: 학년 선택 ──
   if (!grade) {
     return (
-      <div className="mx-auto max-w-lg space-y-6 py-10">
-        <div className="text-center space-y-2">
-          <p className="text-3xl">📚</p>
-          <h1 className="text-2xl font-extrabold text-gray-900">어떤 교재로 시작할까요?</h1>
-          <p className="text-sm text-gray-500">학년을 골라주시면 딱 맞는 교재를 추천해드려요</p>
-        </div>
+      <div
+        className="relative -m-4 md:-m-6 min-h-[calc(100dvh-3.5rem)] overflow-hidden px-4 py-12 md:py-16"
+        style={{ background: VOCA_COLORS.sky }}
+      >
+        <VocaBrandStyle />
+        <VocaHeroLetters variant="full" />
 
-        <div className="grid grid-cols-2 gap-3">
-          {GRADES.map((g) => (
-            <button
-              key={g.key}
-              onClick={() => setGrade(g.key)}
-              className="rounded-2xl border-2 border-gray-200 bg-white p-6 text-center transition-all hover:border-primary hover:shadow-md active:scale-[0.98]"
-            >
-              <p className="text-lg font-extrabold text-gray-800">{g.label}</p>
-              <p className="mt-0.5 text-xs text-gray-400">{g.sub}</p>
-            </button>
-          ))}
-        </div>
+        <div className="relative z-10 mx-auto max-w-lg space-y-8">
+          <div className="text-center space-y-3">
+            <p className="voca-display text-sm font-bold tracking-wide" style={{ color: VOCA_COLORS.gray }}>
+              중고등 영어 단어 암기, 올킬보카
+            </p>
+            <h1 className="voca-display text-3xl md:text-4xl leading-snug" style={{ color: VOCA_COLORS.ink, fontWeight: 700, wordBreak: 'keep-all' }}>
+              어떤 교재로<br className="md:hidden" /> 시작할까요<span style={{ color: VOCA_COLORS.blue }}>?</span>
+            </h1>
+            <p className="text-[15px]" style={{ color: VOCA_COLORS.gray }}>
+              학년을 골라주시면 딱 맞는 교재를 추천해드려요
+            </p>
+          </div>
 
-        <button onClick={onSkip} className="block w-full text-center text-sm text-gray-400 underline-offset-2 hover:text-gray-600 hover:underline">
-          괜찮아요, 교재를 직접 둘러볼게요
-        </button>
+          <div className="grid grid-cols-2 gap-3">
+            {GRADES.map((g, i) => {
+              const theme = VOCA_STEP_THEMES[i % VOCA_STEP_THEMES.length];
+              return (
+                <button
+                  key={g.key}
+                  onClick={() => setGrade(g.key)}
+                  className="group rounded-3xl border border-white bg-white p-6 text-center shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-lg active:scale-[0.98]"
+                >
+                  <span
+                    className="mx-auto mb-3 block h-2.5 w-2.5 rounded-full transition-transform group-hover:scale-125"
+                    style={{ background: theme.solid }}
+                  />
+                  <p className="voca-display text-lg" style={{ color: VOCA_COLORS.ink, fontWeight: 700 }}>{g.label}</p>
+                  <p className="mt-1 text-xs font-medium" style={{ color: '#9AA0A6' }}>{g.sub}</p>
+                </button>
+              );
+            })}
+          </div>
+
+          <button onClick={onSkip} className="block w-full text-center text-sm underline-offset-4 hover:underline" style={{ color: VOCA_COLORS.gray }}>
+            괜찮아요, 교재를 직접 둘러볼게요
+          </button>
+        </div>
       </div>
     );
   }
@@ -101,8 +124,8 @@ export function BookGuidePicker({ books, days, onSelect, onSkip }: BookGuidePick
       <button
         key={book.id}
         onClick={() => onSelect(book.id)}
-        className={`flex w-full items-center gap-4 rounded-2xl border-2 bg-white p-4 text-left transition-all hover:shadow-md active:scale-[0.99] ${
-          recommended ? 'border-primary ring-2 ring-accent' : 'border-gray-200 hover:border-[#d2e3fc]'
+        className={`flex w-full items-center gap-4 rounded-3xl bg-white p-4 text-left shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-lg active:scale-[0.99] ${
+          recommended ? 'ring-2 ring-[#1A73E8]' : 'border border-white'
         }`}
       >
         {book.cover_image_url ? (
@@ -112,20 +135,23 @@ export function BookGuidePicker({ books, days, onSelect, onSkip }: BookGuidePick
             className="h-20 w-[60px] shrink-0 rounded-lg border object-cover"
           />
         ) : (
-          <div className="flex h-20 w-[60px] shrink-0 items-center justify-center rounded-lg bg-accent">
-            <BookOpen className="h-6 w-6 text-primary/70" />
+          <div className="flex h-20 w-[60px] shrink-0 items-center justify-center rounded-lg" style={{ background: VOCA_COLORS.blueLight }}>
+            <BookOpen className="h-6 w-6" style={{ color: VOCA_COLORS.blue }} />
           </div>
         )}
         <div className="min-w-0 flex-1">
           {recommended && (
-            <span className="mb-1 inline-flex items-center gap-1 rounded-full bg-primary px-2 py-0.5 text-[11px] font-bold text-white">
+            <span
+              className="mb-1 inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[11px] font-bold"
+              style={{ background: VOCA_COLORS.blue, color: '#fff' }}
+            >
               <Star className="h-3 w-3 fill-current" /> 추천
             </span>
           )}
-          <p className="truncate font-bold text-gray-800">{book.title}</p>
-          {dayCount > 0 && <p className="mt-0.5 text-xs text-gray-400">Day {dayCount}개 구성</p>}
+          <p className="voca-display truncate text-[15px]" style={{ color: VOCA_COLORS.ink, fontWeight: 700 }}>{book.title}</p>
+          {dayCount > 0 && <p className="mt-0.5 text-xs" style={{ color: '#9AA0A6' }}>Day {dayCount}개 구성</p>}
         </div>
-        <span className="shrink-0 rounded-xl bg-primary px-4 py-2 text-sm font-bold text-white">
+        <span className="voca-cta voca-display shrink-0 rounded-full px-5 py-2.5 text-sm" style={{ fontWeight: 700 }}>
           시작
         </span>
       </button>
@@ -133,36 +159,46 @@ export function BookGuidePicker({ books, days, onSelect, onSkip }: BookGuidePick
   };
 
   return (
-    <div className="mx-auto max-w-lg space-y-5 py-10">
-      <button onClick={() => setGrade(null)} className="flex items-center gap-1 text-sm font-medium text-gray-500 hover:text-gray-700">
-        <ArrowLeft className="h-4 w-4" /> 학년 다시 선택
-      </button>
+    <div
+      className="relative -m-4 md:-m-6 min-h-[calc(100dvh-3.5rem)] overflow-hidden px-4 py-10"
+      style={{ background: VOCA_COLORS.sky }}
+    >
+      <VocaBrandStyle />
+      <VocaHeroLetters variant="full" />
 
-      <div className="space-y-1">
-        <h1 className="text-xl font-extrabold text-gray-900">{gradeLabel} 추천 교재</h1>
-        <p className="text-sm text-gray-500">언제든 다른 교재로 바꿀 수 있어요</p>
-      </div>
+      <div className="relative z-10 mx-auto max-w-lg space-y-5">
+        <button onClick={() => setGrade(null)} className="flex items-center gap-1 text-sm font-semibold hover:opacity-70" style={{ color: VOCA_COLORS.gray }}>
+          <ArrowLeft className="h-4 w-4" /> 학년 다시 선택
+        </button>
 
-      {sorted.length > 0 ? (
-        <div className="space-y-3">
-          {sorted.map((b) => renderCard(b, isRecommended(b, grade)))}
+        <div className="space-y-1.5">
+          <h1 className="voca-display text-2xl" style={{ color: VOCA_COLORS.ink, fontWeight: 700 }}>
+            {gradeLabel} 추천 교재<span style={{ color: VOCA_COLORS.blue }}>.</span>
+          </h1>
+          <p className="text-sm" style={{ color: VOCA_COLORS.gray }}>언제든 다른 교재로 바꿀 수 있어요</p>
         </div>
-      ) : (
-        <p className="rounded-xl bg-gray-50 p-6 text-center text-sm text-gray-400">
-          이 학년 전용 교재가 아직 없어요. 아래 교재에서 골라보세요!
-        </p>
-      )}
 
-      {others.length > 0 && (
-        <details className="pt-2">
-          <summary className="cursor-pointer text-sm font-medium text-gray-400 hover:text-gray-600">
-            다른 교재도 보기 ({others.length})
-          </summary>
-          <div className="mt-3 space-y-3">
-            {others.map((b) => renderCard(b, false))}
+        {sorted.length > 0 ? (
+          <div className="space-y-3">
+            {sorted.map((b) => renderCard(b, isRecommended(b, grade)))}
           </div>
-        </details>
-      )}
+        ) : (
+          <p className="rounded-3xl bg-white/70 p-6 text-center text-sm" style={{ color: VOCA_COLORS.gray }}>
+            이 학년 전용 교재가 아직 없어요. 아래 교재에서 골라보세요!
+          </p>
+        )}
+
+        {others.length > 0 && (
+          <details className="pt-2">
+            <summary className="cursor-pointer text-sm font-semibold hover:opacity-70" style={{ color: VOCA_COLORS.gray }}>
+              다른 교재도 보기 ({others.length})
+            </summary>
+            <div className="mt-3 space-y-3">
+              {others.map((b) => renderCard(b, false))}
+            </div>
+          </details>
+        )}
+      </div>
     </div>
   );
 }

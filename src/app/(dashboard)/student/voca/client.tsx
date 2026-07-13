@@ -8,6 +8,7 @@ import { CheckCircle, Lock, ChevronRight, ChevronDown, Search, BookOpen, BookMar
 import { BonusExam } from '@/components/voca/bonus-exam';
 import { AssignedExams } from '@/components/voca/assigned-exams';
 import { BookGuidePicker } from '@/components/voca/book-guide-picker';
+import { VocaBrandStyle, VocaHeroLetters, VOCA_COLORS } from '@/components/voca/voca-brand';
 import { ParentLinkButton } from '@/components/voca/parent-link-button';
 import { CoverageGauge } from '@/components/voca/coverage-gauge';
 import { WrongMissionCard } from '@/components/voca/wrong-mission-card';
@@ -21,6 +22,8 @@ interface VocaHomeClientProps {
   days: VocaDay[];
   progressList: VocaStudentProgress[];
   submissionStatuses?: Record<string, string>;
+  /** localStorage 키 네임스페이스용 — 같은 브라우저의 다른 계정과 교재 선택이 섞이지 않도록 */
+  studentId: string;
   initialBookId?: string;
   freeDayLimit?: number;
   round2Locked?: boolean;
@@ -55,8 +58,11 @@ function getRound2StepsDone(prog: VocaStudentProgress | undefined): number {
   return done;
 }
 
-export function VocaHomeClient({ books, days, progressList, submissionStatuses = {}, initialBookId, freeDayLimit = 0, round2Locked = false, roundMode: initialRoundMode = 'book', firstTimeGuide = false, expiresAt = null }: VocaHomeClientProps) {
+export function VocaHomeClient({ books, days, progressList, submissionStatuses = {}, studentId, initialBookId, freeDayLimit = 0, round2Locked = false, roundMode: initialRoundMode = 'book', firstTimeGuide = false, expiresAt = null }: VocaHomeClientProps) {
   const router = useRouter();
+  // 계정별 키 — 전역 키('voca:selectedBookId')를 쓰면 같은 브라우저에서
+  // 다른 계정이 보던 교재가 복원되어 첫 진입 가이드가 건너뛰어진다
+  const bookStorageKey = `voca:selectedBookId:${studentId}`;
   const [isPending, startTransition] = useTransition();
   const [roundMode, setRoundMode] = useState<RoundMode>(initialRoundMode);
   const [guideOpen, setGuideOpen] = useState(false);
@@ -82,11 +88,11 @@ export function VocaHomeClient({ books, days, progressList, submissionStatuses =
   // (URL에 bookId가 명시돼 있으면 그걸 우선 + 저장, 없을 때만 localStorage 복원)
   useEffect(() => {
     if (initialBookId) {
-      try { window.localStorage.setItem('voca:selectedBookId', initialBookId); } catch { /* ignore */ }
+      try { window.localStorage.setItem(bookStorageKey, initialBookId); } catch { /* ignore */ }
       return;
     }
     try {
-      const saved = window.localStorage.getItem('voca:selectedBookId');
+      const saved = window.localStorage.getItem(bookStorageKey);
       if (saved && books.some((b) => b.id === saved)) {
         setSelectedBookId(saved);
       } else if (firstTimeGuide) {
@@ -100,7 +106,7 @@ export function VocaHomeClient({ books, days, progressList, submissionStatuses =
   const selectBook = (id: string) => {
     setSelectedBookId(id);
     try {
-      window.localStorage.setItem('voca:selectedBookId', id);
+      window.localStorage.setItem(bookStorageKey, id);
       // 새로고침/공유 시에도 같은 교재가 열리도록 URL 동기화 (재요청 없이).
       window.history.replaceState(null, '', `/student/voca?bookId=${id}`);
     } catch { /* ignore */ }
@@ -278,23 +284,25 @@ export function VocaHomeClient({ books, days, progressList, submissionStatuses =
 
   return (
     <div className="space-y-6 pb-8">
-      {/* Hero banner — 구글 스타일: 흰 카드 + 블루 포인트 */}
-      <div className="relative overflow-hidden rounded-2xl border bg-white p-6 md:p-8">
-        <div className="relative">
-          <div className="flex flex-wrap items-center gap-2 mb-2">
-            <p className="text-primary text-xs font-bold tracking-widest uppercase">AllKill Voca</p>
+      <VocaBrandStyle />
+      {/* Hero banner — /allkill 랜딩 톤: 파스텔 하늘 + 알파벳 카펫 + GmarketSans */}
+      <div className="relative overflow-hidden rounded-3xl p-6 md:p-8" style={{ background: VOCA_COLORS.sky }}>
+        <VocaHeroLetters />
+        <div className="relative z-10">
+          <div className="flex flex-wrap items-center gap-2 mb-3">
+            <p className="voca-display text-xs font-bold tracking-widest uppercase" style={{ color: VOCA_COLORS.blueDark }}>AllKill Voca</p>
             {roundMode === 'book' && (
               <span className={`text-[11px] font-bold px-2 py-0.5 rounded-full ${
                 bookCurrentRound === '2'
-                  ? 'bg-accent text-primary'
-                  : 'bg-muted text-gray-500'
+                  ? 'bg-white text-primary'
+                  : 'bg-white/70 text-gray-500'
               }`}>
                 {bookCurrentRound}회독
               </span>
             )}
             {expiryInfo && (
               <span className={`text-[11px] font-bold px-2 py-0.5 rounded-full ${
-                expiryInfo.urgent ? 'bg-[#FCE8E6] text-[#A50E0E]' : 'bg-muted text-gray-500'
+                expiryInfo.urgent ? 'bg-[#FCE8E6] text-[#A50E0E]' : 'bg-white/70 text-gray-500'
               }`}>
                 이용권 {expiryInfo.label}
               </span>
@@ -305,7 +313,7 @@ export function VocaHomeClient({ books, days, progressList, submissionStatuses =
               </Link>
             )}
             {roundMode === 'book' && round2Locked && freeDayLimit > 0 && (
-              <span className="text-[11px] font-bold px-2 py-0.5 rounded-full bg-muted text-gray-400">
+              <span className="text-[11px] font-bold px-2 py-0.5 rounded-full bg-white/70 text-gray-400">
                 2회독 🔒 유료
               </span>
             )}
@@ -314,25 +322,25 @@ export function VocaHomeClient({ books, days, progressList, submissionStatuses =
               {books.length > 1 && (
                 <button
                   onClick={() => setGuideOpen(true)}
-                  className="inline-flex items-center gap-1 rounded-full border px-3 py-1 text-xs font-semibold text-primary transition-colors hover:bg-accent"
+                  className="inline-flex items-center gap-1 rounded-full bg-white px-3 py-1 text-xs font-semibold text-primary shadow-sm transition-all hover:shadow"
                 >
                   <BookOpen className="h-3 w-3" /> 교재 바꾸기
                 </button>
               )}
             </div>
           </div>
-          <h1 className="text-gray-900 text-2xl md:text-3xl font-extrabold leading-tight mb-1">
-            {selectedBook?.title || '올킬보카'}
+          <h1 className="voca-display text-2xl md:text-3xl leading-tight mb-1" style={{ color: VOCA_COLORS.ink, fontWeight: 700, wordBreak: 'keep-all' }}>
+            {selectedBook?.title || '올킬보카'}<span style={{ color: VOCA_COLORS.blue }}>.</span>
           </h1>
           {totalDays > 0 && (
             <div className="flex items-center gap-3 mt-4">
-              <div className="flex-1 h-2 rounded-full bg-accent overflow-hidden">
+              <div className="flex-1 h-2 rounded-full bg-white overflow-hidden">
                 <div
                   className="h-full rounded-full bg-primary transition-all duration-500"
                   style={{ width: `${totalDays > 0 ? (completedCount / totalDays) * 100 : 0}%` }}
                 />
               </div>
-              <span className="text-primary text-sm font-bold tabular-nums">
+              <span className="text-sm font-bold tabular-nums" style={{ color: VOCA_COLORS.blueDark }}>
                 {completedCount}/{totalDays}
               </span>
             </div>

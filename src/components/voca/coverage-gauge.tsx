@@ -32,12 +32,12 @@ export function CoverageGauge({ bookId }: { bookId: string }) {
   if (!data || data.coverage === null) return null;
 
   return (
-    <div className="mt-3 rounded-xl bg-accent/60 px-4 py-3">
+    <div className="mt-3 rounded-2xl bg-white px-4 py-3 shadow-sm">
       <div className="flex items-baseline justify-between gap-2">
         <span className="text-xs font-bold text-gray-700">🎯 시험 커버리지</span>
         <span className="text-sm font-extrabold tabular-nums text-primary">{data.coverage}%</span>
       </div>
-      <div className="mt-1.5 h-1.5 overflow-hidden rounded-full bg-white">
+      <div className="mt-1.5 h-1.5 overflow-hidden rounded-full bg-accent">
         <div
           className="h-full rounded-full bg-primary transition-all duration-700"
           style={{ width: `${data.coverage}%` }}
