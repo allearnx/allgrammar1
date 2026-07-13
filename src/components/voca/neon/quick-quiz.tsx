@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { cn, shuffle, blankOutWord } from '@/lib/utils';
 import { NeonResultScreen } from './neon-result-screen';
 import { ProgressDots } from './progress-dots';
+import { VOCA_COLORS } from '@/components/voca/voca-brand';
 import type { VocaVocabulary } from '@/types/voca';
 import './neon-styles.css';
 
@@ -175,7 +176,7 @@ export function QuickQuiz({ vocabulary, onComplete }: QuickQuizProps) {
             className="w-full max-w-md space-y-8"
           >
             {question.type === 'fill-blank' && (
-              <p className="text-xs font-medium text-center text-brand-400 mb-1">빈칸에 들어갈 단어는?</p>
+              <p className="voca-display text-xs text-center mb-1" style={{ color: VOCA_COLORS.blue, fontWeight: 700 }}>빈칸에 들어갈 단어는?</p>
             )}
             <p
               className={cn(

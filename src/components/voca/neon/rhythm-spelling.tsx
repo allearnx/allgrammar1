@@ -259,7 +259,7 @@ export function RhythmSpelling({ vocabulary, onComplete, examMode = false }: Rhy
             </div>
           )}
 
-          <p className="text-lg text-gray-600 font-medium">{vocab.back_text}</p>
+          <p className="voca-display text-lg text-gray-700" style={{ fontWeight: 700 }}>{vocab.back_text}</p>
 
           <div className={cn('flex gap-1.5 justify-center flex-wrap', wrongFlash && 'wrong-shake')}>
             {targetWord.split('').map((ch, i) => {

@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { cn } from '@/lib/utils';
+import { VocaBrandStyle, VocaHeroLetters, VOCA_COLORS } from '@/components/voca/voca-brand';
 import './neon-styles.css';
 
 interface NeonResultScreenProps {
@@ -13,6 +13,7 @@ interface NeonResultScreenProps {
   onRetry?: () => void;
 }
 
+/** 단계 최종 결과 — /allkill 톤 (하늘 카드 + 알파벳 + GmarketSans 점수) */
 export function NeonResultScreen({
   score,
   passThreshold,
@@ -24,33 +25,43 @@ export function NeonResultScreen({
   const passed = score >= passThreshold;
 
   return (
-    <div className="neon-container p-6 min-h-[60dvh] flex items-center justify-center">
+    <div
+      className="relative overflow-hidden rounded-3xl p-6 min-h-[60dvh] flex items-center justify-center"
+      style={{ background: VOCA_COLORS.sky }}
+    >
+      <VocaBrandStyle />
+      <VocaHeroLetters />
       <motion.div
         initial={{ scale: 0.8, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
-        className="text-center space-y-4"
+        className="relative z-10 text-center space-y-4"
       >
-        <p className={cn('text-6xl font-bold', passed ? 'text-green-600' : 'text-brand-600')}>
-          {score}%
+        <p className="voca-display text-6xl tabular-nums" style={{ color: passed ? VOCA_COLORS.green : VOCA_COLORS.blue, fontWeight: 700 }}>
+          {score}<span className="text-4xl">%</span>
         </p>
         {subtitle && (
-          <p className="text-gray-500 text-lg">{subtitle}</p>
+          <p className="text-lg" style={{ color: VOCA_COLORS.gray }}>{subtitle}</p>
         )}
-        <p className="text-gray-400 text-base">
+        <p className="voca-display text-lg" style={{ color: VOCA_COLORS.ink, fontWeight: 700 }}>
           {passed ? passMessage : failMessage}
         </p>
         {onRetry && (
-          <button
-            onClick={onRetry}
-            className={cn(
-              'mt-4 px-6 py-2.5 rounded-xl border-2 font-medium transition-colors',
-              passed
-                ? 'border-gray-200 text-gray-500 hover:bg-gray-50'
-                : 'border-brand-300 text-brand-600 hover:bg-brand-50',
-            )}
-          >
-            {passed ? '다시 풀기' : '새 문제로 다시 풀기'}
-          </button>
+          passed ? (
+            <button
+              onClick={onRetry}
+              className="mt-4 rounded-full bg-white px-6 py-2.5 font-medium text-gray-600 shadow-sm transition-all hover:shadow"
+            >
+              다시 풀기
+            </button>
+          ) : (
+            <button
+              onClick={onRetry}
+              className="voca-cta voca-display mt-4 rounded-full px-8 py-3 active:scale-[0.98]"
+              style={{ fontWeight: 700 }}
+            >
+              새 문제로 다시 풀기
+            </button>
+          )
         )}
       </motion.div>
     </div>

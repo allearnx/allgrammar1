@@ -4,6 +4,7 @@ import { useState, useMemo } from 'react';
 import { MatchingGameRound, type MatchingGameItem } from '@/components/voca/vocab-tab/matching-game-round';
 import { NeonResultScreen } from './neon-result-screen';
 import { shuffle } from '@/lib/utils';
+import { VocaBrandStyle, VocaHeroLetters, VOCA_COLORS, VOCA_STEP_THEMES } from '@/components/voca/voca-brand';
 import type { VocaVocabulary } from '@/types/voca';
 import './neon-styles.css';
 
@@ -128,28 +129,58 @@ export function WordMatching({ vocabulary, onComplete }: WordMatchingProps) {
   }
 
   // 셋트 완료 신호 — 다 맞췄음을 알리고, 학생이 직접 다음 세트로 넘어가게 한다.
+  // /allkill 톤: 하늘 카드 + 알파벳 + GmarketSans + 4색 세트 도트 + 노란 CTA
   if (setDone !== null) {
     const allCorrect = setDone.correct === setDone.total;
     return (
-      <div className="neon-container p-4 md:p-6 min-h-[60dvh] flex flex-col items-center justify-center text-center">
-        <div className="text-5xl mb-4">{allCorrect ? '🎉' : '✅'}</div>
-        <h2 className="text-2xl font-bold text-gray-800 mb-1">
-          세트 {currentChunk + 1} 완료!
-        </h2>
-        <p className="text-base text-gray-500 mb-1">
-          {allCorrect
-            ? '5개 모두 맞췄어요!'
-            : `${setDone.total}개 중 ${setDone.correct}개를 한 번에 맞췄어요`}
-        </p>
-        <p className="text-sm text-gray-400 mb-8">
-          다음: 세트 {currentChunk + 2}/{chunks.length}
-        </p>
-        <button
-          onClick={goNextChunk}
-          className="rounded-xl bg-brand-600 px-8 py-3.5 text-base font-bold text-white shadow-lg transition-all hover:bg-brand-700 active:scale-[0.98]"
-        >
-          다음 세트로 →
-        </button>
+      <div
+        className="relative overflow-hidden rounded-3xl p-6 min-h-[60dvh] flex flex-col items-center justify-center text-center"
+        style={{ background: VOCA_COLORS.sky }}
+      >
+        <VocaBrandStyle />
+        <VocaHeroLetters />
+        <div className="relative z-10 flex flex-col items-center">
+          <p className="voca-display text-xs font-bold tracking-widest uppercase mb-3" style={{ color: VOCA_COLORS.blueDark }}>
+            Matching
+          </p>
+          <h2 className="voca-display text-3xl mb-2" style={{ color: VOCA_COLORS.ink, fontWeight: 700 }}>
+            {allCorrect ? <>세트 {currentChunk + 1} 올킬<span style={{ color: VOCA_COLORS.blue }}>!</span></> : <>세트 {currentChunk + 1} 완료<span style={{ color: VOCA_COLORS.blue }}>.</span></>}
+          </h2>
+          <p className="text-base mb-6" style={{ color: VOCA_COLORS.gray }}>
+            {allCorrect
+              ? `${setDone.total}개 모두 한 번에 맞췄어요 👏`
+              : `${setDone.total}개 중 ${setDone.correct}개를 한 번에 맞췄어요`}
+          </p>
+          {/* 세트 진행 도트 — 구글 4색 순환 */}
+          <div className="flex items-center gap-2 mb-8">
+            {chunks.map((_, i) => {
+              const theme = VOCA_STEP_THEMES[i % VOCA_STEP_THEMES.length];
+              const done = i <= currentChunk;
+              return (
+                <span
+                  key={i}
+                  className="rounded-full transition-all"
+                  style={{
+                    width: done ? 12 : 8,
+                    height: done ? 12 : 8,
+                    background: theme.solid,
+                    opacity: done ? 1 : 0.25,
+                  }}
+                />
+              );
+            })}
+            <span className="ml-1 text-xs font-bold tabular-nums" style={{ color: VOCA_COLORS.gray }}>
+              {currentChunk + 1}/{chunks.length}
+            </span>
+          </div>
+          <button
+            onClick={goNextChunk}
+            className="voca-cta voca-display rounded-full px-10 py-3.5 text-base active:scale-[0.98]"
+            style={{ fontWeight: 700 }}
+          >
+            다음 세트로 →
+          </button>
+        </div>
       </div>
     );
   }
