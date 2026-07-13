@@ -1,7 +1,7 @@
 // 올킬보카 랜딩 — 구글 팔레트 기반 톤 (앱 내부 brand-* 스케일과 동일 계열)
 export const C = {
   ink: '#1F1F1F',
-  gray: '#5F6368',
+  gray: '#3C4043',      // 보조 텍스트 — 연하면 AI스러워 보여서 진하게 (사용자 피드백)
   grayLight: '#9AA0A6',
   line: '#E8EAED',
   sky: '#DFEFFF',       // 파스텔 하늘색 배경
@@ -9,11 +9,23 @@ export const C = {
   blueDark: '#174EA6',
   blueLight: '#E8F0FE',
   yellow: '#FDD663',    // 큰 버튼
+  yellowDark: '#B06000',
+  yellowLight: '#FEF7E0',
   green: '#188038',
+  greenDark: '#0D652D',
   greenLight: '#E6F4EA',
   red: '#D93025',
+  redDark: '#A50E0E',
   redLight: '#FCE8E6',
 };
+
+// 구글 4색 스텝 테마 (7단계 카드 순환용)
+export const stepThemes = [
+  { solid: '#1A73E8', bg: '#E8F0FE', text: '#174EA6' },
+  { solid: '#D93025', bg: '#FCE8E6', text: '#A50E0E' },
+  { solid: '#F9AB00', bg: '#FEF7E0', text: '#B06000' },
+  { solid: '#188038', bg: '#E6F4EA', text: '#0D652D' },
+];
 
 // 히어로 롤링 워드 — "OO 단어, 이제 올킬" (원비온다 패밀리: 구글 4색 순환)
 export const rollingWords = ['중간고사', '기말고사', '모의고사', '수능'];

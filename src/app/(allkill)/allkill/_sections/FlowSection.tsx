@@ -1,4 +1,24 @@
-import { C, flowSteps1, flowSteps2 } from '../_data';
+import { C, flowSteps1, flowSteps2, stepThemes } from '../_data';
+
+interface FlowStep {
+  n: number;
+  name: string;
+  pass: string;
+  desc: string;
+}
+
+/** 스텝 카드 — 구글 4색 순환 테마 (숫자 원 채움 + 통과 뱃지 틴트) */
+function StepCard({ step }: { step: FlowStep }) {
+  const theme = stepThemes[(step.n - 1) % stepThemes.length];
+  return (
+    <div className="ak-flow-card">
+      <div className="ak-flow-num ak-display" style={{ background: theme.solid, color: 'white' }}>{step.n}</div>
+      <div className="ak-display" style={{ fontSize: 20, color: C.ink, marginBottom: 10 }}>{step.name}</div>
+      <span style={{ fontSize: 14, fontWeight: 700, color: theme.text, background: theme.bg, padding: '5px 14px', borderRadius: 100 }}>{step.pass}</span>
+      <p style={{ fontSize: 16, color: C.gray, lineHeight: 1.7, marginTop: 14, wordBreak: 'keep-all' }}>{step.desc}</p>
+    </div>
+  );
+}
 
 /** 7단계 — 랜딩 전체에서 이 섹션 딱 한 번만 보여준다 */
 export default function FlowSection() {
@@ -16,35 +36,21 @@ export default function FlowSection() {
         </p>
 
         {/* 1회독 */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: 10, margin: '52px 0 16px' }}>
-          <span style={{ background: C.blueLight, color: C.blueDark, fontSize: 14, fontWeight: 800, padding: '6px 16px', borderRadius: 100 }}>1회독</span>
-          <span style={{ fontSize: 16, fontWeight: 800, color: C.ink }}>단어 암기</span>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 12, margin: '56px 0 18px' }}>
+          <span className="ak-display" style={{ background: C.blue, color: 'white', fontSize: 15, padding: '8px 18px', borderRadius: 100 }}>1회독</span>
+          <span className="ak-display" style={{ fontSize: 19, color: C.ink }}>단어 암기</span>
         </div>
         <div className="ak-flow-grid-4">
-          {flowSteps1.map((step) => (
-            <div key={step.n} className="ak-flow-card">
-              <div className="ak-flow-num" style={{ background: C.blueLight, color: C.blueDark }}>{step.n}</div>
-              <div style={{ fontSize: 17, fontWeight: 800, color: C.ink, marginBottom: 8 }}>{step.name}</div>
-              <span style={{ fontSize: 12, fontWeight: 700, color: C.blue, background: 'white', border: `1.5px solid ${C.blueLight}`, padding: '3px 12px', borderRadius: 100 }}>{step.pass}</span>
-              <p style={{ fontSize: 14, color: C.gray, lineHeight: 1.65, marginTop: 12, wordBreak: 'keep-all' }}>{step.desc}</p>
-            </div>
-          ))}
+          {flowSteps1.map((step) => <StepCard key={step.n} step={step} />)}
         </div>
 
         {/* 2회독 */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: 10, margin: '36px 0 16px' }}>
-          <span style={{ background: C.ink, color: 'white', fontSize: 14, fontWeight: 800, padding: '6px 16px', borderRadius: 100 }}>2회독</span>
-          <span style={{ fontSize: 16, fontWeight: 800, color: C.ink }}>완전 정복</span>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 12, margin: '40px 0 18px' }}>
+          <span className="ak-display" style={{ background: C.ink, color: 'white', fontSize: 15, padding: '8px 18px', borderRadius: 100 }}>2회독</span>
+          <span className="ak-display" style={{ fontSize: 19, color: C.ink }}>완전 정복</span>
         </div>
         <div className="ak-flow-grid-3">
-          {flowSteps2.map((step) => (
-            <div key={step.n} className="ak-flow-card">
-              <div className="ak-flow-num" style={{ background: C.ink, color: 'white' }}>{step.n}</div>
-              <div style={{ fontSize: 17, fontWeight: 800, color: C.ink, marginBottom: 8 }}>{step.name}</div>
-              <span style={{ fontSize: 12, fontWeight: 700, color: C.gray, background: 'white', border: `1.5px solid ${C.line}`, padding: '3px 12px', borderRadius: 100 }}>{step.pass}</span>
-              <p style={{ fontSize: 14, color: C.gray, lineHeight: 1.65, marginTop: 12, wordBreak: 'keep-all' }}>{step.desc}</p>
-            </div>
-          ))}
+          {flowSteps2.map((step) => <StepCard key={step.n} step={step} />)}
         </div>
       </div>
     </section>

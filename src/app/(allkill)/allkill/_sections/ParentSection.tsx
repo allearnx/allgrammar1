@@ -17,13 +17,13 @@ export default function ParentSection() {
             우리 아이가 진짜 외웠는지,<br />
             <span style={{ color: C.blue }}>링크 하나로 확인하세요</span>
           </h2>
-          <p style={{ fontSize: 'clamp(15px, 1.6vw, 18px)', color: C.gray, lineHeight: 1.8, margin: '20px 0 32px', wordBreak: 'keep-all' }}>
+          <p className="ak-subfont" style={{ fontSize: 'clamp(16px, 1.8vw, 20px)', color: C.gray, lineHeight: 1.8, margin: '20px 0 32px', wordBreak: 'keep-all' }}>
             &ldquo;공부했어요&rdquo;라는 말 대신, 오늘 몇 단계를 통과했고
             어떤 단어에서 막혔는지 데이터로 보여드려요.
           </p>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
             {PARENT_POINTS.map((point) => (
-              <div key={point} style={{ display: 'flex', alignItems: 'center', gap: 12, fontSize: 16, color: C.ink, fontWeight: 600 }}>
+              <div key={point} style={{ display: 'flex', alignItems: 'center', gap: 12, fontSize: 17, color: C.ink, fontWeight: 600 }}>
                 <span style={{ width: 24, height: 24, borderRadius: '50%', background: C.greenLight, color: C.green, fontSize: 13, fontWeight: 800, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>✓</span>
                 {point}
               </div>

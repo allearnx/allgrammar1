@@ -8,20 +8,16 @@ import { C, rollingWords, wordColors } from '../_data';
  * 원비온다 패밀리 히어로 — 롤링 워드가 구글 4색으로 순환 + 4색 점 인디케이터.
  * 한 화면 한 메시지 + 문 두 개 (가벼운 문: 무료 체험 / 큰 문: 시작하기).
  */
-// 배경 장식 — 화이트 알파벳 대소문자 (단어 브랜드 소재, 위치/회전 고정값이라 hydration 안전)
+// 배경 장식 — 화이트 알파벳 대소문자, 좌우 가장자리에만 (가운데는 헤드라인 영역이라 비움)
 const HERO_LETTERS = [
   { ch: 'A', top: '8%', left: '4%', size: 120, rot: -12 },
-  { ch: 'b', top: '55%', left: '2%', size: 90, rot: 8 },
-  { ch: 'V', top: '20%', left: '86%', size: 140, rot: 10 },
-  { ch: 'o', top: '70%', left: '89%', size: 80, rot: -6 },
-  { ch: 'C', top: '78%', left: '12%', size: 110, rot: 14 },
-  { ch: 'a', top: '5%', left: '68%', size: 76, rot: -18 },
-  { ch: 'K', top: '46%', left: '92%', size: 100, rot: -10 },
-  { ch: 'w', top: '86%', left: '56%', size: 70, rot: 6 },
-  { ch: 'E', top: '12%', left: '28%', size: 64, rot: 16 },
-  { ch: 'y', top: '83%', left: '76%', size: 88, rot: -14 },
-  { ch: 'R', top: '35%', left: '6%', size: 72, rot: -8 },
-  { ch: 'd', top: '6%', left: '47%', size: 60, rot: 10 },
+  { ch: 'R', top: '35%', left: '7%', size: 84, rot: -8 },
+  { ch: 'b', top: '58%', left: '2%', size: 96, rot: 8 },
+  { ch: 'C', top: '80%', left: '11%', size: 110, rot: 14 },
+  { ch: 'V', top: '16%', left: '87%', size: 140, rot: 10 },
+  { ch: 'K', top: '48%', left: '92%', size: 100, rot: -10 },
+  { ch: 'o', top: '72%', left: '89%', size: 82, rot: -6 },
+  { ch: 'y', top: '87%', left: '82%', size: 88, rot: -14 },
 ];
 
 export default function HeroSection() {
@@ -83,8 +79,8 @@ export default function HeroSection() {
           알아서 전부 외워집니다<span style={{ color: C.blue }}>.</span>
         </h1>
 
-        <p style={{ fontSize: 'clamp(16px, 1.8vw, 21px)', color: C.gray, lineHeight: 1.7, marginBottom: 44, wordBreak: 'keep-all' }}>
-          <b style={{ color: C.ink }}>진짜 시험에 나온 문장</b>으로 외우고,<br />
+        <p className="ak-subfont" style={{ fontSize: 'clamp(17px, 2vw, 23px)', color: C.gray, lineHeight: 1.75, marginBottom: 44, wordBreak: 'keep-all' }}>
+          <b style={{ color: C.ink, fontWeight: 700 }}>진짜 시험에 나온 문장</b>으로 외우고,<br />
           통과 못 하면 다음 단계로 못 넘어가요.
         </p>
 

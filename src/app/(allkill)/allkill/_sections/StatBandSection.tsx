@@ -10,7 +10,7 @@ export default function StatBandSection() {
             <div className="ak-display" style={{ fontSize: 'clamp(36px, 4.5vw, 56px)', color: stat.color, lineHeight: 1.1, marginBottom: 10, letterSpacing: '-1px' }}>
               {stat.num}
             </div>
-            <div style={{ fontSize: 'clamp(13px, 1.4vw, 16px)', fontWeight: 600, color: C.gray, wordBreak: 'keep-all' }}>
+            <div style={{ fontSize: 'clamp(14px, 1.5vw, 17px)', fontWeight: 600, color: C.gray, wordBreak: 'keep-all' }}>
               {stat.label}
             </div>
           </div>

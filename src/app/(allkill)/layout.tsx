@@ -39,6 +39,7 @@ export default function AllkillLayout({ children }: { children: React.ReactNode 
           font-display: swap;
         }
         .ak-display { font-family: 'GmarketSans', 'Pretendard', sans-serif; font-weight: 700; }
+        .ak-subfont { font-family: 'GmarketSans', 'Pretendard', sans-serif; font-weight: 500; }
       `}</style>
       <header
         style={{

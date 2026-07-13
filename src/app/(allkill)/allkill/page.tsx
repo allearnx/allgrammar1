@@ -47,7 +47,7 @@ export default async function AllkillPage() {
         /* 공용 타이포 */
         .ak-badge { display: inline-block; background: ${C.blueLight}; color: ${C.blueDark}; font-size: 13px; font-weight: 800; padding: 6px 16px; border-radius: 100px; margin-bottom: 18px; }
         .ak-h2 { font-family: 'GmarketSans', 'Pretendard', sans-serif; font-weight: 700; font-size: clamp(26px, 3.5vw, 42px); line-height: 1.35; letter-spacing: -0.5px; word-break: keep-all; }
-        .ak-sub { font-size: clamp(15px, 1.6vw, 19px); line-height: 1.8; margin-top: 16px; word-break: keep-all; }
+        .ak-sub { font-family: 'GmarketSans', 'Pretendard', sans-serif; font-weight: 500; font-size: clamp(17px, 1.9vw, 22px); line-height: 1.8; margin-top: 18px; word-break: keep-all; }
 
         /* 숫자 밴드 (원비온다 스타일) */
         .ak-statband { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
@@ -58,8 +58,8 @@ export default async function AllkillPage() {
         /* 7단계 */
         .ak-flow-grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
         .ak-flow-grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
-        .ak-flow-card { background: white; border: 1px solid ${C.line}; border-radius: 18px; padding: 26px 18px; text-align: center; display: flex; flex-direction: column; align-items: center; }
-        .ak-flow-num { width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 17px; font-weight: 900; margin-bottom: 14px; }
+        .ak-flow-card { background: white; border-radius: 22px; padding: 32px 20px; text-align: center; display: flex; flex-direction: column; align-items: center; box-shadow: 0 10px 32px rgba(31,31,31,0.08); }
+        .ak-flow-num { width: 52px; height: 52px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; margin-bottom: 16px; }
 
         /* 차별점 */
         .ak-feature-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }

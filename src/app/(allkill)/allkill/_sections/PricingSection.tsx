@@ -15,7 +15,7 @@ function FeatureList({ items, checkColor }: { items: string[]; checkColor: strin
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 12, marginBottom: 32, flex: 1 }}>
       {items.map((item) => (
-        <div key={item} style={{ display: 'flex', alignItems: 'flex-start', gap: 10, fontSize: 15, color: C.gray, lineHeight: 1.5 }}>
+        <div key={item} style={{ display: 'flex', alignItems: 'flex-start', gap: 10, fontSize: 16, color: C.gray, lineHeight: 1.55 }}>
           <span style={{ color: checkColor, fontWeight: 800, flexShrink: 0 }}>✓</span> {item}
         </div>
       ))}
