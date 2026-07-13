@@ -77,8 +77,8 @@ export function AssignedExams() {
     return (
       <div className="space-y-3">
         <button onClick={() => setActive(null)} className="text-sm font-medium text-gray-500 hover:text-gray-700">← 그만두기</button>
-        <div className="rounded-xl border border-[#d2e3fc] bg-accent px-4 py-3 text-center">
-          <p className="text-lg font-extrabold text-primary">📋 선생님이 낸 시험</p>
+        <div className="rounded-2xl bg-accent px-4 py-3 text-center">
+          <p className="voca-display text-lg text-primary" style={{ fontWeight: 700 }}>📋 선생님이 낸 시험</p>
           <p className="mt-0.5 text-xs text-primary">{rangeLabel(active)} · {vocab.length}단어 · {PASS}점 통과</p>
         </div>
         <RhythmSpelling vocabulary={vocab} onComplete={handleComplete} examMode />
@@ -89,10 +89,10 @@ export function AssignedExams() {
   if (assignments.length === 0) return null;
 
   return (
-    <div className="rounded-2xl border-2 border-[#d2e3fc] bg-accent/50 p-4 space-y-2">
-      <p className="font-bold text-primary">📋 선생님이 낸 시험</p>
+    <div className="rounded-3xl border-2 border-[#d2e3fc] bg-accent/50 p-4 space-y-2">
+      <p className="voca-display text-primary" style={{ fontWeight: 700 }}>📋 선생님이 낸 시험</p>
       {assignments.map((a) => (
-        <div key={a.id} className="flex items-center justify-between gap-2 rounded-xl bg-white px-4 py-3">
+        <div key={a.id} className="flex items-center justify-between gap-2 rounded-2xl bg-white px-4 py-3">
           <div className="min-w-0">
             <p className="truncate font-semibold text-gray-800">{rangeLabel(a)}</p>
             {a.bestScore != null && (
@@ -101,7 +101,7 @@ export function AssignedExams() {
           </div>
           <button
             onClick={() => start(a)}
-            className="shrink-0 rounded-xl bg-primary px-4 py-2 text-sm font-bold text-white hover:bg-primary/90"
+            className="shrink-0 rounded-full bg-primary px-4 py-2 text-sm font-bold text-white hover:bg-primary/90"
           >
             {a.bestScore != null ? '다시 보기' : '시험 보기 →'}
           </button>

@@ -50,10 +50,10 @@ export function WrongMissionCard() {
   // 완료: 축하 카드 (일요일까지 유지)
   if (data.completedAt || remaining === 0) {
     return (
-      <div className="flex items-center gap-3 rounded-2xl border border-[#A8DAB5] bg-[#E6F4EA] p-4">
+      <div className="flex items-center gap-3 rounded-3xl border border-[#A8DAB5] bg-[#E6F4EA] p-4">
         <CheckCircle className="h-8 w-8 shrink-0 text-[#188038]" />
         <div>
-          <p className="font-bold text-[#188038]">이번 주 올킬 미션 완료!</p>
+          <p className="voca-display text-[#188038]" style={{ fontWeight: 700 }}>이번 주 올킬 미션 완료!</p>
           <p className="text-xs text-[#1E8E3E]">오답 {data.words.length}개 전부 정복 — 일요일이 편안하겠어요 😎</p>
         </div>
       </div>
@@ -64,7 +64,7 @@ export function WrongMissionCard() {
 
   return (
     <Link href="/student/voca/wrong-review" className="block group">
-      <div className={`rounded-2xl border-2 p-4 transition-all group-hover:shadow-md ${
+      <div className={`rounded-3xl border-2 p-4 transition-all group-hover:shadow-md ${
         isSunday ? 'border-[#F6AEA9] bg-[#FCE8E6]' : 'border-[#FDE293] bg-[#FEF7E0]'
       }`}>
         <div className="flex items-center gap-3">
@@ -76,7 +76,7 @@ export function WrongMissionCard() {
           <div className="min-w-0 flex-1">
             {isSunday ? (
               <>
-                <p className="font-extrabold text-[#C5221F]">🗡️ 오늘은 올킬오답 시험 보는 날!</p>
+                <p className="voca-display text-[#C5221F]" style={{ fontWeight: 700 }}>🗡️ 오늘은 올킬오답 시험 보는 날!</p>
                 <p className="mt-0.5 text-xs text-gray-600">
                   일요일 아침, 이번 주 틀린 단어 <b>{remaining}개</b>를 정복하고 한 주를 마무리하자
                   {data.coverageDelta && (
@@ -86,14 +86,14 @@ export function WrongMissionCard() {
               </>
             ) : (
               <>
-                <p className="font-extrabold text-[#B06000]">📅 일요일 아침은 올킬오답 시험 보는 날!</p>
+                <p className="voca-display text-[#B06000]" style={{ fontWeight: 700 }}>📅 일요일 아침은 올킬오답 시험 보는 날!</p>
                 <p className="mt-0.5 text-xs text-gray-600">
                   이번 주 오답 <b>{remaining}개</b>가 기다리고 있어요 — 미리 정복하면 일요일이 여유로워요
                 </p>
               </>
             )}
           </div>
-          <span className={`shrink-0 rounded-xl px-4 py-2 text-sm font-bold text-white ${
+          <span className={`shrink-0 rounded-full px-4 py-2 text-sm font-bold text-white ${
             isSunday ? 'bg-[#EA4335]' : 'bg-[#F9AB00]'
           }`}>
             {isSunday ? '시험 보기' : '미리 보기'}

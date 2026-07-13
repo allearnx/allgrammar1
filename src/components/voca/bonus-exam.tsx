@@ -6,6 +6,7 @@ import { RhythmSpelling } from '@/components/voca/neon/rhythm-spelling';
 import { fetchWithToast } from '@/lib/fetch-with-toast';
 import { shuffle } from '@/lib/utils';
 import { VOCA_VOCABULARY_COLUMNS, type VocaDay, type VocaVocabulary } from '@/types/voca';
+import { VOCA_COLORS } from '@/components/voca/voca-brand';
 
 const MAX_DAYS = 3;
 const PASS = 90;
@@ -82,9 +83,9 @@ export function BonusExam({ days, bookId }: { days: VocaDay[]; bookId: string })
         <button onClick={reset} className="text-sm font-medium text-gray-500 hover:text-gray-700">
           ← 그만두기
         </button>
-        <div className="rounded-xl border border-rose-200 bg-rose-50 px-4 py-3 text-center">
-          <p className="text-lg font-extrabold text-rose-600">📝 묶음 표제어 스펠링 시험</p>
-          <p className="mt-0.5 text-xs text-rose-500">
+        <div className="rounded-2xl px-4 py-3 text-center" style={{ background: VOCA_COLORS.greenLight }}>
+          <p className="voca-display text-lg" style={{ color: VOCA_COLORS.greenDark, fontWeight: 700 }}>📝 묶음 표제어 스펠링 시험</p>
+          <p className="mt-0.5 text-xs" style={{ color: VOCA_COLORS.green }}>
             {selected.length}개 Day · {vocab.length}단어 · {PASS}점 통과 · 순서 셔플
           </p>
         </div>
@@ -97,17 +98,17 @@ export function BonusExam({ days, bookId }: { days: VocaDay[]; bookId: string })
   if (mode === 'done') {
     const passed = (score ?? 0) >= PASS;
     return (
-      <div className="rounded-2xl border-2 border-rose-200 bg-rose-50/60 p-6 text-center space-y-3">
+      <div className="rounded-3xl p-6 text-center space-y-3" style={{ background: VOCA_COLORS.greenLight }}>
         <p className="text-4xl">{passed ? '🎉' : '💪'}</p>
-        <p className="text-2xl font-extrabold text-gray-800">{score}점</p>
+        <p className="voca-display text-2xl text-gray-800" style={{ fontWeight: 700 }}>{score}점</p>
         <p className="text-sm text-gray-500">
           {passed ? '보너스 시험 통과!' : `${PASS}점 넘으면 통과예요. 또 도전해보세요!`}
         </p>
         <div className="flex justify-center gap-2 pt-1">
-          <button onClick={() => { setMode('idle'); }} className="rounded-xl bg-rose-500 px-5 py-2.5 text-sm font-bold text-white hover:bg-rose-600">
+          <button onClick={() => { setMode('idle'); }} className="rounded-full px-5 py-2.5 text-sm font-bold text-white transition-opacity hover:opacity-90" style={{ background: VOCA_COLORS.green }}>
             다시 도전
           </button>
-          <button onClick={reset} className="rounded-xl border border-gray-200 px-5 py-2.5 text-sm font-bold text-gray-600 hover:bg-gray-50">
+          <button onClick={reset} className="rounded-full border border-gray-200 bg-white px-5 py-2.5 text-sm font-bold text-gray-600 hover:bg-gray-50">
             닫기
           </button>
         </div>
@@ -117,10 +118,10 @@ export function BonusExam({ days, bookId }: { days: VocaDay[]; bookId: string })
 
   // ── Day 선택 화면 (idle/loading) ──
   return (
-    <div className="rounded-2xl border-2 border-dashed border-rose-200 bg-rose-50/50 p-4 space-y-3">
+    <div className="rounded-3xl border-2 border-dashed border-[#A8DAB5] bg-[#E6F4EA]/50 p-4 space-y-3">
       <div>
-        <p className="font-bold text-rose-600">🎁 보너스: 묶음 표제어 스펠링 시험</p>
-        <p className="mt-0.5 text-xs text-rose-400">
+        <p className="voca-display" style={{ color: VOCA_COLORS.greenDark, fontWeight: 700 }}>🎁 보너스: 묶음 표제어 스펠링 시험</p>
+        <p className="mt-0.5 text-xs" style={{ color: VOCA_COLORS.green }}>
           Day를 최대 {MAX_DAYS}개까지 골라 한 번에 시험! 선택해도 진도엔 영향 없어요 ({PASS}점 통과)
         </p>
       </div>
@@ -134,12 +135,12 @@ export function BonusExam({ days, bookId }: { days: VocaDay[]; bookId: string })
               key={d.id}
               onClick={() => toggle(d.id)}
               disabled={disabled}
-              className={`rounded-lg px-3 py-1.5 text-sm font-semibold transition-colors ${
+              className={`rounded-full px-3 py-1.5 text-sm font-semibold transition-colors ${
                 on
-                  ? 'bg-rose-500 text-white'
+                  ? 'bg-[#188038] text-white'
                   : disabled
                     ? 'bg-gray-100 text-gray-300 cursor-not-allowed'
-                    : 'bg-white text-rose-600 border border-rose-200 hover:bg-rose-50'
+                    : 'bg-white text-[#0D652D] border border-[#A8DAB5] hover:bg-[#E6F4EA]'
               }`}
             >
               {d.title}
@@ -151,7 +152,7 @@ export function BonusExam({ days, bookId }: { days: VocaDay[]; bookId: string })
       <button
         onClick={start}
         disabled={selected.length === 0 || mode === 'loading'}
-        className="w-full rounded-xl bg-rose-500 py-3 text-sm font-bold text-white transition-colors hover:bg-rose-600 disabled:bg-gray-300 disabled:cursor-not-allowed"
+        className="w-full rounded-full bg-[#188038] py-3 text-sm font-bold text-white transition-colors hover:bg-[#0D652D] disabled:bg-gray-300 disabled:cursor-not-allowed"
       >
         {mode === 'loading'
           ? '단어 불러오는 중...'

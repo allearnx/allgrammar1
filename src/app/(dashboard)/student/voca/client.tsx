@@ -8,7 +8,7 @@ import { CheckCircle, Lock, ChevronRight, ChevronDown, Search, BookOpen, BookMar
 import { BonusExam } from '@/components/voca/bonus-exam';
 import { AssignedExams } from '@/components/voca/assigned-exams';
 import { BookGuidePicker } from '@/components/voca/book-guide-picker';
-import { VocaBrandStyle, VocaHeroLetters, VOCA_COLORS } from '@/components/voca/voca-brand';
+import { VocaBrandStyle, VocaHeroLetters, VOCA_COLORS, VOCA_STEP_THEMES } from '@/components/voca/voca-brand';
 import { ParentLinkButton } from '@/components/voca/parent-link-button';
 import { CoverageGauge } from '@/components/voca/coverage-gauge';
 import { WrongMissionCard } from '@/components/voca/wrong-mission-card';
@@ -34,10 +34,7 @@ interface VocaHomeClientProps {
   expiresAt?: string | null;
 }
 
-// 구글 스타일: 교재별 색면 대신 단일 블루 포인트 (색은 절제, 흰 카드가 바탕)
-const BOOK_COLORS = [
-  { bg: '#1A73E8', light: '#E8F0FE', border: '#D2E3FC' },
-];
+// Day 배지·진행 바는 구글 4색 순환 (랜딩 statBand·7단계 카드와 같은 리듬)
 
 function getStepsDone(prog: VocaStudentProgress | undefined): number {
   if (!prog) return 0;
@@ -97,7 +94,7 @@ export function VocaHomeClient({ books, days, progressList, submissionStatuses =
         setSelectedBookId(saved);
       } else if (firstTimeGuide) {
         // 학습 기록도, 저장된 교재 선택도 없는 진짜 첫 진입 → 학년 가이드
-        setGuideOpen(true); // eslint-disable-line react-hooks/set-state-in-effect -- localStorage는 클라이언트에서만 읽을 수 있음
+        setGuideOpen(true);  
       }
     } catch { /* ignore */ }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -111,9 +108,6 @@ export function VocaHomeClient({ books, days, progressList, submissionStatuses =
       window.history.replaceState(null, '', `/student/voca?bookId=${id}`);
     } catch { /* ignore */ }
   };
-  const selectedIndex = Math.max(0, books.findIndex((b) => b.id === selectedBookId));
-  const bookColor = BOOK_COLORS[selectedIndex % BOOK_COLORS.length];
-
   const filteredDays = useMemo(
     () => days.filter((d) => d.book_id === selectedBookId),
     [days, selectedBookId]
@@ -188,22 +182,24 @@ export function VocaHomeClient({ books, days, progressList, submissionStatuses =
   }
 
   // 무료 한도 업그레이드 안내 — 체험 완료 시 상단, 그 전엔 하단에 표시
+  // /allkill 톤: 하늘 카드 + GmarketSans + 흰 플랜 카드 + 노란 CTA (문 두 개)
   const freeUpgradeNotice = freeDayLimit > 0 && filteredDays.length > freeDayLimit ? (
     <div className="space-y-4">
           {/* 헤더 카드 */}
-          <div className="rounded-2xl overflow-hidden">
-            <div className="px-5 py-6 text-center text-white" style={{ background: 'linear-gradient(135deg, #0891B2, #4285F4)' }}>
+          <div className="relative overflow-hidden rounded-3xl px-5 py-8 text-center" style={{ background: VOCA_COLORS.sky }}>
+            <VocaHeroLetters />
+            <div className="relative z-10">
               <div className="flex justify-center mb-3">
-                <div className="rounded-full bg-white/20 p-3">
-                  <Sparkles className="h-6 w-6" />
+                <div className="rounded-full bg-white p-3 shadow-sm">
+                  <Sparkles className="h-6 w-6" style={{ color: VOCA_COLORS.blue }} />
                 </div>
               </div>
-              <h3 className="text-lg font-bold mb-1">
+              <h3 className="voca-display text-lg md:text-xl mb-2" style={{ color: VOCA_COLORS.ink, fontWeight: 700, wordBreak: 'keep-all' }}>
                 {freeTrialDone
-                  ? `무료 체험 Day ${freeDayLimit}개를 완료했어요! 🎉`
-                  : `무료 체험으로 Day ${freeDayLimit}개까지 학습할 수 있어요`}
+                  ? <>무료 체험 Day {freeDayLimit}개를 완료했어요<span style={{ color: VOCA_COLORS.blue }}>!</span> 🎉</>
+                  : <>무료 체험으로 Day {freeDayLimit}개까지 학습할 수 있어요<span style={{ color: VOCA_COLORS.blue }}>.</span></>}
               </h3>
-              <p className="text-sm text-cyan-100 leading-relaxed">
+              <p className="text-sm leading-relaxed" style={{ color: VOCA_COLORS.gray }}>
                 {freeTrialDone
                   ? `전체 ${filteredDays.length}개 Day + 2회독을 열려면 아래 방법 중 하나를 선택하세요`
                   : `전체 ${filteredDays.length}개 Day를 학습하려면 아래 방법 중 하나를 선택하세요`}
@@ -213,23 +209,23 @@ export function VocaHomeClient({ books, days, progressList, submissionStatuses =
 
           {/* 플랜 카드 */}
           <div className="grid grid-cols-1 gap-3">
-            {/* 셀프 스터디 */}
+            {/* 셀프 스터디 — 가벼운 문 */}
             <Link href="/allkill#price" className="block group">
-              <div className="rounded-xl border-2 border-cyan-200 bg-gradient-to-br from-cyan-50 to-white p-5 transition-all group-hover:border-cyan-400 group-hover:shadow-md">
+              <div className="rounded-3xl border border-white bg-white p-5 shadow-sm transition-all group-hover:-translate-y-0.5 group-hover:shadow-lg">
                 <div className="flex items-start gap-3">
-                  <div className="rounded-lg bg-cyan-100 p-2 shrink-0">
-                    <BookOpen className="h-5 w-5 text-cyan-600" />
+                  <div className="rounded-xl p-2 shrink-0" style={{ background: VOCA_COLORS.blueLight }}>
+                    <BookOpen className="h-5 w-5" style={{ color: VOCA_COLORS.blue }} />
                   </div>
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2 mb-1">
-                      <h4 className="font-bold text-cyan-900">셀프 스터디</h4>
-                      <span className="text-[10px] font-bold bg-cyan-600 text-white px-2 py-0.5 rounded-full">월 19,900원</span>
+                      <h4 className="voca-display" style={{ color: VOCA_COLORS.ink, fontWeight: 700 }}>셀프 스터디</h4>
+                      <span className="text-[10px] font-bold px-2 py-0.5 rounded-full" style={{ background: VOCA_COLORS.blueLight, color: VOCA_COLORS.blueDark }}>월 19,900원</span>
                     </div>
-                    <p className="text-xs text-cyan-700 leading-relaxed mb-3">
+                    <p className="text-xs leading-relaxed mb-3" style={{ color: VOCA_COLORS.gray }}>
                       혼자서도 전체 Day + 1회독·2회독 완벽 학습!<br />
                       오답 관리와 AI 서술형 채점까지 포함
                     </p>
-                    <div className="flex items-center gap-1.5 text-xs font-semibold text-cyan-600">
+                    <div className="flex items-center gap-1.5 text-xs font-bold" style={{ color: VOCA_COLORS.blue }}>
                       플랜 보러가기
                       <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
                     </div>
@@ -238,26 +234,29 @@ export function VocaHomeClient({ books, days, progressList, submissionStatuses =
               </div>
             </Link>
 
-            {/* 1:1 온라인 관리 */}
+            {/* 1:1 온라인 관리 — 큰 문 (추천, 노란 CTA) */}
             <Link href="/allkill#price" className="block group">
-              <div className="rounded-xl border-2 border-[#d2e3fc] bg-gradient-to-br from-[#e8f0fe] to-white p-5 transition-all group-hover:border-primary group-hover:shadow-md">
+              <div className="rounded-3xl bg-white p-5 shadow-sm ring-2 ring-[#1A73E8] transition-all group-hover:-translate-y-0.5 group-hover:shadow-lg">
                 <div className="flex items-start gap-3">
-                  <div className="rounded-lg bg-accent p-2 shrink-0">
-                    <Users className="h-5 w-5 text-primary" />
+                  <div className="rounded-xl p-2 shrink-0" style={{ background: VOCA_COLORS.yellowLight }}>
+                    <Users className="h-5 w-5" style={{ color: VOCA_COLORS.yellowDark }} />
                   </div>
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2 mb-1">
-                      <h4 className="font-bold text-[#174ea6]">1:1 온라인 관리</h4>
-                      <span className="text-[10px] font-bold bg-primary text-white px-2 py-0.5 rounded-full">추천</span>
+                      <h4 className="voca-display" style={{ color: VOCA_COLORS.ink, fontWeight: 700 }}>1:1 온라인 관리</h4>
+                      <span className="text-[10px] font-bold px-2 py-0.5 rounded-full text-white" style={{ background: VOCA_COLORS.blue }}>추천</span>
                     </div>
-                    <p className="text-xs text-[#174ea6] leading-relaxed mb-3">
+                    <p className="text-xs leading-relaxed mb-3" style={{ color: VOCA_COLORS.gray }}>
                       선생님이 주 2회 시험 + 진도 관리해줘요.<br />
                       학부모 리포트까지 제공!
                     </p>
-                    <div className="flex flex-wrap gap-1.5">
+                    <div className="flex flex-wrap items-center gap-1.5">
                       {['선생님 관리', '주 2회 시험', '학부모 리포트'].map((tag) => (
-                        <span key={tag} className="text-[11px] bg-accent text-[#174ea6] px-2 py-0.5 rounded-full font-medium">{tag}</span>
+                        <span key={tag} className="text-[11px] px-2 py-0.5 rounded-full font-medium" style={{ background: VOCA_COLORS.blueLight, color: VOCA_COLORS.blueDark }}>{tag}</span>
                       ))}
+                      <span className="voca-cta voca-display ml-auto rounded-full px-4 py-1.5 text-xs" style={{ fontWeight: 700 }}>
+                        시작하기
+                      </span>
                     </div>
                   </div>
                 </div>
@@ -265,13 +264,13 @@ export function VocaHomeClient({ books, days, progressList, submissionStatuses =
             </Link>
 
             {/* 학원 배정 */}
-            <div className="rounded-xl border border-gray-200 bg-white p-5">
+            <div className="rounded-3xl border border-gray-100 bg-white p-5">
               <div className="flex items-start gap-3">
-                <div className="rounded-lg bg-gray-100 p-2 shrink-0">
+                <div className="rounded-xl bg-gray-100 p-2 shrink-0">
                   <GraduationCap className="h-5 w-5 text-gray-500" />
                 </div>
                 <div className="flex-1 min-w-0">
-                  <h4 className="font-bold text-gray-900 mb-1">학원에서 배정받기</h4>
+                  <h4 className="voca-display mb-1" style={{ color: VOCA_COLORS.ink, fontWeight: 700 }}>학원에서 배정받기</h4>
                   <p className="text-xs text-gray-500 leading-relaxed">
                     학원에 소속되어 있다면 선생님께 &ldquo;올킬보카 배정&rdquo;을 요청해보세요!
                   </p>
@@ -357,9 +356,9 @@ export function VocaHomeClient({ books, days, progressList, submissionStatuses =
       {freeTrialDone && freeUpgradeNotice}
 
       {/* Round mode toggle */}
-      <div className="rounded-2xl border bg-white p-4 space-y-3">
+      <div className="rounded-3xl border bg-white p-4 space-y-3">
         <div className="flex items-center justify-between">
-          <p className="text-sm font-bold text-gray-800">학습 방식</p>
+          <p className="voca-display text-sm text-gray-800" style={{ fontWeight: 700 }}>학습 방식</p>
           <div className="flex rounded-lg border border-gray-200 overflow-hidden">
             <button
               onClick={() => handleModeChange('book')}
@@ -416,11 +415,12 @@ export function VocaHomeClient({ books, days, progressList, submissionStatuses =
             const steps = getStepsDone(prog);
             const completed = isR1Complete(prog ?? null);
             const locked = freeDayLimit > 0 && index >= freeDayLimit;
+            const dayColor = VOCA_STEP_THEMES[index % VOCA_STEP_THEMES.length].solid;
 
             if (locked) {
               return (
                 <div key={day.id} className="flex items-center gap-4 rounded-xl border border-gray-100 bg-gray-50/60 px-4 py-3.5 opacity-50">
-                  <DayBadge index={index} color={bookColor} variant="locked" />
+                  <DayBadge index={index} color={dayColor} variant="locked" />
                   <p className="flex-1 font-medium text-gray-400 text-sm">
                     {day.title}
                     {day.description && (
@@ -472,9 +472,9 @@ export function VocaHomeClient({ books, days, progressList, submissionStatuses =
                     ? 'border-green-200 bg-green-50/40'
                     : 'border-gray-200 bg-white hover:border-[#d2e3fc]'
                 }`}>
-                  <DayBadge index={index} color={bookColor} variant={isCompleted ? 'done' : 'default'} />
+                  <DayBadge index={index} color={dayColor} variant={isCompleted ? 'done' : 'default'} />
                   <div className="flex-1 min-w-0">
-                    <p className={`font-semibold text-[15px] truncate ${isCompleted ? 'text-green-700' : 'text-gray-800'}`}>
+                    <p className={`voca-display text-[15px] truncate ${isCompleted ? 'text-green-700' : 'text-gray-800'}`} style={{ fontWeight: 700 }}>
                       {day.title}
                       {day.description && (
                         <span className="ml-2 text-[11px] font-normal text-gray-300">{day.description}</span>
@@ -492,7 +492,7 @@ export function VocaHomeClient({ books, days, progressList, submissionStatuses =
                               className="h-1 rounded-full transition-all"
                               style={{
                                 width: i < stepsNow ? 16 : 8,
-                                background: i < stepsNow ? bookColor.bg : '#e5e7eb',
+                                background: i < stepsNow ? dayColor : '#e5e7eb',
                               }}
                             />
                           ))}
@@ -562,7 +562,7 @@ function BookSelector({ books, selectedBookId, onSelect }: { books: VocaBook[]; 
       >
         <span className="flex min-w-0 items-center gap-2">
           <BookOpen className="h-4 w-4 shrink-0 text-gray-400" />
-          <span className="truncate font-bold text-gray-800">{selected?.title || '교재 선택'}</span>
+          <span className="voca-display truncate text-gray-800" style={{ fontWeight: 700 }}>{selected?.title || '교재 선택'}</span>
           <span className="shrink-0 text-xs font-medium text-gray-400">{books.length}권</span>
         </span>
         <ChevronDown className={`h-4 w-4 shrink-0 text-gray-400 transition-transform ${open ? 'rotate-180' : ''}`} />
@@ -609,7 +609,7 @@ function BookSelector({ books, selectedBookId, onSelect }: { books: VocaBook[]; 
   );
 }
 
-function DayBadge({ index, color, variant }: { index: number; color: typeof BOOK_COLORS[0]; variant: 'default' | 'done' | 'locked' }) {
+function DayBadge({ index, color, variant }: { index: number; color: string; variant: 'default' | 'done' | 'locked' }) {
   if (variant === 'locked') {
     return (
       <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-gray-100 shrink-0">
@@ -627,9 +627,9 @@ function DayBadge({ index, color, variant }: { index: number; color: typeof BOOK
   return (
     <div
       className="flex items-center justify-center w-10 h-10 rounded-xl shrink-0"
-      style={{ background: color.bg }}
+      style={{ background: color }}
     >
-      <span className="text-sm font-bold text-white">{index + 1}</span>
+      <span className="voca-display text-sm text-white" style={{ fontWeight: 700 }}>{index + 1}</span>
     </div>
   );
 }
