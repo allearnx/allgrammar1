@@ -31,8 +31,7 @@ export default function FlowSection() {
           <span style={{ color: C.blue }}>통과할 때까지.</span>
         </h2>
         <p className="ak-sub" style={{ color: C.gray }}>
-          단계마다 통과 점수가 있어요. 두 번 연속 못 넘으면<br />
-          틀린 단어만 모아 다시 시험 — 모르는 단어는 끝까지 잡아요.
+          단계마다 통과 점수가 있어요. 두 번 연속 못 넘으면 틀린 단어만 모아 다시 시험 — 모르는 단어는 끝까지 잡아요.
         </p>
 
         {/* 1회독 */}

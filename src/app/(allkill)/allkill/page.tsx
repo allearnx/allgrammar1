@@ -45,9 +45,10 @@ export default async function AllkillPage() {
         .ak-btn-ghost { background: white; color: ${C.ink}; border: 1.5px solid ${C.line}; box-shadow: 0 4px 16px rgba(31,31,31,0.06); }
 
         /* 공용 타이포 */
-        .ak-badge { display: inline-block; background: ${C.blueLight}; color: ${C.blueDark}; font-size: 13px; font-weight: 800; padding: 6px 16px; border-radius: 100px; margin-bottom: 18px; }
+        .ak-badge { display: inline-block; background: ${C.blueLight}; color: ${C.blueDark}; font-size: clamp(15px, 1.5vw, 17px); font-weight: 800; padding: 11px 26px; border-radius: 100px; margin-bottom: 22px; }
+        .ak-badge-onsky { background: white; box-shadow: 0 4px 14px rgba(31,31,31,0.06); }
         .ak-h2 { font-family: 'GmarketSans', 'Pretendard', sans-serif; font-weight: 700; font-size: clamp(26px, 3.5vw, 42px); line-height: 1.35; letter-spacing: -0.5px; word-break: keep-all; }
-        .ak-sub { font-family: 'GmarketSans', 'Pretendard', sans-serif; font-weight: 500; font-size: clamp(17px, 1.9vw, 22px); line-height: 1.8; margin-top: 18px; word-break: keep-all; }
+        .ak-sub { font-family: 'GmarketSans', 'Pretendard', sans-serif; font-weight: 500; font-size: clamp(17px, 1.9vw, 22px); line-height: 1.8; margin-top: 18px; word-break: keep-all; text-wrap: balance; max-width: 680px; margin-left: auto; margin-right: auto; }
 
         /* 숫자 밴드 (원비온다 스타일) */
         .ak-statband { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }

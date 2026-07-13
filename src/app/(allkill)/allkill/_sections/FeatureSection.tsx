@@ -54,7 +54,7 @@ export default function FeatureSection() {
   return (
     <section className="ak-section" style={{ padding: '96px 24px', background: C.sky }}>
       <div style={{ maxWidth: 1080, margin: '0 auto', textAlign: 'center' }}>
-        <span className="ak-badge">차별점</span>
+        <span className="ak-badge ak-badge-onsky">차별점</span>
         <h2 className="ak-h2" style={{ color: C.ink }}>
           다른 단어장엔 없는 <span style={{ color: C.blue }}>세 가지</span>
         </h2>

@@ -27,7 +27,7 @@ export default function PricingSection({ vocaCourseId, vocaCoursePrice, selfStud
   return (
     <section id="price" className="ak-section" style={{ padding: '96px 24px', background: C.sky }}>
       <div style={{ maxWidth: 1080, margin: '0 auto', textAlign: 'center' }}>
-        <span className="ak-badge">가격</span>
+        <span className="ak-badge ak-badge-onsky">가격</span>
         <h2 className="ak-h2" style={{ color: C.ink }}>
           부담 없이 <span style={{ color: C.blue }}>시작하세요</span>
         </h2>
