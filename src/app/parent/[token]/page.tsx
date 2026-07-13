@@ -16,6 +16,23 @@ interface Props {
   searchParams: Promise<{ voca_day?: string; tab?: string }>;
 }
 
+// 올킬보카 성적표 공유 카드 — 4색 워드마크 + 슬로건 (루트 올라영 OG 대신)
+const ALLKILL_OG = {
+  url: 'https://www.allrounderenglish.co.kr/og-allkill.png',
+  width: 1200,
+  height: 630,
+  alt: '올킬보카 — 영어 단어, 알아서 전부 외워집니다',
+};
+const ALLKILL_SLOGAN = '영어 단어, 알아서 전부 외워집니다';
+
+// 일반 학습 리포트 공유 카드 — 올라영 로고 + 슬로건
+const OLLAYOUNG_OG = {
+  url: 'https://www.allrounderenglish.co.kr/og-ollayoung.png',
+  width: 1200,
+  height: 630,
+  alt: '올라영 — 영어 실력, 알아서 오릅니다',
+};
+
 export async function generateMetadata({ params, searchParams }: Props): Promise<Metadata> {
   const { token } = await params;
   const { voca_day: vocaDayId, tab } = await searchParams;
@@ -49,22 +66,22 @@ export async function generateMetadata({ params, searchParams }: Props): Promise
       const bookArr = dayRow.book as unknown as { title: string }[] | null;
       const bookTitle = bookArr?.[0]?.title ?? '올킬보카';
       const title = `${name} 올킬보카 성적표`;
-      const description = `${bookTitle} · Day ${dayRow.day_number} — ${dayRow.title}`;
+      const description = `${ALLKILL_SLOGAN} · ${bookTitle} Day ${dayRow.day_number} — ${dayRow.title}`;
       return {
         title,
         description,
-        openGraph: { title, description },
+        openGraph: { title, description, images: [ALLKILL_OG] },
       };
     }
   }
 
   if (tab === 'voca') {
     const title = `${name} 올킬보카 성적표`;
-    const description = '올킬보카 학습 현황 및 점수';
+    const description = `${ALLKILL_SLOGAN} · 올킬보카 학습 현황 및 점수`;
     return {
       title,
       description,
-      openGraph: { title, description },
+      openGraph: { title, description, images: [ALLKILL_OG] },
     };
   }
 
@@ -73,7 +90,7 @@ export async function generateMetadata({ params, searchParams }: Props): Promise
   return {
     title,
     description,
-    openGraph: { title, description },
+    openGraph: { title, description, images: [OLLAYOUNG_OG] },
   };
 }
 
