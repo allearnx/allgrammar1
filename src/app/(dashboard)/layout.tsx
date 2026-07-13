@@ -49,13 +49,12 @@ export default async function DashboardLayout({
   if (user.role === 'student') {
     services = await getCachedServices(user.id);
 
-    // 무료 개인 학생: 보카·내신 왔다갔다 허용 — 사이드바에 두 메뉴 모두 노출
+    // 무료 tier(개인·학원 공통): 보카·내신 둘 다 체험 가능하므로 사이드바에 두 메뉴 모두 노출.
+    // 첫 화면 안내 "나머지도 사이드 메뉴에서 언제든 체험" 카피와 동작 일치.
     // (각 서비스의 무료 한도는 페이지에서 적용: 보카 3 Day, 내신 1단원·암기 3종)
-    if (!user.academy_id && services.length > 0) {
-      const planContext = await getPlanContext(user.academy_id, user.id);
-      if (planContext.tier === 'free') {
-        services = [...new Set([...services, 'naesin', 'voca'])];
-      }
+    const { tier } = await getPlanContext(user.academy_id, user.id);
+    if (tier === 'free') {
+      services = [...new Set([...services, 'naesin', 'voca'])];
     }
 
     // Fetch naesin sidebar tree if student has naesin service (cached 60s)
