@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { createAdminClient } from '@/lib/supabase/admin';
+import { ALLKILL_OG, ALLKILL_SLOGAN, OLLAYOUNG_OG } from '@/lib/og-cards';
 import { NaesinProgressCard } from '@/components/dashboard/naesin-progress-card';
 import { VocaProgressCard } from '@/components/dashboard/voca-progress-card';
 import { VocaExamReportCard } from '@/components/dashboard/voca-exam-report-card';
@@ -16,22 +17,6 @@ interface Props {
   searchParams: Promise<{ voca_day?: string; tab?: string }>;
 }
 
-// 올킬보카 성적표 공유 카드 — 4색 워드마크 + 슬로건 (루트 올라영 OG 대신)
-const ALLKILL_OG = {
-  url: 'https://www.allrounderenglish.co.kr/og-allkill.png',
-  width: 1200,
-  height: 630,
-  alt: '올킬보카 — 영어 단어, 알아서 전부 외워집니다',
-};
-const ALLKILL_SLOGAN = '영어 단어, 알아서 전부 외워집니다';
-
-// 일반 학습 리포트 공유 카드 — 올라영 로고 + 슬로건
-const OLLAYOUNG_OG = {
-  url: 'https://www.allrounderenglish.co.kr/og-ollayoung.png',
-  width: 1200,
-  height: 630,
-  alt: '올라영 — 영어 실력, 알아서 오릅니다',
-};
 
 export async function generateMetadata({ params, searchParams }: Props): Promise<Metadata> {
   const { token } = await params;

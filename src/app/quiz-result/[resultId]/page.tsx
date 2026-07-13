@@ -3,6 +3,7 @@ import { createAdminClient } from '@/lib/supabase/admin';
 import { Card, CardContent } from '@/components/ui/card';
 import { cn } from '@/lib/utils';
 import type { Metadata } from 'next';
+import { OLLAYOUNG_OG, OLLAYOUNG_SLOGAN } from '@/lib/og-cards';
 
 interface Props {
   params: Promise<{ resultId: string }>;
@@ -19,11 +20,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     .returns<{ score: number; users: { full_name: string } | null }[]>()
     .single();
 
-  if (!data) return { title: '퀴즈 결과' };
+  if (!data) return { title: '퀴즈 결과', openGraph: { images: [OLLAYOUNG_OG] } };
 
   const studentName = data.users?.full_name || '학생';
+  const title = `${studentName}의 단어 퀴즈 결과 - ${data.score}점`;
+  const description = `${OLLAYOUNG_SLOGAN} · 단어 퀴즈 결과`;
   return {
-    title: `${studentName}의 단어 퀴즈 결과 - ${data.score}점`,
+    title,
+    description,
+    openGraph: { title, description, images: [OLLAYOUNG_OG] },
   };
 }
 

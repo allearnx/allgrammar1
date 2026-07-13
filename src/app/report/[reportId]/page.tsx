@@ -5,6 +5,7 @@ import { Badge } from '@/components/ui/badge';
 import { MetricCard } from '@/components/shared/metric-card';
 import type { Metadata } from 'next';
 import type { EnhancedReportData } from '@/types/report';
+import { OLLAYOUNG_OG, OLLAYOUNG_SLOGAN } from '@/lib/og-cards';
 
 interface Props {
   params: Promise<{ reportId: string }>;
@@ -20,12 +21,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     .eq('id', reportId)
     .single();
 
-  if (!data) return { title: '학습 리포트' };
+  if (!data) return { title: '학습 리포트', openGraph: { images: [OLLAYOUNG_OG] } };
 
   const stats = data.stats as unknown as EnhancedReportData;
   const studentName = stats.student?.split('(')[0]?.trim() || '학생';
+  const title = `${studentName} 학습 리포트 (${data.week_start} ~ ${data.week_end})`;
+  const description = `${OLLAYOUNG_SLOGAN} · 주간 학습 리포트`;
   return {
-    title: `${studentName} 학습 리포트 (${data.week_start} ~ ${data.week_end})`,
+    title,
+    description,
+    openGraph: { title, description, images: [OLLAYOUNG_OG] },
   };
 }
 
