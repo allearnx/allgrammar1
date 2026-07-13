@@ -30,7 +30,7 @@ export default function HeroSection() {
           중고등 영어 단어 암기, 올킬보카
         </p>
 
-        <h1 className="ak-hero-title" style={{ fontSize: 'clamp(40px, 6.5vw, 76px)', fontWeight: 900, color: C.ink, lineHeight: 1.22, letterSpacing: '-1px', marginBottom: 28, wordBreak: 'keep-all' }}>
+        <h1 className="ak-hero-title ak-display" style={{ fontSize: 'clamp(34px, 5.5vw, 62px)', color: C.ink, lineHeight: 1.3, letterSpacing: '-1px', marginBottom: 28, wordBreak: 'keep-all' }}>
           <span
             style={{
               display: 'inline-block',
@@ -44,7 +44,7 @@ export default function HeroSection() {
             {rollingWords[index]}
           </span>{' '}
           단어,<br />
-          이제 올킬<span style={{ color: C.blue }}>.</span>
+          알아서 전부 외워집니다<span style={{ color: C.blue }}>.</span>
         </h1>
 
         <p style={{ fontSize: 'clamp(16px, 1.8vw, 21px)', color: C.gray, lineHeight: 1.7, marginBottom: 44, wordBreak: 'keep-all' }}>

@@ -6,7 +6,7 @@ export default function FinalCtaSection() {
   return (
     <section style={{ background: C.blue, padding: '100px 24px', textAlign: 'center' }}>
       <div style={{ maxWidth: 640, margin: '0 auto' }}>
-        <h2 style={{ fontSize: 'clamp(30px, 4vw, 52px)', fontWeight: 900, color: 'white', marginBottom: 16, lineHeight: 1.3, wordBreak: 'keep-all' }}>
+        <h2 className="ak-display" style={{ fontSize: 'clamp(28px, 3.8vw, 48px)', color: 'white', marginBottom: 16, lineHeight: 1.35, wordBreak: 'keep-all' }}>
           영어 단어,<br />이번엔 진짜 끝내요.
         </h2>
         <p style={{ fontSize: 'clamp(15px, 1.6vw, 19px)', color: 'rgba(255,255,255,0.8)', marginBottom: 40, lineHeight: 1.7 }}>

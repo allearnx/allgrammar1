@@ -15,6 +15,6 @@ export const config = {
      * - api (API routes - they handle their own auth)
      * - sw.js (서비스워커 — 리다이렉트되면 PWA 등록 실패)
      */
-    '/((?!_next/static|_next/image|favicon.ico|sw.js|api|.*\\.(?:svg|png|jpg|jpeg|gif|webp|xml)$).*)',
+    '/((?!_next/static|_next/image|favicon.ico|sw.js|api|.*\\.(?:svg|png|jpg|jpeg|gif|webp|xml|woff|woff2|ttf)$).*)',
   ],
 };

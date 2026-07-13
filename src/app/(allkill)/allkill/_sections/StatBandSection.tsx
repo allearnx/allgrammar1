@@ -7,7 +7,7 @@ export default function StatBandSection() {
       <div className="ak-statband" style={{ maxWidth: 1080, margin: '0 auto' }}>
         {statBand.map((stat) => (
           <div key={stat.num} style={{ textAlign: 'center' }}>
-            <div style={{ fontSize: 'clamp(36px, 4.5vw, 56px)', fontWeight: 900, color: stat.color, lineHeight: 1.1, marginBottom: 10, letterSpacing: '-1px' }}>
+            <div className="ak-display" style={{ fontSize: 'clamp(36px, 4.5vw, 56px)', color: stat.color, lineHeight: 1.1, marginBottom: 10, letterSpacing: '-1px' }}>
               {stat.num}
             </div>
             <div style={{ fontSize: 'clamp(13px, 1.4vw, 16px)', fontWeight: 600, color: C.gray, wordBreak: 'keep-all' }}>

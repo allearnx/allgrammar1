@@ -46,7 +46,7 @@ export default async function AllkillPage() {
 
         /* 공용 타이포 */
         .ak-badge { display: inline-block; background: ${C.blueLight}; color: ${C.blueDark}; font-size: 13px; font-weight: 800; padding: 6px 16px; border-radius: 100px; margin-bottom: 18px; }
-        .ak-h2 { font-size: clamp(28px, 3.8vw, 46px); font-weight: 900; line-height: 1.3; letter-spacing: -0.5px; word-break: keep-all; }
+        .ak-h2 { font-family: 'GmarketSans', 'Pretendard', sans-serif; font-weight: 700; font-size: clamp(26px, 3.5vw, 42px); line-height: 1.35; letter-spacing: -0.5px; word-break: keep-all; }
         .ak-sub { font-size: clamp(15px, 1.6vw, 19px); line-height: 1.8; margin-top: 16px; word-break: keep-all; }
 
         /* 숫자 밴드 (원비온다 스타일) */
@@ -72,7 +72,7 @@ export default async function AllkillPage() {
         .ak-price-grid { display: flex; gap: 20px; align-items: stretch; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; padding: 20px 4px 8px; }
         .ak-price-grid > * { scroll-snap-align: start; flex: 0 0 calc((100% - 60px) / 4); min-width: 240px; }
         .ak-price-card { background: white; border: 1px solid ${C.line}; border-radius: 20px; padding: 36px 28px; display: flex; flex-direction: column; text-align: left; }
-        .ak-price-amount { font-size: clamp(32px, 3vw, 44px); font-weight: 900; margin-bottom: 6px; letter-spacing: -0.5px; }
+        .ak-price-amount { font-family: 'GmarketSans', 'Pretendard', sans-serif; font-weight: 700; font-size: clamp(30px, 2.8vw, 40px); margin-bottom: 6px; letter-spacing: -0.5px; }
         .ak-price-unit { font-size: 18px; font-weight: 600; color: ${C.grayLight}; }
 
         /* 교재 마퀴 */
