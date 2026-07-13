@@ -83,7 +83,7 @@ export function DeleteAccountDialog({
             계정을 삭제하면 되돌릴 수 없습니다.
           </DialogDescription>
         </DialogHeader>
-        <div className="rounded-md border border-red-200 bg-red-50 p-3 text-sm text-red-700">
+        <div className="rounded-xl border border-red-200 bg-red-50 p-3 text-sm text-red-700">
           {warning}
         </div>
         <form onSubmit={handleSubmit} className="space-y-4">
@@ -98,6 +98,7 @@ export function DeleteAccountDialog({
               minLength={6}
               placeholder="현재 비밀번호를 입력하세요"
               autoComplete="current-password"
+              className="rounded-xl h-11"
             />
           </div>
           <div className="space-y-2">
@@ -110,14 +111,16 @@ export function DeleteAccountDialog({
               onChange={(e) => setConfirmText(e.target.value)}
               placeholder={CONFIRM_TEXT}
               autoComplete="off"
+              className="rounded-xl h-11"
             />
           </div>
           <DialogFooter>
+            {/* 위험 동작 — 노랑 대신 빨강(destructive) 유지, 모양만 알약으로 톤 통일 */}
             <Button
               type="submit"
               disabled={loading || confirmText !== CONFIRM_TEXT}
               variant="destructive"
-              className="w-full"
+              className="w-full h-12 rounded-full font-bold text-[15px]"
             >
               {loading ? '삭제 중...' : '계정 삭제'}
             </Button>

@@ -87,6 +87,7 @@ export function ChangePasswordDialog() {
               required
               minLength={6}
               autoComplete="current-password"
+              className="rounded-xl h-11"
             />
           </div>
           <div className="space-y-2">
@@ -100,6 +101,7 @@ export function ChangePasswordDialog() {
               minLength={6}
               placeholder="6자 이상"
               autoComplete="new-password"
+              className="rounded-xl h-11"
             />
           </div>
           <div className="space-y-2">
@@ -112,10 +114,16 @@ export function ChangePasswordDialog() {
               required
               minLength={6}
               autoComplete="new-password"
+              className="rounded-xl h-11"
             />
           </div>
           <DialogFooter>
-            <Button type="submit" disabled={loading} className="w-full">
+            {/* 긍정 primary — 인증 흐름 노란 CTA와 통일 (재설정 페이지와 짝) */}
+            <Button
+              type="submit"
+              disabled={loading}
+              className="w-full h-12 rounded-full font-bold text-[15px] bg-[#FDD663] text-[#1F1F1F] hover:bg-[#f5cb3f] shadow-[0_6px_20px_rgba(253,214,99,0.45)]"
+            >
               {loading ? '변경 중...' : '비밀번호 변경'}
             </Button>
           </DialogFooter>
