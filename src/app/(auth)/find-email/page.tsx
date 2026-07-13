@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { fetchWithToast } from '@/lib/fetch-with-toast';
+import { AuthBrandBg } from '@/components/auth/auth-brand-bg';
 
 export default function FindEmailPage() {
   const [name, setName] = useState('');
@@ -31,20 +32,22 @@ export default function FindEmailPage() {
   }
 
   return (
-    <div className="flex min-h-screen items-center justify-center px-4 bg-gradient-to-b from-slate-50 to-white">
-      <div className="w-full max-w-md">
+    <div className="relative flex min-h-screen items-center justify-center overflow-hidden px-4 py-12" style={{ background: '#DFEFFF' }}>
+      <AuthBrandBg />
+
+      <div className="relative z-10 w-full max-w-md">
         <div className="text-center mb-8">
           <Link href="/">
-            <Image src="/logo.png" alt="올라영" width={80} height={80} className="mx-auto rounded-2xl shadow-lg shadow-brand-200/50" />
+            <Image src="/logo.png" alt="올라영" width={72} height={72} className="mx-auto rounded-2xl shadow-lg shadow-brand-200/50" />
           </Link>
-          <h1 className="mt-5 text-2xl font-black text-[#1d1d1f] tracking-tight">이메일 찾기</h1>
-          <p className="mt-2 text-[#86868b]">가입 시 등록한 이름과 전화번호로 이메일을 찾습니다</p>
+          <h1 className="auth-display mt-5 text-3xl text-[#1F1F1F] tracking-tight" style={{ fontWeight: 700 }}>이메일 찾기</h1>
+          <p className="auth-display mt-2 text-[#3C4043]" style={{ fontWeight: 500 }}>가입 시 등록한 이름과 전화번호로 이메일을 찾습니다</p>
         </div>
 
-        <div className="rounded-3xl p-8 bg-white/70 backdrop-blur-xl border border-gray-200/50 shadow-xl shadow-gray-200/50">
+        <div className="rounded-3xl p-8 bg-white border border-gray-200/60 shadow-xl shadow-[#1A73E8]/5">
           <form onSubmit={handleSubmit} className="space-y-5">
             <div>
-              <label htmlFor="name" className="block text-sm font-bold text-slate-700 mb-2">이름</label>
+              <label htmlFor="name" className="block text-sm font-bold text-[#1F1F1F] mb-2">이름</label>
               <input
                 id="name"
                 type="text"
@@ -54,11 +57,11 @@ export default function FindEmailPage() {
                 required
                 autoComplete="name"
                 disabled={loading}
-                className="w-full px-5 py-4 border-2 border-gray-200 rounded-2xl focus:ring-4 focus:ring-brand-100 focus:border-brand-400 transition-all text-slate-800 placeholder:text-slate-400 font-medium bg-white/80 outline-none"
+                className="w-full px-5 py-4 border-2 border-gray-200 rounded-2xl focus:ring-4 focus:ring-brand-100 focus:border-brand-400 transition-all text-slate-800 placeholder:text-slate-400 font-medium bg-white outline-none"
               />
             </div>
             <div>
-              <label htmlFor="phone" className="block text-sm font-bold text-slate-700 mb-2">전화번호</label>
+              <label htmlFor="phone" className="block text-sm font-bold text-[#1F1F1F] mb-2">전화번호</label>
               <input
                 id="phone"
                 type="tel"
@@ -68,35 +71,36 @@ export default function FindEmailPage() {
                 required
                 autoComplete="tel"
                 disabled={loading}
-                className="w-full px-5 py-4 border-2 border-gray-200 rounded-2xl focus:ring-4 focus:ring-brand-100 focus:border-brand-400 transition-all text-slate-800 placeholder:text-slate-400 font-medium bg-white/80 outline-none"
+                className="w-full px-5 py-4 border-2 border-gray-200 rounded-2xl focus:ring-4 focus:ring-brand-100 focus:border-brand-400 transition-all text-slate-800 placeholder:text-slate-400 font-medium bg-white outline-none"
               />
             </div>
 
             {maskedEmail && (
-              <div className="rounded-2xl bg-green-50 border-2 border-green-200 p-5 text-center">
-                <p className="text-sm text-[#86868b]">찾은 이메일</p>
-                <p className="text-lg font-bold text-green-700 mt-1">{maskedEmail}</p>
+              <div className="rounded-2xl border-2 p-5 text-center" style={{ background: '#E6F4EA', borderColor: '#9FE1CB' }}>
+                <p className="text-sm text-[#3C4043]">찾은 이메일</p>
+                <p className="text-lg font-bold mt-1" style={{ color: '#0D652D' }}>{maskedEmail}</p>
               </div>
             )}
 
             <button
               type="submit"
               disabled={loading}
-              className="w-full py-4 bg-gradient-to-r from-brand-500 to-brand-500 hover:from-brand-600 hover:to-brand-600 text-white text-lg font-bold rounded-2xl transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-brand-300/30"
+              className="auth-cta auth-display w-full py-4 text-lg rounded-full transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+              style={{ fontWeight: 700 }}
             >
               {loading ? '찾는 중...' : '이메일 찾기'}
             </button>
           </form>
 
           <p className="mt-6 text-center">
-            <Link href="/login" className="text-sm text-[#86868b] hover:text-brand-600 transition-colors">
+            <Link href="/login" className="text-sm text-[#3C4043] hover:text-[#1A73E8] transition-colors">
               로그인으로 돌아가기
             </Link>
           </p>
         </div>
 
         <p className="mt-3 text-center">
-          <Link href="/" className="text-sm text-[#86868b] hover:text-brand-600 transition-colors">&larr; 홈으로 돌아가기</Link>
+          <Link href="/" className="text-sm text-[#3C4043] hover:text-[#1A73E8] transition-colors">&larr; 홈으로 돌아가기</Link>
         </p>
       </div>
     </div>
