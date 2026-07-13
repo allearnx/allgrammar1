@@ -47,9 +47,9 @@ export function Sidebar({ user, services, naesinTree }: SidebarProps) {
   const sidebarContent = (
     <div className="flex h-full flex-col">
       <div className="flex h-14 items-center border-b border-sidebar-border px-4">
-        <span className="flex items-center gap-2 font-bold text-slate-900">
+        <span className="flex items-center gap-2 text-slate-900">
           <Image src="/logo.png" alt="올라영" width={36} height={36} className="h-9 w-9 shrink-0 rounded-lg object-contain" />
-          <span>올라영</span>
+          <span className="brand-display text-[17px]" style={{ fontWeight: 700 }}>올라영</span>
         </span>
       </div>
       <ScrollArea className="flex-1 min-h-0 py-3">

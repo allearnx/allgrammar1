@@ -204,6 +204,11 @@
   animation-play-state: paused;
 }
 
+/* ===== 브랜드 디스플레이 폰트 (로그인·/allkill 랜딩과 동일 — 워드마크·히어로 제목용) ===== */
+@font-face { font-family: 'GmarketSans'; font-weight: 700; src: url('/fonts/GmarketSansBold.woff') format('woff'); font-display: swap; }
+@font-face { font-family: 'GmarketSans'; font-weight: 500; src: url('/fonts/GmarketSansMedium.woff') format('woff'); font-display: swap; }
+.brand-display { font-family: 'GmarketSans', 'Pretendard', sans-serif; }
+
 /* ===== Paper Test: Print Styles ===== */
 @media print {
   /* Hide chrome */

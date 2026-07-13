@@ -48,7 +48,7 @@ export function NavLinks({
                 <div key={item.href}>
                   <span
                     aria-disabled="true"
-                    className="flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium pointer-events-none cursor-default text-slate-300"
+                    className="flex items-center gap-3 rounded-full px-3 py-2 text-sm font-medium pointer-events-none cursor-default text-slate-300"
                   >
                     <item.icon className="h-4 w-4 shrink-0 text-slate-300" />
                     {item.label}
@@ -63,9 +63,9 @@ export function NavLinks({
                   href={item.href}
                   onClick={() => onNavigate?.()}
                   className={cn(
-                    'flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-colors relative',
+                    'flex items-center gap-3 rounded-full px-3 py-2 text-sm font-medium transition-colors relative',
                     isActive
-                      ? 'bg-brand-50 text-brand-600 border-l-[3px] border-brand-600 pl-[9px]'
+                      ? 'bg-brand-50 text-brand-600 font-semibold'
                       : hoverWhite
                         ? 'text-slate-500 hover:bg-white hover:text-slate-900'
                         : 'text-slate-500 hover:bg-slate-100 hover:text-slate-900'
