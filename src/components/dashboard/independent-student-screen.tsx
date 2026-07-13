@@ -73,24 +73,24 @@ const CATEGORY_LABEL: Record<string, string> = {
 
 export function IndependentStudentScreen({ userName, courses, isAcademy = false }: IndependentStudentScreenProps) {
   const router = useRouter();
-  const [selected, setSelected] = useState<FreeService>('voca');
-  const [loading, setLoading] = useState(false);
+  const [starting, setStarting] = useState<FreeService | null>(null);
   const [error, setError] = useState('');
   const [moreOpen, setMoreOpen] = useState(false);
 
-  async function handleSelectService() {
-    setLoading(true);
+  // 무료로 들어온 학생이라 별도 확인 버튼 없이 — 서비스 카드를 누르면 바로 시작
+  async function startService(service: FreeService) {
+    if (starting) return;
+    setStarting(service);
     setError('');
     try {
       await fetchWithToast('/api/student/select-free-service', {
-        body: { service: selected },
+        body: { service },
         silent: true,
       });
       router.refresh();
     } catch (err) {
       setError(err instanceof Error ? err.message : '네트워크 오류가 발생했습니다.');
-    } finally {
-      setLoading(false);
+      setStarting(null);
     }
   }
 
@@ -115,49 +115,38 @@ export function IndependentStudentScreen({ userName, courses, isAcademy = false 
             어떤 학습부터 시작할까요?
           </h2>
           <p className="text-center text-sm text-[#3C4043] mt-1 mb-5">
-            고른 쪽으로 바로 시작해요. 나머지도 사이드 메뉴에서 언제든 체험할 수 있어요.
+            누르면 바로 시작해요. 나머지도 사이드 메뉴에서 언제든 체험할 수 있어요.
           </p>
 
           <div className="grid grid-cols-2 gap-3">
             {SERVICE_OPTIONS.map((opt) => (
-              <label
+              <button
                 key={opt.value}
-                className={`flex flex-col items-center gap-2 rounded-2xl border-2 p-4 cursor-pointer transition-all ${
-                  selected === opt.value ? opt.activeColor : 'border-gray-200 hover:border-gray-300'
+                type="button"
+                onClick={() => startService(opt.value)}
+                disabled={!!starting}
+                className={`group relative flex flex-col items-center gap-2 rounded-2xl border-2 p-5 text-center transition-all hover:-translate-y-0.5 disabled:cursor-not-allowed ${
+                  starting === opt.value ? opt.activeColor : 'border-gray-200 hover:border-gray-300 disabled:opacity-60'
                 }`}
               >
-                <input
-                  type="radio"
-                  name="freeService"
-                  value={opt.value}
-                  checked={selected === opt.value}
-                  onChange={() => setSelected(opt.value)}
-                  className="sr-only"
-                />
-                {opt.icon}
+                {starting === opt.value ? (
+                  <Loader2 className="h-6 w-6 animate-spin" style={{ color: opt.value === 'voca' ? '#1A73E8' : '#188038' }} />
+                ) : (
+                  opt.icon
+                )}
                 <span className="text-sm font-bold text-[#1F1F1F]">{opt.label}</span>
-                <span className="text-xs text-[#3C4043] text-center leading-relaxed">{opt.desc}</span>
-              </label>
+                <span className="text-xs text-[#3C4043] leading-relaxed">{opt.desc}</span>
+                <span
+                  className="mt-1 text-xs font-bold"
+                  style={{ color: opt.value === 'voca' ? '#1A73E8' : '#188038' }}
+                >
+                  {starting === opt.value ? '시작하는 중…' : '바로 시작 →'}
+                </span>
+              </button>
             ))}
           </div>
 
           {error && <p className="text-sm text-[#D93025] text-center mt-4">{error}</p>}
-
-          <button
-            onClick={handleSelectService}
-            disabled={loading}
-            className="auth-cta auth-display w-full mt-5 py-4 text-lg rounded-full transition-all disabled:opacity-50 disabled:cursor-not-allowed inline-flex items-center justify-center"
-            style={{ fontWeight: 700 }}
-          >
-            {loading ? (
-              <>
-                <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-                시작하는 중...
-              </>
-            ) : (
-              '무료로 시작하기'
-            )}
-          </button>
         </div>
 
         {/* 부가 옵션(독립 학생만): 학원 합류 · 유료 코스 — 접어서 하단에 */}

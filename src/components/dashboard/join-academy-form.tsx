@@ -111,20 +111,38 @@ export function JoinAcademyForm({ compact = false }: { compact?: boolean } = {})
               <p className="text-sm text-destructive text-center">{error}</p>
             )}
 
-            <Button
-              type="submit"
-              className="w-full"
-              disabled={!academyName || submitting}
-            >
-              {submitting ? (
-                <>
-                  <Loader2 className="h-4 w-4 animate-spin mr-2" />
-                  연결 중...
-                </>
-              ) : (
-                '학원 연결'
-              )}
-            </Button>
+            {compact ? (
+              // 학생 첫 화면 — 브랜드 노란 CTA로 통일 (auth-cta는 같은 화면 AuthBrandBg가 주입)
+              <button
+                type="submit"
+                disabled={!academyName || submitting}
+                className="auth-cta auth-display w-full py-3.5 rounded-full font-bold inline-flex items-center justify-center transition-all disabled:opacity-45 disabled:cursor-not-allowed disabled:shadow-none"
+              >
+                {submitting ? (
+                  <>
+                    <Loader2 className="h-4 w-4 animate-spin mr-2" />
+                    연결 중...
+                  </>
+                ) : (
+                  '학원 연결'
+                )}
+              </button>
+            ) : (
+              <Button
+                type="submit"
+                className="w-full"
+                disabled={!academyName || submitting}
+              >
+                {submitting ? (
+                  <>
+                    <Loader2 className="h-4 w-4 animate-spin mr-2" />
+                    연결 중...
+                  </>
+                ) : (
+                  '학원 연결'
+                )}
+              </Button>
+            )}
           </form>
 
           {/* 프리랜서 선생님용 학원 만들기 안내 */}
