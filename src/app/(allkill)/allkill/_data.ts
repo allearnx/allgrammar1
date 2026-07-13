@@ -4,7 +4,7 @@ export const C = {
   gray: '#5F6368',
   grayLight: '#9AA0A6',
   line: '#E8EAED',
-  sky: '#EAF2FE',       // 파스텔 배경
+  sky: '#DFEFFF',       // 파스텔 하늘색 배경
   blue: '#1A73E8',      // 포인트 (롤링 워드, 강조)
   blueDark: '#174EA6',
   blueLight: '#E8F0FE',

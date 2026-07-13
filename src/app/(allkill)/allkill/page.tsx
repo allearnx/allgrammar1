@@ -93,6 +93,8 @@ export default async function AllkillPage() {
         }
         @media (max-width: 768px) {
           .ak-hero { padding: 72px 20px 64px !important; }
+          .ak-hero-letter { font-size: 56px !important; }
+          .ak-hero-letter:nth-child(n+8) { display: none; }
           .ak-section { padding: 64px 20px !important; }
           .ak-flow-grid-4 { grid-template-columns: repeat(2, 1fr); }
           .ak-flow-grid-3 { grid-template-columns: repeat(2, 1fr); }
