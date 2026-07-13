@@ -27,6 +27,9 @@ const cspDirectives = [
 ].join("; ");
 
 const nextConfig: NextConfig = {
+  // 개발 모드 좌하단 N 배지 숨김 (localhost 전용 표시기 — 프로덕션엔 원래 없음)
+  devIndicators: false,
+
   experimental: {
     staleTimes: {
       dynamic: 30,
