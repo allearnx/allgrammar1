@@ -61,11 +61,11 @@ export default function FeatureSection() {
 
         <div className="ak-feature-grid" style={{ marginTop: 52 }}>
           {features.map((feature) => (
-            <div key={feature.key} className="ak-feature-card">
-              <span style={{ alignSelf: 'flex-start', fontSize: 13, fontWeight: 800, color: C.blueDark, background: C.blueLight, padding: '5px 14px', borderRadius: 100, marginBottom: 18 }}>{feature.tag}</span>
+            <div key={feature.key} className="ak-feature-card" style={{ borderTop: `6px solid ${feature.solid}` }}>
+              <span style={{ alignSelf: 'flex-start', fontSize: 14, fontWeight: 800, color: feature.text, background: feature.bg, padding: '6px 16px', borderRadius: 100, marginBottom: 18 }}>{feature.tag}</span>
               <h3 className="ak-display" style={{ fontSize: 'clamp(20px, 2.2vw, 25px)', color: C.ink, lineHeight: 1.45, marginBottom: 14, whiteSpace: 'pre-line', textAlign: 'left' }}>{feature.title}</h3>
               <p style={{ fontSize: 16, color: C.gray, lineHeight: 1.75, marginBottom: 24, wordBreak: 'keep-all', textAlign: 'left' }}>{feature.body}</p>
-              <div style={{ marginTop: 'auto' }}>
+              <div className="ak-feature-visual" style={{ marginTop: 'auto' }}>
                 <FeatureVisual featureKey={feature.key} />
               </div>
             </div>

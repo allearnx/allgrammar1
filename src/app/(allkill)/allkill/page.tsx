@@ -65,6 +65,8 @@ export default async function AllkillPage() {
         /* 차별점 */
         .ak-feature-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
         .ak-feature-card { background: white; border-radius: 22px; padding: 34px 30px; display: flex; flex-direction: column; box-shadow: 0 8px 28px rgba(31,31,31,0.06); }
+        .ak-feature-visual { min-height: 214px; display: flex; flex-direction: column; justify-content: center; }
+        .ak-feature-visual > div { width: 100%; }
 
         /* 학부모 */
         .ak-parent-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
