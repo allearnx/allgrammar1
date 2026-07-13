@@ -102,7 +102,7 @@ function SignUpForm() {
               <Image src="/logo.png" alt="올라영" width={72} height={72} className="mx-auto rounded-2xl shadow-lg shadow-brand-200/50" />
             </Link>
             <h1 className="auth-display mt-5 text-3xl text-[#1F1F1F] tracking-tight" style={{ fontWeight: 700 }}>회원가입</h1>
-            <p className="auth-display mt-2 text-[#3C4043]" style={{ fontWeight: 500 }}>영어 단어, 알아서 전부 외워집니다</p>
+            <p className="auth-display mt-2 text-[#3C4043]" style={{ fontWeight: 500 }}>영어 실력, 알아서 오릅니다</p>
           </div>
 
           {/* 폼 카드 */}

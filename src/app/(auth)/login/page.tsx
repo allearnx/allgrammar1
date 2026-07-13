@@ -88,7 +88,7 @@ function LoginForm() {
             로그인
           </h1>
           <p className="auth-display mt-2 text-[#3C4043]" style={{ fontWeight: 500 }}>
-            영어 단어, 알아서 전부 외워집니다
+            영어 실력, 알아서 오릅니다
           </p>
         </div>
 
