@@ -98,6 +98,11 @@ export function GuestPayCallbackClient() {
                 </a>
               )}
               <p className="text-sm text-muted-foreground text-center">결제해 주셔서 감사합니다.</p>
+              {searchParams.get('name')?.includes('올킬보카') && (
+                <Button asChild>
+                  <Link href="/allkill/guide">올킬보카 이용 가이드 보기</Link>
+                </Button>
+              )}
               <Button asChild variant="outline">
                 <Link href="/">홈으로</Link>
               </Button>

@@ -91,6 +91,11 @@ export default function PaymentCallbackPage() {
                   영수증 보기
                 </a>
               )}
+              {searchParams.get('name')?.includes('올킬보카') && (
+                <Button asChild variant="outline">
+                  <Link href="/allkill/guide">올킬보카 이용 가이드 보기</Link>
+                </Button>
+              )}
               {serviceActivated ? (
                 <Button asChild>
                   <Link href="/student">학습하러 가기</Link>
