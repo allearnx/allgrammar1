@@ -3,25 +3,11 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { BookA, BookMarked, ShoppingCart, Loader2 } from 'lucide-react';
+import { BookA, BookMarked, Loader2, ChevronDown } from 'lucide-react';
 import { fetchWithToast } from '@/lib/fetch-with-toast';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
 import { JoinAcademyForm } from './join-academy-form';
+import { AuthBrandBg } from '@/components/auth/auth-brand-bg';
 import { formatPrice } from '@/types/public';
-
-function Divider() {
-  return (
-    <div className="relative">
-      <div className="absolute inset-0 flex items-center">
-        <div className="w-full border-t border-gray-200" />
-      </div>
-      <div className="relative flex justify-center text-sm">
-        <span className="bg-white px-3 text-gray-400">또는</span>
-      </div>
-    </div>
-  );
-}
 
 type FreeService = 'voca' | 'naesin';
 
@@ -36,15 +22,15 @@ const SERVICE_OPTIONS: {
     value: 'voca',
     label: '올킬보카',
     desc: 'Day 3개 무료 체험 · 교과서·모의고사 기출 단어',
-    icon: <BookA className="h-6 w-6 text-brand-500" />,
-    activeColor: 'border-brand-500 bg-brand-50',
+    icon: <BookA className="h-6 w-6" style={{ color: '#1A73E8' }} />,
+    activeColor: 'border-[#1A73E8] bg-[#E8F0FE]',
   },
   {
     value: 'naesin',
     label: '올인내신',
     desc: '첫 단원 무료 체험 (어휘·지문·대화문 암기)',
-    icon: <BookMarked className="h-6 w-6 text-emerald-500" />,
-    activeColor: 'border-emerald-500 bg-emerald-50',
+    icon: <BookMarked className="h-6 w-6" style={{ color: '#188038' }} />,
+    activeColor: 'border-[#188038] bg-[#E6F4EA]',
   },
 ];
 
@@ -90,6 +76,7 @@ export function IndependentStudentScreen({ userName, courses, isAcademy = false 
   const [selected, setSelected] = useState<FreeService>('voca');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [moreOpen, setMoreOpen] = useState(false);
 
   async function handleSelectService() {
     setLoading(true);
@@ -108,152 +95,130 @@ export function IndependentStudentScreen({ userName, courses, isAcademy = false 
   }
 
   return (
-    <div className="min-h-[calc(100vh-56px)] bg-gradient-to-b from-slate-50 to-white">
-      <div className="max-w-2xl mx-auto px-4 py-8 space-y-8">
-        {/* Welcome */}
+    <div className="relative min-h-[calc(100vh-56px)] overflow-hidden" style={{ background: '#DFEFFF' }}>
+      <AuthBrandBg />
+
+      <div className="relative z-10 max-w-lg mx-auto px-4 py-12 space-y-6">
+        {/* Welcome — 히어로 */}
         <div className="text-center">
-          <h1 className="text-2xl font-bold text-gray-900">
-            환영합니다, {userName}님!
+          <h1 className="auth-display text-2xl md:text-3xl text-[#1F1F1F]" style={{ fontWeight: 700 }}>
+            환영합니다, {userName}님! 🎉
           </h1>
-          <p className="mt-1 text-sm text-muted-foreground">
-            올킬보카와 올인내신, 무료로 <b>둘 다</b> 체험할 수 있어요.
+          <p className="auth-display mt-2 text-[#3C4043]" style={{ fontWeight: 500 }}>
+            지금 바로 <b style={{ color: '#1A73E8' }}>무료 체험</b>을 시작하세요
           </p>
         </div>
 
-        {/* Section 1: Free Service Selection */}
-        <Card>
-          <CardHeader className="text-center pb-4">
-            <CardTitle className="text-lg">어떤 학습부터 시작할까요?</CardTitle>
-            <p className="text-sm text-muted-foreground mt-1">
-              주로 쓸 서비스를 골라주세요 — 선택하지 않은 쪽도 사이드 메뉴에서 언제든 체험할 수 있어요.
-            </p>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <div className="grid grid-cols-2 gap-3">
-              {SERVICE_OPTIONS.map((opt) => (
-                <label
-                  key={opt.value}
-                  className={`flex flex-col items-center gap-2 rounded-xl border-2 p-4 cursor-pointer transition-all ${
-                    selected === opt.value ? opt.activeColor : 'border-gray-200 hover:border-gray-300'
-                  }`}
-                >
-                  <input
-                    type="radio"
-                    name="freeService"
-                    value={opt.value}
-                    checked={selected === opt.value}
-                    onChange={() => setSelected(opt.value)}
-                    className="sr-only"
-                  />
-                  {opt.icon}
-                  <span className="text-sm font-semibold">{opt.label}</span>
-                  <span className="text-xs text-muted-foreground text-center">{opt.desc}</span>
-                </label>
-              ))}
-            </div>
+        {/* 주 액션: 무료 체험 서비스 선택 */}
+        <div className="rounded-3xl bg-white p-7 border border-gray-200/60 shadow-xl shadow-[#1A73E8]/5">
+          <h2 className="auth-display text-center text-lg text-[#1F1F1F]" style={{ fontWeight: 700 }}>
+            어떤 학습부터 시작할까요?
+          </h2>
+          <p className="text-center text-sm text-[#3C4043] mt-1 mb-5">
+            고른 쪽으로 바로 시작해요. 나머지도 사이드 메뉴에서 언제든 체험할 수 있어요.
+          </p>
 
-            {error && (
-              <p className="text-sm text-red-500 text-center">{error}</p>
+          <div className="grid grid-cols-2 gap-3">
+            {SERVICE_OPTIONS.map((opt) => (
+              <label
+                key={opt.value}
+                className={`flex flex-col items-center gap-2 rounded-2xl border-2 p-4 cursor-pointer transition-all ${
+                  selected === opt.value ? opt.activeColor : 'border-gray-200 hover:border-gray-300'
+                }`}
+              >
+                <input
+                  type="radio"
+                  name="freeService"
+                  value={opt.value}
+                  checked={selected === opt.value}
+                  onChange={() => setSelected(opt.value)}
+                  className="sr-only"
+                />
+                {opt.icon}
+                <span className="text-sm font-bold text-[#1F1F1F]">{opt.label}</span>
+                <span className="text-xs text-[#3C4043] text-center leading-relaxed">{opt.desc}</span>
+              </label>
+            ))}
+          </div>
+
+          {error && <p className="text-sm text-[#D93025] text-center mt-4">{error}</p>}
+
+          <button
+            onClick={handleSelectService}
+            disabled={loading}
+            className="auth-cta auth-display w-full mt-5 py-4 text-lg rounded-full transition-all disabled:opacity-50 disabled:cursor-not-allowed inline-flex items-center justify-center"
+            style={{ fontWeight: 700 }}
+          >
+            {loading ? (
+              <>
+                <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                시작하는 중...
+              </>
+            ) : (
+              '무료로 시작하기'
             )}
+          </button>
+        </div>
 
-            <Button
-              className="w-full"
-              onClick={handleSelectService}
-              disabled={loading}
-            >
-              {loading ? (
-                <>
-                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                  선택 중...
-                </>
-              ) : (
-                '시작하기'
-              )}
-            </Button>
-          </CardContent>
-        </Card>
-
+        {/* 부가 옵션(독립 학생만): 학원 합류 · 유료 코스 — 접어서 하단에 */}
         {!isAcademy && (
-          <>
-            <Divider />
+          <div className="pt-2">
+            <button
+              onClick={() => setMoreOpen((v) => !v)}
+              className="mx-auto flex items-center gap-1.5 text-sm font-medium text-[#3C4043] hover:text-[#1A73E8] transition-colors"
+            >
+              학원 코드가 있거나 유료로 시작하시겠어요?
+              <ChevronDown className={`h-4 w-4 transition-transform ${moreOpen ? 'rotate-180' : ''}`} />
+            </button>
 
-            {/* Section 2: Join Academy */}
-            <JoinAcademyForm compact />
-
-            <Divider />
-
-            {/* Section 3: Course Purchase */}
-            <Card>
-              <CardHeader className="text-center pb-4">
-                <div className="mx-auto rounded-full bg-amber-100 p-3 mb-2">
-                  <ShoppingCart className="h-6 w-6 text-amber-600" />
+            {moreOpen && (
+              <div className="mt-5 space-y-5">
+                {/* 학원 합류 */}
+                <div className="rounded-2xl bg-white/80 p-5 border border-gray-200/60">
+                  <JoinAcademyForm compact />
                 </div>
-                <CardTitle className="text-lg">개인 코스 구매</CardTitle>
-                <p className="text-sm text-muted-foreground mt-1">
-                  학원 없이 직접 코스를 구매하여 바로 학습할 수 있어요.
-                </p>
-              </CardHeader>
-              <CardContent>
-                {courses.length === 0 ? (
-                  <p className="text-center text-sm text-muted-foreground py-4">
-                    현재 구매 가능한 코스가 없습니다.
-                  </p>
-                ) : (
-                  <div className="grid gap-3">
-                    {courses.map((course) => {
-                      const style = CATEGORY_STYLE[course.category] ?? {
-                        border: 'border-gray-200 hover:border-gray-400',
-                        bg: 'bg-gray-50',
-                        badge: 'bg-gray-100 text-gray-700',
-                      };
-                      const icon = CATEGORY_ICON[course.category] ?? (
-                        <BookA className="h-5 w-5 text-gray-500" />
-                      );
-                      const label = CATEGORY_LABEL[course.category] ?? course.category;
-                      const paymentUrl = `/payment?courseId=${course.id}&name=${encodeURIComponent(course.title)}&price=${course.price}`;
 
-                      return (
-                        <Link key={course.id} href={paymentUrl}>
-                          <div
-                            className={`flex items-center gap-4 rounded-xl border p-4 transition-colors ${style.border}`}
-                          >
-                            <div className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-full ${style.bg}`}>
-                              {icon}
-                            </div>
-                            <div className="flex-1 min-w-0">
-                              <div className="flex items-center gap-2">
-                                <span className="font-semibold text-sm text-gray-900 truncate">
-                                  {course.title}
-                                </span>
-                                <span className={`shrink-0 text-[10px] font-medium rounded-full px-2 py-0.5 ${style.badge}`}>
-                                  {label}
-                                </span>
+                {/* 유료 코스 */}
+                {courses.length > 0 && (
+                  <div className="rounded-2xl bg-white/80 p-5 border border-gray-200/60">
+                    <p className="text-sm font-bold text-[#1F1F1F] mb-3">유료 코스로 바로 시작</p>
+                    <div className="grid gap-2.5">
+                      {courses.map((course) => {
+                        const style = CATEGORY_STYLE[course.category] ?? {
+                          border: 'border-gray-200 hover:border-gray-400',
+                          bg: 'bg-gray-50',
+                          badge: 'bg-gray-100 text-gray-700',
+                        };
+                        const icon = CATEGORY_ICON[course.category] ?? (
+                          <BookA className="h-5 w-5 text-gray-500" />
+                        );
+                        const label = CATEGORY_LABEL[course.category] ?? course.category;
+                        const paymentUrl = `/payment?courseId=${course.id}&name=${encodeURIComponent(course.title)}&price=${course.price}`;
+
+                        return (
+                          <Link key={course.id} href={paymentUrl}>
+                            <div className={`flex items-center gap-3 rounded-xl border p-3 transition-colors ${style.border}`}>
+                              <div className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-full ${style.bg}`}>
+                                {icon}
                               </div>
-                              {course.description && (
-                                <p className="text-xs text-muted-foreground mt-0.5 line-clamp-1">
-                                  {course.description}
-                                </p>
-                              )}
+                              <div className="flex-1 min-w-0">
+                                <div className="flex items-center gap-2">
+                                  <span className="font-semibold text-sm text-gray-900 truncate">{course.title}</span>
+                                  <span className={`shrink-0 text-[10px] font-medium rounded-full px-2 py-0.5 ${style.badge}`}>{label}</span>
+                                </div>
+                              </div>
+                              <span className="shrink-0 text-sm font-bold text-gray-900">{formatPrice(course.price)}원</span>
                             </div>
-                            <div className="shrink-0 text-right">
-                              <span className="text-sm font-bold text-gray-900">
-                                {formatPrice(course.price)}원
-                              </span>
-                            </div>
-                          </div>
-                        </Link>
-                      );
-                    })}
+                          </Link>
+                        );
+                      })}
+                    </div>
+                    <p className="text-center text-xs text-gray-400 mt-3">결제 후 해당 서비스가 자동으로 활성화됩니다.</p>
                   </div>
                 )}
-              </CardContent>
-            </Card>
-
-            {/* Help text */}
-            <p className="text-center text-xs text-gray-400">
-              결제 후 해당 서비스가 자동으로 활성화됩니다.
-            </p>
-          </>
+              </div>
+            )}
+          </div>
         )}
       </div>
     </div>
