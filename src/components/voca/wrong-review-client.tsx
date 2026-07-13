@@ -6,8 +6,8 @@ import { Loader2, Swords, Trophy, PartyPopper } from 'lucide-react';
 import { cn, shuffle, blankOutWordExact } from '@/lib/utils';
 import { fetchWithToast } from '@/lib/fetch-with-toast';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
+import { VocaBrandStyle, VocaHeroLetters, VOCA_COLORS } from '@/components/voca/voca-brand';
 import '@/components/voca/neon/neon-styles.css';
 
 interface WordItem {
@@ -89,10 +89,16 @@ export function WrongReviewClient() {
 
 function EmptyState({ weekLabel }: { weekLabel: string }) {
   return (
-    <div className="flex flex-col items-center justify-center py-20 text-muted-foreground">
-      <Trophy className="mb-3 h-12 w-12" />
-      <p className="text-lg font-semibold">최근 3주 오답이 없습니다!</p>
-      <p className="mt-1 text-sm">{weekLabel}</p>
+    <div className="relative overflow-hidden rounded-3xl p-10 md:p-14 text-center" style={{ background: VOCA_COLORS.sky }}>
+      <VocaBrandStyle />
+      <VocaHeroLetters />
+      <div className="relative z-10 flex flex-col items-center">
+        <Trophy className="mb-4 h-12 w-12" style={{ color: VOCA_COLORS.yellowDark }} />
+        <p className="voca-display text-2xl" style={{ color: VOCA_COLORS.ink, fontWeight: 700 }}>
+          최근 3주 오답이 없어요<span style={{ color: VOCA_COLORS.blue }}>!</span>
+        </p>
+        <p className="mt-2 text-sm" style={{ color: VOCA_COLORS.gray }}>{weekLabel}</p>
+      </div>
     </div>
   );
 }
@@ -105,49 +111,73 @@ function ListView({ data, onStart }: { data: ReviewData; onStart: () => void }) 
   const remaining = words.length - graduated;
 
   return (
-    <div className="space-y-6">
-      <div>
-        <h2 className="text-xl font-bold">올킬오답</h2>
-        <p className="text-sm text-muted-foreground">{weekLabel}</p>
+    <div className="space-y-6 pb-8">
+      <VocaBrandStyle />
+
+      {/* Hero — /allkill 톤: 파스텔 하늘 + 알파벳 카펫 + GmarketSans */}
+      <div className="relative overflow-hidden rounded-3xl p-6 md:p-8" style={{ background: VOCA_COLORS.sky }}>
+        <VocaHeroLetters />
+        <div className="relative z-10">
+          <div className="flex flex-wrap items-center gap-2 mb-3">
+            <p className="voca-display text-xs font-bold tracking-widest uppercase" style={{ color: VOCA_COLORS.blueDark }}>AllKill 오답</p>
+            <span className="text-[11px] font-bold px-2 py-0.5 rounded-full bg-white/70 text-gray-500">{weekLabel}</span>
+          </div>
+          <h1 className="voca-display text-2xl md:text-3xl leading-tight" style={{ color: VOCA_COLORS.ink, fontWeight: 700, wordBreak: 'keep-all' }}>
+            이번 주 오답, 전부 정복<span style={{ color: VOCA_COLORS.blue }}>.</span>
+          </h1>
+          {words.length > 0 && (
+            <div className="flex items-center gap-3 mt-4">
+              <div className="flex-1 h-2 rounded-full bg-white overflow-hidden">
+                <div
+                  className="h-full rounded-full bg-primary transition-all duration-500"
+                  style={{ width: `${(graduated / words.length) * 100}%` }}
+                />
+              </div>
+              <span className="text-sm font-bold tabular-nums" style={{ color: VOCA_COLORS.blueDark }}>
+                {graduated}/{words.length}
+              </span>
+            </div>
+          )}
+        </div>
       </div>
 
-      {/* Stats */}
+      {/* Stats — 구글 4색 숫자 밴드 */}
       <div className="grid grid-cols-3 gap-3">
-        <StatCard label="총 오답" value={words.length} />
-        <StatCard label="정복" value={graduated} className="text-green-600" />
-        <StatCard label="남은" value={remaining} className="text-orange-500" />
+        <StatCard label="총 오답" value={words.length} color={VOCA_COLORS.blue} />
+        <StatCard label="정복" value={graduated} color={VOCA_COLORS.green} />
+        <StatCard label="남은" value={remaining} color={VOCA_COLORS.red} />
       </div>
-
-      <Progress value={words.length > 0 ? (graduated / words.length) * 100 : 0} className="h-2" />
 
       {/* 오답 = 커버리지 올리는 지름길 (부족함이 아니라 기회로 프레이밍) */}
       {data.coverageDelta && (
-        <div className="rounded-xl bg-[#E8F0FE] p-4">
+        <div className="rounded-3xl border border-white bg-white p-5 shadow-sm">
           <p className="text-sm font-bold text-gray-800">
-            🎯 이 단어들을 정복하면 <span className="text-[#1A73E8]">{data.coverageDelta.bookTitle}</span> 커버리지가
+            🎯 이 단어들을 정복하면 <span style={{ color: VOCA_COLORS.blue }}>{data.coverageDelta.bookTitle}</span> 커버리지가
           </p>
-          <p className="mt-1 text-lg font-extrabold tabular-nums text-[#1A73E8]">
+          <p className="voca-display mt-1 text-xl tabular-nums" style={{ color: VOCA_COLORS.blue, fontWeight: 700 }}>
             {data.coverageDelta.now}% → {data.coverageDelta.after}%
           </p>
-          <p className="mt-0.5 text-[11px] text-gray-500">오답 복습이 시험 점수로 가는 가장 빠른 길이에요</p>
+          <p className="mt-1 text-[11px] text-gray-500">오답 복습이 시험 점수로 가는 가장 빠른 길이에요</p>
         </div>
       )}
 
       {completedAt ? (
-        <Card className="border-green-200 bg-green-50">
-          <CardContent className="flex items-center gap-3 py-4">
-            <PartyPopper className="h-8 w-8 text-green-600" />
-            <div>
-              <p className="font-semibold text-green-700">올킬 완료!</p>
-              <p className="text-sm text-green-600">이번 주 오답을 모두 정복했습니다</p>
-            </div>
-          </CardContent>
-        </Card>
+        <div className="flex items-center gap-3 rounded-3xl p-5" style={{ background: VOCA_COLORS.greenLight }}>
+          <PartyPopper className="h-8 w-8" style={{ color: VOCA_COLORS.green }} />
+          <div>
+            <p className="voca-display font-bold" style={{ color: VOCA_COLORS.greenDark }}>올킬 완료!</p>
+            <p className="text-sm" style={{ color: VOCA_COLORS.green }}>이번 주 오답을 모두 정복했습니다</p>
+          </div>
+        </div>
       ) : (
-        <Button className="w-full" size="lg" onClick={onStart}>
-          <Swords className="mr-2 h-5 w-5" />
+        <button
+          onClick={onStart}
+          className="voca-cta voca-display flex w-full items-center justify-center gap-2 rounded-full py-4 text-lg"
+          style={{ fontWeight: 700 }}
+        >
+          <Swords className="h-5 w-5" />
           {graduated > 0 ? '이어서 정복하기' : '정복 시작'}
-        </Button>
+        </button>
       )}
 
       {/* Word list preview */}
@@ -180,14 +210,12 @@ function ListView({ data, onStart }: { data: ReviewData; onStart: () => void }) 
   );
 }
 
-function StatCard({ label, value, className }: { label: string; value: number; className?: string }) {
+function StatCard({ label, value, color }: { label: string; value: number; color: string }) {
   return (
-    <Card>
-      <CardContent className="py-3 text-center">
-        <p className={cn('text-2xl font-bold', className)}>{value}</p>
-        <p className="text-xs text-muted-foreground">{label}</p>
-      </CardContent>
-    </Card>
+    <div className="rounded-3xl border border-white bg-white py-4 text-center shadow-sm">
+      <p className="voca-display text-2xl tabular-nums" style={{ color, fontWeight: 700 }}>{value}</p>
+      <p className="mt-0.5 text-xs font-medium text-gray-400">{label}</p>
+    </div>
   );
 }
 
@@ -344,19 +372,27 @@ function ConquestMode({ data, onBack }: { data: ReviewData; onBack: () => void }
   // All done overlay
   if (allDone) {
     return (
-      <div className="flex min-h-[60dvh] flex-col items-center justify-center space-y-4">
-        <motion.div
-          initial={{ scale: 0 }}
-          animate={{ scale: 1 }}
-          transition={{ type: 'spring', stiffness: 200, damping: 15 }}
-        >
-          <PartyPopper className="h-20 w-20 text-yellow-500" />
-        </motion.div>
-        <h2 className="text-2xl font-bold">올킬 완료!</h2>
-        <p className="text-muted-foreground">
-          {words.length}개 오답을 모두 정복했습니다
-        </p>
-        <Button onClick={onBack} size="lg">돌아가기</Button>
+      <div className="relative overflow-hidden rounded-3xl min-h-[60dvh] flex flex-col items-center justify-center space-y-4 p-8" style={{ background: VOCA_COLORS.sky }}>
+        <VocaBrandStyle />
+        <VocaHeroLetters />
+        <div className="relative z-10 flex flex-col items-center space-y-4">
+          <motion.div
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            transition={{ type: 'spring', stiffness: 200, damping: 15 }}
+          >
+            <PartyPopper className="h-20 w-20" style={{ color: VOCA_COLORS.yellowDark }} />
+          </motion.div>
+          <h2 className="voca-display text-3xl" style={{ color: VOCA_COLORS.ink, fontWeight: 700 }}>
+            올킬 완료<span style={{ color: VOCA_COLORS.blue }}>!</span>
+          </h2>
+          <p style={{ color: VOCA_COLORS.gray }}>
+            {words.length}개 오답을 모두 정복했습니다
+          </p>
+          <button onClick={onBack} className="voca-cta voca-display rounded-full px-8 py-3 text-base" style={{ fontWeight: 700 }}>
+            돌아가기
+          </button>
+        </div>
       </div>
     );
   }

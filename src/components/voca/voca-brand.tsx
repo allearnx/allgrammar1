@@ -20,6 +20,7 @@ export const VOCA_COLORS = {
   yellowDark: '#B06000',
   yellowLight: '#FEF7E0',
   green: '#188038',
+  greenDark: '#0D652D',
   greenLight: '#E6F4EA',
   red: '#D93025',
   redLight: '#FCE8E6',
