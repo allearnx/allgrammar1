@@ -40,6 +40,11 @@ export const metadata: Metadata = {
     title: '올라영',
   },
   icons: {
+    // 브랜드 파비콘 — create-next-app 기본(Vercel 삼각형) 대체
+    icon: [
+      { url: '/icon-192x192.png', type: 'image/png', sizes: '192x192' },
+      { url: '/icon-512x512.png', type: 'image/png', sizes: '512x512' },
+    ],
     apple: '/apple-touch-icon.png',
   },
 };
