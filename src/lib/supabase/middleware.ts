@@ -51,6 +51,7 @@ export async function updateSession(request: NextRequest) {
   // Public routes that don't require auth
   const publicRoutes = [
     '/login', '/signup', '/callback', '/impersonate', '/report', '/quiz-result', '/parent',
+    '/find-email', '/forgot-password', '/reset-password',
     '/courses', '/teachers', '/reviews', '/faq', '/allkill', '/about',
     '/curriculum', '/schedule', '/terms', '/privacy', '/trial', '/pricing', '/blog',
   ];
@@ -122,8 +123,9 @@ export async function updateSession(request: NextRequest) {
   const role = (profile.role || 'student') as UserRole;
 
   // Public routes that stay accessible even when authenticated (no redirect)
+  // reset-password: 이메일 링크의 복구 세션(PASSWORD_RECOVERY)이 인증 상태라 대시보드로 튕기면 안 됨
   const noRedirectRoutes = [
-    '/parent', '/report', '/quiz-result',
+    '/parent', '/report', '/quiz-result', '/reset-password',
     '/courses', '/teachers', '/reviews', '/faq', '/allkill', '/about',
     '/curriculum', '/schedule', '/terms', '/privacy', '/trial', '/pricing', '/blog',
   ];
