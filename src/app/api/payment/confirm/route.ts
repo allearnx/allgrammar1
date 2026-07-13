@@ -4,6 +4,7 @@ import { paymentConfirmSchema } from '@/lib/api/schemas';
 import { confirmPayment, cancelPayment, TossPaymentError } from '@/lib/payments/toss';
 import { createAdminClient } from '@/lib/supabase/admin';
 import { invalidateStudentServices } from '@/lib/cache/invalidate';
+import { computeExtendedExpiry } from '@/lib/billing/service-expiry';
 import { logger } from '@/lib/logger';
 import { sendTelegram } from '@/lib/telegram';
 
@@ -105,11 +106,12 @@ export const POST = createApiHandler(
 
     // ── 3. 서비스 자동 활성화 (voca/school_exam 코스만) ──
     let serviceActivated: 'voca' | 'naesin' | null = null;
+    let serviceExpiresAt: string | null = null;
 
     if (courseId) {
       const { data: course } = await supabase
         .from('courses')
-        .select('category')
+        .select('category, duration_days')
         .eq('id', courseId)
         .single();
 
@@ -120,6 +122,16 @@ export const POST = createApiHandler(
         // (user-scoped client는 학생 UPDATE 정책이 없어, 이미 무료로 가진 서비스를
         //  유료로 업그레이드하는 upsert의 ON CONFLICT DO UPDATE에서 RLS에 막힘.)
         const admin = createAdminClient();
+
+        // 만료일: 코스 기간(duration_days)만큼 부여. 만료 전 재결제면 남은 기간 위에 연장
+        const { data: existingAssign } = await admin
+          .from('service_assignments')
+          .select('expires_at')
+          .eq('student_id', user.id)
+          .eq('service', service)
+          .maybeSingle();
+        serviceExpiresAt = computeExtendedExpiry(existingAssign?.expires_at, course?.duration_days);
+
         const { error: assignErr } = await admin
           .from('service_assignments')
           .upsert(
@@ -128,6 +140,7 @@ export const POST = createApiHandler(
               service,
               assigned_by: user.id,
               source: 'payment',
+              expires_at: serviceExpiresAt,
               ...(service === 'voca' ? { round2_unlocked: true } : {}),
             },
             { onConflict: 'student_id,service' },
@@ -163,7 +176,7 @@ export const POST = createApiHandler(
         `📦 ${orderName}`,
         `💳 ${result.totalAmount.toLocaleString()}원`,
         `🔖 주문번호: ${orderId}`,
-        serviceName ? `✅ ${serviceName} 자동 활성화 완료` : '',
+        serviceName ? `✅ ${serviceName} 자동 활성화 완료 (만료: ${serviceExpiresAt ? serviceExpiresAt.slice(0, 10) : '무기한'})` : '',
       ].filter(Boolean).join('\n'),
     );
 

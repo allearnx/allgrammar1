@@ -2,6 +2,7 @@ import { createAdminClient } from '@/lib/supabase/admin';
 import { cached, TTL } from '@/lib/cache/server-cache';
 import { cacheTags } from '@/lib/cache/tags';
 import { deriveTier } from './feature-gate';
+import { isAssignmentActive } from './service-expiry';
 import type { Tier } from './feature-gate';
 
 export interface PlanContext {
@@ -12,6 +13,23 @@ export interface PlanContext {
 }
 
 type AdminClient = ReturnType<typeof createAdminClient>;
+
+/**
+ * 학생 배정 조회 + 만료 처리 (크론 없이 lazy).
+ * expires_at이 지난 행은 삭제하고 유효한 배정만 반환 — 5분 캐시 주기로 정리된다.
+ */
+async function fetchActiveAssignments(supabase: AdminClient, studentId: string) {
+  const { data } = await supabase
+    .from('service_assignments')
+    .select('id, service, source, naesin_memorize_only, expires_at')
+    .eq('student_id', studentId);
+  const all = data ?? [];
+  const expired = all.filter((a) => !isAssignmentActive(a));
+  if (expired.length > 0) {
+    await supabase.from('service_assignments').delete().in('id', expired.map((a) => a.id));
+  }
+  return all.filter((a) => isAssignmentActive(a));
+}
 
 /** 실제 plan context 계산 (academies + subscriptions + service_assignments 조회) */
 async function computePlanContext(
@@ -39,13 +57,8 @@ async function computePlanContext(
         }
       }
 
-      // Free tier 또는 구독 없음: service_assignments로 판단
-      const { data: assignments } = await supabase
-        .from('service_assignments')
-        .select('service, source, naesin_memorize_only')
-        .eq('student_id', studentId);
-
-      const services = assignments ?? [];
+      // Free tier 또는 구독 없음: service_assignments로 판단 (만료 배정 제외)
+      const services = await fetchActiveAssignments(supabase, studentId);
       // 'payment'(개인결제) + 'subscription'(학원/구독) 둘 다 유료. subscription 누락이 b58e270 버그의 잔여.
       const hasPaidAssignment = services.some((a) => a.source === 'payment' || a.source === 'subscription');
       const memorizeOnly = services.some(
@@ -79,15 +92,10 @@ async function computePlanContext(
 
   const tier: Tier = deriveTier(sub ?? null);
 
-  // 학생 개별 service_assignments 조회 (naesin_memorize_only 포함)
+  // 학생 개별 service_assignments 조회 (naesin_memorize_only 포함, 만료 배정 제외)
   let memorizeOnly = false;
   if (studentId) {
-    const { data: studentAssignments } = await supabase
-      .from('service_assignments')
-      .select('service, source, naesin_memorize_only')
-      .eq('student_id', studentId);
-
-    const studentServices = studentAssignments ?? [];
+    const studentServices = await fetchActiveAssignments(supabase, studentId);
     memorizeOnly = studentServices.some(
       (a) => a.service === 'naesin' && a.naesin_memorize_only,
     );

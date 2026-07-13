@@ -12,6 +12,7 @@ import { AnnouncementBanner } from '@/components/dashboard/announcement-banner';
 import { UpdateBanner } from '@/components/layout/update-banner';
 import { QueryProvider } from '@/components/providers/query-provider';
 import { deriveTier } from '@/lib/billing/feature-gate';
+import { isAssignmentActive } from '@/lib/billing/service-expiry';
 import { calculateStageStatuses } from '@/lib/naesin/stage-unlock';
 import { groupBy } from '@/lib/naesin/build-unit-summary';
 import type { NaesinStageStatuses } from '@/types/database';
@@ -98,15 +99,20 @@ export default async function DashboardLayout({
   );
 }
 
-/** Cached student services — TTL 5min (SESSION) */
+/** Cached student services — TTL 5min (SESSION). 만료된 배정은 제외 + lazy 삭제 */
 const getCachedServices = cached(
   async (studentId: string) => {
     const admin = createAdminClient();
     const { data } = await admin
       .from('service_assignments')
-      .select('service')
+      .select('id, service, expires_at')
       .eq('student_id', studentId);
-    return data?.map((d) => d.service) || [];
+    const all = data ?? [];
+    const expired = all.filter((a) => !isAssignmentActive(a));
+    if (expired.length > 0) {
+      await admin.from('service_assignments').delete().in('id', expired.map((a) => a.id));
+    }
+    return all.filter((a) => isAssignmentActive(a)).map((d) => d.service);
   },
   'student-services',
   TTL.SESSION,
