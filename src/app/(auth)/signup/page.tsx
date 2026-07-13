@@ -5,14 +5,12 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
 import { createClient } from '@/lib/supabase/client';
-import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Card, CardContent, CardDescription, CardFooter, CardHeader } from '@/components/ui/card';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { AdminSignupFields } from '@/components/auth/admin-signup-fields';
 import { InviteCodeField } from '@/components/auth/invite-code-field';
 import { AcademySignupGuide } from '@/components/auth/academy-signup-guide';
+import { AuthBrandBg } from '@/components/auth/auth-brand-bg';
 import { toast } from 'sonner';
 import { isSafeRedirect } from '@/lib/auth/redirect';
 import type { UserRole } from '@/types/database';
@@ -93,24 +91,8 @@ function SignUpForm() {
   }
 
   return (
-    <div className="signup-page relative flex min-h-screen items-center justify-center overflow-hidden px-4 py-12" style={{ background: '#DFEFFF' }}>
-      {/* /allkill 패밀리 톤 — GmarketSans 제목 폰트 + 노란 알약 CTA */}
-      <style suppressHydrationWarning>{`
-        @font-face { font-family: 'GmarketSans'; font-weight: 700; src: url('/fonts/GmarketSansBold.woff') format('woff'); font-display: swap; }
-        @font-face { font-family: 'GmarketSans'; font-weight: 500; src: url('/fonts/GmarketSansMedium.woff') format('woff'); font-display: swap; }
-        .signup-display { font-family: 'GmarketSans', 'Pretendard', sans-serif; }
-        .signup-letter { position: absolute; font-family: 'GmarketSans', sans-serif; font-weight: 700; color: rgba(255,255,255,0.7); user-select: none; pointer-events: none; line-height: 1; }
-        .signup-cta { background: #FDD663; color: #1F1F1F; box-shadow: 0 6px 20px rgba(253,214,99,0.5); }
-        .signup-cta:hover:not(:disabled) { transform: translateY(-2px); }
-      `}</style>
-
-      {/* 배경 알파벳 (가장자리) */}
-      <div aria-hidden className="absolute inset-0">
-        <span className="signup-letter" style={{ top: '8%', left: '5%', fontSize: 110, transform: 'rotate(-12deg)' }}>A</span>
-        <span className="signup-letter" style={{ top: '70%', left: '7%', fontSize: 90, transform: 'rotate(10deg)' }}>b</span>
-        <span className="signup-letter" style={{ top: '14%', right: '7%', fontSize: 120, transform: 'rotate(8deg)' }}>V</span>
-        <span className="signup-letter" style={{ top: '74%', right: '6%', fontSize: 84, transform: 'rotate(-8deg)' }}>o</span>
-      </div>
+    <div className="relative flex min-h-screen items-center justify-center overflow-hidden px-4 py-12" style={{ background: '#DFEFFF' }}>
+      <AuthBrandBg />
 
       <div className={`relative z-10 w-full transition-all duration-300 grid grid-cols-1 gap-6 items-start ${isAdminRole ? 'max-w-4xl lg:grid-cols-[1fr_380px]' : 'max-w-md'}`}>
         <div>
@@ -119,8 +101,8 @@ function SignUpForm() {
             <Link href="/">
               <Image src="/logo.png" alt="올라영" width={72} height={72} className="mx-auto rounded-2xl shadow-lg shadow-brand-200/50" />
             </Link>
-            <h1 className="signup-display mt-5 text-3xl text-[#1F1F1F] tracking-tight" style={{ fontWeight: 700 }}>회원가입</h1>
-            <p className="signup-display mt-2 text-[#3C4043]" style={{ fontWeight: 500 }}>영어 단어, 알아서 전부 외워집니다</p>
+            <h1 className="auth-display mt-5 text-3xl text-[#1F1F1F] tracking-tight" style={{ fontWeight: 700 }}>회원가입</h1>
+            <p className="auth-display mt-2 text-[#3C4043]" style={{ fontWeight: 500 }}>영어 단어, 알아서 전부 외워집니다</p>
           </div>
 
           {/* 폼 카드 */}
@@ -173,7 +155,7 @@ function SignUpForm() {
               <button
                 type="submit"
                 disabled={loading}
-                className="signup-cta signup-display w-full py-4 text-lg rounded-full transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                className="auth-cta auth-display w-full py-4 text-lg rounded-full transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                 style={{ fontWeight: 700 }}
               >
                 {loading ? '가입 중...' : '회원가입'}
