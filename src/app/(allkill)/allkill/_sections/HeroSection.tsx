@@ -8,16 +8,23 @@ import { C, rollingWords, wordColors } from '../_data';
  * 원비온다 패밀리 히어로 — 롤링 워드가 구글 4색으로 순환 + 4색 점 인디케이터.
  * 한 화면 한 메시지 + 문 두 개 (가벼운 문: 무료 체험 / 큰 문: 시작하기).
  */
-// 배경 장식 — 화이트 알파벳 대소문자, 좌우 가장자리에만 (가운데는 헤드라인 영역이라 비움)
+// 배경 장식 — 화이트 알파벳 대소문자를 골고루. 가장자리(모바일에도 노출)를 앞에,
+// 가운데 쪽은 뒤에 두고 투명도를 낮춰 헤드라인을 방해하지 않게.
 const HERO_LETTERS = [
-  { ch: 'A', top: '8%', left: '4%', size: 120, rot: -12 },
-  { ch: 'R', top: '35%', left: '7%', size: 84, rot: -8 },
-  { ch: 'b', top: '58%', left: '2%', size: 96, rot: 8 },
-  { ch: 'C', top: '80%', left: '11%', size: 110, rot: 14 },
-  { ch: 'V', top: '16%', left: '87%', size: 140, rot: 10 },
-  { ch: 'K', top: '48%', left: '92%', size: 100, rot: -10 },
-  { ch: 'o', top: '72%', left: '89%', size: 82, rot: -6 },
-  { ch: 'y', top: '87%', left: '82%', size: 88, rot: -14 },
+  { ch: 'A', top: '8%', left: '4%', size: 120, rot: -12, op: 0.8 },
+  { ch: 'R', top: '35%', left: '7%', size: 84, rot: -8, op: 0.8 },
+  { ch: 'b', top: '58%', left: '2%', size: 96, rot: 8, op: 0.8 },
+  { ch: 'C', top: '80%', left: '11%', size: 110, rot: 14, op: 0.8 },
+  { ch: 'V', top: '16%', left: '87%', size: 140, rot: 10, op: 0.8 },
+  { ch: 'K', top: '48%', left: '92%', size: 100, rot: -10, op: 0.8 },
+  { ch: 'o', top: '72%', left: '89%', size: 82, rot: -6, op: 0.8 },
+  { ch: 'E', top: '4%', left: '30%', size: 72, rot: 16, op: 0.6 },
+  { ch: 'd', top: '7%', left: '57%', size: 64, rot: -8, op: 0.6 },
+  { ch: 'u', top: '38%', left: '23%', size: 58, rot: -14, op: 0.5 },
+  { ch: 'Q', top: '43%', left: '73%', size: 66, rot: 12, op: 0.5 },
+  { ch: 'w', top: '88%', left: '38%', size: 72, rot: 6, op: 0.7 },
+  { ch: 'a', top: '90%', left: '61%', size: 66, rot: -12, op: 0.7 },
+  { ch: 'y', top: '86%', left: '81%', size: 88, rot: -14, op: 0.8 },
 ];
 
 export default function HeroSection() {
@@ -48,7 +55,7 @@ export default function HeroSection() {
               top: letter.top,
               left: letter.left,
               fontSize: letter.size,
-              color: 'rgba(255,255,255,0.75)',
+              color: `rgba(255,255,255,${letter.op})`,
               transform: `rotate(${letter.rot}deg)`,
               lineHeight: 1,
               userSelect: 'none',

@@ -24,7 +24,7 @@ export default function AllkillPayButton({
   return (
     <Link
       href={paymentUrl}
-      className="inline-block w-full text-center px-8 py-4 rounded-2xl font-bold text-lg transition-all duration-200 hover:opacity-90 hover:scale-[1.02]"
+      className="inline-flex w-full h-[58px] items-center justify-center rounded-full font-bold text-[17px] transition-all duration-200 hover:opacity-90 hover:scale-[1.02]"
       style={style}
     >
       지금 시작하기 &rarr;

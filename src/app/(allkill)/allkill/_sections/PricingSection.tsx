@@ -39,20 +39,24 @@ export default function PricingSection({ vocaCourseId, vocaCoursePrice, selfStud
 
           {/* 무료 체험 */}
           <div className="ak-price-card">
-            <div style={{ fontSize: 15, fontWeight: 800, color: C.gray, marginBottom: 12 }}>무료 체험</div>
-            <div className="ak-price-amount" style={{ color: C.ink }}>0<span className="ak-price-unit">원</span></div>
-            <div style={{ fontSize: 14, color: C.grayLight, marginBottom: 24 }}>가입만 하면 바로 시작</div>
+            <div className="ak-price-head">
+              <div style={{ fontSize: 15, fontWeight: 800, color: C.gray, marginBottom: 12 }}>무료 체험</div>
+              <div className="ak-price-amount" style={{ color: C.ink }}>0<span className="ak-price-unit">원</span></div>
+              <div style={{ fontSize: 14, color: C.grayLight }}>가입만 하면 바로 시작</div>
+            </div>
             <FeatureList items={freePlanFeatures} checkColor={C.green} />
-            <Link href="/signup" className="ak-btn ak-btn-ghost" style={{ width: '100%' }}>
+            <Link href="/signup" className="ak-btn ak-btn-ghost ak-price-btn">
               무료로 시작하기
             </Link>
           </div>
 
           {/* 셀프 스터디 */}
           <div className="ak-price-card">
-            <div style={{ fontSize: 15, fontWeight: 800, color: C.blue, marginBottom: 12 }}>셀프 스터디</div>
-            <div className="ak-price-amount" style={{ color: C.ink }}>월 24,000<span className="ak-price-unit">원</span></div>
-            <div style={{ fontSize: 14, color: C.grayLight, marginBottom: 24 }}>선생님 없이 혼자서 완벽하게</div>
+            <div className="ak-price-head">
+              <div style={{ fontSize: 15, fontWeight: 800, color: C.blue, marginBottom: 12 }}>셀프 스터디</div>
+              <div className="ak-price-amount" style={{ color: C.ink }}>월 24,000<span className="ak-price-unit">원</span></div>
+              <div style={{ fontSize: 14, color: C.grayLight }}>선생님 없이 혼자서 완벽하게</div>
+            </div>
             <FeatureList items={selfStudyPlanFeatures} checkColor={C.blue} />
             <AllkillPayButton courseId={selfStudyCourseId} price={selfStudyCoursePrice} label="올킬보카 셀프 스터디" variant="outline" />
           </div>
@@ -60,10 +64,12 @@ export default function PricingSection({ vocaCourseId, vocaCoursePrice, selfStud
           {/* 1:1 온라인 관리 */}
           <div className="ak-price-card" style={{ border: `2px solid ${C.blue}`, position: 'relative' }}>
             <div style={{ position: 'absolute', top: -14, left: '50%', transform: 'translateX(-50%)', background: C.blue, color: 'white', fontSize: 13, fontWeight: 800, padding: '5px 18px', borderRadius: 100, whiteSpace: 'nowrap' }}>가장 인기</div>
-            <div style={{ fontSize: 15, fontWeight: 800, color: C.blue, marginBottom: 12 }}>1:1 온라인 관리</div>
-            <div className="ak-price-amount" style={{ color: C.ink }}>월 66,000<span className="ak-price-unit">원</span></div>
-            <div style={{ fontSize: 14, color: C.grayLight, marginBottom: 24 }}>
-              <s>정가 88,000원</s> <b style={{ color: C.blue }}>얼리버드 특가</b>
+            <div className="ak-price-head">
+              <div style={{ fontSize: 15, fontWeight: 800, color: C.blue, marginBottom: 12 }}>1:1 온라인 관리</div>
+              <div className="ak-price-amount" style={{ color: C.ink }}>월 66,000<span className="ak-price-unit">원</span></div>
+              <div style={{ fontSize: 14, color: C.grayLight }}>
+                <s>정가 88,000원</s> <b style={{ color: C.blue }}>얼리버드 특가</b>
+              </div>
             </div>
             <FeatureList items={proPlanFeatures} checkColor={C.blue} />
             <AllkillPayButton courseId={vocaCourseId} price={vocaCoursePrice} label="올킬보카 1:1 온라인 관리" />
@@ -71,16 +77,18 @@ export default function PricingSection({ vocaCourseId, vocaCoursePrice, selfStud
 
           {/* 학원 단체 */}
           <div className="ak-price-card">
-            <div style={{ fontSize: 15, fontWeight: 800, color: C.gray, marginBottom: 12 }}>학원 단체</div>
-            <div className="ak-price-amount" style={{ color: C.ink }}>문의</div>
-            <div style={{ fontSize: 14, color: C.grayLight, marginBottom: 24 }}>학원·그룹 맞춤 견적</div>
+            <div className="ak-price-head">
+              <div style={{ fontSize: 15, fontWeight: 800, color: C.gray, marginBottom: 12 }}>학원 단체</div>
+              <div className="ak-price-amount" style={{ color: C.ink }}>문의</div>
+              <div style={{ fontSize: 14, color: C.grayLight }}>학원·그룹 맞춤 견적</div>
+            </div>
             <FeatureList items={academyFeatures} checkColor={C.green} />
             <a
               href={KAKAO_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="ak-btn"
-              style={{ width: '100%', background: '#FEE500', color: '#3C1E1E' }}
+              className="ak-btn ak-price-btn"
+              style={{ background: '#FEE500', color: '#3C1E1E' }}
             >
               카톡으로 문의하기
             </a>

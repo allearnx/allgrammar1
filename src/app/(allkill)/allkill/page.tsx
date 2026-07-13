@@ -73,6 +73,8 @@ export default async function AllkillPage() {
         .ak-price-grid { display: flex; gap: 20px; align-items: stretch; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; padding: 20px 4px 8px; }
         .ak-price-grid > * { scroll-snap-align: start; flex: 0 0 calc((100% - 60px) / 4); min-width: 240px; }
         .ak-price-card { background: white; border: 1px solid ${C.line}; border-radius: 20px; padding: 36px 28px; display: flex; flex-direction: column; text-align: left; }
+        .ak-price-head { min-height: 128px; margin-bottom: 24px; }
+        .ak-price-btn { width: 100%; height: 58px; padding: 0; font-size: 17px; }
         .ak-price-amount { font-family: 'GmarketSans', 'Pretendard', sans-serif; font-weight: 700; font-size: clamp(30px, 2.8vw, 40px); margin-bottom: 6px; letter-spacing: -0.5px; }
         .ak-price-unit { font-size: 18px; font-weight: 600; color: ${C.grayLight}; }
 
