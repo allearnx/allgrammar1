@@ -1,5 +1,5 @@
 import { createAdminClient } from '@/lib/supabase/admin';
-import { CalendarCheck, Flame, Sparkles, Target } from 'lucide-react';
+import { CalendarCheck, Flame, Target } from 'lucide-react';
 import { computeVocaCoverage } from '@/lib/voca/coverage';
 
 /** KST 기준 오늘 날짜 문자열 (YYYY-MM-DD) */
@@ -17,9 +17,6 @@ function weekStartStr(): string {
 }
 
 const DAY_LABELS = ['월', '화', '수', '목', '금', '토', '일'];
-const PET_LABEL: Record<string, string> = {
-  egg: '알', cracked: '금 간 알', chick: '병아리', chicken: '중간 닭', golden: '황금 닭',
-};
 
 /**
  * 학부모 리포트 상단 "이번 주" 요약 — 열 때마다 그 시점 최신 (크론 불필요).
@@ -30,7 +27,7 @@ export async function ParentWeeklySummary({ studentId }: { studentId: string }) 
   const weekStart = weekStartStr();
   const today = kstDateStr(new Date());
 
-  const [logsRes, attemptsRes, wrongRes, petRes, recentLogsRes] = await Promise.all([
+  const [logsRes, attemptsRes, wrongRes, recentLogsRes] = await Promise.all([
     admin
       .from('learning_daily_log')
       .select('date, seconds')
@@ -47,11 +44,6 @@ export async function ParentWeeklySummary({ studentId }: { studentId: string }) 
       .eq('student_id', studentId)
       .order('week_start', { ascending: false })
       .limit(1)
-      .maybeSingle(),
-    admin
-      .from('student_pets')
-      .select('stage')
-      .eq('student_id', studentId)
       .maybeSingle(),
     // 스트릭 계산용 최근 60일 학습일
     admin
@@ -106,8 +98,6 @@ export async function ParentWeeklySummary({ studentId }: { studentId: string }) 
       } else break;
     }
   }
-
-  const petStage = petRes.data?.stage ? (PET_LABEL[petRes.data.stage] ?? null) : null;
 
   // 시험 커버리지 — 가장 최근에 공부한 교재 기준 (열 때마다 실시간 재계산)
   let coverageInfo: { bookTitle: string; coverage: number; knownInBook: number; totalWords: number } | null = null;
@@ -207,19 +197,12 @@ export async function ParentWeeklySummary({ studentId }: { studentId: string }) 
         </div>
       )}
 
-      {/* 오답 극복 + 펫 */}
-      {(wrongTotal > 0 || petStage) && (
+      {/* 오답 극복 */}
+      {wrongTotal > 0 && (
         <div className="flex flex-wrap items-center gap-2 text-xs">
-          {wrongTotal > 0 && (
-            <span className="inline-flex items-center gap-1 rounded-full bg-[#FCE8E6] px-2.5 py-1 font-medium text-[#C5221F]">
-              틀린 단어 {wrongTotal}개 중 <b>{wrongGraduated}개 극복</b> (3번 연속 정답 시 졸업)
-            </span>
-          )}
-          {petStage && (
-            <span className="inline-flex items-center gap-1 rounded-full bg-amber-50 px-2.5 py-1 font-medium text-amber-700">
-              <Sparkles className="h-3 w-3" /> 학습 펫: {petStage}
-            </span>
-          )}
+          <span className="inline-flex items-center gap-1 rounded-full bg-[#FCE8E6] px-2.5 py-1 font-medium text-[#C5221F]">
+            틀린 단어 {wrongTotal}개 중 <b>{wrongGraduated}개 극복</b> (3번 연속 정답 시 졸업)
+          </span>
         </div>
       )}
 

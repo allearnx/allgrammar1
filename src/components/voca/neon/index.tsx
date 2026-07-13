@@ -11,10 +11,7 @@ import { RhythmSpelling } from './rhythm-spelling';
 import { WordMatching } from './word-matching';
 import { QuickQuiz, type QuizWrongWord } from './quick-quiz';
 import { VocaDayRankCard, type VocaDayRankCardProps } from '@/components/voca/voca-day-rank-card';
-import { PetReaction } from '@/components/voca/pet/pet-reaction';
-import { usePet } from '@/hooks/use-pet';
 import { EMPTY_VOCA_PROGRESS, type VocaVocabulary, type VocaStudentProgress } from '@/types/voca';
-import type { PetFeedResult } from '@/lib/voca/pet-constants';
 import { shuffle } from '@/lib/utils';
 
 const EXAM_PASS = 90;
@@ -46,8 +43,6 @@ export function NeonVocaTab({ vocabulary, dayId, progress, dayTitle }: NeonVocaT
   const router = useRouter();
   const [localProgress, setLocalProgress] = useState(progress);
   const [rankData, setRankData] = useState<RankData | null>(null);
-  const [petReaction, setPetReaction] = useState<PetFeedResult | null>(null);
-  const pet = usePet();
   const completedSteps = useMemo(() => getStepStates(localProgress), [localProgress]);
   // 시험은 표제어를 항상 셔플해서 출제 (연습 단계와 순서를 다르게)
   const examVocab = useMemo(() => shuffle([...vocabulary]), [vocabulary]);
@@ -144,11 +139,6 @@ export function NeonVocaTab({ vocabulary, dayId, progress, dayTitle }: NeonVocaT
             .then((r) => r.json())
             .then((data) => {
               setRankData(data);
-              // 펫 먹이 주기
-              const scores = data.scores as { quiz: number; spelling: number; matching: number };
-              pet.feed(dayId, scores, 0).then((result) => {
-                if (result && result.xpEarned > 0) setPetReaction(result);
-              });
             })
             .catch(() => toast.success('모든 단계 완료!'));
         }
@@ -156,7 +146,7 @@ export function NeonVocaTab({ vocabulary, dayId, progress, dayTitle }: NeonVocaT
     } else {
       toast.info('기준 점수에 도달하지 못했습니다. 다시 도전해보세요!');
     }
-  }, [saveProgress, saveQuizResult, dayId, pet, vocabulary.length]);
+  }, [saveProgress, saveQuizResult, dayId, vocabulary.length]);
 
   // 보너스 시험 완료 — 점수만 기록(최고점), 4단계 완료/랭킹에는 영향 없음
   const handleExamComplete = useCallback((score: number, wrongWords?: { front_text: string; back_text: string }[]) => {
@@ -307,11 +297,6 @@ export function NeonVocaTab({ vocabulary, dayId, progress, dayTitle }: NeonVocaT
           dayTitle={dayTitle}
           onClose={goHome}
         />
-      )}
-
-      {/* Pet Reaction */}
-      {petReaction && (
-        <PetReaction result={petReaction} onClose={() => setPetReaction(null)} />
       )}
     </div>
   );

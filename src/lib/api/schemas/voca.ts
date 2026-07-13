@@ -149,15 +149,3 @@ export const vocaBookAssignmentSchema = z.object({
 export const vocaBookAssignmentDeleteSchema = z.object({
   studentId: ID,
 });
-
-// ── 병아리 키우기 Schemas ──
-
-export const vocaPetFeedSchema = z.object({
-  dayId: ID,
-  scores: z.object({
-    quiz: z.number(),
-    spelling: z.number(),
-    matching: z.number(),
-  }),
-  streak: z.number().min(0),
-});

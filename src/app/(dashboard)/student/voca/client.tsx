@@ -5,7 +5,6 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { Badge } from '@/components/ui/badge';
 import { CheckCircle, Lock, ChevronRight, ChevronDown, Search, BookOpen, BookMarked, Sparkles, GraduationCap, Users, ArrowRight } from 'lucide-react';
-import { PetWidget } from '@/components/voca/pet/pet-widget';
 import { BonusExam } from '@/components/voca/bonus-exam';
 import { AssignedExams } from '@/components/voca/assigned-exams';
 import { BookGuidePicker } from '@/components/voca/book-guide-picker';
@@ -370,9 +369,6 @@ export function VocaHomeClient({ books, days, progressList, submissionStatuses =
           <BookSelector books={books} selectedBookId={selectedBookId} onSelect={selectBook} />
         </div>
       )}
-
-      {/* Pet widget */}
-      <PetWidget />
 
       {/* Day list */}
       {filteredDays.length === 0 ? (
