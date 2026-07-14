@@ -25,16 +25,17 @@ function matchesGrade(book: VocaBook, grade: GradeKey): boolean {
     case 'high1': return /고1/.test(t);
     case 'high2': return /고2/.test(t);
     case 'high3': return /고3/.test(t);
-    case 'intl': return book.definition_lang === 'en'; // 영영 교재는 자동 분류
+    // 영영 교재 + The Giver(원서 단어장, 영한이지만 유학생 대상)
+    case 'intl': return book.definition_lang === 'en' || /giver/i.test(t);
   }
 }
 
-/** 학년별 기본 추천: 초등=주니어, 중등=필수, 고등=3월 모고(첫 시험 대비), 국제=단어 많은 순 */
+/** 학년별 기본 추천: 초등=주니어, 중등=필수, 고등=3월 모고(첫 시험 대비), 국제=전부 추천 */
 function isRecommended(book: VocaBook, grade: GradeKey): boolean {
   const t = book.title.normalize('NFC');
   if (grade === 'elementary') return /주니어/.test(t);
   if (grade === 'middle') return /중등 ?필수/.test(t);
-  if (grade === 'intl') return false; // Day 수 많은 순 정렬에 맡김
+  if (grade === 'intl') return true; // 매칭된 교재(Workshop·Giver)가 곧 추천
   return /3월/.test(t);
 }
 
@@ -189,14 +190,17 @@ export function BookGuidePicker({ books, days, onSelect, onSkip }: BookGuidePick
         )}
 
         {others.length > 0 && (
-          <details className="pt-2">
-            <summary className="cursor-pointer text-sm font-semibold hover:opacity-70" style={{ color: VOCA_COLORS.gray }}>
-              다른 교재도 보기 ({others.length})
-            </summary>
-            <div className="mt-3 space-y-3">
-              {others.map((b) => renderCard(b, false))}
+          <div className="space-y-3 pt-4">
+            {/* 접지 않고 전부 노출 — 접혀 있으면 학생들이 교재를 못 찾는다 */}
+            <div className="flex items-center gap-3">
+              <span className="h-px flex-1 bg-white" />
+              <p className="text-sm font-semibold" style={{ color: VOCA_COLORS.gray }}>
+                다른 교재 ({others.length})
+              </p>
+              <span className="h-px flex-1 bg-white" />
             </div>
-          </details>
+            {others.map((b) => renderCard(b, false))}
+          </div>
         )}
       </div>
     </div>
