@@ -8,6 +8,7 @@ import { cn } from '@/lib/utils';
 import { useAudioPlayer } from './audio-player-hook';
 import { NeonSentenceDisplay } from './neon-sentence-display';
 import { ProgressDots } from './progress-dots';
+import { VOCA_STEP_THEMES } from '@/components/voca/voca-brand';
 import type { VocaVocabulary } from '@/types/voca';
 import './neon-styles.css';
 
@@ -132,6 +133,8 @@ export function NeonFlashcard({ vocabulary, onComplete }: NeonFlashcardProps) {
   };
 
   const allVisited = visited.size === vocabulary.length;
+  // 카드 배경 — 구글 4색 파스텔 순환 (Day 배지·스텝바와 같은 리듬, 30장 넘겨도 안 지루하게)
+  const cardTheme = VOCA_STEP_THEMES[currentIndex % VOCA_STEP_THEMES.length];
 
   return (
     <div className="neon-container p-4 md:p-8 min-h-[60dvh] flex flex-col">
@@ -158,7 +161,8 @@ export function NeonFlashcard({ vocabulary, onComplete }: NeonFlashcardProps) {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -direction * 100 }}
             transition={{ duration: 0.25 }}
-            className="w-full max-w-lg space-y-6"
+            className="w-full max-w-lg rounded-3xl px-6 py-10 md:px-10 md:py-12 space-y-6"
+            style={{ background: cardTheme.bg }}
           >
             {/* 단어 (항상 표시 — 발음 중 글자별 카라오케) */}
             <p className="voca-display text-4xl text-center" style={{ fontWeight: 700 }}>
@@ -206,24 +210,28 @@ export function NeonFlashcard({ vocabulary, onComplete }: NeonFlashcardProps) {
 
             {/* 품사 */}
             {vocab.part_of_speech && (
-              <p className="text-sm text-gray-400 text-center">{vocab.part_of_speech}</p>
+              <p className="text-center">
+                <span className="inline-flex rounded-full bg-white px-3 py-1 text-xs font-bold text-gray-500 shadow-sm">
+                  {vocab.part_of_speech}
+                </span>
+              </p>
             )}
 
-            {/* TTS 재생 버튼 */}
+            {/* TTS 재생 버튼 — 파란 원형(핵심 액션이 한눈에 보이게) */}
             <div className="flex justify-center">
               <Button
                 variant="ghost"
                 size="lg"
                 className={cn(
-                  'rounded-full w-14 h-14 border-2 transition-all',
-                  isPlaying
-                    ? 'border-brand-400 text-brand-500 bg-brand-50'
-                    : 'border-gray-200 text-gray-400 hover:border-brand-300 hover:text-brand-500 hover:bg-brand-50/50',
+                  'rounded-full w-14 h-14 shadow-md transition-all',
+                  isPlaying || isSpeakingWord
+                    ? 'bg-brand-100 text-brand-600'
+                    : 'bg-brand-600 text-white hover:bg-brand-700 hover:shadow-lg hover:text-white hover:-translate-y-0.5',
                 )}
                 onClick={handlePlay}
                 disabled={isPlaying || isSpeakingWord}
               >
-                <Volume2 className={cn('h-6 w-6', isPlaying && 'animate-pulse')} />
+                <Volume2 className={cn('h-6 w-6', (isPlaying || isSpeakingWord) && 'animate-pulse')} />
               </Button>
             </div>
 
@@ -240,7 +248,7 @@ export function NeonFlashcard({ vocabulary, onComplete }: NeonFlashcardProps) {
                     {vocab.back_text}
                   </p>
                   {vocab.exam_source && (
-                    <span className="mt-1.5 inline-flex items-center gap-1 rounded-full bg-[#E8F0FE] px-2.5 py-0.5 text-[11px] font-bold text-[#1A73E8]">
+                    <span className="mt-1.5 inline-flex items-center gap-1 rounded-full bg-white px-2.5 py-0.5 text-[11px] font-bold text-[#1A73E8] shadow-sm">
                       📄 {vocab.exam_source} 기출 문장
                     </span>
                   )}
@@ -275,18 +283,18 @@ export function NeonFlashcard({ vocabulary, onComplete }: NeonFlashcardProps) {
         </Button>
 
         {allVisited && currentIndex === vocabulary.length - 1 ? (
-          <Button
-            size="sm"
-            className="bg-brand-600 text-white hover:bg-brand-700"
+          <button
+            className="voca-cta voca-display rounded-full px-8 py-2.5 text-sm active:scale-[0.98]"
+            style={{ fontWeight: 700 }}
             onClick={onComplete}
           >
-            완료
-          </Button>
+            완료 →
+          </button>
         ) : (
           <Button
-            variant="ghost"
+            variant="outline"
             size="sm"
-            className="text-gray-500"
+            className="rounded-full border-2 border-brand-300 bg-white px-6 text-brand-700 font-semibold shadow-sm hover:bg-brand-50 hover:shadow-md"
             onClick={goNext}
           >
             다음

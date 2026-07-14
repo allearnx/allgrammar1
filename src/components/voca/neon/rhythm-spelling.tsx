@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useMemo, useCallback, useEffect, useRef } from 'react';
+import { useState, useCallback, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { cn, shuffle, blankOutWordExact } from '@/lib/utils';
@@ -38,24 +38,30 @@ interface WordResult {
   totalLetters: number;
 }
 
+type LetterState = 'typed' | 'auto' | 'correct' | 'wrong';
+
+const PASS_THRESHOLD = 80;
+
 export function RhythmSpelling({ vocabulary, onComplete, examMode = false }: RhythmSpellingProps) {
-  const [attempt, setAttempt] = useState(0);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const shuffledVocab = useMemo(() => shuffle([...vocabulary]), [vocabulary, attempt]);
+  // ⚠️ useMemo([vocabulary])로 만들면 리렌더로 배열 참조가 바뀔 때 시험 도중
+  // 출제 순서가 재셔플된다(푼 단어 반복 + 안 푼 단어 누락). 마운트 시 1회만 생성.
+  const [shuffledVocab, setShuffledVocab] = useState(() => shuffle([...vocabulary]));
   const [currentIndex, setCurrentIndex] = useState(0);
   const [typedLetters, setTypedLetters] = useState<string[]>([]);
-  const [letterStates, setLetterStates] = useState<('correct' | 'wrong' | 'auto')[]>([]);
+  const [letterStates, setLetterStates] = useState<LetterState[]>([]);
+  // 채점 완료 후 정답 노출 중 (입력 잠금) — false면 자유 입력 중
+  const [graded, setGraded] = useState(false);
   const [finalScore, setFinalScore] = useState<number | null>(null);
   const [wrongFlash, setWrongFlash] = useState(false);
   const advanceTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const flashTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const resultsRef = useRef<WordResult[]>([]);
   const wrongWordsRef = useRef<SpellingWrongWord[]>([]);
-  const wrongLettersRef = useRef<Set<number>>(new Set());
 
   const vocab = shuffledVocab[currentIndex];
   const targetWord = vocab.front_text.trim().toLowerCase();
   const currentLetterIdx = typedLetters.length;
+  const isFull = currentLetterIdx >= targetWord.length;
 
   // 알파벳 글자만 카운트 (채점용)
   const letterCount = targetWord.split('').filter((ch) => !isNonLetter(ch)).length;
@@ -72,7 +78,7 @@ export function RhythmSpelling({ vocabulary, onComplete, examMode = false }: Rhy
     : null;
 
   /** 현재 위치부터 연속된 비알파벳 문자를 자동 채움 */
-  const autoFillNonLetters = useCallback((fromIdx: number, letters: string[], states: ('correct' | 'wrong' | 'auto')[]) => {
+  const autoFillNonLetters = useCallback((fromIdx: number, letters: string[], states: LetterState[]) => {
     let idx = fromIdx;
     const newLetters = [...letters];
     const newStates = [...states];
@@ -84,10 +90,21 @@ export function RhythmSpelling({ vocabulary, onComplete, examMode = false }: Rhy
     return { newLetters, newStates };
   }, [targetWord]);
 
-  const finishWord = useCallback(() => {
-    const hadWrong = wrongLettersRef.current.size > 0;
+  /** 다 채운 답안을 채점 — 틀린 칸 빨간 표시 후 다음 단어로 */
+  const gradeWord = useCallback(() => {
+    let wrongCount = 0;
+    const gradedStates: LetterState[] = targetWord.split('').map((ch, i) => {
+      if (isNonLetter(ch)) return 'auto';
+      if (typedLetters[i] === ch) return 'correct';
+      wrongCount++;
+      return 'wrong';
+    });
+    setLetterStates(gradedStates);
+    setGraded(true);
+
+    const hadWrong = wrongCount > 0;
     resultsRef.current.push({
-      firstTryCorrect: letterCount - wrongLettersRef.current.size,
+      firstTryCorrect: letterCount - wrongCount,
       totalLetters: letterCount,
     });
     if (hadWrong) {
@@ -95,79 +112,86 @@ export function RhythmSpelling({ vocabulary, onComplete, examMode = false }: Rhy
         front_text: shuffledVocab[currentIndex].front_text,
         back_text: shuffledVocab[currentIndex].back_text,
       });
+      setWrongFlash(true);
+      flashTimerRef.current = setTimeout(() => setWrongFlash(false), 400);
     }
 
+    // 틀렸으면 정답을 볼 시간을 조금 더 준다
     advanceTimerRef.current = setTimeout(() => {
       if (currentIndex + 1 < shuffledVocab.length) {
         setCurrentIndex((prev) => prev + 1);
         setTypedLetters([]);
         setLetterStates([]);
-        wrongLettersRef.current = new Set();
+        setGraded(false);
       } else {
         const all = resultsRef.current;
         const totalCorrect = all.reduce((s, r) => s + r.firstTryCorrect, 0);
         const totalLetters = all.reduce((s, r) => s + r.totalLetters, 0);
         const score = Math.round((totalCorrect / totalLetters) * 100);
         setFinalScore(score);
-        onComplete(score, wrongWordsRef.current);
+        // 통과 시엔 "다음 단계로" 클릭을 기다린 뒤 onComplete 호출.
+        // 미달이면 기존처럼 즉시 저장 + 부모의 재도전 안내 토스트가 뜨도록 바로 호출.
+        if (score < PASS_THRESHOLD) onComplete(score, wrongWordsRef.current);
       }
-    }, 600);
-  }, [currentIndex, shuffledVocab, onComplete, letterCount]);
+    }, hadWrong ? 1800 : 600);
+  }, [currentIndex, shuffledVocab, onComplete, letterCount, targetWord, typedLetters]);
 
+  /** 자유 입력 — 어떤 글자든 다음 칸에 채운다 (채점은 다 채운 뒤) */
   const handleKeyPress = useCallback((key: string) => {
-    if (currentLetterIdx >= targetWord.length) return;
+    if (graded || isFull) return;
 
     // 현재 위치가 비알파벳이면 자동 채움 후 진행
-    let effectiveIdx = currentLetterIdx;
     let currentTyped = typedLetters;
     let currentStates = letterStates;
-    if (isNonLetter(targetWord[effectiveIdx])) {
-      const { newLetters, newStates } = autoFillNonLetters(effectiveIdx, [...typedLetters], [...letterStates]);
+    if (isNonLetter(targetWord[currentTyped.length])) {
+      const { newLetters, newStates } = autoFillNonLetters(currentTyped.length, [...typedLetters], [...letterStates]);
       currentTyped = newLetters;
       currentStates = newStates;
-      effectiveIdx = newLetters.length;
-      if (effectiveIdx >= targetWord.length) {
+      if (currentTyped.length >= targetWord.length) {
         setTypedLetters(currentTyped);
         setLetterStates(currentStates);
-        finishWord();
         return;
       }
     }
 
-    const isCorrect = key.toLowerCase() === targetWord[effectiveIdx];
+    let newLetters = [...currentTyped, key.toLowerCase()];
+    let newStates: LetterState[] = [...currentStates, 'typed'];
 
-    if (isCorrect) {
-      let newLetters = [...currentTyped, key.toLowerCase()];
-      let newStates: ('correct' | 'wrong' | 'auto')[] = [...currentStates, 'correct'];
+    // 다음 위치가 비알파벳이면 자동 채움
+    const filled = autoFillNonLetters(newLetters.length, newLetters, newStates);
+    newLetters = filled.newLetters;
+    newStates = filled.newStates;
 
-      // 다음 위치가 비알파벳이면 자동 채움
-      const filled = autoFillNonLetters(effectiveIdx + 1, newLetters, newStates);
-      newLetters = filled.newLetters;
-      newStates = filled.newStates;
+    setTypedLetters(newLetters);
+    setLetterStates(newStates);
+  }, [graded, isFull, targetWord, typedLetters, letterStates, autoFillNonLetters]);
 
-      setTypedLetters(newLetters);
-      setLetterStates(newStates);
-
-      if (newLetters.length >= targetWord.length) {
-        finishWord();
-      }
-    } else {
-      wrongLettersRef.current.add(effectiveIdx);
-      setWrongFlash(true);
-      flashTimerRef.current = setTimeout(() => setWrongFlash(false), 400);
-      // state 업데이트 (자동채움 적용)
-      if (currentTyped !== typedLetters) {
-        setTypedLetters(currentTyped);
-        setLetterStates(currentStates);
-      }
-    }
-  }, [currentLetterIdx, targetWord, typedLetters, letterStates, autoFillNonLetters, finishWord]);
+  /** 백스페이스 — 자동 채움(구분자)은 건너뛰고 마지막 입력 글자를 지운다 */
+  const handleBackspace = useCallback(() => {
+    if (graded || typedLetters.length === 0) return;
+    let end = typedLetters.length;
+    while (end > 0 && letterStates[end - 1] === 'auto') end--;
+    if (end === 0) return;
+    setTypedLetters(typedLetters.slice(0, end - 1));
+    setLetterStates(letterStates.slice(0, end - 1));
+  }, [graded, typedLetters, letterStates]);
 
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
       if (finalScore !== null) return;
       if (e.isComposing || e.key === 'Process') return; // 한글 IME 조합 중 무시
-      if (e.key === 'Backspace') return;
+      if (e.key === 'Backspace') {
+        e.preventDefault();
+        handleBackspace();
+        return;
+      }
+      if (e.key === 'Enter') {
+        if (isFull && !graded) {
+          e.preventDefault();
+          gradeWord();
+        }
+        return;
+      }
       // 물리 키(e.code) 기준으로 판정 — 한글 IME가 켜져 있어도 영문 스펠링 입력 가능.
       // (숨은 입력창에 IME 조합이 들어가면 e.key가 자모/'Process'가 되어 안 먹던 문제 해결)
       const codeMatch = /^Key([A-Z])$/.exec(e.code);
@@ -183,7 +207,7 @@ export function RhythmSpelling({ vocabulary, onComplete, examMode = false }: Rhy
     };
     window.addEventListener('keydown', handler);
     return () => window.removeEventListener('keydown', handler);
-  }, [handleKeyPress, finalScore]);
+  }, [handleKeyPress, handleBackspace, gradeWord, isFull, graded, finalScore]);
 
   useEffect(() => {
     return () => {
@@ -193,24 +217,27 @@ export function RhythmSpelling({ vocabulary, onComplete, examMode = false }: Rhy
   }, []);
 
   function handleRetry() {
-    setAttempt((a) => a + 1);
+    setShuffledVocab(shuffle([...vocabulary]));
     setCurrentIndex(0);
     setTypedLetters([]);
     setLetterStates([]);
+    setGraded(false);
     setFinalScore(null);
     resultsRef.current = [];
     wrongWordsRef.current = [];
-    wrongLettersRef.current = new Set();
   }
+
+  const hasWrongCell = graded && letterStates.includes('wrong');
 
   if (finalScore !== null) {
     return (
       <NeonResultScreen
         score={finalScore}
-        passThreshold={80}
+        passThreshold={PASS_THRESHOLD}
         passMessage="통과!"
         failMessage="80% 이상 필요합니다"
         onRetry={handleRetry}
+        onContinue={finalScore >= PASS_THRESHOLD ? () => onComplete(finalScore, wrongWordsRef.current) : undefined}
       />
     );
   }
@@ -264,7 +291,7 @@ export function RhythmSpelling({ vocabulary, onComplete, examMode = false }: Rhy
           <div className={cn('flex gap-1.5 justify-center flex-wrap', wrongFlash && 'wrong-shake')}>
             {targetWord.split('').map((ch, i) => {
               const state = letterStates[i];
-              const isNext = i === currentLetterIdx;
+              const isNext = !graded && i === currentLetterIdx;
               const isSeparator = isNonLetter(ch);
 
               if (isSeparator) {
@@ -286,16 +313,34 @@ export function RhythmSpelling({ vocabulary, onComplete, examMode = false }: Rhy
                   key={i}
                   className={cn(
                     'w-10 h-13 md:w-12 md:h-15 rounded-lg border-2 flex items-center justify-center text-xl md:text-2xl font-bold transition-all',
+                    state === 'typed' && 'border-brand-400 text-gray-800 bg-white',
                     state === 'correct' && 'border-green-500 text-green-600 bg-green-50 correct-flash',
+                    state === 'wrong' && 'border-red-400 text-red-500 bg-red-50',
                     !state && isNext && 'border-brand-400 bg-brand-50/50 guide-glow',
                     !state && !isNext && 'border-gray-200 text-gray-300',
                   )}
                 >
-                  {state === 'correct' ? typedLetters[i] : isNext ? '_' : ''}
+                  {typedLetters[i] ?? (isNext ? '_' : '')}
                 </div>
               );
             })}
           </div>
+
+          {/* 채점 결과: 틀렸으면 정답 노출 / 다 채우면 채점 버튼 */}
+          {hasWrongCell && (
+            <p className="text-sm text-gray-500">
+              정답: <span className="voca-display text-green-600" style={{ fontWeight: 700 }}>{vocab.front_text}</span>
+            </p>
+          )}
+          {isFull && !graded && (
+            <button
+              onClick={gradeWord}
+              className="voca-cta voca-display rounded-full px-8 py-3 text-base active:scale-[0.98]"
+              style={{ fontWeight: 700 }}
+            >
+              채점하기 (Enter)
+            </button>
+          )}
         </motion.div>
       </AnimatePresence>
 
@@ -309,8 +354,8 @@ export function RhythmSpelling({ vocabulary, onComplete, examMode = false }: Rhy
               </button>
             ))}
             {ri === 2 && (
-              <button className="neon-key w-12 flex-none" onClick={() => {}}>
-                <Delete className="h-4 w-4 opacity-30" />
+              <button className="neon-key w-12 flex-none" onClick={handleBackspace} aria-label="지우기">
+                <Delete className="h-4 w-4" />
               </button>
             )}
           </div>

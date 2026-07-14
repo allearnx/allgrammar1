@@ -58,17 +58,15 @@ function chunkAvoidingDuplicateMeaning(vocabulary: VocaVocabulary[], size: numbe
 export function WordMatching({ vocabulary, onComplete }: WordMatchingProps) {
   const [currentChunk, setCurrentChunk] = useState(0);
   const [attempt, setAttempt] = useState(1);
-  const [retryCount, setRetryCount] = useState(0);
   const [totalWrong, setTotalWrong] = useState(0);
   const [totalPairs, setTotalPairs] = useState(0);
   const [finalScore, setFinalScore] = useState<number | null>(null);
   // 셋트 완료 후 "다음 세트" 안내 화면 (다 맞췄다는 신호) — null이면 푸는 중
   const [setDone, setSetDone] = useState<{ correct: number; total: number } | null>(null);
 
-  const chunks = useMemo(() => {
-    return chunkAvoidingDuplicateMeaning(vocabulary, CHUNK_SIZE);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [vocabulary, retryCount]);
+  // ⚠️ useMemo([vocabulary])로 만들면 리렌더로 배열 참조가 바뀔 때 게임 도중
+  // 셋트 구성이 재셔플된다. 마운트 시 1회만 생성, 재도전 시에만 명시적으로 재생성.
+  const [chunks, setChunks] = useState(() => chunkAvoidingDuplicateMeaning(vocabulary, CHUNK_SIZE));
 
   const items: MatchingGameItem[] = useMemo(() => {
     return chunks[currentChunk]?.map((v) => ({
@@ -89,7 +87,11 @@ export function WordMatching({ vocabulary, onComplete }: WordMatchingProps) {
     } else {
       const score = Math.round(((newTotalPairs - newTotalWrong) / newTotalPairs) * 100);
 
-      if (score >= PASS_SCORE || attempt >= MAX_ATTEMPTS) {
+      if (score >= PASS_SCORE) {
+        // 통과 — 결과 화면에서 "다음 단계로" 클릭을 기다린 뒤 onComplete 호출
+        setFinalScore(score);
+      } else if (attempt >= MAX_ATTEMPTS) {
+        // 최대 시도 소진 — 미달 점수를 그대로 저장(진행은 막힘, 재도전은 별도 버튼)
         setFinalScore(score);
         onComplete(score);
       } else {
@@ -107,7 +109,7 @@ export function WordMatching({ vocabulary, onComplete }: WordMatchingProps) {
   }
 
   function handleRetry() {
-    setRetryCount((c) => c + 1);
+    setChunks(chunkAvoidingDuplicateMeaning(vocabulary, CHUNK_SIZE));
     setCurrentChunk(0);
     setAttempt(1);
     setTotalWrong(0);
@@ -124,6 +126,7 @@ export function WordMatching({ vocabulary, onComplete }: WordMatchingProps) {
         passMessage="매칭 통과!"
         failMessage={`${finalScore}점 (90% 이상 필요)`}
         onRetry={handleRetry}
+        onContinue={finalScore >= PASS_SCORE ? () => onComplete(finalScore) : undefined}
       />
     );
   }

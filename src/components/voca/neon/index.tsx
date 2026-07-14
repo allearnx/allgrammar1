@@ -27,7 +27,8 @@ interface NeonVocaTabProps {
 }
 
 // 핵심 4단계 (완료 판정 대상). 시험은 보너스라 여기 포함하지 않는다.
-const STEP_LABELS = ['플래시카드', '매칭', '스펠링', '퀴즈'];
+// 순서: 플래시카드 → 매칭 → 퀴즈 → 스펠링 (스펠링을 마지막에 둬 가장 어려운 산출로 마무리)
+const STEP_LABELS = ['플래시카드', '매칭', '퀴즈', '스펠링'];
 
 // Step 완료 여부 판단
 function getStepStates(p: VocaStudentProgress | null) {
@@ -35,8 +36,8 @@ function getStepStates(p: VocaStudentProgress | null) {
   return [
     pr.flashcard_completed || (pr.quiz_score ?? 0) >= 80, // Step 1: 플래시카드
     pr.matching_completed,                                  // Step 2: 매칭
-    (pr.spelling_score ?? 0) >= 80,                         // Step 3: 스펠링
-    (pr.quiz_score ?? 0) >= 80,                             // Step 4: 퀴즈
+    (pr.quiz_score ?? 0) >= 80,                             // Step 3: 퀴즈
+    (pr.spelling_score ?? 0) >= 80,                         // Step 4: 스펠링
   ];
 }
 
@@ -250,22 +251,22 @@ export function NeonVocaTab({ vocabulary, dayId, progress, dayTitle }: NeonVocaT
             />
           )}
           {currentStep === 2 && (
-            <RhythmSpelling
-              vocabulary={vocabulary}
-              onComplete={(score, wrongWords) => handleStepComplete(2, 'spelling', score, wrongWords)}
-            />
-          )}
-          {currentStep === 3 && (
             hasEnoughForQuiz ? (
               <QuickQuiz
                 vocabulary={vocabulary}
-                onComplete={(score, wrongWords) => handleStepComplete(3, 'quiz', score, wrongWords)}
+                onComplete={(score, wrongWords) => handleStepComplete(2, 'quiz', score, wrongWords)}
               />
             ) : (
               <div className="neon-container p-6 text-center">
                 <p className="text-gray-400">퀴즈에는 최소 4개 단어가 필요합니다.</p>
               </div>
             )
+          )}
+          {currentStep === 3 && (
+            <RhythmSpelling
+              vocabulary={vocabulary}
+              onComplete={(score, wrongWords) => handleStepComplete(3, 'spelling', score, wrongWords)}
+            />
           )}
         </motion.div>
       </AnimatePresence>
