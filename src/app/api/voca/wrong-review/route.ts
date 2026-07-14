@@ -22,6 +22,8 @@ export const GET = createApiHandler(
     // 보기 풀 + 문맥형(빈칸 문장) 재료: 오답이 나온 Day들의 단어
     let distractorPool: string[] = [];
     let wordDistractorPool: string[] = [];
+    // 뜻 겹침 필터용 — 단어→뜻 쌍 (유의어가 보기로 섞여 정답이 두 개가 되는 것 방지)
+    let poolWords: { front_text: string; back_text: string }[] = [];
     const exampleMap: Record<string, string> = {};
     const examSourceMap: Record<string, string> = {};
     if (pool.dayIds.size > 0) {
@@ -31,6 +33,7 @@ export const GET = createApiHandler(
         .in('day_id', [...pool.dayIds]);
       distractorPool = (vocabRows || []).map((v) => v.back_text);
       wordDistractorPool = (vocabRows || []).map((v) => v.front_text);
+      poolWords = (vocabRows || []).map((v) => ({ front_text: v.front_text, back_text: v.back_text }));
       for (const v of vocabRows || []) {
         const key = v.front_text.toLowerCase();
         if (v.example_sentence && pool.wordMap.has(key) && !exampleMap[key]) {
@@ -75,6 +78,7 @@ export const GET = createApiHandler(
       weekStart: pool.weekStart,
       distractorPool,
       wordDistractorPool,
+      poolWords,
       exampleMap,
       examSourceMap,
       coverageDelta,

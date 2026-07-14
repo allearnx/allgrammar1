@@ -374,22 +374,26 @@ export function VocaHomeClient({ books, days, progressList, submissionStatuses =
             </button>
             <button
               onClick={() => handleModeChange('day')}
-              disabled={isPending || roundMode === 'day'}
+              disabled={isPending || roundMode === 'day' || round2Locked}
               className={`flex items-center gap-1.5 px-4 py-2 text-sm font-semibold transition-colors ${
                 roundMode === 'day'
                   ? 'bg-primary text-white'
-                  : 'bg-white text-gray-500 hover:bg-gray-50'
+                  : round2Locked
+                    ? 'bg-gray-50 text-gray-300 cursor-not-allowed'
+                    : 'bg-white text-gray-500 hover:bg-gray-50'
               }`}
             >
-              <BookMarked className="h-4 w-4" />
+              {round2Locked ? <Lock className="h-3.5 w-3.5" /> : <BookMarked className="h-4 w-4" />}
               Day별 완벽
             </button>
           </div>
         </div>
         <p className="text-xs text-gray-400">
-          {roundMode === 'book'
-            ? '전체 Day를 1회독으로 훑은 뒤, 다시 처음부터 2회독으로 반복합니다.'
-            : '각 Day를 1회독+2회독 완벽히 마치고 다음 Day로 넘어갑니다.'}
+          {round2Locked
+            ? 'Day별 완벽 모드는 2회독을 포함해서 유료 플랜에서 열려요. 무료 체험은 책 전체 1회독으로 진행됩니다.'
+            : roundMode === 'book'
+              ? '전체 Day를 1회독으로 훑은 뒤, 다시 처음부터 2회독으로 반복합니다.'
+              : '각 Day를 1회독+2회독 완벽히 마치고 다음 Day로 넘어갑니다.'}
         </p>
       </div>
 

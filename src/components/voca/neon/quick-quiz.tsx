@@ -3,6 +3,7 @@
 import { useState, useCallback, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { cn, shuffle, blankOutWord } from '@/lib/utils';
+import { hasMeaningOverlap } from '@/lib/voca/meaning-overlap';
 import { NeonResultScreen } from './neon-result-screen';
 import { ProgressDots } from './progress-dots';
 import { VOCA_COLORS, VOCA_STEP_THEMES } from '@/components/voca/voca-brand';
@@ -55,10 +56,15 @@ function generateQuestions(vocabulary: VocaVocabulary[]): QuizQuestion[] {
   return shuffle([...vocabulary]).map((v) => {
     const type = pickType(canUseFillBlank(v));
 
+    // 오답 보기 후보: 정답과 뜻이 겹치는 단어 제외 (bred↔nurture↔bring up처럼
+    // 유의어가 보기로 섞이면 정답이 두 개인 문제가 됨). 겹침 제외 후 3개가 안 되면
+    // 나머지는 겹치는 것으로 채움 (보기 부족보다 낫다).
+    const safe = vocabulary.filter((d) => d.id !== v.id && !hasMeaningOverlap(v.back_text, d.back_text));
+    const risky = vocabulary.filter((d) => d.id !== v.id && hasMeaningOverlap(v.back_text, d.back_text));
+    const pool = [...shuffle(safe), ...shuffle(risky)];
+
     if (type === 'ko-to-en') {
-      const distractors = shuffle(
-        vocabulary.filter((d) => d.id !== v.id).map((d) => d.front_text)
-      ).slice(0, 3);
+      const distractors = pool.map((d) => d.front_text).slice(0, 3);
       const options = shuffle([v.front_text, ...distractors]);
       return {
         type,
@@ -72,9 +78,7 @@ function generateQuestions(vocabulary: VocaVocabulary[]): QuizQuestion[] {
 
     if (type === 'fill-blank') {
       const blanked = blankOutWord(v.example_sentence!, v.front_text);
-      const distractors = shuffle(
-        vocabulary.filter((d) => d.id !== v.id).map((d) => d.front_text)
-      ).slice(0, 3);
+      const distractors = pool.map((d) => d.front_text).slice(0, 3);
       const options = shuffle([v.front_text, ...distractors]);
       return {
         type,
@@ -87,10 +91,15 @@ function generateQuestions(vocabulary: VocaVocabulary[]): QuizQuestion[] {
       };
     }
 
-    // en-to-ko (기존)
-    const distractors = shuffle(
-      vocabulary.filter((d) => d.id !== v.id).map((d) => d.back_text)
-    ).slice(0, 3);
+    // en-to-ko (기존) — 같은 뜻 문자열 중복 제거
+    const seen = new Set([v.back_text]);
+    const distractors: string[] = [];
+    for (const d of pool) {
+      if (distractors.length >= 3) break;
+      if (seen.has(d.back_text)) continue;
+      seen.add(d.back_text);
+      distractors.push(d.back_text);
+    }
     const options = shuffle([v.back_text, ...distractors]);
     return {
       type,

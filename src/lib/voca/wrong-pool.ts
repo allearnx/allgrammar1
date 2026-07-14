@@ -33,19 +33,21 @@ export interface WrongPool {
 }
 
 /**
- * 올킬오답 풀 — 최근 3주 퀴즈 오답 + 이번 주 정복 진행.
- * 오답 수집 범위는 퀴즈만 (스펠링·매칭은 자가수정 연습이라 제외 — 학부모 노출 최소화 정책).
+ * 올킬오답 풀 — 최근 3주 스펠링 오답 + 이번 주 정복 진행.
+ * 스펠링은 자유입력 시험(2026-07-14~)이라 진짜 오답 — 여기만 수집.
+ * 퀴즈(4지선다)·매칭(소거법)은 찍어서 맞는 노이즈가 커서 제외 (사장님 결정).
  */
 export async function fetchWrongPool(client: SupabaseClient, studentId: string): Promise<WrongPool> {
   const weekStart = getCurrentMonday();
   const windowStart = getThreeWeeksAgo(weekStart);
 
-  const [{ data: quizRows }, { data: review }] = await Promise.all([
+  const [{ data: spellingRows }, { data: review }] = await Promise.all([
     client
-      .from('voca_quiz_results')
-      .select('wrong_words, day_id')
+      .from('voca_student_progress')
+      .select('spelling_wrong_words, day_id')
       .eq('student_id', studentId)
-      .gte('created_at', windowStart + 'T00:00:00Z'),
+      .gte('updated_at', windowStart + 'T00:00:00Z')
+      .not('spelling_wrong_words', 'is', null),
     client
       .from('voca_wrong_review')
       .select('progress, completed_at')
@@ -56,9 +58,11 @@ export async function fetchWrongPool(client: SupabaseClient, studentId: string):
 
   const wordMap = new Map<string, { front_text: string; back_text: string }>();
   const dayIds = new Set<string>();
-  for (const row of quizRows || []) {
+  for (const row of spellingRows || []) {
+    const words = (row.spelling_wrong_words || []) as Array<{ front_text: string; back_text: string }>;
+    if (words.length === 0) continue;
     if (row.day_id) dayIds.add(row.day_id);
-    for (const w of (row.wrong_words || []) as Array<{ front_text: string; back_text: string }>) {
+    for (const w of words) {
       const key = w.front_text.toLowerCase();
       if (!wordMap.has(key)) wordMap.set(key, { front_text: w.front_text, back_text: w.back_text });
     }

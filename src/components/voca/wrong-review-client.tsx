@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback, useRef, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Loader2, Swords, Trophy, PartyPopper } from 'lucide-react';
 import { cn, shuffle, blankOutWordExact } from '@/lib/utils';
+import { hasMeaningOverlap } from '@/lib/voca/meaning-overlap';
 import { fetchWithToast } from '@/lib/fetch-with-toast';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
@@ -23,6 +24,8 @@ interface ReviewData {
   weekStart: string;
   distractorPool: string[];
   wordDistractorPool: string[];
+  /** 뜻 겹침 필터용 단어→뜻 쌍 (Day 단어 풀) */
+  poolWords?: WordItem[];
   exampleMap: Record<string, string>;
   examSourceMap: Record<string, string>;
   coverageDelta: { bookTitle: string; now: number; after: number } | null;
@@ -231,7 +234,7 @@ interface QuizQuestion {
 }
 
 function ConquestMode({ data, onBack }: { data: ReviewData; onBack: () => void }) {
-  const { words, distractorPool, wordDistractorPool, exampleMap, examSourceMap } = data;
+  const { words, distractorPool, wordDistractorPool, poolWords, exampleMap, examSourceMap } = data;
   const [progress, setProgress] = useState<Record<string, number>>({ ...data.progress });
   const [questionIndex, setQuestionIndex] = useState(0);
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
@@ -267,13 +270,25 @@ function ConquestMode({ data, onBack }: { data: ReviewData; onBack: () => void }
       const seen = new Set([key]);
       const wordChoices: string[] = [];
       // 보기: 같은 오답 풀 단어 우선, 부족하면 해당 Day들의 단어로 채움 (총 5지)
-      for (const w of shuffle(words.map((x) => x.front_text))) {
+      // 정답과 뜻이 겹치는 유의어(nurture↔bring up 등)는 빈칸에 똑같이 들어맞아
+      // 정답이 두 개가 되므로 제외
+      for (const w of shuffle(words)) {
         if (wordChoices.length >= 4) break;
-        if (!seen.has(w.toLowerCase())) { seen.add(w.toLowerCase()); wordChoices.push(w); }
+        const k = w.front_text.toLowerCase();
+        if (seen.has(k) || hasMeaningOverlap(currentWord.back_text, w.back_text)) continue;
+        seen.add(k);
+        wordChoices.push(w.front_text);
       }
-      for (const w of shuffle(wordDistractorPool)) {
+      const dayPool: { front_text: string; back_text: string | null }[] = poolWords?.length
+        ? poolWords
+        : wordDistractorPool.map((w) => ({ front_text: w, back_text: null }));
+      for (const w of shuffle(dayPool)) {
         if (wordChoices.length >= 4) break;
-        if (!seen.has(w.toLowerCase())) { seen.add(w.toLowerCase()); wordChoices.push(w); }
+        const k = w.front_text.toLowerCase();
+        if (seen.has(k)) continue;
+        if (w.back_text && hasMeaningOverlap(currentWord.back_text, w.back_text)) continue;
+        seen.add(k);
+        wordChoices.push(w.front_text);
       }
       const options = shuffle([currentWord.front_text, ...wordChoices]);
       return {
@@ -285,10 +300,12 @@ function ConquestMode({ data, onBack }: { data: ReviewData; onBack: () => void }
       };
     }
 
-    // 기본: 뜻 고르기 (4지)
+    // 기본: 뜻 고르기 (4지) — 정답과 뜻이 겹치는 보기(유의어 뜻)는 제외
     const allBackTexts = new Set(distractorPool);
     words.forEach((w) => allBackTexts.add(w.back_text));
-    const others = [...allBackTexts].filter((t) => t !== currentWord.back_text);
+    const others = [...allBackTexts].filter(
+      (t) => t !== currentWord.back_text && !hasMeaningOverlap(currentWord.back_text, t),
+    );
     const distractors = shuffle(others).slice(0, 3);
     const options = shuffle([currentWord.back_text, ...distractors]);
     return {
