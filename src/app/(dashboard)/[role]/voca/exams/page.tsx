@@ -15,7 +15,7 @@ export default async function VocaExamResultsPage({ params }: Props) {
 
   return (
     <>
-      <Topbar user={user} title="보카 시험 결과" />
+      <Topbar user={user} title="올킬시험 관리" />
       <div className="p-4 md:p-6 space-y-6">
         <VocaExamAssignPanel />
         <VocaExamResultsClient />

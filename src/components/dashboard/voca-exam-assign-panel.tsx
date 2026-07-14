@@ -31,7 +31,8 @@ export function VocaExamAssignPanel() {
   const [selDays, setSelDays] = useState<string[]>([]);
   const [selStudents, setSelStudents] = useState<string[]>([]);
   const [title, setTitle] = useState('');
-  const [open, setOpen] = useState(false);
+  // 기본 펼침 — 접혀 있으면 선생님들이 배정 기능 자체를 못 찾는다 (사장님 피드백)
+  const [open, setOpen] = useState(true);
   const [saving, setSaving] = useState(false);
 
   useEffect(() => {
