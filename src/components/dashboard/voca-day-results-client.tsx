@@ -51,6 +51,20 @@ const MATCHING_TYPE_LABEL: Record<string, string> = {
   example: '예문',
 };
 
+/** 마지막 학습 시각 — KST 기준 "7/14 오전 9:33" 형식 */
+function formatStudyTime(iso: string | null | undefined): string | null {
+  if (!iso) return null;
+  const d = new Date(iso);
+  if (Number.isNaN(d.getTime())) return null;
+  return d.toLocaleString('ko-KR', {
+    timeZone: 'Asia/Seoul',
+    month: 'numeric',
+    day: 'numeric',
+    hour: 'numeric',
+    minute: '2-digit',
+  });
+}
+
 export function VocaDayResultsClient() {
   const [books, setBooks] = useState<VocaBook[]>([]);
   const [days, setDays] = useState<VocaDay[]>([]);
@@ -203,6 +217,7 @@ export function VocaDayResultsClient() {
                 <th className="px-4 py-3 font-medium text-center">매칭</th>
                 <th className="px-4 py-3 font-medium text-center">퀴즈</th>
                 <th className="px-4 py-3 font-medium text-center">상태</th>
+                <th className="px-4 py-3 font-medium text-center">학습 시각</th>
                 <th className="px-4 py-3 font-medium text-center">공유</th>
               </tr>
             </thead>
@@ -267,13 +282,16 @@ export function VocaDayResultsClient() {
                           {cfg.label}
                         </span>
                       </td>
+                      <td className="px-4 py-3 text-center text-xs text-gray-500 whitespace-nowrap">
+                        {formatStudyTime(s.progress?.updated_at) ?? <span className="text-gray-300">—</span>}
+                      </td>
                       <td className="px-4 py-3 text-center">
                         <VocaDayShareButton studentId={s.studentId} dayId={selectedDayId} />
                       </td>
                     </tr>
                     {isExpanded && (
                       <tr className="border-b bg-gray-50">
-                        <td colSpan={7} className="px-6 pb-4 pt-2">
+                        <td colSpan={8} className="px-6 pb-4 pt-2">
                           <div className="space-y-3">
                             {s.wrongWords.quiz.length > 0 && (
                               <div>
