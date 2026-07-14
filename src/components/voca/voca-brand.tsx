@@ -8,31 +8,10 @@
  * 위치/회전 고정값이라 hydration 안전.
  */
 
-// 구글 4색 (allkill _data.ts C와 동일 계열)
-export const VOCA_COLORS = {
-  ink: '#1F1F1F',
-  gray: '#3C4043',
-  sky: '#DFEFFF',
-  blue: '#1A73E8',
-  blueDark: '#174EA6',
-  blueLight: '#E8F0FE',
-  yellow: '#FDD663',
-  yellowDark: '#B06000',
-  yellowLight: '#FEF7E0',
-  green: '#188038',
-  greenDark: '#0D652D',
-  greenLight: '#E6F4EA',
-  red: '#D93025',
-  redLight: '#FCE8E6',
-} as const;
-
-// 학년 카드 등 순환용 구글 4색 테마
-export const VOCA_STEP_THEMES = [
-  { solid: '#1A73E8', bg: '#E8F0FE', text: '#174EA6' },
-  { solid: '#D93025', bg: '#FCE8E6', text: '#A50E0E' },
-  { solid: '#F9AB00', bg: '#FEF7E0', text: '#B06000' },
-  { solid: '#188038', bg: '#E6F4EA', text: '#0D652D' },
-] as const;
+// 색 토큰은 서버 안전 모듈에 정의 — 여기서는 클라이언트 편의용 re-export.
+// ⚠️ 서버 컴포넌트는 '@/lib/voca/brand-tokens'에서 직접 임포트할 것
+// ('use client' 모듈 경유 임포트는 값이 아닌 클라이언트 참조가 되어 undefined).
+export { VOCA_COLORS, VOCA_STEP_THEMES } from '@/lib/voca/brand-tokens';
 
 export function VocaBrandStyle() {
   return (

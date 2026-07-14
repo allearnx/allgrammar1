@@ -104,21 +104,43 @@ export function VocaProgressCard({ vocaProgress, submissionStatuses = {} }: Prop
           </div>
         </div>
 
-        {/* Day별 진행률 */}
+        {/* Day별 진행률 — 최근 학습 5개만 펼치고 나머지는 접기 (리포트가 너무 길어지지 않게) */}
         {vocaBooks.length > 0 && (
           <div>
             <h4 className="text-sm font-semibold tracking-tight mb-2">Day별 진행률</h4>
             <div className="space-y-4">
-              {vocaBooks.map(({ bookId, bookTitle, days }) => (
-                <div key={bookId}>
-                  <h5 className="text-sm font-medium text-muted-foreground mb-2">{bookTitle}</h5>
-                  <div className="space-y-2">
-                    {days.map((vp) => (
-                      <DayRow key={vp.day_id} vp={vp} submissionStatuses={submissionStatuses} />
-                    ))}
+              {vocaBooks.map(({ bookId, bookTitle, days }) => {
+                const RECENT_COUNT = 5;
+                // 최근 학습 순으로 상위 5개, 나머지는 Day 순서대로 접힘 목록에
+                const byRecency = [...days].sort((a, b) =>
+                  (b.updated_at ?? '').localeCompare(a.updated_at ?? '')
+                );
+                const recent = byRecency.slice(0, RECENT_COUNT);
+                const recentIds = new Set(recent.map((d) => d.day_id));
+                const older = days.filter((d) => !recentIds.has(d.day_id));
+                return (
+                  <div key={bookId}>
+                    <h5 className="text-sm font-medium text-muted-foreground mb-2">{bookTitle}</h5>
+                    <div className="space-y-2">
+                      {recent.map((vp) => (
+                        <DayRow key={vp.day_id} vp={vp} submissionStatuses={submissionStatuses} />
+                      ))}
+                    </div>
+                    {older.length > 0 && (
+                      <details className="mt-2">
+                        <summary className="cursor-pointer text-xs font-medium text-muted-foreground hover:text-foreground">
+                          지난 Day 모두 보기 ({older.length}개)
+                        </summary>
+                        <div className="mt-2 space-y-2">
+                          {older.map((vp) => (
+                            <DayRow key={vp.day_id} vp={vp} submissionStatuses={submissionStatuses} />
+                          ))}
+                        </div>
+                      </details>
+                    )}
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
         )}
