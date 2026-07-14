@@ -1,0 +1,53 @@
+import { requireRole } from '@/lib/auth/helpers';
+import { createClient } from '@/lib/supabase/server';
+import { redirect } from 'next/navigation';
+import { Topbar } from '@/components/layout/topbar';
+import { getPlanContext } from '@/lib/billing/get-plan-context';
+import { VocaExamClient } from './client';
+import type { VocaBook, VocaDay } from '@/types/voca';
+import { VOCA_BOOKS_COLUMNS, VOCA_DAYS_COLUMNS } from '@/types/voca';
+
+/** 올킬시험 — 묶음 표제어 스펠링 시험 전용 페이지 (보카 홈 하단 카드에서 승격) */
+export default async function VocaExamPage() {
+  const user = await requireRole(['student']);
+  const supabase = await createClient();
+
+  // 보카 홈과 동일한 접근 규칙: 배정 or 무료 체험
+  const { data: assignment } = await supabase
+    .from('service_assignments')
+    .select('id')
+    .eq('student_id', user.id)
+    .eq('service', 'voca')
+    .single();
+
+  const plan = await getPlanContext(user.academy_id, user.id);
+  if (!assignment && plan.tier !== 'free') redirect('/student');
+
+  const { data: books } = await supabase
+    .from('voca_books').select(VOCA_BOOKS_COLUMNS).eq('is_active', true).order('created_at');
+
+  const bookIds = (books || []).map((b) => b.id);
+  let days: VocaDay[] = [];
+  if (bookIds.length > 0) {
+    const { data } = await supabase
+      .from('voca_days')
+      .select(VOCA_DAYS_COLUMNS)
+      .in('book_id', bookIds)
+      .order('sort_order');
+    days = data || [];
+  }
+
+  return (
+    <>
+      <Topbar user={user} title="올킬시험" />
+      <div className="p-4 md:p-6">
+        <VocaExamClient
+          books={(books as VocaBook[]) || []}
+          days={days}
+          studentId={user.id}
+          freeDayLimit={plan.tier === 'free' ? 3 : 0}
+        />
+      </div>
+    </>
+  );
+}
