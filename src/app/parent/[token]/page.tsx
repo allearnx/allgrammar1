@@ -4,6 +4,8 @@ import { ALLKILL_OG, ALLKILL_SLOGAN, OLLAYOUNG_OG } from '@/lib/og-cards';
 import { NaesinProgressCard } from '@/components/dashboard/naesin-progress-card';
 import { VocaProgressCard } from '@/components/dashboard/voca-progress-card';
 import { VocaExamReportCard } from '@/components/dashboard/voca-exam-report-card';
+import { VocaKnownWordsCard } from '@/components/dashboard/voca-known-words-card';
+import { computeTotalKnownWords } from '@/lib/voca/coverage';
 import { ParentProgressTabs } from '@/components/dashboard/parent-progress-tabs';
 import { fetchVocaExamGroups } from '@/lib/voca/fetch-exam-results';
 import { fetchNaesinExamData } from '@/lib/naesin/fetch-exam-data';
@@ -250,13 +252,17 @@ export default async function ParentReportPage({ params, searchParams }: Props) 
     />
   ) : null;
 
-  // 보카 시험 결과 (오늘 본 게 맨 위) — 학부모 리포트에 노출
-  const vocaExam = hasVoca ? await fetchVocaExamGroups(admin, [studentId]) : { groups: [], dayTitles: {} };
+  // 보카 시험 결과 (오늘 본 게 맨 위) + 누적 암기 단어 — 학부모 리포트에 노출
+  const [vocaExam, totalKnown] = await Promise.all([
+    hasVoca ? fetchVocaExamGroups(admin, [studentId]) : Promise.resolve({ groups: [], dayTitles: {} }),
+    hasVoca ? computeTotalKnownWords(admin, studentId) : Promise.resolve({ knownWords: 0, weeklyNew: 0 }),
+  ]);
   const vocaExamExams = vocaExam.groups[0]?.exams ?? [];
 
   const vocaCard = hasVoca ? (
     <div className="space-y-4">
       <VocaExamReportCard exams={vocaExamExams} dayTitles={vocaExam.dayTitles} />
+      <VocaKnownWordsCard knownWords={totalKnown.knownWords} weeklyNew={totalKnown.weeklyNew} />
       <VocaProgressCard vocaProgress={vocaProgress} submissionStatuses={vocaSubmissionStatuses} />
     </div>
   ) : null;

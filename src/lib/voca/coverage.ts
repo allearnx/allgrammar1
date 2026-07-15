@@ -1,6 +1,6 @@
 import type { SupabaseClient } from '@supabase/supabase-js';
 import { isR1Complete } from '@/lib/dashboard/voca-helpers';
-import { fetchWrongPool, activeWrongKeys } from '@/lib/voca/wrong-pool';
+import { fetchWrongPool, activeWrongKeys, getCurrentMonday } from '@/lib/voca/wrong-pool';
 
 export interface VocaCoverage {
   /** 0~100. 대상 교재에 단어가 없으면 null */
@@ -77,4 +77,62 @@ export async function computeVocaCoverage(
     totalWords: target.size,
     coverageAfterConquest: Math.round((hitAfter / target.size) * 100),
   };
+}
+
+export interface VocaTotalKnown {
+  /** 누적 암기 단어 수 (교재 무관 고유 단어, 정복 대기 오답 제외) */
+  knownWords: number;
+  /** 이번 주(월요일~)에 새로 외운 단어 수 */
+  weeklyNew: number;
+}
+
+/**
+ * 누적 암기 단어 — "지금까지 외운 단어 N개" (교재 횡단 대표 숫자, 학부모 리포트용).
+ * 아는 단어 = (모든 교재에서) 1회독 완료한 Day의 고유 단어 − 정복 대기 오답.
+ * 이번 주 증가분 = 이번 주에 완료(updated_at 기준 근사)한 Day에서 처음 나온 단어.
+ */
+export async function computeTotalKnownWords(
+  client: SupabaseClient,
+  studentId: string,
+): Promise<VocaTotalKnown> {
+  const norm = (w: string) => w.trim().toLowerCase();
+  const weekStartIso = getCurrentMonday() + 'T00:00:00Z';
+
+  const [{ data: progress }, wrongPool] = await Promise.all([
+    client
+      .from('voca_student_progress')
+      .select('day_id, flashcard_completed, quiz_score, spelling_score, matching_completed, updated_at')
+      .eq('student_id', studentId),
+    fetchWrongPool(client, studentId),
+  ]);
+  const doneRows = (progress ?? []).filter((p) => isR1Complete(p));
+  if (doneRows.length === 0) return { knownWords: 0, weeklyNew: 0 };
+
+  const { data: words } = await client
+    .from('voca_vocabulary')
+    .select('front_text, day_id')
+    .in('day_id', doneRows.map((p) => p.day_id));
+
+  const thisWeekDayIds = new Set(
+    doneRows.filter((p) => p.updated_at && p.updated_at >= weekStartIso).map((p) => p.day_id),
+  );
+  const activeWrong = activeWrongKeys(wrongPool);
+
+  const known = new Set<string>();
+  const beforeWeek = new Set<string>();
+  for (const w of words ?? []) {
+    const key = norm(w.front_text);
+    if (!activeWrong.has(key)) known.add(key);
+    if (!thisWeekDayIds.has(w.day_id)) beforeWeek.add(key);
+  }
+  let weeklyNew = 0;
+  for (const w of words ?? []) {
+    const key = norm(w.front_text);
+    if (thisWeekDayIds.has(w.day_id) && !beforeWeek.has(key) && known.has(key)) {
+      weeklyNew++;
+      beforeWeek.add(key); // 같은 단어 중복 카운트 방지
+    }
+  }
+
+  return { knownWords: known.size, weeklyNew };
 }
