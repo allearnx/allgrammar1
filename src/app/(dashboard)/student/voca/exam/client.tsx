@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { BookOpen, ChevronDown, CheckCircle } from 'lucide-react';
 import { BonusExam } from '@/components/voca/bonus-exam';
+import { AssignedExams } from '@/components/voca/assigned-exams';
 import { VocaBrandStyle, VocaHeroLetters, VOCA_COLORS } from '@/components/voca/voca-brand';
 import type { VocaBook, VocaDay } from '@/types/voca';
 
@@ -63,6 +64,9 @@ export function VocaExamClient({ books, days, studentId, freeDayLimit = 0 }: Voc
           </p>
         </div>
       </div>
+
+      {/* 📋 선생님이 낸 시험 — 숙제가 자율 시험보다 우선 (배정 있을 때만 표시) */}
+      <AssignedExams />
 
       {/* 교재 선택 */}
       <div className="space-y-1.5">

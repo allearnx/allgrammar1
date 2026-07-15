@@ -46,6 +46,8 @@ export default async function DashboardLayout({
   let services: string[] | undefined;
   let naesinTree: NaesinSidebarExam[] | undefined;
 
+  let vocaPendingExams = 0;
+
   if (user.role === 'student') {
     services = await getCachedServices(user.id);
 
@@ -61,6 +63,11 @@ export default async function DashboardLayout({
     if (services.includes('naesin')) {
       naesinTree = (await getCachedNaesinTree(user.id)) ?? undefined;
     }
+
+    // 올킬시험 미응시 배지 (cached 60s) — 선생님 배정 시험 중 아직 통과 못 한 것
+    if (services.includes('voca')) {
+      vocaPendingExams = await getCachedPendingExams(user.id);
+    }
   }
 
   // Compute isPaid for Topbar NotificationCenter gating (cached 5min)
@@ -75,7 +82,12 @@ export default async function DashboardLayout({
     <PaidStatusProvider isPaid={isPaid}>
     <PresenceTracker />
     <div className="flex h-[100dvh] overflow-hidden">
-      <Sidebar user={user} services={services} naesinTree={naesinTree} />
+      <Sidebar
+        user={user}
+        services={services}
+        naesinTree={naesinTree}
+        badges={vocaPendingExams > 0 ? { '/student/voca/exam': vocaPendingExams } : undefined}
+      />
       <main className="flex-1 overflow-y-auto overscroll-contain">
         <UpdateBanner />
         {children}
@@ -135,6 +147,32 @@ const getCachedIsPaid = cached(
   'is-paid',
   TTL.SESSION,
   (academyId) => [cacheTags.isPaid(academyId)],
+);
+
+/**
+ * Cached 올킬시험 미응시 개수 — TTL 60s (LIVE).
+ * 미응시 = 선생님 배정 시험 중 결과가 없거나 최고점이 90점 미만인 것.
+ */
+const getCachedPendingExams = cached(
+  async (studentId: string) => {
+    const admin = createAdminClient();
+    const { data: asgs } = await admin
+      .from('voca_exam_assignments')
+      .select('id')
+      .eq('student_id', studentId);
+    if (!asgs || asgs.length === 0) return 0;
+    const { data: results } = await admin
+      .from('voca_exam_results')
+      .select('assignment_id, score')
+      .eq('student_id', studentId)
+      .in('assignment_id', asgs.map((a) => a.id));
+    const passed = new Set(
+      (results ?? []).filter((r) => (r.score ?? 0) >= 90).map((r) => r.assignment_id),
+    );
+    return asgs.filter((a) => !passed.has(a.id)).length;
+  },
+  'voca-pending-exams',
+  TTL.LIVE,
 );
 
 /** Cached naesin sidebar tree — TTL 60s (LIVE) */

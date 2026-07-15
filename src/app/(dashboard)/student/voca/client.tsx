@@ -5,7 +5,6 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { Badge } from '@/components/ui/badge';
 import { CheckCircle, Lock, ChevronRight, ChevronDown, Search, BookOpen, BookMarked, Sparkles, GraduationCap, Users, ArrowRight } from 'lucide-react';
-import { AssignedExams } from '@/components/voca/assigned-exams';
 import { BookGuidePicker } from '@/components/voca/book-guide-picker';
 import { VocaBrandStyle, VocaHeroLetters, VOCA_COLORS, VOCA_STEP_THEMES } from '@/components/voca/voca-brand';
 import { ParentLinkButton } from '@/components/voca/parent-link-button';
@@ -532,9 +531,7 @@ export function VocaHomeClient({ books, days, progressList, submissionStatuses =
         </div>
       )}
 
-      {/* 📋 선생님이 배정한 시험 */}
-      <AssignedExams />
-      {/* 묶음 표제어 시험은 사이드바 "올킬시험"(/student/voca/exam)으로 승격 — 홈 카드 제거 */}
+      {/* 시험(선생님 배정 + 자가 묶음)은 사이드바 "올킬시험"(/student/voca/exam)으로 일원화 */}
 
       {/* Free limit notice — 체험 완료 전에는 하단 안내로 */}
       {!freeTrialDone && freeUpgradeNotice}

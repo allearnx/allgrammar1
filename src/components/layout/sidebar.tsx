@@ -23,9 +23,11 @@ interface SidebarProps {
   user: AuthUser;
   services?: string[];
   naesinTree?: NaesinSidebarExam[];
+  /** href → 미확인 개수 (예: 올킬시험 미응시) — 빨간 배지로 표시 */
+  badges?: Record<string, number>;
 }
 
-export function Sidebar({ user, services, naesinTree }: SidebarProps) {
+export function Sidebar({ user, services, naesinTree, badges }: SidebarProps) {
   const pathname = usePathname();
   const router = useRouter();
   const [open, setOpen] = useState(false);
@@ -53,7 +55,7 @@ export function Sidebar({ user, services, naesinTree }: SidebarProps) {
         </span>
       </div>
       <ScrollArea className="flex-1 min-h-0 py-3">
-        <NavLinks groups={navGroups} pathname={pathname} naesinTree={naesinTree} onNavigate={() => setOpen(false)} hoverWhite={hasCustomBg} />
+        <NavLinks groups={navGroups} pathname={pathname} naesinTree={naesinTree} onNavigate={() => setOpen(false)} hoverWhite={hasCustomBg} badges={badges} />
       </ScrollArea>
       <div className="shrink-0 border-t border-sidebar-border p-4">
         <div className="mb-3 px-3">

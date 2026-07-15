@@ -12,12 +12,15 @@ export function NavLinks({
   naesinTree,
   onNavigate,
   hoverWhite,
+  badges,
 }: {
   groups: NavGroup[];
   pathname: string;
   naesinTree?: NaesinSidebarExam[];
   onNavigate?: () => void;
   hoverWhite?: boolean;
+  /** href → 미확인 개수 — 빨간 배지로 표시 */
+  badges?: Record<string, number>;
 }) {
   const searchParams = useSearchParams();
 
@@ -73,6 +76,11 @@ export function NavLinks({
                 >
                   <item.icon className={cn('h-4 w-4 shrink-0', isActive ? 'text-brand-600' : 'text-slate-400')} />
                   {item.label}
+                  {(badges?.[item.href] ?? 0) > 0 && (
+                    <span className="ml-auto flex h-5 min-w-5 items-center justify-center rounded-full bg-[#D93025] px-1.5 text-[11px] font-bold text-white">
+                      {badges![item.href]}
+                    </span>
+                  )}
                 </Link>
                 {/* Naesin tree navigation below the 내신 대비 link */}
                 {hasTree && (
