@@ -11,6 +11,7 @@ import { VocaBrandStyle, VocaHeroLetters, VOCA_COLORS, VOCA_STEP_THEMES } from '
 import { ParentLinkButton } from '@/components/voca/parent-link-button';
 import { CoverageGauge } from '@/components/voca/coverage-gauge';
 import { WrongMissionCard } from '@/components/voca/wrong-mission-card';
+import { TodayStudyCard } from '@/components/voca/today-study-card';
 import { isR1Complete, isR2Complete } from '@/lib/dashboard/voca-helpers';
 import type { VocaBook, VocaDay, VocaStudentProgress } from '@/types/voca';
 
@@ -347,6 +348,16 @@ export function VocaHomeClient({ books, days, progressList, submissionStatuses =
           {selectedBookId && <CoverageGauge bookId={selectedBookId} />}
         </div>
       </div>
+
+      {/* 📌 오늘의 학습 — 학습 중인 교재별 다음 Day (2권 병행 학생의 길잡이) */}
+      <TodayStudyCard
+        books={books}
+        days={days}
+        progressMap={progressMap}
+        freeDayLimit={freeDayLimit}
+        round2Locked={round2Locked}
+        onSelectBook={selectBook}
+      />
 
       {/* 주간 올킬 미션 — 금·토 예고, 일요일 미션 데이 */}
       <WrongMissionCard />
