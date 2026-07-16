@@ -57,13 +57,19 @@ export function PdfVocabExtract({ module, parentId, onAdd, definitionLang }: Voc
     setProgress({ done: 0, total: files.length });
     try {
       const { uploadForExtract } = await import('@/lib/upload-for-extract');
+      // 큰 PDF는 AI 출력 한도에 잘려 실패 → 페이지 단위로 분할해 순차 처리
+      const { splitPdfIntoChunks } = await import('@/lib/split-pdf');
+      const expanded: File[] = [];
+      for (const f of files) expanded.push(...(await splitPdfIntoChunks(f)));
+      setProgress({ done: 0, total: expanded.length });
+
       // front_text(소문자) 기준 중복 제거하며 여러 장을 순차 추출 → 합치기.
       const merged: Omit<ExtractedWord, 'selected'>[] = [];
       const seen = new Set<string>();
       let anySucceeded = false;
 
-      for (let idx = 0; idx < files.length; idx++) {
-        const file = files[idx];
+      for (let idx = 0; idx < expanded.length; idx++) {
+        const file = expanded[idx];
         try {
           const { publicUrl, storagePath } = await uploadForExtract(file);
           const isImage = file.type.startsWith('image/');
@@ -76,7 +82,7 @@ export function PdfVocabExtract({ module, parentId, onAdd, definitionLang }: Voc
                 // voca: 교재 정의 언어(영한/영영) 자동 분기용 (API가 day→교재 역추적)
                 ...(module === 'voca' ? { dayId: parentId, examSource: examLabel.trim() || undefined } : {}),
               },
-              errorMessage: `${idx + 1}번째 파일 단어 추출 실패`,
+              errorMessage: `${idx + 1}번째 구간 단어 추출 실패`,
               logContext: `${cfg.logPrefix}.pdf_vocab_extract`,
             },
           );
@@ -90,7 +96,7 @@ export function PdfVocabExtract({ module, parentId, onAdd, definitionLang }: Voc
         } catch {
           // 개별 파일 실패는 토스트로 안내됨 — 나머지 파일은 계속 진행
         } finally {
-          setProgress({ done: idx + 1, total: files.length });
+          setProgress({ done: idx + 1, total: expanded.length });
         }
       }
 

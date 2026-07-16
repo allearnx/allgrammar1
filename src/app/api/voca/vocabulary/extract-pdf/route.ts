@@ -158,6 +158,15 @@ export const POST = createApiHandler(
       ],
     });
 
+    // 출력 한도에 잘리면 JSON이 안 닫혀 파싱이 터진다 — 원인을 명확히 안내
+    if (message.stop_reason === 'max_tokens') {
+      cleanupStorage(storagePath);
+      return NextResponse.json(
+        { error: '한 번에 처리하기엔 단어가 너무 많습니다. PDF를 더 적은 페이지로 나눠 올려주세요.' },
+        { status: 413 },
+      );
+    }
+
     const raw = parseAiJsonArray<VocabExtractItem>(message);
     const mapped = raw
       .filter((item) => item.w && item.m) // w, m 필수

@@ -33,6 +33,7 @@ export function PdfBulkExtract({ bookId, definitionLang = 'ko', onCreated }: { b
   const [step, setStep] = useState<1 | 2>(1);
   const [file, setFile] = useState<File | null>(null);
   const [extracting, setExtracting] = useState(false);
+  const [progress, setProgress] = useState<{ done: number; total: number } | null>(null);
   const [saving, setSaving] = useState(false);
   const [words, setWords] = useState<ExtractedWord[]>([]);
   const [wordsPerDay, setWordsPerDay] = useState(30);
@@ -42,6 +43,7 @@ export function PdfBulkExtract({ bookId, definitionLang = 'ko', onCreated }: { b
     setStep(1);
     setFile(null);
     setExtracting(false);
+    setProgress(null);
     setSaving(false);
     setWords([]);
     setWordsPerDay(30);
@@ -53,28 +55,47 @@ export function PdfBulkExtract({ bookId, definitionLang = 'ko', onCreated }: { b
     setExtracting(true);
     try {
       const { uploadForExtract } = await import('@/lib/upload-for-extract');
-      const { publicUrl, storagePath } = await uploadForExtract(file);
+      // 큰 PDF는 통짜로 보내면 AI 출력 한도(단어 ~150개 분량)에 잘려 실패 →
+      // 몇 페이지씩 분할해 순차 추출 후 합친다 (중복 단어는 첫 등장만 유지)
+      const { splitPdfIntoChunks } = await import('@/lib/split-pdf');
+      const chunks = await splitPdfIntoChunks(file);
+      setProgress({ done: 0, total: chunks.length });
 
-      const data = await fetchWithToast<{ items: Omit<ExtractedWord, 'selected'>[] }>(
-        '/api/voca/vocabulary/extract-pdf',
-        {
-          body: { pdfUrl: publicUrl, storagePath, bookId, examSource: examLabel.trim() || undefined }, // 정의 언어 분기 + 기출 모드
-          errorMessage: 'PDF 단어 추출 실패',
-          logContext: 'voca_admin.pdf_bulk',
-        },
-      );
+      const merged: Omit<ExtractedWord, 'selected'>[] = [];
+      const seen = new Set<string>();
+      let anySucceeded = false;
 
-      setWords(
-        data.items.map((item) => ({
-          ...item,
-          selected: true,
-        }))
-      );
+      for (let idx = 0; idx < chunks.length; idx++) {
+        try {
+          const { publicUrl, storagePath } = await uploadForExtract(chunks[idx]);
+          const data = await fetchWithToast<{ items: Omit<ExtractedWord, 'selected'>[] }>(
+            '/api/voca/vocabulary/extract-pdf',
+            {
+              body: { pdfUrl: publicUrl, storagePath, bookId, examSource: examLabel.trim() || undefined }, // 정의 언어 분기 + 기출 모드
+              errorMessage: chunks.length > 1 ? `${idx + 1}번째 구간 추출 실패 (나머지 계속 진행)` : 'PDF 단어 추출 실패',
+              logContext: 'voca_admin.pdf_bulk',
+            },
+          );
+          anySucceeded = true;
+          for (const item of data.items) {
+            const key = item.front_text?.toLowerCase().trim();
+            if (!key || seen.has(key)) continue;
+            seen.add(key);
+            merged.push(item);
+          }
+        } catch {
+          // 개별 구간 실패는 토스트로 안내 — 나머지 구간은 계속 진행
+        } finally {
+          setProgress({ done: idx + 1, total: chunks.length });
+        }
+      }
+
+      if (!anySucceeded) return; // 전부 실패 → step1 유지
+      setWords(merged.map((item) => ({ ...item, selected: true })));
       setStep(2);
-    } catch {
-      // fetchWithToast already shows toast
     } finally {
       setExtracting(false);
+      setProgress(null);
     }
   }
 
@@ -244,7 +265,9 @@ export function PdfBulkExtract({ bookId, definitionLang = 'ko', onCreated }: { b
               {extracting ? (
                 <>
                   <Loader2 className="h-4 w-4 mr-2 animate-spin" />
-                  추출 중... (30초~1분 소요)
+                  {progress && progress.total > 1
+                    ? `추출 중... (${progress.done}/${progress.total}구간)`
+                    : '추출 중... (30초~1분 소요)'}
                 </>
               ) : (
                 '단어 추출'
