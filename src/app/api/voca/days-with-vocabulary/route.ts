@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { createApiHandler } from '@/lib/api/handler';
 import { vocaDaysWithVocabSchema } from '@/lib/api/schemas';
+import { invalidateVocaContent } from '@/lib/cache/invalidate';
 
 // POST — Day + 단어 일괄 생성 (PDF 대량 추출용)
 export const POST = createApiHandler(
@@ -73,6 +74,10 @@ export const POST = createApiHandler(
 
       createdDays.push({ ...day, wordCount: chunks[i].length });
     }
+
+    // GET /api/voca/days?bookId=...는 5분 캐시(TTL.CONTENT) — 무효화 안 하면
+    // 방금 만든 Day가 모달 닫고 목록 새로고침해도 최대 5분간 안 보임(리포트된 버그).
+    invalidateVocaContent(book_id);
 
     return NextResponse.json({ days: createdDays, totalWords: items.length });
   }

@@ -22,16 +22,22 @@ export default async function VocaPage({ params }: Props) {
 
   const supabase = await createClient();
 
-  const { data: books } = await supabase
-    .from('voca_books')
-    .select(VOCA_BOOKS_COLUMNS)
-    .order('sort_order');
+  const [{ data: books }, { data: allDays }] = await Promise.all([
+    supabase.from('voca_books').select(VOCA_BOOKS_COLUMNS).order('sort_order'),
+    supabase.from('voca_days').select('book_id'),
+  ]);
+
+  // 교재별 Day 수 — 비슷한 이름의 빈 교재를 진짜 교재로 착각하는 혼동 방지용 배지
+  const dayCounts: Record<string, number> = {};
+  for (const d of allDays || []) {
+    dayCounts[d.book_id] = (dayCounts[d.book_id] ?? 0) + 1;
+  }
 
   return (
     <>
       <Topbar user={user} title="올킬보카 관리" />
       <div className="p-4 md:p-6">
-        <VocaAdminClient books={books || []} />
+        <VocaAdminClient books={books || []} dayCounts={dayCounts} />
       </div>
     </>
   );

@@ -14,6 +14,8 @@ import type { VocaBook, VocaDay } from '@/types/voca';
 
 interface VocaAdminClientProps {
   books: VocaBook[];
+  /** 교재별 Day 수 — 비슷한 이름의 빈 교재를 착각하지 않도록 카드에 표시 */
+  dayCounts?: Record<string, number>;
 }
 
 interface VocaAdminState {
@@ -65,7 +67,7 @@ const initialState: VocaAdminState = {
   editingBook: null,
 };
 
-export function VocaAdminClient({ books: initialBooks }: VocaAdminClientProps) {
+export function VocaAdminClient({ books: initialBooks, dayCounts = {} }: VocaAdminClientProps) {
   const [books, setBooks] = useState(initialBooks);
   const [state, dispatch] = useReducer(vocaAdminReducer, initialState);
 
@@ -120,6 +122,11 @@ export function VocaAdminClient({ books: initialBooks }: VocaAdminClientProps) {
                     )}
                   </div>
                   <div className="flex items-center gap-1">
+                    {(dayCounts[book.id] ?? 0) > 0 ? (
+                      <Badge variant="outline" className="text-gray-500">Day {dayCounts[book.id]}</Badge>
+                    ) : (
+                      <Badge className="bg-amber-100 text-amber-700 hover:bg-amber-100">빈 교재</Badge>
+                    )}
                     {book.definition_lang === 'en' && <Badge className="bg-brand-100 text-brand-700 hover:bg-brand-100">영영</Badge>}
                     {!book.is_active && <Badge variant="secondary">비활성</Badge>}
                     <Button
