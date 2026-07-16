@@ -74,6 +74,7 @@ export function VocaDayResultsClient() {
   const [loadingBooks, setLoadingBooks] = useState(true);
   const [loadingDays, setLoadingDays] = useState(false);
   const [loadingResults, setLoadingResults] = useState(false);
+  const [resultsError, setResultsError] = useState(false);
   const [expandedId, setExpandedId] = useState<string | null>(null);
 
   // Fetch books on mount
@@ -119,18 +120,24 @@ export function VocaDayResultsClient() {
   }, [selectedBookId]);
 
   // Fetch results when day changes
+  // ⚠️ silent로 조용히 삼키면 조회 실패(레이트리밋 등)가 "결과 없음"으로 보인다
+  // — 선생님이 리포트 발송을 못 하는 실제 신고 사례. 에러는 반드시 화면에 표시.
   const fetchResults = useCallback(async () => {
     if (!selectedDayId) {
       setStudents([]);
       return;
     }
     setLoadingResults(true);
+    setResultsError(false);
     try {
       const data = await fetchWithToast<{ students: StudentResult[] }>(
         `/api/voca/day-results?dayId=${selectedDayId}`,
-        { method: 'GET', silent: true },
+        { method: 'GET', silent: true, retry: 2 },
       );
       setStudents(data.students);
+    } catch {
+      setStudents([]);
+      setResultsError(true);
     } finally {
       setLoadingResults(false);
     }
@@ -201,6 +208,17 @@ export function VocaDayResultsClient() {
       {loadingResults ? (
         <div className="flex items-center justify-center py-12">
           <Loader2 className="h-6 w-6 animate-spin text-gray-400" />
+        </div>
+      ) : resultsError ? (
+        <div className="rounded-lg border border-amber-200 bg-amber-50 p-6 text-center">
+          <p className="text-sm font-semibold text-amber-800">결과를 불러오지 못했습니다</p>
+          <p className="mt-1 text-xs text-amber-600">일시적인 오류일 수 있어요 — 잠시 후 다시 시도해주세요. (데이터가 사라진 것이 아닙니다)</p>
+          <button
+            onClick={fetchResults}
+            className="mt-3 rounded-full border border-amber-300 bg-white px-4 py-1.5 text-sm font-bold text-amber-700 hover:bg-amber-100"
+          >
+            다시 불러오기
+          </button>
         </div>
       ) : students.length === 0 ? (
         <p className="text-sm text-gray-500 py-8 text-center">

@@ -3,7 +3,9 @@ import { createApiHandler, ForbiddenError } from '@/lib/api';
 import { createAdminClient } from '@/lib/supabase/admin';
 
 export const GET = createApiHandler(
-  { roles: ['teacher', 'admin', 'boss'], hasBody: false, rateLimit: { max: 30, windowMs: 60_000 } },
+  // 선생님이 교재·Day를 연달아 바꿔가며 확인하는 페이지 — 30/분은 실사용에서
+  // 걸릴 수 있고, 걸리면 빈 목록으로 보여 "결과가 사라졌다" 오인 신고로 이어짐
+  { roles: ['teacher', 'admin', 'boss'], hasBody: false, rateLimit: { max: 120, windowMs: 60_000 } },
   async ({ request, user }) => {
     const { searchParams } = new URL(request.url);
     const dayId = searchParams.get('dayId');
