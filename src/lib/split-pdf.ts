@@ -34,7 +34,14 @@ export async function splitPdfIntoChunks(
     if (total <= pagesPerChunk) return [file];
 
     const chunks: File[] = [];
-    const baseName = file.name.replace(/\.pdf$/i, '');
+    let baseName = file.name.replace(/\.pdf$/i, '');
+    // 이미 분할된 청크(book.p7-9)를 다시 쪼갤 때는 원본 페이지 번호 유지 (p7, p8, p9)
+    let pageOffset = 0;
+    const prev = baseName.match(/^(.*)\.p(\d+)-(\d+)$/);
+    if (prev) {
+      baseName = prev[1];
+      pageOffset = parseInt(prev[2], 10) - 1;
+    }
     for (let start = 0; start < total; start += pagesPerChunk) {
       const end = Math.min(start + pagesPerChunk, total);
       const doc = await PDFDocument.create();
@@ -42,7 +49,7 @@ export async function splitPdfIntoChunks(
       for (const p of pages) doc.addPage(p);
       const out = await doc.save();
       chunks.push(
-        new File([new Uint8Array(out)], `${baseName}.p${start + 1}-${end}.pdf`, { type: 'application/pdf' }),
+        new File([new Uint8Array(out)], `${baseName}.p${pageOffset + start + 1}-${pageOffset + end}.pdf`, { type: 'application/pdf' }),
       );
     }
     return chunks;

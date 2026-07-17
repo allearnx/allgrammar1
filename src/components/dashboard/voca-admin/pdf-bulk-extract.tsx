@@ -109,12 +109,16 @@ export function PdfBulkExtract({ bookId, definitionLang = 'ko', onCreated }: { b
     }
   }
 
-  /** 실패했던 구간만 다시 추출 — 성공분은 기존 결과에 병합 */
+  /** 실패했던 구간만 다시 추출 — 단어가 빽빽해 한도에 걸린 경우를 대비해
+   *  1페이지씩 더 잘게 쪼개 재시도. 성공분은 기존 결과에 병합. */
   async function handleRetryFailed() {
     if (failedChunks.length === 0) return;
     setExtracting(true);
     try {
-      await runExtraction(failedChunks, words);
+      const { splitPdfIntoChunks } = await import('@/lib/split-pdf');
+      const finer: File[] = [];
+      for (const f of failedChunks) finer.push(...(await splitPdfIntoChunks(f, 1)));
+      await runExtraction(finer, words);
     } finally {
       setExtracting(false);
       setProgress(null);
@@ -312,7 +316,9 @@ export function PdfBulkExtract({ bookId, definitionLang = 'ko', onCreated }: { b
                 </p>
                 <Button size="sm" variant="outline" className="h-7 border-amber-300 text-amber-700 hover:bg-amber-100" onClick={handleRetryFailed} disabled={extracting}>
                   {extracting ? <Loader2 className="h-3.5 w-3.5 mr-1 animate-spin" /> : null}
-                  실패 구간만 다시 추출
+                  {extracting && progress
+                    ? `재추출 중... (${progress.done}/${progress.total})`
+                    : '실패 구간만 다시 추출 (1페이지씩)'}
                 </Button>
               </div>
             )}

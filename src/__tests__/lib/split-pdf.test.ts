@@ -26,6 +26,14 @@ describe('splitPdfIntoChunks', () => {
     expect(chunks[2].name).toBe('book.p7-7.pdf');
   });
 
+  it('이미 분할된 청크를 재분할하면 원본 페이지 번호를 유지한다 (p4-6 → p4,p5,p6)', async () => {
+    const original = await makePdf(7);
+    const chunks = await splitPdfIntoChunks(original, 3);
+    // 2번째 청크(book.p4-6.pdf)를 1페이지씩 재분할
+    const finer = await splitPdfIntoChunks(chunks[1], 1);
+    expect(finer.map((f) => f.name)).toEqual(['book.p4-4.pdf', 'book.p5-5.pdf', 'book.p6-6.pdf']);
+  });
+
   it('청크 이하 분량이면 원본 그대로 반환', async () => {
     const file = await makePdf(3);
     const chunks = await splitPdfIntoChunks(file, 3);
