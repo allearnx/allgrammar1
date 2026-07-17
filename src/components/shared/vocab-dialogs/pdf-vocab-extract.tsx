@@ -15,6 +15,7 @@ import {
 import { FileText, Loader2, Check, X as XIcon } from 'lucide-react';
 import { toast } from 'sonner';
 import { fetchWithToast } from '@/lib/fetch-with-toast';
+import { chunkLabel } from '@/lib/split-pdf';
 import type { VocabDialogProps } from './types';
 import { getVocabConfig } from './types';
 
@@ -38,6 +39,8 @@ export function PdfVocabExtract({ module, parentId, onAdd, definitionLang }: Voc
   const [progress, setProgress] = useState<{ done: number; total: number } | null>(null);
   const [saving, setSaving] = useState(false);
   const [words, setWords] = useState<ExtractedWord[]>([]);
+  // 추출 실패한 구간/파일 — 배너로 알리고 그것만 재시도 가능
+  const [failedChunks, setFailedChunks] = useState<File[]>([]);
   const [examLabel, setExamLabel] = useState('');
   const cfg = getVocabConfig(module);
 
@@ -48,63 +51,83 @@ export function PdfVocabExtract({ module, parentId, onAdd, definitionLang }: Voc
     setProgress(null);
     setSaving(false);
     setWords([]);
+    setFailedChunks([]);
     setExamLabel('');
+  }
+
+  /** 파일/구간 목록을 순차 추출해 기존 words에 병합. 실패분은 failedChunks로 보관. */
+  async function runExtraction(chunkFiles: File[], existing: ExtractedWord[]) {
+    const { uploadForExtract } = await import('@/lib/upload-for-extract');
+    // front_text(소문자) 기준 중복 제거하며 순차 추출 → 합치기.
+    const merged = [...existing];
+    const seen = new Set(existing.map((w) => w.front_text.toLowerCase().trim()));
+    const failed: File[] = [];
+    setProgress({ done: 0, total: chunkFiles.length });
+
+    for (let idx = 0; idx < chunkFiles.length; idx++) {
+      const file = chunkFiles[idx];
+      try {
+        const { publicUrl, storagePath } = await uploadForExtract(file);
+        const isImage = file.type.startsWith('image/');
+        const data = await fetchWithToast<{ items: Omit<ExtractedWord, 'selected'>[] }>(
+          `${cfg.apiBase}/extract-pdf`,
+          {
+            body: {
+              ...(isImage ? { imageUrl: publicUrl } : { pdfUrl: publicUrl }),
+              storagePath,
+              // voca: 교재 정의 언어(영한/영영) 자동 분기용 (API가 day→교재 역추적)
+              ...(module === 'voca' ? { dayId: parentId, examSource: examLabel.trim() || undefined } : {}),
+            },
+            errorMessage: `${chunkLabel(file)} 구간 단어 추출 실패 (나머지 계속 진행)`,
+            logContext: `${cfg.logPrefix}.pdf_vocab_extract`,
+            retry: 1, // 일시적 5xx(AI 과부하 등)는 한 번 자동 재시도
+          },
+        );
+        for (const item of data.items) {
+          const key = item.front_text?.toLowerCase().trim();
+          if (!key || seen.has(key)) continue;
+          seen.add(key);
+          merged.push({ ...item, selected: true });
+        }
+      } catch {
+        failed.push(file); // 실패분 보관 — 배너에서 재시도
+      } finally {
+        setProgress({ done: idx + 1, total: chunkFiles.length });
+      }
+    }
+
+    setWords(merged);
+    setFailedChunks(failed);
+    return { anySucceeded: chunkFiles.length > failed.length };
   }
 
   async function handleExtract() {
     if (files.length === 0) return;
     setExtracting(true);
-    setProgress({ done: 0, total: files.length });
     try {
-      const { uploadForExtract } = await import('@/lib/upload-for-extract');
       // 큰 PDF는 AI 출력 한도에 잘려 실패 → 페이지 단위로 분할해 순차 처리
       const { splitPdfIntoChunks } = await import('@/lib/split-pdf');
       const expanded: File[] = [];
       for (const f of files) expanded.push(...(await splitPdfIntoChunks(f)));
-      setProgress({ done: 0, total: expanded.length });
 
-      // front_text(소문자) 기준 중복 제거하며 여러 장을 순차 추출 → 합치기.
-      const merged: Omit<ExtractedWord, 'selected'>[] = [];
-      const seen = new Set<string>();
-      let anySucceeded = false;
-
-      for (let idx = 0; idx < expanded.length; idx++) {
-        const file = expanded[idx];
-        try {
-          const { publicUrl, storagePath } = await uploadForExtract(file);
-          const isImage = file.type.startsWith('image/');
-          const data = await fetchWithToast<{ items: Omit<ExtractedWord, 'selected'>[] }>(
-            `${cfg.apiBase}/extract-pdf`,
-            {
-              body: {
-                ...(isImage ? { imageUrl: publicUrl } : { pdfUrl: publicUrl }),
-                storagePath,
-                // voca: 교재 정의 언어(영한/영영) 자동 분기용 (API가 day→교재 역추적)
-                ...(module === 'voca' ? { dayId: parentId, examSource: examLabel.trim() || undefined } : {}),
-              },
-              errorMessage: `${idx + 1}번째 구간 단어 추출 실패`,
-              logContext: `${cfg.logPrefix}.pdf_vocab_extract`,
-            },
-          );
-          anySucceeded = true;
-          for (const item of data.items) {
-            const key = item.front_text?.toLowerCase().trim();
-            if (!key || seen.has(key)) continue;
-            seen.add(key);
-            merged.push(item);
-          }
-        } catch {
-          // 개별 파일 실패는 토스트로 안내됨 — 나머지 파일은 계속 진행
-        } finally {
-          setProgress({ done: idx + 1, total: expanded.length });
-        }
-      }
-
+      const { anySucceeded } = await runExtraction(expanded, []);
       if (!anySucceeded) return; // 전부 실패 → step1 유지
-      setWords(merged.map((item) => ({ ...item, selected: true })));
       setStep(2);
     } finally {
       setExtracting(false);
+      setProgress(null);
+    }
+  }
+
+  /** 실패했던 구간/파일만 다시 추출 — 성공분은 기존 결과에 병합 */
+  async function handleRetryFailed() {
+    if (failedChunks.length === 0) return;
+    setExtracting(true);
+    try {
+      await runExtraction(failedChunks, words);
+    } finally {
+      setExtracting(false);
+      setProgress(null);
     }
   }
 
@@ -162,6 +185,10 @@ export function PdfVocabExtract({ module, parentId, onAdd, definitionLang }: Voc
     <Dialog
       open={open}
       onOpenChange={(v) => {
+        // 추출/저장 중 닫힘 방지 — 실수 클릭에 장시간 작업이 증발하는 사고 방지
+        if (!v && (extracting || saving)) return;
+        // 추출 결과가 있는 상태에선 닫기 전 확인
+        if (!v && step === 2 && words.length > 0 && !window.confirm('추출된 단어가 사라집니다. 창을 닫을까요?')) return;
         setOpen(v);
         if (!v) reset();
       }}
@@ -242,6 +269,19 @@ export function PdfVocabExtract({ module, parentId, onAdd, definitionLang }: Voc
 
         {step === 2 && (
           <div className="space-y-4">
+            {/* 실패 구간 안내 + 부분 재시도 — 어느 페이지가 빠졌는지 명확히 */}
+            {failedChunks.length > 0 && (
+              <div className="flex flex-wrap items-center gap-2 rounded-lg border border-amber-200 bg-amber-50 px-3 py-2.5">
+                <p className="text-xs font-semibold text-amber-800">
+                  ⚠️ {failedChunks.map((f) => chunkLabel(f)).join(', ')} 구간 추출 실패 — 이 부분 단어는 아래 목록에 없어요
+                </p>
+                <Button size="sm" variant="outline" className="h-7 border-amber-300 text-amber-700 hover:bg-amber-100" onClick={handleRetryFailed} disabled={extracting}>
+                  {extracting ? <Loader2 className="h-3.5 w-3.5 mr-1 animate-spin" /> : null}
+                  실패 구간만 다시 추출
+                </Button>
+              </div>
+            )}
+
             <div className="flex items-center justify-between">
               <label className="flex items-center gap-2 text-sm cursor-pointer">
                 <Checkbox

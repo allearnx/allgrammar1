@@ -9,6 +9,12 @@
 /** 단어장 PDF 기준 청크당 페이지 수 (페이지당 40~50단어 가정, 출력 한도 안쪽) */
 export const PDF_PAGES_PER_CHUNK = 3;
 
+/** 분할 파일 이름에서 페이지 범위 라벨 추출 (book.p7-9.pdf → "p7-9", 아니면 파일명) */
+export function chunkLabel(file: File): string {
+  const m = file.name.match(/\.(p\d+-\d+)\.pdf$/i);
+  return m ? m[1] : file.name;
+}
+
 /**
  * PDF 파일을 pagesPerChunk 페이지씩 잘라 여러 File로 반환.
  * PDF가 아니거나 청크 이하 분량이면 원본 그대로 [file] 반환.

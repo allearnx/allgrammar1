@@ -15,6 +15,7 @@ import {
 import { FileText, Loader2, Check, X as XIcon } from 'lucide-react';
 import { toast } from 'sonner';
 import { fetchWithToast } from '@/lib/fetch-with-toast';
+import { chunkLabel } from '@/lib/split-pdf';
 import type { VocaVocabulary } from '@/types/voca';
 
 interface ExtractedWord {
@@ -36,6 +37,8 @@ export function PdfBulkExtract({ bookId, definitionLang = 'ko', onCreated }: { b
   const [progress, setProgress] = useState<{ done: number; total: number } | null>(null);
   const [saving, setSaving] = useState(false);
   const [words, setWords] = useState<ExtractedWord[]>([]);
+  // 추출 실패한 구간(페이지 분할 파일) — 배너로 알리고 그 구간만 재시도 가능
+  const [failedChunks, setFailedChunks] = useState<File[]>([]);
   const [wordsPerDay, setWordsPerDay] = useState(30);
   const [examLabel, setExamLabel] = useState('');
 
@@ -46,53 +49,72 @@ export function PdfBulkExtract({ bookId, definitionLang = 'ko', onCreated }: { b
     setProgress(null);
     setSaving(false);
     setWords([]);
+    setFailedChunks([]);
     setWordsPerDay(30);
     setExamLabel('');
+  }
+
+  /** 구간 목록을 순차 추출해 기존 words에 병합. 실패 구간은 failedChunks로 보관. */
+  async function runExtraction(chunkFiles: File[], existing: ExtractedWord[]) {
+    const { uploadForExtract } = await import('@/lib/upload-for-extract');
+    const merged = [...existing];
+    const seen = new Set(existing.map((w) => w.front_text.toLowerCase().trim()));
+    const failed: File[] = [];
+    setProgress({ done: 0, total: chunkFiles.length });
+
+    for (let idx = 0; idx < chunkFiles.length; idx++) {
+      try {
+        const { publicUrl, storagePath } = await uploadForExtract(chunkFiles[idx]);
+        const data = await fetchWithToast<{ items: Omit<ExtractedWord, 'selected'>[] }>(
+          '/api/voca/vocabulary/extract-pdf',
+          {
+            body: { pdfUrl: publicUrl, storagePath, bookId, examSource: examLabel.trim() || undefined }, // 정의 언어 분기 + 기출 모드
+            errorMessage: chunkFiles.length > 1 ? `${chunkLabel(chunkFiles[idx])} 구간 추출 실패 (나머지 계속 진행)` : 'PDF 단어 추출 실패',
+            logContext: 'voca_admin.pdf_bulk',
+            retry: 1, // 일시적 5xx(AI 과부하 등)는 한 번 자동 재시도
+          },
+        );
+        for (const item of data.items) {
+          const key = item.front_text?.toLowerCase().trim();
+          if (!key || seen.has(key)) continue;
+          seen.add(key);
+          merged.push({ ...item, selected: true });
+        }
+      } catch {
+        failed.push(chunkFiles[idx]); // 실패 구간 보관 — 배너에서 재시도
+      } finally {
+        setProgress({ done: idx + 1, total: chunkFiles.length });
+      }
+    }
+
+    setWords(merged);
+    setFailedChunks(failed);
+    return { anySucceeded: chunkFiles.length > failed.length };
   }
 
   async function handleExtract() {
     if (!file) return;
     setExtracting(true);
     try {
-      const { uploadForExtract } = await import('@/lib/upload-for-extract');
       // 큰 PDF는 통짜로 보내면 AI 출력 한도(단어 ~150개 분량)에 잘려 실패 →
       // 몇 페이지씩 분할해 순차 추출 후 합친다 (중복 단어는 첫 등장만 유지)
       const { splitPdfIntoChunks } = await import('@/lib/split-pdf');
       const chunks = await splitPdfIntoChunks(file);
-      setProgress({ done: 0, total: chunks.length });
-
-      const merged: Omit<ExtractedWord, 'selected'>[] = [];
-      const seen = new Set<string>();
-      let anySucceeded = false;
-
-      for (let idx = 0; idx < chunks.length; idx++) {
-        try {
-          const { publicUrl, storagePath } = await uploadForExtract(chunks[idx]);
-          const data = await fetchWithToast<{ items: Omit<ExtractedWord, 'selected'>[] }>(
-            '/api/voca/vocabulary/extract-pdf',
-            {
-              body: { pdfUrl: publicUrl, storagePath, bookId, examSource: examLabel.trim() || undefined }, // 정의 언어 분기 + 기출 모드
-              errorMessage: chunks.length > 1 ? `${idx + 1}번째 구간 추출 실패 (나머지 계속 진행)` : 'PDF 단어 추출 실패',
-              logContext: 'voca_admin.pdf_bulk',
-            },
-          );
-          anySucceeded = true;
-          for (const item of data.items) {
-            const key = item.front_text?.toLowerCase().trim();
-            if (!key || seen.has(key)) continue;
-            seen.add(key);
-            merged.push(item);
-          }
-        } catch {
-          // 개별 구간 실패는 토스트로 안내 — 나머지 구간은 계속 진행
-        } finally {
-          setProgress({ done: idx + 1, total: chunks.length });
-        }
-      }
-
+      const { anySucceeded } = await runExtraction(chunks, []);
       if (!anySucceeded) return; // 전부 실패 → step1 유지
-      setWords(merged.map((item) => ({ ...item, selected: true })));
       setStep(2);
+    } finally {
+      setExtracting(false);
+      setProgress(null);
+    }
+  }
+
+  /** 실패했던 구간만 다시 추출 — 성공분은 기존 결과에 병합 */
+  async function handleRetryFailed() {
+    if (failedChunks.length === 0) return;
+    setExtracting(true);
+    try {
+      await runExtraction(failedChunks, words);
     } finally {
       setExtracting(false);
       setProgress(null);
@@ -206,6 +228,10 @@ export function PdfBulkExtract({ bookId, definitionLang = 'ko', onCreated }: { b
     <Dialog
       open={open}
       onOpenChange={(v) => {
+        // 추출/저장 중 닫힘 방지 — 실수 클릭 한 번에 10분짜리 작업이 증발하는 사고 방지
+        if (!v && (extracting || saving)) return;
+        // 추출 결과가 있는 상태에선 닫기 전 확인
+        if (!v && step === 2 && words.length > 0 && !window.confirm('추출된 단어가 사라집니다. 창을 닫을까요?')) return;
         setOpen(v);
         if (!v) reset();
       }}
@@ -278,6 +304,19 @@ export function PdfBulkExtract({ bookId, definitionLang = 'ko', onCreated }: { b
 
         {step === 2 && (
           <div className="space-y-4">
+            {/* 실패 구간 안내 + 부분 재시도 — 어느 페이지가 빠졌는지 명확히 */}
+            {failedChunks.length > 0 && (
+              <div className="flex flex-wrap items-center gap-2 rounded-lg border border-amber-200 bg-amber-50 px-3 py-2.5">
+                <p className="text-xs font-semibold text-amber-800">
+                  ⚠️ {failedChunks.map((f) => chunkLabel(f)).join(', ')} 페이지 구간 추출 실패 — 이 페이지 단어는 아래 목록에 없어요
+                </p>
+                <Button size="sm" variant="outline" className="h-7 border-amber-300 text-amber-700 hover:bg-amber-100" onClick={handleRetryFailed} disabled={extracting}>
+                  {extracting ? <Loader2 className="h-3.5 w-3.5 mr-1 animate-spin" /> : null}
+                  실패 구간만 다시 추출
+                </Button>
+              </div>
+            )}
+
             {/* Day 분할 설정 */}
             <div className="flex items-center gap-4 p-3 bg-muted/50 rounded-lg">
               <div className="flex items-center gap-2">
