@@ -16,6 +16,66 @@ export function chunkLabel(file: File): string {
 }
 
 /**
+ * 추출 작업 단위. 일반 PDF는 물리 분할된 파일, 암호화 PDF는 원본 파일 + 페이지 범위.
+ * (암호화 PDF를 pdf-lib로 물리 분할하면 내용이 깨져 AI에게 백지로 보인다 —
+ * 대신 원본을 통째로 보내고 프롬프트로 "N~M페이지만"을 지정한다)
+ */
+export interface PdfChunk {
+  file: File;
+  pageFrom?: number;
+  pageTo?: number;
+  label: string;
+}
+
+/** 파일을 추출 작업 단위로 계획 — 암호화 여부에 따라 물리 분할/페이지 범위 자동 선택 */
+export async function planPdfChunks(
+  file: File,
+  pagesPerChunk: number = PDF_PAGES_PER_CHUNK,
+): Promise<PdfChunk[]> {
+  if (file.type !== 'application/pdf') return [{ file, label: file.name }];
+
+  try {
+    const { PDFDocument } = await import('pdf-lib');
+    const bytes = await file.arrayBuffer();
+    try {
+      await PDFDocument.load(bytes); // 암호화면 여기서 throw
+    } catch {
+      // 암호화 PDF → 원본 통짜 + 페이지 범위 지정 청크
+      const src = await PDFDocument.load(bytes, { ignoreEncryption: true });
+      const total = src.getPageCount();
+      if (total <= pagesPerChunk) return [{ file, label: file.name }];
+      const chunks: PdfChunk[] = [];
+      for (let start = 1; start <= total; start += pagesPerChunk) {
+        const end = Math.min(start + pagesPerChunk - 1, total);
+        chunks.push({ file, pageFrom: start, pageTo: end, label: `p${start}-${end}` });
+      }
+      return chunks;
+    }
+    // 일반 PDF → 기존 물리 분할
+    const files = await splitPdfIntoChunks(file, pagesPerChunk);
+    return files.map((f) => ({ file: f, label: chunkLabel(f) }));
+  } catch {
+    return [{ file, label: file.name }];
+  }
+}
+
+/** 실패한 청크를 1페이지 단위로 세분화 (빽빽한 페이지의 출력 한도 대응) */
+export async function refinePdfChunk(chunk: PdfChunk): Promise<PdfChunk[]> {
+  // 페이지 범위 청크(암호화 PDF): 범위를 1페이지씩 나누기만 하면 됨
+  if (chunk.pageFrom != null && chunk.pageTo != null) {
+    if (chunk.pageFrom === chunk.pageTo) return [chunk];
+    const out: PdfChunk[] = [];
+    for (let p = chunk.pageFrom; p <= chunk.pageTo; p++) {
+      out.push({ file: chunk.file, pageFrom: p, pageTo: p, label: `p${p}-${p}` });
+    }
+    return out;
+  }
+  // 물리 분할 청크: 파일을 1페이지씩 재분할
+  const files = await splitPdfIntoChunks(chunk.file, 1);
+  return files.map((f) => ({ file: f, label: chunkLabel(f) }));
+}
+
+/**
  * PDF 파일을 pagesPerChunk 페이지씩 잘라 여러 File로 반환.
  * PDF가 아니거나 청크 이하 분량이면 원본 그대로 [file] 반환.
  * 손상된 PDF 등 분할 실패 시에도 원본 그대로 반환 (기존 동작 유지).

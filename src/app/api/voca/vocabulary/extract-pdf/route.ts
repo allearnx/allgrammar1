@@ -136,6 +136,13 @@ export const POST = createApiHandler(
       }
     }
 
+    // 페이지 범위 모드 — 암호화 PDF는 분할하면 깨져서(백지) 원본 통짜 + 범위 지정으로 우회
+    const pageFrom = parseInt(extraFields.pageFrom || '', 10);
+    const pageTo = parseInt(extraFields.pageTo || '', 10);
+    const pageRangeAddon = Number.isFinite(pageFrom) && Number.isFinite(pageTo)
+      ? `\n\n## ⭐ 페이지 범위 (필수 준수)\n이 문서의 **${pageFrom}~${pageTo}페이지에 보이는 단어만** 추출하세요. 그 외 페이지의 단어는 절대 포함하지 마세요.`
+      : '';
+
     // 기출 모드: 업로드 문서가 실제 기출 지문이면 예문을 문서 원문 문장으로 강제
     const examSource = (extraFields.examSource || '').trim();
     const examAddon = examSource
@@ -152,7 +159,7 @@ export const POST = createApiHandler(
           role: 'user',
           content: [
             block as Anthropic.Messages.ContentBlockParam,
-            { type: 'text', text: (definitionLang === 'en' ? PROMPT_EN : PROMPT_KO) + examAddon },
+            { type: 'text', text: (definitionLang === 'en' ? PROMPT_EN : PROMPT_KO) + pageRangeAddon + examAddon },
           ],
         },
       ],

@@ -15,7 +15,7 @@ import {
 import { FileText, Loader2, Check, X as XIcon } from 'lucide-react';
 import { toast } from 'sonner';
 import { fetchWithToast } from '@/lib/fetch-with-toast';
-import { chunkLabel } from '@/lib/split-pdf';
+import { planPdfChunks, refinePdfChunk, type PdfChunk } from '@/lib/split-pdf';
 import type { VocabDialogProps } from './types';
 import { getVocabConfig } from './types';
 
@@ -40,7 +40,7 @@ export function PdfVocabExtract({ module, parentId, onAdd, definitionLang }: Voc
   const [saving, setSaving] = useState(false);
   const [words, setWords] = useState<ExtractedWord[]>([]);
   // 추출 실패한 구간/파일 — 배너로 알리고 그것만 재시도 가능
-  const [failedChunks, setFailedChunks] = useState<File[]>([]);
+  const [failedChunks, setFailedChunks] = useState<PdfChunk[]>([]);
   const [examLabel, setExamLabel] = useState('');
   const cfg = getVocabConfig(module);
 
@@ -55,30 +55,40 @@ export function PdfVocabExtract({ module, parentId, onAdd, definitionLang }: Voc
     setExamLabel('');
   }
 
-  /** 파일/구간 목록을 순차 추출해 기존 words에 병합. 실패분은 failedChunks로 보관. */
-  async function runExtraction(chunkFiles: File[], existing: ExtractedWord[]) {
+  /** 파일/구간 목록을 순차 추출해 기존 words에 병합. 실패분은 failedChunks로 보관.
+   *  암호화 PDF(페이지 범위 청크)는 같은 원본을 재사용하므로 업로드는 파일당 1회,
+   *  스토리지 정리는 그 파일의 마지막 청크에서만 요청한다. */
+  async function runExtraction(chunks: PdfChunk[], existing: ExtractedWord[]) {
     const { uploadForExtract } = await import('@/lib/upload-for-extract');
     // front_text(소문자) 기준 중복 제거하며 순차 추출 → 합치기.
     const merged = [...existing];
     const seen = new Set(existing.map((w) => w.front_text.toLowerCase().trim()));
-    const failed: File[] = [];
-    setProgress({ done: 0, total: chunkFiles.length });
+    const failed: PdfChunk[] = [];
+    const uploadCache = new Map<File, { publicUrl: string; storagePath: string }>();
+    const lastUseIdx = new Map<File, number>();
+    chunks.forEach((c, i) => lastUseIdx.set(c.file, i));
+    setProgress({ done: 0, total: chunks.length });
 
-    for (let idx = 0; idx < chunkFiles.length; idx++) {
-      const file = chunkFiles[idx];
+    for (let idx = 0; idx < chunks.length; idx++) {
+      const c = chunks[idx];
       try {
-        const { publicUrl, storagePath } = await uploadForExtract(file);
-        const isImage = file.type.startsWith('image/');
+        let up = uploadCache.get(c.file);
+        if (!up) {
+          up = await uploadForExtract(c.file);
+          uploadCache.set(c.file, up);
+        }
+        const isImage = c.file.type.startsWith('image/');
         const data = await fetchWithToast<{ items: Omit<ExtractedWord, 'selected'>[] }>(
           `${cfg.apiBase}/extract-pdf`,
           {
             body: {
-              ...(isImage ? { imageUrl: publicUrl } : { pdfUrl: publicUrl }),
-              storagePath,
+              ...(isImage ? { imageUrl: up.publicUrl } : { pdfUrl: up.publicUrl }),
+              ...(lastUseIdx.get(c.file) === idx ? { storagePath: up.storagePath } : {}), // 마지막 사용에서만 정리
+              ...(c.pageFrom != null ? { pageFrom: c.pageFrom, pageTo: c.pageTo } : {}),
               // voca: 교재 정의 언어(영한/영영) 자동 분기용 (API가 day→교재 역추적)
               ...(module === 'voca' ? { dayId: parentId, examSource: examLabel.trim() || undefined } : {}),
             },
-            errorMessage: `${chunkLabel(file)} 구간 단어 추출 실패 (나머지 계속 진행)`,
+            errorMessage: `${c.label} 구간 단어 추출 실패 (나머지 계속 진행)`,
             logContext: `${cfg.logPrefix}.pdf_vocab_extract`,
             retry: 1, // 일시적 5xx(AI 과부하 등)는 한 번 자동 재시도
           },
@@ -90,25 +100,25 @@ export function PdfVocabExtract({ module, parentId, onAdd, definitionLang }: Voc
           merged.push({ ...item, selected: true });
         }
       } catch {
-        failed.push(file); // 실패분 보관 — 배너에서 재시도
+        failed.push(c); // 실패분 보관 — 배너에서 재시도
       } finally {
-        setProgress({ done: idx + 1, total: chunkFiles.length });
+        setProgress({ done: idx + 1, total: chunks.length });
       }
     }
 
     setWords(merged);
     setFailedChunks(failed);
-    return { anySucceeded: chunkFiles.length > failed.length, wordCount: merged.length };
+    return { anySucceeded: chunks.length > failed.length, wordCount: merged.length };
   }
 
   async function handleExtract() {
     if (files.length === 0) return;
     setExtracting(true);
     try {
-      // 큰 PDF는 AI 출력 한도에 잘려 실패 → 페이지 단위로 분할해 순차 처리
-      const { splitPdfIntoChunks } = await import('@/lib/split-pdf');
-      const expanded: File[] = [];
-      for (const f of files) expanded.push(...(await splitPdfIntoChunks(f)));
+      // 큰 PDF는 AI 출력 한도에 잘려 실패 → 페이지 단위로 나눠 순차 처리
+      // (암호화 PDF는 분할하면 깨지므로 원본 통짜 + 페이지 범위 지정으로 자동 전환)
+      const expanded: PdfChunk[] = [];
+      for (const f of files) expanded.push(...(await planPdfChunks(f)));
 
       const { anySucceeded, wordCount } = await runExtraction(expanded, []);
       if (!anySucceeded) return; // 전부 실패 → step1 유지
@@ -130,9 +140,8 @@ export function PdfVocabExtract({ module, parentId, onAdd, definitionLang }: Voc
     if (failedChunks.length === 0) return;
     setExtracting(true);
     try {
-      const { splitPdfIntoChunks } = await import('@/lib/split-pdf');
-      const finer: File[] = [];
-      for (const f of failedChunks) finer.push(...(await splitPdfIntoChunks(f, 1)));
+      const finer: PdfChunk[] = [];
+      for (const c of failedChunks) finer.push(...(await refinePdfChunk(c)));
       await runExtraction(finer, words);
     } finally {
       setExtracting(false);
@@ -282,7 +291,7 @@ export function PdfVocabExtract({ module, parentId, onAdd, definitionLang }: Voc
             {failedChunks.length > 0 && (
               <div className="flex flex-wrap items-center gap-2 rounded-lg border border-amber-200 bg-amber-50 px-3 py-2.5">
                 <p className="text-xs font-semibold text-amber-800">
-                  ⚠️ {failedChunks.map((f) => chunkLabel(f)).join(', ')} 구간 추출 실패 — 이 부분 단어는 아래 목록에 없어요
+                  ⚠️ {failedChunks.map((c) => c.label).join(', ')} 구간 추출 실패 — 이 부분 단어는 아래 목록에 없어요
                 </p>
                 <Button size="sm" variant="outline" className="h-7 border-amber-300 text-amber-700 hover:bg-amber-100" onClick={handleRetryFailed} disabled={extracting}>
                   {extracting ? <Loader2 className="h-3.5 w-3.5 mr-1 animate-spin" /> : null}
