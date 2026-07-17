@@ -98,7 +98,7 @@ export function PdfVocabExtract({ module, parentId, onAdd, definitionLang }: Voc
 
     setWords(merged);
     setFailedChunks(failed);
-    return { anySucceeded: chunkFiles.length > failed.length };
+    return { anySucceeded: chunkFiles.length > failed.length, wordCount: merged.length };
   }
 
   async function handleExtract() {
@@ -110,8 +110,13 @@ export function PdfVocabExtract({ module, parentId, onAdd, definitionLang }: Voc
       const expanded: File[] = [];
       for (const f of files) expanded.push(...(await splitPdfIntoChunks(f)));
 
-      const { anySucceeded } = await runExtraction(expanded, []);
+      const { anySucceeded, wordCount } = await runExtraction(expanded, []);
       if (!anySucceeded) return; // 전부 실패 → step1 유지
+      if (wordCount === 0) {
+        // "성공인데 0단어"로 빈 2단계에 떨어지는 혼란 방지
+        toast.error('추출된 단어가 없습니다 — 단어 목록이 보이는 파일인지 확인해주세요.');
+        return;
+      }
       setStep(2);
     } finally {
       setExtracting(false);

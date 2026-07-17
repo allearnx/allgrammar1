@@ -89,7 +89,7 @@ export function PdfBulkExtract({ bookId, definitionLang = 'ko', onCreated }: { b
 
     setWords(merged);
     setFailedChunks(failed);
-    return { anySucceeded: chunkFiles.length > failed.length };
+    return { anySucceeded: chunkFiles.length > failed.length, wordCount: merged.length };
   }
 
   async function handleExtract() {
@@ -100,8 +100,13 @@ export function PdfBulkExtract({ bookId, definitionLang = 'ko', onCreated }: { b
       // 몇 페이지씩 분할해 순차 추출 후 합친다 (중복 단어는 첫 등장만 유지)
       const { splitPdfIntoChunks } = await import('@/lib/split-pdf');
       const chunks = await splitPdfIntoChunks(file);
-      const { anySucceeded } = await runExtraction(chunks, []);
+      const { anySucceeded, wordCount } = await runExtraction(chunks, []);
       if (!anySucceeded) return; // 전부 실패 → step1 유지
+      if (wordCount === 0) {
+        // "성공인데 0단어"로 빈 2단계에 떨어지는 혼란 방지
+        toast.error('추출된 단어가 없습니다 — 단어 목록이 보이는 페이지의 PDF인지 확인해주세요.');
+        return;
+      }
       setStep(2);
     } finally {
       setExtracting(false);

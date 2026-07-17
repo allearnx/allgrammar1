@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import { createApiHandler } from '@/lib/api';
 import { logger } from '@/lib/logger';
 import Anthropic from '@anthropic-ai/sdk';
-import { parseAiJsonArray } from '@/lib/ai-json';
+import { requireAiJsonArray } from '@/lib/ai-json';
 
 export const maxDuration = 120;
 
@@ -167,7 +167,9 @@ export const POST = createApiHandler(
       );
     }
 
-    const raw = parseAiJsonArray<VocabExtractItem>(message);
+    // parseAiJsonArray는 파싱 실패를 빈 배열로 삼켜 "성공인데 0단어"로 보임(사장님 신고)
+    // → require 버전으로 교체: 실패 시 500 + raw 응답 로그 (클라이언트가 실패 구간으로 처리)
+    const raw = requireAiJsonArray<VocabExtractItem>(message, 'ai.voca_extract');
     const mapped = raw
       .filter((item) => item.w && item.m) // w, m 필수
       .map((item) => ({
