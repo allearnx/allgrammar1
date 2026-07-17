@@ -36,7 +36,8 @@ interface MatchResult {
 }
 
 export const POST = createApiHandler(
-  { roles: ['teacher', 'admin', 'boss'], hasBody: false, rateLimit: { max: 5 } },
+  // 일괄 매칭이 전체 Day를 순회 호출 — 5/분이면 걸릴 수 있어 상향
+  { roles: ['teacher', 'admin', 'boss'], hasBody: false, rateLimit: { max: 20 } },
   async ({ request }) => {
   try {
     const formData = await request.formData();
