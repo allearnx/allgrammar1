@@ -36,8 +36,9 @@ interface MatchResult {
 }
 
 export const POST = createApiHandler(
-  // 일괄 매칭이 전체 Day를 순회 호출 — 5/분이면 걸릴 수 있어 상향
-  { roles: ['teacher', 'admin', 'boss'], hasBody: false, rateLimit: { max: 20 } },
+  // ⚠️ windowMs 기본값은 1시간 — 일괄 매칭(Day 수만큼 순회 호출)이 시간당 한도에
+  // 걸렸던 사고. 분당 기준으로 명시 (순차 호출이라 실제 분당 1~2회 수준)
+  { roles: ['teacher', 'admin', 'boss'], hasBody: false, rateLimit: { max: 20, windowMs: 60_000 } },
   async ({ request }) => {
   try {
     const formData = await request.formData();

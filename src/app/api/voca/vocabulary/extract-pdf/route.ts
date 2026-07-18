@@ -94,7 +94,8 @@ interface VocabExtractItem {
 }
 
 export const POST = createApiHandler(
-  { roles: ['teacher', 'admin', 'boss'], hasBody: false, rateLimit: { max: 100 } },
+  // windowMs 미명시=시간당 — 분할 추출(청크+재시도 반복 호출)은 분당 기준으로 명시
+  { roles: ['teacher', 'admin', 'boss'], hasBody: false, rateLimit: { max: 30, windowMs: 60_000 } },
   async ({ request }) => {
   try {
     // FormData 업로드 시 PDF/이미지만 허용
