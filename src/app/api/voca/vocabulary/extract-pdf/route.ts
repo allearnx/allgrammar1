@@ -153,7 +153,7 @@ export const POST = createApiHandler(
     logger.info('ai.voca_extract', { mode: storagePath ? 'url' : 'formdata', blockType: block.type, definitionLang, examMode: !!examSource });
 
     const message = await anthropic.messages.create({
-      model: 'claude-opus-4-8',
+      model: 'claude-sonnet-5', // 단어/문장 추출은 구조화 작업 — Opus 대비 ~1/5 비용, 품질 검증 완료 (2026-07-17),
       max_tokens: 16384,
       messages: [
         {

@@ -143,7 +143,8 @@ ${attemptsSummary || '(시도 없음)'}
       messages: [{ role: 'user', content: prompt }],
     });
 
-    const responseText = aiResponse.content[0].type === 'text' ? aiResponse.content[0].text : '';
+    const textBlock = aiResponse.content.find((b) => b.type === 'text'); // thinking 블록 대응
+    const responseText = textBlock?.type === 'text' ? textBlock.text : '';
     const jsonMatch = responseText.match(/\{[\s\S]*\}/);
     if (!jsonMatch) {
       logger.error('ai_analysis.parse_failed', { studentId, response: responseText.slice(0, 200) });

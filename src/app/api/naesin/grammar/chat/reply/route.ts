@@ -97,7 +97,8 @@ ${isLastTurn ? '- 마지막 턴이므로 전체 학습을 정리해주세요' : 
         ],
       });
 
-      const responseText = aiResponse.content[0].type === 'text' ? aiResponse.content[0].text : '';
+      const textBlock = aiResponse.content.find((b) => b.type === 'text'); // thinking 블록 대응
+      const responseText = textBlock?.type === 'text' ? textBlock.text : '';
       const jsonMatch = responseText.match(/\{[\s\S]*\}/);
       let result: { feedback: string; isCorrect: boolean; correctedPoint: string | null };
       if (jsonMatch) {

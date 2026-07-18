@@ -57,7 +57,8 @@ Grading criteria:
         ],
       });
 
-      const responseText = message.content[0].type === 'text' ? message.content[0].text : '';
+      const textBlock = message.content.find((b) => b.type === 'text'); // thinking 블록 대응
+      const responseText = textBlock?.type === 'text' ? textBlock.text : '';
 
       const jsonMatch = responseText.match(/\{[\s\S]*\}/);
       if (!jsonMatch) {

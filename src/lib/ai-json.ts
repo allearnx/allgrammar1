@@ -1,9 +1,12 @@
 import type Anthropic from '@anthropic-ai/sdk';
 import { logger } from '@/lib/logger';
 
-/** AI 응답에서 텍스트 추출 + 코드펜스 제거. 커스텀 에러 핸들링이 필요한 경우 사용. */
+/** AI 응답에서 텍스트 추출 + 코드펜스 제거. 커스텀 에러 핸들링이 필요한 경우 사용.
+ *  ⚠️ content[0]만 보면 안 됨 — 모델이 thinking 블록을 앞세우면(Sonnet 5 기본,
+ *  Opus도 간헐) 첫 블록이 text가 아니라 빈 응답으로 오인된다 ("성공인데 0단어" 원인). */
 export function extractAiText(message: Anthropic.Message): string {
-  const raw = message.content[0]?.type === 'text' ? message.content[0].text : '';
+  const textBlock = message.content.find((b) => b.type === 'text');
+  const raw = textBlock?.type === 'text' ? textBlock.text : '';
   return raw.replace(/```(?:json)?\s*/g, '').replace(/```\s*/g, '').trim();
 }
 
