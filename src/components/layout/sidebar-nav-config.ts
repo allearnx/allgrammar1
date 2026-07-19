@@ -26,6 +26,7 @@ import {
   Library,
   Swords,
   Sparkles,
+  Target,
 } from 'lucide-react';
 import type { NaesinStageStatuses } from '@/types/database';
 
@@ -204,6 +205,7 @@ export const NAV_CONFIG: Record<string, NavGroup[]> = {
         { href: '/boss/subscriptions', label: '구독 관리', icon: CreditCard },
         { href: '/boss/plans', label: '요금 플랜', icon: CreditCard },
         { href: '/boss/orders', label: '주문 내역', icon: Receipt },
+        { href: '/boss/leads', label: '진단 리드', icon: Target },
       ],
     },
     {
