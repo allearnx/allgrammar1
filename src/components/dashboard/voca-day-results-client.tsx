@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useCallback, useEffect, useState } from 'react';
-import { ChevronDown, ChevronUp, Loader2 } from 'lucide-react';
+import { ChevronDown, ChevronUp, Loader2, RefreshCw } from 'lucide-react';
 import { fetchWithToast } from '@/lib/fetch-with-toast';
 import { scoreChipClass } from '@/lib/utils/progress-styles';
 import { VocaDayShareButton } from './voca-day-share-button';
@@ -147,6 +147,14 @@ export function VocaDayResultsClient() {
     fetchResults();
   }, [fetchResults]);
 
+  // 학생이 방금 제출한 점수가 이전 스냅샷에 가려 "저장 안 됐다"로 오인되는 신고 방지
+  // (2026-07-19 표예린 사례) — 탭에 다시 포커스가 오면 자동 갱신
+  useEffect(() => {
+    const onFocus = () => fetchResults();
+    window.addEventListener('focus', onFocus);
+    return () => window.removeEventListener('focus', onFocus);
+  }, [fetchResults]);
+
   if (loadingBooks) {
     return (
       <div className="flex items-center justify-center py-12">
@@ -201,6 +209,15 @@ export function VocaDayResultsClient() {
           <span className="text-green-600">완료 <strong>{completedCount}</strong></span>
           <span className="text-amber-600">진행중 <strong>{inProgressCount}</strong></span>
           <span className="text-gray-400">미시작 <strong>{students.length - completedCount - inProgressCount}</strong></span>
+          <button
+            onClick={fetchResults}
+            disabled={loadingResults}
+            className="ml-auto inline-flex items-center gap-1 rounded-full border px-3 py-1 text-xs font-medium text-gray-600 hover:bg-gray-50 disabled:opacity-50"
+            title="학생이 방금 제출한 점수까지 다시 불러오기"
+          >
+            <RefreshCw className={`h-3 w-3 ${loadingResults ? 'animate-spin' : ''}`} />
+            새로고침
+          </button>
         </div>
       )}
 
