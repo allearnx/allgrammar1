@@ -4,6 +4,7 @@ import FlowSection from './_sections/FlowSection';
 import FeatureSection from './_sections/FeatureSection';
 import BookCarouselSection from './_sections/BookCarouselSection';
 import ParentSection from './_sections/ParentSection';
+import DiagnosticSection from './_sections/DiagnosticSection';
 import PricingSection from './_sections/PricingSection';
 import FinalCtaSection from './_sections/FinalCtaSection';
 import { C } from './_data';
@@ -120,6 +121,7 @@ export default async function AllkillPage() {
         <FeatureSection />
         <BookCarouselSection books={carouselBooks} />
         <ParentSection />
+        <DiagnosticSection />
         <PricingSection vocaCourseId={vocaCourseId} vocaCoursePrice={vocaCoursePrice} selfStudyCourseId={selfStudyCourseId} selfStudyCoursePrice={selfStudyCoursePrice} passCourseId={passCourseId} passCoursePrice={passCoursePrice} />
         <FinalCtaSection />
       </div>
