@@ -96,6 +96,9 @@ export function BookExamSentenceMatch({ days, onDone }: { days: VocaDay[]; onDon
                   example_sentence: m.example_sentence,
                   example_sentence_ko: m.example_sentence_ko,
                   exam_source: examLabel.trim(), // 학생 화면 "📄 기출" 뱃지의 근거
+                  // 예문이 바뀌면 기존 음원은 이전 문장을 읽음 — 초기화해서 재생성 대상으로
+                  audio_url: null,
+                  word_timestamps: null,
                 },
                 silent: true,
                 logContext: 'voca_admin.book_exam_match',

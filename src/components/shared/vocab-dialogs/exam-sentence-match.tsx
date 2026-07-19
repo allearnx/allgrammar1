@@ -103,6 +103,9 @@ export function ExamSentenceMatch({ words, onUpdate }: Props) {
               example_sentence_ko: w.example_sentence_ko,
               // 출처 라벨 — 학생 화면 "기출 뱃지"의 근거
               exam_source: examLabel.trim() || null,
+              // 예문이 바뀌면 기존 음원은 이전 문장을 읽음 — 초기화해서 재생성 대상으로
+              audio_url: null,
+              word_timestamps: null,
             },
             silent: true,
             logContext: 'voca_admin.exam_sentence_match',
