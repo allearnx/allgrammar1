@@ -5,6 +5,7 @@ import { NaesinProgressCard } from '@/components/dashboard/naesin-progress-card'
 import { VocaProgressCard } from '@/components/dashboard/voca-progress-card';
 import { VocaExamReportCard } from '@/components/dashboard/voca-exam-report-card';
 import { VocaKnownWordsCard } from '@/components/dashboard/voca-known-words-card';
+import { VocaDiagnosticCard, type DiagnosticCardResult } from '@/components/dashboard/voca-diagnostic-card';
 import { computeTotalKnownWords } from '@/lib/voca/coverage';
 import { ParentProgressTabs } from '@/components/dashboard/parent-progress-tabs';
 import { fetchVocaExamGroups } from '@/lib/voca/fetch-exam-results';
@@ -252,15 +253,25 @@ export default async function ParentReportPage({ params, searchParams }: Props) 
     />
   ) : null;
 
-  // 보카 시험 결과 (오늘 본 게 맨 위) + 누적 암기 단어 — 학부모 리포트에 노출
-  const [vocaExam, totalKnown] = await Promise.all([
+  // 보카 시험 결과 (오늘 본 게 맨 위) + 누적 암기 단어 + 레벨 진단 — 학부모 리포트에 노출
+  const [vocaExam, totalKnown, diagnosticRes] = await Promise.all([
     hasVoca ? fetchVocaExamGroups(admin, [studentId]) : Promise.resolve({ groups: [], dayTitles: {} }),
     hasVoca ? computeTotalKnownWords(admin, studentId) : Promise.resolve({ knownWords: 0, weeklyNew: 0 }),
+    hasVoca
+      ? admin
+          .from('voca_diagnostic_results')
+          .select('grade, start_band, final_band, final_qualifier, coverage_score, created_at')
+          .eq('student_id', studentId)
+          .order('created_at', { ascending: false })
+          .limit(2)
+      : Promise.resolve({ data: null }),
   ]);
   const vocaExamExams = vocaExam.groups[0]?.exams ?? [];
+  const diagnosticResults = (diagnosticRes.data ?? []) as DiagnosticCardResult[];
 
   const vocaCard = hasVoca ? (
     <div className="space-y-4">
+      <VocaDiagnosticCard results={diagnosticResults} />
       <VocaExamReportCard exams={vocaExamExams} dayTitles={vocaExam.dayTitles} />
       <VocaKnownWordsCard knownWords={totalKnown.knownWords} weeklyNew={totalKnown.weeklyNew} />
       <VocaProgressCard vocaProgress={vocaProgress} submissionStatuses={vocaSubmissionStatuses} />
