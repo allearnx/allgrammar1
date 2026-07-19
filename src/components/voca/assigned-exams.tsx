@@ -81,7 +81,12 @@ export function AssignedExams() {
           <p className="voca-display text-lg text-primary" style={{ fontWeight: 700 }}>📋 선생님이 낸 시험</p>
           <p className="mt-0.5 text-xs text-primary">{rangeLabel(active)} · {vocab.length}단어 · {PASS}점 통과</p>
         </div>
-        <RhythmSpelling vocabulary={vocab} onComplete={handleComplete} examMode />
+        <RhythmSpelling
+          vocabulary={vocab}
+          storageContext={`assigned:${active.id}`}
+          onComplete={handleComplete}
+          examMode
+        />
       </div>
     );
   }

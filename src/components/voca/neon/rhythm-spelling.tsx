@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useCallback, useEffect, useRef } from 'react';
+import { toast } from 'sonner';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { cn, shuffle, blankOutWordExact } from '@/lib/utils';
@@ -31,7 +32,24 @@ interface RhythmSpellingProps {
   onComplete: (score: number, wrongWords: SpellingWrongWord[]) => void;
   /** 시험 모드 — 발음 힌트(스피커) 숨김 */
   examMode?: boolean;
+  /**
+   * 진행 자동 저장 컨텍스트 (예: `day:{dayId}`, `bonus:{bookId}:{dayIds}`).
+   * 지정하면 단어를 채점할 때마다 계정별 localStorage에 체크포인트를 남겨,
+   * 소리 문제 등으로 새로고침/재로그인해도 보던 단어부터 이어간다 (2026-07-19 고객 컴플레인).
+   */
+  storageContext?: string;
 }
+
+interface SavedProgress {
+  v: 1;
+  ids: string[]; // 셔플된 출제 순서
+  index: number;
+  results: WordResult[];
+  wrongWords: SpellingWrongWord[];
+  savedAt: number;
+}
+
+const RESUME_TTL_MS = 24 * 60 * 60 * 1000; // 하루 지난 체크포인트는 무시
 
 interface WordResult {
   firstTryCorrect: number;
@@ -42,11 +60,14 @@ type LetterState = 'typed' | 'auto' | 'correct' | 'wrong';
 
 const PASS_THRESHOLD = 80;
 
-export function RhythmSpelling({ vocabulary, onComplete, examMode = false }: RhythmSpellingProps) {
+export function RhythmSpelling({ vocabulary, onComplete, examMode = false, storageContext }: RhythmSpellingProps) {
   // ⚠️ useMemo([vocabulary])로 만들면 리렌더로 배열 참조가 바뀔 때 시험 도중
   // 출제 순서가 재셔플된다(푼 단어 반복 + 안 푼 단어 누락). 마운트 시 1회만 생성.
   const [shuffledVocab, setShuffledVocab] = useState(() => shuffle([...vocabulary]));
   const [currentIndex, setCurrentIndex] = useState(0);
+  // 계정별 체크포인트 키 — 공용 브라우저에서 다른 학생 진행과 섞이지 않게 uid 포함
+  const storageKeyRef = useRef<string | null>(null);
+  const startedRef = useRef(false);
   const [typedLetters, setTypedLetters] = useState<string[]>([]);
   const [letterStates, setLetterStates] = useState<LetterState[]>([]);
   // 채점 완료 후 정답 노출 중 (입력 잠금) — false면 자유 입력 중
@@ -57,6 +78,58 @@ export function RhythmSpelling({ vocabulary, onComplete, examMode = false }: Rhy
   const flashTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const resultsRef = useRef<WordResult[]>([]);
   const wrongWordsRef = useRef<SpellingWrongWord[]>([]);
+
+  // 체크포인트 복원 — 마운트 직후, 사용자가 입력을 시작하기 전에만
+  useEffect(() => {
+    if (!storageContext) return;
+    let cancelled = false;
+    (async () => {
+      try {
+        const { createClient } = await import('@/lib/supabase/client');
+        const { data } = await createClient().auth.getUser();
+        if (cancelled || !data.user) return;
+        const key = `voca-spell:${data.user.id}:${storageContext}`;
+        storageKeyRef.current = key;
+        if (startedRef.current) return; // 이미 입력 시작 — 진행을 덮어쓰지 않음
+        const raw = window.localStorage.getItem(key);
+        if (!raw) return;
+        const saved = JSON.parse(raw) as SavedProgress;
+        if (saved.v !== 1 || Date.now() - saved.savedAt > RESUME_TTL_MS) return;
+        const byId = new Map(vocabulary.map((v) => [v.id, v]));
+        if (saved.ids.length !== vocabulary.length || !saved.ids.every((id) => byId.has(id))) return;
+        if (saved.index <= 0 || saved.index >= saved.ids.length) return;
+        setShuffledVocab(saved.ids.map((id) => byId.get(id)!));
+        setCurrentIndex(saved.index);
+        resultsRef.current = saved.results;
+        wrongWordsRef.current = saved.wrongWords;
+        toast.info(`이어서 진행해요 — ${saved.index + 1}번째 단어부터`, { duration: 4000 });
+      } catch { /* 복원 실패 시 처음부터 진행 */ }
+    })();
+    return () => { cancelled = true; };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [storageContext]);
+
+  const saveCheckpoint = useCallback((nextIndex: number) => {
+    const key = storageKeyRef.current;
+    if (!key) return;
+    try {
+      const payload: SavedProgress = {
+        v: 1,
+        ids: shuffledVocab.map((v) => v.id),
+        index: nextIndex,
+        results: resultsRef.current,
+        wrongWords: wrongWordsRef.current,
+        savedAt: Date.now(),
+      };
+      window.localStorage.setItem(key, JSON.stringify(payload));
+    } catch { /* 저장 실패는 조용히 무시 */ }
+  }, [shuffledVocab]);
+
+  const clearCheckpoint = useCallback(() => {
+    try {
+      if (storageKeyRef.current) window.localStorage.removeItem(storageKeyRef.current);
+    } catch { /* noop */ }
+  }, []);
 
   const vocab = shuffledVocab[currentIndex];
   const targetWord = vocab.front_text.trim().toLowerCase();
@@ -116,6 +189,10 @@ export function RhythmSpelling({ vocabulary, onComplete, examMode = false }: Rhy
       flashTimerRef.current = setTimeout(() => setWrongFlash(false), 400);
     }
 
+    // 채점 직후 체크포인트 저장 — 대기 시간 중 이탈해도 다음 단어부터 이어간다
+    if (currentIndex + 1 < shuffledVocab.length) saveCheckpoint(currentIndex + 1);
+    else clearCheckpoint();
+
     // 틀렸으면 정답을 볼 시간을 조금 더 준다
     advanceTimerRef.current = setTimeout(() => {
       if (currentIndex + 1 < shuffledVocab.length) {
@@ -134,11 +211,12 @@ export function RhythmSpelling({ vocabulary, onComplete, examMode = false }: Rhy
         if (score < PASS_THRESHOLD) onComplete(score, wrongWordsRef.current);
       }
     }, hadWrong ? 1800 : 600);
-  }, [currentIndex, shuffledVocab, onComplete, letterCount, targetWord, typedLetters]);
+  }, [currentIndex, shuffledVocab, onComplete, letterCount, targetWord, typedLetters, saveCheckpoint, clearCheckpoint]);
 
   /** 자유 입력 — 어떤 글자든 다음 칸에 채운다 (채점은 다 채운 뒤) */
   const handleKeyPress = useCallback((key: string) => {
     if (graded || isFull) return;
+    startedRef.current = true;
 
     // 현재 위치가 비알파벳이면 자동 채움 후 진행
     let currentTyped = typedLetters;
@@ -217,6 +295,7 @@ export function RhythmSpelling({ vocabulary, onComplete, examMode = false }: Rhy
   }, []);
 
   function handleRetry() {
+    clearCheckpoint();
     setShuffledVocab(shuffle([...vocabulary]));
     setCurrentIndex(0);
     setTypedLetters([]);

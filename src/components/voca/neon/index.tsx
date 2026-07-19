@@ -265,6 +265,7 @@ export function NeonVocaTab({ vocabulary, dayId, progress, dayTitle }: NeonVocaT
           {currentStep === 3 && (
             <RhythmSpelling
               vocabulary={vocabulary}
+              storageContext={`day:${dayId}`}
               onComplete={(score, wrongWords) => handleStepComplete(3, 'spelling', score, wrongWords)}
             />
           )}

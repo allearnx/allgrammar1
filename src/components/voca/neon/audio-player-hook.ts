@@ -123,6 +123,8 @@ export function useAudioPlayer({
             setCurrentWordIndex(-1);
             currentWordIndexRef.current = -1;
             clearSpeechTimers();
+            // 로드 실패한 엘리먼트를 재사용하면 이후 클릭도 계속 무음 — 다음 시도에 새로 생성
+            audioRef.current = null;
           };
         }
         audioRef.current.currentTime = 0;
@@ -140,16 +142,23 @@ export function useAudioPlayer({
         }
         return;
       } catch {
-        // 오디오 재생 실패 → Web Speech 폴백으로 진행
+        // 오디오 재생 실패 → 깨진 엘리먼트 폐기 후 Web Speech 폴백으로 진행
+        audioRef.current = null;
       }
     }
 
     // Web Speech API 폴백
     if (text && typeof window !== 'undefined' && window.speechSynthesis) {
       synthRef.current = window.speechSynthesis;
+      // Chrome: 이전 발화가 큐에 걸려 있으면 새 speak()가 무음이 됨 — 항상 큐 초기화
+      synthRef.current.cancel();
       const utterance = new SpeechSynthesisUtterance(text);
       utterance.lang = 'en-US';
       utterance.rate = 0.9;
+      // 영어 보이스가 있으면 명시 지정 — 일부 기기에서 기본 보이스가 무음/한국어인 문제 대응
+      const voices = synthRef.current.getVoices();
+      const enVoice = voices.find((v) => v.lang?.toLowerCase().startsWith('en'));
+      if (enVoice) utterance.voice = enVoice;
       utterance.onend = () => {
         setIsPlaying(false);
         setCurrentWordIndex(-1);
@@ -170,6 +179,8 @@ export function useAudioPlayer({
       setupEstimatedTimers(text, estimatedDur);
 
       synthRef.current.speak(utterance);
+      // iOS 사파리/일부 크롬: paused 상태로 시작해 무음이 되는 버그 — resume은 무해한 no-op
+      synthRef.current.resume();
     }
   }, [audioUrl, updateHighlight, clearSpeechTimers, setupEstimatedTimers]);
 

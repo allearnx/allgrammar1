@@ -89,7 +89,12 @@ export function BonusExam({ days, bookId }: { days: VocaDay[]; bookId: string })
             {selected.length}개 Day · {vocab.length}단어 · {PASS}점 통과 · 순서 셔플
           </p>
         </div>
-        <RhythmSpelling vocabulary={vocab} onComplete={handleComplete} examMode />
+        <RhythmSpelling
+          vocabulary={vocab}
+          storageContext={`bonus:${bookId}:${[...selected].sort().join('.')}`}
+          onComplete={handleComplete}
+          examMode
+        />
       </div>
     );
   }
