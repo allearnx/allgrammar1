@@ -20,12 +20,13 @@ export function ParentLinkButton() {
         errorMessage: '링크 발급에 실패했어요. 잠시 후 다시 시도해주세요.',
       });
       if (!data.token) throw new Error('no token');
-      const url = `${window.location.origin}/parent/${data.token}`;
+      // 보카 홈에서 발급하는 링크 → 올킬보카 탭이 바로 열리고 카톡 미리보기도 올킬보카 이미지
+      const url = `${window.location.origin}/parent/${data.token}?tab=voca`;
 
       // 모바일: 공유 시트 / 데스크탑: 클립보드 복사
       if (navigator.share) {
         try {
-          await navigator.share({ title: '올라영 학습 리포트', url });
+          await navigator.share({ title: '올킬보카 성적표', url });
           return;
         } catch { /* 공유 취소 → 복사로 폴백 */ }
       }

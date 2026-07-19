@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { Link2, Check, RefreshCw, Loader2, X, ExternalLink } from 'lucide-react';
+import { Link2, Check, RefreshCw, Loader2, X, ExternalLink, BookA } from 'lucide-react';
 import { fetchWithToast } from '@/lib/fetch-with-toast';
 
 interface Props {
@@ -13,7 +13,8 @@ export function ParentShareButton({ studentId }: Props) {
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [token, setToken] = useState<string | null>(null);
-  const [copied, setCopied] = useState(false);
+  // 어느 링크를 복사했는지 구분 — 전체 리포트('full') vs 올킬보카 성적표('voca', ?tab=voca)
+  const [copied, setCopied] = useState<'full' | 'voca' | null>(null);
   const [fetched, setFetched] = useState(false);
 
   const fetchToken = async () => {
@@ -63,12 +64,12 @@ export function ParentShareButton({ studentId }: Props) {
     }
   };
 
-  const copyLink = async () => {
+  const copyLink = async (type: 'full' | 'voca') => {
     if (!token) return;
-    const url = `${window.location.origin}/parent/${token}`;
+    const url = `${window.location.origin}/parent/${token}${type === 'voca' ? '?tab=voca' : ''}`;
     await navigator.clipboard.writeText(url);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+    setCopied(type);
+    setTimeout(() => setCopied(null), 2000);
   };
 
   const handleOpen = async () => {
@@ -91,9 +92,13 @@ export function ParentShareButton({ studentId }: Props) {
         <Loader2 className="h-4 w-4 animate-spin text-gray-400" />
       ) : token ? (
         <>
-          <Button variant="outline" size="sm" onClick={copyLink} className="gap-1.5">
-            {copied ? <Check className="h-3.5 w-3.5 text-green-500" /> : <Link2 className="h-3.5 w-3.5" />}
-            {copied ? '복사됨' : '링크 복사'}
+          <Button variant="outline" size="sm" onClick={() => copyLink('full')} className="gap-1.5" title="내신+보카 통합 리포트 링크">
+            {copied === 'full' ? <Check className="h-3.5 w-3.5 text-green-500" /> : <Link2 className="h-3.5 w-3.5" />}
+            {copied === 'full' ? '복사됨' : '전체 리포트'}
+          </Button>
+          <Button variant="outline" size="sm" onClick={() => copyLink('voca')} className="gap-1.5" title="올킬보카 성적표만 (카톡 미리보기도 올킬보카 이미지)">
+            {copied === 'voca' ? <Check className="h-3.5 w-3.5 text-green-500" /> : <BookA className="h-3.5 w-3.5" />}
+            {copied === 'voca' ? '복사됨' : '보카 성적표'}
           </Button>
           <Button
             variant="outline"
