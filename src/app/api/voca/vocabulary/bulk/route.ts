@@ -2,12 +2,23 @@ import { NextResponse } from 'next/server';
 import { createApiHandler } from '@/lib/api/handler';
 import { vocaVocabBulkSchema } from '@/lib/api/schemas';
 import { requireContentPermission } from '@/lib/api/require-content-permission';
+import { filterVocabItems } from '@/lib/voca/vocab-guard';
 
 // POST — 단어 대량 업로드
 export const POST = createApiHandler(
   { roles: ['teacher', 'admin', 'boss'], schema: vocaVocabBulkSchema },
   async ({ body, supabase, user }) => {
     await requireContentPermission(user, supabase);
+
+    // 오염 방지: AI 응답 문장 등 표제어 형식이 아닌 항목은 걸러내고 저장
+    const { valid: items, skipped } = filterVocabItems(body.items);
+    if (items.length === 0) {
+      return NextResponse.json(
+        { error: '유효한 단어가 없습니다. 표제어 형식을 확인해주세요.', skipped },
+        { status: 400 },
+      );
+    }
+
     // Get current max sort_order
     const { data: existing } = await supabase
       .from('voca_vocabulary')
@@ -18,7 +29,7 @@ export const POST = createApiHandler(
 
     let nextOrder = (existing?.[0]?.sort_order ?? -1) + 1;
 
-    const rows = body.items.map((item) => ({
+    const rows = items.map((item) => ({
       day_id: body.day_id,
       front_text: item.front_text,
       back_text: item.back_text,
@@ -40,6 +51,6 @@ export const POST = createApiHandler(
       .select();
 
     if (error) return NextResponse.json({ error: error.message }, { status: 400 });
-    return NextResponse.json({ count: data?.length || 0, items: data });
+    return NextResponse.json({ count: data?.length || 0, items: data, skipped });
   }
 );

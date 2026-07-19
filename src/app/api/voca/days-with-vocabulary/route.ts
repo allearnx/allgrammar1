@@ -2,12 +2,22 @@ import { NextResponse } from 'next/server';
 import { createApiHandler } from '@/lib/api/handler';
 import { vocaDaysWithVocabSchema } from '@/lib/api/schemas';
 import { invalidateVocaContent } from '@/lib/cache/invalidate';
+import { filterVocabItems } from '@/lib/voca/vocab-guard';
 
 // POST — Day + 단어 일괄 생성 (PDF 대량 추출용)
 export const POST = createApiHandler(
   { roles: ['teacher', 'admin', 'boss'], schema: vocaDaysWithVocabSchema },
   async ({ body, supabase }) => {
-    const { book_id, words_per_day, items } = body;
+    const { book_id, words_per_day } = body;
+
+    // 오염 방지: AI 응답 문장 등 표제어 형식이 아닌 항목은 걸러내고 저장
+    const { valid: items, skipped } = filterVocabItems(body.items);
+    if (items.length === 0) {
+      return NextResponse.json(
+        { error: '유효한 단어가 없습니다. 추출 결과를 확인해주세요.', skipped },
+        { status: 400 },
+      );
+    }
 
     // 기존 max day_number 조회
     const { data: existing } = await supabase
@@ -79,6 +89,6 @@ export const POST = createApiHandler(
     // 방금 만든 Day가 모달 닫고 목록 새로고침해도 최대 5분간 안 보임(리포트된 버그).
     invalidateVocaContent(book_id);
 
-    return NextResponse.json({ days: createdDays, totalWords: items.length });
+    return NextResponse.json({ days: createdDays, totalWords: items.length, skipped });
   }
 );

@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import { createApiHandler } from '@/lib/api/handler';
 import { vocaVocabCreateSchema, vocaVocabPatchSchema, idSchema } from '@/lib/api/schemas';
 import { requireContentPermission } from '@/lib/api/require-content-permission';
+import { isValidFrontText } from '@/lib/voca/vocab-guard';
 import { VOCA_VOCABULARY_COLUMNS } from '@/types/voca';
 
 // GET — 단어 목록 (dayId 쿼리 파라미터)
@@ -23,6 +24,13 @@ export const POST = createApiHandler(
   { roles: ['teacher', 'admin', 'boss'], schema: vocaVocabCreateSchema },
   async ({ body, supabase, user }) => {
     await requireContentPermission(user, supabase);
+    // 오염 방지: AI 응답 문장/형식 문자열이 표제어로 저장되는 것 차단
+    if (!isValidFrontText(body.front_text)) {
+      return NextResponse.json(
+        { error: '표제어가 영어 단어/숙어 형식이 아닙니다. 입력을 확인해주세요.' },
+        { status: 400 },
+      );
+    }
     const { data, error } = await supabase
       .from('voca_vocabulary')
       .insert(body)
