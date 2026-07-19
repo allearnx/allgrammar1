@@ -95,11 +95,8 @@ export default function PaymentCallbackPage() {
                 <div className="mt-2 flex w-full max-w-xs flex-col gap-3">
                   <Button asChild size="lg" className="h-12 text-base font-bold">
                     <Link href={serviceActivated === 'voca' ? '/student/voca' : '/student'}>
-                      학습하러 가기
+                      {serviceActivated === 'voca' ? '교재 고르러 가기' : '학습하러 가기'}
                     </Link>
-                  </Button>
-                  <Button asChild size="lg" variant="outline" className="h-12 text-base">
-                    <Link href="/updates">이용 방법 보기</Link>
                   </Button>
                 </div>
               ) : (
