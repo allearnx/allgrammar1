@@ -55,15 +55,24 @@ function samePos(a: string | null, b: string | null): boolean {
   return ta.some((t) => tb.includes(t));
 }
 
-/** 밴드별 활성 여부 — 제목이 일치하고 Day가 1개 이상 있는 교재가 하나라도 있으면 활성 */
-export async function getActiveBands(supabase: SupabaseLike): Promise<BandKey[]> {
+export interface BandBook {
+  id: string;
+  title: string;
+}
+
+/** 밴드별 활성 교재(Day 1개 이상) 목록 — 진단 출제 풀이자 추천 교재 */
+export async function getBandBooks(supabase: SupabaseLike): Promise<Record<BandKey, BandBook[]>> {
+  const result = Object.fromEntries(
+    DIAGNOSTIC_BANDS.map((b) => [b.key, [] as BandBook[]]),
+  ) as Record<BandKey, BandBook[]>;
+
   const allTitles = DIAGNOSTIC_BANDS.flatMap((b) => b.bookTitles);
   const { data: books } = await supabase
     .from('voca_books')
     .select('id, title')
     .in('title', allTitles)
     .eq('is_active', true);
-  if (!books?.length) return [];
+  if (!books?.length) return result;
 
   const bookIds = books.map((b: { id: string }) => b.id);
   const { data: days } = await supabase
@@ -76,14 +85,18 @@ export async function getActiveBands(supabase: SupabaseLike): Promise<BandKey[]>
   for (const band of DIAGNOSTIC_BANDS) {
     for (const t of band.bookTitles) titleToBand.set(t, band.key);
   }
-  const active = new Set<BandKey>();
-  for (const b of books as { id: string; title: string }[]) {
-    if (booksWithDays.has(b.id)) {
-      const key = titleToBand.get(b.title);
-      if (key) active.add(key);
-    }
+  for (const b of books as BandBook[]) {
+    if (!booksWithDays.has(b.id)) continue;
+    const key = titleToBand.get(b.title);
+    if (key) result[key].push(b);
   }
-  return DIAGNOSTIC_BANDS.map((b) => b.key).filter((k) => active.has(k));
+  return result;
+}
+
+/** 밴드별 활성 여부 — 제목이 일치하고 Day가 1개 이상 있는 교재가 하나라도 있으면 활성 */
+export async function getActiveBands(supabase: SupabaseLike): Promise<BandKey[]> {
+  const bandBooks = await getBandBooks(supabase);
+  return DIAGNOSTIC_BANDS.map((b) => b.key).filter((k) => bandBooks[k].length > 0);
 }
 
 /** Day를 조금씩 넓혀가며 제외 단어를 뺀 풀을 최소 크기까지 확보 */

@@ -181,6 +181,23 @@ export function formatLevel(level: FinalLevel): string {
   return label;
 }
 
+/**
+ * 판정 레벨 → 추천 교재 밴드. 학년이 아니라 측정된 레벨 기준.
+ * 'above'(최상단 돌파)는 한 단계 위 활성 밴드, 'below'(최하단 미달)는 한 단계 아래,
+ * 없으면 판정 밴드 그대로.
+ */
+export function recommendBandKey(level: FinalLevel, activeBands: BandKey[]): BandKey {
+  if (level.qualifier === 'above') {
+    const up = adjacent(level.band, 1, activeBands);
+    if (up) return up;
+  }
+  if (level.qualifier === 'below') {
+    const down = adjacent(level.band, -1, activeBands);
+    if (down) return down;
+  }
+  return level.band;
+}
+
 /** 학년 기준 밴드와 판정 레벨의 격차 (0=학년 수준, 음수=학년 아래, 양수=학년 위) */
 export function levelGapFromGrade(grade: DiagnosticGrade, level: FinalLevel): number {
   const gradeBand = DIAGNOSTIC_GRADES.find((g) => g.key === grade)!.startBand;

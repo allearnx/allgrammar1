@@ -5,6 +5,7 @@ import {
   getStartBand,
   formatLevel,
   levelGapFromGrade,
+  recommendBandKey,
   type BandKey,
   type RoundSummary,
 } from '@/lib/voca/diagnostic-bands';
@@ -124,6 +125,24 @@ describe('getStartBand', () => {
 
   it('시작 밴드가 비활성이면 가장 가까운 활성 밴드로 (초등 → L2)', () => {
     expect(getStartBand('elementary', NO_L1)).toBe('L2');
+  });
+});
+
+describe('recommendBandKey — 추천 교재 밴드', () => {
+  it('exact 판정이면 그 밴드 교재', () => {
+    expect(recommendBandKey({ band: 'L3', qualifier: 'exact' }, ALL)).toBe('L3');
+  });
+
+  it('"이상" 판정이면 한 단계 위 밴드 (있으면)', () => {
+    expect(recommendBandKey({ band: 'L3', qualifier: 'above' }, ALL)).toBe('L4');
+    // 최상단 돌파면 그대로
+    expect(recommendBandKey({ band: 'L6', qualifier: 'above' }, ALL)).toBe('L6');
+  });
+
+  it('"미만" 판정이면 한 단계 아래 밴드 (있으면)', () => {
+    expect(recommendBandKey({ band: 'L2', qualifier: 'below' }, ALL)).toBe('L1');
+    // L1 비활성이면 L2 유지
+    expect(recommendBandKey({ band: 'L2', qualifier: 'below' }, NO_L1)).toBe('L2');
   });
 });
 

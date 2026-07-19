@@ -18,12 +18,13 @@ import {
   nextStep,
   formatLevel,
   levelGapFromGrade,
+  recommendBandKey,
   type BandKey,
   type DiagnosticGrade,
   type FinalLevel,
   type RoundSummary,
 } from '@/lib/voca/diagnostic-bands';
-import type { DiagnosticQuestion } from '@/lib/voca/diagnostic-sampling';
+import type { DiagnosticQuestion, BandBook } from '@/lib/voca/diagnostic-sampling';
 
 export interface LatestDiagnostic {
   grade: string;
@@ -36,6 +37,7 @@ export interface LatestDiagnostic {
 
 interface Props {
   activeBands: BandKey[];
+  bandBooks: Record<BandKey, BandBook[]>;
   latest: LatestDiagnostic | null;
   tookToday: boolean;
   prevVocabIds: string[];
@@ -71,7 +73,7 @@ function correctCount(items: AnsweredItem[]): number {
   return items.filter((it) => it.chosenVocabId === it.vocabId).length;
 }
 
-export function DiagnosticClient({ activeBands, latest, tookToday, prevVocabIds, isFree }: Props) {
+export function DiagnosticClient({ activeBands, bandBooks, latest, tookToday, prevVocabIds, isFree }: Props) {
   const [phase, setPhase] = useState<Phase>({ step: 'intro' });
   const [grade, setGrade] = useState<DiagnosticGrade | null>(null);
   const [completedRounds, setCompletedRounds] = useState<CompletedRound[]>([]);
@@ -274,6 +276,8 @@ export function DiagnosticClient({ activeBands, latest, tookToday, prevVocabIds,
       rounds={completedRounds}
       previous={latest}
       isFree={isFree}
+      activeBands={activeBands}
+      bandBooks={bandBooks}
     />
   );
 }
@@ -356,12 +360,16 @@ function ResultScreen({
   rounds,
   previous,
   isFree,
+  activeBands,
+  bandBooks,
 }: {
   res: SubmitResponse;
   grade: DiagnosticGrade;
   rounds: CompletedRound[];
   previous: LatestDiagnostic | null;
   isFree: boolean;
+  activeBands: BandKey[];
+  bandBooks: Record<BandKey, BandBook[]>;
 }) {
   const gradeInfo = DIAGNOSTIC_GRADES.find((g) => g.key === grade)!;
   const gap = levelGapFromGrade(grade, res.level);
@@ -415,35 +423,61 @@ function ResultScreen({
         </div>
       )}
 
-      <div className="rounded-2xl border bg-white p-5 text-center">
-        {isFree ? (
-          <>
-            <p className="text-sm font-medium" style={{ color: VOCA_COLORS.gray }}>
-              내 레벨에 딱 맞는 단어장으로 지금 시작해보세요.
-            </p>
-            <Link
-              href="/allkill#price"
-              className="mt-3 inline-block rounded-full px-8 py-3 font-bold text-white"
-              style={{ background: VOCA_COLORS.blue }}
-            >
-              올킬보카 시작하기
-            </Link>
-          </>
-        ) : (
-          <>
-            <p className="text-sm font-medium" style={{ color: VOCA_COLORS.gray }}>
-              결과를 기준으로 단어 학습을 이어가 보세요. 외운 뒤 다시 측정하면 성장이 기록돼요.
-            </p>
-            <Link
-              href="/student/voca"
-              className="mt-3 inline-block rounded-full px-8 py-3 font-bold text-white"
-              style={{ background: VOCA_COLORS.blue }}
-            >
-              단어 학습 시작하기
-            </Link>
-          </>
-        )}
-      </div>
+      <RecommendationCard level={res.level} activeBands={activeBands} bandBooks={bandBooks} isFree={isFree} />
+    </div>
+  );
+}
+
+/** 판정 레벨 밴드의 교재를 추천 — 학년이 아니라 측정된 레벨 기준 */
+function RecommendationCard({
+  level,
+  activeBands,
+  bandBooks,
+  isFree,
+}: {
+  level: FinalLevel;
+  activeBands: BandKey[];
+  bandBooks: Record<BandKey, BandBook[]>;
+  isFree: boolean;
+}) {
+  const band = recommendBandKey(level, activeBands);
+  const books = bandBooks[band] ?? [];
+  const primary = books[0];
+
+  return (
+    <div className="rounded-2xl border bg-white p-5 text-center">
+      {primary && (
+        <>
+          <p className="text-xs font-bold" style={{ color: VOCA_COLORS.blueDark }}>내 레벨 추천 교재</p>
+          <p className="mt-1 text-lg font-bold" style={{ color: VOCA_COLORS.ink, wordBreak: 'keep-all' }}>
+            {primary.title}
+            {books.length > 1 && <span className="text-sm font-medium text-gray-400"> 외 {books.length - 1}권</span>}
+          </p>
+          <p className="mt-1 text-sm" style={{ color: VOCA_COLORS.gray }}>
+            지금 레벨({getBand(band).label})에 딱 맞는 교재예요. 여기서 시작해서 한 단계씩 올라가요.
+          </p>
+        </>
+      )}
+      {isFree ? (
+        <>
+          <Link
+            href="/allkill#price"
+            className="mt-3 inline-block rounded-full px-8 py-3 font-bold text-white"
+            style={{ background: VOCA_COLORS.blue }}
+          >
+            올킬보카 시작하기
+          </Link>
+          <p className="mt-2 text-xs text-gray-400">시작하면 추천 교재부터 바로 학습할 수 있어요</p>
+        </>
+      ) : (
+        <Link
+          href={primary ? `/student/voca?bookId=${primary.id}` : '/student/voca'}
+          className="mt-3 inline-block rounded-full px-8 py-3 font-bold text-white"
+          style={{ background: VOCA_COLORS.blue }}
+        >
+          {primary ? '추천 교재로 시작하기' : '단어 학습 시작하기'}
+        </Link>
+      )}
     </div>
   );
 }
