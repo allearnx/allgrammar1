@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { Link2, Check, RefreshCw, Loader2, X } from 'lucide-react';
+import { Link2, Check, RefreshCw, Loader2, X, ExternalLink } from 'lucide-react';
 import { fetchWithToast } from '@/lib/fetch-with-toast';
 
 interface Props {
@@ -94,6 +94,16 @@ export function ParentShareButton({ studentId }: Props) {
           <Button variant="outline" size="sm" onClick={copyLink} className="gap-1.5">
             {copied ? <Check className="h-3.5 w-3.5 text-green-500" /> : <Link2 className="h-3.5 w-3.5" />}
             {copied ? '복사됨' : '링크 복사'}
+          </Button>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => window.open(`/parent/${token}`, '_blank')}
+            className="gap-1.5"
+            title="학부모가 보는 화면 그대로 열기"
+          >
+            <ExternalLink className="h-3.5 w-3.5" />
+            미리보기
           </Button>
           <Button variant="outline" size="sm" onClick={generateToken} className="gap-1.5" title="재발급">
             <RefreshCw className="h-3.5 w-3.5" />
