@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import { TrackLink } from '@/components/analytics/track-link';
 import { C } from '../_data';
 
 /**
@@ -47,9 +47,9 @@ export default function DiagnosticSection() {
 
         {/* CTA — 목업으로 결과를 보여준 뒤 행동 유도 */}
         <div style={{ marginTop: 40, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 12 }}>
-          <Link href="/signup?next=/student/voca/diagnostic" className="ak-btn ak-btn-primary">
+          <TrackLink event="landing_diagnostic_click" href="/signup?next=/student/voca/diagnostic" className="ak-btn ak-btn-primary">
             무료로 레벨 진단 받기
-          </Link>
+          </TrackLink>
           <p style={{ fontSize: 13, color: C.grayLight }}>
             가입만 하면 바로 진단 · 5분 · 카드 등록 없음
           </p>

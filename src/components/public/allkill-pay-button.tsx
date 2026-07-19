@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { track } from '@vercel/analytics';
 
 export default function AllkillPayButton({
   courseId,
@@ -26,6 +27,7 @@ export default function AllkillPayButton({
   return (
     <Link
       href={paymentUrl}
+      onClick={() => track('checkout_click', { source: 'pricing', label })}
       className="inline-flex w-full h-[58px] items-center justify-center rounded-full font-bold text-[17px] transition-all duration-200 hover:opacity-90 hover:scale-[1.02]"
       style={style}
     >

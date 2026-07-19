@@ -7,6 +7,7 @@
 
 import { useCallback, useMemo, useState } from 'react';
 import Link from 'next/link';
+import { track } from '@vercel/analytics';
 import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import { fetchWithToast } from '@/lib/fetch-with-toast';
@@ -118,6 +119,10 @@ export function DiagnosticClient({ activeBands, bandBooks, latest, tookToday, pr
           retry: 2,
           errorMessage: '결과 저장에 실패했습니다.',
         });
+        track('diagnostic_complete', {
+          level: `${res.level.band}:${res.level.qualifier}`,
+          coverage: res.coverageScore,
+        });
         setPhase({ step: 'result', res });
       } catch {
         setPhase({ step: 'intro' });
@@ -128,6 +133,7 @@ export function DiagnosticClient({ activeBands, bandBooks, latest, tookToday, pr
 
   const startDiagnostic = useCallback(
     (g: DiagnosticGrade) => {
+      track('diagnostic_start', { grade: g });
       setGrade(g);
       setCompletedRounds([]);
       const band = getStartBand(g, activeBands);
@@ -462,6 +468,7 @@ function RecommendationCard({
         <>
           <Link
             href="/allkill#price"
+            onClick={() => track('checkout_click', { source: 'diagnostic_result' })}
             className="mt-3 inline-block rounded-full px-8 py-3 font-bold text-white"
             style={{ background: VOCA_COLORS.blue }}
           >
