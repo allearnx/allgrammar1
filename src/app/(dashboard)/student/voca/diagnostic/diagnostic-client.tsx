@@ -1,0 +1,449 @@
+'use client';
+
+/**
+ * 어휘 레벨 진단 — 학년 선택 → 스테어케이스 라운드(10문항) → 결과.
+ * 문항별 정오는 진행 중 보여주지 않는다 (레벨테스트 관행 + 다음 라운드 힌트 방지).
+ */
+
+import { useCallback, useMemo, useState } from 'react';
+import Link from 'next/link';
+import { motion, AnimatePresence } from 'framer-motion';
+import { cn } from '@/lib/utils';
+import { fetchWithToast } from '@/lib/fetch-with-toast';
+import { VOCA_COLORS, VOCA_STEP_THEMES } from '@/lib/voca/brand-tokens';
+import {
+  DIAGNOSTIC_GRADES,
+  getBand,
+  getStartBand,
+  nextStep,
+  formatLevel,
+  levelGapFromGrade,
+  type BandKey,
+  type DiagnosticGrade,
+  type FinalLevel,
+  type RoundSummary,
+} from '@/lib/voca/diagnostic-bands';
+import type { DiagnosticQuestion } from '@/lib/voca/diagnostic-sampling';
+
+export interface LatestDiagnostic {
+  grade: string;
+  finalBand: string;
+  finalQualifier: string;
+  coverageScore: number;
+  attemptNumber: number;
+  createdAt: string;
+}
+
+interface Props {
+  activeBands: BandKey[];
+  latest: LatestDiagnostic | null;
+  tookToday: boolean;
+  prevVocabIds: string[];
+  isFree: boolean;
+}
+
+interface AnsweredItem {
+  vocabId: string;
+  front_text: string;
+  back_text: string;
+  chosenVocabId: string | null;
+}
+
+interface CompletedRound {
+  band: BandKey;
+  items: AnsweredItem[];
+}
+
+interface SubmitResponse {
+  id: string;
+  attemptNumber: number;
+  level: FinalLevel;
+  coverageScore: number;
+}
+
+type Phase =
+  | { step: 'intro' }
+  | { step: 'loading'; band: BandKey; message: string }
+  | { step: 'quiz'; band: BandKey; questions: DiagnosticQuestion[]; index: number }
+  | { step: 'result'; res: SubmitResponse };
+
+function correctCount(items: AnsweredItem[]): number {
+  return items.filter((it) => it.chosenVocabId === it.vocabId).length;
+}
+
+export function DiagnosticClient({ activeBands, latest, tookToday, prevVocabIds, isFree }: Props) {
+  const [phase, setPhase] = useState<Phase>({ step: 'intro' });
+  const [grade, setGrade] = useState<DiagnosticGrade | null>(null);
+  const [completedRounds, setCompletedRounds] = useState<CompletedRound[]>([]);
+  const [currentItems, setCurrentItems] = useState<AnsweredItem[]>([]);
+  const [busy, setBusy] = useState(false);
+
+  const seenIds = useMemo(
+    () => [
+      ...prevVocabIds,
+      ...completedRounds.flatMap((r) => r.items.map((it) => it.vocabId)),
+      ...currentItems.map((it) => it.vocabId),
+    ],
+    [prevVocabIds, completedRounds, currentItems],
+  );
+
+  const loadRound = useCallback(
+    async (band: BandKey, exclude: string[], message: string) => {
+      setPhase({ step: 'loading', band, message });
+      try {
+        const data = await fetchWithToast<{ questions: DiagnosticQuestion[] }>(
+          '/api/voca/diagnostic/questions',
+          { body: { band, excludeIds: exclude.slice(0, 1000) }, retry: 2, errorMessage: '문제를 불러오지 못했습니다.' },
+        );
+        setCurrentItems([]);
+        setPhase({ step: 'quiz', band, questions: data.questions, index: 0 });
+      } catch {
+        setPhase({ step: 'intro' });
+      }
+    },
+    [],
+  );
+
+  const submit = useCallback(
+    async (rounds: CompletedRound[], selectedGrade: DiagnosticGrade) => {
+      setPhase({ step: 'loading', band: rounds[rounds.length - 1].band, message: '결과를 분석하고 있어요…' });
+      try {
+        const res = await fetchWithToast<SubmitResponse>('/api/voca/diagnostic/submit', {
+          body: {
+            grade: selectedGrade,
+            rounds: rounds.map((r) => ({ band: r.band, items: r.items })),
+          },
+          retry: 2,
+          errorMessage: '결과 저장에 실패했습니다.',
+        });
+        setPhase({ step: 'result', res });
+      } catch {
+        setPhase({ step: 'intro' });
+      }
+    },
+    [],
+  );
+
+  const startDiagnostic = useCallback(
+    (g: DiagnosticGrade) => {
+      setGrade(g);
+      setCompletedRounds([]);
+      const band = getStartBand(g, activeBands);
+      loadRound(band, prevVocabIds, '단어를 고르고 있어요…');
+    },
+    [activeBands, prevVocabIds, loadRound],
+  );
+
+  const handleAnswer = useCallback(
+    (chosenVocabId: string | null) => {
+      if (phase.step !== 'quiz' || busy) return;
+      const q = phase.questions[phase.index];
+      // 더블클릭 등으로 같은 문항이 두 번 기록되는 것 방지
+      if (currentItems.some((it) => it.vocabId === q.vocabId)) return;
+      const correctOption = q.options.find((o) => o.vocabId === q.vocabId);
+      // 오답 표시용 영어/뜻은 유형에 따라 prompt·정답 보기에서 조합
+      const item: AnsweredItem = {
+        vocabId: q.vocabId,
+        front_text: q.type === 'ko-to-en' ? (correctOption?.text ?? '') : q.prompt,
+        back_text: q.type === 'ko-to-en' ? q.prompt : (correctOption?.text ?? ''),
+        chosenVocabId,
+      };
+      const items = [...currentItems, item];
+      setCurrentItems(items);
+
+      if (phase.index + 1 < phase.questions.length) {
+        setPhase({ ...phase, index: phase.index + 1 });
+        return;
+      }
+
+      // 라운드 종료 → 스테어케이스 판단
+      setBusy(true);
+      const rounds = [...completedRounds, { band: phase.band, items }];
+      setCompletedRounds(rounds);
+      const summaries: RoundSummary[] = rounds.map((r) => ({
+        band: r.band,
+        correct: correctCount(r.items),
+        total: r.items.length,
+      }));
+      const step = nextStep(summaries, activeBands);
+      setBusy(false);
+
+      if (step.type === 'continue') {
+        const message =
+          step.band === phase.band
+            ? '정확한 측정을 위해 같은 레벨을 한 번 더 볼게요'
+            : step.band > phase.band
+              ? '잘하는데요? 조금 더 어려운 단어로 볼게요'
+              : '이번엔 조금 쉬운 단어로 볼게요';
+        loadRound(step.band, [...seenIds, ...items.map((i) => i.vocabId)], message);
+      } else {
+        submit(rounds, grade!);
+      }
+    },
+    [phase, busy, currentItems, completedRounds, activeBands, seenIds, grade, loadRound, submit],
+  );
+
+  if (activeBands.length === 0) {
+    return <EmptyState />;
+  }
+
+  if (phase.step === 'intro') {
+    return (
+      <IntroScreen
+        latest={latest}
+        tookToday={tookToday}
+        onStart={startDiagnostic}
+        l1Active={activeBands.includes('L1')}
+      />
+    );
+  }
+
+  if (phase.step === 'loading') {
+    return (
+      <div className="mx-auto flex min-h-[50dvh] max-w-md flex-col items-center justify-center gap-4">
+        <div className="h-10 w-10 animate-spin rounded-full border-4 border-gray-200" style={{ borderTopColor: VOCA_COLORS.blue }} />
+        <p className="text-center font-medium" style={{ color: VOCA_COLORS.gray }}>{phase.message}</p>
+      </div>
+    );
+  }
+
+  if (phase.step === 'quiz') {
+    const q = phase.questions[phase.index];
+    return (
+      <div className="mx-auto max-w-md">
+        <div className="mb-6 flex items-center justify-between text-sm text-gray-400">
+          <span>{phase.index + 1} / {phase.questions.length} 문항</span>
+          <span>{completedRounds.length + 1}라운드 · {getBand(phase.band).label} 수준 측정 중</span>
+        </div>
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={`${phase.band}-${phase.index}`}
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -16 }}
+            transition={{ duration: 0.15 }}
+            className="space-y-8"
+          >
+            {q.type === 'ko-to-en' && (
+              <p className="text-center text-xs font-bold" style={{ color: VOCA_COLORS.blueDark }}>
+                뜻에 맞는 단어는?
+              </p>
+            )}
+            <p
+              className={cn('text-center font-bold', q.type === 'ko-to-en' ? 'text-2xl leading-relaxed' : 'text-4xl')}
+              style={{ color: VOCA_COLORS.blue, wordBreak: 'keep-all' }}
+            >
+              {q.prompt}
+            </p>
+            <div className="space-y-3">
+              {q.options.map((option, i) => {
+                const theme = VOCA_STEP_THEMES[i % VOCA_STEP_THEMES.length];
+                return (
+                  <button
+                    key={option.vocabId}
+                    onClick={() => handleAnswer(option.vocabId)}
+                    className="flex w-full items-center gap-3 rounded-2xl border-2 border-gray-200 bg-white px-4 py-3.5 text-left text-lg font-medium text-gray-700 transition-all hover:-translate-y-0.5 hover:border-gray-300 hover:shadow-md active:scale-[0.99]"
+                  >
+                    <span
+                      className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-sm font-bold"
+                      style={{ background: theme.bg, color: theme.text }}
+                    >
+                      {i + 1}
+                    </span>
+                    {option.text}
+                  </button>
+                );
+              })}
+              <button
+                onClick={() => handleAnswer(null)}
+                className="w-full rounded-2xl border-2 border-dashed border-gray-300 bg-gray-50 px-4 py-3 text-center text-base font-medium text-gray-400 transition-colors hover:bg-gray-100 hover:text-gray-500"
+              >
+                모르겠어요
+              </button>
+            </div>
+          </motion.div>
+        </AnimatePresence>
+      </div>
+    );
+  }
+
+  return (
+    <ResultScreen
+      res={phase.res}
+      grade={grade!}
+      rounds={completedRounds}
+      previous={latest}
+      isFree={isFree}
+    />
+  );
+}
+
+function EmptyState() {
+  return (
+    <div className="mx-auto max-w-md rounded-2xl border bg-white p-8 text-center">
+      <p className="font-medium text-gray-500">진단 준비 중입니다. 조금만 기다려주세요.</p>
+    </div>
+  );
+}
+
+function IntroScreen({
+  latest,
+  tookToday,
+  onStart,
+  l1Active,
+}: {
+  latest: LatestDiagnostic | null;
+  tookToday: boolean;
+  onStart: (g: DiagnosticGrade) => void;
+  l1Active: boolean;
+}) {
+  const latestLevel = latest
+    ? formatLevel({ band: latest.finalBand as BandKey, qualifier: latest.finalQualifier as FinalLevel['qualifier'] })
+    : null;
+
+  return (
+    <div className="mx-auto max-w-lg space-y-6">
+      <div className="rounded-3xl p-6 md:p-8" style={{ background: VOCA_COLORS.sky }}>
+        <h1 className="text-2xl font-bold" style={{ color: VOCA_COLORS.ink }}>내 어휘 레벨, 5분이면 알아요</h1>
+        <p className="mt-2 text-sm leading-relaxed" style={{ color: VOCA_COLORS.gray }}>
+          학년을 고르면 10문항씩 레벨을 오르내리며 정확한 어휘 수준을 찾아드려요.
+          중간에 모르는 단어는 찍지 말고 <b>모르겠어요</b>를 눌러야 정확하게 측정돼요.
+        </p>
+        {latest && (
+          <div className="mt-4 rounded-2xl bg-white/80 p-4 text-sm" style={{ color: VOCA_COLORS.gray }}>
+            최근 진단({new Date(latest.createdAt).toLocaleDateString('ko-KR')}) — 레벨 <b>{latestLevel}</b> · 커버리지 <b>{latest.coverageScore}%</b>
+          </div>
+        )}
+      </div>
+
+      {tookToday ? (
+        <div className="rounded-2xl border bg-white p-6 text-center">
+          <p className="font-medium" style={{ color: VOCA_COLORS.gray }}>오늘은 이미 진단을 마쳤어요. 내일 다시 측정할 수 있어요.</p>
+          <Link href="/student/voca" className="mt-3 inline-block rounded-full px-6 py-2.5 font-bold text-white" style={{ background: VOCA_COLORS.blue }}>
+            단어 학습하러 가기
+          </Link>
+        </div>
+      ) : (
+        <div>
+          <p className="mb-3 text-sm font-bold" style={{ color: VOCA_COLORS.gray }}>학년을 선택하세요</p>
+          <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
+            {DIAGNOSTIC_GRADES.map((g, i) => {
+              const theme = VOCA_STEP_THEMES[i % VOCA_STEP_THEMES.length];
+              return (
+                <button
+                  key={g.key}
+                  onClick={() => onStart(g.key)}
+                  className="rounded-2xl border-2 border-gray-200 bg-white py-4 text-center font-bold transition-all hover:-translate-y-0.5 hover:shadow-md"
+                  style={{ color: theme.text }}
+                >
+                  {g.label}
+                </button>
+              );
+            })}
+          </div>
+          {!l1Active && (
+            <p className="mt-2 text-xs text-gray-400">초등학생은 중1 수준부터 측정돼요.</p>
+          )}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function ResultScreen({
+  res,
+  grade,
+  rounds,
+  previous,
+  isFree,
+}: {
+  res: SubmitResponse;
+  grade: DiagnosticGrade;
+  rounds: CompletedRound[];
+  previous: LatestDiagnostic | null;
+  isFree: boolean;
+}) {
+  const gradeInfo = DIAGNOSTIC_GRADES.find((g) => g.key === grade)!;
+  const gap = levelGapFromGrade(grade, res.level);
+  // 커버리지는 1라운드(학년 시작 밴드) 정답률이므로 출처 라벨도 1라운드 밴드 기준
+  const sourceLabel = getBand(rounds[0].band).sourceLabel;
+  const missed = rounds
+    .flatMap((r) => r.items)
+    .filter((it) => it.chosenVocabId !== it.vocabId)
+    .slice(0, 5);
+  const delta = previous ? res.coverageScore - previous.coverageScore : null;
+
+  const gapText =
+    gap === 0 ? '학년 수준이에요' : gap > 0 ? `학년보다 ${gap}단계 위예요` : `학년보다 ${-gap}단계 아래예요`;
+  const gapColor = gap >= 0 ? VOCA_COLORS.green : VOCA_COLORS.red;
+
+  return (
+    <div className="mx-auto max-w-lg space-y-5">
+      <motion.div
+        initial={{ opacity: 0, scale: 0.96 }}
+        animate={{ opacity: 1, scale: 1 }}
+        className="rounded-3xl p-6 text-center md:p-8"
+        style={{ background: VOCA_COLORS.blueLight }}
+      >
+        <p className="text-sm font-bold" style={{ color: VOCA_COLORS.blueDark }}>진단 결과</p>
+        <p className="mt-2 text-4xl font-bold" style={{ color: VOCA_COLORS.blue }}>{formatLevel(res.level)}</p>
+        <p className="mt-2 text-sm font-bold" style={{ color: gapColor }}>
+          {gradeInfo.label} 기준 · {gapText}
+        </p>
+        <div className="mt-5 rounded-2xl bg-white p-4">
+          <p className="text-sm" style={{ color: VOCA_COLORS.gray }}>{sourceLabel} 단어 커버리지</p>
+          <p className="text-3xl font-bold" style={{ color: VOCA_COLORS.ink }}>{res.coverageScore}%</p>
+          {delta !== null && (
+            <p className="mt-1 text-sm font-bold" style={{ color: delta >= 0 ? VOCA_COLORS.green : VOCA_COLORS.red }}>
+              지난 진단 대비 {delta >= 0 ? '+' : ''}{delta}%p
+            </p>
+          )}
+        </div>
+      </motion.div>
+
+      {missed.length > 0 && (
+        <div className="rounded-2xl border bg-white p-5">
+          <p className="mb-3 text-sm font-bold" style={{ color: VOCA_COLORS.gray }}>이런 단어를 놓쳤어요</p>
+          <ul className="space-y-2">
+            {missed.map((it) => (
+              <li key={it.vocabId} className="flex items-baseline justify-between gap-3 text-sm">
+                <span className="font-bold" style={{ color: VOCA_COLORS.ink }}>{it.front_text}</span>
+                <span className="text-right text-gray-500">{it.back_text}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+
+      <div className="rounded-2xl border bg-white p-5 text-center">
+        {isFree ? (
+          <>
+            <p className="text-sm font-medium" style={{ color: VOCA_COLORS.gray }}>
+              내 레벨에 딱 맞는 단어장으로 지금 시작해보세요.
+            </p>
+            <Link
+              href="/allkill#price"
+              className="mt-3 inline-block rounded-full px-8 py-3 font-bold text-white"
+              style={{ background: VOCA_COLORS.blue }}
+            >
+              올킬보카 시작하기
+            </Link>
+          </>
+        ) : (
+          <>
+            <p className="text-sm font-medium" style={{ color: VOCA_COLORS.gray }}>
+              결과를 기준으로 단어 학습을 이어가 보세요. 외운 뒤 다시 측정하면 성장이 기록돼요.
+            </p>
+            <Link
+              href="/student/voca"
+              className="mt-3 inline-block rounded-full px-8 py-3 font-bold text-white"
+              style={{ background: VOCA_COLORS.blue }}
+            >
+              단어 학습 시작하기
+            </Link>
+          </>
+        )}
+      </div>
+    </div>
+  );
+}

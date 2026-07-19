@@ -5,6 +5,7 @@ import { Topbar } from '@/components/layout/topbar';
 import { VocaHomeClient } from './client';
 import { getPlanContext } from '@/lib/billing/get-plan-context';
 import { canUseFeature } from '@/lib/billing/feature-gate';
+import { DiagnosticEntryCard } from '@/components/voca/diagnostic-entry-card';
 import type { VocaBook, VocaDay, VocaStudentProgress } from '@/types/voca';
 import { VOCA_BOOKS_COLUMNS, VOCA_DAYS_COLUMNS, VOCA_STUDENT_PROGRESS_COLUMNS } from '@/types/voca';
 
@@ -65,6 +66,14 @@ export default async function StudentVocaPage({
     for (const s of submissions || []) submissionStatusMap[s.day_id] = s.status;
   }
 
+  const { data: latestDiagnostic } = await supabase
+    .from('voca_diagnostic_results')
+    .select('final_band, final_qualifier, coverage_score, created_at')
+    .eq('student_id', user.id)
+    .order('created_at', { ascending: false })
+    .limit(1)
+    .maybeSingle();
+
   const planContext = planForGate;
   const isFree = planContext.tier === 'free';
   const round2Locked = !assignment?.round2_unlocked && !canUseFeature(planContext.tier, 'voca:round2');
@@ -73,6 +82,7 @@ export default async function StudentVocaPage({
     <>
       <Topbar user={user} title="올킬보카" />
       <div className="p-4 md:p-6">
+        <DiagnosticEntryCard latest={latestDiagnostic} />
         <VocaHomeClient
           books={(books as VocaBook[]) || []}
           days={days}

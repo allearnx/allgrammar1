@@ -149,3 +149,25 @@ export const vocaBookAssignmentSchema = z.object({
 export const vocaBookAssignmentDeleteSchema = z.object({
   studentId: ID,
 });
+
+// ── 어휘 레벨 진단 Schemas ──
+
+const diagnosticBand = z.enum(['L1', 'L2', 'L3', 'L4', 'L5', 'L6']);
+
+export const vocaDiagnosticQuestionsSchema = z.object({
+  band: diagnosticBand,
+  excludeIds: z.array(ID).max(1000).default([]),
+});
+
+export const vocaDiagnosticSubmitSchema = z.object({
+  grade: z.enum(['elementary', 'm1', 'm2', 'm3', 'h1', 'h2', 'h3']),
+  rounds: z.array(z.object({
+    band: diagnosticBand,
+    items: z.array(z.object({
+      vocabId: ID,
+      front_text: SHORT,
+      back_text: SHORT,
+      chosenVocabId: ID.nullable(), // null = "모르겠어요"
+    })).min(1).max(20),
+  })).min(1).max(6),
+});

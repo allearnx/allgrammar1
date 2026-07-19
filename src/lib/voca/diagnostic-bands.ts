@@ -1,0 +1,191 @@
+/**
+ * 어휘 레벨 진단 — 밴드 설정 + 스테어케이스 판정 로직 (순수 함수).
+ *
+ * 밴드 = 교재 묶음. 학년 선택으로 시작 밴드를 정하고, 라운드(10문항) 정답 수에 따라
+ * 위/아래 밴드로 이동하며 레벨을 확정한다. 교재는 title로 매칭하므로 관리자 화면에서
+ * 교재 이름을 바꾸면 밴드에서 빠진다 — 이름 변경 시 여기도 같이 수정할 것.
+ * 단어가 없는 밴드는 자동으로 사다리에서 건너뛴다 (L1 교재가 채워지면 자동 활성).
+ */
+
+export type BandKey = 'L1' | 'L2' | 'L3' | 'L4' | 'L5' | 'L6';
+
+export interface DiagnosticBand {
+  key: BandKey;
+  /** 결과 화면·리포트에 쓰는 레벨 이름 */
+  label: string;
+  /** 커버리지 문구용 출처 라벨 (예: "고2 3월 모의고사") */
+  sourceLabel: string;
+  bookTitles: string[];
+}
+
+export const DIAGNOSTIC_BANDS: DiagnosticBand[] = [
+  {
+    key: 'L1',
+    label: '예비중',
+    sourceLabel: '중등 기초 필수',
+    bookTitles: ['워드마스터 중등 베이직', '천일문 VOCA 중등 스타트', '능률 VOCA 중등 기본'],
+  },
+  { key: 'L2', label: '중1', sourceLabel: '중등 필수', bookTitles: ['능률 VOCA 중등 필수'] },
+  { key: 'L3', label: '중2~3', sourceLabel: '중등 고난도', bookTitles: ['워드마스터 중등 고난도'] },
+  { key: 'L4', label: '고1', sourceLabel: '고1 3월 모의고사', bookTitles: ['최근 5개년 고1 3월 모고 단어'] },
+  { key: 'L5', label: '고2', sourceLabel: '고2 3월 모의고사', bookTitles: ['최근 4개년 고2 3월 모고 단어'] },
+  { key: 'L6', label: '고3', sourceLabel: '고3 3월 모의고사', bookTitles: ['최근 4개년 고3 3월 모고 단어'] },
+];
+
+export const BAND_KEYS: BandKey[] = DIAGNOSTIC_BANDS.map((b) => b.key);
+
+export function getBand(key: BandKey): DiagnosticBand {
+  return DIAGNOSTIC_BANDS.find((b) => b.key === key)!;
+}
+
+export type DiagnosticGrade = 'elementary' | 'm1' | 'm2' | 'm3' | 'h1' | 'h2' | 'h3';
+
+export const DIAGNOSTIC_GRADES: { key: DiagnosticGrade; label: string; startBand: BandKey }[] = [
+  { key: 'elementary', label: '초등학생', startBand: 'L1' },
+  { key: 'm1', label: '중1', startBand: 'L2' },
+  { key: 'm2', label: '중2', startBand: 'L3' },
+  { key: 'm3', label: '중3', startBand: 'L3' },
+  { key: 'h1', label: '고1', startBand: 'L4' },
+  { key: 'h2', label: '고2', startBand: 'L5' },
+  { key: 'h3', label: '고3', startBand: 'L6' },
+];
+
+/** 학년의 시작 밴드 — 해당 밴드가 비활성이면 활성 밴드 중 가장 가까운 것으로 */
+export function getStartBand(grade: DiagnosticGrade, activeBands: BandKey[]): BandKey {
+  const wanted = DIAGNOSTIC_GRADES.find((g) => g.key === grade)!.startBand;
+  if (activeBands.includes(wanted)) return wanted;
+  const wantedIdx = BAND_KEYS.indexOf(wanted);
+  // 가까운 활성 밴드 (위쪽 우선 — 초등이 L1 비활성이면 L2에서 시작)
+  const sorted = [...activeBands].sort(
+    (a, b) => Math.abs(BAND_KEYS.indexOf(a) - wantedIdx) - Math.abs(BAND_KEYS.indexOf(b) - wantedIdx),
+  );
+  return sorted[0];
+}
+
+export const ROUND_SIZE = 10;
+/** 정답률 ≥ 80% → 한 밴드 위로 */
+export const UP_RATIO = 0.8;
+/** 정답률 ≤ 40% → 한 밴드 아래로 */
+export const DOWN_RATIO = 0.4;
+export const MAX_ROUNDS = 5;
+/**
+ * 레벨 확정에 필요한 해당 밴드 누적 최소 문항 수.
+ * 10문항 한 라운드 정답률은 ±15%p쯤 흔들려서 확정·커버리지 신뢰도가 부족하다 →
+ * 확정 신호가 나와도 그 밴드 누적이 이 수 미만이면 같은 밴드에서 확인 라운드를 더 본다.
+ */
+export const CONFIRM_ITEMS = 20;
+
+export interface RoundSummary {
+  band: BandKey;
+  correct: number;
+  total: number;
+}
+
+export interface FinalLevel {
+  band: BandKey;
+  /** exact: 해당 레벨 / above: 해당 레벨 이상 / below: 해당 레벨 미만 */
+  qualifier: 'exact' | 'above' | 'below';
+}
+
+export type NextStep = { type: 'continue'; band: BandKey } | { type: 'done'; level: FinalLevel };
+
+function adjacent(band: BandKey, dir: 1 | -1, activeBands: BandKey[]): BandKey | null {
+  let idx = BAND_KEYS.indexOf(band);
+  while (true) {
+    idx += dir;
+    if (idx < 0 || idx >= BAND_KEYS.length) return null;
+    if (activeBands.includes(BAND_KEYS[idx])) return BAND_KEYS[idx];
+  }
+}
+
+/** 특정 밴드의 누적 정답/문항 수 */
+function bandCum(rounds: RoundSummary[], band: BandKey): { correct: number; total: number } {
+  let correct = 0;
+  let total = 0;
+  for (const r of rounds) {
+    if (r.band === band) {
+      correct += r.correct;
+      total += r.total;
+    }
+  }
+  return { correct, total };
+}
+
+/**
+ * 지금까지의 라운드 결과로 다음 행동을 결정한다. 판정은 현재 밴드의 "누적" 정답률 기준.
+ * - 누적 ≥80% → 위로 / ≤40% → 아래로 / 사이 → 확정 신호
+ * - 확정(exact·최상단 이상·최하단 미만)은 해당 밴드 누적 CONFIRM_ITEMS(20문항) 이상일 때만.
+ *   미만이면 같은 밴드에서 확인 라운드를 한 번 더 본다 (10문항 단발 확정의 신뢰도 보완).
+ * - 반전(오르내림 교차)이면 이동을 멈추고 잘 본 쪽 밴드를 확인한다.
+ * - MAX_ROUNDS 도달 시 현재 신호대로 즉시 확정.
+ */
+export function nextStep(rounds: RoundSummary[], activeBands: BandKey[]): NextStep {
+  const band = rounds[rounds.length - 1].band;
+  const cum = bandCum(rounds, band);
+  const ratio = cum.correct / cum.total;
+  const canContinue = rounds.length < MAX_ROUNDS;
+  const needConfirm = cum.total < CONFIRM_ITEMS && canContinue;
+  const visited = (b: BandKey) => rounds.some((r) => r.band === b);
+
+  if (ratio >= UP_RATIO) {
+    const up = adjacent(band, 1, activeBands);
+    // 최상단 → "이상" 확정 (확인 라운드 충족 시)
+    if (!up) {
+      if (needConfirm) return { type: 'continue', band };
+      return { type: 'done', level: { band, qualifier: 'above' } };
+    }
+    // 반전: 위 밴드에서 내려와서 현재 밴드를 잘 봤다 → 현재 밴드 확인 후 확정
+    if (visited(up)) {
+      if (needConfirm) return { type: 'continue', band };
+      return { type: 'done', level: { band, qualifier: 'exact' } };
+    }
+    if (!canContinue) return { type: 'done', level: { band, qualifier: 'above' } };
+    return { type: 'continue', band: up };
+  }
+
+  if (ratio <= DOWN_RATIO) {
+    const down = adjacent(band, -1, activeBands);
+    if (!down) {
+      if (needConfirm) return { type: 'continue', band };
+      return { type: 'done', level: { band, qualifier: 'below' } };
+    }
+    // 반전: 아래 밴드에서 올라와서 현재 밴드를 못 봤다 → 잘 봤던 아래 밴드를 확인 후 확정
+    if (visited(down)) {
+      const downCum = bandCum(rounds, down);
+      if (downCum.total < CONFIRM_ITEMS && canContinue) return { type: 'continue', band: down };
+      return { type: 'done', level: { band: down, qualifier: 'exact' } };
+    }
+    if (!canContinue) return { type: 'done', level: { band, qualifier: 'below' } };
+    return { type: 'continue', band: down };
+  }
+
+  if (needConfirm) return { type: 'continue', band };
+  return { type: 'done', level: { band, qualifier: 'exact' } };
+}
+
+/** 라운드 전체를 재생해 최종 레벨 도출 (서버 검증용) */
+export function resolveFinalLevel(rounds: RoundSummary[], activeBands: BandKey[]): FinalLevel {
+  for (let i = 1; i <= rounds.length; i++) {
+    const step = nextStep(rounds.slice(0, i), activeBands);
+    if (step.type === 'done') return step.level;
+    // continue인데 마지막 라운드면 (클라이언트 중단 등) 마지막 밴드로 확정
+    if (i === rounds.length) return { band: rounds[i - 1].band, qualifier: 'exact' };
+  }
+  return { band: rounds[rounds.length - 1].band, qualifier: 'exact' };
+}
+
+export function formatLevel(level: FinalLevel): string {
+  const label = getBand(level.band).label;
+  if (level.qualifier === 'above') return `${label} 이상`;
+  if (level.qualifier === 'below') return `${label} 미만`;
+  return label;
+}
+
+/** 학년 기준 밴드와 판정 레벨의 격차 (0=학년 수준, 음수=학년 아래, 양수=학년 위) */
+export function levelGapFromGrade(grade: DiagnosticGrade, level: FinalLevel): number {
+  const gradeBand = DIAGNOSTIC_GRADES.find((g) => g.key === grade)!.startBand;
+  let gap = BAND_KEYS.indexOf(level.band) - BAND_KEYS.indexOf(gradeBand);
+  if (level.qualifier === 'above') gap += 1;
+  if (level.qualifier === 'below') gap -= 1;
+  return gap;
+}
