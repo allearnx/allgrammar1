@@ -13,7 +13,7 @@ import { ImpersonateButton } from './impersonate-button';
 import { TextbookAssigner } from './textbook-assigner';
 import { getPlanContext } from '@/lib/billing/get-plan-context';
 import { fetchNaesinProgress } from '@/lib/naesin/fetch-naesin-progress';
-import { fetchVocaProgress } from '@/lib/voca/fetch-voca-progress';
+import { fetchVocaProgress, fetchBookDayTotals } from '@/lib/voca/fetch-voca-progress';
 
 interface NaesinData {
   textbookId: string;
@@ -85,6 +85,7 @@ export async function StudentDetail({ user, studentId, naesinData }: Props) {
   ]);
 
   const videoProgress = videoRes.data || [];
+  const vocaDayTotals = await fetchBookDayTotals(vocaProgress);
   const memoryProgress = memoryRes.data || [];
   const textbookProgress = textbookRes.data || [];
   const completedVideos = videoProgress.filter((p) => p.video_completed).length;
@@ -211,7 +212,7 @@ export async function StudentDetail({ user, studentId, naesinData }: Props) {
 
         {/* 올킬보카 서비스 카드 */}
         {hasVocaAssignment && (
-          <VocaProgressCard vocaProgress={vocaProgress} submissionStatuses={vocaSubmissionStatuses} />
+          <VocaProgressCard vocaProgress={vocaProgress} submissionStatuses={vocaSubmissionStatuses} totalDaysByBook={vocaDayTotals} />
         )}
 
         {/* 교과서 배정 */}

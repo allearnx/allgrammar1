@@ -8,9 +8,11 @@ import type { VocaProgressRow } from '@/types/voca';
 interface Props {
   vocaProgress: VocaProgressRow[];
   submissionStatuses?: Record<string, string>;
+  /** 교재별 전체 Day 수 (fetchBookDayTotals) — 있으면 "완료 Day" 분모가 교재 전체 분량이 된다 */
+  totalDaysByBook?: Record<string, number>;
 }
 
-export function VocaProgressCard({ vocaProgress, submissionStatuses = {} }: Props) {
+export function VocaProgressCard({ vocaProgress, submissionStatuses = {}, totalDaysByBook }: Props) {
   // Group by book
   const vocaByBook = new Map<string, { bookTitle: string; sortOrder: number; days: VocaProgressRow[] }>();
   for (const vp of vocaProgress) {
@@ -34,7 +36,10 @@ export function VocaProgressCard({ vocaProgress, submissionStatuses = {} }: Prop
   const vocaCompletedDays = vocaProgress.filter(
     (p) => p.flashcard_completed && p.quiz_score !== null && p.spelling_score !== null && p.matching_completed
   ).length;
-  const vocaTotalDays = vocaProgress.length;
+  // 분모 = 학습 중인 교재들의 전체 Day 수 합 (없는 교재는 시작한 Day 수로 폴백)
+  const vocaTotalDays = totalDaysByBook
+    ? vocaBooks.reduce((sum, b) => sum + (totalDaysByBook[b.bookId] ?? b.days.length), 0)
+    : vocaProgress.length;
   const vocaQuizScores = vocaProgress.filter((p) => p.quiz_score !== null).map((p) => p.quiz_score!);
   const vocaAvgQuiz = vocaQuizScores.length > 0 ? Math.round(vocaQuizScores.reduce((a, b) => a + b, 0) / vocaQuizScores.length) : null;
   const vocaSpellingScores = vocaProgress.filter((p) => p.spelling_score !== null).map((p) => p.spelling_score!);

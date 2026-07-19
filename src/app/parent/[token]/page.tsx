@@ -11,7 +11,7 @@ import { ParentProgressTabs } from '@/components/dashboard/parent-progress-tabs'
 import { fetchVocaExamGroups } from '@/lib/voca/fetch-exam-results';
 import { fetchNaesinExamData } from '@/lib/naesin/fetch-exam-data';
 import { fetchNaesinProgress } from '@/lib/naesin/fetch-naesin-progress';
-import { fetchVocaProgress } from '@/lib/voca/fetch-voca-progress';
+import { fetchVocaProgress, fetchBookDayTotals } from '@/lib/voca/fetch-voca-progress';
 import { ParentWeeklySummary } from '@/components/dashboard/parent-weekly-summary';
 import { Lock, BookA, CheckCircle, Clock, MinusCircle, History } from 'lucide-react';
 
@@ -268,13 +268,14 @@ export default async function ParentReportPage({ params, searchParams }: Props) 
   ]);
   const vocaExamExams = vocaExam.groups[0]?.exams ?? [];
   const diagnosticResults = (diagnosticRes.data ?? []) as DiagnosticCardResult[];
+  const totalDaysByBook = hasVoca ? await fetchBookDayTotals(vocaProgress) : {};
 
   const vocaCard = hasVoca ? (
     <div className="space-y-4">
       <VocaDiagnosticCard results={diagnosticResults} />
       <VocaExamReportCard exams={vocaExamExams} dayTitles={vocaExam.dayTitles} />
       <VocaKnownWordsCard knownWords={totalKnown.knownWords} weeklyNew={totalKnown.weeklyNew} />
-      <VocaProgressCard vocaProgress={vocaProgress} submissionStatuses={vocaSubmissionStatuses} />
+      <VocaProgressCard vocaProgress={vocaProgress} submissionStatuses={vocaSubmissionStatuses} totalDaysByBook={totalDaysByBook} />
     </div>
   ) : null;
 
