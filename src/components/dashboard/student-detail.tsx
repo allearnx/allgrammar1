@@ -7,6 +7,7 @@ import type { AuthUser } from '@/types/auth';
 import type { NaesinExamAssignment, NaesinUnit } from '@/types/database';
 import { NaesinProgressCard } from './naesin-progress-card';
 import { VocaProgressCard } from './voca-progress-card';
+import { VocaDiagnosticCard, type DiagnosticCardResult } from './voca-diagnostic-card';
 import { StudentReportPanel } from './student-report-panel';
 import { ParentShareButton } from './parent-share-button';
 import { ImpersonateButton } from './impersonate-button';
@@ -86,6 +87,14 @@ export async function StudentDetail({ user, studentId, naesinData }: Props) {
 
   const videoProgress = videoRes.data || [];
   const vocaDayTotals = await fetchBookDayTotals(vocaProgress);
+  // 어휘 레벨 진단 — 미배정 학생도 진단은 볼 수 있으므로 배정 여부와 무관하게 조회
+  const { data: diagnosticRows } = await admin
+    .from('voca_diagnostic_results')
+    .select('grade, start_band, final_band, final_qualifier, coverage_score, created_at')
+    .eq('student_id', studentId)
+    .order('created_at', { ascending: false })
+    .limit(2);
+  const diagnosticResults = (diagnosticRows ?? []) as DiagnosticCardResult[];
   const memoryProgress = memoryRes.data || [];
   const textbookProgress = textbookRes.data || [];
   const completedVideos = videoProgress.filter((p) => p.video_completed).length;
@@ -209,6 +218,9 @@ export async function StudentDetail({ user, studentId, naesinData }: Props) {
             </CardContent>
           </Card>
         )}
+
+        {/* 어휘 레벨 진단 — 응시 기록이 있으면 표시 (미응시면 카드 자체가 null) */}
+        <VocaDiagnosticCard results={diagnosticResults} />
 
         {/* 올킬보카 서비스 카드 */}
         {hasVocaAssignment && (
