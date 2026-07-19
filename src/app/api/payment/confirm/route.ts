@@ -18,6 +18,35 @@ export const POST = createApiHandler(
   async ({ user, body, supabase }) => {
     const { paymentKey, orderId, amount, orderName, courseId } = body;
 
+    // ── 0. 멱등성 가드: 이미 승인된 주문의 재진입(뒤로가기·새로고침)은 그대로 성공 응답 ──
+    // 없으면 재승인 시도 → orders UNIQUE(toss_order_id) 충돌 → "기록 실패" 오인 →
+    // 정상 결제를 자동 취소하는 사고가 난다 (2026-07-19 실사고).
+    const { data: existingOrder } = await supabase
+      .from('orders')
+      .select('status, receipt_url, course_id')
+      .eq('toss_order_id', orderId)
+      .maybeSingle();
+    if (existingOrder?.status === 'paid') {
+      let serviceActivated: 'voca' | 'naesin' | null = null;
+      const cid = existingOrder.course_id || courseId;
+      if (cid) {
+        const { data: course } = await supabase
+          .from('courses').select('category').eq('id', cid).single();
+        const service = course ? CATEGORY_TO_SERVICE[course.category] : null;
+        if (service) {
+          const { data: assign } = await supabase
+            .from('service_assignments')
+            .select('id').eq('student_id', user.id).eq('service', service).maybeSingle();
+          if (assign) serviceActivated = service;
+        }
+      }
+      return NextResponse.json({
+        success: true,
+        receiptUrl: existingOrder.receipt_url ?? null,
+        serviceActivated,
+      });
+    }
+
     // ── 1. 토스 결제 승인 ──
     let result;
     try {
@@ -76,6 +105,16 @@ export const POST = createApiHandler(
     });
 
     if (insertErr) {
+      // 중복 키(23505) = 이미 기록된 주문의 동시/재진입 요청 — 실패가 아니므로 절대 취소 금지
+      if (insertErr.code === '23505') {
+        logger.warn('payment.duplicate_confirm', { orderId, userId: user.id });
+        return NextResponse.json({
+          success: true,
+          receiptUrl: result.receipt?.url ?? null,
+          serviceActivated: null,
+        });
+      }
+
       logger.error('payment.insert_failed', {
         orderId,
         userId: user.id,

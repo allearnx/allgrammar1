@@ -91,22 +91,24 @@ export default function PaymentCallbackPage() {
                   영수증 보기
                 </a>
               )}
-              {searchParams.get('name')?.includes('올킬보카') && (
-                <Button asChild variant="outline">
-                  <Link href="/allkill/guide">올킬보카 이용 가이드 보기</Link>
-                </Button>
-              )}
               {serviceActivated ? (
-                <Button asChild>
-                  <Link href="/student">학습하러 가기</Link>
-                </Button>
+                <div className="mt-2 flex w-full max-w-xs flex-col gap-3">
+                  <Button asChild size="lg" className="h-12 text-base font-bold">
+                    <Link href={serviceActivated === 'voca' ? '/student/voca' : '/student'}>
+                      학습하러 가기
+                    </Link>
+                  </Button>
+                  <Button asChild size="lg" variant="outline" className="h-12 text-base">
+                    <Link href="/updates">이용 방법 보기</Link>
+                  </Button>
+                </div>
               ) : (
                 <>
                   <p className="text-lg font-semibold">감사합니다!</p>
                   <p className="text-sm text-muted-foreground text-center">
                     담당 선생님이 온보딩을 위해 곧 연락드릴 거예요.
                   </p>
-                  <Button asChild variant="outline">
+                  <Button asChild size="lg" variant="outline" className="h-12 w-full max-w-xs text-base">
                     <Link href="/">홈으로 가기</Link>
                   </Button>
                 </>

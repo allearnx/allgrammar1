@@ -34,6 +34,16 @@ export async function POST(request: NextRequest) {
   const { paymentKey, orderId, amount, orderName, courseId, guestName, guestPhone } = body;
   const admin = createAdminClient();
 
+  // ── 멱등성 가드: 이미 승인된 주문의 재진입은 그대로 성공 응답 (재승인→중복충돌→자동취소 사고 방지) ──
+  const { data: existingOrder } = await admin
+    .from('orders')
+    .select('status, receipt_url')
+    .eq('toss_order_id', orderId)
+    .maybeSingle();
+  if (existingOrder?.status === 'paid') {
+    return NextResponse.json({ success: true, receiptUrl: existingOrder.receipt_url ?? null });
+  }
+
   // ── 0. 코스 가격 위변조 방어 (공개 엔드포인트 — 클라 금액을 신뢰하지 않음) ──
   // 승인(capture) 전에 차단하므로, 불일치 시 실제 청구는 일어나지 않는다.
   const { data: course } = await admin
@@ -94,6 +104,11 @@ export async function POST(request: NextRequest) {
   });
 
   if (insertErr) {
+    // 중복 키(23505) = 이미 기록된 주문의 동시/재진입 — 실패가 아니므로 절대 취소 금지
+    if (insertErr.code === '23505') {
+      logger.warn('payment.guest_duplicate_confirm', { orderId });
+      return NextResponse.json({ success: true, receiptUrl: result.receipt?.url ?? null });
+    }
     logger.error('payment.guest_insert_failed', { orderId, error: insertErr.message });
     try {
       await cancelPayment(result.paymentKey, '주문 기록 저장 실패로 인한 자동 취소');
