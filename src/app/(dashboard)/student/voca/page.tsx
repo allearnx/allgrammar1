@@ -6,6 +6,7 @@ import { VocaHomeClient } from './client';
 import { getPlanContext } from '@/lib/billing/get-plan-context';
 import { canUseFeature } from '@/lib/billing/feature-gate';
 import { DiagnosticEntryCard } from '@/components/voca/diagnostic-entry-card';
+import { isR1Complete } from '@/lib/dashboard/voca-helpers';
 import type { VocaBook, VocaDay, VocaStudentProgress } from '@/types/voca';
 import { VOCA_BOOKS_COLUMNS, VOCA_DAYS_COLUMNS, VOCA_STUDENT_PROGRESS_COLUMNS } from '@/types/voca';
 
@@ -74,6 +75,22 @@ export default async function StudentVocaPage({
     .limit(1)
     .maybeSingle();
 
+  // 교재 1회독 완주 → 재진단 유도 배너. 최근 7일 내 진단했으면 다시 조르지 않는다.
+  const progressByDay = new Map(progressList.map((p) => [p.day_id, p]));
+  const completedBookTitles = (books || [])
+    .filter((b) => {
+      const bookDays = days.filter((d) => d.book_id === b.id);
+      return bookDays.length > 0 && bookDays.every((d) => isR1Complete(progressByDay.get(d.id) ?? null));
+    })
+    .map((b) => b.title);
+  const diagnosedRecently =
+    !!latestDiagnostic &&
+    Date.now() - new Date(latestDiagnostic.created_at).getTime() < 7 * 24 * 60 * 60 * 1000;
+  const retestBook =
+    completedBookTitles.length > 0 && !diagnosedRecently
+      ? { title: completedBookTitles[0], moreCount: completedBookTitles.length - 1 }
+      : null;
+
   const planContext = planForGate;
   const isFree = planContext.tier === 'free';
   const round2Locked = !assignment?.round2_unlocked && !canUseFeature(planContext.tier, 'voca:round2');
@@ -82,7 +99,7 @@ export default async function StudentVocaPage({
     <>
       <Topbar user={user} title="올킬보카" />
       <div className="p-4 md:p-6">
-        <DiagnosticEntryCard latest={latestDiagnostic} />
+        <DiagnosticEntryCard latest={latestDiagnostic} retestBook={retestBook} />
         <VocaHomeClient
           books={(books as VocaBook[]) || []}
           days={days}
