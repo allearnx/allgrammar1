@@ -37,8 +37,10 @@ interface MatchResult {
 
 export const POST = createApiHandler(
   // ⚠️ windowMs 기본값은 1시간 — 일괄 매칭(Day 수만큼 순회 호출)이 시간당 한도에
-  // 걸렸던 사고. 분당 기준으로 명시 (순차 호출이라 실제 분당 1~2회 수준)
-  { roles: ['teacher', 'admin', 'boss'], hasBody: false, rateLimit: { max: 20, windowMs: 60_000 } },
+  // 걸렸던 사고. 분당 기준으로 명시. max 20이던 시절, 이미 대부분 매칭된 교재는
+  // Day당 남은 단어가 적어 호출이 빨라져 분당 20을 넘겨 "실패" 무더기가 떴다(2026-07-19)
+  // → 순차 호출이라 분당 60은 물리적으로 못 넘음, 여유 있게 상향.
+  { roles: ['teacher', 'admin', 'boss'], hasBody: false, rateLimit: { max: 60, windowMs: 60_000 } },
   async ({ request }) => {
   try {
     const formData = await request.formData();
