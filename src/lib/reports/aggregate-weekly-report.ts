@@ -2,6 +2,7 @@ import { format } from 'date-fns';
 import type { SupabaseClient } from '@supabase/supabase-js';
 import type { EnhancedReportData, ReportNaesinStats, ReportVocaStats } from '@/types/report';
 import { computeWeaknesses, computeRecommendations, avgScore, avgNullableScore } from '@/lib/utils/report-analysis';
+import { countStudentBookDays } from './compute-voca-stats';
 
 interface AggregateParams {
   supabase: SupabaseClient;
@@ -82,7 +83,7 @@ export async function aggregateWeeklyReport({
       .eq('student_id', studentId),
     supabase
       .from('voca_student_progress')
-      .select('flashcard_completed, quiz_score, spelling_score, matching_completed')
+      .select('day_id, flashcard_completed, quiz_score, spelling_score, matching_completed')
       .eq('student_id', studentId),
   ]);
 
@@ -172,13 +173,12 @@ export async function aggregateWeeklyReport({
   if (hasVoca) {
     const vProg = vocaProgressRes.data || [];
 
-    const { count: totalDaysCount } = await supabase
-      .from('voca_days')
-      .select('id', { count: 'exact', head: true });
+    // 분모 = 학생이 학습 중인 교재들의 Day 수 (voca_days 전체 카운트 아님)
+    const totalDaysCount = await countStudentBookDays(supabase, vProg.map((p) => p.day_id));
 
     voca = {
       daysInProgress: vProg.length,
-      totalDays: totalDaysCount || 0,
+      totalDays: totalDaysCount,
       flashcardCompleted: vProg.filter((p) => p.flashcard_completed).length,
       quizAvgScore: avgNullableScore(vProg.map((p) => p.quiz_score)),
       spellingAvgScore: avgNullableScore(vProg.map((p) => p.spelling_score)),
