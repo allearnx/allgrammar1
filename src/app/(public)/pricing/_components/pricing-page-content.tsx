@@ -1,9 +1,20 @@
 'use client';
 
 import Link from 'next/link';
-import { Check, Crown, Sparkles } from 'lucide-react';
+import { Check } from 'lucide-react';
 import type { SubscriptionPlan } from '@/types/billing';
+import { SeatPicker } from '@/components/billing/seat-picker';
 import { SeatLadderTable } from '@/components/billing/seat-ladder-table';
+
+// 구글 팔레트 (디자인 정책: 보라 금지 — google-style-migration)
+const G = {
+  blue: '#1A73E8',
+  blueDark: '#174EA6',
+  blueLight: '#E8F0FE',
+  sky: '#DFEFFF',
+  yellow: '#FDD663',
+  ink: '#1F1F1F',
+};
 
 interface PricingPageContentProps {
   plans: SubscriptionPlan[];
@@ -13,102 +24,87 @@ interface PricingPageContentProps {
   currentPlanId: string | null;
 }
 
-const FEATURES_BY_PLAN: Record<string, string[]> = {
-  'Pro 10': ['학생 10명', '올킬보카 전체 (기출 예문·음원)', '어휘 레벨 진단', '학부모 리포트'],
-  'Pro 50': ['학생 50명', '올킬보카 전체 (기출 예문·음원)', '어휘 레벨 진단', '대량 관리', '학부모 리포트'],
-  'Pro 100': ['학생 100명', '올킬보카 전체 (기출 예문·음원)', '어휘 레벨 진단', '대량 관리', '학부모 리포트'],
-  'Pro 180': ['학생 180명', '올킬보카 전체 (기출 예문·음원)', '어휘 레벨 진단', '대량 관리', '학부모 리포트'],
-};
+const INCLUDED_FEATURES = [
+  '단어 암기 7단계 통과 시스템 (카드·퀴즈·스펠링·매칭)',
+  '모의고사·수능 기출 문장 예문 + 원어민 음원',
+  '어휘 레벨 진단 (학년 대비 수준·커버리지)',
+  'AI 서술형 · 영작 채점',
+  '오답 자동 관리 (3연속 정답까지)',
+  '학부모 리포트 (링크 공유)',
+  '실시간 학습 모니터',
+  '선생님 대시보드 · 대량 학생 관리',
+];
 
 export function PricingPageContent({
   plans,
   isLoggedIn,
   isAdmin,
   currentTier,
-  currentPlanId,
 }: PricingPageContentProps) {
-  // 무료 티어는 노출하지 않음 (2026-07-20 사장님 결정) — 유료 플랜만 표시
-  const proPlansList = plans.filter((p) => p.price_per_unit > 0);
-
-  function getCta(plan: SubscriptionPlan) {
-    const isCurrent =
-      (plan.price_per_unit === 0 && currentTier === 'free') ||
-      (plan.id === currentPlanId && currentTier === 'paid');
-
-    if (isCurrent) {
-      return { label: '현재 플랜', href: '#', disabled: true };
-    }
-
-    if (!isLoggedIn) {
-      return {
-        label: plan.price_per_unit === 0 ? '무료로 시작하기' : '시작하기',
-        href: '/signup?role=admin',
-        disabled: false,
-      };
-    }
-
-    if (isAdmin && currentTier === 'free' && plan.price_per_unit > 0) {
-      return { label: '업그레이드', href: `/admin/upgrade?planId=${plan.id}`, disabled: false };
-    }
-
-    if (isAdmin && currentTier === 'paid' && plan.price_per_unit > 0) {
-      return { label: '플랜 변경 문의', href: '#', disabled: true };
-    }
-
-    return {
-      label: plan.price_per_unit === 0 ? '무료로 시작하기' : '시작하기',
-      href: '/signup?role=admin',
-      disabled: false,
-    };
-  }
+  const paidPlans = plans.filter((p) => p.price_per_unit > 0);
+  const pickerCta = !isLoggedIn || !isAdmin ? 'signup' : currentTier === 'paid' ? 'contact' : 'upgrade';
+  const isFreeAdmin = isLoggedIn && isAdmin && currentTier !== 'paid';
 
   return (
     <div className="pt-28 pb-20">
       {/* Hero */}
-      <div className="mx-auto max-w-4xl px-4 text-center mb-16">
-        <div className="inline-flex items-center gap-2 rounded-full bg-violet-100 px-4 py-1.5 mb-6">
-          <Crown className="h-4 w-4 text-violet-600" />
-          <span className="text-sm font-medium text-violet-700">학원 전용 요금제</span>
+      <div className="mx-auto max-w-4xl px-4 text-center mb-12">
+        <div className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 mb-6" style={{ background: G.blueLight }}>
+          <span className="text-sm font-bold" style={{ color: G.blueDark }}>학원 전용 요금제</span>
         </div>
         <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-4">
           학원 맞춤 요금제
         </h1>
         <p className="text-lg text-gray-500">
-          학원 규모에 맞는 플랜으로 시작하세요
+          먼저 무료로 체험하고, 학생 수만 골라 시작하세요
         </p>
       </div>
 
-      {/* Price Cards */}
-      <div className="mx-auto max-w-7xl px-4">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-3">
-          {proPlansList.map((plan) => (
-            <PlanCard
-              key={plan.id}
-              plan={plan}
-              features={FEATURES_BY_PLAN[plan.name] || []}
-              cta={getCta(plan)}
-              variant="violet"
-              popular={plan.name === 'Pro 50'}
-            />
-          ))}
+      {/* ① 무료 체험 우선 — 결제보다 체험이 먼저 */}
+      <div className="mx-auto max-w-2xl px-4 mb-14">
+        <div className="rounded-3xl px-8 py-8 text-center" style={{ background: G.sky }}>
+          <h2 className="text-2xl font-bold" style={{ color: G.ink }}>
+            먼저 무료로 시작하세요
+          </h2>
+          <p className="mt-2 text-[15px] text-gray-600">
+            <b style={{ color: G.ink }}>학생 5명, Day 3개</b>까지 무료 체험 · 카드 등록 없음
+          </p>
+          {isFreeAdmin ? (
+            <p className="mt-4 text-sm font-semibold" style={{ color: G.blueDark }}>
+              이미 체험 중이에요 — 아래에서 학생 수를 선택해 업그레이드하세요
+            </p>
+          ) : (
+            <Link
+              href="/signup?role=admin"
+              className="mt-5 inline-block rounded-full px-10 py-3.5 text-base font-bold transition-transform hover:scale-[1.02]"
+              style={{ background: G.yellow, color: G.ink }}
+            >
+              가입하고 무료 체험 시작
+            </Link>
+          )}
         </div>
       </div>
 
-      {/* 5명 단위 상세 요금표 (10~180명, 전 구간 정식 요금) */}
-      <div className="mx-auto max-w-2xl px-4 mt-16">
+      {/* ② 학생 수 선택 → 결제 */}
+      <div className="mx-auto max-w-md px-4">
         <h2 className="text-2xl font-bold text-center text-gray-900 mb-2">
-          학생 수별 상세 요금
+          유료 전환은 학생 수만 고르면 끝
         </h2>
-        <p className="text-center text-gray-500 mb-8">
-          5명 단위로 딱 맞는 인원을 선택하세요
+        <p className="text-center text-gray-500 mb-6">
+          5명 단위로 선택하면 요금이 바로 계산돼요
         </p>
-        <SeatLadderTable />
-        <p className="text-xs text-gray-400 mt-3 text-center">
-          가입 후 카카오톡 채널 [올라영]으로 인원을 알려주시면 해당 요금으로 시작해드립니다.
-        </p>
+        <SeatPicker plans={paidPlans} cta={pickerCta} />
       </div>
 
-      {/* 모든 플랜 포함 기능 */}
+      {/* ③ 상세 요금표 */}
+      <div className="mx-auto max-w-2xl px-4 mt-16">
+        <h2 className="text-xl font-bold text-center text-gray-900 mb-6">
+          학생 수별 상세 요금
+        </h2>
+        <SeatLadderTable />
+      </div>
+
+      {/* ④ 포함 기능 */}
       <div className="mx-auto max-w-3xl px-4 mt-20">
         <h2 className="text-2xl font-bold text-center text-gray-900 mb-2">
           모든 플랜에 전부 포함
@@ -116,20 +112,16 @@ export function PricingPageContent({
         <p className="text-center text-gray-500 mb-8">
           플랜은 학생 수만 다릅니다. 기능 제한은 없어요.
         </p>
-        <div className="rounded-2xl border border-violet-100 bg-white px-6 py-6">
+        <div className="rounded-2xl border border-gray-200 bg-white px-6 py-6">
           <ul className="grid gap-3 sm:grid-cols-2 text-sm text-gray-700">
-            {[
-              '단어 암기 7단계 통과 시스템 (카드·퀴즈·스펠링·매칭)',
-              '모의고사·수능 기출 문장 예문 + 원어민 음원',
-              '어휘 레벨 진단 (학년 대비 수준·커버리지)',
-              'AI 서술형 · 영작 채점',
-              '오답 자동 관리 (3연속 정답까지)',
-              '학부모 리포트 (링크 공유)',
-              '실시간 학습 모니터',
-              '선생님 대시보드 · 대량 학생 관리',
-            ].map((label) => (
+            {INCLUDED_FEATURES.map((label) => (
               <li key={label} className="flex items-start gap-2.5">
-                <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-violet-100 text-xs font-bold text-violet-600">✓</span>
+                <span
+                  className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full"
+                  style={{ background: G.blueLight, color: G.blue }}
+                >
+                  <Check className="h-3 w-3" strokeWidth={3} />
+                </span>
                 {label}
               </li>
             ))}
@@ -137,98 +129,26 @@ export function PricingPageContent({
         </div>
       </div>
 
-      {/* Bottom CTA */}
+      {/* ⑤ 대규모 문의 */}
       <div className="mx-auto max-w-2xl px-4 mt-16 text-center">
-        <div className="rounded-2xl bg-gradient-to-br from-violet-50 to-purple-50 p-8">
-          <Sparkles className="h-8 w-8 text-violet-500 mx-auto mb-4" />
+        <div className="rounded-2xl px-8 py-8" style={{ background: G.blueLight }}>
           <h3 className="text-xl font-bold text-gray-900 mb-2">
-            더 많은 학생이 필요하신가요?
+            180명보다 큰 학원이신가요?
           </h3>
-          <p className="text-gray-500 mb-6">
-            180명 이상 대규모 학원은 별도 문의해 주세요.
+          <p className="text-gray-600 mb-5">
+            대규모 학원은 맞춤 견적을 드려요.
           </p>
-          <Link
-            href="/faq"
-            className="inline-flex items-center gap-1.5 rounded-lg px-6 py-2.5 text-sm font-semibold text-white transition-all hover:opacity-90"
-            style={{ background: 'linear-gradient(135deg, #7C3AED, #6D28D9)' }}
+          <a
+            href="http://pf.kakao.com/_iLxcLG/chat"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 rounded-full px-6 py-2.5 text-sm font-bold transition-opacity hover:opacity-90"
+            style={{ background: '#FEE500', color: '#3C1E1E' }}
           >
-            문의하기
-          </Link>
+            카톡으로 문의하기
+          </a>
         </div>
       </div>
-    </div>
-  );
-}
-
-// ── PlanCard ──
-
-interface PlanCardProps {
-  plan: SubscriptionPlan;
-  features: string[];
-  cta: { label: string; href: string; disabled: boolean };
-  variant: 'outline' | 'violet';
-  popular?: boolean;
-}
-
-function PlanCard({ plan, features, cta, variant, popular }: PlanCardProps) {
-  const isOutline = variant === 'outline';
-
-  return (
-    <div
-      className={`relative flex flex-col rounded-2xl p-6 transition-all ${
-        isOutline
-          ? 'border-2 border-gray-200 bg-white'
-          : 'border-2 border-violet-200 bg-gradient-to-b from-violet-50 to-white'
-      } ${popular ? 'ring-2 ring-violet-500 shadow-lg shadow-violet-100' : ''}`}
-    >
-      {popular && (
-        <div className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-violet-600 px-3 py-0.5 text-xs font-bold text-white">
-          인기
-        </div>
-      )}
-
-      <div className="mb-4">
-        <h3 className={`text-lg font-bold ${isOutline ? 'text-gray-900' : 'text-violet-700'}`}>
-          {plan.name}
-        </h3>
-      </div>
-
-      <div className="mb-6">
-        {plan.price_per_unit === 0 ? (
-          <div className="text-3xl font-bold text-gray-900">무료</div>
-        ) : (
-          <div className="text-3xl font-bold text-gray-900">
-            {plan.price_per_unit.toLocaleString('ko-KR')}
-            <span className="text-base font-normal text-gray-500">원/월</span>
-          </div>
-        )}
-      </div>
-
-      <ul className="mb-6 flex-1 space-y-2.5">
-        {features.map((f) => (
-          <li key={f} className="flex items-start gap-2 text-sm text-gray-600">
-            <Check className={`h-4 w-4 mt-0.5 flex-shrink-0 ${isOutline ? 'text-gray-400' : 'text-violet-500'}`} />
-            {f}
-          </li>
-        ))}
-      </ul>
-
-      {cta.disabled ? (
-        <div className="rounded-xl bg-gray-100 py-3 text-center text-sm font-semibold text-gray-500">
-          {cta.label}
-        </div>
-      ) : (
-        <Link
-          href={cta.href}
-          className={`block rounded-xl py-3 text-center text-sm font-semibold transition-all ${
-            isOutline
-              ? 'border-2 border-violet-600 text-violet-600 hover:bg-violet-50'
-              : 'bg-violet-600 text-white hover:bg-violet-700'
-          }`}
-        >
-          {cta.label}
-        </Link>
-      )}
     </div>
   );
 }

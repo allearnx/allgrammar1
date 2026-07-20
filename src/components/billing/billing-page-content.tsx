@@ -9,6 +9,7 @@ import { SubscriptionInfoCard } from '@/components/billing/subscription-info-car
 import { PaymentHistoryCard } from '@/components/billing/payment-history-card';
 import { PlanComparison } from '@/components/billing/plan-comparison';
 import { SeatLadderTable } from '@/components/billing/seat-ladder-table';
+import { SeatPicker } from '@/components/billing/seat-picker';
 import { requestTossCardAuth, cancelSubscription, calcTrialDaysLeft } from '@/lib/billing/toss-helpers';
 import { deriveTier } from '@/lib/billing/feature-gate';
 import { SUBSCRIPTION_PLAN_COLUMNS, ORDER_COLUMNS, PAYMENT_HISTORY_COLUMNS, type Subscription, type PaymentHistory, type SubscriptionPlan, type Order } from '@/types/billing';
@@ -189,37 +190,24 @@ export function BillingPageContent({ mode }: BillingPageContentProps) {
           </div>
         )}
 
-        {/* 요금제 카드 */}
+        {/* 요금제 — 학생 수 선택 → 결제 (클래스카드식, 35개 카드 나열 대신 선택 위젯) */}
         {mode === 'academy' && plans.length > 0 && (
           <section className="space-y-5">
             <h2 className="text-[17px] font-bold text-gray-900">요금제</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3">
-              {plans.map((plan) => {
-                const isCurrent =
-                  (plan.price_per_unit === 0 && tier === 'free') ||
-                  (plan.id === currentPlanId && tier !== 'free');
-                return (
-                  <PlanCard
-                    key={plan.id}
-                    plan={plan}
-                    isCurrent={isCurrent}
-                    isFree={tier === 'free'}
-                    popular={plan.name === 'Pro 50'}
-                  />
-                );
-              })}
+            <div className="max-w-md">
+              <SeatPicker
+                plans={plans.filter((p) => p.price_per_unit > 0)}
+                cta={tier === 'free' ? 'upgrade' : 'contact'}
+              />
             </div>
           </section>
         )}
 
-        {/* 학생 수별 상세 요금 (5명 단위) — 중간 인원은 카톡 문의로 수동 개설 */}
+        {/* 학생 수별 상세 요금 (5명 단위) */}
         {mode === 'academy' && (
           <section className="space-y-5">
             <h2 className="text-[17px] font-bold text-gray-900">학생 수별 상세 요금</h2>
             <SeatLadderTable />
-            <p className="text-xs text-gray-400">
-              표의 인원으로 이용을 원하시면 카카오톡 채널 [올라영]으로 문의 주세요 — 해당 요금으로 개설해드립니다.
-            </p>
           </section>
         )}
 
