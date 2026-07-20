@@ -34,6 +34,23 @@ export const POST = createApiHandler(
       );
     }
 
+    // ── 1-1. 멱등성 가드: 이미 처리된 주문의 재진입(뒤로가기·재시도)은 성공 재응답 ──
+    // 없으면 "이미 유료 플랜" 400이 떠서 성공한 결제가 실패처럼 보인다 (결제 재승인·취소는 없음)
+    const adminForCheck = createAdminClient();
+    const { data: prevPay } = await adminForCheck
+      .from('payment_history')
+      .select('receipt_url')
+      .eq('toss_order_id', orderId)
+      .eq('status', 'success')
+      .maybeSingle();
+    if (prevPay) {
+      return NextResponse.json({
+        success: true,
+        planName: plan.name,
+        receiptUrl: prevPay.receipt_url ?? null,
+      });
+    }
+
     // ── 2. 현재 구독 조회 (free 확인) ──
     if (!user.academy_id) {
       return NextResponse.json({ error: '학원 정보가 없습니다.' }, { status: 400 });
