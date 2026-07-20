@@ -220,6 +220,7 @@ export function ServiceAssignmentToggle({
           type="button"
           disabled={round2Loading}
           onClick={toggleRound2}
+          title="켜면 1회독 없이 바로 2회독부터 시작합니다 (다른 곳에서 이미 1회독을 마친 학생용)"
           className={cn(
             'inline-flex items-center gap-1.5 rounded-full px-4 py-1.5 text-sm font-medium transition-all select-none',
             round2Loading && 'opacity-50 cursor-wait',

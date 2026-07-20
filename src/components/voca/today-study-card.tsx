@@ -25,6 +25,8 @@ interface TodayStudyCardProps {
   progressMap: Map<string, VocaStudentProgress>;
   freeDayLimit: number;
   round2Locked: boolean;
+  /** 관리자 '2회독' 토글 = 1회독 면제 — 1회독 건너뛰고 바로 2회독 안내 */
+  round2Forced?: boolean;
   /** 이어하기 클릭 시 홈의 선택 교재도 함께 전환 (돌아왔을 때 그 교재가 보이도록) */
   onSelectBook: (bookId: string) => void;
 }
@@ -34,7 +36,7 @@ interface TodayStudyCardProps {
  * 2권 이상 병행하는 학생이 교재를 오가며 기억할 필요 없게 하고,
  * 방치된 교재(3일+ 쉼)를 시스템이 알려준다. 1권 학생에게도 "이어하기"로 유용.
  */
-export function TodayStudyCard({ books, days, progressMap, freeDayLimit, round2Locked, onSelectBook }: TodayStudyCardProps) {
+export function TodayStudyCard({ books, days, progressMap, freeDayLimit, round2Locked, round2Forced = false, onSelectBook }: TodayStudyCardProps) {
   // 렌더 순수성: 현재 시각은 마운트 시 1회 스냅샷 (쉬는 일수 계산용)
   const [now] = useState(() => Date.now());
   // 학습 기록이 있는 교재만 대상
@@ -52,7 +54,7 @@ export function TodayStudyCard({ books, days, progressMap, freeDayLimit, round2L
     );
     const idleDays = lastActivity > 0 ? Math.floor((now - lastActivity) / 86_400_000) : 0;
 
-    const nextR1 = bookDays.find((d) => !isR1Complete(progressMap.get(d.id) ?? null));
+    const nextR1 = round2Forced ? undefined : bookDays.find((d) => !isR1Complete(progressMap.get(d.id) ?? null));
     if (nextR1) {
       tasks.push({ book, nextDay: nextR1, round: 1, idleDays, lastActivity });
       continue;

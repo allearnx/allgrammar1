@@ -26,6 +26,8 @@ interface VocaHomeClientProps {
   initialBookId?: string;
   freeDayLimit?: number;
   round2Locked?: boolean;
+  /** 관리자 '2회독' 토글 = 1회독 면제 (다른 곳에서 1회독을 마친 학생) */
+  round2Forced?: boolean;
   roundMode?: RoundMode;
   /** 학습 기록이 하나도 없는 첫 진입 — 학년→교재 가이드 표시 */
   firstTimeGuide?: boolean;
@@ -54,7 +56,7 @@ function getRound2StepsDone(prog: VocaStudentProgress | undefined): number {
   return done;
 }
 
-export function VocaHomeClient({ books, days, progressList, submissionStatuses = {}, studentId, initialBookId, freeDayLimit = 0, round2Locked = false, roundMode: initialRoundMode = 'book', firstTimeGuide = false, expiresAt = null }: VocaHomeClientProps) {
+export function VocaHomeClient({ books, days, progressList, submissionStatuses = {}, studentId, initialBookId, freeDayLimit = 0, round2Locked = false, round2Forced = false, roundMode: initialRoundMode = 'book', firstTimeGuide = false, expiresAt = null }: VocaHomeClientProps) {
   const router = useRouter();
   // 계정별 키 — 전역 키('voca:selectedBookId')를 쓰면 같은 브라우저에서
   // 다른 계정이 보던 교재가 복원되어 첫 진입 가이드가 건너뛰어진다
@@ -124,8 +126,8 @@ export function VocaHomeClient({ books, days, progressList, submissionStatuses =
     return targetDays.length > 0 && targetDays.every((d) => isR1Complete(progressMap.get(d.id) ?? null));
   }, [filteredDays, progressMap, freeDayLimit]);
 
-  // 현재 라운드: 모드에 따라 다르게 (book 모드는 전체 기준)
-  const bookCurrentRound: '1' | '2' = (!round2Locked && bookRound1Complete) ? '2' : '1';
+  // 현재 라운드: 모드에 따라 다르게 (book 모드는 전체 기준, 1회독 면제 시 바로 2회독)
+  const bookCurrentRound: '1' | '2' = (!round2Locked && (round2Forced || bookRound1Complete)) ? '2' : '1';
 
   // 무료 체험(Day 3개) 완료 — 업그레이드 안내를 페이지 상단으로 승격
   const freeTrialDone = freeDayLimit > 0 && bookRound1Complete;
@@ -134,17 +136,17 @@ export function VocaHomeClient({ books, days, progressList, submissionStatuses =
   const completedCount = useMemo(() => {
     const target = filteredDays.slice(0, freeDayLimit > 0 ? freeDayLimit : undefined);
     if (roundMode === 'day') {
-      // Day 모드: 1회독+2회독 모두 완료한 Day 수
+      // Day 모드: 1회독+2회독 모두 완료한 Day 수 (1회독 면제 시 2회독만)
       return target.filter((d) => {
         const p = progressMap.get(d.id) ?? null;
-        return isR1Complete(p) && (round2Locked || isR2Complete(p));
+        return (round2Forced || isR1Complete(p)) && (round2Locked || isR2Complete(p));
       }).length;
     }
     if (bookCurrentRound === '2') {
       return target.filter((day) => isR2Complete(progressMap.get(day.id) ?? null)).length;
     }
     return target.filter((day) => isR1Complete(progressMap.get(day.id) ?? null)).length;
-  }, [filteredDays, progressMap, freeDayLimit, bookCurrentRound, roundMode, round2Locked]);
+  }, [filteredDays, progressMap, freeDayLimit, bookCurrentRound, roundMode, round2Locked, round2Forced]);
 
   const handleModeChange = async (mode: RoundMode) => {
     setRoundMode(mode);
@@ -355,6 +357,7 @@ export function VocaHomeClient({ books, days, progressList, submissionStatuses =
         progressMap={progressMap}
         freeDayLimit={freeDayLimit}
         round2Locked={round2Locked}
+        round2Forced={round2Forced}
         onSelectBook={selectBook}
       />
 
@@ -454,10 +457,11 @@ export function VocaHomeClient({ books, days, progressList, submissionStatuses =
             let dayRoundLabel: string | null = null;
 
             if (roundMode === 'day') {
-              // Day별 모드: 1회독+2회독 모두 완료 = 완료
-              const bothDone = completed && (round2Locked || r2Completed);
+              // Day별 모드: 1회독+2회독 모두 완료 = 완료 (1회독 면제 시 2회독만)
+              const r1Done = round2Forced || completed;
+              const bothDone = r1Done && (round2Locked || r2Completed);
               isCompleted = bothDone;
-              if (!completed) {
+              if (!r1Done) {
                 // 1회독 진행중
                 stepsNow = steps;
                 totalSteps = 4;

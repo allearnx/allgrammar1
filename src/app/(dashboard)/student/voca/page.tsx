@@ -112,6 +112,7 @@ export default async function StudentVocaPage({
           initialBookId={initialBookId}
           freeDayLimit={isFree ? 3 : 0}
           round2Locked={round2Locked}
+          round2Forced={!!assignment?.round2_unlocked}
           roundMode={(assignment?.voca_round_mode as 'book' | 'day') || 'book'}
           firstTimeGuide={progressList.length === 0}
           expiresAt={assignment?.expires_at ?? null}
