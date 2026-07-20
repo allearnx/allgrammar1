@@ -3,7 +3,6 @@
 import Link from 'next/link';
 import { Check, Crown, Sparkles } from 'lucide-react';
 import type { SubscriptionPlan } from '@/types/billing';
-import { PlanComparison } from '@/components/billing/plan-comparison';
 
 interface PricingPageContentProps {
   plans: SubscriptionPlan[];
@@ -14,19 +13,11 @@ interface PricingPageContentProps {
 }
 
 const FEATURES_BY_PLAN: Record<string, string[]> = {
-  '무료': ['학생 5명', '보카·내신 둘 다 체험 (보카 3 Day · 내신 1단원)', '기본 통계'],
   'Pro 10': ['학생 10명', '올킬보카 전체 (기출 예문·음원)', '어휘 레벨 진단', '학부모 리포트'],
   'Pro 50': ['학생 50명', '올킬보카 전체 (기출 예문·음원)', '어휘 레벨 진단', '대량 관리', '학부모 리포트'],
   'Pro 100': ['학생 100명', '올킬보카 전체 (기출 예문·음원)', '어휘 레벨 진단', '대량 관리', '학부모 리포트'],
   'Pro 180': ['학생 180명', '올킬보카 전체 (기출 예문·음원)', '어휘 레벨 진단', '대량 관리', '학부모 리포트'],
 };
-
-// 5명 단위 사다리 (클래스카드 −100원) — 카드에 없는 중간 인원 안내
-const SEAT_LADDER: [string, string][] = [
-  ['10명', '27,900원'], ['15명', '34,900원'], ['20명', '41,900원'], ['25명', '48,900원'],
-  ['30명', '55,900원'], ['35명', '62,900원'], ['40명', '69,900원'], ['45명', '76,900원'],
-  ['50명', '83,900원'], ['100명', '153,900원'], ['180명', '265,900원'],
-];
 
 export function PricingPageContent({
   plans,
@@ -35,7 +26,7 @@ export function PricingPageContent({
   currentTier,
   currentPlanId,
 }: PricingPageContentProps) {
-  const freePlan = plans.find((p) => p.price_per_unit === 0);
+  // 무료 티어는 노출하지 않음 (2026-07-20 사장님 결정) — 유료 플랜만 표시
   const proPlansList = plans.filter((p) => p.price_per_unit > 0);
 
   function getCta(plan: SubscriptionPlan) {
@@ -82,21 +73,13 @@ export function PricingPageContent({
           학원 맞춤 요금제
         </h1>
         <p className="text-lg text-gray-500">
-          무료로 시작하고, 필요할 때 업그레이드하세요
+          학원 규모에 맞는 플랜으로 시작하세요
         </p>
       </div>
 
       {/* Price Cards */}
       <div className="mx-auto max-w-7xl px-4">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 lg:gap-3">
-          {freePlan && (
-            <PlanCard
-              plan={freePlan}
-              features={FEATURES_BY_PLAN[freePlan.name] || []}
-              cta={getCta(freePlan)}
-              variant="outline"
-            />
-          )}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-3">
           {proPlansList.map((plan) => (
             <PlanCard
               key={plan.id}
@@ -110,82 +93,33 @@ export function PricingPageContent({
         </div>
       </div>
 
-      {/* 5명 단위 사다리 — 카드에 없는 중간 인원 */}
-      <div className="mx-auto max-w-3xl px-4 mt-14">
-        <div className="rounded-2xl border border-violet-100 bg-violet-50/40 px-6 py-5">
-          <p className="text-sm font-semibold text-gray-800 mb-3">
-            인원이 애매하면 5명 단위로 맞춰드려요
-          </p>
-          <div className="flex flex-wrap gap-x-5 gap-y-1.5 text-sm text-gray-600" style={{ fontVariantNumeric: 'tabular-nums' }}>
-            {SEAT_LADDER.map(([seats, price]) => (
-              <span key={seats} className="whitespace-nowrap">
-                <b className="text-gray-800">{seats}</b> {price}
-              </span>
-            ))}
-          </div>
-          <p className="text-xs text-gray-400 mt-3">중간 인원(15~45명)은 가입 후 문의 주시면 해당 요금으로 맞춰드립니다.</p>
-        </div>
-      </div>
-
-      {/* C사 비교 — 같은 가격, 단어에서 끝나지 않게 */}
+      {/* 모든 플랜 포함 기능 */}
       <div className="mx-auto max-w-3xl px-4 mt-20">
         <h2 className="text-2xl font-bold text-center text-gray-900 mb-2">
-          많이 비교하시는 C사와 정리해 드릴게요
+          모든 플랜에 전부 포함
         </h2>
         <p className="text-center text-gray-500 mb-8">
-          같은 가격이면, 단어에서 끝나지 않아야 하니까요.
+          플랜은 학생 수만 다릅니다. 기능 제한은 없어요.
         </p>
-        <div className="overflow-x-auto rounded-2xl border border-violet-100 bg-white">
-          <table className="w-full text-sm">
-            <thead>
-              <tr className="border-b border-violet-100 bg-violet-50/50">
-                <th className="px-4 py-3 text-left font-semibold text-gray-700" scope="col"></th>
-                <th className="px-4 py-3 text-center font-semibold text-gray-500" scope="col">C사 (단어 학습)</th>
-                <th className="px-4 py-3 text-center font-semibold text-violet-700" scope="col">올라영</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-gray-100">
-              <tr>
-                <td className="px-4 py-3 font-medium text-gray-700">학생 10명</td>
-                <td className="px-4 py-3 text-center text-gray-500">월 28,000원</td>
-                <td className="px-4 py-3 text-center font-semibold text-gray-900">월 27,900원</td>
-              </tr>
-              <tr>
-                <td className="px-4 py-3 font-medium text-gray-700">학생 50명</td>
-                <td className="px-4 py-3 text-center text-gray-500">월 84,000원</td>
-                <td className="px-4 py-3 text-center font-semibold text-gray-900">월 83,900원</td>
-              </tr>
-              <tr>
-                <td className="px-4 py-3 font-medium text-gray-700">학생 100명</td>
-                <td className="px-4 py-3 text-center text-gray-500">월 154,000원</td>
-                <td className="px-4 py-3 text-center font-bold text-violet-700">월 153,900원</td>
-              </tr>
-              {[
-                ['단어 암기 학습 (카드·퀴즈·스펠링·매칭)', true, true],
-                ['모의고사·수능 기출 문장 예문 + 원어민 음원', false, true],
-                ['어휘 레벨 진단 (학년 대비 수준·커버리지)', false, true],
-                ['AI 서술형 · 영작 채점', false, true],
-                ['오답 자동 관리 (3연속 정답까지)', false, true],
-                ['학부모 리포트', false, true],
-                ['실시간 학습 모니터', false, true],
-              ].map(([label, cSa, us]) => (
-                <tr key={label as string}>
-                  <td className="px-4 py-3 text-gray-700">{label}</td>
-                  <td className="px-4 py-3 text-center">{cSa ? <span className="text-gray-400">✓</span> : <span className="text-gray-300">–</span>}</td>
-                  <td className="px-4 py-3 text-center">{us ? <span className="font-bold text-violet-600">✓</span> : '–'}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+        <div className="rounded-2xl border border-violet-100 bg-white px-6 py-6">
+          <ul className="grid gap-3 sm:grid-cols-2 text-sm text-gray-700">
+            {[
+              '단어 암기 7단계 통과 시스템 (카드·퀴즈·스펠링·매칭)',
+              '모의고사·수능 기출 문장 예문 + 원어민 음원',
+              '어휘 레벨 진단 (학년 대비 수준·커버리지)',
+              'AI 서술형 · 영작 채점',
+              '오답 자동 관리 (3연속 정답까지)',
+              '학부모 리포트 (링크 공유)',
+              '실시간 학습 모니터',
+              '선생님 대시보드 · 대량 학생 관리',
+            ].map((label) => (
+              <li key={label} className="flex items-start gap-2.5">
+                <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-violet-100 text-xs font-bold text-violet-600">✓</span>
+                {label}
+              </li>
+            ))}
+          </ul>
         </div>
-      </div>
-
-      {/* Feature Comparison */}
-      <div className="mx-auto max-w-3xl px-4 mt-20">
-        <h2 className="text-2xl font-bold text-center text-gray-900 mb-8">
-          기능 비교
-        </h2>
-        <PlanComparison showCta={false} />
       </div>
 
       {/* Bottom CTA */}
