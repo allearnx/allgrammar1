@@ -26,7 +26,9 @@ function AnnouncementCard({
   announcement: AnnouncementWithRead;
   onRead: (id: string) => void;
 }) {
-  const Icon = typeIcons[announcement.type];
+  // type 누락/신규 값 방어 — 아이콘·배지는 info로 폴백 (undefined면 렌더 전체가 터진다)
+  const type: AnnouncementType = typeIcons[announcement.type] ? announcement.type : 'info';
+  const Icon = typeIcons[type];
 
   return (
     <div
@@ -37,14 +39,14 @@ function AnnouncementCard({
       onClick={() => { if (!announcement.is_read) onRead(announcement.id); }}
     >
       <div className="flex items-start gap-3">
-        <Icon className={cn('h-5 w-5 mt-0.5 shrink-0', typeBadgeColors[announcement.type].split(' ')[1])} />
+        <Icon className={cn('h-5 w-5 mt-0.5 shrink-0', typeBadgeColors[type].split(' ')[1])} />
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2 flex-wrap">
             <h3 className={cn('text-sm', !announcement.is_read ? 'font-semibold' : 'font-medium')}>
               {announcement.title}
             </h3>
-            <Badge variant="secondary" className={cn('text-[10px]', typeBadgeColors[announcement.type])}>
-              {ANNOUNCEMENT_TYPE_LABELS[announcement.type]}
+            <Badge variant="secondary" className={cn('text-[10px]', typeBadgeColors[type])}>
+              {ANNOUNCEMENT_TYPE_LABELS[type]}
             </Badge>
             {!announcement.is_read && (
               <span className="h-2 w-2 rounded-full bg-blue-500 shrink-0" />

@@ -13,7 +13,7 @@ export const GET = createApiHandler(
     const announcements = dbResult(
       await supabase
         .from('announcements')
-        .select('id, title, content, is_published, published_at, target_roles, created_at')
+        .select('id, title, content, type, is_published, published_at, target_roles, created_at')
         .eq('is_published', true)
         .contains('target_roles', [user.role])
         .gte('published_at', twoWeeksAgo)

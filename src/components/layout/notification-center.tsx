@@ -38,7 +38,7 @@ function AnnouncementItem({
   announcement: AnnouncementWithRead;
   onRead: (id: string) => void;
 }) {
-  const Icon = typeIcons[announcement.type];
+  const Icon = typeIcons[announcement.type] ?? Info;
   return (
     <div
       className={cn(
@@ -72,9 +72,9 @@ function BannerItem({
   announcement: AnnouncementWithRead;
   onDismiss: (id: string) => void;
 }) {
-  const Icon = typeIcons[announcement.type];
+  const Icon = typeIcons[announcement.type] ?? Info;
   return (
-    <div className={cn('flex items-center gap-2 px-4 py-2 border-b text-sm', bannerStyles[announcement.type])}>
+    <div className={cn('flex items-center gap-2 px-4 py-2 border-b text-sm', bannerStyles[announcement.type] ?? bannerStyles.info)}>
       <Icon className="h-4 w-4 shrink-0" />
       <span className="font-medium">{announcement.title}</span>
       <span className="hidden sm:inline text-xs opacity-80">— {announcement.content}</span>
