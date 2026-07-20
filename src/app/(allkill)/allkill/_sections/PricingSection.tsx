@@ -87,8 +87,8 @@ export default function PricingSection({ vocaCourseId, vocaCoursePrice, selfStud
           <div className="ak-price-card">
             <div className="ak-price-head">
               <div style={{ fontSize: 15, fontWeight: 800, color: C.gray, marginBottom: 12 }}>학원 단체</div>
-              <div className="ak-price-amount" style={{ color: C.ink }}>문의</div>
-              <div style={{ fontSize: 14, color: C.grayLight }}>학원·그룹 맞춤 견적</div>
+              <div className="ak-price-amount" style={{ color: C.ink }}>월 27,900원<span className="ak-price-unit">부터</span></div>
+              <div style={{ fontSize: 14, color: C.grayLight }}>학생 10명 기준 · 5명 단위 요금</div>
             </div>
             <FeatureList items={academyFeatures} checkColor={C.green} />
             <a

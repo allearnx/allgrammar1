@@ -119,12 +119,14 @@ export const POST = createApiHandler(
       );
     }
 
-    // 4-2. academies 업데이트 (max_students + free_service 제거)
+    // 4-2. academies 업데이트 (max_students + free_service 제거 + 계약 서비스 제한)
+    // services는 checkServiceGate가 강제 — 보카 전용 플랜 학원은 내신 배정 불가 (2026-07-20)
     await admin
       .from('academies')
       .update({
         max_students: plan.min_students,
         free_service: null,
+        services: plan.services,
         updated_at: now.toISOString(),
       })
       .eq('id', user.academy_id);

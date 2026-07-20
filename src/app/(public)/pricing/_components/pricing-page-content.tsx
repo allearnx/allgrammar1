@@ -15,11 +15,18 @@ interface PricingPageContentProps {
 
 const FEATURES_BY_PLAN: Record<string, string[]> = {
   '무료': ['학생 5명', '보카·내신 둘 다 체험 (보카 3 Day · 내신 1단원)', '기본 통계'],
-  'Pro 10': ['학생 10명', '올인내신 + 올킬보카', '차트 + 랭킹', '학생 리포트'],
-  'Pro 50': ['학생 50명', '올인내신 + 올킬보카', '차트 + 랭킹', '대량 관리', '학생 리포트'],
-  'Pro 100': ['학생 100명', '올인내신 + 올킬보카', '차트 + 랭킹', '대량 관리', '학생 리포트'],
-  'Pro 180': ['학생 180명', '올인내신 + 올킬보카', '차트 + 랭킹', '대량 관리', '학생 리포트'],
+  'Pro 10': ['학생 10명', '올킬보카 전체 (기출 예문·음원)', '어휘 레벨 진단', '학부모 리포트'],
+  'Pro 50': ['학생 50명', '올킬보카 전체 (기출 예문·음원)', '어휘 레벨 진단', '대량 관리', '학부모 리포트'],
+  'Pro 100': ['학생 100명', '올킬보카 전체 (기출 예문·음원)', '어휘 레벨 진단', '대량 관리', '학부모 리포트'],
+  'Pro 180': ['학생 180명', '올킬보카 전체 (기출 예문·음원)', '어휘 레벨 진단', '대량 관리', '학부모 리포트'],
 };
+
+// 5명 단위 사다리 (클래스카드 −100원) — 카드에 없는 중간 인원 안내
+const SEAT_LADDER: [string, string][] = [
+  ['10명', '27,900원'], ['15명', '34,900원'], ['20명', '41,900원'], ['25명', '48,900원'],
+  ['30명', '55,900원'], ['35명', '62,900원'], ['40명', '69,900원'], ['45명', '76,900원'],
+  ['50명', '83,900원'], ['100명', '153,900원'], ['180명', '265,900원'],
+];
 
 export function PricingPageContent({
   plans,
@@ -103,6 +110,23 @@ export function PricingPageContent({
         </div>
       </div>
 
+      {/* 5명 단위 사다리 — 카드에 없는 중간 인원 */}
+      <div className="mx-auto max-w-3xl px-4 mt-14">
+        <div className="rounded-2xl border border-violet-100 bg-violet-50/40 px-6 py-5">
+          <p className="text-sm font-semibold text-gray-800 mb-3">
+            인원이 애매하면 5명 단위로 맞춰드려요
+          </p>
+          <div className="flex flex-wrap gap-x-5 gap-y-1.5 text-sm text-gray-600" style={{ fontVariantNumeric: 'tabular-nums' }}>
+            {SEAT_LADDER.map(([seats, price]) => (
+              <span key={seats} className="whitespace-nowrap">
+                <b className="text-gray-800">{seats}</b> {price}
+              </span>
+            ))}
+          </div>
+          <p className="text-xs text-gray-400 mt-3">중간 인원(15~45명)은 가입 후 문의 주시면 해당 요금으로 맞춰드립니다.</p>
+        </div>
+      </div>
+
       {/* C사 비교 — 같은 가격, 단어에서 끝나지 않게 */}
       <div className="mx-auto max-w-3xl px-4 mt-20">
         <h2 className="text-2xl font-bold text-center text-gray-900 mb-2">
@@ -122,26 +146,26 @@ export function PricingPageContent({
             </thead>
             <tbody className="divide-y divide-gray-100">
               <tr>
-                <td className="px-4 py-3 font-medium text-gray-700">월 28,000원</td>
-                <td className="px-4 py-3 text-center text-gray-500">학생 10명</td>
-                <td className="px-4 py-3 text-center font-semibold text-gray-900">학생 10명</td>
+                <td className="px-4 py-3 font-medium text-gray-700">학생 10명</td>
+                <td className="px-4 py-3 text-center text-gray-500">월 28,000원</td>
+                <td className="px-4 py-3 text-center font-semibold text-gray-900">월 27,900원</td>
               </tr>
               <tr>
-                <td className="px-4 py-3 font-medium text-gray-700">월 84,000원</td>
-                <td className="px-4 py-3 text-center text-gray-500">학생 50명</td>
-                <td className="px-4 py-3 text-center font-semibold text-gray-900">학생 50명</td>
+                <td className="px-4 py-3 font-medium text-gray-700">학생 50명</td>
+                <td className="px-4 py-3 text-center text-gray-500">월 84,000원</td>
+                <td className="px-4 py-3 text-center font-semibold text-gray-900">월 83,900원</td>
               </tr>
               <tr>
-                <td className="px-4 py-3 font-medium text-gray-700">학생 100명 기준</td>
+                <td className="px-4 py-3 font-medium text-gray-700">학생 100명</td>
                 <td className="px-4 py-3 text-center text-gray-500">월 154,000원</td>
-                <td className="px-4 py-3 text-center font-bold text-violet-700">월 140,000원</td>
+                <td className="px-4 py-3 text-center font-bold text-violet-700">월 153,900원</td>
               </tr>
               {[
                 ['단어 암기 학습 (카드·퀴즈·스펠링·매칭)', true, true],
+                ['모의고사·수능 기출 문장 예문 + 원어민 음원', false, true],
+                ['어휘 레벨 진단 (학년 대비 수준·커버리지)', false, true],
                 ['AI 서술형 · 영작 채점', false, true],
-                ['내신 교과서 · 대화문 암기', false, true],
-                ['내신 문제풀이 · 예상문제', false, true],
-                ['오답 자동 관리', false, true],
+                ['오답 자동 관리 (3연속 정답까지)', false, true],
                 ['학부모 리포트', false, true],
                 ['실시간 학습 모니터', false, true],
               ].map(([label, cSa, us]) => (
