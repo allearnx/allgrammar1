@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import AllkillPayButton from '@/components/public/allkill-pay-button';
+import { TrackLink } from '@/components/analytics/track-link';
 import { C, freePlanFeatures, selfStudyPlanFeatures, proPlanFeatures, academyFeatures } from '../_data';
 
 const KAKAO_URL = 'http://pf.kakao.com/_iLxcLG/chat';
@@ -91,14 +92,21 @@ export default function PricingSection({ vocaCourseId, vocaCoursePrice, selfStud
               <div style={{ fontSize: 14, color: C.grayLight }}>학생 10명 기준 · 5명 단위 요금</div>
             </div>
             <FeatureList items={academyFeatures} checkColor={C.green} />
+            <TrackLink
+              event="academy_signup_click"
+              href="/signup?role=admin&next=/pricing"
+              className="ak-btn ak-price-btn"
+              style={{ background: C.yellow, color: C.ink }}
+            >
+              학원 가입하고 시작하기
+            </TrackLink>
             <a
               href={KAKAO_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="ak-btn ak-price-btn"
-              style={{ background: '#FEE500', color: '#3C1E1E' }}
+              style={{ display: 'block', marginTop: 10, textAlign: 'center', fontSize: 13, color: C.grayLight, textDecoration: 'underline' }}
             >
-              카톡으로 문의하기
+              궁금한 점은 카톡으로 문의하기
             </a>
           </div>
 
