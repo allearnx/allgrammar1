@@ -1,6 +1,7 @@
 'use client';
 
-import { Bell, X, Info, AlertTriangle, AlertCircle } from 'lucide-react';
+import Link from 'next/link';
+import { Bell, X, Info, AlertTriangle, AlertCircle, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import {
@@ -89,8 +90,17 @@ function BannerItem({
   );
 }
 
-export function NotificationCenter() {
+/** 역할별 공지사항 전체 페이지 경로 */
+const ANNOUNCEMENTS_PAGE: Record<string, string> = {
+  student: '/student/announcements',
+  teacher: '/teacher/announcements',
+  admin: '/admin/announcements',
+  boss: '/boss/announcements',
+};
+
+export function NotificationCenter({ role }: { role?: string }) {
   const { announcements, unreadCount, unreadImportant, markAsRead, loading } = useAnnouncements();
+  const announcementsHref = role ? ANNOUNCEMENTS_PAGE[role] : undefined;
 
   if (loading) return null;
 
@@ -126,6 +136,15 @@ export function NotificationCenter() {
               ))
             )}
           </div>
+          {announcementsHref && (
+            <Link
+              href={announcementsHref}
+              className="flex items-center justify-center gap-1 border-t px-3 py-2 text-sm font-medium text-blue-600 hover:bg-muted/50 transition-colors"
+            >
+              전체 공지 보기
+              <ArrowRight className="h-3.5 w-3.5" />
+            </Link>
+          )}
         </DropdownMenuContent>
       </DropdownMenu>
 
