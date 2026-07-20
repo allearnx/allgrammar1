@@ -17,7 +17,7 @@ export interface SeatPlan {
 }
 
 const KAKAO_URL = 'http://pf.kakao.com/_iLxcLG/chat';
-const G = { blue: '#1A73E8', blueLight: '#E8F0FE', ink: '#1F1F1F' };
+const G = { blue: '#1A73E8', blueLight: '#E8F0FE', yellow: '#FDD663', ink: '#1F1F1F' };
 
 export function SeatPicker({ plans, cta }: { plans: SeatPlan[]; cta: 'signup' | 'upgrade' | 'contact' }) {
   const sorted = plans
@@ -83,8 +83,8 @@ export function SeatPicker({ plans, cta }: { plans: SeatPlan[]; cta: 'signup' | 
         {cta === 'signup' && (
           <Link
             href="/signup?role=admin&next=/pricing"
-            className="block w-full rounded-full py-3.5 text-center text-base font-bold text-white transition-opacity hover:opacity-90"
-            style={{ background: G.blue }}
+            className="block w-full rounded-full py-3.5 text-center text-base font-bold transition-opacity hover:opacity-90"
+            style={{ background: G.yellow, color: G.ink }}
           >
             가입하고 이 플랜으로 시작하기
           </Link>
@@ -92,8 +92,8 @@ export function SeatPicker({ plans, cta }: { plans: SeatPlan[]; cta: 'signup' | 
         {cta === 'upgrade' && (
           <Link
             href={`/admin/upgrade?planId=${selected.id}`}
-            className="block w-full rounded-full py-3.5 text-center text-base font-bold text-white transition-opacity hover:opacity-90"
-            style={{ background: G.blue }}
+            className="block w-full rounded-full py-3.5 text-center text-base font-bold transition-opacity hover:opacity-90"
+            style={{ background: G.yellow, color: G.ink }}
           >
             {selected.min_students}명 · 월 {selected.price_per_unit.toLocaleString()}원 결제하기
           </Link>
