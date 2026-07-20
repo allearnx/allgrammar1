@@ -4,7 +4,6 @@ import Link from 'next/link';
 import { Check } from 'lucide-react';
 import type { SubscriptionPlan } from '@/types/billing';
 import { SeatPicker } from '@/components/billing/seat-picker';
-import { SeatLadderTable } from '@/components/billing/seat-ladder-table';
 
 // 구글 팔레트 (디자인 정책: 보라 금지 — google-style-migration)
 const G = {
@@ -96,15 +95,7 @@ export function PricingPageContent({
         <SeatPicker plans={paidPlans} cta={pickerCta} />
       </div>
 
-      {/* ③ 상세 요금표 */}
-      <div className="mx-auto max-w-2xl px-4 mt-16">
-        <h2 className="text-xl font-bold text-center text-gray-900 mb-6">
-          학생 수별 상세 요금
-        </h2>
-        <SeatLadderTable />
-      </div>
-
-      {/* ④ 포함 기능 */}
+      {/* ③ 포함 기능 */}
       <div className="mx-auto max-w-3xl px-4 mt-20">
         <h2 className="text-2xl font-bold text-center text-gray-900 mb-2">
           모든 플랜에 전부 포함

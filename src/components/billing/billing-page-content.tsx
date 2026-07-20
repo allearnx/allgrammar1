@@ -8,7 +8,6 @@ import { SubscriptionBanner } from '@/components/billing/subscription-banner';
 import { SubscriptionInfoCard } from '@/components/billing/subscription-info-card';
 import { PaymentHistoryCard } from '@/components/billing/payment-history-card';
 import { PlanComparison } from '@/components/billing/plan-comparison';
-import { SeatLadderTable } from '@/components/billing/seat-ladder-table';
 import { SeatPicker } from '@/components/billing/seat-picker';
 import { requestTossCardAuth, cancelSubscription, calcTrialDaysLeft } from '@/lib/billing/toss-helpers';
 import { deriveTier } from '@/lib/billing/feature-gate';
@@ -200,14 +199,6 @@ export function BillingPageContent({ mode }: BillingPageContentProps) {
                 cta={tier === 'free' ? 'upgrade' : 'contact'}
               />
             </div>
-          </section>
-        )}
-
-        {/* 학생 수별 상세 요금 (5명 단위) */}
-        {mode === 'academy' && (
-          <section className="space-y-5">
-            <h2 className="text-[17px] font-bold text-gray-900">학생 수별 상세 요금</h2>
-            <SeatLadderTable />
           </section>
         )}
 
