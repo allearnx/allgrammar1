@@ -5,7 +5,7 @@
  * 문항별 정오는 진행 중 보여주지 않는다 (레벨테스트 관행 + 다음 라운드 힌트 방지).
  */
 
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
 import { track } from '@vercel/analytics';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -43,6 +43,20 @@ interface Props {
   tookToday: boolean;
   prevVocabIds: string[];
   isFree: boolean;
+  /**
+   * public: 비로그인 /level-test — 진단을 다 풀게 한 뒤 결과 직전에 가입 게이트 (value-first).
+   * 완료 라운드는 localStorage에 담아 가입 후 student 모드가 자동 제출·결과 표시.
+   */
+  mode?: 'student' | 'public';
+}
+
+/** 비로그인 진단 완료분 — 가입 후 자동 제출용 (24시간 유효) */
+const PENDING_KEY = 'allkill:pending-diagnostic';
+
+interface PendingDiagnostic {
+  grade: DiagnosticGrade;
+  rounds: CompletedRound[];
+  at: number;
 }
 
 interface AnsweredItem {
@@ -68,13 +82,14 @@ type Phase =
   | { step: 'intro' }
   | { step: 'loading'; band: BandKey; message: string }
   | { step: 'quiz'; band: BandKey; questions: DiagnosticQuestion[]; index: number }
+  | { step: 'gate' } // public 모드: 다 풀었고, 결과는 가입 후
   | { step: 'result'; res: SubmitResponse };
 
 function correctCount(items: AnsweredItem[]): number {
   return items.filter((it) => it.chosenVocabId === it.vocabId).length;
 }
 
-export function DiagnosticClient({ activeBands, bandBooks, latest, tookToday, prevVocabIds, isFree }: Props) {
+export function DiagnosticClient({ activeBands, bandBooks, latest, tookToday, prevVocabIds, isFree, mode = 'student' }: Props) {
   const [phase, setPhase] = useState<Phase>({ step: 'intro' });
   const [grade, setGrade] = useState<DiagnosticGrade | null>(null);
   const [completedRounds, setCompletedRounds] = useState<CompletedRound[]>([]);
@@ -95,7 +110,7 @@ export function DiagnosticClient({ activeBands, bandBooks, latest, tookToday, pr
       setPhase({ step: 'loading', band, message });
       try {
         const data = await fetchWithToast<{ questions: DiagnosticQuestion[] }>(
-          '/api/voca/diagnostic/questions',
+          mode === 'public' ? '/api/public/diagnostic/questions' : '/api/voca/diagnostic/questions',
           { body: { band, excludeIds: exclude.slice(0, 1000) }, retry: 2, errorMessage: '문제를 불러오지 못했습니다.' },
         );
         setCurrentItems([]);
@@ -104,7 +119,7 @@ export function DiagnosticClient({ activeBands, bandBooks, latest, tookToday, pr
         setPhase({ step: 'intro' });
       }
     },
-    [],
+    [mode],
   );
 
   const submit = useCallback(
@@ -184,12 +199,39 @@ export function DiagnosticClient({ activeBands, bandBooks, latest, tookToday, pr
               ? '잘하는데요? 조금 더 어려운 단어로 볼게요'
               : '이번엔 조금 쉬운 단어로 볼게요';
         loadRound(step.band, [...seenIds, ...items.map((i) => i.vocabId)], message);
+      } else if (mode === 'public') {
+        // value-first: 결과는 가입 후 — 완료분을 담아두고 게이트로
+        try {
+          const pending: PendingDiagnostic = { grade: grade!, rounds, at: Date.now() };
+          localStorage.setItem(PENDING_KEY, JSON.stringify(pending));
+        } catch { /* localStorage 불가 시에도 게이트는 보여준다 */ }
+        track('diagnostic_public_complete', { grade: grade!, rounds: rounds.length });
+        setPhase({ step: 'gate' });
       } else {
         submit(rounds, grade!);
       }
     },
-    [phase, busy, currentItems, completedRounds, activeBands, seenIds, grade, loadRound, submit],
+    [phase, busy, currentItems, completedRounds, activeBands, seenIds, grade, loadRound, submit, mode],
   );
+
+  // 가입 직후 student 모드 진입: /level-test에서 다 푼 진단이 있으면 자동 제출 → 바로 결과
+  useEffect(() => {
+    if (mode !== 'student') return;
+    try {
+      const raw = localStorage.getItem(PENDING_KEY);
+      if (!raw) return;
+      localStorage.removeItem(PENDING_KEY);
+      const pending = JSON.parse(raw) as PendingDiagnostic;
+      if (!pending?.rounds?.length || !pending.grade) return;
+      if (Date.now() - (pending.at ?? 0) > 24 * 60 * 60 * 1000) return;
+      if (tookToday) return; // 오늘 이미 결과가 있으면 하루 1회 제한(409)만 나므로 버린다
+      setGrade(pending.grade);
+      setCompletedRounds(pending.rounds);
+      track('diagnostic_pending_submit', { grade: pending.grade });
+      submit(pending.rounds, pending.grade);
+    } catch { /* 손상된 payload는 무시 */ }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   if (activeBands.length === 0) {
     return <EmptyState />;
@@ -213,6 +255,10 @@ export function DiagnosticClient({ activeBands, bandBooks, latest, tookToday, pr
         <p className="text-center font-medium" style={{ color: VOCA_COLORS.gray }}>{phase.message}</p>
       </div>
     );
+  }
+
+  if (phase.step === 'gate') {
+    return <SignupGateScreen />;
   }
 
   if (phase.step === 'quiz') {
@@ -285,6 +331,43 @@ export function DiagnosticClient({ activeBands, bandBooks, latest, tookToday, pr
       activeBands={activeBands}
       bandBooks={bandBooks}
     />
+  );
+}
+
+/** public 모드 완료 게이트 — 5분 투자를 끝낸 사람에게만 가입을 요구한다 (value-first) */
+function SignupGateScreen() {
+  return (
+    <div className="mx-auto max-w-md space-y-5 text-center">
+      <motion.div
+        initial={{ opacity: 0, scale: 0.96 }}
+        animate={{ opacity: 1, scale: 1 }}
+        className="rounded-3xl p-8"
+        style={{ background: VOCA_COLORS.blueLight }}
+      >
+        <p className="text-5xl">🎉</p>
+        <h2 className="mt-3 text-2xl font-bold" style={{ color: VOCA_COLORS.ink }}>진단 완료!</h2>
+        <p className="mt-2 text-sm leading-relaxed" style={{ color: VOCA_COLORS.gray }}>
+          내 어휘 레벨과 <b style={{ color: VOCA_COLORS.ink }}>모의고사 단어 커버리지 %</b>가 준비됐어요.
+          <br />
+          결과는 가입하면 바로 보여드려요.
+        </p>
+        <div className="mt-5 rounded-2xl bg-white p-4">
+          <p className="text-sm" style={{ color: VOCA_COLORS.gray }}>내 레벨</p>
+          <p className="text-3xl font-bold tracking-widest" style={{ color: VOCA_COLORS.blue, filter: 'blur(10px)', userSelect: 'none' }} aria-hidden>
+            L?
+          </p>
+        </div>
+      </motion.div>
+      <Link
+        href="/signup?next=/student/voca/diagnostic"
+        onClick={() => track('diagnostic_gate_signup_click')}
+        className="inline-block w-full rounded-full py-3.5 text-center text-base font-bold text-white transition-opacity hover:opacity-90"
+        style={{ background: VOCA_COLORS.blue }}
+      >
+        10초 가입하고 결과 보기
+      </Link>
+      <p className="text-xs text-gray-400">무료 · 카드 등록 없음 · 가입 즉시 결과 화면으로 이동해요</p>
+    </div>
   );
 }
 

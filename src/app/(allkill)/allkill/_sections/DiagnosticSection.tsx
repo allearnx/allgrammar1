@@ -47,11 +47,11 @@ export default function DiagnosticSection() {
 
         {/* CTA — 목업으로 결과를 보여준 뒤 행동 유도 */}
         <div style={{ marginTop: 40, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 12 }}>
-          <TrackLink event="landing_diagnostic_click" href="/signup?next=/student/voca/diagnostic" className="ak-btn ak-btn-primary">
-            무료로 레벨 진단 받기
+          <TrackLink event="landing_diagnostic_click" href="/level-test" className="ak-btn ak-btn-primary">
+            가입 없이 바로 진단 시작
           </TrackLink>
           <p style={{ fontSize: 13, color: C.grayLight }}>
-            가입만 하면 바로 진단 · 5분 · 카드 등록 없음
+            가입 없이 시작 · 5분 · 결과 볼 때만 10초 가입
           </p>
         </div>
       </div>
