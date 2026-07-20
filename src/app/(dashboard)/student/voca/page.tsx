@@ -10,6 +10,11 @@ import { isR1Complete } from '@/lib/dashboard/voca-helpers';
 import type { VocaBook, VocaDay, VocaStudentProgress } from '@/types/voca';
 import { VOCA_BOOKS_COLUMNS, VOCA_DAYS_COLUMNS, VOCA_STUDENT_PROGRESS_COLUMNS } from '@/types/voca';
 
+/** 서버 컴포넌트의 요청 시각 기준 판정 — 컴포넌트 본문의 Date.now()는 React 순수성 린트에 걸려 헬퍼로 분리 */
+function isWithinDays(iso: string, days: number): boolean {
+  return Date.now() - new Date(iso).getTime() < days * 24 * 60 * 60 * 1000;
+}
+
 export default async function StudentVocaPage({
   searchParams,
 }: {
@@ -83,9 +88,7 @@ export default async function StudentVocaPage({
       return bookDays.length > 0 && bookDays.every((d) => isR1Complete(progressByDay.get(d.id) ?? null));
     })
     .map((b) => b.title);
-  const diagnosedRecently =
-    !!latestDiagnostic &&
-    Date.now() - new Date(latestDiagnostic.created_at).getTime() < 7 * 24 * 60 * 60 * 1000;
+  const diagnosedRecently = !!latestDiagnostic && isWithinDays(latestDiagnostic.created_at, 7);
   const retestBook =
     completedBookTitles.length > 0 && !diagnosedRecently
       ? { title: completedBookTitles[0], moreCount: completedBookTitles.length - 1 }
