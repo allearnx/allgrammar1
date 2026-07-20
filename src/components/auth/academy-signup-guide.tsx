@@ -42,6 +42,9 @@ export function AcademySignupGuide() {
             <li>보카 3 Day + 내신 1단원 체험</li>
             <li>유료 전환 시 전체 해금</li>
           </ul>
+          <p className="pt-1 text-xs font-semibold text-amber-700">
+            유료 플랜은 학생 10명 월 27,900원부터
+          </p>
         </div>
       </div>
     </div>

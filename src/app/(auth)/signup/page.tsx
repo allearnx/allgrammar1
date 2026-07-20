@@ -15,8 +15,6 @@ import { toast } from 'sonner';
 import { isSafeRedirect } from '@/lib/auth/redirect';
 import type { UserRole } from '@/types/database';
 
-type FreeService = 'naesin' | 'voca';
-
 function SignUpForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -36,7 +34,6 @@ function SignUpForm() {
   const [newAcademyName, setNewAcademyName] = useState('');
   const [contactNumber, setContactNumber] = useState('');
   const [phone, setPhone] = useState('');
-  const [freeService, setFreeService] = useState<FreeService>('naesin');
 
   const isAdminRole = role === 'admin';
 
@@ -46,7 +43,7 @@ function SignUpForm() {
 
     if (isAdminRole) {
       data.academy_name = newAcademyName.trim();
-      data.free_service = freeService;
+      // free_service 미전송 → 학원 트리거가 NULL 생성 = 둘 다 체험 (택1 폐지 정책)
       data.contact_number = contactNumber.trim() || undefined;
     } else {
       const code = inviteCode.trim().toUpperCase();
@@ -146,8 +143,6 @@ function SignUpForm() {
                 <AdminSignupFields
                   academyName={newAcademyName}
                   onAcademyNameChange={setNewAcademyName}
-                  freeService={freeService}
-                  onFreeServiceChange={setFreeService}
                 />
               ) : (
                 <InviteCodeField
@@ -166,6 +161,12 @@ function SignUpForm() {
               >
                 {loading ? '가입 중...' : '회원가입'}
               </button>
+
+              {isAdminRole && nextParam === '/pricing' && (
+                <p className="text-center text-xs text-[#9AA0A6]">
+                  가입하면 요금제 페이지로 이동합니다
+                </p>
+              )}
             </form>
 
             <p className="mt-6 text-center text-sm text-[#3C4043]">
