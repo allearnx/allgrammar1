@@ -93,6 +93,11 @@ export async function getBandBooks(supabase: SupabaseLike): Promise<Record<BandK
     const key = titleToBand.get(b.title);
     if (key) result[key].push(b);
   }
+  // 밴드 내 순서 = bookTitles 설정 순서 (추천 카드의 대표 교재 = 첫 번째) —
+  // DB 조회 순서에 맡기면 나중에 추가된 보조 교재가 대표로 뽑힐 수 있다
+  for (const band of DIAGNOSTIC_BANDS) {
+    result[band.key].sort((a, b) => band.bookTitles.indexOf(a.title) - band.bookTitles.indexOf(b.title));
+  }
   return result;
 }
 
