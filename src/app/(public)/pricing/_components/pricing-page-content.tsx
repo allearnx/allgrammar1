@@ -45,13 +45,14 @@ export function PricingPageContent({
   const isFreeAdmin = isLoggedIn && isAdmin && currentTier !== 'paid';
 
   return (
-    <div className="pt-28 pb-20">
+    // 올킬보카 랜딩과 동일 폰트 체계 — 제목/가격 GmarketSans(brand-display), 본문 Pretendard
+    <div className="pt-28 pb-20" style={{ fontFamily: "'Pretendard', -apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif" }}>
       {/* Hero */}
       <div className="mx-auto max-w-4xl px-4 text-center mb-12">
         <div className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 mb-6" style={{ background: G.blueLight }}>
           <span className="text-sm font-bold" style={{ color: G.blueDark }}>학원 전용 요금제</span>
         </div>
-        <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-4">
+        <h1 className="brand-display text-4xl sm:text-5xl font-bold text-gray-900 mb-4">
           학원 맞춤 요금제
         </h1>
         <p className="text-lg text-gray-500">
@@ -62,7 +63,7 @@ export function PricingPageContent({
       {/* ① 무료 체험 우선 — 결제보다 체험이 먼저 */}
       <div className="mx-auto max-w-2xl px-4 mb-14">
         <div className="rounded-3xl px-8 py-8 text-center" style={{ background: G.sky }}>
-          <h2 className="text-2xl font-bold" style={{ color: G.ink }}>
+          <h2 className="brand-display text-2xl font-bold" style={{ color: G.ink }}>
             먼저 무료로 시작하세요
           </h2>
           <p className="mt-2 text-[15px] text-gray-600">
@@ -86,7 +87,7 @@ export function PricingPageContent({
 
       {/* ② 학생 수 선택 → 결제 */}
       <div className="mx-auto max-w-md px-4">
-        <h2 className="text-2xl font-bold text-center text-gray-900 mb-2">
+        <h2 className="brand-display text-2xl font-bold text-center text-gray-900 mb-2">
           유료 전환은 학생 수만 고르면 끝
         </h2>
         <p className="text-center text-gray-500 mb-6">
@@ -97,7 +98,7 @@ export function PricingPageContent({
 
       {/* ③ 포함 기능 */}
       <div className="mx-auto max-w-3xl px-4 mt-20">
-        <h2 className="text-2xl font-bold text-center text-gray-900 mb-2">
+        <h2 className="brand-display text-2xl font-bold text-center text-gray-900 mb-2">
           모든 플랜에 전부 포함
         </h2>
         <p className="text-center text-gray-500 mb-8">
@@ -123,7 +124,7 @@ export function PricingPageContent({
       {/* ⑤ 대규모 문의 */}
       <div className="mx-auto max-w-2xl px-4 mt-16 text-center">
         <div className="rounded-2xl px-8 py-8" style={{ background: G.blueLight }}>
-          <h3 className="text-xl font-bold text-gray-900 mb-2">
+          <h3 className="brand-display text-xl font-bold text-gray-900 mb-2">
             180명보다 큰 학원이신가요?
           </h3>
           <p className="text-gray-600 mb-5">

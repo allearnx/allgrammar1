@@ -55,7 +55,7 @@ export function SeatPicker({ plans, cta }: { plans: SeatPlan[]; cta: 'signup' | 
       <div className="flex items-center justify-between">
         <span className="text-sm font-semibold text-gray-500">학생 수</span>
         <span className="flex items-center gap-3">
-          <span className="text-lg font-extrabold text-gray-900" style={{ fontVariantNumeric: 'tabular-nums' }}>
+          <span className="brand-display text-lg font-extrabold text-gray-900" style={{ fontVariantNumeric: 'tabular-nums' }}>
             {selected.min_students}명
           </span>
           <button
@@ -72,7 +72,7 @@ export function SeatPicker({ plans, cta }: { plans: SeatPlan[]; cta: 'signup' | 
       <div className="mt-4 flex items-baseline justify-between rounded-xl px-5 py-4" style={{ background: G.blueLight }}>
         <span className="text-sm font-semibold text-gray-600">월 요금</span>
         <span className="text-right">
-          <span className="text-2xl font-extrabold text-gray-900" style={{ fontVariantNumeric: 'tabular-nums' }}>
+          <span className="brand-display text-2xl font-extrabold text-gray-900" style={{ fontVariantNumeric: 'tabular-nums' }}>
             {selected.price_per_unit.toLocaleString()}원
           </span>
           <span className="block text-xs text-gray-500">1인당 {perStudent.toLocaleString()}원</span>
