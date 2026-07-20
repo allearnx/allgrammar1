@@ -11,6 +11,7 @@ import { shuffle } from '@/lib/utils';
 import { cached, TTL } from '@/lib/cache/server-cache';
 import { createAdminClient } from '@/lib/supabase/admin';
 import { DIAGNOSTIC_BANDS, BAND_KEYS, ROUND_SIZE, getBand, type BandKey } from './diagnostic-bands';
+import { BASIC_ENGLISH_WORDS } from './basic-words';
 
 // 서버 supabase 클라이언트 (server/service 어느 쪽이든 쿼리 인터페이스는 동일)
 type SupabaseLike = {
@@ -201,6 +202,12 @@ export async function sampleDiagnosticQuestions(
   const shuffledDayIds = shuffle((days as { id: string }[]).map((d) => d.id));
   // 하위 밴드에 등장하는 쉬운 단어는 출제 제외 (변별력) — 풀이 부족하면 전체 풀로 폴백
   const easySet = new Set(await getLowerBandWords(bandKey));
+  // 모의고사 단어장 밴드(L4+)는 기초 빈도어도 제외 — 지문 추출 리스트라 situation/experience
+  // 같은 기본어가 섞여 첫 라운드가 물러지는 문제 보강. L1~L3 교재 밴드에는 적용 금지
+  // (중등 교재 표제어 자체가 기초 단어라 풀이 무너진다).
+  if (BAND_KEYS.indexOf(bandKey) >= BAND_KEYS.indexOf('L4')) {
+    for (const w of BASIC_ENGLISH_WORDS) easySet.add(w);
+  }
   // 문항 10 + 보기용 여유. 40개 미만이면 보기 다양성이 떨어진다.
   const fullPool = await fetchPool(supabase, shuffledDayIds, new Set(excludeIds), 120, easySet);
   const hardPool = fullPool.filter((w) => !easySet.has(w.front_text.trim().toLowerCase()));
