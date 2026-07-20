@@ -93,6 +93,44 @@ export function PricingPageContent({
         </div>
       </div>
 
+      {/* 5명 단위 상세 요금표 (10~180명, 전 구간 정식 요금) */}
+      <div className="mx-auto max-w-2xl px-4 mt-16">
+        <h2 className="text-2xl font-bold text-center text-gray-900 mb-2">
+          학생 수별 상세 요금
+        </h2>
+        <p className="text-center text-gray-500 mb-8">
+          5명 단위로 딱 맞는 인원을 선택하세요
+        </p>
+        <div className="overflow-x-auto rounded-2xl border border-violet-100 bg-white">
+          <table className="w-full text-sm" style={{ fontVariantNumeric: 'tabular-nums' }}>
+            <thead>
+              <tr className="border-b border-violet-100 bg-violet-50/50">
+                <th className="px-5 py-3 text-left font-semibold text-gray-700" scope="col">학생 수</th>
+                <th className="px-5 py-3 text-right font-semibold text-gray-700" scope="col">월 요금</th>
+                <th className="px-5 py-3 text-right font-semibold text-gray-400" scope="col">1인당</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-gray-100">
+              {Array.from({ length: 35 }, (_, i) => {
+                const seats = 10 + i * 5;
+                const price = 27900 + i * 7000;
+                const highlight = seats === 50 || seats === 100;
+                return (
+                  <tr key={seats} className={highlight ? 'bg-violet-50/40' : undefined}>
+                    <td className="px-5 py-2.5 font-medium text-gray-800">{seats}명</td>
+                    <td className="px-5 py-2.5 text-right font-semibold text-gray-900">{price.toLocaleString()}원</td>
+                    <td className="px-5 py-2.5 text-right text-gray-400">{Math.round(price / seats).toLocaleString()}원</td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+        <p className="text-xs text-gray-400 mt-3 text-center">
+          가입 후 카카오톡 채널 [올라영]으로 인원을 알려주시면 해당 요금으로 시작해드립니다.
+        </p>
+      </div>
+
       {/* 모든 플랜 포함 기능 */}
       <div className="mx-auto max-w-3xl px-4 mt-20">
         <h2 className="text-2xl font-bold text-center text-gray-900 mb-2">
