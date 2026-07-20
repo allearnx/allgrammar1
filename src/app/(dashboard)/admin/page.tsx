@@ -58,7 +58,7 @@ export default async function AdminDashboard() {
         {maxStudents && (
           <div
             className="rounded-xl border bg-white p-4"
-            style={{ borderLeftWidth: 4, borderLeftColor: seatPct >= 90 ? '#F43F5E' : '#06B6D4' }}
+            style={{ borderLeftWidth: 4, borderLeftColor: seatPct >= 90 ? '#EA4335' : '#1A73E8' }}
           >
             <div className="flex items-center justify-between mb-2">
               <span className="text-xs font-semibold uppercase tracking-wider text-gray-500">좌석 현황</span>
@@ -69,7 +69,7 @@ export default async function AdminDashboard() {
                 className="h-full rounded-full transition-all"
                 style={{
                   width: `${seatPct}%`,
-                  background: seatPct >= 90 ? '#F43F5E' : 'linear-gradient(to right, #06B6D4, #4DD9C0)',
+                  background: seatPct >= 90 ? '#EA4335' : '#1A73E8',
                 }}
               />
             </div>

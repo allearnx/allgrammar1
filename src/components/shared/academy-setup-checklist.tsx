@@ -81,7 +81,7 @@ export function AcademySetupChecklist() {
       <button
         onClick={toggle}
         className="w-full flex items-center justify-between px-5 py-4"
-        style={{ background: 'linear-gradient(135deg, #E8F0FE 0%, #D2E3FC 100%)' }}
+        style={{ background: '#E8F0FE' }}
       >
         <div className="flex items-center gap-2.5">
           <Map className="h-5 w-5 text-brand-600" />

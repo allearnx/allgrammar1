@@ -196,7 +196,7 @@ export function AdminOnboardingWizard({ inviteCode, autoOpen, onClose }: Props) 
                   onClick={handleAddStudent}
                   disabled={submitting || !fullName.trim() || !email.trim()}
                   className="flex-1 rounded-[10px] py-2.5 text-sm font-bold text-white transition-all disabled:opacity-50"
-                  style={{ background: '#1A73E8', boxShadow: '0 4px 12px rgba(124,58,237,0.25)' }}
+                  style={{ background: '#1A73E8', boxShadow: '0 4px 12px rgba(26,115,232,0.25)' }}
                 >
                   {submitting ? '추가 중...' : '학생 추가'}
                 </button>
@@ -268,7 +268,7 @@ export function AdminOnboardingWizard({ inviteCode, autoOpen, onClose }: Props) 
               <button
                 onClick={copyFullMessage}
                 className="w-full rounded-[10px] py-2.5 text-sm font-bold text-white transition-all"
-                style={{ background: '#1A73E8', boxShadow: '0 4px 12px rgba(124,58,237,0.25)' }}
+                style={{ background: '#1A73E8', boxShadow: '0 4px 12px rgba(26,115,232,0.25)' }}
               >
                 {copiedField === 'all' ? (
                   <span className="inline-flex items-center gap-1.5">
@@ -308,7 +308,7 @@ export function AdminOnboardingWizard({ inviteCode, autoOpen, onClose }: Props) 
                 <button
                   onClick={() => copyText(inviteCode, 'invite')}
                   className="inline-flex items-center rounded-full px-4 py-2 text-xs font-semibold text-white transition-all"
-                  style={{ background: '#1A73E8', boxShadow: '0 4px 12px rgba(124,58,237,0.25)' }}
+                  style={{ background: '#1A73E8', boxShadow: '0 4px 12px rgba(26,115,232,0.25)' }}
                 >
                   {copiedField === 'invite' ? (
                     <Check className="h-3.5 w-3.5 mr-1.5" />
@@ -328,7 +328,7 @@ export function AdminOnboardingWizard({ inviteCode, autoOpen, onClose }: Props) 
                 onClick={handleComplete}
                 disabled={saving}
                 className="w-full rounded-[10px] py-2.5 text-sm font-bold text-white transition-all disabled:opacity-50"
-                style={{ background: '#1A73E8', boxShadow: '0 4px 12px rgba(124,58,237,0.25)' }}
+                style={{ background: '#1A73E8', boxShadow: '0 4px 12px rgba(26,115,232,0.25)' }}
               >
                 {saving ? '저장 중...' : '시작하기'}
               </button>
