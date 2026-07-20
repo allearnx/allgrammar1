@@ -18,10 +18,18 @@ import type { UserRole } from '@/types/database';
 type FreeService = 'naesin' | 'voca';
 
 function SignUpForm() {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const nextParam = searchParams.get('next');
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [fullName, setFullName] = useState('');
-  const [role, setRole] = useState<UserRole>('student');
+  // ?role=admin 등 URL 파라미터로 초기 역할 지정 — 랜딩 학원 CTA가 원장 폼으로 바로 열리게
+  const [role, setRole] = useState<UserRole>(() => {
+    const r = searchParams.get('role');
+    return r === 'admin' || r === 'teacher' || r === 'student' ? r : 'student';
+  });
   const [inviteCode, setInviteCode] = useState('');
   const [academyName, setAcademyName] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
@@ -29,9 +37,6 @@ function SignUpForm() {
   const [contactNumber, setContactNumber] = useState('');
   const [phone, setPhone] = useState('');
   const [freeService, setFreeService] = useState<FreeService>('naesin');
-  const router = useRouter();
-  const searchParams = useSearchParams();
-  const nextParam = searchParams.get('next');
 
   const isAdminRole = role === 'admin';
 
@@ -94,17 +99,18 @@ function SignUpForm() {
     <div className="relative flex min-h-screen items-center justify-center overflow-hidden px-4 py-12" style={{ background: '#DFEFFF' }}>
       <AuthBrandBg />
 
-      <div className={`relative z-10 w-full transition-all duration-300 grid grid-cols-1 gap-6 items-start ${isAdminRole ? 'max-w-4xl lg:grid-cols-[1fr_380px]' : 'max-w-md'}`}>
-        <div>
-          {/* 로고 + 타이틀 */}
-          <div className="text-center mb-8">
-            <Link href="/">
-              <Image src="/logo.png" alt="올라영" width={72} height={72} className="mx-auto rounded-2xl shadow-lg shadow-brand-200/50" />
-            </Link>
-            <h1 className="auth-display mt-5 text-3xl text-[#1F1F1F] tracking-tight" style={{ fontWeight: 700 }}>회원가입</h1>
-            <p className="auth-display mt-2 text-[#3C4043]" style={{ fontWeight: 500 }}>영어 실력, 알아서 오릅니다</p>
-          </div>
+      <div className={`relative z-10 w-full transition-all duration-300 ${isAdminRole ? 'max-w-4xl' : 'max-w-md'}`}>
+        {/* 로고 + 타이틀 — 그리드 밖에 둬서 폼 카드와 가입 안내 상자의 상단이 나란히 맞는다 */}
+        <div className="text-center mb-8">
+          <Link href="/">
+            <Image src="/logo.png" alt="올라영" width={72} height={72} className="mx-auto rounded-2xl shadow-lg shadow-brand-200/50" />
+          </Link>
+          <h1 className="auth-display mt-5 text-3xl text-[#1F1F1F] tracking-tight" style={{ fontWeight: 700 }}>회원가입</h1>
+          <p className="auth-display mt-2 text-[#3C4043]" style={{ fontWeight: 500 }}>영어 실력, 알아서 오릅니다</p>
+        </div>
 
+        <div className={`grid grid-cols-1 gap-6 items-start ${isAdminRole ? 'lg:grid-cols-[1fr_380px]' : ''}`}>
+        <div>
           {/* 폼 카드 */}
           <div className="rounded-3xl p-8 bg-white border border-gray-200/60 shadow-xl shadow-[#1A73E8]/5">
             <form onSubmit={handleSignUp} className="space-y-5">
@@ -178,6 +184,7 @@ function SignUpForm() {
         </div>
 
         {isAdminRole && <AcademySignupGuide />}
+        </div>
       </div>
     </div>
   );
