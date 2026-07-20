@@ -8,6 +8,7 @@ import { SubscriptionBanner } from '@/components/billing/subscription-banner';
 import { SubscriptionInfoCard } from '@/components/billing/subscription-info-card';
 import { PaymentHistoryCard } from '@/components/billing/payment-history-card';
 import { PlanComparison } from '@/components/billing/plan-comparison';
+import { SeatLadderTable } from '@/components/billing/seat-ladder-table';
 import { requestTossCardAuth, cancelSubscription, calcTrialDaysLeft } from '@/lib/billing/toss-helpers';
 import { deriveTier } from '@/lib/billing/feature-gate';
 import { SUBSCRIPTION_PLAN_COLUMNS, ORDER_COLUMNS, PAYMENT_HISTORY_COLUMNS, type Subscription, type PaymentHistory, type SubscriptionPlan, type Order } from '@/types/billing';
@@ -208,6 +209,17 @@ export function BillingPageContent({ mode }: BillingPageContentProps) {
                 );
               })}
             </div>
+          </section>
+        )}
+
+        {/* 학생 수별 상세 요금 (5명 단위) — 중간 인원은 카톡 문의로 수동 개설 */}
+        {mode === 'academy' && (
+          <section className="space-y-5">
+            <h2 className="text-[17px] font-bold text-gray-900">학생 수별 상세 요금</h2>
+            <SeatLadderTable />
+            <p className="text-xs text-gray-400">
+              표의 인원으로 이용을 원하시면 카카오톡 채널 [올라영]으로 문의 주세요 — 해당 요금으로 개설해드립니다.
+            </p>
           </section>
         )}
 
