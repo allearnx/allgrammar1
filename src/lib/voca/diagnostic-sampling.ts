@@ -8,7 +8,9 @@
  */
 import { hasMeaningOverlap } from '@/lib/voca/meaning-overlap';
 import { shuffle } from '@/lib/utils';
-import { DIAGNOSTIC_BANDS, ROUND_SIZE, getBand, type BandKey } from './diagnostic-bands';
+import { cached, TTL } from '@/lib/cache/server-cache';
+import { createAdminClient } from '@/lib/supabase/admin';
+import { DIAGNOSTIC_BANDS, BAND_KEYS, ROUND_SIZE, getBand, type BandKey } from './diagnostic-bands';
 
 // 서버 supabase 클라이언트 (server/service 어느 쪽이든 쿼리 인터페이스는 동일)
 type SupabaseLike = {
@@ -99,18 +101,61 @@ export async function getActiveBands(supabase: SupabaseLike): Promise<BandKey[]>
   return DIAGNOSTIC_BANDS.map((b) => b.key).filter((k) => bandBooks[k].length > 0);
 }
 
-/** Day를 조금씩 넓혀가며 제외 단어를 뺀 풀을 최소 크기까지 확보 */
+/**
+ * 하위 밴드 교재들에 등장하는 표제어 집합 (소문자) — 상위 밴드 출제에서 제외.
+ * 모고 단어장은 지문 전체에서 추출되어 기본 단어(risk, active, body …)가 다수 섞이는데,
+ * 이를 그대로 출제하면 상위권이 쉬운 단어 덕에 상위 밴드를 통과해 변별이 안 된다
+ * (2026-07-20 릴스 리드 4/6명이 학년 이상 판정된 원인). 5분 캐시.
+ */
+const getLowerBandWords = cached(
+  async (bandKey: BandKey): Promise<string[]> => {
+    const idx = BAND_KEYS.indexOf(bandKey);
+    if (idx <= 0) return [];
+    const lowerTitles = DIAGNOSTIC_BANDS.slice(0, idx).flatMap((b) => b.bookTitles);
+    const admin = createAdminClient();
+    const { data: books } = await admin.from('voca_books').select('id').in('title', lowerTitles);
+    if (!books?.length) return [];
+    const { data: days } = await admin
+      .from('voca_days')
+      .select('id')
+      .in('book_id', books.map((b: { id: string }) => b.id));
+    if (!days?.length) return [];
+    const dayIds = (days as { id: string }[]).map((d) => d.id);
+    const words = new Set<string>();
+    for (let i = 0; i < dayIds.length; i += 40) {
+      let from = 0;
+      while (true) {
+        const { data } = await admin
+          .from('voca_vocabulary')
+          .select('id, front_text')
+          .in('day_id', dayIds.slice(i, i + 40))
+          .order('id')
+          .range(from, from + 999);
+        for (const w of (data ?? []) as { front_text: string }[]) words.add(w.front_text.trim().toLowerCase());
+        if (!data || data.length < 1000) break;
+        from += 1000;
+      }
+    }
+    return [...words];
+  },
+  'diagnostic-lower-words',
+  TTL.CONTENT,
+);
+
+/** Day를 조금씩 넓혀가며 제외 단어를 뺀 풀을 확보 — 변별용(easySet 제외) 단어가 minPool에 찰 때까지 */
 async function fetchPool(
   supabase: SupabaseLike,
   dayIds: string[],
   excludeIds: Set<string>,
   minPool: number,
+  easySet: Set<string>,
 ): Promise<PoolWord[]> {
   const pool: PoolWord[] = [];
   const seenFront = new Set<string>();
   const CHUNK = 12; // Day 12개 ≈ 단어 300~500개
+  let hardCount = 0;
 
-  for (let i = 0; i < dayIds.length && pool.length < minPool; i += CHUNK) {
+  for (let i = 0; i < dayIds.length && hardCount < minPool; i += CHUNK) {
     const chunk = dayIds.slice(i, i + CHUNK);
     const { data } = await supabase
       .from('voca_vocabulary')
@@ -123,6 +168,7 @@ async function fetchPool(
       if (!w.back_text?.trim()) continue;
       seenFront.add(key);
       pool.push(w);
+      if (!easySet.has(key)) hardCount++;
     }
   }
   return pool;
@@ -153,8 +199,12 @@ export async function sampleDiagnosticQuestions(
   if (!days?.length) return null;
 
   const shuffledDayIds = shuffle((days as { id: string }[]).map((d) => d.id));
+  // 하위 밴드에 등장하는 쉬운 단어는 출제 제외 (변별력) — 풀이 부족하면 전체 풀로 폴백
+  const easySet = new Set(await getLowerBandWords(bandKey));
   // 문항 10 + 보기용 여유. 40개 미만이면 보기 다양성이 떨어진다.
-  const pool = await fetchPool(supabase, shuffledDayIds, new Set(excludeIds), 120);
+  const fullPool = await fetchPool(supabase, shuffledDayIds, new Set(excludeIds), 120, easySet);
+  const hardPool = fullPool.filter((w) => !easySet.has(w.front_text.trim().toLowerCase()));
+  const pool = hardPool.length >= ROUND_SIZE + 10 ? hardPool : fullPool;
   if (pool.length < ROUND_SIZE + 3) return null;
 
   // Day 층화 라운드로빈으로 출제 단어 선정
