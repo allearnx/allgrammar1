@@ -159,15 +159,34 @@ export const vocaDiagnosticQuestionsSchema = z.object({
   excludeIds: z.array(ID).max(1000).default([]),
 });
 
+const diagnosticRounds = z.array(z.object({
+  band: diagnosticBand,
+  items: z.array(z.object({
+    vocabId: ID,
+    front_text: SHORT,
+    back_text: SHORT,
+    chosenVocabId: ID.nullable(), // null = "모르겠어요"
+  })).min(1).max(20),
+})).min(1).max(6);
+
 export const vocaDiagnosticSubmitSchema = z.object({
   grade: z.enum(['elementary', 'm1', 'm2', 'm3', 'h1', 'h2', 'h3']),
-  rounds: z.array(z.object({
-    band: diagnosticBand,
-    items: z.array(z.object({
-      vocabId: ID,
-      front_text: SHORT,
-      back_text: SHORT,
-      chosenVocabId: ID.nullable(), // null = "모르겠어요"
-    })).min(1).max(20),
-  })).min(1).max(6),
+  rounds: diagnosticRounds,
+  /** /level-test 익명 완주 기록 id — 가입 제출 시 계정과 연결 */
+  leadId: ID.optional(),
+});
+
+/** 비로그인 완주 기록 (value-first 게이트 도달 시점) */
+export const vocaDiagnosticCompleteSchema = z.object({
+  grade: z.enum(['elementary', 'm1', 'm2', 'm3', 'h1', 'h2', 'h3']),
+  rounds: diagnosticRounds,
+});
+
+/** 게이트 연락처 제출 — leadId가 있으면 기존 기록에 연결, 없으면 rounds로 새로 계산 */
+export const vocaDiagnosticLeadSchema = z.object({
+  name: z.string().trim().min(1).max(30),
+  phone: z.string().trim().regex(/^01[016789]-?\d{3,4}-?\d{4}$/, '올바른 휴대폰 번호가 아닙니다'),
+  leadId: ID.optional(),
+  grade: z.enum(['elementary', 'm1', 'm2', 'm3', 'h1', 'h2', 'h3']).optional(),
+  rounds: diagnosticRounds.optional(),
 });

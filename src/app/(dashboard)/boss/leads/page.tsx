@@ -5,7 +5,7 @@ import { createAdminClient } from '@/lib/supabase/admin';
 import { Topbar } from '@/components/layout/topbar';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Target } from 'lucide-react';
+import { Target, Phone } from 'lucide-react';
 import {
   DIAGNOSTIC_GRADES,
   formatLevel,
@@ -98,13 +98,78 @@ export default async function BossLeadsPage() {
       .sort((a, b) => b.diagnosedAt.localeCompare(a.diagnosedAt));
   }
 
+  // /level-test 게이트에서 연락처만 남긴 리드 (가입 전) + 익명 완주 수
+  const { data: phoneLeadRows } = await admin
+    .from('voca_diagnostic_leads')
+    .select('id, name, phone, grade, final_band, final_qualifier, coverage_score, linked_student_id, created_at')
+    .order('created_at', { ascending: false });
+  const phoneLeads = (phoneLeadRows ?? []).filter((r) => r.phone && !r.linked_student_id);
+  const anonymousCount = (phoneLeadRows ?? []).filter((r) => !r.phone && !r.linked_student_id).length;
+
   const fmt = (iso: string) =>
     new Date(iso).toLocaleDateString('ko-KR', { month: 'numeric', day: 'numeric' });
+
+  const fmtPhone = (p: string) => p.replace(/^(\d{3})(\d{3,4})(\d{4})$/, '$1-$2-$3');
 
   return (
     <>
       <Topbar user={user} title="진단 리드" />
-      <div className="p-4 md:p-6">
+      <div className="p-4 md:p-6 space-y-5">
+        <Card>
+          <CardHeader className="pb-4">
+            <div className="flex items-center gap-2">
+              <div className="rounded-full bg-brand-100 p-2 dark:bg-brand-950">
+                <Phone className="h-5 w-5 text-brand-600 dark:text-brand-400" />
+              </div>
+              <CardTitle className="text-lg">전화번호 리드 — 가입 전 ({phoneLeads.length}명)</CardTitle>
+            </div>
+            <p className="text-sm text-muted-foreground mt-1">
+              레벨테스트를 완주하고 결과 받을 연락처만 남긴 리드예요. 문자·전화 팔로업 대상 1순위.
+              {anonymousCount > 0 && ` (연락처 없이 완주만 하고 간 익명 ${anonymousCount}건)`}
+            </p>
+          </CardHeader>
+          <CardContent>
+            {phoneLeads.length === 0 ? (
+              <p className="py-8 text-center text-sm text-muted-foreground">
+                아직 전화번호 리드가 없어요. /level-test 완주자가 연락처를 남기면 여기에 쌓입니다.
+              </p>
+            ) : (
+              <div className="overflow-x-auto">
+                <table className="w-full text-sm">
+                  <thead>
+                    <tr className="border-b text-left text-xs uppercase tracking-wider text-muted-foreground">
+                      <th className="py-2 pr-4">이름</th>
+                      <th className="py-2 pr-4">휴대폰</th>
+                      <th className="py-2 pr-4">학년</th>
+                      <th className="py-2 pr-4">진단 레벨</th>
+                      <th className="py-2 pr-4">학년 단어 정답률</th>
+                      <th className="py-2">진단일</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {phoneLeads.map((lead) => (
+                      <tr key={lead.id} className="border-b last:border-0 hover:bg-muted/40">
+                        <td className="py-2.5 pr-4 font-medium">{lead.name}</td>
+                        <td className="py-2.5 pr-4 tabular-nums">
+                          <a href={`tel:${lead.phone}`} className="hover:underline">{fmtPhone(lead.phone!)}</a>
+                        </td>
+                        <td className="py-2.5 pr-4">{DIAGNOSTIC_GRADES.find((g) => g.key === lead.grade)?.label ?? lead.grade}</td>
+                        <td className="py-2.5 pr-4">
+                          <Badge variant="outline">
+                            {formatLevel({ band: lead.final_band as BandKey, qualifier: lead.final_qualifier as FinalLevel['qualifier'] })}
+                          </Badge>
+                        </td>
+                        <td className="py-2.5 pr-4 tabular-nums">{lead.coverage_score}%</td>
+                        <td className="py-2.5 text-muted-foreground">{fmt(lead.created_at)}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            )}
+          </CardContent>
+        </Card>
+
         <Card>
           <CardHeader className="pb-4">
             <div className="flex items-center gap-2">

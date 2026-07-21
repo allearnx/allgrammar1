@@ -57,6 +57,8 @@ interface PendingDiagnostic {
   grade: DiagnosticGrade;
   rounds: CompletedRound[];
   at: number;
+  /** 완주 시점의 익명 서버 기록 id — 연락처/계정 연결용 */
+  leadId?: string;
 }
 
 interface AnsweredItem {
@@ -95,6 +97,7 @@ export function DiagnosticClient({ activeBands, bandBooks, latest, tookToday, pr
   const [completedRounds, setCompletedRounds] = useState<CompletedRound[]>([]);
   const [currentItems, setCurrentItems] = useState<AnsweredItem[]>([]);
   const [busy, setBusy] = useState(false);
+  const [leadId, setLeadId] = useState<string | null>(null);
 
   const seenIds = useMemo(
     () => [
@@ -123,13 +126,14 @@ export function DiagnosticClient({ activeBands, bandBooks, latest, tookToday, pr
   );
 
   const submit = useCallback(
-    async (rounds: CompletedRound[], selectedGrade: DiagnosticGrade) => {
+    async (rounds: CompletedRound[], selectedGrade: DiagnosticGrade, linkLeadId?: string) => {
       setPhase({ step: 'loading', band: rounds[rounds.length - 1].band, message: '결과를 분석하고 있어요…' });
       try {
         const res = await fetchWithToast<SubmitResponse>('/api/voca/diagnostic/submit', {
           body: {
             grade: selectedGrade,
             rounds: rounds.map((r) => ({ band: r.band, items: r.items })),
+            ...(linkLeadId ? { leadId: linkLeadId } : {}),
           },
           retry: 2,
           errorMessage: '결과 저장에 실패했습니다.',
@@ -200,13 +204,31 @@ export function DiagnosticClient({ activeBands, bandBooks, latest, tookToday, pr
               : '이번엔 조금 쉬운 단어로 볼게요';
         loadRound(step.band, [...seenIds, ...items.map((i) => i.vocabId)], message);
       } else if (mode === 'public') {
-        // value-first: 결과는 가입 후 — 완료분을 담아두고 게이트로
+        // value-first: 결과는 연락처/가입 후 — 완료분을 담아두고 게이트로
         try {
           const pending: PendingDiagnostic = { grade: grade!, rounds, at: Date.now() };
           localStorage.setItem(PENDING_KEY, JSON.stringify(pending));
         } catch { /* localStorage 불가 시에도 게이트는 보여준다 */ }
         track('diagnostic_public_complete', { grade: grade!, rounds: rounds.length });
         setPhase({ step: 'gate' });
+        // 완주 즉시 익명 서버 기록 — 이탈해도 분포는 남고, 연락처·계정 연결의 앵커가 된다
+        fetchWithToast<{ leadId: string }>('/api/public/diagnostic/complete', {
+          body: { grade: grade!, rounds: rounds.map((r) => ({ band: r.band, items: r.items })) },
+          silent: true,
+          retry: 1,
+        })
+          .then((data) => {
+            setLeadId(data.leadId);
+            try {
+              const raw = localStorage.getItem(PENDING_KEY);
+              if (raw) {
+                const pending = JSON.parse(raw) as PendingDiagnostic;
+                pending.leadId = data.leadId;
+                localStorage.setItem(PENDING_KEY, JSON.stringify(pending));
+              }
+            } catch { /* ignore */ }
+          })
+          .catch(() => { /* 저장 실패해도 게이트는 폴백(rounds 재전송)으로 동작 */ });
       } else {
         submit(rounds, grade!);
       }
@@ -228,7 +250,7 @@ export function DiagnosticClient({ activeBands, bandBooks, latest, tookToday, pr
       setGrade(pending.grade);
       setCompletedRounds(pending.rounds);
       track('diagnostic_pending_submit', { grade: pending.grade });
-      submit(pending.rounds, pending.grade);
+      submit(pending.rounds, pending.grade, pending.leadId);
     } catch { /* 손상된 payload는 무시 */ }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -258,7 +280,21 @@ export function DiagnosticClient({ activeBands, bandBooks, latest, tookToday, pr
   }
 
   if (phase.step === 'gate') {
-    return <SignupGateScreen />;
+    return (
+      <ContactGateScreen
+        onSubmitContact={async (name, phone) => {
+          const body = leadId
+            ? { leadId, name, phone }
+            : { name, phone, grade: grade!, rounds: completedRounds.map((r) => ({ band: r.band, items: r.items })) };
+          const data = await fetchWithToast<{ level: FinalLevel; coverageScore: number }>(
+            '/api/public/diagnostic/lead',
+            { body, retry: 1, errorMessage: '저장에 실패했습니다. 잠시 후 다시 시도해주세요.' },
+          );
+          track('diagnostic_lead_submit', { grade: grade! });
+          setPhase({ step: 'result', res: { id: '', attemptNumber: 1, level: data.level, coverageScore: data.coverageScore } });
+        }}
+      />
+    );
   }
 
   if (phase.step === 'quiz') {
@@ -330,12 +366,34 @@ export function DiagnosticClient({ activeBands, bandBooks, latest, tookToday, pr
       isFree={isFree}
       activeBands={activeBands}
       bandBooks={bandBooks}
+      publicMode={mode === 'public'}
     />
   );
 }
 
-/** public 모드 완료 게이트 — 5분 투자를 끝낸 사람에게만 가입을 요구한다 (value-first) */
-function SignupGateScreen() {
+/**
+ * public 모드 완료 게이트 — 5분 투자를 끝낸 사람에게 "결과 받을 연락처"를 받는다 (value-first).
+ * 주 동선 = 이름+휴대폰 (마찰 최소, 리드 확보). 가입은 결과 화면에서 이어서 유도.
+ */
+function ContactGateScreen({ onSubmitContact }: { onSubmitContact: (name: string, phone: string) => Promise<void> }) {
+  const [name, setName] = useState('');
+  const [phone, setPhone] = useState('');
+  const [submitting, setSubmitting] = useState(false);
+  const valid = name.trim().length >= 1 && /^01[016789]-?\d{3,4}-?\d{4}$/.test(phone.trim());
+
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    if (!valid || submitting) return;
+    setSubmitting(true);
+    try {
+      await onSubmitContact(name.trim(), phone.trim());
+    } catch {
+      // fetchWithToast already toasted
+    } finally {
+      setSubmitting(false);
+    }
+  }
+
   return (
     <div className="mx-auto max-w-md space-y-5 text-center">
       <motion.div
@@ -345,28 +403,49 @@ function SignupGateScreen() {
         style={{ background: VOCA_COLORS.blueLight }}
       >
         <p className="text-5xl">🎉</p>
-        <h2 className="mt-3 text-2xl font-bold" style={{ color: VOCA_COLORS.ink }}>진단 완료!</h2>
+        <h2 className="mt-3 text-2xl font-bold" style={{ color: VOCA_COLORS.ink }}>진단 완료! 결과가 준비됐어요</h2>
         <p className="mt-2 text-sm leading-relaxed" style={{ color: VOCA_COLORS.gray }}>
-          내 어휘 레벨과 <b style={{ color: VOCA_COLORS.ink }}>학년 단어를 몇 % 아는지</b> 준비됐어요.
+          내 어휘 레벨과 <b style={{ color: VOCA_COLORS.ink }}>학년 단어를 몇 % 아는지</b> 나왔어요.
           <br />
-          결과는 가입하면 바로 보여드려요.
+          결과 받을 연락처를 남겨주세요.
         </p>
-        <div className="mt-5 rounded-2xl bg-white p-4">
-          <p className="text-sm" style={{ color: VOCA_COLORS.gray }}>내 레벨</p>
-          <p className="text-3xl font-bold tracking-widest" style={{ color: VOCA_COLORS.blue, filter: 'blur(10px)', userSelect: 'none' }} aria-hidden>
-            L?
-          </p>
-        </div>
+        <form onSubmit={handleSubmit} className="mt-5 space-y-3 text-left">
+          <input
+            type="text"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            placeholder="이름"
+            maxLength={30}
+            className="w-full rounded-2xl border-2 border-white bg-white px-4 py-3 text-base outline-none focus:border-[#1A73E8]"
+          />
+          <input
+            type="tel"
+            value={phone}
+            onChange={(e) => setPhone(e.target.value)}
+            placeholder="휴대폰 번호 (010-0000-0000)"
+            maxLength={13}
+            className="w-full rounded-2xl border-2 border-white bg-white px-4 py-3 text-base outline-none focus:border-[#1A73E8]"
+          />
+          <button
+            type="submit"
+            disabled={!valid || submitting}
+            className="w-full rounded-full py-3.5 text-center text-base font-bold text-white transition-opacity hover:opacity-90 disabled:opacity-40"
+            style={{ background: VOCA_COLORS.blue }}
+          >
+            {submitting ? '결과 확인 중…' : '내 결과 바로 보기'}
+          </button>
+        </form>
+        <p className="mt-3 text-xs" style={{ color: VOCA_COLORS.gray }}>
+          연락처는 결과 안내와 학습 상담 목적으로만 사용해요.
+        </p>
       </motion.div>
       <Link
         href="/signup?next=/student/voca/diagnostic"
         onClick={() => track('diagnostic_gate_signup_click')}
-        className="inline-block w-full rounded-full py-3.5 text-center text-base font-bold text-white transition-opacity hover:opacity-90"
-        style={{ background: VOCA_COLORS.blue }}
+        className="inline-block text-sm font-semibold text-gray-400 underline underline-offset-4 hover:text-gray-600"
       >
-        10초 가입하고 결과 보기
+        또는 10초 가입하고 결과 보기
       </Link>
-      <p className="text-xs text-gray-400">무료 · 카드 등록 없음 · 가입 즉시 결과 화면으로 이동해요</p>
     </div>
   );
 }
@@ -451,6 +530,7 @@ function ResultScreen({
   isFree,
   activeBands,
   bandBooks,
+  publicMode = false,
 }: {
   res: SubmitResponse;
   grade: DiagnosticGrade;
@@ -459,6 +539,7 @@ function ResultScreen({
   isFree: boolean;
   activeBands: BandKey[];
   bandBooks: Record<BandKey, BandBook[]>;
+  publicMode?: boolean;
 }) {
   const gradeInfo = DIAGNOSTIC_GRADES.find((g) => g.key === grade)!;
   const gap = levelGapFromGrade(grade, res.level);
@@ -514,7 +595,7 @@ function ResultScreen({
         </div>
       )}
 
-      <RecommendationCard level={res.level} activeBands={activeBands} bandBooks={bandBooks} isFree={isFree} />
+      <RecommendationCard level={res.level} activeBands={activeBands} bandBooks={bandBooks} isFree={isFree} publicMode={publicMode} />
     </div>
   );
 }
@@ -525,11 +606,13 @@ function RecommendationCard({
   activeBands,
   bandBooks,
   isFree,
+  publicMode = false,
 }: {
   level: FinalLevel;
   activeBands: BandKey[];
   bandBooks: Record<BandKey, BandBook[]>;
   isFree: boolean;
+  publicMode?: boolean;
 }) {
   const band = recommendBandKey(level, activeBands);
   const books = bandBooks[band] ?? [];
@@ -549,7 +632,19 @@ function RecommendationCard({
           </p>
         </>
       )}
-      {isFree ? (
+      {publicMode ? (
+        <>
+          <Link
+            href="/signup?next=/student/voca/diagnostic"
+            onClick={() => track('diagnostic_result_signup_click')}
+            className="mt-3 inline-block rounded-full px-8 py-3 font-bold text-white"
+            style={{ background: VOCA_COLORS.blue }}
+          >
+            가입하고 추천 교재로 시작하기
+          </Link>
+          <p className="mt-2 text-xs text-gray-400">가입하면 이 결과가 계정에 저장되고, 추천 교재부터 바로 학습해요</p>
+        </>
+      ) : isFree ? (
         <>
           <Link
             href="/allkill#price"

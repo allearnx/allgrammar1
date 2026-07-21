@@ -2,7 +2,8 @@ import { NextResponse } from 'next/server';
 import { createApiHandler } from '@/lib/api/handler';
 import { vocaDiagnosticSubmitSchema } from '@/lib/api/schemas/voca';
 import { getActiveBands } from '@/lib/voca/diagnostic-sampling';
-import { resolveFinalLevel, type RoundSummary } from '@/lib/voca/diagnostic-bands';
+import { scoreDiagnosticRounds } from '@/lib/voca/diagnostic-scoring';
+import { createAdminClient } from '@/lib/supabase/admin';
 import type { z } from 'zod';
 
 type Body = z.infer<typeof vocaDiagnosticSubmitSchema>;
@@ -28,32 +29,8 @@ export const POST = createApiHandler<Body>(
     }
 
     // 정답 여부는 서버가 재계산 (선택한 보기의 vocabId === 문항 vocabId)
-    const rounds = body.rounds.map((r) => {
-      const items = r.items.map((it) => ({
-        vocabId: it.vocabId,
-        front_text: it.front_text,
-        back_text: it.back_text,
-        result: it.chosenVocabId === null ? 'unknown' : it.chosenVocabId === it.vocabId ? 'correct' : 'wrong',
-      }));
-      return {
-        band: r.band,
-        total: items.length,
-        correct: items.filter((i) => i.result === 'correct').length,
-        unknown: items.filter((i) => i.result === 'unknown').length,
-        items,
-      };
-    });
-
     const activeBands = await getActiveBands(supabase);
-    const summaries: RoundSummary[] = rounds.map((r) => ({ band: r.band, correct: r.correct, total: r.total }));
-    const level = resolveFinalLevel(summaries, activeBands.length ? activeBands : [rounds[0].band]);
-
-    // 커버리지 = 학년(시작) 밴드에서 푼 전체 문항 누적 정답률 — 확인 라운드 포함 보통 20문항
-    const startBand = rounds[0].band;
-    const startRounds = rounds.filter((r) => r.band === startBand);
-    const cumCorrect = startRounds.reduce((s, r) => s + r.correct, 0);
-    const cumTotal = startRounds.reduce((s, r) => s + r.total, 0);
-    const coverageScore = Math.round((cumCorrect / cumTotal) * 100);
+    const { rounds, level, coverageScore } = scoreDiagnosticRounds(body.rounds, activeBands);
 
     const { data: prev } = await supabase
       .from('voca_diagnostic_results')
@@ -79,6 +56,16 @@ export const POST = createApiHandler<Body>(
       .single();
     if (error) {
       return NextResponse.json({ error: '결과 저장에 실패했습니다.' }, { status: 500 });
+    }
+
+    // /level-test 익명 완주 기록이 있으면 이 계정과 연결 (실패해도 결과 반환에는 영향 없음)
+    if (body.leadId) {
+      const admin = createAdminClient();
+      await admin
+        .from('voca_diagnostic_leads')
+        .update({ linked_student_id: user.id, updated_at: new Date().toISOString() })
+        .eq('id', body.leadId)
+        .is('linked_student_id', null);
     }
 
     return NextResponse.json({
