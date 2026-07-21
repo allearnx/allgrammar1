@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import { createApiHandler } from '@/lib/api/handler';
 import { vocaDiagnosticSubmitSchema } from '@/lib/api/schemas/voca';
 import { getActiveBands } from '@/lib/voca/diagnostic-sampling';
+import { verifyRounds } from '@/lib/voca/diagnostic-token';
 import { scoreDiagnosticRounds } from '@/lib/voca/diagnostic-scoring';
 import { createAdminClient } from '@/lib/supabase/admin';
 import type { z } from 'zod';
@@ -28,9 +29,17 @@ export const POST = createApiHandler<Body>(
       );
     }
 
-    // 정답 여부는 서버가 재계산 (선택한 보기의 vocabId === 문항 vocabId)
+    // 봉인 토큰 검증 — 정오·밴드는 서버만 판정한다 (클라이언트 주장 무시)
+    const verified = await verifyRounds(body.rounds);
+    if (!verified) {
+      return NextResponse.json(
+        { error: '유효하지 않은 진단 기록입니다. 다시 진단해주세요.' },
+        { status: 400 },
+      );
+    }
+
     const activeBands = await getActiveBands(supabase);
-    const { rounds, level, coverageScore } = scoreDiagnosticRounds(body.rounds, activeBands);
+    const { rounds, level, startBand, coverageScore, missed } = scoreDiagnosticRounds(verified, activeBands);
 
     const { data: prev } = await supabase
       .from('voca_diagnostic_results')
@@ -45,7 +54,7 @@ export const POST = createApiHandler<Body>(
       .insert({
         student_id: user.id,
         grade: body.grade,
-        start_band: body.rounds[0].band,
+        start_band: startBand,
         final_band: level.band,
         final_qualifier: level.qualifier,
         coverage_score: coverageScore,
@@ -73,6 +82,8 @@ export const POST = createApiHandler<Body>(
       attemptNumber: saved.attempt_number,
       level,
       coverageScore,
+      startBand,
+      missed,
       rounds: rounds.map(({ items: _items, ...rest }) => rest),
     });
   },

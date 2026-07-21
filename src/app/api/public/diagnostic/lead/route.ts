@@ -3,13 +3,22 @@ import { createAdminClient } from '@/lib/supabase/admin';
 import { checkRateLimit } from '@/lib/api/rate-limit';
 import { vocaDiagnosticLeadSchema } from '@/lib/api/schemas/voca';
 import { getActiveBands } from '@/lib/voca/diagnostic-sampling';
-import { scoreDiagnosticRounds } from '@/lib/voca/diagnostic-scoring';
+import { verifyRounds } from '@/lib/voca/diagnostic-token';
+import { scoreDiagnosticRounds, type ScoredRound } from '@/lib/voca/diagnostic-scoring';
 import { logger } from '@/lib/logger';
+
+function missedFromRounds(rounds: ScoredRound[]): { front_text: string; back_text: string }[] {
+  return rounds
+    .flatMap((r) => r.items ?? [])
+    .filter((i) => i.result !== 'correct')
+    .slice(0, 5)
+    .map((i) => ({ front_text: i.front_text, back_text: i.back_text }));
+}
 
 /**
  * 게이트 연락처 제출 — "결과 받을 연락처"를 남기면 결과를 돌려준다.
  * leadId(완주 시 저장된 익명 기록)에 이름·전번을 붙이는 게 기본 경로.
- * 완주 기록 저장이 실패했던 경우를 대비해 rounds 원본으로 새로 계산·저장하는 폴백도 받는다.
+ * 완주 기록 저장이 실패했던 경우를 대비해 봉인 토큰 rounds로 새로 계산·저장하는 폴백도 받는다.
  */
 export async function POST(request: NextRequest) {
   try {
@@ -34,7 +43,7 @@ export async function POST(request: NextRequest) {
         .update({ name, phone: normalizedPhone, updated_at: new Date().toISOString() })
         .eq('id', leadId)
         .is('phone', null)
-        .select('grade, final_band, final_qualifier, coverage_score')
+        .select('grade, start_band, final_band, final_qualifier, coverage_score, rounds')
         .maybeSingle();
       if (error) {
         logger.error('diagnostic.lead', { error: error.message });
@@ -44,6 +53,8 @@ export async function POST(request: NextRequest) {
         return NextResponse.json({
           level: { band: updated.final_band, qualifier: updated.final_qualifier },
           coverageScore: updated.coverage_score,
+          startBand: updated.start_band,
+          missed: missedFromRounds((updated.rounds ?? []) as ScoredRound[]),
         });
       }
       // 이미 연락처가 붙었거나 없는 id → 폴백으로 진행
@@ -53,8 +64,13 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: '진단 기록을 찾을 수 없습니다. 다시 진단해주세요.' }, { status: 404 });
     }
 
+    const verified = await verifyRounds(rounds);
+    if (!verified) {
+      return NextResponse.json({ error: '유효하지 않은 진단 기록입니다. 다시 진단해주세요.' }, { status: 400 });
+    }
+
     const activeBands = await getActiveBands(admin);
-    const score = scoreDiagnosticRounds(rounds, activeBands);
+    const score = scoreDiagnosticRounds(verified, activeBands);
     const { error: insertError } = await admin.from('voca_diagnostic_leads').insert({
       name,
       phone: normalizedPhone,
@@ -69,7 +85,12 @@ export async function POST(request: NextRequest) {
       logger.error('diagnostic.lead.insert', { error: insertError.message });
       return NextResponse.json({ error: '저장에 실패했습니다.' }, { status: 500 });
     }
-    return NextResponse.json({ level: score.level, coverageScore: score.coverageScore });
+    return NextResponse.json({
+      level: score.level,
+      coverageScore: score.coverageScore,
+      startBand: score.startBand,
+      missed: score.missed,
+    });
   } catch {
     return NextResponse.json({ error: '저장에 실패했습니다.' }, { status: 500 });
   }

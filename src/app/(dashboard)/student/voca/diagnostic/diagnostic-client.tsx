@@ -13,17 +13,15 @@ import { cn } from '@/lib/utils';
 import { fetchWithToast } from '@/lib/fetch-with-toast';
 import { VOCA_COLORS, VOCA_STEP_THEMES } from '@/lib/voca/brand-tokens';
 import {
+  BAND_KEYS,
   DIAGNOSTIC_GRADES,
   getBand,
-  getStartBand,
-  nextStep,
   formatLevel,
   levelGapFromGrade,
   recommendBandKey,
   type BandKey,
   type DiagnosticGrade,
   type FinalLevel,
-  type RoundSummary,
 } from '@/lib/voca/diagnostic-bands';
 import type { DiagnosticQuestion, BandBook } from '@/lib/voca/diagnostic-sampling';
 
@@ -50,8 +48,8 @@ interface Props {
   mode?: 'student' | 'public';
 }
 
-/** 비로그인 진단 완료분 — 가입 후 자동 제출용 (24시간 유효) */
-const PENDING_KEY = 'allkill:pending-diagnostic';
+/** 비로그인 진단 완료분 — 가입 후 자동 제출용 (24시간 유효). v2 = 봉인 토큰 형식 */
+const PENDING_KEY = 'allkill:pending-diagnostic:v2';
 
 interface PendingDiagnostic {
   grade: DiagnosticGrade;
@@ -61,11 +59,10 @@ interface PendingDiagnostic {
   leadId?: string;
 }
 
+/** 정오는 클라이언트가 모른다 — 봉인 토큰과 고른 보기 인덱스만 보관·전송 */
 interface AnsweredItem {
-  vocabId: string;
-  front_text: string;
-  back_text: string;
-  chosenVocabId: string | null;
+  token: string;
+  chosenIndex: number | null;
 }
 
 interface CompletedRound {
@@ -73,23 +70,30 @@ interface CompletedRound {
   items: AnsweredItem[];
 }
 
+interface MissedWord {
+  front_text: string;
+  back_text: string;
+}
+
 interface SubmitResponse {
   id: string;
   attemptNumber: number;
   level: FinalLevel;
   coverageScore: number;
+  startBand?: BandKey;
+  missed?: MissedWord[];
 }
+
+type NextRoundResponse =
+  | { done: true }
+  | { done?: undefined; band: BandKey; questions: DiagnosticQuestion[] };
 
 type Phase =
   | { step: 'intro' }
-  | { step: 'loading'; band: BandKey; message: string }
+  | { step: 'loading'; band: BandKey | null; message: string }
   | { step: 'quiz'; band: BandKey; questions: DiagnosticQuestion[]; index: number }
-  | { step: 'gate' } // public 모드: 다 풀었고, 결과는 가입 후
+  | { step: 'gate' } // public 모드: 다 풀었고, 결과는 연락처/가입 후
   | { step: 'result'; res: SubmitResponse };
-
-function correctCount(items: AnsweredItem[]): number {
-  return items.filter((it) => it.chosenVocabId === it.vocabId).length;
-}
 
 export function DiagnosticClient({ activeBands, bandBooks, latest, tookToday, prevVocabIds, isFree, mode = 'student' }: Props) {
   const [phase, setPhase] = useState<Phase>({ step: 'intro' });
@@ -99,30 +103,33 @@ export function DiagnosticClient({ activeBands, bandBooks, latest, tookToday, pr
   const [busy, setBusy] = useState(false);
   const [leadId, setLeadId] = useState<string | null>(null);
 
-  const seenIds = useMemo(
-    () => [
-      ...prevVocabIds,
-      ...completedRounds.flatMap((r) => r.items.map((it) => it.vocabId)),
-      ...currentItems.map((it) => it.vocabId),
-    ],
-    [prevVocabIds, completedRounds, currentItems],
-  );
-
-  const loadRound = useCallback(
-    async (band: BandKey, exclude: string[], message: string) => {
-      setPhase({ step: 'loading', band, message });
+  /**
+   * 다음 라운드 요청 — 완료 라운드(봉인 토큰+선택)를 서버에 보내면
+   * 서버가 스테어케이스를 판단해 다음 문항 또는 종료(done)를 돌려준다.
+   */
+  const requestNext = useCallback(
+    async (rounds: CompletedRound[], selectedGrade: DiagnosticGrade, message: string): Promise<NextRoundResponse | null> => {
+      const prevBand = rounds.length ? rounds[rounds.length - 1].band : null;
+      setPhase({ step: 'loading', band: prevBand, message });
       try {
-        const data = await fetchWithToast<{ questions: DiagnosticQuestion[] }>(
+        return await fetchWithToast<NextRoundResponse>(
           mode === 'public' ? '/api/public/diagnostic/questions' : '/api/voca/diagnostic/questions',
-          { body: { band, excludeIds: exclude.slice(0, 1000) }, retry: 2, errorMessage: '문제를 불러오지 못했습니다.' },
+          {
+            body: {
+              grade: selectedGrade,
+              rounds: rounds.map((r) => r.items),
+              excludeIds: prevVocabIds.slice(0, 1000),
+            },
+            retry: 2,
+            errorMessage: '문제를 불러오지 못했습니다.',
+          },
         );
-        setCurrentItems([]);
-        setPhase({ step: 'quiz', band, questions: data.questions, index: 0 });
       } catch {
         setPhase({ step: 'intro' });
+        return null;
       }
     },
-    [mode],
+    [mode, prevVocabIds],
   );
 
   const submit = useCallback(
@@ -132,7 +139,7 @@ export function DiagnosticClient({ activeBands, bandBooks, latest, tookToday, pr
         const res = await fetchWithToast<SubmitResponse>('/api/voca/diagnostic/submit', {
           body: {
             grade: selectedGrade,
-            rounds: rounds.map((r) => ({ band: r.band, items: r.items })),
+            rounds: rounds.map((r) => r.items),
             ...(linkLeadId ? { leadId: linkLeadId } : {}),
           },
           retry: 2,
@@ -150,32 +157,62 @@ export function DiagnosticClient({ activeBands, bandBooks, latest, tookToday, pr
     [],
   );
 
+  /** 모든 라운드 종료 후 처리 — public은 익명 저장 + 게이트, student는 제출 */
+  const finishRounds = useCallback(
+    (rounds: CompletedRound[], selectedGrade: DiagnosticGrade) => {
+      if (mode !== 'public') {
+        submit(rounds, selectedGrade);
+        return;
+      }
+      // value-first: 결과는 연락처/가입 후 — 완료분을 담아두고 게이트로
+      try {
+        const pending: PendingDiagnostic = { grade: selectedGrade, rounds, at: Date.now() };
+        localStorage.setItem(PENDING_KEY, JSON.stringify(pending));
+      } catch { /* localStorage 불가 시에도 게이트는 보여준다 */ }
+      track('diagnostic_public_complete', { grade: selectedGrade, rounds: rounds.length });
+      setPhase({ step: 'gate' });
+      // 완주 즉시 익명 서버 기록 — 이탈해도 분포는 남고, 연락처·계정 연결의 앵커가 된다
+      fetchWithToast<{ leadId: string }>('/api/public/diagnostic/complete', {
+        body: { grade: selectedGrade, rounds: rounds.map((r) => r.items) },
+        silent: true,
+        retry: 1,
+      })
+        .then((data) => {
+          setLeadId(data.leadId);
+          try {
+            const raw = localStorage.getItem(PENDING_KEY);
+            if (raw) {
+              const pending = JSON.parse(raw) as PendingDiagnostic;
+              pending.leadId = data.leadId;
+              localStorage.setItem(PENDING_KEY, JSON.stringify(pending));
+            }
+          } catch { /* ignore */ }
+        })
+        .catch(() => { /* 저장 실패해도 게이트는 폴백(rounds 재전송)으로 동작 */ });
+    },
+    [mode, submit],
+  );
+
   const startDiagnostic = useCallback(
-    (g: DiagnosticGrade) => {
+    async (g: DiagnosticGrade) => {
       track('diagnostic_start', { grade: g });
       setGrade(g);
       setCompletedRounds([]);
-      const band = getStartBand(g, activeBands);
-      loadRound(band, prevVocabIds, '단어를 고르고 있어요…');
+      const data = await requestNext([], g, '단어를 고르고 있어요…');
+      if (!data || data.done) return;
+      setCurrentItems([]);
+      setPhase({ step: 'quiz', band: data.band, questions: data.questions, index: 0 });
     },
-    [activeBands, prevVocabIds, loadRound],
+    [requestNext],
   );
 
   const handleAnswer = useCallback(
-    (chosenVocabId: string | null) => {
+    async (chosenIndex: number | null) => {
       if (phase.step !== 'quiz' || busy) return;
-      const q = phase.questions[phase.index];
       // 더블클릭 등으로 같은 문항이 두 번 기록되는 것 방지
-      if (currentItems.some((it) => it.vocabId === q.vocabId)) return;
-      const correctOption = q.options.find((o) => o.vocabId === q.vocabId);
-      // 오답 표시용 영어/뜻은 유형에 따라 prompt·정답 보기에서 조합
-      const item: AnsweredItem = {
-        vocabId: q.vocabId,
-        front_text: q.type === 'ko-to-en' ? (correctOption?.text ?? '') : q.prompt,
-        back_text: q.type === 'ko-to-en' ? q.prompt : (correctOption?.text ?? ''),
-        chosenVocabId,
-      };
-      const items = [...currentItems, item];
+      if (currentItems.length > phase.index) return;
+      const q = phase.questions[phase.index];
+      const items = [...currentItems, { token: q.token, chosenIndex }];
       setCurrentItems(items);
 
       if (phase.index + 1 < phase.questions.length) {
@@ -183,57 +220,31 @@ export function DiagnosticClient({ activeBands, bandBooks, latest, tookToday, pr
         return;
       }
 
-      // 라운드 종료 → 스테어케이스 판단
+      // 라운드 종료 → 서버가 스테어케이스 판단 (다음 밴드 또는 종료)
       setBusy(true);
-      const rounds = [...completedRounds, { band: phase.band, items }];
+      const prevBand = phase.band;
+      const rounds = [...completedRounds, { band: prevBand, items }];
       setCompletedRounds(rounds);
-      const summaries: RoundSummary[] = rounds.map((r) => ({
-        band: r.band,
-        correct: correctCount(r.items),
-        total: r.items.length,
-      }));
-      const step = nextStep(summaries, activeBands);
+      const data = await requestNext(rounds, grade!, '결과를 확인하고 있어요…');
       setBusy(false);
-
-      if (step.type === 'continue') {
-        const message =
-          step.band === phase.band
-            ? '정확한 측정을 위해 같은 레벨을 한 번 더 볼게요'
-            : step.band > phase.band
-              ? '잘하는데요? 조금 더 어려운 단어로 볼게요'
-              : '이번엔 조금 쉬운 단어로 볼게요';
-        loadRound(step.band, [...seenIds, ...items.map((i) => i.vocabId)], message);
-      } else if (mode === 'public') {
-        // value-first: 결과는 연락처/가입 후 — 완료분을 담아두고 게이트로
-        try {
-          const pending: PendingDiagnostic = { grade: grade!, rounds, at: Date.now() };
-          localStorage.setItem(PENDING_KEY, JSON.stringify(pending));
-        } catch { /* localStorage 불가 시에도 게이트는 보여준다 */ }
-        track('diagnostic_public_complete', { grade: grade!, rounds: rounds.length });
-        setPhase({ step: 'gate' });
-        // 완주 즉시 익명 서버 기록 — 이탈해도 분포는 남고, 연락처·계정 연결의 앵커가 된다
-        fetchWithToast<{ leadId: string }>('/api/public/diagnostic/complete', {
-          body: { grade: grade!, rounds: rounds.map((r) => ({ band: r.band, items: r.items })) },
-          silent: true,
-          retry: 1,
-        })
-          .then((data) => {
-            setLeadId(data.leadId);
-            try {
-              const raw = localStorage.getItem(PENDING_KEY);
-              if (raw) {
-                const pending = JSON.parse(raw) as PendingDiagnostic;
-                pending.leadId = data.leadId;
-                localStorage.setItem(PENDING_KEY, JSON.stringify(pending));
-              }
-            } catch { /* ignore */ }
-          })
-          .catch(() => { /* 저장 실패해도 게이트는 폴백(rounds 재전송)으로 동작 */ });
-      } else {
-        submit(rounds, grade!);
+      if (!data) return;
+      if (data.done) {
+        finishRounds(rounds, grade!);
+        return;
       }
+      const dir = BAND_KEYS.indexOf(data.band) - BAND_KEYS.indexOf(prevBand);
+      const message =
+        dir === 0
+          ? '정확한 측정을 위해 같은 레벨을 한 번 더 볼게요'
+          : dir > 0
+            ? '잘하는데요? 조금 더 어려운 단어로 볼게요'
+            : '이번엔 조금 쉬운 단어로 볼게요';
+      setPhase({ step: 'loading', band: data.band, message });
+      await new Promise((r) => setTimeout(r, 900));
+      setCurrentItems([]);
+      setPhase({ step: 'quiz', band: data.band, questions: data.questions, index: 0 });
     },
-    [phase, busy, currentItems, completedRounds, activeBands, seenIds, grade, loadRound, submit, mode],
+    [phase, busy, currentItems, completedRounds, grade, requestNext, finishRounds],
   );
 
   // 가입 직후 student 모드 진입: /level-test에서 다 푼 진단이 있으면 자동 제출 → 바로 결과
@@ -285,13 +296,16 @@ export function DiagnosticClient({ activeBands, bandBooks, latest, tookToday, pr
         onSubmitContact={async (name, phone) => {
           const body = leadId
             ? { leadId, name, phone }
-            : { name, phone, grade: grade!, rounds: completedRounds.map((r) => ({ band: r.band, items: r.items })) };
-          const data = await fetchWithToast<{ level: FinalLevel; coverageScore: number }>(
+            : { name, phone, grade: grade!, rounds: completedRounds.map((r) => r.items) };
+          const data = await fetchWithToast<{ level: FinalLevel; coverageScore: number; startBand?: BandKey; missed?: MissedWord[] }>(
             '/api/public/diagnostic/lead',
             { body, retry: 1, errorMessage: '저장에 실패했습니다. 잠시 후 다시 시도해주세요.' },
           );
           track('diagnostic_lead_submit', { grade: grade! });
-          setPhase({ step: 'result', res: { id: '', attemptNumber: 1, level: data.level, coverageScore: data.coverageScore } });
+          setPhase({
+            step: 'result',
+            res: { id: '', attemptNumber: 1, level: data.level, coverageScore: data.coverageScore, startBand: data.startBand, missed: data.missed },
+          });
         }}
       />
     );
@@ -330,8 +344,8 @@ export function DiagnosticClient({ activeBands, bandBooks, latest, tookToday, pr
                 const theme = VOCA_STEP_THEMES[i % VOCA_STEP_THEMES.length];
                 return (
                   <button
-                    key={option.vocabId}
-                    onClick={() => handleAnswer(option.vocabId)}
+                    key={`${phase.index}-${i}`}
+                    onClick={() => handleAnswer(i)}
                     className="flex w-full items-center gap-3 rounded-2xl border-2 border-gray-200 bg-white px-4 py-3.5 text-left text-lg font-medium text-gray-700 transition-all hover:-translate-y-0.5 hover:border-gray-300 hover:shadow-md active:scale-[0.99]"
                   >
                     <span
@@ -340,7 +354,7 @@ export function DiagnosticClient({ activeBands, bandBooks, latest, tookToday, pr
                     >
                       {i + 1}
                     </span>
-                    {option.text}
+                    {option}
                   </button>
                 );
               })}
@@ -545,12 +559,9 @@ function ResultScreen({
 }) {
   const gradeInfo = DIAGNOSTIC_GRADES.find((g) => g.key === grade)!;
   const gap = levelGapFromGrade(grade, res.level);
-  // 커버리지는 1라운드(학년 시작 밴드) 정답률이므로 출처 라벨도 1라운드 밴드 기준
-  const sourceLabel = getBand(rounds[0].band).sourceLabel;
-  const missed = rounds
-    .flatMap((r) => r.items)
-    .filter((it) => it.chosenVocabId !== it.vocabId)
-    .slice(0, 5);
+  // 정답률 라벨은 시작(학년) 밴드 기준 — 정오는 서버만 알므로 놓친 단어도 서버 응답에서 받는다
+  const sourceLabel = getBand(res.startBand ?? rounds[0]?.band ?? res.level.band).sourceLabel;
+  const missed = res.missed ?? [];
   const delta = previous ? res.coverageScore - previous.coverageScore : null;
 
   const gapText =
@@ -588,7 +599,7 @@ function ResultScreen({
           <p className="mb-3 text-sm font-bold" style={{ color: VOCA_COLORS.gray }}>이런 단어를 놓쳤어요</p>
           <ul className="space-y-2">
             {missed.map((it) => (
-              <li key={it.vocabId} className="flex items-baseline justify-between gap-3 text-sm">
+              <li key={it.front_text} className="flex items-baseline justify-between gap-3 text-sm">
                 <span className="font-bold" style={{ color: VOCA_COLORS.ink }}>{it.front_text}</span>
                 <span className="text-right text-gray-500">{it.back_text}</span>
               </li>

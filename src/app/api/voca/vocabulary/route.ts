@@ -6,7 +6,9 @@ import { isValidFrontText } from '@/lib/voca/vocab-guard';
 import { VOCA_VOCABULARY_COLUMNS } from '@/types/voca';
 
 // GET — 단어 목록 (dayId 쿼리 파라미터)
-export const GET = createApiHandler({ hasBody: false }, async ({ request, supabase }) => {
+// 관리 화면 전용 — 학생 학습 화면은 서버 컴포넌트에서 조회한다.
+// 학생 계정으로 임의 dayId의 단어장(뜻·스펠링 정답 포함)을 덤프하는 것 방지.
+export const GET = createApiHandler({ roles: ['teacher', 'admin', 'boss'], hasBody: false }, async ({ request, supabase }) => {
   const { searchParams } = new URL(request.url);
   const dayId = searchParams.get('dayId');
   if (!dayId) return NextResponse.json({ error: 'dayId is required' }, { status: 400 });

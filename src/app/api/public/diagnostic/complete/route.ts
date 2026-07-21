@@ -3,6 +3,7 @@ import { createAdminClient } from '@/lib/supabase/admin';
 import { checkRateLimit } from '@/lib/api/rate-limit';
 import { vocaDiagnosticCompleteSchema } from '@/lib/api/schemas/voca';
 import { getActiveBands } from '@/lib/voca/diagnostic-sampling';
+import { verifyRounds } from '@/lib/voca/diagnostic-token';
 import { scoreDiagnosticRounds } from '@/lib/voca/diagnostic-scoring';
 import { logger } from '@/lib/logger';
 
@@ -23,9 +24,14 @@ export async function POST(request: NextRequest) {
     const limited = await checkRateLimit(`diagnostic-complete:${ip}`, '/api/public/diagnostic/complete', 10, 60_000);
     if (limited) return limited;
 
+    const verified = await verifyRounds(parsed.data.rounds);
+    if (!verified) {
+      return NextResponse.json({ error: '유효하지 않은 진단 기록입니다.' }, { status: 400 });
+    }
+
     const admin = createAdminClient();
     const activeBands = await getActiveBands(admin);
-    const score = scoreDiagnosticRounds(parsed.data.rounds, activeBands);
+    const score = scoreDiagnosticRounds(verified, activeBands);
 
     const { data: saved, error } = await admin
       .from('voca_diagnostic_leads')

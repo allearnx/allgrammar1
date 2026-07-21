@@ -12,6 +12,7 @@ import { cached, TTL } from '@/lib/cache/server-cache';
 import { createAdminClient } from '@/lib/supabase/admin';
 import { DIAGNOSTIC_BANDS, BAND_KEYS, ROUND_SIZE, getBand, type BandKey } from './diagnostic-bands';
 import { BASIC_ENGLISH_WORDS } from './basic-words';
+import { signDiagnosticToken } from './diagnostic-token';
 
 // 서버 supabase 클라이언트 (server/service 어느 쪽이든 쿼리 인터페이스는 동일)
 type SupabaseLike = {
@@ -26,18 +27,17 @@ interface PoolWord {
   part_of_speech: string | null;
 }
 
-export interface DiagnosticOption {
-  vocabId: string;
-  text: string;
-}
-
 export type DiagnosticQuestionType = 'en-to-ko' | 'ko-to-en';
 
+/**
+ * 클라이언트에 내려가는 문항 — 정답 정보는 token(HMAC 봉인)에만 있다.
+ * options는 순수 텍스트 배열이라 어떤 보기가 정답인지 클라이언트에서 알 수 없다.
+ */
 export interface DiagnosticQuestion {
-  vocabId: string;
+  token: string;
   type: DiagnosticQuestionType;
   prompt: string; // en-to-ko: front_text / ko-to-en: back_text
-  options: DiagnosticOption[]; // 4개, 정답 포함 셔플
+  options: string[]; // 4개, 정답 포함 셔플
 }
 
 /** 품사 문자열("n. v.", "동사" 등)을 비교용 토큰으로 분해 */
@@ -240,7 +240,7 @@ export async function sampleDiagnosticQuestions(
     if (!picked) break;
   }
 
-  return targets.map((target) => {
+  return Promise.all(targets.map(async (target) => {
     // 오답 보기 우선순위: ①같은 품사 + 뜻 안 겹침 ②다른 품사 + 뜻 안 겹침 ③뜻 겹침(최후).
     // 품사가 다른 보기는 그것만으로 배제 가능해 정답이 추측된다 → 같은 품사 우선.
     const samePosSafe: PoolWord[] = [];
@@ -265,15 +265,21 @@ export async function sampleDiagnosticQuestions(
     // 유형 50% 혼합 — 방향이 바뀌면 추측 패턴도 깨진다
     const type: DiagnosticQuestionType = Math.random() < 0.5 ? 'en-to-ko' : 'ko-to-en';
     const optionText = (w: PoolWord) => (type === 'en-to-ko' ? w.back_text : w.front_text);
-    const options = shuffle([
-      { vocabId: target.id, text: optionText(target) },
-      ...distractors.map((d) => ({ vocabId: d.id, text: optionText(d) })),
-    ]);
+    const shuffled = shuffle([target, ...distractors]);
+    const correctIndex = shuffled.findIndex((w) => w.id === target.id);
+    // 정답 인덱스·단어·밴드를 토큰에 봉인 — 클라이언트에는 텍스트만 내려간다
+    const token = await signDiagnosticToken({
+      v: target.id,
+      f: target.front_text,
+      b: target.back_text,
+      c: correctIndex,
+      band: bandKey,
+    });
     return {
-      vocabId: target.id,
+      token,
       type,
       prompt: type === 'en-to-ko' ? target.front_text : target.back_text,
-      options,
+      options: shuffled.map(optionText),
     };
-  });
+  }));
 }
