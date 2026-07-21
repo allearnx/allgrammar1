@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { BookOpen, ChevronDown, CheckCircle } from 'lucide-react';
 import { BonusExam } from '@/components/voca/bonus-exam';
 import { AssignedExams } from '@/components/voca/assigned-exams';
+import { Round2SynAntExam } from '@/components/voca/round2-syn-ant-exam';
 import { VocaBrandStyle, VocaHeroLetters, VOCA_COLORS } from '@/components/voca/voca-brand';
 import type { VocaBook, VocaDay } from '@/types/voca';
 import { DEFAULT_EXAM_INTENSITY, type ExamIntensity } from '@/lib/voca/exam-intensity';
@@ -23,6 +24,7 @@ interface VocaExamClientProps {
 export function VocaExamClient({ books, days, studentId, freeDayLimit = 0, examIntensity = DEFAULT_EXAM_INTENSITY }: VocaExamClientProps) {
   const bookStorageKey = `voca:selectedBookId:${studentId}`;
   const [selectedBookId, setSelectedBookId] = useState<string>(books[0]?.id || '');
+  const [examRound, setExamRound] = useState<1 | 2>(1);
 
   // 보카 홈에서 보던 교재를 기본 선택
   useEffect(() => {
@@ -77,13 +79,32 @@ export function VocaExamClient({ books, days, studentId, freeDayLimit = 0, examI
         <ExamBookSelector books={books} selectedBookId={selectedBookId} onSelect={setSelectedBookId} />
       </div>
 
-      {/* Day 선택 + 시험 (기존 컴포넌트 재사용) */}
+      {/* 시험 유형 선택 — 1회독(표제어 스펠링) / 2회독(유의어·반의어) */}
+      <div className="flex gap-2">
+        {([1, 2] as const).map((r) => (
+          <button
+            key={r}
+            onClick={() => setExamRound(r)}
+            className={`flex-1 rounded-2xl border-2 px-4 py-3 text-sm font-bold transition-all ${
+              examRound === r
+                ? 'border-[#1A73E8] bg-[#E8F0FE] text-[#174EA6]'
+                : 'border-gray-200 bg-white text-gray-500 hover:border-gray-300'
+            }`}
+          >
+            {r === 1 ? '1회독 · 표제어 스펠링' : '2회독 · 유의어·반의어'}
+          </button>
+        ))}
+      </div>
+
+      {/* Day 선택 + 시험 */}
       {filteredDays.length === 0 ? (
         <div className="rounded-3xl bg-white p-8 text-center text-sm text-gray-400">
           {selectedBook?.title}에 아직 등록된 Day가 없어요
         </div>
-      ) : (
+      ) : examRound === 1 ? (
         <BonusExam key={selectedBookId} days={filteredDays} bookId={selectedBookId} intensity={examIntensity} />
+      ) : (
+        <Round2SynAntExam key={`r2-${selectedBookId}`} days={filteredDays} bookId={selectedBookId} intensity={examIntensity} />
       )}
 
       {freeDayLimit > 0 && (
