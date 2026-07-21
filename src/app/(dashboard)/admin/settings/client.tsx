@@ -14,9 +14,11 @@ import { EXAM_PRESETS, resolveExamIntensity, matchPreset } from '@/lib/voca/exam
 interface Props {
   academy: Academy;
   currentStudents: number;
+  /** 학원 정보(이름·연락처·주소·사업자번호·초대코드) 편집 권한. 선생님은 false → 학습 설정만 */
+  canEditAcademyInfo?: boolean;
 }
 
-export function AcademySettingsClient({ academy, currentStudents }: Props) {
+export function AcademySettingsClient({ academy, currentStudents, canEditAcademyInfo = true }: Props) {
   const router = useRouter();
   const [saving, setSaving] = useState(false);
   const [copied, setCopied] = useState(false);
@@ -130,7 +132,8 @@ export function AcademySettingsClient({ academy, currentStudents }: Props) {
         </div>
       )}
 
-      {/* 초대 코드 */}
+      {/* 초대 코드 — 원장 전용 */}
+      {canEditAcademyInfo && (
       <div
         className="relative overflow-hidden rounded-2xl p-6 text-white"
         style={{ background: 'linear-gradient(135deg, #4285F4 0%, #1A73E8 50%, #174EA6 100%)' }}
@@ -155,17 +158,19 @@ export function AcademySettingsClient({ academy, currentStudents }: Props) {
           </p>
         </div>
       </div>
+      )}
 
-      {/* 학원 정보 */}
+      {/* 학원 정보 / 학습 설정 */}
       <div className="rounded-xl border bg-white p-5">
         <div className="flex items-center gap-2 mb-5">
           <div className="inline-flex rounded-lg bg-brand-50 p-2">
             <Building2 className="h-5 w-5 text-brand-600" />
           </div>
-          <h3 className="font-semibold">학원 정보</h3>
+          <h3 className="font-semibold">{canEditAcademyInfo ? '학원 정보' : '학습 설정'}</h3>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-4">
+          {canEditAcademyInfo && (<>
           <div className="space-y-1.5">
             <Label htmlFor="name" className="text-xs font-semibold uppercase tracking-wider text-gray-500">학원 이름</Label>
             <div className="relative">
@@ -232,6 +237,7 @@ export function AcademySettingsClient({ academy, currentStudents }: Props) {
               />
             </div>
           </div>
+          </>)}
           {/* 표제어 시험 학원 기본 강도 */}
           <div className="rounded-lg border p-4">
             <p className="text-sm font-medium">표제어 시험 기본 강도</p>

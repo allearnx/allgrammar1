@@ -36,12 +36,16 @@ export const PATCH = createApiHandler(
     }
     const admin = createAdminClient();
     const updates: Record<string, unknown> = { updated_at: new Date().toISOString() };
-    if (body.name !== undefined && body.name !== null) updates.name = body.name.trim();
-    if (body.contact_phone !== undefined) updates.contact_phone = body.contact_phone;
-    if (body.contact_email !== undefined) updates.contact_email = body.contact_email;
-    if (body.address !== undefined) updates.address = body.address;
-    if (body.logo_url !== undefined) updates.logo_url = body.logo_url;
-    if (body.business_number !== undefined) updates.business_number = body.business_number;
+    // 민감 정보(학원명·연락처·주소·사업자번호·로고)는 원장(admin)·보스만. 선생님은 학습 설정만.
+    const canEditAcademyInfo = user.role !== 'teacher';
+    if (canEditAcademyInfo) {
+      if (body.name !== undefined && body.name !== null) updates.name = body.name.trim();
+      if (body.contact_phone !== undefined) updates.contact_phone = body.contact_phone;
+      if (body.contact_email !== undefined) updates.contact_email = body.contact_email;
+      if (body.address !== undefined) updates.address = body.address;
+      if (body.logo_url !== undefined) updates.logo_url = body.logo_url;
+      if (body.business_number !== undefined) updates.business_number = body.business_number;
+    }
     if (body.naesin_required_rounds !== undefined && body.naesin_required_rounds !== null) {
       updates.naesin_required_rounds = body.naesin_required_rounds;
     }

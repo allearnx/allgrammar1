@@ -38,7 +38,7 @@ export default async function TeacherSettingsPage() {
           </div>
         </div>
 
-        <AcademySettingsClient academy={academy!} currentStudents={currentStudents || 0} />
+        <AcademySettingsClient academy={academy!} currentStudents={currentStudents || 0} canEditAcademyInfo={user.role !== 'teacher'} />
       </div>
     </>
   );
