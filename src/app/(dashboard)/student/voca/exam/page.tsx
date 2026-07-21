@@ -6,6 +6,7 @@ import { getPlanContext } from '@/lib/billing/get-plan-context';
 import { VocaExamClient } from './client';
 import type { VocaBook, VocaDay } from '@/types/voca';
 import { VOCA_BOOKS_COLUMNS, VOCA_DAYS_COLUMNS } from '@/types/voca';
+import { resolveExamIntensity } from '@/lib/voca/exam-intensity';
 
 /** 올킬시험 — 묶음 표제어 스펠링 시험 전용 페이지 (보카 홈 하단 카드에서 승격) */
 export default async function VocaExamPage() {
@@ -15,13 +16,15 @@ export default async function VocaExamPage() {
   // 보카 홈과 동일한 접근 규칙: 배정 or 무료 체험
   const { data: assignment } = await supabase
     .from('service_assignments')
-    .select('id')
+    .select('id, voca_exam_pass_score, voca_exam_seconds_per_word, voca_exam_retry_wrong')
     .eq('student_id', user.id)
     .eq('service', 'voca')
     .single();
 
   const plan = await getPlanContext(user.academy_id, user.id);
   if (!assignment && plan.tier !== 'free') redirect('/student');
+
+  const examIntensity = resolveExamIntensity(assignment);
 
   const { data: books } = await supabase
     .from('voca_books').select(VOCA_BOOKS_COLUMNS).eq('is_active', true).order('created_at');
@@ -46,6 +49,7 @@ export default async function VocaExamPage() {
           days={days}
           studentId={user.id}
           freeDayLimit={plan.tier === 'free' ? 3 : 0}
+          examIntensity={examIntensity}
         />
       </div>
     </>

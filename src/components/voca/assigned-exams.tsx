@@ -6,8 +6,8 @@ import { RhythmSpelling } from '@/components/voca/neon/rhythm-spelling';
 import { fetchWithToast } from '@/lib/fetch-with-toast';
 import { shuffle } from '@/lib/utils';
 import { VOCA_VOCABULARY_COLUMNS, type VocaVocabulary } from '@/types/voca';
+import { DEFAULT_EXAM_INTENSITY, type ExamIntensity } from '@/lib/voca/exam-intensity';
 
-const PASS = 90;
 type WrongWord = { front_text: string; back_text: string };
 interface Assignment {
   id: string;
@@ -19,7 +19,8 @@ interface Assignment {
 }
 
 /** 학생 홈 — 선생님이 배정한 묶음 시험 목록 + 응시 */
-export function AssignedExams() {
+export function AssignedExams({ intensity = DEFAULT_EXAM_INTENSITY }: { intensity?: ExamIntensity }) {
+  const PASS = intensity.passScore;
   const [assignments, setAssignments] = useState<Assignment[]>([]);
   const [dayTitles, setDayTitles] = useState<Record<string, string>>({});
   const [active, setActive] = useState<Assignment | null>(null);
@@ -79,13 +80,15 @@ export function AssignedExams() {
         <button onClick={() => setActive(null)} className="text-sm font-medium text-gray-500 hover:text-gray-700">← 그만두기</button>
         <div className="rounded-2xl bg-accent px-4 py-3 text-center">
           <p className="voca-display text-lg text-primary" style={{ fontWeight: 700 }}>📋 선생님이 낸 시험</p>
-          <p className="mt-0.5 text-xs text-primary">{rangeLabel(active)} · {vocab.length}단어 · {PASS}점 통과</p>
+          <p className="mt-0.5 text-xs text-primary">{rangeLabel(active)} · {vocab.length}단어 · {PASS}점 통과{intensity.secondsPerWord > 0 ? ` · 단어당 ${intensity.secondsPerWord}초` : ''}</p>
         </div>
         <RhythmSpelling
           vocabulary={vocab}
           storageContext={`assigned:${active.id}`}
           onComplete={handleComplete}
           examMode
+          passThreshold={PASS}
+          secondsPerWord={intensity.secondsPerWord}
         />
       </div>
     );

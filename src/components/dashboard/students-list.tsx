@@ -7,6 +7,7 @@ import { Progress } from '@/components/ui/progress';
 import { Eye, Users, Trash2 } from 'lucide-react';
 import Link from 'next/link';
 import { ServiceAssignmentToggle } from './service-assignment-toggle';
+import { resolveExamIntensity, type ExamIntensity } from '@/lib/voca/exam-intensity';
 import { StudentsToolbar } from './students-toolbar';
 import { StudentDeleteButton } from './student-delete-button';
 import { StudentSearchInput } from './student-search-input';
@@ -151,6 +152,7 @@ export async function StudentsList({ user, basePath, searchQuery }: Props) {
   const round2Map: Record<string, boolean> = {};
   const roundModeMap: Record<string, 'book' | 'day'> = {};
   const memorizeMap: Record<string, boolean> = {};
+  const examIntensityMap: Record<string, ExamIntensity> = {};
 
   let vocaBooks: { id: string; title: string }[] = [];
   const bookAssignmentMap: Record<string, string> = {};
@@ -159,7 +161,7 @@ export async function StudentsList({ user, basePath, searchQuery }: Props) {
     const [{ data: assignments }, { data: vocaBooksData }, { data: bookAssignments }] = await Promise.all([
       admin
         .from('service_assignments')
-        .select('student_id, service, round2_unlocked, voca_round_mode, naesin_memorize_only')
+        .select('student_id, service, round2_unlocked, voca_round_mode, naesin_memorize_only, voca_exam_pass_score, voca_exam_seconds_per_word, voca_exam_retry_wrong')
         .in('student_id', studentIds),
       admin
         .from('voca_books')
@@ -179,6 +181,7 @@ export async function StudentsList({ user, basePath, searchQuery }: Props) {
         if (a.service === 'voca') {
           if (a.round2_unlocked) round2Map[a.student_id] = true;
           if (a.voca_round_mode === 'day') roundModeMap[a.student_id] = 'day';
+          examIntensityMap[a.student_id] = resolveExamIntensity(a);
         }
         if (a.service === 'naesin' && a.naesin_memorize_only) {
           memorizeMap[a.student_id] = true;
@@ -293,6 +296,8 @@ export async function StudentsList({ user, basePath, searchQuery }: Props) {
                           showRoundModeToggle
                           naesinMemorizeOnly={memorizeMap[student.id] || false}
                           showMemorizeToggle={isBoss || basePath === '/admin'}
+                          vocaExamIntensity={examIntensityMap[student.id]}
+                          showExamIntensity
                         />
                       </div>
                     )}

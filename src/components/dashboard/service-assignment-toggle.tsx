@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { cn } from '@/lib/utils';
 import { Check, X } from 'lucide-react';
 import { fetchWithToast } from '@/lib/fetch-with-toast';
+import { EXAM_PRESETS, resolveExamIntensity, matchPreset, type ExamIntensity } from '@/lib/voca/exam-intensity';
 
 interface ServiceAssignmentToggleProps {
   studentId: string;
@@ -18,6 +19,9 @@ interface ServiceAssignmentToggleProps {
   showRoundModeToggle?: boolean;
   naesinMemorizeOnly?: boolean;
   showMemorizeToggle?: boolean;
+  /** 표제어 시험 강도 초기값 (service_assignments 행) */
+  vocaExamIntensity?: ExamIntensity;
+  showExamIntensity?: boolean;
   onUpdate?: () => void;
 }
 
@@ -38,6 +42,8 @@ export function ServiceAssignmentToggle({
   showRoundModeToggle = false,
   naesinMemorizeOnly: initialMemorize = false,
   showMemorizeToggle = false,
+  vocaExamIntensity: initialExam = resolveExamIntensity(null),
+  showExamIntensity = false,
   onUpdate,
 }: ServiceAssignmentToggleProps) {
   const router = useRouter();
@@ -51,6 +57,31 @@ export function ServiceAssignmentToggle({
   const [roundModeLoading, setRoundModeLoading] = useState(false);
   const [memorize, setMemorize] = useState(initialMemorize);
   const [memorizeLoading, setMemorizeLoading] = useState(false);
+  const [exam, setExam] = useState<ExamIntensity>(initialExam);
+  const [examLoading, setExamLoading] = useState<string | null>(null);
+
+  async function applyExamPreset(key: string, intensity: ExamIntensity) {
+    setExamLoading(key);
+    try {
+      await fetchWithToast('/api/service-assignments', {
+        method: 'PATCH',
+        body: {
+          studentId,
+          vocaExamPassScore: intensity.passScore,
+          vocaExamSecondsPerWord: intensity.secondsPerWord,
+          vocaExamRetryWrong: intensity.retryWrong,
+        },
+        successMessage: `표제어 시험 강도: ${EXAM_PRESETS.find((p) => p.key === key)?.label ?? key}`,
+        errorMessage: '시험 강도 변경에 실패했습니다',
+      });
+      setExam(intensity);
+      onUpdate?.();
+    } catch {
+      // fetchWithToast already toasted
+    } finally {
+      setExamLoading(null);
+    }
+  }
 
   async function toggle(service: string) {
     const isAssigned = assigned.has(service);
@@ -265,6 +296,35 @@ export function ServiceAssignmentToggle({
           {memorize ? <Check className="h-3.5 w-3.5" /> : <X className="h-3.5 w-3.5" />}
           내신 암기
         </button>
+      )}
+      {vocaOn && showExamIntensity && (
+        <div className="flex w-full items-center gap-1.5 pt-1">
+          <span className="text-xs text-muted-foreground shrink-0">표제어 시험 강도</span>
+          {EXAM_PRESETS.map((p) => {
+            const active = matchPreset(exam) === p.key;
+            return (
+              <button
+                key={p.key}
+                type="button"
+                disabled={examLoading !== null}
+                onClick={() => applyExamPreset(p.key, p.intensity)}
+                title={p.hint}
+                className={cn(
+                  'inline-flex items-center gap-1 rounded-full px-3 py-1 text-xs font-medium transition-all select-none',
+                  examLoading === p.key && 'opacity-50 cursor-wait',
+                  active
+                    ? 'bg-[#FEF7E0] text-[#B06000] font-bold'
+                    : 'bg-muted text-muted-foreground hover:bg-muted/80 border border-border',
+                )}
+              >
+                {p.label}
+              </button>
+            );
+          })}
+          <span className="text-[11px] text-muted-foreground/70 shrink-0">
+            합격 {exam.passScore}{exam.secondsPerWord > 0 ? ` · 단어당 ${exam.secondsPerWord}초` : ''}
+          </span>
+        </div>
       )}
     </div>
   );

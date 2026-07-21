@@ -38,6 +38,10 @@ export const serviceAssignmentPatchSchema = z.object({
   round2Unlocked: z.boolean().optional(),
   vocaRoundMode: z.enum(['book', 'day']).optional(),
   naesinMemorizeOnly: z.boolean().optional(),
+  // 표제어 시험 강도 — null = 학원/시스템 기본으로 되돌림
+  vocaExamPassScore: z.number().int().min(50).max(100).nullable().optional(),
+  vocaExamSecondsPerWord: z.number().int().min(0).max(60).nullable().optional(),
+  vocaExamRetryWrong: z.boolean().nullable().optional(),
 });
 
 // ── Academy Settings Schemas ──

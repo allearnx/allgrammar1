@@ -103,6 +103,9 @@ export const PATCH = createApiHandler(
     const updates: Record<string, unknown> = {};
     if (body.round2Unlocked !== undefined) updates.round2_unlocked = body.round2Unlocked;
     if (body.vocaRoundMode !== undefined) updates.voca_round_mode = body.vocaRoundMode;
+    if (body.vocaExamPassScore !== undefined) updates.voca_exam_pass_score = body.vocaExamPassScore;
+    if (body.vocaExamSecondsPerWord !== undefined) updates.voca_exam_seconds_per_word = body.vocaExamSecondsPerWord;
+    if (body.vocaExamRetryWrong !== undefined) updates.voca_exam_retry_wrong = body.vocaExamRetryWrong;
 
     const { error } = await admin
       .from('service_assignments')

@@ -7,18 +7,22 @@ import { fetchWithToast } from '@/lib/fetch-with-toast';
 import { shuffle } from '@/lib/utils';
 import { VOCA_VOCABULARY_COLUMNS, type VocaDay, type VocaVocabulary } from '@/types/voca';
 import { VOCA_COLORS } from '@/components/voca/voca-brand';
+import { DEFAULT_EXAM_INTENSITY, type ExamIntensity } from '@/lib/voca/exam-intensity';
 
 const MAX_DAYS = 3;
-const PASS = 90;
 
 type WrongWord = { front_text: string; back_text: string };
 
 /** 홈(교재) 페이지의 묶음 보너스 시험 — Day 1~3개를 골라 표제어 스펠링 시험 */
-export function BonusExam({ days, bookId }: { days: VocaDay[]; bookId: string }) {
+export function BonusExam({ days, bookId, intensity = DEFAULT_EXAM_INTENSITY }: { days: VocaDay[]; bookId: string; intensity?: ExamIntensity }) {
+  const PASS = intensity.passScore;
   const [selected, setSelected] = useState<string[]>([]);
   const [mode, setMode] = useState<'idle' | 'loading' | 'exam' | 'done'>('idle');
   const [vocab, setVocab] = useState<VocaVocabulary[]>([]);
   const [score, setScore] = useState<number | null>(null);
+  // 합격 미달 시 "틀린 단어만 다시 시험"용 — retryWrong 강도에서만 노출
+  const [lastWrong, setLastWrong] = useState<WrongWord[]>([]);
+  const [retryOnly, setRetryOnly] = useState(false);
 
   if (days.length === 0) return null;
 
@@ -35,6 +39,7 @@ export function BonusExam({ days, bookId }: { days: VocaDay[]; bookId: string })
   async function start() {
     if (selected.length === 0) return;
     setMode('loading');
+    setRetryOnly(false);
     try {
       const { createClient } = await import('@/lib/supabase/client');
       const sb = createClient();
@@ -57,9 +62,27 @@ export function BonusExam({ days, bookId }: { days: VocaDay[]; bookId: string })
     }
   }
 
+  /** 틀린 단어만 모아 다시 시험 — 점수 기록 없이 복습용 (진도·최고점에 영향 없음) */
+  function startRetryWrong() {
+    if (lastWrong.length === 0) return;
+    const keys = new Set(lastWrong.map((w) => w.front_text.trim().toLowerCase()));
+    const subset = vocab.filter((v) => keys.has(v.front_text.trim().toLowerCase()));
+    if (subset.length === 0) return;
+    setVocab(shuffle([...subset]));
+    setRetryOnly(true);
+    setScore(null);
+    setMode('exam');
+  }
+
   async function handleComplete(s: number, wrongWords?: WrongWord[]) {
     setScore(s);
+    setLastWrong(wrongWords ?? []);
     setMode('done');
+    if (retryOnly) {
+      // 재시험(틀린 단어만)은 복습용 — 서버 저장 안 함
+      if (s >= PASS) toast.success(`🎉 이번엔 ${s}점! 잘했어요`);
+      return;
+    }
     try {
       await fetchWithToast('/api/voca/exam', {
         body: { bookId, dayIds: selected, score: s, wrongWords },
@@ -74,6 +97,7 @@ export function BonusExam({ days, bookId }: { days: VocaDay[]; bookId: string })
     setMode('idle');
     setVocab([]);
     setScore(null);
+    setRetryOnly(false);
   }
 
   // ── 시험 진행 화면 ──
@@ -84,16 +108,18 @@ export function BonusExam({ days, bookId }: { days: VocaDay[]; bookId: string })
           ← 그만두기
         </button>
         <div className="rounded-2xl px-4 py-3 text-center" style={{ background: VOCA_COLORS.greenLight }}>
-          <p className="voca-display text-lg" style={{ color: VOCA_COLORS.greenDark, fontWeight: 700 }}>📝 묶음 표제어 스펠링 시험</p>
+          <p className="voca-display text-lg" style={{ color: VOCA_COLORS.greenDark, fontWeight: 700 }}>{retryOnly ? '🔁 틀린 단어만 다시' : '📝 묶음 표제어 스펠링 시험'}</p>
           <p className="mt-0.5 text-xs" style={{ color: VOCA_COLORS.green }}>
-            {selected.length}개 Day · {vocab.length}단어 · {PASS}점 통과 · 순서 셔플
+            {vocab.length}단어 · {PASS}점 통과{intensity.secondsPerWord > 0 ? ` · 단어당 ${intensity.secondsPerWord}초` : ''} · 순서 셔플
           </p>
         </div>
         <RhythmSpelling
           vocabulary={vocab}
-          storageContext={`bonus:${bookId}:${[...selected].sort().join('.')}`}
+          storageContext={retryOnly ? undefined : `bonus:${bookId}:${[...selected].sort().join('.')}`}
           onComplete={handleComplete}
           examMode
+          passThreshold={PASS}
+          secondsPerWord={intensity.secondsPerWord}
         />
       </div>
     );
@@ -109,9 +135,14 @@ export function BonusExam({ days, bookId }: { days: VocaDay[]; bookId: string })
         <p className="text-sm text-gray-500">
           {passed ? '보너스 시험 통과!' : `${PASS}점 넘으면 통과예요. 또 도전해보세요!`}
         </p>
-        <div className="flex justify-center gap-2 pt-1">
-          <button onClick={() => { setMode('idle'); }} className="rounded-full px-5 py-2.5 text-sm font-bold text-white transition-opacity hover:opacity-90" style={{ background: VOCA_COLORS.green }}>
-            다시 도전
+        <div className="flex flex-wrap justify-center gap-2 pt-1">
+          {!passed && intensity.retryWrong && lastWrong.length > 0 && (
+            <button onClick={startRetryWrong} className="rounded-full px-5 py-2.5 text-sm font-bold text-white transition-opacity hover:opacity-90" style={{ background: VOCA_COLORS.green }}>
+              🔁 틀린 {lastWrong.length}개만 다시
+            </button>
+          )}
+          <button onClick={() => { setRetryOnly(false); setMode('idle'); }} className={`rounded-full px-5 py-2.5 text-sm font-bold ${!passed && intensity.retryWrong && lastWrong.length > 0 ? 'border border-gray-200 bg-white text-gray-600 hover:bg-gray-50' : 'text-white transition-opacity hover:opacity-90'}`} style={!passed && intensity.retryWrong && lastWrong.length > 0 ? undefined : { background: VOCA_COLORS.green }}>
+            {retryOnly ? '전체 다시 도전' : '다시 도전'}
           </button>
           <button onClick={reset} className="rounded-full border border-gray-200 bg-white px-5 py-2.5 text-sm font-bold text-gray-600 hover:bg-gray-50">
             닫기

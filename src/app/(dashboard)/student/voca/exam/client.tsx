@@ -6,6 +6,7 @@ import { BonusExam } from '@/components/voca/bonus-exam';
 import { AssignedExams } from '@/components/voca/assigned-exams';
 import { VocaBrandStyle, VocaHeroLetters, VOCA_COLORS } from '@/components/voca/voca-brand';
 import type { VocaBook, VocaDay } from '@/types/voca';
+import { DEFAULT_EXAM_INTENSITY, type ExamIntensity } from '@/lib/voca/exam-intensity';
 
 interface VocaExamClientProps {
   books: VocaBook[];
@@ -14,10 +15,12 @@ interface VocaExamClientProps {
   studentId: string;
   /** 무료 체험: 앞 N개 Day만 시험 범위 (0 = 전체) */
   freeDayLimit?: number;
+  /** 표제어 시험 강도 (합격선·제한시간·오답 재시험) — 학생별 설정 */
+  examIntensity?: ExamIntensity;
 }
 
 /** 올킬시험 — 교재 골라서 Day 최대 3개 묶음 표제어 스펠링 시험 */
-export function VocaExamClient({ books, days, studentId, freeDayLimit = 0 }: VocaExamClientProps) {
+export function VocaExamClient({ books, days, studentId, freeDayLimit = 0, examIntensity = DEFAULT_EXAM_INTENSITY }: VocaExamClientProps) {
   const bookStorageKey = `voca:selectedBookId:${studentId}`;
   const [selectedBookId, setSelectedBookId] = useState<string>(books[0]?.id || '');
 
@@ -66,7 +69,7 @@ export function VocaExamClient({ books, days, studentId, freeDayLimit = 0 }: Voc
       </div>
 
       {/* 📋 선생님이 낸 시험 — 숙제가 자율 시험보다 우선 (배정 있을 때만 표시) */}
-      <AssignedExams />
+      <AssignedExams intensity={examIntensity} />
 
       {/* 교재 선택 */}
       <div className="space-y-1.5">
@@ -80,7 +83,7 @@ export function VocaExamClient({ books, days, studentId, freeDayLimit = 0 }: Voc
           {selectedBook?.title}에 아직 등록된 Day가 없어요
         </div>
       ) : (
-        <BonusExam key={selectedBookId} days={filteredDays} bookId={selectedBookId} />
+        <BonusExam key={selectedBookId} days={filteredDays} bookId={selectedBookId} intensity={examIntensity} />
       )}
 
       {freeDayLimit > 0 && (

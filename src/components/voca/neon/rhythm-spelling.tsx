@@ -32,6 +32,10 @@ interface RhythmSpellingProps {
   onComplete: (score: number, wrongWords: SpellingWrongWord[]) => void;
   /** 시험 모드 — 발음 힌트(스피커) 숨김 */
   examMode?: boolean;
+  /** 통과 점수(%) — 미지정 시 학습 기본 80. 표제어 시험은 학생 강도에 따라 70~100 */
+  passThreshold?: number;
+  /** 단어당 제한시간(초). 0/미지정 = 무제한. examMode에서만 동작 */
+  secondsPerWord?: number;
   /**
    * 진행 자동 저장 컨텍스트 (예: `day:{dayId}`, `bonus:{bookId}:{dayIds}`).
    * 지정하면 단어를 채점할 때마다 계정별 localStorage에 체크포인트를 남겨,
@@ -60,7 +64,7 @@ type LetterState = 'typed' | 'auto' | 'correct' | 'wrong';
 
 const PASS_THRESHOLD = 80;
 
-export function RhythmSpelling({ vocabulary, onComplete, examMode = false, storageContext }: RhythmSpellingProps) {
+export function RhythmSpelling({ vocabulary, onComplete, examMode = false, passThreshold = PASS_THRESHOLD, secondsPerWord = 0, storageContext }: RhythmSpellingProps) {
   // ⚠️ useMemo([vocabulary])로 만들면 리렌더로 배열 참조가 바뀔 때 시험 도중
   // 출제 순서가 재셔플된다(푼 단어 반복 + 안 푼 단어 누락). 마운트 시 1회만 생성.
   const [shuffledVocab, setShuffledVocab] = useState(() => shuffle([...vocabulary]));
@@ -208,10 +212,36 @@ export function RhythmSpelling({ vocabulary, onComplete, examMode = false, stora
         setFinalScore(score);
         // 통과 시엔 "다음 단계로" 클릭을 기다린 뒤 onComplete 호출.
         // 미달이면 기존처럼 즉시 저장 + 부모의 재도전 안내 토스트가 뜨도록 바로 호출.
-        if (score < PASS_THRESHOLD) onComplete(score, wrongWordsRef.current);
+        if (score < passThreshold) onComplete(score, wrongWordsRef.current);
       }
     }, hadWrong ? 1800 : 600);
-  }, [currentIndex, shuffledVocab, onComplete, letterCount, targetWord, typedLetters, saveCheckpoint, clearCheckpoint]);
+  }, [currentIndex, shuffledVocab, onComplete, letterCount, targetWord, typedLetters, saveCheckpoint, clearCheckpoint, passThreshold]);
+
+  // 최신 gradeWord를 타이머에서 호출하기 위한 ref
+  const gradeWordRef = useRef(gradeWord);
+  gradeWordRef.current = gradeWord;
+
+  // 단어당 제한시간 (examMode + secondsPerWord>0). 만료 시 현재 입력 상태로 강제 채점.
+  const [timeLeft, setTimeLeft] = useState<number | null>(null);
+  useEffect(() => {
+    if (!examMode || secondsPerWord <= 0 || graded || finalScore !== null) {
+      setTimeLeft(null);
+      return;
+    }
+    setTimeLeft(secondsPerWord);
+    const iv = setInterval(() => {
+      setTimeLeft((t) => {
+        if (t === null) return null;
+        if (t <= 1) {
+          clearInterval(iv);
+          gradeWordRef.current();
+          return 0;
+        }
+        return t - 1;
+      });
+    }, 1000);
+    return () => clearInterval(iv);
+  }, [currentIndex, graded, examMode, secondsPerWord, finalScore]);
 
   /** 자유 입력 — 어떤 글자든 다음 칸에 채운다 (채점은 다 채운 뒤) */
   const handleKeyPress = useCallback((key: string) => {
@@ -312,11 +342,11 @@ export function RhythmSpelling({ vocabulary, onComplete, examMode = false, stora
     return (
       <NeonResultScreen
         score={finalScore}
-        passThreshold={PASS_THRESHOLD}
+        passThreshold={passThreshold}
         passMessage="통과!"
-        failMessage="80% 이상 필요합니다"
+        failMessage={`${passThreshold}% 이상 필요합니다`}
         onRetry={handleRetry}
-        onContinue={finalScore >= PASS_THRESHOLD ? () => onComplete(finalScore, wrongWordsRef.current) : undefined}
+        onContinue={finalScore >= passThreshold ? () => onComplete(finalScore, wrongWordsRef.current) : undefined}
       />
     );
   }
@@ -327,6 +357,17 @@ export function RhythmSpelling({ vocabulary, onComplete, examMode = false, stora
         <span className="text-sm text-gray-400">
           {currentIndex + 1} / {shuffledVocab.length}
         </span>
+        {timeLeft !== null && (
+          <span
+            className={cn(
+              'text-sm font-bold tabular-nums transition-colors',
+              timeLeft <= 3 ? 'text-red-500' : 'text-gray-500',
+            )}
+            aria-label={`남은 시간 ${timeLeft}초`}
+          >
+            ⏱ {timeLeft}초
+          </span>
+        )}
         {/* 시험 모드에선 발음 힌트(스피커) 숨김 — 순수 철자 시험 */}
         {!examMode && (
           <Button
