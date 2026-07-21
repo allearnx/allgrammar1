@@ -33,6 +33,7 @@ export function VocaExamAssignPanel() {
   const [title, setTitle] = useState('');
   // 이 시험의 제한시간(초). 0 = 학생/학원 강도 따름 (미지정)
   const [secondsPerWord, setSecondsPerWord] = useState(0);
+  const [examType, setExamType] = useState<'headword' | 'syn_ant'>('headword');
   // 기본 펼침 — 접혀 있으면 선생님들이 배정 기능 자체를 못 찾는다 (사장님 피드백)
   const [open, setOpen] = useState(true);
   const [saving, setSaving] = useState(false);
@@ -73,12 +74,12 @@ export function VocaExamAssignPanel() {
     setSaving(true);
     try {
       const res = await fetchWithToast<{ count: number }>('/api/voca/exam-assignments', {
-        body: { bookId, dayIds: selDays, studentIds: selStudents, title: title.trim() || null, secondsPerWord: secondsPerWord > 0 ? secondsPerWord : null },
+        body: { bookId, dayIds: selDays, studentIds: selStudents, title: title.trim() || null, secondsPerWord: secondsPerWord > 0 ? secondsPerWord : null, examType },
         errorMessage: '배정 실패',
       });
       if (res) {
         toast.success(`${res.count}명에게 시험을 배정했어요`);
-        setSelDays([]); setSelStudents([]); setTitle(''); setSecondsPerWord(0); setOpen(false);
+        setSelDays([]); setSelStudents([]); setTitle(''); setSecondsPerWord(0); setExamType('headword'); setOpen(false);
         loadForBook();
       }
     } finally { setSaving(false); }
@@ -136,6 +137,20 @@ export function VocaExamAssignPanel() {
               })}
             </div>
             {students.length === 0 && <p className="text-xs text-gray-400">보카 배정된 학생이 없습니다.</p>}
+          </div>
+          <div className="flex gap-2">
+            {([['headword', '1회독 · 표제어 스펠링'], ['syn_ant', '2회독 · 유의어·반의어']] as const).map(([v, label]) => (
+              <button
+                key={v}
+                type="button"
+                onClick={() => setExamType(v)}
+                className={`flex-1 rounded-lg border-2 px-3 py-2 text-xs font-bold transition-colors ${
+                  examType === v ? 'border-[#1A73E8] bg-[#E8F0FE] text-[#174EA6]' : 'border-gray-200 bg-white text-gray-500 hover:border-gray-300'
+                }`}
+              >
+                {label}
+              </button>
+            ))}
           </div>
           <input value={title} onChange={(e) => setTitle(e.target.value)} placeholder="시험 제목 (선택)"
             className="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm" maxLength={100} />

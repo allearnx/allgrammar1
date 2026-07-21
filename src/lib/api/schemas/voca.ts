@@ -84,6 +84,7 @@ export const vocaExamSaveSchema = z.object({
     back_text: z.string(),
   })).nullish(),
   assignmentId: ID.nullish(), // 선생님 배정 시험이면 연결
+  examType: z.enum(['headword', 'syn_ant']).default('headword'), // 1회독 표제어 / 2회독 유의어·반의어
 });
 
 // 선생님 배정형 시험 생성 (학생들에게 Day 묶음 시험 배정)
@@ -94,6 +95,7 @@ export const vocaExamAssignmentCreateSchema = z.object({
   title: z.string().trim().max(100).nullish(),
   /** 이 배정 시험의 제한시간(초) 오버라이드. null = 학생/학원 강도 따름 */
   secondsPerWord: z.number().int().min(0).max(60).nullish(),
+  examType: z.enum(['headword', 'syn_ant']).default('headword'),
 });
 
 export const vocaExamAssignmentDeleteSchema = z.object({

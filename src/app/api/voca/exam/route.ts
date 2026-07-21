@@ -7,7 +7,7 @@ import { vocaExamSaveSchema } from '@/lib/api/schemas';
 export const POST = createApiHandler(
   { schema: vocaExamSaveSchema },
   async ({ user, body, supabase }) => {
-    const { bookId, dayIds, score, wrongWords, assignmentId } = body;
+    const { bookId, dayIds, score, wrongWords, assignmentId, examType } = body;
     const sortedDayIds = [...dayIds].sort();
     const rangeKey = sortedDayIds.join(',');
 
@@ -16,7 +16,8 @@ export const POST = createApiHandler(
       .from('voca_exam_results')
       .select('id', { count: 'exact', head: true })
       .eq('student_id', user.id)
-      .eq('range_key', rangeKey);
+      .eq('range_key', rangeKey)
+      .eq('exam_type', examType);
 
     const attemptNumber = (count ?? 0) + 1;
 
@@ -29,6 +30,7 @@ export const POST = createApiHandler(
       score,
       wrong_words: wrongWords ?? [],
       assignment_id: assignmentId ?? null,
+      exam_type: examType,
     });
 
     if (error) return NextResponse.json({ error: error.message }, { status: 400 });

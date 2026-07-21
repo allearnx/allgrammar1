@@ -7,6 +7,7 @@ import { fetchWithToast } from '@/lib/fetch-with-toast';
 import { shuffle } from '@/lib/utils';
 import { VOCA_VOCABULARY_COLUMNS, type VocaVocabulary } from '@/types/voca';
 import { DEFAULT_EXAM_INTENSITY, type ExamIntensity } from '@/lib/voca/exam-intensity';
+import { Round2SynAntExam } from '@/components/voca/round2-syn-ant-exam';
 
 type WrongWord = { front_text: string; back_text: string };
 interface Assignment {
@@ -15,6 +16,7 @@ interface Assignment {
   dayIds: string[];
   title: string | null;
   secondsPerWord: number | null;
+  examType: 'headword' | 'syn_ant';
   bestScore: number | null;
   attempts: number;
 }
@@ -46,6 +48,8 @@ export function AssignedExams({ intensity = DEFAULT_EXAM_INTENSITY }: { intensit
     a.title?.trim() || a.dayIds.map((id) => dayTitles[id] ?? '?').join(' + ');
 
   async function start(a: Assignment) {
+    // 2회독(유의어·반의어)은 Round2SynAntExam이 자체 로드 → 바로 활성화
+    if (a.examType === 'syn_ant') { setActive(a); return; }
     try {
       const { createClient } = await import('@/lib/supabase/client');
       const sb = createClient();
@@ -78,6 +82,20 @@ export function AssignedExams({ intensity = DEFAULT_EXAM_INTENSITY }: { intensit
   }
 
   if (active) {
+    if (active.examType === 'syn_ant') {
+      return (
+        <div className="space-y-3">
+          <button onClick={() => setActive(null)} className="text-sm font-medium text-gray-500 hover:text-gray-700">← 그만두기</button>
+          <Round2SynAntExam
+            days={[]}
+            bookId={active.bookId}
+            intensity={{ ...intensity, secondsPerWord: activeSeconds }}
+            assignment={{ id: active.id, dayIds: active.dayIds, title: rangeLabel(active) }}
+            onDone={() => { setActive(null); load(); }}
+          />
+        </div>
+      );
+    }
     return (
       <div className="space-y-3">
         <button onClick={() => setActive(null)} className="text-sm font-medium text-gray-500 hover:text-gray-700">← 그만두기</button>
@@ -105,7 +123,12 @@ export function AssignedExams({ intensity = DEFAULT_EXAM_INTENSITY }: { intensit
       {assignments.map((a) => (
         <div key={a.id} className="flex items-center justify-between gap-2 rounded-2xl bg-white px-4 py-3">
           <div className="min-w-0">
-            <p className="truncate font-semibold text-gray-800">{rangeLabel(a)}</p>
+            <p className="truncate font-semibold text-gray-800">
+              <span className="mr-1.5 rounded-full px-1.5 py-0.5 text-[10px] font-bold" style={{ background: a.examType === 'syn_ant' ? '#E8F0FE' : '#E6F4EA', color: a.examType === 'syn_ant' ? '#174EA6' : '#188038' }}>
+                {a.examType === 'syn_ant' ? '2회독' : '1회독'}
+              </span>
+              {rangeLabel(a)}
+            </p>
             {a.bestScore != null && (
               <p className="text-xs text-gray-400">최고 {a.bestScore}점 · {a.attempts}회 응시</p>
             )}

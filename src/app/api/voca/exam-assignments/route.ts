@@ -19,7 +19,7 @@ interface AssignmentRow {
 export const POST = createApiHandler(
   { roles: [...STAFF], schema: vocaExamAssignmentCreateSchema },
   async ({ user, body, supabase }) => {
-    const { bookId, dayIds, studentIds, title, secondsPerWord } = body;
+    const { bookId, dayIds, studentIds, title, secondsPerWord, examType } = body;
     for (const sid of studentIds) await requireAcademyScope(user, sid, supabase);
 
     const sortedDayIds = [...dayIds].sort();
@@ -32,6 +32,7 @@ export const POST = createApiHandler(
       range_key: rangeKey,
       title: title ?? null,
       seconds_per_word: secondsPerWord ?? null,
+      exam_type: examType,
       assigned_by: user.id,
     }));
 

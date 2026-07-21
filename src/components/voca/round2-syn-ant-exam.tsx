@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { toast } from 'sonner';
 import { shuffle } from '@/lib/utils';
+import { fetchWithToast } from '@/lib/fetch-with-toast';
 import { VOCA_VOCABULARY_COLUMNS, type VocaDay } from '@/types/voca';
 import { VOCA_COLORS } from '@/components/voca/voca-brand';
 import { DEFAULT_EXAM_INTENSITY, type ExamIntensity } from '@/lib/voca/exam-intensity';
@@ -19,15 +20,22 @@ const RELATION_LABEL = { synonym: '유의어', antonym: '반의어' } as const;
 /** 2회독 표제어 시험 — 유의어·반의어 (스펠링 + 4지선다 혼합) */
 export function Round2SynAntExam({
   days,
+  bookId,
   intensity = DEFAULT_EXAM_INTENSITY,
+  assignment,
+  onDone,
 }: {
   days: VocaDay[];
   bookId: string;
   intensity?: ExamIntensity;
+  /** 선생님 배정 시험이면 지정 — Day 선택 스킵하고 바로 응시, 결과에 연결 */
+  assignment?: { id: string; dayIds: string[]; title: string };
+  onDone?: () => void;
 }) {
   const PASS = intensity.passScore;
-  const [selected, setSelected] = useState<string[]>([]);
+  const [selected, setSelected] = useState<string[]>(assignment?.dayIds ?? []);
   const [mode, setMode] = useState<'idle' | 'loading' | 'exam' | 'done'>('idle');
+  const retryModeRef = useRef(false);
   const [questions, setQuestions] = useState<Round2ExamQuestion[]>([]);
   const [index, setIndex] = useState(0);
   const [input, setInput] = useState('');
@@ -37,7 +45,7 @@ export function Round2SynAntExam({
   const [score, setScore] = useState<number | null>(null);
   const [timeLeft, setTimeLeft] = useState<number | null>(null);
 
-  if (days.length === 0) return null;
+  if (!assignment && days.length === 0) return null;
 
   function toggle(id: string) {
     setSelected((prev) =>
@@ -46,7 +54,9 @@ export function Round2SynAntExam({
   }
 
   async function start(retryOnly = false) {
-    if (!retryOnly && selected.length === 0) return;
+    const dayIds = assignment?.dayIds ?? selected;
+    if (!retryOnly && dayIds.length === 0) return;
+    retryModeRef.current = retryOnly;
     setMode('loading');
     try {
       let qs: Round2ExamQuestion[];
@@ -58,7 +68,7 @@ export function Round2SynAntExam({
         const { data } = await sb
           .from('voca_vocabulary')
           .select(VOCA_VOCABULARY_COLUMNS)
-          .in('day_id', selected)
+          .in('day_id', dayIds)
           .order('sort_order');
         const vocab = (data as Round2Vocab[] | null) ?? [];
         // 표제어 수의 1.5배로 문항 — 유의어·반의어를 골라 난이도 조절 (없으면 있는 만큼)
@@ -83,6 +93,12 @@ export function Round2SynAntExam({
     }
   }
 
+  // 배정 시험이면 Day 선택 없이 바로 시작
+  useEffect(() => {
+    if (assignment && mode === 'idle') start();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const q = questions[index];
 
   const grade = useCallback((answer: string | null) => {
@@ -103,6 +119,21 @@ export function Round2SynAntExam({
       setScore(s);
       setMode('done');
       if (s >= PASS) toast.success(`🎉 통과! ${s}점`);
+      // 재시험(틀린 것만)은 복습용 — 저장 안 함. 정식 응시만 서버 기록.
+      if (!retryModeRef.current) {
+        fetchWithToast('/api/voca/exam', {
+          body: {
+            bookId,
+            dayIds: assignment?.dayIds ?? selected,
+            score: s,
+            wrongWords: wrongRef.current.map((w) => ({ front_text: w.prompt, back_text: w.promptKo })),
+            assignmentId: assignment?.id ?? null,
+            examType: 'syn_ant',
+          },
+          retry: 2,
+          errorMessage: '⚠️ 시험 결과 저장에 실패했어요 — 점수가 기록되지 않았습니다.',
+        }).then(() => onDone?.()).catch(() => { /* toasted */ });
+      }
     }
   }
 
@@ -219,12 +250,17 @@ export function Round2SynAntExam({
               🔁 틀린 {wrongRef.current.length}개만 다시
             </button>
           )}
-          <button onClick={() => { setScore(null); setMode('idle'); }} className="rounded-full border border-gray-200 bg-white px-5 py-2.5 text-sm font-bold text-gray-600 hover:bg-gray-50">
+          <button onClick={() => { setScore(null); if (assignment) onDone?.(); else setMode('idle'); }} className="rounded-full border border-gray-200 bg-white px-5 py-2.5 text-sm font-bold text-gray-600 hover:bg-gray-50">
             닫기
           </button>
         </div>
       </div>
     );
+  }
+
+  // 배정 시험은 Day 선택 화면 없이 로딩 → 시험 (mount 시 자동 start)
+  if (assignment) {
+    return <div className="py-8 text-center text-sm text-gray-400">시험을 불러오는 중…</div>;
   }
 
   // ── Day 선택 ──
