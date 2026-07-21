@@ -7,7 +7,7 @@ import { DiagnosticClient } from '@/app/(dashboard)/student/voca/diagnostic/diag
 
 export const metadata: Metadata = {
   title: '어휘 레벨 진단 | 올킬보카',
-  description: '가입 없이 5분 만에 어휘 레벨과 모의고사 단어 커버리지를 확인하세요.',
+  description: '가입 없이 5분 만에 내 어휘 레벨과 학년 단어를 몇 % 아는지 확인하세요.',
 };
 
 // 밴드 구성은 자주 안 바뀐다 — 5분 ISR (문항은 클라이언트에서 매 라운드 동적 요청)

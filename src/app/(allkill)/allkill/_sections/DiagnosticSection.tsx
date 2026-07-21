@@ -17,7 +17,7 @@ export default function DiagnosticSection() {
         </h2>
         <p className="ak-sub" style={{ color: C.gray }}>
           학년을 고르면 문제가 레벨을 오르내리며 정확한 어휘 수준을 찾아요.
-          <b style={{ color: C.ink }}> 모의고사 단어를 몇 %나 아는지</b> 숫자로 확인하고,
+          <b style={{ color: C.ink }}> 학년 단어를 몇 %나 아는지</b> 숫자로 확인하고,
           한 달 뒤 얼마나 늘었는지도 비교해드려요.
         </p>
 
@@ -28,7 +28,7 @@ export default function DiagnosticSection() {
             <p className="ak-display" style={{ fontSize: 44, color: C.blue, lineHeight: 1.1, marginBottom: 8 }}>중3</p>
             <p style={{ fontSize: 14, fontWeight: 700, color: C.red, marginBottom: 20 }}>고1 기준 · 학년보다 1단계 아래예요</p>
             <div style={{ background: C.blueLight, borderRadius: 16, padding: '18px 20px' }}>
-              <p style={{ fontSize: 13, color: C.gray, marginBottom: 4 }}>고1 3월 모의고사 단어 커버리지</p>
+              <p style={{ fontSize: 13, color: C.gray, marginBottom: 4 }}>고1 단어를 이만큼 알고 있어요</p>
               <p className="ak-display" style={{ fontSize: 34, color: C.ink, lineHeight: 1.1 }}>63%</p>
             </div>
             <div style={{ marginTop: 16, display: 'flex', flexDirection: 'column', gap: 8, textAlign: 'left' }}>

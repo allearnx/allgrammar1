@@ -53,7 +53,7 @@ export function DiagnosticEntryCard({ latest, retestBook = null }: Props) {
         </p>
         <p className="mt-0.5 truncate text-sm" style={{ color: VOCA_COLORS.gray }}>
           {latest
-            ? `레벨 ${formatLevel({ band: latest.final_band as BandKey, qualifier: latest.final_qualifier as FinalLevel['qualifier'] })} · 커버리지 ${latest.coverage_score}% (${new Date(latest.created_at).toLocaleDateString('ko-KR')})`
+            ? `레벨 ${formatLevel({ band: latest.final_band as BandKey, qualifier: latest.final_qualifier as FinalLevel['qualifier'] })} · 학년 단어 정답률 ${latest.coverage_score}% (${new Date(latest.created_at).toLocaleDateString('ko-KR')})`
             : '5분 진단으로 나에게 맞는 단어장을 찾아보세요'}
         </p>
       </div>

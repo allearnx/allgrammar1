@@ -37,7 +37,7 @@ export function VocaDiagnosticCard({ results }: { results: DiagnosticCardResult[
   const gapText = gap === 0 ? '학년 수준' : gap > 0 ? `학년보다 ${gap}단계 위` : `학년보다 ${-gap}단계 아래`;
   const gapColor = gap >= 0 ? VOCA_COLORS.greenDark : VOCA_COLORS.red;
   // 커버리지는 응시 당시 시작 밴드에서 측정됨 → 라벨도 저장된 start_band 기준
-  const sourceLabel = getBand(latest.start_band as BandKey)?.sourceLabel ?? '모의고사';
+  const sourceLabel = getBand(latest.start_band as BandKey)?.sourceLabel ?? '학년';
 
   const prev = results[1];
   const delta = prev ? latest.coverage_score - prev.coverage_score : null;
@@ -66,7 +66,7 @@ export function VocaDiagnosticCard({ results }: { results: DiagnosticCardResult[
           )}
         </div>
         <div className="min-w-0 flex-1 rounded-lg bg-gray-50 p-3 text-center">
-          <p className="text-[11px] text-gray-500">{sourceLabel} 단어 커버리지</p>
+          <p className="text-[11px] text-gray-500">{sourceLabel} 단어 정답률</p>
           <p className="voca-display text-2xl tabular-nums" style={{ color: VOCA_COLORS.ink, fontWeight: 700 }}>
             {latest.coverage_score}%
           </p>

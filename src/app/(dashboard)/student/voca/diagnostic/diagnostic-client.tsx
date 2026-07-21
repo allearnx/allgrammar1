@@ -347,7 +347,7 @@ function SignupGateScreen() {
         <p className="text-5xl">🎉</p>
         <h2 className="mt-3 text-2xl font-bold" style={{ color: VOCA_COLORS.ink }}>진단 완료!</h2>
         <p className="mt-2 text-sm leading-relaxed" style={{ color: VOCA_COLORS.gray }}>
-          내 어휘 레벨과 <b style={{ color: VOCA_COLORS.ink }}>모의고사 단어 커버리지 %</b>가 준비됐어요.
+          내 어휘 레벨과 <b style={{ color: VOCA_COLORS.ink }}>학년 단어를 몇 % 아는지</b> 준비됐어요.
           <br />
           결과는 가입하면 바로 보여드려요.
         </p>
@@ -404,7 +404,7 @@ function IntroScreen({
         </p>
         {latest && (
           <div className="mt-4 rounded-2xl bg-white/80 p-4 text-sm" style={{ color: VOCA_COLORS.gray }}>
-            최근 진단({new Date(latest.createdAt).toLocaleDateString('ko-KR')}) — 레벨 <b>{latestLevel}</b> · 커버리지 <b>{latest.coverageScore}%</b>
+            최근 진단({new Date(latest.createdAt).toLocaleDateString('ko-KR')}) — 레벨 <b>{latestLevel}</b> · 학년 단어 정답률 <b>{latest.coverageScore}%</b>
           </div>
         )}
       </div>
@@ -488,7 +488,9 @@ function ResultScreen({
           {gradeInfo.label} 기준 · {gapText}
         </p>
         <div className="mt-5 rounded-2xl bg-white p-4">
-          <p className="text-sm" style={{ color: VOCA_COLORS.gray }}>{sourceLabel} 단어 커버리지</p>
+          <p className="text-sm" style={{ color: VOCA_COLORS.gray }}>
+            <b style={{ color: VOCA_COLORS.ink }}>{sourceLabel} 단어</b>를 이만큼 알고 있어요
+          </p>
           <p className="text-3xl font-bold" style={{ color: VOCA_COLORS.ink }}>{res.coverageScore}%</p>
           {delta !== null && (
             <p className="mt-1 text-sm font-bold" style={{ color: delta >= 0 ? VOCA_COLORS.green : VOCA_COLORS.red }}>

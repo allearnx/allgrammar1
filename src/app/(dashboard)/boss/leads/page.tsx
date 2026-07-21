@@ -131,7 +131,7 @@ export default async function BossLeadsPage() {
                       <th className="py-2 pr-4">연락처</th>
                       <th className="py-2 pr-4">학년</th>
                       <th className="py-2 pr-4">진단 레벨</th>
-                      <th className="py-2 pr-4">커버리지</th>
+                      <th className="py-2 pr-4">학년 단어 정답률</th>
                       <th className="py-2 pr-4">응시</th>
                       <th className="py-2 pr-4">진단일</th>
                       <th className="py-2">가입일</th>

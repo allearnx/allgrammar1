@@ -18,18 +18,23 @@ export interface DiagnosticBand {
   bookTitles: string[];
 }
 
+/**
+ * 교재 라인업 사다리 (2026-07-21 사장님 확정): 레벨 = 학년 하나씩, 밴드의 첫 교재 = 대표 처방.
+ * 스타트=중1 / 필수=중2 / 워마 고난도=중3 / 고1=고교필수 2000+모고 / 고2·고3=모고(기초 필터 강화).
+ * sourceLabel은 "○○ 단어를 N% 알고 있어요" 문구에 쓰인다 (모의고사·커버리지 표현 금지).
+ */
 export const DIAGNOSTIC_BANDS: DiagnosticBand[] = [
   {
     key: 'L1',
-    label: '예비중',
-    sourceLabel: '중등 기초 필수',
-    bookTitles: ['워드마스터 중등 베이직', '천일문 보카 중등 스타트', '능률 VOCA 중등 기본'],
+    label: '중1',
+    sourceLabel: '중1',
+    bookTitles: ['천일문 보카 중등 스타트', '워드마스터 중등 베이직', '능률 VOCA 중등 기본'],
   },
-  { key: 'L2', label: '중1', sourceLabel: '중등 필수', bookTitles: ['능률 VOCA 중등 필수'] },
-  { key: 'L3', label: '중2~3', sourceLabel: '중등 고난도', bookTitles: ['워드마스터 중등 고난도', '능률 VOCA 중등 고난도'] },
-  { key: 'L4', label: '고1', sourceLabel: '고1 3월 모의고사', bookTitles: ['최근 5개년 고1 3월 모고 단어'] },
-  { key: 'L5', label: '고2', sourceLabel: '고2 3월 모의고사', bookTitles: ['최근 4개년 고2 3월 모고 단어'] },
-  { key: 'L6', label: '고3', sourceLabel: '고3 3월 모의고사', bookTitles: ['최근 4개년 고3 3월 모고 단어'] },
+  { key: 'L2', label: '중2', sourceLabel: '중2', bookTitles: ['능률 VOCA 중등 필수'] },
+  { key: 'L3', label: '중3', sourceLabel: '중3', bookTitles: ['워드마스터 중등 고난도', '능률 VOCA 중등 고난도'] },
+  { key: 'L4', label: '고1', sourceLabel: '고1', bookTitles: ['능률 고교필수 2000', '최근 5개년 고1 3월 모고 단어'] },
+  { key: 'L5', label: '고2', sourceLabel: '고2', bookTitles: ['최근 4개년 고2 3월 모고 단어'] },
+  { key: 'L6', label: '고3', sourceLabel: '고3', bookTitles: ['최근 4개년 고3 3월 모고 단어'] },
 ];
 
 export const BAND_KEYS: BandKey[] = DIAGNOSTIC_BANDS.map((b) => b.key);
@@ -42,8 +47,8 @@ export type DiagnosticGrade = 'elementary' | 'm1' | 'm2' | 'm3' | 'h1' | 'h2' | 
 
 export const DIAGNOSTIC_GRADES: { key: DiagnosticGrade; label: string; startBand: BandKey }[] = [
   { key: 'elementary', label: '초등학생', startBand: 'L1' },
-  { key: 'm1', label: '중1', startBand: 'L2' },
-  { key: 'm2', label: '중2', startBand: 'L3' },
+  { key: 'm1', label: '중1', startBand: 'L1' },
+  { key: 'm2', label: '중2', startBand: 'L2' },
   { key: 'm3', label: '중3', startBand: 'L3' },
   { key: 'h1', label: '고1', startBand: 'L4' },
   { key: 'h2', label: '고2', startBand: 'L5' },

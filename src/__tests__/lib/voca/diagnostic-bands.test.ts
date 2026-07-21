@@ -148,9 +148,9 @@ describe('recommendBandKey — 추천 교재 밴드', () => {
 
 describe('formatLevel / levelGapFromGrade', () => {
   it('한국어 레벨 문구', () => {
-    expect(formatLevel({ band: 'L3', qualifier: 'exact' })).toBe('중2~3');
+    expect(formatLevel({ band: 'L3', qualifier: 'exact' })).toBe('중3');
     expect(formatLevel({ band: 'L6', qualifier: 'above' })).toBe('고3 이상');
-    expect(formatLevel({ band: 'L1', qualifier: 'below' })).toBe('예비중 미만');
+    expect(formatLevel({ band: 'L1', qualifier: 'below' })).toBe('중1 미만');
   });
 
   it('학년 대비 격차 — 고2가 L3 판정이면 -2', () => {
