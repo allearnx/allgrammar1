@@ -403,18 +403,20 @@ function ContactGateScreen({ onSubmitContact }: { onSubmitContact: (name: string
         style={{ background: VOCA_COLORS.blueLight }}
       >
         <p className="text-5xl">🎉</p>
-        <h2 className="mt-3 text-2xl font-bold" style={{ color: VOCA_COLORS.ink }}>진단 완료! 결과가 준비됐어요</h2>
-        <p className="mt-2 text-sm leading-relaxed" style={{ color: VOCA_COLORS.gray }}>
-          내 어휘 레벨과 <b style={{ color: VOCA_COLORS.ink }}>학년 단어를 몇 % 아는지</b> 나왔어요.
+        <h2 className="mt-3 text-2xl font-bold" style={{ color: VOCA_COLORS.ink, wordBreak: 'keep-all' }}>
+          우리 아이 진단 결과가 준비됐어요!
+        </h2>
+        <p className="mt-2 text-sm leading-relaxed" style={{ color: VOCA_COLORS.gray, wordBreak: 'keep-all' }}>
+          어휘 레벨과 <b style={{ color: VOCA_COLORS.ink }}>학년 단어를 몇 % 아는지</b> 나왔어요.
           <br />
-          결과 받을 연락처를 남겨주세요.
+          리포트 받으실 학부모님 연락처를 남겨주세요.
         </p>
         <form onSubmit={handleSubmit} className="mt-5 space-y-3 text-left">
           <input
             type="text"
             value={name}
             onChange={(e) => setName(e.target.value)}
-            placeholder="이름"
+            placeholder="학부모님 성함"
             maxLength={30}
             className="w-full rounded-2xl border-2 border-white bg-white px-4 py-3 text-base outline-none focus:border-[#1A73E8]"
           />
@@ -422,7 +424,7 @@ function ContactGateScreen({ onSubmitContact }: { onSubmitContact: (name: string
             type="tel"
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
-            placeholder="휴대폰 번호 (010-0000-0000)"
+            placeholder="학부모님 휴대폰 번호 (010-0000-0000)"
             maxLength={13}
             className="w-full rounded-2xl border-2 border-white bg-white px-4 py-3 text-base outline-none focus:border-[#1A73E8]"
           />
@@ -432,11 +434,11 @@ function ContactGateScreen({ onSubmitContact }: { onSubmitContact: (name: string
             className="w-full rounded-full py-3.5 text-center text-base font-bold text-white transition-opacity hover:opacity-90 disabled:opacity-40"
             style={{ background: VOCA_COLORS.blue }}
           >
-            {submitting ? '결과 확인 중…' : '내 결과 바로 보기'}
+            {submitting ? '결과 확인 중…' : '진단 결과 바로 보기'}
           </button>
         </form>
         <p className="mt-3 text-xs" style={{ color: VOCA_COLORS.gray }}>
-          연락처는 결과 안내와 학습 상담 목적으로만 사용해요.
+          연락처는 진단 리포트 안내와 학습 상담 목적으로만 사용해요.
         </p>
       </motion.div>
       <Link
