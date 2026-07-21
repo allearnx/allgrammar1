@@ -26,15 +26,21 @@ export function getR1Stages(p: VocaStudentProgress | null): VocaStage[] {
 
   const fcDone = fc || quizPass;
 
-  const quizStatus = quizPass ? 'done' : fcDone ? 'active' : 'locked';
+  // 실제 학습 순서(neon): 플래시카드 → 매칭 → 퀴즈 → 스펠링. 잠금도 이 순서로.
+  const matchStatus = matchDone ? 'done' : fcDone ? 'active' : 'locked';
+  const quizStatus = quizPass ? 'done' : matchDone ? 'active' : 'locked';
   const spellStatus = spellPass ? 'done' : quizPass ? 'active' : 'locked';
-  const matchStatus = matchDone ? 'done' : spellPass ? 'active' : 'locked';
 
   return [
     {
       key: 'flashcard', label: '플래시카드', status: fcDone ? 'done' : 'active',
       icon: <Eye className="h-6 w-6" />, description: '단어·뜻·예문을\n카드로 확인',
       scoreRequirement: '카드 확인', actualScore: fcDone ? '완료 ✓' : undefined,
+    },
+    {
+      key: 'matching', label: '매칭', status: matchStatus,
+      icon: <Link2 className="h-6 w-6" />, description: '유의어·반의어\n연결하기',
+      scoreRequirement: '90점 통과', actualScore: matchDone ? '완료' : p?.matching_score != null ? `${p.matching_score}점` : undefined,
     },
     {
       key: 'quiz', label: '퀴즈', status: quizStatus,
@@ -45,11 +51,6 @@ export function getR1Stages(p: VocaStudentProgress | null): VocaStage[] {
       key: 'spelling', label: '스펠링', status: spellStatus,
       icon: <Keyboard className="h-6 w-6" />, description: '뜻 보고 영단어\n직접 입력',
       scoreRequirement: '80점 통과', actualScore: p?.spelling_score != null ? `${p.spelling_score}점` : undefined,
-    },
-    {
-      key: 'matching', label: '매칭', status: matchStatus,
-      icon: <Link2 className="h-6 w-6" />, description: '유의어·반의어\n연결하기',
-      scoreRequirement: '90점 통과', actualScore: matchDone ? '완료' : p?.matching_score != null ? `${p.matching_score}점` : undefined,
     },
   ] as const satisfies VocaStage[];
 }
