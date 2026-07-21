@@ -93,6 +93,7 @@ export const NAV_CONFIG: Record<string, NavGroup[]> = {
         { href: '/teacher/students', label: '학생 관리', icon: Users },
         { href: '/teacher/live', label: '실시간 모니터', icon: Activity },
         { href: '/teacher/exams', label: '시험 일정', icon: CalendarDays },
+        { href: '/teacher/settings', label: '학원 설정', icon: Settings },
         { href: '/teacher/announcements', label: '공지사항', icon: Megaphone },
         { href: '/updates', label: '업데이트·사용법', icon: Sparkles },
       ],

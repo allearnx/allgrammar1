@@ -4,7 +4,7 @@ import { createAdminClient } from '@/lib/supabase/admin';
 import { academySettingsSchema } from '@/lib/api/schemas';
 
 export const GET = createApiHandler(
-  { roles: ['admin', 'boss'], hasBody: false },
+  { roles: ['teacher', 'admin', 'boss'], hasBody: false },
   async ({ user }) => {
     if (!user.academy_id) {
       throw new ForbiddenError('학원에 소속되어 있지 않습니다.');
@@ -29,7 +29,7 @@ export const GET = createApiHandler(
 );
 
 export const PATCH = createApiHandler(
-  { roles: ['admin', 'boss'], schema: academySettingsSchema },
+  { roles: ['teacher', 'admin', 'boss'], schema: academySettingsSchema },
   async ({ user, body }) => {
     if (!user.academy_id) {
       throw new ForbiddenError('학원에 소속되어 있지 않습니다.');
