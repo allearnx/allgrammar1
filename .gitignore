@@ -51,3 +51,7 @@ next-env.d.ts
 .mcp.json
 supabase/.temp/
 scripts/translation-wrongs-backup.json
+
+# 세션 임시 스크립트·감사용 백업 (커밋 제외)
+scripts/_tmp-*.mjs
+scripts/voca-example-backfill/
