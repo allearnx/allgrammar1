@@ -38,7 +38,7 @@ export function AcademySignupGuide() {
             <span>✦</span> 무료 체험
           </p>
           <ul className="space-y-0.5 text-xs text-slate-600">
-            <li>학생 5명, Day 3개까지 무료</li>
+            <li>학생 5명, 첫 7일은 보카 전체 무료</li>
             <li>보카 3 Day + 내신 1단원 체험</li>
             <li>유료 전환 시 전체 해금</li>
           </ul>

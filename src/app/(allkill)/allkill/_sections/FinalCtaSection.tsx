@@ -10,11 +10,11 @@ export default function FinalCtaSection() {
           영어 단어,<br />이번엔 진짜 끝내요.
         </h2>
         <p style={{ fontSize: 'clamp(15px, 1.6vw, 19px)', color: 'rgba(255,255,255,0.8)', marginBottom: 40, lineHeight: 1.7 }}>
-          언제든 취소 가능 · Day 3개 무료 체험
+          언제든 취소 가능 · 첫 7일 보카 전체 무료
         </p>
         <div style={{ display: 'flex', gap: 14, justifyContent: 'center', flexWrap: 'wrap' }}>
           <Link href="/signup" className="ak-btn" style={{ background: 'rgba(255,255,255,0.14)', color: 'white', border: '1.5px solid rgba(255,255,255,0.4)' }}>
-            Day 3개 무료 체험
+            7일 무료 체험
           </Link>
           <a href="#price" className="ak-btn ak-btn-primary">
             지금 시작하기

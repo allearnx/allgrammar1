@@ -90,7 +90,7 @@ export const reportRows = [
 export const coverageChips = ['중1·2·3 전 교과서', '고1·2·3 모의고사 5개년', '수능 기출 5개년', '고등 교과서'];
 
 // 가격
-export const freePlanFeatures = ['교재당 Day 3개 체험', '7단계 학습 전부 체험', '카드 등록 없음'];
+export const freePlanFeatures = ['가입 후 7일 보카 전체 무료', '7단계 학습 전부 체험', '카드 등록 없음'];
 
 export const selfStudyPlanFeatures = ['모든 교재 무제한', '1회독 + 2회독 전체 포함', '오답 관리 & 틀린 단어 복습', 'AI 서술형 채점'];
 

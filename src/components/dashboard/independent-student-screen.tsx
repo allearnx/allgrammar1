@@ -21,7 +21,7 @@ const SERVICE_OPTIONS: {
   {
     value: 'voca',
     label: '올킬보카',
-    desc: 'Day 3개 무료 체험 · 교과서·모의고사 기출 단어',
+    desc: '가입 후 7일 무료 체험 · 교과서·모의고사 기출 단어',
     icon: <BookA className="h-6 w-6" style={{ color: '#1A73E8' }} />,
     activeColor: 'border-[#1A73E8] bg-[#E8F0FE]',
   },

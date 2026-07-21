@@ -96,12 +96,12 @@ export default function HeroSection() {
             지금 시작하기
           </a>
           <Link href="/signup" className="ak-btn ak-btn-ghost">
-            Day 3개 무료 체험
+            7일 무료 체험
           </Link>
         </div>
 
         <p style={{ marginTop: 18, fontSize: 13, color: C.grayLight }}>
-          가입만 하면 바로 체험 · 카드 등록 없음
+          가입 후 7일간 보카 전체 무료 · 카드 등록 없음
         </p>
 
         {/* 롤링 워드 인디케이터 — 구글 4색 점 */}

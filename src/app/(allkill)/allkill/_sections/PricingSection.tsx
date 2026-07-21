@@ -35,7 +35,7 @@ export default function PricingSection({ vocaCourseId, vocaCoursePrice, selfStud
           부담 없이 <span style={{ color: C.blue }}>시작하세요</span>
         </h2>
         <p className="ak-sub" style={{ color: C.gray }}>
-          교재당 Day 3개는 무료예요. 해보고 결정하세요.
+          가입 후 7일간 보카 전체가 무료예요. 해보고 결정하세요.
         </p>
 
         <div className="ak-price-grid" style={{ marginTop: 52 }}>

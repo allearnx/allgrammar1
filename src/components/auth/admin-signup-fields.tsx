@@ -26,7 +26,7 @@ export function AdminSignupFields({ academyName, onAcademyNameChange }: AdminSig
         />
       </div>
       <p className="text-sm text-muted-foreground">
-        학생 5명, Day 3개까지 무료로 시작하세요. 유료 전환 시 모든 기능이 해제됩니다.
+        학생 5명, 가입 후 7일간 보카 전체를 무료로 써보세요. 유료 전환 시 모든 기능이 해제됩니다.
       </p>
     </>
   );

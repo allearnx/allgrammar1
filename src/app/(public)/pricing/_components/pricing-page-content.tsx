@@ -67,7 +67,7 @@ export function PricingPageContent({
             먼저 무료로 시작하세요
           </h2>
           <p className="mt-2 text-[15px] text-gray-600">
-            <b style={{ color: G.ink }}>학생 5명, Day 3개</b>까지 무료 체험 · 카드 등록 없음
+            <b style={{ color: G.ink }}>학생 5명, 첫 7일은 보카 전체 무료</b> 체험 · 카드 등록 없음
           </p>
           {isFreeAdmin ? (
             <p className="mt-4 text-sm font-semibold" style={{ color: G.blueDark }}>
