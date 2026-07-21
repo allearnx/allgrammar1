@@ -37,16 +37,44 @@ export const EXAM_PRESETS: ExamPreset[] = [
   { key: 'perfect', label: '완벽', hint: '합격 100 · 단어당 5초', intensity: { passScore: 100, secondsPerWord: 5, retryWrong: true } },
 ];
 
-/** service_assignments 행(부분)에서 강도 도출 — NULL 필드는 시스템 기본으로 폴백 */
-export function resolveExamIntensity(row: {
+/** 학생 예외 행 (service_assignments) */
+export interface StudentExamRow {
   voca_exam_pass_score?: number | null;
   voca_exam_seconds_per_word?: number | null;
   voca_exam_retry_wrong?: boolean | null;
-} | null | undefined): ExamIntensity {
+}
+
+/** 학원 기본 행 (academies) */
+export interface AcademyExamRow {
+  voca_exam_pass_score_default?: number | null;
+  voca_exam_seconds_per_word_default?: number | null;
+  voca_exam_retry_wrong_default?: boolean | null;
+}
+
+/**
+ * 강도 병합 — 우선순위(위가 우선): 배정시험 시간 override > 학생 예외 > 학원 기본 > 시스템 기본.
+ * 각 필드는 상위 레이어가 NULL이면 하위로 폴백한다. 1인자만 넘기면 1단계와 동일 동작(하위 호환).
+ */
+export function resolveExamIntensity(
+  student?: StudentExamRow | null,
+  academy?: AcademyExamRow | null,
+  /** 배정 시험 시간 오버라이드 (초). null/undefined면 미적용 */
+  overrideSecondsPerWord?: number | null,
+): ExamIntensity {
   return {
-    passScore: row?.voca_exam_pass_score ?? DEFAULT_EXAM_INTENSITY.passScore,
-    secondsPerWord: row?.voca_exam_seconds_per_word ?? DEFAULT_EXAM_INTENSITY.secondsPerWord,
-    retryWrong: row?.voca_exam_retry_wrong ?? DEFAULT_EXAM_INTENSITY.retryWrong,
+    passScore:
+      student?.voca_exam_pass_score ??
+      academy?.voca_exam_pass_score_default ??
+      DEFAULT_EXAM_INTENSITY.passScore,
+    secondsPerWord:
+      overrideSecondsPerWord ??
+      student?.voca_exam_seconds_per_word ??
+      academy?.voca_exam_seconds_per_word_default ??
+      DEFAULT_EXAM_INTENSITY.secondsPerWord,
+    retryWrong:
+      student?.voca_exam_retry_wrong ??
+      academy?.voca_exam_retry_wrong_default ??
+      DEFAULT_EXAM_INTENSITY.retryWrong,
   };
 }
 

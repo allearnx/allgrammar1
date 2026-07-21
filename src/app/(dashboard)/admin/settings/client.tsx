@@ -9,6 +9,7 @@ import { Copy, Check, Users, Building2, Mail, Phone, MapPin, FileText, BookOpen 
 import { toast } from 'sonner';
 import { fetchWithToast } from '@/lib/fetch-with-toast';
 import type { Academy } from '@/types/user';
+import { EXAM_PRESETS, resolveExamIntensity, matchPreset } from '@/lib/voca/exam-intensity';
 
 interface Props {
   academy: Academy;
@@ -27,6 +28,37 @@ export function AcademySettingsClient({ academy, currentStudents }: Props) {
     business_number: academy.business_number || '',
     naesin_required_rounds: academy.naesin_required_rounds ?? 1,
   });
+  // 표제어 시험 학원 기본 강도 (프리셋 클릭 즉시 저장)
+  const [examDefault, setExamDefault] = useState(() =>
+    resolveExamIntensity(null, {
+      voca_exam_pass_score_default: academy.voca_exam_pass_score_default,
+      voca_exam_seconds_per_word_default: academy.voca_exam_seconds_per_word_default,
+      voca_exam_retry_wrong_default: academy.voca_exam_retry_wrong_default,
+    }),
+  );
+  const [examSaving, setExamSaving] = useState<string | null>(null);
+
+  async function applyExamDefault(key: string, intensity: { passScore: number; secondsPerWord: number; retryWrong: boolean }) {
+    setExamSaving(key);
+    try {
+      await fetchWithToast('/api/admin/settings', {
+        method: 'PATCH',
+        body: {
+          vocaExamPassScoreDefault: intensity.passScore,
+          vocaExamSecondsPerWordDefault: intensity.secondsPerWord,
+          vocaExamRetryWrongDefault: intensity.retryWrong,
+        },
+        successMessage: `표제어 시험 학원 기본: ${EXAM_PRESETS.find((p) => p.key === key)?.label ?? key}`,
+        errorMessage: '저장 실패',
+      });
+      setExamDefault(intensity);
+      router.refresh();
+    } catch {
+      // toasted
+    } finally {
+      setExamSaving(null);
+    }
+  }
 
   function handleCopyCode() {
     navigator.clipboard.writeText(academy.invite_code);
@@ -200,6 +232,34 @@ export function AcademySettingsClient({ academy, currentStudents }: Props) {
               />
             </div>
           </div>
+          {/* 표제어 시험 학원 기본 강도 */}
+          <div className="rounded-lg border p-4">
+            <p className="text-sm font-medium">표제어 시험 기본 강도</p>
+            <p className="text-xs text-muted-foreground mb-3">학원 전체 기본값이에요. 학생별로 다르게 하려면 학생 관리에서 개별 설정하세요.</p>
+            <div className="flex flex-wrap items-center gap-2">
+              {EXAM_PRESETS.map((p) => {
+                const active = matchPreset(examDefault) === p.key;
+                return (
+                  <button
+                    key={p.key}
+                    type="button"
+                    disabled={examSaving !== null}
+                    onClick={() => applyExamDefault(p.key, p.intensity)}
+                    title={p.hint}
+                    className={`rounded-full px-4 py-1.5 text-sm font-medium transition-all ${
+                      examSaving === p.key ? 'opacity-50' : ''
+                    } ${active ? 'bg-[#FEF7E0] text-[#B06000] font-bold' : 'bg-muted text-muted-foreground hover:bg-muted/80 border border-border'}`}
+                  >
+                    {p.label}
+                  </button>
+                );
+              })}
+              <span className="text-xs text-muted-foreground">
+                합격 {examDefault.passScore}{examDefault.secondsPerWord > 0 ? ` · 단어당 ${examDefault.secondsPerWord}초` : ' · 무제한'} · 오답재시험 {examDefault.retryWrong ? 'ON' : 'OFF'}
+              </span>
+            </div>
+          </div>
+
           {/* 내신 2회독 설정 */}
           <div className="flex items-center justify-between rounded-lg border p-4">
             <div className="flex items-center gap-3">

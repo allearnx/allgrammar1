@@ -7,6 +7,7 @@ interface AssignmentRow {
   book_id: string;
   day_ids: string[];
   title: string | null;
+  seconds_per_word: number | null;
   created_at: string;
 }
 
@@ -17,7 +18,7 @@ export const GET = createApiHandler(
     const admin = createAdminClient();
     const { data: aRaw } = await admin
       .from('voca_exam_assignments')
-      .select('id, book_id, day_ids, title, created_at')
+      .select('id, book_id, day_ids, title, seconds_per_word, created_at')
       .eq('student_id', user.id)
       .order('created_at', { ascending: false });
     const assignments = (aRaw as AssignmentRow[] | null) ?? [];
@@ -57,6 +58,7 @@ export const GET = createApiHandler(
           bookId: a.book_id,
           dayIds: a.day_ids,
           title: a.title,
+          secondsPerWord: a.seconds_per_word,
           bestScore: r && r.best >= 0 ? r.best : null,
           attempts: r?.attempts ?? 0,
         };

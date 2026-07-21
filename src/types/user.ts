@@ -12,6 +12,9 @@ export interface Academy {
   max_students?: number | null;
   onboarding_completed_at?: string | null;
   naesin_required_rounds?: number;
+  voca_exam_pass_score_default?: number | null;
+  voca_exam_seconds_per_word_default?: number | null;
+  voca_exam_retry_wrong_default?: boolean | null;
   owner_id?: string | null;
   created_at: string;
   updated_at?: string | null;

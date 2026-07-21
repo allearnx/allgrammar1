@@ -12,7 +12,7 @@ export const GET = createApiHandler(
     const admin = createAdminClient();
     const data = dbResult(await admin
       .from('academies')
-      .select('id, name, invite_code, contact_phone, contact_email, address, logo_url, business_number, max_students, naesin_required_rounds, onboarding_completed_at, created_at, updated_at')
+      .select('id, name, invite_code, contact_phone, contact_email, address, logo_url, business_number, max_students, naesin_required_rounds, voca_exam_pass_score_default, voca_exam_seconds_per_word_default, voca_exam_retry_wrong_default, onboarding_completed_at, created_at, updated_at')
       .eq('id', user.academy_id)
       .single());
 
@@ -45,6 +45,9 @@ export const PATCH = createApiHandler(
     if (body.naesin_required_rounds !== undefined && body.naesin_required_rounds !== null) {
       updates.naesin_required_rounds = body.naesin_required_rounds;
     }
+    if (body.vocaExamPassScoreDefault !== undefined) updates.voca_exam_pass_score_default = body.vocaExamPassScoreDefault;
+    if (body.vocaExamSecondsPerWordDefault !== undefined) updates.voca_exam_seconds_per_word_default = body.vocaExamSecondsPerWordDefault;
+    if (body.vocaExamRetryWrongDefault !== undefined) updates.voca_exam_retry_wrong_default = body.vocaExamRetryWrongDefault;
 
     dbResult(await admin
       .from('academies')

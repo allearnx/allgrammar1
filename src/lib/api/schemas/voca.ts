@@ -92,6 +92,8 @@ export const vocaExamAssignmentCreateSchema = z.object({
   dayIds: z.array(ID).min(1).max(3),
   studentIds: z.array(ID).min(1).max(200),
   title: z.string().trim().max(100).nullish(),
+  /** 이 배정 시험의 제한시간(초) 오버라이드. null = 학생/학원 강도 따름 */
+  secondsPerWord: z.number().int().min(0).max(60).nullish(),
 });
 
 export const vocaExamAssignmentDeleteSchema = z.object({

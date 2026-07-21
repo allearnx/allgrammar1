@@ -24,7 +24,17 @@ export default async function VocaExamPage() {
   const plan = await getPlanContext(user.academy_id, user.id);
   if (!assignment && plan.tier !== 'free') redirect('/student');
 
-  const examIntensity = resolveExamIntensity(assignment);
+  // 학원 기본 강도 (개인 가입은 academy_id 없음 → 시스템 기본으로 폴백)
+  let academyExam = null;
+  if (user.academy_id) {
+    const { data } = await supabase
+      .from('academies')
+      .select('voca_exam_pass_score_default, voca_exam_seconds_per_word_default, voca_exam_retry_wrong_default')
+      .eq('id', user.academy_id)
+      .maybeSingle();
+    academyExam = data;
+  }
+  const examIntensity = resolveExamIntensity(assignment, academyExam);
 
   const { data: books } = await supabase
     .from('voca_books').select(VOCA_BOOKS_COLUMNS).eq('is_active', true).order('created_at');

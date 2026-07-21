@@ -31,6 +31,8 @@ export function VocaExamAssignPanel() {
   const [selDays, setSelDays] = useState<string[]>([]);
   const [selStudents, setSelStudents] = useState<string[]>([]);
   const [title, setTitle] = useState('');
+  // 이 시험의 제한시간(초). 0 = 학생/학원 강도 따름 (미지정)
+  const [secondsPerWord, setSecondsPerWord] = useState(0);
   // 기본 펼침 — 접혀 있으면 선생님들이 배정 기능 자체를 못 찾는다 (사장님 피드백)
   const [open, setOpen] = useState(true);
   const [saving, setSaving] = useState(false);
@@ -71,12 +73,12 @@ export function VocaExamAssignPanel() {
     setSaving(true);
     try {
       const res = await fetchWithToast<{ count: number }>('/api/voca/exam-assignments', {
-        body: { bookId, dayIds: selDays, studentIds: selStudents, title: title.trim() || null },
+        body: { bookId, dayIds: selDays, studentIds: selStudents, title: title.trim() || null, secondsPerWord: secondsPerWord > 0 ? secondsPerWord : null },
         errorMessage: '배정 실패',
       });
       if (res) {
         toast.success(`${res.count}명에게 시험을 배정했어요`);
-        setSelDays([]); setSelStudents([]); setTitle(''); setOpen(false);
+        setSelDays([]); setSelStudents([]); setTitle(''); setSecondsPerWord(0); setOpen(false);
         loadForBook();
       }
     } finally { setSaving(false); }
@@ -137,6 +139,13 @@ export function VocaExamAssignPanel() {
           </div>
           <input value={title} onChange={(e) => setTitle(e.target.value)} placeholder="시험 제목 (선택)"
             className="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm" maxLength={100} />
+          <label className="flex items-center gap-2 text-sm text-gray-600">
+            <span className="shrink-0">단어당 제한시간</span>
+            <input type="number" min={0} max={60} value={secondsPerWord}
+              onChange={(e) => setSecondsPerWord(Math.max(0, Math.min(60, Number(e.target.value) || 0)))}
+              className="w-20 rounded-lg border border-gray-200 px-2 py-1.5 text-sm" />
+            <span className="text-xs text-gray-400">{secondsPerWord > 0 ? '초' : '초 (0 = 학생 강도 따름)'}</span>
+          </label>
           <div className="flex gap-2">
             <button onClick={assign} disabled={saving || selDays.length === 0 || selStudents.length === 0}
               className="flex-1 rounded-xl bg-brand-600 py-2.5 text-sm font-bold text-white hover:bg-brand-700 disabled:bg-gray-300">

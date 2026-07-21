@@ -54,6 +54,10 @@ export const academySettingsSchema = z.object({
   logo_url: URL_STR.nullish(),
   business_number: z.string().max(20).nullish(),
   naesin_required_rounds: z.number().min(1).max(2).nullish(),
+  // 표제어 시험 학원 기본 강도 — null = 시스템 기본(90/무제한/off)
+  vocaExamPassScoreDefault: z.number().int().min(50).max(100).nullable().optional(),
+  vocaExamSecondsPerWordDefault: z.number().int().min(0).max(60).nullable().optional(),
+  vocaExamRetryWrongDefault: z.boolean().nullable().optional(),
 });
 
 export const academyPatchSchema = z.object({
