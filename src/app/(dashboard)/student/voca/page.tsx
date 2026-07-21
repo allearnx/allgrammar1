@@ -5,6 +5,7 @@ import { Topbar } from '@/components/layout/topbar';
 import { VocaHomeClient } from './client';
 import { getPlanContext } from '@/lib/billing/get-plan-context';
 import { canUseFeature } from '@/lib/billing/feature-gate';
+import { resolveFreeVocaDayLimit } from '@/lib/billing/voca-free-limit';
 import { DiagnosticEntryCard } from '@/components/voca/diagnostic-entry-card';
 import { isR1Complete } from '@/lib/dashboard/voca-helpers';
 import type { VocaBook, VocaDay, VocaStudentProgress } from '@/types/voca';
@@ -95,8 +96,9 @@ export default async function StudentVocaPage({
       : null;
 
   const planContext = planForGate;
-  const isFree = planContext.tier === 'free';
   const round2Locked = !assignment?.round2_unlocked && !canUseFeature(planContext.tier, 'voca:round2');
+  // 무료 체험: 가입 7일 이내 전체 Day, 이후 3개 (유료 0=무제한)
+  const freeVocaDayLimit = await resolveFreeVocaDayLimit(supabase, planContext.tier, user.academy_id, user.id);
 
   return (
     <>
@@ -110,7 +112,7 @@ export default async function StudentVocaPage({
           submissionStatuses={submissionStatusMap}
           studentId={user.id}
           initialBookId={initialBookId}
-          freeDayLimit={isFree ? 3 : 0}
+          freeDayLimit={freeVocaDayLimit}
           round2Locked={round2Locked}
           round2Forced={!!assignment?.round2_unlocked}
           roundMode={(assignment?.voca_round_mode as 'book' | 'day') || 'book'}

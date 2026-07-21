@@ -4,8 +4,33 @@ import {
   deriveTier,
   getAllowedNaesinStages,
   mergeEnabledStages,
+  getFreeVocaDayLimit,
+  FREE_VOCA_DAY_LIMIT,
 } from '@/lib/billing/feature-gate';
 import type { Feature, Tier } from '@/lib/billing/feature-gate';
+
+describe('getFreeVocaDayLimit (보카 무료 체험 7일)', () => {
+  const iso = (daysAgo: number) => new Date(Date.now() - daysAgo * 86400000).toISOString();
+
+  it('유료는 항상 무제한(0)', () => {
+    expect(getFreeVocaDayLimit('paid', iso(30))).toBe(0);
+    expect(getFreeVocaDayLimit('trialing', iso(30))).toBe(0);
+  });
+
+  it('무료 + 가입 7일 이내 → 무제한(0)', () => {
+    expect(getFreeVocaDayLimit('free', iso(0))).toBe(0);
+    expect(getFreeVocaDayLimit('free', iso(6))).toBe(0);
+  });
+
+  it('무료 + 가입 7일 초과 → 맛보기 한도', () => {
+    expect(getFreeVocaDayLimit('free', iso(8))).toBe(FREE_VOCA_DAY_LIMIT);
+    expect(getFreeVocaDayLimit('free', iso(365))).toBe(FREE_VOCA_DAY_LIMIT);
+  });
+
+  it('가입일 없으면 맛보기 한도로 폴백', () => {
+    expect(getFreeVocaDayLimit('free', null)).toBe(FREE_VOCA_DAY_LIMIT);
+  });
+});
 
 describe('deriveTier', () => {
   it('null subscription → free', () => {

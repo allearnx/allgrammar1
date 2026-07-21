@@ -19,6 +19,25 @@ const MEMORIZE_STAGES = ['vocab', 'passage', 'dialogue'];
 /** 무료 체험 시 올인내신 단원 제한 (1개만) */
 export const FREE_NAESIN_UNIT_LIMIT = 1;
 
+/** 보카 무료 체험 — 가입 후 이 기간은 전체 Day 무제한, 이후 맛보기 Day 수로 축소 */
+export const FREE_VOCA_TRIAL_DAYS = 7;
+/** 체험 종료 후 무료로 볼 수 있는 Day 수 */
+export const FREE_VOCA_DAY_LIMIT = 3;
+
+/**
+ * 무료 학원/개인이 볼 수 있는 보카 Day 수. 0 = 무제한.
+ * 가입 후 FREE_VOCA_TRIAL_DAYS일 이내면 전체 무제한(체험), 이후 FREE_VOCA_DAY_LIMIT개.
+ * 유료는 항상 무제한(0). (기존 무료 학원은 이미 체험 기간이 지나 3개로 자연 적용)
+ */
+export function getFreeVocaDayLimit(tier: Tier, signupIso: string | null | undefined): number {
+  if (tier !== 'free') return 0;
+  if (signupIso) {
+    const elapsed = Date.now() - new Date(signupIso).getTime();
+    if (elapsed >= 0 && elapsed <= FREE_VOCA_TRIAL_DAYS * 24 * 60 * 60 * 1000) return 0;
+  }
+  return FREE_VOCA_DAY_LIMIT;
+}
+
 const PAID_ONLY_FEATURES: ReadonlySet<Feature> = new Set([
   'naesin:grammar',
   'naesin:problem',

@@ -1,6 +1,7 @@
 import { requireRole } from '@/lib/auth/helpers';
 import { createClient } from '@/lib/supabase/server';
 import { redirect, notFound } from 'next/navigation';
+import { resolveFreeVocaDayLimit } from '@/lib/billing/voca-free-limit';
 import { Topbar } from '@/components/layout/topbar';
 import { VocaDayClient } from './client';
 import { getPlanContext } from '@/lib/billing/get-plan-context';
@@ -39,15 +40,16 @@ export default async function StudentVocaDayPage({
 
   if (!day) notFound();
 
-  // 무료 플랜: Day 3개까지만 접근 가능
+  // 무료 플랜: 가입 7일 이내는 전체 Day, 이후 앞 N개까지만
   const planContext = planForGate;
-  if (planContext.tier === 'free') {
+  const freeVocaDayLimit = await resolveFreeVocaDayLimit(supabase, planContext.tier, user.academy_id, user.id);
+  if (freeVocaDayLimit > 0) {
     const { count } = await supabase
       .from('voca_days')
       .select('id', { count: 'exact', head: true })
       .eq('book_id', (day as VocaDay).book_id)
       .lt('sort_order', (day as VocaDay).sort_order);
-    if ((count ?? 0) >= 3) redirect('/student/voca');
+    if ((count ?? 0) >= freeVocaDayLimit) redirect('/student/voca');
   }
 
   // Get vocabulary

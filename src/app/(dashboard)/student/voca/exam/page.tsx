@@ -1,5 +1,6 @@
 import { requireRole } from '@/lib/auth/helpers';
 import { createClient } from '@/lib/supabase/server';
+import { resolveFreeVocaDayLimit } from '@/lib/billing/voca-free-limit';
 import { redirect } from 'next/navigation';
 import { Topbar } from '@/components/layout/topbar';
 import { getPlanContext } from '@/lib/billing/get-plan-context';
@@ -39,6 +40,7 @@ export default async function VocaExamPage() {
   const { data: books } = await supabase
     .from('voca_books').select(VOCA_BOOKS_COLUMNS).eq('is_active', true).order('created_at');
 
+  const freeVocaDayLimit = await resolveFreeVocaDayLimit(supabase, plan.tier, user.academy_id, user.id);
   const bookIds = (books || []).map((b) => b.id);
   let days: VocaDay[] = [];
   if (bookIds.length > 0) {
@@ -58,7 +60,7 @@ export default async function VocaExamPage() {
           books={(books as VocaBook[]) || []}
           days={days}
           studentId={user.id}
-          freeDayLimit={plan.tier === 'free' ? 3 : 0}
+          freeDayLimit={freeVocaDayLimit}
           examIntensity={examIntensity}
         />
       </div>
