@@ -45,8 +45,6 @@ export function Round2SynAntExam({
   const [score, setScore] = useState<number | null>(null);
   const [timeLeft, setTimeLeft] = useState<number | null>(null);
 
-  if (!assignment && days.length === 0) return null;
-
   function toggle(id: string) {
     setSelected((prev) =>
       prev.includes(id) ? prev.filter((x) => x !== id) : prev.length >= MAX_DAYS ? prev : [...prev, id],
@@ -154,6 +152,9 @@ export function Round2SynAntExam({
     return () => clearInterval(iv);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [index, mode, graded, intensity.secondsPerWord]);
+
+  // 자율 모드에서 Day가 없으면 렌더 안 함 (hook 전부 호출 후 — rules-of-hooks)
+  if (!assignment && days.length === 0) return null;
 
   // ── 시험 진행 ──
   if (mode === 'exam' && q) {
