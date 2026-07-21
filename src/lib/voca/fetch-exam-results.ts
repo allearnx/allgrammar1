@@ -9,12 +9,15 @@ interface ExamResultRow {
   range_key: string;
   score: number;
   wrong_words: WrongWord[] | null;
+  exam_type: string;
   created_at: string;
 }
 
 export interface ExamGroup {
   rangeKey: string;
   dayIds: string[];
+  /** 'headword'(1회독 표제어) / 'syn_ant'(2회독 유의어·반의어) */
+  examType: 'headword' | 'syn_ant';
   bestScore: number;
   attempts: number;
   lastAttemptAt: string;
@@ -46,7 +49,7 @@ export async function fetchVocaExamGroups(
 
   let q = admin
     .from('voca_exam_results')
-    .select('student_id, day_ids, range_key, score, wrong_words, created_at')
+    .select('student_id, day_ids, range_key, score, wrong_words, exam_type, created_at')
     .in('student_id', studentIds)
     .order('created_at', { ascending: false });
   if (bookId) q = q.eq('book_id', bookId);
@@ -61,9 +64,13 @@ export async function fetchVocaExamGroups(
     for (const d of r.day_ids || []) allDayIds.add(d);
     if (!byStudent.has(r.student_id)) byStudent.set(r.student_id, new Map());
     const ranges = byStudent.get(r.student_id)!;
-    const ex = ranges.get(r.range_key) ?? {
+    // 같은 Day조합이라도 1회독/2회독은 별도 카드로 (그룹 키에 유형 포함)
+    const examType = (r.exam_type === 'syn_ant' ? 'syn_ant' : 'headword') as 'headword' | 'syn_ant';
+    const key = `${r.range_key}::${examType}`;
+    const ex = ranges.get(key) ?? {
       rangeKey: r.range_key,
       dayIds: r.day_ids,
+      examType,
       bestScore: -1,
       attempts: 0,
       lastAttemptAt: r.created_at,
@@ -76,7 +83,7 @@ export async function fetchVocaExamGroups(
       ex.bestScore = r.score;
       ex.wrongWords = r.wrong_words || [];
     }
-    ranges.set(r.range_key, ex);
+    ranges.set(key, ex);
   }
 
   const dayTitles: Record<string, string> = {};

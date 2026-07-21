@@ -10,6 +10,7 @@ type WrongWord = { front_text: string; back_text: string };
 interface ExamGroup {
   rangeKey: string;
   dayIds: string[];
+  examType: 'headword' | 'syn_ant';
   attempts: number;
   bestScore: number;
   wrongWords: WrongWord[];
@@ -73,7 +74,7 @@ export function VocaExamResultsClient() {
   return (
     <div className="space-y-4">
       <div className="rounded-xl border bg-rose-50/50 px-4 py-3 text-sm text-rose-600">
-        🎁 학생들이 본 <strong>묶음 보너스 시험(표제어 스펠링)</strong> 결과입니다. Day 조합별 최고점·재응시 횟수·오답을 확인하세요.
+        🎁 학생들이 본 <strong>묶음 시험(1회독 표제어 · 2회독 유의어·반의어)</strong> 결과입니다. Day 조합별 최고점·재응시 횟수·오답을 확인하세요.
       </div>
 
       {/* 교재 선택 */}
@@ -120,10 +121,13 @@ export function VocaExamResultsClient() {
               {expanded === s.studentId && (
                 <div className="border-t px-4 py-3 space-y-3">
                   {s.exams.map((ex) => (
-                    <div key={ex.rangeKey} className="rounded-lg bg-gray-50 px-3 py-2">
+                    <div key={`${ex.rangeKey}-${ex.examType}`} className="rounded-lg bg-gray-50 px-3 py-2">
                       <div className="flex items-center justify-between gap-2">
                         <span className="flex items-center gap-1.5 text-sm font-medium text-gray-800">
                           {ex.isToday && <span className="rounded bg-rose-500 px-1.5 py-0.5 text-[10px] font-bold text-white">오늘</span>}
+                          <span className="rounded-full px-1.5 py-0.5 text-[10px] font-bold" style={{ background: ex.examType === 'syn_ant' ? '#E8F0FE' : '#E6F4EA', color: ex.examType === 'syn_ant' ? '#174EA6' : '#188038' }}>
+                            {ex.examType === 'syn_ant' ? '2회독' : '1회독'}
+                          </span>
                           {rangeLabel(ex.dayIds)}
                         </span>
                         <span className="flex items-center gap-2 shrink-0">
