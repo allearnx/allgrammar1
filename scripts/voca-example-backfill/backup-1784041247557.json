@@ -1,0 +1,2402 @@
+[
+ {
+  "id": "9df65c84-6bb4-4820-b780-acda84ded948",
+  "front_text": "require",
+  "back_text": "요구하다",
+  "example_sentence": "This job requires a lot of patience.",
+  "example_sentence_ko": "이 일은 많은 인내심을 요구한다.",
+  "day_id": "3f62ce9a-8cf8-4dcd-9073-d7951cc5d1f4"
+ },
+ {
+  "id": "f7954944-ef69-4f8e-8516-95cff71b7729",
+  "front_text": "prove",
+  "back_text": "증명하다/입증하다",
+  "example_sentence": "She proved that the theory was wrong.",
+  "example_sentence_ko": "그녀는 그 이론이 잘못되었음을 증명했다.",
+  "day_id": "29a7836e-1b61-4c68-af03-7893d396364d"
+ },
+ {
+  "id": "b3089c69-347b-4f50-ad3b-f513536db9d0",
+  "front_text": "whereas",
+  "back_text": "반면에",
+  "example_sentence": "He is rich",
+  "example_sentence_ko": null,
+  "day_id": "723e9c97-fd4b-493a-aa00-eb55d88a455e"
+ },
+ {
+  "id": "be8b61be-5b90-43e4-a6a5-345553cd632a",
+  "front_text": "lay",
+  "back_text": "(알을) 낳다",
+  "example_sentence": "The bird laid three eggs.",
+  "example_sentence_ko": "그 새는 알 세 개를 낳았다.",
+  "day_id": "723e9c97-fd4b-493a-aa00-eb55d88a455e"
+ },
+ {
+  "id": "97ced273-d7d7-488a-9ed2-6c1829195d19",
+  "front_text": "benefit",
+  "back_text": "혜택",
+  "example_sentence": "There are many benefits to exercise.",
+  "example_sentence_ko": "운동에는 많은 이점이 있습니다.",
+  "day_id": "832e41cc-c133-4f57-9a93-fc06c98de7bc"
+ },
+ {
+  "id": "41b82742-dc9d-40cd-a6e6-00d5530a7453",
+  "front_text": "impression",
+  "back_text": "인상",
+  "example_sentence": "First impressions are important.",
+  "example_sentence_ko": "첫인상은 중요하다.",
+  "day_id": "969db83f-b891-4f4d-9901-a82d7b0ce52b"
+ },
+ {
+  "id": "3f9beed6-b953-41b0-8e9c-10c3747aacb2",
+  "front_text": "impose",
+  "back_text": "부과하다",
+  "example_sentence": "The city imposed a new tax.",
+  "example_sentence_ko": "그 도시는 새로운 세금을 부과했습니다.",
+  "day_id": "ea7ec79b-ea5e-42ef-92d5-943f1eebae39"
+ },
+ {
+  "id": "a1b6bc82-b8ae-4b74-869d-386cd5bdf1ed",
+  "front_text": "enact",
+  "back_text": "법제화하다",
+  "example_sentence": "The government enacted a new law.",
+  "example_sentence_ko": "정부는 새로운 법을 제정했다.",
+  "day_id": "ea7ec79b-ea5e-42ef-92d5-943f1eebae39"
+ },
+ {
+  "id": "c1dac7d5-58e5-4a1b-b856-b2064acfc757",
+  "front_text": "subject",
+  "back_text": "피실험자",
+  "example_sentence": "The subjects were divided into two groups.",
+  "example_sentence_ko": "피험자들을 두 그룹으로 나누었다.",
+  "day_id": "969db83f-b891-4f4d-9901-a82d7b0ce52b"
+ },
+ {
+  "id": "c04bf6a0-45dc-4479-94cf-b64c8e370c25",
+  "front_text": "determine",
+  "back_text": "결정하다",
+  "example_sentence": "Your hard work determines your success.",
+  "example_sentence_ko": "당신의 노력이 당신의 성공을 결정한다.",
+  "day_id": "969db83f-b891-4f4d-9901-a82d7b0ce52b"
+ },
+ {
+  "id": "cc9b6606-157d-4711-add9-48309b5638f2",
+  "front_text": "measure",
+  "back_text": "측정하다",
+  "example_sentence": "This tool measures blood pressure.",
+  "example_sentence_ko": "이 도구는 혈압을 측정한다.",
+  "day_id": "969db83f-b891-4f4d-9901-a82d7b0ce52b"
+ },
+ {
+  "id": "e6f7d102-3e3f-486b-a26c-001231b6fc5a",
+  "front_text": "requirement",
+  "back_text": "요구",
+  "example_sentence": "Meeting the requirements is essential.",
+  "example_sentence_ko": "요구사항을 충족하는 것이 필수적이다.",
+  "day_id": "ea7ec79b-ea5e-42ef-92d5-943f1eebae39"
+ },
+ {
+  "id": "1e079750-b024-45f0-a661-875795fc7c32",
+  "front_text": "encounter",
+  "back_text": "만나다(부닥치다)",
+  "example_sentence": "We encountered several problems.",
+  "example_sentence_ko": "우리는 여러 문제에 직면했다.",
+  "day_id": "3e3fefb8-bd16-45f1-968a-0516e5e304e7"
+ },
+ {
+  "id": "603494d5-0658-4f9b-b4d4-88433b86f333",
+  "front_text": "regulation",
+  "back_text": "규제",
+  "example_sentence": "Safety regulations must be followed.",
+  "example_sentence_ko": "안전 규정을 따라야 한다.",
+  "day_id": "ea7ec79b-ea5e-42ef-92d5-943f1eebae39"
+ },
+ {
+  "id": "8d74d487-20d5-46aa-aed7-12b7af6a97e9",
+  "front_text": "grab",
+  "back_text": "붙잡다",
+  "example_sentence": "He grabbed his bag and left.",
+  "example_sentence_ko": "그는 가방을 집어 들고 나갔다.",
+  "day_id": "3e3fefb8-bd16-45f1-968a-0516e5e304e7"
+ },
+ {
+  "id": "be3acead-eca4-456f-96f4-027b7088e023",
+  "front_text": "import",
+  "back_text": "수입",
+  "example_sentence": "The country's imports are increasing.",
+  "example_sentence_ko": "그 나라의 수입이 증가하고 있다.",
+  "day_id": "ea7ec79b-ea5e-42ef-92d5-943f1eebae39"
+ },
+ {
+  "id": "c4d47070-20be-4515-91b5-2556f95f927a",
+  "front_text": "absorb",
+  "back_text": "부담하다",
+  "example_sentence": "The company absorbed the extra costs.",
+  "example_sentence_ko": "회사가 추가 비용을 부담했다.",
+  "day_id": "ea7ec79b-ea5e-42ef-92d5-943f1eebae39"
+ },
+ {
+  "id": "d9a0373c-7bf0-4a7e-9807-0f397c045d7a",
+  "front_text": "greet",
+  "back_text": "인사하다",
+  "example_sentence": "She greeted me with a smile.",
+  "example_sentence_ko": "그녀는 미소를 지으며 나를 맞이했다.",
+  "day_id": "3e3fefb8-bd16-45f1-968a-0516e5e304e7"
+ },
+ {
+  "id": "ffcadd9a-28e0-4bfd-8b80-50c48aac88e0",
+  "front_text": "board",
+  "back_text": "탑승하다",
+  "example_sentence": "He boarded the plane to Paris.",
+  "example_sentence_ko": "그는 파리행 비행기에 탔다.",
+  "day_id": "3e3fefb8-bd16-45f1-968a-0516e5e304e7"
+ },
+ {
+  "id": "4518c6af-12e7-4a68-abdd-fc75ab4574ef",
+  "front_text": "rescue",
+  "back_text": "구조하다",
+  "example_sentence": "The firemen rescued the cat from the tree.",
+  "example_sentence_ko": "소방관들이 나무에서 고양이를 구출했습니다.",
+  "day_id": "69130c7c-dfab-42c0-ba1b-309b88dbc30a"
+ },
+ {
+  "id": "573a74f7-ccc0-424d-8e9a-4d8cd9a4ed88",
+  "front_text": "release",
+  "back_text": "방출하다",
+  "example_sentence": "The factory released smoke into the air.",
+  "example_sentence_ko": "그 공장은 대기 중으로 연기를 배출했다.",
+  "day_id": "69130c7c-dfab-42c0-ba1b-309b88dbc30a"
+ },
+ {
+  "id": "9c52a8af-7283-4af2-931d-39359dd95b17",
+  "front_text": "condition",
+  "back_text": "조건",
+  "example_sentence": "The working conditions are excellent.",
+  "example_sentence_ko": "근무 환경이 훌륭하다.",
+  "day_id": "69130c7c-dfab-42c0-ba1b-309b88dbc30a"
+ },
+ {
+  "id": "b69ae852-e0cc-4063-8f4b-e92c58529481",
+  "front_text": "design",
+  "back_text": "고안하다",
+  "example_sentence": "They designed a new type of greenhouse.",
+  "example_sentence_ko": "그들은 새로운 종류의 온실을 설계했다.",
+  "day_id": "69130c7c-dfab-42c0-ba1b-309b88dbc30a"
+ },
+ {
+  "id": "b92dd8a7-2d8c-47bd-b6f9-6c25544c7241",
+  "front_text": "prompt",
+  "back_text": "촉구하다",
+  "example_sentence": "The news prompted him to take action.",
+  "example_sentence_ko": "그 뉴스는 그를 행동하도록 촉발했습니다.",
+  "day_id": "69130c7c-dfab-42c0-ba1b-309b88dbc30a"
+ },
+ {
+  "id": "d737d5cf-2de7-410f-842a-32e275ec3445",
+  "front_text": "adopt",
+  "back_text": "채택하다",
+  "example_sentence": "The school adopted a new teaching method.",
+  "example_sentence_ko": "그 학교는 새로운 교수법을 도입했다.",
+  "day_id": "69130c7c-dfab-42c0-ba1b-309b88dbc30a"
+ },
+ {
+  "id": "edce3f72-4edd-4716-b929-798f1d0d667a",
+  "front_text": "observe",
+  "back_text": "관찰하다",
+  "example_sentence": "I observed how the birds built their nests.",
+  "example_sentence_ko": "나는 새들이 둥지를 짓는 모습을 관찰했다.",
+  "day_id": "69130c7c-dfab-42c0-ba1b-309b88dbc30a"
+ },
+ {
+  "id": "074fd25e-9d7b-4824-a4d0-f8032d781e19",
+  "front_text": "deserve",
+  "back_text": "~을 받을 만하다",
+  "example_sentence": "She deserves the reward.",
+  "example_sentence_ko": "그녀는 그 상을 받을 자격이 있다.",
+  "day_id": "7b175480-bd3d-44e4-b916-9eb669333b11"
+ },
+ {
+  "id": "1454bb4c-80d8-4bd8-965a-9062b19089bf",
+  "front_text": "management",
+  "back_text": "관리",
+  "example_sentence": "Good environmental stewardship is our duty.",
+  "example_sentence_ko": "좋은 환경 관리는 우리의 책임이다.",
+  "day_id": "7b175480-bd3d-44e4-b916-9eb669333b11"
+ },
+ {
+  "id": "368946a6-8c6e-4001-b0ca-64c8c5db3965",
+  "front_text": "glow",
+  "back_text": "빛나다",
+  "example_sentence": "The coals glowed in the dark.",
+  "example_sentence_ko": "석탄이 어둠 속에서 빛났다.",
+  "day_id": "d75d8e35-9c81-4818-99d8-ff9f63c26dcf"
+ },
+ {
+  "id": "4414a8d6-8765-44d4-a5d3-e45715312f7e",
+  "front_text": "jam",
+  "back_text": "움직이지 않게 되다",
+  "example_sentence": "The paper got jammed in the printer.",
+  "example_sentence_ko": "종이가 프린터에 걸렸습니다.",
+  "day_id": "d75d8e35-9c81-4818-99d8-ff9f63c26dcf"
+ },
+ {
+  "id": "c0ed79f8-d600-42b3-a86d-2b010c368b2d",
+  "front_text": "standard",
+  "back_text": "표준",
+  "example_sentence": "We have high standards for our products.",
+  "example_sentence_ko": "우리는 제품에 대해 높은 기준을 유지한다.",
+  "day_id": "d75d8e35-9c81-4818-99d8-ff9f63c26dcf"
+ },
+ {
+  "id": "4eeeb686-ec10-4d2a-af49-ed335a207a98",
+  "front_text": "allow",
+  "back_text": "허락하다, 허가하다",
+  "example_sentence": "My parents allowed me to go out.",
+  "example_sentence_ko": "부모님이 나를 외출하도록 허락해주셨다.",
+  "day_id": "bc353e43-d30f-4006-9bd7-ec5db8386c70"
+ },
+ {
+  "id": "5ba92ba5-fc6b-4e42-b373-02b6408efa8c",
+  "front_text": "standard",
+  "back_text": "표준, 기준, 표준의",
+  "example_sentence": "This machine meets international standards.",
+  "example_sentence_ko": "이 기계는 국제 표준을 충족한다.",
+  "day_id": "bc353e43-d30f-4006-9bd7-ec5db8386c70"
+ },
+ {
+  "id": "70420fc0-0c54-4e43-ab43-0ad4bd5600f0",
+  "front_text": "affect",
+  "back_text": "~에 영향을 미치다",
+  "example_sentence": "The weather affects my mood.",
+  "example_sentence_ko": "날씨가 기분에 영향을 미친다.",
+  "day_id": "bc353e43-d30f-4006-9bd7-ec5db8386c70"
+ },
+ {
+  "id": "86f9de55-e538-4568-9cd0-e83a9cf8b093",
+  "front_text": "acquire",
+  "back_text": "얻다, 습득하다",
+  "example_sentence": "He acquired new skills during training.",
+  "example_sentence_ko": "그는 훈련 중에 새로운 기술을 습득했다.",
+  "day_id": "bc353e43-d30f-4006-9bd7-ec5db8386c70"
+ },
+ {
+  "id": "9e2ed54c-1d48-44e6-8550-8fc906c64765",
+  "front_text": "imply",
+  "back_text": "암시하다",
+  "example_sentence": "Her silence implied agreement.",
+  "example_sentence_ko": "그녀의 침묵은 동의를 의미했다.",
+  "day_id": "51d8d196-5cf4-44d1-b587-93e2e6687e3c"
+ },
+ {
+  "id": "e98cdfa2-3e07-4383-8f8f-ac390f9d4eb5",
+  "front_text": "stereotype",
+  "back_text": "고정 관념",
+  "example_sentence": "We should avoid stereotypes.",
+  "example_sentence_ko": "우리는 고정관념을 피해야 한다.",
+  "day_id": "bc353e43-d30f-4006-9bd7-ec5db8386c70"
+ },
+ {
+  "id": "e7fa6778-9a90-4348-b29e-d973d5601b04",
+  "front_text": "facility",
+  "back_text": "편의 시설",
+  "example_sentence": "The hotel has great facilities.",
+  "example_sentence_ko": "그 호텔은 훌륭한 시설을 갖추고 있다.",
+  "day_id": "bc353e43-d30f-4006-9bd7-ec5db8386c70"
+ },
+ {
+  "id": "27b4c5e9-4e0b-48c4-937a-3c7800a5924d",
+  "front_text": "exhibit",
+  "back_text": "전시하다",
+  "example_sentence": "Her work will be exhibited here.",
+  "example_sentence_ko": "그녀의 작품이 여기에 전시될 것이다.",
+  "day_id": "f7b015e6-f24a-49b1-b8b9-95ade6abff46"
+ },
+ {
+  "id": "2fcb6830-cc16-4df1-bb47-7b89f446c3b0",
+  "front_text": "gather",
+  "back_text": "모으다",
+  "example_sentence": "A crowd gathered in the street.",
+  "example_sentence_ko": "군중이 거리에 모여들었다.",
+  "day_id": "51d8d196-5cf4-44d1-b587-93e2e6687e3c"
+ },
+ {
+  "id": "4981f9b3-09b5-4a2d-a350-dee0bd416713",
+  "front_text": "expire",
+  "back_text": "만기가 되다",
+  "example_sentence": "My ID card expires next year.",
+  "example_sentence_ko": "나의 신분증은 내년에 만료됩니다.",
+  "day_id": "bc353e43-d30f-4006-9bd7-ec5db8386c70"
+ },
+ {
+  "id": "68a0fdac-fbcf-4bd1-b6a7-553b6f93e43b",
+  "front_text": "indicate",
+  "back_text": "나타내다, 가리키다",
+  "example_sentence": "The sign indicates the exit.",
+  "example_sentence_ko": "그 표지판은 출구를 가리키고 있다.",
+  "day_id": "bc353e43-d30f-4006-9bd7-ec5db8386c70"
+ },
+ {
+  "id": "d1b71676-9a10-428f-9eca-c237785956ab",
+  "front_text": "fulfill",
+  "back_text": "실천하다/달성하다",
+  "example_sentence": "He finally fulfilled his dream.",
+  "example_sentence_ko": "그는 마침내 꿈을 이루었다.",
+  "day_id": "51d8d196-5cf4-44d1-b587-93e2e6687e3c"
+ },
+ {
+  "id": "66dae649-5d3b-4816-a855-cf59824203d2",
+  "front_text": "mortgage",
+  "back_text": "저당 잡히다/저당권",
+  "example_sentence": "They mortgaged their house to start a business.",
+  "example_sentence_ko": "그들은 사업을 시작하기 위해 그들의 집에 저당을 잡혔다.",
+  "day_id": "a1342d32-a977-471d-bbda-127a1b169d36"
+ },
+ {
+  "id": "fddc7162-e9fc-4006-9cdf-6416915b858d",
+  "front_text": "trap",
+  "back_text": "덫, 속임수, 잡다",
+  "example_sentence": "A fly is trapped in a plant.",
+  "example_sentence_ko": "파리가 식물에 갇혀 있다.",
+  "day_id": "32f01709-5b84-4e42-a7fd-5df5fca92e41"
+ },
+ {
+  "id": "56ac354d-27e6-435b-9314-b03ce36961fa",
+  "front_text": "admit",
+  "back_text": "인정하다",
+  "example_sentence": "He admitted his mistake.",
+  "example_sentence_ko": "그는 자신의 실수를 인정했다.",
+  "day_id": "32f01709-5b84-4e42-a7fd-5df5fca92e41"
+ },
+ {
+  "id": "5ff3b028-e467-49a9-a5cd-20e74549e3c9",
+  "front_text": "forbid",
+  "back_text": "금하다",
+  "example_sentence": "Smoking is forbidden inside the building.",
+  "example_sentence_ko": "건물 내부에서는 흡연이 금지되어 있다.",
+  "day_id": "32f01709-5b84-4e42-a7fd-5df5fca92e41"
+ },
+ {
+  "id": "7d920e67-e0d4-4e41-9626-198cbc37c239",
+  "front_text": "convict",
+  "back_text": "유죄를 선고하다",
+  "example_sentence": "The court convicted him of robbery.",
+  "example_sentence_ko": "법원은 그를 강도죄로 유죄 판결했다.",
+  "day_id": "32f01709-5b84-4e42-a7fd-5df5fca92e41"
+ },
+ {
+  "id": "9223e43a-b5aa-4aba-a6e7-8a90198f60ef",
+  "front_text": "shrink",
+  "back_text": "줄어들다/수축하다",
+  "example_sentence": "The market for these goods is shrinking.",
+  "example_sentence_ko": "이 상품의 시장이 축소되고 있다.",
+  "day_id": "3b9e083c-b22e-40f7-b3f4-0767e32e6c00"
+ },
+ {
+  "id": "a038ac83-e208-48be-8490-fbd50a145292",
+  "front_text": "arrest",
+  "back_text": "체포하다",
+  "example_sentence": "The police arrested the criminal.",
+  "example_sentence_ko": "경찰이 그 범인을 체포했다.",
+  "day_id": "32f01709-5b84-4e42-a7fd-5df5fca92e41"
+ },
+ {
+  "id": "aafe5dec-bf49-4161-b570-a4526a7cc5d7",
+  "front_text": "reveal",
+  "back_text": "드러내다/폭로하다",
+  "example_sentence": "The investigation revealed the truth.",
+  "example_sentence_ko": "그 조사는 진실을 드러냈다.",
+  "day_id": "3b9e083c-b22e-40f7-b3f4-0767e32e6c00"
+ },
+ {
+  "id": "b9f847b9-04c4-4aae-9e0d-0c1b7c9d43ba",
+  "front_text": "confess",
+  "back_text": "자백하다, 고백하다",
+  "example_sentence": "He finally confessed to the crime.",
+  "example_sentence_ko": "그는 결국 그 범죄를 자백했습니다.",
+  "day_id": "32f01709-5b84-4e42-a7fd-5df5fca92e41"
+ },
+ {
+  "id": "5699115c-6810-43d9-b05f-ccf385b25cd0",
+  "front_text": "demonstrate",
+  "back_text": "보여주다/입증하다",
+  "example_sentence": "He demonstrated how to use the tool.",
+  "example_sentence_ko": "그는 그 도구를 사용하는 방법을 보여줬다.",
+  "day_id": "48a5d24e-edc0-4f3a-9c05-59d83fbe3c1d"
+ },
+ {
+  "id": "70b7cc82-3e17-4479-81e3-49659479a5d5",
+  "front_text": "norm",
+  "back_text": "규범/기준",
+  "example_sentence": "Social norms change over time.",
+  "example_sentence_ko": "사회적 규범은 시간에 따라 변한다.",
+  "day_id": "cb6741af-0e67-48b2-97c0-5d05046dd4a0"
+ },
+ {
+  "id": "953c339e-cc28-4e17-b888-ba88654d32a9",
+  "front_text": "regulate",
+  "back_text": "규제하다/조정하다",
+  "example_sentence": "The government regulates the market.",
+  "example_sentence_ko": "정부가 시장을 규제한다.",
+  "day_id": "cb6741af-0e67-48b2-97c0-5d05046dd4a0"
+ },
+ {
+  "id": "6cfdded7-605b-45fb-a4c0-8f065daf3f84",
+  "front_text": "reject",
+  "back_text": "거절하다/거부하다",
+  "example_sentence": "The committee rejected the proposal.",
+  "example_sentence_ko": "위원회는 그 제안을 거절했다.",
+  "day_id": "a03a5eb5-a358-4a71-945f-40f82191c271"
+ },
+ {
+  "id": "6fa55c64-1224-4752-861e-158a6eff8f03",
+  "front_text": "resemble",
+  "back_text": "닮다",
+  "example_sentence": "She resembles her mother very much.",
+  "example_sentence_ko": "그녀는 엄마를 많이 닮았다.",
+  "day_id": "a03a5eb5-a358-4a71-945f-40f82191c271"
+ },
+ {
+  "id": "a139b77d-bbb9-4ea4-a17d-7c1109900d8d",
+  "front_text": "contradict",
+  "back_text": "반박하다/모순되다",
+  "example_sentence": "The evidence contradicts his testimony.",
+  "example_sentence_ko": "그 증거는 그의 증언과 모순된다.",
+  "day_id": "a3c31582-7df9-4ebc-8433-49aaa49c3357"
+ },
+ {
+  "id": "c8c12392-4fa7-4419-aeda-7d965d663e8d",
+  "front_text": "release",
+  "back_text": "석방하다/발표하다",
+  "example_sentence": "The prisoner was released today.",
+  "example_sentence_ko": "그 죄수는 오늘 석방되었다.",
+  "day_id": "a03a5eb5-a358-4a71-945f-40f82191c271"
+ },
+ {
+  "id": "ed28299f-a7ae-4965-9570-ae2bac9e746a",
+  "front_text": "attribute",
+  "back_text": "~의 탓으로 돌리다",
+  "example_sentence": "He attributes his success to hard work.",
+  "example_sentence_ko": "그는 자신의 성공을 노력 덕분이라고 생각한다.",
+  "day_id": "a3c31582-7df9-4ebc-8433-49aaa49c3357"
+ },
+ {
+  "id": "84558743-da45-494e-9add-7f0e1d36e380",
+  "front_text": "enforce",
+  "back_text": "집행하다",
+  "example_sentence": "The school enforces strict rules about attendance.",
+  "example_sentence_ko": "그 학교는 출석에 관한 엄격한 규칙을 집행한다.",
+  "day_id": "f7b015e6-f24a-49b1-b8b9-95ade6abff46"
+ },
+ {
+  "id": "304e062a-ad30-41ee-9bca-46783725d22c",
+  "front_text": "endure",
+  "back_text": "견디다/참다",
+  "example_sentence": "He endured much pain.",
+  "example_sentence_ko": "그는 많은 고통을 견뎌냈다.",
+  "day_id": "f7b015e6-f24a-49b1-b8b9-95ade6abff46"
+ },
+ {
+  "id": "35214b07-74a5-4def-92ef-dc7d372c7296",
+  "front_text": "emphasize",
+  "back_text": "강조하다",
+  "example_sentence": "The teacher emphasized the rules.",
+  "example_sentence_ko": "선생님은 규칙을 강조했다.",
+  "day_id": "f7b015e6-f24a-49b1-b8b9-95ade6abff46"
+ },
+ {
+  "id": "77b16264-9856-4eeb-bdcf-99d02ba56b50",
+  "front_text": "encounter",
+  "back_text": "마주치다",
+  "example_sentence": "I encountered an old friend today.",
+  "example_sentence_ko": "오늘 옛날 친구를 우연히 만났다.",
+  "day_id": "f7b015e6-f24a-49b1-b8b9-95ade6abff46"
+ },
+ {
+  "id": "b1e59199-6962-4e48-8e63-8cc4d6fe8060",
+  "front_text": "enable",
+  "back_text": "가능하게 하다",
+  "example_sentence": "The tool enables us to work fast.",
+  "example_sentence_ko": "그 도구는 우리가 빠르게 일할 수 있게 해준다.",
+  "day_id": "f7b015e6-f24a-49b1-b8b9-95ade6abff46"
+ },
+ {
+  "id": "fa0be101-bd91-4910-9250-f3cf48bfa436",
+  "front_text": "emerge",
+  "back_text": "나타나다",
+  "example_sentence": "The sun emerged from the clouds.",
+  "example_sentence_ko": "해가 구름 사이에서 나타났다.",
+  "day_id": "f7b015e6-f24a-49b1-b8b9-95ade6abff46"
+ },
+ {
+  "id": "74436452-bbf9-470f-a7fd-f7f12204144f",
+  "front_text": "work",
+  "back_text": "효과가 있다",
+  "example_sentence": "This strategy works well for our business.",
+  "example_sentence_ko": "이 전략은 우리 사업에 잘 효과가 있다.",
+  "day_id": "4ef92c44-3966-4c3b-81f0-f2aae385325a"
+ },
+ {
+  "id": "0edf872e-fa80-49c4-845e-f6572a0155e5",
+  "front_text": "impose",
+  "back_text": "부과하다",
+  "example_sentence": "New taxes were imposed on luxury goods.",
+  "example_sentence_ko": "사치품에 새로운 세금이 부과되었습니다.",
+  "day_id": "3f62ce9a-8cf8-4dcd-9073-d7951cc5d1f4"
+ },
+ {
+  "id": "1b71dabc-f492-4678-8b07-c43023f11545",
+  "front_text": "feature",
+  "back_text": "특징",
+  "example_sentence": "This new phone has many interesting features.",
+  "example_sentence_ko": "이 새 휴대폰에는 흥미로운 기능들이 많다.",
+  "day_id": "d75d8e35-9c81-4818-99d8-ff9f63c26dcf"
+ },
+ {
+  "id": "5195d340-758d-4d94-91df-9fe1e2270c68",
+  "front_text": "motivations",
+  "back_text": "동기",
+  "example_sentence": "Her main motivation for studying is to become a doctor.",
+  "example_sentence_ko": "그녀의 공부의 주된 동기는 의사가 되는 것이다.",
+  "day_id": "52e54c13-ca68-4d5b-9614-cde6059cd324"
+ },
+ {
+  "id": "03c5b3d4-5803-474d-bf55-4e41b777a1da",
+  "front_text": "enemy",
+  "back_text": "적",
+  "example_sentence": "They became enemies after the argument.",
+  "example_sentence_ko": "그 논쟁 후 그들은 원수가 되었다.",
+  "day_id": "55ad1c50-0705-4566-9581-9bc4b0e365f7"
+ },
+ {
+  "id": "0af28920-660a-44fe-86c4-2dd2c52c3703",
+  "front_text": "divine",
+  "back_text": "신성한",
+  "example_sentence": "To err is human",
+  "example_sentence_ko": "실수하는 것은 인간의 본성이다.",
+  "day_id": "01b6b0f1-6548-4777-90af-eec5a8641a0a"
+ },
+ {
+  "id": "2cdcd886-4e32-4aae-8e91-0765d7321f98",
+  "front_text": "pose",
+  "back_text": "제기하다",
+  "example_sentence": "The teacher posed an interesting question to the class.",
+  "example_sentence_ko": "선생님이 반 학생들에게 흥미로운 질문을 제기했다.",
+  "day_id": "4bf02c72-fb0e-4fa6-9afe-67f838e08e1c"
+ },
+ {
+  "id": "f85f316c-0e17-487c-9a0b-5a85d3429fd7",
+  "front_text": "stick",
+  "back_text": "꼼짝 못하게 하다",
+  "example_sentence": "The traffic jam stuck us for two hours.",
+  "example_sentence_ko": "교통 체증이 우리를 2시간 동안 꼼짝 못하게 했다.",
+  "day_id": "4ef92c44-3966-4c3b-81f0-f2aae385325a"
+ },
+ {
+  "id": "005d51d1-649c-40f0-a7a3-ea161d7dac5b",
+  "front_text": "inquire",
+  "back_text": "조사하다, 묻다",
+  "example_sentence": "She inquired about the schedule.",
+  "example_sentence_ko": "그녀는 일정에 대해 문의했다.",
+  "day_id": "32f01709-5b84-4e42-a7fd-5df5fca92e41"
+ },
+ {
+  "id": "02fdafec-b5a4-4c8f-af54-37a796f206df",
+  "front_text": "evolve",
+  "back_text": "진화하다",
+  "example_sentence": "Evolving species adapt to their environment.",
+  "example_sentence_ko": "진화하는 종들은 자신의 환경에 적응한다.",
+  "day_id": "1851861a-2ccd-40d5-88b5-7337331b9a44"
+ },
+ {
+  "id": "062d4eba-fff5-4724-aef8-467472dd7b8c",
+  "front_text": "possess",
+  "back_text": "소유하다, 가지다",
+  "example_sentence": "He possesses many rare books.",
+  "example_sentence_ko": "그는 많은 희귀본을 소유하고 있다.",
+  "day_id": "146f928b-906b-48d3-83e9-fa3fad85a33d"
+ },
+ {
+  "id": "03c32670-6cba-4a94-ad72-df9c68c4caee",
+  "front_text": "represent",
+  "back_text": "나타내다",
+  "example_sentence": "The graph represents the sales data.",
+  "example_sentence_ko": "그 그래프는 판매 데이터를 나타낸다.",
+  "day_id": "a5a526ca-7030-41e7-bf9f-9e98fd114675"
+ },
+ {
+  "id": "01466071-e474-4427-b8d9-fe575f61d418",
+  "front_text": "lecture",
+  "back_text": "강의하다",
+  "example_sentence": "The professor lectured on history.",
+  "example_sentence_ko": "교수는 역사에 대해 강의했다.",
+  "day_id": "2235cddc-ecfa-4534-8bc1-72655a67bd65"
+ },
+ {
+  "id": "03d81d07-d9b2-47d3-9756-14a5cf1eff65",
+  "front_text": "rear",
+  "back_text": "뒤쪽/기르다",
+  "example_sentence": "She reared five children on her own.",
+  "example_sentence_ko": "그녀는 혼자서 다섯 명의 아이를 길렀다.",
+  "day_id": "a03a5eb5-a358-4a71-945f-40f82191c271"
+ },
+ {
+  "id": "03ee9c2d-cfac-415b-a66d-c32e57387caf",
+  "front_text": "tune",
+  "back_text": "조율하다; 곡조, 가락",
+  "example_sentence": "She tuned her guitar before the performance.",
+  "example_sentence_ko": "그녀는 공연 전에 기타를 튜닝했다.",
+  "day_id": "0df7ad9f-6087-4d7d-8dc4-6b04a093dd51"
+ },
+ {
+  "id": "08901bdb-7e06-4e16-9da7-d57ff03ee0a3",
+  "front_text": "conduct",
+  "back_text": "수행하다/실시하다",
+  "example_sentence": "The police are conducting an investigation.",
+  "example_sentence_ko": "경찰이 수사를 진행 중이다.",
+  "day_id": "26bf9f21-c056-45f2-975d-9cbf6866fa74"
+ },
+ {
+  "id": "0892b012-d800-41ed-b278-ce9d2fd40f7d",
+  "front_text": "originate",
+  "back_text": "유래하다/비롯되다",
+  "example_sentence": "The story originated in ancient Greece.",
+  "example_sentence_ko": "그 이야기는 고대 그리스에서 비롯되었다.",
+  "day_id": "cb6741af-0e67-48b2-97c0-5d05046dd4a0"
+ },
+ {
+  "id": "060db0a4-bd40-4f98-9672-0c6e03243f2a",
+  "front_text": "approve",
+  "back_text": "찬성하다; 승인하다",
+  "example_sentence": "The board approved the new proposal unanimously.",
+  "example_sentence_ko": "이사회는 새로운 제안을 만장일치로 승인했다.",
+  "day_id": "3eb7c194-d031-4c0e-92f9-503d4dec039e"
+ },
+ {
+  "id": "0a4e9b93-08e2-4792-9ea2-b2c8104104dd",
+  "front_text": "reveal",
+  "back_text": "드러내다",
+  "example_sentence": "The sun revealed the beautiful view.",
+  "example_sentence_ko": "햇빛이 아름다운 풍경을 드러냈다.",
+  "day_id": "9becc633-e074-45d5-9330-0bf59025b520"
+ },
+ {
+  "id": "0b4d88b9-375d-4b36-b9f4-ff45fb93d556",
+  "front_text": "whereas",
+  "back_text": "반면",
+  "example_sentence": "She is talkative",
+  "example_sentence_ko": "그녀는 수다스러운 반면.",
+  "day_id": "2235cddc-ecfa-4534-8bc1-72655a67bd65"
+ },
+ {
+  "id": "0bad9e9a-8e65-4764-844c-a00403af18c8",
+  "front_text": "notice",
+  "back_text": "알아차리다",
+  "example_sentence": "He noticed the tears in her eyes.",
+  "example_sentence_ko": "그는 그녀의 눈에 맺힌 눈물을 알아챘다.",
+  "day_id": "db1fd95d-b50d-4d25-a653-d97e930a80cc"
+ },
+ {
+  "id": "033e7ca6-9e31-4fd6-9fa9-a145c4083424",
+  "front_text": "enrich",
+  "back_text": "풍부하게 하다",
+  "example_sentence": "Education enriches our lives.",
+  "example_sentence_ko": "교육은 우리의 삶을 풍요롭게 한다.",
+  "day_id": "cec92597-3c3b-4c6a-9e93-ea72c84d708f"
+ },
+ {
+  "id": "01d89009-8701-46d1-b08d-6acc1e6f836f",
+  "front_text": "expand",
+  "back_text": "확장하다",
+  "example_sentence": "The company is expanding rapidly.",
+  "example_sentence_ko": "그 회사는 빠르게 확장하고 있다.",
+  "day_id": "f7b015e6-f24a-49b1-b8b9-95ade6abff46"
+ },
+ {
+  "id": "0494d687-5c76-494d-ae95-bb97056ce682",
+  "front_text": "assign",
+  "back_text": "지정하다",
+  "example_sentence": "The teacher assigned tasks to each student.",
+  "example_sentence_ko": "선생님은 각 학생에게 과제를 할당했다.",
+  "day_id": "c668fff9-1daf-4c42-b1a1-b9b311b84039"
+ },
+ {
+  "id": "03fd2cb1-7be1-43a7-95ff-455b9e4d0937",
+  "front_text": "export",
+  "back_text": "수출하다",
+  "example_sentence": "Korea exports many cars.",
+  "example_sentence_ko": "한국은 많은 자동차를 수출한다.",
+  "day_id": "f7b015e6-f24a-49b1-b8b9-95ade6abff46"
+ },
+ {
+  "id": "08dfa6f3-9d9b-4087-992f-5f09183daee3",
+  "front_text": "coach",
+  "back_text": "코치, 감독; 코치하다, 지도하다",
+  "example_sentence": "He coaches the school soccer team.",
+  "example_sentence_ko": "그는 학교 축구팀을 지도한다.",
+  "day_id": "4c9305b6-6452-4c17-8e93-ae632040c01e"
+ },
+ {
+  "id": "065ad9cd-6665-4366-8f27-d288826ca8f1",
+  "front_text": "undergo",
+  "back_text": "겪다",
+  "example_sentence": "The building underwent repairs.",
+  "example_sentence_ko": "그 건물은 수리를 거쳤다.",
+  "day_id": "9de2738b-b103-4c90-88cf-1781285982cf"
+ },
+ {
+  "id": "0b7590fa-eaea-4fdb-85df-c5a12906c4df",
+  "front_text": "correlate",
+  "back_text": "서로 관련시키다",
+  "example_sentence": "Smoking is correlated with cancer.",
+  "example_sentence_ko": "흡연은 암과 관련이 있다.",
+  "day_id": "134823b6-9434-44a6-a4f3-cb58470727e0"
+ },
+ {
+  "id": "13010416-3897-4562-9d1a-b57829ee4849",
+  "front_text": "escape",
+  "back_text": "새어 나오다",
+  "example_sentence": "Gas escaped from the broken pipe.",
+  "example_sentence_ko": "부러진 파이프에서 가스가 새어 나갔다.",
+  "day_id": "c668fff9-1daf-4c42-b1a1-b9b311b84039"
+ },
+ {
+  "id": "62359e0d-9323-4d9a-877c-4219f8c6df5e",
+  "front_text": "move",
+  "back_text": "감동시키다",
+  "example_sentence": "The sad movie moved everyone to tears.",
+  "example_sentence_ko": "그 슬픈 영화는 모두를 눈물 나게 했다.",
+  "day_id": "4bf02c72-fb0e-4fa6-9afe-67f838e08e1c"
+ },
+ {
+  "id": "13f22bc2-262c-464e-9a86-72a217911062",
+  "front_text": "consumer",
+  "back_text": "소비자",
+  "example_sentence": "The store always listens to its consumers.",
+  "example_sentence_ko": "그 가게는 항상 고객의 말에 귀를 기울인다.",
+  "day_id": "77a137fd-2b2f-4e74-a8ca-6492cfe172ae"
+ },
+ {
+  "id": "871fc19f-482b-4343-87b9-0e40ea81ce9e",
+  "front_text": "involve",
+  "back_text": "포함하다",
+  "example_sentence": "This book involves many interesting scientific topics.",
+  "example_sentence_ko": "이 책은 많은 흥미로운 과학 주제를 포함한다.",
+  "day_id": "4ef92c44-3966-4c3b-81f0-f2aae385325a"
+ },
+ {
+  "id": "3abac91d-c727-4e55-8039-88fcf9c5af3a",
+  "front_text": "battle",
+  "back_text": "싸우다",
+  "example_sentence": "The two teams battled for first place.",
+  "example_sentence_ko": "두 팀이 1위를 놓고 싸웠다.",
+  "day_id": "4ef92c44-3966-4c3b-81f0-f2aae385325a"
+ },
+ {
+  "id": "cfb4f189-817d-4297-b7ec-0dffcf9861e5",
+  "front_text": "spawn",
+  "back_text": "낳다",
+  "example_sentence": "The new policy spawned many complaints from customers.",
+  "example_sentence_ko": "그 새로운 정책은 고객들로부터 많은 불만을 낳았다.",
+  "day_id": "4ef92c44-3966-4c3b-81f0-f2aae385325a"
+ },
+ {
+  "id": "0fc5fd03-7a5f-4dac-ade2-e604f75ecd42",
+  "front_text": "overcome",
+  "back_text": "극복하다",
+  "example_sentence": "He finally overcame his fear of heights.",
+  "example_sentence_ko": "그는 마침내 고소공포증을 극복했다.",
+  "day_id": "6b71874d-cef4-4698-bb36-cc75633cd1ab"
+ },
+ {
+  "id": "e1d5cb3f-fedb-434c-ab99-4495f1590db1",
+  "front_text": "provide",
+  "back_text": "제공하다",
+  "example_sentence": "The school provides free meals for students.",
+  "example_sentence_ko": "학교는 학생들에게 무료 급식을 제공한다.",
+  "day_id": "55dc8be9-da56-4576-ac4e-aa14b0a1cb61"
+ },
+ {
+  "id": "16e34914-9ef5-421e-87ab-4a81dca611d0",
+  "front_text": "hang",
+  "back_text": "(공중에) 떠돌다, 매달다",
+  "example_sentence": "The picture hangs on the wall.",
+  "example_sentence_ko": "그 그림은 벽에 걸려 있다.",
+  "day_id": "e3f442e6-f5e8-4684-b927-34b86b33a011"
+ },
+ {
+  "id": "3d6b49bb-273a-43c9-851e-b3e7b9bc2f05",
+  "front_text": "expectation",
+  "back_text": "기대",
+  "example_sentence": "Her expectations for the party were very high.",
+  "example_sentence_ko": "그녀는 그 파티에 대한 기대가 매우 높았다.",
+  "day_id": "4ef92c44-3966-4c3b-81f0-f2aae385325a"
+ },
+ {
+  "id": "0d9c9deb-f819-4ee3-94ef-622f32626556",
+  "front_text": "bear",
+  "back_text": "지탱하다, 견디다",
+  "example_sentence": "The bridge bears heavy traffic.",
+  "example_sentence_ko": "그 다리는 많은 교통량을 견딥니다.",
+  "day_id": "58f035d7-eda2-41d4-9788-40c4d764544d"
+ },
+ {
+  "id": "39750ab2-ee54-446a-9a49-f065b2d3e25d",
+  "front_text": "rush+to부정사",
+  "back_text": "급히 ~하다",
+  "example_sentence": "She rushed to catch the train.",
+  "example_sentence_ko": "그녀는 서둘러 기차를 탔다.",
+  "day_id": "a5a526ca-7030-41e7-bf9f-9e98fd114675"
+ },
+ {
+  "id": "4abdc53c-0185-4f82-b5c7-3482d8d86ecb",
+  "front_text": "orient",
+  "back_text": "향하게 하다",
+  "example_sentence": "The building is oriented to face south.",
+  "example_sentence_ko": "그 건물은 남쪽을 향하도록 배치되어 있습니다.",
+  "day_id": "58f035d7-eda2-41d4-9788-40c4d764544d"
+ },
+ {
+  "id": "8bbafdf5-4bf0-4525-adb9-65cfc3364717",
+  "front_text": "work",
+  "back_text": "효과가 있다, 작동하다",
+  "example_sentence": "The medicine worked immediately and the pain stopped.",
+  "example_sentence_ko": null,
+  "day_id": "f6eaddf5-7917-43f3-893b-31de925cfc02"
+ },
+ {
+  "id": "5a173e85-099a-41b3-9d47-ce78147b5fcc",
+  "front_text": "lack",
+  "back_text": "~가 부족하다",
+  "example_sentence": "The team lacks experienced players this season.",
+  "example_sentence_ko": "그 팀은 이번 시즌에 경험 많은 선수가 부족하다.",
+  "day_id": "6b88864d-d4b6-440f-82ee-def6e1050d8f"
+ },
+ {
+  "id": "ca1a9b54-f503-4ecb-a1cc-3395ad07c336",
+  "front_text": "candidate",
+  "back_text": "(선거의) 후보자, 출마자; 지원자, 응시자",
+  "example_sentence": "Three candidates ran for mayor in the local election.",
+  "example_sentence_ko": "지방 선거에서 세 명의 후보자가 시장에 출마했다.",
+  "day_id": "3eb7c194-d031-4c0e-92f9-503d4dec039e"
+ },
+ {
+  "id": "ea8ae2a5-8b43-4189-bd3b-b4fefbe0c863",
+  "front_text": "quantity",
+  "back_text": "양/수량",
+  "example_sentence": "It's a matter of quality",
+  "example_sentence_ko": "질의 문제이다.",
+  "day_id": "a03a5eb5-a358-4a71-945f-40f82191c271"
+ },
+ {
+  "id": "387889bb-b269-45b5-a24f-20f9c458903b",
+  "front_text": "fabricate",
+  "back_text": "꾸며내다",
+  "example_sentence": "He fabricated a story to avoid trouble.",
+  "example_sentence_ko": "그는 문제를 피하기 위해 거짓말을 꾸며냈다.",
+  "day_id": "6e550f39-2153-49e4-bf99-fade5db50bff"
+ },
+ {
+  "id": "5de93050-0348-4078-80d0-26590f231061",
+  "front_text": "transcend",
+  "back_text": "초월하다",
+  "example_sentence": "Her talent transcends ordinary expectations.",
+  "example_sentence_ko": "그녀의 재능은 보통의 기대를 초월한다.",
+  "day_id": "6e550f39-2153-49e4-bf99-fade5db50bff"
+ },
+ {
+  "id": "b9e18ad4-cda3-41b9-8cd8-d10d9558abc7",
+  "front_text": "deceive",
+  "back_text": "속이다, 기만하다",
+  "example_sentence": "Louis deceived the whole class.",
+  "example_sentence_ko": "루이는 반 전체를 속였습니다.",
+  "day_id": "32f01709-5b84-4e42-a7fd-5df5fca92e41"
+ },
+ {
+  "id": "c57ec479-4a78-4cf7-be5c-f39eee297169",
+  "front_text": "resource",
+  "back_text": "자원",
+  "example_sentence": "This country has abundant natural resources.",
+  "example_sentence_ko": "이 나라는 풍부한 자연 자원을 가지고 있다.",
+  "day_id": "7758b047-4b72-4937-b14a-83bb87d0bc96"
+ },
+ {
+  "id": "df73eb74-59a4-453f-a5f6-9e2c2cbca444",
+  "front_text": "reach",
+  "back_text": "도달하다",
+  "example_sentence": "We reached our destination after driving for five hours.",
+  "example_sentence_ko": "5시간 운전한 끝에 우리는 목적지에 도착했다.",
+  "day_id": "77a137fd-2b2f-4e74-a8ca-6492cfe172ae"
+ },
+ {
+  "id": "e058a163-344d-40ca-9ad1-76bf8124e043",
+  "front_text": "employ",
+  "back_text": "고용하다/사용하다",
+  "example_sentence": "The company employs 500 people.",
+  "example_sentence_ko": "그 회사는 500명을 고용하고 있다.",
+  "day_id": "eb4dc6c6-123c-41c7-bc24-3194bf467b67"
+ },
+ {
+  "id": "f1d87e85-0f3d-4997-b143-d7bf9ead88a7",
+  "front_text": "adolescent",
+  "back_text": "청소년",
+  "example_sentence": "The program is designed for adolescents.",
+  "example_sentence_ko": "이 프로그램은 청소년들을 위해 설계되었다.",
+  "day_id": "2c0f8e77-2fa8-4558-91b6-afc5c0689eaa"
+ },
+ {
+  "id": "3124185f-da92-41e3-b674-6b8f4a3fb9e7",
+  "front_text": "commute",
+  "back_text": "통근하다",
+  "example_sentence": "She commutes to work by subway every day.",
+  "example_sentence_ko": "그녀는 매일 지하철로 통근한다.",
+  "day_id": "6e550f39-2153-49e4-bf99-fade5db50bff"
+ },
+ {
+  "id": "25ea0337-cbaa-48cb-9ca7-875ba115f4b8",
+  "front_text": "pose",
+  "back_text": "[동] (사진 등을 위해) 자세를 취하다 [명] 자세, 포즈",
+  "example_sentence": "The model posed for the magazine photoshoot.",
+  "example_sentence_ko": "그 모델은 잡지 사진 촬영을 위해 포즈를 취했다.",
+  "day_id": "7082188f-5eb7-4e6f-a754-6ab24cc7d8de"
+ },
+ {
+  "id": "e361b306-c635-4886-ae12-d4a8ff63baa5",
+  "front_text": "inspire",
+  "back_text": "영감을 주다",
+  "example_sentence": "The teacher inspired her students.",
+  "example_sentence_ko": "그 선생님은 학생들에게 영감을 주었다.",
+  "day_id": "20fea555-4b05-45a8-a62b-c7f8f7cf7c8c"
+ },
+ {
+  "id": "f01cfc0e-ef47-4077-91cd-6c018dd0d4a7",
+  "front_text": "promote",
+  "back_text": "홍보하다",
+  "example_sentence": "The company promotes its new product on social media.",
+  "example_sentence_ko": "그 회사는 소셜 미디어에서 새 제품을 홍보한다.",
+  "day_id": "77a137fd-2b2f-4e74-a8ca-6492cfe172ae"
+ },
+ {
+  "id": "953033eb-bc41-414a-abda-2487c8ef8fc0",
+  "front_text": "reveal",
+  "back_text": "드러내다",
+  "example_sentence": "The investigation revealed the truth about the scandal.",
+  "example_sentence_ko": "그 조사는 스캔들의 진실을 드러냈다.",
+  "day_id": "6e550f39-2153-49e4-bf99-fade5db50bff"
+ },
+ {
+  "id": "550ac645-fe8a-4094-8ec6-e382544c7514",
+  "front_text": "criticize",
+  "back_text": "[동] 비판하다, 혹평하다",
+  "example_sentence": "The teacher criticized the student's careless work.",
+  "example_sentence_ko": "선생님은 학생의 부주의한 숙제를 비판했다.",
+  "day_id": "7082188f-5eb7-4e6f-a754-6ab24cc7d8de"
+ },
+ {
+  "id": "f12958ff-7f06-4502-8fa2-5031afd9f791",
+  "front_text": "plague",
+  "back_text": "병들게 하다",
+  "example_sentence": "The country was plagued by war.",
+  "example_sentence_ko": "그 나라는 전쟁으로 시달렸다.",
+  "day_id": "969db83f-b891-4f4d-9901-a82d7b0ce52b"
+ },
+ {
+  "id": "f02bb8fd-de72-4f01-9ec4-6b3ee7bdee57",
+  "front_text": "instruct",
+  "back_text": "가르치다",
+  "example_sentence": "She instructed the class on how to draw.",
+  "example_sentence_ko": "그녀는 반 학생들에게 그림 그리는 법을 가르쳤다.",
+  "day_id": "229925ea-2867-43d1-a5c2-f8f0319b98fa"
+ },
+ {
+  "id": "f30f5701-d02f-45ab-8085-b4575e86b696",
+  "front_text": "arrange",
+  "back_text": "배열하다/정리하다",
+  "example_sentence": "She arranged the books on the shelf.",
+  "example_sentence_ko": "그녀는 책들을 선반에 정리했다.",
+  "day_id": "845e28fc-6dc2-4423-ae38-63883d9c6974"
+ },
+ {
+  "id": "d799cb6d-37f0-4879-b995-9414df668ab9",
+  "front_text": "announce",
+  "back_text": "[동] 알리다, 공표하다, 공고하다",
+  "example_sentence": "The president announced the new policy.",
+  "example_sentence_ko": "대통령은 새로운 정책을 발표했다.",
+  "day_id": "7082188f-5eb7-4e6f-a754-6ab24cc7d8de"
+ },
+ {
+  "id": "f3f83eac-1cd8-477e-a036-a0e6bb2fe738",
+  "front_text": "realm",
+  "back_text": "영역",
+  "example_sentence": "Science and art are different realms of knowledge.",
+  "example_sentence_ko": "과학과 예술은 지식의 다른 영역이다.",
+  "day_id": "70924daf-1834-4385-810a-b7e5b277e1aa"
+ },
+ {
+  "id": "bec40776-903e-4250-bf52-a705409a32d7",
+  "front_text": "reveal",
+  "back_text": "[동] 드러내다, 폭로하다",
+  "example_sentence": "The investigation revealed the truth.",
+  "example_sentence_ko": "그 조사는 진실을 드러냈다.",
+  "day_id": "7082188f-5eb7-4e6f-a754-6ab24cc7d8de"
+ },
+ {
+  "id": "2ca81675-1d62-472b-8277-a021ffa99b59",
+  "front_text": "improvise",
+  "back_text": "즉흥 연주하다",
+  "example_sentence": "The jazz musician improvised a beautiful solo.",
+  "example_sentence_ko": "그 재즈 음악가는 아름다운 즉흥 연주를 했다.",
+  "day_id": "738acfe7-e0af-4381-841d-fba69981f2bb"
+ },
+ {
+  "id": "7df75917-8761-47cb-affd-ecd565e7b2dc",
+  "front_text": "refer",
+  "back_text": "지칭하다, 나타내다",
+  "example_sentence": "The teacher referred to the previous lesson.",
+  "example_sentence_ko": "선생님은 이전 수업을 언급했다.",
+  "day_id": "7956a71f-e288-45a9-80d1-ba1cec58bf80"
+ },
+ {
+  "id": "56e8816f-b58d-4ad5-a18e-e0db5730684f",
+  "front_text": "conclude",
+  "back_text": "결론을 내리다",
+  "example_sentence": "The study concludes that exercise improves health.",
+  "example_sentence_ko": "그 연구는 운동이 건강을 개선한다고 결론짓는다.",
+  "day_id": "7956a71f-e288-45a9-80d1-ba1cec58bf80"
+ },
+ {
+  "id": "19aa1801-a306-4dc1-9dfb-3d1c8878008f",
+  "front_text": "involve",
+  "back_text": "포함하다",
+  "example_sentence": "The project involves many different subjects.",
+  "example_sentence_ko": "그 프로젝트는 많은 다양한 과목들을 포함한다.",
+  "day_id": "7956a71f-e288-45a9-80d1-ba1cec58bf80"
+ },
+ {
+  "id": "fca4b188-d2b2-4cd1-bd4b-b9fc3bac57ba",
+  "front_text": "spark",
+  "back_text": "불러일으키다",
+  "example_sentence": "The new law sparked a lot of protests.",
+  "example_sentence_ko": "그 새로운 법은 많은 항의를 야기했다.",
+  "day_id": "a24edfd5-b71f-4483-8213-a56d61c2c423"
+ },
+ {
+  "id": "fa69dfb8-32ff-44d7-945d-68937a7ab9a2",
+  "front_text": "work",
+  "back_text": "효과가 있다",
+  "example_sentence": "This medicine works quickly for headaches.",
+  "example_sentence_ko": "이 약은 두통에 빠르게 효과가 있다.",
+  "day_id": "63a85ef6-e6c8-42f6-b98e-675bd9cfd807"
+ },
+ {
+  "id": "fa3e3603-3d84-4252-be66-93bf42ec08ff",
+  "front_text": "proportion",
+  "back_text": "할당하다",
+  "example_sentence": "The teacher proportioned the tasks among students.",
+  "example_sentence_ko": "선생님은 학생들 사이에 과제를 할당했다.",
+  "day_id": "96dfdc37-35a4-41a5-9739-c4b4dab56491"
+ },
+ {
+  "id": "957f185c-9e34-45a8-8fc1-240cbd8fd57c",
+  "front_text": "report",
+  "back_text": "[동] 보도하다, 전하다 [명] 보도, 보고",
+  "example_sentence": "The news reporter reported the accident.",
+  "example_sentence_ko": "그 뉴스 기자는 그 사고를 보도했다.",
+  "day_id": "7082188f-5eb7-4e6f-a754-6ab24cc7d8de"
+ },
+ {
+  "id": "f6ba24c2-912e-44e3-9eae-9f6dd88c6c45",
+  "front_text": "span",
+  "back_text": "걸치다",
+  "example_sentence": "The bridge spans across the wide river.",
+  "example_sentence_ko": "그 다리는 넓은 강을 걸친다.",
+  "day_id": "738acfe7-e0af-4381-841d-fba69981f2bb"
+ },
+ {
+  "id": "b050f6df-a09d-48ce-aea6-225d45a0faca",
+  "front_text": "expose",
+  "back_text": "노출시키다",
+  "example_sentence": "The accident exposed serious safety problems.",
+  "example_sentence_ko": "그 사고는 심각한 안전 문제를 드러냈다.",
+  "day_id": "7758b047-4b72-4937-b14a-83bb87d0bc96"
+ },
+ {
+  "id": "8dac80a1-8e2d-4411-a1d3-34e5f64fd1ad",
+  "front_text": "polish",
+  "back_text": "닦다/다듬다",
+  "example_sentence": "She polished the table until it shone.",
+  "example_sentence_ko": null,
+  "day_id": "d52f0773-6efa-4613-806a-72933dd94200"
+ },
+ {
+  "id": "fe1cde73-691e-4969-a0ea-bf6df9f2cfcd",
+  "front_text": "trim",
+  "back_text": "다듬다/손질하다",
+  "example_sentence": "He trimmed the bushes in the garden.",
+  "example_sentence_ko": null,
+  "day_id": "d52f0773-6efa-4613-806a-72933dd94200"
+ },
+ {
+  "id": "c741429f-6841-4a23-8a31-b1f109a5530a",
+  "front_text": "leak",
+  "back_text": "새다/누출하다",
+  "example_sentence": "The pipe under the sink is leaking.",
+  "example_sentence_ko": null,
+  "day_id": "d52f0773-6efa-4613-806a-72933dd94200"
+ },
+ {
+  "id": "94f183ff-d33a-4466-a6e1-3404d8c07d0b",
+  "front_text": "discard",
+  "back_text": "버리다/처분하다",
+  "example_sentence": "She discarded her old clothes.",
+  "example_sentence_ko": null,
+  "day_id": "d52f0773-6efa-4613-806a-72933dd94200"
+ },
+ {
+  "id": "63aaed49-838d-449e-83d5-624908cb86d2",
+  "front_text": "appliance",
+  "back_text": "가전제품/기구",
+  "example_sentence": "The kitchen is full of modern appliances.",
+  "example_sentence_ko": null,
+  "day_id": "d52f0773-6efa-4613-806a-72933dd94200"
+ },
+ {
+  "id": "3202469a-e7ee-4665-a2f9-3b1de9f60eca",
+  "front_text": "dust",
+  "back_text": "먼지를 털다",
+  "example_sentence": "He dusted the shelves every morning.",
+  "example_sentence_ko": null,
+  "day_id": "d52f0773-6efa-4613-806a-72933dd94200"
+ },
+ {
+  "id": "b4e28fe7-de9d-478c-abd8-6e0aa9de0047",
+  "front_text": "mop",
+  "back_text": "대걸레로 닦다",
+  "example_sentence": "He mopped the kitchen floor.",
+  "example_sentence_ko": null,
+  "day_id": "d52f0773-6efa-4613-806a-72933dd94200"
+ },
+ {
+  "id": "1d32bb3c-b1d6-4feb-bb13-ab67a454fc5a",
+  "front_text": "immobilize",
+  "back_text": "고정시키다",
+  "example_sentence": "The accident immobilized the car on the road.",
+  "example_sentence_ko": "그 사고는 자동차를 도로 위에 고정시켰다.",
+  "day_id": "04ad177d-2312-4223-a583-2b34892b4169"
+ },
+ {
+  "id": "d2bccac2-aa96-4221-b4e2-b29feeecb6de",
+  "front_text": "reject",
+  "back_text": "거부하다",
+  "example_sentence": "He rejected the job offer because of low salary.",
+  "example_sentence_ko": "그는 낮은 급여 때문에 그 일자리를 거부했다.",
+  "day_id": "04ad177d-2312-4223-a583-2b34892b4169"
+ },
+ {
+  "id": "522c264f-d384-48f6-a95e-030eb8f52c76",
+  "front_text": "beam",
+  "back_text": "빛나다",
+  "example_sentence": "The sun beamed brightly through the window today.",
+  "example_sentence_ko": "오늘 태양이 창을 통해 밝게 빛났다.",
+  "day_id": "0ad647f2-847c-48ab-9f7b-62b9a1c1b459"
+ },
+ {
+  "id": "2fd2a030-3749-4373-8211-f1b2e686ba5c",
+  "front_text": "observe",
+  "back_text": "관찰하다",
+  "example_sentence": "The scientist observed the plant's growth carefully.",
+  "example_sentence_ko": "과학자는 식물의 성장을 조심스럽게 관찰했다.",
+  "day_id": "0ad647f2-847c-48ab-9f7b-62b9a1c1b459"
+ },
+ {
+  "id": "ae7bd53c-cf92-4a32-aaf6-a1e3b6e51a5a",
+  "front_text": "cough",
+  "back_text": "기침하다",
+  "example_sentence": "He coughed loudly during the quiet exam.",
+  "example_sentence_ko": "그는 조용한 시험 중에 큰 소리로 기침했다.",
+  "day_id": "105c197c-174f-4a2b-b1a9-4117eae3df91"
+ },
+ {
+  "id": "24929065-4604-47e5-aeca-01a1292a7c81",
+  "front_text": "taint",
+  "back_text": "오염시키다, 더럽히다",
+  "example_sentence": "The scandal tainted his reputation forever.",
+  "example_sentence_ko": "그 스캔들은 그의 평판을 영원히 더럽혔다.",
+  "day_id": "04ad177d-2312-4223-a583-2b34892b4169"
+ },
+ {
+  "id": "3547e609-59c5-4de7-b8cc-fb2088c209cb",
+  "front_text": "describe",
+  "back_text": "묘사하다",
+  "example_sentence": "She described the beautiful sunset to her friend.",
+  "example_sentence_ko": "그녀는 친구에게 아름다운 석양을 묘사했다.",
+  "day_id": "06dcf8c2-2e4e-4d9e-8e67-02afdcb4ba4d"
+ },
+ {
+  "id": "6f5c988b-fd7c-4f04-b2ee-80e8cb8eebd3",
+  "front_text": "flood",
+  "back_text": "밀려들다",
+  "example_sentence": "Customers flooded into the store during the sale.",
+  "example_sentence_ko": "판매 중에 고객들이 가게로 밀려들었다.",
+  "day_id": "04ad177d-2312-4223-a583-2b34892b4169"
+ },
+ {
+  "id": "0306ccbc-5c6b-4aeb-bde9-c900cde3a502",
+  "front_text": "condition",
+  "back_text": "조건",
+  "example_sentence": "Good weather conditions make hiking enjoyable.",
+  "example_sentence_ko": "좋은 날씨 조건은 등산을 즐겁게 만든다.",
+  "day_id": "06dcf8c2-2e4e-4d9e-8e67-02afdcb4ba4d"
+ },
+ {
+  "id": "7b64c4a9-d5b0-4626-8e31-84c3dfbe65d4",
+  "front_text": "assert",
+  "back_text": "발휘하다",
+  "example_sentence": "He asserted his authority over the team.",
+  "example_sentence_ko": "그는 팀에 대한 자신의 권위를 발휘했다.",
+  "day_id": "092bdbe8-9895-4e28-a5c1-e43bfc51dae8"
+ },
+ {
+  "id": "f587d264-b641-4277-bc57-0be14bd72a93",
+  "front_text": "negotiate",
+  "back_text": "협상하다",
+  "example_sentence": "Both countries negotiated a peace agreement.",
+  "example_sentence_ko": "두 국가가 평화 협정을 협상했다.",
+  "day_id": "092bdbe8-9895-4e28-a5c1-e43bfc51dae8"
+ },
+ {
+  "id": "0db4560f-fb26-4311-867a-09ecf2deaffd",
+  "front_text": "please",
+  "back_text": "기쁘게 하다",
+  "example_sentence": "This gift pleased my mother very much.",
+  "example_sentence_ko": "이 선물은 엄마를 매우 기쁘게 했다.",
+  "day_id": "092bdbe8-9895-4e28-a5c1-e43bfc51dae8"
+ },
+ {
+  "id": "af88a81b-ca8c-48e4-8c68-4022ed79ce3b",
+  "front_text": "overcome",
+  "back_text": "극복하다",
+  "example_sentence": "He overcame his fear of public speaking.",
+  "example_sentence_ko": "그는 사람들 앞에서 말하는 두려움을 극복했다.",
+  "day_id": "092bdbe8-9895-4e28-a5c1-e43bfc51dae8"
+ },
+ {
+  "id": "0a8f1e74-1296-4981-9af6-b12b4486b2b2",
+  "front_text": "gain",
+  "back_text": "얻다",
+  "example_sentence": "She gained confidence through practice.",
+  "example_sentence_ko": "그녀는 연습을 통해 자신감을 얻었다.",
+  "day_id": "06dcf8c2-2e4e-4d9e-8e67-02afdcb4ba4d"
+ },
+ {
+  "id": "82e2e3d7-a013-4985-ab6c-23b7c92d714d",
+  "front_text": "incorporate",
+  "back_text": "통합하다, 포함하다",
+  "example_sentence": "The company incorporated new ideas into its design.",
+  "example_sentence_ko": "회사는 새로운 아이디어를 디자인에 포함시켰다.",
+  "day_id": "092bdbe8-9895-4e28-a5c1-e43bfc51dae8"
+ },
+ {
+  "id": "7d711b03-e131-4843-b12a-73424b2eb18d",
+  "front_text": "adherent",
+  "back_text": "추종자",
+  "example_sentence": "The celebrity has many loyal adherents worldwide.",
+  "example_sentence_ko": "그 연예인은 전 세계에 많은 충실한 추종자를 가지고 있다.",
+  "day_id": "06dcf8c2-2e4e-4d9e-8e67-02afdcb4ba4d"
+ },
+ {
+  "id": "bcb9c9d8-a87c-4213-a22b-688661d12105",
+  "front_text": "prove",
+  "back_text": "증명하다",
+  "example_sentence": "The scientist proved his theory with experiments.",
+  "example_sentence_ko": "과학자는 실험으로 자신의 이론을 증명했다.",
+  "day_id": "092bdbe8-9895-4e28-a5c1-e43bfc51dae8"
+ },
+ {
+  "id": "6af21f89-4aa2-47ca-99f0-6298dad05f44",
+  "front_text": "subordinate",
+  "back_text": "부하, 아랫사람",
+  "example_sentence": "The manager gave instructions to her subordinates.",
+  "example_sentence_ko": "관리자는 부하들에게 지시를 주었다.",
+  "day_id": "092bdbe8-9895-4e28-a5c1-e43bfc51dae8"
+ },
+ {
+  "id": "6cca97de-7708-4853-8082-965daa544864",
+  "front_text": "cloud",
+  "back_text": "우울하게 만들다",
+  "example_sentence": "Bad news clouded her happy mood immediately.",
+  "example_sentence_ko": "나쁜 소식이 그녀의 좋은 기분을 순식간에 어둡게 했다.",
+  "day_id": "04ad177d-2312-4223-a583-2b34892b4169"
+ },
+ {
+  "id": "6934045a-ffce-4e96-a8af-70fb70234780",
+  "front_text": "seem",
+  "back_text": "보이다",
+  "example_sentence": "He seems very tired after work today.",
+  "example_sentence_ko": "그는 오늘 일 후 매우 피곤해 보인다.",
+  "day_id": "06dcf8c2-2e4e-4d9e-8e67-02afdcb4ba4d"
+ },
+ {
+  "id": "8333b759-36ba-49f9-a1a4-effbed3fbb68",
+  "front_text": "intrigue",
+  "back_text": "호기심을 자극하다",
+  "example_sentence": "The mysterious story intrigued all the students in class.",
+  "example_sentence_ko": "그 신비로운 이야기는 반 모든 학생들의 호기심을 자극했다.",
+  "day_id": "0ad647f2-847c-48ab-9f7b-62b9a1c1b459"
+ },
+ {
+  "id": "615961b8-8881-45f0-a300-12db1d009135",
+  "front_text": "blow",
+  "back_text": "폭파하다",
+  "example_sentence": "The fireworks blew up in the sky.",
+  "example_sentence_ko": "불꽃이 하늘에서 폭발했다.",
+  "day_id": "0b47e0aa-d07d-43de-8cd2-1bdf570b05ad"
+ },
+ {
+  "id": "57a36f9d-332e-4e27-a7d4-5b0de819796b",
+  "front_text": "widen",
+  "back_text": "커지다",
+  "example_sentence": "The river widens as it flows toward the ocean.",
+  "example_sentence_ko": "강은 바다로 흐르면서 넓어진다.",
+  "day_id": "04ad177d-2312-4223-a583-2b34892b4169"
+ },
+ {
+  "id": "bd7ecbcd-1a21-4875-887f-3518f2434366",
+  "front_text": "radiate",
+  "back_text": "반짝이다, 빛나다",
+  "example_sentence": "The sun radiates warmth and light every day.",
+  "example_sentence_ko": "태양은 매일 따뜻함과 빛을 발산한다.",
+  "day_id": "04ad177d-2312-4223-a583-2b34892b4169"
+ },
+ {
+  "id": "0be1a0c7-91ff-4566-aad6-766623d6c7d3",
+  "front_text": "base",
+  "back_text": "근거를 두다",
+  "example_sentence": "The argument is based on facts.",
+  "example_sentence_ko": "그 주장은 사실을 근거로 한다.",
+  "day_id": "06dcf8c2-2e4e-4d9e-8e67-02afdcb4ba4d"
+ },
+ {
+  "id": "b3858394-dd2a-4764-890d-c973ce305389",
+  "front_text": "present",
+  "back_text": "표현하다",
+  "example_sentence": "She presented her ideas clearly in the meeting.",
+  "example_sentence_ko": "그녀는 회의에서 자신의 생각을 명확하게 표현했다.",
+  "day_id": "0b47e0aa-d07d-43de-8cd2-1bdf570b05ad"
+ },
+ {
+  "id": "3beae95d-b728-42c2-95b7-5b9a72d4d606",
+  "front_text": "generate",
+  "back_text": "생성하다",
+  "example_sentence": "The artist generates beautiful paintings every month.",
+  "example_sentence_ko": "그 예술가는 매달 아름다운 그림을 생성한다.",
+  "day_id": "105c197c-174f-4a2b-b1a9-4117eae3df91"
+ },
+ {
+  "id": "e37cfb65-1293-4a52-ad11-3b170d1fce8a",
+  "front_text": "rank",
+  "back_text": "차지하다",
+  "example_sentence": "Korea ranks high in education globally.",
+  "example_sentence_ko": "한국은 전 세계적으로 교육에서 높은 순위를 차지한다.",
+  "day_id": "0b47e0aa-d07d-43de-8cd2-1bdf570b05ad"
+ },
+ {
+  "id": "aa9c5dd5-6aed-4f96-a1ec-06f0e0a4705b",
+  "front_text": "guideline",
+  "back_text": "지침",
+  "example_sentence": "Follow the guidelines on the package carefully.",
+  "example_sentence_ko": "패키지의 지침을 주의깊게 따르세요.",
+  "day_id": "0b47e0aa-d07d-43de-8cd2-1bdf570b05ad"
+ },
+ {
+  "id": "4aee90c9-a3b4-4a6c-9614-f879382ba716",
+  "front_text": "measure",
+  "back_text": "측정하다",
+  "example_sentence": "Scientists measured the temperature accurately.",
+  "example_sentence_ko": "과학자들은 온도를 정확히 측정했다.",
+  "day_id": "0b47e0aa-d07d-43de-8cd2-1bdf570b05ad"
+ },
+ {
+  "id": "57a61bc4-07b9-4564-a3d0-eb37fbb6288a",
+  "front_text": "advise",
+  "back_text": "충고하다",
+  "example_sentence": "The teacher advised me to study harder.",
+  "example_sentence_ko": "선생님은 나에게 더 열심히 공부하라고 충고했다.",
+  "day_id": "0b47e0aa-d07d-43de-8cd2-1bdf570b05ad"
+ },
+ {
+  "id": "47d85097-6721-40f6-be92-8ede05bb3da3",
+  "front_text": "categorise",
+  "back_text": "분류하다",
+  "example_sentence": "We categorised the books by author and genre.",
+  "example_sentence_ko": "우리는 책을 저자와 장르별로 분류했다.",
+  "day_id": "11d11157-c53d-42c8-ad48-e18fd5e7e3ea"
+ },
+ {
+  "id": "bb44c868-7f24-473e-a435-c97fa7532b19",
+  "front_text": "transform",
+  "back_text": "변형하다",
+  "example_sentence": "The caterpillar transforms into a beautiful butterfly.",
+  "example_sentence_ko": "애벌레는 아름다운 나비로 변형된다.",
+  "day_id": "11d2d2ce-ae61-45e6-8495-5f2b2464d73a"
+ },
+ {
+  "id": "f1c4f690-0b71-4f81-90e7-13876cd19a04",
+  "front_text": "evolve",
+  "back_text": "진화하다",
+  "example_sentence": "Humans evolved from ancient animals over time.",
+  "example_sentence_ko": "인간은 시간에 따라 고대 동물로부터 진화했다.",
+  "day_id": "105c197c-174f-4a2b-b1a9-4117eae3df91"
+ },
+ {
+  "id": "040621ac-f801-4274-8c30-2f5069278d47",
+  "front_text": "ensure",
+  "back_text": "보증하다",
+  "example_sentence": "Good exercise ensures better health.",
+  "example_sentence_ko": "좋은 운동은 더 나은 건강을 보증한다.",
+  "day_id": "105c197c-174f-4a2b-b1a9-4117eae3df91"
+ },
+ {
+  "id": "d1d1727b-17ac-4c7f-ab21-52a392716a4f",
+  "front_text": "achieve",
+  "back_text": "성취하다",
+  "example_sentence": "She achieved her dream of becoming a doctor.",
+  "example_sentence_ko": "그녀는 의사가 되려는 꿈을 이루었다.",
+  "day_id": "105c197c-174f-4a2b-b1a9-4117eae3df91"
+ },
+ {
+  "id": "286c6639-eb4c-4a1e-898f-1d097fc4772f",
+  "front_text": "restrict",
+  "back_text": "~을 …에 제한하다",
+  "example_sentence": "The school restricts phone use during class.",
+  "example_sentence_ko": "학교는 수업 중 휴대폰 사용을 제한합니다.",
+  "day_id": "10b2e719-7056-42c3-bc4b-a3182f4d18b4"
+ },
+ {
+  "id": "ddbfcba7-d27f-4d60-a294-e1c0446160e4",
+  "front_text": "compose",
+  "back_text": "생성하다",
+  "example_sentence": "She composed a beautiful song for the concert.",
+  "example_sentence_ko": "그녀는 콘서트를 위해 아름다운 곡을 작곡했다.",
+  "day_id": "11d11157-c53d-42c8-ad48-e18fd5e7e3ea"
+ },
+ {
+  "id": "5dfbe102-12bb-4dee-ab53-e921432ec64a",
+  "front_text": "snore",
+  "back_text": "코를 골다",
+  "example_sentence": "My father snores loudly every night.",
+  "example_sentence_ko": "내 아버지는 매일 밤 큰 소리로 코를 곤다.",
+  "day_id": "105c197c-174f-4a2b-b1a9-4117eae3df91"
+ },
+ {
+  "id": "6b242617-ec1d-4f0e-b127-f3da97d2db6a",
+  "front_text": "ancestor",
+  "back_text": "조상",
+  "example_sentence": "My ancestors came from Korea many years ago.",
+  "example_sentence_ko": "나의 조상들은 많은 해 전에 한국에서 왔다.",
+  "day_id": "105c197c-174f-4a2b-b1a9-4117eae3df91"
+ },
+ {
+  "id": "55ee5717-44d9-40f6-bcc7-5712eabd46dc",
+  "front_text": "remain",
+  "back_text": "계속하다",
+  "example_sentence": "The weather remains cold this week.",
+  "example_sentence_ko": "이번 주 날씨는 계속 춥다.",
+  "day_id": "105c197c-174f-4a2b-b1a9-4117eae3df91"
+ },
+ {
+  "id": "0dabad8c-4aec-49f7-891b-1eb497ef7f78",
+  "front_text": "span",
+  "back_text": "~에 걸쳐 있다",
+  "example_sentence": "The bridge spans across the wide river.",
+  "example_sentence_ko": "그 다리는 넓은 강을 가로질러 뻗어 있다.",
+  "day_id": "10b2e719-7056-42c3-bc4b-a3182f4d18b4"
+ },
+ {
+  "id": "8ebd2c98-7a35-4cff-b3f6-67a19febd337",
+  "front_text": "concern",
+  "back_text": "관계[관련]가 있다, 종사하다",
+  "example_sentence": "This issue concerns all students in our school.",
+  "example_sentence_ko": "이 문제는 우리 학교의 모든 학생들과 관련이 있다.",
+  "day_id": "1346237d-1b68-405a-a53b-154d9dc6a055"
+ },
+ {
+  "id": "8b4c23e2-91fc-4d77-9271-aec642a3bcde",
+  "front_text": "analyze",
+  "back_text": "분석하다",
+  "example_sentence": "The scientist analyzed the test results carefully.",
+  "example_sentence_ko": "그 과학자는 실험 결과를 주의깊게 분석했다.",
+  "day_id": "105c197c-174f-4a2b-b1a9-4117eae3df91"
+ },
+ {
+  "id": "8019e2a1-13cd-4a1b-ab95-05c344b278cd",
+  "front_text": "coin",
+  "back_text": "(용어를) 만들다",
+  "example_sentence": "The term 'smartphone' was coined in the late 1990s.",
+  "example_sentence_ko": "'스마트폰'이라는 용어는 1990년대 후반에 만들어졌다.",
+  "day_id": "11d11157-c53d-42c8-ad48-e18fd5e7e3ea"
+ },
+ {
+  "id": "69f57906-44c1-4bea-b932-62864e205c87",
+  "front_text": "excel",
+  "back_text": "탁월하다",
+  "example_sentence": "She excels in mathematics and science.",
+  "example_sentence_ko": "그녀는 수학과 과학에서 탁월하다.",
+  "day_id": "150d01bf-0740-4126-a350-eb95af82f627"
+ },
+ {
+  "id": "10d39f72-314f-4135-b032-ecfd112f99c4",
+  "front_text": "examine",
+  "back_text": "조사하다",
+  "example_sentence": "The doctor examined the patient carefully.",
+  "example_sentence_ko": "의사는 환자를 조심스럽게 조사했다.",
+  "day_id": "105c197c-174f-4a2b-b1a9-4117eae3df91"
+ },
+ {
+  "id": "0160e846-9f20-4c15-b7c0-f3611d1734a6",
+  "front_text": "realize",
+  "back_text": "깨닫다",
+  "example_sentence": "I finally realized my dream last year.",
+  "example_sentence_ko": "나는 작년에 마침내 내 꿈을 이루었다.",
+  "day_id": "11d2d2ce-ae61-45e6-8495-5f2b2464d73a"
+ },
+ {
+  "id": "faadf2e3-800f-401f-a496-63dc897f5e58",
+  "front_text": "tempt",
+  "back_text": "유혹하다",
+  "example_sentence": "The advertisement tempts people to buy.",
+  "example_sentence_ko": "그 광고는 사람들을 사도록 유혹한다.",
+  "day_id": "11d2d2ce-ae61-45e6-8495-5f2b2464d73a"
+ },
+ {
+  "id": "86211087-5c50-45dc-938d-62ad7ff6db62",
+  "front_text": "detect",
+  "back_text": "감지하다",
+  "example_sentence": "The police detected fingerprints at the scene.",
+  "example_sentence_ko": "경찰은 그 현장에서 지문을 감지했다.",
+  "day_id": "105c197c-174f-4a2b-b1a9-4117eae3df91"
+ },
+ {
+  "id": "bbbb1d3e-6745-4d1f-884d-598feaf5b962",
+  "front_text": "argue",
+  "back_text": "주장하다",
+  "example_sentence": "The scientist argued that climate change is real.",
+  "example_sentence_ko": "과학자는 기후 변화가 실제라고 주장했다.",
+  "day_id": "11d2d2ce-ae61-45e6-8495-5f2b2464d73a"
+ },
+ {
+  "id": "48da6caf-9153-49b3-b915-5d6b0207c065",
+  "front_text": "freeze",
+  "back_text": "얼어붙다, 등골이 오싹하다",
+  "example_sentence": "I froze when I heard the scary sound.",
+  "example_sentence_ko": "나는 무서운 소리를 들으면서 공포에 떨었다.",
+  "day_id": "1346237d-1b68-405a-a53b-154d9dc6a055"
+ },
+ {
+  "id": "7a734b0d-cee1-493e-8430-1dbf0014cb05",
+  "front_text": "realize",
+  "back_text": "깨닫다",
+  "example_sentence": "I realized my mistake after the exam.",
+  "example_sentence_ko": "나는 시험 후 내 실수를 깨달았다.",
+  "day_id": "150d01bf-0740-4126-a350-eb95af82f627"
+ },
+ {
+  "id": "2264e756-ddab-4ab5-a595-8e656e14d706",
+  "front_text": "handle",
+  "back_text": "다루다",
+  "example_sentence": "She handles the difficult situation very well.",
+  "example_sentence_ko": "그녀는 어려운 상황을 매우 잘 다룬다.",
+  "day_id": "150d01bf-0740-4126-a350-eb95af82f627"
+ },
+ {
+  "id": "f1e62189-8834-46a2-96f9-77da49c73079",
+  "front_text": "represent",
+  "back_text": "나타내다",
+  "example_sentence": "This painting represents the artist's inner feelings.",
+  "example_sentence_ko": "이 그림은 그 화가의 내면의 감정을 나타낸다.",
+  "day_id": "11d11157-c53d-42c8-ad48-e18fd5e7e3ea"
+ },
+ {
+  "id": "f7bbf0a3-d0f5-42aa-8d9d-40ac41c96a23",
+  "front_text": "direct",
+  "back_text": "이끌다",
+  "example_sentence": "The teacher directed students to read chapter five carefully.",
+  "example_sentence_ko": "선생님은 학생들에게 5장을 신중하게 읽도록 지시했다.",
+  "day_id": "11d11157-c53d-42c8-ad48-e18fd5e7e3ea"
+ },
+ {
+  "id": "8a169e0b-01e6-4ba5-ae76-868938e9b1fe",
+  "front_text": "rend",
+  "back_text": "분열시키다, 찢다",
+  "example_sentence": "The conflict rends the community apart.",
+  "example_sentence_ko": "그 갈등은 지역사회를 분열시킨다.",
+  "day_id": "11d2d2ce-ae61-45e6-8495-5f2b2464d73a"
+ },
+ {
+  "id": "4f2e8a81-eccb-467a-a5ac-d3ec97a15b3a",
+  "front_text": "damage",
+  "back_text": "손상시키다",
+  "example_sentence": "The storm damaged many houses in our neighborhood.",
+  "example_sentence_ko": "폭풍우가 우리 동네의 많은 집을 손상시켰다.",
+  "day_id": "1346237d-1b68-405a-a53b-154d9dc6a055"
+ },
+ {
+  "id": "7b2ccc77-0f62-439c-a3b6-ccda75a31e4a",
+  "front_text": "settle",
+  "back_text": "수용하다",
+  "example_sentence": "He settled for a lower salary finally.",
+  "example_sentence_ko": "그는 결국 더 낮은 급여로 수용했다.",
+  "day_id": "11d2d2ce-ae61-45e6-8495-5f2b2464d73a"
+ },
+ {
+  "id": "cd6048fc-2fbe-498e-b2be-4142eb3e6ae0",
+  "front_text": "follow",
+  "back_text": "뒤따르다",
+  "example_sentence": "The dog follows its owner everywhere.",
+  "example_sentence_ko": "그 개는 주인을 어디든 따라다닌다.",
+  "day_id": "1346237d-1b68-405a-a53b-154d9dc6a055"
+ },
+ {
+  "id": "0babe1a5-3971-4471-94e0-1d11553d9711",
+  "front_text": "characterise",
+  "back_text": "특징짓다",
+  "example_sentence": "Honesty characterises a good person.",
+  "example_sentence_ko": "정직함이 좋은 사람의 특징이다.",
+  "day_id": "1346237d-1b68-405a-a53b-154d9dc6a055"
+ },
+ {
+  "id": "0f938dfd-28e2-440b-8f08-14a6d172c0a9",
+  "front_text": "sniff",
+  "back_text": "코를 킁킁거리다",
+  "example_sentence": "The dog sniffed the ground to find the ball.",
+  "example_sentence_ko": "개는 공을 찾기 위해 땅을 킁킁거렸다.",
+  "day_id": "1346237d-1b68-405a-a53b-154d9dc6a055"
+ },
+ {
+  "id": "ce4c361c-a3be-4454-b7e1-0d0e61895c0f",
+  "front_text": "phytochemical",
+  "back_text": "생화학 물질",
+  "example_sentence": "Phytochemicals in vegetables help protect our health.",
+  "example_sentence_ko": "채소의 생화학 물질은 우리 건강을 보호하는 데 도움이 된다.",
+  "day_id": "134823b6-9434-44a6-a4f3-cb58470727e0"
+ },
+ {
+  "id": "2bffcb30-ad04-40aa-9983-19dad677064b",
+  "front_text": "resident",
+  "back_text": "거주자",
+  "example_sentence": "The residents complained about the noisy construction.",
+  "example_sentence_ko": "거주자들은 시끄러운 건설에 대해 불평했다.",
+  "day_id": "1346237d-1b68-405a-a53b-154d9dc6a055"
+ },
+ {
+  "id": "ccb35c7d-759e-487c-a785-062331194ad6",
+  "front_text": "observe",
+  "back_text": "알다, 목격하다",
+  "example_sentence": "I observed a beautiful bird in the garden yesterday.",
+  "example_sentence_ko": "나는 어제 정원에서 아름다운 새를 목격했다.",
+  "day_id": "1346237d-1b68-405a-a53b-154d9dc6a055"
+ },
+ {
+  "id": "daf61b8e-ab5f-4fcd-86e3-659d1fa6e148",
+  "front_text": "achieve",
+  "back_text": "이루다, 성취하다",
+  "example_sentence": "She achieved her dream of becoming a doctor.",
+  "example_sentence_ko": "그녀는 의사가 되려는 꿈을 이루었다.",
+  "day_id": "1346237d-1b68-405a-a53b-154d9dc6a055"
+ },
+ {
+  "id": "7083b2d0-546c-421f-ad4e-3ad4d4d92b3e",
+  "front_text": "dissenter",
+  "back_text": "반대자",
+  "example_sentence": "The dissenters voiced their opinions at the meeting.",
+  "example_sentence_ko": "반대자들은 회의에서 그들의 의견을 표현했다.",
+  "day_id": "1510b89e-5672-46bf-a49b-89fc3e2372b9"
+ },
+ {
+  "id": "5aff455d-3b8d-45cc-9edf-0c3bbb3136d1",
+  "front_text": "ensure",
+  "back_text": "확실히 하다",
+  "example_sentence": "Good sleep ensures better focus in class tomorrow.",
+  "example_sentence_ko": "충분한 수면은 내일 수업에서 집중을 확실히 한다.",
+  "day_id": "7758b047-4b72-4937-b14a-83bb87d0bc96"
+ },
+ {
+  "id": "24b0a4e8-803a-4e9a-8fa5-1ce065cdb040",
+  "front_text": "relate",
+  "back_text": "관련이 있다",
+  "example_sentence": "This problem relates to the previous lesson.",
+  "example_sentence_ko": "이 문제는 이전 수업과 관련이 있다.",
+  "day_id": "150d01bf-0740-4126-a350-eb95af82f627"
+ },
+ {
+  "id": "11655466-75ab-46f7-8932-1e76eb38282b",
+  "front_text": "invert",
+  "back_text": "뒤바꾸다",
+  "example_sentence": "She inverted the glass to dry it.",
+  "example_sentence_ko": "그녀는 말리기 위해 잔을 뒤집었다.",
+  "day_id": "16053443-d001-4ae5-bdf0-7302b1409710"
+ },
+ {
+  "id": "0346dedc-f4f4-4b8e-a277-e8bca6cf554d",
+  "front_text": "rattle",
+  "back_text": "당황하게 하다",
+  "example_sentence": "The loud noise rattled everyone in the office.",
+  "example_sentence_ko": "큰 소음이 사무실의 모든 사람을 당황하게 했다.",
+  "day_id": "21297ab5-332e-4dc3-a748-eacacffd5bbb"
+ },
+ {
+  "id": "62ae533d-3ff6-4585-9a6f-11a78f425eb3",
+  "front_text": "exemplify",
+  "back_text": "예를 들어 보여 주다",
+  "example_sentence": "This case exemplifies the importance of teamwork.",
+  "example_sentence_ko": "이 사례는 팀워크의 중요성을 보여준다.",
+  "day_id": "21e5568d-0014-4d3f-8a89-e48b9523f320"
+ },
+ {
+  "id": "ae0b15a7-868a-4942-b92e-9b5814a02338",
+  "front_text": "feature",
+  "back_text": "(기사로) 다루다",
+  "example_sentence": "The newspaper featured the new technology in today's article.",
+  "example_sentence_ko": "그 신문은 오늘 기사에서 새로운 기술을 다루었다.",
+  "day_id": "1510b89e-5672-46bf-a49b-89fc3e2372b9"
+ },
+ {
+  "id": "d8808e5f-7853-45a5-b320-f520d7708c19",
+  "front_text": "contain",
+  "back_text": "포함하다, 함유하다",
+  "example_sentence": "This box contains important documents and files.",
+  "example_sentence_ko": "이 상자는 중요한 문서와 파일을 포함한다.",
+  "day_id": "16053443-d001-4ae5-bdf0-7302b1409710"
+ },
+ {
+  "id": "9644d3cd-e58b-409b-8981-662f8a37852b",
+  "front_text": "challenge",
+  "back_text": "어려움",
+  "example_sentence": "Learning a new language is a challenging task.",
+  "example_sentence_ko": "새로운 언어를 배우는 것은 도전적인 과제이다.",
+  "day_id": "21297ab5-332e-4dc3-a748-eacacffd5bbb"
+ },
+ {
+  "id": "c829e71d-a343-4557-b837-9f37384241dd",
+  "front_text": "threaten",
+  "back_text": "위협하다",
+  "example_sentence": "The storm threatens our weekend plans.",
+  "example_sentence_ko": "그 폭풍이 우리 주말 계획을 위협한다.",
+  "day_id": "21297ab5-332e-4dc3-a748-eacacffd5bbb"
+ },
+ {
+  "id": "d919e2a7-22c8-42c9-b8af-dd9f050fb0ea",
+  "front_text": "mammal",
+  "back_text": "포유류",
+  "example_sentence": "Dogs are mammals that require regular care.",
+  "example_sentence_ko": "개는 정기적인 돌봄이 필요한 포유류이다.",
+  "day_id": "1510b89e-5672-46bf-a49b-89fc3e2372b9"
+ },
+ {
+  "id": "3fede1bd-5384-465c-ab5f-ac836c452d67",
+  "front_text": "weaken",
+  "back_text": "약화시키다",
+  "example_sentence": "Lack of sleep weakens your immune system.",
+  "example_sentence_ko": "수면 부족은 면역 체계를 약화시킨다.",
+  "day_id": "1510b89e-5672-46bf-a49b-89fc3e2372b9"
+ },
+ {
+  "id": "74aba54a-3f75-45f8-be6e-61cb5e7f626b",
+  "front_text": "variety",
+  "back_text": "품종",
+  "example_sentence": "This store sells many varieties of coffee beans.",
+  "example_sentence_ko": "이 가게는 많은 종류의 커피콩을 판매한다.",
+  "day_id": "21e5568d-0014-4d3f-8a89-e48b9523f320"
+ },
+ {
+  "id": "981ade4f-5289-4b4d-8b73-e80b5e16af2a",
+  "front_text": "hesitate",
+  "back_text": "망설이다",
+  "example_sentence": "She hesitated before answering the question.",
+  "example_sentence_ko": "그녀는 질문에 답하기 전에 망설였다.",
+  "day_id": "21e5568d-0014-4d3f-8a89-e48b9523f320"
+ },
+ {
+  "id": "fd706595-ad2b-4376-bb1f-abd2cf135ee5",
+  "front_text": "puzzle",
+  "back_text": "당황하게 하다",
+  "example_sentence": "The difficult math problem puzzles me completely.",
+  "example_sentence_ko": "어려운 수학 문제가 나를 완전히 당황하게 한다.",
+  "day_id": "16053443-d001-4ae5-bdf0-7302b1409710"
+ },
+ {
+  "id": "96a91296-a68a-46e3-acf7-536ddd22e7e4",
+  "front_text": "deserve",
+  "back_text": "받아 마땅하다",
+  "example_sentence": "She deserves a reward for her hard work.",
+  "example_sentence_ko": "그녀는 열심히 일한 대가로 보상을 받아 마땅하다.",
+  "day_id": "16053443-d001-4ae5-bdf0-7302b1409710"
+ },
+ {
+  "id": "5a411bd1-a638-42c2-bb51-dde23065b174",
+  "front_text": "roar",
+  "back_text": "소리치다",
+  "example_sentence": "The lion roared loudly in the African savanna.",
+  "example_sentence_ko": "사자가 아프리카 사바나에서 크게 포효했다.",
+  "day_id": "16053443-d001-4ae5-bdf0-7302b1409710"
+ },
+ {
+  "id": "7b54c4fc-d69c-4048-b656-e49f303c3029",
+  "front_text": "impression",
+  "back_text": "인상",
+  "example_sentence": "First impressions are important in job interviews.",
+  "example_sentence_ko": "첫인상은 취업면접에서 중요합니다.",
+  "day_id": "25017d47-a282-45bd-835b-87eba586f3b3"
+ },
+ {
+  "id": "e8988172-3711-4be8-b85d-6aaa7f07733c",
+  "front_text": "hardship",
+  "back_text": "역경, 고난",
+  "example_sentence": "He overcame many hardships to achieve his dream.",
+  "example_sentence_ko": "그는 꿈을 이루기 위해 많은 고난을 이겨냈다.",
+  "day_id": "21297ab5-332e-4dc3-a748-eacacffd5bbb"
+ },
+ {
+  "id": "61e87e92-c15e-4923-9028-760c5cb26226",
+  "front_text": "reason",
+  "back_text": "판단하다, 추론하다",
+  "example_sentence": "I reasoned that she was late.",
+  "example_sentence_ko": "나는 그녀가 늦었다고 추론했다.",
+  "day_id": "21297ab5-332e-4dc3-a748-eacacffd5bbb"
+ },
+ {
+  "id": "e238b27a-b678-4bd0-abab-5555f5538ebb",
+  "front_text": "manufacture",
+  "back_text": "[동] 제조하다, 지어내다 [명] 제조",
+  "example_sentence": "The factory manufactures cars every day.",
+  "example_sentence_ko": "그 공장은 매일 자동차를 제조한다.",
+  "day_id": "2688bf1c-a7b4-4858-8fff-4ef22828e89e"
+ },
+ {
+  "id": "78b882c5-8213-4fff-ba8d-41b02be51aed",
+  "front_text": "prize",
+  "back_text": "높이 평가하다, 존중하다",
+  "example_sentence": "She prizes her family more than anything.",
+  "example_sentence_ko": "그녀는 가족을 무엇보다 소중히 여긴다.",
+  "day_id": "7956a71f-e288-45a9-80d1-ba1cec58bf80"
+ },
+ {
+  "id": "30d0a76c-d7f9-4b22-9351-8ce4e183db80",
+  "front_text": "accomplish",
+  "back_text": "[동] 달성하다, 이루다",
+  "example_sentence": "She accomplished her dream of becoming a teacher.",
+  "example_sentence_ko": "그녀는 교사가 되려는 꿈을 달성했다.",
+  "day_id": "2688bf1c-a7b4-4858-8fff-4ef22828e89e"
+ },
+ {
+  "id": "da2d50e6-a309-4bc8-a471-2b482c143062",
+  "front_text": "manage",
+  "back_text": "[동] 경영하다, 운영하다, 그럭저럭 해내다",
+  "example_sentence": "She manages a small shop in the city.",
+  "example_sentence_ko": "그녀는 도시의 작은 가게를 경영한다.",
+  "day_id": "2688bf1c-a7b4-4858-8fff-4ef22828e89e"
+ },
+ {
+  "id": "1b23f770-cdd9-4194-a7de-b31cca998b1f",
+  "front_text": "occur",
+  "back_text": "발생하다",
+  "example_sentence": "The accident occurred on Monday morning.",
+  "example_sentence_ko": "그 사고는 월요일 아침에 발생했다.",
+  "day_id": "27ea21be-55b3-4c75-840e-d6ce89277897"
+ },
+ {
+  "id": "906f2390-c813-4aff-9a77-dc9db75c9fb8",
+  "front_text": "retire",
+  "back_text": "[동] 퇴직하다, 은퇴하다",
+  "example_sentence": "He retired from his job at age sixty.",
+  "example_sentence_ko": "그는 60세에 일을 은퇴했다.",
+  "day_id": "2688bf1c-a7b4-4858-8fff-4ef22828e89e"
+ },
+ {
+  "id": "690d599e-a72b-4e8c-bacd-524127126e5e",
+  "front_text": "compel",
+  "back_text": "강요하다",
+  "example_sentence": "The teacher compelled students to finish homework.",
+  "example_sentence_ko": "선생님은 학생들에게 숙제를 끝내도록 강요했다.",
+  "day_id": "27ea21be-55b3-4c75-840e-d6ce89277897"
+ },
+ {
+  "id": "35969511-d70d-41ae-872d-9344a9abc220",
+  "front_text": "glitter         ",
+  "back_text": "  [동] 반짝이다 [명] 반짝거림",
+  "example_sentence": "The diamond glitters beautifully in the sunlight.",
+  "example_sentence_ko": "그 다이아몬드는 햇빛 속에서 아름답게 반짝인다.",
+  "day_id": "228076a3-057c-4d49-b508-83ecb2555271"
+ },
+ {
+  "id": "efc0df4e-d980-4221-9b8f-7e994ee42aeb",
+  "front_text": "exceed",
+  "back_text": "초과하다",
+  "example_sentence": "The costs exceeded our budget this year.",
+  "example_sentence_ko": "비용이 올해 예산을 초과했다.",
+  "day_id": "70b1e724-29d5-481d-994d-df33ba8342d1"
+ },
+ {
+  "id": "24160b23-a970-4fec-8caa-85d9d5913179",
+  "front_text": "respond",
+  "back_text": "반응하다",
+  "example_sentence": "She responded quickly to my message.",
+  "example_sentence_ko": "그녀는 내 메시지에 빠르게 반응했다.",
+  "day_id": "70b1e724-29d5-481d-994d-df33ba8342d1"
+ },
+ {
+  "id": "acb1df5c-c8da-40bb-9573-52b4131e67b6",
+  "front_text": "vend",
+  "back_text": "[동] 팔다",
+  "example_sentence": "The store vends fresh fruits and vegetables.",
+  "example_sentence_ko": "그 가게는 신선한 과일과 채소를 판다.",
+  "day_id": "2688bf1c-a7b4-4858-8fff-4ef22828e89e"
+ },
+ {
+  "id": "616a54a7-963e-4ac3-bacf-2281f73b56f4",
+  "front_text": "define",
+  "back_text": "정의하다",
+  "example_sentence": "The teacher defined the new vocabulary words clearly.",
+  "example_sentence_ko": "선생님이 새 단어들을 명확하게 정의했다.",
+  "day_id": "27ea21be-55b3-4c75-840e-d6ce89277897"
+ },
+ {
+  "id": "bc3c2140-6f78-4e24-8f72-1b4c15f78698",
+  "front_text": "demonstrate",
+  "back_text": "보여 주다",
+  "example_sentence": "The teacher demonstrated how to solve the math problem.",
+  "example_sentence_ko": "선생님은 수학 문제를 푸는 방법을 보여주었다.",
+  "day_id": "28226538-906a-4a84-b57d-89b26e05814a"
+ },
+ {
+  "id": "a0fc411b-2dc6-439d-b2bf-bc5d4050d7dc",
+  "front_text": "supervise",
+  "back_text": "[동] 감독하다, 관리하다, 지휘하다",
+  "example_sentence": "The manager supervises all the workers.",
+  "example_sentence_ko": "그 관리자는 모든 근로자들을 감독한다.",
+  "day_id": "2688bf1c-a7b4-4858-8fff-4ef22828e89e"
+ },
+ {
+  "id": "95ba3efa-3a82-4f5f-8eea-5382100ec0b6",
+  "front_text": "impression",
+  "back_text": "인상",
+  "example_sentence": "First impressions are very important.",
+  "example_sentence_ko": "첫 인상은 매우 중요하다.",
+  "day_id": "26df5d4e-f63c-48e7-b937-2f630db94a1c"
+ },
+ {
+  "id": "1a89b4bf-2b6e-43f0-8c57-1e3befd9dfda",
+  "front_text": "abandon",
+  "back_text": "버리다, 포기하다",
+  "example_sentence": "He abandoned his dreams after facing failure.",
+  "example_sentence_ko": "그는 실패에 직면한 후 자신의 꿈을 포기했다.",
+  "day_id": "27ea21be-55b3-4c75-840e-d6ce89277897"
+ },
+ {
+  "id": "0a2472c0-71b1-49f9-a610-30bdbcea3c88",
+  "front_text": "incorporate",
+  "back_text": "통합하다",
+  "example_sentence": "The new plan incorporates everyone's ideas.",
+  "example_sentence_ko": "새로운 계획은 모두의 의견을 통합한다.",
+  "day_id": "27ea21be-55b3-4c75-840e-d6ce89277897"
+ },
+ {
+  "id": "1352a7af-5efb-451c-99e0-45a57ed13877",
+  "front_text": "regulate",
+  "back_text": "조절하다",
+  "example_sentence": "She regulates her sleep schedule every night.",
+  "example_sentence_ko": "그녀는 매일 밤 자신의 수면 시간을 조절한다.",
+  "day_id": "28226538-906a-4a84-b57d-89b26e05814a"
+ },
+ {
+  "id": "3e8e38be-2166-4fca-ab5d-eeaa91b94df1",
+  "front_text": "insist",
+  "back_text": "주장하다",
+  "example_sentence": "He insists on following the original plan.",
+  "example_sentence_ko": "그는 원래 계획을 따르는 것을 고집했다.",
+  "day_id": "29a2a2e9-0b78-4cbc-a512-f305cf911fdd"
+ },
+ {
+  "id": "b62e023c-037b-461a-9465-83d9a166cba4",
+  "front_text": "compose",
+  "back_text": "창작하다",
+  "example_sentence": "Mozart composed beautiful symphonies as a child.",
+  "example_sentence_ko": "모차르트는 어린 시절 아름다운 교향곡을 작곡했다.",
+  "day_id": "27ea21be-55b3-4c75-840e-d6ce89277897"
+ },
+ {
+  "id": "82743bb2-dc3d-4836-910f-a4e59a2add84",
+  "front_text": "cross",
+  "back_text": "넘어가다",
+  "example_sentence": "We crossed the street carefully at the signal.",
+  "example_sentence_ko": "우리는 신호에서 조심스럽게 거리를 건넜다.",
+  "day_id": "27ea21be-55b3-4c75-840e-d6ce89277897"
+ },
+ {
+  "id": "fbbdc00c-2612-4b99-8405-52b5a4a04c2a",
+  "front_text": "function",
+  "back_text": "기능하다",
+  "example_sentence": "This machine functions properly every day.",
+  "example_sentence_ko": "이 기계는 매일 제대로 기능한다.",
+  "day_id": "28226538-906a-4a84-b57d-89b26e05814a"
+ },
+ {
+  "id": "01aa9b28-276b-4076-92ac-00d8b82a5594",
+  "front_text": "confirm",
+  "back_text": "확정하다",
+  "example_sentence": "The test results confirmed our initial diagnosis.",
+  "example_sentence_ko": "검사 결과는 우리의 초기 진단을 확정했다.",
+  "day_id": "29a2a2e9-0b78-4cbc-a512-f305cf911fdd"
+ },
+ {
+  "id": "1583db39-bbe4-4540-bccc-24965fc12dcb",
+  "front_text": "react",
+  "back_text": "반응하다",
+  "example_sentence": "He reacted quickly to the unexpected situation.",
+  "example_sentence_ko": "그는 예상치 못한 상황에 빠르게 반응했다.",
+  "day_id": "29a2a2e9-0b78-4cbc-a512-f305cf911fdd"
+ },
+ {
+  "id": "ea9cabd7-80d7-4e42-925d-78983a3d5e7b",
+  "front_text": "display",
+  "back_text": "보이다",
+  "example_sentence": "The poster displays important information.",
+  "example_sentence_ko": "그 포스터는 중요한 정보를 보여준다.",
+  "day_id": "2c4f86f5-e048-4454-913c-c0fc66d3717d"
+ },
+ {
+  "id": "e7043c90-b781-4cb9-bb34-6e667fb57215",
+  "front_text": "benefit",
+  "back_text": "이익",
+  "example_sentence": "Exercise has many health benefits.",
+  "example_sentence_ko": "운동은 많은 건강상 이점이 있다.",
+  "day_id": "29a2a2e9-0b78-4cbc-a512-f305cf911fdd"
+ },
+ {
+  "id": "435fd761-5e8e-4df4-a17f-16e187bd669a",
+  "front_text": "risk",
+  "back_text": "위험에 빠뜨리다",
+  "example_sentence": "Smoking risks your health seriously.",
+  "example_sentence_ko": "흡연은 당신의 건강을 위험에 빠뜨린다.",
+  "day_id": "29a2a2e9-0b78-4cbc-a512-f305cf911fdd"
+ },
+ {
+  "id": "e5a5563b-c41f-478d-891f-b8464fb036ec",
+  "front_text": "emphasize",
+  "back_text": "강조하다",
+  "example_sentence": "The teacher emphasized the importance of studying hard.",
+  "example_sentence_ko": "선생님은 열심히 공부하는 것의 중요성을 강조했다.",
+  "day_id": "7319a588-de8b-44f9-9ac5-f7d6bcb84b03"
+ },
+ {
+  "id": "efbe2c4c-09f2-44d4-8614-938f9e05ddb6",
+  "front_text": "assert",
+  "back_text": "주장하다",
+  "example_sentence": "She asserted that the plan was the best option.",
+  "example_sentence_ko": "그녀는 그 계획이 최선의 선택지라고 주장했다.",
+  "day_id": "29a2a2e9-0b78-4cbc-a512-f305cf911fdd"
+ },
+ {
+  "id": "c16a7af4-f332-4cd6-a642-774bbe8894ba",
+  "front_text": "overcome",
+  "back_text": "극복하다",
+  "example_sentence": "She overcame her fear of public speaking.",
+  "example_sentence_ko": "그녀는 대중 연설에 대한 두려움을 극복했습니다.",
+  "day_id": "2dd0ab9a-e0ce-4d3a-81c2-2d6d624d7f01"
+ },
+ {
+  "id": "9a38717c-15ec-490b-8ce6-a59affe8c995",
+  "front_text": "accomplish",
+  "back_text": "성취하다",
+  "example_sentence": "She accomplished her goal this year.",
+  "example_sentence_ko": "그녀는 올해 자신의 목표를 성취했다.",
+  "day_id": "29a2a2e9-0b78-4cbc-a512-f305cf911fdd"
+ },
+ {
+  "id": "8dd639b6-6925-440c-b4e4-b112e1a467c6",
+  "front_text": "client",
+  "back_text": "고객",
+  "example_sentence": "Our clients are very satisfied with our service.",
+  "example_sentence_ko": "우리의 고객들은 우리 서비스에 매우 만족한다.",
+  "day_id": "2dd0ab9a-e0ce-4d3a-81c2-2d6d624d7f01"
+ },
+ {
+  "id": "e5d40692-5128-4a83-a958-69293594831b",
+  "front_text": "unfold",
+  "back_text": "진행되다",
+  "example_sentence": "The story unfolds over several chapters.",
+  "example_sentence_ko": "그 이야기는 여러 장에 걸쳐 진행된다.",
+  "day_id": "7758b047-4b72-4937-b14a-83bb87d0bc96"
+ },
+ {
+  "id": "2d95638f-5160-484e-ab56-a5c17f98f83a",
+  "front_text": "communicate",
+  "back_text": "의사소통하다",
+  "example_sentence": "Good communication helps friends understand each other.",
+  "example_sentence_ko": "좋은 의사소통은 친구들이 서로를 이해하도록 돕는다.",
+  "day_id": "70d9e734-4552-4915-974a-efc07e430eff"
+ },
+ {
+  "id": "5ebf9821-0667-43a6-ab97-425f0fbde92c",
+  "front_text": "bless",
+  "back_text": "축복하다",
+  "example_sentence": "The priest blessed the newborn baby.",
+  "example_sentence_ko": "신부가 새로 태어난 아기를 축복했다.",
+  "day_id": "723e9c97-fd4b-493a-aa00-eb55d88a455e"
+ },
+ {
+  "id": "63d0fd3b-f01b-4539-8c42-ea61784c9f73",
+  "front_text": "function",
+  "back_text": "기능하다",
+  "example_sentence": "This machine functions properly every day.",
+  "example_sentence_ko": "이 기계는 매일 제대로 기능한다.",
+  "day_id": "7319a588-de8b-44f9-9ac5-f7d6bcb84b03"
+ },
+ {
+  "id": "c6146fa8-e3f6-4cf7-849b-cf905dc65040",
+  "front_text": "invest",
+  "back_text": "투자하다",
+  "example_sentence": "My parents invested in my education for a better future.",
+  "example_sentence_ko": "부모님은 더 나은 미래를 위해 교육에 투자했다.",
+  "day_id": "7758b047-4b72-4937-b14a-83bb87d0bc96"
+ },
+ {
+  "id": "bd5c5f9c-c9eb-4e2e-aae6-8b8fedaf8a3b",
+  "front_text": "civilian",
+  "back_text": "민간인, 시민",
+  "example_sentence": "Many civilians were injured during the sudden war.",
+  "example_sentence_ko": null,
+  "day_id": "d05ff6cd-27b2-4c6e-b060-25a1a2ed2373"
+ },
+ {
+  "id": "104cf4ac-a951-4ebc-a0c3-38d166248878",
+  "front_text": "perform",
+  "back_text": "수행하다",
+  "example_sentence": "She performed well in the piano concert last night.",
+  "example_sentence_ko": "그녀는 어제 밤 피아노 콘서트에서 잘 공연했다.",
+  "day_id": "2dd0ab9a-e0ce-4d3a-81c2-2d6d624d7f01"
+ },
+ {
+  "id": "03b54993-e16b-45aa-8488-5aecee02e526",
+  "front_text": "earn",
+  "back_text": "벌다",
+  "example_sentence": "He earns money by working part-time at a restaurant.",
+  "example_sentence_ko": "그는 레스토랑에서 아르바이트를 해서 돈을 번다.",
+  "day_id": "300aa5cf-48eb-4d60-ac87-4bf9588106b9"
+ },
+ {
+  "id": "581ecc68-2937-466c-bf14-08f6ae3bad93",
+  "front_text": "determine",
+  "back_text": "결정하다",
+  "example_sentence": "The scientist determined that the water was contaminated.",
+  "example_sentence_ko": "과학자는 그 물이 오염되었다는 것을 결정했다.",
+  "day_id": "300aa5cf-48eb-4d60-ac87-4bf9588106b9"
+ },
+ {
+  "id": "c992240d-9754-4d1b-8454-8fb0cfb1a618",
+  "front_text": "expectation",
+  "back_text": "기대",
+  "example_sentence": "Students have high expectations for the new teacher.",
+  "example_sentence_ko": "학생들은 새 선생님에 대한 높은 기대를 가지고 있다.",
+  "day_id": "30a8a718-b590-4bbb-83bb-45a39a5926e6"
+ },
+ {
+  "id": "50dea018-9c1d-40f2-9fd0-3bb35739d854",
+  "front_text": "irritate",
+  "back_text": "짜증나게 하다",
+  "example_sentence": "His constant complaining irritates me every day.",
+  "example_sentence_ko": "그의 끊임없는 불평이 매일 나를 짜증나게 한다.",
+  "day_id": "398816a9-ce32-4db7-84de-4fca2cf0d49d"
+ },
+ {
+  "id": "77ca9527-cd9b-449d-9c2a-eeb0bd3315d2",
+  "front_text": "adapt",
+  "back_text": "적응시키다",
+  "example_sentence": "The students adapted to the new school environment quickly.",
+  "example_sentence_ko": "그 학생들은 새로운 학교 환경에 빠르게 적응했다.",
+  "day_id": "300aa5cf-48eb-4d60-ac87-4bf9588106b9"
+ },
+ {
+  "id": "ebfc5e9a-5ded-4414-8b2b-d1dfac212c64",
+  "front_text": "pursue",
+  "back_text": "추구하다",
+  "example_sentence": "She pursues her dreams with determination.",
+  "example_sentence_ko": "그녀는 결단력 있게 자신의 꿈을 추구한다.",
+  "day_id": "30a8a718-b590-4bbb-83bb-45a39a5926e6"
+ },
+ {
+  "id": "6318348b-5262-4a6a-bbe4-49a4eceefb44",
+  "front_text": "stereotype",
+  "back_text": "고정 관념",
+  "example_sentence": "We should avoid stereotypes about different cultures.",
+  "example_sentence_ko": "우리는 다양한 문화에 대한 고정 관념을 피해야 한다.",
+  "day_id": "32cd7eaf-7321-4195-a35c-536e1ca4e3f5"
+ },
+ {
+  "id": "9c030fa5-9eb0-41e1-9034-deeafb5629b1",
+  "front_text": "atrisk",
+  "back_text": "위험한 환경에 있는",
+  "example_sentence": "Homeless people are at risk during winter months.",
+  "example_sentence_ko": "노숙자들은 겨울에 위험한 환경에 있다.",
+  "day_id": "32cd7eaf-7321-4195-a35c-536e1ca4e3f5"
+ },
+ {
+  "id": "74515197-2fcc-4768-a83f-35a794cac7c3",
+  "front_text": "satisfy",
+  "back_text": "충족시키다",
+  "example_sentence": "His performance satisfied everyone in the audience.",
+  "example_sentence_ko": "그의 공연은 관객 모두를 만족시켰다.",
+  "day_id": "300aa5cf-48eb-4d60-ac87-4bf9588106b9"
+ },
+ {
+  "id": "cf318f61-5b24-4597-a275-ff9b559d28d8",
+  "front_text": "provide",
+  "back_text": "제공하다",
+  "example_sentence": "The school provides free lunch for students.",
+  "example_sentence_ko": "학교는 학생들에게 무료 점심을 제공한다.",
+  "day_id": "30a8a718-b590-4bbb-83bb-45a39a5926e6"
+ },
+ {
+  "id": "c6a1253a-051c-459f-ad44-043c3679d4a0",
+  "front_text": "possess",
+  "back_text": "소유하다",
+  "example_sentence": "She possesses great talent in painting.",
+  "example_sentence_ko": "그녀는 그림 그리기에 큰 재능을 소유하고 있다.",
+  "day_id": "30a8a718-b590-4bbb-83bb-45a39a5926e6"
+ },
+ {
+  "id": "0976a657-39a7-42f1-842a-5b0f5fce15bb",
+  "front_text": "represent",
+  "back_text": "나타내다",
+  "example_sentence": "This statue represents the city's rich history.",
+  "example_sentence_ko": "이 동상은 그 도시의 풍부한 역사를 나타낸다.",
+  "day_id": "32cd7eaf-7321-4195-a35c-536e1ca4e3f5"
+ },
+ {
+  "id": "05179733-3ef1-4b8e-9c36-7b03550b2988",
+  "front_text": "term",
+  "back_text": "용어",
+  "example_sentence": "In scientific terms, photosynthesis is how plants make food.",
+  "example_sentence_ko": "과학 용어로, 광합성은 식물이 음식을 만드는 방식이다.",
+  "day_id": "32cd7eaf-7321-4195-a35c-536e1ca4e3f5"
+ },
+ {
+  "id": "e3a25805-ff90-436d-8496-0252904a64e2",
+  "front_text": "accept",
+  "back_text": "수락하다",
+  "example_sentence": "She accepted the job offer from the company.",
+  "example_sentence_ko": "그녀는 회사의 직업 제안을 수락했다.",
+  "day_id": "33998b1c-61b4-4cd2-bd63-4acfc0422a26"
+ },
+ {
+  "id": "91bf59a2-d81b-4aa7-b292-23b44c4900a7",
+  "front_text": "selfconcept",
+  "back_text": "자아 개념",
+  "example_sentence": "Positive self-concept helps students succeed in school.",
+  "example_sentence_ko": "긍정적인 자아 개념은 학생들이 학교에서 성공하도록 돕는다.",
+  "day_id": "33998b1c-61b4-4cd2-bd63-4acfc0422a26"
+ },
+ {
+  "id": "bc105dde-69c6-4fde-820a-fe47f715c902",
+  "front_text": "crop",
+  "back_text": "작물",
+  "example_sentence": "Farmers grow crops like rice and wheat.",
+  "example_sentence_ko": "농부들은 쌀과 밀 같은 작물을 재배한다.",
+  "day_id": "398816a9-ce32-4db7-84de-4fca2cf0d49d"
+ },
+ {
+  "id": "2a232a67-4987-4a0d-8138-f4c81a15b06e",
+  "front_text": "popularize",
+  "back_text": "대중화시키다",
+  "example_sentence": "Social media has popularized cooking shows for young people.",
+  "example_sentence_ko": "소셜 미디어는 요리 쇼를 젊은 사람들에게 대중화시켰다.",
+  "day_id": "3e4413e7-8d3e-47dd-9604-5219050463ff"
+ },
+ {
+  "id": "10766160-7d50-4372-ae8e-6c63ecb42b4d",
+  "front_text": "serve",
+  "back_text": "일하다, 근무하다",
+  "example_sentence": "My older brother serves as a mentor to help me with my studies.",
+  "example_sentence_ko": "내 형은 내 공부를 도와주는 멘토로 일한다.",
+  "day_id": "33998b1c-61b4-4cd2-bd63-4acfc0422a26"
+ },
+ {
+  "id": "bfebb5da-311c-4575-ae9b-82cd2d879ec2",
+  "front_text": "assist",
+  "back_text": "도와주다",
+  "example_sentence": "My friend assisted me with my homework.",
+  "example_sentence_ko": "내 친구가 숙제를 도와주었다.",
+  "day_id": "33998b1c-61b4-4cd2-bd63-4acfc0422a26"
+ },
+ {
+  "id": "883f338f-6ef6-47c0-9dfe-8598b1090973",
+  "front_text": "rescue",
+  "back_text": "구조하다",
+  "example_sentence": "The firefighters rescued the family from the fire.",
+  "example_sentence_ko": "소방관들이 가족을 불에서 구조했다.",
+  "day_id": "33998b1c-61b4-4cd2-bd63-4acfc0422a26"
+ },
+ {
+  "id": "fdeb638f-77d3-47f8-b37d-1b91228eaaea",
+  "front_text": "dominate",
+  "back_text": "장악하다",
+  "example_sentence": "The team dominated the entire game.",
+  "example_sentence_ko": "그 팀은 경기 전체를 장악했다.",
+  "day_id": "398816a9-ce32-4db7-84de-4fca2cf0d49d"
+ },
+ {
+  "id": "38cc2178-0df0-4796-95e0-c392e12477b5",
+  "front_text": "boost",
+  "back_text": "높이다",
+  "example_sentence": "Regular exercise boosts your energy and mood.",
+  "example_sentence_ko": "규칙적인 운동은 당신의 에너지와 기분을 높인다.",
+  "day_id": "398816a9-ce32-4db7-84de-4fca2cf0d49d"
+ },
+ {
+  "id": "879eb51c-c019-46eb-a0f7-3fc6ba3a8169",
+  "front_text": "resource",
+  "back_text": "자원/재원",
+  "example_sentence": "The school lacks enough resources to support all students.",
+  "example_sentence_ko": "학교는 모든 학생들을 지원할 충분한 자원이 부족하다.",
+  "day_id": "3b9e083c-b22e-40f7-b3f4-0767e32e6c00"
+ },
+ {
+  "id": "8fb258f8-d57f-446a-a5cc-1a28134443d3",
+  "front_text": "combine",
+  "back_text": "결합하다",
+  "example_sentence": "We combined two small groups into one.",
+  "example_sentence_ko": "우리는 두 개의 작은 그룹을 하나로 결합했다.",
+  "day_id": "70d9e734-4552-4915-974a-efc07e430eff"
+ },
+ {
+  "id": "ef817743-8e53-40c6-b6f5-075e2070066c",
+  "front_text": "characterize",
+  "back_text": "특징이 되다",
+  "example_sentence": "Hard work characterizes successful people.",
+  "example_sentence_ko": "열심히 일하는 것이 성공한 사람들의 특징이다.",
+  "day_id": "70d9e734-4552-4915-974a-efc07e430eff"
+ },
+ {
+  "id": "d510a714-e37c-4ca8-a794-c5f5039a272e",
+  "front_text": "carry",
+  "back_text": "계속하다",
+  "example_sentence": "He carried on with his work despite the noise.",
+  "example_sentence_ko": "그는 소음에도 불구하고 자신의 일을 계속했다.",
+  "day_id": "345b780c-699c-4363-9321-69149048e6e9"
+ },
+ {
+  "id": "dd9b8634-50f5-490c-b1ca-09060891a1fa",
+  "front_text": "hang",
+  "back_text": "붙잡다, 버티다",
+  "example_sentence": "The lamp hangs from the ceiling in our room.",
+  "example_sentence_ko": "우리 방의 천장에서 램프가 매달려 있다.",
+  "day_id": "33998b1c-61b4-4cd2-bd63-4acfc0422a26"
+ },
+ {
+  "id": "2b0a6901-c03a-477b-b0ca-48bb44fb266f",
+  "front_text": "operate",
+  "back_text": "작동하다",
+  "example_sentence": "This machine operates twenty-four hours a day.",
+  "example_sentence_ko": "이 기계는 24시간 작동한다.",
+  "day_id": "7319a588-de8b-44f9-9ac5-f7d6bcb84b03"
+ }
+]

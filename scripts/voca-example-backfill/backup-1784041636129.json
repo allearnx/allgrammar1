@@ -1,0 +1,82 @@
+[
+ {
+  "id": "9df65c84-6bb4-4820-b780-acda84ded948",
+  "front_text": "require",
+  "back_text": "요구하다",
+  "example_sentence": "This job requires a lot of patience.",
+  "example_sentence_ko": "이 일은 많은 인내심을 요구한다.",
+  "day_id": "3f62ce9a-8cf8-4dcd-9073-d7951cc5d1f4"
+ },
+ {
+  "id": "97ced273-d7d7-488a-9ed2-6c1829195d19",
+  "front_text": "benefit",
+  "back_text": "혜택",
+  "example_sentence": "There are many benefits to exercise.",
+  "example_sentence_ko": "운동에는 많은 이점이 있습니다.",
+  "day_id": "832e41cc-c133-4f57-9a93-fc06c98de7bc"
+ },
+ {
+  "id": "39750ab2-ee54-446a-9a49-f065b2d3e25d",
+  "front_text": "rush+to부정사",
+  "back_text": "급히 ~하다",
+  "example_sentence": "She rushed to catch the train.",
+  "example_sentence_ko": "그녀는 서둘러 기차를 탔다.",
+  "day_id": "a5a526ca-7030-41e7-bf9f-9e98fd114675"
+ },
+ {
+  "id": "97b830fd-cad0-4c55-957a-d63d5ef7bc29",
+  "front_text": "require",
+  "back_text": "요구하다",
+  "example_sentence": "The job requires strong communication skills.",
+  "example_sentence_ko": "그 일은 강한 의사소통 능력을 요구한다.",
+  "day_id": "ce47f0c7-3be3-427c-9b5a-ae860670a8f7"
+ },
+ {
+  "id": "e504af64-64fb-4529-a013-3fddbc6cf9f6",
+  "front_text": "include",
+  "back_text": "포함하다",
+  "example_sentence": "The price includes tax and shipping cost.",
+  "example_sentence_ko": "그 가격에는 세금과 배송료가 포함되어 있다.",
+  "day_id": "e0022db4-0c78-430c-b716-ef840baf6109"
+ },
+ {
+  "id": "d15e5144-9391-4ee5-917d-e4de62721d54",
+  "front_text": "possess",
+  "back_text": "가지다, 소유하다",
+  "example_sentence": "She possesses great talent for playing the piano.",
+  "example_sentence_ko": "그녀는 피아노 연주에 대한 뛰어난 재능을 가지고 있습니다.",
+  "day_id": "fe772b75-876d-4968-83e7-920f8d403d9c"
+ },
+ {
+  "id": "bca03e92-1518-4ddd-a276-3a7a3f17bc76",
+  "front_text": "descendant",
+  "back_text": "후손",
+  "example_sentence": "We should plant trees whose shade our descendants will enjoy.",
+  "example_sentence_ko": "우리는 우리의 후손들이 그늘을 즐길 나무를 심어야 한다.",
+  "day_id": "d1498118-5ddd-4ff2-9f27-0be7e80294fa"
+ },
+ {
+  "id": "2b408a80-6fe2-492a-8853-e823deba7e4a",
+  "front_text": "undergo",
+  "back_text": "받다, 겪다, 경험하다",
+  "example_sentence": "Only one of us here today has ever undergone the rigorous training required of a receiver.",
+  "example_sentence_ko": null,
+  "day_id": "f109f81f-fa43-4a94-b140-a46c3d9d28da"
+ },
+ {
+  "id": "8c380afa-3eb1-4dcd-9444-2fbc5b500783",
+  "front_text": "convince",
+  "back_text": "확신시키다, 납득시키다, 설득하다",
+  "example_sentence": "We are convinced that Jonas has the ability to acquire wisdom.",
+  "example_sentence_ko": null,
+  "day_id": "f109f81f-fa43-4a94-b140-a46c3d9d28da"
+ },
+ {
+  "id": "e7f85325-258b-4260-977f-5fb49e5aa46a",
+  "front_text": "predetermine",
+  "back_text": "미리 결정하다, 미리 정하다, 예정하다",
+  "example_sentence": "The color of your hair is predetermined by that of your parents' hair.",
+  "example_sentence_ko": null,
+  "day_id": "dfb04cd4-4d3d-4f67-8690-11bd15cddb4b"
+ }
+]

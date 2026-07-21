@@ -112,10 +112,6 @@ export default function PricingSection({ vocaCourseId, vocaCoursePrice, selfStud
 
         </div>
 
-        <p style={{ marginTop: 32, fontSize: 14, color: C.grayLight }}>
-          결제 후 이용 방법이 궁금하세요?{' '}
-          <Link href="/allkill/guide" style={{ color: C.gray, textDecoration: 'underline', fontWeight: 600 }}>이용 가이드 보기</Link>
-        </p>
       </div>
     </section>
   );
