@@ -630,6 +630,8 @@ function RecommendationCard({
   const band = recommendBandKey(level, activeBands);
   const books = bandBooks[band] ?? [];
   const primary = books[0];
+  // 대표 처방이 학년 교과서 단어면 시중 단어 교재를 나란히 함께 추천
+  const companion = primary?.title.includes('교과서 단어') ? books[1] : undefined;
 
   return (
     <div className="rounded-2xl border bg-white p-5 text-center">
@@ -638,11 +640,16 @@ function RecommendationCard({
           <p className="text-xs font-bold" style={{ color: VOCA_COLORS.blueDark }}>내 레벨 추천 교재</p>
           <p className="mt-1 text-lg font-bold" style={{ color: VOCA_COLORS.ink, wordBreak: 'keep-all' }}>
             {primary.title}
-            {books.length > 1 && <span className="text-sm font-medium text-gray-400"> 외 {books.length - 1}권</span>}
+            {!companion && books.length > 1 && <span className="text-sm font-medium text-gray-400"> 외 {books.length - 1}권</span>}
           </p>
           <p className="mt-1 text-sm" style={{ color: VOCA_COLORS.gray }}>
             지금 레벨({getBand(band).label})에 딱 맞는 교재예요. 여기서 시작해서 한 단계씩 올라가요.
           </p>
+          {companion && (
+            <p className="mt-2 inline-block rounded-full px-3 py-1 text-xs font-semibold" style={{ background: '#E8F0FE', color: VOCA_COLORS.blueDark }}>
+              함께 추천 · {companion.title}
+            </p>
+          )}
         </>
       )}
       {publicMode ? (

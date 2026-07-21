@@ -24,14 +24,16 @@ export interface DiagnosticBand {
  * sourceLabel은 "○○ 단어를 N% 알고 있어요" 문구에 쓰인다 (모의고사·커버리지 표현 금지).
  */
 export const DIAGNOSTIC_BANDS: DiagnosticBand[] = [
+  // 중등 밴드 첫 교재 = 학년별 교과서 단어(내신 데이터 기반) — "학년 단어를 N% 알아요" 문구와
+  // 출처가 정확히 일치하고, 추천 카드의 대표 처방이 된다. 두 번째부터는 함께 추천할 시중 교재.
   {
     key: 'L1',
     label: '중1',
     sourceLabel: '중1',
-    bookTitles: ['천일문 보카 중등 스타트', '워드마스터 중등 베이직', '능률 VOCA 중등 기본'],
+    bookTitles: ['중1 교과서 단어', '천일문 보카 중등 스타트', '워드마스터 중등 베이직', '능률 VOCA 중등 기본'],
   },
-  { key: 'L2', label: '중2', sourceLabel: '중2', bookTitles: ['능률 VOCA 중등 필수'] },
-  { key: 'L3', label: '중3', sourceLabel: '중3', bookTitles: ['워드마스터 중등 고난도', '능률 VOCA 중등 고난도'] },
+  { key: 'L2', label: '중2', sourceLabel: '중2', bookTitles: ['중2 교과서 단어', '능률 VOCA 중등 필수'] },
+  { key: 'L3', label: '중3', sourceLabel: '중3', bookTitles: ['중3 교과서 단어', '워드마스터 중등 고난도', '능률 VOCA 중등 고난도'] },
   { key: 'L4', label: '고1', sourceLabel: '고1', bookTitles: ['능률 고교필수 2000', '최근 5개년 고1 3월 모고 단어'] },
   { key: 'L5', label: '고2', sourceLabel: '고2', bookTitles: ['최근 4개년 고2 3월 모고 단어'] },
   { key: 'L6', label: '고3', sourceLabel: '고3', bookTitles: ['최근 4개년 고3 3월 모고 단어'] },
