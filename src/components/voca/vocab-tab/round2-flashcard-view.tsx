@@ -1,11 +1,27 @@
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { ChevronLeft, ChevronRight, RotateCcw } from 'lucide-react';
+import { ChevronLeft, ChevronRight, RotateCcw, Volume2 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import type { VocaVocabulary } from '@/types/voca';
+
+/** 표제어 발음 (Web Speech) — speak() 후 resume() 필수: iOS 사파리/일부 모바일 크롬은
+ * paused 상태로 시작해 완전 무음이 됨 (browser-compat, e45a493과 동일 대응) */
+function speakWord(word: string, onDone: () => void) {
+  if (typeof window === 'undefined' || !window.speechSynthesis) return;
+  window.speechSynthesis.cancel();
+  const utterance = new SpeechSynthesisUtterance(word);
+  utterance.lang = 'en-US';
+  utterance.rate = 0.85;
+  const enVoice = window.speechSynthesis.getVoices().find((v) => v.lang?.toLowerCase().startsWith('en'));
+  if (enVoice) utterance.voice = enVoice;
+  utterance.onend = onDone;
+  utterance.onerror = onDone;
+  window.speechSynthesis.speak(utterance);
+  window.speechSynthesis.resume();
+}
 
 interface Round2FlashcardViewProps {
   vocabulary: VocaVocabulary[];
@@ -56,6 +72,15 @@ export function Round2FlashcardView({ vocabulary, onComplete }: Round2FlashcardV
   const [currentIdx, setCurrentIdx] = useState(0);
   const [flipped, setFlipped] = useState(false);
   const [completed, setCompleted] = useState(false);
+  const [speaking, setSpeaking] = useState(false);
+
+  // 카드 이동/이탈 시 진행 중인 발화 중단
+  useEffect(() => {
+    setSpeaking(false);
+    return () => {
+      if (typeof window !== 'undefined') window.speechSynthesis?.cancel();
+    };
+  }, [currentIdx]);
 
   if (cards.length === 0) {
     return (
@@ -126,6 +151,21 @@ export function Round2FlashcardView({ vocabulary, onComplete }: Round2FlashcardV
           {!flipped ? (
             <div className="text-center">
               <p className="text-2xl font-semibold tracking-tight text-slate-900 dark:text-white">{card.front}</p>
+              <button
+                type="button"
+                aria-label="발음 듣기"
+                className={cn(
+                  'mt-3 inline-flex h-10 w-10 items-center justify-center rounded-full shadow-sm transition-colors',
+                  speaking ? 'bg-brand-100 text-brand-600' : 'bg-brand-600 text-white hover:bg-brand-700',
+                )}
+                onClick={(e) => {
+                  e.stopPropagation(); // 카드 뒤집기 방지
+                  setSpeaking(true);
+                  speakWord(card.word, () => setSpeaking(false));
+                }}
+              >
+                <Volume2 className={cn('h-5 w-5', speaking && 'animate-pulse')} />
+              </button>
               <p className="mt-2 text-xs text-slate-400 dark:text-slate-500">탭하여 뒤집기</p>
             </div>
           ) : (
