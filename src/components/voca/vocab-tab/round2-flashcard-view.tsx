@@ -32,6 +32,8 @@ interface CardData {
   word: string;
   front: string;
   back: string[];
+  /** 뒷면 발음용 영어 텍스트 — 표제어. 유의어. 반의어. 숙어 순 (마침표가 발화 쉼) */
+  backSpeech: string;
 }
 
 function buildCards(vocabulary: VocaVocabulary[]): CardData[] {
@@ -39,16 +41,20 @@ function buildCards(vocabulary: VocaVocabulary[]): CardData[] {
 
   for (const v of vocabulary) {
     const backLines: string[] = [];
+    const speechParts: string[] = [v.front_text];
 
     if (v.synonyms) {
       backLines.push(`유의어: ${v.synonyms}`);
+      speechParts.push(v.synonyms);
     }
     if (v.antonyms) {
       backLines.push(`반의어: ${v.antonyms}`);
+      speechParts.push(v.antonyms);
     }
     if (v.idioms && v.idioms.length > 0) {
       for (const idiom of v.idioms) {
         backLines.push(`숙어: ${idiom.en} — ${idiom.ko}`);
+        speechParts.push(idiom.en);
         if (idiom.example_en) {
           backLines.push(`  예) ${idiom.example_en}`);
         }
@@ -60,6 +66,7 @@ function buildCards(vocabulary: VocaVocabulary[]): CardData[] {
         word: v.front_text,
         front: v.front_text,
         back: backLines,
+        backSpeech: speechParts.join('. '),
       });
     }
   }
@@ -74,13 +81,14 @@ export function Round2FlashcardView({ vocabulary, onComplete }: Round2FlashcardV
   const [completed, setCompleted] = useState(false);
   const [speaking, setSpeaking] = useState(false);
 
-  // 카드 이동/이탈 시 진행 중인 발화 중단
+  // 카드 이동·뒤집기 시 진행 중인 발화 중단
   useEffect(() => {
     setSpeaking(false);
+    if (typeof window !== 'undefined') window.speechSynthesis?.cancel();
     return () => {
       if (typeof window !== 'undefined') window.speechSynthesis?.cancel();
     };
-  }, [currentIdx]);
+  }, [currentIdx, flipped]);
 
   if (cards.length === 0) {
     return (
@@ -170,7 +178,24 @@ export function Round2FlashcardView({ vocabulary, onComplete }: Round2FlashcardV
             </div>
           ) : (
             <div className="w-full space-y-2 text-left">
-              <p className="mb-3 text-center text-lg font-semibold text-slate-900 dark:text-white">{card.word}</p>
+              <div className="mb-3 flex items-center justify-center gap-2">
+                <p className="text-lg font-semibold text-slate-900 dark:text-white">{card.word}</p>
+                <button
+                  type="button"
+                  aria-label="유의어·반의어 듣기"
+                  className={cn(
+                    'inline-flex h-8 w-8 items-center justify-center rounded-full shadow-sm transition-colors',
+                    speaking ? 'bg-brand-100 text-brand-600' : 'bg-brand-600 text-white hover:bg-brand-700',
+                  )}
+                  onClick={(e) => {
+                    e.stopPropagation(); // 카드 뒤집기 방지
+                    setSpeaking(true);
+                    speakWord(card.backSpeech, () => setSpeaking(false));
+                  }}
+                >
+                  <Volume2 className={cn('h-4 w-4', speaking && 'animate-pulse')} />
+                </button>
+              </div>
               {card.back.map((line, i) => (
                 <p
                   key={i}
