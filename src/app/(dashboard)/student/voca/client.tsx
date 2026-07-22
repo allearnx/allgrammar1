@@ -291,13 +291,10 @@ export function VocaHomeClient({ books, days, progressList, submissionStatuses =
         <div className="relative z-10">
           <div className="flex flex-wrap items-center gap-2 mb-3">
             <p className="voca-display text-xs font-bold tracking-widest uppercase" style={{ color: VOCA_COLORS.blueDark }}>AllKill Voca</p>
-            {roundMode === 'book' && (
-              <span className={`text-[11px] font-bold px-2 py-0.5 rounded-full ${
-                bookCurrentRound === '2'
-                  ? 'bg-white text-primary'
-                  : 'bg-white/70 text-gray-500'
-              }`}>
-                {bookCurrentRound}회독
+            {/* 2026-07-22 완전 개방 — 회독은 Day 화면에서 자유 전환이므로 고정 배지 대신 안내 칩 */}
+            {!round2Locked && (
+              <span className="text-[11px] font-bold px-2 py-0.5 rounded-full bg-white text-primary">
+                1·2회독 자유
               </span>
             )}
             {expiryInfo && (
@@ -312,7 +309,7 @@ export function VocaHomeClient({ books, days, progressList, submissionStatuses =
                 연장하기
               </Link>
             )}
-            {roundMode === 'book' && round2Locked && freeDayLimit > 0 && (
+            {round2Locked && freeDayLimit > 0 && (
               <span className="text-[11px] font-bold px-2 py-0.5 rounded-full bg-white/70 text-gray-400">
                 2회독 🔒 유료
               </span>

@@ -81,14 +81,17 @@ export function Round2FlashcardView({ vocabulary, onComplete }: Round2FlashcardV
   const [completed, setCompleted] = useState(false);
   const [speaking, setSpeaking] = useState(false);
 
-  // 카드 이동·뒤집기 시 진행 중인 발화 중단
+  // 언마운트 시 진행 중인 발화 중단 (이동·뒤집기 중단은 각 핸들러에서)
   useEffect(() => {
-    setSpeaking(false);
-    if (typeof window !== 'undefined') window.speechSynthesis?.cancel();
     return () => {
       if (typeof window !== 'undefined') window.speechSynthesis?.cancel();
     };
-  }, [currentIdx, flipped]);
+  }, []);
+
+  function stopSpeech() {
+    if (typeof window !== 'undefined') window.speechSynthesis?.cancel();
+    setSpeaking(false);
+  }
 
   if (cards.length === 0) {
     return (
@@ -102,6 +105,7 @@ export function Round2FlashcardView({ vocabulary, onComplete }: Round2FlashcardV
   const isLast = currentIdx === cards.length - 1;
 
   function handleNext() {
+    stopSpeech();
     if (isLast) {
       setCompleted(true);
       onComplete();
@@ -113,12 +117,14 @@ export function Round2FlashcardView({ vocabulary, onComplete }: Round2FlashcardV
 
   function handlePrev() {
     if (currentIdx > 0) {
+      stopSpeech();
       setFlipped(false);
       setCurrentIdx((i) => i - 1);
     }
   }
 
   function handleRestart() {
+    stopSpeech();
     setCurrentIdx(0);
     setFlipped(false);
     setCompleted(false);
@@ -146,7 +152,7 @@ export function Round2FlashcardView({ vocabulary, onComplete }: Round2FlashcardV
 
       <div
         className="cursor-pointer overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-[0_4px_24px_-4px_rgba(0,0,0,0.08)] transition-all dark:border-slate-800 dark:bg-slate-900 dark:shadow-[0_4px_24px_-4px_rgba(0,0,0,0.4)]"
-        onClick={() => setFlipped(!flipped)}
+        onClick={() => { stopSpeech(); setFlipped(!flipped); }}
         style={{ minHeight: '220px' }}
       >
         <div className={cn(
