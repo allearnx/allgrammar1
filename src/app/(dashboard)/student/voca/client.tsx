@@ -522,7 +522,35 @@ export function VocaHomeClient({ books, days, progressList, submissionStatuses =
                     {(roundMode === 'day' || bookCurrentRound === '1') && <ProgressBadges progress={prog} submissionStatus={submissionStatuses[day.id]} />}
                   </div>
                   <div className="flex items-center gap-1.5 shrink-0">
-                    {isCompleted && <CheckCircle className="h-5 w-5 text-green-500" />}
+                    {/* 회독 직행 칩 — 진도 표시 겸 바로가기 (2026-07-22 완전 개방) */}
+                    <button
+                      type="button"
+                      onClick={(e) => { e.preventDefault(); e.stopPropagation(); router.push(`/student/voca/${day.id}?round=1`); }}
+                      className={`rounded-full px-2 py-0.5 text-[10px] font-bold transition-colors ${
+                        completed
+                          ? 'bg-green-100 text-green-700 hover:bg-green-200'
+                          : 'bg-gray-100 text-gray-400 hover:bg-gray-200 hover:text-gray-600'
+                      }`}
+                    >
+                      1회독{completed && ' ✓'}
+                    </button>
+                    {round2Locked ? (
+                      <span className="flex items-center gap-0.5 rounded-full bg-gray-50 px-2 py-0.5 text-[10px] font-bold text-gray-300">
+                        <Lock className="h-2.5 w-2.5" />2회독
+                      </span>
+                    ) : (
+                      <button
+                        type="button"
+                        onClick={(e) => { e.preventDefault(); e.stopPropagation(); router.push(`/student/voca/${day.id}?round=2`); }}
+                        className={`rounded-full px-2 py-0.5 text-[10px] font-bold transition-colors ${
+                          r2Completed
+                            ? 'bg-brand-100 text-brand-700 hover:bg-brand-200'
+                            : 'bg-gray-100 text-gray-400 hover:bg-gray-200 hover:text-gray-600'
+                        }`}
+                      >
+                        2회독{r2Completed && ' ✓'}
+                      </button>
+                    )}
                     <ChevronRight className="h-4 w-4 text-gray-300 group-hover:text-primary/70 group-hover:translate-x-0.5 transition-all" />
                   </div>
                 </div>

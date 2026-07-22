@@ -12,10 +12,13 @@ import { VOCA_DAYS_COLUMNS, VOCA_VOCABULARY_COLUMNS, VOCA_STUDENT_PROGRESS_COLUM
 
 export default async function StudentVocaDayPage({
   params,
+  searchParams,
 }: {
   params: Promise<{ dayId: string }>;
+  searchParams: Promise<{ round?: string }>;
 }) {
   const { dayId } = await params;
+  const { round: roundParam } = await searchParams;
   const user = await requireRole(['student']);
   const supabase = await createClient();
 
@@ -119,9 +122,12 @@ export default async function StudentVocaDayPage({
   const round2Forced = !!assignment?.round2_unlocked;
 
   // 첫 진입 탭만 결정 (2026-07-22 완전 개방 — 이후엔 학생이 탭으로 자유 전환)
+  // ?round=1|2 로 직행 가능 (홈 Day 목록의 회독 칩) — 무료 잠금 시 2회독 직행은 무시
   let initialRound: '1' | '2' = '1';
   if (!round2Locked) {
-    if (roundMode === 'day') {
+    if (roundParam === '1' || roundParam === '2') {
+      initialRound = roundParam;
+    } else if (roundMode === 'day') {
       // Day별 모드: 이 Day의 1회독 완료 여부로 판단
       initialRound = round2Forced || isR1Complete((progress as VocaStudentProgress) ?? null) ? '2' : '1';
     } else {
