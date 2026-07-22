@@ -118,14 +118,15 @@ export default async function StudentVocaDayPage({
   // 관리자 '2회독' 토글 = 1회독 면제 — 다른 곳에서 이미 1회독을 마친 학생을 바로 2회독으로
   const round2Forced = !!assignment?.round2_unlocked;
 
-  let currentRound: '1' | '2' = '1';
+  // 첫 진입 탭만 결정 (2026-07-22 완전 개방 — 이후엔 학생이 탭으로 자유 전환)
+  let initialRound: '1' | '2' = '1';
   if (!round2Locked) {
     if (roundMode === 'day') {
       // Day별 모드: 이 Day의 1회독 완료 여부로 판단
-      currentRound = round2Forced || isR1Complete((progress as VocaStudentProgress) ?? null) ? '2' : '1';
+      initialRound = round2Forced || isR1Complete((progress as VocaStudentProgress) ?? null) ? '2' : '1';
     } else {
       // 책 단위 모드: 전체 Day 1회독 완료 여부로 판단
-      currentRound = round2Forced || bookRound1Complete ? '2' : '1';
+      initialRound = round2Forced || bookRound1Complete ? '2' : '1';
     }
   }
 
@@ -138,7 +139,8 @@ export default async function StudentVocaDayPage({
           vocabulary={(vocabulary as VocaVocabulary[]) || []}
           progress={(progress as VocaStudentProgress) || null}
           wrongWords={wrongWords}
-          currentRound={currentRound}
+          initialRound={initialRound}
+          round2Locked={round2Locked}
           hasMatchingSubmission={hasMatchingSubmission}
         />
       </div>
