@@ -100,6 +100,9 @@ export function NeonFlashcard({ vocabulary, onComplete }: NeonFlashcardProps) {
         }
       };
       window.speechSynthesis.speak(utterance);
+      // iOS 사파리/일부 크롬: speak() 후 paused 상태로 시작해 onstart/onend가 영영
+      // 안 오는 버그 — resume()이 없으면 모바일에서 탭해도 완전 무음(audio-player-hook.ts와 동일 대응)
+      window.speechSynthesis.resume();
     } else {
       if (hasSentence) setShowSentence(true);
       play(vocab.example_sentence || vocab.front_text);
