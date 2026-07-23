@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Link2, Check, RefreshCw, Loader2, X, ExternalLink, BookA } from 'lucide-react';
 import { fetchWithToast } from '@/lib/fetch-with-toast';
+import { withShareVersion } from '@/lib/share-url';
 
 interface Props {
   studentId: string;
@@ -66,7 +67,7 @@ export function ParentShareButton({ studentId }: Props) {
 
   const copyLink = async (type: 'full' | 'voca') => {
     if (!token) return;
-    const url = `${window.location.origin}/parent/${token}${type === 'voca' ? '?tab=voca' : ''}`;
+    const url = withShareVersion(`${window.location.origin}/parent/${token}${type === 'voca' ? '?tab=voca' : ''}`);
     await navigator.clipboard.writeText(url);
     setCopied(type);
     setTimeout(() => setCopied(null), 2000);

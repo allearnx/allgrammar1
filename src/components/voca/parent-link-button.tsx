@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { toast } from 'sonner';
 import { Heart, Loader2 } from 'lucide-react';
 import { fetchWithToast } from '@/lib/fetch-with-toast';
+import { withShareVersion } from '@/lib/share-url';
 
 /**
  * 학부모 리포트 링크 버튼 — 학생이 직접 발급 (셀프스터디 핵심 기능).
@@ -21,7 +22,7 @@ export function ParentLinkButton() {
       });
       if (!data.token) throw new Error('no token');
       // 보카 홈에서 발급하는 링크 → 올킬보카 탭이 바로 열리고 카톡 미리보기도 올킬보카 이미지
-      const url = `${window.location.origin}/parent/${data.token}?tab=voca`;
+      const url = withShareVersion(`${window.location.origin}/parent/${data.token}?tab=voca`);
 
       // 모바일: 공유 시트 / 데스크탑: 클립보드 복사
       if (navigator.share) {
