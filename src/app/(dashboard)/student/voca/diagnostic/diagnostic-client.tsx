@@ -276,7 +276,7 @@ export function DiagnosticClient({ activeBands, bandBooks, latest, tookToday, pr
         latest={latest}
         tookToday={tookToday}
         onStart={startDiagnostic}
-        l1Active={activeBands.includes('L1')}
+        elemActive={activeBands.includes('L0')}
       />
     );
   }
@@ -478,12 +478,12 @@ function IntroScreen({
   latest,
   tookToday,
   onStart,
-  l1Active,
+  elemActive,
 }: {
   latest: LatestDiagnostic | null;
   tookToday: boolean;
   onStart: (g: DiagnosticGrade) => void;
-  l1Active: boolean;
+  elemActive: boolean;
 }) {
   const latestLevel = latest
     ? formatLevel({ band: latest.finalBand as BandKey, qualifier: latest.finalQualifier as FinalLevel['qualifier'] })
@@ -529,8 +529,8 @@ function IntroScreen({
               );
             })}
           </div>
-          {!l1Active && (
-            <p className="mt-2 text-xs text-gray-400">초등학생은 중1 수준부터 측정돼요.</p>
+          {!elemActive && (
+            <p className="mt-2 text-xs text-gray-400">초등 교재 준비 중에는 중1 수준부터 측정돼요.</p>
           )}
         </div>
       )}

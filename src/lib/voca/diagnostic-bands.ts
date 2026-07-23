@@ -7,7 +7,7 @@
  * 단어가 없는 밴드는 자동으로 사다리에서 건너뛴다 (L1 교재가 채워지면 자동 활성).
  */
 
-export type BandKey = 'L1' | 'L2' | 'L3' | 'L4' | 'L5' | 'L6';
+export type BandKey = 'L0' | 'L1' | 'L2' | 'L3' | 'L4' | 'L5' | 'L6';
 
 export interface DiagnosticBand {
   key: BandKey;
@@ -26,12 +26,14 @@ export interface DiagnosticBand {
 export const DIAGNOSTIC_BANDS: DiagnosticBand[] = [
   // 중등 밴드 첫 교재 = 학년별 교과서 단어(내신 데이터 기반) — "학년 단어를 N% 알아요" 문구와
   // 출처가 정확히 일치하고, 추천 카드의 대표 처방이 된다. 두 번째부터는 함께 추천할 시중 교재.
+  // L0(초등, 2026-07-23 신설): 천일문 스타트가 대표. 베이직·기본은 빈 교재 — 채워지면 자동 합류.
   {
-    key: 'L1',
-    label: '중1',
-    sourceLabel: '중1',
-    bookTitles: ['중1 교과서 단어', '천일문 보카 중등 스타트', '워드마스터 중등 베이직', '능률 VOCA 중등 기본'],
+    key: 'L0',
+    label: '초등',
+    sourceLabel: '초등',
+    bookTitles: ['천일문 보카 중등 스타트', '워드마스터 중등 베이직', '능률 VOCA 중등 기본'],
   },
+  { key: 'L1', label: '중1', sourceLabel: '중1', bookTitles: ['중1 교과서 단어'] },
   { key: 'L2', label: '중2', sourceLabel: '중2', bookTitles: ['중2 교과서 단어', '능률 VOCA 중등 필수'] },
   { key: 'L3', label: '중3', sourceLabel: '중3', bookTitles: ['중3 교과서 단어', '워드마스터 중등 고난도', '능률 VOCA 중등 고난도'] },
   { key: 'L4', label: '고1', sourceLabel: '고1', bookTitles: ['능률 고교필수 2000', '최근 5개년 고1 3월 모고 단어'] },
@@ -48,7 +50,7 @@ export function getBand(key: BandKey): DiagnosticBand {
 export type DiagnosticGrade = 'elementary' | 'm1' | 'm2' | 'm3' | 'h1' | 'h2' | 'h3';
 
 export const DIAGNOSTIC_GRADES: { key: DiagnosticGrade; label: string; startBand: BandKey }[] = [
-  { key: 'elementary', label: '초등학생', startBand: 'L1' },
+  { key: 'elementary', label: '초등학생', startBand: 'L0' },
   { key: 'm1', label: '중1', startBand: 'L1' },
   { key: 'm2', label: '중2', startBand: 'L2' },
   { key: 'm3', label: '중3', startBand: 'L3' },

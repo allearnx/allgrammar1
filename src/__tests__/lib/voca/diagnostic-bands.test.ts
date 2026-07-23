@@ -10,8 +10,8 @@ import {
   type RoundSummary,
 } from '@/lib/voca/diagnostic-bands';
 
-const ALL: BandKey[] = ['L1', 'L2', 'L3', 'L4', 'L5', 'L6'];
-const NO_L1: BandKey[] = ['L2', 'L3', 'L4', 'L5', 'L6'];
+const ALL: BandKey[] = ['L0', 'L1', 'L2', 'L3', 'L4', 'L5', 'L6'];
+const NO_L0: BandKey[] = ['L1', 'L2', 'L3', 'L4', 'L5', 'L6'];
 
 function r(band: BandKey, correct: number): RoundSummary {
   return { band, correct, total: 10 };
@@ -51,18 +51,18 @@ describe('diagnostic staircase — nextStep', () => {
     });
   });
 
-  it('최하단에서 40% 이하 → 확인 라운드 후 "미만" 확정', () => {
-    expect(nextStep([r('L1', 2)], ALL)).toEqual({ type: 'continue', band: 'L1' });
-    expect(nextStep([r('L1', 2), r('L1', 3)], ALL)).toEqual({
+  it('최하단(L0)에서 40% 이하 → 확인 라운드 후 "미만" 확정', () => {
+    expect(nextStep([r('L0', 2)], ALL)).toEqual({ type: 'continue', band: 'L0' });
+    expect(nextStep([r('L0', 2), r('L0', 3)], ALL)).toEqual({
       type: 'done',
-      level: { band: 'L1', qualifier: 'below' },
+      level: { band: 'L0', qualifier: 'below' },
     });
   });
 
-  it('L1 비활성이면 L2가 최하단으로 동작', () => {
-    expect(nextStep([r('L2', 2), r('L2', 3)], NO_L1)).toEqual({
+  it('L0 비활성이면 L1이 최하단으로 동작', () => {
+    expect(nextStep([r('L1', 2), r('L1', 3)], NO_L0)).toEqual({
       type: 'done',
-      level: { band: 'L2', qualifier: 'below' },
+      level: { band: 'L1', qualifier: 'below' },
     });
   });
 
@@ -120,11 +120,12 @@ describe('resolveFinalLevel — 서버 재생', () => {
 describe('getStartBand', () => {
   it('학년의 기본 시작 밴드를 준다', () => {
     expect(getStartBand('h2', ALL)).toBe('L5');
-    expect(getStartBand('elementary', ALL)).toBe('L1');
+    expect(getStartBand('elementary', ALL)).toBe('L0');
+    expect(getStartBand('m1', ALL)).toBe('L1');
   });
 
-  it('시작 밴드가 비활성이면 가장 가까운 활성 밴드로 (초등 → L2)', () => {
-    expect(getStartBand('elementary', NO_L1)).toBe('L2');
+  it('시작 밴드가 비활성이면 가장 가까운 활성 밴드로 (초등 → L1)', () => {
+    expect(getStartBand('elementary', NO_L0)).toBe('L1');
   });
 });
 
@@ -140,9 +141,9 @@ describe('recommendBandKey — 추천 교재 밴드', () => {
   });
 
   it('"미만" 판정이면 한 단계 아래 밴드 (있으면)', () => {
-    expect(recommendBandKey({ band: 'L2', qualifier: 'below' }, ALL)).toBe('L1');
-    // L1 비활성이면 L2 유지
-    expect(recommendBandKey({ band: 'L2', qualifier: 'below' }, NO_L1)).toBe('L2');
+    expect(recommendBandKey({ band: 'L1', qualifier: 'below' }, ALL)).toBe('L0');
+    // L0 비활성이면 L1 유지
+    expect(recommendBandKey({ band: 'L1', qualifier: 'below' }, NO_L0)).toBe('L1');
   });
 });
 
@@ -151,11 +152,16 @@ describe('formatLevel / levelGapFromGrade', () => {
     expect(formatLevel({ band: 'L3', qualifier: 'exact' })).toBe('중3');
     expect(formatLevel({ band: 'L6', qualifier: 'above' })).toBe('고3 이상');
     expect(formatLevel({ band: 'L1', qualifier: 'below' })).toBe('중1 미만');
+    expect(formatLevel({ band: 'L0', qualifier: 'exact' })).toBe('초등');
+    expect(formatLevel({ band: 'L0', qualifier: 'below' })).toBe('초등 미만');
   });
 
   it('학년 대비 격차 — 고2가 L3 판정이면 -2', () => {
     expect(levelGapFromGrade('h2', { band: 'L3', qualifier: 'exact' })).toBe(-2);
     expect(levelGapFromGrade('h2', { band: 'L5', qualifier: 'exact' })).toBe(0);
     expect(levelGapFromGrade('m3', { band: 'L4', qualifier: 'exact' })).toBe(1);
+    // 초등학생이 중1 판정이면 학년보다 1단계 위
+    expect(levelGapFromGrade('elementary', { band: 'L1', qualifier: 'exact' })).toBe(1);
+    expect(levelGapFromGrade('elementary', { band: 'L0', qualifier: 'exact' })).toBe(0);
   });
 });
