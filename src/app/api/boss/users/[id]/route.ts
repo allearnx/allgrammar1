@@ -109,17 +109,48 @@ export const DELETE = createApiHandler(
       throw new ForbiddenError('다른 학원 사용자는 삭제할 수 없습니다.');
     }
 
+    const adminClient = createAdminClient();
+
+    // 원장이 소유한 학원 처리 (academies.owner_id → users FK 때문에 안 풀면 삭제가 막힘).
+    // 소속 회원(원장 본인 제외)이 있으면 차단, 빈 학원이면 구독·학원까지 함께 정리한다.
+    // (빈 학원 = 원장만 멤버 · 학생 0 → 잃을 데이터 없음. 데드락 해소)
+    const { data: ownedAcademies } = await adminClient
+      .from('academies')
+      .select('id, name')
+      .eq('owner_id', targetId);
+
+    for (const acad of ownedAcademies ?? []) {
+      const { count: otherMembers } = await adminClient
+        .from('users')
+        .select('id', { count: 'exact', head: true })
+        .eq('academy_id', acad.id)
+        .neq('id', targetId);
+      if ((otherMembers ?? 0) > 0) {
+        throw new ValidationError(
+          `이 사용자는 학원 '${acad.name}'의 원장입니다. 소속 회원 ${otherMembers}명이 있어 삭제할 수 없습니다. 먼저 회원을 다른 학원으로 이동하거나 원장을 이관하세요.`,
+        );
+      }
+    }
+
+    // 빈 학원 정리 — 삭제 순서: 구독 → 회원 academy_id 해제 → 학원 (FK 역순)
+    let removedAcademies = 0;
+    for (const acad of ownedAcademies ?? []) {
+      await adminClient.from('subscriptions').delete().eq('academy_id', acad.id);
+      await adminClient.from('users').update({ academy_id: null }).eq('academy_id', acad.id);
+      dbResult(await adminClient.from('academies').delete().eq('id', acad.id));
+      removedAcademies++;
+    }
+
     // users 테이블에서 삭제
     dbResult(await supabase.from('users').delete().eq('id', targetId));
 
     // Supabase Auth에서도 삭제
-    const adminClient = createAdminClient();
     await adminClient.auth.admin.deleteUser(targetId);
 
     await auditLog(supabase, user.id, 'user.delete', {
-      type: 'user', id: targetId, details: { email: target.email, role: target.role },
+      type: 'user', id: targetId, details: { email: target.email, role: target.role, removedAcademies },
     });
 
-    return NextResponse.json({ success: true });
+    return NextResponse.json({ success: true, removedAcademies });
   }
 );
