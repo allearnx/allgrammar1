@@ -5,7 +5,7 @@
  * 문항별 정오는 진행 중 보여주지 않는다 (레벨테스트 관행 + 다음 라운드 힌트 방지).
  */
 
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { track } from '@vercel/analytics';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -16,14 +16,13 @@ import {
   BAND_KEYS,
   DIAGNOSTIC_GRADES,
   getBand,
-  formatLevel,
-  levelGapFromGrade,
   recommendBandKey,
   type BandKey,
   type DiagnosticGrade,
   type FinalLevel,
 } from '@/lib/voca/diagnostic-bands';
-import type { DiagnosticQuestion, BandBook } from '@/lib/voca/diagnostic-sampling';
+import { DIAGNOSTIC_LINEUP, lineupPlacement, lineupColumnGap } from '@/lib/voca/diagnostic-lineup';
+import type { DiagnosticQuestion } from '@/lib/voca/diagnostic-sampling';
 
 export interface LatestDiagnostic {
   grade: string;
@@ -36,7 +35,8 @@ export interface LatestDiagnostic {
 
 interface Props {
   activeBands: BandKey[];
-  bandBooks: Record<BandKey, BandBook[]>;
+  /** 라인업 교재 title → book id (활성 교재만) — "지금 시작할 교재" 렌더용 */
+  lineupBookIds: Record<string, string>;
   latest: LatestDiagnostic | null;
   tookToday: boolean;
   prevVocabIds: string[];
@@ -82,6 +82,7 @@ interface SubmitResponse {
   coverageScore: number;
   startBand?: BandKey;
   missed?: MissedWord[];
+  missedCount?: number;
 }
 
 type NextRoundResponse =
@@ -95,7 +96,7 @@ type Phase =
   | { step: 'gate' } // public 모드: 다 풀었고, 결과는 연락처/가입 후
   | { step: 'result'; res: SubmitResponse };
 
-export function DiagnosticClient({ activeBands, bandBooks, latest, tookToday, prevVocabIds, isFree, mode = 'student' }: Props) {
+export function DiagnosticClient({ activeBands, lineupBookIds, latest, tookToday, prevVocabIds, isFree, mode = 'student' }: Props) {
   const [phase, setPhase] = useState<Phase>({ step: 'intro' });
   const [grade, setGrade] = useState<DiagnosticGrade | null>(null);
   const [completedRounds, setCompletedRounds] = useState<CompletedRound[]>([]);
@@ -297,14 +298,22 @@ export function DiagnosticClient({ activeBands, bandBooks, latest, tookToday, pr
           const body = leadId
             ? { leadId, name, phone }
             : { name, phone, grade: grade!, rounds: completedRounds.map((r) => r.items) };
-          const data = await fetchWithToast<{ level: FinalLevel; coverageScore: number; startBand?: BandKey; missed?: MissedWord[] }>(
+          const data = await fetchWithToast<{ level: FinalLevel; coverageScore: number; startBand?: BandKey; missed?: MissedWord[]; missedCount?: number }>(
             '/api/public/diagnostic/lead',
             { body, retry: 1, errorMessage: '저장에 실패했습니다. 잠시 후 다시 시도해주세요.' },
           );
           track('diagnostic_lead_submit', { grade: grade! });
           setPhase({
             step: 'result',
-            res: { id: '', attemptNumber: 1, level: data.level, coverageScore: data.coverageScore, startBand: data.startBand, missed: data.missed },
+            res: {
+              id: '',
+              attemptNumber: 1,
+              level: data.level,
+              coverageScore: data.coverageScore,
+              startBand: data.startBand,
+              missed: data.missed,
+              missedCount: data.missedCount,
+            },
           });
         }}
       />
@@ -374,12 +383,10 @@ export function DiagnosticClient({ activeBands, bandBooks, latest, tookToday, pr
   return (
     <ResultScreen
       res={phase.res}
-      grade={grade!}
-      rounds={completedRounds}
       previous={latest}
       isFree={isFree}
       activeBands={activeBands}
-      bandBooks={bandBooks}
+      lineupBookIds={lineupBookIds}
       publicMode={mode === 'public'}
     />
   );
@@ -421,7 +428,7 @@ function ContactGateScreen({ onSubmitContact }: { onSubmitContact: (name: string
           우리 아이 진단 결과가 준비됐어요!
         </h2>
         <p className="mt-2 text-sm leading-relaxed" style={{ color: VOCA_COLORS.gray, wordBreak: 'keep-all' }}>
-          어휘 레벨과 <b style={{ color: VOCA_COLORS.ink }}>학년 단어를 몇 % 아는지</b> 나왔어요.
+          <b style={{ color: VOCA_COLORS.ink }}>지금 시작할 교재</b>와 단어 정답률이 나왔어요.
           <br />
           리포트 받으실 학부모님 연락처를 남겨주세요.
         </p>
@@ -485,21 +492,19 @@ function IntroScreen({
   onStart: (g: DiagnosticGrade) => void;
   elemActive: boolean;
 }) {
-  const latestLevel = latest
-    ? formatLevel({ band: latest.finalBand as BandKey, qualifier: latest.finalQualifier as FinalLevel['qualifier'] })
-    : null;
-
   return (
     <div className="mx-auto max-w-lg space-y-6">
       <div className="rounded-3xl p-6 md:p-8" style={{ background: VOCA_COLORS.sky }}>
-        <h1 className="text-2xl font-bold" style={{ color: VOCA_COLORS.ink }}>내 어휘 레벨, 5분이면 알아요</h1>
+        <h1 className="text-2xl font-bold" style={{ color: VOCA_COLORS.ink, wordBreak: 'keep-all' }}>
+          5분이면 나에게 맞는 단어장이 나와요
+        </h1>
         <p className="mt-2 text-sm leading-relaxed" style={{ color: VOCA_COLORS.gray }}>
-          학년을 고르면 10문항씩 레벨을 오르내리며 정확한 어휘 수준을 찾아드려요.
+          천일문부터 수능 기출까지, 어느 교재에서 시작할지 찾아드려요.
           중간에 모르는 단어는 찍지 말고 <b>모르겠어요</b>를 눌러야 정확하게 측정돼요.
         </p>
         {latest && (
           <div className="mt-4 rounded-2xl bg-white/80 p-4 text-sm" style={{ color: VOCA_COLORS.gray }}>
-            최근 진단({new Date(latest.createdAt).toLocaleDateString('ko-KR')}) — 레벨 <b>{latestLevel}</b> · 학년 단어 정답률 <b>{latest.coverageScore}%</b>
+            최근 진단({new Date(latest.createdAt).toLocaleDateString('ko-KR')}) — 단어 정답률 <b>{latest.coverageScore}%</b>
           </div>
         )}
       </div>
@@ -538,35 +543,41 @@ function IntroScreen({
   );
 }
 
+/**
+ * 결과 화면 — "○○ 수준" 학년 주장 없이 "지금 시작할 교재" 라인업 프레임 (2026-07-23 확정).
+ * 학년 라벨은 칸 헤더로 교재를 설명할 뿐, 아이는 시작 위치만 받는다.
+ */
 function ResultScreen({
   res,
-  grade,
-  rounds,
   previous,
   isFree,
   activeBands,
-  bandBooks,
+  lineupBookIds,
   publicMode = false,
 }: {
   res: SubmitResponse;
-  grade: DiagnosticGrade;
-  rounds: CompletedRound[];
   previous: LatestDiagnostic | null;
   isFree: boolean;
   activeBands: BandKey[];
-  bandBooks: Record<BandKey, BandBook[]>;
+  lineupBookIds: Record<string, string>;
   publicMode?: boolean;
 }) {
-  const gradeInfo = DIAGNOSTIC_GRADES.find((g) => g.key === grade)!;
-  const gap = levelGapFromGrade(grade, res.level);
-  // 정답률 라벨은 시작(학년) 밴드 기준 — 정오는 서버만 알므로 놓친 단어도 서버 응답에서 받는다
-  const sourceLabel = getBand(res.startBand ?? rounds[0]?.band ?? res.level.band).sourceLabel;
+  const recBand = recommendBandKey(res.level, activeBands);
+  const placement = lineupPlacement(recBand);
   const missed = res.missed ?? [];
+  const missedCount = res.missedCount ?? missed.length;
   const delta = previous ? res.coverageScore - previous.coverageScore : null;
-
-  const gapText =
-    gap === 0 ? '학년 수준이에요' : gap > 0 ? `학년보다 ${gap}단계 위예요` : `학년보다 ${-gap}단계 아래예요`;
-  const gapColor = gap >= 0 ? VOCA_COLORS.green : VOCA_COLORS.red;
+  // 재진단 칸 비교 — 지난 진단의 추천 칸 대비 몇 칸 이동했는지 (내려간 경우는 언급하지 않는다:
+  // 출제 풀 조정으로도 내려갈 수 있어 delta 오해 소지, 정답률 %p가 이미 변화를 말해준다)
+  const columnGap = previous
+    ? lineupColumnGap(
+        recommendBandKey(
+          { band: previous.finalBand as BandKey, qualifier: previous.finalQualifier as FinalLevel['qualifier'] },
+          activeBands,
+        ),
+        recBand,
+      )
+    : 0;
 
   return (
     <div className="mx-auto max-w-lg space-y-5">
@@ -576,23 +587,37 @@ function ResultScreen({
         className="rounded-3xl p-6 text-center md:p-8"
         style={{ background: VOCA_COLORS.blueLight }}
       >
-        <p className="text-sm font-bold" style={{ color: VOCA_COLORS.blueDark }}>진단 결과</p>
-        <p className="mt-2 text-4xl font-bold" style={{ color: VOCA_COLORS.blue }}>{formatLevel(res.level)}</p>
-        <p className="mt-2 text-sm font-bold" style={{ color: gapColor }}>
-          {gradeInfo.label} 기준 · {gapText}
+        <p className="text-sm font-bold" style={{ color: VOCA_COLORS.blueDark }}>진단 완료 · 지금 시작할 교재</p>
+        <p className="mt-2 text-3xl font-bold" style={{ color: VOCA_COLORS.blue, wordBreak: 'keep-all' }}>
+          {placement.highlightTitle}
         </p>
-        <div className="mt-5 rounded-2xl bg-white p-4">
-          <p className="text-sm" style={{ color: VOCA_COLORS.gray }}>
-            <b style={{ color: VOCA_COLORS.ink }}>{sourceLabel} 단어</b>를 이만큼 알고 있어요
+        <p className="mt-2 text-sm" style={{ color: VOCA_COLORS.gray }}>
+          여기서 시작해서 한 칸씩 올라가요
+        </p>
+        {/* 천일문 추천 근거 한 줄 — 교과서 단어 DB 교차 분석 (중1 교과서 단어 40% 수록) */}
+        {placement.highlightTitle === '천일문 보카 중등 스타트' && (
+          <p className="mt-1.5 text-sm font-semibold" style={{ color: VOCA_COLORS.blueDark, wordBreak: 'keep-all' }}>
+            이 교재에는 중1 교과서 단어의 40%가 담겨 있어요 🎒
           </p>
+        )}
+        <div className="mt-5 rounded-2xl bg-white p-4">
+          <p className="text-sm" style={{ color: VOCA_COLORS.gray }}>이 단계 단어 정답률</p>
           <p className="text-3xl font-bold" style={{ color: VOCA_COLORS.ink }}>{res.coverageScore}%</p>
+          <p className="mt-1 text-sm" style={{ color: VOCA_COLORS.gray }}>몰랐던 단어 {missedCount}개</p>
           {delta !== null && (
             <p className="mt-1 text-sm font-bold" style={{ color: delta >= 0 ? VOCA_COLORS.green : VOCA_COLORS.red }}>
-              지난 진단 대비 {delta >= 0 ? '+' : ''}{delta}%p
+              지난 진단 대비 정답률 {delta >= 0 ? '+' : ''}{delta}%p
+            </p>
+          )}
+          {columnGap > 0 && (
+            <p className="mt-1 text-sm font-bold" style={{ color: VOCA_COLORS.green }}>
+              {columnGap === 1 ? '한 칸 올라갔어요 🎉' : `${columnGap}칸 올라갔어요 🎉`}
             </p>
           )}
         </div>
       </motion.div>
+
+      <LineupCard placement={placement} lineupBookIds={lineupBookIds} isFree={isFree} publicMode={publicMode} />
 
       {missed.length > 0 && (
         <div className="rounded-2xl border bg-white p-5">
@@ -608,89 +633,147 @@ function ResultScreen({
         </div>
       )}
 
-      <RecommendationCard level={res.level} activeBands={activeBands} bandBooks={bandBooks} isFree={isFree} publicMode={publicMode} />
+      <div className="rounded-2xl border bg-white p-5 text-center">
+        {publicMode ? (
+          <>
+            <Link
+              href="/signup?next=/student/voca/diagnostic"
+              onClick={() => track('diagnostic_result_signup_click')}
+              className="inline-block rounded-full px-8 py-3 font-bold text-white"
+              style={{ background: VOCA_COLORS.blue }}
+            >
+              가입하고 추천 교재로 시작하기
+            </Link>
+            <p className="mt-2 text-xs text-gray-400">가입하면 이 결과가 계정에 저장되고, 추천 교재부터 바로 학습해요</p>
+          </>
+        ) : isFree ? (
+          <>
+            <Link
+              href="/allkill#price"
+              onClick={() => track('checkout_click', { source: 'diagnostic_result' })}
+              className="inline-block rounded-full px-8 py-3 font-bold text-white"
+              style={{ background: VOCA_COLORS.blue }}
+            >
+              올킬보카 시작하기
+            </Link>
+            <p className="mt-2 text-xs text-gray-400">시작하면 추천 교재부터 바로 학습할 수 있어요</p>
+          </>
+        ) : (
+          <Link
+            href={
+              lineupBookIds[placement.highlightTitle]
+                ? `/student/voca?bookId=${lineupBookIds[placement.highlightTitle]}`
+                : '/student/voca'
+            }
+            className="inline-block rounded-full px-8 py-3 font-bold text-white"
+            style={{ background: VOCA_COLORS.blue }}
+          >
+            추천 교재로 시작하기
+          </Link>
+        )}
+      </div>
     </div>
   );
 }
 
-/** 판정 레벨 밴드의 교재를 추천 — 학년이 아니라 측정된 레벨 기준 */
-function RecommendationCard({
-  level,
-  activeBands,
-  bandBooks,
+/**
+ * 교재 라인업 — 가로 스크롤 6칸(중1~고3), 시중 교재 실명. 내 칸 하이라이트 + 추천 교재 배지.
+ * 초등 칸은 없다 — 초등 판정도 중1 칸(천일문)에서 시작 (선행이 기본이라 긍정 프레임).
+ */
+function LineupCard({
+  placement,
+  lineupBookIds,
   isFree,
-  publicMode = false,
+  publicMode,
 }: {
-  level: FinalLevel;
-  activeBands: BandKey[];
-  bandBooks: Record<BandKey, BandBook[]>;
+  placement: ReturnType<typeof lineupPlacement>;
+  lineupBookIds: Record<string, string>;
   isFree: boolean;
-  publicMode?: boolean;
+  publicMode: boolean;
 }) {
-  const band = recommendBandKey(level, activeBands);
-  const books = bandBooks[band] ?? [];
-  const primary = books[0];
-  // 대표 처방이 학년 교과서 단어면 시중 단어 교재를 나란히 함께 추천
-  const companion = primary?.title.includes('교과서 단어') ? books[1] : undefined;
+  const myColumnRef = useRef<HTMLDivElement>(null);
+
+  // 내 칸이 보이도록 자동 스크롤 (가로만 — 페이지 세로 점프 방지).
+  // offsetLeft는 offsetParent 기준이라 못 쓴다 — 스크롤러와의 rect 차이로 계산.
+  useEffect(() => {
+    const el = myColumnRef.current;
+    const scroller = el?.parentElement;
+    if (!el || !scroller) return;
+    const left = el.getBoundingClientRect().left - scroller.getBoundingClientRect().left + scroller.scrollLeft;
+    scroller.scrollLeft = left - (scroller.clientWidth - el.clientWidth) / 2;
+  }, []);
+
+  /** 교재별 CTA — 유료는 해당 교재로, 비로그인은 가입, 무료는 결제로 (선택한 흐름 그대로 퍼널 연결) */
+  const bookHref = (title: string) => {
+    if (publicMode) return '/signup?next=/student/voca/diagnostic';
+    if (isFree) return '/allkill#price';
+    const id = lineupBookIds[title];
+    return id ? `/student/voca?bookId=${id}` : '/student/voca';
+  };
 
   return (
-    <div className="rounded-2xl border bg-white p-5 text-center">
-      {primary && (
-        <>
-          <p className="text-xs font-bold" style={{ color: VOCA_COLORS.blueDark }}>내 레벨 추천 교재</p>
-          <p className="mt-1 text-lg font-bold" style={{ color: VOCA_COLORS.ink, wordBreak: 'keep-all' }}>
-            {primary.title}
-            {!companion && books.length > 1 && <span className="text-sm font-medium text-gray-400"> 외 {books.length - 1}권</span>}
-          </p>
-          <p className="mt-1 text-sm" style={{ color: VOCA_COLORS.gray }}>
-            지금 레벨({getBand(band).label})에 딱 맞는 교재예요. 여기서 시작해서 한 단계씩 올라가요.
-          </p>
-          {/* 초등(L0) 추천 = 천일문 스타트 — 교과서 단어 DB 교차 분석 근거 (2026-07-23, 중1 350단어 중 40% 수록) */}
-          {band === 'L0' && (
-            <p className="mt-1.5 text-sm font-semibold" style={{ color: VOCA_COLORS.blueDark }}>
-              이 교재에는 중1 교과서 단어의 40%가 담겨 있어요 — 중학교 입학 전 미리 만나요 🎒
-            </p>
-          )}
-          {companion && (
-            <p className="mt-2 inline-block rounded-full px-3 py-1 text-xs font-semibold" style={{ background: '#E8F0FE', color: VOCA_COLORS.blueDark }}>
-              함께 추천 · {companion.title}
-            </p>
-          )}
-        </>
-      )}
-      {publicMode ? (
-        <>
-          <Link
-            href="/signup?next=/student/voca/diagnostic"
-            onClick={() => track('diagnostic_result_signup_click')}
-            className="mt-3 inline-block rounded-full px-8 py-3 font-bold text-white"
-            style={{ background: VOCA_COLORS.blue }}
-          >
-            가입하고 추천 교재로 시작하기
-          </Link>
-          <p className="mt-2 text-xs text-gray-400">가입하면 이 결과가 계정에 저장되고, 추천 교재부터 바로 학습해요</p>
-        </>
-      ) : isFree ? (
-        <>
-          <Link
-            href="/allkill#price"
-            onClick={() => track('checkout_click', { source: 'diagnostic_result' })}
-            className="mt-3 inline-block rounded-full px-8 py-3 font-bold text-white"
-            style={{ background: VOCA_COLORS.blue }}
-          >
-            올킬보카 시작하기
-          </Link>
-          <p className="mt-2 text-xs text-gray-400">시작하면 추천 교재부터 바로 학습할 수 있어요</p>
-        </>
-      ) : (
-        <Link
-          href={primary ? `/student/voca?bookId=${primary.id}` : '/student/voca'}
-          className="mt-3 inline-block rounded-full px-8 py-3 font-bold text-white"
-          style={{ background: VOCA_COLORS.blue }}
-        >
-          {primary ? '추천 교재로 시작하기' : '단어 학습 시작하기'}
-        </Link>
-      )}
+    <div className="rounded-2xl border bg-white p-5">
+      <p className="text-sm font-bold" style={{ color: VOCA_COLORS.ink }}>교재 라인업</p>
+      <p className="mt-0.5 text-xs" style={{ color: VOCA_COLORS.gray }}>
+        내 시작 칸부터 한 칸씩 — 칸 안에서는 원하는 교재를 골라도 돼요
+      </p>
+      <div className="mt-3 flex snap-x gap-3 overflow-x-auto pb-2">
+        {DIAGNOSTIC_LINEUP.map((column) => {
+          const isMine = column.key === placement.columnKey;
+          const books = column.bookTitles.filter((t) => lineupBookIds[t]);
+          if (books.length === 0) return null;
+          return (
+            <div
+              key={column.key}
+              ref={isMine ? myColumnRef : undefined}
+              className={cn(
+                'w-44 shrink-0 snap-center rounded-2xl border-2 p-3',
+                isMine ? 'border-[#1A73E8]' : 'border-gray-200',
+              )}
+              style={isMine ? { background: VOCA_COLORS.blueLight } : undefined}
+            >
+              <div className="flex items-center justify-between">
+                <span className="text-sm font-bold" style={{ color: isMine ? VOCA_COLORS.blueDark : VOCA_COLORS.gray }}>
+                  {column.gradeLabel}
+                </span>
+                {isMine && (
+                  <span className="rounded-full px-2 py-0.5 text-[11px] font-bold text-white" style={{ background: VOCA_COLORS.blue }}>
+                    내 시작 칸
+                  </span>
+                )}
+              </div>
+              <div className="mt-2 space-y-2">
+                {books.map((title) => {
+                  const isRecommended = isMine && title === placement.highlightTitle;
+                  return (
+                    <div
+                      key={title}
+                      className={cn('rounded-xl border bg-white p-2.5', isRecommended ? 'border-[#1A73E8]' : 'border-gray-100')}
+                    >
+                      {isRecommended && (
+                        <span className="mb-1 inline-block rounded-full px-2 py-0.5 text-[10px] font-bold" style={{ background: VOCA_COLORS.blueLight, color: VOCA_COLORS.blueDark }}>
+                          추천
+                        </span>
+                      )}
+                      <p className="text-[13px] font-semibold leading-snug" style={{ color: VOCA_COLORS.ink, wordBreak: 'keep-all' }}>
+                        {title}
+                      </p>
+                      <Link
+                        href={bookHref(title)}
+                        onClick={() => track('diagnostic_lineup_book_click', { title, recommended: isRecommended })}
+                        className="mt-1.5 inline-block text-xs font-bold underline underline-offset-2"
+                        style={{ color: VOCA_COLORS.blue }}
+                      >
+                        이 교재로 시작
+                      </Link>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 }

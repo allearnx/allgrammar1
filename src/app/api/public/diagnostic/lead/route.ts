@@ -7,12 +7,15 @@ import { verifyRounds } from '@/lib/voca/diagnostic-token';
 import { scoreDiagnosticRounds, type ScoredRound } from '@/lib/voca/diagnostic-scoring';
 import { logger } from '@/lib/logger';
 
-function missedFromRounds(rounds: ScoredRound[]): { front_text: string; back_text: string }[] {
-  return rounds
-    .flatMap((r) => r.items ?? [])
-    .filter((i) => i.result !== 'correct')
-    .slice(0, 5)
-    .map((i) => ({ front_text: i.front_text, back_text: i.back_text }));
+function missedFromRounds(rounds: ScoredRound[]): {
+  missed: { front_text: string; back_text: string }[];
+  missedCount: number;
+} {
+  const all = rounds.flatMap((r) => r.items ?? []).filter((i) => i.result !== 'correct');
+  return {
+    missed: all.slice(0, 5).map((i) => ({ front_text: i.front_text, back_text: i.back_text })),
+    missedCount: all.length,
+  };
 }
 
 /**
@@ -54,7 +57,7 @@ export async function POST(request: NextRequest) {
           level: { band: updated.final_band, qualifier: updated.final_qualifier },
           coverageScore: updated.coverage_score,
           startBand: updated.start_band,
-          missed: missedFromRounds((updated.rounds ?? []) as ScoredRound[]),
+          ...missedFromRounds((updated.rounds ?? []) as ScoredRound[]),
         });
       }
       // 이미 연락처가 붙었거나 없는 id → 폴백으로 진행
@@ -90,6 +93,7 @@ export async function POST(request: NextRequest) {
       coverageScore: score.coverageScore,
       startBand: score.startBand,
       missed: score.missed,
+      missedCount: score.missedCount,
     });
   } catch {
     return NextResponse.json({ error: '저장에 실패했습니다.' }, { status: 500 });

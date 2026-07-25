@@ -2,7 +2,7 @@ import { requireRole } from '@/lib/auth/helpers';
 import { createClient } from '@/lib/supabase/server';
 import { Topbar } from '@/components/layout/topbar';
 import { getPlanContext } from '@/lib/billing/get-plan-context';
-import { getBandBooks } from '@/lib/voca/diagnostic-sampling';
+import { getBandBooks, getLineupBookIds } from '@/lib/voca/diagnostic-sampling';
 import { BAND_KEYS } from '@/lib/voca/diagnostic-bands';
 import { DiagnosticClient, type LatestDiagnostic } from './diagnostic-client';
 
@@ -14,8 +14,9 @@ export default async function VocaDiagnosticPage() {
   const user = await requireRole(['student']);
   const supabase = await createClient();
 
-  const [bandBooks, planContext, { data: results }] = await Promise.all([
+  const [bandBooks, lineupBookIds, planContext, { data: results }] = await Promise.all([
     getBandBooks(supabase),
+    getLineupBookIds(supabase),
     getPlanContext(user.academy_id, user.id),
     supabase
       .from('voca_diagnostic_results')
@@ -57,7 +58,7 @@ export default async function VocaDiagnosticPage() {
       <div className="p-4 md:p-6">
         <DiagnosticClient
           activeBands={activeBands}
-          bandBooks={bandBooks}
+          lineupBookIds={lineupBookIds}
           latest={latestForClient}
           tookToday={tookToday}
           prevVocabIds={prevVocabIds}

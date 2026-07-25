@@ -23,6 +23,8 @@ export interface DiagnosticScore {
   coverageScore: number;
   /** 놓친 단어 (결과 화면 표시용, 최대 5개) */
   missed: { front_text: string; back_text: string }[];
+  /** 놓친 단어 총 개수 — "몰랐던 단어 N개" 지표용 (missed는 5개까지만 노출) */
+  missedCount: number;
 }
 
 export function scoreDiagnosticRounds(
@@ -46,11 +48,8 @@ export function scoreDiagnosticRounds(
   const cumTotal = startRounds.reduce((s, r) => s + r.total, 0);
   const coverageScore = Math.round((cumCorrect / cumTotal) * 100);
 
-  const missed = rounds
-    .flatMap((r) => r.items)
-    .filter((i) => i.result !== 'correct')
-    .slice(0, 5)
-    .map((i) => ({ front_text: i.front_text, back_text: i.back_text }));
+  const missedAll = rounds.flatMap((r) => r.items).filter((i) => i.result !== 'correct');
+  const missed = missedAll.slice(0, 5).map((i) => ({ front_text: i.front_text, back_text: i.back_text }));
 
-  return { rounds, level, startBand, coverageScore, missed };
+  return { rounds, level, startBand, coverageScore, missed, missedCount: missedAll.length };
 }

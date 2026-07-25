@@ -39,7 +39,7 @@ export const POST = createApiHandler<Body>(
     }
 
     const activeBands = await getActiveBands(supabase);
-    const { rounds, level, startBand, coverageScore, missed } = scoreDiagnosticRounds(verified, activeBands);
+    const { rounds, level, startBand, coverageScore, missed, missedCount } = scoreDiagnosticRounds(verified, activeBands);
 
     const { data: prev } = await supabase
       .from('voca_diagnostic_results')
@@ -84,6 +84,7 @@ export const POST = createApiHandler<Body>(
       coverageScore,
       startBand,
       missed,
+      missedCount,
       rounds: rounds.map(({ items: _items, ...rest }) => rest),
     });
   },

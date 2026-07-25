@@ -1,13 +1,13 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { createAdminClient } from '@/lib/supabase/admin';
-import { getBandBooks } from '@/lib/voca/diagnostic-sampling';
+import { getBandBooks, getLineupBookIds } from '@/lib/voca/diagnostic-sampling';
 import { BAND_KEYS } from '@/lib/voca/diagnostic-bands';
 import { DiagnosticClient } from '@/app/(dashboard)/student/voca/diagnostic/diagnostic-client';
 
 export const metadata: Metadata = {
   title: '어휘 레벨 진단 | 올킬보카',
-  description: '가입 없이 5분 만에 내 어휘 레벨과 학년 단어를 몇 % 아는지 확인하세요.',
+  description: '가입 없이 5분이면 나에게 맞는 단어장이 나와요. 천일문부터 수능 기출까지, 어느 교재에서 시작할지 찾아드려요.',
 };
 
 // 밴드 구성은 자주 안 바뀐다 — 5분 ISR (문항은 클라이언트에서 매 라운드 동적 요청)
@@ -20,7 +20,7 @@ export const revalidate = 300;
  */
 export default async function LevelTestPage() {
   const admin = createAdminClient();
-  const bandBooks = await getBandBooks(admin);
+  const [bandBooks, lineupBookIds] = await Promise.all([getBandBooks(admin), getLineupBookIds(admin)]);
   const activeBands = BAND_KEYS.filter((k) => bandBooks[k].length > 0);
 
   return (
@@ -37,7 +37,7 @@ export default async function LevelTestPage() {
         <DiagnosticClient
           mode="public"
           activeBands={activeBands}
-          bandBooks={bandBooks}
+          lineupBookIds={lineupBookIds}
           latest={null}
           tookToday={false}
           prevVocabIds={[]}

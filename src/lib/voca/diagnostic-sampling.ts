@@ -11,6 +11,7 @@ import { shuffle } from '@/lib/utils';
 import { cached, TTL } from '@/lib/cache/server-cache';
 import { createAdminClient } from '@/lib/supabase/admin';
 import { DIAGNOSTIC_BANDS, BAND_KEYS, ROUND_SIZE, getBand, type BandKey } from './diagnostic-bands';
+import { DIAGNOSTIC_LINEUP } from './diagnostic-lineup';
 import { BASIC_ENGLISH_WORDS } from './basic-words';
 import { signDiagnosticToken } from './diagnostic-token';
 
@@ -99,6 +100,20 @@ export async function getBandBooks(supabase: SupabaseLike): Promise<Record<BandK
     result[band.key].sort((a, b) => band.bookTitles.indexOf(a.title) - band.bookTitles.indexOf(b.title));
   }
   return result;
+}
+
+/**
+ * 라인업 교재 title → book id (활성 교재만) — 결과 화면 "지금 시작할 교재" 렌더용.
+ * 비활성이거나 이름이 바뀐 교재는 빠지고, 클라이언트는 조회된 교재만 표시한다.
+ */
+export async function getLineupBookIds(supabase: SupabaseLike): Promise<Record<string, string>> {
+  const titles = DIAGNOSTIC_LINEUP.flatMap((c) => c.bookTitles);
+  const { data: books } = await supabase
+    .from('voca_books')
+    .select('id, title')
+    .in('title', titles)
+    .eq('is_active', true);
+  return Object.fromEntries(((books ?? []) as BandBook[]).map((b) => [b.title, b.id]));
 }
 
 /** 밴드별 활성 여부 — 제목이 일치하고 Day가 1개 이상 있는 교재가 하나라도 있으면 활성 */
