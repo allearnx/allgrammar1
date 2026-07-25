@@ -21,6 +21,14 @@ export default function DiagnosticSection() {
           한 달 뒤 얼마나 늘었는지도 비교해드려요.
         </p>
 
+        {/* 초등(예비중) 데이터 한 줄 — 교과서 단어 DB 교차 분석 (2026-07-23, 40% = 중1 교과서 단어 350개 중 천일문 스타트 수록 비율) */}
+        <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, marginTop: 20, background: 'white', border: `1px solid ${C.line}`, borderRadius: 100, padding: '10px 22px' }}>
+          <span style={{ fontSize: 14 }}>🎒</span>
+          <span style={{ fontSize: 14, fontWeight: 600, color: C.gray, wordBreak: 'keep-all' }}>
+            초등학생은 <b style={{ color: C.ink }}>초등 단계부터</b> 측정 — 추천 교재에는 <b style={{ color: C.blue }}>중1 교과서 단어의 40%</b>가 담겨 있어요
+          </span>
+        </div>
+
         {/* 진단 결과 목업 카드 */}
         <div style={{ display: 'flex', justifyContent: 'center', marginTop: 44 }}>
           <div style={{ background: 'white', border: `1px solid ${C.line}`, borderRadius: 24, padding: '30px 32px', width: '100%', maxWidth: 360, boxShadow: '0 16px 40px rgba(26,115,232,0.14)', textAlign: 'center' }}>

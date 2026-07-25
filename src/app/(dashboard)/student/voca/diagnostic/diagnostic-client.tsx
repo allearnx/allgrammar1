@@ -645,6 +645,12 @@ function RecommendationCard({
           <p className="mt-1 text-sm" style={{ color: VOCA_COLORS.gray }}>
             지금 레벨({getBand(band).label})에 딱 맞는 교재예요. 여기서 시작해서 한 단계씩 올라가요.
           </p>
+          {/* 초등(L0) 추천 = 천일문 스타트 — 교과서 단어 DB 교차 분석 근거 (2026-07-23, 중1 350단어 중 40% 수록) */}
+          {band === 'L0' && (
+            <p className="mt-1.5 text-sm font-semibold" style={{ color: VOCA_COLORS.blueDark }}>
+              이 교재에는 중1 교과서 단어의 40%가 담겨 있어요 — 중학교 입학 전 미리 만나요 🎒
+            </p>
+          )}
           {companion && (
             <p className="mt-2 inline-block rounded-full px-3 py-1 text-xs font-semibold" style={{ background: '#E8F0FE', color: VOCA_COLORS.blueDark }}>
               함께 추천 · {companion.title}
