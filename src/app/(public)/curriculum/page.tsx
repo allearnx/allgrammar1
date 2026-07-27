@@ -131,9 +131,12 @@ export default function CurriculumPage() {
         .cr-btn-ghost { background: white; color: ${G.ink}; border: 1.5px solid ${G.line}; }
       `}</style>
 
-      {/* 히어로 — 흰 바탕, 제목만 크게 (올킬보카: 배경색 대신 타이포가 일함) */}
-      <section className="pt-36 pb-8 px-4 bg-white">
-        <div className="max-w-4xl mx-auto text-center">
+      {/* 히어로 — 흰 바탕 + 은은한 대형 알파벳 포인트 (전면 패턴 대신 히어로에만, 연한 4색) */}
+      <section className="relative overflow-hidden pt-36 pb-10 px-4 bg-white">
+        <span aria-hidden className="cr-display absolute hidden md:block select-none" style={{ color: G.blueLight, fontSize: 200, lineHeight: 1, left: '4%', top: 60, transform: 'rotate(-8deg)' }}>A</span>
+        <span aria-hidden className="cr-display absolute hidden md:block select-none" style={{ color: G.yellowLight, fontSize: 150, lineHeight: 1, right: '14%', top: 40, transform: 'rotate(10deg)' }}>b</span>
+        <span aria-hidden className="cr-display absolute hidden md:block select-none" style={{ color: G.greenLight, fontSize: 170, lineHeight: 1, right: '3%', top: 130, transform: 'rotate(-4deg)' }}>Z</span>
+        <div className="relative max-w-4xl mx-auto text-center">
           <h1 className="cr-display text-4xl md:text-6xl mb-6" style={{ color: G.ink }}>
             올라영 <span style={{ color: G.blue }}>커리큘럼</span>
           </h1>
@@ -227,24 +230,49 @@ export default function CurriculumPage() {
             </div>
           </div>
 
-          {/* 문법 수업 특징 */}
-          <div className="mt-32 px-4">
+        </section>
+      )}
+
+      {/* 문법 수업 특징 — 올킬보카 차별점 카드 문법: 하늘 배경 + 흰 카드 + 색 상단 보더 + 태그 */}
+      {activeTab === 'grammar' && (
+        <section className="py-24 px-4" style={{ background: '#DFEFFF' }}>
+          <div className="max-w-[1080px] mx-auto">
             <h3 className="cr-display text-3xl md:text-4xl text-center mb-12" style={{ color: G.ink }}>
               올라영 문법 수업의 <span style={{ color: G.blue }}>특징</span>
             </h3>
-            <div className="max-w-[1400px] mx-auto grid md:grid-cols-3 gap-6">
-              <div className="rounded-3xl p-10 md:p-12" style={{ background: '#F8F9FA' }}>
-                <h4 className="text-xl md:text-2xl font-bold mb-4" style={{ color: G.ink }}>단계별 체계적 학습</h4>
-                <p className="text-base md:text-lg leading-relaxed" style={{ color: G.gray }}>학년과 수준에 맞는 교재로 기초부터 심화까지</p>
-              </div>
-              <div className="rounded-3xl p-10 md:p-12" style={{ background: '#F8F9FA' }}>
-                <h4 className="text-xl md:text-2xl font-bold mb-4" style={{ color: G.ink }}>검증된 베스트셀러 교재</h4>
-                <p className="text-base md:text-lg leading-relaxed" style={{ color: G.gray }}>구해영, 해커스, Grammar Zone 등 검증된 교재 사용</p>
-              </div>
-              <div className="rounded-3xl p-10 md:p-12" style={{ background: '#F8F9FA' }}>
-                <h4 className="text-xl md:text-2xl font-bold mb-4" style={{ color: G.ink }}>내신 + 수능 동시 대비</h4>
-                <p className="text-base md:text-lg leading-relaxed" style={{ color: G.gray }}>개념 이해부터 문제 풀이 전략까지 균형있게</p>
-              </div>
+            <div className="grid md:grid-cols-3 gap-6">
+              {[
+                {
+                  tag: '단계별',
+                  title: '단계별 체계적 학습',
+                  body: '학년과 수준에 맞는 교재로 기초부터 심화까지 빈틈없이 올라가요.',
+                  solid: G.blue, bg: G.blueLight, text: G.blueDark,
+                },
+                {
+                  tag: '검증된 교재',
+                  title: '베스트셀러 교재만',
+                  body: '구해영, 해커스, Grammar Zone — 서점에서 검증된 교재로 수업해요.',
+                  solid: '#D93025', bg: '#FCE8E6', text: '#A50E0E',
+                },
+                {
+                  tag: '실전',
+                  title: '내신 + 수능 동시 대비',
+                  body: '개념 이해부터 문제 풀이 전략까지 균형 있게 잡아요.',
+                  solid: G.green, bg: G.greenLight, text: G.greenDark,
+                },
+              ].map((card) => (
+                <div
+                  key={card.tag}
+                  className="flex flex-col items-start rounded-3xl bg-white p-8 md:p-10"
+                  style={{ borderTop: `6px solid ${card.solid}`, boxShadow: '0 10px 30px rgba(31,31,31,0.06)' }}
+                >
+                  <span className="rounded-full px-4 py-1.5 text-sm font-extrabold" style={{ background: card.bg, color: card.text }}>
+                    {card.tag}
+                  </span>
+                  <h4 className="cr-display mt-5 mb-3 text-xl md:text-2xl" style={{ color: G.ink }}>{card.title}</h4>
+                  <p className="text-base leading-relaxed" style={{ color: G.gray, wordBreak: 'keep-all' }}>{card.body}</p>
+                </div>
+              ))}
             </div>
           </div>
         </section>
@@ -347,18 +375,27 @@ export default function CurriculumPage() {
         </section>
       )}
 
-      {/* CTA */}
-      <section className="py-20 px-4" style={{ background: '#F8F9FA' }}>
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="cr-display text-3xl md:text-4xl mb-6" style={{ color: G.ink }}>
-            어떤 강의가 맞는지 모르겠다면?
+      {/* 최종 CTA — 올킬보카 FinalCta 문법: 파란 섹션 + 흰 GmarketSans 카피 + 노랑 버튼 */}
+      <section className="py-24 px-4 text-center" style={{ background: G.blue }}>
+        <div className="max-w-[640px] mx-auto">
+          <h2 className="cr-display text-3xl md:text-5xl mb-4 text-white" style={{ lineHeight: 1.35, wordBreak: 'keep-all' }}>
+            어떤 강의가 맞는지<br />모르겠다면?
           </h2>
-          <p className="text-lg mb-8" style={{ color: G.gray }}>
-            무료 레벨테스트로 딱 맞는 강의를 추천받으세요!
+          <p className="text-base md:text-lg mb-10" style={{ color: 'rgba(255,255,255,0.8)' }}>
+            무료 레벨테스트로 딱 맞는 강의를 추천받으세요
           </p>
-          <ConsultationLink className="cr-btn cr-btn-ghost">
-            무료 상담 신청하기
-          </ConsultationLink>
+          <div className="flex flex-wrap justify-center gap-3.5">
+            <Link
+              href="/level-test"
+              className="cr-btn"
+              style={{ background: 'rgba(255,255,255,0.14)', color: 'white', border: '1.5px solid rgba(255,255,255,0.4)' }}
+            >
+              5분 단어 진단
+            </Link>
+            <ConsultationLink className="cr-btn cr-btn-primary">
+              무료 상담 신청하기
+            </ConsultationLink>
+          </div>
         </div>
       </section>
     </>
