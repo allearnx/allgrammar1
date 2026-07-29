@@ -46,6 +46,18 @@ const nextConfig: NextConfig = {
     ],
   },
 
+  // 리뉴얼 전 홈페이지(LMS 솔루션)의 /curriculum/grade?tpf=... 류 잔재 URL 회수
+  // (Search Console 404 보고 대응). 현재 /curriculum은 단일 페이지라 하위 경로 전부 안전.
+  async redirects() {
+    return [
+      {
+        source: "/curriculum/:path+",
+        destination: "/curriculum",
+        permanent: true,
+      },
+    ];
+  },
+
   async headers() {
     return [
       {
