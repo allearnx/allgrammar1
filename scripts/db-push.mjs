@@ -7,6 +7,13 @@
  */
 import { execSync } from 'child_process';
 
+// 프리뷰 빌드는 프로덕션 DB에 마이그레이션을 밀면 안 됨 — 머지 전 브랜치의
+// 마이그레이션이 실 DB에 먼저 적용되는 사고 방지 (프리뷰에도 환경변수가 등록됨, 2026-07-30)
+if (process.env.VERCEL_ENV && process.env.VERCEL_ENV !== 'production') {
+  console.log(`[db-push] VERCEL_ENV=${process.env.VERCEL_ENV} → 프리뷰/개발 빌드는 스킵`);
+  process.exit(0);
+}
+
 const token = process.env.SUPABASE_ACCESS_TOKEN;
 const projectId = process.env.SUPABASE_PROJECT_ID;
 const dbPassword = process.env.SUPABASE_DB_PASSWORD;

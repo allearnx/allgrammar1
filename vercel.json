@@ -1,6 +1,5 @@
 {
   "regions": ["icn1"],
-  "ignoreCommand": "[ \"$VERCEL_ENV\" != \"production\" ]",
   "crons": [
     {
       "path": "/api/cron/billing",
