@@ -23,6 +23,7 @@ export interface CachedProfile {
   academy_id: string | null;
   is_homepage_manager?: boolean;
   can_manage_content?: boolean;
+  naesin_enabled?: boolean;
 }
 
 interface TokenPayload {

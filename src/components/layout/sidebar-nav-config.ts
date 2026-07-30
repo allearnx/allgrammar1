@@ -48,6 +48,8 @@ export interface NavItem {
   icon: React.ComponentType<{ className?: string }>;
   disabled?: boolean;
   requireContentPermission?: boolean;
+  /** 학원 naesin_enabled 필요 (내신 관리 — 올라영 전용, boss 메뉴에는 미사용) */
+  requireNaesin?: boolean;
 }
 
 export interface NavGroup {
@@ -101,12 +103,12 @@ export const NAV_CONFIG: Record<string, NavGroup[]> = {
     {
       label: '콘텐츠',
       items: [
-        { href: '/teacher/naesin', label: '내신 관리', icon: ClipboardList },
+        { href: '/teacher/naesin', label: '내신 관리', icon: ClipboardList, requireNaesin: true },
         { href: '/teacher/voca', label: '올킬보카 관리', icon: BookA, requireContentPermission: true },
         { href: '/teacher/voca/submissions', label: '오답노트 확인', icon: FileCheck },
         { href: '/teacher/voca/results', label: 'Day별 결과', icon: BarChart3 },
         { href: '/teacher/voca/exams', label: '올킬시험 관리', icon: PenLine },
-        { href: '/teacher/naesin?tab=templates', label: '문제 템플릿', icon: Library, requireContentPermission: true },
+        { href: '/teacher/naesin?tab=templates', label: '문제 템플릿', icon: Library, requireContentPermission: true, requireNaesin: true },
       ],
     },
     {
@@ -136,7 +138,7 @@ export const NAV_CONFIG: Record<string, NavGroup[]> = {
     {
       label: '콘텐츠',
       items: [
-        { href: '/admin/naesin', label: '내신 관리', icon: ClipboardList },
+        { href: '/admin/naesin', label: '내신 관리', icon: ClipboardList, requireNaesin: true },
         { href: '/admin/voca', label: '올킬보카 관리', icon: BookA, requireContentPermission: true },
         { href: '/admin/voca/submissions', label: '오답노트 확인', icon: FileCheck },
         { href: '/admin/voca/results', label: 'Day별 결과', icon: BarChart3 },
@@ -253,7 +255,7 @@ export const HOMEPAGE_MANAGER_GROUP: NavGroup = {
   ],
 };
 
-export function getNavGroups(role: string, services?: string[], isHomepageManager?: boolean, canManageContent?: boolean): NavGroup[] {
+export function getNavGroups(role: string, services?: string[], isHomepageManager?: boolean, canManageContent?: boolean, naesinEnabled?: boolean): NavGroup[] {
   let groups = NAV_CONFIG[role] || NAV_CONFIG.student;
 
   // Non-boss homepage managers get the homepage section appended
@@ -266,6 +268,14 @@ export function getNavGroups(role: string, services?: string[], isHomepageManage
     groups = groups.map((group) => ({
       ...group,
       items: group.items.filter((item) => !item.requireContentPermission),
+    })).filter((group) => group.items.length > 0);
+  }
+
+  // 내신 관리 메뉴는 올라영 전용 — 학원 naesin_enabled 없으면 숨김 (boss always passes)
+  if (role !== 'boss' && !naesinEnabled) {
+    groups = groups.map((group) => ({
+      ...group,
+      items: group.items.filter((item) => !item.requireNaesin),
     })).filter((group) => group.items.length > 0);
   }
 

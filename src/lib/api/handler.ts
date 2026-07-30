@@ -12,6 +12,7 @@ import {
   errorResponse,
 } from './errors';
 import { checkRateLimit } from './rate-limit';
+import { isNaesinManagementBlocked } from './require-naesin-enabled';
 import { logger } from '@/lib/logger';
 
 type SupabaseClient = Awaited<ReturnType<typeof createClient>>;
@@ -86,6 +87,11 @@ export function createApiHandler<T = unknown>(
         if (!config.allowHomepageManager || !user.is_homepage_manager) {
           throw new ForbiddenError();
         }
+      }
+
+      // 2.2. 내신 관리 API 잠금 — teacher/admin은 학원 naesin_enabled 필요 (올라영 전용)
+      if (isNaesinManagementBlocked(path, user)) {
+        throw new ForbiddenError('내신 서비스가 활성화되지 않은 학원입니다.');
       }
 
       // 2.5. Rate limit

@@ -107,15 +107,17 @@ export async function updateSession(request: NextRequest) {
       .single();
     if (data) {
       let canManageContent = false;
+      let naesinEnabled = false;
       if (data.academy_id) {
         const { data: acad } = await admin
           .from('academies')
-          .select('can_manage_content')
+          .select('can_manage_content, naesin_enabled')
           .eq('id', data.academy_id)
           .single();
         canManageContent = acad?.can_manage_content ?? false;
+        naesinEnabled = acad?.naesin_enabled ?? false;
       }
-      profile = { ...data, can_manage_content: canManageContent };
+      profile = { ...data, can_manage_content: canManageContent, naesin_enabled: naesinEnabled };
     }
   }
 

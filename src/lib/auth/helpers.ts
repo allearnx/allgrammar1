@@ -45,16 +45,18 @@ export const getUser = cache(async (): Promise<AuthUser | null> => {
   if (!profile) return null;
 
   let canManageContent = false;
+  let naesinEnabled = false;
   if (profile.academy_id) {
     const { data: acad } = await supabase
       .from('academies')
-      .select('can_manage_content')
+      .select('can_manage_content, naesin_enabled')
       .eq('id', profile.academy_id)
       .single();
     canManageContent = acad?.can_manage_content ?? false;
+    naesinEnabled = acad?.naesin_enabled ?? false;
   }
 
-  return { ...profile, can_manage_content: canManageContent } as AuthUser;
+  return { ...profile, can_manage_content: canManageContent, naesin_enabled: naesinEnabled } as AuthUser;
 });
 
 export async function requireUser(): Promise<AuthUser> {

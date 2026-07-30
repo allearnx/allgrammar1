@@ -9,6 +9,8 @@ export interface AuthUser {
   phone?: string | null;
   is_homepage_manager?: boolean;
   can_manage_content?: boolean;
+  /** 소속 학원의 내신 서비스 활성 여부 (올라영 전용 잠금 — boss는 항상 통과) */
+  naesin_enabled?: boolean;
 }
 
 export interface SignUpData {

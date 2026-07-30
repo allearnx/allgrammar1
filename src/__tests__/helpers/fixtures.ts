@@ -16,6 +16,7 @@ export const testTeacher: AuthUser = {
   full_name: '이선생',
   role: 'teacher',
   academy_id: 'academy-1',
+  naesin_enabled: true,
 };
 
 export const testAdmin: AuthUser = {
@@ -24,6 +25,7 @@ export const testAdmin: AuthUser = {
   full_name: '박관리',
   role: 'admin',
   academy_id: 'academy-1',
+  naesin_enabled: true,
 };
 
 export const testBoss: AuthUser = {
