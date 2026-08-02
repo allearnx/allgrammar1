@@ -55,6 +55,23 @@ export const GET = createApiHandler(
       created_at: w.created_at,
     }));
 
+    // ③-1.5 한글 뜻으로 역검색 (?meaning=순회) — 학생이 본 건 뜻이지 영단어가 아님.
+    // 그 뜻을 가진 표제어가 어느 교재/Day에 있는지 + 언제 추가됐는지(학습 후 추가 판별)
+    const meaning = searchParams.get('meaning');
+    let meaningMatches: unknown[] = [];
+    if (meaning) {
+      const { data: mRows } = await admin
+        .from('voca_vocabulary')
+        .select('front_text, back_text, day_id, created_at')
+        .ilike('back_text', `%${meaning}%`);
+      meaningMatches = (mRows ?? []).map((w) => ({
+        headword: w.front_text,
+        meaning: w.back_text,
+        location: dayInfo.get(w.day_id) ?? `삭제된 Day (${w.day_id})`,
+        created_at: w.created_at,
+      }));
+    }
+
     // ③-2 유의어/반의어 필드에 이 단어를 품은 표제어 — 2회독 시험은 이 필드에서 출제됨
     const { data: relRows } = await admin
       .from('voca_vocabulary')
@@ -144,6 +161,7 @@ export const GET = createApiHandler(
       중복_제목_교재: duplicateTitleBooks,
       중복_번호_Day: duplicateDays,
       단어_위치: { 검색어: word, 위치: wordLocations },
+      뜻으로_검색: meaning ? { 검색어: meaning, 일치: meaningMatches } : '(?meaning=순회 형태로 사용)',
       유의어_반의어로_품은_표제어: relatedCarriers,
       Day_단어_덤프: dayDump,
       학생_조사: studentReports,
