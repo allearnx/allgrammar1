@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import { z } from 'zod';
 import { createApiHandler } from '@/lib/api';
 import { logger } from '@/lib/logger';
+import { normalizeTyped } from '@/lib/voca/normalize-typed';
 import Anthropic from '@anthropic-ai/sdk';
 
 const anthropic = new Anthropic();
@@ -23,8 +24,8 @@ export const POST = createApiHandler(
     // 1) Exact match fast path
     type ResultItem = { score: number; feedback: string };
     const results: (ResultItem | null)[] = questions.map((q) => {
-      const trimmed = q.studentAnswer.trim().toLowerCase();
-      const ref = q.reference.trim().toLowerCase();
+      const trimmed = normalizeTyped(q.studentAnswer);
+      const ref = normalizeTyped(q.reference);
       if (trimmed === ref) {
         return { score: 100, feedback: '정답!' };
       }

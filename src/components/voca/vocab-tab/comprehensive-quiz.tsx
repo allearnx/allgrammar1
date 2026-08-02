@@ -9,6 +9,7 @@ import { cn } from '@/lib/utils';
 import { logger } from '@/lib/logger';
 import { toast } from 'sonner';
 import { fetchWithToast } from '@/lib/fetch-with-toast';
+import { normalizeTyped } from '@/lib/voca/normalize-typed';
 import type { VocaVocabulary } from '@/types/voca';
 import {
   generateQuestions,
@@ -89,8 +90,8 @@ export function ComprehensiveQuiz({ vocabulary, dayId: _dayId, onComplete }: Com
           };
         } else if (q.type === 'short_synonym' || q.type === 'short_antonym' || q.type === 'fill_blank') {
           const shortQ = q as ShortQuestion;
-          const trimmed = answer.trim().toLowerCase();
-          const isCorrect = shortQ.acceptedAnswers.includes(trimmed);
+          const trimmed = normalizeTyped(answer);
+          const isCorrect = shortQ.acceptedAnswers.some((a) => normalizeTyped(a) === trimmed);
           questionResults[i] = {
             question: q,
             studentAnswer: answer || '(미응답)',

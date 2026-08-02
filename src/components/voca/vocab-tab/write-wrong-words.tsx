@@ -7,6 +7,7 @@ import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import { CheckCircle, Send } from 'lucide-react';
 import { fetchWithToast } from '@/lib/fetch-with-toast';
+import { normalizeTyped } from '@/lib/voca/normalize-typed';
 import type { VocaWrongWord } from '@/types/voca';
 
 interface WriteWrongWordsProps {
@@ -38,14 +39,14 @@ export function WriteWrongWords({ wrongWords, dayId, onSubmitted }: WriteWrongWo
 
   // Check if a specific attempt is correct
   function isCorrect(word: string, idx: number): boolean | null {
-    const val = writings[word][idx].trim().toLowerCase();
+    const val = normalizeTyped(writings[word][idx]);
     if (!val) return null;
-    return val === word.toLowerCase();
+    return val === normalizeTyped(word);
   }
 
   // Check if all fields are correctly filled
   const allComplete = wrongWords.every((w) =>
-    writings[w.word].every((val) => val.trim().toLowerCase() === w.word.toLowerCase())
+    writings[w.word].every((val) => normalizeTyped(val) === normalizeTyped(w.word))
   );
 
   async function handleSubmit() {

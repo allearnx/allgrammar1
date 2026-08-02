@@ -5,6 +5,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { useMemoryTest, type MemoryTestItem } from '@/hooks/use-memory-test';
+import { normalizeTyped } from '@/lib/voca/normalize-typed';
 import { ScoreBadges, ResultCard, CompletionView, NextButton } from './shared';
 
 interface SpellingViewProps {
@@ -40,7 +41,7 @@ export function SpellingView({ items }: SpellingViewProps) {
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (!answer.trim() || showResult) return;
-    const correct = answer.trim().toLowerCase() === item.spelling_answer?.toLowerCase();
+    const correct = normalizeTyped(answer) === normalizeTyped(item.spelling_answer ?? '');
     recordResult(correct);
   }
 

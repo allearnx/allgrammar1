@@ -9,6 +9,7 @@ import { Volume2, Delete } from 'lucide-react';
 import { useAudioPlayer } from './audio-player-hook';
 import { NeonResultScreen } from './neon-result-screen';
 import type { VocaVocabulary } from '@/types/voca';
+import { normalizeTyped } from '@/lib/voca/normalize-typed';
 import './neon-styles.css';
 
 const QWERTY_ROWS = [
@@ -136,7 +137,7 @@ export function RhythmSpelling({ vocabulary, onComplete, examMode = false, passT
   }, []);
 
   const vocab = shuffledVocab[currentIndex];
-  const targetWord = vocab.front_text.trim().toLowerCase();
+  const targetWord = normalizeTyped(vocab.front_text);
   const currentLetterIdx = typedLetters.length;
   const isFull = currentLetterIdx >= targetWord.length;
 

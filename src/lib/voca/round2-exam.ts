@@ -7,6 +7,8 @@
  * (표제어 20개 → 30문항처럼 유의어·반의어를 골라 추가).
  */
 
+import { normalizeTyped } from '@/lib/voca/normalize-typed';
+
 export interface Round2Vocab {
   id: string;
   front_text: string;
@@ -41,9 +43,9 @@ export function parseRelated(field: string | null): string[] {
     .filter(Boolean);
 }
 
-/** 채점용 정규화 — 소문자, 앞뒤·중복 공백 정리 */
+/** 채점용 정규화 — 소문자, 앞뒤·중복 공백 + 유니코드 문장부호(곱슬따옴표 등) 통일 */
 export function normalizeRelated(s: string): string {
-  return s.trim().toLowerCase().replace(/\s+/g, ' ');
+  return normalizeTyped(s);
 }
 
 /** 답이 정답 후보 중 하나와 일치하는가 */

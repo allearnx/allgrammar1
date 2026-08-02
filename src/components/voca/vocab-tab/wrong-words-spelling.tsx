@@ -7,6 +7,7 @@ import { Input } from '@/components/ui/input';
 import { XCircle, RotateCcw } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { ScoreBadges, ResultCard, NextButton } from '@/components/memory/shared';
+import { normalizeTyped } from '@/lib/voca/normalize-typed';
 import type { WrongWordItem } from '@/app/(dashboard)/student/voca/[dayId]/client';
 
 export function WrongWordsSpelling({ words }: { words: WrongWordItem[] }) {
@@ -25,7 +26,7 @@ export function WrongWordsSpelling({ words }: { words: WrongWordItem[] }) {
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (!answer.trim() || showResult) return;
-    const correct = answer.trim().toLowerCase() === item.front_text.trim().toLowerCase();
+    const correct = normalizeTyped(answer) === normalizeTyped(item.front_text);
     setIsCorrect(correct);
     setShowResult(true);
     if (correct) {
