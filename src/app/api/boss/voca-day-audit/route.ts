@@ -55,6 +55,36 @@ export const GET = createApiHandler(
       created_at: w.created_at,
     }));
 
+    // ③-2 유의어/반의어 필드에 이 단어를 품은 표제어 — 2회독 시험은 이 필드에서 출제됨
+    const { data: relRows } = await admin
+      .from('voca_vocabulary')
+      .select('front_text, back_text, synonyms, antonyms, day_id')
+      .or(`synonyms.ilike.%${word}%,antonyms.ilike.%${word}%`);
+    const relatedCarriers = (relRows ?? []).map((w) => ({
+      headword: w.front_text,
+      meaning: w.back_text,
+      synonyms: w.synonyms,
+      antonyms: w.antonyms,
+      location: dayInfo.get(w.day_id) ?? `삭제된 Day (${w.day_id})`,
+    }));
+
+    // ③-3 특정 Day의 단어 전체 덤프 (?dump_day_ids=id1,id2)
+    const dumpParam = searchParams.get('dump_day_ids');
+    let dayDump: Record<string, string[]> = {};
+    if (dumpParam) {
+      const ids = dumpParam.split(',').map((s) => s.trim()).filter(Boolean).slice(0, 6);
+      const { data: dumpRows } = await admin
+        .from('voca_vocabulary')
+        .select('front_text, day_id')
+        .in('day_id', ids)
+        .order('sort_order');
+      dayDump = {};
+      for (const r of dumpRows ?? []) {
+        const key = dayInfo.get(r.day_id) ?? r.day_id;
+        (dayDump[key] ??= []).push(r.front_text);
+      }
+    }
+
     // ④ 학생의 시험 배정 vs 실제 학습 Day
     const { data: students } = await admin
       .from('users')
@@ -98,6 +128,8 @@ export const GET = createApiHandler(
       중복_제목_교재: duplicateTitleBooks,
       중복_번호_Day: duplicateDays,
       단어_위치: { 검색어: word, 위치: wordLocations },
+      유의어_반의어로_품은_표제어: relatedCarriers,
+      Day_단어_덤프: dayDump,
       학생_조사: studentReports,
       교재_수: (books ?? []).length,
       Day_수: (days ?? []).length,
