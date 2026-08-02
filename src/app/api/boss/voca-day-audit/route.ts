@@ -106,6 +106,22 @@ export const GET = createApiHandler(
         days: ((a.day_ids as string[]) ?? []).map((id) => dayInfo.get(id) ?? `⚠️ 존재하지 않는 Day (${id})`),
       }));
 
+      // 시험 응시 기록 — "제출을 안 눌러서 점수가 없는지" 확인용
+      const { data: examResults } = await admin
+        .from('voca_exam_results')
+        .select('score, exam_type, attempt_number, day_ids, wrong_words, created_at')
+        .eq('student_id', s.id)
+        .order('created_at', { ascending: false })
+        .limit(20);
+      const exams = (examResults ?? []).map((r) => ({
+        score: r.score,
+        exam_type: r.exam_type,
+        attempt: r.attempt_number,
+        days: ((r.day_ids as string[]) ?? []).map((id) => dayInfo.get(id) ?? id),
+        wrong_words: r.wrong_words,
+        created_at: r.created_at,
+      }));
+
       const { data: prog } = await admin
         .from('voca_student_progress')
         .select('day_id, flashcard_completed, quiz_score, spelling_score, updated_at')
@@ -120,7 +136,7 @@ export const GET = createApiHandler(
         updated_at: p.updated_at,
       }));
 
-      studentReports.push({ name: s.full_name, id: s.id, assignments, studiedDays });
+      studentReports.push({ name: s.full_name, id: s.id, assignments, examResults: exams, studiedDays });
     }
 
     return NextResponse.json({
