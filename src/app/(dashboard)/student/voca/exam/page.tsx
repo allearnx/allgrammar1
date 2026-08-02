@@ -52,6 +52,20 @@ export default async function VocaExamPage() {
     days = data || [];
   }
 
+  // 기본 교재 = 학생이 가장 최근에 학습한 교재.
+  // 기존엔 books[0](시스템에서 가장 오래된 교재)이 기본이라, localStorage가 비어 있는
+  // 기기에서는 학생이 엉뚱한 교재의 같은 Day 번호로 시험을 보게 됨 — "안 배운 단어가
+  // 시험에 나옴" 제보의 원인 (김지민 워드마스터↔능률고교필수 Day 21 circuit, 2026-08-02).
+  let defaultBookId: string | undefined;
+  const { data: recentProg } = await supabase
+    .from('voca_student_progress')
+    .select('day_id')
+    .eq('student_id', user.id)
+    .order('updated_at', { ascending: false })
+    .limit(1);
+  const recentDayId = recentProg?.[0]?.day_id;
+  if (recentDayId) defaultBookId = days.find((d) => d.id === recentDayId)?.book_id;
+
   return (
     <>
       <Topbar user={user} title="올킬시험" />
@@ -60,6 +74,7 @@ export default async function VocaExamPage() {
           books={(books as VocaBook[]) || []}
           days={days}
           studentId={user.id}
+          defaultBookId={defaultBookId}
           freeDayLimit={freeVocaDayLimit}
           examIntensity={examIntensity}
         />
