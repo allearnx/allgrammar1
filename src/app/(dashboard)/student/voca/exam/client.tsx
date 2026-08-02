@@ -14,6 +14,8 @@ interface VocaExamClientProps {
   days: VocaDay[];
   /** localStorage 키 네임스페이스용 (보카 홈과 같은 키 공유 — 보던 교재 그대로) */
   studentId: string;
+  /** 서버가 계산한 기본 교재 = 학생이 가장 최근 학습한 교재 (localStorage 없을 때의 안전망) */
+  defaultBookId?: string;
   /** 무료 체험: 앞 N개 Day만 시험 범위 (0 = 전체) */
   freeDayLimit?: number;
   /** 표제어 시험 강도 (합격선·제한시간·오답 재시험) — 학생별 설정 */
@@ -21,9 +23,11 @@ interface VocaExamClientProps {
 }
 
 /** 올킬시험 — 교재 골라서 Day 최대 3개 묶음 표제어 스펠링 시험 */
-export function VocaExamClient({ books, days, studentId, freeDayLimit = 0, examIntensity = DEFAULT_EXAM_INTENSITY }: VocaExamClientProps) {
+export function VocaExamClient({ books, days, studentId, defaultBookId, freeDayLimit = 0, examIntensity = DEFAULT_EXAM_INTENSITY }: VocaExamClientProps) {
   const bookStorageKey = `voca:selectedBookId:${studentId}`;
-  const [selectedBookId, setSelectedBookId] = useState<string>(books[0]?.id || '');
+  // 기본 교재: 최근 학습 교재(서버 계산) → 없으면 첫 교재. books[0]을 기본으로 두면
+  // localStorage 없는 기기에서 엉뚱한 교재의 같은 Day 번호로 시험을 보게 된다 (2026-08-02).
+  const [selectedBookId, setSelectedBookId] = useState<string>(defaultBookId || books[0]?.id || '');
   const [examRound, setExamRound] = useState<1 | 2>(1);
 
   // 보카 홈에서 보던 교재를 기본 선택
