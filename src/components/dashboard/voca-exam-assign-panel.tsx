@@ -110,18 +110,34 @@ export function VocaExamAssignPanel() {
         <div className="space-y-3 rounded-xl bg-white p-3">
           <div>
             <p className="mb-1 text-xs font-medium text-gray-500">Day 선택 (최대 {MAX_DAYS}개)</p>
-            <div className="flex flex-wrap gap-1.5">
-              {days.map((d) => {
-                const on = selDays.includes(d.id);
-                const dis = !on && selDays.length >= MAX_DAYS;
-                return (
-                  <button key={d.id} onClick={() => toggleDay(d.id)} disabled={dis}
-                    className={`rounded-lg px-2.5 py-1 text-sm font-semibold ${on ? 'bg-brand-600 text-white' : dis ? 'bg-gray-100 text-gray-300' : 'bg-gray-50 text-brand-600 border border-brand-200'}`}>
-                    {d.title}
-                  </button>
-                );
-              })}
-            </div>
+            {/* 같은 번호 Day가 2개면 배정이 엉뚱한 사본을 가리킬 수 있음 — 빨간 표시로 경고 */}
+            {(() => {
+              const numCounts = new Map<number, number>();
+              for (const d of days) numCounts.set(d.day_number, (numCounts.get(d.day_number) ?? 0) + 1);
+              const hasDup = [...numCounts.values()].some((c) => c > 1);
+              return (
+                <>
+                  {hasDup && (
+                    <p className="mb-1.5 rounded-lg bg-red-50 px-2.5 py-1.5 text-xs font-semibold text-red-700">
+                      ⚠️ 이 교재에 같은 번호의 Day가 2개 이상 있어요. 빨간 Day는 중복이니 배정 전에 보카 관리에서 정리해주세요.
+                    </p>
+                  )}
+                  <div className="flex flex-wrap gap-1.5">
+                    {days.map((d) => {
+                      const on = selDays.includes(d.id);
+                      const dis = !on && selDays.length >= MAX_DAYS;
+                      const dup = (numCounts.get(d.day_number) ?? 0) > 1;
+                      return (
+                        <button key={d.id} onClick={() => toggleDay(d.id)} disabled={dis}
+                          className={`rounded-lg px-2.5 py-1 text-sm font-semibold ${on ? 'bg-brand-600 text-white' : dis ? 'bg-gray-100 text-gray-300' : dup ? 'bg-red-50 text-red-600 border border-red-300' : 'bg-gray-50 text-brand-600 border border-brand-200'}`}>
+                          {d.title}{dup ? ' ⚠️' : ''}
+                        </button>
+                      );
+                    })}
+                  </div>
+                </>
+              );
+            })()}
           </div>
           <div>
             <p className="mb-1 text-xs font-medium text-gray-500">학생 선택 ({selStudents.length}명)</p>

@@ -193,6 +193,8 @@ export function PdfBulkExtract({ bookId, definitionLang = 'ko', onCreated }: { b
   }
 
   async function handleSave() {
+    // 더블클릭/연타 방지 — 동시 저장 2건이 같은 Day 번호를 중복 생성하는 경합 차단
+    if (saving) return;
     if (selectedWords.length === 0) {
       toast.error('저장할 단어를 선택해주세요.');
       return;

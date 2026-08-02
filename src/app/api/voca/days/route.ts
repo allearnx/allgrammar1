@@ -38,6 +38,20 @@ export const POST = createApiHandler(
   { roles: ['teacher', 'admin', 'boss'], schema: vocaDayCreateSchema },
   async ({ body, supabase, user }) => {
     await requireContentPermission(user, supabase);
+    // 같은 번호 Day 중복 생성 차단 — 중복 Day는 플래시카드/시험 배정이 서로 다른
+    // 사본을 가리켜 "학습 안 한 단어가 시험에 나오는" 사고가 됨 (2026-08-02 제보)
+    const { data: dup } = await supabase
+      .from('voca_days')
+      .select('id')
+      .eq('book_id', body.book_id)
+      .eq('day_number', body.day_number)
+      .limit(1);
+    if (dup && dup.length > 0) {
+      return NextResponse.json(
+        { error: `이 교재에 Day ${body.day_number}이(가) 이미 있습니다. 기존 Day에 단어를 추가하거나 다른 번호를 사용하세요.` },
+        { status: 409 },
+      );
+    }
     const { data, error } = await supabase
       .from('voca_days')
       .insert(body)

@@ -23,6 +23,11 @@ interface DaySectionProps {
 }
 
 export function DaySection({ book, days, expandedDay, onToggleDay, onAddDay, onDeleteDay, onDaysCreated }: DaySectionProps) {
+  // 같은 day_number가 2개 이상 = 중복 Day — 플래시카드/시험이 서로 다른 사본을
+  // 가리켜 "안 배운 단어가 시험에 나오는" 사고의 원인. 눈에 띄게 경고한다.
+  const numberCounts = new Map<number, number>();
+  for (const d of days) numberCounts.set(d.day_number, (numberCounts.get(d.day_number) ?? 0) + 1);
+
   return (
     <div className="space-y-4 pt-4 border-t">
       <div className="flex items-center justify-between">
@@ -48,6 +53,7 @@ export function DaySection({ book, days, expandedDay, onToggleDay, onAddDay, onD
               expanded={expandedDay === day.id}
               onToggle={() => onToggleDay(day.id)}
               onDelete={() => onDeleteDay(day.id)}
+              isDuplicate={(numberCounts.get(day.day_number) ?? 0) > 1}
             />
           ))}
         </div>
@@ -62,12 +68,14 @@ function DayCard({
   expanded,
   onToggle,
   onDelete,
+  isDuplicate,
 }: {
   day: VocaDay;
   definitionLang: 'ko' | 'en';
   expanded: boolean;
   onToggle: () => void;
   onDelete: () => void;
+  isDuplicate?: boolean;
 }) {
   const [deleteOpen, setDeleteOpen] = useState(false);
 
@@ -78,6 +86,11 @@ function DayCard({
           <button type="button" onClick={onToggle} className="flex items-center gap-2 text-left flex-1">
             {expanded ? <ChevronDown className="h-4 w-4 shrink-0" /> : <ChevronRight className="h-4 w-4 shrink-0" />}
             <span className="font-medium">{day.title}</span>
+            {isDuplicate && (
+              <span className="rounded-full bg-red-100 px-2 py-0.5 text-xs font-bold text-red-700">
+                ⚠️ 중복 Day — 시험 오배정 위험, 하나로 정리 필요
+              </span>
+            )}
           </button>
           <Button variant="ghost" size="icon" className="h-8 w-8 shrink-0" onClick={() => setDeleteOpen(true)}>
             <Trash2 className="h-4 w-4 text-destructive" />
