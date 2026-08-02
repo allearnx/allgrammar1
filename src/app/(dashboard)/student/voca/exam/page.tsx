@@ -37,34 +37,51 @@ export default async function VocaExamPage() {
   }
   const examIntensity = resolveExamIntensity(assignment, academyExam);
 
-  const { data: books } = await supabase
+  const { data: allBooks } = await supabase
     .from('voca_books').select(VOCA_BOOKS_COLUMNS).eq('is_active', true).order('created_at');
 
   const freeVocaDayLimit = await resolveFreeVocaDayLimit(supabase, plan.tier, user.academy_id, user.id);
-  const bookIds = (books || []).map((b) => b.id);
-  let days: VocaDay[] = [];
-  if (bookIds.length > 0) {
+  const allBookIds = (allBooks || []).map((b) => b.id);
+  let allDays: VocaDay[] = [];
+  if (allBookIds.length > 0) {
     const { data } = await supabase
       .from('voca_days')
       .select(VOCA_DAYS_COLUMNS)
-      .in('book_id', bookIds)
+      .in('book_id', allBookIds)
       .order('sort_order');
-    days = data || [];
+    allDays = data || [];
   }
 
-  // 기본 교재 = 학생이 가장 최근에 학습한 교재.
-  // 기존엔 books[0](시스템에서 가장 오래된 교재)이 기본이라, localStorage가 비어 있는
-  // 기기에서는 학생이 엉뚱한 교재의 같은 Day 번호로 시험을 보게 됨 — "안 배운 단어가
-  // 시험에 나옴" 제보의 원인 (김지민 워드마스터↔능률고교필수 Day 21 circuit, 2026-08-02).
-  let defaultBookId: string | undefined;
-  const { data: recentProg } = await supabase
-    .from('voca_student_progress')
-    .select('day_id')
-    .eq('student_id', user.id)
-    .order('updated_at', { ascending: false })
-    .limit(1);
-  const recentDayId = recentProg?.[0]?.day_id;
-  if (recentDayId) defaultBookId = days.find((d) => d.id === recentDayId)?.book_id;
+  // 시험 교재 목록 = 학생의 교재만: 배정 교재(voca_book_assignments) + 진도가 있는 교재.
+  // 전체 교재를 보여주면 학생이 엉뚱한 교재의 같은 Day 번호로 시험을 보게 됨 —
+  // "안 배운 단어가 시험에 나옴" 제보의 원인 (김지민: 워드마스터 학습 중인데
+  // 능률고교필수 Day 21의 circuit 목격, 2026-08-02 DB 대조 확정).
+  // 아직 아무 기록도 없는 학생(신규·무료 체험)만 전체 목록 폴백.
+  const dayToBook = new Map(allDays.map((d) => [d.id, d.book_id]));
+  const [{ data: bookAssign }, { data: progRows }] = await Promise.all([
+    supabase.from('voca_book_assignments').select('book_id').eq('student_id', user.id).maybeSingle(),
+    supabase
+      .from('voca_student_progress')
+      .select('day_id')
+      .eq('student_id', user.id)
+      .order('updated_at', { ascending: false }),
+  ]);
+  const myBookIds = new Set<string>();
+  if (bookAssign?.book_id) myBookIds.add(bookAssign.book_id);
+  for (const p of progRows || []) {
+    const bid = dayToBook.get(p.day_id);
+    if (bid) myBookIds.add(bid);
+  }
+  const books = myBookIds.size > 0 ? (allBooks || []).filter((b) => myBookIds.has(b.id)) : allBooks || [];
+  const visibleBookIds = new Set(books.map((b) => b.id));
+  const days = allDays.filter((d) => visibleBookIds.has(d.book_id));
+
+  // 기본 교재 = 배정 교재 → 없으면 가장 최근 학습한 교재
+  let defaultBookId: string | undefined = bookAssign?.book_id ?? undefined;
+  if (!defaultBookId) {
+    const recentDayId = progRows?.[0]?.day_id;
+    if (recentDayId) defaultBookId = dayToBook.get(recentDayId);
+  }
 
   return (
     <>
