@@ -110,20 +110,8 @@ export default function CurriculumPage() {
 
   return (
     <>
-      {/* 원비온다 패밀리 제목 폰트 — 올킬보카 랜딩과 동일 (본문은 Pretendard 유지) */}
+      {/* 제목 폰트 GmarketSans의 @font-face는 globals.css에 전역 선언 — 여기선 페이지 전용 클래스만 */}
       <style suppressHydrationWarning>{`
-        @font-face {
-          font-family: 'GmarketSans';
-          font-weight: 700;
-          src: url('/fonts/GmarketSansBold.woff') format('woff');
-          font-display: swap;
-        }
-        @font-face {
-          font-family: 'GmarketSans';
-          font-weight: 500;
-          src: url('/fonts/GmarketSansMedium.woff') format('woff');
-          font-display: swap;
-        }
         .cr-display { font-family: 'GmarketSans', 'Pretendard', sans-serif; font-weight: 700; letter-spacing: -0.5px; word-break: keep-all; }
         .cr-btn { display: inline-flex; align-items: center; justify-content: center; padding: 18px 44px; border-radius: 100px; font-size: 17px; font-weight: 800; text-decoration: none; transition: transform 0.15s; }
         .cr-btn:hover { transform: translateY(-2px); }

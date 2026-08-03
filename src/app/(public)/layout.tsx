@@ -28,7 +28,7 @@ export default async function PublicLayout({
 
   return (
     <ConsultationModalProvider>
-      <main className="min-h-screen bg-white">
+      <main className="min-h-screen bg-white font-pretendard">
         <PublicHeader isLoggedIn={!!user} />
         {children}
         <PublicFooter />

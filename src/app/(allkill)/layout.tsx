@@ -31,21 +31,9 @@ export const metadata: Metadata = {
  */
 export default function AllkillLayout({ children }: { children: React.ReactNode }) {
   return (
-    <main style={{ minHeight: '100vh', background: 'white' }}>
-      {/* 원비온다 패밀리 제목 폰트 — 본문은 Pretendard 유지 */}
+    <main className="font-pretendard" style={{ minHeight: '100vh', background: 'white' }}>
+      {/* 제목 폰트 GmarketSans의 @font-face는 globals.css에 전역 선언 — 여기선 무게만 지정 */}
       <style suppressHydrationWarning>{`
-        @font-face {
-          font-family: 'GmarketSans';
-          font-weight: 700;
-          src: url('/fonts/GmarketSansBold.woff') format('woff');
-          font-display: swap;
-        }
-        @font-face {
-          font-family: 'GmarketSans';
-          font-weight: 500;
-          src: url('/fonts/GmarketSansMedium.woff') format('woff');
-          font-display: swap;
-        }
         .ak-display { font-family: 'GmarketSans', 'Pretendard', sans-serif; font-weight: 700; }
         .ak-subfont { font-family: 'GmarketSans', 'Pretendard', sans-serif; font-weight: 500; }
       `}</style>

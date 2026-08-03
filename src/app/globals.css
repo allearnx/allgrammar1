@@ -209,6 +209,17 @@
 @font-face { font-family: 'GmarketSans'; font-weight: 500; src: url('/fonts/GmarketSansMedium.woff') format('woff'); font-display: swap; }
 .brand-display { font-family: 'GmarketSans', 'Pretendard', sans-serif; }
 
+/* ===== 홍보 페이지 본문 폰트 =====
+   Pretendard v1.3.9 (SIL OFL) — github.com/orioncactus/pretendard
+   가변 폰트 dynamic subset: public/fonts/pretendard.css + public/fonts/pretendard/*.woff2
+   (@font-face 92개가 unicode-range로 쪼개져 있어 페이지에 실제로 쓰인 글자 범위만 내려받는다)
+   갱신: npm i pretendard → dist/web/variable/woff2-dynamic-subset/ 복사 → css의 url과
+   font-family('Pretendard Variable' → 'Pretendard')만 치환.
+   앱(대시보드)은 Noto Sans KR 유지 — 이 클래스는 (public)/(allkill) 레이아웃에만 적용한다. */
+.font-pretendard {
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', sans-serif;
+}
+
 /* ===== Paper Test: Print Styles ===== */
 @media print {
   /* Hide chrome */
