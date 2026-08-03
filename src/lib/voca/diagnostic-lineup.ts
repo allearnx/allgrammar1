@@ -7,12 +7,16 @@
  *
  * 교재는 title로 매칭한다 — 관리자 화면에서 교재 이름을 바꾸면 라인업에서 빠진다.
  * 이름 변경 시 여기도 같이 수정할 것 (diagnostic-bands.ts와 동일한 함정).
- * 초등 칸은 의도적으로 없음 — 초등은 선행이 기본이라 "중1 교재부터"가 긍정 프레임.
+ *
+ * 초등 칸: 2026-08-04 추가 (사장님 결정) — "초등 필수 영어단어 800" 출시로
+ * L0 판정은 이 교재에서 시작한다. 그전까지는 초등 칸이 의도적으로 없었고
+ * (선행 긍정 프레임) L0도 중1 칸 천일문이었다. 교재가 비활성이면 칸이 화면에서
+ * 숨겨지므로, 배치는 반드시 resolveLineupPlacement(활성 교재 인지 폴백)로 읽을 것.
  */
 
 import type { BandKey } from './diagnostic-bands';
 
-export type LineupColumnKey = 'm1' | 'm2' | 'm3' | 'h1' | 'h2' | 'h3';
+export type LineupColumnKey = 'elem' | 'm1' | 'm2' | 'm3' | 'h1' | 'h2' | 'h3';
 
 export interface LineupColumn {
   key: LineupColumnKey;
@@ -24,6 +28,7 @@ export interface LineupColumn {
 
 /** 확정 배치표: 6칸 19권. 시중 교재 실명 사용 (자체 레벨명 안 씀 — 학부모 인지도 활용). */
 export const DIAGNOSTIC_LINEUP: LineupColumn[] = [
+  { key: 'elem', gradeLabel: '초등', bookTitles: ['초등 필수 영어단어 800'] },
   { key: 'm1', gradeLabel: '중1', bookTitles: ['천일문 보카 중등 스타트', '중1 교과서 단어'] },
   { key: 'm2', gradeLabel: '중2', bookTitles: ['능률 VOCA 중등 필수', '중2 교과서 단어'] },
   {
@@ -70,15 +75,36 @@ export interface LineupPlacement {
 
 /**
  * 진단 밴드 → 라인업 칸 + 추천 교재.
- * L0·L1은 둘 다 중1 칸 — L0(초등 판정)은 천일문, L1은 중1 교과서 단어를 하이라이트.
+ * L0(초등 판정)은 초등 칸, L1은 중1 칸 중1 교과서 단어를 하이라이트.
  * L2~L6은 학년 칸의 대표 교재를 하이라이트.
  */
 export function lineupPlacement(band: BandKey): LineupPlacement {
-  if (band === 'L0') return { columnKey: 'm1', highlightTitle: '천일문 보카 중등 스타트' };
+  if (band === 'L0') return { columnKey: 'elem', highlightTitle: '초등 필수 영어단어 800' };
   if (band === 'L1') return { columnKey: 'm1', highlightTitle: '중1 교과서 단어' };
   const columnKey = ({ L2: 'm2', L3: 'm3', L4: 'h1', L5: 'h2', L6: 'h3' } as const)[band];
   const column = DIAGNOSTIC_LINEUP.find((c) => c.key === columnKey)!;
   return { columnKey, highlightTitle: column.bookTitles[0] };
+}
+
+/**
+ * 화면용 배치 — 활성 교재 목록(lineupBookIds)을 알고 폴백한다.
+ * 칸의 교재가 하나도 활성이 아니면 그 칸은 화면에서 숨겨지므로("내 시작 칸"이
+ * 사라짐), 오른쪽으로 걸어가 처음 만나는 활성 교재를 하이라이트한다.
+ * (예: 초등 800이 검수 중 비활성 → L0은 예전처럼 중1 칸 천일문에서 시작)
+ */
+export function resolveLineupPlacement(
+  band: BandKey,
+  lineupBookIds: Record<string, string>,
+): LineupPlacement {
+  const ideal = lineupPlacement(band);
+  if (lineupBookIds[ideal.highlightTitle]) return ideal;
+  const startIdx = LINEUP_COLUMN_KEYS.indexOf(ideal.columnKey);
+  for (let i = startIdx; i < DIAGNOSTIC_LINEUP.length; i++) {
+    const col = DIAGNOSTIC_LINEUP[i];
+    const active = col.bookTitles.find((t) => lineupBookIds[t]);
+    if (active) return { columnKey: col.key, highlightTitle: active };
+  }
+  return ideal; // 활성 교재가 하나도 없는 극단 — 표시용 원본 유지
 }
 
 export function getLineupColumn(key: LineupColumnKey): LineupColumn {

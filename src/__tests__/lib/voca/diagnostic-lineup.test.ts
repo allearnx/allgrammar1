@@ -3,25 +3,27 @@ import {
   DIAGNOSTIC_LINEUP,
   LINEUP_COLUMN_KEYS,
   lineupPlacement,
+  resolveLineupPlacement,
   lineupColumnGap,
   getLineupColumn,
 } from '@/lib/voca/diagnostic-lineup';
 import { BAND_KEYS } from '@/lib/voca/diagnostic-bands';
 
 describe('DIAGNOSTIC_LINEUP', () => {
-  it('확정 배치표 그대로 — 6칸 19권, 제목 중복 없음', () => {
-    expect(DIAGNOSTIC_LINEUP).toHaveLength(6);
+  it('확정 배치표 그대로 — 7칸 20권, 제목 중복 없음', () => {
+    expect(DIAGNOSTIC_LINEUP).toHaveLength(7);
     const titles = DIAGNOSTIC_LINEUP.flatMap((c) => c.bookTitles);
-    expect(titles).toHaveLength(19);
-    expect(new Set(titles).size).toBe(19);
+    expect(titles).toHaveLength(20);
+    expect(new Set(titles).size).toBe(20);
   });
 
-  it('칸 헤더는 중1~고3 — 초등 칸은 없다 (선행 긍정 프레임)', () => {
-    expect(DIAGNOSTIC_LINEUP.map((c) => c.gradeLabel)).toEqual(['중1', '중2', '중3', '고1', '고2', '고3']);
+  it('칸 헤더는 초등~고3 — 초등 칸은 2026-08-04 초등 800 출시로 추가', () => {
+    expect(DIAGNOSTIC_LINEUP.map((c) => c.gradeLabel)).toEqual(['초등', '중1', '중2', '중3', '고1', '고2', '고3']);
   });
 
   it('칸 대표(첫 교재) = 사장님 확정 배치표', () => {
     expect(DIAGNOSTIC_LINEUP.map((c) => c.bookTitles[0])).toEqual([
+      '초등 필수 영어단어 800',
       '천일문 보카 중등 스타트',
       '능률 VOCA 중등 필수',
       '워드마스터 중등 고난도',
@@ -48,8 +50,8 @@ describe('lineupPlacement', () => {
     }
   });
 
-  it('L0·L1은 둘 다 중1 칸 — L0은 천일문, L1은 중1 교과서 단어 하이라이트', () => {
-    expect(lineupPlacement('L0')).toEqual({ columnKey: 'm1', highlightTitle: '천일문 보카 중등 스타트' });
+  it('L0은 초등 칸(초등 800), L1은 중1 칸(중1 교과서 단어)', () => {
+    expect(lineupPlacement('L0')).toEqual({ columnKey: 'elem', highlightTitle: '초등 필수 영어단어 800' });
     expect(lineupPlacement('L1')).toEqual({ columnKey: 'm1', highlightTitle: '중1 교과서 단어' });
   });
 
@@ -61,10 +63,33 @@ describe('lineupPlacement', () => {
 });
 
 describe('lineupColumnGap', () => {
-  it('칸 이동 수 — L0→L1은 같은 칸(0), L2→L3은 한 칸 위(+1), 내려가면 음수', () => {
-    expect(lineupColumnGap('L0', 'L1')).toBe(0);
+  it('칸 이동 수 — L0→L1은 초등→중1(+1), L2→L3은 한 칸 위(+1), 내려가면 음수', () => {
+    expect(lineupColumnGap('L0', 'L1')).toBe(1);
     expect(lineupColumnGap('L2', 'L3')).toBe(1);
     expect(lineupColumnGap('L1', 'L4')).toBe(3);
     expect(lineupColumnGap('L5', 'L4')).toBe(-1);
+  });
+});
+
+describe('resolveLineupPlacement — 활성 교재 인지 폴백', () => {
+  const 활성 = (titles: string[]) => Object.fromEntries(titles.map((t, i) => [t, `id-${i}`]));
+
+  it('추천 교재가 활성이면 그대로', () => {
+    const ids = 활성(['초등 필수 영어단어 800', '천일문 보카 중등 스타트']);
+    expect(resolveLineupPlacement('L0', ids)).toEqual({ columnKey: 'elem', highlightTitle: '초등 필수 영어단어 800' });
+  });
+
+  it('초등 800이 비활성(검수 중)이면 L0은 중1 칸 천일문으로 폴백 — 예전 동작 유지', () => {
+    const ids = 활성(['천일문 보카 중등 스타트', '중1 교과서 단어']);
+    expect(resolveLineupPlacement('L0', ids)).toEqual({ columnKey: 'm1', highlightTitle: '천일문 보카 중등 스타트' });
+  });
+
+  it('칸 대표가 비활성이면 같은 칸의 다른 활성 교재를 하이라이트', () => {
+    const ids = 활성(['중1 교과서 단어']);
+    expect(resolveLineupPlacement('L0', ids)).toEqual({ columnKey: 'm1', highlightTitle: '중1 교과서 단어' });
+  });
+
+  it('활성 교재가 하나도 없으면 원본 배치 유지 (표시용)', () => {
+    expect(resolveLineupPlacement('L0', {})).toEqual({ columnKey: 'elem', highlightTitle: '초등 필수 영어단어 800' });
   });
 });

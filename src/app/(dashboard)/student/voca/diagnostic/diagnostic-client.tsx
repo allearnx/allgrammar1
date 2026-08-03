@@ -21,7 +21,7 @@ import {
   type DiagnosticGrade,
   type FinalLevel,
 } from '@/lib/voca/diagnostic-bands';
-import { DIAGNOSTIC_LINEUP, lineupPlacement, lineupColumnGap } from '@/lib/voca/diagnostic-lineup';
+import { DIAGNOSTIC_LINEUP, resolveLineupPlacement, lineupColumnGap } from '@/lib/voca/diagnostic-lineup';
 import type { DiagnosticQuestion } from '@/lib/voca/diagnostic-sampling';
 
 export interface LatestDiagnostic {
@@ -563,7 +563,8 @@ function ResultScreen({
   publicMode?: boolean;
 }) {
   const recBand = recommendBandKey(res.level, activeBands);
-  const placement = lineupPlacement(recBand);
+  // 활성 교재 인지 폴백 — 추천 교재가 비활성(예: 검수 중)이면 오른쪽 첫 활성 교재로
+  const placement = resolveLineupPlacement(recBand, lineupBookIds);
   const missed = res.missed ?? [];
   const missedCount = res.missedCount ?? missed.length;
   const delta = previous ? res.coverageScore - previous.coverageScore : null;
@@ -686,7 +687,7 @@ function LineupCard({
   isFree,
   publicMode,
 }: {
-  placement: ReturnType<typeof lineupPlacement>;
+  placement: ReturnType<typeof resolveLineupPlacement>;
   lineupBookIds: Record<string, string>;
   isFree: boolean;
   publicMode: boolean;
