@@ -39,7 +39,7 @@ export function CurriculumSection() {
   const [pinned, setPinned] = useState<number | null>(null);
 
   return (
-    <section className="py-24 px-4" style={{ background: G.surface }}>
+    <section className="py-24 px-4 bg-white">
       <div className="max-w-6xl mx-auto">
         <AnimatedSection className="text-center mb-16">
           <h2 className="brand-display text-4xl md:text-5xl font-bold mb-5 tracking-tight" style={{ color: G.ink }}>

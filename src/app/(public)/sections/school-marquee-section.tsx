@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import { AnimatedSection } from './animated-section';
+import { G } from '../google-palette';
 
 const universityLogos = [
   'University 1.png', 'University 2.jpg', 'University 3.png',
@@ -15,14 +16,15 @@ const schoolLogos = [
 
 export function SchoolMarqueeSection() {
   return (
-    <section className="py-20 px-4 bg-[#f5f5f7] overflow-hidden">
+    // 합격 = 성과 → 초록. 배경은 하늘색으로 흰 후기 섹션과 끊는다
+    <section className="py-20 px-4 overflow-hidden" style={{ background: G.blueLight }}>
       <div className="max-w-6xl mx-auto">
         <AnimatedSection className="text-center mb-14">
-          <h2 className="text-4xl md:text-5xl font-extrabold text-[#1d1d1f] mb-5 tracking-tight">
+          <h2 className="brand-display text-4xl md:text-5xl font-bold mb-5 tracking-tight" style={{ color: G.ink, wordBreak: 'keep-all' }}>
             올라영 학생들의<br className="md:hidden" />
-            <span className="bg-gradient-to-r from-violet-600 to-purple-500 bg-clip-text text-transparent"> 합격 스토리</span>
+            <span style={{ color: G.green }}> 합격 스토리</span>
           </h2>
-          <p className="text-[#86868b] text-lg max-w-xl mx-auto leading-relaxed">
+          <p className="text-lg max-w-xl mx-auto leading-relaxed" style={{ color: G.gray }}>
             올라영과 함께한 학생들이 진학한 학교입니다
           </p>
         </AnimatedSection>
