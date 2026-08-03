@@ -28,7 +28,7 @@ export function DesktopNav({ menuItems, isLoggedIn }: DesktopNavProps) {
         >
           {item.hasDropdown ? (
             <button
-              className="px-2.5 py-2 text-[15px] font-medium text-[#1d1d1f] hover:text-[#0071e3] transition-colors duration-200 flex items-center gap-1"
+              className="px-2.5 py-2 text-[15px] font-medium text-[#1d1d1f] hover:text-brand-600 transition-colors duration-200 flex items-center gap-1"
             >
               {item.label}
               <svg
@@ -45,14 +45,14 @@ export function DesktopNav({ menuItems, isLoggedIn }: DesktopNavProps) {
               href={item.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="px-2.5 py-2 text-[15px] font-medium text-[#1d1d1f] hover:text-[#0071e3] transition-colors duration-200 flex items-center gap-1"
+              className="px-2.5 py-2 text-[15px] font-medium text-[#1d1d1f] hover:text-brand-600 transition-colors duration-200 flex items-center gap-1"
             >
               {item.label}
             </a>
           ) : (
             <Link
               href={item.href}
-              className="px-2.5 py-2 text-[15px] font-medium text-[#1d1d1f] hover:text-[#0071e3] transition-colors duration-200 flex items-center gap-1"
+              className="px-2.5 py-2 text-[15px] font-medium text-[#1d1d1f] hover:text-brand-600 transition-colors duration-200 flex items-center gap-1"
             >
               {item.label}
             </Link>
@@ -73,7 +73,7 @@ export function DesktopNav({ menuItems, isLoggedIn }: DesktopNavProps) {
                     href={dropItem.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="block px-4 py-2.5 text-base font-medium text-[#1d1d1f] hover:text-[#0071e3] hover:bg-gray-50 transition-colors text-center"
+                    className="block px-4 py-2.5 text-base font-medium text-[#1d1d1f] hover:text-brand-600 hover:bg-gray-50 transition-colors text-center"
                   >
                     {dropItem.label}
                     <svg className="inline-block w-3 h-3 ml-1 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -84,7 +84,7 @@ export function DesktopNav({ menuItems, isLoggedIn }: DesktopNavProps) {
                   <Link
                     key={dropItem.label}
                     href={dropItem.href}
-                    className="block px-4 py-2.5 text-base font-medium text-[#1d1d1f] hover:text-[#0071e3] hover:bg-gray-50 transition-colors text-center"
+                    className="block px-4 py-2.5 text-base font-medium text-[#1d1d1f] hover:text-brand-600 hover:bg-gray-50 transition-colors text-center"
                   >
                     {dropItem.label}
                   </Link>
@@ -97,28 +97,18 @@ export function DesktopNav({ menuItems, isLoggedIn }: DesktopNavProps) {
       {/* 올킬보카 강조 버튼 */}
       <Link
         href="/allkill"
-        className="relative px-5 py-2.5 text-[15px] font-bold text-white rounded-full transition-all duration-200 shadow-lg hover:scale-105"
-        style={{ background: 'linear-gradient(135deg, #A78BFA 0%, #4DD9C0 100%)', boxShadow: '0 4px 20px rgba(167,139,250,0.4)' }}
+        className="relative ml-2 px-5 py-2.5 text-[15px] font-bold text-white bg-brand-600 hover:bg-brand-800 rounded-full transition-colors duration-200"
       >
-        <span className="absolute -top-2 -right-1 bg-rose-500 text-white text-[10px] font-black px-1.5 py-0.5 rounded-full leading-none">NEW</span>
-        ✦ 올킬보카
+        <span className="absolute -top-2 -right-1 bg-[#FDD663] text-[#202124] text-[10px] font-black px-1.5 py-0.5 rounded-full leading-none">NEW</span>
+        올킬보카
       </Link>
       {/* 내 대시보드 / 로그인 */}
-      {isLoggedIn ? (
-        <Link
-          href="/student"
-          className="ml-2 px-5 py-2.5 text-[15px] font-medium text-white bg-gradient-to-r from-violet-400 to-purple-400 hover:from-violet-500 hover:to-purple-500 rounded-full transition-all duration-200 shadow-lg shadow-violet-300/30"
-        >
-          내 대시보드
-        </Link>
-      ) : (
-        <Link
-          href="/login"
-          className="ml-2 px-5 py-2.5 text-[15px] font-medium text-[#A78BFA] border-2 border-[#A78BFA] hover:bg-[#A78BFA] hover:text-white rounded-full transition-all duration-200"
-        >
-          로그인
-        </Link>
-      )}
+      <Link
+        href={isLoggedIn ? '/student' : '/login'}
+        className="ml-2 px-5 py-2.5 text-[15px] font-medium text-brand-600 border border-[#DADCE0] hover:border-brand-600 hover:bg-brand-50 rounded-full transition-colors duration-200"
+      >
+        {isLoggedIn ? '내 대시보드' : '로그인'}
+      </Link>
     </nav>
   );
 }

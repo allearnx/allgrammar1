@@ -32,7 +32,7 @@ export function MobileMenu({ menuItems, isLoggedIn, isOpen, onClose }: MobileMen
               <>
                 <button
                   onClick={() => setMobileOpenDropdown(mobileOpenDropdown === item.label ? null : item.label)}
-                  className="w-full flex items-center justify-between px-4 py-3 text-base font-medium text-[#1d1d1f] hover:text-[#0071e3] transition-colors"
+                  className="w-full flex items-center justify-between px-4 py-3 text-base font-medium text-[#1d1d1f] hover:text-brand-600 transition-colors"
                 >
                   {item.label}
                   <svg
@@ -54,7 +54,7 @@ export function MobileMenu({ menuItems, isLoggedIn, isOpen, onClose }: MobileMen
                         href={dropItem.href}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="block pl-8 pr-4 py-2.5 text-sm font-medium text-[#424245] hover:text-[#0071e3] transition-colors"
+                        className="block pl-8 pr-4 py-2.5 text-sm font-medium text-[#424245] hover:text-brand-600 transition-colors"
                         onClick={onClose}
                       >
                         {dropItem.label}
@@ -66,7 +66,7 @@ export function MobileMenu({ menuItems, isLoggedIn, isOpen, onClose }: MobileMen
                       <Link
                         key={dropItem.label}
                         href={dropItem.href}
-                        className="block pl-8 pr-4 py-2.5 text-sm font-medium text-[#424245] hover:text-[#0071e3] transition-colors"
+                        className="block pl-8 pr-4 py-2.5 text-sm font-medium text-[#424245] hover:text-brand-600 transition-colors"
                         onClick={onClose}
                       >
                         {dropItem.label}
@@ -80,7 +80,7 @@ export function MobileMenu({ menuItems, isLoggedIn, isOpen, onClose }: MobileMen
                 href={item.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="block px-4 py-3 text-base font-medium text-[#1d1d1f] hover:text-[#0071e3] transition-colors"
+                className="block px-4 py-3 text-base font-medium text-[#1d1d1f] hover:text-brand-600 transition-colors"
                 onClick={onClose}
               >
                 {item.label}
@@ -88,7 +88,7 @@ export function MobileMenu({ menuItems, isLoggedIn, isOpen, onClose }: MobileMen
             ) : (
               <Link
                 href={item.href}
-                className="block px-4 py-3 text-base font-medium text-[#1d1d1f] hover:text-[#0071e3] transition-colors"
+                className="block px-4 py-3 text-base font-medium text-[#1d1d1f] hover:text-brand-600 transition-colors"
                 onClick={onClose}
               >
                 {item.label}
@@ -99,31 +99,20 @@ export function MobileMenu({ menuItems, isLoggedIn, isOpen, onClose }: MobileMen
         {/* 올킬보카 강조 버튼 (모바일) */}
         <Link
           href="/allkill"
-          className="relative block mt-2 px-4 py-3 text-base font-bold text-white text-center rounded-full transition-all hover:scale-[1.02]"
-          style={{ background: 'linear-gradient(135deg, #A78BFA 0%, #4DD9C0 100%)', boxShadow: '0 4px 20px rgba(167,139,250,0.4)' }}
+          className="relative block mt-2 px-4 py-3 text-base font-bold text-white text-center bg-brand-600 hover:bg-brand-800 rounded-full transition-colors"
           onClick={onClose}
         >
-          <span className="absolute -top-2 left-1/2 -translate-x-1/2 bg-rose-500 text-white text-[10px] font-black px-2 py-0.5 rounded-full leading-none whitespace-nowrap">NEW</span>
-          ✦ 올킬보카
+          <span className="absolute -top-2 left-1/2 -translate-x-1/2 bg-[#FDD663] text-[#202124] text-[10px] font-black px-2 py-0.5 rounded-full leading-none whitespace-nowrap">NEW</span>
+          올킬보카
         </Link>
         {/* 내 대시보드 / 로그인 (모바일) */}
-        {isLoggedIn ? (
-          <Link
-            href="/student"
-            className="block mt-3 px-4 py-3 text-base font-medium text-white text-center bg-gradient-to-r from-violet-400 to-purple-400 hover:from-violet-500 hover:to-purple-500 rounded-full transition-all shadow-lg shadow-violet-300/30"
-            onClick={onClose}
-          >
-            내 대시보드
-          </Link>
-        ) : (
-          <Link
-            href="/login"
-            className="block mt-3 px-4 py-3 text-base font-medium text-[#A78BFA] text-center border-2 border-[#A78BFA] hover:bg-[#A78BFA] hover:text-white rounded-full transition-all"
-            onClick={onClose}
-          >
-            로그인
-          </Link>
-        )}
+        <Link
+          href={isLoggedIn ? '/student' : '/login'}
+          className="block mt-3 px-4 py-3 text-base font-medium text-brand-600 text-center border border-[#DADCE0] hover:border-brand-600 hover:bg-brand-50 rounded-full transition-colors"
+          onClick={onClose}
+        >
+          {isLoggedIn ? '내 대시보드' : '로그인'}
+        </Link>
       </nav>
     </div>
   );
