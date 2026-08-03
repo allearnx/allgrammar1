@@ -9,6 +9,12 @@ export interface VocaBook {
   cover_image_url: string | null;
   /** 정의 언어 — 'ko': 한글 뜻, 'en': 영어 정의(국제학교·유학생용). 추출 프롬프트 자동 분기 */
   definition_lang: 'ko' | 'en';
+  /**
+   * 1회독 퀴즈 방식 — 'single': 4지선다(기본), 'multi': 복수 선택(초등 주제별 교재).
+   * 옵셔널인 이유: 마이그레이션 104 적용 전 환경에서는 컬럼이 없다. 조회하는 쪽은
+   * 값이 없으면 'single'로 폴백할 것 (유령 컬럼 사고 방지 — select에 무턱대고 넣지 말 것).
+   */
+  quiz_type?: 'single' | 'multi';
   sort_order: number;
   is_active: boolean;
   created_at: string;

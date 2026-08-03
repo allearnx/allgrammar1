@@ -43,6 +43,16 @@ export default async function StudentVocaDayPage({
 
   if (!day) notFound();
 
+  // 교재 퀴즈 방식 — 초등(주제별) 교재는 4지선다 대신 복수 선택.
+  // 마이그레이션(104) 적용 전 환경에서는 조회가 실패하므로 'single'로 폴백
+  // (유령 컬럼 사고 재발 방지 — 페이지가 깨지는 대신 기존 퀴즈로 동작).
+  const { data: book } = await supabase
+    .from('voca_books')
+    .select('quiz_type')
+    .eq('id', (day as VocaDay).book_id)
+    .maybeSingle();
+  const quizType: 'single' | 'multi' = book?.quiz_type === 'multi' ? 'multi' : 'single';
+
   // 무료 플랜: 가입 7일 이내는 전체 Day, 이후 앞 N개까지만
   const planContext = planForGate;
   const freeVocaDayLimit = await resolveFreeVocaDayLimit(supabase, planContext.tier, user.academy_id, user.id);
@@ -148,6 +158,7 @@ export default async function StudentVocaDayPage({
           initialRound={initialRound}
           round2Locked={round2Locked}
           hasMatchingSubmission={hasMatchingSubmission}
+          quizType={quizType}
         />
       </div>
     </>

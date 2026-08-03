@@ -11,6 +11,8 @@ import { NeonFlashcard } from './neon-flashcard';
 import { RhythmSpelling } from './rhythm-spelling';
 import { WordMatching } from './word-matching';
 import { QuickQuiz, type QuizWrongWord } from './quick-quiz';
+import { MultiSelectQuiz } from './multi-select-quiz';
+import { generateMultiSelectQuestions } from '@/lib/voca/multi-select-quiz';
 import { VocaDayRankCard, type VocaDayRankCardProps } from '@/components/voca/voca-day-rank-card';
 import { EMPTY_VOCA_PROGRESS, type VocaVocabulary, type VocaStudentProgress } from '@/types/voca';
 import { shuffle } from '@/lib/utils';
@@ -24,6 +26,8 @@ interface NeonVocaTabProps {
   dayId: string;
   progress: VocaStudentProgress | null;
   dayTitle: string;
+  /** 교재 퀴즈 방식 — 'multi'면 4지선다 대신 복수 선택 (초등 주제별 교재) */
+  quizType?: 'single' | 'multi';
 }
 
 // 핵심 4단계 (완료 판정 대상). 시험은 보너스라 여기 포함하지 않는다.
@@ -41,7 +45,7 @@ function getStepStates(p: VocaStudentProgress | null) {
   ];
 }
 
-export function NeonVocaTab({ vocabulary, dayId, progress, dayTitle }: NeonVocaTabProps) {
+export function NeonVocaTab({ vocabulary, dayId, progress, dayTitle, quizType = 'single' }: NeonVocaTabProps) {
   const router = useRouter();
   const [localProgress, setLocalProgress] = useState(progress);
   const [rankData, setRankData] = useState<RankData | null>(null);
@@ -176,6 +180,11 @@ export function NeonVocaTab({ vocabulary, dayId, progress, dayTitle }: NeonVocaT
 
   // 퀴즈 최소 4개 필요
   const hasEnoughForQuiz = vocabulary.length >= 4;
+  // 복수 선택은 안전한 오답 보기를 못 채우는 Day가 있을 수 있다 → 문제 4개 미만이면
+  // 4지선다로 폴백. 생성 개수는 결정적이라 마운트 시 1회 판정이면 충분하다.
+  const [useMultiQuiz] = useState(
+    () => quizType === 'multi' && generateMultiSelectQuestions(vocabulary).length >= 4,
+  );
 
   // 보너스 시험 진행 화면 (선택)
   if (inExam) {
@@ -252,10 +261,17 @@ export function NeonVocaTab({ vocabulary, dayId, progress, dayTitle }: NeonVocaT
           )}
           {currentStep === 2 && (
             hasEnoughForQuiz ? (
-              <QuickQuiz
-                vocabulary={vocabulary}
-                onComplete={(score, wrongWords) => handleStepComplete(2, 'quiz', score, wrongWords)}
-              />
+              useMultiQuiz ? (
+                <MultiSelectQuiz
+                  vocabulary={vocabulary}
+                  onComplete={(score, wrongWords) => handleStepComplete(2, 'quiz', score, wrongWords)}
+                />
+              ) : (
+                <QuickQuiz
+                  vocabulary={vocabulary}
+                  onComplete={(score, wrongWords) => handleStepComplete(2, 'quiz', score, wrongWords)}
+                />
+              )
             ) : (
               <div className="neon-container p-6 text-center">
                 <p className="text-gray-400">퀴즈에는 최소 4개 단어가 필요합니다.</p>

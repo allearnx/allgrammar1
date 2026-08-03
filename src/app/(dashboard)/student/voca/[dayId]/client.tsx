@@ -24,9 +24,11 @@ interface VocaDayClientProps {
   /** 무료 플랜 2회독 잠금 (결제 정책 — 자유 전환과 별개) */
   round2Locked?: boolean;
   hasMatchingSubmission?: boolean;
+  /** 교재 퀴즈 방식 — 'multi'면 1회독 퀴즈가 복수 선택으로 바뀐다 (초등 주제별 교재) */
+  quizType?: 'single' | 'multi';
 }
 
-export function VocaDayClient({ day, vocabulary, progress, initialRound, round2Locked = false }: VocaDayClientProps) {
+export function VocaDayClient({ day, vocabulary, progress, initialRound, round2Locked = false, quizType = 'single' }: VocaDayClientProps) {
   const router = useRouter();
   const [round, setRound] = useState<'1' | '2'>(round2Locked ? '1' : initialRound);
   useLearningSession('voca', day.id);
@@ -79,6 +81,7 @@ export function VocaDayClient({ day, vocabulary, progress, initialRound, round2L
           dayId={day.id}
           progress={progress}
           dayTitle={day.title}
+          quizType={quizType}
         />
       ) : (
         <VocaTab2
