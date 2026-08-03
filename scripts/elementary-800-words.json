@@ -1,0 +1,4808 @@
+{
+ "generatedAt": "2026-08-04",
+ "source": "올라영_교육부 초등필수영단어800.pdf",
+ "learnable": [
+  {
+   "word": "one",
+   "meaning": "하나(1)",
+   "section": "숫자·순서",
+   "bucket": "핵심"
+  },
+  {
+   "word": "two",
+   "meaning": "둘(2)",
+   "section": "숫자·순서",
+   "bucket": "핵심"
+  },
+  {
+   "word": "three",
+   "meaning": "셋(3)",
+   "section": "숫자·순서",
+   "bucket": "핵심"
+  },
+  {
+   "word": "four",
+   "meaning": "넷(4)",
+   "section": "숫자·순서",
+   "bucket": "핵심"
+  },
+  {
+   "word": "five",
+   "meaning": "다섯(5)",
+   "section": "숫자·순서",
+   "bucket": "핵심"
+  },
+  {
+   "word": "six",
+   "meaning": "여섯(6)",
+   "section": "숫자·순서",
+   "bucket": "핵심"
+  },
+  {
+   "word": "seven",
+   "meaning": "일곱(7)",
+   "section": "숫자·순서",
+   "bucket": "핵심"
+  },
+  {
+   "word": "eight",
+   "meaning": "여덟(8)",
+   "section": "숫자·순서",
+   "bucket": "핵심"
+  },
+  {
+   "word": "nine",
+   "meaning": "아홉(9)",
+   "section": "숫자·순서",
+   "bucket": "핵심"
+  },
+  {
+   "word": "ten",
+   "meaning": "열(10)",
+   "section": "숫자·순서",
+   "bucket": "핵심"
+  },
+  {
+   "word": "first",
+   "meaning": "첫 번째의",
+   "section": "숫자·순서",
+   "bucket": "핵심"
+  },
+  {
+   "word": "second",
+   "meaning": "두 번째의",
+   "section": "숫자·순서",
+   "bucket": "핵심"
+  },
+  {
+   "word": "third",
+   "meaning": "세 번째의",
+   "section": "숫자·순서",
+   "bucket": "핵심"
+  },
+  {
+   "word": "eleven",
+   "meaning": "열하나(11)",
+   "section": "숫자·순서",
+   "bucket": "확장"
+  },
+  {
+   "word": "twelve",
+   "meaning": "열둘(12)",
+   "section": "숫자·순서",
+   "bucket": "확장"
+  },
+  {
+   "word": "thirteen",
+   "meaning": "열셋(13)",
+   "section": "숫자·순서",
+   "bucket": "확장"
+  },
+  {
+   "word": "twenty",
+   "meaning": "스물(20)",
+   "section": "숫자·순서",
+   "bucket": "확장"
+  },
+  {
+   "word": "thirty",
+   "meaning": "서른(30)",
+   "section": "숫자·순서",
+   "bucket": "확장"
+  },
+  {
+   "word": "hundred",
+   "meaning": "백(100)",
+   "section": "숫자·순서",
+   "bucket": "확장"
+  },
+  {
+   "word": "twice",
+   "meaning": "두번",
+   "section": "숫자·순서",
+   "bucket": "확장"
+  },
+  {
+   "word": "twenty-first",
+   "meaning": "스물한 번째",
+   "section": "숫자·순서",
+   "bucket": "확장"
+  },
+  {
+   "word": "twenty-second",
+   "meaning": "스물두 번째",
+   "section": "숫자·순서",
+   "bucket": "확장"
+  },
+  {
+   "word": "twenty-third",
+   "meaning": "스물세 번째",
+   "section": "숫자·순서",
+   "bucket": "확장"
+  },
+  {
+   "word": "number",
+   "meaning": "숫자",
+   "section": "숫자·순서",
+   "bucket": "확장"
+  },
+  {
+   "word": "red",
+   "meaning": "빨강; 붉은색의",
+   "section": "색깔",
+   "bucket": "핵심"
+  },
+  {
+   "word": "blue",
+   "meaning": "파란색; 푸른",
+   "section": "색깔",
+   "bucket": "핵심"
+  },
+  {
+   "word": "green",
+   "meaning": "녹색; 녹색의",
+   "section": "색깔",
+   "bucket": "핵심"
+  },
+  {
+   "word": "yellow",
+   "meaning": "노랑색; 노랑색의",
+   "section": "색깔",
+   "bucket": "핵심"
+  },
+  {
+   "word": "black",
+   "meaning": "검정색; 검은",
+   "section": "색깔",
+   "bucket": "핵심"
+  },
+  {
+   "word": "white",
+   "meaning": "백색; 흰",
+   "section": "색깔",
+   "bucket": "핵심"
+  },
+  {
+   "word": "brown",
+   "meaning": "갈색; 밤색의",
+   "section": "색깔",
+   "bucket": "핵심"
+  },
+  {
+   "word": "pink",
+   "meaning": "분홍색; 핑크색의",
+   "section": "색깔",
+   "bucket": "핵심"
+  },
+  {
+   "word": "orange",
+   "meaning": "오렌지",
+   "section": "색깔",
+   "bucket": "핵심"
+  },
+  {
+   "word": "color",
+   "meaning": "색깔",
+   "section": "색깔",
+   "bucket": "핵심"
+  },
+  {
+   "word": "gray",
+   "meaning": "회색; 회색의",
+   "section": "색깔",
+   "bucket": "확장"
+  },
+  {
+   "word": "gold",
+   "meaning": "금",
+   "section": "색깔",
+   "bucket": "확장"
+  },
+  {
+   "word": "mother",
+   "meaning": "어머니",
+   "section": "가족·사람",
+   "bucket": "핵심"
+  },
+  {
+   "word": "father",
+   "meaning": "아버지",
+   "section": "가족·사람",
+   "bucket": "핵심"
+  },
+  {
+   "word": "parent",
+   "meaning": "부모",
+   "section": "가족·사람",
+   "bucket": "핵심"
+  },
+  {
+   "word": "baby",
+   "meaning": "아기",
+   "section": "가족·사람",
+   "bucket": "핵심"
+  },
+  {
+   "word": "brother",
+   "meaning": "형제",
+   "section": "가족·사람",
+   "bucket": "핵심"
+  },
+  {
+   "word": "sister",
+   "meaning": "자매",
+   "section": "가족·사람",
+   "bucket": "핵심"
+  },
+  {
+   "word": "grandfather",
+   "meaning": "할아버지",
+   "section": "가족·사람",
+   "bucket": "핵심"
+  },
+  {
+   "word": "aunt",
+   "meaning": "이모, 고모",
+   "section": "가족·사람",
+   "bucket": "핵심"
+  },
+  {
+   "word": "uncle",
+   "meaning": "삼촌",
+   "section": "가족·사람",
+   "bucket": "핵심"
+  },
+  {
+   "word": "cousin",
+   "meaning": "사촌",
+   "section": "가족·사람",
+   "bucket": "핵심"
+  },
+  {
+   "word": "daughter",
+   "meaning": "딸",
+   "section": "가족·사람",
+   "bucket": "핵심"
+  },
+  {
+   "word": "son",
+   "meaning": "아들",
+   "section": "가족·사람",
+   "bucket": "핵심"
+  },
+  {
+   "word": "family",
+   "meaning": "가족",
+   "section": "가족·사람",
+   "bucket": "핵심"
+  },
+  {
+   "word": "man",
+   "meaning": "남자",
+   "section": "가족·사람",
+   "bucket": "핵심"
+  },
+  {
+   "word": "woman",
+   "meaning": "여자",
+   "section": "가족·사람",
+   "bucket": "핵심"
+  },
+  {
+   "word": "girl",
+   "meaning": "소녀",
+   "section": "가족·사람",
+   "bucket": "핵심"
+  },
+  {
+   "word": "boy",
+   "meaning": "소년",
+   "section": "가족·사람",
+   "bucket": "핵심"
+  },
+  {
+   "word": "kid",
+   "meaning": "아이",
+   "section": "가족·사람",
+   "bucket": "핵심"
+  },
+  {
+   "word": "child",
+   "meaning": "어린이",
+   "section": "가족·사람",
+   "bucket": "핵심"
+  },
+  {
+   "word": "people",
+   "meaning": "사람들",
+   "section": "가족·사람",
+   "bucket": "핵심"
+  },
+  {
+   "word": "friend",
+   "meaning": "친구",
+   "section": "가족·사람",
+   "bucket": "핵심"
+  },
+  {
+   "word": "name",
+   "meaning": "이름",
+   "section": "가족·사람",
+   "bucket": "핵심"
+  },
+  {
+   "word": "husband",
+   "meaning": "남편",
+   "section": "가족·사람",
+   "bucket": "확장"
+  },
+  {
+   "word": "wife",
+   "meaning": "아내",
+   "section": "가족·사람",
+   "bucket": "확장"
+  },
+  {
+   "word": "lady",
+   "meaning": "숙녀",
+   "section": "가족·사람",
+   "bucket": "확장"
+  },
+  {
+   "word": "gentleman",
+   "meaning": "신사",
+   "section": "가족·사람",
+   "bucket": "확장"
+  },
+  {
+   "word": "guy",
+   "meaning": "(비격식) (성인) 남자",
+   "section": "가족·사람",
+   "bucket": "확장"
+  },
+  {
+   "word": "hero",
+   "meaning": "영웅",
+   "section": "가족·사람",
+   "bucket": "확장"
+  },
+  {
+   "word": "king",
+   "meaning": "왕",
+   "section": "가족·사람",
+   "bucket": "확장"
+  },
+  {
+   "word": "queen",
+   "meaning": "여왕",
+   "section": "가족·사람",
+   "bucket": "확장"
+  },
+  {
+   "word": "prince",
+   "meaning": "왕자",
+   "section": "가족·사람",
+   "bucket": "확장"
+  },
+  {
+   "word": "doctor",
+   "meaning": "의사",
+   "section": "직업",
+   "bucket": "핵심"
+  },
+  {
+   "word": "nurse",
+   "meaning": "간호사",
+   "section": "직업",
+   "bucket": "핵심"
+  },
+  {
+   "word": "police",
+   "meaning": "경찰",
+   "section": "직업",
+   "bucket": "핵심"
+  },
+  {
+   "word": "job",
+   "meaning": "직업",
+   "section": "직업",
+   "bucket": "핵심"
+  },
+  {
+   "word": "pilot",
+   "meaning": "조종사",
+   "section": "직업",
+   "bucket": "확장"
+  },
+  {
+   "word": "staff",
+   "meaning": "직원",
+   "section": "직업",
+   "bucket": "확장"
+  },
+  {
+   "word": "member",
+   "meaning": "회원, 구성원",
+   "section": "직업",
+   "bucket": "확장"
+  },
+  {
+   "word": "customer",
+   "meaning": "고객",
+   "section": "직업",
+   "bucket": "확장"
+  },
+  {
+   "word": "partner",
+   "meaning": "파트너, 동반자",
+   "section": "직업",
+   "bucket": "확장"
+  },
+  {
+   "word": "head",
+   "meaning": "머리",
+   "section": "몸",
+   "bucket": "핵심"
+  },
+  {
+   "word": "face",
+   "meaning": "얼굴",
+   "section": "몸",
+   "bucket": "핵심"
+  },
+  {
+   "word": "eye",
+   "meaning": "눈",
+   "section": "몸",
+   "bucket": "핵심"
+  },
+  {
+   "word": "ear",
+   "meaning": "귀",
+   "section": "몸",
+   "bucket": "핵심"
+  },
+  {
+   "word": "nose",
+   "meaning": "코",
+   "section": "몸",
+   "bucket": "핵심"
+  },
+  {
+   "word": "mouth",
+   "meaning": "입",
+   "section": "몸",
+   "bucket": "핵심"
+  },
+  {
+   "word": "hand",
+   "meaning": "손",
+   "section": "몸",
+   "bucket": "핵심"
+  },
+  {
+   "word": "arm",
+   "meaning": "팔",
+   "section": "몸",
+   "bucket": "핵심"
+  },
+  {
+   "word": "leg",
+   "meaning": "다리",
+   "section": "몸",
+   "bucket": "핵심"
+  },
+  {
+   "word": "foot",
+   "meaning": "발",
+   "section": "몸",
+   "bucket": "핵심"
+  },
+  {
+   "word": "finger",
+   "meaning": "손가락",
+   "section": "몸",
+   "bucket": "핵심"
+  },
+  {
+   "word": "hair",
+   "meaning": "머리카락",
+   "section": "몸",
+   "bucket": "핵심"
+  },
+  {
+   "word": "body",
+   "meaning": "몸, 신체",
+   "section": "몸",
+   "bucket": "핵심"
+  },
+  {
+   "word": "tooth",
+   "meaning": "이",
+   "section": "몸",
+   "bucket": "핵심"
+  },
+  {
+   "word": "back",
+   "meaning": "뒤, 등",
+   "section": "몸",
+   "bucket": "핵심"
+  },
+  {
+   "word": "neck",
+   "meaning": "목",
+   "section": "몸",
+   "bucket": "확장"
+  },
+  {
+   "word": "lip",
+   "meaning": "입술",
+   "section": "몸",
+   "bucket": "확장"
+  },
+  {
+   "word": "skin",
+   "meaning": "피부",
+   "section": "몸",
+   "bucket": "확장"
+  },
+  {
+   "word": "heart",
+   "meaning": "심장, 마음",
+   "section": "몸",
+   "bucket": "확장"
+  },
+  {
+   "word": "bone",
+   "meaning": "뼈",
+   "section": "몸",
+   "bucket": "확장"
+  },
+  {
+   "word": "blood",
+   "meaning": "피, 혈액",
+   "section": "몸",
+   "bucket": "확장"
+  },
+  {
+   "word": "voice",
+   "meaning": "목소리",
+   "section": "몸",
+   "bucket": "확장"
+  },
+  {
+   "word": "dog",
+   "meaning": "개",
+   "section": "동물",
+   "bucket": "핵심"
+  },
+  {
+   "word": "cat",
+   "meaning": "고양이",
+   "section": "동물",
+   "bucket": "핵심"
+  },
+  {
+   "word": "bird",
+   "meaning": "새",
+   "section": "동물",
+   "bucket": "핵심"
+  },
+  {
+   "word": "fish",
+   "meaning": "물고기",
+   "section": "동물",
+   "bucket": "핵심"
+  },
+  {
+   "word": "cow",
+   "meaning": "암소",
+   "section": "동물",
+   "bucket": "핵심"
+  },
+  {
+   "word": "pig",
+   "meaning": "돼지",
+   "section": "동물",
+   "bucket": "핵심"
+  },
+  {
+   "word": "horse",
+   "meaning": "말",
+   "section": "동물",
+   "bucket": "핵심"
+  },
+  {
+   "word": "duck",
+   "meaning": "오리",
+   "section": "동물",
+   "bucket": "핵심"
+  },
+  {
+   "word": "rabbit",
+   "meaning": "토끼",
+   "section": "동물",
+   "bucket": "핵심"
+  },
+  {
+   "word": "lion",
+   "meaning": "사자",
+   "section": "동물",
+   "bucket": "핵심"
+  },
+  {
+   "word": "tiger",
+   "meaning": "호랑이",
+   "section": "동물",
+   "bucket": "핵심"
+  },
+  {
+   "word": "bear",
+   "meaning": "곰",
+   "section": "동물",
+   "bucket": "핵심"
+  },
+  {
+   "word": "elephant",
+   "meaning": "코끼리",
+   "section": "동물",
+   "bucket": "핵심"
+  },
+  {
+   "word": "monkey",
+   "meaning": "원숭이",
+   "section": "동물",
+   "bucket": "핵심"
+  },
+  {
+   "word": "mouse",
+   "meaning": "쥐",
+   "section": "동물",
+   "bucket": "핵심"
+  },
+  {
+   "word": "animal",
+   "meaning": "동물",
+   "section": "동물",
+   "bucket": "핵심"
+  },
+  {
+   "word": "zoo",
+   "meaning": "동물원",
+   "section": "동물",
+   "bucket": "핵심"
+  },
+  {
+   "word": "bee",
+   "meaning": "벌",
+   "section": "동물",
+   "bucket": "확장"
+  },
+  {
+   "word": "chicken",
+   "meaning": "닭",
+   "section": "동물",
+   "bucket": "확장"
+  },
+  {
+   "word": "fox",
+   "meaning": "여우",
+   "section": "동물",
+   "bucket": "확장"
+  },
+  {
+   "word": "puppy",
+   "meaning": "강아지",
+   "section": "동물",
+   "bucket": "확장"
+  },
+  {
+   "word": "tail",
+   "meaning": "꼬리",
+   "section": "동물",
+   "bucket": "확장"
+  },
+  {
+   "word": "food",
+   "meaning": "음식",
+   "section": "음식·요리",
+   "bucket": "핵심"
+  },
+  {
+   "word": "bread",
+   "meaning": "빵",
+   "section": "음식·요리",
+   "bucket": "핵심"
+  },
+  {
+   "word": "apple",
+   "meaning": "사과",
+   "section": "음식·요리",
+   "bucket": "핵심"
+  },
+  {
+   "word": "banana",
+   "meaning": "바나나",
+   "section": "음식·요리",
+   "bucket": "핵심"
+  },
+  {
+   "word": "egg",
+   "meaning": "계란",
+   "section": "음식·요리",
+   "bucket": "핵심"
+  },
+  {
+   "word": "milk",
+   "meaning": "우유",
+   "section": "음식·요리",
+   "bucket": "핵심"
+  },
+  {
+   "word": "water",
+   "meaning": "물",
+   "section": "음식·요리",
+   "bucket": "핵심"
+  },
+  {
+   "word": "juice",
+   "meaning": "주스",
+   "section": "음식·요리",
+   "bucket": "핵심"
+  },
+  {
+   "word": "meat",
+   "meaning": "고기",
+   "section": "음식·요리",
+   "bucket": "핵심"
+  },
+  {
+   "word": "cake",
+   "meaning": "케이크",
+   "section": "음식·요리",
+   "bucket": "핵심"
+  },
+  {
+   "word": "candy",
+   "meaning": "사탕, 캔디",
+   "section": "음식·요리",
+   "bucket": "핵심"
+  },
+  {
+   "word": "cheese",
+   "meaning": "치즈",
+   "section": "음식·요리",
+   "bucket": "핵심"
+  },
+  {
+   "word": "chocolate",
+   "meaning": "초콜릿",
+   "section": "음식·요리",
+   "bucket": "핵심"
+  },
+  {
+   "word": "cookie",
+   "meaning": "쿠키",
+   "section": "음식·요리",
+   "bucket": "핵심"
+  },
+  {
+   "word": "hamburger",
+   "meaning": "햄버거",
+   "section": "음식·요리",
+   "bucket": "핵심"
+  },
+  {
+   "word": "pizza",
+   "meaning": "피자",
+   "section": "음식·요리",
+   "bucket": "핵심"
+  },
+  {
+   "word": "potato",
+   "meaning": "감자",
+   "section": "음식·요리",
+   "bucket": "핵심"
+  },
+  {
+   "word": "tomato",
+   "meaning": "토마토",
+   "section": "음식·요리",
+   "bucket": "핵심"
+  },
+  {
+   "word": "carrot",
+   "meaning": "당근",
+   "section": "음식·요리",
+   "bucket": "핵심"
+  },
+  {
+   "word": "vegetable",
+   "meaning": "야채",
+   "section": "음식·요리",
+   "bucket": "핵심"
+  },
+  {
+   "word": "fruit",
+   "meaning": "과일",
+   "section": "음식·요리",
+   "bucket": "핵심"
+  },
+  {
+   "word": "grape",
+   "meaning": "포도",
+   "section": "음식·요리",
+   "bucket": "핵심"
+  },
+  {
+   "word": "watermelon",
+   "meaning": "수박",
+   "section": "음식·요리",
+   "bucket": "핵심"
+  },
+  {
+   "word": "salad",
+   "meaning": "샐러드",
+   "section": "음식·요리",
+   "bucket": "핵심"
+  },
+  {
+   "word": "sandwich",
+   "meaning": "샌드위치",
+   "section": "음식·요리",
+   "bucket": "핵심"
+  },
+  {
+   "word": "soup",
+   "meaning": "수프",
+   "section": "음식·요리",
+   "bucket": "핵심"
+  },
+  {
+   "word": "ice",
+   "meaning": "얼음",
+   "section": "음식·요리",
+   "bucket": "핵심"
+  },
+  {
+   "word": "eat",
+   "meaning": "먹다",
+   "section": "음식·요리",
+   "bucket": "핵심"
+  },
+  {
+   "word": "drink",
+   "meaning": "마시다",
+   "section": "음식·요리",
+   "bucket": "핵심"
+  },
+  {
+   "word": "cook",
+   "meaning": "요리하다",
+   "section": "음식·요리",
+   "bucket": "핵심"
+  },
+  {
+   "word": "breakfast",
+   "meaning": "아침 식사",
+   "section": "음식·요리",
+   "bucket": "핵심"
+  },
+  {
+   "word": "lunch",
+   "meaning": "점심 식사",
+   "section": "음식·요리",
+   "bucket": "핵심"
+  },
+  {
+   "word": "dinner",
+   "meaning": "저녁",
+   "section": "음식·요리",
+   "bucket": "핵심"
+  },
+  {
+   "word": "delicious",
+   "meaning": "맛있는",
+   "section": "음식·요리",
+   "bucket": "핵심"
+  },
+  {
+   "word": "butter",
+   "meaning": "버터",
+   "section": "음식·요리",
+   "bucket": "확장"
+  },
+  {
+   "word": "cream",
+   "meaning": "크림",
+   "section": "음식·요리",
+   "bucket": "확장"
+  },
+  {
+   "word": "doughnut",
+   "meaning": "도넛",
+   "section": "음식·요리",
+   "bucket": "확장"
+  },
+  {
+   "word": "gum",
+   "meaning": "껌, 잇몸",
+   "section": "음식·요리",
+   "bucket": "확장"
+  },
+  {
+   "word": "jam",
+   "meaning": "잼",
+   "section": "음식·요리",
+   "bucket": "확장"
+  },
+  {
+   "word": "salt",
+   "meaning": "소금",
+   "section": "음식·요리",
+   "bucket": "확장"
+  },
+  {
+   "word": "sugar",
+   "meaning": "설탕",
+   "section": "음식·요리",
+   "bucket": "확장"
+  },
+  {
+   "word": "spaghetti",
+   "meaning": "스파게티",
+   "section": "음식·요리",
+   "bucket": "확장"
+  },
+  {
+   "word": "steak",
+   "meaning": "스테이크",
+   "section": "음식·요리",
+   "bucket": "확장"
+  },
+  {
+   "word": "beef",
+   "meaning": "소고기",
+   "section": "음식·요리",
+   "bucket": "확장"
+  },
+  {
+   "word": "coffee",
+   "meaning": "커피",
+   "section": "음식·요리",
+   "bucket": "확장"
+  },
+  {
+   "word": "wine",
+   "meaning": "와인",
+   "section": "음식·요리",
+   "bucket": "확장"
+  },
+  {
+   "word": "bake",
+   "meaning": "굽다",
+   "section": "음식·요리",
+   "bucket": "확장"
+  },
+  {
+   "word": "taste",
+   "meaning": "맛보다",
+   "section": "음식·요리",
+   "bucket": "확장"
+  },
+  {
+   "word": "biscuit",
+   "meaning": "비스킷",
+   "section": "음식·요리",
+   "bucket": "확장"
+  },
+  {
+   "word": "school",
+   "meaning": "학교",
+   "section": "학교·공부",
+   "bucket": "핵심"
+  },
+  {
+   "word": "book",
+   "meaning": "책",
+   "section": "학교·공부",
+   "bucket": "핵심"
+  },
+  {
+   "word": "pen",
+   "meaning": "펜, 만년필",
+   "section": "학교·공부",
+   "bucket": "핵심"
+  },
+  {
+   "word": "pencil",
+   "meaning": "연필",
+   "section": "학교·공부",
+   "bucket": "핵심"
+  },
+  {
+   "word": "class",
+   "meaning": "학급, 반",
+   "section": "학교·공부",
+   "bucket": "핵심"
+  },
+  {
+   "word": "homework",
+   "meaning": "숙제",
+   "section": "학교·공부",
+   "bucket": "핵심"
+  },
+  {
+   "word": "lesson",
+   "meaning": "수업, 레슨",
+   "section": "학교·공부",
+   "bucket": "핵심"
+  },
+  {
+   "word": "teach",
+   "meaning": "가르치다",
+   "section": "학교·공부",
+   "bucket": "핵심"
+  },
+  {
+   "word": "study",
+   "meaning": "공부하다",
+   "section": "학교·공부",
+   "bucket": "핵심"
+  },
+  {
+   "word": "learn",
+   "meaning": "배우다",
+   "section": "학교·공부",
+   "bucket": "핵심"
+  },
+  {
+   "word": "read",
+   "meaning": "읽다",
+   "section": "학교·공부",
+   "bucket": "핵심"
+  },
+  {
+   "word": "write",
+   "meaning": "쓰다",
+   "section": "학교·공부",
+   "bucket": "핵심"
+  },
+  {
+   "word": "draw",
+   "meaning": "그리다",
+   "section": "학교·공부",
+   "bucket": "핵심"
+  },
+  {
+   "word": "question",
+   "meaning": "질문",
+   "section": "학교·공부",
+   "bucket": "핵심"
+  },
+  {
+   "word": "answer",
+   "meaning": "대답",
+   "section": "학교·공부",
+   "bucket": "핵심"
+  },
+  {
+   "word": "test",
+   "meaning": "시험",
+   "section": "학교·공부",
+   "bucket": "핵심"
+  },
+  {
+   "word": "math",
+   "meaning": "수학",
+   "section": "학교·공부",
+   "bucket": "핵심"
+  },
+  {
+   "word": "science",
+   "meaning": "과학",
+   "section": "학교·공부",
+   "bucket": "핵심"
+  },
+  {
+   "word": "art",
+   "meaning": "미술",
+   "section": "학교·공부",
+   "bucket": "핵심"
+  },
+  {
+   "word": "music",
+   "meaning": "음악",
+   "section": "학교·공부",
+   "bucket": "핵심"
+  },
+  {
+   "word": "paper",
+   "meaning": "종이",
+   "section": "학교·공부",
+   "bucket": "핵심"
+  },
+  {
+   "word": "notebook",
+   "meaning": "공책",
+   "section": "학교·공부",
+   "bucket": "핵심"
+  },
+  {
+   "word": "library",
+   "meaning": "도서관",
+   "section": "학교·공부",
+   "bucket": "핵심"
+  },
+  {
+   "word": "word",
+   "meaning": "낱말, 말",
+   "section": "학교·공부",
+   "bucket": "핵심"
+  },
+  {
+   "word": "history",
+   "meaning": "역사",
+   "section": "학교·공부",
+   "bucket": "확장"
+  },
+  {
+   "word": "textbook",
+   "meaning": "교과서",
+   "section": "학교·공부",
+   "bucket": "확장"
+  },
+  {
+   "word": "quiz",
+   "meaning": "퀴즈",
+   "section": "학교·공부",
+   "bucket": "확장"
+  },
+  {
+   "word": "paint",
+   "meaning": "칠하다",
+   "section": "학교·공부",
+   "bucket": "확장"
+  },
+  {
+   "word": "crayon",
+   "meaning": "크레용",
+   "section": "학교·공부",
+   "bucket": "확장"
+  },
+  {
+   "word": "dialogue",
+   "meaning": "대화",
+   "section": "학교·공부",
+   "bucket": "확장"
+  },
+  {
+   "word": "college",
+   "meaning": "대학",
+   "section": "학교·공부",
+   "bucket": "확장"
+  },
+  {
+   "word": "bed",
+   "meaning": "침대",
+   "section": "집·물건",
+   "bucket": "핵심"
+  },
+  {
+   "word": "desk",
+   "meaning": "책상",
+   "section": "집·물건",
+   "bucket": "핵심"
+  },
+  {
+   "word": "chair",
+   "meaning": "의자",
+   "section": "집·물건",
+   "bucket": "핵심"
+  },
+  {
+   "word": "table",
+   "meaning": "식탁, 탁자",
+   "section": "집·물건",
+   "bucket": "핵심"
+  },
+  {
+   "word": "door",
+   "meaning": "문",
+   "section": "집·물건",
+   "bucket": "핵심"
+  },
+  {
+   "word": "window",
+   "meaning": "창문",
+   "section": "집·물건",
+   "bucket": "핵심"
+  },
+  {
+   "word": "wall",
+   "meaning": "벽",
+   "section": "집·물건",
+   "bucket": "핵심"
+  },
+  {
+   "word": "floor",
+   "meaning": "바닥",
+   "section": "집·물건",
+   "bucket": "핵심"
+  },
+  {
+   "word": "clock",
+   "meaning": "시계",
+   "section": "집·물건",
+   "bucket": "핵심"
+  },
+  {
+   "word": "cup",
+   "meaning": "컵",
+   "section": "집·물건",
+   "bucket": "핵심"
+  },
+  {
+   "word": "box",
+   "meaning": "상자",
+   "section": "집·물건",
+   "bucket": "핵심"
+  },
+  {
+   "word": "bag",
+   "meaning": "가방",
+   "section": "집·물건",
+   "bucket": "핵심"
+  },
+  {
+   "word": "key",
+   "meaning": "열쇠",
+   "section": "집·물건",
+   "bucket": "핵심"
+  },
+  {
+   "word": "knife",
+   "meaning": "칼",
+   "section": "집·물건",
+   "bucket": "핵심"
+  },
+  {
+   "word": "spoon",
+   "meaning": "숟가락",
+   "section": "집·물건",
+   "bucket": "핵심"
+  },
+  {
+   "word": "fork",
+   "meaning": "포크",
+   "section": "집·물건",
+   "bucket": "핵심"
+  },
+  {
+   "word": "glass",
+   "meaning": "유리, 잔",
+   "section": "집·물건",
+   "bucket": "핵심"
+  },
+  {
+   "word": "bottle",
+   "meaning": "병",
+   "section": "집·물건",
+   "bucket": "핵심"
+  },
+  {
+   "word": "basket",
+   "meaning": "바구니",
+   "section": "집·물건",
+   "bucket": "핵심"
+  },
+  {
+   "word": "brush",
+   "meaning": "솔",
+   "section": "집·물건",
+   "bucket": "핵심"
+  },
+  {
+   "word": "camera",
+   "meaning": "사진기",
+   "section": "집·물건",
+   "bucket": "핵심"
+  },
+  {
+   "word": "card",
+   "meaning": "카드",
+   "section": "집·물건",
+   "bucket": "핵심"
+  },
+  {
+   "word": "television",
+   "meaning": "텔레비전",
+   "section": "집·물건",
+   "bucket": "핵심"
+  },
+  {
+   "word": "radio",
+   "meaning": "라디오",
+   "section": "집·물건",
+   "bucket": "핵심"
+  },
+  {
+   "word": "telephone",
+   "meaning": "전화기",
+   "section": "집·물건",
+   "bucket": "핵심"
+  },
+  {
+   "word": "toy",
+   "meaning": "장난감",
+   "section": "집·물건",
+   "bucket": "핵심"
+  },
+  {
+   "word": "doll",
+   "meaning": "인형",
+   "section": "집·물건",
+   "bucket": "핵심"
+  },
+  {
+   "word": "picture",
+   "meaning": "그림",
+   "section": "집·물건",
+   "bucket": "핵심"
+  },
+  {
+   "word": "letter",
+   "meaning": "편지",
+   "section": "집·물건",
+   "bucket": "핵심"
+  },
+  {
+   "word": "map",
+   "meaning": "지도",
+   "section": "집·물건",
+   "bucket": "핵심"
+  },
+  {
+   "word": "umbrella",
+   "meaning": "우산",
+   "section": "집·물건",
+   "bucket": "핵심"
+  },
+  {
+   "word": "room",
+   "meaning": "방",
+   "section": "집·물건",
+   "bucket": "핵심"
+  },
+  {
+   "word": "kitchen",
+   "meaning": "부엌",
+   "section": "집·물건",
+   "bucket": "핵심"
+  },
+  {
+   "word": "money",
+   "meaning": "돈",
+   "section": "집·물건",
+   "bucket": "핵심"
+  },
+  {
+   "word": "curtain",
+   "meaning": "커튼",
+   "section": "집·물건",
+   "bucket": "확장"
+  },
+  {
+   "word": "bell",
+   "meaning": "종, 방울",
+   "section": "집·물건",
+   "bucket": "확장"
+  },
+  {
+   "word": "button",
+   "meaning": "단추",
+   "section": "집·물건",
+   "bucket": "확장"
+  },
+  {
+   "word": "board",
+   "meaning": "판자",
+   "section": "집·물건",
+   "bucket": "확장"
+  },
+  {
+   "word": "album",
+   "meaning": "사진첩",
+   "section": "집·물건",
+   "bucket": "확장"
+  },
+  {
+   "word": "ribbon",
+   "meaning": "리본",
+   "section": "집·물건",
+   "bucket": "확장"
+  },
+  {
+   "word": "ticket",
+   "meaning": "표",
+   "section": "집·물건",
+   "bucket": "확장"
+  },
+  {
+   "word": "tape",
+   "meaning": "테이프",
+   "section": "집·물건",
+   "bucket": "확장"
+  },
+  {
+   "word": "newspaper",
+   "meaning": "신문",
+   "section": "집·물건",
+   "bucket": "확장"
+  },
+  {
+   "word": "robot",
+   "meaning": "로봇",
+   "section": "집·물건",
+   "bucket": "확장"
+  },
+  {
+   "word": "film",
+   "meaning": "필름, 영화",
+   "section": "집·물건",
+   "bucket": "확장"
+  },
+  {
+   "word": "file",
+   "meaning": "파일",
+   "section": "집·물건",
+   "bucket": "확장"
+  },
+  {
+   "word": "fan",
+   "meaning": "부채, 선풍기",
+   "section": "집·물건",
+   "bucket": "확장"
+  },
+  {
+   "word": "scissors",
+   "meaning": "가위",
+   "section": "집·물건",
+   "bucket": "확장"
+  },
+  {
+   "word": "comic",
+   "meaning": "재미있는; 만화책",
+   "section": "집·물건",
+   "bucket": "확장"
+  },
+  {
+   "word": "mail",
+   "meaning": "우편",
+   "section": "집·물건",
+   "bucket": "확장"
+  },
+  {
+   "word": "bill",
+   "meaning": "지폐",
+   "section": "집·물건",
+   "bucket": "확장"
+  },
+  {
+   "word": "bath",
+   "meaning": "목욕",
+   "section": "집·물건",
+   "bucket": "확장"
+  },
+  {
+   "word": "clothes",
+   "meaning": "옷",
+   "section": "옷",
+   "bucket": "핵심"
+  },
+  {
+   "word": "shirt",
+   "meaning": "셔츠",
+   "section": "옷",
+   "bucket": "핵심"
+  },
+  {
+   "word": "shoe",
+   "meaning": "신발",
+   "section": "옷",
+   "bucket": "핵심"
+  },
+  {
+   "word": "hat",
+   "meaning": "모자",
+   "section": "옷",
+   "bucket": "핵심"
+  },
+  {
+   "word": "cap",
+   "meaning": "모자",
+   "section": "옷",
+   "bucket": "핵심"
+  },
+  {
+   "word": "coat",
+   "meaning": "코트",
+   "section": "옷",
+   "bucket": "핵심"
+  },
+  {
+   "word": "dress",
+   "meaning": "드레스; 옷을 입다",
+   "section": "옷",
+   "bucket": "핵심"
+  },
+  {
+   "word": "pants",
+   "meaning": "바지",
+   "section": "옷",
+   "bucket": "핵심"
+  },
+  {
+   "word": "sock",
+   "meaning": "양말",
+   "section": "옷",
+   "bucket": "핵심"
+  },
+  {
+   "word": "skirt",
+   "meaning": "치마",
+   "section": "옷",
+   "bucket": "핵심"
+  },
+  {
+   "word": "jacket",
+   "meaning": "재킷, 상의",
+   "section": "옷",
+   "bucket": "핵심"
+  },
+  {
+   "word": "wear",
+   "meaning": "옷을 입다",
+   "section": "옷",
+   "bucket": "핵심"
+  },
+  {
+   "word": "belt",
+   "meaning": "허리띠, 벨트",
+   "section": "옷",
+   "bucket": "확장"
+  },
+  {
+   "word": "helmet",
+   "meaning": "헬멧",
+   "section": "옷",
+   "bucket": "확장"
+  },
+  {
+   "word": "sky",
+   "meaning": "하늘",
+   "section": "자연·날씨",
+   "bucket": "핵심"
+  },
+  {
+   "word": "sun",
+   "meaning": "태양",
+   "section": "자연·날씨",
+   "bucket": "핵심"
+  },
+  {
+   "word": "moon",
+   "meaning": "달",
+   "section": "자연·날씨",
+   "bucket": "핵심"
+  },
+  {
+   "word": "star",
+   "meaning": "별",
+   "section": "자연·날씨",
+   "bucket": "핵심"
+  },
+  {
+   "word": "cloud",
+   "meaning": "구름",
+   "section": "자연·날씨",
+   "bucket": "핵심"
+  },
+  {
+   "word": "rain",
+   "meaning": "비; 비가 오다",
+   "section": "자연·날씨",
+   "bucket": "핵심"
+  },
+  {
+   "word": "snow",
+   "meaning": "눈; 눈이 내리다",
+   "section": "자연·날씨",
+   "bucket": "핵심"
+  },
+  {
+   "word": "wind",
+   "meaning": "바람",
+   "section": "자연·날씨",
+   "bucket": "핵심"
+  },
+  {
+   "word": "weather",
+   "meaning": "날씨",
+   "section": "자연·날씨",
+   "bucket": "핵심"
+  },
+  {
+   "word": "tree",
+   "meaning": "나무",
+   "section": "자연·날씨",
+   "bucket": "핵심"
+  },
+  {
+   "word": "flower",
+   "meaning": "꽃",
+   "section": "자연·날씨",
+   "bucket": "핵심"
+  },
+  {
+   "word": "grass",
+   "meaning": "풀, 잔디",
+   "section": "자연·날씨",
+   "bucket": "핵심"
+  },
+  {
+   "word": "forest",
+   "meaning": "숲",
+   "section": "자연·날씨",
+   "bucket": "핵심"
+  },
+  {
+   "word": "mountain",
+   "meaning": "산",
+   "section": "자연·날씨",
+   "bucket": "핵심"
+  },
+  {
+   "word": "hill",
+   "meaning": "언덕",
+   "section": "자연·날씨",
+   "bucket": "핵심"
+  },
+  {
+   "word": "sea",
+   "meaning": "바다",
+   "section": "자연·날씨",
+   "bucket": "핵심"
+  },
+  {
+   "word": "river",
+   "meaning": "강",
+   "section": "자연·날씨",
+   "bucket": "핵심"
+  },
+  {
+   "word": "lake",
+   "meaning": "호수",
+   "section": "자연·날씨",
+   "bucket": "핵심"
+  },
+  {
+   "word": "rock",
+   "meaning": "바위",
+   "section": "자연·날씨",
+   "bucket": "핵심"
+  },
+  {
+   "word": "sand",
+   "meaning": "모래",
+   "section": "자연·날씨",
+   "bucket": "핵심"
+  },
+  {
+   "word": "beach",
+   "meaning": "해변",
+   "section": "자연·날씨",
+   "bucket": "핵심"
+  },
+  {
+   "word": "garden",
+   "meaning": "정원",
+   "section": "자연·날씨",
+   "bucket": "핵심"
+  },
+  {
+   "word": "park",
+   "meaning": "공원",
+   "section": "자연·날씨",
+   "bucket": "핵심"
+  },
+  {
+   "word": "air",
+   "meaning": "공기",
+   "section": "자연·날씨",
+   "bucket": "핵심"
+  },
+  {
+   "word": "world",
+   "meaning": "세상",
+   "section": "자연·날씨",
+   "bucket": "핵심"
+  },
+  {
+   "word": "spring",
+   "meaning": "봄",
+   "section": "자연·날씨",
+   "bucket": "핵심"
+  },
+  {
+   "word": "summer",
+   "meaning": "여름",
+   "section": "자연·날씨",
+   "bucket": "핵심"
+  },
+  {
+   "word": "winter",
+   "meaning": "겨울",
+   "section": "자연·날씨",
+   "bucket": "핵심"
+  },
+  {
+   "word": "season",
+   "meaning": "계절",
+   "section": "자연·날씨",
+   "bucket": "핵심"
+  },
+  {
+   "word": "earth",
+   "meaning": "지구, 땅",
+   "section": "자연·날씨",
+   "bucket": "확장"
+  },
+  {
+   "word": "fire",
+   "meaning": "불",
+   "section": "자연·날씨",
+   "bucket": "확장"
+  },
+  {
+   "word": "ground",
+   "meaning": "땅, 기초",
+   "section": "자연·날씨",
+   "bucket": "확장"
+  },
+  {
+   "word": "stone",
+   "meaning": "돌",
+   "section": "자연·날씨",
+   "bucket": "확장"
+  },
+  {
+   "word": "field",
+   "meaning": "들판, 경기장",
+   "section": "자연·날씨",
+   "bucket": "확장"
+  },
+  {
+   "word": "wood",
+   "meaning": "나무",
+   "section": "자연·날씨",
+   "bucket": "확장"
+  },
+  {
+   "word": "autumn",
+   "meaning": "가을",
+   "section": "자연·날씨",
+   "bucket": "확장"
+  },
+  {
+   "word": "land",
+   "meaning": "땅",
+   "section": "자연·날씨",
+   "bucket": "확장"
+  },
+  {
+   "word": "rose",
+   "meaning": "장미",
+   "section": "자연·날씨",
+   "bucket": "확장"
+  },
+  {
+   "word": "heat",
+   "meaning": "열기, 열",
+   "section": "자연·날씨",
+   "bucket": "확장"
+  },
+  {
+   "word": "day",
+   "meaning": "낮, 하루",
+   "section": "시간·날짜",
+   "bucket": "핵심"
+  },
+  {
+   "word": "night",
+   "meaning": "밤",
+   "section": "시간·날짜",
+   "bucket": "핵심"
+  },
+  {
+   "word": "morning",
+   "meaning": "아침",
+   "section": "시간·날짜",
+   "bucket": "핵심"
+  },
+  {
+   "word": "afternoon",
+   "meaning": "오후",
+   "section": "시간·날짜",
+   "bucket": "핵심"
+  },
+  {
+   "word": "evening",
+   "meaning": "저녁",
+   "section": "시간·날짜",
+   "bucket": "핵심"
+  },
+  {
+   "word": "today",
+   "meaning": "오늘, 현재",
+   "section": "시간·날짜",
+   "bucket": "핵심"
+  },
+  {
+   "word": "tomorrow",
+   "meaning": "내일",
+   "section": "시간·날짜",
+   "bucket": "핵심"
+  },
+  {
+   "word": "yesterday",
+   "meaning": "어제",
+   "section": "시간·날짜",
+   "bucket": "핵심"
+  },
+  {
+   "word": "week",
+   "meaning": "주(월요일-일요일)",
+   "section": "시간·날짜",
+   "bucket": "핵심"
+  },
+  {
+   "word": "weekend",
+   "meaning": "주말",
+   "section": "시간·날짜",
+   "bucket": "핵심"
+  },
+  {
+   "word": "month",
+   "meaning": "달, 개월",
+   "section": "시간·날짜",
+   "bucket": "핵심"
+  },
+  {
+   "word": "year",
+   "meaning": "해, 년",
+   "section": "시간·날짜",
+   "bucket": "핵심"
+  },
+  {
+   "word": "hour",
+   "meaning": "시간",
+   "section": "시간·날짜",
+   "bucket": "핵심"
+  },
+  {
+   "word": "time",
+   "meaning": "시간",
+   "section": "시간·날짜",
+   "bucket": "핵심"
+  },
+  {
+   "word": "date",
+   "meaning": "날짜",
+   "section": "시간·날짜",
+   "bucket": "확장"
+  },
+  {
+   "word": "tonight",
+   "meaning": "오늘 밤",
+   "section": "시간·날짜",
+   "bucket": "확장"
+  },
+  {
+   "word": "holiday",
+   "meaning": "휴일",
+   "section": "시간·날짜",
+   "bucket": "확장"
+  },
+  {
+   "word": "festival",
+   "meaning": "축제",
+   "section": "시간·날짜",
+   "bucket": "확장"
+  },
+  {
+   "word": "wedding",
+   "meaning": "결혼식",
+   "section": "시간·날짜",
+   "bucket": "확장"
+  },
+  {
+   "word": "birth",
+   "meaning": "탄생",
+   "section": "시간·날짜",
+   "bucket": "확장"
+  },
+  {
+   "word": "house",
+   "meaning": "집",
+   "section": "장소·교통",
+   "bucket": "핵심"
+  },
+  {
+   "word": "home",
+   "meaning": "집, 가정",
+   "section": "장소·교통",
+   "bucket": "핵심"
+  },
+  {
+   "word": "car",
+   "meaning": "자동차",
+   "section": "장소·교통",
+   "bucket": "핵심"
+  },
+  {
+   "word": "bus",
+   "meaning": "버스",
+   "section": "장소·교통",
+   "bucket": "핵심"
+  },
+  {
+   "word": "bike",
+   "meaning": "자전거",
+   "section": "장소·교통",
+   "bucket": "핵심"
+  },
+  {
+   "word": "train",
+   "meaning": "기차",
+   "section": "장소·교통",
+   "bucket": "핵심"
+  },
+  {
+   "word": "taxi",
+   "meaning": "택시",
+   "section": "장소·교통",
+   "bucket": "핵심"
+  },
+  {
+   "word": "airplane",
+   "meaning": "비행기",
+   "section": "장소·교통",
+   "bucket": "핵심"
+  },
+  {
+   "word": "ship",
+   "meaning": "배",
+   "section": "장소·교통",
+   "bucket": "핵심"
+  },
+  {
+   "word": "boat",
+   "meaning": "배",
+   "section": "장소·교통",
+   "bucket": "핵심"
+  },
+  {
+   "word": "road",
+   "meaning": "길",
+   "section": "장소·교통",
+   "bucket": "핵심"
+  },
+  {
+   "word": "street",
+   "meaning": "거리",
+   "section": "장소·교통",
+   "bucket": "핵심"
+  },
+  {
+   "word": "bridge",
+   "meaning": "다리",
+   "section": "장소·교통",
+   "bucket": "핵심"
+  },
+  {
+   "word": "hospital",
+   "meaning": "병원",
+   "section": "장소·교통",
+   "bucket": "핵심"
+  },
+  {
+   "word": "bank",
+   "meaning": "은행",
+   "section": "장소·교통",
+   "bucket": "핵심"
+  },
+  {
+   "word": "store",
+   "meaning": "가게, 상점",
+   "section": "장소·교통",
+   "bucket": "핵심"
+  },
+  {
+   "word": "shop",
+   "meaning": "가게",
+   "section": "장소·교통",
+   "bucket": "핵심"
+  },
+  {
+   "word": "market",
+   "meaning": "상점, 시장",
+   "section": "장소·교통",
+   "bucket": "핵심"
+  },
+  {
+   "word": "restaurant",
+   "meaning": "식당",
+   "section": "장소·교통",
+   "bucket": "핵심"
+  },
+  {
+   "word": "office",
+   "meaning": "사무실",
+   "section": "장소·교통",
+   "bucket": "핵심"
+  },
+  {
+   "word": "city",
+   "meaning": "도시",
+   "section": "장소·교통",
+   "bucket": "핵심"
+  },
+  {
+   "word": "town",
+   "meaning": "도시",
+   "section": "장소·교통",
+   "bucket": "핵심"
+  },
+  {
+   "word": "country",
+   "meaning": "나라, 국가, 시골",
+   "section": "장소·교통",
+   "bucket": "핵심"
+  },
+  {
+   "word": "farm",
+   "meaning": "농장",
+   "section": "장소·교통",
+   "bucket": "핵심"
+  },
+  {
+   "word": "place",
+   "meaning": "장소",
+   "section": "장소·교통",
+   "bucket": "핵심"
+  },
+  {
+   "word": "truck",
+   "meaning": "화물차",
+   "section": "장소·교통",
+   "bucket": "확장"
+  },
+  {
+   "word": "subway",
+   "meaning": "지하철",
+   "section": "장소·교통",
+   "bucket": "확장"
+  },
+  {
+   "word": "way",
+   "meaning": "길",
+   "section": "장소·교통",
+   "bucket": "확장"
+  },
+  {
+   "word": "track",
+   "meaning": "길, 선로",
+   "section": "장소·교통",
+   "bucket": "확장"
+  },
+  {
+   "word": "apartment",
+   "meaning": "아파트",
+   "section": "장소·교통",
+   "bucket": "확장"
+  },
+  {
+   "word": "church",
+   "meaning": "교회",
+   "section": "장소·교통",
+   "bucket": "확장"
+  },
+  {
+   "word": "restroom",
+   "meaning": "화장실",
+   "section": "장소·교통",
+   "bucket": "확장"
+  },
+  {
+   "word": "corner",
+   "meaning": "모퉁이",
+   "section": "장소·교통",
+   "bucket": "확장"
+  },
+  {
+   "word": "center",
+   "meaning": "중앙",
+   "section": "장소·교통",
+   "bucket": "확장"
+  },
+  {
+   "word": "side",
+   "meaning": "옆, 측면",
+   "section": "장소·교통",
+   "bucket": "확장"
+  },
+  {
+   "word": "top",
+   "meaning": "꼭대기",
+   "section": "장소·교통",
+   "bucket": "확장"
+  },
+  {
+   "word": "bottom",
+   "meaning": "맨 아래",
+   "section": "장소·교통",
+   "bucket": "확장"
+  },
+  {
+   "word": "left",
+   "meaning": "왼쪽",
+   "section": "장소·교통",
+   "bucket": "확장"
+  },
+  {
+   "word": "east",
+   "meaning": "동쪽",
+   "section": "장소·교통",
+   "bucket": "확장"
+  },
+  {
+   "word": "west",
+   "meaning": "서쪽",
+   "section": "장소·교통",
+   "bucket": "확장"
+  },
+  {
+   "word": "north",
+   "meaning": "북쪽",
+   "section": "장소·교통",
+   "bucket": "확장"
+  },
+  {
+   "word": "south",
+   "meaning": "남쪽",
+   "section": "장소·교통",
+   "bucket": "확장"
+  },
+  {
+   "word": "middle",
+   "meaning": "한가운데",
+   "section": "장소·교통",
+   "bucket": "확장"
+  },
+  {
+   "word": "front",
+   "meaning": "앞, 정면",
+   "section": "장소·교통",
+   "bucket": "확장"
+  },
+  {
+   "word": "ball",
+   "meaning": "공",
+   "section": "스포츠·취미·놀이",
+   "bucket": "핵심"
+  },
+  {
+   "word": "baseball",
+   "meaning": "야구",
+   "section": "스포츠·취미·놀이",
+   "bucket": "핵심"
+  },
+  {
+   "word": "basketball",
+   "meaning": "농구",
+   "section": "스포츠·취미·놀이",
+   "bucket": "핵심"
+  },
+  {
+   "word": "soccer",
+   "meaning": "축구",
+   "section": "스포츠·취미·놀이",
+   "bucket": "핵심"
+  },
+  {
+   "word": "football",
+   "meaning": "축구",
+   "section": "스포츠·취미·놀이",
+   "bucket": "핵심"
+  },
+  {
+   "word": "tennis",
+   "meaning": "테니스",
+   "section": "스포츠·취미·놀이",
+   "bucket": "핵심"
+  },
+  {
+   "word": "badminton",
+   "meaning": "배드민턴",
+   "section": "스포츠·취미·놀이",
+   "bucket": "핵심"
+  },
+  {
+   "word": "swim",
+   "meaning": "수영하다",
+   "section": "스포츠·취미·놀이",
+   "bucket": "핵심"
+  },
+  {
+   "word": "run",
+   "meaning": "달리다",
+   "section": "스포츠·취미·놀이",
+   "bucket": "핵심"
+  },
+  {
+   "word": "jump",
+   "meaning": "뛰어오르다",
+   "section": "스포츠·취미·놀이",
+   "bucket": "핵심"
+  },
+  {
+   "word": "game",
+   "meaning": "놀이",
+   "section": "스포츠·취미·놀이",
+   "bucket": "핵심"
+  },
+  {
+   "word": "play",
+   "meaning": "놀다",
+   "section": "스포츠·취미·놀이",
+   "bucket": "핵심"
+  },
+  {
+   "word": "sport",
+   "meaning": "운동경기",
+   "section": "스포츠·취미·놀이",
+   "bucket": "핵심"
+  },
+  {
+   "word": "dance",
+   "meaning": "춤추다",
+   "section": "스포츠·취미·놀이",
+   "bucket": "핵심"
+  },
+  {
+   "word": "sing",
+   "meaning": "노래하다",
+   "section": "스포츠·취미·놀이",
+   "bucket": "핵심"
+  },
+  {
+   "word": "song",
+   "meaning": "노래",
+   "section": "스포츠·취미·놀이",
+   "bucket": "핵심"
+  },
+  {
+   "word": "movie",
+   "meaning": "영화",
+   "section": "스포츠·취미·놀이",
+   "bucket": "핵심"
+  },
+  {
+   "word": "travel",
+   "meaning": "여행하다",
+   "section": "스포츠·취미·놀이",
+   "bucket": "핵심"
+  },
+  {
+   "word": "trip",
+   "meaning": "여행",
+   "section": "스포츠·취미·놀이",
+   "bucket": "핵심"
+  },
+  {
+   "word": "fun",
+   "meaning": "즐거움, 재미",
+   "section": "스포츠·취미·놀이",
+   "bucket": "핵심"
+  },
+  {
+   "word": "ski",
+   "meaning": "스키를 타다",
+   "section": "스포츠·취미·놀이",
+   "bucket": "확장"
+  },
+  {
+   "word": "skate",
+   "meaning": "스케이트를 타다",
+   "section": "스포츠·취미·놀이",
+   "bucket": "확장"
+  },
+  {
+   "word": "hobby",
+   "meaning": "취미",
+   "section": "스포츠·취미·놀이",
+   "bucket": "확장"
+  },
+  {
+   "word": "hike",
+   "meaning": "하이킹; 하이킹을 가다",
+   "section": "스포츠·취미·놀이",
+   "bucket": "확장"
+  },
+  {
+   "word": "camp",
+   "meaning": "야영",
+   "section": "스포츠·취미·놀이",
+   "bucket": "확장"
+  },
+  {
+   "word": "marathon",
+   "meaning": "마라톤",
+   "section": "스포츠·취미·놀이",
+   "bucket": "확장"
+  },
+  {
+   "word": "race",
+   "meaning": "경주; 달리다",
+   "section": "스포츠·취미·놀이",
+   "bucket": "확장"
+  },
+  {
+   "word": "piano",
+   "meaning": "피아노",
+   "section": "스포츠·취미·놀이",
+   "bucket": "확장"
+  },
+  {
+   "word": "guitar",
+   "meaning": "기타(악기)",
+   "section": "스포츠·취미·놀이",
+   "bucket": "확장"
+  },
+  {
+   "word": "violin",
+   "meaning": "바이올린",
+   "section": "스포츠·취미·놀이",
+   "bucket": "확장"
+  },
+  {
+   "word": "drum",
+   "meaning": "북",
+   "section": "스포츠·취미·놀이",
+   "bucket": "확장"
+  },
+  {
+   "word": "video",
+   "meaning": "비디오",
+   "section": "스포츠·취미·놀이",
+   "bucket": "확장"
+  },
+  {
+   "word": "court",
+   "meaning": "코트, 경기장",
+   "section": "스포츠·취미·놀이",
+   "bucket": "확장"
+  },
+  {
+   "word": "medal",
+   "meaning": "메달",
+   "section": "스포츠·취미·놀이",
+   "bucket": "확장"
+  },
+  {
+   "word": "tent",
+   "meaning": "텐트",
+   "section": "스포츠·취미·놀이",
+   "bucket": "확장"
+  },
+  {
+   "word": "score",
+   "meaning": "점수",
+   "section": "스포츠·취미·놀이",
+   "bucket": "확장"
+  },
+  {
+   "word": "club",
+   "meaning": "클럽, 모임",
+   "section": "스포츠·취미·놀이",
+   "bucket": "확장"
+  },
+  {
+   "word": "party",
+   "meaning": "파티",
+   "section": "스포츠·취미·놀이",
+   "bucket": "확장"
+  },
+  {
+   "word": "team",
+   "meaning": "팀",
+   "section": "스포츠·취미·놀이",
+   "bucket": "확장"
+  },
+  {
+   "word": "bat",
+   "meaning": "(야구) 방망이",
+   "section": "스포츠·취미·놀이",
+   "bucket": "확장"
+  },
+  {
+   "word": "go",
+   "meaning": "가다",
+   "section": "동작(동사)",
+   "bucket": "핵심"
+  },
+  {
+   "word": "come",
+   "meaning": "오다",
+   "section": "동작(동사)",
+   "bucket": "핵심"
+  },
+  {
+   "word": "get",
+   "meaning": "얻다",
+   "section": "동작(동사)",
+   "bucket": "핵심"
+  },
+  {
+   "word": "give",
+   "meaning": "주다",
+   "section": "동작(동사)",
+   "bucket": "핵심"
+  },
+  {
+   "word": "take",
+   "meaning": "잡다, 가져가다",
+   "section": "동작(동사)",
+   "bucket": "핵심"
+  },
+  {
+   "word": "make",
+   "meaning": "만들다",
+   "section": "동작(동사)",
+   "bucket": "핵심"
+  },
+  {
+   "word": "put",
+   "meaning": "놓다",
+   "section": "동작(동사)",
+   "bucket": "핵심"
+  },
+  {
+   "word": "find",
+   "meaning": "찾다",
+   "section": "동작(동사)",
+   "bucket": "핵심"
+  },
+  {
+   "word": "look",
+   "meaning": "바라보다",
+   "section": "동작(동사)",
+   "bucket": "핵심"
+  },
+  {
+   "word": "see",
+   "meaning": "보다",
+   "section": "동작(동사)",
+   "bucket": "핵심"
+  },
+  {
+   "word": "watch",
+   "meaning": "보다",
+   "section": "동작(동사)",
+   "bucket": "핵심"
+  },
+  {
+   "word": "listen",
+   "meaning": "듣다",
+   "section": "동작(동사)",
+   "bucket": "핵심"
+  },
+  {
+   "word": "say",
+   "meaning": "말하다",
+   "section": "동작(동사)",
+   "bucket": "핵심"
+  },
+  {
+   "word": "tell",
+   "meaning": "이야기하다",
+   "section": "동작(동사)",
+   "bucket": "핵심"
+  },
+  {
+   "word": "talk",
+   "meaning": "말하다",
+   "section": "동작(동사)",
+   "bucket": "핵심"
+  },
+  {
+   "word": "speak",
+   "meaning": "말하다",
+   "section": "동작(동사)",
+   "bucket": "핵심"
+  },
+  {
+   "word": "ask",
+   "meaning": "묻다",
+   "section": "동작(동사)",
+   "bucket": "핵심"
+  },
+  {
+   "word": "call",
+   "meaning": "부르다, 전화하다",
+   "section": "동작(동사)",
+   "bucket": "핵심"
+  },
+  {
+   "word": "help",
+   "meaning": "돕다",
+   "section": "동작(동사)",
+   "bucket": "핵심"
+  },
+  {
+   "word": "love",
+   "meaning": "사랑하다",
+   "section": "동작(동사)",
+   "bucket": "핵심"
+  },
+  {
+   "word": "like",
+   "meaning": "좋아하다",
+   "section": "동작(동사)",
+   "bucket": "핵심"
+  },
+  {
+   "word": "want",
+   "meaning": "원하다",
+   "section": "동작(동사)",
+   "bucket": "핵심"
+  },
+  {
+   "word": "need",
+   "meaning": "필요하다",
+   "section": "동작(동사)",
+   "bucket": "핵심"
+  },
+  {
+   "word": "know",
+   "meaning": "알다",
+   "section": "동작(동사)",
+   "bucket": "핵심"
+  },
+  {
+   "word": "think",
+   "meaning": "생각하다",
+   "section": "동작(동사)",
+   "bucket": "핵심"
+  },
+  {
+   "word": "feel",
+   "meaning": "느끼다",
+   "section": "동작(동사)",
+   "bucket": "핵심"
+  },
+  {
+   "word": "hope",
+   "meaning": "희망, 기대",
+   "section": "동작(동사)",
+   "bucket": "핵심"
+  },
+  {
+   "word": "remember",
+   "meaning": "기억하다",
+   "section": "동작(동사)",
+   "bucket": "핵심"
+  },
+  {
+   "word": "forget",
+   "meaning": "잊다",
+   "section": "동작(동사)",
+   "bucket": "핵심"
+  },
+  {
+   "word": "work",
+   "meaning": "일",
+   "section": "동작(동사)",
+   "bucket": "핵심"
+  },
+  {
+   "word": "try",
+   "meaning": "노력; 시도하다",
+   "section": "동작(동사)",
+   "bucket": "핵심"
+  },
+  {
+   "word": "use",
+   "meaning": "사용하다",
+   "section": "동작(동사)",
+   "bucket": "핵심"
+  },
+  {
+   "word": "keep",
+   "meaning": "지키다, 유지하다",
+   "section": "동작(동사)",
+   "bucket": "핵심"
+  },
+  {
+   "word": "hold",
+   "meaning": "잡다",
+   "section": "동작(동사)",
+   "bucket": "핵심"
+  },
+  {
+   "word": "carry",
+   "meaning": "나르다",
+   "section": "동작(동사)",
+   "bucket": "핵심"
+  },
+  {
+   "word": "bring",
+   "meaning": "가져오다",
+   "section": "동작(동사)",
+   "bucket": "핵심"
+  },
+  {
+   "word": "send",
+   "meaning": "보내다",
+   "section": "동작(동사)",
+   "bucket": "핵심"
+  },
+  {
+   "word": "buy",
+   "meaning": "사다",
+   "section": "동작(동사)",
+   "bucket": "핵심"
+  },
+  {
+   "word": "sell",
+   "meaning": "팔다",
+   "section": "동작(동사)",
+   "bucket": "핵심"
+  },
+  {
+   "word": "pay",
+   "meaning": "지불하다",
+   "section": "동작(동사)",
+   "bucket": "핵심"
+  },
+  {
+   "word": "open",
+   "meaning": "열린",
+   "section": "동작(동사)",
+   "bucket": "핵심"
+  },
+  {
+   "word": "close",
+   "meaning": "닫다",
+   "section": "동작(동사)",
+   "bucket": "핵심"
+  },
+  {
+   "word": "start",
+   "meaning": "출발하다",
+   "section": "동작(동사)",
+   "bucket": "핵심"
+  },
+  {
+   "word": "stop",
+   "meaning": "멈추다",
+   "section": "동작(동사)",
+   "bucket": "핵심"
+  },
+  {
+   "word": "begin",
+   "meaning": "시작하다",
+   "section": "동작(동사)",
+   "bucket": "핵심"
+  },
+  {
+   "word": "finish",
+   "meaning": "끝내다",
+   "section": "동작(동사)",
+   "bucket": "핵심"
+  },
+  {
+   "word": "end",
+   "meaning": "끝, 마지막",
+   "section": "동작(동사)",
+   "bucket": "핵심"
+  },
+  {
+   "word": "win",
+   "meaning": "이기다",
+   "section": "동작(동사)",
+   "bucket": "핵심"
+  },
+  {
+   "word": "catch",
+   "meaning": "붙잡다",
+   "section": "동작(동사)",
+   "bucket": "핵심"
+  },
+  {
+   "word": "kick",
+   "meaning": "차다",
+   "section": "동작(동사)",
+   "bucket": "핵심"
+  },
+  {
+   "word": "hit",
+   "meaning": "때리다",
+   "section": "동작(동사)",
+   "bucket": "핵심"
+  },
+  {
+   "word": "push",
+   "meaning": "밀다",
+   "section": "동작(동사)",
+   "bucket": "핵심"
+  },
+  {
+   "word": "touch",
+   "meaning": "만지다",
+   "section": "동작(동사)",
+   "bucket": "핵심"
+  },
+  {
+   "word": "turn",
+   "meaning": "돌다",
+   "section": "동작(동사)",
+   "bucket": "핵심"
+  },
+  {
+   "word": "move",
+   "meaning": "움직이다",
+   "section": "동작(동사)",
+   "bucket": "핵심"
+  },
+  {
+   "word": "walk",
+   "meaning": "걷다",
+   "section": "동작(동사)",
+   "bucket": "핵심"
+  },
+  {
+   "word": "wait",
+   "meaning": "기다리다",
+   "section": "동작(동사)",
+   "bucket": "핵심"
+  },
+  {
+   "word": "meet",
+   "meaning": "만나다",
+   "section": "동작(동사)",
+   "bucket": "핵심"
+  },
+  {
+   "word": "join",
+   "meaning": "가입하다",
+   "section": "동작(동사)",
+   "bucket": "핵심"
+  },
+  {
+   "word": "live",
+   "meaning": "살다",
+   "section": "동작(동사)",
+   "bucket": "핵심"
+  },
+  {
+   "word": "sleep",
+   "meaning": "잠자다",
+   "section": "동작(동사)",
+   "bucket": "핵심"
+  },
+  {
+   "word": "wash",
+   "meaning": "씻다",
+   "section": "동작(동사)",
+   "bucket": "핵심"
+  },
+  {
+   "word": "clean",
+   "meaning": "깨끗한",
+   "section": "동작(동사)",
+   "bucket": "핵심"
+  },
+  {
+   "word": "cut",
+   "meaning": "자르다",
+   "section": "동작(동사)",
+   "bucket": "핵심"
+  },
+  {
+   "word": "break",
+   "meaning": "깨뜨리다; 부수다",
+   "section": "동작(동사)",
+   "bucket": "핵심"
+  },
+  {
+   "word": "fix",
+   "meaning": "고치다, 고정시키다",
+   "section": "동작(동사)",
+   "bucket": "핵심"
+  },
+  {
+   "word": "build",
+   "meaning": "건설하다, 세우다",
+   "section": "동작(동사)",
+   "bucket": "핵심"
+  },
+  {
+   "word": "grow",
+   "meaning": "성장하다, 자라다",
+   "section": "동작(동사)",
+   "bucket": "핵심"
+  },
+  {
+   "word": "fly",
+   "meaning": "날다",
+   "section": "동작(동사)",
+   "bucket": "핵심"
+  },
+  {
+   "word": "drive",
+   "meaning": "운전하다",
+   "section": "동작(동사)",
+   "bucket": "핵심"
+  },
+  {
+   "word": "climb",
+   "meaning": "오르다",
+   "section": "동작(동사)",
+   "bucket": "핵심"
+  },
+  {
+   "word": "fall",
+   "meaning": "가을; 떨어지다",
+   "section": "동작(동사)",
+   "bucket": "핵심"
+  },
+  {
+   "word": "pick",
+   "meaning": "따다, 골라내다",
+   "section": "동작(동사)",
+   "bucket": "핵심"
+  },
+  {
+   "word": "choose",
+   "meaning": "선택하다",
+   "section": "동작(동사)",
+   "bucket": "핵심"
+  },
+  {
+   "word": "change",
+   "meaning": "바꾸다",
+   "section": "동작(동사)",
+   "bucket": "핵심"
+  },
+  {
+   "word": "visit",
+   "meaning": "방문하다",
+   "section": "동작(동사)",
+   "bucket": "핵심"
+  },
+  {
+   "word": "smile",
+   "meaning": "웃다; 미소",
+   "section": "동작(동사)",
+   "bucket": "핵심"
+  },
+  {
+   "word": "cry",
+   "meaning": "울다, 외치다",
+   "section": "동작(동사)",
+   "bucket": "핵심"
+  },
+  {
+   "word": "die",
+   "meaning": "죽다",
+   "section": "동작(동사)",
+   "bucket": "핵심"
+  },
+  {
+   "word": "wake",
+   "meaning": "잠이 깨다",
+   "section": "동작(동사)",
+   "bucket": "핵심"
+  },
+  {
+   "word": "sit",
+   "meaning": "앉다",
+   "section": "동작(동사)",
+   "bucket": "핵심"
+  },
+  {
+   "word": "stand",
+   "meaning": "서다",
+   "section": "동작(동사)",
+   "bucket": "핵심"
+  },
+  {
+   "word": "believe",
+   "meaning": "믿다",
+   "section": "동작(동사)",
+   "bucket": "확장"
+  },
+  {
+   "word": "save",
+   "meaning": "구하다, 절약하다",
+   "section": "동작(동사)",
+   "bucket": "확장"
+  },
+  {
+   "word": "pass",
+   "meaning": "통과하다",
+   "section": "동작(동사)",
+   "bucket": "확장"
+  },
+  {
+   "word": "cross",
+   "meaning": "가로지르다",
+   "section": "동작(동사)",
+   "bucket": "확장"
+  },
+  {
+   "word": "drop",
+   "meaning": "떨어지다; 방울",
+   "section": "동작(동사)",
+   "bucket": "확장"
+  },
+  {
+   "word": "decide",
+   "meaning": "결정하다",
+   "section": "동작(동사)",
+   "bucket": "확장"
+  },
+  {
+   "word": "borrow",
+   "meaning": "빌리다",
+   "section": "동작(동사)",
+   "bucket": "확장"
+  },
+  {
+   "word": "cover",
+   "meaning": "덮다",
+   "section": "동작(동사)",
+   "bucket": "확장"
+  },
+  {
+   "word": "fill",
+   "meaning": "채우다",
+   "section": "동작(동사)",
+   "bucket": "확장"
+  },
+  {
+   "word": "point",
+   "meaning": "점수, 요점",
+   "section": "동작(동사)",
+   "bucket": "확장"
+  },
+  {
+   "word": "return",
+   "meaning": "되돌아가다",
+   "section": "동작(동사)",
+   "bucket": "확장"
+  },
+  {
+   "word": "invite",
+   "meaning": "초대하다",
+   "section": "동작(동사)",
+   "bucket": "확장"
+  },
+  {
+   "word": "arrive",
+   "meaning": "도착하다",
+   "section": "동작(동사)",
+   "bucket": "확장"
+  },
+  {
+   "word": "act",
+   "meaning": "행동; 행동하다",
+   "section": "동작(동사)",
+   "bucket": "확장"
+  },
+  {
+   "word": "add",
+   "meaning": "더하다",
+   "section": "동작(동사)",
+   "bucket": "확장"
+  },
+  {
+   "word": "hang",
+   "meaning": "매달다, 걸다",
+   "section": "동작(동사)",
+   "bucket": "확장"
+  },
+  {
+   "word": "hurry",
+   "meaning": "서두르다",
+   "section": "동작(동사)",
+   "bucket": "확장"
+  },
+  {
+   "word": "kill",
+   "meaning": "죽이다",
+   "section": "동작(동사)",
+   "bucket": "확장"
+  },
+  {
+   "word": "hunt",
+   "meaning": "사냥; 사냥하다",
+   "section": "동작(동사)",
+   "bucket": "확장"
+  },
+  {
+   "word": "ring",
+   "meaning": "반지, 고리",
+   "section": "동작(동사)",
+   "bucket": "확장"
+  },
+  {
+   "word": "enter",
+   "meaning": "들어가다, 들어오다",
+   "section": "동작(동사)",
+   "bucket": "확장"
+  },
+  {
+   "word": "collect",
+   "meaning": "수집하다, 모으다",
+   "section": "동작(동사)",
+   "bucket": "확장"
+  },
+  {
+   "word": "hate",
+   "meaning": "미워하다",
+   "section": "동작(동사)",
+   "bucket": "확장"
+  },
+  {
+   "word": "kiss",
+   "meaning": "키스; 키스하다",
+   "section": "동작(동사)",
+   "bucket": "확장"
+  },
+  {
+   "word": "marry",
+   "meaning": "결혼하다",
+   "section": "동작(동사)",
+   "bucket": "확장"
+  },
+  {
+   "word": "miss",
+   "meaning": "놓치다, 지나치다",
+   "section": "동작(동사)",
+   "bucket": "확장"
+  },
+  {
+   "word": "set",
+   "meaning": "놓다",
+   "section": "동작(동사)",
+   "bucket": "확장"
+  },
+  {
+   "word": "show",
+   "meaning": "보여 주다",
+   "section": "동작(동사)",
+   "bucket": "확장"
+  },
+  {
+   "word": "stay",
+   "meaning": "머물다",
+   "section": "동작(동사)",
+   "bucket": "확장"
+  },
+  {
+   "word": "smell",
+   "meaning": "냄새나다",
+   "section": "동작(동사)",
+   "bucket": "확장"
+  },
+  {
+   "word": "thank",
+   "meaning": "감사하다",
+   "section": "동작(동사)",
+   "bucket": "확장"
+  },
+  {
+   "word": "tire",
+   "meaning": "피로해지다, 지치다",
+   "section": "동작(동사)",
+   "bucket": "확장"
+  },
+  {
+   "word": "wish",
+   "meaning": "원하다, 바라다",
+   "section": "동작(동사)",
+   "bucket": "확장"
+  },
+  {
+   "word": "fight",
+   "meaning": "싸움; 싸우다",
+   "section": "동작(동사)",
+   "bucket": "확장"
+  },
+  {
+   "word": "burn",
+   "meaning": "불타다, 태우다",
+   "section": "동작(동사)",
+   "bucket": "확장"
+  },
+  {
+   "word": "become",
+   "meaning": "~이 되다",
+   "section": "동작(동사)",
+   "bucket": "확장"
+  },
+  {
+   "word": "agree",
+   "meaning": "동의하다",
+   "section": "동작(동사)",
+   "bucket": "확장"
+  },
+  {
+   "word": "care",
+   "meaning": "주의; 돌보다",
+   "section": "동작(동사)",
+   "bucket": "확장"
+  },
+  {
+   "word": "lie",
+   "meaning": "눕다, 거짓말하다",
+   "section": "동작(동사)",
+   "bucket": "확장"
+  },
+  {
+   "word": "big",
+   "meaning": "큰",
+   "section": "성질·상태(형용사)",
+   "bucket": "핵심"
+  },
+  {
+   "word": "small",
+   "meaning": "작은",
+   "section": "성질·상태(형용사)",
+   "bucket": "핵심"
+  },
+  {
+   "word": "little",
+   "meaning": "작은",
+   "section": "성질·상태(형용사)",
+   "bucket": "핵심"
+  },
+  {
+   "word": "long",
+   "meaning": "긴",
+   "section": "성질·상태(형용사)",
+   "bucket": "핵심"
+  },
+  {
+   "word": "short",
+   "meaning": "짧은",
+   "section": "성질·상태(형용사)",
+   "bucket": "핵심"
+  },
+  {
+   "word": "tall",
+   "meaning": "(키가) 큰, 높은",
+   "section": "성질·상태(형용사)",
+   "bucket": "핵심"
+  },
+  {
+   "word": "high",
+   "meaning": "높은",
+   "section": "성질·상태(형용사)",
+   "bucket": "핵심"
+  },
+  {
+   "word": "low",
+   "meaning": "낮은",
+   "section": "성질·상태(형용사)",
+   "bucket": "핵심"
+  },
+  {
+   "word": "old",
+   "meaning": "늙은, 오래된",
+   "section": "성질·상태(형용사)",
+   "bucket": "핵심"
+  },
+  {
+   "word": "new",
+   "meaning": "새로운",
+   "section": "성질·상태(형용사)",
+   "bucket": "핵심"
+  },
+  {
+   "word": "young",
+   "meaning": "젊은, 어린",
+   "section": "성질·상태(형용사)",
+   "bucket": "핵심"
+  },
+  {
+   "word": "good",
+   "meaning": "좋은",
+   "section": "성질·상태(형용사)",
+   "bucket": "핵심"
+  },
+  {
+   "word": "bad",
+   "meaning": "나쁜",
+   "section": "성질·상태(형용사)",
+   "bucket": "핵심"
+  },
+  {
+   "word": "happy",
+   "meaning": "행복한",
+   "section": "성질·상태(형용사)",
+   "bucket": "핵심"
+  },
+  {
+   "word": "sad",
+   "meaning": "슬픈",
+   "section": "성질·상태(형용사)",
+   "bucket": "핵심"
+  },
+  {
+   "word": "hot",
+   "meaning": "뜨거운",
+   "section": "성질·상태(형용사)",
+   "bucket": "핵심"
+  },
+  {
+   "word": "cold",
+   "meaning": "추운",
+   "section": "성질·상태(형용사)",
+   "bucket": "핵심"
+  },
+  {
+   "word": "warm",
+   "meaning": "따뜻한",
+   "section": "성질·상태(형용사)",
+   "bucket": "핵심"
+  },
+  {
+   "word": "cool",
+   "meaning": "시원한",
+   "section": "성질·상태(형용사)",
+   "bucket": "핵심"
+  },
+  {
+   "word": "fast",
+   "meaning": "빠른",
+   "section": "성질·상태(형용사)",
+   "bucket": "핵심"
+  },
+  {
+   "word": "slow",
+   "meaning": "느린",
+   "section": "성질·상태(형용사)",
+   "bucket": "핵심"
+  },
+  {
+   "word": "large",
+   "meaning": "큰, 넓은",
+   "section": "성질·상태(형용사)",
+   "bucket": "핵심"
+  },
+  {
+   "word": "hard",
+   "meaning": "단단한; 열심히",
+   "section": "성질·상태(형용사)",
+   "bucket": "핵심"
+  },
+  {
+   "word": "heavy",
+   "meaning": "무거운",
+   "section": "성질·상태(형용사)",
+   "bucket": "핵심"
+  },
+  {
+   "word": "light",
+   "meaning": "빛",
+   "section": "성질·상태(형용사)",
+   "bucket": "핵심"
+  },
+  {
+   "word": "dark",
+   "meaning": "어두운",
+   "section": "성질·상태(형용사)",
+   "bucket": "핵심"
+  },
+  {
+   "word": "bright",
+   "meaning": "밝은",
+   "section": "성질·상태(형용사)",
+   "bucket": "핵심"
+  },
+  {
+   "word": "strong",
+   "meaning": "강한",
+   "section": "성질·상태(형용사)",
+   "bucket": "핵심"
+  },
+  {
+   "word": "kind",
+   "meaning": "친절한; 종류",
+   "section": "성질·상태(형용사)",
+   "bucket": "핵심"
+  },
+  {
+   "word": "busy",
+   "meaning": "바쁜",
+   "section": "성질·상태(형용사)",
+   "bucket": "핵심"
+  },
+  {
+   "word": "free",
+   "meaning": "자유로운, 무료의",
+   "section": "성질·상태(형용사)",
+   "bucket": "핵심"
+  },
+  {
+   "word": "full",
+   "meaning": "가득 찬",
+   "section": "성질·상태(형용사)",
+   "bucket": "핵심"
+  },
+  {
+   "word": "sick",
+   "meaning": "아픈",
+   "section": "성질·상태(형용사)",
+   "bucket": "핵심"
+  },
+  {
+   "word": "quiet",
+   "meaning": "조용한",
+   "section": "성질·상태(형용사)",
+   "bucket": "핵심"
+  },
+  {
+   "word": "quick",
+   "meaning": "빠른",
+   "section": "성질·상태(형용사)",
+   "bucket": "핵심"
+  },
+  {
+   "word": "ready",
+   "meaning": "준비가 된",
+   "section": "성질·상태(형용사)",
+   "bucket": "핵심"
+  },
+  {
+   "word": "nice",
+   "meaning": "좋은",
+   "section": "성질·상태(형용사)",
+   "bucket": "핵심"
+  },
+  {
+   "word": "pretty",
+   "meaning": "예쁜",
+   "section": "성질·상태(형용사)",
+   "bucket": "핵심"
+  },
+  {
+   "word": "true",
+   "meaning": "참된, 진짜의",
+   "section": "성질·상태(형용사)",
+   "bucket": "핵심"
+  },
+  {
+   "word": "right",
+   "meaning": "오른쪽, 옳은",
+   "section": "성질·상태(형용사)",
+   "bucket": "핵심"
+  },
+  {
+   "word": "great",
+   "meaning": "큰, 거대한",
+   "section": "성질·상태(형용사)",
+   "bucket": "핵심"
+  },
+  {
+   "word": "fine",
+   "meaning": "좋은, 맑은",
+   "section": "성질·상태(형용사)",
+   "bucket": "핵심"
+  },
+  {
+   "word": "deep",
+   "meaning": "깊은",
+   "section": "성질·상태(형용사)",
+   "bucket": "핵심"
+  },
+  {
+   "word": "wet",
+   "meaning": "젖은",
+   "section": "성질·상태(형용사)",
+   "bucket": "핵심"
+  },
+  {
+   "word": "dry",
+   "meaning": "마른",
+   "section": "성질·상태(형용사)",
+   "bucket": "핵심"
+  },
+  {
+   "word": "same",
+   "meaning": "같은",
+   "section": "성질·상태(형용사)",
+   "bucket": "핵심"
+  },
+  {
+   "word": "afraid",
+   "meaning": "두려워하여",
+   "section": "성질·상태(형용사)",
+   "bucket": "핵심"
+  },
+  {
+   "word": "sorry",
+   "meaning": "슬픈, 유감의",
+   "section": "성질·상태(형용사)",
+   "bucket": "핵심"
+  },
+  {
+   "word": "fresh",
+   "meaning": "신선한",
+   "section": "성질·상태(형용사)",
+   "bucket": "확장"
+  },
+  {
+   "word": "soft",
+   "meaning": "부드러운",
+   "section": "성질·상태(형용사)",
+   "bucket": "확장"
+  },
+  {
+   "word": "difficult",
+   "meaning": "어려운",
+   "section": "성질·상태(형용사)",
+   "bucket": "확장"
+  },
+  {
+   "word": "rich",
+   "meaning": "부유한",
+   "section": "성질·상태(형용사)",
+   "bucket": "확장"
+  },
+  {
+   "word": "poor",
+   "meaning": "가난한",
+   "section": "성질·상태(형용사)",
+   "bucket": "확장"
+  },
+  {
+   "word": "brave",
+   "meaning": "용감한",
+   "section": "성질·상태(형용사)",
+   "bucket": "확장"
+  },
+  {
+   "word": "clever",
+   "meaning": "영리한",
+   "section": "성질·상태(형용사)",
+   "bucket": "확장"
+  },
+  {
+   "word": "lazy",
+   "meaning": "게으른",
+   "section": "성질·상태(형용사)",
+   "bucket": "확장"
+  },
+  {
+   "word": "safe",
+   "meaning": "안전한",
+   "section": "성질·상태(형용사)",
+   "bucket": "확장"
+  },
+  {
+   "word": "sure",
+   "meaning": "확실한",
+   "section": "성질·상태(형용사)",
+   "bucket": "확장"
+  },
+  {
+   "word": "ugly",
+   "meaning": "못생긴",
+   "section": "성질·상태(형용사)",
+   "bucket": "확장"
+  },
+  {
+   "word": "cheap",
+   "meaning": "값싼",
+   "section": "성질·상태(형용사)",
+   "bucket": "확장"
+  },
+  {
+   "word": "honest",
+   "meaning": "정직한",
+   "section": "성질·상태(형용사)",
+   "bucket": "확장"
+  },
+  {
+   "word": "glad",
+   "meaning": "기쁜",
+   "section": "성질·상태(형용사)",
+   "bucket": "확장"
+  },
+  {
+   "word": "mad",
+   "meaning": "미친",
+   "section": "성질·상태(형용사)",
+   "bucket": "확장"
+  },
+  {
+   "word": "shy",
+   "meaning": "부끄러워하는",
+   "section": "성질·상태(형용사)",
+   "bucket": "확장"
+  },
+  {
+   "word": "dead",
+   "meaning": "죽은",
+   "section": "성질·상태(형용사)",
+   "bucket": "확장"
+  },
+  {
+   "word": "wrong",
+   "meaning": "잘못된",
+   "section": "성질·상태(형용사)",
+   "bucket": "확장"
+  },
+  {
+   "word": "favorite",
+   "meaning": "가장 좋아하는",
+   "section": "성질·상태(형용사)",
+   "bucket": "확장"
+  },
+  {
+   "word": "certain",
+   "meaning": "확실한, 틀림없는",
+   "section": "성질·상태(형용사)",
+   "bucket": "확장"
+  },
+  {
+   "word": "clear",
+   "meaning": "분명한",
+   "section": "성질·상태(형용사)",
+   "bucket": "확장"
+  },
+  {
+   "word": "fat",
+   "meaning": "살찐, 뚱뚱한",
+   "section": "성질·상태(형용사)",
+   "bucket": "확장"
+  },
+  {
+   "word": "late",
+   "meaning": "늦은",
+   "section": "성질·상태(형용사)",
+   "bucket": "확장"
+  },
+  {
+   "word": "last",
+   "meaning": "마지막의, 지난",
+   "section": "성질·상태(형용사)",
+   "bucket": "확장"
+  },
+  {
+   "word": "alone",
+   "meaning": "혼자",
+   "section": "성질·상태(형용사)",
+   "bucket": "확장"
+  },
+  {
+   "word": "double",
+   "meaning": "두 배의",
+   "section": "성질·상태(형용사)",
+   "bucket": "확장"
+  },
+  {
+   "word": "address",
+   "meaning": "주소",
+   "section": "심화",
+   "bucket": "심화"
+  },
+  {
+   "word": "adult",
+   "meaning": "어른",
+   "section": "심화",
+   "bucket": "심화"
+  },
+  {
+   "word": "area",
+   "meaning": "지역",
+   "section": "심화",
+   "bucket": "심화"
+  },
+  {
+   "word": "business",
+   "meaning": "사업, 업무",
+   "section": "심화",
+   "bucket": "심화"
+  },
+  {
+   "word": "campaign",
+   "meaning": "캠페인",
+   "section": "심화",
+   "bucket": "심화"
+  },
+  {
+   "word": "case",
+   "meaning": "경우",
+   "section": "심화",
+   "bucket": "심화"
+  },
+  {
+   "word": "condition",
+   "meaning": "상태",
+   "section": "심화",
+   "bucket": "심화"
+  },
+  {
+   "word": "congratulate",
+   "meaning": "축하하다",
+   "section": "심화",
+   "bucket": "심화"
+  },
+  {
+   "word": "control",
+   "meaning": "통제하다, 조절하다",
+   "section": "심화",
+   "bucket": "심화"
+  },
+  {
+   "word": "cost",
+   "meaning": "값",
+   "section": "심화",
+   "bucket": "심화"
+  },
+  {
+   "word": "couple",
+   "meaning": "두어 개, 한 쌍",
+   "section": "심화",
+   "bucket": "심화"
+  },
+  {
+   "word": "course",
+   "meaning": "과정",
+   "section": "심화",
+   "bucket": "심화"
+  },
+  {
+   "word": "culture",
+   "meaning": "문화",
+   "section": "심화",
+   "bucket": "심화"
+  },
+  {
+   "word": "danger",
+   "meaning": "위험",
+   "section": "심화",
+   "bucket": "심화"
+  },
+  {
+   "word": "death",
+   "meaning": "죽음",
+   "section": "심화",
+   "bucket": "심화"
+  },
+  {
+   "word": "design",
+   "meaning": "디자인하다; 디자인",
+   "section": "심화",
+   "bucket": "심화"
+  },
+  {
+   "word": "discuss",
+   "meaning": "토론하다",
+   "section": "심화",
+   "bucket": "심화"
+  },
+  {
+   "word": "energy",
+   "meaning": "에너지",
+   "section": "심화",
+   "bucket": "심화"
+  },
+  {
+   "word": "example",
+   "meaning": "예, 보기",
+   "section": "심화",
+   "bucket": "심화"
+  },
+  {
+   "word": "exercise",
+   "meaning": "연습, 운동",
+   "section": "심화",
+   "bucket": "심화"
+  },
+  {
+   "word": "fact",
+   "meaning": "사실",
+   "section": "심화",
+   "bucket": "심화"
+  },
+  {
+   "word": "fail",
+   "meaning": "실패하다",
+   "section": "심화",
+   "bucket": "심화"
+  },
+  {
+   "word": "focus",
+   "meaning": "집중하다",
+   "section": "심화",
+   "bucket": "심화"
+  },
+  {
+   "word": "form",
+   "meaning": "종류, 유형",
+   "section": "심화",
+   "bucket": "심화"
+  },
+  {
+   "word": "future",
+   "meaning": "미래",
+   "section": "심화",
+   "bucket": "심화"
+  },
+  {
+   "word": "goal",
+   "meaning": "골, 득점",
+   "section": "심화",
+   "bucket": "심화"
+  },
+  {
+   "word": "guess",
+   "meaning": "추측하다",
+   "section": "심화",
+   "bucket": "심화"
+  },
+  {
+   "word": "habit",
+   "meaning": "습관",
+   "section": "심화",
+   "bucket": "심화"
+  },
+  {
+   "word": "human",
+   "meaning": "인간",
+   "section": "심화",
+   "bucket": "심화"
+  },
+  {
+   "word": "idea",
+   "meaning": "생각",
+   "section": "심화",
+   "bucket": "심화"
+  },
+  {
+   "word": "image",
+   "meaning": "이미지",
+   "section": "심화",
+   "bucket": "심화"
+  },
+  {
+   "word": "introduce",
+   "meaning": "소개하다",
+   "section": "심화",
+   "bucket": "심화"
+  },
+  {
+   "word": "issue",
+   "meaning": "문제, 이슈",
+   "section": "심화",
+   "bucket": "심화"
+  },
+  {
+   "word": "laser",
+   "meaning": "레이저",
+   "section": "심화",
+   "bucket": "심화"
+  },
+  {
+   "word": "memory",
+   "meaning": "기억, 추억",
+   "section": "심화",
+   "bucket": "심화"
+  },
+  {
+   "word": "mind",
+   "meaning": "마음, 정신",
+   "section": "심화",
+   "bucket": "심화"
+  },
+  {
+   "word": "model",
+   "meaning": "모형, 모델",
+   "section": "심화",
+   "bucket": "심화"
+  },
+  {
+   "word": "nation",
+   "meaning": "국가",
+   "section": "심화",
+   "bucket": "심화"
+  },
+  {
+   "word": "nature",
+   "meaning": "자연",
+   "section": "심화",
+   "bucket": "심화"
+  },
+  {
+   "word": "note",
+   "meaning": "메모",
+   "section": "심화",
+   "bucket": "심화"
+  },
+  {
+   "word": "page",
+   "meaning": "페이지, 쪽",
+   "section": "심화",
+   "bucket": "심화"
+  },
+  {
+   "word": "part",
+   "meaning": "부분",
+   "section": "심화",
+   "bucket": "심화"
+  },
+  {
+   "word": "power",
+   "meaning": "힘, 권력",
+   "section": "심화",
+   "bucket": "심화"
+  },
+  {
+   "word": "present",
+   "meaning": "현재, 선물",
+   "section": "심화",
+   "bucket": "심화"
+  },
+  {
+   "word": "print",
+   "meaning": "인쇄하다",
+   "section": "심화",
+   "bucket": "심화"
+  },
+  {
+   "word": "problem",
+   "meaning": "문제",
+   "section": "심화",
+   "bucket": "심화"
+  },
+  {
+   "word": "program",
+   "meaning": "프로그램",
+   "section": "심화",
+   "bucket": "심화"
+  },
+  {
+   "word": "project",
+   "meaning": "프로젝트, 과제",
+   "section": "심화",
+   "bucket": "심화"
+  },
+  {
+   "word": "recreation",
+   "meaning": "오락, 레크리에이션",
+   "section": "심화",
+   "bucket": "심화"
+  },
+  {
+   "word": "sale",
+   "meaning": "판매, 할인 판매",
+   "section": "심화",
+   "bucket": "심화"
+  },
+  {
+   "word": "service",
+   "meaning": "봉사하다",
+   "section": "심화",
+   "bucket": "심화"
+  },
+  {
+   "word": "software",
+   "meaning": "소프트웨어",
+   "section": "심화",
+   "bucket": "심화"
+  },
+  {
+   "word": "style",
+   "meaning": "방식",
+   "section": "심화",
+   "bucket": "심화"
+  },
+  {
+   "word": "type",
+   "meaning": "종류",
+   "section": "심화",
+   "bucket": "심화"
+  },
+  {
+   "word": "understand",
+   "meaning": "이해하다",
+   "section": "심화",
+   "bucket": "심화"
+  },
+  {
+   "word": "weight",
+   "meaning": "무게",
+   "section": "심화",
+   "bucket": "심화"
+  },
+  {
+   "word": "welcome",
+   "meaning": "환영하다",
+   "section": "심화",
+   "bucket": "심화"
+  },
+  {
+   "word": "worry",
+   "meaning": "걱정하다; 걱정",
+   "section": "심화",
+   "bucket": "심화"
+  },
+  {
+   "word": "dream",
+   "meaning": "꿈",
+   "section": "심화",
+   "bucket": "심화"
+  },
+  {
+   "word": "life",
+   "meaning": "삶, 생명",
+   "section": "심화",
+   "bucket": "심화"
+  },
+  {
+   "word": "story",
+   "meaning": "이야기",
+   "section": "심화",
+   "bucket": "심화"
+  },
+  {
+   "word": "news",
+   "meaning": "뉴스",
+   "section": "심화",
+   "bucket": "심화"
+  },
+  {
+   "word": "luck",
+   "meaning": "행운",
+   "section": "심화",
+   "bucket": "심화"
+  },
+  {
+   "word": "gas",
+   "meaning": "가스, 휘발유",
+   "section": "심화",
+   "bucket": "심화"
+  },
+  {
+   "word": "oil",
+   "meaning": "기름",
+   "section": "심화",
+   "bucket": "심화"
+  },
+  {
+   "word": "plastic",
+   "meaning": "플라스틱",
+   "section": "심화",
+   "bucket": "심화"
+  },
+  {
+   "word": "compute",
+   "meaning": "계산하다",
+   "section": "심화",
+   "bucket": "심화"
+  },
+  {
+   "word": "internet",
+   "meaning": "인터넷",
+   "section": "심화",
+   "bucket": "심화"
+  },
+  {
+   "word": "website",
+   "meaning": "웹사이트",
+   "section": "심화",
+   "bucket": "심화"
+  },
+  {
+   "word": "space",
+   "meaning": "공간, 우주",
+   "section": "심화",
+   "bucket": "심화"
+  },
+  {
+   "word": "sound",
+   "meaning": "소리",
+   "section": "심화",
+   "bucket": "심화"
+  },
+  {
+   "word": "size",
+   "meaning": "크기",
+   "section": "심화",
+   "bucket": "심화"
+  },
+  {
+   "word": "line",
+   "meaning": "선, 줄",
+   "section": "심화",
+   "bucket": "심화"
+  },
+  {
+   "word": "group",
+   "meaning": "단체",
+   "section": "심화",
+   "bucket": "심화"
+  },
+  {
+   "word": "company",
+   "meaning": "회사",
+   "section": "심화",
+   "bucket": "심화"
+  },
+  {
+   "word": "god",
+   "meaning": "신",
+   "section": "심화",
+   "bucket": "심화"
+  },
+  {
+   "word": "fool",
+   "meaning": "바보",
+   "section": "심화",
+   "bucket": "심화"
+  },
+  {
+   "word": "beauty",
+   "meaning": "아름다움",
+   "section": "심화",
+   "bucket": "심화"
+  },
+  {
+   "word": "chance",
+   "meaning": "기회",
+   "section": "심화",
+   "bucket": "심화"
+  },
+  {
+   "word": "check",
+   "meaning": "수표",
+   "section": "심화",
+   "bucket": "심화"
+  },
+  {
+   "word": "cash",
+   "meaning": "돈, 현금",
+   "section": "심화",
+   "bucket": "심화"
+  },
+  {
+   "word": "circle",
+   "meaning": "원",
+   "section": "심화",
+   "bucket": "심화"
+  },
+  {
+   "word": "thing",
+   "meaning": "사물",
+   "section": "심화",
+   "bucket": "심화"
+  },
+  {
+   "word": "thirst",
+   "meaning": "갈증",
+   "section": "심화",
+   "bucket": "심화"
+  },
+  {
+   "word": "speed",
+   "meaning": "속력",
+   "section": "심화",
+   "bucket": "심화"
+  },
+  {
+   "word": "age",
+   "meaning": "나이",
+   "section": "심화",
+   "bucket": "심화"
+  },
+  {
+   "word": "base",
+   "meaning": "기초",
+   "section": "심화",
+   "bucket": "심화"
+  },
+  {
+   "word": "plan",
+   "meaning": "계획",
+   "section": "심화",
+   "bucket": "심화"
+  },
+  {
+   "word": "war",
+   "meaning": "전쟁",
+   "section": "심화",
+   "bucket": "심화"
+  }
+ ],
+ "functionWords": [
+  {
+   "word": "a",
+   "meaning": "하나의",
+   "section": "기능어",
+   "bucket": "기능어"
+  },
+  {
+   "word": "the",
+   "meaning": "그~, 저~(정관사)",
+   "section": "기능어",
+   "bucket": "기능어"
+  },
+  {
+   "word": "this",
+   "meaning": "이것",
+   "section": "기능어",
+   "bucket": "기능어"
+  },
+  {
+   "word": "that",
+   "meaning": "저것",
+   "section": "기능어",
+   "bucket": "기능어"
+  },
+  {
+   "word": "I",
+   "meaning": "내가, 나는",
+   "section": "기능어",
+   "bucket": "기능어"
+  },
+  {
+   "word": "you",
+   "meaning": "당신",
+   "section": "기능어",
+   "bucket": "기능어"
+  },
+  {
+   "word": "he",
+   "meaning": "그가, 그는",
+   "section": "기능어",
+   "bucket": "기능어"
+  },
+  {
+   "word": "she",
+   "meaning": "그녀가, 그녀는",
+   "section": "기능어",
+   "bucket": "기능어"
+  },
+  {
+   "word": "it",
+   "meaning": "그것",
+   "section": "기능어",
+   "bucket": "기능어"
+  },
+  {
+   "word": "we",
+   "meaning": "우리가, 우리는",
+   "section": "기능어",
+   "bucket": "기능어"
+  },
+  {
+   "word": "they",
+   "meaning": "그들은, 그것들은",
+   "section": "기능어",
+   "bucket": "기능어"
+  },
+  {
+   "word": "and",
+   "meaning": "그리고",
+   "section": "기능어",
+   "bucket": "기능어"
+  },
+  {
+   "word": "but",
+   "meaning": "그러나",
+   "section": "기능어",
+   "bucket": "기능어"
+  },
+  {
+   "word": "or",
+   "meaning": "또는",
+   "section": "기능어",
+   "bucket": "기능어"
+  },
+  {
+   "word": "so",
+   "meaning": "그와 같이, 그래서",
+   "section": "기능어",
+   "bucket": "기능어"
+  },
+  {
+   "word": "not",
+   "meaning": "~아니다",
+   "section": "기능어",
+   "bucket": "기능어"
+  },
+  {
+   "word": "no",
+   "meaning": "아니다, 없다",
+   "section": "기능어",
+   "bucket": "기능어"
+  },
+  {
+   "word": "yes",
+   "meaning": "네(대답)",
+   "section": "기능어",
+   "bucket": "기능어"
+  },
+  {
+   "word": "of",
+   "meaning": "~의",
+   "section": "기능어",
+   "bucket": "기능어"
+  },
+  {
+   "word": "to",
+   "meaning": "~으로, ~까지",
+   "section": "기능어",
+   "bucket": "기능어"
+  },
+  {
+   "word": "in",
+   "meaning": "~안에서",
+   "section": "기능어",
+   "bucket": "기능어"
+  },
+  {
+   "word": "on",
+   "meaning": "~위에",
+   "section": "기능어",
+   "bucket": "기능어"
+  },
+  {
+   "word": "at",
+   "meaning": "~때에(시간), ~에서(장소)",
+   "section": "기능어",
+   "bucket": "기능어"
+  },
+  {
+   "word": "off",
+   "meaning": "떨어진, 꺼진",
+   "section": "기능어",
+   "bucket": "기능어"
+  },
+  {
+   "word": "up",
+   "meaning": "위에",
+   "section": "기능어",
+   "bucket": "기능어"
+  },
+  {
+   "word": "down",
+   "meaning": "아래로",
+   "section": "기능어",
+   "bucket": "기능어"
+  },
+  {
+   "word": "by",
+   "meaning": "~옆에",
+   "section": "기능어",
+   "bucket": "기능어"
+  },
+  {
+   "word": "for",
+   "meaning": "~을 위하여, ~동안",
+   "section": "기능어",
+   "bucket": "기능어"
+  },
+  {
+   "word": "from",
+   "meaning": "~로부터",
+   "section": "기능어",
+   "bucket": "기능어"
+  },
+  {
+   "word": "into",
+   "meaning": "~속으로",
+   "section": "기능어",
+   "bucket": "기능어"
+  },
+  {
+   "word": "out",
+   "meaning": "밖에, 밖으로",
+   "section": "기능어",
+   "bucket": "기능어"
+  },
+  {
+   "word": "over",
+   "meaning": "~위쪽에",
+   "section": "기능어",
+   "bucket": "기능어"
+  },
+  {
+   "word": "with",
+   "meaning": "~와 함께",
+   "section": "기능어",
+   "bucket": "기능어"
+  },
+  {
+   "word": "about",
+   "meaning": "~에 관하여",
+   "section": "기능어",
+   "bucket": "기능어"
+  },
+  {
+   "word": "as",
+   "meaning": "~로서",
+   "section": "기능어",
+   "bucket": "기능어"
+  },
+  {
+   "word": "if",
+   "meaning": "만약 ~라면",
+   "section": "기능어",
+   "bucket": "기능어"
+  },
+  {
+   "word": "than",
+   "meaning": "~보다도",
+   "section": "기능어",
+   "bucket": "기능어"
+  },
+  {
+   "word": "near",
+   "meaning": "가까운",
+   "section": "기능어",
+   "bucket": "기능어"
+  },
+  {
+   "word": "around",
+   "meaning": "~주위에",
+   "section": "기능어",
+   "bucket": "기능어"
+  },
+  {
+   "word": "across",
+   "meaning": "~을 가로질러",
+   "section": "기능어",
+   "bucket": "기능어"
+  },
+  {
+   "word": "along",
+   "meaning": "~을 따라서",
+   "section": "기능어",
+   "bucket": "기능어"
+  },
+  {
+   "word": "above",
+   "meaning": "~위로",
+   "section": "기능어",
+   "bucket": "기능어"
+  },
+  {
+   "word": "below",
+   "meaning": "~아래에",
+   "section": "기능어",
+   "bucket": "기능어"
+  },
+  {
+   "word": "behind",
+   "meaning": "~뒤에",
+   "section": "기능어",
+   "bucket": "기능어"
+  },
+  {
+   "word": "beside",
+   "meaning": "~곁에",
+   "section": "기능어",
+   "bucket": "기능어"
+  },
+  {
+   "word": "between",
+   "meaning": "~사이에",
+   "section": "기능어",
+   "bucket": "기능어"
+  },
+  {
+   "word": "under",
+   "meaning": "~아래에서",
+   "section": "기능어",
+   "bucket": "기능어"
+  },
+  {
+   "word": "away",
+   "meaning": "떨어져, 멀리",
+   "section": "기능어",
+   "bucket": "기능어"
+  },
+  {
+   "word": "ahead",
+   "meaning": "~앞에",
+   "section": "기능어",
+   "bucket": "기능어"
+  },
+  {
+   "word": "inside",
+   "meaning": "~안에",
+   "section": "기능어",
+   "bucket": "기능어"
+  },
+  {
+   "word": "be",
+   "meaning": "~이다",
+   "section": "기능어",
+   "bucket": "기능어"
+  },
+  {
+   "word": "do",
+   "meaning": "하다",
+   "section": "기능어",
+   "bucket": "기능어"
+  },
+  {
+   "word": "have",
+   "meaning": "가지고 있다",
+   "section": "기능어",
+   "bucket": "기능어"
+  },
+  {
+   "word": "can",
+   "meaning": "~할 수 있다",
+   "section": "기능어",
+   "bucket": "기능어"
+  },
+  {
+   "word": "will",
+   "meaning": "~할 것이다",
+   "section": "기능어",
+   "bucket": "기능어"
+  },
+  {
+   "word": "may",
+   "meaning": "~해도 좋다",
+   "section": "기능어",
+   "bucket": "기능어"
+  },
+  {
+   "word": "must",
+   "meaning": "~해야 한다",
+   "section": "기능어",
+   "bucket": "기능어"
+  },
+  {
+   "word": "should",
+   "meaning": "~해야 한다",
+   "section": "기능어",
+   "bucket": "기능어"
+  },
+  {
+   "word": "could",
+   "meaning": "can의 과거형",
+   "section": "기능어",
+   "bucket": "기능어"
+  },
+  {
+   "word": "might",
+   "meaning": "~일지도 모른다",
+   "section": "기능어",
+   "bucket": "기능어"
+  },
+  {
+   "word": "here",
+   "meaning": "여기에서",
+   "section": "기능어",
+   "bucket": "기능어"
+  },
+  {
+   "word": "there",
+   "meaning": "그곳에",
+   "section": "기능어",
+   "bucket": "기능어"
+  },
+  {
+   "word": "how",
+   "meaning": "어떻게",
+   "section": "기능어",
+   "bucket": "기능어"
+  },
+  {
+   "word": "what",
+   "meaning": "무엇",
+   "section": "기능어",
+   "bucket": "기능어"
+  },
+  {
+   "word": "when",
+   "meaning": "언제",
+   "section": "기능어",
+   "bucket": "기능어"
+  },
+  {
+   "word": "where",
+   "meaning": "어디",
+   "section": "기능어",
+   "bucket": "기능어"
+  },
+  {
+   "word": "who",
+   "meaning": "누구",
+   "section": "기능어",
+   "bucket": "기능어"
+  },
+  {
+   "word": "why",
+   "meaning": "왜",
+   "section": "기능어",
+   "bucket": "기능어"
+  },
+  {
+   "word": "too",
+   "meaning": "또한, 너무",
+   "section": "기능어",
+   "bucket": "기능어"
+  },
+  {
+   "word": "very",
+   "meaning": "대단히, 몹시",
+   "section": "기능어",
+   "bucket": "기능어"
+  },
+  {
+   "word": "just",
+   "meaning": "오직, 겨우",
+   "section": "기능어",
+   "bucket": "기능어"
+  },
+  {
+   "word": "only",
+   "meaning": "오직",
+   "section": "기능어",
+   "bucket": "기능어"
+  },
+  {
+   "word": "also",
+   "meaning": "또한, 역시",
+   "section": "기능어",
+   "bucket": "기능어"
+  },
+  {
+   "word": "always",
+   "meaning": "항상",
+   "section": "기능어",
+   "bucket": "기능어"
+  },
+  {
+   "word": "never",
+   "meaning": "결코 ~않은",
+   "section": "기능어",
+   "bucket": "기능어"
+  },
+  {
+   "word": "often",
+   "meaning": "흔히, 종종",
+   "section": "기능어",
+   "bucket": "기능어"
+  },
+  {
+   "word": "again",
+   "meaning": "다시",
+   "section": "기능어",
+   "bucket": "기능어"
+  },
+  {
+   "word": "ago",
+   "meaning": "~전에",
+   "section": "기능어",
+   "bucket": "기능어"
+  },
+  {
+   "word": "already",
+   "meaning": "이미, 벌써",
+   "section": "기능어",
+   "bucket": "기능어"
+  },
+  {
+   "word": "almost",
+   "meaning": "거의, 대부분",
+   "section": "기능어",
+   "bucket": "기능어"
+  },
+  {
+   "word": "alright",
+   "meaning": "괜찮은, 만족스러운",
+   "section": "기능어",
+   "bucket": "기능어"
+  },
+  {
+   "word": "well",
+   "meaning": "상당히, 잘",
+   "section": "기능어",
+   "bucket": "기능어"
+  },
+  {
+   "word": "okay",
+   "meaning": "좋아",
+   "section": "기능어",
+   "bucket": "기능어"
+  },
+  {
+   "word": "please",
+   "meaning": "기쁘게 하다; 제발",
+   "section": "기능어",
+   "bucket": "기능어"
+  },
+  {
+   "word": "however",
+   "meaning": "그러나, 하지만",
+   "section": "기능어",
+   "bucket": "기능어"
+  },
+  {
+   "word": "both",
+   "meaning": "둘다",
+   "section": "기능어",
+   "bucket": "기능어"
+  },
+  {
+   "word": "any",
+   "meaning": "어떤",
+   "section": "기능어",
+   "bucket": "기능어"
+  },
+  {
+   "word": "every",
+   "meaning": "모든; 매~",
+   "section": "기능어",
+   "bucket": "기능어"
+  },
+  {
+   "word": "another",
+   "meaning": "또 하나의",
+   "section": "기능어",
+   "bucket": "기능어"
+  },
+  {
+   "word": "some",
+   "meaning": "약간의",
+   "section": "기능어",
+   "bucket": "기능어"
+  },
+  {
+   "word": "much",
+   "meaning": "많은",
+   "section": "기능어",
+   "bucket": "기능어"
+  },
+  {
+   "word": "many",
+   "meaning": "많은",
+   "section": "기능어",
+   "bucket": "기능어"
+  },
+  {
+   "word": "after",
+   "meaning": "~후에",
+   "section": "기능어",
+   "bucket": "기능어"
+  },
+  {
+   "word": "against",
+   "meaning": "~에 반대하여",
+   "section": "기능어",
+   "bucket": "기능어"
+  },
+  {
+   "word": "before",
+   "meaning": "~전에, ~앞에",
+   "section": "기능어",
+   "bucket": "기능어"
+  },
+  {
+   "word": "during",
+   "meaning": "~동안",
+   "section": "기능어",
+   "bucket": "기능어"
+  },
+  {
+   "word": "because",
+   "meaning": "~때문에",
+   "section": "기능어",
+   "bucket": "기능어"
+  },
+  {
+   "word": "all",
+   "meaning": "모두, 전부",
+   "section": "기능어",
+   "bucket": "기능어"
+  },
+  {
+   "word": "enough",
+   "meaning": "충분한",
+   "section": "기능어",
+   "bucket": "기능어"
+  },
+  {
+   "word": "now",
+   "meaning": "지금, 현재",
+   "section": "기능어",
+   "bucket": "기능어"
+  },
+  {
+   "word": "together",
+   "meaning": "함께",
+   "section": "기능어",
+   "bucket": "기능어"
+  },
+  {
+   "word": "next",
+   "meaning": "다음의",
+   "section": "기능어",
+   "bucket": "기능어"
+  },
+  {
+   "word": "far",
+   "meaning": "멀리 떨어진",
+   "section": "기능어",
+   "bucket": "기능어"
+  },
+  {
+   "word": "early",
+   "meaning": "일찍",
+   "section": "기능어",
+   "bucket": "기능어"
+  },
+  {
+   "word": "hello",
+   "meaning": "여보세요; 안녕",
+   "section": "기능어",
+   "bucket": "기능어"
+  },
+  {
+   "word": "goodbye",
+   "meaning": "잘가",
+   "section": "기능어",
+   "bucket": "기능어"
+  },
+  {
+   "word": "nothing",
+   "meaning": "아무것도",
+   "section": "기능어",
+   "bucket": "기능어"
+  }
+ ]
+}
