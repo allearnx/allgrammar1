@@ -32,7 +32,7 @@ export function ConsultationModalProvider({ children }: { children: React.ReactN
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                 </svg>
               </button>
-              <ConsultationForm onSuccess={() => setIsOpen(false)} />
+              <ConsultationForm onSuccess={() => setIsOpen(false)} embedded />
             </div>
           </div>
         </div>

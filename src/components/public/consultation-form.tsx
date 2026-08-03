@@ -5,8 +5,16 @@ import { createBrowserClient } from '@supabase/ssr';
 import { fetchWithToast } from '@/lib/fetch-with-toast';
 import { GRADE_OPTIONS } from '@/types/public';
 import type { Course } from '@/types/public';
+import { G } from '@/app/(public)/google-palette';
 
-export default function ConsultationForm({ onSuccess }: { onSuccess?: () => void } = {}) {
+/**
+ * 랜딩 마지막 섹션이자 상담 모달의 내용물. 같은 컴포넌트를 두 곳에서 쓴다.
+ * 랜딩에서는 파랑 전면 피날레(섹션 배경 리듬의 종착점), 모달에서는 배경 없이 폼만.
+ */
+export default function ConsultationForm({
+  onSuccess,
+  embedded = false,
+}: { onSuccess?: () => void; embedded?: boolean } = {}) {
   const [studentName, setStudentName] = useState('');
   const [studentGrade, setStudentGrade] = useState('');
   const [parentPhone, setParentPhone] = useState('');
@@ -97,20 +105,30 @@ export default function ConsultationForm({ onSuccess }: { onSuccess?: () => void
 
   return (
     <>
-      <section id="consultation-form" className="py-24 px-4 bg-white">
+      <section
+        id="consultation-form"
+        className={embedded ? '' : 'py-24 px-4'}
+        style={embedded ? undefined : { background: G.blue }}
+      >
         <div className="max-w-xl mx-auto">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl md:text-5xl font-extrabold text-[#1d1d1f] mb-5 tracking-tight">
+          <div className={embedded ? 'text-center mb-8' : 'text-center mb-12'}>
+            <h2
+              className="brand-display text-4xl md:text-5xl font-bold mb-5 tracking-tight"
+              style={{ color: embedded ? G.ink : '#fff', wordBreak: 'keep-all' }}
+            >
               지금 바로<br className="md:hidden" />
-              <span className="bg-gradient-to-r from-violet-600 to-purple-500 bg-clip-text text-transparent"> 상담 신청</span>하세요
+              <span style={{ color: embedded ? G.blue : G.yellow }}> 상담 신청</span>하세요
             </h2>
-            <p className="text-[#86868b] text-lg leading-relaxed">
+            <p className="text-lg leading-relaxed" style={{ color: embedded ? G.gray : 'rgba(255,255,255,0.88)' }}>
               학생의 현재 상태를 남겨주시면,<br className="md:hidden" />
               전문 컨설턴트가 연락드립니다.
             </p>
           </div>
 
-          <div className="rounded-3xl p-8 md:p-10 bg-white/70 backdrop-blur-xl border border-gray-200/50 shadow-xl shadow-gray-200/50">
+          <div
+            className="rounded-3xl p-8 md:p-10 bg-white"
+            style={{ border: `1px solid ${G.line}`, boxShadow: '0 10px 30px -12px rgba(32,33,36,0.25)' }}
+          >
             <form onSubmit={handleSubmit} className="space-y-6">
               {/* 학생 이름 */}
               <div>
@@ -123,7 +141,7 @@ export default function ConsultationForm({ onSuccess }: { onSuccess?: () => void
                   value={studentName}
                   onChange={(e) => setStudentName(e.target.value)}
                   placeholder="예: 김철수"
-                  className="w-full px-5 py-4 border-2 border-gray-200 rounded-2xl focus:ring-4 focus:ring-violet-100 focus:border-violet-400 transition-all text-slate-800 placeholder:text-slate-400 font-medium bg-white/80"
+                  className="w-full px-5 py-4 border-2 border-gray-200 rounded-2xl focus:ring-4 focus:ring-brand-100 focus:border-brand-400 transition-all text-slate-800 placeholder:text-slate-400 font-medium bg-white/80"
                   disabled={isLoading}
                 />
               </div>
@@ -137,10 +155,10 @@ export default function ConsultationForm({ onSuccess }: { onSuccess?: () => void
                   id="studentGrade"
                   value={studentGrade}
                   onChange={(e) => setStudentGrade(e.target.value)}
-                  className="w-full px-5 py-4 border-2 border-gray-200 rounded-2xl focus:ring-4 focus:ring-violet-100 focus:border-violet-400 transition-all text-slate-800 bg-white/80 appearance-none cursor-pointer font-medium"
+                  className="w-full px-5 py-4 border-2 border-gray-200 rounded-2xl focus:ring-4 focus:ring-brand-100 focus:border-brand-400 transition-all text-slate-800 bg-white/80 appearance-none cursor-pointer font-medium"
                   disabled={isLoading}
                   style={{
-                    backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%238b5cf6' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M6 8l4 4 4-4'/%3e%3c/svg%3e")`,
+                    backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%231a73e8' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M6 8l4 4 4-4'/%3e%3c/svg%3e")`,
                     backgroundPosition: 'right 1.25rem center',
                     backgroundRepeat: 'no-repeat',
                     backgroundSize: '1.5em 1.5em',
@@ -166,7 +184,7 @@ export default function ConsultationForm({ onSuccess }: { onSuccess?: () => void
                   value={parentPhone}
                   onChange={handlePhoneChange}
                   placeholder="010-0000-0000"
-                  className="w-full px-5 py-4 border-2 border-gray-200 rounded-2xl focus:ring-4 focus:ring-violet-100 focus:border-violet-400 transition-all text-slate-800 placeholder:text-slate-400 font-medium bg-white/80"
+                  className="w-full px-5 py-4 border-2 border-gray-200 rounded-2xl focus:ring-4 focus:ring-brand-100 focus:border-brand-400 transition-all text-slate-800 placeholder:text-slate-400 font-medium bg-white/80"
                   disabled={isLoading}
                   maxLength={13}
                 />
@@ -189,7 +207,7 @@ export default function ConsultationForm({ onSuccess }: { onSuccess?: () => void
                     {courses.map((course) => (
                       <label
                         key={course.id}
-                        className="flex items-center gap-2 px-3 py-2 border border-gray-200 rounded-xl bg-white/80 cursor-pointer hover:border-violet-300"
+                        className="flex items-center gap-2 px-3 py-2 border border-gray-200 rounded-xl bg-white/80 cursor-pointer hover:border-brand-300"
                       >
                         <input
                           type="checkbox"
@@ -202,7 +220,7 @@ export default function ConsultationForm({ onSuccess }: { onSuccess?: () => void
                             );
                           }}
                           disabled={isLoading}
-                          className="h-4 w-4 text-violet-500 border-gray-300 rounded"
+                          className="h-4 w-4 accent-brand-600 border-gray-300 rounded"
                         />
                         <span className="text-sm text-slate-700">{course.title}</span>
                       </label>
@@ -222,7 +240,8 @@ export default function ConsultationForm({ onSuccess }: { onSuccess?: () => void
               <button
                 type="submit"
                 disabled={isLoading}
-                className="w-full py-5 bg-gradient-to-r from-violet-400 to-purple-400 hover:from-violet-500 hover:to-purple-500 text-white text-lg font-bold rounded-2xl transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-xl shadow-violet-300/30"
+                className="w-full py-5 text-lg font-extrabold rounded-full transition-transform duration-150 hover:-translate-y-0.5 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-y-0"
+                style={{ background: G.yellow, color: G.ink }}
               >
                 {isLoading ? (
                   <span className="flex items-center justify-center gap-3">
@@ -250,8 +269,10 @@ export default function ConsultationForm({ onSuccess }: { onSuccess?: () => void
         <div className="fixed inset-0 bg-slate-900/50 backdrop-blur-md flex items-center justify-center p-4 z-[60]">
           <div className="bg-white rounded-3xl p-10 max-w-sm w-full shadow-2xl animate-[fadeIn_0.3s_ease-out]">
             <div className="text-center">
-              <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-violet-100 to-purple-100 rounded-3xl mb-6">
-                <svg className="w-10 h-10 text-violet-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className="inline-flex items-center justify-center w-20 h-20 rounded-3xl mb-6"
+                style={{ background: G.greenLight }}>
+                <svg className="w-10 h-10"
+                  style={{ color: G.green }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
                 </svg>
               </div>
@@ -264,7 +285,7 @@ export default function ConsultationForm({ onSuccess }: { onSuccess?: () => void
               </p>
               <button
                 onClick={() => setShowModal(false)}
-                className="w-full py-4 bg-gradient-to-r from-violet-500 to-purple-500 hover:from-violet-600 hover:to-purple-600 text-white font-bold rounded-2xl transition-all shadow-lg shadow-violet-500/30"
+                className="w-full py-4 bg-brand-600 hover:bg-brand-800 text-white font-bold rounded-full transition-colors"
               >
                 확인
               </button>
