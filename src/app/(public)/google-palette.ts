@@ -12,6 +12,8 @@ export const G = {
   gray: '#3C4043',
   grayLight: '#9AA0A6',
   line: '#E8EAED',
+  /** 섹션 배경 교차 리듬용 연회색 — 흰 바탕 사이에 넣어 밋밋함을 끊는다 */
+  surface: '#F8F9FA',
   blue: '#1A73E8',
   blueDark: '#174EA6',
   blueLight: '#E8F0FE',

@@ -1,79 +1,145 @@
 'use client';
 
+import { useState } from 'react';
 import { AnimatedSection } from './animated-section';
+import { G } from '../google-palette';
 
 const curriculumData = [
   {
+    label: 'LIVE',
     title: '실시간 수업',
-    shortDesc: '실시간 수업으로 학생의\n수업 참여도+ 집중력 UP',
     detailTitle: '실시간 수업으로 학생의\n수업 참여도+ 집중력 UP',
     detailDesc: '듣기만 하는 인강은 가라~ 인강은 귀찮기도 하고.. 자꾸 딴 생각이 나기도 하고... 선생님과 다른 학생들과의 실시간 수업은 그럴 시간이 없어요! 철저한 개념 이해를 위한 실시간 필기와 질문과 대답을 통한 소통이 수업의 몰입도를 올려 줍니다.',
-    icon: '🎥',
+    accent: G.blue,
+    accentText: G.blueDark,
+    back: G.blueLight,
   },
   {
-    title: '1:1 피드백',
-    shortDesc: '숙제와 오답 1:1 피드백으로\n진짜 영어실력을 올리세요!',
+    label: '1:1 FEEDBACK',
+    title: '숙제·오답\n피드백',
     detailTitle: '숙제와 오답 1:1 피드백\n으로 진짜 영어 실력을\n올리세요.',
     detailDesc: '매주 수업 후 내주는 숙제는 많은 부모님들이 정말 왜 올라영으로 문법이 끝날 수 있는지 알겠다고 입모아 말씀하세요. 게다가 오답은 피드백 설명이 제공됩니다. 다음 수업 전까지 오답 설명까지 완료! 아이들이 모르는 것을 다 해결하고 다음 수업을 들을 수 있어 수업의 효과를 최대로 끌어 올릴 수 있어요!',
-    icon: '💡',
+    accent: G.yellow,
+    accentText: G.yellowDark,
+    back: G.yellowLight,
   },
   {
-    title: '실력&점수 UP',
-    shortDesc: '실력만큼 점수도 올리세요!',
+    label: 'RESULT',
+    title: '실력만큼\n점수도',
     detailTitle: '실력만큼 점수도\n올리세요!',
     detailDesc: '실력은 올라갔다는데 점수는 안 오른다?? 실력만큼 내신 점수가 나오지 않는다면 안되겠죠? 올라영은 성취감에서 자신감이 나온다고 믿습니다. 한번이라도 점수가 오른 아이들은 눈빛이 다르거든요!',
-    icon: '🏆',
+    accent: G.green,
+    accentText: G.greenDark,
+    back: G.greenLight,
   },
 ];
 
 export function CurriculumSection() {
+  // 호버가 없는 터치 기기에서도 뒷면을 볼 수 있어야 한다 (탭하면 고정, 다시 탭하면 복귀)
+  const [pinned, setPinned] = useState<number | null>(null);
+
   return (
-    <section className="py-24 px-4 bg-white">
+    <section className="py-24 px-4" style={{ background: G.surface }}>
       <div className="max-w-6xl mx-auto">
         <AnimatedSection className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-extrabold text-[#1d1d1f] mb-5 tracking-tight">
+          <h2 className="brand-display text-4xl md:text-5xl font-bold mb-5 tracking-tight" style={{ color: G.ink }}>
             올라영만의<br className="md:hidden" />
-            <span className="bg-gradient-to-r from-violet-600 to-purple-500 bg-clip-text text-transparent"> 특별한</span> 3가지
+            <span style={{ color: G.blue }}> 특별한</span> 3가지
           </h2>
-          <p className="text-[#86868b] text-lg max-w-xl mx-auto leading-relaxed">
+          <p className="text-lg max-w-xl mx-auto leading-relaxed" style={{ color: G.gray }}>
             올라영이 특별한 이유, 직접 확인해보세요
           </p>
         </AnimatedSection>
 
         <div className="grid md:grid-cols-3 gap-8">
-          {curriculumData.map((item, index) => (
-            <AnimatedSection key={index} delay={index * 100}>
-              <div className="group h-[480px] cursor-pointer" style={{ perspective: '1000px' }}>
+          {curriculumData.map((item, index) => {
+            const isPinned = pinned === index;
+            const toggle = () => setPinned(isPinned ? null : index);
+            return (
+              <AnimatedSection key={item.title} delay={index * 100}>
                 <div
-                  className="relative w-full h-full transition-transform duration-700 ease-out group-hover:[transform:rotateY(180deg)]"
-                  style={{ transformStyle: 'preserve-3d' }}
+                  role="button"
+                  tabIndex={0}
+                  aria-expanded={isPinned}
+                  onClick={toggle}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      e.preventDefault();
+                      toggle();
+                    }
+                  }}
+                  className="group h-[460px] cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-offset-2 rounded-xl"
+                  style={{ perspective: '1400px', ['--tw-ring-color' as string]: item.accent }}
                 >
                   <div
-                    className="absolute inset-0 bg-white rounded-[44px] p-8 flex flex-col items-center text-center justify-center"
+                    className="relative w-full h-full transition-transform duration-700 ease-out group-hover:[transform:rotateY(180deg)]"
                     style={{
-                      backfaceVisibility: 'hidden',
-                      boxShadow: '0 0 0 2px #1d1d1f, 0 0 0 6px #a1a1aa, 0 25px 50px -12px rgba(0,0,0,0.15)'
+                      transformStyle: 'preserve-3d',
+                      transform: isPinned ? 'rotateY(180deg)' : undefined,
                     }}
                   >
-                    <div className="text-[120px] mb-6 leading-none">{item.icon}</div>
-                    <h3 className="text-4xl md:text-5xl font-black text-[#1d1d1f] mb-4 tracking-tight leading-tight">{item.title}</h3>
-                    <p className="text-[#424245] text-xl md:text-2xl font-bold leading-snug px-2 whitespace-pre-line">{item.shortDesc}</p>
-                  </div>
-                  <div
-                    className="absolute inset-0 bg-violet-50 rounded-[44px] p-6 md:p-8 flex flex-col justify-center"
-                    style={{
-                      backfaceVisibility: 'hidden',
-                      transform: 'rotateY(180deg)',
-                      boxShadow: '0 0 0 2px #1d1d1f, 0 0 0 6px #a1a1aa, 0 25px 50px -12px rgba(0,0,0,0.15)'
-                    }}
-                  >
-                    <h4 className="text-2xl md:text-3xl font-black mb-4 leading-tight whitespace-pre-line text-[#424245]">{item.detailTitle}</h4>
-                    <p className="text-[#424245] text-lg md:text-xl font-semibold leading-relaxed">{item.detailDesc}</p>
+                    {/* 앞면 — 요약 없이 큰 제목만. 하단 "자세히 보기"가 뒷면의 존재를 알린다 */}
+                    <div
+                      className="absolute inset-0 bg-white rounded-xl p-6 flex flex-col"
+                      style={{
+                        backfaceVisibility: 'hidden',
+                        border: `1px solid ${G.line}`,
+                        borderTop: `6px solid ${item.accent}`,
+                        boxShadow: '0 1px 3px rgba(60,64,67,0.12), 0 6px 16px -8px rgba(60,64,67,0.2)',
+                      }}
+                    >
+                      <div className="text-[52px] font-extrabold leading-none tracking-tighter" style={{ color: item.accent, opacity: 0.22 }}>
+                        {String(index + 1).padStart(2, '0')}
+                      </div>
+                      <div className="mt-3 text-[11px] font-extrabold tracking-[0.06em]" style={{ color: item.accentText }}>
+                        {item.label}
+                      </div>
+                      <h3
+                        className="brand-display text-[38px] font-bold leading-[1.18] tracking-tight mt-auto whitespace-pre-line"
+                        style={{ color: G.ink }}
+                      >
+                        {item.title}
+                      </h3>
+                      <div
+                        className="mt-[18px] pt-[14px] flex items-center gap-[7px] text-[13px] font-bold transition-colors"
+                        style={{ borderTop: `1px dashed ${G.line}`, color: G.grayLight }}
+                      >
+                        <svg
+                          className="transition-transform duration-500 ease-out group-hover:rotate-180"
+                          width="15" height="15" viewBox="0 0 24 24" fill="none"
+                          stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"
+                        >
+                          <path d="M21 12a9 9 0 1 1-2.6-6.4" />
+                          <polyline points="21 3 21 9 15 9" />
+                        </svg>
+                        자세히 보기
+                      </div>
+                    </div>
+
+                    {/* 뒷면 */}
+                    <div
+                      className="absolute inset-0 rounded-xl p-6 flex flex-col"
+                      style={{
+                        backfaceVisibility: 'hidden',
+                        transform: 'rotateY(180deg)',
+                        background: item.back,
+                        border: `1px solid ${G.line}`,
+                        borderTop: `6px solid ${item.accent}`,
+                        boxShadow: '0 1px 3px rgba(60,64,67,0.12), 0 6px 16px -8px rgba(60,64,67,0.2)',
+                      }}
+                    >
+                      <h4 className="text-lg md:text-xl font-extrabold leading-snug whitespace-pre-line" style={{ color: item.accentText }}>
+                        {item.detailTitle}
+                      </h4>
+                      <p className="mt-3 text-[13.5px] leading-[1.7]" style={{ color: G.gray }}>
+                        {item.detailDesc}
+                      </p>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </AnimatedSection>
-          ))}
+              </AnimatedSection>
+            );
+          })}
         </div>
       </div>
     </section>
