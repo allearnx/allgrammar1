@@ -8,7 +8,7 @@ const curriculumData = [
   {
     label: 'LIVE',
     title: '실시간 수업',
-    detailTitle: '실시간 수업으로 학생의\n수업 참여도+ 집중력 UP',
+    detailTitle: '실시간 수업으로 학생의 수업 참여도+ 집중력 UP',
     detailDesc: '듣기만 하는 인강은 가라~ 인강은 귀찮기도 하고.. 자꾸 딴 생각이 나기도 하고... 선생님과 다른 학생들과의 실시간 수업은 그럴 시간이 없어요! 철저한 개념 이해를 위한 실시간 필기와 질문과 대답을 통한 소통이 수업의 몰입도를 올려 줍니다.',
     accent: G.blue,
     accentText: G.blueDark,
@@ -17,7 +17,7 @@ const curriculumData = [
   {
     label: '1:1 FEEDBACK',
     title: '숙제·오답\n피드백',
-    detailTitle: '숙제와 오답 1:1 피드백\n으로 진짜 영어 실력을\n올리세요.',
+    detailTitle: '숙제와 오답 1:1 피드백으로 진짜 영어 실력을 올리세요.',
     detailDesc: '매주 수업 후 내주는 숙제는 많은 부모님들이 정말 왜 올라영으로 문법이 끝날 수 있는지 알겠다고 입모아 말씀하세요. 게다가 오답은 피드백 설명이 제공됩니다. 다음 수업 전까지 오답 설명까지 완료! 아이들이 모르는 것을 다 해결하고 다음 수업을 들을 수 있어 수업의 효과를 최대로 끌어 올릴 수 있어요!',
     accent: G.yellow,
     accentText: G.yellowDark,
@@ -26,7 +26,7 @@ const curriculumData = [
   {
     label: 'RESULT',
     title: '실력만큼\n점수도',
-    detailTitle: '실력만큼 점수도\n올리세요!',
+    detailTitle: '실력만큼 점수도 올리세요!',
     detailDesc: '실력은 올라갔다는데 점수는 안 오른다?? 실력만큼 내신 점수가 나오지 않는다면 안되겠죠? 올라영은 성취감에서 자신감이 나온다고 믿습니다. 한번이라도 점수가 오른 아이들은 눈빛이 다르거든요!',
     accent: G.green,
     accentText: G.greenDark,
@@ -68,7 +68,8 @@ export function CurriculumSection() {
                       toggle();
                     }
                   }}
-                  className="group h-[460px] cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-offset-2 rounded-xl"
+                  /* 높이는 가장 좁아지는 md 3단(카드 224px)의 최장 카드 기준 — 여기서 터지면 다 터진다 */
+                  className="group h-[520px] cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-offset-2 rounded-xl"
                   style={{ perspective: '1400px', ['--tw-ring-color' as string]: item.accent }}
                 >
                   <div
@@ -96,7 +97,7 @@ export function CurriculumSection() {
                       </div>
                       <h3
                         className="brand-display text-[38px] font-bold leading-[1.18] tracking-tight mt-auto whitespace-pre-line"
-                        style={{ color: G.ink }}
+                        style={{ color: G.ink, wordBreak: 'keep-all' }}
                       >
                         {item.title}
                       </h3>
@@ -118,7 +119,8 @@ export function CurriculumSection() {
 
                     {/* 뒷면 */}
                     <div
-                      className="absolute inset-0 rounded-xl p-6 flex flex-col"
+                      /* 넓은 화면에서는 글이 짧아 아래가 크게 빈다 — 세로 가운데 정렬로 균형을 잡는다 */
+                      className="absolute inset-0 rounded-xl p-6 flex flex-col justify-center"
                       style={{
                         backfaceVisibility: 'hidden',
                         transform: 'rotateY(180deg)',
@@ -128,10 +130,10 @@ export function CurriculumSection() {
                         boxShadow: '0 1px 3px rgba(60,64,67,0.12), 0 6px 16px -8px rgba(60,64,67,0.2)',
                       }}
                     >
-                      <h4 className="text-lg md:text-xl font-extrabold leading-snug whitespace-pre-line" style={{ color: item.accentText }}>
+                      <h4 className="text-xl font-extrabold leading-snug" style={{ color: item.accentText, wordBreak: 'keep-all' }}>
                         {item.detailTitle}
                       </h4>
-                      <p className="mt-3 text-[13.5px] leading-[1.7]" style={{ color: G.gray }}>
+                      <p className="mt-3 text-[15.5px] leading-[1.72]" style={{ color: G.gray, wordBreak: 'keep-all' }}>
                         {item.detailDesc}
                       </p>
                     </div>
