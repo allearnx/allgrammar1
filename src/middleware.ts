@@ -25,6 +25,9 @@ export const config = {
      * - sw.js (서비스워커 — 리다이렉트되면 PWA 등록 실패)
      */
     // robots.txt를 제외 안 하면 로그인으로 리다이렉트되어 검색엔진이 못 읽는다 (2026-07-17 발견)
-    '/((?!_next/static|_next/image|favicon.ico|sw.js|robots.txt|api|.*\\.(?:svg|png|jpg|jpeg|gif|webp|xml|woff|woff2|ttf)$).*)',
+    // css도 제외 — public/fonts/pretendard.css가 /login으로 리다이렉트되어 웹폰트가 통째로
+    // 안 실리던 문제 (2026-08-03 발견). woff/woff2는 이미 제외돼 있었지만 이를 불러오는
+    // 스타일시트가 막히면 소용이 없다.
+    '/((?!_next/static|_next/image|favicon.ico|sw.js|robots.txt|api|.*\\.(?:svg|png|jpg|jpeg|gif|webp|xml|css|woff|woff2|ttf)$).*)',
   ],
 };
