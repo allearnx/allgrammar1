@@ -247,6 +247,13 @@ export function DayContentManager({ dayId, definitionLang }: { dayId: string; de
                     <Trash2 className="h-3.5 w-3.5 text-destructive" />
                   </Button>
                 </div>
+                {/* 예문은 수정 모드에서만 보였는데, 검수 때 연필을 일일이 눌러야 해서 목록에 상시 표시 (2026-08-04) */}
+                {vocabEdit.editingId !== v.id && v.example_sentence && (
+                  <p className="px-2 pb-1.5 pl-8 text-xs text-muted-foreground truncate">
+                    {v.example_sentence}
+                    {v.example_sentence_ko && <span className="ml-1.5 text-muted-foreground/60">— {v.example_sentence_ko}</span>}
+                  </p>
+                )}
                 {vocabEdit.editingId === v.id && (
                   <div className="px-2 pb-2 space-y-2">
                     <div className="grid grid-cols-2 gap-2">
