@@ -60,6 +60,12 @@ export function NeonVocaTab({ vocabulary, dayId, progress, dayTitle, quizType = 
   const celebrateTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   // 보너스 시험 (선택) — 핵심 4단계 완료와 무관
   const [inExam, setInExam] = useState(false);
+  // 복수 선택 퀴즈 사용 여부 — 안전한 오답 보기를 못 채우는 Day가 있을 수 있어
+  // 문제 4개 미만이면 4지선다로 폴백. 생성 개수는 결정적이라 마운트 시 1회 판정.
+  // (이른 return 뒤에 두면 rules-of-hooks 위반 — CI 30865839667에서 학습)
+  const [useMultiQuiz] = useState(
+    () => quizType === 'multi' && generateMultiSelectQuestions(vocabulary).length >= 4,
+  );
   const examBest = localProgress?.exam_score ?? null;
   // 4단계 모두 완료했는지 (보너스 카드는 이때만 노출 → 단계 진행 중 이탈로 초기화되는 것 방지)
   const allStepsDone = completedSteps.every(Boolean);
@@ -180,11 +186,6 @@ export function NeonVocaTab({ vocabulary, dayId, progress, dayTitle, quizType = 
 
   // 퀴즈 최소 4개 필요
   const hasEnoughForQuiz = vocabulary.length >= 4;
-  // 복수 선택은 안전한 오답 보기를 못 채우는 Day가 있을 수 있다 → 문제 4개 미만이면
-  // 4지선다로 폴백. 생성 개수는 결정적이라 마운트 시 1회 판정이면 충분하다.
-  const [useMultiQuiz] = useState(
-    () => quizType === 'multi' && generateMultiSelectQuestions(vocabulary).length >= 4,
-  );
 
   // 보너스 시험 진행 화면 (선택)
   if (inExam) {
