@@ -39,8 +39,14 @@ describe('diagnostic staircase — nextStep', () => {
     expect(nextStep([r('L4', 9)], ALL)).toEqual({ type: 'continue', band: 'L5' });
   });
 
-  it('4개 이하(40%)면 즉시 한 밴드 아래로', () => {
+  it('5개 이하(50%)면 즉시 한 밴드 아래로 — 배정 구간 50~80 (2026-08-05)', () => {
     expect(nextStep([r('L4', 3)], ALL)).toEqual({ type: 'continue', band: 'L3' });
+    // 경계값: 정확히 50%도 아래로
+    expect(nextStep([r('L4', 5)], ALL)).toEqual({ type: 'continue', band: 'L3' });
+  });
+
+  it('6개(60%)는 하강 신호가 아니다 — 확인 라운드로', () => {
+    expect(nextStep([r('L4', 6)], ALL)).toEqual({ type: 'continue', band: 'L4' });
   });
 
   it('최상단에서 80% 이상 → 확인 라운드 후 "이상" 확정', () => {
@@ -144,6 +150,20 @@ describe('recommendBandKey — 추천 교재 밴드', () => {
     expect(recommendBandKey({ band: 'L1', qualifier: 'below' }, ALL)).toBe('L0');
     // L0 비활성이면 L1 유지
     expect(recommendBandKey({ band: 'L1', qualifier: 'below' }, NO_L0)).toBe('L1');
+  });
+
+  it('exact라도 확정 밴드 정답률 60% 이상이면 한 칸 위 교재 (측정·처방 분리, 2026-08-05)', () => {
+    expect(recommendBandKey({ band: 'L3', qualifier: 'exact' }, ALL, 65)).toBe('L4');
+    // 경계값: 정확히 60%도 상향
+    expect(recommendBandKey({ band: 'L3', qualifier: 'exact' }, ALL, 60)).toBe('L4');
+    // 60% 미만이면 그 밴드 유지
+    expect(recommendBandKey({ band: 'L3', qualifier: 'exact' }, ALL, 55)).toBe('L3');
+    // 최상단이면 올라갈 곳이 없어 유지
+    expect(recommendBandKey({ band: 'L6', qualifier: 'exact' }, ALL, 70)).toBe('L6');
+    // 정답률 미제공(구 데이터)이면 상향 컷 없이 동작
+    expect(recommendBandKey({ band: 'L3', qualifier: 'exact' }, ALL)).toBe('L3');
+    // below 판정은 정답률과 무관하게 아래로
+    expect(recommendBandKey({ band: 'L1', qualifier: 'below' }, ALL, 45)).toBe('L0');
   });
 });
 

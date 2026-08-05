@@ -26,14 +26,17 @@ export interface DiagnosticBand {
 export const DIAGNOSTIC_BANDS: DiagnosticBand[] = [
   // 중등 밴드 첫 교재 = 학년별 교과서 단어(내신 데이터 기반) — "학년 단어를 N% 알아요" 문구와
   // 출처가 정확히 일치하고, 추천 카드의 대표 처방이 된다. 두 번째부터는 함께 추천할 시중 교재.
-  // L0(초등, 2026-07-23 신설): 천일문 스타트가 대표. 베이직·기본은 빈 교재 — 채워지면 자동 합류.
+  // L0 = 초등 800 단독 (2026-08-05): 진짜 초등 교재 출시로 천일문(초등~중1 브릿지, 표제어 51%가
+  // 초등 800과 겹침)은 L1로 이동 — 라인업 중1 칸과 일치. 겹치는 쉬운 절반은 하위 밴드 제외
+  // 로직이 L1 출제에서 자동으로 빼주므로 L1에는 중등 쪽 절반만 남는다. 베이직·기본(빈 교재)도
+  // 예비중 티어라 L1로 — 채워지면 자동 합류.
+  { key: 'L0', label: '초등', sourceLabel: '초등', bookTitles: ['초등 필수 영어단어 800'] },
   {
-    key: 'L0',
-    label: '초등',
-    sourceLabel: '초등',
-    bookTitles: ['천일문 보카 중등 스타트', '워드마스터 중등 베이직', '능률 VOCA 중등 기본'],
+    key: 'L1',
+    label: '중1',
+    sourceLabel: '중1',
+    bookTitles: ['중1 교과서 단어', '천일문 보카 중등 스타트', '워드마스터 중등 베이직', '능률 VOCA 중등 기본'],
   },
-  { key: 'L1', label: '중1', sourceLabel: '중1', bookTitles: ['중1 교과서 단어'] },
   { key: 'L2', label: '중2', sourceLabel: '중2', bookTitles: ['중2 교과서 단어', '능률 VOCA 중등 필수'] },
   { key: 'L3', label: '중3', sourceLabel: '중3', bookTitles: ['중3 교과서 단어', '워드마스터 중등 고난도', '능률 VOCA 중등 고난도'] },
   { key: 'L4', label: '고1', sourceLabel: '고1', bookTitles: ['능률 고교필수 2000', '최근 5개년 고1 3월 모고 단어'] },
@@ -74,8 +77,13 @@ export function getStartBand(grade: DiagnosticGrade, activeBands: BandKey[]): Ba
 export const ROUND_SIZE = 10;
 /** 정답률 ≥ 80% → 한 밴드 위로 */
 export const UP_RATIO = 0.8;
-/** 정답률 ≤ 40% → 한 밴드 아래로 */
-export const DOWN_RATIO = 0.4;
+/**
+ * 정답률 ≤ 50% → 한 밴드 아래로.
+ * 배정 규칙 (2026-08-05 사장님 확정): "교재 단어의 20~50%를 모를 때 그 교재를 배정" —
+ * 즉 50~80% 알 때 확정. 60% 넘게 모르면 좌절 구간이라 아래 교재로. (구 40%에서 상향:
+ * 4지선다 찍기 인플레이션 보정 + 아는 책을 더 다지고 넘어가는 보수적 배정.)
+ */
+export const DOWN_RATIO = 0.5;
 export const MAX_ROUNDS = 5;
 /**
  * 레벨 확정에 필요한 해당 밴드 누적 최소 문항 수.
@@ -191,11 +199,24 @@ export function formatLevel(level: FinalLevel): string {
 }
 
 /**
+ * 처방 상향 컷 (2026-08-05 사장님 확정): 확정 밴드 정답률이 60% 이상이면 그 교재는
+ * 건너뛰고 한 칸 위 교재를 추천 — "모르는 단어가 40% 이상인 첫 교재를 배정".
+ * 측정(스테어케이스 50~80 확정)은 그대로 두고 추천만 조정한다 — 문턱값을 40~60으로
+ * 좁히면 20문항 노이즈(±11%p)가 구간 폭과 비슷해져 판정이 불안정해지기 때문.
+ */
+export const RECOMMEND_UP_PERCENT = 60;
+
+/**
  * 판정 레벨 → 추천 교재 밴드. 학년이 아니라 측정된 레벨 기준.
  * 'above'(최상단 돌파)는 한 단계 위 활성 밴드, 'below'(최하단 미달)는 한 단계 아래,
- * 없으면 판정 밴드 그대로.
+ * 'exact'라도 확정 밴드 정답률(finalBandPercent)이 컷 이상이면 한 단계 위. 없으면 그대로.
+ * finalBandPercent 미제공(구 데이터) 시에는 상향 컷 없이 동작한다.
  */
-export function recommendBandKey(level: FinalLevel, activeBands: BandKey[]): BandKey {
+export function recommendBandKey(
+  level: FinalLevel,
+  activeBands: BandKey[],
+  finalBandPercent?: number | null,
+): BandKey {
   if (level.qualifier === 'above') {
     const up = adjacent(level.band, 1, activeBands);
     if (up) return up;
@@ -203,6 +224,10 @@ export function recommendBandKey(level: FinalLevel, activeBands: BandKey[]): Ban
   if (level.qualifier === 'below') {
     const down = adjacent(level.band, -1, activeBands);
     if (down) return down;
+  }
+  if (level.qualifier === 'exact' && finalBandPercent != null && finalBandPercent >= RECOMMEND_UP_PERCENT) {
+    const up = adjacent(level.band, 1, activeBands);
+    if (up) return up;
   }
   return level.band;
 }

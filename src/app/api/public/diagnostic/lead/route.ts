@@ -4,7 +4,8 @@ import { checkRateLimit } from '@/lib/api/rate-limit';
 import { vocaDiagnosticLeadSchema } from '@/lib/api/schemas/voca';
 import { getActiveBands } from '@/lib/voca/diagnostic-sampling';
 import { verifyRounds } from '@/lib/voca/diagnostic-token';
-import { scoreDiagnosticRounds, type ScoredRound } from '@/lib/voca/diagnostic-scoring';
+import { bandScoreFromRounds, scoreDiagnosticRounds, type ScoredRound } from '@/lib/voca/diagnostic-scoring';
+import type { BandKey } from '@/lib/voca/diagnostic-bands';
 import { logger } from '@/lib/logger';
 
 function missedFromRounds(rounds: ScoredRound[]): {
@@ -56,6 +57,10 @@ export async function POST(request: NextRequest) {
         return NextResponse.json({
           level: { band: updated.final_band, qualifier: updated.final_qualifier },
           coverageScore: updated.coverage_score,
+          finalBandScore: bandScoreFromRounds(
+            (updated.rounds ?? []) as ScoredRound[],
+            updated.final_band as BandKey,
+          ),
           startBand: updated.start_band,
           ...missedFromRounds((updated.rounds ?? []) as ScoredRound[]),
         });
@@ -91,6 +96,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({
       level: score.level,
       coverageScore: score.coverageScore,
+      finalBandScore: score.finalBandScore,
       startBand: score.startBand,
       missed: score.missed,
       missedCount: score.missedCount,

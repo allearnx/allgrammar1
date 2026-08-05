@@ -29,6 +29,8 @@ export interface LatestDiagnostic {
   finalBand: string;
   finalQualifier: string;
   coverageScore: number;
+  /** 확정 밴드 정답률 — 추천 상향 컷 재현용 (저장된 rounds에서 재계산) */
+  finalBandScore?: number;
   attemptNumber: number;
   createdAt: string;
 }
@@ -80,6 +82,8 @@ interface SubmitResponse {
   attemptNumber: number;
   level: FinalLevel;
   coverageScore: number;
+  /** 확정 밴드 정답률 — 60% 이상이면 추천이 한 칸 위 교재로 (RECOMMEND_UP_PERCENT) */
+  finalBandScore?: number;
   startBand?: BandKey;
   missed?: MissedWord[];
   missedCount?: number;
@@ -298,7 +302,7 @@ export function DiagnosticClient({ activeBands, lineupBookIds, latest, tookToday
           const body = leadId
             ? { leadId, name, phone }
             : { name, phone, grade: grade!, rounds: completedRounds.map((r) => r.items) };
-          const data = await fetchWithToast<{ level: FinalLevel; coverageScore: number; startBand?: BandKey; missed?: MissedWord[]; missedCount?: number }>(
+          const data = await fetchWithToast<{ level: FinalLevel; coverageScore: number; finalBandScore?: number; startBand?: BandKey; missed?: MissedWord[]; missedCount?: number }>(
             '/api/public/diagnostic/lead',
             { body, retry: 1, errorMessage: '저장에 실패했습니다. 잠시 후 다시 시도해주세요.' },
           );
@@ -310,6 +314,7 @@ export function DiagnosticClient({ activeBands, lineupBookIds, latest, tookToday
               attemptNumber: 1,
               level: data.level,
               coverageScore: data.coverageScore,
+              finalBandScore: data.finalBandScore,
               startBand: data.startBand,
               missed: data.missed,
               missedCount: data.missedCount,
@@ -562,7 +567,9 @@ function ResultScreen({
   lineupBookIds: Record<string, string>;
   publicMode?: boolean;
 }) {
-  const recBand = recommendBandKey(res.level, activeBands);
+  const recBand = recommendBandKey(res.level, activeBands, res.finalBandScore);
+  // 확정 밴드를 60% 이상 알아서 한 칸 위 교재가 추천된 경우 — 근거 문구 표시용
+  const bumpedUp = recBand !== recommendBandKey(res.level, activeBands);
   // 활성 교재 인지 폴백 — 추천 교재가 비활성(예: 검수 중)이면 오른쪽 첫 활성 교재로
   const placement = resolveLineupPlacement(recBand, lineupBookIds);
   const missed = res.missed ?? [];
@@ -575,6 +582,7 @@ function ResultScreen({
         recommendBandKey(
           { band: previous.finalBand as BandKey, qualifier: previous.finalQualifier as FinalLevel['qualifier'] },
           activeBands,
+          previous.finalBandScore,
         ),
         recBand,
       )
@@ -595,6 +603,11 @@ function ResultScreen({
         <p className="mt-2 text-sm" style={{ color: VOCA_COLORS.gray }}>
           여기서 시작해서 한 칸씩 올라가요
         </p>
+        {bumpedUp && (
+          <p className="mt-1.5 text-sm font-semibold" style={{ color: VOCA_COLORS.blueDark, wordBreak: 'keep-all' }}>
+            아래 단계 단어는 이미 {res.finalBandScore}% 알고 있어서 건너뛰었어요
+          </p>
+        )}
         {/* 천일문 추천 근거 한 줄 — 교과서 단어 DB 교차 분석 (중1 교과서 단어 40% 수록) */}
         {placement.highlightTitle === '천일문 보카 중등 스타트' && (
           <p className="mt-1.5 text-sm font-semibold" style={{ color: VOCA_COLORS.blueDark, wordBreak: 'keep-all' }}>

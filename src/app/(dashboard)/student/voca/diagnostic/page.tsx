@@ -3,10 +3,14 @@ import { createClient } from '@/lib/supabase/server';
 import { Topbar } from '@/components/layout/topbar';
 import { getPlanContext } from '@/lib/billing/get-plan-context';
 import { getBandBooks, getLineupBookIds } from '@/lib/voca/diagnostic-sampling';
-import { BAND_KEYS } from '@/lib/voca/diagnostic-bands';
+import { BAND_KEYS, type BandKey } from '@/lib/voca/diagnostic-bands';
+import { bandScoreFromRounds } from '@/lib/voca/diagnostic-scoring';
 import { DiagnosticClient, type LatestDiagnostic } from './diagnostic-client';
 
 interface StoredRound {
+  band?: BandKey;
+  correct?: number;
+  total?: number;
   items?: { vocabId: string }[];
 }
 
@@ -47,6 +51,15 @@ export default async function VocaDiagnosticPage() {
         finalBand: latest.final_band,
         finalQualifier: latest.final_qualifier,
         coverageScore: latest.coverage_score,
+        // final_band_score 컬럼은 없다 — 저장된 rounds에서 재계산해 이전 진단의
+        // 추천 칸을 현행 상향 컷 규칙으로 재현한다 (재진단 칸 비교의 공정성)
+        finalBandScore: bandScoreFromRounds(
+          ((latest.rounds ?? []) as StoredRound[]).filter(
+            (r): r is { band: BandKey; correct: number; total: number } =>
+              !!r.band && typeof r.correct === 'number' && typeof r.total === 'number',
+          ),
+          latest.final_band as BandKey,
+        ),
         attemptNumber: latest.attempt_number,
         createdAt: latest.created_at,
       }
