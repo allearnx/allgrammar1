@@ -63,7 +63,7 @@ export async function updateSession(request: NextRequest) {
   const publicRoutes = [
     '/login', '/signup', '/callback', '/impersonate', '/report', '/quiz-result', '/parent',
     '/find-email', '/forgot-password', '/reset-password', '/level-test',
-    '/courses', '/teachers', '/reviews', '/faq', '/allkill', '/about',
+    '/courses', '/teachers', '/reviews', '/faq', '/allkill',
     '/curriculum', '/schedule', '/terms', '/privacy', '/trial', '/pricing', '/blog',
   ];
   const isPublicRoute = pathname === '/' || publicRoutes.some((route) => pathname.startsWith(route));
@@ -144,7 +144,7 @@ export async function updateSession(request: NextRequest) {
   // reset-password: 이메일 링크의 복구 세션(PASSWORD_RECOVERY)이 인증 상태라 대시보드로 튕기면 안 됨
   const noRedirectRoutes = [
     '/parent', '/report', '/quiz-result', '/reset-password',
-    '/courses', '/teachers', '/reviews', '/faq', '/allkill', '/about',
+    '/courses', '/teachers', '/reviews', '/faq', '/allkill',
     '/curriculum', '/schedule', '/terms', '/privacy', '/trial', '/pricing', '/blog',
   ];
   const isNoRedirectRoute = pathname === '/' || noRedirectRoutes.some((route) => pathname.startsWith(route));

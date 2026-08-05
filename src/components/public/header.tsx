@@ -8,15 +8,7 @@ import { DesktopNav } from './desktop-nav';
 import { MobileMenu } from './mobile-menu';
 
 const menuItems = [
-  {
-    label: '올라운더영어 소개',
-    href: '#',
-    hasDropdown: true,
-    dropdownItems: [
-      { label: '올라영 소개', href: '/about' },
-      { label: '커리큘럼', href: '/curriculum' },
-    ]
-  },
+  { label: '커리큘럼', href: '/curriculum', hasDropdown: false },
   { label: '시간표', href: '/schedule', hasDropdown: false },
   { label: '선생님 소개', href: '/teachers', hasDropdown: false },
   {

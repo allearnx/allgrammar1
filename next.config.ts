@@ -55,6 +55,12 @@ const nextConfig: NextConfig = {
         destination: "/curriculum",
         permanent: true,
       },
+      // /about 페이지 폐지 (2026-08-05) — 고유 콘텐츠는 랜딩 SystemSection/StatsSection으로 이관
+      {
+        source: "/about",
+        destination: "/",
+        permanent: true,
+      },
     ];
   },
 
