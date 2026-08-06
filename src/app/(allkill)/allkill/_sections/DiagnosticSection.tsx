@@ -29,7 +29,7 @@ export default function DiagnosticSection() {
         </h2>
         <p className="ak-sub" style={{ color: C.gray }}>
           학년을 고르면 문제가 레벨을 오르내리며,
-          <b style={{ color: C.ink }}> 천일문부터 수능 기출까지 어느 교재에서 시작할지</b> 찾아드려요.
+          <b style={{ color: C.ink }}> 초등 단어부터 수능 기출까지 어느 교재에서 시작할지</b> 찾아드려요.
           한 달 뒤 재진단으로 정답률이 얼마나 올랐는지도 비교해드려요.
         </p>
 

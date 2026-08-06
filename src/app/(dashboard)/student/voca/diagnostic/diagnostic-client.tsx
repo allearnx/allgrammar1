@@ -588,8 +588,9 @@ function IntroScreen({
           5분이면 나에게 맞는 단어장이 나와요
         </h1>
         <p className="mt-2 text-sm leading-relaxed" style={{ color: VOCA_COLORS.gray }}>
-          천일문부터 수능 기출까지, 어느 교재에서 시작할지 찾아드려요.
-          중간에 모르는 단어는 찍지 말고 <b>모르겠어요</b>를 눌러야 정확하게 측정돼요.
+          초등 단어부터 수능 기출까지, 어느 교재에서 시작할지 찾아드려요.
+          뜻 고르기와 함께 <b>첫 글자 힌트를 보고 철자를 입력하는 문제</b>도 나와요.
+          모르는 단어는 찍지 말고 <b>모르겠어요</b>를 눌러야 정확하게 측정돼요.
         </p>
         {latest && (
           <div className="mt-4 rounded-2xl bg-white/80 p-4 text-sm" style={{ color: VOCA_COLORS.gray }}>

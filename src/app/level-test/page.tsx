@@ -7,7 +7,7 @@ import { DiagnosticClient } from '@/app/(dashboard)/student/voca/diagnostic/diag
 
 export const metadata: Metadata = {
   title: '어휘 레벨 진단 | 올킬보카',
-  description: '가입 없이 5분이면 나에게 맞는 단어장이 나와요. 천일문부터 수능 기출까지, 어느 교재에서 시작할지 찾아드려요.',
+  description: '가입 없이 5분이면 나에게 맞는 단어장이 나와요. 초등 단어부터 수능 기출까지, 어느 교재에서 시작할지 찾아드려요.',
 };
 
 // 밴드 구성은 자주 안 바뀐다 — 5분 ISR (문항은 클라이언트에서 매 라운드 동적 요청)
