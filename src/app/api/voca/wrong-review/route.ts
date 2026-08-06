@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import { z } from 'zod';
 import { createApiHandler } from '@/lib/api/handler';
 import { fetchWrongPool, activeWrongKeys, getCurrentMonday } from '@/lib/voca/wrong-pool';
+import { selectInChunks } from '@/lib/supabase/in-chunks';
 import { computeVocaCoverage } from '@/lib/voca/coverage';
 
 function formatWeekLabel(from: string, to: string): string {
@@ -27,10 +28,15 @@ export const GET = createApiHandler(
     const exampleMap: Record<string, string> = {};
     const examSourceMap: Record<string, string> = {};
     if (pool.dayIds.size > 0) {
-      const { data: vocabRows } = await supabase
-        .from('voca_vocabulary')
-        .select('front_text, back_text, example_sentence, exam_source')
-        .in('day_id', [...pool.dayIds]);
+      // 오답이 쌓인 Day 목록은 길어질 수 있다 — `.in()` URL 한계 대비 청크 (2026-08-06)
+      const vocabRows = await selectInChunks<{
+        front_text: string; back_text: string; example_sentence: string | null; exam_source: string | null;
+      }>([...pool.dayIds], (chunk) =>
+        supabase
+          .from('voca_vocabulary')
+          .select('front_text, back_text, example_sentence, exam_source')
+          .in('day_id', chunk),
+      );
       distractorPool = (vocabRows || []).map((v) => v.back_text);
       wordDistractorPool = (vocabRows || []).map((v) => v.front_text);
       poolWords = (vocabRows || []).map((v) => ({ front_text: v.front_text, back_text: v.back_text }));

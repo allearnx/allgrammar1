@@ -1,5 +1,6 @@
 import type { SupabaseClient } from '@supabase/supabase-js';
 import { isR1Complete } from '@/lib/dashboard/voca-helpers';
+import { selectInChunks } from '@/lib/supabase/in-chunks';
 import { fetchWrongPool, activeWrongKeys, getCurrentMonday } from '@/lib/voca/wrong-pool';
 
 export interface VocaCoverage {
@@ -36,11 +37,10 @@ export async function computeVocaCoverage(
   const targetDayIds = (targetDays ?? []).map((d) => d.id);
   if (targetDayIds.length === 0) return { coverage: null, knownInBook: 0, totalWords: 0, coverageAfterConquest: null };
 
-  const { data: targetWords } = await client
-    .from('voca_vocabulary')
-    .select('front_text')
-    .in('day_id', targetDayIds);
-  const target = new Set((targetWords ?? []).map((w) => norm(w.front_text)));
+  const targetWords = await selectInChunks<{ front_text: string }>(targetDayIds, (chunk) =>
+    client.from('voca_vocabulary').select('front_text').in('day_id', chunk),
+  );
+  const target = new Set(targetWords.map((w) => norm(w.front_text)));
   if (target.size === 0) return { coverage: null, knownInBook: 0, totalWords: 0, coverageAfterConquest: null };
 
   // 2. 학생이 1회독 완료한 Day (모든 교재) + 정복 대기 오답
@@ -54,12 +54,11 @@ export async function computeVocaCoverage(
   const doneDayIds = (progress ?? []).filter((p) => isR1Complete(p)).map((p) => p.day_id);
   if (doneDayIds.length === 0) return { coverage: 0, knownInBook: 0, totalWords: target.size, coverageAfterConquest: 0 };
 
-  // 3. 아는 단어 = 완료 Day 단어 − 정복 대기 오답
-  const { data: knownWords } = await client
-    .from('voca_vocabulary')
-    .select('front_text')
-    .in('day_id', doneDayIds);
-  const studied = new Set((knownWords ?? []).map((w) => norm(w.front_text)));
+  // 3. 아는 단어 = 완료 Day 단어 − 정복 대기 오답 (완료 Day가 많은 학생은 id 목록이 길어 청크 필수)
+  const knownWords = await selectInChunks<{ front_text: string }>(doneDayIds, (chunk) =>
+    client.from('voca_vocabulary').select('front_text').in('day_id', chunk),
+  );
+  const studied = new Set(knownWords.map((w) => norm(w.front_text)));
   const activeWrong = activeWrongKeys(wrongPool);
 
   let hit = 0;
@@ -108,10 +107,10 @@ export async function computeTotalKnownWords(
   const doneRows = (progress ?? []).filter((p) => isR1Complete(p));
   if (doneRows.length === 0) return { knownWords: 0, weeklyNew: 0 };
 
-  const { data: words } = await client
-    .from('voca_vocabulary')
-    .select('front_text, day_id')
-    .in('day_id', doneRows.map((p) => p.day_id));
+  const words = await selectInChunks<{ front_text: string; day_id: string }>(
+    doneRows.map((p) => p.day_id),
+    (chunk) => client.from('voca_vocabulary').select('front_text, day_id').in('day_id', chunk),
+  );
 
   const thisWeekDayIds = new Set(
     doneRows.filter((p) => p.updated_at && p.updated_at >= weekStartIso).map((p) => p.day_id),

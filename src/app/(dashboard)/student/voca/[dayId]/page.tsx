@@ -85,13 +85,13 @@ export default async function StudentVocaDayPage({
     .from('voca_days')
     .select('id')
     .eq('book_id', (day as VocaDay).book_id);
+  // `.in('day_id', …)` 대신 학생 스코프 조회 — id 목록이 길면 URL 한계로 쿼리가 죽는다 (2026-08-06)
   const allDayIds = (allBookDays || []).map((d) => d.id);
   const { data: allProgress } = allDayIds.length > 0
     ? await supabase
         .from('voca_student_progress')
         .select('day_id, flashcard_completed, quiz_score, spelling_score, matching_completed')
         .eq('student_id', user.id)
-        .in('day_id', allDayIds)
     : { data: [] };
   const progMap = new Map((allProgress || []).map((p) => [p.day_id, p]));
   const bookRound1Complete = allDayIds.length > 0 && allDayIds.every((id) => {

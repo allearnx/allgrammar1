@@ -52,8 +52,12 @@ export default async function StudentVocaPage({
     days = data || [];
   }
 
-  // Get student progress + submission statuses for all days
+  // Get student progress + submission statuses for all days.
+  // ⚠️ `.in('day_id', dayIds)`로 좁히면 안 된다 — 전체 활성 Day가 655개라 요청 URL이
+  // 한계(~300개)를 넘어 쿼리가 통째로 죽고 진도 표시가 전부 사라진다 (2026-08-06 김민유 신고).
+  // 학생 스코프 조회 후 JS에서 활성 Day로 거른다 (행 수는 학생당 최대 Day 수라 안전).
   const dayIds = days.map((d) => d.id);
+  const activeDayIdSet = new Set(dayIds);
   let progressList: VocaStudentProgress[] = [];
   const submissionStatusMap: Record<string, string> = {};
   if (dayIds.length > 0) {
@@ -61,16 +65,16 @@ export default async function StudentVocaPage({
       supabase
         .from('voca_student_progress')
         .select(VOCA_STUDENT_PROGRESS_COLUMNS)
-        .eq('student_id', user.id)
-        .in('day_id', dayIds),
+        .eq('student_id', user.id),
       supabase
         .from('voca_matching_submissions')
         .select('day_id, status')
-        .eq('student_id', user.id)
-        .in('day_id', dayIds),
+        .eq('student_id', user.id),
     ]);
-    progressList = data || [];
-    for (const s of submissions || []) submissionStatusMap[s.day_id] = s.status;
+    progressList = (data || []).filter((p) => activeDayIdSet.has(p.day_id));
+    for (const s of submissions || []) {
+      if (activeDayIdSet.has(s.day_id)) submissionStatusMap[s.day_id] = s.status;
+    }
   }
 
   const { data: latestDiagnostic } = await supabase

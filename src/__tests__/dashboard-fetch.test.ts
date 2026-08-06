@@ -150,10 +150,10 @@ describe('fetchVocaDashboardData', () => {
       voca_student_progress: { data: [vocaProgress], error: null },
       voca_vocabulary: { data: null, error: null, count: 25 },
       voca_quiz_results: [
-        { data: [{ wrong_words: [{ front_text: 'apple' }] }], error: null },
-        { data: [{ score: 90, created_at: '2026-01-15T10:00:00Z' }], error: null },
+        { data: [{ day_id: 'day-1', wrong_words: [{ front_text: 'apple' }] }], error: null },
+        { data: [{ day_id: 'day-1', score: 90, created_at: '2026-01-15T10:00:00Z' }], error: null },
       ],
-      voca_matching_submissions: { data: [{ wrong_words: [{ word: 'banana' }] }], error: null },
+      voca_matching_submissions: { data: [{ day_id: 'day-1', wrong_words: [{ word: 'banana' }] }], error: null },
     });
 
     const { fetchVocaDashboardData } = await import('@/lib/dashboard/fetch-voca-data');
