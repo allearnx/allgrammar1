@@ -41,7 +41,15 @@ export const DIAGNOSTIC_BANDS: DiagnosticBand[] = [
   { key: 'L3', label: '중3', sourceLabel: '중3', bookTitles: ['중3 교과서 단어', '워드마스터 중등 고난도', '능률 VOCA 중등 고난도'] },
   { key: 'L4', label: '고1', sourceLabel: '고1', bookTitles: ['능률 고교필수 2000', '최근 5개년 고1 3월 모고 단어'] },
   { key: 'L5', label: '고2', sourceLabel: '고2', bookTitles: ['최근 4개년 고2 3월 모고 단어'] },
-  { key: 'L6', label: '고3', sourceLabel: '고3', bookTitles: ['최근 4개년 고3 3월 모고 단어'] },
+  // 해커스 어원: 2026-08-06 사장님 확정으로 L6 병렬 합류 — 겹침 실측(고1·2·3 모고와 균등
+  // 24~25% + 심화 고유 30%, 예: legislation·subsidize)상 고3 라벨에 부합. 구 "의도적 제외"
+  // 결정은 라벨 정직성 사유가 결과 개편으로 소멸해 뒤집힘. 라인업 표시는 고2 칸 병렬 유지(분리).
+  {
+    key: 'L6',
+    label: '고3',
+    sourceLabel: '고3',
+    bookTitles: ['최근 4개년 고3 3월 모고 단어', '해커스 보카 어원'],
+  },
 ];
 
 export const BAND_KEYS: BandKey[] = DIAGNOSTIC_BANDS.map((b) => b.key);
