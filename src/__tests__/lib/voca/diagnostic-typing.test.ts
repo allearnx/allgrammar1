@@ -3,7 +3,7 @@ import { describe, it, expect, beforeAll } from 'vitest';
 // 토큰 서명 키는 env에서 읽는다 — import 전에 스텁 (getKey는 첫 호출 시점에 읽음)
 process.env.SUPABASE_SERVICE_ROLE_KEY ??= 'test-secret-for-diagnostic-typing';
 
-import { buildTypingHint } from '@/lib/voca/diagnostic-hint';
+import { buildTypingHint, isTypeableFront } from '@/lib/voca/diagnostic-hint';
 import {
   normalizeTypedAnswer,
   signDiagnosticToken,
@@ -34,6 +34,39 @@ describe('normalizeTypedAnswer', () => {
 
   it('연속 공백은 하나로', () => {
     expect(normalizeTypedAnswer('watch  out   for')).toBe('watch out for');
+  });
+
+  it('아이폰 스마트 아포스트로피(’)를 직선(\')으로 접는다 — 출제 풀 실사례', () => {
+    expect(normalizeTypedAnswer('do one’s best')).toBe(normalizeTypedAnswer("do one's best"));
+    expect(normalizeTypedAnswer('don’t')).toBe("don't");
+  });
+
+  it('엔대시·특수 공백도 ASCII로 통일 (보카 공용 normalizeTyped 계승)', () => {
+    expect(normalizeTypedAnswer('part–time')).toBe('part-time');
+    expect(normalizeTypedAnswer('ice cream')).toBe('ice cream');
+  });
+});
+
+describe('isTypeableFront — 타이핑 출제 가능 판별 (단일 단어만)', () => {
+  it('단일 단어·하이픈 복합어는 허용', () => {
+    expect(isTypeableFront('puppy')).toBe(true);
+    expect(isTypeableFront('part-time')).toBe(true);
+    expect(isTypeableFront("don't")).toBe(true);
+  });
+
+  it('숙어·구동사(공백 포함)는 제외 — 사장님 지시 (스펠링 시험은 단어만)', () => {
+    expect(isTypeableFront('watch out for')).toBe(false);
+    expect(isTypeableFront("do one's best")).toBe(false);
+    expect(isTypeableFront('be used to -ing')).toBe(false);
+  });
+
+  it('문법 패턴 표기는 제외 — 단어가 아니라 철자 입력 불가', () => {
+    expect(isTypeableFront('v-ing')).toBe(false);
+  });
+
+  it('슬래시·물결 등 변칙 표기는 제외', () => {
+    expect(isTypeableFront('give ~ a hand')).toBe(false);
+    expect(isTypeableFront('spend (돈) on')).toBe(false);
   });
 });
 

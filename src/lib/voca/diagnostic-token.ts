@@ -10,6 +10,7 @@
  * 상태 저장이 없어(stateless) 익명 /level-test 플로우에도 그대로 쓸 수 있다.
  */
 import type { BandKey } from './diagnostic-bands';
+import { normalizeTyped } from './normalize-typed';
 
 export interface DiagnosticTokenPayload {
   /** 정답 단어 id */
@@ -94,14 +95,13 @@ export interface TokenAnswer {
   chosenIndex?: number | null;
 }
 
-/** 타이핑 답 정규화 — 대소문자·연속 공백·끝 문장부호 무시 (trim을 먼저 해야 끝 부호가 잡힌다) */
+/**
+ * 타이핑 답 정규화 — 보카 공용 normalizeTyped(대소문자·공백 + 유니코드 문장부호 접기)에
+ * 끝 문장부호 제거를 얹는다. 유니코드 접기가 없으면 아이폰 스마트 아포스트로피(’) 입력이
+ * "do one's best" 같은 숙어에서 오답 처리된다 (출제 풀 전수 점검으로 7건 확인, 2026-08-06).
+ */
 export function normalizeTypedAnswer(s: string): string {
-  return s
-    .toLowerCase()
-    .trim()
-    .replace(/[.?!]+$/, '')
-    .replace(/\s+/g, ' ')
-    .trim();
+  return normalizeTyped(s).replace(/[.?!]+$/, '').trim();
 }
 
 export interface VerifiedItem {

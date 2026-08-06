@@ -16,7 +16,7 @@
  */
 import { hasMeaningOverlap } from '@/lib/voca/meaning-overlap';
 import { shuffle } from '@/lib/utils';
-import { buildTypingHint, TYPEABLE_FRONT } from './diagnostic-hint';
+import { buildTypingHint, isTypeableFront } from './diagnostic-hint';
 import { cached, TTL } from '@/lib/cache/server-cache';
 import { createAdminClient } from '@/lib/supabase/admin';
 import { DIAGNOSTIC_BANDS, BAND_KEYS, getBand, type BandKey } from './diagnostic-bands';
@@ -295,9 +295,9 @@ export async function sampleDiagnosticQuestions(
   }
 
   // 타이핑 문항 배정 — 정확히 typingCount만큼 (랜덤이면 0개인 배치가 생긴다).
-  // 타이핑 가능한(TYPEABLE_FRONT) 표제어 중에서만 뽑고, 나머지는 전부 5지선다.
+  // 타이핑 가능한(isTypeableFront) 표제어 중에서만 뽑고, 나머지는 전부 5지선다.
   const typingIds = new Set(
-    shuffle(targets.filter((t) => TYPEABLE_FRONT.test(t.front_text.trim())))
+    shuffle(targets.filter((t) => isTypeableFront(t.front_text)))
       .slice(0, typingCount)
       .map((t) => t.id),
   );
