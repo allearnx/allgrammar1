@@ -171,6 +171,9 @@ export const POST = createApiHandler(
           .maybeSingle();
         serviceExpiresAt = computeExtendedExpiry(existingAssign?.expires_at, course?.duration_days);
 
+        // round2_unlocked는 심지 않는다 — 결제 학생(tier=paid)은 플랜 게이트(voca:round2)로
+        // 이미 2회독이 열려 있고, 이 플래그는 7/20(1610946)부터 "1회독 면제"(round2Forced)
+        // 의미라 켜면 홈 완료 표시가 2회독 기준이 되어 R1 완료가 안 보인다 (김민유 신고, 2026-08-06).
         const { error: assignErr } = await admin
           .from('service_assignments')
           .upsert(
@@ -180,7 +183,6 @@ export const POST = createApiHandler(
               assigned_by: user.id,
               source: 'payment',
               expires_at: serviceExpiresAt,
-              ...(service === 'voca' ? { round2_unlocked: true } : {}),
             },
             { onConflict: 'student_id,service' },
           );
