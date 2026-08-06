@@ -159,25 +159,29 @@ export const vocaBookAssignmentDeleteSchema = z.object({
 const diagnosticBand = z.enum(['L0', 'L1', 'L2', 'L3', 'L4', 'L5', 'L6']);
 
 /**
- * 토큰 라운드 — 문항은 HMAC 봉인 토큰으로 식별하고 클라이언트는 고른 보기 인덱스만 보고한다.
+ * 토큰 라운드 — 문항은 HMAC 봉인 토큰으로 식별하고 클라이언트는 답만 보고한다:
+ * 타이핑 문항은 typed, 5지선다 문항은 chosenIndex (null = "모르겠어요").
  * 정오 판정·밴드는 전부 서버가 토큰을 열어 결정 (정답 노출·위조 방지).
  */
-const diagnosticTokenRounds = z.array(
-  z.array(z.object({
-    token: z.string().min(20).max(4000),
-    chosenIndex: z.number().int().min(0).max(3).nullable(), // null = "모르겠어요"
-  })).min(1).max(20),
-).max(6);
+const diagnosticTokenItems = z.array(z.object({
+  token: z.string().min(20).max(4000),
+  typed: z.string().max(80).nullable().optional(),
+  chosenIndex: z.number().int().min(0).max(4).nullable().optional(),
+})).min(1).max(20);
+
+const diagnosticTokenRounds = z.array(diagnosticTokenItems).max(6);
 
 const diagnosticGrade = z.enum(['elementary', 'm1', 'm2', 'm3', 'h1', 'h2', 'h3']);
 
 /**
- * 다음 라운드 문항 요청 — 스테어케이스 판단도 서버가 한다.
- * rounds가 비면 학년 시작 밴드 1라운드, 차 있으면 검증 후 nextStep으로 다음 밴드/종료 결정.
+ * 다음 문항 배치 요청 — 스테어케이스 판단도 서버가 한다.
+ * rounds가 비면 학년 시작 밴드의 앞 배치, 차 있으면 검증 후 nextStep으로 다음 밴드/종료 결정.
+ * currentRound(진행 중 라운드의 앞 배치 답)가 있으면 중간 채점 후 뒤 배치를 돌려준다.
  */
 export const vocaDiagnosticQuestionsSchema = z.object({
   grade: diagnosticGrade,
   rounds: diagnosticTokenRounds.default([]),
+  currentRound: diagnosticTokenItems.optional(),
   excludeIds: z.array(ID).max(1000).default([]), // 재진단 시 이전 회차 출제 단어 제외
 });
 

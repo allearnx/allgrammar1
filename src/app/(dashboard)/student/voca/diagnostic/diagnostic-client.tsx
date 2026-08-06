@@ -15,6 +15,7 @@ import { VOCA_COLORS, VOCA_STEP_THEMES } from '@/lib/voca/brand-tokens';
 import {
   BAND_KEYS,
   DIAGNOSTIC_GRADES,
+  ROUND_SIZE,
   getBand,
   recommendBandKey,
   type BandKey,
@@ -61,10 +62,11 @@ interface PendingDiagnostic {
   leadId?: string;
 }
 
-/** 정오는 클라이언트가 모른다 — 봉인 토큰과 고른 보기 인덱스만 보관·전송 */
+/** 정오는 클라이언트가 모른다 — 봉인 토큰과 답(타이핑 or 보기 인덱스)만 보관·전송 (null = 모르겠어요) */
 interface AnsweredItem {
   token: string;
-  chosenIndex: number | null;
+  typed?: string | null;
+  chosenIndex?: number | null;
 }
 
 interface CompletedRound {
@@ -105,15 +107,23 @@ export function DiagnosticClient({ activeBands, lineupBookIds, latest, tookToday
   const [grade, setGrade] = useState<DiagnosticGrade | null>(null);
   const [completedRounds, setCompletedRounds] = useState<CompletedRound[]>([]);
   const [currentItems, setCurrentItems] = useState<AnsweredItem[]>([]);
+  const [typedInput, setTypedInput] = useState('');
   const [busy, setBusy] = useState(false);
   const [leadId, setLeadId] = useState<string | null>(null);
 
   /**
-   * 다음 라운드 요청 — 완료 라운드(봉인 토큰+선택)를 서버에 보내면
+   * 다음 문항 배치 요청 — 완료 라운드(봉인 토큰+답)를 서버에 보내면
    * 서버가 스테어케이스를 판단해 다음 문항 또는 종료(done)를 돌려준다.
+   * currentRound(진행 중 라운드의 앞 배치 답)를 보내면 중간 채점 후 뒤 배치가 온다 —
+   * 앞 배치를 잘 풀면(≥80%) 뒤 배치가 타이핑 위주로 바뀐다 (라운드 내 적응).
    */
   const requestNext = useCallback(
-    async (rounds: CompletedRound[], selectedGrade: DiagnosticGrade, message: string): Promise<NextRoundResponse | null> => {
+    async (
+      rounds: CompletedRound[],
+      selectedGrade: DiagnosticGrade,
+      message: string,
+      currentRound?: AnsweredItem[],
+    ): Promise<NextRoundResponse | null> => {
       const prevBand = rounds.length ? rounds[rounds.length - 1].band : null;
       setPhase({ step: 'loading', band: prevBand, message });
       try {
@@ -123,6 +133,7 @@ export function DiagnosticClient({ activeBands, lineupBookIds, latest, tookToday
             body: {
               grade: selectedGrade,
               rounds: rounds.map((r) => r.items),
+              ...(currentRound?.length ? { currentRound } : {}),
               excludeIds: prevVocabIds.slice(0, 1000),
             },
             retry: 2,
@@ -212,22 +223,37 @@ export function DiagnosticClient({ activeBands, lineupBookIds, latest, tookToday
   );
 
   const handleAnswer = useCallback(
-    async (chosenIndex: number | null) => {
+    async (answer: { typed?: string | null; chosenIndex?: number | null }) => {
       if (phase.step !== 'quiz' || busy) return;
-      // 더블클릭 등으로 같은 문항이 두 번 기록되는 것 방지
+      // 더블 제출 등으로 같은 문항이 두 번 기록되는 것 방지
       if (currentItems.length > phase.index) return;
       const q = phase.questions[phase.index];
-      const items = [...currentItems, { token: q.token, chosenIndex }];
+      const items = [...currentItems, { token: q.token, ...answer }];
       setCurrentItems(items);
+      setTypedInput('');
 
       if (phase.index + 1 < phase.questions.length) {
         setPhase({ ...phase, index: phase.index + 1 });
         return;
       }
 
+      const prevBand = phase.band;
+
+      // 라운드 앞 배치(5문항) 완료 → 중간 채점 후 뒤 배치 (잘 풀었으면 타이핑 위주로 바뀐다)
+      if (items.length < ROUND_SIZE) {
+        setBusy(true);
+        const tail = await requestNext(completedRounds, grade!, '이어질 문제를 고르고 있어요…', items);
+        setBusy(false);
+        if (!tail) return; // 에러 — requestNext가 intro로 되돌림
+        if (!tail.done && tail.questions?.length) {
+          setPhase({ step: 'quiz', band: prevBand, questions: [...phase.questions, ...tail.questions], index: items.length });
+          return;
+        }
+        // 뒤 배치를 못 받은 비정상 케이스 — 앞 배치만으로 라운드를 마감(폴백)하고 아래로 진행
+      }
+
       // 라운드 종료 → 서버가 스테어케이스 판단 (다음 밴드 또는 종료)
       setBusy(true);
-      const prevBand = phase.band;
       const rounds = [...completedRounds, { band: prevBand, items }];
       setCompletedRounds(rounds);
       const data = await requestNext(rounds, grade!, '결과를 확인하고 있어요…');
@@ -330,7 +356,7 @@ export function DiagnosticClient({ activeBands, lineupBookIds, latest, tookToday
     return (
       <div className="mx-auto max-w-md">
         <div className="mb-6 flex items-center justify-between text-sm text-gray-400">
-          <span>{phase.index + 1} / {phase.questions.length} 문항</span>
+          <span>{phase.index + 1} / {ROUND_SIZE} 문항</span>
           <span>{completedRounds.length + 1}라운드 · {getBand(phase.band).label} 수준 측정 중</span>
         </div>
         <AnimatePresence mode="wait">
@@ -342,43 +368,101 @@ export function DiagnosticClient({ activeBands, lineupBookIds, latest, tookToday
             transition={{ duration: 0.15 }}
             className="space-y-8"
           >
-            {q.type === 'ko-to-en' && (
-              <p className="text-center text-xs font-bold" style={{ color: VOCA_COLORS.blueDark }}>
-                뜻에 맞는 단어는?
-              </p>
-            )}
-            <p
-              className={cn('text-center font-bold', q.type === 'ko-to-en' ? 'text-2xl leading-relaxed' : 'text-4xl')}
-              style={{ color: VOCA_COLORS.blue, wordBreak: 'keep-all' }}
-            >
-              {q.prompt}
-            </p>
-            <div className="space-y-3">
-              {q.options.map((option, i) => {
-                const theme = VOCA_STEP_THEMES[i % VOCA_STEP_THEMES.length];
-                return (
+            {q.format === 'typing' ? (
+              <>
+                <p className="text-center text-xs font-bold" style={{ color: VOCA_COLORS.blueDark }}>
+                  뜻에 맞는 영어 단어를 입력하세요
+                </p>
+                <p
+                  className="text-center text-2xl font-bold leading-relaxed"
+                  style={{ color: VOCA_COLORS.blue, wordBreak: 'keep-all' }}
+                >
+                  {q.prompt}
+                </p>
+                {/* 첫 글자 + 글자 수 힌트 — 정답 자체는 토큰에 봉인되어 클라이언트에 없다 */}
+                <p
+                  className="text-center font-mono text-3xl font-bold tracking-[0.2em]"
+                  style={{ color: VOCA_COLORS.ink }}
+                >
+                  {q.hint}
+                </p>
+                <form
+                  onSubmit={(e) => {
+                    e.preventDefault();
+                    if (typedInput.trim()) handleAnswer({ typed: typedInput.trim() });
+                  }}
+                  className="space-y-3"
+                >
+                  <input
+                    key={`${phase.band}-${phase.index}`}
+                    value={typedInput}
+                    onChange={(e) => setTypedInput(e.target.value)}
+                    autoFocus
+                    autoComplete="off"
+                    autoCorrect="off"
+                    autoCapitalize="none"
+                    spellCheck={false}
+                    placeholder="여기에 입력"
+                    className="w-full rounded-2xl border-2 border-gray-200 bg-white px-4 py-3.5 text-center font-mono text-xl font-bold text-gray-800 outline-none transition-colors focus:border-gray-400"
+                  />
                   <button
-                    key={`${phase.index}-${i}`}
-                    onClick={() => handleAnswer(i)}
-                    className="flex w-full items-center gap-3 rounded-2xl border-2 border-gray-200 bg-white px-4 py-3.5 text-left text-lg font-medium text-gray-700 transition-all hover:-translate-y-0.5 hover:border-gray-300 hover:shadow-md active:scale-[0.99]"
+                    type="submit"
+                    disabled={!typedInput.trim()}
+                    className="w-full rounded-2xl px-4 py-3.5 text-lg font-bold text-white transition-all active:scale-[0.99] disabled:opacity-40"
+                    style={{ background: VOCA_COLORS.blue }}
                   >
-                    <span
-                      className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-sm font-bold"
-                      style={{ background: theme.bg, color: theme.text }}
-                    >
-                      {i + 1}
-                    </span>
-                    {option}
+                    제출
                   </button>
-                );
-              })}
-              <button
-                onClick={() => handleAnswer(null)}
-                className="w-full rounded-2xl border-2 border-dashed border-gray-300 bg-gray-50 px-4 py-3 text-center text-base font-medium text-gray-400 transition-colors hover:bg-gray-100 hover:text-gray-500"
-              >
-                모르겠어요
-              </button>
-            </div>
+                  <button
+                    type="button"
+                    onClick={() => handleAnswer({ typed: null })}
+                    className="w-full rounded-2xl border-2 border-dashed border-gray-300 bg-gray-50 px-4 py-3 text-center text-base font-medium text-gray-400 transition-colors hover:bg-gray-100 hover:text-gray-500"
+                  >
+                    모르겠어요
+                  </button>
+                </form>
+              </>
+            ) : (
+              <>
+                {q.type === 'ko-to-en' && (
+                  <p className="text-center text-xs font-bold" style={{ color: VOCA_COLORS.blueDark }}>
+                    뜻에 맞는 단어는?
+                  </p>
+                )}
+                <p
+                  className={cn('text-center font-bold', q.type === 'ko-to-en' ? 'text-2xl leading-relaxed' : 'text-4xl')}
+                  style={{ color: VOCA_COLORS.blue, wordBreak: 'keep-all' }}
+                >
+                  {q.prompt}
+                </p>
+                <div className="space-y-3">
+                  {q.options.map((option, i) => {
+                    const theme = VOCA_STEP_THEMES[i % VOCA_STEP_THEMES.length];
+                    return (
+                      <button
+                        key={`${phase.index}-${i}`}
+                        onClick={() => handleAnswer({ chosenIndex: i })}
+                        className="flex w-full items-center gap-3 rounded-2xl border-2 border-gray-200 bg-white px-4 py-3.5 text-left text-lg font-medium text-gray-700 transition-all hover:-translate-y-0.5 hover:border-gray-300 hover:shadow-md active:scale-[0.99]"
+                      >
+                        <span
+                          className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-sm font-bold"
+                          style={{ background: theme.bg, color: theme.text }}
+                        >
+                          {i + 1}
+                        </span>
+                        {option}
+                      </button>
+                    );
+                  })}
+                  <button
+                    onClick={() => handleAnswer({ chosenIndex: null })}
+                    className="w-full rounded-2xl border-2 border-dashed border-gray-300 bg-gray-50 px-4 py-3 text-center text-base font-medium text-gray-400 transition-colors hover:bg-gray-100 hover:text-gray-500"
+                  >
+                    모르겠어요
+                  </button>
+                </div>
+              </>
+            )}
           </motion.div>
         </AnimatePresence>
       </div>

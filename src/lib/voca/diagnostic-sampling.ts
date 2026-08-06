@@ -3,14 +3,23 @@
  *
  * egress를 위해 밴드 전체 단어를 내려받지 않는다: Day 목록(가벼움)만 받아
  * 무작위 Day 일부에서만 단어를 가져와 샘플링한다.
- * 보기(오답)는 같은 풀에서 hasMeaningOverlap 필터로 유의어를 제외하고 뽑는다
- * (quick-quiz와 동일한 규칙 — 정답이 두 개인 문제 방지).
+ *
+ * 문항 형식 = 타이핑(첫 글자+밑줄 힌트) + 5지선다 혼합, 라운드 내 적응형 (2026-08-06 사장님 확정).
+ * 라운드 10문항은 앞 5(선다 3+타이핑 2) → 서버 중간 채점 → 뒤 5로 나뉘어 출제되고,
+ * 앞 5를 80% 이상 맞히면(승급 조짐) 뒤 5가 타이핑 3+선다 2로 바뀐다 — 라운드 전체 타이핑
+ * 40%→50%. 배치는 diagnostic-flow.ts가 결정하고 여기는 (count, typingCount)만 받는다.
+ * 전부 4지선다이던 시절 찍기(적중 25%)가 인플레 주범(학년 위 판정 79%) — 타이핑은 찍기가
+ * 구조적으로 불가능하고, 선다형도 5지+보기 품질 강화로 소거를 어렵게 한다.
+ * 전부 타이핑(피로도)·다음 라운드 타이핑 100%(과함)·"알아요/몰라요" 자가보고(학부모 정서)는
+ * 전부 기각 — "같은 라운드 안에서" 적응이 확정안.
+ * 슬래시 병기 등 타이핑 불가 표제어는 자동으로 5지선다로 출제된다.
  */
 import { hasMeaningOverlap } from '@/lib/voca/meaning-overlap';
 import { shuffle } from '@/lib/utils';
+import { buildTypingHint, TYPEABLE_FRONT } from './diagnostic-hint';
 import { cached, TTL } from '@/lib/cache/server-cache';
 import { createAdminClient } from '@/lib/supabase/admin';
-import { DIAGNOSTIC_BANDS, BAND_KEYS, ROUND_SIZE, getBand, type BandKey } from './diagnostic-bands';
+import { DIAGNOSTIC_BANDS, BAND_KEYS, getBand, type BandKey } from './diagnostic-bands';
 import { DIAGNOSTIC_LINEUP } from './diagnostic-lineup';
 import { BASIC_ENGLISH_WORDS } from './basic-words';
 import { signDiagnosticToken } from './diagnostic-token';
@@ -28,18 +37,32 @@ interface PoolWord {
   part_of_speech: string | null;
 }
 
+/** 선다형 보기 수 — 4→5 확대 (찍기 적중 25%→20%, 2026-08-06) */
+const CHOICE_COUNT = 5;
+
 export type DiagnosticQuestionType = 'en-to-ko' | 'ko-to-en';
 
 /**
  * 클라이언트에 내려가는 문항 — 정답 정보는 token(HMAC 봉인)에만 있다.
- * options는 순수 텍스트 배열이라 어떤 보기가 정답인지 클라이언트에서 알 수 없다.
+ * typing: 뜻 제시 → 첫 글자+밑줄 힌트 타이핑 (hint는 첫 글자+글자 수만 노출).
+ * choice: 5지선다 — options는 순수 텍스트 배열이라 어떤 보기가 정답인지 클라이언트에서 알 수 없다.
  */
-export interface DiagnosticQuestion {
-  token: string;
-  type: DiagnosticQuestionType;
-  prompt: string; // en-to-ko: front_text / ko-to-en: back_text
-  options: string[]; // 4개, 정답 포함 셔플
-}
+export type DiagnosticQuestion =
+  | {
+      format: 'typing';
+      token: string;
+      /** 한국어 뜻 (back_text) — 이 뜻의 영어 단어를 타이핑한다 */
+      prompt: string;
+      /** 타이핑 힌트 — 예: "watch out for" → "w____ o__ f__" */
+      hint: string;
+    }
+  | {
+      format: 'choice';
+      token: string;
+      type: DiagnosticQuestionType;
+      prompt: string; // en-to-ko: front_text / ko-to-en: back_text
+      options: string[]; // 5개, 정답 포함 셔플
+    };
 
 /** 품사 문자열("n. v.", "동사" 등)을 비교용 토큰으로 분해 */
 function posTokens(pos: string | null): string[] {
@@ -57,6 +80,20 @@ function samePos(a: string | null, b: string | null): boolean {
   const tb = posTokens(b);
   if (ta.length === 0 || tb.length === 0) return false;
   return ta.some((t) => tb.includes(t));
+}
+
+/**
+ * 오답 보기 유사도 (낮을수록 우선) — 소거법으로 찍는 것을 막는 보기 품질 강화 (2026-08-06).
+ * ko→en(영어 보기): 첫 글자 같음 + 길이 비슷 우선 — "생김새로 배제"를 차단.
+ * en→ko(뜻 보기): 같은 Day(주제) 우선 — 맥락이 다른 뜻은 그것만으로 배제된다.
+ */
+function distractorRank(target: PoolWord, w: PoolWord, type: DiagnosticQuestionType): number {
+  if (type === 'ko-to-en') {
+    const sameInitial = w.front_text[0]?.toLowerCase() === target.front_text[0]?.toLowerCase();
+    const lengthGap = Math.abs(w.front_text.length - target.front_text.length);
+    return (sameInitial ? 0 : 10) + Math.min(lengthGap, 9);
+  }
+  return w.day_id === target.day_id ? 0 : 1;
 }
 
 export interface BandBook {
@@ -196,13 +233,15 @@ async function fetchPool(
 }
 
 /**
- * 밴드에서 라운드 1회분(10문항) 샘플링.
+ * 밴드에서 문항 배치(count개, 그중 typingCount개는 타이핑) 샘플링 — 라운드의 앞/뒤 절반 단위로 호출된다.
  * Day 층화: 서로 다른 Day에서 골고루 뽑는다 (한 Day 쏠림 방지).
  */
 export async function sampleDiagnosticQuestions(
   supabase: SupabaseLike,
   bandKey: BandKey,
   excludeIds: string[],
+  count: number,
+  typingCount: number,
 ): Promise<DiagnosticQuestion[] | null> {
   const band = getBand(bandKey);
 
@@ -228,11 +267,11 @@ export async function sampleDiagnosticQuestions(
   if (BAND_KEYS.indexOf(bandKey) >= BAND_KEYS.indexOf('L4')) {
     for (const w of BASIC_ENGLISH_WORDS) easySet.add(w);
   }
-  // 문항 10 + 보기용 여유. 40개 미만이면 보기 다양성이 떨어진다.
+  // 배치 문항 수 + 보기용 여유. 40개 미만이면 보기 다양성이 떨어진다.
   const fullPool = await fetchPool(supabase, shuffledDayIds, new Set(excludeIds), 120, easySet);
   const hardPool = fullPool.filter((w) => !easySet.has(w.front_text.trim().toLowerCase()));
-  const pool = hardPool.length >= ROUND_SIZE + 10 ? hardPool : fullPool;
-  if (pool.length < ROUND_SIZE + 3) return null;
+  const pool = hardPool.length >= count + 10 ? hardPool : fullPool;
+  if (pool.length < count + 3) return null;
 
   // Day 층화 라운드로빈으로 출제 단어 선정
   const byDay = new Map<string, PoolWord[]>();
@@ -243,10 +282,10 @@ export async function sampleDiagnosticQuestions(
   }
   const dayLists = shuffle([...byDay.values()]);
   const targets: PoolWord[] = [];
-  for (let depth = 0; targets.length < ROUND_SIZE; depth++) {
+  for (let depth = 0; targets.length < count; depth++) {
     let picked = false;
     for (const list of dayLists) {
-      if (targets.length >= ROUND_SIZE) break;
+      if (targets.length >= count) break;
       if (list[depth]) {
         targets.push(list[depth]);
         picked = true;
@@ -255,9 +294,35 @@ export async function sampleDiagnosticQuestions(
     if (!picked) break;
   }
 
-  return Promise.all(targets.map(async (target) => {
-    // 오답 보기 우선순위: ①같은 품사 + 뜻 안 겹침 ②다른 품사 + 뜻 안 겹침 ③뜻 겹침(최후).
+  // 타이핑 문항 배정 — 정확히 typingCount만큼 (랜덤이면 0개인 배치가 생긴다).
+  // 타이핑 가능한(TYPEABLE_FRONT) 표제어 중에서만 뽑고, 나머지는 전부 5지선다.
+  const typingIds = new Set(
+    shuffle(targets.filter((t) => TYPEABLE_FRONT.test(t.front_text.trim())))
+      .slice(0, typingCount)
+      .map((t) => t.id),
+  );
+
+  return Promise.all(targets.map(async (target): Promise<DiagnosticQuestion> => {
+    if (typingIds.has(target.id)) {
+      // 타이핑 — 정답 단어·밴드를 토큰에 봉인, 클라이언트에는 뜻과 마스킹 힌트만
+      const token = await signDiagnosticToken({
+        v: target.id,
+        f: target.front_text,
+        b: target.back_text,
+        band: bandKey,
+      });
+      return {
+        format: 'typing',
+        token,
+        prompt: target.back_text,
+        hint: buildTypingHint(target.front_text),
+      };
+    }
+
+    // 5지선다 — 오답 보기 우선순위: ①같은 품사 + 뜻 안 겹침 ②다른 품사 + 뜻 안 겹침 ③뜻 겹침(최후).
     // 품사가 다른 보기는 그것만으로 배제 가능해 정답이 추측된다 → 같은 품사 우선.
+    // 유형 50% 혼합 — 방향이 바뀌면 추측 패턴도 깨진다
+    const type: DiagnosticQuestionType = Math.random() < 0.5 ? 'en-to-ko' : 'ko-to-en';
     const samePosSafe: PoolWord[] = [];
     const otherPosSafe: PoolWord[] = [];
     const risky: PoolWord[] = [];
@@ -267,18 +332,19 @@ export async function sampleDiagnosticQuestions(
       else if (samePos(target.part_of_speech, w.part_of_speech)) samePosSafe.push(w);
       else otherPosSafe.push(w);
     }
-    // 뜻 문자열 중복 제거하며 3개 채움 (부족하면 유의어라도 채움 — quick-quiz와 동일)
+    // 각 우선순위 안에서는 유사도(distractorRank) 순 — 셔플 후 안정 정렬로 동점끼리는 무작위
+    const byRank = (list: PoolWord[]) =>
+      shuffle(list).sort((a, b) => distractorRank(target, a, type) - distractorRank(target, b, type));
+    // 뜻 문자열 중복 제거하며 채움 (부족하면 유의어라도 채움 — quick-quiz와 동일)
     const seen = new Set([target.back_text]);
     const distractors: PoolWord[] = [];
-    for (const w of [...shuffle(samePosSafe), ...shuffle(otherPosSafe), ...shuffle(risky)]) {
-      if (distractors.length >= 3) break;
+    for (const w of [...byRank(samePosSafe), ...byRank(otherPosSafe), ...shuffle(risky)]) {
+      if (distractors.length >= CHOICE_COUNT - 1) break;
       if (seen.has(w.back_text)) continue;
       seen.add(w.back_text);
       distractors.push(w);
     }
 
-    // 유형 50% 혼합 — 방향이 바뀌면 추측 패턴도 깨진다
-    const type: DiagnosticQuestionType = Math.random() < 0.5 ? 'en-to-ko' : 'ko-to-en';
     const optionText = (w: PoolWord) => (type === 'en-to-ko' ? w.back_text : w.front_text);
     const shuffled = shuffle([target, ...distractors]);
     const correctIndex = shuffled.findIndex((w) => w.id === target.id);
@@ -291,6 +357,7 @@ export async function sampleDiagnosticQuestions(
       band: bandKey,
     });
     return {
+      format: 'choice',
       token,
       type,
       prompt: type === 'en-to-ko' ? target.front_text : target.back_text,

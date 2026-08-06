@@ -14,12 +14,12 @@ import type { BandKey } from './diagnostic-bands';
 export interface DiagnosticTokenPayload {
   /** 정답 단어 id */
   v: string;
-  /** front_text (영어) */
+  /** front_text (영어) — 타이핑 정답 비교 대상 */
   f: string;
   /** back_text (뜻) */
   b: string;
-  /** 정답 보기 인덱스 (0~3) */
-  c: number;
+  /** 정답 보기 인덱스 — 5지선다 문항만. 타이핑 문항 토큰엔 없음 */
+  c?: number;
   /** 출제 밴드 — 클라이언트가 밴드를 속이지 못하게 토큰에 봉인 */
   band: BandKey;
   /** 만료 (epoch ms) — 비로그인 완주 후 가입까지의 여유를 고려해 24시간 */
@@ -79,7 +79,7 @@ export async function verifyDiagnosticToken(token: string): Promise<DiagnosticTo
     if (!valid) return null;
     const payload = JSON.parse(Buffer.from(b64urlDecode(body)).toString('utf8')) as DiagnosticTokenPayload;
     if (typeof payload.exp !== 'number' || payload.exp < Date.now()) return null;
-    if (typeof payload.v !== 'string' || typeof payload.c !== 'number') return null;
+    if (typeof payload.v !== 'string' || typeof payload.f !== 'string') return null;
     return payload;
   } catch {
     return null;
@@ -88,14 +88,28 @@ export async function verifyDiagnosticToken(token: string): Promise<DiagnosticTo
 
 export interface TokenAnswer {
   token: string;
-  /** 고른 보기 인덱스 — null = "모르겠어요" */
-  chosenIndex: number | null;
+  /** 타이핑 문항의 답 — null = "모르겠어요" */
+  typed?: string | null;
+  /** 5지선다 문항의 고른 보기 인덱스 — null = "모르겠어요" */
+  chosenIndex?: number | null;
+}
+
+/** 타이핑 답 정규화 — 대소문자·연속 공백·끝 문장부호 무시 (trim을 먼저 해야 끝 부호가 잡힌다) */
+export function normalizeTypedAnswer(s: string): string {
+  return s
+    .toLowerCase()
+    .trim()
+    .replace(/[.?!]+$/, '')
+    .replace(/\s+/g, ' ')
+    .trim();
 }
 
 export interface VerifiedItem {
   vocabId: string;
   front_text: string;
   back_text: string;
+  /** 문항 형식 — 타이핑(리콜) 성적은 승급 게이트에 별도로 쓰인다 */
+  format: 'typing' | 'choice';
   result: 'correct' | 'wrong' | 'unknown';
 }
 
@@ -114,7 +128,7 @@ export async function verifyRounds(rounds: TokenAnswer[][]): Promise<VerifiedRou
   for (const round of rounds) {
     const items: VerifiedItem[] = [];
     let band: BandKey | null = null;
-    for (const { token, chosenIndex } of round) {
+    for (const { token, typed, chosenIndex } of round) {
       const p = await verifyDiagnosticToken(token);
       if (!p) return null;
       if (band === null) band = p.band;
@@ -122,12 +136,26 @@ export async function verifyRounds(rounds: TokenAnswer[][]): Promise<VerifiedRou
       // 같은 토큰 재사용(문항 복제)으로 라운드를 부풀리는 것 방지
       if (seenVocab.has(p.v)) return null;
       seenVocab.add(p.v);
-      items.push({
-        vocabId: p.v,
-        front_text: p.f,
-        back_text: p.b,
-        result: chosenIndex === null ? 'unknown' : chosenIndex === p.c ? 'correct' : 'wrong',
-      });
+      const format: VerifiedItem['format'] = typed !== undefined ? 'typing' : 'choice';
+      let result: VerifiedItem['result'];
+      if (typed !== undefined) {
+        // 타이핑 문항
+        result =
+          typed === null || !typed.trim()
+            ? 'unknown'
+            : normalizeTypedAnswer(typed) === normalizeTypedAnswer(p.f)
+              ? 'correct'
+              : 'wrong';
+      } else {
+        // 선다형 문항 (구 4지선다 토큰도 같은 경로로 채점된다)
+        result =
+          chosenIndex === null || chosenIndex === undefined
+            ? 'unknown'
+            : typeof p.c === 'number' && chosenIndex === p.c
+              ? 'correct'
+              : 'wrong';
+      }
+      items.push({ vocabId: p.v, front_text: p.f, back_text: p.b, format, result });
     }
     if (!band || items.length === 0) return null;
     out.push({ band, items });

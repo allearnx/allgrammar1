@@ -12,7 +12,14 @@ export interface ScoredRound {
   total: number;
   correct: number;
   unknown: number;
-  items: { vocabId: string; front_text: string; back_text: string; result: 'correct' | 'wrong' | 'unknown' }[];
+  items: {
+    vocabId: string;
+    front_text: string;
+    back_text: string;
+    /** 문항 형식 — 구 기록(4지선다 시절)엔 없음 */
+    format?: 'typing' | 'choice';
+    result: 'correct' | 'wrong' | 'unknown';
+  }[];
 }
 
 export interface DiagnosticScore {
