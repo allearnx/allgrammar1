@@ -5,7 +5,10 @@ import { NaesinProgressCard } from '@/components/dashboard/naesin-progress-card'
 import { VocaProgressCard } from '@/components/dashboard/voca-progress-card';
 import { VocaExamReportCard } from '@/components/dashboard/voca-exam-report-card';
 import { VocaKnownWordsCard } from '@/components/dashboard/voca-known-words-card';
-import { VocaDiagnosticCard, type DiagnosticCardResult } from '@/components/dashboard/voca-diagnostic-card';
+import { VocaDiagnosticLineupCard, type DiagnosticLineupResult } from '@/components/dashboard/voca-diagnostic-lineup-card';
+import { bandScoreFromRounds } from '@/lib/voca/diagnostic-scoring';
+import { getActiveBands, getLineupBookIds } from '@/lib/voca/diagnostic-sampling';
+import type { BandKey } from '@/lib/voca/diagnostic-bands';
 import { computeTotalKnownWords } from '@/lib/voca/coverage';
 import { ParentProgressTabs } from '@/components/dashboard/parent-progress-tabs';
 import { fetchVocaExamGroups } from '@/lib/voca/fetch-exam-results';
@@ -254,25 +257,41 @@ export default async function ParentReportPage({ params, searchParams }: Props) 
   ) : null;
 
   // 보카 시험 결과 (오늘 본 게 맨 위) + 누적 암기 단어 + 레벨 진단 — 학부모 리포트에 노출
-  const [vocaExam, totalKnown, diagnosticRes] = await Promise.all([
+  const [vocaExam, totalKnown, diagnosticRes, activeBands, lineupBookIds] = await Promise.all([
     hasVoca ? fetchVocaExamGroups(admin, [studentId]) : Promise.resolve({ groups: [], dayTitles: {} }),
     hasVoca ? computeTotalKnownWords(admin, studentId) : Promise.resolve({ knownWords: 0, weeklyNew: 0 }),
     hasVoca
       ? admin
           .from('voca_diagnostic_results')
-          .select('grade, start_band, final_band, final_qualifier, coverage_score, created_at')
+          .select('grade, start_band, final_band, final_qualifier, coverage_score, rounds, created_at')
           .eq('student_id', studentId)
           .order('created_at', { ascending: false })
           .limit(2)
       : Promise.resolve({ data: null }),
+    hasVoca ? getActiveBands(admin) : Promise.resolve([] as BandKey[]),
+    hasVoca ? getLineupBookIds(admin) : Promise.resolve({}),
   ]);
   const vocaExamExams = vocaExam.groups[0]?.exams ?? [];
-  const diagnosticResults = (diagnosticRes.data ?? []) as DiagnosticCardResult[];
+  // 추천 상향 컷(확정 밴드 정답률 ≥60% → 한 칸 위)을 학생 결과 화면과 동일하게 재현하기 위해
+  // 저장된 rounds에서 확정 밴드 정답률을 재계산한다 (final_band_score 컬럼 없음)
+  interface StoredSummaryRound { band?: BandKey; correct?: number; total?: number }
+  const diagnosticResults: DiagnosticLineupResult[] = ((diagnosticRes.data ?? []) as (Omit<DiagnosticLineupResult, 'final_band_score'> & { rounds: StoredSummaryRound[] | null })[]).map(
+    (row) => ({
+      ...row,
+      final_band_score: bandScoreFromRounds(
+        (row.rounds ?? []).filter(
+          (r): r is { band: BandKey; correct: number; total: number } =>
+            !!r.band && typeof r.correct === 'number' && typeof r.total === 'number',
+        ),
+        row.final_band as BandKey,
+      ),
+    }),
+  );
   const totalDaysByBook = hasVoca ? await fetchBookDayTotals(vocaProgress) : {};
 
   const vocaCard = hasVoca ? (
     <div className="space-y-4">
-      <VocaDiagnosticCard results={diagnosticResults} />
+      <VocaDiagnosticLineupCard results={diagnosticResults} activeBands={activeBands} lineupBookIds={lineupBookIds} />
       <VocaExamReportCard exams={vocaExamExams} dayTitles={vocaExam.dayTitles} />
       <VocaKnownWordsCard knownWords={totalKnown.knownWords} weeklyNew={totalKnown.weeklyNew} />
       <VocaProgressCard vocaProgress={vocaProgress} submissionStatuses={vocaSubmissionStatuses} totalDaysByBook={totalDaysByBook} />
