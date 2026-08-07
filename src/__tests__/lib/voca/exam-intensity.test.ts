@@ -4,7 +4,30 @@ import {
   EXAM_PRESETS,
   resolveExamIntensity,
   matchPreset,
+  secondsForWord,
 } from '@/lib/voca/exam-intensity';
+
+describe('secondsForWord — 글자 수 비례 제한시간 (2026-08-06)', () => {
+  it('6자 이하는 설정값 그대로 (더 줄이지 않음)', () => {
+    expect(secondsForWord('cat', 5)).toBe(5);
+    expect(secondsForWord('planet', 5)).toBe(5);
+  });
+
+  it('6자 초과는 2글자마다 +1초', () => {
+    expect(secondsForWord('painting', 5)).toBe(6); // 8자 → +1
+    expect(secondsForWord('characteristic', 5)).toBe(9); // 14자 → +4
+    expect(secondsForWord('characteristic', 8)).toBe(12);
+  });
+
+  it('공백·하이픈은 글자 수에서 제외', () => {
+    expect(secondsForWord('watch out for', 5)).toBe(secondsForWord('watchoutfor', 5));
+    expect(secondsForWord('part-time', 5)).toBe(secondsForWord('parttime', 5));
+  });
+
+  it('무제한(0)은 그대로 0', () => {
+    expect(secondsForWord('characteristic', 0)).toBe(0);
+  });
+});
 
 describe('resolveExamIntensity', () => {
   it('null 행이면 시스템 기본(90/0/false)', () => {

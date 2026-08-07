@@ -78,6 +78,17 @@ export function resolveExamIntensity(
   };
 }
 
+/**
+ * 단어별 실제 제한시간 — 설정값은 6자 기준이고 긴 단어는 2글자마다 +1초 자동 연장 (2026-08-06 사장님).
+ * 일률 제한은 characteristic(14자) 같은 단어에서 실력과 무관한 시간 오답을 만든다 —
+ * 짧은 단어는 설정값 그대로(더 줄이지 않음), 긴 단어만 늘린다. 알파벳 수 기준(공백·하이픈 제외).
+ */
+export function secondsForWord(front: string, secondsPerWord: number): number {
+  if (secondsPerWord <= 0) return 0;
+  const letters = front.replace(/[^A-Za-z]/g, '').length;
+  return secondsPerWord + Math.ceil(Math.max(0, letters - 6) / 2);
+}
+
 /** 현재 강도와 정확히 일치하는 프리셋 키 (없으면 'custom') */
 export function matchPreset(intensity: ExamIntensity): ExamPresetKey | 'custom' {
   const hit = EXAM_PRESETS.find(

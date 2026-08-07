@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button';
 import { cn, shuffle, blankOutWordExact } from '@/lib/utils';
 import { Volume2, Delete } from 'lucide-react';
 import { useAudioPlayer } from './audio-player-hook';
+import { secondsForWord } from '@/lib/voca/exam-intensity';
 import { NeonResultScreen } from './neon-result-screen';
 import type { VocaVocabulary } from '@/types/voca';
 import { normalizeTyped } from '@/lib/voca/normalize-typed';
@@ -223,13 +224,14 @@ export function RhythmSpelling({ vocabulary, onComplete, examMode = false, passT
   gradeWordRef.current = gradeWord;
 
   // 단어당 제한시간 (examMode + secondsPerWord>0). 만료 시 현재 입력 상태로 강제 채점.
+  // 긴 단어는 secondsForWord로 자동 연장 (6자 기준, 2글자당 +1초)
   const [timeLeft, setTimeLeft] = useState<number | null>(null);
   useEffect(() => {
     if (!examMode || secondsPerWord <= 0 || graded || finalScore !== null) {
       setTimeLeft(null);
       return;
     }
-    setTimeLeft(secondsPerWord);
+    setTimeLeft(secondsForWord(vocab.front_text, secondsPerWord));
     const iv = setInterval(() => {
       setTimeLeft((t) => {
         if (t === null) return null;

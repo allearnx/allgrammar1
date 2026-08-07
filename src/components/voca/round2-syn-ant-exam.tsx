@@ -6,7 +6,7 @@ import { shuffle } from '@/lib/utils';
 import { fetchWithToast } from '@/lib/fetch-with-toast';
 import { VOCA_VOCABULARY_COLUMNS, type VocaDay } from '@/types/voca';
 import { VOCA_COLORS } from '@/components/voca/voca-brand';
-import { DEFAULT_EXAM_INTENSITY, type ExamIntensity } from '@/lib/voca/exam-intensity';
+import { DEFAULT_EXAM_INTENSITY, secondsForWord, type ExamIntensity } from '@/lib/voca/exam-intensity';
 import {
   buildRound2ExamQuestions,
   isRelatedCorrect,
@@ -135,13 +135,15 @@ export function Round2SynAntExam({
     }
   }
 
-  // 단어당 제한시간 — 만료 시 현재 입력으로 강제 채점
+  // 단어당 제한시간 — 만료 시 현재 입력으로 강제 채점.
+  // 긴 단어는 secondsForWord로 자동 연장 (정답 후보 중 가장 짧은 것 기준)
   useEffect(() => {
-    if (mode !== 'exam' || intensity.secondsPerWord <= 0 || graded !== null) {
+    if (mode !== 'exam' || intensity.secondsPerWord <= 0 || graded !== null || !q) {
       setTimeLeft(null);
       return;
     }
-    setTimeLeft(intensity.secondsPerWord);
+    const shortest = [...q.answers].sort((a, b) => a.length - b.length)[0] ?? '';
+    setTimeLeft(secondsForWord(shortest, intensity.secondsPerWord));
     const iv = setInterval(() => {
       setTimeLeft((t) => {
         if (t === null) return null;
