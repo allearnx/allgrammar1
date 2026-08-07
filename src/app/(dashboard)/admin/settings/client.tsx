@@ -261,7 +261,7 @@ export function AcademySettingsClient({ academy, currentStudents, canEditAcademy
                 );
               })}
               <span className="text-xs text-muted-foreground">
-                합격 {examDefault.passScore}{examDefault.secondsPerWord > 0 ? ` · 단어당 ${examDefault.secondsPerWord}초` : ' · 무제한'} · 오답재시험 {examDefault.retryWrong ? 'ON' : 'OFF'}
+                합격 {examDefault.passScore}{examDefault.secondsPerWord > 0 ? ` · 단어당 ${examDefault.secondsPerWord}초(긴 단어 자동 연장)` : ' · 무제한'} · 오답재시험 {examDefault.retryWrong ? 'ON' : 'OFF'}
               </span>
             </div>
           </div>

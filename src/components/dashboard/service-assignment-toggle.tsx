@@ -322,7 +322,7 @@ export function ServiceAssignmentToggle({
             );
           })}
           <span className="text-[11px] text-muted-foreground/70 shrink-0">
-            합격 {exam.passScore}{exam.secondsPerWord > 0 ? ` · 단어당 ${exam.secondsPerWord}초` : ''}
+            합격 {exam.passScore}{exam.secondsPerWord > 0 ? ` · 단어당 ${exam.secondsPerWord}초(긴 단어 연장)` : ''}
           </span>
         </div>
       )}

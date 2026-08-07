@@ -110,7 +110,7 @@ export function BonusExam({ days, bookId, intensity = DEFAULT_EXAM_INTENSITY }: 
         <div className="rounded-2xl px-4 py-3 text-center" style={{ background: VOCA_COLORS.greenLight }}>
           <p className="voca-display text-lg" style={{ color: VOCA_COLORS.greenDark, fontWeight: 700 }}>{retryOnly ? '🔁 틀린 단어만 다시' : '📝 묶음 표제어 스펠링 시험'}</p>
           <p className="mt-0.5 text-xs" style={{ color: VOCA_COLORS.green }}>
-            {vocab.length}단어 · {PASS}점 통과{intensity.secondsPerWord > 0 ? ` · 단어당 ${intensity.secondsPerWord}초` : ''} · 순서 셔플
+            {vocab.length}단어 · {PASS}점 통과{intensity.secondsPerWord > 0 ? ` · 단어당 ${intensity.secondsPerWord}초(긴 단어는 자동 연장)` : ''} · 순서 셔플
           </p>
         </div>
         <RhythmSpelling

@@ -101,7 +101,7 @@ export function AssignedExams({ intensity = DEFAULT_EXAM_INTENSITY }: { intensit
         <button onClick={() => setActive(null)} className="text-sm font-medium text-gray-500 hover:text-gray-700">← 그만두기</button>
         <div className="rounded-2xl bg-accent px-4 py-3 text-center">
           <p className="voca-display text-lg text-primary" style={{ fontWeight: 700 }}>📋 선생님이 낸 시험</p>
-          <p className="mt-0.5 text-xs text-primary">{rangeLabel(active)} · {vocab.length}단어 · {PASS}점 통과{activeSeconds > 0 ? ` · 단어당 ${activeSeconds}초` : ''}</p>
+          <p className="mt-0.5 text-xs text-primary">{rangeLabel(active)} · {vocab.length}단어 · {PASS}점 통과{activeSeconds > 0 ? ` · 단어당 ${activeSeconds}초(긴 단어는 자동 연장)` : ''}</p>
         </div>
         <RhythmSpelling
           vocabulary={vocab}

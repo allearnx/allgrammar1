@@ -175,7 +175,7 @@ export function VocaExamAssignPanel() {
             <input type="number" min={0} max={60} value={secondsPerWord}
               onChange={(e) => setSecondsPerWord(Math.max(0, Math.min(60, Number(e.target.value) || 0)))}
               className="w-20 rounded-lg border border-gray-200 px-2 py-1.5 text-sm" />
-            <span className="text-xs text-gray-400">{secondsPerWord > 0 ? '초' : '초 (0 = 학생 강도 따름)'}</span>
+            <span className="text-xs text-gray-400">{secondsPerWord > 0 ? '초 · 긴 단어는 자동 연장' : '초 (0 = 학생 강도 따름)'}</span>
           </label>
           <div className="flex gap-2">
             <button onClick={assign} disabled={saving || selDays.length === 0 || selStudents.length === 0}

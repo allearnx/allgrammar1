@@ -33,8 +33,8 @@ export interface ExamPreset {
 
 export const EXAM_PRESETS: ExamPreset[] = [
   { key: 'basic', label: '기초', hint: '합격 70 · 여유롭게', intensity: { passScore: 70, secondsPerWord: 0, retryWrong: false } },
-  { key: 'standard', label: '표준', hint: '합격 90 · 단어당 8초', intensity: { passScore: 90, secondsPerWord: 8, retryWrong: true } },
-  { key: 'perfect', label: '완벽', hint: '합격 100 · 단어당 5초', intensity: { passScore: 100, secondsPerWord: 5, retryWrong: true } },
+  { key: 'standard', label: '표준', hint: '합격 90 · 단어당 8초(긴 단어 연장)', intensity: { passScore: 90, secondsPerWord: 8, retryWrong: true } },
+  { key: 'perfect', label: '완벽', hint: '합격 100 · 단어당 5초(긴 단어 연장)', intensity: { passScore: 100, secondsPerWord: 5, retryWrong: true } },
 ];
 
 /** 학생 예외 행 (service_assignments) */
