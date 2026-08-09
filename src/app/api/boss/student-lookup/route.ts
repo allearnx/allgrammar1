@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import { createApiHandler } from '@/lib/api/handler';
 import { createAdminClient } from '@/lib/supabase/admin';
 import { formatLevel, recommendBandKey, getBand, type BandKey } from '@/lib/voca/diagnostic-bands';
+import { bandScoreFromRounds } from '@/lib/voca/diagnostic-scoring';
 import { lineupPlacement } from '@/lib/voca/diagnostic-lineup';
 
 /**
@@ -70,9 +71,11 @@ export const GET = createApiHandler(
       // 진단 결과 → 판정 레벨 + 추천 교재 (결과 화면과 동일한 계산)
       const diagnostics = (diags ?? []).map((d) => {
         const level = { band: d.final_band as BandKey, qualifier: d.final_qualifier as 'exact' | 'above' | 'below' };
-        const recBand = recommendBandKey(level, activeBands);
+        const rounds = (d.rounds as { band: BandKey; correct: number; total: number }[] | null) ?? [];
+        // 확정 밴드 정답률을 넘겨야 상향 컷(60% 이상 → 한 칸 위)이 실서비스와 동일하게 적용됨
+        const finalBandScore = bandScoreFromRounds(rounds, level.band);
+        const recBand = recommendBandKey(level, activeBands, finalBandScore);
         const placement = lineupPlacement(recBand);
-        const rounds = (d.rounds as { band: string; correct: number; total: number }[] | null) ?? [];
         return {
           응시일: d.created_at,
           회차: d.attempt_number,
