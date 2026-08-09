@@ -11,6 +11,7 @@ import { PresenceTracker } from '@/components/layout/presence-tracker';
 import { AnnouncementBanner } from '@/components/dashboard/announcement-banner';
 import { UpdateBanner } from '@/components/layout/update-banner';
 import { UpdatePopup } from '@/components/layout/update-popup';
+import { IdleLogout } from '@/components/layout/idle-logout';
 import { QueryProvider } from '@/components/providers/query-provider';
 import { deriveTier } from '@/lib/billing/feature-gate';
 import { isAssignmentActive } from '@/lib/billing/service-expiry';
@@ -90,6 +91,8 @@ export default async function DashboardLayout({
         badges={vocaPendingExams > 0 ? { '/student/voca/exam': vocaPendingExams } : undefined}
       />
       <main className="flex-1 overflow-y-auto overscroll-contain">
+        {/* 3시간 무활동 자동 로그아웃 — 전 역할 공통 */}
+        <IdleLogout />
         <UpdateBanner />
         {/* 중요 업데이트 팝업 — 스태프에게만 (학생 화면엔 배너·공지로 충분) */}
         {user.role !== 'student' && <UpdatePopup />}
