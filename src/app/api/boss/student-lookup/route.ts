@@ -119,6 +119,32 @@ export const GET = createApiHandler(
       });
     }
 
-    return NextResponse.json({ 검색어: name, 학생수: reports.length, 학생: reports });
+    // 공개 레벨테스트(/level-test) 기록 — 학생 계정이 아닌 리드 테이블에 저장되므로
+    // 학생 화면에서 "진단 기록이 안 보이는" 혼란의 단골 원인 (박태욱 사례, 2026-08-09)
+    const { data: leadRows } = await admin
+      .from('voca_diagnostic_leads')
+      .select('name, phone, grade, final_band, final_qualifier, coverage_score, linked_student_id, created_at')
+      .or(`name.ilike.%${name}%,created_at.gte.${new Date(Date.now() - 24 * 3600_000).toISOString()}`)
+      .order('created_at', { ascending: false })
+      .limit(20);
+    const leads = (leadRows ?? []).map((l) => {
+      const level = { band: l.final_band as BandKey, qualifier: l.final_qualifier as 'exact' | 'above' | 'below' };
+      return {
+        이름: l.name ?? '(익명)',
+        전화: l.phone ?? '(없음)',
+        선택학년: l.grade,
+        판정레벨: formatLevel(level),
+        '본인학년_단어_정답률(%)': l.coverage_score,
+        계정연결: l.linked_student_id ? '연결됨' : '미연결',
+        응시일: l.created_at,
+      };
+    });
+
+    return NextResponse.json({
+      검색어: name,
+      학생수: reports.length,
+      학생: reports,
+      '레벨테스트_리드(이름일치+최근24시간)': leads,
+    });
   },
 );
