@@ -4,6 +4,7 @@ import { createAdminClient } from '@/lib/supabase/admin';
 import { getBandBooks, getLineupBookIds } from '@/lib/voca/diagnostic-sampling';
 import { BAND_KEYS } from '@/lib/voca/diagnostic-bands';
 import { DiagnosticClient } from '@/app/(dashboard)/student/voca/diagnostic/diagnostic-client';
+import { LoggedInStudentGuard } from './logged-in-guard';
 
 export const metadata: Metadata = {
   title: '어휘 레벨 진단 | 올킬보카',
@@ -25,6 +26,8 @@ export default async function LevelTestPage() {
 
   return (
     <div className="min-h-dvh bg-white">
+      {/* 로그인된 재원생은 학생용 진단으로 — 기록이 리드함으로 빠지는 것 방지 */}
+      <LoggedInStudentGuard />
       <header className="border-b border-gray-100">
         <div className="mx-auto flex max-w-3xl items-center justify-between px-4 py-3">
           <Link href="/allkill" className="text-lg font-extrabold" style={{ color: '#1A73E8' }}>
