@@ -9,6 +9,11 @@ export interface PlatformUpdate {
   tag: UpdateTag;
   title: string;
   body: string;      // 줄바꿈(\n) 지원
+  /**
+   * true면 선생님·관리자·boss에게 로그인 시 1회 팝업으로 표시 (확인 누르면 다시 안 뜸).
+   * 사용 방식이 바뀌는 중요 업데이트에만 켜세요 — 남발하면 무시하는 습관이 생깁니다.
+   */
+  popup?: boolean;
 }
 
 export const UPDATES: PlatformUpdate[] = [
@@ -16,6 +21,7 @@ export const UPDATES: PlatformUpdate[] = [
     id: '2026-08-09-exam-assign-redesign',
     date: '2026-08-09',
     tag: 'new',
+    popup: true,
     title: '올킬시험 배정이 "학생 먼저" 방식으로 바뀌었어요',
     body:
       '이제 학생별 교재를 외우거나 찾아볼 필요가 없어요.\n' +
@@ -98,3 +104,6 @@ export const TAG_LABEL: Record<UpdateTag, string> = {
   improve: '개선',
   guide: '사용법',
 };
+
+/** 팝업 대상 최신 업데이트 (popup: true 중 가장 위) — 스태프 로그인 팝업용 */
+export const LATEST_POPUP_UPDATE: PlatformUpdate | null = UPDATES.find((u) => u.popup) ?? null;
