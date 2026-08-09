@@ -16,6 +16,9 @@ interface StudentResult {
     spelling_score: number | null;
     matching_score: number | null;
     matching_completed: boolean;
+    round2_flashcard_completed?: boolean;
+    round2_quiz_score?: number | null;
+    round2_matching_score?: number | null;
     updated_at: string;
   } | null;
   wrongWords: {
@@ -251,6 +254,7 @@ export function VocaDayResultsClient() {
                 <th className="px-4 py-3 font-medium text-center">스펠링</th>
                 <th className="px-4 py-3 font-medium text-center">매칭</th>
                 <th className="px-4 py-3 font-medium text-center">퀴즈</th>
+                <th className="px-4 py-3 font-medium text-center">2회독</th>
                 <th className="px-4 py-3 font-medium text-center">상태</th>
                 <th className="px-4 py-3 font-medium text-center">학습 시각</th>
                 <th className="px-4 py-3 font-medium text-center">공유</th>
@@ -312,6 +316,26 @@ export function VocaDayResultsClient() {
                           <span className="text-gray-300">—</span>
                         )}
                       </td>
+                      {/* 2회독 — 학생이 2회독 탭으로 학습하면 점수가 여기로 온다 (학생관리와 일치) */}
+                      <td className="px-4 py-3 text-center">
+                        {s.progress?.round2_flashcard_completed || s.progress?.round2_quiz_score != null || s.progress?.round2_matching_score != null ? (
+                          <span className="inline-flex items-center gap-1 whitespace-nowrap">
+                            {s.progress?.round2_flashcard_completed && <span className="text-green-600 text-xs">✅</span>}
+                            {s.progress?.round2_quiz_score != null && (
+                              <span className={`inline-block rounded px-1.5 py-0.5 text-xs font-medium ${scoreChipClass(s.progress.round2_quiz_score)}`}>
+                                퀴즈 {s.progress.round2_quiz_score}
+                              </span>
+                            )}
+                            {s.progress?.round2_matching_score != null && (
+                              <span className={`inline-block rounded px-1.5 py-0.5 text-xs font-medium ${scoreChipClass(s.progress.round2_matching_score)}`}>
+                                매칭 {s.progress.round2_matching_score}
+                              </span>
+                            )}
+                          </span>
+                        ) : (
+                          <span className="text-gray-300">—</span>
+                        )}
+                      </td>
                       <td className="px-4 py-3 text-center">
                         <span className={`inline-block rounded-full px-2.5 py-0.5 text-xs font-medium ${cfg.className}`}>
                           {cfg.label}
@@ -326,7 +350,7 @@ export function VocaDayResultsClient() {
                     </tr>
                     {isExpanded && (
                       <tr className="border-b bg-gray-50">
-                        <td colSpan={8} className="px-6 pb-4 pt-2">
+                        <td colSpan={9} className="px-6 pb-4 pt-2">
                           <div className="space-y-3">
                             {s.wrongWords.quiz.length > 0 && (
                               <div>

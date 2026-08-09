@@ -52,7 +52,7 @@ export const GET = createApiHandler(
     // 2. Fetch progress for this day
     const { data: progressRows } = await admin
       .from('voca_student_progress')
-      .select('student_id, flashcard_completed, quiz_score, spelling_score, spelling_wrong_words, matching_score, matching_completed, updated_at')
+      .select('student_id, flashcard_completed, quiz_score, spelling_score, spelling_wrong_words, matching_score, matching_completed, round2_flashcard_completed, round2_quiz_score, round2_matching_score, updated_at')
       .eq('day_id', dayId)
       .in('student_id', studentIds);
 
@@ -101,6 +101,11 @@ export const GET = createApiHandler(
                 spelling_score: p.spelling_score,
                 matching_score: p.matching_score,
                 matching_completed: p.matching_completed,
+                // 2회독 점수 — Day 화면 1·2회독 자유 전환(05a20dc) 후 2회독으로 학습한
+                // 점수가 이 화면에서 안 보여 학생관리와 불일치 (2026-08-09 보스 제보)
+                round2_flashcard_completed: p.round2_flashcard_completed,
+                round2_quiz_score: p.round2_quiz_score,
+                round2_matching_score: p.round2_matching_score,
                 updated_at: p.updated_at,
               }
             : null,
