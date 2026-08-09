@@ -32,6 +32,13 @@ interface SpellingWrongWord {
 interface RhythmSpellingProps {
   vocabulary: VocaVocabulary[];
   onComplete: (score: number, wrongWords: SpellingWrongWord[]) => void;
+  /**
+   * 점수 확정 즉시 호출 (합격·불합격 공통, 결과 화면 뜨기 전).
+   * 서버 저장은 반드시 여기서 — onComplete는 합격 시 "다음 단계로" 클릭까지 미뤄지므로
+   * 저장을 onComplete에 두면 학생이 축하 화면만 보고 나갈 때 점수가 증발한다
+   * (김선우 90점 유실, 2026-08-09).
+   */
+  onScoreFinal?: (score: number, wrongWords: SpellingWrongWord[]) => void;
   /** 시험 모드 — 발음 힌트(스피커) 숨김 */
   examMode?: boolean;
   /** 통과 점수(%) — 미지정 시 학습 기본 80. 표제어 시험은 학생 강도에 따라 70~100 */
@@ -66,7 +73,7 @@ type LetterState = 'typed' | 'auto' | 'correct' | 'wrong';
 
 const PASS_THRESHOLD = 80;
 
-export function RhythmSpelling({ vocabulary, onComplete, examMode = false, passThreshold = PASS_THRESHOLD, secondsPerWord = 0, storageContext }: RhythmSpellingProps) {
+export function RhythmSpelling({ vocabulary, onComplete, onScoreFinal, examMode = false, passThreshold = PASS_THRESHOLD, secondsPerWord = 0, storageContext }: RhythmSpellingProps) {
   // ⚠️ useMemo([vocabulary])로 만들면 리렌더로 배열 참조가 바뀔 때 시험 도중
   // 출제 순서가 재셔플된다(푼 단어 반복 + 안 푼 단어 누락). 마운트 시 1회만 생성.
   const [shuffledVocab, setShuffledVocab] = useState(() => shuffle([...vocabulary]));
@@ -212,12 +219,14 @@ export function RhythmSpelling({ vocabulary, onComplete, examMode = false, passT
         const totalLetters = all.reduce((s, r) => s + r.totalLetters, 0);
         const score = Math.round((totalCorrect / totalLetters) * 100);
         setFinalScore(score);
-        // 통과 시엔 "다음 단계로" 클릭을 기다린 뒤 onComplete 호출.
-        // 미달이면 기존처럼 즉시 저장 + 부모의 재도전 안내 토스트가 뜨도록 바로 호출.
+        // 점수 확정 즉시 저장 훅 — 합격 여부와 무관하게 반드시 여기서 호출
+        onScoreFinal?.(score, wrongWordsRef.current);
+        // 통과 시엔 "다음 단계로" 클릭을 기다린 뒤 onComplete 호출 (화면 이동용).
+        // 미달이면 기존처럼 즉시 호출해 부모의 재도전 안내가 바로 뜨도록.
         if (score < passThreshold) onComplete(score, wrongWordsRef.current);
       }
     }, hadWrong ? 1800 : 600);
-  }, [currentIndex, shuffledVocab, onComplete, letterCount, targetWord, typedLetters, saveCheckpoint, clearCheckpoint, passThreshold]);
+  }, [currentIndex, shuffledVocab, onComplete, onScoreFinal, letterCount, targetWord, typedLetters, saveCheckpoint, clearCheckpoint, passThreshold]);
 
   // 최신 gradeWord를 타이머에서 호출하기 위한 ref
   const gradeWordRef = useRef(gradeWord);

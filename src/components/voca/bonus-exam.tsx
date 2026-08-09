@@ -74,10 +74,11 @@ export function BonusExam({ days, bookId, intensity = DEFAULT_EXAM_INTENSITY }: 
     setMode('exam');
   }
 
-  async function handleComplete(s: number, wrongWords?: WrongWord[]) {
+  // 점수 확정 즉시 저장 (RhythmSpelling onScoreFinal) — 합격 시 학생이 결과 화면만
+  // 보고 나가도 점수가 남는다 (김선우 90점 유실 재발 방지, 2026-08-09)
+  async function handleScoreFinal(s: number, wrongWords?: WrongWord[]) {
     setScore(s);
     setLastWrong(wrongWords ?? []);
-    setMode('done');
     if (retryOnly) {
       // 재시험(틀린 단어만)은 복습용 — 서버 저장 안 함
       if (s >= PASS) toast.success(`🎉 이번엔 ${s}점! 잘했어요`);
@@ -91,6 +92,11 @@ export function BonusExam({ days, bookId, intensity = DEFAULT_EXAM_INTENSITY }: 
       });
     } catch { /* 에러 토스트는 fetchWithToast가 표시 — 점수 화면은 유지 */ }
     if (s >= PASS) toast.success(`🎉 보너스 시험 통과! ${s}점`);
+  }
+
+  // 화면 이동만 담당 — 저장은 handleScoreFinal에서 이미 끝났다
+  function handleComplete() {
+    setMode('done');
   }
 
   function reset() {
@@ -116,6 +122,7 @@ export function BonusExam({ days, bookId, intensity = DEFAULT_EXAM_INTENSITY }: 
         <RhythmSpelling
           vocabulary={vocab}
           storageContext={retryOnly ? undefined : `bonus:${bookId}:${[...selected].sort().join('.')}`}
+          onScoreFinal={handleScoreFinal}
           onComplete={handleComplete}
           examMode
           passThreshold={PASS}

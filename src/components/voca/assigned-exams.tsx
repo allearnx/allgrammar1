@@ -65,9 +65,10 @@ export function AssignedExams({ intensity = DEFAULT_EXAM_INTENSITY }: { intensit
     } catch { toast.error('시험 단어를 불러오지 못했어요.'); }
   }
 
-  async function handleComplete(score: number, wrongWords?: WrongWord[]) {
+  // 점수 확정 즉시 저장 (RhythmSpelling onScoreFinal) — 합격 시 학생이 축하 화면만
+  // 보고 나가도 점수가 남는다 (김선우 90점 유실 재발 방지, 2026-08-09)
+  async function handleScoreFinal(score: number, wrongWords?: WrongWord[]) {
     const a = active;
-    setActive(null);
     if (!a) return;
     try {
       await fetchWithToast('/api/voca/exam', {
@@ -79,6 +80,11 @@ export function AssignedExams({ intensity = DEFAULT_EXAM_INTENSITY }: { intensit
     if (score >= PASS) toast.success(`🎉 시험 통과! ${score}점`);
     else toast.info(`${score}점 — ${PASS}점 넘으면 통과예요.`);
     load();
+  }
+
+  // 화면 이동만 담당 — 저장은 handleScoreFinal에서 이미 끝났다
+  function handleComplete() {
+    setActive(null);
   }
 
   if (active) {
@@ -106,6 +112,7 @@ export function AssignedExams({ intensity = DEFAULT_EXAM_INTENSITY }: { intensit
         <RhythmSpelling
           vocabulary={vocab}
           storageContext={`assigned:${active.id}`}
+          onScoreFinal={handleScoreFinal}
           onComplete={handleComplete}
           examMode
           passThreshold={PASS}
