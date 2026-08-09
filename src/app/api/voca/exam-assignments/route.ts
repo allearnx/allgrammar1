@@ -59,7 +59,13 @@ export const GET = createApiHandler(
       .from('service_assignments')
       .select('student_id, users!service_assignments_student_id_fkey!inner(id, full_name, is_active)')
       .eq('service', 'voca');
-    if (academyId) sq = sq.eq('users.academy_id', academyId);
+    if (academyId) {
+      sq = sq.eq('users.academy_id', academyId);
+    } else {
+      // boss에 학원이 없으면 필터가 통째로 꺼져 개인 무료 가입자까지 전부 떴다
+      // (2026-08-09 현장 피드백 "우리 학원 아닌 애들이 다 뜬다") — 최소한 무학원 제외
+      sq = sq.not('users.academy_id', 'is', null);
+    }
     sq = sq.eq('users.is_active', true);
     const { data: assigns } = await sq;
     const names = new Map<string, string>();
@@ -68,8 +74,31 @@ export const GET = createApiHandler(
       if (u && !names.has(u.id)) names.set(u.id, u.full_name);
     }
     const studentIds = [...names.keys()];
-    const students = studentIds.map((id) => ({ id, name: names.get(id) ?? '-' }));
-    if (studentIds.length === 0) return NextResponse.json({ students: [], assignments: [], dayTitles: {} });
+    if (studentIds.length === 0) {
+      return NextResponse.json({ students: [], assignments: [], dayTitles: {}, progressByBook: {} });
+    }
+
+    // 학생별 배정 교재 + 교재별 학습 진도(최대 Day 번호) — 학생-우선 배정 플로우용:
+    // 선생님이 학생의 교재·진도를 외우지 않아도 화면이 보여준다 (2026-08-09 개편)
+    const [{ data: bookAssigns }, { data: progRows }] = await Promise.all([
+      admin.from('voca_book_assignments').select('student_id, book_id').in('student_id', studentIds),
+      admin
+        .from('voca_student_progress')
+        .select('student_id, day:voca_days(book_id, day_number)')
+        .in('student_id', studentIds),
+    ]);
+    const assignedBook = new Map((bookAssigns ?? []).map((b) => [b.student_id, b.book_id]));
+    const progressByBook: Record<string, Record<string, number>> = {};
+    for (const p of progRows ?? []) {
+      const day = p.day as unknown as { book_id: string; day_number: number } | null;
+      if (!day) continue;
+      const byBook = (progressByBook[p.student_id as string] ??= {});
+      byBook[day.book_id] = Math.max(byBook[day.book_id] ?? 0, day.day_number);
+    }
+
+    const students = studentIds
+      .map((id) => ({ id, name: names.get(id) ?? '-', bookId: assignedBook.get(id) ?? null }))
+      .sort((a, b) => a.name.localeCompare(b.name, 'ko'));
 
     // 배정 목록
     let aq = admin
@@ -109,6 +138,7 @@ export const GET = createApiHandler(
 
     return NextResponse.json({
       students,
+      progressByBook,
       dayTitles,
       assignments: assignments.map((a) => {
         const r = bestByAssignment.get(a.id);
