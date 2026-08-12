@@ -3,6 +3,7 @@ import { VOCA_COLORS } from '@/lib/voca/brand-tokens';
 import { getBand, recommendBandKey, type BandKey, type FinalLevel } from '@/lib/voca/diagnostic-bands';
 import {
   DIAGNOSTIC_LINEUP,
+  LINEUP_ACCENTS,
   lineupColumnGap,
   resolveLineupPlacement,
 } from '@/lib/voca/diagnostic-lineup';
@@ -44,6 +45,7 @@ export function VocaDiagnosticLineupCard({
   const recBand = recommendBandKey(level, activeBands, latest.final_band_score);
   const placement = resolveLineupPlacement(recBand, lineupBookIds);
   const column = DIAGNOSTIC_LINEUP.find((c) => c.key === placement.columnKey);
+  const accent = LINEUP_ACCENTS[placement.columnKey];
   // 정답률은 응시 당시 시작 밴드에서 측정됨 → 라벨도 저장된 start_band 기준
   const sourceLabel = getBand(latest.start_band as BandKey)?.sourceLabel ?? '학년';
 
@@ -73,7 +75,7 @@ export function VocaDiagnosticLineupCard({
         </span>
       </div>
 
-      {/* 미니 라인업 — 칸 헤더(학년 라벨)로 시작 위치만 보여준다 */}
+      {/* 미니 라인업 — 칸 헤더(학년 라벨)로 시작 위치만 보여준다. 색은 학생 결과 화면과 동일 규칙 */}
       <div className="mt-3 flex gap-1">
         {DIAGNOSTIC_LINEUP.map((c) => {
           const mine = c.key === placement.columnKey;
@@ -83,7 +85,7 @@ export function VocaDiagnosticLineupCard({
               className="flex-1 rounded-md py-1 text-center text-[11px] font-bold"
               style={
                 mine
-                  ? { background: VOCA_COLORS.blue, color: '#fff' }
+                  ? { background: LINEUP_ACCENTS[c.key].deep, color: '#fff' }
                   : { background: '#F1F3F4', color: '#9AA0A6' }
               }
             >
@@ -93,9 +95,9 @@ export function VocaDiagnosticLineupCard({
         })}
       </div>
 
-      <div className="mt-3 rounded-lg p-4 text-center" style={{ background: VOCA_COLORS.blueLight }}>
+      <div className="mt-3 rounded-lg p-4 text-center" style={{ background: accent.tint }}>
         <p className="text-[11px] text-gray-500">지금 시작할 교재{column ? ` · ${column.gradeLabel} 단계` : ''}</p>
-        <p className="voca-display mt-1 text-lg leading-snug" style={{ color: VOCA_COLORS.blue, fontWeight: 700, wordBreak: 'keep-all' }}>
+        <p className="voca-display mt-1 text-lg leading-snug" style={{ color: accent.deep, fontWeight: 700, wordBreak: 'keep-all' }}>
           {placement.highlightTitle}
         </p>
       </div>

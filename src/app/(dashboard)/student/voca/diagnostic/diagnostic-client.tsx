@@ -5,7 +5,7 @@
  * 문항별 정오는 진행 중 보여주지 않는다 (레벨테스트 관행 + 다음 라운드 힌트 방지).
  */
 
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import Link from 'next/link';
 import { track } from '@vercel/analytics';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -22,7 +22,14 @@ import {
   type DiagnosticGrade,
   type FinalLevel,
 } from '@/lib/voca/diagnostic-bands';
-import { DIAGNOSTIC_LINEUP, resolveLineupPlacement, lineupColumnGap } from '@/lib/voca/diagnostic-lineup';
+import {
+  DIAGNOSTIC_LINEUP,
+  LINEUP_ACCENTS,
+  resolveLineupPlacement,
+  lineupColumnGap,
+  shortBookTitle,
+} from '@/lib/voca/diagnostic-lineup';
+import { VocaBrandStyle } from '@/components/voca/voca-brand';
 import type { DiagnosticQuestion } from '@/lib/voca/diagnostic-sampling';
 
 export interface LatestDiagnostic {
@@ -506,15 +513,10 @@ function ContactGateScreen({ onSubmitContact }: { onSubmitContact: (name: string
 
   return (
     <div className="mx-auto max-w-md space-y-5 text-center">
-      <motion.div
-        initial={{ opacity: 0, scale: 0.96 }}
-        animate={{ opacity: 1, scale: 1 }}
-        className="rounded-3xl p-8"
-        style={{ background: VOCA_COLORS.blueLight }}
-      >
-        <p className="text-5xl">🎉</p>
-        <h2 className="mt-3 text-2xl font-bold" style={{ color: VOCA_COLORS.ink, wordBreak: 'keep-all' }}>
-          우리 아이 진단 결과가 준비됐어요!
+      <VocaBrandStyle />
+      <div className="rounded-2xl border border-gray-200 bg-white p-8">
+        <h2 className="voca-display text-2xl" style={{ color: VOCA_COLORS.ink, fontWeight: 700, wordBreak: 'keep-all' }}>
+          우리 아이 진단 결과가 준비됐어요
         </h2>
         <p className="mt-2 text-sm leading-relaxed" style={{ color: VOCA_COLORS.gray, wordBreak: 'keep-all' }}>
           <b style={{ color: VOCA_COLORS.ink }}>지금 시작할 교재</b>와 단어 정답률이 나왔어요.
@@ -528,7 +530,7 @@ function ContactGateScreen({ onSubmitContact }: { onSubmitContact: (name: string
             onChange={(e) => setName(e.target.value)}
             placeholder="학부모님 성함"
             maxLength={30}
-            className="w-full rounded-2xl border-2 border-white bg-white px-4 py-3 text-base outline-none focus:border-[#1A73E8]"
+            className="w-full rounded-xl border border-gray-300 bg-white px-4 py-3 text-base outline-none focus:border-gray-500"
           />
           <input
             type="tel"
@@ -536,7 +538,7 @@ function ContactGateScreen({ onSubmitContact }: { onSubmitContact: (name: string
             onChange={(e) => setPhone(e.target.value)}
             placeholder="학부모님 휴대폰 번호 (010-0000-0000)"
             maxLength={13}
-            className="w-full rounded-2xl border-2 border-white bg-white px-4 py-3 text-base outline-none focus:border-[#1A73E8]"
+            className="w-full rounded-xl border border-gray-300 bg-white px-4 py-3 text-base outline-none focus:border-gray-500"
           />
           <button
             type="submit"
@@ -550,11 +552,11 @@ function ContactGateScreen({ onSubmitContact }: { onSubmitContact: (name: string
         <p className="mt-3 text-xs" style={{ color: VOCA_COLORS.gray }}>
           연락처는 진단 리포트 안내와 학습 상담 목적으로만 사용해요.
         </p>
-      </motion.div>
+      </div>
       <Link
         href="/signup?next=/student/voca/diagnostic"
         onClick={() => track('diagnostic_gate_signup_click')}
-        className="inline-block text-sm font-semibold text-gray-400 underline underline-offset-4 hover:text-gray-600"
+        className="inline-block text-sm font-semibold text-gray-500 underline underline-offset-4 hover:text-gray-700"
       >
         또는 10초 가입하고 결과 보기
       </Link>
@@ -625,7 +627,7 @@ function IntroScreen({
             })}
           </div>
           {!elemActive && (
-            <p className="mt-2 text-xs text-gray-400">초등 교재 준비 중에는 중1 수준부터 측정돼요.</p>
+            <p className="mt-2 text-xs text-gray-500">초등 교재 준비 중에는 중1 수준부터 측정돼요.</p>
           )}
         </div>
       )}
@@ -657,6 +659,8 @@ function ResultScreen({
   const bumpedUp = recBand !== recommendBandKey(res.level, activeBands);
   // 활성 교재 인지 폴백 — 추천 교재가 비활성(예: 검수 중)이면 오른쪽 첫 활성 교재로
   const placement = resolveLineupPlacement(recBand, lineupBookIds);
+  // 화면 전체를 내 칸 색으로 물들인다 — 히어로·CTA가 라인업의 내 칸과 같은 색 (파랑 일색 탈피)
+  const accent = LINEUP_ACCENTS[placement.columnKey];
   const missed = res.missed ?? [];
   const missedCount = res.missedCount ?? missed.length;
   const delta = previous ? res.coverageScore - previous.coverageScore : null;
@@ -674,47 +678,61 @@ function ResultScreen({
     : 0;
 
   return (
-    <div className="mx-auto max-w-lg space-y-5">
-      <motion.div
-        initial={{ opacity: 0, scale: 0.96 }}
-        animate={{ opacity: 1, scale: 1 }}
-        className="rounded-3xl p-6 text-center md:p-8"
-        style={{ background: VOCA_COLORS.blueLight }}
-      >
-        <p className="text-sm font-bold" style={{ color: VOCA_COLORS.blueDark }}>진단 완료 · 지금 시작할 교재</p>
-        <p className="mt-2 text-3xl font-bold" style={{ color: VOCA_COLORS.blue, wordBreak: 'keep-all' }}>
-          {placement.highlightTitle}
-        </p>
-        <p className="mt-2 text-sm" style={{ color: VOCA_COLORS.gray }}>
-          여기서 시작해서 한 칸씩 올라가요
-        </p>
-        {bumpedUp && (
-          <p className="mt-1.5 text-sm font-semibold" style={{ color: VOCA_COLORS.blueDark, wordBreak: 'keep-all' }}>
-            아래 단계 단어는 이미 {res.finalBandScore}% 알고 있어서 건너뛰었어요
+    // 라인업이 6칸이라 결과 화면만 넓게 — 좁으면 교재명이 잘게 쪼개진다 (2026-08-12 피드백)
+    <div className="mx-auto max-w-lg space-y-4 lg:max-w-3xl">
+      <VocaBrandStyle />
+      {/*
+        히어로 — 파스텔 카드 + 이모지 + 튀어오르는 애니메이션은 걷어냈다
+        ("AI스러운 요소 싹 빼줘", 2026-08-12). 흰 바탕에 상단 색 바만 두고
+        제목은 브랜드 폰트(GmarketSans)로. 색은 내 칸 색을 따라간다.
+      */}
+      <div className="overflow-hidden rounded-2xl border border-gray-200 bg-white">
+        <div className="h-1.5" style={{ background: accent.vivid }} />
+        <div className="px-6 py-7 text-center md:px-8">
+          <p className="text-xs font-bold tracking-wide" style={{ color: accent.deep }}>
+            진단 완료 · 지금 시작할 교재
           </p>
-        )}
-        {/* 천일문 추천 근거 한 줄 — 교과서 단어 DB 교차 분석 (중1 교과서 단어 40% 수록) */}
-        {placement.highlightTitle === '천일문 보카 중등 스타트' && (
-          <p className="mt-1.5 text-sm font-semibold" style={{ color: VOCA_COLORS.blueDark, wordBreak: 'keep-all' }}>
-            이 교재에는 중1 교과서 단어의 40%가 담겨 있어요 🎒
+          <p
+            className="voca-display mt-2 text-3xl leading-tight"
+            style={{ color: VOCA_COLORS.ink, fontWeight: 700, wordBreak: 'keep-all' }}
+          >
+            {placement.highlightTitle}
           </p>
-        )}
-        <div className="mt-5 rounded-2xl bg-white p-4">
-          <p className="text-sm" style={{ color: VOCA_COLORS.gray }}>이 단계 단어 정답률</p>
-          <p className="text-3xl font-bold" style={{ color: VOCA_COLORS.ink }}>{res.coverageScore}%</p>
-          <p className="mt-1 text-sm" style={{ color: VOCA_COLORS.gray }}>몰랐던 단어 {missedCount}개</p>
-          {delta !== null && (
-            <p className="mt-1 text-sm font-bold" style={{ color: delta >= 0 ? VOCA_COLORS.green : VOCA_COLORS.red }}>
-              지난 진단 대비 정답률 {delta >= 0 ? '+' : ''}{delta}%p
+          <p className="mt-2.5 text-sm" style={{ color: VOCA_COLORS.gray }}>
+            여기서 시작해서 한 칸씩 올라가요
+          </p>
+          {bumpedUp && (
+            <p className="mt-1.5 text-sm font-semibold" style={{ color: accent.deep, wordBreak: 'keep-all' }}>
+              아래 단계 단어는 이미 {res.finalBandScore}% 알고 있어서 건너뛰었어요
             </p>
           )}
-          {columnGap > 0 && (
-            <p className="mt-1 text-sm font-bold" style={{ color: VOCA_COLORS.green }}>
-              {columnGap === 1 ? '한 칸 올라갔어요 🎉' : `${columnGap}칸 올라갔어요 🎉`}
+          {/* 천일문 추천 근거 한 줄 — 교과서 단어 DB 교차 분석 (중1 교과서 단어 40% 수록) */}
+          {placement.highlightTitle === '천일문 보카 중등 스타트' && (
+            <p className="mt-1.5 text-sm font-semibold" style={{ color: accent.deep, wordBreak: 'keep-all' }}>
+              이 교재에는 중1 교과서 단어의 40%가 담겨 있어요
             </p>
           )}
+
+          {/* 정답률 — 카드 안 카드(중첩 상자) 대신 구분선 아래 한 줄로 */}
+          <div className="mt-6 border-t border-gray-100 pt-5">
+            <p className="text-sm" style={{ color: VOCA_COLORS.gray }}>이 단계 단어 정답률</p>
+            <p className="voca-display mt-1 text-4xl tabular-nums" style={{ color: VOCA_COLORS.ink, fontWeight: 700 }}>
+              {res.coverageScore}%
+            </p>
+            <p className="mt-1.5 text-sm" style={{ color: VOCA_COLORS.gray }}>몰랐던 단어 {missedCount}개</p>
+            {delta !== null && (
+              <p className="mt-1 text-sm font-bold" style={{ color: delta >= 0 ? VOCA_COLORS.greenDark : VOCA_COLORS.red }}>
+                지난 진단 대비 정답률 {delta >= 0 ? '+' : ''}{delta}%p
+              </p>
+            )}
+            {columnGap > 0 && (
+              <p className="mt-1 text-sm font-bold" style={{ color: VOCA_COLORS.greenDark }}>
+                {columnGap === 1 ? '지난 진단보다 한 칸 올라갔어요' : `지난 진단보다 ${columnGap}칸 올라갔어요`}
+              </p>
+            )}
+          </div>
         </div>
-      </motion.div>
+      </div>
 
       <LineupCard placement={placement} lineupBookIds={lineupBookIds} isFree={isFree} publicMode={publicMode} />
 
@@ -738,24 +756,22 @@ function ResultScreen({
             <Link
               href="/signup?next=/student/voca/diagnostic"
               onClick={() => track('diagnostic_result_signup_click')}
-              className="inline-block rounded-full px-8 py-3 font-bold text-white"
-              style={{ background: VOCA_COLORS.blue }}
+              className="voca-cta inline-block rounded-full px-8 py-3 font-bold"
             >
               가입하고 추천 교재로 시작하기
             </Link>
-            <p className="mt-2 text-xs text-gray-400">가입하면 이 결과가 계정에 저장되고, 추천 교재부터 바로 학습해요</p>
+            <p className="mt-2 text-xs text-gray-500">가입하면 이 결과가 계정에 저장되고, 추천 교재부터 바로 학습해요</p>
           </>
         ) : isFree ? (
           <>
             <Link
               href="/allkill#price"
               onClick={() => track('checkout_click', { source: 'diagnostic_result' })}
-              className="inline-block rounded-full px-8 py-3 font-bold text-white"
-              style={{ background: VOCA_COLORS.blue }}
+              className="voca-cta inline-block rounded-full px-8 py-3 font-bold"
             >
               올킬보카 시작하기
             </Link>
-            <p className="mt-2 text-xs text-gray-400">시작하면 추천 교재부터 바로 학습할 수 있어요</p>
+            <p className="mt-2 text-xs text-gray-500">시작하면 추천 교재부터 바로 학습할 수 있어요</p>
           </>
         ) : (
           <Link
@@ -764,8 +780,7 @@ function ResultScreen({
                 ? `/student/voca?bookId=${lineupBookIds[placement.highlightTitle]}`
                 : '/student/voca'
             }
-            className="inline-block rounded-full px-8 py-3 font-bold text-white"
-            style={{ background: VOCA_COLORS.blue }}
+            className="voca-cta inline-block rounded-full px-8 py-3 font-bold"
           >
             추천 교재로 시작하기
           </Link>
@@ -776,8 +791,14 @@ function ResultScreen({
 }
 
 /**
- * 교재 라인업 — 가로 스크롤 6칸(중1~고3), 시중 교재 실명. 내 칸 하이라이트 + 추천 교재 배지.
- * 초등 칸은 없다 — 초등 판정도 중1 칸(천일문)에서 시작 (선행이 기본이라 긍정 프레임).
+ * 교재 라인업 — 6칸(중1~고3) 그리드. 사다리는 시중 교재 실명으로만 세우고,
+ * 우리가 만든 초등 800·교과서 단어는 칸 아래 "기준점"으로 병렬 표시한다 (2026-08-12 개편).
+ * 기준점도 선택해 시작할 수 있다. 초등 칸만 예외로 우리 교재(초등 800)가 칸 대표다
+ * — 시중 초등 교재가 없고, L0를 초등 800으로 출제하므로 처방도 같아야 하기 때문.
+ *
+ * 2026-08-12 디자인 개편(사장님 피드백 "온통 파란색·카드가 좁다"):
+ * 가로 스크롤 → 줄바꿈 그리드(카드가 넉넉해 교재가 여러 권인 칸도 안 잘림) +
+ * 칸마다 다른 강조색(LINEUP_ACCENTS) + 단계 번호 칩으로 난이도 순서를 눈에 보이게.
  */
 function LineupCard({
   placement,
@@ -790,18 +811,6 @@ function LineupCard({
   isFree: boolean;
   publicMode: boolean;
 }) {
-  const myColumnRef = useRef<HTMLDivElement>(null);
-
-  // 내 칸이 보이도록 자동 스크롤 (가로만 — 페이지 세로 점프 방지).
-  // offsetLeft는 offsetParent 기준이라 못 쓴다 — 스크롤러와의 rect 차이로 계산.
-  useEffect(() => {
-    const el = myColumnRef.current;
-    const scroller = el?.parentElement;
-    if (!el || !scroller) return;
-    const left = el.getBoundingClientRect().left - scroller.getBoundingClientRect().left + scroller.scrollLeft;
-    scroller.scrollLeft = left - (scroller.clientWidth - el.clientWidth) / 2;
-  }, []);
-
   /** 교재별 CTA — 유료는 해당 교재로, 비로그인은 가입, 무료는 결제로 (선택한 흐름 그대로 퍼널 연결) */
   const bookHref = (title: string) => {
     if (publicMode) return '/signup?next=/student/voca/diagnostic';
@@ -810,64 +819,101 @@ function LineupCard({
     return id ? `/student/voca?bookId=${id}` : '/student/voca';
   };
 
+  // 비활성 교재만 있는 칸은 숨긴다 — 단계 번호는 "보이는 칸" 기준으로 매겨야 1,2,3…이 안 끊긴다
+  const columns = DIAGNOSTIC_LINEUP.map((column) => ({
+    column,
+    books: column.bookTitles.filter((t) => lineupBookIds[t]),
+    anchors: column.anchorTitles.filter((t) => lineupBookIds[t]),
+  })).filter((c) => c.books.length > 0 || c.anchors.length > 0);
+
   return (
-    <div className="rounded-2xl border bg-white p-5">
-      <p className="text-sm font-bold" style={{ color: VOCA_COLORS.ink }}>교재 라인업</p>
-      <p className="mt-0.5 text-xs" style={{ color: VOCA_COLORS.gray }}>
-        내 시작 칸부터 한 칸씩 — 칸 안에서는 원하는 교재를 골라도 돼요
+    <div className="rounded-2xl border border-gray-200 bg-white p-5">
+      <p className="voca-display text-base" style={{ color: VOCA_COLORS.ink, fontWeight: 700 }}>교재 라인업</p>
+      <p className="mt-1 text-xs" style={{ color: VOCA_COLORS.gray }}>
+        쉬운 순서대로 1번부터 — 칸 안에서는 원하는 교재를 골라도 돼요
       </p>
-      <div className="mt-3 flex snap-x gap-3 overflow-x-auto pb-2">
-        {DIAGNOSTIC_LINEUP.map((column) => {
+      {/* items-start — 교재 수가 다른 칸이 같은 높이로 늘어나 빈칸이 생기는 것 방지 */}
+      <div className="mt-4 grid items-start gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        {columns.map(({ column, books, anchors }, step) => {
           const isMine = column.key === placement.columnKey;
-          const books = column.bookTitles.filter((t) => lineupBookIds[t]);
-          if (books.length === 0) return null;
+          const accent = LINEUP_ACCENTS[column.key];
           return (
             <div
               key={column.key}
-              ref={isMine ? myColumnRef : undefined}
               className={cn(
-                'w-44 shrink-0 snap-center rounded-2xl border-2 p-3',
-                isMine ? 'border-[#1A73E8]' : 'border-gray-200',
+                'overflow-hidden rounded-xl border bg-white',
+                isMine ? 'border-2' : 'border-gray-200',
               )}
-              style={isMine ? { background: VOCA_COLORS.blueLight } : undefined}
+              style={isMine ? { borderColor: accent.vivid } : undefined}
             >
-              <div className="flex items-center justify-between">
-                <span className="text-sm font-bold" style={{ color: isMine ? VOCA_COLORS.blueDark : VOCA_COLORS.gray }}>
+              {/* 칸 색은 상단 바로만 — 파스텔 배경을 채우지 않아 인쇄물처럼 담백하게 */}
+              <div className="h-1" style={{ background: accent.vivid }} />
+              <div className="flex items-baseline gap-1.5 px-3.5 pb-2 pt-3">
+                <span className="voca-display text-sm" style={{ color: accent.deep, fontWeight: 700 }}>
+                  {step + 1}
+                </span>
+                <span
+                  className="voca-display whitespace-nowrap text-base"
+                  style={{ color: VOCA_COLORS.ink, fontWeight: 700 }}
+                >
                   {column.gradeLabel}
                 </span>
                 {isMine && (
-                  <span className="rounded-full px-2 py-0.5 text-[11px] font-bold text-white" style={{ background: VOCA_COLORS.blue }}>
+                  <span className="ml-auto whitespace-nowrap text-[11px] font-bold" style={{ color: accent.deep }}>
                     내 시작 칸
                   </span>
                 )}
               </div>
-              <div className="mt-2 space-y-2">
-                {books.map((title) => {
+
+              {/* 교재 목록 — 행 전체가 링크다 ("이 교재로 시작 →" 반복 문구 제거) */}
+              <div className="border-t border-gray-100">
+                {books.map((title, i) => {
                   const isRecommended = isMine && title === placement.highlightTitle;
                   return (
-                    <div
+                    <Link
                       key={title}
-                      className={cn('rounded-xl border bg-white p-2.5', isRecommended ? 'border-[#1A73E8]' : 'border-gray-100')}
+                      href={bookHref(title)}
+                      onClick={() => track('diagnostic_lineup_book_click', { title, recommended: isRecommended })}
+                      className="flex items-baseline gap-2 border-b border-gray-100 px-3.5 py-2.5 transition-colors last:border-b-0 hover:bg-gray-50"
                     >
+                      <span
+                        className={cn('flex-1 text-[13px] leading-snug', i === 0 ? 'font-bold' : 'font-medium')}
+                        style={{ color: i === 0 ? VOCA_COLORS.ink : VOCA_COLORS.gray, wordBreak: 'keep-all' }}
+                      >
+                        {shortBookTitle(title)}
+                      </span>
                       {isRecommended && (
-                        <span className="mb-1 inline-block rounded-full px-2 py-0.5 text-[10px] font-bold" style={{ background: VOCA_COLORS.blueLight, color: VOCA_COLORS.blueDark }}>
+                        <span
+                          className="shrink-0 rounded px-1.5 py-0.5 text-[10px] font-bold text-white"
+                          style={{ background: accent.deep }}
+                        >
                           추천
                         </span>
                       )}
-                      <p className="text-[13px] font-semibold leading-snug" style={{ color: VOCA_COLORS.ink, wordBreak: 'keep-all' }}>
-                        {title}
-                      </p>
-                      <Link
-                        href={bookHref(title)}
-                        onClick={() => track('diagnostic_lineup_book_click', { title, recommended: isRecommended })}
-                        className="mt-1.5 inline-block text-xs font-bold underline underline-offset-2"
-                        style={{ color: VOCA_COLORS.blue }}
-                      >
-                        이 교재로 시작
-                      </Link>
-                    </div>
+                    </Link>
                   );
                 })}
+
+                {/*
+                  우리 교재(초등 800·교과서 단어) — 칸의 수준을 가늠하는 자리지만 라벨은 붙이지 않는다
+                  ("기준점 · 이 칸 수준"이 어색하다는 사장님 지적, 2026-08-12).
+                  맨 아래에 "○○ 외우기"라는 행동 문구로만 둔다.
+                */}
+                {anchors.length > 0 && (
+                  <div className="bg-gray-50/60">
+                    {anchors.map((title) => (
+                      <Link
+                        key={title}
+                        href={bookHref(title)}
+                        onClick={() => track('diagnostic_lineup_book_click', { title, recommended: false, anchor: true })}
+                        className="block border-t border-gray-100 px-3.5 py-2 text-[12px] font-medium leading-snug transition-colors hover:bg-gray-100"
+                        style={{ color: VOCA_COLORS.gray, wordBreak: 'keep-all' }}
+                      >
+                        {shortBookTitle(title)} 외우기
+                      </Link>
+                    ))}
+                  </div>
+                )}
               </div>
             </div>
           );

@@ -75,6 +75,7 @@ const grammarCurriculum = [
 
 // 단어 커리큘럼 = 진단 결과의 교재 라인업(DIAGNOSTIC_LINEUP)과 한 소스 — 라인업 변경 시 자동 반영
 const vocaBands = [
+  { level: '초등', columns: DIAGNOSTIC_LINEUP.filter((c) => c.key === 'elem') },
   { level: '중등', columns: DIAGNOSTIC_LINEUP.filter((c) => c.key.startsWith('m')) },
   { level: '고등', columns: DIAGNOSTIC_LINEUP.filter((c) => c.key.startsWith('h')) },
 ];
@@ -285,21 +286,26 @@ export default function CurriculumPage() {
                             {column.gradeLabel}
                           </div>
                           <div className="flex-1 bg-white">
-                            {column.bookTitles.map((title, bookIndex) => (
+                            {/* 사다리(시중 교재) 먼저, 기준점(초등 800·교과서 단어)은 뒤에 옅게 — 2026-08-12 개편 */}
+                            {[
+                              ...column.bookTitles.map((title, i) => ({ title, tag: i === 0 ? '대표' : null, anchor: false })),
+                              ...column.anchorTitles.map((title) => ({ title, tag: null, anchor: true })),
+                            ].map((row, rowIndex, rows) => (
                               <div
-                                key={title}
+                                key={row.title}
                                 className="flex items-baseline gap-3 px-6 py-4"
-                                style={bookIndex !== column.bookTitles.length - 1 ? { borderBottom: '1px solid #F8F9FA' } : undefined}
+                                style={rowIndex !== rows.length - 1 ? { borderBottom: '1px solid #F8F9FA' } : undefined}
                               >
                                 <p
-                                  className={bookIndex === 0 ? 'font-bold text-base md:text-lg flex-1' : 'font-medium text-base md:text-lg flex-1'}
-                                  style={{ color: G.ink, wordBreak: 'keep-all' }}
+                                  className={row.tag === '대표' ? 'font-bold text-base md:text-lg flex-1' : 'font-medium text-base md:text-lg flex-1'}
+                                  style={{ color: row.anchor ? G.gray : G.ink, wordBreak: 'keep-all' }}
                                 >
-                                  {title}
+                                  {row.title}
                                 </p>
-                                {bookIndex === 0 && (
+                                {row.tag === '대표' && (
                                   <span className="shrink-0 text-sm font-bold" style={{ color: theme.lightText }}>대표</span>
                                 )}
+                                {/* 우리 교재(초등800·교과서 단어)는 라벨 없이 옅은 글씨로만 구분 (2026-08-12) */}
                               </div>
                             ))}
                           </div>
@@ -311,13 +317,13 @@ export default function CurriculumPage() {
               })}
             </div>
 
-            {/* 초등 칸은 기획상 없음 — 선행 긍정 프레임 (천일문×중1 40% = 교과서 단어 교차 분석 근거) */}
+            {/* 초등 칸 신설(2026-08-12) — 기초가 약하면 초등부터, 준비된 초등학생은 중1부터 선행 */}
             <p
               className="mt-6 pl-4 text-sm md:text-base leading-relaxed"
               style={{ borderLeft: `3px solid ${G.yellow}`, color: G.gray, wordBreak: 'keep-all' }}
             >
-              초등학생은 <b style={{ color: G.ink }}>중1 교재(천일문 보카 중등 스타트)부터 선행</b>으로 시작해요.
-              이 교재에는 <b style={{ color: G.blue }}>중1 교과서 단어의 40%</b>가 담겨 있어요.
+              초등학생은 <b style={{ color: G.ink }}>초등 800으로 기초를 다지고 중1 교재(천일문)로 선행</b>해요.
+              초등 800 단어의 <b style={{ color: G.ink }}>62%가 천일문에도 담겨 있어</b> 다음 단계에서 자연스럽게 복습돼요.
             </p>
 
             {/* 진단 퍼널 연결 — 어느 칸에서 시작할지는 5분 진단이 정해준다 */}

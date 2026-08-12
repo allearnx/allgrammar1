@@ -20,7 +20,7 @@ import { buildTypingHint, isTypeableFront } from './diagnostic-hint';
 import { cached, TTL } from '@/lib/cache/server-cache';
 import { createAdminClient } from '@/lib/supabase/admin';
 import { DIAGNOSTIC_BANDS, BAND_KEYS, getBand, type BandKey } from './diagnostic-bands';
-import { DIAGNOSTIC_LINEUP } from './diagnostic-lineup';
+import { ALL_LINEUP_TITLES } from './diagnostic-lineup';
 import { BASIC_ENGLISH_WORDS } from './basic-words';
 import { signDiagnosticToken } from './diagnostic-token';
 
@@ -144,7 +144,7 @@ export async function getBandBooks(supabase: SupabaseLike): Promise<Record<BandK
  * 비활성이거나 이름이 바뀐 교재는 빠지고, 클라이언트는 조회된 교재만 표시한다.
  */
 export async function getLineupBookIds(supabase: SupabaseLike): Promise<Record<string, string>> {
-  const titles = DIAGNOSTIC_LINEUP.flatMap((c) => c.bookTitles);
+  const titles = ALL_LINEUP_TITLES; // 사다리 + 기준점 전부 — 기준점 카드도 선택(시작) 가능
   const { data: books } = await supabase
     .from('voca_books')
     .select('id, title')
