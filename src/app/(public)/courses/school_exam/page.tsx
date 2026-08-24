@@ -16,7 +16,7 @@ const nanumPen = Nanum_Pen_Script({ weight: ['400'], preload: false });
 
 export const metadata: Metadata = {
   title: '올인내신 | 상위권을 위한 영어 내신 대비',
-  description: '95점에서 100점���로 가는 그 구간을 집중적으로 파고듭니다. 킬러 문제, 대치동 자료, AI 변형 문제 완벽 대비.',
+  description: '95점에서 100점으로 가는 그 구간을 집중적으로 파고듭니다. 킬러 문제, 대치동 자료, AI 변형 문제 완벽 대비.',
 };
 
 export default async function SchoolExamPage() {

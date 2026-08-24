@@ -8,9 +8,9 @@ export function CurriculumSection() {
           커리큘럼
         </div>
         <h2 className="text-[clamp(1.8rem,4vw,2.6rem)] font-black leading-[1.25] text-white mb-3">
-          내신 1등급의<br /><span className="text-violet-400">순서가 있습니다.</span>
+          내신 1등급의<br /><span className="text-[#f0d080]">순서가 있습니다.</span>
         </h2>
-        <p className="text-[0.95rem] text-white/50 leading-[1.85] max-w-[520px]">
+        <p className="text-[0.95rem] text-white/65 leading-[1.85] max-w-[520px]">
           순서가 틀리면 시간 낭비입니다.<br />올인내신은 검증된 순서대로 가르칩니다.
         </p>
         <div className="sinaesin-timeline flex flex-col mt-8 relative">
@@ -21,7 +21,7 @@ export function CurriculumSection() {
               </div>
               <div className="transition-transform duration-300 group-hover:translate-x-1">
                 <h3 className="text-[1.05rem] font-bold text-white mb-1.5 leading-[1.4]">{item.title}</h3>
-                <p className="text-sm text-white/45 leading-[1.7] whitespace-pre-line break-keep">{item.desc}</p>
+                <p className="text-sm text-white/65 leading-[1.7] whitespace-pre-line break-keep">{item.desc}</p>
               </div>
             </div>
           ))}

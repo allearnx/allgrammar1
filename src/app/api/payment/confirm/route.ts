@@ -13,6 +13,10 @@ const CATEGORY_TO_SERVICE: Record<string, 'voca' | 'naesin'> = {
   school_exam: 'naesin',
 };
 
+// 올인내신(school_exam) 결제 학생은 올라영 소속으로 자동 편입 (2026-08-24 사장님 지시).
+// 올라영 academy id — academies에서 naesin_enabled 최초 활성 학원 (name: 올라영).
+const OLLAYOUNG_ACADEMY_ID = 'b429a2bc-62d1-41d9-8396-f029c21f53ae';
+
 export const POST = createApiHandler(
   { schema: paymentConfirmSchema },
   async ({ user, body, supabase }) => {
@@ -201,6 +205,37 @@ export const POST = createApiHandler(
           );
         } else {
           serviceActivated = service;
+
+          // ── 3-1. 올인내신 결제 학생 → 올라영 소속 자동 편입 ──
+          // 무소속(독립) 학생만 자동 편입. 타 학원 소속이면 조용히 빼오지 않고
+          // 텔레그램으로 알려 수동 판단 (타 학원 명단에서 사라지는 부작용 방지).
+          if (service === 'naesin') {
+            const { data: profile } = await admin
+              .from('users')
+              .select('academy_id')
+              .eq('id', user.id)
+              .single();
+
+            if (!profile?.academy_id) {
+              const { error: joinErr } = await admin
+                .from('users')
+                .update({ academy_id: OLLAYOUNG_ACADEMY_ID })
+                .eq('id', user.id);
+              if (joinErr) {
+                logger.error('payment.ollayoung_join_failed', {
+                  orderId, userId: user.id, error: joinErr.message,
+                });
+                await sendTelegram(
+                  `🚨 올라영 자동 편입 실패\n\n올인내신 결제는 성공했으나 학원 편입 실패\n유저: ${user.email}\n에러: ${joinErr.message}\n\n👉 수동으로 올라영 소속 처리 필요`
+                );
+              }
+            } else if (profile.academy_id !== OLLAYOUNG_ACADEMY_ID) {
+              await sendTelegram(
+                `⚠️ 올인내신 결제 — 타 학원 소속 학생\n\n유저: ${user.email}\n현재 소속 학원 id: ${profile.academy_id}\n\n올라영으로 이관할지 수동 판단 필요 (자동 이관 안 함)`
+              );
+            }
+          }
+
           // 결제 즉시 접근 반영 — 캐시된 plan context/서비스 목록 갱신
           invalidateStudentServices(user.id);
         }

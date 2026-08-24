@@ -8,7 +8,7 @@ export function CompareSection() {
           비교
         </div>
         <h2 className="text-[clamp(1.8rem,4vw,2.6rem)] font-black leading-[1.25] text-indigo-950 mb-4">
-          목표는 하나.<br /><span className="text-violet-400">고등 내신 1등급, 수능 1등급.</span>
+          목표는 하나.<br /><span className="text-[#188038]">고등 내신 1등급, 수능 1등급.</span>
         </h2>
         <p className="text-[0.95rem] text-slate-500 leading-[1.85] max-w-[520px] mb-14">
           중3이 끝날 때 그 기반이 완성되어야 합니다.<br />올인내신은 거기까지 봅니다.
@@ -39,10 +39,10 @@ export function CompareSection() {
           </div>
         </div>
 
-        <div className="mt-12 px-6 py-7 bg-indigo-50 rounded-2xl text-center border border-indigo-400/15">
+        <div className="mt-12 px-6 py-7 bg-[#E6F4EA] rounded-2xl text-center border border-[#188038]/15">
           <p className="text-[clamp(1rem,2.5vw,1.25rem)] font-bold text-indigo-950 leading-[1.7] break-keep">
             중3이 끝날 때,{' '}
-            <span className="text-indigo-500">고등 영어의 기반이 완성</span>되어야 합니다.
+            <span className="text-[#188038]">고등 영어의 기반이 완성</span>되어야 합니다.
           </p>
           <p className="mt-2 font-normal text-[0.95rem] text-slate-500 break-keep leading-[1.7]">
             올인내신은 그 기반을 온라인에서 만들어 드립니다.

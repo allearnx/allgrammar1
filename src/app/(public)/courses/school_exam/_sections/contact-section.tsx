@@ -14,11 +14,9 @@ export function ContactSection() {
           커리큘럼, 학습 방식, 현재 수준에서 시작 가능한지 — 무엇이든 편하게 물어보세요.
         </p>
         <ConsultationLink
-          className="inline-flex items-center gap-2.5 mt-9 px-9 py-4 rounded-xl text-base font-bold text-white transition-all hover:translate-y-[-1px]"
+          className="inline-flex items-center gap-2.5 mt-9 px-10 py-4 rounded-full text-base font-bold text-[#1F1F1F] bg-[#FDD663] shadow-[0_4px_20px_rgba(253,214,99,0.45)] transition-all hover:bg-[#FCC934] hover:translate-y-[-1px]"
         >
-          <span className="bg-indigo-950 px-9 py-4 rounded-xl shadow-[0_4px_20px_rgba(30,27,75,0.18)] inline-block">
-            문의하기 &rarr;
-          </span>
+          문의하기 &rarr;
         </ConsultationLink>
         <p className="mt-4 text-[0.8rem] text-slate-400">평일 AM 10:00 – PM 5:00 · 주말·공휴일 휴무</p>
       </div>

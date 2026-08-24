@@ -8,13 +8,13 @@ interface PricingSectionProps {
 
 export function PricingSection({ examCourse }: PricingSectionProps) {
   return (
-    <section className="py-24 px-6 bg-[#f8f7ff] text-center">
+    <section className="py-24 px-6 bg-[#F8FAFD] text-center">
       <div className="max-w-[1100px] mx-auto">
         <div className="inline-block text-[0.7rem] font-bold tracking-[0.12em] text-indigo-700 uppercase bg-indigo-50 px-3 py-1 rounded-full mb-5">
           시작하기
         </div>
         <h2 className="text-[clamp(1.8rem,4vw,2.6rem)] font-black leading-[1.25] text-indigo-950 mb-4">
-          올라영에서 중등내신을 통해<br /><span className="text-violet-400">고등실력까지 올려보세요.</span>
+          올라영에서 중등내신을 통해<br /><span className="text-[#188038]">고등실력까지 올려보세요.</span>
         </h2>
         <p className="text-[0.95rem] text-slate-500 leading-[1.85] mx-auto max-w-[520px]">
           체험으로 먼저 경험하고, 선생님과 함께 본격적으로 시작하세요.
@@ -59,7 +59,7 @@ export function PricingSection({ examCourse }: PricingSectionProps) {
                 선생님과 함께 · 4주
               </h3>
               <div className="text-[2.6rem] font-black leading-none tracking-[-2px] text-white">&#x20A9;180,000</div>
-              <div className="text-[0.85rem] text-white/45 mt-2">4주 완성 프로그램</div>
+              <div className="text-[0.85rem] text-white/65 mt-2">4주 완성 프로그램</div>
               <div className="inline-flex items-center gap-1.5 bg-[#c9a84c]/15 border border-[#c9a84c]/30 text-[#c9a84c] text-[0.78rem] font-bold px-3.5 py-1.5 rounded-full mt-3.5">
                 수강생 95% · 95점 달성
               </div>

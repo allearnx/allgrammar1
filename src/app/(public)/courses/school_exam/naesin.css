@@ -77,10 +77,10 @@
 .sinaesin-pricing-cta {
   display: block;
   width: 100%;
-  background: #3182f6;
-  color: white;
+  background: #fdd663; /* 올킬보카 큰 CTA 노랑 (google-palette) */
+  color: #1f1f1f;
   padding: 18px;
-  border-radius: 12px;
+  border-radius: 999px;
   font-size: 1rem;
   font-weight: 700;
   cursor: pointer;
@@ -89,12 +89,12 @@
   transition: all 0.25s;
   text-align: center;
   text-decoration: none;
-  box-shadow: 0 4px 16px rgba(49, 130, 246, 0.25);
+  box-shadow: 0 4px 16px rgba(253, 214, 99, 0.3);
 }
 .sinaesin-pricing-cta:hover {
-  background: #1b6ef3;
+  background: #fcc934;
   transform: translateY(-1px);
-  box-shadow: 0 8px 24px rgba(49, 130, 246, 0.35);
+  box-shadow: 0 8px 24px rgba(253, 214, 99, 0.45);
 }
 
 /* Responsive — timeline step circle alignment */
