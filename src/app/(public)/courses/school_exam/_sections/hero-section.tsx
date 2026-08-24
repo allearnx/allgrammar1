@@ -44,7 +44,13 @@ export function HeroSection() {
 
       <div className="max-w-[880px] relative z-[1]">
         <div className="sinaesin-anim inline-flex items-center gap-1.5 bg-white text-[#1F1F1F] px-6 py-2.5 rounded-full text-[0.9rem] font-extrabold mb-9 shadow-[0_4px_14px_rgba(31,31,31,0.08)]">
-          ✦ 올라영 × 올인내신
+          ✦ 올라영 ×{' '}
+          <span>
+            <span className="text-[#1A73E8]">올</span>
+            <span className="text-[#D93025]">인</span>
+            <span className="text-[#F9AB00]">내</span>
+            <span className="text-[#188038]">신</span>
+          </span>
         </div>
 
         <p className="brand-display sinaesin-anim font-medium text-[clamp(1.05rem,1.9vw,1.4rem)] text-[#3C4043] mb-4 [animation-delay:0.08s]">
