@@ -1,6 +1,4 @@
 import type { Metadata } from 'next';
-import type { CSSProperties } from 'react';
-import { Noto_Serif_KR, Nanum_Pen_Script } from 'next/font/google';
 import { createAdminClient } from '@/lib/supabase/admin';
 import { HeroSection } from './_sections/hero-section';
 import { WhySection } from './_sections/why-section';
@@ -10,9 +8,6 @@ import { ReviewSection } from './_sections/review-section';
 import { PricingSection } from './_sections/pricing-section';
 import { ContactSection } from './_sections/contact-section';
 import './naesin.css';
-
-const notoSerif = Noto_Serif_KR({ weight: ['700'], subsets: ['latin'], preload: false });
-const nanumPen = Nanum_Pen_Script({ weight: ['400'], preload: false });
 
 export const metadata: Metadata = {
   title: '올인내신 | 상위권을 위한 영어 내신 대비',
@@ -31,10 +26,10 @@ export default async function SchoolExamPage() {
 
   return (
     <main
-      className="bg-white text-indigo-950 leading-[1.7] overflow-x-hidden"
-      style={{ fontFamily: "'Pretendard', sans-serif", '--font-serif': notoSerif.style.fontFamily } as CSSProperties}
+      className="bg-white text-[#1F1F1F] leading-[1.7] overflow-x-hidden"
+      style={{ fontFamily: "'Pretendard', sans-serif" }}
     >
-      <HeroSection nanumPenFamily={nanumPen.style.fontFamily} />
+      <HeroSection />
       <WhySection />
       <CurriculumSection />
       <CompareSection />

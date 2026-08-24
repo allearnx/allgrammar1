@@ -1,62 +1,4 @@
-/* naesin.css — Tailwind으로 불가능한 스타일만 보관 */
-
-/* Serif font — CSS custom property (set on <main>) */
-.sinaesin-serif {
-  font-family: var(--font-serif), serif;
-}
-
-/* Gold gradient lines — proof badge */
-.sinaesin-proof::before,
-.sinaesin-proof::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    #c9a84c,
-    #f0d080,
-    #c9a84c,
-    transparent
-  );
-}
-.sinaesin-proof::before {
-  top: 0;
-}
-.sinaesin-proof::after {
-  bottom: 0;
-}
-
-/* Gold gradient top line — why cards */
-.sinaesin-why-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    #c9a84c,
-    #f0d080,
-    #c9a84c,
-    transparent
-  );
-}
-
-/* Vertical gold gradient — curriculum timeline */
-.sinaesin-timeline::before {
-  content: '';
-  position: absolute;
-  left: 28px;
-  top: 0;
-  bottom: 0;
-  width: 1px;
-  background: linear-gradient(180deg, #c9a84c, rgba(201, 168, 76, 0.1));
-}
+/* naesin.css — Tailwind으로 불가능한 스타일만 보관 (올킬보카 랜딩 문법) */
 
 /* Entrance animation */
 @keyframes fadeInUp {
@@ -73,33 +15,36 @@
   animation: fadeInUp 0.5s ease both;
 }
 
-/* Pricing CTA button — used by SinaeSinPayButton component */
+/* Pricing CTA button — used by SinaeSinPayButton component (올킬보카 노랑 pill) */
 .sinaesin-pricing-cta {
   display: block;
   width: 100%;
-  background: #fdd663; /* 올킬보카 큰 CTA 노랑 (google-palette) */
+  background: #fdd663;
   color: #1f1f1f;
   padding: 18px;
   border-radius: 999px;
   font-size: 1rem;
-  font-weight: 700;
+  font-weight: 800;
   cursor: pointer;
   font-family: inherit;
   margin-top: 28px;
   transition: all 0.25s;
   text-align: center;
   text-decoration: none;
-  box-shadow: 0 4px 16px rgba(253, 214, 99, 0.3);
+  box-shadow: 0 6px 20px rgba(253, 214, 99, 0.5);
 }
 .sinaesin-pricing-cta:hover {
   background: #fcc934;
   transform: translateY(-1px);
-  box-shadow: 0 8px 24px rgba(253, 214, 99, 0.45);
+  box-shadow: 0 8px 24px rgba(253, 214, 99, 0.5);
 }
 
-/* Responsive — timeline step circle alignment */
+/* 히어로 알파벳 카펫 — 모바일에선 가장자리 글자만 남긴다 (올킬보카와 동일 규칙) */
 @media (max-width: 768px) {
-  .sinaesin-timeline::before {
-    left: 22px;
+  .sinaesin-hero-letter {
+    font-size: 56px !important;
+  }
+  .sinaesin-hero-letter:nth-child(n + 8) {
+    display: none;
   }
 }

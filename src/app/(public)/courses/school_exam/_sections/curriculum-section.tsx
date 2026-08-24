@@ -1,30 +1,40 @@
 import { curriculumSteps } from '../school-exam-data';
 
+// 구글 4색 순환 (올킬보카 스텝 테마)
+const stepColors = ['#1A73E8', '#D93025', '#F9AB00', '#188038'];
+
 export function CurriculumSection() {
   return (
-    <section className="py-16 px-6 bg-indigo-950">
-      <div className="max-w-[1000px] mx-auto">
-        <div className="inline-block text-[0.7rem] font-bold tracking-[0.12em] text-[#c9a84c] uppercase bg-[#c9a84c]/15 px-3 py-1 rounded-full mb-4 border border-[#c9a84c]/30">
+    <section id="curriculum" className="py-16 md:py-24 px-5 md:px-6 bg-[#F8F9FA]">
+      <div className="max-w-[880px] mx-auto text-center">
+        <span className="inline-block bg-white text-[#174EA6] text-[clamp(0.9rem,1.5vw,1.05rem)] font-extrabold px-6 py-2.5 rounded-full mb-5 shadow-[0_4px_14px_rgba(31,31,31,0.06)]">
           커리큘럼
-        </div>
-        <h2 className="text-[clamp(1.8rem,4vw,2.6rem)] font-black leading-[1.25] text-white mb-3">
-          내신 1등급의<br /><span className="text-[#f0d080]">순서가 있습니다.</span>
+        </span>
+        <h2 className="brand-display font-bold text-[clamp(1.65rem,3.5vw,2.6rem)] leading-[1.35] tracking-[-0.5px] text-[#1F1F1F] break-keep">
+          내신 1등급의<br /><span className="text-[#1A73E8]">순서가 있습니다.</span>
         </h2>
-        <p className="text-[0.95rem] text-white/65 leading-[1.85] max-w-[520px]">
-          순서가 틀리면 시간 낭비입니다.<br />올인내신은 검증된 순서대로 가르칩니다.
+        <p className="brand-display font-medium text-[clamp(1.05rem,1.9vw,1.35rem)] text-[#3C4043] leading-[1.8] mt-4 max-w-[680px] mx-auto break-keep">
+          순서가 틀리면 시간 낭비예요.<br />올인내신은 <b className="font-bold text-[#1F1F1F]">검증된 순서대로</b> 가르칩니다.
         </p>
-        <div className="sinaesin-timeline flex flex-col mt-8 relative">
-          {curriculumSteps.map((item) => (
-            <div key={item.step} className="group grid grid-cols-[44px_1fr] md:grid-cols-[56px_1fr] gap-5 md:gap-7 items-start py-5 border-b border-white/[0.06] last:border-b-0 relative transition-all duration-300">
-              <div className="sinaesin-serif w-11 md:w-14 h-11 md:h-14 rounded-full bg-indigo-900 border-[1.5px] border-[#c9a84c] flex items-center justify-center text-[0.7rem] md:text-[0.8rem] font-bold text-[#c9a84c] shrink-0 relative z-10 transition-all duration-300 group-hover:bg-[#c9a84c] group-hover:text-indigo-950">
-                {item.step}
+
+        <div className="flex flex-col gap-3.5 mt-12 text-left">
+          {curriculumSteps.map((item, i) => {
+            const color = stepColors[i % stepColors.length];
+            return (
+              <div key={item.step} className="bg-white rounded-[22px] px-6 md:px-8 py-6 md:py-7 grid grid-cols-[52px_1fr] gap-5 md:gap-6 items-start shadow-[0_8px_28px_rgba(31,31,31,0.06)]">
+                <div
+                  className="brand-display font-bold w-[52px] h-[52px] rounded-full flex items-center justify-center text-[1.2rem] text-white mt-0.5"
+                  style={{ background: color }}
+                >
+                  {i + 1}
+                </div>
+                <div>
+                  <h3 className="brand-display font-bold text-[clamp(1.05rem,2vw,1.25rem)] text-[#1F1F1F] mb-1.5 leading-[1.4] break-keep">{item.title}</h3>
+                  <p className="text-[0.95rem] text-[#3C4043] leading-[1.75] whitespace-pre-line break-keep">{item.desc}</p>
+                </div>
               </div>
-              <div className="transition-transform duration-300 group-hover:translate-x-1">
-                <h3 className="text-[1.05rem] font-bold text-white mb-1.5 leading-[1.4]">{item.title}</h3>
-                <p className="text-sm text-white/65 leading-[1.7] whitespace-pre-line break-keep">{item.desc}</p>
-              </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>
