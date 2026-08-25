@@ -5,6 +5,7 @@ import { logger } from '@/lib/logger';
 import Anthropic from '@anthropic-ai/sdk';
 import { requireAiJsonArray } from '@/lib/ai-json';
 import { validateProblemStructure } from '@/lib/validation';
+import { sameBank, rebuildBankSets } from '@/lib/naesin/word-bank-sets';
 import type { NaesinProblemQuestion } from '@/types/naesin';
 
 export const maxDuration = 300;
@@ -16,13 +17,11 @@ const PARAPHRASE_CHUNK_SIZE = 12;
 
 /** 연속 문항이 같은 공통 지문/보기 상자를 공유하는지 */
 function sharesPassage(a: Record<string, unknown>, b: Record<string, unknown>): boolean {
+  // word bank 세트: 보기 단어 집합이 같으면 같은 세트 (소거법 유지 위해 안 쪼갬)
+  if (sameBank(a, b)) return true;
+  // 공통 지문: 긴 공통 접두사 휴리스틱
   const qa = String(a?.question ?? '');
   const qb = String(b?.question ?? '');
-  // word bank 세트: 첫 줄 "[보기] ..."가 동일하면 같은 세트 (소거법 유지 위해 안 쪼갬)
-  const la = qa.split('\n', 1)[0].trim();
-  const lb = qb.split('\n', 1)[0].trim();
-  if (la.startsWith('[보기]') && la === lb) return true;
-  // 공통 지문: 긴 공통 접두사 휴리스틱
   if (qa.length < 120 || qb.length < 120) return false;
   return qa.slice(0, 100) === qb.slice(0, 100);
 }
@@ -130,7 +129,8 @@ export const POST = createApiHandler(
 - **★객관식 판별 주의: 문제에 ①~⑤ 선다형 선택지가 실제로 인쇄된 경우에만 객관식.**
   아래는 전부 서술형(options: null)으로 추출할 것:
   · 보기 상자(word bank)에서 단어를 골라 빈칸 채우기 → options에 넣지 말고, 보기 단어들을
-    question 앞에 "[보기] fresh / clean / famous" 형태로 포함, answer는 정답 단어
+    question 앞에 "[보기] fresh / clean / famous" 형태로 포함, answer는 정답 단어.
+    **같은 보기 상자를 공유하는 모든 문항에 똑같은 [보기] 줄을 각각 복제**할 것
   · "(A / B)" 괄호 안에서 알맞은 것 고르기 → 괄호를 question에 그대로 두고 answer는 옳은 쪽
   · 밑줄 치시오·고치시오·배열하시오 등 지시형
 - 모든 문제를 빠짐없이 추출
@@ -163,6 +163,10 @@ export const POST = createApiHandler(
           .then((m) => requireAiJsonArray<Record<string, unknown>>(m, 'ai.paraphrase')),
       ),
     );
+
+    // word bank 세트 재조립: 변형된 정답들로 [보기] 상자를 다시 만들어 세트 전 문항에
+    // 동일 부착 — "각 단어 1회 정답" 소거법 구조를 프롬프트 준수 여부와 무관하게 보장
+    chunkResults.forEach((out, ci) => rebuildBankSets(chunks[ci], out));
 
     // 청크 순서대로 합친 뒤 일련번호 재부여
     const questions: Record<string, unknown>[] = chunkResults
