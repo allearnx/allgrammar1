@@ -17,6 +17,7 @@ import { toast } from 'sonner';
 import { fetchWithToast } from '@/lib/fetch-with-toast';
 import type { NaesinProblemQuestion } from '@/types/naesin';
 import type { FullValidationResult } from '@/lib/validation';
+import { validateProblemStructure } from '@/lib/validation/problem-validator';
 import type { GeneratedQuestion } from '../shared/question-utils';
 import { hasOptions, normalizeQuestions, splitQuestionsIntoSets } from '../shared/question-utils';
 import { QuestionEditRow, QuestionViewRow, ValidationBadgeIcon, QuestionBadge } from '../shared/question-table-rows';
@@ -76,6 +77,48 @@ export function PdfProblemExtractDialog({ unitId, unitTitle, onAdd }: { unitId: 
     }
 
     e.target.value = '';
+  }
+
+  function formatForValidation(qs: GeneratedQuestion[]): NaesinProblemQuestion[] {
+    return qs.map((q, i) => ({
+      number: i + 1,
+      question: q.question,
+      ...(hasOptions(q) ? { options: q.options! } : {}),
+      answer: q.answer,
+      ...(q.explanation ? { explanation: q.explanation } : {}),
+    }));
+  }
+
+  /** 문항 삭제/수정 후 구조 검증을 로컬로 재계산 (AI 검증 결과는 번호가 바뀌므로 리셋) */
+  function refreshStructural(qs: GeneratedQuestion[]) {
+    if (qs.length === 0) { setValidation(null); return; }
+    const s = validateProblemStructure(formatForValidation(qs));
+    setValidation({ structural: s, badge: s.valid ? (s.warningCount > 0 ? 'warn' : 'pass') : 'fail', summary: '' });
+  }
+
+  function handleDeleteQuestion(idx: number) {
+    const next = editor.questions
+      .filter((_, i) => i !== idx)
+      .map((q, i) => ({ ...q, number: i + 1 }));
+    editor.deleteQuestion(idx);
+    refreshStructural(next);
+  }
+
+  function handleDeleteErrorQuestions() {
+    if (!validation) return;
+    const errNums = new Set(
+      validation.structural.issues
+        .filter((i) => i.severity === 'error' && i.questionNumber != null)
+        .map((i) => i.questionNumber),
+    );
+    if (errNums.size === 0) return;
+    const next = editor.questions
+      .filter((_, i) => !errNums.has(i + 1))
+      .map((q, i) => ({ ...q, number: i + 1 }));
+    editor.setQuestions(next);
+    editor.setEditingIdx(null);
+    refreshStructural(next);
+    toast.success(`오류 문항 ${errNums.size}개를 삭제했습니다`);
   }
 
   async function handleAiValidation() {
@@ -236,6 +279,26 @@ export function PdfProblemExtractDialog({ unitId, unitTitle, onAdd }: { unitId: 
               )}
             </Button>
 
+            {validation && validation.structural.errorCount > 0 && (
+              <div className="rounded-lg border border-destructive/30 bg-destructive/5 p-3 text-sm space-y-1.5">
+                <div className="flex items-center justify-between gap-2">
+                  <p className="font-medium text-destructive">구조 오류 {validation.structural.errorCount}건</p>
+                  <Button size="sm" variant="destructive" onClick={handleDeleteErrorQuestions}>
+                    오류 문항 모두 삭제
+                  </Button>
+                </div>
+                <ul className="space-y-0.5 text-destructive/90">
+                  {validation.structural.issues
+                    .filter((i) => i.severity === 'error')
+                    .slice(0, 15)
+                    .map((issue, k) => <li key={k}>· {issue.message}</li>)}
+                  {validation.structural.issues.filter((i) => i.severity === 'error').length > 15 && (
+                    <li>· 외 {validation.structural.issues.filter((i) => i.severity === 'error').length - 15}건</li>
+                  )}
+                </ul>
+              </div>
+            )}
+
             <div className="rounded-lg border overflow-hidden max-h-[60vh] overflow-y-auto">
               <table className="w-full text-sm">
                 <thead className="bg-muted/50 sticky top-0">
@@ -260,7 +323,7 @@ export function PdfProblemExtractDialog({ unitId, unitTitle, onAdd }: { unitId: 
                         />
                       ) : (
                         <>
-                          <QuestionViewRow question={q} onEdit={() => editor.setEditingIdx(i)} />
+                          <QuestionViewRow question={q} onEdit={() => editor.setEditingIdx(i)} onDelete={() => handleDeleteQuestion(i)} />
                           <td className="p-2">
                             <QuestionBadge questionNumber={q.number} validation={validation} />
                           </td>
