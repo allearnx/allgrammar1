@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { validateProblemStructure, sanitizeQuestions, validateBeforeSave, validateAnswerKey, backfillSharedPassages, stripOptionSelfNumbering } from '@/lib/validation/problem-validator';
+import { validateProblemStructure, sanitizeQuestions, validateBeforeSave, validateAnswerKey, backfillSharedPassages, stripOptionSelfNumbering, fixArrowPairAnswer } from '@/lib/validation/problem-validator';
 import type { NaesinProblemQuestion } from '@/types/naesin';
 
 function makeMcq(n: number, answer: number = (n % 5) + 1): NaesinProblemQuestion {
@@ -772,5 +772,29 @@ describe('sanitizeQuestions — 보기 자기번호 제거 (Rule 9)', () => {
       { number: 1, question: 'Q', options: ['① fresh', '② tidy', '③ famous', '④ boring', '⑤ green'], answer: '2' },
     ] as NaesinProblemQuestion[]);
     expect(questions[0].options).toEqual(['fresh', 'tidy', 'famous', 'boring', 'green']);
+  });
+});
+
+describe('fixArrowPairAnswer / sanitizeQuestions Rule 10 — 화살표 쌍 정답', () => {
+  const fixQ = '다음 문장에서 문법적 오류를 찾아 바르게 고치시오. ※ 고친 부분만 쓰시오.\nThe speech made the students boring.';
+
+  it('고치기 맥락의 "틀린형 → 고친형"은 고친 형태만 남김', () => {
+    expect(fixArrowPairAnswer(fixQ, 'boring → bored')).toBe('bored');
+    expect(fixArrowPairAnswer(fixQ, 'happy me -> me happy')).toBe('me happy');
+  });
+
+  it('고치기 맥락이 아니면 보존', () => {
+    expect(fixArrowPairAnswer('빈칸에 알맞은 말을 쓰시오.', 'A → B')).toBe('A → B');
+  });
+
+  it('화살표가 2개 이상(복수 쌍)이면 보존', () => {
+    expect(fixArrowPairAnswer(fixQ, 'if → whether, visits → visited')).toBe('if → whether, visits → visited');
+  });
+
+  it('sanitizeQuestions 저장 시 적용', () => {
+    const { questions } = sanitizeQuestions([
+      { number: 1, question: fixQ, answer: 'boring → bored' },
+    ] as NaesinProblemQuestion[]);
+    expect(questions[0].answer).toBe('bored');
   });
 });

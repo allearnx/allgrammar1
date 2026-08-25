@@ -1,5 +1,5 @@
 import type { NaesinProblemQuestion } from '@/types/naesin';
-import { stripOptionSelfNumbering } from '@/lib/validation/problem-validator';
+import { stripOptionSelfNumbering, fixArrowPairAnswer } from '@/lib/validation/problem-validator';
 
 export interface GeneratedQuestion {
   number: number;
@@ -17,16 +17,21 @@ export function hasOptions(q: GeneratedQuestion): boolean {
 
 /** AI 응답을 정규화: options/explanation을 일관된 타입으로 */
 export function normalizeQuestions(raw: Record<string, unknown>[]): GeneratedQuestion[] {
-  return raw.map((q, i) => ({
-    number: (q.number as number) || i + 1,
-    question: (q.question as string) || '',
-    options: Array.isArray(q.options) && q.options.length > 0
+  return raw.map((q, i) => {
+    const question = (q.question as string) || '';
+    const options = Array.isArray(q.options) && q.options.length > 0
       ? stripOptionSelfNumbering((q.options as unknown[]).map(String))
-      : null,
-    answer: String(q.answer ?? ''),
-    explanation: (q.explanation as string) || '',
-    acceptedAnswers: Array.isArray(q.acceptedAnswers) ? q.acceptedAnswers as string[] : undefined,
-  }));
+      : null;
+    const rawAnswer = String(q.answer ?? '');
+    return {
+      number: (q.number as number) || i + 1,
+      question,
+      options,
+      answer: options ? rawAnswer : fixArrowPairAnswer(question, rawAnswer),
+      explanation: (q.explanation as string) || '',
+      acceptedAnswers: Array.isArray(q.acceptedAnswers) ? q.acceptedAnswers as string[] : undefined,
+    };
+  });
 }
 
 /** 연속 문항이 같은 공통 지문/보기 상자를 공유하는지 (세트 분할 시 안 쪼개기 위함) */

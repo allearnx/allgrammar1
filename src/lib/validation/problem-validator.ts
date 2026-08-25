@@ -20,6 +20,18 @@ const CIRCLED_BY_INDEX = ['①', '②', '③', '④', '⑤', '⑥', '⑦', '⑧'
  *  화면이 보기 번호를 자동 표시하므로 텍스트에 남으면 "① ① fresh"처럼 이중 표기됨.
  *  전 보기가 각자 자기 인덱스 번호로 시작하고 제거 후에도 내용이 남을 때만 발동
  *  (조합형 보기 "①③" 오변형 방지 — 인덱스 불일치로 자동 미발동). */
+/** 오류 수정형 "틀린형 → 고친형" 화살표 쌍 정답을 고친 형태만으로 정규화.
+ *  "※ 고친 부분만 쓰시오" 지시에 학생은 고친 형태만 입력하므로 쌍이 저장되면 전원 오답.
+ *  고치기 맥락(고치/고쳐/바르게) + 화살표 1개일 때만 우측으로 교체 (복수 쌍은 의도 불명이라 보존). */
+export function fixArrowPairAnswer(question: string, answer: string): string {
+  const arrowMatch = answer.match(/^(.{1,80}?)\s*(?:→|➔|->)\s*(.+)$/);
+  const arrowCount = (answer.match(/→|➔|->/g) || []).length;
+  if (arrowMatch && arrowCount === 1 && /고치|고쳐|바르게/.test(question)) {
+    return arrowMatch[2].trim();
+  }
+  return answer;
+}
+
 export function stripOptionSelfNumbering(options: string[]): string[] {
   const stripped = options.map((opt, i) => {
     if (typeof opt !== 'string') return null;
@@ -514,6 +526,14 @@ export function sanitizeQuestions(
     // Ensure numeric answer is stored as string for consistency
     if (typeof out.answer === 'number') {
       out.answer = String(out.answer);
+    }
+
+    // Rule 10: 오류 수정형 "틀린형 → 고친형" 화살표 쌍 정답 정규화.
+    if (!isMcq && typeof out.answer === 'string') {
+      out.answer = fixArrowPairAnswer(
+        typeof out.question === 'string' ? out.question : '',
+        out.answer,
+      );
     }
 
     // Auto-generate acceptedAnswers for common format variants (서술형만)
