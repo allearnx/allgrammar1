@@ -13,6 +13,27 @@ const CIRCLED_ANYWHERE = /[①②③④⑤⑥⑦⑧⑨⑩]/;
 
 // PDF 추출 아티팩트
 const SUPERSCRIPT_NUMBERS = /[⁰¹²³⁴⁵⁶⁷⁸⁹]+[⁾)]\s*/g;
+
+const CIRCLED_BY_INDEX = ['①', '②', '③', '④', '⑤', '⑥', '⑦', '⑧', '⑨', '⑩'];
+
+/** 보기 텍스트 앞의 "자기 번호" 접두사(① / 1. / 1)) 제거.
+ *  화면이 보기 번호를 자동 표시하므로 텍스트에 남으면 "① ① fresh"처럼 이중 표기됨.
+ *  전 보기가 각자 자기 인덱스 번호로 시작하고 제거 후에도 내용이 남을 때만 발동
+ *  (조합형 보기 "①③" 오변형 방지 — 인덱스 불일치로 자동 미발동). */
+export function stripOptionSelfNumbering(options: string[]): string[] {
+  const stripped = options.map((opt, i) => {
+    if (typeof opt !== 'string') return null;
+    const t = opt.trimStart();
+    for (const prefix of [CIRCLED_BY_INDEX[i], `${i + 1}.`, `${i + 1})`]) {
+      if (prefix && t.startsWith(prefix)) {
+        const rest = t.slice(prefix.length).trim();
+        if (rest) return rest;
+      }
+    }
+    return null;
+  });
+  return stripped.every((s): s is string => s !== null) ? stripped : options;
+}
 const FFFD_CHAR = /\ufffd/g;
 
 // ── Types ──
@@ -428,6 +449,8 @@ export function sanitizeQuestions(
         }
         return String(opt);
       });
+      // Rule 9: 보기 자기번호 접두사 제거 ("① fresh" → "fresh") — 화면이 번호 자동 표시
+      out.options = stripOptionSelfNumbering(out.options);
     }
 
     // Rule 2: Array answer (multi-select) → comma-separated string "1, 3"

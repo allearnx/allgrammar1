@@ -1,4 +1,5 @@
 import type { NaesinProblemQuestion } from '@/types/naesin';
+import { stripOptionSelfNumbering } from '@/lib/validation/problem-validator';
 
 export interface GeneratedQuestion {
   number: number;
@@ -19,7 +20,9 @@ export function normalizeQuestions(raw: Record<string, unknown>[]): GeneratedQue
   return raw.map((q, i) => ({
     number: (q.number as number) || i + 1,
     question: (q.question as string) || '',
-    options: Array.isArray(q.options) && q.options.length > 0 ? q.options as string[] : null,
+    options: Array.isArray(q.options) && q.options.length > 0
+      ? stripOptionSelfNumbering((q.options as unknown[]).map(String))
+      : null,
     answer: String(q.answer ?? ''),
     explanation: (q.explanation as string) || '',
     acceptedAnswers: Array.isArray(q.acceptedAnswers) ? q.acceptedAnswers as string[] : undefined,

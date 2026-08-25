@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { validateProblemStructure, sanitizeQuestions, validateBeforeSave, validateAnswerKey, backfillSharedPassages } from '@/lib/validation/problem-validator';
+import { validateProblemStructure, sanitizeQuestions, validateBeforeSave, validateAnswerKey, backfillSharedPassages, stripOptionSelfNumbering } from '@/lib/validation/problem-validator';
 import type { NaesinProblemQuestion } from '@/types/naesin';
 
 function makeMcq(n: number, answer: number = (n % 5) + 1): NaesinProblemQuestion {
@@ -734,5 +734,43 @@ describe('validateAnswerKey', () => {
 
   it('answer_key가 배열이 아니면(null) 통과', () => {
     expect(validateAnswerKey(qs(5), null)).toHaveLength(0);
+  });
+});
+
+describe('stripOptionSelfNumbering', () => {
+  it('전 보기가 자기 번호(①~⑤)로 시작하면 접두사 제거', () => {
+    expect(stripOptionSelfNumbering(['① fresh', '② tidy', '③ famous', '④ boring', '⑤ green']))
+      .toEqual(['fresh', 'tidy', 'famous', 'boring', 'green']);
+  });
+
+  it('"1." / "1)" 스타일 접두사도 제거', () => {
+    expect(stripOptionSelfNumbering(['1. go', '2. goes', '3. going', '4. gone', '5. went']))
+      .toEqual(['go', 'goes', 'going', 'gone', 'went']);
+    expect(stripOptionSelfNumbering(['1) a', '2) b', '3) c', '4) d', '5) e']))
+      .toEqual(['a', 'b', 'c', 'd', 'e']);
+  });
+
+  it('조합형 보기("①③")는 변형하지 않음 (인덱스 불일치)', () => {
+    const combo = ['①, ③', '①, ④', '②, ③', '②, ⑤', '④, ⑤'];
+    expect(stripOptionSelfNumbering(combo)).toEqual(combo);
+  });
+
+  it('접두사 제거 시 내용이 비면 발동하지 않음', () => {
+    const bare = ['①', '②', '③', '④', '⑤'];
+    expect(stripOptionSelfNumbering(bare)).toEqual(bare);
+  });
+
+  it('일부만 번호로 시작하면 발동하지 않음', () => {
+    const mixed = ['① fresh', 'tidy', '③ famous', '④ boring', '⑤ green'];
+    expect(stripOptionSelfNumbering(mixed)).toEqual(mixed);
+  });
+});
+
+describe('sanitizeQuestions — 보기 자기번호 제거 (Rule 9)', () => {
+  it('저장 시 "① fresh" 접두사가 제거된다', () => {
+    const { questions } = sanitizeQuestions([
+      { number: 1, question: 'Q', options: ['① fresh', '② tidy', '③ famous', '④ boring', '⑤ green'], answer: '2' },
+    ] as NaesinProblemQuestion[]);
+    expect(questions[0].options).toEqual(['fresh', 'tidy', 'famous', 'boring', 'green']);
   });
 });
