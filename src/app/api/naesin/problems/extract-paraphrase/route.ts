@@ -5,6 +5,7 @@ import { logger } from '@/lib/logger';
 import Anthropic from '@anthropic-ai/sdk';
 import { requireAiJsonArray } from '@/lib/ai-json';
 import { validateProblemStructure } from '@/lib/validation';
+import { isUnanswerableImageQuestion } from '@/lib/validation/problem-validator';
 import { sameBank, rebuildBankSets } from '@/lib/naesin/word-bank-sets';
 import type { NaesinProblemQuestion } from '@/types/naesin';
 
@@ -133,7 +134,9 @@ export const POST = createApiHandler(
     **같은 보기 상자를 공유하는 모든 문항에 똑같은 [보기] 줄을 각각 복제**할 것
   · "(A / B)" 괄호 안에서 알맞은 것 고르기 → 괄호를 question에 그대로 두고 answer는 옳은 쪽
   · 밑줄 치시오·고치시오·배열하시오 등 지시형
-- 모든 문제를 빠짐없이 추출
+- **그림·사진·지도·그래프를 봐야만 풀 수 있는 문항은 추출하지 말 것** (화면에 이미지를
+  옮길 수 없어 학생이 못 풂). 단, 글자·숫자로 된 표는 마크다운 파이프 표로 재현해 문항 유지
+- 위 제외 대상 외 모든 문제를 빠짐없이 추출
 - **★공통 지문 필수 복제:** "[4~6] 다음 글을 읽고 물음에 답하시오" 같은 번호 범위 머리글 아래 지문·대화가 한 번만 인쇄되고 여러 문제가 딸린 경우, 그 지문(대화·요약·표 포함)을 범위 내 모든 문제의 question 앞에 각각 복제하세요. 지문 속 ⓐ~ⓕ/㉠~㉤/(A)~(C) 마커가 있으면 그대로 보존. "위 글/위 대화/윗글"을 가리키는 문제는 반드시 자기 question에 지문 전체를 포함해야 합니다(참조만 두면 학생이 못 풉니다).`,
             },
           ],
@@ -141,8 +144,14 @@ export const POST = createApiHandler(
       ],
     }).finalMessage();
 
-    const originalQuestions = requireAiJsonArray<Record<string, unknown>>(extractMessage, 'ai.extract');
-    logger.info('ai.extract_done', { count: originalQuestions.length, unitId });
+    const extractedQuestions = requireAiJsonArray<Record<string, unknown>>(extractMessage, 'ai.extract');
+
+    // 그림·사진을 봐야만 풀 수 있는 문항은 패러프레이즈 대상에서 제외 (화면에서 풀 수 없음)
+    const originalQuestions = extractedQuestions.filter(
+      (q) => !isUnanswerableImageQuestion(String(q.question ?? '')),
+    );
+    const removedImageCount = extractedQuestions.length - originalQuestions.length;
+    logger.info('ai.extract_done', { count: originalQuestions.length, removedImageCount, unitId });
 
     if (originalQuestions.length === 0) {
       return NextResponse.json({ error: 'PDF에서 문제를 추출하지 못했습니다.' }, { status: 422 });
@@ -189,7 +198,12 @@ export const POST = createApiHandler(
       });
     }
 
-    return NextResponse.json({ questions, originalCount: originalQuestions.length, validation: { structural } });
+    return NextResponse.json({
+      questions,
+      originalCount: originalQuestions.length,
+      removedImageCount,
+      validation: { structural },
+    });
   } catch (error) {
     const msg = error instanceof Error ? error.message : String(error);
     logger.error('ai.extract_paraphrase', { error: msg });

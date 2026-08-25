@@ -60,10 +60,13 @@ export function PdfProblemExtractDialog({ unitId, unitTitle, onAdd }: { unitId: 
       const { uploadForExtract } = await import('@/lib/upload-for-extract');
       const { publicUrl, storagePath } = await uploadForExtract(file);
 
-      const data = await fetchWithToast<{ questions?: Record<string, unknown>[]; originalCount?: number; validation?: { structural: FullValidationResult['structural'] } }>(
+      const data = await fetchWithToast<{ questions?: Record<string, unknown>[]; originalCount?: number; removedImageCount?: number; validation?: { structural: FullValidationResult['structural'] } }>(
         '/api/naesin/problems/extract-paraphrase',
         { body: { unitId, unitTitle: unitTitle || '', pdfUrl: publicUrl, storagePath }, errorMessage: 'AI 문제 생성에 실패했습니다.' },
       );
+      if (data.removedImageCount) {
+        toast.info(`그림·사진 의존 문항 ${data.removedImageCount}개는 화면에서 풀 수 없어 제외했습니다`);
+      }
       editor.setQuestions(normalizeQuestions(data.questions || []));
       setOriginalCount(data.originalCount || 0);
       if (data.validation?.structural) {
