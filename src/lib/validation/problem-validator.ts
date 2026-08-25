@@ -119,6 +119,7 @@ export function validateProblemStructure(
   const seenTexts = new Set<string>();
   const answerDistribution: Record<number, number> = {};
   let mcqCount = 0;
+  let biasBaseCount = 0; // 편향 검사 모수 (4지선다 이상 객관식)
   let subjectiveCount = 0;
 
   for (const q of questions) {
@@ -153,8 +154,14 @@ export function validateProblemStructure(
     const isMcq = Array.isArray(q.options) && q.options.length > 0;
     if (isMcq) {
       mcqCount++;
-      if (q.options!.length !== 5) {
-        issues.push(issue('error', n, 'WRONG_OPTION_COUNT', `${n}번: 보기가 ${q.options!.length}개입니다. (5개 필요)`));
+      // 2지선다(2택 고르기)·4~5지선다는 정상. 1개(파손)는 오류, 3개는 뭉침·유실 가능성 경고.
+      // 보기 4개 미만인데 보기 텍스트에 원형 마커가 있으면 "선지 뭉침" 사고 패턴 → 오류.
+      if (q.options!.length < 2) {
+        issues.push(issue('error', n, 'WRONG_OPTION_COUNT', `${n}번: 보기가 ${q.options!.length}개입니다.`));
+      } else if (q.options!.length < 4 && q.options!.some((o) => /[①②③④⑤ⓐ-ⓔ]/.test(o))) {
+        issues.push(issue('error', n, 'WRONG_OPTION_COUNT', `${n}번: 보기 ${q.options!.length}개에 원형 마커 포함 — 선지가 뭉친 것으로 보입니다.`));
+      } else if (q.options!.length === 3) {
+        issues.push(issue('warning', n, 'WRONG_OPTION_COUNT', `${n}번: 보기가 3개입니다. (뭉침·유실 확인 필요)`));
       }
 
       // Check for empty options
@@ -167,7 +174,11 @@ export function validateProblemStructure(
       // MCQ answer should be 1-5
       const answerNum = typeof q.answer === 'number' ? q.answer : Number(q.answer);
       if (!Number.isNaN(answerNum) && answerNum >= 1 && answerNum <= 5) {
-        answerDistribution[answerNum] = (answerDistribution[answerNum] || 0) + 1;
+        // 편향 검사는 4지선다 이상만 (2지선다는 1·2 집중이 정상)
+        if (q.options!.length >= 4) {
+          biasBaseCount++;
+          answerDistribution[answerNum] = (answerDistribution[answerNum] || 0) + 1;
+        }
       } else if (typeof q.answer === 'string') {
         // Answer could be text — check if it matches an option
         const matchIdx = q.options!.findIndex(
@@ -256,13 +267,13 @@ export function validateProblemStructure(
     }
   }
 
-  // Answer distribution bias (MCQ only)
-  if (mcqCount >= 10) {
-    const threshold = mcqCount * 0.25;
+  // Answer distribution bias (4지선다 이상 객관식만 — 2지선다는 1·2 집중이 정상)
+  if (biasBaseCount >= 10) {
+    const threshold = biasBaseCount * 0.25;
     for (const [num, count] of Object.entries(answerDistribution)) {
       if (count > threshold) {
         issues.push(
-          issue('warning', null, 'ANSWER_BIAS', `정답 ${num}번이 ${count}개로 편향되었습니다. (25% 초과: ${Math.round((count / mcqCount) * 100)}%)`),
+          issue('warning', null, 'ANSWER_BIAS', `정답 ${num}번이 ${count}개로 편향되었습니다. (25% 초과: ${Math.round((count / biasBaseCount) * 100)}%)`),
         );
       }
     }

@@ -821,3 +821,34 @@ describe('FULL_SENTENCE_ANSWER_TOO_SHORT 경고', () => {
     expect(r.issues.some((i) => i.code === 'FULL_SENTENCE_ANSWER_TOO_SHORT')).toBe(false);
   });
 });
+
+describe('2지선다 객관식 허용', () => {
+  it('보기 2개 객관식은 오류 없음', () => {
+    const r = validateProblemStructure([
+      { number: 1, question: "I don't know ______.", options: ['where it is', 'where is it'], answer: '1', explanation: 'e' },
+    ] as NaesinProblemQuestion[]);
+    expect(r.issues.some((i) => i.code === 'WRONG_OPTION_COUNT')).toBe(false);
+  });
+
+  it('보기 2개인데 원형 마커 포함이면 선지 뭉침 오류', () => {
+    const r = validateProblemStructure([
+      { number: 1, question: 'Q', options: ['① a ② b ③ c', '④ d ⑤ e'], answer: '1', explanation: 'e' },
+    ] as NaesinProblemQuestion[]);
+    expect(r.issues.some((i) => i.code === 'WRONG_OPTION_COUNT' && i.severity === 'error')).toBe(true);
+  });
+
+  it('보기 3개는 경고', () => {
+    const r = validateProblemStructure([
+      { number: 1, question: 'Q', options: ['a', 'b', 'c'], answer: '1', explanation: 'e' },
+    ] as NaesinProblemQuestion[]);
+    expect(r.issues.some((i) => i.code === 'WRONG_OPTION_COUNT' && i.severity === 'warning')).toBe(true);
+  });
+
+  it('2지선다 다수여도 정답 편향 경고 미발동', () => {
+    const qs = Array.from({ length: 20 }, (_, i) => ({
+      number: i + 1, question: `Q${i} ______.`, options: ['a', 'b'], answer: '1', explanation: 'e',
+    }));
+    const r = validateProblemStructure(qs as NaesinProblemQuestion[]);
+    expect(r.issues.some((i) => i.code === 'ANSWER_BIAS')).toBe(false);
+  });
+});
