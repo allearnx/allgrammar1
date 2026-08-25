@@ -104,12 +104,16 @@ export function AddDialogueDialog({ unitId, onAdd }: { unitId: string; onAdd: ()
       const { publicUrl, storagePath } = await uploadForExtract(file);
       const data = await fetchWithToast<{
         dialogues?: { title?: string; sentences?: { original: string; korean: string; speaker?: string }[] }[];
+        title?: string;
+        sentences?: { original: string; korean: string; speaker?: string }[];
       }>('/api/naesin/dialogues/extract-text', {
         body: { pdfUrl: publicUrl, storagePath },
         errorMessage: 'PDF 추출 실패',
         logContext: 'admin.dialogue_pdf_extract',
       });
-      const dialogues = (data.dialogues ?? [])
+      // 구버전 서버(단일 {title, sentences} 응답) 호환
+      const rawDialogues = data.dialogues ?? (data.sentences?.length ? [{ title: data.title, sentences: data.sentences }] : []);
+      const dialogues = rawDialogues
         .map((d, i) => ({
           title: d.title?.trim() || `대화문 ${i + 1}`,
           sentences: (d.sentences ?? []).map(toSentence),

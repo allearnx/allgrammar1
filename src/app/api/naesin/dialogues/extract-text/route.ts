@@ -82,7 +82,12 @@ JSON 객체로만 응답 (다른 텍스트 없이):
         }));
 
       cleanupStorage(storagePath);
-      return NextResponse.json({ dialogues });
+      // title/sentences: 배포 전 로드된 구버전 클라이언트 호환 (첫 대화문)
+      return NextResponse.json({
+        dialogues,
+        title: dialogues[0]?.title ?? '',
+        sentences: dialogues[0]?.sentences ?? [],
+      });
     } catch (error) {
       logger.error('ai.dialogue_pdf_extract', { error: error instanceof Error ? error.message : String(error) });
       return NextResponse.json(
