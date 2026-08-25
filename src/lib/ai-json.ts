@@ -26,18 +26,67 @@ export function parseAiJsonObject<T = unknown>(message: Anthropic.Message): T | 
   return JSON.parse(match[0]);
 }
 
-/** AI 응답에서 JSON 배열 추출 + 실패 시 에러. logTag로 구분. */
+/** 잘린 JSON 배열 복구: 마지막으로 완결된 최상위 원소까지 남기고 배열을 닫는다.
+ *  max_tokens 도달로 응답이 중간에 끊긴 경우용. 배열이 정상 종료됐거나
+ *  완결된 원소가 하나도 없으면 null (복구 불가). */
+export function salvageTruncatedJsonArray(raw: string): string | null {
+  const start = raw.indexOf('[');
+  if (start === -1) return null;
+  let depth = 0;
+  let inString = false;
+  let escaped = false;
+  let lastComplete = -1; // 마지막 완결 원소 직후 인덱스
+  for (let i = start; i < raw.length; i++) {
+    const ch = raw[i];
+    if (inString) {
+      if (escaped) escaped = false;
+      else if (ch === '\\') escaped = true;
+      else if (ch === '"') inString = false;
+      continue;
+    }
+    if (ch === '"') { inString = true; continue; }
+    if (ch === '{' || ch === '[') depth++;
+    else if (ch === '}' || ch === ']') {
+      depth--;
+      if (depth === 1) lastComplete = i + 1;
+      if (depth === 0) return null; // 배열이 정상 종료 — 잘림이 원인이 아님
+    }
+  }
+  if (lastComplete === -1) return null;
+  return raw.slice(start, lastComplete) + ']';
+}
+
+/** AI 응답에서 JSON 배열 추출 + 실패 시 에러. logTag로 구분.
+ *  max_tokens로 잘린 응답은 완결된 원소까지 복구해서 반환. */
 export function requireAiJsonArray<T = unknown>(message: Anthropic.Message, logTag: string): T[] {
   const cleaned = extractAiText(message);
   const match = cleaned.match(/\[[\s\S]*\]/);
-  if (!match) {
-    logger.warn(`${logTag}.parse_fail`, { raw: cleaned.slice(0, 500) });
+  if (!match && cleaned.indexOf('[') === -1) {
+    logger.warn(`${logTag}.parse_fail`, { raw: cleaned.slice(0, 500), stop_reason: message.stop_reason });
     throw new Error('AI 응답에서 JSON을 파싱할 수 없습니다.');
   }
-  try {
-    return JSON.parse(match[0]);
-  } catch (e) {
-    logger.warn(`${logTag}.json_invalid`, { raw: match[0].slice(0, 500), error: String(e) });
-    throw new Error('AI 응답 JSON 형식이 올바르지 않습니다.');
+  if (match) {
+    try {
+      return JSON.parse(match[0]);
+    } catch { /* 아래 복구 시도로 진행 */ }
   }
+  const salvaged = salvageTruncatedJsonArray(cleaned);
+  if (salvaged) {
+    try {
+      const arr: T[] = JSON.parse(salvaged);
+      if (arr.length > 0) {
+        logger.warn(`${logTag}.json_salvaged`, { recovered: arr.length, stop_reason: message.stop_reason });
+        return arr;
+      }
+    } catch { /* 복구 실패 — 아래 에러로 */ }
+  }
+  logger.warn(`${logTag}.json_invalid`, {
+    raw: (match ? match[0] : cleaned).slice(0, 500),
+    stop_reason: message.stop_reason,
+  });
+  throw new Error(
+    message.stop_reason === 'max_tokens'
+      ? 'AI 응답이 길이 제한에 잘렸습니다. PDF를 나눠서 다시 시도해주세요.'
+      : 'AI 응답 JSON 형식이 올바르지 않습니다.',
+  );
 }

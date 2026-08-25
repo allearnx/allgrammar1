@@ -90,9 +90,10 @@ export const POST = createApiHandler(
       : { type: 'document' as const, source: { type: 'base64' as const, media_type: 'application/pdf' as const, data: pdfBase64 as string } };
 
     // Step 1: Extract problems from PDF (Haiku — fast OCR, quality-critical paraphrasing uses Opus)
-    const extractMessage = await anthropic.messages.create({
+    // 공통 지문 복제로 출력이 길어질 수 있어 넉넉한 한도 + 스트리밍 (Haiku 출력 상한 64k)
+    const extractMessage = await anthropic.messages.stream({
       model: 'claude-haiku-4-5-20251001',
-      max_tokens: 8192,
+      max_tokens: 32000,
       messages: [
         {
           role: 'user',
@@ -128,27 +129,27 @@ export const POST = createApiHandler(
           ],
         },
       ],
-    });
+    }).finalMessage();
 
     const originalQuestions = requireAiJsonArray(extractMessage, 'ai.extract');
     logger.info('ai.extract_done', { count: originalQuestions.length, unitId });
 
     // Step 2: Paraphrase — 객관식 32문제 + 서술형 18문제 동시 생성
     const [mcqMessage, subjectiveMessage] = await Promise.all([
-      anthropic.messages.create({
+      anthropic.messages.stream({
         model: 'claude-opus-4-8',
-        max_tokens: 16384,
+        max_tokens: 24000,
         messages: [
           { role: 'user', content: buildParaphrasePrompt(originalQuestions, unitTitle, MCQ_DISTRIBUTION, 'mcq') },
         ],
-      }),
-      anthropic.messages.create({
+      }).finalMessage(),
+      anthropic.messages.stream({
         model: 'claude-opus-4-8',
-        max_tokens: 8192,
+        max_tokens: 16000,
         messages: [
           { role: 'user', content: buildParaphrasePrompt(originalQuestions, unitTitle, SUBJECTIVE_DISTRIBUTION, 'subjective') },
         ],
-      }),
+      }).finalMessage(),
     ]);
 
     const mcqQuestions = requireAiJsonArray<Record<string, unknown>>(mcqMessage, 'ai.paraphrase_mcq');
