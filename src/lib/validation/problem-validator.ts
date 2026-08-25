@@ -186,6 +186,15 @@ export function validateProblemStructure(
       if (typeof q.answer !== 'string') {
         issues.push(issue('warning', n, 'SUBJECTIVE_NUMERIC_ANSWER', `${n}번: 서술형인데 정답이 숫자입니다.`));
       }
+      // 전체 문장 다시 쓰기를 요구하는데 정답이 단어 수준이면 채점 불일치 위험
+      if (
+        typeof q.answer === 'string' &&
+        /(?:올바른|전체)\s*문장(?:으로|을)?[^\n]{0,20}쓰/.test(q.question || '') &&
+        q.answer.trim().length > 0 &&
+        q.answer.trim().split(/\s+/).length <= 2
+      ) {
+        issues.push(issue('warning', n, 'FULL_SENTENCE_ANSWER_TOO_SHORT', `${n}번: 전체 문장 답을 요구하는데 정답이 단어 수준입니다.`));
+      }
     }
 
     // Explanation warning

@@ -798,3 +798,26 @@ describe('fixArrowPairAnswer / sanitizeQuestions Rule 10 — 화살표 쌍 정�
     expect(questions[0].answer).toBe('bored');
   });
 });
+
+describe('FULL_SENTENCE_ANSWER_TOO_SHORT 경고', () => {
+  it('전체 문장 요구 + 단어 정답이면 경고', () => {
+    const r = validateProblemStructure([
+      { number: 1, question: '틀린 부분을 고쳐서 올바른 문장으로 전부 쓰세요.\nThe speech made the students boring.', answer: 'bored', explanation: 'e' },
+    ] as NaesinProblemQuestion[]);
+    expect(r.issues.some((i) => i.code === 'FULL_SENTENCE_ANSWER_TOO_SHORT')).toBe(true);
+  });
+
+  it('전체 문장 정답이면 경고 없음', () => {
+    const r = validateProblemStructure([
+      { number: 1, question: '틀린 부분을 고쳐서 올바른 문장으로 전부 쓰세요.\nThe speech made the students boring.', answer: 'The speech made the students bored.', explanation: 'e' },
+    ] as NaesinProblemQuestion[]);
+    expect(r.issues.some((i) => i.code === 'FULL_SENTENCE_ANSWER_TOO_SHORT')).toBe(false);
+  });
+
+  it('전체 문장 요구가 없으면 단어 정답도 경고 없음', () => {
+    const r = validateProblemStructure([
+      { number: 1, question: '빈칸에 알맞은 단어를 쓰시오.', answer: 'bored', explanation: 'e' },
+    ] as NaesinProblemQuestion[]);
+    expect(r.issues.some((i) => i.code === 'FULL_SENTENCE_ANSWER_TOO_SHORT')).toBe(false);
+  });
+});
