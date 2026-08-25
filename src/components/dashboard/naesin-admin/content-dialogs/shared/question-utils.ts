@@ -29,6 +29,29 @@ export function normalizeQuestions(raw: Record<string, unknown>[]): GeneratedQue
   }));
 }
 
+/** 연속 문항이 같은 공통 지문/보기 상자를 공유하는지 (세트 분할 시 안 쪼개기 위함) */
+function sharesQuestionGroup(a: GeneratedQuestion, b: GeneratedQuestion): boolean {
+  const la = a.question.split('\n', 1)[0].trim();
+  const lb = b.question.split('\n', 1)[0].trim();
+  if (la.startsWith('[보기]') && la === lb) return true;
+  if (a.question.length < 120 || b.question.length < 120) return false;
+  return a.question.slice(0, 100) === b.question.slice(0, 100);
+}
+
+/** 대량 문제를 학생용 세트(시트) 단위로 분할. 같은 지문/word bank 그룹은 경계에서 안 쪼갬. */
+export function splitQuestionsIntoSets(questions: GeneratedQuestion[], size = 30): GeneratedQuestion[][] {
+  if (questions.length <= size) return [questions];
+  const sets: GeneratedQuestion[][] = [];
+  let i = 0;
+  while (i < questions.length) {
+    let end = Math.min(i + size, questions.length);
+    while (end < questions.length && sharesQuestionGroup(questions[end - 1], questions[end])) end++;
+    sets.push(questions.slice(i, end));
+    i = end;
+  }
+  return sets;
+}
+
 /** DB question → GeneratedQuestion 변환 */
 export function toGenerated(q: NaesinProblemQuestion): GeneratedQuestion {
   return {

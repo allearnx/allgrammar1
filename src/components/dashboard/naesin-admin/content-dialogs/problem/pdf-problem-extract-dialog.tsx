@@ -18,7 +18,7 @@ import { fetchWithToast } from '@/lib/fetch-with-toast';
 import type { NaesinProblemQuestion } from '@/types/naesin';
 import type { FullValidationResult } from '@/lib/validation';
 import type { GeneratedQuestion } from '../shared/question-utils';
-import { hasOptions, normalizeQuestions } from '../shared/question-utils';
+import { hasOptions, normalizeQuestions, splitQuestionsIntoSets } from '../shared/question-utils';
 import { QuestionEditRow, QuestionViewRow, ValidationBadgeIcon, QuestionBadge } from '../shared/question-table-rows';
 import { useQuestionEditor } from '@/hooks/use-question-editor';
 
@@ -104,26 +104,42 @@ export function PdfProblemExtractDialog({ unitId, unitTitle, onAdd }: { unitId: 
   async function handleSubmit() {
     if (editor.questions.length === 0 || !title.trim()) return;
     setSaving(true);
+    const sets = splitQuestionsIntoSets(editor.questions);
+    let savedCount = 0;
     try {
-      const formatted: NaesinProblemQuestion[] = editor.questions.map((q, i) => ({
-        number: i + 1,
-        question: q.question,
-        ...(hasOptions(q) ? { options: q.options! } : {}),
-        answer: q.answer,
-        ...(q.explanation ? { explanation: q.explanation } : {}),
-      }));
+      for (let si = 0; si < sets.length; si++) {
+        const set = sets[si];
+        const formatted: NaesinProblemQuestion[] = set.map((q, i) => ({
+          number: i + 1,
+          question: q.question,
+          ...(hasOptions(q) ? { options: q.options! } : {}),
+          answer: q.answer,
+          ...(q.explanation ? { explanation: q.explanation } : {}),
+        }));
+        const answerKey = set.map((q) => q.answer);
+        const sheetTitle = sets.length > 1 ? `${title.trim()} (${si + 1}/${sets.length})` : title.trim();
 
-      const answerKey = editor.questions.map((q) => q.answer);
-
-      await fetchWithToast('/api/naesin/problems', {
-        body: { unitId, title: title.trim(), mode: 'interactive', questions: formatted, answerKey, category: 'problem' },
-        successMessage: `${formatted.length}문제 시트가 추가되었습니다`,
-        errorMessage: '저장에 실패했습니다.',
-      });
+        await fetchWithToast('/api/naesin/problems', {
+          body: { unitId, title: sheetTitle, mode: 'interactive', questions: formatted, answerKey, category: 'problem' },
+          errorMessage: `"${sheetTitle}" 저장 실패`,
+          logContext: 'admin.paraphrase_save',
+        });
+        savedCount++;
+      }
+      toast.success(
+        sets.length > 1
+          ? `${editor.questions.length}문제가 ${sets.length}개 세트 시트로 저장되었습니다`
+          : `${editor.questions.length}문제 시트가 추가되었습니다`,
+      );
       onAdd();
       setOpen(false);
       resetForm();
-    } catch { /* fetchWithToast handles toasts */ } finally {
+    } catch {
+      if (savedCount > 0) {
+        toast.warning(`${savedCount}/${sets.length}개 세트 저장 완료, 나머지 실패`);
+        onAdd();
+      }
+    } finally {
       setSaving(false);
     }
   }
@@ -148,7 +164,8 @@ export function PdfProblemExtractDialog({ unitId, unitTitle, onAdd }: { unitId: 
         {step === 'upload' && (
           <div className="space-y-4">
             <p className="text-sm text-muted-foreground">
-              문법 문제 PDF를 업로드하면 AI가 문제를 추출하고 패러프레이징하여 50문제를 자동 생성합니다.
+              문제 PDF를 업로드하면 AI가 원본 문제를 추출한 뒤 1:1로 패러프레이징합니다
+              (문항 수·유형·순서 유지, 문장·소재만 교체).
             </p>
             <div>
               <Label htmlFor="pdf-paraphrase-title">시트 제목</Label>
@@ -167,9 +184,9 @@ export function PdfProblemExtractDialog({ unitId, unitTitle, onAdd }: { unitId: 
               </Button>
             </div>
             <div className="rounded-lg bg-muted/50 p-3 text-sm space-y-1 text-muted-foreground">
-              <p className="font-medium text-foreground">생성 분배 (총 50문제)</p>
-              <p>객관식: 빈칸 채우기 10 / 영작 선택 5 / 용법 구별 10 / 어법 판단 7</p>
-              <p>서술형: 영작 8 / 어순 배열 5 / 오류 수정 5</p>
+              <p className="font-medium text-foreground">1:1 패러프레이즈</p>
+              <p>원본이 40문제면 40문제 — 유형(객관식/서술형)과 순서를 그대로 따라갑니다</p>
+              <p>30문제가 넘으면 저장 시 30문제 안팎의 세트 시트로 자동 분할됩니다</p>
             </div>
           </div>
         )}
@@ -178,7 +195,7 @@ export function PdfProblemExtractDialog({ unitId, unitTitle, onAdd }: { unitId: 
           <div className="flex flex-col items-center justify-center py-16 space-y-4">
             <Loader2 className="h-10 w-10 animate-spin text-primary" />
             <p className="text-sm text-muted-foreground">AI 문제 생성 중... (최대 5분 소요)</p>
-            <p className="text-xs text-muted-foreground">PDF 추출 → 패러프레이징 → 50문제 생성</p>
+            <p className="text-xs text-muted-foreground">PDF 추출 → 원본 1:1 패러프레이징</p>
           </div>
         )}
 
@@ -256,7 +273,14 @@ export function PdfProblemExtractDialog({ unitId, unitTitle, onAdd }: { unitId: 
             </div>
 
             <Button className="w-full" onClick={handleSubmit} disabled={saving || !title.trim()}>
-              {saving ? '저장 중...' : `${questions.length}문제 시트 저장`}
+              {saving
+                ? '저장 중...'
+                : (() => {
+                    const setCount = splitQuestionsIntoSets(questions).length;
+                    return setCount > 1
+                      ? `${questions.length}문제 저장 (${setCount}개 세트 시트로 분할)`
+                      : `${questions.length}문제 시트 저장`;
+                  })()}
             </Button>
           </div>
         )}
