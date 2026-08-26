@@ -1,11 +1,9 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { Card, CardContent } from '@/components/ui/card';
+import { useState, useEffect, useMemo } from 'react';
 import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Trash2, Pencil } from 'lucide-react';
+import { Trash2, Pencil, BookOpen } from 'lucide-react';
 import { toast } from 'sonner';
 import type { NaesinTextbook, NaesinUnit } from '@/types/database';
 import { AddTextbookDialog, EditTextbookDialog } from './textbook-dialogs';
@@ -17,6 +15,7 @@ import { TextbookExamSection } from './textbook-exam-section';
 import { logger } from '@/lib/logger';
 import { fetchWithToast } from '@/lib/fetch-with-toast';
 import { gradeLabel } from '@/lib/naesin/grade-label';
+import { buildPublisherColorMap } from '@/lib/naesin/publisher-palette';
 
 interface NaesinAdminClientProps {
   textbooks: NaesinTextbook[];
@@ -30,6 +29,7 @@ export function NaesinAdminClient({ textbooks: initialTextbooks, initialTab, can
     () => [...initialTextbooks].sort((a, b) => a.grade - b.grade)[0]?.grade ?? null
   );
   const [selectedTextbook, setSelectedTextbook] = useState<NaesinTextbook | null>(null);
+  const publisherColors = useMemo(() => buildPublisherColorMap(textbooks), [textbooks]);
   const [units, setUnits] = useState<NaesinUnit[]>([]);
   const [expandedUnit, setExpandedUnit] = useState<string | null>(null);
   const [deleteTextbookId, setDeleteTextbookId] = useState<string | null>(null);
@@ -72,7 +72,12 @@ export function NaesinAdminClient({ textbooks: initialTextbooks, initialTab, can
       <TabsContent value="content">
         <div className="space-y-6">
           <div className="flex items-center justify-between">
-            <h2 className="text-xl font-bold">내신 콘텐츠 관리</h2>
+            <div>
+              <h2 className="text-xl font-bold">내신 콘텐츠 관리</h2>
+              <p className="text-sm text-muted-foreground mt-0.5">
+                교과서를 선택하면 아래에서 단원과 콘텐츠를 관리합니다
+              </p>
+            </div>
             <AddTextbookDialog
               onAdd={(tb) => {
                 setTextbooks([...textbooks, tb]);
@@ -83,96 +88,110 @@ export function NaesinAdminClient({ textbooks: initialTextbooks, initialTab, can
 
           {/* Textbook list */}
           {textbooks.length === 0 ? (
-            <p className="text-center text-muted-foreground py-8">
-              등록된 교과서가 없습니다. 교과서를 추가해주세요.
-            </p>
+            <div className="flex flex-col items-center rounded-xl border-2 border-dashed border-gray-200 py-12">
+              <BookOpen className="mb-2 h-8 w-8 text-gray-300" />
+              <p className="text-sm text-gray-400">등록된 교과서가 없습니다. 교과서를 추가해주세요.</p>
+            </div>
           ) : (
             <>
-            {/* 학년 필터 */}
+            {/* 학년 필터 — 중등 파랑 / 고등 초록 */}
             <div className="flex flex-wrap gap-1.5">
               {[...new Set(textbooks.map((t) => t.grade))].sort((a, b) => a - b).map((g) => {
                 const count = textbooks.filter((t) => t.grade === g).length;
+                const active = gradeFilter === g;
+                const activeColor = g >= 4 ? 'bg-[#188038] border-[#188038]' : 'bg-[#1A73E8] border-[#1A73E8]';
                 return (
-                  <Button
+                  <button
                     key={g}
-                    size="sm"
-                    variant={gradeFilter === g ? 'default' : 'outline'}
-                    className="rounded-full h-8"
+                    type="button"
+                    className={`h-8 rounded-full border px-4 text-sm font-semibold transition-colors ${
+                      active
+                        ? `${activeColor} text-white shadow-sm`
+                        : 'border-gray-200 bg-white text-gray-600 hover:bg-gray-50'
+                    }`}
                     onClick={() => {
                       setGradeFilter(g);
                       if (selectedTextbook && selectedTextbook.grade !== g) setSelectedTextbook(null);
                     }}
                   >
                     {gradeLabel(g)}
-                    <span className="ml-1 text-xs opacity-70">{count}</span>
-                  </Button>
+                    <span className={`ml-1.5 text-xs ${active ? 'text-white/70' : 'text-gray-400'}`}>{count}</span>
+                  </button>
                 );
               })}
             </div>
-            <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="grid gap-2.5 sm:grid-cols-2 lg:grid-cols-3">
               {textbooks
                 .filter((tb) => gradeFilter === null || tb.grade === gradeFilter)
                 .sort((a, b) => a.display_name.localeCompare(b.display_name, 'ko'))
-                .map((tb) => (
-                <Card
-                  key={tb.id}
-                  className={`cursor-pointer transition-shadow hover:shadow-md ${
-                    selectedTextbook?.id === tb.id ? 'ring-2 ring-primary' : ''
-                  }`}
-                  onClick={() => setSelectedTextbook(tb)}
-                >
-                  <CardContent className="py-4">
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <p className="font-medium">{tb.display_name}</p>
-                        <p className="text-sm text-muted-foreground">
-                          {gradeLabel(tb.grade)} · {tb.publisher}
-                        </p>
-                      </div>
-                      <div className="flex items-center gap-1">
-                        {!tb.is_active && (
-                          <Badge variant="secondary">비활성</Badge>
-                        )}
-                        <Button
-                          variant="ghost"
-                          size="icon"
-                          className="h-8 w-8"
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            setEditingTextbook(tb);
-                          }}
-                          aria-label="교과서 수정"
-                        >
-                          <Pencil className="h-4 w-4 text-muted-foreground" />
-                        </Button>
-                        <Button
-                          variant="ghost"
-                          size="icon"
-                          className="h-8 w-8"
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            setDeleteTextbookId(tb.id);
-                          }}
-                          aria-label="교과서 삭제"
-                        >
-                          <Trash2 className="h-4 w-4 text-destructive" />
-                        </Button>
-                      </div>
+                .map((tb) => {
+                const palette = publisherColors.get(tb.publisher)!;
+                const selected = selectedTextbook?.id === tb.id;
+                return (
+                  <div
+                    key={tb.id}
+                    role="button"
+                    tabIndex={0}
+                    onClick={() => setSelectedTextbook(tb)}
+                    onKeyDown={(e) => { if (e.key === 'Enter') setSelectedTextbook(tb); }}
+                    className={`group relative flex cursor-pointer items-stretch overflow-hidden rounded-xl border bg-white transition-all hover:-translate-y-0.5 hover:shadow-md ${
+                      selected ? 'border-transparent ring-2 ring-[#1A73E8]' : 'border-gray-100'
+                    } ${tb.is_active ? '' : 'opacity-60'}`}
+                  >
+                    <div className="w-2 shrink-0" style={{ background: palette.spine }} />
+                    <div className="flex w-11 shrink-0 items-center justify-center" style={{ background: palette.bg }}>
+                      <BookOpen className="h-5 w-5" style={{ color: palette.text }} />
                     </div>
-                  </CardContent>
-                </Card>
-              ))}
+                    <div className="min-w-0 flex-1 px-3.5 py-3">
+                      <p className="truncate text-sm font-semibold text-gray-800">{tb.display_name}</p>
+                      <p className="mt-0.5 truncate text-[11px] text-gray-400">
+                        {gradeLabel(tb.grade)} · {tb.publisher}{tb.is_active ? '' : ' · 비활성'}
+                      </p>
+                    </div>
+                    <div className="flex items-center gap-0.5 pr-1.5 opacity-0 transition-opacity group-hover:opacity-100 focus-within:opacity-100">
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        className="h-7 w-7"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setEditingTextbook(tb);
+                        }}
+                        aria-label="교과서 수정"
+                      >
+                        <Pencil className="h-3.5 w-3.5 text-muted-foreground" />
+                      </Button>
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        className="h-7 w-7"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setDeleteTextbookId(tb.id);
+                        }}
+                        aria-label="교과서 삭제"
+                      >
+                        <Trash2 className="h-3.5 w-3.5 text-destructive" />
+                      </Button>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
             </>
           )}
 
           {/* Units section */}
           {selectedTextbook && (
-            <div className="space-y-4 pt-4 border-t">
+            <div className="space-y-3 border-t pt-5">
               <div className="flex items-center justify-between">
-                <h3 className="text-lg font-semibold">
-                  {selectedTextbook.display_name} - 단원 목록
-                </h3>
+                <div className="flex items-center gap-2">
+                  <h3 className="text-base font-bold">{selectedTextbook.display_name}</h3>
+                  <span className="rounded-full bg-gray-100 px-2 py-0.5 text-[11px] font-medium text-gray-500">
+                    {gradeLabel(selectedTextbook.grade)}
+                  </span>
+                  <span className="text-sm text-gray-400">단원 목록</span>
+                </div>
                 <AddUnitDialog
                   textbookId={selectedTextbook.id}
                   onAdd={(unit) => setUnits([...units, unit])}
@@ -180,11 +199,11 @@ export function NaesinAdminClient({ textbooks: initialTextbooks, initialTab, can
               </div>
 
               {units.length === 0 ? (
-                <p className="text-center text-muted-foreground py-4">
-                  단원이 없습니다. 단원을 추가해주세요.
-                </p>
+                <div className="rounded-xl border-2 border-dashed border-gray-200 py-8 text-center">
+                  <p className="text-sm text-gray-400">단원이 없습니다. 단원을 추가해주세요.</p>
+                </div>
               ) : (
-                <div className="space-y-2">
+                <div className="divide-y divide-gray-100 rounded-xl border border-gray-100 bg-white">
                   {units.map((unit) => (
                     <UnitCard
                       key={unit.id}

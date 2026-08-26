@@ -1,0 +1,26 @@
+// 교과서 카드의 출판사별 컬러(책등·아이콘 배경) — 학생 선택 화면과 관리자 목록 공용
+export const PUBLISHER_PALETTES = [
+  { bg: 'linear-gradient(135deg, #DBEAFE 0%, #BFDBFE 100%)', spine: '#3B82F6', text: '#1E40AF' },
+  { bg: 'linear-gradient(135deg, #FCE7F3 0%, #FBCFE8 100%)', spine: '#EC4899', text: '#BE185D' },
+  { bg: 'linear-gradient(135deg, #D1FAE5 0%, #A7F3D0 100%)', spine: '#10B981', text: '#065F46' },
+  { bg: 'linear-gradient(135deg, #FEF3C7 0%, #FDE68A 100%)', spine: '#F59E0B', text: '#92400E' },
+  { bg: 'linear-gradient(135deg, #E0E7FF 0%, #C7D2FE 100%)', spine: '#4285F4', text: '#3730A3' },
+  { bg: 'linear-gradient(135deg, #FFE4E6 0%, #FECDD3 100%)', spine: '#F43F5E', text: '#9F1239' },
+  { bg: 'linear-gradient(135deg, #CCFBF1 0%, #99F6E4 100%)', spine: '#14B8A6', text: '#115E59' },
+  { bg: 'linear-gradient(135deg, #FEE2E2 0%, #FECACA 100%)', spine: '#EF4444', text: '#991B1B' },
+];
+
+export type PublisherPalette = typeof PUBLISHER_PALETTES[0];
+
+// 출판사 등장 순서대로 팔레트를 순환 배정 (같은 목록이면 학생/관리자 화면 색이 일치)
+export function buildPublisherColorMap(items: { publisher: string }[]) {
+  const map = new Map<string, PublisherPalette>();
+  let colorIdx = 0;
+  items.forEach((it) => {
+    if (!map.has(it.publisher)) {
+      map.set(it.publisher, PUBLISHER_PALETTES[colorIdx % PUBLISHER_PALETTES.length]);
+      colorIdx++;
+    }
+  });
+  return map;
+}

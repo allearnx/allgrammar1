@@ -1,7 +1,6 @@
 'use client';
 
 import { useState } from 'react';
-import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
@@ -12,7 +11,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
-import { Plus, Trash2, ChevronDown, ChevronRight } from 'lucide-react';
+import { Plus, Trash2, ChevronDown } from 'lucide-react';
 import type { NaesinUnit } from '@/types/database';
 import { UnitContentManager } from './unit-content-manager';
 import { ConfirmDialog } from '@/components/shared/confirm-dialog';
@@ -109,35 +108,33 @@ export function UnitCard({
   const [deleteOpen, setDeleteOpen] = useState(false);
 
   return (
-    <Card>
-      <CardContent className="py-3">
-        <div className="flex items-center justify-between">
-          <button
-            type="button"
-            onClick={onToggle}
-            className="flex items-center gap-2 text-left flex-1"
-          >
-            {expanded ? (
-              <ChevronDown className="h-4 w-4 shrink-0" />
-            ) : (
-              <ChevronRight className="h-4 w-4 shrink-0" />
-            )}
-            <span className="font-medium">
-              {unit.title}
-            </span>
-          </button>
-          <Button
-            variant="ghost"
-            size="icon"
-            className="h-8 w-8 shrink-0"
-            onClick={() => setDeleteOpen(true)}
-          >
-            <Trash2 className="h-4 w-4 text-destructive" />
-          </Button>
-        </div>
+    <div className="group">
+      <div className={`flex items-center justify-between px-4 py-2.5 ${expanded ? 'bg-gray-50/60' : ''}`}>
+        <button
+          type="button"
+          onClick={onToggle}
+          className="flex flex-1 items-center gap-3 text-left"
+        >
+          <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-gray-100 text-xs font-bold text-gray-600">
+            {unit.unit_number >= 9 ? 'S' : unit.unit_number}
+          </span>
+          <span className="text-sm font-medium text-gray-800">{unit.title}</span>
+          <ChevronDown
+            className={`h-4 w-4 shrink-0 text-gray-300 transition-transform ${expanded ? 'rotate-180' : ''}`}
+          />
+        </button>
+        <Button
+          variant="ghost"
+          size="icon"
+          className="h-7 w-7 shrink-0 opacity-0 transition-opacity group-hover:opacity-100"
+          onClick={() => setDeleteOpen(true)}
+          aria-label="단원 삭제"
+        >
+          <Trash2 className="h-3.5 w-3.5 text-destructive" />
+        </Button>
+      </div>
 
-        {expanded && <UnitContentManager unitId={unit.id} />}
-      </CardContent>
+      {expanded && <div className="px-4 pb-4"><UnitContentManager unitId={unit.id} /></div>}
 
       <ConfirmDialog
         open={deleteOpen}
@@ -158,6 +155,6 @@ export function UnitCard({
           }
         }}
       />
-    </Card>
+    </div>
   );
 }
