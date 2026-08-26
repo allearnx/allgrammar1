@@ -4,11 +4,15 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { BookOpen, Sparkles, AlertTriangle, ChevronRight } from 'lucide-react';
 import type { NaesinTextbook } from '@/types/database';
 import { useNaesinHomeData } from './use-naesin-home-data';
+import { gradeLabel } from '@/lib/naesin/grade-label';
 
 const GRADE_COLORS = [
   { accent: '#06B6D4', light: '#ECFEFF', mid: '#CFFAFE', text: '#0891B2' },
   { accent: '#4285F4', light: '#E8F0FE', mid: '#D2E3FC', text: '#1A73E8' },
   { accent: '#F59E0B', light: '#FFFBEB', mid: '#FEF3C7', text: '#D97706' },
+  { accent: '#34A853', light: '#E6F4EA', mid: '#CEEAD6', text: '#188038' },
+  { accent: '#EA4335', light: '#FCE8E6', mid: '#FAD2CF', text: '#D93025' },
+  { accent: '#5F6368', light: '#F1F3F4', mid: '#E8EAED', text: '#3C4043' },
 ];
 
 interface TextbookSelectorProps {
@@ -20,6 +24,8 @@ interface TextbookSelectorProps {
 export function TextbookSelector({ textbooks, onSelect, saving }: TextbookSelectorProps) {
   const [confirmId, setConfirmId] = useState<string | null>(null);
   const { gradeTextbooks, publisherColorMap } = useNaesinHomeData(textbooks);
+  // 중1~중3은 항상 노출, 고1~고3(4~6)은 등록된 교과서가 있을 때만 탭 노출
+  const visibleGrades = [1, 2, 3, ...[4, 5, 6].filter((g) => gradeTextbooks[g]?.length)];
 
   return (
     <div className="space-y-5">
@@ -59,8 +65,8 @@ export function TextbookSelector({ textbooks, onSelect, saving }: TextbookSelect
           <Tabs defaultValue="1">
             {/* 학년 탭 */}
             <div className="flex gap-2">
-              {[1, 2, 3].map((grade, i) => {
-                const gc = GRADE_COLORS[i];
+              {visibleGrades.map((grade) => {
+                const gc = GRADE_COLORS[(grade - 1) % GRADE_COLORS.length];
                 return (
                   <TabsList key={grade} className="bg-transparent p-0">
                     <TabsTrigger
@@ -72,14 +78,14 @@ export function TextbookSelector({ textbooks, onSelect, saving }: TextbookSelect
                       data-accent={gc.accent}
                       data-light={gc.light}
                     >
-                      중{grade}
+                      {gradeLabel(grade)}
                     </TabsTrigger>
                   </TabsList>
                 );
               })}
             </div>
 
-            {[1, 2, 3].map((grade) => (
+            {visibleGrades.map((grade) => (
               <TabsContent key={grade} value={String(grade)} className="mt-4">
                 {gradeTextbooks[grade]?.length ? (
                   <div className="grid gap-2.5 sm:grid-cols-2">
@@ -118,7 +124,7 @@ export function TextbookSelector({ textbooks, onSelect, saving }: TextbookSelect
                   <div className="flex flex-col items-center py-14 rounded-2xl border-2 border-dashed border-gray-200">
                     <BookOpen className="h-8 w-8 text-gray-300 mb-2" />
                     <p className="text-center text-gray-400 text-sm">
-                      중{grade} 교과서가 아직 등록되지 않았습니다
+                      {gradeLabel(grade)} 교과서가 아직 등록되지 않았습니다
                     </p>
                   </div>
                 )}

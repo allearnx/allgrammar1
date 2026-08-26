@@ -15,6 +15,7 @@ import {
 import { Plus } from 'lucide-react';
 import type { NaesinTextbook } from '@/types/database';
 import { fetchWithToast } from '@/lib/fetch-with-toast';
+import { NAESIN_GRADES, gradeLabel } from '@/lib/naesin/grade-label';
 
 export function EditTextbookDialog({
   textbook,
@@ -68,9 +69,9 @@ export function EditTextbookDialog({
             <Select value={grade} onValueChange={setGrade}>
               <SelectTrigger><SelectValue /></SelectTrigger>
               <SelectContent>
-                <SelectItem value="1">중1</SelectItem>
-                <SelectItem value="2">중2</SelectItem>
-                <SelectItem value="3">중3</SelectItem>
+                {NAESIN_GRADES.map((g) => (
+                  <SelectItem key={g} value={String(g)}>{gradeLabel(g)}</SelectItem>
+                ))}
               </SelectContent>
             </Select>
           </div>
@@ -140,9 +141,9 @@ export function AddTextbookDialog({ onAdd }: { onAdd: (tb: NaesinTextbook) => vo
             <Select value={grade} onValueChange={setGrade}>
               <SelectTrigger><SelectValue /></SelectTrigger>
               <SelectContent>
-                <SelectItem value="1">중1</SelectItem>
-                <SelectItem value="2">중2</SelectItem>
-                <SelectItem value="3">중3</SelectItem>
+                {NAESIN_GRADES.map((g) => (
+                  <SelectItem key={g} value={String(g)}>{gradeLabel(g)}</SelectItem>
+                ))}
               </SelectContent>
             </Select>
           </div>

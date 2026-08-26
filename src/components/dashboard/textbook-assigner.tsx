@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { BookOpen, MessageCircle } from 'lucide-react';
 import { fetchWithToast } from '@/lib/fetch-with-toast';
+import { gradeLabel } from '@/lib/naesin/grade-label';
 
 interface Textbook {
   id: string;
@@ -20,7 +21,6 @@ interface Props {
   currentTextbookName?: string | null;
 }
 
-const GRADE_LABELS: Record<number, string> = { 1: '중1', 2: '중2', 3: '중3' };
 
 export function TextbookAssigner({ studentId, textbooks, currentTextbookName }: Props) {
   const router = useRouter();
@@ -95,7 +95,7 @@ export function TextbookAssigner({ studentId, textbooks, currentTextbookName }: 
               .map(([grade, books]) => (
                 <div key={grade}>
                   <div className="px-2 py-1.5 text-xs font-semibold text-muted-foreground">
-                    {GRADE_LABELS[Number(grade)] || `${grade}학년`}
+                    {gradeLabel(Number(grade))}
                   </div>
                   {books.map((tb) => (
                     <SelectItem key={tb.id} value={tb.id}>

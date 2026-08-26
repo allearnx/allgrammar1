@@ -24,6 +24,7 @@ import { LearningOrderModal } from '@/components/naesin/learning-order-modal';
 import type { NaesinTextbook } from '@/types/database';
 import type { UnitSummary, ExamGroup } from '@/lib/naesin/build-unit-summary';
 import { TextbookSelector } from './textbook-selector';
+import { gradeLabel } from '@/lib/naesin/grade-label';
 
 interface TextbookExam {
   id: string;
@@ -93,7 +94,7 @@ export function NaesinHome({
         <div>
           <h2 className="text-xl font-bold">{selectedTextbook.display_name}</h2>
           <p className="text-muted-foreground text-sm mt-1">
-            {selectedTextbook.publisher} · 중{selectedTextbook.grade}
+            {selectedTextbook.publisher} · {gradeLabel(selectedTextbook.grade)}
           </p>
         </div>
         <div className="flex items-center gap-1.5 text-xs text-gray-400">

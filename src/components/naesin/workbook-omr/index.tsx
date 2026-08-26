@@ -10,6 +10,7 @@ import { logger } from '@/lib/logger';
 import { fetchWithToast } from '@/lib/fetch-with-toast';
 import { WorkbookOmrView } from './workbook-omr-view';
 import type { NaesinWorkbook, NaesinWorkbookOmrSheet, NaesinWorkbookOmrAttempt } from '@/types/naesin';
+import { gradeLabel } from '@/lib/naesin/grade-label';
 
 type Step = 'workbook' | 'sheet' | 'solve';
 
@@ -96,6 +97,8 @@ export function WorkbookOmrClient({ workbooks }: WorkbookOmrClientProps) {
       if (!gradeWorkbooks[wb.grade]) gradeWorkbooks[wb.grade] = [];
       gradeWorkbooks[wb.grade].push(wb);
     });
+    // 중1~중3은 항상 노출, 고1~고3(4~6)은 등록된 교재가 있을 때만 탭 노출
+    const visibleGrades = [1, 2, 3, ...[4, 5, 6].filter((g) => gradeWorkbooks[g]?.length)];
 
     return (
       <div className="space-y-6">
@@ -112,13 +115,13 @@ export function WorkbookOmrClient({ workbooks }: WorkbookOmrClientProps) {
           </p>
         ) : (
           <Tabs defaultValue="1">
-            <TabsList className="grid w-full grid-cols-3">
-              <TabsTrigger value="1">중1</TabsTrigger>
-              <TabsTrigger value="2">중2</TabsTrigger>
-              <TabsTrigger value="3">중3</TabsTrigger>
+            <TabsList className="grid w-full" style={{ gridTemplateColumns: `repeat(${visibleGrades.length}, 1fr)` }}>
+              {visibleGrades.map((grade) => (
+                <TabsTrigger key={grade} value={String(grade)}>{gradeLabel(grade)}</TabsTrigger>
+              ))}
             </TabsList>
 
-            {[1, 2, 3].map((grade) => (
+            {visibleGrades.map((grade) => (
               <TabsContent key={grade} value={String(grade)} className="mt-4">
                 {gradeWorkbooks[grade]?.length ? (
                   <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
@@ -138,7 +141,7 @@ export function WorkbookOmrClient({ workbooks }: WorkbookOmrClientProps) {
                   </div>
                 ) : (
                   <p className="text-center text-muted-foreground py-8">
-                    중{grade} 교재가 아직 등록되지 않았습니다.
+                    {gradeLabel(grade)} 교재가 아직 등록되지 않았습니다.
                   </p>
                 )}
               </TabsContent>

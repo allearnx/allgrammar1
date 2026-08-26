@@ -15,6 +15,7 @@ import { Loader2, Copy, ArrowLeft } from 'lucide-react';
 import { fetchWithToast } from '@/lib/fetch-with-toast';
 import { logger } from '@/lib/logger';
 import type { NaesinProblemSheet } from '@/types/naesin';
+import { gradeLabel } from '@/lib/naesin/grade-label';
 
 interface Textbook {
   id: string;
@@ -186,7 +187,7 @@ export function CopyProblemDialog({ sheet, open, onOpenChange }: Props) {
                   >
                     <CardContent className="py-3 px-4">
                       <p className="font-medium text-sm">{tb.display_name}</p>
-                      <p className="text-xs text-muted-foreground">중{tb.grade} · {tb.publisher}</p>
+                      <p className="text-xs text-muted-foreground">{gradeLabel(tb.grade)} · {tb.publisher}</p>
                     </CardContent>
                   </Card>
                 ))}

@@ -16,6 +16,7 @@ import { TemplateLibraryClient } from './template-library-client';
 import { TextbookExamSection } from './textbook-exam-section';
 import { logger } from '@/lib/logger';
 import { fetchWithToast } from '@/lib/fetch-with-toast';
+import { gradeLabel } from '@/lib/naesin/grade-label';
 
 interface NaesinAdminClientProps {
   textbooks: NaesinTextbook[];
@@ -92,7 +93,7 @@ export function NaesinAdminClient({ textbooks: initialTextbooks, initialTab, can
                       <div>
                         <p className="font-medium">{tb.display_name}</p>
                         <p className="text-sm text-muted-foreground">
-                          중{tb.grade} · {tb.publisher}
+                          {gradeLabel(tb.grade)} · {tb.publisher}
                         </p>
                       </div>
                       <div className="flex items-center gap-1">

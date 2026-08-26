@@ -347,7 +347,7 @@ export const grammarChatReplySchema = z.object({
 export const workbookCreateSchema = z.object({
   title: SHORT,
   publisher: SHORT,
-  grade: z.number().min(1).max(3),
+  grade: z.number().min(1).max(6),
   cover_image_url: URL_STR.nullish(),
   sort_order: z.number().nullish(),
 });

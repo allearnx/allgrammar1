@@ -11,6 +11,7 @@ import { AddSheetDialog } from './add-sheet-dialog';
 import type { NaesinWorkbook, NaesinWorkbookOmrSheet } from '@/types/naesin';
 import { logger } from '@/lib/logger';
 import { fetchWithToast } from '@/lib/fetch-with-toast';
+import { gradeLabel } from '@/lib/naesin/grade-label';
 
 export function WorkbookManager() {
   const [workbooks, setWorkbooks] = useState<NaesinWorkbook[]>([]);
@@ -123,7 +124,7 @@ export function WorkbookManager() {
                     <BookOpen className="h-5 w-5 text-primary" />
                     <div>
                       <p className="font-medium">{wb.title}</p>
-                      <p className="text-sm text-muted-foreground">중{wb.grade} · {wb.publisher}</p>
+                      <p className="text-sm text-muted-foreground">{gradeLabel(wb.grade)} · {wb.publisher}</p>
                     </div>
                   </div>
                   <Button
