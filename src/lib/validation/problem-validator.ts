@@ -32,6 +32,37 @@ export function fixArrowPairAnswer(question: string, answer: string): string {
   return answer;
 }
 
+const BRACKET_ALT = /(\S+)\[([^\]]{1,40})\]/g;
+
+/** "if[whether] ...", "Tom[he]" 같은 대괄호 병기 정답을 기본형 + 변형 목록으로 분해.
+ *  병기 그대로 저장되면 학생 입력과 문자열 불일치로 전원 오답 처리됨 (5과·동아윤 실사례).
+ *  대안이 대명사면 앞의 관사·호칭 제거 ("the bridge[it]" → "it"). 병기 없으면 alts 빈 배열. */
+export function expandBracketAlternatives(answer: string): { primary: string; alts: string[] } {
+  BRACKET_ALT.lastIndex = 0;
+  if (!BRACKET_ALT.test(answer)) return { primary: answer, alts: [] };
+  const cleanupPronoun = (s: string) =>
+    s.replace(/\b(?:the|a|an|Ms\.|Mr\.|Mrs\.)\s+(it|she|he|they)\b/gi, '$1');
+  const parts: ({ text: string } | { choice: [string, string] })[] = [];
+  let last = 0;
+  let m: RegExpExecArray | null;
+  BRACKET_ALT.lastIndex = 0;
+  while ((m = BRACKET_ALT.exec(answer)) !== null) {
+    parts.push({ text: answer.slice(last, m.index) });
+    parts.push({ choice: [m[1], m[2]] });
+    last = BRACKET_ALT.lastIndex;
+  }
+  parts.push({ text: answer.slice(last) });
+  let combos = [''];
+  for (const p of parts) {
+    const opts = 'choice' in p ? p.choice : [p.text];
+    const next: string[] = [];
+    for (const c of combos) for (const o of opts) if (next.length < 16) next.push(c + o);
+    combos = next;
+  }
+  const all = [...new Set(combos.map(cleanupPronoun))];
+  return { primary: all[0], alts: all.slice(1, 8) };
+}
+
 export function stripOptionSelfNumbering(options: string[]): string[] {
   const stripped = options.map((opt, i) => {
     if (typeof opt !== 'string') return null;
@@ -558,6 +589,29 @@ export function sanitizeQuestions(
         typeof out.question === 'string' ? out.question : '',
         out.answer,
       );
+    }
+
+    // Rule 11: "if[whether]"류 대괄호 병기 정답 → 기본형 + acceptedAnswers 분해 (서술형만)
+    if (!isMcq && typeof out.answer === 'string') {
+      const { primary, alts } = expandBracketAlternatives(out.answer);
+      if (alts.length > 0) {
+        out.answer = primary;
+        out.acceptedAnswers = [
+          ...new Set([...(out.acceptedAnswers ?? []).filter((a) => !/\[[^\]]+\]/.test(a)), ...alts]),
+        ];
+      }
+      if (Array.isArray(out.subParts)) {
+        out.subParts = out.subParts.map((sp) => {
+          if (typeof sp.answer !== 'string') return sp;
+          const r = expandBracketAlternatives(sp.answer);
+          if (r.alts.length === 0) return sp;
+          return {
+            ...sp,
+            answer: r.primary,
+            acceptedAnswers: [...new Set([...(sp.acceptedAnswers ?? []).filter((a) => !/\[[^\]]+\]/.test(a)), ...r.alts])],
+          };
+        });
+      }
     }
 
     // Auto-generate acceptedAnswers for common format variants (서술형만)

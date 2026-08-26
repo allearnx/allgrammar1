@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { validateProblemStructure, sanitizeQuestions, validateBeforeSave, validateAnswerKey, backfillSharedPassages, stripOptionSelfNumbering, fixArrowPairAnswer } from '@/lib/validation/problem-validator';
+import { validateProblemStructure, sanitizeQuestions, validateBeforeSave, validateAnswerKey, backfillSharedPassages, stripOptionSelfNumbering, fixArrowPairAnswer, expandBracketAlternatives } from '@/lib/validation/problem-validator';
 import type { NaesinProblemQuestion } from '@/types/naesin';
 
 function makeMcq(n: number, answer: number = (n % 5) + 1): NaesinProblemQuestion {
@@ -867,5 +867,39 @@ describe('sanitizeQuestions — 원본 문항 번호 잔재 제거', () => {
       { number: 1, question: q, answer: 'x' },
     ] as NaesinProblemQuestion[]);
     expect(questions[0].question).toBe(q);
+  });
+});
+
+describe('expandBracketAlternatives / sanitizeQuestions Rule 11 — 대괄호 병기 정답', () => {
+  it('if[whether] 병기를 기본형+변형으로 분해', () => {
+    const r = expandBracketAlternatives('if[whether] he likes swimming');
+    expect(r.primary).toBe('if he likes swimming');
+    expect(r.alts).toEqual(['whether he likes swimming']);
+  });
+
+  it('대명사 대안은 관사·호칭 제거', () => {
+    expect(expandBracketAlternatives('how old the bridge[it] is').alts).toEqual(['how old it is']);
+    expect(expandBracketAlternatives('when Ms. Park[she] will arrive').alts).toEqual(['when she will arrive']);
+  });
+
+  it('병기 2개면 혼합 조합 포함', () => {
+    const r = expandBracketAlternatives('if[whether], her[Mina\'s]');
+    expect(r.primary).toBe('if, her');
+    expect(r.alts).toContain('whether, Mina\'s');
+    expect(r.alts).toContain('if, Mina\'s');
+  });
+
+  it('병기 없으면 그대로', () => {
+    expect(expandBracketAlternatives('the tallest')).toEqual({ primary: 'the tallest', alts: [] });
+  });
+
+  it('sanitizeQuestions 저장 시 answer·subParts 모두 분해', () => {
+    const { questions } = sanitizeQuestions([
+      { number: 1, question: 'Q', answer: 'the farthest[furthest]', subParts: [{ label: '(1)', answer: 'in[of] the class' }] },
+    ] as NaesinProblemQuestion[]);
+    expect(questions[0].answer).toBe('the farthest');
+    expect(questions[0].acceptedAnswers).toContain('the furthest');
+    expect(questions[0].subParts![0].answer).toBe('in the class');
+    expect(questions[0].subParts![0].acceptedAnswers).toContain('of the class');
   });
 });
