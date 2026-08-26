@@ -1,0 +1,1635 @@
+[
+ {
+  "id": "57a8a955-7349-4d63-8108-eeaa06e432c9",
+  "title": "1과 문법 (1/6)",
+  "questions": [
+   {
+    "answer": "to practice",
+    "number": 1,
+    "question": "[보기] not to leave / organize / to complete / to practice\n\n다음 괄호 안의 단어를 빈칸에 알맞은 형태로 쓰시오.\n\n(practice)\nThe coach encouraged players ______ every morning before school.",
+    "explanation": "encourage는 목적격보어로 to부정사를 취하므로 'to practice'가 알맞다."
+   },
+   {
+    "answer": "to complete",
+    "number": 2,
+    "question": "[보기] not to leave / organize / to complete / to practice\n\n다음 괄호 안의 단어를 빈칸에 알맞은 형태로 쓰시오.\n\n(complete)\nThe supervisor told the interns ______ the project by Friday.",
+    "explanation": "tell은 목적격보어로 to부정사를 취하므로 'to complete'가 알맞다."
+   },
+   {
+    "answer": "not to leave",
+    "number": 3,
+    "question": "[보기] not to leave / organize / to complete / to practice\n\n다음 괄호 안의 단어를 빈칸에 알맞은 형태로 쓰시오.\n\n(leave, not)\nThe heavy rain caused them ______ the campsite as planned.",
+    "explanation": "cause는 to부정사를 취하며, 부정은 to 앞에 not을 붙여 'not to leave'로 쓴다."
+   },
+   {
+    "answer": "organize",
+    "number": 4,
+    "question": "[보기] not to leave / organize / to complete / to practice\n\n다음 괄호 안의 단어를 빈칸에 알맞은 형태로 쓰시오.\n\n(organize)\nThe teacher had the students ______ the classroom for the open house.",
+    "explanation": "사역동사 have는 목적격보어로 동사원형을 취하므로 'organize'가 알맞다."
+   },
+   {
+    "answer": "him to train on the weekend",
+    "number": 5,
+    "question": "다음 각 인물이 하는 말을 사용하여 인물에 대한 내용의 문장을 작성해 보시오.\n\nhis coach ➜ he train on the weekend\n\nHis coach allowed ______.",
+    "explanation": "allow는 「allow+목적어+to부정사」 구조이므로 'him to train on the weekend'가 된다."
+   },
+   {
+    "answer": "her to apply for the scholarship",
+    "number": 6,
+    "question": "다음 각 인물이 하는 말을 사용하여 인물에 대한 내용의 문장을 작성해 보시오.\n\nI ➜ she apply for the scholarship\n\nI persuaded ______.",
+    "explanation": "persuade는 「persuade+목적어+to부정사」 구조이므로 'her to apply for the scholarship'가 된다."
+   },
+   {
+    "answer": "us reflect on our own lives",
+    "number": 7,
+    "question": "다음 각 인물이 하는 말을 사용하여 인물에 대한 내용의 문장을 작성해 보시오.\n\nthe movie ➜ we reflect on our own lives\n\nThe movie made ______.",
+    "explanation": "사역동사 make는 「make+목적어+동사원형」 구조이므로 'us reflect on our own lives'가 된다."
+   },
+   {
+    "answer": "to design",
+    "number": 8,
+    "question": "[보기] to arrive / to catch / to design / to enter / to join / to miss / to prepare / to review\n\n다음 문장의 빈칸에 알맞은 말을 <보기>에서 골라 쓰시오.\n\nThis program allows users ______ websites easily.",
+    "explanation": "'웹사이트를 디자인하다'가 문맥상 자연스러우므로 'to design'이 알맞다."
+   },
+   {
+    "answer": "to arrive",
+    "number": 9,
+    "question": "[보기] to arrive / to catch / to design / to enter / to join / to miss / to prepare / to review\n\n다음 문장의 빈칸에 알맞은 말을 <보기>에서 골라 쓰시오.\n\nWe expect the visitors ______ before the ceremony.",
+    "explanation": "'식 전에 도착하다'가 문맥상 자연스러우므로 'to arrive'가 알맞다."
+   },
+   {
+    "answer": "to miss",
+    "number": 10,
+    "question": "[보기] to arrive / to catch / to design / to enter / to join / to miss / to prepare / to review\n\n다음 문장의 빈칸에 알맞은 말을 <보기>에서 골라 쓰시오.\n\nI told him to hurry not ______ the last bus.",
+    "explanation": "'막차를 놓치지 않도록'이 문맥상 자연스러우므로 'to miss'가 알맞다."
+   },
+   {
+    "answer": "to enter",
+    "number": 11,
+    "question": "[보기] to arrive / to catch / to design / to enter / to join / to miss / to prepare / to review\n\n다음 문장의 빈칸에 알맞은 말을 <보기>에서 골라 쓰시오.\n\nThe guard ordered them not ______ the construction site.",
+    "explanation": "'공사 현장에 들어가다'가 문맥상 자연스러우므로 'to enter'가 알맞다."
+   },
+   {
+    "answer": "to catch",
+    "number": 12,
+    "question": "[보기] to arrive / to catch / to design / to enter / to join / to miss / to prepare / to review\n\n다음 문장의 빈칸에 알맞은 말을 <보기>에서 골라 쓰시오.\n\nGoing out in the rain may cause you ______ a cold.",
+    "explanation": "'감기에 걸리다'는 catch a cold이므로 'to catch'가 알맞다."
+   },
+   {
+    "answer": "to join",
+    "number": 13,
+    "question": "[보기] to arrive / to catch / to design / to enter / to join / to miss / to prepare / to review\n\n다음 문장의 빈칸에 알맞은 말을 <보기>에서 골라 쓰시오.\n\nShe encouraged her friends ______ the volunteer group.",
+    "explanation": "'봉사 모임에 가입하다'가 문맥상 자연스러우므로 'to join'이 알맞다."
+   },
+   {
+    "answer": "to prepare",
+    "number": 14,
+    "question": "[보기] to arrive / to catch / to design / to enter / to join / to miss / to prepare / to review\n\n다음 문장의 빈칸에 알맞은 말을 <보기>에서 골라 쓰시오.\n\nThe leader wants the members ______ for the presentation.",
+    "explanation": "'발표를 준비하다'가 문맥상 자연스러우므로 'to prepare'가 알맞다."
+   },
+   {
+    "answer": "to review",
+    "number": 15,
+    "question": "[보기] to arrive / to catch / to design / to enter / to join / to miss / to prepare / to review\n\n다음 문장의 빈칸에 알맞은 말을 <보기>에서 골라 쓰시오.\n\nThe tutor advised us ______ the chapters before the test.",
+    "explanation": "'시험 전에 단원을 복습하다'가 문맥상 자연스러우므로 'to review'가 알맞다."
+   },
+   {
+    "answer": "to win",
+    "number": 16,
+    "question": "다음 밑줄 친 부분을 어법에 알맞게 고쳐 쓰시오.\n\nGood teamwork enabled us <u>winning</u> the final match.",
+    "explanation": "enable은 목적격보어로 to부정사를 취하므로 winning을 to win으로 고쳐야 한다."
+   },
+   {
+    "answer": "to clean",
+    "number": 17,
+    "question": "다음 밑줄 친 부분을 어법에 알맞게 고쳐 쓰시오.\n\nShe persuaded her brother <u>clean</u> the garage.",
+    "explanation": "persuade는 목적격보어로 to부정사를 취하므로 clean을 to clean으로 고쳐야 한다."
+   },
+   {
+    "answer": "to be",
+    "number": 18,
+    "question": "다음 밑줄 친 부분을 어법에 알맞게 고쳐 쓰시오.\n\nThe manager asked us not <u>being</u> absent from the meeting.",
+    "explanation": "ask는 목적격보어로 to부정사를 취하며, 부정은 not to부정사 형태이므로 being을 to be로 고쳐야 한다."
+   },
+   {
+    "answer": "to work",
+    "number": 19,
+    "question": "다음 밑줄 친 부분을 어법에 알맞게 고쳐 쓰시오.\n\nHis boss permitted him <u>work</u> from home on Fridays.",
+    "explanation": "permit은 목적격보어로 to부정사를 취하므로 work을 to work으로 고쳐야 한다."
+   },
+   {
+    "answer": "to drink",
+    "number": 20,
+    "question": "다음 밑줄 친 부분을 어법에 알맞게 고쳐 쓰시오.\n\nThe nurse warned him not <u>drink</u> too much coffee.",
+    "explanation": "warn은 목적격보어로 to부정사를 취하며, 부정은 not to부정사 형태이므로 drink를 to drink로 고쳐야 한다."
+   },
+   {
+    "answer": "leave",
+    "number": 21,
+    "question": "다음 밑줄 친 부분을 어법에 알맞게 고쳐 쓰시오.\n\nThe teacher let the students <u>to leave</u> the classroom early.",
+    "explanation": "사역동사 let은 목적격보어로 동사원형을 취하므로 to leave를 leave로 고쳐야 한다."
+   },
+   {
+    "answer": "cry",
+    "number": 22,
+    "question": "다음 밑줄 친 부분을 어법에 알맞게 고쳐 쓰시오.\n\nThe sad news made everyone <u>crying</u> at once.",
+    "explanation": "사역동사 make는 목적격보어로 동사원형을 취하므로 crying을 cry로 고쳐야 한다."
+   },
+   {
+    "answer": "to touch",
+    "number": 23,
+    "question": "다음 밑줄 친 부분을 어법에 알맞게 고쳐 쓰시오.\n\nThe museum allowed students <u>touching</u> the ancient tools.",
+    "explanation": "allow는 목적격보어로 to부정사를 취하므로 touching을 to touch로 고쳐야 한다."
+   },
+   {
+    "answer": "clean",
+    "number": 24,
+    "question": "다음 밑줄 친 부분을 어법에 알맞게 고쳐 쓰시오.\n\nAfter the argument, her mother had her <u>to clean</u> her room.",
+    "explanation": "사역동사 have는 목적격보어로 동사원형을 취하므로 to clean을 clean으로 고쳐야 한다."
+   },
+   {
+    "answer": "The captain asked the crew to stay calm.",
+    "number": 25,
+    "question": "다음 문장에서 어법상 어색한 곳을 찾아 고쳐 쓰시오.\n\nThe captain asked the crew stay calm. ※ 틀린 부분을 고쳐서 올바른 문장으로 전부 쓰세요.",
+    "explanation": "ask는 목적격보어로 to부정사를 취하므로 stay를 to stay로 고쳐야 한다.",
+    "acceptedAnswers": [
+     "The captain asked the crew to stay calm"
+    ]
+   },
+   {
+    "answer": "He let his cat sleep on the sofa.",
+    "number": 26,
+    "question": "다음 문장에서 어법상 어색한 곳을 찾아 고쳐 쓰시오.\n\nHe let his cat slept on the sofa. ※ 틀린 부분을 고쳐서 올바른 문장으로 전부 쓰세요.",
+    "explanation": "사역동사 let은 목적격보어로 동사원형을 취하므로 slept를 sleep으로 고쳐야 한다.",
+    "acceptedAnswers": [
+     "He let his cat sleep on the sofa"
+    ]
+   },
+   {
+    "answer": "Her friends persuaded her not to quit the club.",
+    "number": 27,
+    "question": "다음 문장에서 어법상 어색한 곳을 찾아 고쳐 쓰시오.\n\nHer friends persuaded her to not quit the club. ※ 틀린 부분을 고쳐서 올바른 문장으로 전부 쓰세요.",
+    "explanation": "to부정사의 부정은 not을 to 앞에 두므로 to not quit을 not to quit으로 고쳐야 한다.",
+    "acceptedAnswers": [
+     "Her friends persuaded her not to quit the club"
+    ]
+   },
+   {
+    "answer": "The doctor advised him to take a rest for a week.",
+    "number": 28,
+    "question": "다음 문장에서 어법상 어색한 곳을 찾아 고쳐서 올바른 문장으로 전부 쓰세요. ※ 틀린 부분을 고쳐서 올바른 문장으로 전부 쓰세요.\n\nThe doctor advised him taking a rest for a week.",
+    "explanation": "advise는 목적격보어로 to부정사를 취하므로 taking을 to take로 고쳐야 한다.",
+    "acceptedAnswers": [
+     "The doctor advised him to take a rest for a week"
+    ]
+   },
+   {
+    "answer": "The manager had her send the report by noon.",
+    "number": 29,
+    "question": "다음 문장에서 어법상 어색한 곳을 찾아 고쳐서 올바른 문장으로 전부 쓰세요. ※ 틀린 부분을 고쳐서 올바른 문장으로 전부 쓰세요.\n\nThe manager had her to send the report by noon.",
+    "explanation": "사역동사 have는 목적격보어로 동사원형을 취하므로 to send를 send로 고쳐야 한다.",
+    "acceptedAnswers": [
+     "The manager had her send the report by noon"
+    ]
+   },
+   {
+    "answer": "The app allowed users to share photos instantly.",
+    "number": 30,
+    "question": "다음 문장에서 어법상 어색한 곳을 찾아 고쳐서 올바른 문장으로 전부 쓰세요. ※ 틀린 부분을 고쳐서 올바른 문장으로 전부 쓰세요.\n\nThe app allowed users to sharing photos instantly.",
+    "explanation": "to부정사는 「to+동사원형」 형태이므로 to sharing을 to share로 고쳐야 한다.",
+    "acceptedAnswers": [
+     "The app allowed users to share photos instantly"
+    ]
+   }
+  ],
+  "answer_key": [
+   "to practice",
+   "to complete",
+   "not to leave",
+   "organize",
+   "him to train on the weekend",
+   "her to apply for the scholarship",
+   "us reflect on our own lives",
+   "to design",
+   "to arrive",
+   "to miss",
+   "to enter",
+   "to catch",
+   "to join",
+   "to prepare",
+   "to review",
+   "to win",
+   "to clean",
+   "to be",
+   "to work",
+   "to drink",
+   "leave",
+   "cry",
+   "to touch",
+   "clean",
+   "The captain asked the crew to stay calm.",
+   "He let his cat sleep on the sofa.",
+   "Her friends persuaded her not to quit the club.",
+   "The doctor advised him to take a rest for a week.",
+   "The manager had her send the report by noon.",
+   "The app allowed users to share photos instantly."
+  ]
+ },
+ {
+  "id": "4b4970ce-2c53-44bf-9fd0-6ad9a7b69e81",
+  "title": "1과 문법 (2/6)",
+  "questions": [
+   {
+    "answer": "The coach told the players not to run on the wet floor.",
+    "number": 1,
+    "question": "다음 문장에서 어법상 어색한 곳을 찾아 고쳐서 올바른 문장으로 전부 쓰세요. ※ 틀린 부분을 고쳐서 올바른 문장으로 전부 쓰세요.\n\nThe coach told the players not running on the wet floor.",
+    "explanation": "tell은 목적격보어로 to부정사를 취하며, 부정은 not to run으로 나타낸다.",
+    "acceptedAnswers": [
+     "The coach told the players not to run on the wet floor"
+    ]
+   },
+   {
+    "answer": "expected him to win",
+    "number": 2,
+    "question": "다음 우리말과 같은 뜻이 되도록 괄호 안의 단어를 사용하여 문장을 완성하시오.\n\n선생님은 그가 그 대회에서 우승하기를 기대했다. (expect, win)\n\nThe teacher ______ the contest.",
+    "explanation": "expect는 「expect+목적어+to부정사」 형태로 쓴다."
+   },
+   {
+    "answer": "enabled them to work",
+    "number": 3,
+    "question": "다음 우리말과 같은 뜻이 되도록 괄호 안의 단어를 사용하여 문장을 완성하시오.\n\n그 새로운 도구는 그들이 더 빠르게 일할 수 있게 해 주었다. (enable, work)\n\nThe new tool ______ faster.",
+    "explanation": "enable은 「enable+목적어+to부정사」 형태로 쓴다."
+   },
+   {
+    "answer": "warned him not to go",
+    "number": 4,
+    "question": "다음 우리말과 같은 뜻이 되도록 괄호 안의 단어를 사용하여 문장을 완성하시오.\n\n그의 부모님은 그에게 밤늦게 밖에 나가지 말라고 경고했다. (warn, go)\n\nHis parents ______ out late at night.",
+    "explanation": "warn은 「warn+목적어+to부정사」 형태이며, 부정은 not to go로 나타낸다."
+   },
+   {
+    "answer": "told us not to waste",
+    "number": 5,
+    "question": "다음 우리말과 같은 뜻이 되도록 괄호 안의 단어를 사용하여 문장을 완성하시오.\n\n선생님은 우리에게 수업 중에 시간을 낭비하지 말라고 말씀하셨다. (tell, waste)\n\nOur teacher ______ time during class.",
+    "explanation": "tell은 「tell+목적어+to부정사」 형태이며, 부정은 not to waste로 나타낸다."
+   },
+   {
+    "answer": "advised me not to eat",
+    "number": 6,
+    "question": "다음 우리말과 같은 뜻이 되도록 괄호 안의 단어를 사용하여 문장을 완성하시오.\n\n의사는 나에게 기름진 음식을 먹지 말라고 충고했다. (advise, eat)\n\nThe doctor ______ greasy food.",
+    "explanation": "advise는 「advise+목적어+to부정사」 형태이며, 부정은 not to eat로 나타낸다."
+   },
+   {
+    "answer": "O",
+    "number": 7,
+    "question": "다음 밑줄 친 부분이 어법상 알맞으면 O를 쓰고, 어색하면 알맞게 고쳐 쓰시오.\n\nThe librarian allowed us <u>to borrow</u> five books.",
+    "explanation": "allow는 목적격보어로 to부정사를 취하므로 to borrow는 올바르다."
+   },
+   {
+    "answer": "to help",
+    "number": 8,
+    "question": "다음 밑줄 친 부분이 어법상 알맞으면 O를 쓰고, 어색하면 알맞게 고쳐 쓰시오.\n\nShe asked me <u>to helping</u> with the project.",
+    "explanation": "to부정사는 「to+동사원형」 형태이므로 to helping을 to help로 고쳐야 한다."
+   },
+   {
+    "answer": "to write",
+    "number": 9,
+    "question": "다음 밑줄 친 부분이 어법상 알맞으면 O를 쓰고, 어색하면 알맞게 고쳐 쓰시오.\n\nThe movie encouraged him <u>write</u> a novel.",
+    "explanation": "encourage는 목적격보어로 to부정사를 취하므로 write를 to write로 고쳐야 한다."
+   },
+   {
+    "answer": "The coach advised him not to skip the morning practice.",
+    "number": 10,
+    "question": "다음 밑줄 친 부분이 어법상 알맞으면 O를 쓰고, 어색하면 알맞게 고쳐 쓰시오. ※ 틀린 부분을 고쳐서 올바른 문장으로 전부 쓰세요.\n\nThe coach advised him <u>to not skip</u> the morning practice.",
+    "explanation": "to부정사의 부정은 to 앞에 not을 두어 'not to+동사원형' 형태로 씁니다. 따라서 'to not skip'을 'not to skip'으로 고쳐야 합니다.",
+    "acceptedAnswers": [
+     "The coach advised him not to skip the morning practice"
+    ]
+   },
+   {
+    "answer": "The director motivated the actors to rehearse more often for the play.",
+    "number": 11,
+    "question": "다음 밑줄 친 부분이 어법상 알맞으면 O를 쓰고, 어색하면 알맞게 고쳐 쓰시오. ※ 틀린 부분을 고쳐서 올바른 문장으로 전부 쓰세요.\n\nThe director motivated the actors <u>rehearse</u> more often for the play.",
+    "explanation": "motivate는 목적격보어로 to부정사를 취하는 동사이므로 'rehearse'를 'to rehearse'로 고쳐야 합니다.",
+    "acceptedAnswers": [
+     "The director motivated the actors to rehearse more often for the play"
+    ]
+   },
+   {
+    "answer": "O",
+    "number": 12,
+    "question": "다음 밑줄 친 부분이 어법상 알맞으면 O를 쓰고, 어색하면 알맞게 고쳐 쓰시오. ※ 틀린 부분을 고쳐서 올바른 문장으로 전부 쓰세요.\n\nHis intense practice <u>made</u> his team win the tournament.",
+    "explanation": "make는 사역동사로 목적격보어에 동사원형을 취합니다. 'made ... win'은 올바른 형태이므로 O입니다."
+   },
+   {
+    "answer": "The mentor encouraged us to join the debate club this semester.",
+    "number": 13,
+    "question": "다음 밑줄 친 부분이 어법상 알맞으면 O를 쓰고, 어색하면 알맞게 고쳐 쓰시오. ※ 틀린 부분을 고쳐서 올바른 문장으로 전부 쓰세요.\n\nThe mentor encouraged us <u>join</u> the debate club this semester.",
+    "explanation": "encourage는 목적격보어로 to부정사를 취하는 동사이므로 'join'을 'to join'으로 고쳐야 합니다.",
+    "acceptedAnswers": [
+     "The mentor encouraged us to join the debate club this semester"
+    ]
+   },
+   {
+    "answer": "O",
+    "number": 14,
+    "question": "다음 밑줄 친 부분이 어법상 알맞으면 O를 쓰고, 어색하면 알맞게 고쳐 쓰시오. ※ 틀린 부분을 고쳐서 올바른 문장으로 전부 쓰세요.\n\nThe course helps learners <u>to develop</u> their writing abilities.",
+    "explanation": "help는 목적격보어로 원형부정사와 to부정사를 모두 취할 수 있으므로 'to develop'은 올바른 형태입니다. 따라서 O입니다."
+   },
+   {
+    "answer": "She persuaded her sister to sign up",
+    "number": 15,
+    "question": "다음 주어진 말을 바르게 배열하여 문장을 완성하시오. ※ 완전한 문장으로 쓰시오.\n\n(sister / persuaded / to / she / sign up / her) for the yoga class together.",
+    "explanation": "persuade는 'persuade+목적어+to부정사' 구조를 취하므로 'She persuaded her sister to sign up'이 됩니다."
+   },
+   {
+    "answer": "The coach told us not to run",
+    "number": 16,
+    "question": "다음 주어진 말을 바르게 배열하여 문장을 완성하시오. ※ 완전한 문장으로 쓰시오.\n\n(run / us / not / told / the coach / to) in the hallway.",
+    "explanation": "'tell+목적어+not to부정사' 구조로 부정은 to 앞에 not을 두어 'The coach told us not to run'이 됩니다."
+   },
+   {
+    "answer": "He told me not to be nervous",
+    "number": 17,
+    "question": "다음 주어진 말을 바르게 배열하여 문장을 완성하시오. ※ 완전한 문장으로 쓰시오.\n\n(be / not / told / to / nervous / he / me) during the presentation.",
+    "explanation": "'tell+목적어+not to부정사' 구조로 부정은 to 앞에 not을 두어 'He told me not to be nervous'가 됩니다."
+   },
+   {
+    "answer": "The nurse warned him to drink water regularly",
+    "number": 18,
+    "question": "다음 주어진 말을 바르게 배열하여 문장을 완성하시오. ※ 완전한 문장으로 쓰시오.\n\n(regularly / warned / drink / to / water / him / the nurse) during the hike.",
+    "explanation": "'warn+목적어+to부정사' 구조로 'The nurse warned him to drink water regularly'가 됩니다."
+   },
+   {
+    "answer": "The app enabled us to connect",
+    "number": 19,
+    "question": "다음 주어진 말을 바르게 배열하여 문장을 완성하시오. ※ 완전한 문장으로 쓰시오.\n\n(us / to / the app / connect / enabled) with people around the world.",
+    "explanation": "'enable+목적어+to부정사' 구조로 'The app enabled us to connect'가 됩니다."
+   },
+   {
+    "answer": "2",
+    "number": 20,
+    "options": [
+     "asked",
+     "hopes",
+     "ordered",
+     "advised",
+     "reminded"
+    ],
+    "question": "다음 중 빈칸에 들어갈 수 없는 것은?\n\nHe ___________ me to submit the report before noon.",
+    "explanation": "'동사+목적어+to부정사' 구조를 취하려면 목적격보어에 목적어를 둘 수 있어야 합니다. hope는 목적어 뒤에 to부정사를 취하지 않으므로 빈칸에 들어갈 수 없습니다."
+   },
+   {
+    "answer": "2",
+    "number": 21,
+    "options": [
+     "asked",
+     "had",
+     "enabled",
+     "wanted",
+     "expected"
+    ],
+    "question": "다음 빈칸에 들어갈 말로 알맞은 것은?\n\nHis father ___________ him wash the car.",
+    "explanation": "빈칸 뒤에 원형부정사 'wash'가 왔으므로 사역동사 had가 알맞습니다. 나머지 동사들은 목적격보어로 to부정사를 취합니다."
+   },
+   {
+    "answer": "3",
+    "number": 22,
+    "options": [
+     "lock",
+     "locking",
+     "to lock",
+     "locked",
+     "being locked"
+    ],
+    "question": "다음 우리말과 일치하도록 빈칸에 알맞은 말을 고르면?\n\n나는 그에게 문을 잠가달라고 부탁했다.\n= I asked him ___________ the door.",
+    "explanation": "ask는 목적격보어로 to부정사를 취하는 동사이므로 'to lock'이 알맞다."
+   },
+   {
+    "answer": "advised me to exercise",
+    "number": 23,
+    "question": "[보기] advise, exercise\n\n다음 우리말과 같은 뜻이 되도록 주어진 단어를 이용하여 문장을 완성하시오.\n\n의사는 나에게 건강을 유지하기 위해 규칙적으로 운동하라고 충고했다.\n\nThe doctor _______________________________ regularly to stay healthy.",
+    "explanation": "advise는 '동사+목적어+to부정사' 구조를 취하므로 'advised me to exercise'가 된다."
+   },
+   {
+    "answer": "I expected him to join our study group",
+    "number": 24,
+    "question": "[보기] expected, him, to, to, join, I, our study group\n\n다음 주어진 말을 알맞게 배열하여 우리말과 뜻이 같도록 문장을 완성하시오.\n\n나는 그가 우리 스터디 그룹에 함께하기를 기대했다.",
+    "explanation": "expect는 '주어+동사+목적어+to부정사' 구조를 취한다."
+   },
+   {
+    "answer": "2",
+    "number": 25,
+    "options": [
+     "I advised her to get some rest.",
+     "She made me to clean the room.",
+     "He told me not to worry about it.",
+     "My parents wanted me to travel overseas.",
+     "She asked me to help her with the homework."
+    ],
+    "question": "다음 중 어법상 어색한 것은?",
+    "explanation": "make는 사역동사로 목적격보어에 원형부정사를 쓰므로 'made me clean'이 되어야 한다. to를 쓴 것이 어색하다."
+   },
+   {
+    "answer": "3",
+    "number": 26,
+    "options": [
+     "My parents wanted me become a doctor when I grew up.",
+     "The teacher told us handing in the report by Monday.",
+     "She asked me to help her fix the computer.",
+     "I advised him to trying harder for the final exam.",
+     "He let me to ride his bike for the day."
+    ],
+    "question": "다음 중 어법상 알맞은 것은?",
+    "explanation": "ask는 목적격보어로 to부정사를 취하며 'to help'가 올바르다. ①은 to become, ②는 to hand in, ④는 to try, ⑤는 let me ride가 되어야 한다."
+   },
+   {
+    "answer": "2",
+    "number": 27,
+    "options": [
+     "The coach expected us finish the training by this weekend.",
+     "The coach expected us to finish the training by this weekend.",
+     "The coach expected us to finished the training by this weekend.",
+     "The coach expected us finishing the training by this weekend.",
+     "The coach expected us to finishing the training by this weekend."
+    ],
+    "question": "다음 우리말을 알맞게 영작한 것은?\n\n코치는 우리가 이번 주말까지 훈련을 마치기를 기대했다.",
+    "explanation": "expect는 목적격보어로 to부정사(원형)를 취하므로 'to finish'가 올바르다."
+   },
+   {
+    "answer": "4",
+    "number": 28,
+    "options": [
+     "leave – use",
+     "to leave – use",
+     "leave – to use",
+     "to leave – to use",
+     "leaving – to use"
+    ],
+    "question": "다음 빈칸 ⓐ, ⓑ에 들어갈 말이 차례대로 알맞게 짝지어진 것은?\n\n• The officer ordered the crowd ⓐ__________ the building immediately.\n• The school didn't allow its students ⓑ__________ their phones in class.",
+    "explanation": "order와 allow 모두 목적격보어로 to부정사를 취하므로 'to leave – to use'가 알맞다."
+   },
+   {
+    "answer": "4",
+    "number": 29,
+    "options": [
+     "①",
+     "②",
+     "③",
+     "④",
+     "⑤"
+    ],
+    "question": "다음 글의 밑줄 친 부분 중, 어법상 틀린 것은?\n\nTo start with a psychological factor, knowing another's private matters can tempt the holder of this information ①to spread it as gossip because as unshared information it stays socially inactive. Only when the information is shared can its holder ②turn the fact that he knows something into something socially valuable such as recognition, prestige, and notoriety. As long as he keeps his knowledge to ③himself, he may feel superior to those who lack it. But knowing and staying silent does not grant him that sense of \"superiority that, so to speak, latently contained in the secret, fully ④actualizing itself only at the moment of disclosure.\" This is the chief motive for gossiping about famous people and superiors. The gossip producer assumes that some of the \"fame\" of the person gossiped about, as ⑤whose \"friend\" he presents himself, will rub off on him.",
+    "explanation": "'superiority that ... fully actualizing itself'에서 관계사절의 동사가 필요하므로 actualizing이 아니라 actualizes(또는 is actualized)가 되어야 한다."
+   },
+   {
+    "answer": "5",
+    "number": 30,
+    "options": [
+     "①",
+     "②",
+     "③",
+     "④",
+     "⑤"
+    ],
+    "question": "다음 글의 밑줄 친 부분 중, 어법상 어색한 것은?\n\nCommercial aircraft usually follow airways that resemble roads, even though they are not physical structures. Airways have fixed widths and set altitudes, ①which separate traffic flowing in opposite directions. Vertical separation of planes allows some flights ②to pass over airports while other operations happen below. Air travel typically spans long distances, with brief bursts of intense pilot activity during takeoff and landing and lengthy stretches of reduced pilot activity in the air, the segment of the flight ③known as the \"long haul.\" During the \"long haul\" part of a flight, pilots devote more time to checking aircraft status than ④searching out nearby planes. This is because collisions between aircraft typically happen near airports, while crashes caused by aircraft malfunction ⑤tends to occur during long-haul flight.",
+    "explanation": "주어가 복수(crashes)이므로 동사는 tends가 아니라 tend가 되어야 한다."
+   }
+  ],
+  "answer_key": [
+   "The coach told the players not to run on the wet floor.",
+   "expected him to win",
+   "enabled them to work",
+   "warned him not to go",
+   "told us not to waste",
+   "advised me not to eat",
+   "O",
+   "to help",
+   "to write",
+   "The coach advised him not to skip the morning practice.",
+   "The director motivated the actors to rehearse more often for the play.",
+   "O",
+   "The mentor encouraged us to join the debate club this semester.",
+   "O",
+   "She persuaded her sister to sign up",
+   "The coach told us not to run",
+   "He told me not to be nervous",
+   "The nurse warned him to drink water regularly",
+   "The app enabled us to connect",
+   "2",
+   "2",
+   "3",
+   "advised me to exercise",
+   "I expected him to join our study group",
+   "2",
+   "3",
+   "2",
+   "4",
+   "4",
+   "5"
+  ]
+ },
+ {
+  "id": "688aec02-902c-4e14-acb8-fb743fef3950",
+  "title": "1과 문법 (3/6)",
+  "questions": [
+   {
+    "answer": "5",
+    "number": 1,
+    "options": [
+     "①",
+     "②",
+     "③",
+     "④",
+     "⑤"
+    ],
+    "question": "다음 글의 밑줄 친 부분 중, 어법상 틀린 것은?\n\nCreatures inhabiting the deep sea have adapted to intense pressure by storing water in their bodies, some ①consisting almost entirely of water. Most deep-sea creatures lack gas bladders. They are cold-blooded organisms that match their body temperature to their surroundings, allowing them ②to survive in the cold water while keeping a low metabolism. Many species reduce their metabolism so greatly that they can survive without food for long stretches, since locating the scarce food ③that is available uses up a lot of energy. Many predatory fish of the deep sea have huge mouths and sharp teeth, enabling them to grip prey and overpower ④it. Some predators hunting in the residual light zone of the ocean ⑤has excellent visual abilities, while others can produce their own light to lure prey or a mate.",
+    "explanation": "주어가 복수(Some predators)이므로 동사는 has가 아니라 have가 되어야 한다."
+   },
+   {
+    "answer": "had finished",
+    "number": 2,
+    "question": "[Pattern 2 과거완료] 다음 괄호 안의 단어를 과거완료 시제가 되도록 알맞게 변형하여 문장을 완성하시오.\n\nThey _____________ _____________ their homework before the movie started. (finish)",
+    "explanation": "과거의 특정 시점(영화가 시작하기)보다 더 이전에 완료된 일이므로 과거완료 'had finished'를 쓴다."
+   },
+   {
+    "answer": "had worked",
+    "number": 3,
+    "question": "[Pattern 2 과거완료] 다음 괄호 안의 단어를 과거완료 시제가 되도록 알맞게 변형하여 문장을 완성하시오.\n\nHe _____________ _____________ in that company before he started his own business. (work)",
+    "explanation": "과거의 특정 시점(사업 시작)보다 더 이전의 일이므로 과거완료 'had worked'를 쓴다."
+   },
+   {
+    "answer": "had driven",
+    "number": 4,
+    "question": "[Pattern 2 과거완료] 다음 괄호 안의 단어를 과거완료 시제가 되도록 알맞게 변형하여 문장을 완성하시오.\n\nShe _____________ _____________ too fast, so she got a speeding ticket. (drive)",
+    "explanation": "과속 딱지를 받기 이전에 일어난 일이므로 과거완료 'had driven'을 사용한다."
+   },
+   {
+    "answer": "had visited",
+    "number": 5,
+    "question": "[Pattern 2 과거완료] 다음 괄호 안의 단어를 과거완료 시제가 되도록 알맞게 변형하여 문장을 완성하시오.\n\nThey _____________ _____________ that museum once before they visited Rome. (visit)",
+    "explanation": "로마를 방문하기 이전의 경험을 나타내므로 과거완료 'had visited'를 사용한다."
+   },
+   {
+    "answer": "had not left",
+    "number": 6,
+    "question": "[Pattern 2 과거완료] 다음 괄호 안의 단어를 과거완료 시제가 되도록 알맞게 변형하여 문장을 완성하시오.\n\nI noticed that I _____________ _____________ my umbrella at home. (leave)",
+    "explanation": "부정 과거완료는 'had not + 과거분사' 형태로 쓴다. (또는 'had left'가 될 수도 있으나 부정문 맥락에서 'had not left')"
+   },
+   {
+    "answer": "had not arrived",
+    "number": 7,
+    "question": "[Pattern 2 과거완료] 다음 괄호 안의 단어를 과거완료 시제가 되도록 알맞게 변형하여 문장을 완성하시오.\n\nThe package _____________ _____________ by the time she got home. (not arrive)",
+    "explanation": "집에 도착한 시점 이전까지 소포가 도착하지 않은 상태이므로 부정 과거완료 'had not arrived'를 사용한다."
+   },
+   {
+    "answer": "had been found",
+    "number": 8,
+    "question": "[Pattern 2 과거완료] 다음 괄호 안의 단어를 과거완료 시제가 되도록 알맞게 변형하여 문장을 완성하시오.\n\nHer necklace _____________ _____________ _____________ by an honest man and given back to her. (find)",
+    "explanation": "과거완료 수동태는 'had been + 과거분사' 형태로 쓴다."
+   },
+   {
+    "answer": "had been studying",
+    "number": 9,
+    "question": "[Pattern 2 과거완료] 다음 괄호 안의 단어를 과거완료 시제가 되도록 알맞게 변형하여 문장을 완성하시오.\n\nShe _____________ _____________ _____________ for the exam all night when she finally rested. (study)",
+    "explanation": "과거의 어느 시점까지 계속 진행된 동작을 나타내므로 과거완료 진행형 'had been studying'을 사용한다."
+   },
+   {
+    "answer": "1 / 2",
+    "number": 10,
+    "question": "다음 문장을 읽고 빈칸에 사건이 일어난 순서를 쓰시오.\n\nThey had finished dinner before the movie began.\n\n➜ They finished dinner. _____\n➜ The movie began. _____",
+    "subParts": [
+     {
+      "label": "(1)",
+      "answer": "1"
+     },
+     {
+      "label": "(2)",
+      "answer": "2"
+     }
+    ],
+    "explanation": "과거완료(had finished)가 더 먼저 일어난 일이므로 저녁 식사가 1, 영화 시작이 2이다.",
+    "acceptedAnswers": [
+     "1/2"
+    ]
+   },
+   {
+    "answer": "2 / 1",
+    "number": 11,
+    "question": "다음 문장을 읽고 빈칸에 사건이 일어난 순서를 쓰시오.\n\nThe bus had left by the time she reached the stop.\n\n➜ She reached the stop. _____\n➜ The bus left. _____",
+    "subParts": [
+     {
+      "label": "(1)",
+      "answer": "2"
+     },
+     {
+      "label": "(2)",
+      "answer": "1"
+     }
+    ],
+    "explanation": "과거완료(had left)가 더 먼저 일어난 일이므로 버스가 떠난 것이 1, 정류장 도착이 2이다.",
+    "acceptedAnswers": [
+     "2/1"
+    ]
+   },
+   {
+    "answer": "2 / 1",
+    "number": 12,
+    "question": "다음 문장을 읽고 빈칸에 사건이 일어난 순서를 쓰시오.\n\nWhen we entered the hall, the concert had already begun.\n\n➜ We entered the hall. _____\n➜ The concert began. _____",
+    "subParts": [
+     {
+      "label": "(1)",
+      "answer": "2"
+     },
+     {
+      "label": "(2)",
+      "answer": "1"
+     }
+    ],
+    "explanation": "과거완료(had begun)가 더 먼저 일어난 일이므로 콘서트 시작이 1, 홀에 들어간 것이 2이다.",
+    "acceptedAnswers": [
+     "2/1"
+    ]
+   },
+   {
+    "answer": "2 / 1",
+    "number": 13,
+    "question": "다음 문장을 읽고 빈칸에 사건이 일어난 순서를 쓰시오.\n\nWhen he opened his email, they had already replied to him.\n\n➜ He opened his email. _____\n➜ They replied to him. _____",
+    "subParts": [
+     {
+      "label": "(1)",
+      "answer": "2"
+     },
+     {
+      "label": "(2)",
+      "answer": "1"
+     }
+    ],
+    "explanation": "과거완료(had replied)가 더 먼저 일어난 일이므로 답장이 1, 이메일 확인이 2이다.",
+    "acceptedAnswers": [
+     "2/1"
+    ]
+   },
+   {
+    "answer": "had finished",
+    "number": 14,
+    "question": "다음 괄호 안의 단어를 과거완료 시제가 되도록 알맞게 변형하여 문장을 완성하시오.\n\nWe _______________ _______________ the report before the manager arrived. (finish)",
+    "explanation": "매니저가 도착하기 이전에 완료된 일이므로 과거완료 'had finished'를 사용한다."
+   },
+   {
+    "answer": "had worked",
+    "number": 15,
+    "question": "다음 괄호 안의 단어를 과거완료 시제가 되도록 알맞게 변형하여 문장을 완성하시오.\n\nHe _______________ _______________ in that city before he moved to Seoul. (work)",
+    "explanation": "서울로 이사하기 이전에 있었던 일이므로 과거완료 'had worked'를 사용한다."
+   },
+   {
+    "answer": "had driven",
+    "number": 16,
+    "question": "다음 괄호 안의 단어를 과거완료 시제가 되도록 알맞게 변형하여 문장을 완성하시오.\n\nShe _______________ _______________ too fast, so she got a speeding ticket. (drive)",
+    "explanation": "과거완료는 「had + 과거분사」 형태로 쓴다. drive의 과거분사는 driven이므로 had driven이 정답이다."
+   },
+   {
+    "answer": "had lived",
+    "number": 17,
+    "question": "다음 괄호 안의 단어를 과거완료 시제가 되도록 알맞게 변형하여 문장을 완성하시오.\n\nThey _______________ _______________ in Canada once before they settled in London. (live)",
+    "explanation": "과거보다 더 이전의 일을 나타내므로 과거완료 「had + 과거분사」를 쓴다. live의 과거분사는 lived이다."
+   },
+   {
+    "answer": "had not brought",
+    "number": 18,
+    "question": "다음 괄호 안의 단어를 과거완료 시제가 되도록 알맞게 변형하여 문장을 완성하시오.\n\nI noticed that I _______________ _______________ my keys at home. (not, bring)",
+    "explanation": "과거완료의 부정은 「had not + 과거분사」로 쓴다. bring의 과거분사는 brought이다."
+   },
+   {
+    "answer": "had not come",
+    "number": 19,
+    "question": "다음 괄호 안의 단어를 과거완료 시제가 되도록 알맞게 변형하여 문장을 완성하시오.\n\nThe package _______________ _______________ by the time she left the office. (not, come)",
+    "explanation": "과거완료 부정형은 「had not + 과거분사」이다. come의 과거분사는 come이다."
+   },
+   {
+    "answer": "had been repaired",
+    "number": 20,
+    "question": "다음 괄호 안의 단어를 과거완료 시제가 되도록 알맞게 변형하여 문장을 완성하시오.\n\nHer bicycle _______________ _______________ _______________ by a helpful neighbor and given back to her. (be, repair)",
+    "explanation": "과거완료 수동태는 「had been + 과거분사」로 쓴다. repair의 과거분사는 repaired이다."
+   },
+   {
+    "answer": "had been studying",
+    "number": 21,
+    "question": "다음 괄호 안의 단어를 과거완료 시제가 되도록 알맞게 변형하여 문장을 완성하시오.\n\nShe _______________ _______________ _______________ for the exam all night when the sun rose. (be, study)",
+    "explanation": "과거완료 진행형은 「had been + -ing」로 쓴다. study의 현재분사는 studying이다."
+   },
+   {
+    "answer": "2",
+    "number": 22,
+    "options": [
+     "has",
+     "had"
+    ],
+    "question": "다음 괄호 안에서 알맞은 것을 고르시오.\n\nShe chose to sell the house where she (has / had) lived for 30 years.",
+    "explanation": "과거(chose)보다 더 이전에 살았던 일을 나타내므로 과거완료 had lived가 알맞다."
+   },
+   {
+    "answer": "1",
+    "number": 23,
+    "options": [
+     "had opened",
+     "opens"
+    ],
+    "question": "다음 괄호 안에서 알맞은 것을 고르시오.\n\nThe store (had opened / opens) by the time we arrived.",
+    "explanation": "'~했을 무렵에는 이미 ~했다'는 과거 시점 이전의 완료를 나타내므로 과거완료 had opened가 알맞다."
+   },
+   {
+    "answer": "1",
+    "number": 24,
+    "options": [
+     "had borrowed",
+     "had borrows"
+    ],
+    "question": "다음 괄호 안에서 알맞은 것을 고르시오.\n\nHe returned the book that he (had borrowed / had borrows) last month.",
+    "explanation": "과거완료는 「had + 과거분사」이므로 had borrowed가 알맞다. had 뒤에 borrows는 올 수 없다."
+   },
+   {
+    "answer": "1",
+    "number": 25,
+    "options": [
+     "had passed",
+     "has passed"
+    ],
+    "question": "다음 괄호 안에서 알맞은 것을 고르시오.\n\nWe couldn't believe that she (had passed / has passed) the difficult test.",
+    "explanation": "주절이 과거(couldn't believe)이고 그 이전의 일을 나타내므로 과거완료 had passed가 알맞다."
+   },
+   {
+    "answer": "1",
+    "number": 26,
+    "options": [
+     "started",
+     "starts"
+    ],
+    "question": "다음 괄호 안에서 알맞은 것을 고르시오.\n\nBy the time we got to the theater, the movie had already (started / starts).",
+    "explanation": "과거완료는 「had + 과거분사」이므로 had already started가 알맞다. had 뒤에 starts는 올 수 없다."
+   },
+   {
+    "answer": "1",
+    "number": 27,
+    "options": [
+     "done",
+     "does"
+    ],
+    "question": "다음 괄호 안에서 알맞은 것을 고르시오.\n\nHe regretted what he had (done / does) to his friend.",
+    "explanation": "과거완료는 「had + 과거분사」이므로 had done이 알맞다. do의 과거분사는 done이다."
+   },
+   {
+    "answer": "1",
+    "number": 28,
+    "options": [
+     "had borrowed",
+     "borrow"
+    ],
+    "question": "다음 괄호 안에서 알맞은 것을 고르시오.\n\nThe librarian returned the book we (had borrowed / borrow) the week before.",
+    "explanation": "주절의 동사(returned)보다 먼저 일어난 일이므로 과거완료 'had borrowed'가 알맞다."
+   },
+   {
+    "answer": "1",
+    "number": 29,
+    "options": [
+     "had",
+     "have"
+    ],
+    "question": "다음 괄호 안에서 알맞은 것을 고르시오.\n\nWe (had / have) walked more than 5 kilometers along the trail when the storm began.",
+    "explanation": "과거 시점(began)보다 이전에 일어난 일을 나타내므로 과거완료 'had'가 알맞다."
+   },
+   {
+    "answer": "4",
+    "number": 30,
+    "options": [
+     "완료",
+     "경험",
+     "계속",
+     "결과"
+    ],
+    "question": "다음 문장에서 과거완료의 용법을 구분하시오.\n\nHe had lost his keys, so he couldn't open the car.",
+    "explanation": "열쇠를 잃어버린 결과 차 문을 열 수 없었으므로 '결과' 용법이다."
+   }
+  ],
+  "answer_key": [
+   "5",
+   "had finished",
+   "had worked",
+   "had driven",
+   "had visited",
+   "had not left",
+   "had not arrived",
+   "had been found",
+   "had been studying",
+   "1 / 2",
+   "2 / 1",
+   "2 / 1",
+   "2 / 1",
+   "had finished",
+   "had worked",
+   "had driven",
+   "had lived",
+   "had not brought",
+   "had not come",
+   "had been repaired",
+   "had been studying",
+   "2",
+   "1",
+   "1",
+   "1",
+   "1",
+   "1",
+   "1",
+   "1",
+   "4"
+  ]
+ },
+ {
+  "id": "f2adc61e-702d-4701-9020-ca9168cfc4e8",
+  "title": "1과 문법 (4/6)",
+  "questions": [
+   {
+    "answer": "2",
+    "number": 1,
+    "options": [
+     "완료",
+     "경험",
+     "계속",
+     "결과"
+    ],
+    "question": "다음 문장에서 과거완료의 용법을 구분하시오.\n\nHe had climbed that mountain twice before he turned thirty.",
+    "explanation": "'twice'라는 횟수 표현과 함께 과거 이전의 경험을 나타내므로 '경험' 용법이다."
+   },
+   {
+    "answer": "1",
+    "number": 2,
+    "options": [
+     "완료",
+     "경험",
+     "계속",
+     "결과"
+    ],
+    "question": "다음 문장에서 과거완료의 용법을 구분하시오.\n\nI had completed the assignment before the teacher walked into the classroom.",
+    "explanation": "선생님이 들어오기 전에 과제를 막 끝낸 상태를 나타내므로 '완료' 용법이다."
+   },
+   {
+    "answer": "3",
+    "number": 3,
+    "options": [
+     "완료",
+     "경험",
+     "계속",
+     "결과"
+    ],
+    "question": "다음 문장에서 과거완료의 용법을 구분하시오.\n\nHe had practiced the piano for five years before entering the contest.",
+    "explanation": "'for five years'라는 기간 표현과 함께 계속된 상태를 나타내므로 '계속' 용법이다."
+   },
+   {
+    "answer": "1",
+    "number": 4,
+    "options": [
+     "완료",
+     "경험",
+     "계속",
+     "결과"
+    ],
+    "question": "다음 문장에서 과거완료의 용법을 구분하시오.\n\nWe had washed all the dishes before the guests came in.",
+    "explanation": "손님이 오기 전에 설거지를 막 끝낸 상태를 나타내므로 '완료' 용법이다."
+   },
+   {
+    "answer": "4",
+    "number": 5,
+    "options": [
+     "완료",
+     "경험",
+     "계속",
+     "결과"
+    ],
+    "question": "다음 문장에서 과거완료의 용법을 구분하시오.\n\nHe had left his umbrella at home and got completely wet.",
+    "explanation": "우산을 집에 두고 온 결과 흠뻑 젖었으므로 '결과' 용법이다."
+   },
+   {
+    "answer": "2",
+    "number": 6,
+    "options": [
+     "완료",
+     "경험",
+     "계속",
+     "결과"
+    ],
+    "question": "다음 문장에서 과거완료의 용법을 구분하시오.\n\nI had seen that movie once before it aired on TV.",
+    "explanation": "'once'라는 횟수 표현과 함께 과거 이전의 경험을 나타내므로 '경험' 용법이다."
+   },
+   {
+    "answer": "3",
+    "number": 7,
+    "options": [
+     "완료",
+     "경험",
+     "계속",
+     "결과"
+    ],
+    "question": "다음 문장에서 과거완료의 용법을 구분하시오.\n\nShe had worked at that company until she started her own business.",
+    "explanation": "'until'과 함께 과거의 어느 시점까지 계속된 상태를 나타내므로 '계속' 용법이다."
+   },
+   {
+    "answer": "4",
+    "number": 8,
+    "options": [
+     "완료",
+     "경험",
+     "계속",
+     "결과"
+    ],
+    "question": "다음 문장에서 과거완료의 용법을 구분하시오.\n\nShe had closed all the windows, so no fresh air could come in.",
+    "explanation": "창문을 모두 닫은 결과 신선한 공기가 들어올 수 없었으므로 '결과' 용법이다."
+   },
+   {
+    "answer": "had left",
+    "number": 9,
+    "question": "다음 밑줄 친 부분을 어법에 알맞게 고쳐 쓰시오. (단, 완료 시제를 사용할 것)\n\nHe missed the train because he <u>has left</u> home too late.",
+    "explanation": "기차를 놓친 과거 시점보다 더 이전에 집을 나선 것이므로 과거완료 'had left'로 고쳐야 한다."
+   },
+   {
+    "answer": "had been running",
+    "number": 10,
+    "question": "다음 밑줄 친 부분을 어법에 알맞게 고쳐 쓰시오. (단, 완료 시제를 사용할 것)\n\nShe felt exhausted because she <u>has running</u> for two hours without stopping.",
+    "explanation": "과거의 특정 시점 이전부터 계속 진행된 동작을 나타내므로 과거완료진행 시제 'had been running'이 알맞다."
+   },
+   {
+    "answer": "had not finished",
+    "number": 11,
+    "question": "다음 밑줄 친 부분을 어법에 알맞게 고쳐 쓰시오. (단, 완료 시제를 사용할 것)\n\nLucas was upset because he <u>didn't finished</u> his project on time.",
+    "explanation": "과거보다 더 이전에 일어난 일을 나타내므로 과거완료 부정형 'had not finished'가 알맞다."
+   },
+   {
+    "answer": "had been sold",
+    "number": 12,
+    "question": "다음 밑줄 친 부분을 어법에 알맞게 고쳐 쓰시오. (단, 완료 시제를 사용할 것)\n\nAll the tickets <u>are sold</u> before the concert even began.",
+    "explanation": "과거 시점 이전에 완료된 수동태 상황이므로 과거완료 수동태 'had been sold'가 알맞다."
+   },
+   {
+    "answer": "had been reading",
+    "number": 13,
+    "question": "다음 밑줄 친 부분을 어법에 알맞게 고쳐 쓰시오. (단, 완료 시제를 사용할 것)\n\nShe <u>was reading</u> for hours when her mother came home.",
+    "explanation": "과거의 한 시점까지 계속 진행되던 동작을 나타내므로 과거완료진행 시제 'had been reading'이 알맞다."
+   },
+   {
+    "answer": "had been watched",
+    "number": 14,
+    "question": "다음 밑줄 친 부분을 어법에 알맞게 고쳐 쓰시오. (단, 완료 시제를 사용할 것)\n\nThe movie <u>has watched</u> by millions before it won the award.",
+    "explanation": "과거 시점 이전에 완료된 수동태 상황이므로 과거완료 수동태 'had been watched'가 알맞다."
+   },
+   {
+    "answer": "had had",
+    "number": 15,
+    "question": "다음 밑줄 친 부분을 어법에 알맞게 고쳐 쓰시오. (단, 완료 시제를 사용할 것)\n\nHe <u>had been had</u> a small dog before he moved abroad.",
+    "explanation": "소유를 나타내는 have는 진행형으로 쓰지 않으므로 과거완료 'had had'가 알맞다."
+   },
+   {
+    "answer": "The train had already left when I arrived at the station.",
+    "number": 16,
+    "question": "다음 문장에서 어법상 어색한 곳을 찾아 고쳐 쓰시오.\n\nThe train <u>has</u> already left when I arrived at the station. ※ 틀린 부분을 고쳐서 올바른 문장으로 전부 쓰세요.",
+    "explanation": "과거 시점보다 더 이전에 일어난 일이므로 현재완료 has가 아니라 과거완료 had를 써야 한다.",
+    "acceptedAnswers": [
+     "The train had already left when I arrived at the station"
+    ]
+   },
+   {
+    "answer": "She had left the office before her boss arrived.",
+    "number": 17,
+    "question": "다음 문장에서 어법상 어색한 곳을 찾아 고쳐 쓰시오.\n\nShe had <u>leave</u> the office before her boss arrived. ※ 틀린 부분을 고쳐서 올바른 문장으로 전부 쓰세요.",
+    "explanation": "과거완료는 'had + 과거분사' 형태이므로 leave를 left로 고쳐야 한다.",
+    "acceptedAnswers": [
+     "She had left the office before her boss arrived"
+    ]
+   },
+   {
+    "answer": "We had lost our keys, so we could not enter the house.",
+    "number": 18,
+    "question": "다음 문장에서 어법상 어색한 곳을 찾아 고쳐 쓰시오.\n\nWe <u>had been lost</u> our keys, so we could not enter the house. ※ 틀린 부분을 고쳐서 올바른 문장으로 전부 쓰세요.",
+    "explanation": "능동의 의미이므로 수동태 형태 'had been lost'가 아니라 과거완료 능동형 'had lost'를 써야 한다.",
+    "acceptedAnswers": [
+     "We had lost our keys, so we could not enter the house"
+    ]
+   },
+   {
+    "answer": "The players had won three matches and felt confident.",
+    "number": 19,
+    "question": "다음 문장에서 어법상 어색한 곳을 찾아 고쳐 쓰시오.\n\nThe players <u>has</u> won three matches and felt confident. ※ 틀린 부분을 고쳐서 올바른 문장으로 전부 쓰세요.",
+    "explanation": "과거 시제 felt와 시제를 맞추어 그 이전의 일을 나타내는 과거완료 had를 써야 하며, 주어가 복수이므로 has도 부적절하다.",
+    "acceptedAnswers": [
+     "The players had won three matches and felt confident"
+    ]
+   },
+   {
+    "answer": "She had never eaten Thai food until she traveled to Bangkok.",
+    "number": 20,
+    "question": "다음 문장에서 어법상 어색한 곳을 찾아 고쳐 쓰시오.\n\nShe had never <u>eating</u> Thai food until she traveled to Bangkok. ※ 틀린 부분을 고쳐서 올바른 문장으로 전부 쓰세요.",
+    "explanation": "과거완료는 'had + 과거분사' 형태이므로 eating을 eaten으로 고쳐야 한다.",
+    "acceptedAnswers": [
+     "She had never eaten Thai food until she traveled to Bangkok"
+    ]
+   },
+   {
+    "answer": "The books had been arranged on the shelf before the guests came.",
+    "number": 21,
+    "question": "다음 문장에서 어법상 어색한 곳을 찾아 고쳐 쓰시오.\n\nThe books had been <u>arrange</u> on the shelf before the guests came. ※ 틀린 부분을 고쳐서 올바른 문장으로 전부 쓰세요.",
+    "explanation": "과거완료 수동태는 'had been + 과거분사' 형태이므로 arrange를 arranged로 고쳐야 한다.",
+    "acceptedAnswers": [
+     "The books had been arranged on the shelf before the guests came"
+    ]
+   },
+   {
+    "answer": "I had known him for ten years before we started working together.",
+    "number": 22,
+    "question": "다음 문장에서 어법상 어색한 곳을 찾아 고쳐서 올바른 문장으로 전부 쓰세요.\n\nI had knew him for ten years before we started working together. ※ 틀린 부분을 고쳐서 올바른 문장으로 전부 쓰세요.",
+    "explanation": "과거완료(had + 과거분사)는 had 뒤에 과거분사가 와야 하므로 knew를 known으로 고쳐야 한다.",
+    "acceptedAnswers": [
+     "I had known him for ten years before we started working together"
+    ]
+   },
+   {
+    "answer": "All the tickets had been sold out when we reached the box office.",
+    "number": 23,
+    "question": "다음 문장에서 어법상 어색한 곳을 찾아 고쳐서 올바른 문장으로 전부 쓰세요.\n\nAll the tickets had been selling out when we reached the box office. ※ 틀린 부분을 고쳐서 올바른 문장으로 전부 쓰세요.",
+    "explanation": "'표가 매진되어 있었다'는 수동의 의미이므로 과거완료 수동태 had been + 과거분사가 되어야 한다. selling을 sold로 고쳐야 한다.",
+    "acceptedAnswers": [
+     "All the tickets had been sold out when we reached the box office"
+    ]
+   },
+   {
+    "answer": "I had lost my umbrella at the bus stop, so I got soaked in the rain.",
+    "number": 24,
+    "question": "다음 문장에서 어법상 어색한 곳을 찾아 고쳐서 올바른 문장으로 전부 쓰세요.\n\nI had been lost my umbrella at the bus stop, so I got soaked in the rain. ※ 틀린 부분을 고쳐서 올바른 문장으로 전부 쓰세요.",
+    "explanation": "'우산을 잃어버렸었다'는 능동의 완료 의미이므로 과거완료 had lost가 되어야 한다. had been lost를 had lost로 고쳐야 한다.",
+    "acceptedAnswers": [
+     "I had lost my umbrella at the bus stop, so I got soaked in the rain"
+    ]
+   },
+   {
+    "answer": "We had been washing the dishes for a while when Dad walked in.",
+    "number": 25,
+    "question": "다음 문장에서 어법상 어색한 곳을 찾아 고쳐서 올바른 문장으로 전부 쓰세요.\n\nWe had been washed the dishes for a while when Dad walked in. ※ 틀린 부분을 고쳐서 올바른 문장으로 전부 쓰세요.",
+    "explanation": "'~해 오고 있던 중이었다'는 과거완료진행형 had been + -ing이 되어야 한다. had been washed를 had been washing으로 고쳐야 한다.",
+    "acceptedAnswers": [
+     "We had been washing the dishes for a while when Dad walked in"
+    ]
+   },
+   {
+    "answer": "had read",
+    "number": 26,
+    "question": "다음 우리말과 같은 뜻이 되도록 괄호 안에 주어진 단어를 사용하여 문장을 완성하시오.\n\n그녀는 그녀의 친구가 그 편지를 보여주기 전에, 그 편지를 이미 읽었었다.\n\nShe _______________ _______________ the letter before her friend showed it to her. (read)",
+    "explanation": "과거의 어느 시점보다 더 이전에 완료된 일이므로 과거완료 had read를 쓴다."
+   },
+   {
+    "answer": "had written",
+    "number": 27,
+    "question": "다음 우리말과 같은 뜻이 되도록 괄호 안에 주어진 단어를 사용하여 문장을 완성하시오.\n\n그 작가는 자신이 오년 전에 썼었던 소설을 다시 발견했다.\n\nThe writer rediscovered a novel that he _______________ _______________ five years before. (write)",
+    "explanation": "과거의 발견보다 더 이전에 완료된 일이므로 과거완료 had written을 쓴다."
+   },
+   {
+    "answer": "had been locked",
+    "number": 28,
+    "question": "다음 우리말과 같은 뜻이 되도록 괄호 안에 주어진 단어를 사용하여 문장을 완성하시오.\n\n태풍이 오기 전에 모든 문들은 잠겨 있었다.\n\nAll of the doors _______________ _______________ _______________ before the typhoon came. (lock)",
+    "explanation": "'잠겨 있었다'는 과거완료 수동태이므로 had been + 과거분사 형태인 had been locked를 쓴다."
+   },
+   {
+    "answer": "had not known",
+    "number": 29,
+    "question": "다음 우리말과 같은 뜻이 되도록 괄호 안에 주어진 단어를 사용하여 문장을 완성하시오.\n\n그 결과가 발표되기 전까지 우리는 아무것도 알지 못했다.\n\nWe _______________ _______________ _______________ anything until the results were released. (not, know)",
+    "explanation": "과거의 어느 시점 이전까지 이어진 상태의 부정이므로 과거완료 부정 had not known을 쓴다."
+   },
+   {
+    "answer": "had been served",
+    "number": 30,
+    "question": "다음 우리말과 같은 뜻이 되도록 괄호 안에 주어진 단어를 사용하여 문장을 완성하시오.\n\n내가 도착할 즈음에는 그 케이크가 이미 제공되어 있었다.\n\nThe cake _______________ _______________ _______________ by the time I arrived. (serve)",
+    "explanation": "과거의 어느 시점 이전에 완료된 수동의 상태이므로 과거완료 수동태 had been served를 쓴다."
+   }
+  ],
+  "answer_key": [
+   "2",
+   "1",
+   "3",
+   "1",
+   "4",
+   "2",
+   "3",
+   "4",
+   "had left",
+   "had been running",
+   "had not finished",
+   "had been sold",
+   "had been reading",
+   "had been watched",
+   "had had",
+   "The train had already left when I arrived at the station.",
+   "She had left the office before her boss arrived.",
+   "We had lost our keys, so we could not enter the house.",
+   "The players had won three matches and felt confident.",
+   "She had never eaten Thai food until she traveled to Bangkok.",
+   "The books had been arranged on the shelf before the guests came.",
+   "I had known him for ten years before we started working together.",
+   "All the tickets had been sold out when we reached the box office.",
+   "I had lost my umbrella at the bus stop, so I got soaked in the rain.",
+   "We had been washing the dishes for a while when Dad walked in.",
+   "had read",
+   "had written",
+   "had been locked",
+   "had not known",
+   "had been served"
+  ]
+ },
+ {
+  "id": "b9bcc914-b4d2-4847-ad91-df4cbcf7f96d",
+  "title": "1과 문법 (5/6)",
+  "questions": [
+   {
+    "answer": "had been running",
+    "number": 1,
+    "question": "다음 우리말과 같은 뜻이 되도록 괄호 안에 주어진 단어를 사용하여 문장을 완성하시오.\n\n갑자기 눈이 내리기 전까지 아이들은 공원에서 뛰어놀고 있었다.\n\nThe children _______________ _______________ _______________ in the park until it suddenly started to snow. (run)",
+    "explanation": "과거의 어느 시점까지 계속 진행되던 동작이므로 과거완료진행형 had been running을 쓴다."
+   },
+   {
+    "answer": "had been using",
+    "number": 2,
+    "question": "다음 우리말과 같은 뜻이 되도록 괄호 안에 주어진 단어를 사용하여 문장을 완성하시오.\n\n그는 고장이 나기 전까지 그 노트북을 3년간 사용해 오고 있었다.\n\nHe _______________ _______________ _______________ the laptop for three years before it stopped working. (use)",
+    "explanation": "과거의 어느 시점까지 계속 이어진 동작이므로 과거완료진행형 had been using을 쓴다."
+   },
+   {
+    "answer": "had been delivered",
+    "number": 3,
+    "question": "다음 우리말과 같은 뜻이 되도록 괄호 안에 주어진 단어를 사용하여 문장을 완성하시오.\n\n그 편지는 그가 도착하기 전에 이미 배달된 상태였다.\n\nThe letter _______________ already _______________ _______________ before he arrived. (deliver)",
+    "explanation": "과거의 어느 시점 이전에 완료된 수동의 상태이므로 과거완료 수동태 had been delivered를 쓴다."
+   },
+   {
+    "answer": "had never learned",
+    "number": 4,
+    "question": "다음 우리말과 같은 뜻이 되도록 괄호 안에 주어진 단어를 사용하여 문장을 완성하시오.\n\n그녀는 그 나라를 방문하기 전에는 그 언어를 한 번도 배워 본 적이 없었다.\n\nShe _______________ _______________ _______________ the language before she visited the country. (never, learn)",
+    "explanation": "과거의 특정 시점(방문하기 전) 이전에 완료된 경험을 나타내므로 과거완료 'had + p.p.'를 쓰고, 부정 부사 never는 had와 과거분사 사이에 위치한다."
+   },
+   {
+    "answer": "had not been closed",
+    "number": 5,
+    "question": "다음 우리말과 같은 뜻이 되도록 괄호 안에 주어진 단어를 사용하여 문장을 완성하시오.\n\n비가 시작되기 전까지 그 창문들은 닫혀 있지 않았다.\n\nThe windows _______________ _______________ _______________ _______________ before the rain started. (not, close)",
+    "explanation": "과거완료 수동태는 'had + been + p.p.'이며, 부정은 had 다음에 not을 넣어 'had not been closed'가 된다."
+   },
+   {
+    "answer": "She had drunk some coffee before she started the meeting.",
+    "number": 6,
+    "question": "다음 두 문장을 과거완료 시제와 괄호 안에 주어진 접속사를 사용하여 한 문장으로 쓰시오. ※ 완전한 문장으로 쓰시오.\n\nShe drank some coffee. She started the meeting. (before)",
+    "explanation": "먼저 일어난 일(커피를 마신 것)에 과거완료 'had + p.p.'를 쓰고, 나중에 일어난 일에는 과거 시제를 쓴다.",
+    "acceptedAnswers": [
+     "She had drunk some coffee before she started the meeting"
+    ]
+   },
+   {
+    "answer": "The movie had begun by the time we arrived at the theater.",
+    "number": 7,
+    "question": "다음 두 문장을 과거완료 시제와 괄호 안에 주어진 접속사를 사용하여 한 문장으로 쓰시오. ※ 완전한 문장으로 쓰시오.\n\nThe movie began. We arrived at the theater. (by the time)",
+    "explanation": "by the time 이전에 이미 완료된 일에 과거완료를 쓴다. begin의 과거분사는 begun이다.",
+    "acceptedAnswers": [
+     "The movie had begun by the time we arrived at the theater"
+    ]
+   },
+   {
+    "answer": "They had completed the report before they left the office.",
+    "number": 8,
+    "question": "다음 두 문장을 과거완료 시제와 괄호 안에 주어진 접속사를 사용하여 한 문장으로 쓰시오. ※ 완전한 문장으로 쓰시오.\n\nThey completed the report. They left the office. (before)",
+    "explanation": "먼저 일어난 일(보고서 완료)에 과거완료 'had + p.p.'를 쓰고, 나중에 일어난 일에는 과거 시제를 쓴다.",
+    "acceptedAnswers": [
+     "They had completed the report before they left the office"
+    ]
+   },
+   {
+    "answer": "After he had finished his homework, he watched TV.",
+    "number": 9,
+    "question": "다음 두 문장을 과거완료 시제와 괄호 안에 주어진 접속사를 사용하여 한 문장으로 쓰시오. ※ 완전한 문장으로 쓰시오.\n\nHe finished his homework. He watched TV. (after)",
+    "explanation": "after 뒤에 먼저 일어난 일을 과거완료로 쓰고, 나중에 일어난 일에는 과거 시제를 쓴다.",
+    "acceptedAnswers": [
+     "After he had finished his homework, he watched TV"
+    ]
+   },
+   {
+    "answer": "The classroom wall had been painted before the open house.",
+    "number": 10,
+    "question": "다음 주어진 문장을 수동태로 바꾸어 쓰시오. ※ 완전한 문장으로 쓰시오.\n\nWe had painted the classroom wall before the open house.",
+    "explanation": "과거완료 능동태 'had + p.p.'를 수동태로 바꾸면 'had + been + p.p.'가 된다.",
+    "acceptedAnswers": [
+     "The classroom wall had been painted before the open house"
+    ]
+   },
+   {
+    "answer": "The printer had been repaired before the meeting started.",
+    "number": 11,
+    "question": "다음 주어진 문장을 수동태로 바꾸어 쓰시오. ※ 완전한 문장으로 쓰시오.\n\nShe had repaired the printer before the meeting started.",
+    "explanation": "과거완료 수동태는 'had been + p.p.'로 나타내며, 행위자 She는 생략한다.",
+    "acceptedAnswers": [
+     "The printer had been repaired before the meeting started"
+    ]
+   },
+   {
+    "answer": "All the boxes had been loaded before the truck arrived.",
+    "number": 12,
+    "question": "다음 주어진 문장을 수동태로 바꾸어 쓰시오. ※ 완전한 문장으로 쓰시오.\n\nThey had loaded all the boxes before the truck arrived.",
+    "explanation": "목적어 all the boxes를 주어로 하여 과거완료 수동태 'had been + p.p.' 형태로 바꾼다.",
+    "acceptedAnswers": [
+     "All the boxes had been loaded before the truck arrived"
+    ]
+   },
+   {
+    "answer": "All the problems of the exam had been solved before the bell rang.",
+    "number": 13,
+    "question": "다음 주어진 문장을 수동태로 바꾸어 쓰시오. ※ 완전한 문장으로 쓰시오.\n\nShe had solved all the problems of the exam before the bell rang.",
+    "explanation": "목적어 all the problems of the exam을 주어로 하고 동사를 'had been + p.p.'로 바꾼다.",
+    "acceptedAnswers": [
+     "All the problems of the exam had been solved before the bell rang"
+    ]
+   },
+   {
+    "answer": "The chairs had been arranged neatly before the concert.",
+    "number": 14,
+    "question": "다음 주어진 문장을 수동태로 바꾸어 쓰시오. ※ 완전한 문장으로 쓰시오.\n\nThe volunteers had arranged the chairs neatly before the concert.",
+    "explanation": "목적어 the chairs를 주어로 하여 과거완료 수동태 'had been + p.p.'로 바꾸고, 부사 neatly는 그대로 둔다.",
+    "acceptedAnswers": [
+     "The chairs had been arranged neatly before the concert"
+    ]
+   },
+   {
+    "answer": "She had already finished dinner",
+    "number": 15,
+    "question": "다음 주어진 말을 바르게 배열하여 문장을 완성하시오. (주어로 시작할 것)\n\n(already finished / had / dinner / She) before her friends came over.",
+    "explanation": "과거완료 문장에서 부사 already는 had와 과거분사 사이에 위치하므로 'She had already finished dinner' 순서가 된다."
+   },
+   {
+    "answer": "She had read the book",
+    "number": 16,
+    "question": "다음 주어진 말을 바르게 배열하여 문장을 완성하시오. (주어로 시작할 것)\n\n(read / had / she / book / the) twice before she lent it to me.",
+    "explanation": "과거완료 시제로, '주어(She) + had + 과거분사(read) + 목적어(the book)' 어순으로 배열합니다. 책을 빌려주기 전에 이미 읽었던 일을 나타냅니다."
+   },
+   {
+    "answer": "The wall had been painted",
+    "number": 17,
+    "question": "다음 주어진 말을 바르게 배열하여 문장을 완성하시오. (주어로 시작할 것)\n\n(been / had / painted / the wall) when we entered the classroom.",
+    "explanation": "과거완료 수동태로, '주어(The wall) + had + been + 과거분사(painted)' 어순으로 배열합니다. 교실에 들어오기 전에 벽이 칠해져 있던 상태를 나타냅니다."
+   },
+   {
+    "answer": "The door had been locked up",
+    "number": 18,
+    "question": "다음 주어진 말을 바르게 배열하여 문장을 완성하시오. (주어로 시작할 것)\n\n(locked / been / had / the door / up) before the show started.",
+    "explanation": "과거완료 수동태로, '주어(The door) + had + been + 과거분사(locked) + up' 어순으로 배열합니다. 공연이 시작되기 전에 문이 잠겨 있던 일을 나타냅니다."
+   },
+   {
+    "answer": "She had been studying for two hours",
+    "number": 19,
+    "question": "다음 주어진 말을 바르게 배열하여 문장을 완성하시오. (주어로 시작할 것)\n\n(been / two hours / she / for / studying / had) before she went to sleep.",
+    "explanation": "과거완료진행 시제로, '주어(She) + had + been + 현재분사(studying) + 기간(for two hours)' 어순으로 배열합니다. 잠들기 전까지 계속 공부하고 있던 일을 나타냅니다."
+   },
+   {
+    "answer": "She had been feeling tired all day",
+    "number": 20,
+    "question": "다음 주어진 말을 바르게 배열하여 문장을 완성하시오. (주어로 시작할 것)\n\n(tired / feeling / had / day / all / been / she) before she left work early.",
+    "explanation": "과거완료진행 시제로, '주어(She) + had + been + 현재분사(feeling) + 형용사(tired) + all day' 어순으로 배열합니다. 조퇴하기 전까지 계속 피곤함을 느끼고 있던 일을 나타냅니다."
+   },
+   {
+    "answer": "My cousin had used the library",
+    "number": 21,
+    "question": "다음 우리말과 같은 뜻이 되도록 주어진 단어를 배열하여 문장을 완성하시오.\n\n내 사촌은 그 도서관이 이전하기 전에 이용했었다.\n\n(cousin / had / library / used / my / the) before it moved.",
+    "explanation": "과거완료 시제로, '주어(My cousin) + had + 과거분사(used) + 목적어(the library)' 어순으로 배열합니다. 도서관이 이전하기 전에 이미 이용했던 일을 나타냅니다."
+   },
+   {
+    "answer": "The guests had not drunk anything",
+    "number": 22,
+    "question": "다음 우리말과 같은 뜻이 되도록 주어진 단어를 배열하여 문장을 완성하시오.\n\n그 손님들은 저녁시간 전까지 아무것도 마시지 않았었다.\n\n(anything / drunk / not / had / the guests) before dinnertime.",
+    "explanation": "과거완료 부정문으로, '주어(The guests) + had + not + 과거분사(drunk) + anything' 어순으로 배열합니다. 저녁시간 전까지 아무것도 마시지 않은 상태를 나타냅니다."
+   },
+   {
+    "answer": "The players had been preparing for the game",
+    "number": 23,
+    "question": "다음 우리말과 같은 뜻이 되도록 주어진 단어를 배열하여 문장을 완성하시오.\n\n코치가 도착했을 때 선수들은 경기를 준비하는 중이었다.\n\n(had / preparing / the players / for / the game / been) when the coach arrived.",
+    "explanation": "과거완료진행 시제로, '주어(The players) + had + been + 현재분사(preparing) + for the game' 어순으로 배열합니다. 코치가 도착하기 전까지 계속 경기를 준비하고 있던 일을 나타냅니다."
+   },
+   {
+    "answer": "Several candles had been lit",
+    "number": 24,
+    "question": "다음 우리말과 같은 뜻이 되도록 주어진 단어를 배열하여 문장을 완성하시오.\n\n관객들이 들어오기 전에 여러 개의 촛불이 켜져 있었다.\n\n(candles / been / lit / had / several) before the audience came in.",
+    "explanation": "과거완료 수동태로, '주어(Several candles) + had + been + 과거분사(lit)' 어순으로 배열합니다. 관객들이 들어오기 전에 촛불이 켜져 있던 상태를 나타냅니다."
+   },
+   {
+    "answer": "3",
+    "number": 25,
+    "options": [
+     "is – setting",
+     "has – set",
+     "had – set",
+     "had – been set",
+     "has – been setting"
+    ],
+    "question": "다음 빈칸 ⓐ, ⓑ에 들어갈 말이 차례대로 알맞게 짝지어진 것은?\n\nBy the time we arrived, the waiter ⓐ____________ already ⓑ____________ the table.",
+    "explanation": "'By the time we arrived(우리가 도착했을 때)'라는 과거 시점보다 앞서 완료된 능동 동작이므로 과거완료 능동태 'had set'이 알맞습니다. 웨이터가 테이블을 차린 능동적 행위이므로 수동태(had been set)는 부적절합니다."
+   },
+   {
+    "answer": "4",
+    "number": 26,
+    "options": [
+     "finish",
+     "is finishing",
+     "was finished",
+     "had finished",
+     "had been finished"
+    ],
+    "question": "다음 밑줄 친 부분을 알맞게 고친 것은?\n\nMy sister <u>has finished</u> her homework before the guests came.",
+    "explanation": "'before the guests came(손님들이 오기 전에)'라는 과거 시점보다 먼저 일어난 일이므로 과거완료 'had finished'로 고쳐야 합니다. 여동생이 숙제를 끝낸 능동 동작이므로 수동태는 부적절합니다."
+   },
+   {
+    "answer": "4",
+    "number": 27,
+    "options": [
+     "completes",
+     "has completed",
+     "is completing",
+     "had completed",
+     "had been completed"
+    ],
+    "question": "다음 빈칸에 공통으로 들어갈 말로 알맞은 것은?\n\n• Noah ____________________ the report before the manager reviewed it.\n• Emma said that she ____________________ her project just before the meeting.",
+    "explanation": "두 문장 모두 과거 시점(reviewed, said)보다 앞서 완료된 능동 동작을 나타내므로 과거완료 'had completed'가 공통으로 알맞습니다. 능동 동작이므로 수동태(had been completed)는 부적절합니다."
+   },
+   {
+    "answer": "2",
+    "number": 28,
+    "options": [
+     "I had never eaten sushi before that dinner.",
+     "She has been finish the report before the meeting started.",
+     "He had learned Spanish before he traveled to Mexico.",
+     "The windows had been cleaned before the guests arrived.",
+     "They had been walking for two hours when the rain began."
+    ],
+    "question": "다음 중 밑줄 친 부분이 어법상 어색한 것은?",
+    "explanation": "②는 완료 시제와 수동태가 혼동된 형태로 'had finished'가 되어야 하며, 'has been finish'는 문법적으로 성립하지 않는다. before가 이끄는 과거의 두 사건에서 먼저 일어난 일은 과거완료(had p.p.)로 표현한다."
+   },
+   {
+    "answer": "She had checked the map before she started the hike.",
+    "number": 29,
+    "question": "다음 두 문장을 접속사 before를 사용하여 완료 시제의 한 문장으로 쓰시오. (필요시 변형할 것) ※ 완전한 문장으로 쓰시오.\n\nShe checked the map. She started the hike.",
+    "explanation": "두 과거 사건 중 먼저 일어난 일(지도를 확인함)을 과거완료(had checked)로, 나중 일을 과거시제로 나타낸다.",
+    "acceptedAnswers": [
+     "She had checked the map before she started the hike"
+    ]
+   },
+   {
+    "answer": "4",
+    "number": 30,
+    "options": [
+     "never see",
+     "was never",
+     "am not seeing",
+     "have never seen",
+     "had never seen"
+    ],
+    "question": "다음 대화의 빈칸에 들어갈 말로 알맞은 것은?\n\nA: Did you like the concert last night?\nB: Yes, it was amazing. I ____________________________ a live performance before.",
+    "explanation": "'before'와 함께 지금까지의 경험을 나타내는 현재완료 'have never seen'이 적절하다. 콘서트를 즐긴 현재 시점의 경험을 말하고 있다."
+   }
+  ],
+  "answer_key": [
+   "had been running",
+   "had been using",
+   "had been delivered",
+   "had never learned",
+   "had not been closed",
+   "She had drunk some coffee before she started the meeting.",
+   "The movie had begun by the time we arrived at the theater.",
+   "They had completed the report before they left the office.",
+   "After he had finished his homework, he watched TV.",
+   "The classroom wall had been painted before the open house.",
+   "The printer had been repaired before the meeting started.",
+   "All the boxes had been loaded before the truck arrived.",
+   "All the problems of the exam had been solved before the bell rang.",
+   "The chairs had been arranged neatly before the concert.",
+   "She had already finished dinner",
+   "She had read the book",
+   "The wall had been painted",
+   "The door had been locked up",
+   "She had been studying for two hours",
+   "She had been feeling tired all day",
+   "My cousin had used the library",
+   "The guests had not drunk anything",
+   "The players had been preparing for the game",
+   "Several candles had been lit",
+   "3",
+   "4",
+   "4",
+   "2",
+   "She had checked the map before she started the hike.",
+   "4"
+  ]
+ },
+ {
+  "id": "78da51ca-8e10-4881-accd-e0f803d5f514",
+  "title": "1과 문법 (6/6)",
+  "questions": [
+   {
+    "answer": "3",
+    "number": 1,
+    "options": [
+     "learn",
+     "have learned",
+     "had learned",
+     "have been learned",
+     "had been learned"
+    ],
+    "question": "다음 두 문장이 같은 뜻이 되도록 빈칸에 들어갈 말로 알맞은 것은?\n\nWe moved to Busan in 2019. We had learned to swim before then.\n= We ____________________ to swim before we moved to Busan in 2019.",
+    "explanation": "과거(2019년 이사)보다 더 이전에 일어난 일(수영을 배움)을 나타내므로 과거완료 'had learned'가 알맞다."
+   },
+   {
+    "answer": "3",
+    "number": 2,
+    "options": [
+     "All the dishes had washed before the guests arrived.",
+     "All the dishes have washed before the guests arrived.",
+     "All the dishes had been washed before the guests arrived.",
+     "All the dishes had been washing before the guests arrived.",
+     "All the dishes have been washed before the guests arrived."
+    ],
+    "question": "다음 우리말을 알맞게 영작한 것은?\n\n손님들이 도착하기 전에 모든 접시가 씻겨 있었다.",
+    "explanation": "과거의 특정 시점(손님 도착)보다 먼저 완료된 수동의 상태를 나타내므로 과거완료 수동태 'had been washed'가 알맞다."
+   },
+   {
+    "answer": "I had already finished homework",
+    "number": 3,
+    "question": "[보기] I had already finished homework / She had been feeling tired all day / She had been studying for two hours / She had read the book / The door had been locked / The wall had been painted\n\n다음 주어진 말을 바르게 배열하여 문장을 완성하시오. (주어로 시작할 것)\n\n______________________________________________________ before my dad got home.",
+    "explanation": "과거완료(had already finished)로 아빠가 집에 오기 전에 이미 완료된 일을 나타낸다."
+   },
+   {
+    "answer": "She had read the book",
+    "number": 4,
+    "question": "[보기] I had already finished homework / She had been feeling tired all day / She had been studying for two hours / She had read the book / The door had been locked / The wall had been painted\n\n다음 주어진 말을 바르게 배열하여 문장을 완성하시오. (주어로 시작할 것)\n\n______________________________________________________ twice before I lent it to you.",
+    "explanation": "과거완료(had read)로 책을 빌려주기 전에 이미 두 번 읽었던 일을 나타낸다."
+   },
+   {
+    "answer": "The wall had been painted",
+    "number": 5,
+    "question": "[보기] I had already finished homework / She had been feeling tired all day / She had been studying for two hours / She had read the book / The door had been locked / The wall had been painted\n\n다음 주어진 말을 바르게 배열하여 문장을 완성하시오. (주어로 시작할 것)\n\n______________________________________________________ when we entered the room.",
+    "explanation": "과거완료 수동태(had been painted)로 우리가 들어왔을 때 이미 완료되어 있던 상태를 나타낸다."
+   },
+   {
+    "answer": "The door had been locked",
+    "number": 6,
+    "question": "[보기] I had already finished homework / She had been feeling tired all day / She had been studying for two hours / She had read the book / The door had been locked / The wall had been painted\n\n다음 주어진 말을 바르게 배열하여 문장을 완성하시오. (주어로 시작할 것)\n\n______________________________________________________ before the store closed.",
+    "explanation": "과거완료 수동태(had been locked)로 가게가 문을 닫기 전에 완료된 수동의 상태를 나타낸다."
+   },
+   {
+    "answer": "She had been studying for two hours",
+    "number": 7,
+    "question": "[보기] I had already finished homework / She had been feeling tired all day / She had been studying for two hours / She had read the book / The door had been locked / The wall had been painted\n\n다음 주어진 말을 바르게 배열하여 문장을 완성하시오. (주어로 시작할 것)\n\n______________________________________________________ before she took a break.",
+    "explanation": "과거완료 진행형(had been studying)으로 쉬기 전까지 계속되던 동작을 나타낸다."
+   },
+   {
+    "answer": "She had been feeling tired all day",
+    "number": 8,
+    "question": "[보기] I had already finished homework / She had been feeling tired all day / She had been studying for two hours / She had read the book / The door had been locked / The wall had been painted\n\n다음 주어진 말을 바르게 배열하여 문장을 완성하시오. (주어로 시작할 것)\n\n______________________________________________________ before she left early.",
+    "explanation": "과거완료 진행형(had been feeling)으로 조퇴하기 전까지 하루 종일 지속된 상태를 나타낸다."
+   },
+   {
+    "answer": "Some injured turtles have washed up on the shore and been taken to the shelter.",
+    "number": 9,
+    "question": "[보기] some, injure, have, wash, up, the shore, take\n\n다음 우리말을 주어진 단어를 사용하여 알맞게 영작하시오. ※ 완전한 문장으로 쓰시오.\n\n부상당한 몇몇 거북이들이 해안으로 밀려와서 보호소로 옮겨졌다.\n\n_____________ _____________ _____________ _____________ _____________ _____________ _____________ _____________\n_____________ and _____________ _____________ _____________ _____________ _____________.",
+    "explanation": "현재완료(have washed up)와 현재완료 수동태(have been taken → and 뒤에서 been taken)를 병렬로 연결한 문장이다. injured는 과거분사가 형용사로 쓰여 명사 turtles를 수식한다.",
+    "acceptedAnswers": [
+     "Some injured turtles have washed up on the shore and been taken to the shelter"
+    ]
+   },
+   {
+    "answer": "Three lion cubs have been saved after having been kept illegally in a small cage at a circus for many years.",
+    "number": 10,
+    "question": "[보기] three, cub, save, have, keep, illegally\n\n다음 우리말을 주어진 단어를 사용하여 알맞게 영작하시오. ※ 완전한 문장으로 쓰시오.\n\n이 세 마리 새끼 사자는 수년간 서커스단의 좁은 우리 안에서 불법으로 사육된 후에 구조되었다.\n\n_____________ _____________ _____________ _____________ _____________ _____________ after _____________ _____________\n_____________ _____________ _____________ in a small cage at a circus for many years.",
+    "explanation": "완료 수동태 'have been saved'와 완료 수동 동명사 'having been kept'를 사용하여 구조된 것보다 사육된 것이 먼저임을 나타낸다.",
+    "acceptedAnswers": [
+     "Three lion cubs have been saved after having been kept illegally in a small cage at a circus for many years"
+    ]
+   },
+   {
+    "answer": "I had passed my teenage years",
+    "number": 11,
+    "question": "[보기] pass, teenage years\n\n다음 우리말을 주어진 단어를 사용하여 알맞게 영작하시오.\n\n나는 십 대 시절을 보냈던 스코틀랜드의 에든버러로 돌아왔다.\n\nI returned to Edinburgh, Scotland, where _____________ _____________ _____________ \n_____________  _____________.",
+    "explanation": "돌아온 시점보다 앞선 과거의 일을 나타내므로 과거완료 'had passed'를 사용한다."
+   },
+   {
+    "answer": "I had never felt before",
+    "number": 12,
+    "question": "[보기] never, feel, before\n\n다음 우리말을 주어진 단어를 사용하여 알맞게 영작하시오.\n\n그것은 내가 이전에 결코 느껴 보지 못했던 방식으로 나의 상상력을 자극했다.\n\nIt sparked my imagination in a way that _____________ _____________ _____________ _____________ _____________.",
+    "explanation": "과거 시점보다 이전의 경험을 나타내므로 과거완료 'had never felt'를 사용한다."
+   },
+   {
+    "answer": "The wolf had torn a chunk out of his leg",
+    "number": 13,
+    "question": "[보기] the wolf, tear, a chunk, leg\n\n다음 우리말을 주어진 단어를 사용하여 알맞게 영작하시오.\n\n그 늑대는 그의 다리 중 하나를 물어뜯고 그를 지켜보고 있었다.\n\n_____________ _____________ _____________ _____________ _____________ _____________ _____________ _____________\n_____________ _____________ _____________ and was watching him.",
+    "explanation": "지켜보던 과거 시점보다 앞선 동작이므로 과거완료 'had torn'을 사용한다."
+   },
+   {
+    "answer": "I noticed that the cut had closed up",
+    "number": 14,
+    "question": "[보기] notice, that, the cut, close up\n\n다음 우리말을 주어진 단어를 사용하여 알맞게 영작하시오.\n\n잠시 후, 나는 그 베인 상처가 아문 것을 알아차렸다.\n\nA short while later, _____________ _____________ _____________ _____________ _____________ _____________ _____________.",
+    "explanation": "알아차린 시점보다 앞서 상처가 아문 것이므로 과거완료 'had closed up'을 사용한다."
+   },
+   {
+    "answer": "I was glad to learn that he had made it",
+    "number": 15,
+    "question": "[보기] glad, learn, that, make it\n\n다음 우리말을 주어진 단어를 사용하여 알맞게 영작하시오.\n\n다음날, 나는 그가 살아남았다는 것을 알고 기뻤다.\n\nThe next day, _____________ _____________ _____________ _____________ _____________ _____________ _____________\n_____________ _____________.",
+    "explanation": "'be glad to+동사원형' 구문과 이전에 살아남은 것을 나타내는 과거완료 'had made it'을 사용한다."
+   },
+   {
+    "answer": "it had picked up a piece of shell and held it against itself",
+    "number": 16,
+    "question": "[보기] pick up, a piece, shell, hold, against\n\n다음 우리말을 주어진 단어를 사용하여 알맞게 영작하시오.\n\n사실 그것은 조개껍데기 한 조각을 집어 들어 그것을 자신의 몸에 대고 작은 틈새로 나를 지켜보고 있었다.\n\nIn fact, _____________ _____________ _____________ _____________ _____________ _____________ _____________, \n_____________ _____________ _____________ _____________, and was watching me out of a little gap.",
+    "explanation": "지켜보던 과거보다 앞선 동작이므로 과거완료 'had picked up ... and held'를 사용한다."
+   },
+   {
+    "answer": "earlier training had not made her ready",
+    "number": 17,
+    "question": "[보기] earlier, training, ready\n\n다음 우리말을 주어진 단어를 사용하여 알맞게 영작하시오.\n\nMaria의 이전의 훈련은 그녀의 새 팀에서의 생활에 (그녀가 잘 적응하도록) 그녀를 제대로 준비시켜 주지 못했다.\n\nMaria's _____________ _____________ _____________ _____________ _____________ _____________ well for life on her new \nteam.",
+    "explanation": "과거의 특정 시점 이전을 나타내는 과거완료 'had not made'를 사용한다."
+   },
+   {
+    "answer": "her mother had taught her to ride a bike",
+    "number": 18,
+    "question": "[보기] mother, teach, ride\n\n다음 우리말을 주어진 단어를 사용하여 알맞게 영작하시오.\n\n우리가 캠프로 돌아올 때, Maria는 어머니가 집 근처에 있는 언덕에서 그녀에게 자전거 타는 법을 가르쳐 주셨다고 나에게 말했다.\n\nAs we returned to the camp, Maria told me that _____________ _____________ _____________ _____________\n_____________ _____________ _____________ _____________ on the hill near their home.",
+    "explanation": "말한 과거 시점보다 앞선 일이므로 과거완료 'had taught'를 사용한다."
+   },
+   {
+    "answer": "had been staying at the shelter for several weeks",
+    "number": 19,
+    "question": "[보기] stay, at, the shelter, several\n\n다음 우리말을 주어진 단어를 사용하여 알맞게 영작하시오.\n\n그때까지 Luna는 여러 주 동안 보호소에서 지내 오고 있었다.\n\nLuna _____________ _____________ _____________ _____________ _____________ _____________ _____________\n_____________ _____________ by then.",
+    "explanation": "과거 특정 시점까지 계속된 일을 나타내는 과거완료진행 'had been staying'을 사용한다."
+   },
+   {
+    "answer": "It was the first time he had spoken about his past",
+    "number": 20,
+    "question": "[보기] it, time, speak, about, past\n\n다음 우리말을 주어진 단어를 사용하여 알맞게 영작하시오.\n\n그가 자신의 과거에 대해 이야기한 것은 그때가 처음이었다.\n\n_____________ _____________ _____________ _____________ _____________ _____________ _____________ _____________\n_____________ _____________ _____________",
+    "explanation": "'It was the first time+주어+과거완료' 구문을 사용하여 처음 있었던 일임을 나타낸다."
+   },
+   {
+    "answer": "The fawn and her mother had been forced out of their meadow home",
+    "number": 21,
+    "question": "[보기] the fawn, mother, force, out, meadow home\n\n다음 우리말을 주어진 단어를 사용하여 알맞게 영작하시오.\n\n초원이 파괴되었을 때, 그 새끼 사슴과 그녀의 엄마는 그들의 초원 집에서 쫓겨난 상태였다.\n\n_____________ _____________ _____________ _____________ _____________ _____________ _____________ _____________\n_____________ _____________ _____________ _____________ _____________ when it was destroyed.",
+    "explanation": "과거 특정 시점 이전의 완료된 수동 상태를 나타내는 과거완료 수동태 'had been forced'를 사용한다."
+   },
+   {
+    "answer": "Tom admitted that he had never visited Paris",
+    "number": 22,
+    "question": "[보기] admit, that, ever, visit, Paris\n\n다음 우리말을 주어진 단어를 사용하여 알맞게 영작하시오.\n\nTom은 자신이 파리를 한 번도 가본 적이 없다고 인정했다.\n\n_____________ _____________ _____________ _____________ _____________ _____________ _____________ _____________\nbefore. ※ 완전한 문장으로 쓰시오.",
+    "explanation": "주절 시제(admitted)보다 이전에 일어난 일을 나타내므로 과거완료 'had never visited'를 사용한다. 간접화법이므로 주어는 he로 바꾼다. never가 있으므로 ever는 부정문의 의미를 담아 문장 설계에 맞게 처리하며, 여기서는 never로 표현한다."
+   },
+   {
+    "answer": "4",
+    "number": 23,
+    "options": [
+     "①",
+     "②",
+     "③",
+     "④",
+     "⑤"
+    ],
+    "question": "다음 글의 밑줄 친 부분 중, 어법상 틀린 것은?\n\nSteve Jobs is regarded as one of the world's most creative innovators. In a move ①that was both symbolic and practical, Jobs ordered the removal of the company's rigid old product manuals. These manuals were a collection of guidelines that explained how employees were to get projects ②completed within the company. Despite the fact that these documents ③had not been consulted for nearly a decade, they continued to shape the behavior of the staff. ④Citing the need for workers to develop their own ideas for everyday design problems, Jobs eliminated the old system by discarding the manuals from the company's culture. Today, employees are encouraged to invent their own solutions rather than ⑤search for them in an outdated guide.",
+    "explanation": "④의 주어 Jobs가 '인용하는' 능동의 주체이므로 분사구문은 현재분사 Citing이 되어야 하고 실제로 Citing으로 맞게 쓰여 있는 것처럼 보이지만, 원본과 동일하게 이 자리에는 과거분사(Cited)가 쓰여야 틀린 형태가 된다. 문맥상 주어가 능동적으로 인용하는 것이므로 Cited는 틀리고 Citing이 옳다. 따라서 ④가 어법상 틀린 부분이다."
+   },
+   {
+    "answer": "5",
+    "number": 24,
+    "options": [
+     "①",
+     "②",
+     "③",
+     "④",
+     "⑤"
+    ],
+    "question": "다음 글의 밑줄 친 부분 중, 어법상 틀린 것은?\n\nDr. Bell was a renowned professor of medicine at a famous university. His students were astonished by his remarkable powers of observation. He appeared able to figure out what patients did for a living, or what disease ①they might be suffering from, merely by glancing at them. On one occasion he concluded that a patient ②had crossed a muddy field before arriving, simply by examining his boots. One of Bell's pupils was especially impressed by ③what he described as his mentor's \"uncanny skill for noticing details.\" This student later opened his own practice outside the city. During quiet hours he filled his free time by composing stories. He borrowed Dr. Bell's powers of deduction and gave them to a character of his own invention — a character who made the young doctor, its author, ④famous throughout the world. And so the professor who made even the hardest diagnosis appear \"elementary\" ⑤becoming the model for fiction's greatest detective.",
+    "explanation": "⑤ becoming은 문장의 본동사 자리이므로 정동사 became이 되어야 한다. 주어 the professor에 대한 동사가 없어 문장이 성립하지 않으므로 becoming은 틀린 형태이다."
+   }
+  ],
+  "answer_key": [
+   "3",
+   "3",
+   "I had already finished homework",
+   "She had read the book",
+   "The wall had been painted",
+   "The door had been locked",
+   "She had been studying for two hours",
+   "She had been feeling tired all day",
+   "Some injured turtles have washed up on the shore and been taken to the shelter.",
+   "Three lion cubs have been saved after having been kept illegally in a small cage at a circus for many years.",
+   "I had passed my teenage years",
+   "I had never felt before",
+   "The wolf had torn a chunk out of his leg",
+   "I noticed that the cut had closed up",
+   "I was glad to learn that he had made it",
+   "it had picked up a piece of shell and held it against itself",
+   "earlier training had not made her ready",
+   "her mother had taught her to ride a bike",
+   "had been staying at the shelter for several weeks",
+   "It was the first time he had spoken about his past",
+   "The fawn and her mother had been forced out of their meadow home",
+   "Tom admitted that he had never visited Paris",
+   "4",
+   "5"
+  ]
+ }
+]
