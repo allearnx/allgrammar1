@@ -26,6 +26,9 @@ interface NaesinAdminClientProps {
 
 export function NaesinAdminClient({ textbooks: initialTextbooks, initialTab, canManageContent = false }: NaesinAdminClientProps) {
   const [textbooks, setTextbooks] = useState(initialTextbooks);
+  const [gradeFilter, setGradeFilter] = useState<number | null>(
+    () => [...initialTextbooks].sort((a, b) => a.grade - b.grade)[0]?.grade ?? null
+  );
   const [selectedTextbook, setSelectedTextbook] = useState<NaesinTextbook | null>(null);
   const [units, setUnits] = useState<NaesinUnit[]>([]);
   const [expandedUnit, setExpandedUnit] = useState<string | null>(null);
@@ -70,7 +73,12 @@ export function NaesinAdminClient({ textbooks: initialTextbooks, initialTab, can
         <div className="space-y-6">
           <div className="flex items-center justify-between">
             <h2 className="text-xl font-bold">내신 콘텐츠 관리</h2>
-            <AddTextbookDialog onAdd={(tb) => setTextbooks([...textbooks, tb])} />
+            <AddTextbookDialog
+              onAdd={(tb) => {
+                setTextbooks([...textbooks, tb]);
+                setGradeFilter(tb.grade);
+              }}
+            />
           </div>
 
           {/* Textbook list */}
@@ -79,8 +87,33 @@ export function NaesinAdminClient({ textbooks: initialTextbooks, initialTab, can
               등록된 교과서가 없습니다. 교과서를 추가해주세요.
             </p>
           ) : (
+            <>
+            {/* 학년 필터 */}
+            <div className="flex flex-wrap gap-1.5">
+              {[...new Set(textbooks.map((t) => t.grade))].sort((a, b) => a - b).map((g) => {
+                const count = textbooks.filter((t) => t.grade === g).length;
+                return (
+                  <Button
+                    key={g}
+                    size="sm"
+                    variant={gradeFilter === g ? 'default' : 'outline'}
+                    className="rounded-full h-8"
+                    onClick={() => {
+                      setGradeFilter(g);
+                      if (selectedTextbook && selectedTextbook.grade !== g) setSelectedTextbook(null);
+                    }}
+                  >
+                    {gradeLabel(g)}
+                    <span className="ml-1 text-xs opacity-70">{count}</span>
+                  </Button>
+                );
+              })}
+            </div>
             <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-              {textbooks.map((tb) => (
+              {textbooks
+                .filter((tb) => gradeFilter === null || tb.grade === gradeFilter)
+                .sort((a, b) => a.display_name.localeCompare(b.display_name, 'ko'))
+                .map((tb) => (
                 <Card
                   key={tb.id}
                   className={`cursor-pointer transition-shadow hover:shadow-md ${
@@ -130,6 +163,7 @@ export function NaesinAdminClient({ textbooks: initialTextbooks, initialTab, can
                 </Card>
               ))}
             </div>
+            </>
           )}
 
           {/* Units section */}
