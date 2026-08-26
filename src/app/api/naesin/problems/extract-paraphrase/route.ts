@@ -16,6 +16,43 @@ const anthropic = new Anthropic();
 /** 청크당 원본 문항 수 — 출력 잘림 방지 + 병렬 처리 단위 */
 const PARAPHRASE_CHUNK_SIZE = 12;
 
+/**
+ * 추출 시 한 조각당 페이지 수 — 큰 PDF를 통짜로 추출시키면 모델이
+ * 앞 몇 페이지만 뽑고 멈춤 (30페이지 워크북에서 17문항만 추출된 실사례).
+ * 프롬프트로 "N~M페이지만" 지정하는 방식은 모델이 페이지 위치를 못 짚어 실패
+ * (E2E 확인) → pdf-lib로 물리 분할해 조각만 보낸다. 경계에 걸친 문항을 위해
+ * 조각끼리 1페이지씩 겹치고, 잘린 문항은 프롬프트 지시 + 코드 dedup으로 정리.
+ */
+const EXTRACT_PAGES_PER_CHUNK = 6;
+
+/**
+ * PDF를 6페이지(1페이지 겹침) base64 조각들로 물리 분할.
+ * 분할이 불가능하면(암호화·손상·작은 문서) null — 통짜 추출로 폴백.
+ */
+async function splitPdfForExtract(pdfBase64?: string, pdfUrl?: string): Promise<string[] | null> {
+  try {
+    const { PDFDocument } = await import('pdf-lib');
+    const bytes = pdfUrl
+      ? new Uint8Array(await (await fetch(pdfUrl)).arrayBuffer())
+      : pdfBase64!;
+    const src = await PDFDocument.load(bytes); // 암호화면 throw → 통짜 폴백
+    const total = src.getPageCount();
+    if (total <= EXTRACT_PAGES_PER_CHUNK) return null;
+    const chunks: string[] = [];
+    for (let start = 0; start < total; start += EXTRACT_PAGES_PER_CHUNK - 1) {
+      const end = Math.min(start + EXTRACT_PAGES_PER_CHUNK, total);
+      const doc = await PDFDocument.create();
+      const pages = await doc.copyPages(src, Array.from({ length: end - start }, (_, i) => start + i));
+      for (const p of pages) doc.addPage(p);
+      chunks.push(Buffer.from(await doc.save()).toString('base64'));
+      if (end >= total) break;
+    }
+    return chunks;
+  } catch {
+    return null;
+  }
+}
+
 /** 연속 문항이 같은 공통 지문/보기 상자를 공유하는지 */
 function sharesPassage(a: Record<string, unknown>, b: Record<string, unknown>): boolean {
   // word bank 세트: 보기 단어 집합이 같으면 같은 세트 (소거법 유지 위해 안 쪼갬)
@@ -41,13 +78,13 @@ function chunkPreservingGroups(qs: Record<string, unknown>[], size: number): Rec
 }
 
 function buildParaphrasePrompt(chunk: Record<string, unknown>[], unitTitle: string) {
-  return `아래는 중학교 영어 시험에서 추출한 원본 문제들입니다:
+  return `아래는 중·고등학교 영어 시험에서 추출한 원본 문제들입니다:
 
 ${JSON.stringify(chunk, null, 2)}
 
 위 원본 문제를 **하나도 빠짐없이 1:1로 패러프레이즈**하세요.
 문제를 합치거나, 빼거나, 새로 추가하지 마세요. 원본이 ${chunk.length}문제이므로 정확히 ${chunk.length}문제를 반환해야 합니다.
-문법 주제: ${unitTitle || '중학 영어 문법'}
+문법 주제: ${unitTitle || '중·고등 영어 문법'}
 
 각 문제 형식 (JSON 배열로만 응답):
 [
@@ -74,7 +111,7 @@ ${JSON.stringify(chunk, null, 2)}
 - **서술형 정답이 완전한 문장이면 지시문에 출력 형식을 반드시 명시할 것** (예: " ※ 완전한 문장으로 쓰시오."). 학생이 일부만 써서 오답 처리되지 않게
 - **오류 수정형은 전체 문장 다시 쓰기로 출제**: question 끝에 " ※ 틀린 부분을 고쳐서 올바른 문장으로 전부 쓰세요."를 넣고, answer는 **고친 전체 문장**(예: "The speech made the students bored."). "고친 부분만 쓰시오" 방식이나 "틀린형 / 고친형"·"boring → bored" 같은 쌍 표기 금지
 - **정답 형식이 특별하면 문제에 예시를 보여줄 것**: 정답이 단어 하나·문장 하나가 아닌 형식(두 요소를 쉼표로 "upset, 형용사" / 기호+단어 / 복수 답 등)이면 question 끝에 **같은 형식의 예시**를 넣어 학생이 보고 따라 쓰게 할 것 (예: " ※ 예시와 같은 형식으로 쓰세요 → 예시: brave, 형용사"). 예시 내용은 정답과 다른 것으로
-- 중학생 수준에 적합한 난이도
+- 원본과 같은 학교급·난이도 유지 (원본이 고등이면 고등 수준, 중등이면 중등 수준)
 - number는 원본의 number를 그대로 유지. **question 텍스트 안에 "7." 같은 원본 문항 번호를
   남기지 말 것** (원본에 섞여 있어도 제거 — 시트가 번호를 새로 매김)`;
 }
@@ -97,19 +134,27 @@ export const POST = createApiHandler(
       : { type: 'document' as const, source: { type: 'base64' as const, media_type: 'application/pdf' as const, data: pdfBase64 as string } };
 
     // Step 1: Extract problems from PDF (Haiku — fast OCR, quality-critical paraphrasing uses Opus)
-    // 공통 지문 복제로 출력이 길어질 수 있어 넉넉한 한도 + 스트리밍 (Haiku 출력 상한 64k)
-    const extractMessage = await anthropic.messages.stream({
+    // 큰 PDF는 물리 분할한 조각을 병렬 추출 (통짜로 시키면 모델이 앞부분만 뽑고 멈춤).
+    const chunkDocs = await splitPdfForExtract(pdfBase64, pdfUrl);
+
+    const extractChunk = (chunkBase64: string | null) => anthropic.messages.stream({
       model: 'claude-haiku-4-5-20251001',
       max_tokens: 32000,
       messages: [
         {
           role: 'user',
           content: [
-            documentBlock,
+            chunkBase64
+              ? { type: 'document' as const, source: { type: 'base64' as const, media_type: 'application/pdf' as const, data: chunkBase64 } }
+              : documentBlock,
             {
               type: 'text',
-              text: `이 PDF는 중학교 영어 시험 문제지입니다.
-모든 문법 문제를 추출하세요. JSON 배열로만 응답 (다른 텍스트 없이):
+              text: `이 PDF는 중·고등학교 영어 시험 문제지${chunkBase64 ? '의 일부 조각입니다 (앞뒤 조각과 1페이지씩 겹침)' : '입니다'}.
+모든 문법 문제를 빠짐없이 추출하세요.${chunkBase64 ? `
+- 첫 페이지가 이전 조각에서 이어진 내용으로 시작하면(문항의 지시문·시작이 안 보이면) 그 잘린 문항은 제외 (이전 조각에서 추출됨)
+- 마지막 페이지에서 시작했지만 끝이 잘려 완전하지 않은 문항도 제외 (다음 조각에서 추출됨)
+- 조각에 문제가 하나도 없으면(설명·해설·목차뿐이면) 빈 배열 []로 응답` : ''}
+JSON 배열로만 응답 (다른 텍스트 없이):
 [
   {
     "number": 1,
@@ -152,9 +197,42 @@ export const POST = createApiHandler(
           ],
         },
       ],
-    }).finalMessage();
+    }).finalMessage()
+      .then((m) => requireAiJsonArray<Record<string, unknown>>(m, 'ai.extract'));
 
-    const extractedQuestions = requireAiJsonArray<Record<string, unknown>>(extractMessage, 'ai.extract');
+    let extractedChunks: Record<string, unknown>[][];
+    if (chunkDocs) {
+      try {
+        extractedChunks = await Promise.all(chunkDocs.map((c) => extractChunk(c)));
+      } catch {
+        // 분할 조각 추출 실패(깨진 조각 등) → 통짜 추출로 폴백
+        logger.warn('ai.extract_chunks_fallback', { unitId, chunks: chunkDocs.length });
+        extractedChunks = [await extractChunk(null)];
+      }
+    } else {
+      extractedChunks = [await extractChunk(null)];
+    }
+    // 겹침 페이지 중복 안전장치 — 두 조각이 같은 문항을 추출하면 지시문·각주 번호
+    // ("early.1)") 유무로 텍스트가 달라지므로, 영문 본문 꼬리 + 정답 + 보기로 비교
+    const dedupKey = (q: Record<string, unknown>) => {
+      const norm = (s: unknown) => String(s ?? '').toLowerCase().replace(/[^a-z0-9가-힣]/g, '');
+      // 영문 단어(2자 이상)만 이어붙임 — 한글 지시문 속 낱글자(O/X)·각주 숫자를 배제
+      const en = (String(q.question ?? '').match(/[a-zA-Z]{2,}/g) || []).join('').toLowerCase();
+      const base = en.length >= 15 ? en.slice(-80) : norm(q.question).slice(-80);
+      const opts = Array.isArray(q.options) ? norm(q.options.join('')).slice(0, 80) : '';
+      return `${base}|${norm(q.answer)}|${opts}`;
+    };
+    const seenKeys = new Set<string>();
+    const extractedQuestions = extractedChunks.flat().filter((q) => {
+      const k = dedupKey(q);
+      if (seenKeys.has(k)) return false;
+      seenKeys.add(k);
+      return true;
+    });
+    logger.info('ai.extract_chunks', {
+      unitId, chunks: extractedChunks.length,
+      perChunk: extractedChunks.map((c) => c.length), deduped: extractedChunks.flat().length - extractedQuestions.length,
+    });
 
     // 그림·사진을 봐야만 풀 수 있는 문항은 패러프레이즈 대상에서 제외 (화면에서 풀 수 없음)
     const originalQuestions = extractedQuestions.filter(
