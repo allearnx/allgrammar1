@@ -10,11 +10,18 @@ export async function getNaesinPageData(roles: UserRole[]) {
     redirect(`/${user.role}`);
   }
   const supabase = await createClient();
-  const { data: textbooks } = await supabase
-    .from('naesin_textbooks')
-    // naesin_textbooks에 cover_image_url 컬럼 없음 — select에 넣으면 쿼리 에러로 교과서 전체가 빈 목록이 됨
-    .select('id, display_name, publisher, grade, sort_order, is_active, created_at')
-    .order('grade')
-    .order('sort_order');
-  return { user, textbooks: textbooks || [] };
+  const [{ data: textbooks }, { data: unitRows }] = await Promise.all([
+    supabase
+      .from('naesin_textbooks')
+      // naesin_textbooks에 cover_image_url 컬럼 없음 — select에 넣으면 쿼리 에러로 교과서 전체가 빈 목록이 됨
+      .select('id, display_name, publisher, grade, sort_order, is_active, created_at')
+      .order('grade')
+      .order('sort_order'),
+    supabase.from('naesin_units').select('textbook_id'),
+  ]);
+  const unitCounts: Record<string, number> = {};
+  (unitRows || []).forEach((u: { textbook_id: string }) => {
+    unitCounts[u.textbook_id] = (unitCounts[u.textbook_id] || 0) + 1;
+  });
+  return { user, textbooks: textbooks || [], unitCounts };
 }

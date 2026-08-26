@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Trash2, Pencil, BookOpen } from 'lucide-react';
@@ -15,21 +15,21 @@ import { TextbookExamSection } from './textbook-exam-section';
 import { logger } from '@/lib/logger';
 import { fetchWithToast } from '@/lib/fetch-with-toast';
 import { gradeLabel } from '@/lib/naesin/grade-label';
-import { buildPublisherColorMap } from '@/lib/naesin/publisher-palette';
 
 interface NaesinAdminClientProps {
   textbooks: NaesinTextbook[];
+  unitCounts?: Record<string, number>;
   initialTab?: string;
   canManageContent?: boolean;
 }
 
-export function NaesinAdminClient({ textbooks: initialTextbooks, initialTab, canManageContent = false }: NaesinAdminClientProps) {
+export function NaesinAdminClient({ textbooks: initialTextbooks, unitCounts: initialUnitCounts, initialTab, canManageContent = false }: NaesinAdminClientProps) {
   const [textbooks, setTextbooks] = useState(initialTextbooks);
+  const [unitCounts, setUnitCounts] = useState<Record<string, number>>(initialUnitCounts ?? {});
   const [gradeFilter, setGradeFilter] = useState<number | null>(
     () => [...initialTextbooks].sort((a, b) => a.grade - b.grade)[0]?.grade ?? null
   );
   const [selectedTextbook, setSelectedTextbook] = useState<NaesinTextbook | null>(null);
-  const publisherColors = useMemo(() => buildPublisherColorMap(textbooks), [textbooks]);
   const [units, setUnits] = useState<NaesinUnit[]>([]);
   const [expandedUnit, setExpandedUnit] = useState<string | null>(null);
   const [deleteTextbookId, setDeleteTextbookId] = useState<string | null>(null);
@@ -120,12 +120,11 @@ export function NaesinAdminClient({ textbooks: initialTextbooks, initialTab, can
                 );
               })}
             </div>
-            <div className="grid gap-2.5 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="divide-y divide-gray-100 rounded-xl border border-gray-100 bg-white">
               {textbooks
                 .filter((tb) => gradeFilter === null || tb.grade === gradeFilter)
                 .sort((a, b) => a.display_name.localeCompare(b.display_name, 'ko'))
                 .map((tb) => {
-                const palette = publisherColors.get(tb.publisher)!;
                 const selected = selectedTextbook?.id === tb.id;
                 return (
                   <div
@@ -134,21 +133,18 @@ export function NaesinAdminClient({ textbooks: initialTextbooks, initialTab, can
                     tabIndex={0}
                     onClick={() => setSelectedTextbook(tb)}
                     onKeyDown={(e) => { if (e.key === 'Enter') setSelectedTextbook(tb); }}
-                    className={`group relative flex cursor-pointer items-stretch overflow-hidden rounded-xl border bg-white transition-all hover:-translate-y-0.5 hover:shadow-md ${
-                      selected ? 'border-transparent ring-2 ring-[#1A73E8]' : 'border-gray-100'
+                    className={`group flex cursor-pointer items-center gap-3 px-4 py-2.5 transition-colors first:rounded-t-xl last:rounded-b-xl ${
+                      selected ? 'bg-[#F0F6FF] shadow-[inset_3px_0_0_0_#1A73E8]' : 'hover:bg-gray-50'
                     } ${tb.is_active ? '' : 'opacity-60'}`}
                   >
-                    <div className="w-2 shrink-0" style={{ background: palette.spine }} />
-                    <div className="flex w-11 shrink-0 items-center justify-center" style={{ background: palette.bg }}>
-                      <BookOpen className="h-5 w-5" style={{ color: palette.text }} />
-                    </div>
-                    <div className="min-w-0 flex-1 px-3.5 py-3">
-                      <p className="truncate text-sm font-semibold text-gray-800">{tb.display_name}</p>
-                      <p className="mt-0.5 truncate text-[11px] text-gray-400">
-                        {gradeLabel(tb.grade)} · {tb.publisher}{tb.is_active ? '' : ' · 비활성'}
-                      </p>
-                    </div>
-                    <div className="flex items-center gap-0.5 pr-1.5 opacity-0 transition-opacity group-hover:opacity-100 focus-within:opacity-100">
+                    <p className="w-40 shrink-0 truncate text-sm font-semibold text-gray-800 sm:w-56">{tb.display_name}</p>
+                    <p className="hidden min-w-0 flex-1 truncate text-xs text-gray-400 sm:block">
+                      {tb.publisher}{tb.is_active ? '' : ' · 비활성'}
+                    </p>
+                    <span className="ml-auto shrink-0 rounded-full bg-gray-100 px-2.5 py-0.5 text-xs text-gray-500 sm:ml-0">
+                      단원 {unitCounts[tb.id] ?? 0}
+                    </span>
+                    <div className="flex shrink-0 items-center gap-0.5 opacity-0 transition-opacity focus-within:opacity-100 group-hover:opacity-100">
                       <Button
                         variant="ghost"
                         size="icon"
@@ -194,7 +190,10 @@ export function NaesinAdminClient({ textbooks: initialTextbooks, initialTab, can
                 </div>
                 <AddUnitDialog
                   textbookId={selectedTextbook.id}
-                  onAdd={(unit) => setUnits([...units, unit])}
+                  onAdd={(unit) => {
+                    setUnits([...units, unit]);
+                    setUnitCounts((prev) => ({ ...prev, [selectedTextbook.id]: (prev[selectedTextbook.id] ?? 0) + 1 }));
+                  }}
                 />
               </div>
 
@@ -214,6 +213,7 @@ export function NaesinAdminClient({ textbooks: initialTextbooks, initialTab, can
                       }
                       onDelete={() => {
                         setUnits(units.filter((u) => u.id !== unit.id));
+                        setUnitCounts((prev) => ({ ...prev, [selectedTextbook.id]: Math.max(0, (prev[selectedTextbook.id] ?? 1) - 1) }));
                         toast.success('단원이 삭제되었습니다');
                       }}
                     />

@@ -12,12 +12,12 @@ export default async function NaesinPage({ params, searchParams }: Props) {
   const { role } = await params;
   const { tab } = await searchParams;
   const { allowedRoles } = getRoleConfig(role);
-  const { user, textbooks } = await getNaesinPageData(allowedRoles);
+  const { user, textbooks, unitCounts } = await getNaesinPageData(allowedRoles);
   return (
     <>
       <Topbar user={user} title="내신 관리" />
       <div className="p-4 md:p-6">
-        <NaesinAdminClient textbooks={textbooks} initialTab={tab} canManageContent={user.role === 'boss' || !!user.can_manage_content} />
+        <NaesinAdminClient textbooks={textbooks} unitCounts={unitCounts} initialTab={tab} canManageContent={user.role === 'boss' || !!user.can_manage_content} />
       </div>
     </>
   );
