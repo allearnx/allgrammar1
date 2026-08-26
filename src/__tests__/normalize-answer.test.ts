@@ -8,8 +8,8 @@ describe('normalize', () => {
   });
 
   it('normalizes curly quotes to straight quotes', () => {
-    expect(normalize('she\u2019s')).toBe("she's");
-    expect(normalize('don\u2019t')).toBe("don't");
+    expect(normalize('she\u2019s')).toBe('she is'); // 곡선따옴표 변환 후 축약 확장
+    expect(normalize('don\u2019t')).toBe('do not');
     expect(normalize('\u201CHello\u201D')).toBe('"hello"');
   });
 
@@ -144,5 +144,21 @@ describe('resolveCorrectIndex', () => {
 
   it('returns original if no match found', () => {
     expect(resolveCorrectIndex('unknown', options)).toBe('unknown');
+  });
+});
+
+describe('normalize — 축약형 동등 처리', () => {
+  it("It's ≡ It is, isn't ≡ is not", () => {
+    expect(normalize("It's softer than a cracker.")).toBe(normalize('It is softer than a cracker'));
+    expect(normalize("There isn't a dog in the yard.")).toBe(normalize('There is not a dog in the yard.'));
+    expect(normalize("The boy didn't know who he was.")).toBe(normalize('The boy did not know who he was.'));
+    expect(normalize("can't keep the promise")).toBe(normalize('cannot keep the promise'));
+    expect(normalize("I'm faster than you.")).toBe(normalize('I am faster than you.'));
+    expect(normalize("I'll give all my things")).toBe(normalize('I will give all my things'));
+  });
+
+  it('소유격은 확장하지 않음', () => {
+    expect(normalize("Tom's bike")).toBe("tom's bike");
+    expect(normalize("your sister's best friend")).toBe("your sister's best friend");
   });
 });

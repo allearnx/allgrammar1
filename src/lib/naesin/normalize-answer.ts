@@ -34,6 +34,18 @@ export function normalize(s: string): string {
     .replace(/[\u2013\u2014\u2212]/g, '-') // 엔대시/엠대시 → 하이픈
     .trim()
     .toLowerCase()
+    // 축약형 ↔ 비축약형 동등 처리: 학생/정답 양쪽에 같은 확장을 적용해 비교하므로
+    // "It's ~"와 "It is ~", "isn't"와 "is not"이 서로 정답 인정됨 (동아윤 검수에서 확정).
+    // 소유격 's는 확장하지 않도록 호스트를 대명사·의문사·there로 제한.
+    .replace(/\bcan't\b/g, 'cannot')
+    .replace(/\bcan not\b/g, 'cannot')
+    .replace(/\bwon't\b/g, 'will not')
+    .replace(/([a-z])n't\b/g, '$1 not')  // isn't/aren't/wasn't/don't/didn't...
+    .replace(/\bi'm\b/g, 'i am')
+    .replace(/\b(you|we|they)'re\b/g, '$1 are')
+    .replace(/\b(i|you|we|they|he|she|it|there|who|what)'ll\b/g, '$1 will')
+    .replace(/\b(i|you|we|they)'ve\b/g, '$1 have')
+    .replace(/\b(it|that|there|he|she|what|who|where|when|how|here)'s\b/g, '$1 is')
     .replace(/\.+\s*$/, '')              // 끝 마침표 제거
     .replace(/\((\d+)\)\s*/g, '($1) ')   // (1)that → (1) that 통일
     .replace(/\s*\/\s*/g, ' / ')         // A/B, A /B → A / B 통일
