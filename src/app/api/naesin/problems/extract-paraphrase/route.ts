@@ -6,7 +6,8 @@ import Anthropic from '@anthropic-ai/sdk';
 import { requireAiJsonArray } from '@/lib/ai-json';
 import { validateProblemStructure } from '@/lib/validation';
 import { isUnanswerableImageQuestion } from '@/lib/validation/problem-validator';
-import { sameBank, rebuildBankSets } from '@/lib/naesin/word-bank-sets';
+import { rebuildBankSets } from '@/lib/naesin/word-bank-sets';
+import { chunkPreservingGroups } from '@/lib/naesin/paraphrase-chunks';
 import type { NaesinProblemQuestion } from '@/types/naesin';
 
 export const maxDuration = 300;
@@ -51,30 +52,6 @@ async function splitPdfForExtract(pdfBase64?: string, pdfUrl?: string): Promise<
   } catch {
     return null;
   }
-}
-
-/** 연속 문항이 같은 공통 지문/보기 상자를 공유하는지 */
-function sharesPassage(a: Record<string, unknown>, b: Record<string, unknown>): boolean {
-  // word bank 세트: 보기 단어 집합이 같으면 같은 세트 (소거법 유지 위해 안 쪼갬)
-  if (sameBank(a, b)) return true;
-  // 공통 지문: 긴 공통 접두사 휴리스틱
-  const qa = String(a?.question ?? '');
-  const qb = String(b?.question ?? '');
-  if (qa.length < 120 || qb.length < 120) return false;
-  return qa.slice(0, 100) === qb.slice(0, 100);
-}
-
-/** 청크 분할 — 같은 지문을 공유하는 연속 문항 그룹은 경계에서 쪼개지 않음 */
-function chunkPreservingGroups(qs: Record<string, unknown>[], size: number): Record<string, unknown>[][] {
-  const chunks: Record<string, unknown>[][] = [];
-  let i = 0;
-  while (i < qs.length) {
-    let end = Math.min(i + size, qs.length);
-    while (end < qs.length && sharesPassage(qs[end - 1], qs[end])) end++;
-    chunks.push(qs.slice(i, end));
-    i = end;
-  }
-  return chunks;
 }
 
 function buildParaphrasePrompt(chunk: Record<string, unknown>[], unitTitle: string) {
@@ -122,7 +99,40 @@ export const POST = createApiHandler(
   await requireContentPermission(user, supabase);
 
   try {
-    const { unitId, unitTitle, pdfBase64, mediaType, pdfUrl, storagePath } = await request.json();
+    const { unitId, unitTitle, pdfBase64, mediaType, pdfUrl, storagePath, phase, questions: inputQuestions } = await request.json();
+
+    // 변형을 청크 단위로 병렬 실행 (지문·word bank 그룹은 경계에서 안 쪼갬)
+    const paraphraseQuestions = async (originals: Record<string, unknown>[]) => {
+      const chunks = chunkPreservingGroups(originals, PARAPHRASE_CHUNK_SIZE);
+      const chunkResults = await Promise.all(
+        chunks.map((chunk) =>
+          anthropic.messages.stream({
+            model: 'claude-opus-4-8',
+            max_tokens: 20000,
+            messages: [
+              { role: 'user', content: buildParaphrasePrompt(chunk, unitTitle) },
+            ],
+          }).finalMessage()
+            .then((m) => requireAiJsonArray<Record<string, unknown>>(m, 'ai.paraphrase')),
+        ),
+      );
+      // word bank 세트 재조립: 변형된 정답들로 [보기] 상자를 다시 만들어 세트 전 문항에
+      // 동일 부착 — "각 단어 1회 정답" 소거법 구조를 프롬프트 준수 여부와 무관하게 보장
+      chunkResults.forEach((out, ci) => rebuildBankSets(chunks[ci], out));
+      return { questions: chunkResults.flat(), chunkCount: chunks.length };
+    };
+
+    // ── phase 'paraphrase': 추출된 원본 배치를 변형만 해서 반환 ──
+    // (215문항급 대형 PDF를 한 요청으로 처리하면 서버리스 타임아웃·동시 호출 한도에
+    //  걸리므로, 다이얼로그가 추출 1회 + 변형 여러 요청으로 나눠 호출한다)
+    if (phase === 'paraphrase') {
+      if (!unitId || !Array.isArray(inputQuestions) || inputQuestions.length === 0) {
+        return NextResponse.json({ error: 'unitId와 questions가 필요합니다.' }, { status: 400 });
+      }
+      const { questions: out, chunkCount } = await paraphraseQuestions(inputQuestions as Record<string, unknown>[]);
+      logger.info('ai.paraphrase_batch_done', { unitId, input: inputQuestions.length, output: out.length, chunks: chunkCount });
+      return NextResponse.json({ questions: out });
+    }
 
     if (!unitId || (!pdfBase64 && !pdfUrl)) {
       return NextResponse.json({ error: 'unitId와 pdfBase64 또는 pdfUrl이 필요합니다.' }, { status: 400 });
@@ -245,35 +255,30 @@ JSON 배열로만 응답 (다른 텍스트 없이):
       return NextResponse.json({ error: 'PDF에서 문제를 추출하지 못했습니다.' }, { status: 422 });
     }
 
-    // Step 2: 원본 1:1 패러프레이즈 — 문항 수·유형·순서를 원본 그대로 유지.
-    // 지문 그룹이 안 쪼개지게 청크로 나눠 병렬 실행 (출력 잘림 방지 겸용)
-    const chunks = chunkPreservingGroups(originalQuestions, PARAPHRASE_CHUNK_SIZE);
-    const chunkResults = await Promise.all(
-      chunks.map((chunk) =>
-        anthropic.messages.stream({
-          model: 'claude-opus-4-8',
-          max_tokens: 20000,
-          messages: [
-            { role: 'user', content: buildParaphrasePrompt(chunk, unitTitle) },
-          ],
-        }).finalMessage()
-          .then((m) => requireAiJsonArray<Record<string, unknown>>(m, 'ai.paraphrase')),
-      ),
-    );
+    // ── phase 'extract': 원본 추출 결과만 반환 (변형은 후속 요청들이 배치로) ──
+    if (phase === 'extract') {
+      if (storagePath) {
+        import('@/lib/supabase/admin').then(({ createAdminClient }) => {
+          createAdminClient().storage.from('public-images').remove([storagePath]).catch(() => {});
+        });
+      }
+      return NextResponse.json({
+        questions: originalQuestions,
+        originalCount: originalQuestions.length,
+        removedImageCount,
+      });
+    }
 
-    // word bank 세트 재조립: 변형된 정답들로 [보기] 상자를 다시 만들어 세트 전 문항에
-    // 동일 부착 — "각 단어 1회 정답" 소거법 구조를 프롬프트 준수 여부와 무관하게 보장
-    chunkResults.forEach((out, ci) => rebuildBankSets(chunks[ci], out));
+    // ── 레거시 단일 요청 경로: 추출 + 변형을 한 번에 (소형 PDF용) ──
+    const { questions: transformed, chunkCount } = await paraphraseQuestions(originalQuestions);
 
     // 청크 순서대로 합친 뒤 일련번호 재부여
-    const questions: Record<string, unknown>[] = chunkResults
-      .flat()
-      .map((q, i) => ({ ...q, number: i + 1 }));
+    const questions: Record<string, unknown>[] = transformed.map((q, i) => ({ ...q, number: i + 1 }));
 
     const mcqCount = questions.filter((q) => Array.isArray(q.options) && q.options.length > 0).length;
     logger.info('ai.paraphrase_done', {
       original: originalQuestions.length, mcq: mcqCount,
-      subjective: questions.length - mcqCount, total: questions.length, chunks: chunks.length, unitId,
+      subjective: questions.length - mcqCount, total: questions.length, chunks: chunkCount, unitId,
     });
 
     // Layer 1: Structural validation (free, instant)

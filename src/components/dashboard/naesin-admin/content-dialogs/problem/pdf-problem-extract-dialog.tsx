@@ -20,6 +20,7 @@ import type { FullValidationResult } from '@/lib/validation';
 import { validateProblemStructure } from '@/lib/validation/problem-validator';
 import type { GeneratedQuestion } from '../shared/question-utils';
 import { hasOptions, normalizeQuestions, splitQuestionsIntoSets } from '../shared/question-utils';
+import { chunkPreservingGroups } from '@/lib/naesin/paraphrase-chunks';
 import { QuestionEditRow, QuestionViewRow, ValidationBadgeIcon, QuestionBadge } from '../shared/question-table-rows';
 import { useQuestionEditor } from '@/hooks/use-question-editor';
 
@@ -31,6 +32,7 @@ export function PdfProblemExtractDialog({ unitId, unitTitle, onAdd }: { unitId: 
   const [title, setTitle] = useState('');
   const editor = useQuestionEditor();
   const [originalCount, setOriginalCount] = useState(0);
+  const [progress, setProgress] = useState<{ done: number; total: number } | null>(null);
   const [saving, setSaving] = useState(false);
   const [validation, setValidation] = useState<FullValidationResult | null>(null);
   const [validating, setValidating] = useState(false);
@@ -41,6 +43,7 @@ export function PdfProblemExtractDialog({ unitId, unitTitle, onAdd }: { unitId: 
     setTitle('');
     editor.setQuestions([]);
     setOriginalCount(0);
+    setProgress(null);
     editor.setEditingIdx(null);
     setValidation(null);
     setValidating(false);
@@ -55,26 +58,60 @@ export function PdfProblemExtractDialog({ unitId, unitTitle, onAdd }: { unitId: 
     }
 
     setStep('loading');
+    setProgress(null);
 
     try {
       const { uploadForExtract } = await import('@/lib/upload-for-extract');
       const { publicUrl, storagePath } = await uploadForExtract(file);
 
-      const data = await fetchWithToast<{ questions?: Record<string, unknown>[]; originalCount?: number; removedImageCount?: number; validation?: { structural: FullValidationResult['structural'] } }>(
+      // 1단계: 원본 문제 추출 (빠름 — Haiku 병렬)
+      const extracted = await fetchWithToast<{ questions?: Record<string, unknown>[]; originalCount?: number; removedImageCount?: number }>(
         '/api/naesin/problems/extract-paraphrase',
-        { body: { unitId, unitTitle: unitTitle || '', pdfUrl: publicUrl, storagePath }, errorMessage: 'AI 문제 생성에 실패했습니다.' },
+        { body: { unitId, phase: 'extract', pdfUrl: publicUrl, storagePath }, errorMessage: 'PDF에서 문제 추출에 실패했습니다.' },
       );
-      if (data.removedImageCount) {
-        toast.info(`그림·사진 의존 문항 ${data.removedImageCount}개는 화면에서 풀 수 없어 제외했습니다`);
+      if (extracted.removedImageCount) {
+        toast.info(`그림·사진 의존 문항 ${extracted.removedImageCount}개는 화면에서 풀 수 없어 제외했습니다`);
       }
-      editor.setQuestions(normalizeQuestions(data.questions || []));
-      setOriginalCount(data.originalCount || 0);
-      if (data.validation?.structural) {
-        const s = data.validation.structural;
-        setValidation({ structural: s, badge: s.valid ? 'pass' : 'fail', summary: '' });
+      const originals = extracted.questions || [];
+      if (originals.length === 0) {
+        toast.error('PDF에서 문제를 추출하지 못했습니다.');
+        setStep('upload');
+        e.target.value = '';
+        return;
       }
+      setOriginalCount(originals.length);
+
+      // 2단계: 배치 변형 — 대형 PDF를 한 요청으로 변형하면 서버 제한시간·AI 동시
+      // 호출 한도에 걸리므로 ~24문항(지문 그룹 보존)씩 나눠 최대 3요청 동시 진행
+      const groupChunks = chunkPreservingGroups(originals, 12);
+      const batches: Record<string, unknown>[][] = [];
+      for (let i = 0; i < groupChunks.length; i += 2) {
+        batches.push([...groupChunks[i], ...(groupChunks[i + 1] || [])]);
+      }
+      setProgress({ done: 0, total: originals.length });
+      const results: Record<string, unknown>[][] = new Array(batches.length);
+      let nextBatch = 0;
+      let doneCount = 0;
+      const worker = async () => {
+        while (nextBatch < batches.length) {
+          const idx = nextBatch++;
+          const res = await fetchWithToast<{ questions?: Record<string, unknown>[] }>(
+            '/api/naesin/problems/extract-paraphrase',
+            { body: { unitId, unitTitle: unitTitle || '', phase: 'paraphrase', questions: batches[idx] }, errorMessage: 'AI 문제 변형에 실패했습니다.' },
+          );
+          results[idx] = res.questions || [];
+          doneCount += batches[idx].length;
+          setProgress({ done: doneCount, total: originals.length });
+        }
+      };
+      await Promise.all(Array.from({ length: Math.min(3, batches.length) }, () => worker()));
+
+      const merged = results.flat().map((q, i) => ({ ...q, number: i + 1 }));
+      const normalized = normalizeQuestions(merged);
+      editor.setQuestions(normalized);
+      refreshStructural(normalized);
       setStep('preview');
-      toast.success(`원본 ${data.originalCount}문제 → ${data.questions?.length || 0}문제 생성 완료`);
+      toast.success(`원본 ${originals.length}문제 → ${merged.length}문제 생성 완료`);
     } catch {
       setStep('upload');
     }
@@ -240,8 +277,25 @@ export function PdfProblemExtractDialog({ unitId, unitTitle, onAdd }: { unitId: 
         {step === 'loading' && (
           <div className="flex flex-col items-center justify-center py-16 space-y-4">
             <Loader2 className="h-10 w-10 animate-spin text-primary" />
-            <p className="text-sm text-muted-foreground">AI 문제 생성 중... (최대 5분 소요)</p>
-            <p className="text-xs text-muted-foreground">PDF 추출 → 원본 1:1 패러프레이징</p>
+            {progress ? (
+              <>
+                <p className="text-sm font-medium">
+                  원본 {originalCount}문항 추출 완료 — AI 변형 중 ({progress.done}/{progress.total})
+                </p>
+                <div className="w-64 h-2 rounded-full bg-muted overflow-hidden">
+                  <div
+                    className="h-full bg-primary transition-all"
+                    style={{ width: `${Math.round((progress.done / Math.max(1, progress.total)) * 100)}%` }}
+                  />
+                </div>
+                <p className="text-xs text-muted-foreground">문항이 많으면 몇 분 걸릴 수 있어요 — 창을 닫지 마세요</p>
+              </>
+            ) : (
+              <>
+                <p className="text-sm text-muted-foreground">PDF에서 원본 문제 추출 중...</p>
+                <p className="text-xs text-muted-foreground">추출이 끝나면 문항 단위 변형 진행률이 표시됩니다</p>
+              </>
+            )}
           </div>
         )}
 
