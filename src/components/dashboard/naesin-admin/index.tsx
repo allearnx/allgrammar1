@@ -134,7 +134,7 @@ export function NaesinAdminClient({ textbooks: initialTextbooks, unitCounts: ini
                     onClick={() => setSelectedTextbook(tb)}
                     onKeyDown={(e) => { if (e.key === 'Enter') setSelectedTextbook(tb); }}
                     className={`group flex cursor-pointer items-center gap-3 px-4 py-2.5 transition-colors first:rounded-t-xl last:rounded-b-xl ${
-                      selected ? 'bg-[#F0F6FF] shadow-[inset_3px_0_0_0_#1A73E8]' : 'hover:bg-gray-50'
+                      selected ? 'bg-[#E8F0FE] shadow-[inset_3px_0_0_0_#1A73E8]' : 'hover:bg-[#F8F9FA]'
                     } ${tb.is_active ? '' : 'opacity-60'}`}
                   >
                     <p className="w-40 shrink-0 truncate text-sm font-semibold text-gray-800 sm:w-56">{tb.display_name}</p>
