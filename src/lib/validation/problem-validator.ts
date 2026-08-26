@@ -453,6 +453,10 @@ export function sanitizeQuestions(
     // PDF artifact cleanup: superscript numbering (¹⁾ ²⁵⁾) and U+FFFD replacement chars
     if (typeof out.question === 'string') {
       out.question = out.question.replace(SUPERSCRIPT_NUMBERS, '').replace(FFFD_CHAR, '');
+      // 원본 문항 번호 잔재 제거: "7. ______ – prettier"처럼 줄 시작 번호 바로 뒤가 빈칸이면
+      // 번호만 제거 (시트가 번호를 새로 매기므로 이중 번호 방지). 조건 목록("1. 간접의문문을
+      // 사용할 것")은 뒤에 빈칸이 아니라 텍스트가 오므로 미발동.
+      out.question = out.question.replace(/^\d{1,3}\.\s+(?=_{3,})/gm, '');
     }
     if (typeof out.explanation === 'string') {
       out.explanation = out.explanation.replace(SUPERSCRIPT_NUMBERS, '').replace(FFFD_CHAR, '');

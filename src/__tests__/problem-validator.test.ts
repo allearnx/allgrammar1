@@ -852,3 +852,20 @@ describe('2지선다 객관식 허용', () => {
     expect(r.issues.some((i) => i.code === 'ANSWER_BIAS')).toBe(false);
   });
 });
+
+describe('sanitizeQuestions — 원본 문항 번호 잔재 제거', () => {
+  it('줄 시작 "번호. + 빈칸" 패턴의 번호만 제거', () => {
+    const { questions } = sanitizeQuestions([
+      { number: 1, question: '형용사를 쓰시오. e.g. hot – hotter\n\n7. ___________ – prettier', answer: 'pretty' },
+    ] as NaesinProblemQuestion[]);
+    expect(questions[0].question).toBe('형용사를 쓰시오. e.g. hot – hotter\n\n___________ – prettier');
+  });
+
+  it('조건 목록("1. 간접의문문을...")은 건드리지 않음', () => {
+    const q = '<조건>\n1. 간접의문문을 사용할 것\n2. 단어 up을 사용할 것\n영작하시오.';
+    const { questions } = sanitizeQuestions([
+      { number: 1, question: q, answer: 'x' },
+    ] as NaesinProblemQuestion[]);
+    expect(questions[0].question).toBe(q);
+  });
+});
