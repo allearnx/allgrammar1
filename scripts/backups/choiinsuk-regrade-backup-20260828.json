@@ -1,0 +1,1155 @@
+{
+ "sheets": [
+  {
+   "id": "4fb01567-fddb-4a5a-bfab-5b2bbb3dab89",
+   "title": "5과 문법 1단계 (5/12)",
+   "questions": [
+    {
+     "answer": "the best",
+     "number": 1,
+     "question": "[보기] the best / the friendliest / the most beautiful / the quickest\n\n[보기]에서 알맞은 것을 골라 빈칸에 쓰시오.\n\nJenny is _____________________ singer in the band.",
+     "explanation": "good은 불규칙 변화 형용사로 최상급이 the best이다."
+    },
+    {
+     "answer": "the quickest",
+     "number": 2,
+     "question": "[보기] the best / the friendliest / the most beautiful / the quickest\n\n[보기]에서 알맞은 것을 골라 빈칸에 쓰시오.\n\nWhat's _____________________ way to reach the train station?",
+     "explanation": "quick의 최상급은 the quickest이다."
+    },
+    {
+     "answer": "the most beautiful",
+     "number": 3,
+     "question": "[보기] the best / the friendliest / the most beautiful / the quickest\n\n[보기]에서 알맞은 것을 골라 빈칸에 쓰시오.\n\nI think Paris is _____________________ city in Europe.",
+     "explanation": "beautiful은 긴 형용사이므로 최상급은 the most beautiful로 쓴다."
+    },
+    {
+     "answer": "the friendliest",
+     "number": 4,
+     "question": "[보기] the best / the friendliest / the most beautiful / the quickest\n\n[보기]에서 알맞은 것을 골라 빈칸에 쓰시오.\n\nTom is warm and helpful. He is _______________ boy in my class.",
+     "explanation": "friendly는 「자음+y」로 끝나므로 y를 i로 바꾸고 -est를 붙여 the friendliest로 쓴다."
+    },
+    {
+     "answer": "What is the fastest animal in the world?",
+     "number": 5,
+     "question": "다음 우리말을 주어진 단어를 사용하여 영작하시오.\n\n세상에서 가장 빠른 동물은 무엇일까?\nfast, in the world\n※ 완전한 문장으로 쓰시오.",
+     "explanation": "최상급 형용사는 「the + 형용사-est」 형태로 쓰며, fast의 최상급은 fastest입니다."
+    },
+    {
+     "answer": "What animal has the most legs?",
+     "number": 6,
+     "question": "다음 우리말을 주어진 단어를 사용하여 영작하시오.\n\n어떤 동물이 다리를 가장 많이 가지고 있을까?\nmany\n※ 완전한 문장으로 쓰시오.",
+     "explanation": "many의 최상급은 the most이며, 뒤에 명사(legs)가 옵니다.",
+     "acceptedAnswers": [
+      "Which animal has the most legs?"
+     ]
+    },
+    {
+     "answer": "I will buy the prettiest dress with this coupon.",
+     "number": 7,
+     "question": "다음 우리말을 주어진 단어를 사용하여 영작하시오.\n\n나는 이 쿠폰으로 가장 예쁜 원피스를 살 것이다.\nbuy, pretty, dress, with\n※ 완전한 문장으로 쓰시오.",
+     "explanation": "pretty의 최상급은 y를 i로 바꾸고 -est를 붙여 prettiest가 됩니다.",
+     "acceptedAnswers": [
+      "I will buy the prettiest dress with this coupon"
+     ]
+    },
+    {
+     "answer": "I like strawberry milk the most.",
+     "number": 8,
+     "question": "다음 우리말을 주어진 단어를 사용하여 영작하시오.\n\n나는 딸기 우유를 제일 좋아해.\nlike\n※ 완전한 문장으로 쓰시오.",
+     "explanation": "「like ~ the most」는 '~을 가장 좋아한다'는 뜻으로 최상급을 나타냅니다.",
+     "acceptedAnswers": [
+      "I like strawberry milk the most",
+      "I like strawberry milk the best."
+     ]
+    },
+    {
+     "answer": "It is the tallest building in the world.",
+     "number": 9,
+     "question": "다음 우리말을 주어진 단어를 사용하여 영작하시오.\n\n그것은 세계에서 가장 높은 건물이다.\ntall, building, in\n※ 완전한 문장으로 쓰시오.",
+     "explanation": "tall의 최상급은 tallest이며, 범위를 나타낼 때 in the world를 씁니다.",
+     "acceptedAnswers": [
+      "It is the tallest building in the world",
+      "That is the tallest building in the world"
+     ]
+    },
+    {
+     "answer": "I will give all my things to the most honest daughter.",
+     "number": 10,
+     "question": "다음 우리말을 주어진 단어를 사용하여 영작하시오.\n\n나는 나의 모든 재산을 가장 정직한 딸에게 주겠다.\ngive, all, things, honest\n※ 완전한 문장으로 쓰시오.",
+     "explanation": "「give A to B」 또는 「give B A」 어순으로 쓰고, '가장 정직한'은 honest의 최상급 the most honest로 쓴다.",
+     "acceptedAnswers": [
+      "I'll give all my things to the most honest daughter.",
+      "I will give the most honest daughter all my things.",
+      "I'll give the most honest daughter all my things."
+     ]
+    },
+    {
+     "answer": "They started to perform the most exciting play.",
+     "number": 11,
+     "question": "다음 우리말을 주어진 단어를 사용하여 영작하시오.\n\n그들은 가장 흥미로운 연극을 공연하기 시작했습니다.\nstart, exciting, play\n※ 완전한 문장으로 쓰시오.",
+     "explanation": "exciting처럼 긴 형용사의 최상급은 the most exciting으로 씁니다.",
+     "acceptedAnswers": [
+      "They started to perform the most exciting play"
+     ]
+    },
+    {
+     "answer": "The Sahara is the driest place on Earth.",
+     "number": 12,
+     "question": "다음 우리말을 주어진 단어를 사용하여 영작하시오.\n\n사하라 사막은 지구에서 가장 건조한 지역입니다.\nthe Sahara, dry, place, on Earth\n※ 완전한 문장으로 쓰시오.",
+     "explanation": "dry의 최상급은 y를 i로 바꾸고 -est를 붙여 driest가 됩니다.",
+     "acceptedAnswers": [
+      "The Sahara is the driest place on Earth",
+      "The Sahara is the driest place on the Earth"
+     ]
+    },
+    {
+     "answer": "The Tyrannosaurus was the biggest and fiercest dinosaur.",
+     "number": 13,
+     "question": "다음 우리말을 주어진 단어를 사용하여 영작하시오.\n\n티라노사우루스는 가장 크고 사나운 공룡이었습니다.\nthe Tyrannosaurus, big, fierce, dinosaur\n※ 완전한 문장으로 쓰시오.",
+     "explanation": "big은 자음을 하나 더 붙여 biggest, fierce는 -st만 붙여 fiercest가 됩니다.",
+     "acceptedAnswers": [
+      "The Tyrannosaurus was the biggest and fiercest dinosaur",
+      "The Tyrannosaurus was the biggest and the fiercest dinosaur"
+     ]
+    },
+    {
+     "answer": "The smallest bird was the hummingbird. It was lighter than a coin.",
+     "number": 14,
+     "question": "다음 우리말을 주어진 단어를 사용하여 영작하시오.\n\n가장 작은 새는 벌새였습니다. 그것은 하나의 동전보다 더 가벼웠습니다.\nsmall, hummingbird, a\n※ 완전한 문장으로 쓰시오.",
+     "explanation": "small의 최상급은 smallest이고, light의 비교급은 lighter than으로 씁니다.",
+     "acceptedAnswers": [
+      "The smallest bird was the hummingbird. It was lighter than a coin",
+      "The smallest bird was a hummingbird. It was lighter than a coin"
+     ]
+    },
+    {
+     "answer": "It was the most enjoyable moment of my life.",
+     "number": 15,
+     "question": "다음 우리말을 주어진 단어를 사용하여 영작하시오.\n\n그것은 내 인생에서 가장 즐거운 순간이었다.\nenjoy, moment, of\n※ 완전한 문장으로 쓰시오.",
+     "explanation": "enjoyable은 긴 형용사이므로 최상급을 the most enjoyable로 씁니다.",
+     "acceptedAnswers": [
+      "It was the most enjoyable moment of my life"
+     ]
+    },
+    {
+     "answer": "Canada is not the biggest country in the world.",
+     "number": 16,
+     "question": "다음 우리말을 주어진 단어를 사용하여 영작하시오.\n\n캐나다가 세계에서 가장 큰 나라는 아니야.\nbig, country, in\n※ 완전한 문장으로 쓰시오.",
+     "explanation": "big의 최상급은 biggest이며, 부정문은 is not the biggest 형태로 씁니다.",
+     "acceptedAnswers": [
+      "Canada is not the biggest country in the world"
+     ]
+    },
+    {
+     "answer": "Angel Falls is the highest waterfall in the world.",
+     "number": 17,
+     "question": "다음 우리말을 주어진 단어를 사용하여 영작하시오.\n\nAngel Falls는 세계에서 가장 높은 폭포이다.\nAngel Falls, high, in ※ 완전한 문장으로 쓰시오.",
+     "explanation": "최상급 the highest를 사용하며, '~에서'는 in the world로 표현합니다.",
+     "acceptedAnswers": [
+      "Angel Falls is the highest waterfall in the world"
+     ]
+    },
+    {
+     "answer": "Death Valley is the hottest place on Earth.",
+     "number": 18,
+     "question": "다음 우리말을 주어진 단어를 사용하여 영작하시오.\n\nDeath Valley는 지구에서 가장 더운 곳이다.\nhot, place, on ※ 완전한 문장으로 쓰시오.",
+     "explanation": "hot의 최상급은 자음을 겹쳐 the hottest로 씁니다. '지구에서'는 on Earth입니다.",
+     "acceptedAnswers": [
+      "Death Valley is the hottest place on Earth",
+      "Death Valley is the hottest place on the Earth"
+     ]
+    },
+    {
+     "answer": "The world's longest river is the Nile.",
+     "number": 19,
+     "question": "다음 우리말을 주어진 단어를 사용하여 영작하시오.\n\n세계에서 가장 긴 강은 the Nile이다.\nthe world, long, the Nile ※ 완전한 문장으로 쓰시오.",
+     "explanation": "소유격 the world's 뒤에 최상급 longest를 씁니다.",
+     "acceptedAnswers": [
+      "The world's longest river is the Nile",
+      "The longest river in the world is the Nile",
+      "In the world, the longest river is the Nile"
+     ]
+    },
+    {
+     "answer": "The coldest place is Vostok Station in Antarctica.",
+     "number": 20,
+     "question": "다음 우리말을 주어진 단어를 사용하여 영작하시오.\n\n가장 추운 곳은 남극의 Vostok Station이다.\ncold, place, Vostok Station, Antarctica ※ 완전한 문장으로 쓰시오.",
+     "explanation": "cold의 최상급 the coldest를 사용하고, 위치는 in Antarctica로 표현합니다.",
+     "acceptedAnswers": [
+      "The coldest place is Vostok Station in Antarctica"
+     ]
+    },
+    {
+     "answer": "one",
+     "number": 21,
+     "question": "그림을 보고 질문에 대한 대답을 완성하시오.\n\n(그림: 연필 1자루, 의자 3개, 자 2개)\nHow many pencils are there?\n→ There is ____________ pencil.",
+     "explanation": "단수 명사 pencil이므로 There is one pencil.으로 씁니다."
+    },
+    {
+     "answer": "are three",
+     "number": 22,
+     "question": "그림을 보고 질문에 대한 대답을 완성하시오.\n\n(그림: 연필 1자루, 의자 3개, 자 2개)\nHow many chairs are there?\n→ There _____________ _____________ chairs.",
+     "explanation": "복수 명사이므로 There are를 쓰고 개수 three를 넣습니다."
+    },
+    {
+     "answer": "are two",
+     "number": 23,
+     "question": "그림을 보고 질문에 대한 대답을 완성하시오.\n\n(그림: 연필 1자루, 의자 3개, 자 2개)\nHow many rulers are there?\n→ There _____________ _____________ rulers.",
+     "explanation": "복수 명사이므로 There are two rulers.가 됩니다."
+    },
+    {
+     "answer": "There is",
+     "number": 24,
+     "question": "빈칸에 알맞은 말을 쓰시오.\n\n_________________ a clock.",
+     "explanation": "단수 명사 clock 앞에는 There is를 씁니다."
+    },
+    {
+     "answer": "There are",
+     "number": 25,
+     "question": "빈칸에 알맞은 말을 쓰시오.\n\n_________________ two doors.",
+     "explanation": "복수 명사 doors 앞에는 There are를 씁니다."
+    },
+    {
+     "answer": "There is",
+     "number": 26,
+     "question": "빈칸에 알맞은 말을 쓰시오.\n\n_________________ a sofa.",
+     "explanation": "단수 명사 sofa 앞에는 There is를 씁니다."
+    },
+    {
+     "answer": "There is",
+     "number": 27,
+     "question": "빈칸에 알맞은 말을 쓰시오.\n\n_________________ a blanket.",
+     "explanation": "단수 명사 blanket 앞에는 There is를 씁니다."
+    },
+    {
+     "answer": "There are",
+     "number": 28,
+     "question": "빈칸에 알맞은 말을 쓰시오.\n\n_________________ five chairs.",
+     "explanation": "복수 명사 chairs 앞에는 There are를 씁니다."
+    },
+    {
+     "answer": "There is",
+     "number": 29,
+     "question": "빈칸에 알맞은 말을 쓰시오.\n\n_________________ a magazine.",
+     "explanation": "단수 명사(a magazine) 앞에는 'There is'를 씁니다."
+    },
+    {
+     "answer": "There are",
+     "number": 30,
+     "question": "빈칸에 알맞은 말을 쓰시오.\n\n_________________ four pencils.",
+     "explanation": "복수 명사(four pencils) 앞에는 'There are'를 씁니다."
+    }
+   ]
+  },
+  {
+   "id": "20771b59-d644-4bed-a8ef-9b77469257fc",
+   "title": "5과 문법 1단계 (4/12)",
+   "questions": [
+    {
+     "answer": "newer",
+     "number": 1,
+     "question": "괄호 안의 단어를 알맞은 형태로 바꾸어 빈칸에 쓰시오.\n\nMy bike is ____________ (new) than Jim's bike.",
+     "explanation": "than이 있으므로 비교급이며 new의 비교급은 newer입니다."
+    },
+    {
+     "answer": "more important",
+     "number": 2,
+     "question": "괄호 안의 단어를 알맞은 형태로 바꾸어 빈칸에 쓰시오.\n\nI think science is ______________ (important) than history.",
+     "explanation": "3음절 이상 형용사의 비교급은 more를 붙여 more important가 됩니다."
+    },
+    {
+     "answer": "more useful",
+     "number": 3,
+     "question": "괄호 안의 단어를 알맞은 형태로 바꾸어 빈칸에 쓰시오.\n\nWhich subject is _______________ (useful), math or music?",
+     "explanation": "두 대상을 비교하므로 비교급이며 useful의 비교급은 more useful입니다."
+    },
+    {
+     "answer": "longer",
+     "number": 4,
+     "question": "괄호 안의 단어를 알맞은 형태로 바꾸어 빈칸에 쓰시오.\n\nThe days are ______________ (long) in summer than in winter.",
+     "explanation": "than이 있으므로 비교급이며 long의 비교급은 longer입니다."
+    },
+    {
+     "answer": "the most tired",
+     "number": 5,
+     "question": "괄호 안의 단어를 알맞은 형태로 바꾸어 빈칸에 쓰시오.\n\nDon't wake her, she is ______________ (tired) of us all!",
+     "explanation": "감정·상태 형용사 tired의 최상급은 the most tired가 표준이다. (the tiredest도 인정)",
+     "acceptedAnswers": [
+      "the tiredest"
+     ]
+    },
+    {
+     "answer": "the funniest",
+     "number": 6,
+     "question": "괄호 안의 단어를 알맞은 형태로 바꾸어 빈칸에 쓰시오.\n\nSam is ______________ (funny) boy in our class.",
+     "explanation": "최상급이며 -y로 끝나는 funny는 y를 i로 바꿔 the funniest가 됩니다."
+    },
+    {
+     "answer": "taller / the tallest",
+     "number": 7,
+     "question": "괄호 안의 단어를 알맞은 형태로 바꾸어 빈칸에 쓰시오.\n\nMy brother is ______________ (tall) than me, but my uncle is ______________ (tall) in my family.",
+     "subParts": [
+      {
+       "label": "(1)",
+       "answer": "taller"
+      },
+      {
+       "label": "(2)",
+       "answer": "the tallest"
+      }
+     ],
+     "explanation": "첫 빈칸은 than이 있어 비교급 taller, 둘째 빈칸은 in my family로 최상급 the tallest입니다.",
+     "acceptedAnswers": [
+      "taller/the tallest"
+     ]
+    },
+    {
+     "answer": "the highest",
+     "number": 8,
+     "question": "괄호 안의 단어를 알맞은 형태로 바꾸어 빈칸에 쓰시오.\n\nMy score was ______________ (high) in this test.",
+     "explanation": "최상급 문맥이며 high의 최상급은 the highest입니다."
+    },
+    {
+     "answer": "driest / sunniest",
+     "number": 9,
+     "question": "괄호 안의 단어를 알맞은 형태로 바꾸어 빈칸에 쓰시오.\n\nWhich is the ____________________ (dry) season of the year? And the ________________ (sunny)?",
+     "subParts": [
+      {
+       "label": "(1)",
+       "answer": "driest"
+      },
+      {
+       "label": "(2)",
+       "answer": "sunniest"
+      }
+     ],
+     "explanation": "-y로 끝나는 dry와 sunny는 y를 i로 바꿔 최상급 driest, sunniest가 됩니다.",
+     "acceptedAnswers": [
+      "driest/sunniest"
+     ]
+    },
+    {
+     "answer": "the tastiest / the best",
+     "number": 10,
+     "question": "괄호 안의 단어를 알맞은 형태로 바꾸어 빈칸에 쓰시오.\n\nMom makes __________________ (tasty) pancakes. She's _____________ (good) baker!",
+     "subParts": [
+      {
+       "label": "(1)",
+       "answer": "the tastiest",
+       "acceptedAnswers": [
+        "the most tasty"
+       ]
+      },
+      {
+       "label": "(2)",
+       "answer": "the best"
+      }
+     ],
+     "explanation": "빈칸 뒤 in the family가 생략된 최상급 문장으로 the most tasty를, 명사 baker를 꾸미는 최상급으로 the best를 씁니다. good의 최상급은 the best입니다.",
+     "acceptedAnswers": [
+      "the most tasty / the best"
+     ]
+    },
+    {
+     "answer": "heavier",
+     "number": 11,
+     "question": "괄호 안의 단어를 알맞은 형태로 바꾸어 빈칸에 쓰시오.\n\nLisa's suitcase is ______________ (heavy) than Kate's suitcase.",
+     "explanation": "than이 있으므로 비교급을 씁니다. heavy는 -y로 끝나므로 y를 i로 바꾸고 -er을 붙여 heavier가 됩니다."
+    },
+    {
+     "answer": "the most colorful",
+     "number": 12,
+     "question": "괄호 안의 단어를 알맞은 형태로 바꾸어 빈칸에 쓰시오.\n\nI like this jacket best. It's __________________ (colorful) in the store.",
+     "explanation": "in the store라는 범위가 있으므로 최상급을 씁니다. colorful은 긴 형용사라 the most colorful로 만듭니다."
+    },
+    {
+     "answer": "worst",
+     "number": 13,
+     "question": "괄호 안의 단어를 알맞은 형태로 바꾸어 빈칸에 쓰시오.\n\nMy neighbor Jack is not kind at all. He's the ______________ (bad)!",
+     "explanation": "bad의 최상급은 불규칙 변화로 worst입니다."
+    },
+    {
+     "answer": "the most poisonous",
+     "number": 14,
+     "question": "괄호 안의 단어를 알맞은 형태로 바꾸어 빈칸에 쓰시오.\n\nThat spider is ________________ (poisonous) creature in the zoo. Watch out!",
+     "explanation": "in the zoo라는 범위가 있으므로 최상급이며, poisonous는 긴 형용사라 the most poisonous가 됩니다."
+    },
+    {
+     "answer": "the tiniest",
+     "number": 15,
+     "question": "괄호 안의 단어를 알맞은 형태로 바꾸어 빈칸에 쓰시오.\n\nMia's handwriting is ______________ (tiny) handwriting in the class.",
+     "explanation": "tiny는 -y로 끝나므로 y를 i로 바꾸고 -est를 붙여 최상급 the tiniest가 됩니다."
+    },
+    {
+     "answer": "the best",
+     "number": 16,
+     "question": "괄호 안의 단어를 알맞은 형태로 바꾸어 빈칸에 쓰시오.\n\nSam and Leo are _____________ (good) friends.",
+     "explanation": "good의 최상급은 the best입니다. '가장 좋은 친구'라는 뜻입니다.",
+     "acceptedAnswers": [
+      "best"
+     ]
+    },
+    {
+     "answer": "the coolest",
+     "number": 17,
+     "question": "괄호 안의 단어를 알맞은 형태로 바꾸어 빈칸에 쓰시오.\n\nThank you so much! This is ______________ (cool) gift!",
+     "explanation": "cool은 짧은 형용사라 -est를 붙여 최상급 the coolest가 됩니다."
+    },
+    {
+     "answer": "strangest / ugliest",
+     "number": 18,
+     "question": "괄호 안의 단어를 알맞은 형태로 바꾸어 빈칸에 쓰시오.\n\nThis creature is the _________________ (strange) and ________________ (ugly) in the museum.",
+     "subParts": [
+      {
+       "label": "(1)",
+       "answer": "strangest"
+      },
+      {
+       "label": "(2)",
+       "answer": "ugliest",
+       "acceptedAnswers": [
+        "the ugliest"
+       ]
+      }
+     ],
+     "explanation": "the ~est 형태의 최상급입니다. strange는 -e로 끝나 -st만 붙여 strangest, ugly는 y를 i로 바꿔 ugliest가 됩니다.",
+     "acceptedAnswers": [
+      "strangest/ugliest"
+     ]
+    },
+    {
+     "answer": "better / the best",
+     "number": 19,
+     "question": "괄호 안의 단어를 알맞은 형태로 바꾸어 빈칸에 쓰시오.\n\nMike is ______________ (good) than Paul at soccer, but Chris is ______________ (good) soccer player in our class.",
+     "subParts": [
+      {
+       "label": "(1)",
+       "answer": "better"
+      },
+      {
+       "label": "(2)",
+       "answer": "the best"
+      }
+     ],
+     "explanation": "than이 있는 앞 빈칸은 비교급 better, 범위(in our class)가 있는 뒤 빈칸은 최상급 the best입니다.",
+     "acceptedAnswers": [
+      "better/the best"
+     ]
+    },
+    {
+     "answer": "worse / the worst",
+     "number": 20,
+     "question": "괄호 안의 단어를 알맞은 형태로 바꾸어 빈칸에 쓰시오.\n\nThe traffic yesterday was ______________ (bad) than last month, but the traffic today is ______________ (bad) this year.",
+     "subParts": [
+      {
+       "label": "(1)",
+       "answer": "worse"
+      },
+      {
+       "label": "(2)",
+       "answer": "the worst"
+      }
+     ],
+     "explanation": "than이 있는 앞은 비교급 worse, 범위(this year)가 있는 뒤는 최상급 the worst입니다. bad는 불규칙 변화입니다.",
+     "acceptedAnswers": [
+      "worse/the worst"
+     ]
+    },
+    {
+     "answer": "the shortest",
+     "number": 21,
+     "question": "[보기] the longest / the most dangerous / the most intelligent / the oldest / the shortest\n\n[보기]에서 알맞은 것을 골라 빈칸에 쓰시오.\n\nFebruary is _____________________ month in the year.",
+     "explanation": "1년 중 일수가 가장 짧은 달은 2월이므로 short의 최상급 the shortest를 쓴다."
+    },
+    {
+     "answer": "the most intelligent",
+     "number": 22,
+     "question": "[보기] the longest / the most dangerous / the most intelligent / the oldest / the shortest\n\n[보기]에서 알맞은 것을 골라 빈칸에 쓰시오.\n\nChimpanzees are _____________________ animals in the jungle.",
+     "explanation": "'가장 지능이 높은'이라는 뜻으로 intelligent의 최상급 the most intelligent가 알맞습니다."
+    },
+    {
+     "answer": "the oldest",
+     "number": 23,
+     "question": "[보기] the longest / the most dangerous / the most intelligent / the oldest / the shortest\n\n[보기]에서 알맞은 것을 골라 빈칸에 쓰시오.\n\nMy grandmother is _____________________ person in my family.",
+     "explanation": "가족 중 나이가 가장 많은 사람을 나타내므로 old의 최상급 the oldest가 알맞습니다."
+    },
+    {
+     "answer": "the most dangerous",
+     "number": 24,
+     "question": "[보기] the longest / the most dangerous / the most intelligent / the oldest / the shortest\n\n[보기]에서 알맞은 것을 골라 빈칸에 쓰시오.\n\nCrocodiles are _____________________ animals in the river.",
+     "explanation": "'가장 위험한'이라는 뜻으로 dangerous의 최상급 the most dangerous가 알맞습니다."
+    },
+    {
+     "answer": "the longest",
+     "number": 25,
+     "question": "[보기] the longest / the most dangerous / the most intelligent / the oldest / the shortest\n\n[보기]에서 알맞은 것을 골라 빈칸에 쓰시오.\n\nThe Amazon is _____________________ river in the world.",
+     "explanation": "'가장 긴'이라는 뜻으로 long의 최상급 the longest가 알맞습니다."
+    },
+    {
+     "answer": "the most popular",
+     "number": 26,
+     "question": "[보기] the farthest[furthest] / the fastest / the most expensive / the most popular\n\n[보기]에서 알맞은 것을 골라 빈칸에 쓰시오.\n\nHe is _____________________ boy in our club. Everyone wants to be his friend.",
+     "explanation": "'가장 ~한'을 뜻하는 최상급은 「the + 최상급」으로 쓴다. popular는 긴 형용사이므로 the most popular로 만든다."
+    },
+    {
+     "answer": "the most expensive",
+     "number": 27,
+     "question": "[보기] the farthest[furthest] / the fastest / the most expensive / the most popular\n\n[보기]에서 알맞은 것을 골라 빈칸에 쓰시오.\n\nShe ordered _____________________ dish on the menu.",
+     "explanation": "expensive는 긴 형용사이므로 최상급은 the most expensive로 쓴다."
+    },
+    {
+     "answer": "the fastest",
+     "number": 28,
+     "question": "[보기] the farthest[furthest] / the fastest / the most expensive / the most popular\n\n[보기]에서 알맞은 것을 골라 빈칸에 쓰시오.\n\nThe peregrine falcon is _____________________ bird in the world.",
+     "explanation": "fast는 짧은 형용사이므로 최상급은 -est를 붙여 the fastest로 쓴다."
+    },
+    {
+     "answer": "the farthest",
+     "number": 29,
+     "question": "[보기] the farthest / the fastest / the most expensive / the most popular\n\n[보기]에서 알맞은 것을 골라 빈칸에 쓰시오.\n\nMia's home is _____________________ home from the office, so she often arrives late.",
+     "explanation": "far의 최상급은 the farthest 또는 the furthest이다.",
+     "acceptedAnswers": [
+      "the furthest"
+     ]
+    },
+    {
+     "answer": "the cleanest",
+     "number": 30,
+     "question": "[보기] the cheapest / the cleanest / The hottest / the most / the thickest\n\n[보기]에서 알맞은 것을 골라 빈칸에 쓰시오.\n\nAntarctica has _____________________ air on the planet.",
+     "explanation": "clean은 짧은 형용사이므로 최상급은 the cleanest로 쓴다."
+    },
+    {
+     "answer": "the cheapest",
+     "number": 31,
+     "question": "[보기] the cheapest / the cleanest / The hottest / the most / the thickest\n\n[보기]에서 알맞은 것을 골라 빈칸에 쓰시오.\n\nYou can buy _____________________ fruit and vegetables at this store.",
+     "explanation": "cheap의 최상급은 -est를 붙여 the cheapest로 쓴다."
+    },
+    {
+     "answer": "the thickest",
+     "number": 32,
+     "question": "[보기] the cheapest / the cleanest / The hottest / the most / the thickest\n\n[보기]에서 알맞은 것을 골라 빈칸에 쓰시오.\n\nThis encyclopedia is _____________________ book on the shelf.",
+     "explanation": "thick의 최상급은 the thickest이다."
+    },
+    {
+     "answer": "The hottest",
+     "number": 33,
+     "question": "[보기] the cheapest / the cleanest / The hottest / the most / the thickest\n\n[보기]에서 알맞은 것을 골라 빈칸에 쓰시오.\n\n_____________________ desert of all is the Sahara, and it lies in Africa.",
+     "explanation": "hot은 단모음+단자음으로 끝나 자음을 하나 더 쓰고 -est를 붙인다. 문장 맨 앞이므로 The hottest로 쓴다."
+    },
+    {
+     "answer": "the most",
+     "number": 34,
+     "question": "[보기] the cheapest / the cleanest / The hottest / the most / the thickest\n\n[보기]에서 알맞은 것을 골라 빈칸에 쓰시오.\n\nSeattle has _____________________ coffee shops in the United States.",
+     "explanation": "many의 최상급은 the most이다."
+    }
+   ]
+  }
+ ],
+ "attempts": [
+  {
+   "id": "d135e860-09db-488d-ba46-7859943816e6",
+   "sheet_id": "f3301d53-f9d3-4d78-8e32-2a86515b2f01",
+   "score": 97,
+   "total_questions": 30,
+   "answers": [
+    "2",
+    "2",
+    "1",
+    "Fast / Small",
+    "Shorter / The best",
+    "The most exciting ",
+    "Worse  / Colder",
+    "Faster / Stronger",
+    "3",
+    "1",
+    "1",
+    "1",
+    "1",
+    "1",
+    "2",
+    "1",
+    "1",
+    "2",
+    "1",
+    "1",
+    "2",
+    "1",
+    "1",
+    "2",
+    "2",
+    "2",
+    "2",
+    "1",
+    "bigger than  / the biggest",
+    "friendlier than / the friendliest "
+   ],
+   "wrong_answers": [
+    {
+     "number": 4,
+     "question": "다음 표현과 반대되는 뜻을 가진 표현을 각각 쓰시오.\n\nthe fastest : _________ smaller : ___________",
+     "userAnswer": "Fast / Small",
+     "correctAnswer": "the slowest / bigger"
+    },
+    {
+     "number": 2,
+     "question": "Which is the coldest month ________ the year?",
+     "userAnswer": "2",
+     "retryCorrect": true,
+     "correctAnswer": "2"
+    },
+    {
+     "number": 5,
+     "question": "taller : ___________ the worst : ___________",
+     "userAnswer": "Shorter / The best",
+     "retryCorrect": true,
+     "correctAnswer": "shorter / the best"
+    },
+    {
+     "number": 9,
+     "question": "I think winter is (very cold / colder / the coldest) season of the year.",
+     "userAnswer": "3",
+     "retryCorrect": true,
+     "correctAnswer": "3"
+    },
+    {
+     "number": 12,
+     "question": "Basketball is (more / the most) popular than tennis.",
+     "userAnswer": "1",
+     "retryCorrect": true,
+     "correctAnswer": "1"
+    },
+    {
+     "number": 15,
+     "question": "Yesterday was (hotter / the hottest) day in this town.",
+     "userAnswer": "2",
+     "retryCorrect": true,
+     "correctAnswer": "2"
+    },
+    {
+     "number": 18,
+     "question": "Trains are (the fastest / faster) than buses.",
+     "userAnswer": "2",
+     "retryCorrect": true,
+     "correctAnswer": "2"
+    },
+    {
+     "number": 28,
+     "question": "Who is (the best / better) dancer in the school?",
+     "userAnswer": "1",
+     "retryCorrect": true,
+     "correctAnswer": "1"
+    }
+   ],
+   "created_at": "2026-08-27T12:39:40.069793+00:00"
+  },
+  {
+   "id": "c0af8e0e-3757-467a-8aed-adf3849330ab",
+   "sheet_id": "4485925a-cf88-4bfb-b167-6ff0bd17ae60",
+   "score": 57,
+   "total_questions": 30,
+   "answers": [
+    "1",
+    "the highest mountain ",
+    "The kindest girl",
+    "The hardest problem ",
+    "The biggest city ",
+    "the oldest in",
+    " taller than",
+    "The famous actor in",
+    "The hottest day ",
+    "The saddest moment ",
+    "The longest hair ",
+    "The laziest students",
+    "The most expensive ",
+    "The tallest tower in",
+    "The best idea in",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "faster",
+    "near",
+    "The highest ",
+    "The best",
+    "The most beautiful ",
+    "The worst ",
+    "The most exciting ",
+    "The coldest"
+   ],
+   "wrong_answers": [
+    {
+     "number": 6,
+     "question": "This bridge is very old.\nIt's ______________________________ the city.",
+     "userAnswer": "the oldest in",
+     "correctAnswer": "the oldest bridge in"
+    },
+    {
+     "number": 7,
+     "question": "Mina is very tall.\nShe is ______________________________ all the girls in the team.",
+     "userAnswer": " taller than",
+     "correctAnswer": "the tallest of"
+    },
+    {
+     "number": 8,
+     "question": "He is a very famous actor.\nHe is ______________________________ the world.",
+     "userAnswer": "The famous actor in",
+     "correctAnswer": "the most famous actor in"
+    },
+    {
+     "number": 11,
+     "question": "I have very long hair.\nMy hair is ___________________________________ my class.",
+     "userAnswer": "The longest hair ",
+     "correctAnswer": "the longest in"
+    },
+    {
+     "number": 16,
+     "question": "<Information>\n• Earth is our planet and it is very beautiful.\n• Mars has high mountains and deep valleys.\n• Mercury is a small planet and it is very close to the Sun.\n• Jupiter is a very large planet.\n• Venus is very hot; the temperature there is over 400ºC.\n• Saturn is a very light planet.\n• Uranus is a very cold planet.\n• Neptune is very far from the Sun.\n\nMars has ______________ mountains and ______________ valleys than Earth.\nMars has ______________ mountains and ______________ valleys in the Solar System.",
+     "userAnswer": "",
+     "correctAnswer": "higher / deeper / the highest / the deepest"
+    },
+    {
+     "number": 17,
+     "question": "<Information>\n• Earth is our planet and it is very beautiful.\n• Mars has high mountains and deep valleys.\n• Mercury is a small planet and it is very close to the Sun.\n• Jupiter is a very large planet.\n• Venus is very hot; the temperature there is over 400ºC.\n• Saturn is a very light planet.\n• Uranus is a very cold planet.\n• Neptune is very far from the Sun.\n\nMercury is ______________ and ______________ to the Sun than Earth.\nMercury is ______________ planet in the Solar System and ______________ to the Sun.",
+     "userAnswer": "",
+     "correctAnswer": "smaller / closer / the smallest / the closest"
+    },
+    {
+     "number": 18,
+     "question": "<Information>\n• Earth is our planet and it is very beautiful.\n• Mars has high mountains and deep valleys.\n• Mercury is a small planet and it is very close to the Sun.\n• Jupiter is a very large planet.\n• Venus is very hot; the temperature there is over 400ºC.\n• Saturn is a very light planet.\n• Uranus is a very cold planet.\n• Neptune is very far from the Sun.\n\nJupiter is ______________ than all the other planets, and 11 times larger than Earth.\nJupiter is ______________ planet in the Solar System.",
+     "userAnswer": "",
+     "correctAnswer": "larger / the largest"
+    },
+    {
+     "number": 19,
+     "question": "<Information>\n• Earth is our planet and it is very beautiful.\n• Mars has high mountains and deep valleys.\n• Mercury is a small planet and it is very close to the Sun.\n• Jupiter is a very large planet.\n• Venus is very hot; the temperature there is over 400ºC.\n• Saturn is a very light planet.\n• Uranus is a very cold planet.\n• Neptune is very far from the Sun.\n\nVenus is ______________ than Earth.\nVenus is ______________ planet of our Solar System.",
+     "userAnswer": "",
+     "correctAnswer": "hotter / the hottest"
+    },
+    {
+     "number": 20,
+     "question": "<Information>\n• Earth is our planet and it is very beautiful.\n• Mars has high mountains and deep valleys.\n• Mercury is a small planet and it is very close to the Sun.\n• Jupiter is a very large planet.\n• Venus is very hot; the temperature there is over 400ºC.\n• Saturn is a very light planet.\n• Uranus is a very cold planet.\n• Neptune is very far from the Sun.\n\nSaturn is ______________ than Earth.\nSaturn is ______________ planet of our Solar System.",
+     "userAnswer": "",
+     "correctAnswer": "lighter / the lightest"
+    },
+    {
+     "number": 21,
+     "question": "<Information>\n• Earth is our planet and it is very beautiful.\n• Mars has high mountains and deep valleys.\n• Mercury is a small planet and it is very close to the Sun.\n• Jupiter is a very large planet.\n• Venus is very hot; the temperature there is over 400ºC.\n• Saturn is a very light planet.\n• Uranus is a very cold planet.\n• Neptune is very far from the Sun.\n\nUranus is ______________ than Earth.\nUranus is ______________ planet of our Solar System.",
+     "userAnswer": "",
+     "correctAnswer": "colder / the coldest"
+    },
+    {
+     "number": 22,
+     "question": "<Information>\n• Earth is our planet and it is very beautiful.\n• Mars has high mountains and deep valleys.\n• Mercury is a small planet and it is very close to the Sun.\n• Jupiter is a very large planet.\n• Venus is very hot; the temperature there is over 400ºC.\n• Saturn is a very light planet.\n• Uranus is a very cold planet.\n• Neptune is very far from the Sun.\n\nNeptune is ______________ from the Sun than Earth.\nNeptune is ______________ planet from the Sun.",
+     "userAnswer": "",
+     "correctAnswer": "farther / the farthest"
+    },
+    {
+     "number": 24,
+     "question": "It is five miles to ______________ (near) station.",
+     "userAnswer": "near",
+     "correctAnswer": "the nearest"
+    },
+    {
+     "number": 30,
+     "question": "It's ___________ (cold) today than last week.",
+     "userAnswer": "The coldest",
+     "correctAnswer": "colder"
+    }
+   ],
+   "created_at": "2026-08-27T12:57:06.991219+00:00"
+  },
+  {
+   "id": "59adf420-a2c9-47c6-947c-d825ad98842d",
+   "sheet_id": "20771b59-d644-4bed-a8ef-9b77469257fc",
+   "score": 85,
+   "total_questions": 34,
+   "answers": [
+    "Newer",
+    "More important ",
+    "More useful ",
+    "Longer ",
+    "The most tired ",
+    "The funniest ",
+    "Taller  / The tallest ",
+    "The highest ",
+    "Driest / Sunniest",
+    "The most tasty / Good at",
+    "heavier",
+    "The most colorful ",
+    "Worst",
+    "The most poisonous ",
+    "The tiniest ",
+    "The best ",
+    "The coolest ",
+    "Strangest  / The ugliest ",
+    "Better / The best",
+    "Worse  / The worst",
+    "longest ",
+    "the most intelligent ",
+    "The oldest",
+    "the most dangerous",
+    "the longest",
+    "The most popular",
+    "The most expensive ",
+    "the most popular",
+    "the farthest",
+    "the cleanest",
+    "the cheapest ",
+    "the thickest\n",
+    "The hottest",
+    "The cheapest "
+   ],
+   "wrong_answers": [
+    {
+     "number": 10,
+     "question": "Mom makes __________________ (tasty) pancakes. She's _____________ (good) baker!",
+     "userAnswer": "The most tasty / Good at",
+     "correctAnswer": "the tastiest / the best"
+    },
+    {
+     "number": 18,
+     "question": "This creature is the _________________ (strange) and ________________ (ugly) in the museum.",
+     "userAnswer": "Strangest  / The ugliest ",
+     "correctAnswer": "strangest / ugliest"
+    },
+    {
+     "number": 21,
+     "question": "[보기] the longest / the most dangerous / the most intelligent / the oldest / the shortest\n\nFebruary is _____________________ month in the year.",
+     "userAnswer": "longest ",
+     "correctAnswer": "the shortest"
+    },
+    {
+     "number": 28,
+     "question": "[보기] the farthest[furthest] / the fastest / the most expensive / the most popular\n\nThe peregrine falcon is _____________________ bird in the world.",
+     "userAnswer": "the most popular",
+     "correctAnswer": "the fastest"
+    },
+    {
+     "number": 34,
+     "question": "[보기] the cheapest / the cleanest / The hottest / the most / the thickest\n\nSeattle has _____________________ coffee shops in the United States.",
+     "userAnswer": "The cheapest ",
+     "correctAnswer": "the most"
+    }
+   ],
+   "created_at": "2026-08-28T10:05:10.571758+00:00"
+  },
+  {
+   "id": "d989d4f9-652f-4d93-8d44-4fd7b4cb1030",
+   "sheet_id": "4fb01567-fddb-4a5a-bfab-5b2bbb3dab89",
+   "score": 33,
+   "total_questions": 30,
+   "answers": [
+    "The best",
+    "the quickest",
+    " the most beautiful ",
+    "The friendliest ",
+    "Which is the fastest animal in the world?",
+    "Which animal has the  most many leg?",
+    "I will buy the most pretty dress with this coupon.",
+    "I like strawberry milk ",
+    "That is the tallest building in the world ",
+    "I will give all my  money to the most honest daughter.",
+    "They started to the most exciting play",
+    "The Sahara is the driest place On Earth",
+    "the Tyrannosaurus was the biggest and the fiercest dinosaur",
+    "The smallest bird was a hummingbird. It was lighter than a coin. ",
+    "It was the most enjoy moment In my life",
+    "canada is not the biggest country in the world",
+    "Angel Falls is the highest falls in the world",
+    "Death valley is the hottest place on the earth ",
+    "The longest  river in the world is the Nile",
+    "The coldest place in Antarctica is vostok station",
+    "one",
+    "are three",
+    "are two",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    ""
+   ],
+   "wrong_answers": [
+    {
+     "number": 5,
+     "question": "세상에서 가장 빠른 동물은 무엇일까?\nfast, in the world\n※ 완전한 문장으로 쓰시오.",
+     "userAnswer": "Which is the fastest animal in the world?",
+     "correctAnswer": "What is the fastest animal in the world?"
+    },
+    {
+     "number": 6,
+     "question": "어떤 동물이 다리를 가장 많이 가지고 있을까?\nmany\n※ 완전한 문장으로 쓰시오.",
+     "userAnswer": "Which animal has the  most many leg?",
+     "correctAnswer": "What animal has the most legs?"
+    },
+    {
+     "number": 7,
+     "question": "나는 이 쿠폰으로 가장 예쁜 원피스를 살 것이다.\nbuy, pretty, dress, with\n※ 완전한 문장으로 쓰시오.",
+     "userAnswer": "I will buy the most pretty dress with this coupon.",
+     "correctAnswer": "I will buy the prettiest dress with this coupon."
+    },
+    {
+     "number": 9,
+     "question": "그것은 세계에서 가장 높은 건물이다.\ntall, building, in\n※ 완전한 문장으로 쓰시오.",
+     "userAnswer": "That is the tallest building in the world ",
+     "correctAnswer": "It is the tallest building in the world."
+    },
+    {
+     "number": 10,
+     "question": "나는 나의 모든 재산을 가장 정직한 딸에게 주겠다.\ngive, all, things, honest\n※ 완전한 문장으로 쓰시오.",
+     "userAnswer": "I will give all my  money to the most honest daughter.",
+     "correctAnswer": "I will give all my things to the most honest daughter."
+    },
+    {
+     "number": 11,
+     "question": "그들은 가장 흥미로운 연극을 공연하기 시작했습니다.\nstart, exciting, play\n※ 완전한 문장으로 쓰시오.",
+     "userAnswer": "They started to the most exciting play",
+     "correctAnswer": "They started to perform the most exciting play."
+    },
+    {
+     "number": 13,
+     "question": "티라노사우루스는 가장 크고 사나운 공룡이었습니다.\nthe Tyrannosaurus, big, fierce, dinosaur\n※ 완전한 문장으로 쓰시오.",
+     "userAnswer": "the Tyrannosaurus was the biggest and the fiercest dinosaur",
+     "correctAnswer": "The Tyrannosaurus was the biggest and fiercest dinosaur."
+    },
+    {
+     "number": 14,
+     "question": "가장 작은 새는 벌새였습니다. 그것은 하나의 동전보다 더 가벼웠습니다.\nsmall, hummingbird, a\n※ 완전한 문장으로 쓰시오.",
+     "userAnswer": "The smallest bird was a hummingbird. It was lighter than a coin. ",
+     "correctAnswer": "The smallest bird was the hummingbird. It was lighter than a coin."
+    },
+    {
+     "number": 15,
+     "question": "그것은 내 인생에서 가장 즐거운 순간이었다.\nenjoy, moment, of\n※ 완전한 문장으로 쓰시오.",
+     "userAnswer": "It was the most enjoy moment In my life",
+     "correctAnswer": "It was the most enjoyable moment of my life."
+    },
+    {
+     "number": 17,
+     "question": "Angel Falls는 세계에서 가장 높은 폭포이다.\nAngel Falls, high, in ※ 완전한 문장으로 쓰시오.",
+     "userAnswer": "Angel Falls is the highest falls in the world",
+     "correctAnswer": "Angel Falls is the highest waterfall in the world."
+    },
+    {
+     "number": 18,
+     "question": "Death Valley는 지구에서 가장 더운 곳이다.\nhot, place, on ※ 완전한 문장으로 쓰시오.",
+     "userAnswer": "Death valley is the hottest place on the earth ",
+     "correctAnswer": "Death Valley is the hottest place on Earth."
+    },
+    {
+     "number": 19,
+     "question": "세계에서 가장 긴 강은 the Nile이다.\nthe world, long, the Nile ※ 완전한 문장으로 쓰시오.",
+     "userAnswer": "The longest  river in the world is the Nile",
+     "correctAnswer": "The world's longest river is the Nile."
+    },
+    {
+     "number": 20,
+     "question": "가장 추운 곳은 남극의 Vostok Station이다.\ncold, place, Vostok Station, Antarctica ※ 완전한 문장으로 쓰시오.",
+     "userAnswer": "The coldest place in Antarctica is vostok station",
+     "correctAnswer": "The coldest place is Vostok Station in Antarctica."
+    },
+    {
+     "number": 24,
+     "question": "_________________ a clock.",
+     "userAnswer": "",
+     "correctAnswer": "There is"
+    },
+    {
+     "number": 25,
+     "question": "_________________ two doors.",
+     "userAnswer": "",
+     "correctAnswer": "There are"
+    },
+    {
+     "number": 26,
+     "question": "_________________ a sofa.",
+     "userAnswer": "",
+     "correctAnswer": "There is"
+    },
+    {
+     "number": 27,
+     "question": "_________________ a blanket.",
+     "userAnswer": "",
+     "correctAnswer": "There is"
+    },
+    {
+     "number": 28,
+     "question": "_________________ five chairs.",
+     "userAnswer": "",
+     "correctAnswer": "There are"
+    },
+    {
+     "number": 29,
+     "question": "_________________ a magazine.",
+     "userAnswer": "",
+     "correctAnswer": "There is"
+    },
+    {
+     "number": 30,
+     "question": "_________________ four pencils.",
+     "userAnswer": "",
+     "correctAnswer": "There are"
+    }
+   ],
+   "created_at": "2026-08-28T11:23:56.070584+00:00"
+  },
+  {
+   "id": "d75d890d-3491-4f9d-a78c-81422f6b3c64",
+   "sheet_id": "3f31f67c-f0a0-4fc9-b308-66977eefcd01",
+   "score": 97,
+   "total_questions": 30,
+   "answers": [
+    "There are",
+    "There is",
+    "There are",
+    "There is a kitchen",
+    "There are three computers",
+    "There is a desk",
+    "There are two dogs ",
+    "are",
+    "are",
+    "is",
+    "are",
+    "are",
+    "is",
+    "is",
+    "is",
+    "are",
+    "is",
+    "are",
+    "is",
+    "are",
+    "is",
+    "is",
+    "are",
+    "are",
+    "is",
+    "are",
+    "is",
+    "is",
+    "are",
+    "are"
+   ],
+   "wrong_answers": [
+    {
+     "number": 24,
+     "question": "There ______________ a lot of milk for the baby.",
+     "userAnswer": "are",
+     "correctAnswer": "is"
+    }
+   ],
+   "created_at": "2026-08-28T11:36:55.117755+00:00"
+  },
+  {
+   "id": "c2aa5867-f787-488b-9f01-98e92f8b7fc7",
+   "sheet_id": "4fb01567-fddb-4a5a-bfab-5b2bbb3dab89",
+   "score": 63,
+   "total_questions": 30,
+   "answers": [
+    "The best ",
+    "the quickest",
+    "the most beautiful",
+    "the friendliest",
+    "What is the fastest animal in the world ?",
+    "What animal has the most many leg?",
+    "I will buy the prettiest dress with this coupon",
+    "I like  strawberry milk the most",
+    "It is the tallest building in the norm",
+    "I will give all my things to the most honest daughter",
+    "They started to the most exciting performance ",
+    "The sahara is the driest place on the Earth",
+    "The Tyrannosaurus was  the  biggest and fiercest dinosour",
+    "The smallest bird was humming bird. It was lighter than a coin",
+    "It was the most enjoyable moment of my life",
+    "Canada is not the biggest\ncountry in the word",
+    "Angel Falls is the highest water fall in the world",
+    "Death valley is the hottest place on the Earth",
+    "In the world, the longest river is the Nile",
+    "The coldest place is vostok station in Antarctica",
+    "One",
+    "are three",
+    "are two",
+    "There is There are",
+    "There are",
+    "There is",
+    "there is",
+    "There are",
+    "There is",
+    "There are"
+   ],
+   "wrong_answers": [
+    {
+     "number": 5,
+     "question": "세상에서 가장 빠른 동물은 무엇일까?\nfast, in the world\n※ 완전한 문장으로 쓰시오.",
+     "userAnswer": "What is the fastest animal in the world ?",
+     "correctAnswer": "What is the fastest animal in the world?"
+    },
+    {
+     "number": 6,
+     "question": "어떤 동물이 다리를 가장 많이 가지고 있을까?\nmany\n※ 완전한 문장으로 쓰시오.",
+     "userAnswer": "What animal has the most many leg?",
+     "correctAnswer": "What animal has the most legs?"
+    },
+    {
+     "number": 9,
+     "question": "그것은 세계에서 가장 높은 건물이다.\ntall, building, in\n※ 완전한 문장으로 쓰시오.",
+     "userAnswer": "It is the tallest building in the norm",
+     "correctAnswer": "It is the tallest building in the world."
+    },
+    {
+     "number": 11,
+     "question": "그들은 가장 흥미로운 연극을 공연하기 시작했습니다.\nstart, exciting, play\n※ 완전한 문장으로 쓰시오.",
+     "userAnswer": "They started to the most exciting performance ",
+     "correctAnswer": "They started to perform the most exciting play."
+    },
+    {
+     "number": 12,
+     "question": "사하라 사막은 지구에서 가장 건조한 지역입니다.\nthe Sahara, dry, place, on Earth\n※ 완전한 문장으로 쓰시오.",
+     "userAnswer": "The sahara is the driest place on the Earth",
+     "correctAnswer": "The Sahara is the driest place on Earth."
+    },
+    {
+     "number": 13,
+     "question": "티라노사우루스는 가장 크고 사나운 공룡이었습니다.\nthe Tyrannosaurus, big, fierce, dinosaur\n※ 완전한 문장으로 쓰시오.",
+     "userAnswer": "The Tyrannosaurus was  the  biggest and fiercest dinosour",
+     "correctAnswer": "The Tyrannosaurus was the biggest and fiercest dinosaur."
+    },
+    {
+     "number": 14,
+     "question": "가장 작은 새는 벌새였습니다. 그것은 하나의 동전보다 더 가벼웠습니다.\nsmall, hummingbird, a\n※ 완전한 문장으로 쓰시오.",
+     "userAnswer": "The smallest bird was humming bird. It was lighter than a coin",
+     "correctAnswer": "The smallest bird was the hummingbird. It was lighter than a coin."
+    },
+    {
+     "number": 16,
+     "question": "캐나다가 세계에서 가장 큰 나라는 아니야.\nbig, country, in\n※ 완전한 문장으로 쓰시오.",
+     "userAnswer": "Canada is not the biggest\ncountry in the word",
+     "correctAnswer": "Canada is not the biggest country in the world."
+    },
+    {
+     "number": 17,
+     "question": "Angel Falls는 세계에서 가장 높은 폭포이다.\nAngel Falls, high, in ※ 완전한 문장으로 쓰시오.",
+     "userAnswer": "Angel Falls is the highest water fall in the world",
+     "correctAnswer": "Angel Falls is the highest waterfall in the world."
+    },
+    {
+     "number": 18,
+     "question": "Death Valley는 지구에서 가장 더운 곳이다.\nhot, place, on ※ 완전한 문장으로 쓰시오.",
+     "userAnswer": "Death valley is the hottest place on the Earth",
+     "correctAnswer": "Death Valley is the hottest place on Earth."
+    },
+    {
+     "number": 19,
+     "question": "세계에서 가장 긴 강은 the Nile이다.\nthe world, long, the Nile ※ 완전한 문장으로 쓰시오.",
+     "userAnswer": "In the world, the longest river is the Nile",
+     "correctAnswer": "The world's longest river is the Nile."
+    }
+   ],
+   "created_at": "2026-08-28T12:05:40.825129+00:00"
+  }
+ ]
+}

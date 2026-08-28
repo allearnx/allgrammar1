@@ -46,6 +46,7 @@ export function normalize(s: string): string {
     .replace(/\b(i|you|we|they|he|she|it|there|who|what)'ll\b/g, '$1 will')
     .replace(/\b(i|you|we|they)'ve\b/g, '$1 have')
     .replace(/\b(it|that|there|he|she|what|who|where|when|how|here)'s\b/g, '$1 is')
+    .replace(/\s+([?!.,;:])/g, '$1')     // 구두점 앞 공백 제거 ("world ?" 오답 처리 실사고)
     .replace(/\.+\s*$/, '')              // 끝 마침표 제거
     .replace(/\((\d+)\)\s*/g, '($1) ')   // (1)that → (1) that 통일
     .replace(/\s*\/\s*/g, ' / ')         // A/B, A /B → A / B 통일
