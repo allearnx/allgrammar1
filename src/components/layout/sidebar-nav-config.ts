@@ -281,18 +281,27 @@ export function getNavGroups(role: string, services?: string[], isHomepageManage
 
   if (role !== 'student' || !services) return groups;
 
-  // Filter student learning items based on assigned services
+  // Filter student learning items based on assigned services.
+  // 서비스 경로(/student/naesin, /student/voca)에 속하지 않는 공용 항목
+  // (오답모음, 학습자료)은 서비스 배정과 무관하게 항상 노출.
   const serviceHrefs = new Set(services.map((s) => SERVICE_HREF_MAP[s]).filter(Boolean));
+  const allServicePrefixes = Object.values(SERVICE_HREF_MAP);
+  const belongsToService = (href: string) =>
+    allServicePrefixes.some((p) => href === p || href.startsWith(p + '/'));
 
   return groups.map((group) => {
     if (group.label !== '학습') return group;
-    // No services assigned → keep items visible but disabled
+    // No services assigned → keep service items visible but disabled
     if (serviceHrefs.size === 0) {
-      return { ...group, items: group.items.map((item) => ({ ...item, disabled: true })) };
+      return {
+        ...group,
+        items: group.items.map((item) => (belongsToService(item.href) ? { ...item, disabled: true } : item)),
+      };
     }
     return {
       ...group,
       items: group.items.filter((item) =>
+        !belongsToService(item.href) ||
         [...serviceHrefs].some((href) => item.href === href || item.href.startsWith(href + '/'))
       ),
     };

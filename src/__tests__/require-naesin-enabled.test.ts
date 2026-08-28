@@ -72,3 +72,32 @@ describe('getNavGroups — 내신 관리 메뉴 노출', () => {
     expect(hrefs).toContain('/admin/voca/submissions');
   });
 });
+
+describe('getNavGroups — 학생 서비스 필터와 공용 메뉴', () => {
+  const allHrefs = (groups: ReturnType<typeof getNavGroups>) =>
+    groups.flatMap((g) => g.items.map((i) => i.href));
+
+  it('voca만 배정된 학생도 오답모음·학습자료는 보임', () => {
+    const hrefs = allHrefs(getNavGroups('student', ['voca'], false, false, false));
+    expect(hrefs).toContain('/student/wrong-answers');
+    expect(hrefs).toContain('/student/materials');
+    expect(hrefs).toContain('/student/voca');
+    expect(hrefs).not.toContain('/student/naesin');
+  });
+
+  it('naesin만 배정된 학생도 오답모음·학습자료는 보임', () => {
+    const hrefs = allHrefs(getNavGroups('student', ['naesin'], false, false, false));
+    expect(hrefs).toContain('/student/wrong-answers');
+    expect(hrefs).toContain('/student/materials');
+    expect(hrefs).not.toContain('/student/voca');
+  });
+
+  it('서비스 미배정 학생은 서비스 메뉴만 disabled, 공용 메뉴는 활성', () => {
+    const groups = getNavGroups('student', [], false, false, false);
+    const learning = groups.find((g) => g.label === '학습')!;
+    const byHref = Object.fromEntries(learning.items.map((i) => [i.href, i.disabled ?? false]));
+    expect(byHref['/student/voca']).toBe(true);
+    expect(byHref['/student/wrong-answers']).toBe(false);
+    expect(byHref['/student/materials']).toBe(false);
+  });
+});
