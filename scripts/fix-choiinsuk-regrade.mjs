@@ -105,6 +105,11 @@ for (const s of [s5, s4]) {
   console.log(s.title, r.status === 204 ? '✓ 시트' : `✗ ${r.status}`);
 }
 // attempt 반영 + 오답노트 정리
+// ⚠️ naesin_wrong_answers는 시트별 "최신 attempt"의 스냅샷 — 옛 attempt의 구제로 테이블을
+// 지우면 최신 attempt의 정당한 오답까지 삭제됨 (2026-08-29 c2aa5867 Q9/13/14 실사고, 복원 완료).
+// 같은 시트에 attempt가 여러 개면 최신 attempt의 flipped만 테이블 삭제 대상.
+const latestPerSheet = new Map();
+for (const a of attempts) latestPerSheet.set(a.sheet_id, a.id); // created_at 오름차순 → 마지막=최신
 for (const u of updates) {
   const r = await fetch(`${URL}/rest/v1/naesin_problem_attempts?id=eq.${u.attempt.id}`, {
     method: 'PATCH', headers: { ...H, Prefer: 'return=minimal' },
@@ -112,6 +117,7 @@ for (const u of updates) {
   });
   console.log('attempt', u.attempt.id.slice(0, 8), r.status === 204 ? '✓' : `✗ ${r.status}`);
   // naesin_wrong_answers에서 구제 문항 행 삭제 (question_data->>number 매칭)
+  if (latestPerSheet.get(u.attempt.sheet_id) !== u.attempt.id) continue;
   for (const f of u.flipped) {
     const del = await fetch(`${URL}/rest/v1/naesin_wrong_answers?student_id=eq.${STUDENT}&sheet_id=eq.${u.attempt.sheet_id}&question_data->>number=eq.${f.number}`, {
       method: 'DELETE', headers: { ...H, Prefer: 'return=minimal' },
