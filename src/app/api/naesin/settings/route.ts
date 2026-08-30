@@ -19,18 +19,25 @@ export const POST = createApiHandler(
       await requireAcademyScope(user, targetId, supabase);
     }
 
-    // Block if textbook already selected
+    // 교과서 변경 정책:
+    // - 학생 본인: 한 번 선택하면 변경 불가 (기존 정책 유지)
+    // - teacher/admin/boss: 변경 허용 — /api/naesin/* 게이트가 teacher/admin을
+    //   naesin_enabled 학원(올라영)으로 제한하므로 외부 학원 스태프는 여기 못 옴
     const { data: existing } = await supabase
       .from('naesin_student_settings')
       .select('textbook_id')
       .eq('student_id', targetId)
       .maybeSingle();
 
-    if (existing?.textbook_id) {
+    const isStaff = ['teacher', 'admin', 'boss'].includes(user.role);
+    if (existing?.textbook_id && !isStaff) {
       return NextResponse.json(
-        { error: '교과서는 한 번 선택하면 변경할 수 없습니다. 카카오톡 채널로 문의해 주세요.' },
+        { error: '교과서는 한 번 선택하면 변경할 수 없습니다. 선생님께 문의해 주세요.' },
         { status: 400 }
       );
+    }
+    if (existing?.textbook_id === textbookId) {
+      return NextResponse.json({ success: true });
     }
 
     dbResult(await supabase
@@ -39,6 +46,7 @@ export const POST = createApiHandler(
         { student_id: targetId, textbook_id: textbookId },
         { onConflict: 'student_id' }
       ));
+    invalidateStudent(targetId);
 
     // Auto-create default exam assignment (paid academies only)
     const admin = createAdminClient();
