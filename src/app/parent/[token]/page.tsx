@@ -13,6 +13,8 @@ import { computeTotalKnownWords } from '@/lib/voca/coverage';
 import { ParentProgressTabs } from '@/components/dashboard/parent-progress-tabs';
 import { fetchVocaExamGroups } from '@/lib/voca/fetch-exam-results';
 import { fetchNaesinExamData } from '@/lib/naesin/fetch-exam-data';
+import { computeExamReadiness } from '@/lib/reports/compute-exam-readiness';
+import { ExamReadinessSection } from '@/components/dashboard/exam-readiness-section';
 import { fetchNaesinProgress } from '@/lib/naesin/fetch-naesin-progress';
 import { fetchVocaProgress, fetchBookDayTotals } from '@/lib/voca/fetch-voca-progress';
 import { ParentWeeklySummary } from '@/components/dashboard/parent-weekly-summary';
@@ -236,24 +238,30 @@ export default async function ParentReportPage({ params, searchParams }: Props) 
     naesinRequiredRounds = academy?.naesin_required_rounds ?? 1;
   }
 
+  // 시험별 준비도 (배정이 있을 때만)
+  const examReadiness = hasNaesin ? await computeExamReadiness(admin, studentId) : [];
+
   // Build cards
   const naesinCard = hasNaesin && naesinProgressData ? (
-    <NaesinProgressCard
-      studentId={studentId}
-      naesinData={naesinData!}
-      naesinProgress={naesinProgressData.naesinProgress}
-      hours={naesinProgressData.hours}
-      minutes={naesinProgressData.minutes}
-      enabledStages={['vocab', 'passage', 'dialogue', 'textbookVideo', 'grammar', 'problem', 'mockExam', 'lastReview']}
-      passageStages={['fill_blanks', 'translation']}
-      translationSentencesPerPage={10}
-      fillBlanksByUnit={naesinProgressData.fillBlanksByUnit}
-      problemSheetsByUnit={naesinProgressData.problemSheetsByUnit}
-      problemAttemptsBySheet={naesinProgressData.problemAttemptsBySheet}
-      grammarContentByUnit={naesinProgressData.grammarContentByUnit}
-      naesinRequiredRounds={naesinRequiredRounds}
-      hideSettings
-    />
+    <div className="space-y-4">
+      {examReadiness.length > 0 && <ExamReadinessSection items={examReadiness} />}
+      <NaesinProgressCard
+        studentId={studentId}
+        naesinData={naesinData!}
+        naesinProgress={naesinProgressData.naesinProgress}
+        hours={naesinProgressData.hours}
+        minutes={naesinProgressData.minutes}
+        enabledStages={['vocab', 'passage', 'dialogue', 'textbookVideo', 'grammar', 'problem', 'mockExam', 'lastReview']}
+        passageStages={['fill_blanks', 'translation']}
+        translationSentencesPerPage={10}
+        fillBlanksByUnit={naesinProgressData.fillBlanksByUnit}
+        problemSheetsByUnit={naesinProgressData.problemSheetsByUnit}
+        problemAttemptsBySheet={naesinProgressData.problemAttemptsBySheet}
+        grammarContentByUnit={naesinProgressData.grammarContentByUnit}
+        naesinRequiredRounds={naesinRequiredRounds}
+        hideSettings
+      />
+    </div>
   ) : null;
 
   // 보카 시험 결과 (오늘 본 게 맨 위) + 누적 암기 단어 + 레벨 진단 — 학부모 리포트에 노출

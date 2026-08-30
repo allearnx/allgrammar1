@@ -1,6 +1,7 @@
 import { Badge } from '@/components/ui/badge';
 import { AlertTriangle, TrendingUp, BarChart3, BookOpen, Target, Sparkles, PartyPopper } from 'lucide-react';
 import { STAT_COLORS } from '@/lib/utils/brand-colors';
+import { ExamReadinessSection } from '@/components/dashboard/exam-readiness-section';
 import type { StudentReportData } from '@/types/student-report';
 
 function StatCard({ label, value, color, icon }: {
@@ -20,6 +21,9 @@ function StatCard({ label, value, color, icon }: {
 export function SummaryTab({ data, hasVoca, hasNaesin }: { data: StudentReportData; hasVoca: boolean; hasNaesin: boolean }) {
   return (
     <div className="space-y-4">
+      {hasNaesin && data.examReadiness && data.examReadiness.length > 0 && (
+        <ExamReadinessSection items={data.examReadiness} />
+      )}
       <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
         {hasVoca && data.current.voca && (
           <>

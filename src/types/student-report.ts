@@ -22,6 +22,24 @@ export interface ActivityRecord {
   maxScore: number | null;
 }
 
+/** 시험별 준비도 — 시험 배정(차수·날짜·범위)에 스코프된 진도·성적·오답 집계 */
+export interface ExamReadiness {
+  textbookName: string;
+  examRound: number;
+  examLabel: string | null;
+  /** yyyy-MM-dd (null = 날짜 미지정) */
+  examDate: string | null;
+  units: { id: string; unitNumber: number; title: string }[];
+  /** 학습을 시작한 범위 단원 수 */
+  unitsStarted: number;
+  /** 문제풀이+모의고사까지 완료한 범위 단원 수 */
+  unitsCompleted: number;
+  problemAttempts: number;
+  problemAvgScore: number | null;
+  wrongTotal: number;
+  wrongUnresolved: number;
+}
+
 export interface StudentReportData {
   current: {
     services: ('naesin' | 'voca')[];
@@ -30,6 +48,8 @@ export interface StudentReportData {
     weaknesses: string[];
     recommendations: string[];
   };
+  /** 시험별 준비도 (내신 시험 배정이 있을 때만 채워짐) */
+  examReadiness?: ExamReadiness[];
   trends: {
     vocaQuizScores: { date: string; score: number; label: string }[];
     naesinProblemScores: { date: string; score: number; label: string }[];

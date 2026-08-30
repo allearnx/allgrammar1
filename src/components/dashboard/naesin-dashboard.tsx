@@ -161,7 +161,7 @@ export function NaesinDashboard({
       <div className="rounded-2xl border bg-white p-5 md:p-6">
         <div className="flex items-center justify-between mb-3">
           <h3 className="text-sm font-bold">문제풀이 점수 추이</h3>
-          <Link href="/student/my-report" className="inline-flex items-center gap-1 text-xs font-medium text-brand-600 hover:underline">
+          <Link href="/student/progress" className="inline-flex items-center gap-1 text-xs font-medium text-brand-600 hover:underline">
             자세히 보기 <ArrowRight className="h-3 w-3" />
           </Link>
         </div>

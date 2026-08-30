@@ -10,6 +10,7 @@ import { computeWrongAnalysis } from './compute-wrong-analysis';
 import { computeUnitBreakdown } from './compute-unit-breakdown';
 import { computeActivityLog } from './compute-activity-log';
 import { computeTopicAccuracy } from './compute-topic-accuracy';
+import { computeExamReadiness } from './compute-exam-readiness';
 
 export async function buildStudentReport(
   queryClient: SupabaseClient,
@@ -58,6 +59,11 @@ export async function buildStudentReport(
     ? await computeTopicAccuracy(queryClient, naesinProblemAllRes.data || [])
     : [];
 
+  // 시험별 준비도 (시험 배정 범위 스코프 집계)
+  const examReadiness = hasNaesin
+    ? await computeExamReadiness(queryClient, studentId)
+    : [];
+
   // Fetch daily learning seconds
   const { data: dailyRows } = await queryClient
     .from('learning_daily_log')
@@ -75,6 +81,7 @@ export async function buildStudentReport(
 
   return {
     current: { services, naesin, voca, weaknesses, recommendations },
+    examReadiness,
     trends,
     wrongAnalysis,
     unitBreakdown,
