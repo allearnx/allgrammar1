@@ -32,6 +32,8 @@ export function PdfProblemExtractDialog({ unitId, unitTitle, onAdd }: { unitId: 
   const [title, setTitle] = useState('');
   const editor = useQuestionEditor();
   const [originalCount, setOriginalCount] = useState(0);
+  const [extractedTotal, setExtractedTotal] = useState(0);
+  const [halfSampling, setHalfSampling] = useState(true);
   const [progress, setProgress] = useState<{ done: number; total: number } | null>(null);
   const [saving, setSaving] = useState(false);
   const [validation, setValidation] = useState<FullValidationResult | null>(null);
@@ -43,6 +45,7 @@ export function PdfProblemExtractDialog({ unitId, unitTitle, onAdd }: { unitId: 
     setTitle('');
     editor.setQuestions([]);
     setOriginalCount(0);
+    setExtractedTotal(0);
     setProgress(null);
     editor.setEditingIdx(null);
     setValidation(null);
@@ -65,12 +68,16 @@ export function PdfProblemExtractDialog({ unitId, unitTitle, onAdd }: { unitId: 
       const { publicUrl, storagePath } = await uploadForExtract(file);
 
       // 1단계: 원본 문제 추출 (빠름 — Haiku 병렬)
-      const extracted = await fetchWithToast<{ questions?: Record<string, unknown>[]; originalCount?: number; removedImageCount?: number }>(
+      const extracted = await fetchWithToast<{ questions?: Record<string, unknown>[]; originalCount?: number; extractedTotal?: number; removedImageCount?: number }>(
         '/api/naesin/problems/extract-paraphrase',
-        { body: { unitId, phase: 'extract', pdfUrl: publicUrl, storagePath }, errorMessage: 'PDF에서 문제 추출에 실패했습니다.' },
+        { body: { unitId, phase: 'extract', pdfUrl: publicUrl, storagePath, halfSampling }, errorMessage: 'PDF에서 문제 추출에 실패했습니다.' },
       );
       if (extracted.removedImageCount) {
         toast.info(`그림·사진 의존 문항 ${extracted.removedImageCount}개는 화면에서 풀 수 없어 제외했습니다`);
+      }
+      setExtractedTotal(extracted.extractedTotal ?? extracted.questions?.length ?? 0);
+      if (halfSampling && extracted.extractedTotal && extracted.questions && extracted.extractedTotal > extracted.questions.length) {
+        toast.info(`전체 ${extracted.extractedTotal}문항 중 절반 추출로 ${extracted.questions.length}문항을 사용합니다`);
       }
       const originals = extracted.questions || [];
       if (originals.length === 0) {
@@ -266,9 +273,24 @@ export function PdfProblemExtractDialog({ unitId, unitTitle, onAdd }: { unitId: 
                 PDF 업로드 및 생성 시작
               </Button>
             </div>
+            <label className="flex items-start gap-2 rounded-lg border p-3 cursor-pointer">
+              <input
+                type="checkbox"
+                checked={halfSampling}
+                onChange={(e) => setHalfSampling(e.target.checked)}
+                className="mt-0.5"
+              />
+              <span className="text-sm">
+                <span className="font-medium">문항 절반만 추출</span>
+                <span className="block text-xs text-muted-foreground mt-0.5">
+                  유형 묶음별로 1·3·5번째만 사용합니다. 지시문·보기 상자는 유지되고, 같은 유형이
+                  대량 반복되는 워크북에서 문항 수를 절반으로 줄입니다.
+                </span>
+              </span>
+            </label>
             <div className="rounded-lg bg-muted/50 p-3 text-sm space-y-1 text-muted-foreground">
               <p className="font-medium text-foreground">1:1 패러프레이즈</p>
-              <p>원본이 40문제면 40문제 — 유형(객관식/서술형)과 순서를 그대로 따라갑니다</p>
+              <p>추출된 문항을 유형(객관식/서술형)과 순서 그대로 변형합니다</p>
               <p>30문제가 넘으면 저장 시 30문제 안팎의 세트 시트로 자동 분할됩니다</p>
             </div>
           </div>
@@ -302,7 +324,9 @@ export function PdfProblemExtractDialog({ unitId, unitTitle, onAdd }: { unitId: 
         {step === 'preview' && (
           <div className="space-y-4">
             <div className="flex flex-wrap items-center gap-2 text-sm">
-              <Badge variant="secondary">원본 {originalCount}문제</Badge>
+              <Badge variant="secondary">
+                원본 {originalCount}문제{extractedTotal > originalCount ? ` (전체 ${extractedTotal} 중 절반 추출)` : ''}
+              </Badge>
               <Badge variant="secondary">생성 {questions.length}문제</Badge>
               {mcqCount > 0 && <Badge variant="outline">객관식 {mcqCount}</Badge>}
               {subCount > 0 && <Badge variant="outline">서술형 {subCount}</Badge>}

@@ -47,3 +47,43 @@ describe('splitQuestionsIntoSets', () => {
     expect(sets[1]).toHaveLength(1);
   });
 });
+
+import { thinAlternate } from '@/lib/naesin/paraphrase-chunks';
+
+describe('thinAlternate — 절반 추출', () => {
+  const instr = '다음 빈칸에 알맞은 비교급을 쓰시오.';
+  it('같은 지시문 묶음에서 1·3·5번째만 유지', () => {
+    const qs = Array.from({ length: 6 }, (_, i) => ({ number: i + 1, question: `${instr}\nSentence ${i} ___.`, answer: 'a' }));
+    const kept = thinAlternate(qs);
+    expect(kept.map((q) => q.number)).toEqual([1, 3, 5]);
+  });
+
+  it('그룹이 바뀌면 교대가 리셋 — 모든 묶음이 최소 1문항 유지', () => {
+    const qs = [
+      { number: 1, question: `${instr}\nA ___.` },
+      { number: 2, question: `${instr}\nB ___.` },
+      { number: 3, question: '다음 문장을 의문문으로 바꾸시오.\nThere is a dog.' },
+      { number: 4, question: '다음 문장을 의문문으로 바꾸시오.\nThere are cats.' },
+      { number: 5, question: '단독 지시문 문항입니다. 최상급을 쓰시오.' },
+    ];
+    const kept = thinAlternate(qs as Record<string, unknown>[]);
+    expect(kept.map((q) => q.number)).toEqual([1, 3, 5]);
+  });
+
+  it('word bank 세트도 교대 유지 (동일 [보기] 줄 공유)', () => {
+    const bank = '[보기] fresh / clean / famous / boring / yellow';
+    const qs = Array.from({ length: 5 }, (_, i) => ({ number: i + 1, question: `${bank}\nSentence ${i} ___.` }));
+    const kept = thinAlternate(qs as Record<string, unknown>[]);
+    expect(kept.map((q) => q.number)).toEqual([1, 3, 5]);
+  });
+
+  it('짧은 지시문(8자 미만 첫 줄)은 그룹으로 안 묶여 각자 유지', () => {
+    const qs = [
+      { number: 1, question: 'Q1 ___.' },
+      { number: 2, question: 'Q2 ___.' },
+      { number: 3, question: 'Q3 ___.' },
+    ];
+    const kept = thinAlternate(qs as Record<string, unknown>[]);
+    expect(kept.map((q) => q.number)).toEqual([1, 2, 3]);
+  });
+});

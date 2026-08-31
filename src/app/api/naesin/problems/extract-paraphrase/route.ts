@@ -7,7 +7,7 @@ import { requireAiJsonArray } from '@/lib/ai-json';
 import { validateProblemStructure } from '@/lib/validation';
 import { isUnanswerableImageQuestion } from '@/lib/validation/problem-validator';
 import { rebuildBankSets } from '@/lib/naesin/word-bank-sets';
-import { chunkPreservingGroups } from '@/lib/naesin/paraphrase-chunks';
+import { chunkPreservingGroups, thinAlternate } from '@/lib/naesin/paraphrase-chunks';
 import type { NaesinProblemQuestion } from '@/types/naesin';
 
 export const maxDuration = 300;
@@ -99,7 +99,7 @@ export const POST = createApiHandler(
   await requireContentPermission(user, supabase);
 
   try {
-    const { unitId, unitTitle, pdfBase64, mediaType, pdfUrl, storagePath, phase, questions: inputQuestions } = await request.json();
+    const { unitId, unitTitle, pdfBase64, mediaType, pdfUrl, storagePath, phase, questions: inputQuestions, halfSampling } = await request.json();
 
     // 변형을 청크 단위로 병렬 실행 (지문·word bank 그룹은 경계에서 안 쪼갬)
     const paraphraseQuestions = async (originals: Record<string, unknown>[]) => {
@@ -245,11 +245,18 @@ JSON 배열로만 응답 (다른 텍스트 없이):
     });
 
     // 그림·사진을 봐야만 풀 수 있는 문항은 패러프레이즈 대상에서 제외 (화면에서 풀 수 없음)
-    const originalQuestions = extractedQuestions.filter(
+    const filteredQuestions = extractedQuestions.filter(
       (q) => !isUnanswerableImageQuestion(String(q.question ?? '')),
     );
-    const removedImageCount = extractedQuestions.length - originalQuestions.length;
-    logger.info('ai.extract_done', { count: originalQuestions.length, removedImageCount, unitId });
+    const removedImageCount = extractedQuestions.length - filteredQuestions.length;
+
+    // 절반 추출: 그룹별 1·3·5번째만 유지 (대량 드릴 자료의 문항 수 절반화 — 옵트아웃 가능)
+    const originalQuestions = halfSampling === false ? filteredQuestions : thinAlternate(filteredQuestions);
+    const extractedTotal = filteredQuestions.length;
+    logger.info('ai.extract_done', {
+      count: originalQuestions.length, extractedTotal, removedImageCount,
+      halfSampling: halfSampling !== false, unitId,
+    });
 
     if (originalQuestions.length === 0) {
       return NextResponse.json({ error: 'PDF에서 문제를 추출하지 못했습니다.' }, { status: 422 });
@@ -265,6 +272,7 @@ JSON 배열로만 응답 (다른 텍스트 없이):
       return NextResponse.json({
         questions: originalQuestions,
         originalCount: originalQuestions.length,
+        extractedTotal,
         removedImageCount,
       });
     }
@@ -294,6 +302,7 @@ JSON 배열로만 응답 (다른 텍스트 없이):
     return NextResponse.json({
       questions,
       originalCount: originalQuestions.length,
+      extractedTotal,
       removedImageCount,
       validation: { structural },
     });
