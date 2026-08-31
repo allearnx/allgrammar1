@@ -77,13 +77,25 @@ describe('thinAlternate — 절반 추출', () => {
     expect(kept.map((q) => q.number)).toEqual([1, 3, 5]);
   });
 
-  it('짧은 지시문(8자 미만 첫 줄)은 그룹으로 안 묶여 각자 유지', () => {
+  it('그룹 판별 불가(지시문 없는 짧은 문항)는 삭제', () => {
     const qs = [
       { number: 1, question: 'Q1 ___.' },
       { number: 2, question: 'Q2 ___.' },
       { number: 3, question: 'Q3 ___.' },
     ];
     const kept = thinAlternate(qs as Record<string, unknown>[]);
-    expect(kept.map((q) => q.number)).toEqual([1, 2, 3]);
+    expect(kept).toEqual([]);
+  });
+
+  it('흩어져 있어도 같은 지시문(한국어 접두)이면 같은 그룹으로 교대', () => {
+    const qs = [
+      { number: 1, question: '다음 빈칸에 알맞은 말을 쓰시오. There ___ a dog.' },
+      { number: 2, question: '다음 문장을 의문문으로 바꾸시오.\nThere is a cat.' },
+      { number: 3, question: '다음 빈칸에 알맞은 말을 쓰시오. There ___ two cats.' },
+      { number: 4, question: '다음 문장을 의문문으로 바꾸시오.\nThere are dogs.' },
+      { number: 5, question: '다음 빈칸에 알맞은 말을 쓰시오. There ___ milk.' },
+    ];
+    const kept = thinAlternate(qs as Record<string, unknown>[]);
+    expect(kept.map((q) => q.number)).toEqual([1, 2, 5]);
   });
 });
