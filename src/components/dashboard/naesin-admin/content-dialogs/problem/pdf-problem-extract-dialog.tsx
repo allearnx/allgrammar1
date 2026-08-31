@@ -26,6 +26,14 @@ import { useQuestionEditor } from '@/hooks/use-question-editor';
 
 type Step = 'upload' | 'loading' | 'preview';
 
+/** AI 검산(3단계)이 지적한 문항 — number는 미리보기 목록의 현재 번호 기준 */
+interface VerifyIssue {
+  number: number;
+  verdict: string; // 'wrong' | 'broken'
+  aiAnswer?: string;
+  reason?: string;
+}
+
 export function PdfProblemExtractDialog({ unitId, unitTitle, onAdd }: { unitId: string; unitTitle?: string; onAdd: () => void }) {
   const [open, setOpen] = useState(false);
   const [step, setStep] = useState<Step>('upload');
@@ -34,7 +42,9 @@ export function PdfProblemExtractDialog({ unitId, unitTitle, onAdd }: { unitId: 
   const [originalCount, setOriginalCount] = useState(0);
   const [extractedTotal, setExtractedTotal] = useState(0);
   const [halfSampling, setHalfSampling] = useState(true);
-  const [progress, setProgress] = useState<{ done: number; total: number } | null>(null);
+  const [aiVerify, setAiVerify] = useState(true);
+  const [verifyIssues, setVerifyIssues] = useState<VerifyIssue[]>([]);
+  const [progress, setProgress] = useState<{ done: number; total: number; stage: 'paraphrase' | 'verify' } | null>(null);
   const [saving, setSaving] = useState(false);
   const [validation, setValidation] = useState<FullValidationResult | null>(null);
   const [validating, setValidating] = useState(false);
@@ -50,6 +60,7 @@ export function PdfProblemExtractDialog({ unitId, unitTitle, onAdd }: { unitId: 
     editor.setEditingIdx(null);
     setValidation(null);
     setValidating(false);
+    setVerifyIssues([]);
   }
 
   async function handleFileUpload(e: React.ChangeEvent<HTMLInputElement>) {
@@ -95,7 +106,7 @@ export function PdfProblemExtractDialog({ unitId, unitTitle, onAdd }: { unitId: 
       for (let i = 0; i < groupChunks.length; i += 2) {
         batches.push([...groupChunks[i], ...(groupChunks[i + 1] || [])]);
       }
-      setProgress({ done: 0, total: originals.length });
+      setProgress({ done: 0, total: originals.length, stage: 'paraphrase' });
       const results: Record<string, unknown>[][] = new Array(batches.length);
       let nextBatch = 0;
       let doneCount = 0;
@@ -108,16 +119,59 @@ export function PdfProblemExtractDialog({ unitId, unitTitle, onAdd }: { unitId: 
           );
           results[idx] = res.questions || [];
           doneCount += batches[idx].length;
-          setProgress({ done: doneCount, total: originals.length });
+          setProgress({ done: doneCount, total: originals.length, stage: 'paraphrase' });
         }
       };
       await Promise.all(Array.from({ length: Math.min(3, batches.length) }, () => worker()));
 
       const merged = results.flat().map((q, i) => ({ ...q, number: i + 1 }));
       const normalized = normalizeQuestions(merged);
+
+      // 3단계: AI 검산 — 변형된 문항을 정답을 가리고 다시 풀어 정답 오류·성립 불가를
+      // 저장 전에 잡음 (변형 AI의 문법 오답이 코드 검증을 통과하는 사고 방지).
+      // 검산 실패는 파이프라인을 막지 않음 — 지적 없이 미리보기로 진행.
+      const issues: VerifyIssue[] = [];
+      if (aiVerify && normalized.length > 0) {
+        const verifyInput = normalized.map((q, i) => ({
+          number: i + 1,
+          question: q.question,
+          ...(hasOptions(q) ? { options: q.options } : {}),
+          answer: q.answer,
+          ...(q.explanation ? { explanation: q.explanation } : {}),
+        }));
+        const VERIFY_BATCH = 24;
+        const vBatches: typeof verifyInput[] = [];
+        for (let i = 0; i < verifyInput.length; i += VERIFY_BATCH) {
+          vBatches.push(verifyInput.slice(i, i + VERIFY_BATCH));
+        }
+        setProgress({ done: 0, total: normalized.length, stage: 'verify' });
+        let nextV = 0;
+        let doneV = 0;
+        const vWorker = async () => {
+          while (nextV < vBatches.length) {
+            const idx = nextV++;
+            try {
+              const res = await fetchWithToast<{ issues?: VerifyIssue[] }>(
+                '/api/naesin/problems/extract-paraphrase',
+                { body: { unitId, unitTitle: unitTitle || '', phase: 'verify', questions: vBatches[idx] }, errorMessage: 'AI 검산 요청 실패 (해당 배치는 건너뜀)' },
+              );
+              issues.push(...(res.issues || []));
+            } catch { /* 검산 실패는 치명적이지 않음 — 배치 건너뜀 */ }
+            doneV += vBatches[idx].length;
+            setProgress({ done: doneV, total: normalized.length, stage: 'verify' });
+          }
+        };
+        await Promise.all(Array.from({ length: Math.min(3, vBatches.length) }, () => vWorker()));
+        issues.sort((a, b) => a.number - b.number);
+      }
+
       editor.setQuestions(normalized);
+      setVerifyIssues(issues);
       refreshStructural(normalized);
       setStep('preview');
+      if (issues.length > 0) {
+        toast.warning(`AI 검산에서 ${issues.length}개 문항이 지적되었습니다 — 목록을 확인하세요`);
+      }
       toast.success(`원본 ${originals.length}문제 → ${merged.length}문제 생성 완료`);
     } catch {
       setStep('upload');
@@ -143,11 +197,24 @@ export function PdfProblemExtractDialog({ unitId, unitTitle, onAdd }: { unitId: 
     setValidation({ structural: s, badge: s.valid ? (s.warningCount > 0 ? 'warn' : 'pass') : 'fail', summary: '' });
   }
 
+  /** 문항 삭제 시 검산 지적 목록의 번호를 같이 당김 (삭제된 번호의 지적은 제거) */
+  function shiftVerifyIssues(deletedNums: Set<number>) {
+    setVerifyIssues((prev) =>
+      prev
+        .filter((v) => !deletedNums.has(v.number))
+        .map((v) => ({
+          ...v,
+          number: v.number - [...deletedNums].filter((n) => n < v.number).length,
+        })),
+    );
+  }
+
   function handleDeleteQuestion(idx: number) {
     const next = editor.questions
       .filter((_, i) => i !== idx)
       .map((q, i) => ({ ...q, number: i + 1 }));
     editor.deleteQuestion(idx);
+    shiftVerifyIssues(new Set([idx + 1]));
     refreshStructural(next);
   }
 
@@ -155,8 +222,7 @@ export function PdfProblemExtractDialog({ unitId, unitTitle, onAdd }: { unitId: 
     if (!validation) return;
     const errNums = new Set(
       validation.structural.issues
-        .filter((i) => i.severity === 'error' && i.questionNumber != null)
-        .map((i) => i.questionNumber),
+        .flatMap((i) => (i.severity === 'error' && i.questionNumber != null ? [i.questionNumber] : [])),
     );
     if (errNums.size === 0) return;
     const next = editor.questions
@@ -164,8 +230,22 @@ export function PdfProblemExtractDialog({ unitId, unitTitle, onAdd }: { unitId: 
       .map((q, i) => ({ ...q, number: i + 1 }));
     editor.setQuestions(next);
     editor.setEditingIdx(null);
+    shiftVerifyIssues(errNums);
     refreshStructural(next);
     toast.success(`오류 문항 ${errNums.size}개를 삭제했습니다`);
+  }
+
+  function handleDeleteVerifyIssueQuestions() {
+    const nums = new Set(verifyIssues.map((v) => v.number));
+    if (nums.size === 0) return;
+    const next = editor.questions
+      .filter((_, i) => !nums.has(i + 1))
+      .map((q, i) => ({ ...q, number: i + 1 }));
+    editor.setQuestions(next);
+    editor.setEditingIdx(null);
+    setVerifyIssues([]);
+    refreshStructural(next);
+    toast.success(`AI 검산 지적 문항 ${nums.size}개를 삭제했습니다`);
   }
 
   async function handleAiValidation() {
@@ -288,6 +368,21 @@ export function PdfProblemExtractDialog({ unitId, unitTitle, onAdd }: { unitId: 
                 </span>
               </span>
             </label>
+            <label className="flex items-start gap-2 rounded-lg border p-3 cursor-pointer">
+              <input
+                type="checkbox"
+                checked={aiVerify}
+                onChange={(e) => setAiVerify(e.target.checked)}
+                className="mt-0.5"
+              />
+              <span className="text-sm">
+                <span className="font-medium">AI 검산 (권장)</span>
+                <span className="block text-xs text-muted-foreground mt-0.5">
+                  변형이 끝난 모든 문항을 AI가 정답을 가리고 다시 풀어, 정답 오류·복수 정답·풀 수 없는
+                  문항을 저장 전에 지적합니다. 시간이 몇 분 더 걸립니다.
+                </span>
+              </span>
+            </label>
             <div className="rounded-lg bg-muted/50 p-3 text-sm space-y-1 text-muted-foreground">
               <p className="font-medium text-foreground">1:1 패러프레이즈</p>
               <p>추출된 문항을 유형(객관식/서술형)과 순서 그대로 변형합니다</p>
@@ -302,7 +397,9 @@ export function PdfProblemExtractDialog({ unitId, unitTitle, onAdd }: { unitId: 
             {progress ? (
               <>
                 <p className="text-sm font-medium">
-                  원본 {originalCount}문항 추출 완료 — AI 변형 중 ({progress.done}/{progress.total})
+                  {progress.stage === 'verify'
+                    ? `변형 완료 — AI 검산 중 (${progress.done}/${progress.total})`
+                    : `원본 ${originalCount}문항 추출 완료 — AI 변형 중 (${progress.done}/${progress.total})`}
                 </p>
                 <div className="w-64 h-2 rounded-full bg-muted overflow-hidden">
                   <div
@@ -359,6 +456,31 @@ export function PdfProblemExtractDialog({ unitId, unitTitle, onAdd }: { unitId: 
                 </>
               )}
             </Button>
+
+            {verifyIssues.length > 0 && (
+              <div className="rounded-lg border border-amber-500/40 bg-amber-500/5 p-3 text-sm space-y-1.5">
+                <div className="flex items-center justify-between gap-2">
+                  <p className="font-medium text-amber-700 dark:text-amber-400">
+                    AI 검산 지적 {verifyIssues.length}건 — 확인 후 수정하거나 삭제하세요
+                  </p>
+                  <Button size="sm" variant="outline" onClick={handleDeleteVerifyIssueQuestions}>
+                    지적 문항 모두 삭제
+                  </Button>
+                </div>
+                <ul className="space-y-1">
+                  {verifyIssues.map((v, k) => (
+                    <li key={k}>
+                      · <span className="font-medium">#{v.number}</span>{' '}
+                      <span className="text-xs rounded bg-amber-500/15 px-1">
+                        {v.verdict === 'broken' ? '성립 불가' : '정답 오류'}
+                      </span>{' '}
+                      {v.reason}
+                      {v.aiAnswer ? <span className="text-muted-foreground"> (AI 풀이: {v.aiAnswer})</span> : null}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
 
             {validation && validation.structural.errorCount > 0 && (
               <div className="rounded-lg border border-destructive/30 bg-destructive/5 p-3 text-sm space-y-1.5">

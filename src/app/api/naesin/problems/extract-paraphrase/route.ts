@@ -93,6 +93,41 @@ ${JSON.stringify(chunk, null, 2)}
   남기지 말 것** (원본에 섞여 있어도 제거 — 시트가 번호를 새로 매김)`;
 }
 
+/** 검산 청크 크기 — 풀이+판정만 반환하므로 변형보다 큰 배치 가능 */
+const VERIFY_CHUNK_SIZE = 12;
+
+function buildVerifyPrompt(chunk: Record<string, unknown>[], unitTitle: string) {
+  return `당신은 중·고등학교 영어 문법 문제의 적대적 검수자입니다. 문법 주제: ${unitTitle || '중·고등 영어 문법'}
+
+아래는 시험에 출제될 문항들입니다:
+
+${JSON.stringify(chunk, null, 2)}
+
+각 문항에 대해:
+1. 저장된 정답(answer)을 가렸다고 생각하고 문제를 **먼저 스스로 푸세요**.
+2. 당신의 풀이와 저장된 정답을 비교하세요.
+
+다음 중 하나라도 해당하면 지적하세요 (학생 채점이 실제로 틀어지는 것만):
+- 저장된 정답이 어법상 틀리거나(비문) 그 문제의 정답이 아님
+- 객관식에서 저장된 번호 외의 다른 선지도 옳음 (정답 유일성 붕괴), 또는 복수 정답인데 일부만 저장됨
+- 지시문의 조건(단어 수, 특정 단어 사용, 빈칸 개수)과 정답이 맞지 않음
+- 문항만 보고 풀 수 없음 (그림·표 소실, 배열 제시 단어 누락, 지시문 없음)
+- 해설이 정답과 모순되거나, 정답에 "(또는: ...)" 병기·작업 메모가 섞여 있음
+- 정답이 슬래시로 복수 병기("A / B")된 경우, 병기된 답 **각각**이 모두 옳아야 함 — 하나라도 비문이면 지적 (예: "Tell me the way how ... / Tell me how ..."는 앞 병기가 비문이므로 지적)
+
+지적하지 말 것 (오탐 금지 — 확신 없으면 ok):
+- 저장된 정답도 어법상 옳은 경우의 표현·어순·소재 차이
+- 해설의 문체·상세도 등 채점과 무관한 품질 문제
+
+JSON 배열로만 응답 (모든 문항 포함):
+[
+  { "number": 1, "verdict": "ok" },
+  { "number": 2, "verdict": "wrong", "aiAnswer": "당신이 푼 정답", "reason": "저장 정답이 틀린 이유 한 문장" },
+  { "number": 3, "verdict": "broken", "reason": "풀 수 없는 이유 한 문장" }
+]
+verdict: "ok"(문제 없음) / "wrong"(정답 오류·유일성 붕괴) / "broken"(성립 불가·조건 불일치). reason은 ok가 아닐 때만.`;
+}
+
 export const POST = createApiHandler(
   // 2단계 방식은 추출 1회에 요청 ~12개(extract 1 + paraphrase 배치)가 나가므로
   // 대형 PDF 여러 개를 연달아 돌리는 실사용에 맞춰 상향 (스태프 전용 + naesin 게이트)
@@ -134,6 +169,36 @@ export const POST = createApiHandler(
       const { questions: out, chunkCount } = await paraphraseQuestions(inputQuestions as Record<string, unknown>[]);
       logger.info('ai.paraphrase_batch_done', { unitId, input: inputQuestions.length, output: out.length, chunks: chunkCount });
       return NextResponse.json({ questions: out });
+    }
+
+    // ── phase 'verify': 변형된 문항을 AI가 정답을 가리고 다시 풀어 검산 ──
+    // 변형 과정의 정답 오류(비문 정답·유일성 붕괴·조건 불일치)는 코드로 못 잡으므로
+    // 저장 전에 자동 검산해 지적 문항을 미리보기 패널에 띄운다 (다이얼로그가 배치 호출)
+    if (phase === 'verify') {
+      if (!unitId || !Array.isArray(inputQuestions) || inputQuestions.length === 0) {
+        return NextResponse.json({ error: 'unitId와 questions가 필요합니다.' }, { status: 400 });
+      }
+      const chunks: Record<string, unknown>[][] = [];
+      for (let i = 0; i < inputQuestions.length; i += VERIFY_CHUNK_SIZE) {
+        chunks.push(inputQuestions.slice(i, i + VERIFY_CHUNK_SIZE));
+      }
+      const chunkResults = await Promise.all(
+        chunks.map((chunk) =>
+          anthropic.messages.stream({
+            model: 'claude-opus-4-8',
+            max_tokens: 16000,
+            // 검산은 전 선지 대입·개수 세기·배열 검산이 필요해 사고 과정 필수 —
+            // thinking 없이는 같은 오류 셋에서 검출이 4~5/6으로 흔들리고, high effort로 6/6 (E2E 2회 확인)
+            thinking: { type: 'adaptive' },
+            output_config: { effort: 'high' },
+            messages: [{ role: 'user', content: buildVerifyPrompt(chunk, unitTitle) }],
+          }).finalMessage()
+            .then((m) => requireAiJsonArray<{ number: number; verdict: string; aiAnswer?: string; reason?: string }>(m, 'ai.verify')),
+        ),
+      );
+      const issues = chunkResults.flat().filter((r) => r.verdict === 'wrong' || r.verdict === 'broken');
+      logger.info('ai.verify_batch_done', { unitId, input: inputQuestions.length, issues: issues.length });
+      return NextResponse.json({ issues });
     }
 
     if (!unitId || (!pdfBase64 && !pdfUrl)) {
