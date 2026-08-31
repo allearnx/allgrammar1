@@ -284,7 +284,7 @@ export function PdfProblemExtractDialog({ unitId, unitTitle, onAdd }: { unitId: 
                 <span className="font-medium">문항 일부만 추출 (약 40%)</span>
                 <span className="block text-xs text-muted-foreground mt-0.5">
                   유형 묶음별로 5문항마다 2개(1·3번째)만 사용합니다. 지시문·보기 상자는 유지되고, 같은 유형이
-                  대량 반복되는 워크북에서 문항 수를 절반으로 줄입니다.
+                  대량 반복되는 워크북에서 문항 수와 학습 부담을 크게 줄입니다.
                 </span>
               </span>
             </label>
