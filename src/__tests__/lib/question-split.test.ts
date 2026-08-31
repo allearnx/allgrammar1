@@ -132,3 +132,36 @@ describe('thinAlternate — 근접 창 (25문항)', () => {
     expect(kept).not.toContain(4);
   });
 });
+
+describe('thinAlternate — 전체 상한 42%', () => {
+  it('소그룹 왜곡으로 비율이 치솟으면 큰 그룹의 비보호 문항에서 덜어 42% 이하로', () => {
+    // 큰 그룹 2개(각 10문항 → 4개 유지) + 2문항 소그룹 10개(각 1개 유지)
+    // = 40문항 중 18개(45%) → 상한 17개(42%)로 축소돼야 함
+    const qs: Record<string, unknown>[] = [];
+    for (let g = 0; g < 2; g++) {
+      for (let i = 0; i < 10; i++) {
+        qs.push({ number: qs.length + 1, question: `다음 ${g}대형 유형의 문장을 완성하시오. Item ${i} ___.` });
+      }
+    }
+    for (let g = 0; g < 10; g++) {
+      qs.push({ number: qs.length + 1, question: `다음 ${g}소형 유형의 빈칸을 채우시오. A${g} ___.` });
+      qs.push({ number: qs.length + 1, question: `다음 ${g}소형 유형의 빈칸을 채우시오. B${g} ___.` });
+    }
+    const kept = thinAlternate(qs);
+    expect(kept.length).toBeLessThanOrEqual(Math.ceil(40 * 0.42));
+    // 소그룹의 유일 대표(그룹 첫 문항)는 전부 보호됨
+    for (let g = 0; g < 10; g++) {
+      expect(kept.some((q) => String(q.question).includes(`${g}소형 유형`))).toBe(true);
+    }
+  });
+
+  it('그룹 첫 문항만 남은 경우엔 상한보다 많아도 더 줄이지 않음', () => {
+    // 싱글턴 그룹 10개 — 전부 pos 0이라 보호 대상
+    const qs = Array.from({ length: 10 }, (_, i) => ({
+      number: i + 1,
+      question: `다음 ${i}유형 문장을 완성하시오. Sentence number ${i} goes here.`,
+    }));
+    const kept = thinAlternate(qs as Record<string, unknown>[]);
+    expect(kept).toHaveLength(10); // 유형이 전부 달라 하나도 못 줄임 (의도된 보호)
+  });
+});

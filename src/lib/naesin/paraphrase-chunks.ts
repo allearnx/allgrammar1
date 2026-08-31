@@ -43,17 +43,40 @@ const THIN_GROUP_GAP = 25;
  *  애매한 쪽을 남기기보다 버리는 것이 안전 (사장님 확정).
  *  word bank 세트는 변형 후 rebuildBankSets가 남은 문항 정답으로 [보기]를 재조립하므로
  *  절반만 남아도 소거법이 성립한다. */
+/** 전체 유지 상한 — 소그룹(2~3문항·지문 문항)의 "최소 1문항 보장"이 비율을 60%까지
+ *  끌어올리는 왜곡 방지. 그룹 첫 문항은 보호하고 나머지에서 고르게 덜어낸다. */
+const THIN_TOTAL_CAP = 0.42;
+
 export function thinAlternate(qs: Record<string, unknown>[]): Record<string, unknown>[] {
   const state = new Map<string, { pos: number; lastIdx: number }>();
-  return qs.filter((q, i) => {
+  const kept: { q: Record<string, unknown>; pos: number }[] = [];
+  qs.forEach((q, i) => {
     const key = thinGroupKey(q);
-    if (!key) return false; // 판별 불가 — 삭제
+    if (!key) return; // 판별 불가 — 삭제
     const prev = state.get(key);
     const pos = prev && i - prev.lastIdx <= THIN_GROUP_GAP ? prev.pos + 1 : 0;
     state.set(key, { pos, lastIdx: i });
     // 그룹당 40% 유지: 5문항마다 1번째·3번째 (2026-09-01 사장님 확정 — 50%도 많았음)
-    return pos % 5 === 0 || pos % 5 === 2;
+    if (pos % 5 === 0 || pos % 5 === 2) kept.push({ q, pos });
   });
+
+  // 전체 상한 적용: 초과분을 그룹 첫 문항(pos 0)이 아닌 항목에서 고르게 제거
+  const target = Math.ceil(qs.length * THIN_TOTAL_CAP);
+  if (kept.length > target) {
+    const droppableIdx = kept.map((k, i) => (k.pos > 0 ? i : -1)).filter((i) => i >= 0);
+    const excess = Math.min(kept.length - target, droppableIdx.length);
+    const toDrop = new Set<number>();
+    for (let d = 0; d < excess; d++) {
+      toDrop.add(droppableIdx[Math.floor(((d + 0.5) * droppableIdx.length) / excess)]);
+    }
+    // 균등 선택이 중복으로 모자라면 앞에서부터 보충
+    for (const i of droppableIdx) {
+      if (toDrop.size >= excess) break;
+      toDrop.add(i);
+    }
+    return kept.filter((_, i) => !toDrop.has(i)).map((k) => k.q);
+  }
+  return kept.map((k) => k.q);
 }
 
 /** 청크 분할 — 같은 지문을 공유하는 연속 문항 그룹은 경계에서 쪼개지 않음 */
