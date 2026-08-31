@@ -94,7 +94,9 @@ ${JSON.stringify(chunk, null, 2)}
 }
 
 export const POST = createApiHandler(
-  { roles: ['teacher', 'admin', 'boss'], hasBody: false, rateLimit: { max: 30 } },
+  // 2단계 방식은 추출 1회에 요청 ~12개(extract 1 + paraphrase 배치)가 나가므로
+  // 대형 PDF 여러 개를 연달아 돌리는 실사용에 맞춰 상향 (스태프 전용 + naesin 게이트)
+  { roles: ['teacher', 'admin', 'boss'], hasBody: false, rateLimit: { max: 300 } },
   async ({ user, supabase, request }) => {
   await requireContentPermission(user, supabase);
 
