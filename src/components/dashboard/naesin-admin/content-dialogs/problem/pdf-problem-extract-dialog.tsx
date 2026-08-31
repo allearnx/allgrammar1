@@ -77,7 +77,7 @@ export function PdfProblemExtractDialog({ unitId, unitTitle, onAdd }: { unitId: 
       }
       setExtractedTotal(extracted.extractedTotal ?? extracted.questions?.length ?? 0);
       if (halfSampling && extracted.extractedTotal && extracted.questions && extracted.extractedTotal > extracted.questions.length) {
-        toast.info(`전체 ${extracted.extractedTotal}문항 중 절반 추출로 ${extracted.questions.length}문항을 사용합니다`);
+        toast.info(`전체 ${extracted.extractedTotal}문항 중 일부 추출로 ${extracted.questions.length}문항을 사용합니다`);
       }
       const originals = extracted.questions || [];
       if (originals.length === 0) {
@@ -281,9 +281,9 @@ export function PdfProblemExtractDialog({ unitId, unitTitle, onAdd }: { unitId: 
                 className="mt-0.5"
               />
               <span className="text-sm">
-                <span className="font-medium">문항 절반만 추출</span>
+                <span className="font-medium">문항 일부만 추출 (약 40%)</span>
                 <span className="block text-xs text-muted-foreground mt-0.5">
-                  유형 묶음별로 1·3·5번째만 사용합니다. 지시문·보기 상자는 유지되고, 같은 유형이
+                  유형 묶음별로 5문항마다 2개(1·3번째)만 사용합니다. 지시문·보기 상자는 유지되고, 같은 유형이
                   대량 반복되는 워크북에서 문항 수를 절반으로 줄입니다.
                 </span>
               </span>
@@ -325,7 +325,7 @@ export function PdfProblemExtractDialog({ unitId, unitTitle, onAdd }: { unitId: 
           <div className="space-y-4">
             <div className="flex flex-wrap items-center gap-2 text-sm">
               <Badge variant="secondary">
-                원본 {originalCount}문제{extractedTotal > originalCount ? ` (전체 ${extractedTotal} 중 절반 추출)` : ''}
+                원본 {originalCount}문제{extractedTotal > originalCount ? ` (전체 ${extractedTotal}  중 일부 추출)` : ''}
               </Badge>
               <Badge variant="secondary">생성 {questions.length}문제</Badge>
               {mcqCount > 0 && <Badge variant="outline">객관식 {mcqCount}</Badge>}
