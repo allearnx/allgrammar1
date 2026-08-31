@@ -52,10 +52,10 @@ import { thinAlternate } from '@/lib/naesin/paraphrase-chunks';
 
 describe('thinAlternate — 절반 추출', () => {
   const instr = '다음 빈칸에 알맞은 비교급을 쓰시오.';
-  it('같은 지시문 묶음에서 1·3·5번째만 유지', () => {
-    const qs = Array.from({ length: 6 }, (_, i) => ({ number: i + 1, question: `${instr}\nSentence ${i} ___.`, answer: 'a' }));
+  it('같은 지시문 묶음에서 40% 유지 (5문항마다 1·3번째)', () => {
+    const qs = Array.from({ length: 10 }, (_, i) => ({ number: i + 1, question: `${instr}\nSentence ${i} ___.`, answer: 'a' }));
     const kept = thinAlternate(qs);
-    expect(kept.map((q) => q.number)).toEqual([1, 3, 5]);
+    expect(kept.map((q) => q.number)).toEqual([1, 3, 6, 8]); // pos 0,2,5,7
   });
 
   it('그룹이 바뀌면 교대가 리셋 — 모든 묶음이 최소 1문항 유지', () => {
@@ -74,7 +74,7 @@ describe('thinAlternate — 절반 추출', () => {
     const bank = '[보기] fresh / clean / famous / boring / yellow';
     const qs = Array.from({ length: 5 }, (_, i) => ({ number: i + 1, question: `${bank}\nSentence ${i} ___.` }));
     const kept = thinAlternate(qs as Record<string, unknown>[]);
-    expect(kept.map((q) => q.number)).toEqual([1, 3, 5]);
+    expect(kept.map((q) => q.number)).toEqual([1, 3]); // 40%: pos 0,2
   });
 
   it('그룹 판별 불가(지시문 없는 짧은 문항)는 삭제', () => {

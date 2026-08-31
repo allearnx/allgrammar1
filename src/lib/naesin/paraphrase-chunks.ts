@@ -51,7 +51,8 @@ export function thinAlternate(qs: Record<string, unknown>[]): Record<string, unk
     const prev = state.get(key);
     const pos = prev && i - prev.lastIdx <= THIN_GROUP_GAP ? prev.pos + 1 : 0;
     state.set(key, { pos, lastIdx: i });
-    return pos % 2 === 0;
+    // 그룹당 40% 유지: 5문항마다 1번째·3번째 (2026-09-01 사장님 확정 — 50%도 많았음)
+    return pos % 5 === 0 || pos % 5 === 2;
   });
 }
 
