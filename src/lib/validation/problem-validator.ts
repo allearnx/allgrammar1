@@ -135,6 +135,18 @@ function detectExpectedAnswerCount(qtext: string): number | null {
   return null;
 }
 
+// ── subParts 개수 검증용 ──
+// 문항 텍스트의 파트 마커 "(1)(2)(3)…" 개수 — (1)부터 연속된 최대치만 인정 (배점 "(3점)"류 잡음 배제)
+function countPartMarkers(text: string): number {
+  const nums = new Set<number>();
+  for (const m of text.matchAll(/\((\d{1,2})\)/g)) nums.add(Number(m[1]));
+  let k = 0;
+  while (nums.has(k + 1)) k++;
+  return k;
+}
+// 공백/개행 뒤 파트 마커 + 내용 — subPart answer에 다른 파트의 내용이 혼입된 흔적
+const MID_ANSWER_PART_MARKER = /\s\(\d{1,2}\)\s*\S/;
+
 // ── Main ──
 
 export function validateProblemStructure(
@@ -783,11 +795,33 @@ export function validateBeforeSave(
     }
 
     // ERROR: subParts with empty answers
-    if (q.subParts && Array.isArray(q.subParts)) {
+    if (q.subParts && Array.isArray(q.subParts) && q.subParts.length > 0) {
       for (const sp of q.subParts) {
         if (!sp.answer) {
           errors.push(issue('error', n, 'EMPTY_SUBPART_ANSWER', `${n}번: subPart "${sp.label}" 정답이 비어있습니다.`));
         }
+      }
+
+      // WARNING(quality): subParts 개수 ≠ 문항 텍스트의 파트 마커/빈칸 그룹 수 (SUBPARTS_COUNT_MISMATCH)
+      //   실사고(중3 능률김 5과, 8문항+): AI 추출이 복수 인정답 병기("that is / which is")를
+      //   슬래시 기준으로 잘라 subParts로 만들어 파트 수가 어긋나거나 다른 파트 내용이 혼입됨.
+      //   조건 목록의 (1)(2) 등 오탐 여지가 있어 quality(warn) — 차단 아님.
+      if (hasQuestion && q.subParts.length >= 2) {
+        const markerCount = countPartMarkers(q.question!);
+        const blankCount = (q.question!.match(/_{3,}/g) || []).length;
+        const expectedParts = markerCount >= 2 ? markerCount : blankCount >= 2 ? blankCount : null;
+        if (expectedParts != null && expectedParts !== q.subParts.length) {
+          warnings.push(issue('warning', n, 'SUBPARTS_COUNT_MISMATCH',
+            `${n}번: 문항의 파트 수(${expectedParts})와 subParts 수(${q.subParts.length})가 다릅니다. 복수 인정답 병기("A / B")가 슬래시로 잘려 subParts가 된 사고 패턴일 수 있습니다.`));
+        }
+      }
+      // 강한 신호: subPart answer 안에 "(2) ..." 같은 파트 마커 + 내용 → 다른 파트 혼입 (개수가 맞아도 발동)
+      const contaminated = q.subParts.find(
+        (sp) => typeof sp.answer === 'string' && MID_ANSWER_PART_MARKER.test(sp.answer),
+      );
+      if (contaminated) {
+        warnings.push(issue('warning', n, 'SUBPARTS_COUNT_MISMATCH',
+          `${n}번: subPart "${contaminated.label}" 정답에 다른 파트 마커가 섞여 있습니다 ("${String(contaminated.answer).slice(0, 40)}"). 슬래시 분할로 다른 파트 내용이 혼입된 것으로 보입니다.`));
       }
     }
 

@@ -502,6 +502,100 @@ describe('validateBeforeSave', () => {
     });
   });
 
+  describe('subParts 개수 불일치 (SUBPARTS_COUNT_MISMATCH — quality/warn)', () => {
+    it('파트 마커 (1)(2) 2개 + subParts 2개 → 통과', () => {
+      const q: NaesinProblemQuestion = {
+        number: 1,
+        question: '빈칸에 알맞은 말을 쓰시오. (1) He is the boy ___ won. (2) She is the girl ___ sings.',
+        answer: 'who / who',
+        subParts: [
+          { label: '(1)', answer: 'who' },
+          { label: '(2)', answer: 'who' },
+        ],
+      };
+      expect(validateBeforeSave([q]).warnings.some((e) => e.code === 'SUBPARTS_COUNT_MISMATCH')).toBe(false);
+    });
+
+    it('파트 마커 2개인데 subParts 3개 (복수 인정답 병기 슬래시 분할 사고) → 경고', () => {
+      const q: NaesinProblemQuestion = {
+        number: 1,
+        question: '빈칸에 알맞은 말을 쓰시오. (1) This is the book ___ interesting. (2) He is the man ___ tall.',
+        answer: 'that is / which is / who is',
+        subParts: [
+          { label: '(1)', answer: 'that is' },
+          { label: '(2)', answer: 'which is' },
+          { label: '(3)', answer: 'who is' },
+        ],
+      };
+      const result = validateBeforeSave([q]);
+      const hits = result.warnings.filter((e) => e.code === 'SUBPARTS_COUNT_MISMATCH');
+      expect(hits.length).toBeGreaterThan(0);
+      expect(hits[0].severity).toBe('warning');
+      expect(result.errors.some((e) => e.code === 'SUBPARTS_COUNT_MISMATCH')).toBe(false); // 차단 아님
+    });
+
+    it('빈칸(___) 그룹 3개인데 subParts 2개 → 경고', () => {
+      const q: NaesinProblemQuestion = {
+        number: 1,
+        question: '빈칸을 채우시오. He ___ to school ___ she ___ home.',
+        answer: 'goes / while / stays',
+        subParts: [
+          { label: '(1)', answer: 'goes' },
+          { label: '(2)', answer: 'while' },
+        ],
+      };
+      expect(validateBeforeSave([q]).warnings.some((e) => e.code === 'SUBPARTS_COUNT_MISMATCH')).toBe(true);
+    });
+
+    it('subPart answer에 다른 파트 마커 혼입 ("which is\\n(2) who likes") → 개수가 맞아도 경고', () => {
+      const q: NaesinProblemQuestion = {
+        number: 1,
+        question: '빈칸에 알맞은 말을 쓰시오. (1) This is the book ___. (2) He is the boy ___.',
+        answer: 'that is / which is\n(2) who likes',
+        subParts: [
+          { label: '(1)', answer: 'that is' },
+          { label: '(2)', answer: 'which is\n(2) who likes' },
+        ],
+      };
+      expect(validateBeforeSave([q]).warnings.some((e) => e.code === 'SUBPARTS_COUNT_MISMATCH')).toBe(true);
+    });
+
+    it('마커·빈칸 신호가 부족하면(마커 0, 빈칸 1) 개수 비교 미발동 → 통과', () => {
+      const q: NaesinProblemQuestion = {
+        number: 1,
+        question: '다음 문장을 완성하시오. He is the boy ___ won the race.',
+        answer: 'who / that',
+        subParts: [
+          { label: '(1)', answer: 'who' },
+          { label: '(2)', answer: 'that' },
+        ],
+      };
+      expect(validateBeforeSave([q]).warnings.some((e) => e.code === 'SUBPARTS_COUNT_MISMATCH')).toBe(false);
+    });
+
+    it('배점 "(3점)" 같은 비연속 괄호 숫자는 파트 마커로 세지 않음 → 통과', () => {
+      const q: NaesinProblemQuestion = {
+        number: 1,
+        question: '(1) 빈칸 ___를 채우고 (2) 빈칸 ___를 채우시오. (5) 힌트 참고',
+        answer: 'who / which',
+        subParts: [
+          { label: '(1)', answer: 'who' },
+          { label: '(2)', answer: 'which' },
+        ],
+      };
+      expect(validateBeforeSave([q]).warnings.some((e) => e.code === 'SUBPARTS_COUNT_MISMATCH')).toBe(false);
+    });
+
+    it('subParts 없는 문항은 미발동', () => {
+      const q: NaesinProblemQuestion = {
+        number: 1,
+        question: '빈칸을 채우시오. (1) ___ (2) ___ (3) ___',
+        answer: 'a / b / c',
+      };
+      expect(validateBeforeSave([q]).warnings.some((e) => e.code === 'SUBPARTS_COUNT_MISMATCH')).toBe(false);
+    });
+  });
+
   describe('복수정답 범위 검증', () => {
     it('"1, 3"은 5개 선택지에서 통과', () => {
       const q: NaesinProblemQuestion = { number: 1, question: 'test', answer: '1, 3', options: ['a', 'b', 'c', 'd', 'e'] };

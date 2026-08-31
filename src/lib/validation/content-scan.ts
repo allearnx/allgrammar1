@@ -14,7 +14,8 @@ export type IssueCategory = 'correctness' | 'quality';
 // 품질(노이즈) 코드 — 채점/표시에 영향 없음. 나머지는 전부 correctness.
 // MULTI_ANSWER_UNDERCOUNT: 조합형("①③")·2빈칸 공통답 등 잔여 오탐이 있어 오탐0이 아님 →
 //   "검토 후보"로만(quality). 자동수정 금지, 반드시 사람이 보기/풀이 확인 후 고칠 것.
-const QUALITY_CODES = new Set<string>(['NO_EXPLANATION', 'NO_FORMAT_HINT', 'EMPTY_OPTION', 'MULTI_ANSWER_UNDERCOUNT', 'UNDERLINE_MISSING']);
+// SUBPARTS_COUNT_MISMATCH: 조건 목록 "(1)(2)…" 등 오탐 여지 → 검토 후보로만(quality).
+const QUALITY_CODES = new Set<string>(['NO_EXPLANATION', 'NO_FORMAT_HINT', 'EMPTY_OPTION', 'MULTI_ANSWER_UNDERCOUNT', 'UNDERLINE_MISSING', 'SUBPARTS_COUNT_MISMATCH']);
 
 function categoryOf(code: string): IssueCategory {
   return QUALITY_CODES.has(code) ? 'quality' : 'correctness';
