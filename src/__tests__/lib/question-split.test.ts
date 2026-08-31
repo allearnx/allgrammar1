@@ -99,3 +99,36 @@ describe('thinAlternate — 절반 추출', () => {
     expect(kept.map((q) => q.number)).toEqual([1, 2, 5]);
   });
 });
+
+describe('thinAlternate — 근접 창 (25문항)', () => {
+  const instr = '다음 문장을 부정문으로 바꾸시오.';
+  it('창 안(≤25)에서 재등장하면 같은 묶음으로 이어서 교대', () => {
+    const other = Array.from({ length: 5 }, (_, i) => ({ number: 100 + i, question: `다음 빈칸에 알맞은 말을 쓰시오. There ___ item${i}.` }));
+    const qs = [
+      { number: 1, question: `${instr}\nA.` },
+      { number: 2, question: `${instr}\nB.` },
+      ...other,
+      { number: 3, question: `${instr}\nC.` }, // 5칸 뒤 재등장 → 같은 묶음 3번째 → 유지
+    ];
+    const kept = thinAlternate(qs as Record<string, unknown>[]).map((q) => q.number);
+    expect(kept).toContain(1);
+    expect(kept).not.toContain(2);
+    expect(kept).toContain(3);
+  });
+
+  it('창 밖(>25)에서 재등장하면 새 묶음으로 리셋 (첫 문항 유지)', () => {
+    const filler = Array.from({ length: 30 }, (_, i) => ({ number: 200 + i, question: `다음 빈칸에 알맞은 말을 쓰시오. There ___ filler${i}.` }));
+    const qs = [
+      { number: 1, question: `${instr}\nA.` },
+      { number: 2, question: `${instr}\nB.` },
+      ...filler,
+      { number: 3, question: `${instr}\nC.` }, // 30칸 뒤 → 새 묶음 1번째 → 유지
+      { number: 4, question: `${instr}\nD.` }, // 새 묶음 2번째 → 삭제
+    ];
+    const kept = thinAlternate(qs as Record<string, unknown>[]).map((q) => q.number);
+    expect(kept).toContain(1);
+    expect(kept).not.toContain(2);
+    expect(kept).toContain(3);
+    expect(kept).not.toContain(4);
+  });
+});

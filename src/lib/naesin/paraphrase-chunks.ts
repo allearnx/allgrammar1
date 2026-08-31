@@ -30,19 +30,27 @@ export function thinGroupKey(q: Record<string, unknown>): string | null {
   return null; // 판별 불가 (지시문 없는 짧은 문항 등) — 삭제 대상
 }
 
+/** 같은 키가 이 거리(문항 수) 안에서 다시 나오면 같은 묶음으로 이어서 교대.
+ *  추출 조각(6페이지 ≈ 30문항) 경계에서 흩어진 같은 섹션은 묶이고,
+ *  멀리 떨어진 다른 파트의 같은 유형(보통 50문항+ 간격)은 새 묶음으로 리셋. */
+const THIN_GROUP_GAP = 25;
+
 /** 절반 추출: 그룹(지시문·지문·보기 상자)별로 1·3·5번째 문항만 유지.
+ *  같은 키라도 THIN_GROUP_GAP보다 멀리서 재등장하면 새 묶음으로 취급 (근접 창 —
+ *  서로 다른 파트가 유형만 같다고 묶이는 것 방지, 사장님 확정).
  *  모든 유형 묶음이 최소 1문항 남고, 지시문은 문항마다 복제돼 있어 유실되지 않음.
  *  그룹 판별이 애매한 문항(지시문 없는 짧은 문항 등)은 삭제 — 유형별 문항이 충분하므로
  *  애매한 쪽을 남기기보다 버리는 것이 안전 (사장님 확정).
  *  word bank 세트는 변형 후 rebuildBankSets가 남은 문항 정답으로 [보기]를 재조립하므로
  *  절반만 남아도 소거법이 성립한다. */
 export function thinAlternate(qs: Record<string, unknown>[]): Record<string, unknown>[] {
-  const counts = new Map<string, number>();
-  return qs.filter((q) => {
+  const state = new Map<string, { pos: number; lastIdx: number }>();
+  return qs.filter((q, i) => {
     const key = thinGroupKey(q);
     if (!key) return false; // 판별 불가 — 삭제
-    const pos = counts.get(key) ?? 0;
-    counts.set(key, pos + 1);
+    const prev = state.get(key);
+    const pos = prev && i - prev.lastIdx <= THIN_GROUP_GAP ? prev.pos + 1 : 0;
+    state.set(key, { pos, lastIdx: i });
     return pos % 2 === 0;
   });
 }
