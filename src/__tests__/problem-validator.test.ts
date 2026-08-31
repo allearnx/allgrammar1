@@ -903,3 +903,31 @@ describe('expandBracketAlternatives / sanitizeQuestions Rule 11 — 대괄호 �
     expect(questions[0].subParts![0].acceptedAnswers).toContain('of the class');
   });
 });
+
+describe('NO_DIRECTION 경고 — 지시문 없는 서술형', () => {
+  it('평서문·빈칸만 있는 문항은 경고', () => {
+    const r = validateProblemStructure([
+      { number: 1, question: 'There was a dog in the yard.', answer: "There wasn't a dog in the yard.", explanation: 'e' },
+      { number: 2, question: 'There ______________ some apples.', answer: 'are', explanation: 'e' },
+    ] as NaesinProblemQuestion[]);
+    const codes = r.issues.filter((i) => i.code === 'NO_DIRECTION').map((i) => i.questionNumber);
+    expect(codes).toEqual([1, 2]);
+  });
+
+  it('지시문·[보기]·※·영어 지시가 있으면 경고 없음', () => {
+    const r = validateProblemStructure([
+      { number: 1, question: '다음 문장을 의문문으로 바꾸어 쓰시오.\nThere is a dog.', answer: 'Is there a dog?', explanation: 'e' },
+      { number: 2, question: '[보기] fresh / clean\nKeep it ___.', answer: 'clean', explanation: 'e' },
+      { number: 3, question: '빈칸을 채우시오. ※ 예시: brave, 형용사\nHe is ___.', answer: 'tall, 형용사', explanation: 'e' },
+      { number: 4, question: 'Rewrite the sentence as shown.\nI am tall.', answer: 'Am I tall?', explanation: 'e' },
+    ] as NaesinProblemQuestion[]);
+    expect(r.issues.some((i) => i.code === 'NO_DIRECTION')).toBe(false);
+  });
+
+  it('객관식은 검사 대상 아님 (보기 선택이 자명)', () => {
+    const r = validateProblemStructure([
+      { number: 1, question: 'A giraffe is ___ than a horse.', options: ['taller', 'tallest'], answer: '1', explanation: 'e' },
+    ] as NaesinProblemQuestion[]);
+    expect(r.issues.some((i) => i.code === 'NO_DIRECTION')).toBe(false);
+  });
+});

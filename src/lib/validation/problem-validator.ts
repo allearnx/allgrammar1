@@ -14,6 +14,9 @@ const CIRCLED_ANYWHERE = /[①②③④⑤⑥⑦⑧⑨⑩]/;
 // PDF 추출 아티팩트
 const SUPERSCRIPT_NUMBERS = /[⁰¹²³⁴⁵⁶⁷⁸⁹]+[⁾)]\s*/g;
 
+// 지시문 존재 단서 — 한국어 지시 어미, 형식 안내(※), 보기 상자, 영어 지시 동사
+const DIRECTION_CUE = /(시오|세요|하라\b|할 것|하기\.|보기\]|※|맞게|알맞은|같도록|일치하도록|이용하여|사용하여|활용하여|참고하여|Choose|Write|Rewrite|Complete|Fill in|Answer|Circle|Underline|Translate|Combine|Match|Put\b|correct order|according to|as shown)/i;
+
 const CIRCLED_BY_INDEX = ['①', '②', '③', '④', '⑤', '⑥', '⑦', '⑧', '⑨', '⑩'];
 
 /** 보기 텍스트 앞의 "자기 번호" 접두사(① / 1. / 1)) 제거.
@@ -236,6 +239,11 @@ export function validateProblemStructure(
         q.answer.trim().split(/\s+/).length <= 2
       ) {
         issues.push(issue('warning', n, 'FULL_SENTENCE_ANSWER_TOO_SHORT', `${n}번: 전체 문장 답을 요구하는데 정답이 단어 수준입니다.`));
+      }
+      // 지시문 단서가 전혀 없는 서술형 — 한 문제씩 단독 표시되므로 학생이 뭘 할지 알 수 없음
+      // (지시문 유실 실사례: 평서문만 남은 의문문 전환 문항 21건)
+      if (!DIRECTION_CUE.test(q.question || '')) {
+        issues.push(issue('warning', n, 'NO_DIRECTION', `${n}번: 지시문이 없습니다 — 문항 단독으로 무엇을 해야 할지 알 수 없습니다.`));
       }
     }
 
