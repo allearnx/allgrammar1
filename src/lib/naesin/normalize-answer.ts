@@ -131,13 +131,20 @@ export function isSubstringMatch(student: string, correct: string): boolean {
 
   if (sWords.length < 3) return false;
 
+  // prefix/suffix는 단어 단위로 비교 — 문자열 startsWith는 "had been study"가
+  // "had been studying"의 접두사로 통과해 틀린 답이 정답 처리됨 (전하루 실사례)
+  const wordPrefix = (words: string[], prefix: string[]) =>
+    prefix.length <= words.length && prefix.every((w, i) => words[i] === w);
+  const wordSuffix = (words: string[], suffix: string[]) =>
+    suffix.length <= words.length && suffix.every((w, i) => words[words.length - suffix.length + i] === w);
+
   // 학생 답이 정답의 prefix 또는 suffix
-  if (c.startsWith(s) || c.endsWith(s)) {
+  if (wordPrefix(cWords, sWords) || wordSuffix(cWords, sWords)) {
     return sWords.length / cWords.length >= 0.35;
   }
 
   // 정답이 학생 답의 prefix 또는 suffix (학생이 더 많이 쓴 경우)
-  if (s.startsWith(c) || s.endsWith(c)) {
+  if (wordPrefix(sWords, cWords) || wordSuffix(sWords, cWords)) {
     return cWords.length / sWords.length >= 0.35;
   }
 

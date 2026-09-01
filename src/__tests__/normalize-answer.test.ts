@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { normalize, normalizeSeparators, matchMcqAnswer, resolveCorrectIndex, uncircle } from '@/lib/naesin/normalize-answer';
+import { normalize, normalizeSeparators, matchMcqAnswer, resolveCorrectIndex, uncircle, isSubstringMatch } from '@/lib/naesin/normalize-answer';
 
 describe('normalize', () => {
   it('trims, lowercases, removes trailing period, collapses spaces', () => {
@@ -160,5 +160,30 @@ describe('normalize — 축약형 동등 처리', () => {
   it('소유격은 확장하지 않음', () => {
     expect(normalize("Tom's bike")).toBe("tom's bike");
     expect(normalize("your sister's best friend")).toBe("your sister's best friend");
+  });
+});
+
+describe('isSubstringMatch — 단어 경계', () => {
+  it('마지막 단어가 다른 단어의 접두사여도 오답 처리 (had been study ≠ had been studying)', () => {
+    expect(isSubstringMatch('had been study', 'had been studying')).toBe(false);
+    expect(isSubstringMatch('she had been feeling tired', 'she had been feeling tiredness')).toBe(false);
+  });
+
+  it('학생이 더 길게 쓴 경우에도 문자 단위 접두사는 오답 처리', () => {
+    // 구버전은 s.startsWith(c) 문자 비교라 "study"≈"studying"으로 통과했음
+    expect(isSubstringMatch('had been studying hard today', 'had been study')).toBe(false);
+  });
+
+  it('단어 단위 prefix/suffix 부분 일치는 계속 정답 처리', () => {
+    expect(isSubstringMatch('she persuaded her sister to sign up', 'she persuaded her sister to sign up for the yoga class')).toBe(true);
+    expect(isSubstringMatch('for the yoga class together', 'she persuaded her sister for the yoga class together')).toBe(true);
+  });
+
+  it('완전 일치는 정답', () => {
+    expect(isSubstringMatch('Had been studying', 'had been studying')).toBe(true);
+  });
+
+  it('2단어 이하는 부분 일치 미적용', () => {
+    expect(isSubstringMatch('he walk', 'he walks every day')).toBe(false);
   });
 });
