@@ -16,7 +16,15 @@ const sb = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL, process.env.SUPABA
 const extractAnswer = (v) => v == null ? '' : typeof v === 'string' ? v : typeof v === 'number' ? String(v) : (typeof v === 'object' && 'answer' in v ? String(v.answer ?? '') : '');
 const C = { '①':'1','②':'2','③':'3','④':'4','⑤':'5','⑥':'6','⑦':'7','⑧':'8','⑨':'9','⑩':'10' };
 const uncircle = (s) => String(s).replace(/[①②③④⑤⑥⑦⑧⑨⑩]+/g, (m) => [...m].map((c) => C[c] ?? c).join(','));
-const normalize = (s) => String(s).replace(/[\r\n\t]/g,' ').replace(/[‘’`´]/g,"'").replace(/[“”]/g,'"').replace(/[–—−]/g,'-').trim().toLowerCase().replace(/\.+\s*$/,'').replace(/\((\d+)\)\s*/g,'($1) ').replace(/\s*\/\s*/g,' / ').replace(/\s+/g,' ').trim();
+// normalize-answer.ts 현행 포팅 — 축약형 확장 포함 (2026-09-01 동기화: 구버전엔 축약 확장이 빠져
+// 재채점 결과가 실서비스 채점과 달랐음. 이 스크립트 수정 시 normalize-answer.ts와 대조할 것)
+const normalize = (s) => String(s).replace(/[\r\n\t]/g,' ').replace(/[‘’`´]/g,"'").replace(/[“”]/g,'"').replace(/[–—−]/g,'-').trim().toLowerCase()
+  .replace(/\bcan't\b/g,'cannot').replace(/\bcan not\b/g,'cannot').replace(/\bwon't\b/g,'will not')
+  .replace(/([a-z])n't\b/g,'$1 not').replace(/\bi'm\b/g,'i am').replace(/\b(you|we|they)'re\b/g,'$1 are')
+  .replace(/\b(i|you|we|they|he|she|it|there|who|what)'ll\b/g,'$1 will').replace(/\b(i|you|we|they)'ve\b/g,'$1 have')
+  .replace(/\b(it|that|there|he|she|what|who|where|when|how|here)'s\b/g,'$1 is')
+  .replace(/\s+([?!.,;:])/g,'$1')
+  .replace(/\.+\s*$/,'').replace(/\((\d+)\)\s*/g,'($1) ').replace(/\s*\/\s*/g,' / ').replace(/\s+/g,' ').trim();
 const normalizeSeparators = (s) => normalize(s).replace(/\s*[,/]\s*/g,' ').replace(/\s+/g,' ').trim();
 function normalizeMulti(s){const p=String(s).split(',').map(v=>v.trim());if(p.length<=1)return String(s).trim().toLowerCase();if(p.every(x=>/^\d+$/.test(x)))return p.sort((a,b)=>+a-+b).join(', ');return p.map(x=>x.toLowerCase()).sort().join(', ');}
 function matchMcqAnswer(ua,ca,opts){const u=uncircle(ua).trim().toLowerCase(),c=uncircle(ca).trim().toLowerCase();if(u===c)return true;if(c.includes(',')||u.includes(','))if(normalizeMulti(u)===normalizeMulti(c))return true;if(!opts||!opts.length)return false;const i=parseInt(u,10);if(!isNaN(i)&&i>=1&&i<=opts.length&&opts[i-1].trim().toLowerCase()===c)return true;const ci=parseInt(c,10);if(!isNaN(ci)&&ci>=1&&ci<=opts.length&&opts[ci-1].trim().toLowerCase()===u)return true;return false;}
