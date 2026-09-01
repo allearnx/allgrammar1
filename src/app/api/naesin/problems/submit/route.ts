@@ -111,15 +111,17 @@ export const POST = createApiHandler(
       .select()
       .single());
 
+    // 같은 시트의 이전 오답 정리 — 오답 유무와 무관하게 항상 실행.
+    // if 안에 있으면 만점 재시험(오답 0)이 이전 오답을 못 지워 오답노트에 잔존
+    // (전하루 실사례, 헬스체크 WRONG_ANSWER_SYNC).
+    dbResult(await supabase
+      .from('naesin_wrong_answers')
+      .delete()
+      .eq('student_id', user.id)
+      .eq('sheet_id', sheetId));
+
     // Save wrong answers to unified table with enriched data
     if (wrongAnswers.length > 0) {
-      // 같은 시트의 이전 오답 정리 (재시도 시 중복 방지)
-      dbResult(await supabase
-        .from('naesin_wrong_answers')
-        .delete()
-        .eq('student_id', user.id)
-        .eq('sheet_id', sheetId));
-
       const wrongRows = wrongAnswers.map((wa) => {
         const idx = wa.number - 1;
         const q = questions?.[idx];

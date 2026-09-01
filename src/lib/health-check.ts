@@ -121,20 +121,23 @@ async function checkLowScoreCluster(admin: ReturnType<typeof createAdminClient>)
 
   const { data: attempts } = await admin
     .from('naesin_problem_attempts')
-    .select('sheet_id, score')
+    .select('sheet_id, score, student_id')
     .gte('created_at', sevenDaysAgo)
     .lte('score', 50)
     .gt('total_questions', 0);
 
   if (!attempts?.length) return [];
 
-  const bySheet = new Map<string, number>();
+  // 학생 수 기준 — 한 학생의 반복 저점 시도를 "N명"으로 오보하지 않게 (전하루 4회 실사례)
+  const bySheet = new Map<string, Set<string>>();
   for (const a of attempts) {
-    bySheet.set(a.sheet_id, (bySheet.get(a.sheet_id) || 0) + 1);
+    if (!bySheet.has(a.sheet_id)) bySheet.set(a.sheet_id, new Set());
+    bySheet.get(a.sheet_id)!.add(a.student_id);
   }
 
   const issues: HealthIssue[] = [];
-  for (const [sheetId, count] of bySheet) {
+  for (const [sheetId, students] of bySheet) {
+    const count = students.size;
     if (count >= 3) {
       const { data: sheet } = await admin
         .from('naesin_problem_sheets')
