@@ -1,0 +1,74 @@
+{
+ "attempt": {
+  "id": "0126d675-04f3-4d06-b2f4-eaa1a1973ff4",
+  "student_id": "1265b36f-c01c-4c48-b3ee-55eda9dd1a54",
+  "sheet_id": "688aec02-902c-4e14-acb8-fb743fef3950",
+  "answers": [
+   "1",
+   "had finished",
+   "had worked",
+   "had driven",
+   "had visited",
+   "had left",
+   "had not arrived",
+   "had found",
+   "had not studied",
+   "1 / 2",
+   "2 / 1",
+   "2 / 1",
+   "2 / 1",
+   "had finished",
+   "had worked",
+   "had driven",
+   "had lived",
+   "had not brought",
+   "had not come",
+   "had been repaired",
+   "had been study",
+   "2",
+   "1",
+   "1",
+   "1",
+   "1",
+   "1",
+   "1",
+   "1",
+   "1"
+  ],
+  "score": 83,
+  "total_questions": 30,
+  "wrong_answers": [
+   {
+    "number": 1,
+    "question": "다음 글의 밑줄 친 부분 중, 어법상 틀린 것은?\n\nCreatures inhabiting the deep sea have adapted to intense pressure by storing water in their bodies, some ①<u>consisting</u> almost entirely of water. Most deep-sea creatures lack gas bladders. They are cold-blooded organisms that match their body temperature to their surroundings, allowing them ②<u>to survive</u> in the cold water while keeping a low metabolism. Many species reduce their metabolism so greatly that they can survive without food for long stretches, since locating the scarce food ③<u>that</u> is available uses up a lot of energy. Many predatory fish of the deep sea have huge mouths and sharp teeth, enabling them to grip prey and overpower ④<u>it</u>. Some predators hunting in the residual light zone of the ocean ⑤<u>has</u> excellent visual abilities, while others can produce their own light to lure prey or a mate.",
+    "userAnswer": "1",
+    "correctAnswer": "5"
+   },
+   {
+    "number": 8,
+    "question": "[Pattern 2 과거완료] 다음 괄호 안의 단어를 과거완료 시제가 되도록 알맞게 변형하여 문장을 완성하시오.\n\nHer necklace _____________ _____________ _____________ by an honest man and given back to her. (find)",
+    "userAnswer": "had found",
+    "correctAnswer": "had been found"
+   },
+   {
+    "number": 9,
+    "question": "[Pattern 2 과거완료] 다음 괄호 안의 단어를 과거완료 시제가 되도록 알맞게 변형하여 문장을 완성하시오.\n\nShe _____________ _____________ _____________ for the exam all night when she finally rested. (study)",
+    "userAnswer": "had not studied",
+    "correctAnswer": "had been studying"
+   },
+   {
+    "number": 21,
+    "question": "다음 괄호 안의 단어를 과거완료 시제가 되도록 알맞게 변형하여 문장을 완성하시오.\n\nShe _______________ _______________ _______________ for the exam all night when the sun rose. (be, study)",
+    "userAnswer": "had been study",
+    "correctAnswer": "had been studying"
+   },
+   {
+    "number": 30,
+    "question": "다음 문장에서 과거완료의 용법을 구분하시오.\n\nHe had lost his keys, so he couldn't open the car.",
+    "userAnswer": "1",
+    "correctAnswer": "4"
+   }
+  ],
+  "created_at": "2026-08-30T12:17:59.427938+00:00"
+ }
+}
