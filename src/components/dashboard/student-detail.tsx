@@ -15,6 +15,9 @@ import { TextbookAssigner } from './textbook-assigner';
 import { getPlanContext } from '@/lib/billing/get-plan-context';
 import { fetchNaesinProgress } from '@/lib/naesin/fetch-naesin-progress';
 import { fetchVocaProgress, fetchBookDayTotals } from '@/lib/voca/fetch-voca-progress';
+import { getActiveBands, getLineupBookIds } from '@/lib/voca/diagnostic-sampling';
+import { bandScoreFromRounds } from '@/lib/voca/diagnostic-scoring';
+import type { BandKey } from '@/lib/voca/diagnostic-bands';
 
 interface NaesinData {
   textbookId: string;
@@ -87,14 +90,33 @@ export async function StudentDetail({ user, studentId, naesinData }: Props) {
 
   const videoProgress = videoRes.data || [];
   const vocaDayTotals = await fetchBookDayTotals(vocaProgress);
-  // 어휘 레벨 진단 — 미배정 학생도 진단은 볼 수 있으므로 배정 여부와 무관하게 조회
-  const { data: diagnosticRows } = await admin
-    .from('voca_diagnostic_results')
-    .select('grade, start_band, final_band, final_qualifier, coverage_score, created_at')
-    .eq('student_id', studentId)
-    .order('created_at', { ascending: false })
-    .limit(2);
-  const diagnosticResults = (diagnosticRows ?? []) as DiagnosticCardResult[];
+  // 어휘 레벨 진단 — 미배정 학생도 진단은 볼 수 있으므로 배정 여부와 무관하게 조회.
+  // 추천 교재를 학생 결과 화면과 같은 규칙(상향 컷 포함)으로 보여주기 위해 rounds·활성 밴드·
+  // 라인업 교재 id도 함께 가져온다 (2026-09-03 사장님: "레벨만 보이고 교재가 안 보인다").
+  const [{ data: diagnosticRows }, diagActiveBands, diagLineupBookIds] = await Promise.all([
+    admin
+      .from('voca_diagnostic_results')
+      .select('grade, start_band, final_band, final_qualifier, coverage_score, rounds, created_at')
+      .eq('student_id', studentId)
+      .order('created_at', { ascending: false })
+      .limit(2),
+    getActiveBands(admin),
+    getLineupBookIds(admin),
+  ]);
+  interface StoredSummaryRound { band?: BandKey; correct?: number; total?: number }
+  const diagnosticResults: DiagnosticCardResult[] = (
+    (diagnosticRows ?? []) as (Omit<DiagnosticCardResult, 'final_band_score'> & { rounds: StoredSummaryRound[] | null })[]
+  ).map((row) => ({
+    ...row,
+    // 확정 밴드 정답률 — 저장된 rounds에서 재계산 (final_band_score 컬럼 없음, 학부모 리포트와 동일)
+    final_band_score: bandScoreFromRounds(
+      (row.rounds ?? []).filter(
+        (r): r is { band: BandKey; correct: number; total: number } =>
+          !!r.band && typeof r.correct === 'number' && typeof r.total === 'number',
+      ),
+      row.final_band as BandKey,
+    ),
+  }));
   const memoryProgress = memoryRes.data || [];
   const textbookProgress = textbookRes.data || [];
   const completedVideos = videoProgress.filter((p) => p.video_completed).length;
@@ -220,7 +242,7 @@ export async function StudentDetail({ user, studentId, naesinData }: Props) {
         )}
 
         {/* 어휘 레벨 진단 — 응시 기록이 있으면 표시 (미응시면 카드 자체가 null) */}
-        <VocaDiagnosticCard results={diagnosticResults} />
+        <VocaDiagnosticCard results={diagnosticResults} activeBands={diagActiveBands} lineupBookIds={diagLineupBookIds} />
 
         {/* 올킬보카 서비스 카드 */}
         {hasVocaAssignment && (
