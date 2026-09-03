@@ -360,6 +360,8 @@ export function DiagnosticClient({ activeBands, lineupBookIds, latest, tookToday
 
   if (phase.step === 'quiz') {
     const q = phase.questions[phase.index];
+    // 한글 자모·완성형이 섞이면 영어 답이 될 수 없다 (한글 자판 상태 그대로 친 경우)
+    const hangulTyped = /[ㄱ-ㅎㅏ-ㅣ가-힣]/.test(typedInput);
     return (
       <div className="mx-auto max-w-md">
         <div className="mb-6 flex items-center justify-between text-sm text-gray-400">
@@ -393,10 +395,14 @@ export function DiagnosticClient({ activeBands, lineupBookIds, latest, tookToday
                 >
                   {q.hint}
                 </p>
+                {/* 첫 글자만 보여주는 힌트를 "이미 채워진 것"으로 읽고 나머지만 치는 학생이 있었다 */}
+                <p className="-mt-4 text-center text-xs" style={{ color: VOCA_COLORS.gray }}>
+                  첫 글자를 포함해 <b style={{ color: VOCA_COLORS.ink }}>단어 전체</b>를 입력하세요
+                </p>
                 <form
                   onSubmit={(e) => {
                     e.preventDefault();
-                    if (typedInput.trim()) handleAnswer({ typed: typedInput.trim() });
+                    if (typedInput.trim() && !hangulTyped) handleAnswer({ typed: typedInput.trim() });
                   }}
                   className="space-y-3"
                 >
@@ -409,12 +415,22 @@ export function DiagnosticClient({ activeBands, lineupBookIds, latest, tookToday
                     autoCorrect="off"
                     autoCapitalize="none"
                     spellCheck={false}
-                    placeholder="여기에 입력"
-                    className="w-full rounded-2xl border-2 border-gray-200 bg-white px-4 py-3.5 text-center font-mono text-xl font-bold text-gray-800 outline-none transition-colors focus:border-gray-400"
+                    lang="en"
+                    placeholder="단어 전체 입력"
+                    className={cn(
+                      'w-full rounded-2xl border-2 bg-white px-4 py-3.5 text-center font-mono text-xl font-bold text-gray-800 outline-none transition-colors',
+                      hangulTyped ? 'border-[#D93025]' : 'border-gray-200 focus:border-gray-400',
+                    )}
                   />
+                  {/* 한글 자판 상태로 치면 무조건 오답이 된다 — 제출을 막고 바로 알려준다 */}
+                  {hangulTyped && (
+                    <p className="text-center text-sm font-bold" style={{ color: VOCA_COLORS.red }}>
+                      한글로 입력됐어요. 키보드를 영어로 바꿔주세요
+                    </p>
+                  )}
                   <button
                     type="submit"
-                    disabled={!typedInput.trim()}
+                    disabled={!typedInput.trim() || hangulTyped}
                     className="w-full rounded-2xl px-4 py-3.5 text-lg font-bold text-white transition-all active:scale-[0.99] disabled:opacity-40"
                     style={{ background: VOCA_COLORS.blue }}
                   >

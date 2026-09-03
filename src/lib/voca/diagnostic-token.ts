@@ -111,6 +111,31 @@ export interface VerifiedItem {
   /** 문항 형식 — 타이핑(리콜) 성적은 승급 게이트에 별도로 쓰인다 */
   format: 'typing' | 'choice';
   result: 'correct' | 'wrong' | 'unknown';
+  /**
+   * 학생이 실제로 친 문자열 (타이핑 오답일 때만 저장).
+   * 배경: 타이핑만 무더기로 틀리는 현상(객관식 88% vs 타이핑 33%, 34건 중 18건이 타이핑
+   * 전부 오답)의 원인을 데이터로 못 좁혔다 — 한글 IME인지, 첫 글자를 빼고 친 건지 구분 불가.
+   * 정답·미입력은 저장하지 않는다 (원인 조사에 필요한 최소한만).
+   */
+  typed?: string;
+}
+
+/** 한글 자모·완성형이 섞여 있으면 한글 입력 상태로 친 것 — 원인 분류용 */
+export function looksKorean(s: string): boolean {
+  return /[ㄱ-ㅎㅏ-ㅣ가-힣]/.test(s);
+}
+
+/**
+ * 타이핑 채점 — 정답 일치 외에 "힌트로 보여준 첫 글자를 빼고 나머지만 친" 경우도 정답 인정.
+ * 힌트가 `c_____`로 크게 뜨다 보니 첫 글자는 이미 채워진 것으로 읽고 `ousin`만 치는
+ * 학생이 있다 (2026-09 성채안 사례: 객관식 12/12인데 타이핑 0/8). 진단은 철자 시험이
+ * 아니라 어휘량 측정이므로 이 관용은 측정 목적을 해치지 않는다.
+ */
+export function isTypingCorrect(typed: string, answer: string): boolean {
+  const t = normalizeTypedAnswer(typed);
+  const a = normalizeTypedAnswer(answer);
+  if (!t) return false;
+  return t === a || (a.length > 1 && normalizeTypedAnswer(answer[0] + typed) === a);
 }
 
 export interface VerifiedRound {
@@ -138,14 +163,17 @@ export async function verifyRounds(rounds: TokenAnswer[][]): Promise<VerifiedRou
       seenVocab.add(p.v);
       const format: VerifiedItem['format'] = typed !== undefined ? 'typing' : 'choice';
       let result: VerifiedItem['result'];
+      let typedRaw: string | undefined;
       if (typed !== undefined) {
         // 타이핑 문항
         result =
           typed === null || !typed.trim()
             ? 'unknown'
-            : normalizeTypedAnswer(typed) === normalizeTypedAnswer(p.f)
+            : isTypingCorrect(typed, p.f)
               ? 'correct'
               : 'wrong';
+        // 오답일 때만 원문 보관 — 원인(한글 IME·부분 입력 등) 추적용, 최대 40자
+        if (result === 'wrong' && typed) typedRaw = typed.slice(0, 40);
       } else {
         // 선다형 문항 (구 4지선다 토큰도 같은 경로로 채점된다)
         result =
@@ -155,7 +183,7 @@ export async function verifyRounds(rounds: TokenAnswer[][]): Promise<VerifiedRou
               ? 'correct'
               : 'wrong';
       }
-      items.push({ vocabId: p.v, front_text: p.f, back_text: p.b, format, result });
+      items.push({ vocabId: p.v, front_text: p.f, back_text: p.b, format, result, ...(typedRaw ? { typed: typedRaw } : {}) });
     }
     if (!band || items.length === 0) return null;
     out.push({ band, items });

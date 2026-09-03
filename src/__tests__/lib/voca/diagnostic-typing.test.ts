@@ -5,6 +5,8 @@ process.env.SUPABASE_SERVICE_ROLE_KEY ??= 'test-secret-for-diagnostic-typing';
 
 import { buildTypingHint, isTypeableFront } from '@/lib/voca/diagnostic-hint';
 import {
+  isTypingCorrect,
+  looksKorean,
   normalizeTypedAnswer,
   signDiagnosticToken,
   verifyRounds,
@@ -105,5 +107,62 @@ describe('verifyRounds — 타이핑 채점', () => {
 
   it('위조 토큰은 라운드 전체 거부', async () => {
     expect(await verifyRounds([[{ token: 'garbage.token', typed: 'puppy' }]])).toBeNull();
+  });
+});
+
+describe('isTypingCorrect — 첫 글자 생략 관용 (2026-09 성채안 사례)', () => {
+  it('정답을 그대로 치면 정답', () => {
+    expect(isTypingCorrect('cousin', 'cousin')).toBe(true);
+    expect(isTypingCorrect(' Cousin ', 'cousin')).toBe(true);
+  });
+
+  it('힌트로 보여준 첫 글자를 빼고 나머지만 쳐도 정답', () => {
+    expect(isTypingCorrect('ousin', 'cousin')).toBe(true);
+    expect(isTypingCorrect('ld', 'old')).toBe(true);
+  });
+
+  it('그래도 틀린 답은 오답', () => {
+    expect(isTypingCorrect('cousine', 'cousin')).toBe(false);
+    expect(isTypingCorrect('', 'cousin')).toBe(false);
+    expect(isTypingCorrect('사촌', 'cousin')).toBe(false);
+  });
+
+  it('한 글자 정답은 관용 규칙을 적용하지 않는다 (빈 입력이 정답이 되면 안 됨)', () => {
+    expect(isTypingCorrect('a', 'a')).toBe(true);
+    expect(isTypingCorrect(' ', 'a')).toBe(false);
+  });
+});
+
+describe('looksKorean — 한글 자판 상태 감지', () => {
+  it('한글 자모·완성형을 잡는다', () => {
+    expect(looksKorean('촦ㅕ신')).toBe(true);
+    expect(looksKorean('사촌')).toBe(true);
+    expect(looksKorean('ㅋ')).toBe(true);
+  });
+
+  it('영문·기호는 통과', () => {
+    expect(looksKorean('cousin')).toBe(false);
+    expect(looksKorean("don't")).toBe(false);
+  });
+});
+
+describe('verifyRounds — 타이핑 오답이면 학생이 친 답을 남긴다', () => {
+  it('오답만 typed 보관, 정답·미입력은 저장 안 함', async () => {
+    const mk = (f: string) => signDiagnosticToken({ v: `id-${f}`, f, b: '뜻', band: 'L0' });
+    const rounds = await Promise.all([
+      Promise.all([
+        mk('cousin').then((token) => ({ token, typed: '촦ㅕ신' })),
+        mk('hurry').then((token) => ({ token, typed: 'hurry' })),
+        mk('style').then((token) => ({ token, typed: null })),
+      ]),
+    ]);
+    const verified = await verifyRounds(rounds);
+    expect(verified).not.toBeNull();
+    const items = verified![0].items;
+    expect(items[0]).toMatchObject({ result: 'wrong', typed: '촦ㅕ신' });
+    expect(items[1].result).toBe('correct');
+    expect(items[1].typed).toBeUndefined();
+    expect(items[2].result).toBe('unknown');
+    expect(items[2].typed).toBeUndefined();
   });
 });
