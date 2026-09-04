@@ -47,14 +47,14 @@ export const scheduleData: Record<string, Record<string, ScheduleCell>> = {
     '월': { classes: [] }, '화': { classes: [] }, '수': { classes: [] }, '목': { classes: [] },
     '토': { classes: [
       { name: '해커스', subName: '중학영문법 2학년', time: '8:40-9:50', teacher: '유혜령 T', type: 'hackers' },
-      { name: '구해영', subName: '중학영문법 Level 2', time: '9:00-10:20', teacher: '이다은 T', isNew: true, type: 'guhaeyoung' },
+      { name: '구해영', subName: '중학영문법 Level 2', time: '9:00-10:20', teacher: '민경은 T', type: 'guhaeyoung' },
     ]},
     '일': { classes: [] },
   },
   'am-10': {
     '월': { classes: [] }, '화': { classes: [] }, '수': { classes: [] }, '목': { classes: [] },
     '토': { classes: [
-      { name: '초등 영문법', subName: '3800제 2권', time: '10:00-11:20', teacher: '유혜령 T', isNew: true, type: 'grammar' },
+      { name: '초등 영문법', subName: '3800제 4권', time: '10:00-11:20', teacher: '유혜령 T', type: 'grammar' },
     ]},
     '일': { classes: [] },
   },
@@ -66,7 +66,7 @@ export const scheduleData: Record<string, Record<string, ScheduleCell>> = {
     '월': { classes: [] },
     '화': { classes: [] },
     '수': { classes: [
-      { name: '구해영', subName: '중학영문법 Level 1', time: '6:30-7:50', teacher: '', isNew: true, type: 'guhaeyoung' },
+      { name: '중학 3800제', subName: '중1', time: '6:30-7:50', teacher: '민경은 T', isNew: true, type: 'grammar' },
     ]},
     '목': { classes: [] }, '토': { classes: [] }, '일': { classes: [] },
   },
@@ -74,14 +74,12 @@ export const scheduleData: Record<string, Record<string, ScheduleCell>> = {
     '월': { classes: [
       { name: '해커스', subName: '중학영문법 2학년', time: '7:00-8:20', teacher: '안홍미 T', isNew: true, type: 'hackers' },
     ]},
-    '화': { classes: [
-      { name: '리딩 3.0 국내반', time: '7:30-8:50', teacher: '민경은 T', isNew: true, type: 'reading' },
-    ]},
+    '화': { classes: [] },
     '수': { classes: [
-      { name: '중학 영문법', subName: '3800제 3학년', time: '7:00-8:00', teacher: '안홍미 T', isClosed: true, type: 'grammar' },
+      { name: '중학 영문법', subName: '3800제 3학년', time: '7:00-8:20', teacher: '안홍미 T', type: 'grammar' },
     ]},
     '목': { classes: [
-      { name: '리딩 5.0 국내반', time: '7:00-8:20', teacher: '안홍미 T', isClosed: true, tags: ['리딩'], type: 'reading' },
+      { name: '리딩 5.0 국내반', time: '7:00-8:20', teacher: '안홍미 T', tags: ['리딩'], type: 'reading' },
     ]},
     '토': { classes: [] },
     '일': { classes: [
@@ -90,13 +88,11 @@ export const scheduleData: Record<string, Record<string, ScheduleCell>> = {
   },
   'pm-8': {
     '월': { classes: [
-      { name: '어법끝', subName: 'Start 실력다지기', time: '8:30-9:50', teacher: '안홍미 T', isClosed: true, type: 'grammar' },
+      { name: '어법끝', subName: 'Start 실력다지기', time: '8:30-9:50', teacher: '안홍미 T', type: 'grammar' },
     ]},
     '화': { classes: [] },
     '수': { classes: [] },
-    '목': { classes: [
-      { name: 'Great Writing 4', time: '8:30-9:40', teacher: 'Samuel T', isClosed: true, tags: ['국제학교'], type: 'international' },
-    ]}, '토': { classes: [] },
+    '목': { classes: [] }, '토': { classes: [] },
     '일': { classes: [
       { name: '2027 수능특강', subName: '영어', time: '8:30-9:50', teacher: '황지환 T', isNew: true, type: 'reading' },
     ]},
