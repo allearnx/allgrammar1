@@ -5,7 +5,9 @@ import { useRouter } from 'next/navigation';
 import { Card, CardContent } from '@/components/ui/card';
 import {
   ClipboardList,
+  Download,
   FileQuestion,
+  FileText,
   Info,
   CheckCircle2,
   Lock,
@@ -23,6 +25,7 @@ import { LearningOrderGuide } from '@/components/naesin/learning-order-guide';
 import { LearningOrderModal } from '@/components/naesin/learning-order-modal';
 import type { NaesinTextbook } from '@/types/database';
 import type { UnitSummary, ExamGroup } from '@/lib/naesin/build-unit-summary';
+import type { NaesinTextbookMaterial } from '@/types/naesin';
 import { TextbookSelector } from './textbook-selector';
 import { gradeLabel } from '@/lib/naesin/grade-label';
 
@@ -41,6 +44,8 @@ interface NaesinHomeProps {
   examGroups?: ExamGroup[];
   isPaid?: boolean;
   textbookExams?: TextbookExam[];
+  /** 교과서 자료 (단어 암기 PDF 등) — 선생님이 올린 파일 */
+  textbookMaterials?: NaesinTextbookMaterial[];
   /** 무료 체험 시 단원 제한 수 (0 = 무제한) */
   freeUnitLimit?: number;
 }
@@ -54,6 +59,7 @@ export function NaesinHome({
   examGroups = [],
   isPaid = false,
   textbookExams = [],
+  textbookMaterials = [],
   freeUnitLimit = 0,
 }: NaesinHomeProps) {
   const router = useRouter();
@@ -102,6 +108,34 @@ export function NaesinHome({
           <span>변경 시 선생님 문의</span>
         </div>
       </div>
+
+      {/* 교과서 자료 (단어 암기 PDF 등) — 선생님이 올린 파일 다운로드 */}
+      {textbookMaterials.length > 0 && (
+        <Card className="border-[#1A73E8]/20 bg-[#E8F0FE]/40">
+          <CardContent className="py-4">
+            <div className="mb-2.5 flex items-center gap-2">
+              <FileText className="h-4 w-4 text-[#1A73E8]" />
+              <p className="text-sm font-bold text-[#174EA6]">단어 암기 PDF</p>
+              <p className="text-xs text-muted-foreground">인쇄해서 외우고 시험 보세요</p>
+            </div>
+            <div className="flex flex-wrap gap-2">
+              {textbookMaterials.map((m) => (
+                <a
+                  key={m.id}
+                  href={m.file_url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  download
+                  className="inline-flex items-center gap-1.5 rounded-full border border-[#1A73E8]/30 bg-white px-3.5 py-1.5 text-sm font-medium text-[#174EA6] transition-colors hover:bg-[#E8F0FE]"
+                >
+                  <Download className="h-3.5 w-3.5" />
+                  {m.title}
+                </a>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+      )}
 
       {/* 시험일 설정 / D-day */}
       {textbookId && !hasExamGroups && (

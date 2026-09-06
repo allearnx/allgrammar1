@@ -558,3 +558,15 @@ export interface NaesinGrammarChatSession {
   created_at: string;
   updated_at: string;
 }
+
+// ── 교과서 자료 (단어 암기 PDF 등) ──
+export interface NaesinTextbookMaterial {
+  id: string;
+  textbook_id: string;
+  title: string;
+  file_url: string;
+  file_size: number;
+  uploaded_by: string | null;
+  uploaded_by_name: string | null;
+  created_at: string;
+}

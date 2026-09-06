@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Trash2, Pencil, BookOpen } from 'lucide-react';
+import { Trash2, Pencil, BookOpen, FileText } from 'lucide-react';
 import { toast } from 'sonner';
 import type { NaesinTextbook, NaesinUnit } from '@/types/database';
 import { AddTextbookDialog, EditTextbookDialog } from './textbook-dialogs';
@@ -12,6 +12,7 @@ import { ConfirmDialog } from '@/components/shared/confirm-dialog';
 import { WorkbookManager } from './workbook-manager';
 import { TemplateLibraryClient } from './template-library-client';
 import { TextbookExamSection } from './textbook-exam-section';
+import { TextbookMaterialsDialog } from './textbook-materials-dialog';
 import { logger } from '@/lib/logger';
 import { fetchWithToast } from '@/lib/fetch-with-toast';
 import { gradeLabel } from '@/lib/naesin/grade-label';
@@ -19,13 +20,17 @@ import { gradeLabel } from '@/lib/naesin/grade-label';
 interface NaesinAdminClientProps {
   textbooks: NaesinTextbook[];
   unitCounts?: Record<string, number>;
+  /** 교과서별 자료(암기 PDF 등) 수 — 목록 배지로 노출해 중복 업로드 방지 */
+  materialCounts?: Record<string, number>;
   initialTab?: string;
   canManageContent?: boolean;
 }
 
-export function NaesinAdminClient({ textbooks: initialTextbooks, unitCounts: initialUnitCounts, initialTab, canManageContent = false }: NaesinAdminClientProps) {
+export function NaesinAdminClient({ textbooks: initialTextbooks, unitCounts: initialUnitCounts, materialCounts: initialMaterialCounts, initialTab, canManageContent = false }: NaesinAdminClientProps) {
   const [textbooks, setTextbooks] = useState(initialTextbooks);
   const [unitCounts, setUnitCounts] = useState<Record<string, number>>(initialUnitCounts ?? {});
+  const [materialCounts, setMaterialCounts] = useState<Record<string, number>>(initialMaterialCounts ?? {});
+  const [materialsTextbook, setMaterialsTextbook] = useState<NaesinTextbook | null>(null);
   const [gradeFilter, setGradeFilter] = useState<number | null>(
     () => [...initialTextbooks].sort((a, b) => a.grade - b.grade)[0]?.grade ?? null
   );
@@ -144,7 +149,25 @@ export function NaesinAdminClient({ textbooks: initialTextbooks, unitCounts: ini
                     <span className="ml-auto shrink-0 rounded-full bg-gray-100 px-2.5 py-0.5 text-xs text-gray-500 sm:ml-0">
                       단원 {unitCounts[tb.id] ?? 0}
                     </span>
+                    {(materialCounts[tb.id] ?? 0) > 0 && (
+                      <span className="shrink-0 rounded-full bg-[#E8F0FE] px-2.5 py-0.5 text-xs font-medium text-[#174EA6]">
+                        자료 {materialCounts[tb.id]}
+                      </span>
+                    )}
                     <div className="flex shrink-0 items-center gap-0.5 opacity-0 transition-opacity focus-within:opacity-100 group-hover:opacity-100">
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        className="h-7 w-7"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setMaterialsTextbook(tb);
+                        }}
+                        aria-label="교과서 자료 (암기 PDF)"
+                        title="자료 (암기 PDF)"
+                      >
+                        <FileText className="h-3.5 w-3.5 text-[#1A73E8]" />
+                      </Button>
                       <Button
                         variant="ghost"
                         size="icon"
@@ -263,6 +286,14 @@ export function NaesinAdminClient({ textbooks: initialTextbooks, unitCounts: ini
               }}
             />
           )}
+          <TextbookMaterialsDialog
+            textbook={materialsTextbook}
+            canManage={canManageContent}
+            onClose={() => setMaterialsTextbook(null)}
+            onCountChange={(textbookId, count) =>
+              setMaterialCounts((prev) => ({ ...prev, [textbookId]: count }))
+            }
+          />
         </div>
       </TabsContent>
 

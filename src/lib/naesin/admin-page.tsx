@@ -10,7 +10,7 @@ export async function getNaesinPageData(roles: UserRole[]) {
     redirect(`/${user.role}`);
   }
   const supabase = await createClient();
-  const [{ data: textbooks }, { data: unitRows }] = await Promise.all([
+  const [{ data: textbooks }, { data: unitRows }, { data: materialRows }] = await Promise.all([
     supabase
       .from('naesin_textbooks')
       // naesin_textbooks에 cover_image_url 컬럼 없음 — select에 넣으면 쿼리 에러로 교과서 전체가 빈 목록이 됨
@@ -18,10 +18,15 @@ export async function getNaesinPageData(roles: UserRole[]) {
       .order('grade')
       .order('sort_order'),
     supabase.from('naesin_units').select('textbook_id'),
+    supabase.from('naesin_textbook_materials').select('textbook_id'),
   ]);
   const unitCounts: Record<string, number> = {};
   (unitRows || []).forEach((u: { textbook_id: string }) => {
     unitCounts[u.textbook_id] = (unitCounts[u.textbook_id] || 0) + 1;
   });
-  return { user, textbooks: textbooks || [], unitCounts };
+  const materialCounts: Record<string, number> = {};
+  (materialRows || []).forEach((m: { textbook_id: string }) => {
+    materialCounts[m.textbook_id] = (materialCounts[m.textbook_id] || 0) + 1;
+  });
+  return { user, textbooks: textbooks || [], unitCounts, materialCounts };
 }

@@ -8,6 +8,7 @@ import { groupBy, buildUnitSummary } from '@/lib/naesin/build-unit-summary';
 import type { UnitSummary, ExamGroup } from '@/lib/naesin/build-unit-summary';
 import type { NaesinExamAssignment, NaesinStudentProgress } from '@/types/database';
 import { PROGRESS_SUMMARY_COLUMNS } from '@/types/naesin';
+import type { NaesinTextbookMaterial } from '@/types/naesin';
 
 export default async function NaesinPage() {
   const user = await requireRole(['student']);
@@ -59,6 +60,17 @@ export default async function NaesinPage() {
       .eq('textbook_id', setting.textbook_id)
       .single();
     examDate = examDateData?.exam_date || null;
+  }
+
+  // 교과서 자료 (단어 암기 PDF 등) — 선생님이 올린 파일을 내신 홈에서 바로 다운로드
+  let textbookMaterials: NaesinTextbookMaterial[] = [];
+  if (setting?.textbook_id) {
+    const { data } = await supabase
+      .from('naesin_textbook_materials')
+      .select('id, textbook_id, title, file_url, file_size, uploaded_by, uploaded_by_name, created_at')
+      .eq('textbook_id', setting.textbook_id)
+      .order('created_at', { ascending: false });
+    textbookMaterials = data || [];
   }
 
   // Fetch textbook-level exam sheets (시험 대비)
@@ -212,6 +224,7 @@ export default async function NaesinPage() {
           examGroups={examGroups}
           isPaid={planContext.tier !== 'free' || planContext.naesinMemorizeOnly}
           textbookExams={textbookExams}
+          textbookMaterials={textbookMaterials}
           freeUnitLimit={freeUnitLimit}
         />
       </div>
