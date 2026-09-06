@@ -163,7 +163,7 @@ export function PdfVocabExtract({ module, parentId, onAdd, definitionLang }: Voc
         ...(module === 'voca' && examLabel.trim() ? { exam_source: examLabel.trim() } : {}),
       }));
 
-      const data = await fetchWithToast<{ count: number }>(`${cfg.apiBase}/bulk`, {
+      const data = await fetchWithToast<{ count: number; skipped?: number }>(`${cfg.apiBase}/bulk`, {
         body: { [cfg.parentIdKey]: parentId, items },
         errorMessage: '단어 저장 실패',
         logContext: `${cfg.logPrefix}.pdf_vocab_extract`,
@@ -171,7 +171,11 @@ export function PdfVocabExtract({ module, parentId, onAdd, definitionLang }: Voc
       onAdd();
       setOpen(false);
       reset();
-      toast.success(`${data.count}개 단어가 추가되었습니다`);
+      toast.success(
+        data.skipped
+          ? `${data.count}개 추가 (이미 있던 ${data.skipped}개는 건너뜀)`
+          : `${data.count}개 단어가 추가되었습니다`,
+      );
     } catch {
       // fetchWithToast already shows toast
     } finally {
