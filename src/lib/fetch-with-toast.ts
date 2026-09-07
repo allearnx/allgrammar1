@@ -16,11 +16,27 @@ interface FetchWithToastOptions {
 }
 
 /**
+ * keepalive 적용 상한. 브라우저는 keepalive 요청의 동시 본문 합계를 64KB로 제한하므로
+ * 그 절반만 쓴다(초과분은 keepalive 없이 보내 정상 요청으로 처리). 한글은 3바이트/자라
+ * 문자 수가 아니라 바이트로 잰다.
+ */
+const KEEPALIVE_MAX_BYTES = 32 * 1024;
+
+function byteLength(text: string): number {
+  if (typeof TextEncoder !== 'undefined') return new TextEncoder().encode(text).length;
+  return text.length * 3; // 인코더 없는 환경: 최악(3바이트/자)으로 보수적 추정
+}
+
+/**
  * Wrapper around fetch that handles:
  * - JSON serialization (or FormData passthrough)
  * - Error extraction from response body
  * - Toast notifications on success/error
  * - Structured logging on error
+ * - 작은 JSON 본문에는 keepalive 기본 적용 — 페이지가 내려가는(리로드·크래시·이동) 순간
+ *   일반 fetch는 중단되어 점수·진도 저장이 조용히 유실된다(2026-09-07 정재원: 완료 직후
+ *   기기에서 페이지가 내려가 채점 POST는 전부 유실, keepalive인 학습시간 heartbeat만 저장됨).
+ *   keepalive 요청은 언로드 후에도 서버에 도달한다. 호출자가 fetchOptions.keepalive를 주면 그 값이 우선.
  */
 export async function fetchWithToast<T = unknown>(
   url: string,
@@ -29,13 +45,16 @@ export async function fetchWithToast<T = unknown>(
   const { method = 'POST', body, successMessage, errorMessage, logContext, silent, fetchOptions, retry = 0 } = options;
 
   const isFormData = body instanceof FormData;
+  const serialized = body != null && !isFormData ? JSON.stringify(body) : undefined;
+  const useKeepalive = serialized != null && byteLength(serialized) <= KEEPALIVE_MAX_BYTES;
   const buildInit = (): RequestInit => ({
     method,
     ...(body != null
       ? isFormData
         ? { body }
-        : { headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) }
+        : { headers: { 'Content-Type': 'application/json' }, body: serialized }
       : {}),
+    ...(useKeepalive ? { keepalive: true } : {}),
     ...fetchOptions,
   });
 
