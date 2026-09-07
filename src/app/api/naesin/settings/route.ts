@@ -23,7 +23,13 @@ export const POST = createApiHandler(
     // - 학생 본인: 한 번 선택하면 변경 불가 (기존 정책 유지)
     // - teacher/admin/boss: 변경 허용 — /api/naesin/* 게이트가 teacher/admin을
     //   naesin_enabled 학원(올라영)으로 제한하므로 외부 학원 스태프는 여기 못 옴
-    const { data: existing } = await supabase
+    //
+    // 읽기/쓰기는 admin 클라이언트로: naesin_student_settings RLS는 "본인" 또는
+    // "스태프 학원 = 학생 학원"만 통과시켜, 학원 소속이 없는 boss(및 무학원 학생 대상)는
+    // 배정이 조용히 실패했음. 권한은 위 requireAcademyScope + 경로 게이트가 이미 검증.
+    // (passage-stages / enabled-stages 라우트와 동일한 방식)
+    const admin = createAdminClient();
+    const { data: existing } = await admin
       .from('naesin_student_settings')
       .select('textbook_id')
       .eq('student_id', targetId)
@@ -40,7 +46,7 @@ export const POST = createApiHandler(
       return NextResponse.json({ success: true });
     }
 
-    dbResult(await supabase
+    dbResult(await admin
       .from('naesin_student_settings')
       .upsert(
         { student_id: targetId, textbook_id: textbookId },
@@ -49,7 +55,6 @@ export const POST = createApiHandler(
     invalidateStudent(targetId);
 
     // Auto-create default exam assignment (paid academies only)
-    const admin = createAdminClient();
     const { data: student } = await admin
       .from('users')
       .select('academy_id')
