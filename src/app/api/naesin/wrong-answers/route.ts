@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { createApiHandler, dbResult } from '@/lib/api';
 import { wrongAnswerCreateSchema, wrongAnswerPatchSchema } from '@/lib/api/schemas';
+import { cleanWrongAnswers, wrongAnswerKey } from '@/lib/naesin/wrong-answer-dedupe';
 
 // NOTE: autoBackfill 제거 — submit/route.ts에서 오답 저장이 실시간으로 처리됨.
 // 레거시 누락 데이터는 별도 마이그레이션으로 처리.
@@ -117,20 +118,45 @@ export const POST = createApiHandler(
   { schema: wrongAnswerCreateSchema },
   async ({ user, body, supabase }) => {
     const { unitId, stage, sourceType, wrongAnswers, round } = body;
+    const effectiveRound = round ?? 1;
 
-    const rows = wrongAnswers.map((wa: unknown) => ({
+    // 빈 답 제외 + 같은 문항은 이번 제출의 마지막 1건만
+    const cleaned = cleanWrongAnswers(wrongAnswers);
+    if (cleaned.length === 0) {
+      return NextResponse.json({ success: true, count: 0 });
+    }
+
+    // 이전 시도에서 남은 같은 문항은 지우고 최신 1건만 유지 (같은 학생·단원·단계·유형·회독 범위)
+    const incomingKeys = new Set(cleaned.map(wrongAnswerKey));
+    let existingQuery = supabase
+      .from('naesin_wrong_answers')
+      .select('id, question_data')
+      .eq('student_id', user.id)
+      .eq('stage', stage)
+      .eq('source_type', sourceType)
+      .eq('round', effectiveRound);
+    existingQuery = unitId ? existingQuery.eq('unit_id', unitId) : existingQuery.is('unit_id', null);
+    const existing = dbResult(await existingQuery) as { id: string; question_data: unknown }[];
+    const staleIds = existing
+      .filter((e) => incomingKeys.has(wrongAnswerKey(e.question_data)))
+      .map((e) => e.id);
+    if (staleIds.length > 0) {
+      dbResult(await supabase.from('naesin_wrong_answers').delete().in('id', staleIds));
+    }
+
+    const rows = cleaned.map((wa: unknown) => ({
       student_id: user.id,
       unit_id: unitId,
       stage,
       source_type: sourceType,
       question_data: wa,
-      round: round ?? 1,
+      round: effectiveRound,
     }));
 
     dbResult(await supabase
       .from('naesin_wrong_answers')
       .insert(rows));
-    return NextResponse.json({ success: true, count: rows.length });
+    return NextResponse.json({ success: true, count: rows.length, replaced: staleIds.length });
   }
 );
 
