@@ -106,6 +106,9 @@ export const gradeSubjectiveSchema = z.object({
   referenceAnswer: LONG,
   studentAnswer: LONG,
   acceptedAnswers: z.array(z.string()).nullish(),
+  // 검수 로그 연결용 (없어도 채점은 동작 — 구버전 클라이언트 호환)
+  sheetId: ID.nullish(),
+  questionNumber: z.number().int().nullish(),
 });
 
 export const legacyVideoProgressSchema = z.object({

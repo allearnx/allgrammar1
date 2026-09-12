@@ -41,7 +41,7 @@ export function useInteractiveProblem({
     return d?.mode === 'interactive' ? d.wrongList : [];
   });
   const [isGrading, setIsGrading] = useState(false);
-  const [subjectiveResult, setSubjectiveResult] = useState<{ score: number } | null>(null);
+  const [subjectiveResult, setSubjectiveResult] = useState<AiFeedback | null>(null);
   const [aiResultsMap, setAiResultsMap] = useState<Record<string, AiFeedback>>(() => {
     const d = loadDraft();
     return d?.mode === 'interactive' ? d.aiResultsMap : {};
@@ -141,7 +141,7 @@ export function useInteractiveProblem({
   const answerHasComma = String(question?.answer).includes(',');
   const isMultiSelect = !isSubjective && (answerHasComma || /모두\s*고르/.test(question?.question ?? ''));
 
-  async function gradeSubjective(studentAnswer: string): Promise<{ score: number } | null> {
+  async function gradeSubjective(studentAnswer: string): Promise<AiFeedback | null> {
     // subParts: client-side exact match grading (no API call needed)
     if (question.subParts) {
       const parts = String(studentAnswer).split(' / ');
@@ -154,12 +154,14 @@ export function useInteractiveProblem({
     }
 
     try {
-      return await fetchWithToast<{ score: number }>('/api/naesin/problems/grade-subjective', {
+      return await fetchWithToast<AiFeedback>('/api/naesin/problems/grade-subjective', {
         body: {
           question: question.question,
           referenceAnswer: String(question.answer),
           studentAnswer,
           acceptedAnswers: question.acceptedAnswers,
+          sheetId,
+          questionNumber: question.number,
         },
         errorMessage: '채점에 실패했습니다.',
         logContext: 'naesin.interactive_view',
@@ -257,8 +259,7 @@ export function useInteractiveProblem({
 
       if (result) {
         setSubjectiveResult(result);
-        const aiFeedback: AiFeedback = { score: result.score };
-        newAiMap = { ...aiResultsMap, [String(currentIndex)]: aiFeedback };
+        newAiMap = { ...aiResultsMap, [String(currentIndex)]: result };
         setAiResultsMap(newAiMap);
         correct = result.score === 100;
       } else {
@@ -305,14 +306,13 @@ export function useInteractiveProblem({
       const { newScore, newWrongList } = applyResult(false, answer, question);
       finishOrSave(isLast, answer, newScore, newWrongList, newAiMap);
     } else {
-      // 1차 오답 → 재시도 모드
+      // 1차 오답 → 재시도 모드 — subjectiveResult는 유지해 AI 피드백을 힌트로 노출
       setRetryMode(true);
       if (!isSubjective) {
         setDisabledOptions(prev => [...prev, String(answer)]);
       }
       setSelectedAnswer(null);
       setMultiSelectedValues([]);
-      setSubjectiveResult(null);
     }
   }
 
@@ -517,6 +517,7 @@ export function useInteractiveProblem({
     finished,
     wrongList,
     isGrading,
+    subjectiveResult,
     currentAnswerStatus,
     question,
     isSubjective,

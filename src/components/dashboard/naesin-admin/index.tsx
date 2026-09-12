@@ -11,6 +11,7 @@ import { AddUnitDialog, UnitCard } from './unit-section';
 import { ConfirmDialog } from '@/components/shared/confirm-dialog';
 import { WorkbookManager } from './workbook-manager';
 import { TemplateLibraryClient } from './template-library-client';
+import { SubjectiveReviewTab } from './subjective-review-tab';
 import { TextbookExamSection } from './textbook-exam-section';
 import { TextbookMaterialsDialog } from './textbook-materials-dialog';
 import { logger } from '@/lib/logger';
@@ -72,6 +73,7 @@ export function NaesinAdminClient({ textbooks: initialTextbooks, unitCounts: ini
         <TabsTrigger value="content">내신 콘텐츠 관리</TabsTrigger>
         <TabsTrigger value="workbook-omr">교재 OMR 관리</TabsTrigger>
         <TabsTrigger value="templates">문제 템플릿</TabsTrigger>
+        <TabsTrigger value="grading-review">서술형 검수</TabsTrigger>
       </TabsList>
 
       <TabsContent value="content">
@@ -303,6 +305,10 @@ export function NaesinAdminClient({ textbooks: initialTextbooks, unitCounts: ini
 
       <TabsContent value="templates">
         <TemplateLibraryClient />
+      </TabsContent>
+
+      <TabsContent value="grading-review">
+        <SubjectiveReviewTab />
       </TabsContent>
     </Tabs>
   );

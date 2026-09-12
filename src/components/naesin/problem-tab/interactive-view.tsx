@@ -90,7 +90,7 @@ export function InteractiveProblemView({
   const questions = sheet.questions as NaesinProblemQuestion[];
   const {
     currentIndex, selectedAnswer, showResult, score, finished,
-    wrongList, isGrading, currentAnswerStatus,
+    wrongList, isGrading, subjectiveResult, currentAnswerStatus,
     question, isSubjective, isMultiSelect, multiSelectedValues,
     retryMode, retryCorrectList, disabledOptions,
     handleSelect, handleMultiToggle, handleMultiSubmit, handleNext, handleMidSave, isMidSaving, answersMap,
@@ -210,10 +210,13 @@ export function InteractiveProblemView({
         </CardContent>
       </Card>
 
-      {/* 재시도 메시지 */}
+      {/* 재시도 메시지 — 서술형은 AI 피드백을 힌트로 (정답 노출인 correctedAnswer는 제외) */}
       {retryMode && !showResult && (
-        <div className="max-w-lg mx-auto text-center text-sm font-medium py-2 rounded-md bg-amber-100 text-amber-700 border border-amber-200">
+        <div className="max-w-lg mx-auto text-center text-sm font-medium py-2 px-3 rounded-md bg-amber-100 text-amber-700 border border-amber-200">
           틀렸습니다. 다시 생각해보세요
+          {isSubjective && subjectiveResult?.feedback && (
+            <div className="mt-1 font-normal">💡 {subjectiveResult.feedback}</div>
+          )}
         </div>
       )}
 
@@ -253,7 +256,7 @@ export function InteractiveProblemView({
       {showResult && selectedAnswer !== null && currentAnswerStatus && (
         <div className="max-w-lg mx-auto">
           <div className={cn(
-            'text-center text-sm font-medium py-1.5 rounded-md',
+            'text-center text-sm font-medium py-1.5 px-3 rounded-md',
             currentAnswerStatus === 'correct' && 'bg-green-100 text-green-700',
             currentAnswerStatus === 'retry_correct' && 'bg-amber-100 text-amber-700',
             currentAnswerStatus === 'wrong' && 'bg-red-100 text-red-700',
@@ -261,6 +264,16 @@ export function InteractiveProblemView({
             {currentAnswerStatus === 'correct' ? '✅ 정답입니다!' :
              currentAnswerStatus === 'retry_correct' ? '🔺 맞았지만 한 번 틀렸어요' :
              '❌ 오답입니다'}
+            {/* 서술형 AI 피드백: 부분 정답(50)·오답에 이유와 교정문 표시 */}
+            {isSubjective && currentAnswerStatus === 'wrong' && subjectiveResult && (
+              <div className="mt-1 font-normal text-left space-y-0.5">
+                {subjectiveResult.score === 50 && <div>🔸 부분적으로 맞았어요</div>}
+                {subjectiveResult.feedback && <div>💡 {subjectiveResult.feedback}</div>}
+                {subjectiveResult.correctedAnswer && (
+                  <div>✏️ 바르게 쓰면: <span className="font-medium">{subjectiveResult.correctedAnswer}</span></div>
+                )}
+              </div>
+            )}
           </div>
         </div>
       )}

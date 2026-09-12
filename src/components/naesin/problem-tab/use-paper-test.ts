@@ -3,7 +3,6 @@ import { toast } from 'sonner';
 import { fetchWithToast } from '@/lib/fetch-with-toast';
 import { useProblemDraft } from '@/hooks/use-problem-draft';
 import type { AiFeedback, WrongItem, PaperTestDraft } from '@/hooks/use-problem-draft';
-import { matchMcqAnswer, normalize } from '@/lib/naesin/normalize-answer';
 import type { NaesinProblemQuestion } from '@/types/database';
 
 export function usePaperTest({
@@ -156,6 +155,8 @@ export function usePaperTest({
                   referenceAnswer: String(q.answer),
                   studentAnswer: String(answers[i]),
                   acceptedAnswers: q.acceptedAnswers,
+                  sheetId,
+                  questionNumber: q.number,
                 },
                 silent: true, // 토스트 폭주 방지 — 실패 문항은 제출 라우트가 규칙채점/오답 처리
                 logContext: 'naesin.paper_test',
