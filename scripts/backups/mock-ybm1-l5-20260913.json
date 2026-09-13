@@ -1,0 +1,891 @@
+{
+ "R1": [
+  {
+   "number": 1,
+   "question": "다음 중 짝지어진 단어의 관계가 나머지 넷과 다른 것은?",
+   "options": [
+    "kind : type",
+    "have : eat",
+    "flavor : taste",
+    "melt : freeze",
+    "delicious : tasty"
+   ],
+   "answer": "4",
+   "explanation": "'녹다 : 얼다'는 반의어 관계이고 나머지는 '유의어' 관계이다."
+  },
+  {
+   "number": 2,
+   "question": "다음 중 어느 빈칸에도 들어갈 수 없는 단어는?\n\n<보기>\n• Did you ________ the key to him?\n• You ________ happy when you eat ice cream.\n• Don't ________ the rubber band too much.\n• When did the rainbow ________ in the sky?",
+   "options": [
+    "add",
+    "hand",
+    "look",
+    "appear",
+    "stretch"
+   ],
+   "answer": "1",
+   "explanation": "차례대로 hand - look - stretch - appear이다. add(더하다)는 어느 빈칸에도 들어갈 수 없다."
+  },
+  {
+   "number": 3,
+   "question": "다음 중 <보기>의 영영풀이에 해당하지 않는 단어는?\n\n<보기>\n• liked by a lot of people\n• pleasantly thin, dry, and easily broken\n• having a taste that gives a pleasant burning feeling in your mouth\n• having a soft and wet texture that clings to your teeth or tongue",
+   "options": [
+    "spicy",
+    "crispy",
+    "creamy",
+    "sticky",
+    "popular"
+   ],
+   "answer": "3",
+   "explanation": "차례대로 popular - crispy - spicy - sticky이다. creamy의 영영풀이는 thick and smooth, like cream(크림처럼 걸쭉하고 부드러운)이다."
+  },
+  {
+   "number": 4,
+   "question": "다음 중 어법상 알맞지 않은 것을 모두 고르면? (정답 2개)",
+   "options": [
+    "Does it smell sweet?",
+    "The noise sounds strangely.",
+    "She speaks more slowly than Jamie.",
+    "The blue balloon is biger than the red one.",
+    "This movie is more exciting than the last one."
+   ],
+   "answer": "2, 4",
+   "explanation": "② 감각동사 sound 뒤에는 형용사가 오므로 strangely → strange. ④ big의 비교급은 자음을 한 번 더 쓴 bigger이므로 biger → bigger."
+  },
+  {
+   "number": 5,
+   "question": "다음 그림에 대한 설명으로 어법상 또는 내용상 일치하지 않는 것은?\n(그림 설명: 기린 옆에 기린보다 키가 작은 말, 코끼리 옆에 작은 쥐, 결승선(FINISH) 앞에 거북과 치타, 닭과 날개가 큰 공작이 있는 경주 장면)",
+   "options": [
+    "The horse is shorter than the giraffe.",
+    "The mouse is lighter than the elephant.",
+    "The turtle runs quicklier than the cheetah.",
+    "The chicken's wings are smaller than the peacock's wings.",
+    "The turtle reached the finish line earlier than the cheetah."
+   ],
+   "answer": "3",
+   "explanation": "③ -ly로 끝나는 부사의 비교급은 앞에 more를 붙이므로 quicklier → more quickly."
+  },
+  {
+   "number": 6,
+   "question": "다음 대화의 빈칸에 들어갈 말로 알맞은 것은?\n\nA: ______________________________\nB: I'm going to play soccer with Sam.",
+   "options": [
+    "What are you going to eat?",
+    "Do you want to play soccer?",
+    "What kind of sports do you like?",
+    "What are you going to do after school?",
+    "How do you play soccer better than Sam?"
+   ],
+   "answer": "4",
+   "explanation": "B가 Sam과 함께 축구를 할 것이라는 미래의 계획을 말하고 있으므로 빈칸에는 미래에 할 일을 묻는 질문이 들어가야 한다."
+  },
+  {
+   "number": 7,
+   "question": "다음 대화의 빈칸에 들어갈 말로 알맞은 것은?\n\nA: ______________________________\nB: Sounds good. I'm going to buy a T-shirt.",
+   "options": [
+    "Can I ask you a favor?",
+    "What did you buy yesterday?",
+    "Are you going to go shopping?",
+    "Why don't you clean your room first?",
+    "Why don't we go shopping together?"
+   ],
+   "answer": "5",
+   "explanation": "B가 동의하는 표현을 한 뒤에 티셔츠를 살 것이라는 계획을 말하고 있으므로, A의 말에는 함께 쇼핑 가자는 제안이 들어가야 한다."
+  },
+  {
+   "number": 8,
+   "question": "다음 대화를 읽고 물음에 답하시오.\nW: May I have your attention, please? Ming's Kitchen is going to hold an opening event for three days from today. Peking duck will be half price during the event. It's a traditional Chinese dish, and the duck is really crispy. Why don't you come and enjoy some tasty Chinese food?\n\n위 대화를 읽고 다음 질문에 대한 알맞은 대답이 되도록 주어진 <조건>에 맞게 빈칸을 완성하시오.\n\n<조건> with, texture, dish를 사용할 것\n\nQ. What is Peking duck?\n→ It is (1)____________ with a (2)____________.",
+   "options": [],
+   "answer": "a traditional Chinese dish, crispy texture",
+   "subParts": [
+    {
+     "label": "(1)",
+     "answer": "a traditional Chinese dish"
+    },
+    {
+     "label": "(2)",
+     "answer": "crispy texture"
+    }
+   ],
+   "explanation": "북경 오리는 바삭한 질감을 가진 중국 전통 요리이다."
+  },
+  {
+   "number": 9,
+   "question": "다음 대화를 읽고 물음에 답하시오.\nW: May I have your attention, please? Ming's Kitchen is going to hold an opening event for three days from today. Peking duck will be half price during the event. It's a traditional Chinese dish, and the duck is really crispy. Why don't you come and enjoy some tasty Chinese food?\n\n위 대화의 내용과 일치하지 않는 것은?",
+   "options": [
+    "The speaker is promoting the opening event of a Chinese restaurant.",
+    "Ming's Kitchen is a newly opened restaurant.",
+    "The opening event will start from today.",
+    "Peking duck is cheaper than usual for two days.",
+    "People can eat traditional Chinese dishes at Ming's Kitchen."
+   ],
+   "answer": "4",
+   "explanation": "개업 행사는 오늘부터 3일 동안 열리며 그 기간 동안 북경 오리가 반값이므로 ④ 2일 동안이라는 내용은 일치하지 않는다."
+  },
+  {
+   "number": 10,
+   "question": "다음 중 짝지어진 대화가 어색한 것은?",
+   "options": [
+    "A: I want some sweet food. / B: Why don't you try a cake?",
+    "A: Why don't you try som tam? / B: Okay, I'll try it.",
+    "A: Let's eat French food now. / B: Sorry, but I'm full.",
+    "A: Can I have one sandwich? / B: Sure. The sandwiches are sold out.",
+    "A: What are you going to eat for dinner? / B: I'm going to eat a hamburger."
+   ],
+   "answer": "4",
+   "explanation": "④ 샌드위치를 하나 먹을 수 있냐는 요청에 물론이라고 답한 뒤 샌드위치가 다 팔렸다고 하는 것은 어색하다."
+  },
+  {
+   "number": 11,
+   "question": "다음 글을 읽고 물음에 답하시오.\nThis is a truck for Mexican ice cream, paleta. Paleta looks like a popsicle. Most paletas have natural fruits in them. I want this kiwi paleta. Oh, no! It tastes spicy!\nMexicans love spicy food. They sometimes add chili peppers to paletas. Most paletas are sweet, but some are spicy. Some Mexicans make them at home.\n\n윗글의 주제로 알맞은 것은?",
+   "options": [
+    "natural food in paleta",
+    "the features of paleta",
+    "many flavors of paleta",
+    "spicy desserts in Mexico",
+    "different ways of eating paleta"
+   ],
+   "answer": "2",
+   "explanation": "팔레타의 모양, 천연 과일, 고추를 넣기도 하는 점, 집에서 만들기도 하는 점 등 팔레타의 특징을 설명하고 있다."
+  },
+  {
+   "number": 12,
+   "question": "다음 글을 읽고 물음에 답하시오.\nThis is a truck for Mexican ice cream, paleta. Paleta looks like a popsicle. Most paletas have natural fruits in them. I want this kiwi paleta. Oh, no! It tastes spicy!\nMexicans love spicy food. They sometimes add chili peppers to paletas. Most paletas are sweet, but some are spicy. Some Mexicans make them at home.\n\n윗글을 읽고 답할 수 없는 질문은?",
+   "options": [
+    "Where do paletas come from?",
+    "What kind of food is a paleta?",
+    "How does the kiwi paleta taste?",
+    "What flavor of paleta is popular?",
+    "Why do Mexicans add chili peppers to paletas?"
+   ],
+   "answer": "4",
+   "explanation": "어떤 맛의 팔레타가 가장 인기 있는지는 언급되지 않았다."
+  },
+  {
+   "number": 13,
+   "question": "다음 대화를 읽고, 물음에 알맞은 답을 고르시오.\n\nG: Let's eat Thai food today.\nB: Sure. I want some spicy food.\nG: Why don't you try som tam? It's spicy.\nB: Som tam? What's that?\nG: It's Thai salad.\nB: Sounds good. I'll get it.\n\nWhat is the girl doing?",
+   "options": [
+    "She is eating Thai food.",
+    "She is cooking a spicy dish.",
+    "She is suggesting a Thai salad.",
+    "She is traveling around Thailand.",
+    "She is asking about Thai traditional food."
+   ],
+   "answer": "3",
+   "explanation": "소녀는 매운 음식을 먹고 싶다는 소년에게 태국 샐러드인 솜땀을 먹어 보라고 제안하고 있다."
+  },
+  {
+   "number": 14,
+   "question": "다음 글을 읽고 물음에 답하시오.\nHi, everyone! Welcome to my vlog. I'm at an international ice cream festival. I love ice cream. How about you? Different countries have different types of ice cream. A gelato truck is over there. There ⓐ<u>is</u> a long line. Let's ⓑ<u>go</u> there first.\nThere are many flavors of gelato. They all look ⓒ<u>deliciously</u>. Hmm.... This time, I want to try strawberry gelato. Yummy! It is very creamy.\nItaly is the home of gelato. Gelato is a very popular dessert there. ⓓ<u>It</u> first appeared there in the 16th century, and some gelato shops ⓔ<u>have</u> a long history.\n\n윗글의 밑줄 친 ⓐ~ⓔ 중, 어법상 어색한 것은?",
+   "options": [
+    "ⓐ",
+    "ⓑ",
+    "ⓒ",
+    "ⓓ",
+    "ⓔ"
+   ],
+   "answer": "3",
+   "explanation": "ⓒ 감각동사 look은 형용사를 보어로 취하므로 deliciously → delicious."
+  },
+  {
+   "number": 15,
+   "question": "다음 글을 읽고 물음에 답하시오.\nHi, everyone! Welcome to my vlog. I'm at an international ice cream festival. I love ice cream. How about you? Different countries have different types of ice cream. A gelato truck is over there. There ⓐ<u>is</u> a long line. Let's ⓑ<u>go</u> there first.\nThere are many flavors of gelato. They all look ⓒ<u>deliciously</u>. Hmm.... This time, I want to try strawberry gelato. Yummy! It is very creamy.\nItaly is the home of gelato. Gelato is a very popular dessert there. ⓓ<u>It</u> first appeared there in the 16th century, and some gelato shops ⓔ<u>have</u> a long history.\n\n윗글의 내용과 일치하지 않는 것은?",
+   "options": [
+    "There are different kinds of ice cream around the world.",
+    "The gelato truck sells many flavors of gelato.",
+    "The speaker is enjoying many kinds of creamy gelato.",
+    "There are some gelato shops with a long history.",
+    "Gelato is very popular as a dessert in Italy."
+   ],
+   "answer": "3",
+   "explanation": "화자는 많은 젤라토 맛 중 딸기 젤라토를 먹고 싶다고 하며 그것을 먹은 뒤 부드럽다고 했으므로 ③ 많은 종류의 젤라토를 즐기고 있다는 내용은 일치하지 않는다."
+  },
+  {
+   "number": 16,
+   "question": "다음 글을 읽고 물음에 답하시오.\nHi, everyone! Welcome to my vlog. I'm at an international ice cream festival. I love ice cream. How about you? Different countries have different types of ice cream. A gelato truck is over there. There ⓐ<u>is</u> a long line. Let's ⓑ<u>go</u> there first.\nThere are many flavors of gelato. They all look ⓒ<u>deliciously</u>. Hmm.... This time, I want to try strawberry gelato. Yummy! It is very creamy.\nItaly is the home of gelato. Gelato is a very popular dessert there. ⓓ<u>It</u> first appeared there in the 16th century, and some gelato shops ⓔ<u>have</u> a long history.\n\n윗글을 읽고 다음 질문에 대한 알맞은 대답이 되도록 주어진 <조건>에 맞게 빈칸을 완성하시오.\n\n<조건> record를 사용할 것 (필요시 변형할 것)\n\nQ. What is the speaker doing now?\n→ The speaker (1)________ a (2)________ at (3)________________.",
+   "options": [],
+   "answer": "is recording, vlog, an international ice cream festival",
+   "subParts": [
+    {
+     "label": "(1)",
+     "answer": "is recording"
+    },
+    {
+     "label": "(2)",
+     "answer": "vlog"
+    },
+    {
+     "label": "(3)",
+     "answer": "an international ice cream festival"
+    }
+   ],
+   "explanation": "화자는 국제 아이스크림 축제에서 브이로그를 촬영하고 있다."
+  },
+  {
+   "number": 17,
+   "question": "다음 글을 읽고 물음에 답하시오.\nHere ⓐ<u>is</u> a dondurma truck. I choose chocolate dondurma. Surprise! It's sticky and stretchy. ⓑ<u>Look</u> at the man. He is stretching some dondurma. It is ⓒ<u>long</u> than his arm. Now he is handing the dondurma to a boy, but then he is ⓓ<u>taking it back</u>. Huh? The man is doing the same thing again and again. Can the boy get it?\nDondurma is Turkish ice cream. It melts very slowly. Turkish people (A)______________________. Some use a knife and fork, and ⓔ<u>others</u> eat it like a sandwich.\n\n윗글의 밑줄 친 ⓐ~ⓔ 중, 어법상 어색한 것은?",
+   "options": [
+    "ⓐ",
+    "ⓑ",
+    "ⓒ",
+    "ⓓ",
+    "ⓔ"
+   ],
+   "answer": "3",
+   "explanation": "ⓒ 뒤에 than이 이어지므로 비교급 longer가 되어야 한다."
+  },
+  {
+   "number": 18,
+   "question": "다음 글을 읽고 물음에 답하시오.\nHere ⓐ<u>is</u> a dondurma truck. I choose chocolate dondurma. Surprise! It's sticky and stretchy. ⓑ<u>Look</u> at the man. He is stretching some dondurma. It is ⓒ<u>long</u> than his arm. Now he is handing the dondurma to a boy, but then he is ⓓ<u>taking it back</u>. Huh? The man is doing the same thing again and again. Can the boy get it?\nDondurma is Turkish ice cream. It melts very slowly. Turkish people (A)______________________. Some use a knife and fork, and ⓔ<u>others</u> eat it like a sandwich.\n\n윗글의 빈칸 (A)에 들어갈 말로 알맞은 것은?",
+   "options": [
+    "add some toppings to it",
+    "don't need any tableware",
+    "share dondurma with others",
+    "eat dondurma in many ways",
+    "change it into other kinds of food"
+   ],
+   "answer": "4",
+   "explanation": "뒤에 칼과 포크를 쓰는 사람과 샌드위치처럼 먹는 사람이 예시로 이어지므로 튀르키예 사람들이 다양한 방법으로 돈두르마를 먹는다는 내용이 알맞다."
+  },
+  {
+   "number": 19,
+   "question": "다음 글을 읽고 물음에 답하시오.\nHere ⓐ<u>is</u> a dondurma truck. I choose chocolate dondurma. Surprise! It's sticky and stretchy. ⓑ<u>Look</u> at the man. He is stretching some dondurma. It is ⓒ<u>long</u> than his arm. Now he is handing the dondurma to a boy, but then he is ⓓ<u>taking it back</u>. Huh? The man is doing the same thing again and again. Can the boy get it?\nDondurma is Turkish ice cream. It melts very slowly. Turkish people (A)______________________. Some use a knife and fork, and ⓔ<u>others</u> eat it like a sandwich.\n\n윗글의 첫 번째 단락을 다음과 같이 요약할 때, 빈칸 (A), (B)에 들어갈 말로 알맞게 연결된 것은?\n\nThe speaker is experiencing the (A)________ texture and seeing (B)________ serving style of dondurma, Turkish ice cream.",
+   "options": [
+    "(A) watery – (B) strange",
+    "(A) chewy – (B) fun",
+    "(A) chewy – (B) serious",
+    "(A) rough – (B) fun",
+    "(A) rough – (B) serious"
+   ],
+   "answer": "2",
+   "explanation": "화자는 쫀득하고 잘 늘어나는 돈두르마를 경험하고, 아저씨가 돈두르마를 건네주다 말고 다시 가져가는 재미있는 장면을 보고 있다."
+  },
+  {
+   "number": 20,
+   "question": "다음 글을 읽고 물음에 답하시오.\nThere are many flavors of gelato. They all look delicious. Hmm.... This time, I want to try strawberry gelato. Yummy! It is very creamy.\nItaly is the home of gelato. Gelato is a very popular dessert there. It first appeared there in the 16th century, and some gelato shops have a long history.\nHere is a dondurma truck. I choose chocolate dondurma. Surprise! It's sticky and stretchy. Look at the man.\n(A) It is longer than his arm.\n(B) He is stretching some dondurma.\n(C) Huh? The man is doing the same thing again and again.\n(D) Now he is handing the dondurma to a boy, but then he is taking it back.\nCan the boy get it?\nDondurma is Turkish ice cream. It melts very slowly. Turkish people eat dondurma in many ways. Some use a knife and fork, and others eat it like a sandwich.\nThis is a truck for Mexican ice cream, paleta. Paleta looks like a popsicle. Most paletas have natural fruits in them. I want this kiwi paleta. Oh, no! It tastes spicy!\nMexicans love spicy food. They sometimes add chili peppers to paletas. Most paletas are sweet, but some are spicy. Some Mexicans make them at home.\nToday, I had a lot of ice cream. Gelato was my favorite. ⓐ<u>그것은 돈두르마와 팔레타보다 더 맛있었다.</u> What kind of ice cream do you want to try? Please leave ⓑ<u>a comment</u>. Bye, bye.\n\n위 주어진 글에 이어질 순서로 알맞은 것은?",
+   "options": [
+    "(A)-(B)-(D)-(C)",
+    "(A)-(C)-(D)-(B)",
+    "(B)-(A)-(D)-(C)",
+    "(B)-(D)-(C)-(A)",
+    "(D)-(B)-(C)-(A)"
+   ],
+   "answer": "3",
+   "explanation": "아저씨가 돈두르마를 늘리고 있다(B) → 그것이 팔보다 더 길다(A) → 소년에게 건네주다 다시 가져간다(D) → 같은 행동을 반복한다(C)의 순서가 자연스럽다."
+  },
+  {
+   "number": 21,
+   "question": "다음 글을 읽고 물음에 답하시오.\nThere are many flavors of gelato. They all look delicious. Hmm.... This time, I want to try strawberry gelato. Yummy! It is very creamy.\nItaly is the home of gelato. Gelato is a very popular dessert there. It first appeared there in the 16th century, and some gelato shops have a long history.\nHere is a dondurma truck. I choose chocolate dondurma. Surprise! It's sticky and stretchy. Look at the man.\n(A) It is longer than his arm.\n(B) He is stretching some dondurma.\n(C) Huh? The man is doing the same thing again and again.\n(D) Now he is handing the dondurma to a boy, but then he is taking it back.\nCan the boy get it?\nDondurma is Turkish ice cream. It melts very slowly. Turkish people eat dondurma in many ways. Some use a knife and fork, and others eat it like a sandwich.\nThis is a truck for Mexican ice cream, paleta. Paleta looks like a popsicle. Most paletas have natural fruits in them. I want this kiwi paleta. Oh, no! It tastes spicy!\nMexicans love spicy food. They sometimes add chili peppers to paletas. Most paletas are sweet, but some are spicy. Some Mexicans make them at home.\nToday, I had a lot of ice cream. Gelato was my favorite. ⓐ<u>그것은 돈두르마와 팔레타보다 더 맛있었다.</u> What kind of ice cream do you want to try? Please leave ⓑ<u>a comment</u>. Bye, bye.\n\n윗글의 밑줄 친 ⓐ의 우리말을 주어진 <조건>에 알맞게 영작하시오.\n\n<조건>\n• delicious, it, be, dondurma and paleta를 사용할 것 (필요시 변형할 것)\n• 8단어로 영작할 것 ※ 완전한 문장으로 쓰시오.",
+   "options": [],
+   "answer": "It was more delicious than dondurma and paleta.",
+   "explanation": "주어 It을 쓰고 과거 시제 was, 3음절 형용사 delicious의 비교급 more delicious와 than을 쓴다."
+  },
+  {
+   "number": 22,
+   "question": "다음 글을 읽고 물음에 답하시오.\nThere are many flavors of gelato. They all look delicious. Hmm.... This time, I want to try strawberry gelato. Yummy! It is very creamy.\nItaly is the home of gelato. Gelato is a very popular dessert there. It first appeared there in the 16th century, and some gelato shops have a long history.\nHere is a dondurma truck. I choose chocolate dondurma. Surprise! It's sticky and stretchy. Look at the man.\n(A) It is longer than his arm.\n(B) He is stretching some dondurma.\n(C) Huh? The man is doing the same thing again and again.\n(D) Now he is handing the dondurma to a boy, but then he is taking it back.\nCan the boy get it?\nDondurma is Turkish ice cream. It melts very slowly. Turkish people eat dondurma in many ways. Some use a knife and fork, and others eat it like a sandwich.\nThis is a truck for Mexican ice cream, paleta. Paleta looks like a popsicle. Most paletas have natural fruits in them. I want this kiwi paleta. Oh, no! It tastes spicy!\nMexicans love spicy food. They sometimes add chili peppers to paletas. Most paletas are sweet, but some are spicy. Some Mexicans make them at home.\nToday, I had a lot of ice cream. Gelato was my favorite. ⓐ<u>그것은 돈두르마와 팔레타보다 더 맛있었다.</u> What kind of ice cream do you want to try? Please leave ⓑ<u>a comment</u>. Bye, bye.\n\n윗글의 밑줄 친 ⓑ의 내용으로 알맞지 않은 것은?",
+   "options": [
+    "I want to try gelato and enjoy its Italian flavor.",
+    "I want to experience the unique texture of dondurma.",
+    "I wonder about the taste of paleta with chili peppers in it.",
+    "I want to see the man's playful dondurma performance.",
+    "I like both natural fruits and spicy food, so I want to try gelato from Italy."
+   ],
+   "answer": "5",
+   "explanation": "천연 과일이 들어 있고 매운 맛이 나는 것은 멕시코의 팔레타이므로 ⑤는 댓글 내용으로 적절하지 않다."
+  },
+  {
+   "number": 23,
+   "question": "다음 그림에 어울리는 말이 되도록 <보기>의 A와 B에서 단어를 각각 하나씩 골라 빈칸을 완성하시오. (필요시 변형할 것)\n(그림 설명: 접시 위의 곰 모양 초콜릿 케이크)\n\n<보기>\nA: look, feel, smell\nB: sweet, soft, cute\n\ne.g. This chocolate cake tastes delicious. (맛)\n\n(1) This chocolate cake ________. (외형)\n(2) This chocolate cake ________. (냄새)\n(3) This chocolate cake ________. (질감)",
+   "options": [],
+   "answer": "looks cute, smells sweet, feels soft",
+   "subParts": [
+    {
+     "label": "(1)",
+     "answer": "looks cute"
+    },
+    {
+     "label": "(2)",
+     "answer": "smells sweet"
+    },
+    {
+     "label": "(3)",
+     "answer": "feels soft"
+    }
+   ],
+   "explanation": "외형은 look, 냄새는 smell, 질감은 feel을 쓰고 감각동사 뒤에는 형용사를 쓴다."
+  },
+  {
+   "number": 24,
+   "question": "다음 글을 읽고 물음에 답하시오.\nHere is a dondurma truck. I choose chocolate dondurma. Surprise! It's sticky and stretchy. Look at the man. He is stretching some dondurma. It is longer than his arm. Now he is handing the dondurma to a boy, but then he is taking it back. Huh? The man is doing the same thing again and again. Can the boy get it?\nDondurma is Turkish ice cream. It melts very slowly. Turkish people eat dondurma in many ways. Some use a knife and fork, and others eat it like a sandwich.\n\n다음 물음에 알맞은 답을 고르시오.\nWhat is the man doing?",
+   "options": [
+    "He is stretching the boy's arm.",
+    "He is playing a trick on the boy.",
+    "He is making chocolate dondurma.",
+    "He is eating dondurma like a sandwich.",
+    "He is giving the boy dondurma for free."
+   ],
+   "answer": "2",
+   "explanation": "아저씨는 소년에게 돈두르마를 건네주다가 다시 가져가는 행동을 반복하고 있으므로 소년에게 장난을 치고 있는 것이다."
+  },
+  {
+   "number": 25,
+   "question": "다음 글을 읽고 물음에 답하시오.\nHere is a dondurma truck. I choose chocolate dondurma. Surprise! It's sticky and stretchy. Look at the man. He is stretching some dondurma. It is longer than his arm. Now he is handing the dondurma to a boy, but then he is taking it back. Huh? The man is doing the same thing again and again. Can the boy get it?\nDondurma is Turkish ice cream. It melts very slowly. Turkish people eat dondurma in many ways. Some use a knife and fork, and others eat it like a sandwich.\n\n윗글의 내용과 일치하는 것은?",
+   "options": [
+    "The speaker couldn't pick one flavor of dondurma.",
+    "Everyone enjoys dondurma in the same way.",
+    "Dondurma cannot become longer.",
+    "Dondurma doesn't melt easily.",
+    "The boy is eating dondurma."
+   ],
+   "answer": "4",
+   "explanation": "돈두르마는 매우 천천히 녹는다고 했으므로 ④가 일치한다."
+  },
+  {
+   "number": 26,
+   "question": "다음 글을 읽고 물음에 답하시오.\nHere is a dondurma truck. I choose chocolate dondurma. Surprise! It's sticky and stretchy. Look at the man. He is stretching some dondurma. It is longer than his arm. Now he is handing the dondurma to a boy, but then he is taking it back. Huh? The man is doing the same thing again and again. Can the boy get it?\nDondurma is Turkish ice cream. It melts very slowly. Turkish people eat dondurma in many ways. Some use a knife and fork, and others eat it like a sandwich.\n\n윗글의 첫 번째 단락의 주제를 <보기>의 단어들을 배열하여 완성하시오.\n\n<보기> a / funny / dondurma experience / a / performance / with\n\n→ ________________________________",
+   "options": [],
+   "answer": "a dondurma experience with a funny performance",
+   "explanation": "첫 단락은 재미있는 퍼포먼스와 함께한 돈두르마 체험을 다룬다."
+  },
+  {
+   "number": 27,
+   "question": "다음 글을 읽고 물음에 답하시오.\nThis is a truck for Mexican ice cream, paleta. Paleta (A)[looks / looks like] a popsicle. Most paletas have natural fruits in them. I want this kiwi paleta. Oh, no! It tastes (B)[spicy / spicily]!\nMexicans love spicy food. They sometimes add chili peppers to paletas. Most paletas are sweet, but some (C)[is / are] spicy. Some Mexicans make them at home.\n\n윗글의 괄호 (A), (B), (C)에서 어법상 알맞은 말로 바르게 연결된 것은?",
+   "options": [
+    "(A) looks like – (B) spicy – (C) are",
+    "(A) looks like – (B) spicily – (C) are",
+    "(A) looks like – (B) spicy – (C) is",
+    "(A) looks – (B) spicy – (C) are",
+    "(A) looks – (B) spicily – (C) is"
+   ],
+   "answer": "1",
+   "explanation": "(A) 뒤에 명사구가 오므로 looks like, (B) 감각동사 taste 뒤에는 형용사 spicy, (C) 주어 some(paletas)이 복수이므로 are."
+  },
+  {
+   "number": 28,
+   "question": "다음 글을 읽고 물음에 답하시오.\nThis is a truck for Mexican ice cream, paleta. Paleta (A)[looks / looks like] a popsicle. Most paletas have natural fruits in them. I want this kiwi paleta. Oh, no! It tastes (B)[spicy / spicily]!\nMexicans love spicy food. They sometimes add chili peppers to paletas. Most paletas are sweet, but some (C)[is / are] spicy. Some Mexicans make them at home.\n\n윗글을 읽고 다음 질문에 대한 알맞은 대답이 되도록 주어진 <조건>에 맞게 빈칸을 완성하시오.\n\n<조건> put, in을 사용하여 5단어로 쓸 것\n\nQ. What do Mexicans do when they want to make spicy paletas?\n→ They ______________________ when they want to make spicy ones.",
+   "options": [],
+   "answer": "put chili peppers in paletas",
+   "explanation": "멕시코 사람들은 매운 팔레타를 만들고 싶을 때 팔레타에 고추를 넣는다."
+  },
+  {
+   "number": 29,
+   "question": "다음 글을 아래와 같이 요약할 때, 빈칸에 들어갈 알맞은 말을 쓰시오.\n\nThis is a truck for Mexican ice cream, paleta. Paleta looks like a popsicle. Most paletas have natural fruits in them. I want this kiwi paleta. Oh, no! It tastes spicy!\nMexicans love spicy food. They sometimes add chili peppers to paletas. Most paletas are sweet, but some are spicy. Some Mexicans make them at home.\n\nPaleta is a Mexican ice cream with (1)________ in it and the speaker was surprised at the (2)________ taste of the kiwi paleta. Mexicans sometimes make paletas with (3)________ because of their love for (4)________ food.",
+   "options": [],
+   "answer": "natural fruits, spicy, chili peppers, spicy",
+   "subParts": [
+    {
+     "label": "(1)",
+     "answer": "natural fruits"
+    },
+    {
+     "label": "(2)",
+     "answer": "spicy"
+    },
+    {
+     "label": "(3)",
+     "answer": "chili peppers"
+    },
+    {
+     "label": "(4)",
+     "answer": "spicy"
+    }
+   ],
+   "explanation": "팔레타는 천연 과일이 들어간 멕시코 아이스크림이며, 화자는 키위 팔레타의 매운 맛에 놀랐다. 멕시코 사람들은 매운 음식을 좋아해서 가끔 고추를 넣어 팔레타를 만든다."
+  },
+  {
+   "number": 30,
+   "question": "다음 글의 제목으로 알맞은 것은?\n\nThere are many flavors of gelato. They all look delicious. Hmm.... This time, I want to try strawberry gelato. Yummy! It is very creamy.\nItaly is the home of gelato. Gelato is a very popular dessert there. It first appeared there in the 16th century, and some gelato shops have a long history.",
+   "options": [
+    "Top Flavors of Gelato",
+    "Worldwide Popularity of Gelato",
+    "Gelato: Italy's Creamy Tradition",
+    "Gelato: The Center of Italian Tourism",
+    "What Does Gelato Mean to Italian People?"
+   ],
+   "answer": "3",
+   "explanation": "부드러운 젤라토의 맛과 16세기부터 이어진 이탈리아의 긴 역사를 설명하고 있으므로 제목으로 ③이 적절하다."
+  },
+  {
+   "number": 31,
+   "question": "다음 표를 보고 Phone A와 Phone B를 비교하는 문장의 빈칸을 완성하시오.\n\n| | Phone A | Phone B |\n|---|---|---|\n| 무게 | 150g | 200g |\n| 길이 | 5inch | 6inch |\n| 두께 | 5mm | 7mm |\n\n(1) Phone A ______________ Phone B. (무게)\n(2) Phone B ______________. (길이)\n(3) Phone A ______________. (두께)",
+   "options": [],
+   "answer": "is lighter than, is longer than Phone A, is thinner than Phone B",
+   "subParts": [
+    {
+     "label": "(1)",
+     "answer": "is lighter than"
+    },
+    {
+     "label": "(2)",
+     "answer": "is longer than Phone A"
+    },
+    {
+     "label": "(3)",
+     "answer": "is thinner than Phone B"
+    }
+   ],
+   "explanation": "Phone A는 Phone B보다 더 가볍고(lighter), Phone B는 Phone A보다 더 길고(longer), Phone A는 Phone B보다 더 얇다(thinner)."
+  }
+ ],
+ "R2": [
+  {
+   "number": 1,
+   "question": "다음 중 짝지어진 단어의 관계가 나머지 넷과 다른 것은?",
+   "options": [
+    "top : bottom = slowly : quickly",
+    "Thai : Thailand = Italian : Italy",
+    "appear : emerge = popular : unpopular",
+    "attend : attention = choose : choice",
+    "tradition : traditional = cream : creamy"
+   ],
+   "answer": "3",
+   "explanation": "'나타나다 : 나타나다'는 유의어 관계이지만 '인기 있는 : 인기가 없는'은 반의어 관계이다."
+  },
+  {
+   "number": 2,
+   "question": "다음 중 <보기>의 단어가 들어갈 수 없는 것은?\n\n<보기> sticky, hot, stretchy, international, crispy",
+   "options": [
+    "The rice cake is ________ and chewy.",
+    "People like ________ types of music.",
+    "These pants are ________ and comfortable.",
+    "I just fried these potatoes, so they're ________.",
+    "Many countries joined the ________ sports games."
+   ],
+   "answer": "2",
+   "explanation": "'매운'이라는 뜻의 hot이 들어갈 수 있는 문장이 없고, ② '사람들은 다른 종류의 음악을 좋아한다.'에는 different가 들어가야 한다."
+  },
+  {
+   "number": 3,
+   "question": "다음 밑줄 친 단어가 같은 의미로 쓰인 것은?",
+   "options": [
+    "I <u>try</u> hard to study for success. / You should <u>try</u> this Mexican dish.",
+    "What <u>type</u> of music do you like? / I can <u>type</u> fast on a keyboard.",
+    "Did you <u>hand</u> the book to him? / She raised her <u>hand</u>.",
+    "We're going to <u>hold</u> a concert in the park. / They will <u>hold</u> a meeting tomorrow.",
+    "Let's <u>have</u> lunch at 12:00. / I don't <u>have</u> a lot of money, but I'm happy."
+   ],
+   "answer": "4",
+   "explanation": "④의 hold는 모두 '개최하다'라는 뜻의 동사로 쓰였다."
+  },
+  {
+   "number": 4,
+   "question": "다음 중 밑줄 친 부분을 바르게 고치지 않은 것은?",
+   "options": [
+    "The song sounds so <u>beautifully</u>. → beautiful",
+    "His house is <u>more large</u> than ours. → larger",
+    "She looks <u>happily</u> and smiles happily. → happy",
+    "This ring is <u>expensive</u> than that one. → expensiver",
+    "The chair is <u>very</u> more comfortable than that one. → much"
+   ],
+   "answer": "4",
+   "explanation": "④ 3음절 형용사 expensive의 비교급은 more expensive이다."
+  },
+  {
+   "number": 5,
+   "question": "다음 중 어법상 어색한 문장은 몇 개인가?\n\nⓐ He had little money than she.\nⓑ This sounds more serious than that.\nⓒ Your device is usefuler than my device.\nⓓ She arrived at work more fast than usual.\nⓔ My computer is more efficient than you.\nⓕ The air in the garden smells like fresh flowers after the rain.",
+   "options": [
+    "2개",
+    "3개",
+    "4개",
+    "5개",
+    "6개"
+   ],
+   "answer": "3",
+   "explanation": "ⓐ little → less, ⓒ usefuler → more useful, ⓓ more fast → faster, ⓔ you → your computer 또는 yours. 어색한 문장은 4개이다."
+  },
+  {
+   "number": 6,
+   "question": "다음 <보기> 중, 대화의 빈칸에 들어갈 말로 알맞지 않은 것의 개수는?\n\nW: Why don't you try the apple pie? It's a popular dessert.\nB: ________________ I'm not a big fan of apples.\n\n<보기>\n• Why not?\n• No, thanks.\n• I'd love to.\n• Sounds good.\n• I'd rather not.\n• Maybe next time.",
+   "options": [
+    "1개",
+    "2개",
+    "3개",
+    "4개",
+    "5개"
+   ],
+   "answer": "3",
+   "explanation": "사과를 좋아하지 않는다고 했으므로 제안을 거절하는 표현이 와야 한다. Why not?, I'd love to., Sounds good.은 수락하는 표현이므로 알맞지 않다(3개)."
+  },
+  {
+   "number": 7,
+   "question": "다음 글을 읽고 답할 수 없는 것은?\n\nW: May I have your attention, please? Ming's Kitchen is going to hold an opening event for three days from today. Peking duck will be half price during the event. It's a traditional Chinese dish, and the duck is really crispy. Why don't you come and enjoy some tasty Chinese food?",
+   "options": [
+    "How long will the opening event go on?",
+    "How does Peking duck feel?",
+    "How does Peking duck smell?",
+    "What country is Peking duck from?",
+    "How much discount will there be on Peking duck?"
+   ],
+   "answer": "3",
+   "explanation": "북경 오리의 냄새가 어떠한지는 언급되지 않았다."
+  },
+  {
+   "number": 8,
+   "question": "다음 글을 읽고 물음에 답하시오.\nThere are many flavors of gelato. They all look delicious. Hmm.... This time, I want to try strawberry gelato. Yummy! It is very creamy.\nItaly is the home of gelato. Gelato is a very popular dessert there. It first appeared there in the 16th century, and some gelato shops have a long history.\n\n윗글의 주제로 알맞은 것은?",
+   "options": [
+    "natural fruits in gelato",
+    "my favorite gelato flavor",
+    "the experience with Italian desserts",
+    "the experience with gelato and its history",
+    "different flavors of gelato and their recipes"
+   ],
+   "answer": "4",
+   "explanation": "첫 단락은 젤라토를 맛본 경험, 두 번째 단락은 젤라토의 역사를 설명하고 있다."
+  },
+  {
+   "number": 9,
+   "question": "다음 글을 읽고 물음에 답하시오.\nThere are many flavors of gelato. They all look delicious. Hmm.... This time, I want to try strawberry gelato. Yummy! It is very creamy.\nItaly is the home of gelato. Gelato is a very popular dessert there. It first appeared there in the 16th century, and some gelato shops have a long history.\n\n윗글을 읽고 다음 질문에 대한 알맞은 대답이 되도록 주어진 <조건>에 맞게 빈칸을 완성하시오.\n\n<조건> taste, and를 사용할 것 (필요시 변형할 것)\n\nQ. What does the speaker think about the strawberry gelato?\n→ The speaker thinks ________________________.",
+   "options": [],
+   "answer": "it tastes yummy and very creamy",
+   "explanation": "화자는 딸기 젤라토가 맛있고 매우 부드러운 맛이 난다고 생각한다."
+  },
+  {
+   "number": 10,
+   "question": "다음 각 음식의 질감과 맛을 나타내는 표를 보고, <조건>에 알맞게 빈칸을 완성하시오.\n\n| | texture | flavor |\n|---|---|---|\n| potato chips | crispy | salty |\n| sherbet | smooth | sour and fruity |\n| cereal | crunchy | sweet |\n\n<조건>\n• 적절한 감각동사를 사용할 것\n• 표의 texture, flavor의 내용을 순서대로 쓸 것\n\n(1) Potato chips ________ and ________.\n(2) Sherbet ________ and ________.\n(3) Cereal ________ and ________.",
+   "options": [],
+   "answer": "feel crispy, taste salty / feels smooth, tastes sour and fruity / feels crunchy, tastes sweet",
+   "subParts": [
+    {
+     "label": "(1)",
+     "answer": "feel crispy, taste salty"
+    },
+    {
+     "label": "(2)",
+     "answer": "feels smooth, tastes sour and fruity"
+    },
+    {
+     "label": "(3)",
+     "answer": "feels crunchy, tastes sweet"
+    }
+   ],
+   "explanation": "질감은 feel, 맛은 taste를 쓰며 주어의 수에 맞춰 동사 형태를 바꾼다."
+  },
+  {
+   "number": 11,
+   "question": "다음 글을 아래와 같이 요약할 때, 빈칸에 들어갈 알맞은 말을 쓰시오.\n\nMexicans love spicy food. They sometimes add chili peppers to paletas. Most paletas are sweet, but some are spicy. Some Mexicans make them at home.\n\nSome paletas are sweet, but others are (1)________ with (2)________ because Mexicans like (3)________.",
+   "options": [],
+   "answer": "spicy, chili peppers, spicy food",
+   "subParts": [
+    {
+     "label": "(1)",
+     "answer": "spicy"
+    },
+    {
+     "label": "(2)",
+     "answer": "chili peppers"
+    },
+    {
+     "label": "(3)",
+     "answer": "spicy food"
+    }
+   ],
+   "explanation": "어떤 팔레타는 달콤하지만 다른 팔레타는 고추 때문에 매운데, 이는 멕시코 사람들이 매운 음식을 좋아하기 때문이다."
+  },
+  {
+   "number": 12,
+   "question": "다음 두 빵집의 베이글에 대한 표를 보고 <보기>에서 적절한 말을 골라 두 베이글을 비교하는 문장의 빈칸을 완성하시오. (단, 동사는 모두 be동사를 쓰고 축약형을 쓰지 말 것)\n\n| | Salty Delight | Seoul Crust |\n|---|---|---|\n| 맛 | ★★★★★ | ★★★ |\n| 인기 | ♥♥♥♥ | ♥♥♥ |\n| 가격 | 3,000 won | 2,500 won |\n| 크기 | 300cm³ | 450cm³ |\n\n<보기> large, popular, delicious, expensive\n\n(1) Salty Delight's bagel is ________ than Seoul Crust's bagel. (맛)\n(2) Salty Delight's bagel ________ Seoul Crust's bagel. (인기)\n(3) Seoul Crust's bagel ________. (가격)\n(4) ________. (크기)",
+   "options": [],
+   "answer": "more delicious / is more popular than / is less expensive than Salty Delight's bagel / Seoul Crust's bagel is larger than Salty Delight's bagel.",
+   "subParts": [
+    {
+     "label": "(1)",
+     "answer": "more delicious"
+    },
+    {
+     "label": "(2)",
+     "answer": "is more popular than"
+    },
+    {
+     "label": "(3)",
+     "answer": "is less expensive than Salty Delight's bagel"
+    },
+    {
+     "label": "(4)",
+     "answer": "Seoul Crust's bagel is larger than Salty Delight's bagel."
+    }
+   ],
+   "explanation": "맛과 인기는 Salty Delight가 더 높고(more delicious, more popular), 가격은 Seoul Crust가 덜 비싸며(less expensive), 크기는 Seoul Crust가 더 크다(larger)."
+  },
+  {
+   "number": 13,
+   "question": "다음 글을 읽고 물음에 답하시오.\nThis is a truck for Mexican ice cream, paleta. Paleta looks like a popsicle. Most paletas have natural fruits in ⓐ<u>it</u>. I want this kiwi paleta. Oh, no! It tastes spicy!\n(A)__________________ Mexicans ⓑ<u>add sometimes</u> chili peppers to paletas. Most paletas are sweet, but some are spicy. Some Mexicans make them at home.\nToday, I had ⓒ<u>many</u> ice cream. Gelato was my favorite. It was ⓓ<u>delicious</u> than dondurma and paleta. What kind of ice cream do you want to try? Please ⓔ<u>leaving</u> a comment. Bye, bye.\n\n윗글의 빈칸 (A)에 들어갈 말로 알맞은 것은?",
+   "options": [
+    "Mexicans avoid spicy food.",
+    "Mexicans are good at cooking.",
+    "Spicy food is popular in Mexico.",
+    "Paletas are daily snacks for Mexicans.",
+    "Mexicans like sweet flavors more than spicy ones."
+   ],
+   "answer": "3",
+   "explanation": "빈칸 뒤에 멕시코 사람들이 팔레타에 고추를 넣기도 한다는 내용이 이어지므로 매운 음식이 멕시코에서 인기가 있다는 내용이 알맞다."
+  },
+  {
+   "number": 14,
+   "question": "다음 글을 읽고 물음에 답하시오.\nThis is a truck for Mexican ice cream, paleta. Paleta looks like a popsicle. Most paletas have natural fruits in ⓐ<u>it</u>. I want this kiwi paleta. Oh, no! It tastes spicy!\n(A)__________________ Mexicans ⓑ<u>add sometimes</u> chili peppers to paletas. Most paletas are sweet, but some are spicy. Some Mexicans make them at home.\nToday, I had ⓒ<u>many</u> ice cream. Gelato was my favorite. It was ⓓ<u>delicious</u> than dondurma and paleta. What kind of ice cream do you want to try? Please ⓔ<u>leaving</u> a comment. Bye, bye.\n\n윗글의 밑줄 친 ⓐ~ⓔ를 바르게 고치지 못한 것은?",
+   "options": [
+    "ⓐ: it → them",
+    "ⓑ: add sometimes → sometimes add",
+    "ⓒ: many → a lot of",
+    "ⓓ: delicious → deliciouser",
+    "ⓔ: leaving → leave"
+   ],
+   "answer": "4",
+   "explanation": "ⓓ 3음절 형용사 delicious의 비교급은 more delicious이다."
+  },
+  {
+   "number": 15,
+   "question": "다음 글을 읽고 물음에 답하시오.\nThis is a truck for Mexican ice cream, paleta. Paleta looks like a popsicle. Most paletas have natural fruits in ⓐ<u>it</u>. I want this kiwi paleta. Oh, no! It tastes spicy!\n(A)__________________ Mexicans ⓑ<u>add sometimes</u> chili peppers to paletas. Most paletas are sweet, but some are spicy. Some Mexicans make them at home.\nToday, I had ⓒ<u>many</u> ice cream. Gelato was my favorite. It was ⓓ<u>delicious</u> than dondurma and paleta. What kind of ice cream do you want to try? Please ⓔ<u>leaving</u> a comment. Bye, bye.\n\n윗글의 내용과 ㉠, ㉡, ㉢가 일치하면 T, 일치하지 않으면 F를 쓸 때, 순서대로 연결된 것은?\n\n㉠ People can usually eat natural fruits when they eat paletas. (T/F)\n㉡ Mexicans can't eat paletas without chili peppers. (T/F)\n㉢ Gelato tasted the best for the speaker. (T/F)",
+   "options": [
+    "T-T-T",
+    "F-F-T",
+    "F-T-T",
+    "F-T-F",
+    "T-F-T"
+   ],
+   "answer": "5",
+   "explanation": "㉠ 대부분의 팔레타에는 천연 과일이 들어 있다(T). ㉡ 멕시코 사람들은 가끔 고추를 넣으므로 고추 없이도 먹는다(F). ㉢ 화자에게는 젤라토가 가장 맛있었다(T)."
+  },
+  {
+   "number": 16,
+   "question": "다음 대화를 읽고 물음에 답하시오.\nW: May I have your attention, please? Ming's Kitchen is going to hold an opening event for three days from today. Peking duck will be half price during the event. It's a traditional Chinese dish, and the duck is really crispy. ______________________________\n\n위 대화의 빈칸에 들어갈 말로 알맞지 않은 것은?",
+   "options": [
+    "We hope you'll come and enjoy some tasty Chinese food.",
+    "How about coming to try some tasty Chinese dishes?",
+    "Why don't you come and enjoy some tasty Chinese food?",
+    "Would you like to come and have some tasty Chinese food?",
+    "Let's go and enjoy some tasty Chinese food."
+   ],
+   "answer": "5",
+   "explanation": "화자는 Ming's Kitchen의 개업 행사를 홍보하며 상대방에게 오라고 권유하고 있으므로, '우리 같이 ~하자'라는 뜻의 Let's ~는 어색하다."
+  },
+  {
+   "number": 17,
+   "question": "다음 대화를 읽고 물음에 답하시오.\nW: May I have your attention, please? Ming's Kitchen is going to hold an opening event for three days from today. Peking duck will be half price during the event. It's a traditional Chinese dish, and the duck is really crispy. Why don't you come and enjoy some tasty Chinese food?\n\n위 대화의 내용을 다음과 같이 요약할 때, 빈칸에 들어갈 알맞은 말을 쓰시오.\n\nMing's Kitchen, a Chinese restaurant, will sell (1)________ at (2)________ price during its three-day (3)________ event.",
+   "options": [],
+   "answer": "Peking duck, half, opening",
+   "subParts": [
+    {
+     "label": "(1)",
+     "answer": "Peking duck"
+    },
+    {
+     "label": "(2)",
+     "answer": "half"
+    },
+    {
+     "label": "(3)",
+     "answer": "opening"
+    }
+   ],
+   "explanation": "중국 음식점인 Ming's Kitchen은 3일 간의 개업 행사 기간 동안 북경 오리를 반값에 판다."
+  },
+  {
+   "number": 18,
+   "question": "다음 글을 아래와 같이 요약할 때, 빈칸에 들어갈 알맞은 말을 쓰시오.\n\nItaly is the home of gelato. Gelato is a very popular dessert there. It first appeared there in the 16th century, and some gelato shops have a long history.\n\nGelato is a traditional Italian (1)________ and remains (2)________, and some gelato (3)________ are very old.",
+   "options": [],
+   "answer": "dessert, popular, shops",
+   "subParts": [
+    {
+     "label": "(1)",
+     "answer": "dessert"
+    },
+    {
+     "label": "(2)",
+     "answer": "popular"
+    },
+    {
+     "label": "(3)",
+     "answer": "shops"
+    }
+   ],
+   "explanation": "젤라토는 전통적인 이탈리아의 디저트이며 인기가 있고, 몇몇 젤라토 가게는 매우 오래되었다."
+  },
+  {
+   "number": 19,
+   "question": "다음 글을 읽고 물음에 답하시오.\nHi, everyone! Welcome to my vlog. I'm at an international ice cream festival. I love ice cream. How about you? Different countries have different types of ice cream. A gelato truck is over there. There is a long line. Let's go there first.\nThere are many (A)[recipes / flavors] of gelato. They all look delicious. Hmm.... This time, I want ⓐ<u>to try</u> strawberry gelato. Yummy! It is very creamy.\nItaly is the (B)[destination / home] of gelato. Gelato is a very popular dessert there. It first ⓑ<u>appears</u> there in the 16th century, and some gelato shops have a long history.\nHere is ⓒ<u>dondurma trucks</u>. I choose chocolate dondurma. Surprise! It's sticky and stretchy. Look at the man. He is (C)[slicing / stretching] some dondurma. It is longer than his arm. Now he is ⓓ<u>handing</u> the dondurma to a boy, but then he is taking it back. Huh? The man is doing the same thing again and again. Can the boy get ⓔ<u>it</u>?\nDondurma is Turkish ice cream. It melts very slowly. Turkish people eat dondurma in many ways. Some ⓕ<u>uses</u> a knife and fork, and others eat it like a sandwich.\n\n윗글의 밑줄 친 ⓐ~ⓕ 중, 어법상 어색한 것의 개수는?",
+   "options": [
+    "1개",
+    "2개",
+    "3개",
+    "4개",
+    "5개"
+   ],
+   "answer": "3",
+   "explanation": "ⓑ appears → appeared, ⓒ dondurma trucks → a dondurma truck, ⓕ uses → use. 어색한 것은 3개이다."
+  },
+  {
+   "number": 20,
+   "question": "다음 글을 읽고 물음에 답하시오.\nHi, everyone! Welcome to my vlog. I'm at an international ice cream festival. I love ice cream. How about you? Different countries have different types of ice cream. A gelato truck is over there. There is a long line. Let's go there first.\nThere are many (A)[recipes / flavors] of gelato. They all look delicious. Hmm.... This time, I want ⓐ<u>to try</u> strawberry gelato. Yummy! It is very creamy.\nItaly is the (B)[destination / home] of gelato. Gelato is a very popular dessert there. It first ⓑ<u>appears</u> there in the 16th century, and some gelato shops have a long history.\nHere is ⓒ<u>dondurma trucks</u>. I choose chocolate dondurma. Surprise! It's sticky and stretchy. Look at the man. He is (C)[slicing / stretching] some dondurma. It is longer than his arm. Now he is ⓓ<u>handing</u> the dondurma to a boy, but then he is taking it back. Huh? The man is doing the same thing again and again. Can the boy get ⓔ<u>it</u>?\nDondurma is Turkish ice cream. It melts very slowly. Turkish people eat dondurma in many ways. Some ⓕ<u>uses</u> a knife and fork, and others eat it like a sandwich.\n\n윗글의 괄호 (A), (B), (C)에서 흐름상 알맞은 말로 바르게 연결된 것은?",
+   "options": [
+    "(A) flavors – (B) home – (C) stretching",
+    "(A) recipes – (B) home – (C) stretching",
+    "(A) flavors – (B) home – (C) slicing",
+    "(A) recipes – (B) destination – (C) slicing",
+    "(A) flavors – (B) destination – (C) stretching"
+   ],
+   "answer": "1",
+   "explanation": "(A) 젤라토의 여러 맛(flavors), (B) 이탈리아는 젤라토의 본고장(home), (C) 돈두르마를 늘리고 있다(stretching)가 자연스럽다."
+  },
+  {
+   "number": 21,
+   "question": "다음 글을 읽고 물음에 답하시오.\nHi, everyone! Welcome to my vlog. I'm at an international ice cream festival. I love ice cream. How about you? Different countries have different types of ice cream. A gelato truck is over there. There is a long line. Let's go there first.\nThere are many flavors of gelato. They all look delicious. Hmm.... This time, I want to try strawberry gelato. Yummy! It is very creamy.\nItaly is the home of gelato. Gelato is a very popular dessert there. It first appeared there in the 16th century, and some gelato shops have a long history.\nHere is a dondurma truck. I choose chocolate dondurma. Surprise! It's sticky and stretchy. Look at the man. He is stretching some dondurma. It is longer than his arm. Now he is handing the dondurma to a boy, but then he is taking it back. Huh? The man is doing the same thing again and again. Can the boy get it?\nDondurma is Turkish ice cream. It melts very slowly. Turkish people eat dondurma in many ways. Some use a knife and fork, and others eat it like a sandwich.\n\n윗글의 내용과 일치하지 않는 것의 개수는?\n\n(1) There are different kinds of ice cream at the international ice cream festival.\n(2) Many people are waiting in line for gelato.\n(3) The speaker tried gelato, an Italian ice cream, first, but she wasn't satisfied with it.\n(4) People started to eat gelato before the 16th century.\n(5) The man is not giving the dondurma to the boy all at once.\n(6) Dondurma is a sticky, stretchy, and fast-melting ice cream.",
+   "options": [
+    "2개",
+    "3개",
+    "4개",
+    "5개",
+    "6개"
+   ],
+   "answer": "2",
+   "explanation": "(3) 화자는 젤라토에 만족했고, (4) 젤라토는 16세기에 처음 나타났으며, (6) 돈두르마는 천천히 녹는다. 일치하지 않는 것은 3개이다."
+  },
+  {
+   "number": 22,
+   "question": "다음 글의 제목으로 알맞은 것은?\n\nThis is a truck for Mexican ice cream, paleta. Paleta looks like a popsicle. Most paletas have natural fruits in them. I want this kiwi paleta. Oh, no! It tastes spicy!\nMexicans love spicy food. They sometimes add chili peppers to paletas. Most paletas are sweet, but some are spicy. Some Mexicans make them at home.",
+   "options": [
+    "I Don't Like Spicy Ice Cream!",
+    "Mexico's Deep Love for Spicy Flavor",
+    "Difference Between Popsicles and Paletas",
+    "How do Mexicans Make Paletas at Home?",
+    "Meet a Sweet or Spicy Mexican Dessert on a Stick"
+   ],
+   "answer": "5",
+   "explanation": "막대 아이스크림처럼 생긴 팔레타의 특징(달콤하거나 매운 맛)을 소개하는 글이므로 ⑤가 제목으로 적절하다."
+  },
+  {
+   "number": 23,
+   "question": "다음 글을 읽고 물음에 답하시오.\nHi, everyone! Welcome to my vlog. I'm at an international ice cream festival. I love ice cream. (A)<u>How about you</u>? Different countries have different types of ice cream. A gelato truck is over there. There is a long line. Let's go there first.\nThere are many flavors of gelato. They all look delicious. Hmm.... This time, I want to try strawberry gelato. Yummy! It is very creamy.\nItaly is the home of gelato. Gelato is a very popular dessert there. It first appeared there in the 16th century, and some gelato shops have a long history.\n(B)<u>Here</u> is a dondurma truck. I choose chocolate dondurma. Surprise! It's sticky and stretchy. Look at the man. He is stretching some dondurma. It is longer than his arm. Now he is handing the dondurma to a boy, but then he is taking it back. Huh? The man is doing the same thing again and again. Can the boy get it?\nDondurma is Turkish ice cream. It melts very slowly. Turkish people eat dondurma in many ways. Some use a knife and fork, and (C)<u>others</u> eat it like a sandwich.\nThis is a truck for Mexican ice cream, paleta. Paleta looks like a popsicle. Most paletas have natural fruits in them. I want this kiwi paleta. Oh, no! It tastes (D)<u>spicy</u>!\nMexicans love spicy food. They sometimes add chili peppers to paletas. Most paletas are sweet, but some are spicy. Some Mexicans make them at home.\nToday, I had a lot of ice cream. Gelato was my favorite. It was (E)<u>more delicious</u> than dondurma and paleta. What kind of ice cream do you want to try? Please leave a comment. Bye, bye.\n\n윗글을 읽고 답할 수 없는 질문은?",
+   "options": [
+    "What is the speaker filming?",
+    "How is the strawberry gelato's texture?",
+    "What flavor of dondurma is the speaker eating?",
+    "Why does dondurma melt slowly?",
+    "What is paleta similar to?"
+   ],
+   "answer": "4",
+   "explanation": "돈두르마가 천천히 녹는다고는 했으나 그 이유는 언급되지 않았다."
+  },
+  {
+   "number": 24,
+   "question": "다음 글을 읽고 물음에 답하시오.\nHi, everyone! Welcome to my vlog. I'm at an international ice cream festival. I love ice cream. (A)<u>How about you</u>? Different countries have different types of ice cream. A gelato truck is over there. There is a long line. Let's go there first.\nThere are many flavors of gelato. They all look delicious. Hmm.... This time, I want to try strawberry gelato. Yummy! It is very creamy.\nItaly is the home of gelato. Gelato is a very popular dessert there. It first appeared there in the 16th century, and some gelato shops have a long history.\n(B)<u>Here</u> is a dondurma truck. I choose chocolate dondurma. Surprise! It's sticky and stretchy. Look at the man. He is stretching some dondurma. It is longer than his arm. Now he is handing the dondurma to a boy, but then he is taking it back. Huh? The man is doing the same thing again and again. Can the boy get it?\nDondurma is Turkish ice cream. It melts very slowly. Turkish people eat dondurma in many ways. Some use a knife and fork, and (C)<u>others</u> eat it like a sandwich.\nThis is a truck for Mexican ice cream, paleta. Paleta looks like a popsicle. Most paletas have natural fruits in them. I want this kiwi paleta. Oh, no! It tastes (D)<u>spicy</u>!\nMexicans love spicy food. They sometimes add chili peppers to paletas. Most paletas are sweet, but some are spicy. Some Mexicans make them at home.\nToday, I had a lot of ice cream. Gelato was my favorite. It was (E)<u>more delicious</u> than dondurma and paleta. What kind of ice cream do you want to try? Please leave a comment. Bye, bye.\n\n윗글의 밑줄 친 (A)~(E)에 대한 설명으로 알맞지 않은 것을 모두 고르면? (정답 2개)",
+   "options": [
+    "(A): 흐름상 'Do you love ice cream, too?'를 의미한다.",
+    "(B): 문장 맨 앞에 쓰였으므로 문장의 주어이다.",
+    "(C): other Turkish people을 의미한다.",
+    "(D): 동사 tastes를 수식하는 부사로 쓰였다.",
+    "(E): delicious가 3음절 이상이기 때문에 앞에 more를 붙여 만들어진 비교급이다."
+   ],
+   "answer": "2, 4",
+   "explanation": "(B) Here+be동사+주어 구문으로 주어는 a dondurma truck이다. (D) spicy는 감각동사 tastes의 보어 역할을 하는 형용사이다."
+  },
+  {
+   "number": 25,
+   "question": "다음 글을 읽고 물음에 답하시오.\nHi, everyone! Welcome to my vlog. I'm at an international ice cream festival. I love ice cream. (A)<u>How about you</u>? Different countries have different types of ice cream. A gelato truck is over there. There is a long line. Let's go there first.\nThere are many flavors of gelato. They all look delicious. Hmm.... This time, I want to try strawberry gelato. Yummy! It is very creamy.\nItaly is the home of gelato. Gelato is a very popular dessert there. It first appeared there in the 16th century, and some gelato shops have a long history.\n(B)<u>Here</u> is a dondurma truck. I choose chocolate dondurma. Surprise! It's sticky and stretchy. Look at the man. He is stretching some dondurma. It is longer than his arm. Now he is handing the dondurma to a boy, but then he is taking it back. Huh? The man is doing the same thing again and again. Can the boy get it?\nDondurma is Turkish ice cream. It melts very slowly. Turkish people eat dondurma in many ways. Some use a knife and fork, and (C)<u>others</u> eat it like a sandwich.\nThis is a truck for Mexican ice cream, paleta. Paleta looks like a popsicle. Most paletas have natural fruits in them. I want this kiwi paleta. Oh, no! It tastes (D)<u>spicy</u>!\nMexicans love spicy food. They sometimes add chili peppers to paletas. Most paletas are sweet, but some are spicy. Some Mexicans make them at home.\nToday, I had a lot of ice cream. Gelato was my favorite. It was (E)<u>more delicious</u> than dondurma and paleta. What kind of ice cream do you want to try? Please leave a comment. Bye, bye.\n\n윗글을 읽고 다음 질문에 대한 알맞은 대답이 되도록 주어진 <조건>에 맞게 빈칸을 완성하시오.\n\n<조건> feel을 사용할 것 (필요시 변형할 것)\n\nQ. Why was the speaker surprised when she ate the dondurma?\n→ Because it ________________________.",
+   "options": [],
+   "answer": "felt sticky and stretchy",
+   "explanation": "돈두르마를 먹었을 때 쫀득하고 늘어나는 느낌이 났기 때문에 놀랐다."
+  },
+  {
+   "number": 26,
+   "question": "다음 글을 읽고 물음에 답하시오.\nHi, everyone! Welcome to my vlog. I'm at an international ice cream festival. I love ice cream. (A)<u>How about you</u>? Different countries have different types of ice cream. A gelato truck is over there. There is a long line. Let's go there first.\nThere are many flavors of gelato. They all look delicious. Hmm.... This time, I want to try strawberry gelato. Yummy! It is very creamy.\nItaly is the home of gelato. Gelato is a very popular dessert there. It first appeared there in the 16th century, and some gelato shops have a long history.\n(B)<u>Here</u> is a dondurma truck. I choose chocolate dondurma. Surprise! It's sticky and stretchy. Look at the man. He is stretching some dondurma. It is longer than his arm. Now he is handing the dondurma to a boy, but then he is taking it back. Huh? The man is doing the same thing again and again. Can the boy get it?\nDondurma is Turkish ice cream. It melts very slowly. Turkish people eat dondurma in many ways. Some use a knife and fork, and (C)<u>others</u> eat it like a sandwich.\nThis is a truck for Mexican ice cream, paleta. Paleta looks like a popsicle. Most paletas have natural fruits in them. I want this kiwi paleta. Oh, no! It tastes (D)<u>spicy</u>!\nMexicans love spicy food. They sometimes add chili peppers to paletas. Most paletas are sweet, but some are spicy. Some Mexicans make them at home.\nToday, I had a lot of ice cream. Gelato was my favorite. It was (E)<u>more delicious</u> than dondurma and paleta. What kind of ice cream do you want to try? Please leave a comment. Bye, bye.\n\n윗글의 브이로그에 대해 아래와 같이 대화를 나눌 때, 빈칸에 들어갈 알맞은 말을 쓰시오.\n\nA: Here's a vlog about an (1)________________.\nB: It already sounds sweet. What is it about?\nA: The speaker is tasting three types of (2)________ from (3)________ countries. They are gelato, dondurma, and paleta.\nB: I know them! Gelato is from (4)________, dondurma from (5)________, and paleta from (6)________.\nA: Right. She's sharing her thoughts about each one and giving some simple information on them.",
+   "options": [],
+   "answer": "international ice cream festival, ice cream, different, Italy, Turkey, Mexico",
+   "subParts": [
+    {
+     "label": "(1)",
+     "answer": "international ice cream festival"
+    },
+    {
+     "label": "(2)",
+     "answer": "ice cream"
+    },
+    {
+     "label": "(3)",
+     "answer": "different"
+    },
+    {
+     "label": "(4)",
+     "answer": "Italy"
+    },
+    {
+     "label": "(5)",
+     "answer": "Turkey"
+    },
+    {
+     "label": "(6)",
+     "answer": "Mexico"
+    }
+   ],
+   "explanation": "국제 아이스크림 축제에서 서로 다른 나라에서 온 세 가지 아이스크림(이탈리아의 젤라토, 튀르키예의 돈두르마, 멕시코의 팔레타)을 맛보는 브이로그이다."
+  },
+  {
+   "number": 27,
+   "question": "다음 글을 읽고 물음에 답하시오.\nHi, everyone! Welcome to my vlog. I'm at an international ice cream festival. I love ice cream. How about you? Different countries have different types of ice cream. A gelato truck is over there. There is a long line. Let's go there first.\nThere are many flavors of gelato. They all look delicious. Hmm.... This time, I want to try strawberry gelato. Yummy! It is very creamy.\nItaly is the home of gelato. Gelato is a very popular dessert there. It first appeared there in the 16th century, and some gelato shops have a long history.\nHere is a dondurma truck. I choose chocolate dondurma. Surprise! It's sticky and stretchy. Look at the man. He is stretching some dondurma. It is longer than his arm. Now he is handing the dondurma to a boy, but then he is taking it back. Huh? The man is doing the same thing again and again. Can the boy get it?\nDondurma is Turkish ice cream. It melts very slowly. Turkish people eat dondurma in many ways. Some use a knife and fork, and others eat it like a sandwich.\nThis is a truck for Mexican ice cream, paleta. Paleta looks like a popsicle. Most paletas have natural fruits in them. I want this kiwi paleta. Oh, no! It tastes spicy!\nMexicans love spicy food. They sometimes add chili peppers to paletas. Most paletas are sweet, but some are spicy. Some Mexicans make them at home.\nToday, I had a lot of ice cream. Gelato was my favorite. It was more delicious than dondurma and paleta. What kind of ice cream do you want to try? Please leave a comment. Bye, bye.\n\n다음 물음에 알맞은 답을 고르시오.\nWhat do paletas with chili peppers show?",
+   "options": [
+    "They show Mexicans' creativity.",
+    "They show Mexicans' high stress levels.",
+    "They show Mexicans' love for natural food.",
+    "They show Mexicans' preference for spicy flavors.",
+    "They show Mexico's good weather for growing vegetables."
+   ],
+   "answer": "4",
+   "explanation": "멕시코 사람들은 매운 음식을 좋아해서 팔레타에 고추를 넣기도 하므로, 고추가 들어간 팔레타는 매운 맛에 대한 선호를 보여준다."
+  },
+  {
+   "number": 28,
+   "question": "다음 글을 읽고 물음에 답하시오.\nHi, everyone! Welcome to my vlog. I'm at an international ice cream festival. I love ice cream. How about you? Different countries have different types of ice cream. A gelato truck is over there. There is a long line. Let's go there first.\nThere are many flavors of gelato. They all look delicious. Hmm.... This time, I want to try strawberry gelato. Yummy! It is very creamy.\nItaly is the home of gelato. Gelato is a very popular dessert there. It first appeared there in the 16th century, and some gelato shops have a long history.\nHere is a dondurma truck. I choose chocolate dondurma. Surprise! It's sticky and stretchy. Look at the man. He is stretching some dondurma. It is longer than his arm. Now he is handing the dondurma to a boy, but then he is taking it back. Huh? The man is doing the same thing again and again. Can the boy get it?\nDondurma is Turkish ice cream. It melts very slowly. Turkish people eat dondurma in many ways. Some use a knife and fork, and others eat it like a sandwich.\nThis is a truck for Mexican ice cream, paleta. Paleta looks like a popsicle. Most paletas have natural fruits in them. I want this kiwi paleta. Oh, no! It tastes spicy!\nMexicans love spicy food. They sometimes add chili peppers to paletas. Most paletas are sweet, but some are spicy. Some Mexicans make them at home.\nToday, I had a lot of ice cream. Gelato was my favorite. It was more delicious than dondurma and paleta. What kind of ice cream do you want to try? Please leave a comment. Bye, bye.\n\n윗글의 목적으로 알맞은 것은?",
+   "options": [
+    "to introduce the history of different types of ice cream",
+    "to advertise a festival about different types of ice cream",
+    "to teach recipes for three types of ice cream from around the world",
+    "to talk about the features of three types of ice cream from different countries",
+    "to show the popularity of traditional ice cream around the world"
+   ],
+   "answer": "4",
+   "explanation": "화자는 국제 아이스크림 축제에서 세 나라의 아이스크림을 맛보며 각각의 특징을 이야기하고 있다."
+  },
+  {
+   "number": 29,
+   "question": "다음 글을 읽고 물음에 답하시오.\nHi, everyone! Welcome to my vlog. I'm at an international ice cream festival. I love ice cream. How about you? Different countries have different types of ice cream. A gelato truck is over there. There is a long line. Let's go there first.\nThere are many flavors of gelato. They all look delicious. Hmm.... This time, I want to try strawberry gelato. Yummy! It is very creamy.\nItaly is the home of gelato. Gelato is a very popular dessert there. It first appeared there in the 16th century, and some gelato shops have a long history.\nHere is a dondurma truck. I choose chocolate dondurma. Surprise! It's sticky and stretchy. Look at the man. He is stretching some dondurma. It is longer than his arm. Now he is handing the dondurma to a boy, but then he is taking it back. Huh? The man is doing the same thing again and again. Can the boy get it?\nDondurma is Turkish ice cream. It melts very slowly. Turkish people eat dondurma in many ways. Some use a knife and fork, and others eat it like a sandwich.\nThis is a truck for Mexican ice cream, paleta. Paleta looks like a popsicle. Most paletas have natural fruits in them. I want this kiwi paleta. Oh, no! It tastes spicy!\nMexicans love spicy food. They sometimes add chili peppers to paletas. Most paletas are sweet, but some are spicy. Some Mexicans make them at home.\nToday, I had a lot of ice cream. Gelato was my favorite. It was more delicious than dondurma and paleta. What kind of ice cream do you want to try? Please leave a comment. Bye, bye.\n\n윗글을 읽고 국제 아이스크림 축제를 홍보하는 포스터를 다음과 같이 만들 때, ⓐ~ⓔ 중 일치하지 않는 것은?\n\nWelcome to the International Ice Cream Festival!\nⓐ<u>Why don't you taste many ice cream flavors from around the world?</u>\n\nGELATO from Italy\nCreamy and yummy!\nⓑ<u>Enjoy a dessert with a long history!</u>\n\nDONDURMA from Turkey\nSticky and stretchy!\nⓒ<u>Enjoy a fun ice cream performance at the truck!</u>\n\nPALETA from Mexico\nⓓ<u>Sweet and fruity!</u>\nⓔ<u>An unexpected flavor is waiting for you in a cup!</u>",
+   "options": [
+    "ⓐ",
+    "ⓑ",
+    "ⓒ",
+    "ⓓ",
+    "ⓔ"
+   ],
+   "answer": "5",
+   "explanation": "팔레타는 막대 아이스크림처럼 생겼다고 했으므로 ⓔ 컵 안에서 기다린다는 설명은 일치하지 않는다."
+  },
+  {
+   "number": 30,
+   "question": "다음 글을 읽고 물음에 답하시오.\nHi, everyone! Welcome to my vlog. I'm at an international ice cream festival. I love ice cream. How about you? Different countries have different types of ice cream. A gelato truck is over there. There is a long line. Let's go there first.\nThere are many flavors of gelato. They all look delicious. Hmm.... This time, I want to try strawberry gelato. Yummy! It is very creamy.\nItaly is the home of gelato. Gelato is a very popular dessert there. It first appeared there in the 16th century, and some gelato shops have a long history.\nHere is a dondurma truck. I choose chocolate dondurma. Surprise! It's sticky and stretchy. Look at the man. He is stretching some dondurma. It is longer than his arm. Now he is handing the dondurma to a boy, but then he is taking it back. Huh? The man is doing the same thing again and again. Can the boy get it?\nDondurma is Turkish ice cream. It melts very slowly. Turkish people eat dondurma in many ways. Some use a knife and fork, and others eat it like a sandwich.\nThis is a truck for Mexican ice cream, paleta. Paleta looks like a popsicle. Most paletas have natural fruits in them. I want this kiwi paleta. Oh, no! It tastes spicy!\nMexicans love spicy food. They sometimes add chili peppers to paletas. Most paletas are sweet, but some are spicy. Some Mexicans make them at home.\nToday, I had a lot of ice cream. Gelato was my favorite. It was more delicious than dondurma and paleta. What kind of ice cream do you want to try? Please leave a comment. Bye, bye.\n\n윗글을 읽고 다음 질문에 대한 알맞은 대답이 되도록 주어진 <조건>에 맞게 빈칸을 완성하시오.\n\n<조건>\n• 비교급 형용사를 사용할 것\n• 앞의 어구를 제외하고 8단어로 영작할 것\n\nQ. How does the speaker compare gelato with dondurma and paleta?\n→ The speaker thinks ________________________________.",
+   "options": [],
+   "answer": "gelato is more delicious than dondurma and paleta",
+   "explanation": "화자는 젤라토가 돈두르마와 팔레타보다 더 맛있다고 생각한다."
+  },
+  {
+   "number": 31,
+   "question": "다음 글을 읽고 물음에 답하시오.\nHi, everyone! Welcome to my vlog. I'm at an international ice cream festival. I love ice cream. How about you? Different countries have different types of ice cream. A gelato truck is over there. There is a long line. Let's go there first.\nThere are many flavors of gelato. (A)<u>그것들은 모두 맛있어 보여요.</u> Hmm.... This time, I want to try strawberry gelato. Yummy! It is very creamy.\nItaly is the home of gelato. Gelato is a very popular dessert there. It first appeared there in the 16th century, and some gelato shops have a long history.\nHere is a dondurma truck. I choose chocolate dondurma. Surprise! It's sticky and stretchy. Look at the man. He is stretching some dondurma. It is longer than his arm. Now he is handing the dondurma to a boy, but then he is taking it back. Huh? The man is doing the same thing again and again. Can the boy get it?\nDondurma is Turkish ice cream. It melts very slowly. Turkish people eat dondurma in many ways. Some use a knife and fork, and others eat it like a sandwich.\nThis is a truck for Mexican ice cream, paleta. (B)<u>팔레타는 막대 아이스크림처럼 생겼어요.</u> Most paletas have natural fruits in them. I want this kiwi paleta. Oh, no! It tastes spicy!\n\n윗글의 밑줄 친 (A), (B)의 우리말을 주어진 <조건>에 알맞게 각각 영작하시오.\n\n<조건>\n• delicious, all, look, a popsicle을 사용할 것 (필요시 변형할 것)\n• (A)는 4단어, (B)는 5단어로 영작할 것\n\n(A) ________________\n(B) ________________",
+   "options": [],
+   "answer": "They all look delicious. / Paleta looks like a popsicle.",
+   "subParts": [
+    {
+     "label": "(1)",
+     "answer": "They all look delicious."
+    },
+    {
+     "label": "(2)",
+     "answer": "Paleta looks like a popsicle."
+    }
+   ],
+   "explanation": "(A) 복수 주어 They all에 감각동사 look과 형용사 delicious를 쓴다. (B) '~처럼 보이다'는 look like + 명사구로 나타낸다."
+  },
+  {
+   "number": 32,
+   "question": "다음 글을 읽고 물음에 답하시오.\nHi, everyone! Welcome to my vlog. I'm at an international ice cream festival. I love ice cream. How about you? Different countries have different types of ice cream. A gelato truck is over there. There is a long line. Let's go there first.\nThere are many flavors of gelato. (A)<u>그것들은 모두 맛있어 보여요.</u> Hmm.... This time, I want to try strawberry gelato. Yummy! It is very creamy.\nItaly is the home of gelato. Gelato is a very popular dessert there. It first appeared there in the 16th century, and some gelato shops have a long history.\nHere is a dondurma truck. I choose chocolate dondurma. Surprise! It's sticky and stretchy. Look at the man. He is stretching some dondurma. It is longer than his arm. Now he is handing the dondurma to a boy, but then he is taking it back. Huh? The man is doing the same thing again and again. Can the boy get it?\nDondurma is Turkish ice cream. It melts very slowly. Turkish people eat dondurma in many ways. Some use a knife and fork, and others eat it like a sandwich.\nThis is a truck for Mexican ice cream, paleta. (B)<u>팔레타는 막대 아이스크림처럼 생겼어요.</u> Most paletas have natural fruits in them. I want this kiwi paleta. Oh, no! It tastes spicy!\n\n윗글을 읽고 다음 질문에 대한 알맞은 대답이 되도록 주어진 <조건>에 맞게 빈칸을 완성하시오.\n\n<조건>\n• start를 사용할 것 (필요시 변형할 것)\n• in을 두 번 사용할 것\n\nQ. Why do some gelato shops in Italy have a long history?\n→ Because gelato ______________________.",
+   "options": [],
+   "answer": "started in Italy in the 16th century",
+   "explanation": "젤라토가 16세기에 이탈리아에서 시작되었기 때문이다."
+  }
+ ]
+}
