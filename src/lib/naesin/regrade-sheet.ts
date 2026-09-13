@@ -42,12 +42,31 @@ export async function regradeSheet(
     subParts?: { label: string; answer: string; acceptedAnswers?: string[] }[];
   }[];
 
+  // AI·선생님 채점 결과 (subjective_grading_logs): 규칙 채점이 놓치는 서술형 정답을 보존한다.
+  // key = 학생|문항번호|정규화한 답, 값 = 선생님 교정 점수(있으면) 아니면 AI 점수. 최신 로그가 이긴다.
+  const { data: gradingLogs } = await admin
+    .from('subjective_grading_logs')
+    .select('user_id, question_number, student_answer, ai_score, teacher_score')
+    .eq('sheet_id', sheetId)
+    .order('created_at', { ascending: true });
+  const verdictMap = new Map<string, number>();
+  for (const l of gradingLogs ?? []) {
+    if (l.question_number == null) continue;
+    verdictMap.set(`${l.user_id}|${l.question_number}|${normalize(String(l.student_answer))}`, l.teacher_score ?? l.ai_score);
+  }
+
   let changed = 0;
 
   for (const attempt of attempts) {
     const answers = attempt.answers as (string | number)[];
     const totalQuestions = attempt.total_questions;
     let correctCount = 0;
+    // 제출 당시 오답이 아니었던 문항 (retryCorrect는 재도전 정답이므로 정답으로 취급)
+    const oldWrongNums = new Set(
+      ((attempt.wrong_answers ?? []) as { number: number; retryCorrect?: boolean }[])
+        .filter((w) => !w.retryCorrect)
+        .map((w) => w.number),
+    );
     const wrongAnswers: {
       number: number;
       userAnswer: string | number;
@@ -83,6 +102,15 @@ export async function regradeSheet(
           if (!isCorrect) {
             isCorrect = candidates.some((c) => isSubstringMatch(userAnswer, c));
           }
+          // 규칙 채점 실패 → AI/선생님 판정 보존.
+          // 제출 시엔 AI가 정답(100)으로 준 답이 재채점(정답처리·정답 수정 후 자동 실행)에서
+          // 규칙 채점만 거쳐 오답으로 뒤집히던 문제 (2026-09-13 김유민 3단계 Q20, 86%→81%).
+          // 로그가 있으면 로그 판정, 없으면(구 시도) 제출 당시 정답이었던 결과를 유지한다.
+          if (!isCorrect) {
+            const verdict = verdictMap.get(`${attempt.student_id}|${q?.number ?? i + 1}|${studentNorm}`);
+            if (verdict !== undefined) isCorrect = verdict === 100;
+            else if (userAnswer.trim() !== '' && !oldWrongNums.has(i + 1)) isCorrect = true;
+          }
         }
       } else {
         isCorrect = matchMcqAnswer(userAnswer, correctAnswer, questions?.[i]?.options);
@@ -108,11 +136,10 @@ export async function regradeSheet(
     const newScore = Math.round((correctCount / totalQuestions) * 100);
 
     // 점수 또는 오답 목록이 바뀌었는지 확인
-    const oldWrongNums = ((attempt.wrong_answers ?? []) as { number: number }[])
+    const oldWrongKey = [...oldWrongNums].sort((a, b) => a - b).join(',');
+    const newWrongKey = wrongAnswers
       .map((w) => w.number).sort((a, b) => a - b).join(',');
-    const newWrongNums = wrongAnswers
-      .map((w) => w.number).sort((a, b) => a - b).join(',');
-    const hasChange = newScore !== attempt.score || oldWrongNums !== newWrongNums;
+    const hasChange = newScore !== attempt.score || oldWrongKey !== newWrongKey;
 
     // JSONB 항상 동기화 (backfill이 stale JSONB에서 오답 재생성하는 것 방지)
     await admin
