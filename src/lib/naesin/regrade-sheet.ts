@@ -1,5 +1,5 @@
 import { createAdminClient } from '@/lib/supabase/admin';
-import { normalize, normalizeSeparators, matchMcqAnswer, extractAnswer, isSubstringMatch, matchSubParts } from '@/lib/naesin/normalize-answer';
+import { normalize, normalizeSeparators, matchMcqAnswer, extractAnswer, isSubstringMatch, matchSubParts, uncircle } from '@/lib/naesin/normalize-answer';
 
 /**
  * 시트 1개를 재채점하고 오답 테이블을 갱신한다.
@@ -118,6 +118,13 @@ export async function regradeSheet(
         if (!isCorrect && questions?.[i]?.acceptedAnswers?.length) {
           const studentNorm = normalize(userAnswer);
           isCorrect = questions[i].acceptedAnswers!.some((c) => normalize(c) === studentNorm);
+        }
+        // 문항이 나중에 복수정답("1, 5")으로 바뀐 경우: 바뀌기 전에 풀어 정답이었고 학생 답이
+        // 정답 집합의 일부("1")면 유지. (so that Step 2 Q2 — 재채점마다 100→98로 깎이던 사고)
+        if (!isCorrect && correctAnswer.includes(',') && !oldWrongNums.has(i + 1)) {
+          const keySet = new Set(uncircle(correctAnswer).split(',').map((v) => v.trim()).filter(Boolean));
+          const userParts = uncircle(userAnswer).split(',').map((v) => v.trim()).filter(Boolean);
+          isCorrect = userParts.length > 0 && userParts.every((v) => keySet.has(v));
         }
       }
 
