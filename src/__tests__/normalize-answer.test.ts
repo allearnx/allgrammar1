@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { normalize, normalizeSeparators, matchMcqAnswer, resolveCorrectIndex, uncircle } from '@/lib/naesin/normalize-answer';
+import { normalize, normalizeSeparators, matchMcqAnswer, resolveCorrectIndex, uncircle, matchSubParts } from '@/lib/naesin/normalize-answer';
 
 describe('normalize', () => {
   it('trims, lowercases, removes trailing period, collapses spaces', () => {
@@ -160,5 +160,30 @@ describe('normalize — 축약형 동등 처리', () => {
   it('소유격은 확장하지 않음', () => {
     expect(normalize("Tom's bike")).toBe("tom's bike");
     expect(normalize("your sister's best friend")).toBe("your sister's best friend");
+  });
+});
+
+describe('matchSubParts — 파트별 비교 + 전체 문자열 구분자 무시 폴백', () => {
+  const subParts = [{ label: '(1)', answer: 'stay' }, { label: '(2)', answer: 'explain' }];
+  const whole = ['stay, explain', 'stay / explain', 'stay, so that, explain'];
+
+  it('파트별 일치면 정답', () => {
+    expect(matchSubParts('stay / explain', subParts, whole)).toBe(true);
+    expect(matchSubParts('Stay / EXPLAIN.', subParts, whole)).toBe(true);
+  });
+
+  it('2번 칸에 so that까지 쓴 답(구분자 혼용)은 인정답안과 구분자 무시로 매칭', () => {
+    expect(matchSubParts('stay / so that, explain', subParts, whole)).toBe(true);
+    expect(matchSubParts('stay / so that explain', subParts, whole)).toBe(true);
+  });
+
+  it('단어가 틀리면 폴백에도 걸리지 않음', () => {
+    expect(matchSubParts('stay / so that, record', subParts, whole)).toBe(false);
+    expect(matchSubParts('stay', subParts, whole)).toBe(false);
+  });
+
+  it('subPart acceptedAnswers도 파트별로 인정', () => {
+    const sp = [{ label: '(1)', answer: 'so that', acceptedAnswers: ['in order that'] }, { label: '(2)', answer: 'could' }];
+    expect(matchSubParts('in order that / could', sp, [])).toBe(true);
   });
 });

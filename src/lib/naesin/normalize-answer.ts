@@ -165,3 +165,29 @@ export function resolveCorrectIndex(correctAnswer: string, options: string[]): s
   if (idx !== -1) return String(idx + 1);
   return correctAnswer;
 }
+
+/**
+ * subParts 문항 채점: 파트별(" / " 구분) 비교가 우선.
+ * 실패하면 전체 문자열을 정답·인정답안과 비교하되 구분자(쉼표/슬래시)를 무시한다.
+ * 예) 빈칸 4개(so that 포함)에 입력칸 2개인 문항에서 학생이 "stay / so that, explain"을
+ *     쓴 경우, 인정답안 "stay, so that, explain"과 같은 답으로 본다 (김유민 5과 19~21번 실사고).
+ */
+export function matchSubParts(
+  userAnswer: string,
+  subParts: { answer: string; acceptedAnswers?: string[] }[],
+  wholeCandidates: (string | number | undefined | null)[] = [],
+): boolean {
+  const parts = userAnswer.split(' / ');
+  const partsOk = subParts.every((sp, j) => {
+    const studentNorm = normalize(parts[j]?.trim() ?? '');
+    const candidates = [sp.answer, ...(sp.acceptedAnswers ?? [])];
+    return candidates.some((c) => normalize(c) === studentNorm);
+  });
+  if (partsOk) return true;
+
+  const whole = wholeCandidates.map(extractAnswer).filter((c) => c !== '');
+  const studentNorm = normalize(userAnswer);
+  if (whole.some((c) => normalize(c) === studentNorm)) return true;
+  const studentSep = normalizeSeparators(userAnswer);
+  return whole.some((c) => normalizeSeparators(c) === studentSep);
+}

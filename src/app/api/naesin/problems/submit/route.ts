@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { createApiHandler, NotFoundError, dbResult } from '@/lib/api';
 import { problemSubmitSchema } from '@/lib/api/schemas';
-import { normalize, normalizeSeparators, matchMcqAnswer, extractAnswer, isSubstringMatch } from '@/lib/naesin/normalize-answer';
+import { normalize, normalizeSeparators, matchMcqAnswer, extractAnswer, isSubstringMatch, matchSubParts } from '@/lib/naesin/normalize-answer';
 
 export const maxDuration = 60;
 
@@ -39,13 +39,8 @@ export const POST = createApiHandler(
       if (isSubjective) {
         const q = questions?.[i];
         if (q?.subParts) {
-          // subParts grading: each part must match
-          const parts = userAnswer.split(' / ');
-          isCorrect = q.subParts.every((sp, j) => {
-            const studentNorm = normalize(parts[j]?.trim() ?? '');
-            const candidates = [sp.answer, ...(sp.acceptedAnswers ?? [])];
-            return candidates.some((c) => normalize(c) === studentNorm);
-          });
+          // 파트별 비교 → 실패 시 전체 문자열(구분자 무시) 폴백
+          isCorrect = matchSubParts(userAnswer, q.subParts, [correctAnswer, ...(q.acceptedAnswers ?? [])]);
         } else {
           // 규칙 기반 정규화 채점: 먼저 정규화 비교, AI는 보조
           const studentNorm = normalize(userAnswer);

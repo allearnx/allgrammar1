@@ -1,5 +1,5 @@
 import { createAdminClient } from '@/lib/supabase/admin';
-import { normalize, normalizeSeparators, matchMcqAnswer, extractAnswer, isSubstringMatch } from '@/lib/naesin/normalize-answer';
+import { normalize, normalizeSeparators, matchMcqAnswer, extractAnswer, isSubstringMatch, matchSubParts } from '@/lib/naesin/normalize-answer';
 
 /**
  * 시트 1개를 재채점하고 오답 테이블을 갱신한다.
@@ -66,19 +66,8 @@ export async function regradeSheet(
       if (isSubjective) {
         const q = questions?.[i];
         if (q?.subParts) {
-          // subParts grading: each part must match independently
-          const parts = userAnswer.split(' / ');
-          isCorrect = q.subParts.every((sp, j) => {
-            const studentNorm = normalize(parts[j]?.trim() ?? '');
-            const candidates = [sp.answer, ...(sp.acceptedAnswers ?? [])];
-            return candidates.some((c) => normalize(c) === studentNorm);
-          });
-          // Fallback: 기존 제출은 subParts UI 없이 작성 → 전체 문자열 비교
-          if (!isCorrect) {
-            const studentNorm = normalize(userAnswer);
-            const candidates = [correctAnswer, ...(q?.acceptedAnswers ?? [])];
-            isCorrect = candidates.some((c) => normalize(c) === studentNorm);
-          }
+          // 파트별 비교 → 실패 시 전체 문자열(구분자 무시) 폴백
+          isCorrect = matchSubParts(userAnswer, q.subParts, [correctAnswer, ...(q.acceptedAnswers ?? [])]);
         } else {
           const studentNorm = normalize(userAnswer);
           const candidates = [
@@ -200,12 +189,7 @@ export async function regradeSheet(
         let isCorrect: boolean;
         if (isSubjective) {
           if (q?.subParts) {
-            const parts = String(userAnswer).split(' / ');
-            isCorrect = q.subParts.every((sp, j) => {
-              const studentNorm = normalize(parts[j]?.trim() ?? '');
-              const candidates = [sp.answer, ...(sp.acceptedAnswers ?? [])];
-              return candidates.some((c) => normalize(c) === studentNorm);
-            });
+            isCorrect = matchSubParts(String(userAnswer), q.subParts, [correctAnswer, ...(q.acceptedAnswers ?? [])]);
           } else {
             const aiResult = aiResultsMap[idxStr];
             if (aiResult && aiResult.score === 100) {

@@ -4,7 +4,7 @@ import { fetchWithToast } from '@/lib/fetch-with-toast';
 import type { NaesinProblemQuestion } from '@/types/database';
 import { useProblemDraft } from '@/hooks/use-problem-draft';
 import type { AiFeedback, WrongItem, InteractiveDraft } from '@/hooks/use-problem-draft';
-import { matchMcqAnswer, normalize } from '@/lib/naesin/normalize-answer';
+import { matchMcqAnswer, matchSubParts } from '@/lib/naesin/normalize-answer';
 
 export type AnswerStatus = 'correct' | 'retry_correct' | 'wrong';
 
@@ -144,12 +144,12 @@ export function useInteractiveProblem({
   async function gradeSubjective(studentAnswer: string): Promise<AiFeedback | null> {
     // subParts: client-side exact match grading (no API call needed)
     if (question.subParts) {
-      const parts = String(studentAnswer).split(' / ');
-      const allCorrect = question.subParts.every((sp, i) => {
-        const studentNorm = normalize(parts[i]?.trim() ?? '');
-        const candidates = [sp.answer, ...(sp.acceptedAnswers ?? [])];
-        return candidates.some(c => normalize(c) === studentNorm);
-      });
+      // 서버(submit/regrade)와 같은 규칙: 파트별 비교 → 전체 문자열(구분자 무시) 폴백
+      const allCorrect = matchSubParts(
+        String(studentAnswer),
+        question.subParts,
+        [question.answer, ...(question.acceptedAnswers ?? [])],
+      );
       return { score: allCorrect ? 100 : 0 };
     }
 
