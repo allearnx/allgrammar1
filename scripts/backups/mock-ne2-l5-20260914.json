@@ -1,0 +1,835 @@
+{
+  "R1": [
+    {
+      "number": 1,
+      "question": "다음 중 짝지어진 단어의 관계가 나머지 넷과 다른 것은?",
+      "options": [
+        "aim - goal",
+        "mix - blend",
+        "pull - push",
+        "make - create",
+        "amazing - wonderful"
+      ],
+      "answer": "3",
+      "explanation": "'~을 끌어당기다 - ~을 밀다'는 반의어 관계이고 나머지는 유의어 관계이다."
+    },
+    {
+      "number": 2,
+      "question": "다음 중 어느 빈칸에도 들어갈 수 없는 단어는?\n\n• Will you ________ me the remote control?\n• My brother likes to ________ animals in his sketchbook.\n• Please ________ your homework on the school website.\n• We will ________ a meeting to discuss the new school rules.",
+      "options": [
+        "draw",
+        "edit",
+        "hold",
+        "post",
+        "hand"
+      ],
+      "answer": "2",
+      "explanation": "차례대로 hand - draw - post - hold이며, '~을 편집하다'라는 뜻의 동사 edit은 어느 빈칸에도 들어갈 수 없다."
+    },
+    {
+      "number": 3,
+      "question": "다음 중 영영풀이가 알맞지 않은 것은?",
+      "options": [
+        "blank: empty, with nothing written",
+        "mark: a shape or sign that is written or printed",
+        "shake: to stop moving suddenly because of fear, etc.",
+        "pick up: to take hold of something and lift it up",
+        "experiment: to try or test new ideas, methods, etc. to find out what effect they have"
+      ],
+      "answer": "3",
+      "explanation": "shake는 '흔들리다, 떨다, 떨리다; ~을 흔들다'라는 뜻이나, '두려움 등으로 인해 갑자기 움직이는 것을 멈추다'는 freeze(얼어붙다, 동작을 멈추다)와 같은 단어에 대한 설명이므로 알맞지 않은 영영풀이이다. 'to move with short quick movements from side to side or up and down'과 같은 설명으로 고쳐야 한다."
+    },
+    {
+      "number": 4,
+      "question": "다음 중 짝지어진 대화가 어색한 것은?",
+      "options": [
+        "A: Are you good at coding? / B: No, I'm not good at it yet.",
+        "A: Are you good at running? / B: Yes. I have won races before.",
+        "A: I'm going to take the soccer class. / B: I'm sure you will enjoy the class.",
+        "A: I'm good at taking pictures. / B: That's cool. I'm not sure if you can do it well.",
+        "A: How did he become good at giving presentations? / B: He practiced speaking in front of other people."
+      ],
+      "answer": "4",
+      "explanation": "'나는 사진 찍기를 잘 해.'라고 자신의 강점을 말하는 상대에게 '멋지다.'라고 반응한 뒤 '나는 네가 그것을 잘 할 수 있을지 잘 모르겠어.'라는 의구심을 나타내는 흐름은 어색하다. 'I'm sure your photos are fantastic.'과 같은 표현으로 고쳐야 한다."
+    },
+    {
+      "number": 5,
+      "question": "다음 밑줄 친 부분과 쓰임이 같은 것은?\n\nThis is the book <u>that</u> I really enjoyed.",
+      "options": [
+        "Do you see <u>that</u> building over there?",
+        "This bag is so expensive <u>that</u> I can't buy it.",
+        "I know <u>that</u> exercise is good for our health.",
+        "I found the notebook <u>that</u> you were looking for.",
+        "My mother said <u>that</u> she would come home early."
+      ],
+      "answer": "4",
+      "explanation": "'이것은 내가 정말 즐겨 읽었던 책이다.'와 ④ '나는 네가 찾고 있던 공책을 찾았다.'의 that은 모두 목적격 관계대명사로 쓰였다. ① 지시형용사 ② 'so ~ that ...' 구문의 접속사 ③⑤ 명사절 접속사"
+    },
+    {
+      "number": 6,
+      "question": "다음 그림의 ⓐ~ⓓ에 들어갈 말로 어법상 어색한 것을 모두 골라 짝지은 것은?\n(그림 설명: 곰과 판다 친구들이 등장하는 네 장면의 그림이다. ⓐ 판다가 TV 속 가수를 가리키며 말한다. ⓑ 곰이 판다에게 선물을 건넨다. ⓒ 판다가 선물을 받고 \"Oh, I love surprise!\"라고 기뻐한다. ⓓ 곰이 티셔츠를 꺼내 보이자 판다가 \"I can't believe it. You are so sweet!\"이라고 말한다.)\n\nⓐ Benzi is the singer whose I like the most.\nⓑ Oh, I want to have the T-shirt he is wearing!\nⓒ We've got something that we prepared it for you.\nⓓ Ta-da! It's the T-shirt which you wanted.",
+      "options": [
+        "ⓐ, ⓒ",
+        "ⓑ, ⓒ",
+        "ⓒ, ⓓ",
+        "ⓐ, ⓒ, ⓓ",
+        "ⓑ, ⓒ, ⓓ"
+      ],
+      "answer": "1",
+      "explanation": "ⓐ whose → who(m) 또는 that (선행사 the singer가 사람이고 뒤에 목적어가 없는 불완전한 절이 오므로 목적격 관계대명사) ⓒ prepared it for you → prepared for you (목적격 관계대명사 that이 목적어 역할을 하므로 it을 삭제)"
+    },
+    {
+      "number": 7,
+      "question": "다음 대화를 읽고 물음에 답하시오.\nB: Mia, you're interested in writing, right?\nG: Yes. I want to be a writer, so I keep a diary every day.\nB: That's great! ⓐ______________________________\nG: Thank you. How about you, Suho? Do you enjoy writing? (A)\nB: I enjoy it, but I'm not good at it. (B)\nG: Then why don't you join a writing class with me? There's a new one in the after-school program. (C)\nB: Really? (D)\nG: Sure. It is held every Wednesday at 5:00 p.m. in the school library. We can learn to write essays. (E)\nB: That sounds good. Let's sign up together.\nG: Great!\n\n위 대화의 빈칸 ⓐ에 들어갈 말로 알맞은 것은?",
+      "options": [
+        "You must be a good writer.",
+        "I know a lot of good writers.",
+        "Being a good writer isn't easy.",
+        "I'm sure you will be a good writer.",
+        "My dream is to become a good writer."
+      ],
+      "answer": "4",
+      "explanation": "작가가 되고 싶어서 매일 일기를 쓴다는 Mia의 말에 'That's great!(멋지다)'라고 말한 뒤 이어진 수호의 반응으로, 뒤에 Mia가 고맙다고 답하고 있으므로, 좋은 작가가 될 것이라고 확신하며 격려해 주는 흐름이 자연스럽다."
+    },
+    {
+      "number": 8,
+      "question": "다음 대화를 읽고 물음에 답하시오.\nB: Mia, you're interested in writing, right?\nG: Yes. I want to be a writer, so I keep a diary every day.\nB: That's great! ⓐ______________________________\nG: Thank you. How about you, Suho? Do you enjoy writing? (A)\nB: I enjoy it, but I'm not good at it. (B)\nG: Then why don't you join a writing class with me? There's a new one in the after-school program. (C)\nB: Really? (D)\nG: Sure. It is held every Wednesday at 5:00 p.m. in the school library. We can learn to write essays. (E)\nB: That sounds good. Let's sign up together.\nG: Great!\n\n위 대화의 (A)~(E) 중, 주어진 문장이 들어갈 알맞은 곳은?\n\nCan you tell me more about it?",
+      "options": [
+        "(A)",
+        "(B)",
+        "(C)",
+        "(D)",
+        "(E)"
+      ],
+      "answer": "4",
+      "explanation": "주어진 문장은 '그것에 대해 더 말해 줄 수 있어?'라는 뜻으로, it이 가리키는 것에 대한 추가적인 정보를 요청하는 내용이므로, Mia가 방과 후 프로그램에 생긴 새로운 글쓰기 수업에 대해 언급한 다음이자, 주어진 문장의 it이 가리키는 글쓰기 수업을 다시 it으로 가리켜 수업시간, 장소, 배울 수 있는 내용 등을 구체적으로 설명하는 문장 앞인 (D)에 들어가는 것이 적절하다."
+    },
+    {
+      "number": 9,
+      "question": "다음 대화를 읽고 물음에 답하시오.\nB: Mia, you're interested in writing, right?\nG: Yes. I want to be a writer, so I keep a diary every day.\nB: That's great! ⓐ______________________________\nG: Thank you. How about you, Suho? Do you enjoy writing? (A)\nB: I enjoy it, but I'm not good at it. (B)\nG: Then why don't you join a writing class with me? There's a new one in the after-school program. (C)\nB: Really? (D)\nG: Sure. It is held every Wednesday at 5:00 p.m. in the school library. We can learn to write essays. (E)\nB: That sounds good. Let's sign up together.\nG: Great!\n\n위 대화를 읽고 다음 질문에 대한 답을 주어진 <조건>에 맞게 완전한 한 문장으로 쓰시오.\n\nQ. What will Mia and Suho learn in the new writing class?\n\n<조건>\nThey로 시작하여 총 6단어로 쓸 것 ※ 완전한 문장으로 쓰시오.\n\n→ ______________________________",
+      "options": [],
+      "answer": "They will learn to write essays.",
+      "explanation": "Mia와 수호는 새로운 글쓰기 수업에서 무엇을 배울 것인가? → 그들은 에세이를 쓰는 법을 배울 것이다."
+    },
+    {
+      "number": 10,
+      "question": "다음 대화를 읽고 물음에 답하시오.\nG: Jiwon, I saw your dance video on social media.\nB: Really? What did you think of it?\nG: It was amazing. (A)<u>You are really good at dancing</u>!\nB: Thank you. I often make dance videos and post them.\nG: That's great. Look, this video got a lot of comments. People said that they loved your dance moves.\nB: I'm glad to hear that. But I should practice more.\nG: I think you're already good.\nB: Actually, I'm practicing new dance moves these days. They are very difficult.\nG: I see. I'm sure you will learn them quickly!\n\n위 대화의 밑줄 친 (A)와 바꾸어 쓸 수 없는 것은?",
+      "options": [
+        "You dance really well!",
+        "You can be a great dancer!",
+        "You are an excellent dancer!",
+        "You are really skilled at dancing!",
+        "You do have a talent for dancing!"
+      ],
+      "answer": "2",
+      "explanation": "밑줄 친 'You are really good at dancing!'은 '너는 정말로 춤을 잘 춰!'라는 뜻으로, 지원이의 춤 영상을 본 후 'It was amazing.(정말 멋졌어.)'이라고 말한 뒤 상대방의 뛰어난 실력에 대해 칭찬하는 흐름에서 쓰였으므로, 앞으로의 가능성을 나타내는 표현인 ② '너는 훌륭한 댄서가 될 수 있어!'와는 바꾸어 쓸 수 없다."
+    },
+    {
+      "number": 11,
+      "question": "다음 대화를 읽고 물음에 답하시오.\nG: Jiwon, I saw your dance video on social media.\nB: Really? What did you think of it?\nG: It was amazing. (A)<u>You are really good at dancing</u>!\nB: Thank you. I often make dance videos and post them.\nG: That's great. Look, this video got a lot of comments. People said that they loved your dance moves.\nB: I'm glad to hear that. But I should practice more.\nG: I think you're already good.\nB: Actually, I'm practicing new dance moves these days. They are very difficult.\nG: I see. I'm sure you will learn them quickly!\n\n위 대화의 내용과 일치하지 않는 것을 모두 고르면? (정답 2개)",
+      "options": [
+        "Jiwon has posted a few dance videos on social media.",
+        "One of Jiwon's videos received some negative comments.",
+        "Jiwon thinks he should try harder to become a better dancer.",
+        "Jiwon is still practicing some difficult dance moves he's already good at.",
+        "The girl believes Jiwon will learn the new dance moves fast."
+      ],
+      "answer": "2, 4",
+      "explanation": "소녀는 한 영상에 댓글이 많이 달렸으며 사람들이 지원이의 춤 동작을 정말 좋아한다고 말했다고 했으므로, ② '지원이의 영상들 중 하나는 몇몇 부정적인 댓글을 받았다.'는 대화의 내용과 일치하지 않는다. 지원이는 요즘 새로운 춤 동작을 연습하고 있으며 그것들이 아주 어렵다고 말했으므로, ④ '지원이는 그가 이미 잘 하는 몇몇 어려운 춤 동작들을 아직도 연습하고 있다.' 역시 대화의 내용과 일치하지 않는다."
+    },
+    {
+      "number": 12,
+      "question": "다음 글을 읽고 물음에 답하시오.\nArt class was over, but Vashti still sat in her chair. Her paper was blank. Her teacher leaned over and (A)[looking / looked] at it.\n\"Ah! It is a polar bear in a snowstorm,\" she said.\n\"That's funny!\" said Vashti. \"I CAN'T draw!\"\n\nHer teacher smiled. \"Just (B)[make / making] a mark.\"\nVashti picked up a marker and drew a small dot on the paper.\n\"Here it is!\"\n\nHer teacher picked up the paper and looked at it carefully.\n\"Hmmmm.\"\nShe pushed the paper toward Vashti and asked her (C)[sign / to sign] it.\n\nVashti thought for a moment.\n\"Well, maybe I can't draw, but I CAN sign my name.\"\n\n윗글의 괄호 (A), (B), (C)에서 어법상 알맞은 말로 바르게 연결된 것은?",
+      "options": [
+        "(A) looking – (B) make – (C) to sign",
+        "(A) looking – (B) making – (C) sign",
+        "(A) looked – (B) make – (C) sign",
+        "(A) looked – (B) make – (C) to sign",
+        "(A) looked – (B) making – (C) sign"
+      ],
+      "answer": "4",
+      "explanation": "(A) 주어 Her teacher 뒤의 과거동사구 leaned over와 등위접속사 and에 의해 병렬로 동사구가 연결되어야 하므로, 과거동사 looked가 적절하다. (B) 앞에 부사 Just만 있고 뒤에는 목적어인 명사구 a mark만 이어지므로, 주어 없이 동사원형으로 시작하는 명령문을 이루는 동사원형 make가 적절하다. (C) 동사 ask가 '~에게 ...해 달라고 부탁하다'라는 뜻의 5형식 구문 'ask+목적어+목적격보어'로 쓰일 때 목적격보어로 to부정사를 취하므로, 과거동사 asked와 목적어인 her에 이어진 목적격보어 자리에는 to부정사인 to sign이 적절하다."
+    },
+    {
+      "number": 13,
+      "question": "다음 글을 읽고 물음에 답하시오.\nArt class was over, but Vashti still sat in her chair. Her paper was blank. Her teacher leaned over and (A)[looking / looked] at it.\n\"Ah! It is a polar bear in a snowstorm,\" she said.\n\"That's funny!\" said Vashti. \"I CAN'T draw!\"\n\nHer teacher smiled. \"Just (B)[make / making] a mark.\"\nVashti picked up a marker and drew a small dot on the paper.\n\"Here it is!\"\n\nHer teacher picked up the paper and looked at it carefully.\n\"Hmmmm.\"\nShe pushed the paper toward Vashti and asked her (C)[sign / to sign] it.\n\nVashti thought for a moment.\n\"Well, maybe I can't draw, but I CAN sign my name.\"\n\n윗글을 읽고 답할 수 없는 질문은?",
+      "options": [
+        "What was Vashti doing when the class was over?",
+        "Why did Vashti draw a polar bear on her paper?",
+        "What did Vashti use to draw a little dot?",
+        "Why did the teacher give the paper back to Vashti?",
+        "What did Vashti think she could do?"
+      ],
+      "answer": "2",
+      "explanation": "미술 수업이 끝난 후 Vashti의 종이는 비어 있었고 선생님이 흰 종이를 보며 눈보라 속의 북극곰이라고 말하자 Vashti가 재미있다고 반응했을 뿐 실제로 종이에 그것을 그린 것은 아니므로, ② 'Vashti는 왜 자신의 종이에 북극곰을 그렸는가?'는 글을 읽고 답할 수 없는 질문이다."
+    },
+    {
+      "number": 14,
+      "question": "다음 글을 읽고 물음에 답하시오.\nThe next day, Vashti was surprised ⓐ<u>to see</u> something in a frame on the wall of the art classroom. It was her little dot!\n\n\"(A)______________________________\" Vashti said.\nShe got a brush and started ⓑ<u>painting</u>.\nA red dot. A purple dot. A yellow dot. A blue dot. Then she mixed blue and yellow together. She discovered ⓒ<u>that</u> she could make a green dot. Vashti kept ⓓ<u>experimented</u>. She painted lots of little dots in many colors.\n\"If I can make little dots, I can make big dots, too.\"\nAll of the dots ⓔ<u>that</u> she painted looked beautiful together on the paper.\n\n윗글의 밑줄 친 ⓐ~ⓔ 중, 어법상 어색한 것은?",
+      "options": [
+        "ⓐ",
+        "ⓑ",
+        "ⓒ",
+        "ⓓ",
+        "ⓔ"
+      ],
+      "answer": "4",
+      "explanation": "ⓓ experimented → experimenting (동사 kept 뒤에 접속사 없이 또 다른 동사가 이어질 수 없으며, '계속 ~하다'라는 뜻으로 'keep -ing'를 사용하므로, experimented를 -ing 형태인 experimenting으로 고쳐야 한다.)"
+    },
+    {
+      "number": 15,
+      "question": "다음 글을 읽고 물음에 답하시오.\nThe next day, Vashti was surprised ⓐ<u>to see</u> something in a frame on the wall of the art classroom. It was her little dot!\n\n\"(A)______________________________\" Vashti said.\nShe got a brush and started ⓑ<u>painting</u>.\nA red dot. A purple dot. A yellow dot. A blue dot. Then she mixed blue and yellow together. She discovered ⓒ<u>that</u> she could make a green dot. Vashti kept ⓓ<u>experimented</u>. She painted lots of little dots in many colors.\n\"If I can make little dots, I can make big dots, too.\"\nAll of the dots ⓔ<u>that</u> she painted looked beautiful together on the paper.\n\n윗글의 빈칸 (A)에 들어갈 말로 알맞은 것은?",
+      "options": [
+        "It's not even a painting!",
+        "This dot needs coloring.",
+        "I'm not good at painting.",
+        "I can make a better dot than that!",
+        "I'm not going to draw any more dots."
+      ],
+      "answer": "4",
+      "explanation": "Vashti가 붓을 들고 빨간색, 보라색, 파란색 점을 그린 뒤, 파란색과 노란색을 섞어 녹색 점을 만들고, 계속 실험하며 여러 색깔의 작은 점들을 그린 뒤, 작은 점을 그릴 수 있다면 큰 점도 그릴 수 있겠다고 생각하는 내용이 이어지므로, 미술실 벽에 걸린 자신이 그린 액자 속 작은 점을 본 후 더 나은 점을 그릴 수 있다고 스스로에게 말하는 흐름이 자연스럽다. 따라서 빈칸에는 ④ '나는 저것보다 더 나은 점을 그릴 수 있어!'가 적절하다."
+    },
+    {
+      "number": 16,
+      "question": "다음 글을 읽고 물음에 답하시오.\nThe next day, Vashti was surprised ⓐ<u>to see</u> something in a frame on the wall of the art classroom. It was her little dot!\n\n\"(A)______________________________\" Vashti said.\nShe got a brush and started ⓑ<u>painting</u>.\nA red dot. A purple dot. A yellow dot. A blue dot. Then she mixed blue and yellow together. She discovered ⓒ<u>that</u> she could make a green dot. Vashti kept ⓓ<u>experimented</u>. She painted lots of little dots in many colors.\n\"If I can make little dots, I can make big dots, too.\"\nAll of the dots ⓔ<u>that</u> she painted looked beautiful together on the paper.\n\n윗글의 제목으로 알맞은 것은?",
+      "options": [
+        "The Best Painting I've Ever Seen",
+        "Vashti's Dream of Becoming a Painter",
+        "From a Little Dot to a Beautiful Painting",
+        "Difficulties in Making Different Colors for Painting",
+        "The Importance of Using Various Colors for Painting"
+      ],
+      "answer": "3",
+      "explanation": "자신이 그린 작은 점이 미술실 벽 액자 속에 걸린 것을 보고 붓을 들고 그리기 시작했으며 다양한 색깔의 크고 작은 점들을 그려 아름다운 점들이 한데 어우러진 그림을 그리는 내용이므로, 글의 제목으로 ③ '작은 점에서부터 아름다운 그림으로'가 적절하다."
+    },
+    {
+      "number": 17,
+      "question": "다음 글을 읽고 물음에 답하시오.\nAt the school art show ⓐ<u>a few</u> weeks later, everyone loved Vashti's paintings.\n\nA little boy looked up at her.\n\"You're a really great artist. I want to paint like you,\" he said.\n\"I bet you can,\" ⓑ<u>said Vashti</u>.\n\"Me? No, not me. I CAN'T draw!\"\n\nVashti smiled. She handed the boy a blank sheet of paper and told him ⓒ<u>drew</u> a line.\nThe pencil ⓓ<u>what</u> the boy held shook as he drew. Vashti looked at the boy's line. And then she said ...\n\"Sign ⓔ<u>it</u>.\"\n\n윗글의 밑줄 친 ⓐ~ⓔ 중, 어법상 어색한 것을 모두 고르면? (정답 2개)",
+      "options": [
+        "ⓐ",
+        "ⓑ",
+        "ⓒ",
+        "ⓓ",
+        "ⓔ"
+      ],
+      "answer": "3, 4",
+      "explanation": "ⓒ drew → to draw (앞의 동사구 told him에 접속사 없이 또 다른 동사구가 이어질 수 없으므로, told와 목적어 him에 이어져 'tell+목적어+목적격보어'의 5형식 구문을 이루는 목적격보어 자리이다. 5형식 동사로 쓰일 때 tell은 목적격보어로 to부정사를 취하므로 to draw로 고쳐야 한다.) ⓓ what → which[that] (주어 The pencil과 이에 대한 동사 shook 사이에서 타동사 held의 목적어가 없는 불완전한 절 'the boy held'를 이끌어 선행사인 명사구 The pencil을 수식하는 관계사절을 이루어야 하므로, what을 사물 선행사와 쓰이는 목적격 관계대명사 which 또는 that으로 고쳐야 한다.)"
+    },
+    {
+      "number": 18,
+      "question": "다음 글을 읽고 물음에 답하시오.\nAt the school art show ⓐ<u>a few</u> weeks later, everyone loved Vashti's paintings.\n\nA little boy looked up at her.\n\"You're a really great artist. I want to paint like you,\" he said.\n\"I bet you can,\" ⓑ<u>said Vashti</u>.\n\"Me? No, not me. I CAN'T draw!\"\n\nVashti smiled. She handed the boy a blank sheet of paper and told him ⓒ<u>drew</u> a line.\nThe pencil ⓓ<u>what</u> the boy held shook as he drew. Vashti looked at the boy's line. And then she said ...\n\"Sign ⓔ<u>it</u>.\"\n\n윗글의 내용과 일치하지 않는 것은?",
+      "options": [
+        "Vashti's painting was popular at the school art show.",
+        "The little boy was amazed by Vashti's painting.",
+        "The little boy was not confident about his drawing skill.",
+        "Vashti gave the boy a piece of paper with her sign on it.",
+        "The little boy drew a line on the empty paper."
+      ],
+      "answer": "4",
+      "explanation": "Vashti는 소년에게 자신의 서명을 써 준 것이 아니라 빈 종이 한 장을 건네주고 선을 그려보라고 한 뒤 거기에 서명하라고 한 것이므로 ④ 'Vashti는 소년에게 자신의 서명이 있는 종이 한 장을 주었다.'는 글의 내용과 일치하지 않는다."
+    },
+    {
+      "number": 19,
+      "question": "다음 글을 읽고 물음에 답하시오.\nAt the school art show ⓐ<u>a few</u> weeks later, everyone loved Vashti's paintings.\n\nA little boy looked up at her.\n\"You're a really great artist. I want to paint like you,\" he said.\n\"I bet you can,\" ⓑ<u>said Vashti</u>.\n\"Me? No, not me. I CAN'T draw!\"\n\nVashti smiled. She handed the boy a blank sheet of paper and told him ⓒ<u>drew</u> a line.\nThe pencil ⓓ<u>what</u> the boy held shook as he drew. Vashti looked at the boy's line. And then she said ...\n\"Sign ⓔ<u>it</u>.\"\n\n윗글을 읽고 다음 질문에 대한 알맞은 대답이 되도록 주어진 <조건>에 맞게 빈칸을 완성하시오.\n\nQ. What did Vashti tell the boy that he could do?\n\n<조건>\nhe, her, could를 사용하여 5단어로 쓸 것\n\n→ She told him that ______________________.",
+      "options": [],
+      "answer": "he could paint like her",
+      "explanation": "Vashti는 소년에게 그가 무엇을 할 수 있다고 말했는가? → 그녀는 그에게 그가 자신처럼 그릴 수 있다고 말했다."
+    },
+    {
+      "number": 20,
+      "question": "다음 글을 읽고 물음에 답하시오.\nArt class was over, but Vashti still sat in her chair. ⓐ<u>Her</u> paper was blank. Her teacher leaned over and looked at it.\n\"Ah! It is a polar bear in a snowstorm,\" ⓑ<u>she</u> said.\n\"ⓒ<u>That</u>'s funny!\" said Vashti. \"I CAN'T draw!\"\n\nHer teacher smiled. \"Just make a mark.\"\nVashti picked up a marker and drew a small dot on the paper.\n\"Here ⓓ<u>it</u> is!\"\n\nHer teacher picked up the paper and looked at it carefully.\n\"Hmmmm.\"\nShe pushed the paper toward Vashti and asked her to sign ⓔ<u>it</u>.\n\nVashti thought for a moment.\n\"Well, maybe I can't draw, but I CAN sign my name.\"\n\n윗글의 밑줄 친 ⓐ~ⓔ가 가리키는 것으로 알맞지 않은 것을 모두 고르면? (정답 2개)",
+      "options": [
+        "ⓐ: Vashti",
+        "ⓑ: Vashti의 선생님",
+        "ⓒ: 눈보라 속의 북극곰",
+        "ⓓ: 마커",
+        "ⓔ: 작은 점을 그린 종이"
+      ],
+      "answer": "3, 4",
+      "explanation": "ⓒ That은 앞서 Vashti의 선생님이 한 말(It is a polar bear in a snowstorm)을 가리킨다. ⓓ it은 Vashti가 그린 작은 점, 또는 작은 점을 그린 종이를 가리킨다."
+    },
+    {
+      "number": 21,
+      "question": "다음 글을 읽고 물음에 답하시오.\nArt class was over, but Vashti still sat in her chair. ⓐ<u>Her</u> paper was blank. Her teacher leaned over and looked at it.\n\"Ah! It is a polar bear in a snowstorm,\" ⓑ<u>she</u> said.\n\"ⓒ<u>That</u>'s funny!\" said Vashti. \"I CAN'T draw!\"\n\nHer teacher smiled. \"Just make a mark.\"\nVashti picked up a marker and drew a small dot on the paper.\n\"Here ⓓ<u>it</u> is!\"\n\nHer teacher picked up the paper and looked at it carefully.\n\"Hmmmm.\"\nShe pushed the paper toward Vashti and asked her to sign ⓔ<u>it</u>.\n\nVashti thought for a moment.\n\"Well, maybe I can't draw, but I CAN sign my name.\"\n\n윗글의 주제로 알맞은 것은?",
+      "options": [
+        "Vashti's great artistic talent",
+        "an interesting picture that Vashti drew",
+        "Vashti's efforts to improve her drawing skills",
+        "the reason for signing a name on a drawing",
+        "a teacher's encouragement to give a student confidence"
+      ],
+      "answer": "5",
+      "explanation": "미술 수업에서 아무것도 그리지 못하고 자신이 그림을 못 그린다고 생각하는 Vashti에게 선생님이 아무 표시나 해 보라고 말한 뒤, 그녀가 작은 점을 그리자 종이에 예술가들이 하는 것처럼 서명을 하라고 하며 작은 점도 그림이 될 수 있다는 것을 알려주고 있으므로, 글의 주제로 ⑤ '학생에게 자신감을 주는 선생님의 격려'가 적절하다."
+    },
+    {
+      "number": 22,
+      "question": "다음 글을 읽고 물음에 답하시오.\nThe next day, Vashti was surprised to see something in a frame on the wall of the art classroom. It was her little dot!\n\n\"I can make a better dot than that!\" Vashti said.\nShe got a brush and started painting.\nA red dot. A purple dot. A yellow dot. A blue dot. Then she mixed blue and yellow together. She discovered that she could make a green dot. Vashti kept experimenting. She painted lots of little dots in many colors.\n\"If I can make little dots, I can make big dots, too.\"\n(A)<u>그녀가 그린 모든 점들은 종이 위에서 함께 어우러져 아름답게 보였다</u>.\n\n윗글의 밑줄 친 (A)의 우리말을 다음과 같이 쓸 때, 주어진 <조건>에 알맞게 빈칸을 완성하시오.\n\n<조건>\n• 관계대명사 that을 사용할 것\n• look, paint, all of the dots를 사용하되 필요시 변형할 것\n• 뒤에 주어진 어구를 제외하고 9단어로 영작할 것\n\n→ ______________________________ together on the paper",
+      "options": [],
+      "answer": "All of the dots that she painted looked beautiful",
+      "explanation": "주어 자리에 명사구 All of the dots를 쓰고, <조건>에 따라 관계대명사 that을 사용하여 주어를 수식하는 관계사절을 쓴다. 선행사 All of the dots가 '그린' 대상으로, 관계사절에 쓰일 동사 painted의 의미상 목적어이므로, 목적격 관계대명사 that 뒤에 목적어가 없는 불완전한 절 she painted를 쓴다. '~하게 보이다'라는 뜻의 2형식 구문인 'look+보어(형용사)'를 사용하여, 과거시제 looked 뒤에 보어로 형용사 beautiful을 쓴다."
+    },
+    {
+      "number": 23,
+      "question": "다음 글을 읽고 물음에 답하시오.\nThe next day, Vashti was surprised to see something in a frame on the wall of the art classroom. It was her little dot!\n\n\"I can make a better dot than that!\" Vashti said.\nShe got a brush and started painting.\nA red dot. A purple dot. A yellow dot. A blue dot. Then she mixed blue and yellow together. She discovered that she could make a green dot. Vashti kept experimenting. She painted lots of little dots in many colors.\n\"If I can make little dots, I can make big dots, too.\"\n(A)<u>그녀가 그린 모든 점들은 종이 위에서 함께 어우러져 아름답게 보였다</u>.\n\n윗글의 내용과 일치하는 것은?",
+      "options": [
+        "Vashti put her drawing in the frame.",
+        "Vashti found a little dot that someone drew on the wall.",
+        "Vashti thought she could draw better dots.",
+        "Vashti made a green dot by mixing four colors.",
+        "Vashti kept trying to make small dots of the same color."
+      ],
+      "answer": "3",
+      "explanation": "① Vashti는 자신의 그림을 액자에 넣었다. (→Vashti는 자신이 그린 작은 점이 액자에 담겨 미술실 벽에 걸린 것을 보고 놀랐다고 했으므로 자신이 넣은 것이 아님을 알 수 있다.) ② Vashti는 누군가가 벽에 그린 작은 점을 발견했다. (→Vashti는 미술실 벽에 걸린 액자를 보았고 그것은 자신이 그린 작은 점이었다.) ④ Vashti는 네 가지 색을 섞어서 녹색 점을 만들었다. (→Vashti는 파란색과 노란색 두 가지를 섞은 뒤 녹색 점을 만들 수 있다는 것을 발견했다.) ⑤ Vashti는 계속해서 같은 색의 작은 점들을 만들려고 애썼다. (→Vashti는 여러 색깔의 작은 점들을 많이 그렸으며, 작은 점을 그릴 수 있다면 큰 점도 그릴 수 있겠다고 생각했다.)"
+    },
+    {
+      "number": 24,
+      "question": "다음 글을 읽고 물음에 답하시오.\nAt the school art show a few weeks later, everyone loved Vashti's paintings.\n\n(A) The pencil which the boy held shook as he drew. Vashti looked at the boy's line. And then she said ... \"Sign it.\"\n(B) \"Me? No, not me. I CAN'T draw!\" Vashti smiled. She handed the boy a blank sheet of paper and told him to draw a line.\n(C) A little boy looked up at her. \"You're a really great artist. I want to paint like you,\" he said. \"I bet you can,\" said Vashti.\n\n위 주어진 글에 이어질 순서로 알맞은 것은?",
+      "options": [
+        "(A)-(C)-(B)",
+        "(B)-(A)-(C)",
+        "(B)-(C)-(A)",
+        "(C)-(A)-(B)",
+        "(C)-(B)-(A)"
+      ],
+      "answer": "5",
+      "explanation": "몇 주 후 학교 미술 전시회에서 모두가 Vashti의 그림을 좋아했다는 내용의 주어진 글 뒤에, 한 작은 소년이 그녀가 정말 훌륭한 예술가이며 그녀처럼 그림을 그리고 싶다고 말하자 Vashti가 그도 분명히 할 수 있다고 답해주는 내용의 (C), Vashti의 말에 소년이 자신은 그림을 못 그린다고 말하며 자신 없는 반응을 보이고, 이에 Vashti가 빈 종이 한 장을 건네주며 선을 그려보라고 하는 내용의 (B), 소년이 선을 그리면서 연필을 쥔 손이 떨렸고, 그 선을 바라본 Vashti가 서명하라고 말하는 내용의 (A)로 이어지는 것이 자연스럽다."
+    },
+    {
+      "number": 25,
+      "question": "다음 글을 읽고 물음에 답하시오.\nAt the school art show a few weeks later, everyone loved Vashti's paintings.\n\nA little boy looked up at her.\n\"You're a really great artist. I want to paint like you,\" he said.\n\"I bet you can,\" said Vashti.\n\"Me? No, not me. I CAN'T draw!\"\n\nVashti smiled. She handed the boy a blank sheet of paper and told him to draw a line.\nThe pencil which the boy held shook as he drew. Vashti looked at the boy's line. And then she said ...\n\"Sign it.\"\n\n윗글의 시사점을 아래와 같이 쓸 때, 빈칸에 들어갈 알맞은 말을 지문에서 찾아 한 단어로 각각 쓰시오.\n\nAnyone can (1)________, and even a(n) (2)________ on paper can be great (3)________.",
+      "options": [],
+      "answer": "paint, line, art",
+      "subParts": [
+        {
+          "label": "(1)",
+          "answer": "paint",
+          "acceptedAnswers": [
+            "draw"
+          ]
+        },
+        {
+          "label": "(2)",
+          "answer": "line"
+        },
+        {
+          "label": "(3)",
+          "answer": "art"
+        }
+      ],
+      "explanation": "누구나 그릴 수 있으며, 심지어 종이 위에 있는 하나의 선도 훌륭한 예술이 될 수 있다."
+    },
+    {
+      "number": 26,
+      "question": "다음 글을 읽고 아래 질문에 대한 알맞은 대답이 되도록 주어진 <조건>에 맞게 빈칸을 완성하시오.\nThe next day, Vashti was surprised to see something in a frame on the wall of the art classroom. It was her little dot!\n\n\"I can make a better dot than that!\" Vashti said.\nShe got a brush and started painting.\nA red dot. A purple dot. A yellow dot. A blue dot. Then she mixed blue and yellow together. She discovered that she could make a green dot. Vashti kept experimenting. She painted lots of little dots in many colors.\n\"If I can make little dots, I can make big dots, too.\"\nAll of the dots that she painted looked beautiful together on the paper.\n\nQ. What did Vashti do after realizing that she could make a green dot by mixing blue and yellow?\n\n<조건>\n• 지문에서 찾아 그대로 쓸 것\n• (1)은 2단어, (2)는 8단어로 쓸 것\n\n→ She (1)________________ and (2)________________.",
+      "options": [],
+      "answer": "kept experimenting / painted lots of little dots in many colors",
+      "subParts": [
+        {
+          "label": "(1)",
+          "answer": "kept experimenting"
+        },
+        {
+          "label": "(2)",
+          "answer": "painted lots of little dots in many colors"
+        }
+      ],
+      "explanation": "Vashti는 자신이 파란색과 노란색을 혼합하여 초록색 점을 만들 수 있다는 것을 깨달은 후 무엇을 했는가? → 그녀는 (1)계속 실험했고 (2)여러 가지 색깔의 많은 작은 점들을 그렸다."
+    },
+    {
+      "number": 27,
+      "question": "다음 대화를 읽고 주호가 유나에게 조언한 내용을 다음과 같이 쓸 때, 빈칸을 완성하시오.\n\nM: Yuna, you don't look well. Is something wrong?\nW: Hey, Juno. My throat feels sore.\nM: Oh, I'm sorry to hear that. Does it hurt a lot?\nW: Yeah. It hurts when I swallow.\nM: You should drink warm water often. It may help your throat feel better.\nW: I'll try that. Thanks!\n\n→ Juho advises Yuna ____ ____ ____ ____ ____.",
+      "options": [],
+      "answer": "to drink warm water often",
+      "explanation": "주호는 유나에게 따뜻한 물을 자주 마시라고 조언한다. advise는 목적격보어로 to부정사를 취한다."
+    },
+    {
+      "number": 28,
+      "question": "다음 그림의 내용과 일치하도록 <조건>에 맞게 빈칸을 완성하시오.\n(그림 설명: 생일 선물 상자 안에 손뜨개 벙어리장갑 한 켤레가 들어 있고, 옆에 놓인 카드에는 \"Happy birthday! These are mittens that I made for you. with love, Mom\"이라고 적혀 있다.)\n\n<조건>\n• 적절한 목적격 관계대명사를 사용할 것\n• 앞에 주어진 어구를 제외하고 빈칸에 7단어로 쓸 것\n\n→ On my birthday, I received a pair of ______________________________.",
+      "options": [],
+      "answer": "mittens which my mom made for me",
+      "acceptedAnswers": [
+        "mittens that my mom made for me",
+        "mittens which my mother made for me",
+        "mittens that my mother made for me"
+      ],
+      "explanation": "내 생일에, 나는 나의 엄마가 나를 위해 만드신 벙어리장갑 한 켤레를 받았다. 사물 선행사 mittens 뒤에 목적격 관계대명사 which[that]를 쓰고 목적어가 없는 불완전한 절 my mom[mother] made for me를 쓴다."
+    },
+    {
+      "number": 29,
+      "question": "다음 글을 아래와 같이 요약할 때, 빈칸 (1)~(3)에 들어갈 알맞은 말을 지문에서 찾아 두 단어로 각각 쓰시오.\nArt class was over, but Vashti still sat in her chair. Her paper was blank. Her teacher leaned over and looked at it.\n\"Ah! It is a polar bear in a snowstorm,\" she said.\n\"That's funny!\" said Vashti. \"I CAN'T draw!\"\n\nHer teacher smiled. \"Just make a mark.\"\nVashti picked up a marker and drew a small dot on the paper.\n\"Here it is!\"\n\nHer teacher picked up the paper and looked at it carefully.\n\"Hmmmm.\"\nShe pushed the paper toward Vashti and asked her to sign it.\n\nVashti thought for a moment.\n\"Well, maybe I can't draw, but I CAN sign my name.\"\n\nVashti could not draw anything during the (1)________. Vashti felt she wasn't good at drawing, but her teacher encouraged her to make any mark. When Vashti drew a(n) (2)________, the teacher looked at it and told her to (3)________.",
+      "options": [],
+      "answer": "art class, small dot, sign it",
+      "subParts": [
+        {
+          "label": "(1)",
+          "answer": "art class"
+        },
+        {
+          "label": "(2)",
+          "answer": "small dot"
+        },
+        {
+          "label": "(3)",
+          "answer": "sign it"
+        }
+      ],
+      "explanation": "[요약문] Vashti는 (1)미술 수업 동안 아무것도 그릴 수 없었다. Vashti는 자신이 그림을 잘 그리지 못한다고 생각했지만 그녀의 선생님은 그녀에게 아무 표시나 해 보라고 격려했다. Vashti가 (2)작은 점을 그렸을 때, 선생님은 그것을 본 뒤 그녀에게 (3)그것에 서명을 하라고 말했다."
+    },
+    {
+      "number": 30,
+      "question": "다음 글을 아래와 같이 요약할 때, 빈칸 (A), (B)에 들어갈 말로 알맞게 연결된 것은?\nThe next day, Vashti was surprised to see something in a frame on the wall of the art classroom. It was her little dot!\n\n\"I can make a better dot than that!\" Vashti said.\nShe got a brush and started painting.\nA red dot. A purple dot. A yellow dot. A blue dot. Then she mixed blue and yellow together. She discovered that she could make a green dot. Vashti kept experimenting. She painted lots of little dots in many colors.\n\"If I can make little dots, I can make big dots, too.\"\nAll of the dots that she painted looked beautiful together on the paper.\n\nWhen Vashti found her little dot in a frame on the classroom wall, she felt she could do better. She tried making dots of (A)________ colors and sizes, and all the dots together made a (B)________ painting.",
+      "options": [
+        "(A) bright – (B) vivid",
+        "(A) various – (B) terrible",
+        "(A) similar – (B) beautiful",
+        "(A) different – (B) wonderful",
+        "(A) the same – (B) boring"
+      ],
+      "answer": "4",
+      "explanation": "Vashti는 자신의 작은 점이 미술실 벽에 걸린 액자에 있는 것을 보고 더 나은 점을 그리기 시작했으며 여러 색깔의 점을 그렸다고 했으므로 (A)에는 various(다양한)나 different(다양한)가 적절하다. 작은 점들에 이어 더 큰 점도 그려보면서 이 모든 점들이 종이 위에서 함께 어우러져 아름답게 보였다고 했으므로 (B)에는 beautiful(아름다운)이나 wonderful(멋진)이 적절하다."
+    }
+  ],
+  "R2": [
+    {
+      "number": 1,
+      "question": "다음 중 짝지어진 단어의 관계가 어색한 것은?",
+      "options": [
+        "good : poor = blank : full",
+        "act : perform = fast : quickly",
+        "lean : bend = pick up : put down",
+        "sure : unsure = strength : weakness",
+        "thankful : grateful = sign up : register"
+      ],
+      "answer": "3",
+      "explanation": "'기울이다, 숙이다 : 숙이다, 굽히다' 유의어 관계 ≠ '~을 집어 들다 : ~을 내려놓다' 반의어 관계"
+    },
+    {
+      "number": 2,
+      "question": "다음 중 <보기>의 단어가 들어갈 수 없는 것은?\n\n<보기> bet, sign, mix, push, paint",
+      "options": [
+        "Please ________ the herbs into the sauce.",
+        "The artist likes to ________ trees and flowers.",
+        "The man tried to ________ the boat toward the shore.",
+        "Could you please ________ your name at the bottom of the paper?",
+        "We were surprised to ________ that a door was hidden behind the bookshelf."
+      ],
+      "answer": "5",
+      "explanation": "'우리는 책장 뒤에 문이 숨겨져 있는 것을 발견하고 놀랐다.'라는 흐름으로 빈칸에는 '~을 발견하다'를 뜻하는 discover와 같은 단어가 들어가는 것이 자연스러우며, <보기>의 단어 중 '~을 장담하다'라는 뜻의 동사 bet은 빈칸 어디에도 들어갈 수 없다. ① mix ② paint ③ push ④ sign"
+    },
+    {
+      "number": 3,
+      "question": "다음 밑줄 친 단어가 같은 의미로 쓰인 것은?",
+      "options": [
+        "A bird flew <u>over</u> the tall building. / The meeting is <u>over</u>, so everyone can go home.",
+        "Could you <u>hand</u> me that jacket, please? / I had to <u>hand</u> the keys to him before I left.",
+        "Please <u>hold</u> this box while I open the door. / Our school will <u>hold</u> a science fair next month.",
+        "People from every <u>class</u> attended the festival. / We have English <u>class</u> every Tuesday afternoon.",
+        "I'll <u>show</u> you how to solve this math problem. / We visited an art <u>show</u> at the city museum."
+      ],
+      "answer": "2",
+      "explanation": "'저 재킷 좀 건네주시겠어요?'와 '나는 떠나기 전에 그에게 그 열쇠를 건네주어야 했다.'의 hand는 둘 다 '~을 건네주다'라는 뜻의 동사로 쓰였다. ① 전치사 ~위로 / 부사 끝난 ③ ~을 들다 / ~을 개최하다 ④ 계층 / 수업 ⑤ ~을 보여주다 / 전시회"
+    },
+    {
+      "number": 4,
+      "question": "다음 중 어법상 어색한 문장의 개수는?\n\nⓐ James asked us to come early.\nⓑ Mary has a friend everyone likes.\nⓒ Mom didn't allow me go camping.\nⓓ My parents expect me to win the game.\nⓔ The robot that I built can dance to music.\nⓕ They cleaned the room that they were used.\nⓖ The guide told visitors to not touch the paintings.",
+      "options": [
+        "1개",
+        "3개",
+        "4개",
+        "5개",
+        "6개"
+      ],
+      "answer": "2",
+      "explanation": "ⓒ go → to go ('allow+목적어+목적격보어(to부정사)') ⓕ were used → used (관계사절 안에서 주어인 they가 사용한 주체이므로 능동태) ⓖ to not touch → not to touch (to부정사의 부정은 to 앞에 not)"
+    },
+    {
+      "number": 5,
+      "question": "다음 중 어법상 어색한 부분을 바르게 고쳐 쓰지 못한 것을 모두 고르면? (정답 2개)",
+      "options": [
+        "David wants me <u>play</u> video games with him. → to play",
+        "My friends liked the movie that I <u>recommended it</u>. → recommended",
+        "We tried the restaurant <u>who</u> you told us about. → which",
+        "The teacher advised us <u>joining</u> various activities. → join",
+        "The box which we found <u>were</u> full of old coins. → to be"
+      ],
+      "answer": "4, 5",
+      "explanation": "④ joining → to join (동사 advise는 '~에게 ...하라고 조언하다'라는 뜻으로 'advise+목적어+목적격보어'의 5형식 구문으로 쓰일 수 있으며 목적격보어로 to부정사를 취하므로 to join으로 고쳐야 한다.) ⑤ were → was (주어 The box를 목적격 관계대명사 which가 이끄는 관계사절 which we found가 수식하는 구조이며, 핵심 주어 The box가 단수명사이므로 was로 고쳐야 한다.)"
+    },
+    {
+      "number": 6,
+      "question": "다음 대화를 읽고 물음에 답하시오.\nG: Jiwon, I saw your dance video on social media.\nB: Really? What did you think of it?\nG: It was amazing. You are really good at dancing!\nB: Thank you. I often make dance videos and post them.\nG: That's great. Look, this video got a lot of comments. People said that they loved your dance moves.\nB: I'm glad to hear that. But I should practice more.\nG: I think you're already good.\nB: Actually, I'm practicing new dance moves these days. They are very difficult.\nG: I see. ______________________________\n\n위 대화의 빈칸에 들어갈 말로 알맞은 것을 모두 골라 짝지은 것은?\n\nⓐ You should learn them quickly.\nⓑ You'd better learn them quickly.\nⓒ I'm sure you will learn them quickly!\nⓓ You will want to learn them quickly.\nⓔ I'm certain you can learn them quickly.\nⓕ I have no doubt that you will learn them quickly.",
+      "options": [
+        "ⓐ, ⓔ",
+        "ⓑ, ⓓ",
+        "ⓐ, ⓒ, ⓕ",
+        "ⓒ, ⓔ, ⓕ",
+        "ⓒ, ⓓ, ⓔ, ⓕ"
+      ],
+      "answer": "4",
+      "explanation": "지원이의 춤 영상을 보고 지원이의 춤 실력이 정말 멋지다고 칭찬했으며, 지원이가 좀 더 연습해야 한다고 말하자 이미 잘 한다고 생각한다고 답했으므로, 요즘 연습하는 새로운 춤 동작이 아주 어렵다는 지원이의 말에 그것들을 금방 배울 수 있을 것이라고 답하는 흐름이 자연스럽다. 따라서 빈칸에는 '나는 네가 그것들을 빨리 배울 거라고 확신해.'를 뜻하는 ⓒ와 ⓔ, '나는 네가 그것들을 빨리 배울 것이라는 데 아무런 의심이 없어.'를 뜻하는 ⓕ가 적절하다."
+    },
+    {
+      "number": 7,
+      "question": "다음 대화를 읽고 물음에 답하시오.\nG: Jiwon, I saw your dance video on social media.\nB: Really? What did you think of it?\nG: It was amazing. You are really good at dancing!\nB: Thank you. I often make dance videos and post them.\nG: That's great. Look, this video got a lot of comments. People said that they loved your dance moves.\nB: I'm glad to hear that. But I should practice more.\nG: I think you're already good.\nB: Actually, I'm practicing new dance moves these days. They are very difficult.\nG: I see. ______________________________\n\n위 대화를 아래와 같이 요약할 때, 밑줄 친 (A)~(E) 중 알맞지 않은 것은?\n\nJiwon often (A)<u>uploads</u> dance videos on social media. The girl watched one and were (B)<u>amazed</u> by his dancing skills. One of Jiwon's videos got many (C)<u>positive comments</u>. Jiwon says he needs to (D)<u>practice more</u>, and he is now practicing new dance moves that are (E)<u>easy</u> for him.",
+      "options": [
+        "(A)",
+        "(B)",
+        "(C)",
+        "(D)",
+        "(E)"
+      ],
+      "answer": "5",
+      "explanation": "지원이는 자신이 더 연습해야 하고, 사실 요즘 새로운 춤 동작을 연습하고 있으며 그것들이 아주 어렵다고 했으므로, 그가 현재 쉬운 것이 아닌 어려운 새로운 동작을 연습한다는 흐름이 되어야 한다. 따라서 (E) 'easy(쉬운)'는 알맞지 않으며, '어려운'이라는 뜻의 difficult, hard 등으로 고쳐야 한다."
+    },
+    {
+      "number": 8,
+      "question": "다음 대화를 읽고 물음에 답하시오.\nB: Mia, you're interested in writing, right?\nG: Yes. I want to be a writer, so I keep a diary every day.\nB: That's great! I'm sure you will be a good writer.\nG: Thank you. How about you, Suho? Do you enjoy writing?\nB: I enjoy it, but ______________________________.\nG: Then why don't you join a writing class with me? There's a new one in the after-school program.\nB: Really? Can you tell me more about it?\nG: Sure. It is held every Wednesday at 5:00 p.m. in the school library. We can learn to write essays.\nB: That sounds good. Let's sign up together.\nG: Great!\n\n위 대화의 빈칸에 들어갈 말로 알맞지 않은 것을 모두 고르면? (정답 2개)",
+      "options": [
+        "I'm not good at it",
+        "I don't write much",
+        "I'm not good enough",
+        "I think it isn't easy for me",
+        "I think I'm better than you"
+      ],
+      "answer": "2, 5",
+      "explanation": "앞서 Mia가 글쓰기를 즐기는지 물었고 이에 대해 수호가 즐긴다고 답한 뒤 but(하지만)으로 이어진 말로서, 뒤에 Mia가 함께 글쓰기 수업을 들어보자고 제안하고 수호가 긍정적으로 답하고 있으므로, 글쓰기를 좋아하지만 잘 하지는 못한다는 흐름이 자연스럽다. 따라서 평소 글을 쓰는 빈도에 대해 말하는 ② '나는 글을 많이 쓰지 않아.'와 상대보다 자신이 더 낫다고 말하는 ⑤ '나는 내가 너보다 낫다고 생각해.'는 빈칸에 들어갈 수 없다."
+    },
+    {
+      "number": 9,
+      "question": "다음 대화를 읽고 물음에 답하시오.\nB: Mia, you're interested in writing, right?\nG: Yes. I want to be a writer, so I keep a diary every day.\nB: That's great! I'm sure you will be a good writer.\nG: Thank you. How about you, Suho? Do you enjoy writing?\nB: I enjoy it, but ______________________________.\nG: Then why don't you join a writing class with me? There's a new one in the after-school program.\nB: Really? Can you tell me more about it?\nG: Sure. It is held every Wednesday at 5:00 p.m. in the school library. We can learn to write essays.\nB: That sounds good. Let's sign up together.\nG: Great!\n\n위 대화의 내용과 일치하지 않는 것을 모두 고르면? (정답 2개)",
+      "options": [
+        "Mia likes to write and keeps a diary every day.",
+        "Suho believes Mia can become a good writer.",
+        "Mia is taking a writing class and recommends it to Suho.",
+        "The new writing class is held every weekend in the school library.",
+        "Suho will join the new after-school program with Mia."
+      ],
+      "answer": "3, 4",
+      "explanation": "Mia가 방과 후 프로그램에 새로 글쓰기 수업이 생겼다고 말하며 수호에게 함께 들어보자고 제안했고, 수호가 긍정적으로 답하자 같이 신청하자고 했으므로, ③ 'Mia는 글쓰기 수업을 듣고 있고 그것을 수호에게 추천한다.'는 대화의 내용과 일치하지 않는다. 새로운 글쓰기 수업은 매주 수요일 오후 5시에 학교 도서관에서 열린다고 했으므로, ④ '새로운 글쓰기 수업은 학교 도서관에서 매주 주말에 열린다.' 또한 대화의 내용과 일치하지 않는다."
+    },
+    {
+      "number": 10,
+      "question": "다음 글을 읽고 물음에 답하시오.\nArt class was over, but Vashti still sat in her chair. Her paper was ⓐ<u>blank</u>. Her teacher leaned over and ⓑ<u>looked at them</u>.\n\"Ah! It is a polar bear in a snowstorm,\" ⓒ<u>she said</u>.\n\"That's funny!\" said Vashti. \"I CAN'T draw!\"\n\nHer teacher smiled. \"Just make a mark.\"\nVashti picked up a marker and ⓓ<u>drawing</u> a small dot on the paper.\n\"Here ⓔ<u>it is</u>!\"\n\nHer teacher ⓕ<u>picked the paper up</u> and looked at it carefully.\n\"Hmmmm.\"\n(A)<u>그녀는 종이를 Vashti 쪽으로 밀어주며 그것에 서명을 하라고 요청했다</u>.\n\nVashti thought for a moment.\n\"Well, maybe I can't draw, but I CAN sign my name.\"\n\n윗글의 밑줄 친 ⓐ~ⓕ 중, 어법상 어색한 것의 개수는?",
+      "options": [
+        "1개",
+        "2개",
+        "3개",
+        "4개",
+        "5개"
+      ],
+      "answer": "2",
+      "explanation": "ⓑ looked at them → looked at it (주어 Her teacher에 이어진 과거시제 동사구 leaned over와 등위접속사 and에 의해 병렬로 연결되어 '~을 보다'라는 뜻으로 'look at ~'을 사용하므로, 전치사 at의 목적어 자리에 흐름상 단수명사구 her paper를 가리키는 단수 대명사 it이 와야 한다.) ⓓ drawing → drew (주어 Vashti에 대한 동사구 picked up과 등위접속사 and에 의해 병렬로 동사구가 연결되어야 하므로, drawing을 과거동사 drew로 고쳐야 한다.)"
+    },
+    {
+      "number": 11,
+      "question": "다음 글을 읽고 물음에 답하시오.\nArt class was over, but Vashti still sat in her chair. Her paper was ⓐ<u>blank</u>. Her teacher leaned over and ⓑ<u>looked at them</u>.\n\"Ah! It is a polar bear in a snowstorm,\" ⓒ<u>she said</u>.\n\"That's funny!\" said Vashti. \"I CAN'T draw!\"\n\nHer teacher smiled. \"Just make a mark.\"\nVashti picked up a marker and ⓓ<u>drawing</u> a small dot on the paper.\n\"Here ⓔ<u>it is</u>!\"\n\nHer teacher ⓕ<u>picked the paper up</u> and looked at it carefully.\n\"Hmmmm.\"\n(A)<u>그녀는 종이를 Vashti 쪽으로 밀어주며 그것에 서명을 하라고 요청했다</u>.\n\nVashti thought for a moment.\n\"Well, maybe I can't draw, but I CAN sign my name.\"\n\n윗글의 밑줄 친 (A)의 우리말을 다음과 같이 쓸 때, 주어진 <조건>에 알맞게 빈칸을 완성하시오.\n\n<조건>\n• 과거시제로 쓸 것\n• ask, sign, push, it, toward, the paper를 사용하되 필요시 변형할 것\n• (1)과 (2) 모두 5단어로 각각 영작할 것\n\n→ She (1)________________ and (2)________________.",
+      "options": [],
+      "answer": "pushed the paper toward Vashti / asked her to sign it",
+      "subParts": [
+        {
+          "label": "(1)",
+          "answer": "pushed the paper toward Vashti"
+        },
+        {
+          "label": "(2)",
+          "answer": "asked her to sign it"
+        }
+      ],
+      "explanation": "(1) 주어 She 뒤에 <조건>에 따라 과거시제를 사용하여 push를 과거형인 pushed로 변형해 쓴다. '~을 ...쪽으로 밀다'라는 뜻의 'push ~ toward ...'를 사용하여, pushed의 목적어로 명사구 the paper를 쓰고, 전치사 toward와 명사 Vashti를 연결한다. (2) 등위접속사 and에 의해 과거동사 pushed와 병렬로 연결되도록 ask를 과거동사 asked로 변형한다. '~에게 ...해 달라고 요청[부탁]하다'라는 뜻의 5형식 구문인 'ask+목적어+목적격보어(to부정사)'를 사용하여, asked 뒤에 목적어인 대명사 her를 쓰고 sign을 to부정사인 to sign으로 변형한다. sign의 목적어로 대명사 it을 써서 완성한다."
+    },
+    {
+      "number": 12,
+      "question": "다음 글을 읽고 물음에 답하시오.\nAt the school art show a few weeks later, everyone (A)[loved / disliked] Vashti's paintings.\n\nA little boy looked up at her.\n\"You're a really great artist. I want to paint like you,\" he said.\n\"I (B)[bet / doubt] you can,\" said Vashti.\n\"Me? No, not me. I CAN'T draw!\"\n\nVashti smiled. She handed the boy a blank sheet of paper and told him to draw a line.\nThe pencil which the boy held shook as he drew. Vashti looked at the boy's line. And then she said ...\n\"(C)[Sign / Delete] it.\"\n\n윗글의 괄호 (A), (B), (C)에서 흐름상 알맞은 말로 바르게 연결된 것은?",
+      "options": [
+        "(A) loved – (B) bet – (C) Sign",
+        "(A) disliked – (B) doubt – (C) Sign",
+        "(A) loved – (B) bet – (C) Delete",
+        "(A) loved – (B) doubt – (C) Sign",
+        "(A) disliked – (B) doubt – (C) Delete"
+      ],
+      "answer": "1",
+      "explanation": "(A) 한 작은 소년이 Vashti에게 그녀가 정말 훌륭한 예술가이며 그녀처럼 그림을 그리고 싶다고 칭찬하는 내용이 이어지므로, 미술 전시회에서 그녀의 그림이 모두에게 긍정적인 반응을 얻었다는 내용이 앞에 오는 것이 자연스럽다. 따라서 loved(매우 좋아했다)가 적절하다. (B) 소년이 'Me?(나요?)'라고 되물으며 자신은 그림을 못 그린다고 답하지만 Vashti가 웃으면서 빈 종이에 선을 그려보라고 독려하는 내용이 이어지므로, 자신처럼 그림을 그리고 싶다고 말하는 소년에게 너도 분명히 그렇게 할 수 있다는 확신을 주는 흐름이 자연스럽다. 따라서 'I bet ~(장담컨대 ~임 것이 분명해)' 표현을 이루는 bet이 적절하다. (C) Vashti는 자신처럼 그림을 그리기를 희망하는 소년에게 빈 종이에 선을 그려보라고 했으므로, 소년이 그린 것을 긍정적으로 평가하며 그림으로 인정해주는 내용으로 이야기가 마무리되는 것이 자연스럽다. 따라서 그림에 서명하라는 흐름이 되는 Sign(~에 서명하다)이 적절하다."
+    },
+    {
+      "number": 13,
+      "question": "다음 글을 읽고 물음에 답하시오.\nThe next day, Vashti was ⓐ<u>surprising</u> to see something in a frame on the wall of the art classroom. It was her little dot!\n\n\"I can make a ⓑ<u>good</u> dot than that!\" Vashti said.\nShe got a brush and ⓒ<u>starting</u> painting.\nA red dot. A purple dot. A yellow dot. A blue dot. Then she mixed blue and yellow together. She discovered that she could make a green dot. Vashti kept experimenting. She painted ⓓ<u>much</u> little dots in many colors.\n\"If I can make little dots, I can make big dots, too.\"\nAll of the dots that she painted looked ⓔ<u>beautifully</u> together on the paper.\n\n윗글의 밑줄 친 ⓐ~ⓔ를 바르게 고치지 못한 것을 모두 고르면? (정답 2개)",
+      "options": [
+        "ⓐ: surprising → surprise",
+        "ⓑ: good → better",
+        "ⓒ: starting → to start",
+        "ⓓ: much → lots of",
+        "ⓔ: beautifully → beautiful"
+      ],
+      "answer": "1, 3",
+      "explanation": "ⓐ surprising → surprised (be동사인 was의 보어 자리에 분사 형태의 형용사가 올 수 있으나, 주어 Vashti가 '놀라게 한' 주체가 아니라 '놀라게 된' 대상이므로 능동의 의미를 가진 현재분사 형태의 형용사 surprising을 수동의 의미를 가진 과거분사 형태의 형용사 surprised로 고쳐야 한다.) ⓒ starting → started (주어 She에 이어진 과거동사 got과 등위접속사 and에 의해 병렬로 과거동사가 연결되어야 하므로 starting을 to부정사 to start가 아니라 과거동사 started로 고쳐야 한다.)"
+    },
+    {
+      "number": 14,
+      "question": "다음 글을 읽고 물음에 답하시오.\nThe next day, Vashti was surprised to see something in a frame on the wall of the art classroom. It was her little dot!\n\n\"I can make a better dot than that!\" Vashti said.\nShe got a brush and started painting.\nA red dot. A purple dot. A yellow dot. A blue dot. Then she mixed blue and yellow together. She discovered that she could make a green dot. Vashti kept experimenting. She painted lots of little dots in many colors.\n\"If I can make little dots, I can make big dots, too.\"\nAll of the dots that she painted looked beautiful together on the paper.\n\n윗글을 읽고 다음 질문에 대한 대답을 완성할 때, 빈칸에 들어갈 알맞은 표현은?\n\nQ. Why did Vashti keep experimenting?\n→ Because ______________________________.",
+      "options": [
+        "she hoped to make dots of different sizes",
+        "she needed more practice to become a painter",
+        "she didn't like the green color she made at first",
+        "she had to create another painting to display on the classroom wall",
+        "she wanted to create more new colors by mixing different colors"
+      ],
+      "answer": "5",
+      "explanation": "Vashti는 파란색과 노란색을 함께 섞었을 때 녹색 점을 만들 수 있다는 것을 발견했고 계속 실험하여 여러 색깔의 많은 점들을 그렸다고 했으므로, 빈칸에는 ⑤ '그녀는 다양한 색을 섞어서 더 많은 새로운 색들을 만들기를 원했다'가 적절하다."
+    },
+    {
+      "number": 15,
+      "question": "다음 글의 내용과 일치하면 T, 일치하지 않으면 F일 때, 알맞은 것은?\nAt the school art show a few weeks later, everyone loved Vashti's paintings.\n\nA little boy looked up at her.\n\"You're a really great artist. I want to paint like you,\" he said.\n\"I bet you can,\" said Vashti.\n\"Me? No, not me. I CAN'T draw!\"\n\nVashti smiled. She handed the boy a blank sheet of paper and told him to draw a line.\nThe pencil which the boy held shook as he drew. Vashti looked at the boy's line. And then she said ...\n\"Sign it.\"",
+      "options": [
+        "Vashti's paintings were displayed at the school art show. (T)",
+        "A little boy showed great respect for Vashti. (T)",
+        "Vashti told the boy about the difficulty of becoming a painter. (F)",
+        "The boy drew a line on a piece of paper with confidence. (T)",
+        "Vashti saw the boy's line and told him to try again. (F)"
+      ],
+      "answer": "4",
+      "explanation": "소년은 자신이 잘 그리지 못한다고 생각하고 있으므로 종이에 선을 그릴 때 연필을 쥔 손이 흔들렸다는 것은 자신감이라기보다는 긴장이나 자신감의 부족을 나타낸다고 볼 수 있다. 따라서 ④ '소년은 자신감을 가지고 종이 위에 선을 그렸다.'는 일치하지 않는 내용이므로, (T)를 (F)로 고쳐야 한다."
+    },
+    {
+      "number": 16,
+      "question": "다음 글의 내용과 (A)~(C)가 일치하면 T, 일치하지 않으면 F를 쓸 때, 순서대로 연결된 것은?\nArt class was over, but Vashti still sat in her chair. Her paper was blank. Her teacher leaned over and looked at it.\n\"Ah! It is a polar bear in a snowstorm,\" she said.\n\"That's funny!\" said Vashti. \"I CAN'T draw!\"\n\nHer teacher smiled. \"Just make a mark.\"\nVashti picked up a marker and drew a small dot on the paper.\n\"Here it is!\"\n\nHer teacher picked up the paper and looked at it carefully.\n\"Hmmmm.\"\nShe pushed the paper toward Vashti and asked her to sign it.\n\nVashti thought for a moment.\n\"Well, maybe I can't draw, but I CAN sign my name.\"\n\n(A) The teacher saw Vashti's empty paper and guessed it could be a polar bear in a snowstorm. (T/F)\n(B) Vashti made a little mark on the paper and showed it to her teacher. (T/F)\n(C) Vashti couldn't sign her name on the paper because she didn't draw anything. (T/F)",
+      "options": [
+        "T-T-T",
+        "T-T-F",
+        "T-F-F",
+        "F-T-T",
+        "F-T-F"
+      ],
+      "answer": "2",
+      "explanation": "(A) 선생님은 Vashti의 빈 종이를 보고 그것이 눈보라 속의 북극곰이라고 추측했다. (T) (일치) (B) Vashti는 종이 위에 작은 표시를 한 뒤 그것을 자신의 선생님에게 보여 주었다. (T) (일치) (C) Vashti는 아무것도 그리지 않았기 때문에 종이에 자신의 이름을 서명할 수 없었다. (→ Vashti는 종이에 작은 점을 그렸고 선생님이 서명을 하라고 하자, 자신이 그림은 못 그려도 이름은 쓸 수 있다고 생각했다.) (F) (불일치)"
+    },
+    {
+      "number": 17,
+      "question": "다음 Jake에게 엄마가 남긴 메모의 내용과 일치하도록 <조건>에 알맞게 빈칸을 완성하시오.\n(그림 설명: 냉장고에 붙은 메모지에 다음과 같이 적혀 있다. \"MOM OUT! JAKE'S TO-DO LIST 1. Take out the trash by 2 PM. 2. Water the flowers. (in the garden) 3. Finish your homework first, THEN you can play video games.\")\n\n<조건>\n• 현재시제로 쓸 것\n• 괄호 안에 주어진 단어를 사용할 것 (필요시 변형할 것)\n• 각 빈칸에 한 단어씩 쓸 것\n\n(1) Jake's Mom ____ ____ ____ ____ ____ ____ ____ by 2 p.m. (him, want)\n(2) Jake's Mom ____ ____ ____ ____ ____ ____ in the garden. (him, ask)\n(3) Jake's Mom doesn't ____ ____ ____ ____ ____ ____ unless he finishes his homework. (him, allow)",
+      "options": [],
+      "answer": "wants him to take out the trash / asks him to water the flowers / allow him to play video games",
+      "subParts": [
+        {
+          "label": "(1)",
+          "answer": "wants him to take out the trash"
+        },
+        {
+          "label": "(2)",
+          "answer": "asks him to water the flowers"
+        },
+        {
+          "label": "(3)",
+          "answer": "allow him to play video games"
+        }
+      ],
+      "explanation": "(1) Jake의 엄마는 오후 두 시까지 그가 쓰레기를 버리기를 원한다. (2) Jake의 엄마는 그가 정원에 있는 꽃에 물을 주기를 요청한다. (3) Jake의 엄마는 숙제를 끝내지 않을 경우 그가 비디오 게임을 하는 것을 허용하지 않는다."
+    },
+    {
+      "number": 18,
+      "question": "다음 글을 읽고 물음에 답하시오.\nAt the school art show ⓐ<u>a few weeks later</u>, everyone loved Vashti's paintings.\n\nA little boy looked up at her.\n\"You're a really great artist. I want to paint like you,\" he said.\n\"I bet ⓑ<u>you can</u>,\" said Vashti.\n\"Me? No, not me. I CAN'T draw!\"\n\nVashti smiled. She handed the boy a blank sheet of paper and told him ⓒ<u>to draw</u> a line.\nThe pencil ⓓ<u>which</u> the boy held shook ⓔ<u>as</u> he drew. Vashti looked at the boy's line. And then she said ...\n\"Sign it.\"\n\n윗글의 밑줄 친 ⓐ~ⓔ에 대한 설명으로 알맞지 않은 것은?",
+      "options": [
+        "ⓐ: after a few weeks로 바꾸어 쓸 수 있다.",
+        "ⓑ: 흐름상 you can paint like me를 의미한다.",
+        "ⓒ: '그리기 위해서'라는 뜻의 목적을 나타내는 부사적 용법의 to부정사이다.",
+        "ⓓ: 목적격 관계대명사이며 that으로 바꾸어 쓸 수 있다.",
+        "ⓔ: 부사절 접속사로 쓰였으며 '~할 때'라는 뜻으로 해석할 수 있다."
+      ],
+      "answer": "3",
+      "explanation": "ⓒ to draw는 'tell+목적어+목적격보어(~에게 ...하라고 말하다)'의 5형식 구문에서 목적격보어로 쓰인 to부정사이다."
+    },
+    {
+      "number": 19,
+      "question": "다음 글을 읽고 물음에 답하시오.\nAt the school art show ⓐ<u>a few weeks later</u>, everyone loved Vashti's paintings.\n\nA little boy looked up at her.\n\"You're a really great artist. I want to paint like you,\" he said.\n\"I bet ⓑ<u>you can</u>,\" said Vashti.\n\"Me? No, not me. I CAN'T draw!\"\n\nVashti smiled. She handed the boy a blank sheet of paper and told him ⓒ<u>to draw</u> a line.\nThe pencil ⓓ<u>which</u> the boy held shook ⓔ<u>as</u> he drew. Vashti looked at the boy's line. And then she said ...\n\"Sign it.\"\n\n윗글의 주제로 알맞은 것은?",
+      "options": [
+        "the popularity of Vashti as a painter",
+        "Vashti's art class and her first student",
+        "a little boy's drawing that impressed everyone",
+        "Vashti's way of giving a little boy confidence in drawing",
+        "the friendship between Vashti and a little boy who admired her"
+      ],
+      "answer": "4",
+      "explanation": "Vashti처럼 그림을 그리고 싶지만 그리기를 못한다고 말하는 소년에게 종이에 선을 그리고 서명을 하게 함으로써 간단한 선도 그림이 될 수 있음을 알려주며 자신감을 갖도록 돕는 내용이므로, 글의 주제로 ④ '작은 소년에게 그리기에 자신감을 주는 Vashti의 방식'이 적절하다."
+    },
+    {
+      "number": 20,
+      "question": "다음 글을 읽고 물음에 답하시오.\nAt the school art show ⓐ<u>a few weeks later</u>, everyone loved Vashti's paintings.\n\nA little boy looked up at her.\n\"You're a really great artist. I want to paint like you,\" he said.\n\"I bet ⓑ<u>you can</u>,\" said Vashti.\n\"Me? No, not me. I CAN'T draw!\"\n\nVashti smiled. She handed the boy a blank sheet of paper and told him ⓒ<u>to draw</u> a line.\nThe pencil ⓓ<u>which</u> the boy held shook ⓔ<u>as</u> he drew. Vashti looked at the boy's line. And then she said ...\n\"Sign it.\"\n\n윗글을 읽고 다음 질문에 대한 알맞은 대답이 되도록 주어진 <조건>에 맞게 빈칸을 완성하시오.\n\nQ. Who did Vashti meet at the school art show?\n\n<조건>\n• 주격 관계대명사 who를 사용할 것\n• 관계사절의 동사로 wish를 사용하되 필요시 변형할 것\n• 앞에 주어진 어구를 제외하고 9단어로 쓸 것\n\n→ She met ______________________________.",
+      "options": [],
+      "answer": "a little boy who wished to paint like her",
+      "explanation": "Vashti는 학교 미술 전시회에서 누구를 만났는가? → 그녀는 자신처럼 그리고 싶어 하는 한 작은 소년을 만났다."
+    },
+    {
+      "number": 21,
+      "question": "다음 글의 밑줄 친 (A)~(E) 중, 흐름상 관계없는 문장은?\n\nThe next day, Vashti was surprised to see something in a frame on the wall of the art classroom. It was her little dot!\n\n\"I can make a better dot than that!\" Vashti said.\nShe got a brush and started painting.\nA red dot. A purple dot. A yellow dot. A blue dot. (A)<u>Then she mixed blue and yellow together.</u> (B)<u>She discovered that she could make a green dot.</u> (C)<u>Vashti kept experimenting.</u> (D)<u>The experiment needed careful planning and preparation.</u> (E)<u>She painted lots of little dots in many colors.</u>\n\"If I can make little dots, I can make big dots, too.\"\nAll of the dots that she painted looked beautiful together on the paper.",
+      "options": [
+        "(A)",
+        "(B)",
+        "(C)",
+        "(D)",
+        "(E)"
+      ],
+      "answer": "4",
+      "explanation": "Vashti가 미술실 벽에 걸린 액자에 자신이 그린 작은 점이 있는 것을 발견하고 그것보다 더 나은 점을 그리기 위해 붓을 들고 그리기 시작하여 여러 다양한 색을 쓰고 몇몇 색을 섞어 새로운 색을 만드는 시도도 하면서 많은 다양한 점들을 그려 아름다운 그림을 완성하는 흐름이므로, 실험에서 필요한 조건에 대해 말하는 (D) '실험은 세심한 계획과 준비를 필요로 했다.'는 관계없는 문장이다."
+    },
+    {
+      "number": 22,
+      "question": "다음 글을 읽고 아래 질문에 대한 알맞은 대답이 되도록 주어진 <조건>에 맞게 빈칸을 완성하시오.\nArt class was over, but Vashti still sat in her chair. Her paper was blank. Her teacher leaned over and looked at it.\n\"Ah! It is a polar bear in a snowstorm,\" she said.\n\"That's funny!\" said Vashti. \"I CAN'T draw!\"\n\nHer teacher smiled. \"Just make a mark.\"\nVashti picked up a marker and drew a small dot on the paper.\n\"Here it is!\"\n\nHer teacher picked up the paper and looked at it carefully.\n\"Hmmmm.\"\nShe pushed the paper toward Vashti and asked her to sign it.\n\nVashti thought for a moment.\n\"Well, maybe I can't draw, but I CAN sign my name.\"\n\nQ. What did Vashti's teacher do to motivate her?\n\n<조건>\n• (1)에는 tell, (2)에는 ask를 사용할 것 (필요시 변형할 것)\n• (1)은 6단어, (2)는 5단어로 각각 쓸 것\n\n→ The teacher (1)________________ on the paper. After that, she (2)________________.",
+      "options": [],
+      "answer": "told her to make a mark / asked her to sign it",
+      "subParts": [
+        {
+          "label": "(1)",
+          "answer": "told her to make a mark"
+        },
+        {
+          "label": "(2)",
+          "answer": "asked her to sign it"
+        }
+      ],
+      "explanation": "Vashti의 선생님은 그녀에게 동기를 부여하기 위해 무엇을 했는가? → 선생님은 종이 위에 (1)아무 표시나 해보라고 그녀에게 말했다. 그 후, 선생님은 (2)그녀에게 거기에 서명을 하라고 요청했다."
+    },
+    {
+      "number": 23,
+      "question": "다음 글을 아래와 같이 요약할 때, 빈칸에 들어갈 알맞은 말을 쓰시오. (각 빈칸에 한 단어씩 쓸 것)\nAt the school art show a few weeks later, everyone loved Vashti's paintings.\n\nA little boy looked up at her.\n\"You're a really great artist. I want to paint like you,\" he said.\n\"I bet you can,\" said Vashti.\n\"Me? No, not me. I CAN'T draw!\"\n\nVashti smiled. She handed the boy a blank sheet of paper and told him to draw a line.\nThe pencil which the boy held shook as he drew. Vashti looked at the boy's line. And then she said ...\n\"Sign it.\"\n\nEveryone loved Vashti's (1)________ at the school art show. A little boy told her he hoped to (2)________ like her, and Vashti confidently said he could. Vashti asked him to (3)________ ________ ________ on the paper. After looking at it, Vashti told him to (4)________ ________.",
+      "options": [],
+      "answer": "painting / paint / draw a line / sign it",
+      "subParts": [
+        {
+          "label": "(1)",
+          "answer": "painting",
+          "acceptedAnswers": [
+            "paintings"
+          ]
+        },
+        {
+          "label": "(2)",
+          "answer": "paint",
+          "acceptedAnswers": [
+            "draw"
+          ]
+        },
+        {
+          "label": "(3)",
+          "answer": "draw a line"
+        },
+        {
+          "label": "(4)",
+          "answer": "sign it"
+        }
+      ],
+      "explanation": "[요약문] 학교 미술 전시회에서 모두가 Vashti의 그림을 좋아했다. 한 소년이 그녀에게 자신도 그녀처럼 그림을 그리기를 원한다고 말했고, Vashti는 그가 할 수 있다고 자신 있게 말했다. Vashti는 그에게 종이에 선을 그리라고 요청했다. 그것을 본 후, Vashti는 그에게 거기에 서명을 하라고 말했다."
+    },
+    {
+      "number": 24,
+      "question": "다음 대화와 일치하도록 주어진 <조건>에 맞게 빈칸을 완성하시오.\n\n(1)\nJimin: Hey, Michael. What's up?\nMichael: Hi. I'm just trying to book a hotel for our family trip to Busan.\nJimin: (Looking at the hotel on Michael's phone) Oh, our family stayed at the same hotel when we went there last year. It was great!\nMichael: That's good to know. I think I've chosen the right one.\n\n→ Michael will book a room at the same hotel ____ ____ ____ ____ at last year. (stay, family)\n\n(2)\nKen: Mia, what do you want to be in the future?\nMia: I want to be a veterinarian because I love animals. How about you?\nKen: That sounds wonderful. I want to be a firefighter.\nMia: Really? Why?\nKen: Because I want to help people and keep them safe.\n\n→ Ken and Mia are talking about jobs ____ ____ ____ ____ ____ ____ ____ ____. (have, want, in the future)\n\n<조건>\n• 적절한 목적격 관계대명사를 사용할 것\n• 괄호 안에 주어진 단어 또는 표현을 사용할 것 (필요시 변형할 것)\n• 각 빈칸에 한 단어씩 쓸 것",
+      "options": [],
+      "answer": "which Jimin's family stayed / which they want to have in the future",
+      "subParts": [
+        {
+          "label": "(1)",
+          "answer": "which Jimin's family stayed",
+          "acceptedAnswers": [
+            "that Jimin's family stayed"
+          ]
+        },
+        {
+          "label": "(2)",
+          "answer": "which they want to have in the future",
+          "acceptedAnswers": [
+            "that they want to have in the future"
+          ]
+        }
+      ],
+      "explanation": "(1) → Michael은 작년에 지민이의 가족이 머물렀던 동일한 호텔을 예약할 것이다. (2) → Ken과 Mia는 미래에 그들이 갖기를 원하는 직업에 관해 이야기하고 있다."
+    },
+    {
+      "number": 25,
+      "question": "다음 글의 제목으로 알맞은 것은?\nArt class was over, but Vashti still sat in her chair. Her paper was blank. Her teacher leaned over and looked at it.\n\"Ah! It is a polar bear in a snowstorm,\" she said.\n\"That's funny!\" said Vashti. \"I CAN'T draw!\"\n\nHer teacher smiled. \"Just make a mark.\"\nVashti picked up a marker and drew a small dot on the paper.\n\"Here it is!\"\n\nHer teacher picked up the paper and looked at it carefully.\n\"Hmmmm.\"\nShe pushed the paper toward Vashti and asked her to sign it.\n\nVashti thought for a moment.\n\"Well, maybe I can't draw, but I CAN sign my name.\"",
+      "options": [
+        "Not Everyone Can Draw",
+        "A Little Dot, Vashti's First Drawing",
+        "A Dirty Mark That Ruined Vashti's Drawing",
+        "The Necessity of Signing a Name on a Picture",
+        "Vashti's Creative Idea of Using Blank Paper to Create Art"
+      ],
+      "answer": "2",
+      "explanation": "미술 수업에서 아무 것도 그리지 못하고 자신이 그림을 못 그린다고 생각하는 Vashti에게 선생님이 아무 표시나 해 보라고 말한 뒤, 그녀가 작은 점을 그리자 서명하라고 말하며 작은 점도 그림이 될 수 있음을 보여주는 내용이므로, 글의 제목으로 ② '작은 점, Vashti의 첫 그림'이 적절하다."
+    },
+    {
+      "number": 26,
+      "question": "다음 글을 읽고 물음에 답하시오.\nThe next day, Vashti was surprised to see something in a frame on the wall of the art classroom. It was her little dot!\n\n\"I can make a better dot than that!\" Vashti said.\nShe got a brush and started painting.\nA red dot. A purple dot. A yellow dot. A blue dot. Then she mixed blue and yellow together. She discovered ⓐ<u>that</u> she could make a green dot. Vashti kept experimenting. She (A)______________________________.\n\"If I can make little dots, I can make big dots, too.\"\nAll of the dots ⓑ<u>that</u> she painted looked beautiful together on the paper.\n\nAt the school art show a few weeks later, everyone loved Vashti's paintings.\n\nA little boy looked up at her.\n\"You're a really great artist. I want to paint like you,\" he said.\n\"I bet you can,\" said Vashti.\n\"Me? No, not me. I CAN'T draw!\"\n\nVashti smiled. She handed the boy a blank sheet of paper and told him to draw a line.\nThe pencil which the boy held shook as he drew. Vashti looked at the boy's line. And then she said ...\n\"Sign it.\"\n\n윗글의 밑줄 친 ⓐ, ⓑ의 용법과 각각 같은 것끼리 짝지어진 것은?\n\n<보기>\n(a) He liked the picture <u>that</u> I drew for him.\n(b) I will take a class <u>that</u> is held every Monday.\n(c) I thought <u>that</u> we could go hiking tomorrow.\n(d) Some people believed <u>that</u> the earth was flat.\n(e) I found a wallet <u>that</u> someone left in the restroom.",
+      "options": [
+        "ⓐ - (a)",
+        "ⓐ - (b)",
+        "ⓑ - (c)",
+        "ⓑ - (d)",
+        "ⓑ - (e)"
+      ],
+      "answer": "5",
+      "explanation": "ⓐ는 뒤의 완전한 절(she could ~ dot)을 이끌어 동사 discovered의 목적어 역할을 하는 명사절을 이루는 명사절 접속사이다. ⓑ는 타동사 painted의 목적어가 없는 불완전한 절(she painted)을 이끌어 선행사인 명사구 All of the dots를 수식하는 관계사절을 이루는 목적격 관계대명사이다. (a) 목적격 관계대명사 (b) 주격 관계대명사 (c) 명사절 접속사 (d) 명사절 접속사 (e) 목적격 관계대명사"
+    },
+    {
+      "number": 27,
+      "question": "다음 글을 읽고 물음에 답하시오.\nThe next day, Vashti was surprised to see something in a frame on the wall of the art classroom. It was her little dot!\n\n\"I can make a better dot than that!\" Vashti said.\nShe got a brush and started painting.\nA red dot. A purple dot. A yellow dot. A blue dot. Then she mixed blue and yellow together. She discovered ⓐ<u>that</u> she could make a green dot. Vashti kept experimenting. She (A)______________________________.\n\"If I can make little dots, I can make big dots, too.\"\nAll of the dots ⓑ<u>that</u> she painted looked beautiful together on the paper.\n\nAt the school art show a few weeks later, everyone loved Vashti's paintings.\n\nA little boy looked up at her.\n\"You're a really great artist. I want to paint like you,\" he said.\n\"I bet you can,\" said Vashti.\n\"Me? No, not me. I CAN'T draw!\"\n\nVashti smiled. She handed the boy a blank sheet of paper and told him to draw a line.\nThe pencil which the boy held shook as he drew. Vashti looked at the boy's line. And then she said ...\n\"Sign it.\"\n\n윗글의 빈칸 (A)에 들어갈 말로 알맞은 것은?",
+      "options": [
+        "felt that she was a terrible painter",
+        "painted lots of little dots in many colors",
+        "thought she could become a great scientist",
+        "didn't have enough time to finish her painting",
+        "was tired of drawing dots and started to try other shapes"
+      ],
+      "answer": "2",
+      "explanation": "Vashti가 빨간색, 보라색, 노란색 점들을 그린 데 이어 파란색과 노란색을 함께 섞으면 녹색 점을 만들 수 있다는 것을 발견하고 계속해서 실험했다는 내용 뒤에 이어지므로, 색들을 혼합해 여러 가지 색의 점들을 많이 그렸다는 흐름이 되어야 한다. 따라서 빈칸에는 ② '여러 가지 색깔의 많은 작은 점들을 그렸다'가 적절하다."
+    },
+    {
+      "number": 28,
+      "question": "다음 글을 읽고 물음에 답하시오.\nThe next day, Vashti was surprised to see something in a frame on the wall of the art classroom. It was her little dot!\n\n\"I can make a better dot than that!\" Vashti said.\nShe got a brush and started painting.\nA red dot. A purple dot. A yellow dot. A blue dot. Then she mixed blue and yellow together. She discovered ⓐ<u>that</u> she could make a green dot. Vashti kept experimenting. She (A)______________________________.\n\"If I can make little dots, I can make big dots, too.\"\nAll of the dots ⓑ<u>that</u> she painted looked beautiful together on the paper.\n\nAt the school art show a few weeks later, everyone loved Vashti's paintings.\n\nA little boy looked up at her.\n\"You're a really great artist. I want to paint like you,\" he said.\n\"I bet you can,\" said Vashti.\n\"Me? No, not me. I CAN'T draw!\"\n\nVashti smiled. She handed the boy a blank sheet of paper and told him to draw a line.\nThe pencil which the boy held shook as he drew. Vashti looked at the boy's line. And then she said ...\n\"Sign it.\"\n\n윗글을 읽고 답할 수 없는 질문을 모두 고르면? (정답 2개)",
+      "options": [
+        "What was in the frame on the wall of the art classroom?",
+        "How many paintings did Vashti enter into the school art show?",
+        "How did the little boy feel about Vashti's paintings?",
+        "How did Vashti help the little boy have more confidence in drawing?",
+        "What did Vashti do after the little boy sign the paper?"
+      ],
+      "answer": "2, 5",
+      "explanation": "학교 미술 전시회에서 모두가 Vashti의 그림들을 좋아했다고 했으나 구체적으로 몇 개의 그림이 전시되었는지는 글에 언급되어 있지 않으므로, ② 'Vashti는 학교 미술 전시회에 몇 개의 그림들을 출품했는가?'에는 답할 수 없다. 소년이 종이에 선을 그린 뒤 Vashti가 서명하라고 말하는 내용으로 마무리되었으며 소년이 실제로 서명했는지와 이후에 Vashti가 한 행동은 나와 있지 않으므로 ⑤ 'Vashti는 작은 소년이 종이에 서명을 한 후 무엇을 했는가?' 또한 답할 수 없다."
+    },
+    {
+      "number": 29,
+      "question": "다음 글을 읽고 물음에 답하시오.\nArt class was over, but Vashti still sat in her chair. Her paper was blank. Her teacher leaned over and looked at it.\n\"Ah! It is a polar bear in a snowstorm,\" she said.\n\"That's funny!\" said Vashti. \"I CAN'T draw!\"\n\nHer teacher smiled. \"Just make a mark.\"\nVashti picked up a marker and drew a small dot on the paper.\n\"Here it is!\"\n\nHer teacher picked up the paper and looked at it carefully.\n\"Hmmmm.\"\nShe pushed the paper toward Vashti and asked her to sign it.\n\nVashti thought for a moment.\n\"Well, maybe I can't draw, but I CAN sign my name.\"\n\nThe next day, Vashti was surprised to see something in a frame on the wall of the art classroom. It was her little dot!\n\n\"I can make a better dot than that!\" Vashti said.\nShe got a brush and started painting.\nA red dot. A purple dot. A yellow dot. A blue dot. Then she mixed blue and yellow together. She discovered that she could make a green dot. Vashti kept experimenting. She painted lots of little dots in many colors.\n\"If I can make little dots, I can make big dots, too.\"\nAll of the dots that she painted looked beautiful together on the paper.\n\nAt the school art show a few weeks later, everyone loved Vashti's paintings.\n\nA little boy looked up at her.\n\"You're a really great artist. I want to paint like you,\" he said.\n\"I bet you can,\" said Vashti.\n\"Me? No, not me. I CAN'T draw!\"\n\nVashti smiled. She handed the boy a blank sheet of paper and told him to draw a line.\nThe pencil which the boy held shook as he drew. Vashti looked at the boy's line. And then she said ...\n\"ⓐ<u>Sign it</u>.\"\n\n윗글의 밑줄 친 ⓐ의 의미로 알맞은 것은?",
+      "options": [
+        "I will not accept a blank paper.",
+        "It is a sign of trust between us.",
+        "Your line is a good work of art.",
+        "Write your name so I can remember it.",
+        "I need your signature on the paper, not a line."
+      ],
+      "answer": "3",
+      "explanation": "Vashti의 미술 선생님은 그리기를 못한다고 생각하는 그녀에게 작은 점을 그리도록 유도하고 거기에 서명하라고 한 뒤, 다음 날 그것을 액자에 걸어 미술실 벽에 걸어둠으로써 작은 점도 하나의 그림이 될 수 있음을 알려주었다. Vashti가 소년에게 선을 그리게 하고 거기에 서명하라고 말한 것 또한 소년의 선도 하나의 그림이 될 수 있음을 알려줌으로써 자신감을 심어주려는 의도임을 알 수 있다. 따라서 밑줄 친 ⓐ '서명해.'의 의미로 ③ '너의 선은 좋은 예술 작품이야.'가 적절하다."
+    },
+    {
+      "number": 30,
+      "question": "다음 글을 읽고 물음에 답하시오.\nArt class was over, but Vashti still sat in her chair. Her paper was blank. Her teacher leaned over and looked at it.\n\"Ah! It is a polar bear in a snowstorm,\" she said.\n\"That's funny!\" said Vashti. \"I CAN'T draw!\"\n\nHer teacher smiled. \"Just make a mark.\"\nVashti picked up a marker and drew a small dot on the paper.\n\"Here it is!\"\n\nHer teacher picked up the paper and looked at it carefully.\n\"Hmmmm.\"\nShe pushed the paper toward Vashti and asked her to sign it.\n\nVashti thought for a moment.\n\"Well, maybe I can't draw, but I CAN sign my name.\"\n\nThe next day, Vashti was surprised to see something in a frame on the wall of the art classroom. It was her little dot!\n\n\"I can make a better dot than that!\" Vashti said.\nShe got a brush and started painting.\nA red dot. A purple dot. A yellow dot. A blue dot. Then she mixed blue and yellow together. She discovered that she could make a green dot. Vashti kept experimenting. She painted lots of little dots in many colors.\n\"If I can make little dots, I can make big dots, too.\"\nAll of the dots that she painted looked beautiful together on the paper.\n\nAt the school art show a few weeks later, everyone loved Vashti's paintings.\n\nA little boy looked up at her.\n\"You're a really great artist. I want to paint like you,\" he said.\n\"I bet you can,\" said Vashti.\n\"Me? No, not me. I CAN'T draw!\"\n\nVashti smiled. She handed the boy a blank sheet of paper and told him to draw a line.\nThe pencil which the boy held shook as he drew. Vashti looked at the boy's line. And then she said ...\n\"ⓐ<u>Sign it</u>.\"\n\n윗글의 교훈으로 알맞은 것은?",
+      "options": [
+        "Success comes from careful preparation.",
+        "Great artists are born with natural talent.",
+        "Creating great artwork takes years of practice.",
+        "A small start can help you discover your potential.",
+        "Copying others is the first step toward creating your own art."
+      ],
+      "answer": "4",
+      "explanation": "자신이 그림을 못 그린다고 생각했던 Vashti가 선생님의 격려로 작은 점 하나를 그렸고 그 작은 시작이 다양한 시도로 이어져 전시회에서 모든 사람들의 사랑을 받는 멋진 작품을 그렸으며, 자신의 경험을 바탕으로 자신처럼 그림을 잘 그리고 싶어 하는 어린 소년에게 작은 선 하나를 그리는 것부터 시작하도록 격려하는 이야기이므로, 글의 교훈으로 ④ '작은 시작이 자신의 잠재력을 발견하는 데 도움이 된다.'가 적절하다."
+    },
+    {
+      "number": 31,
+      "question": "다음 글을 읽고 물음에 답하시오.\nArt class was over, but Vashti still sat in her chair. Her paper was blank. Her teacher leaned over and looked at it.\n\"Ah! It is a polar bear in a snowstorm,\" she said.\n\"That's funny!\" said Vashti. \"I CAN'T draw!\"\n\nHer teacher smiled. \"Just make a mark.\"\nVashti picked up a marker and drew a small dot on the paper.\n\"Here it is!\"\n\nHer teacher picked up the paper and looked at it carefully.\n\"Hmmmm.\"\nShe pushed the paper toward Vashti and asked her to sign it.\n\nVashti thought for a moment.\n\"Well, maybe I can't draw, but I CAN sign my name.\"\n\nThe next day, Vashti was surprised to see something in a frame on the wall of the art classroom. It was her little dot!\n\n\"I can make a better dot than that!\" Vashti said.\nShe got a brush and started painting.\nA red dot. A purple dot. A yellow dot. A blue dot. Then she mixed blue and yellow together. She discovered that she could make a green dot. Vashti kept experimenting. She painted lots of little dots in many colors.\n\"If I can make little dots, I can make big dots, too.\"\nAll of the dots that she painted looked beautiful together on the paper.\n\nAt the school art show a few weeks later, everyone loved Vashti's paintings.\n\nA little boy looked up at her.\n\"You're a really great artist. I want to paint like you,\" he said.\n\"I bet you can,\" said Vashti.\n\"Me? No, not me. I CAN'T draw!\"\n\nVashti smiled. She handed the boy a blank sheet of paper and told him to draw a line.\nThe pencil which the boy held shook as he drew. Vashti looked at the boy's line. And then she said ...\n\"ⓐ<u>Sign it</u>.\"\n\n윗글을 읽고 나눈 대화가 다음과 같을 때, 빈칸 (A)~(C)에 들어갈 알맞은 말이 차례대로 연결된 것은?\n\nSeho: What do you think of Vashti's teacher?\nMinju: I like her. She (A)________ Vashti to draw by making a mark.\nSeho: I agree. What impressed you most about Vashti?\nMinju: She didn't stop after drawing one dot. She kept (B)________ different methods and improved her drawing skills.\nSeho: You're right. We can learn from her story that a (C)______ start can make a difference.",
+      "options": [
+        "(A) forbade – (B) trying – (C) big",
+        "(A) forbade – (B) avoiding – (C) big",
+        "(A) encouraged – (B) trying – (C) small",
+        "(A) encouraged – (B) trying – (C) big",
+        "(A) encouraged – (B) avoiding – (C) small"
+      ],
+      "answer": "3",
+      "explanation": "(A) Vashti의 선생님은 미술 수업에서 자신이 그림을 잘 못 그린다고 생각하고 아무 것도 그리지 못한 Vashti에게 종이에 아무 표시나 해 보라고 말하고 그녀가 그린 작은 점을 미술실에 전시해 줌으로써 그녀가 그릴 수 있도록 격려했다는 흐름이 되는 encouraged(격려했다)가 적절하다. (B) 자신이 그린 작은 점이 미술실에 전시된 것을 본 Vashti는 저것보다 더 나은 점을 그릴 수 있다고 생각한 뒤 그리기를 시작했고 두 가지 색을 섞으면 새로운 색이 만들어진다는 것을 발견하고 계속 실험하며 여러 색깔의 많은 점들을 그렸으므로, 그가 계속해서 시도했다는 흐름이 되는 trying(시도하는)이 적절하다. (C) 선생님의 격려를 통해 작은 점에서 시작하여 자신감을 얻고 모두에게 인정받는 그림을 그리게 된 이야기이므로, 작은 시작이 변화를 만들 수 있다는 흐름이 되는 small(작은)이 적절하다."
+    }
+  ]
+}
