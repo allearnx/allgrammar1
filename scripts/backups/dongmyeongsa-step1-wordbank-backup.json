@@ -1,0 +1,2192 @@
+{
+ "sheet_89be0f00-2631-49c1-b1f2-481d37c9cd7a": {
+  "questions": [
+   {
+    "tag": "단일",
+    "type": "single_choice",
+    "answer": "playing",
+    "number": 1,
+    "options": [
+     "play",
+     "eat",
+     "talk",
+     "go"
+    ],
+    "question": "다음 <보기>에서 알맞은 단어를 골라 대화를 완성하시오.\n\n<보기> play eat talk go\n\n(1) A: What does he do in his free time?\nB: He enjoys __________ with a ball."
+   },
+   {
+    "tag": "단일",
+    "type": "single_choice",
+    "answer": "eating",
+    "number": 2,
+    "options": [
+     "play",
+     "eat",
+     "talk",
+     "go"
+    ],
+    "question": "[보기] play / eat / talk / go\n(2) A: How long does it take for him to eat?\nB: He always finishes __________ in 2 minutes."
+   },
+   {
+    "tag": "단일",
+    "type": "single_choice",
+    "answer": "going",
+    "number": 3,
+    "options": [
+     "play",
+     "eat",
+     "talk",
+     "go"
+    ],
+    "question": "[보기] play / eat / talk / go\n(3) A: What is your pet's favorite activity?\nB: My dog Mongmong loves __________ for a walk."
+   },
+   {
+    "tag": "단일",
+    "type": "single_choice",
+    "answer": "talking",
+    "number": 4,
+    "options": [
+     "play",
+     "eat",
+     "talk",
+     "go"
+    ],
+    "question": "[보기] play / eat / talk / go\n(4) A: I'm studying for the test tomorrow. Can you stop __________?\nB: Sorry."
+   },
+   {
+    "tag": "빈칸",
+    "type": "short_answer",
+    "answer": "enjoy learning",
+    "number": 5,
+    "question": "다음 괄호 안에 주어진 단어로 문장의 빈칸을 완성하시오.\n\nThe boy and girl __________ English.\n(enjoy, learn)"
+   },
+   {
+    "tag": "오류수정",
+    "type": "sentence",
+    "answer": "enjoy learning math",
+    "number": 6,
+    "question": "다음 각각의 문장에서 어떤상 어색한 부분을 찾아 바르게 고치시오.\n\n(1) Tom and David enjoy to learn math."
+   },
+   {
+    "tag": "기타",
+    "type": "sentence",
+    "answer": "finished doing his homework",
+    "number": 7,
+    "question": "(2) Kevin finsihed do his homework."
+   },
+   {
+    "tag": "기타",
+    "type": "sentence",
+    "answer": "Taking pictures is interesting",
+    "number": 8,
+    "question": "(take pictures / interesting)\n→ __________"
+   },
+   {
+    "tag": "빈칸",
+    "type": "short_answer",
+    "answer": "mind closing",
+    "number": 9,
+    "question": "다음 <보기>의 단어 중 알맞은 것을 두 가지 골라 문장을 완성하시오. (필수어 변형 가능)\n\n<보기>\nfinish mind watch enjoy clean close\n\n(1) I don't __________ __________ the window. It's up to you.\n※ 두 단어를 띄어쓰기로 구분하여 입력 (예: enjoy swimming)"
+   },
+   {
+    "tag": "빈칸",
+    "type": "short_answer",
+    "answer": "enjoys cleaning",
+    "number": 10,
+    "question": "(2) Suzy __________ __________ her room, so it's always clean.\n※ 두 단어를 띄어쓰기로 구분하여 입력 (예: enjoy swimming)"
+   },
+   {
+    "tag": "빈칸",
+    "type": "short_answer",
+    "answer": "enjoys watching",
+    "number": 11,
+    "question": "(3) Jiho __________ __________ baseball games. Now it's time to study!\n※ 두 단어를 띄어쓰기로 구분하여 입력 (예: enjoy swimming)"
+   },
+   {
+    "tag": "빈칸",
+    "type": "short_answer",
+    "answer": "English and math",
+    "number": 12,
+    "question": "다음 미니에 대한 정보를 참고하여 문장을 완성하시오.\n\nstudy: English, math       play: tennis, soccer\nwatch: movies              drink: orange juice\neat: noodles\n\n(1) Mina loves studying __________ and __________."
+   },
+   {
+    "tag": "빈칸",
+    "type": "short_answer",
+    "answer": "eating",
+    "number": 13,
+    "question": "(2) She likes __________ noodles."
+   },
+   {
+    "tag": "subParts",
+    "type": "multi_part",
+    "answer": "playing, soccer",
+    "number": 14,
+    "question": "(3) She enjoys __________ tennis and __________.",
+    "subParts": [
+     {
+      "label": "(1)",
+      "answer": "playing"
+     },
+     {
+      "label": "(2)",
+      "answer": "soccer"
+     }
+    ]
+   },
+   {
+    "tag": "빈칸",
+    "type": "short_answer",
+    "answer": "drinking",
+    "number": 15,
+    "question": "(4) She likes __________ orange juice."
+   },
+   {
+    "tag": "빈칸",
+    "type": "short_answer",
+    "answer": "watching",
+    "number": 16,
+    "question": "(5) She enjoys __________ movies."
+   },
+   {
+    "tag": "빈칸",
+    "type": "short_answer",
+    "answer": "I like writing",
+    "number": 17,
+    "question": "다음 중 <보기>에서 단어를 알맞게 골라 문장을 만드시오. (단, 단어의 형태는 적정히 바꿀 것)\n\n<보기>\nstart, finish, learn, give up, like, hate, mind, hope, wish, avoid\n\n(1) 나는 글쓰기를 좋아한다.\n→ __________"
+   },
+   {
+    "tag": "기타",
+    "type": "sentence",
+    "answer": "I should avoid eating fast food",
+    "number": 18,
+    "question": "(2) 나는 패스트푸드를 먹는 것을 피해야 한다.\n→ __________"
+   },
+   {
+    "tag": "기타",
+    "type": "sentence",
+    "answer": "Don't give up learning something new",
+    "number": 19,
+    "question": "(3) 새로운 무엇인가를 배우는 것을 포기하지 마라.\n→ __________",
+    "acceptedAnswers": [
+     "Do not give up learning something new"
+    ]
+   },
+   {
+    "tag": "subParts",
+    "type": "multi_part",
+    "answer": "hear, writing music, listening to his music",
+    "number": 20,
+    "question": "다음 글을 읽고 빈칸에 알맞은 글을 쓰시오.\n\nBeethoven had difficulty hearing. But he didn't give up, and continued to write music. Now, many people love to listen to his music.\n\n→ Beethoven couldn't __________. However, he didn't give up __________. Now many people enjoy __________.",
+    "subParts": [
+     {
+      "label": "(1)",
+      "answer": "hear"
+     },
+     {
+      "label": "(2)",
+      "answer": "writing music"
+     },
+     {
+      "label": "(3)",
+      "answer": "listening to his music"
+     }
+    ]
+   },
+   {
+    "tag": "subParts",
+    "type": "multi_part",
+    "answer": "playing the piano, to be a pianist, practicing",
+    "number": 21,
+    "question": "Although Lee Heeah has only four fingers, she likes to play the piano. When she was young, she practiced repeatedly to be a pianist.\n\n→ Lee Heeah has only four fingers. However, she enjoys __________. When she was young, she wanted __________ and kept __________ again and again.",
+    "subParts": [
+     {
+      "label": "(1)",
+      "answer": "playing the piano"
+     },
+     {
+      "label": "(2)",
+      "answer": "to be a pianist"
+     },
+     {
+      "label": "(3)",
+      "answer": "practicing"
+     }
+    ]
+   },
+   {
+    "tag": "기타",
+    "type": "sentence",
+    "answer": "inviting me to the party",
+    "number": 22,
+    "question": "다음 괄호 안에 주어진 단어를 서술하여 빈칸에 알맞은 말을 쓰시오.\n\n(1) Thank you for __________.\n(invite me to the party)"
+   },
+   {
+    "tag": "기타",
+    "type": "sentence",
+    "answer": "Reading Harry Potter series",
+    "number": 23,
+    "question": "(2) __________ is very fun.\n(read Harry Potter series)"
+   },
+   {
+    "tag": "빈칸",
+    "type": "short_answer",
+    "answer": "Exercising regularly",
+    "number": 24,
+    "question": "(3) __________ is good for your health. (exercise regularly)"
+   },
+   {
+    "tag": "빈칸",
+    "type": "short_answer",
+    "answer": "watching action movies",
+    "number": 25,
+    "question": "(4) My hobby is __________.\n(watch action movies)"
+   },
+   {
+    "tag": "subParts",
+    "type": "multi_part",
+    "answer": "Giving, receiving",
+    "number": 26,
+    "question": "다음의 친구를 사귈 때 중요한 것들에 대해 생각\n하며, 주어진 단어로 문장을 완성하시오.\n\nQ: What do you think is important for friends to do?\n\nreceive share listen give\n\n13. __________ and __________ advice is important.",
+    "subParts": [
+     {
+      "label": "(1)",
+      "answer": "Giving",
+      "acceptedAnswers": [
+       "Receiving"
+      ]
+     },
+     {
+      "label": "(2)",
+      "answer": "receiving",
+      "acceptedAnswers": [
+       "giving"
+      ]
+     }
+    ],
+    "acceptedAnswers": [
+     "Receiving, giving",
+     "Giving and receiving",
+     "Receiving and giving"
+    ]
+   },
+   {
+    "tag": "빈칸",
+    "type": "short_answer",
+    "answer": "Sharing",
+    "number": 27,
+    "question": "14. __________ common interests is important."
+   },
+   {
+    "tag": "빈칸",
+    "type": "short_answer",
+    "answer": "Listening",
+    "number": 28,
+    "question": "15. __________ to others is important."
+   },
+   {
+    "tag": "영작",
+    "type": "sentence",
+    "answer": "Waking up early is a good habit",
+    "number": 29,
+    "question": "다음 쉬어 되는 문장을 연결하여, 동명사를 이용한 문장을 완성하시오.\n\nGet a good grade\nWake up early\nHave good friends\n\nimportant\nnot easy\na good habit\n\nExample: Getting a good grade is not easy.\n\n16. __________",
+    "acceptedAnswers": [
+     "Having good friends is important"
+    ]
+   },
+   {
+    "tag": "기타",
+    "type": "sentence",
+    "answer": "Having good friends is important",
+    "number": 30,
+    "question": "17. __________"
+   },
+   {
+    "tag": "빈칸",
+    "type": "short_answer",
+    "answer": "Making new friends",
+    "number": 31,
+    "question": "다음 주어진 단어를 이용하여 문장을 완성하시오.\n\n새로운 친구를 사귀는 것은 쉽지 않다. (make)\n→ __________ is not easy."
+   },
+   {
+    "tag": "빈칸",
+    "type": "short_answer",
+    "answer": "Eating healthy food",
+    "number": 32,
+    "question": "건강한 음식을 먹는 것은 중요하다.\n→ __________ is important."
+   },
+   {
+    "tag": "빈칸",
+    "type": "short_answer",
+    "answer": "Swimming",
+    "number": 33,
+    "question": "강에서 수영하는 것은 위험하다.\n→ __________ in the river is dangerous. (swim)"
+   },
+   {
+    "tag": "빈칸",
+    "type": "short_answer",
+    "answer": "enjoys walking",
+    "number": 34,
+    "question": "다음 우리말과 같도록 괄호 안의 단어를 사용하여 문장을 완성하시오.\n\n• Sora __________ in the park every Sunday.\n(enjoy, walk)\n\nSora는 매주 일요일 공원에서 걷기를 즐긴다."
+   },
+   {
+    "tag": "subParts",
+    "type": "multi_part",
+    "answer": "cook, cooking",
+    "number": 35,
+    "question": "다음 각 문장에서 어색한 부분을 한 곳씩 찾아 바르게 고쳐 쓰시오.\n\n(A) Mark enjoys cook in the park.\n(B) Ride a bicycle with her is exciting.\n(C) Jane told her sister wash her hands.\n\n(A) __________ → __________",
+    "subParts": [
+     {
+      "label": "(1)",
+      "answer": "cook"
+     },
+     {
+      "label": "(2)",
+      "answer": "cooking"
+     }
+    ]
+   },
+   {
+    "tag": "subParts",
+    "type": "multi_part",
+    "answer": "Ride, Riding",
+    "number": 36,
+    "question": "(B) __________ → __________",
+    "subParts": [
+     {
+      "label": "(1)",
+      "answer": "Ride"
+     },
+     {
+      "label": "(2)",
+      "answer": "Riding"
+     }
+    ]
+   },
+   {
+    "tag": "subParts",
+    "type": "multi_part",
+    "answer": "wash, to wash",
+    "number": 37,
+    "question": "(C) __________ → __________",
+    "subParts": [
+     {
+      "label": "(1)",
+      "answer": "wash"
+     },
+     {
+      "label": "(2)",
+      "answer": "to wash"
+     }
+    ]
+   }
+  ],
+  "answer_key": [
+   "playing",
+   "eating",
+   "going",
+   "talking",
+   "enjoy learning",
+   "enjoy learning math",
+   "finished doing his homework",
+   "Taking pictures is interesting",
+   "mind closing",
+   "enjoys cleaning",
+   "enjoys watching",
+   "English and math",
+   "eating",
+   "playing, soccer",
+   "drinking",
+   "watching",
+   "I like writing",
+   "I should avoid eating fast food",
+   "Don't give up learning something new",
+   "hear, writing music, listening to his music",
+   "playing the piano, to be a pianist, practicing",
+   "inviting me to the party",
+   "Reading Harry Potter series",
+   "Exercising regularly",
+   "watching action movies",
+   "Giving, receiving",
+   "Sharing",
+   "Listening",
+   "Waking up early is a good habit",
+   "Having good friends is important",
+   "Making new friends",
+   "Eating healthy food",
+   "Swimming",
+   "enjoys walking",
+   "cook, cooking",
+   "Ride, Riding",
+   "wash, to wash"
+  ]
+ },
+ "sheet_94d145aa-a551-4c3b-bc24-ff3b93aa64e9": {
+  "questions": [
+   {
+    "tag": "단일",
+    "type": "single_choice",
+    "answer": "play",
+    "number": 1,
+    "options": [
+     "play",
+     "eat",
+     "talk",
+     "go"
+    ],
+    "question": "다음 <보기>에서 알맞은 단어를 골라 대화를 완성하시오.\n\n<보기> play eat talk go\n\n(1) A: What does he do in his free time?\nB: He enjoys __________ with a ball."
+   },
+   {
+    "tag": "단일",
+    "type": "single_choice",
+    "answer": "eat",
+    "number": 2,
+    "options": [
+     "play",
+     "eat",
+     "talk",
+     "go"
+    ],
+    "question": "(2) A: How long does it take for him to eat?\nB: He always finishes __________ in 2 minutes."
+   },
+   {
+    "tag": "단일",
+    "type": "single_choice",
+    "answer": "go",
+    "number": 3,
+    "options": [
+     "play",
+     "eat",
+     "talk",
+     "go"
+    ],
+    "question": "(3) A: What is your pet's favorite activity?\nB: My dog Mongmong loves __________ for a walk."
+   },
+   {
+    "tag": "단일",
+    "type": "single_choice",
+    "answer": "talk",
+    "number": 4,
+    "options": [
+     "play",
+     "eat",
+     "talk",
+     "go"
+    ],
+    "question": "(4) A: I'm studying for the test tomorrow. Can you stop __________?\nB: Sorry."
+   },
+   {
+    "tag": "빈칸",
+    "type": "short_answer",
+    "answer": "enjoy learning",
+    "number": 5,
+    "question": "다음 괄호 안에 주어진 단어로 문장의 빈칸을 완성하시오.\n\nThe boy and girl __________ English.\n(enjoy, learn)"
+   },
+   {
+    "tag": "오류수정",
+    "type": "sentence",
+    "answer": "enjoy learning math",
+    "number": 6,
+    "question": "다음 각각의 문장에서 어떤상 어색한 부분을 찾아 바르게 고치시오.\n\n(1) Tom and David enjoy to learn math."
+   },
+   {
+    "tag": "기타",
+    "type": "sentence",
+    "answer": "finished doing his homework",
+    "number": 7,
+    "question": "(2) Kevin finsihed do his homework."
+   },
+   {
+    "tag": "기타",
+    "type": "sentence",
+    "answer": "Taking pictures is interesting",
+    "number": 8,
+    "question": "(take pictures / interesting)\n→ __________"
+   },
+   {
+    "tag": "기타",
+    "type": "sentence",
+    "answer": "watching TV and playing computer games",
+    "number": 9,
+    "question": "다음 표를 보고 예문과 같이 윤장을 완성하시오.\n\nex. Julie enjoys listening to music and traveling.\n\n(1) Damin enjoys __________."
+   },
+   {
+    "tag": "빈칸",
+    "type": "short_answer",
+    "answer": "traveling and cooking",
+    "number": 10,
+    "question": "(2) Matt enjoys __________."
+   },
+   {
+    "tag": "기타",
+    "type": "sentence",
+    "answer": "listening to music and playing computer games",
+    "number": 11,
+    "question": "(3) Junsu enjoys __________."
+   },
+   {
+    "tag": "빈칸",
+    "type": "short_answer",
+    "answer": "mind closing",
+    "number": 12,
+    "question": "다음 <보기>의 단어 중 알맞은 것을 두 가지 골라 문장을 완성하시오. (필수어 변형 가능)\n\n<보기>\nfinish mind watch enjoy clean close\n\n(1) I don't __________ __________ the window. It's up to you.\n※ 두 단어를 띄어쓰기로 구분하여 입력 (예: enjoy swimming)"
+   },
+   {
+    "tag": "빈칸",
+    "type": "short_answer",
+    "answer": "enjoys cleaning",
+    "number": 13,
+    "question": "(2) Suzy __________ __________ her room, so it's always clean.\n※ 두 단어를 띄어쓰기로 구분하여 입력 (예: enjoy swimming)"
+   },
+   {
+    "tag": "빈칸",
+    "type": "short_answer",
+    "answer": "enjoys watching",
+    "number": 14,
+    "question": "(3) Jiho __________ __________ baseball games. Now it's time to study!\n※ 두 단어를 띄어쓰기로 구분하여 입력 (예: enjoy swimming)"
+   },
+   {
+    "tag": "빈칸",
+    "type": "short_answer",
+    "answer": "English and math",
+    "number": 15,
+    "question": "다음 미니에 대한 정보를 참고하여 문장을 완성하시오.\n\nstudy: English, math       play: tennis, soccer\nwatch: movies              drink: orange juice\neat: noodles\n\n(1) Mina loves studying __________ and __________."
+   },
+   {
+    "tag": "빈칸",
+    "type": "short_answer",
+    "answer": "eating",
+    "number": 16,
+    "question": "(2) She likes __________ noodles."
+   },
+   {
+    "tag": "subParts",
+    "type": "multi_part",
+    "answer": "playing, soccer",
+    "number": 17,
+    "question": "(3) She enjoys __________ tennis and __________.",
+    "subParts": [
+     {
+      "label": "(1)",
+      "answer": "playing"
+     },
+     {
+      "label": "(2)",
+      "answer": "soccer"
+     }
+    ]
+   },
+   {
+    "tag": "빈칸",
+    "type": "short_answer",
+    "answer": "drinking",
+    "number": 18,
+    "question": "(4) She likes __________ orange juice."
+   },
+   {
+    "tag": "빈칸",
+    "type": "short_answer",
+    "answer": "watching",
+    "number": 19,
+    "question": "(5) She enjoys __________ movies."
+   },
+   {
+    "tag": "빈칸",
+    "type": "short_answer",
+    "answer": "I like writing",
+    "number": 20,
+    "question": "다음 중 <보기>에서 단어를 알맞게 골라 문장을 만드시오. (단, 단어의 형태는 적정히 바꿀 것)\n\n<보기>\nstart, finish, learn, give up, like, hate, mind, hope, wish, avoid\n\n(1) 나는 글쓰기를 좋아한다.\n→ __________"
+   },
+   {
+    "tag": "기타",
+    "type": "sentence",
+    "answer": "I should avoid eating fast food",
+    "number": 21,
+    "question": "(2) 나는 패스트푸드를 먹는 것을 피해야 한다.\n→ __________"
+   },
+   {
+    "tag": "기타",
+    "type": "sentence",
+    "answer": "Don't give up learning something new",
+    "number": 22,
+    "question": "(3) 새로운 무엇인가를 배우는 것을 포기하지 마라.\n→ __________",
+    "acceptedAnswers": [
+     "Do not give up learning something new"
+    ]
+   },
+   {
+    "tag": "subParts",
+    "type": "multi_part",
+    "answer": "hear, writing music, listening to his music",
+    "number": 23,
+    "question": "다음 글을 읽고 빈칸에 알맞은 글을 쓰시오.\n\nBeethoven had difficulty hearing. But he didn't give up, and continued to write music. Now, many people love to listen to his music.\n\n→ Beethoven couldn't __________. However, he didn't give up __________. Now many people enjoy __________.",
+    "subParts": [
+     {
+      "label": "(1)",
+      "answer": "hear"
+     },
+     {
+      "label": "(2)",
+      "answer": "writing music"
+     },
+     {
+      "label": "(3)",
+      "answer": "listening to his music"
+     }
+    ]
+   },
+   {
+    "tag": "subParts",
+    "type": "multi_part",
+    "answer": "playing the piano, to be a pianist, practicing",
+    "number": 24,
+    "question": "Although Lee Heeah has only four fingers, she likes to play the piano. When she was young, she practiced repeatedly to be a pianist.\n\n→ Lee Heeah has only four fingers. However, she enjoys __________. When she was young, she wanted __________ and kept __________ again and again.",
+    "subParts": [
+     {
+      "label": "(1)",
+      "answer": "playing the piano"
+     },
+     {
+      "label": "(2)",
+      "answer": "to be a pianist"
+     },
+     {
+      "label": "(3)",
+      "answer": "practicing"
+     }
+    ]
+   },
+   {
+    "tag": "기타",
+    "type": "sentence",
+    "answer": "inviting me to the party",
+    "number": 25,
+    "question": "다음 괄호 안에 주어진 단어를 서술하여 빈칸에 알맞은 말을 쓰시오.\n\n(1) Thank you for __________.\n(invite me to the party)"
+   },
+   {
+    "tag": "기타",
+    "type": "sentence",
+    "answer": "Reading Harry Potter series",
+    "number": 26,
+    "question": "(2) __________ is very fun.\n(read Harry Potter series)"
+   },
+   {
+    "tag": "빈칸",
+    "type": "short_answer",
+    "answer": "Exercising regularly",
+    "number": 27,
+    "question": "(3) __________ is good for your health. (exercise regularly)"
+   },
+   {
+    "tag": "빈칸",
+    "type": "short_answer",
+    "answer": "watching action movies",
+    "number": 28,
+    "question": "(4) My hobby is __________.\n(watch action movies)"
+   },
+   {
+    "tag": "subParts",
+    "type": "multi_part",
+    "answer": "Sharing, giving",
+    "number": 29,
+    "question": "다음의 친구를 사귈 때 중요한 것들에 대해 생각\n하며, 주어진 단어로 문장을 완성하시오.\n\nQ: What do you think is important for friends to do?\n\nreceive share listen give\n\n13. __________ and __________ advice is important.",
+    "subParts": [
+     {
+      "label": "(1)",
+      "answer": "Sharing"
+     },
+     {
+      "label": "(2)",
+      "answer": "giving"
+     }
+    ]
+   },
+   {
+    "tag": "빈칸",
+    "type": "short_answer",
+    "answer": "Having",
+    "number": 30,
+    "question": "14. __________ common interests is important."
+   },
+   {
+    "tag": "빈칸",
+    "type": "short_answer",
+    "answer": "Listening",
+    "number": 31,
+    "question": "15. __________ to others is important."
+   },
+   {
+    "tag": "영작",
+    "type": "sentence",
+    "answer": "Waking up early is not easy",
+    "number": 32,
+    "question": "다음 쉬어 되는 문장을 연결하여, 동명사를 이용한 문장을 완성하시오.\n\nGet a good grade\nWake up early\nHave good friends\n\nimportant\nnot easy\na good habit\n\nExample: Getting a good grade is not easy.\n\n16. __________",
+    "acceptedAnswers": [
+     "or: a good habit",
+     "Waking up early isn't easy"
+    ]
+   },
+   {
+    "tag": "기타",
+    "type": "sentence",
+    "answer": "Having good friends is important",
+    "number": 33,
+    "question": "17. __________"
+   },
+   {
+    "tag": "빈칸",
+    "type": "short_answer",
+    "answer": "Making new friends",
+    "number": 34,
+    "question": "다음 주어진 단어를 이용하여 문장을 완성하시오.\n\n새로운 친구를 사귀는 것은 쉽지 않다. (make)\n→ __________ is not easy."
+   },
+   {
+    "tag": "빈칸",
+    "type": "short_answer",
+    "answer": "Eating healthy food",
+    "number": 35,
+    "question": "건강한 음식을 먹는 것은 중요하다.\n→ __________ is important."
+   },
+   {
+    "tag": "빈칸",
+    "type": "short_answer",
+    "answer": "Swimming",
+    "number": 36,
+    "question": "강에서 수영하는 것은 위험하다.\n→ __________ in the river is dangerous. (swim)"
+   },
+   {
+    "tag": "빈칸",
+    "type": "short_answer",
+    "answer": "enjoys walking",
+    "number": 37,
+    "question": "다음 우리말과 같도록 괄호 안의 단어를 사용하여 문장을 완성하시오.\n\n• Sora __________ in the park every Sunday.\n(enjoy, walk)\n\nSora는 매주 일요일 공원에서 걷기를 즐긴다."
+   },
+   {
+    "tag": "subParts",
+    "type": "multi_part",
+    "answer": "cook, cooking",
+    "number": 38,
+    "question": "다음 각 문장에서 어색한 부분을 한 곳씩 찾아 바르게 고쳐 쓰시오.\n\n(A) Mark enjoys cook in the park.\n(B) Ride a bicycle with her is exciting.\n(C) Jane told her sister wash her hands.\n\n(A) __________ → __________",
+    "subParts": [
+     {
+      "label": "(1)",
+      "answer": "cook"
+     },
+     {
+      "label": "(2)",
+      "answer": "cooking"
+     }
+    ]
+   },
+   {
+    "tag": "subParts",
+    "type": "multi_part",
+    "answer": "Ride, Riding",
+    "number": 39,
+    "question": "(B) __________ → __________",
+    "subParts": [
+     {
+      "label": "(1)",
+      "answer": "Ride"
+     },
+     {
+      "label": "(2)",
+      "answer": "Riding"
+     }
+    ]
+   },
+   {
+    "tag": "subParts",
+    "type": "multi_part",
+    "answer": "wash, to wash",
+    "number": 40,
+    "question": "(C) __________ → __________",
+    "subParts": [
+     {
+      "label": "(1)",
+      "answer": "wash"
+     },
+     {
+      "label": "(2)",
+      "answer": "to wash"
+     }
+    ]
+   },
+   {
+    "tag": "기타",
+    "type": "sentence",
+    "answer": "keeping his room clean",
+    "number": 41,
+    "question": "다음 표를 보고 Minho에 관한 글을 완성하시오.\n\nHis name is Minho.\nHis hobby is reading books.\nHe is good at __________. (1)__________.\nHe enjoys __________ (2)__________.\nCleaning his room is his work.\n\n(1) __________"
+   },
+   {
+    "tag": "빈칸",
+    "type": "short_answer",
+    "answer": "cleaning his room",
+    "number": 42,
+    "question": "(2) __________"
+   }
+  ],
+  "answer_key": [
+   "play",
+   "eat",
+   "go",
+   "talk",
+   "enjoy learning",
+   "enjoy learning math",
+   "finished doing his homework",
+   "Taking pictures is interesting",
+   "watching TV and playing computer games",
+   "traveling and cooking",
+   "listening to music and playing computer games",
+   "mind closing",
+   "enjoys cleaning",
+   "enjoys watching",
+   "English and math",
+   "eating",
+   "playing, soccer",
+   "drinking",
+   "watching",
+   "I like writing",
+   "I should avoid eating fast food",
+   "Don't give up learning something new",
+   "hear, writing music, listening to his music",
+   "playing the piano, to be a pianist, practicing",
+   "inviting me to the party",
+   "Reading Harry Potter series",
+   "Exercising regularly",
+   "watching action movies",
+   "Sharing, giving",
+   "Having",
+   "Listening",
+   "Waking up early is not easy",
+   "Having good friends is important",
+   "Making new friends",
+   "Eating healthy food",
+   "Swimming",
+   "enjoys walking",
+   "cook, cooking",
+   "Ride, Riding",
+   "wash, to wash",
+   "keeping his room clean",
+   "cleaning his room"
+  ]
+ },
+ "sheet_2afe8533-9a7f-4b30-a404-1de6cfffd122": {
+  "questions": [
+   {
+    "answer": "playing",
+    "number": 1,
+    "options": [
+     "play",
+     "eat",
+     "talk",
+     "go"
+    ],
+    "question": "다음 <보기>에서 알맞은 단어를 골라 대화를 완성하시오.\n\n<보기> play eat talk go\n\n(1) A: What does he do in his free time?\nB: He enjoys __________ with a ball."
+   },
+   {
+    "answer": "eating",
+    "number": 2,
+    "options": [
+     "play",
+     "eat",
+     "talk",
+     "go"
+    ],
+    "question": "[보기] play / eat / talk / go\n(2) A: How long does it take for him to eat?\nB: He always finishes __________ in 2 minutes."
+   },
+   {
+    "answer": "going",
+    "number": 3,
+    "options": [
+     "play",
+     "eat",
+     "talk",
+     "go"
+    ],
+    "question": "[보기] play / eat / talk / go\n(3) A: What is your pet's favorite activity?\nB: My dog Mongmong loves __________ for a walk."
+   },
+   {
+    "answer": "talking",
+    "number": 4,
+    "options": [
+     "play",
+     "eat",
+     "talk",
+     "go"
+    ],
+    "question": "[보기] play / eat / talk / go\n(4) A: I'm studying for the test tomorrow. Can you stop __________?\nB: Sorry."
+   },
+   {
+    "answer": "enjoy learning",
+    "number": 5,
+    "question": "다음 괄호 안에 주어진 단어로 문장의 빈칸을 완성하시오.\n\nThe boy and girl __________ English.\n(enjoy, learn)"
+   },
+   {
+    "answer": "enjoy learning math",
+    "number": 6,
+    "question": "다음 각각의 문장에서 어떤상 어색한 부분을 찾아 바르게 고치시오.\n\n(1) Tom and David enjoy to learn math."
+   },
+   {
+    "answer": "finished doing his homework",
+    "number": 7,
+    "question": "(2) Kevin finsihed do his homework."
+   },
+   {
+    "answer": "Taking pictures is interesting",
+    "number": 8,
+    "question": "(take pictures / interesting)\n→ __________"
+   },
+   {
+    "answer": "watching TV and playing computer games",
+    "number": 9,
+    "question": "다음 표를 보고 예문과 같이 윤장을 완성하시오.\n\nex. Julie enjoys listening to music and traveling.\n\n(1) Damin enjoys __________."
+   },
+   {
+    "answer": "traveling and cooking",
+    "number": 10,
+    "question": "(2) Matt enjoys __________."
+   },
+   {
+    "answer": "listening to music and playing computer games",
+    "number": 11,
+    "question": "(3) Junsu enjoys __________."
+   },
+   {
+    "answer": "mind closing",
+    "number": 12,
+    "question": "다음 <보기>의 단어 중 알맞은 것을 두 가지 골라 문장을 완성하시오. (필수어 변형 가능)\n\n<보기>\nfinish mind watch enjoy clean close\n\n(1) I don't __________ __________ the window. It's up to you.\n※ 두 단어를 띄어쓰기로 구분하여 입력 (예: enjoy swimming)"
+   },
+   {
+    "answer": "enjoys cleaning",
+    "number": 13,
+    "question": "(2) Suzy __________ __________ her room, so it's always clean.\n※ 두 단어를 띄어쓰기로 구분하여 입력 (예: enjoy swimming)"
+   },
+   {
+    "answer": "enjoys watching",
+    "number": 14,
+    "question": "(3) Jiho __________ __________ baseball games. Now it's time to study!\n※ 두 단어를 띄어쓰기로 구분하여 입력 (예: enjoy swimming)"
+   },
+   {
+    "answer": "English and math",
+    "number": 15,
+    "question": "다음 미니에 대한 정보를 참고하여 문장을 완성하시오.\n\nstudy: English, math       play: tennis, soccer\nwatch: movies              drink: orange juice\neat: noodles\n\n(1) Mina loves studying __________ and __________."
+   },
+   {
+    "answer": "eating",
+    "number": 16,
+    "question": "(2) She likes __________ noodles."
+   },
+   {
+    "answer": "playing, soccer",
+    "number": 17,
+    "question": "(3) She enjoys __________ tennis and __________.",
+    "subParts": [
+     {
+      "label": "(1)",
+      "answer": "playing"
+     },
+     {
+      "label": "(2)",
+      "answer": "soccer"
+     }
+    ]
+   },
+   {
+    "answer": "drinking",
+    "number": 18,
+    "question": "(4) She likes __________ orange juice."
+   },
+   {
+    "answer": "watching",
+    "number": 19,
+    "question": "(5) She enjoys __________ movies."
+   },
+   {
+    "answer": "I like writing",
+    "number": 20,
+    "question": "다음 중 <보기>에서 단어를 알맞게 골라 문장을 만드시오. (단, 단어의 형태는 적정히 바꿀 것)\n\n<보기>\nstart, finish, learn, give up, like, hate, mind, hope, wish, avoid\n\n(1) 나는 글쓰기를 좋아한다.\n→ __________"
+   },
+   {
+    "answer": "I should avoid eating fast food",
+    "number": 21,
+    "question": "(2) 나는 패스트푸드를 먹는 것을 피해야 한다.\n→ __________"
+   },
+   {
+    "answer": "Don't give up learning something new",
+    "number": 22,
+    "question": "(3) 새로운 무엇인가를 배우는 것을 포기하지 마라.\n→ __________",
+    "acceptedAnswers": [
+     "Do not give up learning something new"
+    ]
+   },
+   {
+    "answer": "hear, writing music, listening to his music",
+    "number": 23,
+    "question": "다음 글을 읽고 빈칸에 알맞은 글을 쓰시오.\n\nBeethoven had difficulty hearing. But he didn't give up, and continued to write music. Now, many people love to listen to his music.\n\n→ Beethoven couldn't __________. However, he didn't give up __________. Now many people enjoy __________.",
+    "subParts": [
+     {
+      "label": "(1)",
+      "answer": "hear"
+     },
+     {
+      "label": "(2)",
+      "answer": "writing music"
+     },
+     {
+      "label": "(3)",
+      "answer": "listening to his music"
+     }
+    ]
+   },
+   {
+    "answer": "playing the piano, to be a pianist, practicing",
+    "number": 24,
+    "question": "Although Lee Heeah has only four fingers, she likes to play the piano. When she was young, she practiced repeatedly to be a pianist.\n\n→ Lee Heeah has only four fingers. However, she enjoys __________. When she was young, she wanted __________ and kept __________ again and again.",
+    "subParts": [
+     {
+      "label": "(1)",
+      "answer": "playing the piano"
+     },
+     {
+      "label": "(2)",
+      "answer": "to be a pianist"
+     },
+     {
+      "label": "(3)",
+      "answer": "practicing"
+     }
+    ]
+   },
+   {
+    "answer": "inviting me to the party",
+    "number": 25,
+    "question": "다음 괄호 안에 주어진 단어를 서술하여 빈칸에 알맞은 말을 쓰시오.\n\n(1) Thank you for __________.\n(invite me to the party)"
+   }
+  ],
+  "answer_key": [
+   "playing",
+   "eating",
+   "going",
+   "talking",
+   "enjoy learning",
+   "enjoy learning math",
+   "finished doing his homework",
+   "Taking pictures is interesting",
+   "watching TV and playing computer games",
+   "traveling and cooking",
+   "listening to music and playing computer games",
+   "mind closing",
+   "enjoys cleaning",
+   "enjoys watching",
+   "English and math",
+   "eating",
+   "playing, soccer",
+   "drinking",
+   "watching",
+   "I like writing",
+   "I should avoid eating fast food",
+   "Don't give up learning something new",
+   "hear, writing music, listening to his music",
+   "playing the piano, to be a pianist, practicing",
+   "inviting me to the party"
+  ]
+ },
+ "draft_b16f77a8-b8a8-4a78-881a-23835d3ff7f4": {
+  "mode": "paper_test",
+  "savedAt": "2026-09-13T21:35:18.133Z",
+  "sheetId": "89be0f00-2631-49c1-b1f2-481d37c9cd7a",
+  "version": 1,
+  "answersMap": {
+   "0": "1",
+   "1": "2",
+   "2": "4",
+   "3": "1",
+   "5": "enjoy learning",
+   "6": "finished doing"
+  },
+  "questionCount": 37
+ },
+ "draft_aa7accd3-1f3d-4edc-9dc1-c0a6b0429454": {
+  "mode": "interactive",
+  "score": {
+   "wrong": 0,
+   "correct": 4
+  },
+  "savedAt": "2026-06-24T11:59:41.557Z",
+  "sheetId": "94d145aa-a551-4c3b-bc24-ff3b93aa64e9",
+  "version": 1,
+  "wrongList": [],
+  "answersMap": {
+   "0": "1",
+   "1": "2",
+   "2": "4",
+   "3": "3"
+  },
+  "aiResultsMap": {},
+  "answeredUpTo": 4,
+  "currentIndex": 4,
+  "questionCount": 42,
+  "retryCorrectList": [
+   {
+    "number": 3,
+    "options": [
+     "play",
+     "eat",
+     "talk",
+     "go"
+    ],
+    "question": "(3) A: What is your pet's favorite activity?\nB: My dog Mongmong loves __________ for a walk.",
+    "userAnswer": "4",
+    "correctAnswer": "go"
+   }
+  ],
+  "overtimeQuestions": []
+ },
+ "sheet_498f6e8b-e7c3-499e-a21e-de19aa45ab36": {
+  "questions": [
+   {
+    "answer": "3",
+    "number": 1,
+    "options": [
+     "She was upset <u>to arrive</u> so late.",
+     "This book is fun <u>to read</u>, but that one is not.",
+     "Sam ran to the station <u>to catch</u> the train.",
+     "You are very kind <u>to carry</u> my heavy bag.",
+     "I am glad <u>to invite</u> you to my house."
+    ],
+    "question": "다음 문장의 밑줄 친 부분과 쓰임이 같은 것은?\n\nI practice English every day <u>to be</u> a good speaker.",
+    "explanation": "제시문의 to be는 '~가 되기 위해'라는 목적의 부사적 용법입니다. ③의 to catch도 '잡기 위해'라는 목적을 나타냅니다. ①④⑤는 감정의 원인이나 판단의 근거, ②는 형용사 수식입니다."
+   },
+   {
+    "answer": "5",
+    "number": 2,
+    "options": [
+     "He wants <u>to ride</u> a bike.",
+     "<u>To learn</u> Spanish is very hard.",
+     "It is not easy for us <u>to solve</u> math.",
+     "Please bring me something warm <u>to wear</u>.",
+     "She rushed to the door <u>to greet</u> her friend."
+    ],
+    "question": "다음 문장의 밑줄 친 부분과 쓰임이 같은 것은?\n\nJenny looked at the map <u>to find</u> the way.",
+    "explanation": "제시문의 to find는 '찾기 위해'라는 목적의 부사적 용법입니다. ⑤의 to greet도 '맞이하기 위해'라는 목적을 나타냅니다. ①②③은 명사적 용법, ④는 형용사적 용법입니다."
+   },
+   {
+    "answer": "4",
+    "number": 3,
+    "options": [
+     "We visit the market <u>to buy</u> some fruit.",
+     "Sujin runs every day <u>to be</u> a great athlete.",
+     "We like <u>to go</u> outside <u>to play</u> soccer after lunch.",
+     "I emailed Sora <u>to asks</u> her address and phone number yesterday.",
+     "During the holidays, we went to the lake <u>to enjoy</u> the view."
+    ],
+    "question": "다음 중 밑줄 친 부분이 어법상 어색한 것은?",
+    "explanation": "to부정사는 'to+동사원형'의 형태이므로 to asks가 아니라 to ask가 되어야 합니다. 따라서 ④가 어법상 어색합니다."
+   },
+   {
+    "answer": "4",
+    "number": 4,
+    "options": [
+     "She was glad <u>to get</u> the good news.",
+     "I have many books <u>to read</u> this week.",
+     "You will be surprised <u>to see</u> the result.",
+     "I drank some water <u>to feel</u> better.",
+     "My dream is <u>to be</u> a pilot someday."
+    ],
+    "question": "다음 문장의 밑줄 친 부분과 쓰임이 같은 것은?\n\nHe practiced hard <u>to win</u> the game.",
+    "explanation": "제시문의 to win은 '이기기 위해'라는 목적의 부사적 용법입니다. ④의 to feel도 '기분이 나아지기 위해'라는 목적을 나타냅니다. ①③은 감정의 원인, ②는 형용사적 용법, ⑤는 명사적 용법입니다."
+   },
+   {
+    "answer": "1",
+    "number": 5,
+    "options": [
+     "It is difficult <u>to save</u> money.",
+     "I texted my friend <u>to meet</u> later.",
+     "I went to Jeju <u>to swim</u> in the ocean.",
+     "They recycle cans <u>to protect</u> nature.",
+     "We stayed quiet <u>not to wake</u> the baby."
+    ],
+    "question": "다음 중 밑줄 친 부분의 쓰임이 다른 하나는?",
+    "explanation": "①의 to save는 문장의 진주어로 쓰인 명사적 용법입니다. 나머지는 모두 '~하기 위해'라는 목적의 부사적 용법이므로 ①이 다릅니다."
+   },
+   {
+    "answer": "5",
+    "number": 6,
+    "options": [
+     "You are so nice <u>to help</u> me.",
+     "I'm very glad <u>to meet</u> you today.",
+     "He grew up <u>to become</u> a lawyer.",
+     "You will be amazed <u>to hear</u> the story.",
+     "There are many spots <u>to see</u> in Seoul."
+    ],
+    "question": "다음 밑줄 친 to부정사의 용법이 나머지 넷과 다른 것은?",
+    "explanation": "⑤의 to see는 명사 spots를 꾸며주는 형용사적 용법입니다. ①②④는 감정의 원인이나 판단의 근거, ③은 결과의 부사적 용법이지만, 특히 ⑤만 형용사적 용법으로 다릅니다."
+   },
+   {
+    "answer": "3",
+    "number": 7,
+    "options": [
+     "He studied math hard <u>to get</u> a better grade.",
+     "She bought a gift <u>to give</u> her friend.",
+     "It is impossible for me <u>to meet</u> the star someday.",
+     "I went to Canada <u>to learn</u> English for a year.",
+     "My dad went out <u>to buy</u> some milk at the store."
+    ],
+    "question": "다음 중 밑줄 친 부분의 용법이 다른 하나는?",
+    "explanation": "③의 to meet은 가주어 It에 대한 진주어로 쓰인 명사적 용법입니다. 나머지는 모두 '~하기 위해'라는 목적의 부사적 용법이므로 ③이 다릅니다."
+   },
+   {
+    "answer": "5",
+    "number": 8,
+    "options": [
+     "Yuna went to the store <u>to buy</u> a chocolate cake.",
+     "I went to the shelter <u>to do</u> volunteer work.",
+     "Sam went to the park <u>to ride</u> his bike.",
+     "Jimin went to Japan <u>to study</u> Japanese.",
+     "I want <u>to learn</u> French."
+    ],
+    "question": "다음 중 밑줄 친 부분의 용법이 다른 하나는?",
+    "explanation": "⑤의 to learn은 동사 want의 목적어로 쓰인 명사적 용법입니다. 나머지는 모두 '~하기 위해'라는 목적의 부사적 용법이므로 ⑤가 다릅니다."
+   },
+   {
+    "answer": "4",
+    "number": 9,
+    "options": [
+     "I'm so happy <u>to see</u> you again.",
+     "I'm glad <u>to get</u> your letter.",
+     "Jiho was shocked <u>to hear</u> the story.",
+     "Tom grew up <u>to be</u> a scientist.",
+     "The kids were excited <u>to start</u> the trip."
+    ],
+    "question": "다음 밑줄 친 부분의 쓰임이 다른 하나는?",
+    "explanation": "④의 to be는 '자라서 ~가 되었다'라는 결과의 부사적 용법입니다. 나머지는 모두 감정의 원인을 나타내는 부사적 용법이므로 ④가 다릅니다."
+   },
+   {
+    "answer": "4",
+    "number": 10,
+    "options": [
+     "Do you want <u>to eat</u> some cake?",
+     "Jane hopes <u>to study</u> science.",
+     "<u>To swim</u> is good for your health.",
+     "She was glad <u>to hear</u> the news.",
+     "My hobby is <u>to draw</u> pictures."
+    ],
+    "question": "다음 중 밑줄 친 부분의 쓰임이 다른 하나는?",
+    "explanation": "④의 to hear는 감정의 원인을 나타내는 부사적 용법입니다. ①②는 목적어, ③은 주어, ⑤는 보어로 쓰인 명사적 용법이므로 ④가 다릅니다."
+   },
+   {
+    "answer": "1",
+    "number": 11,
+    "options": [
+     "I visited the store to buy a new bag.",
+     "Her father loves to travel.",
+     "She wants her sister to be kind.",
+     "Would you like something to drink?",
+     "I have many chores to do this weekend."
+    ],
+    "question": "다음 문장의 밑줄 친 부분과 쓰임이 같은 것은?\n\nSarah went to the library <u>to</u> borrow some books.",
+    "explanation": "제시된 문장의 to부정사는 '~하기 위해'라는 목적을 나타내는 부사적 용법입니다. ①의 to buy도 '사기 위해'라는 목적을 나타냅니다. 나머지는 명사적 용법(②③④)이나 형용사적 용법(⑤)입니다."
+   },
+   {
+    "answer": "2",
+    "number": 12,
+    "options": [
+     "She was at the meeting to find the best answer.",
+     "A summer camp is a great place to make new friends.",
+     "He worked hard late at night not to miss the deadline.",
+     "To improve my Chinese, I will read books in Chinese often.",
+     "She went to the store to buy some vegetables for lunch."
+    ],
+    "question": "다음 문장의 밑줄 친 부분과 쓰임이 다른 것은?\n\nMy friends will meet this Saturday <u>to</u> celebrate Mina's graduation.",
+    "explanation": "제시된 문장의 to부정사는 목적을 나타내는 부사적 용법입니다. ②의 to make는 앞의 명사 place를 꾸며 주는 형용사적 용법입니다. 나머지는 모두 목적을 나타내는 부사적 용법입니다."
+   },
+   {
+    "answer": "1 4",
+    "number": 13,
+    "options": [
+     "I went to the shop to buy some milk.",
+     "I want to read a book after dinner.",
+     "I like to swim with my classmates.",
+     "What should I do to become a doctor?",
+     "I don't have enough time to clean my room."
+    ],
+    "question": "다음 밑줄 친 부분과 쓰임이 같은 것을 두 가지 고르면?\n\nI open the app <u>to</u> check the weather.",
+    "explanation": "제시된 문장의 to부정사는 '~하기 위해'라는 목적을 나타내는 부사적 용법입니다. ①의 to buy와 ④의 to become이 목적을 나타냅니다. ②③은 명사적 용법, ⑤는 형용사적 용법입니다."
+   },
+   {
+    "answer": "5",
+    "number": 14,
+    "options": [
+     "His dream is to teach English.",
+     "To help other people is wonderful.",
+     "I want to make some Italian food.",
+     "They have many tasks to finish today.",
+     "Tom bought flour and eggs to bake a cake."
+    ],
+    "question": "다음 주어진 문장의 밑줄 친 부분과 그 쓰임이 같은 것은?\n\nShe trained hard <u>to</u> win the medal.",
+    "explanation": "제시된 문장의 to부정사는 목적을 나타내는 부사적 용법입니다. ⑤의 to bake도 '굽기 위해'라는 목적을 나타냅니다. ①②③은 명사적 용법, ④는 형용사적 용법입니다."
+   },
+   {
+    "answer": "5",
+    "number": 15,
+    "options": [
+     "I felt sad to read the letter today.",
+     "I joined a music class to learn the guitar.",
+     "She traveled to Busan to visit the beach.",
+     "She was glad to get a birthday gift.",
+     "I want to go hiking with my family next month."
+    ],
+    "question": "다음 중 밑줄 친 to부정사의 용법이 <보기>와 다른 것은?\n\n<보기>\nㄱ. They practice hard <u>to</u> win the match.\nㄴ. I'm happy <u>to</u> see you.",
+    "explanation": "<보기>의 to부정사는 목적(~하기 위해)이나 감정의 원인(~해서)을 나타내는 부사적 용법입니다. ⑤의 to go는 want의 목적어 역할을 하는 명사적 용법입니다. 나머지는 부사적 용법입니다."
+   },
+   {
+    "answer": "2",
+    "number": 16,
+    "options": [
+     "Sam studied hard <u>to pass</u> the exam.",
+     "Emma wants <u>to dance</u> on the stage.",
+     "David woke up early <u>to catch</u> the bus.",
+     "Jina exercises daily <u>to stay</u> healthy.",
+     "Peter went to the clinic <u>to see</u> a doctor."
+    ],
+    "question": "다음 중 밑줄 친 to부정사의 용법이 다른 하나는?",
+    "explanation": "①③④⑤의 to부정사는 모두 목적을 나타내는 부사적 용법입니다. ②의 to dance는 wants의 목적어 역할을 하는 명사적 용법입니다."
+   },
+   {
+    "answer": "4",
+    "number": 17,
+    "options": [
+     "I studied hard <u>to do</u> well in my midterm exams.",
+     "Sam is saving money <u>to buy</u> a new bike.",
+     "Lucy exercises every morning <u>to stay</u> fit.",
+     "This question is hard <u>to answer</u>.",
+     "I bake cookies <u>to make</u> her happy."
+    ],
+    "question": "다음 중 밑줄 친 부분의 쓰임이 다른 것은?",
+    "explanation": "①②③⑤의 to부정사는 목적을 나타내는 부사적 용법입니다. ④의 to answer는 앞의 형용사 hard를 꾸며 주는 부사적 용법(정도)으로 쓰였으며, 목적의 의미가 아닙니다."
+   },
+   {
+    "answer": "1",
+    "number": 18,
+    "options": [
+     "I want to meet you again.",
+     "I'll go to Italy to eat pizza.",
+     "She went to the shop to buy some pens.",
+     "To visit that island, we have to take a boat.",
+     "Many guests will come to my party to have fun."
+    ],
+    "question": "다음 중 밑줄 친 부분의 쓰임이 나머지 넷과 다른 것은?",
+    "explanation": "②③④⑤의 to부정사는 모두 목적을 나타내는 부사적 용법입니다. ①의 to meet은 want의 목적어 역할을 하는 명사적 용법입니다."
+   },
+   {
+    "answer": "2",
+    "number": 19,
+    "options": [
+     "She traveled to Africa <u>to help</u> children.",
+     "I have enough money <u>to buy</u> the bike.",
+     "I met Suho <u>to study</u> math with him.",
+     "Tom went to the park <u>to ride</u> his bike.",
+     "He entered law school <u>to be</u> a lawyer."
+    ],
+    "question": "다음 중 밑줄 친 to부정사의 용법이 다른 하나는?",
+    "explanation": "①③④⑤의 to부정사는 목적을 나타내는 부사적 용법입니다. ②의 to buy는 앞의 명사 money를 꾸며 주는 형용사적 용법입니다."
+   },
+   {
+    "answer": "4",
+    "number": 20,
+    "options": [
+     "I woke up early <u>to watch</u> the sunrise.",
+     "Anna came <u>to visit</u> me last week.",
+     "Mike studied hard <u>to pass</u> the quiz.",
+     "Lisa started <u>to play</u> many kinds of games.",
+     "What did the king do <u>to help</u> poor people?"
+    ],
+    "question": "다음 중 밑줄 친 부분의 쓰임이 다른 하나는?",
+    "explanation": "①②③⑤의 to부정사는 목적을 나타내는 부사적 용법입니다. ④의 to play는 started의 목적어 역할을 하는 명사적 용법입니다."
+   },
+   {
+    "answer": "2",
+    "number": 21,
+    "options": [
+     "I flew to Canada to visit my cousin.",
+     "This is a hard question to answer.",
+     "She has to leave early to catch the bus.",
+     "I bake bread to make him happy.",
+     "She stopped by there to meet her teacher."
+    ],
+    "question": "다음 중 밑줄 친 부분의 쓰임이 <보기>와 다른 것은?\n\n<보기>\nHe says they traveled there <u>to</u> protect the animals of Kenya.",
+    "explanation": "<보기>와 ①③④⑤의 to부정사는 목적을 나타내는 부사적 용법입니다. ②의 to answer는 앞의 명사 question을 꾸며 주는 형용사적 용법입니다."
+   },
+   {
+    "answer": "3",
+    "number": 22,
+    "options": [
+     "She sleeps early so as to get enough rest.",
+     "He learns to bake in order to open a bakery.",
+     "She must be glad to have a sister like you.",
+     "He joined the club to help other students.",
+     "You should study harder than now to earn good grades."
+    ],
+    "question": "다음 중 밑줄 친 부분의 쓰임이 나머지 넷과 다른 것은?",
+    "explanation": "①②④⑤의 to부정사는 모두 목적을 나타내는 부사적 용법입니다(so as to, in order to는 목적을 강조하는 표현). ③의 to have는 glad의 감정의 원인(~해서)을 나타내는 부사적 용법입니다."
+   },
+   {
+    "answer": "4",
+    "number": 23,
+    "options": [
+     "My father goes to the gym to stay fit.",
+     "My father goes to the gym in order to stay fit.",
+     "My father goes to the gym so that he can stay fit.",
+     "My father goes to the gym but he can't stay fit.",
+     "My father goes to the gym so as to stay fit."
+    ],
+    "question": "다음 중 문장의 의미가 나머지 넷과 다른 것은?",
+    "explanation": "①②③⑤는 모두 '건강을 유지하기 위해서'라는 목적을 나타냅니다. ④는 'but'을 써서 '건강을 유지할 수 없다'는 반대의 의미가 되므로 나머지와 다릅니다."
+   },
+   {
+    "answer": "2",
+    "number": 24,
+    "options": [
+     "I wrote this letter <u>to thank my teacher</u>.",
+     "I think you have <u>to finish your homework</u>.",
+     "She practiced hard <u>to win the contest</u>.",
+     "He went to the store <u>to buy some milk</u>.",
+     "You can use this app <u>to learn English</u>."
+    ],
+    "question": "다음 중 밑줄 친 부분의 쓰임이 다른 하나는?",
+    "explanation": "①③④⑤는 '~하기 위해서'라는 목적을 나타내는 부사적 용법입니다. ②의 'to finish'는 'have to(~해야 한다)'의 일부로 쓰인 것으로 용법이 다릅니다."
+   },
+   {
+    "answer": "5",
+    "number": 25,
+    "options": [
+     "I bought some flour <u>to bake a cake</u>.",
+     "She woke up early <u>to catch the bus</u>.",
+     "He left home <u>to study abroad</u>.",
+     "We went to the store <u>to buy some bread</u>.",
+     "I have many books <u>to read this week</u>."
+    ],
+    "question": "다음 중 밑줄 친 부분의 쓰임이 다른 하나는?",
+    "explanation": "①②③④는 '~하기 위해서'라는 목적을 나타내는 부사적 용법입니다. ⑤의 'to read'는 앞의 명사 'books'를 꾸며 주는 형용사적 용법이므로 다릅니다."
+   }
+  ],
+  "answer_key": [
+   "3",
+   "5",
+   "4",
+   "4",
+   "1",
+   "5",
+   "3",
+   "5",
+   "4",
+   "4",
+   "1",
+   "2",
+   "1 4",
+   "5",
+   "5",
+   "2",
+   "4",
+   "1",
+   "2",
+   "4",
+   "2",
+   "3",
+   "4",
+   "2",
+   "5"
+  ]
+ },
+ "tmpl_beafa65a-097b-4caa-b313-2384493115d2": [
+  {
+   "tag": "단일",
+   "type": "single_choice",
+   "answer": "before",
+   "number": 1,
+   "options": [
+    "when",
+    "while",
+    "before",
+    "after"
+   ],
+   "question": "다음 빈칸에 <보기>에서 알맞은 접속사를 골라 쓰시오.\n<보기> when, while, before, after\n\nDinner should be ready __________ the customers arrive."
+  },
+  {
+   "tag": "단일",
+   "type": "single_choice",
+   "answer": "While",
+   "number": 2,
+   "options": [
+    "when",
+    "while",
+    "before",
+    "after"
+   ],
+   "question": "다음 빈칸에 <보기>에서 알맞은 접속사를 골라 쓰시오.\n<보기> when, while, before, after\n\n__________ I was sleeping, my sister tore my book."
+  },
+  {
+   "tag": "단일",
+   "type": "single_choice",
+   "answer": "After",
+   "number": 3,
+   "options": [
+    "when",
+    "while",
+    "before",
+    "after"
+   ],
+   "question": "다음 빈칸에 <보기>에서 알맞은 접속사를 골라 쓰시오.\n<보기> when, while, before, after\n\n__________ I finish reading the book, I will tell you about its story."
+  },
+  {
+   "tag": "단일",
+   "type": "single_choice",
+   "answer": "When",
+   "number": 4,
+   "options": [
+    "when",
+    "while",
+    "before",
+    "after"
+   ],
+   "question": "다음 빈칸에 <보기>에서 알맞은 접속사를 골라 쓰시오.\n<보기> when, while, before, after\n\n__________ I was 15 years old, I met her for the first time."
+  },
+  {
+   "tag": "단어배열",
+   "type": "sentence",
+   "answer": "Despite everyone playing well",
+   "number": 5,
+   "options": [],
+   "question": "다음 우리말과 일치하도록 괄호 안에 주어진 단어를 이용하여 빈칸에 알맞은 말을 쓰시오.\n\n모두가 잘 싸웠지만 우리는 그 경기에서 졌다. (play)\n→ _________  _________  everyone ________ well, we lost the game."
+  },
+  {
+   "tag": "빈칸",
+   "type": "short_answer",
+   "answer": "Although, dislike",
+   "number": 6,
+   "question": "다음 우리말과 일치하도록 괄호 안에 주어진 단어를 이용하여 빈칸에 알맞은 말을 쓰시오.\n\n여름은 신나는 계절이지만 하지만, 더위는 참을 수 없다. (stand) \n→ __________ summer is a fun season, I __________ the heat."
+  },
+  {
+   "tag": "빈칸",
+   "type": "short_answer",
+   "answer": "while I was",
+   "number": 7,
+   "question": "다음 우리말과 일치하도록 괄호 안에 주어진 단어를 이용하여 빈칸에 알맞은 말을 쓰시오.\n\n내가 외출한 동안 누가 전화했나요? (be)\n→ Did anyone call __________ __________ __________ away?"
+  },
+  {
+   "tag": "빈칸",
+   "type": "short_answer",
+   "answer": "while taking",
+   "number": 8,
+   "question": "다음 우리말과 일치하도록 괄호 안에 주어진 단어를 이용하여 빈칸에 알맞은 말을 쓰시오.\n\n샤워하는 동안 귀에 물이 들어갔다. (take)\n→ Water got into my ear __________ __________  __________ __________ a shower."
+  },
+  {
+   "tag": "빈칸",
+   "type": "short_answer",
+   "answer": "Although",
+   "number": 9,
+   "question": "다음 대화의 흐름상 빈칸에 들어갈 알맞은 말을 써서 대화를 완성하시오.\n\nA: Did it rain a lot?\nB: Yes, it did. __________ it rained a lot, I arrived at the festival on time."
+  },
+  {
+   "tag": "기타",
+   "type": "sentence",
+   "answer": "the traffic was heavy,",
+   "number": 10,
+   "question": "다음 대화의 흐름상 빈칸에 들어갈 알맞은 말을 써서 대화를 완성하시오.\n\nA: Was the traffic heavy?\nB: Yes, __________ __________ Although __________ __________  __________  __________ , we arrived on time."
+  },
+  {
+   "tag": "복수정답",
+   "type": "multi_choice",
+   "answer": "were too expensive, couldn't buy them",
+   "number": 11,
+   "options": [
+    "exercised every day",
+    "couldn't buy them",
+    "were too expensive",
+    "got not healthier"
+   ],
+   "question": "다음 <보기>에서 알맞은 표현을 골라 문장을 완성하시오.\n<보기> exercised every day / couldn't buy them / were too expensive / got healthier \n\nSince the shoes _________________, Sora __________."
+  },
+  {
+   "tag": "단어배열",
+   "type": "sentence",
+   "answer": "has been dieting, gained weight",
+   "number": 12,
+   "question": "다음 <보기>에서 알맞은 표현을 골라 문장을 완성하시오.\n<보기> exercised every day / couldn't buy them / were too expensive / got healthier \n\nMinho _____________________ since he __________."
+  },
+  {
+   "tag": "영작",
+   "type": "sentence",
+   "answer": "After washing her hair, mom combed her hair.",
+   "number": 13,
+   "question": "다음 두 문장이 같은 뜻이 되도록 빈칸에 알맞은 문장을 완성하시오. (단, 주어진 정자로 시작하는 접속사를 이용하여 쓰시오.)\n\nMom washed my little sister's hair, and then she combed her hair.\n= A ____________________________________\n\n*comb one's hair : 머리를 빗다 "
+  },
+  {
+   "tag": "단어배열",
+   "type": "sentence",
+   "answer": "he still plays soccer",
+   "number": 14,
+   "question": "다음 문장의 빈칸을 자연스러운 의미가 되도록 괄호 안의 단어를 사용하여 완성하시오.\n\n→ Though Minsu had a big car accident last month, ______________________________  (start, play, soccer)"
+  },
+  {
+   "tag": "단일",
+   "type": "single_choice",
+   "answer": "Though",
+   "number": 15,
+   "options": [
+    "though",
+    "since"
+   ],
+   "question": "다음 문장의 빈칸에 들어가기에 적절한 접속사를 <보기>에서 골라 쓰시오.\n<보기> though / since\n\n__________ it looked very easy at first, it took a long time to solve it."
+  },
+  {
+   "tag": "단일",
+   "type": "single_choice",
+   "answer": "since",
+   "number": 16,
+   "options": [
+    "though",
+    "since"
+   ],
+   "question": "다음 문장의 빈칸에 들어가기에 적절한 접속사를 <보기>에서 골라 쓰시오.\n<보기> though / since\n\nShe gets lost often __________ she is really poor at directions."
+  },
+  {
+   "tag": "단일",
+   "type": "single_choice",
+   "answer": "Since",
+   "number": 17,
+   "options": [
+    "though",
+    "since"
+   ],
+   "question": "다음 문장의 빈칸에 들어가기에 적절한 접속사를 <보기>에서 골라 쓰시오.\n<보기> though / since\n\n__________ he was good at painting, he could easily learn how to draw cartoons."
+  },
+  {
+   "tag": "단일",
+   "type": "single_choice",
+   "answer": "Though",
+   "number": 18,
+   "options": [
+    "though",
+    "since"
+   ],
+   "question": "다음 문장의 빈칸에 들어가기에 적절한 접속사를 <보기>에서 골라 쓰시오.\n<보기> though / since\n\n__________ he has many friends, he often feels lonely."
+  },
+  {
+   "tag": "단일",
+   "type": "single_choice",
+   "answer": "since",
+   "number": 19,
+   "options": [
+    "though",
+    "since"
+   ],
+   "question": "다음 문장의 빈칸에 들어가기에 적절한 접속사를 <보기>에서 골라 쓰시오.\n<보기> though / since\n\nI didn't watch the soccer game __________ I was so busy."
+  },
+  {
+   "tag": "단일",
+   "type": "single_choice",
+   "answer": "though",
+   "number": 20,
+   "options": [
+    "though",
+    "since"
+   ],
+   "question": "다음 문장의 빈칸에 들어가기에 적절한 접속사를 <보기>에서 골라 쓰시오.\n<보기> though / since\nJustin ate ten pieces of chocolate cake __________ he was on a diet."
+  },
+  {
+   "tag": "단일",
+   "type": "single_choice",
+   "answer": "since",
+   "number": 21,
+   "options": [
+    "though",
+    "since"
+   ],
+   "question": "다음 문장의 빈칸에 들어가기에 적절한 접속사를 <보기>에서 골라 쓰시오.\n<보기> though / since\n\nThey often die from eating plastic __________ their bodies cannot break it down."
+  },
+  {
+   "tag": "단일",
+   "type": "single_choice",
+   "answer": "Though",
+   "number": 22,
+   "options": [
+    "though",
+    "since"
+   ],
+   "question": "다음 문장의 빈칸에 들어가기에 적절한 접속사를 <보기>에서 골라 쓰시오.\n<보기> though / since\n\n__________ it is very difficult, I will find some way to solve it."
+  },
+  {
+   "tag": "빈칸",
+   "type": "short_answer",
+   "answer": "While",
+   "number": 23,
+   "question": "다음 두 문장의 뜻이 같도록 빈칸을 채우시오.\n\nMom is baking a cake, and I am writing a card for my dad.\n= __________ mom is baking a cake, I am writing a card for my dad."
+  },
+  {
+   "tag": "기타",
+   "type": "sentence",
+   "answer": "While I was on vacation,",
+   "number": 24,
+   "question": "다음 두 문장의 뜻이 같도록 빈칸을 채우시오.\n\nDuring my vacation, I visited Jeju Island.\n= __________ __________was __________ __________ __________, I visited Jeju Island."
+  },
+  {
+   "tag": "단어배열",
+   "type": "sentence",
+   "answer": "since you don't have much time",
+   "number": 25,
+   "question": "다음 우리말에 맞게 주어진 단어를 알맞게 배열하시오. \n\n너는 시간이 많지 않기 때문에 서둘러야 한다.\n→ You should hurry up _____________________.\n (have, you, since, time, don't, much)"
+  },
+  {
+   "tag": "단어배열",
+   "type": "sentence",
+   "answer": "Since you like apples,",
+   "number": 26,
+   "question": "다음 우리말에 맞게 주어진 단어를 알맞게 배열하시오. \n\n네가 사람 좋아하기 때문에 나는 그것들을 몇 개 가지왔다.\n→ _______________, I brought some of them. \n(like, apples, since, you)"
+  },
+  {
+   "tag": "단어배열",
+   "type": "sentence",
+   "answer": "Though I failed this time, even",
+   "number": 27,
+   "question": "다음 우리말에 맞게 주어진 단어를 알맞게 배열하시오. \n\n내가 이번에는 실패했지만, 다시 시도해 볼 수 있어.\n→ ________________, you can try again.\n(may, though, this, even, fail, you, time)"
+  },
+  {
+   "tag": "단어배열",
+   "type": "sentence",
+   "answer": "Although she had a map,",
+   "number": 28,
+   "question": "다음 우리말에 맞게 주어진 단어를 알맞게 배열하시오. \n\n그녀는 지도를 가지고 있었지만, 길을 찾을 수 없었다.\n→ _________________, she could not find the way. \n(although, had, a, she, map)"
+  },
+  {
+   "tag": "단어배열",
+   "type": "sentence",
+   "answer": "since he had to do his homework",
+   "number": 29,
+   "question": "다음 우리말에 맞게 주어진 단어를 알맞게 배열하시오. \n\n준호는 숙제를 해야 하기 때문에 일찍 집에 돌아갔다.\n→ Junho went back home early _______________________ \n(had, since, his, to, homework, do, he)"
+  },
+  {
+   "tag": "단어배열",
+   "type": "sentence",
+   "answer": "since it was her sister's birthday",
+   "number": 30,
+   "question": "다음 우리말에 맞게 주어진 단어를 알맞게 배열하시오. \n\n수민이는 그녀의 여동생의 생일이었기 때문에 케이크를 샀다.\n→ Sumin bought a cake ______________________ \n(birthday, since, was, sister's, her, it)"
+  },
+  {
+   "tag": "복수정답",
+   "type": "multi_choice",
+   "answer": "sick, study",
+   "number": 31,
+   "options": [
+    "sick / tired / poor / study / happy / hospital"
+   ],
+   "question": "다음 우리말에 맞게 주어진 단어를 알맞게 배열하시오. \n<보기> sick / tired / poor / study / happy / hospital\n\nThough she was __________, she tried to __________ hard."
+  },
+  {
+   "tag": "복수정답",
+   "type": "multi_choice",
+   "answer": "poor, happy",
+   "number": 32,
+   "options": [
+    "sick / tired / poor / study / happy / hospital"
+   ],
+   "question": "다음 우리말에 맞게 주어진 단어를 알맞게 배열하시오. \n<보기> sick / tired / poor / study / happy / hospital\n\nThough his family is __________, they are always __________."
+  },
+  {
+   "tag": "복수정답",
+   "type": "multi_choice",
+   "answer": "sick, hospital",
+   "number": 33,
+   "options": [
+    "sick / tired / poor / study / happy / hospital"
+   ],
+   "question": "다음 우리말에 맞게 주어진 단어를 알맞게 배열하시오. \n<보기> sick / tired / poor / study / happy / hospital\n\nThough the boy was __________, he didn't want to go to a __________."
+  },
+  {
+   "tag": "단어배열",
+   "type": "sentence",
+   "answer": "Although David eats a lot,",
+   "number": 34,
+   "question": "다음 <예시>와 같이 괄호 안에 주어진 단어들을 바르게 배열하여 문장을 완성하시오.\n<예시> (although, is, very, it, cold), my father will go fishing. \n→ Although it is very cold, my father will go fishing.\n\n(David, a lot, although, eats), he looks thin.\n→ _________________ he looks thin."
+  },
+  {
+   "tag": "단어배열",
+   "type": "sentence",
+   "answer": "Although we are close friends,",
+   "number": 35,
+   "question": "다음 <예시>와 같이 괄호 안에 주어진 단어들을 바르게 배열하여 문장을 완성하시오.\n<예시> (although, is, very, it, cold), my father will go fishing. \n→ Although it is very cold, my father will go fishing.\n\n(we, although, friends, are, close) we don't meet that often.\n→ ________________ we don't meet that often."
+  },
+  {
+   "tag": "단어배열",
+   "type": "sentence",
+   "answer": "Even though Nancy can't speak English well,",
+   "number": 36,
+   "question": "다음 <예시>와 같이 괄호 안에 주어진 단어들을 바르게 배열하여 문장을 완성하시오.\n<예시> (although, is, very, it, cold), my father will go fishing. \n→ Although it is very cold, my father will go fishing.\n\n(English, well, even though, Nancy, can't speak), she writes English perfectly.\n→ ______________________ she writes English perfectly."
+  },
+  {
+   "tag": "단어배열",
+   "type": "sentence",
+   "answer": "Even though the movie was exciting to me,",
+   "number": 37,
+   "question": "다음 <예시>와 같이 괄호 안에 주어진 단어들을 바르게 배열하여 문장을 완성하시오.\n<예시> (although, is, very, it, cold), my father will go fishing. \n→ Although it is very cold, my father will go fishing.\n\n(the movie, even though, exciting, was, to me), the reviews were not so good.\n→ _______________________ the reviews were not so good."
+  },
+  {
+   "tag": "빈칸",
+   "type": "short_answer",
+   "answer": "Although",
+   "number": 38,
+   "question": "다음 두 문장의 의미가 같도록 빈칸에 알맞은 말을 쓰시오.\n\nHe wasn't interested in movies, but he joined the school club.\n→ __________ he wasn't interested in movies, he joined the school club."
+  },
+  {
+   "tag": "기타",
+   "type": "sentence",
+   "answer": "Although it was raining,",
+   "number": 39,
+   "question": "다음 두 문장의 의미가 같도록 빈칸에 알맞은 말을 쓰시오.\n\nIn spite of the rain, we played soccer.\n→ __________ __________ __________, we played soccer."
+  },
+  {
+   "tag": "빈칸",
+   "type": "short_answer",
+   "answer": "studying hard,",
+   "number": 40,
+   "question": "다음 두 문장의 의미가 같도록 빈칸에 알맞은 말을 쓰시오.\n\nAlthough he studied hard, he failed to pass the final exam.\n→ In spite of __________ __________ he couldn't pass the final exam."
+  },
+  {
+   "tag": "단어배열",
+   "type": "sentence",
+   "answer": "Though Korea is a small country, it has a long history.",
+   "number": 41,
+   "question": "다음 <예시>와 같이 <보기>에 주어진 표현과 though 또는 since를 사용하여 문장을 완성하시오.\n<예시> She is not satisfied with it.\n→ Though Cathy got a good job, she is not satisfied with it.  \n\nIt has a long history. (Korea is a small country.)"
+  },
+  {
+   "tag": "단어배열",
+   "type": "sentence",
+   "answer": "Since Jerry had used all his allowance, he could not buy some snacks.",
+   "number": 42,
+   "question": "다음 <예시>와 같이 <보기>에 주어진 표현과 though 또는 since를 사용하여 문장을 완성하시오.\n<예시> She is not satisfied with it.\n→ Though Cathy got a good job, she is not satisfied with it.  \n\nHe could not buy some snacks. (jerry had used all his allowance) "
+  },
+  {
+   "tag": "단어배열",
+   "type": "sentence",
+   "answer": "Since Tom is a careful driver, he didn't run at all.",
+   "number": 43,
+   "question": "다음 <예시>와 같이 <보기>에 주어진 표현과 though 또는 since를 사용하여 문장을 완성하시오.\n<예시> She is not satisfied with it.\n→ Though Cathy got a good job, she is not satisfied with it.  \n\nHe didn't run at all. (Tom is a careful driver.) "
+  },
+  {
+   "tag": "단어배열",
+   "type": "sentence",
+   "answer": "Since Rick has had some accidents, he was late for the meeting.",
+   "number": 44,
+   "question": "다음 <예시>와 같이 <보기>에 주어진 표현과 though 또는 since를 사용하여 문장을 완성하시오.\n<예시> She is not satisfied with it.\n→ Though Cathy got a good job, she is not satisfied with it.  \n\nHe has had some accidents. (Rick was late for the meeting) "
+  },
+  {
+   "tag": "단어배열",
+   "type": "sentence",
+   "answer": "Since the problem is hard to solve, you should ask somebody for help.",
+   "number": 45,
+   "question": "다음 <예시>와 같이 <보기>에 주어진 표현과 though 또는 since를 사용하여 문장을 완성하시오.\n<예시> She is not satisfied with it.\n→ Though Cathy got a good job, she is not satisfied with it.  \n\nYou should ask somebody for help. (The problem is hard to slove.) "
+  },
+  {
+   "tag": "단어배열",
+   "type": "sentence",
+   "answer": "Since Hana is only 16 years old, she cannot travel alone.",
+   "number": 46,
+   "question": "다음 <예시>와 같이 <보기>에 주어진 표현과 though 또는 since를 사용하여 문장을 완성하시오.\n<예시> She is not satisfied with it.\n→ Though Cathy got a good job, she is not satisfied with it.  \n\nShe cannot travel alone. (Hana is only 16 years old)"
+  },
+  {
+   "tag": "단어배열",
+   "type": "sentence",
+   "answer": "Though his health is good for fruit, he doesn't like it.",
+   "number": 47,
+   "question": "다음 우리말과 일치하도록 괄호 안에 주어진 단어들을 바르게 배열하시오.\n\n비록 과일이 건강에 좋지만, 그는 그것을 좋아하지 않는다.\n(fruit, like, he, it, for, good, though, is, his, health, doesn't)"
+  },
+  {
+   "tag": "단어배열",
+   "type": "sentence",
+   "answer": "Ms. Johnson is over 80, so she doesn't drive any more.",
+   "number": 48,
+   "question": "다음 우리말과 일치하도록 괄호 안에 주어진 단어들을 바르게 배열하시오.\n\nJohnson 부인은 여든 살이 넘었기 때문에 더 이상 운전을 할 수 없다.\n(any more, Ms. Johnson, since, over, is, she, drive, 80, not, does)"
+  },
+  {
+   "tag": "기타",
+   "type": "sentence",
+   "answer": "she is sad, she is smiling.",
+   "number": 49,
+   "question": "다음 두 문장의 의미가 같도록 빈칸에 알맞은 말을 쓰시오.\n\nShe is sad, but she is smiling.\n→ Although ______________________________________________."
+  },
+  {
+   "tag": "영작",
+   "type": "sentence",
+   "answer": "We had to walk home since we had no money.",
+   "number": 50,
+   "question": "다음 두 문장의 의미가 같도록 빈칸에 알맞은 말을 쓰시오.\n\nWe had no money. Therefore, we had to walk home.\n→ ____________________ since __________"
+  },
+  {
+   "tag": "기타",
+   "type": "sentence",
+   "answer": "is still hungry, he ate a big lunch.",
+   "number": 51,
+   "question": "다음 두 문장의 의미가 같도록 빈칸에 알맞은 말을 쓰시오.\n\nHe ate a big lunch, but he is still hungry.\n→ He __________ although __________"
+  },
+  {
+   "tag": "영작",
+   "type": "sentence",
+   "answer": "I finished all of my homework, I was very tired.",
+   "number": 52,
+   "question": "다음 두 문장의 의미가 같도록 빈칸에 알맞은 말을 쓰시오.\n\nI was very tired. However, I finished all of my homework.\n→ __________ although __________"
+  },
+  {
+   "tag": "영작",
+   "type": "sentence",
+   "answer": "while I am taking a shower",
+   "number": 53,
+   "question": "다음 두 문장을 알맞은 접속사를 사용하여 한 문장으로 만드시오.\n\nI usually sing. + I am taking a shower. (나는 샤워하는 동안 주로 노래를 부른다.)\n\n→ I usually sing __________ __________ __________ __________ __________ __________"
+  },
+  {
+   "tag": "단어배열",
+   "type": "sentence",
+   "answer": "If you think that way, you will be happy.",
+   "number": 54,
+   "question": "다음 괄호 안에 주어진 날말들을 배열하여 올바른 문장으로 쓰시오.\n\n(that / if / think / you / way), you will be happy."
+  },
+  {
+   "tag": "기타",
+   "type": "sentence",
+   "answer": "Though he was poor,",
+   "number": 55,
+   "question": "다음 두 문장의 의미가 같도록 since 또는 though를 사용하여 빈칸에 알맞은 말을 쓰시오.\n\nHe was poor, but he always helped others.\n→ _________________________, he always helped others."
+  },
+  {
+   "tag": "영작",
+   "type": "sentence",
+   "answer": "Unless it rains tomorrow, we will go to the library.",
+   "number": 56,
+   "question": "다음 우리말과 의미하도록 조건을 나타내는 'If'나 'Unless'를 사용하여 8-10단어의 한 문장으로 영작하시오.\n\n만약 내일 비가 온다면, 우리는 도서관에 갈 것이다."
+  },
+  {
+   "tag": "기타",
+   "type": "sentence",
+   "answer": "unless you have a ticket",
+   "number": 57,
+   "question": "다음 두 문장이 같은 뜻이 되도록 빈칸을 알맞은 말을 쓰시오.\n\nYou cannot go in if you don't have a ticket.\n= You cannot go in __________ __________ __________ __________ __________"
+  },
+  {
+   "tag": "빈칸",
+   "type": "short_answer",
+   "answer": "since",
+   "number": 58,
+   "question": "다음 빈칸에 since, although 중 알맞은 접속사를 각각 골라 쓰시오.\n\nI got an A on the English test __________ I studied very hard."
+  },
+  {
+   "tag": "다중빈칸",
+   "type": "multi_part",
+   "answer": "(1) will rain, (2) rains",
+   "number": 59,
+   "question": "다음 대화를 읽고 주어진 동사를 알맞은 빈칸에 알맞은 말을 쓰시오.\n\nA: It's very cloudy tonight. I'm sure that it (1)__________(rain) tomorrow.\nB: Are you going to stay at home if it (2)__________(rain) tomorrow?"
+  },
+  {
+   "tag": "빈칸",
+   "type": "short_answer",
+   "answer": "In spite of",
+   "number": 60,
+   "question": "다음 두 문장의 의미가 같도록 빈칸에 알맞은 말을 쓰시오.\n\nAlthough my grades were low, I lived a successful life.\n→ __________ __________  __________ my low grades, I lived a successful life."
+  },
+  {
+   "tag": "영작",
+   "type": "sentence",
+   "answer": "Although it rained a lot,",
+   "number": 61,
+   "question": "다음 대화의 빈칸에 접속사 although를 사용하여 완전한 영어 문장으로 완성하시오.\nA: Did it rain a lot?\nB: Yes, it did. ____________________ they played soccer."
+  },
+  {
+   "tag": "오류수정",
+   "type": "sentence",
+   "answer": "Though it rained a lot, I went for a walk.",
+   "number": 62,
+   "question": "다음 문장에 접속사 though를 사용하여 주어진 우리말과 같은 의미로 고쳐쓰시오.\n\nIt rained a lot. I went for a walk.\n(비가 많이 왔음에도 불구하고, 나는 산책을 나갔다.)"
+  },
+  {
+   "tag": "영작",
+   "type": "sentence",
+   "answer": "Steve had no difficulty getting there even though he didn't have a map.",
+   "number": 63,
+   "question": "다음 우리말을 괄호 안에 주어진 단어와 접속사 though를 사용하여 영작하시오.\n\nSteve는 지도가 없었음에도 그곳에 도착하는 데 어려움이 없었다. (difficulty, get)"
+  },
+  {
+   "tag": "단어배열",
+   "type": "sentence",
+   "answer": "While my brother likes chicken,",
+   "number": 64,
+   "question": "다음 괄호 안의 단어를 바르게 배열하시오.\n\n(my, likes, brother, while, chicken), I like pork."
+  },
+  {
+   "tag": "단어배열",
+   "type": "sentence",
+   "answer": "It rained while Ann was taking a walk.",
+   "number": 65,
+   "question": "다음 <보기>와 같이 'while'과 같이 'while'과 과거진행형을 사용하여 문장을 만드시오.\n<보기>\nit rain / Ann, take a walk\n→ It rained while Ann was taking a walk.\n\nMom, cook dinner / Dad, wash the car \n→ _________________________________"
+  },
+  {
+   "tag": "빈칸",
+   "type": "short_answer",
+   "answer": "Although",
+   "number": 66,
+   "question": "다음 두 문장의 의미가 같도록 빈칸에 알맞은 말을 쓰시오.\nI missed the train, but I arrived on time.\n\n→ __________ I missed the train, I arrived on time."
+  },
+  {
+   "tag": "빈칸",
+   "type": "short_answer",
+   "answer": "Although / Though",
+   "number": 67,
+   "question": "다음 두 문장의 의미가 같도록 빈칸에 알맞은 말을 쓰시오.\nThere were too many people in the concert hall, but the concert was wonderful.\n\n→ __________ __________ there were too many people in the concert hall, the concert was wonderful."
+  },
+  {
+   "tag": "단어배열",
+   "type": "sentence",
+   "answer": "While I was in the library, my uncle visited my house.",
+   "number": 68,
+   "question": "다음 우리말 의미와 같도록 <보기>의 단어를 모두 사용하여 쓰시오.\n내가 도서관에 있는 동안 내 삼촌이 나의 집을 방문하였다.\n\n<보기>\nhouse / while / my / was / in / visited / the / my / library / I / uncle"
+  },
+  {
+   "tag": "영작",
+   "type": "sentence",
+   "answer": "Though they live next to us,",
+   "number": 69,
+   "question": "다음 두 문장을 since 또는 though를 사용하여 한 문장으로 연결하시오.\n\nThey live next to us. But we don't see them very often.\n→ __________ we don't see them very often."
+  },
+  {
+   "tag": "영작",
+   "type": "sentence",
+   "answer": "After listening to music, he played soccer.",
+   "number": 70,
+   "question": "다음 그림을 참고하여 주어진 두 문장을 <조건>에 맞게 완성하시오.\n(그림: 오전-음악을 듣는 소년 / 오후-축구를 하는 소년) \n• He listened to music.\n• He played soccer.\n\n<조건>\n• 접속사 after를 사용할 것\n• 8단어 이내의 완전한 문장으로 쓸 것"
+  },
+  {
+   "tag": "단어배열",
+   "type": "sentence",
+   "answer": "Though Sungkyu is tall, he can't play basketball.",
+   "number": 71,
+   "question": "다음 <보기>와 같이 괄호 안에 주어진 단어를 바르게 배열하여 Though로 시작하는 문장을 완성하시오.\n\n<보기>\n(play, Sungkyu, basketball, be, tall, can't, he)\n→ Though Sungkyu is tall, he can't play basketball.\n\nthis fruit, delicious, it, really bad, look, smell "
+  },
+  {
+   "tag": "단일",
+   "type": "single_choice",
+   "answer": "5",
+   "number": 72,
+   "options": [
+    "①",
+    "②",
+    "③",
+    "④",
+    "① and ④"
+   ],
+   "question": "다음 밑줄 친 since의 의미가 같은 것끼리 묶고, 그 의미를 쓰시오.\n① I have known her <u>since</u> I was young.\n② Lisa wants to be a scientist <u>since</u> she's good at science.\n③ <u>Since</u> he bought her a teddy bear, she was happy.\n④ We have lived in Seoul <u>since</u> we left our home.\n\n(1) 기호: _________ 의미: __________\n(2) 기호: _________ 의미: __________"
+  },
+  {
+   "tag": "다중빈칸",
+   "type": "multi_part",
+   "answer": "(1) After Ted ran, he walked his dog. (2) Before Ted walked his dog, he played soccer.",
+   "number": 73,
+   "question": "다음 그림을 보고, Ted가 내일 할 일을 <조건>에 맞게 영작하시오.\n(그림: 뛰어가는 소년→강아지와 산책하는 소년)\n(그림: 학교 → 자고 있는 소년) \n\n<조건>\n1. 시간 접속사 'after / before'를 써서 완성할 것 ((1), (2) 접속사 달라야 함)\n2. 화살표는 시간상 순서를 의미함"
+  },
+  {
+   "tag": "영작",
+   "type": "sentence",
+   "answer": "Although I was sick, I went to school.",
+   "number": 74,
+   "question": "다음 대화의 밑줄 친 우리말을 바르게 영작하시오.\n\nA: Were you sick yesterday?\nB: Yes, I was. <u>비록 나는 아팠지만, 나는 학교에 갔어.</u>\nA: That's too bad. Are you okay now?\nB: I'm still sick. What I want to do now is to take more rest."
+  },
+  {
+   "tag": "단어배열",
+   "type": "sentence",
+   "answer": "Although Minsu was sick, he finished his homework.",
+   "number": 75,
+   "question": "다음 그림을 표현하는 문장을 <보기>의 단어를 모두 사용하여 쓰시오.\n(그림: 머리를 감싸고 숙제를 하는 소년) \n\n<보기>\nfinished / he / although / Minsu / was / sick / his / homework"
+  },
+  {
+   "tag": "단어배열",
+   "type": "sentence",
+   "answer": "Although he was not hungry, he ate what she cooked.",
+   "number": 76,
+   "question": "다음 우리말과 일치하도록 괄호 안에 주어진 단어들을 바르게 배열하시오. (필요시 단어를 변형할 것)\n\n(1) 비록 그는 배가 고프지 않았지만, 그녀가 요리해준 것을 먹었다. \n(he, what, not, hungry, be, she, although, he, eat, cook)"
+  },
+  {
+   "tag": "다중빈칸",
+   "type": "multi_part",
+   "answer": "(1) after her English, (2) two, two different",
+   "number": 77,
+   "question": "시간표를 보고 빈칸을 채우시오.\n\nTime | Judy             | James\n10:00 | English         | English\n11:00 | Math             | History\n12:00 | History         | Lunch time\n13:00 | Lunch time  | Math\n14:00 | Literature     | Literature\n15:00 |        -             | Science\n\n(1) Judy has a history class __________ __________ __________ class.\n(2) James has __________ classes before lunch time and has __________ __________ after lunch time."
+  },
+  {
+   "tag": "단어배열",
+   "type": "sentence",
+   "answer": "Though it rained, many people played outside.",
+   "number": 78,
+   "question": "다음 우리말을 주어진 <조건>에 맞게 영작하시오.\n\n<조건>\n1. 괄호 안에 주어진 단어를 사용할 것\n2. 필요시 단어의 형태를 바꿀 것\n\n비가 내리는데도, 많은 사람들이 밖에서 놀았다. (rain, people, outside) "
+  },
+  {
+   "tag": "영작",
+   "type": "sentence",
+   "answer": "Although he is not rich, he helps poor people.",
+   "number": 79,
+   "question": "다음 <조건>에 맞게 영어 문장을 쓰시오.\n<조건>\n1. 접속사 although와 since를 각각 사용할 것\n2. 주어진 단어를 활용하여, 현재시제를 사용할 것\n\n______________________ (be not rich / help poor people / he)"
+  },
+  {
+   "tag": "오류수정",
+   "type": "sentence",
+   "answer": "Though she was tired, she tried to study hard.",
+   "number": 80,
+   "question": "다음 우리말을 주어진 <조건>에 맞게 영작하시오.\n\n<조건>\n1. 대소문자 및 철자 오류는 오답 처리하니 철자를 식별 가능하도록 쓸 것 \n2. 시제와 수를 일치 시킬 것\n\n그녀는 피곤했음에도 불구하고, 열심히 공부하려고 노력했다.\n→  Though ______________________________,________________________. "
+  },
+  {
+   "tag": "영작",
+   "type": "sentence",
+   "answer": "Although I am not a good friend,",
+   "number": 81,
+   "question": "다음 우리말과 의미하도록 빈칸을 완성하시오.\n\n비록 내가 좋은 친구 아닐지라도, 나는 너의 가장 좋은 친구가 되고 싶어.\n→ ______________________________ I want to be your best friend."
+  },
+  {
+   "tag": "다중빈칸",
+   "type": "multi_part",
+   "answer": "(1) After graduating, (2) After working in a restaurant in Korea,",
+   "number": 82,
+   "question": "Hojin의 장래 계획을 보고 알맞은 시간 접속사를 사용하여 문장을 완성하시오.\n\nAGE | Hojin's PLAN\n25    | - graduate from school\n        | - go to Japan\n30    | - working in a restaurant in Korea\n        | - write some cookbooks\n\n(1) 25 years old\n→ __________ __________ from school, he will go to Japan.\n\n(2) 30 years old\n→ __________ __________ he will write some cookbooks."
+  },
+  {
+   "tag": "단어배열",
+   "type": "sentence",
+   "answer": "I went to bed at 12:00 a.m. since I was playing a computer game.",
+   "number": 83,
+   "question": "다음 대화의 빈칸에 글의 흐름에 맞도록 <보기>에 주어진 단어를 사용하여 영문으로 답하시오. \n\nTeacher: You are late again today, Steve. It has already been 3 times this week.\nSteve: I'm sorry. I set the alarm, but I couldn't hear it this morning.\nTeacher: What time did you go to bed last night?\nSteve: __________________________\nTeacher: You have to promise me to turn off your computer around 10 p.m. All right? Or, I will call your mom.\nSteve: I promise.\n\n<보기> since / 12:00 a.m.,  / computer game"
+  },
+  {
+   "tag": "기타",
+   "type": "sentence",
+   "answer": "(a) Although, (b) while",
+   "number": 84,
+   "question": "다음 두 문장의 빈칸으로 들어갈 말을 쓰고 그 차이를 설명하시오.\n\nⓐ __________ some of them are diligent, others are lazy.\n\nⓑ I saw many friends __________ I was taking a walk yesterday."
+  },
+  {
+   "tag": "다중빈칸",
+   "type": "multi_part",
+   "answer": "(1) After, (2) will come, since, (3) will have, when, comes",
+   "number": 85,
+   "question": "다음 대화를 읽고, <보기>에 주어진 단어 중 알맞은 것을 활용하여 빈칸을 채우시오. (단, 빈칸의 개수와 단어의 수는 상관없음)\n\nPiglet: Did you see Pooh?\nTigger: No.\nEeyore: No.\nPiglet: He left this message and disappeared. Where did he go?\n(I'll be back when spring comes. - Pooh)\nOwl: I know. He went to the Rocky Mountains. He will sleep during the winter.\nPiglet: The Rocky Mountains? How far is it from here?\nOwl: It's about 50km.\nTigger: How long will he sleep?\nOwl: He'll sleep for about four months.\nPiglet: I miss him.\nEeyore: Me, too.\nPiglet: Let's have a big party when he comes back.\nEeyore: Lets clean his house before he comes back.\n\n<보기>\n• before, after, as soon as, while, until\n• come, disappear, leave, find, have\n\n(1) __________ Piglet found Pooh's message, Pooh left for the Rocky Mountains.\n(2) Pooh __________ back about four months __________ he went to the Rocky Mountains.\n(3) Pooh's friends __________ a big party __________ Pooh __________ back."
+  },
+  {
+   "tag": "빈칸",
+   "type": "short_answer",
+   "answer": "although I'm tired",
+   "number": 86,
+   "question": "다음 대화가 자연스럽도록 <조건>에 맞게 빈칸을 완성하시오.\n\nMom: Jenny, are you O.K.?\nJenny: Yes, mom. I'm getting better now.\nMom: But you still look so tired. Why don't you go to bed now? I think that you should take a rest.\nJenny: I can't do that, mom. I have homework to do. I should finish my homework __________ (although / tired).\nMom: I see. Don't stay up too late.\n\n<조건>\n1. 반드시 괄호 안에 주어진 단어를 포함할 것\n2. 반드시 한 문장으로 쓸 것\n→ I should finish my homework ____________________________. (although / tired)"
+  },
+  {
+   "tag": "단어배열",
+   "type": "sentence",
+   "answer": "I have been on a diet since I always gain weight.",
+   "number": 87,
+   "question": "다음 <보기>에 제시된 모든 조건에 맞게 주어진 우리말을 영작하시오.\n\n<보기>\n1. 다음 주어진 단어를 모두 사용할 것 (형태 변경 가능)\n: gain / be / diet / a / always / weight\n\n2. 다음 내용이 설명하는 단어를 사용할 것\nYou use this word to introduce reasons or explanations, and it has a meaning similar to 'because' and 'as'. It can also be used in the blank with a different meaning: / have been here _____ the end of June.\n\n3. 10~11단어 이내로 쓸 것\n\n나는 쉽게 살이 찌기 때문에 항상 다이어트 중이다."
+  }
+ ]
+}
