@@ -257,6 +257,7 @@ export default async function ParentReportPage({ params, searchParams }: Props) 
         fillBlanksByUnit={naesinProgressData.fillBlanksByUnit}
         problemSheetsByUnit={naesinProgressData.problemSheetsByUnit}
         problemAttemptsBySheet={naesinProgressData.problemAttemptsBySheet}
+        problemDraftsBySheet={naesinProgressData.problemDraftsBySheet}
         grammarContentByUnit={naesinProgressData.grammarContentByUnit}
         naesinRequiredRounds={naesinRequiredRounds}
         hideSettings

@@ -63,6 +63,8 @@ interface Props {
   fillBlanksByUnit?: Record<string, Record<string, number>>;
   problemSheetsByUnit?: Record<string, { id: string; title: string; category?: string }[]>;
   problemAttemptsBySheet?: Record<string, { score: number; total: number; pct: number }>;
+  /** 제출 전 임시저장 — 회색 '미완료' 대신 '진행 중 n/총'으로 표시 */
+  problemDraftsBySheet?: Record<string, { answered: number; total: number; updatedAt: string }>;
   grammarContentByUnit?: Record<string, boolean>;
   naesinRequiredRounds?: number;
   hideSettings?: boolean;
@@ -83,6 +85,7 @@ export function NaesinProgressCard({
   fillBlanksByUnit,
   problemSheetsByUnit,
   problemAttemptsBySheet,
+  problemDraftsBySheet,
   grammarContentByUnit,
   naesinRequiredRounds,
   hideSettings,
@@ -323,9 +326,12 @@ export function NaesinProgressCard({
                         : sheet.category === 'eng_eng_def' ? '영영풀이'
                         : problemOnly.length > 1 ? `문제${problemOnly.indexOf(sheet) + 1}` : '문제';
                       const label = sheet.title || categoryLabel;
+                      const draft = problemDraftsBySheet?.[sheet.id];
                       const node = attempt
                         ? <span key={sheet.id} className={`${chip} ${scoreChipClass(attempt.pct)}`}>{label} {attempt.pct}점</span>
-                        : <span key={sheet.id} className={grayChip}>{label} 미완료</span>;
+                        : draft
+                          ? <span key={sheet.id} className={`${chip} bg-amber-50 text-amber-700 dark:bg-amber-950 dark:text-amber-300`} title={`마지막 저장 ${new Date(draft.updatedAt).toLocaleString('ko-KR')}`}>{label} 진행 중 {draft.answered}{draft.total ? `/${draft.total}` : ''}</span>
+                          : <span key={sheet.id} className={grayChip}>{label} 미완료</span>;
                       if (isMock) mockChips.push(node);
                       else if (isOther) otherChips.push(node);
                       else probChips.push(node);

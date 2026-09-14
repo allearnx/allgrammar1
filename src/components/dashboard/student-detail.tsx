@@ -124,9 +124,9 @@ export async function StudentDetail({ user, studentId, naesinData }: Props) {
 
   // Naesin progress (depends on videoRes for legacy watch seconds)
   const legacyWatchedSeconds = videoProgress.reduce((a, p) => a + p.video_watched_seconds, 0);
-  const { naesinProgress, hours, minutes, fillBlanksByUnit, problemSheetsByUnit, problemAttemptsBySheet, grammarContentByUnit } = naesinData
+  const { naesinProgress, hours, minutes, fillBlanksByUnit, problemSheetsByUnit, problemAttemptsBySheet, problemDraftsBySheet, grammarContentByUnit } = naesinData
     ? await fetchNaesinProgress(studentId, naesinData, legacyWatchedSeconds)
-    : { naesinProgress: [], hours: 0, minutes: 0, fillBlanksByUnit: {}, problemSheetsByUnit: {}, problemAttemptsBySheet: {}, grammarContentByUnit: {} };
+    : { naesinProgress: [], hours: 0, minutes: 0, fillBlanksByUnit: {}, problemSheetsByUnit: {}, problemAttemptsBySheet: {}, problemDraftsBySheet: {}, grammarContentByUnit: {} };
 
   // Fetch academy-level naesin_required_rounds
   let naesinRequiredRounds = 1;
@@ -196,6 +196,7 @@ export async function StudentDetail({ user, studentId, naesinData }: Props) {
             fillBlanksByUnit={fillBlanksByUnit}
             problemSheetsByUnit={problemSheetsByUnit}
             problemAttemptsBySheet={problemAttemptsBySheet}
+            problemDraftsBySheet={problemDraftsBySheet}
             grammarContentByUnit={grammarContentByUnit}
             naesinRequiredRounds={naesinRequiredRounds}
             canEditProgress={user.role === 'teacher' || user.role === 'admin' || user.role === 'boss'}
