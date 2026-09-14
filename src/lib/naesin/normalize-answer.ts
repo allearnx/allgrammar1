@@ -191,3 +191,108 @@ export function matchSubParts(
   const studentSep = normalizeSeparators(userAnswer);
   return whole.some((c) => normalizeSeparators(c) === studentSep);
 }
+
+/** 빈칸(밑줄 2개 이상). 공백만으로 이어진 인접 빈칸("_____ _____")은 하나로 본다. */
+const BLANK_RE = /_{2,}(?:[ \t]+_{2,})*/g;
+/** 문항 라벨: (A) (1) ㉠ ㊀ ㄱ: A: • → 등 — 학생 답·문제 문장 앞에서 제거 */
+const LEADING_LABEL_RE = /^\s*(?:\(?[A-Za-z0-9]\)|[㉠-㉭㊀-㊉]|[ㄱ-ㅎ]\s*[:.]|[A-Z]\s*:|[•·→\-])\s*/;
+const MAX_VARIANTS = 64;
+
+function stripLeadingLabels(s: string): string {
+  let prev = '';
+  let cur = s;
+  while (cur !== prev) {
+    prev = cur;
+    cur = cur.replace(LEADING_LABEL_RE, '');
+  }
+  return cur.trim();
+}
+
+/** 문장 단위 분리: 줄바꿈 + 문장 종결부호 뒤 공백 (iOS 구형 Safari 호환을 위해 lookbehind 미사용) */
+function splitSentences(text: string): string[] {
+  return text
+    .replace(/([.?!])\s+/g, '$1\n')
+    .split(/\n+/)
+    .map((s) => s.trim())
+    .filter(Boolean);
+}
+
+function fillVariants(sentence: string, candidates: string[][]): string[] {
+  let variants = [''];
+  const pieces = sentence.split(BLANK_RE);
+  for (let i = 0; i < pieces.length; i++) {
+    const next: string[] = [];
+    const fills = i < pieces.length - 1 ? candidates[i] : [''];
+    for (const v of variants) {
+      for (const f of fills) {
+        next.push(v + pieces[i] + f);
+        if (next.length >= MAX_VARIANTS) break;
+      }
+      if (next.length >= MAX_VARIANTS) break;
+    }
+    variants = next;
+  }
+  return variants;
+}
+
+/**
+ * 빈칸 문항에 학생이 "빈칸을 채운 완전한 문장"을 쓴 경우 정답 인정.
+ * 문제 본문에서 빈칸(___)이 있는 문장만 골라 정답(파트별 인정답안 포함)을 채워 넣고,
+ * 학생 답을 문장 단위로 나눠 순서대로 정확히 일치할 때만 정답으로 본다.
+ * 학생이 문제의 빈칸 없는 문장을 그대로 베껴 쓴 것("I am so sleepy.")은 무시한다.
+ * (이동형 과거형 Step2 #9 "He doesn't have an older sister." → 정답 "doesn't have"인데 오답 처리된 실사고)
+ */
+export function matchFilledBlanks(
+  userAnswer: string,
+  question: string | undefined | null,
+  correctAnswer: string,
+  acceptedAnswers: string[] = [],
+  subParts?: { answer: string; acceptedAnswers?: string[] }[],
+): boolean {
+  if (!question || !/[A-Za-z]/.test(userAnswer)) return false;
+  // 빈칸 바로 앞의 라벨("(A)______", "㉠______")은 문장 중간이어도 제거
+  const cleaned = question.replace(/(?:\(?[A-Za-z0-9]\)|[㉠-㉭㊀-㊉])\s*(?=_{2,})/g, '');
+  const sentences = splitSentences(cleaned).map(stripLeadingLabels);
+  const blankSentences = sentences.filter((s) => BLANK_RE.test(s) && (BLANK_RE.lastIndex = 0) === 0);
+  if (blankSentences.length === 0) return false;
+  const plainSentences = new Set(
+    sentences.filter((s) => !blankSentences.includes(s)).map((s) => normalize(s)).filter(Boolean),
+  );
+  const blankCounts = blankSentences.map((s) => (s.match(BLANK_RE) ?? []).length);
+  const total = blankCounts.reduce((a, b) => a + b, 0);
+
+  // 빈칸별 후보: subParts 우선, 없으면 정답을 " / " 또는 ","로 나눠 개수가 맞을 때만
+  let perBlank: string[][] | null = null;
+  if (subParts && subParts.length === total) {
+    perBlank = subParts.map((sp) => [sp.answer, ...(sp.acceptedAnswers ?? [])]);
+  } else {
+    const splitBy = (s: string): string[] | null => {
+      for (const sep of [/\s*\/\s*/, /\s*,\s*/]) {
+        const parts = s.split(sep).map((p) => p.trim()).filter(Boolean);
+        if (parts.length === total) return parts;
+      }
+      return total === 1 ? [s.trim()] : null;
+    };
+    for (const cand of [correctAnswer, ...acceptedAnswers]) {
+      const parts = splitBy(cand);
+      if (!parts) continue;
+      perBlank ??= parts.map(() => []);
+      parts.forEach((p, i) => perBlank![i].push(p));
+    }
+  }
+  if (!perBlank) return false;
+
+  let offset = 0;
+  const expected = blankSentences.map((s, i) => {
+    const variants = fillVariants(s, perBlank!.slice(offset, offset + blankCounts[i]));
+    offset += blankCounts[i];
+    return new Set(variants.map((v) => normalize(v)));
+  });
+
+  const segments = splitSentences(userAnswer.replace(/\s*\/\s*/g, '\n'))
+    .map(stripLeadingLabels)
+    .map((s) => normalize(s))
+    .filter((s) => s && !plainSentences.has(s));
+  if (segments.length !== expected.length) return false;
+  return segments.every((seg, i) => expected[i].has(seg));
+}

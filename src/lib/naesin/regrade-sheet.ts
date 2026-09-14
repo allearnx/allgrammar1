@@ -1,5 +1,5 @@
 import { createAdminClient } from '@/lib/supabase/admin';
-import { normalize, normalizeSeparators, matchMcqAnswer, extractAnswer, isSubstringMatch, matchSubParts, uncircle } from '@/lib/naesin/normalize-answer';
+import { normalize, normalizeSeparators, matchMcqAnswer, extractAnswer, isSubstringMatch, matchSubParts, matchFilledBlanks, uncircle } from '@/lib/naesin/normalize-answer';
 
 /**
  * 시트 1개를 재채점하고 오답 테이블을 갱신한다.
@@ -86,7 +86,8 @@ export async function regradeSheet(
         const q = questions?.[i];
         if (q?.subParts) {
           // 파트별 비교 → 실패 시 전체 문자열(구분자 무시) 폴백
-          isCorrect = matchSubParts(userAnswer, q.subParts, [correctAnswer, ...(q.acceptedAnswers ?? [])]);
+          isCorrect = matchSubParts(userAnswer, q.subParts, [correctAnswer, ...(q.acceptedAnswers ?? [])])
+            || matchFilledBlanks(userAnswer, q.question, correctAnswer, q.acceptedAnswers, q.subParts);
         } else {
           const studentNorm = normalize(userAnswer);
           const candidates = [
@@ -101,6 +102,10 @@ export async function regradeSheet(
           // 배열 문제 등 부분 일치 (prefix/suffix)
           if (!isCorrect) {
             isCorrect = candidates.some((c) => isSubstringMatch(userAnswer, c));
+          }
+          // 빈칸을 채운 완전한 문장을 쓴 경우
+          if (!isCorrect) {
+            isCorrect = matchFilledBlanks(userAnswer, q?.question, correctAnswer, q?.acceptedAnswers);
           }
           // 규칙 채점 실패 → AI/선생님 판정 보존.
           // 제출 시엔 AI가 정답(100)으로 준 답이 재채점(정답처리·정답 수정 후 자동 실행)에서
@@ -223,7 +228,8 @@ export async function regradeSheet(
         let isCorrect: boolean;
         if (isSubjective) {
           if (q?.subParts) {
-            isCorrect = matchSubParts(String(userAnswer), q.subParts, [correctAnswer, ...(q.acceptedAnswers ?? [])]);
+            isCorrect = matchSubParts(String(userAnswer), q.subParts, [correctAnswer, ...(q.acceptedAnswers ?? [])])
+              || matchFilledBlanks(String(userAnswer), q.question, correctAnswer, q.acceptedAnswers, q.subParts);
           } else {
             const aiResult = aiResultsMap[idxStr];
             if (aiResult && aiResult.score === 100) {
@@ -239,6 +245,9 @@ export async function regradeSheet(
               // 배열 문제 등 부분 일치 (prefix/suffix)
               if (!isCorrect) {
                 isCorrect = candidates.some((c) => isSubstringMatch(String(userAnswer), c));
+              }
+              if (!isCorrect) {
+                isCorrect = matchFilledBlanks(String(userAnswer), q?.question, correctAnswer, q?.acceptedAnswers);
               }
             }
           }

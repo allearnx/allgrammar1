@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { normalize, normalizeSeparators, matchMcqAnswer, resolveCorrectIndex, uncircle, matchSubParts } from '@/lib/naesin/normalize-answer';
+import { normalize, normalizeSeparators, matchMcqAnswer, resolveCorrectIndex, uncircle, matchSubParts, matchFilledBlanks } from '@/lib/naesin/normalize-answer';
 
 describe('normalize', () => {
   it('trims, lowercases, removes trailing period, collapses spaces', () => {
@@ -185,5 +185,56 @@ describe('matchSubParts — 파트별 비교 + 전체 문자열 구분자 무시
   it('subPart acceptedAnswers도 파트별로 인정', () => {
     const sp = [{ label: '(1)', answer: 'so that', acceptedAnswers: ['in order that'] }, { label: '(2)', answer: 'could' }];
     expect(matchSubParts('in order that / could', sp, [])).toBe(true);
+  });
+});
+
+describe('matchFilledBlanks — 빈칸을 채운 완전한 문장 인정', () => {
+  it('단일 빈칸: 학생이 문장 전체를 쓴 경우 (이동형 과거형 Step2 #9)', () => {
+    const q = '다음 괄호 안에 주어진 단어를 이용하여 빈칸을 완성하시오.\nHe ________ an older sister. (not / have)';
+    expect(matchFilledBlanks("He doesn't have an older sister.\n", q, "doesn't have", ['does not have'])).toBe(true);
+    expect(matchFilledBlanks('He does not have an older sister.', q, "doesn't have")).toBe(true);
+    expect(matchFilledBlanks('He has an older sister.', q, "doesn't have")).toBe(false);
+  });
+
+  it('문제의 빈칸 없는 문장을 베껴 쓴 부분은 무시하되 빈칸 문장은 틀리면 오답', () => {
+    const q = 'I ________ to bed early. I am so sleepy. (go)';
+    expect(matchFilledBlanks("I didn't go to bed early. I am so sleepy.", q, "didn't go")).toBe(true);
+    expect(matchFilledBlanks('I went to bed early. I am so sleepy.', q, "didn't go")).toBe(false);
+    const q2 = "That's not true. We ________ that. (believe)";
+    expect(matchFilledBlanks("That's not true. We can't believe that.", q2, "don't believe")).toBe(false);
+  });
+
+  it('대화 여러 줄 + subParts (이동형 #22, #24)', () => {
+    const q = '다음 <보기>의 단어를 이용하여 대화를 완성하시오.\n<보기> go, enjoy, wake, get, play\n\nA: Where did you go for the vacation?\nB: We ________ to Jejudo.\nA: ________ you ________ it?\nB: Yes, I ________.';
+    const sub = [{ answer: 'went' }, { answer: 'Did' }, { answer: 'enjoy' }, { answer: 'did' }];
+    expect(matchFilledBlanks('We went to Jejudo. / Did you enjoy it? / Yes, I did.', q, 'went, Did, enjoy, did', [], sub)).toBe(true);
+    expect(matchFilledBlanks('We went to Jejudo. Did you enjoy it? Yes, I did.', q, 'went, Did, enjoy, did', [], sub)).toBe(true);
+    expect(matchFilledBlanks('We go to Jejudo. / Did you enjoy it? / Yes, I did.', q, 'went, Did, enjoy, did', [], sub)).toBe(false);
+    const q24 = 'A: What ________ you ________ yesterday?\nB: I ________ table tennis.\nA: ________ you read any books?\nB: ________, ________ ________.';
+    const sub24 = [{ answer: 'did' }, { answer: 'do' }, { answer: 'played' }, { answer: 'Did' }, { answer: 'No' }, { answer: "I didn't", acceptedAnswers: ['I did not'] }];
+    expect(matchFilledBlanks(" What did you do yesterday? / I played table tennis. / Did you read any books? / No, I didn't.", q24, "did, do, played, Did, No, I didn't", [], sub24)).toBe(true);
+  });
+
+  it('subParts 인정답안이 빈칸 후보에 포함된다 (#23 woke/go)', () => {
+    const q = 'A: When ________ you ________ up this morning?\nB: I ________ up at eight.\nA: ________ you ________ to school on time?\nB: No, I ________.';
+    const sub = [{ answer: 'did' }, { answer: 'wake' }, { answer: 'got', acceptedAnswers: ['woke'] }, { answer: 'Did' }, { answer: 'get', acceptedAnswers: ['go'] }, { answer: "didn't", acceptedAnswers: ['did not'] }];
+    expect(matchFilledBlanks("When did you wake up this morning? / I woke up at eight. / Did you go to school on time? / No, I didn't.", q, 'did, wake, got, Did, get, didn\'t', [], sub)).toBe(true);
+  });
+
+  it('한 줄 안에 라벨 붙은 빈칸 여러 개 (이동형 명령문 Step1 #26)', () => {
+    const q = "다음은 동물원의 안내문입니다.\n\nWelcome to Wonder World. (A)______ with cute animals. However, (B)______ snacks to the animals. They're not good for the animals. (C)______ in the trash can, please. Have a great time.\n\n※ (A)/(B)/(C)를 앞에서부터 ' / '로 구분해 쓰시오.";
+    const sub = [
+      { answer: 'Take pictures', acceptedAnswers: ['Enjoy time'] },
+      { answer: "Don't give", acceptedAnswers: ["Don't feed"] },
+      { answer: 'Put trash', acceptedAnswers: ['Throw trash', 'Throw the trash'] },
+    ];
+    expect(matchFilledBlanks("take pictures with cute animals. /  However, Don't feed snacks to the animals. / Throw the trash in the trash can, please", q, "Take pictures / Don't give / Put trash", [], sub)).toBe(true);
+    expect(matchFilledBlanks("take pictures with cute animals. / However, Don't feed snacks to the animals.", q, "Take pictures / Don't give / Put trash", [], sub)).toBe(false);
+  });
+
+  it('빈칸 개수와 답 개수가 안 맞거나 빈칸이 없으면 false', () => {
+    expect(matchFilledBlanks('He does not have an older sister.', 'He ________ ________ an older sister.', "doesn't have")).toBe(true); // 인접 빈칸은 하나
+    expect(matchFilledBlanks('anything', '다음 문장을 영작하시오.', 'He is tall')).toBe(false);
+    expect(matchFilledBlanks("doesn't have", 'He ________ an older sister.', "doesn't have")).toBe(false); // 빈칸만 쓴 답은 다른 규칙 담당
   });
 });
