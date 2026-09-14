@@ -1,0 +1,856 @@
+{
+  "R1": [
+    {
+      "number": 1,
+      "question": "다음 중 짝지어진 단어의 관계가 나머지 넷과 다른 것은?",
+      "options": [
+        "believable - unbelievable",
+        "touching - moving",
+        "continue - stop",
+        "rich - poor",
+        "real - fake"
+      ],
+      "answer": "2",
+      "explanation": "'감동적인 - 감동적인'은 유의어 관계이고 나머지는 반의어 관계다."
+    },
+    {
+      "number": 2,
+      "question": "다음 중 영영풀이가 알맞지 않은 것은?",
+      "options": [
+        "article: a piece of writing about a particular subject in a newspaper or magazine",
+        "government: the group of people who officially control a country or state",
+        "hide: to go or stay in a place where no one will see or find you",
+        "gather: to move apart and go away in different directions",
+        "bury: to put someone who has died in a grave"
+      ],
+      "answer": "4",
+      "explanation": "gather는 '모이다'라는 뜻이므로, 주어진 영영풀이인 '서로 떨어져 움직여 다른 방향으로 멀리 가다'라는 뜻은 적절하지 않다. 'to come together and form a group(함께 모여서 집단을 형성하다)'로 고쳐야 한다."
+    },
+    {
+      "number": 3,
+      "question": "다음 빈칸 (A)~(D)에 들어갈 단어가 차례대로 연결된 것은?\n\n• Many people fought for Korea's (A)________ from Japan.\n• She wants to study (B)________ and become a doctor.\n• They started the green (C)________ to save polar bears.\n• Talking to a (D)________ in English is difficult for me.\n\nⓐ foreigner ⓑ independence ⓒ medicine ⓓ movement",
+      "options": [
+        "ⓐ-ⓒ-ⓓ-ⓑ",
+        "ⓑ-ⓒ-ⓐ-ⓓ",
+        "ⓑ-ⓒ-ⓓ-ⓐ",
+        "ⓒ-ⓑ-ⓐ-ⓓ",
+        "ⓒ-ⓑ-ⓓ-ⓐ"
+      ],
+      "answer": "3",
+      "explanation": "(A) ⓑ independence (많은 사람들이 일본으로부터의 한국의 독립을 위해 싸웠다.) (B) ⓒ medicine (그녀는 의학을 공부해서 의사가 되길 원한다.) (C) ⓓ movement (그들은 북극곰들을 구하기 위해 환경 운동을 시작했다.) (D) ⓐ foreigner (영어로 외국인과 말하는 것은 내게는 어렵다.)"
+    },
+    {
+      "number": 4,
+      "question": "다음 중 어법상 어색한 것의 개수는?\n\nⓐ He left very late that he missed the bus.\nⓑ I was so scared that I can't say anything.\nⓒ The watch is so expensive that I cannot buy.\nⓓ She is so smart which she can solve the puzzle.\nⓔ It rained so heavy that we couldn't play basketball.",
+      "options": [
+        "1개",
+        "2개",
+        "3개",
+        "4개",
+        "5개"
+      ],
+      "answer": "5",
+      "explanation": "어법상 어색한 것은 총 5개이다. ⓐ very → so ('매우[너무] ~해서 (그 결과) ...하다'는 'so+형용사/부사+that+주어+동사') ⓑ can't → couldn't[could not] (주절의 과거시제에 that절의 시제 일치) ⓒ buy → buy it (that이 이끄는 절이 완전한 절이 되도록 목적어 it 추가) ⓓ which → that ⓔ heavy → heavily (동사 rained를 수식하는 부사)"
+    },
+    {
+      "number": 5,
+      "question": "다음 그림에 대한 설명으로 어법상 또는 내용상 어색한 것을 모두 골라 짝지은 것은?\n(그림 설명: 농장 풍경이다. 울타리 옆에서 고양이 두 마리가 자고 있고, 멀리 풍차가 돌고 있으며, 나뭇가지 위에서 새가 노래하고 있다. 닭은 물을 마시고 있고, 말 한 마리가 들판을 가로질러 달리고 있다. 소녀 Kate가 이 장면을 바라보고 있다.)\n\nⓐ <u>Kate saw cats sleeping by the fence</u>. ⓑ <u>Kate noticed the windmill turn far away</u>. ⓒ <u>Kate heard a bird to sing on the branch</u>. ⓓ <u>Kate watched a chicken lay an egg</u>. ⓔ <u>Kate looked at a horse running across the field</u>.",
+      "options": [
+        "ⓐ, ⓑ",
+        "ⓒ, ⓓ",
+        "ⓓ, ⓔ",
+        "ⓑ, ⓔ",
+        "ⓒ, ⓓ, ⓔ"
+      ],
+      "answer": "2",
+      "explanation": "ⓒ to sing → singing 또는 sing (지각동사 hear는 'hear+목적어+목적격보어(~가 ...하는 것을 듣다)'의 5형식으로 쓸 때 목적격보어로 동사원형 또는 현재분사를 쓰므로 과거형 동사 heard의 목적어 a bird에 이어진 목적격보어 to sing을 현재분사 singing 또는 동사원형 sing으로 고쳐야 한다.) ⓓ lay an egg → drink water 또는 drinking water (그림에서 닭이 물을 마시고 있으므로 'lay an egg(알을 낳다)'를 'drink water(물을 마시다)' 또는 'drinking water(물을 마시고 있다)'로 고쳐야 한다.)"
+    },
+    {
+      "number": 6,
+      "question": "다음 대화의 빈칸에 들어갈 말로 알맞지 않은 것을 모두 고르면? (정답 2개)\n\nB: What kinds of books do you usually read?\nG: I usually read sci-fi novels.\nB: Then, can you recommend a good sci-fi novel for me?\nG: ______________________________ I think it's the best.",
+      "options": [
+        "How about The Time Machine?",
+        "I recommend The Time Machine.",
+        "I'm curious about The Time Machine.",
+        "Why don't you read The Time Machine?",
+        "I'm looking forward to reading The Time Machine."
+      ],
+      "answer": "3, 5",
+      "explanation": "소년이 소녀에게 공상 과학 소설을 추천해 달라고 요청하고 있고, 빈칸 뒤에 그것이 최고라고 생각한다는 내용이 이어지고 있으므로 빈칸에는 특정 공상 과학 소설 이름을 언급하며 추천하거나 권유하는 표현이 들어가야 한다. 따라서 궁금증을 표현하는 ③ '나는 'The Time Machine'이 궁금해.'와 기대감을 표현하는 ⑤ '나는 'The Time Machine'을 읽는 것을 기대하고 있어.'는 빈칸에 들어갈 말로 적절하지 않다."
+    },
+    {
+      "number": 7,
+      "question": "다음 대화를 읽고 물음에 답하시오.\nG: Liam, can you please help me? I need to find some books for my homework.\nB: ______________________________, Somi?\nG: I'm looking for books on famous people who helped others. I need to write an essay.\nB: Who do you want to write about?\nG: I was thinking about Dr. Schweitzer, but can you recommend someone else for me?\nB: What about Audrey Hepburn?\nG: I know she was a famous actor, but what did she do to help others?\nB: She did a lot of volunteer work, especially for children.\nG: Really? Then, I can write about her. Thank you!\n\n위 대화의 빈칸에 들어갈 말로 알맞은 것은?",
+      "options": [
+        "Why are you looking for an essay",
+        "When should you return the book",
+        "What kind of homework should you do",
+        "How many books do you read a month",
+        "What sorts of books are you looking for"
+      ],
+      "answer": "5",
+      "explanation": "소미가 '다른 사람들을 도운 유명인들에 관한 책을 찾고 있어.'라고 답하고 있으므로 빈칸에는 어떤 종류의 책을 찾고 있는지 묻는 표현이 들어가야 한다. 구체적인 종류를 물을 때 'What kinds[sorts] of+명사 ~?'의 형태로 물을 수 있으므로 빈칸에는 ⑤ '어떤 종류의 책을 찾고 있니'가 적절하다."
+    },
+    {
+      "number": 8,
+      "question": "다음 대화를 읽고 물음에 답하시오.\nG: Liam, can you please help me? I need to find some books for my homework.\nB: ______________________________, Somi?\nG: I'm looking for books on famous people who helped others. I need to write an essay.\nB: Who do you want to write about?\nG: I was thinking about Dr. Schweitzer, but can you recommend someone else for me?\nB: What about Audrey Hepburn?\nG: I know she was a famous actor, but what did she do to help others?\nB: She did a lot of volunteer work, especially for children.\nG: Really? Then, I can write about her. Thank you!\n\n위 대화의 내용과 일치하는 것은?",
+      "options": [
+        "Somi needs books on famous actors for her homework.",
+        "Liam suggests Dr. Schweitzer to Somi.",
+        "Somi already knew about Audrey Hepburn's actions to help others.",
+        "Audrey Hepburn mainly helped children as a volunteer.",
+        "Somi decides to write an essay about Dr. Schweitzer."
+      ],
+      "answer": "4",
+      "explanation": "소미가 Audrey Hepburn이 다른 사람들을 돕기 위해 무엇을 했는지 묻자, 그녀는 특히 아이들을 돕기 위해 많은 자원봉사를 했다고 Liam이 답하고 있으므로 ④ 'Audrey Hepburn은 자원봉사자로서 주로 아이들을 도왔다.'는 대화의 내용과 일치한다."
+    },
+    {
+      "number": 9,
+      "question": "다음 담화를 읽고 답할 수 없는 질문은?\n\nW: Hello, everyone. The movie I'm going to introduce today is The Song of Love. It's a movie about a pianist who loses his love for music. He moves to a small town for a new start. There, he begins teaching music to children and finds his love for music again. This movie has great music and a touching story, so I strongly recommend it.",
+      "options": [
+        "What movie is the woman introducing today?",
+        "Who is the main character of the movie?",
+        "What is the name of the actor who played the main character?",
+        "Where does the main character move for a new start?",
+        "Why does the woman strongly recommend the movie?"
+      ],
+      "answer": "3",
+      "explanation": "영화에서 주인공을 맡은 배우에 관한 소개는 없으므로 ③ '주인공을 연기한 배우의 이름은 무엇인가?'는 답할 수 없는 질문이다."
+    },
+    {
+      "number": 10,
+      "question": "다음 중 짝지어진 대화가 어색한 것은?",
+      "options": [
+        "A: What types of movies do you like? / B: I like animation movies.",
+        "A: Can you suggest a good Korean dish for me? / B: What about bulgogi? I'm sure you'll like it.",
+        "A: What kinds of sports do you like? / B: I play badminton with my little sister.",
+        "A: Can you recommend a science magazine for me? / B: Sure. You'll love this one, Teen's Science.",
+        "A: It's my first time in Busan. What do you recommend? / B: I recommend visiting Haeundae Beach."
+      ],
+      "answer": "3",
+      "explanation": "어떤 종류의 스포츠를 좋아하는지 묻는 A의 질문에 여동생과 배드민턴을 친다고 답하는 것은 어색하다. 'I like badminton.'과 같은 답으로 고쳐야 한다."
+    },
+    {
+      "number": 11,
+      "question": "다음 글을 읽고 물음에 답하시오.\nOn February 28, 1919, a man came to Dr. Schofield's house.\nA man: Dr. Schofield, I have a special favor ⓐ<u>to ask</u> you.\nDr. Schofield: What can I do for you?\nA man: Many people are going to gather tomorrow for the independence of Korea. Could you take pictures of the event and share ⓑ<u>it</u> with the world?\nAt 2 p.m. on March 1, Dr. Schofield ⓒ<u>was hiding</u> in a building and saw a large group of people ⓓ<u>gathering</u> outside. He began to take pictures.\nDr. Schofield: Unbelievable! There ⓔ<u>are</u> so many people here. I hope the world will learn about this important event through my pictures.\n\n윗글의 밑줄 친 ⓐ~ⓔ 중, 어법상 어색한 것은?",
+      "options": [
+        "ⓐ",
+        "ⓑ",
+        "ⓒ",
+        "ⓓ",
+        "ⓔ"
+      ],
+      "answer": "2",
+      "explanation": "ⓑ it → them (동사 share의 목적어 자리로, 앞에 언급된 복수명사구 pictures of the event를 가리키므로, 목적격 단수 대명사 it을 목적격 복수 대명사 them으로 고쳐야 한다.)"
+    },
+    {
+      "number": 12,
+      "question": "다음 글을 읽고 물음에 답하시오.\nOn February 28, 1919, a man came to Dr. Schofield's house.\nA man: Dr. Schofield, I have a special favor ⓐ<u>to ask</u> you.\nDr. Schofield: What can I do for you?\nA man: Many people are going to gather tomorrow for the independence of Korea. Could you take pictures of the event and share ⓑ<u>it</u> with the world?\nAt 2 p.m. on March 1, Dr. Schofield ⓒ<u>was hiding</u> in a building and saw a large group of people ⓓ<u>gathering</u> outside. He began to take pictures.\nDr. Schofield: Unbelievable! There ⓔ<u>are</u> so many people here. I hope the world will learn about this important event through my pictures.\n\n윗글을 읽고 답할 수 없는 질문은?",
+      "options": [
+        "When did the man visit Dr. Schofield's house?",
+        "What relationship did the man have with Dr. Schofield?",
+        "Why did many people gather on March 1?",
+        "Where was Dr. Schofield hiding on March 1?",
+        "What did Dr. Schofield do on March 1?"
+      ],
+      "answer": "2",
+      "explanation": "Schofield 박사와 남자의 관계에 대한 언급은 없으므로 ② '그 남자는 Schofield 박사와 어떤 관계이었는가?'는 답할 수 없는 질문이다."
+    },
+    {
+      "number": 13,
+      "question": "다음 글을 읽고 물음에 답하시오.\nOn February 28, 1919, a man came to Dr. Schofield's house.\nA man: Dr. Schofield, I have a special favor ⓐ<u>to ask</u> you.\nDr. Schofield: What can I do for you?\nA man: Many people are going to gather tomorrow for the independence of Korea. Could you take pictures of the event and share ⓑ<u>it</u> with the world?\nAt 2 p.m. on March 1, Dr. Schofield ⓒ<u>was hiding</u> in a building and saw a large group of people ⓓ<u>gathering</u> outside. He began to take pictures.\nDr. Schofield: Unbelievable! There ⓔ<u>are</u> so many people here. I hope the world will learn about this important event through my pictures.\n\n윗글의 목적으로 알맞은 것은?",
+      "options": [
+        "to explain the history of the March 1st Movement",
+        "to introduce Dr. Schofield's medical work in Korea",
+        "to tell us about the difficult situation under Japanese rule",
+        "to show our ancestors' efforts for Korean independence",
+        "to explain Dr. Schofield's first step in helping Korean independence"
+      ],
+      "answer": "5",
+      "explanation": "한 남자의 부탁으로 Schofield 박사가 3·1 운동 사진을 찍으며 한국의 상황을 세계에 알리고자 결심하는 내용이므로, 글의 목적으로 ⑤ 'Schofield 박사가 한국의 독립을 돕는 데 내디딘 첫걸음을 설명하기 위해'가 적절하다."
+    },
+    {
+      "number": 14,
+      "question": "다음 글을 읽고 물음에 답하시오.\nOn March 1, 1919, Dr. Schofield heard people shouting for Korean independence in Tapgol Park. He took pictures of the event with his camera.\n\n(A) Dr. Schofield's fight for Korean independence didn't stop even after the March 1st Movement. He continued to write about the terrible situation in Korea for foreign newspapers.\n(B) He was under the watchful eye of the Japanese police, so he had to go back to Canada in 1920.\n(C) He then wrote an article about the historic event and sent it to foreign newspapers with his pictures.\n\n위 주어진 글에 이어질 순서로 알맞은 것은?",
+      "options": [
+        "(A)-(C)-(B)",
+        "(B)-(A)-(C)",
+        "(B)-(C)-(A)",
+        "(C)-(A)-(B)",
+        "(C)-(B)-(A)"
+      ],
+      "answer": "4",
+      "explanation": "1919년 3월 1일 Schofield 박사가 탑골 공원에서 사람들이 한국의 독립을 외치는 소리를 들었고, 카메라로 그 사건을 찍었다는 주어진 글에 이어, then을 사용하여 그 후 그 사건에 대한 기사와 사진을 외국 신문사에 보냈다는 (C), 일본 경찰의 감시를 받게 되어 캐나다로 돌아가야 했다는 (B)로 이어지는 것이 자연스럽다."
+    },
+    {
+      "number": 15,
+      "question": "다음 글의 제목을 다음과 같이 쓸 때 빈칸에 들어갈 알맞은 말을 본문에서 찾아 쓰시오. (첫 철자는 대문자로 쓸 것)\nOn March 1, 1919, Dr. Schofield heard people shouting for Korean independence in Tapgol Park. He took pictures of the event with his camera. He then wrote an article about the historic event and sent it to foreign newspapers with his pictures.\nDr. Schofield's fight for Korean independence didn't stop even after the March 1st Movement. He continued to write about the terrible situation in Korea for foreign newspapers. He was under the watchful eye of the Japanese police, so he had to go back to Canada in 1920.\nIn 1958, he returned to Korea at the invitation of the Korean government and never left again. For the rest of his life, he worked hard to help Koreans, especially poor students. Dr. Schofield died in April 1970, and he was buried in Seoul National Cemetery.\n\nHow Did Dr. Schofield Fight for (1)________ (2)________?",
+      "options": [],
+      "answer": "Korean Independence",
+      "subParts": [
+        {
+          "label": "(1)",
+          "answer": "Korean"
+        },
+        {
+          "label": "(2)",
+          "answer": "Independence"
+        }
+      ],
+      "explanation": "[제시문] Schofield 박사는 한국의 독립을 위해 어떻게 싸웠는가?"
+    },
+    {
+      "number": 16,
+      "question": "다음 그림의 내용과 일치하도록 <보기>에서 단어를 골라 'so ~ that ...' 구문을 사용하여 문장을 완성하시오. (중복 사용 가능)\n(그림 설명: 키가 큰 남자가 책장 맨 위 칸의 책에 손을 뻗어 닿고 있고, 그 옆의 키가 작은 여동생은 손을 뻗어도 책에 닿지 않는다.)\n\n<보기> reach, tall, small, can\n\n(1) He is ____ ____ ____ ____ ____ ____ the book on the top shelf.\n(2) His sister is ____ ____ ____ ____ ____ ____ the book on the top shelf.",
+      "options": [],
+      "answer": "so tall that he can reach / so small that she cannot reach",
+      "subParts": [
+        {
+          "label": "(1)",
+          "answer": "so tall that he can reach"
+        },
+        {
+          "label": "(2)",
+          "answer": "so small that she cannot reach",
+          "acceptedAnswers": [
+            "so small that she can't reach"
+          ]
+        }
+      ],
+      "explanation": "[제시문] (1) 그는 키가 매우 커서 선반 꼭대기의 책에 닿을 수 있다. (2) 그의 여동생은 키가 매우 작아서 선반 꼭대기의 책에 닿을 수 없다."
+    },
+    {
+      "number": 17,
+      "question": "다음 글을 읽고 물음에 답하시오.\nDo you know Seok Hopil? His English name was Frank W. Schofield, but he loved his Korean name. It sounded (A)[similarly / similar] to his real name, and it also had a good meaning.\nDr. Schofield was a Canadian doctor, and he first came to Korea in 1916 to teach medicine. He wanted to teach in Korean, so he began to learn Korean right away. He studied (B)[so / too] hard that he was able to teach in Korean after only a few years. He believed that every country (C)[has / have] the (D)<u>right</u> to be independent, so he helped the Korean independence movement.\n\n윗글의 괄호 (A), (B), (C)에서 어법상 알맞은 말로 바르게 연결된 것은?",
+      "options": [
+        "(A) similarly – (B) so – (C) has",
+        "(A) similar – (B) so – (C) have",
+        "(A) similar – (B) so – (C) has",
+        "(A) similar – (B) too – (C) has",
+        "(A) similarly – (B) too – (C) have"
+      ],
+      "answer": "3",
+      "explanation": "(A) '~하게 들리다'라는 뜻의 감각동사 sound는 보어로 형용사를 취하므로 과거동사 sounded의 보어 자리에 형용사 similar가 적절하다. (B) 'so+형용사/부사+that+주어+동사' 구문은 '매우[너무] ~해서 (그 결과) ...하다'라는 뜻으로 쓰인다. 뒤에 접속사 that이 완전한 절(he ~ years)을 이끌어 결과의 부사절을 이루고 있으므로, 부사 hard를 수식하는 'so ~ that ...' 구문을 이루는 so가 적절하다. (C) 'every+단수명사(구)'가 주어일 때 단수취급하여 단수동사가 쓰이므로, 주어 every country에 수일치한 단수동사 has가 적절하다."
+    },
+    {
+      "number": 18,
+      "question": "다음 글을 읽고 물음에 답하시오.\nDo you know Seok Hopil? His English name was Frank W. Schofield, but he loved his Korean name. It sounded (A)[similarly / similar] to his real name, and it also had a good meaning.\nDr. Schofield was a Canadian doctor, and he first came to Korea in 1916 to teach medicine. He wanted to teach in Korean, so he began to learn Korean right away. He studied (B)[so / too] hard that he was able to teach in Korean after only a few years. He believed that every country (C)[has / have] the (D)<u>right</u> to be independent, so he helped the Korean independence movement.\n\n윗글의 밑줄 친 (D)right와 뜻이 같은 것은?",
+      "options": [
+        "She came <u>right</u> back after the meeting.",
+        "This coat is <u>right</u> for this cold weather.",
+        "I think my son made the <u>right</u> decision.",
+        "You can find the post office on the <u>right</u>.",
+        "We have the <u>right</u> to express our opinions."
+      ],
+      "answer": "5",
+      "explanation": "(D)의 right는 '권리'라는 뜻의 명사이므로 ⑤ '우리는 의견을 표현할 권리를 가진다.'의 right가 같은 뜻으로 쓰였다. ① 즉시, 바로 ② 알맞은, 적절한 ③ 옳은, 올바른 ④ 오른쪽"
+    },
+    {
+      "number": 19,
+      "question": "다음 글을 읽고 물음에 답하시오.\nDo you know Seok Hopil? His English name was Frank W. Schofield, but he loved his Korean name. It sounded (A)[similarly / similar] to his real name, and it also had a good meaning.\nDr. Schofield was a Canadian doctor, and he first came to Korea in 1916 to teach medicine. He wanted to teach in Korean, so he began to learn Korean right away. He studied (B)[so / too] hard that he was able to teach in Korean after only a few years. He believed that every country (C)[has / have] the (D)<u>right</u> to be independent, so he helped the Korean independence movement.\n\n윗글의 내용과 일치하지 않는 것은?",
+      "options": [
+        "Dr. Schofield had a Korean name.",
+        "Dr. Schofield was a doctor from Canada.",
+        "Dr. Schofield wanted to teach medicine in Korea.",
+        "Dr. Schofield began to learn Korean a few years after arriving in Korea.",
+        "Dr. Schofield helped Korean independence based on his belief."
+      ],
+      "answer": "4",
+      "explanation": "Schofield 박사는 한국어로 가르치고 싶어 곧바로 한국어를 배우기 시작했다고 했으므로 ④ 'Schofield 박사는 한국에 도착하고 몇 년 후에 한국어를 배우기 시작했다.'는 글의 내용과 일치하지 않는다."
+    },
+    {
+      "number": 20,
+      "question": "다음 글을 읽고 물음에 답하시오.\nOn March 1, 1919, Dr. Schofield heard people ⓐ<u>to shouting</u> for Korean independence in Tapgol Park. He took pictures of the event with his camera. He then wrote an article about the historic event and ⓑ<u>sent</u> it to foreign newspapers with his pictures.\nDr. Schofield's fight for Korean independence didn't stop even after the March 1st Movement. He continued ⓒ<u>write</u> about the terrible situation in Korea for foreign newspapers. He was under the watchful eye of the Japanese police, so he had to go back to Canada in 1920.\nIn 1958, he returned to Korea at the invitation of the Korean government and never left again. For the rest of his life, he worked hard ⓓ<u>to help</u> Koreans, especially poor students. Dr. Schofield died in April 1970, and he ⓔ<u>was buried</u> in Seoul National Cemetery.\n\n윗글의 밑줄 친 ⓐ~ⓔ 중, 어법상 어색한 것을 모두 고르면? (정답 2개)",
+      "options": [
+        "ⓐ",
+        "ⓑ",
+        "ⓒ",
+        "ⓓ",
+        "ⓔ"
+      ],
+      "answer": "1, 3",
+      "explanation": "ⓐ to shouting → shouting 또는 shout (지각동사 hear는 'hear+목적어+목적격보어(~가 ...하는 것을 듣다)'의 5형식 형태로 쓸 때, 목적격보어로 동사원형 또는 현재분사를 사용하므로 과거동사 heard와 목적어 people에 이어진 목적격보어 자리의 to shouting을 현재분사 shouting 또는 동사원형 shout으로 고쳐야 한다.) ⓒ write → writing 또는 to write (과거동사 continued의 목적어 자리로, 동사 continue는 목적어 자리에 동사원형이 올 수 없으며 to부정사 또는 동명사가 와야 한다. 따라서 continued의 목적어 자리의 write를 to부정사인 to write 또는 동명사인 writing으로 고쳐야 한다.)"
+    },
+    {
+      "number": 21,
+      "question": "다음 글을 읽고 물음에 답하시오.\nOn March 1, 1919, Dr. Schofield heard people ⓐ<u>to shouting</u> for Korean independence in Tapgol Park. He took pictures of the event with his camera. He then wrote an article about the historic event and ⓑ<u>sent</u> it to foreign newspapers with his pictures.\nDr. Schofield's fight for Korean independence didn't stop even after the March 1st Movement. He continued ⓒ<u>write</u> about the terrible situation in Korea for foreign newspapers. He was under the watchful eye of the Japanese police, so he had to go back to Canada in 1920.\nIn 1958, he returned to Korea at the invitation of the Korean government and never left again. For the rest of his life, he worked hard ⓓ<u>to help</u> Koreans, especially poor students. Dr. Schofield died in April 1970, and he ⓔ<u>was buried</u> in Seoul National Cemetery.\n\n윗글을 읽고 다음 질문에 대한 알맞은 대답이 되도록 주어진 <조건>에 맞게 빈칸을 완성하시오.\n\nQ. What did Dr. Schofield send to foreign newspapers after taking pictures of the March 1st Movement?\n\n<조건>\n• about, event를 사용할 것\n• 각 빈칸에 한 단어씩 쓸 것\n\n→ He sent his (1)____ ____ ____ ____ ____ and his (2)____ to foreign newspapers.",
+      "options": [],
+      "answer": "article about the historic event / pictures",
+      "subParts": [
+        {
+          "label": "(1)",
+          "answer": "article about the historic event"
+        },
+        {
+          "label": "(2)",
+          "answer": "pictures"
+        }
+      ],
+      "explanation": "Schofield 박사는 3·1운동의 사진을 찍은 후에 무엇을 외국 신문사에 보냈는가? → 그는 이 역사적인 사건에 대한 자신의 기사와 자신의 사진들을 외국 신문사에 보냈다."
+    },
+    {
+      "number": 22,
+      "question": "다음 글을 읽고 물음에 답하시오.\nDo you know Seok Hopil? His English name was Frank W. Schofield, but he loved his Korean name. It sounded similar to his real name, and it also had a good meaning.\nDr. Schofield was a Canadian doctor, and he first came to Korea in 1916 to teach medicine. He wanted to teach in Korean, so he began to learn Korean right away. He studied so hard (A)<u>that</u> he was able to teach in Korean after only a few years. He believed that every country has the right to be independent, so he helped the Korean independence movement.\nOn March 1, 1919, (B)<u>Schofield 박사는 탑골 공원에서 사람들이 한국의 독립을 외치는 소리를 들었다</u>. He took pictures of the event with his camera. He then wrote an article about the historic event and sent it to foreign newspapers with his pictures.\nDr. Schofield's fight for Korean independence didn't stop even after the March 1st Movement. He continued to write about the terrible situation in Korea for foreign newspapers. He was under the watchful eye of the Japanese police, so (C)______________________.\nIn 1958, he returned to Korea at the invitation of the Korean government and never left again. For the rest of his life, he worked hard to help Koreans, especially poor students. Dr. Schofield died in April 1970, and he was buried in Seoul National Cemetery.\n\n윗글의 밑줄 친 (A)that과 쓰임이 같은 것은?",
+      "options": [
+        "They argued <u>that</u> the policy wouldn't solve the problem.",
+        "The movie <u>that</u> I watched yesterday was really touching.",
+        "The good news is <u>that</u> no one was injured in the accident.",
+        "Kevin was such a fast runner <u>that</u> he could win the race easily.",
+        "She built a school for poor students <u>that</u> wanted to study."
+      ],
+      "answer": "4",
+      "explanation": "밑줄 친 (A)의 that은 앞의 so hard와 함께 '매우[너무] ~해서 (그 결과) ...하다'라는 뜻의 'so+형용사/부사+that+주어+동사' 구문을 이루는 결과의 부사절 접속사 that이다. 따라서 앞의 such a fast runner와 함께 '매우[너무] ~한 [명사]여서 (그 결과) ...하다'라는 뜻의 'such+a(n)+형용사+명사+that+주어+동사' 구문을 이루는 결과의 부사절 접속사 that인 ④의 that이 같은 쓰임으로 적절하다. ① 목적어 자리에 쓰인 명사절 접속사 ② 목적격 관계대명사 ③ 보어 자리에 쓰인 명사절 접속사 ⑤ 주격 관계대명사"
+    },
+    {
+      "number": 23,
+      "question": "다음 글을 읽고 물음에 답하시오.\nDo you know Seok Hopil? His English name was Frank W. Schofield, but he loved his Korean name. It sounded similar to his real name, and it also had a good meaning.\nDr. Schofield was a Canadian doctor, and he first came to Korea in 1916 to teach medicine. He wanted to teach in Korean, so he began to learn Korean right away. He studied so hard (A)<u>that</u> he was able to teach in Korean after only a few years. He believed that every country has the right to be independent, so he helped the Korean independence movement.\nOn March 1, 1919, (B)<u>Schofield 박사는 탑골 공원에서 사람들이 한국의 독립을 외치는 소리를 들었다</u>. He took pictures of the event with his camera. He then wrote an article about the historic event and sent it to foreign newspapers with his pictures.\nDr. Schofield's fight for Korean independence didn't stop even after the March 1st Movement. He continued to write about the terrible situation in Korea for foreign newspapers. He was under the watchful eye of the Japanese police, so (C)______________________.\nIn 1958, he returned to Korea at the invitation of the Korean government and never left again. For the rest of his life, he worked hard to help Koreans, especially poor students. Dr. Schofield died in April 1970, and he was buried in Seoul National Cemetery.\n\n윗글의 밑줄 친 (B)의 우리말을 다음과 같이 쓸 때, 주어진 <조건>에 알맞게 문장을 완성하시오.\n\n<조건>\n• 현재분사를 사용할 것\n• <보기>의 단어 및 표현을 사용할 것 (필요시 변형할 것)\n• 빈칸에 9단어로 쓸 것\n\n<보기> Tapgol Park, for, shout, hear, Korean\n\n→ Dr. Schofield ______________________________.",
+      "options": [],
+      "answer": "heard people shouting for Korean independence in Tapgol Park",
+      "explanation": "'~가 ...하는 것을 듣다'라는 뜻이므로, 주어진 단어 hear를 사용하여 'hear+목적어+목적격보어(동사원형/현재분사)' 구문으로 영작한다. 주어 Dr. Schofield에 이어 과거동사 heard와 목적어 people을 쓰고, 현재분사를 쓰라는 조건이 있으므로 목적격보어로 현재분사 shouting을 쓴다. '~을 외치다'라는 뜻으로 'shout for ~'를 쓰므로 shouting 뒤에 for Korean independence를 쓴 후, 장소 부사구 in Tapgol Park를 쓴다."
+    },
+    {
+      "number": 24,
+      "question": "다음 글을 읽고 물음에 답하시오.\nDo you know Seok Hopil? His English name was Frank W. Schofield, but he loved his Korean name. It sounded similar to his real name, and it also had a good meaning.\nDr. Schofield was a Canadian doctor, and he first came to Korea in 1916 to teach medicine. He wanted to teach in Korean, so he began to learn Korean right away. He studied so hard (A)<u>that</u> he was able to teach in Korean after only a few years. He believed that every country has the right to be independent, so he helped the Korean independence movement.\nOn March 1, 1919, (B)<u>Schofield 박사는 탑골 공원에서 사람들이 한국의 독립을 외치는 소리를 들었다</u>. He took pictures of the event with his camera. He then wrote an article about the historic event and sent it to foreign newspapers with his pictures.\nDr. Schofield's fight for Korean independence didn't stop even after the March 1st Movement. He continued to write about the terrible situation in Korea for foreign newspapers. He was under the watchful eye of the Japanese police, so (C)______________________.\nIn 1958, he returned to Korea at the invitation of the Korean government and never left again. For the rest of his life, he worked hard to help Koreans, especially poor students. Dr. Schofield died in April 1970, and he was buried in Seoul National Cemetery.\n\n윗글의 빈칸 (C)에 들어갈 말로 알맞은 것은?",
+      "options": [
+        "he gave in to the Japanese government",
+        "he stopped teaching Koreans medicine",
+        "he had to go back to Canada in 1920",
+        "he didn't give up helping Koreans",
+        "he was arrested in 1920"
+      ],
+      "answer": "3",
+      "explanation": "한국 독립을 위한 Schofield 박사의 투쟁이 계속되자 일본 경찰의 감시를 받게 되었다는 내용과 so로 연결되어 있으며, 뒤로 1958년에 한국 정부의 초청으로 한국에 돌아와 한국인들을 위해 여생을 보냈다는 내용이 이어지므로 빈칸에는 한국을 떠나야 했다는 내용이 들어가야 한다. 따라서 ③ '그는 1920년에 캐나다로 돌아가야 했다'가 적절하다."
+    },
+    {
+      "number": 25,
+      "question": "다음 글을 읽고 물음에 답하시오.\nDo you know Seok Hopil? His English name was Frank W. Schofield, but he loved his Korean name. It sounded similar to his real name, and it also had a good meaning.\nDr. Schofield was a Canadian doctor, and he first came to Korea in 1916 to teach medicine. He wanted to teach in Korean, so he began to learn Korean right away. He studied so hard (A)<u>that</u> he was able to teach in Korean after only a few years. He believed that every country has the right to be independent, so he helped the Korean independence movement.\nOn March 1, 1919, (B)<u>Schofield 박사는 탑골 공원에서 사람들이 한국의 독립을 외치는 소리를 들었다</u>. He took pictures of the event with his camera. He then wrote an article about the historic event and sent it to foreign newspapers with his pictures.\nDr. Schofield's fight for Korean independence didn't stop even after the March 1st Movement. He continued to write about the terrible situation in Korea for foreign newspapers. He was under the watchful eye of the Japanese police, so (C)______________________.\nIn 1958, he returned to Korea at the invitation of the Korean government and never left again. For the rest of his life, he worked hard to help Koreans, especially poor students. Dr. Schofield died in April 1970, and he was buried in Seoul National Cemetery.\n\n윗글을 읽고 다음 질문에 대한 알맞은 대답이 되도록 빈칸을 완성하시오. (각 빈칸에 한 단어씩 쓸 것)\n\n(1) Why did Dr. Schofield begin learning Korean?\n→ Because he ____ ____ ____ ____ ____ ____.\n(2) What did Dr. Schofield do after returning to Korea in 1958?\n→ He ____ ____ ____ ____ ____, ____ ____ ____.",
+      "options": [],
+      "answer": "wanted to teach medicine in Korean / worked hard to help Koreans, especially poor students",
+      "subParts": [
+        {
+          "label": "(1)",
+          "answer": "wanted to teach medicine in Korean"
+        },
+        {
+          "label": "(2)",
+          "answer": "worked hard to help Koreans, especially poor students"
+        }
+      ],
+      "explanation": "(1) 왜 Schofield 박사는 한국어를 배우기 시작했는가? → 그는 한국어로 의학을 가르치길 원했기 때문이다. (2) 1958년에 한국으로 돌아온 후 Schofield 박사는 무엇을 했는가? → 그는 한국인들, 특히 가난한 학생들을 돕기 위해 열심히 일했다."
+    },
+    {
+      "number": 26,
+      "question": "다음 글을 읽고 물음에 답하시오.\nDo you know Seok Hopil? His English name was Frank W. Schofield, but he loved his Korean name. It sounded similar to his real name, and it also had a good meaning.\nDr. Schofield was a Canadian doctor, and he first came to Korea in 1916 to teach medicine. He wanted to teach in Korean, so he began to learn Korean right away. He studied so hard (A)<u>that</u> he was able to teach in Korean after only a few years. He believed that every country has the right to be independent, so he helped the Korean independence movement.\nOn March 1, 1919, (B)<u>Schofield 박사는 탑골 공원에서 사람들이 한국의 독립을 외치는 소리를 들었다</u>. He took pictures of the event with his camera. He then wrote an article about the historic event and sent it to foreign newspapers with his pictures.\nDr. Schofield's fight for Korean independence didn't stop even after the March 1st Movement. He continued to write about the terrible situation in Korea for foreign newspapers. He was under the watchful eye of the Japanese police, so (C)______________________.\nIn 1958, he returned to Korea at the invitation of the Korean government and never left again. For the rest of his life, he worked hard to help Koreans, especially poor students. Dr. Schofield died in April 1970, and he was buried in Seoul National Cemetery.\n\n윗글의 주제로 알맞은 것은?",
+      "options": [
+        "the impact of Dr. Schofield on Korean medicine",
+        "the purpose of Dr. Schofield's visit to Korea",
+        "Dr. Schofield's Korean language study",
+        "Japanese pressure on Dr. Schofield",
+        "Dr. Schofield's devotion to Korea"
+      ],
+      "answer": "5",
+      "explanation": "1916년 의학을 가르치기 위해 한국에 온 Schofield 박사가 한국의 독립운동을 돕다가 캐나다로 돌아가야만 했던 것과, 다시 한국에 돌아온 후에도 여생을 한국인들, 특히 가난한 학생들을 위해 일했던 내용을 다루고 있으므로, 글의 주제로 ⑤ 'Schofield 박사의 한국에 대한 헌신'이 적절하다."
+    },
+    {
+      "number": 27,
+      "question": "다음 글을 아래와 같이 요약할 때, 빈칸에 들어갈 알맞은 말을 각각 찾아 쓰시오. (각 빈칸에 한 단어씩 쓸 것)\nOn February 28, 1919, a man came to Dr. Schofield's house.\nA man: Dr. Schofield, I have a special favor to ask you.\nDr. Schofield: What can I do for you?\nA man: Many people are going to gather tomorrow for the independence of Korea. Could you take pictures of the event and share them with the world?\nAt 2 p.m. on March 1, Dr. Schofield was hiding in a building and saw a large group of people gathering outside. He began to take pictures.\nDr. Schofield: Unbelievable! There are so many people here. I hope the world will learn about this important event through my pictures.\n\nAfter getting a (1)________ from a man, Dr. Schofield took (2)________ of the event for the (3)________ of Korea in order to let the world know about the important event.",
+      "options": [],
+      "answer": "favor, pictures, independence",
+      "subParts": [
+        {
+          "label": "(1)",
+          "answer": "favor"
+        },
+        {
+          "label": "(2)",
+          "answer": "pictures"
+        },
+        {
+          "label": "(3)",
+          "answer": "independence"
+        }
+      ],
+      "explanation": "[요약문] 한 남자로부터 부탁을 받은 후, Schofield 박사는 그 중요한 사건을 세상이 알게 하기 위해 한국의 독립을 위한 사건의 사진을 찍었다."
+    },
+    {
+      "number": 28,
+      "question": "다음 대화를 읽고 괄호 안에 주어진 단어를 사용하여 문장을 완성하시오. (과거 시제로 쓰고, 각 빈칸에 한 단어씩 쓸 것)\n\n(1)\nSuho: Did you find Eric?\nMiju: Yes. He was riding his bike in the playground.\n\n→ Miju ____ ____ ____ ____ ____ in the playground. (see)\n\n(2)\nSumi: Oh, do you hear that beautiful music?\nJunho: Yes. A girl is playing the guitar in the cafe.\n\n→ Sumi and Junho ____ ____ ____ ____ ____ ____ in the cafe. (hear)",
+      "options": [],
+      "answer": "saw Eric ride his bike / heard a girl play the guitar",
+      "subParts": [
+        {
+          "label": "(1)",
+          "answer": "saw Eric ride his bike",
+          "acceptedAnswers": [
+            "saw Eric riding his bike"
+          ]
+        },
+        {
+          "label": "(2)",
+          "answer": "heard a girl play the guitar",
+          "acceptedAnswers": [
+            "heard a girl playing the guitar"
+          ]
+        }
+      ],
+      "explanation": "[제시문] (1) 미주는 Eric이 운동장에서 자전거를 타고 있는 것을 보았다. (2) 수미와 준호는 카페에서 한 소녀가 기타를 연주하는 것을 들었다. 지각동사의 목적격보어로 동사원형 또는 현재분사를 쓴다."
+    },
+    {
+      "number": 29,
+      "question": "다음 글을 아래와 같이 요약할 때, 빈칸 (A), (B)에 들어갈 말로 알맞게 연결된 것은?\n\nDr. Schofield was a Canadian doctor, and he first came to Korea in 1916 to teach medicine. He wanted to teach in Korean, so he began to learn Korean right away. He studied so hard that he was able to teach in Korean after only a few years. He believed that every country has the right to be independent, so he helped the Korean independence movement.\n\nDr. Schofield came to Korea and learned Korean (A)________ to teach medicine in Korean. And he also (B)________ the Korean independence movement based on his belief.",
+      "options": [
+        "(A) diligently – (B) supported",
+        "(A) diligently – (B) led",
+        "(A) reluctantly – (B) supported",
+        "(A) reluctantly – (B) led",
+        "(A) hard – (B) prevented"
+      ],
+      "answer": "1",
+      "explanation": "Schofield 박사는 한국어로 의학을 가르치기 위해 한국어를 매우 열심히 공부했으며, 모든 나라는 독립할 권리가 있다고 믿었기에 한국의 독립운동을 도왔으므로, (A)에는 '열심히'를 뜻하는 diligently나 hard가, (B)에는 '지지했다'라는 의미의 supported가 들어가야 한다. [요약문] Schofield 박사는 한국에 와서 한국어로 의학을 가르치기 위해 한국어를 (A)열심히 배웠다. 그리고 그는 자신의 신념에 따라 한국의 독립운동도 (B)지지했다."
+    },
+    {
+      "number": 30,
+      "question": "다음 글의 내용과 일치하지 않는 것을 모두 고르면? (정답 2개)\n\nOn March 1, 1919, Dr. Schofield heard people shouting for Korean independence in Tapgol Park. He took pictures of the event with his camera. He then wrote an article about the historic event and sent it to foreign newspapers with his pictures.\nDr. Schofield's fight for Korean independence didn't stop even after the March 1st Movement. He continued to write about the terrible situation in Korea for foreign newspapers. He was under the watchful eye of the Japanese police, so he had to go back to Canada in 1920.",
+      "options": [
+        "The March 1st Movement for Korean independence took place on March 1, 1919.",
+        "Dr. Schofield used his camera and took pictures of the March 1st Movement.",
+        "Dr. Schofield wrote an article about the March 1st Movement for Korean newspapers.",
+        "Dr. Schofield could not write articles about the situation in Korea after the March 1st Movement.",
+        "The Japanese police watched Dr. Schofield, and he finally had to leave Korea."
+      ],
+      "answer": "3, 4",
+      "explanation": "Schofield 박사는 3·1운동에 관한 기사를 써서 사진과 함께 외국 신문사에 보냈다고 했으므로 ③ 'Schofield 박사는 한국 신문에 3·1운동에 관한 기사를 썼다.'는 글의 내용과 일치하지 않는다. 또한, 3·1운동 이후에도 Schofield 박사는 계속해서 한국의 참혹한 상황에 대해 외국 신문에 글을 썼다고 했으므로 ④ 'Schofield 박사는 3·1운동 이후에 한국의 상황에 관한 기사를 쓸 수 없었다.'도 글의 내용과 일치하지 않는다."
+    }
+  ],
+  "R2": [
+    {
+      "number": 1,
+      "question": "다음 중 짝지어진 단어의 관계가 어색한 것은?",
+      "options": [
+        "go back : return = continue : go on",
+        "introduce : introduction = die : death",
+        "Japan : Japanese = Canada : Canadian",
+        "strong : strongly = especial : especially",
+        "independent : independence = bury : burial"
+      ],
+      "answer": "5",
+      "explanation": "'독립한 : 독립' 형용사-명사 관계 ≠ '묻다, 매장하다 : 매장' 동사-명사 관계"
+    },
+    {
+      "number": 2,
+      "question": "다음 중 <보기>의 단어가 들어갈 수 없는 것은?\n\n<보기> medicine, government, cemetery, right, invitation",
+      "options": [
+        "I put flowers on his grave in the ________.",
+        "Everyone has the ________ to get an education.",
+        "He turned down my ________ because of the exam.",
+        "She wrote a(n) ________ about the truth of the rumor.",
+        "The ________ made a new policy to protect the environment."
+      ],
+      "answer": "4",
+      "explanation": "'그녀는 소문의 진실에 관한 기사[보고서/이야기]를 썼다.'라는 흐름이 자연스러우므로, 빈칸에는 글과 관련된 명사들인 article, report, story 등이 들어가야 하며 <보기>의 medicine(의학)이 들어갈 문장은 없다. ① cemetery ② right ③ invitation ⑤ government"
+    },
+    {
+      "number": 3,
+      "question": "다음 밑줄 친 단어가 같은 의미로 쓰인 것은?",
+      "options": [
+        "The doctor advised me to <u>rest</u>. / I want to live in Korea for the <u>rest</u> of my life.",
+        "We <u>gathered</u> shells on the beach. / They <u>gathered</u> in the gym for the ceremony.",
+        "There are many <u>foreign</u> tourists in the town. / She is interested in <u>foreign</u> history and culture.",
+        "Although his family was <u>poor</u>, he never gave up his dream. / He is <u>poor</u> at expressing his feelings to others.",
+        "The dancer's <u>movements</u> were very impressive. / The zero-waste <u>movement</u> has very started among teenagers."
+      ],
+      "answer": "3",
+      "explanation": "'그 마을에는 외국의 관광객들이 많이 있다.'와 '그녀는 외국 역사와 문화에 관심이 있다.'의 foreign은 둘 다 '외국의'라는 뜻의 형용사로 쓰였다. ① 쉬다 / 나머지 ② 모으다 / 모이다 ④ 가난한 / 잘 못하는 ⑤ 움직임 / (사람들이 조직적으로 벌이는) 운동"
+    },
+    {
+      "number": 4,
+      "question": "다음 중 밑줄 친 부분의 쓰임이 <보기>와 같은 것은?\n\n<보기> I heard crowds <u>shouting</u> loudly outside.",
+      "options": [
+        "He avoided <u>answering</u> my question.",
+        "<u>Eating</u> breakfast makes your brain active.",
+        "Thank you for <u>inviting</u> me to your birthday party.",
+        "The best part of the trip was <u>visiting</u> local markets.",
+        "The woman who is <u>talking</u> on the phone is my homeroom teacher."
+      ],
+      "answer": "5",
+      "explanation": "지각동사 hear는 'hear+목적어+목적격보어(~가 ...하는 것을 듣다)'의 5형식으로 쓸 때, 목적격보어로 동사원형과 현재분사를 사용하므로, <보기>의 shouting은 heard의 목적격보어로 쓰인 현재분사이다. 따라서 'be동사의 현재형+현재분사' 형태로 현재진행 시제를 이루고 있는 ⑤의 현재분사 talking이 같은 쓰임이다. ①②③④ 동명사"
+    },
+    {
+      "number": 5,
+      "question": "다음 중 주어진 문장을 전환한 것으로 알맞지 않은 것은?",
+      "options": [
+        "The box was so heavy that I couldn't lift it. → The box was too heavy for me to lift.",
+        "I am so strong that I can carry this bag. → I am strong enough to carry this bag.",
+        "The kid felt something. It was crawling on her leg. → The kid felt something crawling on her leg.",
+        "She noticed a stranger. He was running away quickly. → She noticed a stranger running away quickly.",
+        "The problems were so easy that I solved them right away. → Although the problems were very easy, I solved them right away."
+      ],
+      "answer": "5",
+      "explanation": "'so+형용사/부사+that+주어+동사' 구문은 '매우[너무] ~해서 (그 결과) ...하다'라는 의미로, 앞의 원인과 that절의 결과로 이루어진 문장이다. 주어진 문장은 '문제가 너무 쉬웠다'라는 원인과 '그것들을 즉시 풀었다'는 결과의 내용으로 이루어져 있으므로 접속사 Although(비록 ~일지라도)가 아닌 이유를 나타내는 접속사 Because[As/Since]를 사용하여 'Because[As/Since] the problems were very easy, I solved them right away.'로 고쳐야 한다."
+    },
+    {
+      "number": 6,
+      "question": "다음 대화의 빈칸에 들어갈 말로 알맞은 것을 모두 골라 짝지은 것은?\n\nB: What kinds of magazines do you have?\nG: We have all kinds of magazines.\nB: I'm really interested in science. ______________________________\nG: Sure. You'll love this one, Teen's Science.\n\nⓐ Would you like me to recommend a good science magazine?\nⓑ Do you have any recommendations for a science magazine?\nⓒ Do you have any science magazines to recommend?\nⓓ Could I ask you a question about science magazines?\nⓔ Can you recommend a science magazine for me?",
+      "options": [
+        "ⓐ, ⓑ, ⓒ",
+        "ⓐ, ⓒ, ⓓ",
+        "ⓑ, ⓒ, ⓔ",
+        "ⓑ, ⓓ, ⓔ",
+        "ⓒ, ⓓ, ⓔ"
+      ],
+      "answer": "3",
+      "explanation": "소년이 과학에 정말 관심이 있다고 말한 뒤이며, 빈칸 뒤에서 소녀가 'Teen's Science'가 아주 마음에 들 것이라며 특정 잡지를 추천하고 있으므로 빈칸에는 과학 잡지를 추천해달라는 요청의 표현인 ⓑ '과학 잡지 추천해 줄 것이 있니?', ⓒ '추천해 줄 과학 잡지가 있니?', ⓔ '과학 잡지 하나 추천해 줄래?'가 들어갈 말로 적절하다."
+    },
+    {
+      "number": 7,
+      "question": "다음 대화를 읽고 물음에 답하시오.\nG: ⓐ<u>Liam, can you please help me</u>? I need to find some books for my homework.\nB: ⓑ<u>What kinds of books are you looking for, Somi</u>?\nG: I'm looking for books on famous people who helped others. I need to write an essay.\nB: Who do you want to write about?\nG: ⓒ<u>I was thinking about Dr. Schweitzer</u>, but can you recommend someone else for me?\nB: ⓓ<u>What about Audrey Hepburn</u>?\nG: I know she was a famous actor, but ⓔ<u>what did she do to help others</u>?\nB: She did a lot of volunteer work, especially for children.\nG: Really? Then, I can write about her. Thank you!\n\n위 대화의 밑줄 친 ⓐ~ⓔ와 바꾸어 쓸 수 없는 것을 모두 고르면? (정답 2개)",
+      "options": [
+        "ⓐ: Liam, do you need any help?",
+        "ⓑ: What types of books are you looking for, Somi?",
+        "ⓒ: I had Dr. Schweitzer in mind",
+        "ⓓ: Why don't we write about Audrey Hepburn?",
+        "ⓔ: how did she help other people?"
+      ],
+      "answer": "1, 4",
+      "explanation": "① ⓐ의 'Liam, can you please help me?'는 'Liam, 나 좀 도와줄래?'라는 뜻으로 도움을 요청하는 표현이지만 'Liam, do you need any help?'는 'Liam, 도움이 필요하니?'라는 뜻으로 도움을 제안하는 표현이므로 바꾸어 쓸 수 없다. ④ ⓓ의 'What about Audrey Hepburn?'은 'Audrey Hepburn은 어때?'라는 뜻으로, 소미가 에세이 숙제를 혼자 하는 상황에서 에세이 주제로 다른 사람을 추천해 줄 수 있는지 요청하는 것에 대한 대답이지만, 'Why don't we write about Audrey Hepburn?'은 '우리 Audrey Hepburn에 대해 쓰는 것이 어때?'라는 뜻으로, 함께 에세이 숙제를 하는 경우 제안의 표현이므로 바꾸어 쓸 수 없다."
+    },
+    {
+      "number": 8,
+      "question": "다음 대화를 읽고 물음에 답하시오.\nG: ⓐ<u>Liam, can you please help me</u>? I need to find some books for my homework.\nB: ⓑ<u>What kinds of books are you looking for, Somi</u>?\nG: I'm looking for books on famous people who helped others. I need to write an essay.\nB: Who do you want to write about?\nG: ⓒ<u>I was thinking about Dr. Schweitzer</u>, but can you recommend someone else for me?\nB: ⓓ<u>What about Audrey Hepburn</u>?\nG: I know she was a famous actor, but ⓔ<u>what did she do to help others</u>?\nB: She did a lot of volunteer work, especially for children.\nG: Really? Then, I can write about her. Thank you!\n\n위 대화를 아래와 같이 요약할 때, 밑줄 친 ㉠~㉤ 중, 알맞지 않은 것은?\n\nSomi asks Liam to ㉠<u>recommend a book for her homework essay</u> about ㉡<u>famous figures that overcame difficulties</u>. ㉢<u>She was considering Dr. Schweitzer at first</u>, but ㉣<u>she b</u>after Liam tells her about ㉤<u>Hepburn's volunteer work for children</u>.",
+      "options": [
+        "㉠",
+        "㉡",
+        "㉢",
+        "㉣",
+        "㉤"
+      ],
+      "answer": "2",
+      "explanation": "소미는 에세이를 위해 다른 사람들을 도운 유명인에 관한 책을 찾고 있다고 말하고 있으므로 ㉡의 어려움을 극복한 유명 인물들은 내용과 일치하지 않는다."
+    },
+    {
+      "number": 9,
+      "question": "다음 담화를 읽고 아래 질문에 대한 알맞은 대답이 되도록 주어진 <조건>에 맞게 빈칸을 완성하시오.\n\nW: Hello, everyone. The movie I'm going to introduce today is The Song of Love. It's a movie about a pianist who loses his love for music. He moves to a small town for a new start. There, he begins teaching music to children and finds his love for music again. This movie has great music and a touching story, so I strongly recommend it.\n\nQ. How does the pianist in the movie recover his love for music?\n\n<조건>\n• by를 사용할 것\n• 각 빈칸에 한 단어씩 쓸 것\n\n→ He recovers his love for music ____ ____ ____ ____ in a small town.",
+      "options": [],
+      "answer": "by teaching children music",
+      "explanation": "그 영화의 피아니스트는 어떻게 음악에 대한 사랑을 되찾는가? → 그는 작은 마을에서 아이들에게 음악을 가르침으로써 음악에 대한 사랑을 되찾는다."
+    },
+    {
+      "number": 10,
+      "question": "다음 대화의 내용과 일치하지 않는 것을 <보기>에서 모두 골라 짝지은 것은?\n\nG: What kinds of soft drinks do you usually have?\nB: I usually drink apple soda, but today, I want to try something else. Can you recommend some new soft drinks?\nG: Try a cherry soda. The cherry soda here is good.\nB: OK. I'll give it a try, then.\n\n<보기>\n(A) The boy tells the girl that he usually doesn't drink soft drinks.\n(B) The boy wants to try a different kind of soda from usual today.\n(C) The girl recommends apple soda to the boy.\n(D) The boy refuses the girl's recommendation.",
+      "options": [
+        "(A), (D)",
+        "(B), (C)",
+        "(C), (D)",
+        "(A), (C), (D)",
+        "(B), (C), (D)"
+      ],
+      "answer": "4",
+      "explanation": "(A) 소년은 보통 사과 소다를 마신다고 말하고 있으므로 '소년은 소녀에게 그는 보통 탄산음료를 마시지 않는다고 말한다.'는 일치하지 않는다. (C) 소녀는 체리 소다를 마셔 보라고 추천하고 여기 체리 소다가 맛있다고 말하고 있으므로 '소녀는 소년에게 사과 소다를 추천한다.'는 일치하지 않는다. (D) 소년은 소녀의 추천에 대해 마셔 보겠다고 답하고 있으므로 '소년은 소녀의 추천을 거절한다.'는 일치하지 않는다."
+    },
+    {
+      "number": 11,
+      "question": "다음 글을 읽고 물음에 답하시오.\nOn February 28, 1919, a man came to Dr. Schofield's house.\nA man: Dr. Schofield, I have a special favor ⓐ<u>to asking</u> you.\nDr. Schofield: What can I do for you?\nA man: Many people are going to gather tomorrow for the independence of Korea. Could you take pictures of the event and ⓑ<u>shared</u> them with the world?\nAt 2 p.m. on March 1, Dr. Schofield was hiding in a building and saw a large group of people ⓒ<u>to gather</u> outside. He began ⓓ<u>to taking</u> pictures.\nDr. Schofield: Unbelievable! There are so many people here. I hope ⓔ<u>which</u> the world will learn about this important event through my pictures.\n\n윗글의 밑줄 친 ⓐ~ⓔ 중, 어색한 부분을 바르게 고치지 못한 것을 모두 고르면? (정답 2개)",
+      "options": [
+        "ⓐ: to asking → to ask",
+        "ⓑ: shared → share",
+        "ⓒ: to gather → to gathering",
+        "ⓓ: to taking → taking",
+        "ⓔ: which → what"
+      ],
+      "answer": "3, 5",
+      "explanation": "ⓒ to gather → gather 또는 gathering (지각동사 see는 'see+목적어+목적격보어(~가 ...하는 것을 보다)'의 구문으로 쓰일 때, 목적격보어로 동사원형 또는 현재분사가 온다. 따라서 과거동사 saw와 목적어 a large group of people에 이어지는 목적격보어 자리의 to부정사 to gather를 동사원형 gather 또는 현재분사 gathering으로 고쳐야 한다.) ⓔ which → that (완전한 절(the world ~ my pictures)을 이끌어, 동사 hope의 목적어인 명사절을 이루어야 하므로 which를 명사절 접속사 that으로 고쳐야 한다.)"
+    },
+    {
+      "number": 12,
+      "question": "다음 글을 읽고 물음에 답하시오.\nOn February 28, 1919, a man came to Dr. Schofield's house.\nA man: Dr. Schofield, I have a special favor ⓐ<u>to asking</u> you.\nDr. Schofield: What can I do for you?\nA man: Many people are going to gather tomorrow for the independence of Korea. Could you take pictures of the event and ⓑ<u>shared</u> them with the world?\nAt 2 p.m. on March 1, Dr. Schofield was hiding in a building and saw a large group of people ⓒ<u>to gather</u> outside. He began ⓓ<u>to taking</u> pictures.\nDr. Schofield: Unbelievable! There are so many people here. I hope ⓔ<u>which</u> the world will learn about this important event through my pictures.\n\n윗글의 내용과 (A)~(C)가 일치하면 T, 일치하지 않으면 F를 쓸 때, 순서대로 연결된 것은?\n\n(A) The man asked Dr. Schofield to photograph the event for Korea's independence and show the pictures to the world. (T/F)\n(B) At 2 p.m. on March 1, Dr. Schofield stood among the crowd and started to take pictures. (T/F)\n(C) Dr. Schofield was surprised because too few people gathered for Korea's independence. (T/F)",
+      "options": [
+        "T-F-F",
+        "T-F-T",
+        "T-T-F",
+        "F-F-T",
+        "F-F-F"
+      ],
+      "answer": "1",
+      "explanation": "차례대로 T-F-F이다. (A) 한 남자가 Schofield 박사에게 한국의 독립을 위한 집회 사진을 찍어 세상에 그 사진들을 보여주길 요청했다. (T) (일치) (B) 3월 1일 오후 2시, Schofield 박사는 군중들 사이에 서서(→한 건물에 숨어 있으면서) 사진을 찍기 시작했다. (F) (불일치) (C) Schofield 박사는 한국의 독립을 위해 너무 적은(→정말 많은) 사람들이 모였기 때문에 놀랐다. (F) (불일치)"
+    },
+    {
+      "number": 13,
+      "question": "다음 글을 읽고 물음에 답하시오.\nOn March 1, 1919, Dr. Schofield heard people shouting for Korean independence in Tapgol Park. He took pictures of the event with his camera. He then wrote an article about the historic event and sent it to foreign newspapers with his pictures.\nDr. Schofield's fight for Korean independence didn't stop even after the March 1st Movement. He continued to write about the terrible situation in Korea for foreign newspapers. He was under the watchful eye of the Japanese police, so he had to go back to Canada in 1920.\nIn 1958, he returned to Korea at the invitation of the Korean government and never left again. For the rest of his life, he worked hard to help Koreans, especially poor students. Dr. Schofield died in April 1970, and he was buried in Seoul National Cemetery.\n\n윗글의 제목으로 알맞은 것은?",
+      "options": [
+        "Dr. Schofield's Difficulties Under Japanese Rule",
+        "Dr. Schofield: A Foreigner Who Devoted His Life to Korea",
+        "The Japanese Police's Control over Foreign Reporters",
+        "Foreigners in the Independence Movement in Tapgol Park",
+        "Why Did the Japanese Government Send Dr. Schofield Away?"
+      ],
+      "answer": "2",
+      "explanation": "3·1운동과 일본 통치하의 한국의 참혹한 상황을 사진과 기사로 세계에 알리다가 일본 경찰의 감시로 캐나다로 돌아가야 했으며, 다시 한국으로 돌아온 후에도 여생 동안 한국인들, 특히 가난한 학생들을 열심히 도왔던 Schofield 박사에 관한 내용이므로 글의 제목으로 ② 'Schofield 박사: 그의 삶을 한국에 헌신했던 외국인'이 적절하다."
+    },
+    {
+      "number": 14,
+      "question": "다음 글을 읽고 물음에 답하시오.\nOn March 1, 1919, Dr. Schofield heard people shouting for Korean independence in Tapgol Park. He took pictures of the event with his camera. He then wrote an article about the historic event and sent it to foreign newspapers with his pictures.\nDr. Schofield's fight for Korean independence didn't stop even after the March 1st Movement. He continued to write about the terrible situation in Korea for foreign newspapers. He was under the watchful eye of the Japanese police, so he had to go back to Canada in 1920.\nIn 1958, he returned to Korea at the invitation of the Korean government and never left again. For the rest of his life, he worked hard to help Koreans, especially poor students. Dr. Schofield died in April 1970, and he was buried in Seoul National Cemetery.\n\n윗글을 읽고 답할 수 없는 질문은?",
+      "options": [
+        "What did people do in Tapgol Park on March 1, 1919?",
+        "Where did Dr. Schofield send an article and his picture about the March 1st Movement?",
+        "What did Dr. Schofield do for the rest of his life in Korea?",
+        "When did Korea gain independence from Japan?",
+        "Where was Dr. Schofield buried after he died in April 1970?"
+      ],
+      "answer": "4",
+      "explanation": "사람들이 한국의 독립을 외치고 Schofield 박사가 한국의 독립을 위한 투쟁을 벌였다는 내용은 있지만, 언제 한국이 일본으로부터 독립했는지에 대한 언급은 없으므로 ④ '한국은 언제 일본으로부터 독립을 얻었는가?'는 답할 수 없는 질문이다."
+    },
+    {
+      "number": 15,
+      "question": "다음 글을 읽고 물음에 답하시오.\nDo you know Seok Hopil? His English name was Frank W. Schofield, but he loved his Korean name. It sounded similar to his real name, and it also had a good meaning.\nDr. Schofield was a Canadian doctor, and he first came to Korea in 1916 to teach medicine. He wanted to teach in Korean, so he began to learn Korean right away. (A)<u>그는 매우 열심히 공부해서 몇 년 만에 한국어로 가르칠 수 있게 되었다</u>. He believed that every country has the right to be independent, so he helped the Korean independence movement.\n\n윗글의 밑줄 친 (A)의 우리말을 주어진 <조건>에 알맞게 영작하시오.\n\n<조건>\n• 'so ~ that ...' 구문을 사용할 것\n• <보기>의 단어를 차례대로 사용할 것 (필요시 변형할 것)\n• 17단어의 완전한 문장으로 영작할 것 ※ 완전한 문장으로 쓰시오.\n\n<보기> study, hard, able, after, only, few\n\n→ ______________________________",
+      "options": [],
+      "answer": "He studied so hard that he was able to teach in Korean after only a few years.",
+      "explanation": "주어진 조건에 따라 '매우 ~해서 (그 결과) ...하다'라는 뜻의 'so+형용사/부사+that+주어+동사' 구문을 사용한다. 주어 He를 쓰고 동사 study를 과거의 내용에 맞게 과거형 동사 studied로 변형하여 쓴다. 동사 studied를 수식해야 하므로 주어진 부사 hard를 사용하여 so hard를 이어 쓴다. so hard 뒤에 접속사 that을 쓰고, 접속사 that 뒤에는 완전한 절이 와야 하므로 주어 he를 쓰고 '~할 수 있다'라는 뜻의 'be able to+동사원형'을 사용하여 과거 시제의 was able to teach를 쓴다. '한국어로'라는 뜻은 전치사 in을 사용하므로 in Korean을 이어 쓴다. '몇몇의'라는 뜻의 a few 뒤에는 복수명사가 이어지므로 복수명사 years를 사용해 a few years를 쓰고, 제시된 단어를 차례대로 사용하라는 조건에 따라 '몇 년 만에'라는 뜻의 after only a few years를 이어 쓴다."
+    },
+    {
+      "number": 16,
+      "question": "다음 글을 읽고 물음에 답하시오.\nDo you know Seok Hopil? His English name was Frank W. Schofield, but he loved his Korean name. It sounded similar to his real name, and it also had a good meaning.\nDr. Schofield was a Canadian doctor, and he first came to Korea in 1916 to teach medicine. He wanted to teach in Korean, so he began to learn Korean right away. (A)<u>그는 매우 열심히 공부해서 몇 년 만에 한국어로 가르칠 수 있게 되었다</u>. He believed that every country has the right to be independent, so he helped the Korean independence movement.\n\n윗글을 읽고 다음 질문에 대한 알맞은 대답이 되도록 주어진 <조건>에 맞게 빈칸을 완성하시오.\n\nQ. What was Dr. Schofield's belief that led him to help the Korean independence movement?\n\n<조건>\n• 접속사 that을 사용할 것\n• 빈칸에 10단어로 쓸 것\n\n→ It ______________________________.",
+      "options": [],
+      "answer": "was that every country has the right to be independent",
+      "explanation": "Schofield 박사가 한국의 독립운동을 돕도록 이끈 그의 신념은 무엇이었는가? → 그것은 모든 나라가 독립할 권리를 가지고 있다는 것이었다."
+    },
+    {
+      "number": 17,
+      "question": "다음 글을 읽고 물음에 답하시오.\nDo you know Seok Hopil? His English name was Frank W. Schofield, but he loved his Korean name. It sounded similar to his real name, and it also had a good meaning.\nDr. Schofield was a Canadian doctor, and he first came to Korea in 1916 to teach medicine. He wanted to teach in Korean, so he began to learn Korean right away. (A)<u>그는 매우 열심히 공부해서 몇 년 만에 한국어로 가르칠 수 있게 되었다</u>. He believed that every country has the right to be independent, so he helped the Korean independence movement.\n\n윗글의 주제로 알맞은 것은?",
+      "options": [
+        "Dr. Schofield's efforts to teach medicine in Korea",
+        "the meaning of Dr. Schofield's Korean name",
+        "Dr. Schofield's passion for Korean language",
+        "Dr. Schofield's fight for Korea's freedom",
+        "Dr. Schofield's deep heart for Korea"
+      ],
+      "answer": "5",
+      "explanation": "Schofield 박사의 자신의 한국 이름에 대한 애정, 한국어를 배워 한국어로 의학을 가르친 것, 그리고 한국의 독립을 도운 것이 언급되어 있으므로 글의 주제로 ⑤ 'Schofield 박사의 한국에 대한 깊은 마음'이 적절하다."
+    },
+    {
+      "number": 18,
+      "question": "다음 대화의 내용과 일치하도록 'so ~ that ...' 구문을 사용하여 문장을 완성하시오. (각 빈칸에 한 단어씩 쓸 것)\n\n(1)\nA: Tom, you look upset. What's wrong?\nB: I wanted to ride the roller coaster, but I couldn't.\nA: Why not?\nB: Because I'm too young.\n\n→ Tom was (1)____ ____ ____ he (2)____ ____ the roller coaster.\n\n(2)\nA: Minsu, which team do you think will win the final match?\nB: I think that Blue Team will win.\nA: Why do you think so?\nB: Because they are very strong.\n\n→ Minsu thinks that Blue Team is (3)____ ____ ____ they can (4)____ ____ ____ ____.",
+      "options": [],
+      "answer": "so young that / couldn't ride / so strong that / win the final match",
+      "subParts": [
+        {
+          "label": "(1)",
+          "answer": "so young that"
+        },
+        {
+          "label": "(2)",
+          "answer": "couldn't ride",
+          "acceptedAnswers": [
+            "could not ride"
+          ]
+        },
+        {
+          "label": "(3)",
+          "answer": "so strong that"
+        },
+        {
+          "label": "(4)",
+          "answer": "win the final match"
+        }
+      ],
+      "explanation": "[제시문] (1) Tom은 너무 어려서 롤러코스터를 탈 수 없었다. (2) 민수는 Blue 팀이 매우 강해서 그들은 결승전에서 이길 수 있다고 생각한다."
+    },
+    {
+      "number": 19,
+      "question": "다음 글을 읽고 물음에 답하시오.\nDo you know Seok Hopil? His English name was Frank W. Schofield, but he loved his Korean name. It sounded similar to his real name, and it also had a good meaning.\nDr. Schofield was a Canadian doctor, and he first came to Korea in 1916 to teach (A)<u>medicine</u>. He wanted to teach in Korean, so he began to learn Korean right away. He studied so hard that he was able to teach in Korean after only a few years. He believed ⓐ<u>that</u> every country has the right to be independent, so ㉠______________________.\nOn March 1, 1919, Dr. Schofield heard people ⓑ<u>shouting</u> for Korean independence in Tapgol Park. He took pictures of the event with his camera. He then wrote an article about the historic event and sent ⓒ<u>it</u> to foreign newspapers with his pictures.\nDr. Schofield's fight for Korean independence didn't stop even after the March 1st Movement. He (B)<u>continued</u> to write about the terrible situation in Korea for (C)<u>foreign</u> newspapers. He was under the watchful eye of the Japanese police, so he ⓓ<u>had to go back</u> to Canada in 1920.\nIn 1958, he returned to Korea at the invitation of the Korean government and never left again. For the (D)<u>rest</u> of his life, he worked hard ⓔ<u>to help</u> Koreans, especially poor students. Dr. Schofield died in April 1970, and he was buried in Seoul National (E)<u>Cemetery</u>.\n\n윗글의 밑줄 친 (A)~(E)의 영영풀이로 알맞은 것을 모두 골라 짝지은 것은?\n\n<보기>\n(A) medicine: a substance that you take in order to cure an illness\n(B) continue: to keep existing or happening without stopping\n(C) foreign: belonging to or coming from another country, not your own\n(D) rest: a period of relaxing, sleeping or doing nothing after a period of activity\n(E) cemetery: an area of land that is used for burying dead people",
+      "options": [
+        "(A), (D)",
+        "(B), (E)",
+        "(C), (D)",
+        "(A), (D), (E)",
+        "(B), (C), (E)"
+      ],
+      "answer": "5",
+      "explanation": "(B) 계속하다: 멈추지 않고 계속 존재하거나 발생하다 (C) 외국의: 당신 자신의 나라가 아닌 다른 나라에 속하거나 그곳에서 온 (E) 묘지: 죽은 사람들을 묻기 위해 사용되는 땅. (A) 지문의 medicine은 '의학'이라는 뜻으로 쓰였으므로, 주어진 영영풀이인 '질병을 치료하기 위해 복용하는 물질'은 medicine의 다른 뜻인 '약, 의약품'의 풀이로 알맞지 않다. (D) 지문의 rest는 '나머지'라는 뜻으로 쓰였으므로, 주어진 영영풀이인 '활동한 시간 뒤에 편히 쉬거나, 잠을 자거나, 아무것도 하지 않는 시간'은 rest의 다른 뜻인 '쉼, 휴식'의 풀이로 알맞지 않다."
+    },
+    {
+      "number": 20,
+      "question": "다음 글을 읽고 물음에 답하시오.\nDo you know Seok Hopil? His English name was Frank W. Schofield, but he loved his Korean name. It sounded similar to his real name, and it also had a good meaning.\nDr. Schofield was a Canadian doctor, and he first came to Korea in 1916 to teach (A)<u>medicine</u>. He wanted to teach in Korean, so he began to learn Korean right away. He studied so hard that he was able to teach in Korean after only a few years. He believed ⓐ<u>that</u> every country has the right to be independent, so ㉠______________________.\nOn March 1, 1919, Dr. Schofield heard people ⓑ<u>shouting</u> for Korean independence in Tapgol Park. He took pictures of the event with his camera. He then wrote an article about the historic event and sent ⓒ<u>it</u> to foreign newspapers with his pictures.\nDr. Schofield's fight for Korean independence didn't stop even after the March 1st Movement. He (B)<u>continued</u> to write about the terrible situation in Korea for (C)<u>foreign</u> newspapers. He was under the watchful eye of the Japanese police, so he ⓓ<u>had to go back</u> to Canada in 1920.\nIn 1958, he returned to Korea at the invitation of the Korean government and never left again. For the (D)<u>rest</u> of his life, he worked hard ⓔ<u>to help</u> Koreans, especially poor students. Dr. Schofield died in April 1970, and he was buried in Seoul National (E)<u>Cemetery</u>.\n\n윗글의 밑줄 친 ⓐ~ⓔ에 대한 설명으로 알맞지 않은 것을 모두 고르면? (정답 2개)",
+      "options": [
+        "ⓐ: 과거동사 believed의 목적어 자리에 쓰인 명사절 접속사로 생략할 수 있다.",
+        "ⓑ: 과거동사 heard의 목적격보어 자리에 쓰인 동명사이며 동사원형 shout으로 바꿔 쓸 수 있다.",
+        "ⓒ: 앞에 언급된 단수명사구 an article about the historic event를 가리킨다.",
+        "ⓓ: '돌아가야 했다'라는 뜻으로, 'have to+동사원형'의 과거 형태가 쓰였다.",
+        "ⓔ: 형용사 hard를 수식하는 부사적 용법의 to부정사이다."
+      ],
+      "answer": "2, 5",
+      "explanation": "ⓑ 지각동사 hear는 'hear+목적어+목적격보어(~가 ...하는 것을 듣다)'의 구문으로 쓰일 때 목적격보어로 동사원형이나 현재분사가 온다. 따라서 shouting은 과거동사 heard의 목적격보어 자리에 쓰인 현재분사이며, 동사원형 shout으로 바꿔 쓸 수 있다. ⓔ hard는 '열심히'라는 뜻의 부사로 동사 worked를 수식하며 to help는 '돕기 위해'라는 뜻의 '목적'을 나타내는 부사적 용법의 to부정사이다."
+    },
+    {
+      "number": 21,
+      "question": "다음 글을 읽고 물음에 답하시오.\nDo you know Seok Hopil? His English name was Frank W. Schofield, but he loved his Korean name. It sounded similar to his real name, and it also had a good meaning.\nDr. Schofield was a Canadian doctor, and he first came to Korea in 1916 to teach (A)<u>medicine</u>. He wanted to teach in Korean, so he began to learn Korean right away. He studied so hard that he was able to teach in Korean after only a few years. He believed ⓐ<u>that</u> every country has the right to be independent, so ㉠______________________.\nOn March 1, 1919, Dr. Schofield heard people ⓑ<u>shouting</u> for Korean independence in Tapgol Park. He took pictures of the event with his camera. He then wrote an article about the historic event and sent ⓒ<u>it</u> to foreign newspapers with his pictures.\nDr. Schofield's fight for Korean independence didn't stop even after the March 1st Movement. He (B)<u>continued</u> to write about the terrible situation in Korea for (C)<u>foreign</u> newspapers. He was under the watchful eye of the Japanese police, so he ⓓ<u>had to go back</u> to Canada in 1920.\nIn 1958, he returned to Korea at the invitation of the Korean government and never left again. For the (D)<u>rest</u> of his life, he worked hard ⓔ<u>to help</u> Koreans, especially poor students. Dr. Schofield died in April 1970, and he was buried in Seoul National (E)<u>Cemetery</u>.\n\n윗글의 빈칸 ㉠에 들어갈 말로 알맞은 것은?",
+      "options": [
+        "he was afraid of the Japanese police",
+        "he was not interested in Korea's independence",
+        "he helped the Korean independence movement",
+        "he fought for the independence of his own country",
+        "he worked hard for the development of Korean education"
+      ],
+      "answer": "3",
+      "explanation": "Schofield 박사는 모든 국가가 독립할 권리를 가진다고 믿었다는 내용과 so(그래서)로 연결되어 있으므로 그 결과가 이어져야 하며, 뒤로 Schofield 박사가 3·1운동 현장을 사진으로 찍고 외국 신문사에 알리는 등 한국의 독립운동을 어떻게 도왔는지에 관한 내용이 이어지므로 빈칸에는 ③ '그는 한국의 독립운동을 도왔다'가 적절하다."
+    },
+    {
+      "number": 22,
+      "question": "다음 글을 읽고 물음에 답하시오.\nDo you know Seok Hopil? His English name was Frank W. Schofield, but he loved his Korean name. It sounded similar to his real name, and it also had a good meaning.\nDr. Schofield was a Canadian doctor, and he first came to Korea in 1916 to teach (A)<u>medicine</u>. He wanted to teach in Korean, so he began to learn Korean right away. He studied so hard that he was able to teach in Korean after only a few years. He believed ⓐ<u>that</u> every country has the right to be independent, so ㉠______________________.\nOn March 1, 1919, Dr. Schofield heard people ⓑ<u>shouting</u> for Korean independence in Tapgol Park. He took pictures of the event with his camera. He then wrote an article about the historic event and sent ⓒ<u>it</u> to foreign newspapers with his pictures.\nDr. Schofield's fight for Korean independence didn't stop even after the March 1st Movement. He (B)<u>continued</u> to write about the terrible situation in Korea for (C)<u>foreign</u> newspapers. He was under the watchful eye of the Japanese police, so he ⓓ<u>had to go back</u> to Canada in 1920.\nIn 1958, he returned to Korea at the invitation of the Korean government and never left again. For the (D)<u>rest</u> of his life, he worked hard ⓔ<u>to help</u> Koreans, especially poor students. Dr. Schofield died in April 1970, and he was buried in Seoul National (E)<u>Cemetery</u>.\n\n윗글의 내용과 일치하면 T, 일치하지 않으면 F일 때, 알맞지 않은 것은?",
+      "options": [
+        "Dr. Schofield's Korean name sounded different from his English name. (F)",
+        "To teach medicine in Korean, Dr. Schofield started learning Korean right after coming to Korea. (T)",
+        "Dr. Schofield believed all countries have the right to independence and acted according to his belief. (F)",
+        "By continuing to write articles after the March 1st Movement, Dr. Schofield tried to inform the world of Korea's awful situation. (T)",
+        "After returning to Korea in 1958, Dr. Schofield lived in Korea and helped poor Korean students until he died in 1970. (T)"
+      ],
+      "answer": "3",
+      "explanation": "Schofield 박사는 모든 나라가 독립할 권리가 있다고 믿었고, 1919년 3월 1일에 한국의 독립을 외치는 사람들의 현장 사진을 찍어 외국 신문사에 보내고, 그 후에도 투쟁을 멈추지 않고 한국의 참혹한 상황에 대해 계속 알리고자 했으므로, ③ 'Schofield 박사는 모든 나라가 독립에 대한 권리를 가진다고 믿었고, 그의 신념에 따라 행동했다.'는 글의 내용과 일치한다. 따라서 F(불일치)를 T(일치)로 고쳐야 한다."
+    },
+    {
+      "number": 23,
+      "question": "다음 글을 읽고 물음에 답하시오.\nDo you know Seok Hopil? His English name was Frank W. Schofield, but he loved his Korean name. It sounded ⓐ<u>similarly</u> to his real name, and it also had a good meaning.\nDr. Schofield was a Canadian doctor, and he first came to Korea in 1916 ⓑ<u>to teach</u> medicine. He wanted to teach in Korean, so he began to learn Korean right away. He studied so hard ⓒ<u>which</u> he was able to teach in Korean after only a few years. He believed that every country has the right ⓓ<u>to be</u> independent, so he helped the Korean independence movement.\nOn March 1, 1919, Dr. Schofield heard people shouting for Korean independence in Tapgol Park. He took pictures of the event with his camera. He then wrote an article about the historic event and sent it to foreign newspapers with his pictures.\nDr. Schofield's fight for Korean independence didn't stop even after the March 1st Movement. He continued ⓔ<u>writing</u> about the terrible situation in Korea for foreign newspapers. He was under the watchful eye of the Japanese police, so he had to go back to Canada in 1920.\nIn 1958, he returned to Korea at the invitation of the Korean government and ⓕ<u>never left</u> again. For the rest of his life, he worked hard to help Koreans, especially poor students. Dr. Schofield died in April 1970, and he ⓖ<u>buried</u> in Seoul National Cemetery.\n\n윗글의 밑줄 친 ⓐ~ⓖ 중, 어법상 어색한 것의 개수는?",
+      "options": [
+        "1개",
+        "2개",
+        "3개",
+        "4개",
+        "5개"
+      ],
+      "answer": "3",
+      "explanation": "어법상 어색한 것은 총 3개이다. ⓐ similarly → similar ('~하게 들리다'라는 뜻의 감각동사 sound는 보어로 형용사를 취하므로, 과거동사 sounded의 보어로 쓰인 부사 similarly를 형용사 similar로 고쳐야 한다.) ⓒ which → that (뒤에 완전한 절(he was able ~ years)을 이끌어 앞의 He studied so hard의 결과를 나타내는 부사절을 이루어야 하므로 '매우[너무] ~해서 ...하다'라는 뜻의 'so+부사+that+주어+동사' 구문을 이루도록 which를 접속사 that으로 고쳐야 한다.) ⓖ buried → was buried (bury는 '묻다, 매장하다'라는 뜻의 타동사로, 흐름상 주어 he(=Dr. Schofield)가 '묻힌' 대상이며 뒤에 목적어가 없으므로, 수동태(be동사+p.p.)가 쓰여야 한다. 따라서 주어 Dr. Schofield에 수일치한 단수형 과거 be동사 was를 사용하여 buried를 수동태 was buried로 고쳐야 한다.)"
+    },
+    {
+      "number": 24,
+      "question": "다음 글을 읽고 물음에 답하시오.\nDo you know Seok Hopil? His English name was Frank W. Schofield, but he loved his Korean name. It sounded ⓐ<u>similarly</u> to his real name, and it also had a good meaning.\nDr. Schofield was a Canadian doctor, and he first came to Korea in 1916 ⓑ<u>to teach</u> medicine. He wanted to teach in Korean, so he began to learn Korean right away. He studied so hard ⓒ<u>which</u> he was able to teach in Korean after only a few years. He believed that every country has the right ⓓ<u>to be</u> independent, so he helped the Korean independence movement.\nOn March 1, 1919, Dr. Schofield heard people shouting for Korean independence in Tapgol Park. He took pictures of the event with his camera. He then wrote an article about the historic event and sent it to foreign newspapers with his pictures.\nDr. Schofield's fight for Korean independence didn't stop even after the March 1st Movement. He continued ⓔ<u>writing</u> about the terrible situation in Korea for foreign newspapers. He was under the watchful eye of the Japanese police, so he had to go back to Canada in 1920.\nIn 1958, he returned to Korea at the invitation of the Korean government and ⓕ<u>never left</u> again. For the rest of his life, he worked hard to help Koreans, especially poor students. Dr. Schofield died in April 1970, and he ⓖ<u>buried</u> in Seoul National Cemetery.\n\n윗글을 읽고 다음 질문에 알맞은 답을 고르시오.\n\nWhy did Dr. Schofield have to leave Korea in 1920?",
+      "options": [
+        "Because foreign newspapers refused his articles on Korea's terrible situation.",
+        "Because he had to teach medicine to poor students in Canada.",
+        "Because Korea achieved political freedom from Japan.",
+        "Because the Canadian government called him back.",
+        "Because he was watched by the Japanese police."
+      ],
+      "answer": "5",
+      "explanation": "Schofield 박사가 한국의 참혹한 상황에 관한 기사를 외국 신문에 계속해서 쓰자 그는 일본 경찰의 감시를 받게 되어 1920년에 캐나다로 돌아가야 했다고 했으므로 ⑤ '그가 일본 경찰에 의해 감시를 받았기 때문이다'가 적절하다."
+    },
+    {
+      "number": 25,
+      "question": "다음 글을 읽고 물음에 답하시오.\nOn February 28, 1919, a man came to Dr. Schofield's house.\nA man: Dr. Schofield, I have a special favor to ask you.\nDr. Schofield: What can I do for you?\nA man: Many people are going to gather tomorrow for the independence of Korea. Could you take pictures of the event and share them with the world?\nAt 2 p.m. on March 1, Dr. Schofield was hiding in a building and saw a large group of people gathering outside. He began to take pictures.\nDr. Schofield: Unbelievable! There are so many people here. I hope the world will learn about this important event through my pictures.\n\n윗글을 읽고 다음 질문에 대한 알맞은 대답이 되도록 주어진 <조건>에 맞게 빈칸을 완성하시오.\n\nQ. What did Dr. Schofield hope the world would learn about through his pictures?\n\n<조건>\n• 주격 관계대명사 that을 사용할 것\n• Korean, happened, movement를 사용할 것\n• 각 빈칸에 한 단어씩 쓸 것\n\n→ He hoped the world would learn about the ____ ____ ____ ____ ____ on March 1, 1919.",
+      "options": [],
+      "answer": "Korean independence movement that happened",
+      "explanation": "Schofield 박사는 자신의 사진을 통해 세상이 무엇에 대해 알게 되기를 바랐는가? → 그는 세계가 1919년 3월 1일에 일어난 한국의 독립운동에 대해 알게 되길 바랐다."
+    },
+    {
+      "number": 26,
+      "question": "다음 글을 읽고 물음에 답하시오.\nOn February 28, 1919, a man came to Dr. Schofield's house.\nA man: Dr. Schofield, I have a special favor to ask you.\nDr. Schofield: What can I do for you?\nA man: Many people are going to gather tomorrow for the independence of Korea. Could you take pictures of the event and share them with the world?\nAt 2 p.m. on March 1, Dr. Schofield was hiding in a building and saw a large group of people gathering outside. He began to take pictures.\nDr. Schofield: Unbelievable! There are so many people here. I hope the world will learn about this important event through my pictures.\n\n윗글의 주제로 알맞은 것은?",
+      "options": [
+        "Dr. Schofield's plan for Korea's independence",
+        "foreigners who helped Korea like Dr. Schofield",
+        "the beginning of Dr. Schofield's fight for Korean independence",
+        "the value of Dr. Schofield's pictures for Korea's independence",
+        "Dr. Schofield's various efforts to share Korea's situation with the world"
+      ],
+      "answer": "3",
+      "explanation": "한 남자의 부탁으로 한국의 독립을 위한 역사적 사건의 사진을 찍게 된 Schofield 박사가 이런 중요한 사건을 세계가 알길 바라는 내용이므로, 글의 주제는 ③ '한국의 독립을 위한 Schofield 박사의 투쟁의 시작'이 적절하다."
+    },
+    {
+      "number": 27,
+      "question": "다음 글을 읽고 물음에 답하시오.\nDo you know Seok Hopil? His English name was Frank W. Schofield, but he loved his Korean name. It sounded similar to his real name, and it also had a good meaning.\nDr. Schofield was a Canadian doctor, and he first came to Korea in 1916 to teach medicine. He wanted to teach in Korean, so he began to learn Korean right away. He studied so hard that he was (A)[unable / able] to teach in Korean after only a few years. He believed that every country has the right to be independent, so he (B)[opposed / contributed to] the Korean independence movement.\nOn March 1, 1919, Dr. Schofield heard people shouting for Korean independence in Tapgol Park. He took pictures of the event with his camera. He then wrote an article about the historic event and sent it to foreign newspapers with his pictures.\nDr. Schofield's fight for Korean independence didn't stop even after the March 1st Movement. He (C)[continued / gave up] writing about the terrible situation in Korea for foreign newspapers. He was under the watchful eye of the Japanese police, so he had to go back to Canada in 1920.\nIn 1958, he returned to Korea at the invitation of the Korean government and never left again. For the rest of his life, he worked hard to help Koreans, especially poor students. Dr. Schofield died in April 1970, and he was buried in Seoul National Cemetery.\n\n윗글의 괄호 (A), (B), (C)에서 흐름상 알맞은 말로 바르게 연결된 것은?",
+      "options": [
+        "(A) unable – (B) opposed – (C) gave up",
+        "(A) unable – (B) contributed to – (C) continued",
+        "(A) able – (B) contributed to – (C) gave up",
+        "(A) able – (B) contributed to – (C) continued",
+        "(A) able – (B) opposed – (C) gave up"
+      ],
+      "answer": "4",
+      "explanation": "(A) 한국어를 즉시 배우기 시작해 매우 열심히 공부했다고 했으므로, 몇 년 만에 한국어로 '가르칠 수' 있게 되었다는 긍정적 흐름이 자연스럽다. 따라서 '~할 수 있는'을 뜻하는 able이 적절하다. (B) 모든 나라는 독립할 권리가 있다고 믿었다는 내용과 so(그래서)로 연결되어 있으므로 한국의 독립운동'에 기여했다'는 긍정적 흐름이 자연스럽다. 따라서 '~에 기여했다'라는 뜻의 contributed to가 적절하다. (C) 3·1 운동 이후에도 한국 독립을 위한 그의 투쟁은 멈추지 않았다는 내용이 이어지므로, 한국의 참혹한 상황에 대해 '계속해서' 글을 썼다는 흐름이 자연스럽다. 따라서 '계속했다'라는 뜻의 continued가 적절하다."
+    },
+    {
+      "number": 28,
+      "question": "다음 글을 읽고 물음에 답하시오.\nDo you know Seok Hopil? His English name was Frank W. Schofield, but he loved his Korean name. It sounded similar to his real name, and it also had a good meaning.\nDr. Schofield was a Canadian doctor, and he first came to Korea in 1916 to teach medicine. He wanted to teach in Korean, so he began to learn Korean right away. He studied so hard that he was (A)[unable / able] to teach in Korean after only a few years. He believed that every country has the right to be independent, so he (B)[opposed / contributed to] the Korean independence movement.\nOn March 1, 1919, Dr. Schofield heard people shouting for Korean independence in Tapgol Park. He took pictures of the event with his camera. He then wrote an article about the historic event and sent it to foreign newspapers with his pictures.\nDr. Schofield's fight for Korean independence didn't stop even after the March 1st Movement. He (C)[continued / gave up] writing about the terrible situation in Korea for foreign newspapers. He was under the watchful eye of the Japanese police, so he had to go back to Canada in 1920.\nIn 1958, he returned to Korea at the invitation of the Korean government and never left again. For the rest of his life, he worked hard to help Koreans, especially poor students. Dr. Schofield died in April 1970, and he was buried in Seoul National Cemetery.\n\n윗글의 내용을 다음과 같이 정리할 때, ⓐ~ⓔ 중 일치하지 않은 것을 모두 고르면? (정답 2개)\n\n| Year | Activities & Events |\n|---|---|\n| 1916~ | • He visited Korea for the first time to teach medicine.<br>• ⓐ<u>He quickly learned Korean and taught in Korean</u>. |\n| 1919 | ⓑ<u>He took pictures of the March 1st Movement and then wrote an article about it for the foreign newspapers</u>. |\n| 1920 | • ⓒ<u>Because he constantly worked for Korean independence, the Japanese police sent him to prison</u>.<br>• He finally had to return to his own country. |\n| 1958~ | After returning to Korea, ⓓ<u>he dedicated the rest of his life to helping Korean people, especially sick children</u>. |\n| 1970 | ⓔ<u>He passed away and his grave is located in Seoul National Cemetery</u>. |",
+      "options": [
+        "ⓐ",
+        "ⓑ",
+        "ⓒ",
+        "ⓓ",
+        "ⓔ"
+      ],
+      "answer": "3, 4",
+      "explanation": "Schofield 박사가 계속해서 외국 신문에 한국의 참혹한 상황에 관한 기사를 써서 일본 경찰의 감시를 받게 되었다고 했으므로 ⓒ의 '일본 경찰이 그를 감옥에 보냈다'는 글의 내용과 일치하지 않는다. 또한 한국 정부의 초청으로 한국에 돌아온 후에는 여생을 한국인들, 특히 가난한 학생들을 위해 열심히 일했다고 했으므로 ⓓ의 '아픈 아이들'도 글의 내용과 일치하지 않는다."
+    },
+    {
+      "number": 29,
+      "question": "다음 글을 Schofield 박사와의 대화로 구성할 때, 빈칸에 들어갈 알맞은 단어를 본문에서 찾아 쓰시오.\nOn March 1, 1919, Dr. Schofield heard people shouting for Korean independence in Tapgol Park. He took pictures of the event with his camera. He then wrote an article about the historic event and sent it to foreign newspapers with his pictures.\nDr. Schofield's fight for Korean independence didn't stop even after the March 1st Movement. He continued to write about the terrible situation in Korea for foreign newspapers. He was under the watchful eye of the Japanese police, so he had to go back to Canada in 1920.\nIn 1958, he returned to Korea at the invitation of the Korean government and never left again. For the rest of his life, he worked hard to help Koreans, especially poor students. Dr. Schofield died in April 1970, and he was buried in Seoul National Cemetery.\n\nA: Dr. Schofield, what did you do on March 1, 1919?\nB: Many people in Tapgol Park shouted for the (1)________ of Korea, and I took (2)________. Then, I wrote an article to inform (3)________ ________.\nA: Did you continue to help Korea after that?\nB: Sure. I kept writing about the (4)________ situation under Japanese control. But I had to leave for (5)________ in 1920 because of the Japanese police.\nA: Then, when did you come back to Korea?\nB: The (6)________ ________ invited me back in 1958, and I decided to stay here for the rest of my life.\nA: What did you do after you returned?\nB: I tried hard to help Koreans. In particular, I helped (7)________ ________.",
+      "options": [],
+      "answer": "independence / pictures / foreign newspapers / terrible / Canada / Korean government / poor students",
+      "subParts": [
+        {
+          "label": "(1)",
+          "answer": "independence"
+        },
+        {
+          "label": "(2)",
+          "answer": "pictures"
+        },
+        {
+          "label": "(3)",
+          "answer": "foreign newspapers"
+        },
+        {
+          "label": "(4)",
+          "answer": "terrible"
+        },
+        {
+          "label": "(5)",
+          "answer": "Canada"
+        },
+        {
+          "label": "(6)",
+          "answer": "Korean government"
+        },
+        {
+          "label": "(7)",
+          "answer": "poor students"
+        }
+      ],
+      "explanation": "[제시문] A: Schofield 박사님, 1919년 3월 1일에 무엇을 하셨나요? B: 탑골공원에서 많은 사람들이 한국의 독립을 외쳤고 저는 사진을 찍었습니다. 그 후에 외국 신문사에 알리기 위해 기사를 썼습니다. A: 그 후에도 계속해서 한국을 도우셨나요? B: 물론입니다. 저는 일본의 통제 아래에서의 참혹한 상황에 대해 계속해서 글을 썼습니다. 하지만 일본 경찰 때문에 1920년에 캐나다로 떠나야만 했습니다. A: 그렇다면 언제 다시 한국으로 돌아오셨나요? B: 1958년에 한국 정부가 저를 다시 초청해 주었고, 저는 여생을 여기에 남기로 결정했습니다. A: 돌아오신 후에 무엇을 하셨나요? B: 한국인들을 돕기 위해 열심히 노력했습니다. 특히, 가난한 학생들을 도왔습니다."
+    },
+    {
+      "number": 30,
+      "question": "다음 세호의 일기를 읽고 괄호 안의 지각동사를 어법에 맞게 사용하여 문장을 완성하시오. (각 빈칸에 한 단어씩 쓸 것)\n\nSaturday, September 20\nToday, I visited the national park with my classmates. In the trees, cicadas cried loudly and dragonflies flew around in the sky. Near the garden, popcorn popped, and it smelled sweet. While I walked on the grass, a tiny insect crawled up my leg. I was very surprised. But it was an exciting day!\n\n(1) Seho ____ ____ ____ ____ in the trees. (hear)\n(2) Seho ____ ____ ____ ____ in the sky. (see)\n(3) Seho ____ ____ ____ near the garden. (smell)\n(4) Seho ____ ____ ____ ____ ____ ____ ____ ____ while he walked on the grass. (feel)",
+      "options": [],
+      "answer": "heard cicadas cry loudly / saw dragonflies fly around / smelled popcorn pop / felt a tiny insect crawl up his leg",
+      "subParts": [
+        {
+          "label": "(1)",
+          "answer": "heard cicadas cry loudly",
+          "acceptedAnswers": [
+            "heard cicadas crying loudly"
+          ]
+        },
+        {
+          "label": "(2)",
+          "answer": "saw dragonflies fly around",
+          "acceptedAnswers": [
+            "saw dragonflies flying around"
+          ]
+        },
+        {
+          "label": "(3)",
+          "answer": "smelled popcorn pop",
+          "acceptedAnswers": [
+            "smelled popcorn popping"
+          ]
+        },
+        {
+          "label": "(4)",
+          "answer": "felt a tiny insect crawl up his leg",
+          "acceptedAnswers": [
+            "felt a tiny insect crawling up his leg"
+          ]
+        }
+      ],
+      "explanation": "[제시문] 9월 20일 토요일. 오늘 나는 반 친구들과 함께 국립공원을 방문했다. 나무에서는 매미들이 시끄럽게 울었고, 하늘에는 잠자리들이 이리저리 날아다녔다. 정원 근처에서는 팝콘이 튀겨졌고, 달콤한 냄새가 났다. 내가 잔디밭을 걷는 동안 아주 작은 곤충이 내 다리를 기어 올라왔다. 나는 몹시 놀랐다. 그러나 정말 신나는 하루였다! (1) 세호는 매미들이 나무에서 크게 우는 것을 들었다. (2) 세호는 잠자리들이 하늘에서 이리저리 날아다니는 것을 보았다. (3) 세호는 정원 근처에서 팝콘이 튀겨지는 냄새를 맡았다. (4) 세호는 잔디밭을 걷는 동안에 아주 작은 곤충이 그의 다리를 기어 올라오는 것을 느꼈다. 지각동사의 목적격보어로 동사원형 또는 현재분사를 쓴다."
+    }
+  ]
+}
