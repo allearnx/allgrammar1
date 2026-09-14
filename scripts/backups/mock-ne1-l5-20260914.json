@@ -1,0 +1,870 @@
+{
+ "R1": [
+  {
+   "number": 1,
+   "question": "다음 중 짝지어진 단어의 관계가 나머지 넷과 다른 것은?",
+   "options": [
+    "famous - well-known",
+    "feeling - emotion",
+    "choose - pick",
+    "diary - journal",
+    "similarity - difference"
+   ],
+   "answer": "5",
+   "explanation": "나머지는 모두 '유의어' 관계이나, similarity(유사점)와 difference(차이점)는 '반의어' 관계이다."
+  },
+  {
+   "number": 2,
+   "question": "다음 중 영영풀이가 알맞지 않은 것은?",
+   "options": [
+    "remember: to bring something to mind or think of it again",
+    "mirror: a piece of special glass in which you can see yourself",
+    "self-portrait: a picture that you draw or paint of yourself",
+    "agree: to have a different opinion from someone else about something",
+    "expression: a look on a person's face that shows their thoughts or feelings"
+   ],
+   "answer": "4",
+   "explanation": "agree는 '동의하다'라는 뜻의 동사로, 'to have the same opinion as somebody'로 고쳐야 한다."
+  },
+  {
+   "number": 3,
+   "question": "다음 빈칸 (A)~(D)에 들어갈 단어가 차례대로 연결된 것은?\n\n• You can (A)________ your thoughts freely.\n• Her paintings (B)________ the beauty of nature very well.\n• These cookies (C)________ memories of my grandmother.\n• He decided to (D)________ white paint to the wall.\n\nⓐ capture ⓑ apply ⓒ express ⓓ bring back",
+   "options": [
+    "ⓐ-ⓑ-ⓓ-ⓒ",
+    "ⓑ-ⓐ-ⓓ-ⓒ",
+    "ⓒ-ⓐ-ⓑ-ⓓ",
+    "ⓒ-ⓐ-ⓓ-ⓑ",
+    "ⓓ-ⓑ-ⓐ-ⓒ"
+   ],
+   "answer": "4",
+   "explanation": "(A) 생각을 표현하다(express), (B) 자연의 아름다움을 포착하다(capture), (C) 할머니의 기억을 떠올리게 하다(bring back), (D) 흰색 페인트를 바르다(apply)."
+  },
+  {
+   "number": 4,
+   "question": "다음 밑줄 친 재귀대명사 용법이 다른 것은?",
+   "options": [
+    "She cleaned her room <u>herself</u>.",
+    "They decorated it <u>themselves</u>.",
+    "We should protect <u>ourselves</u>.",
+    "He washed the car <u>himself</u>.",
+    "I made the table <u>myself</u>."
+   ],
+   "answer": "3",
+   "explanation": "③은 동사 protect의 목적어 자리에 쓰여 주어와 동일 대상임을 나타내는 재귀 용법으로 생략할 수 없고, 나머지는 강조 용법으로 생략할 수 있다."
+  },
+  {
+   "number": 5,
+   "question": "다음 대화의 빈칸에 들어갈 말로 알맞은 것은?\n\nG: ______________________________\nB: I think it's strange.\nG: I agree. The woman's face looks like a puzzle.\nB: Yes. But I like it. It's very colorful.",
+   "options": [
+    "Why do you think so?",
+    "What are you doing now?",
+    "Who painted this painting?",
+    "Why do you like this painting?",
+    "What do you think of this painting?"
+   ],
+   "answer": "5",
+   "explanation": "소년이 '그것은 이상하다고 생각해.'라는 의견을 답하고 있으므로 빈칸에는 의견을 묻는 표현이 알맞다."
+  },
+  {
+   "number": 6,
+   "question": "다음 그림을 보고 묘사한 문장들 중 어법상 또는 내용상 어색한 것을 모두 고르면? (정답 2개)\n(그림 설명: 공원에서 Dad는 자전거를 타고 있고, Tim은 축구공을 차고 있으며, Lisa는 개를 산책시키고, Yumi는 줄넘기를 하고, Mr. Park은 벤치에서 책을 읽고 있다.)",
+   "options": [
+    "My dad went to the park to run.",
+    "Tim went to the park to play soccer.",
+    "Lisa went to the park to walk her dog.",
+    "Yumi went to the park to jumping rope.",
+    "Mr. Park went to the park to read a book."
+   ],
+   "answer": "1, 4",
+   "explanation": "① 그림에서 아빠는 자전거를 타고 있으므로 run → ride a bike. ④ to부정사는 to+동사원형이므로 jumping → jump."
+  },
+  {
+   "number": 7,
+   "question": "다음 중 짝지어진 대화가 어색한 것은?",
+   "options": [
+    "A: I think this ring is pretty. / B: I think so too.",
+    "A: I think the painting is colorful and funny. / B: I agree. I think it's boring.",
+    "A: What do you think of this artwork? / B: I think the man is sad.",
+    "A: I'm so excited to see all these paintings. / B: Me too. What do you think of The Sunflower?",
+    "A: I think the painting is weird. / B: Why do you think so?"
+   ],
+   "answer": "2",
+   "explanation": "② 그림이 다채롭고 재미있다는 A의 의견에 동의한 뒤 지루하다는 반대 의견을 이어 말하는 것은 어색하다. I agree → I don't agree로 고쳐야 한다."
+  },
+  {
+   "number": 8,
+   "question": "다음 대화의 빈칸에 들어갈 말로 알맞은 것은?\n\nG: What do you think of this painting?\nB: ______________________________\nG: I agree. The woman's face looks like a puzzle.\nB: Yes. But I like it. It's very colorful.",
+   "options": [
+    "I'm curious about it.",
+    "I'm interested in it.",
+    "I think it's strange.",
+    "I'm good at it.",
+    "I don't like it."
+   ],
+   "answer": "3",
+   "explanation": "빈칸 뒤에서 소녀가 소년의 의견에 동의하며 여성의 얼굴이 퍼즐 같다고 말하므로 '나는 그것이 이상하다고 생각해.'가 알맞다. 소년이 마지막에 그림이 좋다고 하므로 ⑤는 들어갈 수 없다."
+  },
+  {
+   "number": 9,
+   "question": "다음 표를 보고 물건의 목적을 나타내는 문장을 to부정사를 사용하여 완성하시오.\n\n| Object | Purpose |\n|---|---|\n| a phone case | protect my new phone |\n| headphones | listen to music in the subway |\n| a helmet | stay safe when I ride a bike |\n\n(1) I need a phone case ________________.\n(2) I use headphones ________________.\n(3) I bought ________________.",
+   "options": [],
+   "answer": "to protect my new phone / to listen to music in the subway / a helmet to stay safe when I ride a bike",
+   "subParts": [
+    {
+     "label": "(1)",
+     "answer": "to protect my new phone"
+    },
+    {
+     "label": "(2)",
+     "answer": "to listen to music in the subway"
+    },
+    {
+     "label": "(3)",
+     "answer": "a helmet to stay safe when I ride a bike"
+    }
+   ],
+   "explanation": "'~하기 위해'라는 목적은 부사적 용법의 to부정사로 나타낸다."
+  },
+  {
+   "number": 10,
+   "question": "다음 그림을 보고 <보기>의 단어 및 표현을 어법에 알맞게 사용하여 빈칸에 알맞은 말을 쓰시오.\n(그림 설명: (1) 소녀가 거울 속 자신에게 미소 짓고 있다. (2) 아기가 스스로 옷을 입고 있다.)\n\n<보기> dress, smile at, her, him\n\n(1) She is ________ ________ ________ in the mirror.\n(2) The baby is ________ ________.",
+   "options": [],
+   "answer": "smiling at herself / dressing himself",
+   "subParts": [
+    {
+     "label": "(1)",
+     "answer": "smiling at herself"
+    },
+    {
+     "label": "(2)",
+     "answer": "dressing himself"
+    }
+   ],
+   "explanation": "주어와 동일한 대상이 목적어이므로 재귀대명사 herself, himself를 쓴다. dress oneself는 옷을 입다."
+  },
+  {
+   "number": 11,
+   "question": "다음 글을 읽고 물음에 답하시오.\nToday, people enjoy (A)[taking / to take] selfies. We can capture special moments with (B)[themselves / them].\nLong ago, people captured their own image in a different way. They painted pictures of (C)[themselves / them]. These pictures are self-portraits.\n\n윗글의 괄호 (A), (B), (C)에서 어법상 알맞은 말로 바르게 연결된 것은?",
+   "options": [
+    "(A) taking – (B) them – (C) themselves",
+    "(A) to take – (B) them – (C) themselves",
+    "(A) to take – (B) themselves – (C) them",
+    "(A) taking – (B) themselves – (C) themselves",
+    "(A) taking – (B) them – (C) them"
+   ],
+   "answer": "1",
+   "explanation": "(A) enjoy는 동명사를 목적어로 취한다. (B) with의 목적어는 앞의 selfies를 가리키므로 them. (C) 주어 They와 of의 목적어가 동일 대상이므로 재귀대명사 themselves."
+  },
+  {
+   "number": 12,
+   "question": "다음 글을 읽고 물음에 답하시오.\nToday, people enjoy (A)[taking / to take] selfies. We can capture special moments with (B)[themselves / them].\nLong ago, people captured their own image in a different way. They painted pictures of (C)[themselves / them]. These pictures are self-portraits.\n\n윗글의 제목을 다음과 같이 쓸 때, 빈칸에 들어갈 알맞은 말을 찾아 쓰시오. (첫 철자는 대문자로 쓸 것)\n\nHow Can We (1)________ Ourselves?: From (2)________ to (3)________",
+   "options": [],
+   "answer": "Capture, Self-Portraits, Selfies",
+   "subParts": [
+    {
+     "label": "(1)",
+     "answer": "Capture"
+    },
+    {
+     "label": "(2)",
+     "answer": "Self-Portraits"
+    },
+    {
+     "label": "(3)",
+     "answer": "Selfies"
+    }
+   ],
+   "explanation": "우리는 어떻게 우리 자신을 포착할 수 있는가?: 자화상에서부터 셀피까지"
+  },
+  {
+   "number": 13,
+   "question": "다음 대화를 아래와 같이 요약할 때, 밑줄 친 ⓐ~ⓔ 중, 알맞지 않은 것은?\n\nG: Hey, Seojun. There's a photo exhibition in the school library. Do you want to come with me?\nB: That sounds interesting. Let's go together.\nG: There are so many photos of our school life here.\nB: Yes. Look at this photo. It's from our class picnic! What do you think of it?\nG: I think it is great.\nB: Yes! We had so much fun.\nG: I agree. That was a really fun day.\n\nSeojun and the girl visit a ⓐ<u>photo exhibition</u> at ⓑ<u>the school library</u> and look at pictures of their ⓒ<u>school life</u>. They enjoy seeing a photo from their ⓓ<u>class picnic</u>, and share ⓔ<u>different opinions</u> about that day.",
+   "options": [
+    "ⓐ",
+    "ⓑ",
+    "ⓒ",
+    "ⓓ",
+    "ⓔ"
+   ],
+   "answer": "5",
+   "explanation": "서준이와 소녀 둘 다 반 소풍이 정말 재미있고 즐거운 날이었다고 말하므로 ⓔ different opinions(다른 의견들)를 the same opinion(같은 의견)으로 고쳐야 한다."
+  },
+  {
+   "number": 14,
+   "question": "다음 글을 읽고 물음에 답하시오.\nSelfies and self-portraits are similar.\nBoth ⓐ<u>show</u> our image at a certain time. When we look at them, we can remember ⓑ<u>ourselves</u> from that time. They are like a diary.\nWe take selfies ⓒ<u>to remember</u> happy moments. Selfies capture the expressions on our faces at those times. We often look at selfies with our family and friends to bring back ⓓ<u>those</u> joyful feelings.\nSimilarly, some painters made self-portraits to capture different times in their lives. Rembrandt looked in the mirror and painted ⓔ<u>him</u> many times. He painted (A)<u>around</u> 90 self-portraits in his life. They show his face from youth to old age.\n\n윗글의 밑줄 친 ⓐ~ⓔ 중, 어법상 어색한 것은?",
+   "options": [
+    "ⓐ",
+    "ⓑ",
+    "ⓒ",
+    "ⓓ",
+    "ⓔ"
+   ],
+   "answer": "5",
+   "explanation": "ⓔ 주어 Rembrandt와 painted의 목적어가 동일 대상이므로 재귀대명사 himself를 써야 한다."
+  },
+  {
+   "number": 15,
+   "question": "다음 글을 읽고 물음에 답하시오.\nSelfies and self-portraits are similar.\nBoth ⓐ<u>show</u> our image at a certain time. When we look at them, we can remember ⓑ<u>ourselves</u> from that time. They are like a diary.\nWe take selfies ⓒ<u>to remember</u> happy moments. Selfies capture the expressions on our faces at those times. We often look at selfies with our family and friends to bring back ⓓ<u>those</u> joyful feelings.\nSimilarly, some painters made self-portraits to capture different times in their lives. Rembrandt looked in the mirror and painted ⓔ<u>him</u> many times. He painted (A)<u>around</u> 90 self-portraits in his life. They show his face from youth to old age.\n\n윗글의 밑줄 친 (A)around와 뜻이 다른 것을 모두 고르면? (정답 2개)",
+   "options": [
+    "There are <u>around</u> 50 people at the party.",
+    "The hospital is <u>around</u> two miles away.",
+    "The dog was running <u>around</u> the tree.",
+    "They're travelling <u>around</u> the country.",
+    "The meeting will start <u>around</u> 10 a.m."
+   ],
+   "answer": "3, 4",
+   "explanation": "(A)의 around는 부사로 '약, -쯤'이라는 뜻이다. ③은 '~ 주위에', ④는 '~의 여기저기에'라는 뜻의 전치사로 쓰였다."
+  },
+  {
+   "number": 16,
+   "question": "다음 글을 읽고 물음에 답하시오.\nSelfies and self-portraits are similar.\nBoth ⓐ<u>show</u> our image at a certain time. When we look at them, we can remember ⓑ<u>ourselves</u> from that time. They are like a diary.\nWe take selfies ⓒ<u>to remember</u> happy moments. Selfies capture the expressions on our faces at those times. We often look at selfies with our family and friends to bring back ⓓ<u>those</u> joyful feelings.\nSimilarly, some painters made self-portraits to capture different times in their lives. Rembrandt looked in the mirror and painted ⓔ<u>him</u> many times. He painted (A)<u>around</u> 90 self-portraits in his life. They show his face from youth to old age.\n\n윗글을 읽고 다음 질문에 대한 대답을 완성할 때, 빈칸에 들어갈 알맞은 표현은?\n\nQ: What are selfies and self-portraits similar to?\nA: They are similar to a ____________.",
+   "options": [
+    "mirror",
+    "diary",
+    "painting",
+    "painter",
+    "happy moment"
+   ],
+   "answer": "2",
+   "explanation": "셀피와 자화상은 특정 시간의 우리 모습을 보여 주어 그때의 우리 자신을 기억하게 하므로 일기와 같다고 했다."
+  },
+  {
+   "number": 17,
+   "question": "다음 글을 읽고 물음에 답하시오.\nSelfies and self-portraits are similar.\nBoth ⓐ<u>show</u> our image at a certain time. When we look at them, we can remember ⓑ<u>ourselves</u> from that time. They are like a diary.\nWe take selfies ⓒ<u>to remember</u> happy moments. Selfies capture the expressions on our faces at those times. We often look at selfies with our family and friends to bring back ⓓ<u>those</u> joyful feelings.\nSimilarly, some painters made self-portraits to capture different times in their lives. Rembrandt looked in the mirror and painted ⓔ<u>him</u> many times. He painted (A)<u>around</u> 90 self-portraits in his life. They show his face from youth to old age.\n\n윗글의 제목으로 알맞은 것은?",
+   "options": [
+    "The Life of Rembrandt",
+    "The Start of Self-Portraits",
+    "The Popularity of Selfies Today",
+    "Why Did People Paint Self-Portraits?",
+    "How Are Selfies and Self-Portraits Similar?"
+   ],
+   "answer": "5",
+   "explanation": "셀피와 자화상의 비슷한 점을 설명하고 있으므로 '셀피와 자화상은 어떻게 비슷한가?'가 알맞다."
+  },
+  {
+   "number": 18,
+   "question": "다음 글을 읽고 물음에 답하시오.\nSelfies and self-portraits also have differences.\nⓐ<u>Taking</u> a selfie is easy. We can do it quickly with our camera at any time. However, painting a self-portrait ⓑ<u>take</u> some time. Also, a self-portrait shows a painter's personal painting style.\n(A)<u>To paint</u> a person, a painter needs a model. Vincent van Gogh didn't have enough money for a model. So (B)______________________! When he painted his self-portraits, he chose bright colors and ⓒ<u>applied</u> a lot of paint. This became his unique style. We can see ⓓ<u>them</u> in his other paintings too.\nWe can express ⓔ<u>us</u> with selfies and self-portraits. Do you want to try?\n\n윗글의 밑줄 친 ⓐ~ⓔ 중, 어법상 알맞은 것을 모두 고르면? (정답 2개)",
+   "options": [
+    "ⓐ",
+    "ⓑ",
+    "ⓒ",
+    "ⓓ",
+    "ⓔ"
+   ],
+   "answer": "1, 3",
+   "explanation": "ⓑ 동명사구 주어는 단수 취급하므로 take → takes. ⓓ 단수명사구 his unique style을 가리키므로 them → it. ⓔ 주어 We와 목적어가 동일 대상이므로 us → ourselves."
+  },
+  {
+   "number": 19,
+   "question": "다음 글을 읽고 물음에 답하시오.\nSelfies and self-portraits also have differences.\nⓐ<u>Taking</u> a selfie is easy. We can do it quickly with our camera at any time. However, painting a self-portrait ⓑ<u>take</u> some time. Also, a self-portrait shows a painter's personal painting style.\n(A)<u>To paint</u> a person, a painter needs a model. Vincent van Gogh didn't have enough money for a model. So (B)______________________! When he painted his self-portraits, he chose bright colors and ⓒ<u>applied</u> a lot of paint. This became his unique style. We can see ⓓ<u>them</u> in his other paintings too.\nWe can express ⓔ<u>us</u> with selfies and self-portraits. Do you want to try?\n\n윗글의 밑줄 친 (A)To paint와 용법이 같은 것은?",
+   "options": [
+    "I called him <u>to ask</u> for help.",
+    "I hope <u>to see</u> you again soon.",
+    "<u>To get</u> up early is very difficult.",
+    "He decided <u>to buy</u> a new house.",
+    "My hobby is <u>to read</u> comic books."
+   ],
+   "answer": "1",
+   "explanation": "(A)의 To paint는 '그리기 위해'라는 목적을 나타내는 부사적 용법이다. ①의 to ask도 같은 용법이며 나머지는 명사적 용법이다."
+  },
+  {
+   "number": 20,
+   "question": "다음 글을 읽고 물음에 답하시오.\nSelfies and self-portraits also have differences.\nⓐ<u>Taking</u> a selfie is easy. We can do it quickly with our camera at any time. However, painting a self-portrait ⓑ<u>take</u> some time. Also, a self-portrait shows a painter's personal painting style.\n(A)<u>To paint</u> a person, a painter needs a model. Vincent van Gogh didn't have enough money for a model. So (B)______________________! When he painted his self-portraits, he chose bright colors and ⓒ<u>applied</u> a lot of paint. This became his unique style. We can see ⓓ<u>them</u> in his other paintings too.\nWe can express ⓔ<u>us</u> with selfies and self-portraits. Do you want to try?\n\n윗글의 빈칸 (B)에 들어갈 말로 알맞은 것은?",
+   "options": [
+    "he changed his painting style",
+    "he started painting landscapes",
+    "he painted his family",
+    "he gave up painting",
+    "he painted himself"
+   ],
+   "answer": "5",
+   "explanation": "모델을 구할 돈이 없었으므로 그 결과로 고흐는 자기 자신을 그렸다는 내용이 알맞다."
+  },
+  {
+   "number": 21,
+   "question": "다음 글을 읽고 물음에 답하시오.\nSelfies and self-portraits also have differences.\nⓐ<u>Taking</u> a selfie is easy. We can do it quickly with our camera at any time. However, painting a self-portrait ⓑ<u>take</u> some time. Also, a self-portrait shows a painter's personal painting style.\n(A)<u>To paint</u> a person, a painter needs a model. Vincent van Gogh didn't have enough money for a model. So (B)______________________! When he painted his self-portraits, he chose bright colors and ⓒ<u>applied</u> a lot of paint. This became his unique style. We can see ⓓ<u>them</u> in his other paintings too.\nWe can express ⓔ<u>us</u> with selfies and self-portraits. Do you want to try?\n\n다음 물음에 알맞은 답을 고르시오.\nWhat does a self-portrait show about the painter?",
+   "options": [
+    "the painter's personal experiences",
+    "the painter's own style of painting",
+    "the painter's favorite subjects",
+    "the painter's favorite colors",
+    "the painter's personality"
+   ],
+   "answer": "2",
+   "explanation": "자화상은 화가 개인의 화풍(personal painting style)을 보여 준다고 했다."
+  },
+  {
+   "number": 22,
+   "question": "다음 글을 읽고 물음에 답하시오.\nToday, people enjoy taking selfies. We can capture special moments with them.\nLong ago, people captured their own image in a different way. They painted pictures of themselves. These pictures are self-portraits.\nSelfies and self-portraits are similar.\nBoth show our image at a certain time. When we look at them, we can remember ourselves from that time. They are like a diary.\nWe take selfies to remember happy moments. Selfies capture the expressions on our faces at those times. We often look at selfies with our family and friends to bring back those joyful feelings.\nSimilarly, (A)<u>몇몇 화가들은 그들의 삶에서 다른 시기를 포착하기 위해 자화상들을 만들었습니다.</u> Rembrandt looked in the mirror and painted himself many times. He painted around 90 self-portraits in his life. They show his face from youth to old age.\n\n윗글의 밑줄 친 (A)의 우리말을 주어진 <조건>에 알맞게 영작하시오.\n\n<조건>\n• to부정사를 사용할 것\n• capture, different, make, lives, times를 사용할 것 (필요시 변형할 것)\n\n→ some painters ________________________________",
+   "options": [],
+   "answer": "made self-portraits to capture different times in their lives",
+   "explanation": "과거형 made를 쓰고 목적어 self-portraits 뒤에 목적을 나타내는 부사적 용법의 to capture와 different times in their lives를 이어 쓴다."
+  },
+  {
+   "number": 23,
+   "question": "다음 글을 읽고 물음에 답하시오.\nToday, people enjoy taking selfies. We can capture special moments with them.\nLong ago, people captured their own image in a different way. They painted pictures of themselves. These pictures are self-portraits.\nSelfies and self-portraits are similar.\nBoth show our image at a certain time. When we look at them, we can remember ourselves from that time. They are like a diary.\nWe take selfies to remember happy moments. Selfies capture the expressions on our faces at those times. We often look at selfies with our family and friends to bring back those joyful feelings.\nSimilarly, (A)<u>몇몇 화가들은 그들의 삶에서 다른 시기를 포착하기 위해 자화상들을 만들었습니다.</u> Rembrandt looked in the mirror and painted himself many times. He painted around 90 self-portraits in his life. They show his face from youth to old age.\n\n윗글을 읽고 아래 질문에 대한 대답이 되도록 주어진 <조건>에 알맞게 쓰시오.\n\n<조건>\n• 대명사 주어로 시작할 것\n• 지문에서 찾아 완전한 문장으로 쓸 것\n\nQ. What do Rembrandt's self-portraits show?\n→ ________________________________",
+   "options": [],
+   "answer": "They show his face from youth to old age.",
+   "explanation": "렘브란트의 자화상들은 젊은 시절부터 노년까지의 그의 얼굴을 보여 준다."
+  },
+  {
+   "number": 24,
+   "question": "다음 글을 읽고 물음에 답하시오.\nToday, people enjoy taking selfies. We can capture special moments with them.\nLong ago, people captured their own image in a different way. They painted pictures of themselves. These pictures are self-portraits.\nSelfies and self-portraits are similar.\nBoth show our image at a certain time. When we look at them, we can remember ourselves from that time. They are like a diary.\nWe take selfies to remember happy moments. Selfies capture the expressions on our faces at those times. We often look at selfies with our family and friends to bring back those joyful feelings.\nSimilarly, (A)<u>몇몇 화가들은 그들의 삶에서 다른 시기를 포착하기 위해 자화상들을 만들었습니다.</u> Rembrandt looked in the mirror and painted himself many times. He painted around 90 self-portraits in his life. They show his face from youth to old age.\n\n윗글의 내용과 일치하지 않는 것은?",
+   "options": [
+    "These days, people like taking selfies to remember special moments.",
+    "A long time ago, people painted self-portraits to capture their image.",
+    "We can remember ourselves at a certain time through both selfies and self-portraits.",
+    "We can feel happy again when we look at selfies.",
+    "Rembrandt painted only a few self-portraits."
+   ],
+   "answer": "5",
+   "explanation": "렘브란트는 약 90점의 자화상을 그렸으므로 ⑤는 일치하지 않는다."
+  },
+  {
+   "number": 25,
+   "question": "다음 글의 내용과 일치하는 것은?\n\nSelfies and self-portraits also have differences.\nTaking a selfie is easy. We can do it quickly with our camera at any time. However, painting a self-portrait takes some time. Also, a self-portrait shows a painter's personal painting style.\nTo paint a person, a painter needs a model. Vincent van Gogh didn't have enough money for a model. So he painted himself! When he painted his self-portraits, he chose bright colors and applied a lot of paint. This became his unique style. We can see it in his other paintings too.",
+   "options": [
+    "Selfies and self-portraits have no differences.",
+    "Taking a selfie requires a lot of time.",
+    "We can learn a painter's painting style from a self-portrait.",
+    "Vincent van Gogh applied lots of paint in dark colors in his self-portraits.",
+    "We can see Van Gogh's unique style only in his self-portraits."
+   ],
+   "answer": "3",
+   "explanation": "① 차이점이 있다. ② 셀피는 빨리 찍을 수 있다. ④ 고흐는 밝은 색을 썼다. ⑤ 다른 그림에서도 볼 수 있다."
+  },
+  {
+   "number": 26,
+   "question": "다음 글을 아래와 같이 요약할 때, 빈칸 (A), (B)에 들어갈 말로 알맞게 연결된 것은?\n\nToday, people enjoy taking selfies. We can capture special moments with them.\nLong ago, people captured their own image in a different way. They painted pictures of themselves. These pictures are self-portraits.\n\nTo (A)________ an image of themselves at a certain moment, people in the past and the present used (B)________ ways. Today, people take selfies, but in the past, they painted self-portraits.",
+   "options": [
+    "(A) keep – (B) similar",
+    "(A) keep – (B) different",
+    "(A) erase – (B) different",
+    "(A) erase – (B) similar",
+    "(A) remember – (B) normal"
+   ],
+   "answer": "2",
+   "explanation": "특정 순간의 자신의 모습을 간직하기(keep) 위해 과거와 현재의 사람들은 다른(different) 방법을 사용했다."
+  },
+  {
+   "number": 27,
+   "question": "다음 글의 (A)~(E) 중, 주어진 문장이 들어갈 알맞은 곳은?\n\nSelfies capture the expressions on our faces at those times.\n\nSelfies and self-portraits are similar.\nBoth show our image at a certain time. (A) When we look at them, we can remember ourselves from that time. They are like a diary.\nWe take selfies to remember happy moments. (B) We often look at selfies with our family and friends to bring back those joyful feelings. (C)\nSimilarly, some painters made self-portraits to capture different times in their lives. (D) Rembrandt looked in the mirror and painted himself many times. (E) He painted around 90 self-portraits in his life. They show his face from youth to old age.",
+   "options": [
+    "(A)",
+    "(B)",
+    "(C)",
+    "(D)",
+    "(E)"
+   ],
+   "answer": "2",
+   "explanation": "주어진 문장의 those times는 앞의 happy moments를 가리키므로, '행복한 순간을 기억하기 위해 셀피를 찍는다'는 문장 뒤인 (B)에 들어가는 것이 자연스럽다."
+  },
+  {
+   "number": 28,
+   "question": "다음 글을 읽고 물음에 답하시오.\nSelfies and self-portraits also have differences.\nTaking a selfie is easy. We can do it quickly with our camera at any time. However, painting a self-portrait takes some time. Also, a self-portrait shows a painter's personal painting style.\nTo paint a person, a painter needs a model. Vincent van Gogh didn't have enough money for a model. So he painted himself! When he painted his self-portraits, he chose bright colors and applied a lot of paint. This became his unique style. We can see it in his other paintings too.\n\n윗글을 읽고 다음 질문에 대한 알맞은 대답이 되도록 빈칸을 완성하시오.\n\nQ. Why did Van Gogh paint himself?\n→ He painted himself because ________ ________ ________ ________ ________ ________ ________ ________.",
+   "options": [],
+   "answer": "he didn't have enough money for a model",
+   "explanation": "고흐는 모델을 위한 충분한 돈이 없었기 때문에 자기 자신을 그렸다."
+  },
+  {
+   "number": 29,
+   "question": "다음 글을 읽고 물음에 답하시오.\nSelfies and self-portraits also have differences.\nTaking a selfie is easy. We can do it quickly with our camera at any time. However, painting a self-portrait takes some time. Also, a self-portrait shows a painter's personal painting style.\nTo paint a person, a painter needs a model. Vincent van Gogh didn't have enough money for a model. So he painted himself! When he painted his self-portraits, he chose bright colors and applied a lot of paint. This became his unique style. We can see it in his other paintings too.\n\n윗글의 목적으로 알맞은 것은?",
+   "options": [
+    "to show Vincent van Gogh's artworks",
+    "to teach good skills for taking selfies",
+    "to talk about the history of self-portraits",
+    "to compare different types of painting styles",
+    "to explain the differences between selfies and self-portraits"
+   ],
+   "answer": "5",
+   "explanation": "셀피와 자화상의 차이점에 관해 설명하고 있다."
+  },
+  {
+   "number": 30,
+   "question": "다음 글을 읽고 물음에 답하시오.\nSelfies and self-portraits also have differences.\nTaking a selfie is easy. We can do it quickly with our camera at any time. However, painting a self-portrait takes some time. Also, a self-portrait shows a painter's personal painting style.\nTo paint a person, a painter needs a model. Vincent van Gogh didn't have enough money for a model. So he painted himself! When he painted his self-portraits, he chose bright colors and applied a lot of paint. This became his unique style. We can see it in his other paintings too.\n\n윗글을 아래와 같이 요약하고자 할 때 빈칸에 들어갈 알맞은 말을 각각 찾아 쓰시오. (필요시 변형할 것)\n\nWe can take selfies (1)________ and (2)________ with a camera anytime. However, self-portraits need more (3)________ and also show the painter's (4)________ (5)________, like Gogh's unique style.",
+   "options": [],
+   "answer": "easily, quickly, time, painting, style",
+   "subParts": [
+    {
+     "label": "(1)",
+     "answer": "easily",
+     "acceptedAnswers": [
+      "quickly"
+     ]
+    },
+    {
+     "label": "(2)",
+     "answer": "quickly",
+     "acceptedAnswers": [
+      "easily"
+     ]
+    },
+    {
+     "label": "(3)",
+     "answer": "time"
+    },
+    {
+     "label": "(4)",
+     "answer": "painting",
+     "acceptedAnswers": [
+      "personal"
+     ]
+    },
+    {
+     "label": "(5)",
+     "answer": "style"
+    }
+   ],
+   "explanation": "우리는 카메라로 언제든지 쉽고 빠르게 셀피를 찍을 수 있다. 그러나 자화상은 더 많은 시간이 필요하고 화가의 그림[개인적인] 스타일을 보여 준다."
+  }
+ ],
+ "R2": [
+  {
+   "number": 1,
+   "question": "다음 중 짝지어진 단어의 관계가 나머지 넷과 다른 것은?",
+   "options": [
+    "place : museum = animal : monkey",
+    "easy : difficult = slowly : quickly",
+    "agree : agreement = enjoy : enjoyment",
+    "different : similar = boring : interesting",
+    "remember : remembrance = famous : fame"
+   ],
+   "answer": "5",
+   "explanation": "'기억하다 : 기억'은 동사-명사 관계이지만 '유명한 : 명성'은 형용사-명사 관계이다."
+  },
+  {
+   "number": 2,
+   "question": "다음 중 <보기>의 단어가 들어갈 수 없는 것은?\n\n<보기> expression, youth, self-portrait, difference, moment",
+   "options": [
+    "The man checked his hair in the ________.",
+    "The museum has a famous ________ by Picasso.",
+    "Can you see the ________ between the two pictures?",
+    "Let's take a picture to capture this ________ of victory.",
+    "Her ________ changed when she heard the news."
+   ],
+   "answer": "1",
+   "explanation": "'어린 시절'이라는 뜻의 youth가 들어갈 수 있는 문장이 없고, ① '그 남자는 거울로 자신의 머리를 확인했다.'에는 mirror(거울)가 들어간다."
+  },
+  {
+   "number": 3,
+   "question": "다음 밑줄 친 단어가 같은 의미로 쓰인 것은?",
+   "options": [
+    "People gathered <u>around</u> the stage after the concert was over. / I was bored because the movie lasted <u>around</u> two hours.",
+    "You should <u>apply</u> sunscreen before you go outside. / She'll <u>apply</u> for a job at the new company.",
+    "There weren't <u>enough</u> chairs for all the guests. / I brought <u>enough</u> snacks for my classmates.",
+    "He has a <u>bright</u> mind for solving problems. / The sky was <u>bright</u> blue this morning.",
+    "She wants to start her <u>own</u> business. / My parents <u>own</u> a small bookstore."
+   ],
+   "answer": "3",
+   "explanation": "③의 enough는 모두 '충분한'이라는 뜻의 형용사로 쓰였다."
+  },
+  {
+   "number": 4,
+   "question": "다음 중 어법상 어색한 문장의 개수는?\n\nⓐ Don't compare yourself with other people.\nⓑ Tim hurt himself when he played soccer.\nⓒ Mom opened the window to let fresh air in.\nⓓ Jake and I can solve the problem themselves.\nⓔ My family left early to catching the first train.\nⓕ I check the website every day in order get tickets for the concert.\nⓖ When the players won the game, Mr. Brown was so proud of themselves.",
+   "options": [
+    "2개",
+    "3개",
+    "4개",
+    "5개",
+    "6개"
+   ],
+   "answer": "3",
+   "explanation": "ⓓ themselves → ourselves, ⓔ catching → catch, ⓕ in order → in order to, ⓖ themselves → them. 어색한 문장은 4개이다."
+  },
+  {
+   "number": 5,
+   "question": "다음 중 to부정사의 쓰임이 같은 것끼리 묶인 것은?\n\nⓐ They promised not <u>to play</u> video games on weekdays.\nⓑ <u>To practice</u> English every day is important for me.\nⓒ <u>To help</u> sick people, they raised a lot of money.\nⓓ We hurried to the airport <u>to catch</u> the flight.\nⓔ Her plan for the vacation is <u>to read</u> 5 books.\nⓕ I am learning Spanish <u>to work</u> in Spain.",
+   "options": [
+    "(A) ⓐ, ⓑ - (B) ⓒ, ⓓ, ⓔ, ⓕ",
+    "(A) ⓒ, ⓕ - (B) ⓐ, ⓑ, ⓓ, ⓔ",
+    "(A) ⓐ, ⓑ, ⓔ - (B) ⓒ, ⓓ, ⓕ",
+    "(A) ⓒ, ⓓ, ⓔ - (B) ⓐ, ⓑ, ⓕ",
+    "(A) ⓐ, ⓒ, ⓓ, ⓕ - (B) ⓑ, ⓔ"
+   ],
+   "answer": "3",
+   "explanation": "ⓐ, ⓑ, ⓔ는 명사적 용법의 to부정사이고, ⓒ, ⓓ, ⓕ는 목적을 나타내는 부사적 용법의 to부정사이다."
+  },
+  {
+   "number": 6,
+   "question": "다음 대화의 빈칸에 들어갈 말로 알맞은 것을 모두 고르면? (정답 2개)\n\nG: This museum has so many paintings.\nB: Yes, it does. ______________________________\nG: I think it's beautiful. I like the flowers on the water.\nB: Hmm... I don't agree. I think it's a little boring.",
+   "options": [
+    "How do you feel about this painting?",
+    "What do you think of this painting?",
+    "Why don't you see this painting?",
+    "Which one do you like the best?",
+    "What about seeing this painting?"
+   ],
+   "answer": "1, 2",
+   "explanation": "소녀가 그림이 아름답다는 의견을 말하고 있으므로 빈칸에는 그림에 대한 생각을 묻는 표현이 알맞다."
+  },
+  {
+   "number": 7,
+   "question": "다음 대화를 읽고 물음에 답하시오.\nG: Hey, Seojun. There's a photo exhibition in the school library. Do you want to come with me?\nB: That sounds interesting. Let's go together.\nG: There are so many photos of our school life here.\nB: Yes. Look at this photo. It's from our class picnic! What do you think of it?\nG: I think it is great.\nB: Yes! We had so much fun.\nG: ______________ That was a really fun day.\n\n위 대화의 빈칸에 들어갈 말로 알맞은 것을 모두 골라 짝지은 것은?\n\nⓐ I agree.\nⓑ I don't think so.\nⓒ I can't believe it.\nⓓ I feel the same way.\nⓔ I couldn't agree more.\nⓕ You can say that again.",
+   "options": [
+    "ⓐ, ⓒ, ⓕ",
+    "ⓐ, ⓓ, ⓔ",
+    "ⓑ, ⓒ, ⓕ",
+    "ⓐ, ⓑ, ⓒ, ⓕ",
+    "ⓐ, ⓓ, ⓔ, ⓕ"
+   ],
+   "answer": "5",
+   "explanation": "반 소풍이 정말 재미있었다는 소년의 말에 소녀도 정말 재미있는 날이었다고 말하고 있으므로 동의하는 표현 ⓐ, ⓓ, ⓔ, ⓕ가 알맞다."
+  },
+  {
+   "number": 8,
+   "question": "다음 대화를 읽고 물음에 답하시오.\nG: Hey, Seojun. There's a photo exhibition in the school library. Do you want to come with me?\nB: That sounds interesting. Let's go together.\nG: There are so many photos of our school life here.\nB: Yes. Look at this photo. It's from our class picnic! What do you think of it?\nG: I think it is great.\nB: Yes! We had so much fun.\nG: I agree. That was a really fun day.\n\n위 대화의 내용과 일치하는 것을 모두 고르면? (정답 2개)",
+   "options": [
+    "A photo exhibition takes place in the gym.",
+    "Seojun refuses to go to the exhibition with the girl.",
+    "The photos in the exhibition show their school life.",
+    "The girl thinks the photo from her class picnic is not good.",
+    "The girl and Seojun have the same opinion about their class picnic."
+   ],
+   "answer": "3, 5",
+   "explanation": "① 전시회는 도서관에서 열린다. ② 서준이는 함께 가자고 승낙했다. ④ 소녀는 사진이 정말 좋다고 생각한다."
+  },
+  {
+   "number": 9,
+   "question": "다음 대화를 읽고 아래 질문에 대한 답이 되도록 주어진 <조건>에 맞게 빈칸에 알맞은 말을 쓰시오.\n\nG: I'm so excited to see all these paintings.\nB: Me too. What is your favorite painting here?\nG: I like this painting of a woman.\nB: Oh, that is a very famous painting. What do you think of it?\nG: I think the woman is happy. She is with her monkeys.\nB: Hmm, I don't agree. I think she is sad.\nG: Why do you think so?\nB: She has sad eyes. Look, she is not smiling.\n\n<조건>\n• her eyes, no smile, have를 사용할 것 (필요시 변형할 것)\n• 각 빈칸에 한 단어씩 쓸 것\n\nQ. Why does the boy think the woman in the painting is sad?\n→ He thinks the woman is sad because (1)________ ________ ________ ________ and her face (2)________ ________ ________.",
+   "options": [],
+   "answer": "her eyes are sad, has no smile",
+   "subParts": [
+    {
+     "label": "(1)",
+     "answer": "her eyes are sad"
+    },
+    {
+     "label": "(2)",
+     "answer": "has no smile"
+    }
+   ],
+   "explanation": "소년은 그녀의 눈이 슬프고 얼굴에 미소가 없기 때문에 여성이 슬프다고 생각한다."
+  },
+  {
+   "number": 10,
+   "question": "다음 대화를 읽고 주어진 <조건>에 맞게 빈칸에 알맞은 말을 쓰시오.\n\nA: The sun is really strong today.\nB: Yeah, did you put on any sunscreen?\nA: No, I don't usually use it.\nB: ______________________________ How about using it from now on?\nA: Okay, I will.\n\n<조건>\n• protect, the sun, should, from, you를 모두 한 번씩 사용할 것\n• 7단어의 완전한 문장으로 쓸 것 (중복 사용 가능하며, 필요시 변형할 것) ※ 완전한 문장으로 쓰시오.",
+   "options": [],
+   "answer": "You should protect yourself from the sun.",
+   "explanation": "너는 햇빛으로부터 너 자신을 보호해야 해."
+  },
+  {
+   "number": 11,
+   "question": "다음 글을 읽고 물음에 답하시오.\nToday, people enjoy ⓐ<u>take</u> selfies. We can capture special moments with them.\nLong ago, people ⓑ<u>capture</u> their own image in a different way. They painted pictures of ⓒ<u>them</u>. These pictures are self-portraits.\nSelfies and self-portraits are similar.\nBoth ⓓ<u>shows</u> our image at a certain time. When we look at them, we can remember ⓔ<u>themselves</u> from that time. They are like a diary.\n\n윗글의 밑줄 친 ⓐ~ⓔ 중, 어색한 부분을 바르게 고치지 못한 것을 모두 고르면? (정답 2개)",
+   "options": [
+    "ⓐ: take → to take",
+    "ⓑ: capture → captured",
+    "ⓒ: them → themselves",
+    "ⓓ: shows → show",
+    "ⓔ: themselves → us"
+   ],
+   "answer": "1, 5",
+   "explanation": "ⓐ enjoy는 동명사를 목적어로 취하므로 take → taking. ⓔ 주어 we와 목적어가 동일 대상이므로 themselves → ourselves."
+  },
+  {
+   "number": 12,
+   "question": "다음 글을 읽고 물음에 답하시오.\nToday, people enjoy ⓐ<u>take</u> selfies. We can capture special moments with them.\nLong ago, people ⓑ<u>capture</u> their own image in a different way. They painted pictures of ⓒ<u>them</u>. These pictures are self-portraits.\nSelfies and self-portraits are similar.\nBoth ⓓ<u>shows</u> our image at a certain time. When we look at them, we can remember ⓔ<u>themselves</u> from that time. They are like a diary.\n\n윗글의 주제로 알맞은 것은?",
+   "options": [
+    "problems with taking too many selfies",
+    "changes in the ways of painting self-portraits",
+    "past and present ways of remembering ourselves",
+    "the importance of selfies in modern times",
+    "benefits of selfies and self-portraits"
+   ],
+   "answer": "3",
+   "explanation": "오늘날 사람들은 셀피를 통해, 오래전에는 자화상을 그려 자신의 모습을 포착했다는 내용이므로 주제는 자신을 기억하는 과거와 현재의 방식들이다."
+  },
+  {
+   "number": 13,
+   "question": "다음 글을 읽고 물음에 답하시오.\nToday, people enjoy ⓐ<u>take</u> selfies. We can capture special moments with them.\nLong ago, people ⓑ<u>capture</u> their own image in a different way. They painted pictures of ⓒ<u>them</u>. These pictures are self-portraits.\nSelfies and self-portraits are similar.\nBoth ⓓ<u>shows</u> our image at a certain time. When we look at them, we can remember ⓔ<u>themselves</u> from that time. They are like a diary.\n\n윗글의 내용과 (A)~(C)가 일치하면 T, 일치하지 않으면 F를 쓸 때, 순서대로 연결된 것은?\n\n(A) These days, people draw self-portraits to keep meaningful moments. (T/F)\n(B) Before selfies, people didn't have any method for capturing their own image. (T/F)\n(C) Selfies and self-portraits don't have similarities. (T/F)",
+   "options": [
+    "T-T-T",
+    "T-F-T",
+    "T-F-F",
+    "F-F-T",
+    "F-F-F"
+   ],
+   "answer": "5",
+   "explanation": "(A) 요즘 사람들은 셀피를 찍는다(F). (B) 셀피 이전에는 자화상을 그렸다(F). (C) 셀피와 자화상은 유사점을 가진다(F)."
+  },
+  {
+   "number": 14,
+   "question": "다음 글을 읽고 물음에 답하시오.\nWe take selfies to remember happy moments. Selfies capture the expressions on our faces at those times. We often look at selfies with our family and friends to bring back those joyful feelings.\nSimilarly, some painters made self-portraits (A)______________________. Rembrandt looked in the mirror and painted (B)<u>himself</u> many times. He painted around 90 self-portraits in his life. They show his face from youth to old age.\n\n윗글의 빈칸 (A)에 들어갈 말로 알맞은 것은?",
+   "options": [
+    "to make money",
+    "to record history",
+    "to express their feelings",
+    "to capture different times in their lives",
+    "to remember the beauty of people's lives"
+   ],
+   "answer": "4",
+   "explanation": "행복한 순간을 기억하기 위해 셀피를 찍는다는 내용과 Similarly로 이어지므로, 화가들이 자화상을 그린 이유는 그들의 삶에서 다른 시기를 포착하기 위해서이다."
+  },
+  {
+   "number": 15,
+   "question": "다음 글을 읽고 물음에 답하시오.\nWe take selfies to remember happy moments. Selfies capture the expressions on our faces at those times. We often look at selfies with our family and friends to bring back those joyful feelings.\nSimilarly, some painters made self-portraits (A)______________________. Rembrandt looked in the mirror and painted (B)<u>himself</u> many times. He painted around 90 self-portraits in his life. They show his face from youth to old age.\n\n윗글의 밑줄 친 (B)himself와 용법이 같은 것을 모두 고르면? (정답 2개)",
+   "options": [
+    "I did it <u>myself</u>.",
+    "Jenny laughed at <u>herself</u>.",
+    "He wrote the poem <u>himself</u>.",
+    "You should love <u>yourselves</u>.",
+    "They took pictures <u>themselves</u>."
+   ],
+   "answer": "2, 4",
+   "explanation": "(B)의 himself는 동사 painted의 목적어로 주어와 동일한 대상을 가리키는 재귀 용법이다. ②, ④도 같은 재귀 용법이며 나머지는 생략 가능한 강조 용법이다."
+  },
+  {
+   "number": 16,
+   "question": "다음 글을 읽고 물음에 답하시오.\nWe take selfies to remember happy moments. Selfies capture the expressions on our faces at those times. We often look at selfies with our family and friends to bring back those joyful feelings.\nSimilarly, some painters made self-portraits (A)______________________. Rembrandt looked in the mirror and painted (B)<u>himself</u> many times. He painted around 90 self-portraits in his life. They show his face from youth to old age.\n\n윗글을 읽고 다음 질문에 대한 알맞은 대답이 되도록 주어진 <조건>에 맞게 빈칸을 완성하시오.\n\n<조건>\n• emotions, happy moments, good, capture를 반드시 포함할 것\n• 각 빈칸에 한 단어씩 쓸 것\n\nQ. Why do we often look at selfies with our family and friends?\n→ Because selfies (1)________ our (2)________ ________ and (3)________ ________ the (4)________ ________ from those times.",
+   "options": [],
+   "answer": "capture, happy moments, bring back, good emotions",
+   "subParts": [
+    {
+     "label": "(1)",
+     "answer": "capture"
+    },
+    {
+     "label": "(2)",
+     "answer": "happy moments"
+    },
+    {
+     "label": "(3)",
+     "answer": "bring back"
+    },
+    {
+     "label": "(4)",
+     "answer": "good emotions"
+    }
+   ],
+   "explanation": "셀피는 우리의 행복한 순간들을 포착하고 그때의 좋은 감정들을 되살리기 때문이다."
+  },
+  {
+   "number": 17,
+   "question": "다음 글을 읽고 물음에 답하시오.\nSelfies and self-portraits also have differences.\nTaking a selfie ⓐ<u>is</u> easy. We can do ⓑ<u>them</u> quickly with our camera at any time. However, painting a self-portrait takes some time. Also, a self-portrait shows a painter's personal painting style.\nⓒ<u>To paint</u> a person, a painter needs a model. Vincent van Gogh didn't have enough money for a model. So he painted ⓓ<u>him</u>! When he painted his self-portraits, he chose bright colors and applied a lot of paint. This became his unique style. We can see it in his other paintings too.\nWe can express ⓔ<u>ourselves</u> with selfies and self-portraits. Do you want ⓕ<u>trying</u>?\n\n윗글의 밑줄 친 ⓐ~ⓕ 중, 어법상 어색한 것끼리 짝지어진 것은?",
+   "options": [
+    "ⓐ, ⓑ, ⓒ",
+    "ⓐ, ⓒ, ⓔ",
+    "ⓑ, ⓓ, ⓔ",
+    "ⓑ, ⓓ, ⓕ",
+    "ⓒ, ⓓ, ⓕ"
+   ],
+   "answer": "4",
+   "explanation": "ⓑ them → it (앞의 taking a selfie를 가리킴), ⓓ him → himself (주어와 동일 대상), ⓕ trying → to try (want는 to부정사를 목적어로 취함)."
+  },
+  {
+   "number": 18,
+   "question": "다음 글을 읽고 물음에 답하시오.\nSelfies and self-portraits also have differences.\nTaking a selfie ⓐ<u>is</u> easy. We can do ⓑ<u>them</u> quickly with our camera at any time. However, painting a self-portrait takes some time. Also, a self-portrait shows a painter's personal painting style.\nⓒ<u>To paint</u> a person, a painter needs a model. Vincent van Gogh didn't have enough money for a model. So he painted ⓓ<u>him</u>! When he painted his self-portraits, he chose bright colors and applied a lot of paint. This became his unique style. We can see it in his other paintings too.\nWe can express ⓔ<u>ourselves</u> with selfies and self-portraits. Do you want ⓕ<u>trying</u>?\n\n윗글을 읽고 다음 질문에 대한 대답을 완성할 때, 빈칸에 들어갈 수 있는 것은?\n\nQ: Why did Vincent van Gogh paint his self-portraits?\nA: Because ______________________________.",
+   "options": [
+    "he wanted to be famous",
+    "he couldn't buy a camera",
+    "he liked to express himself",
+    "he lacked money for a model",
+    "he didn't enjoy painting other people"
+   ],
+   "answer": "4",
+   "explanation": "고흐는 모델을 구할 충분한 돈이 없어서 자신을 그렸다."
+  },
+  {
+   "number": 19,
+   "question": "다음 글을 읽고 물음에 답하시오.\nSelfies and self-portraits also have differences.\nTaking a selfie ⓐ<u>is</u> easy. We can do ⓑ<u>them</u> quickly with our camera at any time. However, painting a self-portrait takes some time. Also, a self-portrait shows a painter's personal painting style.\nⓒ<u>To paint</u> a person, a painter needs a model. Vincent van Gogh didn't have enough money for a model. So he painted ⓓ<u>him</u>! When he painted his self-portraits, he chose bright colors and applied a lot of paint. This became his unique style. We can see it in his other paintings too.\nWe can express ⓔ<u>ourselves</u> with selfies and self-portraits. Do you want ⓕ<u>trying</u>?\n\n윗글의 내용과 일치하면 T, 일치하지 않으면 F일 때, 알맞지 않은 것은?",
+   "options": [
+    "Selfies have no differences from self-portraits. (F)",
+    "We can finish both selfies and self-portraits quickly. (F)",
+    "We can see the personal painting style of the artist in a self-portrait. (T)",
+    "Vincent van Gogh imitated other painters' painting style for his self-portraits. (T)",
+    "Selfies and self-portraits can be tools for expressing ourselves. (T)"
+   ],
+   "answer": "4",
+   "explanation": "고흐는 밝은 색과 많은 물감을 사용해 자신만의 독특한 스타일을 만들었으므로 ④는 F로 고쳐야 한다."
+  },
+  {
+   "number": 20,
+   "question": "다음 글을 읽고 물음에 답하시오.\nSelfies and self-portraits are similar.\nBoth show our image at a certain time. When we look at them, we can remember ⓐ<u>ourselves</u> from that time. They are like a diary.\nWe take selfies ⓑ<u>to remember</u> happy moments. Selfies capture the expressions on our faces at those times. We ⓒ<u>often look</u> at selfies with our family and friends to bring back those joyful feelings.\nSimilarly, some painters made self-portraits ⓓ<u>to capture</u> different times in their lives. Rembrandt looked in the mirror and ⓔ<u>painted</u> himself many times. He painted around 90 self-portraits in his life. They show his face from youth to old age.\n\n윗글의 밑줄 친 ⓐ~ⓔ에 대한 설명으로 알맞지 않은 것을 모두 고르면? (정답 2개)",
+   "options": [
+    "ⓐ: 주어 we와 목적어가 동일한 대상이므로 재귀대명사가 쓰였으며 생략할 수 있다.",
+    "ⓑ: '목적'을 나타내는 부사적 용법의 to부정사이다.",
+    "ⓒ: 빈도부사는 be동사 뒤, 일반동사 앞에 위치하므로 often look의 순서로 쓰였다.",
+    "ⓓ: 보어 자리에 쓰인 명사적 용법의 to부정사이다.",
+    "ⓔ: 주어 Rembrandt의 과거동사 looked와 접속사 and로 연결된 과거동사이다."
+   ],
+   "answer": "1, 4",
+   "explanation": "ⓐ 재귀 용법의 재귀대명사는 생략할 수 없다(강조 용법만 생략 가능). ⓓ 완전한 문장 뒤에서 '포착하기 위해'라는 목적을 나타내는 부사적 용법이다."
+  },
+  {
+   "number": 21,
+   "question": "다음 글을 읽고 물음에 답하시오.\nSelfies and self-portraits are similar.\nBoth show our image at a certain time. When we look at them, we can remember ⓐ<u>ourselves</u> from that time. They are like a diary.\nWe take selfies ⓑ<u>to remember</u> happy moments. Selfies capture the expressions on our faces at those times. We ⓒ<u>often look</u> at selfies with our family and friends to bring back those joyful feelings.\nSimilarly, some painters made self-portraits ⓓ<u>to capture</u> different times in their lives. Rembrandt looked in the mirror and ⓔ<u>painted</u> himself many times. He painted around 90 self-portraits in his life. They show his face from youth to old age.\n\n윗글을 읽고 다음 대화문의 빈칸에 알맞은 단어를 찾아 쓰시오.\n\nB: Jane, why are you taking a selfie?\nG: Because I want to (1)________ this happy moment. A selfie can capture my facial (2)________.\nB: Do you look at it again later?\nG: Yes. I often look at it to (3)________ ________ the happy feelings.\nB: That's wonderful. Then... how did people in the past preserve their own image?\nG: They painted their (4)________. When I looked at Rembrandt's paintings, I could see his face from (5)________ to (6)________ ________.\nB: Wow, they are (7)________ to selfies! Both are like a diary.",
+   "options": [],
+   "answer": "remember, expressions, bring back, self-portraits, youth, old age, similar",
+   "subParts": [
+    {
+     "label": "(1)",
+     "answer": "remember",
+     "acceptedAnswers": [
+      "capture"
+     ]
+    },
+    {
+     "label": "(2)",
+     "answer": "expressions"
+    },
+    {
+     "label": "(3)",
+     "answer": "bring back"
+    },
+    {
+     "label": "(4)",
+     "answer": "self-portraits"
+    },
+    {
+     "label": "(5)",
+     "answer": "youth"
+    },
+    {
+     "label": "(6)",
+     "answer": "old age"
+    },
+    {
+     "label": "(7)",
+     "answer": "similar"
+    }
+   ],
+   "explanation": "행복한 순간을 기억하기[포착하기] 위해 셀피를 찍고, 셀피는 표정을 담으며, 행복한 감정을 되살리기 위해 자주 본다. 과거 사람들은 자화상을 그렸고 렘브란트의 그림에서 젊은 시절부터 노년까지의 얼굴을 볼 수 있으며, 그것들은 셀피와 비슷하다."
+  },
+  {
+   "number": 22,
+   "question": "다음 글을 읽고 물음에 답하시오.\nSelfies and self-portraits also have ⓐ<u>differences</u>.\nTaking a selfie is easy. We can do it ⓑ<u>quickly</u> with our camera at any time. However, painting a self-portrait takes some time. Also, a self-portrait shows a painter's ⓒ<u>personal</u> painting style.\n(A)<u>인물을 그리기 위해, 화가는 모델이 필요합니다.</u> Vincent van Gogh didn't have ⓓ<u>enough</u> money for a model. So he painted himself! When he painted his self-portraits, he chose bright colors and ⓔ<u>applied</u> a lot of paint. This became his unique style. We can see it in his other paintings too.\n(B)<u>우리는 셀피들과 자화상들로 우리 자신을 표현할 수 있습니다.</u> Do you want to try?\n\n윗글의 밑줄 친 ⓐ~ⓔ의 영영풀이로 알맞은 것을 모두 골라 짝지은 것은?\n\n<보기>\nⓐ the state of being similar to somebody or something but not exactly the same\nⓑ fast or in a short time\nⓒ related to all or most people, places or things\nⓓ as much as you need\nⓔ to ask officially for something, often by writing",
+   "options": [
+    "ⓐ, ⓒ",
+    "ⓑ, ⓓ",
+    "ⓐ, ⓒ, ⓓ",
+    "ⓑ, ⓓ, ⓔ",
+    "ⓑ, ⓒ, ⓓ, ⓔ"
+   ],
+   "answer": "2",
+   "explanation": "ⓑ 빠르게, 빨리: 빠르게 또는 짧은 시간 안에, ⓓ 충분한: 당신이 필요한 만큼. ⓐ는 similarity, ⓒ는 public, ⓔ는 apply의 다른 뜻(지원하다)의 영영풀이다."
+  },
+  {
+   "number": 23,
+   "question": "다음 글을 읽고 물음에 답하시오.\nSelfies and self-portraits also have ⓐ<u>differences</u>.\nTaking a selfie is easy. We can do it ⓑ<u>quickly</u> with our camera at any time. However, painting a self-portrait takes some time. Also, a self-portrait shows a painter's ⓒ<u>personal</u> painting style.\n(A)<u>인물을 그리기 위해, 화가는 모델이 필요합니다.</u> Vincent van Gogh didn't have ⓓ<u>enough</u> money for a model. So he painted himself! When he painted his self-portraits, he chose bright colors and ⓔ<u>applied</u> a lot of paint. This became his unique style. We can see it in his other paintings too.\n(B)<u>우리는 셀피들과 자화상들로 우리 자신을 표현할 수 있습니다.</u> Do you want to try?\n\n윗글의 밑줄 친 (A), (B)의 우리말을 주어진 <조건>에 알맞게 각각 영작하시오.\n\n<조건>\n• (A)는 to부정사로, (B)는 대명사 주어로 시작할 것\n• <보기>의 단어를 모두 포함시킬 것 (필요시 변형할 것)\n• (A)는 9단어, (B)는 8단어로 각각 쓸 것\n\n<보기> paint, express, need, with, painter, person\n\n(A) ________________\n(B) ________________",
+   "options": [],
+   "answer": "To paint a person, a painter needs a model. / We can express ourselves with selfies and self-portraits.",
+   "subParts": [
+    {
+     "label": "(1)",
+     "answer": "To paint a person, a painter needs a model."
+    },
+    {
+     "label": "(2)",
+     "answer": "We can express ourselves with selfies and self-portraits."
+    }
+   ],
+   "explanation": "(A) 목적을 나타내는 부사적 용법의 to부정사 To paint로 시작하고 주어 a painter에 단수동사 needs를 쓴다. (B) 주어 We와 조동사 can, 재귀대명사 ourselves를 쓴다."
+  },
+  {
+   "number": 24,
+   "question": "다음 글을 읽고 물음에 답하시오.\nSelfies and self-portraits are similar.\nBoth (A)[hide / show] our image at a certain time. When we look at them, we can remember ourselves from that time. They are like a diary.\nWe take selfies to remember happy moments. Selfies capture the expressions on our faces at those times. We often look at selfies with our family and friends to bring back those (B)[joyful / unhappy] feelings.\nSimilarly, some painters made self-portraits to (C)[capture / forget] different times in their lives. Rembrandt looked in the mirror and painted himself many times. He painted around 90 self-portraits in his life. They show his face from youth to old age.\n\n윗글의 괄호 (A), (B), (C)에서 흐름상 알맞은 말로 바르게 연결된 것은?",
+   "options": [
+    "(A) hide – (B) joyful – (C) capture",
+    "(A) show – (B) unhappy – (C) capture",
+    "(A) hide – (B) unhappy – (C) forget",
+    "(A) show – (B) joyful – (C) forget",
+    "(A) show – (B) joyful – (C) capture"
+   ],
+   "answer": "5",
+   "explanation": "(A) 둘 다 특정 시간의 우리 모습을 보여 준다(show). (B) 행복한 순간의 즐거운(joyful) 감정을 되살린다. (C) 삶의 다른 시기를 포착하기(capture) 위해 자화상을 그렸다."
+  },
+  {
+   "number": 25,
+   "question": "다음 글을 읽고 물음에 답하시오.\nSelfies and self-portraits are similar.\nBoth (A)[hide / show] our image at a certain time. When we look at them, we can remember ourselves from that time. They are like a diary.\nWe take selfies to remember happy moments. Selfies capture the expressions on our faces at those times. We often look at selfies with our family and friends to bring back those (B)[joyful / unhappy] feelings.\nSimilarly, some painters made self-portraits to (C)[capture / forget] different times in their lives. Rembrandt looked in the mirror and painted himself many times. He painted around 90 self-portraits in his life. They show his face from youth to old age.\n\n윗글을 읽고 대답할 수 없는 질문은?",
+   "options": [
+    "Why do we take selfies?",
+    "What do selfies capture?",
+    "What colors did Rembrandt mainly use?",
+    "What do Rembrandt's self-portraits show?",
+    "How many self-portraits did Rembrandt paint?"
+   ],
+   "answer": "3",
+   "explanation": "렘브란트가 어떤 색을 사용했는지에 대한 언급은 없다."
+  },
+  {
+   "number": 26,
+   "question": "다음 글을 읽고 물음에 답하시오.\nSelfies and self-portraits are similar.\nBoth (A)[hide / show] our image at a certain time. When we look at them, we can remember ourselves from that time. They are like a diary.\nWe take selfies to remember happy moments. Selfies capture the expressions on our faces at those times. We often look at selfies with our family and friends to bring back those (B)[joyful / unhappy] feelings.\nSimilarly, some painters made self-portraits to (C)[capture / forget] different times in their lives. Rembrandt looked in the mirror and painted himself many times. He painted around 90 self-portraits in his life. They show his face from youth to old age.\n\n윗글의 요지로 알맞은 것은?",
+   "options": [
+    "Selfies and self-portraits may look similar, but they are completely different.",
+    "To remember yourself at special moments, you can try different ways.",
+    "Both selfies and self-portraits can capture images of ourselves.",
+    "We should not take selfies to show off happy moments.",
+    "Rembrandt painted many pictures to show his daily life."
+   ],
+   "answer": "3",
+   "explanation": "셀피와 자화상이 특정 시간의 우리 모습을 보여 주는 비슷한 점이 있음을 설명하고 있다."
+  },
+  {
+   "number": 27,
+   "question": "다음 글을 읽고 물음에 답하시오.\nSelfies and self-portraits are similar.\nBoth show our image at a certain time. When we look at them, we can remember ourselves from that time. They are like a diary.\nWe take selfies to remember happy moments. Selfies capture the expressions on our faces at those times. We often look at selfies with our family and friends to bring back those joyful feelings.\nSimilarly, some painters made self-portraits to capture different times in their lives. Rembrandt looked in the mirror and painted himself many times. He painted around 90 self-portraits in his life. They show his face from youth to old age.\nSelfies and self-portraits also have differences.\nTaking a selfie is easy. We can do it quickly with our camera at any time. However, painting a self-portrait takes some time. Also, a self-portrait shows a painter's personal painting style.\nTo paint a person, a painter needs a model. Vincent van Gogh didn't have enough money for a model. So he painted himself! When he painted his self-portraits, he chose bright colors and applied a lot of paint. This became his unique style. We can see it in his other paintings too.\n\n윗글의 제목으로 알맞은 것은?",
+   "options": [
+    "Why Did Self-Portraits Disappear?",
+    "Comparison of Self-Portraits and Selfies: Which Is Easier?",
+    "From Self-Portraits to Selfies: The Development of Technology",
+    "From Rembrandt to Van Gogh: Dramatic Changes in Painting Styles",
+    "What Are the Similarities and Differences Between Selfies and Self-Portraits?"
+   ],
+   "answer": "5",
+   "explanation": "셀피와 자화상의 공통점과 차이점을 설명하는 내용이다."
+  },
+  {
+   "number": 28,
+   "question": "다음 글을 읽고 물음에 답하시오.\nSelfies and self-portraits are similar.\nBoth show our image at a certain time. When we look at them, we can remember ourselves from that time. They are like a diary.\nWe take selfies to remember happy moments. Selfies capture the expressions on our faces at those times. We often look at selfies with our family and friends to bring back those joyful feelings.\nSimilarly, some painters made self-portraits to capture different times in their lives. Rembrandt looked in the mirror and painted himself many times. He painted around 90 self-portraits in his life. They show his face from youth to old age.\nSelfies and self-portraits also have differences.\nTaking a selfie is easy. We can do it quickly with our camera at any time. However, painting a self-portrait takes some time. Also, a self-portrait shows a painter's personal painting style.\nTo paint a person, a painter needs a model. Vincent van Gogh didn't have enough money for a model. So he painted himself! When he painted his self-portraits, he chose bright colors and applied a lot of paint. This became his unique style. We can see it in his other paintings too.\n\n윗글을 읽고 아래 질문에 대한 알맞은 대답이 되도록 주어진 <조건>에 맞게 빈칸을 완성하시오.\n\n<조건>\n• 지문에서 찾아 빈칸에 각각 한 단어씩 쓸 것 (필요시 변형할 것)\n\nQ. What is Van Gogh's painting style?\n→ It is to (1)________ ________ ________ and (2)________ ________ ________ ________ ________.",
+   "options": [],
+   "answer": "choose bright colors, apply a lot of paint",
+   "subParts": [
+    {
+     "label": "(1)",
+     "answer": "choose bright colors"
+    },
+    {
+     "label": "(2)",
+     "answer": "apply a lot of paint"
+    }
+   ],
+   "explanation": "고흐의 화풍은 밝은색을 고르고 많은 물감을 바르는 것이다."
+  },
+  {
+   "number": 29,
+   "question": "다음 글을 읽고 물음에 답하시오.\nSelfies and self-portraits are similar.\nBoth show our image at a certain time. When we look at them, we can remember ourselves from that time. They are like a diary.\nWe take selfies to remember happy moments. Selfies capture the expressions on our faces at those times. We often look at selfies with our family and friends to bring back those joyful feelings.\nSimilarly, some painters made self-portraits to capture different times in their lives. Rembrandt looked in the mirror and painted himself many times. He painted around 90 self-portraits in his life. They show his face from youth to old age.\nSelfies and self-portraits also have differences.\nTaking a selfie is easy. We can do it quickly with our camera at any time. However, painting a self-portrait takes some time. Also, a self-portrait shows a painter's personal painting style.\nTo paint a person, a painter needs a model. Vincent van Gogh didn't have enough money for a model. So he painted himself! When he painted his self-portraits, he chose bright colors and applied a lot of paint. This became his unique style. We can see it in his other paintings too.\n\n윗글의 내용을 다음과 같이 정리할 때, ⓐ~ⓔ 중 일치하지 않은 것은?\n\n| 셀피와 자화상의 공통점 | 셀피와 자화상의 차이점 |\n|---|---|\n| • They show our own image at special moments. • ⓐ<u>We don't forget certain moments thanks to them.</u> | 셀피: ⓑ<u>We can take selfies easily.</u> ⓒ<u>We can take them quickly by using a camera.</u> / 자화상: ⓓ<u>Painting self-portraits requires some time.</u> ⓔ<u>We can understand an artist's personal values in a self-portrait.</u> |",
+   "options": [
+    "ⓐ",
+    "ⓑ",
+    "ⓒ",
+    "ⓓ",
+    "ⓔ"
+   ],
+   "answer": "5",
+   "explanation": "자화상은 화가 개인의 화풍(painting style)을 보여 준다고 했으므로 ⓔ '화가 개인의 가치들(values)을 이해할 수 있다'는 일치하지 않는다."
+  },
+  {
+   "number": 30,
+   "question": "다음 그림을 보고 <조건>에 맞게 주어진 문장의 빈칸에 알맞은 말을 쓰시오.\n(그림 설명: Kate는 셀피를 찍고 있고(capture the moment), Mina는 일기를 쓰고 있으며(remember her day), Andy는 그림을 그리고 있고(express himself), Tim은 카메라로 영상을 찍고 있다(share his stories).)\n\n<조건>\n• to부정사를 사용하여 '목적'을 나타낼 것\n• <보기>의 단어 및 표현을 한 번씩 사용할 것 (필요시 변형할 것)\n\n<보기> a picture, video blogs, selfies, a diary / keep, take, film, draw\n\n(1) Kate ________________________.\n(2) Mina ________________________.\n(3) Andy ________________________.\n(4) Tim ________________________.",
+   "options": [],
+   "answer": "takes selfies to capture the moment / keeps a diary to remember her day / draws a picture to express himself / films video blogs to share his stories",
+   "subParts": [
+    {
+     "label": "(1)",
+     "answer": "takes selfies to capture the moment"
+    },
+    {
+     "label": "(2)",
+     "answer": "keeps a diary to remember her day"
+    },
+    {
+     "label": "(3)",
+     "answer": "draws a picture to express himself"
+    },
+    {
+     "label": "(4)",
+     "answer": "films video blogs to share his stories"
+    }
+   ],
+   "explanation": "3인칭 단수 현재형 동사를 쓰고, 목적을 나타내는 부사적 용법의 to부정사를 이어 쓴다. Kate는 순간을 포착하기 위해 셀피를 찍고, Mina는 하루를 기억하기 위해 일기를 쓰고, Andy는 자신을 표현하기 위해 그림을 그리고, Tim은 이야기를 공유하기 위해 영상 블로그를 촬영한다."
+  }
+ ]
+}
