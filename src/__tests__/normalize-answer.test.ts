@@ -238,3 +238,15 @@ describe('matchFilledBlanks — 빈칸을 채운 완전한 문장 인정', () =>
     expect(matchFilledBlanks("doesn't have", 'He ________ an older sister.', "doesn't have")).toBe(false); // 빈칸만 쓴 답은 다른 규칙 담당
   });
 });
+
+describe('matchSubParts — 줄바꿈 구분 + 라벨 제거', () => {
+  const sub = [{ answer: "Don't take the elevator." }, { answer: 'Cover your nose and mouth.' }];
+  it('ㄱ:/ㄴ: 라벨과 줄바꿈으로 쓴 답 (이동현 명령문 Step1 #31)', () => {
+    expect(matchSubParts("ㄱ: Don't take the elevator.\nㄴ: Cover your nose and mouth.", sub)).toBe(true);
+    expect(matchSubParts("(1) Don't take the elevator.\n(2) Cover your nose and mouth.", sub)).toBe(true);
+    expect(matchSubParts("(A): Open the door\n(B): Close it", [{ answer: 'Open the door' }, { answer: 'Close it' }])).toBe(true);
+  });
+  it('파트 하나가 틀리면 오답', () => {
+    expect(matchSubParts("ㄱ: Don't use the elevator.\nㄴ: Cover your nose and mouth.", sub)).toBe(false);
+  });
+});

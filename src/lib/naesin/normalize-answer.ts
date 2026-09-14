@@ -177,7 +177,10 @@ export function matchSubParts(
   subParts: { answer: string; acceptedAnswers?: string[] }[],
   wholeCandidates: (string | number | undefined | null)[] = [],
 ): boolean {
-  const parts = userAnswer.split(' / ');
+  // " / " 구분이 기본. 개수가 안 맞으면 줄바꿈 구분도 허용하고, 각 파트 앞의 라벨("(1)", "ㄱ:", "㉠", "(A):")은 뗀다.
+  let parts = userAnswer.split(' / ');
+  if (parts.length !== subParts.length && userAnswer.includes('\n')) parts = userAnswer.split(/\n+/);
+  parts = parts.map((p) => stripLeadingLabels(p));
   const partsOk = subParts.every((sp, j) => {
     const studentNorm = normalize(parts[j]?.trim() ?? '');
     const candidates = [sp.answer, ...(sp.acceptedAnswers ?? [])];
@@ -195,7 +198,7 @@ export function matchSubParts(
 /** 빈칸(밑줄 2개 이상). 공백만으로 이어진 인접 빈칸("_____ _____")은 하나로 본다. */
 const BLANK_RE = /_{2,}(?:[ \t]+_{2,})*/g;
 /** 문항 라벨: (A) (1) ㉠ ㊀ ㄱ: A: • → 등 — 학생 답·문제 문장 앞에서 제거 */
-const LEADING_LABEL_RE = /^\s*(?:\(?[A-Za-z0-9]\)|[㉠-㉭㊀-㊉]|[ㄱ-ㅎ]\s*[:.]|[A-Z]\s*:|[•·→\-])\s*/;
+const LEADING_LABEL_RE = /^\s*(?:\(?[A-Za-z0-9]\)\s*:?|[㉠-㉭㊀-㊉]\s*:?|[ㄱ-ㅎ]\s*[:.]|[A-Z]\s*:|[•·→\-])\s*/;
 const MAX_VARIANTS = 64;
 
 function stripLeadingLabels(s: string): string {

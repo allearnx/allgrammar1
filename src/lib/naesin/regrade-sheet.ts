@@ -107,15 +107,16 @@ export async function regradeSheet(
           if (!isCorrect) {
             isCorrect = matchFilledBlanks(userAnswer, q?.question, correctAnswer, q?.acceptedAnswers);
           }
-          // 규칙 채점 실패 → AI/선생님 판정 보존.
-          // 제출 시엔 AI가 정답(100)으로 준 답이 재채점(정답처리·정답 수정 후 자동 실행)에서
-          // 규칙 채점만 거쳐 오답으로 뒤집히던 문제 (2026-09-13 김유민 3단계 Q20, 86%→81%).
-          // 로그가 있으면 로그 판정, 없으면(구 시도) 제출 당시 정답이었던 결과를 유지한다.
-          if (!isCorrect) {
-            const verdict = verdictMap.get(`${attempt.student_id}|${q?.number ?? i + 1}|${studentNorm}`);
-            if (verdict !== undefined) isCorrect = verdict === 100;
-            else if (userAnswer.trim() !== '' && !oldWrongNums.has(i + 1)) isCorrect = true;
-          }
+        }
+        // 규칙 채점 실패 → AI/선생님 판정 보존 (subParts 문항 포함 — 문항을 subParts로 바꾼 뒤
+        // AI가 100점 준 답이 오답으로 뒤집히던 문제, 2026-09-14 이동현 명령문 Step1 #31).
+        // 제출 시엔 AI가 정답(100)으로 준 답이 재채점(정답처리·정답 수정 후 자동 실행)에서
+        // 규칙 채점만 거쳐 오답으로 뒤집히던 문제 (2026-09-13 김유민 3단계 Q20, 86%→81%).
+        // 로그가 있으면 로그 판정, 없으면(구 시도) 제출 당시 정답이었던 결과를 유지한다.
+        if (!isCorrect) {
+          const verdict = verdictMap.get(`${attempt.student_id}|${q?.number ?? i + 1}|${normalize(userAnswer)}`);
+          if (verdict !== undefined) isCorrect = verdict === 100;
+          else if (userAnswer.trim() !== '' && !oldWrongNums.has(i + 1)) isCorrect = true;
         }
       } else {
         isCorrect = matchMcqAnswer(userAnswer, correctAnswer, questions?.[i]?.options);
