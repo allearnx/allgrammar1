@@ -35,7 +35,7 @@ const ACC: [string, string[]][] = [
 function fixQuestion(q: Q, sheetTitle: string, log: string[]) {
   const before = q.question;
   // 1) 보기 없는 전환 문항
-  const m = q.question.match(/^보기와 같이 문장을 전환하시오[.:]\s*(.+?)\s*(※ 완전한 문장으로 쓰시오\.?)?\s*$/s);
+  const m = q.question.match(/^보기와 같이 문장을 전환하시오[.:]\s*([\s\S]+?)\s*(※ 완전한 문장으로 쓰시오\.?)?\s*$/);
   if (m) {
     q.question = `＜보기＞와 같이 비교급을 사용하여 문장을 바꿔 쓰시오.\n${EXAMPLE}\n\n${m[1].trim()} ※ 완전한 문장으로 쓰시오.`;
     for (const [sent, acc] of ACC) if (m[1].includes(sent)) addAcc(q, acc);
