@@ -5,6 +5,7 @@ import { ClipboardList, RotateCcw, Loader2 } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
+import { toast } from 'sonner';
 import { logger } from '@/lib/logger';
 import { getEncouragement } from '@/lib/naesin/encouragement';
 import { extractAnswer } from '@/lib/naesin/normalize-answer';
@@ -108,6 +109,32 @@ export function ProblemTab({ sheets, unitId, onStageComplete, bestScoreBySheet, 
       onActiveSheetChange(activeSheet.category);
     }
   }, [activeSheet?.category, onActiveSheetChange]);
+
+  // 시트를 열 때 서버 임시저장이 다른 모드(문제별↔시험지)에 있으면 그 모드로 전환한다.
+  // 각 모드는 자기 모드의 임시저장만 불러오므로, 문제별로 20문항 풀고 시험지 모드로 다시 열면
+  // 0/27로 보여 "푼 게 사라졌다"는 신고가 생겼다 (정재원 2026-09-14, 5과 문법 1단계 (2/8)).
+  useEffect(() => {
+    if (!activeSheet || activeSheet.mode !== 'interactive') return;
+    if (bestScoreBySheet?.[activeSheet.id] != null && lastAttemptBySheet?.[activeSheet.id] && !retrySheetIds.has(activeSheet.id)) return;
+    let cancelled = false;
+    (async () => {
+      try {
+        const res = await fetch(`/api/naesin/problems/draft/load?sheetId=${activeSheet.id}`);
+        if (!res.ok || cancelled) return;
+        const data = await res.json();
+        const draft = data?.draft_data as { mode?: string; answersMap?: Record<string, unknown> } | undefined;
+        const answered = Object.keys(draft?.answersMap ?? {}).length;
+        if (!draft || answered === 0) return;
+        if ((draft.mode === 'interactive' || draft.mode === 'paper_test') && draft.mode !== viewMode) {
+          setViewMode(draft.mode);
+          toast.info(`${draft.mode === 'interactive' ? '문제별' : '시험지'} 모드에 풀던 답 ${answered}개가 있어 그 모드로 열었어요.`);
+        }
+      } catch { /* 네트워크 실패 시 현재 모드 유지 */ }
+    })();
+    return () => { cancelled = true; };
+    // viewMode는 의도적으로 제외: 사용자가 직접 모드를 바꾸면 그대로 둔다 (시트가 바뀔 때만 검사)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [activeSheet?.id]);
 
   if (sheets.length === 0) {
     return (
