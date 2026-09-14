@@ -1,0 +1,869 @@
+{
+  "R1": [
+    {
+      "number": 1,
+      "question": "다음 중 짝지어진 단어의 관계가 나머지 넷과 다른 것은?",
+      "options": [
+        "tiny - huge",
+        "ancient - modern",
+        "initial - final",
+        "unknown - well-known",
+        "take care of - look after"
+      ],
+      "answer": "5",
+      "explanation": "'~을 돌보다 - ~을 돌보다'는 유의어 관계이고 나머지는 반의어 관계이다."
+    },
+    {
+      "number": 2,
+      "question": "다음 중 영영풀이가 알맞지 않은 것은?",
+      "options": [
+        "leafless: having no leaves on a tree",
+        "figure: a person in a painting or a story",
+        "pleasure: a feeling of happiness or enjoyment",
+        "hip: doing things or done according to the latest fashion",
+        "dot: a long thin mark on a piece of paper, the ground, or another surface"
+      ],
+      "answer": "5",
+      "explanation": "dot은 '점'이라는 뜻이므로, 주어진 영영풀이인 '종이나 땅, 또는 다른 표면 위에 있는 길고 가는 표시'라는 뜻은 적절하지 않다. 'a small round mark(작은 둥근 표시)'로 고쳐야 한다."
+    },
+    {
+      "number": 3,
+      "question": "다음 빈칸 (A)~(D)에 들어갈 단어가 차례대로 연결된 것은?\n\n• Please (A)________ the cleaner on the windows and wipe them.\n• Don't (B)________ gum during the English class.\n• Please be careful not to (C)________ the plate.\n• Bright colors in this painting (D)________ hope.\n\nⓐ chew ⓑ represent ⓒ spray ⓓ drop",
+      "options": [
+        "ⓑ-ⓐ-ⓓ-ⓒ",
+        "ⓒ-ⓐ-ⓑ-ⓓ",
+        "ⓒ-ⓐ-ⓓ-ⓑ",
+        "ⓓ-ⓑ-ⓐ-ⓒ",
+        "ⓓ-ⓐ-ⓑ-ⓒ"
+      ],
+      "answer": "3",
+      "explanation": "(A) ⓒ spray (창문에 그 세제를 뿌리고 그것을 닦아주세요.) (B) ⓐ chew (영어 수업 시간 동안에는 껌을 씹지 마라.) (C) ⓓ drop (접시를 떨어뜨리지 않도록 조심하세요.) (D) ⓑ represent (이 그림 속 밝은 색들은 희망을 나타낸다.)"
+    },
+    {
+      "number": 4,
+      "question": "다음 중 어법상 어색한 문장은 몇 개인가?\n\nⓐ The teacher whom everyone likes are very kind.\nⓑ Lily lost the ring that her mom gave it to her.\nⓒ Where is the book that I lent you yesterday?\nⓓ Edison was a boy people called a genius.\nⓔ This is the house which I lived in.",
+      "options": [
+        "1개",
+        "2개",
+        "3개",
+        "4개",
+        "5개"
+      ],
+      "answer": "2",
+      "explanation": "ⓐ are → is (관계사절의 수식을 받는 선행사인 단수명사구 The teacher가 주어이므로 단수동사 is로 고쳐야 한다.) ⓑ gave it to her → gave to her (관계대명사 that이 이미 선행사 the ring을 가리키는 대명사 역할을 하고 있으므로 중복으로 쓰인 it을 삭제해야 한다.)"
+    },
+    {
+      "number": 5,
+      "question": "다음 그림에 대한 설명으로 어법상 또는 내용상 어색한 것을 모두 골라 짝지은 것은?\n(그림 설명: ⓐ 전에는 머리가 길었던 소녀가 지금은 짧은 머리이다. ⓑ 전에는 새것처럼 깨끗했던 건물이 지금은 낡고 지저분하다. ⓒ 전에는 패스트푸드를 먹던 소년이 지금은 채소 위주의 건강한 식사를 한다. ⓓ 전에는 2층 집이 있던 자리가 지금은 빈 들판이다.)\n\nⓐ <u>The girl used to keep her hair long, but she has short hair now</u>. ⓑ <u>The building used to look new and tidy, but it looks old and dirty now</u>. ⓒ <u>The boy used to love eating fast food, but he is trying to change to a healthier diet now</u>. ⓓ <u>There used being a two-story house here, but it is gone now</u>.",
+      "options": [
+        "ⓐ, ⓑ",
+        "ⓑ, ⓓ",
+        "ⓒ, ⓓ",
+        "ⓐ, ⓑ, ⓒ",
+        "ⓑ, ⓒ, ⓓ"
+      ],
+      "answer": "2",
+      "explanation": "ⓑ used to look new and tidy, but it looks old and dirty → used to look old and dirty, but it looks new and tidy (과거에는 낡고 지저분해 보이는 건물이었으나 현재에는 새것 같고 깨끗해 보이므로 과거의 상태를 나타내는 'used to look' 표현 뒤에 old and dirty가 이어지고, 현재의 상태에 new and tidy가 와야 한다.) ⓓ being → to be ('(전에는) ~이었다'라는 뜻으로 과거의 상태를 나타내거나 '~하곤 했었다'라는 뜻으로 과거의 습관을 나타낼 때 'used to+동사원형'을 쓰므로 used 뒤의 being을 be로 고쳐야 한다.)"
+    },
+    {
+      "number": 6,
+      "question": "다음 대화의 빈칸에 들어갈 말로 알맞은 것을 모두 고르면? (정답 2개)\n\nB: Excuse me, how can I get to the Star Stadium?\nG: ______________________________ Take line 4, the green line, and get off at Hangang Station.\nB: Line 4 and Hangang Station. Got it. How long will it take?\nG: A little more than 30 minutes.",
+      "options": [
+        "You can get there by subway.",
+        "You should take a taxi instead.",
+        "You can walk there in 5 minutes.",
+        "The subway is the best way to get there.",
+        "Taking the bus is better than the subway."
+      ],
+      "answer": "1, 4",
+      "explanation": "소년이 Star 경기장에 어떻게 갈 수 있는지 묻고 있으며, 소녀가 4호선을 타고 한강역에서 내리라고 구체적인 방법을 설명하고 있으므로 빈칸에는 지하철로 갈 수 있다는 흐름의 표현이 들어가야 함을 알 수 있다. 따라서 ① '당신은 지하철로 거기에 갈 수 있어요.'와 ④ '지하철이 거기에 가는 가장 좋은 방법이에요.'가 적절하다."
+    },
+    {
+      "number": 7,
+      "question": "다음 대화를 읽고 물음에 답하시오.\nB: Somi, I need help. What's the best way to get to Sebit Park from here?\nG: Sebit Park? Well, you can get there by bus or by subway, but the subway is better.\nB: OK. Which line should I take?\nG: Take line 3, and get off at Sebit Station.\nB: Line 3 and get off at Sebit Station. ______________________________\nG: It'll take about 40 minutes.\nB: Is it that far?\nG: Yes. Anyway, why are you going to Sebit Park, Liam?\nB: Oh, there is an art fair this Saturday. You can come with me if you want.\nG: Really? I'm free this Saturday. Let's go together.\nB: Perfect. Let's meet here at 10.\n\n위 대화의 빈칸에 들어갈 말로 알맞은 것은?",
+      "options": [
+        "How many stops do I have to go?",
+        "How often do you go to the park?",
+        "What time will I get to the park?",
+        "How long will it take?",
+        "When should I leave?"
+      ],
+      "answer": "4",
+      "explanation": "소녀가 약 40분이 걸릴 것이라고 이동하는 데 걸리는 시간을 답하고 있으므로 빈칸에는 소요 시간을 묻는 표현인 ④ '얼마나 걸릴까?'가 적절하다."
+    },
+    {
+      "number": 8,
+      "question": "다음 대화를 읽고 물음에 답하시오.\nB: Somi, I need help. What's the best way to get to Sebit Park from here?\nG: Sebit Park? Well, you can get there by bus or by subway, but the subway is better.\nB: OK. Which line should I take?\nG: Take line 3, and get off at Sebit Station.\nB: Line 3 and get off at Sebit Station. ______________________________\nG: It'll take about 40 minutes.\nB: Is it that far?\nG: Yes. Anyway, why are you going to Sebit Park, Liam?\nB: Oh, there is an art fair this Saturday. You can come with me if you want.\nG: Really? I'm free this Saturday. Let's go together.\nB: Perfect. Let's meet here at 10.\n\n위 대화의 내용과 일치하는 것은?",
+      "options": [
+        "Somi recommends taking a taxi or the subway to get to Sebit Park.",
+        "Liam needs to take subway line 5 to go to Sebit Park.",
+        "Liam wants to go to Sebit Park to take part in an art fair.",
+        "Although Somi is busy, she wants to go to Sebit Park with Liam.",
+        "Somi and Liam are going to meet here at 10 this Sunday."
+      ],
+      "answer": "3",
+      "explanation": "소미가 Liam에게 세빛 공원에 왜 가는지 이유를 묻자, Liam은 이번 주 토요일에 미술 박람회가 있다고 답하고 있으므로, ③ 'Liam은 미술 박람회에 참여하기 위해 세빛 공원에 가길 원한다.'는 대화의 내용과 일치한다. ① 소미는 세빛 공원에 가기 위해 택시(→버스)나 전철을 타는 것을 추천한다. ② Liam은 세빛 공원에 가기 위해 지하철 5호선(→3호선)을 타야 한다. ④ 소미는 바쁘지만(→한가하기 때문에), Liam과 함께 세빛 공원에 가고 싶어 한다. ⑤ 소미와 Liam은 이번 주 일요일(→토요일) 10시에 여기서 만날 것이다."
+    },
+    {
+      "number": 9,
+      "question": "다음 주어진 글에 이어질 순서로 알맞은 것은?\n\nThe final stop of our tour today is Muswell Hill. Can't see any street artworks?\n\n(A) For example, the one over here is a happy birthday wish for a loved one. Wilson's gum paintings are tiny, but they give great pleasure to many people.\n(B) Wilson is well known for painting pictures on gum that people drop on the street. His gum paintings often carry personal messages from people he meets on the street.\n(C) Well, look down and look closely. Do you see the little chewing gum paintings? They are by the artist Ben Wilson.",
+      "options": [
+        "(A)-(C)-(B)",
+        "(B)-(A)-(C)",
+        "(B)-(C)-(A)",
+        "(C)-(A)-(B)",
+        "(C)-(B)-(A)"
+      ],
+      "answer": "5",
+      "explanation": "'오늘 우리 투어의 마지막 장소는 머스웰 힐입니다. 어떤 거리 예술 작품도 보이지 않나요?'의 주어진 글에 이어 어떤 작품도 보이지 않는다면 아래를 내려다보고 자세히 살피면 보이는 Ben Wilson의 껌 그림들을 언급하는 (C), (C)의 마지막에 처음 소개한 Ben Wilson을 Wilson으로 받아 그의 껌 그림 작품을 소개하는 (B), (B)의 마지막에 언급한 껌 그림에 담긴 개인적 메시지의 구체적인 예를 For example로 연결하여 소개하는 (A)로 이어지는 것이 자연스럽다."
+    },
+    {
+      "number": 10,
+      "question": "다음 글을 읽고 아래 질문에 대한 알맞은 대답이 되도록 빈칸을 완성하시오. (각 빈칸에 한 단어씩 쓸 것)\n\nWe are now in Finsbury Park to see a painting by Banksy, an internationally famous street artist. Banksy's artworks often carry social messages, and the green tree you see over there is a good example. As you can see, he created a green tree by spraying green paint on a wall behind a leafless tree. Next to the tree, there is a person who is holding a sprayer. What message does Banksy want to give us through this painting? In many people's opinion, he is telling us that nature is having a hard time. They think he wants us to take better care of it.\n\n(1) What characteristic do Banksy's artworks have?\n→ They ____ ____ ____ ____.\n(2) Where did Banksy spray the green paint to create the green tree?\n→ He sprayed it ____ ____ ____ ____ ____ ____ ____.",
+      "options": [],
+      "answer": "often carry social messages / on a wall behind a leafless tree",
+      "subParts": [
+        {
+          "label": "(1)",
+          "answer": "often carry social messages"
+        },
+        {
+          "label": "(2)",
+          "answer": "on a wall behind a leafless tree"
+        }
+      ],
+      "explanation": "(1) Banksy 작품들은 어떤 특징을 가지는가? → 그것들은 종종 사회적 메시지를 담고 있다. (2) Banksy는 초록색 나무를 만들기 위해 초록색 페인트를 어디에 뿌렸는가? → 그는 잎이 없는 나무 뒤쪽 벽에 그것을 뿌렸다."
+    },
+    {
+      "number": 11,
+      "question": "다음 글을 읽고 물음에 답하시오.\nModern street art comes in many different forms, and it makes cities colorful and ⓐ<u>lively</u>. Today, we are going to see some well-known street artworks in London.\n\nThe place ⓑ<u>whom</u> we are going to visit is Shoreditch. Poor workers used to live in this area, but now it is one of the hippest ⓒ<u>area</u> in London. We can find so many great pieces of street art here. Do you see the painting over there? It is by the artist STIK. He is famous for ⓓ<u>using</u> only lines and dots in his paintings of human bodies. According to STIK, the three figures represent the past, present, and future of Shoreditch. Which figure represents which? Well, look closely at the eyes of the three figures. They are just dots, but they will give ⓔ<u>you</u> a clue.\n\n윗글의 밑줄 친 ⓐ~ⓔ 중, 어법상 어색한 것을 모두 고르면? (정답 2개)",
+      "options": [
+        "ⓐ",
+        "ⓑ",
+        "ⓒ",
+        "ⓓ",
+        "ⓔ"
+      ],
+      "answer": "2, 3",
+      "explanation": "ⓑ whom → which[that] 또는 whom 삭제 (visit의 목적어가 없는 불완전한 절을 이끌고 있으며, 선행사 The place를 수식하는 관계사절을 이루어야 하므로 목적격 관계대명사 자리이다. 목적격 관계대명사 whom은 사람이 선행사일 때 사용하므로 사람이 아닌 선행사 The place에 이어지는 목적격 관계대명사 자리의 whom을 목적격 관계대명사 which 또는 that으로 고치거나 목적격 관계대명사는 생략할 수 있으므로 whom을 삭제해야 한다.) ⓒ area → areas ('가장 ~한 ...중 하나'라는 뜻은 'one of the+형용사의 최상급+복수명사' 형태로 쓰므로 one of the hippest에 이어진 단수명사 area를 복수명사 areas로 고쳐야 한다.)"
+    },
+    {
+      "number": 12,
+      "question": "다음 글을 읽고 물음에 답하시오.\nModern street art comes in many different forms, and it makes cities colorful and lively. Today, we are going to see some well-known street artworks in London.\n\nThe place that we are going to visit is Shoreditch. Poor workers used to live in this area, but now it is one of the hippest areas in London. We can find so many great pieces of street art here. Do you see the painting over there? It is by the artist STIK. He is famous for using only lines and dots in his paintings of human bodies. According to STIK, the three figures represent the past, present, and future of Shoreditch. Which figure represents which? Well, look closely at the eyes of the three figures. They are just dots, but they will give you a clue.\n\n윗글을 읽고 다음 질문에 대한 알맞은 대답이 되도록 빈칸을 완성하시오. (각 빈칸에 한 단어씩 쓸 것)\n\nQ. How are STIK's paintings of human bodies expressed?\n\n→ They (1)____ ____ with (2)____ ____ ____ ____.",
+      "options": [],
+      "answer": "are expressed / only lines and dots",
+      "subParts": [
+        {
+          "label": "(1)",
+          "answer": "are expressed"
+        },
+        {
+          "label": "(2)",
+          "answer": "only lines and dots",
+          "acceptedAnswers": [
+            "only dots and lines"
+          ]
+        }
+      ],
+      "explanation": "STIK의 인체를 그린 그림들은 어떻게 표현되는가? → 그것들은 오직 선[점]과 점[선]으로 표현된다."
+    },
+    {
+      "number": 13,
+      "question": "다음 글을 읽고 물음에 답하시오.\nModern street art comes in many different forms, and it makes cities colorful and ⓐ<u>lively</u>. Today, we are going to see some well-known street artworks in London.\n\nThe place ⓑ<u>whom</u> we are going to visit is Shoreditch. Poor workers used to live in this area, but now it is one of the hippest ⓒ<u>area</u> in London. We can find so many great pieces of street art here. Do you see the painting over there? It is by the artist STIK. He is famous for ⓓ<u>using</u> only lines and dots in his paintings of human bodies. According to STIK, the three figures represent the past, present, and future of Shoreditch. Which figure represents which? Well, look closely at the eyes of the three figures. They are just dots, but they will give ⓔ<u>you</u> a clue.\n\n윗글의 내용과 일치하지 않는 것을 모두 고르면? (정답 2개)",
+      "options": [
+        "There are many different types of modern street art.",
+        "Shoreditch is an area which poor workers live in now.",
+        "We can see the painting of the street artist STIK in Shoreditch.",
+        "STIK's painting of three figures represents the past, present, and future of London.",
+        "In STIK's painting, each figure's eyes provide a clue about its meaning."
+      ],
+      "answer": "2, 4",
+      "explanation": "가난한 노동자들이 쇼어디치에 살았으나, 지금 그곳은 런던에서 가장 힙한 지역 중 하나라고 했으므로 ② '쇼어디치는 가난한 노동자들이 지금 살고 있는 지역이다.'는 글의 내용과 일치하지 않는다. 또한 STIK에 따르면, 그의 그림에 있는 세 인물은 쇼어디치의 과거, 현재, 미래를 나타낸다고 했으므로 ④ 'STIK의 세 인물 그림은 런던의 과거, 현재, 미래를 나타낸다.'도 글의 내용과 일치하지 않는다."
+    },
+    {
+      "number": 14,
+      "question": "다음 글을 읽고 물음에 답하시오.\nThe final stop of our tour today (A)[is / are] Muswell Hill. Can't see any street artworks? Well, look down and look closely. Do you see the little chewing gum paintings? They are by the artist Ben Wilson. Wilson is well known for painting pictures on gum (B)[that / what] people drop on the street. His gum paintings often carry personal messages from people he meets on the street. For example, the one over here is a happy birthday wish for a loved one. Wilson's gum paintings are tiny, but they give great pleasure (C)[many people / to many people].\n\n윗글의 괄호 (A), (B), (C)에서 어법상 알맞은 말로 바르게 연결된 것은?",
+      "options": [
+        "(A) is – (B) that – (C) many people",
+        "(A) are – (B) what – (C) many people",
+        "(A) are – (B) that – (C) to many people",
+        "(A) is – (B) what – (C) to many people",
+        "(A) is – (B) that – (C) to many people"
+      ],
+      "answer": "5",
+      "explanation": "(A) 전치사구 of our tour의 수식을 받는 단수 명사구 The final stop이 주어이므로, 주어에 수일치한 단수동사 is가 적절하다. (B) 동사 drop의 목적어가 없는 불완전한 절(people drop on the street)을 이끌어, 선행사 gum을 수식하는 관계사절을 이루어야 하므로 목적격 관계대명사 that이 적절하다. (C) '~에게 ...을 주다'라는 뜻은 'give+A(간접목적어)+B(직접목적어)'의 4형식 또는 'give+B+전치사 to+A'의 3형식으로 나타낼 수 있다. 따라서 동사 give뒤에 목적어 great pleasure가 이어지므로 3형식 구문을 이루도록 전치사 to와 함께 쓰인 to many people이 적절하다."
+    },
+    {
+      "number": 15,
+      "question": "다음 글을 읽고 물음에 답하시오.\nThe final stop of our tour today (A)[is / are] Muswell Hill. Can't see any street artworks? Well, look down and look closely. Do you see the little chewing gum paintings? They are by the artist Ben Wilson. Wilson is well known for painting pictures on gum (B)[that / what] people drop on the street. His gum paintings often carry personal messages from people he meets on the street. For example, the one over here is a happy birthday wish for a loved one. Wilson's gum paintings are tiny, but they give great pleasure (C)[many people / to many people].\n\n윗글의 목적으로 알맞은 것은?",
+      "options": [
+        "to encourage people not to drop gum on the street",
+        "to introduce Wilson's gum paintings as street art",
+        "to give advice on how to become a street artist",
+        "to recommend places to visit in Muswell Hill",
+        "to explain the changes in Ben Wilson's art style"
+      ],
+      "answer": "2",
+      "explanation": "머스웰 힐의 거리 예술 작품인 Ben Wilson의 껌 그림에 대해 설명하고 있는 내용이므로 글의 목적으로 ② '거리 예술로서 Wilson의 껌 그림들을 소개하기 위해'가 적절하다."
+    },
+    {
+      "number": 16,
+      "question": "다음 글을 읽고 물음에 답하시오.\nThe final stop of our tour today (A)[is / are] Muswell Hill. Can't see any street artworks? Well, look down and look closely. Do you see the little chewing gum paintings? They are by the artist Ben Wilson. Wilson is well known for painting pictures on gum (B)[that / what] people drop on the street. His gum paintings often carry personal messages from people he meets on the street. For example, the one over here is a happy birthday wish for a loved one. Wilson's gum paintings are tiny, but they give great pleasure (C)[many people / to many people].\n\n윗글을 읽고 답할 수 없는 질문은?",
+      "options": [
+        "In what area are Ben Wilson's artworks found?",
+        "What is Ben Wilson well known for?",
+        "What does Ben Wilson use to paint pictures on gum?",
+        "What kinds of messages do Wilson's gum paintings often carry?",
+        "What do Wilson's gum paintings bring people?"
+      ],
+      "answer": "3",
+      "explanation": "Ben Wilson이 껌 위에 그림을 그린다는 내용만 있을 뿐 그림을 그리는 데 쓰이는 도구에 대한 언급은 없으므로 ③ 'Ben Wilson은 껌 위에 그림을 그리기 위해 무엇을 사용하는가?'는 답할 수 없는 질문이다."
+    },
+    {
+      "number": 17,
+      "question": "다음 글을 읽고 물음에 답하시오.\nWe are now in Finsbury Park ⓐ<u>to seeing</u> a painting by Banksy, an internationally famous street artist. Banksy's artworks often carry social messages, and the green tree you see over there ⓑ<u>is</u> a good example. As you can see, he created a green tree by spraying green paint on a wall behind a leafless tree. Next to the tree, there is a person ⓒ<u>whom</u> is holding a sprayer. What message does Banksy want to give us through this painting? In many people's opinion, he is telling us ⓓ<u>that</u> nature is having a hard time. They think he wants us ⓔ<u>taking</u> better care of it.\n\n윗글의 밑줄 친 ⓐ~ⓔ 중, 어법상 알맞은 것을 모두 고르면? (정답 2개)",
+      "options": [
+        "ⓐ",
+        "ⓑ",
+        "ⓒ",
+        "ⓓ",
+        "ⓔ"
+      ],
+      "answer": "2, 4",
+      "explanation": "ⓑ 등위접속사 and로 이어진 절의 문장의 동사 자리로, 주어가 단수명사구 the green tree이므로 주어에 수일치한 단수동사 is는 적절하다. 참고로, 'you see over there'는 목적격 관계대명사 which[that]가 생략된 목적격 관계사절로, 선행사 the green tree를 수식해 주어부를 이루고 있다. ⓓ 동사 tell은 'tell+간접목적어+직접목적어(that절)'의 4형식 형태로 '~에게 ...을 말하다'라는 뜻으로 쓰이므로, is telling의 간접목적어 us 뒤에서, 완전한 절(nature ~ time)을 이끌어 직접목적어인 명사절을 이루는 접속사 that은 적절하다. ⓐ to seeing → to see ⓒ whom → who 또는 that ⓔ taking → to take"
+    },
+    {
+      "number": 18,
+      "question": "다음 글을 읽고 물음에 답하시오.\nWe are now in Finsbury Park ⓐ<u>to seeing</u> a painting by Banksy, an internationally famous street artist. Banksy's artworks often carry social messages, and the green tree you see over there ⓑ<u>is</u> a good example. As you can see, he created a green tree by spraying green paint on a wall behind a leafless tree. Next to the tree, there is a person ⓒ<u>whom</u> is holding a sprayer. What message does Banksy want to give us through this painting? In many people's opinion, he is telling us ⓓ<u>that</u> nature is having a hard time. They think he wants us ⓔ<u>taking</u> better care of it.\n\n윗글의 제목을 다음과 같이 쓸 때 빈칸에 들어갈 알맞은 말을 쓰시오. (첫 철자는 대문자로 쓸 것)\n\nBanksy: The (1)________ Artist Who Shows (2)________ (3)________ Through His Artworks",
+      "options": [],
+      "answer": "Street, Social, Messages",
+      "subParts": [
+        {
+          "label": "(1)",
+          "answer": "Street"
+        },
+        {
+          "label": "(2)",
+          "answer": "Social"
+        },
+        {
+          "label": "(3)",
+          "answer": "Messages"
+        }
+      ],
+      "explanation": "[제시문] Banksy: 그의 작품을 통해 사회적 메시지를 보여주는 거리 예술가"
+    },
+    {
+      "number": 19,
+      "question": "다음 글을 읽고 물음에 답하시오.\nWe are now in Finsbury Park ⓐ<u>to seeing</u> a painting by Banksy, an internationally famous street artist. Banksy's artworks often carry social messages, and the green tree you see over there ⓑ<u>is</u> a good example. As you can see, he created a green tree by spraying green paint on a wall behind a leafless tree. Next to the tree, there is a person ⓒ<u>whom</u> is holding a sprayer. What message does Banksy want to give us through this painting? In many people's opinion, he is telling us ⓓ<u>that</u> nature is having a hard time. They think he wants us ⓔ<u>taking</u> better care of it.\n\n윗글의 내용과 일치하는 것을 모두 고르면? (정답 2개)",
+      "options": [
+        "There is Banksy's green tree artwork in Finsbury Park.",
+        "Banksy made the artwork by painting the leafless tree green.",
+        "There is a person next to Banksy's green tree.",
+        "The person in the green tree artwork is holding a leaf.",
+        "Many people feel the beauty of nature when they see Banksy's green tree artwork."
+      ],
+      "answer": "1, 3",
+      "explanation": "② Banksy는 잎이 없는 나무를 초록색으로 칠해(→잎이 없는 나무 뒤쪽 벽에 초록색 페인트를 뿌려서) 작품을 만들었다. ④ 초록색 나무 작품에 있는 사람은 나뭇잎을(→분무기를) 들고 있다. ⑤ 많은 사람들이 Banksy의 초록색 나무 작품을 보고 자연의 아름다움(→자연이 힘든 시간을 보내고 있음)을 느낀다."
+    },
+    {
+      "number": 20,
+      "question": "다음 주어진 대화에 이어질 순서로 알맞은 것은?\n\nB: Excuse me. I'm going to the National Art Museum. What's the best way to get there?\n\n(A) Only about 15 minutes.\n(B) You can walk. Go straight for about 500 meters and turn left. It'll be on your right.\n(C) Really? Thanks.\n(D) I see. How long will it take?",
+      "options": [
+        "(B)-(A)-(D)-(C)",
+        "(B)-(D)-(A)-(C)",
+        "(B)-(D)-(C)-(A)",
+        "(D)-(A)-(B)-(C)",
+        "(D)-(A)-(C)-(B)"
+      ],
+      "answer": "2",
+      "explanation": "국립 미술 박물관에 가는 가장 좋은 방법을 묻고 있는 소년의 질문에 이어, 걸어갈 수 있다고 말하며 구체적인 방법을 언급하는 (B), 알겠다고 답하며 소요 시간을 묻는 (D), 15분 정도 걸린다고 소요 시간을 답하는 (A), 감사 인사를 하는 (C)로 이어지는 것이 자연스럽다."
+    },
+    {
+      "number": 21,
+      "question": "다음 중 짝지어진 대화가 어색한 것은?",
+      "options": [
+        "A: Excuse me, how can I get to the Dream Zoo? / B: You can take the subway.",
+        "A: What's the best way to get to ABC Mart? / B: You can go there on foot. Take bus No. 324 from here.",
+        "A: Which is faster, the bus or the subway to Seoul Museum? / B: I think the bus is faster.",
+        "A: I should hurry to get to Star Cinema. How long will it take by taxi? / B: Not very long. It'll take less than 15 minutes.",
+        "A: You can walk to Green Farm. Go straight two blocks. / B: I see. How long does it take?"
+      ],
+      "answer": "2",
+      "explanation": "ABC Mart에 가는 방법을 묻는 A에게 걸어서 갈 수 있다고 답한 후, 몇 번 버스를 타야 하는지 알려주는 흐름은 어색하다. on foot을 by bus로 고쳐야 한다."
+    },
+    {
+      "number": 22,
+      "question": "다음 글을 읽고 물음에 답하시오.\nModern street art comes in many different forms, and it makes cities colorful and lively. Today, we are going to see some well-known street artworks in London.\n\nThe place that we are going to visit is Shoreditch. (A)<u>가난한 노동자들이 이 지역에 살았었다</u>, but now it is one of the hippest areas in London. We can find so many great pieces of street art here. Do you see the painting over there? It is by the artist STIK. He is famous for using only lines and dots in his paintings of human bodies. According to STIK, the three figures represent the past, present, and future of Shoreditch. Which figure ⓐ<u>represents</u> which? Well, look closely at the eyes of the three figures. They are just dots, but they will give you a clue.\n\nWe are now in Finsbury Park to see a painting by Banksy, an internationally famous street artist. Banksy's artworks often carry social messages, and the green tree you see over there is a good example. As you can see, he created a green tree by spraying green paint on a wall behind a leafless tree. Next to the tree, there is a person who is holding a sprayer. What message does Banksy want to give us through this painting? In many people's opinion, he is telling us that ⓑ______________________________. They think he wants us to take better care of it.\n\nThe final stop of our tour today is Muswell Hill. Can't see any street artworks? Well, look down and look closely. Do you see the little chewing gum paintings? They are by the artist Ben Wilson. Wilson is well known for painting pictures on gum that people drop on the street. (B)<u>그의 껌 그림들은 그가 길에서 만나는 사람들로부터 온 개인적인 메시지들을 종종 담고 있습니다</u>. For example, the one over here is a happy birthday wish for a loved one. Wilson's gum paintings are tiny, but they give great pleasure to many people.\n\n윗글의 밑줄 친 (A), (B)의 우리말을 주어진 <조건>에 알맞게 각각 영작하시오.\n\n<조건>\n• (A)는 과거의 상태를 나타내는 표현을 사용할 것\n• (B)는 목적격 관계대명사를 생략할 것\n• <보기>의 단어 및 표현을 모두 포함시킬 것 (필요시 추가 및 변형할 것)\n• (A)는 8단어, (B)는 14단어로 각각 쓸 것\n\n<보기> worker, area, used, often carry, meet, personal, from, gum paintings, on the street, poor\n\n(A) ______________________\n(B) ______________________",
+      "options": [],
+      "answer": "Poor workers used to live in this area / His gum paintings often carry personal messages from people he meets on the street",
+      "subParts": [
+        {
+          "label": "(A)",
+          "answer": "Poor workers used to live in this area"
+        },
+        {
+          "label": "(B)",
+          "answer": "His gum paintings often carry personal messages from people he meets on the street"
+        }
+      ],
+      "explanation": "(A) <조건>에 따라 과거의 상태를 나타내는 표현을 사용해야 하며, <보기>에 used가 있으므로 '~하곤 했다'라는 뜻으로 과거의 상태를 나타내는 'used to+동사원형' 표현을 사용하여 영작한다. 주어 Poor workers를 쓰고 used to를 쓴 후, 동사원형 live를 쓴다. live는 자동사로 바로 목적어를 취하지 못하고 전치사 in과 함께 '~에 살다'라는 뜻을 나타내므로 live 뒤에 in this area를 쓴다. (B) 주어 His gum paintings를 쓰고 빈도부사는 일반동사 앞에 위치하므로 빈도부사 often(종종)을 일반동사 carry 앞에 두어 often carry를 쓴 후, 목적어 personal messages와 from people을 쓴다. '그가 길에서 만나는'이 people을 수식하도록 관계사절을 영작한다. <조건>에 따라 목적격 관계대명사 whom[who/that]을 생략하고 목적격 관계사절의 주어 he와 동사 meets를 쓴다. 선행사 people이 meets의 의미상 목적어 역할을 하므로 meets 뒤에 목적어를 중복해서 쓰지 않고 바로 부사구 on the street을 이어 쓴다."
+    },
+    {
+      "number": 23,
+      "question": "다음 글을 읽고 물음에 답하시오.\nModern street art comes in many different forms, and it makes cities colorful and lively. Today, we are going to see some well-known street artworks in London.\n\nThe place that we are going to visit is Shoreditch. (A)<u>가난한 노동자들이 이 지역에 살았었다</u>, but now it is one of the hippest areas in London. We can find so many great pieces of street art here. Do you see the painting over there? It is by the artist STIK. He is famous for using only lines and dots in his paintings of human bodies. According to STIK, the three figures represent the past, present, and future of Shoreditch. Which figure ⓐ<u>represents</u> which? Well, look closely at the eyes of the three figures. They are just dots, but they will give you a clue.\n\nWe are now in Finsbury Park to see a painting by Banksy, an internationally famous street artist. Banksy's artworks often carry social messages, and the green tree you see over there is a good example. As you can see, he created a green tree by spraying green paint on a wall behind a leafless tree. Next to the tree, there is a person who is holding a sprayer. What message does Banksy want to give us through this painting? In many people's opinion, he is telling us that ⓑ______________________________. They think he wants us to take better care of it.\n\nThe final stop of our tour today is Muswell Hill. Can't see any street artworks? Well, look down and look closely. Do you see the little chewing gum paintings? They are by the artist Ben Wilson. Wilson is well known for painting pictures on gum that people drop on the street. (B)<u>그의 껌 그림들은 그가 길에서 만나는 사람들로부터 온 개인적인 메시지들을 종종 담고 있습니다</u>. For example, the one over here is a happy birthday wish for a loved one. Wilson's gum paintings are tiny, but they give great pleasure to many people.\n\n윗글의 밑줄 친 ⓐrepresent와 뜻이 다른 것을 모두 고르면? (정답 2개)",
+      "options": [
+        "Somi will <u>represent</u> our class in the contest.",
+        "Music <u>represents</u> our feelings and thoughts.",
+        "The players were chosen to <u>represent</u> Korea.",
+        "The dove <u>represents</u> peace in the painting.",
+        "She made a circle to <u>represent</u> the sun."
+      ],
+      "answer": "1, 3",
+      "explanation": "ⓐrepresents는 '나타내다, 상징하다'라는 뜻의 represent의 단수형이나, ① '소미는 그 대회에서 우리 반을 대표할 것이다.'와 ③ '그 선수들은 한국을 대표하기 위해 선발되었다.'의 represent는 '대표하다, 대신하다'라는 뜻으로 쓰였으므로 ⓐ와 뜻이 다르다. 나머지는 모두 '나타내다, 상징하다'라는 뜻의 동사로 쓰였다."
+    },
+    {
+      "number": 24,
+      "question": "다음 글을 읽고 물음에 답하시오.\nModern street art comes in many different forms, and it makes cities colorful and lively. Today, we are going to see some well-known street artworks in London.\n\nThe place that we are going to visit is Shoreditch. (A)<u>가난한 노동자들이 이 지역에 살았었다</u>, but now it is one of the hippest areas in London. We can find so many great pieces of street art here. Do you see the painting over there? It is by the artist STIK. He is famous for using only lines and dots in his paintings of human bodies. According to STIK, the three figures represent the past, present, and future of Shoreditch. Which figure ⓐ<u>represents</u> which? Well, look closely at the eyes of the three figures. They are just dots, but they will give you a clue.\n\nWe are now in Finsbury Park to see a painting by Banksy, an internationally famous street artist. Banksy's artworks often carry social messages, and the green tree you see over there is a good example. As you can see, he created a green tree by spraying green paint on a wall behind a leafless tree. Next to the tree, there is a person who is holding a sprayer. What message does Banksy want to give us through this painting? In many people's opinion, he is telling us that ⓑ______________________________. They think he wants us to take better care of it.\n\nThe final stop of our tour today is Muswell Hill. Can't see any street artworks? Well, look down and look closely. Do you see the little chewing gum paintings? They are by the artist Ben Wilson. Wilson is well known for painting pictures on gum that people drop on the street. (B)<u>그의 껌 그림들은 그가 길에서 만나는 사람들로부터 온 개인적인 메시지들을 종종 담고 있습니다</u>. For example, the one over here is a happy birthday wish for a loved one. Wilson's gum paintings are tiny, but they give great pleasure to many people.\n\n윗글의 빈칸 ⓑ에 들어갈 말로 알맞은 것은?",
+      "options": [
+        "only technology can save a leafless tree",
+        "more parks should be built in cities",
+        "nature is not beautiful anymore",
+        "nature is having a hard time",
+        "street art is very important"
+      ],
+      "answer": "4",
+      "explanation": "거리 예술가 Banksy의 예술 작품들은 종종 사회적 메시지를 담고 있다고 했으며, 잎이 없는 나무 뒤의 벽에 초록색 페인트를 뿌려서 초록색 나무를 만들었는데, Banksy가 이 작품을 통해 전하고자 하는 메시지에 대한 사람들의 생각으로 Banksy는 우리가 그것을 더 잘 보살피길 원하고 있다는 내용이 이어지므로, 빈칸에는 우리가 그것을 더 잘 보살펴야 하는 이유와 관련된 사회적 메시지에 대한 내용이 들어가야 한다. 따라서 ④ '자연이 힘든 시간을 보내고 있다'가 적절하다."
+    },
+    {
+      "number": 25,
+      "question": "다음 글을 읽고 물음에 답하시오.\nModern street art comes in many different forms, and it makes cities colorful and lively. Today, we are going to see some well-known street artworks in London.\n\nThe place that we are going to visit is Shoreditch. (A)<u>가난한 노동자들이 이 지역에 살았었다</u>, but now it is one of the hippest areas in London. We can find so many great pieces of street art here. Do you see the painting over there? It is by the artist STIK. He is famous for using only lines and dots in his paintings of human bodies. According to STIK, the three figures represent the past, present, and future of Shoreditch. Which figure ⓐ<u>represents</u> which? Well, look closely at the eyes of the three figures. They are just dots, but they will give you a clue.\n\nWe are now in Finsbury Park to see a painting by Banksy, an internationally famous street artist. Banksy's artworks often carry social messages, and the green tree you see over there is a good example. As you can see, he created a green tree by spraying green paint on a wall behind a leafless tree. Next to the tree, there is a person who is holding a sprayer. What message does Banksy want to give us through this painting? In many people's opinion, he is telling us that ⓑ______________________________. They think he wants us to take better care of it.\n\nThe final stop of our tour today is Muswell Hill. Can't see any street artworks? Well, look down and look closely. Do you see the little chewing gum paintings? They are by the artist Ben Wilson. Wilson is well known for painting pictures on gum that people drop on the street. (B)<u>그의 껌 그림들은 그가 길에서 만나는 사람들로부터 온 개인적인 메시지들을 종종 담고 있습니다</u>. For example, the one over here is a happy birthday wish for a loved one. Wilson's gum paintings are tiny, but they give great pleasure to many people.\n\n윗글의 제목으로 알맞은 것은?",
+      "options": [
+        "Modern Street Art to Protect the Environment",
+        "The Rebirth of Poor Streets in London",
+        "Social Messages Through Street Art",
+        "A Journey into London's Street Art",
+        "Turning Trash into Art"
+      ],
+      "answer": "4",
+      "explanation": "현대 거리 예술이 도시를 다채롭고 활기차게 만든다고 하면서 런던에 있는 유명한 거리 예술 작품 3개를 투어 형식으로 설명하는 내용이므로 글의 제목으로 ④ '런던의 거리 예술로의 여정'이 적절하다."
+    },
+    {
+      "number": 26,
+      "question": "다음 글을 읽고 물음에 답하시오.\nThe final stop of our tour today is Muswell Hill. Can't see any street artworks? Well, look down and look closely. Do you see the little chewing gum paintings? They are by the artist Ben Wilson. Wilson is well known for painting pictures on gum ⓐ<u>that</u> people drop on the street. His gum paintings often carry personal messages from people he meets on the street. For example, the one over here is a happy birthday wish for a loved one. Wilson's gum paintings are tiny, but they give great pleasure to many people.\n\n윗글의 밑줄 친 ⓐthat과 쓰임이 같은 것을 모두 고르면? (정답 2개)",
+      "options": [
+        "Can you show me the bag <u>that</u> is on the shelf?",
+        "Do you like the songs <u>that</u> Sam recommended?",
+        "An architect is a person <u>that</u> designs buildings.",
+        "The food <u>that</u> was left on the table went bad.",
+        "The dog <u>that</u> she has is very small and cute."
+      ],
+      "answer": "2, 5",
+      "explanation": "밑줄 친 ⓐ의 that은 명사 gum을 선행사로 하고 있으며 drop의 목적어가 없는 불완전한 절(people ~ street)을 이끌고 있으므로 목적격 관계대명사이다. 따라서 ②에서 recommended의 목적어가 없는 불완전한 절(Sam recommended)을 이끌어, 선행사 the songs를 수식하는 관계사절을 이루는 that과 ⑤에서 has의 목적어가 없는 불완전한 절(she has)을 이끌어, 선행사 The dog을 수식하는 관계사절을 이루는 that이 같은 목적격 관계대명사로 쓰였다. 나머지는 모두 주격 관계대명사 that이다."
+    },
+    {
+      "number": 27,
+      "question": "다음 글을 읽고 물음에 답하시오.\nThe final stop of our tour today is Muswell Hill. Can't see any street artworks? Well, look down and look closely. Do you see the little chewing gum paintings? They are by the artist Ben Wilson. Wilson is well known for painting pictures on gum ⓐ<u>that</u> people drop on the street. His gum paintings often carry personal messages from people he meets on the street. For example, the one over here is a happy birthday wish for a loved one. Wilson's gum paintings are tiny, but they give great pleasure to many people.\n\n윗글을 다음과 같이 요약할 때, 빈칸 (A), (B)에 들어갈 말로 알맞게 연결된 것은?\n\nIn Muswell Hill, we can see very (A)________ gum paintings by Ben Wilson. These street artworks show us (B)________ messages from people and bring great pleasure.",
+      "options": [
+        "(A) small – (B) public",
+        "(A) simple – (B) social",
+        "(A) small – (B) everyday",
+        "(A) colorful – (B) private",
+        "(A) simple – (B) environmental"
+      ],
+      "answer": "3",
+      "explanation": "머스웰 힐에 있는 거리 예술 작품인 Ben Wilson의 껌 위에 그린 그림들을 소개하는 내용으로, 이 그림들은 Wilson이 거리에서 만난 사람들의 개인적인 메시지를 담고 있으며 아주 작지만 큰 기쁨을 사람들에게 준다고 했으므로 (A)에는 '작은'을 뜻하는 small, (B)에는 '일상적인'을 뜻하는 everyday나 '사적인, 사사로운'을 뜻하는 private가 적절하다."
+    },
+    {
+      "number": 28,
+      "question": "다음 글을 아래와 같이 요약하고자 할 때, 빈칸에 들어갈 알맞은 말을 각각 찾아 쓰시오. (각 빈칸에 한 단어씩 쓸 것)\n\nThe place that we are going to visit is Shoreditch. Poor workers used to live in this area, but now it is one of the hippest areas in London. We can find so many great pieces of street art here. Do you see the painting over there? It is by the artist STIK. He is famous for using only lines and dots in his paintings of human bodies. According to STIK, the three figures represent the past, present, and future of Shoreditch. Which figure represents which? Well, look closely at the eyes of the three figures. They are just dots, but they will give you a clue.\n\nIn Shoreditch, we can see the street artist STIK's painting of three figures. They were painted by using only (1)________ and (2)________. Each of them means the (3)________, (4)________, and (5)________ of Shoreditch, and we can get a clue from their (6)________ to know the meaning of each figure.",
+      "options": [],
+      "answer": "lines, dots, past, present, future, eyes",
+      "subParts": [
+        {
+          "label": "(1)",
+          "answer": "lines",
+          "acceptedAnswers": [
+            "dots"
+          ]
+        },
+        {
+          "label": "(2)",
+          "answer": "dots",
+          "acceptedAnswers": [
+            "lines"
+          ]
+        },
+        {
+          "label": "(3)",
+          "answer": "past"
+        },
+        {
+          "label": "(4)",
+          "answer": "present"
+        },
+        {
+          "label": "(5)",
+          "answer": "future"
+        },
+        {
+          "label": "(6)",
+          "answer": "eyes"
+        }
+      ],
+      "explanation": "[요약문] 쇼어디치에서 우리는 STIK의 세 인물 그림을 볼 수 있다. 그것들은 오직 선[점]과 점[선]만을 사용하여 그려졌다. 그것들 각각은 쇼어디치의 과거[미래], 현재, 그리고 미래[과거]를 의미하며, 우리는 어떤 인물이 어떤 것을 의미하는지 알기 위해 단서를 그들의 눈으로부터 얻을 수 있다."
+    },
+    {
+      "number": 29,
+      "question": "다음 대화를 읽고 과거의 상태와 습관을 나타내는 문장을 완성하시오. (각 빈칸에 한 단어씩 쓸 것)\n\nSuho: Wow, look at this street! There is a pretty dessert cafe next to the elementary school.\nMiju: Oh, there was a small stationery store here in the past.\nSuho: You're right. We often bought snacks there after school.\n\n(1) There ____ ____ ____ ____ ____ ____ ____ next to the elementary school.\n(2) Suho and Miju ____ ____ ____ ____ at the stationery store after school.",
+      "options": [],
+      "answer": "used to be a small stationery store / used to buy snacks",
+      "subParts": [
+        {
+          "label": "(1)",
+          "answer": "used to be a small stationery store"
+        },
+        {
+          "label": "(2)",
+          "answer": "used to buy snacks"
+        }
+      ],
+      "explanation": "(1) 초등학교 옆에 작은 문구점이 있었다. (2) 수호와 미주는 방과 후에 그 문구점에서 간식을 사곤 했다."
+    },
+    {
+      "number": 30,
+      "question": "다음 그림과 설명을 참고하여, <조건>에 맞게 빈칸을 완성하시오.\n(그림 설명: 초록색 벽의 연습실에서 발레복을 입은 소녀들이 나이 든 남자 선생님 주위에 모여 수업을 받고 있는 그림이다. 그림 아래에 \"<The Ballet Class – 1874년경, Edgar Degas>\"라고 적혀 있다.)\n\n<조건>\n• 적절한 목적격 관계대명사를 쓸 것 (단, that은 제외할 것)\n• paint, around를 사용할 것 (필요시 변형할 것)\n• 빈칸에 6단어로 쓸 것\n\n→ This is a famous painting ______________________. The title of this artwork is The Ballet Class.",
+      "options": [],
+      "answer": "which Edgar Degas painted around 1874",
+      "explanation": "[제시문] 이것은 Edgar Degas가 1874년경에 그렸던 유명한 그림이다. 이 작품의 제목은 '발레 수업'이다."
+    }
+  ],
+  "R2": [
+    {
+      "number": 1,
+      "question": "다음 중 짝지어진 단어의 관계가 어색한 것은?",
+      "options": [
+        "area : region = hip : cool",
+        "opinion : view = clue : hint",
+        "color : colorful = person : personal",
+        "get off : get on = represent : stand for",
+        "final : finally = international : internationally"
+      ],
+      "answer": "4",
+      "explanation": "'내리다 : 타다' 반의어 관계 ≠ '나타내다, 상징하다 : 상징하다' 유의어 관계"
+    },
+    {
+      "number": 2,
+      "question": "다음 중 밑줄 친 단어 및 표현의 쓰임이 어색한 것은?",
+      "options": [
+        "The kid found a <u>tiny</u> insect between large rocks.",
+        "The streets became <u>lively</u> with many performers.",
+        "She accepted the prince's invitation with <u>pleasure</u>.",
+        "<u>According to</u> the guide, this palace was built in 1395.",
+        "Busan <u>is known for</u> tourists from all over the world."
+      ],
+      "answer": "5",
+      "explanation": "'be known for ~'는 '~로 알려져 있다, ~로 유명하다'라는 뜻으로, 전치사 for 뒤에 유명하게 된 어떤 특징, 대상이 와야 한다. 주어진 문장은 for 뒤에 알려진 대상인 'tourists from all over the world(전 세계에서 온 관광객들)'가 이어지고 있으므로 그 쓰임이 어색하다. 'be known to ~'가 '~에게 알려져 있다'라는 뜻이므로 is known for를 is known to로 고쳐야 한다."
+    },
+    {
+      "number": 3,
+      "question": "다음 밑줄 친 단어가 같은 의미로 쓰인 것은?",
+      "options": [
+        "I think the referee didn't make a <u>fair</u> decision. / He bought three books at the book <u>fair</u>.",
+        "She used simple lines to draw human <u>figures</u>. / There are unique <u>figures</u> in this fairy tale.",
+        "It <u>takes</u> about 10 minutes to walk to the lake. / We should <u>take</u> a boat to visit the island.",
+        "The pianist played a beautiful <u>piece</u> of music. / The flask broke into many sharp <u>pieces</u>.",
+        "Can you <u>hold</u> this gift box for a moment? / Our school will <u>hold</u> a festival next month."
+      ],
+      "answer": "2",
+      "explanation": "'그녀는 인물을 그리기 위해 단순한 선들을 사용했다.'와 '이 동화책에는 독특한 인물들이 있다.'의 figure는 '(그림·소설 등에서의) 인물(모습)'을 뜻하므로 같은 의미로 쓰였다. ① 공정한 / 박람회 ③ (시간이) 걸리다 / (교통수단 등을) 타다 ④ 작품 / 조각 ⑤ 잡다, 들다 / 개최하다"
+    },
+    {
+      "number": 4,
+      "question": "다음 중 어법상 어색한 문장의 개수는?\n\nⓐ Did you use to play soccer every weekend?\nⓑ The Korean food we tried were spicy but tasty.\nⓒ There didn't used to be a library in this town.\nⓓ The sofa on which he sat was very comfortable.\nⓔ Anne used to listening to quiet guitar music when she worked.\nⓕ The man who I met at the party yesterday was a famous novelist.",
+      "options": [
+        "1개",
+        "2개",
+        "3개",
+        "4개",
+        "5개"
+      ],
+      "answer": "3",
+      "explanation": "ⓑ were → was (목적격 관계대명사 that[which]이 생략된 관계사절 we tried가 선행사 The Korean food를 수식하고 있으며, 주어부의 핵심인 단수명사구 The Korean food에 수일치하여야 하므로 단수동사 was로 고쳐야 한다.) ⓒ used → use ('used to+동사원형'의 부정형은 'didn't use to+동사원형'으로 쓴다.) ⓔ listening → listen (과거의 습관을 나타낼 때 'used to+동사원형'을 쓴다.)"
+    },
+    {
+      "number": 5,
+      "question": "다음 대화의 빈칸에 들어갈 말로 알맞은 것을 모두 고르면? (정답 2개)\n\nB: I'm sorry, but how can I get to the Sky Cinema?\nG: It's not far, but it's a little difficult to find. Why don't you take a taxi?\nB: OK. How long will it take?\nG: By taxi? ______________________________",
+      "options": [
+        "About 20 minutes.",
+        "It will last for two hours.",
+        "It's only about 800 meters.",
+        "Take line 5, the purple line.",
+        "It will take only a few minutes."
+      ],
+      "answer": "1, 5",
+      "explanation": "Sky 영화관까지 멀지 않지만 찾기 조금 어려우니 택시를 타는 것이 좋겠다는 소녀의 권유에 'How long will it take?(얼마나 걸릴까요?)'로 소요 시간을 묻고 있으므로, 빈칸에는 ① '20분 정도요.' 또는 ⑤ '겨우 몇 분밖에 안 걸릴 거예요.'가 적절하다."
+    },
+    {
+      "number": 6,
+      "question": "다음 중 밑줄 친 부분의 쓰임이 <보기>와 같은 것은?\n\n<보기> The movie <u>that</u> we watched last night was scary.",
+      "options": [
+        "Can you hand me <u>that</u> blue sweater?",
+        "I heard <u>that</u> the restaurant will close soon.",
+        "This is the pop song <u>that</u> I listen to every day.",
+        "My belief is <u>that</u> small habits make a big difference.",
+        "<u>That</u> was the most exciting game I have ever seen."
+      ],
+      "answer": "3",
+      "explanation": "<보기>의 밑줄 친 that은 watched의 목적어가 없는 불완전한 절(we watched last night)을 이끌어, 선행사 The movie를 수식하는 관계사절을 이루고 있으므로 목적격 관계대명사이다. 따라서 전치사 to의 목적어가 없는 불완전한 절(I ~ every day)을 이끌어, 선행사 the pop song을 수식하는 관계사절을 이루는 목적격 관계대명사가 쓰인 ③의 that이 같은 쓰임으로 쓰였다. ① 지시 형용사 ② 명사절 접속사 ④ 명사절 접속사 ⑤ 지시 대명사"
+    },
+    {
+      "number": 7,
+      "question": "다음 대화를 읽고 물음에 답하시오.\nB: Excuse me, how can I get to the Star Stadium?\nG: You can get there by subway. Take line 4, the green line, and get off at Hangang Station.\nB: Line 4 and Hangang Station. Got it. How long will it take?\nG: A little more than 30 minutes.\n\n위 대화를 읽고 답할 수 없는 질문을 모두 고르면? (정답 2개)",
+      "options": [
+        "Where does the boy want to go?",
+        "Which station should the boy get on at?",
+        "What line should the boy take?",
+        "Which station should the boy get off at?",
+        "How long should the boy walk after getting off the subway?"
+      ],
+      "answer": "2, 5",
+      "explanation": "소년이 몇 호선을 타야하는지 어느 역에서 내려야 하는지 언급은 있으나, 출발역에 대해서는 정보가 없으므로 ② '소년은 어느 역에서 타야 하는가?'는 답할 수 없는 질문이다. 지하철을 타고 가는데 30분 조금 넘게 걸릴 거라고 소녀가 말하고 있으나, 내린 후에 얼마를 더 걸어야 하는지에 대한 대화 내용은 없으므로 ⑤ '소년은 지하철에서 내린 후에 얼마를 걸어야 하는가?'도 답할 수 없는 질문이다."
+    },
+    {
+      "number": 8,
+      "question": "다음 대화를 읽고 물음에 답하시오.\nB: Somi, I need help. ______________________________\nG: Sebit Park? Well, you can get there by bus or by subway, but the subway is better.\nB: OK. Which line should I take?\nG: Take line 3, and get off at Sebit Station.\nB: Line 3 and get off at Sebit Station. How long will it take?\nG: It'll take about 40 minutes.\nB: Is it that far?\nG: Yes. Anyway, why are you going to Sebit Park, Liam?\nB: Oh, there is an art fair this Saturday. You can come with me if you want.\nG: Really? I'm free this Saturday. Let's go together.\nB: Perfect. Let's meet here at 10.\n\n위 대화의 빈칸에 들어갈 말로 알맞은 것의 개수는?\n\nⓐ Where is Sebit Park located?\nⓑ How can I get to Sebit Park?\nⓒ What event is held at Sebit Park?\nⓓ What are people doing at Sebit Park this Saturday?\nⓔ Can you tell me the way to get to Sebit Park?\nⓕ What's the best way to get to Sebit Park from here?",
+      "options": [
+        "1개",
+        "2개",
+        "3개",
+        "4개",
+        "5개"
+      ],
+      "answer": "3",
+      "explanation": "소미가 Liam에게 세빛 공원까지 버스나 지하철을 탈 수 있으며 지하철이 더 좋다고 답하고 있으므로 빈칸에는 세빛 공원까지 가는 방법을 묻는 표현이 들어가야 한다. 따라서 ⓑ, ⓔ, ⓕ의 3개가 들어갈 수 있다."
+    },
+    {
+      "number": 9,
+      "question": "다음 대화를 읽고 물음에 답하시오.\nB: Somi, I need help. ______________________________\nG: Sebit Park? Well, you can get there by bus or by subway, but the subway is better.\nB: OK. Which line should I take?\nG: Take line 3, and get off at Sebit Station.\nB: Line 3 and get off at Sebit Station. How long will it take?\nG: It'll take about 40 minutes.\nB: Is it that far?\nG: Yes. Anyway, why are you going to Sebit Park, Liam?\nB: Oh, there is an art fair this Saturday. You can come with me if you want.\nG: Really? I'm free this Saturday. Let's go together.\nB: Perfect. Let's meet here at 10.\n\n위 대화를 다음과 같이 요약할 때, 밑줄 친 ㉠~㉤ 중, 알맞지 않은 것을 모두 고르면? (정답 2개)\n\nWhen Liam asks Somi ㉠<u>how to get to Sebit Park for a job fair that is held this Saturday</u>, Somi tells him ㉡<u>to take subway Line 3 and get off at Sebit Station</u>, and adds that ㉢<u>it will take about 40 minutes</u>. ㉣<u>Liam suggests going to the fair with him, and Somi accepts his suggestion</u>. ㉤<u>They agree to meet at 10 at Sebit Station</u>.",
+      "options": [
+        "㉠",
+        "㉡",
+        "㉢",
+        "㉣",
+        "㉤"
+      ],
+      "answer": "1, 5",
+      "explanation": "소미가 왜 세빛 공원에 가려고 하는지 묻자, Liam은 이번 주 토요일에 미술 박람회가 있다고 답하고 있으므로 ㉠의 취업 박람회는 내용과 일치하지 않는다. 또한, Liam은 소미에게 이번 주 토요일 10시에 여기[대화 장소]에서 만나자고 말하고 있으므로 ㉤의 세빛역도 내용과 일치하지 않는다."
+    },
+    {
+      "number": 10,
+      "question": "다음 대화를 읽고 아래 질문에 대한 답이 되도록 주어진 <조건>에 맞게 빈칸에 알맞은 말을 쓰시오.\n\nB: Excuse me. I'm going to the National Art Museum. What's the best way to get there?\nG: You can walk. Go straight for about 500 meters and turn left. It'll be on your right.\nB: I see. How long will it take?\nG: Only about 15 minutes.\nB: Really? Thanks.\n\nQ. How can the boy get to the destination?\n\n<조건>\n• walk를 어법에 맞게 사용할 것\n• 각 빈칸에 한 단어씩 쓸 것\n\n→ He can get there by (1)____ ____ ____ ____ ____ ____ and (2)____ ____.",
+      "options": [],
+      "answer": "walking straight for about 500 meters / turning left",
+      "subParts": [
+        {
+          "label": "(1)",
+          "answer": "walking straight for about 500 meters"
+        },
+        {
+          "label": "(2)",
+          "answer": "turning left"
+        }
+      ],
+      "explanation": "소년은 목적지에 어떻게 갈 수 있는가? → 그는 500미터 정도 곧장 걸어가서 왼쪽으로 돎으로써 거기에 갈 수 있다."
+    },
+    {
+      "number": 11,
+      "question": "다음 그림을 보고 <조건>에 맞게 빈칸에 알맞은 말을 쓰시오.\n(그림 설명: BEFORE 그림에서는 발표를 앞둔 민수가 긴장한 표정으로 손톱을 물어뜯고 있고, NOW 그림에서는 민수가 자신 있는 표정으로 웃고 있다.)\n\n<조건>\n• 과거의 습관을 나타내는 표현을 사용할 것\n• make, bite, a presentation, his nails를 사용할 것 (필요시 변형할 것)\n• 각 빈칸에 한 단어씩 쓸 것\n\nMinsu (1)____ ____ ____ ____ ____ before (2)____ ____ ____.",
+      "options": [],
+      "answer": "used to bite his nails / making a presentation",
+      "subParts": [
+        {
+          "label": "(1)",
+          "answer": "used to bite his nails"
+        },
+        {
+          "label": "(2)",
+          "answer": "making a presentation"
+        }
+      ],
+      "explanation": "[제시문] 민수는 발표하기 전에 손톱을 물어뜯곤 했었다."
+    },
+    {
+      "number": 12,
+      "question": "다음 글을 읽고 물음에 답하시오.\nModern street art comes in many different forms, and ⓐ<u>it</u> makes cities colorful and lively. Today, we are going to see some well-known street artworks in London.\n\nThe place ⓑ<u>that</u> we are going to visit is Shoreditch. Poor workers ⓒ<u>used to live</u> in this area, but now it is one of the hippest areas in London. We can find so many great pieces of street art here. Do you see the painting over there? It is by the artist STIK. He is famous for using only lines and dots in his paintings of human bodies. According to STIK, the three figures represent the past, present, and future of Shoreditch. Which figure ⓓ<u>represents</u> which? Well, look closely at the eyes of the three figures. They are just dots, but they will ⓔ<u>give you a clue</u>.\n\n윗글의 밑줄 친 ⓐ~ⓔ에 대한 설명으로 알맞지 않은 것을 모두 고르면? (정답 2개)",
+      "options": [
+        "ⓐ: modern street art를 가리키는 단수대명사이다.",
+        "ⓑ: The place를 선행사로 하는 목적격 관계대명사로, 생략할 수 없다.",
+        "ⓒ: 현재는 더 이상 그렇지 않은 과거의 상태를 나타내며 would live로 바꿔 쓸 수 있다.",
+        "ⓓ: 의문사(구)가 주어일 때 단수 취급하므로 주어인 Which figure에 수일치하여 쓰인 단수동사이다.",
+        "ⓔ: give a clue to you로 바꿔 쓸 수 있다."
+      ],
+      "answer": "2, 3",
+      "explanation": "ⓑ The place를 선행사로 하는 목적격 관계대명사인 것은 적절하나, 목적격 관계대명사이므로 생략할 수 있다. ⓒ 현재는 더 이상 그렇지 않은 과거의 상태를 나타내는 것은 적절하나, would가 '~하곤 했다'라는 뜻으로 쓰일 때에는 과거의 상태가 아닌 현재에 지속되지 않는 과거의 습관을 나타낼 때만 쓰인다. used to live는 과거의 습관이 아닌 과거의 상태를 나타내므로 used to live를 would live로 바꿔 쓸 수 없다."
+    },
+    {
+      "number": 13,
+      "question": "다음 글을 읽고 물음에 답하시오.\nModern street art comes in many different forms, and ⓐ<u>it</u> makes cities colorful and lively. Today, we are going to see some well-known street artworks in London.\n\nThe place ⓑ<u>that</u> we are going to visit is Shoreditch. Poor workers ⓒ<u>used to live</u> in this area, but now it is one of the hippest areas in London. We can find so many great pieces of street art here. Do you see the painting over there? It is by the artist STIK. He is famous for using only lines and dots in his paintings of human bodies. According to STIK, the three figures represent the past, present, and future of Shoreditch. Which figure ⓓ<u>represents</u> which? Well, look closely at the eyes of the three figures. They are just dots, but they will ⓔ<u>give you a clue</u>.\n\n윗글의 내용과 (A)~(C)가 일치하면 T, 일치하지 않으면 F를 쓸 때, 순서대로 연결된 것은?\n\n(A) Cities become colorful and lively because of modern street art that exists in various forms. (T/F)\n(B) STIK is a street artist who is famous for using various colors to express human bodies. (T/F)\n(C) The three figures in STIK's work mean three different period of Shoreditch. (T/F)",
+      "options": [
+        "T-T-F",
+        "T-F-F",
+        "T-F-T",
+        "F-T-T",
+        "F-F-T"
+      ],
+      "answer": "3",
+      "explanation": "(A) 다양한 형태로 존재하는 현대 거리 예술 때문에 도시들은 다채롭고 활기차게 된다. (T) (일치) (B) STIK은 인체를 표현하기 위해 다양한 색(→선과 점만)을 사용하는 것으로 유명한 거리 예술가이다. (F) (불일치) (C) STIK의 작품 속 세 인물들은 쇼어디치의 세 개의 다른 시간을 의미한다. (T) (일치)"
+    },
+    {
+      "number": 14,
+      "question": "다음 글을 읽고 물음에 답하시오.\nThe final stop of our tour today is Muswell Hill. Can't see any street artworks? Well, look down and look closely. Do you see the little chewing gum paintings? They are by the artist Ben Wilson. Wilson is well known for painting pictures on gum that people drop on the street. His gum paintings often carry ______________________________. For example, the one over here is a happy birthday wish for a loved one. Wilson's gum paintings are tiny, but they give great pleasure to many people.\n\n윗글의 빈칸에 들어갈 말로 알맞은 것은?",
+      "options": [
+        "political messages against the government",
+        "personal messages from ordinary people",
+        "warning messages about dirty streets",
+        "social messages to protect the Earth",
+        "messages to help people in need"
+      ],
+      "answer": "2",
+      "explanation": "뒤에서 For example(예를 들어)로 연결하여 사랑하는 사람을 위한 생일 축하 메시지를 구체적인 예로 보여주고 있으므로 Wilson의 껌 그림이 담고 있는 것은 ② '평범한 사람들의 개인적인 메시지'가 적절하다."
+    },
+    {
+      "number": 15,
+      "question": "다음 글을 읽고 물음에 답하시오.\nThe final stop of our tour today is Muswell Hill. Can't see any street artworks? Well, look down and look closely. Do you see the little chewing gum paintings? They are by the artist Ben Wilson. Wilson is well known for painting pictures on gum that people drop on the street. His gum paintings often carry ______________________________. For example, the one over here is a happy birthday wish for a loved one. Wilson's gum paintings are tiny, but they give great pleasure to many people.\n\n윗글을 읽고 다음 질문에 대한 대답을 완성할 때, 빈칸에 들어갈 알맞은 말은?\n\nQ: What effect do Wilson's tiny gum paintings have on many people?\nA: They ______________________________.",
+      "options": [
+        "cause people to complain about gum on the street",
+        "encourage many people to have a dream",
+        "make many people visit Muswell Hill",
+        "delight many people a lot",
+        "inspire other street artists"
+      ],
+      "answer": "4",
+      "explanation": "Wilson의 껌 그림들은 아주 작지만 많은 사람들에게 큰 기쁨을 준다고 했으므로 ④ '많은 사람들을 매우 기쁘게 한다'가 적절하다."
+    },
+    {
+      "number": 16,
+      "question": "다음 글을 읽고 물음에 답하시오.\nWe are now in Finsbury Park ⓐ<u>see</u> a painting by Banksy, an ⓑ<u>international</u> famous street artist. Banksy's artworks often carry social messages, and the green tree you see over there is a good example. As you can see, he created a green tree by spraying green paint on a wall behind a leafless tree. Next to the tree, there is a person who ⓒ<u>is held</u> a sprayer. What message does Banksy want to give us through this painting? In many people's opinion, he is telling us ⓓ<u>which</u> nature is having a hard time. They think he wants us ⓔ<u>take</u> better care of it.\n\n윗글의 밑줄 친 ⓐ~ⓔ 중, 어색한 부분을 바르게 고치지 못한 것은?",
+      "options": [
+        "ⓐ: see → to see",
+        "ⓑ: international → internationally",
+        "ⓒ: is held → is holding",
+        "ⓓ: which → that",
+        "ⓔ: take → taking"
+      ],
+      "answer": "5",
+      "explanation": "ⓔ take → to take (동사 want는 'want+목적어+목적격보어(to부정사)'의 5형식 구문으로 '~가 ...하기를 원하다'라는 뜻으로 쓰이므로, 단수동사 wants의 목적어 us에 이어지는 목적격보어 자리의 take를 taking이 아닌 to부정사 to take로 고쳐야 한다.)"
+    },
+    {
+      "number": 17,
+      "question": "다음 글을 읽고 물음에 답하시오.\nWe are now in Finsbury Park ⓐ<u>see</u> a painting by Banksy, an ⓑ<u>international</u> famous street artist. Banksy's artworks often carry social messages, and the green tree you see over there is a good example. As you can see, he created a green tree by spraying green paint on a wall behind a leafless tree. Next to the tree, there is a person who ⓒ<u>is held</u> a sprayer. What message does Banksy want to give us through this painting? In many people's opinion, he is telling us ⓓ<u>which</u> nature is having a hard time. They think he wants us ⓔ<u>take</u> better care of it.\n\n윗글을 읽고 다음 질문에 대한 알맞은 대답이 되도록 주어진 <조건>에 맞게 빈칸을 완성하시오.\n\nQ. How did Banksy create the green tree?\n\n<조건>\n• 수동태로 쓸 것\n• 각 빈칸에 한 단어씩 쓸 것\n\n→ It ____ ____ ____ ____ ____ ____ ____ ____ ____ ____ ____ ____ ____.",
+      "options": [],
+      "answer": "was created by spraying green paint on a wall behind a leafless tree",
+      "explanation": "Banksy는 초록색 나무를 어떻게 만들었는가? → 그것은 잎이 없는 나무 뒤의 벽에 초록색 페인트를 뿌림으로써 만들어졌다."
+    },
+    {
+      "number": 18,
+      "question": "다음 글을 읽고 물음에 답하시오.\nWe are now in Finsbury Park ⓐ<u>see</u> a painting by Banksy, an ⓑ<u>international</u> famous street artist. Banksy's artworks often carry social messages, and the green tree you see over there is a good example. As you can see, he created a green tree by spraying green paint on a wall behind a leafless tree. Next to the tree, there is a person who ⓒ<u>is held</u> a sprayer. What message does Banksy want to give us through this painting? In many people's opinion, he is telling us ⓓ<u>which</u> nature is having a hard time. They think he wants us ⓔ<u>take</u> better care of it.\n\n윗글의 주제로 알맞은 것은?",
+      "options": [
+        "the history of street art in Finsbury Park",
+        "street art that ruins the beauty of Finsbury Park",
+        "artists' responsibility for environmental protection",
+        "the process of Banksy's creation of a green tree in Finsbury Park",
+        "Banksy's street artwork with an environmental message"
+      ],
+      "answer": "5",
+      "explanation": "거리 예술가 Banksy가 핀즈베리 공원의 잎이 없는 나무 뒤쪽 벽에 초록색 페인트를 뿌려 만든 초록색 나무를 소개하고, 이 작품이 사람들에게 자연을 더 잘 보살펴야 한다는 메시지를 전달하고 있다는 내용이므로, 글의 주제로 ⑤ '환경적 메시지가 있는 Banksy의 거리 예술 작품'이 적절하다."
+    },
+    {
+      "number": 19,
+      "question": "다음 글을 읽고 물음에 답하시오.\nThe place that we are going to visit is Shoreditch. Poor workers used to live in this area, but now it is one of the hippest areas in London. We can find so many great pieces of street art here. Do you see the painting over there? It is by the artist STIK. He is famous for using only lines and dots in his paintings of human bodies. According to STIK, the three figures represent the past, present, and future of Shoreditch. Which figure represents which? Well, look closely at the eyes of the three figures. They are just dots, but they will give you a clue.\n\n윗글의 제목으로 알맞은 것은?",
+      "options": [
+        "Finding Clues to Understand Street Art",
+        "How Shoreditch Has Changed Over Time",
+        "Reading the History of Shoreditch Through Street Artwork",
+        "Attraction of Human Bodies Paintings with Lines and Dots",
+        "Exploring Street Art Through STIK's Three Figures in Shoreditch"
+      ],
+      "answer": "5",
+      "explanation": "멋진 거리 예술 작품들을 볼 수 있는 쇼어디치를 방문하여 예술가 STIK의 작품인 세 인물의 그림 스타일과 의미를 설명하는 내용이므로, 글의 제목으로 ⑤ '쇼어디치에 있는 STIK의 세 인물을 통한 거리 예술 탐방'이 적절하다."
+    },
+    {
+      "number": 20,
+      "question": "다음 글을 읽고 물음에 답하시오.\nThe place that we are going to visit is Shoreditch. Poor workers used to live in this area, but now it is one of the hippest areas in London. We can find so many great pieces of street art here. Do you see the painting over there? It is by the artist STIK. He is famous for using only lines and dots in his paintings of human bodies. According to STIK, the three figures represent the past, present, and future of Shoreditch. Which figure represents which? Well, look closely at the eyes of the three figures. They are just dots, but they will give you a clue.\n\n윗글을 읽고 다음 질문에 대한 알맞은 대답이 되도록 주어진 <조건>에 맞게 빈칸을 완성하시오.\n\nQ. How can we know which figure represents each period of the past, present, and future of Shoreditch?\n\n<조건>\n• 전치사 by를 사용할 것\n• 각 빈칸에 한 단어씩 쓸 것\n\n→ We can know it ____ ____ ____ ____ ____ ____ ____ ____ ____ ____.",
+      "options": [],
+      "answer": "by looking closely at the eyes of the three figures",
+      "explanation": "어떤 인물이 쇼어디치의 과거, 현재, 미래의 각 시기를 나타내는지 우리는 어떻게 알 수 있는가? → 우리는 세 인물의 눈을 자세히 봄으로써 그것을 알 수 있다."
+    },
+    {
+      "number": 21,
+      "question": "다음 글을 읽고 물음에 답하시오.\nModern street art comes in many different forms, and it makes cities ⓐ<u>colorful and lively</u>. Today, we are going to see some well-known street artworks in London.\n\nThe place that we are going to visit ⓑ<u>to be</u> Shoreditch. Poor workers used to live in this area, but now it is one of the hippest ⓒ<u>areas</u> in London. We can find so many great pieces of street art here. Do you see the painting over there? It is by the artist STIK. He is famous for using only lines and dots in his paintings of human bodies. According to STIK, the three figures represent the past, present, and future of Shoreditch. Which figure represents which? Well, look closely at the eyes of the three figures. They are just dots, but they will give you a clue.\n\nWe are now in Finsbury Park to see a painting by Banksy, an internationally famous street artist. Banksy's artworks often carry social messages, and (A)<u>여러분이 저쪽에서 보는 초록색 나무가 좋은 예입니다</u>. As you can see, he created a green tree by ⓓ<u>spraying</u> green paint on a wall behind a leafless tree. Next to the tree, (B)<u>분무기를 들고 있는 사람이 한 명 있습니다</u>. What message does Banksy want to give us through this painting? In many people's opinion, he is telling us that nature is having a hard time. They think he wants us to take better care of it.\n\nThe final stop of our tour today is Muswell Hill. Can't see any street artworks? Well, look down and look closely. Do you see the little chewing gum paintings? They are by the artist Ben Wilson. Wilson is well known for painting pictures on gum that people ⓔ<u>drop it</u> on the street. His gum paintings often carry personal messages from people he meets on the street. For example, the one over here is a happy birthday wish for a loved one. Wilson's gum paintings are tiny, but they give ⓕ<u>to many people</u> great pleasure.\n\n윗글의 밑줄 친 ⓐ~ⓕ 중, 어법상 어색한 것의 개수는?",
+      "options": [
+        "1개",
+        "2개",
+        "3개",
+        "4개",
+        "5개"
+      ],
+      "answer": "3",
+      "explanation": "ⓑ to be → is (The place가 관계사절인 'that ~ visit'의 수식을 받아 주어부를 이루고 있으므로 주어부에 이어지는 문장의 동사 자리이며, 주어의 핵심인 단수명사구인 The place이므로 to be를 주어에 수일치한 단수동사 is로 고쳐야 한다.) ⓔ drop it → drop (that은 명사 gum을 선행사로 하는 관계대명사로, 관계대명사는 접속사와 대명사의 역할을 동시에 하므로, 관계대명사 that에는 이미 선행사 gum을 가리키는 대명사 it이 포함되어 있다. 따라서 중복 사용된 drop 뒤의 it을 삭제해 drop it을 drop으로 고쳐야 한다.) ⓕ to many people → many people (수여동사 give는 'give+간접목적어+직접목적어'의 4형식 구문으로 쓰여 '~에게 ...을 주다'라는 뜻을 나타내며, 간접목적어 바로 뒤에 직접목적어 great pleasure가 있으므로 전치사 to를 삭제한 many people로 고쳐야 한다.)"
+    },
+    {
+      "number": 22,
+      "question": "다음 글을 읽고 물음에 답하시오.\nModern street art comes in many different forms, and it makes cities ⓐ<u>colorful and lively</u>. Today, we are going to see some well-known street artworks in London.\n\nThe place that we are going to visit ⓑ<u>to be</u> Shoreditch. Poor workers used to live in this area, but now it is one of the hippest ⓒ<u>areas</u> in London. We can find so many great pieces of street art here. Do you see the painting over there? It is by the artist STIK. He is famous for using only lines and dots in his paintings of human bodies. According to STIK, the three figures represent the past, present, and future of Shoreditch. Which figure represents which? Well, look closely at the eyes of the three figures. They are just dots, but they will give you a clue.\n\nWe are now in Finsbury Park to see a painting by Banksy, an internationally famous street artist. Banksy's artworks often carry social messages, and (A)<u>여러분이 저쪽에서 보는 초록색 나무가 좋은 예입니다</u>. As you can see, he created a green tree by ⓓ<u>spraying</u> green paint on a wall behind a leafless tree. Next to the tree, (B)<u>분무기를 들고 있는 사람이 한 명 있습니다</u>. What message does Banksy want to give us through this painting? In many people's opinion, he is telling us that nature is having a hard time. They think he wants us to take better care of it.\n\nThe final stop of our tour today is Muswell Hill. Can't see any street artworks? Well, look down and look closely. Do you see the little chewing gum paintings? They are by the artist Ben Wilson. Wilson is well known for painting pictures on gum that people ⓔ<u>drop it</u> on the street. His gum paintings often carry personal messages from people he meets on the street. For example, the one over here is a happy birthday wish for a loved one. Wilson's gum paintings are tiny, but they give ⓕ<u>to many people</u> great pleasure.\n\n윗글의 밑줄 친 (A), (B)의 우리말을 주어진 <조건>에 알맞게 각각 영작하시오.\n\n<조건>\n• (A), (B)에 적절한 관계대명사를 쓸 것 (that은 제외할 것)\n• <보기>의 단어 및 표현을 모두 포함시킬 것 (필요시 추가 및 변형할 것)\n• (A)는 12단어, (B)는 9단어로 각각 쓸 것\n\n<보기> a sprayer, over there, the green tree, a person, see, hold, example, there, good\n\n(A) ______________________\n(B) ______________________",
+      "options": [],
+      "answer": "the green tree which you see over there is a good example / there is a person who is holding a sprayer",
+      "subParts": [
+        {
+          "label": "(A)",
+          "answer": "the green tree which you see over there is a good example"
+        },
+        {
+          "label": "(B)",
+          "answer": "there is a person who is holding a sprayer"
+        }
+      ],
+      "explanation": "(A) '초록색 나무'를 '여러분이 저쪽에서 보는'이 수식하고 있으며 '초록색 나무'는 see(보다)의 의미상 목적어 역할을 하므로 적절한 관계대명사를 쓰되 that은 제외하라는 <조건>에 따라 목적격 관계대명사 which를 사용하여 영작한다. the green tree를 쓰고 목적격 관계대명사 which를 쓴 후, 목적어가 없는 불완전한 절이 이어지도록 you see over there를 써서 주어부를 완성한다. 주어부의 핵심인 단수명사구 the green tree에 수일치 하여 단수동사 is를 문장의 동사로 쓰고 보어로 a good example을 쓴다. (B) <보기>에 there가 있으므로 '~이 있다'라는 뜻의 'there+be동사+주어' 구문을 사용한다. 주어가 a person의 단수명사구이므로 be동사에 주어에 수일치한 단수동사 is를 써서 there is a person을 쓴다. a person을 '분무기를 들고 있는'이 수식해야 하며, a person이 관계사절의 의미상 주어 역할을 하므로 적절한 관계대명사를 쓰되 that은 제외하라는 <조건>에 따라 주격 관계대명사 who를 사용하여 영작한다. 주격 관계대명사 who 뒤에는 '들고 있는'의 의미이므로 현재진행형(be동사 현재형+현재분사) 시제를 사용해 관계사절의 동사 부분을 영작한다. 주격 관계대명사 뒤의 동사는 선행사에 수를 일치시켜야 하므로 단수명사구 a person에 수를 일치한 단수동사 is를 사용해 is holding을 쓴 후, 목적어 a sprayer를 쓴다."
+    },
+    {
+      "number": 23,
+      "question": "다음 글을 읽고 물음에 답하시오.\nModern street art comes in many different forms, and it makes cities ⓐ<u>colorful and lively</u>. Today, we are going to see some well-known street artworks in London.\n\nThe place that we are going to visit ⓑ<u>to be</u> Shoreditch. Poor workers used to live in this area, but now it is one of the hippest ⓒ<u>areas</u> in London. We can find so many great pieces of street art here. Do you see the painting over there? It is by the artist STIK. He is famous for using only lines and dots in his paintings of human bodies. According to STIK, the three figures represent the past, present, and future of Shoreditch. Which figure represents which? Well, look closely at the eyes of the three figures. They are just dots, but they will give you a clue.\n\nWe are now in Finsbury Park to see a painting by Banksy, an internationally famous street artist. Banksy's artworks often carry social messages, and (A)<u>여러분이 저쪽에서 보는 초록색 나무가 좋은 예입니다</u>. As you can see, he created a green tree by ⓓ<u>spraying</u> green paint on a wall behind a leafless tree. Next to the tree, (B)<u>분무기를 들고 있는 사람이 한 명 있습니다</u>. What message does Banksy want to give us through this painting? In many people's opinion, he is telling us that nature is having a hard time. They think he wants us to take better care of it.\n\nThe final stop of our tour today is Muswell Hill. Can't see any street artworks? Well, look down and look closely. Do you see the little chewing gum paintings? They are by the artist Ben Wilson. Wilson is well known for painting pictures on gum that people ⓔ<u>drop it</u> on the street. His gum paintings often carry personal messages from people he meets on the street. For example, the one over here is a happy birthday wish for a loved one. Wilson's gum paintings are tiny, but they give ⓕ<u>to many people</u> great pleasure.\n\n윗글을 읽고 답할 수 없는 질문은?",
+      "options": [
+        "How does modern street art affect cities?",
+        "Where are the places to visit on this tour?",
+        "What do the three figures in STIK's painting represent?",
+        "When people see the green tree artwork, how do people think Banksy wants them to treat nature?",
+        "How many gum paintings did Ben Wilson paint?"
+      ],
+      "answer": "5",
+      "explanation": "Ben Wilson의 아주 작은 껌 그림을 소개하는 투어가 마지막에 이어지나, 그 그림의 개수에 대한 언급은 없으므로 ⑤ 'Ben Wilson은 얼마나 많은 껌 그림을 그렸는가?'는 답할 수 없는 질문이다."
+    },
+    {
+      "number": 24,
+      "question": "다음 글을 읽고 물음에 답하시오.\nModern street art comes in many different forms, and it makes cities colorful and ⓐ<u>lively</u>. Today, we are going to see some well-known street artworks in London.\n\nThe place that we are going to visit is Shoreditch. Poor workers used to live in this area, but now it is one of the hippest areas in London. We can find so many great pieces of street art here. Do you see the painting over there? It is by the artist STIK. He is famous for using only lines and dots in his paintings of human bodies. According to STIK, the three figures represent the past, present, and future of Shoreditch. Which figure ⓑ<u>represents</u> which? Well, look closely at the eyes of the three figures. They are just dots, but they will give you a clue.\n\nWe are now in Finsbury Park to see a painting by Banksy, an internationally famous street artist. Banksy's artworks often carry social messages, and the green tree you see over there is a good example. As you can see, he created a green tree by ⓒ<u>spraying</u> green paint on a wall behind a leafless tree. Next to the tree, there is a person who is holding a sprayer. What message does Banksy want to give us through this painting? In many people's ⓓ<u>opinion</u>, he is telling us that nature is having a hard time. They think he wants us to take better care of it.\n\nThe final stop of our tour today is Muswell Hill. Can't see any street artworks? Well, look down and look closely. Do you see the little chewing gum paintings? They are by the artist Ben Wilson. Wilson is well known for painting pictures on gum that people drop on the street. His gum paintings often carry personal messages from people he meets on the street. For example, the one over here is a happy birthday wish for a loved one. Wilson's gum paintings are ⓔ<u>tiny</u>, but they give great pleasure to many people.\n\n윗글의 밑줄 친 ⓐ~ⓔ의 영영풀이로 알맞은 것을 모두 골라 짝지은 것은?\n\n<보기>\nⓐ lively: not interesting or exciting\nⓑ represent: to officially speak or take action for another person or group of people\nⓒ spray: to force liquid out of a container in many small drops\nⓓ opinion: your ideas or beliefs about a particular subject\nⓔ tiny: very small in size or amount",
+      "options": [
+        "ⓐ, ⓑ",
+        "ⓒ, ⓓ",
+        "ⓓ, ⓔ",
+        "ⓐ, ⓑ, ⓔ",
+        "ⓒ, ⓓ, ⓔ"
+      ],
+      "answer": "5",
+      "explanation": "ⓐ lively는 '활기찬'이라는 뜻이므로, 주어진 영영풀이인 '흥미롭거나 흥미진진하지 않은'은 적절하지 않다. 'full of interest or excitement(관심이나 신남으로 가득 찬)'로 고쳐야 한다. ⓑ 지문에서 represent는 '나타내다, 상징하다'라는 뜻으로 쓰였고, 주어진 영영풀이인 '다른 사람이나 집단의 사람들을 위해 공식적으로 말하거나 행동을 취하다'는 represent의 다른 뜻인 '대표하다'의 풀이이므로 적절하지 않다. 'to be a sign or symbol of something(무언가의 표시나 상징이 되다)'로 고쳐야 한다."
+    },
+    {
+      "number": 25,
+      "question": "다음 글을 읽고 물음에 답하시오.\nModern street art comes in many different forms, and it makes cities colorful and ⓐ<u>lively</u>. Today, we are going to see some well-known street artworks in London.\n\nThe place that we are going to visit is Shoreditch. Poor workers used to live in this area, but now it is one of the hippest areas in London. We can find so many great pieces of street art here. Do you see the painting over there? It is by the artist STIK. He is famous for using only lines and dots in his paintings of human bodies. According to STIK, the three figures represent the past, present, and future of Shoreditch. Which figure ⓑ<u>represents</u> which? Well, look closely at the eyes of the three figures. They are just dots, but they will give you a clue.\n\nWe are now in Finsbury Park to see a painting by Banksy, an internationally famous street artist. Banksy's artworks often carry social messages, and the green tree you see over there is a good example. As you can see, he created a green tree by ⓒ<u>spraying</u> green paint on a wall behind a leafless tree. Next to the tree, there is a person who is holding a sprayer. What message does Banksy want to give us through this painting? In many people's ⓓ<u>opinion</u>, he is telling us that nature is having a hard time. They think he wants us to take better care of it.\n\nThe final stop of our tour today is Muswell Hill. Can't see any street artworks? Well, look down and look closely. Do you see the little chewing gum paintings? They are by the artist Ben Wilson. Wilson is well known for painting pictures on gum that people drop on the street. His gum paintings often carry personal messages from people he meets on the street. For example, the one over here is a happy birthday wish for a loved one. Wilson's gum paintings are ⓔ<u>tiny</u>, but they give great pleasure to many people.\n\n윗글의 내용을 다음과 같이 정리할 때, ㉠~㉤ 중 일치하지 않은 것을 모두 고르면? (정답 2개)\n\n| Location | Artists & Artworks |\n|---|---|\n| Shoreditch | (1) Artist: STIK<br>• ㉠<u>the artwork that was painted by using only lines and a single color</u><br>• ㉡<u>The three figures stand for the past, present, and the future of the area</u>. |\n| Finsbury Park | (2) Artist: Banksy<br>• ㉢<u>a green tree that is created by spraying green paint on a wall beside a leafy tree</u><br>• ㉣<u>The artwork contains a message about protecting nature</u>. |\n| Muswell Hill | (3) Artist: Ben Wilson<br>• the paintings that are painted on gum on the street<br>• ㉤<u>The artworks show us people's personal messages</u>. |",
+      "options": [
+        "㉠",
+        "㉡",
+        "㉢",
+        "㉣",
+        "㉤"
+      ],
+      "answer": "1, 3",
+      "explanation": "STIK은 인체를 그린 그림에서 선과 점만을 사용하는 것으로 유명하다고 했으므로 ㉠의 '오직 선과 단색으로만' 그려졌다는 것은 일치하지 않는다. 또한 Banksy는 잎이 없는 나무 뒤쪽 벽에 초록색 페인트를 뿌려서 초록색 나무를 만들었다고 했으므로 ㉢의 '잎이 무성한 나무 옆의 벽'이라는 것은 일치하지 않는다."
+    },
+    {
+      "number": 26,
+      "question": "다음 글을 읽고 물음에 답하시오.\nModern street art comes in many different forms, and it makes cities colorful and lively. Today, we are going to see some well-known street artworks in London.\n\nThe place that we are going to visit is Shoreditch. Poor workers used to live in this area, but now it is one of the (A)[trendiest / most outdated] areas in London. We can find so many great pieces of street art here. Do you see the painting over there? It is by the artist STIK. He is famous for using only lines and dots in his paintings of human bodies. According to STIK, the three figures represent the past, present, and future of Shoreditch. Which figure represents which? Well, look closely at the eyes of the three figures. They are just dots, but they will give you a clue.\n\nWe are now in Finsbury Park to see a painting by Banksy, an internationally famous street artist. Banksy's artworks often carry social messages, and the green tree you see over there is a good example. As you can see, he created a green tree by spraying green paint on a wall behind a leafless tree. Next to the tree, there is a person who is holding a sprayer. What message does Banksy want to give us through this painting? In many people's opinion, he is telling us that nature is having a (B)[flourishing / difficult] time. They think he wants us to take better care of it.\n\nThe final stop of our tour today is Muswell Hill. Can't see any street artworks? Well, look down and look closely. Do you see the little chewing gum paintings? They are by the artist Ben Wilson. Wilson is well known for painting pictures on gum that people drop on the street. His gum paintings often carry personal messages from people he meets on the street. For example, the one over here is a happy birthday wish for a loved one. Wilson's gum paintings are (C)[tiny / attractive], but they give great pleasure to many people.\n\n윗글의 괄호 (A), (B), (C)에서 흐름상 알맞은 말로 바르게 연결된 것은?",
+      "options": [
+        "(A) trendiest – (B) flourishing – (C) attractive",
+        "(A) trendiest – (B) difficult – (C) attractive",
+        "(A) trendiest – (B) difficult – (C) tiny",
+        "(A) most outdated – (B) difficult – (C) tiny",
+        "(A) most outdated – (B) flourishing – (C) attractive"
+      ],
+      "answer": "3",
+      "explanation": "(A) 쇼어디치는 가난한 노동자들이 살았었다는 문장과 but(하지만)으로 연결되어 있으므로 상반되는 내용이 들어가야 하고, 뒤로 이곳에서 정말 많은 멋진 거리 예술 작품들을 볼 수 있다는 내용이 이어지므로 '가장 최신 유행을 따르는' 지역이라는 흐름이 자연스럽다. 따라서 trendiest가 적절하다. (B) Banksy는 잎이 없는 나무 뒤의 벽에 초록색 페인트를 뿌려 작품을 만들었다고 했으며, 사람들이 이 작품을 볼 때 Banksy가 자신들이 자연을 더 잘 돌보길 원한다고 생각한다는 내용이 이어지므로 사람들이 생각하기에 Banksy가 우리에게 말하고자 하는 내용으로 자연이 '어려운' 시간을 보내고 있다는 흐름이 자연스럽다. 따라서 difficult가 적절하다. (C) but(하지만)으로 Wilson의 껌 그림이 많은 사람들에게 큰 기쁨을 준다는 긍정적인 내용과 연결되어 있으므로, 대조되는 내용이 되도록 껌 그림이 '아주 작다'는 흐름이 자연스럽다. 따라서 tiny가 적절하다."
+    },
+    {
+      "number": 27,
+      "question": "다음 글을 읽고 물음에 답하시오.\nModern street art comes in many different forms, and it makes cities colorful and lively. Today, we are going to see some well-known street artworks in London.\n\nThe place that we are going to visit is Shoreditch. Poor workers used to live in this area, but now it is one of the (A)[trendiest / most outdated] areas in London. We can find so many great pieces of street art here. Do you see the painting over there? It is by the artist STIK. He is famous for using only lines and dots in his paintings of human bodies. According to STIK, the three figures represent the past, present, and future of Shoreditch. Which figure represents which? Well, look closely at the eyes of the three figures. They are just dots, but they will give you a clue.\n\nWe are now in Finsbury Park to see a painting by Banksy, an internationally famous street artist. Banksy's artworks often carry social messages, and the green tree you see over there is a good example. As you can see, he created a green tree by spraying green paint on a wall behind a leafless tree. Next to the tree, there is a person who is holding a sprayer. What message does Banksy want to give us through this painting? In many people's opinion, he is telling us that nature is having a (B)[flourishing / difficult] time. They think he wants us to take better care of it.\n\nThe final stop of our tour today is Muswell Hill. Can't see any street artworks? Well, look down and look closely. Do you see the little chewing gum paintings? They are by the artist Ben Wilson. Wilson is well known for painting pictures on gum that people drop on the street. His gum paintings often carry personal messages from people he meets on the street. For example, the one over here is a happy birthday wish for a loved one. Wilson's gum paintings are (C)[tiny / attractive], but they give great pleasure to many people.\n\n윗글의 목적으로 알맞은 것은?",
+      "options": [
+        "to show the role of London's workers in economic growth",
+        "to warn people not to drop chewing gum on the street",
+        "to explain how London's street artists participate in social issues",
+        "to encourage people to plant more trees and care for them",
+        "to introduce well-known street artworks and the artists in London"
+      ],
+      "answer": "5",
+      "explanation": "런던의 쇼어디치, 핀즈베리 공원, 머스웰 힐을 방문하여 유명한 거리 예술 작품과 그 작가에 관해 소개하고 있는 내용이므로, 글의 목적으로 ⑤ '런던에 잘 알려진 거리 예술 작품들과 그 작가들을 소개하기 위해'가 적절하다."
+    },
+    {
+      "number": 28,
+      "question": "다음 글을 읽고 물음에 답하시오.\nModern street art comes in many different forms, and it makes cities colorful and lively. Today, we are going to see some well-known street artworks in London.\n\nThe place that we are going to visit is Shoreditch. Poor workers used to live in this area, but now it is one of the (A)[trendiest / most outdated] areas in London. We can find so many great pieces of street art here. Do you see the painting over there? It is by the artist STIK. He is famous for using only lines and dots in his paintings of human bodies. According to STIK, the three figures represent the past, present, and future of Shoreditch. Which figure represents which? Well, look closely at the eyes of the three figures. They are just dots, but they will give you a clue.\n\nWe are now in Finsbury Park to see a painting by Banksy, an internationally famous street artist. Banksy's artworks often carry social messages, and the green tree you see over there is a good example. As you can see, he created a green tree by spraying green paint on a wall behind a leafless tree. Next to the tree, there is a person who is holding a sprayer. What message does Banksy want to give us through this painting? In many people's opinion, he is telling us that nature is having a (B)[flourishing / difficult] time. They think he wants us to take better care of it.\n\nThe final stop of our tour today is Muswell Hill. Can't see any street artworks? Well, look down and look closely. Do you see the little chewing gum paintings? They are by the artist Ben Wilson. Wilson is well known for painting pictures on gum that people drop on the street. His gum paintings often carry personal messages from people he meets on the street. For example, the one over here is a happy birthday wish for a loved one. Wilson's gum paintings are (C)[tiny / attractive], but they give great pleasure to many people.\n\n윗글의 내용과 일치하지 않는 것의 개수는?\n\n㉠ In Shoreditch, visitors can enjoy many wonderful pieces of street art.\n㉡ Banksy is an artist who avoids showing social problems in his art.\n㉢ Banksy painted a tree that has no leaves on a wall in Finsbury Park.\n㉣ In Banksy's artwork, the person next to the tree is holding a saw to cut it down.\n㉤ Ben Wilson uses chewing gum that people dropped on the street for his paintings.\n㉥ Ben Wilson never includes any messages in his gum paintings.",
+      "options": [
+        "1개",
+        "2개",
+        "3개",
+        "4개",
+        "5개"
+      ],
+      "answer": "4",
+      "explanation": "내용상 일치하지 않는 것의 개수는 4개이다. ㉡ Banksy의 예술 작품들은 종종 사회적 메시지를 담고 있다고 했으므로 'Banksy는 그의 예술에서 사회적 문제를 보여주는 것을 피하는 예술가이다.'는 일치하지 않는 내용이다. ㉢ Banksy는 핀즈베리 공원의 잎이 없는 나무 뒤쪽의 벽에 초록색 페인트를 뿌려 초록색 나무를 만들었다고 했으므로 'Banksy는 핀즈베리 공원의 한 벽에 잎이 없는 나무를 그렸다.'는 일치하지 않는 내용이다. ㉣ Banksy의 초록색 나무 작품에서 나무 옆에는 분무기를 든 사람이 있다고 했으므로 'Banksy의 작품에서, 나무 옆에 있는 사람은 그것을 자르기 위한 톱을 들고 있다.'는 일치하지 않는 내용이다. ㉥ Ben Wilson은 껌 그림들에 길에서 그가 만난 사람들의 개인적인 메시지를 담는다고 했으므로 'Ben Wilson은 그의 껌 그림에 어떤 메시지도 결코 포함하지 않는다.'는 일치하지 않는 내용이다."
+    },
+    {
+      "number": 29,
+      "question": "다음 글을 아래와 같이 소미와 Liam의 대화문으로 구성할 때 빈칸에 들어갈 알맞은 말을 쓰시오.\n\nWe are now in Finsbury Park to see a painting by Banksy, an internationally famous street artist. Banksy's artworks often carry social messages, and the green tree you see over there is a good example. As you can see, he created a green tree by spraying green paint on a wall behind a leafless tree. Next to the tree, there is a person who is holding a sprayer. What message does Banksy want to give us through this painting? In many people's opinion, he is telling us that nature is having a hard time. They think he wants us to take better care of it.\n\nA: Somi, look at the green tree! The tree has no leaves, and (1)____ ____ was sprayed on the (2)____ behind it.\nB: That is a work by Banksy, a well-known (3)____ ____. He is famous for making artworks that deliver (4)____ ____.\nA: Then, what message does this work give to us? A person beside the tree is holding a (5)____.\nB: How do you feel about it, Liam?\nA: Umm... I feel like the tree is having a (6)____ ____.\nB: Right. Many people feel the same way. People think Banksy's message is that we should (7)____ ____ ____ ____ nature.",
+      "options": [],
+      "answer": "green paint / wall / street artist / social messages / sprayer / hard time / take better care of",
+      "subParts": [
+        {
+          "label": "(1)",
+          "answer": "green paint"
+        },
+        {
+          "label": "(2)",
+          "answer": "wall"
+        },
+        {
+          "label": "(3)",
+          "answer": "street artist"
+        },
+        {
+          "label": "(4)",
+          "answer": "social messages"
+        },
+        {
+          "label": "(5)",
+          "answer": "sprayer"
+        },
+        {
+          "label": "(6)",
+          "answer": "hard time"
+        },
+        {
+          "label": "(7)",
+          "answer": "take better care of"
+        }
+      ],
+      "explanation": "[제시문] A: 소미야, 저 초록색 나무 좀 봐! 나무에는 잎이 없고, 그 뒤의 벽에는 초록색 페인트가 뿌려졌어. B: 저건 잘 알려진 거리 예술가인 Banksy의 작품이야. 그는 사회적 메시지를 전달하는 작품을 만드는 것으로 유명해. A: 그럼 이 작품은 우리에게 어떤 메시지를 주는 걸까? 나무 옆에 있는 사람은 분무기를 들고 있어. B: Liam, 너는 어떻게 느끼니? A: 음... 나는 나무가 힘든 시간을 보내고 있는 것 같아. B: 맞아. 많은 사람들도 똑같이 생각해. 사람들은 Banksy의 메시지가 우리가 자연을 더 잘 돌봐야 한다는 것이라고 생각해."
+    },
+    {
+      "number": 30,
+      "question": "다음 대화와 일치하도록 <조건>에 맞게 빈칸을 완성하시오.\n\nOlivia: Who are you looking for?\nTom: I am looking for the art club leader. I promised to have an interview with her.\nOlivia: She is in the art room now.\n\n(1) Tom is looking for ____ ____ ____ ____ ____ ____ ____ ____ ____ ____ ____ ____.\n\nMinsu: Hana, is that a new smartphone?\nHana: Yes. My parents bought it for my birthday last Saturday.\nMinsu: Wow! It looks so light.\n\n(2) Hana's new smartphone ____ ____ ____ ____ ____ ____ ____ last Saturday (3)____ so light.\n\n<조건>\n• 목적격 관계대명사를 사용할 것 (that은 제외할 것)\n• 각 빈칸에 한 단어씩 쓸 것",
+      "options": [],
+      "answer": "the art club leader whom he promised to have an interview with / which her parents bought for her birthday / looks",
+      "subParts": [
+        {
+          "label": "(1)",
+          "answer": "the art club leader whom he promised to have an interview with",
+          "acceptedAnswers": [
+            "the art club leader who he promised to have an interview with",
+            "the art club leader with whom he promised to have an interview"
+          ]
+        },
+        {
+          "label": "(2)",
+          "answer": "which her parents bought for her birthday"
+        },
+        {
+          "label": "(3)",
+          "answer": "looks"
+        }
+      ],
+      "explanation": "[제시문] Olivia: 누구를 찾고 있니? Tom: 미술 동아리 리더를 찾고 있어. 그녀와 인터뷰를 하기로 약속했거든. Olivia: 그녀는 지금 미술실에 있어. (1) Tom은 그가 인터뷰하기로 약속했던 미술 동아리 리더를 찾고 있다. 민수: 하나야, 그것은 새 스마트폰이니? 하나: 응. 부모님이 지난 토요일에 내 생일을 위해 사주셨어. 민수: 와! 그것은 정말 가벼워 보여. (2) 부모님이 그녀의 생일을 위해 사주신 하나의 새 스마트폰은 정말 가벼워 보인다."
+    }
+  ]
+}
