@@ -1,0 +1,1077 @@
+{
+  "R1": [
+    {
+      "number": 1,
+      "question": "다음 중 단어의 관계가 나머지 넷과 다른 하나는?",
+      "options": [
+        "concern - worry",
+        "reliable - trusted",
+        "positive - negative",
+        "sensible - reasonable",
+        "look after – take care of"
+      ],
+      "answer": "3"
+    },
+    {
+      "number": 2,
+      "question": "다음 우리말을 영작할 때 빈칸에 들어가지 않는 단어는?\n\n나는 기꺼이 이 유용한 앱을 다운로드 하겠습니다.\n→ I ________ ________ to ________ this ________ app.",
+      "options": [
+        "download",
+        "willing",
+        "am",
+        "useful",
+        "happily"
+      ],
+      "answer": "5"
+    },
+    {
+      "number": 3,
+      "question": "다음 빈칸에 들어갈 말로 알맞은 것은?\n\n__________ my teeth, I listened to the radio.",
+      "options": [
+        "Brush",
+        "Brushed",
+        "Brushing",
+        "To brush",
+        "To brushing"
+      ],
+      "answer": "3"
+    },
+    {
+      "number": 4,
+      "question": "다음 주어진 문장과 의미가 같은 것은?\n\nThe more you have, the fatter you get.",
+      "options": [
+        "Since you have much, you get fat.",
+        "When you get fat, you'll have much.",
+        "If you get fat, you'll have more food.",
+        "Although you have much, you get fat.",
+        "You'll get fatter if you have more food."
+      ],
+      "answer": "5"
+    },
+    {
+      "number": 5,
+      "question": "다음 중 어법상 어색한 문장은?",
+      "options": [
+        "Having no money, I couldn't buy it.",
+        "Being Monday, the museum was not open.",
+        "Running for the bus, I dropped my book.",
+        "Not knowing what to do, I asked him for help.",
+        "There being no bridge, we had to swim across the river."
+      ],
+      "answer": "2"
+    },
+    {
+      "number": 6,
+      "question": "다음 두 문장을 한 문장으로 바르게 연결한 것은? (정답 2개)\n\n• She felt tired.\n• She went to bed early.",
+      "options": [
+        "Feeling tired, going to bed early.",
+        "Being felt tired, she went to bed early.",
+        "Feeling tired, she went to bed early.",
+        "Because she felt tired, going to bed early.",
+        "Because she felt tired, she went to bed early."
+      ],
+      "answer": "3, 5"
+    },
+    {
+      "number": 7,
+      "question": "다음 중 밑줄 친 부분을 분사구문으로 바르게 바꾼 것은?",
+      "options": [
+        "<u>When I finished jogging</u>, I drank cold water. → I having finished jogging.",
+        "<u>If you buy this machine</u>, you can save your time. → Buying this machine",
+        "<u>Because I felt confident</u>, I didn't hesitate. → Felt confident",
+        "<u>When I was left alone</u>, I felt scared. → Leaving alone,",
+        "<u>As they didn't know each other</u>, they had many questions to ask. → Didn't know each other,"
+      ],
+      "answer": "2"
+    },
+    {
+      "number": 8,
+      "question": "다음 문장에서 어법상 어색한 부분을 찾아 문장을 다시 쓰시오. ※ 완전한 문장으로 쓰시오.\n\n(1) Sang happily, the boys walked around the lake.\n(2) Been very late, they could not enter the show.",
+      "options": [],
+      "answer": "Singing happily, the boys walked around the lake. / Being very late, they could not enter the show.",
+      "subParts": [
+        {
+          "label": "(1)",
+          "answer": "Singing happily, the boys walked around the lake."
+        },
+        {
+          "label": "(2)",
+          "answer": "Being very late, they could not enter the show."
+        }
+      ]
+    },
+    {
+      "number": 9,
+      "question": "다음 대화의 빈칸에 들어갈 말로 알맞은 것을 모두 고르면? (정답 2개)\n\nB: I'm going to buy a jumper with my allowance.\nG: I see. Don't forget to ______________________.\nB: Don't worry. I won't.",
+      "options": [
+        "give me a receipt",
+        "save the document",
+        "compare prices before buying it",
+        "spend as much money as possible",
+        "record your spending after buying it"
+      ],
+      "answer": "3, 5"
+    },
+    {
+      "number": 10,
+      "question": "다음 대화가 자연스럽게 이어지도록 (A)~(D)를 바르게 연결한 것은?\n\n(A) Yes, but I like the design of the white ones better.\n(B) These two pairs of shoes are on sale! Which do you prefer?\n(C) Why is that? The black ones are cheaper.\n(D) Well, I prefer the white shoes to the black ones.",
+      "options": [
+        "(B)-(C)-(A)-(D)",
+        "(B)-(D)-(C)-(A)",
+        "(C)-(A)-(B)-(D)",
+        "(C)-(B)-(D)-(A)",
+        "(C)-(D)-(B)-(A)"
+      ],
+      "answer": "2"
+    },
+    {
+      "number": 11,
+      "question": "다음 대화를 읽고 물음에 답하시오.\nAmy: (A)<u>Which do you prefer</u>, the Special Sandwich or the Classic Sandwich?\nLori: Well, the Special Sandwich is the healthier choice. It's made with lots of fresh vegetables and other healthy ingredients.\nAmy: But it's much more expensive than the Classic Sandwich.\nLori: I know, but (B)______________________________. Eating healthy is important to me.\nAmy: I prefer the cheaper one. I'll spend my money on books instead.\nLori: I guess our spending habits are different.\n\n위 대화의 밑줄 친 (A)의 의도로 알맞은 것은?",
+      "options": [
+        "더 좋아하는 것 묻기",
+        "환불 요청하기",
+        "제안하기",
+        "광고하기",
+        "거절하기"
+      ],
+      "answer": "1"
+    },
+    {
+      "number": 12,
+      "question": "다음 대화를 읽고 물음에 답하시오.\nAmy: (A)<u>Which do you prefer</u>, the Special Sandwich or the Classic Sandwich?\nLori: Well, the Special Sandwich is the healthier choice. It's made with lots of fresh vegetables and other healthy ingredients.\nAmy: But it's much more expensive than the Classic Sandwich.\nLori: I know, but (B)______________________________. Eating healthy is important to me.\nAmy: I prefer the cheaper one. I'll spend my money on books instead.\nLori: I guess our spending habits are different.\n\n위 대화의 빈칸 (B)에 들어갈 말로 알맞은 것을 고르시오.\n\nWhich of the following fits in the blank (B)?",
+      "options": [
+        "I prefer the Classic Sandwich to the Special Sandwich.",
+        "I prefer the Special Sandwich than the Classic Sandwich.",
+        "I prefer the Classic Sandwich on the Special Sandwich.",
+        "I like the Classic Sandwich better than the Special Sandwich.",
+        "I prefer the Special Sandwich to the Classic Sandwich."
+      ],
+      "answer": "5"
+    },
+    {
+      "number": 13,
+      "question": "다음 대화를 읽고 물음에 답하시오.\nAmy: (A)<u>Which do you prefer</u>, the Special Sandwich or the Classic Sandwich?\nLori: Well, the Special Sandwich is the healthier choice. It's made with lots of fresh vegetables and other healthy ingredients.\nAmy: But it's much more expensive than the Classic Sandwich.\nLori: I know, but (B)______________________________. Eating healthy is important to me.\nAmy: I prefer the cheaper one. I'll spend my money on books instead.\nLori: I guess our spending habits are different.\n\n위 대화의 내용과 일치하지 않는 것을 고르시오.\n\nWhich of the following is NOT true according to the dialog?",
+      "options": [
+        "두 사람은 선호하는 샌드위치에 관해 이야기하고 있다.",
+        "스페셜 샌드위치는 신선한 채소와 건강한 재료로 만들어져있다.",
+        "스페셜 샌드위치가 클래식 샌드위치보다 비싸다.",
+        "Amy는 스페셜 샌드위치를 선호한다.",
+        "Lori는 소비할 때 가격을 제일 중요한 요소로 생각하지 않는다."
+      ],
+      "answer": "4"
+    },
+    {
+      "number": 14,
+      "question": "다음 대화의 빈칸에 들어갈 알맞은 말을 주어진 <조건>에 알맞게 쓰시오.\n\nA: I will go on a trip to Jeju tomorrow.\nB: I see. ______________________ your sunglasses. (forget, bring)\nA: Okay, I won't. Thank you for reminding me.\n\n<조건>\n괄호 안에 주어진 단어를 사용할 것",
+      "options": [],
+      "answer": "Don't forget to bring"
+    },
+    {
+      "number": 15,
+      "question": "다음 글을 읽고 물음에 답하시오.\nBorrow from your neighbors!\nAsk Your Neighbors helps people easily (A)[find / finding] items that they can borrow from others. First, users download the app and search for another user that has the item they need. Then they pick up the item and return it later.\n\nJasmine : December 12, 2019\nI asked for a board game and got one in less than 30 minutes. I love saving money by (B)[borrow / borrowing] things that I don't often need. Also, I think it's environmentally friendly. The fewer products we buy, the more resources we save.\n\nCassandra : March 7, 2020\nSeeing a lot of positive reviews, I decided to borrow a bike helmet. When I got it, however, it was (C)[broke / broken]. I was so upset! ⓐ______________________________\n\nAsk Your Neighbors : March 9, 2020\nWe're sorry that you had such a negative experience. To fix this issue, we are asking lenders to update the pictures of their items regularly. This will let other users know the exact condition of the product.\n\n위 글의 괄호 (A), (B), (C)에서 어법상 알맞은 말로 바르게 연결된 것은?",
+      "options": [
+        "(A) find – (B) borrowing – (C) broken",
+        "(A) find – (B) borrowing – (C) broke",
+        "(A) find – (B) borrow – (C) broken",
+        "(A) finding – (B) borrow – (C) broken",
+        "(A) finding – (B) borrowing – (C) broke"
+      ],
+      "answer": "1"
+    },
+    {
+      "number": 16,
+      "question": "다음 글을 읽고 물음에 답하시오.\nBorrow from your neighbors!\nAsk Your Neighbors helps people easily (A)[find / finding] items that they can borrow from others. First, users download the app and search for another user that has the item they need. Then they pick up the item and return it later.\n\nJasmine : December 12, 2019\nI asked for a board game and got one in less than 30 minutes. I love saving money by (B)[borrow / borrowing] things that I don't often need. Also, I think it's environmentally friendly. The fewer products we buy, the more resources we save.\n\nCassandra : March 7, 2020\nSeeing a lot of positive reviews, I decided to borrow a bike helmet. When I got it, however, it was (C)[broke / broken]. I was so upset! ⓐ______________________________\n\nAsk Your Neighbors : March 9, 2020\nWe're sorry that you had such a negative experience. To fix this issue, we are asking lenders to update the pictures of their items regularly. This will let other users know the exact condition of the product.\n\n위 글의 빈칸 ⓐ에 들어갈 말로 어색한 것은?",
+      "options": [
+        "I will never use this app again.",
+        "I felt guilty that the helmet was broken.",
+        "This kind of happening shouldn't happen again.",
+        "I hope next users will avoid such a bad experience like me using this app.",
+        "I want you to warn the lender of the inconvenience I had because of the broken helmet."
+      ],
+      "answer": "2"
+    },
+    {
+      "number": 17,
+      "question": "다음 글을 읽고 물음에 답하시오.\nI can look after your pet!\nPet Sitter Finder is the (A)__________ app for pet lovers and pet owners. It helps pet owners find reliable people to look after their pets. When a pet owner is (B)__________ pet sitters, he or she uploads a post. Pet sitters or dog walkers can then send messages to the owner. The owner checks their reviews and chooses the best person.\n\nSon: What great apps! We can borrow tent and find someone to take care of our dog.\nDad: That's right. These kinds of services are part of the \"sharing economy.\" People can share their items with others and provide services to them at a small fee or for free.\nSon: But these services do have some (C)________. Some people left negative reviews about the services.\nDad: Well, I think the more people use the services, the more they will improve.\n\n위 글의 빈칸 (A), (B), (C)에 들어갈 말로 알맞게 연결된 것은?",
+      "options": [
+        "(A) perfect – (B) looking for – (C) weaknesses",
+        "(A) perfect – (B) looking after – (C) strengths",
+        "(A) imperfect – (B) looking for – (C) weaknesses",
+        "(A) imperfect – (B) looking after – (C) weaknesses",
+        "(A) perfect – (B) looking for – (C) strengths"
+      ],
+      "answer": "1"
+    },
+    {
+      "number": 18,
+      "question": "다음 글을 읽고 물음에 답하시오.\nI can look after your pet!\nPet Sitter Finder is the (A)__________ app for pet lovers and pet owners. It helps pet owners find reliable people to look after their pets. When a pet owner is (B)__________ pet sitters, he or she uploads a post. Pet sitters or dog walkers can then send messages to the owner. The owner checks their reviews and chooses the best person.\n\nSon: What great apps! We can borrow tent and find someone to take care of our dog.\nDad: That's right. These kinds of services are part of the \"sharing economy.\" People can share their items with others and provide services to them at a small fee or for free.\nSon: But these services do have some (C)________. Some people left negative reviews about the services.\nDad: Well, I think the more people use the services, the more they will improve.\n\n위 글의 내용과 일치하는 것은?",
+      "options": [
+        "모든 사람이 공유경제에 대해 긍정적이다.",
+        "Pet Sitter Finder는 애완견을 대여해주는 공유앱이다.",
+        "앱 이용자들의 후기를 읽고 서비스를 이용할 수 있다.",
+        "공유경제란 물건을 공유하는 것으로 서비스는 제외된다.",
+        "사람들이 서비스를 이용하더라도 결국 공유서비스는 쇠퇴할 것이다."
+      ],
+      "answer": "3"
+    },
+    {
+      "number": 19,
+      "question": "다음 글을 읽고 물음에 답하시오.\nBorrow from your neighbors!\nAsk Your Neighbors helps people easily find items that they can borrow from others. First, users download the app and search for another user (A)________ has the item they need. Then they pick up the item and return it later.\n\nJasmine : December 12, 2019\nI asked for a board game and got one in less than 30 minutes. I love saving money by borrowing things (A)________ I don't often need. Also, I think it's environmentally friendly. (B)__________ products we buy, (C)__________ resources we save.\n\nCassandra : March 7, 2020\nⓐ<u>Seeing a lot of positive reviews</u>, I decided to borrow a bike helmet. When I got it, however, it was broken. I was so upset!\n\nAsk Your Neighbors : March 9, 2020\nWe're sorry (A)________ you had such a negative experience. To fix this issue, we are ⓑ(ask, lenders, update) the pictures of their items regularly. This will ⓒ(let, other users, know) the exact condition of the product.\n\n위 글의 빈칸 (A)에 공통으로 들어갈 말로 알맞은 것은?",
+      "options": [
+        "which",
+        "when",
+        "that",
+        "where",
+        "who"
+      ],
+      "answer": "3"
+    },
+    {
+      "number": 20,
+      "question": "다음 글을 읽고 물음에 답하시오.\nBorrow from your neighbors!\nAsk Your Neighbors helps people easily find items that they can borrow from others. First, users download the app and search for another user (A)________ has the item they need. Then they pick up the item and return it later.\n\nJasmine : December 12, 2019\nI asked for a board game and got one in less than 30 minutes. I love saving money by borrowing things (A)________ I don't often need. Also, I think it's environmentally friendly. (B)__________ products we buy, (C)__________ resources we save.\n\nCassandra : March 7, 2020\nⓐ<u>Seeing a lot of positive reviews</u>, I decided to borrow a bike helmet. When I got it, however, it was broken. I was so upset!\n\nAsk Your Neighbors : March 9, 2020\nWe're sorry (A)________ you had such a negative experience. To fix this issue, we are ⓑ(ask, lenders, update) the pictures of their items regularly. This will ⓒ(let, other users, know) the exact condition of the product.\n\n위 글의 빈칸 (B), (C)에 들어갈 말로 알맞은 것은?",
+      "options": [
+        "(B) A fewer – (C) a more",
+        "(B) Many – (C) much",
+        "(B) The fewer – (C) the more",
+        "(B) Fewer – (C) more",
+        "(B) The more – (C) the more"
+      ],
+      "answer": "3"
+    },
+    {
+      "number": 21,
+      "question": "다음 글을 읽고 물음에 답하시오.\nPet Sitter Finder is the perfect app for pet lovers and pet owners. It helps pet owners find reliable people to look after their pets.\n\n(A) When a pet owner is looking for pet sitters, he or she uploads a post.\n(B) The owner checks their reviews and chooses the best person.\n(C) Pet sitters or dog walkers can then send messages to the owner.\n\nGeorge : November 12, 2019\nI use this app whenever I'm going out of town. I have some concerns about my personal information, though. What if people use my phone number for other purposes?\n\nPet Sitter Finder : November 14, 2019\nWe're aware of this issue. We're now developing a system that allows users to communicate freely without showing their personal information.\n\nSamantha : February 22, 2020\nAnimals aren't allowed in my apartment, so I don't have any pets. However, by using Pet Sitter Finder, I can experience the joy of walking a dog.\n\n위 주어진 글에 이어질 순서로 알맞은 것은?",
+      "options": [
+        "(A)-(B)-(C)",
+        "(A)-(C)-(B)",
+        "(B)-(A)-(C)",
+        "(B)-(C)-(A)",
+        "(C)-(A)-(B)"
+      ],
+      "answer": "2"
+    },
+    {
+      "number": 22,
+      "question": "다음 글을 읽고 물음에 답하시오.\nPet Sitter Finder is the perfect app for pet lovers and pet owners. It helps pet owners find reliable people to look after their pets.\n\n(A) When a pet owner is looking for pet sitters, he or she uploads a post.\n(B) The owner checks their reviews and chooses the best person.\n(C) Pet sitters or dog walkers can then send messages to the owner.\n\nGeorge : November 12, 2019\nI use this app whenever I'm going out of town. I have some concerns about my personal information, though. What if people use my phone number for other purposes?\n\nPet Sitter Finder : November 14, 2019\nWe're aware of this issue. We're now developing a system that allows users to communicate freely without showing their personal information.\n\nSamantha : February 22, 2020\nAnimals aren't allowed in my apartment, so I don't have any pets. However, by using Pet Sitter Finder, I can experience the joy of walking a dog.\n\n위 글의 내용과 일치하지 않는 것은?",
+      "options": [
+        "Pet Sitter Finder는 Pet Owners의 애완동물 입양을 도와준다.",
+        "George는 마을 밖으로 나갈 때마다 Pet Sitter Finder를 이용한다.",
+        "George는 Pet Sitter Finder의 단점에 대해서 말하고 있다.",
+        "Pet Owners는 Pet Sitter Finder를 이용하기 위해서 전화번호를 입력해야했다.",
+        "Pet Sitter Finder측은 시스템 개선을 위해서 노력하고 있다."
+      ],
+      "answer": "1"
+    },
+    {
+      "number": 23,
+      "question": "다음 글을 읽고 물음에 답하시오.\nBorrow from your neighbors!\nAsk Your Neighbors helps people easily find items that they can borrow from others. (A)__________, users download the app and search for another user that has the item they need. Then they pick up the item and ⓐ<u>return</u> it later.\n\nJasmine: December 12, 2019\nI ⓑ<u>asked</u> for a board game and got one in less than 30 minutes. I love saving money by borrowing things that I don't often need. (B)__________, I think it's environmentally friendly. The fewer products we buy, the ⓒ<u>more</u> resources we save.\n\nCassandra: March 7, 2020\n(가)<u>Seeing</u> a lot of positive reviews, I decided to borrow a bike helmet. When I got it, (C)__________, it was broken. I was so upset!\n\nAsk Your Neighbors: March 9, 2020\nWe're sorry that you had such a ⓓ<u>positive</u> experience. To fix this issue, we are asking lenders to update the pictures of their items ⓔ<u>regularly</u>. This will let other users know the exact condition of the product.\n\n위 글의 빈칸 (A), (B), (C)에 들어갈 연결사로 바르게 연결된 것은?",
+      "options": [
+        "(A) First – (B) Also – (C) however",
+        "(A) First – (B) But – (C) however",
+        "(A) First – (B) Also – (C) likewise",
+        "(A) Lastly – (B) But – (C) likewise",
+        "(A) Lastly – (B) Also – (C) in fact"
+      ],
+      "answer": "1"
+    },
+    {
+      "number": 24,
+      "question": "다음 글을 읽고 물음에 답하시오.\nBorrow from your neighbors!\nAsk Your Neighbors helps people easily find items that they can borrow from others. (A)__________, users download the app and search for another user that has the item they need. Then they pick up the item and ⓐ<u>return</u> it later.\n\nJasmine: December 12, 2019\nI ⓑ<u>asked</u> for a board game and got one in less than 30 minutes. I love saving money by borrowing things that I don't often need. (B)__________, I think it's environmentally friendly. The fewer products we buy, the ⓒ<u>more</u> resources we save.\n\nCassandra: March 7, 2020\n(가)<u>Seeing</u> a lot of positive reviews, I decided to borrow a bike helmet. When I got it, (C)__________, it was broken. I was so upset!\n\nAsk Your Neighbors: March 9, 2020\nWe're sorry that you had such a ⓓ<u>positive</u> experience. To fix this issue, we are asking lenders to update the pictures of their items ⓔ<u>regularly</u>. This will let other users know the exact condition of the product.\n\n위 글의 밑줄 친 ⓐ~ⓔ 중, 흐름상 어색한 것은?",
+      "options": [
+        "ⓐ",
+        "ⓑ",
+        "ⓒ",
+        "ⓓ",
+        "ⓔ"
+      ],
+      "answer": "4"
+    },
+    {
+      "number": 25,
+      "question": "다음 글을 읽고 물음에 답하시오.\nBorrow from your neighbors!\nAsk Your Neighbors helps people easily find items that they can borrow from others. (A)__________, users download the app and search for another user that has the item they need. Then they pick up the item and ⓐ<u>return</u> it later.\n\nJasmine: December 12, 2019\nI ⓑ<u>asked</u> for a board game and got one in less than 30 minutes. I love saving money by borrowing things that I don't often need. (B)__________, I think it's environmentally friendly. The fewer products we buy, the ⓒ<u>more</u> resources we save.\n\nCassandra: March 7, 2020\n(가)<u>Seeing</u> a lot of positive reviews, I decided to borrow a bike helmet. When I got it, (C)__________, it was broken. I was so upset!\n\nAsk Your Neighbors: March 9, 2020\nWe're sorry that you had such a ⓓ<u>positive</u> experience. To fix this issue, we are asking lenders to update the pictures of their items ⓔ<u>regularly</u>. This will let other users know the exact condition of the product.\n\n위 글의 밑줄 친 (가)와 쓰임이 다른 것은?",
+      "options": [
+        "<u>Finding</u> my wallet, I felt relieved.",
+        "She went to bed <u>finishing</u> the task.",
+        "Katie enjoyed <u>playing</u> with her cats.",
+        "<u>Focusing</u> on the classes, he got all As.",
+        "James went home, <u>finding</u> his new glasses."
+      ],
+      "answer": "3"
+    },
+    {
+      "number": 26,
+      "question": "다음 글을 읽고 물음에 답하시오.\nBorrow from your neighbors!\nAsk Your Neighbors helps people easily find items that they can borrow from others. (A)__________, users download the app and search for another user that has the item they need. Then they pick up the item and ⓐ<u>return</u> it later.\n\nJasmine: December 12, 2019\nI ⓑ<u>asked</u> for a board game and got one in less than 30 minutes. I love saving money by borrowing things that I don't often need. (B)__________, I think it's environmentally friendly. The fewer products we buy, the ⓒ<u>more</u> resources we save.\n\nCassandra: March 7, 2020\n(가)<u>Seeing</u> a lot of positive reviews, I decided to borrow a bike helmet. When I got it, (C)__________, it was broken. I was so upset!\n\nAsk Your Neighbors: March 9, 2020\nWe're sorry that you had such a ⓓ<u>positive</u> experience. To fix this issue, we are asking lenders to update the pictures of their items ⓔ<u>regularly</u>. This will let other users know the exact condition of the product.\n\n위 글을 읽고 답할 수 없는 질문은?",
+      "options": [
+        "Why was Cassandra so upset?",
+        "What benefits of borrowing does Jasmine say?",
+        "How do you use the Ask Your Neighbors app?",
+        "How long did it take for Jasmine to get a board game?",
+        "How often does the lenders of Ask Your Neighbor update the pictures of their items?"
+      ],
+      "answer": "5"
+    },
+    {
+      "number": 27,
+      "question": "다음 글을 읽고 물음에 답하시오.\nJessica ★☆☆☆☆\nMarch 7, 2020\nI needed a bike helmet. I heard about your company. ⓐ______________ a lot of positive reviews, I decided to borrow a bike helmet. When I got it, however, it was broken. I was so upset!\n\nAsk Your Neighbors\nMarch 9, 2020\nWe're sorry that you had such a negative experience. To fix this issue, we are asking lenders to update the pictures of their items regularly. This will let other users know the exact condition of the product.\n\n위 글의 빈칸 ⓐ에 들어갈 말을 주어진 <조건>에 알맞게 두 가지 표현으로 완성하시오.\n\n<조건>\n• 동사 'see'를 반드시 포함하되, 필요하면 형태를 바꿀 것\n• '구'와 '절'로 하나씩 쓸 것\n\n(1) ______________________ (구)\n(2) ______________________ (절)",
+      "options": [],
+      "answer": "Seeing / After I saw",
+      "subParts": [
+        {
+          "label": "(1)",
+          "answer": "Seeing",
+          "acceptedAnswers": [
+            "After seeing"
+          ]
+        },
+        {
+          "label": "(2)",
+          "answer": "After I saw",
+          "acceptedAnswers": [
+            "When I saw",
+            "Because I saw",
+            "As I saw"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 28,
+      "question": "다음 글을 읽고 물음에 답하시오.\nJasmine : December 12, 2019\nI asked for a board game and got one in less than 30 minutes. I love saving money by borrowing things that I don't often need. Also, I think ⓐ<u>it</u> is environmentally friendly. ⓑ<u>As we buy fewer products, we save more resources</u>.\n\nCassandra : March 7, 2020\nSeeing a lot of positive reviews, I decided to borrow a bike helmet. When I got it, however, it was broken. I was so upset!\n\nAsk Your Neighbors : March 9, 2020\nWe're sorry that you had such a negative experience. To fix this issue, we are asking lenders to update the pictures of their items regularly. This will let other users know the exact condition of the product.\n\n위 글의 밑줄 친 ⓑ를 'the+비교급..., the+비교급~'을 사용하여 같은 의미가 되도록 바꿔 쓰시오.\n\n→ ____ ____ ____ ____ ____, ____ ____ ____ ____ ____.",
+      "options": [],
+      "answer": "The fewer products we buy, the more resources we save.",
+      "acceptedAnswers": [
+        "the fewer products we buy, the more resources we save"
+      ]
+    },
+    {
+      "number": 29,
+      "question": "다음 글을 읽고 물음에 답하시오.\nI can look after your pet!\nPet Sitter Finder is the perfect app for pet lovers and pet owners. It helps pet owners find reliable people to look after their pets. When a pet owner is looking for pet sitters, he or she uploads a post. Pet sitters or dog walkers can then send messages to the owner. The owner checks their reviews and chooses the best person.\n\nGreg : November 12, 2019\nI use this app whenever I'm going out of town. I have some concerns about my personal information, though. What if people use my phone number for other purposes?\n\nPet Sitter Finder : November 14, 2019\nWe're aware of ⓑ<u>this issue</u>. We're now developing a system that allows users to communicate freely without showing their personal information.\n\nSue : February 22, 2020\nAnimals aren't allowed in my apartment, so I don't have any pets. However, by using Pet Sitter Finder, I can experience the joy of walking a dog.\n\n위 글의 밑줄 친 ⓑthis issue가 의미하는 바가 아래와 같을 때 빈칸을 완성하시오.\n\n→ the problem of my (1)________ information being (2)________ for other purposes",
+      "options": [],
+      "answer": "personal / used",
+      "subParts": [
+        {
+          "label": "(1)",
+          "answer": "personal"
+        },
+        {
+          "label": "(2)",
+          "answer": "used"
+        }
+      ]
+    },
+    {
+      "number": 30,
+      "question": "다음 글에서 설명하는 상황을 가리키는 알맞은 단어를 고르시오.\n\n- Our group members share our knowledge by helping each other learn other languages.\n- I share a house with other people. Sharing a house helps me save money. It's also safer than living alone.\n- I sometimes give other people a ride on my way to work. They can get to their destinations for a small fee, and I can make some money. Ride sharing also reduces the number of cars on the road, which is environmentally friendly.\n\nWhat is the appropriate word that refers to the above situations?",
+      "options": [
+        "global warming",
+        "climate change",
+        "natural resource",
+        "sharing economy",
+        "economic problem"
+      ],
+      "answer": "4"
+    }
+  ],
+  "R2": [
+    {
+      "number": 1,
+      "question": "다음 중 단어의 관계가 나머지 넷과 다른 하나는?",
+      "options": [
+        "curly : straight",
+        "save : waste",
+        "download : upload",
+        "regularly : irregularly",
+        "reasonable : expensive"
+      ],
+      "answer": "5"
+    },
+    {
+      "number": 2,
+      "question": "다음 단어의 영영풀이로 어색한 것은?",
+      "options": [
+        "refund: a sum of money that is paid back to you",
+        "aware: knowing that something exists",
+        "improve: to make or become better in quality",
+        "weakness: something used for making something else",
+        "app: a piece of software that is designed for a mobile device"
+      ],
+      "answer": "4"
+    },
+    {
+      "number": 3,
+      "question": "다음 빈칸에 들어갈 말로 알맞지 않은 것은?\n\n__________________, she missed them a lot.",
+      "options": [
+        "Didn't live with her family",
+        "As Amy wasn't with her family",
+        "Getting the letter from her family",
+        "After seeing the pictures of friends",
+        "Because Amy didn't live with her family"
+      ],
+      "answer": "1"
+    },
+    {
+      "number": 4,
+      "question": "다음 주어진 문장과 의미가 같은 것은?\n\nIf you work harder, the results will be better.",
+      "options": [
+        "Work harder, or the results will be better.",
+        "The less you work, the better the results will be.",
+        "The better the results are, the harder you'll work.",
+        "The harder you work, the more the results will be.",
+        "The harder you work, the better the results will be."
+      ],
+      "answer": "5"
+    },
+    {
+      "number": 5,
+      "question": "다음 중 어법상 어색한 문장은?",
+      "options": [
+        "The more, the merrier.",
+        "The older you get, the wise you will be.",
+        "The more I know about Beth, the more I like her.",
+        "The more popular she becomes, the more money she will make.",
+        "The stronger the wind is, the tighter the man held his clothes."
+      ],
+      "answer": "2"
+    },
+    {
+      "number": 6,
+      "question": "다음 중 밑줄 친 부분의 용법이 나머지 넷과 다른 것은?",
+      "options": [
+        "<u>Passing</u> the ball, he ran to the teacher.",
+        "<u>Holding</u> the baby, she sang a song for her.",
+        "He read the book <u>listening</u> to the classical music.",
+        "<u>Being</u> the winner, he was awarded by the teacher.",
+        "<u>Watching</u> an old movie is a good way to enjoy your free time."
+      ],
+      "answer": "5"
+    },
+    {
+      "number": 7,
+      "question": "다음 중 문장의 뜻이 서로 다른 것은?",
+      "options": [
+        "Playing the game, he answered to his father. → While he was playing the game, he answered to his father.",
+        "Buying the concert ticket, you will get one for free. → Though you bought the concert ticket, you will get one for free.",
+        "Feeling tired, the artist stopped painting. → Because the artist felt tired, he stopped painting.",
+        "Looking at the baby, I sang her a song. → While I was looking at the baby, I sang her a song.",
+        "Exercising every day, I was very healthy. → As I exercised every day, I was very healthy."
+      ],
+      "answer": "2"
+    },
+    {
+      "number": 8,
+      "question": "다음 문장을 분사구문으로 바꿔 쓰시오. ※ 완전한 문장으로 쓰시오.\n\nAs he smiled brightly, my boyfriend looked at me.\n\n→ ______________________________",
+      "options": [],
+      "answer": "Smiling brightly, my boyfriend looked at me."
+    },
+    {
+      "number": 9,
+      "question": "다음 대화의 빈칸에 들어갈 말로 알맞은 것은?\n\nG: ______________________________\nB: I like cooking at home better.",
+      "options": [
+        "Why do you like cooking at home?",
+        "What do you think of cooking at home?",
+        "When did you begin cooking at home?",
+        "Which is easier, cooking at home or eating out?",
+        "Which do you prefer, cooking at home or eating out?"
+      ],
+      "answer": "5"
+    },
+    {
+      "number": 10,
+      "question": "다음 대화를 읽고 물음에 답하시오.\nA: I think my hair is too curly. I want to (A)[straight / straighten] my hair. Can you recommend a good place?\nB: Sure. I know two places, Styles Studio and Hair Castle.\nA: Is there any difference between the two?\nB: Well, Styles Studio provides free treatment to keep your hair (B)[healthy / healthily].\nA: That's great. What about Hair Castle?\nB: Hair Castle doesn't provide treatment for free, but they give student discounts.\nA: Okay. ⓐ<u>Which do you prefer</u>?\nB: I prefer Styles Studio to Hair Castle. It's important for me to get (C)[regular / regularly] treatment.\n\n위 대화의 괄호 (A), (B), (C)에서 어법상 알맞은 말로 바르게 연결된 것은?",
+      "options": [
+        "(A) straighten – (B) healthy – (C) regular",
+        "(A) straight – (B) healthily – (C) regular",
+        "(A) straighten – (B) healthy – (C) regularly",
+        "(A) straight – (B) healthy – (C) regularly",
+        "(A) straighten – (B) healthily – (C) regularly"
+      ],
+      "answer": "1"
+    },
+    {
+      "number": 11,
+      "question": "다음 대화를 읽고 물음에 답하시오.\nA: I think my hair is too curly. I want to (A)[straight / straighten] my hair. Can you recommend a good place?\nB: Sure. I know two places, Styles Studio and Hair Castle.\nA: Is there any difference between the two?\nB: Well, Styles Studio provides free treatment to keep your hair (B)[healthy / healthily].\nA: That's great. What about Hair Castle?\nB: Hair Castle doesn't provide treatment for free, but they give student discounts.\nA: Okay. ⓐ<u>Which do you prefer</u>?\nB: I prefer Styles Studio to Hair Castle. It's important for me to get (C)[regular / regularly] treatment.\n\n위 대화의 밑줄 친 ⓐ와 바꿔 쓸 수 있는 것은?",
+      "options": [
+        "Which place did you go?",
+        "Which place do you like better?",
+        "What is your favorite hair style?",
+        "Do you often visit Styles Studio?",
+        "How often do you get hair treatment?"
+      ],
+      "answer": "2"
+    },
+    {
+      "number": 12,
+      "question": "다음 대화를 읽고 물음에 답하시오.\nA: I think my hair is too curly. I want to (A)[straight / straighten] my hair. Can you recommend a good place?\nB: Sure. I know two places, Styles Studio and Hair Castle.\nA: Is there any difference between the two?\nB: Well, Styles Studio provides free treatment to keep your hair (B)[healthy / healthily].\nA: That's great. What about Hair Castle?\nB: Hair Castle doesn't provide treatment for free, but they give student discounts.\nA: Okay. ⓐ<u>Which do you prefer</u>?\nB: I prefer Styles Studio to Hair Castle. It's important for me to get (C)[regular / regularly] treatment.\n\n위 대화를 통해 알 수 없는 것은?",
+      "options": [
+        "A가 원하는 머리 모양",
+        "학생 할인을 제공하는 미용실",
+        "B가 다니는 미용실의 이용 요금",
+        "B가 Styles Studio를 선호하는 이유",
+        "Styles Studio가 헤어트리트먼트 서비스를 제공하는 이유"
+      ],
+      "answer": "3"
+    },
+    {
+      "number": 13,
+      "question": "다음 대화를 읽고 물음에 답하시오.\nAmy: What should we sell at the flea market next month?\nSam: Before we choose anything ⓐ<u>to sell</u>, I think we need to do some market research.\nAmy: Market research? Why do we need that?\nSam: Because it helps us find out ⓑ<u>what</u> items are popular these days.\nAmy: I see. Then we can decide what ⓒ<u>to sell</u> at the market.\nSam: That's right. It will also help us ⓓ<u>setting</u> reasonable prices for our items.\nAmy: Cool. Is there anything else we should do?\nSam: Oh, (A)<u>우리 이름들을 이번 주 금요일까지 등록하는 것을 잊지 마</u>!\nAmy: Right. Thanks for ⓔ<u>reminding</u> me.\n\n위 대화의 밑줄 친 ⓐ~ⓔ 중, 어법상 어색한 것은?",
+      "options": [
+        "ⓐ",
+        "ⓑ",
+        "ⓒ",
+        "ⓓ",
+        "ⓔ"
+      ],
+      "answer": "4"
+    },
+    {
+      "number": 14,
+      "question": "다음 대화를 읽고 물음에 답하시오.\nAmy: What should we sell at the flea market next month?\nSam: Before we choose anything ⓐ<u>to sell</u>, I think we need to do some market research.\nAmy: Market research? Why do we need that?\nSam: Because it helps us find out ⓑ<u>what</u> items are popular these days.\nAmy: I see. Then we can decide what ⓒ<u>to sell</u> at the market.\nSam: That's right. It will also help us ⓓ<u>setting</u> reasonable prices for our items.\nAmy: Cool. Is there anything else we should do?\nSam: Oh, (A)<u>우리 이름들을 이번 주 금요일까지 등록하는 것을 잊지 마</u>!\nAmy: Right. Thanks for ⓔ<u>reminding</u> me.\n\n위 대화의 밑줄 친 (A)의 우리말과 같은 뜻이 되도록 <보기>의 단어를 모두 이용하여 영작하시오. ※ 완전한 문장으로 쓰시오.\n\n<보기> register, names, by, forget\n\n→ ______________________________",
+      "options": [],
+      "answer": "Don't forget to register our names by this Friday."
+    },
+    {
+      "number": 15,
+      "question": "다음 대화를 읽고 물음에 답하시오.\nSon: What great apps! We can borrow a tent and find someone to take care of our dog. (A)\nDad: That's right. These kinds of services are part of the \"sharing economy.\" (B) People can share their items with others and provide services to them at a small fee or for free.\nSon: (C) Some people left negative reviews about the services. (D)\nDad: Well, I think the more people use the services, the more they will improve. (E)\n\n위 대화의 (A)~(E) 중, 주어진 문장이 들어갈 알맞은 곳은?\n\nBut these services do have some weaknesses.",
+      "options": [
+        "(A)",
+        "(B)",
+        "(C)",
+        "(D)",
+        "(E)"
+      ],
+      "answer": "3"
+    },
+    {
+      "number": 16,
+      "question": "다음 대화를 읽고 소년이 지금 캠핑 가는 것을 걱정하는 이유를 고르시오.\n\nWhy is the boy worried about going camping now?\n\nSon: What should we do this weekend, Dad?\nDad: Why don't we go camping?\nSon: But we don't have a tent. Should we buy one? Also, who will take care of our dog?\nDad: Don't worry. I know some apps that can help us. We're going to borrow a tent through the Ask Your Neighbors app. Also, we will use another app to find a pet sitter to look after our dog.",
+      "options": [
+        "That's because his father doesn't like going camping.",
+        "That's because his father didn't know any apps that can help him.",
+        "That's because the boy and his father don't have a tent and there is no one to take care of their dog yet.",
+        "That's because some apps that he found have some weaknesses.",
+        "That's because his father can't find a pet sitter to look after their dog."
+      ],
+      "answer": "3"
+    },
+    {
+      "number": 17,
+      "question": "다음 글을 읽고 물음에 답하시오.\nI can look after your pet!\nPet Sitter Finder is the perfect app for pet lovers and pet owners. It helps pet owners find ______________________________. When a pet owner is looking for pet sitters, he or she uploads a post. Pet sitters or dog walkers can then send messages to the owner. The owner checks their reviews and chooses the best person.\n\nGeorge : November 12, 2019\nI use this app to look for a pet sitter whenever I'm going out of town. I have some concerns about my personal information, though. What if people use my phone number for other purposes?\n\nJane : November 14, 2019\nOur company is aware of this issue. I am now developing a system that allows users to communicate freely without showing their personal information.\n\nSamantha : February 22, 2020\nAnimals aren't allowed in my apartment, so I don't have any pets. However, by using Pet Sitter Finder, I can experience the joy of walking a dog.\n\n위 글의 빈칸에 들어갈 말로 알맞은 것은?",
+      "options": [
+        "new owners for lost dogs",
+        "pet parks to walk their dogs in",
+        "the best medicine for their pets",
+        "reliable people to look after their pets",
+        "some friends to walk their dogs with"
+      ],
+      "answer": "4"
+    },
+    {
+      "number": 18,
+      "question": "다음 글을 읽고 물음에 답하시오.\nI can look after your pet!\nPet Sitter Finder is the perfect app for pet lovers and pet owners. It helps pet owners find ______________________________. When a pet owner is looking for pet sitters, he or she uploads a post. Pet sitters or dog walkers can then send messages to the owner. The owner checks their reviews and chooses the best person.\n\nGeorge : November 12, 2019\nI use this app to look for a pet sitter whenever I'm going out of town. I have some concerns about my personal information, though. What if people use my phone number for other purposes?\n\nJane : November 14, 2019\nOur company is aware of this issue. I am now developing a system that allows users to communicate freely without showing their personal information.\n\nSamantha : February 22, 2020\nAnimals aren't allowed in my apartment, so I don't have any pets. However, by using Pet Sitter Finder, I can experience the joy of walking a dog.\n\n위 글의 내용과 일치하는 것은?",
+      "options": [
+        "George doesn't have a pet.",
+        "George used this app for the first time.",
+        "Jane is a pet sitter who gets good reviews.",
+        "Jane is a pet owner who uses Pet Sitter Finder app.",
+        "Samantha uses Pet Sitter Finder app as a dog walker."
+      ],
+      "answer": "5"
+    },
+    {
+      "number": 19,
+      "question": "다음 글을 읽고 물음에 답하시오.\nBorrow from your neighbors!\nAsk Your Neighbors helps people easily find items ⓐ<u>who</u> they can borrow from others. First, users download the app and search for another user that has the item they need. Then they pick up the item and return it later.\n\nJasmine : December 12, 2019\nI asked for a board game and got one in less than 30 minutes. I ⓑ<u>love saving</u> money by borrowing things that I don't often need. Also, I think it's environmentally friendly. The fewer products we buy, the more resources we save.\n\nCassandra : March 7, 2020\nAfter ⓒ<u>Seeing</u> a lot of positive reviews, I decided to borrow a bike helmet. When I got it, however, it was broken. I was so upset!\n\nAsk Your Neighbors : March 9, 2020\nWe're sorry that you had such a negative experience. ⓓ<u>To fix</u> this issue, we are asking lenders to update the pictures of their items regularly. This will let other users ⓔ<u>know</u> the exact condition of the product.\n\n위 글의 밑줄 친 ⓐ~ⓔ 중, 어법상 어색한 것은?",
+      "options": [
+        "ⓐ",
+        "ⓑ",
+        "ⓒ",
+        "ⓓ",
+        "ⓔ"
+      ],
+      "answer": "1"
+    },
+    {
+      "number": 20,
+      "question": "다음 글을 읽고 물음에 답하시오.\nBorrow from your neighbors!\nAsk Your Neighbors helps people easily find items ⓐ<u>who</u> they can borrow from others. First, users download the app and search for another user that has the item they need. Then they pick up the item and return it later.\n\nJasmine : December 12, 2019\nI asked for a board game and got one in less than 30 minutes. I ⓑ<u>love saving</u> money by borrowing things that I don't often need. Also, I think it's environmentally friendly. The fewer products we buy, the more resources we save.\n\nCassandra : March 7, 2020\nAfter ⓒ<u>Seeing</u> a lot of positive reviews, I decided to borrow a bike helmet. When I got it, however, it was broken. I was so upset!\n\nAsk Your Neighbors : March 9, 2020\nWe're sorry that you had such a negative experience. ⓓ<u>To fix</u> this issue, we are asking lenders to update the pictures of their items regularly. This will let other users ⓔ<u>know</u> the exact condition of the product.\n\n위 글을 읽고 답할 수 없는 질문은?",
+      "options": [
+        "What made Cassandra upset?",
+        "What benefits of borrowing is Cassandra mentioning?",
+        "Why did Cassandra decide to borrow a bike helmet?",
+        "How long did it take for Jasmine to get the board game?",
+        "What does Ask Your Neighbors do to fix the issue Cassandra had?"
+      ],
+      "answer": "2"
+    },
+    {
+      "number": 21,
+      "question": "다음 글을 읽고 물음에 답하시오.\nJessica ★☆☆☆☆\nMarch 7, 2020\nI needed a bike helmet. I heard about your company. Seeing a lot of positive reviews, I decided to borrow a bike helmet. When I got it, however, it was broken. I was so upset!\n\nAsk Your Neighbors\nMarch 9, 2020\nWe're sorry that you had such a (A)[positive / negative] experience. To fix this issue, we are asking (B)[borrowers / lenders] to update the pictures of their items regularly. This will let other users know the exact (C)[price / condition] of the product.\n\n위 글의 괄호 (A), (B), (C)에서 흐름상 알맞은 말로 바르게 연결된 것은?",
+      "options": [
+        "(A) positive – (B) borrowers – (C) price",
+        "(A) positive – (B) lenders – (C) condition",
+        "(A) negative – (B) borrowers – (C) price",
+        "(A) negative – (B) lenders – (C) price",
+        "(A) negative – (B) lenders – (C) condition"
+      ],
+      "answer": "5"
+    },
+    {
+      "number": 22,
+      "question": "다음 글을 읽고 물음에 답하시오.\nI can look after your pet!\nPet Sitter Finder is the perfect app for pet lovers and pet owners. It helps pet owners find ⓐ________ people to look after their pets. When a pet owner is looking for pet sitters, he or she uploads a post. Pet sitters or dog walkers can then send messages to the owner. The owner checks their ⓑ________ and chooses the best person.\n\nGeorge\nI use this app whenever I'm going out of town. I have some concerns about my ⓒ________ information, though. What if people use my phone number for other purposes?\n\nPet Sitter Finder\nWe're ⓓ________ of this issue. We're now developing a system that allows users to ⓔ________ freely without showing their personal information.\n\nSamantha\nAnimals aren't allowed in my apartment, so I don't have any pets. However, when I use Pet Sitter Finder, I can experience the joy of walking a dog.\n\n위 글의 빈칸 ⓐ~ⓔ에 들어갈 말로 알맞지 않은 것은?",
+      "options": [
+        "ⓐ: reliable",
+        "ⓑ: reviews",
+        "ⓒ: personal",
+        "ⓓ: aware",
+        "ⓔ: discount"
+      ],
+      "answer": "5"
+    },
+    {
+      "number": 23,
+      "question": "다음 글을 읽고 물음에 답하시오.\nI can look after your pet!\nPet Sitter Finder is the perfect app for pet lovers and pet owners. It helps pet owners find ⓐ________ people to look after their pets. When a pet owner is looking for pet sitters, he or she uploads a post. Pet sitters or dog walkers can then send messages to the owner. The owner checks their ⓑ________ and chooses the best person.\n\nGeorge\nI use this app whenever I'm going out of town. I have some concerns about my ⓒ________ information, though. What if people use my phone number for other purposes?\n\nPet Sitter Finder\nWe're ⓓ________ of this issue. We're now developing a system that allows users to ⓔ________ freely without showing their personal information.\n\nSamantha\nAnimals aren't allowed in my apartment, so I don't have any pets. However, when I use Pet Sitter Finder, I can experience the joy of walking a dog.\n\n위 글의 내용과 일치하지 않는 것은?",
+      "options": [
+        "Samantha enjoys walking her dog.",
+        "George is worried about the misuse of his personal information.",
+        "Pet Sitter Finder is trying to solve the problem which George described.",
+        "A pet owner can find a pet sitter through the app named Pet Sitter Finder.",
+        "Pet Sitter Finder is an app which pet owners use to find people to look after their pets."
+      ],
+      "answer": "1"
+    },
+    {
+      "number": 24,
+      "question": "다음 글을 읽고 물음에 답하시오.\nAsk Your Neighbors (A)______________________ that they can borrow from others. ⓐ<u>First, users download the app and search for another user that has the item that they need</u>. Then they pick up the item and return it later.\n\nJasmine : December 12, 2019\nI asked for a board game and got one in less than 30 minutes. ⓑ<u>I love saving money by borrowing things what I don't often need</u>. Also, I think it's environmentally friendly. ⓒ<u>The fewer products we buy, the many resources we save</u>.\n\nCassandra : March 7, 2020\nⓓ<u>Seeing a lot of positive reviews, I decided to borrow a bike helmet</u>. When I got it, however, it was broken. I was so upset!\n\nAsk Your Neighbors : March 9, 2020\nWe're sorry that you had such a negative experience. ⓔ<u>To fix this issue, we are asking borrowers to update the pictures of their items regularly</u>. This will let other users know the exact (B)__________ of the product.\n\n위 글의 빈칸 (A)에 들어갈 말이 되도록 <보기>의 단어들을 바르게 배열한 것은?\n\n<보기> people, helps, find, easily, items",
+      "options": [
+        "people helps find easily items",
+        "helps people easily items find",
+        "helps people easily find items",
+        "people helps easily find items",
+        "people find easily items helps"
+      ],
+      "answer": "3"
+    },
+    {
+      "number": 25,
+      "question": "다음 글을 읽고 물음에 답하시오.\nAsk Your Neighbors (A)______________________ that they can borrow from others. ⓐ<u>First, users download the app and search for another user that has the item that they need</u>. Then they pick up the item and return it later.\n\nJasmine : December 12, 2019\nI asked for a board game and got one in less than 30 minutes. ⓑ<u>I love saving money by borrowing things what I don't often need</u>. Also, I think it's environmentally friendly. ⓒ<u>The fewer products we buy, the many resources we save</u>.\n\nCassandra : March 7, 2020\nⓓ<u>Seeing a lot of positive reviews, I decided to borrow a bike helmet</u>. When I got it, however, it was broken. I was so upset!\n\nAsk Your Neighbors : March 9, 2020\nWe're sorry that you had such a negative experience. ⓔ<u>To fix this issue, we are asking borrowers to update the pictures of their items regularly</u>. This will let other users know the exact (B)__________ of the product.\n\n위 글의 밑줄 친 ⓐ~ⓔ 중, 흐름상 또는 어법상 어색한 것끼리 짝지어진 것은?",
+      "options": [
+        "ⓐ, ⓔ",
+        "ⓑ, ⓔ",
+        "ⓒ, ⓓ",
+        "ⓐ, ⓑ, ⓒ",
+        "ⓑ, ⓒ, ⓔ"
+      ],
+      "answer": "5"
+    },
+    {
+      "number": 26,
+      "question": "다음 글을 읽고 물음에 답하시오.\nAsk Your Neighbors (A)______________________ that they can borrow from others. ⓐ<u>First, users download the app and search for another user that has the item that they need</u>. Then they pick up the item and return it later.\n\nJasmine : December 12, 2019\nI asked for a board game and got one in less than 30 minutes. ⓑ<u>I love saving money by borrowing things what I don't often need</u>. Also, I think it's environmentally friendly. ⓒ<u>The fewer products we buy, the many resources we save</u>.\n\nCassandra : March 7, 2020\nⓓ<u>Seeing a lot of positive reviews, I decided to borrow a bike helmet</u>. When I got it, however, it was broken. I was so upset!\n\nAsk Your Neighbors : March 9, 2020\nWe're sorry that you had such a negative experience. ⓔ<u>To fix this issue, we are asking borrowers to update the pictures of their items regularly</u>. This will let other users know the exact (B)__________ of the product.\n\n위 글의 빈칸 (B)에 들어갈 단어의 영영풀이로 알맞은 것은?",
+      "options": [
+        "a reduction in price",
+        "a problem or subject for discussion",
+        "the state that something or someone is in",
+        "the system that a country uses for controlling its finances",
+        "a piece of software that is designed for a mobile device"
+      ],
+      "answer": "3"
+    },
+    {
+      "number": 27,
+      "question": "다음 글을 읽고 물음에 답하시오.\nAsk Your Neighbors (A)______________________ that they can borrow from others. ⓐ<u>First, users download the app and search for another user that has the item that they need</u>. Then they pick up the item and return it later.\n\nJasmine : December 12, 2019\nI asked for a board game and got one in less than 30 minutes. ⓑ<u>I love saving money by borrowing things what I don't often need</u>. Also, I think it's environmentally friendly. ⓒ<u>The fewer products we buy, the many resources we save</u>.\n\nCassandra : March 7, 2020\nⓓ<u>Seeing a lot of positive reviews, I decided to borrow a bike helmet</u>. When I got it, however, it was broken. I was so upset!\n\nAsk Your Neighbors : March 9, 2020\nWe're sorry that you had such a negative experience. ⓔ<u>To fix this issue, we are asking borrowers to update the pictures of their items regularly</u>. This will let other users know the exact (B)__________ of the product.\n\n위 글의 내용과 일치하지 않는 것은?",
+      "options": [
+        "Before using the service, downloading the app is needed.",
+        "Jasmine thinks that the service can help us save resources.",
+        "Jasmine has borrowed a board game through the app before.",
+        "People don't need to give the items that they borrow back to the owners.",
+        "People can borrow items they don't often need from neighbors through the app."
+      ],
+      "answer": "4"
+    },
+    {
+      "number": 28,
+      "question": "다음 글을 읽고 물음에 답하시오.\nI can look after your pet!\nPet Sitter Finder is the perfect app for pet lovers and pet owners. It helps pet owners find reliable people to look after their pets. When a pet owner is looking for pet sitters, he or she uploads a post. Pet sitters or dog walkers can then send messages to the owner. The owner checks their reviews and chooses the best person.\n\nGeorge / November 12, 2019\nI use this app whenever I'm going out of town. I have some concerns about my personal information, though. What if people use my phone number for other purposes?\n\nPet Sitter Finder / November 14, 2019\nWe're aware of this issue. We're now developing a system that allows users to communicate freely without showing their personal information.\n\nSamantha / February 22, 2020\nAnimals aren't allowed in my apartment, so I don't have any pets. However, by using Pet Sitter Finder, I can experience the joy of walking a dog.\n\n위 글의 내용과 일치하도록 아래 Pet Sitter Finder 이용 과정의 빈칸을 완성하시오.\n\n→ I (1)________ ________ ________ to look for a pet sitter. Then some pet sitters sent me a (2)________. I (3)________ ________ ________ and chose the best sitter.",
+      "options": [],
+      "answer": "uploaded a post / message / checked their reviews",
+      "subParts": [
+        {
+          "label": "(1)",
+          "answer": "uploaded a post"
+        },
+        {
+          "label": "(2)",
+          "answer": "message"
+        },
+        {
+          "label": "(3)",
+          "answer": "checked their reviews"
+        }
+      ]
+    },
+    {
+      "number": 29,
+      "question": "다음 글을 읽고 물음에 답하시오.\nBorrow from your neighbors!\nAsk Your Neighbors helps people easily find items ⓐ<u>that</u> they can borrow from others. First, users download the app and search for another user that has the item ⓑ<u>that</u> they need. Then they pick up the item and return it later.\n\nJasmine\n\"I asked for a board game and got one in less than 30 minutes. I love saving money by borrowing things ⓒ<u>that</u> I don't often need. Also, I think it's environmentally friendly. (A)<u>우리가 물건을 적게 사면 살수록, 우리는 더 많은 자원을 절약한다</u>.\"\n\nCassandra\n(B)<u>As I saw a lot of positive reviews, I decided to borrow a bike helmet</u> ⓓ<u>that</u> I found on this app. When I got it, however, it was broken. I was so upset!\n\nAsk Your Neighbors\nWe're sorry ⓔ<u>that</u> you had such a negative experience. To fix this issue, we are asking lenders to update the pictures of their items regularly. This will let other users know the exact condition of the product.\n\n위 글의 밑줄 친 (A)의 우리말을 주어진 <조건>에 알맞게 영작하시오.\n\n<조건>\n• The 비교급 ~, the 비교급 ~ 구문을 사용할 것\n• buy, product를 이용할 것 ※ 완전한 문장으로 쓰시오.\n\n→ ______________________________",
+      "options": [],
+      "answer": "The fewer products we buy, the more resources we save."
+    },
+    {
+      "number": 30,
+      "question": "다음 글의 밑줄 친 ⓐ~ⓔ 중, 어법상 어색한 것은?\n\nLast Sunday, my family went to see a baseball game. ⓐ<u>Cheering for our team, we had a really nice time together</u>. ⓑ<u>Happily, our team won the game</u>. ⓒ<u>Feeling happy about the win, we decided to celebrate</u>. ⓓ<u>While we are eating fried chicken together, we talked about the game</u>. ⓔ<u>Talking about the game made us happy again</u>.",
+      "options": [
+        "ⓐ",
+        "ⓑ",
+        "ⓒ",
+        "ⓓ",
+        "ⓔ"
+      ],
+      "answer": "4"
+    }
+  ],
+  "R3": [
+    {
+      "number": 1,
+      "question": "다음 중 단어의 관계가 나머지 넷과 다른 하나는?",
+      "options": [
+        "aware : awareness",
+        "reliable : reliability",
+        "economic : economy",
+        "communicate : communication",
+        "environmental : environment"
+      ],
+      "answer": "4"
+    },
+    {
+      "number": 2,
+      "question": "다음 중 빈칸에 들어갈 수 없는 것은?\n\n• ________ is when you worry about someone.\n• If the price of something is ________, it is fair.\n• A ________ is a sum of money which is returned to you.\n• If you ________ something with another person, you both have it.",
+      "options": [
+        "share",
+        "cheap",
+        "refund",
+        "concern",
+        "reasonable"
+      ],
+      "answer": "2"
+    },
+    {
+      "number": 3,
+      "question": "다음 문장의 빈칸에 들어갈 말로 알맞은 것은?\n\nWhen I eat more sweets, I feel happier.\n→ The more sweets I eat, __________________.",
+      "options": [
+        "the more happy",
+        "happier I feel",
+        "the happier I feel",
+        "the happiest I feel",
+        "I feel more happier"
+      ],
+      "answer": "3"
+    },
+    {
+      "number": 4,
+      "question": "다음 빈칸 (A), (B)에 들어갈 말로 알맞게 연결된 것은?\n\n(A)________ up you go, (B)________ you can see.",
+      "options": [
+        "(A) Higher – (B) more far",
+        "(A) The higher – (B) the far",
+        "(A) The high – (B) the far",
+        "(A) The higher – (B) the farther",
+        "(A) The high – (B) the farther"
+      ],
+      "answer": "4"
+    },
+    {
+      "number": 5,
+      "question": "다음 중 어법과 의미상 알맞은 문장은?",
+      "options": [
+        "Being sunny tomorrow, I will walk my dog.",
+        "Tom talked on the phone with his dog lie next to him.",
+        "The more you work on your memory, it will improve more.",
+        "The more you spend time alone, the lonely you will become.",
+        "Not having heard the bell, the teacher kept on teaching."
+      ],
+      "answer": "5"
+    },
+    {
+      "number": 6,
+      "question": "다음 대화의 밑줄 친 부분의 문장 속 역할이 나머지 넷과 다른 것은?",
+      "options": [
+        "A: I took a picture of the park yesterday. / B: It's awesome. Look at these boys <u>holding their dad's hands</u>.",
+        "A: Why didn't you answer my message last night? / B: <u>Feeling tired</u>, I went to bed early.",
+        "A: What happened to Minjeong? / B: She broke her leg <u>playing football</u>.",
+        "A: Where is Yoonsung? / B: He's in the kitchen <u>making milkshake</u>.",
+        "A: Jake was late again. / B: Yes, he entered the classroom <u>trying not to make a noise</u>."
+      ],
+      "answer": "1"
+    },
+    {
+      "number": 7,
+      "question": "다음 대화 중 밑줄 친 부분이 대화의 흐름과 어법상 알맞지 않은 것은?",
+      "options": [
+        "A: What did you do on your 1st anniversary? / B: <u>Being so tired</u>, I went to bed early.",
+        "A: I didn't know it rained last night. / B: You know what? <u>Walking home in the rain</u>, I got wet.",
+        "A: What will you do if it's fine tomorrow? / B: <u>Being fine tomorrow</u>, we'll go on a picnic. If it's not, we'll stay at home.",
+        "A: Can you tell me how to get to the office? / B: <u>Turning to the left</u>, you'll see tall buildings. The office will be there.",
+        "A: Did you invite the couple to your birthday party? / B: I invited the man. But <u>the woman being rude</u>, I didn't invite her to the party."
+      ],
+      "answer": "3"
+    },
+    {
+      "number": 8,
+      "question": "다음 문장을 <조건>에 알맞게 바꿔 쓰시오.\n\nBecause she was very hungry, she ate a whole pizza by herself.\n\n<조건>\n분사구문을 사용할 것\n\n→ ______________________, she ate a whole pizza by herself.",
+      "options": [],
+      "answer": "Being very hungry",
+      "acceptedAnswers": [
+        "Very hungry"
+      ]
+    },
+    {
+      "number": 9,
+      "question": "다음 각각의 대화의 빈칸 (A), (B), (C)에 들어갈 말을 <보기>에서 골라 알맞게 짝지은 것은?\n\nA: (A)______________________\nB: I prefer apples to peaches.\n\nA: Is there anything else we should do?\nB: Oh, (B)______________________\nA: Right. Thanks for reminding me.\n\nA: What do you think of this flying camera? I want to buy it.\nB: A flying camera? (C)______________________\n\n<보기>\nⓐ Could you explain how it works?\nⓑ Don't forget to register our names by this Friday.\nⓒ Which do you prefer?",
+      "options": [
+        "(A) ⓐ – (B) ⓑ – (C) ⓒ",
+        "(A) ⓑ – (B) ⓐ – (C) ⓒ",
+        "(A) ⓑ – (B) ⓒ – (C) ⓐ",
+        "(A) ⓒ – (B) ⓐ – (C) ⓑ",
+        "(A) ⓒ – (B) ⓑ – (C) ⓐ"
+      ],
+      "answer": "5"
+    },
+    {
+      "number": 10,
+      "question": "다음 대화를 읽고 물음에 답하시오.\nJiwon: I tried Spring Chips recently, and now I want to review them.\nMinseo: That sounds ⓐ<u>fun</u>. How will you do your review?\nJiwon: I'll make a video. I want to ⓑ<u>focus on</u> their delicious taste!\nMinseo: Okay, but don't forget ⓒ<u>to talk</u> about their bad points too.\nJiwon: I won't. I want to give a ⓓ<u>balanced</u> review.\nMinseo: Good. Your video will make (A)<u>it</u> easier for people to choose better products.\nJiwon: That's exactly the thing ⓔ<u>what</u> I want. I'd like to give people more useful information about the product.\n\n위 대화의 밑줄 친 ⓐ~ⓔ 중, 어법상 어색한 것은?",
+      "options": [
+        "ⓐ",
+        "ⓑ",
+        "ⓒ",
+        "ⓓ",
+        "ⓔ"
+      ],
+      "answer": "5"
+    },
+    {
+      "number": 11,
+      "question": "다음 대화를 읽고 물음에 답하시오.\nJiwon: I tried Spring Chips recently, and now I want to review them.\nMinseo: That sounds ⓐ<u>fun</u>. How will you do your review?\nJiwon: I'll make a video. I want to ⓑ<u>focus on</u> their delicious taste!\nMinseo: Okay, but don't forget ⓒ<u>to talk</u> about their bad points too.\nJiwon: I won't. I want to give a ⓓ<u>balanced</u> review.\nMinseo: Good. Your video will make (A)<u>it</u> easier for people to choose better products.\nJiwon: That's exactly the thing ⓔ<u>what</u> I want. I'd like to give people more useful information about the product.\n\n위 대화의 밑줄 친 (A)와 같은 역할을 하는 것은?",
+      "options": [
+        "Could you explain what <u>it</u> is?",
+        "We should bring <u>it</u> when we go shopping.",
+        "I found <u>it</u> interesting to talk to Christine.",
+        "I bought an umbrella this morning, and I lost <u>it</u>.",
+        "<u>It</u> is an umbrella that gives you the weather forecast for the day."
+      ],
+      "answer": "3"
+    },
+    {
+      "number": 12,
+      "question": "다음 대화를 읽고 물음에 답하시오.\nJiwon: I tried Spring Chips recently, and now I want to review them.\nMinseo: That sounds ⓐ<u>fun</u>. How will you do your review?\nJiwon: I'll make a video. I want to ⓑ<u>focus on</u> their delicious taste!\nMinseo: Okay, but don't forget ⓒ<u>to talk</u> about their bad points too.\nJiwon: I won't. I want to give a ⓓ<u>balanced</u> review.\nMinseo: Good. Your video will make (A)<u>it</u> easier for people to choose better products.\nJiwon: That's exactly the thing ⓔ<u>what</u> I want. I'd like to give people more useful information about the product.\n\n위 대화의 내용과 일치하는 것은?",
+      "options": [
+        "Minseo asks Jiwon to review Spring Chips.",
+        "Jiwon thinks that Spring Chips are delicious.",
+        "Jiwon would like to make an easy video for people to understand.",
+        "Jiwon wants to review Spring Chips, which are released recently.",
+        "In Minseo's opinion, it is better to talk about bad points about the products than to talk about good points."
+      ],
+      "answer": "2"
+    },
+    {
+      "number": 13,
+      "question": "다음 대화를 읽고 물음에 답하시오.\nA: Which do you prefer, the Special Sandwich or the Classic Sandwich?\nB: Well, the Special Sandwich is the healthier choice. It's made with lots of fresh vegetables and other healthy ingredients.\nA: But it's much more expensive than the Classic Sandwich.\nB: I know, but (A)<u>I prefer the Special Sandwich to the Classic Sandwich</u>. Eating healthy is important to me.\nA: I prefer the cheaper one. I'll spend my money on books instead.\nB: I guess (B)______________________________.\n\n위 대화의 남자가 (A)라고 말하는 이유로 알맞은 것은?",
+      "options": [
+        "That's because the Special Sandwich is bad.",
+        "That's because the Special Sandwich is hot.",
+        "That's because the Special Sandwich is cheaper.",
+        "That's because the Classic Sandwich is not good.",
+        "That's because the Special Sandwich is healthier."
+      ],
+      "answer": "5"
+    },
+    {
+      "number": 14,
+      "question": "다음 대화를 읽고 물음에 답하시오.\nA: Which do you prefer, the Special Sandwich or the Classic Sandwich?\nB: Well, the Special Sandwich is the healthier choice. It's made with lots of fresh vegetables and other healthy ingredients.\nA: But it's much more expensive than the Classic Sandwich.\nB: I know, but (A)<u>I prefer the Special Sandwich to the Classic Sandwich</u>. Eating healthy is important to me.\nA: I prefer the cheaper one. I'll spend my money on books instead.\nB: I guess (B)______________________________.\n\n위 대화의 빈칸 (B)에 들어갈 말로 알맞은 것은?",
+      "options": [
+        "you have healthy eating habits",
+        "you're not good at saving money",
+        "our spending habits are different",
+        "we have many things in common",
+        "you waste a lot of money on food"
+      ],
+      "answer": "3"
+    },
+    {
+      "number": 15,
+      "question": "다음 글을 읽고 물음에 답하시오.\nBorrow from your neighbors!\nAsk Your Neighbors helps people easily find items that they can borrow from others. First, users download the app and search for another user that has the item they need. Then they pick up the item and return it later.\n\nJasmine : December 12, 2019\nI asked for a board game and got (A)<u>one</u> in less than 30 minutes. I love saving money by borrowing things that I don't often need. Also, I think it's environmentally friendly. The fewer products we buy, the more resources we save.\n\nCassandra : March 7, 2020\nSeeing a lot of positive reviews, I decided to borrow a bike helmet. When I got it, however, it was broken. I was so upset!\n\nAsk Your Neighbors : March 9, 2020\nWe're sorry that you had such a negative experience. To fix this issue, we are asking lenders to update the pictures of their items regularly. This will let other users know the exact condition of the product.\n\n위 글의 밑줄 친 (A)one이 가리키는 것을 본문에서 찾아 세 단어로 쓰시오.\n\n→ ________ ________ ________",
+      "options": [],
+      "answer": "a board game"
+    },
+    {
+      "number": 16,
+      "question": "다음 글의 괄호 (A), (B), (C)에서 어법상 또는 흐름상 알맞은 말로 바르게 연결된 것은?\n\nSon: What great apps! We can borrow a tent and (A)[find / finding] someone to take care of our dog.\nDad: That's right. These kinds of services are part of the \"sharing economy.\" People can share their items with others and provide services to them at a small fee or for free.\nSon: But these services (B)[do / don't] have some weaknesses. Some people left negative reviews about the services.\nDad: Well, I think they will (C)[prove / improve] more as more people use the services.",
+      "options": [
+        "(A) find – (B) do – (C) prove",
+        "(A) find – (B) do – (C) improve",
+        "(A) finding – (B) don't – (C) prove",
+        "(A) finding – (B) do – (C) improve",
+        "(A) find – (B) don't – (C) improve"
+      ],
+      "answer": "2"
+    },
+    {
+      "number": 17,
+      "question": "다음 글을 읽고 물음에 답하시오.\nPet Sitter Finder is the perfect ⓐ________ for pet lovers and pet owners. It helps pet owners find ⓑ________ people to look after their pets. When a pet owner is ⓒ________ pet sitters, he or she uploads a post. Pet sitters or dog walkers can then send messages to the owner. The owner checks their reviews and chooses the best person.\n\nGeorge : November 12, 2019\nI use this app whenever I'm going out of town. I have some ⓓ________ about my personal information, though. What if people use my phone number for other ⓔ________?\n\nPet Sitter Finder : November 14, 2019\nWe're aware of this issue. We're now developing a system that allows users to communicate freely without showing their personal information.\n\nSamantha : February 22, 2020\nAnimals aren't allowed in my apartment, so I don't have any pets. However, by using Pet Sitter Finder, I can experience the joy (A)<u>of</u> walking a dog.\n\n위 글의 빈칸 ⓐ~ⓔ에 들어가지 않는 것은?",
+      "options": [
+        "reliable",
+        "concerns",
+        "looking at",
+        "purposes",
+        "application"
+      ],
+      "answer": "3"
+    },
+    {
+      "number": 18,
+      "question": "다음 글을 읽고 물음에 답하시오.\nPet Sitter Finder is the perfect ⓐ________ for pet lovers and pet owners. It helps pet owners find ⓑ________ people to look after their pets. When a pet owner is ⓒ________ pet sitters, he or she uploads a post. Pet sitters or dog walkers can then send messages to the owner. The owner checks their reviews and chooses the best person.\n\nGeorge : November 12, 2019\nI use this app whenever I'm going out of town. I have some ⓓ________ about my personal information, though. What if people use my phone number for other ⓔ________?\n\nPet Sitter Finder : November 14, 2019\nWe're aware of this issue. We're now developing a system that allows users to communicate freely without showing their personal information.\n\nSamantha : February 22, 2020\nAnimals aren't allowed in my apartment, so I don't have any pets. However, by using Pet Sitter Finder, I can experience the joy (A)<u>of</u> walking a dog.\n\n위 글의 밑줄 친 (A)of의 쓰임과 같은 것을 두 개 고르면? (정답 2개)",
+      "options": [
+        "These are the paintings <u>of</u> Monet.",
+        "The tone <u>of</u> his speech was calm.",
+        "I have the courage <u>of</u> telling the truth.",
+        "One <u>of</u> my brothers wants to be a singer.",
+        "I've just heard the news <u>of</u> starting the project."
+      ],
+      "answer": "3, 5"
+    },
+    {
+      "number": 19,
+      "question": "다음 글을 읽고 물음에 답하시오.\nPet Sitter Finder is the perfect ⓐ________ for pet lovers and pet owners. It helps pet owners find ⓑ________ people to look after their pets. When a pet owner is ⓒ________ pet sitters, he or she uploads a post. Pet sitters or dog walkers can then send messages to the owner. The owner checks their reviews and chooses the best person.\n\nGeorge : November 12, 2019\nI use this app whenever I'm going out of town. I have some ⓓ________ about my personal information, though. What if people use my phone number for other ⓔ________?\n\nPet Sitter Finder : November 14, 2019\nWe're aware of this issue. We're now developing a system that allows users to communicate freely without showing their personal information.\n\nSamantha : February 22, 2020\nAnimals aren't allowed in my apartment, so I don't have any pets. However, by using Pet Sitter Finder, I can experience the joy (A)<u>of</u> walking a dog.\n\n위 글의 내용과 일치하는 것은?",
+      "options": [
+        "Samantha has a pet at home.",
+        "Pet owners can read reviews about pet sitters.",
+        "Pet Sitter Finder can be used only by pet owners.",
+        "The pet owners and pet sitters are matched randomly.",
+        "Pet Sitter Finder is trying to show the users' personal information."
+      ],
+      "answer": "2"
+    },
+    {
+      "number": 20,
+      "question": "다음 글을 읽고 물음에 답하시오.\nAsk Your Neighbors helps people easily find items that they can borrow from others. First, users ⓐ<u>download</u> the app and search for another user that has the item they need. Then they pick up the item and return it later.\n\nJasmine : December 12, 2019\nI asked for a board game and got one in less than 30 minutes. I love saving money by ⓑ<u>borrowing</u> things that I don't often need. Also, I think it's environmentally friendly. The ⓒ<u>more</u> products we buy, the more resources we save.\n\nCassandra : March 7, 2020\n(A)<u>Seeing a lot of positive reviews</u>, I decided to borrow a bike helmet. When I got it, however, it was ⓓ<u>broken</u>. I was so upset!\n\nAsk Your Neighbors : March 9, 2020\nWe're sorry that you had such a ⓔ<u>negative</u> experience. To fix this issue, we are asking lenders to update the pictures of their items regularly. This will let other users know the exact condition of the product.\n\n위 글의 밑줄 친 ⓐ~ⓔ 중, 흐름상 어색한 것은?",
+      "options": [
+        "ⓐ",
+        "ⓑ",
+        "ⓒ",
+        "ⓓ",
+        "ⓔ"
+      ],
+      "answer": "3"
+    },
+    {
+      "number": 21,
+      "question": "다음 글을 읽고 물음에 답하시오.\nAsk Your Neighbors helps people easily find items that they can borrow from others. First, users ⓐ<u>download</u> the app and search for another user that has the item they need. Then they pick up the item and return it later.\n\nJasmine : December 12, 2019\nI asked for a board game and got one in less than 30 minutes. I love saving money by ⓑ<u>borrowing</u> things that I don't often need. Also, I think it's environmentally friendly. The ⓒ<u>more</u> products we buy, the more resources we save.\n\nCassandra : March 7, 2020\n(A)<u>Seeing a lot of positive reviews</u>, I decided to borrow a bike helmet. When I got it, however, it was ⓓ<u>broken</u>. I was so upset!\n\nAsk Your Neighbors : March 9, 2020\nWe're sorry that you had such a ⓔ<u>negative</u> experience. To fix this issue, we are asking lenders to update the pictures of their items regularly. This will let other users know the exact condition of the product.\n\n위 글의 밑줄 친 (A)와 의미가 같은 것은?",
+      "options": [
+        "After I saw a lot of positive review",
+        "When I see a lot of positive review",
+        "Before I saw a lot of positive review",
+        "Though I saw a lot of positive review",
+        "Because I see a lot of positive review"
+      ],
+      "answer": "1"
+    },
+    {
+      "number": 22,
+      "question": "다음 글을 읽고 물음에 답하시오.\nAsk Your Neighbors helps people easily find items that they can borrow from others. First, users ⓐ<u>download</u> the app and search for another user that has the item they need. Then they pick up the item and return it later.\n\nJasmine : December 12, 2019\nI asked for a board game and got one in less than 30 minutes. I love saving money by ⓑ<u>borrowing</u> things that I don't often need. Also, I think it's environmentally friendly. The ⓒ<u>more</u> products we buy, the more resources we save.\n\nCassandra : March 7, 2020\n(A)<u>Seeing a lot of positive reviews</u>, I decided to borrow a bike helmet. When I got it, however, it was ⓓ<u>broken</u>. I was so upset!\n\nAsk Your Neighbors : March 9, 2020\nWe're sorry that you had such a ⓔ<u>negative</u> experience. To fix this issue, we are asking lenders to update the pictures of their items regularly. This will let other users know the exact condition of the product.\n\n위 글의 내용과 일치하는 것은?",
+      "options": [
+        "공유앱은 새 물건을 판매하는 온라인 상점이다.",
+        "공유앱 이용자는 물건을 빌린 후 돌려주어야 한다.",
+        "Casandra는 공유앱을 이용한 후 매우 만족하고 있다.",
+        "Ask Your Neighbors는 이용자의 불만을 고려하지 않는다.",
+        "Jasmine은 공유앱으로 원하는 보드게임을 30분 만에 구입했다."
+      ],
+      "answer": "2"
+    },
+    {
+      "number": 23,
+      "question": "다음 글을 읽고 물음에 답하시오.\nI can look after your pet!\nPet Sitter Finder is the perfect app for pet lovers and pet owners. It helps pet owners find (A)__________ people to look after their pets. When a pet owner is looking for pet sitters, he or she uploads a post. Pet sitters or dog walkers can then send messages to the owner. The owner checks their reviews and chooses the best person.\n\nGeorge : November 12, 2019\nI use this app whenever I'm going out of town. I have some (B)__________ about my personal information, though. What if people use my phone number for other purposes?\n\nPet Sitter Finder : November 14, 2019\nWe're (C)__________ this issue. We're now developing a system that allows users to communicate freely without showing their personal information.\n\nSamantha : February 22, 2020\nAnimals aren't allowed in my apartment, so I don't have any pets. However, by using Pet Sitter Finder, I can experience the joy of walking a dog.\n\n위 글의 빈칸 (A), (B), (C)에 들어갈 말로 바르게 연결된 것은?",
+      "options": [
+        "(A) dependable – (B) anxiety – (C) unfamiliar with",
+        "(A) independent – (B) fear – (C) interested in",
+        "(A) reliable – (B) concern – (C) aware of",
+        "(A) suspicious – (B) concern – (C) aware of",
+        "(A) trustworthy – (B) interest – (C) unfamiliar with"
+      ],
+      "answer": "3"
+    },
+    {
+      "number": 24,
+      "question": "다음 글을 읽고 물음에 답하시오.\nI can look after your pet!\nPet Sitter Finder is the perfect app for pet lovers and pet owners. It helps pet owners find (A)__________ people to look after their pets. When a pet owner is looking for pet sitters, he or she uploads a post. Pet sitters or dog walkers can then send messages to the owner. The owner checks their reviews and chooses the best person.\n\nGeorge : November 12, 2019\nI use this app whenever I'm going out of town. I have some (B)__________ about my personal information, though. What if people use my phone number for other purposes?\n\nPet Sitter Finder : November 14, 2019\nWe're (C)__________ this issue. We're now developing a system that allows users to communicate freely without showing their personal information.\n\nSamantha : February 22, 2020\nAnimals aren't allowed in my apartment, so I don't have any pets. However, by using Pet Sitter Finder, I can experience the joy of walking a dog.\n\n위 글의 Pet Sitter Finder에 관한 내용으로 알맞은 것은?",
+      "options": [
+        "애완동물을 돌봐줄 사람을 자동으로 찾아준다.",
+        "이용자의 개인정보유출 문제가 발생한 적이 있다.",
+        "애완동물을 가진 사람만 이 앱을 이용할 수 있다.",
+        "대부분의 아파트에서는 애완동물을 키울 수 없다.",
+        "애완동물을 돌봐준 사람에 대해 평가를 할 수 있다."
+      ],
+      "answer": "5"
+    },
+    {
+      "number": 25,
+      "question": "다음 글을 읽고 물음에 답하시오.\n[가]\nGeorge : November 12, 2019\nI use this app (A)[whenever / whatever] I'm going out of town. I have some concerns about my personal information, (B)[though / although]. What if people use my phone number for other purposes?\n\n[나]\nPet Sitter Finder : November 14, 2019\nWe're aware of this issue. We're now developing a system that allows users (C)[communicate / to communicate] freely without showing their personal information.\n\n[다]\nSamantha : February 22, 2020\nAnimals aren't allowed in my apartment, so I don't have any pets. However, by using Pet Sitter Finder, I can experience the joy of walking a dog.\n\n[라]\nSon: What great apps! ⓐ<u>We can borrow a tent and find someone to take care of our dog</u>.\nDad: That's right. ⓑ<u>These kinds of services are part of the \"sharing economy.\"</u> ⓒ<u>People can share their items with others and provide services to them at a small fee or for free</u>.\nSon: But ⓓ<u>these services do have some weaknesses</u>. ⓔ<u>Some people left negative reviews about the services</u>.\nDad: Well, I think the more people use the services, the more ㉠<u>they</u> will improve.\n\n위 글의 괄호 (A), (B), (C)에서 어법상 알맞은 말로 바르게 연결된 것은?",
+      "options": [
+        "(A) whatever – (B) although – (C) communicate",
+        "(A) whenever – (B) although – (C) to communicate",
+        "(A) whenever – (B) though – (C) communicate",
+        "(A) whenever – (B) though – (C) to communicate",
+        "(A) whatever – (B) though – (C) to communicate"
+      ],
+      "answer": "4"
+    },
+    {
+      "number": 26,
+      "question": "다음 글을 읽고 물음에 답하시오.\n[가]\nGeorge : November 12, 2019\nI use this app (A)[whenever / whatever] I'm going out of town. I have some concerns about my personal information, (B)[though / although]. What if people use my phone number for other purposes?\n\n[나]\nPet Sitter Finder : November 14, 2019\nWe're aware of this issue. We're now developing a system that allows users (C)[communicate / to communicate] freely without showing their personal information.\n\n[다]\nSamantha : February 22, 2020\nAnimals aren't allowed in my apartment, so I don't have any pets. However, by using Pet Sitter Finder, I can experience the joy of walking a dog.\n\n[라]\nSon: What great apps! ⓐ<u>We can borrow a tent and find someone to take care of our dog</u>.\nDad: That's right. ⓑ<u>These kinds of services are part of the \"sharing economy.\"</u> ⓒ<u>People can share their items with others and provide services to them at a small fee or for free</u>.\nSon: But ⓓ<u>these services do have some weaknesses</u>. ⓔ<u>Some people left negative reviews about the services</u>.\nDad: Well, I think the more people use the services, the more ㉠<u>they</u> will improve.\n\n위 글 [라]의 밑줄 친 ⓐ~ⓔ 중, 공유 경제의 개념에 대해 가장 잘 설명한 문장을 고르면?",
+      "options": [
+        "ⓐ",
+        "ⓑ",
+        "ⓒ",
+        "ⓓ",
+        "ⓔ"
+      ],
+      "answer": "3"
+    },
+    {
+      "number": 27,
+      "question": "다음 글을 읽고 물음에 답하시오.\n[가]\nGeorge : November 12, 2019\nI use this app (A)[whenever / whatever] I'm going out of town. I have some concerns about my personal information, (B)[though / although]. What if people use my phone number for other purposes?\n\n[나]\nPet Sitter Finder : November 14, 2019\nWe're aware of this issue. We're now developing a system that allows users (C)[communicate / to communicate] freely without showing their personal information.\n\n[다]\nSamantha : February 22, 2020\nAnimals aren't allowed in my apartment, so I don't have any pets. However, by using Pet Sitter Finder, I can experience the joy of walking a dog.\n\n[라]\nSon: What great apps! ⓐ<u>We can borrow a tent and find someone to take care of our dog</u>.\nDad: That's right. ⓑ<u>These kinds of services are part of the \"sharing economy.\"</u> ⓒ<u>People can share their items with others and provide services to them at a small fee or for free</u>.\nSon: But ⓓ<u>these services do have some weaknesses</u>. ⓔ<u>Some people left negative reviews about the services</u>.\nDad: Well, I think the more people use the services, the more ㉠<u>they</u> will improve.\n\n위 글 밑줄 친 ㉠they가 가리키는 것으로 알맞은 것은?",
+      "options": [
+        "a tent and a dog",
+        "the items",
+        "some weaknesses",
+        "some people",
+        "the services"
+      ],
+      "answer": "5"
+    },
+    {
+      "number": 28,
+      "question": "다음 글을 읽고 물음에 답하시오.\n[가]\nGeorge : November 12, 2019\nI use this app (A)[whenever / whatever] I'm going out of town. I have some concerns about my personal information, (B)[though / although]. What if people use my phone number for other purposes?\n\n[나]\nPet Sitter Finder : November 14, 2019\nWe're aware of this issue. We're now developing a system that allows users (C)[communicate / to communicate] freely without showing their personal information.\n\n[다]\nSamantha : February 22, 2020\nAnimals aren't allowed in my apartment, so I don't have any pets. However, by using Pet Sitter Finder, I can experience the joy of walking a dog.\n\n[라]\nSon: What great apps! ⓐ<u>We can borrow a tent and find someone to take care of our dog</u>.\nDad: That's right. ⓑ<u>These kinds of services are part of the \"sharing economy.\"</u> ⓒ<u>People can share their items with others and provide services to them at a small fee or for free</u>.\nSon: But ⓓ<u>these services do have some weaknesses</u>. ⓔ<u>Some people left negative reviews about the services</u>.\nDad: Well, I think the more people use the services, the more ㉠<u>they</u> will improve.\n\n위 글 [가]~[라]에 대한 설명 중 알맞은 것은?",
+      "options": [
+        "[가]에서 글쓴이는 자신이 사용한 앱의 장점을 홍보한다.",
+        "[가]에서 글쓴이는 앱을 사용해본 적이 없다.",
+        "[나]에서 글쓴이는 해당 앱의 문제점을 개선하고자 한다.",
+        "[다]에서 글쓴이는 해당 앱의 한계점에 대해 지적한다.",
+        "[라] 대화의 주제는 공유 경제의 단점이다."
+      ],
+      "answer": "3"
+    },
+    {
+      "number": 29,
+      "question": "다음 글을 읽고 물음에 답하시오.\nBorrow from your neighbors!\nAsk Your Neighbors helps people easily find items ⓐ<u>that</u> they can borrow from others. First, users download the app and search for another user that has the item ⓑ<u>that</u> they need. Then they pick up the item and return it later.\n\nJasmine\n\"I asked for a board game and got one in less than 30 minutes. I love saving money by borrowing things ⓒ<u>that</u> I don't often need. Also, I think it's environmentally friendly. The fewer products we buy, the more resources we save.\"\n\nCassandra\n(B)<u>As I saw a lot of positive reviews, I decided to borrow a bike helmet</u> ⓓ<u>that</u> I found on this app. When I got it, however, it was broken. I was so upset!\n\nAsk Your Neighbors\nWe're sorry ⓔ<u>that</u> you had such a negative experience. To fix this issue, we are asking lenders to update the pictures of their items regularly. This will let other users know the exact condition of the product.\n\n위 글의 밑줄 친 (B)를 주어진 <조건>에 알맞게 다시 쓰시오.\n\n<조건>\n분사구문을 포함할 것\n\n→ ______________________________",
+      "options": [],
+      "answer": "Seeing a lot of positive reviews, I decided to borrow a bike helmet",
+      "acceptedAnswers": [
+        "Seeing a lot of positive reviews, I decided to borrow a bike helmet."
+      ]
+    },
+    {
+      "number": 30,
+      "question": "다음 글의 주제로 알맞은 것은?\n\n1. I share a house with other people. Sharing a house helps me save money. It's also safer than living alone.\n2. I sometimes give other people a ride on my way to work. They can get to their destinations for a small fee, and I can make some money. In addition, ride sharing reduces the number of cars on the road, which is environmentally friendly.\n3. Our group share our knowledge by helping each other learn other languages. For example, I'm good at Spanish, so I help others learn Spanish. Other members of the group are from China, so they teach us Chinese.",
+      "options": [
+        "the weaknesses of house sharing",
+        "the good points of sharing economy",
+        "the importance of having one's own car",
+        "the difference between knowing and teaching",
+        "the reasons people don't like to share something"
+      ],
+      "answer": "2"
+    }
+  ]
+}
