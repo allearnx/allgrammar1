@@ -1,0 +1,1808 @@
+{
+  "R1": [
+    {
+      "number": 1,
+      "question": "다음 영어 표현의 우리말 뜻이 알맞지 않은 것은?",
+      "options": [
+        "delicate: 부서지기 쉬운, 섬세한",
+        "contents: 내용물",
+        "architect: 우주인",
+        "spaceship: 우주선",
+        "tourist attraction: 관광 명소"
+      ],
+      "answer": "3"
+    },
+    {
+      "number": 2,
+      "question": "다음 빈칸에 공통으로 들어갈 말로 알맞은 것은?\n\n• He was ________ in health.\n• It is a ________ problem for students.\n• Babies have weak and ________ skin.",
+      "options": [
+        "giant",
+        "thrilled",
+        "curved",
+        "tightly",
+        "delicate"
+      ],
+      "answer": "5"
+    },
+    {
+      "number": 3,
+      "question": "다음 단어들을 배열하여 문장을 만들 때, 다섯 번째로 오는 단어는?\n\n<보기> Jiho / hear / everyone / spoke / that / could / him / loudly / so",
+      "options": [
+        "so",
+        "that",
+        "everyone",
+        "could",
+        "hear"
+      ],
+      "answer": "2"
+    },
+    {
+      "number": 4,
+      "question": "다음 중 빈칸에 들어갈 말이 나머지와 다른 것은?",
+      "options": [
+        "The boy is fast ________ to win the race.",
+        "He is smart ________ to understand the problem.",
+        "The marble table is ________ heavy for me to carry.",
+        "This rice cake is big ________ for all of us to eat.",
+        "The weather is warm ________ for us to play outside."
+      ],
+      "answer": "3"
+    },
+    {
+      "number": 5,
+      "question": "다음 두 문장의 의미가 서로 같지 않은 것은?",
+      "options": [
+        "Yumi took a rest so that she could recharge. → Yumi took a rest in order to recharge.",
+        "I wrote his name in my diary so that I wouldn't forget it. → I wrote his name in my diary so as to remember it.",
+        "Emily went to bed early so that she wouldn't miss the train. → Emily went to bed early in order to miss the train.",
+        "John saved money so that he could travel around the world. → John saved money so as to travel around the world.",
+        "I turned off the radio to concentrate on studying English. → I turned off the radio so that I could concentrate on studying English."
+      ],
+      "answer": "3"
+    },
+    {
+      "number": 6,
+      "question": "다음 중 의미가 나머지와 다른 하나는?",
+      "options": [
+        "We turned on the radio so as to listen to the news.",
+        "We turned on the radio not to listen to the news.",
+        "We turned on the radio in order to listen to the news.",
+        "We turned on the radio so that we could listen to the news.",
+        "We turned on the radio in order that we could listen to the news."
+      ],
+      "answer": "2"
+    },
+    {
+      "number": 7,
+      "question": "다음 우리말과 같은 의미가 되도록 괄호 안의 주어진 어구를 사용하여 영작하시오. (단어 추가 가능, 어형 변화 없음) ※ 완전한 문장으로 쓰시오.\n\n(1) 그 쥐는 그 구멍을 통과할 만큼 충분히 작지 않다. (go through / enough / the hole / mouse)\n(2) 민호의 영어는 외국인과 이야기할 만큼 충분히 좋다. (a foreigner / talk with / enough)\n\n(1) ______________________________\n(2) ______________________________",
+      "options": [],
+      "answer": "The mouse is not small enough to go through the hole. / Minho's English is good enough to talk with a foreigner.",
+      "subParts": [
+        {
+          "label": "(1)",
+          "answer": "The mouse is not small enough to go through the hole.",
+          "acceptedAnswers": [
+            "The mouse isn't small enough to go through the hole.",
+            "That mouse is not small enough to go through the hole.",
+            "That mouse isn't small enough to go through the hole."
+          ]
+        },
+        {
+          "label": "(2)",
+          "answer": "Minho's English is good enough to talk with a foreigner."
+        }
+      ]
+    },
+    {
+      "number": 8,
+      "question": "다음 문장의 의미가 나머지와 다른 것은?",
+      "options": [
+        "I appreciate your help.",
+        "Thank you for your help.",
+        "I'm very thankful to you for your help.",
+        "It's been a pleasure to have a chance to help you.",
+        "I can't tell you how much your help means to me."
+      ],
+      "answer": "4"
+    },
+    {
+      "number": 9,
+      "question": "다음 글을 읽고 물음에 답하시오.\nHello, students! Thank you for visiting our art museum. This museum opened in 1995. Since then, ⓐ<u>it</u> has exhibited many famous artworks. Today, you will see some famous artworks from the art books. Before we begin the (A)__________, let me remind you of a basic rule. You can take pictures of the artworks, but you're not allowed to touch ⓑ<u>them</u>. Now let's start the (A)__________.\n\n위 글의 밑줄 친 ⓐ, ⓑ가 가리키는 대상으로 바르게 짝지어진 것은?",
+      "options": [
+        "ⓐ 1995 – ⓑ the art books",
+        "ⓐ the tour – ⓑ the art books",
+        "ⓐ the tour – ⓑ the artworks",
+        "ⓐ this museum – ⓑ pictures",
+        "ⓐ this museum – ⓑ the artworks"
+      ],
+      "answer": "5"
+    },
+    {
+      "number": 10,
+      "question": "다음 글을 읽고 물음에 답하시오.\nHello, students! Thank you for visiting our art museum. This museum opened in 1995. Since then, ⓐ<u>it</u> has exhibited many famous artworks. Today, you will see some famous artworks from the art books. Before we begin the (A)__________, let me remind you of a basic rule. You can take pictures of the artworks, but you're not allowed to touch ⓑ<u>them</u>. Now let's start the (A)__________.\n\n위 글의 빈칸 (A)에 공통으로 들어갈 말을 아래 영영풀이를 참고하여 고르면?\n\nan activity to go through a place in to see and learn about the different parts of it",
+      "options": [
+        "tour",
+        "attraction",
+        "exhibit",
+        "palace",
+        "guide"
+      ],
+      "answer": "1"
+    },
+    {
+      "number": 11,
+      "question": "다음 글을 읽고 물음에 답하시오.\nHello, students! Thank you for visiting our art museum. This museum opened in 1995. Since then, ⓐ<u>it</u> has exhibited many famous artworks. Today, you will see some famous artworks from the art books. Before we begin the (A)__________, let me remind you of a basic rule. You can take pictures of the artworks, but you're not allowed to touch ⓑ<u>them</u>. Now let's start the (A)__________.\n\n위 글의 내용과 일치하는 것은?",
+      "options": [
+        "The students are allowed to touch the artworks.",
+        "The students are not allowed to take their art books.",
+        "The art book has exhibited many artworks since 1995.",
+        "A boy is allowed to remind the students of a basic rule.",
+        "The students are allowed to take pictures of the artworks."
+      ],
+      "answer": "5"
+    },
+    {
+      "number": 12,
+      "question": "다음 대화를 읽고 물음에 답하시오.\nB: The tickets for the World Music Concert are on sale now.\nG: Really? Let's (A)<u>book</u> the tickets online right away.\nB: Okay. Let's see... There are still tickets left for November 5th.\nG: Sounds good. Let's get two student tickets.\nB: Oh, do you mind if I bring my little brother?\nG: (B)<u>물론, 데려가도 되지</u>. But it says that you are not allowed to bring children under 8.\nB: No problem. He's 10.\nG: Okay, I'll add one child ticket. The total price is 25 dollars.\nB: Great.\nG: I can't wait to see the concert!\n\n위 대화의 밑줄 친 (A)와 가장 유사한 뜻으로 쓰인 것은?",
+      "options": [
+        "She's in Songdo writing her new <u>book</u>.",
+        "My life is an open <u>book</u>. I have nothing to hide.",
+        "That's one of the best <u>book</u>s I've read in a long time.",
+        "To get tickets, you have to <u>book</u> before a future time.",
+        "You can learn many things by studying the <u>book</u> about plants."
+      ],
+      "answer": "4"
+    },
+    {
+      "number": 13,
+      "question": "다음 대화를 읽고 물음에 답하시오.\nB: The tickets for the World Music Concert are on sale now.\nG: Really? Let's (A)<u>book</u> the tickets online right away.\nB: Okay. Let's see... There are still tickets left for November 5th.\nG: Sounds good. Let's get two student tickets.\nB: Oh, do you mind if I bring my little brother?\nG: (B)<u>물론, 데려가도 되지</u>. But it says that you are not allowed to bring children under 8.\nB: No problem. He's 10.\nG: Okay, I'll add one child ticket. The total price is 25 dollars.\nB: Great.\nG: I can't wait to see the concert!\n\n위 대화의 밑줄 친 (B)의 우리말과 뜻이 유사한 영어 표현으로 알맞은 것은?",
+      "options": [
+        "Definitely.",
+        "Yes, I do.",
+        "Of course.",
+        "Of course not.",
+        "Yes, I'm not allowed to bring your little brother."
+      ],
+      "answer": "4"
+    },
+    {
+      "number": 14,
+      "question": "다음 글을 읽고 물음에 답하시오.\nHave you heard of the ⓐ<u>expression</u>, \"Art imitates nature\"? Many artists get their ideas and ⓑ<u>inspirations</u> from the world around them. This is because the natural world is a beautiful place. The ⓒ<u>shapes</u> in nature are very pleasing to the eye. For example, look at the egg on the left. Isn't it beautiful? It is round and delicate, yet strong enough to protect its ⓓ<u>contents</u>. Can you imagine a ⓔ<u>building</u> that looks like an egg? Such a building actually exists in London.\n\n위 글의 밑줄 친 ⓐ~ⓔ 중, 아래 영영 풀이에 해당하는 단어는?\n\nsomething that gives you ideas about what to do or create",
+      "options": [
+        "ⓐ",
+        "ⓑ",
+        "ⓒ",
+        "ⓓ",
+        "ⓔ"
+      ],
+      "answer": "2"
+    },
+    {
+      "number": 15,
+      "question": "다음 글을 읽고 물음에 답하시오.\nHave you heard of the ⓐ<u>expression</u>, \"Art imitates nature\"? Many artists get their ideas and ⓑ<u>inspirations</u> from the world around them. This is because the natural world is a beautiful place. The ⓒ<u>shapes</u> in nature are very pleasing to the eye. For example, look at the egg on the left. Isn't it beautiful? It is round and delicate, yet strong enough to protect its ⓓ<u>contents</u>. Can you imagine a ⓔ<u>building</u> that looks like an egg? Such a building actually exists in London.\n\n위 글의 내용과 일치하는 것은?",
+      "options": [
+        "자연은 예술을 모방한다.",
+        "달걀 모양의 건물은 존재하지 않는다.",
+        "예술작품은 우리 눈에 보기 매우 좋다.",
+        "달걀은 그 내용물을 보호할 만큼 튼튼하다.",
+        "많은 예술가들은 자연에서 벗어나 아이디어를 얻는다."
+      ],
+      "answer": "4"
+    },
+    {
+      "number": 16,
+      "question": "다음 글을 읽고 물음에 답하시오.\nHave you heard of the ⓐ<u>expression</u>, \"Art imitates nature\"? Many artists get their ideas and ⓑ<u>inspirations</u> from the world around them. This is because the natural world is a beautiful place. The ⓒ<u>shapes</u> in nature are very pleasing to the eye. For example, look at the egg on the left. Isn't it beautiful? It is round and delicate, yet strong enough to protect its ⓓ<u>contents</u>. Can you imagine a ⓔ<u>building</u> that looks like an egg? Such a building actually exists in London.\n\n위 글의 주제로 가장 적절한 것은?",
+      "options": [
+        "예술의 자연 모방성",
+        "예술가의 영감의 즉흥성",
+        "자연의 신비함과 아름다움",
+        "달걀의 생김새와 재질의 독특함",
+        "런던 시청 건물의 특징"
+      ],
+      "answer": "1"
+    },
+    {
+      "number": 17,
+      "question": "다음 글을 읽고 물음에 답하시오.\nNature has (A)______________________________. This is (B)<u>the Sagrada Familia</u> in Spain. It is ⓐ<u>one of the most famous church</u> in the world. ⓑ<u>Looking at</u> the beautiful tall columns inside the church. They look like trees, ⓒ<u>don't</u> they? The famous architect, Antoni Gaudi, ⓓ<u>using</u> the shape of trees in the Sagrada Familia. That's ⓔ<u>what</u> he brought the beauty of nature indoors.\n\n위 글의 빈칸 (A)에 들어갈 말로 알맞은 것은?",
+      "options": [
+        "provided people a place to rest",
+        "been destroyed by many architects",
+        "frightened many artists in the world",
+        "inspired many architects around the world",
+        "imitated architecture that was created by artists"
+      ],
+      "answer": "4"
+    },
+    {
+      "number": 18,
+      "question": "다음 글을 읽고 물음에 답하시오.\nNature has (A)______________________________. This is (B)<u>the Sagrada Familia</u> in Spain. It is ⓐ<u>one of the most famous church</u> in the world. ⓑ<u>Looking at</u> the beautiful tall columns inside the church. They look like trees, ⓒ<u>don't</u> they? The famous architect, Antoni Gaudi, ⓓ<u>using</u> the shape of trees in the Sagrada Familia. That's ⓔ<u>what</u> he brought the beauty of nature indoors.\n\n위 글의 밑줄 친 ⓐ~ⓔ 중, 어법상 알맞은 것은?",
+      "options": [
+        "ⓐ",
+        "ⓑ",
+        "ⓒ",
+        "ⓓ",
+        "ⓔ"
+      ],
+      "answer": "3"
+    },
+    {
+      "number": 19,
+      "question": "다음 글을 읽고 물음에 답하시오.\nNature has (A)______________________________. This is (B)<u>the Sagrada Familia</u> in Spain. It is ⓐ<u>one of the most famous church</u> in the world. ⓑ<u>Looking at</u> the beautiful tall columns inside the church. They look like trees, ⓒ<u>don't</u> they? The famous architect, Antoni Gaudi, ⓓ<u>using</u> the shape of trees in the Sagrada Familia. That's ⓔ<u>what</u> he brought the beauty of nature indoors.\n\n위 글의 밑줄 친 (B)에 대한 설명으로 옳지 않은 것은?",
+      "options": [
+        "It is located in Spain.",
+        "It is a well-known church.",
+        "Its columns resemble trees.",
+        "It was inspired by the most famous church.",
+        "It was designed by Antoni Gaudi, a famous architect."
+      ],
+      "answer": "4"
+    },
+    {
+      "number": 20,
+      "question": "다음 글을 읽고 물음에 답하시오.\nIn the first two examples, we can easily see ⓐ<u>that</u> inspired the architect. But in the next example from Australia, this is not so ⓑ<u>obviously</u>. Jørn Utzon, the architect of the Sydney Opera House, took a shape from nature and ⓒ<u>adds</u> his imagination. Can you guess what inspired him? Many people think ⓓ<u>what</u> it is the waves in the ocean or a sailing boat. But interestingly, the inspiration came from an orange. Look at the roof ⓔ<u>closely</u>. Can you see the peels of an orange? When orange lights are ⓕ<u>shone</u> on the building, you can see the peels ⓖ<u>more</u> clearly.\n\n위 글의 밑줄 친 ⓐ~ⓖ 중, 어법상 어색한 것의 개수는?",
+      "options": [
+        "1개",
+        "2개",
+        "3개",
+        "4개",
+        "5개"
+      ],
+      "answer": "4"
+    },
+    {
+      "number": 21,
+      "question": "다음 글을 읽고 물음에 답하시오.\nIn the first two examples, we can easily see ⓐ<u>that</u> inspired the architect. But in the next example from Australia, this is not so ⓑ<u>obviously</u>. Jørn Utzon, the architect of the Sydney Opera House, took a shape from nature and ⓒ<u>adds</u> his imagination. Can you guess what inspired him? Many people think ⓓ<u>what</u> it is the waves in the ocean or a sailing boat. But interestingly, the inspiration came from an orange. Look at the roof ⓔ<u>closely</u>. Can you see the peels of an orange? When orange lights are ⓕ<u>shone</u> on the building, you can see the peels ⓖ<u>more</u> clearly.\n\n위 글의 내용과 일치하지 않는 것은?",
+      "options": [
+        "사실 시드니 오페라 하우스의 건축가는 오렌지 껍질에서 영감을 얻었다.",
+        "시드니 오페라 하우스의 건축가는 자연 속의 형태와 자신의 상상력을 결합했다.",
+        "사람들은 시드니 오페라 하우스를 보고 파도와 돛단배를 연상하는 경우가 많다.",
+        "세계 각국의 모든 건물은 건축가에게 영감을 준 요소를 명확하게 드러낸다.",
+        "오렌지색 조명이 오페라 하우스를 비추면 껍질의 이미지가 더 분명하게 보인다."
+      ],
+      "answer": "4"
+    },
+    {
+      "number": 22,
+      "question": "다음 글을 읽고 물음에 답하시오.\nWhat about Korea? Have you ever been to Dongdaemun Design Plaza in Seoul? Many people think that ⓐ<u>the building</u> looks like a giant spaceship. But the architect, Zaha Hadid, took the curved lines from nature so that city people could enjoy ⓑ<u>them</u>. Thanks to its special design, ⓒ<u>it</u> has become a popular tourist (A)__________ in Seoul. Millions of people visit ⓓ<u>there</u> every year.\nAs you can see, many buildings try to capture the beauty of nature in their design. ⓔ<u>They</u> are perfect examples of \"Nature meets city.\" (B)<u>만약 당신이 건축가라면</u>, what would you choose from nature?\n\n위 글의 밑줄 친 ⓐ~ⓔ가 의미하는 것으로 알맞지 않은 것은?",
+      "options": [
+        "ⓐ the building: Dongdaemun Design Plaza",
+        "ⓑ them: the curved lines from nature",
+        "ⓒ it: the curved line from nature",
+        "ⓓ there: Dongdaemun Design Plaza",
+        "ⓔ they: Buildings inspired from nature"
+      ],
+      "answer": "3"
+    },
+    {
+      "number": 23,
+      "question": "다음 글을 읽고 물음에 답하시오.\nWhat about Korea? Have you ever been to Dongdaemun Design Plaza in Seoul? Many people think that ⓐ<u>the building</u> looks like a giant spaceship. But the architect, Zaha Hadid, took the curved lines from nature so that city people could enjoy ⓑ<u>them</u>. Thanks to its special design, ⓒ<u>it</u> has become a popular tourist (A)__________ in Seoul. Millions of people visit ⓓ<u>there</u> every year.\nAs you can see, many buildings try to capture the beauty of nature in their design. ⓔ<u>They</u> are perfect examples of \"Nature meets city.\" (B)<u>만약 당신이 건축가라면</u>, what would you choose from nature?\n\n위 글의 빈칸 (A)에 들어갈 단어가 들어가기에 가장 적절한 문장은? (단, 문장 내 사용된 의미는 다를 수 있음)",
+      "options": [
+        "Barely 50% of the ________ voted.",
+        "He won first prize in the ________.",
+        "She felt an immediate ________ for him.",
+        "A(n) ________ in military expenditure was unavoidable.",
+        "You made a small improvement, but in a right ________."
+      ],
+      "answer": "3"
+    },
+    {
+      "number": 24,
+      "question": "다음 글을 읽고 물음에 답하시오.\nWhat about Korea? Have you ever been to Dongdaemun Design Plaza in Seoul? Many people think that ⓐ<u>the building</u> looks like a giant spaceship. But the architect, Zaha Hadid, took the curved lines from nature so that city people could enjoy ⓑ<u>them</u>. Thanks to its special design, ⓒ<u>it</u> has become a popular tourist (A)__________ in Seoul. Millions of people visit ⓓ<u>there</u> every year.\nAs you can see, many buildings try to capture the beauty of nature in their design. ⓔ<u>They</u> are perfect examples of \"Nature meets city.\" (B)<u>만약 당신이 건축가라면</u>, what would you choose from nature?\n\n위 글의 밑줄 친 (B)의 우리말을 5단어로 영작하시오.\n\n→ ______________________, what would you choose from nature?",
+      "options": [],
+      "answer": "If you were an architect"
+    },
+    {
+      "number": 25,
+      "question": "다음 글을 읽고 물음에 답하시오.\nWhat about Korea? Have you ever been to Dongdaemun Design Plaza in Seoul? Many people think that ⓐ<u>the building</u> looks like a giant spaceship. But the architect, Zaha Hadid, took the curved lines from nature so that city people could enjoy ⓑ<u>them</u>. Thanks to its special design, ⓒ<u>it</u> has become a popular tourist (A)__________ in Seoul. Millions of people visit ⓓ<u>there</u> every year.\nAs you can see, many buildings try to capture the beauty of nature in their design. ⓔ<u>They</u> are perfect examples of \"Nature meets city.\" (B)<u>만약 당신이 건축가라면</u>, what would you choose from nature?\n\n위 글을 읽고 다음 질문에 답하시오.\n\nWhy did the architect, Zaha Hadid apply the curved lines to Dongdaemun Design Plaza? Fill in the blanks.\n\n→ Because she wanted to make ________ ________ ________ ________ ________ ________ ________.",
+      "options": [],
+      "answer": "people enjoy the curved lines from nature"
+    },
+    {
+      "number": 26,
+      "question": "다음 글을 읽고 물음에 답하시오.\nHave you heard of the expression, \"Art imitates nature\"? Many artists get their ideas and inspirations from the world around (A)<u>them</u>. This is because the natural world is a beautiful place. The shapes in nature are very pleasing to the eye. For example, look at the egg on the left. Isn't it beautiful? It is round and delicate, yet strong enough to protect (B)<u>its</u> contents. Can you imagine a building that looks like an egg? Such a building actually exists in London. It is London City Hall.\n\n위 글의 밑줄 친 (A)와 (B)가 가리키는 것으로 알맞게 연결된 것은?",
+      "options": [
+        "(A) artists – (B) nature",
+        "(A) artists – (B) egg",
+        "(A) ideas – (B) egg",
+        "(A) ideas – (B) shape",
+        "(A) inspirations – (B) nature"
+      ],
+      "answer": "2"
+    },
+    {
+      "number": 27,
+      "question": "다음 글을 읽고 물음에 답하시오.\nHave you heard of the expression, \"Art imitates nature\"? Many artists get their ideas and inspirations from the world around (A)<u>them</u>. This is because the natural world is a beautiful place. The shapes in nature are very pleasing to the eye. For example, look at the egg on the left. Isn't it beautiful? It is round and delicate, yet strong enough to protect (B)<u>its</u> contents. Can you imagine a building that looks like an egg? Such a building actually exists in London. It is London City Hall.\n\n위 글의 주제로 가장 적절한 것은?",
+      "options": [
+        "negative impact of nature on architecture",
+        "where London City Hall is and how to get there",
+        "architecture whose design is inspired by nature around the world",
+        "who designed London City Hall and how he was inspired by an egg",
+        "why City Hall in London is the greatest architecture throughout the history"
+      ],
+      "answer": "3"
+    },
+    {
+      "number": 28,
+      "question": "다음 글을 읽고 물음에 답하시오.\nHave you heard of the expression, \"Art ⓐ<u>inspires</u> nature\"? Many artists get their ideas and inspirations from the world around them. (A)<u>This</u> is because the natural world is a beautiful place. The shapes in nature are very ⓑ<u>pleased</u> to the eye. For example, think of an egg. Isn't it beautiful? It is round and delicate, yet (B)<u>그것의 내용물을 보호할 만큼 충분히 튼튼한</u>. Can you imagine a building that looks like an egg? Such a building actually ⓒ<u>exits</u> in London.\nNature has ⓓ<u>imitated</u> many architects around the world. Look at the Sagrada Familia in Spain. It is one of the most famous churches in the world. Look at the beautiful tall columns inside the church. They look like trees, don't they? The famous architect, Antoni Gaudi, used the shape of trees in the Sagrada Familia. That's how he ⓔ<u>brought</u> the beauty of nature indoors.\n\n위 글의 밑줄 친 (B)의 우리말을 <보기>에 주어진 단어를 이용하여 영작하시오.\n\n<보기> strong, protect, contents\n\n→ It is round and delicate, yet ______________________.",
+      "options": [],
+      "answer": "strong enough to protect its contents"
+    },
+    {
+      "number": 29,
+      "question": "다음 글을 읽고 물음에 답하시오.\nHave you heard of the expression, \"Art imitates nature\"? Many artists get their ideas and inspirations from the world around them. This is ⓐ________ the natural world is a beautiful place. The shapes in nature are very pleasing to the eye. (A)________, look at the egg on the left. Isn't it beautiful? It is round and delicate, yet strong enough to protect its contents. Can you imagine a building that looks like an egg? Such a building actually exists in London.\nNature has inspired many architects around the world. This is the Sagrada Familia in Spain. (B)<u>그것은 세계에서 가장 유명한 성당 중의 하나이다</u>. Look at the beautiful tall columns inside the church. They look like trees, don't they? The famous architect, Antoni Gaudi, used the shape of trees in the Sagrada Familia. That's ⓑ________ he brought the beauty of nature indoors.\n\n위 글의 밑줄 친 (B)의 우리말을 주어진 단어 및 표현을 이용하여 알맞게 영작하시오. ※ 완전한 문장으로 쓰시오.\n\n<보기> famous, church, in the world\n\n→ ______________________________",
+      "options": [],
+      "answer": "It is one of the most famous churches in the world."
+    },
+    {
+      "number": 30,
+      "question": "다음 글의 밑줄 친 우리말 (A)와 같은 뜻이 되도록 <보기>에 주어진 단어를 이용하여 영작하시오. ※ 완전한 문장으로 쓰시오.\n\nI go to Boram Middle School in Suwon. My school has a 4-story building. It also has a large playground, a gym and a small garden. The garden is on top of the school building. (A)<u>우리는 신선한 음식을 먹을 수 있도록 그곳에서 몇 몇 채소들을 기른다</u>. My favorite place is the bench under the big tree. I love sitting there and talking with my friends. I like my school very much.\n\n<보기> some, grow, have, so\n\n→ ______________________________",
+      "options": [],
+      "answer": "We grow some vegetables there so that we can have fresh food."
+    }
+  ],
+  "R2": [
+    {
+      "number": 1,
+      "question": "다음 중 두 단어의 관계가 나머지와 다른 하나는?",
+      "options": [
+        "inspire - inspiration",
+        "natural - nature",
+        "imagine - imagination",
+        "express - expression",
+        "attract - attraction"
+      ],
+      "answer": "2"
+    },
+    {
+      "number": 2,
+      "question": "다음 빈칸에 공통으로 들어갈 말로 알맞은 것은?\n\n• If you ________ the concert tickets this month, you can get a 20% discount.\n• Holes is a ________ by Louis Sachar in 1998.",
+      "options": [
+        "book",
+        "exhibit",
+        "allow",
+        "capture",
+        "imitate"
+      ],
+      "answer": "1"
+    },
+    {
+      "number": 3,
+      "question": "다음 우리말 뜻에 맞게 아래 단어들을 나열할 때, 4번째 오는 단어는?\n\n<보기> the / the / into / to / is / fit / doll / pocket / enough / small\n\n그 인형은 그 주머니에 들어가기에 충분히 작다.",
+      "options": [
+        "it",
+        "fit",
+        "pocket",
+        "enough",
+        "small"
+      ],
+      "answer": "5"
+    },
+    {
+      "number": 4,
+      "question": "다음 주어진 문장과 뜻이 같은 문장은?\n\nShe is too young to drive a car.",
+      "options": [
+        "She can drive a car.",
+        "She is old enough to drive a car.",
+        "She isn't young enough to drive a car.",
+        "She is young but she can drive a car.",
+        "She can't drive a car because she is too young."
+      ],
+      "answer": "5"
+    },
+    {
+      "number": 5,
+      "question": "다음 중 두 문장의 의미가 같은 것은?",
+      "options": [
+        "She is too young to travel alone. → She is so old that she can travel alone.",
+        "This book is so big that I can't put it in the bag. → This book is big enough to put it in the bag.",
+        "She is not old enough to drive a car. → She is so old that she can drive a car.",
+        "I was too tired to do the dishes. → I was so tired that I can't do the dishes.",
+        "The ladder is long enough to reach the top shelf. → The ladder is so long that it can reach the top shelf."
+      ],
+      "answer": "5"
+    },
+    {
+      "number": 6,
+      "question": "다음 중 밑줄 친 부분이 바르게 쓰인 것은?",
+      "options": [
+        "The dress is <u>such pretty to</u> wear.",
+        "The coffee is <u>too hot for</u> to drink.",
+        "This bag is <u>too small to</u> carry two balls.",
+        "Sumi isn't <u>old enough that</u> she can't drive a car.",
+        "He is <u>enough smart to</u> solve the math problem."
+      ],
+      "answer": "3"
+    },
+    {
+      "number": 7,
+      "question": "다음 주어진 문장을 괄호 안의 주어진 표현을 사용하여 같은 의미의 문장으로 바꾸어 쓰시오. ※ 완전한 문장으로 쓰시오.\n\n(1) The girl went home early to take care of her brother. (so that)\n(2) I wrote his name in my diary so that I wouldn't forget it. (so as to)\n\n(1) ______________________________\n(2) ______________________________",
+      "options": [],
+      "answer": "The girl went home early so that she could take care of her brother. / I wrote his name in my diary so as not to forget it.",
+      "subParts": [
+        {
+          "label": "(1)",
+          "answer": "The girl went home early so that she could take care of her brother."
+        },
+        {
+          "label": "(2)",
+          "answer": "I wrote his name in my diary so as not to forget it."
+        }
+      ]
+    },
+    {
+      "number": 8,
+      "question": "다음 중 금지하는 표현으로 알맞지 않은 것은?",
+      "options": [
+        "You'd better not skip breakfast.",
+        "Don't throw empty bottles away.",
+        "I can't afford to buy this computer now.",
+        "They shouldn't bring their cameras here.",
+        "They're not allowed to bring their umbrellas inside."
+      ],
+      "answer": "3"
+    },
+    {
+      "number": 9,
+      "question": "다음 대화를 읽고 물음에 답하시오.\nB: The tickets for the World Music Concert are on sale now.\nG: Really? Let's book the tickets online right away.\nB: Okay. Let's see... There are still tickets left for November 5th.\nG: Sounds good. Let's get two student tickets.\nB: Oh, do you mind if I bring my little brother?\nG: Not at all. But it says that you are not allowed to bring children under 8.\nB: No problem. He's 10.\nG: Okay, I'll add one child ticket. The total price is 25 dollars.\nB: Great.\nG: I can't wait to see the concert!\n\n위 대화의 내용과 일치하는 것은?",
+      "options": [
+        "They will get three student tickets.",
+        "The World Music Concert is for all ages.",
+        "The girl's little brother will go to the concert.",
+        "The tickets are still left for the whole of November.",
+        "The girl is looking forward to going to the concert."
+      ],
+      "answer": "5"
+    },
+    {
+      "number": 10,
+      "question": "다음 대화의 빈칸에 들어갈 말로 알맞은 것은?\n\nM: Excuse me. You're not allowed to ____________.\nG: Oh, where should I put it?\nM: There is an umbrella stand outside.\nG: Okay. I'll put it there. Thank you.",
+      "options": [
+        "use a camera",
+        "bring any food",
+        "touch the works",
+        "drink something inside",
+        "bring your umbrella inside"
+      ],
+      "answer": "5"
+    },
+    {
+      "number": 11,
+      "question": "다음 대화의 빈칸 ⓐ~ⓓ에 들어갈 말로 알맞지 않은 것은?\n\nA: Sumin, my train is leaving in five minutes.\nB: I hope you enjoyed your trip, Daniel.\nA: ⓐ____________________\nB: Which place did you like most in my town?\nA: ⓑ____________________\nB: Yeah, it's the most popular place here.\nA: I really liked walking around in hanbok. ⓒ________________\nB: I'm glad to hear that.\nA: ⓓ____________________\nB: It was my pleasure. Have a safe trip.",
+      "options": [
+        "Of course, I did.",
+        "I looked really cool.",
+        "I'm sorry to hear that.",
+        "I liked the folk village most.",
+        "Thank you for showing me around."
+      ],
+      "answer": "3"
+    },
+    {
+      "number": 12,
+      "question": "다음 대화를 읽고 물음에 답하시오.\nB: Sumin, my train is leaving in five minutes.\nG: I hope you enjoyed your trip, Daniel.\nB: Of course, I (A)__________.\nG: Which place did you like most in my town?\nB: I liked the folk village most.\nG: Yeah, it's the most popular place here.\nB: I really liked walking around in hanbok. I looked really cool.\nG: I'm glad to hear that.\nB: Thank you for showing me around.\nG: It was my pleasure. Have a safe trip.\n\n위 대화의 빈칸 (A)에 들어갈 말로 알맞은 것은?",
+      "options": [
+        "am",
+        "was",
+        "will",
+        "do",
+        "did"
+      ],
+      "answer": "5"
+    },
+    {
+      "number": 13,
+      "question": "다음 대화를 읽고 물음에 답하시오.\nB: Sumin, my train is leaving in five minutes.\nG: I hope you enjoyed your trip, Daniel.\nB: Of course, I (A)__________.\nG: Which place did you like most in my town?\nB: I liked the folk village most.\nG: Yeah, it's the most popular place here.\nB: I really liked walking around in hanbok. I looked really cool.\nG: I'm glad to hear that.\nB: Thank you for showing me around.\nG: It was my pleasure. Have a safe trip.\n\n위 대화를 읽고 대답할 수 없는 질문은?",
+      "options": [
+        "When is Daniel's train leaving?",
+        "Which color looked cool to Daniel?",
+        "Did Daniel like walking around in hanbok?",
+        "What was Daniel thankful to Sumin for?",
+        "What is the most popular place in Sumin's town?"
+      ],
+      "answer": "2"
+    },
+    {
+      "number": 14,
+      "question": "다음 글을 읽고 물음에 답하시오.\nThis is the Sagrada Familia in Spain. It is one of the most famous churches in the world. Look at the beautiful tall columns inside the church. They look like trees, don't they? The famous architect, Antoni Gaudi, used the shape of tress in the Sagrada Familia. That's how he brought the beauty of nature (A)[indoors / outdoors].\nJørn Utzon, the architect of the Sydney Opera House, took a shape from nature and added his imagination. Can you guess what inspired him? Many people think that it is the waves in the ocean or a sailing boat. But interestingly, the (B)[exhibition / inspiration] came from an orange. Look at the roof closely. Can you see the peels of an orange? When orange lights are shone on the building, you can see the peels more clearly.\nWhat about Korea? Have you ever been to Dongdaemun Design Plaza in Seoul? Many people think that the building looks like a giant spaceship. But the architect, Zaha Hadid, took the curved lines from nature so that city people could enjoy them. (C)[Because of / Without] its special design, it has become a popular tourist attraction in Seoul.\n\n위 글의 괄호 (A), (B), (C)에서 흐름상 알맞은 말로 바르게 연결된 것은?",
+      "options": [
+        "(A) indoors – (B) inspiration – (C) Because of",
+        "(A) indoors – (B) exhibition – (C) Because of",
+        "(A) indoors – (B) inspiration – (C) Without",
+        "(A) outdoors – (B) inspiration – (C) Because of",
+        "(A) outdoors – (B) exhibition – (C) Without"
+      ],
+      "answer": "1"
+    },
+    {
+      "number": 15,
+      "question": "다음 글을 읽고 물음에 답하시오.\nThis is the Sagrada Familia in Spain. It is one of the most famous churches in the world. Look at the beautiful tall columns inside the church. They look like trees, don't they? The famous architect, Antoni Gaudi, used the shape of tress in the Sagrada Familia. That's how he brought the beauty of nature (A)[indoors / outdoors].\nJørn Utzon, the architect of the Sydney Opera House, took a shape from nature and added his imagination. Can you guess what inspired him? Many people think that it is the waves in the ocean or a sailing boat. But interestingly, the (B)[exhibition / inspiration] came from an orange. Look at the roof closely. Can you see the peels of an orange? When orange lights are shone on the building, you can see the peels more clearly.\nWhat about Korea? Have you ever been to Dongdaemun Design Plaza in Seoul? Many people think that the building looks like a giant spaceship. But the architect, Zaha Hadid, took the curved lines from nature so that city people could enjoy them. (C)[Because of / Without] its special design, it has become a popular tourist attraction in Seoul.\n\n위 글의 내용과 일치하는 것은?",
+      "options": [
+        "Antoni Gaudi made tall columns outside the church.",
+        "Jørn Utzon was inspired by the waves when he designed the Sydney Opera House.",
+        "The Sydney Opera House is one of the largest sailing boats in the world.",
+        "The architect, Zaha Hadid, wanted city people to enjoy the curved lines from nature.",
+        "Dongdaemun Design Plaza is only known to just a few tourists in Seoul."
+      ],
+      "answer": "4"
+    },
+    {
+      "number": 16,
+      "question": "다음 글을 읽고 물음에 답하시오.\nNature has inspired many architects around the world. ⓐ<u>This</u> is the Sagrada Familia in Spain. ⓑ<u>It</u> is one of the most famous churches in the world. Look at the beautiful tall columns inside ⓒ<u>the church</u>. They look like trees, don't they? The famous architect, Antoni Gaudi, used the shape of tress in ⓓ<u>the Sagrada Familia</u>. That's how he brought ⓔ<u>the beauty of nature</u> indoors.\n\n위 글의 밑줄 친 ⓐ~ⓔ 중, 가리키는 대상이 다른 하나는?",
+      "options": [
+        "ⓐ",
+        "ⓑ",
+        "ⓒ",
+        "ⓓ",
+        "ⓔ"
+      ],
+      "answer": "5"
+    },
+    {
+      "number": 17,
+      "question": "다음 글을 읽고 물음에 답하시오.\nNature has inspired many architects around the world. ⓐ<u>This</u> is the Sagrada Familia in Spain. ⓑ<u>It</u> is one of the most famous churches in the world. Look at the beautiful tall columns inside ⓒ<u>the church</u>. They look like trees, don't they? The famous architect, Antoni Gaudi, used the shape of tress in ⓓ<u>the Sagrada Familia</u>. That's how he brought ⓔ<u>the beauty of nature</u> indoors.\n\n위 글의 the Sagrada Familia에 대한 설명으로 옳지 않은 것은?",
+      "options": [
+        "It was designed by Antoni Gaudi.",
+        "It is well known all around the world.",
+        "You're not allowed to go inside the church.",
+        "Gaudi was inspired by nature when he designed it.",
+        "Gaudi took the shape of trees for the columns inside the church."
+      ],
+      "answer": "3"
+    },
+    {
+      "number": 18,
+      "question": "다음 주어진 글에 이어질 순서로 알맞은 것은?\n\nHave you heard of the expression, \"Art imitates nature?\" Many artists get their ideas and inspirations from the world around them.\n\n(A) Can you imagine a building that looks like an egg? Such a building actually exists in London.\n(B) This is because the natural world is a beautiful place. The shapes in nature are very pleasing to the eye.\n(C) For example, look at the shape of an egg. Isn't it beautiful? It is round and delicate, yet strong enough to protect its contents.",
+      "options": [
+        "(A)-(B)-(C)",
+        "(A)-(C)-(B)",
+        "(B)-(A)-(C)",
+        "(B)-(C)-(A)",
+        "(C)-(B)-(A)"
+      ],
+      "answer": "4"
+    },
+    {
+      "number": 19,
+      "question": "다음 글을 읽고 물음에 답하시오.\nIn the first two examples, we can ⓐ________ see what inspired the architect. But in the next example from Australia, this is not so ⓑ________. Jørn Utzon, the architect of the Sydney Opera House, took a shape from nature and added his imagination. Can you guess what inspired him? Many people think that it is the waves in the ocean or a sailing boat. But interestingly, the inspiration came from an orange. Look at the roof ⓒ________. Can you see the peels of an orange? When orange lights are shone on the building, you can see the peels more ⓓ________.\nWhat about Korea? Have you ever been to Dongdaemun Design Plaza in Seoul? Many people think that the building looks like a giant spaceship. But the architect, Zaha Hadid, took the curved lines from nature so that city people could enjoy them. Thanks to its special design, it has become a popular tourist ⓔ________ in Seoul.\n\n위 글의 내용과 일치하는 것은? (정답 2개)",
+      "options": [
+        "Zaha Hadid는 Sydney Opera House의 건축가다.",
+        "Dongdaemun Design Plaza는 자연의 곡선을 본 따서 만들었다.",
+        "Jørn Utzon은 바다의 파도에서 영감을 얻어 건축물을 만들었다.",
+        "사람들은 Sydney Opera House의 건축가가 돛단배에서 영감을 얻었다고 생각한다.",
+        "사람들은 Dongdaemun Design Plaza가 거대한 행성을 닮았다고 생각한다."
+      ],
+      "answer": "2, 4"
+    },
+    {
+      "number": 20,
+      "question": "다음 글을 읽고 물음에 답하시오.\nIn the first two examples, we can ⓐ________ see what inspired the architect. But in the next example from Australia, this is not so ⓑ________. Jørn Utzon, the architect of the Sydney Opera House, took a shape from nature and added his imagination. Can you guess what inspired him? Many people think that it is the waves in the ocean or a sailing boat. But interestingly, the inspiration came from an orange. Look at the roof ⓒ________. Can you see the peels of an orange? When orange lights are shone on the building, you can see the peels more ⓓ________.\nWhat about Korea? Have you ever been to Dongdaemun Design Plaza in Seoul? Many people think that the building looks like a giant spaceship. But the architect, Zaha Hadid, took the curved lines from nature so that city people could enjoy them. Thanks to its special design, it has become a popular tourist ⓔ________ in Seoul.\n\n위 글의 빈칸 ⓐ~ⓔ에 들어갈 단어로 바르게 연결되지 않은 것은?",
+      "options": [
+        "ⓐ: easily",
+        "ⓑ: obvious",
+        "ⓒ: far away",
+        "ⓓ: clearly",
+        "ⓔ: attraction"
+      ],
+      "answer": "3"
+    },
+    {
+      "number": 21,
+      "question": "다음 글을 읽고 물음에 답하시오.\nⓐ<u>Nature has inspired many architects around the world</u>. ⓑ<u>This is the Sagrada Familia in Spain</u>. ⓒ<u>It is one of the (A)[most famous / famousest] churches in the world</u>. ⓓ<u>Look at the beautiful tall columns inside the church</u>. ⓔ<u>They look like trees, (B)[don't / do] they</u>? The famous architect, Antoni Gaudi, used the shape of trees in the Sagrada Familia. That's (C)[how / the way how] he brought the beauty of nature ㉠<u>indoors</u>.\n\n위 글의 밑줄 친 ㉠에 해당하는 곳에 대한 구체적 설명이 포함된 문장은?",
+      "options": [
+        "ⓐ",
+        "ⓑ",
+        "ⓒ",
+        "ⓓ",
+        "ⓔ"
+      ],
+      "answer": "4"
+    },
+    {
+      "number": 22,
+      "question": "다음 글을 읽고 물음에 답하시오.\nⓐ<u>Nature has inspired many architects around the world</u>. ⓑ<u>This is the Sagrada Familia in Spain</u>. ⓒ<u>It is one of the (A)[most famous / famousest] churches in the world</u>. ⓓ<u>Look at the beautiful tall columns inside the church</u>. ⓔ<u>They look like trees, (B)[don't / do] they</u>? The famous architect, Antoni Gaudi, used the shape of trees in the Sagrada Familia. That's (C)[how / the way how] he brought the beauty of nature ㉠<u>indoors</u>.\n\n위 글의 괄호 (A), (B), (C)에서 어법상 알맞은 말로 바르게 연결된 것은?",
+      "options": [
+        "(A) most famous – (B) don't – (C) the way how",
+        "(A) most famous – (B) don't – (C) how",
+        "(A) famousest – (B) don't – (C) how",
+        "(A) most famous – (B) do – (C) how",
+        "(A) famousest – (B) do – (C) the way how"
+      ],
+      "answer": "2"
+    },
+    {
+      "number": 23,
+      "question": "다음 글의 밑줄 친 ⓐ~ⓔ 중, 어법상 어색한 것은?\n\nIn the first two examples, we can ⓐ<u>easily</u> see what inspired the architect. But in the next example from Australia, this is not so ⓑ<u>obviously</u>. Jørn Utzon, the architect of the Sydney Opera House, took a shape from nature and added his imagination. Can you guess what inspired him? Many people think that it is the waves in the ocean or a sailing boat. But ⓒ<u>interestingly</u>, the inspiration came from an orange. Look at the roof ⓓ<u>closely</u>. Can you see the peels of an orange? When orange lights are shone on the building, you can see the peels more ⓔ<u>clearly</u>.",
+      "options": [
+        "ⓐ",
+        "ⓑ",
+        "ⓒ",
+        "ⓓ",
+        "ⓔ"
+      ],
+      "answer": "2"
+    },
+    {
+      "number": 24,
+      "question": "다음 글을 읽고 물음에 답하시오.\nWhat about Korea? Have you ever (A)[gone / been] to Dongdaemun Design Plaza in Seoul? Many people think that the building (B)[looks like / looks] a giant spaceship. But the architect, Zaha Hadid, took the curved lines from nature so that city people could enjoy them. Thanks (C)[to / for] its special design, it has become a popular tourist attraction in Seoul. As you can see, many buildings try (D)[capturing / to capture] the beauty of nature in their design. They are perfect examples of \"Nature meets city.\" If you were an architect, what should you choose from nature?\n\n위 글의 괄호 (A)~(D)에서 어법상 알맞은 말로 바르게 연결된 것은?",
+      "options": [
+        "been - looks - to - capturing",
+        "gone - looks - for - to capture",
+        "been - looks like - to - to capture",
+        "gone - looks like - for - capturing",
+        "been - looks like - for - to capture"
+      ],
+      "answer": "3"
+    },
+    {
+      "number": 25,
+      "question": "다음 글을 읽고 물음에 답하시오.\nWhat about Korea? Have you ever (A)[gone / been] to Dongdaemun Design Plaza in Seoul? Many people think that the building (B)[looks like / looks] a giant spaceship. But the architect, Zaha Hadid, took the curved lines from nature so that city people could enjoy them. Thanks (C)[to / for] its special design, it has become a popular tourist attraction in Seoul. As you can see, many buildings try (D)[capturing / to capture] the beauty of nature in their design. They are perfect examples of \"Nature meets city.\" If you were an architect, what should you choose from nature?\n\n위 글을 읽고 답할 수 없는 질문은?",
+      "options": [
+        "Where is Dongdaemun Design Plaza?",
+        "What is Dongdaemun Design Plaza used for?",
+        "What does Dongdaemun Design Plaza look like?",
+        "Who is the architect of Dongdaemun Design Plaza?",
+        "What did the architect of Dongdaemun Design Plaza bring from nature?"
+      ],
+      "answer": "2"
+    },
+    {
+      "number": 26,
+      "question": "다음 글을 읽고 물음에 답하시오.\nHave you ⓐ<u>hear</u> of the expression, \"(A)______________________\"? A lot of artists get their ideas and ⓑ<u>inspirations</u> from the world around them. This is ⓒ<u>because</u> the natural world is a beautiful place. The shapes in nature ⓓ<u>is</u> very ⓔ<u>pleasing</u> to the eye. For example, look at the egg on the left. Isn't it beautiful? It is round and delicate, yet (B)<u>그것의 내용물을 보호할 만큼 충분히 튼튼한</u>. Can you imagine a building that looks like an egg? ⓕ<u>A such building</u> actually exists in London.\nNature has inspired many architects around the world. This is the Sagrada Familia in Spain. It is ⓖ<u>one of the most famous church</u> in the world. Look at the beautiful tall columns inside the church. They look like trees, ⓗ<u>do they</u>? The famous architect, Antoni Gaudi, ⓘ<u>was used</u> the shape of trees in the Sagrada Familia. That's ⓙ<u>what</u> he brought the beauty of nature indoors.\n\n위 글의 밑줄 친 ⓐ~ⓙ 중 어법상 알맞은 것의 개수는?",
+      "options": [
+        "3개",
+        "4개",
+        "5개",
+        "6개",
+        "7개"
+      ],
+      "answer": "1"
+    },
+    {
+      "number": 27,
+      "question": "다음 글을 읽고 물음에 답하시오.\nHave you ⓐ<u>hear</u> of the expression, \"(A)______________________\"? A lot of artists get their ideas and ⓑ<u>inspirations</u> from the world around them. This is ⓒ<u>because</u> the natural world is a beautiful place. The shapes in nature ⓓ<u>is</u> very ⓔ<u>pleasing</u> to the eye. For example, look at the egg on the left. Isn't it beautiful? It is round and delicate, yet (B)<u>그것의 내용물을 보호할 만큼 충분히 튼튼한</u>. Can you imagine a building that looks like an egg? ⓕ<u>A such building</u> actually exists in London.\nNature has inspired many architects around the world. This is the Sagrada Familia in Spain. It is ⓖ<u>one of the most famous church</u> in the world. Look at the beautiful tall columns inside the church. They look like trees, ⓗ<u>do they</u>? The famous architect, Antoni Gaudi, ⓘ<u>was used</u> the shape of trees in the Sagrada Familia. That's ⓙ<u>what</u> he brought the beauty of nature indoors.\n\n위 글의 빈칸 (A)에 들어갈 말로 알맞은 것은?",
+      "options": [
+        "Art imitates nature",
+        "Nature is our mother",
+        "Youth is the gift of nature",
+        "Colors are the smiles of nature",
+        "To the artist, there's never anything ugly."
+      ],
+      "answer": "1"
+    },
+    {
+      "number": 28,
+      "question": "다음 글을 읽고 물음에 답하시오.\nHave you ⓐ<u>hear</u> of the expression, \"(A)______________________\"? A lot of artists get their ideas and ⓑ<u>inspirations</u> from the world around them. This is ⓒ<u>because</u> the natural world is a beautiful place. The shapes in nature ⓓ<u>is</u> very ⓔ<u>pleasing</u> to the eye. For example, look at the egg on the left. Isn't it beautiful? It is round and delicate, yet (B)<u>그것의 내용물을 보호할 만큼 충분히 튼튼한</u>. Can you imagine a building that looks like an egg? ⓕ<u>A such building</u> actually exists in London.\nNature has inspired many architects around the world. This is the Sagrada Familia in Spain. It is ⓖ<u>one of the most famous church</u> in the world. Look at the beautiful tall columns inside the church. They look like trees, ⓗ<u>do they</u>? The famous architect, Antoni Gaudi, ⓘ<u>was used</u> the shape of trees in the Sagrada Familia. That's ⓙ<u>what</u> he brought the beauty of nature indoors.\n\n위 글의 밑줄 친 (B)의 우리말을 아래와 같이 영작할 때, 두 번째 빈칸에 오는 말로 알맞은 것은?\n\n→ ________ ________ ________ ________ its ________",
+      "options": [
+        "to",
+        "strong",
+        "protect",
+        "enough",
+        "contents"
+      ],
+      "answer": "4"
+    },
+    {
+      "number": 29,
+      "question": "다음 글을 읽고 물음에 답하시오.\nIn the first two examples, we can easily see what inspired the architect. But in the next example from Australia, this is not so (A)________. Jørn Utzon, the architect of the Sydney Opera House, took a shape from nature and added his imagination. ⓐ<u>Can you guess what inspired him?</u> ⓑ<u>Many people think that it is the waves in the ocean or a sailing boat.</u> ⓒ<u>But interestingly, the inspiration actually came from a sailing boat.</u> ⓓ<u>Look at the roof closely.</u> ⓔ<u>Can you see the peels of an orange?</u> When orange lights are shone on the building, you can see the peels more clearly.\n\n위 글을 읽고 다음 질문에 답하시오.\n\nWhat did Jørn Utzon do after taking a shape from nature to design the Sydney Opera House? Fill in the blank.\n\n→ He ________ ________ ________.",
+      "options": [],
+      "answer": "added his imagination"
+    },
+    {
+      "number": 30,
+      "question": "다음 글의 Boram Middle School에 대한 설명으로 가장 적절한 것은?\n\nI go to Boram Middle School in Suwon. My school has a 4-story building. It also has a large playground, a gym and a small garden. The garden is on top of the school building. We grow some vegetables there so that we can have fresh food. My favorite place is the bench under the big tree. I love sitting there and talking with my friends. I like my school very much.",
+      "options": [
+        "우리 학교에는 네 가지 이야기가 있다.",
+        "학교 가장 위층에는 커다란 체육관이 있다.",
+        "내가 좋아하는 장소는 큰 나무로 만든 벤치이다.",
+        "나는 교실에 앉아 친구들과 이야기 나누는 것을 좋아한다.",
+        "학교에는 넓은 운동장과 체육관, 작은 정원이 있다."
+      ],
+      "answer": "5"
+    }
+  ],
+  "R3": [
+    {
+      "number": 1,
+      "question": "다음 중 두 단어의 관계가 나머지와 다른 하나는?",
+      "options": [
+        "allow : let",
+        "lend : borrow",
+        "book : reserve",
+        "imitate: mimic",
+        "delicate : fragile"
+      ],
+      "answer": "2"
+    },
+    {
+      "number": 2,
+      "question": "다음 밑줄 친 부분이 알맞지 않은 것은?",
+      "options": [
+        "Ghosts exist only in your <u>imagination</u>.",
+        "The artist got his <u>inspiration</u> from nature.",
+        "The monkeys <u>imitate</u> my body movements.",
+        "The famous restaurants <u>attraction</u> many people.",
+        "Do you know the <u>expression</u>, \"I have two left feet?\""
+      ],
+      "answer": "4"
+    },
+    {
+      "number": 3,
+      "question": "다음 주어진 우리말과 같은 뜻이 되도록 문장을 완성할 때 빈칸에 들어갈 수 없는 것은?\n\n그녀는 건강을 유지하기 위해 매일 아침 조깅을 한다.\n→ She jogs every morning ______________________.",
+      "options": [
+        "to stay healthy",
+        "so as stay healthy",
+        "in order to stay healthy",
+        "so that she can stay healthy",
+        "in order that she can stay healthy"
+      ],
+      "answer": "2"
+    },
+    {
+      "number": 4,
+      "question": "다음 주어진 문장과 같은 의미의 문장으로 알맞은 것은?\n\nJimin practices hard so that he can win the contest.",
+      "options": [
+        "Jimin practices hard so as to win the contest.",
+        "Jimin practices so hard that he could win the contest.",
+        "Jimin practices hard that he can win the contest.",
+        "Jimin practices hard in order to winning the contest.",
+        "Jimin practices hard in order that he win the contest."
+      ],
+      "answer": "1"
+    },
+    {
+      "number": 5,
+      "question": "다음 중 우리말을 바르게 영작한 것은?",
+      "options": [
+        "수진이는 건강을 유지하기 위해 매일 아침 수영을 한다. → Sujin swims every morning so that stay healthy.",
+        "그는 그 시험에 합격하기 위해 최선을 다했다. → He did his best, so that he could pass the test.",
+        "아빠는 언니를 태우기 위해 공항에 가셨다. → My father went to the airport so as to he could pick up my sister.",
+        "그녀는 가수가 되기 위해 매우 열심히 연습한다. → She practices singing very hard in order that she can be a singer.",
+        "우리는 기부하기 위해 헌 옷을 모았다. → We collected old clothes so that we can donate them."
+      ],
+      "answer": "4"
+    },
+    {
+      "number": 6,
+      "question": "다음 중 어법상 옳은 문장은?",
+      "options": [
+        "The box is enough big to carry 20 books.",
+        "He is so strongly that he could lift the box.",
+        "She jogs every morning so as to she can stay healthy.",
+        "I turned off the radio so that I will be able to concentrate on studying math.",
+        "The book was so interesting that I couldn't put it down."
+      ],
+      "answer": "5"
+    },
+    {
+      "number": 7,
+      "question": "다음 문장의 빈칸에 Sam과 Emily 각각의 저축 목적을 <조건>에 알맞게 쓰시오.\n\n<조건>\n(1)번은 order, (2)번은 so that을 반드시 포함할 것\n\n(1) Sam saved money ______________________. (Sam의 저축 목적: 아픈 사람들을 도와주기 위해)\n(2) Emily saved money ______________________. (Emily의 저축 목적: 새로운 핸드폰을 구매하기 위해)",
+      "options": [],
+      "answer": "in order to help sick people / so that she could buy a new phone",
+      "subParts": [
+        {
+          "label": "(1)",
+          "answer": "in order to help sick people"
+        },
+        {
+          "label": "(2)",
+          "answer": "so that she could buy a new phone"
+        }
+      ]
+    },
+    {
+      "number": 8,
+      "question": "다음 대화의 밑줄 친 문장과 의미가 다른 것은?\n\nA: Hi, Lisa. <u>Thank you for inviting me to your birthday party</u>.\nB: My pleasure. I'm glad you could come.",
+      "options": [
+        "I appreciate your invitation.",
+        "I'm grateful to you for the invitation.",
+        "I don't understand why you invite me.",
+        "I'm very thankful to you for inviting me.",
+        "I can't tell you how much your invitation means to me."
+      ],
+      "answer": "3"
+    },
+    {
+      "number": 9,
+      "question": "다음 두 대화의 빈칸에 공통으로 들어갈 말로 알맞은 것은?\n\nA: How was the movie?\nB: It was great. Thank you for recommending the movie.\nA: You're welcome. ______________________\n\nA: Thank you for inviting me to your birthday party.\nB: ______________________ I'm happy you could come.\nA: These flowers are for you. Happy birthday!\nB: They are beautiful. Thank you.",
+      "options": [
+        "My pleasure.",
+        "I'll try my best.",
+        "I hope you do well.",
+        "I'm sorry. I didn't know that.",
+        "You need to listen carefully to others' opinions."
+      ],
+      "answer": "1"
+    },
+    {
+      "number": 10,
+      "question": "다음 글의 밑줄 친 ⓐ~ⓔ 중, 흐름상 어색한 것은?\n\nHello, students! ⓐ<u>Thank you for visiting our art museum</u>. This museum opened in 1995. ⓑ<u>Since then, it has exhibited many famous artworks</u>. ⓒ<u>Today, you will see some famous artworks from the art books</u>. Before we begin the tour, let me remind you of a basic rule. ⓓ<u>You can take pictures of the artworks, but you're not allowed to touch them</u>. ⓔ<u>You can feel artworks by breaking them</u>. Now let's start the tour.",
+      "options": [
+        "ⓐ",
+        "ⓑ",
+        "ⓒ",
+        "ⓓ",
+        "ⓔ"
+      ],
+      "answer": "5"
+    },
+    {
+      "number": 11,
+      "question": "다음 대화의 내용과 일치하는 것은?\n\nTom: The tickets for the World Music Concert are on sale now.\nYumi: Really? Let's book the tickets online right away.\nTom: Okay. Let's see... There are still tickets left for November 5th.\nYumi: Sounds good. Let's get two student tickets.\nTom: Oh, do you mind if I bring my little brother?\nYumi: Not at all. But it says that you are not allowed to bring children under 8.\nTom: No problem. He's 10.\nYumi: Okay, I'll add one child ticket. The total price is 25 dollars.\nTom: Great.\nYumi: I can't wait to see the concert!",
+      "options": [
+        "There are no more World Music Concert tickets left online.",
+        "Yumi doesn't mind if Tom brings his little brother to the World Music Concert.",
+        "Only teenagers are allowed to watch the World Tour Concert.",
+        "Two student tickets for the World Music Concert are 25 dollars.",
+        "Tom and Yumi will go to the World Music Concert on November 8th."
+      ],
+      "answer": "2"
+    },
+    {
+      "number": 12,
+      "question": "다음 대화를 읽고 물음에 답하시오.\nA: Jenny, my train ⓐ<u>is leaving</u> in five minutes.\nB: I hope you ⓑ<u>enjoyed</u> your trip, Mike.\nA: Of course, I did.\nB: Which place did you like most in my town?\nA: I liked the folk village most.\nB: Yeah, it's the ⓒ<u>most</u> popular place here.\nA: I really liked (A)<u>walking</u> around in hanbok. I looked really ⓓ<u>cool</u>.\nB: I'm glad to hear that.\nA: Thank you for showing me around.\nB: It was ⓔ<u>my pleasure</u>. Have a safe trip.\n\n위 대화의 밑줄 친 ⓐ~ⓔ에 대한 설명 중, 알맞지 않은 것은?",
+      "options": [
+        "'떠날 것이다'라는 미래 상황의 표현",
+        "'즐거운 시간을 보냈다'는 과거형 표현",
+        "'가장 ~한'의 뜻의 최상급을 만드는 표현",
+        "'멋지게'라는 뜻의 부사의 품사로 쓰인 표현",
+        "감사에 대한 대답으로 쓰는 표현"
+      ],
+      "answer": "4"
+    },
+    {
+      "number": 13,
+      "question": "다음 대화를 읽고 물음에 답하시오.\nA: Jenny, my train ⓐ<u>is leaving</u> in five minutes.\nB: I hope you ⓑ<u>enjoyed</u> your trip, Mike.\nA: Of course, I did.\nB: Which place did you like most in my town?\nA: I liked the folk village most.\nB: Yeah, it's the ⓒ<u>most</u> popular place here.\nA: I really liked (A)<u>walking</u> around in hanbok. I looked really ⓓ<u>cool</u>.\nB: I'm glad to hear that.\nA: Thank you for showing me around.\nB: It was ⓔ<u>my pleasure</u>. Have a safe trip.\n\n위 대화의 밑줄 친 (A)와 어법상 같은 역할을 하는 것은?",
+      "options": [
+        "Jenny is <u>being</u> kind to me.",
+        "Where is this money <u>coming</u> from?",
+        "Thank you for <u>lending</u> me the book.",
+        "He is <u>playing</u> the violin in the orchestra.",
+        "I was <u>having</u> lunch when you called me yesterday."
+      ],
+      "answer": "3"
+    },
+    {
+      "number": 14,
+      "question": "다음 글을 읽고 아래 문장의 빈칸에 들어갈 알맞은 말을 고르면?\n\nNature has inspired many architects around the world. This is the Sagrada Familia in Spain. It is one of the most famous churches in the world. Look at the beautiful tall columns inside the church. They look like trees, don't they? The famous architect, Antoni Gaudi, used the shape of trees in the Sagrada Familia. That's how he brought the beauty of nature indoors.\n\nThe columns in the Sagrada Familia ____________.",
+      "options": [
+        "look like an egg",
+        "resemble trees",
+        "are made of real trees",
+        "are stronger than trees",
+        "support the church well"
+      ],
+      "answer": "2"
+    },
+    {
+      "number": 15,
+      "question": "다음 글에서 어법상 어색한 부분을 4군데 찾아 올바른 영어로 고쳐 쓰시오.\n\nJørn Utzon, the architect of the Sydney Opera House, took a shape from nature and added his imagine. Can you guess whose inspired him? Many people think that it is the waves in the ocean or a sailing boat. But interesting, the inspiration came from an orange. Look at the roof closely. Can you see the peels of an orange? When orange lights are shine on the building, you can see the peels more clearly.\n\n(1) 어색한 표현 → 고친 표현\n(2) 어색한 표현 → 고친 표현\n(3) 어색한 표현 → 고친 표현\n(4) 어색한 표현 → 고친 표현",
+      "options": [],
+      "answer": "imagine → imagination / whose → what / interesting → interestingly / shine → shone",
+      "subParts": [
+        {
+          "label": "(1)",
+          "answer": "imagine → imagination"
+        },
+        {
+          "label": "(2)",
+          "answer": "whose → what"
+        },
+        {
+          "label": "(3)",
+          "answer": "interesting → interestingly"
+        },
+        {
+          "label": "(4)",
+          "answer": "shine → shone"
+        }
+      ]
+    },
+    {
+      "number": 16,
+      "question": "다음 글을 읽고 물음에 답하시오.\nHave you heard of the expression, \"Art ⓐ<u>inspires</u> nature\"? Many artists get their ideas and inspirations from the world around them. (A)<u>This</u> is because the natural world is a beautiful place. The shapes in nature are very ⓑ<u>pleased</u> to the eye. For example, think of an egg. Isn't it beautiful? It is round and delicate, yet (B)<u>그것의 내용물을 보호할 만큼 충분히 튼튼한</u>. Can you imagine a building that looks like an egg? Such a building actually ⓒ<u>exits</u> in London.\nNature has ⓓ<u>imitated</u> many architects around the world. Look at the Sagrada Familia in Spain. It is one of the most famous churches in the world. Look at the beautiful tall columns inside the church. They look like trees, don't they? The famous architect, Antoni Gaudi, used the shape of trees in the Sagrada Familia. That's how he ⓔ<u>brought</u> the beauty of nature indoors.\n\n위 글의 밑줄 친 ⓐ~ⓔ 중, 내용의 흐름과 어법에 맞게 쓰인 것은?",
+      "options": [
+        "ⓐ",
+        "ⓑ",
+        "ⓒ",
+        "ⓓ",
+        "ⓔ"
+      ],
+      "answer": "5"
+    },
+    {
+      "number": 17,
+      "question": "다음 글을 읽고 물음에 답하시오.\nHave you heard of the expression, \"Art ⓐ<u>inspires</u> nature\"? Many artists get their ideas and inspirations from the world around them. (A)<u>This</u> is because the natural world is a beautiful place. The shapes in nature are very ⓑ<u>pleased</u> to the eye. For example, think of an egg. Isn't it beautiful? It is round and delicate, yet (B)<u>그것의 내용물을 보호할 만큼 충분히 튼튼한</u>. Can you imagine a building that looks like an egg? Such a building actually ⓒ<u>exits</u> in London.\nNature has ⓓ<u>imitated</u> many architects around the world. Look at the Sagrada Familia in Spain. It is one of the most famous churches in the world. Look at the beautiful tall columns inside the church. They look like trees, don't they? The famous architect, Antoni Gaudi, used the shape of trees in the Sagrada Familia. That's how he ⓔ<u>brought</u> the beauty of nature indoors.\n\n위 글의 밑줄 친 (A)This의 의미로 가장 적절한 것은?",
+      "options": [
+        "Nature is an imitation of art.",
+        "Many architects imitate famous art works.",
+        "Nature has inspired many artists around the world.",
+        "Many artists get their inspirations from many architects.",
+        "Many artists inspire many architects to protect the nature."
+      ],
+      "answer": "3"
+    },
+    {
+      "number": 18,
+      "question": "다음 글을 읽고 물음에 답하시오.\nIn the first two examples, we can easily see what inspired the architect. But in the next example from Australia, this is not so obvious. (A) Jørn Utzon, the architect of the Sydney Opera House, took a shape from nature and added his imagination. (B) Can you guess what inspired him? (C) But interestingly, the inspiration came from an orange. (D) Look at the roof closely. (E) Can you see the peels of an orange? When orange lights are shone on the building, you can see the peels more clearly.\n\n위 글의 (A)~(E) 중, 주어진 문장이 들어갈 알맞은 곳은?\n\nMany people think that it is the waves in the ocean or a sailing boat.",
+      "options": [
+        "(A)",
+        "(B)",
+        "(C)",
+        "(D)",
+        "(E)"
+      ],
+      "answer": "3"
+    },
+    {
+      "number": 19,
+      "question": "다음 글을 읽고 물음에 답하시오.\nIn the first two examples, we can easily see what inspired the architect. But in the next example from Australia, this is not so obvious. (A) Jørn Utzon, the architect of the Sydney Opera House, took a shape from nature and added his imagination. (B) Can you guess what inspired him? (C) But interestingly, the inspiration came from an orange. (D) Look at the roof closely. (E) Can you see the peels of an orange? When orange lights are shone on the building, you can see the peels more clearly.\n\n위 글을 읽고 대답할 수 있는 것은?",
+      "options": [
+        "What was the architect of the Sydney Opera House inspired by?",
+        "What is the ocean surrounding the Sydney Opera House?",
+        "For what purpose was the Sydney Opera House built?",
+        "What are other buildings of Jørn Utzon?",
+        "Where is Jørn Utzon from?"
+      ],
+      "answer": "1"
+    },
+    {
+      "number": 20,
+      "question": "다음 글을 읽고 물음에 답하시오.\nHave you heard of ⓐ<u>the expression</u>, \"Art imitates nature\"? Many artists get their ideas and inspirations from the world around ⓑ<u>them</u>. This is because the natural world is a beautiful place. The shapes in nature are very pleasing to the eye. For example, look at the egg on the left. Isn't it beautiful? ⓒ<u>It</u> is round and delicate, yet strong enough to protect its contents. Can you imagine a building that looks like an egg? ⓓ<u>Such a building</u> actually exists in London.\nNature has inspired many architects around the world. This is the Sagrada Familia in Spain. It is one of the most famous churches in the world. Look at the beautiful tall columns inside the church. They look like trees, don't ⓔ<u>they</u>? The famous architect, Antoni Gaudi, used the shape of trees in the Sagrada Familia. That's how (A)______________________________.\n\n위 글의 밑줄 친 ⓐ~ⓔ가 의미하는 바로 옳지 않은 것은?",
+      "options": [
+        "ⓐ: \"Art imitates nature\"",
+        "ⓑ: natural places",
+        "ⓒ: the egg",
+        "ⓓ: the building that looks like an egg",
+        "ⓔ: the beautiful tall columns"
+      ],
+      "answer": "2"
+    },
+    {
+      "number": 21,
+      "question": "다음 글을 읽고 물음에 답하시오.\nHave you heard of ⓐ<u>the expression</u>, \"Art imitates nature\"? Many artists get their ideas and inspirations from the world around ⓑ<u>them</u>. This is because the natural world is a beautiful place. The shapes in nature are very pleasing to the eye. For example, look at the egg on the left. Isn't it beautiful? ⓒ<u>It</u> is round and delicate, yet strong enough to protect its contents. Can you imagine a building that looks like an egg? ⓓ<u>Such a building</u> actually exists in London.\nNature has inspired many architects around the world. This is the Sagrada Familia in Spain. It is one of the most famous churches in the world. Look at the beautiful tall columns inside the church. They look like trees, don't ⓔ<u>they</u>? The famous architect, Antoni Gaudi, used the shape of trees in the Sagrada Familia. That's how (A)______________________________.\n\n위 글의 빈칸 (A)에 들어갈 말로 적절한 것은?",
+      "options": [
+        "he influenced other architects",
+        "he was known as a talented architect",
+        "he brought the beauty of nature indoors",
+        "he made the trees grow well inside the church",
+        "the Sagrada Familia has been a famous church"
+      ],
+      "answer": "3"
+    },
+    {
+      "number": 22,
+      "question": "다음 글을 읽고 물음에 답하시오.\nWhat about Korea? ⓐ<u>Have you been to</u> Dongdaemun Design Plaza in Seoul? Many people think that the building looks like a giant spaceship. But the architect, Zaha Hadid, took the curved lines from nature so that city people could enjoy them. ⓑ<u>Thanks to</u> its special design, it has become a popular tourist attraction in Seoul.\nⓒ<u>As you can see</u>, many buildings ⓓ<u>try to capture</u> the beauty of nature in their design. They are perfect examples of \"Nature meets city.\" ⓔ<u>If you are an architect</u>, what would you choose from nature?\n\n위 글의 밑줄 친 ⓐ~ⓔ 중, 어법상 어색한 것은?",
+      "options": [
+        "ⓐ",
+        "ⓑ",
+        "ⓒ",
+        "ⓓ",
+        "ⓔ"
+      ],
+      "answer": "5"
+    },
+    {
+      "number": 23,
+      "question": "다음 글을 읽고 물음에 답하시오.\nWhat about Korea? ⓐ<u>Have you been to</u> Dongdaemun Design Plaza in Seoul? Many people think that the building looks like a giant spaceship. But the architect, Zaha Hadid, took the curved lines from nature so that city people could enjoy them. ⓑ<u>Thanks to</u> its special design, it has become a popular tourist attraction in Seoul.\nⓒ<u>As you can see</u>, many buildings ⓓ<u>try to capture</u> the beauty of nature in their design. They are perfect examples of \"Nature meets city.\" ⓔ<u>If you are an architect</u>, what would you choose from nature?\n\n위 글의 내용과 가장 일치하는 것은?",
+      "options": [
+        "Zaha Hadid is an architect who is inspired by nature.",
+        "Korea does not have any example of a nature-inspired building.",
+        "Many people believe that Dongdaemun Design Plaza is a giant spaceship.",
+        "Tourists like to visit Dongdaemun Design Plaza since it has many attractive stores.",
+        "It is impossible for us to find buildings that try to bring the beauty of nature in their design."
+      ],
+      "answer": "1"
+    },
+    {
+      "number": 24,
+      "question": "다음 글의 밑줄 친 ⓐ~ⓔ 중, 흐름상 어색한 것은?\n\nJørn Utzon, the architect of the Sydney Opera House, took a shape from nature and added his imagination. Can you guess what inspired him? ⓐ<u>Many people think that it is the waves in the ocean or a sailing boat</u>. ⓑ<u>But interestingly, the inspiration came from an orange</u>. Look at the roof closely. ⓒ<u>Can you see the peels of an orange</u>? ⓓ<u>It is really good for you health to eat orange peels</u>. ⓔ<u>When orange lights are shone on the building, you can see the peels more clearly</u>.",
+      "options": [
+        "ⓐ",
+        "ⓑ",
+        "ⓒ",
+        "ⓓ",
+        "ⓔ"
+      ],
+      "answer": "4"
+    },
+    {
+      "number": 25,
+      "question": "다음 글을 읽고 물음에 답하시오.\nNature has inspired many architects around the world. This is Sagrada Familia in Spain. It is one of the most famous churches in the world. Look at the beautiful tall columns inside the church. ⓐ<u>They</u> look like trees, don't they? The famous architect, Antoni Gaudi, used the shape of trees in the Sagrada Familia. That's how he brought the beauty of nature indoors.\n\n위 글의 밑줄 친 ⓐThey가 가리키는 것은?",
+      "options": [
+        "famous churches in the world",
+        "many architects around the world",
+        "the shapes of the famous churches",
+        "many buildings which got inspiration from nature",
+        "the beautiful tall columns inside the Sagrada Familia"
+      ],
+      "answer": "5"
+    },
+    {
+      "number": 26,
+      "question": "다음 글을 읽고 물음에 답하시오.\nNature has inspired many architects around the world. This is Sagrada Familia in Spain. It is one of the most famous churches in the world. Look at the beautiful tall columns inside the church. ⓐ<u>They</u> look like trees, don't they? The famous architect, Antoni Gaudi, used the shape of trees in the Sagrada Familia. That's how he brought the beauty of nature indoors.\n\n위 글을 읽고 대답할 수 없는 질문은?",
+      "options": [
+        "Who is the architect of the Sagrada Familia?",
+        "Which shape did Gaudi use in the Sagrada Familia?",
+        "What has inspired many architects around the world?",
+        "What are the names of the three famous churches in Spain?",
+        "What do the columns inside the Sagrada Familia look like?"
+      ],
+      "answer": "4"
+    },
+    {
+      "number": 27,
+      "question": "다음 글의 빈칸에 들어갈 말로 적절한 것은?\n\nHave you heard of the expression, \"Art imitates nature\"? Many artists get their ideas and inspirations from the world around them. This is because ______________________________. The shapes in nature are very pleasing to the eye. For example, look at the egg on the left. Isn't it beautiful? It is round and delicate, yet strong enough to protect its contents.",
+      "options": [
+        "natural asset is expensive",
+        "nature fascinates people instinctively",
+        "natural architecture makes big money",
+        "nature and people exist together happily",
+        "nature doesn't have every shape in the world"
+      ],
+      "answer": "2"
+    },
+    {
+      "number": 28,
+      "question": "다음 글을 읽고 물음에 답하시오.\nIn the first two examples, we can easily see ⓐ<u>that</u> inspired the architect. But in the next example from Australia, this is not so obvious. Jørn Utzon, the architect of the Sydney Opera House, ⓑ<u>taking</u> a shape from nature and added his imagination. Can you guess what ⓒ<u>inspiring</u> him? Many people think that it is the waves in the ocean or a sailing boat. But interestingly, the inspiration ⓓ<u>coming</u> from an orange. Look ⓔ<u>closely</u> at the roof. Can you see the peels of an orange? When orange lights are shone on the building, you can see the peels more clearly.\n\n위 글의 밑줄 친 ⓐ~ⓔ 중, 어법상 알맞은 것은?",
+      "options": [
+        "ⓐ",
+        "ⓑ",
+        "ⓒ",
+        "ⓓ",
+        "ⓔ"
+      ],
+      "answer": "5"
+    },
+    {
+      "number": 29,
+      "question": "다음 글을 읽고 물음에 답하시오.\nIn the first two examples, we can easily see ⓐ<u>that</u> inspired the architect. But in the next example from Australia, this is not so obvious. Jørn Utzon, the architect of the Sydney Opera House, ⓑ<u>taking</u> a shape from nature and added his imagination. Can you guess what ⓒ<u>inspiring</u> him? Many people think that it is the waves in the ocean or a sailing boat. But interestingly, the inspiration ⓓ<u>coming</u> from an orange. Look ⓔ<u>closely</u> at the roof. Can you see the peels of an orange? When orange lights are shone on the building, you can see the peels more clearly.\n\n위 글을 읽고 답할 수 있는 질문만을 <보기>에서 있는 대로 고른 것은?\n\n<보기>\n㉠ Who designed the Sydney Opera House?\n㉡ When is the proper time to enjoy architectures?\n㉢ What is the most interesting about being imaginative?\n㉣ How many examples were mentioned before this article?\n㉤ What gave Jørn Utzon an inspiration for the Sydney Opera House?",
+      "options": [
+        "㉠, ㉡",
+        "㉢, ㉣",
+        "㉢, ㉤",
+        "㉠, ㉡, ㉤",
+        "㉠, ㉣, ㉤"
+      ],
+      "answer": "5"
+    },
+    {
+      "number": 30,
+      "question": "다음 글의 밑줄 친 ⓐ~ⓔ 중, 어법상 어색한 것은?\n\nHello, everyone! I'd like to introduce you to my school today. I go to Haan Middle school in Gwangmyeong. My school has a ⓐ<u>5-story</u> building. It also has a large playground, a gym, and a small garden. The garden is on the way to the school building. We grow some vegetables there ⓑ<u>so that</u> we can have fresh food. It is very glad ⓒ<u>to watch</u> the plants every day. My favorite place ⓓ<u>is</u> the bench under the big tree. It is wide enough to sit with all my friends. That's why I love sitting there and ⓔ<u>to talk</u> with my friends. I like my school very much.",
+      "options": [
+        "ⓐ",
+        "ⓑ",
+        "ⓒ",
+        "ⓓ",
+        "ⓔ"
+      ],
+      "answer": "5"
+    }
+  ],
+  "R4": [
+    {
+      "number": 1,
+      "question": "다음 빈칸에 들어갈 말로 가장 적절한 것은?\n\nThe painter said in an interview that he gets the __________ from nature. It helped him get ideas about what to draw.",
+      "options": [
+        "limit",
+        "rule",
+        "challenge",
+        "interest",
+        "inspiration"
+      ],
+      "answer": "5"
+    },
+    {
+      "number": 2,
+      "question": "다음 밑줄 친 부분이 알맞지 않은 것은?",
+      "options": [
+        "That website doesn't <u>exist</u>.",
+        "His paintings show great <u>imagination</u>.",
+        "The musician drew <u>inspiration</u> from flowers.",
+        "He is a famous <u>architecture</u> from Korea.",
+        "The cup is very <u>delicate</u>, so please be careful with it."
+      ],
+      "answer": "4"
+    },
+    {
+      "number": 3,
+      "question": "다음 중 의미가 가장 다른 한 문장은?",
+      "options": [
+        "Yumi studies hard to pass the exam.",
+        "Yumi studies hard so as to pass the exam.",
+        "Yumi studies so hard that she can pass the exam.",
+        "Yumi studies hard so that she can pass the exam",
+        "Yumi studies hard in order that she can pass the exam."
+      ],
+      "answer": "3"
+    },
+    {
+      "number": 4,
+      "question": "다음 주어진 문장을 같은 의미를 가진 다른 형태의 문장으로 바꿀 때 알맞지 않은 것은?\n\nMy father went to the airport to pick up my sister.",
+      "options": [
+        "My father went to the airport so as to pick up my sister.",
+        "My father went to the airport in order to pick up my sister.",
+        "My father went to the airport so that he could pick up my sister.",
+        "My father went to the airport in order to he can pick up my sister.",
+        "My father went to the airport in order that he could pick up my sister."
+      ],
+      "answer": "4"
+    },
+    {
+      "number": 5,
+      "question": "다음 문장 전환 중 올바른 것은?",
+      "options": [
+        "John writes a book to be famous. → John writes a book so as to be famous.",
+        "She exercises every day to be healthy. → She exercises every day in order to being healthy.",
+        "He spoke loudly so that everybody could hear him. → He spoke loudly to hear everybody.",
+        "They went to bed early so that they could get up early. → They went to bed early to getting up early.",
+        "Teachers study hard to teach students well. → Teachers study hard in order that students teach well."
+      ],
+      "answer": "1"
+    },
+    {
+      "number": 6,
+      "question": "다음 중 어법상 옳지 않은 것은?",
+      "options": [
+        "The tea is too hot to drink.",
+        "We're old enough to look after ourselves.",
+        "The monkey imitates my body movement.",
+        "The doll is not enough small to fit into the pocket.",
+        "The store has many interesting items, so it attracts many people."
+      ],
+      "answer": "4"
+    },
+    {
+      "number": 7,
+      "question": "다음 우리말과 뜻이 같도록 주어진 단어를 활용하여 문장을 완성하여 쓰시오.\n\n(1) 그는 상자를 들 만큼 강하다. (lift)\n→ He is ______________________ the box.\n(2) 그 사다리는 선반 꼭대기에 닿을 만큼 길다. (long, the top shelf)\n→ The ladder is ______________________.\n(3) 그녀는 차를 운전할 만큼 나이가 들지 않았다. (old)\n→ She is not ______________________.\n(4) 그녀의 영어는 외국인과 이야기할 만큼 충분히 좋다. (talk with a foreigner)\n→ Her English is ______________________.",
+      "options": [],
+      "answer": "strong enough to lift / long enough to touch the top shelf / old enough to drive a car / good enough to talk with a foreigner",
+      "subParts": [
+        {
+          "label": "(1)",
+          "answer": "strong enough to lift"
+        },
+        {
+          "label": "(2)",
+          "answer": "long enough to touch the top shelf",
+          "acceptedAnswers": [
+            "long enough to reach the top shelf"
+          ]
+        },
+        {
+          "label": "(3)",
+          "answer": "old enough to drive a car"
+        },
+        {
+          "label": "(4)",
+          "answer": "good enough to talk with a foreigner"
+        }
+      ]
+    },
+    {
+      "number": 8,
+      "question": "다음 대화의 빈칸에 들어갈 표현으로 알맞지 않은 것을 고르시오.\n\nWhich expression is incorrect?\n\nA: Excuse me. __________________ eat here.\nB: I'm sorry, I didn't know that.\nA: Please read the sign over here.\nB: Okay, I'll do that.",
+      "options": [
+        "You must not",
+        "You should not",
+        "You are supposed to",
+        "You're not allowed to",
+        "You're not supposed to"
+      ],
+      "answer": "3"
+    },
+    {
+      "number": 9,
+      "question": "다음 대화를 읽고 물음에 답하시오.\nA: Jenny, my train ⓐ<u>is leaving</u> in five minutes.\nB: I hope you ⓑ<u>enjoyed</u> your trip, Mike.\nA: Of course, I did.\nB: Which place did you like most in my town?\nA: I liked the folk village most.\nB: Yeah, it's the ⓒ<u>most</u> popular place here.\nA: I really liked (A)<u>walking</u> around in hanbok. I looked really ⓓ<u>cool</u>.\nB: I'm glad to hear that.\nA: Thank you for showing me around.\nB: It was ⓔ<u>my pleasure</u>. Have a safe trip.\n\n위 대화를 읽고 답할 수 없는 것은?",
+      "options": [
+        "Why did Mike thank Sumin?",
+        "When is Mike's train leaving?",
+        "Who liked walking around in Hanbok?",
+        "How much did Daniel pay to visit the folk village?",
+        "What is the most popular place in Jenny's town?"
+      ],
+      "answer": "4"
+    },
+    {
+      "number": 10,
+      "question": "다음 글을 읽고 물음에 답하시오.\nHello, students! Thank you for visiting our art museum. (A) This museum opened in 1995. (B) Today, you will see some famous artworks from the art books. (C) Before we begin the tour, let me remind you of a basic rule. (D) You can take pictures of the artworks, but you're not allowed to touch them. (E) Now let's start the tour.\n\n위 글의 (A)~(E) 중, 주어진 문장이 들어갈 알맞은 곳은?\n\nSince then, it has exhibited many famous artworks.",
+      "options": [
+        "(A)",
+        "(B)",
+        "(C)",
+        "(D)",
+        "(E)"
+      ],
+      "answer": "2"
+    },
+    {
+      "number": 11,
+      "question": "다음 글을 읽고 물음에 답하시오.\nHello, students! Thank you for visiting our art museum. (A) This museum opened in 1995. (B) Today, you will see some famous artworks from the art books. (C) Before we begin the tour, let me remind you of a basic rule. (D) You can take pictures of the artworks, but you're not allowed to touch them. (E) Now let's start the tour.\n\n위 글을 읽고 답을 알 수 없는 질문은?",
+      "options": [
+        "When did the art museum open?",
+        "Who established the art museum?",
+        "What does the art museum exhibit?",
+        "What are you allowed to do in this place?",
+        "What are you not allowed to do in this place?"
+      ],
+      "answer": "2"
+    },
+    {
+      "number": 12,
+      "question": "다음 중 짝지어진 대화가 가장 어색한 것은?",
+      "options": [
+        "A: We are finally here. / B: Yes, I'm so excited. Let's look around.",
+        "A: Thank you for lending me the book. / B: You are welcome.",
+        "A: Thank you for inviting me to your party. / B: My pleasure. I'm glad you could come.",
+        "A: Which place did you like most in my town? / B: I want to visit the Central Park most.",
+        "A: You are not allowed to bring your tennis racket. / B: Oh, where should I put it?"
+      ],
+      "answer": "4"
+    },
+    {
+      "number": 13,
+      "question": "다음 대화를 읽고 물음에 답하시오.\nA: ⓐ<u>The tickets for the World Music Concert are on sale now</u>.\nB: Really? Let's book the tickets online right away.\nA: Okay. Let's see... ⓑ<u>There are still tickets left for November 5th</u>.\nB: Sounds good. Let's get two student tickets.\nA: Oh, ⓒ<u>do you mind if I bringing my little brother</u>?\nB: Not at all. But ⓓ<u>it says that you are not allowed to bring children under 8</u>.\nA: No problem. He's 10. Let's add one child ticket. (가)<u>나는 총 금액이 얼마인지 궁금해</u>.\nB: It is 25 dollars.\nA: Great.\nB: ⓔ<u>I can't wait to see the concert</u>!\n\n위 대화의 밑줄 친 ⓐ~ⓔ 중, 어법상 어색한 것은?",
+      "options": [
+        "ⓐ",
+        "ⓑ",
+        "ⓒ",
+        "ⓓ",
+        "ⓔ"
+      ],
+      "answer": "3"
+    },
+    {
+      "number": 14,
+      "question": "다음 글을 읽고 물음에 답하시오.\nWhat about Korea? Have you ever been to Dongdaemun Design Plaza in Seoul? Many people think that the building looks like a giant spaceship. But the architect, Zaha Hadid, took the curved lines from nature so that city people could enjoy them. Thanks to its special design, it has become a popular tourist attraction in Seoul.\nAs you can see, many buildings try to capture the beauty of nature in their design. They are perfect examples of \"______________________.\"\n\n위 글을 읽고 다음 질문에 알맞은 답을 고르시오.\n\nWhy did the architect of Dongdaemun Design Plaza take the curved lines from nature?",
+      "options": [
+        "도시 사람들이 즐길 수 있도록",
+        "자연의 아름다움을 담아내려고",
+        "자연에서 곡선을 가져왔기 때문에",
+        "거대한 우주선처럼 보이도록 하기 위해",
+        "서울의 인기 있는 관광명소로 만들기 위해"
+      ],
+      "answer": "1"
+    },
+    {
+      "number": 15,
+      "question": "다음 글을 읽고 물음에 답하시오.\nWhat about Korea? Have you ever been to Dongdaemun Design Plaza in Seoul? Many people think that the building looks like a giant spaceship. But the architect, Zaha Hadid, took the curved lines from nature so that city people could enjoy them. Thanks to its special design, it has become a popular tourist attraction in Seoul.\nAs you can see, many buildings try to capture the beauty of nature in their design. They are perfect examples of \"______________________.\"\n\n위 글의 빈칸에 들어갈 말로 알맞은 것은?",
+      "options": [
+        "Shapes in Nature",
+        "Buildings in City",
+        "The Beauty of City",
+        "Nature Meets City",
+        "Adding One's Imagination"
+      ],
+      "answer": "4"
+    },
+    {
+      "number": 16,
+      "question": "다음 글의 빈칸 ⓐ~ⓔ에 들어갈 말로 알맞지 않은 것은?\n\nHave you ⓐ________ of the expression, \"Art imitates nature\"? Many artists get their ideas and inspirations from the world around them. This is because the natural world is a beautiful place. The shapes in nature are very ⓑ________ to the eye. ⓒ________, look at the egg on the left. ⓓ________ it beautiful? It is round and delicate, yet strong enough to protect its contents. Can you imagine a building that looks like an egg? ⓔ________ a building actually exists in London.",
+      "options": [
+        "ⓐ - heard",
+        "ⓑ - irritating",
+        "ⓒ - For example",
+        "ⓓ - Isn't",
+        "ⓔ - Such"
+      ],
+      "answer": "2"
+    },
+    {
+      "number": 17,
+      "question": "다음 글을 읽고 물음에 답하시오.\nIn the first two examples, we can easily see what inspired the architect. (A) But in the next example from Australia, this is not so obvious. (B) Jørn Utzon, the architect of the Sydney Opera House, took a shape from nature and added his imagination. (C) Many people think that it is the waves in the ocean or a sailing boat. (D) But interestingly, the inspiration came from an orange. Look at the roof closely. (E) Can you see the peels of an orange? When orange lights are shone on the building, you can see the peels more clearly.\n\n위 글의 (A)~(E) 중, 주어진 문장이 들어갈 알맞은 곳은?\n\nCan you guess what inspired him?",
+      "options": [
+        "(A)",
+        "(B)",
+        "(C)",
+        "(D)",
+        "(E)"
+      ],
+      "answer": "3"
+    },
+    {
+      "number": 18,
+      "question": "다음 글을 읽고 물음에 답하시오.\nIn the first two examples, we can easily see what inspired the architect. (A) But in the next example from Australia, this is not so obvious. (B) Jørn Utzon, the architect of the Sydney Opera House, took a shape from nature and added his imagination. (C) Many people think that it is the waves in the ocean or a sailing boat. (D) But interestingly, the inspiration came from an orange. Look at the roof closely. (E) Can you see the peels of an orange? When orange lights are shone on the building, you can see the peels more clearly.\n\n위 글을 읽고 추측할 수 없는 것은?",
+      "options": [
+        "Jørn Utzon designed the Sydney Opera House.",
+        "Jørn Utzon used his imagination to complete the Sydney Opera House.",
+        "Jørn Utzon was inspired by some fruit when he designed the Sydney Opera House.",
+        "People are usually wrong about what inspired the architect of the Sydney Opera House.",
+        "It's always obvious to tell what inspired the architects when they designed buildings."
+      ],
+      "answer": "5"
+    },
+    {
+      "number": 19,
+      "question": "다음 글을 읽고 물음에 답하시오.\nHave you heard of the expression, \"Art imitates nature\"? Many artists get their ideas and inspirations from the world around them. This is ⓐ________ the natural world is a beautiful place. The shapes in nature are very pleasing to the eye. (A)________, look at the egg on the left. Isn't it beautiful? It is round and delicate, yet strong enough to protect its contents. Can you imagine a building that looks like an egg? Such a building actually exists in London.\nNature has inspired many architects around the world. This is the Sagrada Familia in Spain. (B)<u>그것은 세계에서 가장 유명한 성당 중의 하나이다</u>. Look at the beautiful tall columns inside the church. They look like trees, don't they? The famous architect, Antoni Gaudi, used the shape of trees in the Sagrada Familia. That's ⓑ________ he brought the beauty of nature indoors.\n\n위 글의 빈칸 ⓐ와 ⓑ에 들어갈 말로 바르게 짝지어진 것은?",
+      "options": [
+        "ⓐ because – ⓑ when",
+        "ⓐ because – ⓑ how",
+        "ⓐ the reason – ⓑ how",
+        "ⓐ why – ⓑ when",
+        "ⓐ why – ⓑ where"
+      ],
+      "answer": "2"
+    },
+    {
+      "number": 20,
+      "question": "다음 글을 읽고 물음에 답하시오.\nHave you heard of the expression, \"Art imitates nature\"? Many artists get their ideas and inspirations from the world around them. This is ⓐ________ the natural world is a beautiful place. The shapes in nature are very pleasing to the eye. (A)________, look at the egg on the left. Isn't it beautiful? It is round and delicate, yet strong enough to protect its contents. Can you imagine a building that looks like an egg? Such a building actually exists in London.\nNature has inspired many architects around the world. This is the Sagrada Familia in Spain. (B)<u>그것은 세계에서 가장 유명한 성당 중의 하나이다</u>. Look at the beautiful tall columns inside the church. They look like trees, don't they? The famous architect, Antoni Gaudi, used the shape of trees in the Sagrada Familia. That's ⓑ________ he brought the beauty of nature indoors.\n\n위 글의 빈칸 (A)에 들어갈 말로 적절한 것은?",
+      "options": [
+        "Instead",
+        "However",
+        "Fortunately",
+        "In the end",
+        "For example"
+      ],
+      "answer": "5"
+    },
+    {
+      "number": 21,
+      "question": "다음 글을 읽고 물음에 답하시오.\nHave you heard of the expression, \"Art imitates nature\"? Many artists get their ideas and inspirations from the world around them. This is ⓐ________ the natural world is a beautiful place. The shapes in nature are very pleasing to the eye. (A)________, look at the egg on the left. Isn't it beautiful? It is round and delicate, yet strong enough to protect its contents. Can you imagine a building that looks like an egg? Such a building actually exists in London.\nNature has inspired many architects around the world. This is the Sagrada Familia in Spain. (B)<u>그것은 세계에서 가장 유명한 성당 중의 하나이다</u>. Look at the beautiful tall columns inside the church. They look like trees, don't they? The famous architect, Antoni Gaudi, used the shape of trees in the Sagrada Familia. That's ⓑ________ he brought the beauty of nature indoors.\n\n위 글을 읽고 답할 수 없는 질문을 고르시오.\n\nWhich question CANNOT be answered?",
+      "options": [
+        "What has given inspirations to many architects around the world?",
+        "Where do many artists get their ideas and inspirations?",
+        "Which shape did Antoni Gaudi use in the Sagrada Familia?",
+        "How many columns are there inside the Sagrada Familia?",
+        "In which city can you see the building that looks like an egg?"
+      ],
+      "answer": "4"
+    },
+    {
+      "number": 22,
+      "question": "다음 글을 읽고 물음에 답하시오.\nIn the first two examples, we can easily see what inspired the architect. But in the next example from Australia, this is not so obvious.\n\n(A) Many people think that it is the waves in the ocean or a sailing boat. But interestingly, the inspiration came from an orange.\n(B) Jørn Utzon, the architect of the Sydney Opera House, took a shape from nature and added his imagination. Can you guess what inspired him?\n(C) Look at the roof closely. Can you see the peels of an orange? When orange lights are shone on the building, you can see the peels more clearly.\n\n주어진 글 다음에 이어질 글의 순서로 가장 적절한 것은?",
+      "options": [
+        "(A)-(C)-(B)",
+        "(B)-(A)-(C)",
+        "(B)-(C)-(A)",
+        "(C)-(A)-(B)",
+        "(C)-(B)-(A)"
+      ],
+      "answer": "2"
+    },
+    {
+      "number": 23,
+      "question": "다음 글을 읽고 물음에 답하시오.\nIn the first two examples, we can easily see what inspired the architect. But in the next example from Australia, this is not so obvious.\n\n(A) Many people think that it is the waves in the ocean or a sailing boat. But interestingly, the inspiration came from an orange.\n(B) Jørn Utzon, the architect of the Sydney Opera House, took a shape from nature and added his imagination. Can you guess what inspired him?\n(C) Look at the roof closely. Can you see the peels of an orange? When orange lights are shone on the building, you can see the peels more clearly.\n\n위 글의 앞에 나올 내용으로 가장 알맞은 것은?",
+      "options": [
+        "roles of a good architect",
+        "Jørn Utzon's other unique buildings",
+        "necessary conditions of architectures",
+        "some places where architects obtain natural sources",
+        "buildings which show what inspired their architects"
+      ],
+      "answer": "5"
+    },
+    {
+      "number": 24,
+      "question": "다음 글을 읽고 물음에 답하시오.\nIn the first two examples, we can easily see what inspired the architect. But in the next example from Australia, this is not so obvious.\n\n(A) Many people think that it is the waves in the ocean or a sailing boat. But interestingly, the inspiration came from an orange.\n(B) Jørn Utzon, the architect of the Sydney Opera House, took a shape from nature and added his imagination. Can you guess what inspired him?\n(C) Look at the roof closely. Can you see the peels of an orange? When orange lights are shone on the building, you can see the peels more clearly.\n\n위 글의 내용과 일치하지 않는 것은?",
+      "options": [
+        "Jørn Utzon got ideas from peels of a fruit.",
+        "Jørn Utzon used his imagination to design the Sydney Opera House.",
+        "Orange lights shining on the Sydney Opera House make you see the peels better.",
+        "The appearance of the Sydney Opera House isn't related to an orange.",
+        "Some people think that the Sydney Opera House looks like the waves in the ocean."
+      ],
+      "answer": "4"
+    },
+    {
+      "number": 25,
+      "question": "다음 글을 읽고 물음에 답하시오.\nIn the first two examples, we can easily see what inspired the architect. But in the next example from Australia, this is not so (A)________. Jørn Utzon, the architect of the Sydney Opera House, took a shape from nature and added his imagination. ⓐ<u>Can you guess what inspired him?</u> ⓑ<u>Many people think that it is the waves in the ocean or a sailing boat.</u> ⓒ<u>But interestingly, the inspiration actually came from a sailing boat.</u> ⓓ<u>Look at the roof closely.</u> ⓔ<u>Can you see the peels of an orange?</u> When orange lights are shone on the building, you can see the peels more clearly.\n\n위 글의 빈칸 (A)에 들어갈 단어의 영어 뜻풀이로 가장 적절한 것은?",
+      "options": [
+        "easy to see or understand",
+        "not expressed or understood clearly",
+        "causing people to want to do or create something",
+        "having or showing an ability to think of new and interesting ideas",
+        "attracting your attention and making you want to learn more about something"
+      ],
+      "answer": "1"
+    },
+    {
+      "number": 26,
+      "question": "다음 글을 읽고 물음에 답하시오.\nIn the first two examples, we can easily see what inspired the architect. But in the next example from Australia, this is not so (A)________. Jørn Utzon, the architect of the Sydney Opera House, took a shape from nature and added his imagination. ⓐ<u>Can you guess what inspired him?</u> ⓑ<u>Many people think that it is the waves in the ocean or a sailing boat.</u> ⓒ<u>But interestingly, the inspiration actually came from a sailing boat.</u> ⓓ<u>Look at the roof closely.</u> ⓔ<u>Can you see the peels of an orange?</u> When orange lights are shone on the building, you can see the peels more clearly.\n\n위 글의 밑줄 친 ⓐ~ⓔ 중, 흐름상 어색한 것은?",
+      "options": [
+        "ⓐ",
+        "ⓑ",
+        "ⓒ",
+        "ⓓ",
+        "ⓔ"
+      ],
+      "answer": "3"
+    },
+    {
+      "number": 27,
+      "question": "다음 글을 읽고 물음에 답하시오.\nHave you ⓐ<u>hear</u> of the expression, \"Art imitates nature\"? Many artists get their ideas and inspirations from the world around them. This is because the natural world is a beautiful place. The shapes in nature are very ⓑ<u>pleased</u> to the eye. For example, look at the egg on the left. Isn't it beautiful? It is round and delicate, (A)<u>yet</u> strong enough to protect its contents. Can you imagine a building that looks like an egg? Such a building actually exists in London.\nNature has inspired many architects around the world. This is the Sagrada Familia in Spain. It is one of the most famous ⓒ<u>church</u> in the world. Look at the beautiful tall columns inside the church. They look like trees, ⓓ<u>don't they</u>? The famous architect, Antoni Gaudi, used the shape of trees in the Sagrada Familia. That's ⓔ<u>what</u> he brought the beauty of nature indoors.\n\n위 글의 밑줄 친 ⓐ~ⓔ 중, 어법상 알맞은 것은?",
+      "options": [
+        "ⓐ",
+        "ⓑ",
+        "ⓒ",
+        "ⓓ",
+        "ⓔ"
+      ],
+      "answer": "4"
+    },
+    {
+      "number": 28,
+      "question": "다음 글을 읽고 물음에 답하시오.\nHave you ⓐ<u>hear</u> of the expression, \"Art imitates nature\"? Many artists get their ideas and inspirations from the world around them. This is because the natural world is a beautiful place. The shapes in nature are very ⓑ<u>pleased</u> to the eye. For example, look at the egg on the left. Isn't it beautiful? It is round and delicate, (A)<u>yet</u> strong enough to protect its contents. Can you imagine a building that looks like an egg? Such a building actually exists in London.\nNature has inspired many architects around the world. This is the Sagrada Familia in Spain. It is one of the most famous ⓒ<u>church</u> in the world. Look at the beautiful tall columns inside the church. They look like trees, ⓓ<u>don't they</u>? The famous architect, Antoni Gaudi, used the shape of trees in the Sagrada Familia. That's ⓔ<u>what</u> he brought the beauty of nature indoors.\n\n위 글의 밑줄 친 (A)와 의미가 같은 것은?",
+      "options": [
+        "Have you got a job <u>yet</u>?",
+        "Jiho can't read Korean <u>yet</u>.",
+        "Has Jina made up with her sister <u>yet</u>?",
+        "The car is small, <u>yet</u> energy-efficient.",
+        "I haven't received a gift from him <u>yet</u>."
+      ],
+      "answer": "4"
+    },
+    {
+      "number": 29,
+      "question": "다음 글을 읽고 물음에 답하시오.\nHave you ⓐ<u>hear</u> of the expression, \"Art imitates nature\"? Many artists get their ideas and inspirations from the world around them. This is because the natural world is a beautiful place. The shapes in nature are very ⓑ<u>pleased</u> to the eye. For example, look at the egg on the left. Isn't it beautiful? It is round and delicate, (A)<u>yet</u> strong enough to protect its contents. Can you imagine a building that looks like an egg? Such a building actually exists in London.\nNature has inspired many architects around the world. This is the Sagrada Familia in Spain. It is one of the most famous ⓒ<u>church</u> in the world. Look at the beautiful tall columns inside the church. They look like trees, ⓓ<u>don't they</u>? The famous architect, Antoni Gaudi, used the shape of trees in the Sagrada Familia. That's ⓔ<u>what</u> he brought the beauty of nature indoors.\n\n위 글의 내용과 일치하는 것은?",
+      "options": [
+        "Nature often tries to imitate art in many ways.",
+        "Humans always fail to catch the beauty of nature by building structures.",
+        "There is an orange-shaped building in London, England.",
+        "Outside the Sagrada Familia, you can see the columns that look like books.",
+        "Building Sagrada Familia, Antoni Gaudi tried to capture the beauty of nature."
+      ],
+      "answer": "5"
+    },
+    {
+      "number": 30,
+      "question": "다음 글의 빈칸 (A)에 들어갈 말로 적절한 것은?\n\nHello, everyone! I'd like to introduce you to my school today. I go to Haan Middle school in Gwangmyeong. My school has a 5-story building. It also has a large playground, a gym, and a small garden. The garden is on the way to the school building. We grow some vegetables there so that we can have fresh food. It is very glad to watch the plants every day. My favorite place is the bench under the big tree. (A)______________________________. That's why I love sitting there and talking with my friends. I like my school very much.",
+      "options": [
+        "It is big but uncomfortable.",
+        "It is too dangerous for student to climb up",
+        "It is wide enough to sit with all my friends",
+        "It is so narrow that my friends can't sit on it",
+        "It is so old and damaged that nobody can sit on it"
+      ],
+      "answer": "3"
+    }
+  ],
+  "R5": [
+    {
+      "number": 1,
+      "question": "다음 빈칸에 들어갈 단어로 가장 적절한 것은?\n\nThe colors he uses in his painting are so __________ to my eyes. I always get enjoyment out of his paintings.",
+      "options": [
+        "smooth",
+        "obvious",
+        "sweet",
+        "pleasing",
+        "challenging"
+      ],
+      "answer": "4"
+    },
+    {
+      "number": 2,
+      "question": "다음 중 밑줄 친 부분이 알맞은 것끼리 짝지어진 것은?\n\nⓐ Ghost exist only in <u>imagination</u>.\nⓑ The artist got his <u>inspire</u> from nature.\nⓒ The monkeys <u>imitation</u> my body movements.\nⓓ The famous restaurants <u>attract</u> many people.\nⓔ Do you know the <u>express</u>, \"I have two left feet?\"",
+      "options": [
+        "ⓐ, ⓓ",
+        "ⓑ, ⓒ",
+        "ⓐ, ⓔ",
+        "ⓑ, ⓓ",
+        "ⓒ, ⓔ"
+      ],
+      "answer": "1"
+    },
+    {
+      "number": 3,
+      "question": "다음 문장 중 의미가 다른 것은?",
+      "options": [
+        "Emily went to bed early to get up early.",
+        "Emily went to bed early so as to get up early.",
+        "Emily went to bed early in order to get up early.",
+        "Emily went to bed early so that she could get up early.",
+        "Emily went to bed so early that she could get up early."
+      ],
+      "answer": "5"
+    },
+    {
+      "number": 4,
+      "question": "다음 두 문장의 의미가 같지 않은 것은?",
+      "options": [
+        "Jim is too short to reach the top shelf. → Jim is so short that he can't reach the top shelf.",
+        "He is smart enough to win the game easily. → He is so smart that he can win the game easily.",
+        "Tom studied hard in order to pass the test. → Tom studied hard, so that he could pass the test.",
+        "If I were a doctor, I could help sick people. → As I am not a doctor, I can't help sick people.",
+        "The mouse is so small that it can go through the hole → The mouse is small enough to go through the hole."
+      ],
+      "answer": "3"
+    },
+    {
+      "number": 5,
+      "question": "주어진 우리말 문장과 같은 문장으로 가장 바르게 영작한 것은?\n\n마이크는 어려운 수학 문제들을 풀 만큼 충분히 똑똑하다.",
+      "options": [
+        "Mike is difficult math problems smart enough to solve.",
+        "Mike can solve difficult math problems smart enough.",
+        "Mike is enough smart to solve difficult math problems.",
+        "Difficult math problems are solved by Mike so smart.",
+        "Mike is smart enough to solve difficult math problems."
+      ],
+      "answer": "5"
+    },
+    {
+      "number": 6,
+      "question": "다음 중 어법상 어색한 문장은?",
+      "options": [
+        "Please speak louder so that everyone can hear you.",
+        "Tom goes to bed early so that he can became taller.",
+        "Yumi does yoga every morning so that she can stay healthy.",
+        "My father went to the store so that he could buy bread.",
+        "Minsu turned on the radio so that he could listen to the baseball game."
+      ],
+      "answer": "2"
+    },
+    {
+      "number": 7,
+      "question": "다음 글에서 어색한 단어 하나를 찾아 바르게 고쳐 쓰시오.\n\nThis is Mary's house. It looks like a big tree. The roof opens in order to she can get fresh air and sunshine all the time. You know what? Her house can move around.\n\n→ ________ → ________",
+      "options": [],
+      "answer": "to → that"
+    },
+    {
+      "number": 8,
+      "question": "다음 대화를 읽고 물음에 답하시오.\nA: ⓐ<u>The tickets for the World Music Concert are on sale now</u>.\nB: Really? Let's book the tickets online right away.\nA: Okay. Let's see... ⓑ<u>There are still tickets left for November 5th</u>.\nB: Sounds good. Let's get two student tickets.\nA: Oh, ⓒ<u>do you mind if I bringing my little brother</u>?\nB: Not at all. But ⓓ<u>it says that you are not allowed to bring children under 8</u>.\nA: No problem. He's 10. Let's add one child ticket. (가)<u>나는 총 금액이 얼마인지 궁금해</u>.\nB: It is 25 dollars.\nA: Great.\nB: ⓔ<u>I can't wait to see the concert</u>!\n\n위 대화의 밑줄 친 (가)의 우리말과 같은 뜻이 되도록 <보기>의 단어를 배열할 때, 4번째로 오는 단어는? (단어 변형이나 구두점 추가 불가)\n\n<보기> is / how / price / wonder / the / much / total\n→ I ______________________________.",
+      "options": [
+        "is",
+        "the",
+        "much",
+        "price",
+        "wonder"
+      ],
+      "answer": "2"
+    },
+    {
+      "number": 9,
+      "question": "다음 대화를 읽고 물음에 답하시오.\nA: ⓐ<u>The tickets for the World Music Concert are on sale now</u>.\nB: Really? Let's book the tickets online right away.\nA: Okay. Let's see... ⓑ<u>There are still tickets left for November 5th</u>.\nB: Sounds good. Let's get two student tickets.\nA: Oh, ⓒ<u>do you mind if I bringing my little brother</u>?\nB: Not at all. But ⓓ<u>it says that you are not allowed to bring children under 8</u>.\nA: No problem. He's 10. Let's add one child ticket. (가)<u>나는 총 금액이 얼마인지 궁금해</u>.\nB: It is 25 dollars.\nA: Great.\nB: ⓔ<u>I can't wait to see the concert</u>!\n\n위 대화의 내용과 일치하는 것은?",
+      "options": [
+        "콘서트 표 판매가 시작될 예정이다.",
+        "10월 5일에 표가 가장 많이 남아있다.",
+        "어린이는 입장 가능 연령에 제한이 있다.",
+        "여학생과 남학생의 동생은 각각 8세와 10세이다.",
+        "콘서트의 학생용 표와 어린이용 표는 가격이 동일하다."
+      ],
+      "answer": "3"
+    },
+    {
+      "number": 10,
+      "question": "다음 글의 주제로 알맞은 것은?\n\nI'd like to talk about the rules at the museum. Inside the museum, you're not allowed to drink soda or eat snacks. You may take pictures of the artworks, but you're not allowed to use a flash. The last rule is most important. You're not allowed to touch the artworks.",
+      "options": [
+        "박물관에서 지켜야 할 규칙들",
+        "박물관에서 먹을 수 있는 음식",
+        "박물관에서 꼭 해봐야 할 것들",
+        "박물관에서 사진을 잘 찍는 방법",
+        "박물관의 작품을 잘 감상하는 방법"
+      ],
+      "answer": "1"
+    },
+    {
+      "number": 11,
+      "question": "다음 주어진 대화에 이어질 순서로 알맞은 것은?\n\nB: Sumin, my train is leaving in five minutes.\nG: I hope you enjoyed your trip, Daniel.\nB: Of course, I did.\n\nⓐ I really liked walking around in hanbok. I looked really cool.\nⓑ Yeah, it's the most popular place here.\nⓒ Which place did you like most in my town?\nⓓ I liked the folk village most.\n\nG: I'm glad to hear that.\nB: Thank you for showing me around.\nG: It was my pleasure. Have a safe trip.",
+      "options": [
+        "ⓐ - ⓑ - ⓒ - ⓓ",
+        "ⓑ - ⓒ - ⓐ - ⓓ",
+        "ⓒ - ⓑ - ⓓ - ⓐ",
+        "ⓒ - ⓓ - ⓐ - ⓑ",
+        "ⓒ - ⓓ - ⓑ - ⓐ"
+      ],
+      "answer": "5"
+    },
+    {
+      "number": 12,
+      "question": "다음 대화를 읽고 물음에 답하시오.\nB: The tickets for the World Music Concert are on sale now.\n\nⓐ: Sounds good. Let's get two student tickets.\nⓑ: Really? Let's book the tickets online right away.\nⓒ: No problem. One is 10, and the other is 9.\nⓓ: Not at all. But it says that you are not allowed to bring children under 8.\nⓔ: Okay, I'll add two child tickets. The total price is 30 dollars, but we can get a 10% discount.\nⓕ: Okay. Let's see.... Unfortunately, the tickets for November 5th are all sold out. But there are still tickets left for the next day.\nⓖ: Oh, do you mind if I bring my little brothers?\n\nB: Great.\nG: (A)<u>I can't wait to see the concert</u>!\n\n위 주어진 대화에 이어질 순서로 알맞은 것은?",
+      "options": [
+        "ⓐ-ⓑ-ⓔ-ⓕ-ⓖ-ⓓ-ⓒ",
+        "ⓐ-ⓕ-ⓑ-ⓔ-ⓖ-ⓒ-ⓓ",
+        "ⓑ-ⓐ-ⓔ-ⓖ-ⓒ-ⓕ-ⓓ",
+        "ⓑ-ⓕ-ⓐ-ⓖ-ⓓ-ⓒ-ⓔ",
+        "ⓑ-ⓕ-ⓖ-ⓒ-ⓐ-ⓔ-ⓓ"
+      ],
+      "answer": "4"
+    },
+    {
+      "number": 13,
+      "question": "다음 대화를 읽고 물음에 답하시오.\nB: The tickets for the World Music Concert are on sale now.\n\nⓐ: Sounds good. Let's get two student tickets.\nⓑ: Really? Let's book the tickets online right away.\nⓒ: No problem. One is 10, and the other is 9.\nⓓ: Not at all. But it says that you are not allowed to bring children under 8.\nⓔ: Okay, I'll add two child tickets. The total price is 30 dollars, but we can get a 10% discount.\nⓕ: Okay. Let's see.... Unfortunately, the tickets for November 5th are all sold out. But there are still tickets left for the next day.\nⓖ: Oh, do you mind if I bring my little brothers?\n\nB: Great.\nG: (A)<u>I can't wait to see the concert</u>!\n\n위 대화의 밑줄 친 (A)I can't wait to see the concert와 바꾸어 쓸 수 있는 말로 적절한 것은?",
+      "options": [
+        "I don't want to see the concert",
+        "I wouldn't love to see the concert",
+        "I'm worried about seeing the concert",
+        "I'm anxious about seeing the concert",
+        "I'm looking forward to seeing the concert"
+      ],
+      "answer": "5"
+    },
+    {
+      "number": 14,
+      "question": "다음 글을 읽고 물음에 답하시오.\nIn the first two examples, we can easily see what inspired the architect. But in the next example from Australia, ⓐ<u>this</u> is not so (A)________. Jørn Utzon, the architect of the Sydney Opera House, took a shape from nature and added his imagination. Can you guess what inspired him? Many people think that it is the waves in the ocean or a sailing boat. But interestingly, the inspiration came from an orange. Look at the roof (B)________. Can you see the peels of an orange? When orange lights are shone on the building, you can see the peels more (C)________.\nWhat about Korea? Have you ever been to Dongdaemun Design Plaza in Seoul? Many people think that the building looks like a giant spaceship. But the architect, Zaha Hadid, took the (D)________ lines from nature so that city people could enjoy them. Thanks to its special design, it has become a popular tourist attraction in Seoul.\nAs you can see, many buildings try to (E)________ the beauty of nature in their design. They are perfect examples of \"Nature meets city.\" If you were an architect, what would you choose from nature?\n\n위 글의 빈칸 (A)~(E)에 들어갈 말로 바르게 연결된 것은?",
+      "options": [
+        "(A) - pleasing",
+        "(B) - roughly",
+        "(C) - closely",
+        "(D) - curved",
+        "(E) - inspire"
+      ],
+      "answer": "1"
+    },
+    {
+      "number": 15,
+      "question": "다음 글을 읽고 물음에 답하시오.\nIn the first two examples, we can easily see what inspired the architect. But in the next example from Australia, ⓐ<u>this</u> is not so (A)________. Jørn Utzon, the architect of the Sydney Opera House, took a shape from nature and added his imagination. Can you guess what inspired him? Many people think that it is the waves in the ocean or a sailing boat. But interestingly, the inspiration came from an orange. Look at the roof (B)________. Can you see the peels of an orange? When orange lights are shone on the building, you can see the peels more (C)________.\nWhat about Korea? Have you ever been to Dongdaemun Design Plaza in Seoul? Many people think that the building looks like a giant spaceship. But the architect, Zaha Hadid, took the (D)________ lines from nature so that city people could enjoy them. Thanks to its special design, it has become a popular tourist attraction in Seoul.\nAs you can see, many buildings try to (E)________ the beauty of nature in their design. They are perfect examples of \"Nature meets city.\" If you were an architect, what would you choose from nature?\n\n위 글의 밑줄 친 ⓐthis가 가리키는 것은?",
+      "options": [
+        "a shape from nature",
+        "the first two examples",
+        "the Sydney Opera House",
+        "what inspired the architect",
+        "the next example from Australia"
+      ],
+      "answer": "4"
+    },
+    {
+      "number": 16,
+      "question": "다음 글을 읽고 물음에 답하시오.\nIn the first two examples, we can easily see what inspired the architect. But in the next example from Australia, ⓐ<u>this</u> is not so (A)________. Jørn Utzon, the architect of the Sydney Opera House, took a shape from nature and added his imagination. Can you guess what inspired him? Many people think that it is the waves in the ocean or a sailing boat. But interestingly, the inspiration came from an orange. Look at the roof (B)________. Can you see the peels of an orange? When orange lights are shone on the building, you can see the peels more (C)________.\nWhat about Korea? Have you ever been to Dongdaemun Design Plaza in Seoul? Many people think that the building looks like a giant spaceship. But the architect, Zaha Hadid, took the (D)________ lines from nature so that city people could enjoy them. Thanks to its special design, it has become a popular tourist attraction in Seoul.\nAs you can see, many buildings try to (E)________ the beauty of nature in their design. They are perfect examples of \"Nature meets city.\" If you were an architect, what would you choose from nature?\n\n위 글을 읽고 다음 질문에 답하시오. ※ 완전한 문장으로 쓰시오.\n\nWhy can't we easily see what inspired Jorn Utzon when he built the Sydney Opera House? Find the answer in the paragraph and write the sentence as it is. (Do not transform.)\n\n→ ______________________________",
+      "options": [],
+      "answer": "Jørn Utzon, the architect of the Sydney Opera House, took a shape from nature and added his imagination.",
+      "acceptedAnswers": [
+        "Jorn Utzon, the architect of the Sydney Opera House, took a shape from nature and added his imagination."
+      ]
+    },
+    {
+      "number": 17,
+      "question": "다음 글을 읽고 물음에 답하시오.\nIn the first two examples, we can easily see what inspired the architect. But in the next example from Australia, ⓐ<u>this</u> is not so (A)________. Jørn Utzon, the architect of the Sydney Opera House, took a shape from nature and added his imagination. Can you guess what inspired him? Many people think that it is the waves in the ocean or a sailing boat. But interestingly, the inspiration came from an orange. Look at the roof (B)________. Can you see the peels of an orange? When orange lights are shone on the building, you can see the peels more (C)________.\nWhat about Korea? Have you ever been to Dongdaemun Design Plaza in Seoul? Many people think that the building looks like a giant spaceship. But the architect, Zaha Hadid, took the (D)________ lines from nature so that city people could enjoy them. Thanks to its special design, it has become a popular tourist attraction in Seoul.\nAs you can see, many buildings try to (E)________ the beauty of nature in their design. They are perfect examples of \"Nature meets city.\" If you were an architect, what would you choose from nature?\n\n위 글을 통해 알 수 있는 것은?",
+      "options": [
+        "Jørn Utzon is an architect from Australia.",
+        "The roof of the Sydney Opera House imitates a sailing boat.",
+        "Many buildings are designed based on the beauty of nature.",
+        "People enjoy the city life thanks to the popular tourist attractions.",
+        "The architect of Dongdaemun Design Plaza was inspired by a spaceship."
+      ],
+      "answer": "3"
+    },
+    {
+      "number": 18,
+      "question": "다음 글을 읽고 물음에 답하시오.\nⓐ________ about Korea? Have you ever ⓑ________ to Dongdaemun Design Plaza in Seoul? Many people think that the building ⓒ________ a giant spaceship. But the architect, Zaha Hadid, took ⓓ________ from nature (A)[so / such] that city people could enjoy them. ⓔ________ its special design, it (B)[become / has become] a popular tourist attraction in Seoul.\nAs you can see, many buildings try to (C)[capture / capturing] the beauty of nature in their design.\n\n위 글의 빈칸 ⓐ~ⓔ에 들어갈 말로 바르게 연결되지 않은 것은?",
+      "options": [
+        "ⓐ: What",
+        "ⓑ: been",
+        "ⓒ: looks",
+        "ⓓ: the curved lines",
+        "ⓔ: Thanks to"
+      ],
+      "answer": "3"
+    },
+    {
+      "number": 19,
+      "question": "다음 글을 읽고 물음에 답하시오.\nⓐ________ about Korea? Have you ever ⓑ________ to Dongdaemun Design Plaza in Seoul? Many people think that the building ⓒ________ a giant spaceship. But the architect, Zaha Hadid, took ⓓ________ from nature (A)[so / such] that city people could enjoy them. ⓔ________ its special design, it (B)[become / has become] a popular tourist attraction in Seoul.\nAs you can see, many buildings try to (C)[capture / capturing] the beauty of nature in their design.\n\n위 글의 괄호 (A), (B), (C)에서 어법상 알맞은 말로 바르게 연결된 것은?",
+      "options": [
+        "(A) such – (B) become – (C) capturing",
+        "(A) so – (B) has become – (C) capture",
+        "(A) so – (B) has become – (C) capturing",
+        "(A) so – (B) become – (C) capture",
+        "(A) such – (B) has become – (C) capture"
+      ],
+      "answer": "2"
+    },
+    {
+      "number": 20,
+      "question": "다음 글을 읽고 물음에 답하시오.\nHave you heard of the expression, \"Art (A)<u>imitates</u> nature?\" Many artists get their ideas and inspirations from world around them. This is because the natural world is a (B)<u>beautiful</u> place. The shapes in nature ⓐ<u>is</u> very (C)<u>pleasing</u> to the eye. For example, look at the egg on the left. It is beautiful, ⓑ<u>isn't</u> it? It is round and (D)<u>delicate</u>, yet ⓒ<u>enough strong</u> to protect its contents. Can you imagine a building ⓓ<u>that</u> looks like an egg? Such a building actually exists in London.\nAs you can see, many buildings try to capture the beauty of nature in their design. They are perfect examples of \"Nature (E)<u>avoids</u> city.\" If you were an architect, what ⓔ<u>would</u> you choose from nature?\n\n위 글의 밑줄 친 (A)~(E) 중, 흐름상 어색한 것은?",
+      "options": [
+        "(A)",
+        "(B)",
+        "(C)",
+        "(D)",
+        "(E)"
+      ],
+      "answer": "5"
+    },
+    {
+      "number": 21,
+      "question": "다음 글을 읽고 물음에 답하시오.\nHave you heard of the expression, \"Art (A)<u>imitates</u> nature?\" Many artists get their ideas and inspirations from world around them. This is because the natural world is a (B)<u>beautiful</u> place. The shapes in nature ⓐ<u>is</u> very (C)<u>pleasing</u> to the eye. For example, look at the egg on the left. It is beautiful, ⓑ<u>isn't</u> it? It is round and (D)<u>delicate</u>, yet ⓒ<u>enough strong</u> to protect its contents. Can you imagine a building ⓓ<u>that</u> looks like an egg? Such a building actually exists in London.\nAs you can see, many buildings try to capture the beauty of nature in their design. They are perfect examples of \"Nature (E)<u>avoids</u> city.\" If you were an architect, what ⓔ<u>would</u> you choose from nature?\n\n위 글의 밑줄 친 ⓐ~ⓔ 중, 어법상 어색한 것끼리 짝지어진 것은?",
+      "options": [
+        "ⓐ, ⓒ",
+        "ⓐ, ⓓ",
+        "ⓑ, ⓒ",
+        "ⓑ, ⓔ",
+        "ⓓ, ⓔ"
+      ],
+      "answer": "1"
+    },
+    {
+      "number": 22,
+      "question": "다음 글을 읽고 물음에 답하시오.\nNature has ⓐ__________ many architects around the world. This is the Sagrada Familia in Spain. It is one of the ⓑ__________ famous ⓒ__________ in the world. Look at the beautiful tall columns inside the church. They look like trees, ⓓ__________ they? The famous architect, Antoni Gaudi, used the shape of trees in the Sagrada Familia. That's ⓔ__________ he brought the beauty of nature indoors.\nIn the first two examples, we can easily see what inspired the architect. But in the next example from Australia, this is not so obvious. Jørn Utzon, the architect of the Sydney Opera House, took a shape from nature and added his imagination. Can you guess what inspired him? Many people think that it is the waves in the ocean or a sailing boat. But interestingly, the inspiration came from an orange. Look at the roof closely. Can you see the peels of an orange? When orange lights are shone on the building, you can see the peels more clearly.\n\n위 글의 빈칸 ⓐ~ⓔ에 들어갈 말로 알맞지 않은 것은?",
+      "options": [
+        "ⓐ - inspired",
+        "ⓑ - most",
+        "ⓒ - churches",
+        "ⓓ - don't",
+        "ⓔ - why"
+      ],
+      "answer": "5"
+    },
+    {
+      "number": 23,
+      "question": "다음 글을 읽고 물음에 답하시오.\nNature has ⓐ__________ many architects around the world. This is the Sagrada Familia in Spain. It is one of the ⓑ__________ famous ⓒ__________ in the world. Look at the beautiful tall columns inside the church. They look like trees, ⓓ__________ they? The famous architect, Antoni Gaudi, used the shape of trees in the Sagrada Familia. That's ⓔ__________ he brought the beauty of nature indoors.\nIn the first two examples, we can easily see what inspired the architect. But in the next example from Australia, this is not so obvious. Jørn Utzon, the architect of the Sydney Opera House, took a shape from nature and added his imagination. Can you guess what inspired him? Many people think that it is the waves in the ocean or a sailing boat. But interestingly, the inspiration came from an orange. Look at the roof closely. Can you see the peels of an orange? When orange lights are shone on the building, you can see the peels more clearly.\n\n위 글에 대한 내용으로 알맞지 않은 것은?",
+      "options": [
+        "자연은 많은 건축가들에게 영감을 주었다.",
+        "오렌지는 Jørn Utzon에게 영감을 주었다.",
+        "Sydney Opera House는 Jørn Utzon라는 건축가가 디자인했다.",
+        "Sydney Opera House는 여러 가지 사물의 모습을 표현한 것이다.",
+        "Antoni Gaudi는 Sagrada Familia 성당에 나무의 형태를 사용했다."
+      ],
+      "answer": "4"
+    },
+    {
+      "number": 24,
+      "question": "다음 글을 읽고 물음에 답하시오.\nHave you heard of the expression, \"Art imitates nature\"? Many artists get their ideas and inspirations from the world around them. This is (A)__________ the natural world is a beautiful place. ⓐ<u>The shapes in nature are very pleased to the eye</u>. For example, look at the egg on the left. Isn't it beautiful? ⓑ<u>It is round and delicate, yet it's so strong that it can protect its contents</u>. Can you imagine a building that looks like an egg? Such a building actually exists in London.\nⓒ<u>Nature has been inspired many architects around the world</u>. This is the Sagrada Familia in Spain. ⓓ<u>It is one of the most famous churches in the world</u>. Look at the beautiful tall columns inside the church. ⓔ<u>They look like trees, didn't they</u>? The famous architect, Antoni Gaudi, used the shape of trees in the Sagrada Familia. That's (B)____________ he brought the beauty of nature indoors.\nⓕ<u>In the first two examples, we can easily see that inspired the architect</u>. But in the next example from Australia, this is not so obvious. Jørn Utzon, the architect of the Sydney Opera House, took a shape from nature and added his imagination. Can you guess what inspired him? Many people think that it is the waves in the ocean or a sailing boat. But interestingly, the inspiration came from an orange. Look at the roof closely. Can you see the peels of an orange? ⓖ<u>When orange lights are shone on the building, you can see the peels more clearly</u>.\n\n위 글의 빈칸 (A), (B)에 들어갈 말이 차례대로 짝지어진 것은?",
+      "options": [
+        "(A) why – (B) the way",
+        "(A) why – (B) why",
+        "(A) because – (B) the way",
+        "(A) because – (B) why",
+        "(A) the way – (B) the way"
+      ],
+      "answer": "3"
+    },
+    {
+      "number": 25,
+      "question": "다음 글을 읽고 물음에 답하시오.\nHave you heard of the expression, \"Art imitates nature\"? Many artists get their ideas and inspirations from the world around them. This is (A)__________ the natural world is a beautiful place. ⓐ<u>The shapes in nature are very pleased to the eye</u>. For example, look at the egg on the left. Isn't it beautiful? ⓑ<u>It is round and delicate, yet it's so strong that it can protect its contents</u>. Can you imagine a building that looks like an egg? Such a building actually exists in London.\nⓒ<u>Nature has been inspired many architects around the world</u>. This is the Sagrada Familia in Spain. ⓓ<u>It is one of the most famous churches in the world</u>. Look at the beautiful tall columns inside the church. ⓔ<u>They look like trees, didn't they</u>? The famous architect, Antoni Gaudi, used the shape of trees in the Sagrada Familia. That's (B)____________ he brought the beauty of nature indoors.\nⓕ<u>In the first two examples, we can easily see that inspired the architect</u>. But in the next example from Australia, this is not so obvious. Jørn Utzon, the architect of the Sydney Opera House, took a shape from nature and added his imagination. Can you guess what inspired him? Many people think that it is the waves in the ocean or a sailing boat. But interestingly, the inspiration came from an orange. Look at the roof closely. Can you see the peels of an orange? ⓖ<u>When orange lights are shone on the building, you can see the peels more clearly</u>.\n\n위 글의 밑줄 친 ⓐ~ⓖ 중, 어법상 올바른 문장의 개수는?",
+      "options": [
+        "1개",
+        "2개",
+        "3개",
+        "4개",
+        "5개"
+      ],
+      "answer": "3"
+    },
+    {
+      "number": 26,
+      "question": "다음 글을 읽고 물음에 답하시오.\nHave you heard of the expression, \"Art imitates nature\"? Many artists get their ideas and inspirations from the world around them. This is (A)__________ the natural world is a beautiful place. ⓐ<u>The shapes in nature are very pleased to the eye</u>. For example, look at the egg on the left. Isn't it beautiful? ⓑ<u>It is round and delicate, yet it's so strong that it can protect its contents</u>. Can you imagine a building that looks like an egg? Such a building actually exists in London.\nⓒ<u>Nature has been inspired many architects around the world</u>. This is the Sagrada Familia in Spain. ⓓ<u>It is one of the most famous churches in the world</u>. Look at the beautiful tall columns inside the church. ⓔ<u>They look like trees, didn't they</u>? The famous architect, Antoni Gaudi, used the shape of trees in the Sagrada Familia. That's (B)____________ he brought the beauty of nature indoors.\nⓕ<u>In the first two examples, we can easily see that inspired the architect</u>. But in the next example from Australia, this is not so obvious. Jørn Utzon, the architect of the Sydney Opera House, took a shape from nature and added his imagination. Can you guess what inspired him? Many people think that it is the waves in the ocean or a sailing boat. But interestingly, the inspiration came from an orange. Look at the roof closely. Can you see the peels of an orange? ⓖ<u>When orange lights are shone on the building, you can see the peels more clearly</u>.\n\n위 글의 내용과 일치하는 것은?",
+      "options": [
+        "It's not obvious that art imitates nature.",
+        "There is a building which looks like a tree.",
+        "It was Jørn Utzon that was inspired by a sailing boat.",
+        "It's not easy to see what inspired Antoni Gaudi when he designed the Sagrada familia.",
+        "The architect's inspiration from nature and imagination affected the design of Sydney Opera House."
+      ],
+      "answer": "5"
+    },
+    {
+      "number": 27,
+      "question": "다음 글을 읽고 물음에 답하시오.\nHave you heard of the expression, \"Art imitates nature\"? Many artists get their ideas and inspirations from the world around them. This is (A)__________ the natural world is a beautiful place. ⓐ<u>The shapes in nature are very pleased to the eye</u>. For example, look at the egg on the left. Isn't it beautiful? ⓑ<u>It is round and delicate, yet it's so strong that it can protect its contents</u>. Can you imagine a building that looks like an egg? Such a building actually exists in London.\nⓒ<u>Nature has been inspired many architects around the world</u>. This is the Sagrada Familia in Spain. ⓓ<u>It is one of the most famous churches in the world</u>. Look at the beautiful tall columns inside the church. ⓔ<u>They look like trees, didn't they</u>? The famous architect, Antoni Gaudi, used the shape of trees in the Sagrada Familia. That's (B)____________ he brought the beauty of nature indoors.\nⓕ<u>In the first two examples, we can easily see that inspired the architect</u>. But in the next example from Australia, this is not so obvious. Jørn Utzon, the architect of the Sydney Opera House, took a shape from nature and added his imagination. Can you guess what inspired him? Many people think that it is the waves in the ocean or a sailing boat. But interestingly, the inspiration came from an orange. Look at the roof closely. Can you see the peels of an orange? ⓖ<u>When orange lights are shone on the building, you can see the peels more clearly</u>.\n\n위 글을 읽고 다음 질문에 답하시오. ※ 완전한 문장으로 쓰시오.\n\nHow did Antoni Gaudi bring the beauty of nature inside the Sagrada Familia? Find the answer in the paragraph and write the sentence as it is. (Do not transform.)\n\n→ ______________________________",
+      "options": [],
+      "answer": "The famous architect, Antoni Gaudi, used the shape of trees to make these beautiful columns.",
+      "acceptedAnswers": [
+        "The famous architect, Antoni Gaudi, used the shape of trees in the Sagrada Familia."
+      ]
+    },
+    {
+      "number": 28,
+      "question": "다음 글을 읽고 물음에 답하시오.\nHave you ever been to Dongdaemun Design Plaza in Seoul? Many people think that the building looks like a giant spaceship. But the architect, Zaha Hadid, took the curved lines from nature so that city people could enjoy them. Thanks to its special design, it has become a popular tourist attraction in Seoul.\n\n다음 Dongdaemun Design Plaza에 대한 설명으로 알맞지 않은 것은?",
+      "options": [
+        "It is located in Seoul.",
+        "Many tourists visit there when they're in Seoul.",
+        "The architect wanted people in the city to enjoy its shape.",
+        "Many people think it looks like a vehicle that travels in space.",
+        "The architect used her own imagination only when she designed it."
+      ],
+      "answer": "5"
+    },
+    {
+      "number": 29,
+      "question": "다음 글을 읽고 물음에 답하시오.\nHave you heard of the expression, \"Art imitates nature\"? Many artists get their ideas and inspirations from the world around them. This is because the natural world is a beautiful place. The shapes in nature are very pleased to the eye. For example, look at the egg on the left. Isn't it beautiful? It is round and ⓐ<u>delicate</u>, yet (A)<u>strongly enough to protect its contents</u>. (B)<u>Can you imagine a building which looks like an egg</u>? Such a building actually ⓑ<u>exists</u> in London.\nNature has inspired many architects around the world. This is the Sagrada Familia in Spain. It is one of the most famous churches in the world. Look at the beautiful tall columns inside the church. (C)<u>They look like trees, aren't they</u>? The famous ⓒ<u>architect</u>, Antoni Gaudi, used the shape of trees in the Sagrada Familia. (D)<u>That's how he brought the beauty of nature indoors</u>.\nIn the first two examples, we can easily see what inspired the architect. But in the next example from Australia, this is not so ⓓ<u>obvious</u>. Jørn Utzon, the architect of the Sydney Opera House, took a shape from nature and added his imagination. Can you guess what inspired him? Many people think that it is the waves in the ocean or a sailing boat. But interestingly, (E)<u>the inspiration came from an orange</u>. Look at the roof closely. Can you see the ⓔ<u>peels</u> of an orange? When orange lights are shone on the building, you can see the peels more clearly.\n\n위 글의 밑줄 친 (A)~(E) 중, 어법상 어색한 것의 개수는?",
+      "options": [
+        "1개",
+        "2개",
+        "3개",
+        "4개",
+        "5개"
+      ],
+      "answer": "2"
+    },
+    {
+      "number": 30,
+      "question": "다음 글을 읽고 물음에 답하시오.\nHave you heard of the expression, \"Art imitates nature\"? Many artists get their ideas and inspirations from the world around them. This is because the natural world is a beautiful place. The shapes in nature are very pleased to the eye. For example, look at the egg on the left. Isn't it beautiful? It is round and ⓐ<u>delicate</u>, yet (A)<u>strongly enough to protect its contents</u>. (B)<u>Can you imagine a building which looks like an egg</u>? Such a building actually ⓑ<u>exists</u> in London.\nNature has inspired many architects around the world. This is the Sagrada Familia in Spain. It is one of the most famous churches in the world. Look at the beautiful tall columns inside the church. (C)<u>They look like trees, aren't they</u>? The famous ⓒ<u>architect</u>, Antoni Gaudi, used the shape of trees in the Sagrada Familia. (D)<u>That's how he brought the beauty of nature indoors</u>.\nIn the first two examples, we can easily see what inspired the architect. But in the next example from Australia, this is not so ⓓ<u>obvious</u>. Jørn Utzon, the architect of the Sydney Opera House, took a shape from nature and added his imagination. Can you guess what inspired him? Many people think that it is the waves in the ocean or a sailing boat. But interestingly, (E)<u>the inspiration came from an orange</u>. Look at the roof closely. Can you see the ⓔ<u>peels</u> of an orange? When orange lights are shone on the building, you can see the peels more clearly.\n\n위 글의 밑줄 친 ⓐ~ⓔ의 뜻이 바르게 연결된 것끼리 짝지어진 것은?\n\nⓐ delicate: easily broken or damaged\nⓑ exist: to show something in a public place so that people can see it\nⓒ architect: a person who designs buildings\nⓓ obvious: hard to see or understand\nⓔ peel: the soft part inside the skin of a fruit",
+      "options": [
+        "ⓐ, ⓑ",
+        "ⓐ, ⓒ",
+        "ⓑ, ⓔ",
+        "ⓒ, ⓓ",
+        "ⓓ, ⓔ"
+      ],
+      "answer": "2"
+    }
+  ]
+}
