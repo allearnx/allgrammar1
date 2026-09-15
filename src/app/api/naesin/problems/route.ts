@@ -53,7 +53,7 @@ export const POST = createApiHandler(
     // Sanitize questions before saving (normalize answers, flatten arrays)
     const hasQuestions = Array.isArray(rawQuestions) && rawQuestions.length > 0;
     const { questions: sanitizedQuestions, answerKey: sanitizedAnswerKey } = hasQuestions
-      ? sanitizeQuestions(rawQuestions, rawAnswerKey as (string | number | null)[] | undefined)
+      ? sanitizeQuestions(rawQuestions, rawAnswerKey as (string | number | null)[] | undefined, { title })
       : { questions: rawQuestions || [], answerKey: rawAnswerKey || [] };
 
     const insertData: Record<string, unknown> = {
@@ -118,6 +118,7 @@ export const PATCH = createApiHandler(
       const { questions: sq, answerKey: sak } = sanitizeQuestions(
         updates.questions as NaesinProblemQuestion[],
         updates.answer_key as (string | number | null)[] | undefined,
+        { title: typeof updates.title === 'string' ? updates.title : undefined },
       );
       updates.questions = sq;
       updates.answer_key = sak;

@@ -22,7 +22,7 @@ export const POST = createApiHandler(
     // 2. Sanitize + validate before import
     const hasQ = Array.isArray(template.questions) && template.questions.length > 0;
     const { questions: sq, answerKey: sak } = hasQ
-      ? sanitizeQuestions(template.questions, template.answer_key)
+      ? sanitizeQuestions(template.questions, template.answer_key, { title: template.title })
       : { questions: template.questions || [], answerKey: template.answer_key || [] };
 
     // 3. Build rows for each target unit

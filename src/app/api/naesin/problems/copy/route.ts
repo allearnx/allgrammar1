@@ -22,7 +22,7 @@ export const POST = createApiHandler(
     // 2. Sanitize before copy
     const hasQ = Array.isArray(source.questions) && source.questions.length > 0;
     const { questions: sq, answerKey: sak } = hasQ
-      ? sanitizeQuestions(source.questions, source.answer_key)
+      ? sanitizeQuestions(source.questions, source.answer_key, { title: source.title })
       : { questions: source.questions || [], answerKey: source.answer_key || [] };
 
     if (hasQ) {

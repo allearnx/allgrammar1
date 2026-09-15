@@ -1,4 +1,5 @@
 import type { NaesinProblemQuestion } from '@/types/naesin';
+import { fixMissingUnderline, hasMissingUnderline } from '@/lib/naesin/fix-underlines';
 
 // ── Constants ──
 
@@ -493,10 +494,14 @@ export function backfillSharedPassages(
  * 6. 중첩 배열 선지 → 문자열로 평탄화
  * 7. answer_key를 questions[].answer에서 재구축
  * 8. 이미지 참조 문항 자동 삭제 (인라인 설명 없는 경우)
+ * 12. "밑줄 친" 문항인데 <u>가 없으면 밑줄 복구 (마커 변환 → 규칙 복원 → 지시문 재작성, 정답 무변경)
+ *     — 2026-09-15. 기존 콘텐츠는 scripts/fix-missing-underlines.ts로 일괄 처리 완료, 이후는 여기서 자동.
+ *     opts.title(시트/템플릿 제목)은 문법 주제 힌트("동명사 Step2")로만 쓰임 — 없어도 동작.
  */
 export function sanitizeQuestions(
   questions: NaesinProblemQuestion[],
   answerKey?: (string | number | null)[],
+  opts?: { title?: string },
 ): { questions: NaesinProblemQuestion[]; answerKey: (string | number | null)[] } {
   const sanitized = questions.map((q, qi) => {
     const out = { ...q };
@@ -672,6 +677,11 @@ export function sanitizeQuestions(
           }));
         }
       }
+    }
+
+    // Rule 12: 밑줄 유실 복구 — 학생 화면은 <u>만 밑줄로 그림. 정답은 건드리지 않음.
+    if (typeof out.question === 'string' && hasMissingUnderline(out)) {
+      fixMissingUnderline(out, opts?.title ?? '');
     }
 
     return out;

@@ -41,7 +41,7 @@ export const POST = createApiHandler(
     // Sanitize + validate
     const hasQ = Array.isArray(rawQuestions) && rawQuestions.length > 0;
     const { questions, answerKey } = hasQ
-      ? sanitizeQuestions(rawQuestions as NaesinProblemQuestion[], rawAnswerKey as (string | number | null)[] | undefined)
+      ? sanitizeQuestions(rawQuestions as NaesinProblemQuestion[], rawAnswerKey as (string | number | null)[] | undefined, { title })
       : { questions: rawQuestions || [], answerKey: rawAnswerKey || [] };
 
     // 템플릿은 교사 작업 공간이므로 검증 오류를 경고로만 반환 (저장은 허용)
@@ -92,6 +92,7 @@ export const PATCH = createApiHandler(
       const { questions: sq, answerKey: sak } = sanitizeQuestions(
         questions as NaesinProblemQuestion[],
         answerKey as (string | number | null)[] | undefined,
+        { title: typeof updates.title === 'string' ? updates.title : undefined },
       );
       updates.questions = sq;
       updates.answer_key = sak;
