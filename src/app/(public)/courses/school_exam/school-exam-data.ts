@@ -46,7 +46,6 @@ export const trialAcademyItems = [
 
 export const premiumItems = [
   '주 4회 선생님 라이브 클리닉',
-  '녹화 강의 무제한 다시보기',
   '올인내신 + 올킬보카 전체 이용',
   '내신 6단계 전체 (문법영상 + 문제풀이 + 라스트리뷰)',
   '오답 라스트리뷰 — 유사문제 자동 재출제',
