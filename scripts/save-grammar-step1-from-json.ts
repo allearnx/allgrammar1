@@ -1,7 +1,7 @@
 /**
  * 문법 1단계 시트 + 문법 뱅크(템플릿) 저장 — 워크북에서 원문 그대로 구조화한 JSON({P1,P2,...})을 넣는다.
  *  실행: GRAMMAR_JSON=<path> UNIT_ID=<uuid> TEXTBOOK_ID=<uuid> TITLE_PREFIX="8과 문법 1단계" \
- *        TOPICS='{"P1":"분사구문","P2":"과거완료"}' TEMPLATE_SUFFIX="(동아이 8과 워크북)" [SET_SIZE=27] \
+ *        TOPICS='{"P1":"분사구문","P2":"과거완료"}' TEMPLATE_SUFFIX="(동아이 8과 워크북)" [SET_SIZE=27] [STEP=1] \
  *        npx tsx --env-file=.env.local scripts/save-grammar-step1-from-json.ts [--apply] [--sheets-only]
  *  - 템플릿: 파트별 "<topic> Step 1 <suffix>" (category problem / mode interactive)
  *  - 시트: 파트 순서대로 이어 붙여 SET_SIZE로 분할, "<TITLE_PREFIX> (i/N)", source_template_id는 파트 템플릿
@@ -15,6 +15,7 @@ const APPLY = process.argv.includes('--apply');
 const SHEETS_ONLY = process.argv.includes('--sheets-only');
 const { GRAMMAR_JSON, UNIT_ID, TEXTBOOK_ID, TITLE_PREFIX, TOPICS, TEMPLATE_SUFFIX } = process.env;
 const SET_SIZE = Number(process.env.SET_SIZE ?? 27);
+const STEP = process.env.STEP ?? '1';
 if (!GRAMMAR_JSON || !UNIT_ID || !TEXTBOOK_ID || !TITLE_PREFIX || !TOPICS) throw new Error('GRAMMAR_JSON, UNIT_ID, TEXTBOOK_ID, TITLE_PREFIX, TOPICS 환경변수 필요');
 const parts = JSON.parse(readFileSync(GRAMMAR_JSON, 'utf8')) as Record<string, NaesinProblemQuestion[]>;
 const topics = JSON.parse(TOPICS) as Record<string, string>;
@@ -57,7 +58,7 @@ async function main() {
   // 1) 템플릿
   const templateIds: Record<string, string | null> = {};
   for (const key of Object.keys(parts)) {
-    const title = `${topics[key]} Step 1 ${TEMPLATE_SUFFIX ?? ''}`.trim();
+    const title = `${topics[key]} Step ${STEP} ${TEMPLATE_SUFFIX ?? ''}`.trim();
     if (!APPLY || SHEETS_ONLY) { templateIds[key] = null; console.log(`템플릿 예정: ${title} (${prepared[key].questions.length})`); continue; }
     if (tplExisting?.some((t) => t.title === title)) throw new Error(`템플릿 이미 존재: ${title}`);
     const { data, error } = await admin.from('naesin_templates').insert({ title, template_topic: topics[key], category: 'problem', mode: 'interactive', questions: prepared[key].questions, answer_key: prepared[key].answerKey }).select('id').single();
