@@ -1,0 +1,888 @@
+{
+ "R1": [
+  {
+   "number": 1,
+   "question": "다음 중 짝지어진 단어의 관계가 나머지 넷과 다른 것은?",
+   "options": [
+    "sad - happy",
+    "rude - polite",
+    "online - offline",
+    "blue - gloomy",
+    "careless - careful"
+   ],
+   "answer": "4",
+   "explanation": "'우울한 : 울적한'은 유의어 관계이고 나머지는 반의어 관계이다."
+  },
+  {
+   "number": 2,
+   "question": "다음 중 어느 빈칸에도 들어갈 수 없는 단어는?\n\n<보기>\n• How do you ________ your free time?\n• We all ________ difficult problems in life.\n• I will ________ food pictures on the blog.\n• You can ________ your worries with me.",
+   "options": [
+    "face",
+    "post",
+    "reply",
+    "spend",
+    "share"
+   ],
+   "answer": "3",
+   "explanation": "차례대로 spend - face - post - share이다."
+  },
+  {
+   "number": 3,
+   "question": "다음 중 <보기>의 영영풀이에 해당하지 않는 단어는?\n\n<보기>\n• a subject that people talk or write about\n• a combination of all the things that are happening\n• a written message that you send with a mobile phone\n• a movement of your hand, arm or body for a particular meaning",
+   "options": [
+    "text",
+    "topic",
+    "gesture",
+    "account",
+    "situation"
+   ],
+   "answer": "4",
+   "explanation": "차례대로 topic - situation - text - gesture이다. account(계정)의 영영풀이는 'a personal place on a website for logging in and using services'이다."
+  },
+  {
+   "number": 4,
+   "question": "다음 중 어법상 알맞지 않은 것을 모두 골라 짝지은 것은?\n\nⓐ Yena sent her favorite doll her sister.\nⓑ Mr. Kong bought pizza for us.\nⓒ Making new friends takes time.\nⓓ We talked about join the club.\nⓔ He avoided to answer the question.",
+   "options": [
+    "ⓐ, ⓑ, ⓓ",
+    "ⓐ, ⓒ, ⓔ",
+    "ⓐ, ⓓ, ⓔ",
+    "ⓑ, ⓒ, ⓓ",
+    "ⓑ, ⓓ, ⓔ"
+   ],
+   "answer": "3",
+   "explanation": "ⓐ her favorite doll her sister → her sister her favorite doll 또는 her favorite doll to her sister. ⓓ join → joining (전치사의 목적어). ⓔ to answer → answering (avoid는 동명사를 목적어로 취한다)."
+  },
+  {
+   "number": 5,
+   "question": "다음 대화의 빈칸에 들어갈 말로 알맞은 것은?\n\nA: I won the gold medal.\nB: ______________________________",
+   "options": [
+    "That's too bad.",
+    "Right. I deserve it.",
+    "I'm proud of myself.",
+    "I'm happy to hear that.",
+    "You can't say that again."
+   ],
+   "answer": "4",
+   "explanation": "A가 금메달을 땄다는 좋은 일을 전하고 있으므로 이에 대한 기쁨을 표현하는 ④ '그 말을 들으니 기쁘다.'가 적절하다."
+  },
+  {
+   "number": 6,
+   "question": "다음 대화의 빈칸에 들어갈 말로 알맞은 것은?\n\nA: ______________________________ I feel so sad.\nB: I'm sorry to hear that.",
+   "options": [
+    "I passed the exam.",
+    "I lost my favorite necklace.",
+    "I finally solved the problem.",
+    "I'm walking around the beautiful lake.",
+    "I got a reply from my favorite singer."
+   ],
+   "answer": "2",
+   "explanation": "A가 너무 슬퍼하고 있고 B가 이에 대해 유감을 표하고 있으므로 빈칸에는 좋지 않은 일에 대한 내용이 들어가야 한다."
+  },
+  {
+   "number": 7,
+   "question": "다음 그림을 보고 말풍선에 들어갈 자기소개를 쓸 때, 어법상 또는 내용상 알맞지 않은 것을 모두 고르면? (정답 2개)\n(그림 설명: Joan은 헤드폰으로 음악을 듣고 있고, Alan은 패스트푸드 앞에서 손을 내저으며 거절하고 있으며, Kayla는 카메라로 사진을 찍고 있고, Billy는 AI 로봇과 영어로 말하고 있다.)",
+   "options": [
+    "Joan: I like to listen to music.",
+    "Alan: I don't mind eating fast food.",
+    "Joan: Listening to music is my hobby.",
+    "Kayla: I enjoy taking pictures in my free time.",
+    "Billy: I practice to speaking English with an AI robot."
+   ],
+   "answer": "2, 5",
+   "explanation": "② mind는 동명사를 목적어로 취하면 '~하는 것을 꺼리다'라는 뜻으로, 그림에서 패스트푸드를 보고 손사래를 치고 있는 Alan이 할 말로 적절하지 않다. ⑤ practice는 동명사를 목적어로 취하므로 to speaking → speaking."
+  },
+  {
+   "number": 8,
+   "question": "다음 대화를 읽고 물음에 답하시오.\nB: Hey, Keri.\nW: Hello. I'm your AI friend, Keri. How are you doing today?\n\n(A) How come?\n(B) Oh, I'm sorry to hear that.\n(C) I don't feel good.\n(D) My baseball team lost the game. I feel blue.\n\nB: Can you cheer me up, Keri?\nW: Sure. I'll play some happy songs for you.\n(Music turns on.)\n\n위 주어진 대화에 이어질 순서로 알맞은 것은?",
+   "options": [
+    "(A)-(B)-(C)-(D)",
+    "(A)-(C)-(B)-(D)",
+    "(C)-(A)-(B)-(D)",
+    "(C)-(A)-(D)-(B)",
+    "(D)-(B)-(C)-(A)"
+   ],
+   "answer": "4",
+   "explanation": "오늘 기분이 어떤지 묻자 기분이 좋지 않다고 대답하고(C), 이유를 묻자(A), 야구팀이 져서 우울하다고 답하고(D), 이에 유감을 표하는(B) 순서가 자연스럽다."
+  },
+  {
+   "number": 9,
+   "question": "다음 대화를 읽고 물음에 답하시오.\nB: Hey, Keri.\nW: Hello. I'm your AI friend, Keri. How are you doing today?\n\n(A) How come?\n(B) Oh, I'm sorry to hear that.\n(C) I don't feel good.\n(D) My baseball team lost the game. I feel blue.\n\nB: Can you cheer me up, Keri?\nW: Sure. I'll play some happy songs for you.\n(Music turns on.)\n\n위 대화를 읽고 다음 질문에 대한 답이 되도록 주어진 <조건>에 맞게 빈칸에 알맞은 말을 쓰시오.\n\n<조건> by를 사용할 것\n\nQ. How does Keri cheer up the boy?\n→ She cheers him up ________________.",
+   "options": [],
+   "answer": "by playing happy songs",
+   "explanation": "Keri는 행복한 노래를 틀어 줌으로써 소년을 기운 나게 한다."
+  },
+  {
+   "number": 10,
+   "question": "다음 중 짝지어진 대화가 어색한 것은?",
+   "options": [
+    "A: How are you doing? / B: I'm great.",
+    "A: I caught a bad cold. / B: I'm sorry to hear that.",
+    "A: You look sad. What's wrong? / B: My best friend isn't talking to me.",
+    "A: What's up? / B: I finally finished my project. I feel bad.",
+    "A: I'm feeling much better now. / B: I'm happy to hear that."
+   ],
+   "answer": "4",
+   "explanation": "④ 드디어 프로젝트를 끝냈다는 좋은 일을 말한 뒤 기분이 안 좋다고 말하는 것은 어색하다."
+  },
+  {
+   "number": 11,
+   "question": "다음 글을 읽고 물음에 답하시오.\nDohun's Story\nMy friend, Jian, sends ⓐ<u>me too many texts</u>. He even texts in the middle of the night. When I ⓑ<u>didn't</u> reply, he sends me angry emojis. Jian is my good friend, and I want ⓒ<u>to be</u> kind to him. What should I do?\n↳ It sounds ⓓ<u>stressful</u>. Only text him short, simple messages.\n↳ Say ⓔ<u>honestly</u>, \"Can you text me less?\"\n\n윗글의 밑줄 친 ⓐ~ⓔ 중, 어법상 어색한 것은?",
+   "options": [
+    "ⓐ",
+    "ⓑ",
+    "ⓒ",
+    "ⓓ",
+    "ⓔ"
+   ],
+   "answer": "2",
+   "explanation": "ⓑ 주절의 동사 sends가 현재형이므로 부사절의 시제도 현재로 일치시켜 didn't → don't."
+  },
+  {
+   "number": 12,
+   "question": "다음 글을 읽고 물음에 답하시오.\nDohun's Story\nMy friend, Jian, sends ⓐ<u>me too many texts</u>. He even texts in the middle of the night. When I ⓑ<u>didn't</u> reply, he sends me angry emojis. Jian is my good friend, and I want ⓒ<u>to be</u> kind to him. What should I do?\n↳ It sounds ⓓ<u>stressful</u>. Only text him short, simple messages.\n↳ Say ⓔ<u>honestly</u>, \"Can you text me less?\"\n\n윗글의 내용과 일치하지 않는 것은?",
+   "options": [
+    "Jian sends texts to Dohun late at night.",
+    "Jian expresses his feelings with angry emojis.",
+    "Dohun wants to treat Jian kindly.",
+    "Someone suggests sending Jian short messages.",
+    "Someone suggests texting Jian less."
+   ],
+   "answer": "5",
+   "explanation": "두 번째 댓글은 지안이에게 문자를 덜 보내 달라고 솔직하게 요청하라는 제안이지, 지안이에게 문자를 덜 보내라는 제안이 아니다."
+  },
+  {
+   "number": 13,
+   "question": "다음 글을 읽고 물음에 답하시오.\nDohun's Story\nMy friend, Jian, sends ⓐ<u>me too many texts</u>. He even texts in the middle of the night. When I ⓑ<u>didn't</u> reply, he sends me angry emojis. Jian is my good friend, and I want ⓒ<u>to be</u> kind to him. What should I do?\n↳ It sounds ⓓ<u>stressful</u>. Only text him short, simple messages.\n↳ Say ⓔ<u>honestly</u>, \"Can you text me less?\"\n\n윗글의 제목으로 알맞은 것은?",
+   "options": [
+    "Please Text Me Less",
+    "End of Our Friendship",
+    "Texts: A New Way of Making Friends",
+    "Stay Away From Your Phone At Night",
+    "I Don't Want to Be Your Friend Any More!"
+   ],
+   "answer": "1",
+   "explanation": "지안이가 문자를 너무 많이 보내 도훈이가 고민하고 있으며, 관계를 유지하면서 문자를 줄이고 싶어 하는 내용이므로 ①이 알맞다."
+  },
+  {
+   "number": 14,
+   "question": "다음 글을 읽고 물음에 답하시오.\nDami's Story\nYumin, Sia, and I are good friends. Yumin's hobby is (A)[post / posting] photos online. Yesterday, when I saw photos on her social media account, I (B)[am / was] surprised. In one photo, Sia has a strange face and (C)[making / makes] a funny gesture. It had a lot of likes and rude comments about her. Sia knows nothing about this. Should I tell her?\n↳ Of course! You should tell her. Hurry!\n↳ Ask Yumin first. Maybe she doesn't understand the problem.\n\n윗글의 괄호 (A), (B), (C)에서 어법상 알맞은 말로 바르게 연결된 것은?",
+   "options": [
+    "(A) post – (B) am – (C) making",
+    "(A) posting – (B) was – (C) makes",
+    "(A) post – (B) was – (C) makes",
+    "(A) posting – (B) was – (C) making",
+    "(A) posting – (B) am – (C) makes"
+   ],
+   "answer": "2",
+   "explanation": "(A) be동사 is의 보어 자리이므로 동명사 posting. (B) Yesterday가 있으므로 과거형 was. (C) 3인칭 단수 주어 Sia에 수일치한 현재형 makes."
+  },
+  {
+   "number": 15,
+   "question": "다음 글을 읽고 물음에 답하시오.\nDami's Story\nYumin, Sia, and I are good friends. Yumin's hobby is (A)[post / posting] photos online. Yesterday, when I saw photos on her social media account, I (B)[am / was] surprised. In one photo, Sia has a strange face and (C)[making / makes] a funny gesture. It had a lot of likes and rude comments about her. Sia knows nothing about this. Should I tell her?\n↳ Of course! You should tell her. Hurry!\n↳ Ask Yumin first. Maybe she doesn't understand the problem.\n\n윗글의 다미의 심경으로 알맞은 것은?",
+   "options": [
+    "relaxed",
+    "proud",
+    "conflicted",
+    "scared",
+    "confident"
+   ],
+   "answer": "3",
+   "explanation": "다미는 시아에게 사실을 말해야 할지 말아야 할지 고민하고 있으므로 갈등하는(conflicted) 심경이 적절하다."
+  },
+  {
+   "number": 16,
+   "question": "다음 글을 읽고 물음에 답하시오.\nDami's Story\nYumin, Sia, and I are good friends. Yumin's hobby is (A)[post / posting] photos online. Yesterday, when I saw photos on her social media account, I (B)[am / was] surprised. In one photo, Sia has a strange face and (C)[making / makes] a funny gesture. It had a lot of likes and rude comments about her. Sia knows nothing about this. Should I tell her?\n↳ Of course! You should tell her. Hurry!\n↳ Ask Yumin first. Maybe she doesn't understand the problem.\n\n윗글의 내용과 일치하지 않는 것은?",
+   "options": [
+    "Yumin and Sia are Dami's friends.",
+    "Yumin enjoys posting photos online.",
+    "Sia's photo is on Yumin's social media account.",
+    "Some people left bad comments about Yumin.",
+    "Someone thinks Dami should tell Sia the truth."
+   ],
+   "answer": "4",
+   "explanation": "무례한 댓글은 유민이가 아니라 시아에 대한 것이다."
+  },
+  {
+   "number": 17,
+   "question": "다음 글을 읽고 물음에 답하시오.\nDami's Story\nYumin, Sia, and I are good friends. Yumin's hobby is (A)[post / posting] photos online. Yesterday, when I saw photos on her social media account, I (B)[am / was] surprised. In one photo, Sia has a strange face and (C)[making / makes] a funny gesture. It had a lot of likes and rude comments about her. Sia knows nothing about this. Should I tell her?\n↳ Of course! You should tell her. Hurry!\n↳ Ask Yumin first. Maybe she doesn't understand the problem.\n\n윗글의 다미의 이야기를 아래와 같이 요약할 때, 빈칸에 들어갈 알맞은 말을 쓰시오.\n\nDami saw (1)________ ________ on a (2)________ and funny photo of Sia on Yumin's (3)________ ________ ________. Sia does not know about it, so Dami is worried and asks, \"Should I (4)________ Sia?\"",
+   "options": [],
+   "answer": "rude comments, strange, social media account, tell",
+   "subParts": [
+    {
+     "label": "(1)",
+     "answer": "rude comments"
+    },
+    {
+     "label": "(2)",
+     "answer": "strange"
+    },
+    {
+     "label": "(3)",
+     "answer": "social media account"
+    },
+    {
+     "label": "(4)",
+     "answer": "tell"
+    }
+   ],
+   "explanation": "다미는 유민이의 소셜 미디어 계정에서 시아의 이상하고 웃긴 사진에 달린 무례한 댓글을 보았고, 시아에게 말해야 할지 고민한다."
+  },
+  {
+   "number": 18,
+   "question": "다음 글을 읽고 물음에 답하시오.\nDami's Story\nYumin, Sia, and I are good friends. Yumin's hobby is (A)[post / posting] photos online. Yesterday, when I saw photos on her social media account, I (B)[am / was] surprised. In one photo, Sia has a strange face and (C)[making / makes] a funny gesture. It had a lot of likes and rude comments about her. Sia knows nothing about this. Should I tell her?\n↳ Of course! You should tell her. Hurry!\n↳ Ask Yumin first. Maybe she doesn't understand the problem.\n\n윗글을 읽고 다음 질문에 대한 알맞은 대답이 되도록 주어진 <조건>에 맞게 빈칸을 완성하시오.\n\n<조건> ask, tell을 사용할 것 (필요시 변형할 것)\n\nQ. What is the second comment's advice?\n→ The advice is to (1)________ ________ ________ before (2)________ ________, because she may not (3)________ ________ ________.",
+   "options": [],
+   "answer": "ask Yumin first, telling Sia, understand the problem",
+   "subParts": [
+    {
+     "label": "(1)",
+     "answer": "ask Yumin first"
+    },
+    {
+     "label": "(2)",
+     "answer": "telling Sia"
+    },
+    {
+     "label": "(3)",
+     "answer": "understand the problem"
+    }
+   ],
+   "explanation": "두 번째 댓글의 조언은 유민이가 문제를 이해하지 못하고 있을지 모르니 시아에게 말하기 전에 유민이에게 먼저 물어보라는 것이다."
+  },
+  {
+   "number": 19,
+   "question": "다음 글을 다음과 같이 요약할 때, 빈칸 (A), (B)에 들어갈 말로 알맞게 연결된 것은?\n\nI was in a group chat with four friends. We enjoyed talking about many topics: sports, music, teachers, and classmates. I sometimes shared my problems with these friends. One day, one of them invited his friend to our group chat. Later, he invited another new person. Now I don't feel good in the new group chat.\n\nSeoha enjoyed chatting about (A)________ topics in the group chat, but now he feels (B)________ there after new people joined.",
+   "options": [
+    "(A) various – (B) uncomfortable",
+    "(A) various – (B) excited",
+    "(A) unique – (B) proud",
+    "(A) academic – (B) uncomfortable",
+    "(A) academic – (B) excited"
+   ],
+   "answer": "1",
+   "explanation": "서하는 다양한(various) 주제에 대해 이야기하는 것을 즐겼으나, 새로운 사람들이 들어온 뒤 불편한(uncomfortable) 기분이 든다."
+  },
+  {
+   "number": 20,
+   "question": "다음 글을 읽고 물음에 답하시오.\nSeoha's Story\nI was in a group chat with four friends. We enjoyed ⓐ<u>to talk</u> about many topics: sports, music, teachers, and classmates. I sometimes shared my problems with ⓑ<u>this</u> friends. One day, one of them ⓒ<u>invited</u> his friend to our group chat. Later, he invited another new person. Now I don't feel ⓓ<u>good</u> in the new group chat.\n↳ I understand. (A)______________________________\n↳ Why don't you try ⓔ<u>to get</u> along with the new people?\n\n윗글의 밑줄 친 ⓐ~ⓔ 중, 어법상 어색한 것을 모두 고르면? (정답 2개)",
+   "options": [
+    "ⓐ",
+    "ⓑ",
+    "ⓒ",
+    "ⓓ",
+    "ⓔ"
+   ],
+   "answer": "1, 2",
+   "explanation": "ⓐ enjoy는 동명사를 목적어로 취하므로 to talk → talking. ⓑ 복수명사 friends를 수식하므로 this → these."
+  },
+  {
+   "number": 21,
+   "question": "다음 글을 읽고 물음에 답하시오.\nSeoha's Story\nI was in a group chat with four friends. We enjoyed ⓐ<u>to talk</u> about many topics: sports, music, teachers, and classmates. I sometimes shared my problems with ⓑ<u>this</u> friends. One day, one of them ⓒ<u>invited</u> his friend to our group chat. Later, he invited another new person. Now I don't feel ⓓ<u>good</u> in the new group chat.\n↳ I understand. (A)______________________________\n↳ Why don't you try ⓔ<u>to get</u> along with the new people?\n\n윗글의 빈칸 (A)에 들어갈 말로 알맞은 것은?",
+   "options": [
+    "You were careless.",
+    "Your friend was careless.",
+    "Your friend behaved very carefully.",
+    "You should understand your friend.",
+    "You will feel better with the new people."
+   ],
+   "answer": "2",
+   "explanation": "서하의 고민을 이해한다는 말에 이어지므로, 다른 사람들을 초대한 친구의 부주의함을 언급하는 '네 친구가 경솔했어'가 알맞다."
+  },
+  {
+   "number": 22,
+   "question": "다음 글을 읽고 물음에 답하시오.\nSeoha's Story\nI was in a group chat with four friends. We enjoyed ⓐ<u>to talk</u> about many topics: sports, music, teachers, and classmates. I sometimes shared my problems with ⓑ<u>this</u> friends. One day, one of them ⓒ<u>invited</u> his friend to our group chat. Later, he invited another new person. Now I don't feel ⓓ<u>good</u> in the new group chat.\n↳ I understand. (A)______________________________\n↳ Why don't you try ⓔ<u>to get</u> along with the new people?\n\n윗글을 읽고 대답할 수 없는 질문은?",
+   "options": [
+    "How many people were there in the group chat at first?",
+    "What topics did Seoha usually talk about in his group chat?",
+    "What problem did Seoha share in the group chat?",
+    "How does Seoha feel now?",
+    "How many people joined the group chat later?"
+   ],
+   "answer": "3",
+   "explanation": "서하가 친구들에게 고민을 공유했다고만 했을 뿐 어떤 문제였는지는 언급되지 않았다."
+  },
+  {
+   "number": 23,
+   "question": "다음 글을 읽고 물음에 답하시오.\nDami's Story\nYumin, Sia, and I are good friends. Yumin's hobby is posting photos online.\n\n(A) In one photo, Sia has a strange face and makes a funny gesture.\n(B) Yesterday, when I saw photos on her social media account, I was surprised.\n(C) It had a lot of likes and rude comments about her.\n\nSia knows nothing about this. Should I tell her?\n↳ Of course! You should tell her. Hurry!\n↳ Ask Yumin first. Maybe she doesn't understand the problem.\n\n위 주어진 글에 이어질 순서로 알맞은 것은?",
+   "options": [
+    "(A)-(B)-(C)",
+    "(A)-(C)-(B)",
+    "(B)-(C)-(A)",
+    "(B)-(A)-(C)",
+    "(C)-(A)-(B)"
+   ],
+   "answer": "4",
+   "explanation": "어제 유민이의 계정에서 사진을 보고 놀랐다(B) → 그 사진 속 시아의 모습(A) → 그 사진에 달린 좋아요와 무례한 댓글(C)의 순서가 자연스럽다."
+  },
+  {
+   "number": 24,
+   "question": "다음 글을 읽고 물음에 답하시오.\nDami's Story\nYumin, Sia, and I are good friends. Yumin's hobby is posting photos online.\n\n(A) In one photo, Sia has a strange face and makes a funny gesture.\n(B) Yesterday, when I saw photos on her social media account, I was surprised.\n(C) It had a lot of likes and rude comments about her.\n\nSia knows nothing about this. Should I tell her?\n↳ Of course! You should tell her. Hurry!\n↳ Ask Yumin first. Maybe she doesn't understand the problem.\n\n윗글의 제목으로 알맞은 것은?",
+   "options": [
+    "The Joy of Online Activities",
+    "Rude Comments, Hurt Heart",
+    "Three Friends' Broken Friendship",
+    "Dami's Dilemma: Tell Sia or Not?",
+    "Sometimes, Not Knowing is Better"
+   ],
+   "answer": "4",
+   "explanation": "다미가 시아에게 사실을 알려줘야 하는지 고민하는 내용이므로 ④가 제목으로 알맞다."
+  },
+  {
+   "number": 25,
+   "question": "다음 대화의 내용과 일치하지 않는 것은?\n\nB: Hey, Keri.\nW: Hello. I'm your AI friend, Keri. How are you doing today?\nB: I don't feel good.\nW: How come?\nB: My baseball team lost the game. I feel blue.\nW: Oh, I'm sorry to hear that.\nB: Can you cheer me up, Keri?\nW: Sure. I'll play some happy songs for you.\n(Music turns on.)",
+   "options": [
+    "Keri is the boy's AI friend.",
+    "The boy's baseball team didn't win the game.",
+    "Keri is happy with the boy's situation.",
+    "The boy wants Keri's encouragement.",
+    "The boy will listen to happy songs thanks to Keri."
+   ],
+   "answer": "3",
+   "explanation": "소년이 우울하다고 하자 Keri가 유감이라고 말했으므로 ③은 일치하지 않는다."
+  },
+  {
+   "number": 26,
+   "question": "다음 글을 읽고 물음에 답하시오.\nThese days, we spend a lot of time in the digital world. (A)<u>우리는 온라인에서 대화하고 사진들을 게시하는 것을 좋아합니다.</u> We also enjoy watching videos. But we sometimes face unhappy situations. Three students share their stories here. Please give them advice.\n\nDohun's Story\nMy friend, Jian, sends me too many texts. He even texts in the middle of the night. When I don't reply, he sends me angry emojis. Jian is my good friend, and I want to be kind to him. What should I do?\n↳ It sounds stressful. Only text him short, simple messages.\n↳ Say honestly, \"Can you text me less?\"\n\nDami's Story\nYumin, Sia, and I are good friends. Yumin's hobby is posting photos online. Yesterday, when I saw photos on her social media account, I was surprised. In one photo, Sia has a strange face and makes a funny gesture. It had a lot of likes and rude comments about her. Sia knows nothing about this. Should I tell her?\n↳ Of course! You should tell her. Hurry!\n↳ Ask Yumin first. Maybe she doesn't understand the problem.\n\nSeoha's Story\nI was in a group chat with four friends. We enjoyed talking about many topics: sports, music, teachers, and classmates. I sometimes shared my problems with these friends. One day, one of them invited his friend to our group chat. Later, he invited another new person. Now I don't feel good in the new group chat.\n↳ I understand. Your friend was careless.\n↳ Why don't you try to get along with the new people?\n\n윗글의 밑줄 친 (A)의 우리말을 주어진 <조건>에 알맞게 영작하시오.\n\n<조건>\n• like, chat, post, photo를 사용할 것 (필요시 변형할 것)\n• 7단어로 영작할 것 ※ 완전한 문장으로 쓰시오.",
+   "options": [],
+   "answer": "We like chatting and posting photos online.",
+   "explanation": "주어 We와 동사 like를 쓰고, 7단어 조건에 맞춰 동명사구 chatting and posting photos online을 목적어로 쓴다."
+  },
+  {
+   "number": 27,
+   "question": "다음 글을 읽고 물음에 답하시오.\nThese days, we spend a lot of time in the digital world. (A)<u>우리는 온라인에서 대화하고 사진들을 게시하는 것을 좋아합니다.</u> We also enjoy watching videos. But we sometimes face unhappy situations. Three students share their stories here. Please give them advice.\n\nDohun's Story\nMy friend, Jian, sends me too many texts. He even texts in the middle of the night. When I don't reply, he sends me angry emojis. Jian is my good friend, and I want to be kind to him. What should I do?\n↳ It sounds stressful. Only text him short, simple messages.\n↳ Say honestly, \"Can you text me less?\"\n\nDami's Story\nYumin, Sia, and I are good friends. Yumin's hobby is posting photos online. Yesterday, when I saw photos on her social media account, I was surprised. In one photo, Sia has a strange face and makes a funny gesture. It had a lot of likes and rude comments about her. Sia knows nothing about this. Should I tell her?\n↳ Of course! You should tell her. Hurry!\n↳ Ask Yumin first. Maybe she doesn't understand the problem.\n\nSeoha's Story\nI was in a group chat with four friends. We enjoyed talking about many topics: sports, music, teachers, and classmates. I sometimes shared my problems with these friends. One day, one of them invited his friend to our group chat. Later, he invited another new person. Now I don't feel good in the new group chat.\n↳ I understand. Your friend was careless.\n↳ Why don't you try to get along with the new people?\n\n윗글을 읽고 대답할 수 없는 질문은?",
+   "options": [
+    "How many students share their stories?",
+    "When does Jian send Dohun angry emojis?",
+    "When was Dami surprised at Sia's photo?",
+    "Why did Yumin upload Sia's funny photo?",
+    "What does the first comment in Dami's story say?"
+   ],
+   "answer": "4",
+   "explanation": "유민이가 시아의 웃긴 사진을 올린 이유는 언급되지 않았다."
+  },
+  {
+   "number": 28,
+   "question": "다음 글을 읽고 물음에 답하시오.\nThese days, we spend a lot of time in the digital world. (A)<u>우리는 온라인에서 대화하고 사진들을 게시하는 것을 좋아합니다.</u> We also enjoy watching videos. But we sometimes face unhappy situations. Three students share their stories here. Please give them advice.\n\nDohun's Story\nMy friend, Jian, sends me too many texts. He even texts in the middle of the night. When I don't reply, he sends me angry emojis. Jian is my good friend, and I want to be kind to him. What should I do?\n↳ It sounds stressful. Only text him short, simple messages.\n↳ Say honestly, \"Can you text me less?\"\n\nDami's Story\nYumin, Sia, and I are good friends. Yumin's hobby is posting photos online. Yesterday, when I saw photos on her social media account, I was surprised. In one photo, Sia has a strange face and makes a funny gesture. It had a lot of likes and rude comments about her. Sia knows nothing about this. Should I tell her?\n↳ Of course! You should tell her. Hurry!\n↳ Ask Yumin first. Maybe she doesn't understand the problem.\n\nSeoha's Story\nI was in a group chat with four friends. We enjoyed talking about many topics: sports, music, teachers, and classmates. I sometimes shared my problems with these friends. One day, one of them invited his friend to our group chat. Later, he invited another new person. Now I don't feel good in the new group chat.\n↳ I understand. Your friend was careless.\n↳ Why don't you try to get along with the new people?\n\n윗글을 읽고 다음 질문에 대한 알맞은 대답이 되도록 주어진 <조건>에 맞게 빈칸을 완성하시오.\n\n<조건> be, her를 사용할 것 (중복 사용 가능하며 필요시 변형할 것)\n\nQ. How was Sia in the photo?\n→ Her (1)________ ________ ________ and (2)________ ________ ________ ________.",
+   "options": [],
+   "answer": "face was strange, her gesture was funny",
+   "subParts": [
+    {
+     "label": "(1)",
+     "answer": "face was strange"
+    },
+    {
+     "label": "(2)",
+     "answer": "her gesture was funny"
+    }
+   ],
+   "explanation": "사진 속 시아의 표정은 이상했고 제스처는 웃겼다."
+  },
+  {
+   "number": 29,
+   "question": "다음 글을 읽고 물음에 답하시오.\nThese days, we spend a lot of time in the digital world. (A)<u>우리는 온라인에서 대화하고 사진들을 게시하는 것을 좋아합니다.</u> We also enjoy watching videos. But we sometimes face unhappy situations. Three students share their stories here. Please give them advice.\n\nDohun's Story\nMy friend, Jian, sends me too many texts. He even texts in the middle of the night. When I don't reply, he sends me angry emojis. Jian is my good friend, and I want to be kind to him. What should I do?\n↳ It sounds stressful. Only text him short, simple messages.\n↳ Say honestly, \"Can you text me less?\"\n\nDami's Story\nYumin, Sia, and I are good friends. Yumin's hobby is posting photos online. Yesterday, when I saw photos on her social media account, I was surprised. In one photo, Sia has a strange face and makes a funny gesture. It had a lot of likes and rude comments about her. Sia knows nothing about this. Should I tell her?\n↳ Of course! You should tell her. Hurry!\n↳ Ask Yumin first. Maybe she doesn't understand the problem.\n\nSeoha's Story\nI was in a group chat with four friends. We enjoyed talking about many topics: sports, music, teachers, and classmates. I sometimes shared my problems with these friends. One day, one of them invited his friend to our group chat. Later, he invited another new person. Now I don't feel good in the new group chat.\n↳ I understand. Your friend was careless.\n↳ Why don't you try to get along with the new people?\n\n윗글의 제목을 다음과 같이 쓸 때, 빈칸에 들어갈 알맞은 말을 쓰시오. (첫 글자는 대문자로 쓸 것)\n\nLife in the ________ ________ Isn't Always Easy",
+   "options": [],
+   "answer": "Digital World",
+   "explanation": "디지털 세상에서의 삶은 항상 쉽지 않다"
+  },
+  {
+   "number": 30,
+   "question": "다음 표를 보고 Rumi를 소개하는 글의 빈칸에 알맞은 말을 쓰시오.\n\n| 이름 | Rumi |\n|---|---|\n| 사는 곳 | Seoul |\n| 취미 | make French bread |\n| 좋아하는 것 | visit famous bakeries and try various desserts |\n| 미래의 꿈 | become a famous baker |\n\nMy best friend, Rumi, lives in Seoul. Her hobby is (1)________ ________ ________, and she likes (2)________ ________ ________ and (3)________ ________ ________. She dreams of (4)________ ________ ________ ________.",
+   "options": [],
+   "answer": "making French bread / visiting famous bakeries / trying various desserts / becoming a famous baker",
+   "subParts": [
+    {
+     "label": "(1)",
+     "answer": "making French bread"
+    },
+    {
+     "label": "(2)",
+     "answer": "visiting famous bakeries"
+    },
+    {
+     "label": "(3)",
+     "answer": "trying various desserts"
+    },
+    {
+     "label": "(4)",
+     "answer": "becoming a famous baker"
+    }
+   ],
+   "explanation": "보어 자리, like의 목적어, 전치사 of의 목적어 자리에 모두 동명사를 쓴다."
+  },
+  {
+   "number": 31,
+   "question": "다음 설명을 읽고, <보기>에서 알맞은 동사를 골라 같은 의미가 되도록 빈칸을 완성하시오.\n\n(1) Taeri received a nice cap from Jinwoo.\n(2) Sena is learning math from Heejin.\n(3) Mira heard an interesting story from Somi.\n\n<보기> teach, tell, ask, give\n\n(1) Jinwoo ________ ________ ________ ________ ________.\n(2) Heejin ________ ________ ________ ________.\n(3) Somi ________ ________ ________ ________ ________.",
+   "options": [],
+   "answer": "gave Taeri a nice cap / is teaching Sena math / told Mira an interesting story",
+   "subParts": [
+    {
+     "label": "(1)",
+     "answer": "gave Taeri a nice cap"
+    },
+    {
+     "label": "(2)",
+     "answer": "is teaching Sena math"
+    },
+    {
+     "label": "(3)",
+     "answer": "told Mira an interesting story"
+    }
+   ],
+   "explanation": "수여동사+간접목적어+직접목적어의 4형식으로 쓴다. (1) 진우는 태리에게 멋진 모자를 주었다. (2) 희진이는 세나에게 수학을 가르쳐주고 있다. (3) 소미는 미라에게 재미있는 이야기를 말해주었다."
+  }
+ ],
+ "R2": [
+  {
+   "number": 1,
+   "question": "다음 중 짝지어진 단어의 관계가 어색한 것은?",
+   "options": [
+    "kind : nice = photo : picture",
+    "rude : impolite = strange : odd",
+    "stress : stressful = beauty : beautiful",
+    "honestly : frankly = simple : complex",
+    "congratulate : congratulation = invite : invitation"
+   ],
+   "answer": "4",
+   "explanation": "'솔직하게 : 솔직하게'는 유의어 관계이지만 '간단한 : 복잡한'은 반의어 관계이다."
+  },
+  {
+   "number": 2,
+   "question": "다음 중 <보기>의 단어가 들어갈 수 없는 것은?\n\n<보기> topic, gesture, comment, advice, situation",
+   "options": [
+    "I got a piece of ________ from my teacher.",
+    "A thumbs-up is a ________ for \"good job.\"",
+    "His favorite essay ________ is space and the stars.",
+    "I forgot the password to my email ________.",
+    "I'm upset about the rude ________ on social media."
+   ],
+   "answer": "4",
+   "explanation": "situation은 '상황'이라는 뜻으로 들어갈 수 있는 문장이 없고, ④ '나는 내 이메일 계정의 비밀번호를 잊어버렸다.'에는 account가 들어갈 수 있다."
+  },
+  {
+   "number": 3,
+   "question": "다음 <보기>의 영영풀이가 알맞지 않은 것을 모두 골라 짝지은 것은?\n\n<보기>\nⓐ spend: to use time in doing a particular thing\nⓑ post: to share something online, such as a message, photo, or video\nⓒ face: to avoid a difficult situation or problem\nⓓ reply: to answer someone by saying or writing something\nⓔ get along: to have a bad relationship with someone",
+   "options": [
+    "ⓐ, ⓒ",
+    "ⓐ, ⓓ",
+    "ⓑ, ⓓ",
+    "ⓑ, ⓔ",
+    "ⓒ, ⓔ"
+   ],
+   "answer": "5",
+   "explanation": "ⓒ face는 '직면하다'라는 뜻이므로 'to deal with or confront a difficult situation, problem, or person directly'로, ⓔ get along은 '잘 지내다'라는 뜻이므로 'to be or remain friendly with someone'으로 고쳐야 한다."
+  },
+  {
+   "number": 4,
+   "question": "다음 중 문장의 전환이 어법상 어색한 것은?",
+   "options": [
+    "She lent me some money. → She lent some money to me.",
+    "I can tell them funny stories. → I can tell funny stories to them.",
+    "She asked him a question. → She asked a question of him.",
+    "Can you get me a newspaper when you go out? → Can you get a newspaper to me when you go out?",
+    "The teacher taught the students a new song. → The teacher taught a new song to the students."
+   ],
+   "answer": "4",
+   "explanation": "수여동사 get은 3형식으로 전환할 때 전치사 for를 쓰므로 to me → for me로 고쳐야 한다."
+  },
+  {
+   "number": 5,
+   "question": "다음 밑줄 친 부분의 쓰임이 같은 것끼리 짝지어진 것은?\n\nⓐ They talked about <u>going</u> on a trip.\nⓑ He is <u>feeding</u> the birds in the garden.\nⓒ They are <u>eating</u> ice cream in the park.\nⓓ Our plan is <u>traveling</u> around the world.\nⓔ Jiho's job is <u>taking</u> care of sick animals.\nⓕ The fun of the trip is <u>meeting</u> new people.",
+   "options": [
+    "ⓐ, ⓒ, ⓕ - ⓑ, ⓓ, ⓔ",
+    "ⓐ, ⓓ, ⓔ - ⓑ, ⓒ, ⓕ",
+    "ⓐ, ⓑ, ⓒ, ⓓ - ⓔ, ⓕ",
+    "ⓐ, ⓑ, ⓓ, ⓔ - ⓒ, ⓕ",
+    "ⓐ, ⓓ, ⓔ, ⓕ - ⓑ, ⓒ"
+   ],
+   "answer": "5",
+   "explanation": "ⓐ, ⓓ, ⓔ, ⓕ는 동명사(전치사의 목적어·보어)이고, ⓑ, ⓒ는 현재진행형을 이루는 현재분사이다."
+  },
+  {
+   "number": 6,
+   "question": "다음 대화의 빈칸에 들어갈 말로 알맞은 것의 개수는?\n\nA: ______________________________\nB: Really?\nA: Yes. I feel so happy now.\n\nⓐ My allowance went up.\nⓑ I met my favorite singer.\nⓒ My team won the game.\nⓓ I solved a difficult problem.\nⓔ Mom bought me a concert ticket.\nⓕ My best friend moved to another country.",
+   "options": [
+    "1개",
+    "2개",
+    "3개",
+    "4개",
+    "5개"
+   ],
+   "answer": "5",
+   "explanation": "A가 지금 매우 기쁘다고 했으므로 빈칸에는 좋은 일이 들어가야 한다. ⓕ 가장 친한 친구가 다른 나라로 이사 갔다는 것만 제외한 5개가 알맞다."
+  },
+  {
+   "number": 7,
+   "question": "다음 대화를 읽고 물음에 답하시오.\nB: Hey, Keri.\nW: Hello. I'm your AI friend, Keri. How are you doing today?\nB: I don't feel good.\nW: How come?\nB: My baseball team lost the game. I feel blue.\nW: Oh, ______________________________.\nB: Can you cheer me up, Keri?\nW: Sure. I'll play some happy songs for you.\n(Music turns on.)\n\n위 대화의 빈칸에 들어갈 말로 알맞은 것을 모두 골라 짝지은 것은?\n\nⓐ that's too bad\nⓑ you should be happy\nⓒ I never lose the game\nⓓ I'm sorry to hear that\nⓔ that must be disappointing",
+   "options": [
+    "ⓐ, ⓑ, ⓔ",
+    "ⓐ, ⓒ, ⓔ",
+    "ⓐ, ⓓ, ⓔ",
+    "ⓑ, ⓒ, ⓓ",
+    "ⓑ, ⓒ, ⓔ"
+   ],
+   "answer": "3",
+   "explanation": "소년이 야구팀이 져서 우울하다고 했으므로 이에 유감을 표하는 표현인 ⓐ, ⓓ, ⓔ가 알맞다."
+  },
+  {
+   "number": 8,
+   "question": "다음 대화를 읽고 물음에 답하시오.\nB: Hey, Keri.\nW: Hello. I'm your AI friend, Keri. How are you doing today?\nB: I don't feel good.\nW: How come?\nB: My baseball team lost the game. I feel blue.\nW: Oh, I'm sorry to hear that.\nB: Can you cheer me up, Keri?\nW: Sure. I'll play some happy songs for you.\n(Music turns on.)\n\n다음 물음에 알맞은 답을 고르시오.\nWhat does the boy ask Keri for?",
+   "options": [
+    "some food",
+    "happy songs",
+    "encouragement",
+    "a new baseball",
+    "help with baseball practice"
+   ],
+   "answer": "3",
+   "explanation": "소년은 Keri에게 자신을 기운 나게 해 줄 수 있는지 물었으므로 요청한 것은 '격려'이다."
+  },
+  {
+   "number": 9,
+   "question": "다음 대화를 읽고 물음에 답하시오.\nB: Hey, Keri.\nW: Hello. I'm your AI friend, Keri. How are you doing today?\nB: I don't feel good.\nW: How come?\nB: My baseball team lost the game. I feel blue.\nW: Oh, I'm sorry to hear that.\nB: Can you cheer me up, Keri?\nW: Sure. I'll play some happy songs for you.\n(Music turns on.)\n\n위 대화의 내용을 아래와 같이 요약할 때, 빈칸 (A), (B)에 들어갈 말로 알맞게 연결된 것은?\n\nThe boy is feeling (A)________ after losing the game, so his AI friend Keri tries to cheer him up through (B)________.",
+   "options": [
+    "(A) proud – (B) dance",
+    "(A) down – (B) music",
+    "(A) down – (B) dance",
+    "(A) nervous – (B) music",
+    "(A) nervous – (B) food"
+   ],
+   "answer": "2",
+   "explanation": "소년은 경기에서 져서 우울해(down) 하고 있고, Keri는 행복한 노래를 틀어 주어 음악(music)으로 그를 격려하려 한다."
+  },
+  {
+   "number": 10,
+   "question": "다음 글을 읽고 물음에 답하시오.\nThese days, we spend a lot of time in the digital world. We like chatting and ⓐ<u>to post</u> photos online. We also enjoy watching videos. But we sometimes face unhappy situations. Three students share their stories here. Please give ⓑ<u>advice them</u>.\n\nDohun's Story\nMy friend, Jian, sends ⓒ<u>too many texts for me</u>. He even texts in the middle of the night. When I don't reply, he ⓓ<u>sent</u> me angry emojis. Jian is my good friend, and I want to be kind to him. What should I do?\n↳ It sounds stressful. Only ⓔ<u>texting</u> him short, simple messages.\n↳ Say honestly, \"Can you text me less?\"\n\n윗글의 밑줄 친 ⓐ~ⓔ의 어색한 부분을 바르게 고치지 못한 것은?",
+   "options": [
+    "ⓐ: to post → posting",
+    "ⓑ: advice them → them advice",
+    "ⓒ: too many texts for me → too many texts me",
+    "ⓓ: sent → sends",
+    "ⓔ: texting → text"
+   ],
+   "answer": "3",
+   "explanation": "ⓒ send는 'send+간접목적어+직접목적어' 또는 'send+직접목적어+to+간접목적어'로 쓰므로 too many texts to me 또는 me too many texts로 고쳐야 한다."
+  },
+  {
+   "number": 11,
+   "question": "다음 글을 읽고 물음에 답하시오.\nThese days, we spend a lot of time in the digital world. We like chatting and ⓐ<u>to post</u> photos online. We also enjoy watching videos. But we sometimes face unhappy situations. Three students share their stories here. Please give ⓑ<u>advice them</u>.\n\nDohun's Story\nMy friend, Jian, sends ⓒ<u>too many texts for me</u>. He even texts in the middle of the night. When I don't reply, he ⓓ<u>sent</u> me angry emojis. Jian is my good friend, and I want to be kind to him. What should I do?\n↳ It sounds stressful. Only ⓔ<u>texting</u> him short, simple messages.\n↳ Say honestly, \"Can you text me less?\"\n\n윗글의 내용과 일치하면 T, 일치하지 않으면 F일 때, 알맞지 않은 것은?",
+   "options": [
+    "The digital world is far from our lives. (F)",
+    "There are always pleasant and joyful situations online. (F)",
+    "When Jian texts at night, Dohun sends him an angry reply. (F)",
+    "Dohun doesn't want to keep in touch with Jian. (T)",
+    "The two comments have different opinions. (T)"
+   ],
+   "answer": "4",
+   "explanation": "도훈이는 지안이가 문자를 너무 많이 보내지만 여전히 좋은 친구라 생각하고 친절하게 대하고 싶어 하므로 ④는 F로 고쳐야 한다."
+  },
+  {
+   "number": 12,
+   "question": "다음 글을 읽고 물음에 답하시오.\nSeoha's Story\nI was in a group chat with four friends. We enjoyed talking about many topics: sports, music, teachers, and classmates. I sometimes shared my problems with these friends. One day, one of them invited his friend to our group chat. Later, he invited another new person. Now I don't feel good in the new group chat.\n↳ I understand. Your friend was careless.\n↳ Why don't you try to get along with the new people?\n\n윗글을 읽고 다음 질문에 대한 대답으로 알맞은 것을 고르면?\n\nQ. What is the second comment's advice?",
+   "options": [
+    "leaving the group chat",
+    "ignoring the new people",
+    "inviting more people to the chat",
+    "being friendly with the new people",
+    "talking to your old friends about your feelings"
+   ],
+   "answer": "4",
+   "explanation": "두 번째 댓글은 '새로운 사람들과 잘 지내보는 건 어때?'이므로 새로운 사람들과 친하게 지내라는 조언이다."
+  },
+  {
+   "number": 13,
+   "question": "다음 글을 읽고 물음에 답하시오.\nSeoha's Story\nI was in a group chat with four friends. We enjoyed talking about many topics: sports, music, teachers, and classmates. I sometimes shared my problems with these friends. One day, one of them invited his friend to our group chat. Later, he invited another new person. Now I don't feel good in the new group chat.\n↳ I understand. Your friend was careless.\n↳ Why don't you try to get along with the new people?\n\n윗글의 제목으로 알맞은 것은?",
+   "options": [
+    "My New Friends",
+    "More People, More Fun!",
+    "New Members, Uneasy Feelings",
+    "How About Making a Group Chat?",
+    "My Problems Go Away in the Group Chat"
+   ],
+   "answer": "3",
+   "explanation": "새로운 사람들이 그룹 대화방에 들어와 서하의 기분이 좋지 않다는 내용이므로 ③이 알맞다."
+  },
+  {
+   "number": 14,
+   "question": "다음 글을 읽고 물음에 답하시오.\nSeoha's Story\nI was in a group chat with four friends. We enjoyed talking about many topics: sports, music, teachers, and classmates. I sometimes shared my problems with these friends. One day, one of them invited his friend to our group chat. Later, he invited another new person. Now I don't feel good in the new group chat.\n↳ I understand. Your friend was careless.\n↳ Why don't you try to get along with the new people?\n\n윗글의 내용과 (A)~(C)가 일치하면 T, 일치하지 않으면 F를 쓸 때, 순서대로 연결된 것은?\n\n(A) Seoha talked with four friends on various topics in a group chat. (T/F)\n(B) One of the four friends invited three other people to the group chat. (T/F)\n(C) One of the comments relates to Seoha. (T/F)",
+   "options": [
+    "T-T-T",
+    "T-F-T",
+    "T-T-F",
+    "F-F-T",
+    "F-T-F"
+   ],
+   "answer": "2",
+   "explanation": "(A) 네 명의 친구와 다양한 주제로 대화했다(T). (B) 초대한 사람은 세 명이 아니라 두 명이다(F). (C) 첫 번째 댓글이 서하에게 공감하고 있다(T)."
+  },
+  {
+   "number": 15,
+   "question": "다음 글을 읽고 아래 질문에 대한 알맞은 대답이 되도록 주어진 <조건>에 맞게 빈칸을 완성하시오.\n\nThese days, we spend a lot of time in the digital world. We like chatting and posting photos online. We also enjoy watching videos. But we sometimes face unhappy situations. Three students share their stories here. Please give them advice.\n\n<조건> the three, read, unhappy를 쓸 것\n\nQ. According to the writer, what should we do?\n→ We should (1)________ ________ ________ ________ ________ about (2)________ ________ online and (3)________ ________ ________.",
+   "options": [],
+   "answer": "read the three students' stories, unhappy situations, give them advice",
+   "subParts": [
+    {
+     "label": "(1)",
+     "answer": "read the three students' stories"
+    },
+    {
+     "label": "(2)",
+     "answer": "unhappy situations"
+    },
+    {
+     "label": "(3)",
+     "answer": "give them advice"
+    }
+   ],
+   "explanation": "우리는 세 학생들의 온라인에서의 언짢은 상황에 대한 이야기를 읽고 그들에게 조언을 해 주어야 한다."
+  },
+  {
+   "number": 16,
+   "question": "다음 네 친구들이 좋아하거나 하고 있는 활동을 나타내는 표를 보고 괄호 안의 동사를 사용하여 빈칸을 완성하시오. (현재시제로 쓰고, 필요시 변형할 것)\n\n| | Jian | Anna | Mira | Joy |\n|---|---|---|---|---|\n| read history books | ○ | | | |\n| learn a foreign language | | ○ | | |\n| draw animals | | | ○ | |\n| learn about space and the stars | | | | ○ |\n\n(1) Jian ________________. (continue)\n(2) Anna ________________. (enjoy)\n(3) Mira ________________. (practice)\n(4) Joy ________________. (like)",
+   "options": [],
+   "answer": "continues reading history books / enjoys learning a foreign language / practices drawing animals / likes learning about space and the stars",
+   "subParts": [
+    {
+     "label": "(1)",
+     "answer": "continues reading history books",
+     "acceptedAnswers": [
+      "continues to read history books"
+     ]
+    },
+    {
+     "label": "(2)",
+     "answer": "enjoys learning a foreign language"
+    },
+    {
+     "label": "(3)",
+     "answer": "practices drawing animals"
+    },
+    {
+     "label": "(4)",
+     "answer": "likes learning about space and the stars",
+     "acceptedAnswers": [
+      "likes to learn about space and the stars"
+     ]
+    }
+   ],
+   "explanation": "enjoy와 practice는 동명사만, continue와 like는 동명사와 to부정사 모두 목적어로 취한다."
+  },
+  {
+   "number": 17,
+   "question": "다음 글을 읽고 물음에 답하시오.\nDami's Story\nYumin, Sia, and I are good friends. Yumin's hobby is posting photos online. Yesterday, when I saw photos on her social media account, I was surprised. In one photo, Sia has a strange face and makes a funny gesture. It had a lot of likes and rude comments about her. Sia knows nothing about this. Should I tell her?\n↳ Of course! You should tell her. Hurry!\n↳ Ask Yumin first. Maybe she doesn't understand the problem.\n\n윗글의 요지로 알맞은 것은?",
+   "options": [
+    "Dami is worried about telling Yumin that she is too careless.",
+    "Dami wants to tell Yumin that she should delete the photo of Sia on SNS.",
+    "Dami is upset with rude behaviors and comments by Yumin on Sia's photo.",
+    "Dami is unsure about telling Sia about the rude comments on her photo on SNS.",
+    "Dami feels blue after seeing her funny photo and rude words under the photo."
+   ],
+   "answer": "4",
+   "explanation": "다미는 시아의 사진에 달린 무례한 댓글을 보고 시아에게 말해야 하는지 고민하고 있다."
+  },
+  {
+   "number": 18,
+   "question": "다음 글을 읽고 물음에 답하시오.\nDami's Story\nYumin, Sia, and I are good friends. Yumin's hobby is posting photos online. Yesterday, when I saw photos on her social media account, I was surprised. In one photo, Sia has a strange face and makes a funny gesture. It had a lot of likes and rude comments about her. Sia knows nothing about this. Should I tell her?\n↳ Of course! You should tell her. Hurry!\n↳ Ask Yumin first. Maybe she doesn't understand the problem.\n\n윗글을 읽고 다음 질문에 대한 알맞은 대답이 되도록 주어진 <조건>에 맞게 빈칸을 완성하시오.\n\n<조건> a photo of, with, see를 사용할 것 (필요시 변형할 것)\n\nQ. What happened to Dami yesterday?\n→ Dami was (1)________ because she (2)________ ________ ________ ________ Sia with a strange (3)________ and a (4)________ ________ on Yumin's SNS, and it had unpleasant (5)________ about Sia.",
+   "options": [],
+   "answer": "surprised, saw a photo of, face, funny gesture, comments",
+   "subParts": [
+    {
+     "label": "(1)",
+     "answer": "surprised"
+    },
+    {
+     "label": "(2)",
+     "answer": "saw a photo of"
+    },
+    {
+     "label": "(3)",
+     "answer": "face"
+    },
+    {
+     "label": "(4)",
+     "answer": "funny gesture"
+    },
+    {
+     "label": "(5)",
+     "answer": "comments"
+    }
+   ],
+   "explanation": "다미는 유민이의 SNS에서 이상한 표정과 웃긴 제스처를 한 시아의 사진을 보고 놀랐고, 그 사진에는 시아에 대한 불쾌한 댓글이 있었다."
+  },
+  {
+   "number": 19,
+   "question": "다음 글을 읽고 물음에 답하시오.\nSeoha's Story\nI was in a group chat with four friends. We enjoyed talking about many topics: sports, music, teachers, and classmates. I sometimes shared my problems with these friends. One day, one of them invited his friend to our group chat. Later, he invited another new person. Now I don't feel good in the new group chat.\n↳ I understand. Your friend was careless.\n↳ Why don't you try to get along with the new people?\n\n다음 물음에 알맞은 답을 고르시오.\nWhat change happened to the group chat?",
+   "options": [
+    "The members began to talk less.",
+    "The number of members increased.",
+    "One of the members left the group chat.",
+    "The members started to talk about new topics.",
+    "The relationship between the members got worse."
+   ],
+   "answer": "2",
+   "explanation": "친구 한 명이 두 명의 새로운 사람을 초대해 그룹 대화방의 구성원 수가 늘어났다."
+  },
+  {
+   "number": 20,
+   "question": "다음 글을 읽고 물음에 답하시오.\nSeoha's Story\nI was in a group chat with four friends. We enjoyed talking about many topics: sports, music, teachers, and classmates. I sometimes shared my problems with these friends. One day, one of them invited his friend to our group chat. Later, he invited another new person. Now I don't feel good in the new group chat.\n↳ I understand. Your friend was careless.\n↳ Why don't you try to get along with the new people?\n\n윗글의 서하가 댓글을 읽고 며칠 후에 쓴 일기가 다음과 같을 때, 빈칸에 알맞은 말을 지문에서 찾아 쓰시오. (필요시 변형할 것)\n\nI had a chat on various topics in my (1)________ ________ with (2)________ friends. But one of them kept (3)________ new members, and I didn't feel (4)________. I posted this story online and got two different comments. One of them suggested (5)________ ________ ________ them.",
+   "options": [],
+   "answer": "group chat, four, inviting, good, getting along with",
+   "subParts": [
+    {
+     "label": "(1)",
+     "answer": "group chat"
+    },
+    {
+     "label": "(2)",
+     "answer": "four"
+    },
+    {
+     "label": "(3)",
+     "answer": "inviting"
+    },
+    {
+     "label": "(4)",
+     "answer": "good"
+    },
+    {
+     "label": "(5)",
+     "answer": "getting along with"
+    }
+   ],
+   "explanation": "서하는 네 명의 친구와 그룹 대화방에서 이야기했으나 한 명이 계속 새 구성원을 초대해 기분이 좋지 않았고, 댓글 하나는 그들과 잘 지내 보라고 제안했다."
+  },
+  {
+   "number": 21,
+   "question": "다음 글을 읽고 물음에 답하시오.\nThese days, we spend a lot of time in the digital world. We like chatting and (A)<u>posting</u> photos online. We also enjoy watching videos. But we sometimes face unhappy situations. Three students share their stories here. Please (B)<u>give them advice</u>.\n\nDohun's Story\n(C)<u>My friend, Jian,</u> sends me too many texts. He even texts in the middle of the night. ㉠<u>내가 답장하지 않을 때는 그는 내게 화난 표정의 이모지들을 보낸다.</u> Jian is my good friend, and I want (D)<u>to be</u> kind to him. What should I do?\n↳ It sounds stressful. Only (E)<u>text</u> him short, simple messages.\n↳ Say honestly, \"Can you text me less?\"\n\nDami's Story\nYumin, Sia, and I are good friends. Yumin's hobby is posting photos online. Yesterday, when I saw photos on her social media account, I was surprised. In one photo, Sia has a strange face and makes a funny gesture. It had a lot of likes and rude comments about her. Sia knows nothing about this. Should I tell her?\n↳ Of course! You should tell her. Hurry!\n↳ Ask Yumin first. Maybe she doesn't understand the problem.\n\nSeoha's Story\nI was in a group chat with four friends. We enjoyed talking about many topics: sports, music, teachers, and classmates. I sometimes shared my problems with these friends. One day, one of them invited his friend to our group chat. Later, he invited another new person. Now I don't feel good in the new group chat.\n↳ I understand. Your friend was careless.\n↳ Why don't you try to get along with the new people?\n\n윗글의 밑줄 친 (A)~(E)에 대한 설명으로 알맞지 않은 것을 모두 고르면? (정답 2개)",
+   "options": [
+    "(A): 현재분사 chatting과 등위접속사 and로 연결된 현재분사이다.",
+    "(B): give advice to them으로 바꿔 쓸 수 있다.",
+    "(C): 가운데 콤마가 My friend와 Jian이 같은 사람임을 나타낸다.",
+    "(D): 명사적 용법의 to부정사로 보어 역할을 한다.",
+    "(E): '문자메시지를 보내라'라는 뜻의 명령문을 나타내는 동사원형이다."
+   ],
+   "answer": "1, 4",
+   "explanation": "(A) posting은 동사 like의 목적어인 동명사 chatting과 병렬 연결된 동명사이다. (D) to be는 타동사 want의 목적어 역할을 하는 명사적 용법의 to부정사이다."
+  },
+  {
+   "number": 22,
+   "question": "다음 글을 읽고 물음에 답하시오.\nThese days, we spend a lot of time in the digital world. We like chatting and (A)<u>posting</u> photos online. We also enjoy watching videos. But we sometimes face unhappy situations. Three students share their stories here. Please (B)<u>give them advice</u>.\n\nDohun's Story\n(C)<u>My friend, Jian,</u> sends me too many texts. He even texts in the middle of the night. ㉠<u>내가 답장하지 않을 때는 그는 내게 화난 표정의 이모지들을 보낸다.</u> Jian is my good friend, and I want (D)<u>to be</u> kind to him. What should I do?\n↳ It sounds stressful. Only (E)<u>text</u> him short, simple messages.\n↳ Say honestly, \"Can you text me less?\"\n\nDami's Story\nYumin, Sia, and I are good friends. Yumin's hobby is posting photos online. Yesterday, when I saw photos on her social media account, I was surprised. In one photo, Sia has a strange face and makes a funny gesture. It had a lot of likes and rude comments about her. Sia knows nothing about this. Should I tell her?\n↳ Of course! You should tell her. Hurry!\n↳ Ask Yumin first. Maybe she doesn't understand the problem.\n\nSeoha's Story\nI was in a group chat with four friends. We enjoyed talking about many topics: sports, music, teachers, and classmates. I sometimes shared my problems with these friends. One day, one of them invited his friend to our group chat. Later, he invited another new person. Now I don't feel good in the new group chat.\n↳ I understand. Your friend was careless.\n↳ Why don't you try to get along with the new people?\n\n윗글의 밑줄 친 ㉠의 우리말을 주어진 <조건>에 알맞게 영작하시오.\n\n<조건>\n• '동사+간접목적어+직접목적어' 형태를 사용할 것\n• when, reply, angry를 차례대로 사용할 것\n• 9단어로 영작할 것 ※ 완전한 문장으로 쓰시오.",
+   "options": [],
+   "answer": "When I don't reply, he sends me angry emojis.",
+   "explanation": "접속사 When이 이끄는 부사절 뒤에 'send+간접목적어(me)+직접목적어(angry emojis)'의 4형식 주절을 쓴다."
+  },
+  {
+   "number": 23,
+   "question": "다음 글을 읽고 물음에 답하시오.\nThese days, we spend a lot of time in the digital world. We like chatting and (A)<u>posting</u> photos online. We also enjoy watching videos. But we sometimes face unhappy situations. Three students share their stories here. Please (B)<u>give them advice</u>.\n\nDohun's Story\n(C)<u>My friend, Jian,</u> sends me too many texts. He even texts in the middle of the night. ㉠<u>내가 답장하지 않을 때는 그는 내게 화난 표정의 이모지들을 보낸다.</u> Jian is my good friend, and I want (D)<u>to be</u> kind to him. What should I do?\n↳ It sounds stressful. Only (E)<u>text</u> him short, simple messages.\n↳ Say honestly, \"Can you text me less?\"\n\nDami's Story\nYumin, Sia, and I are good friends. Yumin's hobby is posting photos online. Yesterday, when I saw photos on her social media account, I was surprised. In one photo, Sia has a strange face and makes a funny gesture. It had a lot of likes and rude comments about her. Sia knows nothing about this. Should I tell her?\n↳ Of course! You should tell her. Hurry!\n↳ Ask Yumin first. Maybe she doesn't understand the problem.\n\nSeoha's Story\nI was in a group chat with four friends. We enjoyed talking about many topics: sports, music, teachers, and classmates. I sometimes shared my problems with these friends. One day, one of them invited his friend to our group chat. Later, he invited another new person. Now I don't feel good in the new group chat.\n↳ I understand. Your friend was careless.\n↳ Why don't you try to get along with the new people?\n\n윗글의 도훈이가 엄마와 나눈 대화가 다음과 같을 때, ⓐ~ⓔ 중 일치하지 않는 것은?\n\nMom: Dohun, what's wrong?\nDohun: Mom, you know my friend Jian. I was stressed because ⓐ<u>he texted me too often</u>, but ⓑ<u>I wanted to be nice to him at the same time</u>.\nMom: One day, ⓒ<u>you got a text in the middle of the night</u>.\nDohun: Yes. ⓓ<u>I posted about this problem online and some people left comments</u>.\nMom: What did they say?\nDohun: One was about ⓔ<u>stopping being friends with that friend</u>, and the other was about honestly saying, \"Can you text me less?\"",
+   "options": [
+    "ⓐ",
+    "ⓑ",
+    "ⓒ",
+    "ⓓ",
+    "ⓔ"
+   ],
+   "answer": "5",
+   "explanation": "도훈이에게 달린 댓글 중 하나는 친구에게 짧고 간단한 메시지를 보내라는 것이었으므로 ⓔ는 일치하지 않는다."
+  },
+  {
+   "number": 24,
+   "question": "다음 글을 읽고 물음에 답하시오.\nThese days, we spend a lot of time in the digital world. We like ⓐ<u>to chat</u> and posting photos online. We also enjoy watching videos. But we ㉠________ ________. Three students share their stories here. Please give them advice.\n\nDohun's Story\nMy friend, Jian, sends me too many texts. He even texts in the middle of the night. When I don't reply, he sends ⓑ<u>me angry emojis</u>. Jian is my good friend, and I want to be (A)[kind / mean] to him. What should I do?\n↳ It sounds (B)[exciting / stressful]. Only text him short, simple messages.\n↳ Say (C)[honestly / dishonestly], \"Can you text me less?\"\n\nDami's Story\nYumin, Sia, and I ⓒ<u>are</u> good friends. Yumin's hobby is posting photos online. Yesterday, when I ⓓ<u>see</u> photos on her social media account, I was surprised. In one photo, Sia has a strange face and makes a funny gesture. It had a lot of likes and rude comments about her. Sia knows nothing about this. Should I tell her?\n↳ Of course! You should tell her. Hurry!\n↳ ⓔ<u>Ask</u> Yumin first. Maybe she doesn't understand the problem.\n\nSeoha's Story\nI was in a group chat with four friends. We enjoyed talking about many topics: sports, music, teachers, and classmates. I sometimes shared my problems with these friends. One day, one of them invited his friend to our group chat. Later, he invited ⓕ<u>other</u> new person. Now I don't feel good in the new group chat.\n↳ I understand. Your friend was careless.\n↳ Why don't you try to get along with the new people?\n\n윗글의 밑줄 친 ⓐ~ⓕ 중, 어법상 어색한 것의 개수는?",
+   "options": [
+    "1개",
+    "2개",
+    "3개",
+    "4개",
+    "5개"
+   ],
+   "answer": "3",
+   "explanation": "ⓐ to chat → chatting (and로 연결된 posting과 병렬), ⓓ see → saw (주절이 과거), ⓕ other → another (단수명사 수식). 어색한 것은 3개이다."
+  },
+  {
+   "number": 25,
+   "question": "다음 글을 읽고 물음에 답하시오.\nThese days, we spend a lot of time in the digital world. We like ⓐ<u>to chat</u> and posting photos online. We also enjoy watching videos. But we ㉠________ ________. Three students share their stories here. Please give them advice.\n\nDohun's Story\nMy friend, Jian, sends me too many texts. He even texts in the middle of the night. When I don't reply, he sends ⓑ<u>me angry emojis</u>. Jian is my good friend, and I want to be (A)[kind / mean] to him. What should I do?\n↳ It sounds (B)[exciting / stressful]. Only text him short, simple messages.\n↳ Say (C)[honestly / dishonestly], \"Can you text me less?\"\n\nDami's Story\nYumin, Sia, and I ⓒ<u>are</u> good friends. Yumin's hobby is posting photos online. Yesterday, when I ⓓ<u>see</u> photos on her social media account, I was surprised. In one photo, Sia has a strange face and makes a funny gesture. It had a lot of likes and rude comments about her. Sia knows nothing about this. Should I tell her?\n↳ Of course! You should tell her. Hurry!\n↳ ⓔ<u>Ask</u> Yumin first. Maybe she doesn't understand the problem.\n\nSeoha's Story\nI was in a group chat with four friends. We enjoyed talking about many topics: sports, music, teachers, and classmates. I sometimes shared my problems with these friends. One day, one of them invited his friend to our group chat. Later, he invited ⓕ<u>other</u> new person. Now I don't feel good in the new group chat.\n↳ I understand. Your friend was careless.\n↳ Why don't you try to get along with the new people?\n\n윗글의 빈칸 ㉠에 들어갈 말로 알맞은 것은?",
+   "options": [
+    "can't protect our privacy",
+    "don't use language correctly",
+    "don't pay attention to our studies",
+    "are sometimes in unhappy situations",
+    "lack physical activity and become unhealthy"
+   ],
+   "answer": "4",
+   "explanation": "앞의 즐거운 온라인 활동과 But으로 연결되며, 이어지는 세 학생의 고민 이야기로 볼 때 때로는 언짢은 상황에 있다는 내용이 알맞다."
+  },
+  {
+   "number": 26,
+   "question": "다음 글을 읽고 물음에 답하시오.\nThese days, we spend a lot of time in the digital world. We like ⓐ<u>to chat</u> and posting photos online. We also enjoy watching videos. But we ㉠________ ________. Three students share their stories here. Please give them advice.\n\nDohun's Story\nMy friend, Jian, sends me too many texts. He even texts in the middle of the night. When I don't reply, he sends ⓑ<u>me angry emojis</u>. Jian is my good friend, and I want to be (A)[kind / mean] to him. What should I do?\n↳ It sounds (B)[exciting / stressful]. Only text him short, simple messages.\n↳ Say (C)[honestly / dishonestly], \"Can you text me less?\"\n\nDami's Story\nYumin, Sia, and I ⓒ<u>are</u> good friends. Yumin's hobby is posting photos online. Yesterday, when I ⓓ<u>see</u> photos on her social media account, I was surprised. In one photo, Sia has a strange face and makes a funny gesture. It had a lot of likes and rude comments about her. Sia knows nothing about this. Should I tell her?\n↳ Of course! You should tell her. Hurry!\n↳ ⓔ<u>Ask</u> Yumin first. Maybe she doesn't understand the problem.\n\nSeoha's Story\nI was in a group chat with four friends. We enjoyed talking about many topics: sports, music, teachers, and classmates. I sometimes shared my problems with these friends. One day, one of them invited his friend to our group chat. Later, he invited ⓕ<u>other</u> new person. Now I don't feel good in the new group chat.\n↳ I understand. Your friend was careless.\n↳ Why don't you try to get along with the new people?\n\n윗글의 괄호 (A), (B), (C)에서 흐름상 알맞은 말로 바르게 연결된 것은?",
+   "options": [
+    "(A) mean – (B) exciting – (C) dishonestly",
+    "(A) kind – (B) exciting – (C) honestly",
+    "(A) kind – (B) stressful – (C) dishonestly",
+    "(A) mean – (B) stressful – (C) honestly",
+    "(A) kind – (B) stressful – (C) honestly"
+   ],
+   "answer": "5",
+   "explanation": "(A) 좋은 친구이므로 친절하게(kind) 대하고 싶다. (B) 문자를 너무 많이 받는 상황은 스트레스를 주는(stressful) 것이다. (C) 솔직하게(honestly) 말하라는 흐름이 자연스럽다."
+  },
+  {
+   "number": 27,
+   "question": "다음 그림을 보고 <보기>에서 적절한 단어를 골라 빈칸을 완성하시오. (단, 모두 과거시제로 쓸 것)\n(그림 설명: (1) Bomi가 여동생에게 선물 상자를 건네주고 있다. (2) Sera가 Jamie에게 \"Hope you're doing well...\"이라는 이메일을 보내고 있다.)\n\n<보기> give, email, cook, dish, ask, present, send\n\n(1) Bomi ________ ________ ________ ________ ________.\n(2) Sera ________ ________ ________ ________.",
+   "options": [],
+   "answer": "gave her sister a present / sent Jamie an email",
+   "subParts": [
+    {
+     "label": "(1)",
+     "answer": "gave her sister a present"
+    },
+    {
+     "label": "(2)",
+     "answer": "sent Jamie an email"
+    }
+   ],
+   "explanation": "(1) 보미는 그녀의 자매에게 선물을 주었다. (2) 세라는 Jamie에게 이메일을 보냈다."
+  },
+  {
+   "number": 28,
+   "question": "다음 글을 읽고 물음에 답하시오.\nThese days, we spend a lot of time in the digital world. ⓐ<u>We like chatting and posting photos online.</u> We also enjoy watching videos. But we sometimes face unhappy situations. Three students share their stories here. Please give them advice.\n\nDohun's Story\nMy friend, Jian, sends me too many texts. He even texts in the middle of the night. When I don't reply, ⓑ<u>he sends me angry emojis</u>. Jian is my good friend, and I want to be kind to him. What should I do?\n↳ It sounds stressful. Only text him short, simple messages.\n↳ Say honestly, \"Can you text me less?\"\n\nDami's Story\nYumin, Sia, and I are good friends. Yumin's hobby is posting photos online. Yesterday, when I saw photos on her social media account, I was surprised. In one photo, Sia has a strange face and makes a funny gesture. ⓒ<u>It had a lot of likes and rude comments about her.</u> ⓓ<u>Sia knows nothing about this.</u> Should I tell her?\n↳ Of course! You should tell her. Hurry!\n↳ Ask Yumin first. Maybe she doesn't understand the problem.\n\nSeoha's Story\nI was in a group chat with four friends. We enjoyed talking about many topics: sports, music, teachers, and classmates. I sometimes shared my problems with these friends. One day, one of them invited his friend to our group chat. Later, he invited another new person. Now I don't feel good in the new group chat.\n↳ I understand. Your friend was careless.\n↳ ⓔ<u>Why don't you try to get along with the new people?</u>\n\n윗글의 밑줄 친 ⓐ~ⓔ와 바꾸어 쓸 수 없는 것은?",
+   "options": [
+    "ⓐ: We like to chat and post photos online.",
+    "ⓑ: he sends angry emojis to me",
+    "ⓒ: There was a lot of likes and rude comments about her under the photo.",
+    "ⓓ: Sia doesn't know anything about this.",
+    "ⓔ: How about trying to get along with the new people?"
+   ],
+   "answer": "3",
+   "explanation": "ⓒ 주어 a lot of likes and rude comments가 복수이므로 There was가 아니라 There were를 써야 한다."
+  },
+  {
+   "number": 29,
+   "question": "다음 글을 읽고 물음에 답하시오.\nThese days, we spend a lot of time in the digital world. ⓐ<u>We like chatting and posting photos online.</u> We also enjoy watching videos. But we sometimes face unhappy situations. Three students share their stories here. Please give them advice.\n\nDohun's Story\nMy friend, Jian, sends me too many texts. He even texts in the middle of the night. When I don't reply, ⓑ<u>he sends me angry emojis</u>. Jian is my good friend, and I want to be kind to him. What should I do?\n↳ It sounds stressful. Only text him short, simple messages.\n↳ Say honestly, \"Can you text me less?\"\n\nDami's Story\nYumin, Sia, and I are good friends. Yumin's hobby is posting photos online. Yesterday, when I saw photos on her social media account, I was surprised. In one photo, Sia has a strange face and makes a funny gesture. ⓒ<u>It had a lot of likes and rude comments about her.</u> ⓓ<u>Sia knows nothing about this.</u> Should I tell her?\n↳ Of course! You should tell her. Hurry!\n↳ Ask Yumin first. Maybe she doesn't understand the problem.\n\nSeoha's Story\nI was in a group chat with four friends. We enjoyed talking about many topics: sports, music, teachers, and classmates. I sometimes shared my problems with these friends. One day, one of them invited his friend to our group chat. Later, he invited another new person. Now I don't feel good in the new group chat.\n↳ I understand. Your friend was careless.\n↳ ⓔ<u>Why don't you try to get along with the new people?</u>\n\n윗글을 읽고 다음 질문에 대한 알맞은 대답이 되도록 주어진 <조건>에 맞게 빈칸을 완성하시오.\n\n<조건> send, reply, he를 사용할 것\n\nQ. When does Dohun receive angry emojis from Jian?\n→ Dohun receives angry emojis from Jian when ________ ________ ________ ________ ________.",
+   "options": [],
+   "answer": "he doesn't send a reply",
+   "explanation": "도훈이는 답장을 보내지 않을 때 지안이로부터 화난 이모지를 받는다."
+  },
+  {
+   "number": 30,
+   "question": "다음 글을 읽고 물음에 답하시오.\nThese days, we spend a lot of time in the digital world. ⓐ<u>We like chatting and posting photos online.</u> We also enjoy watching videos. But we sometimes face unhappy situations. Three students share their stories here. Please give them advice.\n\nDohun's Story\nMy friend, Jian, sends me too many texts. He even texts in the middle of the night. When I don't reply, ⓑ<u>he sends me angry emojis</u>. Jian is my good friend, and I want to be kind to him. What should I do?\n↳ It sounds stressful. Only text him short, simple messages.\n↳ Say honestly, \"Can you text me less?\"\n\nDami's Story\nYumin, Sia, and I are good friends. Yumin's hobby is posting photos online. Yesterday, when I saw photos on her social media account, I was surprised. In one photo, Sia has a strange face and makes a funny gesture. ⓒ<u>It had a lot of likes and rude comments about her.</u> ⓓ<u>Sia knows nothing about this.</u> Should I tell her?\n↳ Of course! You should tell her. Hurry!\n↳ Ask Yumin first. Maybe she doesn't understand the problem.\n\nSeoha's Story\nI was in a group chat with four friends. We enjoyed talking about many topics: sports, music, teachers, and classmates. I sometimes shared my problems with these friends. One day, one of them invited his friend to our group chat. Later, he invited another new person. Now I don't feel good in the new group chat.\n↳ I understand. Your friend was careless.\n↳ ⓔ<u>Why don't you try to get along with the new people?</u>\n\n다음 물음에 알맞은 답을 고르시오.\nWhat do Dohun, Dami, and Seoha have in common?",
+   "options": [
+    "They see harmful content online.",
+    "They make friends only in the digital world.",
+    "They want to have the latest digital devices.",
+    "They spend too much time on social media.",
+    "They are worried about a problem in the digital world."
+   ],
+   "answer": "5",
+   "explanation": "세 사람 모두 문자, 소셜 미디어, 그룹 대화방 등 디지털 세상에서 겪는 고민을 이야기하고 있다."
+  },
+  {
+   "number": 31,
+   "question": "다음 글을 읽고 물음에 답하시오.\nThese days, we spend a lot of time in the digital world. ⓐ<u>We like chatting and posting photos online.</u> We also enjoy watching videos. But we sometimes face unhappy situations. Three students share their stories here. Please give them advice.\n\nDohun's Story\nMy friend, Jian, sends me too many texts. He even texts in the middle of the night. When I don't reply, ⓑ<u>he sends me angry emojis</u>. Jian is my good friend, and I want to be kind to him. What should I do?\n↳ It sounds stressful. Only text him short, simple messages.\n↳ Say honestly, \"Can you text me less?\"\n\nDami's Story\nYumin, Sia, and I are good friends. Yumin's hobby is posting photos online. Yesterday, when I saw photos on her social media account, I was surprised. In one photo, Sia has a strange face and makes a funny gesture. ⓒ<u>It had a lot of likes and rude comments about her.</u> ⓓ<u>Sia knows nothing about this.</u> Should I tell her?\n↳ Of course! You should tell her. Hurry!\n↳ Ask Yumin first. Maybe she doesn't understand the problem.\n\nSeoha's Story\nI was in a group chat with four friends. We enjoyed talking about many topics: sports, music, teachers, and classmates. I sometimes shared my problems with these friends. One day, one of them invited his friend to our group chat. Later, he invited another new person. Now I don't feel good in the new group chat.\n↳ I understand. Your friend was careless.\n↳ ⓔ<u>Why don't you try to get along with the new people?</u>\n\n윗글의 제목으로 알맞은 것은?",
+   "options": [
+    "A Break in Our Friendship",
+    "Smart Use of the Digital World",
+    "We Can Solve Digital Troubles",
+    "Give Advice to Online Beginners!",
+    "Online Life: Dilemmas and Solutions"
+   ],
+   "answer": "5",
+   "explanation": "세 친구가 디지털 세상에서 겪은 고민과 이에 대한 댓글(조언)이 이어지는 글이므로 ⑤가 알맞다."
+  }
+ ]
+}

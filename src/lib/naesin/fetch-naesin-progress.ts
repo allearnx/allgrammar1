@@ -39,6 +39,8 @@ export interface NaesinProgressResult {
   fillBlanksByUnit: Record<string, Record<string, number>>;
   problemSheetsByUnit: Record<string, { id: string; title: string; category: string }[]>;
   problemAttemptsBySheet: Record<string, { score: number; total: number; pct: number }>;
+  /** 제출 전 임시저장(풀다 만 시트): 답한 문항 수 / 전체, 마지막 저장 시각 */
+  problemDraftsBySheet: Record<string, { answered: number; total: number; updatedAt: string }>;
   grammarContentByUnit: Record<string, boolean>;
 }
 
@@ -56,7 +58,7 @@ export async function fetchNaesinProgress(
   const admin = createAdminClient();
   const unitIds = naesinData.units.map((u) => u.id);
 
-  const [progressRes, videoRes, fillBlanksRes, sheetsRes, attemptsRes, grammarLessonsRes] = await Promise.all([
+  const [progressRes, videoRes, fillBlanksRes, sheetsRes, attemptsRes, grammarLessonsRes, draftsRes] = await Promise.all([
     admin
       .from('naesin_student_progress')
       .select('unit_id, vocab_completed, vocab_quiz_score, vocab_spelling_score, passage_completed, passage_fill_blanks_best, passage_ordering_best, passage_translation_best, passage_grammar_vocab_best, dialogue_ordering_best, dialogue_first_letter_best, dialogue_translation_best, dialogue_completed, grammar_completed, grammar_videos_completed, grammar_total_videos, problem_completed, mock_exam_completed, total_learning_seconds, updated_at, round2_passage_fill_blanks_best, round2_passage_ordering_best, round2_passage_translation_best, round2_passage_grammar_vocab_best, round2_passage_completed, round2_dialogue_ordering_best, round2_dialogue_first_letter_best, round2_dialogue_translation_best, round2_dialogue_completed')
@@ -76,7 +78,8 @@ export async function fetchNaesinProgress(
       .select('id, unit_id, title, sort_order, category')
       .in('category', ['problem', 'mock_exam', 'external_passage', 'eng_eng_def'])
       .in('unit_id', unitIds)
-      .order('sort_order'),
+      .order('sort_order')
+      .order('created_at'),
     admin
       .from('naesin_problem_attempts')
       .select('sheet_id, score, total_questions')
@@ -86,6 +89,10 @@ export async function fetchNaesinProgress(
       .select('unit_id')
       .in('unit_id', unitIds)
       .eq('content_type', 'video'),
+    admin
+      .from('naesin_problem_drafts')
+      .select('sheet_id, updated_at, draft_data')
+      .eq('student_id', studentId),
   ]);
 
   const naesinProgress = progressRes.data || [];
@@ -123,11 +130,20 @@ export async function fetchNaesinProgress(
     }
   }
 
+  // 풀다 만 시트 (임시저장). 제출 기록이 없는 시트만 '진행 중'으로 보여준다.
+  const problemDraftsBySheet: Record<string, { answered: number; total: number; updatedAt: string }> = {};
+  for (const d of draftsRes.data || []) {
+    const data = d.draft_data as { answersMap?: Record<string, unknown>; questionCount?: number } | null;
+    const answered = Object.keys(data?.answersMap ?? {}).length;
+    if (answered === 0 || problemAttemptsBySheet[d.sheet_id]) continue;
+    problemDraftsBySheet[d.sheet_id] = { answered, total: data?.questionCount ?? 0, updatedAt: d.updated_at };
+  }
+
   // Grammar content availability per unit (units with at least one grammar video)
   const grammarContentByUnit: Record<string, boolean> = {};
   for (const lesson of grammarLessonsRes.data || []) {
     grammarContentByUnit[lesson.unit_id] = true;
   }
 
-  return { naesinProgress, hours, minutes, fillBlanksByUnit, problemSheetsByUnit, problemAttemptsBySheet, grammarContentByUnit };
+  return { naesinProgress, hours, minutes, fillBlanksByUnit, problemSheetsByUnit, problemAttemptsBySheet, problemDraftsBySheet, grammarContentByUnit };
 }

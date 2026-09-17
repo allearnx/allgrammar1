@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { createAdminClient } from '@/lib/supabase/admin';
-import type { BlogPostSummary } from '@/types/blog';
+import type { BlogPostSummary, BlogFeedItem } from '@/types/blog';
+import { getNaverBlogPosts } from '@/lib/naver-blog-rss';
 import { BlogList } from './blog-list';
 
 export const metadata: Metadata = {
@@ -23,14 +24,27 @@ export const metadata: Metadata = {
 export default async function BlogPage() {
   const admin = createAdminClient();
 
-  const { data } = await admin
-    .from('blog_posts')
-    .select('id, slug, title, excerpt, thumbnail_url, category, published_at, view_count')
-    .eq('is_published', true)
-    .order('sort_order', { ascending: true })
-    .order('published_at', { ascending: false });
+  const [{ data }, naverPosts] = await Promise.all([
+    admin
+      .from('blog_posts')
+      .select('id, slug, title, excerpt, thumbnail_url, category, published_at, view_count')
+      .eq('is_published', true)
+      .order('sort_order', { ascending: true })
+      .order('published_at', { ascending: false }),
+    getNaverBlogPosts(),
+  ]);
 
-  const posts: BlogPostSummary[] = (data || []) as BlogPostSummary[];
+  const sitePosts: BlogPostSummary[] = (data || []) as BlogPostSummary[];
 
-  return <BlogList initialPosts={posts} />;
+  // 자체 글 + 네이버 글을 한 목록으로 — 최신순
+  const items: BlogFeedItem[] = [
+    ...sitePosts.map((post): BlogFeedItem => ({
+      source: 'site',
+      post,
+      publishedAt: post.published_at || '',
+    })),
+    ...naverPosts.map((p): BlogFeedItem => ({ source: 'naver', ...p })),
+  ].sort((a, b) => (b.publishedAt > a.publishedAt ? 1 : b.publishedAt < a.publishedAt ? -1 : 0));
+
+  return <BlogList items={items} />;
 }

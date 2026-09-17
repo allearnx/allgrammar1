@@ -31,7 +31,8 @@ export const GET = createApiHandler(
       .from('naesin_problem_sheets')
       .select(SHEET_ADMIN_LITE_COLUMNS)
       .eq('category', category)
-      .order('sort_order');
+      .order('sort_order')
+      .order('created_at');
 
     if (textbookId) {
       query = query.eq('textbook_id', textbookId);

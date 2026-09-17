@@ -1,0 +1,2091 @@
+{
+  "R1": [
+    {
+      "number": 1,
+      "question": "다음 밑줄 친 부분의 기능이 다른 하나는?",
+      "options": [
+        "<u>mis</u>sion",
+        "<u>mis</u>lead",
+        "<u>mis</u>match",
+        "<u>mis</u>take",
+        "<u>mis</u>understand"
+      ],
+      "answer": "1"
+    },
+    {
+      "number": 2,
+      "question": "다음 문장의 빈칸에 들어갈 말이 차례대로 연결된 것은?\n\n• Talking ________ the phone with her friend, Sumi is cooking dinner.\n• According ________ research, people feel sad on rainy days.",
+      "options": [
+        "for - at",
+        "to - to",
+        "on - on",
+        "to - of",
+        "on - to"
+      ],
+      "answer": "5"
+    },
+    {
+      "number": 3,
+      "question": "다음 빈칸에 공통으로 들어갈 말로 알맞은 것을 모두 고르면? (정답 2개)\n\n• Peter went to the city ________ get a new job.\n• Mickey wanted to have the desk cleaned ________ study for the final exam.",
+      "options": [
+        "to",
+        "enough to",
+        "too much to",
+        "in order he can",
+        "so that he could"
+      ],
+      "answer": "1, 5"
+    },
+    {
+      "number": 4,
+      "question": "다음 대화의 빈칸에 들어갈 말로 어법상 알맞지 않은 것은?\n\nA: Wow. Mike woke up so early! Why so?\nB: Well, ______________________________.",
+      "options": [
+        "he usually gets up early to catch the first subway",
+        "he got up early today so that he might catch the first subway",
+        "he got up early today of him to catch the first subway",
+        "he got up early in order that he could catch the first subway",
+        "he usually gets up early so that he will catch the first subway"
+      ],
+      "answer": "3"
+    },
+    {
+      "number": 5,
+      "question": "다음 중 어법상 어색한 문장의 개수는?\n\n• Known the answer to the question, Ben raised his hand.\n• Surprising by a loud scream, people ran out of the building.\n• Turned to the left next corner, you will find the hospital.\n• After washing your feet, dry them with a clean towel.\n• Keep practicing swimming so that you can win the race.\n• As the big dog barked at us, my brother and I started to run away.\n• Drinking hot water makes you sweat and the sweat cools down the body.",
+      "options": [
+        "1개",
+        "2개",
+        "3개",
+        "4개",
+        "5개"
+      ],
+      "answer": "3"
+    },
+    {
+      "number": 6,
+      "question": "다음 <보기>와 같이 문장을 바꿔 쓸 때, 어법상 어색한 것은?\n\n<보기>\nWhen I take a shower, I listen to music.\n→ Taking a shower, I listen to music.",
+      "options": [
+        "Because he didn't feel well, he stayed in bed. → Not feeling well, he stayed in bed.",
+        "If you turn left, you will find the bank. → Turning left, you will find the bank.",
+        "Though I did my best, I couldn't win the race. → Though doing my best, I couldn't win the race.",
+        "While I was singing on the stage, I saw him dancing. → Singing on the stage, I saw him dancing.",
+        "As I had been invited to the party, I bought a new dress. → Inviting to the party, I bought a new dress."
+      ],
+      "answer": "5"
+    },
+    {
+      "number": 7,
+      "question": "다음 두 문장의 의미가 같도록 빈칸에 알맞은 말을 쓰시오.\n\nI often drink coffee so that I don't get sleepy.\n→ I often drink coffee in ________ ________ ________ get sleepy.",
+      "options": [],
+      "answer": "order not to"
+    },
+    {
+      "number": 8,
+      "question": "다음 빈칸에 들어갈 말로 어색한 것은?\n\nJenny: I think Clara got a boyfriend during the vacation.\nJimin: ______________________________\nJenny: She's got a new ring on her left hand.",
+      "options": [
+        "What do you think?",
+        "Why do you say so?",
+        "Why do you think so?",
+        "Do you have any reason?",
+        "What makes you think so?"
+      ],
+      "answer": "1"
+    },
+    {
+      "number": 9,
+      "question": "다음 대화를 읽고 물음에 답하시오.\nSam: I read an article saying that Napoleon was fairly tall.\nTom: Oh, really? Can you tell me more about it?\nSam: According to the article, a French doctor wrote down Napoleon's height according to the French measuring system, not the English one.\nTom: What was the (A)________?\nSam: At that time, an inch in French was (B)________ than an inch in England. So, Napoleon was actually about 168 cm tall, which was not short in those times.\n\n위 대화의 빈칸 (A), (B)에 들어갈 말로 바르게 짝지어진 것은?",
+      "options": [
+        "(A) difference – (B) shorter",
+        "(A) difference – (B) longer",
+        "(A) difficulty – (B) shorter",
+        "(A) difficulty – (B) longer",
+        "(A) article – (B) shorter"
+      ],
+      "answer": "2"
+    },
+    {
+      "number": 10,
+      "question": "다음 대화를 읽고 물음에 답하시오.\nSam: I read an article saying that Napoleon was fairly tall.\nTom: Oh, really? Can you tell me more about it?\nSam: According to the article, a French doctor wrote down Napoleon's height according to the French measuring system, not the English one.\nTom: What was the (A)________?\nSam: At that time, an inch in French was (B)________ than an inch in England. So, Napoleon was actually about 168 cm tall, which was not short in those times.\n\n위 대화를 읽고 대답할 수 없는 것은?",
+      "options": [
+        "What was Napoleon's height?",
+        "Who wrote down Napoleon's height?",
+        "What measuring system did England and France use?",
+        "Why was the inch different in England and France?",
+        "How did Sam know Napoleon's height was pretty tall?"
+      ],
+      "answer": "4"
+    },
+    {
+      "number": 11,
+      "question": "다음 대화를 읽고 물음에 답하시오.\nM: Hey, Sandy. Do you think I should buy this drink? It is said that it can help me lose weight.\nW: Let me read the label more closely. Hmm, it looks a bit strange to me, David.\nM: Why do you say so?\nW: There isn't enough information about what's in the drink.\nM: Oh, you're right.\nW: Also, it doesn't tell you how much you have to drink to lose weight.\n\n위 대화의 내용과 일치하는 것은?",
+      "options": [
+        "David는 이미 음료를 샀다.",
+        "음료에는 살 빼는 것을 도울 수 있다고 적혀있다.",
+        "Sandy는 과거에 이 음료를 마셔본 적이 있다.",
+        "David가 먼저 라벨을 더 자세히 읽어 보았다.",
+        "Sandy는 음료 안에 무엇이 들었는지에 대한 충분한 정보를 찾았다."
+      ],
+      "answer": "2"
+    },
+    {
+      "number": 12,
+      "question": "다음 대화를 읽고 물음에 답하시오.\nM: Hey, Sandy. Do you think I should buy this drink? It is said that it can help me lose weight.\nW: Let me read the label more closely. Hmm, it looks a bit strange to me, David.\nM: Why do you say so?\nW: There isn't enough information about what's in the drink.\nM: Oh, you're right.\nW: Also, it doesn't tell you how much you have to drink to lose weight.\n\n위 대화 후 David가 할 행동으로 적절한 것은?",
+      "options": [
+        "He will order drink for Sandy and himself.",
+        "He will not buy the drink after talking with Sandy.",
+        "He will let Sandy know where she can buy the drink.",
+        "He will send Sandy e-mail for her to get more information.",
+        "He will not help Sandy lose her weight."
+      ],
+      "answer": "2"
+    },
+    {
+      "number": 13,
+      "question": "다음 글을 읽고 물음에 답하시오.\nEvery day we watch, hear, or read interesting news. However, have you ever seriously considered ⓐ<u>whether</u> an article is really true? Everyone likes an interesting news story but what if it is completely ⓑ<u>made up</u>?\nFake news can be very harmful in that it can make people less informed or even ⓒ<u>mislead</u>. Nevertheless, there ⓓ<u>have</u> been various fake news reports throughout history.\nWhy have some people written ⓔ<u>such</u> false information? Let's look into some articles thinking about the hidden (A)____________ behind them.\n\n위 글의 밑줄 친 ⓐ~ⓔ 중, 어법상 어색한 것은?",
+      "options": [
+        "ⓐ",
+        "ⓑ",
+        "ⓒ",
+        "ⓓ",
+        "ⓔ"
+      ],
+      "answer": "3"
+    },
+    {
+      "number": 14,
+      "question": "다음 글을 읽고 물음에 답하시오.\nEvery day we watch, hear, or read interesting news. However, have you ever seriously considered ⓐ<u>whether</u> an article is really true? Everyone likes an interesting news story but what if it is completely ⓑ<u>made up</u>?\nFake news can be very harmful in that it can make people less informed or even ⓒ<u>mislead</u>. Nevertheless, there ⓓ<u>have</u> been various fake news reports throughout history.\nWhy have some people written ⓔ<u>such</u> false information? Let's look into some articles thinking about the hidden (A)____________ behind them.\n\n위 글의 빈칸 (A)에 들어갈 말로 알맞은 것은?",
+      "options": [
+        "motive",
+        "damage",
+        "excuse",
+        "wealth",
+        "character"
+      ],
+      "answer": "1"
+    },
+    {
+      "number": 15,
+      "question": "다음 글을 읽고 물음에 답하시오.\nEvery day we watch, hear, or read interesting news. However, have you ever seriously considered ⓐ<u>whether</u> an article is really true? Everyone likes an interesting news story but what if it is completely ⓑ<u>made up</u>?\nFake news can be very harmful in that it can make people less informed or even ⓒ<u>mislead</u>. Nevertheless, there ⓓ<u>have</u> been various fake news reports throughout history.\nWhy have some people written ⓔ<u>such</u> false information? Let's look into some articles thinking about the hidden (A)____________ behind them.\n\n위 글의 내용과 일치하는 것은?",
+      "options": [
+        "Most people can recognize if an article is true or not.",
+        "Fake news is made by accident, not on purpose.",
+        "There is no fake news that is perfectly made up.",
+        "Every day we get to know news, which can be either true or wrong.",
+        "Because of its danger, we can't find fake news in the media any more."
+      ],
+      "answer": "4"
+    },
+    {
+      "number": 16,
+      "question": "다음 글을 읽고 물음에 답하시오.\nAWFUL DISASTER\nLast night, an angry group of rhinoceroses broke down the walls of the cage at the zoo and escaped. They also broke down the walls of the other wild animals' cages. These animals ran down the streets and injured hundreds of people. Twelve of the animals are still on the loose. Citizens should stay indoors until further notice.\n*Not a single act or incident described above has taken place.\n\nAt that time, those who read the article carefully ⓐ______________. Those who didn't read it to the end got really worried. ⓑ<u>As many people didn't know the news was false, they panicked</u>. Some tried to escape the city while others went into the parks with guns to hunt the animals.\nSo why did The Herald make up such news? Later, the confessed that they made it up so that they could drew the readers' attention to the unsafe conditions at the zoo.\n\n위 글의 빈칸 ⓐ에 들어갈 말로 알맞은 것은?",
+      "options": [
+        "ran away",
+        "laughed out loud",
+        "reported it to the police",
+        "locked the door and stayed in",
+        "called the zoo to check it was safe"
+      ],
+      "answer": "2"
+    },
+    {
+      "number": 17,
+      "question": "다음 글을 읽고 물음에 답하시오.\nAWFUL DISASTER\nLast night, an angry group of rhinoceroses broke down the walls of the cage at the zoo and escaped. They also broke down the walls of the other wild animals' cages. These animals ran down the streets and injured hundreds of people. Twelve of the animals are still on the loose. Citizens should stay indoors until further notice.\n*Not a single act or incident described above has taken place.\n\nAt that time, those who read the article carefully ⓐ______________. Those who didn't read it to the end got really worried. ⓑ<u>As many people didn't know the news was false, they panicked</u>. Some tried to escape the city while others went into the parks with guns to hunt the animals.\nSo why did The Herald make up such news? Later, the confessed that they made it up so that they could drew the readers' attention to the unsafe conditions at the zoo.\n\n위 글의 밑줄 친 ⓑ를 아래와 같이 쓸 때, 빈칸에 필요 없는 단어는?\n\n→ ________ ________ ________ ________ ________ ________, many people panicked.",
+      "options": [
+        "didn't",
+        "knowing",
+        "news",
+        "was",
+        "false"
+      ],
+      "answer": "1"
+    },
+    {
+      "number": 18,
+      "question": "다음 글을 읽고 물음에 답하시오.\nAWFUL DISASTER\nLast night, an angry group of rhinoceroses broke down the walls of the cage at the zoo and escaped. They also broke down the walls of the other wild animals' cages. These animals ran down the streets and injured hundreds of people. Twelve of the animals are still on the loose. Citizens should stay indoors until further notice.\n*Not a single act or incident described above has taken place.\n\nAt that time, those who read the article carefully ⓐ______________. Those who didn't read it to the end got really worried. ⓑ<u>As many people didn't know the news was false, they panicked</u>. Some tried to escape the city while others went into the parks with guns to hunt the animals.\nSo why did The Herald make up such news? Later, the confessed that they made it up so that they could drew the readers' attention to the unsafe conditions at the zoo.\n\n위 글에 나오지 않는 단어의 영영 풀이는?",
+      "options": [
+        "to say what they are like or what happened",
+        "being extremely unpleasant, shocking or bad",
+        "to make you believe something which is not true",
+        "to admit something that you feel ashamed or embarrassed about",
+        "a very bad accident, especially one in which a lot of people are killed"
+      ],
+      "answer": "3"
+    },
+    {
+      "number": 19,
+      "question": "다음 글을 읽고 물음에 답하시오.\nSLAV SHOOTS A FRIEND IN ARGUMENT\nMejk Swenekafew, a Slav worker at the Columbia Coal Mine, was shot and seriously ⓐ<u>wound</u> by John Pecitello near the mining camp Thursday evening.\nThe two men had an argument during a meeting. The argument led to a fight, and Pecitello shot Swenekafew twice, in the chest and leg. He is now at the hospital in (A)<u>critical</u> condition. Pecitello ran away after the shooting.\nThe police are ⓑ<u>searching</u> for him now and are warning citizens that he is extremely dangerous.\n\nIs there anything strange about the article? Read the Slav's name backwards; it spells \"we-fake-news.\" Who wrote this and why?\nThe Daily Telegram published this fake article so that they could prove if The Daily News, their competitor, was ⓒ<u>stealing</u> their articles. The Daily News published the same article about \"Swenekafew\" the next day and thus got ⓓ<u>caught</u> stealing. The people at The Daily News had to admit their act and were harshly ⓔ<u>criticized</u> by the public.\n\n위 글의 밑줄 친 ⓐ~ⓔ 중, 어법상 어색한 것은?",
+      "options": [
+        "ⓐ",
+        "ⓑ",
+        "ⓒ",
+        "ⓓ",
+        "ⓔ"
+      ],
+      "answer": "1"
+    },
+    {
+      "number": 20,
+      "question": "다음 글을 읽고 물음에 답하시오.\nSLAV SHOOTS A FRIEND IN ARGUMENT\nMejk Swenekafew, a Slav worker at the Columbia Coal Mine, was shot and seriously ⓐ<u>wound</u> by John Pecitello near the mining camp Thursday evening.\nThe two men had an argument during a meeting. The argument led to a fight, and Pecitello shot Swenekafew twice, in the chest and leg. He is now at the hospital in (A)<u>critical</u> condition. Pecitello ran away after the shooting.\nThe police are ⓑ<u>searching</u> for him now and are warning citizens that he is extremely dangerous.\n\nIs there anything strange about the article? Read the Slav's name backwards; it spells \"we-fake-news.\" Who wrote this and why?\nThe Daily Telegram published this fake article so that they could prove if The Daily News, their competitor, was ⓒ<u>stealing</u> their articles. The Daily News published the same article about \"Swenekafew\" the next day and thus got ⓓ<u>caught</u> stealing. The people at The Daily News had to admit their act and were harshly ⓔ<u>criticized</u> by the public.\n\n위 글의 밑줄 친 (A)critical과 같은 의미로 쓰인 것은?",
+      "options": [
+        "Is it a <u>critical</u> evidence?",
+        "Your decision is <u>critical</u> to our future.",
+        "This is a <u>critical</u> moment in my school life.",
+        "His condition was <u>critical</u> after the accident.",
+        "The journal was very <u>critical</u> of the politics."
+      ],
+      "answer": "4"
+    },
+    {
+      "number": 21,
+      "question": "다음 글을 읽고 물음에 답하시오.\nSLAV SHOOTS A FRIEND IN ARGUMENT\nMejk Swenekafew, a Slav worker at the Columbia Coal Mine, was shot and seriously ⓐ<u>wound</u> by John Pecitello near the mining camp Thursday evening.\nThe two men had an argument during a meeting. The argument led to a fight, and Pecitello shot Swenekafew twice, in the chest and leg. He is now at the hospital in (A)<u>critical</u> condition. Pecitello ran away after the shooting.\nThe police are ⓑ<u>searching</u> for him now and are warning citizens that he is extremely dangerous.\n\nIs there anything strange about the article? Read the Slav's name backwards; it spells \"we-fake-news.\" Who wrote this and why?\nThe Daily Telegram published this fake article so that they could prove if The Daily News, their competitor, was ⓒ<u>stealing</u> their articles. The Daily News published the same article about \"Swenekafew\" the next day and thus got ⓓ<u>caught</u> stealing. The people at The Daily News had to admit their act and were harshly ⓔ<u>criticized</u> by the public.\n\n위 글의 내용과 일치하지 않는 것은?",
+      "options": [
+        "Mejk Swenekafew was an imaginary character.",
+        "People blamed The Daily Telegram for making up the fake news.",
+        "The clue was hidden in the article that could prove it was false.",
+        "The article was on both The Daily Telegram and The Daily News.",
+        "The Daily News stole the article of their rival, The Daily Telegram."
+      ],
+      "answer": "2"
+    },
+    {
+      "number": 22,
+      "question": "다음 글을 읽고 물음에 답하시오.\nThere are many \"fake\" news articles published every day. As readers, we need to read critically and judge whether the news is real or fake.\n\nHOW TO SPOT FAKE NEWS\n1. CONSIDER the Source\nIs it from a ⓐ<u>reliable</u> source?\nCan we ⓑ<u>trust</u> the writer?\n2. CHECK the Date\nIs it a new or an old story?\nIs it related to ⓒ<u>current</u> events?\n3. READ BEYOND the Headlines\nDoes the headline match the ⓓ<u>content</u>?\n4. FIND Supporting Sources\nDo other related stories ⓔ<u>provide</u> similar content?\n\n위 글의 밑줄 친 ⓐ~ⓔ의 뜻으로 알맞지 않은 것은?",
+      "options": [
+        "ⓐ 믿을만한",
+        "ⓑ 신뢰하다",
+        "ⓒ 흐름",
+        "ⓓ 내용",
+        "ⓔ 제공하다"
+      ],
+      "answer": "3"
+    },
+    {
+      "number": 23,
+      "question": "다음 글을 읽고 물음에 답하시오.\nThere are many \"fake\" news articles published every day. As readers, we need to read critically and judge whether the news is real or fake.\n\nHOW TO SPOT FAKE NEWS\n1. CONSIDER the Source\nIs it from a ⓐ<u>reliable</u> source?\nCan we ⓑ<u>trust</u> the writer?\n2. CHECK the Date\nIs it a new or an old story?\nIs it related to ⓒ<u>current</u> events?\n3. READ BEYOND the Headlines\nDoes the headline match the ⓓ<u>content</u>?\n4. FIND Supporting Sources\nDo other related stories ⓔ<u>provide</u> similar content?\n\n위 글의 목적으로 가장 적절한 것은?",
+      "options": [
+        "to teach how to read beyond the headlines",
+        "to mislead the readers for their wrong motive",
+        "to give the tips for the way to spot fake news",
+        "to write a strong essay with supporting details",
+        "to let people trust the writers of their company"
+      ],
+      "answer": "3"
+    },
+    {
+      "number": 24,
+      "question": "다음 글을 읽고 물음에 답하시오.\nThe two articles were special cases, but there are many \"fake\" news articles published every day. ⓐ<u>독자로서, 우리는 비판적으로 읽고 그 뉴스가 진짜인지 가짜인지 판단할 필요가 있다</u>.\n\nHOW TO SPOT FAKE NEWS\nCONSIDER the Source\n(A)\nIs it from a reliable source?\nCan we trust the writer?\nCHECK the Date\n(B)\nIs it related to current events?\nREAD BEYOND the Headlines\n(C)\nDoes the headline match the content?\nFIND Supporting Sources\n(D)\nDo other related stories provide similar content?\n\n위 글의 밑줄 친 ⓐ의 우리말과 같은 뜻이 되도록 아래 <보기>에 주어진 단어를 바르게 배열하여 빈칸을 완성하시오.\n\n<보기> is / whether / judge / the news\n\n→ As readers, we need to read critically and ______________________ real or fake.",
+      "options": [],
+      "answer": "judge whether the news is"
+    },
+    {
+      "number": 25,
+      "question": "다음 글을 읽고 물음에 답하시오.\nEvery day we watch, hear, or read interesting news. However, have you ever seriously considered whether an article is really true? Everyone likes an interesting news story but what if ⓐ<u>it</u> is completely made up?\nFake news can be very harmful in that ⓑ<u>it</u> can make people less informed or even misled. Nevertheless, there have been various fake news reports throughout history. Why have some people written such false information? Let's look into some articles thinking about the hidden motives behind ⓒ<u>them</u>.\n\n위 글의 밑줄 친 ⓐ, ⓑ, ⓒ가 가리키는 것을 찾아 쓰시오.\n\nⓐ ______________________\nⓑ ______________________\nⓒ ______________________",
+      "options": [],
+      "answer": "an interesting news story / Fake news / some articles",
+      "subParts": [
+        {
+          "label": "ⓐ",
+          "answer": "an interesting news story"
+        },
+        {
+          "label": "ⓑ",
+          "answer": "Fake news",
+          "acceptedAnswers": [
+            "fake news"
+          ]
+        },
+        {
+          "label": "ⓒ",
+          "answer": "some articles"
+        }
+      ]
+    },
+    {
+      "number": 26,
+      "question": "다음 글을 읽고 물음에 답하시오.\nSLAV SHOOTS A FRIEND IN ARGUMENT\nMejk Swenekafew, a Slav worker at the Columbia Coal Mine, was shot and seriously wounded by John Pecitello near the mining camp Thursday evening.\nThe two men had an argument during a meeting. The argument led to a fight, and Pecitello shot Swenekafew twice, in the chest and leg. He is now at the hospital in critical condition. Pecitello ran away after the shooting. The police are searching for him now and are warning citizens that he is extremely dangerous.\n\nIs there anything strange about the article? Read the Slav's name backwards; it spells \"we-fake-news.\" Who wrote this and why? The Daily Telegram published this fake article (A)[could / so / they / that / prove] if The Daily News, their competitor, was stealing their articles. The Daily News published the same article about \"Swenekafew\" the next day and thus got caught stealing. The people at The Daily News had to admit their act and (B)______________________________.\n\n위 글의 괄호 (A)의 단어를 알맞게 배열하시오.\n\n→ ______________________",
+      "options": [],
+      "answer": "so that they could prove"
+    },
+    {
+      "number": 27,
+      "question": "다음 글을 읽고 물음에 답하시오.\nAWFUL DISASTER\n– The Herald November 9th, 1874\nLast night, an angry group of rhinoceroses broke down the walls of the cage at the zoo and escaped.\n\n(A) At that time, those who read the article carefully laughed out loud. Those who didn't read it to the end got really worried. Not knowing the news was false, many people panicked. Some tried to escape the city while others went into the parks with guns to hunt the animals.\n(B) Because of the risk of injury or death, citizens should stay indoors until further notice. Not a single act or incident described above has taken place.\n(C) They also broke down the walls of the other wild animals' cages. These animals ran down the streets and injured hundreds of people. Twelve of the animals are still on the loose.\n\nSo why did The Herald make up such news? Later, they confessed that they made it up so that they could draw the readers' attention to the unsafe conditions at the zoo.\n\n위 주어진 글에 이어질 순서로 알맞은 것은?",
+      "options": [
+        "(A)-(C)-(B)",
+        "(B)-(A)-(C)",
+        "(B)-(C)-(A)",
+        "(C)-(A)-(B)",
+        "(C)-(B)-(A)"
+      ],
+      "answer": "5"
+    },
+    {
+      "number": 28,
+      "question": "다음 글을 읽고 물음에 답하시오.\nAWFUL DISASTER\n– The Herald November 9th, 1874\nLast night, an angry group of rhinoceroses broke down the walls of the cage at the zoo and escaped.\n\n(A) At that time, those who read the article carefully laughed out loud. Those who didn't read it to the end got really worried. Not knowing the news was false, many people panicked. Some tried to escape the city while others went into the parks with guns to hunt the animals.\n(B) Because of the risk of injury or death, citizens should stay indoors until further notice. Not a single act or incident described above has taken place.\n(C) They also broke down the walls of the other wild animals' cages. These animals ran down the streets and injured hundreds of people. Twelve of the animals are still on the loose.\n\nSo why did The Herald make up such news? Later, they confessed that they made it up so that they could draw the readers' attention to the unsafe conditions at the zoo.\n\n위 글의 내용과 일치하는 것은?",
+      "options": [
+        "People who read the article with care became really concerned.",
+        "Some people went into the parks with guns to protect other animals.",
+        "The Herald wanted people to pay attention to unsafe conditions at the zoo.",
+        "A group of rhinoceroses broke down the walls of the cage to get food last night.",
+        "When the article was published, thirteen of the rhinoceroses hadn't been caught yet."
+      ],
+      "answer": "3"
+    },
+    {
+      "number": 29,
+      "question": "다음 글을 읽고 물음에 답하시오.\nWalk and You'll Get Slim and Strong!\nOur new walking shoes, Wing Walker, have various strong points. Walking with Wing Walker, you burn more calories and get slimmer. They also strengthen leg muscles because they use the hidden board technology. Upgrade your walking experience with Wing Walker!\n\n위 글의 종류로 가장 적절한 것은?",
+      "options": [
+        "advertisement",
+        "novel",
+        "essay",
+        "poetry",
+        "diary"
+      ],
+      "answer": "1"
+    }
+  ],
+  "R2": [
+    {
+      "number": 1,
+      "question": "다음 짝지어진 단어의 관계가 나머지와 다른 것은?",
+      "options": [
+        "hire - employ",
+        "pass away - die",
+        "fake - genuine",
+        "look into - investigate",
+        "look after - take care of"
+      ],
+      "answer": "3"
+    },
+    {
+      "number": 2,
+      "question": "다음 중 빈칸 어느 곳에도 들어갈 수 없는 단어는?\n\n• She has finally ________ that she lied to him.\n• He ________ his leg while running.\n• This magazine is ________ once a month.\n• The dog ________ me as soon as he saw me.",
+      "options": [
+        "injured",
+        "described",
+        "recognized",
+        "published",
+        "confessed"
+      ],
+      "answer": "2"
+    },
+    {
+      "number": 3,
+      "question": "다음 빈칸에 공통으로 들어갈 말로 알맞은 것을 모두 고르면? (정답 2개)\n\n• Michael stood up ________ get a better view.\n• My brother began to boil water ________ drink hot tea.",
+      "options": [
+        "enough to",
+        "in order to",
+        "in order he can",
+        "so that he could",
+        "so much that he could"
+      ],
+      "answer": "2, 4"
+    },
+    {
+      "number": 4,
+      "question": "다음 주어진 우리말의 밑줄 친 부분을 영어로 바르게 옮긴 것을 모두 고른 것은?\n\n나는 <u>바깥 풍경을 보기 위해</u> 종종 창가 옆에 앉는 것을 좋아한다.\n\nⓐ too see the view outside\nⓑ in order to see the view outside\nⓒ enough to see the view outside\nⓓ so that I can see the view outside\nⓔ in order that I can see the view outside\nⓕ to see the view outside",
+      "options": [
+        "ⓐ, ⓑ, ⓓ",
+        "ⓑ, ⓓ, ⓔ",
+        "ⓒ, ⓔ, ⓕ",
+        "ⓐ, ⓑ, ⓓ, ⓔ",
+        "ⓑ, ⓓ, ⓔ, ⓕ"
+      ],
+      "answer": "5"
+    },
+    {
+      "number": 5,
+      "question": "다음 중 밑줄 친 부분의 쓰임이 나머지와 다른 것은?",
+      "options": [
+        "Not <u>doing</u> her best, Stella regretted the past.",
+        "<u>Drinking</u> and driving, he lost his driver's license.",
+        "I'm more afraid of <u>being</u> sick than being alone.",
+        "Not <u>being</u> interested in you, I didn't recognize you.",
+        "<u>Living</u> far from my house, he can't visit me often."
+      ],
+      "answer": "3"
+    },
+    {
+      "number": 6,
+      "question": "다음 밑줄 친 부분을 분사구문을 사용하여 바꿔 쓰시오.\n\n<u>Because I felt hopeless</u>, I just cried.\n\n→ ______________________, I just cried.",
+      "options": [],
+      "answer": "Feeling hopeless"
+    },
+    {
+      "number": 7,
+      "question": "다음 대화의 빈칸에 들어갈 말로 알맞은 것은?\n\nA: Weather can ______________ people's feelings.\nB: Can you tell me more about it?\nA: According to research, people feel sad on rainy days.",
+      "options": [
+        "guess",
+        "spend",
+        "watch",
+        "affect",
+        "improve"
+      ],
+      "answer": "4"
+    },
+    {
+      "number": 8,
+      "question": "다음 대화의 빈칸에 들어갈 말로 알맞은 것을 모두 고르면? (정답 2개)\n\nW: What are you reading, John?\nM: I'm reading a book of riddles.\nW: Riddles? Aren't they for children?\nM: Actually, no. Books of riddles are really useful for adults.\nW: Really? ______________________\nM: They help us think more creatively. We need to think outside the box to find the answers.",
+      "options": [
+        "Why do you think so?",
+        "What makes you say that?",
+        "What's the matter with you?",
+        "Why don't you hold that view?",
+        "How come you are thinking the same thing?"
+      ],
+      "answer": "1, 2"
+    },
+    {
+      "number": 9,
+      "question": "다음 대화를 읽고 물음에 답하시오.\nJin: There are so many pieces of information we call \"facts\" ⓐ<u>that</u> are completely wrong.\nLisa: Can you tell me more about it?\nJin: I read a book, and there were a lot of examples of ⓑ<u>these kinds of facts</u>.\nLisa: Like what?\nJin: Well, most people think goldfish are not smart. But, goldfish are actually smart.\nLisa: Really?\nJin: Yeah, they can recognize their owners.\nLisa: Oh, I didn't know that.\n\n위 대화의 밑줄 친 ⓐ의 쓰임과 같은 것은?",
+      "options": [
+        "<u>That</u> is what I want to get.",
+        "I didn't know <u>that</u> you were sick.",
+        "The girl <u>that</u> sang a song was my sister.",
+        "I heard the news <u>that</u> he had a car accident.",
+        "It was at this shop <u>that</u> I wanted to buy a watch."
+      ],
+      "answer": "3"
+    },
+    {
+      "number": 10,
+      "question": "다음 대화를 읽고 물음에 답하시오.\nJin: There are so many pieces of information we call \"facts\" ⓐ<u>that</u> are completely wrong.\nLisa: Can you tell me more about it?\nJin: I read a book, and there were a lot of examples of ⓑ<u>these kinds of facts</u>.\nLisa: Like what?\nJin: Well, most people think goldfish are not smart. But, goldfish are actually smart.\nLisa: Really?\nJin: Yeah, they can recognize their owners.\nLisa: Oh, I didn't know that.\n\n위 대화의 밑줄 친 ⓑ가 의미하는 것은?",
+      "options": [
+        "facts that many people know",
+        "facts that were about goldfish",
+        "facts that had many examples",
+        "facts that were not true actually",
+        "facts that were believed to be true"
+      ],
+      "answer": "4"
+    },
+    {
+      "number": 11,
+      "question": "다음 대화의 밑줄 친 ⓐ~ⓔ 중, 어법상 어색한 것은?\n\nW: There are so many pieces of information we call \"facts\" that are ⓐ<u>completely</u> wrong.\nM: Why do you say so?\nW: I read a book, and there ⓑ<u>was</u> a lot of examples of ⓒ<u>these</u> facts that are wrong.\nM: Like what?\nW: Well, most people ⓓ<u>think</u> goldfish are not smart. But goldfish are actually smart.\nM: Really? Can you tell me more about that?\nW: They can ⓔ<u>recognize</u> their owners.\nM: Oh, I didn't know that.",
+      "options": [
+        "ⓐ",
+        "ⓑ",
+        "ⓒ",
+        "ⓓ",
+        "ⓔ"
+      ],
+      "answer": "2"
+    },
+    {
+      "number": 12,
+      "question": "다음 대화의 빈칸에 들어갈 가장 알맞은 것은?\n\nW: What are you reading, John?\nM: I'm reading a book of riddles.\nW: Riddles? Aren't they for children?\nM: Actually, no. Books of riddles are really useful for adults.\nW: Really? Why do you say so?\nM: They help us think more creatively. We need to ______________ to understand them.",
+      "options": [
+        "take our shares",
+        "stand on our heads",
+        "think outside the box",
+        "hit the book of poetry",
+        "have our heads in the clouds"
+      ],
+      "answer": "3"
+    },
+    {
+      "number": 13,
+      "question": "다음 글을 읽고 물음에 답하시오.\nAWFUL DISASTER\nLast night, an angry group of rhinoceroses ⓐ<u>broken</u> down the walls of the cage at the zoo and escaped. They also broke down the walls of the other wild animals' cages. These animals ran down the streets and ⓑ<u>injuring</u> hundreds of people. Twelve of the animals are still on the loose. Citizens should stay indoors until further notice.\n*Not a single act or incident described above ⓒ<u>has taken</u> place.\n\nAt that time, those who read the article carefully laughed out loud. Those who didn't read it to the end got ⓓ<u>worried</u>. Because many people didn't know the news was false, they (A)____________. Some tried to escape the city while others went into the parks with guns to hunt the animals.\nSo why did The Herald make up such news? Later, they ⓔ<u>confessed</u> that they made it up so that they could draw the readers' attention to the unsafe conditions at the zoo.\n\n위 글의 밑줄 친 ⓐ~ⓔ 중, 어법상 어색한 것을 모두 고르면? (정답 2개)",
+      "options": [
+        "ⓐ",
+        "ⓑ",
+        "ⓒ",
+        "ⓓ",
+        "ⓔ"
+      ],
+      "answer": "1, 2"
+    },
+    {
+      "number": 14,
+      "question": "다음 글을 읽고 물음에 답하시오.\nAWFUL DISASTER\nLast night, an angry group of rhinoceroses ⓐ<u>broken</u> down the walls of the cage at the zoo and escaped. They also broke down the walls of the other wild animals' cages. These animals ran down the streets and ⓑ<u>injuring</u> hundreds of people. Twelve of the animals are still on the loose. Citizens should stay indoors until further notice.\n*Not a single act or incident described above ⓒ<u>has taken</u> place.\n\nAt that time, those who read the article carefully laughed out loud. Those who didn't read it to the end got ⓓ<u>worried</u>. Because many people didn't know the news was false, they (A)____________. Some tried to escape the city while others went into the parks with guns to hunt the animals.\nSo why did The Herald make up such news? Later, they ⓔ<u>confessed</u> that they made it up so that they could draw the readers' attention to the unsafe conditions at the zoo.\n\n위 글의 빈칸 (A)에 들어갈 말로 알맞은 것은?",
+      "options": [
+        "cheered up",
+        "were satisfied",
+        "calmed down",
+        "responded reasonably",
+        "were overwhelmed by fear"
+      ],
+      "answer": "5"
+    },
+    {
+      "number": 15,
+      "question": "다음 글을 읽고 물음에 답하시오.\nAWFUL DISASTER\nLast night, an angry group of rhinoceroses ⓐ<u>broken</u> down the walls of the cage at the zoo and escaped. They also broke down the walls of the other wild animals' cages. These animals ran down the streets and ⓑ<u>injuring</u> hundreds of people. Twelve of the animals are still on the loose. Citizens should stay indoors until further notice.\n*Not a single act or incident described above ⓒ<u>has taken</u> place.\n\nAt that time, those who read the article carefully laughed out loud. Those who didn't read it to the end got ⓓ<u>worried</u>. Because many people didn't know the news was false, they (A)____________. Some tried to escape the city while others went into the parks with guns to hunt the animals.\nSo why did The Herald make up such news? Later, they ⓔ<u>confessed</u> that they made it up so that they could draw the readers' attention to the unsafe conditions at the zoo.\n\n위 글의 내용과 일치하지 않는 것을 고르시오.\n\nWhich is NOT correct according to the text?",
+      "options": [
+        "The incident described in the article has never taken place.",
+        "Some people tried to escape the city after reading the article.",
+        "People who read the article carefully noticed that it was fake news.",
+        "The Herald made up the fake news in order to sell more newspapers.",
+        "At the end of the article, The Herald added that the news story, \"Awful Disaster,\" was false."
+      ],
+      "answer": "4"
+    },
+    {
+      "number": 16,
+      "question": "다음 글을 읽고 물음에 답하시오.\nCan You Spot Fake News?\nEvery day we watch, hear, or read interesting news. However, have you ever seriously considered whether an article is really true? Everyone likes an interesting news story but (A)________ it is completely made up?\nFake news can be very harmful (B)________ it can make people less informed or even misled. (C)________, there have been various fake news reports throughout history. Why have some people written such false information? Let's look into some articles thinking about the hidden motives behind them.\n\n위 글의 빈칸 (A), (B), (C)에 들어갈 말로 알맞게 연결된 것은?",
+      "options": [
+        "(A) what if – (B) in that – (C) Nevertheless",
+        "(A) whether – (B) because – (C) Furthermore",
+        "(A) whether – (B) in that – (C) Nevertheless",
+        "(A) what if – (B) because – (C) Furthermore",
+        "(A) what if – (B) that – (C) Nevertheless"
+      ],
+      "answer": "1"
+    },
+    {
+      "number": 17,
+      "question": "다음 글을 읽고 물음에 답하시오.\nCan You Spot Fake News?\nEvery day we watch, hear, or read interesting news. However, have you ever seriously considered whether an article is really true? Everyone likes an interesting news story but (A)________ it is completely made up?\nFake news can be very harmful (B)________ it can make people less informed or even misled. (C)________, there have been various fake news reports throughout history. Why have some people written such false information? Let's look into some articles thinking about the hidden motives behind them.\n\n위 글의 내용과 일치하는 것을 고르시오.\n\nWhich is correct according to the text?",
+      "options": [
+        "It is hard to find fake news in history.",
+        "The writer will show us some examples of advertisements.",
+        "Many people seriously consider whether an article is true.",
+        "Some people write articles with hidden motives behind them.",
+        "Interesting news is helpful in that it can make us informed."
+      ],
+      "answer": "4"
+    },
+    {
+      "number": 18,
+      "question": "다음 글을 읽고 물음에 답하시오.\nSLAV SHOOTS A FRIEND IN ARGUMENT\nMejk Swenekafew, a Slav worker at the Columbia Coal Mine, was shot and ⓐ<u>seriously wounded</u> by John Pecitello near the mining camp Thursday evening.\nThe two men had an argument ⓑ<u>during</u> a meeting. The argument led to a fight, and Pecitello shot Swenekafew twice, in the chest and leg. He is now at the hospital in critical condition. Pecitello ran away after the shooting. The police are searching for him now and are warning citizens ⓒ<u>who</u> he is extremely dangerous.\n-The Daily Telegram\n\nIs there ⓓ<u>anything strange</u> about the article? Read the Slav's name backwards; it spells \"we-fake-news.\" Who wrote this and why?\nThe Daily Telegram published this fake article so that they could prove if The Daily News, their competitor, was stealing their articles. The Daily News published the same article about \"Swenekafew\" the next day and thus ⓔ<u>got caught stealing</u>. The people at The Daily News had to admit their act and were harshly criticized by the public.\n\n위 글의 밑줄 친 ⓐ~ⓔ 중, 어법상 어색한 것은?",
+      "options": [
+        "ⓐ",
+        "ⓑ",
+        "ⓒ",
+        "ⓓ",
+        "ⓔ"
+      ],
+      "answer": "3"
+    },
+    {
+      "number": 19,
+      "question": "다음 글을 읽고 물음에 답하시오.\nSLAV SHOOTS A FRIEND IN ARGUMENT\nMejk Swenekafew, a Slav worker at the Columbia Coal Mine, was shot and ⓐ<u>seriously wounded</u> by John Pecitello near the mining camp Thursday evening.\nThe two men had an argument ⓑ<u>during</u> a meeting. The argument led to a fight, and Pecitello shot Swenekafew twice, in the chest and leg. He is now at the hospital in critical condition. Pecitello ran away after the shooting. The police are searching for him now and are warning citizens ⓒ<u>who</u> he is extremely dangerous.\n-The Daily Telegram\n\nIs there ⓓ<u>anything strange</u> about the article? Read the Slav's name backwards; it spells \"we-fake-news.\" Who wrote this and why?\nThe Daily Telegram published this fake article so that they could prove if The Daily News, their competitor, was stealing their articles. The Daily News published the same article about \"Swenekafew\" the next day and thus ⓔ<u>got caught stealing</u>. The people at The Daily News had to admit their act and were harshly criticized by the public.\n\n위 글을 요약한 표의 내용 중 알맞지 않은 것은?\n\n| | |\n|---|---|\n| A News Story | It was news (A)<u>about a Slav worker who was shot and injured</u>. (B)<u>Pecitello ran away after the shooting</u>. |\n| Motive | The Daily Telegram wanted to prove that (C)<u>their competitor was stealing their articles</u>. |\n| Result | (D)<u>The people at the Daily News did not admit their act</u> and (E)<u>was criticized by the public</u>. |",
+      "options": [
+        "(A)",
+        "(B)",
+        "(C)",
+        "(D)",
+        "(E)"
+      ],
+      "answer": "4"
+    },
+    {
+      "number": 20,
+      "question": "다음 글을 읽고 물음에 답하시오.\nSLAV SHOOTS A FRIEND IN ARGUMENT\n-The Daily Telegram September 19th, 1903\nMejk Swenekafew, a Slav worker at the Columbia Coal Mine, was shot and seriously wounded by John Pecitello near the mining camp Thursday evening.\nThe two men had an argument during a meeting. The argument led to a fight, and Pecitello shot him twice, in the chest and leg. He is now at the hospital in critical condition. Pecitello ran away after the shooting. The police are searching for him now and are warning citizens that he is extremely dangerous. Fortunately, the man who was shot by his friend saved his life.\n\nIs there anything strange about the article? Read the Slav's name backwards; it spells \"we-fake-news.\" Who wrote this and why?\nThe Daily Telegram published this fake article so that they could prove if The Daily News, their competitor, was stealing their articles. The Daily News published the same article about \"Swenekafew\" the next day and thus got caught stealing. The people at The Daily News had to admit their act and were harshly criticized by the public.\n\n위 글을 읽고 대답할 수 없는 것은?",
+      "options": [
+        "What did Swenekafew do for a living?",
+        "What did Pecitello do after the shooting?",
+        "Why did Pecitello have an argument with Swenekafew?",
+        "Was there any special meaning to Swenekafew?",
+        "Why was The Daily News harshly criticized by the public?"
+      ],
+      "answer": "3"
+    },
+    {
+      "number": 21,
+      "question": "다음 글을 읽고 물음에 답하시오.\nSLAV SHOOTS A FRIEND IN ARGUMENT\n-The Daily Telegram September 19th, 1903\nMejk Swenekafew, a Slav worker at the Columbia Coal Mine, was shot and seriously wounded by John Pecitello near the mining camp Thursday evening.\nThe two men had an argument during a meeting. The argument led to a fight, and Pecitello shot him twice, in the chest and leg. He is now at the hospital in critical condition. Pecitello ran away after the shooting. The police are searching for him now and are warning citizens that he is extremely dangerous. Fortunately, the man who was shot by his friend saved his life.\n\nIs there anything strange about the article? Read the Slav's name backwards; it spells \"we-fake-news.\" Who wrote this and why?\nThe Daily Telegram published this fake article so that they could prove if The Daily News, their competitor, was stealing their articles. The Daily News published the same article about \"Swenekafew\" the next day and thus got caught stealing. The people at The Daily News had to admit their act and were harshly criticized by the public.\n\n위 글을 읽고 아래 질문에 대한 답이 되도록 빈칸에 들어갈 알맞은 말을 고르면?\n\nQ: What did The Daily Telegram want to prove by publishing the article, \"Slav Shoots a Friend in Argument?\"\nA: They wanted to prove that ______________________.",
+      "options": [
+        "The Daily News reported Slav worker was really in danger and needed a help",
+        "The Daily News was publishing not only crime articles but also sports articles",
+        "The Daily News helped to protect human rights of criminals",
+        "The Daily News reported a wrong police report",
+        "The Daily News was stealing their articles"
+      ],
+      "answer": "5"
+    },
+    {
+      "number": 22,
+      "question": "다음 글을 읽고 물음에 답하시오.\nLast night, an angry group of rhinoceroses (A)[broke / has broken] down the walls of the cage at the zoo and escaped. They also broke down the walls of the other wild animals' cages. These animals ran down the streets and injured hundreds of people. Twelve of the animals are still on the loose. Citizens should stay indoors until further notice.\n*Not a single act or incident (B)[describing / described] above has taken place.\n\nAt that time, those who read the article carefully laughed out loud. Those who didn't read it to the end got really worried. Not knowing the news was false, many people panicked. Some tried (C)[escaping / to escape] the city while others went into the parks with guns to hunt the animals. So why did The Herald make up such news? Later, they confessed that they made it up so that they could draw the readers' attention to the ⓐ________ conditions at the zoo.\n\n위 글의 괄호 (A), (B), (C)에서 어법상 알맞은 말로 바르게 연결된 것은?",
+      "options": [
+        "(A) has broken – (B) described – (C) to escape",
+        "(A) broke – (B) describing – (C) to escape",
+        "(A) broke – (B) described – (C) escaping",
+        "(A) broke – (B) described – (C) to escape",
+        "(A) has broken – (B) describing – (C) escaping"
+      ],
+      "answer": "4"
+    },
+    {
+      "number": 23,
+      "question": "다음 글을 읽고 물음에 답하시오.\nLast night, an angry group of rhinoceroses (A)[broke / has broken] down the walls of the cage at the zoo and escaped. They also broke down the walls of the other wild animals' cages. These animals ran down the streets and injured hundreds of people. Twelve of the animals are still on the loose. Citizens should stay indoors until further notice.\n*Not a single act or incident (B)[describing / described] above has taken place.\n\nAt that time, those who read the article carefully laughed out loud. Those who didn't read it to the end got really worried. Not knowing the news was false, many people panicked. Some tried (C)[escaping / to escape] the city while others went into the parks with guns to hunt the animals. So why did The Herald make up such news? Later, they confessed that they made it up so that they could draw the readers' attention to the ⓐ________ conditions at the zoo.\n\n위 글의 빈칸 ⓐ에 들어갈 말로 알맞은 것은?",
+      "options": [
+        "safe",
+        "reliable",
+        "secure",
+        "various",
+        "uncomfortable"
+      ],
+      "answer": "5"
+    },
+    {
+      "number": 24,
+      "question": "다음 글을 읽고 물음에 답하시오.\nLast night, an angry group of rhinoceroses (A)[broke / has broken] down the walls of the cage at the zoo and escaped. They also broke down the walls of the other wild animals' cages. These animals ran down the streets and injured hundreds of people. Twelve of the animals are still on the loose. Citizens should stay indoors until further notice.\n*Not a single act or incident (B)[describing / described] above has taken place.\n\nAt that time, those who read the article carefully laughed out loud. Those who didn't read it to the end got really worried. Not knowing the news was false, many people panicked. Some tried (C)[escaping / to escape] the city while others went into the parks with guns to hunt the animals. So why did The Herald make up such news? Later, they confessed that they made it up so that they could draw the readers' attention to the ⓐ________ conditions at the zoo.\n\n위 글의 내용을 가장 잘 요약한 것은?",
+      "options": [
+        "A zoo keeper unlocked the cages of animals.",
+        "Fake news made people run away from home.",
+        "Animals were smart enough to unlock the cage.",
+        "The press used an article to indicate the condition of zoo.",
+        "The media press deceived people only for their own profit."
+      ],
+      "answer": "4"
+    },
+    {
+      "number": 25,
+      "question": "다음 글을 읽고 물음에 답하시오.\nThe two articles were special cases, but there are many \"fake\" news articles published every day. ⓐ<u>독자로서, 우리는 비판적으로 읽고 그 뉴스가 진짜인지 가짜인지 판단할 필요가 있다</u>.\n\nHOW TO SPOT FAKE NEWS\nCONSIDER the Source\n(A)\nIs it from a reliable source?\nCan we trust the writer?\nCHECK the Date\n(B)\nIs it related to current events?\nREAD BEYOND the Headlines\n(C)\nDoes the headline match the content?\nFIND Supporting Sources\n(D)\nDo other related stories provide similar content?\n\n위 글의 (A)~(D) 중, 주어진 문장이 들어갈 곳으로 알맞은 곳은?\n\nIs it a new or an old story?",
+      "options": [
+        "(A)",
+        "(B)",
+        "(C)",
+        "(D)",
+        "없다"
+      ],
+      "answer": "2"
+    },
+    {
+      "number": 26,
+      "question": "다음 글을 읽고 물음에 답하시오.\nSLAV SHOOTS A FRIEND IN ARGUMENT\nMejk Swenekafew, a Slav worker at the Columbia Coal Mine, was shot and seriously wounded by John Pecitello near the mining camp Thursday evening.\nThe two men had an argument during a meeting. The argument led to a fight, and Pecitello shot Swenekafew twice, in the chest and leg. He is now at the hospital in critical condition. Pecitello ran away after the shooting. The police are searching for him now and are warning citizens that he is extremely dangerous.\n\nIs there anything strange about the article? Read the Slav's name backwards; it spells \"we-fake-news.\" Who wrote this and why?\nThe Daily Telegram published this fake article so that they could prove if The Daily News, their competitor, was stealing their articles. The Daily News published the same article about \"Swenekafew\" the next day and thus got caught stealing. The people at The Daily News had to admit their act and were harshly criticized by the public.\n\nThe article was a special case, but there are many \"fake\" news articles published every day. As readers, we need to read critically and judge whether the news is real or fake.\n\n위 글을 아래와 같이 요약할 때, 빈칸 (A)~(C)에 들어갈 말을 본문에서 찾아 한 단어로 각각 쓰시오.\n\n• The Fake News Trap\nIn 1903, The Daily Telegram published the (A)________ article to prove if their competitor (B)________ ________ their articles. The story was about a slav worker named Mejk Swenekafew being shot. The same story (C)________ ________ in The Daily News the next day. Due to the article, The Daily News was caught copying it and had to admit their wrong act.",
+      "options": [],
+      "answer": "fake / was stealing / was published",
+      "subParts": [
+        {
+          "label": "(A)",
+          "answer": "fake",
+          "acceptedAnswers": [
+            "false"
+          ]
+        },
+        {
+          "label": "(B)",
+          "answer": "was stealing"
+        },
+        {
+          "label": "(C)",
+          "answer": "was published"
+        }
+      ]
+    },
+    {
+      "number": 27,
+      "question": "다음 글을 읽고 물음에 답하시오.\n(A) Every day we watch, hear, or read interesting news. However, have you ever seriously considered whether an article is really true? Everyone likes an interesting news story but ⓐ<u>what if is it completely made up</u>?\n(B) Fake news can be very harmful in that it can make ⓑ<u>people less informed or even misled</u>. Nevertheless, there have been various fake news reports throughout history. Why have some people written such false information? Let's look into some articles ⓒ<u>thinking about the hidden motives behind them</u>.\n\nAWFUL DISASTER\n(C) Last night, an angry group of rhinoceroses broke down the walls of the cage at the zoo and escaped. They also broke down the walls of the other wild animals' cages. These animals ran down the streets and injured hundreds of people. Twelve of the animals are still on the loose. Citizens should stay indoors until further notice.\nⓓ<u>Not a single act or incident described above has taken place</u>. - The Herald November 9th, 1874\n(D) At that time, those who read the article carefully laughed out loud. Those who didn't read it to the end got really worried. (A)<u>Because they didn't know the news was false</u>, many people panicked. Some tried to escape the city while others went into the parks with guns to hunt the animals.\nSo why did The Herald make up such news? Later, they confessed that they made it up ⓔ<u>so that they could draw the readers' attention to the unsafe conditions at the zoo</u>.\n\n위 글의 밑줄 친 (A)를 6단어의 분사구문으로 바꾸어 쓰시오.\n\n→ ______________________, many people panicked.",
+      "options": [],
+      "answer": "Not knowing the news was false"
+    },
+    {
+      "number": 28,
+      "question": "다음 글을 읽고, Anna와 Mike가 나눈 대화의 내용 중 가짜뉴스를 찾아낼 때 고려해야 할 사항과 일치하지 않는 것은?\n\nHow to spot fake news!\n• Consider the Source.\nIs it from a reliable source? Can we trust the writer?\n• Check the Date\nIs it a new or an old story? Is it related to current events?\n• Read Beyond the Headlines\nDoes the headline match the content?\n• Find Supporting Sources.\nDo other related stories provide similar content?\n\nAnna: Mike, do you believe that every published article is true?\nMike: No, I try to read articles critically.\nAnna: Oh, how?\nMike: First, ⓐ<u>I read beyond the headline to see if the headline matches the content</u>. Then, ⓑ<u>I consider the source to check if the story is from a reliable source</u> or ⓒ<u>if the reader can be trusted</u>. How about you?\nAnna: ⓓ<u>I check the date of the article to see if the story is related to current events</u>. I also find supporting sources. In other words, ⓔ<u>I check if other related stories provide similar content</u>.",
+      "options": [
+        "ⓐ",
+        "ⓑ",
+        "ⓒ",
+        "ⓓ",
+        "ⓔ"
+      ],
+      "answer": "3"
+    },
+    {
+      "number": 29,
+      "question": "다음 글을 읽고 물음에 답하시오.\nWalk and You'll Get Slim and Strong!\nOur new walking shoes, Wing Walker, have various strong points. Walking with Wing Walker, you burn more calories and get slimmer. They also strengthen leg muscles because they use the hidden board technology. Upgrade your walking experience with Wing Walker!\n\n위 글을 읽고 아래 질문에 대한 답이 되도록 빈칸에 들어갈 알맞은 말을 고르면?\n\nQ: What are the strong points of the product, new walking shoes?\nA: When people walk with Wing Walker, they ______________________.",
+      "options": [
+        "use the hidden board technology",
+        "burn more calories and get slimmer",
+        "consume less calories and get slim",
+        "can strength their new walking shoes",
+        "may not upgrade their walking experience"
+      ],
+      "answer": "2"
+    }
+  ],
+  "R3": [
+    {
+      "number": 1,
+      "question": "다음 빈칸에 공통으로 들어갈 말로 알맞은 것은?\n\n• I think you ________ the meaning of the word.\n• You ________ what I'm saying.\n• Sometimes people ________ each other.",
+      "options": [
+        "mistake",
+        "misunderstand",
+        "mislead",
+        "miscount",
+        "misbehave"
+      ],
+      "answer": "2"
+    },
+    {
+      "number": 2,
+      "question": "다음 빈칸 어느 곳에도 들어갈 수 없는 단어는?\n\n• Rotten fish smells ________.\n• I found Jason to be a ________ person.\n• Tom is going to ________ that he cheated on the exam.\n• I couldn't ________ my old friend.",
+      "options": [
+        "confess",
+        "awful",
+        "reliable",
+        "recognize",
+        "argument"
+      ],
+      "answer": "5"
+    },
+    {
+      "number": 3,
+      "question": "다음 우리말과 같은 뜻이 되도록 주어진 단어 및 표현을 배열할 때 빈칸의 네 번째에 오는 것은?\n\n아이들이 길을 안전하게 건널 수 있도록 속도를 낮추시오.\nSlow down ______________________________.\n(so / safely / children / cross / that / the street / can)",
+      "options": [
+        "so",
+        "can",
+        "that",
+        "cross",
+        "safely"
+      ],
+      "answer": "2"
+    },
+    {
+      "number": 4,
+      "question": "다음 중 우리말을 바르게 영작한 것은?",
+      "options": [
+        "우리가 '사실'이라고 부르는 정보 중에 틀린 것들이 너무 많아. → There are so much place of information that we call \"facts\" are completely wrong.",
+        "간이 낮 동안 커졌다가 밤에는 작아진다고 하는 기사를 난 읽었어. → I read an article that saying the liver gets bigger while the day and gets smaller at night.",
+        "따뜻한 우유 한잔이 실제로 잠드는 데 도움을 주는 건 아니라고 의사가 말했어. → A doctor said that a glass of warm milk don't actually help you fall sleep.",
+        "체온이 낮다고 해서 감기에 걸리지는 않는다고 하는 기사를 난 읽었어. → I read an article that saying you don't catch a cold because of your body temperature is low.",
+        "나폴레옹은 실제로 키가 168cm 정도였는데, 그 시대에는 그렇게 작은 키가 아니었어. → Napoleon was actually about 168 centimeters tall, which was not that short in those times."
+      ],
+      "answer": "5"
+    },
+    {
+      "number": 5,
+      "question": "다음 중 분사구문으로 잘못 바꾼 것은?",
+      "options": [
+        "Because Jack had no classes, he played with his friends all day. → Having no classes, he played with his friends all day.",
+        "While I was watching a soccer game, I ate a pizza at my friend's house. → Watching a soccer game, I ate a pizza at my friend's house.",
+        "Because I didn't feel hungry, I didn't eat fruits on the table. → Feeling not hungry, I didn't eat fruits on the table.",
+        "When I waited for a bus, I met my English teacher. → Waiting for a bus, I met my English teacher.",
+        "Because I am tired of staying home, I'm planning to go to the festival. → Being tired of staying home, I'm planning to go to the festival."
+      ],
+      "answer": "3"
+    },
+    {
+      "number": 6,
+      "question": "다음 밑줄 친 부분을 분사구문을 사용하여 바꿔 쓰시오.\n\n<u>Because I have no one to talk to</u>, I feel lonely.\n\n→ ______________________, I feel lonely.",
+      "options": [],
+      "answer": "Having no one to talk to"
+    },
+    {
+      "number": 7,
+      "question": "다음 대화를 읽고 물음에 답하시오.\nA: Hey, Sandy. Do you think I should buy this drink? It is said that it can help me lose weight.\nB: Let me read the label more closely. Hmm, it looks a bit strange to me, David.\nA: Why do you say so?\nA: ______________________________\nB: There isn't enough information about what's in the drink.\nA: Oh, you're right.\nB: Also, it doesn't tell you how much you have to drink to lose weight.\n\n위 대화의 빈칸에 들어갈 말로 알맞지 않은 것을 고르시오.\n\nChoose the incorrect answer for the blank.",
+      "options": [
+        "Why do you think so?",
+        "What makes you say so?",
+        "What makes you think so?",
+        "Why makes you think that?",
+        "Why do you hold that view?"
+      ],
+      "answer": "4"
+    },
+    {
+      "number": 8,
+      "question": "다음 대화의 빈칸에 들어갈 말로 적절한 것은?\n\nW: I think I caught a cold because I didn't dress warmly yesterday.\nM: Well, I've read an article saying that you don't catch a cold because your body temperature is low.\nW: Really? Can you tell me more about it?\nM: The article said that ______________________________.",
+      "options": [
+        "taking a walk is good for our health",
+        "people catch colds because of viruses",
+        "we should be careful not to catch a cold",
+        "the thermometer is getting more expensive",
+        "we have to check the weather report every day"
+      ],
+      "answer": "2"
+    },
+    {
+      "number": 9,
+      "question": "다음 대화의 내용과 일치하는 것은?\n\nSumi: I read an article saying that Napoleon was actually fairly tall.\nJohn: Oh, really? Can you tell me more about it?\nSumi: According to the article, a French doctor wrote down Napoleon's height according to the French measuring system, not the English one.\nJohn: What was the difference?\nSumi: At that time, an inch in France was longer than an inch in England. So, Napoleon was actually about 168 cm tall, which was not that short in those times.",
+      "options": [
+        "Napoleon was really short in those times.",
+        "John wants to know more about Napoleon's life.",
+        "The French measuring system was not correct at that time.",
+        "An inch in France was longer than an inch in England at that time.",
+        "A French doctor wrote down Napoleon's height according to the English measuring system."
+      ],
+      "answer": "4"
+    },
+    {
+      "number": 10,
+      "question": "다음 대화를 읽고 물음에 답하시오.\nA: I read an article saying that Napoleon was actually fairly tall.\nB: Oh, really? <u>Can you tell me more about it?</u>\nA: According to the article, a French doctor wrote down Napoleon's height according to the French measuring system, not the English one.\nB: What was the difference?\nA: At that time, an inch in France was longer than an inch in England. So, Napoleon was actually about 168 cm tall, which was not that short in those times.\n\n위 대화의 밑줄 친 부분의 의도로 알맞은 것은?",
+      "options": [
+        "이의 제기하기",
+        "선호에 대해 묻기",
+        "상대방의 의견 묻기",
+        "자세한 설명 요청하기",
+        "의견에 대한 이유 듣기"
+      ],
+      "answer": "4"
+    },
+    {
+      "number": 11,
+      "question": "다음 대화를 읽고 물음에 답하시오.\nA: I read an article saying that Napoleon was actually fairly tall.\nB: Oh, really? <u>Can you tell me more about it?</u>\nA: According to the article, a French doctor wrote down Napoleon's height according to the French measuring system, not the English one.\nB: What was the difference?\nA: At that time, an inch in France was longer than an inch in England. So, Napoleon was actually about 168 cm tall, which was not that short in those times.\n\n위 대화의 내용과 일치하지 않는 것은?",
+      "options": [
+        "나폴레옹의 실제 키는 168 cm 정도였다.",
+        "어떤 프랑스 의사가 나폴레옹의 키를 적었다.",
+        "나폴레옹의 키는 프랑스식 측정법으로 기록되었다.",
+        "당시 프랑스 사람들이 영국 사람들보다 키가 더 컸다.",
+        "당시 프랑스에서의 1인치는 영국의 1인치보다 더 길었다."
+      ],
+      "answer": "4"
+    },
+    {
+      "number": 12,
+      "question": "다음 대화의 빈칸에 들어갈 말로 어색한 것은?\n\nM: Do you think I should buy this drink? It is said that it can help me lose weight.\nW: Let me check the explanation of it more closely. Hmm, it looks a bit strange to me.\nM: Why do you say so?\nW: ______________________________\nM: Oh, you're right.",
+      "options": [
+        "There isn't information about what's in the drink.",
+        "It doesn't seem to be made by a reliable company.",
+        "It doesn't tell you how much you have to drink to lose weight.",
+        "You have to think about it at least three times before you buy something.",
+        "I cannot find supporting evidence of a link between the drink and losing weight."
+      ],
+      "answer": "4"
+    },
+    {
+      "number": 13,
+      "question": "다음 글을 읽고 물음에 답하시오.\nEvery day we watch, hear, or read interesting news. (A)__________, ⓐ<u>have you ever seriously considered whether an article is really true</u>? ⓑ<u>Everyone likes an interesting news story but what if it completely made up</u>? Fake news can be very harmful in that ⓒ<u>it can make people less informed or even mislead</u>. (B)__________, ⓓ<u>there has been various fake news reports throughout history</u>. Why have some people written such false information? ⓔ<u>Let's look into some articles thought about the hidden motives behind them</u>.\n\n위 글의 빈칸 (A), (B)에 들어갈 말로 바르게 연결된 것은?",
+      "options": [
+        "(A) However – (B) At first",
+        "(A) In turn – (B) For example",
+        "(A) However – (B) Nonetheless",
+        "(A) In turn – (B) At first",
+        "(A) In the end – (B) Nonetheless"
+      ],
+      "answer": "3"
+    },
+    {
+      "number": 14,
+      "question": "다음 글을 읽고 물음에 답하시오.\nEvery day we watch, hear, or read interesting news. (A)__________, ⓐ<u>have you ever seriously considered whether an article is really true</u>? ⓑ<u>Everyone likes an interesting news story but what if it completely made up</u>? Fake news can be very harmful in that ⓒ<u>it can make people less informed or even mislead</u>. (B)__________, ⓓ<u>there has been various fake news reports throughout history</u>. Why have some people written such false information? ⓔ<u>Let's look into some articles thought about the hidden motives behind them</u>.\n\n위 글의 밑줄 친 ⓐ~ⓔ 중, 어법상 알맞은 것은?",
+      "options": [
+        "ⓐ",
+        "ⓑ",
+        "ⓒ",
+        "ⓓ",
+        "ⓔ"
+      ],
+      "answer": "1"
+    },
+    {
+      "number": 15,
+      "question": "다음 글을 읽고 물음에 답하시오.\nEvery day we watch, hear, or read interesting news. (A)__________, ⓐ<u>have you ever seriously considered whether an article is really true</u>? ⓑ<u>Everyone likes an interesting news story but what if it completely made up</u>? Fake news can be very harmful in that ⓒ<u>it can make people less informed or even mislead</u>. (B)__________, ⓓ<u>there has been various fake news reports throughout history</u>. Why have some people written such false information? ⓔ<u>Let's look into some articles thought about the hidden motives behind them</u>.\n\n위 글의 종류로 알맞은 것은?",
+      "options": [
+        "설명문",
+        "감상문",
+        "광고문",
+        "기행문",
+        "전기문"
+      ],
+      "answer": "1"
+    },
+    {
+      "number": 16,
+      "question": "다음 글을 읽고 물음에 답하시오.\nEvery day we watch, hear, or read interesting news. (A)__________, ⓐ<u>have you ever seriously considered whether an article is really true</u>? ⓑ<u>Everyone likes an interesting news story but what if it completely made up</u>? Fake news can be very harmful in that ⓒ<u>it can make people less informed or even mislead</u>. (B)__________, ⓓ<u>there has been various fake news reports throughout history</u>. Why have some people written such false information? ⓔ<u>Let's look into some articles thought about the hidden motives behind them</u>.\n\n위 글에 이어질 내용으로 가장 알맞은 것은?",
+      "options": [
+        "가짜 뉴스의 배경",
+        "가짜 뉴스의 위험성",
+        "가짜 뉴스의 숨겨진 동기",
+        "가짜 뉴스의 역사와 피해 정도",
+        "가짜 뉴스와 진짜 뉴스의 비교"
+      ],
+      "answer": "3"
+    },
+    {
+      "number": 17,
+      "question": "다음 글을 읽고 물음에 답하시오.\nAWFUL DISASTER\nLast night, an angry group of rhinoceroses broke down the walls of the cage at the zoo and escaped. They also ⓐ<u>broke down</u> the walls of the other wild animals' cages. These animals ran down the streets and ⓑ<u>injured</u> hundreds of people. Twelve of the animals ⓒ<u>are on the loose</u>. Citizens should stay indoors until ⓓ<u>further notice</u>.\n*Not a single act or incident described above has ⓔ<u>taken place</u>.\n\n위 글의 밑줄 친 ⓐ~ⓔ의 의미로 알맞은 것은?",
+      "options": [
+        "ⓐ - 고장났다",
+        "ⓑ - 다쳤다",
+        "ⓒ - 잡히지 않다",
+        "ⓓ - 추후 예측",
+        "ⓔ - 대신하다"
+      ],
+      "answer": "3"
+    },
+    {
+      "number": 18,
+      "question": "다음 글을 읽고 물음에 답하시오.\nAWFUL DISASTER\nLast night, an angry group of rhinoceroses broke down the walls of the cage at the zoo and escaped. They also ⓐ<u>broke down</u> the walls of the other wild animals' cages. These animals ran down the streets and ⓑ<u>injured</u> hundreds of people. Twelve of the animals ⓒ<u>are on the loose</u>. Citizens should stay indoors until ⓓ<u>further notice</u>.\n*Not a single act or incident described above has ⓔ<u>taken place</u>.\n\n위 기사를 읽은 후의 사람들의 반응으로 적절하지 않은 것은?",
+      "options": [
+        "Some people would try to escape the city.",
+        "People would go to the zoo and save the animals.",
+        "Those who read the article carefully would laugh out loud.",
+        "People who didn't read this article to the end would get really frightened.",
+        "Not knowing the news was false, many people would be in panic."
+      ],
+      "answer": "2"
+    },
+    {
+      "number": 19,
+      "question": "다음 글의 밑줄 친 ⓐ~ⓔ 중, 흐름상 어색한 것은?\n\nSLAV SHOOTS A FRIEND IN ARGUMENT\nMejk Swenekafew, a Slav worker at the Columbia Coal Mine, was shot and seriously ⓐ<u>wounded</u> by John Pecitello near the mining camp Thursday evening.\nThe two men had an argument during a meeting. The argument led to a fight, and Pecitello shot Swenekafew twice, in the chest and leg. He is now at the hospital in ⓑ<u>critical</u> condition. Pecitello ran away after the shooting. The police are searching for him now and are warning citizens that he is extremely ⓒ<u>safe</u>.\n\nIs there anything strange about the article? Read the Slav's name ⓓ<u>backwards</u>; it spells \"we-fake-news.\" Who wrote this and why? The Daily Telegram published this fake article so that they could prove if The Daily News, their competitor, was stealing their articles. The Daily News published the same article about \"Swenekafew\" the next day and thus got caught ⓔ<u>stealing</u>. The people at The Daily News had to admit their act and were harshly criticized by the public.",
+      "options": [
+        "ⓐ",
+        "ⓑ",
+        "ⓒ",
+        "ⓓ",
+        "ⓔ"
+      ],
+      "answer": "3"
+    },
+    {
+      "number": 20,
+      "question": "다음 글을 읽고 물음에 답하시오.\nAWFUL DISASTER\nLast night, an angry group of rhinoceroses broke down the walls of the cage at the zoo and escaped. They also broke down the walls of the other wild animals' cages. These animals ran down the streets and injured hundreds of people. Twelve of the animals are still on the loose. Citizens should stay indoors until further notice.\n*Not a single act or incident described above has taken place.\n\nAt that time, those who read the article carefully laughed out loud. Those who didn't read it to the end got really worried. Because many people didn't know the news was false, many people panicked. Some tried to escape the city while others went into the parks with guns to hunt the animals.\n(A)<u>Later, they confessed that they made it up so that they could draw the readers' attention to the unsafe conditions at the zoo</u>.\n\n위 글의 내용과 일치하도록 빈칸 ⓐ, ⓑ에 들어갈 말로 바르게 연결된 것을 고르면?\n\nThe article said that ⓐ__________ should stay indoors because the dangerous animals might ⓑ________ them.",
+      "options": [
+        "ⓐ rhinoceroses – ⓑ escape",
+        "ⓐ rhinoceroses – ⓑ wound",
+        "ⓐ citizens – ⓑ injure",
+        "ⓐ citizens – ⓑ escape",
+        "ⓐ writers – ⓑ wound"
+      ],
+      "answer": "3"
+    },
+    {
+      "number": 21,
+      "question": "다음 글을 읽고 물음에 답하시오.\nAWFUL DISASTER\nLast night, an angry group of rhinoceroses broke down the walls of the cage at the zoo and escaped. They also broke down the walls of the other wild animals' cages. These animals ran down the streets and injured hundreds of people. Twelve of the animals are still on the loose. Citizens should stay indoors until further notice.\n*Not a single act or incident described above has taken place.\n\nAt that time, those who read the article carefully laughed out loud. Those who didn't read it to the end got really worried. Because many people didn't know the news was false, many people panicked. Some tried to escape the city while others went into the parks with guns to hunt the animals.\n(A)<u>Later, they confessed that they made it up so that they could draw the readers' attention to the unsafe conditions at the zoo</u>.\n\n위 글의 밑줄 친 (A)가 답이 될 수 있는 질문으로 알맞은 것은?",
+      "options": [
+        "When was the news made?",
+        "What happened in the zoo?",
+        "Why did The Herald make up such news?",
+        "Why did some people try to escape the city?",
+        "Why were many people interested in fake news?"
+      ],
+      "answer": "3"
+    },
+    {
+      "number": 22,
+      "question": "다음 글을 읽고 물음에 답하시오.\nMejk Swenekafew, a Slav worker at the Columbia Coal Mine, was shot and seriously wounded by John Pecitello near the mining camp Thursday evening.\nThe two men had an argument during a meeting. The argument led to a fight, and ⓐ<u>Pecitello</u> shot Swenekafew twice, in the chest and leg. ⓑ<u>He</u> is now at the hospital in critical condition. Pecitello ran away after ⓒ<u>he</u> shot Swenekafew The police are searching for ⓓ<u>him</u> now and are warning citizens that ⓔ<u>he</u> is extremely dangerous.\n\n위 글의 밑줄 친 ⓐ~ⓔ 중, 가리키는 것이 다른 것은?",
+      "options": [
+        "ⓐ",
+        "ⓑ",
+        "ⓒ",
+        "ⓓ",
+        "ⓔ"
+      ],
+      "answer": "2"
+    },
+    {
+      "number": 23,
+      "question": "다음 글을 읽고 물음에 답하시오.\nMejk Swenekafew, a Slav worker at the Columbia Coal Mine, was shot and seriously wounded by John Pecitello near the mining camp Thursday evening.\nThe two men had an argument during a meeting. The argument led to a fight, and ⓐ<u>Pecitello</u> shot Swenekafew twice, in the chest and leg. ⓑ<u>He</u> is now at the hospital in critical condition. Pecitello ran away after ⓒ<u>he</u> shot Swenekafew The police are searching for ⓓ<u>him</u> now and are warning citizens that ⓔ<u>he</u> is extremely dangerous.\n\n위 글의 내용과 일치하지 않은 것은?",
+      "options": [
+        "Pecitello는 총을 쏜 뒤 달아났다.",
+        "Swenekafew는 광산에서 일하는 슬라브인이다.",
+        "경찰은 시민에게 도주한 Pecitello를 잡으라고 경고하고 있다.",
+        "Swenekafew와 Pecitello의 언쟁이 싸움으로 번졌다.",
+        "Swenekafew는 가슴과 다리에 총상을 입어서 현재 위독한 상태이다."
+      ],
+      "answer": "3"
+    },
+    {
+      "number": 24,
+      "question": "다음 글을 읽고 물음에 답하시오.\nMejk Swenekafew, a Slav worker at the Columbia Coal Mine, was shot and seriously wounded by John Pecitello near the mining camp Thursday evening.\nThe two men had an argument during a meeting. The argument led to a fight, and ⓐ<u>Pecitello</u> shot Swenekafew twice, in the chest and leg. ⓑ<u>He</u> is now at the hospital in critical condition. Pecitello ran away after ⓒ<u>he</u> shot Swenekafew The police are searching for ⓓ<u>him</u> now and are warning citizens that ⓔ<u>he</u> is extremely dangerous.\n\n위 글의 제목으로 알맞은 것은?",
+      "options": [
+        "Slav People Work Hard",
+        "Two Slavs Had an Argument",
+        "Slav Shoots a Friend in Argument",
+        "The Columbia Coal Mine is Dangerous",
+        "The Columbia Coal Mine is in Critical Condition"
+      ],
+      "answer": "3"
+    },
+    {
+      "number": 25,
+      "question": "다음 글을 읽고 물음에 답하시오.\nEveryone likes an interesting news story but ⓐ<u>만약 그것이 완전히 지어낸 것이라면 어떻게 할 것인가</u>? Fake news can be very harmful in that it can make people less informed or even misled. Nevertheless, there have been various fake news reports throughout history. Why have some people written such false information? Let's look into some articles ⓑ<u>그 뒤에 숨겨진 동기를 생각하면서</u>.\n\nAWFUL DISASTER\n(A) Last night, an angry group of rhinoceroses broke down the walls of the cage at the zoo and escaped. (B) These animals ran down the streets and injured hundreds of people. Twelve of the animals are still on the loose. (C) Citizens should stay indoors until further notice. (D)\nNot a single act or incident described above has taken place. (E)\n\nAt that time, those who read the article carefully laughed out loud. Those who didn't read it to the end got really worried. Not knowing the news was false, many people panicked. Some tried to escape the city while others went into the parks with guns to hunt the animals.\nSo why did The Herald make up such news? Later, they confessed that they made it up so that they could draw the readers' attention to the unsafe conditions at the zoo.\n\n위 글의 밑줄 친 ⓐ의 우리말을 주어진 <조건>에 알맞게 영작하시오.\n\n<조건>\ncompletely, what, make up을 활용하되 필요할 경우 변형할 것\n\n→ Everyone likes an interesting news story but ______________________?",
+      "options": [],
+      "answer": "what if it is completely made up",
+      "acceptedAnswers": [
+        "what if it is completely made up?"
+      ]
+    },
+    {
+      "number": 26,
+      "question": "다음 글을 읽고 물음에 답하시오.\nEveryone likes an interesting news story but ⓐ<u>만약 그것이 완전히 지어낸 것이라면 어떻게 할 것인가</u>? Fake news can be very harmful in that it can make people less informed or even misled. Nevertheless, there have been various fake news reports throughout history. Why have some people written such false information? Let's look into some articles ⓑ<u>그 뒤에 숨겨진 동기를 생각하면서</u>.\n\nAWFUL DISASTER\n(A) Last night, an angry group of rhinoceroses broke down the walls of the cage at the zoo and escaped. (B) These animals ran down the streets and injured hundreds of people. Twelve of the animals are still on the loose. (C) Citizens should stay indoors until further notice. (D)\nNot a single act or incident described above has taken place. (E)\n\nAt that time, those who read the article carefully laughed out loud. Those who didn't read it to the end got really worried. Not knowing the news was false, many people panicked. Some tried to escape the city while others went into the parks with guns to hunt the animals.\nSo why did The Herald make up such news? Later, they confessed that they made it up so that they could draw the readers' attention to the unsafe conditions at the zoo.\n\n위 글의 밑줄 친 우리말 ⓑ와 같은 뜻이 되도록 <보기>의 단어들을 배열할 때, 5번째로 올 단어는?\n\n<보기> the / them / thinking / motives / about / behind / hidden",
+      "options": [
+        "about",
+        "behind",
+        "hidden",
+        "motives",
+        "the"
+      ],
+      "answer": "4"
+    },
+    {
+      "number": 27,
+      "question": "다음 글을 읽고 물음에 답하시오.\nThere are many \"fake\" news articles published every day. As readers, we need to read critically and judge whether the news is real or fake.\n\nHow to spot fake news!\nⓐ________ the Source\n• Is it from a ⓑ________ source?\n• Can we ⓒ________ the writer?\nCHECK the Date\n• Is it a new or an old story?\n• Is it related to ⓓ________ events?\nREAD BEYOND the Headlines\n• Does the headline ⓔ________ the content?\n\n위 글의 빈칸 ⓐ~ⓔ에 들어갈 말로 알맞지 않은 것은?",
+      "options": [
+        "ⓐ: consider",
+        "ⓑ: release",
+        "ⓒ: trust",
+        "ⓓ: current",
+        "ⓔ: match"
+      ],
+      "answer": "2"
+    },
+    {
+      "number": 28,
+      "question": "다음 글을 읽고 물음에 답하시오.\nThere are many \"fake\" news articles published every day. As readers, we need to read critically and judge whether the news is real or fake.\n\nHow to spot fake news!\nⓐ________ the Source\n• Is it from a ⓑ________ source?\n• Can we ⓒ________ the writer?\nCHECK the Date\n• Is it a new or an old story?\n• Is it related to ⓓ________ events?\nREAD BEYOND the Headlines\n• Does the headline ⓔ________ the content?\n\n위 글의 제목으로 가장 적절한 것은?",
+      "options": [
+        "Fake News: You Must Judge",
+        "Too Much Information Causes Stress",
+        "Learn From the Future Not From the Past",
+        "Leave the Press Media that Won't Give Truth",
+        "Hunger: the Best Source of Fake News"
+      ],
+      "answer": "1"
+    },
+    {
+      "number": 29,
+      "question": "다음 신문 기사의 제목으로 알맞은 것은?\n\nDAILY NEWS   may 7th, 2020\n______________________________\nWe have been wrong about Napoleon's height. The misunderstanding came from the difference between the French measuring system and the English one. He was actually about 168 cm tall!",
+      "options": [
+        "Was Napoleon Really short?",
+        "How Much Weight Did Napoleon Lose?",
+        "What's the Measuring System of Rome?",
+        "The Story of Napoleon's Army in France",
+        "The Misunderstanding of Napoleon's Age"
+      ],
+      "answer": "1"
+    }
+  ],
+  "R4": [
+    {
+      "number": 1,
+      "question": "다음 문장의 빈칸에 공통으로 들어갈 말로 알맞은 것은?\n\n• Oedipus solved Sphinx's ________.\n• Can you guess the answer to this ________?\n• Here's a ________ for you, \"What is the drier, the wetter?\"",
+      "options": [
+        "judgment",
+        "theory",
+        "riddle",
+        "principle",
+        "research"
+      ],
+      "answer": "3"
+    },
+    {
+      "number": 2,
+      "question": "다음 뒤섞인 철자 순서를 바로잡을 때, ⓐ, ⓑ, ⓒ, ⓓ, ⓔ에 들어가는 철자를 순서대로 나열한 단어의 영영풀이로 적절한 것은? (모든 단어의 영영풀이는 선택지에 제시됨)\n(그림 설명: 네 단어의 철자가 뒤섞여 있고, 바로잡은 철자 칸 중 일부에 ⓐ~ⓔ 표시가 있다.)\n\nMDSLIAE → M _ _ _ _ _ _ (첫 글자 M이 주어짐, ⓒ = M)\nRSTPUPO → _ _ _ _ _ _ ⓔ (ⓔ = 마지막 칸)\nSAPCEE → _ _ _ ⓐ _ _ (ⓐ = 네 번째 칸)\nBEIRCSD → ⓑ _ _ _ _ ⓓ _ _ (ⓑ = 첫 번째 칸, ⓓ = 여섯 번째 칸)\n\n완성 단어: ⓐ ⓑ M ⓓ ⓔ",
+      "options": [
+        "to get free from something",
+        "to agree that something is true",
+        "to help to show something to be true",
+        "to cause someone to believe something that is not true",
+        "to say or write what someone or something is like"
+      ],
+      "answer": "2"
+    },
+    {
+      "number": 3,
+      "question": "다음 중 의미가 다른 문장은?",
+      "options": [
+        "He studies hard to pass the test.",
+        "He studies hard in order to pass the test.",
+        "He studies so hard that he can pass the test.",
+        "He studies hard so that he can pass the test.",
+        "He studies hard in order that he can pass the test."
+      ],
+      "answer": "3"
+    },
+    {
+      "number": 4,
+      "question": "다음 <보기>와 같이 문장을 바꾸어 쓸 때, 어법상 바르지 못한 것은?\n\n<보기>\nI keep my phone off while I'm reading books.\n→ I keep my phone off reading books.",
+      "options": [
+        "Because I got up late, I brought some bread to school for breakfast. → Getting up late, I brought some bread to school for breakfast.",
+        "Because I felt hungry, I ate some snacks. → Feeling hungry, I ate some snacks.",
+        "As she had failed twice, she didn't want to try again. → Failing twice, she didn't want to try again.",
+        "As she listened to music, she did yoga. → Listening to music, she did yoga.",
+        "When I concentrate on reading, I don't feel hungry. → Concentrating on reading, I don't feel hungry."
+      ],
+      "answer": "3"
+    },
+    {
+      "number": 5,
+      "question": "다음 밑줄 친 부분을 분사구문을 사용하여 바꿔 쓰시오.\n\n<u>When I arrived at the airport</u>, I saw the movie star.\n\n→ ______________________, I saw the movie star.",
+      "options": [],
+      "answer": "Arriving at the airport"
+    },
+    {
+      "number": 6,
+      "question": "다음 <조건>에 알맞게 문장을 완성하시오.\n\n<조건>\n• 괄호 안의 단어를 모두 배열할 것\n• 괄호 안의 단어를 모두 배열하되, 그 중에 한 개를 변형시켜 분사구문이 되도록 완성할 것\n\n(1) 밤에 배가 고팠기 때문에, 나는 테이블 위에 있는 빵을 먹었다.\n→ ______________________, I ate some bread on the table. (at, hungry, feel, night)\n(2) 길에서 나를 보았을 때, 그녀는 도망갔다.\n→ ______________________, she ran away. (the, me, street, see, on)",
+      "options": [],
+      "answer": "Feeling hungry at night / Seeing me on the street",
+      "subParts": [
+        {
+          "label": "(1)",
+          "answer": "Feeling hungry at night"
+        },
+        {
+          "label": "(2)",
+          "answer": "Seeing me on the street"
+        }
+      ]
+    },
+    {
+      "number": 7,
+      "question": "다음 주어진 말에 이어질 순서로 적절한 것은?\n\nA: Wow! The news title says \"Longer vacation for students.\" Hey, we're going to have a longer vacation!\n\n(A) Why do you think so?\n(B) Wait! We should check first if it is true.\n(C) Some news uses a shocking title but its content may tell a different story.\n(D) Oh, I see. I should read beyond the news title.",
+      "options": [
+        "(A)-(B)-(C)-(D)",
+        "(B)-(A)-(C)-(D)",
+        "(C)-(B)-(A)-(D)",
+        "(D)-(A)-(C)-(B)",
+        "(D)-(B)-(A)-(C)"
+      ],
+      "answer": "2"
+    },
+    {
+      "number": 8,
+      "question": "다음 대화의 빈칸에 들어갈 말로 알맞은 것은?\n\nM: Jane, do you usually get news online or from the newspaper?\nW: Well, I usually watch TV news.\nM: TV news? Is there any special reason?\nW: I think TV is the most useful way to get news.\nM: Why do you say so?\nW: ______________________________ So, I just watch the main news on TV.\nM: I see your point.",
+      "options": [
+        "I don't watch TV news any more.",
+        "I enjoy reading texts like articles.",
+        "I would read all the main news in the newspaper.",
+        "I always read the newspaper instead of watching news on TV.",
+        "I have to spend too much time reading all the news online or in the newspaper."
+      ],
+      "answer": "5"
+    },
+    {
+      "number": 9,
+      "question": "다음 대화의 빈칸에 들어갈 말로 알맞은 것은?\n\nW: What are you reading, John?\nM: I'm reading a book of riddles.\nW: Riddles? Aren't they for children?\nM: Actually, no. Books of riddles are really useful for adults.\nW: Really? Why do you say so?\nM: They help us think more __________. We need to think outside the box to find the answers.\nW: You mean that riddles can get us thinking in new ways.",
+      "options": [
+        "correctly",
+        "honestly",
+        "creatively",
+        "carefully",
+        "negatively"
+      ],
+      "answer": "3"
+    },
+    {
+      "number": 10,
+      "question": "다음 대화를 읽고 물음에 답하시오.\nYujin: I think I caught a cold because I didn't dress warmly yesterday.\nSangho: Well, I've read an article saying that you don't catch a cold because your body temperature is low.\nYujin: Really? Can you tell me more about it?\nSangho: The article said that people catch colds because of viruses.\n\n위 대화의 내용과 일치하지 않는 것은?",
+      "options": [
+        "Yujin had a cold.",
+        "Yujin didn't dress warmly yesterday.",
+        "Sangho says a different opinion from Yujin's.",
+        "Sangho says viruses are active when it's cold.",
+        "Sangho read a article about the cause of a cold."
+      ],
+      "answer": "4"
+    },
+    {
+      "number": 11,
+      "question": "다음 대화를 읽고 물음에 답하시오.\nYujin: I think I caught a cold because I didn't dress warmly yesterday.\nSangho: Well, I've read an article saying that you don't catch a cold because your body temperature is low.\nYujin: Really? Can you tell me more about it?\nSangho: The article said that people catch colds because of viruses.\n\n위 대화의 주제로 가장 알맞은 것은?",
+      "options": [
+        "the history of cold viruses",
+        "the reason of catching a cold",
+        "the wrong article about a cold",
+        "the importance of dressing warmly",
+        "the good effect of low body temperature"
+      ],
+      "answer": "2"
+    },
+    {
+      "number": 12,
+      "question": "다음 글을 읽고 물음에 답하시오.\nIs there anything strange about the article? Read the Slav's name, Swenekafew, backwards; it spells, \"(A)______________________.\" Who ⓐ<u>wrote</u> this and why?\nThe Daily Telegram published this fake article so that they ⓑ<u>could prove</u> if The Daily News, their competitor, was stealing their articles. The Daily News published the same article about \"Swenekafew\" the next day and thus ⓒ<u>got caught</u> stealing. The people at The Daily News ⓓ<u>had to</u> admit their act and ⓔ<u>criticizing</u> by the public.\n\n위 글의 빈칸 (A)에 들어갈 말로 알맞은 것은?",
+      "options": [
+        "we catch stealing the same article",
+        "we publish this fake article",
+        "we prove the fact",
+        "we make news",
+        "we fake news"
+      ],
+      "answer": "5"
+    },
+    {
+      "number": 13,
+      "question": "다음 글을 읽고 물음에 답하시오.\nIs there anything strange about the article? Read the Slav's name, Swenekafew, backwards; it spells, \"(A)______________________.\" Who ⓐ<u>wrote</u> this and why?\nThe Daily Telegram published this fake article so that they ⓑ<u>could prove</u> if The Daily News, their competitor, was stealing their articles. The Daily News published the same article about \"Swenekafew\" the next day and thus ⓒ<u>got caught</u> stealing. The people at The Daily News ⓓ<u>had to</u> admit their act and ⓔ<u>criticizing</u> by the public.\n\n위 글의 밑줄 친 ⓐ~ⓔ 중, 어법상 어색한 것은?",
+      "options": [
+        "ⓐ",
+        "ⓑ",
+        "ⓒ",
+        "ⓓ",
+        "ⓔ"
+      ],
+      "answer": "5"
+    },
+    {
+      "number": 14,
+      "question": "다음 글을 읽고 물음에 답하시오.\nIs there anything strange about the article? Read the Slav's name, Swenekafew, backwards; it spells, \"(A)______________________.\" Who ⓐ<u>wrote</u> this and why?\nThe Daily Telegram published this fake article so that they ⓑ<u>could prove</u> if The Daily News, their competitor, was stealing their articles. The Daily News published the same article about \"Swenekafew\" the next day and thus ⓒ<u>got caught</u> stealing. The people at The Daily News ⓓ<u>had to</u> admit their act and ⓔ<u>criticizing</u> by the public.\n\n위 글의 내용과 일치하는 것은?",
+      "options": [
+        "기사에 나온 슬라브인은 실존 인물이었다.",
+        "The Daily News가 가짜 뉴스를 처음 발행했다.",
+        "대중은 The Daily News의 행동을 혹독하게 비난했다.",
+        "The Daily Telegram은 대중의 이목을 끌기 위해 가짜 뉴스를 발행했다.",
+        "The Daily News와 The Daily Telegram은 서로 협력하는 관계였다."
+      ],
+      "answer": "3"
+    },
+    {
+      "number": 15,
+      "question": "다음 글을 읽고 물음에 답하시오.\n<AWFUL DISASTER>\nLast night, an angry group of rhinoceroses broke down the walls of the cage at the zoo and (A)______. They also (B)______ the walls of the other wild animals' cages. These animals ran down the streets and (C)______ hundreds of people. Twelve of the animals (D)______ still on the loose. Citizens should (E)______ indoors until further notice.\n*Not a single act or incident described above has taken place.\n\nAt that time, those who read the article carefully laughed out loud. Those who didn't read it to the end got really worried. ⓐ<u>그 기사가 거짓이라는 것을 알지 못했기 때문에</u>, many people panicked. Some tried to escape the city while others went into the parks with guns to hunt the animals.\nSo why did The Herald make up such news? Later, they confessed that they made it up so that they could draw the readers' attention to the unsafe conditions at the zoo.\n\n위 글의 빈칸 (A)~(E)에 들어갈 단어로 바르게 연결된 것은?",
+      "options": [
+        "(A): to escape",
+        "(B): breaking down",
+        "(C): injured",
+        "(D): had been",
+        "(E): have stayed"
+      ],
+      "answer": "3"
+    },
+    {
+      "number": 16,
+      "question": "다음 글을 읽고 물음에 답하시오.\n<AWFUL DISASTER>\nLast night, an angry group of rhinoceroses broke down the walls of the cage at the zoo and (A)______. They also (B)______ the walls of the other wild animals' cages. These animals ran down the streets and (C)______ hundreds of people. Twelve of the animals (D)______ still on the loose. Citizens should (E)______ indoors until further notice.\n*Not a single act or incident described above has taken place.\n\nAt that time, those who read the article carefully laughed out loud. Those who didn't read it to the end got really worried. ⓐ<u>그 기사가 거짓이라는 것을 알지 못했기 때문에</u>, many people panicked. Some tried to escape the city while others went into the parks with guns to hunt the animals.\nSo why did The Herald make up such news? Later, they confessed that they made it up so that they could draw the readers' attention to the unsafe conditions at the zoo.\n\n위 글의 밑줄 친 ⓐ의 우리말을 바르게 영작한 것은?",
+      "options": [
+        "Having known the news was false",
+        "Since they didn't know the news was false",
+        "Knowing not many people the news was false",
+        "Because they don't know the news was false",
+        "Not knowing they didn't know the news was false"
+      ],
+      "answer": "2"
+    },
+    {
+      "number": 17,
+      "question": "다음 글을 읽고 물음에 답하시오.\n<AWFUL DISASTER>\nLast night, an angry group of rhinoceroses broke down the walls of the cage at the zoo and (A)______. They also (B)______ the walls of the other wild animals' cages. These animals ran down the streets and (C)______ hundreds of people. Twelve of the animals (D)______ still on the loose. Citizens should (E)______ indoors until further notice.\n*Not a single act or incident described above has taken place.\n\nAt that time, those who read the article carefully laughed out loud. Those who didn't read it to the end got really worried. ⓐ<u>그 기사가 거짓이라는 것을 알지 못했기 때문에</u>, many people panicked. Some tried to escape the city while others went into the parks with guns to hunt the animals.\nSo why did The Herald make up such news? Later, they confessed that they made it up so that they could draw the readers' attention to the unsafe conditions at the zoo.\n\n위 글의 내용과 일치하지 않은 것은?",
+      "options": [
+        "기사의 사건은 실제로 발생하지 않았다.",
+        "기사를 주의 깊게 읽었던 사람들은 크게 웃었다.",
+        "몇몇 사람들은 총을 들고 공원으로 가서 동물들을 사냥하는데 성공했다.",
+        "기사는 The Herald에서 작성했고, 후에 그들은 기사를 작성한 이유를 고백했다.",
+        "The Herald는 동물원의 안전하지 않은 상태에 대해 독자들의 주의를 끌기 위해 기사를 지어냈다."
+      ],
+      "answer": "3"
+    },
+    {
+      "number": 18,
+      "question": "다음 글을 읽고 물음에 답하시오.\n(A)______________________\nMejk Swenekafew, a Slav worker at the Columbia Coal Mine, was shot and seriously wounded by John Pecitello near the mining camp Thursday evening.\nThe two men had an argument during a meeting. The argument led to a fight, and ⓐ<u>Pecitello</u> shot Swenekafew twice, in the chest and leg. ⓑ<u>He</u> is now at the hospital in critical condition. ⓒ<u>The shooter</u> ran away after the incident. The police are searching for ⓓ<u>him</u> now and are warning citizens that ⓔ<u>he</u> is extremely dangerous.\n\n위 글의 빈칸 (A)에 들어갈 신문 기사의 제목으로 가장 적절한 것은?",
+      "options": [
+        "슬라브인 탈주사건",
+        "광산 사업의 위험성",
+        "슬라브인의 노동의 가치",
+        "언쟁 중 일어난 총기사건",
+        "우수한 컬럼비아의 광산 사업"
+      ],
+      "answer": "4"
+    },
+    {
+      "number": 19,
+      "question": "다음 글을 읽고 물음에 답하시오.\n(A)______________________\nMejk Swenekafew, a Slav worker at the Columbia Coal Mine, was shot and seriously wounded by John Pecitello near the mining camp Thursday evening.\nThe two men had an argument during a meeting. The argument led to a fight, and ⓐ<u>Pecitello</u> shot Swenekafew twice, in the chest and leg. ⓑ<u>He</u> is now at the hospital in critical condition. ⓒ<u>The shooter</u> ran away after the incident. The police are searching for ⓓ<u>him</u> now and are warning citizens that ⓔ<u>he</u> is extremely dangerous.\n\n위 글의 Swenekafew에 대한 기사내용으로 일치하는 것은?",
+      "options": [
+        "콜롬비아의 금을 캐는 광산 근처에서 일을 했다.",
+        "게르만계 동료인 Pecitello와 언쟁을 벌였다.",
+        "Pecitello의 가슴과 다리에 총을 쐈다.",
+        "현재 병원에서 치명적인 상태이다.",
+        "경찰에 의해 쫓기고 있는 상태다."
+      ],
+      "answer": "4"
+    },
+    {
+      "number": 20,
+      "question": "다음 글을 읽고 물음에 답하시오.\n(A)______________________\nMejk Swenekafew, a Slav worker at the Columbia Coal Mine, was shot and seriously wounded by John Pecitello near the mining camp Thursday evening.\nThe two men had an argument during a meeting. The argument led to a fight, and ⓐ<u>Pecitello</u> shot Swenekafew twice, in the chest and leg. ⓑ<u>He</u> is now at the hospital in critical condition. ⓒ<u>The shooter</u> ran away after the incident. The police are searching for ⓓ<u>him</u> now and are warning citizens that ⓔ<u>he</u> is extremely dangerous.\n\n위 글을 읽고 Swenekafew에 대해 어떠한 검색 결과가 나오지 않았다면, 아래 글의 Fake News 구별 방법 ⓐ~ⓔ 중 이 기사를 Fake News라고 판단하기에 적용할 수 있는 가장 적절한 질문은?\n\n<How to Spot Fake News!>\nConsider the Source\nⓐCan we trust the writer?\nCheck the Date\nⓑIs it a new or an old story?\nⓒIs it related to current events?\nRead Beyond the Headlines\nⓓDoes the headline match the content?\nFind Supporting Sources\nⓔDo other related stories provide similar content?",
+      "options": [
+        "ⓐ",
+        "ⓑ",
+        "ⓒ",
+        "ⓓ",
+        "ⓔ"
+      ],
+      "answer": "5"
+    },
+    {
+      "number": 21,
+      "question": "다음 글을 읽고 물음에 답하시오.\nLast night, an angry group of rhinoceroses broke down the walls of the cage at the zoo and escaped. They also broke down the walls of the other wild animals' cage. These animals ran down the streets and injured hundreds of people. Twelve of the animals should stay indoors until further notice.\nAt that time, those who read the article carefully laughed out loud. Those who didn't read it to the end got really worried. Not knowing the news was false, many people panicked. Some tried to escape the city while others went into the parks with guns to hunt the animals.\nSo why did the herald make up such news? Later, they confessed that they made it up so that they could draw the readers' attention to the unsafe conditions at the zoo.\n\n위 글을 읽고 답을 할 수 없는 질문으로 가장 적절한 것은?",
+      "options": [
+        "Why can fake news be harmful?",
+        "How many people were injured?",
+        "What happened in the zoo last night?",
+        "How many animals are still on the loose?",
+        "What did those who did not know the news was false do?"
+      ],
+      "answer": "1"
+    },
+    {
+      "number": 22,
+      "question": "다음 글을 읽고 물음에 답하시오.\nLast night, an angry group of rhinoceroses broke down the walls of the cage at the zoo and escaped. They also broke down the walls of the other wild animals' cage. These animals ran down the streets and injured hundreds of people. Twelve of the animals should stay indoors until further notice.\nAt that time, those who read the article carefully laughed out loud. Those who didn't read it to the end got really worried. Not knowing the news was false, many people panicked. Some tried to escape the city while others went into the parks with guns to hunt the animals.\nSo why did the herald make up such news? Later, they confessed that they made it up so that they could draw the readers' attention to the unsafe conditions at the zoo.\n\n위 글의 내용과 다른 것은?",
+      "options": [
+        "화가 난 코뿔소 떼가 동물원 우리 벽을 부수고 도망친 것은 어젯밤이었다.",
+        "코뿔소들은 다른 야생 동물 우리의 벽도 부수었다.",
+        "시민들은 추후 안내가 있을 때까지 집 안에 머물러야 한다.",
+        "많은 사람들이 겁에 질린 것은 그 기사가 거짓이라는 것을 몰랐기 때문이다.",
+        "그 당시 이 기사를 주의 깊게 읽었던 사람들은 미소를 지었다."
+      ],
+      "answer": "5"
+    },
+    {
+      "number": 23,
+      "question": "다음 글을 읽고 물음에 답하시오.\nSLAV SHOOTS A FRIEND IN ARGUMENT\n(A) Mejk Swenekafew, a Slav worker at the Columbia Coal Mine, was shot and seriously wounded by John Pecitello near the mining camp Thursday evening.\nThe two men had an argument during a meeting. (B) The argument led to a fight, and Pecitello shot Swenekafew twice, in the chest and leg. (C) Pecitello ran away after the shooting. (D) The police are searching for him now and are warning citizens that he is extremely dangerous. (E)\n\n위 글의 (A)~(E) 중, 주어진 문장이 들어갈 알맞은 곳은?\n\nHe is now at the hospital in critical condition.",
+      "options": [
+        "(A)",
+        "(B)",
+        "(C)",
+        "(D)",
+        "(E)"
+      ],
+      "answer": "3"
+    },
+    {
+      "number": 24,
+      "question": "다음 글을 읽고 물음에 답하시오.\nSLAV SHOOTS A FRIEND IN ARGUMENT\n(A) Mejk Swenekafew, a Slav worker at the Columbia Coal Mine, was shot and seriously wounded by John Pecitello near the mining camp Thursday evening.\nThe two men had an argument during a meeting. (B) The argument led to a fight, and Pecitello shot Swenekafew twice, in the chest and leg. (C) Pecitello ran away after the shooting. (D) The police are searching for him now and are warning citizens that he is extremely dangerous. (E)\n\n위 글을 읽고 답할 수 없는 것은?",
+      "options": [
+        "Where is Pecitello now?",
+        "When did the accident happen?",
+        "Where did the accident happen?",
+        "What are the police doing after the accident?",
+        "How many times did Pecitello shoot Swenekafew?"
+      ],
+      "answer": "1"
+    },
+    {
+      "number": 25,
+      "question": "다음 글을 읽고 답할 수 없는 질문은?\n\nLast night, an angry group of rhinoceroses broke down the walls of the cage at the zoo and escaped. They also broke down the walls of the other wild animals' cages. These animals ran down the streets and injured hundreds of people. Twelve of the animals are still on the loose. Citizens should stay indoors until further notice.",
+      "options": [
+        "What did citizens have to do?",
+        "How many people got injured?",
+        "How many animals are still free?",
+        "What made rhinoceroses get angry?",
+        "What broke down the walls of the cage at the zoo at first?"
+      ],
+      "answer": "4"
+    },
+    {
+      "number": 26,
+      "question": "다음 글을 읽고 물음에 답하시오.\n[A] AWFUL DISASTER\nLast night, an angry group of rhinoceroses broke down the walls of the cage at the zoo and escaped. They also broke down the walls of the other cages. These animals ran down the streets and injured hundreds of people. Twelve of the animals are still on the loose. Citizens should stay indoors until further notice.\nThe Herald   November 9th, 1874\n\n[B]\nAt that time, those who read the article carefully laughed out loud. There was actually a little comment that said 'Not a single act or incident described above has taken place.' at the end of the article below the picture of animals. Those who didn't read it to the end and missed the comment got really worried. Not knowing the news was false, many people panicked. Some tried to escape the city while others went into the parks with guns to hunt the animals.\nSo why did The Herald make up such news? Later, they confessed that they made it up so that they could draw the readers' attention to the unsafe conditions at the zoo.\n\n[C] As readers, we need to read articles critically.\nHow to read articles critically\n(1) Consider the Source\n- Is it from a reliable source?\n- Can we trust the writer?\n(2) Check the Date\n- Is it a new or an old story?\n- Is it related to events happening these days?\n(3) Read Beyond the Headlines\n- Does the headline match the content?\n(4) Find Supporting Sources\n- Do other related stories provide similar content?\n\n위 글의 [A]~[C]를 올바르게 이해한 것은?",
+      "options": [
+        "In [A], the article said that twelve animals have not got caught yet.",
+        "According to [B], the readers who read the article to the end carefully became really worried.",
+        "In [A], some animals tried to escape the city when people with guns went into the zoo.",
+        "The purpose of The Herald was to make people who read the article pay attention to saving wild animals.",
+        "Four important ways to consider when people write their own articles are mentioned."
+      ],
+      "answer": "1"
+    },
+    {
+      "number": 27,
+      "question": "다음 글을 읽고 물음에 답하시오.\n[A] AWFUL DISASTER\nLast night, an angry group of rhinoceroses broke down the walls of the cage at the zoo and escaped. They also broke down the walls of the other cages. These animals ran down the streets and injured hundreds of people. Twelve of the animals are still on the loose. Citizens should stay indoors until further notice.\nThe Herald   November 9th, 1874\n\n[B]\nAt that time, those who read the article carefully laughed out loud. There was actually a little comment that said 'Not a single act or incident described above has taken place.' at the end of the article below the picture of animals. Those who didn't read it to the end and missed the comment got really worried. Not knowing the news was false, many people panicked. Some tried to escape the city while others went into the parks with guns to hunt the animals.\nSo why did The Herald make up such news? Later, they confessed that they made it up so that they could draw the readers' attention to the unsafe conditions at the zoo.\n\n[C] As readers, we need to read articles critically.\nHow to read articles critically\n(1) Consider the Source\n- Is it from a reliable source?\n- Can we trust the writer?\n(2) Check the Date\n- Is it a new or an old story?\n- Is it related to events happening these days?\n(3) Read Beyond the Headlines\n- Does the headline match the content?\n(4) Find Supporting Sources\n- Do other related stories provide similar content?\n\n위 글의 [C]의 (1)~(4)의 기준을 적용하여 [A] 기사를 비판적으로 읽지 않은 사람은?",
+      "options": [
+        "재은: The article was written by The Herald, a famous and trusted newspaper company. We could trust the source.",
+        "현덕: The article was published in 1874. It means that it is such an old story. Plus, I haven't heard of any related current incident on TV or on the Internet.",
+        "은주: When I take a look at the article's headline 'AWFUL DISASTER', it fits the story about the animals on the loose.",
+        "은명: I thought about the main purpose of the article. I think that it wanted the citizens to stay indoors until further notice.",
+        "근영: I found out other newspapers published articles about animals that escaped from the zoo in the city center."
+      ],
+      "answer": "4"
+    },
+    {
+      "number": 28,
+      "question": "다음 글의 내용과 관련 없는 의견은?\n\n1. Consider the Source\nIs it from a reliable source?\nCan we trust the writer?\n2. Check the Date\nIs it a new or an old story?\nIs it related to current events?\n3. Read Beyond the Headlines\nDoes the headline match the content?\n4. Find Supporting Sources\nDo other related stories provide similar content?",
+      "options": [
+        "소정: 제목이 기사 내용과 일치하는지가 중요하기 때문에 기사 제목 그 이상을 읽는 것이 가장 중요하다고 생각해.",
+        "현영: 글쓴이를 신뢰할 수 있다면 그 기사를 믿을 수 있기 때문에 기사의 출처를 고려하는 것이 가장 중요하다고 생각해.",
+        "미화: 최신 기사를 읽고 있는지 확인하기 위해 기사 날짜를 체크하는 것이 가장 중요하다고 생각해.",
+        "민숙: 다양한 댓글을 통해 기사의 사실 여부를 판단하려면 다른 사람들의 댓글을 읽어보는 것이 가장 중요하다고 생각해.",
+        "대성: 관련 자료를 통해 기사의 정확성을 확인할 수 있기 때문에 나는 뒷받침하는 자료들을 찾는 것이 가장 중요하다고 생각해."
+      ],
+      "answer": "4"
+    },
+    {
+      "number": 29,
+      "question": "다음 글의 밑줄 친 ⓐ~ⓔ 중, 어법상 어색한 것은?\n\nWalk and You'll Get Slim and Strong!\nOur new walking shoes, Wing Walker, ⓐ<u>have</u> various strong points. ⓑ<u>Walked</u> with Wing Walker, you burn more calories and ⓒ<u>get</u> slimmer. They also strengthen leg muscles ⓓ<u>because</u> they use the hidden board technology. ⓔ<u>Upgrade</u> your walking experience with Wing Walker!",
+      "options": [
+        "ⓐ",
+        "ⓑ",
+        "ⓒ",
+        "ⓓ",
+        "ⓔ"
+      ],
+      "answer": "2"
+    }
+  ],
+  "R5": [
+    {
+      "number": 1,
+      "question": "다음 문장의 빈칸에 공통으로 들어갈 말로 알맞은 것은?\n\n• I'm looking for a quiet ________ to fish.\n• He put on a white tie with blue ________s.\n• There are a lot of ________s on your window.\n• I ________ed him at once as an American.",
+      "options": [
+        "line",
+        "dust",
+        "point",
+        "spot",
+        "source"
+      ],
+      "answer": "4"
+    },
+    {
+      "number": 2,
+      "question": "다음 영영풀이가 어색한 것은?",
+      "options": [
+        "disaster: a strong disagreement in talking or discussing something",
+        "panic: to suddenly fell so worried that you cannot be reasonable",
+        "mislead: to cause someone to believe something that is not true",
+        "spot: to see or notice someone or something",
+        "fake: not real but made to seem real"
+      ],
+      "answer": "1"
+    },
+    {
+      "number": 3,
+      "question": "다음 주어진 문장과 같은 뜻이 되도록 빈칸 (A), (B)에 들어갈 말이 바르게 연결된 것을 고르면?\n\nRead the book carefully so that you can find hidden ideas.\n→ Read the book carefully (A)________ you can find hidden ideas.\n→ Read the book carefully (B)________ find hidden ideas.",
+      "options": [
+        "(A) such that – (B) in order that",
+        "(A) so as to – (B) in order to",
+        "(A) such that – (B) order to",
+        "(A) in order that – (B) so as to",
+        "(A) in order that – (B) such that"
+      ],
+      "answer": "4"
+    },
+    {
+      "number": 4,
+      "question": "다음 <보기>와 같이 문장을 바꿔 쓸 때, 어법상 어색한 것은? (정답 2개)\n\n<보기>\nWhen I arrived home late at night, I saw some fruits and ate them.\n→ Arriving home late at night, I saw some fruits and ate them.",
+      "options": [
+        "As he felt so excited, he jumped high. → Feeling so excited, he jumped high.",
+        "Because she was sick, she was absent from school. → Being sick, she was absent from school.",
+        "As she broke her arm, she is absent from school. → Breaking her arm, she is absent from school.",
+        "After she went inside the room, she turned the lights on. → Going inside the room, she turned the lights on.",
+        "Since the bakery was closed, I couldn't buy breakfast for the next day. → Being closed, I couldn't buy breakfast for the next day."
+      ],
+      "answer": "3, 5"
+    },
+    {
+      "number": 5,
+      "question": "다음 두 문장을 'so that'을 활용하여 어법에 맞게 한 문장으로 만드시오. ※ 완전한 문장으로 쓰시오.\n\n• She turned off the light.\n• I could get a deep sleep.\n\n→ ______________________________",
+      "options": [],
+      "answer": "She turned off the light so that I could get a deep sleep."
+    },
+    {
+      "number": 6,
+      "question": "다음 일기에서 어법상 어색한 두 곳을 찾고, <조건>에 맞게 바르게 고쳐 쓰시오. (단, 어색한 부분이 단어 또는 2단어가 연속된 어구 일 수도 있음)\n\nI usually get up at 7 a.m. Today, I woke up at 8 a.m.! Finish breakfast, I took a taxi to school. Strangely, I couldn't see anyone in the classroom. Not knowing what happened, I called my friend, Sam. He said everyone was at Seoul Land. Right! Today was a field trip day! I felt so embarrassed, I took a taxi again. Luckily, I met all of my classmates at Seoul Land.\n\n<조건>\n어색한 부분을 찾아 분사구문 형태로 표현할 것\n\n(1) 잘못된 부분 → 고친 표현\n(2) 잘못된 부분 → 고친 표현",
+      "options": [],
+      "answer": "Finish → Finishing / I felt → Feeling",
+      "subParts": [
+        {
+          "label": "(1)",
+          "answer": "Finish → Finishing"
+        },
+        {
+          "label": "(2)",
+          "answer": "I felt → Feeling"
+        }
+      ]
+    },
+    {
+      "number": 7,
+      "question": "다음 대화 중 어색한 것은?",
+      "options": [
+        "A: I think I got a cold because I didn't dress warmly last night. / B: I'm supposed to go see a doctor.",
+        "A: The article says that a goldfish can see more colors than a human. / B: Can you give me more information about it?",
+        "A: I think Sarah got a boyfriend during the vacation. / B: What makes you say that?",
+        "A: Do you think I should buy this engine oil? It is reported that it can protect engines from damage. / B: I will read the print first. Please, wait a second.",
+        "A: People say that the frozen fruits are as fresh as fresh ones. / B: Oh, than I'll take the frozen fruits. It will save me money."
+      ],
+      "answer": "1"
+    },
+    {
+      "number": 8,
+      "question": "다음 대화의 밑줄 친 부분의 의미로 알맞은 것은?\n\nW: There are so many pieces of information we call \"facts\" that are completely wrong.\nM: <u>Why do you say so?</u>\nW: I read a book, and there were a lot of examples of these \"facts\" that are wrong.\nM: Like what?\nW: Well, most people think goldfish are not smart. But, goldfish are actually smart.\nM: Really? Can you tell me more about that?\nW: They can recognize their owners.\nM: Oh, I didn't know that.",
+      "options": [
+        "Who is wrong?",
+        "Why are you wrong?",
+        "Would you tell me about it?",
+        "What makes you say that?",
+        "Could you tell me more about it?"
+      ],
+      "answer": "4"
+    },
+    {
+      "number": 9,
+      "question": "다음 대화를 읽고 물음에 답하시오.\nW: I read an article saying that Napoleon was actually fairly tall.\nM: Oh, really? ______________________\nW: According to the article, a French doctor wrote down Napoleon's height according to the French measuring system, not the English one.\nM: What was the difference?\nW: At that time, an inch in France was longer than an inch in England. So, Napoleon was actually about 168 cm tall, which was not that short in those times.\n\n위 대화의 빈칸에 들어갈 말로 알맞은 것은?",
+      "options": [
+        "Did you know that?",
+        "What do you think?",
+        "Why do you say that?",
+        "What makes you think so?",
+        "Can you tell me more about it?"
+      ],
+      "answer": "5"
+    },
+    {
+      "number": 10,
+      "question": "다음 대화를 읽고 물음에 답하시오.\nW: I read an article saying that Napoleon was actually fairly tall.\nM: Oh, really? ______________________\nW: According to the article, a French doctor wrote down Napoleon's height according to the French measuring system, not the English one.\nM: What was the difference?\nW: At that time, an inch in France was longer than an inch in England. So, Napoleon was actually about 168 cm tall, which was not that short in those times.\n\n위 대화를 읽고 아래 신문 기사에서 흐름상 어색한 것을 고르면?\n\nDAILY NEWS   May 7th, 2020\nⓐ<u>Was Napoleon Really Short?</u>\nⓑ<u>We have been wrong about Napoleon's height.</u> ⓒ<u>The misunderstanding came from the difference between the French measuring system and the English one.</u> ⓓ<u>An inch in France was shorter than an inch in America.</u> ⓔ<u>He was actually about 168 cm tall!</u>",
+      "options": [
+        "ⓐ",
+        "ⓑ",
+        "ⓒ",
+        "ⓓ",
+        "ⓔ"
+      ],
+      "answer": "4"
+    },
+    {
+      "number": 11,
+      "question": "다음 대화의 빈칸에 들어갈 말로 알맞은 것은?\n\nMan: There are so many pieces of information we call \"facts\" that are completely wrong.\nWoman: Why do you say so?\nMan: I read a book, and there were a lot of examples of these \"facts\" ______________.\nWoman: Like what?\nMan: Well, most people think goldfish are not smart. But, goldfish are actually smart.\nWoman: Really? Can you tell me more about that?\nMan: They can recognize their owners.\nWoman: Oh, I didn't know that.",
+      "options": [
+        "that are right",
+        "that are false",
+        "that are not easy",
+        "that are complete",
+        "that are not useful"
+      ],
+      "answer": "2"
+    },
+    {
+      "number": 12,
+      "question": "다음 글을 읽고, 내용을 바르게 이해한 사람은?\n\nEvery day we watch, hear, or read interesting news. However, have you ever seriously considered whether an article is really true? Everyone likes an interesting news story but what if it is completely made up?\nFake news can be very harmful in that it can make people less informed or even misled. Nevertheless, there have been various fake news reports throughout history.\nWhy have some people written such false information? Let's look into some articles thinking about the hidden motives behind them.",
+      "options": [
+        "윤기: 가짜 뉴스는 사람들을 잘못 이끌 수도 있다.",
+        "정국: 모든 뉴스에서는 풍족한 정보를 얻을 수 있어.",
+        "지민: 역사를 통틀어 모든 뉴스는 진실만을 보도해 왔어.",
+        "태형: 매일 재미있는 뉴스를 볼 수만 있다면 그것이 가짜라고 해도 상관없어.",
+        "석진: 뉴스가 가짜일 수도 있다니! 그럼 난 앞으로 평생 뉴스를 안 보겠어."
+      ],
+      "answer": "1"
+    },
+    {
+      "number": 13,
+      "question": "다음 글을 읽고 물음에 답하시오.\nLast night, an angry group of rhinoceroses broke down the walls of the cage at the zoo and ⓐ<u>escaped</u>. They also broke down the walls of the other wild animals' cages. These animals ran down the streets and ⓑ<u>injured</u> hundreds of people. Twelve of the animals are still on the loose. Citizens should stay indoors until further notice.\n\n*Not a single act or incident ⓒ<u>described</u> above (A)______________.\nAt that time, those who read the article carefully laughed out loud. Those who didn't read it to the end got really worried. Not knowing the news was false, many people ⓓ<u>panicked</u>. Some tried to escape the city while others went into the parks with guns to hunt the animals. So why did The Herald make up such news? Later, they ⓔ<u>confessed</u> that they (B)__________ so that they could draw the readers' attention to the unsafe conditions at the zoo.\n\n위 글의 밑줄 친 ⓐ~ⓔ의 동사를 명사로 바꾼 것 중 어색한 것은?",
+      "options": [
+        "ⓐ escaption",
+        "ⓑ injury",
+        "ⓒ description",
+        "ⓓ panic",
+        "ⓔ confession"
+      ],
+      "answer": "1"
+    },
+    {
+      "number": 14,
+      "question": "다음 글을 읽고 물음에 답하시오.\nLast night, an angry group of rhinoceroses broke down the walls of the cage at the zoo and ⓐ<u>escaped</u>. They also broke down the walls of the other wild animals' cages. These animals ran down the streets and ⓑ<u>injured</u> hundreds of people. Twelve of the animals are still on the loose. Citizens should stay indoors until further notice.\n\n*Not a single act or incident ⓒ<u>described</u> above (A)______________.\nAt that time, those who read the article carefully laughed out loud. Those who didn't read it to the end got really worried. Not knowing the news was false, many people ⓓ<u>panicked</u>. Some tried to escape the city while others went into the parks with guns to hunt the animals. So why did The Herald make up such news? Later, they ⓔ<u>confessed</u> that they (B)__________ so that they could draw the readers' attention to the unsafe conditions at the zoo.\n\n위 글의 빈칸 (A), (B)에 들어갈 말로 알맞게 연결된 것은?",
+      "options": [
+        "(A) has taken place – (B) made it up",
+        "(A) has taken place – (B) made up it",
+        "(A) has taken places – (B) made up it",
+        "(A) has taken places – (B) made it up",
+        "(A) was taken places – (B) made it up"
+      ],
+      "answer": "1"
+    },
+    {
+      "number": 15,
+      "question": "다음 글을 읽고 물음에 답하시오.\nLast night, an angry group of rhinoceroses broke down the walls of the cage at the zoo and ⓐ<u>escaped</u>. They also broke down the walls of the other wild animals' cages. These animals ran down the streets and ⓑ<u>injured</u> hundreds of people. Twelve of the animals are still on the loose. Citizens should stay indoors until further notice.\n\n*Not a single act or incident ⓒ<u>described</u> above (A)______________.\nAt that time, those who read the article carefully laughed out loud. Those who didn't read it to the end got really worried. Not knowing the news was false, many people ⓓ<u>panicked</u>. Some tried to escape the city while others went into the parks with guns to hunt the animals. So why did The Herald make up such news? Later, they ⓔ<u>confessed</u> that they (B)__________ so that they could draw the readers' attention to the unsafe conditions at the zoo.\n\n위 글의 기사의 내용과 일치하는 것은?",
+      "options": [
+        "지난밤 화난 하마 무리가 담장을 부수고 동물원을 탈출했다.",
+        "다른 야생동물들의 공격으로 코뿔소가 우리에서 풀려났다.",
+        "동물들은 거리로 달려 나가서 수천 명의 사람을 다치게 했다.",
+        "달아난 동물 중, 12마리가 경찰에 의해 현장에서 포획됐다.",
+        "시민들은 추후 안내가 있을 때까지 실내에 머물러야 한다."
+      ],
+      "answer": "5"
+    },
+    {
+      "number": 16,
+      "question": "다음 글을 읽고 물음에 답하시오.\nFake news can be very harmful in that it can make people less informed or even misled. Nevertheless, there have been various fake news reports throughout history. Why have some people written such false information? Let's look into some articles thinking about (가)<u>the hidden motives</u> behind them.\n\nAWFUL DISASTER\nLast night, an angry group of rhinoceroses broke down the walls of the cage at the zoo and escaped. They also broke down the walls of the other wild animals' cages. (A)<u>These animals ran down the streets and injured hundreds of people</u>. Twelve of the animals are still on the loose. (B)<u>Citizens should stay indoors until further notice</u>.\n(C)<u>Not a single act or incident described above has taken place</u>.\nAt that time, those who read the article carefully laughed out loud. Those who didn't read it to the end got really worried. (D)<u>Not knowing the news was false, many people panicked</u>. Some tried to escape the city while others went into the parks with guns to hunt the animals.\nSo why did The Herald make up such news? (E)<u>Later, they confessed that they made it up so that they could draw the readers' attention to the unsafe conditions at the zoo</u>.\n\n위 글의 밑줄 친 (A)~(E) 중, 밑줄 친 (가)the hidden motives에 해당하는 것은?",
+      "options": [
+        "(A)",
+        "(B)",
+        "(C)",
+        "(D)",
+        "(E)"
+      ],
+      "answer": "5"
+    },
+    {
+      "number": 17,
+      "question": "다음 글을 읽고 물음에 답하시오.\nFake news can be very harmful in that it can make people less informed or even misled. Nevertheless, there have been various fake news reports throughout history. Why have some people written such false information? Let's look into some articles thinking about (가)<u>the hidden motives</u> behind them.\n\nAWFUL DISASTER\nLast night, an angry group of rhinoceroses broke down the walls of the cage at the zoo and escaped. They also broke down the walls of the other wild animals' cages. (A)<u>These animals ran down the streets and injured hundreds of people</u>. Twelve of the animals are still on the loose. (B)<u>Citizens should stay indoors until further notice</u>.\n(C)<u>Not a single act or incident described above has taken place</u>.\nAt that time, those who read the article carefully laughed out loud. Those who didn't read it to the end got really worried. (D)<u>Not knowing the news was false, many people panicked</u>. Some tried to escape the city while others went into the parks with guns to hunt the animals.\nSo why did The Herald make up such news? (E)<u>Later, they confessed that they made it up so that they could draw the readers' attention to the unsafe conditions at the zoo</u>.\n\n위 글의 내용과 일치하는 것을 고르시오.\n\nWhich is true according to the text?",
+      "options": [
+        "모든 독자들은 보도된 사건의 내용을 믿었다.",
+        "어떤 사람들은 탈주한 동물을 직접 포획하였다.",
+        "The Herald는 실제로 일어난 사건을 보도하였다.",
+        "가짜 뉴스는 해롭기 때문에 그동안 보도되지 않았다.",
+        "기사에 나온 동물원의 상태는 좋지 않았을 것이다."
+      ],
+      "answer": "5"
+    },
+    {
+      "number": 18,
+      "question": "다음 글을 읽고 물음에 답하시오.\nSLAV SHOOTS A FRIEND IN ARGUMENT\nMejk Swenekafew, a Slav worker at the Columbia Coal Mine, ⓐ<u>was shot</u> and seriously wounded by John Pecitello near the mining camp Thursday evening. The two men had an argument during a meeting. The argument ⓑ<u>led</u> to a fight, and Pecitello shot Swenekafew twice, in the chest and leg. He is now at the hospital in critical condition. Pecitello ran away after the shooting. The police are searching for him now and ⓒ<u>are warning</u> citizens that he is extremely dangerous.\n\nIs there anything strange about the article? Read the Slav's name backwards; it spells \"we-fake-news.\" Who wrote this and why?\nThe Daily Telegram published this fake article ⓓ<u>in order that</u> prove if The Daily News, their competitor, was stealing their articles. The Daily News (A)______________________ about \"Swenekafew\" the next day and thus got caught ⓔ<u>stealing</u>. The people at The Daily News had to admit their act and were harshly criticized by the public.\n\n위 글의 밑줄 친 ⓐ~ⓔ 중, 어법상 어색한 것은?",
+      "options": [
+        "ⓐ",
+        "ⓑ",
+        "ⓒ",
+        "ⓓ",
+        "ⓔ"
+      ],
+      "answer": "4"
+    },
+    {
+      "number": 19,
+      "question": "다음 글을 읽고 물음에 답하시오.\nSLAV SHOOTS A FRIEND IN ARGUMENT\nMejk Swenekafew, a Slav worker at the Columbia Coal Mine, ⓐ<u>was shot</u> and seriously wounded by John Pecitello near the mining camp Thursday evening. The two men had an argument during a meeting. The argument ⓑ<u>led</u> to a fight, and Pecitello shot Swenekafew twice, in the chest and leg. He is now at the hospital in critical condition. Pecitello ran away after the shooting. The police are searching for him now and ⓒ<u>are warning</u> citizens that he is extremely dangerous.\n\nIs there anything strange about the article? Read the Slav's name backwards; it spells \"we-fake-news.\" Who wrote this and why?\nThe Daily Telegram published this fake article ⓓ<u>in order that</u> prove if The Daily News, their competitor, was stealing their articles. The Daily News (A)______________________ about \"Swenekafew\" the next day and thus got caught ⓔ<u>stealing</u>. The people at The Daily News had to admit their act and were harshly criticized by the public.\n\n위 글의 빈칸 (A)에 들어갈 말로 알맞은 것은?",
+      "options": [
+        "praised the article",
+        "doubted the truth",
+        "criticized the article",
+        "investigated the incident",
+        "published the same article"
+      ],
+      "answer": "5"
+    },
+    {
+      "number": 20,
+      "question": "다음 글을 읽고 물음에 답하시오.\nSLAV SHOOTS A FRIEND IN ARGUMENT\nMejk Swenekafew, a Slav worker at the Columbia Coal Mine, ⓐ<u>was shot</u> and seriously wounded by John Pecitello near the mining camp Thursday evening. The two men had an argument during a meeting. The argument ⓑ<u>led</u> to a fight, and Pecitello shot Swenekafew twice, in the chest and leg. He is now at the hospital in critical condition. Pecitello ran away after the shooting. The police are searching for him now and ⓒ<u>are warning</u> citizens that he is extremely dangerous.\n\nIs there anything strange about the article? Read the Slav's name backwards; it spells \"we-fake-news.\" Who wrote this and why?\nThe Daily Telegram published this fake article ⓓ<u>in order that</u> prove if The Daily News, their competitor, was stealing their articles. The Daily News (A)______________________ about \"Swenekafew\" the next day and thus got caught ⓔ<u>stealing</u>. The people at The Daily News had to admit their act and were harshly criticized by the public.\n\n위 글을 읽고 답할 수 없는 것을 고르시오.\n\nWhich CANNOT be answered according to the text?",
+      "options": [
+        "Why is Swenekafew at the hospital?",
+        "When and where was Swenekafew shot?",
+        "Why did The Daily News steal the article?",
+        "What did Pecitello do after the shooting?",
+        "Why did The Daily Telegram write the fake news?"
+      ],
+      "answer": "3"
+    },
+    {
+      "number": 21,
+      "question": "다음 글을 읽고 물음에 답하시오.\nSLAV SHOOTS A FRIEND IN ARGUMENT\nMejk Swenekafew, a Slav worker at the Columbia Coal Mine, was shot and seriously wounded by John Pecitello near the mining camp Thursday evening.\nThe two men had an argument during a meeting. The argument led to a fight, and Pecitello shot Swenekafew twice, in the chest and leg. He is now at the hospital in critical condition. Pecitello ran away after the shooting. The police are searching for him now and are warning citizens that he is extremely dangerous.\n\nIs there anything strange about the article? Read the Slav's name backwards; it spells \"we-fake-news.\" Who wrote this and why?\nThe Daily Telegram published this fake article so that they could prove if The Daily News, their competitor, was stealing their articles. The Daily News published the same article about \"Swenekafew\" the next day and thus got caught stealing. The people at The Daily News had to admit their act and were harshly criticized by the public.\n\nThe article was a special case, but there are many \"fake\" news articles published every day. As readers, we need to read critically and judge whether the news is real or fake.\n\n위 글의 내용으로 알 수 없는 것은?",
+      "options": [
+        "The Daily News는 경쟁사의 기사를 베껴 보도했다.",
+        "The Daily News는 비도덕적 행동으로 대중들에게 비난을 받았다.",
+        "The Daily Telegram은 슬라브인의 이름에 그들의 행동을 암시했다.",
+        "Pecitello는 The Daily News의 표절을 밝혀내기 위 위 목적으로 위의 행동을 했다.",
+        "The Daily Telegram는 The Daily News가 자신들의 기사를 무단 도용한다고 의심해왔다."
+      ],
+      "answer": "4"
+    },
+    {
+      "number": 22,
+      "question": "다음 글을 읽고 물음에 답하시오.\nAWFUL DISASTER\nLast night, an angry group of rhinoceroses broke down the walls of the cage at the zoo and escaped. They also broke down the walls of the other wild animals' cages. These animals ran down the streets and ⓐ<u>injured</u> hundreds of people. Twelve of the animals are still on the loose. Citizens should stay indoors until further notice.\n*Not a single act or incident ⓑ<u>described</u> above ⓒ<u>has taken place</u>.\n-The Herald, November 9th, 1874\n\nAt that time, those who read the article carefully laughed out loud. Those who didn't read it to the end got really worried. ⓓ<u>Knowing</u> the news was false, many people panicked. (A)__________ tried to escape the city while (B)__________ went into the parks with guns to hunt the animals.\nSo why did The Herald make up such news? Later, they ⓔ<u>confessed</u> that they made it up (C)<u>so that</u> they could draw the readers' attention to the unsafe conditions at the zoo.\n\n위 글의 밑줄 친 ⓐ~ⓔ 중, 흐름상 어색한 것은?",
+      "options": [
+        "ⓐ",
+        "ⓑ",
+        "ⓒ",
+        "ⓓ",
+        "ⓔ"
+      ],
+      "answer": "4"
+    },
+    {
+      "number": 23,
+      "question": "다음 글을 읽고 물음에 답하시오.\nAWFUL DISASTER\nLast night, an angry group of rhinoceroses broke down the walls of the cage at the zoo and escaped. They also broke down the walls of the other wild animals' cages. These animals ran down the streets and ⓐ<u>injured</u> hundreds of people. Twelve of the animals are still on the loose. Citizens should stay indoors until further notice.\n*Not a single act or incident ⓑ<u>described</u> above ⓒ<u>has taken place</u>.\n-The Herald, November 9th, 1874\n\nAt that time, those who read the article carefully laughed out loud. Those who didn't read it to the end got really worried. ⓓ<u>Knowing</u> the news was false, many people panicked. (A)__________ tried to escape the city while (B)__________ went into the parks with guns to hunt the animals.\nSo why did The Herald make up such news? Later, they ⓔ<u>confessed</u> that they made it up (C)<u>so that</u> they could draw the readers' attention to the unsafe conditions at the zoo.\n\n위 글의 빈칸 (A), (B)에 들어갈 말을 순서대로 연결한 것은?",
+      "options": [
+        "(A) One – (B) others",
+        "(A) Some – (B) another",
+        "(A) Some – (B) others",
+        "(A) Other – (B) some",
+        "(A) One – (B) ones"
+      ],
+      "answer": "3"
+    },
+    {
+      "number": 24,
+      "question": "다음 글을 읽고 물음에 답하시오.\nAWFUL DISASTER\nLast night, an angry group of rhinoceroses broke down the walls of the cage at the zoo and escaped. They also broke down the walls of the other wild animals' cages. These animals ran down the streets and ⓐ<u>injured</u> hundreds of people. Twelve of the animals are still on the loose. Citizens should stay indoors until further notice.\n*Not a single act or incident ⓑ<u>described</u> above ⓒ<u>has taken place</u>.\n-The Herald, November 9th, 1874\n\nAt that time, those who read the article carefully laughed out loud. Those who didn't read it to the end got really worried. ⓓ<u>Knowing</u> the news was false, many people panicked. (A)__________ tried to escape the city while (B)__________ went into the parks with guns to hunt the animals.\nSo why did The Herald make up such news? Later, they ⓔ<u>confessed</u> that they made it up (C)<u>so that</u> they could draw the readers' attention to the unsafe conditions at the zoo.\n\n위 글의 밑줄 친 (C)와 쓰임이 다른 것은?",
+      "options": [
+        "Please wear a helmet <u>so that</u> you can protect your head.",
+        "Can you turn off the TV <u>so that</u> we can read books quietly?",
+        "They escaped the room <u>so that</u> their mother could take their own time.",
+        "Stop using a smartphone <u>so that</u> you can focus on your study.",
+        "She was <u>so</u> kind <u>that</u> many people could work with her well."
+      ],
+      "answer": "5"
+    },
+    {
+      "number": 25,
+      "question": "다음 글을 읽고 물음에 답하시오.\nAWFUL DISASTER\nLast night, an angry group of rhinoceroses broke down the walls of the cage at the zoo and escaped. They also broke down the walls of the other wild animals' cages. These animals ran down the streets and ⓐ<u>injured</u> hundreds of people. Twelve of the animals are still on the loose. Citizens should stay indoors until further notice.\n*Not a single act or incident ⓑ<u>described</u> above ⓒ<u>has taken place</u>.\n-The Herald, November 9th, 1874\n\nAt that time, those who read the article carefully laughed out loud. Those who didn't read it to the end got really worried. ⓓ<u>Knowing</u> the news was false, many people panicked. (A)__________ tried to escape the city while (B)__________ went into the parks with guns to hunt the animals.\nSo why did The Herald make up such news? Later, they ⓔ<u>confessed</u> that they made it up (C)<u>so that</u> they could draw the readers' attention to the unsafe conditions at the zoo.\n\n위 글을 읽고 알 수 없는 것은?",
+      "options": [
+        "The article was not a real story.",
+        "People hunted the escaped animals to save other citizens.",
+        "Some people laughed because they knew not a single incident in the article did not happen.",
+        "People who didn't read the news to the end felt panicked.",
+        "The Herald made up the fake news to draw the readers' attention."
+      ],
+      "answer": "2"
+    },
+    {
+      "number": 26,
+      "question": "다음 글을 읽고 물음에 답하시오.\nSLAV SHOOTS A FRIEND IN ARGUMENT\nMejk Swenekafew, a Slav worker at the Columbia Coal Mine, was shot and seriously ⓐ<u>wound</u> by John Pecitello near the mining camp Thursday evening.\nThe two men ⓑ<u>had an argue</u> during a meeting. The argument ⓒ<u>led to</u> a fight, and Pecitello shot Swenekafew twice, in the chest and leg. He is now at the hospital ⓓ<u>in critically condition</u>. Pecitello ran away after the shooting. The police ⓔ<u>is searching</u> him now and are warning citizens that he is extremely dangerous.\n\nIs there anything strange about the article? Read the Slav's name backwards; it spells \"we-fake-news.\" Who wrote this and why?\nThe Daily Telegram published this fake article so that they could prove if The Daily News, their competitor, was stealing their articles. The Daily News published the same article about \"Swenekafew\" the next day and thus got caught stealing. The people at The Daily News had to admit their act and were harshly criticized by the public.\n\n위 글의 밑줄 친 ⓐ~ⓔ 중, 어법상 적절한 것은?",
+      "options": [
+        "ⓐ",
+        "ⓑ",
+        "ⓒ",
+        "ⓓ",
+        "ⓔ"
+      ],
+      "answer": "3"
+    },
+    {
+      "number": 27,
+      "question": "다음 글을 읽고 물음에 답하시오.\nSLAV SHOOTS A FRIEND IN ARGUMENT\nMejk Swenekafew, a Slav worker at the Columbia Coal Mine, was shot and seriously ⓐ<u>wound</u> by John Pecitello near the mining camp Thursday evening.\nThe two men ⓑ<u>had an argue</u> during a meeting. The argument ⓒ<u>led to</u> a fight, and Pecitello shot Swenekafew twice, in the chest and leg. He is now at the hospital ⓓ<u>in critically condition</u>. Pecitello ran away after the shooting. The police ⓔ<u>is searching</u> him now and are warning citizens that he is extremely dangerous.\n\nIs there anything strange about the article? Read the Slav's name backwards; it spells \"we-fake-news.\" Who wrote this and why?\nThe Daily Telegram published this fake article so that they could prove if The Daily News, their competitor, was stealing their articles. The Daily News published the same article about \"Swenekafew\" the next day and thus got caught stealing. The people at The Daily News had to admit their act and were harshly criticized by the public.\n\n위 글에 대한 질문에 알맞게 답한 것은?",
+      "options": [
+        "Q: Why is Swenekafew at the hospital? / A: Because he was injured by a group of animals.",
+        "Q: How many times did Pecitello shoot Swenekafew? / A: He shot Swenekafew three times.",
+        "Q: Why did The Daily Telegram write the fake news? / A: Because they wanted to make people laugh.",
+        "Q: What did The Daily News publish the next day? / A: They published the same article as that of The Daily Telegram the next day.",
+        "Q: How did the public react to The Daily News after they came to know the truth? / A: The public tried to encourage The Daily News."
+      ],
+      "answer": "4"
+    },
+    {
+      "number": 28,
+      "question": "다음 글을 읽고 물음에 답하시오.\nSLAV SHOOTS A FRIEND IN ARGUMENT\nMejk Swenekafew, a Slav worker at the Columbia Coal Mine, was shot and seriously ⓐ<u>wound</u> by John Pecitello near the mining camp Thursday evening.\nThe two men ⓑ<u>had an argue</u> during a meeting. The argument ⓒ<u>led to</u> a fight, and Pecitello shot Swenekafew twice, in the chest and leg. He is now at the hospital ⓓ<u>in critically condition</u>. Pecitello ran away after the shooting. The police ⓔ<u>is searching</u> him now and are warning citizens that he is extremely dangerous.\n\nIs there anything strange about the article? Read the Slav's name backwards; it spells \"we-fake-news.\" Who wrote this and why?\nThe Daily Telegram published this fake article so that they could prove if The Daily News, their competitor, was stealing their articles. The Daily News published the same article about \"Swenekafew\" the next day and thus got caught stealing. The people at The Daily News had to admit their act and were harshly criticized by the public.\n\n위 글을 아래와 같이 요약할 때, 빈칸에 들어갈 말로 순서대로 나열된 것은?\n\nThe Daily __________ made up the article: Pecitello shot a friend in the __________. That's because they wanted to __________ that their articles were __________.",
+      "options": [
+        "News – fight – hide – fake",
+        "News – mine – hide – stolen",
+        "Telegram – fight – prove – fake",
+        "Telegram – mine – hide – stolen",
+        "Telegram – fight – prove – stolen"
+      ],
+      "answer": "5"
+    },
+    {
+      "number": 29,
+      "question": "다음 글을 읽고 물음에 답하시오.\nWalk and You'll Get Slim and Strong!\nOur new walking shoes, Wing Walker, have various strong points. Walking with Wing Walker, you burn more calories and get slimmer. They also strengthen leg muscles because they use the hidden board technology. Upgrade your walking experience with Wing Walker!\n\n위 글의 목적으로 알맞은 것은?",
+      "options": [
+        "to ask for help",
+        "to promote a product",
+        "to warn about a product",
+        "to inquire about a product",
+        "to complain about a product"
+      ],
+      "answer": "2"
+    }
+  ],
+  "R6": [
+    {
+      "number": 1,
+      "question": "다음 빈칸에 들어갈 말이 바르게 짝지어진 것은?\n\n• Those who didn't read it ________ the end got worried.\n• I would change myself ________ famous people.",
+      "options": [
+        "on - from",
+        "to - into",
+        "by - die",
+        "up - with",
+        "in – down"
+      ],
+      "answer": "2"
+    },
+    {
+      "number": 2,
+      "question": "다음 영영풀이가 어색한 것은?",
+      "options": [
+        "escape: to get away from a place",
+        "motive: a reason for doing something",
+        "condition: the physical state of something",
+        "informed: having little knowledge of a subject",
+        "warn: to tell someone about possible danger or trouble"
+      ],
+      "answer": "4"
+    },
+    {
+      "number": 3,
+      "question": "다음 중 어법상 어색한 문장은?",
+      "options": [
+        "The boy is too shy to speak in front of others.",
+        "I got up early, so that I could take the first train.",
+        "She is so rich that she can buy the expensive jewelry.",
+        "Eric borrowed a book so that he could read during weekends.",
+        "Emily walks for an hour every day in order to she can stay in shape."
+      ],
+      "answer": "5"
+    },
+    {
+      "number": 4,
+      "question": "다음 중 어법상 알맞은 것끼리 짝지어진 것은?\n\nⓐ Sit on the sofa, I read a book.\nⓑ Woke up late, I missed the train.\nⓒ Being tired from the work, I fell asleep.\nⓓ Leaving early, I arrived there on time.\nⓔ Not having much money, he can't help them.",
+      "options": [
+        "ⓐ, ⓑ",
+        "ⓑ, ⓒ",
+        "ⓑ, ⓓ",
+        "ⓐ, ⓓ, ⓔ",
+        "ⓒ, ⓓ, ⓔ"
+      ],
+      "answer": "5"
+    },
+    {
+      "number": 5,
+      "question": "다음 중 주어진 문장을 같은 의미가 되도록 알맞게 바꾼 것은?",
+      "options": [
+        "We were so late that we missed the train. → We were late in order to miss the train.",
+        "The insect is so small that I can't see it with my eyes. → The insect is too small for me not to see it with my eyes.",
+        "She worked hard so that everything could be ready in time. → She worked too hard for everything to be ready in time.",
+        "The music was so loud that I could hear it from far away. → The music was loud enough for me to hear it from far away.",
+        "There has been a great increase in car production, so that the quality of the air is very poor. → There has been a great increase in car production, in order that the quality of the air is very poor."
+      ],
+      "answer": "4"
+    },
+    {
+      "number": 6,
+      "question": "다음 자전거 이용 안전에 대한 표를 보고 2개의 문장을 <조건>에 알맞게 완성하시오.\n\n<조건>\n• (A)와 (B)에서 의미가 통하는 표현을 각각 골라 연결하여 한 문장으로 쓸 것\n• 'so that ~ can'을 반드시 이용할 것 ※ 완전한 문장으로 쓰시오.\n\n| (A) | (B) |\n|---|---|\n| • Wear a helmet<br>• Never use your phone<br>• Wear a bright-colored clothes | • Drivers watch their car<br>• People see you at night<br>• You protect your head |\n\n(1) ______________________________\n(2) ______________________________",
+      "options": [],
+      "answer": "Wear a helmet so that you can protect your head. / Wear a bright-colored clothes so that people can see you at night.",
+      "subParts": [
+        {
+          "label": "(1)",
+          "answer": "Wear a helmet so that you can protect your head.",
+          "acceptedAnswers": [
+            "Wear a bright-colored clothes so that people can see you at night."
+          ]
+        },
+        {
+          "label": "(2)",
+          "answer": "Wear a bright-colored clothes so that people can see you at night.",
+          "acceptedAnswers": [
+            "Wear a helmet so that you can protect your head."
+          ]
+        }
+      ]
+    },
+    {
+      "number": 7,
+      "question": "다음 대화를 읽고 <보기>에서 알 수 있는 것의 개수를 고르면?\n\nW: I read an interesting article about the Black Sea. Do you know where it is?\nM: Yes. It's between Eastern Europe and Western Asia, right?\nW: Right. What color do you think it is?\nM: Well, black, I guess.\nW: No, it isn't. It's blue.\nM: Really? Then why is it called the Black Sea? Can you tell me more about it?\nW: People call it the Black Sea because it is very dangerous.\n\n<보기>\n• 흑해의 크기\n• 흑해의 위치\n• 흑해의 색깔\n• 흑해라고 불리는 이유\n• 흑해에 살고 있는 생물",
+      "options": [
+        "1개",
+        "2개",
+        "3개",
+        "4개",
+        "5개"
+      ],
+      "answer": "3"
+    },
+    {
+      "number": 8,
+      "question": "다음 대화를 읽고 물음에 답하시오.\nA: What are you reading, John?\nB: I'm reading a book of riddles.\nA: Riddles? Aren't they for children?\nB: Actually, no. Books of riddles are really useful for adults.\nA: Really? ⓐ______________________\nB: They help us think more creatively. We need to ⓑ<u>think outside the box</u> to find the answers.\n\n위 대화의 빈칸 ⓐ에 들어갈 말로 알맞은 것은?",
+      "options": [
+        "Do I lend you the book?",
+        "What makes you say so?",
+        "How come you didn't read it?",
+        "Are you thinking of reading a book?",
+        "What kinds of books are you going to read?"
+      ],
+      "answer": "2"
+    },
+    {
+      "number": 9,
+      "question": "다음 대화를 읽고 물음에 답하시오.\nA: What are you reading, John?\nB: I'm reading a book of riddles.\nA: Riddles? Aren't they for children?\nB: Actually, no. Books of riddles are really useful for adults.\nA: Really? ⓐ______________________\nB: They help us think more creatively. We need to ⓑ<u>think outside the box</u> to find the answers.\n\n위 대화의 밑줄 친 ⓑ의 의미로 알맞은 것은?",
+      "options": [
+        "act quickly",
+        "act exactly",
+        "think in a different way",
+        "become childish",
+        "feel various emotions"
+      ],
+      "answer": "3"
+    },
+    {
+      "number": 10,
+      "question": "다음 대화의 내용과 일치하는 것은?\n\nW: I read an interesting article about the Black Sea. Do you know where it is?\nM: Yes. It's between Eastern Europe and Western Asia, right?\nW: Right. What color do you think it is?\nM: Well, black, I guess.\nW: No, it isn't. It's blue.\nM: Really? Then why is it called the Black Sea? Can you tell me more about it?\nW: People call it the Black Sea because it is very dangerous.",
+      "options": [
+        "Black Sea는 파란색이다.",
+        "남자는 Black Sea에 관한 기사를 읽었다.",
+        "여자는 Black Sea의 위치를 남자에게 설명했다.",
+        "Black Sea는 서유럽과 동아시아 사이에 있다.",
+        "Black Sea의 이름의 유래는 물 색깔에서부터 나온 것이다."
+      ],
+      "answer": "1"
+    },
+    {
+      "number": 11,
+      "question": "다음 대화의 내용과 일치하는 것을 고르시오.\n\nWhich is true according to the dialogue?\n\nW: I read an article saying that Napoleon was actually fairly tall.\nM: Oh, really? Can you tell me more about it?\nW: According to the article, a French doctor wrote down Napoleon's height according to the French measuring system, not the English one.\nM: What was the difference?\nW: At that time, an inch in France was longer than an inch in England. So, Napoleon was actually about 168 cm tall, which was not that short in those times.",
+      "options": [
+        "French people are actually shorter than English people.",
+        "There was a misunderstanding about Napoleon's actual height.",
+        "At that time, an inch in England was longer than an inch in France.",
+        "An English doctor recorded Napoleon's height for the French doctor.",
+        "According to the article, the French measuring system was the most used one."
+      ],
+      "answer": "2"
+    },
+    {
+      "number": 12,
+      "question": "다음 글을 읽고 물음에 답하시오.\nLast night, an angry group of rhinoceroses broke down the walls of the cage at the zoo and escaped. They also broke down the walls of the other wild animals' cages. These animals ran down the streets and injured hundreds of people. Twelve of the animals are still on the loose. Citizens should stay indoors until further notice.\n*Not a single act or incident described above has taken place.\n\nAt that time, those who read the article carefully laughed out loud. (A) Those who didn't read it to the end got really worried. (B) Not knowing the news was false, many people panicked. (C) Some tried to escape the city while others went into the parks with guns to hunt the animals. (D) Later, they confessed that they made it up so that they could draw the readers' attention to the unsafe conditions at the zoo. (E)\n\n위 글의 (A)~(E) 중, 다음 문장이 들어갈 곳은?\n\nSo, why did The Herald make up such news?",
+      "options": [
+        "(A)",
+        "(B)",
+        "(C)",
+        "(D)",
+        "(E)"
+      ],
+      "answer": "4"
+    },
+    {
+      "number": 13,
+      "question": "다음 글을 읽고 물음에 답하시오.\nLast night, an angry group of rhinoceroses broke down the walls of the cage at the zoo and escaped. They also broke down the walls of the other wild animals' cages. These animals ran down the streets and injured hundreds of people. Twelve of the animals are still on the loose. Citizens should stay indoors until further notice.\n*Not a single act or incident described above has taken place.\n\nAt that time, those who read the article carefully laughed out loud. (A) Those who didn't read it to the end got really worried. (B) Not knowing the news was false, many people panicked. (C) Some tried to escape the city while others went into the parks with guns to hunt the animals. (D) Later, they confessed that they made it up so that they could draw the readers' attention to the unsafe conditions at the zoo. (E)\n\n위 글의 내용과 일치하는 것은?",
+      "options": [
+        "The article described only rhinoceroses escaping from the zoo.",
+        "The incident of the article actually happened.",
+        "All the people who read the article tried to leave the city.",
+        "There were a few people who visited the park with guns.",
+        "This article was written to make people visit the zoo more often."
+      ],
+      "answer": "4"
+    },
+    {
+      "number": 14,
+      "question": "다음 글을 읽고 물음에 답하시오.\n(A) Every day we watch, hear, or read interesting news. However, have you ever seriously considered whether an article is really true? Everyone likes an interesting news story but ⓐ<u>what if is it completely made up</u>?\n(B) Fake news can be very harmful in that it can make ⓑ<u>people less informed or even misled</u>. Nevertheless, there have been various fake news reports throughout history. Why have some people written such false information? Let's look into some articles ⓒ<u>thinking about the hidden motives behind them</u>.\n\nAWFUL DISASTER\n(C) Last night, an angry group of rhinoceroses broke down the walls of the cage at the zoo and escaped. They also broke down the walls of the other wild animals' cages. These animals ran down the streets and injured hundreds of people. Twelve of the animals are still on the loose. Citizens should stay indoors until further notice.\nⓓ<u>Not a single act or incident described above has taken place</u>. - The Herald November 9th, 1874\n(D) At that time, those who read the article carefully laughed out loud. Those who didn't read it to the end got really worried. (A)<u>Because they didn't know the news was false</u>, many people panicked. Some tried to escape the city while others went into the parks with guns to hunt the animals.\nSo why did The Herald make up such news? Later, they confessed that they made it up ⓔ<u>so that they could draw the readers' attention to the unsafe conditions at the zoo</u>.\n\n위 글의 밑줄 친 ⓐ~ⓔ 중, 어법상 어색한 것은?",
+      "options": [
+        "ⓐ",
+        "ⓑ",
+        "ⓒ",
+        "ⓓ",
+        "ⓔ"
+      ],
+      "answer": "1"
+    },
+    {
+      "number": 15,
+      "question": "다음 글을 읽고 물음에 답하시오.\n(A) Every day we watch, hear, or read interesting news. However, have you ever seriously considered whether an article is really true? Everyone likes an interesting news story but ⓐ<u>what if is it completely made up</u>?\n(B) Fake news can be very harmful in that it can make ⓑ<u>people less informed or even misled</u>. Nevertheless, there have been various fake news reports throughout history. Why have some people written such false information? Let's look into some articles ⓒ<u>thinking about the hidden motives behind them</u>.\n\nAWFUL DISASTER\n(C) Last night, an angry group of rhinoceroses broke down the walls of the cage at the zoo and escaped. They also broke down the walls of the other wild animals' cages. These animals ran down the streets and injured hundreds of people. Twelve of the animals are still on the loose. Citizens should stay indoors until further notice.\nⓓ<u>Not a single act or incident described above has taken place</u>. - The Herald November 9th, 1874\n(D) At that time, those who read the article carefully laughed out loud. Those who didn't read it to the end got really worried. (A)<u>Because they didn't know the news was false</u>, many people panicked. Some tried to escape the city while others went into the parks with guns to hunt the animals.\nSo why did The Herald make up such news? Later, they confessed that they made it up ⓔ<u>so that they could draw the readers' attention to the unsafe conditions at the zoo</u>.\n\n위 글 (C), (D)의 내용과 일치하는 것은?",
+      "options": [
+        "The Herald made up the news to make people angry.",
+        "Everybody who read the article got worried.",
+        "People went to the zoo and hunted the animals.",
+        "The people that read the article to the end panicked.",
+        "Some people tried to escape the city after reading the article."
+      ],
+      "answer": "5"
+    },
+    {
+      "number": 16,
+      "question": "다음 글의 밑줄 친 ⓐ~ⓔ 중, 흐름상 알맞지 않은 것은?\n\nSLAV SHOOTS A FRIEND IN ARGUMENT\nMejk Swenekafew, a Slav worker at the Columbia Coal Mine, was shot and seriously ⓐ<u>wounded</u> by John Pecitello near the mining camp Thursday evening. The two men had an argument during a meeting. The argument led to a fight, and Pecitello shot Swenekafew twice, in the chest and leg. He is now at the hospital in ⓑ<u>critical</u> condition. Pecitello ran away after the ⓒ<u>shooting</u>. The police are searching for him now and are warning citizens that he is extremely dangerous.\n\nIs there anything strange about the article? Read the Slav's name ⓓ<u>forwards</u>; it spells \"we fake news.\" Who wrote this and why?\nThe Daily Telegram published this fake article so that they could prove if The Daily News, their ⓔ<u>competitor</u>, was stealing their articles. The Daily News published the same article about \"Swenekafew\" the next day and thus got caught stealing. The people at The Daily News had to admit their act and were harshly criticized by the public.",
+      "options": [
+        "ⓐ",
+        "ⓑ",
+        "ⓒ",
+        "ⓓ",
+        "ⓔ"
+      ],
+      "answer": "4"
+    },
+    {
+      "number": 17,
+      "question": "다음 글을 읽고 물음에 답하시오.\nEveryone likes an interesting news story but ⓐ<u>만약 그것이 완전히 지어낸 것이라면 어떻게 할 것인가</u>? Fake news can be very harmful in that it can make people less informed or even misled. Nevertheless, there have been various fake news reports throughout history. Why have some people written such false information? Let's look into some articles ⓑ<u>그 뒤에 숨겨진 동기를 생각하면서</u>.\n\nAWFUL DISASTER\n(A) Last night, an angry group of rhinoceroses broke down the walls of the cage at the zoo and escaped. (B) These animals ran down the streets and injured hundreds of people. Twelve of the animals are still on the loose. (C) Citizens should stay indoors until further notice. (D)\nNot a single act or incident described above has taken place. (E)\n\nAt that time, those who read the article carefully laughed out loud. Those who didn't read it to the end got really worried. Not knowing the news was false, many people panicked. Some tried to escape the city while others went into the parks with guns to hunt the animals.\nSo why did The Herald make up such news? Later, they confessed that they made it up so that they could draw the readers' attention to the unsafe conditions at the zoo.\n\n위 글의 (A)~(E) 중, 주어진 문장이 들어갈 알맞은 곳은?\n\nThey also broke down the walls of the wild animals' cages.",
+      "options": [
+        "(A)",
+        "(B)",
+        "(C)",
+        "(D)",
+        "(E)"
+      ],
+      "answer": "2"
+    },
+    {
+      "number": 18,
+      "question": "다음 글을 읽고 물음에 답하시오.\nEveryone likes an interesting news story but ⓐ<u>만약 그것이 완전히 지어낸 것이라면 어떻게 할 것인가</u>? Fake news can be very harmful in that it can make people less informed or even misled. Nevertheless, there have been various fake news reports throughout history. Why have some people written such false information? Let's look into some articles ⓑ<u>그 뒤에 숨겨진 동기를 생각하면서</u>.\n\nAWFUL DISASTER\n(A) Last night, an angry group of rhinoceroses broke down the walls of the cage at the zoo and escaped. (B) These animals ran down the streets and injured hundreds of people. Twelve of the animals are still on the loose. (C) Citizens should stay indoors until further notice. (D)\nNot a single act or incident described above has taken place. (E)\n\nAt that time, those who read the article carefully laughed out loud. Those who didn't read it to the end got really worried. Not knowing the news was false, many people panicked. Some tried to escape the city while others went into the parks with guns to hunt the animals.\nSo why did The Herald make up such news? Later, they confessed that they made it up so that they could draw the readers' attention to the unsafe conditions at the zoo.\n\n위 글의 AWFUL DISASTER에 대한 내용과 일치하지 않는 것은?",
+      "options": [
+        "The Herald의 기사 제목이다.",
+        "언급된 사건은 하나도 일어나지 않았다.",
+        "기사의 첫 경고 문장을 놓친 사람들은 걱정했다.",
+        "많은 사람들이 기사 내용이 가짜라는 것을 몰랐기 때문에 겁에 질렸다.",
+        "어떤 사람들은 총을 들고 동물들을 사냥하러 갔다."
+      ],
+      "answer": "3"
+    },
+    {
+      "number": 19,
+      "question": "다음 글을 읽고 물음에 답하시오.\nEveryone likes an interesting news story but ⓐ<u>만약 그것이 완전히 지어낸 것이라면 어떻게 할 것인가</u>? Fake news can be very harmful in that it can make people less informed or even misled. Nevertheless, there have been various fake news reports throughout history. Why have some people written such false information? Let's look into some articles ⓑ<u>그 뒤에 숨겨진 동기를 생각하면서</u>.\n\nAWFUL DISASTER\n(A) Last night, an angry group of rhinoceroses broke down the walls of the cage at the zoo and escaped. (B) These animals ran down the streets and injured hundreds of people. Twelve of the animals are still on the loose. (C) Citizens should stay indoors until further notice. (D)\nNot a single act or incident described above has taken place. (E)\n\nAt that time, those who read the article carefully laughed out loud. Those who didn't read it to the end got really worried. Not knowing the news was false, many people panicked. Some tried to escape the city while others went into the parks with guns to hunt the animals.\nSo why did The Herald make up such news? Later, they confessed that they made it up so that they could draw the readers' attention to the unsafe conditions at the zoo.\n\n위 글을 읽고 The Herald가 뉴스를 지어낸 이유를 고르시오.\n\nWhy did The Herald make up the news?",
+      "options": [
+        "to publish another magazine about the zoo",
+        "to make people panicked for the medical test",
+        "to make a lot of money drawing the readers' attention",
+        "to draw the readers' attention to poor wild animals at the zoo",
+        "to bring the readers' attention to the dangerous condition at the zoo"
+      ],
+      "answer": "5"
+    },
+    {
+      "number": 20,
+      "question": "다음 글을 읽고 물음에 답하시오.\n(article 1) AWFUL DISASTER\nLast night, an angry group of rhinoceroses broke down the walls of the cage at the zoo and escaped. They also broke down the walls of the other wild animals' cages. These animals ran down the streets and injured hundreds of people. Twelve of the animals are still ⓐ<u>on the loose</u>. Citizens should stay indoors ⓑ<u>until further notice</u>.\n*Not a single act or incident described above has ⓒ<u>taken place</u>.\n------------------------------\nAt that time, those who read the article carefully ⓓ<u>laughed out loud</u>. Those who didn't read it to the end got really worried. Not knowing the news was false, many people panicked. Some tried to escape the city while others went into the parks with guns to hunt the animals.\nSo why did The Herald make up such news? Later, they confessed that they made it up so that they could draw the readers' attention to the unsafe conditions at the zoo.\n\n(article 2) SLAV SHOOTS A FRIEND IN ARGUMENT\nThe two men had an argument during a meeting. The argument led to a fight, and Pecitello shot Swenekafew twice, in the chest and leg. He is now at the hospital ⓔ<u>in critical condition</u>. Pecitello ran away after the shooting. The police are searching for him now and are warning citizens that he is extremely dangerous.\n------------------------------\nThe Daily Telegram published this fake article so that they could prove if The Daily News, their competitor, was stealing their articles. The Daily News published the same article about \"Swenekafew\" the next day and thus got caught stealing. The people at The Daily News had to admit their act and were harshly criticized by the public.\n\n위 글의 밑줄 친 ⓐ~ⓔ의 의미가 바르게 연결되지 않은 것은?",
+      "options": [
+        "ⓐ - 잡히지 않은",
+        "ⓑ - 추후 안내 시까지",
+        "ⓒ - 발생하다",
+        "ⓓ - 크게 웃었다",
+        "ⓔ - 중요한 상태로"
+      ],
+      "answer": "5"
+    },
+    {
+      "number": 21,
+      "question": "다음 글을 읽고 물음에 답하시오.\n(article 1) AWFUL DISASTER\nLast night, an angry group of rhinoceroses broke down the walls of the cage at the zoo and escaped. They also broke down the walls of the other wild animals' cages. These animals ran down the streets and injured hundreds of people. Twelve of the animals are still ⓐ<u>on the loose</u>. Citizens should stay indoors ⓑ<u>until further notice</u>.\n*Not a single act or incident described above has ⓒ<u>taken place</u>.\n------------------------------\nAt that time, those who read the article carefully ⓓ<u>laughed out loud</u>. Those who didn't read it to the end got really worried. Not knowing the news was false, many people panicked. Some tried to escape the city while others went into the parks with guns to hunt the animals.\nSo why did The Herald make up such news? Later, they confessed that they made it up so that they could draw the readers' attention to the unsafe conditions at the zoo.\n\n(article 2) SLAV SHOOTS A FRIEND IN ARGUMENT\nThe two men had an argument during a meeting. The argument led to a fight, and Pecitello shot Swenekafew twice, in the chest and leg. He is now at the hospital ⓔ<u>in critical condition</u>. Pecitello ran away after the shooting. The police are searching for him now and are warning citizens that he is extremely dangerous.\n------------------------------\nThe Daily Telegram published this fake article so that they could prove if The Daily News, their competitor, was stealing their articles. The Daily News published the same article about \"Swenekafew\" the next day and thus got caught stealing. The people at The Daily News had to admit their act and were harshly criticized by the public.\n\n위 글의 두 개의 기사의 공통점으로 알맞은 것은?",
+      "options": [
+        "경쟁사를 의식하고 쓰여 졌다.",
+        "보도 후, 대중들의 비난을 받았다.",
+        "예상하지 못한 결과를 불러 일으켰다.",
+        "특정한 목적을 위해 쓰인 가짜 뉴스이었다.",
+        "대중에게 즐거움을 주기 위함이 목적이었다."
+      ],
+      "answer": "4"
+    },
+    {
+      "number": 22,
+      "question": "다음 글을 읽고 물음에 답하시오.\n(article 1) AWFUL DISASTER\nLast night, an angry group of rhinoceroses broke down the walls of the cage at the zoo and escaped. They also broke down the walls of the other wild animals' cages. These animals ran down the streets and injured hundreds of people. Twelve of the animals are still ⓐ<u>on the loose</u>. Citizens should stay indoors ⓑ<u>until further notice</u>.\n*Not a single act or incident described above has ⓒ<u>taken place</u>.\n------------------------------\nAt that time, those who read the article carefully ⓓ<u>laughed out loud</u>. Those who didn't read it to the end got really worried. Not knowing the news was false, many people panicked. Some tried to escape the city while others went into the parks with guns to hunt the animals.\nSo why did The Herald make up such news? Later, they confessed that they made it up so that they could draw the readers' attention to the unsafe conditions at the zoo.\n\n(article 2) SLAV SHOOTS A FRIEND IN ARGUMENT\nThe two men had an argument during a meeting. The argument led to a fight, and Pecitello shot Swenekafew twice, in the chest and leg. He is now at the hospital ⓔ<u>in critical condition</u>. Pecitello ran away after the shooting. The police are searching for him now and are warning citizens that he is extremely dangerous.\n------------------------------\nThe Daily Telegram published this fake article so that they could prove if The Daily News, their competitor, was stealing their articles. The Daily News published the same article about \"Swenekafew\" the next day and thus got caught stealing. The people at The Daily News had to admit their act and were harshly criticized by the public.\n\n위 글의 내용과 일치하는 것은?",
+      "options": [
+        "기사 2의 총격 사건은 실제 사건을 기반으로 쓰였다.",
+        "기사 1은 야생동물의 위험성에 대한 독자의 관심을 끌기 위해 쓰였다.",
+        "The Daily Telegram은 거짓 기사를 보도하여 대중에게 비난받았다.",
+        "기사 1을 끝까지 읽은 사람들은 도시를 탈출하거나 탈출한 동물을 잡으러 나갔다.",
+        "The Daily Telegram은 The Daily News와 경쟁 관계였다."
+      ],
+      "answer": "5"
+    },
+    {
+      "number": 23,
+      "question": "다음 글을 읽고 물음에 답하시오.\nMejk Swenekafew, a Slav worker at the Columbia Coal Mine, was shot and seriously wounded by John Pecitello near the mining camp Thursday evening.\nThe two men had an argument during a meeting. The argument led to a fight, and Pecitello shot Swenekafew twice, in the chest and leg. He is now at the hospital in critical condition. Pecitello ran away after the shooting. The police are searching for him now and are warning citizens that he is extremely dangerous.\nThe Daily Telegram   September 19th, 1903\n\nIs there anything strange about the article? Read the Slav's name backwards; it spells we-fake-news.\" Who wrote this and why?\nThe Daily Telegram published this fake article to prove so that they could prove if The Daily News, their competitor, was stealing their articles. The Daily News published the same article about \"Swenekafew\" the next day and thus got caught stealing. ______________________________, the people at The Daily News had to admit their act.\n\n위 글의 빈칸에 들어갈 수 있는 것을 모두 고르면? (정답 2개)",
+      "options": [
+        "Criticizing by the public",
+        "Harshly criticized by the public",
+        "Harshly criticizing by the public",
+        "Be harshly criticized by the public",
+        "Being harshly criticized by the public"
+      ],
+      "answer": "2, 5"
+    },
+    {
+      "number": 24,
+      "question": "다음 글을 읽고 물음에 답하시오.\nMejk Swenekafew, a Slav worker at the Columbia Coal Mine, was shot and seriously wounded by John Pecitello near the mining camp Thursday evening.\nThe two men had an argument during a meeting. The argument led to a fight, and Pecitello shot Swenekafew twice, in the chest and leg. He is now at the hospital in critical condition. Pecitello ran away after the shooting. The police are searching for him now and are warning citizens that he is extremely dangerous.\nThe Daily Telegram   September 19th, 1903\n\nIs there anything strange about the article? Read the Slav's name backwards; it spells we-fake-news.\" Who wrote this and why?\nThe Daily Telegram published this fake article to prove so that they could prove if The Daily News, their competitor, was stealing their articles. The Daily News published the same article about \"Swenekafew\" the next day and thus got caught stealing. ______________________________, the people at The Daily News had to admit their act.\n\n위 글의 내용에 대한 전문가와 뉴스 리포터 사이의 대화이다. 질문에 대한 전문가의 답변 내용이 위 글과 일치하는 것은?\n\nReporter Q1: What was the news about?\nⓐExpert: It was about a man named Peticello, who shot Swenekafew after an argument with him that resulted in a fight.\nReporter Q2: Why is Swenekafew at the hospital?\nⓑExpert: He is now in good condition after being shot.\nReporter Q3: I see. I heard that this article was fake. What is the motive behind the fake article?\nⓒExpert: The Daily News wanted to show their competitor, The daily Telegram, was actually stealing their articles.\nReporter Q4: After the article was first published, what happened next?\nⓓExpert: The Daily Telegram was found to steal the article published by The Daily News.\nReporter Q5: What was the public's reaction to this?\nⓔExpert: They criticized The Daily News harshly and had to admit what they did.",
+      "options": [
+        "ⓐ",
+        "ⓑ",
+        "ⓒ",
+        "ⓓ",
+        "ⓔ"
+      ],
+      "answer": "1"
+    },
+    {
+      "number": 25,
+      "question": "다음 글을 읽고 물음에 답하시오.\nCan you Spot Fake News?\nEvery day we watch, hear, or read interesting news. (A) However, have you ever seriously considered ⓐ<u>whether</u> an article is really true? (B) Everyone likes an interesting news story but what if it is completely made up? (C)\nFake news can be very harmful in that it can make people ⓑ<u>less informed or even misled</u>. (D) Why have some people written such false information? (E) Let's look into some articles thinking about the hidden motives behind ⓒ<u>them</u>.\n\nAWFUL DISASTER\nLast night, an angry group of rhinoceroses broke down the walls of the cage at the zoo and escaped. They also broke down the walls of the other wild animals' cages. These animals ran down the streets and injured hundreds of people. Twelve of the animals are still on the loose. Citizens should stay indoors until further notice.\n(Not a single act or incident ⓓ<u>described above</u> has taken place.)\n\nAt that time, those who read the article carefully laughed out loud. Those who didn't read it to the end got really worried. Not knowing the news was false, many people panicked. Some tried to escape the city while ⓔ<u>others</u> went into the parks with guns to hunt the animals.\nSo why did The Herald make up such news? Later, ⓕ<u>they</u> confessed that they made it up ⓖ<u>so that they could draw</u> the readers' attention to the unsafe conditions at the zoo.\n\n위 글의 (A)~(E) 중, 주어진 문장이 들어갈 알맞은 곳은?\n\nNevertheless, there have been various fake news reports throughout history.",
+      "options": [
+        "(A)",
+        "(B)",
+        "(C)",
+        "(D)",
+        "(E)"
+      ],
+      "answer": "4"
+    },
+    {
+      "number": 26,
+      "question": "다음 글을 읽고 물음에 답하시오.\nCan you Spot Fake News?\nEvery day we watch, hear, or read interesting news. (A) However, have you ever seriously considered ⓐ<u>whether</u> an article is really true? (B) Everyone likes an interesting news story but what if it is completely made up? (C)\nFake news can be very harmful in that it can make people ⓑ<u>less informed or even misled</u>. (D) Why have some people written such false information? (E) Let's look into some articles thinking about the hidden motives behind ⓒ<u>them</u>.\n\nAWFUL DISASTER\nLast night, an angry group of rhinoceroses broke down the walls of the cage at the zoo and escaped. They also broke down the walls of the other wild animals' cages. These animals ran down the streets and injured hundreds of people. Twelve of the animals are still on the loose. Citizens should stay indoors until further notice.\n(Not a single act or incident ⓓ<u>described above</u> has taken place.)\n\nAt that time, those who read the article carefully laughed out loud. Those who didn't read it to the end got really worried. Not knowing the news was false, many people panicked. Some tried to escape the city while ⓔ<u>others</u> went into the parks with guns to hunt the animals.\nSo why did The Herald make up such news? Later, ⓕ<u>they</u> confessed that they made it up ⓖ<u>so that they could draw</u> the readers' attention to the unsafe conditions at the zoo.\n\n위 글의 내용과 일치하는 것은?",
+      "options": [
+        "No one in this city believed this article at all.",
+        "The article said that all the animals were caught in the end.",
+        "The Herald made up the fake story in order to sell more newspapers.",
+        "Fake news can be very harmful because it can make people more informed.",
+        "The people who read the article carefully came to know that the article was not true."
+      ],
+      "answer": "5"
+    },
+    {
+      "number": 27,
+      "question": "다음 글을 읽고 물음에 답하시오.\nCan you Spot Fake News?\nEvery day we watch, hear, or read interesting news. (A) However, have you ever seriously considered ⓐ<u>whether</u> an article is really true? (B) Everyone likes an interesting news story but what if it is completely made up? (C)\nFake news can be very harmful in that it can make people ⓑ<u>less informed or even misled</u>. (D) Why have some people written such false information? (E) Let's look into some articles thinking about the hidden motives behind ⓒ<u>them</u>.\n\nAWFUL DISASTER\nLast night, an angry group of rhinoceroses broke down the walls of the cage at the zoo and escaped. They also broke down the walls of the other wild animals' cages. These animals ran down the streets and injured hundreds of people. Twelve of the animals are still on the loose. Citizens should stay indoors until further notice.\n(Not a single act or incident ⓓ<u>described above</u> has taken place.)\n\nAt that time, those who read the article carefully laughed out loud. Those who didn't read it to the end got really worried. Not knowing the news was false, many people panicked. Some tried to escape the city while ⓔ<u>others</u> went into the parks with guns to hunt the animals.\nSo why did The Herald make up such news? Later, ⓕ<u>they</u> confessed that they made it up ⓖ<u>so that they could draw</u> the readers' attention to the unsafe conditions at the zoo.\n\n위 글의 밑줄 친 ⓐ~ⓖ에 대한 설명으로 알맞은 것끼리 짝지어진 것은?\n\nCan you Spot Fake News?\nⓐ 명사절을 이끄는 접속사로서 이 문장에서 'have considered'의 목적절을 이끈다.\nⓑ 'informed'는 'less'를 'misled'는 'even'을 꾸며주는 과거 분사들이다.\nⓒ 앞에 있는 'some people'을 가리키는 대명사이다.\nⓓ 앞에 있는 명사를 꾸며주는 과거분사구이다.\nⓔ 의미상 'the other'로 바꿔 쓸 수 있다.\nⓕ The Herald를 가리킨다.\nⓖ 'in order to draw'라는 표현으로 바꿀 수 있다.",
+      "options": [
+        "ⓐ, ⓓ, ⓖ",
+        "ⓐ, ⓓ, ⓕ, ⓖ",
+        "ⓑ, ⓒ, ⓓ, ⓔ",
+        "ⓑ, ⓒ, ⓔ, ⓕ",
+        "ⓐ, ⓒ, ⓓ, ⓔ, ⓕ, ⓖ"
+      ],
+      "answer": "2"
+    },
+    {
+      "number": 28,
+      "question": "다음 글을 읽고 물음에 답하시오.\nSLAV SHOOTS A FRIEND IN ARGUMENT\nMejk Swenekafew, a Slav worker at the Columbia Coal Mine, was shot and seriously wounded by John Pecitello near the mining camp Thursday evening.\nThe two men had an argument during a meeting. The argument led to a fight, and Pecitello shot Swenekafew twice, in the chest and leg. He is now at the hospital in critical condition. Pecitello ran away after the shooting. The police are searching for him now and are warning citizens that he is extremely dangerous.\n\nIs there anything strange about the article? Read the Slav's name backwards; it spells \"we-fake-news.\" Who wrote this and why? The Daily Telegram published this fake article (A)[could / so / they / that / prove] if The Daily News, their competitor, was stealing their articles. The Daily News published the same article about \"Swenekafew\" the next day and thus got caught stealing. The people at The Daily News had to admit their act and (B)______________________________.\n\n위 글의 빈칸 (B)에 들어갈 말로 알맞은 것은?",
+      "options": [
+        "got angry that Slav workers went to The Daily News",
+        "won the 1st prize in the clean media contest",
+        "helped the police to search for Swenekafew",
+        "were harshly criticized by the public",
+        "also stole other companies' news"
+      ],
+      "answer": "4"
+    },
+    {
+      "number": 29,
+      "question": "다음 글을 읽고 물음에 답하시오.\nWalk and You'll Get Slim and Strong!\nOur new walking shoes, Wing Walker, have various strong points. Walking with Wing Walker, you burn more calories and get slimmer. They also strengthen leg muscles because they use the hidden board technology. Upgrade your walking experience with Wing Walker!\n\n위 글의 Wing Walker를 신은 효과로 알맞은 것을 모두 고르면? (정답 2개)",
+      "options": [
+        "날씬해진다.",
+        "다리가 길어 보인다.",
+        "더 많이 걸을 수 있다.",
+        "걷기 속도가 빨라진다.",
+        "다리 근육이 튼튼해진다."
+      ],
+      "answer": "1, 5"
+    }
+  ]
+}

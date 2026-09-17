@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { createApiHandler, NotFoundError, dbResult } from '@/lib/api';
 import { problemSubmitSchema } from '@/lib/api/schemas';
-import { normalize, normalizeSeparators, matchMcqAnswer, extractAnswer, isSubstringMatch, matchSubParts } from '@/lib/naesin/normalize-answer';
+import { normalize, normalizeSeparators, matchMcqAnswer, extractAnswer, isSubstringMatch, matchSubParts, matchFilledBlanks } from '@/lib/naesin/normalize-answer';
 
 export const maxDuration = 60;
 
@@ -40,7 +40,8 @@ export const POST = createApiHandler(
         const q = questions?.[i];
         if (q?.subParts) {
           // 파트별 비교 → 실패 시 전체 문자열(구분자 무시) 폴백
-          isCorrect = matchSubParts(userAnswer, q.subParts, [correctAnswer, ...(q.acceptedAnswers ?? [])]);
+          isCorrect = matchSubParts(userAnswer, q.subParts, [correctAnswer, ...(q.acceptedAnswers ?? [])])
+            || matchFilledBlanks(userAnswer, q.question, correctAnswer, q.acceptedAnswers, q.subParts);
         } else {
           // 규칙 기반 정규화 채점: 먼저 정규화 비교, AI는 보조
           const studentNorm = normalize(userAnswer);
@@ -54,6 +55,9 @@ export const POST = createApiHandler(
             isCorrect = true;
           } else if (candidates.some((c) => isSubstringMatch(userAnswer, c))) {
             // 배열 문제 등 부분 일치 (prefix/suffix)
+            isCorrect = true;
+          } else if (matchFilledBlanks(userAnswer, q?.question, correctAnswer, q?.acceptedAnswers)) {
+            // 빈칸을 채운 완전한 문장을 쓴 경우
             isCorrect = true;
           } else {
             const aiResult = aiResults?.[String(i)];

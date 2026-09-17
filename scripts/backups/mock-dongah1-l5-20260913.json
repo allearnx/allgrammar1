@@ -1,0 +1,844 @@
+{
+ "R1": [
+  {
+   "number": 1,
+   "question": "다음 중 짝지어진 단어의 관계가 나머지 넷과 다른 것은?",
+   "options": [
+    "tall - short",
+    "clearly - obviously",
+    "outside - inside",
+    "young - old",
+    "remember - forget"
+   ],
+   "answer": "2",
+   "explanation": "'또렷이, 명백하게 - 명백하게'는 유의어 관계이고 나머지는 '반의어' 관계이다."
+  },
+  {
+   "number": 2,
+   "question": "다음 중 어느 빈칸에도 들어갈 수 없는 단어는?\n\n• English is an international ________.\n• Stealing others' things is a ________.\n• The police listened to the ________ carefully.\n• He finally arrived at the ________ of the accident.",
+   "options": [
+    "crime",
+    "scene",
+    "height",
+    "language",
+    "eyewitness"
+   ],
+   "answer": "3",
+   "explanation": "차례대로 language - crime - eyewitness - scene이다. height는 '키'라는 뜻의 명사이다."
+  },
+  {
+   "number": 3,
+   "question": "다음 중 영영풀이가 알맞지 않은 것은?",
+   "options": [
+    "fast: able to move quickly",
+    "bakery: a shop that sells bread, cakes, etc.",
+    "speak: to talk to someone about something",
+    "janitor: a person who cleans and takes care of a building",
+    "wig: a piece of clothing that you wear on your head"
+   ],
+   "answer": "5",
+   "explanation": "wig는 '가발'이라는 뜻이므로, 주어진 영영풀이는 알맞지 않다. 'artificial hair that you wear on your head'로 고쳐야 한다."
+  },
+  {
+   "number": 4,
+   "question": "다음 중 어법상 어색한 것을 모두 고르면? (정답 2개)",
+   "options": [
+    "This is the most interesting book in the library.",
+    "There weren't any trees in the mountain.",
+    "This room is hoter than that room.",
+    "Jessica is busier than her friends.",
+    "Are there rice in the bowl?"
+   ],
+   "answer": "3, 5",
+   "explanation": "③ hoter → hotter (단모음+단자음으로 끝나는 형용사는 자음을 한 번 더 쓴다). ⑤ rice는 셀 수 없는 명사로 단수 취급하므로 Are → Is."
+  },
+  {
+   "number": 5,
+   "question": "다음 그림에 대한 설명으로 어법상 또는 내용상 일치하지 않는 것을 모두 골라 짝지은 것은?\n(그림 설명: 민호의 방. 책상 위에 컴퓨터가 있고, 책상 아래에는 고양이 한 마리가 있으며, 벽에 시계가 걸려 있고, 침대 위에 책 세 권이 있다.)\n\nThis is Minho's room. ⓐ<u>There is a desk in the room.</u> ⓑ<u>There is a ball under the desk.</u> ⓒ<u>There is a computer on the desk.</u> ⓓ<u>There is a clock on the wall.</u> ⓔ<u>There is three books on the bed.</u>",
+   "options": [
+    "ⓐ, ⓑ",
+    "ⓐ, ⓓ",
+    "ⓑ, ⓔ",
+    "ⓒ, ⓓ",
+    "ⓒ, ⓔ"
+   ],
+   "answer": "3",
+   "explanation": "ⓑ 책상 아래에는 공이 아니라 고양이 한 마리가 있다(내용 불일치). ⓔ 주어가 복수(three books)이므로 is → are."
+  },
+  {
+   "number": 6,
+   "question": "다음 대화의 순서를 알맞게 배열한 것은?\n\n(A) Look at that sign. You must not run inside the museum.\n(B) Of course, but don't run, Jake.\n(C) May I go to the video room, Mom?\n(D) Why not?",
+   "options": [
+    "(A)-(B)-(D)-(C)",
+    "(A)-(D)-(B)-(C)",
+    "(C)-(B)-(A)-(D)",
+    "(C)-(B)-(D)-(A)",
+    "(C)-(D)-(B)-(A)"
+   ],
+   "answer": "4",
+   "explanation": "엄마에게 비디오 방에 가도 되는지 허락을 구하고(C), 된다고 허락해 주면서 그러나 뛰면 안 된다고 말하자(B), 왜 뛰면 안 되는지 묻고(D), 그 이유로 표지판을 보라고 말하는(A) 순서가 자연스럽다."
+  },
+  {
+   "number": 7,
+   "question": "다음 대화의 빈칸에 들어갈 말로 알맞은 것은?\n\nW: Excuse me, but ______________________________\nB: I'm terribly sorry. I'll turn off my phone.\nW: You don't have to. Texting is OK.\nB: I see. Thank you.",
+   "options": [
+    "You must stand in line here.",
+    "You may not eat any food here.",
+    "You should not touch the artwork.",
+    "You should turn off your phone here.",
+    "You must not talk on the phone here."
+   ],
+   "answer": "5",
+   "explanation": "소년이 사과하며 휴대폰을 끄겠다고 하자 여자가 그럴 필요 없고 문자는 괜찮다고 말하고 있으므로, 빈칸에는 통화 금지를 나타내는 ⑤가 알맞다."
+  },
+  {
+   "number": 8,
+   "question": "다음 중 짝지어진 대화가 어색한 것은?",
+   "options": [
+    "A: May I bring my dog to the store? / B: No, you may not.",
+    "A: May I touch this golden bear? / B: No, you may not touch anything in this room.",
+    "A: Mr. Lee, may I eat snacks in class? / B: Of course. You must not eat snacks in class.",
+    "A: You must not run in the museum. / B: Why not?",
+    "A: May I open the window? / B: Sure, go ahead."
+   ],
+   "answer": "3",
+   "explanation": "③ 수업 중 간식을 먹어도 되는지 허락을 구하는 말에 '물론이지'라고 수락한 뒤 먹어서는 안 된다고 금지하는 것은 어색하다."
+  },
+  {
+   "number": 9,
+   "question": "다음 그림을 보고 <보기>의 단어와 'there+be동사 ~' 구문을 사용하여 빈칸을 완성하시오. (단, 필요시 변형할 것)\n(그림 설명: Mia의 생일 파티. 테이블 주변에 아이 다섯 명이 있고, 테이블 위에 선물 네 개가 있으며, 테이블 가운데에 케이크가 있다.)\n\n<보기> cake, child, five, gift, four\n\nToday is Mia's birthday. (1)________ around the table. (2)________ on the table, and Mia likes them a lot. (3)________ in the middle of the table. Everyone is singing and having fun.",
+   "options": [],
+   "answer": "There are five children / There are four gifts / There is a cake",
+   "subParts": [
+    {
+     "label": "(1)",
+     "answer": "There are five children"
+    },
+    {
+     "label": "(2)",
+     "answer": "There are four gifts"
+    },
+    {
+     "label": "(3)",
+     "answer": "There is a cake"
+    }
+   ],
+   "explanation": "복수 명사 앞에는 There are, 단수 명사 앞에는 There is를 쓴다. child의 복수형은 children이다."
+  },
+  {
+   "number": 10,
+   "question": "다음 대화를 읽고 물음에 답하시오.\nM: Everybody, look over here, please. This is Sunflowers by Van Gogh.\nG: Wow, this is my favorite painting. May I take a picture of it?\nM: ______________, but you must not use the flash.\nG: Why not? It's a little dark in here.\nM: I'm sorry, but using the flash can damage paintings.\nG: Oh, I didn't know that.\nM: Everyone, we'll move on to Monet's paintings next.\nG: Great!\n\n위 대화의 빈칸에 들어갈 말로 알맞은 것은?",
+   "options": [
+    "No, you don't have to.",
+    "No, you may not.",
+    "You're welcome.",
+    "Yes, you may.",
+    "Yes, please."
+   ],
+   "answer": "4",
+   "explanation": "사진을 찍어도 되는지 허락을 요청하는 질문에 대한 대답으로, 뒤에 but(하지만)으로 플래시 사용 금지가 이어지므로 허락하는 표현 ④가 알맞다."
+  },
+  {
+   "number": 11,
+   "question": "다음 대화를 읽고 물음에 답하시오.\nM: Everybody, look over here, please. This is Sunflowers by Van Gogh.\nG: Wow, this is my favorite painting. May I take a picture of it?\nM: ______________, but you must not use the flash.\nG: Why not? It's a little dark in here.\nM: I'm sorry, but using the flash can damage paintings.\nG: Oh, I didn't know that.\nM: Everyone, we'll move on to Monet's paintings next.\nG: Great!\n\n위 대화를 아래와 같이 요약할 때, 밑줄 친 ⓐ~ⓔ 중, 알맞지 않은 것은?\n\nAt the exhibition, a girl wants to take a ⓐ<u>photo</u> of her ⓑ<u>favorite</u> painting, Sunflowers. The man says she can do it, but she ⓒ<u>must not</u> use the flash because it is ⓓ<u>good</u> for the paintings. Then they will go to see ⓔ<u>Monet's</u> paintings.",
+   "options": [
+    "ⓐ",
+    "ⓑ",
+    "ⓒ",
+    "ⓓ",
+    "ⓔ"
+   ],
+   "answer": "4",
+   "explanation": "플래시는 그림을 훼손시킬 수 있기 때문에 사용하지 말라고 했으므로 ⓓ good을 bad와 같은 단어로 고쳐야 한다."
+  },
+  {
+   "number": 12,
+   "question": "다음 대화를 읽고 답할 수 없는 질문을 모두 고르면? (정답 2개)\n\nB: May I go to the video room, Mom?\nW: Of course, but don't run.\nB: Why not?\nW: Look at that sign. You must not run inside the museum.",
+   "options": [
+    "What shouldn't the boy do inside the museum?",
+    "What artwork did the boy see in the museum?",
+    "After the dialogue, where will the boy go?",
+    "What is the sign about in the museum?",
+    "What video will the boy watch?"
+   ],
+   "answer": "2, 5",
+   "explanation": "박물관에서 본 작품과 비디오 방에서 볼 비디오에 대한 언급은 없다."
+  },
+  {
+   "number": 13,
+   "question": "다음 글을 읽고 물음에 답하시오.\nLast Saturday, someone ⓐ<u>threw</u> a cake at the Monalisa in the Botero Museum in Bogota, Colombia. (A) What did they say? (B) Read the following, and ⓑ<u>find</u> the criminal.\n\nAnn Jones, a visitor\nI was ⓒ<u>looking</u> at the Monalisa, and someone threw a cake at the painting. (C) I turned around and ⓓ<u>saw</u> an old man. (D) He was standing in front of a wheelchair. I'm about 170 cm tall, and he was a little ⓔ<u>tall</u> than me. (E)\n\n윗글의 밑줄 친 ⓐ~ⓔ 중, 어법상 어색한 것은?",
+   "options": [
+    "ⓐ",
+    "ⓑ",
+    "ⓒ",
+    "ⓓ",
+    "ⓔ"
+   ],
+   "answer": "5",
+   "explanation": "ⓔ 뒤에 than이 있으므로 비교급 taller가 되어야 한다."
+  },
+  {
+   "number": 14,
+   "question": "다음 글을 읽고 물음에 답하시오.\nLast Saturday, someone ⓐ<u>threw</u> a cake at the Monalisa in the Botero Museum in Bogota, Colombia. (A) What did they say? (B) Read the following, and ⓑ<u>find</u> the criminal.\n\nAnn Jones, a visitor\nI was ⓒ<u>looking</u> at the Monalisa, and someone threw a cake at the painting. (C) I turned around and ⓓ<u>saw</u> an old man. (D) He was standing in front of a wheelchair. I'm about 170 cm tall, and he was a little ⓔ<u>tall</u> than me. (E)\n\n윗글의 (A)~(E) 중, 주어진 문장이 들어갈 알맞은 곳은?\n\nThere were four eyewitnesses.",
+   "options": [
+    "(A)",
+    "(B)",
+    "(C)",
+    "(D)",
+    "(E)"
+   ],
+   "answer": "1",
+   "explanation": "'네 명의 목격자가 있었다'는 문장은 사건을 간략히 설명하는 문장 뒤, 목격자들을 they로 받아 그들이 무엇을 말했는지 묻는 문장 앞인 (A)에 들어가는 것이 적절하다."
+  },
+  {
+   "number": 15,
+   "question": "다음 글을 읽고 물음에 답하시오.\nLast Saturday, someone ⓐ<u>threw</u> a cake at the Monalisa in the Botero Museum in Bogota, Colombia. (A) What did they say? (B) Read the following, and ⓑ<u>find</u> the criminal.\n\nAnn Jones, a visitor\nI was ⓒ<u>looking</u> at the Monalisa, and someone threw a cake at the painting. (C) I turned around and ⓓ<u>saw</u> an old man. (D) He was standing in front of a wheelchair. I'm about 170 cm tall, and he was a little ⓔ<u>tall</u> than me. (E)\n\n윗글의 제목을 다음과 같이 쓸 때, 빈칸에 들어갈 알맞은 말을 찾아 쓰시오. (첫 철자는 대문자로 쓸 것)\n\nWhat Did (1)________ Say About the (2)________?",
+   "options": [],
+   "answer": "Eyewitnesses, Criminal",
+   "subParts": [
+    {
+     "label": "(1)",
+     "answer": "Eyewitnesses"
+    },
+    {
+     "label": "(2)",
+     "answer": "Criminal"
+    }
+   ],
+   "explanation": "목격자들(Eyewitnesses)이 범인(Criminal)에 대해 무엇을 말했는지를 담은 글이다."
+  },
+  {
+   "number": 16,
+   "question": "다음 글을 읽고 물음에 답하시오.\nLast Saturday, someone ⓐ<u>threw</u> a cake at the Monalisa in the Botero Museum in Bogota, Colombia. (A) What did they say? (B) Read the following, and ⓑ<u>find</u> the criminal.\n\nAnn Jones, a visitor\nI was ⓒ<u>looking</u> at the Monalisa, and someone threw a cake at the painting. (C) I turned around and ⓓ<u>saw</u> an old man. (D) He was standing in front of a wheelchair. I'm about 170 cm tall, and he was a little ⓔ<u>tall</u> than me. (E)\n\n윗글의 내용과 일치하는 것은?",
+   "options": [
+    "An old man stole the Monalisa last Saturday.",
+    "Ann was at the crime scene, the Botero Museum.",
+    "Ann saw an old man on the way to the museum.",
+    "An old man was standing in front of the Monalisa.",
+    "The old man is a little shorter than Ann."
+   ],
+   "answer": "2",
+   "explanation": "Ann은 보테로 박물관에서 '모나리자'를 보고 있을 때 누군가가 케이크를 던졌다고 했으므로 ② Ann이 범죄 현장인 보테로 박물관에 있었다는 내용이 일치한다."
+  },
+  {
+   "number": 17,
+   "question": "다음 글을 읽고 물음에 답하시오.\nCarlos Diaz, a janitor\nAn old man with gray hair was running away, and something fell off his head. It was his wig. I ran after him, but I ⓐ<u>can't catch</u> him. He was ⓑ<u>more fast</u> than me. In fact, the old man ⓒ<u>was not</u> old. He was a young man with long brown hair.\n\nDiego Perez, a guard\nI went to the crime scene, and (A)<u>그림 곳곳에 케이크 조각들이 있었어요.</u> There ⓓ<u>was</u> also a wheelchair near the painting, and I ⓔ<u>found</u> a cake box next to the wheelchair. The box was from Camila's Bakery.\n\n윗글의 밑줄 친 ⓐ~ⓔ 중, 어법상 어색한 것을 모두 고르면? (정답 2개)",
+   "options": [
+    "ⓐ",
+    "ⓑ",
+    "ⓒ",
+    "ⓓ",
+    "ⓔ"
+   ],
+   "answer": "1, 2",
+   "explanation": "ⓐ 과거의 일이므로 can't catch → couldn't catch(could not catch). ⓑ 1음절 형용사 fast의 비교급은 faster이다."
+  },
+  {
+   "number": 18,
+   "question": "다음 글을 읽고 물음에 답하시오.\nCarlos Diaz, a janitor\nAn old man with gray hair was running away, and something fell off his head. It was his wig. I ran after him, but I ⓐ<u>can't catch</u> him. He was ⓑ<u>more fast</u> than me. In fact, the old man ⓒ<u>was not</u> old. He was a young man with long brown hair.\n\nDiego Perez, a guard\nI went to the crime scene, and (A)<u>그림 곳곳에 케이크 조각들이 있었어요.</u> There ⓓ<u>was</u> also a wheelchair near the painting, and I ⓔ<u>found</u> a cake box next to the wheelchair. The box was from Camila's Bakery.\n\n윗글의 밑줄 친 (A)의 우리말을 주어진 <조건>에 알맞게 영작하시오.\n\n<조건>\n• 'There+be동사 ~' 구문을 사용할 것\n• all, piece, over, the painting을 사용할 것 (필요시 변형할 것)\n• 총 9단어로 영작할 것\n\n→ ________________________________",
+   "options": [],
+   "answer": "there were pieces of cake all over the painting",
+   "acceptedAnswers": [
+    "There were pieces of cake all over the painting."
+   ],
+   "explanation": "주어가 복수(pieces of cake)이고 과거의 일이므로 There were를 쓰고, '곳곳에'는 all over로 나타낸다."
+  },
+  {
+   "number": 19,
+   "question": "다음 글을 읽고 물음에 답하시오.\nCarlos Diaz, a janitor\nAn old man with gray hair was running away, and something fell off his head. It was his wig. I ran after him, but I ⓐ<u>can't catch</u> him. He was ⓑ<u>more fast</u> than me. In fact, the old man ⓒ<u>was not</u> old. He was a young man with long brown hair.\n\nDiego Perez, a guard\nI went to the crime scene, and (A)<u>그림 곳곳에 케이크 조각들이 있었어요.</u> There ⓓ<u>was</u> also a wheelchair near the painting, and I ⓔ<u>found</u> a cake box next to the wheelchair. The box was from Camila's Bakery.\n\n윗글을 읽고 다음 질문에 대한 대답으로 알맞은 것을 고르면?\n\nQ. What clue did Diego find on the cake box?",
+   "options": [
+    "the receipt",
+    "the bakery's name",
+    "the criminal's memo",
+    "the bakery's address",
+    "the criminal's language"
+   ],
+   "answer": "2",
+   "explanation": "휠체어 옆에 있던 케이크 상자는 Camila 빵집의 것이었다고 했으므로 Diego가 발견한 단서는 '빵집의 이름'이다."
+  },
+  {
+   "number": 20,
+   "question": "다음 글을 읽고 물음에 답하시오.\nCarlos Diaz, a janitor\nAn old man with gray hair was running away, and something fell off his head. It was his wig. I ran after him, but I ⓐ<u>can't catch</u> him. He was ⓑ<u>more fast</u> than me. In fact, the old man ⓒ<u>was not</u> old. He was a young man with long brown hair.\n\nDiego Perez, a guard\nI went to the crime scene, and (A)<u>그림 곳곳에 케이크 조각들이 있었어요.</u> There ⓓ<u>was</u> also a wheelchair near the painting, and I ⓔ<u>found</u> a cake box next to the wheelchair. The box was from Camila's Bakery.\n\n윗글의 제목으로 알맞은 것은?",
+   "options": [
+    "Lies of the Suspects",
+    "Eyewitness Statements",
+    "Workers in the Museum",
+    "The Causes of the Crime",
+    "The Solution by the Police"
+   ],
+   "answer": "2",
+   "explanation": "청소부 Carlos와 경비원 Diego가 범죄 현장에서 본 것을 진술하고 있으므로 제목으로 '목격자 진술들'이 알맞다."
+  },
+  {
+   "number": 21,
+   "question": "다음 글을 읽고 물음에 답하시오.\nCamila Santos, the owner of Camila's Bakery\nLast Friday, a young man came in. I spoke to him in Spanish, but he (A)[wasn't / didn't] understand me. He spoke only English. We had a lot of different cakes, but he just wanted the (B)[most small / smallest] one. We sold only one cake that day, so I remember him clearly. Oh, he had blue eyes.\n\nNow, (C)[looking / look] at the information about the suspects. Who threw the cake at the Monalisa?\n\n| The Suspects | |\n|---|---|\n| Andres Lozano — Height: 176 cm / Hair: long, black / Languages: Spanish, English / Eyes: brown | Larry Johnson — Height: 173 cm / Hair: long, brown / Languages: English / Eyes: blue |\n| Tim Baker — Height: 182 cm / Hair: long, brown / Languages: English / Eyes: green | Luca Ferez — Height: 166 cm / Hair: short, gray / Languages: Spanish / Eyes: blue |\n\n윗글의 괄호 (A), (B), (C)에서 어법상 알맞은 말로 바르게 연결된 것은?",
+   "options": [
+    "(A) didn't – (B) smallest – (C) look",
+    "(A) wasn't – (B) smallest – (C) looking",
+    "(A) wasn't – (B) most small – (C) look",
+    "(A) didn't – (B) most small – (C) looking",
+    "(A) didn't – (B) smallest – (C) looking"
+   ],
+   "answer": "1",
+   "explanation": "(A) 일반동사의 과거 부정은 didn't+동사원형. (B) 1음절 형용사 small의 최상급은 smallest. (C) 명령문이므로 동사원형 look."
+  },
+  {
+   "number": 22,
+   "question": "다음 글을 읽고 물음에 답하시오.\nCamila Santos, the owner of Camila's Bakery\nLast Friday, a young man came in. I spoke to him in Spanish, but he (A)[wasn't / didn't] understand me. He spoke only English. We had a lot of different cakes, but he just wanted the (B)[most small / smallest] one. We sold only one cake that day, so I remember him clearly. Oh, he had blue eyes.\n\nNow, (C)[looking / look] at the information about the suspects. Who threw the cake at the Monalisa?\n\n| The Suspects | |\n|---|---|\n| Andres Lozano — Height: 176 cm / Hair: long, black / Languages: Spanish, English / Eyes: brown | Larry Johnson — Height: 173 cm / Hair: long, brown / Languages: English / Eyes: blue |\n| Tim Baker — Height: 182 cm / Hair: long, brown / Languages: English / Eyes: green | Luca Ferez — Height: 166 cm / Hair: short, gray / Languages: Spanish / Eyes: blue |\n\n윗글을 읽고 다음 질문에 대한 알맞은 대답이 되도록 빈칸을 완성하시오.\n\nQ. What information does Camila give about the young man?\n→ He used (1)________ and (2)________.",
+   "options": [],
+   "answer": "only English, had blue eyes",
+   "subParts": [
+    {
+     "label": "(1)",
+     "answer": "only English"
+    },
+    {
+     "label": "(2)",
+     "answer": "had blue eyes"
+    }
+   ],
+   "explanation": "Camila는 그 젊은 남자가 영어만 사용했고 파란 눈을 가졌다고 말했다."
+  },
+  {
+   "number": 23,
+   "question": "다음 글을 읽고 물음에 답하시오.\nCamila Santos, the owner of Camila's Bakery\nLast Friday, a young man came in. I spoke to him in Spanish, but he (A)[wasn't / didn't] understand me. He spoke only English. We had a lot of different cakes, but he just wanted the (B)[most small / smallest] one. We sold only one cake that day, so I remember him clearly. Oh, he had blue eyes.\n\nNow, (C)[looking / look] at the information about the suspects. Who threw the cake at the Monalisa?\n\n| The Suspects | |\n|---|---|\n| Andres Lozano — Height: 176 cm / Hair: long, black / Languages: Spanish, English / Eyes: brown | Larry Johnson — Height: 173 cm / Hair: long, brown / Languages: English / Eyes: blue |\n| Tim Baker — Height: 182 cm / Hair: long, brown / Languages: English / Eyes: green | Luca Ferez — Height: 166 cm / Hair: short, gray / Languages: Spanish / Eyes: blue |\n\n윗글의 목적으로 알맞은 것은?",
+   "options": [
+    "to get a job as a baker",
+    "to find Camila's helper",
+    "to show great people",
+    "to catch the criminal",
+    "to stop crime"
+   ],
+   "answer": "4",
+   "explanation": "케이크를 사간 사람에 대한 진술과 용의자들의 정보를 제시하며 누가 케이크를 던졌는지 묻고 있으므로 범인을 잡기 위한 글이다."
+  },
+  {
+   "number": 24,
+   "question": "다음 글을 읽고 물음에 답하시오.\nCamila Santos, the owner of Camila's Bakery\nLast Friday, a young man came in. I spoke to him in Spanish, but he (A)[wasn't / didn't] understand me. He spoke only English. We had a lot of different cakes, but he just wanted the (B)[most small / smallest] one. We sold only one cake that day, so I remember him clearly. Oh, he had blue eyes.\n\nNow, (C)[looking / look] at the information about the suspects. Who threw the cake at the Monalisa?\n\n| The Suspects | |\n|---|---|\n| Andres Lozano — Height: 176 cm / Hair: long, black / Languages: Spanish, English / Eyes: brown | Larry Johnson — Height: 173 cm / Hair: long, brown / Languages: English / Eyes: blue |\n| Tim Baker — Height: 182 cm / Hair: long, brown / Languages: English / Eyes: green | Luca Ferez — Height: 166 cm / Hair: short, gray / Languages: Spanish / Eyes: blue |\n\n윗글의 내용과 일치하지 않는 것을 모두 고르면? (정답 2개)",
+   "options": [
+    "Last Friday, only one person bought a cake at Camila's Bakery.",
+    "Camila Santos knows the young man's height.",
+    "Luca Ferez is shorter than Andres Lozano.",
+    "Tim Baker is the tallest of the four suspects.",
+    "Both Larry Johnson and Luca Ferez have green eyes."
+   ],
+   "answer": "2, 5",
+   "explanation": "② Camila는 남자의 키에 대해서는 언급하지 않았다. ⑤ Larry Johnson과 Luca Ferez의 눈은 둘 다 파란색이다."
+  },
+  {
+   "number": 25,
+   "question": "다음 글을 읽고 아래 대화의 빈칸 (A)~(C)에 들어갈 알맞은 말을 쓰시오.\n\nDiego Perez, a guard\nI went to the crime scene, and there were pieces of cake all over the painting. There was also a wheelchair near the painting, and I found a cake box next to the wheelchair. The box was from Camila's Bakery.\n\nW: Diego, what did you see at the crime scene?\nM: I saw (A)________ on the painting, a (B)________ near it, and a (C)________ from Camila's Bakery.",
+   "options": [],
+   "answer": "pieces of cake, wheelchair, cake box",
+   "subParts": [
+    {
+     "label": "(1)",
+     "answer": "pieces of cake"
+    },
+    {
+     "label": "(2)",
+     "answer": "wheelchair"
+    },
+    {
+     "label": "(3)",
+     "answer": "cake box"
+    }
+   ],
+   "explanation": "Diego는 그림 위의 케이크 조각들, 근처의 휠체어, Camila 빵집의 케이크 상자를 보았다."
+  },
+  {
+   "number": 26,
+   "question": "다음 글을 읽고 물음에 답하시오.\nLast Saturday, someone threw a cake at the Monalisa in the Botero Museum in Bogota, Colombia. There were four eyewitnesses. What did they say? Read the following, and find the criminal.\n\nAnn Jones, a visitor\nI was looking at the Monalisa, and someone threw a cake at the painting. I turned around and saw an old man. He was standing in front of a wheelchair. I'm about 170 cm tall, and he was a little taller than me.\n\nCarlos Diaz, a janitor\nAn old man with gray hair was running away, and something fell off his head. It was his wig. I ran after him, but I couldn't catch him. ______________________ In fact, the old man was not old. He was a young man with long brown hair.\n\n윗글의 빈칸에 들어갈 말로 알맞은 것은?",
+   "options": [
+    "He ran more slowly than me.",
+    "He was weaker than me.",
+    "He was taller than me.",
+    "He ran faster than me.",
+    "He was older than me."
+   ],
+   "answer": "4",
+   "explanation": "Carlos가 그를 뒤쫓았지만 잡을 수 없었다는 문장에 이어지므로 '그는 나보다 빠르게 달렸다'가 알맞다."
+  },
+  {
+   "number": 27,
+   "question": "다음 글을 읽고 물음에 답하시오.\nLast Saturday, someone threw a cake at the Monalisa in the Botero Museum in Bogota, Colombia. There were four eyewitnesses. What did they say? Read the following, and find the criminal.\n\nAnn Jones, a visitor\nI was looking at the Monalisa, and someone threw a cake at the painting. I turned around and saw an old man. He was standing in front of a wheelchair. I'm about 170 cm tall, and he was a little taller than me.\n\nCarlos Diaz, a janitor\nAn old man with gray hair was running away, and something fell off his head. It was his wig. I ran after him, but I couldn't catch him. ______________________ In fact, the old man was not old. He was a young man with long brown hair.\n\n윗글을 읽고 아래 질문에 대한 답을 <조건>에 알맞게 쓰시오.\n\n<조건>\n• 대명사 주어로 시작할 것\n• 6단어의 완전한 문장으로 쓸 것\n\nQ. What was Ann Jones doing in the museum last Saturday?\n→ ________________________",
+   "options": [],
+   "answer": "She was looking at the Monalisa.",
+   "explanation": "Ann Jones는 '모나리자'를 보고 있었다."
+  },
+  {
+   "number": 28,
+   "question": "다음 글을 읽고 물음에 답하시오.\nLast Saturday, someone threw a cake at the Monalisa in the Botero Museum in Bogota, Colombia. There were four eyewitnesses. What did they say? Read the following, and find the criminal.\n\nAnn Jones, a visitor\nI was looking at the Monalisa, and someone threw a cake at the painting. I turned around and saw an old man. He was standing in front of a wheelchair. I'm about 170 cm tall, and he was a little taller than me.\n\nCarlos Diaz, a janitor\nAn old man with gray hair was running away, and something fell off his head. It was his wig. I ran after him, but I couldn't catch him. ______________________ In fact, the old man was not old. He was a young man with long brown hair.\n\n윗글을 읽고 답할 수 없는 것은?",
+   "options": [
+    "How many eyewitnesses were there?",
+    "What time did the crime happen?",
+    "What day did the crime happen?",
+    "What did the old man throw?",
+    "Where did the crime happen?"
+   ],
+   "answer": "2",
+   "explanation": "범죄가 지난 토요일에 발생했다고만 했을 뿐 발생한 시각은 언급되지 않았다."
+  },
+  {
+   "number": 29,
+   "question": "다음 글을 아래와 같이 요약할 때, 빈칸 (A), (B)에 들어갈 말로 알맞게 연결된 것은?\n\nCamila Santos, the owner of Camila's Bakery\nLast Friday, a young man came in. I spoke to him in Spanish, but he didn't understand me. He spoke only English. We had a lot of different cakes, but he just wanted the smallest one. We sold only one cake that day, so I remember him clearly. Oh, he had blue eyes.\n\nLast Friday, Camila sold only one cake, so she can never (A)________ the customer. He was a young man with (B)________, and he spoke English, not Spanish.",
+   "options": [
+    "(A) remember – (B) black eyes",
+    "(A) forget – (B) blue eyes",
+    "(A) remember – (B) brown hair",
+    "(A) miss – (B) blue eyes",
+    "(A) forget – (B) brown hair"
+   ],
+   "answer": "2",
+   "explanation": "Camila는 케이크를 한 개만 팔았기 때문에 그 젊은 남자를 분명히 기억하며(never forget), 그는 파란 눈이었다고 했다."
+  },
+  {
+   "number": 30,
+   "question": "다음 표를 보고 <보기>의 단어를 활용하여 비교하는 문장을 완성하시오.\n\n| Car Model | Red Car | Green Car | Black Car |\n|---|---|---|---|\n| Price | $26,900 | $21,500 | $34,600 |\n\n<보기> expensive, cheap\n\n(1) Red Car is ________ Green Car.\n(2) Green Car is ________ Black Car.\n(3) Black Car is ________ of the three cars.",
+   "options": [],
+   "answer": "more expensive than / cheaper than / the most expensive",
+   "subParts": [
+    {
+     "label": "(1)",
+     "answer": "more expensive than"
+    },
+    {
+     "label": "(2)",
+     "answer": "cheaper than"
+    },
+    {
+     "label": "(3)",
+     "answer": "the most expensive"
+    }
+   ],
+   "explanation": "Red Car는 Green Car보다 비싸고(more expensive than), Green Car는 Black Car보다 싸며(cheaper than), Black Car는 셋 중 가장 비싸다(the most expensive)."
+  }
+ ],
+ "R2": [
+  {
+   "number": 1,
+   "question": "다음 중 짝지어진 단어의 관계가 어색한 것은?",
+   "options": [
+    "small : large = short : long",
+    "own : owner = visit : visitor",
+    "color : gray = place : bakery",
+    "different : various = fast : quick",
+    "turn off : turn on = run after : chase"
+   ],
+   "answer": "5",
+   "explanation": "'끄다 : 켜다'는 반의어 관계이지만 '뒤쫓다 : 뒤쫓다'는 유의어 관계이다."
+  },
+  {
+   "number": 2,
+   "question": "다음 중 <보기>의 단어가 들어갈 수 없는 것은?\n\n<보기> run away, throw, turn around, fall off, remember",
+   "options": [
+    "Do you ________ Jessica's birthday?",
+    "Don't ________ a stone in the river.",
+    "Your hat may ________ because of the wind.",
+    "I didn't ________ the question, so I couldn't answer.",
+    "The thief could ________ because he saw the police first."
+   ],
+   "answer": "4",
+   "explanation": "'뒤돌아보다'라는 뜻의 turn around가 들어갈 수 있는 문장이 없고, ④ '나는 질문을 이해하지 못해서 답을 할 수 없었다.'에는 understand가 들어가야 한다."
+  },
+  {
+   "number": 3,
+   "question": "다음 밑줄 친 단어가 같은 의미로 쓰인 것은?",
+   "options": [
+    "Don't <u>touch</u> the pan. It's hot! / The story <u>touched</u> the hearts of readers.",
+    "The reporters came to the fire <u>scene</u>. / The last <u>scene</u> in the movie was very sad.",
+    "The <u>criminal</u> is very dangerous. / The police are looking for the <u>criminal</u>.",
+    "Mr. Lee never <u>suspected</u> anything. / The <u>suspect</u> did not answer the police.",
+    "A cough is a <u>sign</u> of a cold. / There is a \"No photos\" <u>sign</u> on the wall."
+   ],
+   "answer": "3",
+   "explanation": "③의 criminal은 모두 '범인, 범죄자'라는 뜻의 명사로 쓰였다."
+  },
+  {
+   "number": 4,
+   "question": "다음 중 어법상 옳은 문장의 개수는?\n\nⓐ Your idea is better than mine.\nⓑ Is there any butter on the bread?\nⓒ This street is the dirtyest in the city.\nⓓ My laptop is more worse than yours.\nⓔ This restaurant is famousest in the town.\nⓕ There was not any shops near the museum.\nⓖ This sofa is more comfortable than that one.",
+   "options": [
+    "3개",
+    "4개",
+    "5개",
+    "6개",
+    "7개"
+   ],
+   "answer": "1",
+   "explanation": "ⓒ dirtyest → dirtiest, ⓓ more worse → worse, ⓔ famousest → the most famous, ⓕ was → were. 옳은 문장은 ⓐ, ⓑ, ⓖ 3개이다."
+  },
+  {
+   "number": 5,
+   "question": "다음 중 짝지어진 문장의 의미가 다른 것은?",
+   "options": [
+    "There is sugar in the bottle. = Sugar is in the bottle.",
+    "Jason is younger than me, and I am younger than Mike. = Jason is the oldest of the three.",
+    "My family is more important than money. = Money is less important than my family.",
+    "Four children were on the playground. = There were four children on the playground.",
+    "Russia is the largest country in the world. = Russia is larger than any other country in the world."
+   ],
+   "answer": "2",
+   "explanation": "Jason은 나보다 더 어리고 나는 Mike보다 더 어리므로 세 명 중 가장 나이가 많은 사람은 Mike이다."
+  },
+  {
+   "number": 6,
+   "question": "다음 대화의 빈칸에 들어갈 말로 알맞은 것을 모두 골라 짝지은 것은?\n\nB: May I go to the video room, Mom?\nW: Of course, but don't run.\nB: Why not?\nW: Look at that sign. ______________________\n\nⓐ You don't have to run inside the museum.\nⓑ You must not run inside the museum.\nⓒ You need not run inside the museum.\nⓓ It says \"Please don't run inside the museum.\"\nⓔ You shouldn't run inside the museum.",
+   "options": [
+    "ⓐ, ⓓ",
+    "ⓑ, ⓒ",
+    "ⓓ, ⓔ",
+    "ⓐ, ⓑ, ⓒ",
+    "ⓑ, ⓓ, ⓔ"
+   ],
+   "answer": "5",
+   "explanation": "표지판을 보라고 한 말에 이어지므로 금지 표현인 ⓑ, ⓓ, ⓔ가 알맞다. ⓐ, ⓒ는 필요 없음을 나타내는 표현이라 어색하다."
+  },
+  {
+   "number": 7,
+   "question": "다음 대화를 읽고 물음에 답하시오.\nM: Everybody, look over here, please. This is Sunflowers by Van Gogh.\nG: Wow, this is my favorite painting. ______________\nM: Of course, but you must not use the flash.\nG: Why not? It's a little dark in here.\nM: I'm sorry, but using the flash can damage paintings.\nG: Oh, I didn't know that.\nM: Everyone, we'll move on to Monet's paintings next.\nG: Great!\n\n위 대화의 빈칸에 들어갈 말로 알맞은 것을 모두 고르면? (정답 2개)",
+   "options": [
+    "Is it okay if I take a picture of it?",
+    "Do you like taking a picture?",
+    "Can you take a picture of it?",
+    "Shall I take a picture of it?",
+    "May I take a picture of it?"
+   ],
+   "answer": "1, 5",
+   "explanation": "남자가 '물론입니다'라고 수락하면서 플래시는 사용하지 말라고 하므로 소녀가 사진을 찍어도 되는지 허락을 구하는 표현인 ①, ⑤가 알맞다."
+  },
+  {
+   "number": 8,
+   "question": "다음 대화를 읽고 물음에 답하시오.\nM: Everybody, look over here, please. This is Sunflowers by Van Gogh.\nG: Wow, this is my favorite painting. ______________\nM: Of course, but you must not use the flash.\nG: Why not? It's a little dark in here.\nM: I'm sorry, but using the flash can damage paintings.\nG: Oh, I didn't know that.\nM: Everyone, we'll move on to Monet's paintings next.\nG: Great!\n\n위 대화의 내용과 일치하지 않는 것을 모두 고르면? (정답 2개)",
+   "options": [
+    "The painter of Sunflowers is Van Gogh.",
+    "The painting, Sunflowers is the girl's favorite.",
+    "The girl doesn't have to use the flash because the room is bright.",
+    "Taking pictures with flash is helpful for the paintings.",
+    "They will appreciate Monet's works next."
+   ],
+   "answer": "3, 4",
+   "explanation": "③ 소녀는 공간이 좀 어둡다고 말하며 플래시 사용을 원했다. ④ 플래시는 그림을 훼손할 수 있다고 했다."
+  },
+  {
+   "number": 9,
+   "question": "다음 대화를 읽고 아래 질문에 대한 알맞은 대답이 되도록 주어진 <조건>에 맞게 빈칸을 완성하시오.\n\nW: Excuse me, but you must not talk on the phone here.\nB: I'm terribly sorry. I'll turn off my phone.\nW: You don't have to. Texting is OK.\nB: I see. Thank you.\n\n<조건> messages, send를 반드시 포함할 것\n\nQ. What can the boy do here?\n→ He can ________________ here.",
+   "options": [],
+   "answer": "send text messages",
+   "explanation": "여자가 문자 보내는 것은 괜찮다고 했으므로 소년은 문자 메시지를 보낼 수 있다."
+  },
+  {
+   "number": 10,
+   "question": "다음 글을 읽고 물음에 답하시오.\nLast Saturday, someone threw a cake at the Monalisa in the Botero Museum in Bogota, Colombia. There ⓐ<u>was</u> four eyewitnesses. What ⓑ<u>do</u> they say? ⓒ<u>Reading</u> the following, and find the criminal.\n\nAnn Jones, a visitor\nI was looking at the Monalisa, and someone threw a cake at the painting. I turned around and ⓓ<u>see</u> an old man. He ⓔ<u>was standing</u> in front of a wheelchair. I'm about 170 cm tall, and he was a little ⓕ<u>more tall</u> than me.\n\n윗글의 밑줄 친 ⓐ~ⓕ 중, 어법상 옳은 것의 개수는?",
+   "options": [
+    "1개",
+    "2개",
+    "3개",
+    "4개",
+    "5개"
+   ],
+   "answer": "1",
+   "explanation": "ⓐ was → were, ⓑ do → did, ⓒ Reading → Read, ⓓ see → saw, ⓕ more tall → taller. 옳은 것은 ⓔ 1개이다."
+  },
+  {
+   "number": 11,
+   "question": "다음 글을 읽고 물음에 답하시오.\nLast Saturday, someone threw a cake at the Monalisa in the Botero Museum in Bogota, Colombia. There ⓐ<u>was</u> four eyewitnesses. What ⓑ<u>do</u> they say? ⓒ<u>Reading</u> the following, and find the criminal.\n\nAnn Jones, a visitor\nI was looking at the Monalisa, and someone threw a cake at the painting. I turned around and ⓓ<u>see</u> an old man. He ⓔ<u>was standing</u> in front of a wheelchair. I'm about 170 cm tall, and he was a little ⓕ<u>more tall</u> than me.\n\n윗글의 제목으로 알맞은 것은?",
+   "options": [
+    "The Most Popular Painting in the Botero Museum",
+    "Why Did a Crime Happen in the Botero Museum?",
+    "An Unexpected Crime in the Botero Museum",
+    "A Fun Weekend Activity at the Museum",
+    "The Story of the Cake in the Paintings"
+   ],
+   "answer": "3",
+   "explanation": "보테로 박물관에서 발생한 사건을 설명하며 목격자들의 이야기를 듣고 범인을 찾자는 내용이므로 '보테로 박물관에서의 예상치 못한 범죄'가 알맞다."
+  },
+  {
+   "number": 12,
+   "question": "다음 글을 읽고 물음에 답하시오.\nLast Saturday, someone threw a cake at the Monalisa in the Botero Museum in Bogota, Colombia. There ⓐ<u>was</u> four eyewitnesses. What ⓑ<u>do</u> they say? ⓒ<u>Reading</u> the following, and find the criminal.\n\nAnn Jones, a visitor\nI was looking at the Monalisa, and someone threw a cake at the painting. I turned around and ⓓ<u>see</u> an old man. He ⓔ<u>was standing</u> in front of a wheelchair. I'm about 170 cm tall, and he was a little ⓕ<u>more tall</u> than me.\n\n윗글을 읽고 아래 질문에 대한 대답이 되도록 주어진 <조건>에 알맞게 쓰시오.\n\n<조건>\n• 동격을 사용할 것\n• 각 빈칸에 한 단어씩 쓸 것\n\nQ. What happened in the Botero Museum last Saturday?\n→ (1)________ ________ ________ ________ at the painting, (2)________ ________.",
+   "options": [],
+   "answer": "Someone threw a cake, the Monalisa",
+   "subParts": [
+    {
+     "label": "(1)",
+     "answer": "Someone threw a cake"
+    },
+    {
+     "label": "(2)",
+     "answer": "the Monalisa"
+    }
+   ],
+   "explanation": "누군가가 '모나리자' 그림에 케이크를 던졌다."
+  },
+  {
+   "number": 13,
+   "question": "다음 글을 읽고 물음에 답하시오.\nCarlos Diaz, a janitor\nAn old man ⓐ<u>with gray hair</u> was running away, and something fell off his head. It was his wig. I ran after him, but I ⓑ<u>couldn't</u> catch him. He was ⓒ<u>faster than</u> me. In fact, the old man was not old. He was a young man with long brown hair.\n\nDiego Perez, a guard\nI ⓓ<u>went to</u> the crime scene, and there were pieces of cake all over the painting. ⓔ<u>There</u> was also a wheelchair near the painting, and I found a cake box next to the wheelchair. The box was from Camila's Bakery.\n\n윗글의 밑줄 친 ⓐ~ⓔ에 대한 설명으로 알맞지 않은 것은?",
+   "options": [
+    "ⓐ: '회색 머리를 가진'이라는 뜻으로 앞의 명사구 An old man을 수식한다.",
+    "ⓑ: 과거의 일이므로 조동사 can의 과거형인 could에 not이 축약된 형태이다.",
+    "ⓒ: 형용사 fast에 -er을 붙여 만든 비교급 faster와 than이 쓰여 그와 나를 비교하고 있다.",
+    "ⓓ: 'go to ~'는 '~에 가다'라는 뜻이므로, 과거의 일이므로 went to가 쓰였다.",
+    "ⓔ: '거기에'라는 뜻의 부사로, 앞의 범죄 현장을 가리킨다."
+   ],
+   "answer": "5",
+   "explanation": "ⓔ '~이 있었다'라는 'There+was/were+명사(구)' 구문의 There이며, 문장을 이끄는 유도부사로 특별한 의미가 없어 따로 해석하지 않는다."
+  },
+  {
+   "number": 14,
+   "question": "다음 글을 읽고 물음에 답하시오.\nCarlos Diaz, a janitor\nAn old man ⓐ<u>with gray hair</u> was running away, and something fell off his head. It was his wig. I ran after him, but I ⓑ<u>couldn't</u> catch him. He was ⓒ<u>faster than</u> me. In fact, the old man was not old. He was a young man with long brown hair.\n\nDiego Perez, a guard\nI ⓓ<u>went to</u> the crime scene, and there were pieces of cake all over the painting. ⓔ<u>There</u> was also a wheelchair near the painting, and I found a cake box next to the wheelchair. The box was from Camila's Bakery.\n\n윗글을 읽고 다음 질문에 대한 대답을 완성할 때, 빈칸에 들어갈 알맞은 표현은?\n\nQ: What item did the old man drop?\nA: He dropped ____________.",
+   "options": [
+    "his cap",
+    "his wig",
+    "a cake",
+    "his glasses",
+    "a box"
+   ],
+   "answer": "2",
+   "explanation": "노인이 도망가고 있었는데 그의 머리에서 무언가 떨어졌고 그것은 그의 가발이었다고 했다."
+  },
+  {
+   "number": 15,
+   "question": "다음 글을 읽고 물음에 답하시오.\nCarlos Diaz, a janitor\nAn old man ⓐ<u>with gray hair</u> was running away, and something fell off his head. It was his wig. I ran after him, but I ⓑ<u>couldn't</u> catch him. He was ⓒ<u>faster than</u> me. In fact, the old man was not old. He was a young man with long brown hair.\n\nDiego Perez, a guard\nI ⓓ<u>went to</u> the crime scene, and there were pieces of cake all over the painting. ⓔ<u>There</u> was also a wheelchair near the painting, and I found a cake box next to the wheelchair. The box was from Camila's Bakery.\n\n윗글의 주제로 알맞은 것은?",
+   "options": [
+    "job shadowing",
+    "talking about my job",
+    "clues about the crime",
+    "crime as a social problem",
+    "information about eyewitnesses"
+   ],
+   "answer": "3",
+   "explanation": "청소부 Carlos와 경비원 Diego가 범죄 현장에서 본 것들을 이야기하고 있으므로 주제는 범죄에 대한 단서들이다."
+  },
+  {
+   "number": 16,
+   "question": "다음 글을 읽고 물음에 답하시오.\nCarlos Diaz, a janitor\nAn old man ⓐ<u>with gray hair</u> was running away, and something fell off his head. It was his wig. I ran after him, but I ⓑ<u>couldn't</u> catch him. He was ⓒ<u>faster than</u> me. In fact, the old man was not old. He was a young man with long brown hair.\n\nDiego Perez, a guard\nI ⓓ<u>went to</u> the crime scene, and there were pieces of cake all over the painting. ⓔ<u>There</u> was also a wheelchair near the painting, and I found a cake box next to the wheelchair. The box was from Camila's Bakery.\n\n윗글의 내용과 일치하는 것의 개수는?\n\nⓐ According to Carlos, an old man with a gray wig was running away.\nⓑ Carlos was slower than the old man, so he missed the man.\nⓒ The old man was actually a young man with long black hair.\nⓓ There were pieces of cake only on one part of the painting.\nⓔ Diego found a wheelchair, and a wig at the crime scene.",
+   "options": [
+    "1개",
+    "2개",
+    "3개",
+    "4개",
+    "5개"
+   ],
+   "answer": "2",
+   "explanation": "ⓒ 노인은 실제로 긴 갈색 머리의 젊은 남자였다. ⓓ 케이크 조각은 그림 곳곳에 있었다. ⓔ Diego는 휠체어와 케이크 조각·케이크 상자를 발견했다. 일치하는 것은 ⓐ, ⓑ 2개이다."
+  },
+  {
+   "number": 17,
+   "question": "다음 글의 내용을 바탕으로 아래의 사건일지를 완성할 때 주어진 <조건>에 알맞게 빈칸에 들어갈 말을 쓰시오.\n\nLast Saturday, someone threw a cake at the Monalisa in the Botero Museum in Bogota, Colombia. There were four eyewitnesses. What did they say? Read the following, and find the criminal.\n\nWho Is the (A)________?\nWhen: (B)________________\nWhere: The (C)________________\nIncident: The damage to the Monalisa\n(A person (D)________________ at the painting)\nEyewitness: (E)________ people\n\n<조건>\n• (A), (B), (C) 단어의 첫 철자는 대문자로 쓸 것\n• (A), (E)는 한 단어, (B), (C)는 두 단어, (D)는 세 단어로 쓸 것",
+   "options": [],
+   "answer": "Criminal, Last Saturday, Botero Museum, threw a cake, four",
+   "subParts": [
+    {
+     "label": "(A)",
+     "answer": "Criminal"
+    },
+    {
+     "label": "(B)",
+     "answer": "Last Saturday"
+    },
+    {
+     "label": "(C)",
+     "answer": "Botero Museum"
+    },
+    {
+     "label": "(D)",
+     "answer": "threw a cake"
+    },
+    {
+     "label": "(E)",
+     "answer": "four"
+    }
+   ],
+   "explanation": "누가 범인인가? / 시간: 지난 토요일 / 장소: 보테로 박물관 / 사건: 한 사람이 그림에 케이크를 던졌다 / 목격자: 네 명"
+  },
+  {
+   "number": 18,
+   "question": "다음 글을 읽고 물음에 답하시오.\nCamila Santos, the owner of Camila's Bakery\nLast Friday, a young man ⓐ<u>comes</u> in. I spoke to him in Spanish, but he didn't ⓑ<u>understands</u> me. He spoke only English. ㉠<u>우리는 다양한 케이크가 많이 있었지만, 그는 단지 가장 작은 것을 원했어요.</u> We ⓒ<u>sell</u> only one cake that day, so I remember him ⓓ<u>clear</u>. Oh, he had blue eyes.\n\nNow, look at the information about the suspects. Who ⓔ<u>throws</u> the cake at the Monalisa?\n\n| The Suspects | |\n|---|---|\n| Andres Lozano — Height: 176 cm / Hair: long, black / Languages: Spanish, English / Eyes: brown | Larry Johnson — Height: 173 cm / Hair: long, brown / Languages: English / Eyes: blue |\n| Tim Baker — Height: 182 cm / Hair: long, brown / Languages: English / Eyes: green | Luca Ferez — Height: 166 cm / Hair: short, gray / Languages: Spanish / Eyes: blue |\n\n윗글의 밑줄 친 ⓐ~ⓔ 중, 어색한 부분을 바르게 고치지 못한 것을 모두 고르면? (정답 2개)",
+   "options": [
+    "ⓐ: comes → came",
+    "ⓑ: understands → understand",
+    "ⓒ: sell → selled",
+    "ⓓ: clear → clearly",
+    "ⓔ: throws → throwing"
+   ],
+   "answer": "3, 5",
+   "explanation": "ⓒ sell의 과거형은 sold이다. ⓔ 의문사 Who가 주어인 과거의 질문이므로 threw가 되어야 한다."
+  },
+  {
+   "number": 19,
+   "question": "다음 글을 읽고 물음에 답하시오.\nCamila Santos, the owner of Camila's Bakery\nLast Friday, a young man ⓐ<u>comes</u> in. I spoke to him in Spanish, but he didn't ⓑ<u>understands</u> me. He spoke only English. ㉠<u>우리는 다양한 케이크가 많이 있었지만, 그는 단지 가장 작은 것을 원했어요.</u> We ⓒ<u>sell</u> only one cake that day, so I remember him ⓓ<u>clear</u>. Oh, he had blue eyes.\n\nNow, look at the information about the suspects. Who ⓔ<u>throws</u> the cake at the Monalisa?\n\n| The Suspects | |\n|---|---|\n| Andres Lozano — Height: 176 cm / Hair: long, black / Languages: Spanish, English / Eyes: brown | Larry Johnson — Height: 173 cm / Hair: long, brown / Languages: English / Eyes: blue |\n| Tim Baker — Height: 182 cm / Hair: long, brown / Languages: English / Eyes: green | Luca Ferez — Height: 166 cm / Hair: short, gray / Languages: Spanish / Eyes: blue |\n\n윗글의 밑줄 친 ㉠의 우리말을 주어진 <조건>에 알맞게 영작하시오.\n\n<조건>\n• 두 문장을 적절한 접속사로 연결할 것\n• <보기>의 단어 및 표현을 사용할 것 (필요시 변형할 것)\n• 14단어로 영작할 것\n\n<보기> one, a lot of, just, want, different, have, small ※ 완전한 문장으로 쓰시오.",
+   "options": [],
+   "answer": "We had a lot of different cakes, but he just wanted the smallest one.",
+   "explanation": "과거 시제 had, 접속사 but, 최상급 the smallest one을 사용한다."
+  },
+  {
+   "number": 20,
+   "question": "다음 글을 읽고 물음에 답하시오.\nCamila Santos, the owner of Camila's Bakery\nLast Friday, a young man ⓐ<u>comes</u> in. I spoke to him in Spanish, but he didn't ⓑ<u>understands</u> me. He spoke only English. ㉠<u>우리는 다양한 케이크가 많이 있었지만, 그는 단지 가장 작은 것을 원했어요.</u> We ⓒ<u>sell</u> only one cake that day, so I remember him ⓓ<u>clear</u>. Oh, he had blue eyes.\n\nNow, look at the information about the suspects. Who ⓔ<u>throws</u> the cake at the Monalisa?\n\n| The Suspects | |\n|---|---|\n| Andres Lozano — Height: 176 cm / Hair: long, black / Languages: Spanish, English / Eyes: brown | Larry Johnson — Height: 173 cm / Hair: long, brown / Languages: English / Eyes: blue |\n| Tim Baker — Height: 182 cm / Hair: long, brown / Languages: English / Eyes: green | Luca Ferez — Height: 166 cm / Hair: short, gray / Languages: Spanish / Eyes: blue |\n\n윗글을 읽고 답할 수 없는 질문은?",
+   "options": [
+    "What color were Larry's eyes?",
+    "How many suspects are there?",
+    "What language does Luca speak?",
+    "Who is the tallest among the suspects?",
+    "What flavor of cake did the young man buy?"
+   ],
+   "answer": "5",
+   "explanation": "젊은 남자가 산 케이크의 종류나 맛에 대한 언급은 없다."
+  },
+  {
+   "number": 21,
+   "question": "다음 글을 읽고 물음에 답하시오.\nCamila Santos, the owner of Camila's Bakery\nLast Friday, a young man ⓐ<u>comes</u> in. I spoke to him in Spanish, but he didn't ⓑ<u>understands</u> me. He spoke only English. ㉠<u>우리는 다양한 케이크가 많이 있었지만, 그는 단지 가장 작은 것을 원했어요.</u> We ⓒ<u>sell</u> only one cake that day, so I remember him ⓓ<u>clear</u>. Oh, he had blue eyes.\n\nNow, look at the information about the suspects. Who ⓔ<u>throws</u> the cake at the Monalisa?\n\n| The Suspects | |\n|---|---|\n| Andres Lozano — Height: 176 cm / Hair: long, black / Languages: Spanish, English / Eyes: brown | Larry Johnson — Height: 173 cm / Hair: long, brown / Languages: English / Eyes: blue |\n| Tim Baker — Height: 182 cm / Hair: long, brown / Languages: English / Eyes: green | Luca Ferez — Height: 166 cm / Hair: short, gray / Languages: Spanish / Eyes: blue |\n\n윗글의 제목으로 알맞은 것은?",
+   "options": [
+    "Is the Suspect a Criminal?",
+    "An Eyewitness' Clear Memory",
+    "The Eyewitnesses' Personal Information",
+    "Finding the Criminal Among the Suspects",
+    "Introducing Four Clues About the Criminal"
+   ],
+   "answer": "4",
+   "explanation": "Camila의 진술과 용의자들의 정보를 제시하며 누가 케이크를 던졌는지 묻고 있으므로 '용의자들 사이에서 범인 찾기'가 알맞다."
+  },
+  {
+   "number": 22,
+   "question": "다음 글을 읽고 물음에 답하시오.\nCamila Santos, the owner of Camila's Bakery\nLast Friday, a young man ⓐ<u>comes</u> in. I spoke to him in Spanish, but he didn't ⓑ<u>understands</u> me. He spoke only English. ㉠<u>우리는 다양한 케이크가 많이 있었지만, 그는 단지 가장 작은 것을 원했어요.</u> We ⓒ<u>sell</u> only one cake that day, so I remember him ⓓ<u>clear</u>. Oh, he had blue eyes.\n\nNow, look at the information about the suspects. Who ⓔ<u>throws</u> the cake at the Monalisa?\n\n| The Suspects | |\n|---|---|\n| Andres Lozano — Height: 176 cm / Hair: long, black / Languages: Spanish, English / Eyes: brown | Larry Johnson — Height: 173 cm / Hair: long, brown / Languages: English / Eyes: blue |\n| Tim Baker — Height: 182 cm / Hair: long, brown / Languages: English / Eyes: green | Luca Ferez — Height: 166 cm / Hair: short, gray / Languages: Spanish / Eyes: blue |\n\n윗글의 내용과 (A)~(C)가 일치하면 T, 일치하지 않으면 F를 쓸 때, 순서대로 연결된 것은?\n\n(A) Last Friday, a young man came to Camila's Bakery, and he didn't understand English. (T/F)\n(B) Last Friday, two customers bought cakes at Camila's Bakery. (T/F)\n(C) Larry Johnson is taller than Luca Ferez but shorter than Tim Baker. (T/F)",
+   "options": [
+    "T-T-F",
+    "F-F-T",
+    "F-T-F",
+    "F-T-T",
+    "T-F-F"
+   ],
+   "answer": "2",
+   "explanation": "(A) 그는 스페인어를 이해하지 못했다(F). (B) 그날 케이크는 한 개만 팔렸다(F). (C) Larry(173cm)는 Luca(166cm)보다 크고 Tim(182cm)보다 작다(T)."
+  },
+  {
+   "number": 23,
+   "question": "다음 글을 읽고 물음에 답하시오.\nAnn Jones, a visitor\nI was looking at the Monalisa, and someone threw a cake at the painting. I turned around and saw an old man. He was standing in front of a wheelchair. I'm (A)<u>about</u> 170 cm tall, and he was a little taller than me.\n\nCarlos Diaz, a janitor\nAn old man with gray hair was running away, and something fell off his head. It was his wig. I ran after him, but I couldn't catch him. He was faster than me. In fact, (B)____________________. He was a young man with long brown hair.\n\nDiego Perez, a guard\nI went to the crime scene, and there were pieces of cake all over the painting. There was also a wheelchair near the painting, and I found a cake box next to the wheelchair. The box was from Camila's Bakery.\n\nCamila Santos, the owner of Camila's Bakery\nLast Friday, a young man came in. I spoke to him in Spanish, but he didn't understand me. He spoke only English. We had a lot of different cakes, but he just wanted the smallest one. We sold only one cake that day, so I remember him clearly. Oh, he had blue eyes.\n\nNow, look at the information about the suspects. Who threw the cake at the Monalisa?\n\n| The Suspects | |\n|---|---|\n| Andres Lozano — Height: 176 cm / Hair: long, black / Languages: Spanish, English / Eyes: brown | Larry Johnson — Height: 173 cm / Hair: long, brown / Languages: English / Eyes: blue |\n| Tim Baker — Height: 182 cm / Hair: long, brown / Languages: English / Eyes: green | Luca Ferez — Height: 166 cm / Hair: short, gray / Languages: Spanish / Eyes: blue |\n\n윗글의 밑줄 친 (A)about과 뜻이 같은 것을 모두 고르면? (정답 2개)",
+   "options": [
+    "Can you tell me <u>about</u> your family?",
+    "I spent <u>about</u> 10,000 won on a gift.",
+    "He is reading a book <u>about</u> animals.",
+    "We walked <u>about</u> five kilometers yesterday.",
+    "They learned <u>about</u> different cultures in class."
+   ],
+   "answer": "2, 4",
+   "explanation": "(A)의 about은 '대략, ~쯤'의 뜻의 부사이다. ②, ④도 같은 뜻으로 쓰였고 나머지는 '~에 대해'를 뜻하는 전치사이다."
+  },
+  {
+   "number": 24,
+   "question": "다음 글을 읽고 물음에 답하시오.\nAnn Jones, a visitor\nI was looking at the Monalisa, and someone threw a cake at the painting. I turned around and saw an old man. He was standing in front of a wheelchair. I'm (A)<u>about</u> 170 cm tall, and he was a little taller than me.\n\nCarlos Diaz, a janitor\nAn old man with gray hair was running away, and something fell off his head. It was his wig. I ran after him, but I couldn't catch him. He was faster than me. In fact, (B)____________________. He was a young man with long brown hair.\n\nDiego Perez, a guard\nI went to the crime scene, and there were pieces of cake all over the painting. There was also a wheelchair near the painting, and I found a cake box next to the wheelchair. The box was from Camila's Bakery.\n\nCamila Santos, the owner of Camila's Bakery\nLast Friday, a young man came in. I spoke to him in Spanish, but he didn't understand me. He spoke only English. We had a lot of different cakes, but he just wanted the smallest one. We sold only one cake that day, so I remember him clearly. Oh, he had blue eyes.\n\nNow, look at the information about the suspects. Who threw the cake at the Monalisa?\n\n| The Suspects | |\n|---|---|\n| Andres Lozano — Height: 176 cm / Hair: long, black / Languages: Spanish, English / Eyes: brown | Larry Johnson — Height: 173 cm / Hair: long, brown / Languages: English / Eyes: blue |\n| Tim Baker — Height: 182 cm / Hair: long, brown / Languages: English / Eyes: green | Luca Ferez — Height: 166 cm / Hair: short, gray / Languages: Spanish / Eyes: blue |\n\n윗글의 빈칸 (B)에 들어갈 말로 알맞은 것은?",
+   "options": [
+    "the old man was not old",
+    "the old man was not fast",
+    "the old man was really old",
+    "the old man was not a man",
+    "the old man wasn't a criminal"
+   ],
+   "answer": "1",
+   "explanation": "빈칸 뒤에 그가 긴 갈색 머리의 젊은 남자였다는 내용이 이어지므로 노인은 사실 나이 든 사람이 아니었다는 내용이 알맞다."
+  },
+  {
+   "number": 25,
+   "question": "다음 글을 읽고 물음에 답하시오.\nAnn Jones, a visitor\nI was looking at the Monalisa, and someone threw a cake at the painting. I turned around and saw an old man. He was standing in front of a wheelchair. I'm (A)<u>about</u> 170 cm tall, and he was a little taller than me.\n\nCarlos Diaz, a janitor\nAn old man with gray hair was running away, and something fell off his head. It was his wig. I ran after him, but I couldn't catch him. He was faster than me. In fact, (B)____________________. He was a young man with long brown hair.\n\nDiego Perez, a guard\nI went to the crime scene, and there were pieces of cake all over the painting. There was also a wheelchair near the painting, and I found a cake box next to the wheelchair. The box was from Camila's Bakery.\n\nCamila Santos, the owner of Camila's Bakery\nLast Friday, a young man came in. I spoke to him in Spanish, but he didn't understand me. He spoke only English. We had a lot of different cakes, but he just wanted the smallest one. We sold only one cake that day, so I remember him clearly. Oh, he had blue eyes.\n\nNow, look at the information about the suspects. Who threw the cake at the Monalisa?\n\n| The Suspects | |\n|---|---|\n| Andres Lozano — Height: 176 cm / Hair: long, black / Languages: Spanish, English / Eyes: brown | Larry Johnson — Height: 173 cm / Hair: long, brown / Languages: English / Eyes: blue |\n| Tim Baker — Height: 182 cm / Hair: long, brown / Languages: English / Eyes: green | Luca Ferez — Height: 166 cm / Hair: short, gray / Languages: Spanish / Eyes: blue |\n\n윗글을 읽고 아래 질문에 대한 대답이 되도록 주어진 <조건>에 알맞게 쓰시오.\n\n<조건>\n• sell, buy를 알맞은 형태로 사용할 것\n• 각 빈칸에 한 단어씩 쓸 것\n\nQ. Why does Camila Santos remember the young man so well?\n→ Because she (1)________ ________ ________ ________ that day, and the man (2)________ ________.",
+   "options": [],
+   "answer": "sold only one cake, bought it",
+   "subParts": [
+    {
+     "label": "(1)",
+     "answer": "sold only one cake"
+    },
+    {
+     "label": "(2)",
+     "answer": "bought it"
+    }
+   ],
+   "explanation": "그날 케이크를 한 개만 팔았고 그 남자가 그것을 샀기 때문이다."
+  },
+  {
+   "number": 26,
+   "question": "다음 글을 읽고 물음에 답하시오.\nAnn Jones, a visitor\nI was looking at the Monalisa, and someone threw a cake at the painting. I turned around and saw an old man. He was standing in front of a wheelchair. I'm (A)<u>about</u> 170 cm tall, and he was a little taller than me.\n\nCarlos Diaz, a janitor\nAn old man with gray hair was running away, and something fell off his head. It was his wig. I ran after him, but I couldn't catch him. He was faster than me. In fact, (B)____________________. He was a young man with long brown hair.\n\nDiego Perez, a guard\nI went to the crime scene, and there were pieces of cake all over the painting. There was also a wheelchair near the painting, and I found a cake box next to the wheelchair. The box was from Camila's Bakery.\n\nCamila Santos, the owner of Camila's Bakery\nLast Friday, a young man came in. I spoke to him in Spanish, but he didn't understand me. He spoke only English. We had a lot of different cakes, but he just wanted the smallest one. We sold only one cake that day, so I remember him clearly. Oh, he had blue eyes.\n\nNow, look at the information about the suspects. Who threw the cake at the Monalisa?\n\n| The Suspects | |\n|---|---|\n| Andres Lozano — Height: 176 cm / Hair: long, black / Languages: Spanish, English / Eyes: brown | Larry Johnson — Height: 173 cm / Hair: long, brown / Languages: English / Eyes: blue |\n| Tim Baker — Height: 182 cm / Hair: long, brown / Languages: English / Eyes: green | Luca Ferez — Height: 166 cm / Hair: short, gray / Languages: Spanish / Eyes: blue |\n\n윗글을 읽고 다음과 같이 정리할 때, ⓐ~ⓔ 중 일치하지 않는 것은?\n\n| Eyewitness | Important Clues |\n|---|---|\n| Ann Jones | The Criminal's Height: ⓐ<u>He looked a bit taller than 170cm.</u> |\n| Carlos Diaz | The Criminal's Hair: ⓑ<u>He had long brown hair.</u> |\n| Diego Perez | The Name of the Bakery: ⓒ<u>He bought a cake in Camila's Bakery.</u> |\n| Camila Santos | 1. The Criminal's Eye Color: ⓓ<u>His eyes were brown.</u> 2. The Criminal's Language: He understood only English. |\n| ↓ | |\n| The Criminal's Name: | ⓔ<u>Larry Johnson</u> |",
+   "options": [
+    "ⓐ",
+    "ⓑ",
+    "ⓒ",
+    "ⓓ",
+    "ⓔ"
+   ],
+   "answer": "4",
+   "explanation": "Camila는 그 젊은 남자가 파란 눈을 가졌다고 했으므로 ⓓ '그의 눈은 갈색이었다'는 일치하지 않는다."
+  },
+  {
+   "number": 27,
+   "question": "다음 글을 읽고 물음에 답하시오.\nAnn Jones, a visitor\nI was looking at the Monalisa, and someone ⓐ<u>threw</u> a cake at the painting. I turned around and saw an old man. He was standing in front of a ⓑ<u>wheelchair</u>. I'm about 170 cm tall, and he was a little taller than me.\n\nCarlos Diaz, a janitor\nAn old man with gray hair was running away, and something ⓒ<u>fell off</u> his head. It was his wig. I ran after him, but I couldn't (A)[catch / miss] him. He was faster than me. In fact, the old man was not old. He was a young man with long brown hair.\n\nDiego Perez, a guard\nI went to the ⓓ<u>crime</u> scene, and there were pieces of cake all over the painting. There was also a wheelchair near the painting, and I found a cake box next to the wheelchair. The box was from Camila's Bakery.\n\nCamila Santos, the ⓔ<u>owner</u> of Camila's Bakery\nLast Friday, a young man came in. I spoke to him in Spanish, but he didn't understand me. He spoke only (B)[English / Spanish]. We had a lot of different cakes, but he just wanted the smallest one. We sold one cake that day, so I remember him (C)[a little / clearly]. Oh, he had blue eyes.\n\n윗글의 밑줄 친 ⓐ~ⓔ의 영영풀이로 알맞은 것을 모두 골라 짝지은 것은?\n\n<보기>\nⓐ to capture someone or something after chasing them\nⓑ a special chair with wheels for people who can't walk\nⓒ to drop to the ground from a high object\nⓓ a person who breaks the law by doing something wrong, like stealing, or hurting others\nⓔ a person who protects a person or place from danger or attack",
+   "options": [
+    "ⓐ, ⓓ",
+    "ⓑ, ⓒ",
+    "ⓐ, ⓓ, ⓔ",
+    "ⓑ, ⓒ, ⓔ",
+    "ⓒ, ⓓ, ⓔ"
+   ],
+   "answer": "2",
+   "explanation": "ⓑ 휠체어: 걸을 수 없는 사람들을 위한 바퀴가 달린 특별한 의자, ⓒ ~에서 떨어지다: 높은 물체에서 땅으로 떨어지다. ⓐ는 catch, ⓓ는 criminal, ⓔ는 guard의 영영풀이다."
+  },
+  {
+   "number": 28,
+   "question": "다음 글을 읽고 물음에 답하시오.\nAnn Jones, a visitor\nI was looking at the Monalisa, and someone ⓐ<u>threw</u> a cake at the painting. I turned around and saw an old man. He was standing in front of a ⓑ<u>wheelchair</u>. I'm about 170 cm tall, and he was a little taller than me.\n\nCarlos Diaz, a janitor\nAn old man with gray hair was running away, and something ⓒ<u>fell off</u> his head. It was his wig. I ran after him, but I couldn't (A)[catch / miss] him. He was faster than me. In fact, the old man was not old. He was a young man with long brown hair.\n\nDiego Perez, a guard\nI went to the ⓓ<u>crime</u> scene, and there were pieces of cake all over the painting. There was also a wheelchair near the painting, and I found a cake box next to the wheelchair. The box was from Camila's Bakery.\n\nCamila Santos, the ⓔ<u>owner</u> of Camila's Bakery\nLast Friday, a young man came in. I spoke to him in Spanish, but he didn't understand me. He spoke only (B)[English / Spanish]. We had a lot of different cakes, but he just wanted the smallest one. We sold one cake that day, so I remember him (C)[a little / clearly]. Oh, he had blue eyes.\n\n윗글의 괄호 (A), (B), (C)에서 흐름상 알맞은 말로 바르게 연결된 것은?",
+   "options": [
+    "(A) catch – (B) English – (C) a little",
+    "(A) catch – (B) Spanish – (C) clearly",
+    "(A) miss – (B) English – (C) clearly",
+    "(A) miss – (B) Spanish – (C) a little",
+    "(A) catch – (B) English – (C) clearly"
+   ],
+   "answer": "5",
+   "explanation": "(A) 그가 나보다 빨라서 잡을(catch) 수 없었다. (B) 스페인어를 이해하지 못했으므로 영어(English)만 말했다. (C) 케이크를 한 개만 팔았으므로 또렷이(clearly) 기억한다."
+  },
+  {
+   "number": 29,
+   "question": "다음 그림을 보고 주어진 <조건>에 알맞게 질문에 대한 답을 쓰시오.\n(그림 설명: 테이블 위 바구니에 사과 세 개가 있고, 테이블 위에 컵이 두 개 있으며, 벽에 시계가 하나 걸려 있다.)\n\n<조건>\n• 'There+be동사 ~' 구문을 각각 사용할 것\n• 숫자는 영어로 쓸 것\n\n1. Are there three oranges in the basket?\n→ (1)________, ________ ________. ________ ________ ________ ________ in the basket.\n2. How many cups are there on the table?\n→ (2)________ ________ ________ ________ on the table.\n3. What is on the wall?\n→ (3)________ ________ ________ ________ on the wall.",
+   "options": [],
+   "answer": "No, there aren't. There are three apples / There are two cups / There is a clock",
+   "subParts": [
+    {
+     "label": "(1)",
+     "answer": "No, there aren't. There are three apples"
+    },
+    {
+     "label": "(2)",
+     "answer": "There are two cups"
+    },
+    {
+     "label": "(3)",
+     "answer": "There is a clock",
+     "acceptedAnswers": [
+      "There is one clock"
+     ]
+    }
+   ],
+   "explanation": "바구니 안에는 오렌지가 아니라 사과 세 개가 있고(No, there aren't. There are three apples), 테이블 위에 컵 두 개(There are two cups), 벽에 시계 하나(There is a[one] clock)가 있다."
+  },
+  {
+   "number": 30,
+   "question": "다음 그림과 표를 보고 주어진 <조건>에 알맞게 빈칸을 완성하시오.\n(그림 설명: 책 세 권이 나란히 서 있다. Book A가 가장 두껍고, Book B가 그다음, Book C가 가장 얇다.)\n\n| | Book A | Book B | Book C |\n|---|---|---|---|\n| Sales | ☆☆ | ☆☆☆☆ | ☆☆☆ |\n\n<조건>\n• 괄호 안의 지시를 참고하여 1, 2는 '비교급'을, 3, 4는 '최상급'을 사용할 것\n• thin, thick, popular를 어법에 맞게 사용할 것 (중복 사용 가능)\n\n1. Book A is (1)________ the Book B. (두께)\n2. Book C is (2)________ the Book B. (인기도)\n3. Book C is (3)________ of the three books. (두께)\n4. Book B is (4)________ of the three books. (인기도)",
+   "options": [],
+   "answer": "thicker than / less popular than / the thinnest / the most popular",
+   "subParts": [
+    {
+     "label": "(1)",
+     "answer": "thicker than"
+    },
+    {
+     "label": "(2)",
+     "answer": "less popular than"
+    },
+    {
+     "label": "(3)",
+     "answer": "the thinnest"
+    },
+    {
+     "label": "(4)",
+     "answer": "the most popular"
+    }
+   ],
+   "explanation": "Book A는 Book B보다 더 두껍고(thicker than), Book C는 Book B보다 인기가 적으며(less popular than), Book C는 가장 얇고(the thinnest), Book B는 가장 인기가 있다(the most popular)."
+  }
+ ]
+}

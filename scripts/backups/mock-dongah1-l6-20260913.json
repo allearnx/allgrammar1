@@ -1,0 +1,853 @@
+{
+ "R1": [
+  {
+   "number": 1,
+   "question": "다음 중 짝지어진 단어의 관계가 나머지 넷과 다른 것은?",
+   "options": [
+    "perfect - imperfect",
+    "heavy - light",
+    "reduce - increase",
+    "fix - repair",
+    "remember - forget"
+   ],
+   "answer": "4",
+   "explanation": "나머지는 모두 '반의어' 관계이나, '수선하다'라는 뜻의 fix와 repair는 '유의어' 관계이다."
+  },
+  {
+   "number": 2,
+   "question": "다음 중 영영풀이가 알맞지 않은 것은?",
+   "options": [
+    "leftover: the food that remains after a meal",
+    "decide: to choose something after thinking carefully",
+    "recycle: to get rid of something that you do not want or need",
+    "waste: materials that you no longer need and throw away",
+    "challenge: a task or activity that is difficult and needs a lot of effort and trying"
+   ],
+   "answer": "3",
+   "explanation": "recycle은 '재활용하다'라는 뜻의 동사로, 'to put old paper, glass, plastic, etc. through a process for using again'으로 고쳐야 한다."
+  },
+  {
+   "number": 3,
+   "question": "다음 빈칸 (A)~(D)에 들어갈 단어가 차례대로 연결된 것은?\n\n• I always (A)________ the wrapping paper carefully.\n• We try to (B)________ old containers for the Earth.\n• She likes to (C)________, so she has colorful threads.\n• These factories (D)________ many cars every day.\n\nⓐ reuse ⓑ sew ⓒ produce ⓓ tear",
+   "options": [
+    "ⓐ-ⓑ-ⓓ-ⓒ",
+    "ⓑ-ⓓ-ⓐ-ⓒ",
+    "ⓒ-ⓐ-ⓑ-ⓓ",
+    "ⓓ-ⓐ-ⓑ-ⓒ",
+    "ⓓ-ⓐ-ⓒ-ⓑ"
+   ],
+   "answer": "4",
+   "explanation": "(A) 포장지를 조심스럽게 찢는다(tear), (B) 오래된 용기를 재사용하려고(reuse), (C) 바느질하는(sew) 것을 좋아해서, (D) 공장들이 차를 생산한다(produce)."
+  },
+  {
+   "number": 4,
+   "question": "다음 밑줄 친 to부정사의 쓰임이 다른 것은?",
+   "options": [
+    "His goal is <u>to help</u> people as a lawyer.",
+    "He hopes <u>to become</u> an English teacher.",
+    "I want <u>to learn</u> to surf this summer.",
+    "They learned <u>to work</u> together.",
+    "She decided <u>to quit</u> school."
+   ],
+   "answer": "1",
+   "explanation": "①의 to help는 보어 자리에 쓰인 명사적 용법이며, 나머지는 목적어 자리에 쓰인 명사적 용법이다."
+  },
+  {
+   "number": 5,
+   "question": "다음 대화의 빈칸에 들어갈 말로 알맞은 것은?\n\nM: Can you please carry this box to my car?\nG: ______________, Dad, but I'm late for my class.\nM: Oh, I see. I'll ask somebody else.",
+   "options": [
+    "It's my pleasure",
+    "Sure. No problem",
+    "I'm really sorry",
+    "Okay. I will",
+    "Sounds great"
+   ],
+   "answer": "3",
+   "explanation": "상자를 옮겨 달라는 요청에 수업에 늦었다고 하며 거절하고 있으므로 거절의 표현 'I'm really sorry'가 알맞다."
+  },
+  {
+   "number": 6,
+   "question": "다음 그림을 보고 묘사한 문장 중, 어법상 어색한 것을 모두 고르면? (정답 2개)\n(그림 설명: ① Dan이 Jenny에게 꽃을 주고 Jenny가 기뻐하는 모습 ② Tom이 책상에서 공부하는 모습 ③ Jinho가 휠체어를 밀어 주는 모습 ④ Mia가 친구들과 생일 파티를 하는 모습)",
+   "options": [
+    "I think that Jenny is happy.",
+    "I believe Jinho has a warm heart.",
+    "I heard that Dan gave flowers to Jenny.",
+    "Mia said which her birthday party was fun.",
+    "Tom hopes that will get a good grade next time."
+   ],
+   "answer": "4, 5",
+   "explanation": "④ said의 목적어 자리에 완전한 문장이 오므로 which → that. ⑤ hopes 뒤의 that절에 주어가 없으므로 will → he will."
+  },
+  {
+   "number": 7,
+   "question": "다음 대화를 읽고 답할 수 없는 질문을 모두 고르면? (정답 2개)\n\nM: For here or to go?\nG: For here, please. And can you please put my smoothie in a plastic cup, not in a glass?\nM: I'm sorry, but we don't use single-use plastic cups inside the café.\nG: Oh, I see.",
+   "options": [
+    "How much is the smoothie?",
+    "What does the girl ask the man for?",
+    "What flavor of smoothie does she order?",
+    "Why does the man refuse the girl's request?",
+    "Where does the girl want to drink her smoothie?"
+   ],
+   "answer": "1, 3",
+   "explanation": "스무디의 가격과 맛에 대한 정보는 대화문에 언급되지 않았다."
+  },
+  {
+   "number": 8,
+   "question": "다음 중 짝지어진 대화가 어색한 것은?",
+   "options": [
+    "A: I need a favor. Can you please feed the cat? / B: I'm sorry, but I can't.",
+    "A: Can you wash the car? / B: Of course, but I'm busy now.",
+    "A: Can you water the plants? / B: Sure. No problem.",
+    "A: Can you turn off the light? / B: Sure, I can.",
+    "A: Can you please empty the trash can? / B: I'm afraid, I can't. I'm cleaning the windows."
+   ],
+   "answer": "2",
+   "explanation": "② 세차해 줄 수 있는지에 대한 요청에 '물론이죠'라고 승낙하고 바로 이어서 '지금 저는 바빠요'라고 말하는 것은 어색하다."
+  },
+  {
+   "number": 9,
+   "question": "다음 대화의 빈칸에 들어갈 말로 알맞은 것은?\n\nG: Dad, ______________________________?\nM: Now? I'm cooking dinner.\nG: Oh, I see. Then, when can you fix it?\nM: I'll do it right after dinner.",
+   "options": [
+    "what are you doing",
+    "can you please fix my bag",
+    "can I help you with dinner",
+    "would you like to have dinner",
+    "what are you going to do after dinner"
+   ],
+   "answer": "2",
+   "explanation": "지금은 저녁을 요리하고 있다고 말하자 소녀가 그러면 언제 고쳐 줄 수 있는지 묻고 있으므로, 빈칸에는 가방을 고쳐 달라는 요청이 알맞다."
+  },
+  {
+   "number": 10,
+   "question": "다음 대화의 내용과 일치하는 것을 모두 고르면? (정답 2개)\n\nB: Hi, Yuna. What are you doing here?\nG: Hi, Alex. I'm plogging with my club members.\nB: Excuse me?\nG: Plogging. It means jogging and picking up trash at the same time.\nB: Sounds cool! So you're a member of a plogging club.\nG: Yes. We plog together every Saturday morning from 10 to 12. Interested?\nB: Well, I'll think about it.\nG: OK. By the way, can you please help me with this trash bag? It's heavy.\nB: Sure. No problem.",
+   "options": [
+    "Yuna explains the meaning of plogging to Alex.",
+    "Plogging means picking up trash during a walk.",
+    "The plogging club meets every Sunday morning.",
+    "Alex decides not to join the plogging club.",
+    "Yuna asks Alex for help because her trash bag is heavy."
+   ],
+   "answer": "1, 5",
+   "explanation": "② 플로깅은 조깅하면서 쓰레기를 줍는 것이다. ③ 매주 토요일 아침에 만난다. ④ Alex는 가입할지 생각해 보겠다고 했다."
+  },
+  {
+   "number": 11,
+   "question": "다음 글을 읽고 물음에 답하시오.\nEvery day, we produce lots of waste, and the Earth is getting sicker and sicker. Do you want ⓐ<u>saving</u> the Earth? Then, join the zero-waste challenge, and ⓑ<u>share</u> your stories.\n\nOlivia: My birthday was last Saturday, and my family and I ate out. There ⓒ<u>were</u> lots of leftovers, but we brought them home. The next day, I made a nice lunch out of ⓓ<u>them</u>. FYI, you can ⓔ<u>find</u> great cooking ideas for leftovers on the Internet.\n\n윗글의 밑줄 친 ⓐ~ⓔ 중, 어법상 어색한 것은?",
+   "options": [
+    "ⓐ",
+    "ⓑ",
+    "ⓒ",
+    "ⓓ",
+    "ⓔ"
+   ],
+   "answer": "1",
+   "explanation": "ⓐ 동사 want는 목적어로 to부정사를 취하므로 saving → to save."
+  },
+  {
+   "number": 12,
+   "question": "다음 글을 읽고 물음에 답하시오.\nEvery day, we produce lots of waste, and the Earth is getting sicker and sicker. Do you want ⓐ<u>saving</u> the Earth? Then, join the zero-waste challenge, and ⓑ<u>share</u> your stories.\n\nOlivia: My birthday was last Saturday, and my family and I ate out. There ⓒ<u>were</u> lots of leftovers, but we brought them home. The next day, I made a nice lunch out of ⓓ<u>them</u>. FYI, you can ⓔ<u>find</u> great cooking ideas for leftovers on the Internet.\n\n윗글을 읽고 다음 질문에 대한 알맞은 대답이 되도록 빈칸을 완성하시오.\n\nQ. How is the Earth changing, and why?\n→ The Earth (1)________ because of (2)________.",
+   "options": [],
+   "answer": "is getting sicker and sicker, lots of waste",
+   "subParts": [
+    {
+     "label": "(1)",
+     "answer": "is getting sicker and sicker"
+    },
+    {
+     "label": "(2)",
+     "answer": "lots of waste"
+    }
+   ],
+   "explanation": "지구는 많은 쓰레기 때문에 점점 더 병들어 가고 있다."
+  },
+  {
+   "number": 13,
+   "question": "다음 글을 읽고 물음에 답하시오.\nEvery day, we produce lots of waste, and the Earth is getting sicker and sicker. Do you want ⓐ<u>saving</u> the Earth? Then, join the zero-waste challenge, and ⓑ<u>share</u> your stories.\n\nOlivia: My birthday was last Saturday, and my family and I ate out. There ⓒ<u>were</u> lots of leftovers, but we brought them home. The next day, I made a nice lunch out of ⓓ<u>them</u>. FYI, you can ⓔ<u>find</u> great cooking ideas for leftovers on the Internet.\n\n윗글의 제목으로 알맞은 것은?",
+   "options": [
+    "Eat Everything on the Plate",
+    "New Kinds of Food from Leftovers",
+    "Why Do We Produce Much Waste?",
+    "Failure of the Zero-Waste Challenge",
+    "Helping the Earth: Trying Zero-Waste!"
+   ],
+   "answer": "5",
+   "explanation": "병들어 가는 지구를 구하기 위해 제로 웨이스트 챌린지에 동참하자고 하며 Olivia의 경험을 제시하고 있으므로 '지구를 돕기: 제로 웨이스트 시도하기!'가 알맞다."
+  },
+  {
+   "number": 14,
+   "question": "다음 글을 읽고 물음에 답하시오.\nEvery day, we produce lots of waste, and the Earth is getting sicker and sicker. Do you want ⓐ<u>saving</u> the Earth? Then, join the zero-waste challenge, and ⓑ<u>share</u> your stories.\n\nOlivia: My birthday was last Saturday, and my family and I ate out. There ⓒ<u>were</u> lots of leftovers, but we brought them home. The next day, I made a nice lunch out of ⓓ<u>them</u>. FYI, you can ⓔ<u>find</u> great cooking ideas for leftovers on the Internet.\n\n윗글의 내용과 일치하는 것을 모두 고르면? (정답 2개)",
+   "options": [
+    "Olivia had a meal at home on her birthday.",
+    "Olivia didn't throw away the leftovers.",
+    "Olivia shared the leftovers with others.",
+    "Olivia cooked a nice dinner from leftovers.",
+    "We can find ideas for leftovers online."
+   ],
+   "answer": "2, 5",
+   "explanation": "① Olivia는 생일에 외식을 했다. ③ 남은 음식을 집으로 가져왔다. ④ 남은 음식으로 점심을 만들었다."
+  },
+  {
+   "number": 15,
+   "question": "다음 글을 읽고 물음에 답하시오.\nDomingo: My dog ⓐ<u>tore</u> my bag. I wanted to buy a new one, but I thought again. I learned that reusing is important for zero-waste living. So, I decided to fix it and (A)[reuse / reusing] it. I'm not very good at sewing, and I don't think that the bag looks (B)[perfectly / perfect]. I guess (C)[that / which] it's all right.\n\n윗글의 밑줄 친 ⓐ와 뜻이 다른 것을 모두 고르면? (정답 2개)",
+   "options": [
+    "Don't <u>tear</u> the paper.",
+    "He <u>tore</u> the letter in half.",
+    "She had <u>tears</u> in her eyes.",
+    "The children <u>tore</u> the curtain.",
+    "A <u>tear</u> rolled down his cheek."
+   ],
+   "answer": "3, 5",
+   "explanation": "ⓐ의 tore는 '찢다'라는 뜻의 동사 tear의 과거형이고, ③, ⑤의 tear는 '눈물'이라는 뜻의 명사이다."
+  },
+  {
+   "number": 16,
+   "question": "다음 글을 읽고 물음에 답하시오.\nDomingo: My dog ⓐ<u>tore</u> my bag. I wanted to buy a new one, but I thought again. I learned that reusing is important for zero-waste living. So, I decided to fix it and (A)[reuse / reusing] it. I'm not very good at sewing, and I don't think that the bag looks (B)[perfectly / perfect]. I guess (C)[that / which] it's all right.\n\n윗글의 괄호 (A), (B), (C)에서 어법상 알맞은 말로 바르게 연결된 것은?",
+   "options": [
+    "(A) reusing – (B) perfectly – (C) which",
+    "(A) reuse – (B) perfectly – (C) which",
+    "(A) reuse – (B) perfect – (C) that",
+    "(A) reusing – (B) perfect – (C) that",
+    "(A) reuse – (B) perfect – (C) which"
+   ],
+   "answer": "3",
+   "explanation": "(A) decided의 목적어 to fix와 and로 연결되므로 (to) reuse. (B) 감각동사 looks 뒤에는 형용사 perfect. (C) guess의 목적어인 완전한 절을 이끄는 접속사 that."
+  },
+  {
+   "number": 17,
+   "question": "다음 글을 읽고 물음에 답하시오.\nDomingo: My dog ⓐ<u>tore</u> my bag. I wanted to buy a new one, but I thought again. I learned that reusing is important for zero-waste living. So, I decided to fix it and (A)[reuse / reusing] it. I'm not very good at sewing, and I don't think that the bag looks (B)[perfectly / perfect]. I guess (C)[that / which] it's all right.\n\n윗글의 제목을 다음과 같이 쓸 때 빈칸에 들어갈 알맞은 말을 쓰시오. (첫 철자는 대문자로 쓸 것)\n\n(1)________ My (2)________ by Fixing It",
+   "options": [],
+   "answer": "Reusing, Bag",
+   "subParts": [
+    {
+     "label": "(1)",
+     "answer": "Reusing"
+    },
+    {
+     "label": "(2)",
+     "answer": "Bag"
+    }
+   ],
+   "explanation": "수선함으로써 내 가방 재사용하기"
+  },
+  {
+   "number": 18,
+   "question": "다음 글을 읽고 물음에 답하시오.\nEmma: I often use food delivery services, but today I ⓐ<u>didn't</u>. Instead, I walked to my favorite restaurant with a reusable container and ⓑ<u>pick</u> up the food. I heard (A)<u>that</u> plastic never goes away completely. I didn't use any single-use plastic today. I felt good!\nMinsu: Yesterday, I took some plastic and glass bottles to a recycling machine near my house. I put ⓒ<u>it</u> into the machine one by one, and I got some points in return. What ⓓ<u>can I do</u> with those points? Well, I can use them like money. Don't you think ⓔ<u>that's</u> cool?\n\n윗글의 밑줄 친 ⓐ~ⓔ 중, 어법상 어색한 것을 모두 고르면? (정답 2개)",
+   "options": [
+    "ⓐ",
+    "ⓑ",
+    "ⓒ",
+    "ⓓ",
+    "ⓔ"
+   ],
+   "answer": "2, 3",
+   "explanation": "ⓑ walked와 and로 연결된 과거의 일이므로 pick → picked. ⓒ 앞의 복수 명사구 some plastic and glass bottles를 가리키므로 it → them."
+  },
+  {
+   "number": 19,
+   "question": "다음 글을 읽고 물음에 답하시오.\nEmma: I often use food delivery services, but today I ⓐ<u>didn't</u>. Instead, I walked to my favorite restaurant with a reusable container and ⓑ<u>pick</u> up the food. I heard (A)<u>that</u> plastic never goes away completely. I didn't use any single-use plastic today. I felt good!\nMinsu: Yesterday, I took some plastic and glass bottles to a recycling machine near my house. I put ⓒ<u>it</u> into the machine one by one, and I got some points in return. What ⓓ<u>can I do</u> with those points? Well, I can use them like money. Don't you think ⓔ<u>that's</u> cool?\n\n윗글의 밑줄 친 (A)that과 쓰임이 같지 않은 것은?",
+   "options": [
+    "He said <u>that</u> she is very kind.",
+    "I think <u>that</u> this book is fun.",
+    "We believe <u>that</u> he is honest.",
+    "People know <u>that</u> is not true.",
+    "She learned <u>that</u> the Earth is round."
+   ],
+   "answer": "4",
+   "explanation": "(A)의 that은 동사 heard의 목적어인 명사절을 이끄는 접속사이지만, ④의 that은 주어 자리에 쓰인 지시대명사이다."
+  },
+  {
+   "number": 20,
+   "question": "다음 글을 읽고 물음에 답하시오.\nEmma: I often use food delivery services, but today I ⓐ<u>didn't</u>. Instead, I walked to my favorite restaurant with a reusable container and ⓑ<u>pick</u> up the food. I heard (A)<u>that</u> plastic never goes away completely. I didn't use any single-use plastic today. I felt good!\nMinsu: Yesterday, I took some plastic and glass bottles to a recycling machine near my house. I put ⓒ<u>it</u> into the machine one by one, and I got some points in return. What ⓓ<u>can I do</u> with those points? Well, I can use them like money. Don't you think ⓔ<u>that's</u> cool?\n\n윗글의 주제로 알맞은 것은?",
+   "options": [
+    "benefits of food delivery services",
+    "how to use a recycling machine",
+    "my difficulty in reducing waste",
+    "my effort for a zero-waste life",
+    "problems of single-use plastic"
+   ],
+   "answer": "4",
+   "explanation": "Emma는 배달 대신 재사용 용기로 음식을 가져왔고, 민수는 병을 재활용 기계에 넣어 포인트를 받았다고 했으므로 두 사람의 제로 웨이스트를 위한 노력이 주제이다."
+  },
+  {
+   "number": 21,
+   "question": "다음 글을 읽고 물음에 답하시오.\nEmma: I often use food delivery services, but today I ⓐ<u>didn't</u>. Instead, I walked to my favorite restaurant with a reusable container and ⓑ<u>pick</u> up the food. I heard (A)<u>that</u> plastic never goes away completely. I didn't use any single-use plastic today. I felt good!\nMinsu: Yesterday, I took some plastic and glass bottles to a recycling machine near my house. I put ⓒ<u>it</u> into the machine one by one, and I got some points in return. What ⓓ<u>can I do</u> with those points? Well, I can use them like money. Don't you think ⓔ<u>that's</u> cool?\n\n윗글의 내용과 일치하는 것을 모두 고르면? (정답 2개)",
+   "options": [
+    "Emma decided not to use food delivery services today.",
+    "Emma walked to the restaurant with a single-use container.",
+    "Emma heard plastic completely goes away after many years.",
+    "Minsu put all the bottles into the machine at once.",
+    "Minsu received some points after he used the recycling machine."
+   ],
+   "answer": "1, 5",
+   "explanation": "② Emma는 재사용할 수 있는 용기를 가지고 갔다. ③ 플라스틱은 완전히 없어지지 않는다고 들었다. ④ 민수는 병을 하나씩 넣었다."
+  },
+  {
+   "number": 22,
+   "question": "다음 글을 읽고 물음에 답하시오.\nDomingo: My dog tore my bag. I wanted to buy a new one, but I thought again. (A)<u>나는 재사용이 제로 웨이스트 생활에 중요하다고 배웠어.</u> So, I decided to fix it and reuse it. I'm not very good at sewing, and I don't think that the bag looks perfect. I guess it's all right.\n\n윗글의 밑줄 친 (A)의 우리말을 주어진 <조건>에 알맞게 영작하시오.\n\n<조건>\n• 접속사 that을 사용할 것\n• be, important, learn, living, reusing, for를 사용할 것 (필요시 변형할 것)\n• 9단어로 쓸 것 ※ 완전한 문장으로 쓰시오.",
+   "options": [],
+   "answer": "I learned that reusing is important for zero-waste living.",
+   "explanation": "주어 I와 과거형 learned, 접속사 that, 동명사 주어 reusing에 단수동사 is를 쓴다."
+  },
+  {
+   "number": 23,
+   "question": "다음 글을 읽고 물음에 답하시오.\nDomingo: My dog tore my bag. I wanted to buy a new one, but I thought again. (A)<u>나는 재사용이 제로 웨이스트 생활에 중요하다고 배웠어.</u> So, I decided to fix it and reuse it. I'm not very good at sewing, and I don't think that the bag looks perfect. I guess it's all right.\n\n윗글을 읽고 다음 질문에 대한 대답이 되도록 주어진 <조건>에 알맞게 쓰시오.\n\n<조건>\n• 본문에서 찾아 쓰되, 필요시 변형할 것\n• 각 빈칸에 한 단어씩 쓸 것\n\nQ. How did Domingo decide to address his torn bag?\n→ He decided (1)________ ________ ________ and (2)________ ________ instead of (3)________ ________ ________ ________.",
+   "options": [],
+   "answer": "to fix it, reuse it, buying a new one",
+   "subParts": [
+    {
+     "label": "(1)",
+     "answer": "to fix it"
+    },
+    {
+     "label": "(2)",
+     "answer": "reuse it"
+    },
+    {
+     "label": "(3)",
+     "answer": "buying a new one"
+    }
+   ],
+   "explanation": "그는 새것을 사는 대신에 그것을 수선해서 재사용하기로 결정했다."
+  },
+  {
+   "number": 24,
+   "question": "다음 글을 아래와 같이 요약할 때, 빈칸에 들어갈 알맞은 말을 본문에서 찾아 쓰시오.\n\nEmma: I often use food delivery services, but today I didn't. Instead, I walked to my favorite restaurant with a reusable container and picked up the food. I heard that plastic never goes away completely. I didn't use any single-use plastic today. I felt good!\n\nEmma learned that plastic doesn't fully disappear, so she picked up her food by herself in a (1)________ ________ and avoided using (2)________ ________ today.",
+   "options": [],
+   "answer": "reusable container, single-use plastic",
+   "subParts": [
+    {
+     "label": "(1)",
+     "answer": "reusable container"
+    },
+    {
+     "label": "(2)",
+     "answer": "single-use plastic"
+    }
+   ],
+   "explanation": "Emma는 재사용할 수 있는 용기에 직접 음식을 가져왔고 일회용 플라스틱 사용을 피했다."
+  },
+  {
+   "number": 25,
+   "question": "다음 준호에 관한 표를 보고 질문에 대한 알맞은 답을 어법에 맞게 쓰시오. (각 빈칸에 한 단어씩 쓸 것)\n\n| Hobby | take pictures of his pet dogs |\n|---|---|\n| Dream | become an animal doctor |\n| Plan | read books about animals |\n\n(1) What is Junho's hobby?\n→ His hobby is ________ ________ ________ ________ ________ ________ ________.\n(2) What is Junho's dream?\n→ He wants ________ ________ ________ ________ ________.\n(3) What is Junho's plan for his dream?\n→ He is planning ________ ________ ________ ________ ________.",
+   "options": [],
+   "answer": "to take pictures of his pet dogs / to become an animal doctor / to read books about animals",
+   "subParts": [
+    {
+     "label": "(1)",
+     "answer": "to take pictures of his pet dogs"
+    },
+    {
+     "label": "(2)",
+     "answer": "to become an animal doctor"
+    },
+    {
+     "label": "(3)",
+     "answer": "to read books about animals"
+    }
+   ],
+   "explanation": "보어 자리, want의 목적어, plan의 목적어 자리에 모두 to부정사를 쓴다."
+  },
+  {
+   "number": 26,
+   "question": "다음 글을 읽고 물음에 답하시오.\nDomingo: My dog tore my bag. (A) I wanted to buy a new one, but I thought again. (B) I learned that reusing is important for zero-waste living. (C) I'm not very good at sewing, and I don't think that the bag looks perfect. (D) I guess it's all right. (E)\nMinsu: Yesterday, I took some plastic and glass bottles to a recycling machine near my house. I put them into the machine one by one, and ⓐ______________________. What can I do with those points? Well, I can use them like money. Don't you think that's cool?\n\n윗글의 (A)~(E) 중, 주어진 문장이 들어갈 알맞은 곳은?\n\nSo, I decided to fix it and reuse it.",
+   "options": [
+    "(A)",
+    "(B)",
+    "(C)",
+    "(D)",
+    "(E)"
+   ],
+   "answer": "3",
+   "explanation": "주어진 문장은 '그래서 나는 그것을 수선해서 재사용하기로 결심했어.'라는 뜻으로 So로 시작하므로, 그 원인이 되는 '재사용이 중요하다고 배웠어' 뒤인 (C)에 들어가야 한다."
+  },
+  {
+   "number": 27,
+   "question": "다음 글을 읽고 물음에 답하시오.\nDomingo: My dog tore my bag. (A) I wanted to buy a new one, but I thought again. (B) I learned that reusing is important for zero-waste living. (C) I'm not very good at sewing, and I don't think that the bag looks perfect. (D) I guess it's all right. (E)\nMinsu: Yesterday, I took some plastic and glass bottles to a recycling machine near my house. I put them into the machine one by one, and ⓐ______________________. What can I do with those points? Well, I can use them like money. Don't you think that's cool?\n\n윗글의 빈칸 ⓐ에 들어갈 말로 알맞은 것은?",
+   "options": [
+    "I lost some points",
+    "I made lots of money",
+    "I could use some points",
+    "I got some points in return",
+    "I felt good about helping the Earth"
+   ],
+   "answer": "4",
+   "explanation": "뒤에서 그 포인트들로 무엇을 할 수 있는지 묻고 있으므로 민수가 병을 넣은 후 포인트를 받았다는 내용이 알맞다."
+  },
+  {
+   "number": 28,
+   "question": "다음 글을 읽고 물음에 답하시오.\nDomingo: My dog tore my bag. (A) I wanted to buy a new one, but I thought again. (B) I learned that reusing is important for zero-waste living. (C) I'm not very good at sewing, and I don't think that the bag looks perfect. (D) I guess it's all right. (E)\nMinsu: Yesterday, I took some plastic and glass bottles to a recycling machine near my house. I put them into the machine one by one, and ⓐ______________________. What can I do with those points? Well, I can use them like money. Don't you think that's cool?\n\n윗글을 읽고 답할 수 없는 질문은?",
+   "options": [
+    "What did Domingo's dog do?",
+    "What is important for zero-waste living?",
+    "What is Domingo very good at?",
+    "What did Minsu take to the recycling machine?",
+    "Where was the recycling machine?"
+   ],
+   "answer": "3",
+   "explanation": "Domingo가 바느질을 잘 못한다는 언급은 있으나 무엇을 잘하는지에 대한 언급은 없다."
+  },
+  {
+   "number": 29,
+   "question": "다음 글을 아래와 같이 요약할 때, 빈칸 (A), (B)에 들어갈 말로 알맞게 연결된 것은?\n\nOlivia: My birthday was last Saturday, and my family and I ate out. There were lots of leftovers, but we brought them home. The next day, I made a nice lunch out of them. FYI, you can find great cooking ideas for leftovers on the Internet.\n\nOlivia's family ate out for her birthday. They didn't (A)________ the leftovers and took them home. She later made a (B)________ lunch from them.",
+   "options": [
+    "(A) waste – (B) tasty",
+    "(A) throw away – (B) bad",
+    "(A) save – (B) delicious",
+    "(A) pack – (B) cheap",
+    "(A) wrap – (B) terrible"
+   ],
+   "answer": "1",
+   "explanation": "Olivia의 가족은 남은 음식을 낭비하지(waste) 않고 집으로 가져왔고, 그것으로 맛있는(tasty) 점심을 만들었다."
+  },
+  {
+   "number": 30,
+   "question": "다음 세 친구들의 스마트폰에 대한 생각을 나타내는 표를 읽고, 괄호 안의 동사를 어법에 맞게 사용하여 문장의 빈칸을 완성하시오. (단, 알맞은 접속사를 각각 사용할 것)\n\n| Person | Opinion |\n|---|---|\n| Jisue | Using smartphones too much is bad for the eyes. |\n| Heejoo | people use smartphones too much. |\n| Dami | sharing ideas is easy with smartphones. |\n\n(1) Jisue ________________________. (think)\n(2) Heejoo ________________________. (say)\n(3) Dami ________________________. (feel)",
+   "options": [],
+   "answer": "thinks that using smartphones too much is bad for the eyes / says that people use smartphones too much / feels that sharing ideas is easy with smartphones",
+   "subParts": [
+    {
+     "label": "(1)",
+     "answer": "thinks that using smartphones too much is bad for the eyes"
+    },
+    {
+     "label": "(2)",
+     "answer": "says that people use smartphones too much"
+    },
+    {
+     "label": "(3)",
+     "answer": "feels that sharing ideas is easy with smartphones"
+    }
+   ],
+   "explanation": "3인칭 단수 주어에 맞춰 thinks/says/feels를 쓰고, 접속사 that으로 완전한 절을 연결한다."
+  }
+ ],
+ "R2": [
+  {
+   "number": 1,
+   "question": "다음 중 짝지어진 단어의 관계가 어색한 것은?",
+   "options": [
+    "turn off : turn on = close : open",
+    "produce : make = sick : ill",
+    "recycle : recyclable = use : useful",
+    "forget : forgetful = importance : important",
+    "complete : completely = heavy : heavily"
+   ],
+   "answer": "4",
+   "explanation": "'잊다 : 잘 잊는'은 동사-형용사 관계이지만 '중요함 : 중요한'은 명사-형용사 관계이다."
+  },
+  {
+   "number": 2,
+   "question": "다음 중 <보기>의 단어 및 표현이 들어갈 수 없는 것은?\n\n<보기> go away, reduce, share, reuse, save",
+   "options": [
+    "Turn off the lights. We must ________ energy use.",
+    "She likes to ________ her ideas on social media.",
+    "I believe the doctor can ________ the sick boy.",
+    "Please ________ cloth bags instead of plastic bags.",
+    "I love to ________, so I try new restaurants every weekend."
+   ],
+   "answer": "5",
+   "explanation": "'없어지다'라는 뜻의 go away가 들어갈 수 있는 문장이 없고, ⑤ '나는 외식하는 것을 아주 좋아해서 주말마다 새로운 식당을 시도한다.'에는 eat out이 들어간다."
+  },
+  {
+   "number": 3,
+   "question": "다음 밑줄 친 단어가 같은 의미로 쓰인 것은?",
+   "options": [
+    "You look <u>cool</u> with that hat. / It's <u>cool</u> outside today.",
+    "Plastic <u>waste</u> harms the environment. / We must not <u>waste</u> water.",
+    "He plays soccer <u>like</u> a professional player. / The students sang <u>like</u> angels.",
+    "He <u>tore</u> the paper into small pieces. / <u>Tears</u> of joy fell from her eyes.",
+    "I will <u>pick up</u> my package at the post office. / She <u>picked up</u> the pencil from the floor."
+   ],
+   "answer": "3",
+   "explanation": "③의 like는 둘 다 '~처럼'이라는 뜻의 전치사로 쓰였다."
+  },
+  {
+   "number": 4,
+   "question": "다음 중 어법상 어색한 문장의 개수는?\n\nⓐ They believe that helping others is important.\nⓑ He decided eating healthy food from now on.\nⓒ I heard what the movie was very good.\nⓓ She finished to write the letter last night.\nⓔ We expect to win the game tomorrow.\nⓕ My plan is visit Korea next year.\nⓖ I felt the story was interesting.",
+   "options": [
+    "2개",
+    "3개",
+    "4개",
+    "5개",
+    "6개"
+   ],
+   "answer": "3",
+   "explanation": "ⓑ eating → to eat, ⓒ what → that, ⓓ to write → writing, ⓕ visit → to visit 또는 visiting. 어색한 문장은 4개이다."
+  },
+  {
+   "number": 5,
+   "question": "다음 중 짝지어진 두 문장의 의미가 다른 것은?",
+   "options": [
+    "They started to run to the bus stop. = They started running to the bus stop.",
+    "She remembered to feed the puppy. = She remembered feeding the puppy.",
+    "I love to eat ice cream on hot days. = I love eating ice cream on hot days.",
+    "My task is to water plants in the garden. = My task is watering plants in the garden.",
+    "We continued playing soccer even in the rain. = We continued to play soccer even in the rain."
+   ],
+   "answer": "2",
+   "explanation": "remember는 to부정사가 오면 '(미래에) ~할 것을 기억하다', 동명사가 오면 '(과거에) ~한 것을 기억하다'라는 뜻으로 의미가 달라진다."
+  },
+  {
+   "number": 6,
+   "question": "다음 그림을 보고 <조건>에 맞게 빈칸에 들어갈 말을 완성하시오.\n(그림 설명: 학생 세 명이 재활용 통에 플라스틱 병을 넣고 있는 모습)\n\n<조건>\n• 접속사 that을 사용할 것\n• into, three students, a, plastic bottles, show, put, be, recycling bin을 한 번씩 사용할 것 (필요시 변형할 것)\n\n→ This picture ________________________________.",
+   "options": [],
+   "answer": "shows that three students are putting plastic bottles into a recycling bin",
+   "explanation": "이 그림은 세 명의 학생들이 플라스틱 병을 재활용 통에 넣고 있는 것을 보여 준다."
+  },
+  {
+   "number": 7,
+   "question": "다음 대화를 읽고 물음에 답하시오.\nB: Hi, Yuna. What are you doing here?\nG: Hi, Alex. I'm plogging with my club members.\nB: Excuse me?\nG: Plogging. It means jogging and picking up trash at the same time.\nB: Sounds cool! So you're a member of a plogging club.\nG: Yes. We plog together every Saturday morning from 10 to 12. Interested?\nB: Well, I'll think about it.\nG: OK. By the way, can you please help me with this trash bag? It's heavy.\nB: ______________________\n\n위 대화의 빈칸에 들어갈 말로 알맞은 것을 모두 골라 짝지은 것은?\n\nⓐ I agree.\nⓑ Of course.\nⓒ Okay. Go ahead.\nⓓ Sure. No problem.\nⓔ I'm sorry to hear that.\nⓕ I'm afraid, I can't. I'm busy now.",
+   "options": [
+    "ⓐ, ⓒ, ⓕ",
+    "ⓐ, ⓓ, ⓔ",
+    "ⓑ, ⓓ, ⓕ",
+    "ⓒ, ⓔ, ⓕ",
+    "ⓑ, ⓓ, ⓔ, ⓕ"
+   ],
+   "answer": "3",
+   "explanation": "쓰레기봉투를 들어 달라는 도움 요청에 대한 답이므로 승낙(ⓑ, ⓓ) 또는 거절(ⓕ)의 표현이 알맞다."
+  },
+  {
+   "number": 8,
+   "question": "다음 대화를 읽고 물음에 답하시오.\nB: Hi, Yuna. What are you doing here?\nG: Hi, Alex. I'm plogging with my club members.\nB: Excuse me?\nG: Plogging. It means jogging and picking up trash at the same time.\nB: Sounds cool! So you're a member of a plogging club.\nG: Yes. We plog together every Saturday morning from 10 to 12. Interested?\nB: Well, I'll think about it.\nG: OK. By the way, can you please help me with this trash bag? It's heavy.\nB: Sure. No problem.\n\n위 대화를 읽고 아래 질문에 대한 답을 <조건>에 알맞게 쓰시오.\n\n<조건>\n• 알맞은 인칭대명사로 시작할 것\n• Yuna's, join, plogging을 사용하여 총 8단어로 쓸 것\n\nQ. What will Alex think about?\n→ ________________________________",
+   "options": [],
+   "answer": "He will think about joining Yuna's plogging club.",
+   "explanation": "Alex는 유나의 플로깅 동아리에 가입하는 것에 관해 생각해 볼 것이다."
+  },
+  {
+   "number": 9,
+   "question": "다음 대화를 읽고 물음에 답하시오.\nB: Hi, Yuna. What are you doing here?\nG: Hi, Alex. I'm plogging with my club members.\nB: Excuse me?\nG: Plogging. It means jogging and picking up trash at the same time.\nB: Sounds cool! So you're a member of a plogging club.\nG: Yes. We plog together every Saturday morning from 10 to 12. Interested?\nB: Well, I'll think about it.\nG: OK. By the way, can you please help me with this trash bag? It's heavy.\nB: Sure. No problem.\n\n위 대화를 아래와 같이 요약할 때, 빈칸에 들어갈 알맞은 말을 쓰시오.\n\nThe members of Yuna's (1)________ club meet every (2)________ at 10 a.m. and (3)________ while they (4)________ ________ trash for two hours. Yuna is (5)________ today and asks Alex for help with her (6)________ trash bag.",
+   "options": [],
+   "answer": "plogging, Saturday, jog, pick up, plogging, heavy",
+   "subParts": [
+    {
+     "label": "(1)",
+     "answer": "plogging"
+    },
+    {
+     "label": "(2)",
+     "answer": "Saturday"
+    },
+    {
+     "label": "(3)",
+     "answer": "jog"
+    },
+    {
+     "label": "(4)",
+     "answer": "pick up"
+    },
+    {
+     "label": "(5)",
+     "answer": "plogging"
+    },
+    {
+     "label": "(6)",
+     "answer": "heavy"
+    }
+   ],
+   "explanation": "유나의 플로깅 동아리 회원들은 매주 토요일 아침 10시에 만나 2시간 동안 쓰레기를 주우며 조깅한다. 유나는 오늘 플로깅을 하는 중이고 무거운 쓰레기봉투를 들고 있어 Alex에게 도움을 요청한다."
+  },
+  {
+   "number": 10,
+   "question": "다음 대화의 빈칸에 들어갈 말로 알맞은 것을 모두 고르면? (정답 2개)\n\nW: Excuse me, but ______________________? The air conditioner is on.\nB: Oh, I didn't know that. I'll close it right away.\nW: Thanks.",
+   "options": [
+    "could you please open the door",
+    "would you mind closing the door",
+    "can you please close the door",
+    "is it okay if I open the door",
+    "may I open the door"
+   ],
+   "answer": "2, 3",
+   "explanation": "에어컨이 켜져 있다고 말하자 소년이 지금 바로 닫겠다고 하므로 빈칸에는 문을 닫아 달라는 요청의 표현이 들어가야 한다."
+  },
+  {
+   "number": 11,
+   "question": "다음은 각 학생의 제로 웨이스트 챌린지 계획표이다. 이 표를 보고 어법에 맞게 빈칸을 완성하시오.\n\n| David | use a reusable water bottle |\n|---|---|\n| Joy | not use plastic straws |\n| Johnny | use both sides of the paper |\n\n(1) David decided ________________.\n(2) Joy promised ________________.\n(3) Johnny began ________________.",
+   "options": [],
+   "answer": "to use a reusable water bottle / not to use plastic straws / using both sides of the paper",
+   "subParts": [
+    {
+     "label": "(1)",
+     "answer": "to use a reusable water bottle"
+    },
+    {
+     "label": "(2)",
+     "answer": "not to use plastic straws"
+    },
+    {
+     "label": "(3)",
+     "answer": "using both sides of the paper",
+     "acceptedAnswers": [
+      "to use both sides of the paper"
+     ]
+    }
+   ],
+   "explanation": "decide와 promise는 to부정사를 목적어로 취하고, begin은 동명사와 to부정사를 모두 목적어로 취한다."
+  },
+  {
+   "number": 12,
+   "question": "다음 글을 읽고 물음에 답하시오.\nEvery day, we produce lots of waste, and the Earth is getting ⓐ<u>sicker and sick</u>. Do you want ⓑ<u>to saving</u> the Earth? Then, ⓒ<u>joining</u> the zero-waste challenge, and share your stories.\n\nOlivia: My birthday was last Saturday, and my family and I ate out. There ⓓ<u>are</u> lots of leftovers, but we brought them home. The next day, I ⓔ<u>make</u> a nice lunch out of them. FYI, you can find great cooking ideas for leftovers on the Internet.\n\n윗글의 밑줄 친 ⓐ~ⓔ 중, 어색한 부분을 바르게 고친 것을 모두 고르면? (정답 2개)",
+   "options": [
+    "ⓐ: sicker and sick → sicker and sicker",
+    "ⓑ: to saving → saving",
+    "ⓒ: joining → join",
+    "ⓓ: are → was",
+    "ⓔ: make → will make"
+   ],
+   "answer": "1, 3",
+   "explanation": "ⓑ to saving → to save, ⓓ are → were, ⓔ make → made로 고쳐야 한다."
+  },
+  {
+   "number": 13,
+   "question": "다음 글을 읽고 물음에 답하시오.\nEvery day, we produce lots of waste, and the Earth is getting ⓐ<u>sicker and sick</u>. Do you want ⓑ<u>to saving</u> the Earth? Then, ⓒ<u>joining</u> the zero-waste challenge, and share your stories.\n\nOlivia: My birthday was last Saturday, and my family and I ate out. There ⓓ<u>are</u> lots of leftovers, but we brought them home. The next day, I ⓔ<u>make</u> a nice lunch out of them. FYI, you can find great cooking ideas for leftovers on the Internet.\n\n윗글의 내용과 일치하는 것의 개수는?\n\nⓐ We're making less trash, and the Earth is getting better and better.\nⓑ We can help the Earth through the zero-waste challenge.\nⓒ Olivia's family ate out on her birthday last Sunday.\nⓓ Olivia's family left all the leftover food at the restaurant.\nⓔ Olivia used the leftovers for her lunch.\nⓕ There are cooking ideas for leftovers online.",
+   "options": [
+    "2개",
+    "3개",
+    "4개",
+    "5개",
+    "6개"
+   ],
+   "answer": "2",
+   "explanation": "ⓐ 매일 많은 쓰레기를 만들고 지구는 점점 더 병들고 있다. ⓒ 생일은 지난 토요일이었다. ⓓ 남은 음식을 집으로 가져왔다. 일치하는 것은 ⓑ, ⓔ, ⓕ 3개이다."
+  },
+  {
+   "number": 14,
+   "question": "다음 글을 읽고 물음에 답하시오.\nDomingo: My dog tore my bag. I wanted to buy a new ⓐ<u>one</u>, but I thought again. I learned that reusing ⓑ<u>is</u> important for zero-waste living. So, I decided ⓒ<u>to fix</u> it and reuse it. I'm not very good at sewing, and I don't think ⓓ<u>that</u> the bag looks perfect. I guess ⓔ<u>it's all right</u>.\n\n윗글의 밑줄 친 ⓐ~ⓔ에 대한 설명으로 알맞지 않은 것은?",
+   "options": [
+    "ⓐ: bag을 가리키는 부정대명사이다.",
+    "ⓑ: that절의 주어 reusing이 동명사이며, 동명사는 단수 취급하므로 단수동사 is가 쓰였다.",
+    "ⓒ: decided의 목적어 자리에 쓰인 명사적 용법의 to부정사로, 동명사 fixing으로 바꿔 쓸 수 있다.",
+    "ⓓ: 동사 think의 목적어 자리에 쓰인 접속사로, 생략할 수 있다.",
+    "ⓔ: 동사 guess의 목적어로 쓰인 완전한 절이며 it's 앞에 접속사 that이 생략되어 있다."
+   ],
+   "answer": "3",
+   "explanation": "decide는 to부정사만을 목적어로 취하므로 동명사 fixing으로 바꿔 쓸 수 없다."
+  },
+  {
+   "number": 15,
+   "question": "다음 글을 읽고 물음에 답하시오.\nDomingo: My dog tore my bag. I wanted to buy a new ⓐ<u>one</u>, but I thought again. I learned that reusing ⓑ<u>is</u> important for zero-waste living. So, I decided ⓒ<u>to fix</u> it and reuse it. I'm not very good at sewing, and I don't think ⓓ<u>that</u> the bag looks perfect. I guess ⓔ<u>it's all right</u>.\n\n윗글을 읽고 다음 질문에 대한 대답으로 알맞은 것을 모두 고르면? (정답 2개)\n\nQ. What does Domingo think about his bag after he fixed it?",
+   "options": [
+    "He thinks it looks okay.",
+    "He thinks he won't use it.",
+    "He thinks he sewed it very well.",
+    "He thinks it doesn't look perfect.",
+    "He thinks it looks like a new bag."
+   ],
+   "answer": "1, 4",
+   "explanation": "Domingo는 가방이 완벽해 보이지는 않지만 괜찮다고 생각한다."
+  },
+  {
+   "number": 16,
+   "question": "다음 글을 읽고 물음에 답하시오.\nDomingo: My dog tore my bag. I wanted to buy a new ⓐ<u>one</u>, but I thought again. I learned that reusing ⓑ<u>is</u> important for zero-waste living. So, I decided ⓒ<u>to fix</u> it and reuse it. I'm not very good at sewing, and I don't think ⓓ<u>that</u> the bag looks perfect. I guess ⓔ<u>it's all right</u>.\n\n윗글의 내용과 (A)~(C)가 일치하면 T, 일치하지 않으면 F를 쓸 때, 순서대로 연결된 것은?\n\n(A) Domingo could not use his bag because of his little brother. (T/F)\n(B) Domingo knew that using things again is necessary for zero-waste living. (T/F)\n(C) Domingo finally chose to buy a new bag instead of fixing his torn bag. (T/F)",
+   "options": [
+    "T-T-F",
+    "F-T-F",
+    "T-F-F",
+    "F-T-T",
+    "F-F-F"
+   ],
+   "answer": "2",
+   "explanation": "(A) 가방을 찢은 것은 남동생이 아니라 개이다(F). (B) 재사용이 제로 웨이스트 생활에 중요하다고 배웠다(T). (C) 새 가방을 사는 대신 수선하기로 했다(F)."
+  },
+  {
+   "number": 17,
+   "question": "다음 글을 읽고 물음에 답하시오.\nEmma: I often use food delivery services, but today I didn't. Instead, I walked to my favorite restaurant with a reusable container and picked up the food. I heard that plastic never goes away completely. I didn't use any single-use plastic today. I felt good!\n\n윗글의 제목으로 알맞은 것은?",
+   "options": [
+    "Emma Caused Plastic Pollution!",
+    "Emma's Favorite Green Restaurant",
+    "Emma's Day Without Single-Use Plastic",
+    "Why Does Emma Like Delivery Services?",
+    "Don't Throw Away Reusable Containers!"
+   ],
+   "answer": "3",
+   "explanation": "Emma는 오늘 배달 서비스를 이용하지 않고 재사용 용기로 음식을 가져와 일회용 플라스틱을 전혀 쓰지 않았다는 내용이므로 ③이 알맞다."
+  },
+  {
+   "number": 18,
+   "question": "다음 글을 읽고 물음에 답하시오.\nEmma: I often use food delivery services, but today I didn't. Instead, I walked to my favorite restaurant with a reusable container and picked up the food. I heard that plastic never goes away completely. I didn't use any single-use plastic today. I felt good!\n\n윗글을 바르게 이해한 학생들의 대화로 어색한 것은?",
+   "options": [
+    "A: Did Emma order food with a delivery service today, too? / B: No, she didn't. She picked up the food in a reusable container.",
+    "A: Really? Why did she use the container? / B: Because she decided not to use plastic.",
+    "A: Why did she decide to do so? / B: Because she heard about its problem.",
+    "A: Then, how much single-use plastic did she use today? / B: She used very little single-use plastic.",
+    "A: Wow! How did she feel about it? / B: She felt good."
+   ],
+   "answer": "4",
+   "explanation": "Emma는 오늘 일회용 플라스틱을 전혀 사용하지 않았다고 했으므로 ④는 어색하다."
+  },
+  {
+   "number": 19,
+   "question": "다음 글의 빈칸에 들어갈 말로 알맞은 것은?\n\nDomingo: My dog tore my bag. I wanted to buy a new one, but I thought again. I learned that reusing is important for zero-waste living. So, ______________________. I'm not very good at sewing, and I don't think that the bag looks perfect. I guess it's all right.",
+   "options": [
+    "I threw the bag away",
+    "I purchased a new bag",
+    "I decided to fix and reuse it",
+    "I put it into a box for old clothes",
+    "I decided to make a new thing with it"
+   ],
+   "answer": "3",
+   "explanation": "재사용이 중요하다고 배웠기 때문에 찢어진 가방을 바느질했다는 내용이므로 수선해서 재사용하기로 결정했다는 ③이 알맞다."
+  },
+  {
+   "number": 20,
+   "question": "다음 글을 읽고 물음에 답하시오.\nMinsu: Yesterday, I took some plastic and glass bottles to a recycling machine near my house. I put them into the machine one by one, and I got some points in return. What can I do with those points? Well, I can use them like money. Don't you think (A)<u>that</u> is cool?\n\n윗글의 밑줄 친 (A)that과 쓰임이 같은 것은?",
+   "options": [
+    "I believe <u>that</u> we can help the Earth.",
+    "Do you see <u>that</u> big tree in the park?",
+    "<u>That</u> she won the prize is great news.",
+    "The problem is <u>that</u> we don't have money.",
+    "He said <u>that</u> was his favorite movie in his life."
+   ],
+   "answer": "5",
+   "explanation": "(A)의 that은 앞의 내용을 가리키는 지시대명사이다. ⑤의 that도 '그것이 평생 가장 좋아하는 영화라고 말했다'의 지시대명사이다."
+  },
+  {
+   "number": 21,
+   "question": "다음 글을 읽고 물음에 답하시오.\nMinsu: Yesterday, I took some plastic and glass bottles to a recycling machine near my house. I put them into the machine one by one, and I got some points in return. What can I do with those points? Well, I can use them like money. Don't you think (A)<u>that</u> is cool?\n\n윗글을 읽고 다음 질문에 대한 대답으로 알맞은 것은?\n\nQ. What can Minsu do by using a recycling machine?\nA. He can ______________.",
+   "options": [
+    "fix bottles",
+    "collect points",
+    "wash plastic and glass",
+    "sell recyclable products",
+    "change bottles to different things"
+   ],
+   "answer": "2",
+   "explanation": "민수는 병을 재활용 기계에 넣고 포인트를 받았다고 했으므로 포인트를 모을 수 있다."
+  },
+  {
+   "number": 22,
+   "question": "다음 글을 읽고 물음에 답하시오.\nMinsu: Yesterday, I took some plastic and glass bottles to a recycling machine near my house. I put them into the machine one by one, and I got some points in return. What can I do with those points? Well, I can use them like money. Don't you think (A)<u>that</u> is cool?\n\n윗글의 제목으로 알맞은 것은?",
+   "options": [
+    "The Journey of Plastic and Glass Bottles",
+    "Who Invented the Recycling Machine?",
+    "Let's Earn Points by Recycling!",
+    "What Are Recyclable Items?",
+    "The Bad Side of Recycling"
+   ],
+   "answer": "3",
+   "explanation": "재활용 기계에 병을 넣고 포인트를 받아 돈처럼 사용할 수 있다는 내용이므로 ③이 알맞다."
+  },
+  {
+   "number": 23,
+   "question": "다음 글을 읽고 물음에 답하시오.\nEvery day, we produce lots of waste, and the Earth is getting sicker and sicker. Do you want to save the Earth? Then, join the zero-waste challenge, and share your stories.\nOlivia: My birthday was last Saturday, and my family and I ate out. There were lots of leftovers, but we brought them home. The next day, I made a nice lunch out of them. FYI, you can find great cooking ideas for leftovers on the Internet.\nDomingo: My dog tore my bag. I wanted to buy a new one, but I thought again. I learned that reusing is important for zero-waste living. So, I decided to fix it and reuse it. I'm not very good at sewing, and (A)<u>나는 가방이 완벽해 보인다고 생각하지 않아.</u> I guess it's all right.\n\n윗글의 밑줄 친 (A)의 우리말을 주어진 <조건>에 알맞게 영작하시오.\n\n<조건>\n• 적절한 접속사를 사용할 것\n• <보기>의 단어 및 표현을 모두 포함시킬 것 (필요시 변형할 것)\n• 8단어로 영작할 것\n\n<보기> look, think, the bag, perfect ※ 완전한 문장으로 쓰시오.",
+   "options": [],
+   "answer": "I don't think that the bag looks perfect",
+   "acceptedAnswers": [
+    "I don't think that the bag looks perfect."
+   ],
+   "explanation": "부정문 don't think, 접속사 that, 3인칭 단수 주어 the bag에 맞춘 looks와 형용사 perfect를 쓴다."
+  },
+  {
+   "number": 24,
+   "question": "다음 글을 읽고 물음에 답하시오.\nEvery day, we produce lots of waste, and the Earth is getting sicker and sicker. Do you want to save the Earth? Then, join the zero-waste challenge, and share your stories.\nOlivia: My birthday was last Saturday, and my family and I ate out. There were lots of leftovers, but we brought them home. The next day, I made a nice lunch out of them. FYI, you can find great cooking ideas for leftovers on the Internet.\nDomingo: My dog tore my bag. I wanted to buy a new one, but I thought again. I learned that reusing is important for zero-waste living. So, I decided to fix it and reuse it. I'm not very good at sewing, and (A)<u>나는 가방이 완벽해 보인다고 생각하지 않아.</u> I guess it's all right.\n\n윗글의 목적으로 알맞은 것은?",
+   "options": [
+    "to talk about my volunteer work",
+    "to introduce Internet cooking websites",
+    "to suggest joining the zero-waste challenge",
+    "to explain the steps of joining the zero-waste challenge",
+    "to show examples of failure in the zero-waste challenge"
+   ],
+   "answer": "3",
+   "explanation": "병들어 가는 지구를 위해 제로 웨이스트 챌린지에 참여하자고 하며 Olivia와 Domingo의 사례를 소개하고 있으므로 ③이 알맞다."
+  },
+  {
+   "number": 25,
+   "question": "다음 글을 읽고 물음에 답하시오.\nEvery day, we produce lots of waste, and the Earth is getting sicker and sicker. Do you want to save the Earth? Then, join the zero-waste challenge, and share your stories.\nOlivia: My birthday was last Saturday, and my family and I ate out. There were lots of leftovers, but we brought them home. The next day, I made a nice lunch out of them. FYI, you can find great cooking ideas for leftovers on the Internet.\nDomingo: My dog tore my bag. I wanted to buy a new one, but I thought again. I learned that reusing is important for zero-waste living. So, I decided to fix it and reuse it. I'm not very good at sewing, and (A)<u>나는 가방이 완벽해 보인다고 생각하지 않아.</u> I guess it's all right.\n\n윗글의 Olivia와 Domingo가 다음과 같이 대화를 나눌 때, 빈칸에 알맞은 단어를 찾아 쓰시오.\n\nB: Olivia, are you joining the zero-waste challenge?\nG: Yes. I didn't throw away (1)________ after meals at the restaurant. I took them (2)________ and cooked a (3)________ ________ the next day.\nB: That's great! You reduced waste!\nG: How about you?\nB: My dog (4)________ my bag. I wanted to replace it with a new one, but I remembered the importance of (5)________ for zero-waste living and chose to (6)________ it. I sewed it. What do you think of this bag?\nG: It's cool!",
+   "options": [],
+   "answer": "leftovers, home, nice lunch, tore, reusing, fix",
+   "subParts": [
+    {
+     "label": "(1)",
+     "answer": "leftovers"
+    },
+    {
+     "label": "(2)",
+     "answer": "home"
+    },
+    {
+     "label": "(3)",
+     "answer": "nice lunch"
+    },
+    {
+     "label": "(4)",
+     "answer": "tore"
+    },
+    {
+     "label": "(5)",
+     "answer": "reusing"
+    },
+    {
+     "label": "(6)",
+     "answer": "fix"
+    }
+   ],
+   "explanation": "Olivia는 남은 음식(leftovers)을 집(home)으로 가져와 맛있는 점심(nice lunch)을 만들었고, Domingo는 개가 찢은(tore) 가방을 재사용(reusing)의 중요성을 떠올리며 수선(fix)했다."
+  },
+  {
+   "number": 26,
+   "question": "다음 글의 밑줄 친 ⓐ~ⓔ의 영영풀이로 어색한 것을 모두 골라 짝지은 것은?\n\nEmma: I often use food ⓐ<u>delivery</u> services, but today I didn't. Instead, I walked to my favorite restaurant with a reusable ⓑ<u>container</u> and picked up the food. I heard that plastic never goes away completely. I didn't use any ⓒ<u>single-use</u> plastic today. I felt good!\nMinsu: Yesterday, I took some plastic and glass bottles to a recycling machine near my house. I put them into the ⓓ<u>machine</u> one by one, and I got some points ⓔ<u>in return</u>. What can I do with those points? Well, I can use them like money. Don't you think that's cool?\n\n<보기>\nⓐ the act of taking letters or things to a person or place\nⓑ a flat and round object for putting food on\nⓒ likely to last for a long time without breaking or getting weaker\nⓓ a piece of equipment that you use for a particular job\nⓔ as payment or reward for something",
+   "options": [
+    "ⓐ, ⓑ",
+    "ⓑ, ⓒ",
+    "ⓓ, ⓔ",
+    "ⓐ, ⓒ, ⓔ",
+    "ⓑ, ⓒ, ⓓ"
+   ],
+   "answer": "2",
+   "explanation": "ⓑ container(용기, 그릇)의 영영풀이는 'something such as a box or bowl for keeping things in'이고, ⓒ single-use(일회용의)는 'used one time and then thrown away'가 알맞다."
+  },
+  {
+   "number": 27,
+   "question": "다음 글의 괄호 (A), (B), (C)에서 흐름상 알맞은 말로 바르게 연결된 것은?\n\nEvery day, we (A)[remove / produce] lots of waste, and the Earth is getting sicker and sicker. Do you want to save the Earth? Then, join the zero-waste challenge, and share your stories.\nDomingo: My dog tore my bag. I wanted to buy a new one, but I thought again. I learned that reusing is (B)[important / useless] for zero-waste living. So, I decided to fix it and reuse it. I'm not very (C)[poor / good] at sewing, and I don't think that the bag looks perfect. I guess it's all right.",
+   "options": [
+    "(A) produce – (B) important – (C) good",
+    "(A) remove – (B) important – (C) good",
+    "(A) produce – (B) important – (C) poor",
+    "(A) remove – (B) useless – (C) poor",
+    "(A) produce – (B) useless – (C) good"
+   ],
+   "answer": "1",
+   "explanation": "(A) 지구가 병들고 있으므로 쓰레기를 만든다(produce). (B) 가방을 수선하기로 했으므로 재사용이 중요하다(important). (C) 'be good at'(~을 잘하다)의 good."
+  },
+  {
+   "number": 28,
+   "question": "다음 글을 읽고 아래 질문에 대한 알맞은 대답이 되도록 주어진 <조건>에 맞게 답하시오.\n\nOlivia: My birthday was last Saturday, and my family and I ate out. There were lots of leftovers, but we brought them home. The next day, I made a nice lunch out of them. FYI, you can find great cooking ideas for leftovers on the Internet.\n\n<조건>\n• 본문에서 찾아 쓸 것\n• 각 빈칸에 한 단어씩 쓸 것\n\nQ. What did Olivia do with the leftovers?\n→ She (1)________ ________ ________ and (2)________ ________ ________ ________ the next day.",
+   "options": [],
+   "answer": "brought them home, made a nice lunch",
+   "subParts": [
+    {
+     "label": "(1)",
+     "answer": "brought them home"
+    },
+    {
+     "label": "(2)",
+     "answer": "made a nice lunch"
+    }
+   ],
+   "explanation": "그녀는 그것들을 집으로 가져왔고 다음 날 맛있는 점심을 만들었다."
+  },
+  {
+   "number": 29,
+   "question": "다음 글을 읽고 물음에 답하시오.\nEmma: I ⓐ<u>often use</u> food delivery services, but today I didn't. Instead, I walked to my favorite restaurant with a reusable container and picked up ⓑ<u>the food</u>. I heard ⓒ<u>which</u> plastic never goes away completely. I didn't use any single-use plastic today. I felt ⓓ<u>good</u>!\nMinsu: Yesterday, I ⓔ<u>taked</u> some plastic and glass bottles to a recycling machine near my house. I put them into the machine one by one, and I got some points in return. What can I do with those points? Well, I can use ⓕ<u>it</u> like money. ⓖ<u>Don't you think</u> that's cool?\n\n윗글의 밑줄 친 ⓐ~ⓖ 중, 어법상 알맞은 것의 개수는?",
+   "options": [
+    "2개",
+    "3개",
+    "4개",
+    "5개",
+    "6개"
+   ],
+   "answer": "3",
+   "explanation": "ⓒ which → that, ⓔ taked → took, ⓕ it → them. 어법상 알맞은 것은 ⓐ, ⓑ, ⓓ, ⓖ 4개이다."
+  },
+  {
+   "number": 30,
+   "question": "다음 글을 읽고 물음에 답하시오.\nEmma: I ⓐ<u>often use</u> food delivery services, but today I didn't. Instead, I walked to my favorite restaurant with a reusable container and picked up ⓑ<u>the food</u>. I heard ⓒ<u>which</u> plastic never goes away completely. I didn't use any single-use plastic today. I felt ⓓ<u>good</u>!\nMinsu: Yesterday, I ⓔ<u>taked</u> some plastic and glass bottles to a recycling machine near my house. I put them into the machine one by one, and I got some points in return. What can I do with those points? Well, I can use ⓕ<u>it</u> like money. ⓖ<u>Don't you think</u> that's cool?\n\n윗글을 읽고 다음 질문에 대한 알맞은 대답이 되도록 주어진 <조건>에 맞게 답하시오.\n\n<조건>\n• 대명사로 시작하여 쓸 것\n• 적절한 접속사를 쓸 것\n• 완전한 문장으로 답할 것\n\nQ. What did Emma learn about plastic?\n→ ________________________________",
+   "options": [],
+   "answer": "She learned that it never goes away completely.",
+   "acceptedAnswers": [
+    "She learned that plastic never goes away completely."
+   ],
+   "explanation": "그녀는 플라스틱이 결코 완전히 없어지지 않는다는 것을 배웠다."
+  }
+ ]
+}

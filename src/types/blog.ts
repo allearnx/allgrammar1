@@ -45,3 +45,17 @@ export interface BlogPost {
   created_at: string;
   updated_at: string;
 }
+
+/** 블로그 목록 카드 공용 항목 — 자체 글(site) + 네이버 블로그 글(naver) */
+export type BlogFeedItem =
+  | { source: 'site'; post: BlogPostSummary; publishedAt: string }
+  | {
+      source: 'naver';
+      id: string;
+      title: string;
+      link: string;
+      excerpt: string;
+      thumbnailUrl: string | null;
+      category: string;
+      publishedAt: string;
+    };

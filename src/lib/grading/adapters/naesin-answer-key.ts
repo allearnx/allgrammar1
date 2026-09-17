@@ -1,7 +1,7 @@
 import type { GradingItem, GradingResult, RubricAdapter } from '../types';
 import { parseJsonArrayResponse, snapScore } from '../engine';
 // normalize-answer는 순수 함수 모음 — 코어의 "DB·UI 의존 금지" 원칙에 어긋나지 않는다.
-import { normalize, normalizeSeparators, isSubstringMatch } from '@/lib/naesin/normalize-answer';
+import { normalize, normalizeSeparators, isSubstringMatch, matchFilledBlanks } from '@/lib/naesin/normalize-answer';
 
 /**
  * 내신 정답키 루브릭 — 모범 답안(+인정 답안)과 비교하는 채점.
@@ -19,7 +19,8 @@ export const naesinAnswerKeyAdapter: RubricAdapter = {
     const isExact =
       candidates.some((c) => normalize(c) === studentNorm) ||
       candidates.some((c) => normalizeSeparators(c) === normalizeSeparators(item.studentAnswer)) ||
-      candidates.some((c) => isSubstringMatch(item.studentAnswer, c));
+      candidates.some((c) => isSubstringMatch(item.studentAnswer, c)) ||
+      matchFilledBlanks(item.studentAnswer, item.prompt, item.referenceAnswer, item.acceptedAnswers ?? undefined);
     return isExact ? { id: item.id, score: 100, method: 'exact' } : null;
   },
 

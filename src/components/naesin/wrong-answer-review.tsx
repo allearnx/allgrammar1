@@ -8,7 +8,7 @@ import { Badge } from '@/components/ui/badge';
 import { CheckCircle, AlertTriangle, RotateCcw } from 'lucide-react';
 import { fetchWithToast } from '@/lib/fetch-with-toast';
 import { FormattedText } from '@/components/shared/formatted-text';
-import { extractAnswer, normalize, matchMcqAnswer, isSubstringMatch } from '@/lib/naesin/normalize-answer';
+import { extractAnswer, normalize, matchMcqAnswer, isSubstringMatch, matchFilledBlanks } from '@/lib/naesin/normalize-answer';
 import type { NaesinWrongAnswer } from '@/types/database';
 
 interface WrongAnswerReviewProps {
@@ -162,7 +162,15 @@ function gradeRetryAnswer(
   if (accepted?.some((a) => normalize(a) === norm)) return true;
 
   // 부분 일치
-  return isSubstringMatch(userAnswer, correct);
+  if (isSubstringMatch(userAnswer, correct)) return true;
+  // 빈칸을 채운 완전한 문장을 쓴 경우
+  return matchFilledBlanks(
+    userAnswer,
+    data.question as string | undefined,
+    correct,
+    accepted,
+    data.subParts as { answer: string; acceptedAnswers?: string[] }[] | undefined,
+  );
 }
 
 export function WrongAnswerCard({ wrongAnswer, onResolve }: { wrongAnswer: NaesinWrongAnswer; onResolve?: () => void }) {

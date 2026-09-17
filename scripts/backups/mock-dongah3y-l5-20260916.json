@@ -1,0 +1,1442 @@
+{
+  "R1": [
+    {
+      "number": 1,
+      "question": "다음 단어의 뜻이 잘못 짝지어진 것은?",
+      "options": [
+        "tribe – 부족",
+        "attention – 목표",
+        "achieve – 성취하다",
+        "register – 등록하다",
+        "crew – (함께 일하는) 팀"
+      ],
+      "answer": "2"
+    },
+    {
+      "number": 2,
+      "question": "다음 빈칸에 공통으로 들어갈 말로 알맞은 것은?\n\n• Which team do you __________?\n• Many students __________ the plans to change the school uniform.",
+      "options": [
+        "hire",
+        "knock",
+        "achieve",
+        "register",
+        "support"
+      ],
+      "answer": "5"
+    },
+    {
+      "number": 3,
+      "question": "다음 영영풀이에 해당하는 단어는?\n\na situation in which people are peaceful and agree with each other",
+      "options": [
+        "goal",
+        "crew",
+        "tribe",
+        "target",
+        "harmony"
+      ],
+      "answer": "5"
+    },
+    {
+      "number": 4,
+      "question": "다음 빈칸에 들어갈 말로 알맞은 것은?\n\nI can speak English as __________ as Korean.",
+      "options": [
+        "fast",
+        "good",
+        "easy",
+        "better",
+        "fluent"
+      ],
+      "answer": "1"
+    },
+    {
+      "number": 5,
+      "question": "다음 빈칸에 들어갈 말로 알맞은 것은?\n\nThe police couldn't find the paintings __________ from the museum.",
+      "options": [
+        "steal",
+        "stole",
+        "stolen",
+        "stealing",
+        "were stolen"
+      ],
+      "answer": "3"
+    },
+    {
+      "number": 6,
+      "question": "다음 괄호 ⓐ~ⓔ에서 어법상 알맞은 말로 바르게 연결된 것은?\n\n• He fixed the ⓐ[breaking / broken] chair.\n• Watch out for that ⓑ[sleeping / slept] dog!\n• People ⓒ[living / lived] in South America often sleep in the daytime.\n• He felt ⓓ[boring / bored] because the movie was so long.\n• I heard my name ⓔ[calling / called].",
+      "options": [
+        "ⓐ broken – ⓑ sleeping – ⓒ living – ⓓ bored – ⓔ called",
+        "ⓐ broken – ⓑ slept – ⓒ living – ⓓ boring – ⓔ calling",
+        "ⓐ breaking – ⓑ sleeping – ⓒ living – ⓓ boring – ⓔ calling",
+        "ⓐ breaking – ⓑ slept – ⓒ lived – ⓓ bored – ⓔ called",
+        "ⓐ broken – ⓑ sleeping – ⓒ lived – ⓓ bored – ⓔ calling"
+      ],
+      "answer": "1"
+    },
+    {
+      "number": 7,
+      "question": "다음 중 어법상 어색한 것은?",
+      "options": [
+        "I like fried potatoes.",
+        "He opened the folded paper.",
+        "A rolling stone gathers no moss.",
+        "I'd like to have my pictures taken.",
+        "I saw the boys broken the window."
+      ],
+      "answer": "5"
+    },
+    {
+      "number": 8,
+      "question": "다음 문장 (1), (2)에서 어법상 어색한 부분을 한 군데씩 찾아 알맞게 고친 뒤, 문장 전체를 다시 쓰시오. (다른 단어를 추가하지 말 것) ※ 완전한 문장으로 쓰시오.\n\n(1) The girl played basketball is my sister.\n(2) My smartphone is as older as Yubin's.",
+      "options": [],
+      "answer": "The girl playing basketball is my sister. / My smartphone is as old as Yubin's.",
+      "subParts": [
+        {
+          "label": "(1)",
+          "answer": "The girl playing basketball is my sister."
+        },
+        {
+          "label": "(2)",
+          "answer": "My smartphone is as old as Yubin's."
+        }
+      ]
+    },
+    {
+      "number": 9,
+      "question": "다음 우리말을 주어진 <조건>에 알맞게 영작하시오. ※ 완전한 문장으로 쓰시오.\n\n오늘은 어제만큼 춥진 않다.\n\n<조건>\nas, cold를 사용하여 7단어로 영작할 것",
+      "options": [],
+      "answer": "Today is not as cold as yesterday.",
+      "acceptedAnswers": [
+        "Today is not so cold as yesterday.",
+        "Today isn't as cold as yesterday."
+      ]
+    },
+    {
+      "number": 10,
+      "question": "다음 대화의 빈칸에 들어갈 말로 알맞은 것은?\n\nA: ______________________________\nB: I exercise once a week.",
+      "options": [
+        "How far is it?",
+        "How much is it?",
+        "How long is the course?",
+        "How many times do you exercise?",
+        "How often do you want to exercise?"
+      ],
+      "answer": "4"
+    },
+    {
+      "number": 11,
+      "question": "다음 대화의 빈칸에 들어갈 말로 알맞은 것은?\n\nG: It will be fun to go bowling together with you today. I heard you're very good.\nB: Well, I love bowling. Hmm, your bowling ball looks heavy for you. ______________________________\nG: OK. I'll look for one, then.",
+      "options": [
+        "I suggest we practice harder.",
+        "I suggest you use a lighter ball.",
+        "I suggest you wear running shoes.",
+        "I suggest you join my bowling club.",
+        "I suggest we do some stretching first."
+      ],
+      "answer": "2"
+    },
+    {
+      "number": 12,
+      "question": "다음 대화를 읽고 물음에 답하시오.\nW: Hello. Welcome to Sports World. May I help you?\nB: Yes, I came to register for a swimming class.\nW: Is this your first time taking swimming lessons?\nB: Yes, it is. I don't know how to swim at all.\nW: I see. (A)______________________________\nB: I want to take classes twice a week. I'd like to take classes on weekdays and not on weekends.\nW: Then, (B)<u>I suggest that you take the Beginner 2 class</u>. This class meets on Tuesdays and Thursdays.\nB: That sounds good. I'd like to sign up for that class. How big is the class?\nW: The class has a limit of 10 people.\nB: That's perfect.\n\n위 대화의 빈칸 (A)에 들어갈 말로 알맞은 것은?",
+      "options": [
+        "What's your name?",
+        "How well do you swim?",
+        "How long do you want to take lessons?",
+        "How often do you want to take classes?",
+        "Where do you usually practice swimming?"
+      ],
+      "answer": "4"
+    },
+    {
+      "number": 13,
+      "question": "다음 대화를 읽고 물음에 답하시오.\nW: Hello. Welcome to Sports World. May I help you?\nB: Yes, I came to register for a swimming class.\nW: Is this your first time taking swimming lessons?\nB: Yes, it is. I don't know how to swim at all.\nW: I see. (A)______________________________\nB: I want to take classes twice a week. I'd like to take classes on weekdays and not on weekends.\nW: Then, (B)<u>I suggest that you take the Beginner 2 class</u>. This class meets on Tuesdays and Thursdays.\nB: That sounds good. I'd like to sign up for that class. How big is the class?\nW: The class has a limit of 10 people.\nB: That's perfect.\n\n위 대화의 밑줄 친 (B)의 의도로 알맞은 것은?",
+      "options": [
+        "제안하기",
+        "사과하기",
+        "불평하기",
+        "초대하기",
+        "부탁하기"
+      ],
+      "answer": "1"
+    },
+    {
+      "number": 14,
+      "question": "다음 대화를 읽고 물음에 답하시오.\nW: Hello. Welcome to Sports World. May I help you?\nB: Yes, I came to register for a swimming class.\nW: Is this your first time taking swimming lessons?\nB: Yes, it is. I don't know how to swim at all.\nW: I see. (A)______________________________\nB: I want to take classes twice a week. I'd like to take classes on weekdays and not on weekends.\nW: Then, (B)<u>I suggest that you take the Beginner 2 class</u>. This class meets on Tuesdays and Thursdays.\nB: That sounds good. I'd like to sign up for that class. How big is the class?\nW: The class has a limit of 10 people.\nB: That's perfect.\n\n위 대화의 내용과 일치하지 않는 것은?",
+      "options": [
+        "The woman works at Sports World.",
+        "The boy wants to learn how to swim.",
+        "The woman advises him to take a beginner lesson.",
+        "The boy will take the class every Tuesday and Thursday.",
+        "There will be over ten students in every class."
+      ],
+      "answer": "5"
+    },
+    {
+      "number": 15,
+      "question": "다음 대화의 밑줄 친 (B)의 우리말과 같은 뜻이 되도록 <보기>의 단어를 알맞게 배열할 때, 다섯 번째로 오는 단어는?\n\nB: Suji, how often do you take bowling lessons?\nG: Twice a week. I'm just a beginner. I heard you're very good.\nB: Well, I love bowling. Hmm. (B)<u>네 볼링공이 너에게 무거워 보여</u>. I suggest you use a lighter ball.\nG: OK. I'll look for a lighter one.\n\n<보기> you / looks / bowling / heavy / ball / your / for",
+      "options": [
+        "ball",
+        "bowling",
+        "heavy",
+        "looks",
+        "your"
+      ],
+      "answer": "4"
+    },
+    {
+      "number": 16,
+      "question": "다음 글을 읽고 물음에 답하시오.\nPit Crews in Car Racing\nYou may only see the car and the driver ⓐ<u>during</u> most car races, but there is a team behind the driver. This team is called a pit crew. A pit is a place on the side of the race track, and drivers stop there several times during a race. The main job of the pit crew is to check the car and change the tires. Changing the tires ⓑ<u>is</u> especially important because the tires wear out easily in a high speed race.\nA pit stop can be (A)______________________, and there are as many as 20 members on a crew. Therefore, the pit crew has to work in perfect harmony. The driver may get all the attention, but ⓒ<u>as</u> people say, \"Races are won in the pits.\"\n\nSherpas in Mountain Climbing\nThe word Sherpa comes from the Sherpa tribe, ⓓ<u>which</u> lives in the eastern part of Nepal. Sherpas have good climbing skills and know their way around the mountains well. They also have little difficulty breathing high up in the mountains. Therefore, mountain climbers started ⓔ<u>to hire</u> Sherpas ⓕ<u>to help</u> them climb Mount Everest.\nSherpas lead mountain climbers to the top of the mountain. They support climbers in many ways. For example, they put up tents and carry climbers' bags. Sherpas are often called the (B)___visible people of Mount Everest because people often see a picture of only the climbers at the top of the mountain.\n\n위 글의 밑줄 친 ⓐ~ⓕ에 대해 바르게 설명하고 있는 학생은?",
+      "options": [
+        "지민: ⓐ는 '~동안'이라는 뜻이며 while로 바꿔 쓸 수 있다.",
+        "정국: 앞의 the tires가 복수니까 수일치를 위해 ⓑ는 are로 고쳐야 해.",
+        "석진: ⓒ는 '~때문에'라는 의미로 쓰였으므로 since로 바꾸어 쓸 수 있다.",
+        "태형: ⓓ는 계속적 용법으로 쓰인 주격 관계대명사로 생략할 수 없어.",
+        "윤기: ⓔ와 ⓕ는 둘 다 문장에서 목적어 역할을 하는 명사적 용법의 to부정사로 쓰였어."
+      ],
+      "answer": "4"
+    },
+    {
+      "number": 17,
+      "question": "다음 글을 읽고 물음에 답하시오.\nPit Crews in Car Racing\nYou may only see the car and the driver ⓐ<u>during</u> most car races, but there is a team behind the driver. This team is called a pit crew. A pit is a place on the side of the race track, and drivers stop there several times during a race. The main job of the pit crew is to check the car and change the tires. Changing the tires ⓑ<u>is</u> especially important because the tires wear out easily in a high speed race.\nA pit stop can be (A)______________________, and there are as many as 20 members on a crew. Therefore, the pit crew has to work in perfect harmony. The driver may get all the attention, but ⓒ<u>as</u> people say, \"Races are won in the pits.\"\n\nSherpas in Mountain Climbing\nThe word Sherpa comes from the Sherpa tribe, ⓓ<u>which</u> lives in the eastern part of Nepal. Sherpas have good climbing skills and know their way around the mountains well. They also have little difficulty breathing high up in the mountains. Therefore, mountain climbers started ⓔ<u>to hire</u> Sherpas ⓕ<u>to help</u> them climb Mount Everest.\nSherpas lead mountain climbers to the top of the mountain. They support climbers in many ways. For example, they put up tents and carry climbers' bags. Sherpas are often called the (B)___visible people of Mount Everest because people often see a picture of only the climbers at the top of the mountain.\n\n위 글의 빈칸 (A)에 들어갈 말로 알맞은 것은?",
+      "options": [
+        "as short 2 seconds as",
+        "as short as 2 seconds",
+        "as 2 seconds as short",
+        "2 seconds as short as",
+        "short as 2 seconds as"
+      ],
+      "answer": "2"
+    },
+    {
+      "number": 18,
+      "question": "다음 글을 읽고 물음에 답하시오.\nPit Crews in Car Racing\nYou may only see the car and the driver ⓐ<u>during</u> most car races, but there is a team behind the driver. This team is called a pit crew. A pit is a place on the side of the race track, and drivers stop there several times during a race. The main job of the pit crew is to check the car and change the tires. Changing the tires ⓑ<u>is</u> especially important because the tires wear out easily in a high speed race.\nA pit stop can be (A)______________________, and there are as many as 20 members on a crew. Therefore, the pit crew has to work in perfect harmony. The driver may get all the attention, but ⓒ<u>as</u> people say, \"Races are won in the pits.\"\n\nSherpas in Mountain Climbing\nThe word Sherpa comes from the Sherpa tribe, ⓓ<u>which</u> lives in the eastern part of Nepal. Sherpas have good climbing skills and know their way around the mountains well. They also have little difficulty breathing high up in the mountains. Therefore, mountain climbers started ⓔ<u>to hire</u> Sherpas ⓕ<u>to help</u> them climb Mount Everest.\nSherpas lead mountain climbers to the top of the mountain. They support climbers in many ways. For example, they put up tents and carry climbers' bags. Sherpas are often called the (B)___visible people of Mount Everest because people often see a picture of only the climbers at the top of the mountain.\n\n위 글의 빈칸 (B)에 들어갈 접두사와 다른 것은?",
+      "options": [
+        "Stress is an ___direct cause of cancer.",
+        "This sentence is grammatically ___correct.",
+        "Isn't it ___convenient living so far out of town?",
+        "It is ___possible to get a table in the restaurant because it is already full.",
+        "It's okay to wear casual clothes, because I'm just going to an ___formal gathering of friends."
+      ],
+      "answer": "4"
+    },
+    {
+      "number": 19,
+      "question": "다음 글을 읽고 물음에 답하시오.\nPit Crews in Car Racing\nYou may only see the car and the driver ⓐ<u>during</u> most car races, but there is a team behind the driver. This team is called a pit crew. A pit is a place on the side of the race track, and drivers stop there several times during a race. The main job of the pit crew is to check the car and change the tires. Changing the tires ⓑ<u>is</u> especially important because the tires wear out easily in a high speed race.\nA pit stop can be (A)______________________, and there are as many as 20 members on a crew. Therefore, the pit crew has to work in perfect harmony. The driver may get all the attention, but ⓒ<u>as</u> people say, \"Races are won in the pits.\"\n\nSherpas in Mountain Climbing\nThe word Sherpa comes from the Sherpa tribe, ⓓ<u>which</u> lives in the eastern part of Nepal. Sherpas have good climbing skills and know their way around the mountains well. They also have little difficulty breathing high up in the mountains. Therefore, mountain climbers started ⓔ<u>to hire</u> Sherpas ⓕ<u>to help</u> them climb Mount Everest.\nSherpas lead mountain climbers to the top of the mountain. They support climbers in many ways. For example, they put up tents and carry climbers' bags. Sherpas are often called the (B)___visible people of Mount Everest because people often see a picture of only the climbers at the top of the mountain.\n\n위 글의 내용과 일치하지 않는 것은?",
+      "options": [
+        "Drivers stop at the pit only once during a race.",
+        "The pit crew in a car race should cooperate closely with each other.",
+        "The word Sherpa originates from the Sherpa tribe.",
+        "Sherpas support climbers by putting up tents and carrying their bags.",
+        "Mountain climbers can climb Mt. Everest more easily with the help of Sherpas."
+      ],
+      "answer": "1"
+    },
+    {
+      "number": 20,
+      "question": "다음 글을 읽고 물음에 답하시오.\nPit Crews in Car Racing\nYou may only see the car and the driver ⓐ<u>during</u> most car races, but there is a team behind the driver. This team is called a pit crew. A pit is a place on the side of the race track, and drivers stop there several times during a race. The main job of the pit crew is to check the car and change the tires. Changing the tires ⓑ<u>is</u> especially important because the tires wear out easily in a high speed race.\nA pit stop can be (A)______________________, and there are as many as 20 members on a crew. Therefore, the pit crew has to work in perfect harmony. The driver may get all the attention, but ⓒ<u>as</u> people say, \"Races are won in the pits.\"\n\nSherpas in Mountain Climbing\nThe word Sherpa comes from the Sherpa tribe, ⓓ<u>which</u> lives in the eastern part of Nepal. Sherpas have good climbing skills and know their way around the mountains well. They also have little difficulty breathing high up in the mountains. Therefore, mountain climbers started ⓔ<u>to hire</u> Sherpas ⓕ<u>to help</u> them climb Mount Everest.\nSherpas lead mountain climbers to the top of the mountain. They support climbers in many ways. For example, they put up tents and carry climbers' bags. Sherpas are often called the (B)___visible people of Mount Everest because people often see a picture of only the climbers at the top of the mountain.\n\n위 글을 읽고 질문에 알맞게 답한 것은?",
+      "options": [
+        "Q: How long does a pit stop take? / A: A pit stop can be 2 minutes.",
+        "Q: How many members are there on the crew? / A: There are more than 20 members.",
+        "Q: Where does the Sherpa tribe live? / A: They live in the northern part of Nepal.",
+        "Q: Why is changing tires especially important in a car race? / A: It is because the tires easily wear out in a high speed race.",
+        "Q: What are the three things that Sherpas are better at than the mountain climbers? / A: They have good climbing skills and know the way around mountains well. Also, they can run high up in the mountains."
+      ],
+      "answer": "3"
+    },
+    {
+      "number": 21,
+      "question": "다음 글을 읽고 물음에 답하시오.\nIn sports, only the players get a trophy or medal, but ⓐ<u>they</u> don't win on their own. ⓑ<u>These people</u> are often hidden and don't get attention. However, ⓒ<u>they</u> are as important as the players. Here (A)<u>is</u> some examples.\nPacers run with (B)<u>another</u> runners and lead them in a marathon. Pacers are experienced runners, and their job is to help other runners (C)<u>to manage</u> their race better. There can be several pacers in a race.\nEach (D)<u>pacers</u> runs at different speeds and finishes the race in different times. Pacers usually have flags or balloons (E)<u>show</u> their finish time.\nRunners can choose a pacer depending on ⓓ<u>their</u> target finish time. For example, if a runner wants to finish the race in four hours, the runner will follow the four-hour pacer. (가)<u>Since</u> the pacer keeps track of the time, the runner can achieve his or her goal of finishing the marathon in a particular time more easily. In short, pacers run but they don't run to win. ⓔ<u>They</u> run for others.\n\n위 글의 밑줄 친 ⓐ~ⓔ가 가리키는 대상으로 알맞은 것은?",
+      "options": [
+        "ⓐ they: sports",
+        "ⓑ These people: the players",
+        "ⓒ they: people who help the players",
+        "ⓓ their: pacers",
+        "ⓔ They: runners"
+      ],
+      "answer": "3"
+    },
+    {
+      "number": 22,
+      "question": "다음 글을 읽고 물음에 답하시오.\nIn sports, only the players get a trophy or medal, but ⓐ<u>they</u> don't win on their own. ⓑ<u>These people</u> are often hidden and don't get attention. However, ⓒ<u>they</u> are as important as the players. Here (A)<u>is</u> some examples.\nPacers run with (B)<u>another</u> runners and lead them in a marathon. Pacers are experienced runners, and their job is to help other runners (C)<u>to manage</u> their race better. There can be several pacers in a race.\nEach (D)<u>pacers</u> runs at different speeds and finishes the race in different times. Pacers usually have flags or balloons (E)<u>show</u> their finish time.\nRunners can choose a pacer depending on ⓓ<u>their</u> target finish time. For example, if a runner wants to finish the race in four hours, the runner will follow the four-hour pacer. (가)<u>Since</u> the pacer keeps track of the time, the runner can achieve his or her goal of finishing the marathon in a particular time more easily. In short, pacers run but they don't run to win. ⓔ<u>They</u> run for others.\n\n위 글의 밑줄 친 (A)~(E) 중, 어법상 알맞은 것은?",
+      "options": [
+        "(A)",
+        "(B)",
+        "(C)",
+        "(D)",
+        "(E)"
+      ],
+      "answer": "3"
+    },
+    {
+      "number": 23,
+      "question": "다음 글을 읽고 물음에 답하시오.\nIn sports, only the players get a trophy or medal, but ⓐ<u>they</u> don't win on their own. ⓑ<u>These people</u> are often hidden and don't get attention. However, ⓒ<u>they</u> are as important as the players. Here (A)<u>is</u> some examples.\nPacers run with (B)<u>another</u> runners and lead them in a marathon. Pacers are experienced runners, and their job is to help other runners (C)<u>to manage</u> their race better. There can be several pacers in a race.\nEach (D)<u>pacers</u> runs at different speeds and finishes the race in different times. Pacers usually have flags or balloons (E)<u>show</u> their finish time.\nRunners can choose a pacer depending on ⓓ<u>their</u> target finish time. For example, if a runner wants to finish the race in four hours, the runner will follow the four-hour pacer. (가)<u>Since</u> the pacer keeps track of the time, the runner can achieve his or her goal of finishing the marathon in a particular time more easily. In short, pacers run but they don't run to win. ⓔ<u>They</u> run for others.\n\n위 글의 밑줄 친 (가)Since와 의미가 같은 것은?",
+      "options": [
+        "I haven't seen him <u>since</u> I last saw him.",
+        "He has lived in Busan <u>since</u> he was born.",
+        "I've known her <u>since</u> she was ten years old.",
+        "Tom has been learning Korean <u>since</u> he came to Korea last summer.",
+        "<u>Since</u> you've finished your homework, you can go out and play."
+      ],
+      "answer": "5"
+    },
+    {
+      "number": 24,
+      "question": "다음 글을 읽고 물음에 답하시오.\nIn sports, only the players get a trophy or medal, but ⓐ<u>they</u> don't win on their own. ⓑ<u>These people</u> are often hidden and don't get attention. However, ⓒ<u>they</u> are as important as the players. Here (A)<u>is</u> some examples.\nPacers run with (B)<u>another</u> runners and lead them in a marathon. Pacers are experienced runners, and their job is to help other runners (C)<u>to manage</u> their race better. There can be several pacers in a race.\nEach (D)<u>pacers</u> runs at different speeds and finishes the race in different times. Pacers usually have flags or balloons (E)<u>show</u> their finish time.\nRunners can choose a pacer depending on ⓓ<u>their</u> target finish time. For example, if a runner wants to finish the race in four hours, the runner will follow the four-hour pacer. (가)<u>Since</u> the pacer keeps track of the time, the runner can achieve his or her goal of finishing the marathon in a particular time more easily. In short, pacers run but they don't run to win. ⓔ<u>They</u> run for others.\n\n위 글의 내용과 일치하는 것은?",
+      "options": [
+        "In sports, players help each other to get a trophy or medal.",
+        "Runners are much more important than pacers to win a game.",
+        "There are four pacers in every race.",
+        "Every pacer runs at different speeds but their finish time is the same.",
+        "Pacers play an important role in finishing the race."
+      ],
+      "answer": "5"
+    },
+    {
+      "number": 25,
+      "question": "다음 글을 읽고 물음에 답하시오.\nIn sports, only the players get a trophy or medal, but they don't win on their own. There are people who help the players. These people are often hidden and don't get attention. However, they are as important as the players. Here are some examples.\nFor example, pacers run with other runners and lead them in a marathon. Pacers are experienced runners, and their job is ⓐ<u>helping</u> other runners manage their race better. There can be several pacers in a race.\nEach pacer runs at different speeds and ⓑ<u>finishing</u> the race in different times. Pacers usually have flags or balloons ⓒ<u>shown</u> their finish time.\nRunners can choose a pacer ⓓ<u>depends</u> on their target finish time. For example, if a runner wants to finish the race in four hours, the runner will follow the four-hour pacer. Since the pacer keeps track of the time, the runner can achieve his or her goal of ⓔ<u>finished</u> the marathon in a particular time more easily. In short, pacers run but they don't run to win. (A)______________________\n\n위 글의 밑줄 친 ⓐ~ⓔ 중, 어법상 알맞은 것은?",
+      "options": [
+        "ⓐ",
+        "ⓑ",
+        "ⓒ",
+        "ⓓ",
+        "ⓔ"
+      ],
+      "answer": "1"
+    },
+    {
+      "number": 26,
+      "question": "다음 글을 읽고 물음에 답하시오.\nIn sports, only the players get a trophy or medal, but they don't win on their own. There are people who help the players. These people are often hidden and don't get attention. However, they are as important as the players. Here are some examples.\nFor example, pacers run with other runners and lead them in a marathon. Pacers are experienced runners, and their job is ⓐ<u>helping</u> other runners manage their race better. There can be several pacers in a race.\nEach pacer runs at different speeds and ⓑ<u>finishing</u> the race in different times. Pacers usually have flags or balloons ⓒ<u>shown</u> their finish time.\nRunners can choose a pacer ⓓ<u>depends</u> on their target finish time. For example, if a runner wants to finish the race in four hours, the runner will follow the four-hour pacer. Since the pacer keeps track of the time, the runner can achieve his or her goal of ⓔ<u>finished</u> the marathon in a particular time more easily. In short, pacers run but they don't run to win. (A)______________________\n\n위 글의 빈칸 (A)에 들어갈 말로 알맞은 것은?",
+      "options": [
+        "They run for others.",
+        "They run for themselves.",
+        "They lose for other runners.",
+        "They don't win on their own.",
+        "They only want to get a trophy or medal."
+      ],
+      "answer": "1"
+    },
+    {
+      "number": 27,
+      "question": "다음 글을 읽고 물음에 답하시오.\nIn sports, only the players get a trophy or medal, but they don't win on their own. There are people who help the players. These people are often hidden and don't get attention. However, they are as important as the players. Here are some examples.\nFor example, pacers run with other runners and lead them in a marathon. Pacers are experienced runners, and their job is ⓐ<u>helping</u> other runners manage their race better. There can be several pacers in a race.\nEach pacer runs at different speeds and ⓑ<u>finishing</u> the race in different times. Pacers usually have flags or balloons ⓒ<u>shown</u> their finish time.\nRunners can choose a pacer ⓓ<u>depends</u> on their target finish time. For example, if a runner wants to finish the race in four hours, the runner will follow the four-hour pacer. Since the pacer keeps track of the time, the runner can achieve his or her goal of ⓔ<u>finished</u> the marathon in a particular time more easily. In short, pacers run but they don't run to win. (A)______________________\n\n위 글의 제목으로 알맞은 것은?",
+      "options": [
+        "Stories Behind Heroes",
+        "The Best Way to Remember Players",
+        "Pacers: Hidden Heroes in a Marathon",
+        "How Do Runners Affect the Marathon?",
+        "Disappearing Hopes: Talented Pacers in a Race"
+      ],
+      "answer": "3"
+    },
+    {
+      "number": 28,
+      "question": "다음 글을 읽고 물음에 답하시오.\nIn sports, only the players get a trophy or medal, but they don't win on their own. There are people who help the players. These people are often hidden and don't get attention. However, (A)<u>그들은 선수들만큼 중요하다</u>. Here are some examples.\n\n위 글의 밑줄 친 (A)의 우리말을 주어진 단어 및 표현을 사용하여 7단어로 알맞게 영작하시오.\n\n<보기> the players, important\n\n→ ______________________",
+      "options": [],
+      "answer": "they are as important as the players"
+    },
+    {
+      "number": 29,
+      "question": "다음 글을 읽고 물음에 답하시오.\nPit Crews in Car Racing\nYou may only see the car and the driver during most car races, but there is a team behind the driver. This team is called a pit crew. A pit is a place on the side of the race track, and drivers stop there several times during a race. The main job of the pit crew is to check the car and change the tires. Changing the tires is especially important because the tires wear out easily in a high speed race.\nA pit stop can be as short as 2 seconds, and there are as many as 20 members on a crew. Therefore, the pit crew has to work in perfect harmony. The driver may get all the attention, but as people say, \"Races are won in the pits.\"\n\n위 글을 읽고 주어진 질문에 대한 답을 다음과 같이 쓸 때, 빈칸에 들어갈 말을 본문에서 찾아 완성하시오.\n\nQ. In car racing, what is a pit?\n\n→ It is ______________________, where drivers stop several times during a race.",
+      "options": [],
+      "answer": "a place on the side of the race track"
+    },
+    {
+      "number": 30,
+      "question": "다음 글의 괄호 (A), (B), (C)에서 어법상 알맞은 말로 바르게 연결된 것은?\n\nCheerleaders in Football Games\nAlthough people usually don't think that cheerleaders are a part of a football team, they play an important role in a football game. By (A)[cheer / cheering] at a game, they create team spirit. They also encourage their team and fans. (B)[Do / To do] their job well, cheerleaders need to be fit and strong. They also need to be good at jumping and dancing. Most of all, they need to work as (C)[hard / harder] as the players.",
+      "options": [
+        "(A) cheer – (B) Do – (C) hard",
+        "(A) cheering – (B) To do – (C) harder",
+        "(A) cheer – (B) To do – (C) hard",
+        "(A) cheer – (B) Do – (C) harder",
+        "(A) cheering – (B) To do – (C) hard"
+      ],
+      "answer": "5"
+    }
+  ],
+  "R2": [
+    {
+      "number": 1,
+      "question": "다음 빈칸에 공통으로 들어갈 말로 알맞은 것은?\n\n• You need to __________ how much money you spend in a month.\n• I will win the race if I __________ the time very well.",
+      "options": [
+        "wait for",
+        "look after",
+        "keep track of",
+        "look forward to",
+        "keep in touch with"
+      ],
+      "answer": "3"
+    },
+    {
+      "number": 2,
+      "question": "다음 빈칸에 공통으로 들어갈 말로 알맞은 것은?\n\n• It's normal for things to __________ out with long use.\n• It's easy to catch a cold during the change of seasons. So now I can't decide what to __________.",
+      "options": [
+        "have",
+        "keep",
+        "make",
+        "take",
+        "wear"
+      ],
+      "answer": "5"
+    },
+    {
+      "number": 3,
+      "question": "다음 영영풀이에 해당하는 단어는?\n\na group of people who have their own language and ways of living",
+      "options": [
+        "target",
+        "tribe",
+        "support",
+        "achieve",
+        "pacer"
+      ],
+      "answer": "2"
+    },
+    {
+      "number": 4,
+      "question": "다음 빈칸에 들어갈 말로 알맞지 않은 것은?\n\nThe girl can write the sentences as ______ as the boy.",
+      "options": [
+        "fast",
+        "well",
+        "easily",
+        "fluent",
+        "quickly"
+      ],
+      "answer": "4"
+    },
+    {
+      "number": 5,
+      "question": "다음 우리말을 알맞게 영작한 것은?\n\n봄은 겨울만큼 춥지 않다.",
+      "options": [
+        "Spring is not cold so as winter.",
+        "Spring is not as cold as winter.",
+        "Spring is not as colder as winter.",
+        "Spring is not so cold than winter.",
+        "Spring is not as colder than winter."
+      ],
+      "answer": "2"
+    },
+    {
+      "number": 6,
+      "question": "다음 중 어법상 알맞은 것을 두 개 고르면? (정답 2개)",
+      "options": [
+        "I jumped as high as possible.",
+        "Jake swims as well than Sam.",
+        "My sister is not so tall as Amy.",
+        "Greece is not as larger as Germany.",
+        "This shirt is not so more good as that one."
+      ],
+      "answer": "1, 3"
+    },
+    {
+      "number": 7,
+      "question": "다음 밑줄 친 부분의 쓰임이 나머지와 다른 것은?",
+      "options": [
+        "The love story is <u>touching</u>.",
+        "Don't touch the <u>boiling</u> water.",
+        "My healthy habit is <u>exercising</u> every day.",
+        "That woman <u>wearing</u> glasses is my mother.",
+        "There are many people <u>waiting</u> at the bus stop."
+      ],
+      "answer": "3"
+    },
+    {
+      "number": 8,
+      "question": "다음 대화의 빈칸에 들어갈 알맞은 말을 <보기>에서 필요한 단어를 골라 사용하여 6단어로 완성하시오.\n\nA: You used to play football very often. Do you still enjoy football that much?\nB: I don't play football ______________________.\n\n<보기> to, as, I, as, many, much, more, most, use, used",
+      "options": [],
+      "answer": "as much as I used to"
+    },
+    {
+      "number": 9,
+      "question": "다음 우리말과 같은 뜻이 되도록 <보기>에 주어진 단어를 알맞게 배열하시오. (필요시 변형할 것) ※ 완전한 문장으로 쓰시오.\n\n도서관에서 공부하는 학생들이 많이 있다.\n\n<보기> be / in / library / many / student / study / the / there\n\n→ ______________________",
+      "options": [],
+      "answer": "There are many students studying in the library."
+    },
+    {
+      "number": 10,
+      "question": "다음 대화의 빈칸에 들어갈 말로 알맞은 것은?\n\nA: Hojun, ______________________________?\nB: I read a book twice a month.\nA: I suggest you read more books.\nB: OK, I'll try.",
+      "options": [
+        "how soon will you be back",
+        "how long have you lived here",
+        "how often do you read books",
+        "how many books do you have",
+        "how far is it from here to the bookstore"
+      ],
+      "answer": "3"
+    },
+    {
+      "number": 11,
+      "question": "다음 대화의 흐름이 자연스럽도록 (A)~(E)를 순서대로 알맞게 배열한 것은?\n\n(A) That often? Anyway, it'll be fun swimming together today.\n(B) I swim four times a week.\n(C) That's a good idea.\n(D) Yes, but before we swim, I suggest we do stretching exercises.\n(E) I don't swim often. How about you, Kate? How often do you swim?",
+      "options": [
+        "(D)-(A)-(C)-(B)-(E)",
+        "(D)-(A)-(E)-(B)-(C)",
+        "(E)-(B)-(A)-(C)-(D)",
+        "(E)-(B)-(A)-(D)-(C)",
+        "(E)-(B)-(D)-(C)-(A)"
+      ],
+      "answer": "4"
+    },
+    {
+      "number": 12,
+      "question": "다음 대화의 (A)~(E) 중, 주어진 문장이 들어갈 알맞은 곳은?\n\nI suggest you join my basketball club.\n\nB: How often do you play basketball? (A)\nG: I play once a week. (B) I want to play more often.\nB: (C) We play three times a week.\nG: (D) That sounds good! It'll be fun to play with you. (E)",
+      "options": [
+        "(A)",
+        "(B)",
+        "(C)",
+        "(D)",
+        "(E)"
+      ],
+      "answer": "3"
+    },
+    {
+      "number": 13,
+      "question": "다음 대화를 읽고 물음에 답하시오.\nMary: Hello. Welcome to Sports World. May I help you?\nTony: Yes, I came to (A)<u>register</u> for a swimming class.\nMary: Is this your first time taking swimming lessons?\nTony: Yes, it is. I don't know how to swim at all.\nMary: I see. How often do you want to take classes?\nTony: (B)______________________________ I'd like to take classes on weekdays and not on weekends.\nMary: Then, I suggest that you take the Beginner 2 class. This class meets on Tuesdays and Thursdays.\nTony: That sounds good. I'd like to sign up for that class. How big is the class?\nMary: The class has a limit of fifteen people.\nTony: That's perfect.\n\n위 대화의 밑줄 친 (A)register의 영영풀이로 알맞은 것은?",
+      "options": [
+        "to pay someone to work for you",
+        "to put your name on an official list",
+        "to be in the same place with someone",
+        "to recommend an idea for someone to think about",
+        "to move through water by making movements with your arms and legs"
+      ],
+      "answer": "2"
+    },
+    {
+      "number": 14,
+      "question": "다음 대화를 읽고 물음에 답하시오.\nMary: Hello. Welcome to Sports World. May I help you?\nTony: Yes, I came to (A)<u>register</u> for a swimming class.\nMary: Is this your first time taking swimming lessons?\nTony: Yes, it is. I don't know how to swim at all.\nMary: I see. How often do you want to take classes?\nTony: (B)______________________________ I'd like to take classes on weekdays and not on weekends.\nMary: Then, I suggest that you take the Beginner 2 class. This class meets on Tuesdays and Thursdays.\nTony: That sounds good. I'd like to sign up for that class. How big is the class?\nMary: The class has a limit of fifteen people.\nTony: That's perfect.\n\n위 대화의 빈칸 (B)에 들어갈 말로 알맞은 것은?",
+      "options": [
+        "How often do you swim in a week?",
+        "I want to take classes twice a week.",
+        "I would like to swim every morning.",
+        "What kind of sports classes do you have?",
+        "I can start a Beginner class from tomorrow."
+      ],
+      "answer": "2"
+    },
+    {
+      "number": 15,
+      "question": "다음 대화를 읽고 물음에 답하시오.\nMary: Hello. Welcome to Sports World. May I help you?\nTony: Yes, I came to (A)<u>register</u> for a swimming class.\nMary: Is this your first time taking swimming lessons?\nTony: Yes, it is. I don't know how to swim at all.\nMary: I see. How often do you want to take classes?\nTony: (B)______________________________ I'd like to take classes on weekdays and not on weekends.\nMary: Then, I suggest that you take the Beginner 2 class. This class meets on Tuesdays and Thursdays.\nTony: That sounds good. I'd like to sign up for that class. How big is the class?\nMary: The class has a limit of fifteen people.\nTony: That's perfect.\n\n위 대화의 내용과 일치하는 것은?",
+      "options": [
+        "Tony is very good at swimming.",
+        "Tony is going to take a soccer class as well.",
+        "Less than 10 people can take the Beginner 2 class.",
+        "Tony will take the class every Tuesday and every Thursday.",
+        "Mary will teach Tony how to swim from next Tuesday."
+      ],
+      "answer": "4"
+    },
+    {
+      "number": 16,
+      "question": "다음 글을 읽고 물음에 답하시오.\nPacers in a Marathon\nPacers run with other runners and lead them in a marathon. Pacers are experienced runners, and their job is to help other runners manage their race better. There can be several pacers in a race.\nEach pacer runs (A)_____ different speeds and finishes the race in different times. Pacers usually have flags or balloons ⓐ<u>showed</u> their finish time.\nRunners can choose a pacer depending (B)_____ their target finish time. For example, if a runner wants to finish the race in four hours, the runner will follow the four-hour pacer. Since the pacer keeps track (C)_____ the time, the runner can achieve his or her goal of finishing the marathon in a particular time ⓑ<u>easier</u>. In short, pacers run but they don't run to win. They run for others.\n\nPit Crews in Car Racing\nYou may only see the car and the driver during most car races, but there is a team behind the driver. ㉠ A pit is a place on the side of the race track, and drivers stop there several times during a race. ㉡ The main job of the pit crew is to check the car and change the tires. ㉢ Changing the tires ⓒ<u>is</u> especially important because the tires wear out easily in a high speed race. ㉣\nA pit stop can be as short as 2 seconds, and there are as ⓓ<u>much</u> as 20 members on a crew. ㉤ Therefore, the pit crew ⓔ<u>has to work</u> in perfect harmony. The driver may get all the attention, but as people say, \"Races are won in the pits.\"\n\n위 글의 빈칸 (A), (B), (C)에 들어갈 말로 알맞게 연결된 것은?",
+      "options": [
+        "(A) in – (B) on – (C) of",
+        "(A) in – (B) at – (C) on",
+        "(A) on – (B) at – (C) on",
+        "(A) at – (B) in – (C) for",
+        "(A) at – (B) on – (C) of"
+      ],
+      "answer": "5"
+    },
+    {
+      "number": 17,
+      "question": "다음 글을 읽고 물음에 답하시오.\nPacers in a Marathon\nPacers run with other runners and lead them in a marathon. Pacers are experienced runners, and their job is to help other runners manage their race better. There can be several pacers in a race.\nEach pacer runs (A)_____ different speeds and finishes the race in different times. Pacers usually have flags or balloons ⓐ<u>showed</u> their finish time.\nRunners can choose a pacer depending (B)_____ their target finish time. For example, if a runner wants to finish the race in four hours, the runner will follow the four-hour pacer. Since the pacer keeps track (C)_____ the time, the runner can achieve his or her goal of finishing the marathon in a particular time ⓑ<u>easier</u>. In short, pacers run but they don't run to win. They run for others.\n\nPit Crews in Car Racing\nYou may only see the car and the driver during most car races, but there is a team behind the driver. ㉠ A pit is a place on the side of the race track, and drivers stop there several times during a race. ㉡ The main job of the pit crew is to check the car and change the tires. ㉢ Changing the tires ⓒ<u>is</u> especially important because the tires wear out easily in a high speed race. ㉣\nA pit stop can be as short as 2 seconds, and there are as ⓓ<u>much</u> as 20 members on a crew. ㉤ Therefore, the pit crew ⓔ<u>has to work</u> in perfect harmony. The driver may get all the attention, but as people say, \"Races are won in the pits.\"\n\n위 글의 밑줄 친 ⓐ~ⓔ 중, 어법상 알맞은 것을 모두 골라 짝지은 것은?",
+      "options": [
+        "ⓐ, ⓒ",
+        "ⓑ, ⓒ",
+        "ⓒ, ⓔ",
+        "ⓑ, ⓒ, ⓔ",
+        "ⓐ, ⓒ, ⓓ"
+      ],
+      "answer": "3"
+    },
+    {
+      "number": 18,
+      "question": "다음 글을 읽고 물음에 답하시오.\nPacers in a Marathon\nPacers run with other runners and lead them in a marathon. Pacers are experienced runners, and their job is to help other runners manage their race better. There can be several pacers in a race.\nEach pacer runs (A)_____ different speeds and finishes the race in different times. Pacers usually have flags or balloons ⓐ<u>showed</u> their finish time.\nRunners can choose a pacer depending (B)_____ their target finish time. For example, if a runner wants to finish the race in four hours, the runner will follow the four-hour pacer. Since the pacer keeps track (C)_____ the time, the runner can achieve his or her goal of finishing the marathon in a particular time ⓑ<u>easier</u>. In short, pacers run but they don't run to win. They run for others.\n\nPit Crews in Car Racing\nYou may only see the car and the driver during most car races, but there is a team behind the driver. ㉠ A pit is a place on the side of the race track, and drivers stop there several times during a race. ㉡ The main job of the pit crew is to check the car and change the tires. ㉢ Changing the tires ⓒ<u>is</u> especially important because the tires wear out easily in a high speed race. ㉣\nA pit stop can be as short as 2 seconds, and there are as ⓓ<u>much</u> as 20 members on a crew. ㉤ Therefore, the pit crew ⓔ<u>has to work</u> in perfect harmony. The driver may get all the attention, but as people say, \"Races are won in the pits.\"\n\n위 글의 ㉠~㉤ 중, 주어진 문장이 들어갈 알맞은 곳은?\n\nThis team is called a pit crew.",
+      "options": [
+        "㉠",
+        "㉡",
+        "㉢",
+        "㉣",
+        "㉤"
+      ],
+      "answer": "1"
+    },
+    {
+      "number": 19,
+      "question": "다음 글을 읽고 물음에 답하시오.\nPacers in a Marathon\nPacers run with other runners and lead them in a marathon. Pacers are experienced runners, and their job is to help other runners manage their race better. There can be several pacers in a race.\nEach pacer runs (A)_____ different speeds and finishes the race in different times. Pacers usually have flags or balloons ⓐ<u>showed</u> their finish time.\nRunners can choose a pacer depending (B)_____ their target finish time. For example, if a runner wants to finish the race in four hours, the runner will follow the four-hour pacer. Since the pacer keeps track (C)_____ the time, the runner can achieve his or her goal of finishing the marathon in a particular time ⓑ<u>easier</u>. In short, pacers run but they don't run to win. They run for others.\n\nPit Crews in Car Racing\nYou may only see the car and the driver during most car races, but there is a team behind the driver. ㉠ A pit is a place on the side of the race track, and drivers stop there several times during a race. ㉡ The main job of the pit crew is to check the car and change the tires. ㉢ Changing the tires ⓒ<u>is</u> especially important because the tires wear out easily in a high speed race. ㉣\nA pit stop can be as short as 2 seconds, and there are as ⓓ<u>much</u> as 20 members on a crew. ㉤ Therefore, the pit crew ⓔ<u>has to work</u> in perfect harmony. The driver may get all the attention, but as people say, \"Races are won in the pits.\"\n\n위 글을 읽고 나눈 대화 중, 글의 내용과 일치하지 않는 것은?",
+      "options": [
+        "A: I am surprised to learn that there are several pacers helping runners in the race. / B: Me, too. Now I can understand why there are so many people running at the race.",
+        "A: Runners usually lead pacers to finish the race as quickly as possible. / B: Yes, pacers get a lot of help from runners during a race.",
+        "A: I learned that there is a place on the side of the race track and it is called a pit. / B: Oh, yeah. Drivers stop there several times.",
+        "A: What is the main job of the pit crew? / B: Their job is to check the car and change the tires.",
+        "A: What do you think is important for car racing? / B: Since almost 20 members have to work together in a short time, the perfect harmony seems important."
+      ],
+      "answer": "2"
+    },
+    {
+      "number": 20,
+      "question": "다음 글을 읽고 물음에 답하시오.\nYou may only see the car and the driver during most car races, but there is a team behind the driver. This team is called a pit crew. A pit is a place on the side of the race track, and drivers stop there several times ⓐ<u>for</u> a race. The main job of the pit crew is to check the car and change the tires. Changing the tires ⓑ<u>are</u> especially important because the tires ⓒ<u>wearing out</u> easily in a high speed race.\nA pit stop can be as short as 2 seconds, and there are ⓓ<u>as much as</u> 20 members on a crew. Therefore, the pit crew has to work in perfect harmony. The driver may get all the attention, but as people say, \"Races ⓔ<u>win</u> in the pits.\"\n\n위 글의 밑줄 친 ⓐ~ⓔ를 어법상 알맞게 고치지 않은 것은?",
+      "options": [
+        "ⓐ: for → during",
+        "ⓑ: are → is",
+        "ⓒ: wearing out → worn out",
+        "ⓓ: as much as → as many as",
+        "ⓔ: win → are won"
+      ],
+      "answer": "3"
+    },
+    {
+      "number": 21,
+      "question": "다음 글을 읽고 물음에 답하시오.\nYou may only see the car and the driver during most car races, but there is a team behind the driver. This team is called a pit crew. A pit is a place on the side of the race track, and drivers stop there several times ⓐ<u>for</u> a race. The main job of the pit crew is to check the car and change the tires. Changing the tires ⓑ<u>are</u> especially important because the tires ⓒ<u>wearing out</u> easily in a high speed race.\nA pit stop can be as short as 2 seconds, and there are ⓓ<u>as much as</u> 20 members on a crew. Therefore, the pit crew has to work in perfect harmony. The driver may get all the attention, but as people say, \"Races ⓔ<u>win</u> in the pits.\"\n\n위 글을 읽고 알 수 없는 것은?",
+      "options": [
+        "the number of pits",
+        "the main job of the pit crew",
+        "how short a pit stop can take",
+        "why changing tires is important",
+        "why the pit crew has to work in perfect harmony"
+      ],
+      "answer": "1"
+    },
+    {
+      "number": 22,
+      "question": "다음 글을 읽고 물음에 답하시오.\nIn sports, only the players get a trophy or medal, but they don't win on their own. There are people who help the players. These people are often hidden and don't get attention. However, they are ⓐ<u>as important as the players</u>. Here is an example.\nPacers run with other runners and lead them in a marathon. ⓑ<u>Pacers are experienced runners, and their job is to help other runners managing their race better</u>. There can be several pacers in a race.\nⓒ<u>Each pacer run at different speeds and finish the race in different times</u>. ⓓ<u>Pacers usually have flags or balloons that show their finish time</u>.\nⓔ<u>Runners can choose a pacer depend on their target finish time</u>. For example, if a runner wants to finish the race in four hours, the runner will follow the four-hour pacer. ⓕ<u>Since the pacer keeps track of the time, the runner can achieve his or her goal of finishing the marathon in a particular time more easily</u>. (A)<u>요컨대, 페이서들은 달리기는 하지만 그들이 우승을 하기 위해 달리는 것은 아니다</u>. They run for others.\n\n위 글의 밑줄 친 ⓐ~ⓕ 중 어법상 알맞은 것의 개수는?",
+      "options": [
+        "2개",
+        "3개",
+        "4개",
+        "5개",
+        "6개"
+      ],
+      "answer": "2"
+    },
+    {
+      "number": 23,
+      "question": "다음 글을 읽고 물음에 답하시오.\nIn sports, only the players get a trophy or medal, but they don't win on their own. There are people who help the players. These people are often hidden and don't get attention. However, they are ⓐ<u>as important as the players</u>. Here is an example.\nPacers run with other runners and lead them in a marathon. ⓑ<u>Pacers are experienced runners, and their job is to help other runners managing their race better</u>. There can be several pacers in a race.\nⓒ<u>Each pacer run at different speeds and finish the race in different times</u>. ⓓ<u>Pacers usually have flags or balloons that show their finish time</u>.\nⓔ<u>Runners can choose a pacer depend on their target finish time</u>. For example, if a runner wants to finish the race in four hours, the runner will follow the four-hour pacer. ⓕ<u>Since the pacer keeps track of the time, the runner can achieve his or her goal of finishing the marathon in a particular time more easily</u>. (A)<u>요컨대, 페이서들은 달리기는 하지만 그들이 우승을 하기 위해 달리는 것은 아니다</u>. They run for others.\n\n위 글의 밑줄 친 (A)의 우리말과 같은 뜻이 되도록 <보기>에 주어진 단어를 알맞게 배열하시오. ※ 완전한 문장으로 쓰시오.\n\n<보기> to / but / run / they / pacers / in / don't / short / win / run\n\n→ ______________________",
+      "options": [],
+      "answer": "In short, pacers run but they don't run to win."
+    },
+    {
+      "number": 24,
+      "question": "다음 글을 읽고 물음에 답하시오.\nIn sports, only the players get a trophy or medal, but they don't win on their own. There are people who help the players. These people are often hidden and don't get attention. However, they are ⓐ<u>as important as the players</u>. Here is an example.\nPacers run with other runners and lead them in a marathon. ⓑ<u>Pacers are experienced runners, and their job is to help other runners managing their race better</u>. There can be several pacers in a race.\nⓒ<u>Each pacer run at different speeds and finish the race in different times</u>. ⓓ<u>Pacers usually have flags or balloons that show their finish time</u>.\nⓔ<u>Runners can choose a pacer depend on their target finish time</u>. For example, if a runner wants to finish the race in four hours, the runner will follow the four-hour pacer. ⓕ<u>Since the pacer keeps track of the time, the runner can achieve his or her goal of finishing the marathon in a particular time more easily</u>. (A)<u>요컨대, 페이서들은 달리기는 하지만 그들이 우승을 하기 위해 달리는 것은 아니다</u>. They run for others.\n\n위 글의 제목으로 알맞은 것은?",
+      "options": [
+        "Helpful Tips for Runners",
+        "The Main Role of Flags in Sports",
+        "Challenges of Running a Marathon Alone",
+        "People Who Help Runners in a Marathon",
+        "Speed: The Most Important Thing to Win a Marathon"
+      ],
+      "answer": "4"
+    },
+    {
+      "number": 25,
+      "question": "다음 글을 읽고 물음에 답하시오.\nIn sports, only the players get a trophy or medal, but they don't win on their own. There are people who help the players. These people are often hidden and don't get attention. However, they are ⓐ<u>as important as the players</u>. Here is an example.\nPacers run with other runners and lead them in a marathon. ⓑ<u>Pacers are experienced runners, and their job is to help other runners managing their race better</u>. There can be several pacers in a race.\nⓒ<u>Each pacer run at different speeds and finish the race in different times</u>. ⓓ<u>Pacers usually have flags or balloons that show their finish time</u>.\nⓔ<u>Runners can choose a pacer depend on their target finish time</u>. For example, if a runner wants to finish the race in four hours, the runner will follow the four-hour pacer. ⓕ<u>Since the pacer keeps track of the time, the runner can achieve his or her goal of finishing the marathon in a particular time more easily</u>. (A)<u>요컨대, 페이서들은 달리기는 하지만 그들이 우승을 하기 위해 달리는 것은 아니다</u>. They run for others.\n\n위 글을 읽고 나눈 대화 중 글의 내용을 바르게 이해한 것을 두 개 고르면? (정답 2개)",
+      "options": [
+        "A: What do pacers run for? / B: They run for a trophy or medal.",
+        "A: What do the pacers' flags or balloons show? / B: Flags or balloons show the finish line.",
+        "A: Do players get a trophy or medal on their own? / B: No, there are people who help the players.",
+        "A: How do runners choose a pacer in a marathon? / B: Each runner is paired with one pacer depending on his or her age and experience.",
+        "A: Why is it that pacers are as important as the runners? / B: It's because runners can achieve their goal more easily with the help of pacers."
+      ],
+      "answer": "3, 5"
+    },
+    {
+      "number": 26,
+      "question": "다음 글을 읽고 물음에 답하시오.\nPacers run with other runners and lead them in a marathon. Pacers are experienced runners, and their job is to help other runners manage their race better. There can be several pacers in a race.\nEach pacer runs at different speeds and finishes the race in different times. Pacers usually have flags or balloons showing their finish time.\n(A) Runners can choose a pacer depending on their target finish time. (B) For example, if a runner wants to finish the race in four hours, the runner will follow the four-hour pacer. (C) Since the pacer keeps track of the time, the runner can achieve his or her goal of finishing the marathon in a particular time more easily. (D) They run for others. (E)\n\n위 글의 (A)~(E) 중, 주어진 문장이 들어갈 알맞은 곳은?\n\nIn short, pacers run but they don't run to win.",
+      "options": [
+        "(A)",
+        "(B)",
+        "(C)",
+        "(D)",
+        "(E)"
+      ],
+      "answer": "4"
+    },
+    {
+      "number": 27,
+      "question": "다음 글을 읽고 물음에 답하시오.\nPacers run with other runners and lead them in a marathon. Pacers are experienced runners, and their job is to help other runners manage their race better. There can be several pacers in a race.\nEach pacer runs at different speeds and finishes the race in different times. Pacers usually have flags or balloons showing their finish time.\n(A) Runners can choose a pacer depending on their target finish time. (B) For example, if a runner wants to finish the race in four hours, the runner will follow the four-hour pacer. (C) Since the pacer keeps track of the time, the runner can achieve his or her goal of finishing the marathon in a particular time more easily. (D) They run for others. (E)\n\n위 글을 읽고 질문에 답한 것으로 알맞은 것은?",
+      "options": [
+        "Q: What do pacers run for? / A: They run for themselves.",
+        "Q: What do the pacers' flags or balloons show? / A: They show the pacers' finish time.",
+        "Q: What does a pacer keep track of? / A: The pacer keeps track of the time they run.",
+        "Q: What is a pacer's job in a marathon? / A: It is to run with other pacers.",
+        "Q: How many pacers can there be in a race? / A: There can be one pacer in a race."
+      ],
+      "answer": "2"
+    },
+    {
+      "number": 28,
+      "question": "다음 글을 읽고 물음에 답하시오.\nPit Crews in Car Racing\nYou may only see the car and the driver during most car races, but there is a team behind the driver. This team is called a pit crew. A pit is a place on the side of the race track, and drivers stop there several times during a race. The main job of the pit crew is to check the car and change the tires. Changing the tires is especially important because the tires wear out easily in a high speed race.\nA pit stop can be as short as 2 seconds, and there are as many as 20 members on a crew. Therefore, the pit crew has to work in perfect harmony. The driver may get all the attention, but as people say, \"Races are won in the pits.\"\n\n위 글을 읽고 다음 질문에 답할 때, 빈칸에 들어갈 알맞은 말을 본문에서 찾아 10단어로 쓰시오.\n\nQ. Why is changing tires important in a car race?\n\n→ It is important because ______________________.",
+      "options": [],
+      "answer": "the tires wear out easily in a high speed race"
+    },
+    {
+      "number": 29,
+      "question": "다음 글에 이어질 내용으로 알맞은 것은?\n\nIn sports, only the players get a trophy or medal, but they don't win on their own. There are people who help the players. These people are often hidden and don't get attention. However, they are as important as the players. Here are some examples.",
+      "options": [
+        "how to build team spirit",
+        "the main goal of a sport player",
+        "examples of hidden people in sports",
+        "players doing their best to win a game",
+        "examples of people getting most attention in a sport"
+      ],
+      "answer": "3"
+    },
+    {
+      "number": 30,
+      "question": "다음 글의 내용과 일치하는 것은?\n\nCheerleaders in Football Games\nAlthough people usually don't think that cheerleaders are a part of a football team, they play an important role in a football game. By cheering at a game, they create team spirit. They also encourage their team and fans. To do their job well, cheerleaders need to be fit and strong. They also need to be good at jumping and dancing. Most of all, they need to work as hard as the players.",
+      "options": [
+        "Cheerleaders are not a part of a football team.",
+        "Health and strength are needed to be a good cheerleader.",
+        "It is hard for cheerleaders to encourage their team and fans in games.",
+        "Football players have to work harder than cheerleaders all the time.",
+        "Many people know that cheerleaders are very important in a football game."
+      ],
+      "answer": "2"
+    }
+  ],
+  "R3": [
+    {
+      "number": 1,
+      "question": "다음 빈칸 ⓐ, ⓑ에 들어갈 말이 차례대로 연결된 것은?\n\n• Each pacer runs ⓐ______ different speeds and finishes the race in different times.\n• Baby birds can't find food ⓑ______ their own, so the mother bird brings it to them.",
+      "options": [
+        "at – on",
+        "for – on",
+        "at – of",
+        "for – of",
+        "in – for"
+      ],
+      "answer": "1"
+    },
+    {
+      "number": 2,
+      "question": "다음 영영풀이에 해당하는 단어는?\n\na group of people who work together with special skills",
+      "options": [
+        "crew",
+        "council",
+        "pacer",
+        "tribe",
+        "religion"
+      ],
+      "answer": "1"
+    },
+    {
+      "number": 3,
+      "question": "다음 단어에 대한 영영풀이가 알맞은 것은?",
+      "options": [
+        "register: to stop being part of a group",
+        "achieve: to organize and control something",
+        "manage: to put your name on an official list",
+        "target: something that makes it difficult to do something",
+        "attention: the act of listening to or looking at something carefully"
+      ],
+      "answer": "5"
+    },
+    {
+      "number": 4,
+      "question": "다음 문장과 의미가 같은 것은?\n\nI am as old as Mary.",
+      "options": [
+        "I always feel old.",
+        "I am the youngest.",
+        "Mary is the oldest.",
+        "Mary is younger than me.",
+        "Mary and I are the same age."
+      ],
+      "answer": "5"
+    },
+    {
+      "number": 5,
+      "question": "다음 중 어법상 어색한 것은?",
+      "options": [
+        "Look at the falling leaves.",
+        "The girl is talking with a teacher is Sujin.",
+        "Do you see the man who is holding a big ball?",
+        "There are many students studying in the library.",
+        "The woman going into the music room is my teacher."
+      ],
+      "answer": "2"
+    },
+    {
+      "number": 6,
+      "question": "다음 <보기>의 밑줄 친 부분과 쓰임이 다른 것은?\n\n<보기> I saw the band <u>playing</u> the guitar.",
+      "options": [
+        "The boy <u>drinking</u> orange juice is Tom.",
+        "The girl <u>standing</u> over there is my sister.",
+        "There are students <u>studying</u> in the library.",
+        "That is why <u>changing</u> the tires is important.",
+        "I like the girl <u>reading</u> books in the classroom."
+      ],
+      "answer": "4"
+    },
+    {
+      "number": 7,
+      "question": "다음 짝지어진 두 문장이 의미하는 바가 같은 것은?",
+      "options": [
+        "Sue is not so old as Jane. → Jane is younger than Sue.",
+        "She is not as pretty as an actress. → She is much prettier than an actress.",
+        "Today is not as cold as yesterday. → Yesterday was less cold than today.",
+        "Greece is not as large as Germany. → Germany is smaller than Greece.",
+        "This car is not as expensive as that bike. → That bike is more expensive than this car."
+      ],
+      "answer": "5"
+    },
+    {
+      "number": 8,
+      "question": "다음 우리말과 같은 뜻이 되도록 빈칸에 들어갈 말을 괄호 안에 주어진 단어를 사용하여 각각 알맞게 완성하시오. (각 빈칸에 한 단어씩 쓸 것)\n\n(1) 잠자고 있는 아기를 봐. (sleep)\n→ Look at ________ ________ ________.\n(2) 음악을 듣고 있는 소년은 Eric이다. (listen)\n→ The boy ________ ________ ________ is Eric.\n(3) 그에게 질문들을 하는 많은 사람들이 있었다. (questions, ask, many)\n→ There were ________ ________ ________ ________ ________.",
+      "options": [],
+      "answer": "the sleeping baby / listening to music / many people asking him questions",
+      "subParts": [
+        {
+          "label": "(1)",
+          "answer": "the sleeping baby"
+        },
+        {
+          "label": "(2)",
+          "answer": "listening to music"
+        },
+        {
+          "label": "(3)",
+          "answer": "many people asking him questions"
+        }
+      ]
+    },
+    {
+      "number": 9,
+      "question": "다음 우리말을 <보기>의 단어를 사용하여 8단어로 알맞게 영작하시오. ※ 완전한 문장으로 쓰시오.\n\nJenny에게 말 걸고 있는 그 소년은 나의 오빠야.\n\n<보기> to, the, talk\n\n→ ______________________",
+      "options": [],
+      "answer": "The boy talking to Jenny is my brother."
+    },
+    {
+      "number": 10,
+      "question": "다음 주어진 대화에 이어질 순서로 알맞은 것은?\n\nW: Hello. Welcome to Sports World. May I help you?\nB: Yes, I came to register for a swimming class.\n\n(A) I see. How often do you want to take classes?\n(B) That sounds good. I'd like to sign up for that class. How big is the class?\n(C) Yes, it is. I don't know how to swim at all.\n(D) I want to take classes twice a week. I'd like to take classes on weekdays and not on weekends.\n(E) That's perfect.\n(F) Is this your first time taking swimming lessons?\n(G) The class has a limit of 10 people.\n(H) Then, I suggest that you take the Beginner 2 class. This class meets on Tuesdays and Thursdays.",
+      "options": [
+        "(A)-(D)-(H)-(B)-(F)-(C)-(E)-(G)",
+        "(A)-(D)-(H)-(B)-(G)-(E)-(C)-(F)",
+        "(F)-(A)-(D)-(H)-(B)-(G)-(E)-(C)",
+        "(F)-(C)-(A)-(D)-(H)-(B)-(G)-(E)",
+        "(F)-(C)-(A)-(H)-(D)-(B)-(E)-(G)"
+      ],
+      "answer": "4"
+    },
+    {
+      "number": 11,
+      "question": "다음 대화의 빈칸에 들어갈 말로 알맞은 것은?\n\nA: Mina, ______________________________?\nB: Every day.\nA: Can I run with you today?\nB: Sure, but I suggest you wear running shoes. Your shoes aren't good for running.",
+      "options": [
+        "how do you go to the gym",
+        "what time did you start running",
+        "how long have you been running",
+        "how often do you come here to run",
+        "how many hours do you exercise every day"
+      ],
+      "answer": "4"
+    },
+    {
+      "number": 12,
+      "question": "다음 대화를 읽고 물음에 답하시오.\nW: Hello. Welcome to Sports World. May I help you?\nB: Yes, I came ⓐ<u>to register</u> for a swimming class.\nW: Is this your first time ⓑ<u>taking</u> swimming lessons?\nB: Yes, it is. I don't know how ⓒ<u>to swim</u> at all.\nW: I see. How often do you want ⓓ<u>to take</u> classes?\nB: I want to take classes (A)__________ a week. (B)<u>저는 주말이 아닌 주중에 수업을 듣고 싶어요</u>.\nW: Then, I suggest ⓔ<u>what</u> you take the Beginner 2 class. This class meets on Tuesdays and Thursdays.\nB: That sounds good. I'd like to (C)__________ that class. How big is the class?\nW: The class has a limit of 10 people.\nB: That's perfect.\n\n위 대화의 밑줄 친 ⓐ~ⓔ 중, 어법상 어색한 부분을 한 개 찾아 기호를 쓰고 알맞게 고쳐 쓰시오.\n\n기호: ________ / 고친 표현: ________",
+      "options": [],
+      "answer": "ⓔ → that",
+      "subParts": [
+        {
+          "label": "기호",
+          "answer": "ⓔ"
+        },
+        {
+          "label": "고친 표현",
+          "answer": "that"
+        }
+      ]
+    },
+    {
+      "number": 13,
+      "question": "다음 대화를 읽고 물음에 답하시오.\nW: Hello. Welcome to Sports World. May I help you?\nB: Yes, I came ⓐ<u>to register</u> for a swimming class.\nW: Is this your first time ⓑ<u>taking</u> swimming lessons?\nB: Yes, it is. I don't know how ⓒ<u>to swim</u> at all.\nW: I see. How often do you want ⓓ<u>to take</u> classes?\nB: I want to take classes (A)__________ a week. (B)<u>저는 주말이 아닌 주중에 수업을 듣고 싶어요</u>.\nW: Then, I suggest ⓔ<u>what</u> you take the Beginner 2 class. This class meets on Tuesdays and Thursdays.\nB: That sounds good. I'd like to (C)__________ that class. How big is the class?\nW: The class has a limit of 10 people.\nB: That's perfect.\n\n위 대화의 빈칸 (A), (C)에 들어갈 말로 알맞게 연결된 것은?",
+      "options": [
+        "(A) once – (C) cancel",
+        "(A) twice – (C) cancel",
+        "(A) three times – (C) open",
+        "(A) two times – (C) sign up for",
+        "(A) twice – (C) sign up for"
+      ],
+      "answer": "5"
+    },
+    {
+      "number": 14,
+      "question": "다음 대화를 읽고 물음에 답하시오.\nW: Hello. Welcome to Sports World. May I help you?\nB: Yes, I came ⓐ<u>to register</u> for a swimming class.\nW: Is this your first time ⓑ<u>taking</u> swimming lessons?\nB: Yes, it is. I don't know how ⓒ<u>to swim</u> at all.\nW: I see. How often do you want ⓓ<u>to take</u> classes?\nB: I want to take classes (A)__________ a week. (B)<u>저는 주말이 아닌 주중에 수업을 듣고 싶어요</u>.\nW: Then, I suggest ⓔ<u>what</u> you take the Beginner 2 class. This class meets on Tuesdays and Thursdays.\nB: That sounds good. I'd like to (C)__________ that class. How big is the class?\nW: The class has a limit of 10 people.\nB: That's perfect.\n\n위 대화의 밑줄 친 (B)의 우리말과 같은 뜻이 되도록 주어진 단어 및 표현을 알맞게 배열하시오. ※ 완전한 문장으로 쓰시오.\n\ntake / on / classes / on / I'd / to / like / weekends / weekdays / and not\n\n→ ______________________",
+      "options": [],
+      "answer": "I'd like to take classes on weekdays and not on weekends."
+    },
+    {
+      "number": 15,
+      "question": "다음 대화를 읽고 물음에 답하시오.\nW: Hello. Welcome to Sports World. May I help you?\nB: Yes, I came ⓐ<u>to register</u> for a swimming class.\nW: Is this your first time ⓑ<u>taking</u> swimming lessons?\nB: Yes, it is. I don't know how ⓒ<u>to swim</u> at all.\nW: I see. How often do you want ⓓ<u>to take</u> classes?\nB: I want to take classes (A)__________ a week. (B)<u>저는 주말이 아닌 주중에 수업을 듣고 싶어요</u>.\nW: Then, I suggest ⓔ<u>what</u> you take the Beginner 2 class. This class meets on Tuesdays and Thursdays.\nB: That sounds good. I'd like to (C)__________ that class. How big is the class?\nW: The class has a limit of 10 people.\nB: That's perfect.\n\n위 대화의 내용과 일치하지 않는 것을 두 개 고르면? (정답 2개)",
+      "options": [
+        "The boy wants to learn to swim.",
+        "The boy has taken swimming lessons before.",
+        "The woman suggests the Beginner 2 class to the boy.",
+        "The boy will come to Sports World twice every weekend.",
+        "Up to 10 people can take the class that the boy chooses."
+      ],
+      "answer": "2, 4"
+    },
+    {
+      "number": 16,
+      "question": "다음 글을 읽고 물음에 답하시오.\nThe word Sherpa comes from the Sherpa tribe, (A)[that / which] lives in the eastern part of Nepal. Sherpas have good climbing skills and know their way around the mountains well. They also have little difficulty (B)[breathe / breathing] high up in the mountains. Therefore, mountain climbers started to hire Sherpas (C)[help / to help] them climb Mount Everest.\nSherpas lead mountain climbers to the top of the mountain. They support climbers in many ways. For example, they put up tents and carry climbers' bags. Sherpas are often called the ⓐ<u>invisible</u> people of Mount Everest because people often see a picture of only the climbers at the top of the mountain.\n\n위 글의 밑줄 친 ⓐinvisible과 같이 접두사 in-을 붙여 반의어를 만들 수 없는 단어의 개수는?\n\nformal, patient, direct, possible, fortunately",
+      "options": [
+        "1개",
+        "2개",
+        "3개",
+        "4개",
+        "5개"
+      ],
+      "answer": "3"
+    },
+    {
+      "number": 17,
+      "question": "다음 글을 읽고 물음에 답하시오.\nThe word Sherpa comes from the Sherpa tribe, (A)[that / which] lives in the eastern part of Nepal. Sherpas have good climbing skills and know their way around the mountains well. They also have little difficulty (B)[breathe / breathing] high up in the mountains. Therefore, mountain climbers started to hire Sherpas (C)[help / to help] them climb Mount Everest.\nSherpas lead mountain climbers to the top of the mountain. They support climbers in many ways. For example, they put up tents and carry climbers' bags. Sherpas are often called the ⓐ<u>invisible</u> people of Mount Everest because people often see a picture of only the climbers at the top of the mountain.\n\n위 글의 괄호 (A), (B), (C)에서 어법상 알맞은 말로 바르게 연결된 것은?",
+      "options": [
+        "(A) that – (B) breathing – (C) to help",
+        "(A) that – (B) breathe – (C) help",
+        "(A) which – (B) breathing – (C) help",
+        "(A) which – (B) breathe – (C) to help",
+        "(A) which – (B) breathing – (C) to help"
+      ],
+      "answer": "5"
+    },
+    {
+      "number": 18,
+      "question": "다음 글을 읽고 물음에 답하시오.\nThe word Sherpa comes from the Sherpa tribe, (A)[that / which] lives in the eastern part of Nepal. Sherpas have good climbing skills and know their way around the mountains well. They also have little difficulty (B)[breathe / breathing] high up in the mountains. Therefore, mountain climbers started to hire Sherpas (C)[help / to help] them climb Mount Everest.\nSherpas lead mountain climbers to the top of the mountain. They support climbers in many ways. For example, they put up tents and carry climbers' bags. Sherpas are often called the ⓐ<u>invisible</u> people of Mount Everest because people often see a picture of only the climbers at the top of the mountain.\n\n위 글을 읽고 답할 수 없는 질문은?",
+      "options": [
+        "Where does the word Sherpa come from?",
+        "How many Sherpas are there in Nepal?",
+        "Why are Sherpas called the invisible people of Mount Everest?",
+        "How do Sherpas support climbers when they climb Mount Everest?",
+        "Why do mountain climbers hire Sherpas to climb Mount Everest?"
+      ],
+      "answer": "2"
+    },
+    {
+      "number": 19,
+      "question": "다음 글을 읽고 물음에 답하시오.\nThe word Sherpa comes from the Sherpa tribe, (A)[that / which] lives in the eastern part of Nepal. Sherpas have good climbing skills and know their way around the mountains well. They also have little difficulty (B)[breathe / breathing] high up in the mountains. Therefore, mountain climbers started to hire Sherpas (C)[help / to help] them climb Mount Everest.\nSherpas lead mountain climbers to the top of the mountain. They support climbers in many ways. For example, they put up tents and carry climbers' bags. Sherpas are often called the ⓐ<u>invisible</u> people of Mount Everest because people often see a picture of only the climbers at the top of the mountain.\n\n위 글의 주제로 알맞은 것은?",
+      "options": [
+        "the history of climbing",
+        "talented young sherpas",
+        "the best sherpa in Nepal",
+        "good knowledge of climbing",
+        "the roles of Sherpas in mountain climbing"
+      ],
+      "answer": "5"
+    },
+    {
+      "number": 20,
+      "question": "다음 글을 읽고 물음에 답하시오.\nIn sports, only the players get a trophy or medal, but they don't win on their own. There are people ⓐ<u>who help the players</u>. These people are often hidden and don't get attention. However, they are as important as the players. Here are some examples.\n\nPacers run with other runners and lead them in a marathon. Pacers are experienced runners, and their job is ⓑ<u>to help other runners managing</u> their race better. There can be several pacers in a race.\nⓒ<u>Each pacer runs</u> at different speeds and finishes the race in different times. Pacers usually have flags or balloons ⓓ<u>showing their finish time</u>.\nRunners can choose a pacer depending on their target finish time. For example, ⓔ<u>if a runner wants to finish the race</u> in four hours, the runner will follow the four-hour pacer. Since the pacer keeps track of the time, the runner can achieve his or her goal of finishing the marathon in a particular time more easily. In short, pacers run but they don't run to win. They run for others.\n\n위 글의 밑줄 친 ⓐ~ⓔ 중, 어법상 어색한 것은?",
+      "options": [
+        "ⓐ",
+        "ⓑ",
+        "ⓒ",
+        "ⓓ",
+        "ⓔ"
+      ],
+      "answer": "2"
+    },
+    {
+      "number": 21,
+      "question": "다음 글을 읽고 물음에 답하시오.\nPit Crews in Car Racing\n(A) You may only see the car and the driver during most car races, but there is a team behind the driver. This team is called a pit crew. A pit is a place on the side of the race track, and drivers stop there several times during a race. (B) Changing the tires is especially important because the tires wear out easily in a high speed race. (C)\nA pit stop can be as short as 2 seconds, and there are as many as 20 members on a crew. (D) Therefore, the pit crew has to work in perfect harmony. The driver may get all the attention, but as people say, \"Races are won in the pits.\" (E)\n\nSherpas in Mountain Climbing\nThe word Sherpa comes from the Sherpa tribe, which lives in the eastern part of Nepal. Sherpas have good climbing skills and know their way around the mountains well. They also have little difficulty breathing high up in the mountains. Therefore, mountain climbers ⓐ<u>자신들이 에베레스트 산을 등반하는 것을 돕는 셰르파를 고용하기 시작했다</u>.\nSherpas lead mountain climbers to the top of the mountain. They support climbers in many ways. For example, they put up tents and carry climbers' bags. Sherpas are often called the invisible people of Mount Everest because people often see a picture of only the climbers at the top of the mountain.\n\n위 글의 (A)~(E) 중 주어진 문장이 들어갈 알맞은 곳은?\n\nThe main job of the pit crew is to check the car and change the tires.",
+      "options": [
+        "(A)",
+        "(B)",
+        "(C)",
+        "(D)",
+        "(E)"
+      ],
+      "answer": "2"
+    },
+    {
+      "number": 22,
+      "question": "다음 글을 읽고 물음에 답하시오.\nPit Crews in Car Racing\n(A) You may only see the car and the driver during most car races, but there is a team behind the driver. This team is called a pit crew. A pit is a place on the side of the race track, and drivers stop there several times during a race. (B) Changing the tires is especially important because the tires wear out easily in a high speed race. (C)\nA pit stop can be as short as 2 seconds, and there are as many as 20 members on a crew. (D) Therefore, the pit crew has to work in perfect harmony. The driver may get all the attention, but as people say, \"Races are won in the pits.\" (E)\n\nSherpas in Mountain Climbing\nThe word Sherpa comes from the Sherpa tribe, which lives in the eastern part of Nepal. Sherpas have good climbing skills and know their way around the mountains well. They also have little difficulty breathing high up in the mountains. Therefore, mountain climbers ⓐ<u>자신들이 에베레스트 산을 등반하는 것을 돕는 셰르파를 고용하기 시작했다</u>.\nSherpas lead mountain climbers to the top of the mountain. They support climbers in many ways. For example, they put up tents and carry climbers' bags. Sherpas are often called the invisible people of Mount Everest because people often see a picture of only the climbers at the top of the mountain.\n\n위 글의 밑줄 친 ⓐ의 우리말과 같은 뜻이 되도록 <보기>의 단어 및 표현을 알맞게 배열할 때, 일곱 번째로 오는 것은?\n\n<보기> to / started / them / climb / to / help / Sherpas / Mount Everest / hire",
+      "options": [
+        "them",
+        "hire",
+        "help",
+        "climb",
+        "Sherpas"
+      ],
+      "answer": "1"
+    },
+    {
+      "number": 23,
+      "question": "다음 글을 읽고 물음에 답하시오.\nPit Crews in Car Racing\n(A) You may only see the car and the driver during most car races, but there is a team behind the driver. This team is called a pit crew. A pit is a place on the side of the race track, and drivers stop there several times during a race. (B) Changing the tires is especially important because the tires wear out easily in a high speed race. (C)\nA pit stop can be as short as 2 seconds, and there are as many as 20 members on a crew. (D) Therefore, the pit crew has to work in perfect harmony. The driver may get all the attention, but as people say, \"Races are won in the pits.\" (E)\n\nSherpas in Mountain Climbing\nThe word Sherpa comes from the Sherpa tribe, which lives in the eastern part of Nepal. Sherpas have good climbing skills and know their way around the mountains well. They also have little difficulty breathing high up in the mountains. Therefore, mountain climbers ⓐ<u>자신들이 에베레스트 산을 등반하는 것을 돕는 셰르파를 고용하기 시작했다</u>.\nSherpas lead mountain climbers to the top of the mountain. They support climbers in many ways. For example, they put up tents and carry climbers' bags. Sherpas are often called the invisible people of Mount Everest because people often see a picture of only the climbers at the top of the mountain.\n\n위 글을 읽고 답할 수 없는 것은?",
+      "options": [
+        "In car racing, what is a pit?",
+        "Where does the word Sherpa come from?",
+        "Why is changing the tires important in a car race?",
+        "How much money do climbers pay for hiring Sherpas?",
+        "Why are Sherpas called the invisible people of Mount Everest?"
+      ],
+      "answer": "4"
+    },
+    {
+      "number": 24,
+      "question": "다음 글의 밑줄 친 ⓐ~ⓔ 중, 흐름상 어색한 것은?\n\nPacers run with other runners and lead them in a marathon. Pacers are experienced runners, and their job is to help other runners manage their race better. There can be several pacers in a race.\nEach pacer runs at different speeds and finishes the race in different times. Pacers usually have flags or balloons showing their finish time.\nⓐ<u>Runners can choose a pacer depending on their target finish time</u>. ⓑ<u>For example, if a runner wants to finish the race in four hours, the runner will follow the four-hour pacer</u>. ⓒ<u>Since the pacer keeps track of the time, the runner can achieve his or her goal of finishing the marathon in a particular time more easily</u>. ⓓ<u>In short, pacers run but they don't run to win</u>. ⓔ<u>They run for themselves</u>.",
+      "options": [
+        "ⓐ",
+        "ⓑ",
+        "ⓒ",
+        "ⓓ",
+        "ⓔ"
+      ],
+      "answer": "5"
+    },
+    {
+      "number": 25,
+      "question": "다음 글을 읽고 물음에 답하시오.\nThe word Sherpa comes from the Sherpa tribe ⓐ<u>living</u> in the eastern part of Nepal. (A) Sherpas have good climbing skills and know their way around the mountains well. (B) They also have ⓑ<u>little</u> difficulty breathing high up in the mountains. (C) Therefore, mountain climbers started to hire Sherpas to help them ⓒ<u>climbed</u> Mount Everest. (D) Sherpas lead mountain climbers to the top of the mountain. (E) For example, they put up tents and ⓓ<u>carry</u> climbers' bags. Sherpas are often called the invisible people of Mount Everest ⓔ<u>as</u> people often see a picture of only the climbers at the top of the mountain.\n\n위 글의 밑줄 친 ⓐ~ⓔ 중, 어법상 어색한 것은?",
+      "options": [
+        "ⓐ",
+        "ⓑ",
+        "ⓒ",
+        "ⓓ",
+        "ⓔ"
+      ],
+      "answer": "3"
+    },
+    {
+      "number": 26,
+      "question": "다음 글을 읽고 물음에 답하시오.\nThe word Sherpa comes from the Sherpa tribe ⓐ<u>living</u> in the eastern part of Nepal. (A) Sherpas have good climbing skills and know their way around the mountains well. (B) They also have ⓑ<u>little</u> difficulty breathing high up in the mountains. (C) Therefore, mountain climbers started to hire Sherpas to help them ⓒ<u>climbed</u> Mount Everest. (D) Sherpas lead mountain climbers to the top of the mountain. (E) For example, they put up tents and ⓓ<u>carry</u> climbers' bags. Sherpas are often called the invisible people of Mount Everest ⓔ<u>as</u> people often see a picture of only the climbers at the top of the mountain.\n\n위 글의 (A)~(E) 중, 주어진 문장이 들어갈 알맞은 곳은?\n\nThey support climbers in many ways.",
+      "options": [
+        "(A)",
+        "(B)",
+        "(C)",
+        "(D)",
+        "(E)"
+      ],
+      "answer": "5"
+    },
+    {
+      "number": 27,
+      "question": "다음 글을 읽고 물음에 답하시오.\nThe word Sherpa comes from the Sherpa tribe ⓐ<u>living</u> in the eastern part of Nepal. (A) Sherpas have good climbing skills and know their way around the mountains well. (B) They also have ⓑ<u>little</u> difficulty breathing high up in the mountains. (C) Therefore, mountain climbers started to hire Sherpas to help them ⓒ<u>climbed</u> Mount Everest. (D) Sherpas lead mountain climbers to the top of the mountain. (E) For example, they put up tents and ⓓ<u>carry</u> climbers' bags. Sherpas are often called the invisible people of Mount Everest ⓔ<u>as</u> people often see a picture of only the climbers at the top of the mountain.\n\n위 글에 언급된 Sherpa에 대한 설명으로 알맞지 않은 것은?",
+      "options": [
+        "They are good at climbing mountains.",
+        "They can show climbers the way to the top of Mt. Everest.",
+        "They support mountain climbers by setting up tents.",
+        "They usually suffer from breathing problems in the high mountains.",
+        "They are not seen in a picture of the climbers at the summit of the mountain."
+      ],
+      "answer": "4"
+    },
+    {
+      "number": 28,
+      "question": "다음 글을 읽고 물음에 답하시오.\nThe word Sherpa comes from the Sherpa tribe, which lives in the eastern part of Nepal. Sherpas have good climbing skills and know their way around the mountains well. They also have little difficulty breathing high up in the mountains. Therefore, mountain climbers started to hire Sherpas to help them climb Mount Everest.\nSherpas lead mountain climbers to the top of the mountain. They support climbers in many ways. For example, they put up tents and carry climbers' bags. Sherpas are often called the invisible people of Mount Everest because people often see a picture of only the climbers at the top of the mountain.\n\n위 글에 언급된 셰르파의 장점 세 가지를 찾아 우리말로 서술하시오. (본문에 언급된 순서대로 적을 것)\n\n(1) ______________________\n(2) ______________________\n(3) ______________________",
+      "options": [],
+      "answer": "훌륭한 등산 기술을 가지고 있다. / 산의 지리에 밝다. / 산의 높은 곳에서 호흡하는 데 어려움이 없다.",
+      "subParts": [
+        {
+          "label": "(1)",
+          "answer": "훌륭한 등산 기술을 가지고 있다."
+        },
+        {
+          "label": "(2)",
+          "answer": "산의 지리에 밝다."
+        },
+        {
+          "label": "(3)",
+          "answer": "산의 높은 곳에서 호흡하는 데 어려움이 없다."
+        }
+      ]
+    },
+    {
+      "number": 29,
+      "question": "다음 글을 읽고 물음에 답하시오.\nPit Crews in Car Racing\nYou may only see the car and the driver during most car races, but there is a team behind the driver. This team is called a pit crew. A pit is a place on the side of the race track, and drivers stop there several times during a race. The main job of the pit crew is to check the car and change the tires. Changing the tires is especially important because the tires wear out easily in a high speed race.\nA pit stop can be as short as 2 seconds, and there are as many as 20 members on a crew. Therefore, the pit crew has to work in perfect harmony. The driver may get all the attention, but as people say, \"Races are won in the pits.\"\n\n위 글의 내용과 일치하는 것은?",
+      "options": [
+        "There is a team called a pit crew behind the driver in a car race.",
+        "The pit crew doesn't need to work together.",
+        "Drivers stop in the pit only once during a race.",
+        "The pit crew wants to get all the attention.",
+        "Races are won only by the driver."
+      ],
+      "answer": "1"
+    },
+    {
+      "number": 30,
+      "question": "다음 글의 목적으로 알맞은 것은?\n\nDo you like riding a bike? Then, I suggest you join our club, Fun Wheels. We ride bikes once a week, on Saturdays. We ride along the river or in parks. It's fun to ride bikes together. Riding bikes will make you feel happy and joyful.",
+      "options": [
+        "자전거 동아리 가입을 제안하려고",
+        "자전거의 바퀴에 대해 설명하려고",
+        "자전거를 탈 때 필요한 사항을 알려 주려고",
+        "주중에 할 수 있는 유용한 활동을 소개하려고",
+        "강과 공원에서 지켜야 하는 규칙을 알려 주려고"
+      ],
+      "answer": "1"
+    }
+  ],
+  "R4": [
+    {
+      "number": 1,
+      "question": "다음 밑줄 친 표현과 바꾸어 쓸 수 있는 것은?\n\nDid you do it <u>on your own</u>?",
+      "options": [
+        "alone",
+        "enough",
+        "together",
+        "easily",
+        "separately"
+      ],
+      "answer": "1"
+    },
+    {
+      "number": 2,
+      "question": "다음 <보기>에 짝지어진 단어는 서로 반의어 관계이다. 빈칸에 들어갈 접두어가 나머지와 다른 하나는?\n\n<보기>\nⓐ polite – ___polite ⓑ patient – ___patient\nⓒ possible – ___possible ⓓ formal – ___formal\nⓔ perfect – ___perfect",
+      "options": [
+        "ⓐ",
+        "ⓑ",
+        "ⓒ",
+        "ⓓ",
+        "ⓔ"
+      ],
+      "answer": "4"
+    },
+    {
+      "number": 3,
+      "question": "다음 괄호 (A), (B), (C)에서 흐름상 알맞은 말로 바르게 연결된 것은?\n\n• It is (A)[possible / impossible] to get a table in the restaurant because it is already full.\n• Although air is everywhere, it is (B)[visible / invisible] to the eye.\n• He was wearing a suit because he had to give a (C)[formal / informal] speech.",
+      "options": [
+        "(A) possible – (B) visible – (C) informal",
+        "(A) impossible – (B) invisible – (C) formal",
+        "(A) possible – (B) invisible – (C) formal",
+        "(A) impossible – (B) visible – (C) formal",
+        "(A) possible – (B) invisible – (C) informal"
+      ],
+      "answer": "2"
+    },
+    {
+      "number": 4,
+      "question": "다음 문장의 (A)~(E) 중, baking이 들어갈 위치로 알맞은 곳은?\n\nA (A) chef (B) a cake (C) is (D) my father (E).",
+      "options": [
+        "(A)",
+        "(B)",
+        "(C)",
+        "(D)",
+        "(E)"
+      ],
+      "answer": "2"
+    },
+    {
+      "number": 5,
+      "question": "다음 중 어법상 어색한 것은?",
+      "options": [
+        "I ate a boiled egg for breakfast.",
+        "I heard my mom calling my name.",
+        "The man walking his dog asked me for help.",
+        "Look at the little boy worn his father's big gloves.",
+        "The people standing in line are all waiting for the same bus."
+      ],
+      "answer": "4"
+    },
+    {
+      "number": 6,
+      "question": "다음 문장과 의미가 같은 것은?\n\nTalent is not as important as effort.",
+      "options": [
+        "Effort is not important at all.",
+        "Effort is more important than talent.",
+        "Talent is more important than effort.",
+        "Neither talent nor effort is important.",
+        "Effort is the most important in our life."
+      ],
+      "answer": "2"
+    },
+    {
+      "number": 7,
+      "question": "다음 <보기>의 ⓐ~ⓔ 중, 어법상 알맞은 문장을 모두 골라 짝지은 것은?\n\n<보기>\nⓐ Who is the boy smiles at you?\nⓑ Sue doesn't speak so slowly as Jenny.\nⓒ Why don't we ask the man reading a book over there?\nⓓ My mom's new bag is as more expensive as her old one.\nⓔ The people taking pictures in front of the statue are from Italy.",
+      "options": [
+        "ⓐ, ⓑ",
+        "ⓑ, ⓔ",
+        "ⓐ, ⓓ, ⓔ",
+        "ⓑ, ⓒ, ⓓ",
+        "ⓑ, ⓒ, ⓔ"
+      ],
+      "answer": "5"
+    },
+    {
+      "number": 8,
+      "question": "다음 빈칸 (1), (2)에 들어갈 알맞은 말을 <보기>와 같이 as ~ as ... 구문을 사용하여 각각 완성하시오.\n\n<보기>\nMegan is angry and I'm equally angry.\n→ I'm as angry as Megan.\n\n(1) Her last book is good and her new book is equally good.\n→ Her new book is ______________________.\n(2) Your clothes are clean and my clothes are equally clean.\n→ My clothes are ______________________.",
+      "options": [],
+      "answer": "as good as her last book / as clean as your clothes",
+      "subParts": [
+        {
+          "label": "(1)",
+          "answer": "as good as her last book"
+        },
+        {
+          "label": "(2)",
+          "answer": "as clean as your clothes"
+        }
+      ]
+    },
+    {
+      "number": 9,
+      "question": "다음 우리말을 주어진 <조건>에 알맞게 각각 영작하시오. ※ 완전한 문장으로 쓰시오.\n\n(1) Tom은 Jerry만큼 열심히 공부한다.\n(2) 내 노트북은 Mina의 것만큼 비싸다.\n\n<조건>\n• 모두 as가 포함된 동등비교 문장으로 쓸 것\n• <보기>의 단어를 사용할 것\n• (1)은 6단어, (2)는 7단어로 영작할 것\n\n<보기> hard, expensive, laptop",
+      "options": [],
+      "answer": "Tom studies as hard as Jerry. / My laptop is as expensive as Mina's.",
+      "subParts": [
+        {
+          "label": "(1)",
+          "answer": "Tom studies as hard as Jerry."
+        },
+        {
+          "label": "(2)",
+          "answer": "My laptop is as expensive as Mina's."
+        }
+      ]
+    },
+    {
+      "number": 10,
+      "question": "다음 주어진 (A)의 말에 이어질 대화가 자연스럽도록 (B), (C), (D)를 순서대로 바르게 배열한 것은?\n\n(A) Suji, how often do you take bowling lessons?\n\n(B) Twice a week. I'm just a beginner. I heard you're very good.\n(C) OK. I'll look for a lighter one, then.\n(D) Well, I love bowling. Hmm, Your bowling ball looks heavy for you. I suggest you use a lighter ball.",
+      "options": [
+        "(B)-(C)-(D)",
+        "(B)-(D)-(C)",
+        "(C)-(D)-(B)",
+        "(D)-(B)-(C)",
+        "(D)-(C)-(B)"
+      ],
+      "answer": "2"
+    },
+    {
+      "number": 11,
+      "question": "다음 대화의 빈칸에 들어갈 말로 알맞은 것은?\n\nA: Mina, do you often come here to run?\nB: ______________________________\nA: Can I run with you today?\nB: Sure, but you should wear running shoes. Your shoes aren't good for running",
+      "options": [
+        "I came here to run last year.",
+        "I come here to run every day.",
+        "I will come here again next week.",
+        "Why don't we come here tomorrow?",
+        "I came here and ran a few days ago."
+      ],
+      "answer": "2"
+    },
+    {
+      "number": 12,
+      "question": "다음 대화를 읽고 물음에 답하시오.\nWoman: Hello. Welcome to Sports World. May I help you?\nMinsu: Yes, I came to register for a swimming class. (A)\nWoman: Is this your first time taking swimming lessons?\nMinsu: Yes, it is. I don't know how to swim at all. (B)\nWoman: I see. How often do you want to take classes? (C)\nMinsu: I want to take classes twice a week. I'd like to take classes on weekdays and not on weekends.\nWoman: Then, I suggest that you take the Beginner 2 class. This class meets on Tuesdays and Thursdays. (D)\nMinsu: That sounds good. I'd like to sign up for that class. (E)\nWoman: The class has a limit of 10 people.\nMinsu: That's perfect.\n\n위 대화의 (A)~(E) 중, 주어진 문장이 들어갈 알맞은 곳은?\n\nHow big is the class?",
+      "options": [
+        "(A)",
+        "(B)",
+        "(C)",
+        "(D)",
+        "(E)"
+      ],
+      "answer": "5"
+    },
+    {
+      "number": 13,
+      "question": "다음 대화를 읽고 물음에 답하시오.\nWoman: Hello. Welcome to Sports World. May I help you?\nMinsu: Yes, I came to register for a swimming class. (A)\nWoman: Is this your first time taking swimming lessons?\nMinsu: Yes, it is. I don't know how to swim at all. (B)\nWoman: I see. How often do you want to take classes? (C)\nMinsu: I want to take classes twice a week. I'd like to take classes on weekdays and not on weekends.\nWoman: Then, I suggest that you take the Beginner 2 class. This class meets on Tuesdays and Thursdays. (D)\nMinsu: That sounds good. I'd like to sign up for that class. (E)\nWoman: The class has a limit of 10 people.\nMinsu: That's perfect.\n\n위 대화의 내용과 일치하는 것은?",
+      "options": [
+        "Minsu wants to take swimming lessons every other day.",
+        "Minsu has never taken any sports lessons before.",
+        "The woman encourages Minsu to take the advanced level class.",
+        "Minsu wants to take the classes twice a week including weekends.",
+        "As many as 10 people can register for the Beginner 2 class."
+      ],
+      "answer": "5"
+    },
+    {
+      "number": 14,
+      "question": "다음 대화의 밑줄 친 (A), (B)의 우리말을 <보기>의 단어를 사용하여 각각 알맞게 영작하시오. (필요시 어법에 맞게 변형하고 (A)는 8단어, (B)는 9단어로 영작할 것) ※ 완전한 문장으로 쓰시오.\n\nGinny: Welcome to Sports World. May I help you?\nLuke: Yes, (A)<u>수영강좌에 등록하려고 왔어요</u>.\nGinny: Is this your first time taking swimming lessons?\nLuke: Yes, it is. I don't know how to swim at all.\nGinny: I see. How often do you want to take classes?\nLuke: I want to take classes twice a week. I'd like to take classes on weekdays and not on weekends.\nGinny: Then, (B)<u>초급 2반을 수강하기를 권합니다</u>. This class meets on Tuesdays and Thursdays.\nLuke: That sounds good. I'd like to sign up for that class. How big is the class?\nGinny: The class has a limit of 10 people.\nLuke: That's perfect.\n\n<보기>\n(A) a, come, register, class\n(B) that, suggest, the Beginner 2 class\n\n(A) ______________________\n(B) ______________________",
+      "options": [],
+      "answer": "I came to register for a swimming class. / I suggest that you take the Beginner 2 class.",
+      "subParts": [
+        {
+          "label": "(A)",
+          "answer": "I came to register for a swimming class."
+        },
+        {
+          "label": "(B)",
+          "answer": "I suggest that you take the Beginner 2 class."
+        }
+      ]
+    },
+    {
+      "number": 15,
+      "question": "다음 대화의 빈칸 (A)에 들어갈 말이 되도록 <보기>에 주어진 단어를 알맞게 배열하시오.\n\nB: Suji, (A)______________________?\nG: Twice a week. I'm just a beginner. I heard you're very good.\nB: Well, I love bowling. Hmm. Your bowling ball looks heavy for you. I suggest that you use a lighter ball.\nG: OK. Thank you for your advice.\n\n<보기> bowling / do / how / lessons / you / often / take",
+      "options": [],
+      "answer": "how often do you take bowling lessons"
+    },
+    {
+      "number": 16,
+      "question": "다음 글을 읽고 물음에 답하시오.\nPit Crews in Car Racing\nYou may only see the car and the driver during most car races, but there is a team behind the driver. This team is called a pit crew. A pit is a place on the side of the race track, and drivers stop there several times during a race. The main job of the pit crew is to check the car and change the tires. Changing the tires is especially important because the tires wear out (A)[easy / easily] in a high speed race.\nA pit stop can be as short as 2 seconds, and there are as many as 20 members on a crew. Therefore, the pit crew has to work in perfect harmony. The driver may get all the attention, but as people say, \"Races are won in the pits.\"\n\nSherpas in Mountain Climbing\nThe word Sherpa comes from the Sherpa tribe, (B)[which / that] lives in the eastern part of Nepal. ⓐ<u>Sherpas have good climbing skills and know their way around the mountains well</u>. They also have little difficulty (C)[breathe / breathing] high up in the mountains. ⓑ<u>Therefore, mountain climbers started to hire Sherpas to help them climb Mount Everest</u>.\nⓒ<u>Sherpas lead mountain climbers to the top of the mountain</u>. ⓓ<u>They support climbers in many ways</u>. For example, they put up tents and carry climbers' bags. ⓔ<u>Mountain Climbers have been taking pictures of Sherpas</u>. Sherpas are often called the invisible people of Mount Everest because people often see a picture of only the climbers at the top of the mountain.\n\n위 글의 괄호 (A), (B), (C)에서 어법상 알맞은 말로 바르게 연결된 것은?",
+      "options": [
+        "(A) easily – (B) which – (C) breathing",
+        "(A) easy – (B) that – (C) breathe",
+        "(A) easily – (B) that – (C) breathe",
+        "(A) easy – (B) which – (C) breathing",
+        "(A) easily – (B) which – (C) breathe"
+      ],
+      "answer": "1"
+    },
+    {
+      "number": 17,
+      "question": "다음 글을 읽고 물음에 답하시오.\nPit Crews in Car Racing\nYou may only see the car and the driver during most car races, but there is a team behind the driver. This team is called a pit crew. A pit is a place on the side of the race track, and drivers stop there several times during a race. The main job of the pit crew is to check the car and change the tires. Changing the tires is especially important because the tires wear out (A)[easy / easily] in a high speed race.\nA pit stop can be as short as 2 seconds, and there are as many as 20 members on a crew. Therefore, the pit crew has to work in perfect harmony. The driver may get all the attention, but as people say, \"Races are won in the pits.\"\n\nSherpas in Mountain Climbing\nThe word Sherpa comes from the Sherpa tribe, (B)[which / that] lives in the eastern part of Nepal. ⓐ<u>Sherpas have good climbing skills and know their way around the mountains well</u>. They also have little difficulty (C)[breathe / breathing] high up in the mountains. ⓑ<u>Therefore, mountain climbers started to hire Sherpas to help them climb Mount Everest</u>.\nⓒ<u>Sherpas lead mountain climbers to the top of the mountain</u>. ⓓ<u>They support climbers in many ways</u>. For example, they put up tents and carry climbers' bags. ⓔ<u>Mountain Climbers have been taking pictures of Sherpas</u>. Sherpas are often called the invisible people of Mount Everest because people often see a picture of only the climbers at the top of the mountain.\n\n위 글의 밑줄 친 ⓐ~ⓔ 중, 흐름상 관계없는 것은?",
+      "options": [
+        "ⓐ",
+        "ⓑ",
+        "ⓒ",
+        "ⓓ",
+        "ⓔ"
+      ],
+      "answer": "5"
+    },
+    {
+      "number": 18,
+      "question": "다음 글을 읽고 물음에 답하시오.\nPit Crews in Car Racing\nYou may only see the car and the driver during most car races, but there is a team behind the driver. This team is called a pit crew. A pit is a place on the side of the race track, and drivers stop there several times during a race. The main job of the pit crew is to check the car and change the tires. Changing the tires is especially important because the tires wear out (A)[easy / easily] in a high speed race.\nA pit stop can be as short as 2 seconds, and there are as many as 20 members on a crew. Therefore, the pit crew has to work in perfect harmony. The driver may get all the attention, but as people say, \"Races are won in the pits.\"\n\nSherpas in Mountain Climbing\nThe word Sherpa comes from the Sherpa tribe, (B)[which / that] lives in the eastern part of Nepal. ⓐ<u>Sherpas have good climbing skills and know their way around the mountains well</u>. They also have little difficulty (C)[breathe / breathing] high up in the mountains. ⓑ<u>Therefore, mountain climbers started to hire Sherpas to help them climb Mount Everest</u>.\nⓒ<u>Sherpas lead mountain climbers to the top of the mountain</u>. ⓓ<u>They support climbers in many ways</u>. For example, they put up tents and carry climbers' bags. ⓔ<u>Mountain Climbers have been taking pictures of Sherpas</u>. Sherpas are often called the invisible people of Mount Everest because people often see a picture of only the climbers at the top of the mountain.\n\n위 글을 읽고 답할 수 없는 질문은?",
+      "options": [
+        "What is a pit?",
+        "What does the pit crew do in a car race?",
+        "For how many years can a pit crew work in a team?",
+        "Where does the Sherpa tribe live?",
+        "Why are Sherpas called the invisible people of Mount Everest?"
+      ],
+      "answer": "3"
+    },
+    {
+      "number": 19,
+      "question": "다음 글의 괄호 (A), (B), (C)에서 어법상 알맞은 말로 바르게 연결된 것은?\n\nIn sports, only the players get a trophy or medal, but they don't win on their own. There are people (A)[that / whose] help the players. These people are often hidden and don't get attention. However, they are as (B)[important / more important] as the players. Here are some examples.\n\nPacers in a Marathon\nPacers run with other runners and lead them in a marathon. Pacers are experienced runners, and their job is (C)[helping / helped] other runners manage their race better. There can be several pacers in a race.",
+      "options": [
+        "(A) whose – (B) important – (C) helping",
+        "(A) that – (B) important – (C) helping",
+        "(A) that – (B) more important – (C) helped",
+        "(A) that – (B) important – (C) helped",
+        "(A) whose – (B) more important – (C) helping"
+      ],
+      "answer": "2"
+    },
+    {
+      "number": 20,
+      "question": "다음 글을 읽고 물음에 답하시오.\nPit Crews in Car Racing\nYou may only see the car and the driver during most car races, but there is a team behind the driver. This team is called a pit crew. A pit is a place on the side of the race track, and drivers stop there several times during a race. ⓐ<u>The main job of the pit crew is checking the car and change the tires</u>. ⓑ<u>Changing the tires is especially important because the tires wear out easy in a high speed race</u>.\nA pit stop can be as short as 2 seconds, and there are as many as 20 members on a crew. Therefore, the pit crew has to work in perfect harmony. The driver may get all the attention, but ⓒ<u>as people say, \"Races win in the pits</u>.\"\n\nSherpas in Mountain Climbing\nⓓ<u>The word Sherpa comes from the Sherpa tribe, that lives in the eastern part of Nepal</u>. Sherpas have good climbing skills and know their way around the mountains well. ⓔ<u>They also have little difficulty breathe high up in the mountains</u>. Therefore, mountain climbers started to hire Sherpas to help them climb Mount Everest.\nSherpas lead mountain climbers to the top of the mountain. They support climbers in many ways. For example, they put up tents and carry climbers' bags. Sherpas are often called the invisible people of Mount Everest because people often see a picture of only the climbers at the top of the mountain.\n\n위 글의 밑줄 친 ⓐ~ⓔ에서 어법상 어색한 부분을 알맞게 고치지 않은 것은?",
+      "options": [
+        "ⓐ: change → to change",
+        "ⓑ: easy → easily",
+        "ⓒ: win → are won",
+        "ⓓ: that → which",
+        "ⓔ: breathe → breathing"
+      ],
+      "answer": "1"
+    },
+    {
+      "number": 21,
+      "question": "다음 글을 읽고 물음에 답하시오.\nPit Crews in Car Racing\nYou may only see the car and the driver during most car races, but there is a team behind the driver. This team is called a pit crew. A pit is a place on the side of the race track, and drivers stop there several times during a race. ⓐ<u>The main job of the pit crew is checking the car and change the tires</u>. ⓑ<u>Changing the tires is especially important because the tires wear out easy in a high speed race</u>.\nA pit stop can be as short as 2 seconds, and there are as many as 20 members on a crew. Therefore, the pit crew has to work in perfect harmony. The driver may get all the attention, but ⓒ<u>as people say, \"Races win in the pits</u>.\"\n\nSherpas in Mountain Climbing\nⓓ<u>The word Sherpa comes from the Sherpa tribe, that lives in the eastern part of Nepal</u>. Sherpas have good climbing skills and know their way around the mountains well. ⓔ<u>They also have little difficulty breathe high up in the mountains</u>. Therefore, mountain climbers started to hire Sherpas to help them climb Mount Everest.\nSherpas lead mountain climbers to the top of the mountain. They support climbers in many ways. For example, they put up tents and carry climbers' bags. Sherpas are often called the invisible people of Mount Everest because people often see a picture of only the climbers at the top of the mountain.\n\n위 글을 읽고 나눈 대화로 알맞은 것은?",
+      "options": [
+        "Q: What is the team behind the driver called in car racing? / A: It is called a pit stop.",
+        "Q: Why does the pit crew have to work in perfect harmony? / A: It is because speed is one of the most important things in a race.",
+        "Q: Where does the word Sherpa come from? / A: It comes from the name of the place which is located in eastern part of Nepal.",
+        "Q: Why did mountain climbers start to hire Sherpas? / A: It is because climbers needed to help Sherpas by leading them to the top of the mountain.",
+        "Q: Why are Sherpa often called the invisible people of Mount Everest? / A: It is because people have never met Sherpas until climbing the Mount Everest."
+      ],
+      "answer": "2"
+    },
+    {
+      "number": 22,
+      "question": "다음 글을 읽고 물음에 답하시오.\nⓐ<u>In sports, only the players win a trophy or medal</u>, ⓑ<u>but they don't win by themselves</u>. There are people who help the players. ⓒ<u>These people are often hidden and don't receive attention</u>. However, they are as important as the players. Here are some examples.\n\nPacers in a Marathon\nPacers run with other runners and lead them in a marathon. ⓓ<u>Pacers are inexperienced runners</u>, and their job is to help other runners manage their race better. ⓔ<u>There can be several pacers in a race</u>.\nEach pacer runs at different speeds and finishes the race in different times. Pacers usually have flags or balloons showing their finish time.\nRunners can choose a pacer depending on their target finish time. (A)__________, if a runner wants to finish the race in four hours, the runner will follow the four-hour pacer. Since the pacer keeps track of the time, the runner can achieve his or her goal of finishing the marathon in a particular time more easily. (B)__________, pacers run but they don't run to win. They run for others.\n\n위 글의 밑줄 친 ⓐ~ⓔ 중, 흐름상 어색한 것은?",
+      "options": [
+        "ⓐ",
+        "ⓑ",
+        "ⓒ",
+        "ⓓ",
+        "ⓔ"
+      ],
+      "answer": "4"
+    },
+    {
+      "number": 23,
+      "question": "다음 글을 읽고 물음에 답하시오.\nⓐ<u>In sports, only the players win a trophy or medal</u>, ⓑ<u>but they don't win by themselves</u>. There are people who help the players. ⓒ<u>These people are often hidden and don't receive attention</u>. However, they are as important as the players. Here are some examples.\n\nPacers in a Marathon\nPacers run with other runners and lead them in a marathon. ⓓ<u>Pacers are inexperienced runners</u>, and their job is to help other runners manage their race better. ⓔ<u>There can be several pacers in a race</u>.\nEach pacer runs at different speeds and finishes the race in different times. Pacers usually have flags or balloons showing their finish time.\nRunners can choose a pacer depending on their target finish time. (A)__________, if a runner wants to finish the race in four hours, the runner will follow the four-hour pacer. Since the pacer keeps track of the time, the runner can achieve his or her goal of finishing the marathon in a particular time more easily. (B)__________, pacers run but they don't run to win. They run for others.\n\n위 글의 빈칸 (A), (B)에 들어갈 말로 알맞게 연결된 것은?",
+      "options": [
+        "(A) However – (B) However",
+        "(A) For instance – (B) In brief",
+        "(A) However – (B) On the other hand",
+        "(A) For instance – (B) On the other hand",
+        "(A) In other words – (B) In brief"
+      ],
+      "answer": "2"
+    },
+    {
+      "number": 24,
+      "question": "다음 글을 읽고 물음에 답하시오.\nⓐ<u>In sports, only the players win a trophy or medal</u>, ⓑ<u>but they don't win by themselves</u>. There are people who help the players. ⓒ<u>These people are often hidden and don't receive attention</u>. However, they are as important as the players. Here are some examples.\n\nPacers in a Marathon\nPacers run with other runners and lead them in a marathon. ⓓ<u>Pacers are inexperienced runners</u>, and their job is to help other runners manage their race better. ⓔ<u>There can be several pacers in a race</u>.\nEach pacer runs at different speeds and finishes the race in different times. Pacers usually have flags or balloons showing their finish time.\nRunners can choose a pacer depending on their target finish time. (A)__________, if a runner wants to finish the race in four hours, the runner will follow the four-hour pacer. Since the pacer keeps track of the time, the runner can achieve his or her goal of finishing the marathon in a particular time more easily. (B)__________, pacers run but they don't run to win. They run for others.\n\n위 글을 읽고 답할 수 없는 질문은?",
+      "options": [
+        "Who does a pacer run for?",
+        "What does a pacer keep track of?",
+        "What is a pacer's job in a marathon?",
+        "How many pacers are there in a race?",
+        "What do the pacers' flags or balloons show?"
+      ],
+      "answer": "4"
+    },
+    {
+      "number": 25,
+      "question": "다음 글을 읽고 물음에 답하시오.\nThe word Sherpa comes from the Sherpa tribe, which lives in the eastern part of Nepal. Sherpas have good climbing skills and know their way around the mountains well. They also have little difficulty breathing high up in the mountains. Therefore, mountain climbers started to hire Sherpas to help them climb Mount Everest.\nSherpas lead mountain climbers to the top of the mountain. They support climbers in many ways. For example, they put up tents and carry climbers' bags. Since people often see a picture of only the climbers at the top of the mountain, Sherpas are often called the invisible people of Mount Everest.\n\n위 글을 읽고 아래 질문에 답할 때, 빈칸에 들어갈 알맞은 말을 본문에서 찾아 각각 쓰시오. (본문에 언급된 순서대로 쓸 것)\n\nQ. What are the three advantages of Sherpas that make mountain climbers begin hiring them?\n\n(1) They ______________________.\n(2) They ______________________.\n(3) They ______________________.",
+      "options": [],
+      "answer": "have good climbing skills / know their way around the mountains well / have little difficulty breathing high up in the mountains",
+      "subParts": [
+        {
+          "label": "(1)",
+          "answer": "have good climbing skills"
+        },
+        {
+          "label": "(2)",
+          "answer": "know their way around the mountains well"
+        },
+        {
+          "label": "(3)",
+          "answer": "have little difficulty breathing high up in the mountains"
+        }
+      ]
+    },
+    {
+      "number": 26,
+      "question": "다음 글을 읽고 물음에 답하시오.\nThe word Sherpa comes from the Sherpa tribe, which lives in the eastern part of Nepal. Sherpas have good climbing skills and know their way around the mountains well. They also have little difficulty breathing high up in the mountains. Therefore, mountain climbers started to hire Sherpas to help them climb Mount Everest.\nSherpas lead mountain climbers to the top of the mountain. They support climbers in many ways. For example, they put up tents and carry climbers' bags. Since people often see a picture of only the climbers at the top of the mountain, Sherpas are often called the invisible people of Mount Everest.\n\n위 글을 읽고 아래 질문에 대한 답이 되도록 빈칸에 들어갈 알맞은 말을 본문에서 찾아 각각 쓰시오.\n\n(1) How do Sherpas support the climbers?\n→ They ______________________.\n(2) Why are Sherpas called the invisible people of Mt. Everest?\n→ It is because ______________________.",
+      "options": [],
+      "answer": "put up tents and carry climbers' bags / people often see a picture of only the climbers at the top of the mountain",
+      "subParts": [
+        {
+          "label": "(1)",
+          "answer": "put up tents and carry climbers' bags"
+        },
+        {
+          "label": "(2)",
+          "answer": "people often see a picture of only the climbers at the top of the mountain"
+        }
+      ]
+    },
+    {
+      "number": 27,
+      "question": "다음 글을 읽고 물음에 답하시오.\n(A) The word Sherpa comes from the Sherpa tribe, which lives in the eastern part of Nepal. (B) Sherpas have good climbing skills and know their way around the mountains well. They also have little difficulty breathing high up in the mountains. (C) Since then, Sherpas have led mountain climbers to the top of the mountain. They support climbers in many ways. (D) For example, they put up tents and carry climbers' bags. (E) Sherpas are often called the invisible people of Mount Everest because ⓐ______________________________.\n\n위 글의 (A)~(E) 중, 주어진 문장이 들어갈 알맞은 곳은?\n\nTherefore, mountain climbers started to hire Sherpas to help them climb Mount Everest.",
+      "options": [
+        "(A)",
+        "(B)",
+        "(C)",
+        "(D)",
+        "(E)"
+      ],
+      "answer": "3"
+    },
+    {
+      "number": 28,
+      "question": "다음 글을 읽고 물음에 답하시오.\n(A) The word Sherpa comes from the Sherpa tribe, which lives in the eastern part of Nepal. (B) Sherpas have good climbing skills and know their way around the mountains well. They also have little difficulty breathing high up in the mountains. (C) Since then, Sherpas have led mountain climbers to the top of the mountain. They support climbers in many ways. (D) For example, they put up tents and carry climbers' bags. (E) Sherpas are often called the invisible people of Mount Everest because ⓐ______________________________.\n\n위 글을 읽고 나눈 대화의 빈칸에 들어갈 알맞은 질문을 고르면?\n\nA: ______________________________\nB: They put up tents and carry climbers' bags.",
+      "options": [
+        "How do Sherpas usually support climbers?",
+        "Where does the word Sherpa come from?",
+        "What is the highest mountain in the world?",
+        "How much money do Sherpas get when they help climbers?",
+        "Why do the climbers have difficulty in breathing high up in the mountains?"
+      ],
+      "answer": "1"
+    },
+    {
+      "number": 29,
+      "question": "다음 글을 읽고 물음에 답하시오.\nIn sports, only the players get a trophy or medal, but they don't win on their own. There are people who help the players. These people are often hidden and don't get attention. However, they are as important as the players. Here are some examples.\nPacers run with other runners and lead them in a marathon. Pacers are experienced runners, and their job is to help other runners manage their race better. There can be several pacers in a race.\nEach pacer runs at different speeds and finishes the race in different times. Pacers usually have flags or balloons showing their finish time.\nRunners can choose a pacer depending on their target finish time. For example, if a runner wants to finish the race in four hours, the runner will follow the four-hour pacer. Since the pacer keeps track of the time, the runner can achieve his or her goal of finishing the marathon in a particular time more easily. In short, pacers run but they don't run to win. They run for others.\n\n위 글의 제목으로 가장 알맞은 것을 고르시오.\n\nWhat is the best title of the passage above?",
+      "options": [
+        "How to Manage One's Running Time",
+        "Methods of Becoming a Great Runner",
+        "Hidden but Important People in Sports",
+        "Examples of the Best Pacers in the World",
+        "Relationship between Runners and Players"
+      ],
+      "answer": "3"
+    },
+    {
+      "number": 30,
+      "question": "다음 글의 내용과 일치하지 않는 것은?\n\nThe word caddie comes from the French word le cadet, meaning \"the boy.\" In Europe in the 18th century, caddies carried water to houses. The first mention of caddies carrying golf clubs is in 1857. Now, caddies are not boys, and both men and women can be caddies.\nThe caddie supports the golf player in many ways. The caddie is in charge of carrying the golf player's bag and cleaning the golf balls. The caddie also has to find where the golf ball is for the player after the player hits it. The caddie must know the golf course well so he or she can give advice to the player. Caddies make a difference between winning and losing in a game.",
+      "options": [
+        "The word caddie originates from the French word.",
+        "Caddies originally carried water for golfers.",
+        "Now, caddies can be both men and women.",
+        "The caddie helps the golf player by giving the player advice.",
+        "The caddie is responsible for finding the golf ball for the player."
+      ],
+      "answer": "2"
+    }
+  ]
+}

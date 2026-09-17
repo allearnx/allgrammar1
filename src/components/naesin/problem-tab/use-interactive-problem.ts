@@ -4,7 +4,7 @@ import { fetchWithToast } from '@/lib/fetch-with-toast';
 import type { NaesinProblemQuestion } from '@/types/database';
 import { useProblemDraft } from '@/hooks/use-problem-draft';
 import type { AiFeedback, WrongItem, InteractiveDraft } from '@/hooks/use-problem-draft';
-import { matchMcqAnswer, matchSubParts } from '@/lib/naesin/normalize-answer';
+import { matchMcqAnswer, matchSubParts, matchFilledBlanks } from '@/lib/naesin/normalize-answer';
 
 export type AnswerStatus = 'correct' | 'retry_correct' | 'wrong';
 
@@ -149,7 +149,7 @@ export function useInteractiveProblem({
         String(studentAnswer),
         question.subParts,
         [question.answer, ...(question.acceptedAnswers ?? [])],
-      );
+      ) || matchFilledBlanks(String(studentAnswer), question.question, String(question.answer), question.acceptedAnswers, question.subParts);
       return { score: allCorrect ? 100 : 0 };
     }
 

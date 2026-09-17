@@ -133,7 +133,8 @@ async function fetchMockExamData(supabase: SupabaseClient, unitId: string, userI
     .select(SHEET_LITE_COLUMNS)
     .eq('unit_id', unitId)
     .eq('category', 'mock_exam')
-    .order('sort_order');
+    .order('sort_order')
+    .order('created_at');
 
   const mockExamSheets = mockExamRes.data || [];
   const mockSheetIds = new Set(mockExamSheets.map((s) => s.id));
@@ -180,7 +181,8 @@ async function fetchProblemData(supabase: SupabaseClient, unitId: string, userId
     .select(SHEET_LITE_COLUMNS)
     .eq('unit_id', unitId)
     .in('category', ['problem', 'external_passage', 'eng_eng_def'])
-    .order('sort_order');
+    .order('sort_order')
+    .order('created_at'); // sort_order 동률(구 시트 전부 0) 시 생성순 — 시트 순서 뒤섞임 방지
 
   const sheetIds = (problemRes.data || []).map((s) => s.id);
   const attemptsRes = userId && sheetIds.length > 0
@@ -221,7 +223,7 @@ async function fetchProblemData(supabase: SupabaseClient, unitId: string, userId
 
 async function fetchLastReviewData(supabase: SupabaseClient, unitId: string) {
   const [sheetsRes, similarRes, contentRes] = await Promise.all([
-    supabase.from('naesin_problem_sheets').select(SHEET_LITE_COLUMNS).eq('unit_id', unitId).eq('category', 'last_review').order('sort_order'),
+    supabase.from('naesin_problem_sheets').select(SHEET_LITE_COLUMNS).eq('unit_id', unitId).eq('category', 'last_review').order('sort_order').order('created_at'),
     supabase.from('naesin_similar_problems').select('id, grammar_tag, question_data, status').eq('unit_id', unitId).eq('status', 'approved'),
     supabase.from('naesin_last_review_content').select('id, content_type, title, youtube_video_id, pdf_url, text_content').eq('unit_id', unitId).order('sort_order'),
   ]);

@@ -1,0 +1,1956 @@
+{
+ "naesin_templates_fa9d511c-0755-450e-b4b6-3fbc37266776": {
+  "questions": [
+   {
+    "tag": "빈칸",
+    "type": "short_answer",
+    "answer": "playing",
+    "number": 1,
+    "question": "다음 <보기>에서 알맞은 단어를 골라 대화를 완성하시오. (필요시 단어를 변형할 것)\n\n<보기> play / eat / talk / go\n\nA: What does he do in his free time?\nB: He enjoys __________ with a ball."
+   },
+   {
+    "tag": "빈칸",
+    "type": "short_answer",
+    "answer": "eating",
+    "number": 2,
+    "question": "다음 <보기>에서 알맞은 단어를 골라 대화를 완성하시오. (필요시 단어를 변형할 것)\n\n<보기> play / eat / talk / go\n\n(2) A: How long does it take for him to eat?\nB: He always finishes __________ in 2 minutes."
+   },
+   {
+    "tag": "빈칸",
+    "type": "short_answer",
+    "answer": "going",
+    "number": 3,
+    "question": "다음 <보기>에서 알맞은 단어를 골라 대화를 완성하시오. (필요시 단어를 변형할 것)\n\n<보기> play / eat / talk / go\n\n(3) A: What is your pet's favorite activity?\nB: My dog Mongmong loves __________ for a walk."
+   },
+   {
+    "tag": "빈칸",
+    "type": "short_answer",
+    "answer": "talking",
+    "number": 4,
+    "question": "다음 <보기>에서 알맞은 단어를 골라 대화를 완성하시오. (필요시 단어를 변형할 것)\n\n<보기> play / eat / talk / go\n\n(4) A: I'm studying for the test tomorrow. Can you stop __________?\nB: Sorry."
+   },
+   {
+    "tag": "빈칸",
+    "type": "short_answer",
+    "answer": "enjoy learning",
+    "number": 5,
+    "question": "다음 괄호 안에 주어진 단어로 문장의 빈칸을 완성하시오.\n\nThe boy and girl __________ English.\n(enjoy, learn)"
+   },
+   {
+    "tag": "오류수정",
+    "type": "sentence",
+    "answer": "Tom and David enjoy learning math.",
+    "number": 6,
+    "question": "다음 각각의 문장에서 어법상 어색한 부분을 찾아 바르게 고치시오. (고친 문장을 전부 쓸 것.)\n\n(1) Tom and David enjoy to learn math."
+   },
+   {
+    "tag": "오류수정",
+    "type": "sentence",
+    "answer": "Kevin finished doing his homework.",
+    "number": 7,
+    "question": "다음 각각의 문장에서 어법상 어색한 부분을 찾아 바르게 고치시오. (고친 문장을 전부 쓸 것.)\n\n(2) Kevin finsihed do his homework."
+   },
+   {
+    "tag": "빈칸",
+    "type": "short_answer",
+    "answer": "Jane enjoys swimming",
+    "number": 8,
+    "question": "다음 그림을 보고 주어진 문장을 영어로 쓰시오. \n(그림: 수영하고 있는 여자아이) \n\nJane은 수영하기를 즐긴다.\n→ __________  __________  __________"
+   },
+   {
+    "tag": "영작",
+    "type": "sentence",
+    "answer": "watching TV and playing computer games",
+    "number": 9,
+    "question": "다음 표를 보고 예문과 같이 문장을 완성하시오.\nex. Julie enjoys listening to music and traveling.\n\n(1) Damin enjoys __________. (watch TV / play computer games)"
+   },
+   {
+    "tag": "빈칸",
+    "type": "short_answer",
+    "answer": "traveling and cooking",
+    "number": 10,
+    "question": "다음 표를 보고 예문과 같이 문장을 완성하시오.\nex. Julie enjoys listening to music and traveling.\n\n(2) Matt enjoys __________. (travel / cook) "
+   },
+   {
+    "tag": "영작",
+    "type": "sentence",
+    "answer": "listening to music and playing computer games",
+    "number": 11,
+    "question": "다음 표를 보고 예문과 같이 문장을 완성하시오.\nex. Julie enjoys listening to music and traveling.\n\n(3) Junsu enjoys __________. (music / play computer games) "
+   },
+   {
+    "tag": "빈칸",
+    "type": "short_answer",
+    "answer": "mind closing",
+    "number": 12,
+    "question": "다음 <보기>의 단어 중 알맞은 것을 두 가지 골라 문장을 완성하시오. (필수시 변형 가능)\n\n<보기>\nfinish / mind / watch / enjoy / clean /close\n\n(1) I don't __________ __________ the window. It's up to you."
+   },
+   {
+    "tag": "빈칸",
+    "type": "short_answer",
+    "answer": "enjoys cleaning",
+    "number": 13,
+    "question": "다음 <보기>의 단어 중 알맞은 것을 두 가지 골라 문장을 완성하시오. (필수시 변형 가능)\n\n<보기>\nfinish / mind / watch / enjoy / clean /close\n\n(2) Suzy __________ __________ her room, so it's always clean."
+   },
+   {
+    "tag": "빈칸",
+    "type": "short_answer",
+    "answer": "finished watching",
+    "number": 14,
+    "question": "다음 <보기>의 단어 중 알맞은 것을 두 가지 골라 문장을 완성하시오. (필수시 변형 가능)\n\n<보기>\nfinish / mind / watch / enjoy / clean /close\n\n(3) Jiho __________ __________ baseball games. Now it's time to study!"
+   },
+   {
+    "tag": "빈칸",
+    "type": "short_answer",
+    "answer": "English and math",
+    "number": 15,
+    "question": "다음 미나에 대한 정보를 참고하여 문장을 완성하시오.\n\nstudy: English, math       play: tennis, soccer\nwatch: movies              drink: orange juice\neat: noodles\n\n(1) Mina loves studying __________ and __________."
+   },
+   {
+    "tag": "빈칸",
+    "type": "short_answer",
+    "answer": "eating",
+    "number": 16,
+    "question": "다음 미나에 대한 정보를 참고하여 문장을 완성하시오.\n\nstudy: English, math       play: tennis, soccer\nwatch: movies              drink: orange juice\neat: noodles\n\n(2) She likes __________ noodles."
+   },
+   {
+    "tag": "빈칸",
+    "type": "short_answer",
+    "answer": "playing, soccer",
+    "number": 17,
+    "question": "다음 미나에 대한 정보를 참고하여 문장을 완성하시오.\n\nstudy: English, math       play: tennis, soccer\nwatch: movies              drink: orange juice\neat: noodles\n\n(3) She enjoys __________ tennis and __________."
+   },
+   {
+    "tag": "빈칸",
+    "type": "short_answer",
+    "answer": "drinking",
+    "number": 18,
+    "question": "다음 미나에 대한 정보를 참고하여 문장을 완성하시오.\n\nstudy: English, math       play: tennis, soccer\nwatch: movies              drink: orange juice\neat: noodles\n\n(4) She likes __________ orange juice."
+   },
+   {
+    "tag": "빈칸",
+    "type": "short_answer",
+    "answer": "watching",
+    "number": 19,
+    "question": "다음 미나에 대한 정보를 참고하여 문장을 완성하시오.\n\nstudy: English, math       play: tennis, soccer\nwatch: movies              drink: orange juice\neat: noodles\n\n(5) She enjoys __________ movies."
+   },
+   {
+    "tag": "빈칸",
+    "type": "short_answer",
+    "answer": "I like writing",
+    "number": 20,
+    "question": "다음 중 <보기>에서 단어를 알맞게 골라 문장을 만드시오. (단, 단어의 형태는 적절히 바꿔 사용할 것)\n\n<보기>\nstart, finish, learn, give up, like, hate, mind, hope, wish, avoid\n\n(1) 나는 글쓰기를 좋아한다.\n→ __________"
+   },
+   {
+    "tag": "단어배열",
+    "type": "sentence",
+    "answer": "I should avoid eating fast food",
+    "number": 21,
+    "question": "다음 중 <보기>에서 단어를 알맞게 골라 문장을 만드시오. (단, 단어의 형태는 적절히 바꿔 사용할 것)\n\n<보기>\nstart, finish, learn, give up, like, hate, mind, hope, wish, avoid\n\n(2) 나는 패스트푸드를 먹는 것을 피해야 한다.\n→ __________"
+   },
+   {
+    "tag": "단어배열",
+    "type": "sentence",
+    "answer": "Don't give up learning something new",
+    "number": 22,
+    "question": "다음 중 <보기>에서 단어를 알맞게 골라 문장을 만드시오. (단, 단어의 형태는 적절히 바꿔 사용할 것)\n\n<보기>\nstart, finish, learn, give up, like, hate, mind, hope, wish, avoid\n\n(3) 새로운 무엇인가를 배우는 것을 포기하지 마라.\n→ __________"
+   },
+   {
+    "tag": "기타",
+    "type": "sentence",
+    "answer": "hear, writing music, listening to his music",
+    "number": 23,
+    "question": "다음 글을 읽고 빈칸에 알맞은 글을 쓰시오.\n\nBeethoven had difficulty hearing. But he didn't give up, and continued to write music. Now, many people love to listen to his music.\n\n→ Beethoven couldn't __________. However, he didn't give up __________. Now many people enjoy __________."
+   },
+   {
+    "tag": "기타",
+    "type": "sentence",
+    "answer": "playing the piano, to be a pianist, practicing",
+    "number": 24,
+    "question": "다음 글을 읽고 빈칸에 알맞은 글을 쓰시오.\n\nAlthough Lee Heeah has only four fingers, she likes to play the piano. When she was young, she practiced repeatedly to be a pianist.\n\n→ Lee Heeah has only four fingers. However, she enjoys __________. When she was young, she wanted __________ and kept __________ again and again."
+   },
+   {
+    "tag": "단어배열",
+    "type": "sentence",
+    "answer": "inviting me to the party",
+    "number": 25,
+    "question": "다음 괄호 안에 주어진 단어를 사용하여 빈칸에 알맞은 말을 쓰시오.\n\n(1) Thank you for __________.\n(invite me to the party)"
+   },
+   {
+    "tag": "단어배열",
+    "type": "sentence",
+    "answer": "Reading Harry Potter series",
+    "number": 26,
+    "question": "다음 괄호 안에 주어진 단어를 사용하여 빈칸에 알맞은 말을 쓰시오.\n\n(2) __________ is very fun.\n(read Harry Potter series)"
+   },
+   {
+    "tag": "빈칸",
+    "type": "short_answer",
+    "answer": "Exercising regularly",
+    "number": 27,
+    "question": "다음 괄호 안에 주어진 단어를 사용하여 빈칸에 알맞은 말을 쓰시오.\n\n(3) __________ is good for your health. (exercise regularly)"
+   },
+   {
+    "tag": "빈칸",
+    "type": "short_answer",
+    "answer": "watching action movies",
+    "number": 28,
+    "question": "다음 괄호 안에 주어진 단어를 사용하여 빈칸에 알맞은 말을 쓰시오.\n\n(4) My hobby is __________.\n(watch action movies)"
+   },
+   {
+    "tag": "빈칸",
+    "type": "short_answer",
+    "answer": "Sharing, giving",
+    "number": 29,
+    "question": "다음의 친구를 사귈 때 중요한 것들에 대해 생각하며, <보기>에서 주어진 단어로 문장을 완성하시오.\n\nQ: What do you think is important for friends to do?\n\n<보기> receive / share / listen / give\n\n13. __________ and __________ advice is important."
+   },
+   {
+    "tag": "빈칸",
+    "type": "short_answer",
+    "answer": "Having",
+    "number": 30,
+    "question": "다음의 친구를 사귈 때 중요한 것들에 대해 생각하며, <보기>에서 주어진 단어로 문장을 완성하시오.\n\nQ: What do you think is important for friends to do?\n\n<보기> receive / share / listen / give\n\n14. __________ common interests is important."
+   },
+   {
+    "tag": "빈칸",
+    "type": "short_answer",
+    "answer": "Listening",
+    "number": 31,
+    "question": "다음의 친구를 사귈 때 중요한 것들에 대해 생각하며, <보기>에서 주어진 단어로 문장을 완성하시오.\n\nQ: What do you think is important for friends to do?\n\n<보기> receive / share / listen / give\n\n15. __________ to others is important."
+   },
+   {
+    "tag": "영작",
+    "type": "sentence",
+    "answer": "Waking up early is not easy",
+    "number": 32,
+    "question": "다음 짝이 되는 문장을 연결하여, 동명사를 이용한 문장을 완성하시오.\n\n<보기1> Get a good grade / Wake up early / Have good friends\n\n<보기2> important / not easy / a good habit\n\nExample: Getting a good grade is not easy.\n\n16. __________________",
+    "acceptedAnswers": [
+     "Waking up early is a good habit.",
+     "Having good friends is important.",
+     "Having good friends is a good habit.",
+     "Having good friends is not easy.",
+     "Getting a good grade is important."
+    ]
+   },
+   {
+    "tag": "영작",
+    "type": "sentence",
+    "answer": "Having good friends is important",
+    "number": 33,
+    "question": "다음 짝이 되는 문장을 연결하여, 동명사를 이용한 문장을 완성하시오.\n\n<보기1> Get a good grade / Wake up early / Have good friends\n\n<보기2> important / not easy / a good habit\n\nExample: Getting a good grade is not easy.\n\n17. __________",
+    "acceptedAnswers": [
+     "Waking up early is a good habit.",
+     "Waking up early is not easy.",
+     "Waking up early is important.",
+     "Having good friends is not easy.",
+     "Having good friends is a good habit.",
+     "Getting a good grade is important."
+    ]
+   },
+   {
+    "tag": "빈칸",
+    "type": "short_answer",
+    "answer": "Making new friends",
+    "number": 34,
+    "question": "다음 주어진 단어를 이용하여 문장을 완성하시오.\n\n새로운 친구를 사귀는 것은 쉽지 않다. (make)\n→ __________ is not easy."
+   },
+   {
+    "tag": "빈칸",
+    "type": "short_answer",
+    "answer": "Eating healthy food",
+    "number": 35,
+    "question": "다음 주어진 단어를 이용하여 문장을 완성하시오.\n\n건강한 음식을 먹는 것은 중요하다.\n→ __________ is important."
+   },
+   {
+    "tag": "빈칸",
+    "type": "short_answer",
+    "answer": "Swimming",
+    "number": 36,
+    "question": "다음 주어진 단어를 이용하여 문장을 완성하시오.\n\n강에서 수영하는 것은 위험하다.\n→ __________ in the river is dangerous. (swim)"
+   },
+   {
+    "tag": "빈칸",
+    "type": "short_answer",
+    "answer": "enjoys walking",
+    "number": 37,
+    "question": "다음 우리말과 같도록 괄호 안의 단어를 사용하여 문장을 완성하시오.\n\n• Sora __________ in the park every Sunday.\n(enjoy, walk)\n\nSora는 매주 일요일 공원에서 걷기를 즐긴다."
+   },
+   {
+    "tag": "빈칸",
+    "type": "short_answer",
+    "answer": "cook, cooking",
+    "number": 38,
+    "question": "다음 각 문장에서 어색한 부분을 한 곳씩 찾아 바르게 고쳐 쓰시오.\n\n(A) Mark enjoys cook in the park.\n(B) Ride a bicycle with her is exciting.\n(C) Jane told her sister wash her hands.\n\n(A) __________ → __________"
+   },
+   {
+    "tag": "빈칸",
+    "type": "short_answer",
+    "answer": "Ride, Riding",
+    "number": 39,
+    "question": "다음 각 문장에서 어색한 부분을 한 곳씩 찾아 바르게 고쳐 쓰시오.\n\n(A) Mark enjoys cook in the park.\n(B) Ride a bicycle with her is exciting.\n(C) Jane told her sister wash her hands.\n\n(B) __________ → __________"
+   },
+   {
+    "tag": "빈칸",
+    "type": "short_answer",
+    "answer": "wash, to wash",
+    "number": 40,
+    "question": "다음 각 문장에서 어색한 부분을 한 곳씩 찾아 바르게 고쳐 쓰시오.\n\n(A) Mark enjoys cook in the park.\n(B) Ride a bicycle with her is exciting.\n(C) Jane told her sister wash her hands.\n\n(C) __________ → __________"
+   },
+   {
+    "tag": "빈칸",
+    "type": "short_answer",
+    "answer": "playing basketball",
+    "number": 41,
+    "question": "다음 표를 보고 Minho에 관한 글을 완성하시오.\n\n이름 : Minho\n취미 :  책 읽기\n잘하는 것 : 농구하기\n좋아하는 것 : 음악듣기\n해야 할 일 :  방청소하기\n\nHis name is Minho.\nHis hobby is reading books.\nHe is good at __________. (1)__________.\nHe enjoys __________ (2)__________.\nCleaning his room is his work.\n\n(1) __________"
+   },
+   {
+    "tag": "빈칸",
+    "type": "short_answer",
+    "answer": "listening to music",
+    "number": 42,
+    "question": "다음 표를 보고 Minho에 관한 글을 완성하시오.\n\n이름 : Minho\n취미 :  책 읽기\n잘하는 것 : 농구하기\n좋아하는 것 : 음악듣기\n해야 할 일 :  방청소하기\n\nHis name is Minho.\nHis hobby is reading books.\nHe is good at __________. (1)__________.\nHe enjoys __________ (2)__________.\nCleaning his room is his work.\n\n(2) __________"
+   }
+  ],
+  "answer_key": [
+   "playing",
+   "eating",
+   "going",
+   "talking",
+   "enjoy learning",
+   "Tom and David enjoy learning math.",
+   "Kevin finished doing his homework.",
+   "Jane enjoys swimming",
+   "watching TV and playing computer games",
+   "traveling and cooking",
+   "listening to music and playing computer games",
+   "mind closing",
+   "enjoys cleaning",
+   "finished watching",
+   "English and math",
+   "eating",
+   "playing, soccer",
+   "drinking",
+   "watching",
+   "I like writing",
+   "I should avoid eating fast food",
+   "Don't give up learning something new",
+   "hear, writing music, listening to his music",
+   "playing the piano, to be a pianist, practicing",
+   "inviting me to the party",
+   "Reading Harry Potter series",
+   "Exercising regularly",
+   "watching action movies",
+   "Sharing, giving",
+   "Having",
+   "Listening",
+   "Waking up early is not easy",
+   "Having good friends is important",
+   "Making new friends",
+   "Eating healthy food",
+   "Swimming",
+   "enjoys walking",
+   "cook, cooking",
+   "Ride, Riding",
+   "wash, to wash",
+   "playing basketball",
+   "listening to music"
+  ]
+ },
+ "naesin_problem_sheets_94d145aa-a551-4c3b-bc24-ff3b93aa64e9": {
+  "questions": [
+   {
+    "tag": "빈칸",
+    "type": "short_answer",
+    "answer": "playing",
+    "number": 1,
+    "question": "다음 <보기>에서 알맞은 단어를 골라 대화를 완성하시오. (필요시 단어를 변형할 것)\n\n<보기> play / eat / talk / go\n\n(1) A: What does he do in his free time?\nB: He enjoys __________ with a ball."
+   },
+   {
+    "tag": "빈칸",
+    "type": "short_answer",
+    "answer": "eating",
+    "number": 2,
+    "question": "다음 <보기>에서 알맞은 단어를 골라 대화를 완성하시오. (필요시 단어를 변형할 것)\n\n<보기> play / eat / talk / go\n\n(2) A: How long does it take for him to eat?\nB: He always finishes __________ in 2 minutes."
+   },
+   {
+    "tag": "빈칸",
+    "type": "short_answer",
+    "answer": "going",
+    "number": 3,
+    "question": "다음 <보기>에서 알맞은 단어를 골라 대화를 완성하시오. (필요시 단어를 변형할 것)\n\n<보기> play / eat / talk / go\n\n(3) A: What is your pet's favorite activity?\nB: My dog Mongmong loves __________ for a walk."
+   },
+   {
+    "tag": "빈칸",
+    "type": "short_answer",
+    "answer": "talking",
+    "number": 4,
+    "question": "다음 <보기>에서 알맞은 단어를 골라 대화를 완성하시오. (필요시 단어를 변형할 것)\n\n<보기> play / eat / talk / go\n\n(4) A: I'm studying for the test tomorrow. Can you stop __________?\nB: Sorry."
+   },
+   {
+    "tag": "빈칸",
+    "type": "short_answer",
+    "answer": "enjoy learning",
+    "number": 5,
+    "question": "다음 괄호 안에 주어진 단어로 문장의 빈칸을 완성하시오.\n\nThe boy and girl __________ English.\n(enjoy, learn)"
+   },
+   {
+    "tag": "오류수정",
+    "type": "sentence",
+    "answer": "enjoy learning math",
+    "number": 6,
+    "question": "다음 각각의 문장에서 어떤상 어색한 부분을 찾아 바르게 고치시오.\n\n(1) Tom and David enjoy to learn math."
+   },
+   {
+    "tag": "기타",
+    "type": "sentence",
+    "answer": "finished doing his homework",
+    "number": 7,
+    "question": "(2) Kevin finsihed do his homework."
+   },
+   {
+    "tag": "기타",
+    "type": "sentence",
+    "answer": "Taking pictures is interesting",
+    "number": 8,
+    "question": "(take pictures / interesting)\n→ __________"
+   },
+   {
+    "tag": "기타",
+    "type": "sentence",
+    "answer": "watching TV and playing computer games",
+    "number": 9,
+    "question": "다음 표를 보고 예문과 같이 윤장을 완성하시오.\n\nex. Julie enjoys listening to music and traveling.\n\n(1) Damin enjoys __________."
+   },
+   {
+    "tag": "빈칸",
+    "type": "short_answer",
+    "answer": "traveling and cooking",
+    "number": 10,
+    "question": "(2) Matt enjoys __________."
+   },
+   {
+    "tag": "기타",
+    "type": "sentence",
+    "answer": "listening to music and playing computer games",
+    "number": 11,
+    "question": "(3) Junsu enjoys __________."
+   },
+   {
+    "tag": "빈칸",
+    "type": "short_answer",
+    "answer": "mind closing",
+    "number": 12,
+    "question": "다음 <보기>의 단어 중 알맞은 것을 두 가지 골라 문장을 완성하시오. (필수어 변형 가능)\n\n<보기>\nfinish mind watch enjoy clean close\n\n(1) I don't __________ __________ the window. It's up to you.\n※ 두 단어를 띄어쓰기로 구분하여 입력 (예: enjoy swimming)"
+   },
+   {
+    "tag": "빈칸",
+    "type": "short_answer",
+    "answer": "enjoys cleaning",
+    "number": 13,
+    "question": "(2) Suzy __________ __________ her room, so it's always clean.\n※ 두 단어를 띄어쓰기로 구분하여 입력 (예: enjoy swimming)"
+   },
+   {
+    "tag": "빈칸",
+    "type": "short_answer",
+    "answer": "enjoys watching",
+    "number": 14,
+    "question": "(3) Jiho __________ __________ baseball games. Now it's time to study!\n※ 두 단어를 띄어쓰기로 구분하여 입력 (예: enjoy swimming)"
+   },
+   {
+    "tag": "빈칸",
+    "type": "short_answer",
+    "answer": "English and math",
+    "number": 15,
+    "question": "다음 미니에 대한 정보를 참고하여 문장을 완성하시오.\n\nstudy: English, math       play: tennis, soccer\nwatch: movies              drink: orange juice\neat: noodles\n\n(1) Mina loves studying __________ and __________."
+   },
+   {
+    "tag": "빈칸",
+    "type": "short_answer",
+    "answer": "eating",
+    "number": 16,
+    "question": "(2) She likes __________ noodles."
+   },
+   {
+    "tag": "subParts",
+    "type": "multi_part",
+    "answer": "playing, soccer",
+    "number": 17,
+    "question": "(3) She enjoys __________ tennis and __________.",
+    "subParts": [
+     {
+      "label": "(1)",
+      "answer": "playing"
+     },
+     {
+      "label": "(2)",
+      "answer": "soccer"
+     }
+    ]
+   },
+   {
+    "tag": "빈칸",
+    "type": "short_answer",
+    "answer": "drinking",
+    "number": 18,
+    "question": "(4) She likes __________ orange juice."
+   },
+   {
+    "tag": "빈칸",
+    "type": "short_answer",
+    "answer": "watching",
+    "number": 19,
+    "question": "(5) She enjoys __________ movies."
+   },
+   {
+    "tag": "빈칸",
+    "type": "short_answer",
+    "answer": "I like writing",
+    "number": 20,
+    "question": "다음 중 <보기>에서 단어를 알맞게 골라 문장을 만드시오. (단, 단어의 형태는 적정히 바꿀 것)\n\n<보기>\nstart, finish, learn, give up, like, hate, mind, hope, wish, avoid\n\n(1) 나는 글쓰기를 좋아한다.\n→ __________"
+   },
+   {
+    "tag": "기타",
+    "type": "sentence",
+    "answer": "I should avoid eating fast food",
+    "number": 21,
+    "question": "(2) 나는 패스트푸드를 먹는 것을 피해야 한다.\n→ __________"
+   },
+   {
+    "tag": "기타",
+    "type": "sentence",
+    "answer": "Don't give up learning something new",
+    "number": 22,
+    "question": "(3) 새로운 무엇인가를 배우는 것을 포기하지 마라.\n→ __________",
+    "acceptedAnswers": [
+     "Do not give up learning something new"
+    ]
+   },
+   {
+    "tag": "subParts",
+    "type": "multi_part",
+    "answer": "hear, writing music, listening to his music",
+    "number": 23,
+    "question": "다음 글을 읽고 빈칸에 알맞은 글을 쓰시오.\n\nBeethoven had difficulty hearing. But he didn't give up, and continued to write music. Now, many people love to listen to his music.\n\n→ Beethoven couldn't __________. However, he didn't give up __________. Now many people enjoy __________.",
+    "subParts": [
+     {
+      "label": "(1)",
+      "answer": "hear"
+     },
+     {
+      "label": "(2)",
+      "answer": "writing music"
+     },
+     {
+      "label": "(3)",
+      "answer": "listening to his music"
+     }
+    ]
+   },
+   {
+    "tag": "subParts",
+    "type": "multi_part",
+    "answer": "playing the piano, to be a pianist, practicing",
+    "number": 24,
+    "question": "Although Lee Heeah has only four fingers, she likes to play the piano. When she was young, she practiced repeatedly to be a pianist.\n\n→ Lee Heeah has only four fingers. However, she enjoys __________. When she was young, she wanted __________ and kept __________ again and again.",
+    "subParts": [
+     {
+      "label": "(1)",
+      "answer": "playing the piano"
+     },
+     {
+      "label": "(2)",
+      "answer": "to be a pianist"
+     },
+     {
+      "label": "(3)",
+      "answer": "practicing"
+     }
+    ]
+   },
+   {
+    "tag": "기타",
+    "type": "sentence",
+    "answer": "inviting me to the party",
+    "number": 25,
+    "question": "다음 괄호 안에 주어진 단어를 서술하여 빈칸에 알맞은 말을 쓰시오.\n\n(1) Thank you for __________.\n(invite me to the party)"
+   },
+   {
+    "tag": "기타",
+    "type": "sentence",
+    "answer": "Reading Harry Potter series",
+    "number": 26,
+    "question": "(2) __________ is very fun.\n(read Harry Potter series)"
+   },
+   {
+    "tag": "빈칸",
+    "type": "short_answer",
+    "answer": "Exercising regularly",
+    "number": 27,
+    "question": "(3) __________ is good for your health. (exercise regularly)"
+   },
+   {
+    "tag": "빈칸",
+    "type": "short_answer",
+    "answer": "watching action movies",
+    "number": 28,
+    "question": "(4) My hobby is __________.\n(watch action movies)"
+   },
+   {
+    "tag": "subParts",
+    "type": "multi_part",
+    "answer": "Sharing, giving",
+    "number": 29,
+    "question": "다음의 친구를 사귈 때 중요한 것들에 대해 생각\n하며, 주어진 단어로 문장을 완성하시오.\n\nQ: What do you think is important for friends to do?\n\nreceive share listen give\n\n13. __________ and __________ advice is important.",
+    "subParts": [
+     {
+      "label": "(1)",
+      "answer": "Sharing"
+     },
+     {
+      "label": "(2)",
+      "answer": "giving"
+     }
+    ]
+   },
+   {
+    "tag": "빈칸",
+    "type": "short_answer",
+    "answer": "Having",
+    "number": 30,
+    "question": "14. __________ common interests is important."
+   },
+   {
+    "tag": "빈칸",
+    "type": "short_answer",
+    "answer": "Listening",
+    "number": 31,
+    "question": "15. __________ to others is important."
+   },
+   {
+    "tag": "영작",
+    "type": "sentence",
+    "answer": "Waking up early is not easy",
+    "number": 32,
+    "question": "다음 쉬어 되는 문장을 연결하여, 동명사를 이용한 문장을 완성하시오.\n\nGet a good grade\nWake up early\nHave good friends\n\nimportant\nnot easy\na good habit\n\nExample: Getting a good grade is not easy.\n\n16. __________",
+    "acceptedAnswers": [
+     "or: a good habit",
+     "Waking up early isn't easy"
+    ]
+   },
+   {
+    "tag": "기타",
+    "type": "sentence",
+    "answer": "Having good friends is important",
+    "number": 33,
+    "question": "17. __________"
+   },
+   {
+    "tag": "빈칸",
+    "type": "short_answer",
+    "answer": "Making new friends",
+    "number": 34,
+    "question": "다음 주어진 단어를 이용하여 문장을 완성하시오.\n\n새로운 친구를 사귀는 것은 쉽지 않다. (make)\n→ __________ is not easy."
+   },
+   {
+    "tag": "빈칸",
+    "type": "short_answer",
+    "answer": "Eating healthy food",
+    "number": 35,
+    "question": "건강한 음식을 먹는 것은 중요하다.\n→ __________ is important."
+   },
+   {
+    "tag": "빈칸",
+    "type": "short_answer",
+    "answer": "Swimming",
+    "number": 36,
+    "question": "강에서 수영하는 것은 위험하다.\n→ __________ in the river is dangerous. (swim)"
+   },
+   {
+    "tag": "빈칸",
+    "type": "short_answer",
+    "answer": "enjoys walking",
+    "number": 37,
+    "question": "다음 우리말과 같도록 괄호 안의 단어를 사용하여 문장을 완성하시오.\n\n• Sora __________ in the park every Sunday.\n(enjoy, walk)\n\nSora는 매주 일요일 공원에서 걷기를 즐긴다."
+   },
+   {
+    "tag": "subParts",
+    "type": "multi_part",
+    "answer": "cook, cooking",
+    "number": 38,
+    "question": "다음 각 문장에서 어색한 부분을 한 곳씩 찾아 바르게 고쳐 쓰시오.\n\n(A) Mark enjoys cook in the park.\n(B) Ride a bicycle with her is exciting.\n(C) Jane told her sister wash her hands.\n\n(A) __________ → __________",
+    "subParts": [
+     {
+      "label": "(1)",
+      "answer": "cook"
+     },
+     {
+      "label": "(2)",
+      "answer": "cooking"
+     }
+    ]
+   },
+   {
+    "tag": "subParts",
+    "type": "multi_part",
+    "answer": "Ride, Riding",
+    "number": 39,
+    "question": "(B) __________ → __________",
+    "subParts": [
+     {
+      "label": "(1)",
+      "answer": "Ride"
+     },
+     {
+      "label": "(2)",
+      "answer": "Riding"
+     }
+    ]
+   },
+   {
+    "tag": "subParts",
+    "type": "multi_part",
+    "answer": "wash, to wash",
+    "number": 40,
+    "question": "(C) __________ → __________",
+    "subParts": [
+     {
+      "label": "(1)",
+      "answer": "wash"
+     },
+     {
+      "label": "(2)",
+      "answer": "to wash"
+     }
+    ]
+   },
+   {
+    "tag": "기타",
+    "type": "sentence",
+    "answer": "keeping his room clean",
+    "number": 41,
+    "question": "다음 표를 보고 Minho에 관한 글을 완성하시오.\n\nHis name is Minho.\nHis hobby is reading books.\nHe is good at __________. (1)__________.\nHe enjoys __________ (2)__________.\nCleaning his room is his work.\n\n(1) __________"
+   },
+   {
+    "tag": "빈칸",
+    "type": "short_answer",
+    "answer": "cleaning his room",
+    "number": 42,
+    "question": "(2) __________"
+   }
+  ],
+  "answer_key": [
+   "playing",
+   "eating",
+   "going",
+   "talking",
+   "enjoy learning",
+   "enjoy learning math",
+   "finished doing his homework",
+   "Taking pictures is interesting",
+   "watching TV and playing computer games",
+   "traveling and cooking",
+   "listening to music and playing computer games",
+   "mind closing",
+   "enjoys cleaning",
+   "enjoys watching",
+   "English and math",
+   "eating",
+   "playing, soccer",
+   "drinking",
+   "watching",
+   "I like writing",
+   "I should avoid eating fast food",
+   "Don't give up learning something new",
+   "hear, writing music, listening to his music",
+   "playing the piano, to be a pianist, practicing",
+   "inviting me to the party",
+   "Reading Harry Potter series",
+   "Exercising regularly",
+   "watching action movies",
+   "Sharing, giving",
+   "Having",
+   "Listening",
+   "Waking up early is not easy",
+   "Having good friends is important",
+   "Making new friends",
+   "Eating healthy food",
+   "Swimming",
+   "enjoys walking",
+   "cook, cooking",
+   "Ride, Riding",
+   "wash, to wash",
+   "keeping his room clean",
+   "cleaning his room"
+  ]
+ },
+ "naesin_problem_sheets_89be0f00-2631-49c1-b1f2-481d37c9cd7a": {
+  "questions": [
+   {
+    "tag": "빈칸",
+    "type": "short_answer",
+    "answer": "playing",
+    "number": 1,
+    "question": "다음 <보기>에서 알맞은 단어를 골라 대화를 완성하시오. (필요시 단어를 변형할 것)\n\n<보기> play / eat / talk / go\n\n(1) A: What does he do in his free time?\nB: He enjoys __________ with a ball."
+   },
+   {
+    "tag": "빈칸",
+    "type": "short_answer",
+    "answer": "eating",
+    "number": 2,
+    "question": "다음 <보기>에서 알맞은 단어를 골라 대화를 완성하시오. (필요시 단어를 변형할 것)\n\n<보기> play / eat / talk / go\n\n(2) A: How long does it take for him to eat?\nB: He always finishes __________ in 2 minutes."
+   },
+   {
+    "tag": "빈칸",
+    "type": "short_answer",
+    "answer": "going",
+    "number": 3,
+    "question": "다음 <보기>에서 알맞은 단어를 골라 대화를 완성하시오. (필요시 단어를 변형할 것)\n\n<보기> play / eat / talk / go\n\n(3) A: What is your pet's favorite activity?\nB: My dog Mongmong loves __________ for a walk."
+   },
+   {
+    "tag": "빈칸",
+    "type": "short_answer",
+    "answer": "talking",
+    "number": 4,
+    "question": "다음 <보기>에서 알맞은 단어를 골라 대화를 완성하시오. (필요시 단어를 변형할 것)\n\n<보기> play / eat / talk / go\n\n(4) A: I'm studying for the test tomorrow. Can you stop __________?\nB: Sorry."
+   },
+   {
+    "tag": "빈칸",
+    "type": "short_answer",
+    "answer": "enjoy learning",
+    "number": 5,
+    "question": "다음 괄호 안에 주어진 단어로 문장의 빈칸을 완성하시오.\n\nThe boy and girl __________ English.\n(enjoy, learn)"
+   },
+   {
+    "tag": "오류수정",
+    "type": "sentence",
+    "answer": "enjoy learning math",
+    "number": 6,
+    "question": "다음 각각의 문장에서 어떤상 어색한 부분을 찾아 바르게 고치시오.\n\n(1) Tom and David enjoy to learn math."
+   },
+   {
+    "tag": "기타",
+    "type": "sentence",
+    "answer": "finished doing his homework",
+    "number": 7,
+    "question": "(2) Kevin finsihed do his homework."
+   },
+   {
+    "tag": "기타",
+    "type": "sentence",
+    "answer": "Taking pictures is interesting",
+    "number": 8,
+    "question": "(take pictures / interesting)\n→ __________"
+   },
+   {
+    "tag": "빈칸",
+    "type": "short_answer",
+    "answer": "mind closing",
+    "number": 9,
+    "question": "다음 <보기>의 단어 중 알맞은 것을 두 가지 골라 문장을 완성하시오. (필수어 변형 가능)\n\n<보기>\nfinish mind watch enjoy clean close\n\n(1) I don't __________ __________ the window. It's up to you.\n※ 두 단어를 띄어쓰기로 구분하여 입력 (예: enjoy swimming)"
+   },
+   {
+    "tag": "빈칸",
+    "type": "short_answer",
+    "answer": "enjoys cleaning",
+    "number": 10,
+    "question": "(2) Suzy __________ __________ her room, so it's always clean.\n※ 두 단어를 띄어쓰기로 구분하여 입력 (예: enjoy swimming)"
+   },
+   {
+    "tag": "빈칸",
+    "type": "short_answer",
+    "answer": "enjoys watching",
+    "number": 11,
+    "question": "(3) Jiho __________ __________ baseball games. Now it's time to study!\n※ 두 단어를 띄어쓰기로 구분하여 입력 (예: enjoy swimming)"
+   },
+   {
+    "tag": "빈칸",
+    "type": "short_answer",
+    "answer": "English and math",
+    "number": 12,
+    "question": "다음 미니에 대한 정보를 참고하여 문장을 완성하시오.\n\nstudy: English, math       play: tennis, soccer\nwatch: movies              drink: orange juice\neat: noodles\n\n(1) Mina loves studying __________ and __________."
+   },
+   {
+    "tag": "빈칸",
+    "type": "short_answer",
+    "answer": "eating",
+    "number": 13,
+    "question": "(2) She likes __________ noodles."
+   },
+   {
+    "tag": "subParts",
+    "type": "multi_part",
+    "answer": "playing, soccer",
+    "number": 14,
+    "question": "(3) She enjoys __________ tennis and __________.",
+    "subParts": [
+     {
+      "label": "(1)",
+      "answer": "playing"
+     },
+     {
+      "label": "(2)",
+      "answer": "soccer"
+     }
+    ]
+   },
+   {
+    "tag": "빈칸",
+    "type": "short_answer",
+    "answer": "drinking",
+    "number": 15,
+    "question": "(4) She likes __________ orange juice."
+   },
+   {
+    "tag": "빈칸",
+    "type": "short_answer",
+    "answer": "watching",
+    "number": 16,
+    "question": "(5) She enjoys __________ movies."
+   },
+   {
+    "tag": "빈칸",
+    "type": "short_answer",
+    "answer": "I like writing",
+    "number": 17,
+    "question": "다음 중 <보기>에서 단어를 알맞게 골라 문장을 만드시오. (단, 단어의 형태는 적정히 바꿀 것)\n\n<보기>\nstart, finish, learn, give up, like, hate, mind, hope, wish, avoid\n\n(1) 나는 글쓰기를 좋아한다.\n→ __________"
+   },
+   {
+    "tag": "기타",
+    "type": "sentence",
+    "answer": "I should avoid eating fast food",
+    "number": 18,
+    "question": "(2) 나는 패스트푸드를 먹는 것을 피해야 한다.\n→ __________"
+   },
+   {
+    "tag": "기타",
+    "type": "sentence",
+    "answer": "Don't give up learning something new",
+    "number": 19,
+    "question": "(3) 새로운 무엇인가를 배우는 것을 포기하지 마라.\n→ __________",
+    "acceptedAnswers": [
+     "Do not give up learning something new"
+    ]
+   },
+   {
+    "tag": "subParts",
+    "type": "multi_part",
+    "answer": "hear, writing music, listening to his music",
+    "number": 20,
+    "question": "다음 글을 읽고 빈칸에 알맞은 글을 쓰시오.\n\nBeethoven had difficulty hearing. But he didn't give up, and continued to write music. Now, many people love to listen to his music.\n\n→ Beethoven couldn't __________. However, he didn't give up __________. Now many people enjoy __________.",
+    "subParts": [
+     {
+      "label": "(1)",
+      "answer": "hear"
+     },
+     {
+      "label": "(2)",
+      "answer": "writing music"
+     },
+     {
+      "label": "(3)",
+      "answer": "listening to his music"
+     }
+    ]
+   },
+   {
+    "tag": "subParts",
+    "type": "multi_part",
+    "answer": "playing the piano, to be a pianist, practicing",
+    "number": 21,
+    "question": "Although Lee Heeah has only four fingers, she likes to play the piano. When she was young, she practiced repeatedly to be a pianist.\n\n→ Lee Heeah has only four fingers. However, she enjoys __________. When she was young, she wanted __________ and kept __________ again and again.",
+    "subParts": [
+     {
+      "label": "(1)",
+      "answer": "playing the piano"
+     },
+     {
+      "label": "(2)",
+      "answer": "to be a pianist"
+     },
+     {
+      "label": "(3)",
+      "answer": "practicing"
+     }
+    ]
+   },
+   {
+    "tag": "기타",
+    "type": "sentence",
+    "answer": "inviting me to the party",
+    "number": 22,
+    "question": "다음 괄호 안에 주어진 단어를 서술하여 빈칸에 알맞은 말을 쓰시오.\n\n(1) Thank you for __________.\n(invite me to the party)"
+   },
+   {
+    "tag": "기타",
+    "type": "sentence",
+    "answer": "Reading Harry Potter series",
+    "number": 23,
+    "question": "(2) __________ is very fun.\n(read Harry Potter series)"
+   },
+   {
+    "tag": "빈칸",
+    "type": "short_answer",
+    "answer": "Exercising regularly",
+    "number": 24,
+    "question": "(3) __________ is good for your health. (exercise regularly)"
+   },
+   {
+    "tag": "빈칸",
+    "type": "short_answer",
+    "answer": "watching action movies",
+    "number": 25,
+    "question": "(4) My hobby is __________.\n(watch action movies)"
+   },
+   {
+    "tag": "subParts",
+    "type": "multi_part",
+    "answer": "Giving, receiving",
+    "number": 26,
+    "question": "다음의 친구를 사귈 때 중요한 것들에 대해 생각\n하며, 주어진 단어로 문장을 완성하시오.\n\nQ: What do you think is important for friends to do?\n\nreceive share listen give\n\n13. __________ and __________ advice is important.",
+    "subParts": [
+     {
+      "label": "(1)",
+      "answer": "Giving",
+      "acceptedAnswers": [
+       "Receiving"
+      ]
+     },
+     {
+      "label": "(2)",
+      "answer": "receiving",
+      "acceptedAnswers": [
+       "giving"
+      ]
+     }
+    ],
+    "acceptedAnswers": [
+     "Receiving, giving",
+     "Giving and receiving",
+     "Receiving and giving"
+    ]
+   },
+   {
+    "tag": "빈칸",
+    "type": "short_answer",
+    "answer": "Sharing",
+    "number": 27,
+    "question": "14. __________ common interests is important."
+   },
+   {
+    "tag": "빈칸",
+    "type": "short_answer",
+    "answer": "Listening",
+    "number": 28,
+    "question": "15. __________ to others is important."
+   },
+   {
+    "tag": "영작",
+    "type": "sentence",
+    "answer": "Waking up early is a good habit",
+    "number": 29,
+    "question": "다음 쉬어 되는 문장을 연결하여, 동명사를 이용한 문장을 완성하시오.\n\nGet a good grade\nWake up early\nHave good friends\n\nimportant\nnot easy\na good habit\n\nExample: Getting a good grade is not easy.\n\n16. __________",
+    "acceptedAnswers": [
+     "Having good friends is important"
+    ]
+   },
+   {
+    "tag": "기타",
+    "type": "sentence",
+    "answer": "Having good friends is important",
+    "number": 30,
+    "question": "17. __________"
+   },
+   {
+    "tag": "빈칸",
+    "type": "short_answer",
+    "answer": "Making new friends",
+    "number": 31,
+    "question": "다음 주어진 단어를 이용하여 문장을 완성하시오.\n\n새로운 친구를 사귀는 것은 쉽지 않다. (make)\n→ __________ is not easy."
+   },
+   {
+    "tag": "빈칸",
+    "type": "short_answer",
+    "answer": "Eating healthy food",
+    "number": 32,
+    "question": "건강한 음식을 먹는 것은 중요하다.\n→ __________ is important."
+   },
+   {
+    "tag": "빈칸",
+    "type": "short_answer",
+    "answer": "Swimming",
+    "number": 33,
+    "question": "강에서 수영하는 것은 위험하다.\n→ __________ in the river is dangerous. (swim)"
+   },
+   {
+    "tag": "빈칸",
+    "type": "short_answer",
+    "answer": "enjoys walking",
+    "number": 34,
+    "question": "다음 우리말과 같도록 괄호 안의 단어를 사용하여 문장을 완성하시오.\n\n• Sora __________ in the park every Sunday.\n(enjoy, walk)\n\nSora는 매주 일요일 공원에서 걷기를 즐긴다."
+   },
+   {
+    "tag": "subParts",
+    "type": "multi_part",
+    "answer": "cook, cooking",
+    "number": 35,
+    "question": "다음 각 문장에서 어색한 부분을 한 곳씩 찾아 바르게 고쳐 쓰시오.\n\n(A) Mark enjoys cook in the park.\n(B) Ride a bicycle with her is exciting.\n(C) Jane told her sister wash her hands.\n\n(A) __________ → __________",
+    "subParts": [
+     {
+      "label": "(1)",
+      "answer": "cook"
+     },
+     {
+      "label": "(2)",
+      "answer": "cooking"
+     }
+    ]
+   },
+   {
+    "tag": "subParts",
+    "type": "multi_part",
+    "answer": "Ride, Riding",
+    "number": 36,
+    "question": "(B) __________ → __________",
+    "subParts": [
+     {
+      "label": "(1)",
+      "answer": "Ride"
+     },
+     {
+      "label": "(2)",
+      "answer": "Riding"
+     }
+    ]
+   },
+   {
+    "tag": "subParts",
+    "type": "multi_part",
+    "answer": "wash, to wash",
+    "number": 37,
+    "question": "(C) __________ → __________",
+    "subParts": [
+     {
+      "label": "(1)",
+      "answer": "wash"
+     },
+     {
+      "label": "(2)",
+      "answer": "to wash"
+     }
+    ]
+   }
+  ],
+  "answer_key": [
+   "playing",
+   "eating",
+   "going",
+   "talking",
+   "enjoy learning",
+   "enjoy learning math",
+   "finished doing his homework",
+   "Taking pictures is interesting",
+   "mind closing",
+   "enjoys cleaning",
+   "enjoys watching",
+   "English and math",
+   "eating",
+   "playing, soccer",
+   "drinking",
+   "watching",
+   "I like writing",
+   "I should avoid eating fast food",
+   "Don't give up learning something new",
+   "hear, writing music, listening to his music",
+   "playing the piano, to be a pianist, practicing",
+   "inviting me to the party",
+   "Reading Harry Potter series",
+   "Exercising regularly",
+   "watching action movies",
+   "Giving, receiving",
+   "Sharing",
+   "Listening",
+   "Waking up early is a good habit",
+   "Having good friends is important",
+   "Making new friends",
+   "Eating healthy food",
+   "Swimming",
+   "enjoys walking",
+   "cook, cooking",
+   "Ride, Riding",
+   "wash, to wash"
+  ]
+ },
+ "naesin_problem_sheets_2afe8533-9a7f-4b30-a404-1de6cfffd122": {
+  "questions": [
+   {
+    "tag": "빈칸",
+    "type": "short_answer",
+    "answer": "playing",
+    "number": 1,
+    "question": "다음 <보기>에서 알맞은 단어를 골라 대화를 완성하시오. (필요시 단어를 변형할 것)\n\n<보기> play / eat / talk / go\n\n(1) A: What does he do in his free time?\nB: He enjoys __________ with a ball."
+   },
+   {
+    "tag": "빈칸",
+    "type": "short_answer",
+    "answer": "eating",
+    "number": 2,
+    "question": "다음 <보기>에서 알맞은 단어를 골라 대화를 완성하시오. (필요시 단어를 변형할 것)\n\n<보기> play / eat / talk / go\n\n(2) A: How long does it take for him to eat?\nB: He always finishes __________ in 2 minutes."
+   },
+   {
+    "tag": "빈칸",
+    "type": "short_answer",
+    "answer": "going",
+    "number": 3,
+    "question": "다음 <보기>에서 알맞은 단어를 골라 대화를 완성하시오. (필요시 단어를 변형할 것)\n\n<보기> play / eat / talk / go\n\n(3) A: What is your pet's favorite activity?\nB: My dog Mongmong loves __________ for a walk."
+   },
+   {
+    "tag": "빈칸",
+    "type": "short_answer",
+    "answer": "talking",
+    "number": 4,
+    "question": "다음 <보기>에서 알맞은 단어를 골라 대화를 완성하시오. (필요시 단어를 변형할 것)\n\n<보기> play / eat / talk / go\n\n(4) A: I'm studying for the test tomorrow. Can you stop __________?\nB: Sorry."
+   },
+   {
+    "answer": "enjoy learning",
+    "number": 5,
+    "question": "다음 괄호 안에 주어진 단어로 문장의 빈칸을 완성하시오.\n\nThe boy and girl __________ English.\n(enjoy, learn)"
+   },
+   {
+    "answer": "enjoy learning math",
+    "number": 6,
+    "question": "다음 각각의 문장에서 어떤상 어색한 부분을 찾아 바르게 고치시오.\n\n(1) Tom and David enjoy to learn math."
+   },
+   {
+    "answer": "finished doing his homework",
+    "number": 7,
+    "question": "(2) Kevin finsihed do his homework."
+   },
+   {
+    "answer": "Taking pictures is interesting",
+    "number": 8,
+    "question": "(take pictures / interesting)\n→ __________"
+   },
+   {
+    "answer": "watching TV and playing computer games",
+    "number": 9,
+    "question": "다음 표를 보고 예문과 같이 윤장을 완성하시오.\n\nex. Julie enjoys listening to music and traveling.\n\n(1) Damin enjoys __________."
+   },
+   {
+    "answer": "traveling and cooking",
+    "number": 10,
+    "question": "(2) Matt enjoys __________."
+   },
+   {
+    "answer": "listening to music and playing computer games",
+    "number": 11,
+    "question": "(3) Junsu enjoys __________."
+   },
+   {
+    "answer": "mind closing",
+    "number": 12,
+    "question": "다음 <보기>의 단어 중 알맞은 것을 두 가지 골라 문장을 완성하시오. (필수어 변형 가능)\n\n<보기>\nfinish mind watch enjoy clean close\n\n(1) I don't __________ __________ the window. It's up to you.\n※ 두 단어를 띄어쓰기로 구분하여 입력 (예: enjoy swimming)"
+   },
+   {
+    "answer": "enjoys cleaning",
+    "number": 13,
+    "question": "(2) Suzy __________ __________ her room, so it's always clean.\n※ 두 단어를 띄어쓰기로 구분하여 입력 (예: enjoy swimming)"
+   },
+   {
+    "answer": "enjoys watching",
+    "number": 14,
+    "question": "(3) Jiho __________ __________ baseball games. Now it's time to study!\n※ 두 단어를 띄어쓰기로 구분하여 입력 (예: enjoy swimming)"
+   },
+   {
+    "answer": "English and math",
+    "number": 15,
+    "question": "다음 미니에 대한 정보를 참고하여 문장을 완성하시오.\n\nstudy: English, math       play: tennis, soccer\nwatch: movies              drink: orange juice\neat: noodles\n\n(1) Mina loves studying __________ and __________."
+   },
+   {
+    "answer": "eating",
+    "number": 16,
+    "question": "(2) She likes __________ noodles."
+   },
+   {
+    "answer": "playing, soccer",
+    "number": 17,
+    "question": "(3) She enjoys __________ tennis and __________.",
+    "subParts": [
+     {
+      "label": "(1)",
+      "answer": "playing"
+     },
+     {
+      "label": "(2)",
+      "answer": "soccer"
+     }
+    ]
+   },
+   {
+    "answer": "drinking",
+    "number": 18,
+    "question": "(4) She likes __________ orange juice."
+   },
+   {
+    "answer": "watching",
+    "number": 19,
+    "question": "(5) She enjoys __________ movies."
+   },
+   {
+    "answer": "I like writing",
+    "number": 20,
+    "question": "다음 중 <보기>에서 단어를 알맞게 골라 문장을 만드시오. (단, 단어의 형태는 적정히 바꿀 것)\n\n<보기>\nstart, finish, learn, give up, like, hate, mind, hope, wish, avoid\n\n(1) 나는 글쓰기를 좋아한다.\n→ __________"
+   },
+   {
+    "answer": "I should avoid eating fast food",
+    "number": 21,
+    "question": "(2) 나는 패스트푸드를 먹는 것을 피해야 한다.\n→ __________"
+   },
+   {
+    "answer": "Don't give up learning something new",
+    "number": 22,
+    "question": "(3) 새로운 무엇인가를 배우는 것을 포기하지 마라.\n→ __________",
+    "acceptedAnswers": [
+     "Do not give up learning something new"
+    ]
+   },
+   {
+    "answer": "hear, writing music, listening to his music",
+    "number": 23,
+    "question": "다음 글을 읽고 빈칸에 알맞은 글을 쓰시오.\n\nBeethoven had difficulty hearing. But he didn't give up, and continued to write music. Now, many people love to listen to his music.\n\n→ Beethoven couldn't __________. However, he didn't give up __________. Now many people enjoy __________.",
+    "subParts": [
+     {
+      "label": "(1)",
+      "answer": "hear"
+     },
+     {
+      "label": "(2)",
+      "answer": "writing music"
+     },
+     {
+      "label": "(3)",
+      "answer": "listening to his music"
+     }
+    ]
+   },
+   {
+    "answer": "playing the piano, to be a pianist, practicing",
+    "number": 24,
+    "question": "Although Lee Heeah has only four fingers, she likes to play the piano. When she was young, she practiced repeatedly to be a pianist.\n\n→ Lee Heeah has only four fingers. However, she enjoys __________. When she was young, she wanted __________ and kept __________ again and again.",
+    "subParts": [
+     {
+      "label": "(1)",
+      "answer": "playing the piano"
+     },
+     {
+      "label": "(2)",
+      "answer": "to be a pianist"
+     },
+     {
+      "label": "(3)",
+      "answer": "practicing"
+     }
+    ]
+   },
+   {
+    "answer": "inviting me to the party",
+    "number": 25,
+    "question": "다음 괄호 안에 주어진 단어를 서술하여 빈칸에 알맞은 말을 쓰시오.\n\n(1) Thank you for __________.\n(invite me to the party)"
+   }
+  ],
+  "answer_key": [
+   "playing",
+   "eating",
+   "going",
+   "talking",
+   "enjoy learning",
+   "enjoy learning math",
+   "finished doing his homework",
+   "Taking pictures is interesting",
+   "watching TV and playing computer games",
+   "traveling and cooking",
+   "listening to music and playing computer games",
+   "mind closing",
+   "enjoys cleaning",
+   "enjoys watching",
+   "English and math",
+   "eating",
+   "playing, soccer",
+   "drinking",
+   "watching",
+   "I like writing",
+   "I should avoid eating fast food",
+   "Don't give up learning something new",
+   "hear, writing music, listening to his music",
+   "playing the piano, to be a pianist, practicing",
+   "inviting me to the party"
+  ]
+ },
+ "naesin_templates_a96a4fa1-02cc-4bb0-98c8-4ba96df229ed": {
+  "questions": [
+   {
+    "tag": "기타",
+    "type": "sentence",
+    "answer": "going to go swimming / going to have a club meeting / I'm going to visit my grandma / I'm going to go out for dinner",
+    "number": 1,
+    "question": "다음 표의 내용을 바탕으로 주어진 빈 칸에 알맞은 글을 쓰시오.\n\nSaturday: In the morning - go swimming, In the afternoon - have a club meeting\nSunday: In the morning - visit my grandma, In the afternoon - go out for dinner\n\nI have many things to do this weekend. On Saturday morning, I'm _______ _______ _______ with my little brother. In the afternoon, I _______ _______ _______ with my club members. On Sunday morning, _______ _______ _______ with my family. In the afternoon, _______ _______ _______ with Grandma and my family."
+   },
+   {
+    "tag": "기타",
+    "type": "sentence",
+    "answer": "She is going to have a snack",
+    "number": 2,
+    "question": "(그림: 소녀가 방과 후에 과자를 먹고 있음)\n\nQ: What is she going to do after school?"
+   },
+   {
+    "tag": "기타",
+    "type": "sentence",
+    "answer": "He is going to ride a bike",
+    "number": 3,
+    "question": "(그림: 소년이 자전거를 타고 있음)\n\nQ: What is he going to do after school?"
+   },
+   {
+    "tag": "단어배열",
+    "type": "sentence",
+    "answer": "(A) He is going to eat / (B) She is going to play the piano",
+    "number": 4,
+    "question": "다음 그림 (A), (B)와 각각 일치하도록 주어진 단어를 사용하여 우리, 동사가 포함된 영어 문장으로 쓰시오.\n(그림: 소년이 아이스크림을 먹고 있음)\n\n(A) Q: Is he going to play soccer?\nA: No, he isn't.\n_______ _______ _______ (eat)\n\n(그림: 소녀가 피아노를 연주하고 있음)\n(B) Q: What is she going to do?\nA: _______ _______ _______ (play)"
+   },
+   {
+    "tag": "기타",
+    "type": "sentence",
+    "answer": "1 am going to walk my dog / 2 is going to go shopping / 3 are going to play baseball",
+    "number": 5,
+    "question": "다음은 Sujin과 내가 이번 주말에 할 일에 관한 표이다. 표를 바탕으로 ①, ②, ③에 들어갈 말을 쓰시오.\n\nSaturday: In the morning - walk my dog, In the afternoon - go shopping\nSunday: In the morning - play baseball\n\nWe have many things to do this weekend. On Saturday morning, I ①_________. In the afternoon, Sujin ②_________. On Sunday morning, Sujin and I ③_________.\n\n단, \"Be going to\"를 사용할 것"
+   },
+   {
+    "tag": "기타",
+    "type": "sentence",
+    "answer": "is going to clean",
+    "number": 6,
+    "question": "다음 그림의 상황과 맞도록 문장의 빈칸을 완성하여 쓰시오. (그림: 소년이 청소하고 있음)\n\nMinjun _______ _______ to _______ the living room this weekend."
+   },
+   {
+    "tag": "기타",
+    "type": "sentence",
+    "answer": "She is going to go shopping",
+    "number": 7,
+    "question": "Q: What is she going to do this weekend?  (그림: 소녀가 쇼핑하고 있음)\nA: _______ _______ _______ (6 단어)"
+   },
+   {
+    "tag": "기타",
+    "type": "sentence",
+    "answer": "He is going to ride a bike",
+    "number": 8,
+    "question": "Q: What is he going to do after school?  (그림: 소년이 자전거를 타고 있음)\nA: _______ _______ _______ (7 단어)"
+   },
+   {
+    "tag": "영작",
+    "type": "sentence",
+    "answer": "What are you going to do this weekend?",
+    "number": 9,
+    "question": "다음 주어진 우리말을 영작하시오. (단, be going to를 활용할 것)\n\n너는 이번 주말에 무엇을 할 예정이니?"
+   },
+   {
+    "tag": "영작",
+    "type": "sentence",
+    "answer": "Mina is going to go to the movies on Monday. / Mina is going to play tennis on Wednesday. / Mina is going to swim on Thursday. / Mina is going to visit her grandmother on Saturday.",
+    "number": 10,
+    "question": "다음은 미나의 이번 주 계획표이다. 표를 보고 미나의 계획 중 하나를 선택하여 영어로 쓰시오.\n\nMon. - go to the movies \nTue. - X\nWed. - play tennis\nThu. - swim\nFri. - X \nSat. - visit grandmother\nSun. - X\n(단, 요일을 꼭 쓰고, be동사를 꼭 활용할 것)\n\n→ Mina _________"
+   },
+   {
+    "tag": "다중빈칸",
+    "type": "multi_part",
+    "answer": "(1) What are you going to do this weekend? / (2) I am going to go shopping with my mom. / (3) What is your sister going to do this weekend? / (4) She is going to do her homework.",
+    "number": 11,
+    "question": "다음은 수미와 수미의 여동생이 이번 주말에 할 일로 제시한 내용이다. <조건>에 맞게 대화를 완성하시오.\n\n수미: 엄마와 쇼핑하러 가기\n수미의 여동생: 숙제하기\n\n<조건>\n(1)~(4) 모두 \"be going to\"를 활용하여 완전한 문장으로 쓰시오.\n\nKate: (1) 이번 주말에 무엇을 할 거니?\nSumi: (2)\nKate: (3) 이번 주말에 네 여동생은 무엇을 할 거니?\nSumi: (4)"
+   },
+   {
+    "tag": "기타",
+    "type": "sentence",
+    "answer": "am going to play basketball",
+    "number": 12,
+    "question": "다음 그림을 보고 대화의 빈칸에 알맞은 말을 쓰시오. (그림: 소년들이 농구를 하는 사진)\n\nQ: What are you going to do this afternoon?\nA: I _______ _______ _______ _______ with my friends."
+   },
+   {
+    "tag": "기타",
+    "type": "sentence",
+    "answer": "We're going to stay there for 3 days",
+    "number": 13,
+    "question": "다음 Mike의 캠핑 계획표를 보고 대화를 완성하시오.\n\nMike's Camping Plan\n기간: Sep. 27 - Sep. 29\n장소: 강원도\n준비물: 침낭, 야채, 고기, 편안한 신발, 외투\n\nYuna: Mike, what are you going to do this weekend?\nMike: I'm going camping to Sokcho, Gangwon-do with my friends.\nYuna: How long are you going to stay there?\nMike: We're _________\nYuna: What do you need to bring?\nMike: We need to bring a sleeping bag, some vegetables and meat for our dinner, and a pair of comfortable shoes, and a jacket.",
+    "acceptedAnswers": [
+     "from September 27 to September 29"
+    ]
+   },
+   {
+    "tag": "단어배열",
+    "type": "sentence",
+    "answer": "What are you going to do this weekend?",
+    "number": 14,
+    "question": "다음 우리말과 같도록 괄호 안에 주어진 단어를 순서대로 배열하여 문장을 완성하시오.16)\n\n(1) 이번 주 주말에 넌 뭘 할 예정이니?\n→ _______________\n(are, what, do, going, you, this, to, weekend)"
+   },
+   {
+    "tag": "영작",
+    "type": "sentence",
+    "answer": "I am going to visit Europe with my family.",
+    "number": 15,
+    "question": "다음 주어진 질문에 대한 답을 괄호 안에 주어진 단어들로 문장으로 쓸 것)17)\n\nWhat are you going to do during the summer?\n→ _______________\n(visit, Europe, my, family)"
+   },
+   {
+    "tag": "단어배열",
+    "type": "sentence",
+    "answer": "He is going to take a trip to London.",
+    "number": 16,
+    "question": "다음 괄호 안에 주어진 단어를 이용하여 질문에 영어로 답하시오. (단, 주어, 동사가 있는 문장으로 쓸 것)\n\nQ: Where is he going to take a trip?\nA: ___________________________ (London)"
+   },
+   {
+    "tag": "영작",
+    "type": "sentence",
+    "answer": "Are you going to stay home?",
+    "number": 17,
+    "question": "다음 빈칸에 알맞은 말을 쓰시오.19)\n\nA: _______________?\nB: No, I'm not. I'm going to stay home."
+   },
+   {
+    "tag": "다중빈칸",
+    "type": "multi_part",
+    "answer": "(1) She is going to feed the fish.\n(2) They are going to practice yoga after school.\n(3) He is going to wash his car.",
+    "number": 18,
+    "question": "다음 문장을 'be going to'를 사용하여 미래의 뜻이 되도록 바꿔 쓰시오.20)\n\n(1) She feeds the fish.\n→ _______________\n\n(2) They practice yoga after school.\n→ _______________\n\n(3) He washes his car.\n→ _______________"
+   },
+   {
+    "tag": "다중빈칸",
+    "type": "multi_part",
+    "answer": "(1) She is going to take Chinese lessons.\n(2) He is going to visit his uncle's house.",
+    "number": 19,
+    "question": "다음 주어진 일정을 보고 문장을 완성하시오.21)\n\n| Name | Day | Things to do |\n| Jane | Fri. | take Chinese lessons |\n| Tom | Sat. | visit his uncle's house |\n\n(1) What is Jane going to do this Friday?\n→ She _______________.\n\n(2) What is Tom going to do this Saturday?\n→ He _______________."
+   },
+   {
+    "tag": "다중빈칸",
+    "type": "multi_part",
+    "answer": "(1) going to stay (2) am going to watch (3) going to do",
+    "number": 20,
+    "question": "다음 <보기>에서 적절한 단어를 골라 대화를 완성하시오. (단, be going to 구문을 활용할 것)22)\n\n<보기>\ndo    stay    watch\n\nA: Are you (1)___________ at home this weekend?\nB: No, I'm not. I (2)___________ a movie with Suji.\nA: What are you (3)___________ after that?\nB: We are going to eat something delicious."
+   },
+   {
+    "tag": "영작",
+    "type": "sentence",
+    "answer": "I am going to visit Bulguksa.",
+    "number": 21,
+    "question": "다음 표를 보고 질문에 알맞은 대답을 영어문장으로 쓰시오. (단, 반드시 be going to 구문을 이용할 것)23)\n\n| When | Where / What |\n| 1st Day | Visit Gyeongju National Museum |\n| 2nd Day | Go Hiking on Mt. Munbok |\n| 3rd Day | Visit Bulguksa |\n\nQ: What are you going to do on the 3rd Day?\nA: _______________"
+   },
+   {
+    "tag": "영작",
+    "type": "sentence",
+    "answer": "He is going to visit his grandmother in Busan.",
+    "number": 22,
+    "question": "다음 글을 읽고 물음에 대한 대답을 완전한 문장으로 쓰시오.24)\n\nMinsu lives in Seoul. His grandmother lives in Busan. She wants to see him. He is free this weekend. So he will visit her this Saturday.\n\nQ: What is Minsu going to do this weekend?\nA: _______________"
+   },
+   {
+    "tag": "다중빈칸",
+    "type": "multi_part",
+    "answer": "(1) He is going to eat pizza.\n(2) He is going to play soccer.",
+    "number": 23,
+    "question": "다음 민수와 지우의 주말 계획표를 보고 질문에 답하시오. (단, 빈칸 앞뒤 쓸 것)25)\n\n| Minsu | Jiwoo |\n| [pizza image] | [soccer ball image] |\n\n(1)\nQ: What is Minsu going to do this weekend?\nA: He is ___ ___ ___ ___.\n\n(2)\nQ: What is Jiwoo going to do this weekend?\nA: He is ___ ___ ___ ___."
+   },
+   {
+    "tag": "다중빈칸",
+    "type": "multi_part",
+    "answer": "(1) am going to buy a present\n(2) is going to take pictures\n(3) are going to cook",
+    "number": 24,
+    "question": "다음 표를 보고 'be going to'를 사용하여 빈칸을 완성하시오.26)\n\n| Party plans for Jiwon |\n| I : 선물 사기 |\n| Hojin : 사진 찍기 |\n| Jihun and Minju : 요리하기 |\n\nThis Saturday is Jiwon's birthday. We will prepare a birthday party for her. I (1)_______________. Hojin (2)_______________ Jihun and Minju (3)_______________."
+   },
+   {
+    "tag": "다중빈칸",
+    "type": "multi_part",
+    "answer": "(1) is going to make cookies\n(2) is going to play soccer",
+    "number": 25,
+    "question": "다음은 James의 다음 주 계획표의 일부이다. 빈칸 (1), (2)에 들어갈 말을 주어진 조건에 맞게 영작하시오.27)\n\n| Monday | Tuesday | Wednesday | Thursday |\n| make cookies | walk my dog | play soccer | go shopping |\n\nJames has many things to do after school this week. On Monday, he (1)_______________. On Wednesday, he (2)_______________.\n\n<조건>\n• 단어 'be'와 'going'을 반드시 포함할 것\n• 필요시, 주어진 단어 변형 및 다른 단어를 첨가할 수 있음"
+   },
+   {
+    "tag": "단어배열",
+    "type": "sentence",
+    "answer": "is going to make cookies",
+    "number": 26,
+    "question": "다음 표를 보고 질문에 알맞은 응답을 <조건>에 맞게 쓰시오.28)\n\n| Who | What | When |\n| Susan | have a birthday party | this weekend |\n| Tom | make cookies | this weekend |\n\n<보기>\nA: What is Susan going to do this weekend?\nB: She is going to have a birthday party this weekend.\n\n<조건>\n• 표의 내용과 일치할 것.\n• 빈칸에 알맞은 말을 쓸 것.\n\nA: What is Tom going to do this weekend?\nB: He ___________________ this weekend."
+   },
+   {
+    "tag": "다중빈칸",
+    "type": "multi_part",
+    "answer": "(1) I am going to take a rest.\n(2) She is going to have a sandwich.",
+    "number": 27,
+    "question": "다음 문장을 참고하여 자연스러운 문장이 되도록 <조건>에 맞게 빈칸을 완성하시오.29)\n\nMinsu is thirsty. He is going to drink some water.\n\n<보기>\nclean the house        have a sandwich\ntake a rest            watch a movie\n\n<조건>\n• be동사 going to의 표현을 사용하시오.\n• <보기>의 영어표현을 선택하여 사용하시오.\n\n(1) I have a headache.\nI _______________.\n\n(2) Mrs. Kim is very hungry.\nShe _______________."
+   }
+  ],
+  "answer_key": [
+   "going to go swimming / going to have a club meeting / I'm going to visit my grandma / I'm going to go out for dinner",
+   "She is going to have a snack",
+   "He is going to ride a bike",
+   "(A) He is going to eat / (B) She is going to play the piano",
+   "1 am going to walk my dog / 2 is going to go shopping / 3 are going to play baseball",
+   "is going to clean",
+   "She is going to go shopping",
+   "He is going to ride a bike",
+   "What are you going to do this weekend?",
+   "Mina is going to go to the movies on Monday. / Mina is going to play tennis on Wednesday. / Mina is going to swim on Thursday. / Mina is going to visit her grandmother on Saturday.",
+   "(1) What are you going to do this weekend? / (2) I am going to go shopping with my mom. / (3) What is your sister going to do this weekend? / (4) She is going to do her homework.",
+   "am going to play basketball",
+   "We're going to stay there for 3 days",
+   "What are you going to do this weekend?",
+   "I am going to visit Europe with my family.",
+   "He is going to take a trip to London.",
+   "Are you going to stay home?",
+   "(1) She is going to feed the fish.\n(2) They are going to practice yoga after school.\n(3) He is going to wash his car.",
+   "(1) She is going to take Chinese lessons.\n(2) He is going to visit his uncle's house.",
+   "(1) going to stay (2) am going to watch (3) going to do",
+   "I am going to visit Bulguksa.",
+   "He is going to visit his grandmother in Busan.",
+   "(1) He is going to eat pizza.\n(2) He is going to play soccer.",
+   "(1) am going to buy a present\n(2) is going to take pictures\n(3) are going to cook",
+   "(1) is going to make cookies\n(2) is going to play soccer",
+   "is going to make cookies",
+   "(1) I am going to take a rest.\n(2) She is going to have a sandwich."
+  ]
+ },
+ "naesin_problem_sheets_8c755dca-40a4-4c6f-8d5c-eaa55212b791": {
+  "questions": [
+   {
+    "tag": "subParts",
+    "type": "multi_part",
+    "answer": "going to go swimming / going to have a club meeting / I'm going to visit my grandma / I'm going to go out for dinner",
+    "number": 1,
+    "question": "다음 표의 내용을 바탕으로 주어진 빈 칸에 알맞은 글을 쓰시오.\n\nSaturday: In the morning - go swimming, In the afternoon - have a club meeting\nSunday: In the morning - visit my grandma, In the afternoon - go out for dinner\n\nI have many things to do this weekend. On Saturday morning, I'm _______ _______ _______ with my little brother. In the afternoon, I _______ _______ _______ with my club members. On Sunday morning, _______ _______ _______ with my family. In the afternoon, _______ _______ _______ with Grandma and my family.",
+    "subParts": [
+     {
+      "label": "(1)",
+      "answer": "going to go swimming"
+     },
+     {
+      "label": "(2)",
+      "answer": "going to have a club meeting"
+     },
+     {
+      "label": "(3)",
+      "answer": "I'm going to visit my grandma",
+      "acceptedAnswers": [
+       "I am going to visit my grandma"
+      ]
+     },
+     {
+      "label": "(4)",
+      "answer": "I'm going to go out for dinner",
+      "acceptedAnswers": [
+       "I am going to go out for dinner"
+      ]
+     }
+    ],
+    "acceptedAnswers": [
+     "going to go swimming / going to have a club meeting / I am going to visit my grandma / I am going to go out for dinner"
+    ]
+   },
+   {
+    "tag": "기타",
+    "type": "sentence",
+    "answer": "She is going to have a snack",
+    "number": 2,
+    "question": "(그림: 소녀가 방과 후에 과자를 먹고 있음)\n\nQ: What is she going to do after school?",
+    "acceptedAnswers": [
+     "She is going to eat a snack",
+     "She is going to eat snacks",
+     "She's going to eat a snack"
+    ]
+   },
+   {
+    "tag": "기타",
+    "type": "sentence",
+    "answer": "He is going to ride a bike",
+    "number": 3,
+    "question": "(그림: 소년이 자전거를 타고 있음)\n\nQ: What is he going to do after school?",
+    "acceptedAnswers": [
+     "He is going to ride his bike",
+     "He is going to ride a bicycle",
+     "He's going to ride a bike"
+    ]
+   },
+   {
+    "tag": "subParts",
+    "type": "multi_part",
+    "answer": "He is going to eat / She is going to play the piano",
+    "number": 4,
+    "question": "다음 그림 (A), (B)와 각각 일치하도록 주어진 단어를 사용하여 우리, 동사가 포함된 영어 문장으로 쓰시오.\n(그림: 소년이 아이스크림을 먹고 있음)\n\n(A) Q: Is he going to play soccer?\nA: No, he isn't.\n_______ _______ _______ (eat)\n\n(그림: 소녀가 피아노를 연주하고 있음)\n(B) Q: What is she going to do?\nA: _______ _______ _______ (play)",
+    "subParts": [
+     {
+      "label": "(A)",
+      "answer": "He is going to eat",
+      "acceptedAnswers": [
+       "He's going to eat",
+       "He is going to eat ice cream",
+       "He's going to eat ice cream"
+      ]
+     },
+     {
+      "label": "(B)",
+      "answer": "She is going to play the piano",
+      "acceptedAnswers": [
+       "She's going to play the piano"
+      ]
+     }
+    ],
+    "acceptedAnswers": [
+     "(A) He's going to eat / (B) She's going to play the piano",
+     "(A) He is going to eat / (B) She's going to play the piano"
+    ]
+   },
+   {
+    "tag": "subParts",
+    "type": "multi_part",
+    "answer": "am going to walk my dog / is going to go shopping / are going to play baseball",
+    "number": 5,
+    "question": "다음은 Sujin과 내가 이번 주말에 할 일에 관한 표이다. 표를 바탕으로 ①, ②, ③에 들어갈 말을 쓰시오.\n\nSaturday: In the morning - walk my dog, In the afternoon - go shopping\nSunday: In the morning - play baseball\n\nWe have many things to do this weekend. On Saturday morning, I ①_________. In the afternoon, Sujin ②_________. On Sunday morning, Sujin and I ③_________.\n\n단, \"Be going to\"를 사용할 것",
+    "subParts": [
+     {
+      "label": "①",
+      "answer": "am going to walk my dog"
+     },
+     {
+      "label": "②",
+      "answer": "is going to go shopping"
+     },
+     {
+      "label": "③",
+      "answer": "are going to play baseball"
+     }
+    ]
+   },
+   {
+    "tag": "기타",
+    "type": "sentence",
+    "answer": "is going to clean",
+    "number": 6,
+    "question": "다음 그림의 상황과 맞도록 문장의 빈칸을 완성하여 쓰시오. (그림: 소년이 청소하고 있음)\n\nMinjun _______ _______ to _______ the living room this weekend."
+   },
+   {
+    "tag": "기타",
+    "type": "sentence",
+    "answer": "She is going to go shopping",
+    "number": 7,
+    "question": "Q: What is she going to do this weekend?  (그림: 소녀가 쇼핑하고 있음)\nA: _______ _______ _______ (6 단어)",
+    "acceptedAnswers": [
+     "She's going to go shopping"
+    ]
+   },
+   {
+    "tag": "기타",
+    "type": "sentence",
+    "answer": "He is going to ride a bike",
+    "number": 8,
+    "question": "Q: What is he going to do after school?  (그림: 소년이 자전거를 타고 있음)\nA: _______ _______ _______ (7 단어)",
+    "acceptedAnswers": [
+     "He is going to ride his bike",
+     "He is going to ride a bicycle"
+    ]
+   },
+   {
+    "tag": "영작",
+    "type": "sentence",
+    "answer": "What are you going to do this weekend?",
+    "number": 9,
+    "question": "다음 주어진 우리말을 영작하시오. (단, be going to를 활용할 것)\n\n너는 이번 주말에 무엇을 할 예정이니?"
+   },
+   {
+    "tag": "영작",
+    "type": "sentence",
+    "answer": "Mina is going to go to the movies on Monday. / Mina is going to play tennis on Wednesday. / Mina is going to swim on Thursday. / Mina is going to visit her grandmother on Saturday.",
+    "number": 10,
+    "question": "다음은 미나의 이번 주 계획표이다. 표를 보고 미나의 계획 중 하나를 선택하여 영어로 쓰시오.\n\nMon. - go to the movies \nTue. - X\nWed. - play tennis\nThu. - swim\nFri. - X \nSat. - visit grandmother\nSun. - X\n(단, 요일을 꼭 쓰고, be동사를 꼭 활용할 것)\n\n→ Mina _________",
+    "acceptedAnswers": [
+     "Mina is going to go to the movies on Monday. / Mina is going to play tennis on Wednesday. / Mina is going to swim on Thursday. / Mina is going to visit her grandmother on Saturday"
+    ]
+   },
+   {
+    "tag": "다중빈칸",
+    "type": "multi_part",
+    "answer": "(1) What are you going to do this weekend? / (2) I am going to go shopping with my mom. / (3) What is your sister going to do this weekend? / (4) She is going to do her homework.",
+    "number": 11,
+    "question": "다음은 수미와 수미의 여동생이 이번 주말에 할 일로 제시한 내용이다. <조건>에 맞게 대화를 완성하시오.\n\n수미: 엄마와 쇼핑하러 가기\n수미의 여동생: 숙제하기\n\n<조건>\n(1)~(4) 모두 \"be going to\"를 활용하여 완전한 문장으로 쓰시오.\n\nKate: (1) 이번 주말에 무엇을 할 거니?\nSumi: (2)\nKate: (3) 이번 주말에 네 여동생은 무엇을 할 거니?\nSumi: (4)",
+    "acceptedAnswers": [
+     "(1) What are you going to do this weekend? / (2) I am going to go shopping with my mom. / (3) What is your sister going to do this weekend? / (4) She is going to do her homework",
+     "(1) What are you going to do this weekend? / (2) I'm going to go shopping with my mom. / (3) What is your sister going to do this weekend? / (4) She is going to do her homework.",
+     "(1) What are you going to do this weekend? / (2) I am going to go shopping with my mom. / (3) What is your sister going to do this weekend? / (4) She's going to do her homework.",
+     "(1) What are you going to do this weekend? / (2) I am going to go shopping with my mom. / (3) What's your sister going to do this weekend? / (4) She is going to do her homework."
+    ]
+   },
+   {
+    "tag": "기타",
+    "type": "sentence",
+    "answer": "am going to play basketball",
+    "number": 12,
+    "question": "다음 그림을 보고 대화의 빈칸에 알맞은 말을 쓰시오. (그림: 소년들이 농구를 하는 사진)\n\nQ: What are you going to do this afternoon?\nA: I _______ _______ _______ _______ with my friends."
+   },
+   {
+    "tag": "기타",
+    "type": "sentence",
+    "answer": "We're going to stay there for 3 days",
+    "number": 13,
+    "question": "다음 Mike의 캠핑 계획표를 보고 대화를 완성하시오.\n\nMike's Camping Plan\n기간: Sep. 27 - Sep. 29\n장소: 강원도\n준비물: 침낭, 야채, 고기, 편안한 신발, 외투\n\nYuna: Mike, what are you going to do this weekend?\nMike: I'm going camping to Sokcho, Gangwon-do with my friends.\nYuna: How long are you going to stay there?\nMike: We're _________\nYuna: What do you need to bring?\nMike: We need to bring a sleeping bag, some vegetables and meat for our dinner, and a pair of comfortable shoes, and a jacket.",
+    "acceptedAnswers": [
+     "from September 27 to September 29",
+     "We are going to stay there for 3 days"
+    ]
+   },
+   {
+    "tag": "단어배열",
+    "type": "sentence",
+    "answer": "What are you going to do this weekend?",
+    "number": 14,
+    "question": "다음 우리말과 같도록 괄호 안에 주어진 단어를 순서대로 배열하여 문장을 완성하시오.16)\n\n(1) 이번 주 주말에 넌 뭘 할 예정이니?\n→ _______________\n(are, what, do, going, you, this, to, weekend)"
+   },
+   {
+    "tag": "영작",
+    "type": "sentence",
+    "answer": "I am going to visit Europe with my family.",
+    "number": 15,
+    "question": "다음 주어진 질문에 대한 답을 괄호 안에 주어진 단어들로 문장으로 쓸 것)17)\n\nWhat are you going to do during the summer?\n→ _______________\n(visit, Europe, my, family)",
+    "acceptedAnswers": [
+     "I am going to visit Europe with my family",
+     "I'm going to visit Europe with my family."
+    ]
+   },
+   {
+    "tag": "단어배열",
+    "type": "sentence",
+    "answer": "He is going to take a trip to London.",
+    "number": 16,
+    "question": "다음 괄호 안에 주어진 단어를 이용하여 질문에 영어로 답하시오. (단, 주어, 동사가 있는 문장으로 쓸 것)\n\nQ: Where is he going to take a trip?\nA: ___________________________ (London)",
+    "acceptedAnswers": [
+     "He is going to take a trip to London",
+     "He's going to take a trip to London."
+    ]
+   },
+   {
+    "tag": "다중빈칸",
+    "type": "multi_part",
+    "answer": "(1) She is going to feed the fish.\n(2) They are going to practice yoga after school.\n(3) He is going to wash his car.",
+    "number": 17,
+    "question": "다음 문장을 'be going to'를 사용하여 미래의 뜻이 되도록 바꿔 쓰시오.20)\n\n(1) She feeds the fish.\n→ _______________\n\n(2) They practice yoga after school.\n→ _______________\n\n(3) He washes his car.\n→ _______________",
+    "acceptedAnswers": [
+     "(1) She is going to feed the fish.\n(2) They are going to practice yoga after school.\n(3) He is going to wash his car",
+     "(1) She's going to feed the fish.\n(2) They are going to practice yoga after school.\n(3) He's going to wash his car.",
+     "(1) She's going to feed the fish.\n(2) They are going to practice yoga after school.\n(3) He is going to wash his car.",
+     "(1) She is going to feed the fish.\n(2) They're going to practice yoga after school.\n(3) He is going to wash his car."
+    ]
+   },
+   {
+    "tag": "다중빈칸",
+    "type": "multi_part",
+    "answer": "(1) She is going to take Chinese lessons.\n(2) He is going to visit his uncle's house.",
+    "number": 18,
+    "question": "다음 주어진 일정을 보고 문장을 완성하시오.21)\n\n| Name | Day | Things to do |\n| Jane | Fri. | take Chinese lessons |\n| Tom | Sat. | visit his uncle's house |\n\n(1) What is Jane going to do this Friday?\n→ She _______________.\n\n(2) What is Tom going to do this Saturday?\n→ He _______________.",
+    "acceptedAnswers": [
+     "(1) She is going to take Chinese lessons.\n(2) He is going to visit his uncle's house",
+     "(1) She's going to take Chinese lessons.\n(2) He's going to visit his uncle's house.",
+     "(1) She's going to take Chinese lessons.\n(2) He is going to visit his uncle's house."
+    ]
+   },
+   {
+    "tag": "다중빈칸",
+    "type": "multi_part",
+    "answer": "(1) going to stay (2) am going to watch (3) going to do",
+    "number": 19,
+    "question": "다음 <보기>에서 적절한 단어를 골라 대화를 완성하시오. (단, be going to 구문을 활용할 것)22)\n\n<보기>\ndo    stay    watch\n\nA: Are you (1)___________ at home this weekend?\nB: No, I'm not. I (2)___________ a movie with Suji.\nA: What are you (3)___________ after that?\nB: We are going to eat something delicious."
+   },
+   {
+    "tag": "영작",
+    "type": "sentence",
+    "answer": "I am going to visit Bulguksa.",
+    "number": 20,
+    "question": "다음 표를 보고 질문에 알맞은 대답을 영어문장으로 쓰시오. (단, 반드시 be going to 구문을 이용할 것)23)\n\n| When | Where / What |\n| 1st Day | Visit Gyeongju National Museum |\n| 2nd Day | Go Hiking on Mt. Munbok |\n| 3rd Day | Visit Bulguksa |\n\nQ: What are you going to do on the 3rd Day?\nA: _______________",
+    "acceptedAnswers": [
+     "I am going to visit Bulguksa",
+     "I'm going to visit Bulguksa."
+    ]
+   },
+   {
+    "tag": "영작",
+    "type": "sentence",
+    "answer": "He is going to visit his grandmother in Busan.",
+    "number": 21,
+    "question": "다음 글을 읽고 물음에 대한 대답을 완전한 문장으로 쓰시오.24)\n\nMinsu lives in Seoul. His grandmother lives in Busan. She wants to see him. He is free this weekend. So he will visit her this Saturday.\n\nQ: What is Minsu going to do this weekend?\nA: _______________",
+    "acceptedAnswers": [
+     "He is going to visit his grandmother in Busan",
+     "He's going to visit his grandmother in Busan."
+    ]
+   },
+   {
+    "tag": "다중빈칸",
+    "type": "multi_part",
+    "answer": "(1) He is going to eat pizza.\n(2) He is going to play soccer.",
+    "number": 22,
+    "question": "다음 민수와 지우의 주말 계획표를 보고 질문에 답하시오. (단, 빈칸 앞뒤 쓸 것)25)\n\n| Minsu | Jiwoo |\n| [pizza image] | [soccer ball image] |\n\n(1)\nQ: What is Minsu going to do this weekend?\nA: He is ___ ___ ___ ___.\n\n(2)\nQ: What is Jiwoo going to do this weekend?\nA: He is ___ ___ ___ ___.",
+    "acceptedAnswers": [
+     "(1) He is going to eat pizza.\n(2) He is going to play soccer",
+     "(1) He's going to eat pizza.\n(2) He's going to play soccer."
+    ]
+   },
+   {
+    "tag": "다중빈칸",
+    "type": "multi_part",
+    "answer": "(1) am going to buy a present\n(2) is going to take pictures\n(3) are going to cook",
+    "number": 23,
+    "question": "다음 표를 보고 'be going to'를 사용하여 빈칸을 완성하시오.26)\n\n| Party plans for Jiwon |\n| I : 선물 사기 |\n| Hojin : 사진 찍기 |\n| Jihun and Minju : 요리하기 |\n\nThis Saturday is Jiwon's birthday. We will prepare a birthday party for her. I (1)_______________. Hojin (2)_______________ Jihun and Minju (3)_______________."
+   },
+   {
+    "tag": "다중빈칸",
+    "type": "multi_part",
+    "answer": "(1) is going to make cookies\n(2) is going to play soccer",
+    "number": 24,
+    "question": "다음은 James의 다음 주 계획표의 일부이다. 빈칸 (1), (2)에 들어갈 말을 주어진 조건에 맞게 영작하시오.27)\n\n| Monday | Tuesday | Wednesday | Thursday |\n| make cookies | walk my dog | play soccer | go shopping |\n\nJames has many things to do after school this week. On Monday, he (1)_______________. On Wednesday, he (2)_______________.\n\n<조건>\n• 단어 'be'와 'going'을 반드시 포함할 것\n• 필요시, 주어진 단어 변형 및 다른 단어를 첨가할 수 있음"
+   },
+   {
+    "tag": "단어배열",
+    "type": "sentence",
+    "answer": "is going to make cookies",
+    "number": 25,
+    "question": "다음 표를 보고 질문에 알맞은 응답을 <조건>에 맞게 쓰시오.28)\n\n| Who | What | When |\n| Susan | have a birthday party | this weekend |\n| Tom | make cookies | this weekend |\n\n<보기>\nA: What is Susan going to do this weekend?\nB: She is going to have a birthday party this weekend.\n\n<조건>\n• 표의 내용과 일치할 것.\n• 빈칸에 알맞은 말을 쓸 것.\n\nA: What is Tom going to do this weekend?\nB: He ___________________ this weekend."
+   },
+   {
+    "tag": "다중빈칸",
+    "type": "multi_part",
+    "answer": "(1) I am going to take a rest.\n(2) She is going to have a sandwich.",
+    "number": 26,
+    "question": "다음 문장을 참고하여 자연스러운 문장이 되도록 <조건>에 맞게 빈칸을 완성하시오.29)\n\nMinsu is thirsty. He is going to drink some water.\n\n<보기>\nclean the house        have a sandwich\ntake a rest            watch a movie\n\n<조건>\n• be동사 going to의 표현을 사용하시오.\n• <보기>의 영어표현을 선택하여 사용하시오.\n\n(1) I have a headache.\nI _______________.\n\n(2) Mrs. Kim is very hungry.\nShe _______________.",
+    "acceptedAnswers": [
+     "(1) I am going to take a rest.\n(2) She is going to have a sandwich",
+     "(1) I'm going to take a rest.\n(2) She is going to have a sandwich.",
+     "(1) I am going to take a rest.\n(2) She's going to have a sandwich."
+    ]
+   }
+  ],
+  "answer_key": [
+   "going to go swimming / going to have a club meeting / I'm going to visit my grandma / I'm going to go out for dinner",
+   "She is going to have a snack",
+   "He is going to ride a bike",
+   "He is going to eat / She is going to play the piano",
+   "am going to walk my dog / is going to go shopping / are going to play baseball",
+   "is going to clean",
+   "She is going to go shopping",
+   "He is going to ride a bike",
+   "What are you going to do this weekend?",
+   "Mina is going to go to the movies on Monday. / Mina is going to play tennis on Wednesday. / Mina is going to swim on Thursday. / Mina is going to visit her grandmother on Saturday.",
+   "(1) What are you going to do this weekend? / (2) I am going to go shopping with my mom. / (3) What is your sister going to do this weekend? / (4) She is going to do her homework.",
+   "am going to play basketball",
+   "We're going to stay there for 3 days",
+   "What are you going to do this weekend?",
+   "I am going to visit Europe with my family.",
+   "He is going to take a trip to London.",
+   "(1) She is going to feed the fish.\n(2) They are going to practice yoga after school.\n(3) He is going to wash his car.",
+   "(1) She is going to take Chinese lessons.\n(2) He is going to visit his uncle's house.",
+   "(1) going to stay (2) am going to watch (3) going to do",
+   "I am going to visit Bulguksa.",
+   "He is going to visit his grandmother in Busan.",
+   "(1) He is going to eat pizza.\n(2) He is going to play soccer.",
+   "(1) am going to buy a present\n(2) is going to take pictures\n(3) are going to cook",
+   "(1) is going to make cookies\n(2) is going to play soccer",
+   "is going to make cookies",
+   "(1) I am going to take a rest.\n(2) She is going to have a sandwich."
+  ]
+ }
+}

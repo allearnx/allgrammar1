@@ -1,0 +1,1336 @@
+{
+  "P1": [
+    {
+      "number": 1,
+      "question": "다음 분사구문에 이어질 알맞은 절을 고르시오.\n\nWalking on the street, ______________________",
+      "options": [
+        "I couldn't stop crying.",
+        "I met an old friend of mine.",
+        "I had some questions to ask."
+      ],
+      "answer": "2"
+    },
+    {
+      "number": 2,
+      "question": "다음 분사구문에 이어질 알맞은 절을 고르시오.\n\nWatching the movie, ______________________",
+      "options": [
+        "I couldn't stop crying.",
+        "I met an old friend of mine.",
+        "I had some questions to ask."
+      ],
+      "answer": "1"
+    },
+    {
+      "number": 3,
+      "question": "[보기] listen to music loudly / carry a lot of baggage / be surprised by the barking dog\n<보기>의 표현을 사용하여 우리말에 맞게 분사구문으로 빈칸을 완성하시오.\n\n음악을 크게 들었기 때문에, Mike는 Ann이 그를 부르고 있는 것을 들을 수 없었다.\n→ ______________________, Mike couldn't hear Ann calling him.",
+      "options": [],
+      "answer": "Listening to music loudly"
+    },
+    {
+      "number": 4,
+      "question": "[보기] listen to music loudly / carry a lot of baggage / be surprised by the barking dog\n<보기>의 표현을 사용하여 우리말에 맞게 분사구문으로 빈칸을 완성하시오.\n\n짖는 개에 놀라서, Kate는 갑자기 비명을 질렀다.\n→ ______________________, Kate suddenly cried out.",
+      "options": [],
+      "answer": "Surprised by the barking dog",
+      "acceptedAnswers": [
+        "Being surprised by the barking dog"
+      ]
+    },
+    {
+      "number": 5,
+      "question": "[보기] listen to music loudly / carry a lot of baggage / be surprised by the barking dog\n<보기>의 표현을 사용하여 우리말에 맞게 분사구문으로 빈칸을 완성하시오.\n\n많은 짐을 가지고 있었기 때문에, Jane은 역까지 택시를 탔다.\n→ ______________________, Jane took a taxi to the station.",
+      "options": [],
+      "answer": "Carrying a lot of baggage"
+    },
+    {
+      "number": 6,
+      "question": "다음 문장에서 분사구문에 해당하는 부분을 찾아 그대로 쓰시오.\n\nWalking along the street, he hummed a song.",
+      "options": [],
+      "answer": "Walking along the street"
+    },
+    {
+      "number": 7,
+      "question": "다음 문장에서 분사구문에 해당하는 부분을 찾아 그대로 쓰시오.\n\nMark climbed the rock, holding the rope tightly and pulling himself up.",
+      "options": [],
+      "answer": "holding the rope tightly and pulling himself up"
+    },
+    {
+      "number": 8,
+      "question": "다음 문장에서 분사구문에 해당하는 부분을 찾아 그대로 쓰시오.\n\nI injured my ankle, practicing a dance for the school festival.",
+      "options": [],
+      "answer": "practicing a dance for the school festival"
+    },
+    {
+      "number": 9,
+      "question": "알맞은 것을 고르시오.\n\n(Watched / Watching) TV, Kevin fell asleep.",
+      "options": [
+        "Watched",
+        "Watching"
+      ],
+      "answer": "2"
+    },
+    {
+      "number": 10,
+      "question": "알맞은 것을 고르시오.\n\n(Written / Writing) in easy English, this book is easy to read.",
+      "options": [
+        "Written",
+        "Writing"
+      ],
+      "answer": "1"
+    },
+    {
+      "number": 11,
+      "question": "알맞은 것을 고르시오.\n\nEmma said goodbye to her friend, (got / getting) off the bus.",
+      "options": [
+        "got",
+        "getting"
+      ],
+      "answer": "2"
+    },
+    {
+      "number": 12,
+      "question": "알맞은 것을 고르시오.\n\n(Interested / Interesting) in the movie, I asked my brother some questions.",
+      "options": [
+        "Interested",
+        "Interesting"
+      ],
+      "answer": "1"
+    },
+    {
+      "number": 13,
+      "question": "알맞은 것을 고르시오.\n\n(Been / Being) curious about the boat, they climbed onto it.",
+      "options": [
+        "Been",
+        "Being"
+      ],
+      "answer": "2"
+    },
+    {
+      "number": 14,
+      "question": "알맞은 것을 고르시오.\n\n(Arrived / Arriving) at the office, he called his son.",
+      "options": [
+        "Arrived",
+        "Arriving"
+      ],
+      "answer": "2"
+    },
+    {
+      "number": 15,
+      "question": "알맞은 것을 고르시오.\n\n(Tired / Tiring) of touring, The Beatles spent more time in writing and recording songs.",
+      "options": [
+        "Tired",
+        "Tiring"
+      ],
+      "answer": "1"
+    },
+    {
+      "number": 16,
+      "question": "밑줄 친 부분이 분사인지 동명사인지 고르시오.\n\n<u>Smiling</u> brightly, she waves her hand.",
+      "options": [
+        "분사",
+        "동명사"
+      ],
+      "answer": "1"
+    },
+    {
+      "number": 17,
+      "question": "밑줄 친 부분이 분사인지 동명사인지 고르시오.\n\nThe rain prevented us from <u>doing</u> anything outdoors.",
+      "options": [
+        "분사",
+        "동명사"
+      ],
+      "answer": "2"
+    },
+    {
+      "number": 18,
+      "question": "밑줄 친 부분이 분사인지 동명사인지 고르시오.\n\n<u>Having</u> no money with me, I can't buy a car.",
+      "options": [
+        "분사",
+        "동명사"
+      ],
+      "answer": "1"
+    },
+    {
+      "number": 19,
+      "question": "밑줄 친 부분이 분사인지 동명사인지 고르시오.\n\nI am sure of his <u>passing</u> the exam.",
+      "options": [
+        "분사",
+        "동명사"
+      ],
+      "answer": "2"
+    },
+    {
+      "number": 20,
+      "question": "밑줄 친 부분이 분사인지 동명사인지 고르시오.\n\n<u>Waiting</u> for Jane, I saw Bob and Mary.",
+      "options": [
+        "분사",
+        "동명사"
+      ],
+      "answer": "1"
+    },
+    {
+      "number": 21,
+      "question": "밑줄 친 부분이 분사인지 동명사인지 고르시오.\n\n<u>Yawning</u> is a sign of sleepiness.",
+      "options": [
+        "분사",
+        "동명사"
+      ],
+      "answer": "2"
+    },
+    {
+      "number": 22,
+      "question": "밑줄 친 부분이 분사인지 동명사인지 고르시오.\n\nHe went away, <u>waving</u> his hand.",
+      "options": [
+        "분사",
+        "동명사"
+      ],
+      "answer": "1"
+    },
+    {
+      "number": 23,
+      "question": "두 문장의 뜻이 같도록 빈칸을 채우시오.\n\nI entered my room, and turned on the TV.\n→ I entered my room, __________ on the TV.",
+      "options": [],
+      "answer": "turning"
+    },
+    {
+      "number": 24,
+      "question": "두 문장의 뜻이 같도록 빈칸을 채우시오.\n\nAs he studied hard, he passed the exam.\n→ __________ hard, he passed the exam.",
+      "options": [],
+      "answer": "Studying"
+    },
+    {
+      "number": 25,
+      "question": "두 문장의 뜻이 같도록 빈칸을 채우시오.\n\nAs I felt tired, I got some rest.\n→ __________ __________, I got some rest.",
+      "options": [],
+      "answer": "Feeling tired"
+    },
+    {
+      "number": 26,
+      "question": "두 문장의 뜻이 같도록 빈칸을 채우시오.\n\nBecause I have no money with me, I can't help you.\n→ __________ no money with me, I can't help you.",
+      "options": [],
+      "answer": "Having"
+    },
+    {
+      "number": 27,
+      "question": "두 문장의 뜻이 같도록 빈칸을 채우시오.\n\nAs I didn't know what to do, I just read a book.\n→ __________ __________ what to do, I just read a book.",
+      "options": [],
+      "answer": "Not knowing"
+    },
+    {
+      "number": 28,
+      "question": "두 문장의 뜻이 같도록 빈칸을 채우시오.\n\nAlthough he was very rich, he lived a simple life.\n→ __________ __________ __________, he lived a simple life.",
+      "options": [],
+      "answer": "Being very rich"
+    },
+    {
+      "number": 29,
+      "question": "두 문장의 뜻이 같도록 빈칸을 채우시오.\n\nSince I have a bad cold, I can't study more.\n→ __________ a bad cold, I can't study more.",
+      "options": [],
+      "answer": "Having"
+    },
+    {
+      "number": 30,
+      "question": "두 문장의 뜻이 같도록 빈칸을 채우시오.\n\nBecause I had nothing to eat, I went to the market.\n→ __________ nothing to eat, I went to the market.",
+      "options": [],
+      "answer": "Having"
+    },
+    {
+      "number": 31,
+      "question": "두 문장의 뜻이 같도록 빈칸을 채우시오.\n\nAs I walked along the street, I got a phone call from Jack.\n→ __________ along the street, I got a phone call from Jack.",
+      "options": [],
+      "answer": "Walking"
+    },
+    {
+      "number": 32,
+      "question": "두 문장의 뜻이 같도록 빈칸에 알맞은 접속사를 고르시오.\n\nTurning to the left, you'll see a beautiful mountain.\n→ __________ you turn to the left, you'll see a beautiful mountain.",
+      "options": [
+        "if",
+        "while",
+        "because",
+        "when"
+      ],
+      "answer": "1"
+    },
+    {
+      "number": 33,
+      "question": "두 문장의 뜻이 같도록 빈칸에 알맞은 접속사를 고르시오.\n\nFeeling ill, she decided not to go to the party.\n→ __________ she felt ill, she decided not to go to the party.",
+      "options": [
+        "if",
+        "while",
+        "because",
+        "when"
+      ],
+      "answer": "3"
+    },
+    {
+      "number": 34,
+      "question": "두 문장의 뜻이 같도록 빈칸에 알맞은 접속사를 고르시오.\n\nFinishing his homework, he went to see the movie.\n→ __________ he finished his homework, he went to see the movie.",
+      "options": [
+        "while",
+        "after",
+        "because",
+        "although"
+      ],
+      "answer": "2"
+    },
+    {
+      "number": 35,
+      "question": "두 문장의 뜻이 같도록 빈칸에 알맞은 접속사를 고르시오.\n\nStudying hard, he couldn't pass the exam.\n→ __________ he studied hard, he couldn't pass the exam.",
+      "options": [
+        "while",
+        "after",
+        "because",
+        "although"
+      ],
+      "answer": "4"
+    },
+    {
+      "number": 36,
+      "question": "두 문장의 뜻이 같도록 빈칸에 알맞은 접속사를 고르시오.\n\nBorn in the city, Linda didn't know much about country life.\n→ __________ Linda was born in the city, she didn't know much about country life.",
+      "options": [
+        "while",
+        "since",
+        "after",
+        "though"
+      ],
+      "answer": "2"
+    },
+    {
+      "number": 37,
+      "question": "두 문장의 뜻이 같도록 빈칸에 알맞은 접속사를 고르시오.\n\nTrying her best, she failed her driving test.\n→ __________ she tried her best, she failed her driving test.",
+      "options": [
+        "while",
+        "since",
+        "after",
+        "though"
+      ],
+      "answer": "4"
+    },
+    {
+      "number": 38,
+      "question": "두 문장의 뜻이 같도록 빈칸에 알맞은 접속사를 고르시오.\n\nBeing sick, I couldn't study for the test.\n→ __________ I was sick, I couldn't study for the test.",
+      "options": [
+        "since",
+        "if",
+        "after",
+        "although"
+      ],
+      "answer": "1"
+    },
+    {
+      "number": 39,
+      "question": "두 문장의 뜻이 같도록 빈칸에 알맞은 접속사를 고르시오.\n\nWanting to go out, he must remain here.\n→ __________ he wants to go out, he must remain here.",
+      "options": [
+        "since",
+        "if",
+        "after",
+        "although"
+      ],
+      "answer": "4"
+    },
+    {
+      "number": 40,
+      "question": "분사구문을 사용하여 문장을 완성하시오.\n\nAlthough I know it's her mistake, I won't blame her.\n→ ______________________, I won't blame her.",
+      "options": [],
+      "answer": "Knowing it's her mistake",
+      "acceptedAnswers": [
+        "Knowing it is her mistake"
+      ]
+    },
+    {
+      "number": 41,
+      "question": "분사구문을 사용하여 문장을 완성하시오.\n\nAs Kelly cooked in the kitchen, she sang some pop songs.\n→ ______________________, Kelly sang some pop songs.",
+      "options": [],
+      "answer": "Cooking in the kitchen"
+    },
+    {
+      "number": 42,
+      "question": "분사구문을 사용하여 문장을 완성하시오.\n\nIf you open the box, you will find something surprising.\n→ ______________________, you will find something surprising.",
+      "options": [],
+      "answer": "Opening the box"
+    },
+    {
+      "number": 43,
+      "question": "분사구문을 사용하여 문장을 완성하시오.\n\nSince he lost his wallet, he doesn't have any money.\n→ ______________________, he doesn't have any money.",
+      "options": [],
+      "answer": "Having lost his wallet"
+    },
+    {
+      "number": 44,
+      "question": "분사구문을 사용하여 문장을 완성하시오.\n\nAfter his car had been repaired by Greg, it worked as he had expected.\n→ ______________________, his car worked as he had expected.",
+      "options": [],
+      "answer": "Repaired by Greg",
+      "acceptedAnswers": [
+        "Having been repaired by Greg"
+      ]
+    },
+    {
+      "number": 45,
+      "question": "분사구문을 사용하여 문장을 완성하시오.\n\nBecause he was exhausted, he lay down on the grass.\n→ ______________________, he lay down on the grass.",
+      "options": [],
+      "answer": "Exhausted",
+      "acceptedAnswers": [
+        "Being exhausted"
+      ]
+    },
+    {
+      "number": 46,
+      "question": "분사구문을 사용하여 문장을 완성하시오.\n\nAlthough he is not old enough, he is very wise and thoughtful.\n→ ______________________, he is very wise and thoughtful.",
+      "options": [],
+      "answer": "Not being old enough"
+    },
+    {
+      "number": 47,
+      "question": "분사구문을 사용하여 문장을 완성하시오.\n\nAs he had bought a brand-new car, he gave his old car to me.\n→ ______________________, he gave his old car to me.",
+      "options": [],
+      "answer": "Having bought a brand-new car"
+    },
+    {
+      "number": 48,
+      "question": "다음 문장의 분사구문을 부사절로 바꾸어 빈칸을 완성하시오.\n\nFeeling sick, I stayed home.\n→ ______________________, I stayed home.",
+      "options": [],
+      "answer": "Because I felt sick",
+      "acceptedAnswers": [
+        "Since I felt sick",
+        "As I felt sick"
+      ]
+    },
+    {
+      "number": 49,
+      "question": "다음 문장의 분사구문을 부사절로 바꾸어 빈칸을 완성하시오.\n\nHaving a test tomorrow, I have to study all day.\n→ ______________________, I have to study all day.",
+      "options": [],
+      "answer": "Because I have a test tomorrow",
+      "acceptedAnswers": [
+        "Since I have a test tomorrow",
+        "As I have a test tomorrow"
+      ]
+    },
+    {
+      "number": 50,
+      "question": "다음 문장의 분사구문을 부사절로 바꾸어 빈칸을 완성하시오.\n\nNot having enough money, he couldn't buy a bike.\n→ ______________________, he couldn't buy a bike.",
+      "options": [],
+      "answer": "Because he didn't have enough money",
+      "acceptedAnswers": [
+        "Since he didn't have enough money",
+        "As he didn't have enough money",
+        "Because he did not have enough money"
+      ]
+    },
+    {
+      "number": 51,
+      "question": "다음 문장의 분사구문을 부사절로 바꾸어 빈칸을 완성하시오.\n\nHaving lost my bag, I couldn't hand in the report.\n→ ______________________, I couldn't hand in the report.",
+      "options": [],
+      "answer": "Because I had lost my bag",
+      "acceptedAnswers": [
+        "As I had lost my bag",
+        "Since I had lost my bag"
+      ]
+    },
+    {
+      "number": 52,
+      "question": "다음 문장의 분사구문을 부사절로 바꾸어 빈칸을 완성하시오.\n\nListening to music, she cleaned her room.\n→ ______________________, she cleaned her room.",
+      "options": [],
+      "answer": "While she was listening to music",
+      "acceptedAnswers": [
+        "As she was listening to music"
+      ]
+    },
+    {
+      "number": 53,
+      "question": "다음 문장의 분사구문을 부사절로 바꾸어 빈칸을 완성하시오.\n\nBeing sick with a high fever, Mary stayed home all day.\n→ ______________________, she stayed home all day.",
+      "options": [],
+      "answer": "Because Mary was sick with a high fever",
+      "acceptedAnswers": [
+        "As Mary was sick with a high fever",
+        "Since Mary was sick with a high fever"
+      ]
+    },
+    {
+      "number": 54,
+      "question": "다음 문장의 분사구문을 부사절로 바꾸어 빈칸을 완성하시오.\n\nNot living with my family, I miss them a lot.\n→ ______________________, I miss them a lot.",
+      "options": [],
+      "answer": "Because I don't live with my family",
+      "acceptedAnswers": [
+        "As I don't live with my family",
+        "Since I don't live with my family",
+        "Because I do not live with my family"
+      ]
+    },
+    {
+      "number": 55,
+      "question": "다음 단어들을 알맞은 순서로 배열하여 우리말에 맞는 문장을 쓰시오. ※ 완전한 문장으로 쓰시오.\n\nKate는 음악을 들으면서 수학을 공부하고 있는 중이다.\n(math, is, Kate, studying), (to, listening, music)",
+      "options": [],
+      "answer": "Kate is studying math, listening to music."
+    },
+    {
+      "number": 56,
+      "question": "다음 단어들을 알맞은 순서로 배열하여 우리말에 맞는 문장을 쓰시오. ※ 완전한 문장으로 쓰시오.\n\nTV를 끄고 나서, 나는 숙제를 하기 시작했다.\n(off, TV, the, turning), (started, homework, I, doing, my)",
+      "options": [],
+      "answer": "Turning off the TV, I started doing my homework."
+    },
+    {
+      "number": 57,
+      "question": "다음 단어들을 알맞은 순서로 배열하여 우리말에 맞는 문장을 쓰시오. ※ 완전한 문장으로 쓰시오.\n\n나는 문제에 대한 답을 알았기 때문에 손을 들었다.\n(answer, question, to, knowing, the, the), (my, raised, hand, I)",
+      "options": [],
+      "answer": "Knowing the answer to the question, I raised my hand."
+    },
+    {
+      "number": 58,
+      "question": "다음 단어들을 알맞은 순서로 배열하여 우리말에 맞는 문장을 쓰시오. ※ 완전한 문장으로 쓰시오.\n\n작별 인사를 하면서, Kelly는 버스에 탔다.\n(goodbye, saying), (the, on, bus, got, Kelly)",
+      "options": [],
+      "answer": "Saying goodbye, Kelly got on the bus."
+    },
+    {
+      "number": 59,
+      "question": "다음 단어들을 알맞은 순서로 배열하여 우리말에 맞는 문장을 쓰시오. ※ 완전한 문장으로 쓰시오.\n\nSally는 굽이 높은 신발을 신었기 때문에 빨리 달릴 수 없었다.\n(high-heeled, wearing, shoes), (run, couldn't, fast, Sally)",
+      "options": [],
+      "answer": "Wearing high-heeled shoes, Sally couldn't run fast."
+    },
+    {
+      "number": 60,
+      "question": "다음 단어들을 알맞은 순서로 배열하여 우리말에 맞는 문장을 쓰시오. ※ 완전한 문장으로 쓰시오.\n\n나의 아버지가 차를 운전하고 계셨기 때문에 내가 대신 전화를 받았다.\n(car, driving, my, the, father), (phone, instead, answered, I, the)",
+      "options": [],
+      "answer": "My father driving the car, I answered the phone instead."
+    },
+    {
+      "number": 61,
+      "question": "다음 단어들을 알맞은 순서로 배열하여 우리말에 맞는 문장을 쓰시오. ※ 완전한 문장으로 쓰시오.\n\n많은 나무들이 베어지는 것을 보았기 때문에, 나는 재활용 종이를 사용하기로 결심했다.\n(down, cut, trees, seeing, many), (recycled, decided, use, to, I, paper)",
+      "options": [],
+      "answer": "Seeing many trees cut down, I decided to use recycled paper."
+    },
+    {
+      "number": 62,
+      "question": "다음 단어들을 알맞은 순서로 배열하여 우리말에 맞는 문장을 쓰시오. ※ 완전한 문장으로 쓰시오.\n\n그녀의 방을 청소하면서, 지수는 돈을 발견했다.\n(room, cleaning, her), (money, found, Jisu, some)",
+      "options": [],
+      "answer": "Cleaning her room, Jisu found some money."
+    },
+    {
+      "number": 63,
+      "question": "다음 문장에서 문법적 오류를 찾아 고치시오. ※ 틀린 부분을 고쳐서 올바른 문장으로 전부 쓰세요.\n\nWalked on the street, he saw a dog.",
+      "options": [],
+      "answer": "Walking on the street, he saw a dog."
+    },
+    {
+      "number": 64,
+      "question": "다음 문장에서 문법적 오류를 찾아 고치시오. ※ 틀린 부분을 고쳐서 올바른 문장으로 전부 쓰세요.\n\nCrossed the street, you should be very careful.",
+      "options": [],
+      "answer": "Crossing the street, you should be very careful."
+    },
+    {
+      "number": 65,
+      "question": "다음 문장에서 문법적 오류를 찾아 고치시오. ※ 틀린 부분을 고쳐서 올바른 문장으로 전부 쓰세요.\n\nKnowing not what to do, I called my sister.",
+      "options": [],
+      "answer": "Not knowing what to do, I called my sister."
+    },
+    {
+      "number": 66,
+      "question": "다음 문장에서 문법적 오류를 찾아 고치시오. ※ 틀린 부분을 고쳐서 올바른 문장으로 전부 쓰세요.\n\nWhile watching TV last night, my phone rang.",
+      "options": [],
+      "answer": "While I was watching TV last night, my phone rang."
+    },
+    {
+      "number": 67,
+      "question": "다음 문장에서 문법적 오류를 찾아 고치시오. ※ 틀린 부분을 고쳐서 올바른 문장으로 전부 쓰세요.\n\nBeing had broken her arm, Lisa had to learn to write with her left hand.",
+      "options": [],
+      "answer": "Having broken her arm, Lisa had to learn to write with her left hand."
+    },
+    {
+      "number": 68,
+      "question": "다음 문장에서 문법적 오류를 찾아 고치시오. ※ 틀린 부분을 고쳐서 올바른 문장으로 전부 쓰세요.\n\nBeing played soccer, Minsu hurt his leg.",
+      "options": [],
+      "answer": "Playing soccer, Minsu hurt his leg."
+    },
+    {
+      "number": 69,
+      "question": "다음 문장에서 문법적 오류를 찾아 고치시오. ※ 틀린 부분을 고쳐서 올바른 문장으로 전부 쓰세요.\n\nPuzzling, the little girl began to look around the area.",
+      "options": [],
+      "answer": "Puzzled, the little girl began to look around the area."
+    },
+    {
+      "number": 70,
+      "question": "다음 문장에서 문법적 오류를 찾아 고치시오. ※ 틀린 부분을 고쳐서 올바른 문장으로 전부 쓰세요.\n\nWatching not TV at all, she doesn't know the celebrities that her friends are talking about.",
+      "options": [],
+      "answer": "Not watching TV at all, she doesn't know the celebrities that her friends are talking about."
+    },
+    {
+      "number": 71,
+      "question": "분사구문을 사용하여 문장을 다시 쓰시오. ※ 완전한 문장으로 쓰시오.\n\nAs it was very hot yesterday, we couldn't go out.",
+      "options": [],
+      "answer": "It being very hot yesterday, we couldn't go out."
+    },
+    {
+      "number": 72,
+      "question": "분사구문을 사용하여 문장을 다시 쓰시오. ※ 완전한 문장으로 쓰시오.\n\nAs she was sick, she had to stay home.",
+      "options": [],
+      "answer": "Being sick, she had to stay home."
+    },
+    {
+      "number": 73,
+      "question": "분사구문을 사용하여 문장을 다시 쓰시오. ※ 완전한 문장으로 쓰시오.\n\nBecause I had nothing to eat, I went to the market.",
+      "options": [],
+      "answer": "Having nothing to eat, I went to the market."
+    },
+    {
+      "number": 74,
+      "question": "분사구문을 사용하여 문장을 다시 쓰시오. ※ 완전한 문장으로 쓰시오.\n\nBecause it rained cats and dogs, we couldn't go outside.",
+      "options": [],
+      "answer": "It raining cats and dogs, we couldn't go outside."
+    },
+    {
+      "number": 75,
+      "question": "분사구문을 사용하여 문장을 다시 쓰시오. ※ 완전한 문장으로 쓰시오.\n\nBecause she felt tired, she went to bed early.",
+      "options": [],
+      "answer": "Feeling tired, she went to bed early."
+    },
+    {
+      "number": 76,
+      "question": "분사구문을 사용하여 문장을 다시 쓰시오. ※ 완전한 문장으로 쓰시오.\n\nWhen Jane received a call from Jack, she went outside to meet him.",
+      "options": [],
+      "answer": "Receiving a call from Jack, Jane went outside to meet him."
+    },
+    {
+      "number": 77,
+      "question": "분사구문을 사용하여 문장을 다시 쓰시오. ※ 완전한 문장으로 쓰시오.\n\nIf you turn to the left, you will find the post office.",
+      "options": [],
+      "answer": "Turning to the left, you will find the post office."
+    },
+    {
+      "number": 78,
+      "question": "분사구문을 사용하여 문장을 다시 쓰시오. ※ 완전한 문장으로 쓰시오.\n\nAs I had no money, I walked home.",
+      "options": [],
+      "answer": "Having no money, I walked home."
+    },
+    {
+      "number": 79,
+      "question": "다음 문장을 주어진 단어를 활용하여 영작하시오. (분사구문 사용, 필요시 어형 변화)\n\n서울에 갔을 때 나는 Sarah를 만났다.\n[단어: visit, meet]\n(1)__________ __________, I (2)__________ __________.",
+      "options": [],
+      "answer": "Visiting Seoul / met Sarah",
+      "subParts": [
+        {
+          "label": "(1)",
+          "answer": "Visiting Seoul"
+        },
+        {
+          "label": "(2)",
+          "answer": "met Sarah"
+        }
+      ]
+    },
+    {
+      "number": 80,
+      "question": "다음 문장을 주어진 단어를 활용하여 영작하시오. (분사구문 사용, 필요시 어형 변화)\n\n아팠기 때문에 나는 집에 있었다.\n[단어: feel, sick, stay]\n(1)__________ __________, I (2)__________ __________.",
+      "options": [],
+      "answer": "Feeling sick / stayed home",
+      "subParts": [
+        {
+          "label": "(1)",
+          "answer": "Feeling sick"
+        },
+        {
+          "label": "(2)",
+          "answer": "stayed home"
+        }
+      ]
+    },
+    {
+      "number": 81,
+      "question": "다음 문장을 주어진 단어를 활용하여 영작하시오. (분사구문 사용, 필요시 어형 변화)\n\n그 뉴스를 들었을 때, 그녀는 대단히 놀랐다.\n[단어: hear, the news, totally, amaze]\n(1)__________ __________ __________, she (2)__________ __________ __________.",
+      "options": [],
+      "answer": "Hearing the news / was totally amazed",
+      "subParts": [
+        {
+          "label": "(1)",
+          "answer": "Hearing the news"
+        },
+        {
+          "label": "(2)",
+          "answer": "was totally amazed"
+        }
+      ]
+    },
+    {
+      "number": 82,
+      "question": "다음 문장을 주어진 단어를 활용하여 영작하시오. (분사구문 사용, 필요시 어형 변화)\n\n왼쪽으로 돌면, 너는 우체국을 볼 것이다.\n[단어: turn, see]\n(1)__________ __________, you (2)__________ __________ __________ __________ __________.",
+      "options": [],
+      "answer": "Turning left / will see the post office",
+      "subParts": [
+        {
+          "label": "(1)",
+          "answer": "Turning left"
+        },
+        {
+          "label": "(2)",
+          "answer": "will see the post office"
+        }
+      ]
+    },
+    {
+      "number": 83,
+      "question": "다음 문장을 주어진 단어를 활용하여 영작하시오. (분사구문 사용, 필요시 어형 변화)\n\n인터넷을 검색하다가 그녀는 이메일을 받았다.\n[단어: search, get]\n(1)__________ __________ __________, she (2)__________ __________ __________.",
+      "options": [],
+      "answer": "Searching the Internet / got an e-mail",
+      "subParts": [
+        {
+          "label": "(1)",
+          "answer": "Searching the Internet"
+        },
+        {
+          "label": "(2)",
+          "answer": "got an e-mail"
+        }
+      ]
+    },
+    {
+      "number": 84,
+      "question": "다음 문장을 주어진 단어를 활용하여 영작하시오. (분사구문 사용, 필요시 어형 변화)\n\n내 여동생은 크게 노래 부르면서 잔디에 물을 주고 있었다.\n[단어: sing, loudly, water, the grass]\n(1)__________ __________, my little sister (2)__________ __________ __________ __________.",
+      "options": [],
+      "answer": "Singing loudly / was watering the grass",
+      "subParts": [
+        {
+          "label": "(1)",
+          "answer": "Singing loudly"
+        },
+        {
+          "label": "(2)",
+          "answer": "was watering the grass"
+        }
+      ]
+    },
+    {
+      "number": 85,
+      "question": "다음 문장을 주어진 단어를 활용하여 영작하시오. (분사구문 사용, 필요시 어형 변화)\n\n차를 가지고 있지 않아서, 그는 대중교통을 사용하기로 했다.\n[단어: car, decide, use, transportation]\n(1)__________ __________ __________ __________, he (2)__________ __________ __________ __________ __________.",
+      "options": [],
+      "answer": "Not having a car / decided to use public transportation",
+      "subParts": [
+        {
+          "label": "(1)",
+          "answer": "Not having a car"
+        },
+        {
+          "label": "(2)",
+          "answer": "decided to use public transportation"
+        }
+      ]
+    }
+  ],
+  "P2": [
+    {
+      "number": 1,
+      "question": "다음 질문에 알맞은 대답을 고르시오.\n\nDid you meet Jenny last weekend?",
+      "options": [
+        "Yes. I returned the book that I had borrowed from her.",
+        "No. She had already left when I arrived at the party.",
+        "No. I'd spent too much on books."
+      ],
+      "answer": "1"
+    },
+    {
+      "number": 2,
+      "question": "다음 질문에 알맞은 대답을 고르시오.\n\nDid you have enough money to buy the shoes?",
+      "options": [
+        "Yes. I returned the book that I had borrowed from her.",
+        "No. She had already left when I arrived at the party.",
+        "No. I'd spent too much on books."
+      ],
+      "answer": "3"
+    },
+    {
+      "number": 3,
+      "question": "두 문장의 내용에 맞게 과거완료를 사용하여 빈칸을 채우시오.\n\n• Judy arrived at the theater.\n• The movie already started.\n→ When Judy arrived at the theater, the movie __________ __________ __________.",
+      "options": [],
+      "answer": "had already started"
+    },
+    {
+      "number": 4,
+      "question": "두 문장의 내용에 맞게 과거완료를 사용하여 빈칸을 채우시오.\n\n• Sarah couldn't work.\n• She had a surgery last week.\n→ Sarah couldn't work because she __________ __________ a surgery last week.",
+      "options": [],
+      "answer": "had had"
+    },
+    {
+      "number": 5,
+      "question": "괄호 안의 말을 이용하여 '과거완료 시제'로 문장을 완성하시오.\n\nI knew who he was. I __________ (see) him before.",
+      "options": [],
+      "answer": "had seen"
+    },
+    {
+      "number": 6,
+      "question": "괄호 안의 말을 이용하여 '과거완료 시제'로 문장을 완성하시오.\n\nThe bus __________ (already, leave) when I arrived at the bus stop.",
+      "options": [],
+      "answer": "had already left"
+    },
+    {
+      "number": 7,
+      "question": "괄호 안의 말을 이용하여 '과거완료 시제'로 문장을 완성하시오.\n\nI realized that I __________ (not, complete) my homework.",
+      "options": [],
+      "answer": "had not completed",
+      "acceptedAnswers": [
+        "hadn't completed"
+      ]
+    },
+    {
+      "number": 8,
+      "question": "괄호 안의 말을 이용하여 '과거완료 시제'로 문장을 완성하시오.\n\nWhen I entered the classroom, my English teacher __________ (already, start) her class.",
+      "options": [],
+      "answer": "had already started"
+    },
+    {
+      "number": 9,
+      "question": "괄호 안의 말을 이용하여 '과거완료 시제'로 문장을 완성하시오.\n\nI __________ (just, finish) my homework when the teacher came in.",
+      "options": [],
+      "answer": "had just finished"
+    },
+    {
+      "number": 10,
+      "question": "괄호 안의 말을 이용하여 '과거완료 시제'로 문장을 완성하시오.\n\nYesterday at a meeting, I saw Susan, an old friend of mine. I __________ (not, see) her in years.",
+      "options": [],
+      "answer": "had not seen",
+      "acceptedAnswers": [
+        "hadn't seen"
+      ]
+    },
+    {
+      "number": 11,
+      "question": "괄호 안의 말을 이용하여 '과거완료 시제'로 문장을 완성하시오.\n\nLiam quit his job after he __________ (win) some money in the lottery.",
+      "options": [],
+      "answer": "had won"
+    },
+    {
+      "number": 12,
+      "question": "괄호 안의 말을 이용하여 '과거완료 시제'로 문장을 완성하시오.\n\nElsa __________ (never, taste) an octopus until she visited Korea.",
+      "options": [],
+      "answer": "had never tasted"
+    },
+    {
+      "number": 13,
+      "question": "괄호 안의 말을 이용하여 '과거완료 시제'로 문장을 완성하시오.\n\nSimon called the travel agency, but the flight __________ (already, be cancel).",
+      "options": [],
+      "answer": "had already been canceled",
+      "acceptedAnswers": [
+        "had already been cancelled"
+      ]
+    },
+    {
+      "number": 14,
+      "question": "괄호 안의 말을 이용하여 '과거완료 시제'로 문장을 완성하시오.\n\nWhen I arrived at the airport, the check-in counters __________ (be, close).",
+      "options": [],
+      "answer": "had been closed"
+    },
+    {
+      "number": 15,
+      "question": "괄호 안의 말을 이용하여 '과거완료 시제'로 문장을 완성하시오.\n\nBefore I lost my bag, I __________ (lose) my umbrella.",
+      "options": [],
+      "answer": "had lost"
+    },
+    {
+      "number": 16,
+      "question": "다음 문장을 읽고, 두 사건 중 먼저 일어난 일을 고르시오.\n\nHer mother asked her to peel the carrots that had become soft.",
+      "options": [
+        "Her mother asked her to peel the carrots.",
+        "The carrots became soft."
+      ],
+      "answer": "2"
+    },
+    {
+      "number": 17,
+      "question": "다음 문장을 읽고, 두 사건 중 먼저 일어난 일을 고르시오.\n\nI remembered I had left my textbooks in Grandma's car.",
+      "options": [
+        "I left my textbooks in Grandma's car.",
+        "I remembered what I did."
+      ],
+      "answer": "1"
+    },
+    {
+      "number": 18,
+      "question": "다음 문장을 읽고, 두 사건 중 먼저 일어난 일을 고르시오.\n\nEveryone was surprised at what Gansong had done.",
+      "options": [
+        "Everyone was surprised.",
+        "Gansong did something."
+      ],
+      "answer": "2"
+    },
+    {
+      "number": 19,
+      "question": "다음 문장을 읽고, 두 사건 중 먼저 일어난 일을 고르시오.\n\nThe rabbits had less to eat because the deer had eaten their food.",
+      "options": [
+        "The deer ate the rabbit's food.",
+        "The rabbits had less to eat."
+      ],
+      "answer": "1"
+    },
+    {
+      "number": 20,
+      "question": "다음 문장을 읽고, 두 사건 중 먼저 일어난 일을 고르시오.\n\nWhen our food came out, it was not what we had expected.",
+      "options": [
+        "Our food came out.",
+        "We expected our food."
+      ],
+      "answer": "2"
+    },
+    {
+      "number": 21,
+      "question": "알맞은 시제를 고르시오.\n\nHe (has read / had read) that book before he arrived there.",
+      "options": [
+        "has read",
+        "had read"
+      ],
+      "answer": "2"
+    },
+    {
+      "number": 22,
+      "question": "알맞은 시제를 고르시오.\n\nHe often (came / had come) to see me when he was in Seoul.",
+      "options": [
+        "came",
+        "had come"
+      ],
+      "answer": "1"
+    },
+    {
+      "number": 23,
+      "question": "알맞은 시제를 고르시오.\n\nI (had finished / have finished) my homework when she visited me.",
+      "options": [
+        "had finished",
+        "have finished"
+      ],
+      "answer": "1"
+    },
+    {
+      "number": 24,
+      "question": "알맞은 시제를 고르시오.\n\nAmy told me that she (had paid / will pay) the bill.",
+      "options": [
+        "had paid",
+        "will pay"
+      ],
+      "answer": "1"
+    },
+    {
+      "number": 25,
+      "question": "알맞은 시제를 고르시오.\n\n(Did / Had) you met her before I visited you?",
+      "options": [
+        "Did",
+        "Had"
+      ],
+      "answer": "2"
+    },
+    {
+      "number": 26,
+      "question": "알맞은 시제를 고르시오.\n\nShe sent me a digital camera that she (has / had) bought in Hong Kong.",
+      "options": [
+        "has",
+        "had"
+      ],
+      "answer": "2"
+    },
+    {
+      "number": 27,
+      "question": "알맞은 시제를 고르시오.\n\nI had to take a taxi because the last bus (left / had left).",
+      "options": [
+        "left",
+        "had left"
+      ],
+      "answer": "2"
+    },
+    {
+      "number": 28,
+      "question": "알맞은 시제를 고르시오.\n\nWhen I got there, the bus (has been leaving / had left) already.",
+      "options": [
+        "has been leaving",
+        "had left"
+      ],
+      "answer": "2"
+    },
+    {
+      "number": 29,
+      "question": "괄호 안의 동사를 알맞은 형태로 써서 우리말에 맞는 문장을 완성하시오.\n\nSarah가 파티에 도착했을 때, Paul은 이미 집에 가고 없었다.\n→ When Sarah (1)(arrive) at the party, Paul (2)(go, already) home.",
+      "options": [],
+      "answer": "arrived / had already gone",
+      "subParts": [
+        {
+          "label": "(1)",
+          "answer": "arrived"
+        },
+        {
+          "label": "(2)",
+          "answer": "had already gone"
+        }
+      ]
+    },
+    {
+      "number": 30,
+      "question": "괄호 안의 동사를 알맞은 형태로 써서 우리말에 맞는 문장을 완성하시오.\n\n우리가 집에 도착했을 때, 아이들은 먼저 잠들어 있었다.\n→ When we (1)(get) home, the children (2)(fall) asleep.",
+      "options": [],
+      "answer": "got / had fallen",
+      "subParts": [
+        {
+          "label": "(1)",
+          "answer": "got"
+        },
+        {
+          "label": "(2)",
+          "answer": "had fallen"
+        }
+      ]
+    },
+    {
+      "number": 31,
+      "question": "괄호 안의 동사를 알맞은 형태로 써서 우리말에 맞는 문장을 완성하시오.\n\n우리가 극장에 도착했을 때, 모든 표가 이미 다 팔렸다.\n→ When we (1)(arrive) at the theater, all the tickets (2)(be, sell).",
+      "options": [],
+      "answer": "arrived / had been sold",
+      "subParts": [
+        {
+          "label": "(1)",
+          "answer": "arrived"
+        },
+        {
+          "label": "(2)",
+          "answer": "had been sold"
+        }
+      ]
+    },
+    {
+      "number": 32,
+      "question": "괄호 안의 동사를 알맞은 형태로 써서 우리말에 맞는 문장을 완성하시오.\n\n내가 공항에 도착했을 때 비행기는 이미 이륙해 있었다.\n→ The plane (1)(already, take off) when I (2)(get) to the airport.",
+      "options": [],
+      "answer": "had already taken off / got",
+      "subParts": [
+        {
+          "label": "(1)",
+          "answer": "had already taken off"
+        },
+        {
+          "label": "(2)",
+          "answer": "got"
+        }
+      ]
+    },
+    {
+      "number": 33,
+      "question": "괄호 안의 동사를 알맞은 형태로 써서 우리말에 맞는 문장을 완성하시오.\n\n내가 선생님이 되기 전에 그는 학생들을 가르쳤다.\n→ He (1)(teach) the students before I (2)(become) a teacher.",
+      "options": [],
+      "answer": "had taught / became",
+      "subParts": [
+        {
+          "label": "(1)",
+          "answer": "had taught"
+        },
+        {
+          "label": "(2)",
+          "answer": "became"
+        }
+      ]
+    },
+    {
+      "number": 34,
+      "question": "괄호 안의 동사를 과거시제 또는 과거완료 시제로 알맞게 바꾸어 쓰시오.\n\nI found my wallet that I (lose) a month ago.",
+      "options": [],
+      "answer": "had lost"
+    },
+    {
+      "number": 35,
+      "question": "괄호 안의 동사를 과거시제 또는 과거완료 시제로 알맞게 바꾸어 쓰시오.\n\nWhen we got home, the children (fall) asleep.",
+      "options": [],
+      "answer": "had fallen"
+    },
+    {
+      "number": 36,
+      "question": "괄호 안의 동사를 과거시제 또는 과거완료 시제로 알맞게 바꾸어 쓰시오.\n\nThey (already, leave) the restaurant before I got there.",
+      "options": [],
+      "answer": "had already left",
+      "acceptedAnswers": [
+        "already left"
+      ]
+    },
+    {
+      "number": 37,
+      "question": "괄호 안의 동사를 과거시제 또는 과거완료 시제로 알맞게 바꾸어 쓰시오.\n\nJohn had an upset stomach after he (eat) too much.",
+      "options": [],
+      "answer": "ate",
+      "acceptedAnswers": [
+        "had eaten"
+      ]
+    },
+    {
+      "number": 38,
+      "question": "괄호 안의 동사를 과거시제 또는 과거완료 시제로 알맞게 바꾸어 쓰시오.\n\nI couldn't buy a gift for my sister because I (spend) all my money.",
+      "options": [],
+      "answer": "had spent"
+    },
+    {
+      "number": 39,
+      "question": "괄호 안의 동사를 과거시제 또는 과거완료 시제로 알맞게 바꾸어 쓰시오.\n\nI didn't know who she was. I (never, see) her before.",
+      "options": [],
+      "answer": "had never seen"
+    },
+    {
+      "number": 40,
+      "question": "괄호 안의 동사를 과거시제 또는 과거완료 시제로 알맞게 바꾸어 쓰시오.\n\nWhen Sarah arrived at the party, Paul (already, go) home.",
+      "options": [],
+      "answer": "had already gone"
+    },
+    {
+      "number": 41,
+      "question": "괄호 안의 동사를 과거시제 또는 과거완료 시제로 알맞게 바꾸어 쓰시오.\n\nIt had begun to rain when I (step) out of the house.",
+      "options": [],
+      "answer": "stepped"
+    },
+    {
+      "number": 42,
+      "question": "괄호 안의 동사를 과거시제 또는 과거완료 시제로 알맞게 바꾸어 쓰시오.\n\nWhen I reached the bus stop, the bus (already, leave) the bus stop.",
+      "options": [],
+      "answer": "had already left"
+    },
+    {
+      "number": 43,
+      "question": "괄호 안의 동사를 과거시제 또는 과거완료 시제로 알맞게 바꾸어 쓰시오.\n\nI was very excited since I (never, be) to Dokdo before.",
+      "options": [],
+      "answer": "had never been"
+    },
+    {
+      "number": 44,
+      "question": "빈칸에 알맞은 말을 고르시오.\n\nThis evening, I had __________ finished my homework by 6 p.m.",
+      "options": [
+        "after",
+        "already",
+        "before",
+        "for",
+        "just"
+      ],
+      "answer": "2"
+    },
+    {
+      "number": 45,
+      "question": "빈칸에 알맞은 말을 고르시오.\n\nI watched TV __________ we had finished dinner.",
+      "options": [
+        "after",
+        "already",
+        "before",
+        "for",
+        "just"
+      ],
+      "answer": "1"
+    },
+    {
+      "number": 46,
+      "question": "빈칸에 알맞은 말을 고르시오.\n\nI had __________ switched the light off when I bumped into the wall.",
+      "options": [
+        "after",
+        "already",
+        "before",
+        "for",
+        "just"
+      ],
+      "answer": "5"
+    },
+    {
+      "number": 47,
+      "question": "빈칸에 알맞은 말을 고르시오.\n\nHelen went to bed __________ she had watched her favorite TV program.",
+      "options": [
+        "after",
+        "before",
+        "already",
+        "just",
+        "since"
+      ],
+      "answer": "1"
+    },
+    {
+      "number": 48,
+      "question": "빈칸에 알맞은 말을 고르시오.\n\nThe patient had died __________ the doctor arrived.",
+      "options": [
+        "after",
+        "before",
+        "already",
+        "just",
+        "since"
+      ],
+      "answer": "2"
+    },
+    {
+      "number": 49,
+      "question": "빈칸에 알맞은 말을 고르시오.\n\nYou should have come ten minutes earlier, we had __________ finished breakfast.",
+      "options": [
+        "after",
+        "before",
+        "already",
+        "just",
+        "since"
+      ],
+      "answer": "4"
+    },
+    {
+      "number": 50,
+      "question": "밑줄 친 과거완료의 용법을 고르시오.\n\nI <u>had studied</u> English for three years before I entered school.",
+      "options": [
+        "경험",
+        "계속",
+        "완료",
+        "결과"
+      ],
+      "answer": "2"
+    },
+    {
+      "number": 51,
+      "question": "밑줄 친 과거완료의 용법을 고르시오.\n\nWhen I arrived at the theater, the movie <u>had already started</u>.",
+      "options": [
+        "경험",
+        "계속",
+        "완료",
+        "결과"
+      ],
+      "answer": "3"
+    },
+    {
+      "number": 52,
+      "question": "밑줄 친 과거완료의 용법을 고르시오.\n\nI <u>had never seen</u> a beautiful beach before I went to Hawaii.",
+      "options": [
+        "경험",
+        "계속",
+        "완료",
+        "결과"
+      ],
+      "answer": "1"
+    },
+    {
+      "number": 53,
+      "question": "밑줄 친 과거완료의 용법을 고르시오.\n\nHe <u>had lost</u> his key, so he couldn't open the locker.",
+      "options": [
+        "경험",
+        "계속",
+        "완료",
+        "결과"
+      ],
+      "answer": "4"
+    },
+    {
+      "number": 54,
+      "question": "밑줄 친 과거완료의 용법을 고르시오.\n\nWhen the bears got home, they found somebody <u>had turned</u> on the TV.",
+      "options": [
+        "경험",
+        "계속",
+        "완료",
+        "결과"
+      ],
+      "answer": "3"
+    },
+    {
+      "number": 55,
+      "question": "밑줄 친 과거완료의 용법을 고르시오.\n\nMy sister was very excited since she <u>had never been</u> to Jeju Island before.",
+      "options": [
+        "경험",
+        "계속",
+        "완료",
+        "결과"
+      ],
+      "answer": "1"
+    },
+    {
+      "number": 56,
+      "question": "다음 문장에서 문법적 오류를 찾아 고치시오. ※ 틀린 부분을 고쳐서 올바른 문장으로 전부 쓰세요.\n\nMike didn't want to see the movie because he already sees it.",
+      "options": [],
+      "answer": "Mike didn't want to see the movie because he had already seen it."
+    },
+    {
+      "number": 57,
+      "question": "다음 문장에서 문법적 오류를 찾아 고치시오. ※ 틀린 부분을 고쳐서 올바른 문장으로 전부 쓰세요.\n\nI have already finished my homework when he came in.",
+      "options": [],
+      "answer": "I had already finished my homework when he came in."
+    },
+    {
+      "number": 58,
+      "question": "다음 문장에서 문법적 오류를 찾아 고치시오. ※ 틀린 부분을 고쳐서 올바른 문장으로 전부 쓰세요.\n\nShe lost the doll yesterday that my mom has made for her.",
+      "options": [],
+      "answer": "She lost the doll yesterday that my mom had made for her."
+    },
+    {
+      "number": 59,
+      "question": "다음 문장에서 문법적 오류를 찾아 고치시오. ※ 틀린 부분을 고쳐서 올바른 문장으로 전부 쓰세요.\n\nHe had a stomachache because he has eaten much pizza.",
+      "options": [],
+      "answer": "He had a stomachache because he had eaten much pizza."
+    },
+    {
+      "number": 60,
+      "question": "다음 문장에서 문법적 오류를 찾아 고치시오. ※ 틀린 부분을 고쳐서 올바른 문장으로 전부 쓰세요.\n\nHe has to take a long journey and worried about the gold coins he had saved for years.",
+      "options": [],
+      "answer": "He had to take a long journey and worried about the gold coins he had saved for years."
+    },
+    {
+      "number": 61,
+      "question": "다음 문장에서 문법적 오류를 찾아 고치시오. ※ 틀린 부분을 고쳐서 올바른 문장으로 전부 쓰세요.\n\nMy dog has died two weeks ago. I was very sad.",
+      "options": [],
+      "answer": "My dog had died two weeks ago. I was very sad."
+    },
+    {
+      "number": 62,
+      "question": "다음 문장에서 문법적 오류를 찾아 고치시오. ※ 틀린 부분을 고쳐서 올바른 문장으로 전부 쓰세요.\n\nWhen the police arrived, the thieves had already ran away.",
+      "options": [],
+      "answer": "When the police arrived, the thieves had already run away."
+    },
+    {
+      "number": 63,
+      "question": "다음 문장에서 문법적 오류를 찾아 고치시오. ※ 틀린 부분을 고쳐서 올바른 문장으로 전부 쓰세요.\n\nBy the time he gets to the party, everyone had already begun dancing.",
+      "options": [],
+      "answer": "By the time he got to the party, everyone had already begun dancing."
+    },
+    {
+      "number": 64,
+      "question": "다음 단어들을 알맞은 순서로 배열하여 우리말에 맞는 문장을 쓰시오. ※ 완전한 문장으로 쓰시오.\n\n내가 거기에 도착했을 때, 버스는 이미 떠나버렸다.\n(got, I, when, there), (had, left, bus, the, already)",
+      "options": [],
+      "answer": "When I got there, the bus had already left."
+    },
+    {
+      "number": 65,
+      "question": "다음 단어들을 알맞은 순서로 배열하여 우리말에 맞는 문장을 쓰시오. ※ 완전한 문장으로 쓰시오.\n\n내가 외출하기 전에 비가 이미 그쳤다.\n(rain, already, had, stopped, the) (out, before, I, went)",
+      "options": [],
+      "answer": "The rain had already stopped before I went out."
+    },
+    {
+      "number": 66,
+      "question": "다음 단어들을 알맞은 순서로 배열하여 우리말에 맞는 문장을 쓰시오. ※ 완전한 문장으로 쓰시오.\n\n남동생과 나는 아버지가 사 주신 케이크를 먹었다.\n(bought, Dad, and, cake, my brother, for, I, the, ate, had, us)",
+      "options": [],
+      "answer": "My brother and I ate the cake Dad had bought for us."
+    },
+    {
+      "number": 67,
+      "question": "다음 단어들을 알맞은 순서로 배열하여 우리말에 맞는 문장을 쓰시오. ※ 완전한 문장으로 쓰시오.\n\n집에 도착했을 때 나는 누군가가 우유를 마신 것을 알았다.\n(home, I, got, when), (drunk, somebody, found, milk, had, the, I)",
+      "options": [],
+      "answer": "When I got home, I found somebody had drunk the milk."
+    },
+    {
+      "number": 68,
+      "question": "다음 단어들을 알맞은 순서로 배열하여 우리말에 맞는 문장을 쓰시오. ※ 완전한 문장으로 쓰시오.\n\n우리는 그 모든 돈이 어디로 갔는지 알아낼 수가 없었다.\n(money, out, all, find, gone, we, the, couldn't, had, where)",
+      "options": [],
+      "answer": "We couldn't find out where all the money had gone."
+    },
+    {
+      "number": 69,
+      "question": "다음 문장을 주어진 단어를 활용하여 영작하시오. (과거시제와 과거완료가 모두 가능할 경우 과거완료를 사용할 것) ※ 완전한 문장으로 쓰시오.\n\n나는 그녀가 그 영화를 보았다는 것을 알았다.\n[단어: know, that, see, the movie]",
+      "options": [],
+      "answer": "I knew that she had seen the movie."
+    },
+    {
+      "number": 70,
+      "question": "다음 문장을 주어진 단어를 활용하여 영작하시오. (과거시제와 과거완료가 모두 가능할 경우 과거완료를 사용할 것) ※ 완전한 문장으로 쓰시오.\n\n그 토크 쇼는 내가 TV를 틀기 전에 이미 시작했다.\n[단어: talk show, turn on]",
+      "options": [],
+      "answer": "The talk show had already started before I turned on the TV."
+    },
+    {
+      "number": 71,
+      "question": "다음 문장을 주어진 단어를 활용하여 영작하시오. (과거시제와 과거완료가 모두 가능할 경우 과거완료를 사용할 것) ※ 완전한 문장으로 쓰시오.\n\n나는 우산을 지하철에 두고 왔다는 것을 깨달았다.\n[단어: find, that, leave]",
+      "options": [],
+      "answer": "I found that I had left my umbrella in the subway."
+    },
+    {
+      "number": 72,
+      "question": "다음 문장을 주어진 단어를 활용하여 영작하시오. (과거시제와 과거완료가 모두 가능할 경우 과거완료를 사용할 것) ※ 완전한 문장으로 쓰시오.\n\n남동생이 내 MP3 플레이어를 망가뜨려서 나는 남동생에게 소리를 질렀다.\n[단어: shout, break]",
+      "options": [],
+      "answer": "I shouted at my brother because he had broken my MP3 player."
+    },
+    {
+      "number": 73,
+      "question": "다음 문장을 주어진 단어를 활용하여 영작하시오. (과거시제와 과거완료가 모두 가능할 경우 과거완료를 사용할 것) ※ 완전한 문장으로 쓰시오.\n\n내가 학교에 갔을 때, 나는 숙제를 집에 두고 왔었다는 것이 생각났다.\n[단어: get, remember, leave]",
+      "options": [],
+      "answer": "When I got to school, I remembered I had left my homework at home.",
+      "acceptedAnswers": [
+        "When I got to school, I remembered that I had left my homework at home."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,1444 @@
+{
+  "R1": [
+    {
+      "number": 1,
+      "question": "다음 단어의 뜻이 잘못 짝지어진 것은?",
+      "options": [
+        "attach – 붙이다",
+        "antique – 골동품",
+        "valuable – 귀중한",
+        "priceless – 가치가 없는",
+        "owner – 주인, 소유자"
+      ],
+      "answer": "4"
+    },
+    {
+      "number": 2,
+      "question": "다음 빈칸에 들어갈 단어에 해당하지 않는 것은?\n\n• There's lots of nice __________ in the house.\n• It was __________ of me to leave the door open.\n• We saw a lot of __________ paintings in the museum.\n• Her father bought a truck from a car __________.",
+      "options": [
+        "attach",
+        "dealer",
+        "careless",
+        "priceless",
+        "furniture"
+      ],
+      "answer": "1"
+    },
+    {
+      "number": 3,
+      "question": "다음 영영풀이에 해당하는 단어는?\n\nan amount of money that someone is willing to pay for something",
+      "options": [
+        "saw",
+        "offer",
+        "favor",
+        "antique",
+        "collection"
+      ],
+      "answer": "2"
+    },
+    {
+      "number": 4,
+      "question": "다음 빈칸에 들어갈 말로 알맞은 것은?\n\nWhen I came home, everybody __________ to bed.",
+      "options": [
+        "to go",
+        "going",
+        "has gone",
+        "had gone",
+        "have gone"
+      ],
+      "answer": "4"
+    },
+    {
+      "number": 5,
+      "question": "다음 빈칸에 공통으로 들어갈 말로 알맞은 것은?\n\n• __________ I need is a good long holiday.\n• You haven't given me __________ I asked for.\n• George always does his best, and that's __________ I like about him.",
+      "options": [
+        "who",
+        "what",
+        "that",
+        "whom",
+        "which"
+      ],
+      "answer": "2"
+    },
+    {
+      "number": 6,
+      "question": "다음 중 어법상 알맞은 문장은?",
+      "options": [
+        "He rode the car what I like.",
+        "That I need now is a long rest.",
+        "She told me that she had already seen the TV show.",
+        "When I came home, everyone has already finished the dinner.",
+        "I had been surprised that somebody left flowers in front of my house yesterday."
+      ],
+      "answer": "3"
+    },
+    {
+      "number": 7,
+      "question": "다음 밑줄 친 what의 쓰임이 나머지와 다른 것은?",
+      "options": [
+        "We must do <u>what</u> is right.",
+        "This is <u>what</u> I don't understand well.",
+        "He was satisfied with <u>what</u> he had done.",
+        "I want to know <u>what</u> his favorite movie is.",
+        "<u>What</u> is important is that we love ourselves."
+      ],
+      "answer": "4"
+    },
+    {
+      "number": 8,
+      "question": "다음 대화의 빈칸에 들어갈 말을 <보기>의 단어를 사용하여 5단어로 알맞게 완성하시오.\n\nA: Is there anything you want to do on your birthday?\nB: ______________________ on my birthday is to go on a camping trip.\n\n<보기> do, want",
+      "options": [],
+      "answer": "What I want to do"
+    },
+    {
+      "number": 9,
+      "question": "다음 두 문장을 주어진 <조건>에 알맞게 하나의 문장으로 바꾸어 쓰시오. ※ 완전한 문장으로 쓰시오.\n\n• Ben finished his homework.\n• After that, the teacher came into the classroom.\n\n<조건>\n• 접속사 when을 사용하여 두 문장을 연결할 것\n• 과거완료 시제가 반드시 포함되도록 할 것\n\n→ ______________________________",
+      "options": [],
+      "answer": "Ben had finished his homework when the teacher came into the classroom.",
+      "acceptedAnswers": [
+        "When the teacher came into the classroom, Ben had finished his homework."
+      ]
+    },
+    {
+      "number": 10,
+      "question": "다음 대화의 빈칸에 들어갈 말로 알맞지 않은 것은?\n\nA: Jisu, I got an A on the science test.\nB: ______________________________",
+      "options": [
+        "That's a pity.",
+        "Good for you.",
+        "That's wonderful!",
+        "I'm so happy for you.",
+        "Congratulations! I'm so proud of you."
+      ],
+      "answer": "1"
+    },
+    {
+      "number": 11,
+      "question": "다음 대화의 빈칸에 들어갈 말로 알맞은 것은?\n\nA: What's up?\nB: I won first prize in the English speech contest!\nA: ______________________ Congratulations.",
+      "options": [
+        "That's a pity.",
+        "That's too bad.",
+        "That's a shame.",
+        "That's wonderful.",
+        "That's no surprise."
+      ],
+      "answer": "4"
+    },
+    {
+      "number": 12,
+      "question": "다음 대화를 읽고 물음에 답하시오.\nB: Excuse me, Ms. Carter. Can I ask you a question? Did I get the main role in the play?\n\nⓐ Unfortunately, no. She's very disappointed.\nⓑ Really? I'm so excited. Thank you so much, Ms. Carter.\nⓒ Oh, I'm sorry to hear that. Anyway, when is the first practice?\nⓓ Thank you. What about Sumi? Did she get the role she wanted, too?\nⓔ Yes, you did. Congratulations, Jiho! You're going to be Romeo in our school play, Romeo and Juliet.\nⓕ I know how much you wanted the role. I'm so happy for you.\n\nW: It's at 2 p.m. on September 20th, in the acting club room. You'll get a text message about it soon.\nB: OK, I'll be there.\n\n위 대화의 흐름이 자연스럽도록 ⓐ~ⓕ를 순서대로 바르게 배열한 것은?",
+      "options": [
+        "ⓔ-ⓑ-ⓐ-ⓕ-ⓓ-ⓒ",
+        "ⓔ-ⓑ-ⓕ-ⓓ-ⓐ-ⓒ",
+        "ⓔ-ⓑ-ⓕ-ⓓ-ⓒ-ⓐ",
+        "ⓕ-ⓓ-ⓔ-ⓑ-ⓐ-ⓒ",
+        "ⓕ-ⓓ-ⓔ-ⓑ-ⓒ-ⓐ"
+      ],
+      "answer": "2"
+    },
+    {
+      "number": 13,
+      "question": "다음 대화를 읽고 물음에 답하시오.\nB: Excuse me, Ms. Carter. Can I ask you a question? Did I get the main role in the play?\n\nⓐ Unfortunately, no. She's very disappointed.\nⓑ Really? I'm so excited. Thank you so much, Ms. Carter.\nⓒ Oh, I'm sorry to hear that. Anyway, when is the first practice?\nⓓ Thank you. What about Sumi? Did she get the role she wanted, too?\nⓔ Yes, you did. Congratulations, Jiho! You're going to be Romeo in our school play, Romeo and Juliet.\nⓕ I know how much you wanted the role. I'm so happy for you.\n\nW: It's at 2 p.m. on September 20th, in the acting club room. You'll get a text message about it soon.\nB: OK, I'll be there.\n\n위 대화를 읽고 다음 질문에 알맞은 답을 고르시오.\n\nAccording to the dialog above, why was Sumi disappointed?",
+      "options": [
+        "She didn't get the job she wanted.",
+        "She didn't get the main part in the play.",
+        "She didn't get the role she wished for in the play.",
+        "She didn't know that Jiho would play Romeo in the play.",
+        "She didn't get the text message about the school play."
+      ],
+      "answer": "3"
+    },
+    {
+      "number": 14,
+      "question": "다음 대화를 읽고 물음에 답하시오.\nYun: Mina, is anything wrong?\nMina: Well, I lost my smartphone. I'm so (A)__________.\nYun: Oh, I'm so (B)__________ to hear that. Do you remember when you used it last?\nMina: Well, I remember taking it out of my bag at the snack shop.\nYun: Then, let's go back to the snack shop to look for it.\nMina: Okay.\n\n위 대화의 빈칸 (A), (B)에 들어갈 말로 알맞게 연결된 것은?",
+      "options": [
+        "(A) sad – (B) glad",
+        "(A) upset – (B) sorry",
+        "(A) upset – (B) nervous",
+        "(A) excited – (B) worried",
+        "(A) excited – (B) disappointed"
+      ],
+      "answer": "2"
+    },
+    {
+      "number": 15,
+      "question": "다음 대화를 읽고 물음에 답하시오.\nYun: Mina, is anything wrong?\nMina: Well, I lost my smartphone. I'm so (A)__________.\nYun: Oh, I'm so (B)__________ to hear that. Do you remember when you used it last?\nMina: Well, I remember taking it out of my bag at the snack shop.\nYun: Then, let's go back to the snack shop to look for it.\nMina: Okay.\n\n위 대화 후에 일어날 일로 알맞은 것을 고르시오.\n\nWhat will happen after the conversation above?",
+      "options": [
+        "Yun will buy a new phone for Mina.",
+        "Yun and Mina will go back to school.",
+        "Yun will blame Mina for losing her phone.",
+        "Yun and Mina are going to go to the snack shop.",
+        "Mina will stop looking for her phone again and will buy a new one."
+      ],
+      "answer": "4"
+    },
+    {
+      "number": 16,
+      "question": "다음 글을 읽고 물음에 답하시오.\nCyril Boggis was an antique furniture dealer in London. He was known for buying good things at a low price and then selling them at a high price. (A)<u>사람들은 그에게 그가 그 가구를 어디서 구했는지 물었다</u>, but he just said, \"It's a secret.\"\nMr. Boggis' secret was simple. He went to small towns every Sunday and knocked on doors. He told people that he was a furniture dealer. ⓐ<u>People didn't know how valuable were their things</u>, so Mr. Boggis took advantage of them. He was able to buy things very cheaply.\nNow it was another Sunday, and Mr. Boggis was in a small town again. At a house he visited, he met two men. ⓑ<u>One was Rummins, the owner, and another was his son Bert</u>.\n\"I buy old furniture. Do you have any?\" asked Mr. Boggis.\n\"No, I don't,\" said Rummins.\n\"Can I just take a look?\" asked Mr. Boggis.\n\"Sure. Please come in,\" said Rummins.\nMr. Boggis first went to the kitchen, and there was nothing. He then moved to the living room. And there it was! ⓒ<u>A table which was a priceless piece of eighteenth-century English furniture</u>. He was so excited that he almost fell over.\n\"What's wrong?\" Bert asked.\n\"Oh, nothing. Nothing at all,\" Mr. Boggis lied. He then said with a straight face, \"This table is a reproduction. It's worth only a few pounds.\"\nHe then added, \"Hmm, I think I may buy it. The legs of my table at home are broken. ⓓ<u>I can cut off the legs of your table and attaching them to mine</u>.\"\n\"How much?\" Rummins asked.\n\"Not much, I'm afraid. This is just a reproduction,\" said Mr. Boggis.\n\"So how much?\"\n\"Ten pounds.\"\n\"Ten? It's worth more than that.\"\n\"How about fifteen?\"\n\"Make it fifty.\"\n\"Well, thirty. This is my final offer.\"\n\"OK, it's yours, but how are you going to take it? This thing will not go in a car!\"\n\"We'll see,\" Mr. Boggis said and went out to bring his car.\nⓔ<u>On his way to the car, Mr. Boggis couldn't help smile</u>. The table was (B)______________________. He couldn't believe his luck.\n\"Dad, what if this thing doesn't go in his car? He might not pay you,\" said Bert.\nRummins then had an idea. \"What he wants is only the legs. Let's cut the legs off for him,\" said Rummins. \"Great idea!\" said Bert. Bert then took out a saw and began to cut off the legs.\nWhen Mr. Boggis came back, the legs had been cut off. \"Don't worry, this was a favor. I won't charge you for this,\" said Rummins.\nMr. Boggis was so shocked that he couldn't say anything.\n\n위 글의 밑줄 친 ⓐ~ⓔ 중, 어법상 알맞은 것은?",
+      "options": [
+        "ⓐ",
+        "ⓑ",
+        "ⓒ",
+        "ⓓ",
+        "ⓔ"
+      ],
+      "answer": "3"
+    },
+    {
+      "number": 17,
+      "question": "다음 글을 읽고 물음에 답하시오.\nCyril Boggis was an antique furniture dealer in London. He was known for buying good things at a low price and then selling them at a high price. (A)<u>사람들은 그에게 그가 그 가구를 어디서 구했는지 물었다</u>, but he just said, \"It's a secret.\"\nMr. Boggis' secret was simple. He went to small towns every Sunday and knocked on doors. He told people that he was a furniture dealer. ⓐ<u>People didn't know how valuable were their things</u>, so Mr. Boggis took advantage of them. He was able to buy things very cheaply.\nNow it was another Sunday, and Mr. Boggis was in a small town again. At a house he visited, he met two men. ⓑ<u>One was Rummins, the owner, and another was his son Bert</u>.\n\"I buy old furniture. Do you have any?\" asked Mr. Boggis.\n\"No, I don't,\" said Rummins.\n\"Can I just take a look?\" asked Mr. Boggis.\n\"Sure. Please come in,\" said Rummins.\nMr. Boggis first went to the kitchen, and there was nothing. He then moved to the living room. And there it was! ⓒ<u>A table which was a priceless piece of eighteenth-century English furniture</u>. He was so excited that he almost fell over.\n\"What's wrong?\" Bert asked.\n\"Oh, nothing. Nothing at all,\" Mr. Boggis lied. He then said with a straight face, \"This table is a reproduction. It's worth only a few pounds.\"\nHe then added, \"Hmm, I think I may buy it. The legs of my table at home are broken. ⓓ<u>I can cut off the legs of your table and attaching them to mine</u>.\"\n\"How much?\" Rummins asked.\n\"Not much, I'm afraid. This is just a reproduction,\" said Mr. Boggis.\n\"So how much?\"\n\"Ten pounds.\"\n\"Ten? It's worth more than that.\"\n\"How about fifteen?\"\n\"Make it fifty.\"\n\"Well, thirty. This is my final offer.\"\n\"OK, it's yours, but how are you going to take it? This thing will not go in a car!\"\n\"We'll see,\" Mr. Boggis said and went out to bring his car.\nⓔ<u>On his way to the car, Mr. Boggis couldn't help smile</u>. The table was (B)______________________. He couldn't believe his luck.\n\"Dad, what if this thing doesn't go in his car? He might not pay you,\" said Bert.\nRummins then had an idea. \"What he wants is only the legs. Let's cut the legs off for him,\" said Rummins. \"Great idea!\" said Bert. Bert then took out a saw and began to cut off the legs.\nWhen Mr. Boggis came back, the legs had been cut off. \"Don't worry, this was a favor. I won't charge you for this,\" said Rummins.\nMr. Boggis was so shocked that he couldn't say anything.\n\n위 글의 밑줄 친 (A)의 우리말을 주어진 <조건>에 알맞게 영작하시오. ※ 완전한 문장으로 쓰시오.\n\n<조건>\n• 과거완료 시제를 한 번 사용할 것\n• <보기>의 단어 및 표현을 사용할 것 (필요시 변형할 것)\n• 9단어로 영작할 것\n\n<보기> ask, get, the furniture\n\n→ ______________________________",
+      "options": [],
+      "answer": "People asked him where he had got the furniture."
+    },
+    {
+      "number": 18,
+      "question": "다음 글을 읽고 물음에 답하시오.\nCyril Boggis was an antique furniture dealer in London. He was known for buying good things at a low price and then selling them at a high price. (A)<u>사람들은 그에게 그가 그 가구를 어디서 구했는지 물었다</u>, but he just said, \"It's a secret.\"\nMr. Boggis' secret was simple. He went to small towns every Sunday and knocked on doors. He told people that he was a furniture dealer. ⓐ<u>People didn't know how valuable were their things</u>, so Mr. Boggis took advantage of them. He was able to buy things very cheaply.\nNow it was another Sunday, and Mr. Boggis was in a small town again. At a house he visited, he met two men. ⓑ<u>One was Rummins, the owner, and another was his son Bert</u>.\n\"I buy old furniture. Do you have any?\" asked Mr. Boggis.\n\"No, I don't,\" said Rummins.\n\"Can I just take a look?\" asked Mr. Boggis.\n\"Sure. Please come in,\" said Rummins.\nMr. Boggis first went to the kitchen, and there was nothing. He then moved to the living room. And there it was! ⓒ<u>A table which was a priceless piece of eighteenth-century English furniture</u>. He was so excited that he almost fell over.\n\"What's wrong?\" Bert asked.\n\"Oh, nothing. Nothing at all,\" Mr. Boggis lied. He then said with a straight face, \"This table is a reproduction. It's worth only a few pounds.\"\nHe then added, \"Hmm, I think I may buy it. The legs of my table at home are broken. ⓓ<u>I can cut off the legs of your table and attaching them to mine</u>.\"\n\"How much?\" Rummins asked.\n\"Not much, I'm afraid. This is just a reproduction,\" said Mr. Boggis.\n\"So how much?\"\n\"Ten pounds.\"\n\"Ten? It's worth more than that.\"\n\"How about fifteen?\"\n\"Make it fifty.\"\n\"Well, thirty. This is my final offer.\"\n\"OK, it's yours, but how are you going to take it? This thing will not go in a car!\"\n\"We'll see,\" Mr. Boggis said and went out to bring his car.\nⓔ<u>On his way to the car, Mr. Boggis couldn't help smile</u>. The table was (B)______________________. He couldn't believe his luck.\n\"Dad, what if this thing doesn't go in his car? He might not pay you,\" said Bert.\nRummins then had an idea. \"What he wants is only the legs. Let's cut the legs off for him,\" said Rummins. \"Great idea!\" said Bert. Bert then took out a saw and began to cut off the legs.\nWhen Mr. Boggis came back, the legs had been cut off. \"Don't worry, this was a favor. I won't charge you for this,\" said Rummins.\nMr. Boggis was so shocked that he couldn't say anything.\n\n위 글의 빈칸 (B)에 들어갈 알맞은 말이 되도록 <보기>의 단어를 배열할 때, 네 번째로 오는 단어는?\n\n<보기> of / every / dreamed / what / dealer",
+      "options": [
+        "of",
+        "what",
+        "every",
+        "dealer",
+        "dreamed"
+      ],
+      "answer": "5"
+    },
+    {
+      "number": 19,
+      "question": "다음 글을 읽고 물음에 답하시오.\nCyril Boggis was an antique furniture dealer in London. He was known for buying good things at a low price and then selling them at a high price. People asked him where he had got the furniture, but he just said, \"It's a secret.\"\nMr. Boggis' secret was simple. He went to small towns every Sunday and knocked on doors. He told people that he was a furniture dealer. People didn't know how valuable their things were, so Mr. Boggis took advantage of them. He was able to buy things very cheaply.\nⓐ<u>Now</u> it was another Sunday, and Mr. Boggis was in a small town again. At a house he visited, he met two men. One was Rummins, the owner, and the other was his son Bert.\n\"I buy old furniture. Do you have any?\" asked Mr. Boggis.\n\"No, I don't,\" said Rummins.\n\"Can I just take a look?\" asked Mr. Boggis.\n\"Sure. Please come in,\" said Rummins.\nMr. Boggis first went to the kitchen, and there was nothing. He then moved to the living room. And ⓑ<u>there it was</u>! A table which was a priceless piece of eighteenth-century English furniture. (A)<u>He was so excited that he almost fell over</u>.\n\"What's wrong?\" Bert asked.\n\"Oh, nothing. Nothing at all,\" Mr. Boggis lied. He then said with a straight face, \"This table is a reproduction. It's ⓒ<u>worth of</u> only a few pounds.\"\nHe then added, \"Hmm, I think I may buy it. The legs of my table at home are broken. I can cut off the legs of your table and attach them to mine.\"\n\"How much?\" Rummins asked.\n\"Not much, I'm afraid. This is just a reproduction,\" said Mr. Boggis.\n\"So how much?\"\n\"Ten pounds.\"\n\"Ten? It's worth more than that.\"\n\"How about fifteen?\"\n\"ⓓ<u>Make it fifty</u>.\"\n\"Well, thirty. This is my final offer.\"\n\"OK, it's yours, but how are you going to take it? This thing will not go in a car!\"\n\"We'll see,\" Mr. Boggis said and went out to bring his car.\nOn his way to the car, Mr. Boggis couldn't help smiling. The table was what every dealer dreamed of. He couldn't believe his luck.\n\"Dad, ⓔ<u>what if</u> this thing doesn't go in his car? He might not pay you,\" said Bert.\nRummins then had an idea. \"What he wants is only the legs. Let's cut the legs off for him,\" said Rummins. \"Great idea!\" said Bert. Bert then took out a saw and began to cut off the legs.\nWhen Mr. Boggis came back, the legs had been cut off. \"Don't worry, this was a favor. I won't charge you for this,\" said Rummins. Mr. Boggis was so shocked that he couldn't say anything.\n\n위 글의 밑줄 친 ⓐ~ⓔ 중, 어법상 어색한 것은?",
+      "options": [
+        "ⓐ",
+        "ⓑ",
+        "ⓒ",
+        "ⓓ",
+        "ⓔ"
+      ],
+      "answer": "3"
+    },
+    {
+      "number": 20,
+      "question": "다음 글을 읽고 물음에 답하시오.\nCyril Boggis was an antique furniture dealer in London. He was known for buying good things at a low price and then selling them at a high price. People asked him where he had got the furniture, but he just said, \"It's a secret.\"\nMr. Boggis' secret was simple. He went to small towns every Sunday and knocked on doors. He told people that he was a furniture dealer. People didn't know how valuable their things were, so Mr. Boggis took advantage of them. He was able to buy things very cheaply.\nⓐ<u>Now</u> it was another Sunday, and Mr. Boggis was in a small town again. At a house he visited, he met two men. One was Rummins, the owner, and the other was his son Bert.\n\"I buy old furniture. Do you have any?\" asked Mr. Boggis.\n\"No, I don't,\" said Rummins.\n\"Can I just take a look?\" asked Mr. Boggis.\n\"Sure. Please come in,\" said Rummins.\nMr. Boggis first went to the kitchen, and there was nothing. He then moved to the living room. And ⓑ<u>there it was</u>! A table which was a priceless piece of eighteenth-century English furniture. (A)<u>He was so excited that he almost fell over</u>.\n\"What's wrong?\" Bert asked.\n\"Oh, nothing. Nothing at all,\" Mr. Boggis lied. He then said with a straight face, \"This table is a reproduction. It's ⓒ<u>worth of</u> only a few pounds.\"\nHe then added, \"Hmm, I think I may buy it. The legs of my table at home are broken. I can cut off the legs of your table and attach them to mine.\"\n\"How much?\" Rummins asked.\n\"Not much, I'm afraid. This is just a reproduction,\" said Mr. Boggis.\n\"So how much?\"\n\"Ten pounds.\"\n\"Ten? It's worth more than that.\"\n\"How about fifteen?\"\n\"ⓓ<u>Make it fifty</u>.\"\n\"Well, thirty. This is my final offer.\"\n\"OK, it's yours, but how are you going to take it? This thing will not go in a car!\"\n\"We'll see,\" Mr. Boggis said and went out to bring his car.\nOn his way to the car, Mr. Boggis couldn't help smiling. The table was what every dealer dreamed of. He couldn't believe his luck.\n\"Dad, ⓔ<u>what if</u> this thing doesn't go in his car? He might not pay you,\" said Bert.\nRummins then had an idea. \"What he wants is only the legs. Let's cut the legs off for him,\" said Rummins. \"Great idea!\" said Bert. Bert then took out a saw and began to cut off the legs.\nWhen Mr. Boggis came back, the legs had been cut off. \"Don't worry, this was a favor. I won't charge you for this,\" said Rummins. Mr. Boggis was so shocked that he couldn't say anything.\n\n위 글에서 알 수 있는 Boggis의 성격으로 알맞은 것은?",
+      "options": [
+        "lazy",
+        "polite",
+        "generous",
+        "dishonest",
+        "thoughtful"
+      ],
+      "answer": "4"
+    },
+    {
+      "number": 21,
+      "question": "다음 글을 읽고 물음에 답하시오.\nCyril Boggis was an antique furniture dealer in London. He was known for buying good things at a low price and then selling them at a high price. People asked him where he had got the furniture, but he just said, \"It's a secret.\"\nMr. Boggis' secret was simple. He went to small towns every Sunday and knocked on doors. He told people that he was a furniture dealer. People didn't know how valuable their things were, so Mr. Boggis took advantage of them. He was able to buy things very cheaply.\nⓐ<u>Now</u> it was another Sunday, and Mr. Boggis was in a small town again. At a house he visited, he met two men. One was Rummins, the owner, and the other was his son Bert.\n\"I buy old furniture. Do you have any?\" asked Mr. Boggis.\n\"No, I don't,\" said Rummins.\n\"Can I just take a look?\" asked Mr. Boggis.\n\"Sure. Please come in,\" said Rummins.\nMr. Boggis first went to the kitchen, and there was nothing. He then moved to the living room. And ⓑ<u>there it was</u>! A table which was a priceless piece of eighteenth-century English furniture. (A)<u>He was so excited that he almost fell over</u>.\n\"What's wrong?\" Bert asked.\n\"Oh, nothing. Nothing at all,\" Mr. Boggis lied. He then said with a straight face, \"This table is a reproduction. It's ⓒ<u>worth of</u> only a few pounds.\"\nHe then added, \"Hmm, I think I may buy it. The legs of my table at home are broken. I can cut off the legs of your table and attach them to mine.\"\n\"How much?\" Rummins asked.\n\"Not much, I'm afraid. This is just a reproduction,\" said Mr. Boggis.\n\"So how much?\"\n\"Ten pounds.\"\n\"Ten? It's worth more than that.\"\n\"How about fifteen?\"\n\"ⓓ<u>Make it fifty</u>.\"\n\"Well, thirty. This is my final offer.\"\n\"OK, it's yours, but how are you going to take it? This thing will not go in a car!\"\n\"We'll see,\" Mr. Boggis said and went out to bring his car.\nOn his way to the car, Mr. Boggis couldn't help smiling. The table was what every dealer dreamed of. He couldn't believe his luck.\n\"Dad, ⓔ<u>what if</u> this thing doesn't go in his car? He might not pay you,\" said Bert.\nRummins then had an idea. \"What he wants is only the legs. Let's cut the legs off for him,\" said Rummins. \"Great idea!\" said Bert. Bert then took out a saw and began to cut off the legs.\nWhen Mr. Boggis came back, the legs had been cut off. \"Don't worry, this was a favor. I won't charge you for this,\" said Rummins. Mr. Boggis was so shocked that he couldn't say anything.\n\n위 글의 밑줄 친 (A)의 이유로 알맞은 것은?",
+      "options": [
+        "거실에 가구가 너무 많아서",
+        "Rummins씨의 집이 너무 멋져서",
+        "너무 돌아다녀 다리가 너무 아파서",
+        "부엌에서 본 탁자가 너무 형편없어서",
+        "값을 매길 수 없을 만큼 가치 있는 가구를 봐서"
+      ],
+      "answer": "5"
+    },
+    {
+      "number": 22,
+      "question": "다음 글을 읽고 물음에 답하시오.\nCyril Boggis was an antique furniture dealer in London. He was known for buying good things at a low price and then selling them at a high price. People asked him where he had got the furniture, but he just said, \"It's a secret.\"\nMr. Boggis' secret was simple. He went to small towns every Sunday and knocked on doors. He told people that he was a furniture dealer. People didn't know how valuable their things were, so Mr. Boggis took advantage of them. He was able to buy things very cheaply.\nⓐ<u>Now</u> it was another Sunday, and Mr. Boggis was in a small town again. At a house he visited, he met two men. One was Rummins, the owner, and the other was his son Bert.\n\"I buy old furniture. Do you have any?\" asked Mr. Boggis.\n\"No, I don't,\" said Rummins.\n\"Can I just take a look?\" asked Mr. Boggis.\n\"Sure. Please come in,\" said Rummins.\nMr. Boggis first went to the kitchen, and there was nothing. He then moved to the living room. And ⓑ<u>there it was</u>! A table which was a priceless piece of eighteenth-century English furniture. (A)<u>He was so excited that he almost fell over</u>.\n\"What's wrong?\" Bert asked.\n\"Oh, nothing. Nothing at all,\" Mr. Boggis lied. He then said with a straight face, \"This table is a reproduction. It's ⓒ<u>worth of</u> only a few pounds.\"\nHe then added, \"Hmm, I think I may buy it. The legs of my table at home are broken. I can cut off the legs of your table and attach them to mine.\"\n\"How much?\" Rummins asked.\n\"Not much, I'm afraid. This is just a reproduction,\" said Mr. Boggis.\n\"So how much?\"\n\"Ten pounds.\"\n\"Ten? It's worth more than that.\"\n\"How about fifteen?\"\n\"ⓓ<u>Make it fifty</u>.\"\n\"Well, thirty. This is my final offer.\"\n\"OK, it's yours, but how are you going to take it? This thing will not go in a car!\"\n\"We'll see,\" Mr. Boggis said and went out to bring his car.\nOn his way to the car, Mr. Boggis couldn't help smiling. The table was what every dealer dreamed of. He couldn't believe his luck.\n\"Dad, ⓔ<u>what if</u> this thing doesn't go in his car? He might not pay you,\" said Bert.\nRummins then had an idea. \"What he wants is only the legs. Let's cut the legs off for him,\" said Rummins. \"Great idea!\" said Bert. Bert then took out a saw and began to cut off the legs.\nWhen Mr. Boggis came back, the legs had been cut off. \"Don't worry, this was a favor. I won't charge you for this,\" said Rummins. Mr. Boggis was so shocked that he couldn't say anything.\n\n위 글의 교훈으로 알맞은 것은?",
+      "options": [
+        "백지장도 맞들면 낫다.",
+        "뛰는 놈 위에 나는 놈 있다.",
+        "자기 꾀에 자기가 넘어간다.",
+        "고래 싸움에 새우 등 터진다.",
+        "사공이 많으면 배가 산으로 간다."
+      ],
+      "answer": "3"
+    },
+    {
+      "number": 23,
+      "question": "다음 글을 읽고 물음에 답하시오.\nNow it was another Sunday, and Mr. Boggis was in a small town again. At a house he visited, he met two men. ⓐ<u>One was Rummins, the owner, and another was his son Bert</u>. (A)\n\"I buy old furniture. Do you have any?\" asked Mr. Boggis.\n\"No, I don't,\" said Rummins.\n\"Can I just take a look?\" asked Mr. Boggis.\n\"Sure. Please come in,\" said Rummins.\nMr. Boggis first went to the kitchen, and ㉠<u>there was nothing</u>. He then moved to the living room. (B) He was so excited that he almost fell over.\n\"What's wrong?\" Bert asked.\n\"Oh, nothing. Nothing at all,\" ⓑ<u>Mr. Boggis was lied</u>. He then said with a straight face, \"This table is a reproduction. It's worth only a few pounds.\"\nHe then added, \"Hmm, I think I may buy it. The legs of my table at home are broken. I can cut off the legs of your table and attach them to ㉡<u>mine</u>.\"\n\"How much?\" Rummins asked.\n\"Not much, I'm afraid. This is just a reproduction,\" said Mr. Boggis. (C)\n\"So how much?\"\n\"Ten pounds.\"\n\"Ten? It's worth more than that.\"\n\"How about fifteen?\"\n\"Make it fifty.\"\n\"Well, thirty. This is ㉢<u>my final offer</u>.\"\n\"OK, it's yours, but how are you going to take it? This thing will not go in a car!\"\n\"We'll see,\" Mr. Boggis said and went out to bring his car. (D)\nOn his way to the car, Mr. Boggis couldn't help smiling. ⓒ<u>The table was what every dealer dreamed of</u>. He couldn't believe ㉣<u>his luck</u>.\n\"Dad, what if this thing doesn't go in his car? He might not pay you,\" said Bert. (E)\nRummins then had an idea. \"ⓓ<u>What he wants to be only the legs</u>. Let's cut the legs off for him,\" said Rummins. \"Great idea!\" said Bert. Bert then took out a saw and began to cut off the legs.\nⓔ<u>When Mr. Boggis came back, the legs had cut off</u>. \"Don't worry, this was ㉤<u>a favor</u>. I won't charge you for this,\" said Rummins. Mr. Boggis was so shocked that he couldn't say anything.\n\n위 글의 밑줄 친 ⓐ~ⓔ 중, 어법상 알맞은 것은?",
+      "options": [
+        "ⓐ",
+        "ⓑ",
+        "ⓒ",
+        "ⓓ",
+        "ⓔ"
+      ],
+      "answer": "3"
+    },
+    {
+      "number": 24,
+      "question": "다음 글을 읽고 물음에 답하시오.\nNow it was another Sunday, and Mr. Boggis was in a small town again. At a house he visited, he met two men. ⓐ<u>One was Rummins, the owner, and another was his son Bert</u>. (A)\n\"I buy old furniture. Do you have any?\" asked Mr. Boggis.\n\"No, I don't,\" said Rummins.\n\"Can I just take a look?\" asked Mr. Boggis.\n\"Sure. Please come in,\" said Rummins.\nMr. Boggis first went to the kitchen, and ㉠<u>there was nothing</u>. He then moved to the living room. (B) He was so excited that he almost fell over.\n\"What's wrong?\" Bert asked.\n\"Oh, nothing. Nothing at all,\" ⓑ<u>Mr. Boggis was lied</u>. He then said with a straight face, \"This table is a reproduction. It's worth only a few pounds.\"\nHe then added, \"Hmm, I think I may buy it. The legs of my table at home are broken. I can cut off the legs of your table and attach them to ㉡<u>mine</u>.\"\n\"How much?\" Rummins asked.\n\"Not much, I'm afraid. This is just a reproduction,\" said Mr. Boggis. (C)\n\"So how much?\"\n\"Ten pounds.\"\n\"Ten? It's worth more than that.\"\n\"How about fifteen?\"\n\"Make it fifty.\"\n\"Well, thirty. This is ㉢<u>my final offer</u>.\"\n\"OK, it's yours, but how are you going to take it? This thing will not go in a car!\"\n\"We'll see,\" Mr. Boggis said and went out to bring his car. (D)\nOn his way to the car, Mr. Boggis couldn't help smiling. ⓒ<u>The table was what every dealer dreamed of</u>. He couldn't believe ㉣<u>his luck</u>.\n\"Dad, what if this thing doesn't go in his car? He might not pay you,\" said Bert. (E)\nRummins then had an idea. \"ⓓ<u>What he wants to be only the legs</u>. Let's cut the legs off for him,\" said Rummins. \"Great idea!\" said Bert. Bert then took out a saw and began to cut off the legs.\nⓔ<u>When Mr. Boggis came back, the legs had cut off</u>. \"Don't worry, this was ㉤<u>a favor</u>. I won't charge you for this,\" said Rummins. Mr. Boggis was so shocked that he couldn't say anything.\n\n위 글의 (A)~(E) 중, 주어진 문장이 들어갈 알맞은 곳은?\n\nAnd there it was! A table which was a priceless piece of eighteenth-century English furniture.",
+      "options": [
+        "(A)",
+        "(B)",
+        "(C)",
+        "(D)",
+        "(E)"
+      ],
+      "answer": "2"
+    },
+    {
+      "number": 25,
+      "question": "다음 글을 읽고 물음에 답하시오.\nNow it was another Sunday, and Mr. Boggis was in a small town again. At a house he visited, he met two men. ⓐ<u>One was Rummins, the owner, and another was his son Bert</u>. (A)\n\"I buy old furniture. Do you have any?\" asked Mr. Boggis.\n\"No, I don't,\" said Rummins.\n\"Can I just take a look?\" asked Mr. Boggis.\n\"Sure. Please come in,\" said Rummins.\nMr. Boggis first went to the kitchen, and ㉠<u>there was nothing</u>. He then moved to the living room. (B) He was so excited that he almost fell over.\n\"What's wrong?\" Bert asked.\n\"Oh, nothing. Nothing at all,\" ⓑ<u>Mr. Boggis was lied</u>. He then said with a straight face, \"This table is a reproduction. It's worth only a few pounds.\"\nHe then added, \"Hmm, I think I may buy it. The legs of my table at home are broken. I can cut off the legs of your table and attach them to ㉡<u>mine</u>.\"\n\"How much?\" Rummins asked.\n\"Not much, I'm afraid. This is just a reproduction,\" said Mr. Boggis. (C)\n\"So how much?\"\n\"Ten pounds.\"\n\"Ten? It's worth more than that.\"\n\"How about fifteen?\"\n\"Make it fifty.\"\n\"Well, thirty. This is ㉢<u>my final offer</u>.\"\n\"OK, it's yours, but how are you going to take it? This thing will not go in a car!\"\n\"We'll see,\" Mr. Boggis said and went out to bring his car. (D)\nOn his way to the car, Mr. Boggis couldn't help smiling. ⓒ<u>The table was what every dealer dreamed of</u>. He couldn't believe ㉣<u>his luck</u>.\n\"Dad, what if this thing doesn't go in his car? He might not pay you,\" said Bert. (E)\nRummins then had an idea. \"ⓓ<u>What he wants to be only the legs</u>. Let's cut the legs off for him,\" said Rummins. \"Great idea!\" said Bert. Bert then took out a saw and began to cut off the legs.\nⓔ<u>When Mr. Boggis came back, the legs had cut off</u>. \"Don't worry, this was ㉤<u>a favor</u>. I won't charge you for this,\" said Rummins. Mr. Boggis was so shocked that he couldn't say anything.\n\n위 글의 밑줄 친 ㉠~㉤이 나타내는 의미로 알맞은 것은?",
+      "options": [
+        "㉠: Boggis의 집에는 가구가 하나도 없었다",
+        "㉡: Rummins의 집에 있는 부서진 탁자",
+        "㉢: Rummins의 테이블을 50파운드에 사는 것",
+        "㉣: 값싼 테이블을 Rummins에게 비싸게 팔게 된 것",
+        "㉤: Rummins와 Bert가 테이블의 다리를 자른 것"
+      ],
+      "answer": "5"
+    },
+    {
+      "number": 26,
+      "question": "다음 글을 읽고 물음에 답하시오.\nNow it was another Sunday, and Mr. Boggis was in a small town again. At a house he visited, he met two men. ⓐ<u>One was Rummins, the owner, and another was his son Bert</u>. (A)\n\"I buy old furniture. Do you have any?\" asked Mr. Boggis.\n\"No, I don't,\" said Rummins.\n\"Can I just take a look?\" asked Mr. Boggis.\n\"Sure. Please come in,\" said Rummins.\nMr. Boggis first went to the kitchen, and ㉠<u>there was nothing</u>. He then moved to the living room. (B) He was so excited that he almost fell over.\n\"What's wrong?\" Bert asked.\n\"Oh, nothing. Nothing at all,\" ⓑ<u>Mr. Boggis was lied</u>. He then said with a straight face, \"This table is a reproduction. It's worth only a few pounds.\"\nHe then added, \"Hmm, I think I may buy it. The legs of my table at home are broken. I can cut off the legs of your table and attach them to ㉡<u>mine</u>.\"\n\"How much?\" Rummins asked.\n\"Not much, I'm afraid. This is just a reproduction,\" said Mr. Boggis. (C)\n\"So how much?\"\n\"Ten pounds.\"\n\"Ten? It's worth more than that.\"\n\"How about fifteen?\"\n\"Make it fifty.\"\n\"Well, thirty. This is ㉢<u>my final offer</u>.\"\n\"OK, it's yours, but how are you going to take it? This thing will not go in a car!\"\n\"We'll see,\" Mr. Boggis said and went out to bring his car. (D)\nOn his way to the car, Mr. Boggis couldn't help smiling. ⓒ<u>The table was what every dealer dreamed of</u>. He couldn't believe ㉣<u>his luck</u>.\n\"Dad, what if this thing doesn't go in his car? He might not pay you,\" said Bert. (E)\nRummins then had an idea. \"ⓓ<u>What he wants to be only the legs</u>. Let's cut the legs off for him,\" said Rummins. \"Great idea!\" said Bert. Bert then took out a saw and began to cut off the legs.\nⓔ<u>When Mr. Boggis came back, the legs had cut off</u>. \"Don't worry, this was ㉤<u>a favor</u>. I won't charge you for this,\" said Rummins. Mr. Boggis was so shocked that he couldn't say anything.\n\n위 글을 읽고 질문에 바르게 답한 것을 고르면?",
+      "options": [
+        "Q: What was Rummins' job? / A: He was an antique furniture dealer.",
+        "Q: What did Mr. Boggis find in the living room in Rummins' house? / A: He found a table which was a worthless piece of nineteenth-century English furniture.",
+        "Q: What was Mr. Boggis' final offer for the table? / A: It was fifty pounds.",
+        "Q: What did Bert worry about? / A: He worried that the table might be too big to go in Mr. Boggis' car.",
+        "Q: Why couldn't Mr. Boggis help smiling on his way to the car? / A: It was because he had found a table that was valueless."
+      ],
+      "answer": "4"
+    },
+    {
+      "number": 27,
+      "question": "다음 글을 읽고 물음에 답하시오.\nMr. Boggis went to a small town again to find antique furniture, and there he met two men, Rummins and his son Bert.\nAt Rummins' house, Mr. Boggis found a table which was a priceless piece of eighteenth-century English furniture. He was so excited that he almost fell over, but he lied to Rummins that the table was a reproduction, which is ⓐ<u>worth</u> only a few pounds.\nHe then added, \"Hmm, I think I may buy it. The legs of my table at home are broken. I can cut off the legs of your table and attach them to mine.\"\n\"How much?\" Rummins asked.\n\"Not much, I'm afraid. This is just a reproduction,\" said Mr. Boggis.\n\"So how much?\"\n\"Ten pounds.\"\n\"Ten? It's worth more than that.\"\n\"How about fifteen?\"\n\"Make it fifty.\"\n\"Well, thirty. This is my final ⓑ<u>offer</u>.\"\n\"OK, it's yours, but how are you going to take it? This thing will not go in a car!\"\n\"We'll see,\" Mr. Boggis said and went out to bring his car.\nOn his way to the car, Mr. Boggis ⓒ<u>couldn't help smiling</u>. The table was what every dealer dreamed of. He couldn't believe his luck.\n\"Dad, what if this thing doesn't go in his car? He might not pay you,\" said Bert.\n(A) Rummins then had an idea. (B) \"Great idea!\" said Bert. (C) Bert then ⓓ<u>took out</u> a saw and began to cut off the legs. (D)\nWhen Mr. Boggis came back, the legs had been cut off. \"Don't worry, this was a favor. I won't ⓔ<u>pay</u> you for this,\" (E) said Rummins. Mr. Boggis was so shocked that he couldn't say anything.\n\n위 글의 밑줄 친 ⓐ~ⓔ 중, 흐름상 어색한 것은?",
+      "options": [
+        "ⓐ",
+        "ⓑ",
+        "ⓒ",
+        "ⓓ",
+        "ⓔ"
+      ],
+      "answer": "5"
+    },
+    {
+      "number": 28,
+      "question": "다음 글을 읽고 물음에 답하시오.\nMr. Boggis went to a small town again to find antique furniture, and there he met two men, Rummins and his son Bert.\nAt Rummins' house, Mr. Boggis found a table which was a priceless piece of eighteenth-century English furniture. He was so excited that he almost fell over, but he lied to Rummins that the table was a reproduction, which is ⓐ<u>worth</u> only a few pounds.\nHe then added, \"Hmm, I think I may buy it. The legs of my table at home are broken. I can cut off the legs of your table and attach them to mine.\"\n\"How much?\" Rummins asked.\n\"Not much, I'm afraid. This is just a reproduction,\" said Mr. Boggis.\n\"So how much?\"\n\"Ten pounds.\"\n\"Ten? It's worth more than that.\"\n\"How about fifteen?\"\n\"Make it fifty.\"\n\"Well, thirty. This is my final ⓑ<u>offer</u>.\"\n\"OK, it's yours, but how are you going to take it? This thing will not go in a car!\"\n\"We'll see,\" Mr. Boggis said and went out to bring his car.\nOn his way to the car, Mr. Boggis ⓒ<u>couldn't help smiling</u>. The table was what every dealer dreamed of. He couldn't believe his luck.\n\"Dad, what if this thing doesn't go in his car? He might not pay you,\" said Bert.\n(A) Rummins then had an idea. (B) \"Great idea!\" said Bert. (C) Bert then ⓓ<u>took out</u> a saw and began to cut off the legs. (D)\nWhen Mr. Boggis came back, the legs had been cut off. \"Don't worry, this was a favor. I won't ⓔ<u>pay</u> you for this,\" (E) said Rummins. Mr. Boggis was so shocked that he couldn't say anything.\n\n위 글의 (A)~(E) 중, 주어진 문장이 들어갈 알맞은 곳은?\n\n\"What he wants is only the legs. Let's cut the legs off for him,\" said Rummins.",
+      "options": [
+        "(A)",
+        "(B)",
+        "(C)",
+        "(D)",
+        "(E)"
+      ],
+      "answer": "2"
+    },
+    {
+      "number": 29,
+      "question": "다음 글을 읽고 물음에 답하시오.\nHe then added, \"Hmm, I think I may buy it. The legs of my table at home are broken. I can cut off the legs of your table and attach them to mine.\"\n\"How much?\" Rummins asked.\n\"Not much, I'm afraid. This is just a reproduction,\" said Mr. Boggis.\n\"So how much?\"\n\"Ten pounds.\"\n\"Ten? It's worth more than that.\"\n\"How about fifteen?\"\n\"Make it fifty.\"\n\"Well, thirty. This is my final offer.\"\n\"OK, it's yours, but how are you going to take it? This thing will not go in a car!\"\n\"We'll see,\" Mr. Boggis said and went out to bring his car.\nOn his way to the car, Mr. Boggis couldn't help smiling. The table was what every dealer dreamed of. He couldn't believe his luck.\n\"Dad, what if this thing doesn't go in his car? He might not pay you,\" said Bert.\nRummins then had an idea. \"What he wants is only the legs. Let's cut the legs off for him,\" said Rummins. \"Great idea!\" said Bert. Bert then took out a saw and began to cut off the legs.\nWhen Mr. Boggis came back, the legs had been cut off. \"Don't worry, this was a favor. I won't charge you for this,\" said Rummins. Mr. Boggis was so shocked that he couldn't say anything.\n\n위 글의 밑줄 친 (A)what과 쓰임이 같은 것을 <보기>에서 모두 골라 짝지은 것은?\n\n(위 글의 \"The table was (A)<u>what</u> every dealer dreamed of.\"의 what)\n\n<보기>\nⓐ I saw <u>what</u> you drew on the wall.\nⓑ Tell me <u>what</u> your major was in college.\nⓒ I asked <u>what</u> she would cook for dinner.\nⓓ I'll explain <u>what</u> this machine is used for.\nⓔ I wonder <u>what</u> kind of movies you watched.\nⓕ Kelly loved <u>what</u> Joe made during the art class.",
+      "options": [
+        "ⓐ, ⓕ",
+        "ⓑ, ⓓ",
+        "ⓒ, ⓔ",
+        "ⓑ, ⓒ, ⓔ",
+        "ⓐ, ⓓ, ⓕ"
+      ],
+      "answer": "1"
+    },
+    {
+      "number": 30,
+      "question": "다음 글의 밑줄 친 ⓐ~ⓔ 중, 어법상 어색한 것은?\n\nⓐ<u>Roald Dahl was born in 1916 in Wales</u>. Dahl's parents were Norwegian, and ⓑ<u>Dahl named after the Norwegian explorer Roald Amundsen</u>. His first language was Norwegian, which he spoke at home with his parents and his four sisters. In 1920, when Dahl was three years old, his seven-year-old sister, Astri, died and weeks later, his father died too at the age of 57. However, ⓒ<u>Dahl's mother did not go back to Norway and stayed in Wales</u>. It was because her husband Harald had wanted their children to be educated in British schools, which he considered the world's best. Dahl went to St. Peter's, a boarding school, but ⓓ<u>his time at St. Peter's was unpleasant</u>. He was very homesick and unhappy. ⓔ<u>Dahl later wrote about his time</u> at St. Peter's in his autobiography Boy: Tales of Childhood.",
+      "options": [
+        "ⓐ",
+        "ⓑ",
+        "ⓒ",
+        "ⓓ",
+        "ⓔ"
+      ],
+      "answer": "2"
+    }
+  ],
+  "R2": [
+    {
+      "number": 1,
+      "question": "다음 단어의 뜻이 알맞게 짝지어진 것은?",
+      "options": [
+        "upset – 신난",
+        "saw – 톱질하다",
+        "knock – 알려진",
+        "announcement – 호의",
+        "favor – 제의, 제안"
+      ],
+      "answer": "2"
+    },
+    {
+      "number": 2,
+      "question": "다음 중 영어 표현에 대해 바르게 설명한 학생을 모두 골라 짝지은 것은?\n\nEmily: 'be known for'는 '~로 알려져 있다'라는 뜻이야.\nJohn: 'on my way home'은 '집으로 가는 방법은'이라는 뜻이야.\nJake: 'can't help -ing'는 '~를 도와줄 수 없다'라는 뜻이야.\nAndrew: 'can't help -ing'는 'can't help but+동사원형'으로 바꾸어 쓸 수 있어.\nCharles: 'The city is known for tall buildings.'는 '그 도시에는 높다고 알려진 빌딩이 있다.'라고 해석해.",
+      "options": [
+        "Emily, John",
+        "John, Jake",
+        "Emily, Andrew",
+        "Jake, Andrew",
+        "Andrew, Charles"
+      ],
+      "answer": "3"
+    },
+    {
+      "number": 3,
+      "question": "다음 빈칸에 들어갈 단어에 해당하지 않는 것은?\n\n• She is ________ about what others think.\n• This vase is ________ over 20,000 dollars.\n• They ________ $100 a year for membership.\n• The museum has a collection of ________ art.",
+      "options": [
+        "charge",
+        "worth",
+        "knock",
+        "careless",
+        "priceless"
+      ],
+      "answer": "3"
+    },
+    {
+      "number": 4,
+      "question": "다음 빈칸에 들어갈 말로 알맞은 것은?\n\nOn my way to school this morning, I found that I ______________ my phone at home.",
+      "options": [
+        "leave",
+        "was left",
+        "had left",
+        "have left",
+        "have been left"
+      ],
+      "answer": "3"
+    },
+    {
+      "number": 5,
+      "question": "다음 빈칸에 들어갈 말이 나머지와 다른 것은?",
+      "options": [
+        "This is ________ I am looking for.",
+        "Sally read a letter ________ he wrote to her.",
+        "________ he told me yesterday was not true.",
+        "Have you finished ________ I told you to do?",
+        "He showed me ________ he made during the class."
+      ],
+      "answer": "2"
+    },
+    {
+      "number": 6,
+      "question": "다음 우리말을 알맞게 영작한 것은?\n\n그는 나에게 자신은 이미 그 영화를 보았다고 말했다.",
+      "options": [
+        "He has already told me what he saw the movie.",
+        "He had already told me that he saw the movie.",
+        "He told me that he has already seen the movie.",
+        "He already told me that he has seen the movie.",
+        "He told me that he had already seen the movie."
+      ],
+      "answer": "5"
+    },
+    {
+      "number": 7,
+      "question": "다음 밑줄 친 what의 쓰임이 나머지와 다른 것은?",
+      "options": [
+        "It is not <u>what</u> I am looking for.",
+        "I asked the man <u>what</u> his name was.",
+        "I'll tell you <u>what</u> I was curious about.",
+        "He had <u>what</u> I wanted to have for a long time.",
+        "<u>What</u> she requires from us is that we listen to her and understand her."
+      ],
+      "answer": "2"
+    },
+    {
+      "number": 8,
+      "question": "다음 우리말과 같은 뜻이 되도록 빈칸에 들어갈 말을 <보기>에 주어진 단어 및 표현을 알맞게 배열하여 완성하시오.\n\n(1) Cathy는 그 문제를 이미 해결했다고 내게 말했다.\n(2) 그는 자신의 잔에 남은 것을 마실 것이다.\n\n<보기>\n(1) had / she / the matter / already solved\n(2) is / his glass / in / what / left\n\n(1) Cathy told me ______________________.\n(2) He will drink ______________________.",
+      "options": [],
+      "answer": "she had already solved the matter / what is left in his glass",
+      "subParts": [
+        {
+          "label": "(1)",
+          "answer": "she had already solved the matter"
+        },
+        {
+          "label": "(2)",
+          "answer": "what is left in his glass"
+        }
+      ]
+    },
+    {
+      "number": 9,
+      "question": "다음 우리말을 주어진 <조건>에 알맞게 영작하시오. ※ 완전한 문장으로 쓰시오.\n\n그 테이블은 모든 판매상이 꿈꿔왔던 것이었다.\n\n<조건>\n• 선행사를 포함한 관계대명사를 사용할 것\n• <보기>에 주어진 단어 및 표현을 사용할 것 (필요시 변형할 것)\n• 9단어로 영작할 것\n\n<보기> the table, dream of, every, dealer\n\n→ ______________________________",
+      "options": [],
+      "answer": "The table was what every dealer had dreamed of."
+    },
+    {
+      "number": 10,
+      "question": "다음 대화의 빈칸에 들어갈 말로 알맞은 것은?\n\nB: Mina, is anything wrong?\nG: Well, I lost my smartphone. I'm upset.\nB: ______________________________ Do you remember when you used it last?\nG: Well, I remember taking it out of my bag at the snack shop.\nB: Then, let's go back to the snack shop to look for it.",
+      "options": [
+        "OK. I'll try.",
+        "Thank you.",
+        "Oh, I'm sorry to hear that.",
+        "That's wonderful. Congratulations!",
+        "You must be very proud of yourself."
+      ],
+      "answer": "3"
+    },
+    {
+      "number": 11,
+      "question": "다음 대화의 빈칸에 들어갈 말로 알맞은 것은?\n\nA: What's up?\nB: ______________________________\nA: Oh, I'm sorry to hear that.",
+      "options": [
+        "My bike is broken.",
+        "I passed the driving test.",
+        "Our team won the soccer game.",
+        "I was elected as school president.",
+        "I was chosen as the leader of the school band."
+      ],
+      "answer": "1"
+    },
+    {
+      "number": 12,
+      "question": "다음 대화를 읽고 물음에 답하시오.\nB: Excuse me, Ms. Carter. Can I ask you a question? Did I get the main role in the play?\nW: (A) Yes, you did. Congratulations, Jiho! You're going to be Romeo in our school play, Romeo and Juliet.\nB: Really? (B) I'm so excited. Thank you so much, Ms. Carter.\nW: ⓐ<u>네가 얼마나 그 역할을 원했는지 알고 있단다</u>. I'm so happy for you.\nB: (C) Thank you. What about Sumi? Did she get the role she wanted, too?\nW: Unfortunately, no. She's very disappointed.\nB: (D) Anyway, when is the first practice?\nW: It's at 2 p.m. on September 20th, in the acting club room. (E) You'll get a text message about it soon.\nB: OK. I'll be there.\n\n위 대화의 (A)~(E) 중, 주어진 문장이 들어갈 알맞은 곳은?\n\nOh, I'm sorry to hear that.",
+      "options": [
+        "(A)",
+        "(B)",
+        "(C)",
+        "(D)",
+        "(E)"
+      ],
+      "answer": "4"
+    },
+    {
+      "number": 13,
+      "question": "다음 대화를 읽고 물음에 답하시오.\nB: Excuse me, Ms. Carter. Can I ask you a question? Did I get the main role in the play?\nW: (A) Yes, you did. Congratulations, Jiho! You're going to be Romeo in our school play, Romeo and Juliet.\nB: Really? (B) I'm so excited. Thank you so much, Ms. Carter.\nW: ⓐ<u>네가 얼마나 그 역할을 원했는지 알고 있단다</u>. I'm so happy for you.\nB: (C) Thank you. What about Sumi? Did she get the role she wanted, too?\nW: Unfortunately, no. She's very disappointed.\nB: (D) Anyway, when is the first practice?\nW: It's at 2 p.m. on September 20th, in the acting club room. (E) You'll get a text message about it soon.\nB: OK. I'll be there.\n\n위 대화의 내용과 일치하지 않는 것은?",
+      "options": [
+        "There is an acting club at Jiho's school.",
+        "Sumi got the main role she had wanted.",
+        "Jiho will start practicing for the school play on September 20th.",
+        "Ms. Carter congratulates Jiho on getting the role of Romeo.",
+        "Jiho hasn't got a text message about the practice for the play yet."
+      ],
+      "answer": "2"
+    },
+    {
+      "number": 14,
+      "question": "다음 짝지어진 대화 중, 흐름상 어색한 것은?",
+      "options": [
+        "A: I won first prize in the writing contest. / B: That's great. Congratulations!",
+        "A: My smartphone is broken. I'm very upset. / B: That's too bad. I'm sorry to hear that.",
+        "A: Congratulations on winning the gold medal in the school marathon. / B: Thanks, Suji. I'm very happy.",
+        "A: You don't look so good, Inho. What's the matter? / B: I have the flu. / A: I'm happy for you. Did you see the doctor?",
+        "A: I lost my phone in the park yesterday. / B: That's too bad. Have you reported to the park office? / A: Yes, but they say there's little chance of finding it."
+      ],
+      "answer": "4"
+    },
+    {
+      "number": 15,
+      "question": "다음 대화의 빈칸에 들어갈 말로 알맞은 것은?\n\nA: Sue, you look excited. What's up?\nB: I was elected as class president. I'm so excited.\nA: That's wonderful. Congratulations!\nB: Thanks. ______________________________",
+      "options": [
+        "I'll try harder next time.",
+        "I'm sure I can get a role next time.",
+        "I hope you'll have a chance to learn.",
+        "You must be very proud of yourself.",
+        "I'm really happy to have a chance to work for my class."
+      ],
+      "answer": "5"
+    },
+    {
+      "number": 16,
+      "question": "다음 글을 읽고 물음에 답하시오.\nCyril Boggis was an antique furniture dealer in London. He was known for buying good things at a low price and then ⓐ<u>sold them at a high price</u>. People asked him where he had got the furniture, but he just said, \"It's a secret.\"\nMr. Boggis' secret was simple. He went to small towns every Sunday and knocked on doors. He told people that he was a furniture dealer. People didn't know ⓑ<u>how their things were valuable</u>, so Mr. Boggis took advantage of them. He was able to buy things very cheaply.\nNow it was another Sunday, and Mr. Boggis was in a small town again. At a house he visited, he met two men. One was Rummins, the owner, and the other was his son Bert.\n\"I buy old furniture. Do you have any?\" asked Mr. Boggis.\n\"No, I don't,\" said Rummins.\n\"Can I just take a look?\" asked Mr. Boggis.\n\"Sure. Please come in,\" said Rummins.\nMr. Boggis first went to the kitchen, and there was nothing. He then moved to the living room. And there it was! A table which was a priceless piece of eighteenth-century English furniture. He was so excited that he almost fell over.\n\"What's wrong?\" Bert asked.\n\"Oh, nothing. Nothing at all,\" Mr. Boggis lied. He then said with a straight face, \"This table is a reproduction. It's worth only a few pounds.\"\nHe then added, \"Hmm, I think I may buy it. ⓒ<u>The legs of my table at home is broken</u>. I can cut off the legs of your table and attach them to mine.\"\n\"How much?\" Rummins asked.\n\"Not much, I'm afraid. This is just a reproduction,\" said Mr. Boggis.\n\"So how much?\"\n\"Ten pounds.\"\n\"Ten? It's worth more than that.\"\n\"How about fifteen?\"\n\"Make it fifty.\"\n\"Well, thirty. This is my final offer.\"\n\"OK, it's yours, but how are you going to take it? This thing will not go in a car!\"\n\"We'll see,\" Mr. Boggis said and went out to bring his car.\nOn his way to the car, ⓓ<u>Mr. Boggis couldn't help to smiling</u>. The table was what every dealer dreamed of. He couldn't believe his luck.\n\"Dad, what if this thing doesn't go in his car? He might not pay you,\" said Bert.\nRummins then had an idea. \"What he wants is only the legs. Let's cut the legs off for him,\" said Rummins. \"Great idea!\" said Bert. Bert then took out a saw and began to cut off the legs.\nWhen Mr. Boggis came back, ⓔ<u>the legs had been cut off</u>. \"Don't worry, this was a favor. I won't charge you for this,\" said Rummins. Mr. Boggis was so shocked that he couldn't say anything.\n\n위 글의 밑줄 친 ⓐ~ⓔ 중, 어법상 알맞은 것은?",
+      "options": [
+        "ⓐ",
+        "ⓑ",
+        "ⓒ",
+        "ⓓ",
+        "ⓔ"
+      ],
+      "answer": "5"
+    },
+    {
+      "number": 17,
+      "question": "다음 글을 읽고 물음에 답하시오.\nCyril Boggis was an antique furniture dealer in London. He was known for buying good things at a low price and then ⓐ<u>sold them at a high price</u>. People asked him where he had got the furniture, but he just said, \"It's a secret.\"\nMr. Boggis' secret was simple. He went to small towns every Sunday and knocked on doors. He told people that he was a furniture dealer. People didn't know ⓑ<u>how their things were valuable</u>, so Mr. Boggis took advantage of them. He was able to buy things very cheaply.\nNow it was another Sunday, and Mr. Boggis was in a small town again. At a house he visited, he met two men. One was Rummins, the owner, and the other was his son Bert.\n\"I buy old furniture. Do you have any?\" asked Mr. Boggis.\n\"No, I don't,\" said Rummins.\n\"Can I just take a look?\" asked Mr. Boggis.\n\"Sure. Please come in,\" said Rummins.\nMr. Boggis first went to the kitchen, and there was nothing. He then moved to the living room. And there it was! A table which was a priceless piece of eighteenth-century English furniture. He was so excited that he almost fell over.\n\"What's wrong?\" Bert asked.\n\"Oh, nothing. Nothing at all,\" Mr. Boggis lied. He then said with a straight face, \"This table is a reproduction. It's worth only a few pounds.\"\nHe then added, \"Hmm, I think I may buy it. ⓒ<u>The legs of my table at home is broken</u>. I can cut off the legs of your table and attach them to mine.\"\n\"How much?\" Rummins asked.\n\"Not much, I'm afraid. This is just a reproduction,\" said Mr. Boggis.\n\"So how much?\"\n\"Ten pounds.\"\n\"Ten? It's worth more than that.\"\n\"How about fifteen?\"\n\"Make it fifty.\"\n\"Well, thirty. This is my final offer.\"\n\"OK, it's yours, but how are you going to take it? This thing will not go in a car!\"\n\"We'll see,\" Mr. Boggis said and went out to bring his car.\nOn his way to the car, ⓓ<u>Mr. Boggis couldn't help to smiling</u>. The table was what every dealer dreamed of. He couldn't believe his luck.\n\"Dad, what if this thing doesn't go in his car? He might not pay you,\" said Bert.\nRummins then had an idea. \"What he wants is only the legs. Let's cut the legs off for him,\" said Rummins. \"Great idea!\" said Bert. Bert then took out a saw and began to cut off the legs.\nWhen Mr. Boggis came back, ⓔ<u>the legs had been cut off</u>. \"Don't worry, this was a favor. I won't charge you for this,\" said Rummins. Mr. Boggis was so shocked that he couldn't say anything.\n\n위 글의 내용과 일치하지 않는 것은?",
+      "options": [
+        "Mr. Boggis used people who didn't know the value of their things.",
+        "Mr. Boggis found a priceless table in the living room of Rummins' house.",
+        "Mr. Boggis and Rummins agreed to price the table at 30 pounds.",
+        "Bert cut the legs of the table off since he thought the price was not reasonable.",
+        "Rummins didn't ask Mr. Boggis to pay for cutting the legs of the table."
+      ],
+      "answer": "4"
+    },
+    {
+      "number": 18,
+      "question": "다음 글을 읽고 물음에 답하시오.\nCyril Boggis was an antique furniture dealer in London. He was known for buying good things at a low price and then ⓐ<u>sold them at a high price</u>. People asked him where he had got the furniture, but he just said, \"It's a secret.\"\nMr. Boggis' secret was simple. He went to small towns every Sunday and knocked on doors. He told people that he was a furniture dealer. People didn't know ⓑ<u>how their things were valuable</u>, so Mr. Boggis took advantage of them. He was able to buy things very cheaply.\nNow it was another Sunday, and Mr. Boggis was in a small town again. At a house he visited, he met two men. One was Rummins, the owner, and the other was his son Bert.\n\"I buy old furniture. Do you have any?\" asked Mr. Boggis.\n\"No, I don't,\" said Rummins.\n\"Can I just take a look?\" asked Mr. Boggis.\n\"Sure. Please come in,\" said Rummins.\nMr. Boggis first went to the kitchen, and there was nothing. He then moved to the living room. And there it was! A table which was a priceless piece of eighteenth-century English furniture. He was so excited that he almost fell over.\n\"What's wrong?\" Bert asked.\n\"Oh, nothing. Nothing at all,\" Mr. Boggis lied. He then said with a straight face, \"This table is a reproduction. It's worth only a few pounds.\"\nHe then added, \"Hmm, I think I may buy it. ⓒ<u>The legs of my table at home is broken</u>. I can cut off the legs of your table and attach them to mine.\"\n\"How much?\" Rummins asked.\n\"Not much, I'm afraid. This is just a reproduction,\" said Mr. Boggis.\n\"So how much?\"\n\"Ten pounds.\"\n\"Ten? It's worth more than that.\"\n\"How about fifteen?\"\n\"Make it fifty.\"\n\"Well, thirty. This is my final offer.\"\n\"OK, it's yours, but how are you going to take it? This thing will not go in a car!\"\n\"We'll see,\" Mr. Boggis said and went out to bring his car.\nOn his way to the car, ⓓ<u>Mr. Boggis couldn't help to smiling</u>. The table was what every dealer dreamed of. He couldn't believe his luck.\n\"Dad, what if this thing doesn't go in his car? He might not pay you,\" said Bert.\nRummins then had an idea. \"What he wants is only the legs. Let's cut the legs off for him,\" said Rummins. \"Great idea!\" said Bert. Bert then took out a saw and began to cut off the legs.\nWhen Mr. Boggis came back, ⓔ<u>the legs had been cut off</u>. \"Don't worry, this was a favor. I won't charge you for this,\" said Rummins. Mr. Boggis was so shocked that he couldn't say anything.\n\n위 글이 주는 교훈으로 알맞은 것은?",
+      "options": [
+        "Two heads are better than one.",
+        "Don't judge a book by its cover.",
+        "What goes around comes around.",
+        "A friend in need is a friend indeed.",
+        "A picture is worth a thousand words."
+      ],
+      "answer": "3"
+    },
+    {
+      "number": 19,
+      "question": "다음 글을 읽고 물음에 답하시오.\nCyril Boggis was an antique furniture dealer in London. He was known for buying good things at a low price and then ⓐ<u>sold them at a high price</u>. People asked him where he had got the furniture, but he just said, \"It's a secret.\"\nMr. Boggis' secret was simple. He went to small towns every Sunday and knocked on doors. He told people that he was a furniture dealer. People didn't know ⓑ<u>how their things were valuable</u>, so Mr. Boggis took advantage of them. He was able to buy things very cheaply.\nNow it was another Sunday, and Mr. Boggis was in a small town again. At a house he visited, he met two men. One was Rummins, the owner, and the other was his son Bert.\n\"I buy old furniture. Do you have any?\" asked Mr. Boggis.\n\"No, I don't,\" said Rummins.\n\"Can I just take a look?\" asked Mr. Boggis.\n\"Sure. Please come in,\" said Rummins.\nMr. Boggis first went to the kitchen, and there was nothing. He then moved to the living room. And there it was! A table which was a priceless piece of eighteenth-century English furniture. He was so excited that he almost fell over.\n\"What's wrong?\" Bert asked.\n\"Oh, nothing. Nothing at all,\" Mr. Boggis lied. He then said with a straight face, \"This table is a reproduction. It's worth only a few pounds.\"\nHe then added, \"Hmm, I think I may buy it. ⓒ<u>The legs of my table at home is broken</u>. I can cut off the legs of your table and attach them to mine.\"\n\"How much?\" Rummins asked.\n\"Not much, I'm afraid. This is just a reproduction,\" said Mr. Boggis.\n\"So how much?\"\n\"Ten pounds.\"\n\"Ten? It's worth more than that.\"\n\"How about fifteen?\"\n\"Make it fifty.\"\n\"Well, thirty. This is my final offer.\"\n\"OK, it's yours, but how are you going to take it? This thing will not go in a car!\"\n\"We'll see,\" Mr. Boggis said and went out to bring his car.\nOn his way to the car, ⓓ<u>Mr. Boggis couldn't help to smiling</u>. The table was what every dealer dreamed of. He couldn't believe his luck.\n\"Dad, what if this thing doesn't go in his car? He might not pay you,\" said Bert.\nRummins then had an idea. \"What he wants is only the legs. Let's cut the legs off for him,\" said Rummins. \"Great idea!\" said Bert. Bert then took out a saw and began to cut off the legs.\nWhen Mr. Boggis came back, ⓔ<u>the legs had been cut off</u>. \"Don't worry, this was a favor. I won't charge you for this,\" said Rummins. Mr. Boggis was so shocked that he couldn't say anything.\n\n위 글에서 Mr. Boggis의 감정변화로 알맞은 것은?",
+      "options": [
+        "pleased → moved",
+        "terrified → relieved",
+        "annoyed → worried",
+        "delighted → shocked",
+        "nervous → embarrassed"
+      ],
+      "answer": "4"
+    },
+    {
+      "number": 20,
+      "question": "다음 글을 읽고 물음에 답하시오.\nOne Sunday, Mr. Boggis, an antique furniture dealer, went to a small town to buy furniture. At Rummins and Bert's house, Mr. Boggis found a table (A)[which / where] was priceless piece of eighteenth-century English furniture. He was so ⓐ<u>disappointed</u> that he almost fell over.\n\"What's wrong?\" Bert asked.\n\"Oh, nothing. Nothing at all,\" Mr. Boggis lied. He then said with a straight face, \"This table is a reproduction. It's ⓑ<u>worth</u> only a few pounds.\"\nHe then added, \"Hmm, I think I may buy it. The legs of my table at home are broken. I can cut off the legs of your table and attach (B)<u>them</u> to mine.\"\n\"How much?\" Rummins asked.\n\"Not much, I'm afraid. This is just a reproduction,\" said Mr. Boggis.\n\"So how much?\"\n\"Ten pounds.\"\n\"Ten? It's worth more than that.\"\n\"How about fifteen?\"\n\"Make it fifty.\"\n\"Well, thirty. This is my final offer.\"\n\"OK, it's yours, but how are you going to take it? This thing will not go in a car!\"\n\"We'll see,\" Mr. Boggis said and went out to bring his car.\nOn his way to the car, Mr. Boggis couldn't help ⓒ<u>smiling</u>. The table was the thing (C)[that / what] every dealer dreamed of. He couldn't believe his ⓓ<u>luck</u>.\n\"Dad, what if this thing doesn't go in his car? He might not pay you,\" said Bert.\nRummins then had an idea. \"(D)[What / Which] he wants is only the legs. Let's cut the legs off for him,\" said Rummins. \"Great idea!\" said Bert. Bert then took out a saw and began to cut off the legs.\nWhen Mr. Boggis came back, the legs had been cut off. \"Don't worry, this was a favor. You don't have to ⓔ<u>pay</u> for this.\" said Rummins. Mr. Boggis was so shocked that he couldn't say anything.\n\n위 글의 밑줄 친 ⓐ~ⓔ 중, 흐름상 어색한 것은?",
+      "options": [
+        "ⓐ",
+        "ⓑ",
+        "ⓒ",
+        "ⓓ",
+        "ⓔ"
+      ],
+      "answer": "1"
+    },
+    {
+      "number": 21,
+      "question": "다음 글을 읽고 물음에 답하시오.\nOne Sunday, Mr. Boggis, an antique furniture dealer, went to a small town to buy furniture. At Rummins and Bert's house, Mr. Boggis found a table (A)[which / where] was priceless piece of eighteenth-century English furniture. He was so ⓐ<u>disappointed</u> that he almost fell over.\n\"What's wrong?\" Bert asked.\n\"Oh, nothing. Nothing at all,\" Mr. Boggis lied. He then said with a straight face, \"This table is a reproduction. It's ⓑ<u>worth</u> only a few pounds.\"\nHe then added, \"Hmm, I think I may buy it. The legs of my table at home are broken. I can cut off the legs of your table and attach (B)<u>them</u> to mine.\"\n\"How much?\" Rummins asked.\n\"Not much, I'm afraid. This is just a reproduction,\" said Mr. Boggis.\n\"So how much?\"\n\"Ten pounds.\"\n\"Ten? It's worth more than that.\"\n\"How about fifteen?\"\n\"Make it fifty.\"\n\"Well, thirty. This is my final offer.\"\n\"OK, it's yours, but how are you going to take it? This thing will not go in a car!\"\n\"We'll see,\" Mr. Boggis said and went out to bring his car.\nOn his way to the car, Mr. Boggis couldn't help ⓒ<u>smiling</u>. The table was the thing (C)[that / what] every dealer dreamed of. He couldn't believe his ⓓ<u>luck</u>.\n\"Dad, what if this thing doesn't go in his car? He might not pay you,\" said Bert.\nRummins then had an idea. \"(D)[What / Which] he wants is only the legs. Let's cut the legs off for him,\" said Rummins. \"Great idea!\" said Bert. Bert then took out a saw and began to cut off the legs.\nWhen Mr. Boggis came back, the legs had been cut off. \"Don't worry, this was a favor. You don't have to ⓔ<u>pay</u> for this.\" said Rummins. Mr. Boggis was so shocked that he couldn't say anything.\n\n위 글의 괄호 (A), (C), (D)에 들어갈 말로 가장 알맞은 것은?",
+      "options": [
+        "(A) where – (C) what – (D) Which",
+        "(A) which – (C) what – (D) What",
+        "(A) which – (C) that – (D) Which",
+        "(A) where – (C) that – (D) What",
+        "(A) which – (C) that – (D) What"
+      ],
+      "answer": "5"
+    },
+    {
+      "number": 22,
+      "question": "다음 글을 읽고 물음에 답하시오.\nOne Sunday, Mr. Boggis, an antique furniture dealer, went to a small town to buy furniture. At Rummins and Bert's house, Mr. Boggis found a table (A)[which / where] was priceless piece of eighteenth-century English furniture. He was so ⓐ<u>disappointed</u> that he almost fell over.\n\"What's wrong?\" Bert asked.\n\"Oh, nothing. Nothing at all,\" Mr. Boggis lied. He then said with a straight face, \"This table is a reproduction. It's ⓑ<u>worth</u> only a few pounds.\"\nHe then added, \"Hmm, I think I may buy it. The legs of my table at home are broken. I can cut off the legs of your table and attach (B)<u>them</u> to mine.\"\n\"How much?\" Rummins asked.\n\"Not much, I'm afraid. This is just a reproduction,\" said Mr. Boggis.\n\"So how much?\"\n\"Ten pounds.\"\n\"Ten? It's worth more than that.\"\n\"How about fifteen?\"\n\"Make it fifty.\"\n\"Well, thirty. This is my final offer.\"\n\"OK, it's yours, but how are you going to take it? This thing will not go in a car!\"\n\"We'll see,\" Mr. Boggis said and went out to bring his car.\nOn his way to the car, Mr. Boggis couldn't help ⓒ<u>smiling</u>. The table was the thing (C)[that / what] every dealer dreamed of. He couldn't believe his ⓓ<u>luck</u>.\n\"Dad, what if this thing doesn't go in his car? He might not pay you,\" said Bert.\nRummins then had an idea. \"(D)[What / Which] he wants is only the legs. Let's cut the legs off for him,\" said Rummins. \"Great idea!\" said Bert. Bert then took out a saw and began to cut off the legs.\nWhen Mr. Boggis came back, the legs had been cut off. \"Don't worry, this was a favor. You don't have to ⓔ<u>pay</u> for this.\" said Rummins. Mr. Boggis was so shocked that he couldn't say anything.\n\n위 글의 밑줄 친 (B)them이 가리키는 것을 본문에서 찾아 우리말로 쓰시오.",
+      "options": [],
+      "answer": "(당신[Rummins씨]의) 탁자의 다리",
+      "acceptedAnswers": [
+        "탁자의 다리",
+        "Rummins의 탁자의 다리",
+        "당신의 탁자의 다리",
+        "Rummins씨의 탁자의 다리"
+      ]
+    },
+    {
+      "number": 23,
+      "question": "다음 글을 읽고 물음에 답하시오.\nOne Sunday, Mr. Boggis, an antique furniture dealer, went to a small town to buy furniture. At Rummins and Bert's house, Mr. Boggis found a table (A)[which / where] was priceless piece of eighteenth-century English furniture. He was so ⓐ<u>disappointed</u> that he almost fell over.\n\"What's wrong?\" Bert asked.\n\"Oh, nothing. Nothing at all,\" Mr. Boggis lied. He then said with a straight face, \"This table is a reproduction. It's ⓑ<u>worth</u> only a few pounds.\"\nHe then added, \"Hmm, I think I may buy it. The legs of my table at home are broken. I can cut off the legs of your table and attach (B)<u>them</u> to mine.\"\n\"How much?\" Rummins asked.\n\"Not much, I'm afraid. This is just a reproduction,\" said Mr. Boggis.\n\"So how much?\"\n\"Ten pounds.\"\n\"Ten? It's worth more than that.\"\n\"How about fifteen?\"\n\"Make it fifty.\"\n\"Well, thirty. This is my final offer.\"\n\"OK, it's yours, but how are you going to take it? This thing will not go in a car!\"\n\"We'll see,\" Mr. Boggis said and went out to bring his car.\nOn his way to the car, Mr. Boggis couldn't help ⓒ<u>smiling</u>. The table was the thing (C)[that / what] every dealer dreamed of. He couldn't believe his ⓓ<u>luck</u>.\n\"Dad, what if this thing doesn't go in his car? He might not pay you,\" said Bert.\nRummins then had an idea. \"(D)[What / Which] he wants is only the legs. Let's cut the legs off for him,\" said Rummins. \"Great idea!\" said Bert. Bert then took out a saw and began to cut off the legs.\nWhen Mr. Boggis came back, the legs had been cut off. \"Don't worry, this was a favor. You don't have to ⓔ<u>pay</u> for this.\" said Rummins. Mr. Boggis was so shocked that he couldn't say anything.\n\n위 글의 내용과 일치하는 것은?",
+      "options": [
+        "At Rummins and Bert's house, Mr. Boggis found a table and it was a reproduction.",
+        "Mr. Boggis lied to Rummins and Bert that the table was invaluable.",
+        "Mr. Boggis' final offer for the table was fifty pounds and Rummins accepted it.",
+        "Mr. Boggis asked Rummins and Bert to cut off and sell the legs of the table.",
+        "Mr. Boggis was very shocked to find that the legs of the table had been cut off."
+      ],
+      "answer": "5"
+    },
+    {
+      "number": 24,
+      "question": "다음 글을 읽고 물음에 답하시오.\n\"What's wrong?\" Bert asked.\n\"Oh, nothing. Nothing at all,\" Mr. Boggis lied. He then said with a straight face, \"This table is a reproduction. It's worth only a few pounds.\"\nHe then added, \"Hmm, I think I may buy it. (A)<u>우리집에 있는 탁자 다리가 부러져 있다</u>. I can cut off the legs of your table and attach them to my broken ⓐ<u>one</u>.\"\n\"How much?\" Rummins asked.\n\"Not much, I'm afraid. This is just a reproduction,\" said Mr. Boggis.\n\"So how much?\"\n\"Ten pounds.\"\n\"Ten? It's worth more than ⓑ<u>that</u>.\"\n\"How about fifteen?\"\n\"Make it fifty.\"\n\"Well, thirty. This is my final offer.\"\n\"OK, it's yours, but how are you going to take ⓒ<u>it</u>? This thing will not go in a car!\"\n\"We'll see,\" Mr. Boggis said and went out to bring his car.\n(B)<u>그의 차로 가는 길에, Boggis씨는 웃지 않을 수가 없었다</u>.\nThe table was what every dealer dreamed of. He couldn't believe his luck.\n\"Dad, what if ⓓ<u>this thing</u> doesn't go in his car? He might not pay you,\" said Bert.\nRummins then had an idea. \"(C)<u>그는 원하는 것은 오직 탁자 다리뿐이야</u>. Let's cut the legs off for him,\" said Rummins. \"Great idea!\" said Bert. Bert then took out a saw and began to cut off the legs.\nWhen Mr. Boggis came back, (D)<u>탁자 다리는 잘려 있었다</u>. \"Don't worry, ⓔ<u>this</u> was a favor. I won't charge you for this,\" said Rummins. (E)<u>Boggis씨는 너무 충격을 받아서 아무 말도 할 수 없었다</u>.\n\n위 글의 밑줄 친 (A)~(E)의 우리말을 알맞게 영작한 것은?",
+      "options": [
+        "(A): The legs of my table at home is broken.",
+        "(B): On his way to the car, Mr. Boggis couldn't help to smile.",
+        "(C): What he wants is only the legs.",
+        "(D): the legs had cut off.",
+        "(E): Mr. Boggis was so shocked that he could say nothing."
+      ],
+      "answer": "3"
+    },
+    {
+      "number": 25,
+      "question": "다음 글을 읽고 물음에 답하시오.\n\"What's wrong?\" Bert asked.\n\"Oh, nothing. Nothing at all,\" Mr. Boggis lied. He then said with a straight face, \"This table is a reproduction. It's worth only a few pounds.\"\nHe then added, \"Hmm, I think I may buy it. (A)<u>우리집에 있는 탁자 다리가 부러져 있다</u>. I can cut off the legs of your table and attach them to my broken ⓐ<u>one</u>.\"\n\"How much?\" Rummins asked.\n\"Not much, I'm afraid. This is just a reproduction,\" said Mr. Boggis.\n\"So how much?\"\n\"Ten pounds.\"\n\"Ten? It's worth more than ⓑ<u>that</u>.\"\n\"How about fifteen?\"\n\"Make it fifty.\"\n\"Well, thirty. This is my final offer.\"\n\"OK, it's yours, but how are you going to take ⓒ<u>it</u>? This thing will not go in a car!\"\n\"We'll see,\" Mr. Boggis said and went out to bring his car.\n(B)<u>그의 차로 가는 길에, Boggis씨는 웃지 않을 수가 없었다</u>.\nThe table was what every dealer dreamed of. He couldn't believe his luck.\n\"Dad, what if ⓓ<u>this thing</u> doesn't go in his car? He might not pay you,\" said Bert.\nRummins then had an idea. \"(C)<u>그는 원하는 것은 오직 탁자 다리뿐이야</u>. Let's cut the legs off for him,\" said Rummins. \"Great idea!\" said Bert. Bert then took out a saw and began to cut off the legs.\nWhen Mr. Boggis came back, (D)<u>탁자 다리는 잘려 있었다</u>. \"Don't worry, ⓔ<u>this</u> was a favor. I won't charge you for this,\" said Rummins. (E)<u>Boggis씨는 너무 충격을 받아서 아무 말도 할 수 없었다</u>.\n\n위 글의 밑줄 친 ⓐ~ⓔ가 가리키는 것으로 알맞은 것은?",
+      "options": [
+        "ⓐ one: Rummins' table",
+        "ⓑ that: fifteen pounds",
+        "ⓒ it: Mr. Boggis' old table",
+        "ⓓ this thing: the leg of the table",
+        "ⓔ this: cutting off the legs of Rummins' table"
+      ],
+      "answer": "5"
+    },
+    {
+      "number": 26,
+      "question": "다음 글을 읽고 물음에 답하시오.\n\"What's wrong?\" Bert asked.\n\"Oh, nothing. Nothing at all,\" Mr. Boggis lied. He then said with a straight face, \"This table is a reproduction. It's worth only a few pounds.\"\nHe then added, \"Hmm, I think I may buy it. (A)<u>우리집에 있는 탁자 다리가 부러져 있다</u>. I can cut off the legs of your table and attach them to my broken ⓐ<u>one</u>.\"\n\"How much?\" Rummins asked.\n\"Not much, I'm afraid. This is just a reproduction,\" said Mr. Boggis.\n\"So how much?\"\n\"Ten pounds.\"\n\"Ten? It's worth more than ⓑ<u>that</u>.\"\n\"How about fifteen?\"\n\"Make it fifty.\"\n\"Well, thirty. This is my final offer.\"\n\"OK, it's yours, but how are you going to take ⓒ<u>it</u>? This thing will not go in a car!\"\n\"We'll see,\" Mr. Boggis said and went out to bring his car.\n(B)<u>그의 차로 가는 길에, Boggis씨는 웃지 않을 수가 없었다</u>.\nThe table was what every dealer dreamed of. He couldn't believe his luck.\n\"Dad, what if ⓓ<u>this thing</u> doesn't go in his car? He might not pay you,\" said Bert.\nRummins then had an idea. \"(C)<u>그는 원하는 것은 오직 탁자 다리뿐이야</u>. Let's cut the legs off for him,\" said Rummins. \"Great idea!\" said Bert. Bert then took out a saw and began to cut off the legs.\nWhen Mr. Boggis came back, (D)<u>탁자 다리는 잘려 있었다</u>. \"Don't worry, ⓔ<u>this</u> was a favor. I won't charge you for this,\" said Rummins. (E)<u>Boggis씨는 너무 충격을 받아서 아무 말도 할 수 없었다</u>.\n\n위 글을 읽고 답할 수 없는 질문은?",
+      "options": [
+        "What did Bert worry about?",
+        "When was Rummins' table made?",
+        "Why did Mr. Boggis go out after the deal?",
+        "What happened when Mr. Boggis came back?",
+        "What was Mr. Boggis' final offer for the table?"
+      ],
+      "answer": "2"
+    },
+    {
+      "number": 27,
+      "question": "다음 글을 읽고 물음에 답하시오.\n\"What's wrong?\" Bert asked.\n\"Oh, nothing. Nothing at all,\" Mr. Boggis lied. He then said with a straight face, \"This table is a reproduction. It's worth only a few pounds.\"\nHe then added, \"Hmm, I think I may buy it. (A)<u>우리집에 있는 탁자 다리가 부러져 있다</u>. I can cut off the legs of your table and attach them to my broken ⓐ<u>one</u>.\"\n\"How much?\" Rummins asked.\n\"Not much, I'm afraid. This is just a reproduction,\" said Mr. Boggis.\n\"So how much?\"\n\"Ten pounds.\"\n\"Ten? It's worth more than ⓑ<u>that</u>.\"\n\"How about fifteen?\"\n\"Make it fifty.\"\n\"Well, thirty. This is my final offer.\"\n\"OK, it's yours, but how are you going to take ⓒ<u>it</u>? This thing will not go in a car!\"\n\"We'll see,\" Mr. Boggis said and went out to bring his car.\n(B)<u>그의 차로 가는 길에, Boggis씨는 웃지 않을 수가 없었다</u>.\nThe table was what every dealer dreamed of. He couldn't believe his luck.\n\"Dad, what if ⓓ<u>this thing</u> doesn't go in his car? He might not pay you,\" said Bert.\nRummins then had an idea. \"(C)<u>그는 원하는 것은 오직 탁자 다리뿐이야</u>. Let's cut the legs off for him,\" said Rummins. \"Great idea!\" said Bert. Bert then took out a saw and began to cut off the legs.\nWhen Mr. Boggis came back, (D)<u>탁자 다리는 잘려 있었다</u>. \"Don't worry, ⓔ<u>this</u> was a favor. I won't charge you for this,\" said Rummins. (E)<u>Boggis씨는 너무 충격을 받아서 아무 말도 할 수 없었다</u>.\n\n위 글이 주는 교훈과 관련 있는 영어속담으로 알맞은 것은?",
+      "options": [
+        "Bad news travels fast.",
+        "Every dog has his day.",
+        "Honesty is the best policy.",
+        "A bad workman blames his tools.",
+        "A bird in the hand is worth two in the bush."
+      ],
+      "answer": "3"
+    },
+    {
+      "number": 28,
+      "question": "다음 글을 읽고 물음에 답하시오.\nHe then added, \"Hmm, I think I may buy it. The legs of my table at home are broken. I can cut off the legs of your table and attach them to mine.\"\n\"How much?\" Rummins asked.\n\"Not much, I'm afraid. This is just a reproduction,\" said Mr. Boggis.\n\"So how much?\"\n\"Ten pounds.\"\n\"Ten? It's worth more than that.\"\n\"How about fifteen?\"\n\"Make it fifty.\"\n\"Well, thirty. This is my final offer.\"\n\"OK, it's yours, but how are you going to take it? This thing will not go in a car!\"\n\"We'll see,\" Mr. Boggis said and went out to bring his car.\nOn his way to the car, Mr. Boggis couldn't help smiling. The table was what every dealer dreamed of. He couldn't believe his luck.\n\"Dad, what if this thing doesn't go in his car? He might not pay you,\" said Bert.\nRummins then had an idea. \"What he wants is only the legs. Let's cut the legs off for him,\" said Rummins. \"Great idea!\" said Bert. Bert then took out a saw and began to cut off the legs.\nWhen Mr. Boggis came back, the legs had been cut off. \"Don't worry, this was a favor. I won't charge you for this,\" said Rummins. Mr. Boggis was so shocked that he couldn't say anything.\n\n위 글을 읽고 다음 질문에 대한 답을 주어진 <조건>에 알맞게 쓰시오.\n\nQ. What happened to the table when Mr. Boggis came back?\n\n<조건>\n• 과거완료 시제를 사용할 것\n• Its로 시작하여 6단어로 쓸 것\n\n→ ______________________",
+      "options": [],
+      "answer": "Its legs had been cut off.",
+      "acceptedAnswers": [
+        "Its legs had been cut off"
+      ]
+    },
+    {
+      "number": 29,
+      "question": "다음 글을 읽고 물음에 답하시오.\nHe then added, \"Hmm, I think I may buy it. The legs of my table at home are broken. I can cut off the legs of your table and attach them to mine.\"\n\"How much?\" Rummins asked.\n\"Not much, I'm afraid. This is just a reproduction,\" said Mr. Boggis.\n\"So how much?\"\n\"Ten pounds.\"\n\"Ten? It's worth more than that.\"\n\"How about fifteen?\"\n\"Make it fifty.\"\n\"Well, thirty. This is my final offer.\"\n\"OK, it's yours, but how are you going to take it? This thing will not go in a car!\"\n\"We'll see,\" Mr. Boggis said and went out to bring his car.\nOn his way to the car, Mr. Boggis couldn't help smiling. The table was what every dealer dreamed of. He couldn't believe his luck.\n\"Dad, what if this thing doesn't go in his car? He might not pay you,\" said Bert.\nRummins then had an idea. \"What he wants is only the legs. Let's cut the legs off for him,\" said Rummins. \"Great idea!\" said Bert. Bert then took out a saw and began to cut off the legs.\nWhen Mr. Boggis came back, the legs had been cut off. \"Don't worry, this was a favor. I won't charge you for this,\" said Rummins. Mr. Boggis was so shocked that he couldn't say anything.\n\n위 글에 드러난 Mr. Boggis의 심경 변화로 알맞은 것을 고르면?",
+      "options": [
+        "bored → upset",
+        "excited → relaxed",
+        "upset → interested",
+        "pleased → confident",
+        "satisfied → embarrassed"
+      ],
+      "answer": "5"
+    },
+    {
+      "number": 30,
+      "question": "다음 글을 읽고 물음에 답하시오.\nRoald Dahl was born in 1916 in Wales. Dahl's parents were Norwegian, and Dahl was named after the Norwegian explorer Roald Amundsen. His first language was Norwegian, which he spoke at home with his parents and his four sisters. In 1920, when Dahl was three years old, his seven-year-old sister, Astri, died and weeks later, his father died too at the age of 57. However, Dahl's mother did not go back to Norway and stayed in Wales. It was because her husband Harald had wanted their children to be educated in British schools, which he considered the world's best. Dahl went to St. Peter's, a boarding school, but his time at St. Peter's was unpleasant. He was very homesick and unhappy. Dahl later wrote about his time at St. Peter's in his autobiography Boy: Tales of Childhood.\n\n위 글의 내용과 일치하지 않는 것은?",
+      "options": [
+        "Dahl's parents were Norwegian.",
+        "Dahl's father died at the age of 57.",
+        "Dahl went to St. Peter's, which was a boarding school.",
+        "When Dahl was at St. Peter's, he got homesick.",
+        "When Dahl was three years old, two of his sisters died."
+      ],
+      "answer": "5"
+    }
+  ],
+  "R3": [
+    {
+      "number": 1,
+      "question": "다음 (A)~(D)의 영영풀이에 해당하는 단어로 알맞게 연결된 것은?\n\n(A) to process something so that it can be used again\n(B) to make a copy of something\n(C) lasting for a very long time\n(D) being worth a very large amount of money",
+      "options": [
+        "(A) recycle – (B) reproduce – (C) endless – (D) priceless",
+        "(A) replay – (B) reproduce – (C) careless – (D) priceless",
+        "(A) recycle – (B) reprove – (C) careless – (D) valueless",
+        "(A) replay – (B) reproduce – (C) endless – (D) valueless",
+        "(A) recycle – (B) reprove – (C) endless – (D) priceless"
+      ],
+      "answer": "1"
+    },
+    {
+      "number": 2,
+      "question": "다음 짝지어진 단어의 관계가 나머지와 다른 것은?",
+      "options": [
+        "play – replay",
+        "careful – careless",
+        "correct – incorrect",
+        "cheap – expensive",
+        "popular – unpopular"
+      ],
+      "answer": "1"
+    },
+    {
+      "number": 3,
+      "question": "다음 설명의 빈칸에 들어갈 말로 알맞은 것은?\n\n• This word is used to describe something that has a high value beyond any price.\n• For example, we can say 'Her ability to motivate people is ______________.'",
+      "options": [
+        "priceless",
+        "hopeless",
+        "helpless",
+        "useless",
+        "endless"
+      ],
+      "answer": "1"
+    },
+    {
+      "number": 4,
+      "question": "다음 빈칸에 들어갈 말로 알맞은 것은?\n\nMy teacher said that the sun ____________ in the East.",
+      "options": [
+        "rose",
+        "rises",
+        "raised",
+        "had risen",
+        "had been raised"
+      ],
+      "answer": "2"
+    },
+    {
+      "number": 5,
+      "question": "다음 문장의 빈칸 (A), (B)에 들어갈 말로 알맞게 연결된 것은?\n\n• We ate (A)__________ Mom had cooked for us.\n• This is the book (B)________ I bought yesterday.",
+      "options": [
+        "(A) that – (B) that",
+        "(A) which – (B) which",
+        "(A) what – (B) what",
+        "(A) that – (B) what",
+        "(A) what – (B) that"
+      ],
+      "answer": "5"
+    },
+    {
+      "number": 6,
+      "question": "다음 빈칸 (A), (B), (C)에 들어갈 말로 알맞게 연결된 것은?\n\n• I got (A)__________ I wanted to buy.\n• The store had the thing (B)__________ I was looking for.\n• I ate (C)__________ she had cooked for me.",
+      "options": [
+        "(A) what – (B) that – (C) which",
+        "(A) which – (B) what – (C) which",
+        "(A) what – (B) that – (C) the thing",
+        "(A) what – (B) what – (C) the thing",
+        "(A) which – (B) which – (C) what"
+      ],
+      "answer": "3"
+    },
+    {
+      "number": 7,
+      "question": "다음 중 어법상 어색한 문장은?",
+      "options": [
+        "What I will have for dinner is Bulgogi.",
+        "This machine is the one what I've been looking for.",
+        "I really liked the cookies which my friend made for me.",
+        "I like the backpack my mom bought for my birthday.",
+        "Have you started reading the book that I gave you yesterday?"
+      ],
+      "answer": "2"
+    },
+    {
+      "number": 8,
+      "question": "다음 우리말 (A), (B)를 주어진 <조건>에 알맞게 각각 영작하시오. ※ 완전한 문장으로 쓰시오.\n\n<보기>\n(A) 내가 어제 잃어버린 것은 나의 자전거이다.\n(B) Sujin은 Nick이 그녀에게 쓴 것을 읽었다.\n\n<조건>\n• (A)와 (B) 모두 관계대명사 what을 한 번씩 사용할 것\n• (B)의 경우 과거완료 시제가 포함되도록 할 것\n• (A)는 7단어, (B)는 8단어로 영작할 것\n\n(A) ______________________________\n(B) ______________________________",
+      "options": [],
+      "answer": "What I lost yesterday is my bike. / Sujin read what Nick had written to her.",
+      "subParts": [
+        {
+          "label": "(A)",
+          "answer": "What I lost yesterday is my bike.",
+          "acceptedAnswers": [
+            "What I lost yesterday is my bicycle."
+          ]
+        },
+        {
+          "label": "(B)",
+          "answer": "Sujin read what Nick had written to her."
+        }
+      ]
+    },
+    {
+      "number": 9,
+      "question": "다음 우리말을 주어진 <조건>에 알맞게 영작하시오. ※ 완전한 문장으로 쓰시오.\n\n그는 그가 수업 중에 만든 것을 내게 보여 주었다.\n\n<조건>\n• what, during the class를 사용할 것\n• 과거 완료 시제를 사용할 것\n• 10단어로 영작할 것\n\n→ ______________________________",
+      "options": [],
+      "answer": "He showed me what he had made during the class."
+    },
+    {
+      "number": 10,
+      "question": "다음 대화의 빈칸에 들어갈 말로 알맞은 것은?\n\nA: You don't look so good, Inho. What's the matter?\nB: I have the flu.\nA: ______________________________ Did you see the doctor?\nB: Yes. I'm taking medicine.",
+      "options": [
+        "That's great.",
+        "That's too bad.",
+        "Don't mention it.",
+        "I have a sore throat.",
+        "I am very disappointed."
+      ],
+      "answer": "2"
+    },
+    {
+      "number": 11,
+      "question": "다음 대화의 (A)~(E) 중, 주어진 문장이 들어갈 알맞은 곳은?\n\nWhat's up?\n\nA: Sue, you look excited. (A)\nB: (B) I was elected as class president. I'm so excited. (C)\nA: (D) That's wonderful. Congratulations!\nB: Thanks. (E) I'm really happy to have a chance to work for my class.",
+      "options": [
+        "(A)",
+        "(B)",
+        "(C)",
+        "(D)",
+        "(E)"
+      ],
+      "answer": "1"
+    },
+    {
+      "number": 12,
+      "question": "다음 대화를 읽고 물음에 답하시오.\nA: Excuse me, Ms. Carter. Can I ask you a question? Did I get the main role in the play?\nB: Yes, you did. Congratulations, Jiho! You're going to be Romeo in our school play, Romeo and Juliet.\nA: Really? I'm so excited. Thank you so much, Ms. Carter. (A)\nB: I know how much you wanted the role. (B)\nA: Thank you. What about Sumi? Did she get the role she wanted, too? (C)\nB: Unfortunately, no. She's very disappointed. (D)\nA: Oh, I'm sorry to hear that. Anyway, when is the first practice?\nB: It's at 2 p.m. on September 20th, in the acting club room. You'll get a text message about it soon. (E)\nA: OK. I'll be there.\n\n위 대화의 (A)~(E) 중, 주어진 문장이 들어갈 알맞은 곳은?\n\nI'm so happy for you.",
+      "options": [
+        "(A)",
+        "(B)",
+        "(C)",
+        "(D)",
+        "(E)"
+      ],
+      "answer": "2"
+    },
+    {
+      "number": 13,
+      "question": "다음 대화를 읽고 물음에 답하시오.\nA: Excuse me, Ms. Carter. Can I ask you a question? Did I get the main role in the play?\nB: Yes, you did. Congratulations, Jiho! You're going to be Romeo in our school play, Romeo and Juliet.\nA: Really? I'm so excited. Thank you so much, Ms. Carter. (A)\nB: I know how much you wanted the role. (B)\nA: Thank you. What about Sumi? Did she get the role she wanted, too? (C)\nB: Unfortunately, no. She's very disappointed. (D)\nA: Oh, I'm sorry to hear that. Anyway, when is the first practice?\nB: It's at 2 p.m. on September 20th, in the acting club room. You'll get a text message about it soon. (E)\nA: OK. I'll be there.\n\n위 대화를 읽고 다음 질문에 알맞은 답을 고르시오.\n\nHow does Jiho feel when he heard that he got the main role in the school play?",
+      "options": [
+        "sad",
+        "angry",
+        "pleased",
+        "nervous",
+        "disappointed"
+      ],
+      "answer": "3"
+    },
+    {
+      "number": 14,
+      "question": "다음 대화의 밑줄 친 ⓐ~ⓔ 중, 쓰임이 어색한 것은?\n\n1.\nTom: Sue, you look excited. What's up?\nSue: I was elected ⓐ<u>as</u> class president. I'm so excited.\nTom: That's wonderful. Congratulations!\nSue: Thanks. I'm really happy to have a chance to work ⓑ<u>for</u> my class.\n\n2.\nKate: John, congratulations ⓒ<u>by</u> winning the gold medal ⓓ<u>in</u> the school marathon.\nJohn: Thanks, Kate. I'm very happy.\nKate: You must be very proud ⓔ<u>of</u> yourself.\nJohn: Yes, I am. I did my best.",
+      "options": [
+        "ⓐ",
+        "ⓑ",
+        "ⓒ",
+        "ⓓ",
+        "ⓔ"
+      ],
+      "answer": "3"
+    },
+    {
+      "number": 15,
+      "question": "다음 대화를 읽고 물음에 답하시오.\nB: Excuse me, Ms. Carter. Can I ask you a question? Did I get the main role in the play?\nW: Yes, you did. Congratulations, Jiho! You're going to be Romeo in our school play, Romeo and Juliet.\nB: Really? I'm so excited. Thank you so much, Ms. Carter.\nW: I know how much you wanted the role. I'm so happy for you.\nB: Thank you. What about Sumi? Did she get the role she wanted, too?\nW: Unfortunately, no. ______________________________\nB: Oh, I'm sorry to hear that. Anyway, when is the first practice?\nW: It's at 2 p.m. on September 20th, in the acting club room. You'll get a text message about it soon.\nB: OK. I'll be there.\n\n위 대화의 빈칸에 들어갈 말로 알맞은 것은?",
+      "options": [
+        "She is so nervous.",
+        "She is doing great.",
+        "She is proud of herself.",
+        "She is very disappointed.",
+        "She is so excited and happy."
+      ],
+      "answer": "4"
+    },
+    {
+      "number": 16,
+      "question": "다음 글을 읽고 물음에 답하시오.\n\"Can I just take a look?\" asked Mr. Boggis.\n\"Sure. Please come in,\" said Rummins.\nMr. Boggis first went to the kitchen, and there was nothing. He then moved to the living room. And there it was! A table which was a priceless piece of eighteenth-century English furniture. He was so excited that he almost fell over.\n\"What's wrong?\" Bert asked.\n\"Oh, nothing. Nothing at all,\" Mr. Boggis lied.\nHe then said with a straight face, \"This table is a reproduction. It's worth only a few pounds.\"\nHe then added, \"Hmm, I think I may buy it. The legs of my table at home ⓐ<u>is</u> broken. I can cut off the legs of your table and attach them to mine.\"\n\"How much?\" Rummins asked.\n\"Not much, I'm afraid. This is just a reproduction,\" said Mr. Boggis.\n\"So how much?\"\n\"Ten pounds.\"\n\"Ten? It's worth more than that.\"\n\"How about fifteen?\"\n\"Make it fifty.\"\n\"Well, thirty. This is my final offer.\"\n\"OK, it's yours, but how are you going to take it? This thing will not go in a car!\"\n\"We'll see,\" Mr. Boggis said and went out to bring his car.\nOn his way to the car, Mr. Boggis couldn't help ⓑ<u>to smile</u>. The table was (가)<u>what</u> every dealer dreamed of. He couldn't believe his luck.\n\"Dad, what if this thing doesn't go in his car? He might not pay you,\" said Bert.\nRummins then had an idea. \"ⓒ<u>That</u> he wants is only the legs. Let's cut the legs off for him,\" said Rummins. \"Great idea!\" said Bert. Bert then took out a saw and began to cut off the legs.\nWhen Mr. Boggis came back, the legs ⓓ<u>have been cut</u> off. \"Don't worry, this was a favor. I won't charge you for this,\" said Rummins. Mr. Boggis was ⓔ<u>so shocked</u> that he couldn't say anything.\n\n위 글의 밑줄 친 ⓐ~ⓔ 중, 어법상 알맞은 것은?",
+      "options": [
+        "ⓐ",
+        "ⓑ",
+        "ⓒ",
+        "ⓓ",
+        "ⓔ"
+      ],
+      "answer": "5"
+    },
+    {
+      "number": 17,
+      "question": "다음 글을 읽고 물음에 답하시오.\n\"Can I just take a look?\" asked Mr. Boggis.\n\"Sure. Please come in,\" said Rummins.\nMr. Boggis first went to the kitchen, and there was nothing. He then moved to the living room. And there it was! A table which was a priceless piece of eighteenth-century English furniture. He was so excited that he almost fell over.\n\"What's wrong?\" Bert asked.\n\"Oh, nothing. Nothing at all,\" Mr. Boggis lied.\nHe then said with a straight face, \"This table is a reproduction. It's worth only a few pounds.\"\nHe then added, \"Hmm, I think I may buy it. The legs of my table at home ⓐ<u>is</u> broken. I can cut off the legs of your table and attach them to mine.\"\n\"How much?\" Rummins asked.\n\"Not much, I'm afraid. This is just a reproduction,\" said Mr. Boggis.\n\"So how much?\"\n\"Ten pounds.\"\n\"Ten? It's worth more than that.\"\n\"How about fifteen?\"\n\"Make it fifty.\"\n\"Well, thirty. This is my final offer.\"\n\"OK, it's yours, but how are you going to take it? This thing will not go in a car!\"\n\"We'll see,\" Mr. Boggis said and went out to bring his car.\nOn his way to the car, Mr. Boggis couldn't help ⓑ<u>to smile</u>. The table was (가)<u>what</u> every dealer dreamed of. He couldn't believe his luck.\n\"Dad, what if this thing doesn't go in his car? He might not pay you,\" said Bert.\nRummins then had an idea. \"ⓒ<u>That</u> he wants is only the legs. Let's cut the legs off for him,\" said Rummins. \"Great idea!\" said Bert. Bert then took out a saw and began to cut off the legs.\nWhen Mr. Boggis came back, the legs ⓓ<u>have been cut</u> off. \"Don't worry, this was a favor. I won't charge you for this,\" said Rummins. Mr. Boggis was ⓔ<u>so shocked</u> that he couldn't say anything.\n\n위 글의 밑줄 친 (가)what과 쓰임이 다른 것은?",
+      "options": [
+        "This is <u>what</u> he likes to do.",
+        "I asked <u>what</u> his name was.",
+        "<u>What</u> I know is only the tile.",
+        "<u>What</u> I need is books to read.",
+        "We ate <u>what</u> we had wanted to eat."
+      ],
+      "answer": "2"
+    },
+    {
+      "number": 18,
+      "question": "다음 글을 읽고 물음에 답하시오.\n\"Can I just take a look?\" asked Mr. Boggis.\n\"Sure. Please come in,\" said Rummins.\nMr. Boggis first went to the kitchen, and there was nothing. He then moved to the living room. And there it was! A table which was a priceless piece of eighteenth-century English furniture. He was so excited that he almost fell over.\n\"What's wrong?\" Bert asked.\n\"Oh, nothing. Nothing at all,\" Mr. Boggis lied.\nHe then said with a straight face, \"This table is a reproduction. It's worth only a few pounds.\"\nHe then added, \"Hmm, I think I may buy it. The legs of my table at home ⓐ<u>is</u> broken. I can cut off the legs of your table and attach them to mine.\"\n\"How much?\" Rummins asked.\n\"Not much, I'm afraid. This is just a reproduction,\" said Mr. Boggis.\n\"So how much?\"\n\"Ten pounds.\"\n\"Ten? It's worth more than that.\"\n\"How about fifteen?\"\n\"Make it fifty.\"\n\"Well, thirty. This is my final offer.\"\n\"OK, it's yours, but how are you going to take it? This thing will not go in a car!\"\n\"We'll see,\" Mr. Boggis said and went out to bring his car.\nOn his way to the car, Mr. Boggis couldn't help ⓑ<u>to smile</u>. The table was (가)<u>what</u> every dealer dreamed of. He couldn't believe his luck.\n\"Dad, what if this thing doesn't go in his car? He might not pay you,\" said Bert.\nRummins then had an idea. \"ⓒ<u>That</u> he wants is only the legs. Let's cut the legs off for him,\" said Rummins. \"Great idea!\" said Bert. Bert then took out a saw and began to cut off the legs.\nWhen Mr. Boggis came back, the legs ⓓ<u>have been cut</u> off. \"Don't worry, this was a favor. I won't charge you for this,\" said Rummins. Mr. Boggis was ⓔ<u>so shocked</u> that he couldn't say anything.\n\n위 글을 읽고 작성한 표에서 True 혹은 False가 바르게 표시된 문장을 고르면?\n\n| statement | True | False |\n|---|---|---|\n| (A) Mr. Boggis found nothing in the kitchen. | | ✓ |\n| (B) Mr. Boggis jumped because he was very excited. | ✓ | |\n| (C) Rummins knew that his table was priceless. | ✓ | |\n| (D) Bert worried that Mr. Boggis didn't bring his car. | | ✓ |\n| (E) Rummins asked Mr. Boggis to pay for cutting the leg. | ✓ | |",
+      "options": [
+        "(A)",
+        "(B)",
+        "(C)",
+        "(D)",
+        "(E)"
+      ],
+      "answer": "4"
+    },
+    {
+      "number": 19,
+      "question": "다음 글을 읽고 물음에 답하시오.\n\"Can I just take a look?\" asked Mr. Boggis.\n\"Sure. Please come in,\" said Rummins.\nMr. Boggis first went to the kitchen, and there was nothing. He then moved to the living room. And there it was! A table which was a priceless piece of eighteenth-century English furniture. He was so excited that he almost fell over.\n\"What's wrong?\" Bert asked.\n\"Oh, nothing. Nothing at all,\" Mr. Boggis lied.\nHe then said with a straight face, \"This table is a reproduction. It's worth only a few pounds.\"\nHe then added, \"Hmm, I think I may buy it. The legs of my table at home ⓐ<u>is</u> broken. I can cut off the legs of your table and attach them to mine.\"\n\"How much?\" Rummins asked.\n\"Not much, I'm afraid. This is just a reproduction,\" said Mr. Boggis.\n\"So how much?\"\n\"Ten pounds.\"\n\"Ten? It's worth more than that.\"\n\"How about fifteen?\"\n\"Make it fifty.\"\n\"Well, thirty. This is my final offer.\"\n\"OK, it's yours, but how are you going to take it? This thing will not go in a car!\"\n\"We'll see,\" Mr. Boggis said and went out to bring his car.\nOn his way to the car, Mr. Boggis couldn't help ⓑ<u>to smile</u>. The table was (가)<u>what</u> every dealer dreamed of. He couldn't believe his luck.\n\"Dad, what if this thing doesn't go in his car? He might not pay you,\" said Bert.\nRummins then had an idea. \"ⓒ<u>That</u> he wants is only the legs. Let's cut the legs off for him,\" said Rummins. \"Great idea!\" said Bert. Bert then took out a saw and began to cut off the legs.\nWhen Mr. Boggis came back, the legs ⓓ<u>have been cut</u> off. \"Don't worry, this was a favor. I won't charge you for this,\" said Rummins. Mr. Boggis was ⓔ<u>so shocked</u> that he couldn't say anything.\n\n위 글과 아래 Boggis 씨가 쓴 가상 일기의 밑줄 친 ㉠~㉤ 중, 내용이 일치하지 않는 것은?\n\n㉠<u>In Rummins' living room, I found a very valuable antique table</u>. ㉡<u>All dealers including me have wanted to get it</u>. I lied to Rummins that it was just a reproduction. ㉢<u>I also lied that I could cut off the legs of his table and use them to repair my broken table</u>. ㉣<u>At first, I suggested ten pounds for selling his table</u>. ㉤<u>He accepted my first offer</u>. At that time, I thought I got the table already.",
+      "options": [
+        "㉠",
+        "㉡",
+        "㉢",
+        "㉣",
+        "㉤"
+      ],
+      "answer": "5"
+    },
+    {
+      "number": 20,
+      "question": "다음 글을 읽고 물음에 답하시오.\n[A]\nNow it was another Sunday, and Mr. Boggis was in a small town again. At a house he visited, he met two men. ⓐ<u>한 명은 주인인 Rummins였고 다른 한 명은 그의 아들인 Bert였다</u>.\n\"I am an antique furniture dealer. Do you have any good old furniture?\" asked Mr. Boggis.\n\n[B]\n\"The legs of my table at home are broken,\" Mr. Boggis answered. \"I can cut off the legs of ㉠<u>your table</u> and attach them to mine,\" he lied again.\n\"How much?\" Rummins asked.\n\n[C]\n\"No, I don't,\" said Rummins.\n\"Can I just take a look?\" asked Mr. Boggis.\n\"Sure. Please come in,\" said Rummins.\nMr. Boggis first went to the kitchen, and there was nothing. He then moved to the living room.\n\n[D]\nAnd there was a table! It was ㉡<u>a priceless piece of eighteenth-century English furniture</u>. He was so excited that he almost fell over.\n\"What's wrong?\" Bert asked.\n\"Oh, nothing. Nothing at all,\" Mr. Boggis lied. He then said with a straight face, \"This table is a reproduction. It's worth only a few pounds.\"\nHe then added, \"Hmm, I think I may buy ㉢<u>it</u>.\"\n\"Really? Why?\" Rummins asked.\n\n[E]\n\"Not much, I'm afraid. This is just a reproduction,\" said Mr. Boggis.\n\"So how much?\"\n\"Ten pounds.\"\n\"Ten? It's worth more than ㉣<u>that</u>.\"\n\"How about fifteen?\"\n\"Make it fifty.\"\n\"Well, thirty. This is my final offer.\"\n\"OK, it's yours, but how are you going to take ㉤<u>it</u>? This thing will not go in a car!\"\n\"We'll see,\" Mr. Boggis said and went out to bring his car.\n\n위 글 [A]에 이어질 순서로 알맞은 것은?",
+      "options": [
+        "[B]-[D]-[C]-[E]",
+        "[C]-[D]-[B]-[E]",
+        "[C]-[D]-[E]-[B]",
+        "[D]-[B]-[E]-[C]",
+        "[D]-[E]-[B]-[C]"
+      ],
+      "answer": "2"
+    },
+    {
+      "number": 21,
+      "question": "다음 글을 읽고 물음에 답하시오.\n[A]\nNow it was another Sunday, and Mr. Boggis was in a small town again. At a house he visited, he met two men. ⓐ<u>한 명은 주인인 Rummins였고 다른 한 명은 그의 아들인 Bert였다</u>.\n\"I am an antique furniture dealer. Do you have any good old furniture?\" asked Mr. Boggis.\n\n[B]\n\"The legs of my table at home are broken,\" Mr. Boggis answered. \"I can cut off the legs of ㉠<u>your table</u> and attach them to mine,\" he lied again.\n\"How much?\" Rummins asked.\n\n[C]\n\"No, I don't,\" said Rummins.\n\"Can I just take a look?\" asked Mr. Boggis.\n\"Sure. Please come in,\" said Rummins.\nMr. Boggis first went to the kitchen, and there was nothing. He then moved to the living room.\n\n[D]\nAnd there was a table! It was ㉡<u>a priceless piece of eighteenth-century English furniture</u>. He was so excited that he almost fell over.\n\"What's wrong?\" Bert asked.\n\"Oh, nothing. Nothing at all,\" Mr. Boggis lied. He then said with a straight face, \"This table is a reproduction. It's worth only a few pounds.\"\nHe then added, \"Hmm, I think I may buy ㉢<u>it</u>.\"\n\"Really? Why?\" Rummins asked.\n\n[E]\n\"Not much, I'm afraid. This is just a reproduction,\" said Mr. Boggis.\n\"So how much?\"\n\"Ten pounds.\"\n\"Ten? It's worth more than ㉣<u>that</u>.\"\n\"How about fifteen?\"\n\"Make it fifty.\"\n\"Well, thirty. This is my final offer.\"\n\"OK, it's yours, but how are you going to take ㉤<u>it</u>? This thing will not go in a car!\"\n\"We'll see,\" Mr. Boggis said and went out to bring his car.\n\n위 글의 밑줄 친 ⓐ의 우리말과 같은 뜻이 되도록 <보기>의 단어 및 표현을 알맞게 배열하시오. ※ 완전한 문장으로 쓰시오.\n\n<보기> Rummins, / the owner, / one / Bert / and / was / the / his son / was / other\n\n→ ______________________________",
+      "options": [],
+      "answer": "One was Rummins, the owner, and the other was his son Bert."
+    },
+    {
+      "number": 22,
+      "question": "다음 글을 읽고 물음에 답하시오.\n[A]\nNow it was another Sunday, and Mr. Boggis was in a small town again. At a house he visited, he met two men. ⓐ<u>한 명은 주인인 Rummins였고 다른 한 명은 그의 아들인 Bert였다</u>.\n\"I am an antique furniture dealer. Do you have any good old furniture?\" asked Mr. Boggis.\n\n[B]\n\"The legs of my table at home are broken,\" Mr. Boggis answered. \"I can cut off the legs of ㉠<u>your table</u> and attach them to mine,\" he lied again.\n\"How much?\" Rummins asked.\n\n[C]\n\"No, I don't,\" said Rummins.\n\"Can I just take a look?\" asked Mr. Boggis.\n\"Sure. Please come in,\" said Rummins.\nMr. Boggis first went to the kitchen, and there was nothing. He then moved to the living room.\n\n[D]\nAnd there was a table! It was ㉡<u>a priceless piece of eighteenth-century English furniture</u>. He was so excited that he almost fell over.\n\"What's wrong?\" Bert asked.\n\"Oh, nothing. Nothing at all,\" Mr. Boggis lied. He then said with a straight face, \"This table is a reproduction. It's worth only a few pounds.\"\nHe then added, \"Hmm, I think I may buy ㉢<u>it</u>.\"\n\"Really? Why?\" Rummins asked.\n\n[E]\n\"Not much, I'm afraid. This is just a reproduction,\" said Mr. Boggis.\n\"So how much?\"\n\"Ten pounds.\"\n\"Ten? It's worth more than ㉣<u>that</u>.\"\n\"How about fifteen?\"\n\"Make it fifty.\"\n\"Well, thirty. This is my final offer.\"\n\"OK, it's yours, but how are you going to take ㉤<u>it</u>? This thing will not go in a car!\"\n\"We'll see,\" Mr. Boggis said and went out to bring his car.\n\n위 글의 밑줄 친 ㉠~㉤ 중, 가리키는 대상이 나머지 넷과 다른 것은?",
+      "options": [
+        "㉠",
+        "㉡",
+        "㉢",
+        "㉣",
+        "㉤"
+      ],
+      "answer": "4"
+    },
+    {
+      "number": 23,
+      "question": "다음 글을 읽고 물음에 답하시오.\n[A]\nNow it was another Sunday, and Mr. Boggis was in a small town again. At a house he visited, he met two men. ⓐ<u>한 명은 주인인 Rummins였고 다른 한 명은 그의 아들인 Bert였다</u>.\n\"I am an antique furniture dealer. Do you have any good old furniture?\" asked Mr. Boggis.\n\n[B]\n\"The legs of my table at home are broken,\" Mr. Boggis answered. \"I can cut off the legs of ㉠<u>your table</u> and attach them to mine,\" he lied again.\n\"How much?\" Rummins asked.\n\n[C]\n\"No, I don't,\" said Rummins.\n\"Can I just take a look?\" asked Mr. Boggis.\n\"Sure. Please come in,\" said Rummins.\nMr. Boggis first went to the kitchen, and there was nothing. He then moved to the living room.\n\n[D]\nAnd there was a table! It was ㉡<u>a priceless piece of eighteenth-century English furniture</u>. He was so excited that he almost fell over.\n\"What's wrong?\" Bert asked.\n\"Oh, nothing. Nothing at all,\" Mr. Boggis lied. He then said with a straight face, \"This table is a reproduction. It's worth only a few pounds.\"\nHe then added, \"Hmm, I think I may buy ㉢<u>it</u>.\"\n\"Really? Why?\" Rummins asked.\n\n[E]\n\"Not much, I'm afraid. This is just a reproduction,\" said Mr. Boggis.\n\"So how much?\"\n\"Ten pounds.\"\n\"Ten? It's worth more than ㉣<u>that</u>.\"\n\"How about fifteen?\"\n\"Make it fifty.\"\n\"Well, thirty. This is my final offer.\"\n\"OK, it's yours, but how are you going to take ㉤<u>it</u>? This thing will not go in a car!\"\n\"We'll see,\" Mr. Boggis said and went out to bring his car.\n\n위 글의 내용과 일치하지 않는 것은?",
+      "options": [
+        "Mr. Boggis was so excited to find a priceless table.",
+        "Mr. Boggis met Rummins and Bert in a small town.",
+        "Mr. Boggis' job is to buy and sell old furniture.",
+        "Rummins is the owner of the house which Mr. Boggis visited.",
+        "Mr. Boggis wanted to buy only the legs of Rummins' table he thought he could use them to fix his broken table at home."
+      ],
+      "answer": "5"
+    },
+    {
+      "number": 24,
+      "question": "다음 글을 읽고 물음에 답하시오.\nCyril Boggis was an antique furniture dealer in London. (A) He was known for buying good things at a low price and then selling them at a high price. ⓐ<u>People asked Mr. Boggis, \"Where did you get the furniture?\"</u> (B)\n\"It's a secret,\" he said.\n(C) He went to small towns every Sunday and knocked on doors. (D) He told people that he was a furniture dealer. (E) People didn't know how ⓑ<u>valuable</u> their things were, so Mr. Boggis took advantage of them. He was able to buy things very cheaply.\nNow it was another Sunday, and Mr. Boggis was in a small town again. At a house he visited, he met two men. ⓒ______ was Rummins, the owner, and ⓓ______ was his son Bert.\n\"I buy old furniture. Do you have any?\" asked Mr. Boggis.\n\"No, I don't,\" said Rummins.\n\"Can I just ㉠<u>take a look</u>?\" asked Mr. Boggis.\n\"Sure. Please come in,\" said Rummins.\nMr. Boggis first went to the kitchen, and there was nothing. He then moved to the living room. And there it was! A table which was a ㉡<u>priceless</u> piece of eighteenth-century English furniture. He was so excited that he ㉢<u>almost fell over</u>.\n\"What's wrong?\" Bert asked.\n\"Oh, nothing. Nothing at all,\" Mr. Boggis lied. He then said ㉣<u>with a straight face</u>. \"This table is a ㉤<u>reproduction</u>. It's worth only a few pounds.\"\n\n위 글의 밑줄 친 ⓐ를 간접 화법으로 알맞게 전환한 것은?",
+      "options": [
+        "People asked Mr. Boggis where had he got the furniture.",
+        "People asked Mr. Boggis where he had got the furniture.",
+        "People had asked Mr. Boggis where did he get the furniture.",
+        "People had asked Mr. Boggis where you got the furniture.",
+        "People asked Mr. Boggis where you had got the furniture."
+      ],
+      "answer": "2"
+    },
+    {
+      "number": 25,
+      "question": "다음 글을 읽고 물음에 답하시오.\nCyril Boggis was an antique furniture dealer in London. (A) He was known for buying good things at a low price and then selling them at a high price. ⓐ<u>People asked Mr. Boggis, \"Where did you get the furniture?\"</u> (B)\n\"It's a secret,\" he said.\n(C) He went to small towns every Sunday and knocked on doors. (D) He told people that he was a furniture dealer. (E) People didn't know how ⓑ<u>valuable</u> their things were, so Mr. Boggis took advantage of them. He was able to buy things very cheaply.\nNow it was another Sunday, and Mr. Boggis was in a small town again. At a house he visited, he met two men. ⓒ______ was Rummins, the owner, and ⓓ______ was his son Bert.\n\"I buy old furniture. Do you have any?\" asked Mr. Boggis.\n\"No, I don't,\" said Rummins.\n\"Can I just ㉠<u>take a look</u>?\" asked Mr. Boggis.\n\"Sure. Please come in,\" said Rummins.\nMr. Boggis first went to the kitchen, and there was nothing. He then moved to the living room. And there it was! A table which was a ㉡<u>priceless</u> piece of eighteenth-century English furniture. He was so excited that he ㉢<u>almost fell over</u>.\n\"What's wrong?\" Bert asked.\n\"Oh, nothing. Nothing at all,\" Mr. Boggis lied. He then said ㉣<u>with a straight face</u>. \"This table is a ㉤<u>reproduction</u>. It's worth only a few pounds.\"\n\n위 글의 (A)~(E) 중, 주어진 문장이 들어갈 알맞은 곳은?\n\nMr. Boggis' secret was simple.",
+      "options": [
+        "(A)",
+        "(B)",
+        "(C)",
+        "(D)",
+        "(E)"
+      ],
+      "answer": "3"
+    },
+    {
+      "number": 26,
+      "question": "다음 글을 읽고 물음에 답하시오.\nCyril Boggis was an antique furniture dealer in London. (A) He was known for buying good things at a low price and then selling them at a high price. ⓐ<u>People asked Mr. Boggis, \"Where did you get the furniture?\"</u> (B)\n\"It's a secret,\" he said.\n(C) He went to small towns every Sunday and knocked on doors. (D) He told people that he was a furniture dealer. (E) People didn't know how ⓑ<u>valuable</u> their things were, so Mr. Boggis took advantage of them. He was able to buy things very cheaply.\nNow it was another Sunday, and Mr. Boggis was in a small town again. At a house he visited, he met two men. ⓒ______ was Rummins, the owner, and ⓓ______ was his son Bert.\n\"I buy old furniture. Do you have any?\" asked Mr. Boggis.\n\"No, I don't,\" said Rummins.\n\"Can I just ㉠<u>take a look</u>?\" asked Mr. Boggis.\n\"Sure. Please come in,\" said Rummins.\nMr. Boggis first went to the kitchen, and there was nothing. He then moved to the living room. And there it was! A table which was a ㉡<u>priceless</u> piece of eighteenth-century English furniture. He was so excited that he ㉢<u>almost fell over</u>.\n\"What's wrong?\" Bert asked.\n\"Oh, nothing. Nothing at all,\" Mr. Boggis lied. He then said ㉣<u>with a straight face</u>. \"This table is a ㉤<u>reproduction</u>. It's worth only a few pounds.\"\n\n위 글의 밑줄 친 ⓑvaluable을 대신하여 쓸 수 없는 것을 고르면?",
+      "options": [
+        "worthless",
+        "precious",
+        "priceless",
+        "treasured",
+        "invaluable"
+      ],
+      "answer": "1"
+    },
+    {
+      "number": 27,
+      "question": "다음 글을 읽고 물음에 답하시오.\nCyril Boggis was an antique furniture dealer in London. (A) He was known for buying good things at a low price and then selling them at a high price. ⓐ<u>People asked Mr. Boggis, \"Where did you get the furniture?\"</u> (B)\n\"It's a secret,\" he said.\n(C) He went to small towns every Sunday and knocked on doors. (D) He told people that he was a furniture dealer. (E) People didn't know how ⓑ<u>valuable</u> their things were, so Mr. Boggis took advantage of them. He was able to buy things very cheaply.\nNow it was another Sunday, and Mr. Boggis was in a small town again. At a house he visited, he met two men. ⓒ______ was Rummins, the owner, and ⓓ______ was his son Bert.\n\"I buy old furniture. Do you have any?\" asked Mr. Boggis.\n\"No, I don't,\" said Rummins.\n\"Can I just ㉠<u>take a look</u>?\" asked Mr. Boggis.\n\"Sure. Please come in,\" said Rummins.\nMr. Boggis first went to the kitchen, and there was nothing. He then moved to the living room. And there it was! A table which was a ㉡<u>priceless</u> piece of eighteenth-century English furniture. He was so excited that he ㉢<u>almost fell over</u>.\n\"What's wrong?\" Bert asked.\n\"Oh, nothing. Nothing at all,\" Mr. Boggis lied. He then said ㉣<u>with a straight face</u>. \"This table is a ㉤<u>reproduction</u>. It's worth only a few pounds.\"\n\n위 글의 빈칸 ⓒ, ⓓ에 들어갈 말로 알맞게 연결된 것은?",
+      "options": [
+        "ⓒ one – ⓓ other",
+        "ⓒ one – ⓓ the other",
+        "ⓒ some – ⓓ another",
+        "ⓒ some – ⓓ other",
+        "ⓒ some – ⓓ the other"
+      ],
+      "answer": "2"
+    },
+    {
+      "number": 28,
+      "question": "다음 글을 읽고 물음에 답하시오.\nHe then added, \"Hmm, I think I may buy it. ⓐ<u>The legs of my table at home are broken</u>. I can cut off the legs of your table and attach them to mine.\"\n\"How much?\" Rummins asked.\n\"Not much, I'm afraid. This is just a reproduction,\" said Mr. Boggis.\n\"So how much?\"\n\"Ten pounds.\"\n\"Ten? It's worth more than that.\"\n\"How about fifteen?\"\n\"ⓑ<u>Made it fifty</u>.\"\n\"Well, thirty. This is my final offer.\"\n\"OK, it's yours, but how are you going to take it? This thing will not go in a car!\"\n\"We'll see,\" Mr. Boggis said and went out to bring his car.\nⓒ<u>On his way to the car, Mr. Boggis couldn't help smile</u>. The table was what every dealer dreamed of. He couldn't believe his luck.\n\"Dad, what if this thing doesn't go in his car? He might not pay you,\" said Bert.\nRummins then had an idea. \"(A)<u>What</u> he wants is only the legs. Let's cut the legs off for him,\" said Rummins. \"Great idea!\" said Bert. ⓓ<u>Bert then took out a saw and begins to cut off the legs</u>.\nWhen Mr. Boggis came back, the legs had been cut off. \"Don't worry, this was a favor. I won't charge you for this,\" said Rummins. ⓔ<u>Mr. Boggis was too shocked that he couldn't say anything</u>.\n\n위 글의 밑줄 친 ⓐ~ⓔ 중, 어법상 알맞은 것은?",
+      "options": [
+        "ⓐ",
+        "ⓑ",
+        "ⓒ",
+        "ⓓ",
+        "ⓔ"
+      ],
+      "answer": "1"
+    },
+    {
+      "number": 29,
+      "question": "다음 글을 읽고 물음에 답하시오.\nHe then added, \"Hmm, I think I may buy it. ⓐ<u>The legs of my table at home are broken</u>. I can cut off the legs of your table and attach them to mine.\"\n\"How much?\" Rummins asked.\n\"Not much, I'm afraid. This is just a reproduction,\" said Mr. Boggis.\n\"So how much?\"\n\"Ten pounds.\"\n\"Ten? It's worth more than that.\"\n\"How about fifteen?\"\n\"ⓑ<u>Made it fifty</u>.\"\n\"Well, thirty. This is my final offer.\"\n\"OK, it's yours, but how are you going to take it? This thing will not go in a car!\"\n\"We'll see,\" Mr. Boggis said and went out to bring his car.\nⓒ<u>On his way to the car, Mr. Boggis couldn't help smile</u>. The table was what every dealer dreamed of. He couldn't believe his luck.\n\"Dad, what if this thing doesn't go in his car? He might not pay you,\" said Bert.\nRummins then had an idea. \"(A)<u>What</u> he wants is only the legs. Let's cut the legs off for him,\" said Rummins. \"Great idea!\" said Bert. ⓓ<u>Bert then took out a saw and begins to cut off the legs</u>.\nWhen Mr. Boggis came back, the legs had been cut off. \"Don't worry, this was a favor. I won't charge you for this,\" said Rummins. ⓔ<u>Mr. Boggis was too shocked that he couldn't say anything</u>.\n\n위 글의 밑줄 친 (A)What과 쓰임이 다른 것은?",
+      "options": [
+        "You can borrow <u>what</u> I have.",
+        "I don't remember <u>what</u> your plan is.",
+        "I haven't received <u>what</u> I ordered yet.",
+        "You haven't given me <u>what</u> I asked for.",
+        "<u>What</u> you need is a good long holiday."
+      ],
+      "answer": "2"
+    },
+    {
+      "number": 30,
+      "question": "다음 글을 읽고 물음에 답하시오.\nRoald Dahl was born in 1916 in Wales. Dahl's parents were Norwegian, and Dahl was named after the Norwegian explorer Roald Amundsen. His first language was Norwegian, which he spoke at home with his parents and his four sisters. In 1920, when Dahl was three years old, his seven-year-old sister, Astri, died and weeks later, his father died too at the age of 57. However, Dahl's mother did not go back to Norway and stayed in Wales. It was because her husband Harald had wanted their children to be educated in British schools, which he considered the world's best. Dahl went to St. Peter's, a boarding school, but his time at St. Peter's was unpleasant. He was very homesick and unhappy. Dahl later wrote about his time at St. Peter's in his autobiography Boy: Tales of Childhood.\n\n위 글을 읽고 다음 질문에 대한 답을 본문에서 찾아 완전한 영문으로 쓰시오. ※ 완전한 문장으로 쓰시오.\n\nQ. What was Roald Dahl's first language?\n\n→ ______________________________",
+      "options": [],
+      "answer": "His first language was Norwegian.",
+      "acceptedAnswers": [
+        "It was Norwegian.",
+        "Roald Dahl's first language was Norwegian."
+      ]
+    }
+  ],
+  "R4": [
+    {
+      "number": 1,
+      "question": "다음 단어의 뜻이 알맞게 짝지어진 것은?",
+      "options": [
+        "dealer – 중개인",
+        "furniture – 털옷",
+        "reproduction – 생산",
+        "shocked – 충격을 주는",
+        "charge – (요금을) 지불하다"
+      ],
+      "answer": "1"
+    },
+    {
+      "number": 2,
+      "question": "다음 밑줄 친 부분의 쓰임이 어색한 것을 모두 골라 짝지은 것은?\n\n(A) <u>Careful</u> drivers can cause accidents.\n(B) I'm tired of your <u>endless</u> complaining.\n(C) Photocopy machines can <u>reproduce</u> documents.\n(D) This pen is <u>priceless</u>. I'm going to throw it away.\n(E) Don't <u>replay</u> the music so many times. People won't like it.",
+      "options": [
+        "(A), (C)",
+        "(A), (D)",
+        "(B), (E)",
+        "(B), (D)",
+        "(C), (E)"
+      ],
+      "answer": "2"
+    },
+    {
+      "number": 3,
+      "question": "다음 빈칸에 공통으로 들어갈 말로 알맞은 것은?\n\n• The cell phone is ________ again.\n• I cut myself on a piece of ________ glass.",
+      "options": [
+        "bored",
+        "broken",
+        "excited",
+        "shocked",
+        "disappointed"
+      ],
+      "answer": "2"
+    },
+    {
+      "number": 4,
+      "question": "다음 빈칸에 들어갈 말로 알맞은 것은?\n\nI was shocked that my bike ____________ during the night.",
+      "options": [
+        "stole",
+        "was stealing",
+        "has stolen",
+        "had been stolen",
+        "had been stealing"
+      ],
+      "answer": "4"
+    },
+    {
+      "number": 5,
+      "question": "다음 밑줄 친 부분이 어법상 어색한 것은?",
+      "options": [
+        "When I got there, everybody <u>had already gone</u>.",
+        "People asked me where I <u>had bought</u> the dress.",
+        "The girl isn't hungry because she <u>has just eaten</u> pizza.",
+        "The movie <u>had already started</u> when the boy arrived at the theater.",
+        "I was shocked that somebody <u>has stolen</u> my bag while I was taking pictures."
+      ],
+      "answer": "5"
+    },
+    {
+      "number": 6,
+      "question": "다음 <보기>의 빈칸에 들어갈 말과 같은 것은?\n\n<보기> I can't understand ________ she is trying to say.",
+      "options": [
+        "I wonder ________ he knows the truth.",
+        "His smile is ________ makes me happy.",
+        "I stopped reading the book ________ made me bored.",
+        "The problem is ________ she doesn't listen to others at all.",
+        "The pictures ________ Sam took while traveling in Africa were great."
+      ],
+      "answer": "2"
+    },
+    {
+      "number": 7,
+      "question": "다음 밑줄 친 부분이 어법상 어색한 것은?",
+      "options": [
+        "Rose <u>has lived</u> in Seoul since she was 18.",
+        "The TV show, Hang out with Yoo, <u>had already finished</u> when I turned on the TV.",
+        "I <u>had never tried</u> Spanish food before I visited Spain.",
+        "Ms. Lee found that she <u>has left</u> her phone at home.",
+        "When Mom came home, Jenny <u>had already eaten</u> the whole pizza."
+      ],
+      "answer": "4"
+    },
+    {
+      "number": 8,
+      "question": "다음 <보기>의 ⓐ~ⓖ 중, 어법상 어색한 문장을 두 개 골라 그 기호를 쓰고, 어색한 부분을 한 군데씩 고쳐 전체를 다시 쓰시오. ※ 완전한 문장으로 쓰시오.\n\n<보기>\nⓐ I can't understand what she said.\nⓑ What you need is a good long holiday.\nⓒ I have to do that my mom told me to do.\nⓓ I found the key that I have lost in the park.\nⓔ Mr. Kim is the only man that came to the party.\nⓕ He told me that he had never seen a parrot before.\nⓖ When I called his office, he had already gone to the bank.\n\n(1) 기호: ____ → 고친 문장: ______________________\n(2) 기호: ____ → 고친 문장: ______________________",
+      "options": [],
+      "answer": "ⓒ → I have to do what my mom told me to do. / ⓓ → I found the key that I had lost in the park.",
+      "subParts": [
+        {
+          "label": "(1)",
+          "answer": "ⓒ → I have to do what my mom told me to do.",
+          "acceptedAnswers": [
+            "ⓒ, I have to do what my mom told me to do."
+          ]
+        },
+        {
+          "label": "(2)",
+          "answer": "ⓓ → I found the key that I had lost in the park.",
+          "acceptedAnswers": [
+            "ⓓ → I found the key that I lost in the park.",
+            "ⓓ, I found the key that I had lost in the park."
+          ]
+        }
+      ]
+    },
+    {
+      "number": 9,
+      "question": "다음 우리말과 같은 뜻이 되도록 빈칸에 들어갈 말을 주어진 <조건>에 알맞게 완성하시오.\n\n(1) 이것이 내가 사야 하는 것이다.\n(2) 우리는 Sue가 우리를 위해 요리해준 것을 먹었다.\n(3) 나는 내가 주문했던 것을 아직 못 받았다.\n\n<조건>\n• (1), (2), (3) 모두 관계대명사 what을 사용할 것\n• <보기>의 단어 및 표현을 사용할 것 (필요시 변형할 것)\n• 각 빈칸에 한 단어씩 쓸 것\n\n<보기> for, buy, cook, order, have to\n\n(1) This is ____ ____ ____ ____ ____.\n(2) We ate ____ ____ ____ ____ ____ ____.\n(3) I haven't get ____ ____ ____.",
+      "options": [],
+      "answer": "what I have to buy / what Sue had cooked for us / what I ordered",
+      "subParts": [
+        {
+          "label": "(1)",
+          "answer": "what I have to buy"
+        },
+        {
+          "label": "(2)",
+          "answer": "what Sue had cooked for us",
+          "acceptedAnswers": [
+            "what Sue cooked for us"
+          ]
+        },
+        {
+          "label": "(3)",
+          "answer": "what I ordered",
+          "acceptedAnswers": [
+            "what I had ordered"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 10,
+      "question": "다음 대화의 흐름이 자연스럽도록 (A)~(D)를 순서대로 바르게 배열한 것은?\n\nYou don't look so good, Inho. What's the matter?\n\n(A) Yes. I'm taking medicine.\n(B) I have the flu.\n(C) That's too bad. Did you see the doctor?\n(D) Well, I hope you feel better soon.\n\nThanks.",
+      "options": [
+        "(B)-(A)-(D)-(C)",
+        "(B)-(C)-(A)-(D)",
+        "(B)-(C)-(D)-(A)",
+        "(C)-(A)-(B)-(D)",
+        "(C)-(B)-(D)-(A)"
+      ],
+      "answer": "2"
+    },
+    {
+      "number": 11,
+      "question": "다음 대화를 읽고 물음에 답하시오.\nA: Excuse me, Ms. Carter. Can I ask you a question? Did I get the main role in the play?\nB: Yes, you did. Congratulations, Jiho! You're going to be Romeo in our school play, Romeo and Juliet.\nA: Really? I'm so excited. Thank you so much, Ms. Carter.\nB: I know how much you wanted the role. I'm so happy for you.\nA: Thank you. What about Sumi? Did she get the role she wanted, too?\nB: Unfortunately, no. She's very disappointed.\nA: Oh, I'm sorry to hear that. Anyway, when is the first practice?\nB: It's at 2 p.m. on September 20th, in the acting club room. You'll get a text message about it soon.\nA: OK. I'll be there.\n\n위 대화의 내용과 일치하지 않는 것은?",
+      "options": [
+        "지호는 연극에서 주인공 역할을 맡게 되었다.",
+        "Carter 선생님은 지호가 로미오 역할을 간절히 원했다는 것을 알고 있다.",
+        "수미는 원하는 역할을 맡지 못해 매우 실망하였다.",
+        "9월 20일에 첫 번째 연극 연습이 있을 예정이다.",
+        "지호는 첫 연습에 관한 정보를 이메일로 안내받을 것이다."
+      ],
+      "answer": "5"
+    },
+    {
+      "number": 12,
+      "question": "다음 대화의 내용과 일치하지 않는 것은?\n\nB: Mina, is anything wrong?\nG: Hi, Jiho. Well, I lost my smartphone. I'm upset.\nB: Oh, I'm so sorry to hear that. Do you remember when you used it last?\nG: Well, I remember taking it out of my bag at the snack shop.\nB: Then, let's go back to the snack shop to look for it.",
+      "options": [
+        "Mina is unhappy.",
+        "Mina lost her smartphone.",
+        "Jiho apologizes to Mina for losing her smartphone.",
+        "Mina remembers where she used her smartphone last.",
+        "Mina and Jiho are going to look for the smartphone together."
+      ],
+      "answer": "3"
+    },
+    {
+      "number": 13,
+      "question": "다음 대화를 읽고 물음에 답하시오.\nA: Excuse me, Ms. Carter. Can I ask you a question? Did I get the main role in the play?\nB: Yes, you did. Congratulations, Jiho! You're going to be Romeo in our school play, Romeo and Juliet.\nA: Really? I'm so excited. Thank you so much, Ms. Carter.\nB: I know how much you wanted the role. I'm so happy for you.\nA: Thank you. What about Sumi? Did she get the role she wanted, too?\nB: Unfortunately, no. She's very disappointed.\nA: Oh, I'm sorry to hear that. Anyway, when is the first practice?\nB: It's at 2 p.m. on September 20th, in the acting club room. You'll get a text message about it soon.\nA: OK. I'll be there.\n\n위 대화의 내용과 일치하는 것은?",
+      "options": [
+        "Ms. Carter is worried about the school play.",
+        "Jiho is so happy to get the role of Romeo.",
+        "Sumi is going to be Juliet in the school play.",
+        "The first practice for the play is in the morning.",
+        "Jiho will go to the music room on September 20th."
+      ],
+      "answer": "2"
+    },
+    {
+      "number": 14,
+      "question": "다음 대화를 읽고 물음에 답하시오.\nA: Excuse me, Ms. Carter. Can I ask you a question? Did I get the main role in the play?\nB: (A)______________________________ You're going to be Romeo in our school play, Romeo and Juliet.\nA: Really? I'm so excited. Thank you so much, Ms. Carter.\nB: (B)______________________________ I'm so happy for you.\nA: Thank you. What about Sumi? Did she get the role she wanted, too?\nB: (C)______________________________\nA: Oh, I'm sorry to hear that. (D)______________________________\nB: It's at 2 p.m. on September 20th, in the acting club room. You'll get a text message about it soon.\nA: OK. I'll be there.\n\n위 대화의 빈칸 (A)~(D)에 들어갈 말을 <보기>에서 골라 차례대로 배열한 것은?\n\n<보기>\nⓐ Anyway, when is the first practice?\nⓑ Yes, you did. Congratulations, Jiho!\nⓒ I know how much you wanted the role.\nⓓ Unfortunately, no. She's very disappointed.",
+      "options": [
+        "ⓐ-ⓑ-ⓓ-ⓒ",
+        "ⓐ-ⓓ-ⓑ-ⓒ",
+        "ⓑ-ⓒ-ⓐ-ⓓ",
+        "ⓑ-ⓒ-ⓓ-ⓐ",
+        "ⓒ-ⓓ-ⓐ-ⓑ"
+      ],
+      "answer": "4"
+    },
+    {
+      "number": 15,
+      "question": "다음 대화를 읽고 물음에 답하시오.\nA: Excuse me, Ms. Carter. Can I ask you a question? Did I get the main role in the play?\nB: (A)______________________________ You're going to be Romeo in our school play, Romeo and Juliet.\nA: Really? I'm so excited. Thank you so much, Ms. Carter.\nB: (B)______________________________ I'm so happy for you.\nA: Thank you. What about Sumi? Did she get the role she wanted, too?\nB: (C)______________________________\nA: Oh, I'm sorry to hear that. (D)______________________________\nB: It's at 2 p.m. on September 20th, in the acting club room. You'll get a text message about it soon.\nA: OK. I'll be there.\n\n위 대화를 읽고 다음 질문에 알맞은 답을 고르시오.\n\nAccording to the dialogue above, why is Jiho so excited?",
+      "options": [
+        "It is because he has got a free time.",
+        "It is because he is going to watch a play.",
+        "It is because he will get a text message from Ms. Carter.",
+        "It is because he finally got a chance to talk with Ms. Carter.",
+        "It is because he was chosen to play the main role in his school play."
+      ],
+      "answer": "5"
+    },
+    {
+      "number": 16,
+      "question": "다음 글을 읽고 물음에 답하시오.\nMr. Boggis went to a small town again to find antique furniture, and there he met two men, Rummins and his son Bert.\nAt Rummins' house, Mr. Boggis found a table which was a priceless piece of eighteenth-century English furniture. He was so excited that he almost fell over, but he lied to Rummins that the table was a reproduction, which is worth only a few pounds.\nHe then added, \"Hmm, I think I may buy it. The legs of my table at home are broken. I can cut off the legs of your table and attach them to mine.\"\n\"How much?\" Rummins asked.\n\"Not much, I'm afraid. This is just a reproduction,\" said Mr. Boggis.\n\"So how much?\"\n\"Ten pounds.\"\n\"Ten? It's worth more than that.\"\n\"How about fifteen?\"\n\"Make it fifty.\"\n\"Well, thirty. This is my final offer.\"\n\"OK, it's yours, but how are you going to take it? This thing will not go in a car!\"\n\"We'll see,\" Mr. Boggis said and went out to bring his car.\nOn his way to the car, Mr. Boggis couldn't help smiling. The table was what every dealer dreamed of. He couldn't believe his luck.\n\"Dad, what if this thing doesn't go in his car? He might not pay you,\" said Bert.\n(A) Rummins then had an idea. \"Great idea!\" said Bert. Bert then took out a saw and began to cut off the legs.\nWhen Mr. Boggis came back, the legs had been cut off. \"Don't worry, this was a favor. I won't pay you for this,\" said Rummins. Mr. Boggis was so shocked that he couldn't say anything.\n\n위 글을 읽고 답할 수 없는 것은?",
+      "options": [
+        "What was Mr. Boggis' final offer for the table?",
+        "How did Mr. Boggis feel when he found a priceless table?",
+        "What was the false reason that Mr. Boggis gave to Rummins to buy the table?",
+        "When and where did Rummins get the eighteenth-century English furniture?",
+        "How did Mr. Boggis feel after he came back to Rummins's house and found what happened?"
+      ],
+      "answer": "4"
+    },
+    {
+      "number": 17,
+      "question": "다음 글을 읽고 물음에 답하시오.\nOn his way to the car, Mr. Boggis couldn't help smiling. The table was what every dealer dreamed of. He couldn't believe his luck.\n\"Dad, what if this thing doesn't go in his car? He might not pay you,\" said Bert.\nRummins then had an idea. \"What he wants is only the legs. Let's cut the legs off for him,\" said Rummins. \"Great idea!\" said Bert. Bert then took out a saw and began to cut off the legs.\nWhen Mr. Boggis came back, the legs had been cut off. \"Don't worry, this was a favor. I won't charge you for this,\" said Rummins. Mr. Boggis was so shocked that he couldn't say anything.\n\n위 글을 읽고 다음 질문에 대한 답이 되도록 빈칸에 들어갈 알맞은 말을 주어진 <조건>에 알맞게 쓰시오.\n\nQ. Bert worried that the table wouldn't go in Mr. Boggis' car and that Mr. Boggis might not buy it. So, they decided to do something for Mr. Boggis when he went out to bring his car. What did they do for Mr. Boggis?\n\n<조건>\n본문의 단어 및 표현을 사용하여 7단어로 쓸 것\n\n→ They ____ ____ ____ ____ ____ ____ ____ for him.",
+      "options": [],
+      "answer": "cut off the legs of the table",
+      "acceptedAnswers": [
+        "cut the legs of the table off"
+      ]
+    },
+    {
+      "number": 18,
+      "question": "다음 글을 읽고 물음에 답하시오.\nCyril Boggis was an antique furniture dealer in London. He was known for buying good things at a low price and then selling them at a high price. People asked him where he had got the furniture, but he just said, \"It's a secret.\"\nMr. Boggis' secret was simple. He went to small towns every Sunday and knocked on doors. He told people that he was a furniture dealer. People didn't know how valuable their things were, so Mr. Boggis took advantage of them. He was able to buy things very cheaply.\nNow it was another Sunday, and Mr. Boggis was in a small town again. At a house he visited, he met two men. One was Rummins, the owner, and the other was his son Bert.\n\"I buy old furniture. Do you have any?\" asked Mr. Boggis.\n\"No, I don't,\" said Rummins.\n\"Can I just ㉠<u>take a look</u>?\" asked Mr. Boggis.\n\"Sure. Please come in,\" said Rummins.\nMr. Boggis first went to the kitchen, and there was nothing. He then moved to the living room. And there it was! A table which was a ㉡<u>priceless</u> piece of eighteenth-century English furniture. He was so excited that he ㉢<u>almost fell over</u>.\n\"What's wrong?\" Bert asked.\n\"Oh, nothing. Nothing at all,\" Mr. Boggis lied. He then said ㉣<u>with a straight face</u>, \"This table is a ㉤<u>reproduction</u>. It's worth only a few pounds.\"\n\n위 글의 밑줄 친 ㉠~㉤의 우리말 뜻으로 알맞지 않은 것은?",
+      "options": [
+        "㉠ take a look: 한번 보다",
+        "㉡ priceless : 값싼",
+        "㉢ almost fell over : 거의 넘어질 뻔했다",
+        "㉣ with a straight face : 정색하며",
+        "㉤ reproduction : 복제품"
+      ],
+      "answer": "2"
+    },
+    {
+      "number": 19,
+      "question": "다음 글을 읽고 물음에 답하시오.\nCyril Boggis was an antique furniture dealer in London. He was known for buying good things at a low price and then selling them at a high price. People asked him where he had got the furniture, but he just said, \"It's a secret.\"\nMr. Boggis' secret was simple. He went to small towns every Sunday and knocked on doors. He told people that he was a furniture dealer. People didn't know how valuable their things were, so Mr. Boggis took advantage of them. He was able to buy things very cheaply.\nNow it was another Sunday, and Mr. Boggis was in a small town again. At a house he visited, he met two men. One was Rummins, the owner, and the other was his son Bert.\n\"I buy old furniture. Do you have any?\" asked Mr. Boggis.\n\"No, I don't,\" said Rummins.\n\"Can I just take a look?\" asked Mr. Boggis.\n\"Sure. Please come in,\" said Rummins.\nMr. Boggis first went to the kitchen, and there was nothing. He then moved to the living room. And there it was! A table which was a priceless piece of eighteenth-century English furniture. He was so excited that he almost fell over.\n\"What's wrong?\" Bert asked.\n\"Oh, nothing. Nothing at all,\" Mr. Boggis lied. He then said with a straight face, \"This table is a reproduction. It's worth only a few pounds.\"\n\n위 글을 읽고 답할 수 없는 것은?",
+      "options": [
+        "What was Mr. Boggis' job?",
+        "What was Mr. Boggis known for?",
+        "Who did Mr. Boggis meet at the house he visited in a small town?",
+        "Why did Mr. Boggis almost fall over in Rummins' house?",
+        "How much is the original price of the table in Rummins' living room?"
+      ],
+      "answer": "5"
+    },
+    {
+      "number": 20,
+      "question": "다음 글을 읽고 물음에 답하시오.\nHe then added, \"Hmm, I think I may buy it. The legs of my table at home are broken. I can cut off the legs of your table and attach them to mine.\"\n\"How much?\" Rummins asked.\n\"Not much, I'm afraid. This is just a reproduction,\" said Mr. Boggis.\n\"So how much?\"\n\"Ten pounds.\"\n\"Ten? It's worth more than that.\"\n\"How about fifteen?\"\n\"Make it fifty.\"\n\"Well, thirty. This is my final offer.\"\n\"OK, it's yours, but how are you going to take it? This thing will not go in a car!\"\n\"We'll see,\" Mr. Boggis said and went out to bring his car.\nOn his way to the car, Mr. Boggis couldn't help smiling. The table was what every dealer dreamed of. He couldn't believe his luck.\n\"Dad, what if this thing doesn't go in his car? He might not pay you,\" said Bert.\nRummins then had an idea. \"What he wants is only the legs. Let's cut the legs off for him,\" said Rummins. \"Great idea!\" said Bert. Bert then took out a saw and began to cut off the legs.\nWhen Mr. Boggis came back, the legs had been cut off. \"Don't worry, this was a favor. I won't charge you for this,\" said Rummins. Mr. Boggis was so shocked that he couldn't say anything.\n\n위 글의 교훈으로 알맞은 것은?",
+      "options": [
+        "Better late than never.",
+        "Practice makes perfect.",
+        "Help you neighbors who are in need.",
+        "Don't be greedy without paying properly.",
+        "Lack of knowledge sometimes brings you good luck."
+      ],
+      "answer": "4"
+    },
+    {
+      "number": 21,
+      "question": "다음 글을 읽고 물음에 답하시오.\nCyril Boggis was an antique furniture dealer in London. He was known for buying good things at a low price and then selling them at a high price. People asked him ⓐ<u>where he had got the furniture</u>, but he just said, \"It's a secret.\"\nMr. Boggis' secret was simple. He went to small towns every Sunday and knocked on doors. He told people that he was a furniture dealer. People didn't know ⓑ<u>how valuable their things were</u>, so Mr. Boggis took advantage of them. He was able to buy things very cheaply.\nNow it was another Sunday, and Mr. Boggis was in a small town again. At a house ⓒ<u>which he visited</u>, he met two men. One was Rummins, the owner, and the other was his son Bert.\n\"I buy old furniture. Do you have any?\" asked Mr. Boggis.\n\"No, I don't,\" said Rummins.\n(A)<u>\"Can I just take a look?\" asked Mr. Boggis</u>.\n\"Sure. Please come in,\" said Rummins.\nMr. Boggis first went to the kitchen, and there was nothing. He then moved to the living room. And there it was! A table ⓓ<u>what was a priceless piece of eighteenth-century English furniture</u>. He was so excited that he almost fell over.\n\"What's wrong?\" Bert asked.\n\"Oh, nothing. Nothing at all,\" Mr. Boggis lied. He then said with a straight face, \"This table is a reproduction. It's ⓔ<u>worth only a few pounds</u>.\"\n\n위 글의 밑줄 친 ⓐ~ⓔ 중, 어법상 어색한 것은?",
+      "options": [
+        "ⓐ",
+        "ⓑ",
+        "ⓒ",
+        "ⓓ",
+        "ⓔ"
+      ],
+      "answer": "4"
+    },
+    {
+      "number": 22,
+      "question": "다음 글을 읽고 물음에 답하시오.\nCyril Boggis was an antique furniture dealer in London. He was known for buying good things at a low price and then selling them at a high price. People asked him ⓐ<u>where he had got the furniture</u>, but he just said, \"It's a secret.\"\nMr. Boggis' secret was simple. He went to small towns every Sunday and knocked on doors. He told people that he was a furniture dealer. People didn't know ⓑ<u>how valuable their things were</u>, so Mr. Boggis took advantage of them. He was able to buy things very cheaply.\nNow it was another Sunday, and Mr. Boggis was in a small town again. At a house ⓒ<u>which he visited</u>, he met two men. One was Rummins, the owner, and the other was his son Bert.\n\"I buy old furniture. Do you have any?\" asked Mr. Boggis.\n\"No, I don't,\" said Rummins.\n(A)<u>\"Can I just take a look?\" asked Mr. Boggis</u>.\n\"Sure. Please come in,\" said Rummins.\nMr. Boggis first went to the kitchen, and there was nothing. He then moved to the living room. And there it was! A table ⓓ<u>what was a priceless piece of eighteenth-century English furniture</u>. He was so excited that he almost fell over.\n\"What's wrong?\" Bert asked.\n\"Oh, nothing. Nothing at all,\" Mr. Boggis lied. He then said with a straight face, \"This table is a reproduction. It's ⓔ<u>worth only a few pounds</u>.\"\n\n위 글의 밑줄 친 (A)를 간접화법으로 바꾸어 쓴 것으로 알맞은 것은?",
+      "options": [
+        "Mr. Boggis asked if he could just take a look.",
+        "Mr. Boggis asked that could he just take a look.",
+        "Mr. Boggis asked if could he could just take a look.",
+        "Mr. Boggis asked whether I can just take a look.",
+        "Mr. Boggis asked whether can I just take a look."
+      ],
+      "answer": "1"
+    },
+    {
+      "number": 23,
+      "question": "다음 글을 읽고 물음에 답하시오.\nCyril Boggis was an antique furniture dealer in London. He was known for buying good things at a low price and then selling them at a high price. People asked him ⓐ<u>where he had got the furniture</u>, but he just said, \"It's a secret.\"\nMr. Boggis' secret was simple. He went to small towns every Sunday and knocked on doors. He told people that he was a furniture dealer. People didn't know ⓑ<u>how valuable their things were</u>, so Mr. Boggis took advantage of them. He was able to buy things very cheaply.\nNow it was another Sunday, and Mr. Boggis was in a small town again. At a house ⓒ<u>which he visited</u>, he met two men. One was Rummins, the owner, and the other was his son Bert.\n\"I buy old furniture. Do you have any?\" asked Mr. Boggis.\n\"No, I don't,\" said Rummins.\n(A)<u>\"Can I just take a look?\" asked Mr. Boggis</u>.\n\"Sure. Please come in,\" said Rummins.\nMr. Boggis first went to the kitchen, and there was nothing. He then moved to the living room. And there it was! A table ⓓ<u>what was a priceless piece of eighteenth-century English furniture</u>. He was so excited that he almost fell over.\n\"What's wrong?\" Bert asked.\n\"Oh, nothing. Nothing at all,\" Mr. Boggis lied. He then said with a straight face, \"This table is a reproduction. It's ⓔ<u>worth only a few pounds</u>.\"\n\n위 글의 Mr. Boggis에 관한 내용과 일치하는 것을 모두 골라 짝지은 것은?\n\n㉠ He was famous for buying and selling good things at a low price.\n㉡ He went to small towns on Sundays to buy old furniture.\n㉢ He met Rummins and Bert at a house he visited in a small town.\n㉣ He found a piece of 18th century English furniture which had little value.\n㉤ He was so excited because he found a table which was a reproduction.",
+      "options": [
+        "㉠, ㉢",
+        "㉡, ㉢",
+        "㉠, ㉡, ㉢",
+        "㉡, ㉢, ㉣",
+        "㉡, ㉣, ㉤"
+      ],
+      "answer": "2"
+    },
+    {
+      "number": 24,
+      "question": "다음 글을 읽고 물음에 답하시오.\nOn his way to the car, Mr. Boggis couldn't help smiling. The table was what every dealer dreamed of. He couldn't believe his luck.\n\"Dad, what if this thing doesn't go in his car? He might not pay you,\" said Bert.\nRummins then had (A)<u>an idea</u>. \"What he wants is only the legs. Let's cut the legs off for him,\" said Rummins. \"Great idea!\" said Bert. Bert then took out a saw and began to cut off the legs.\nWhen Mr. Boggis came back, (B)______________________. \"Don't worry, this was a favor. I won't charge you for this,\" said Rummins. Mr. Boggis was so shocked that he couldn't say anything.\n\n위 글의 밑줄 친 (A)an idea가 의미하는 것을 본문에서 찾아 구체적인 우리말로 쓰시오.",
+      "options": [],
+      "answer": "(Boggis를 위해) 탁자의 다리를 자르는 것",
+      "acceptedAnswers": [
+        "탁자의 다리를 자르는 것",
+        "Boggis를 위해 탁자의 다리를 자르는 것",
+        "탁자 다리를 잘라주는 것"
+      ]
+    },
+    {
+      "number": 25,
+      "question": "다음 글을 읽고 물음에 답하시오.\nOn his way to the car, Mr. Boggis couldn't help smiling. The table was what every dealer dreamed of. He couldn't believe his luck.\n\"Dad, what if this thing doesn't go in his car? He might not pay you,\" said Bert.\nRummins then had an idea. \"What he wants is only the legs. Let's cut the legs off for him,\" said Rummins. \"Great idea!\" said Bert. Bert then took out a saw and began to cut off the legs.\nWhen Mr. Boggis came back, (B)______________________. \"Don't worry, this was a favor. I won't charge you for this,\" said Rummins. Mr. Boggis was so shocked that he couldn't say anything.\n\n위 글의 빈칸 (B)에 들어갈 알맞은 말이 되도록 <보기>의 단어를 배열할 때, 5번째로 오는 것은?\n\n<보기> been / off / legs / cut / had / the",
+      "options": [
+        "cut",
+        "had",
+        "off",
+        "been",
+        "legs"
+      ],
+      "answer": "1"
+    },
+    {
+      "number": 26,
+      "question": "다음 글의 내용과 일치하지 않는 것을 두 개 고르면? (정답 2개)\n\nCyril Boggis was an antique furniture dealer in London. He was known for buying good things at a low price and then selling them at a high price. People asked him where he had got the furniture, but he just said, \"It's a secret.\"\nMr. Boggis' secret was simple. He went to small towns every Sunday and knocked on doors. He told people that he was a furniture dealer. People didn't know how valuable their things were, so Mr. Boggis took advantage of them. He was able to buy things very cheaply.",
+      "options": [
+        "Mr. Boggis was always willing to buy a good thing at a high price.",
+        "Mr. Boggis took advantage of people who didn't know the real value of their antique furniture.",
+        "Mr. Boggis was a person who bought good things cheaply and sold them expensively.",
+        "Mr. Boggis, an antique furniture dealer, went to small towns every Sunday to get good things.",
+        "People who wanted to sell their antique furniture at a high price could do it easily thanks to Mr. Boggis."
+      ],
+      "answer": "1, 5"
+    },
+    {
+      "number": 27,
+      "question": "다음 글을 읽고 물음에 답하시오.\n\"What's wrong?\" Bert asked.\n\"Oh, nothing. Nothing at all,\" Mr. Boggis lied. He then said ⓐ<u>정색하며</u>, \"This table is ⓑ<u>복제품</u>. It's worth only a few pounds.\"\nHe then added, \"Hmm, I think I may buy it. The legs of my table at home are broken. I can cut off the legs of your table and attach them to mine.\"\n\"How much?\" Rummins asked.\n\"Not much, I'm afraid. This is just a reproduction,\" said Mr. Boggis.\n\"So how much?\"\n\"Ten pounds.\"\n\"Ten? It's ⓒ<u>그 이상의 가치가 있는</u>.\"\n\"How about fifteen?\"\n\"Make it fifty.\"\n\"Well, thirty. This is ⓓ<u>제 마지막 제안</u>.\"\n\"OK, it's yours, but how are you going to take it? This thing will not go in a car!\"\n\"We'll see,\" Mr. Boggis said and went out to bring his car.\nOn his way to the car, Mr. Boggis couldn't help smiling. The table was ⓔ<u>모든 딜러들이 꿈꾸던 것</u>. He couldn't believe his luck.\n\"Dad, what if this thing doesn't go in his car? He might not pay you,\" said Bert.\nRummins then had an idea. \"(A)<u>What</u> he wants is only the legs. Let's cut the legs off for him,\" said Rummins. \"Great idea!\" said Bert. Bert then took out a saw and began to cut off the legs.\nWhen Mr. Boggis came back, the legs had been cut off. \"Don't worry, this was a favor. I won't charge you for this,\" said Rummins. Mr. Boggis was so shocked that he couldn't say anything.\n\n위 글의 밑줄 친 ⓐ~ⓔ의 우리말을 영작한 것 중 어색한 것은?",
+      "options": [
+        "ⓐ: with a straight face",
+        "ⓑ: a production",
+        "ⓒ: worth more than that",
+        "ⓓ: my final offer",
+        "ⓔ: what every dealer dreamed of"
+      ],
+      "answer": "2"
+    },
+    {
+      "number": 28,
+      "question": "다음 글을 읽고 물음에 답하시오.\nCyril Boggis was an antique furniture dealer in London. He was known for buying good things at a low price and then selling them at a high price. People asked him ⓐ<u>where he had got the furniture</u>, but he just said, \"It's a secret.\"\nMr. Boggis' secret was simple. He went to small towns ⓑ<u>every Sunday</u> and knocked on doors. He told people that he was a furniture dealer. People didn't know ⓒ<u>how valuable were their things</u>, so Mr. Boggis ⓓ<u>took advantage of them</u>. He was able to buy things ⓔ<u>very cheaply</u>.\n\n위 글의 밑줄 친 ⓐ~ⓔ 중, 어법상 어색한 것은?",
+      "options": [
+        "ⓐ",
+        "ⓑ",
+        "ⓒ",
+        "ⓓ",
+        "ⓔ"
+      ],
+      "answer": "3"
+    },
+    {
+      "number": 29,
+      "question": "다음 글을 읽고 물음에 답하시오.\nCyril Boggis was an antique furniture dealer in London. He was known for (A)<u>buying</u> good things at a low price and then selling them at a high price. People asked him where he had got the furniture, but he just said, \"It's a secret.\"\nMr. Boggis' secret was simple. He went to small towns every Sunday and knocked on doors. He told people that he was a furniture dealer. People didn't know how valuable their things were, so Mr. Boggis took advantage of them. He was able to buy things very cheaply.\n\n위 글을 읽고 답할 수 없는 질문은?",
+      "options": [
+        "What was Mr. Boggis' job?",
+        "What was Mr. Boggis known for?",
+        "Who did Mr. Boggis take advantage of?",
+        "How did Mr. Boggis go to small towns?",
+        "What was Mr. Boggis' secret to get furniture?"
+      ],
+      "answer": "4"
+    },
+    {
+      "number": 30,
+      "question": "다음 글의 (A)~(E) 중, 주어진 문장이 들어갈 알맞은 곳은?\n\nHowever, Dahl's mother did not go back to Norway and stayed in Wales.\n\nRoald Dahl was born in 1916 in Wales. Dahl's parents were Norwegian, and Dahl was named after the Norwegian explorer Roald Amundsen. (A) His first language was Norwegian, which he spoke at home with his parents and his sisters (Astri, Alfhild, Else, and Asta). (B) In 1920, when Dahl was three years old, his seven-year-old sister, Astri, died and weeks later, his father died too at the age of 57. (C) It was because her husband Harald had wanted their children to be educated in British schools, which he considered the world's best. (D) Dahl went to St. Peter's, a boarding school, but his time at St. Peter's was unpleasant. (E) He was very homesick and unhappy. Dahl later wrote about his time at St. Peter's in his autobiography Boy: Tales of Childhood.",
+      "options": [
+        "(A)",
+        "(B)",
+        "(C)",
+        "(D)",
+        "(E)"
+      ],
+      "answer": "3"
+    }
+  ]
+}
