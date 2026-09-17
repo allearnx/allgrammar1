@@ -35,6 +35,7 @@ const EDITS = {
     q.answer = 'I still remember the morning when we moved to Busan.'; q.acceptedAnswers = ['I still remember the morning when we moved to Busan']; },
   25: (q) => { q.question = '다음 두 문장을 <조건>에 맞게 한 문장으로 쓰시오.\n\n• I still remember the morning.\n• We moved to Busan on that morning.\n\n<조건> on which를 반드시 사용할 것';
     q.answer = 'I still remember the morning on which we moved to Busan.'; q.acceptedAnswers = ['I still remember the morning on which we moved to Busan']; },
+  23: (q) => { q.question = '다음 문장을 <보기>와 같이 "관계대명사(that)+전치사" 형태로 바꿔 쓰시오.\n\n<보기> This is the room where he studies.\n→ This is the room that he studies in.\n\nThis is the library where I do my homework.'; },
   28: (q) => { q.question = '다음 우리말과 일치하도록 주어진 단어를 배열하여 영작하시오.\n\n이것은 내 삼촌이 일하는 공장이다.\n(factory, where, works, uncle, my, this, the, is)';
     q.answer = 'This is the factory where my uncle works.'; q.acceptedAnswers = ['This is the factory where my uncle works']; },
   29: (q) => { q.question = '다음 우리말과 일치하도록 주어진 단어를 배열하여 영작하시오. (전치사+관계대명사를 사용할 것)\n\n이것은 내 삼촌이 일하는 공장이다.\n(factory, in, which, works, uncle, my, this, the, is)';
