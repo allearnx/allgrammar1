@@ -9,7 +9,7 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Badge } from '@/components/ui/badge';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
-import { Plus, ChevronDown, ChevronRight, BookOpen, FileText, Video, Target, UserPlus, Pencil, Trash2, Loader2 } from 'lucide-react';
+import { Plus, ChevronDown, ChevronRight, BookOpen, FileText, Video, Target, UserPlus, Pencil, Trash2, Loader2, PlayCircle } from 'lucide-react';
 import { extractVideoId } from '@/lib/utils/youtube';
 import { createClient } from '@/lib/supabase/client';
 import { toast } from 'sonner';
@@ -54,6 +54,22 @@ export function ContentClient({ levels, kokkokSets = [] }: ContentClientProps) {
   const [editing, setEditing] = useState<{ id: string; title: string; template_topic: string; questions: NaesinProblemQuestion[] } | null>(null);
   const [addingFor, setAddingFor] = useState<string | null>(null); // grammar_id
   const [deleting, setDeleting] = useState<string | null>(null);
+  const [videoFor, setVideoFor] = useState<KokkokSet | null>(null);
+  const [videoUrl, setVideoUrl] = useState('');
+  const [savingVideo, setSavingVideo] = useState(false);
+
+  async function handleSaveVideo() {
+    if (!videoFor) return;
+    const url = videoUrl.trim();
+    if (url && !extractVideoId(url)) { toast.error('유튜브 링크가 아닙니다'); return; }
+    setSavingVideo(true);
+    try {
+      await fetchWithToast('/api/naesin/templates', { method: 'PATCH', body: { id: videoFor.id, videoUrl: url }, logContext: 'content.kokkok_video' });
+      toast.success(url ? '영상을 연결했습니다. 이미 배정된 학생에게도 바로 보입니다.' : '영상 연결을 해제했습니다.');
+      setVideoFor(null);
+      router.refresh();
+    } catch { /* toast handled */ } finally { setSavingVideo(false); }
+  }
 
   async function openEdit(set: KokkokSet) {
     try {
@@ -182,6 +198,8 @@ export function ContentClient({ levels, kokkokSets = [] }: ContentClientProps) {
                             <div className="flex items-center gap-2">
                               <span className="text-sm font-medium flex-1 min-w-0 truncate">{set.title}</span>
                               <Badge variant="outline" className="text-[10px]">{set.questionCount}문항</Badge>
+                              {set.videoUrl && <Badge className="text-[10px] bg-red-100 text-red-700 dark:bg-red-900 dark:text-red-300"><Video className="h-3 w-3 mr-0.5" />영상</Badge>}
+                              <Button variant="ghost" size="icon" className="h-7 w-7" title={set.videoUrl ? '먼저 보는 영상 바꾸기' : '먼저 보는 영상 연결'} onClick={() => { setVideoFor(set); setVideoUrl(set.videoUrl ?? ''); }}><PlayCircle className={`h-3.5 w-3.5 ${set.videoUrl ? 'text-red-500' : ''}`} /></Button>
                               <Button variant="ghost" size="icon" className="h-7 w-7" title="학생에게 배정" onClick={() => setAssigning(set)}><UserPlus className="h-3.5 w-3.5" /></Button>
                               <Button variant="ghost" size="icon" className="h-7 w-7" title="편집" onClick={() => openEdit(set)}><Pencil className="h-3.5 w-3.5" /></Button>
                               <Button variant="ghost" size="icon" className="h-7 w-7" title="삭제" disabled={deleting === set.id} onClick={() => handleDeleteSet(set)}>
@@ -266,6 +284,21 @@ export function ContentClient({ levels, kokkokSets = [] }: ContentClientProps) {
         <EditTemplateDialog template={editing} open={true}
           onOpenChange={(v) => { if (!v) setEditing(null); }} onUpdated={() => router.refresh()} />
       )}
+      <Dialog open={!!videoFor} onOpenChange={(v) => { if (!v) setVideoFor(null); }}>
+        <DialogContent className="max-w-md">
+          <DialogHeader><DialogTitle>먼저 보는 영상</DialogTitle></DialogHeader>
+          <p className="text-sm text-muted-foreground">&ldquo;{videoFor?.title}&rdquo; 세트를 풀기 전에 학생이 보는 유튜브 영상입니다. 배정된 학생의 풀이 화면 맨 위에 나오고 시청 여부가 기록됩니다.</p>
+          <div className="space-y-2">
+            <Label htmlFor="kokkok-video-url">YouTube URL</Label>
+            <Input id="kokkok-video-url" value={videoUrl} onChange={(e) => setVideoUrl(e.target.value)} placeholder="https://youtube.com/watch?v=... (비우면 해제)" />
+          </div>
+          <div className="flex justify-end gap-2">
+            <Button variant="outline" onClick={() => setVideoFor(null)}>취소</Button>
+            <Button onClick={handleSaveVideo} disabled={savingVideo}>{savingVideo ? <Loader2 className="h-4 w-4 animate-spin mr-1.5" /> : null}저장</Button>
+          </div>
+        </DialogContent>
+      </Dialog>
+
       {addingFor && (
         <AddTemplateFromPdfDialog open={true} onOpenChange={(v) => { if (!v) setAddingFor(null); }}
           onAdd={() => router.refresh()} fixed={{ kind: 'kokkok', templateTopic: KOKKOK_TOPIC, grammarId: addingFor }} />

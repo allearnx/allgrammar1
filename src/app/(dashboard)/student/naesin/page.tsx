@@ -106,11 +106,11 @@ export default async function NaesinPage() {
   }
 
   // 선생님이 이 학생에게만 개별 배정한 "클리닉(집중훈련)" 시트 — 교과서 선택과 무관하게 항상 노출.
-  let clinicSheets: { id: string; title: string; note: string | null; bestScore: number | null; inProgressCount: number | null }[] = [];
+  let clinicSheets: { id: string; title: string; note: string | null; bestScore: number | null; inProgressCount: number | null; hasVideo: boolean }[] = [];
   {
     const { data: assigned } = await supabase
       .from('naesin_problem_sheets')
-      .select('id, title, assigned_note')
+      .select('id, title, assigned_note, video_url')
       .eq('assigned_student_id', user.id)
       .order('assigned_at', { ascending: false });
 
@@ -135,6 +135,7 @@ export default async function NaesinPage() {
         id: s.id,
         title: s.title,
         note: s.assigned_note,
+        hasVideo: !!s.video_url,
         bestScore: bestBySheet.get(s.id) ?? null,
         inProgressCount: bestBySheet.has(s.id) ? null : answeredBySheet.get(s.id) ?? null,
       }));

@@ -42,6 +42,7 @@ interface ClinicSheet {
   note: string | null;
   bestScore: number | null;
   inProgressCount: number | null;
+  hasVideo?: boolean;
 }
 
 interface NaesinHomeProps {
@@ -135,6 +136,7 @@ export function NaesinHome({
                 <CardContent className="py-3 flex items-center justify-between gap-3">
                   <div className="min-w-0">
                     <span className="font-medium text-sm">{sheet.title}</span>
+                    {sheet.hasVideo && <span className="ml-2 text-[11px] font-medium text-red-600">▶ 설명 영상</span>}
                     {sheet.note && (
                       <p className="text-xs text-muted-foreground truncate mt-0.5">{sheet.note}</p>
                     )}

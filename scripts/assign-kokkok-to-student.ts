@@ -24,7 +24,7 @@ async function main() {
   if (!APPLY) { console.log('[dry-run]'); return; }
   const { data: sheet, error } = await admin.from('naesin_problem_sheets').insert({
     unit_id: null, assigned_student_id: STUDENT, assigned_by: BY, assigned_at: new Date().toISOString(), assigned_note: NOTE,
-    title: t.title, mode: t.mode, questions, answer_key: answerKey, category: t.category || 'problem', source_template_id: TEMPLATE,
+    title: t.title, mode: t.mode, questions, answer_key: answerKey, category: t.category || 'problem', video_url: t.video_url ?? null, source_template_id: TEMPLATE,
   }).select('id').single();
   if (error) throw error;
   console.log('✓ 배정 완료 sheet', sheet.id);

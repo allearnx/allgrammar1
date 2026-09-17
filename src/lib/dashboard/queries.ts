@@ -1,7 +1,7 @@
 import { createClient } from '@/lib/supabase/server';
 
 export interface KokkokAssignment { sheetId: string; studentId: string; studentName: string; bestScore: number | null; assignedAt: string | null }
-export interface KokkokSet { id: string; title: string; grammar_id: string; questionCount: number; assignments: KokkokAssignment[] }
+export interface KokkokSet { id: string; title: string; grammar_id: string; questionCount: number; videoUrl: string | null; assignments: KokkokAssignment[] }
 
 export async function fetchContentData() {
   const supabase = await createClient();
@@ -19,7 +19,7 @@ export async function fetchKokkokSets(): Promise<KokkokSet[]> {
   const supabase = await createClient();
   const { data: sets } = await supabase
     .from('naesin_templates')
-    .select('id, title, grammar_id, questions')
+    .select('id, title, grammar_id, questions, video_url')
     .eq('kind', 'kokkok')
     .not('grammar_id', 'is', null)
     .order('created_at');
@@ -46,6 +46,7 @@ export async function fetchKokkokSets(): Promise<KokkokSet[]> {
     title: s.title,
     grammar_id: s.grammar_id as string,
     questionCount: Array.isArray(s.questions) ? s.questions.length : 0,
+    videoUrl: (s.video_url as string | null) ?? null,
     assignments: (sheets ?? [])
       .filter((sh) => sh.source_template_id === s.id)
       .map((sh) => ({ sheetId: sh.id, studentId: sh.assigned_student_id as string, studentName: name.get(sh.assigned_student_id as string) ?? '?', bestScore: best.get(sh.id) ?? null, assignedAt: sh.assigned_at })),

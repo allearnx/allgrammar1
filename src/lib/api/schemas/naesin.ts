@@ -454,12 +454,15 @@ export const templateCreateSchema = z.object({
   /** 'kokkok' = 내신 콕콕 (콘텐츠 관리 문법 주제에 귀속, 템플릿 라이브러리에는 비노출) */
   kind: z.enum(['template', 'kokkok']).default('template'),
   grammarId: ID.nullish(),
+  videoUrl: URL_STR.nullish(),
 });
 
 export const templatePatchSchema = z.object({
   id: ID,
   title: SHORT.nullish(),
   templateTopic: SHORT.nullish(),
+  /** 내신 콕콕 '먼저 보는 영상' — 빈 문자열이면 해제. 배정된 학생 사본에도 같이 반영 */
+  videoUrl: z.string().trim().max(500).nullish(),
   questions: z.array(z.unknown()).nullish(),
   answerKey: z.array(z.unknown()).nullish(),
   syncCopies: z.boolean().optional(),

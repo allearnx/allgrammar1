@@ -37,7 +37,7 @@ export const POST = createApiHandler(
   { roles: [...ADMIN_ROLES], schema: templateCreateSchema },
   async ({ body, supabase, user }) => {
     await requireContentPermission(user, supabase);
-    const { title, templateTopic, questions: rawQuestions, answerKey: rawAnswerKey, category, mode, kind, grammarId } = body;
+    const { title, templateTopic, questions: rawQuestions, answerKey: rawAnswerKey, category, mode, kind, grammarId, videoUrl } = body;
     const admin = createAdminClient();
 
     // Sanitize + validate
@@ -79,6 +79,7 @@ export const POST = createApiHandler(
         mode,
         kind,
         grammar_id: grammarId ?? null,
+        video_url: videoUrl || null,
         created_by: user.id,
       })
       .select()
@@ -95,12 +96,13 @@ export const PATCH = createApiHandler(
   { roles: [...ADMIN_ROLES], schema: templatePatchSchema },
   async ({ body, supabase, user }) => {
     await requireContentPermission(user, supabase);
-    const { id, title, templateTopic, questions, answerKey, syncCopies } = body;
+    const { id, title, templateTopic, questions, answerKey, syncCopies, videoUrl } = body;
 
     const updates: Record<string, unknown> = {};
     let patchWarnings: unknown[] = [];
     if (title != null) updates.title = title;
     if (templateTopic != null) updates.template_topic = templateTopic;
+    if (videoUrl != null) updates.video_url = videoUrl.trim() || null;
 
     // Sanitize + validate questions on update
     if (questions != null && Array.isArray(questions) && questions.length > 0) {
@@ -146,6 +148,11 @@ export const PATCH = createApiHandler(
       .eq('id', id)
       .select()
       .single());
+
+    // 영상 링크는 이미 배정된 학생 사본에도 바로 반영 (콕콕 세트 → assigned 시트)
+    if ('video_url' in updates) {
+      await admin.from('naesin_problem_sheets').update({ video_url: updates.video_url }).eq('source_template_id', id).not('assigned_student_id', 'is', null);
+    }
 
     // 복사본 일괄 업데이트 (sanitized 값 사용)
     let syncedCount = 0;

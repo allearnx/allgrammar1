@@ -77,6 +77,7 @@ export const POST = createApiHandler(
       questions: sq,
       answer_key: sak,
       category: template.category || 'problem',
+      video_url: template.video_url ?? null,
       source_template_id: templateId,
     }));
 
