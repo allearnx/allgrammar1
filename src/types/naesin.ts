@@ -324,6 +324,12 @@ export interface NaesinProblemSheet {
   is_template?: boolean;
   template_topic?: string | null;
   source_template_id?: string | null;
+  /** 단원 배정이 아니라 특정 학생 1명에게만 배정된 "클리닉(집중훈련)" 시트일 때 해당 학생 id */
+  assigned_student_id?: string | null;
+  assigned_by?: string | null;
+  assigned_at?: string | null;
+  /** 배정 사유 (학생 화면에 노출, 예: "관계부사=전치사+관계대명사 반복오답으로 배정") */
+  assigned_note?: string | null;
   created_at: string;
 }
 

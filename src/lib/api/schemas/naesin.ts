@@ -467,6 +467,12 @@ export const templateImportSchema = z.object({
   targetUnitIds: z.array(ID).min(1).max(50),
 });
 
+export const clinicAssignSchema = z.object({
+  templateId: ID,
+  studentIds: z.array(ID).min(1).max(50),
+  note: SHORT.nullish(),
+});
+
 // ── Problem Draft Schemas ──
 
 export const problemDraftSaveSchema = z.object({

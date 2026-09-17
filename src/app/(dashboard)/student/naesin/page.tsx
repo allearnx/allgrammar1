@@ -105,6 +105,42 @@ export default async function NaesinPage() {
     }));
   }
 
+  // 선생님이 이 학생에게만 개별 배정한 "클리닉(집중훈련)" 시트 — 교과서 선택과 무관하게 항상 노출.
+  let clinicSheets: { id: string; title: string; note: string | null; bestScore: number | null; inProgressCount: number | null }[] = [];
+  {
+    const { data: assigned } = await supabase
+      .from('naesin_problem_sheets')
+      .select('id, title, assigned_note')
+      .eq('assigned_student_id', user.id)
+      .order('assigned_at', { ascending: false });
+
+    if (assigned && assigned.length > 0) {
+      const sheetIds = assigned.map((s) => s.id);
+      const [attemptsRes, draftsRes] = await Promise.all([
+        supabase.from('naesin_problem_attempts').select('sheet_id, score').eq('student_id', user.id).in('sheet_id', sheetIds),
+        supabase.from('naesin_problem_drafts').select('sheet_id, draft_data').eq('student_id', user.id).in('sheet_id', sheetIds),
+      ]);
+      const bestBySheet = new Map<string, number>();
+      for (const a of attemptsRes.data || []) {
+        const prev = bestBySheet.get(a.sheet_id);
+        if (prev == null || a.score > prev) bestBySheet.set(a.sheet_id, a.score);
+      }
+      const answeredBySheet = new Map<string, number>();
+      for (const d of draftsRes.data || []) {
+        const dd = d.draft_data as { answersMap?: Record<string, unknown> } | null;
+        const n = Object.keys(dd?.answersMap ?? {}).length;
+        if (n > 0) answeredBySheet.set(d.sheet_id, n);
+      }
+      clinicSheets = assigned.map((s) => ({
+        id: s.id,
+        title: s.title,
+        note: s.assigned_note,
+        bestScore: bestBySheet.get(s.id) ?? null,
+        inProgressCount: bestBySheet.has(s.id) ? null : answeredBySheet.get(s.id) ?? null,
+      }));
+    }
+  }
+
   // If student has a textbook selected, get the units with lightweight data only
   let units: UnitSummary[] = [];
   let examGroups: ExamGroup[] = [];
@@ -226,6 +262,7 @@ export default async function NaesinPage() {
           textbookExams={textbookExams}
           textbookMaterials={textbookMaterials}
           freeUnitLimit={freeUnitLimit}
+          clinicSheets={clinicSheets}
         />
       </div>
     </>

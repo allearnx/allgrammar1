@@ -4,12 +4,13 @@ import { useState, useEffect, useCallback, useMemo } from 'react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from '@/components/ui/accordion';
-import { Loader2, Library, ClipboardList, Trash2, Pencil, Search, FileUp } from 'lucide-react';
+import { Loader2, Library, ClipboardList, Trash2, Pencil, Search, FileUp, UserPlus } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { fetchWithToast } from '@/lib/fetch-with-toast';
 import { toast } from 'sonner';
 import { EditTemplateDialog } from './content-dialogs/template/edit-template-dialog';
 import { AddTemplateFromPdfDialog } from './content-dialogs/template/add-template-from-pdf-dialog';
+import { AssignClinicDialog } from './content-dialogs/template/assign-clinic-dialog';
 import { ContentScanButton } from './content-scan-button';
 import type { NaesinProblemQuestion } from '@/types/naesin';
 
@@ -28,6 +29,7 @@ export function TemplateLibraryClient() {
   const [editingTemplate, setEditingTemplate] = useState<TemplateItem | null>(null);
   const [search, setSearch] = useState('');
   const [pdfDialogOpen, setPdfDialogOpen] = useState(false);
+  const [assigningTemplate, setAssigningTemplate] = useState<TemplateItem | null>(null);
 
   const loadTemplates = useCallback(async () => {
     setLoading(true);
@@ -188,6 +190,15 @@ export function TemplateLibraryClient() {
                                   variant="ghost"
                                   size="icon"
                                   className="h-8 w-8"
+                                  title="학생에게 배정"
+                                  onClick={() => setAssigningTemplate(tmpl)}
+                                >
+                                  <UserPlus className="h-3.5 w-3.5" />
+                                </Button>
+                                <Button
+                                  variant="ghost"
+                                  size="icon"
+                                  className="h-8 w-8"
                                   onClick={() => setEditingTemplate(tmpl)}
                                 >
                                   <Pencil className="h-3.5 w-3.5" />
@@ -233,6 +244,15 @@ export function TemplateLibraryClient() {
         onOpenChange={setPdfDialogOpen}
         onAdd={loadTemplates}
       />
+
+      {assigningTemplate && (
+        <AssignClinicDialog
+          templateId={assigningTemplate.id}
+          templateTitle={assigningTemplate.title}
+          open={true}
+          onOpenChange={(v) => { if (!v) setAssigningTemplate(null); }}
+        />
+      )}
     </div>
   );
 }

@@ -15,6 +15,7 @@ import {
   GraduationCap,
   Users,
   ArrowRight,
+  Stethoscope,
 } from 'lucide-react';
 import { fetchWithToast } from '@/lib/fetch-with-toast';
 import Link from 'next/link';
@@ -35,6 +36,14 @@ interface TextbookExam {
   bestScore: number | null;
 }
 
+interface ClinicSheet {
+  id: string;
+  title: string;
+  note: string | null;
+  bestScore: number | null;
+  inProgressCount: number | null;
+}
+
 interface NaesinHomeProps {
   textbooks: NaesinTextbook[];
   selectedTextbook: NaesinTextbook | null;
@@ -48,6 +57,8 @@ interface NaesinHomeProps {
   textbookMaterials?: NaesinTextbookMaterial[];
   /** 무료 체험 시 단원 제한 수 (0 = 무제한) */
   freeUnitLimit?: number;
+  /** 선생님이 이 학생에게만 개별 배정한 보충 문제(클리닉) */
+  clinicSheets?: ClinicSheet[];
 }
 
 export function NaesinHome({
@@ -61,6 +72,7 @@ export function NaesinHome({
   textbookExams = [],
   textbookMaterials = [],
   freeUnitLimit = 0,
+  clinicSheets = [],
 }: NaesinHomeProps) {
   const router = useRouter();
   const [saving, setSaving] = useState(false);
@@ -108,6 +120,40 @@ export function NaesinHome({
           <span>변경 시 선생님 문의</span>
         </div>
       </div>
+
+      {/* 선생님이 이 학생에게만 보낸 보충 문제(클리닉) — 단원 전체가 아니라 개인 배정 */}
+      {clinicSheets.length > 0 && (
+        <div className="space-y-3">
+          <div className="flex items-center gap-2">
+            <Stethoscope className="h-5 w-5 text-amber-500" />
+            <h3 className="text-lg font-semibold">선생님이 보낸 보충 문제</h3>
+          </div>
+          {clinicSheets.map((sheet) => (
+            <Link key={sheet.id} href={`/student/naesin/exam/${sheet.id}`}>
+              <Card className="hover:shadow-md transition-shadow border-amber-200">
+                <CardContent className="py-3 flex items-center justify-between gap-3">
+                  <div className="min-w-0">
+                    <span className="font-medium text-sm">{sheet.title}</span>
+                    {sheet.note && (
+                      <p className="text-xs text-muted-foreground truncate mt-0.5">{sheet.note}</p>
+                    )}
+                  </div>
+                  {sheet.bestScore != null ? (
+                    <div className="flex items-center gap-1.5 shrink-0">
+                      <CheckCircle2 className="h-4 w-4 text-green-500" />
+                      <span className="text-sm font-medium text-green-600">{sheet.bestScore}점</span>
+                    </div>
+                  ) : sheet.inProgressCount ? (
+                    <span className="text-xs font-medium text-amber-600 shrink-0">진행 중 {sheet.inProgressCount}</span>
+                  ) : (
+                    <span className="text-xs text-muted-foreground shrink-0">아직 안 풀었어요</span>
+                  )}
+                </CardContent>
+              </Card>
+            </Link>
+          ))}
+        </div>
+      )}
 
       {/* 교과서 자료 (단어 암기 PDF 등) — 선생님이 올린 파일 다운로드 */}
       {textbookMaterials.length > 0 && (

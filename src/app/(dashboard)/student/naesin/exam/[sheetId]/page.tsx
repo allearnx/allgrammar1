@@ -23,6 +23,8 @@ export default async function ExamPage({ params }: Props) {
     .single();
 
   if (!sheet) notFound();
+  // 학생 개별 배정(클리닉) 시트는 배정받은 학생만 열 수 있다 (단원 소속 시트는 계속 공개).
+  if (sheet.assigned_student_id && sheet.assigned_student_id !== user.id) notFound();
 
   // Fetch best score + last attempt
   const { data: attempts } = await supabase
@@ -38,10 +40,13 @@ export default async function ExamPage({ params }: Props) {
     : null;
 
   const textbookName = (sheet.textbook as { display_name: string } | null)?.display_name || '';
+  const pageTitle = sheet.assigned_student_id
+    ? '보충 문제'
+    : textbookName ? `${textbookName} - 시험 대비` : '시험 대비';
 
   return (
     <>
-      <Topbar user={user} title={textbookName ? `${textbookName} - 시험 대비` : '시험 대비'} />
+      <Topbar user={user} title={pageTitle} />
       <div className="p-4 md:p-6">
         <ExamClient
           sheet={sheet}
