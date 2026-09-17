@@ -30,16 +30,18 @@ interface Props {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   onAdd: () => void;
+  /** 내신 콕콕 모드: 주제 입력 없이 고정 주제·종류·문법 주제로 저장 (콘텐츠 관리에서 사용) */
+  fixed?: { kind: 'kokkok'; templateTopic: string; grammarId: string };
 }
 
-export function AddTemplateFromPdfDialog({ open, onOpenChange, onAdd }: Props) {
+export function AddTemplateFromPdfDialog({ open, onOpenChange, onAdd, fixed }: Props) {
   const { saving, handleSubmit } = useFormDialog({
     onSuccess: () => {
       onAdd();
       onOpenChange(false);
     },
     logContext: 'admin.add_template_from_pdf',
-    successMessage: '템플릿이 추가되었습니다',
+    successMessage: fixed ? '내신 콕콕 세트가 추가되었습니다' : '템플릿이 추가되었습니다',
     errorMessage: '템플릿 추가 실패',
   });
   const [title, setTitle] = useState('');
@@ -161,7 +163,7 @@ export function AddTemplateFromPdfDialog({ open, onOpenChange, onAdd }: Props) {
   // preview에서 저장
   async function handleSaveExtracted() {
     if (!title.trim()) { toast.error('제목을 입력해주세요'); return; }
-    if (!templateTopic.trim()) { toast.error('문법 주제를 입력해주세요'); return; }
+    if (!fixed && !templateTopic.trim()) { toast.error('문법 주제를 입력해주세요'); return; }
 
     const questions = extractedQuestions.map((q, i) => {
       const base: Record<string, unknown> = {
@@ -187,11 +189,12 @@ export function AddTemplateFromPdfDialog({ open, onOpenChange, onAdd }: Props) {
       const res = await fetchWithToast<{ validationWarnings?: { message: string }[] }>('/api/naesin/templates', {
         body: {
           title,
-          templateTopic,
+          templateTopic: fixed ? fixed.templateTopic : templateTopic,
           questions,
           answerKey,
           category: 'problem',
           mode: 'interactive',
+          ...(fixed ? { kind: fixed.kind, grammarId: fixed.grammarId } : {}),
         },
         silent: true,
       });
@@ -237,10 +240,10 @@ export function AddTemplateFromPdfDialog({ open, onOpenChange, onAdd }: Props) {
                 <Label htmlFor="tpl-pdf-title">제목</Label>
                 <Input id="tpl-pdf-title" value={title} onChange={(e) => setTitle(e.target.value)} placeholder="템플릿 제목" required />
               </div>
-              <div className="flex-1">
+              {!fixed && (<div className="flex-1">
                 <Label htmlFor="tpl-pdf-topic">문법 주제</Label>
                 <Input id="tpl-pdf-topic" value={templateTopic} onChange={(e) => setTemplateTopic(e.target.value)} placeholder="예: to부정사, 관계대명사" required />
-              </div>
+              </div>)}
             </div>
 
             <div className="flex gap-2 flex-wrap">

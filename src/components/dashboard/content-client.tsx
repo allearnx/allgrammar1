@@ -9,10 +9,18 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Badge } from '@/components/ui/badge';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
-import { Plus, ChevronDown, ChevronRight, BookOpen, FileText, Video } from 'lucide-react';
+import { Plus, ChevronDown, ChevronRight, BookOpen, FileText, Video, Target, UserPlus, Pencil, Trash2, Loader2 } from 'lucide-react';
 import { extractVideoId } from '@/lib/utils/youtube';
 import { createClient } from '@/lib/supabase/client';
 import { toast } from 'sonner';
+import { fetchWithToast } from '@/lib/fetch-with-toast';
+import { AssignClinicDialog } from '@/components/dashboard/naesin-admin/content-dialogs/template/assign-clinic-dialog';
+import { EditTemplateDialog } from '@/components/dashboard/naesin-admin/content-dialogs/template/edit-template-dialog';
+import { AddTemplateFromPdfDialog } from '@/components/dashboard/naesin-admin/content-dialogs/template/add-template-from-pdf-dialog';
+import type { KokkokSet } from '@/lib/dashboard/queries';
+import type { NaesinProblemQuestion } from '@/types/naesin';
+
+export const KOKKOK_TOPIC = '내신 콕콕';
 
 interface ContentGrammar {
   id: string;
@@ -31,13 +39,41 @@ interface ContentLevel {
 
 interface ContentClientProps {
   levels: ContentLevel[];
+  /** 내신 콕콕 세트 (문법 주제별) — 특정 유형을 틀리는 학생에게 배정하는 맞춤 세트 */
+  kokkokSets?: KokkokSet[];
 }
 
-export function ContentClient({ levels }: ContentClientProps) {
+export function ContentClient({ levels, kokkokSets = [] }: ContentClientProps) {
   const [expandedLevel, setExpandedLevel] = useState<string | null>(null);
   const [addGrammarOpen, setAddGrammarOpen] = useState(false);
   const [selectedLevelId, setSelectedLevelId] = useState<string>('');
   const router = useRouter();
+
+  // 내신 콕콕 상태
+  const [assigning, setAssigning] = useState<KokkokSet | null>(null);
+  const [editing, setEditing] = useState<{ id: string; title: string; template_topic: string; questions: NaesinProblemQuestion[] } | null>(null);
+  const [addingFor, setAddingFor] = useState<string | null>(null); // grammar_id
+  const [deleting, setDeleting] = useState<string | null>(null);
+
+  async function openEdit(set: KokkokSet) {
+    try {
+      const supabase = createClient();
+      const { data, error } = await supabase.from('naesin_templates').select('id, title, template_topic, questions').eq('id', set.id).single();
+      if (error || !data) { toast.error('세트를 불러오지 못했습니다'); return; }
+      setEditing(data as { id: string; title: string; template_topic: string; questions: NaesinProblemQuestion[] });
+    } catch { toast.error('세트를 불러오지 못했습니다'); }
+  }
+
+  async function handleDeleteSet(set: KokkokSet) {
+    const n = set.assignments.length;
+    if (!window.confirm(`"${set.title}" 세트를 삭제할까요?${n ? `\n\n배정된 학생 ${n}명의 사본과 풀이 기록도 함께 삭제됩니다.` : ''}`)) return;
+    setDeleting(set.id);
+    try {
+      await fetchWithToast(`/api/naesin/templates?id=${set.id}`, { method: 'DELETE', logContext: 'content.kokkok_delete' });
+      toast.success('삭제했습니다');
+      router.refresh();
+    } catch { /* toast handled */ } finally { setDeleting(null); }
+  }
 
   // Grammar form state
   const [grammarTitle, setGrammarTitle] = useState('');
@@ -108,10 +144,8 @@ export function ContentClient({ levels }: ContentClientProps) {
               {isExpanded && (
                 <div className="mt-4 ml-8 space-y-2">
                   {grammars.map((grammar) => (
-                    <div
-                      key={grammar.id}
-                      className="flex items-center justify-between p-2 rounded-lg bg-muted/50"
-                    >
+                    <div key={grammar.id} className="p-2 rounded-lg bg-muted/50 space-y-2">
+                      <div className="flex items-center justify-between">
                       <div>
                         <span className="text-sm font-medium">{grammar.title}</span>
                         <div className="flex gap-2 mt-1">
@@ -129,6 +163,42 @@ export function ContentClient({ levels }: ContentClientProps) {
                             교과서 {grammar.textbook_passages?.[0]?.count || 0}
                           </Badge>
                         </div>
+                      </div>
+                      </div>
+
+                      {/* 내신 콕콕 — 이 문법 유형을 내신에서 틀리는 학생에게 배정하는 맞춤 세트 */}
+                      <div className="ml-4 pl-3 border-l-2 border-amber-200 space-y-1.5">
+                        <div className="flex items-center gap-2 text-xs font-semibold text-amber-700">
+                          <Target className="h-3.5 w-3.5" />
+                          내신 콕콕
+                          <Button variant="ghost" size="sm" className="h-6 px-2 text-xs ml-auto" onClick={() => setAddingFor(grammar.id)}>
+                            <Plus className="h-3 w-3 mr-1" />PDF에서 세트 추가
+                          </Button>
+                        </div>
+                        {kokkokSets.filter((k) => k.grammar_id === grammar.id).length === 0 ? (
+                          <p className="text-xs text-muted-foreground">아직 세트가 없습니다.</p>
+                        ) : kokkokSets.filter((k) => k.grammar_id === grammar.id).map((set) => (
+                          <div key={set.id} className="rounded-md bg-amber-50/60 dark:bg-amber-950/20 px-3 py-2">
+                            <div className="flex items-center gap-2">
+                              <span className="text-sm font-medium flex-1 min-w-0 truncate">{set.title}</span>
+                              <Badge variant="outline" className="text-[10px]">{set.questionCount}문항</Badge>
+                              <Button variant="ghost" size="icon" className="h-7 w-7" title="학생에게 배정" onClick={() => setAssigning(set)}><UserPlus className="h-3.5 w-3.5" /></Button>
+                              <Button variant="ghost" size="icon" className="h-7 w-7" title="편집" onClick={() => openEdit(set)}><Pencil className="h-3.5 w-3.5" /></Button>
+                              <Button variant="ghost" size="icon" className="h-7 w-7" title="삭제" disabled={deleting === set.id} onClick={() => handleDeleteSet(set)}>
+                                {deleting === set.id ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <Trash2 className="h-3.5 w-3.5 text-destructive" />}
+                              </Button>
+                            </div>
+                            {set.assignments.length > 0 && (
+                              <div className="mt-1 flex flex-wrap gap-1">
+                                {set.assignments.map((a) => (
+                                  <span key={a.sheetId} className={`text-[11px] px-1.5 py-0.5 rounded ${a.bestScore != null ? 'bg-green-100 text-green-700 dark:bg-green-900 dark:text-green-300' : 'bg-gray-100 text-gray-600 dark:bg-gray-800 dark:text-gray-300'}`}>
+                                    {a.studentName}{a.bestScore != null ? ` ${a.bestScore}점` : ' 미완료'}
+                                  </span>
+                                ))}
+                              </div>
+                            )}
+                          </div>
+                        ))}
                       </div>
                     </div>
                   ))}
@@ -187,6 +257,19 @@ export function ContentClient({ levels }: ContentClientProps) {
           </Card>
         );
       })}
+
+      {assigning && (
+        <AssignClinicDialog templateId={assigning.id} templateTitle={assigning.title} open={true}
+          onOpenChange={(v) => { if (!v) { setAssigning(null); router.refresh(); } }} />
+      )}
+      {editing && (
+        <EditTemplateDialog template={editing} open={true}
+          onOpenChange={(v) => { if (!v) setEditing(null); }} onUpdated={() => router.refresh()} />
+      )}
+      {addingFor && (
+        <AddTemplateFromPdfDialog open={true} onOpenChange={(v) => { if (!v) setAddingFor(null); }}
+          onAdd={() => router.refresh()} fixed={{ kind: 'kokkok', templateTopic: KOKKOK_TOPIC, grammarId: addingFor }} />
+      )}
     </div>
   );
 }

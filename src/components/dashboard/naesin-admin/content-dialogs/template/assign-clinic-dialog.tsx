@@ -101,7 +101,7 @@ export function AssignClinicDialog({ templateId, templateTitle, open, onOpenChan
           <DialogTitle>학생에게 배정</DialogTitle>
           <DialogDescription>
             &ldquo;{templateTitle}&rdquo;을 선택한 학생에게만 보냅니다. 단원에는 붙지 않고,
-            학생 홈의 &ldquo;선생님이 보낸 보충 문제&rdquo;에만 나타납니다.
+            학생 홈의 &ldquo;내신 콕콕&rdquo;에만 나타납니다.
           </DialogDescription>
         </DialogHeader>
 
@@ -140,7 +140,7 @@ export function AssignClinicDialog({ templateId, templateTitle, open, onOpenChan
           )}
 
           <Textarea
-            placeholder="배정 이유 (학생 화면에 짧게 표시됩니다. 예: 관계부사=전치사+관계대명사 반복오답으로 배정)"
+            placeholder="배정 이유 (학생 화면에 짧게 표시됩니다. 예: 관계부사=전치사+관계대명사 유형을 자주 틀려서)"
             value={note}
             onChange={(e) => setNote(e.target.value)}
             rows={2}

@@ -193,7 +193,6 @@ export const NAV_CONFIG: Record<string, NavGroup[]> = {
       label: '콘텐츠',
       items: [
         { href: '/boss/content', label: '콘텐츠 관리', icon: NotebookPen },
-        { href: '/boss/textbook-mode', label: '교과서 모드', icon: BookMarked },
         { href: '/boss/naesin', label: '내신 관리', icon: ClipboardList },
         { href: '/boss/voca', label: '올킬보카 관리', icon: BookA },
         { href: '/boss/voca/submissions', label: '오답노트 확인', icon: FileCheck },

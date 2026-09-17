@@ -451,6 +451,9 @@ export const templateCreateSchema = z.object({
   answerKey: z.array(z.unknown()),
   category: SHORT.default('problem'),
   mode: SHORT.default('interactive'),
+  /** 'kokkok' = 내신 콕콕 (콘텐츠 관리 문법 주제에 귀속, 템플릿 라이브러리에는 비노출) */
+  kind: z.enum(['template', 'kokkok']).default('template'),
+  grammarId: ID.nullish(),
 });
 
 export const templatePatchSchema = z.object({

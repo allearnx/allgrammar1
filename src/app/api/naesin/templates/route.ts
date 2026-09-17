@@ -6,6 +6,7 @@ import { regradeSheet } from '@/lib/naesin/regrade-sheet';
 import { createAdminClient } from '@/lib/supabase/admin';
 import { sanitizeQuestions } from '@/lib/validation/problem-validator';
 import { scanRow } from '@/lib/validation';
+import { findDuplicateSentences } from '@/lib/naesin/duplicate-sentences';
 import type { NaesinProblemQuestion } from '@/types/naesin';
 
 const ADMIN_ROLES = ['teacher', 'admin', 'boss'] as const;
@@ -16,6 +17,7 @@ export const GET = createApiHandler(
     const data = dbResult(await supabase
       .from('naesin_templates')
       .select('id, title, questions, template_topic, category, created_at')
+      .eq('kind', 'template') // 내신 콕콕(kokkok)은 콘텐츠 관리에서만 보인다
       .order('template_topic')
       .order('created_at', { ascending: false }));
 
@@ -35,7 +37,7 @@ export const POST = createApiHandler(
   { roles: [...ADMIN_ROLES], schema: templateCreateSchema },
   async ({ body, supabase, user }) => {
     await requireContentPermission(user, supabase);
-    const { title, templateTopic, questions: rawQuestions, answerKey: rawAnswerKey, category, mode } = body;
+    const { title, templateTopic, questions: rawQuestions, answerKey: rawAnswerKey, category, mode, kind, grammarId } = body;
     const admin = createAdminClient();
 
     // Sanitize + validate
@@ -55,6 +57,17 @@ export const POST = createApiHandler(
       }).filter((i) => i.category === 'correctness');
     }
 
+    // 내신 콕콕은 내신 단원 문항과 같은 문장이 있으면 저장 차단 (층 간 동일 문항 금지)
+    if (kind === 'kokkok' && hasQ) {
+      const dups = await findDuplicateSentences(admin, questions as NaesinProblemQuestion[]);
+      if (dups.length > 0) {
+        return NextResponse.json(
+          { error: `내신 문항과 똑같은 문장이 ${dups.length}건 있어 저장할 수 없습니다. 내신 콕콕은 내신 문제와 다른 문항이어야 합니다.`, duplicates: dups.slice(0, 20) },
+          { status: 422 },
+        );
+      }
+    }
+
     const inserted = dbResult(await admin
       .from('naesin_templates')
       .insert({
@@ -64,6 +77,8 @@ export const POST = createApiHandler(
         answer_key: answerKey,
         category,
         mode,
+        kind,
+        grammar_id: grammarId ?? null,
         created_by: user.id,
       })
       .select()
@@ -111,6 +126,19 @@ export const PATCH = createApiHandler(
       return NextResponse.json({ error: 'nothing to update' }, { status: 400 });
     }
     const admin = createAdminClient();
+
+    if (Array.isArray(updates.questions) && (updates.questions as unknown[]).length > 0) {
+      const { data: cur } = await admin.from('naesin_templates').select('kind').eq('id', id).single();
+      if (cur?.kind === 'kokkok') {
+        const dups = await findDuplicateSentences(admin, updates.questions as NaesinProblemQuestion[], id as string);
+        if (dups.length > 0) {
+          return NextResponse.json(
+            { error: `내신 문항과 똑같은 문장이 ${dups.length}건 있어 저장할 수 없습니다. 내신 콕콕은 내신 문제와 다른 문항이어야 합니다.`, duplicates: dups.slice(0, 20) },
+            { status: 422 },
+          );
+        }
+      }
+    }
 
     const updated = dbResult(await admin
       .from('naesin_templates')

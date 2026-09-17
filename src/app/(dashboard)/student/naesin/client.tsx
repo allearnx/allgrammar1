@@ -121,12 +121,13 @@ export function NaesinHome({
         </div>
       </div>
 
-      {/* 선생님이 이 학생에게만 보낸 보충 문제(클리닉) — 단원 전체가 아니라 개인 배정 */}
+      {/* 내신 콕콕 — 선생님이 이 학생에게만 배정한 맞춤 문제 (단원 전체가 아니라 개인 배정) */}
       {clinicSheets.length > 0 && (
         <div className="space-y-3">
           <div className="flex items-center gap-2">
             <Stethoscope className="h-5 w-5 text-amber-500" />
-            <h3 className="text-lg font-semibold">선생님이 보낸 보충 문제</h3>
+            <h3 className="text-lg font-semibold">내신 콕콕</h3>
+            <span className="text-xs text-muted-foreground">선생님이 콕 집어준 문제</span>
           </div>
           {clinicSheets.map((sheet) => (
             <Link key={sheet.id} href={`/student/naesin/exam/${sheet.id}`}>

@@ -41,7 +41,7 @@ export default async function ExamPage({ params }: Props) {
 
   const textbookName = (sheet.textbook as { display_name: string } | null)?.display_name || '';
   const pageTitle = sheet.assigned_student_id
-    ? '보충 문제'
+    ? '내신 콕콕'
     : textbookName ? `${textbookName} - 시험 대비` : '시험 대비';
 
   return (

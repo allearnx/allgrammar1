@@ -1,11 +1,11 @@
 import { requireRole } from '@/lib/auth/helpers';
-import { fetchContentData, fetchTextbookData, fetchStudentsList, fetchTeachersList } from './queries';
+import { fetchContentData, fetchKokkokSets, fetchTextbookData, fetchStudentsList, fetchTeachersList } from './queries';
 import type { UserRole } from '@/types/database';
 
 export async function getContentPageData(roles: UserRole[]) {
   const user = await requireRole(roles);
-  const levels = await fetchContentData();
-  return { user, levels };
+  const [levels, kokkokSets] = await Promise.all([fetchContentData(), fetchKokkokSets()]);
+  return { user, levels, kokkokSets };
 }
 
 export async function getTextbookModePageData(roles: UserRole[]) {

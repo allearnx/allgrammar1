@@ -10,12 +10,12 @@ interface Props {
 export default async function ContentPage({ params }: Props) {
   const { role } = await params;
   const { allowedRoles } = getRoleConfig(role);
-  const { user, levels } = await getContentPageData(allowedRoles);
+  const { user, levels, kokkokSets } = await getContentPageData(allowedRoles);
   return (
     <>
       <Topbar user={user} title="콘텐츠 관리" />
       <div className="p-4 md:p-6">
-        <ContentClient levels={levels} />
+        <ContentClient levels={levels} kokkokSets={kokkokSets} />
       </div>
     </>
   );
