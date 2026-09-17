@@ -27,14 +27,22 @@ if (!URL || !KEY) {
 }
 
 // ── 1. 스키마 로드 (네트워크/플레이스홀더 실패는 graceful skip — 배포를 막지 않음) ──
-const schema = {}; // table -> Set(columns)
-try {
+// 마이그레이션 직후엔 PostgREST 스키마 캐시가 아직 새 컬럼을 모를 수 있다(비동기 reload).
+// 빌드 체인이 db-push 바로 뒤에 이 검사를 돌리므로, 없는 컬럼이 나오면 잠시 기다렸다 다시 받아 재확인한다
+// (2026-09-17: 컬럼 추가 마이그레이션 커밋 2건이 이 경합으로 연속 빌드 실패, 재푸시는 통과).
+let schema = {}; // table -> Set(columns)
+async function loadSchema() {
   const res = await fetch(`${URL}/rest/v1/`, { headers: { apikey: KEY, Authorization: `Bearer ${KEY}` } });
   if (!res.ok) throw new Error(`HTTP ${res.status}`);
   const spec = await res.json();
+  const out = {};
   for (const [t, def] of Object.entries(spec.definitions || {})) {
-    schema[t] = new Set(Object.keys(def.properties || {}));
+    out[t] = new Set(Object.keys(def.properties || {}));
   }
+  return out;
+}
+try {
+  schema = await loadSchema();
 } catch (e) {
   console.log(`⏭  스키마를 가져오지 못함 (${e.message}) — 컬럼 검사 건너뜀.`);
   process.exit(0);
@@ -85,6 +93,7 @@ function resolveExpr(expr, depth = 0) {
 }
 
 // ── 4. .from('table').select(...) 추출 + 검증 ──
+function findProblems() {
 const problems = [];
 const NON_COLS = new Set(['count', 'exact', 'planned', 'estimated']);
 
@@ -145,8 +154,18 @@ for (const f of files) {
     }
   }
 }
+  return problems;
+}
 
-// ── 5. 보고 ──
+// ── 5. 보고 (없는 컬럼이 있으면 스키마 캐시 갱신을 기다리며 재확인) ──
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+let problems = findProblems();
+for (let attempt = 1; problems.length > 0 && attempt <= 4; attempt++) {
+  console.log(`⏳ 스키마에 없는 컬럼 ${problems.length}건 — PostgREST 캐시 갱신 대기 후 재확인 (${attempt}/4, 15초)`);
+  await sleep(15_000);
+  try { schema = await loadSchema(); } catch { break; }
+  problems = findProblems();
+}
 if (problems.length === 0) {
   console.log('✅ 모든 .select() 컬럼이 스키마에 존재합니다.');
   process.exit(0);

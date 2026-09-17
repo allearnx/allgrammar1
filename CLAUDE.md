@@ -119,6 +119,9 @@ ESLint `supabase/no-select-wildcard` 규칙 적용 중 (warn, 117건).
   있음 → 조인으로 유도. 영상진도 시각은 `created_at`이 아니라 `updated_at`.
 - **재발 방지**: `npm run check:columns` — PostgREST 스키마와 코드 대조, build 체인 포함.
   컬럼 추가/변경 후 반드시 한 번 돌릴 것.
+- ⚠️ **마이그레이션 커밋의 Vercel 첫 빌드 실패 (2026-09-17 원인 확정)**: db-push 직후 PostgREST 스키마
+  캐시가 새 컬럼을 아직 모르는 순간에 check-select-columns가 돌아 "스키마에 없는 컬럼"으로 빌드 중단
+  (110·111 연속 재현, 재푸시는 통과). 스크립트에 15초×4회 재확인 추가로 해결. 그래도 실패하면 진짜 유령 컬럼.
 - 컬럼 상수: `SHEET_LITE_COLUMNS`, `SHEET_ADMIN_LITE_COLUMNS`, `PROGRESS_SUMMARY_COLUMNS`
   (src/types/naesin.ts). 우선순위: naesin_student_progress → 콘텐츠 JSONB 테이블 → 보카.
 
