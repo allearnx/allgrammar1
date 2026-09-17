@@ -308,7 +308,7 @@ function AttemptSummary({ attempt, onRetry }: { attempt: LastAttempt; onRetry: (
           )}
         </p>
         <p className="text-sm font-medium text-muted-foreground">
-          {getEncouragement(pct)}
+          {getEncouragement(pct, attempt.created_at)}
         </p>
       </div>
 
