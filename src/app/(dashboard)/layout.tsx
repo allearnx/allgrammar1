@@ -11,6 +11,7 @@ import { PresenceTracker } from '@/components/layout/presence-tracker';
 import { AnnouncementBanner } from '@/components/dashboard/announcement-banner';
 import { UpdateBanner } from '@/components/layout/update-banner';
 import { UpdatePopup } from '@/components/layout/update-popup';
+import { AnnouncementPopup } from '@/components/layout/announcement-popup';
 import { IdleLogout } from '@/components/layout/idle-logout';
 import { QueryProvider } from '@/components/providers/query-provider';
 import { deriveTier } from '@/lib/billing/feature-gate';
@@ -96,6 +97,8 @@ export default async function DashboardLayout({
         <UpdateBanner />
         {/* 중요 업데이트 팝업 — 스태프에게만 (학생 화면엔 배너·공지로 충분) */}
         {user.role !== 'student' && <UpdatePopup />}
+        {/* 학원 범위 공지 팝업(popup=true, 미읽음) — 스태프에게만 (예: 내신 콕콕 배정 알림) */}
+        {user.role !== 'student' && <AnnouncementPopup announcementsHref={`/${user.role}/announcements`} />}
         {children}
         {user.role === 'student' && <AnnouncementBanner />}
       </main>

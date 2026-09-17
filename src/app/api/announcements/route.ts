@@ -13,9 +13,10 @@ export const GET = createApiHandler(
     const announcements = dbResult(
       await supabase
         .from('announcements')
-        .select('id, title, content, type, is_published, published_at, target_roles, created_at')
+        .select('id, title, content, type, is_published, published_at, target_roles, created_at, academy_id, popup')
         .eq('is_published', true)
         .contains('target_roles', [user.role])
+        .or(user.academy_id ? `academy_id.is.null,academy_id.eq.${user.academy_id}` : 'academy_id.is.null')
         .gte('published_at', twoWeeksAgo)
         .order('published_at', { ascending: false })
     ) ?? [];

@@ -7,6 +7,8 @@ export const announcementCreateSchema = z.object({
   type: z.enum(['info', 'warning', 'important']).default('info'),
   target_roles: z.array(z.enum(['admin', 'teacher'])).min(1),
   is_published: z.boolean().default(false),
+  academy_id: ID.nullish(),
+  popup: z.boolean().default(false),
 });
 
 export const announcementPatchSchema = z.object({
