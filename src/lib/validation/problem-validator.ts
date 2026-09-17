@@ -691,7 +691,9 @@ export function sanitizeQuestions(
   const withPassages = backfillSharedPassages(sanitized);
 
   // Rule 8: Remove unanswerable image-referencing questions (no inline description)
+  // — 그림이 imageUrl로 첨부된 문항은 학생이 볼 수 있으므로 삭제 대상이 아니다
   const filtered = withPassages.filter((q) => {
+    if (q.imageUrl) return true;
     const text = q.question || '';
     return !isUnanswerableImageQuestion(text);
   });
