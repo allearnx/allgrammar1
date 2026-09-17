@@ -14,7 +14,8 @@ const cspDirectives = [
   "default-src 'self'",
   `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ""} https://www.youtube.com https://*.tosspayments.com`,
   "style-src 'self' 'unsafe-inline' https://*.tosspayments.com",
-  "img-src 'self' data: blob: https://*.tosspayments.com https://*.supabase.co",
+  // *.pstatic.net = 네이버 블로그 RSS 썸네일 (blogthumb.pstatic.net) — /blog 목록 카드
+  "img-src 'self' data: blob: https://*.tosspayments.com https://*.supabase.co https://*.pstatic.net",
   "font-src 'self' https://*.tosspayments.com",
   "frame-src https://www.youtube.com https://*.tosspayments.com https:",
   "connect-src 'self' https://*.supabase.co https://*.sentry.io https://*.tosspayments.com",

@@ -1,117 +1,111 @@
 'use client';
 
 import { useState, useMemo } from 'react';
-import type { BlogPostSummary, BlogCategory } from '@/types/blog';
+import type { BlogFeedItem, BlogCategory } from '@/types/blog';
 import { BLOG_CATEGORIES, BLOG_CATEGORY_LABELS } from '@/types/blog';
 import BlogCard from '@/components/public/blog-card';
+import { NAVER_BLOG_URL } from '@/lib/naver-blog-rss';
 
 const PAGE_SIZE = 12;
 
+/** 필터 키: 'all' | 'naver' | BlogCategory */
+type FilterKey = 'all' | 'naver' | BlogCategory;
+
 interface BlogListProps {
-  initialPosts: BlogPostSummary[];
+  items: BlogFeedItem[];
 }
 
-export function BlogList({ initialPosts }: BlogListProps) {
-  const [filterCategory, setFilterCategory] = useState<string>('all');
+function matches(item: BlogFeedItem, filter: FilterKey): boolean {
+  if (filter === 'all') return true;
+  if (filter === 'naver') return item.source === 'naver';
+  return item.source === 'site' && item.post.category === filter;
+}
+
+function itemKey(item: BlogFeedItem): string {
+  return item.source === 'site' ? item.post.id : item.id;
+}
+
+export function BlogList({ items }: BlogListProps) {
+  const [filter, setFilter] = useState<FilterKey>('all');
   const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
 
-  const filteredPosts = useMemo(
-    () =>
-      filterCategory === 'all'
-        ? initialPosts
-        : initialPosts.filter((p) => p.category === filterCategory),
-    [initialPosts, filterCategory],
-  );
+  const filtered = useMemo(() => items.filter((it) => matches(it, filter)), [items, filter]);
+  const visible = filtered.slice(0, visibleCount);
+  const hasMore = visibleCount < filtered.length;
 
-  const visiblePosts = filteredPosts.slice(0, visibleCount);
-  const hasMore = visibleCount < filteredPosts.length;
+  const count = (key: FilterKey) => items.filter((it) => matches(it, key)).length;
+  const hasNaver = count('naver') > 0;
 
-  const categoryCount = (cat: string) =>
-    cat === 'all'
-      ? initialPosts.length
-      : initialPosts.filter((p) => p.category === cat).length;
-
-  const handleCategoryChange = (cat: string) => {
-    setFilterCategory(cat);
+  const handleFilter = (key: FilterKey) => {
+    setFilter(key);
     setVisibleCount(PAGE_SIZE);
   };
 
+  // 자체 글이 하나도 없는 카테고리는 칩을 숨긴다 (빈 탭 방지)
+  const siteCategories = BLOG_CATEGORIES.filter((c) => count(c) > 0);
+
+  const chip = (active: boolean) =>
+    `px-5 py-2.5 rounded-full text-sm font-bold transition-all ${
+      active
+        ? 'bg-[#1A73E8] text-white shadow-[0_4px_14px_rgba(26,115,232,0.3)]'
+        : 'bg-white text-[#3C4043] hover:bg-[#F8F9FA] border border-[#E8EAED]'
+    }`;
+
   return (
     <>
-      {/* 히어로 섹션 */}
-      <section className="pt-32 pb-12 text-center bg-gradient-to-b from-violet-50 to-white">
+      {/* 히어로 — 올킬보카 문법 (하늘색 + GmarketSans) */}
+      <section className="pt-32 pb-12 text-center bg-[#DFEFFF]">
         <div className="max-w-3xl mx-auto px-4">
-          <h1 className="text-4xl sm:text-5xl font-extrabold text-slate-800 mb-4">
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-600 to-purple-600">
-              블로그
-            </span>
+          <h1 className="brand-display font-bold text-4xl sm:text-5xl text-[#1F1F1F] mb-4 tracking-tight">
+            블로그<span className="text-[#1A73E8]">.</span>
           </h1>
-          <p className="text-lg text-slate-600">
+          <p className="brand-display font-medium text-[clamp(1.05rem,1.9vw,1.35rem)] text-[#3C4043]">
             영어 학습에 도움이 되는 팁과 전략을 확인하세요
           </p>
+          {hasNaver && (
+            <a
+              href={NAVER_BLOG_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 mt-6 px-5 py-2.5 rounded-full text-sm font-extrabold bg-[#03C75A] text-white shadow-[0_4px_14px_rgba(3,199,90,0.3)] transition-all hover:-translate-y-0.5"
+            >
+              <span className="font-black">N</span> 네이버 블로그 바로가기
+            </a>
+          )}
         </div>
       </section>
 
-      {/* 카테고리 필터 */}
-      <section className="max-w-6xl mx-auto px-4 mb-8">
+      {/* 필터 */}
+      <section className="max-w-6xl mx-auto px-4 mb-8 mt-10">
         <div className="flex flex-wrap justify-center gap-2">
-          <button
-            onClick={() => handleCategoryChange('all')}
-            className={`px-5 py-2.5 rounded-full text-sm font-medium transition-all ${
-              filterCategory === 'all'
-                ? 'bg-violet-500 text-white shadow-lg shadow-violet-200'
-                : 'bg-white text-slate-600 hover:bg-violet-50 border border-slate-200'
-            }`}
-          >
-            전체 ({categoryCount('all')})
+          <button onClick={() => handleFilter('all')} className={chip(filter === 'all')}>
+            전체 ({count('all')})
           </button>
-          {BLOG_CATEGORIES.map((key: BlogCategory) => (
-            <button
-              key={key}
-              onClick={() => handleCategoryChange(key)}
-              className={`px-5 py-2.5 rounded-full text-sm font-medium transition-all ${
-                filterCategory === key
-                  ? 'bg-violet-500 text-white shadow-lg shadow-violet-200'
-                  : 'bg-white text-slate-600 hover:bg-violet-50 border border-slate-200'
-              }`}
-            >
-              {BLOG_CATEGORY_LABELS[key]} ({categoryCount(key)})
+          {hasNaver && (
+            <button onClick={() => handleFilter('naver')} className={chip(filter === 'naver')}>
+              네이버 블로그 ({count('naver')})
+            </button>
+          )}
+          {siteCategories.map((key) => (
+            <button key={key} onClick={() => handleFilter(key)} className={chip(filter === key)}>
+              {BLOG_CATEGORY_LABELS[key]} ({count(key)})
             </button>
           ))}
         </div>
       </section>
 
-      {/* 블로그 목록 */}
+      {/* 목록 */}
       <section className="max-w-6xl mx-auto px-4 pb-20">
-        {filteredPosts.length === 0 ? (
+        {filtered.length === 0 ? (
           <div className="text-center py-20">
-            <div className="inline-flex items-center justify-center w-20 h-20 bg-violet-100 rounded-full mb-6">
-              <svg
-                className="w-10 h-10 text-violet-400"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"
-                />
-              </svg>
-            </div>
-            <p className="text-xl text-slate-600 font-medium mb-2">
-              등록된 글이 없습니다
-            </p>
-            <p className="text-slate-400">
-              다른 카테고리를 선택해보세요
-            </p>
+            <p className="text-xl text-[#3C4043] font-bold mb-2">등록된 글이 없습니다</p>
+            <p className="text-[#9AA0A6]">다른 카테고리를 선택해보세요</p>
           </div>
         ) : (
           <>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {visiblePosts.map((post) => (
-                <BlogCard key={post.id} post={post} />
+              {visible.map((item) => (
+                <BlogCard key={itemKey(item)} item={item} />
               ))}
             </div>
 
@@ -119,9 +113,9 @@ export function BlogList({ initialPosts }: BlogListProps) {
               <div className="mt-12 text-center">
                 <button
                   onClick={() => setVisibleCount((prev) => prev + PAGE_SIZE)}
-                  className="px-8 py-3 rounded-full text-sm font-medium bg-white text-violet-600 border border-violet-200 hover:bg-violet-50 hover:border-violet-300 transition-all shadow-sm"
+                  className="px-8 py-3 rounded-full text-sm font-bold bg-white text-[#1F1F1F] border border-[#E8EAED] hover:bg-[#F8F9FA] transition-all shadow-sm"
                 >
-                  더 보기 ({filteredPosts.length - visibleCount}개 남음)
+                  더 보기 ({filtered.length - visibleCount}개 남음)
                 </button>
               </div>
             )}
