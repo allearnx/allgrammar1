@@ -1,4 +1,4 @@
-// 중3 능률김 5~6과 학교 기출 1~5회 — OMR 모드 스텁 (PDF 그대로, 정답표만)
+// 중3 능률김 5~6과 학교 기출 1~4회 — OMR 모드 스텁 (PDF 그대로, 정답표만)
 import fs from 'fs';
 const C = ['①','②','③','④','⑤'];
 const sets = {};
@@ -65,37 +65,10 @@ s('그림 설명 문장을 <조건>에 맞게 서술하시오. (you, read, book,
   'The more books you read, the smarter you are.',
   { acceptedAnswers: ['The more books you read, the smarter you become.','The more books you read, the smarter you get.','The more books you read, the smarter you will be.'] });
 
-// ───────── 2회 (26문항 전 선택형, 25·26은 7과)
-set('R2');
-m('[1~4 Cancun] 빈칸 (A)에 들어갈 제목으로 가장 적절한 것은?', 5);
-m('[1~4 Cancun] 밑줄 친 ⓐ~ⓔ 중 어법상 옳지 않은 것은?', 1);
-m('[1~4 Cancun] 빈칸 (B)에 들어갈 내용으로 가장 적절한 것은?', 2);
-m('[1~4 Cancun] 윗글을 읽고 답할 수 없는 것은?', 3);
-m('[대화] 다음 대화의 요지로 가장 적절한 것은? (elevator / stairs)', 5);
-m('[6~8 Singapore] 전체 흐름과 관계 없는 문장은?', 5);
-m('[6~8 Singapore] (A)~(C)의 각 괄호 안에서 문맥에 맞는 낱말로 가장 적절한 것은?', 3);
-m('[6~8 Singapore] 윗글의 목적으로 가장 적절한 것은?', 3);
-m('[9~10 Ask Your Neighbors] 윗글의 내용과 일치하는 것은?', 4);
-m('[9~10 Ask Your Neighbors] 윗글의 빈칸에 들어갈 내용으로 가장 적절한 것은?', 1);
-m('[11~12 Pet Sitter Finder] (A)~(C)의 각 괄호 안에서 어법상 옳은 표현으로 가장 적절한 것은?', 2);
-m('[11~12 Pet Sitter Finder] 윗글을 읽고 답할 수 있는 것은?', 1);
-m('[13~14 artworks] 빈칸 (A)에 공통으로 들어갈 말로 가장 적절한 것은?', 2);
-m('[13~14 artworks] 윗글의 주제로 가장 적절한 것은?', 4);
-m('(7과) 다음 글의 주제로 가장 적절한 것은? (The Printing Press / Canning)', 5);
-m('[Via Verde] 요약문의 빈칸 (A)~(C)에 들어갈 말로 가장 적절한 것은?', 2);
-m('(7과) 밑줄 친 ⓐ~ⓔ 중 어법상 옳지 않은 문장의 개수는? (robots)', 4);
-m('(7과) 밑줄 친 ⓐ~ⓔ 중 어법상 옳지 않은 것은? (trash problem / recycling)', 5);
-m('(7과) [19~20 Robots around Us] 주어진 문장이 들어가기에 가장 적절한 곳은?', 2);
-m('(7과) [19~20 Robots around Us] 빈칸에 들어갈 말로 가장 적절한 것은?', 1);
-m('(7과) [21~22 Chin-Gu] 요약문의 빈칸 (A)~(C)에 들어갈 말로 가장 적절한 것은?', 2);
-m('(7과) [21~22 Chin-Gu] 밑줄 친 ⓐ~ⓔ 중 가리키는 대상이 나머지 넷과 다른 것은?', 1);
-m('[대화] 빈칸에 들어갈 말로 가장 적절한 것은? (Special Sandwich / Classic Sandwich)', 5);
-m('다음 중 어법이 옳은 문장의 개수는? (분사구문·가정법·관계부사·the 비교급)', 4);
-m('(7과) 다음 글의 내용과 일치하는 것은? (climate change / bugs)', 1);
-m('(7과) 다음 빈칸에 들어갈 말로 가장 적절한 것은? (sharing a house / ride / group)', 2);
+// (구 2회는 7과 문항 8개 포함으로 사장님 지시에 따라 삭제 — 2026-09-17)
 
-// ───────── 3회 (26문항 전 선택형)
-set('R3');
+// ───────── 2회 (구 3회, 26문항 전 선택형)
+set('R2');
 m('빈칸에 공통으로 들어갈 단어로 가장 적절한 것은? (단어 프린트)', 4);
 m('[대화] ⓐ~ⓔ 중 대화의 흐름상 어색한 것은? (economical / on sale)', 5);
 m('다음 글의 내용과 일치하는 것은? (community car sharing program)', 2);
@@ -123,8 +96,8 @@ m('다음 ⓐ~ⓔ에 들어갈 단어로 가장 적절한 것은? (Antoni Gaudi)
 m('[대화] ⓐ~ⓔ 중 대화의 흐름으로 보아 어색한 것은? (sheep park)', 5);
 m('다음 중 어법상 맞는 문장의 개수는? (관계부사)', 4);
 
-// ───────── 4회 (30문항: 선택 25 / 서술 5, 6·17 복수정답)
-set('R4');
+// ───────── 3회 (구 4회, 30문항: 선택 25 / 서술 5, 6·17 복수정답)
+set('R3');
 m('다음 각 단어들의 관계가 나머지와 다른 것은?', 2);
 m('다음 중 영영 풀이로 옳지 않은 것은?', 3);
 m('[대화] 자연스럽게 이어지도록 가장 바르게 연결한 것은? (sheep park)', 4);
@@ -166,8 +139,8 @@ s('우화 \'The City Mouse and the Country Mouse\'의 내용과 일치하도록 
   'where they can be safe / why he doesn\'t like living in the city',
   sp(['(A)','where they can be safe',['where they could be safe']], ['(B)','why he doesn\'t like living in the city',['why he does not like living in the city','why he didn\'t like living in the city']]));
 
-// ───────── 5회 (29문항: 선택 24 / 서술 5)
-set('R5');
+// ───────── 4회 (구 5회, 29문항: 선택 24 / 서술 5)
+set('R4');
 m('[대화] 밑줄 친 (A)에 대한 설명으로 알맞은 것은? (a new bag)', 4);
 m('[2~3 trash problem] 윗글의 (A)에 들어갈 말로 가장 알맞은 것은?', 1);
 m('[2~3 trash problem] 윗글의 흐름상 ⓐ~ⓔ 중 쓰임이 어색한 것은?', 5);
