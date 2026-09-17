@@ -196,7 +196,7 @@
    },
    {
     "number": 17,
-    "question": "[15~18 Cancun] Q: Why did the artists make an underwater museum near Cancun? — 우리말로 쓰시오.",
+    "question": "[15~18 Cancun] Q: Why did the artists make an underwater museum near Cancun? — 우리말로 쓰시오. (채점 기준: 우리말 내용 이해 문항이므로 핵심 내용이 같으면 어휘·표현·어순이 달라도 정답으로 인정)",
     "options": [],
     "answer": "관광 활동들이 Cancun 인근의 바다 일부를 심각하게 훼손하고 있기 때문에",
     "acceptedAnswers": [
@@ -209,7 +209,7 @@
    },
    {
     "number": 18,
-    "question": "[15~18 Cancun] Q: What do the artists want people to realize when they see sea life growing on the statues? — 우리말로 쓰시오.",
+    "question": "[15~18 Cancun] Q: What do the artists want people to realize when they see sea life growing on the statues? — 우리말로 쓰시오. (채점 기준: 우리말 내용 이해 문항이므로 핵심 내용이 같으면 어휘·표현·어순이 달라도 정답으로 인정)",
     "options": [],
     "answer": "해양 생물이 얼마나 풍부한지 깨닫고 바다를 구하는 것이 얼마나 중요한지 이해하기를 원한다.",
     "acceptedAnswers": [
@@ -324,6 +324,10 @@
        "Being very busy, she could not join the meeting."
       ]
      }
+    ],
+    "acceptedAnswers": [
+     "(1) Walking down the street, I saw a famous movie star. (2) Being very busy, she couldn't join the meeting.",
+     "(1) Walking down the street, I saw a famous movie star., (2) Being very busy, she couldn't join the meeting."
     ]
    },
    {

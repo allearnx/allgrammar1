@@ -7,11 +7,12 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { AlertTriangle } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { extractAnswer } from '@/lib/naesin/normalize-answer';
+import { extractAnswer, normalize, normalizeSeparators, isSubstringMatch, matchFilledBlanks } from '@/lib/naesin/normalize-answer';
 import { toast } from 'sonner';
 import { fetchWithToast } from '@/lib/fetch-with-toast';
 import type { NaesinProblemSheet, NaesinProblemQuestion } from '@/types/database';
 import { useProblemDraft } from '@/hooks/use-problem-draft';
+import type { AiFeedback } from '@/hooks/use-problem-draft';
 import { isSafeIframeSrc } from '@/lib/utils/safe-url';
 
 const CIRCLED = ['①', '②', '③', '④', '⑤', '⑥', '⑦', '⑧', '⑨', '⑩'];
@@ -70,17 +71,58 @@ export function ImageAnswerView({
     saveDraft({ mode: 'image_answer', answers: newAnswers });
   }
 
+  /** 서술형 중 규칙 채점(정규화·구분자·부분일치·빈칸 완성)에 실패한 문항만 AI 채점으로 보낸다 — interactive 화면과 같은 폴백 순서 */
+  function passesRuleGrading(q: NaesinProblemQuestion, key: string | number | undefined, user: string): boolean {
+    const correct = extractAnswer(key ?? '');
+    const candidates = [correct, ...(q.acceptedAnswers ?? [])];
+    const u = normalize(user);
+    return candidates.some((c) => normalize(c) === u)
+      || candidates.some((c) => normalizeSeparators(user) === normalizeSeparators(c))
+      || candidates.some((c) => isSubstringMatch(user, c))
+      || matchFilledBlanks(user, q.question, correct, q.acceptedAnswers);
+  }
+
+  async function gradeWithAi(answerArray: string[]): Promise<Record<string, AiFeedback>> {
+    if (!hasStubs) return {};
+    const targets = questions
+      .map((q, i) => ({ q, i, user: answerArray[i] }))
+      // subParts 문항은 서버의 파트별 규칙 채점으로 충분 (interactive와 동일하게 AI 제외)
+      .filter(({ q, user }) => itemKind(q) === 'subjective' && !q.subParts && user.trim() && !passesRuleGrading(q, sheet.answer_key[q.number - 1], user));
+    const results = await Promise.all(targets.map(async ({ q, i, user }) => {
+      try {
+        const r = await fetchWithToast<AiFeedback>('/api/naesin/problems/grade-subjective', {
+          body: {
+            question: q.question,
+            referenceAnswer: extractAnswer(sheet.answer_key[i] ?? q.answer),
+            studentAnswer: user,
+            acceptedAnswers: q.acceptedAnswers,
+            sheetId: sheet.id,
+            questionNumber: q.number,
+          },
+          silent: true,
+          logContext: 'naesin.image_answer_view.ai',
+        });
+        return [String(i), r] as const;
+      } catch {
+        return null; // AI 실패 시 서버 규칙 채점 결과(오답)로 진행
+      }
+    }));
+    return Object.fromEntries(results.filter((r): r is readonly [string, AiFeedback] => r !== null));
+  }
+
   async function handleSubmit() {
     setSubmitting(true);
     const answerArray = Array.from({ length: totalQuestions }, (_, i) => answers[i] || '');
 
     try {
+      const aiResults = await gradeWithAi(answerArray);
       const data = await fetchWithToast<{ score: number; wrongAnswers: { number: number; userAnswer: string | number; correctAnswer: string | number }[] }>('/api/naesin/problems/submit', {
         body: {
           sheetId: sheet.id,
           unitId,
           answers: answerArray,
           totalQuestions,
+          ...(Object.keys(aiResults).length ? { aiResults } : {}),
         },
         errorMessage: '제출 중 오류가 발생했습니다',
         logContext: 'naesin.image_answer_view',

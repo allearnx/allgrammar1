@@ -30,10 +30,10 @@ m('[13~14 Via Verde] 윗글의 주제로 가장 적절한 것은?', 4);
 m('[13~14 Via Verde] 주어진 문장이 들어가기에 가장 적절한 곳은? (Moreover, the watering system ~)', 5);
 m('[15~18 Cancun] 윗글의 ⓐ~ⓓ 중 어법상 옳은 것을 고른 것은?', 4);
 m('[15~18 Cancun] 윗글의 내용과 일치하는 것을 <보기>에서 고른 것은?', 1);
-s('[15~18 Cancun] Q: Why did the artists make an underwater museum near Cancun? — 우리말로 쓰시오.',
+s('[15~18 Cancun] Q: Why did the artists make an underwater museum near Cancun? — 우리말로 쓰시오. (채점 기준: 우리말 내용 이해 문항이므로 핵심 내용이 같으면 어휘·표현·어순이 달라도 정답으로 인정)',
   '관광 활동들이 Cancun 인근의 바다 일부를 심각하게 훼손하고 있기 때문에',
   { acceptedAnswers: ['관광 활동이 Cancun 근처의 바다 일부를 심각하게 훼손하고 있기 때문에','관광객들의 활동이 바다를 심각하게 훼손하고 있기 때문에','죽어가는 해양 영역이 회복할 시간을 갖도록 관광객들을 다른 곳으로 유인하기 위해','관광객들을 바다의 다른 곳으로 유인해서 죽어가는 지역이 회복할 시간을 갖게 하려고','관광 활동이 칸쿤 근처 바다를 심각하게 훼손하고 있기 때문에'] });
-s('[15~18 Cancun] Q: What do the artists want people to realize when they see sea life growing on the statues? — 우리말로 쓰시오.',
+s('[15~18 Cancun] Q: What do the artists want people to realize when they see sea life growing on the statues? — 우리말로 쓰시오. (채점 기준: 우리말 내용 이해 문항이므로 핵심 내용이 같으면 어휘·표현·어순이 달라도 정답으로 인정)',
   '해양 생물이 얼마나 풍부한지 깨닫고 바다를 구하는 것이 얼마나 중요한지 이해하기를 원한다.',
   { acceptedAnswers: ['예술가들은 사람들이 조각상에서 다양한 해양 생물을 보고 해양 생태계가 얼마나 풍부한지 깨닫기를 원한다.','바다를 구하는 것이 얼마나 중요한지 깨닫기를 원한다.','해양 생물이 얼마나 풍부한지','바다를 구하는 것이 얼마나 중요한지','해양 생물이 얼마나 풍부한지 깨닫기를 원한다.','바다를 지키는 것이 얼마나 중요한지 이해하기를 원한다.'] });
 m('[19~21 Singapore] 빈칸 (A), (B)에 들어갈 말로 가장 적절한 것은?', 3);
