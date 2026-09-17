@@ -197,8 +197,8 @@ export function matchSubParts(
 
 /** 빈칸(밑줄 2개 이상). 공백만으로 이어진 인접 빈칸("_____ _____")은 하나로 본다. */
 const BLANK_RE = /_{2,}(?:[ \t]+_{2,})*/g;
-/** 문항 라벨: (A) (1) ㉠ ㊀ ㄱ: A: • → 등 — 학생 답·문제 문장 앞에서 제거 */
-const LEADING_LABEL_RE = /^\s*(?:\(?[A-Za-z0-9]\)\s*:?|[㉠-㉭㊀-㊉]\s*:?|[ㄱ-ㅎ]\s*[:.]|[A-Z]\s*:|[•·→\-])\s*/;
+/** 문항 라벨: (A) (1) 2-1. ㉠ ㊀ ㄱ: A: • → 등 — 학생 답·문제 문장 앞에서 제거 */
+const LEADING_LABEL_RE = /^\s*(?:\d+-\d+\s*[.:)]?|\(?[A-Za-z0-9]\)\s*:?|[㉠-㉭㊀-㊉]\s*:?|[ㄱ-ㅎ]\s*[:.]|[A-Z]\s*:|[•·→\-])\s*/;
 const MAX_VARIANTS = 64;
 
 function stripLeadingLabels(s: string): string {

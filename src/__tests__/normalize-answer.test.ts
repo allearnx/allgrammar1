@@ -250,3 +250,19 @@ describe('matchSubParts — 줄바꿈 구분 + 라벨 제거', () => {
     expect(matchSubParts("ㄱ: Don't use the elevator.\nㄴ: Cover your nose and mouth.", sub)).toBe(false);
   });
 });
+
+describe('matchSubParts — 시험지식 "2-1." 라벨 제거', () => {
+  const sub = [
+    { label: '2-1', answer: 'You must not talk on the phone here.' },
+    { label: '2-2', answer: 'You must not bring any food inside.' },
+  ];
+  it('줄바꿈 + "N-M." 라벨을 붙여 써도 정답', () => {
+    expect(matchSubParts('2-1. You must not talk on the phone here.\n2-2. You must not bring any food inside.', sub)).toBe(true);
+  });
+  it('슬래시 + "N-M)" 라벨도 정답', () => {
+    expect(matchSubParts("2-1) You mustn't talk on the phone here. / 2-2) You mustn't bring any food inside.", sub)).toBe(true);
+  });
+  it('라벨만 맞고 내용이 틀리면 오답', () => {
+    expect(matchSubParts('2-1. You must talk on the phone here.\n2-2. You must not bring any food inside.', sub)).toBe(false);
+  });
+});

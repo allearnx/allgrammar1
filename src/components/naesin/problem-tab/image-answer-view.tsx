@@ -31,6 +31,12 @@ function multiSelectLimit(q: NaesinProblemQuestion | undefined, key: string | nu
   return k.includes(',') ? k.split(',').length : 1;
 }
 
+/** 시험지가 서답형을 따로 번호 매긴 경우(서답형 1~N) 발문 앞의 [서답형 N] 태그를 행 라벨로 보여준다 */
+function paperLabel(q: NaesinProblemQuestion | undefined): string | null {
+  const m = q?.question.match(/^\[(서(?:답형|술형)?\s*\d+)\]/);
+  return m ? m[1] : null;
+}
+
 function toggleChoice(current: string, n: number, limit: number): string {
   const picked = current.split(',').map((x) => x.trim()).filter(Boolean);
   const idx = picked.indexOf(String(n));
@@ -198,9 +204,13 @@ export function ImageAnswerView({
                     );
                   }
                   const labels = q.subParts?.map((sp) => sp.label) ?? [];
+                  const paper = paperLabel(q);
                   return (
                     <div key={i} className="flex items-start gap-3 px-3 py-2">
-                      <span className="w-6 shrink-0 pt-2 text-sm font-semibold text-muted-foreground">{i + 1}</span>
+                      <span className="w-6 shrink-0 pt-2 text-sm font-semibold text-muted-foreground">
+                        {i + 1}
+                        {paper && <span className="block whitespace-nowrap text-[10px] font-medium leading-tight text-brand-600">{paper}</span>}
+                      </span>
                       <div className="flex-1 space-y-1">
                         <Textarea
                           rows={labels.length > 1 ? labels.length : 2}
