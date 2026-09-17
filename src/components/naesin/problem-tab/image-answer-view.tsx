@@ -1,18 +1,44 @@
 'use client';
 
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
 import { AlertTriangle } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { extractAnswer } from '@/lib/naesin/normalize-answer';
 import { toast } from 'sonner';
 import { fetchWithToast } from '@/lib/fetch-with-toast';
-import type { NaesinProblemSheet } from '@/types/database';
+import type { NaesinProblemSheet, NaesinProblemQuestion } from '@/types/database';
 import { useProblemDraft } from '@/hooks/use-problem-draft';
-import type { ImageAnswerDraft } from '@/hooks/use-problem-draft';
 import { isSafeIframeSrc } from '@/lib/utils/safe-url';
+
+const CIRCLED = ['①', '②', '③', '④', '⑤', '⑥', '⑦', '⑧', '⑨', '⑩'];
+
+/** 문항 스텁이 있으면 객관식(번호 버튼)·서술형(여러 줄 입력)으로 나누고, 없으면(구 OMR 시트) 타이핑 칸으로 둔다. */
+function itemKind(q: NaesinProblemQuestion | undefined): 'mcq' | 'subjective' | 'legacy' {
+  if (!q) return 'legacy';
+  return q.options && q.options.length > 0 ? 'mcq' : 'subjective';
+}
+
+/** "(정답 2개)" 같은 안내 또는 정답표의 쉼표로 복수 선택 문항 판별 → 선택 개수 상한 */
+function multiSelectLimit(q: NaesinProblemQuestion | undefined, key: string | number | undefined): number {
+  const m = q?.question.match(/정답\s*(\d)\s*개/);
+  if (m) return Number(m[1]);
+  const k = extractAnswer(key ?? '');
+  return k.includes(',') ? k.split(',').length : 1;
+}
+
+function toggleChoice(current: string, n: number, limit: number): string {
+  const picked = current.split(',').map((x) => x.trim()).filter(Boolean);
+  const idx = picked.indexOf(String(n));
+  if (idx >= 0) picked.splice(idx, 1);
+  else if (limit <= 1) return String(n);
+  else if (picked.length < limit) picked.push(String(n));
+  else return current;
+  return picked.map(Number).sort((a, b) => a - b).join(', ');
+}
 
 export function ImageAnswerView({
   sheet,
@@ -24,6 +50,8 @@ export function ImageAnswerView({
   onComplete?: () => void;
 }) {
   const totalQuestions = sheet.answer_key.length;
+  const questions = (sheet.questions ?? []) as NaesinProblemQuestion[];
+  const hasStubs = questions.length === totalQuestions && totalQuestions > 0;
   const { loadDraft, saveDraft, clearDraft } = useProblemDraft(sheet.id, totalQuestions);
 
   const [answers, setAnswers] = useState<Record<number, string>>(() => {
@@ -32,6 +60,15 @@ export function ImageAnswerView({
   });
   const [results, setResults] = useState<{ score: number; wrongAnswers: { number: number; userAnswer: string | number; correctAnswer: string | number }[] } | null>(null);
   const [submitting, setSubmitting] = useState(false);
+
+  // 연속 클릭에도 이전 값을 덮어쓰지 않도록 함수형 갱신 + ref 미러(draft 저장용)
+  const answersRef = useRef(answers);
+  function update(i: number, v: string) {
+    const newAnswers = { ...answersRef.current, [i]: v };
+    answersRef.current = newAnswers;
+    setAnswers(newAnswers);
+    saveDraft({ mode: 'image_answer', answers: newAnswers });
+  }
 
   async function handleSubmit() {
     setSubmitting(true);
@@ -65,13 +102,18 @@ export function ImageAnswerView({
   return (
     <div className="space-y-6">
       {sheet.pdf_url && isSafeIframeSrc(sheet.pdf_url) && (
-        <div className="border rounded-lg overflow-hidden">
-          <iframe
-            src={sheet.pdf_url}
-            className="w-full h-[500px]"
-            title={sheet.title}
-            sandbox="allow-same-origin"
-          />
+        <div className="space-y-1">
+          {/* sandbox 속성을 주면 Chrome이 PDF 뷰어(플러그인)를 차단해 빈 화면이 됨 — https 검사(isSafeIframeSrc)만 하고 sandbox 없이 띄운다 */}
+          <div className="border rounded-lg overflow-hidden">
+            <iframe
+              src={sheet.pdf_url}
+              className="w-full h-[75vh] min-h-[500px]"
+              title={sheet.title}
+            />
+          </div>
+          <a href={sheet.pdf_url} target="_blank" rel="noopener noreferrer" className="inline-block text-xs text-muted-foreground underline underline-offset-2">
+            시험지가 안 보이면 새 창에서 열기
+          </a>
         </div>
       )}
 
@@ -79,23 +121,75 @@ export function ImageAnswerView({
         <>
           <div className="space-y-3">
             <p className="text-sm font-medium">답 입력 ({totalQuestions}문항)</p>
-            <div className="grid grid-cols-5 gap-2">
-              {Array.from({ length: totalQuestions }, (_, i) => (
-                <div key={i} className="flex items-center gap-1">
-                  <span className="text-xs text-muted-foreground w-5">{i + 1}</span>
-                  <Input
-                    className="h-8 text-sm text-center"
-                    value={answers[i] || ''}
-                    onChange={(e) => {
-                      const newAnswers = { ...answers, [i]: e.target.value };
-                      setAnswers(newAnswers);
-                      saveDraft({ mode: 'image_answer', answers: newAnswers });
-                    }}
-                    placeholder="-"
-                  />
-                </div>
-              ))}
-            </div>
+            {hasStubs ? (
+              <div className="divide-y rounded-lg border">
+                {questions.map((q, i) => {
+                  const kind = itemKind(q);
+                  const value = answers[i] || '';
+                  if (kind === 'mcq') {
+                    const limit = multiSelectLimit(q, sheet.answer_key[i]);
+                    const picked = value.split(',').map((x) => x.trim()).filter(Boolean);
+                    return (
+                      <div key={i} className="flex items-center gap-3 px-3 py-2">
+                        <span className="w-6 shrink-0 text-sm font-semibold text-muted-foreground">{i + 1}</span>
+                        <div className="flex flex-wrap gap-1.5" role="group" aria-label={`${i + 1}번 선택`}>
+                          {q.options!.map((_, n) => {
+                            const on = picked.includes(String(n + 1));
+                            return (
+                              <button
+                                key={n}
+                                type="button"
+                                aria-pressed={on}
+                                onClick={() => update(i, toggleChoice(answersRef.current[i] || '', n + 1, limit))}
+                                className={cn(
+                                  'h-9 w-9 rounded-full border text-base transition-colors',
+                                  on ? 'border-primary bg-primary text-primary-foreground' : 'bg-background hover:bg-muted',
+                                )}
+                              >
+                                {CIRCLED[n] ?? n + 1}
+                              </button>
+                            );
+                          })}
+                        </div>
+                        {limit > 1 && <span className="text-xs text-muted-foreground">정답 {limit}개</span>}
+                      </div>
+                    );
+                  }
+                  const labels = q.subParts?.map((sp) => sp.label) ?? [];
+                  return (
+                    <div key={i} className="flex items-start gap-3 px-3 py-2">
+                      <span className="w-6 shrink-0 pt-2 text-sm font-semibold text-muted-foreground">{i + 1}</span>
+                      <div className="flex-1 space-y-1">
+                        <Textarea
+                          rows={labels.length > 1 ? labels.length : 2}
+                          className="min-h-0 text-sm"
+                          value={value}
+                          onChange={(e) => update(i, e.target.value)}
+                          placeholder={labels.length > 1 ? labels.map((l) => `${l} …`).join(' / ') : '서술형 답 입력'}
+                        />
+                        {labels.length > 1 && (
+                          <p className="text-xs text-muted-foreground">{labels.join(', ')} 순서로, 각 답은 슬래시( / )로 구분하거나 줄을 바꿔 쓰세요.</p>
+                        )}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            ) : (
+              <div className="grid grid-cols-5 gap-2">
+                {Array.from({ length: totalQuestions }, (_, i) => (
+                  <div key={i} className="flex items-center gap-1">
+                    <span className="text-xs text-muted-foreground w-5">{i + 1}</span>
+                    <Input
+                      className="h-8 text-sm text-center"
+                      value={answers[i] || ''}
+                      onChange={(e) => update(i, e.target.value)}
+                      placeholder="-"
+                    />
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
           <Button onClick={handleSubmit} className="w-full" disabled={submitting}>
             {submitting ? '채점 중...' : '제출하기'}
@@ -135,7 +229,7 @@ export function ImageAnswerView({
             </>
           )}
 
-          <Button variant="outline" className="w-full" onClick={() => { clearDraft(); setResults(null); setAnswers({}); }}>
+          <Button variant="outline" className="w-full" onClick={() => { clearDraft(); setResults(null); answersRef.current = {}; setAnswers({}); }}>
             다시 풀기
           </Button>
         </div>
