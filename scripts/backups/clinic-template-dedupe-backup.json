@@ -1,0 +1,463 @@
+{
+ "questions": [
+  {
+   "tag": "단일",
+   "type": "single_choice",
+   "answer": "1",
+   "number": 1,
+   "options": [
+    "in which",
+    "that",
+    "which",
+    "when",
+    "what"
+   ],
+   "question": "This is the hospital where my mother works.\n= This is the hospital __________ my mother works.",
+   "explanation": "관계부사 where는 '전치사+관계대명사'로 바꿀 수 있다. works(일하다)는 장소를 나타내는 전치사 in이 필요하므로 where = in which."
+  },
+  {
+   "tag": "단일",
+   "type": "single_choice",
+   "answer": "2",
+   "number": 2,
+   "options": [
+    "what",
+    "on which",
+    "where",
+    "which",
+    "that"
+   ],
+   "question": "I still remember the day when we first met.\n= I still remember the day __________ we first met.",
+   "explanation": "시간을 나타내는 관계부사 when은 '전치사+관계대명사'로 바꿀 때 보통 on which(특정한 날)를 쓴다. when = on which."
+  },
+  {
+   "tag": "단일",
+   "type": "single_choice",
+   "answer": "3",
+   "number": 3,
+   "options": [
+    "which",
+    "what",
+    "for which",
+    "where",
+    "how"
+   ],
+   "question": "Tell me the reason why you were late.\n= Tell me the reason __________ you were late.",
+   "explanation": "이유를 나타내는 관계부사 why는 '전치사+관계대명사'로 바꿀 때 for which를 쓴다. (이유 → be late FOR a reason)"
+  },
+  {
+   "tag": "단일",
+   "type": "single_choice",
+   "answer": "4",
+   "number": 4,
+   "options": [
+    "the way how",
+    "in which",
+    "for which",
+    "the way in which",
+    "when"
+   ],
+   "question": "This is how she fixed the machine.\n= This is __________ she fixed the machine.",
+   "explanation": "관계부사 how는 the way와 함께 쓸 수 없다(the way how ✕). how 대신 the way, the way that, the way in which로 바꿔 쓴다."
+  },
+  {
+   "tag": "단일",
+   "type": "single_choice",
+   "answer": "5",
+   "number": 5,
+   "options": [
+    "which",
+    "that",
+    "why",
+    "how",
+    "where"
+   ],
+   "question": "This is the town which I grew up in.\n= This is the town __________ I grew up.",
+   "explanation": "전치사(in)가 이미 관계대명사 뒤에 있던 문장을 관계부사로 바꾸면 전치사가 사라진다. 장소를 나타내므로 where."
+  },
+  {
+   "tag": "단일",
+   "type": "single_choice",
+   "answer": "1",
+   "number": 6,
+   "options": [
+    "in which",
+    "which",
+    "why",
+    "how",
+    "what"
+   ],
+   "question": "December is the month when it snows a lot.\n= December is the month __________ it snows a lot.",
+   "explanation": "시간의 관계부사 when = 전치사+관계대명사로 바꾸면 in which(그 달 안에)가 자연스럽다."
+  },
+  {
+   "tag": "단일",
+   "type": "single_choice",
+   "answer": "2",
+   "number": 7,
+   "options": [
+    "where",
+    "for which",
+    "which",
+    "when",
+    "what"
+   ],
+   "question": "She didn’t explain the reason why she quit her job.\n= She didn’t explain the reason __________ she quit her job.",
+   "explanation": "이유의 관계부사 why = for which."
+  },
+  {
+   "tag": "단일",
+   "type": "single_choice",
+   "answer": "3",
+   "number": 8,
+   "options": [
+    "which",
+    "that",
+    "where",
+    "why",
+    "how"
+   ],
+   "question": "This is the café that I met her in.\n= This is the café __________ I met her.",
+   "explanation": "전치사(in)가 딸려 있던 문장을 관계부사로 바꾸면 전치사는 사라지고 where만 남는다."
+  },
+  {
+   "tag": "단일",
+   "type": "single_choice",
+   "answer": "4",
+   "number": 9,
+   "options": [
+    "why",
+    "how",
+    "which",
+    "in which",
+    "that"
+   ],
+   "question": "Spring is the season when flowers bloom.\n= Spring is the season __________ flowers bloom.",
+   "explanation": "시간의 관계부사 when = in which. bloom은 자동사지만 the season 자체가 시간의 배경이 되므로 in which로 자연스럽게 바꾼다."
+  },
+  {
+   "tag": "단일",
+   "type": "single_choice",
+   "answer": "5",
+   "number": 10,
+   "options": [
+    "which",
+    "when",
+    "where",
+    "how",
+    "why"
+   ],
+   "question": "I can’t find the reason for which he was upset.\n= I can’t find the reason __________ he was upset.",
+   "explanation": "전치사+관계대명사(for which)를 관계부사로 바꾸면 for가 사라지고 why만 남는다."
+  },
+  {
+   "tag": "단일",
+   "type": "single_choice",
+   "answer": "1",
+   "number": 11,
+   "options": [
+    "This is the house where I was born in.",
+    "This is the house where I was born.",
+    "This is the house in which I was born.",
+    "This is the house which I was born in.",
+    "This is the house that I was born in."
+   ],
+   "question": "다음 중 어법상 어색한 것은?",
+   "explanation": "관계부사 where는 이미 전치사의 의미를 포함하므로, 뒤에 전치사(in)를 또 쓰면 중복 오류가 된다."
+  },
+  {
+   "tag": "단일",
+   "type": "single_choice",
+   "answer": "2",
+   "number": 12,
+   "options": [
+    "Tell me the reason why he left.",
+    "Tell me the reason why he left for.",
+    "Tell me the reason for which he left.",
+    "Tell me the reason which he left for.",
+    "Tell me the reason that he left for."
+   ],
+   "question": "다음 중 어법상 어색한 것은?",
+   "explanation": "why도 전치사(for)의 의미를 포함하므로, 뒤에 for를 또 쓰면 중복 오류."
+  },
+  {
+   "tag": "단일",
+   "type": "single_choice",
+   "answer": "3",
+   "number": 13,
+   "options": [
+    "I remember the day when we met.",
+    "I remember the day on which we met.",
+    "I remember the day when we met on.",
+    "I remember the day which we met on.",
+    "I remember the day that we met on."
+   ],
+   "question": "다음 중 어법상 어색한 것은?",
+   "explanation": "when 뒤에 전치사 on을 또 쓰면 중복 오류."
+  },
+  {
+   "tag": "단일",
+   "type": "single_choice",
+   "answer": "4",
+   "number": 14,
+   "options": [
+    "This is how she solved it.",
+    "This is the way she solved it.",
+    "This is the way in which she solved it.",
+    "This is the way how she solved it.",
+    "This is the way that she solved it."
+   ],
+   "question": "다음 중 어법상 어색한 것은?",
+   "explanation": "the way와 how는 같이 쓸 수 없다. the way / the way that / the way in which / how 중 하나만 쓴다."
+  },
+  {
+   "tag": "단일",
+   "type": "single_choice",
+   "answer": "5",
+   "number": 15,
+   "options": [
+    "The café where I met her at was cozy.",
+    "The café in that I met her was cozy.",
+    "The café at that I met her was cozy.",
+    "The café which I met her at in was cozy.",
+    "The café that I met her in was cozy."
+   ],
+   "question": "다음 중 어법상 옳은 것은?",
+   "explanation": "that(또는 which)로 바꿀 때는 전치사를 문장 끝에 남긴다(that ... in). 전치사를 관계대명사 that 바로 앞에 쓸 수는 없다(in that ✕)."
+  },
+  {
+   "tag": "단일",
+   "type": "single_choice",
+   "answer": "1",
+   "number": 16,
+   "options": [
+    "The reason for which he apologized is unclear.",
+    "The reason how he apologized is unclear.",
+    "The reason which he apologized is unclear.",
+    "The reason where he apologized is unclear.",
+    "The reason when he apologized is unclear."
+   ],
+   "question": "다음 중 어법상 옳은 것은?",
+   "explanation": "apologize for a reason이므로 이유를 나타낼 때는 for which(또는 why)를 쓴다."
+  },
+  {
+   "tag": "단일",
+   "type": "single_choice",
+   "answer": "2",
+   "number": 17,
+   "options": [
+    "This is the hotel <u>where</u> we stayed.",
+    "This is the hotel <u>where</u> we stayed at.",
+    "This is the hotel <u>which</u> we stayed at.",
+    "This is the hotel <u>at which</u> we stayed.",
+    "This is the hotel <u>that</u> we stayed at."
+   ],
+   "question": "다음 밑줄 친 부분 중 어법상 어색한 것은?",
+   "explanation": "where 뒤에 전치사 at을 또 쓰면 중복 오류. 나머지는 형태가 다르지만 모두 올바른 표현이다."
+  },
+  {
+   "tag": "단일",
+   "type": "single_choice",
+   "answer": "3",
+   "number": 18,
+   "options": [
+    "which - where",
+    "how - which",
+    "where - that",
+    "why - when",
+    "when - why"
+   ],
+   "question": "다음 빈칸 ⓐ, ⓑ에 들어갈 말이 순서대로 바르게 짝지어진 것은?\n\n· This is the lab ⓐ__________ he works.\n· This is the lab ⓑ__________ he works in.",
+   "explanation": "ⓐ는 뒤에 전치사가 없으므로 where(전치사 포함)가 필요하고, ⓑ는 뒤에 in이 이미 있으므로 that(전치사 없는 관계대명사)이 필요하다."
+  },
+  {
+   "tag": "단일",
+   "type": "single_choice",
+   "answer": "4",
+   "number": 19,
+   "options": [
+    "None",
+    "One",
+    "Three",
+    "Two",
+    "Four"
+   ],
+   "question": "다음 중 어법상 옳은 문장의 개수는?\n\nⓐ This is the museum where we visited.\nⓑ This is the museum which we visited.\nⓒ This is the museum in which we visited.\nⓓ This is the museum that we visited.\nⓔ This is the museum where we visited it.",
+   "explanation": "visit은 목적어를 바로 받는 타동사(visit + 목적어)라 전치사가 필요 없다. 따라서 where/in which(전치사 포함)를 쓰면 오히려 어색하고, which/that(전치사 없는 관계대명사)이 맞다. 옳은 문장은 ⓑ, ⓓ 2개."
+  },
+  {
+   "tag": "복수",
+   "type": "multi_choice",
+   "answer": "3, 4",
+   "number": 20,
+   "options": [
+    "The town which I was born is quiet.",
+    "The town where I was born in is quiet.",
+    "The town in which I was born is quiet.",
+    "The town that I was born in is quiet.",
+    "The town how I was born is quiet."
+   ],
+   "question": "다음 중 어법상 옳은 문장을 모두 고르면? (정답 2개)",
+   "explanation": "be born은 '~에서 태어나다'로 전치사 in이 필요한 동사다. ①은 전치사가 없어 불완전하고 ②는 where와 in이 중복, ⑤는 how가 어색하다. ③(in which)과 ④(that ... in)만 올바르다."
+  },
+  {
+   "tag": "서술형",
+   "type": "sentence",
+   "answer": "This is the restaurant where we had dinner last night.",
+   "number": 21,
+   "question": "다음 두 문장을 관계부사를 사용하여 한 문장으로 쓰시오.\n\n• This is the restaurant.\n• We had dinner there last night.",
+   "explanation": "장소를 나타내는 there → 관계부사 where로 바꿔 두 문장을 연결한다.",
+   "acceptedAnswers": [
+    "This is the restaurant where we had dinner last night"
+   ]
+  },
+  {
+   "tag": "서술형",
+   "type": "sentence",
+   "answer": "This is the restaurant in which we had dinner last night.",
+   "number": 22,
+   "question": "다음 두 문장을 <조건>에 맞게 한 문장으로 쓰시오.\n\n• This is the restaurant.\n• We had dinner there last night.\n\n<조건> in which를 반드시 사용할 것",
+   "explanation": "in which는 관계부사 where와 같은 뜻이지만, 조건이 있으므로 반드시 in which 형태로 써야 한다.",
+   "acceptedAnswers": [
+    "This is the restaurant in which we had dinner last night"
+   ]
+  },
+  {
+   "tag": "서술형",
+   "type": "sentence",
+   "answer": "This is the library that I do my homework in.",
+   "number": 23,
+   "question": "다음 문장을 <보기>와 같이 \"관계대명사(that)+전치사\" 형태로 바꿔 쓰시오.\n\n<보기> This is the town where I was born.\n→ This is the town that I was born in.\n\nThis is the library where I do my homework.",
+   "explanation": "관계부사 where를 관계대명사 that(또는 which)로 바꾸면, where가 품고 있던 전치사 in을 문장 끝에 남겨야 한다.",
+   "acceptedAnswers": [
+    "This is the library which I do my homework in.",
+    "This is the library that I do my homework in"
+   ]
+  },
+  {
+   "tag": "서술형",
+   "type": "sentence",
+   "answer": "I'll never forget the day when I graduated from middle school.",
+   "number": 24,
+   "question": "다음 두 문장을 관계부사 when을 사용하여 한 문장으로 쓰시오.\n\n• I’ll never forget the day.\n• I graduated from middle school on that day.",
+   "explanation": "on that day → 관계부사 when으로 바꿔 두 문장을 연결한다.",
+   "acceptedAnswers": [
+    "I'll never forget the day when I graduated from middle school"
+   ]
+  },
+  {
+   "tag": "서술형",
+   "type": "sentence",
+   "answer": "I'll never forget the day on which I graduated from middle school.",
+   "number": 25,
+   "question": "다음 두 문장을 <조건>에 맞게 한 문장으로 쓰시오.\n\n• I’ll never forget the day.\n• I graduated from middle school on that day.\n\n<조건> on which를 반드시 사용할 것",
+   "explanation": "on which는 when과 같은 뜻이지만, 조건에 따라 on which 형태로 써야 한다.",
+   "acceptedAnswers": [
+    "I'll never forget the day on which I graduated from middle school"
+   ]
+  },
+  {
+   "tag": "서술형",
+   "type": "sentence",
+   "answer": "where we stayed",
+   "number": 26,
+   "question": "다음 문장에서 어법상 어색한 부분을 찾아 바르게 고치시오.\n\nThis is the hotel where we stayed at during the trip.",
+   "explanation": "where가 이미 '그 호텔에서'라는 뜻을 포함하므로, stay at의 at을 또 쓰면 전치사가 중복된다. at을 지우거나, where 대신 that/which를 쓰고 at을 살려야 한다. (※ 정답은 '고친 형태'만 자동 저장됨 — where we stayed)",
+   "acceptedAnswers": [
+    "This is the hotel where we stayed during the trip.",
+    "This is the hotel that we stayed at during the trip.",
+    "This is the hotel which we stayed at during the trip.",
+    "stayed at → stayed"
+   ]
+  },
+  {
+   "tag": "서술형",
+   "type": "sentence",
+   "answer": "why he apologized",
+   "number": 27,
+   "question": "다음 문장에서 어법상 어색한 부분을 찾아 바르게 고치시오.\n\nTell me the reason why he apologized for.",
+   "explanation": "why가 이미 '그 이유로'라는 뜻을 포함하므로, apologize for의 for를 또 쓰면 전치사가 중복된다. (※ 정답은 '고친 형태'만 자동 저장됨 — why he apologized)",
+   "acceptedAnswers": [
+    "Tell me the reason why he apologized.",
+    "Tell me the reason for which he apologized.",
+    "apologized for → apologized"
+   ]
+  },
+  {
+   "tag": "서술형",
+   "type": "sentence",
+   "answer": "This is the town where I was born.",
+   "number": 28,
+   "question": "다음 우리말과 일치하도록 주어진 단어를 배열하여 영작하시오.\n\n이것은 내가 태어난 마을이다.\n(town, where, born, was, I, this, the, is)",
+   "explanation": "관계부사 where를 사용해 선행사(the town)를 수식하는 문장을 만든다.",
+   "acceptedAnswers": [
+    "This is the town where I was born"
+   ]
+  },
+  {
+   "tag": "서술형",
+   "type": "sentence",
+   "answer": "This is the town in which I was born.",
+   "number": 29,
+   "question": "다음 우리말과 일치하도록 주어진 단어를 배열하여 영작하시오. (전치사+관계대명사를 사용할 것)\n\n이것은 내가 태어난 마을이다.\n(town, in, which, born, was, I, this, the, is)",
+   "explanation": "관계부사 where 대신 전치사+관계대명사 in which를 사용해 같은 뜻의 문장을 만든다.",
+   "acceptedAnswers": [
+    "This is the town in which I was born"
+   ]
+  },
+  {
+   "tag": "복합",
+   "type": "multi_part",
+   "answer": "She didn’t tell me the reason why she was upset. / She didn’t tell me the reason for which she was upset.",
+   "number": 30,
+   "question": "다음 두 문장을 <조건>에 맞게 각각 완성하시오.\n\n• She didn’t tell me the reason.\n• She was upset for that reason.\n\n(1) 관계부사를 사용하여 쓸 것\n(2) 전치사+관계대명사를 사용하여 쓸 것\n\n※ 두 문장 모두 완전한 문장으로 쓸 것",
+   "subParts": [
+    {
+     "label": "(1)",
+     "answer": "She didn't tell me the reason why she was upset."
+    },
+    {
+     "label": "(2)",
+     "answer": "She didn't tell me the reason for which she was upset."
+    }
+   ],
+   "explanation": "for that reason → 관계부사 why 또는 전치사+관계대명사 for which로 바꿔 연결한다.",
+   "acceptedAnswers": [
+    "She didn’t tell me the reason why she was upset. / She didn’t tell me the reason for which she was upset",
+    "She didn’t tell me the reason why she was upset./She didn’t tell me the reason for which she was upset."
+   ]
+  }
+ ],
+ "answer_key": [
+  "1",
+  "2",
+  "3",
+  "4",
+  "5",
+  "1",
+  "2",
+  "3",
+  "4",
+  "5",
+  "1",
+  "2",
+  "3",
+  "4",
+  "5",
+  "1",
+  "2",
+  "3",
+  "4",
+  "3, 4",
+  "This is the restaurant where we had dinner last night.",
+  "This is the restaurant in which we had dinner last night.",
+  "This is the library that I do my homework in.",
+  "I'll never forget the day when I graduated from middle school.",
+  "I'll never forget the day on which I graduated from middle school.",
+  "where we stayed",
+  "why he apologized",
+  "This is the town where I was born.",
+  "This is the town in which I was born.",
+  "She didn’t tell me the reason why she was upset. / She didn’t tell me the reason for which she was upset."
+ ]
+}
