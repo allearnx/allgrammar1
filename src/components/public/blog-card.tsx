@@ -2,6 +2,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import type { BlogPostSummary, BlogFeedItem } from '@/types/blog';
 import { BLOG_CATEGORY_LABELS } from '@/types/blog';
+import { NaverPostPoster } from './naver-post-poster';
 
 interface BlogCardProps {
   /** 목록 카드 — 자체 글 + 네이버 글 공용 */
@@ -37,40 +38,19 @@ export default function BlogCard({ item, post }: BlogCardProps) {
   const resolved: BlogFeedItem | null = item ?? (post ? { source: 'site', post, publishedAt: post.published_at || '' } : null);
   if (!resolved) return null;
 
-  // ── 네이버 블로그 글: 외부 링크 + 썸네일은 Referer 없이 (pstatic 핫링크 403 회피) ──
+  // ── 네이버 블로그 글: 외부 링크 + 생성 포스터 썸네일 ──
+  // RSS 썸네일은 인스타 정사각형이라 16:9에서 글자가 잘려 쓰지 않는다 (naver-post-poster 참고)
   if (resolved.source === 'naver') {
     return (
       <a href={resolved.link} target="_blank" rel="noopener noreferrer" className={cardClass}>
-        <div className="relative aspect-[16/9] overflow-hidden bg-[#F8F9FA]">
-          {resolved.thumbnailUrl ? (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img
-              src={resolved.thumbnailUrl}
-              alt={resolved.title}
-              referrerPolicy="no-referrer"
-              loading="lazy"
-              className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-            />
-          ) : (
-            <Placeholder />
-          )}
-          <span className="absolute top-3 left-3 inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-extrabold bg-[#03C75A] text-white shadow-sm">
-            <span className="font-black">N</span> 네이버
-          </span>
+        <div className="relative aspect-[16/9] overflow-hidden">
+          <NaverPostPoster title={resolved.title} category={resolved.category} />
         </div>
         <div className="p-5">
-          {resolved.category && (
-            <span className="inline-block px-2.5 py-0.5 rounded-full text-xs font-bold bg-[#E6F4EA] text-[#0D652D] mb-3">
-              {resolved.category}
-            </span>
-          )}
-          <h3 className="text-lg font-bold text-[#1F1F1F] line-clamp-2 mb-2 group-hover:text-[#1A73E8] transition-colors">
-            {resolved.title}
-          </h3>
-          <p className="text-sm text-[#5F6368] line-clamp-2 mb-3 leading-relaxed">{resolved.excerpt}</p>
+          <p className="text-sm text-[#3C4043] line-clamp-3 mb-3 leading-relaxed">{resolved.excerpt}</p>
           <div className="flex items-center justify-between text-xs text-[#9AA0A6]">
             <time>{formatDate(resolved.publishedAt)}</time>
-            <span>네이버에서 읽기 →</span>
+            <span className="group-hover:text-[#1A73E8] transition-colors">네이버에서 읽기 →</span>
           </div>
         </div>
       </a>
