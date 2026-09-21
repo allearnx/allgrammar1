@@ -1,6 +1,7 @@
 import type { createClient } from '@/lib/supabase/server';
-import type { NaesinStudentProgress } from '@/types/naesin';
+import type { NaesinStudentProgress, NaesinProblemSheet } from '@/types/naesin';
 import { SHEET_LITE_COLUMNS, NAESIN_VOCABULARY_COLUMNS, NAESIN_PASSAGES_COLUMNS, NAESIN_DIALOGUES_COLUMNS, NAESIN_VOCAB_QUIZ_SETS_COLUMNS } from '@/types/naesin';
+import { PROBLEM_STAGE_CATEGORIES, EXTERNAL_PASSAGE_CATEGORY } from '@/lib/naesin/sheet-categories';
 
 type SupabaseClient = Awaited<ReturnType<typeof createClient>>;
 type StageKey = 'vocab' | 'passage' | 'dialogue' | 'textbookVideo' | 'grammar' | 'problem' | 'mockExam' | 'lastReview';
@@ -69,14 +70,23 @@ async function fetchVocabData(
 }
 
 async function fetchPassageData(supabase: SupabaseClient, userId: string, unitId: string) {
-  const [passageRes, settingsRes, progressRes] = await Promise.all([
+  const [passageRes, settingsRes, progressRes, externalRes] = await Promise.all([
     supabase.from('naesin_passages').select(NAESIN_PASSAGES_COLUMNS).eq('unit_id', unitId).order('sort_order'),
     supabase.from('naesin_student_settings').select('passage_required_stages, translation_sentences_per_page').eq('student_id', userId).single(),
     supabase.from('naesin_student_progress').select('passage_completed, passage_fill_blanks_best, passage_ordering_best, passage_translation_best, passage_grammar_vocab_best').eq('student_id', userId).eq('unit_id', unitId).single(),
+    // 외부지문 시트는 교과서 암기 단계에서 칩으로 노출 — 문장 수가 적어 questions까지 한 번에 로드
+    supabase.from('naesin_problem_sheets').select(SHEET_LITE_COLUMNS + ', questions').eq('unit_id', unitId).eq('category', EXTERNAL_PASSAGE_CATEGORY).order('sort_order').order('created_at'),
   ]);
   const p = progressRes.data;
+  const externalPassageSheets = (externalRes.data || []) as unknown as NaesinProblemSheet[];
+  const { bestScoreBySheet, lastAttemptBySheet } = await fetchAttemptSummary(
+    supabase, externalPassageSheets.map((sh) => sh.id), userId,
+  );
   return {
     passages: passageRes.data || [],
+    externalPassageSheets,
+    bestScoreBySheet,
+    lastAttemptBySheet,
     passageRequiredStages: (settingsRes.data?.passage_required_stages as string[] | null) ?? ['fill_blanks', 'translation'],
     translationSentencesPerPage: (settingsRes.data?.translation_sentences_per_page as number | null) ?? 10,
     passageRound1Completed: p?.passage_completed ?? false,
@@ -180,15 +190,21 @@ async function fetchProblemData(supabase: SupabaseClient, unitId: string, userId
     .from('naesin_problem_sheets')
     .select(SHEET_LITE_COLUMNS)
     .eq('unit_id', unitId)
-    .in('category', ['problem', 'external_passage', 'eng_eng_def'])
+    .in('category', [...PROBLEM_STAGE_CATEGORIES])
     .order('sort_order')
     .order('created_at'); // sort_order 동률(구 시트 전부 0) 시 생성순 — 시트 순서 뒤섞임 방지
 
   const sheetIds = (problemRes.data || []).map((s) => s.id);
+  const { bestScoreBySheet, lastAttemptBySheet } = await fetchAttemptSummary(supabase, sheetIds, userId);
+  return { problemSheets: problemRes.data || [], bestScoreBySheet, lastAttemptBySheet };
+}
+
+/** 시트별 최고 점수 + 최근 시도 요약 (문제풀이·외부지문 공용) */
+async function fetchAttemptSummary(supabase: SupabaseClient, sheetIds: string[], userId?: string) {
   const attemptsRes = userId && sheetIds.length > 0
     ? await supabase
         .from('naesin_problem_attempts')
-        .select('sheet_id, score, total_questions, wrong_answers, created_at')
+        .select('sheet_id, score, total_questions, wrong_answers, answers, created_at')
         .eq('student_id', userId)
         .in('sheet_id', sheetIds)
         .order('created_at', { ascending: false })
@@ -200,6 +216,8 @@ async function fetchProblemData(supabase: SupabaseClient, unitId: string, userId
     score: number;
     total_questions: number;
     wrong_answers: { number: number; userAnswer: string | number; correctAnswer: string | number; question?: string }[];
+    /** 외부지문: [빈칸, 순서, 영작] 세부 점수 */
+    answers?: unknown;
     created_at: string;
   }> = {};
   for (const row of attemptsRes.data || []) {
@@ -213,12 +231,13 @@ async function fetchProblemData(supabase: SupabaseClient, unitId: string, userId
         score: row.score,
         total_questions: row.total_questions,
         wrong_answers: row.wrong_answers || [],
+        answers: row.answers,
         created_at: row.created_at,
       };
     }
   }
 
-  return { problemSheets: problemRes.data || [], bestScoreBySheet, lastAttemptBySheet };
+  return { bestScoreBySheet, lastAttemptBySheet };
 }
 
 async function fetchLastReviewData(supabase: SupabaseClient, unitId: string) {

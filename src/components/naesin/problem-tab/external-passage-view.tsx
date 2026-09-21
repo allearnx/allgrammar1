@@ -3,7 +3,8 @@
 import { useState, useCallback, useMemo, useEffect } from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Badge } from '@/components/ui/badge';
-import { CheckCircle2, ArrowRightLeft, PenLine, TextCursorInput } from 'lucide-react';
+import { CheckCircle2, ArrowRightLeft, PenLine, TextCursorInput, BookOpen, RotateCcw, ChevronDown, ChevronUp } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 import { OrderingExercise } from '@/components/shared/ordering-exercise';
 import { TranslationExercise, type WrongTranslation } from '@/components/shared/translation-exercise';
 import { FillBlanksExercise } from '@/components/shared/fill-blanks-exercise';
@@ -15,10 +16,30 @@ import type { NaesinProblemSheet, NaesinEpVideoProgress } from '@/types/database
 import type { TextbookPassage, SentenceItem, BlankItem } from '@/types/textbook';
 import type { ExternalPassageSentence } from '@/types/naesin';
 
+/** 시트별 최근 시도 요약 (fetch-stage-data lastAttemptBySheet와 동일 형태) */
+export interface ExternalPassageAttempt {
+  score: number;
+  total_questions: number;
+  wrong_answers: { number: number; userAnswer: string | number; correctAnswer: string | number; question?: string }[];
+  /** [빈칸, 순서, 영작] 세부 점수 */
+  answers?: unknown;
+  created_at: string;
+}
+
 interface ExternalPassageViewProps {
   sheet: NaesinProblemSheet;
   unitId?: string | null;
   onComplete?: () => void;
+  /** 이미 제출한 적이 있으면 완료 요약(다시 보기·다시 풀기)부터 보여준다 */
+  lastAttempt?: ExternalPassageAttempt;
+}
+
+function subScoresOf(attempt: ExternalPassageAttempt | undefined): { fill: number | null; ordering: number; translation: number } | null {
+  const a = attempt?.answers;
+  if (!Array.isArray(a) || !a.every((n) => typeof n === 'number')) return null;
+  if (a.length === 3) return { fill: a[0], ordering: a[1], translation: a[2] };
+  if (a.length === 2) return { fill: null, ordering: a[0], translation: a[1] };
+  return null;
 }
 
 function generateBlanks(originalText: string, interval: number): BlankItem[] {
@@ -56,18 +77,23 @@ function toTextbookPassage(sheet: NaesinProblemSheet): TextbookPassage {
 
 const DRAFT_KEY = (id: string) => `ext_passage_draft_${id}`;
 
-function loadDraft(sheetId: string): { fillBlanks?: number; ordering?: number } {
+interface Draft { fillBlanks?: number; ordering?: number; translation?: number; translationWrongs?: WrongTranslation[] }
+
+function loadDraft(sheetId: string): Draft {
   try {
     const raw = localStorage.getItem(DRAFT_KEY(sheetId));
     return raw ? JSON.parse(raw) : {};
   } catch { return {}; }
 }
 
-function saveDraft(sheetId: string, data: { fillBlanks?: number | null; ordering?: number | null }) {
+// 세 연습(빈칸·순서·영작)의 완료 점수를 모두 임시 저장 — 페이지를 나갔다 와도 끝낸 연습은 유지
+function saveDraft(sheetId: string, data: Partial<Draft>) {
   try {
     const prev = loadDraft(sheetId);
     if (data.fillBlanks != null) prev.fillBlanks = data.fillBlanks;
     if (data.ordering != null) prev.ordering = data.ordering;
+    if (data.translation != null) prev.translation = data.translation;
+    if (data.translationWrongs) prev.translationWrongs = data.translationWrongs;
     localStorage.setItem(DRAFT_KEY(sheetId), JSON.stringify(prev));
   } catch { /* ignore */ }
 }
@@ -76,14 +102,20 @@ function clearDraft(sheetId: string) {
   try { localStorage.removeItem(DRAFT_KEY(sheetId)); } catch { /* ignore */ }
 }
 
-export function ExternalPassageView({ sheet, unitId, onComplete }: ExternalPassageViewProps) {
+export function ExternalPassageView({ sheet, unitId, onComplete, lastAttempt }: ExternalPassageViewProps) {
   const draft = useMemo(() => loadDraft(sheet.id), [sheet.id]);
   const [fillBlanksScore, setFillBlanksScore] = useState<number | null>(draft.fillBlanks ?? null);
   const [orderingScore, setOrderingScore] = useState<number | null>(draft.ordering ?? null);
-  const [translationScore, setTranslationScore] = useState<number | null>(null);
-  const [translationWrongs, setTranslationWrongs] = useState<WrongTranslation[]>([]);
+  const [translationScore, setTranslationScore] = useState<number | null>(draft.translation ?? null);
+  const [translationWrongs, setTranslationWrongs] = useState<WrongTranslation[]>(draft.translationWrongs ?? []);
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  // 이전 제출 기록이 있으면 완료 요약부터. 임시 저장(풀던 중)이 있으면 그걸 우선 — 이어서 풀게
+  const hasDraft = draft.fillBlanks != null || draft.ordering != null || draft.translation != null;
+  const [retrying, setRetrying] = useState(hasDraft);
+  const [showPassage, setShowPassage] = useState(false);
+  // 리마운트 없이 연습 컴포넌트를 초기화하기 위한 키
+  const [attemptKey, setAttemptKey] = useState(0);
 
   // Video progress state
   const [videoProgress, setVideoProgress] = useState<NaesinEpVideoProgress | null>(null);
@@ -124,7 +156,20 @@ export function ExternalPassageView({ sheet, unitId, onComplete }: ExternalPassa
   const handleTranslationComplete = useCallback((score: number, wrongs: WrongTranslation[]) => {
     setTranslationScore(score);
     setTranslationWrongs(wrongs);
-  }, []);
+    saveDraft(sheet.id, { translation: score, translationWrongs: wrongs });
+  }, [sheet.id]);
+
+  function startRetry() {
+    clearDraft(sheet.id);
+    setFillBlanksScore(null);
+    setOrderingScore(null);
+    setTranslationScore(null);
+    setTranslationWrongs([]);
+    setSubmitted(false);
+    setShowPassage(false);
+    setAttemptKey((k) => k + 1);
+    setRetrying(true);
+  }
 
   const allDone = fillBlanksScore !== null && orderingScore !== null && translationScore !== null;
 
@@ -165,11 +210,21 @@ export function ExternalPassageView({ sheet, unitId, onComplete }: ExternalPassa
   }
 
   // Auto-submit when all exercises are done
-  if (allDone && !submitted && !submitting) {
-    handleSubmit();
-  }
+  useEffect(() => {
+    if (allDone && !submitted && !submitting) handleSubmit();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [allDone]);
 
-  const avgScore = allDone ? Math.round((fillBlanksScore + orderingScore + translationScore) / 3) : null;
+  const sessionAvg = allDone ? Math.round((fillBlanksScore + orderingScore + translationScore) / 3) : null;
+  const prevSub = subScoresOf(lastAttempt);
+  // 완료 요약: 이번 세션 제출 → 세션 점수, 아니면 이전 제출 기록
+  const showSummary = submitted || (!retrying && !!lastAttempt);
+  const summary = submitted && sessionAvg !== null
+    ? { avg: sessionAvg, fill: fillBlanksScore, ordering: orderingScore, translation: translationScore }
+    : lastAttempt
+      ? { avg: lastAttempt.score, fill: prevSub?.fill ?? null, ordering: prevSub?.ordering ?? null, translation: prevSub?.translation ?? null }
+      : null;
+  const sentences = sheet.questions as unknown as ExternalPassageSentence[];
 
   return (
     <div className="space-y-4">
@@ -218,20 +273,46 @@ export function ExternalPassageView({ sheet, unitId, onComplete }: ExternalPassa
         </div>
       )}
 
-      {submitted && avgScore !== null && (
-        <div className="text-center py-4 space-y-2">
-          <CheckCircle2 className="h-10 w-10 text-green-500 mx-auto" />
-          <p className="text-3xl font-bold">{avgScore}점</p>
-          <div className="flex justify-center gap-4 text-sm text-muted-foreground">
-            <span>빈칸 {fillBlanksScore}점</span>
-            <span>순서배열 {orderingScore}점</span>
-            <span>영작 {translationScore}점</span>
+      {showSummary && summary && (
+        <div className="rounded-lg border bg-muted/30 p-4 space-y-3">
+          <div className="text-center space-y-1">
+            <CheckCircle2 className="h-8 w-8 text-green-500 mx-auto" />
+            <p className="text-3xl font-bold">{summary.avg}점</p>
+            <div className="flex justify-center gap-4 text-sm text-muted-foreground">
+              {summary.fill !== null && <span>빈칸 {summary.fill}점</span>}
+              {summary.ordering !== null && <span>순서배열 {summary.ordering}점</span>}
+              {summary.translation !== null && <span>영작 {summary.translation}점</span>}
+            </div>
+            {!submitted && lastAttempt && (
+              <p className="text-xs text-muted-foreground">{new Date(lastAttempt.created_at).toLocaleDateString('ko-KR')} 제출</p>
+            )}
           </div>
+          <div className="flex gap-2 justify-center">
+            <Button variant="outline" size="sm" onClick={() => setShowPassage((v) => !v)}>
+              <BookOpen className="h-3.5 w-3.5 mr-1" />
+              본문 다시 보기
+              {showPassage ? <ChevronUp className="h-3.5 w-3.5 ml-1" /> : <ChevronDown className="h-3.5 w-3.5 ml-1" />}
+            </Button>
+            <Button size="sm" onClick={startRetry}>
+              <RotateCcw className="h-3.5 w-3.5 mr-1" />
+              다시 풀기
+            </Button>
+          </div>
+          {showPassage && (
+            <ol className="space-y-2 text-sm">
+              {sentences.map((q, i) => (
+                <li key={i} className="rounded-md bg-background border px-3 py-2">
+                  <p className="font-medium">{i + 1}. {q.original}</p>
+                  <p className="text-muted-foreground mt-0.5">{q.korean}</p>
+                </li>
+              ))}
+            </ol>
+          )}
         </div>
       )}
 
-      {!submitted && (
-        <Tabs defaultValue="fillBlanks" className="w-full">
+      {!showSummary && (
+        <Tabs key={attemptKey} defaultValue="fillBlanks" className="w-full">
           <TabsList className="grid w-full grid-cols-3">
             <TabsTrigger value="fillBlanks" className="gap-1.5">
               <TextCursorInput className="h-3.5 w-3.5" />

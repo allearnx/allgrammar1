@@ -67,6 +67,8 @@ interface StageData {
   completedSetIds?: string[];
   vocabProgress?: VocabProgress;
   passages?: NaesinPassage[];
+  /** 외부지문 시트 (questions 포함) — 교과서 암기 단계 하단 칩 */
+  externalPassageSheets?: NaesinProblemSheet[];
   passageRequiredStages?: string[];
   translationSentencesPerPage?: number;
   dialogues?: NaesinDialogue[];
@@ -80,6 +82,7 @@ interface StageData {
     score: number;
     total_questions: number;
     wrong_answers: { number: number; userAnswer: string | number; correctAnswer: string | number; question?: string }[];
+    answers?: unknown;
     created_at: string;
   }>;
   mockExamSheets?: (NaesinProblemSheet | NaesinProblemSheetLite)[];
@@ -122,11 +125,14 @@ const STAGE_RENDERERS: Record<StageKey, StageRenderer> = {
       onNavigateToNextStage={() => router.push(`/student/naesin/${unitId}/passage`)}
     />
   ),
-  passage: ({ stageData, unitId, onStageComplete }) => (
+  passage: ({ stageData, unitId, onStageComplete, onActiveSheetChange }) => (
     <PassageTab
       passages={stageData.passages || []}
       unitId={unitId}
       onStageComplete={onStageComplete}
+      externalPassageSheets={stageData.externalPassageSheets}
+      externalAttempts={stageData.lastAttemptBySheet}
+      onActiveSheetChange={onActiveSheetChange}
       requiredStages={stageData.passageRequiredStages}
       translationSentencesPerPage={stageData.translationSentencesPerPage}
       naesinRequiredRounds={stageData.naesinRequiredRounds}

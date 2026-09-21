@@ -60,29 +60,8 @@ export const POST = createApiHandler(
       dbResult(await supabase.from('naesin_wrong_answers').insert(wrongRows));
     }
 
-    // Update progress: check if all problem-group sheets are attempted
-    const { data: allSheets } = await supabase
-      .from('naesin_problem_sheets')
-      .select('id')
-      .eq('unit_id', unitId)
-      .in('category', ['problem', 'external_passage', 'eng_eng_def']);
-    const sheetIds = (allSheets || []).map((s) => s.id);
-
-    const { data: attemptRows } = await supabase
-      .from('naesin_problem_attempts')
-      .select('sheet_id')
-      .eq('student_id', user.id)
-      .in('sheet_id', sheetIds.length > 0 ? sheetIds : ['__none__']);
-    const attemptedIds = new Set((attemptRows || []).map((r) => r.sheet_id));
-
-    const allCompleted = sheetIds.length > 0 && sheetIds.every((id) => attemptedIds.has(id));
-
-    dbResult(await supabase
-      .from('naesin_student_progress')
-      .upsert(
-        { student_id: user.id, unit_id: unitId, problem_completed: allCompleted },
-        { onConflict: 'student_id,unit_id' }
-      ));
+    // 외부지문은 교과서 암기 단계의 부가 연습 — 어떤 단계의 완료 조건에도 포함하지 않고
+    // 시도·점수·오답 기록만 남긴다 (2026-09-22 사장님 결정). problem_completed는 건드리지 않음.
 
     return NextResponse.json({
       attempt,

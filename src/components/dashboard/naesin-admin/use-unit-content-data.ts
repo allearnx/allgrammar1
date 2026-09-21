@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback, useReducer } from 'react';
 import { toast } from 'sonner';
 import { logger } from '@/lib/logger';
+import { PROBLEM_STAGE_CATEGORIES, EXTERNAL_PASSAGE_CATEGORY } from '@/lib/naesin/sheet-categories';
 import { fetchWithToast } from '@/lib/fetch-with-toast';
 import type { NaesinVocabulary, NaesinGrammarLesson, NaesinPassage } from '@/types/database';
 import type { NaesinDialogue, NaesinProblemSheet, NaesinTextbookVideo } from '@/types/naesin';
@@ -91,6 +92,16 @@ export function useUnitContentData(unitId: string) {
     messages: { success: '문법 설명이 수정되었습니다', error: '문법 설명 수정 중 오류가 발생했습니다' },
   }, setGrammarList);
 
+  // 외부지문 시트 — 학생 화면에선 교과서 암기 단계에 속하므로 문제풀이와 분리해 관리
+  const [externalPassageList, setExternalPassageList] = useState<NaesinProblemSheet[]>([]);
+  const externalPassageDelete = useConfirmDelete(
+    makeDeleteHandler('/api/naesin/problems', setExternalPassageList as never, {
+      success: '외부지문 시트가 삭제되었습니다',
+      error: '외부지문 시트 삭제 중 오류가 발생했습니다',
+      logKey: 'unit.delete_external_passage',
+    }),
+  );
+
   const [problemList, setProblemList] = useState<NaesinProblemSheet[]>([]);
   const problemDelete = useConfirmDelete(
     makeDeleteHandler('/api/naesin/problems', setProblemList as never, {
@@ -122,16 +133,17 @@ export function useUnitContentData(unitId: string) {
     try {
       const { createClient } = await import('@/lib/supabase/client');
       const supabase = createClient();
-      const [v, p, dlg, g, o, prob, lr, tbv, mock] = await Promise.all([
+      const [v, p, dlg, g, o, prob, lr, tbv, mock, ext] = await Promise.all([
         supabase.from('naesin_vocabulary').select(NAESIN_VOCABULARY_COLUMNS).eq('unit_id', unitId).order('sort_order'),
         supabase.from('naesin_passages').select(NAESIN_PASSAGES_COLUMNS).eq('unit_id', unitId).order('created_at'),
         supabase.from('naesin_dialogues').select(NAESIN_DIALOGUES_COLUMNS).eq('unit_id', unitId).order('created_at'),
         supabase.from('naesin_grammar_lessons').select(NAESIN_GRAMMAR_LESSONS_COLUMNS).eq('unit_id', unitId).order('sort_order'),
         supabase.from('naesin_omr_sheets').select('id', { count: 'exact', head: true }).eq('unit_id', unitId),
-        supabase.from('naesin_problem_sheets').select(SHEET_ADMIN_LITE_COLUMNS).eq('unit_id', unitId).in('category', ['problem', 'external_passage', 'eng_eng_def']).order('sort_order'),
+        supabase.from('naesin_problem_sheets').select(SHEET_ADMIN_LITE_COLUMNS).eq('unit_id', unitId).in('category', [...PROBLEM_STAGE_CATEGORIES]).order('sort_order'),
         supabase.from('naesin_last_review_content').select('id', { count: 'exact', head: true }).eq('unit_id', unitId),
         supabase.from('naesin_textbook_videos').select(NAESIN_TEXTBOOK_VIDEOS_COLUMNS).eq('unit_id', unitId).order('sort_order'),
         supabase.from('naesin_problem_sheets').select(SHEET_ADMIN_LITE_COLUMNS).eq('unit_id', unitId).eq('category', 'mock_exam').order('sort_order'),
+        supabase.from('naesin_problem_sheets').select(SHEET_ADMIN_LITE_COLUMNS).eq('unit_id', unitId).eq('category', EXTERNAL_PASSAGE_CATEGORY).order('sort_order').order('created_at'),
       ]);
       vocab.setItems((v.data as NaesinVocabulary[]) || []);
       setPassageList((p.data as NaesinPassage[]) || []);
@@ -141,6 +153,7 @@ export function useUnitContentData(unitId: string) {
       setProblemList((prob.data as unknown as NaesinProblemSheet[]) || []);
       setTextbookVideoList((tbv.data as NaesinTextbookVideo[]) || []);
       setMockExamList((mock.data as unknown as NaesinProblemSheet[]) || []);
+      setExternalPassageList((ext.data as unknown as NaesinProblemSheet[]) || []);
       vocab.setSelectedIds(new Set());
     } catch (err) {
       logger.error('unit.load_counts', { error: err instanceof Error ? err.message : String(err) });
@@ -232,6 +245,7 @@ export function useUnitContentData(unitId: string) {
     problemList, setProblemList, problemDelete,
     textbookVideoList, textbookVideoDelete,
     mockExamList, setMockExamList, mockExamDelete,
+    externalPassageList, externalPassageDelete,
     loadFullSheet, loadingSheetId,
     refresh: loadCounts,
     regenerateGrammarVocab,

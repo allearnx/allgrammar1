@@ -1,4 +1,5 @@
 import type { SupabaseClient } from '@supabase/supabase-js';
+import { PROBLEM_STAGE_CATEGORIES } from '@/lib/naesin/sheet-categories';
 import type {
   NaesinUnit,
   NaesinStudentProgress,
@@ -90,7 +91,7 @@ export async function fetchNaesinDashboardData(
         supabase.from('naesin_dialogues').select('unit_id').in('unit_id', unitIds),
         supabase.from('naesin_textbook_videos').select('unit_id').in('unit_id', unitIds),
         supabase.from('naesin_grammar_lessons').select('unit_id, content_type').in('unit_id', unitIds),
-        supabase.from('naesin_problem_sheets').select('unit_id').in('unit_id', unitIds).in('category', ['problem', 'external_passage', 'eng_eng_def']),
+        supabase.from('naesin_problem_sheets').select('unit_id').in('unit_id', unitIds).in('category', [...PROBLEM_STAGE_CATEGORIES]),
         supabase.from('naesin_problem_sheets').select('unit_id').in('unit_id', unitIds).eq('category', 'mock_exam'),
         supabase.from('naesin_last_review_content').select('unit_id').in('unit_id', unitIds),
         supabase.from('naesin_vocab_quiz_sets').select('unit_id').in('unit_id', unitIds),

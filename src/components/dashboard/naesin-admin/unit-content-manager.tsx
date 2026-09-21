@@ -57,6 +57,7 @@ export function UnitContentManager({ unitId }: { unitId: string }) {
     problemList, setProblemList, problemDelete,
     textbookVideoList, textbookVideoDelete,
     mockExamList, setMockExamList, mockExamDelete,
+    externalPassageList, externalPassageDelete,
     loadFullSheet, loadingSheetId,
     refresh,
     regenerateGrammarVocab,
@@ -72,6 +73,7 @@ export function UnitContentManager({ unitId }: { unitId: string }) {
   const sections: ContentSection[] = [
     { label: '단어', icon: BookOpen, count: vocab.items.length, color: 'text-blue-500', toggle: () => dispatchCM({ type: 'TOGGLE_SECTION', section: 'vocab' }), expanded: cm.showVocabList },
     { label: '교과서 지문', icon: FileText, count: passageList.length, color: 'text-orange-500', toggle: () => dispatchCM({ type: 'TOGGLE_SECTION', section: 'passage' }), expanded: cm.showPassageList },
+    { label: '외부지문', icon: FileText, count: externalPassageList.length, color: 'text-amber-600', toggle: () => dispatchCM({ type: 'TOGGLE_SECTION', section: 'externalPassage' }), expanded: cm.showExternalPassageList },
     { label: '대화문', icon: MessageSquare, count: dialogueList.length, color: 'text-brand-500', toggle: () => dispatchCM({ type: 'TOGGLE_SECTION', section: 'dialogue' }), expanded: cm.showDialogueList },
     { label: '본문 설명 영상', icon: PlayCircle, count: textbookVideoList.length, color: 'text-cyan-500', toggle: () => dispatchCM({ type: 'TOGGLE_SECTION', section: 'textbookVideo' }), expanded: cm.showTextbookVideoList },
     { label: '문법 설명', icon: GraduationCap, count: grammarList.length, color: 'text-green-500', toggle: () => dispatchCM({ type: 'TOGGLE_SECTION', section: 'grammar' }), expanded: cm.showGrammarList },
@@ -115,6 +117,26 @@ export function UnitContentManager({ unitId }: { unitId: string }) {
           onRequestDelete={passageDelete.requestDelete}
           onRegenerateGrammarVocab={regenerateGrammarVocab}
         />
+      )}
+
+      {cm.showExternalPassageList && externalPassageList.length > 0 && (
+        <div className="space-y-1 rounded-lg border p-3">
+          <h4 className="text-sm font-semibold text-gray-700 mb-1">외부지문 목록</h4>
+          <p className="text-xs text-muted-foreground mb-2">학생 화면의 「교과서 암기」 단계에 칩으로 노출됩니다 (완료 조건에는 포함되지 않음).</p>
+          {externalPassageList.map((sheet) => (
+            <div key={sheet.id} className="flex items-center justify-between py-1.5 px-2 rounded hover:bg-muted/50">
+              <div className="flex items-center gap-2 min-w-0">
+                <FileText className="h-4 w-4 text-amber-600 shrink-0" />
+                <span className="text-sm truncate">{sheet.title}</span>
+                <span className="text-xs text-gray-400 shrink-0">{sheet.answer_key?.length ?? 0}문장</span>
+                {sheet.video_url && <PlayCircle className="h-3.5 w-3.5 text-cyan-500 shrink-0" aria-label="설명 영상 있음" />}
+              </div>
+              <Button size="sm" variant="ghost" className="text-red-500 hover:text-red-700 h-7 px-2" onClick={() => externalPassageDelete.requestDelete(sheet.id)}>
+                삭제
+              </Button>
+            </div>
+          ))}
+        </div>
       )}
 
       {cm.showDialogueList && dialogueList.length > 0 && (
@@ -186,6 +208,7 @@ export function UnitContentManager({ unitId }: { unitId: string }) {
         <CollapsibleButtonGroup label="콘텐츠 추가" icon={FileText}>
           <AddPassageDialog unitId={unitId} onAdd={refresh} />
           <BulkPassageUploadDialog unitId={unitId} onAdd={refresh} />
+          <CreateExternalPassageDialog unitId={unitId} onAdd={refresh} />
           <AddDialogueDialog unitId={unitId} onAdd={refresh} />
           <BulkDialogueUploadDialog unitId={unitId} onAdd={refresh} />
           <AddGrammarDialog unitId={unitId} onAdd={refresh} />
@@ -202,7 +225,6 @@ export function UnitContentManager({ unitId }: { unitId: string }) {
           <PdfProblemExtractDialog unitId={unitId} onAdd={refresh} />
           <AiProblemGenerateDialog unitId={unitId} onAdd={refresh} />
           <CreateEngEngDefDialog unitId={unitId} onAdd={refresh} />
-          <CreateExternalPassageDialog unitId={unitId} onAdd={refresh} />
           <ImportTemplateDialog unitId={unitId} onAdd={refresh} />
         </CollapsibleButtonGroup>
       </div>
@@ -240,6 +262,11 @@ export function UnitContentManager({ unitId }: { unitId: string }) {
       <ConfirmDialog
         description="이 문제 시트를 삭제하시겠습니까? 관련된 학생 답안도 함께 삭제됩니다."
         {...problemDelete.confirmDialogProps}
+      />
+
+      <ConfirmDialog
+        description="이 외부지문 시트를 삭제하시겠습니까? 학생의 연습 기록도 함께 삭제됩니다."
+        {...externalPassageDelete.confirmDialogProps}
       />
 
       <ConfirmDialog

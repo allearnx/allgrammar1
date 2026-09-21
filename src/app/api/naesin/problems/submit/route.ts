@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import { createApiHandler, NotFoundError, dbResult } from '@/lib/api';
 import { problemSubmitSchema } from '@/lib/api/schemas';
 import { normalize, normalizeSeparators, matchMcqAnswer, extractAnswer, isSubstringMatch, matchSubParts, matchFilledBlanks } from '@/lib/naesin/normalize-answer';
+import { PROBLEM_STAGE_CATEGORIES } from '@/lib/naesin/sheet-categories';
 
 export const maxDuration = 60;
 
@@ -153,8 +154,7 @@ export const POST = createApiHandler(
     // Update progress: mark completed only when all sheets in the unit have been attempted
     if (unitId) {
       const isMockExam = sheet.category === 'mock_exam';
-      const problemGroupCategories = ['problem', 'external_passage', 'eng_eng_def'];
-      const targetCategories = isMockExam ? ['mock_exam'] : problemGroupCategories;
+      const targetCategories = isMockExam ? ['mock_exam'] : [...PROBLEM_STAGE_CATEGORIES];
       const progressField = isMockExam ? 'mock_exam_completed' : 'problem_completed';
 
       const { data: allSheets } = await supabase

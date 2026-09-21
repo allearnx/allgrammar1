@@ -1,6 +1,7 @@
 export interface ContentManagerState {
   showVocabList: boolean;
   showPassageList: boolean;
+  showExternalPassageList: boolean;
   showDialogueList: boolean;
   showGrammarList: boolean;
   showProblemList: boolean;
@@ -13,7 +14,7 @@ export interface ContentManagerState {
 }
 
 export type ContentManagerAction =
-  | { type: 'TOGGLE_SECTION'; section: 'vocab' | 'passage' | 'dialogue' | 'grammar' | 'problem' | 'textbookVideo' | 'mockExam' }
+  | { type: 'TOGGLE_SECTION'; section: 'vocab' | 'passage' | 'externalPassage' | 'dialogue' | 'grammar' | 'problem' | 'textbookVideo' | 'mockExam' }
   | { type: 'SET_BULK_DELETE_OPEN'; open: boolean }
   | { type: 'SET_COUNTS'; omrCount: number; lastReviewCount: number }
   | { type: 'SET_REGENERATING_GV'; id: string | null };
@@ -21,6 +22,7 @@ export type ContentManagerAction =
 const SECTION_KEY_MAP: Record<string, keyof ContentManagerState> = {
   vocab: 'showVocabList',
   passage: 'showPassageList',
+  externalPassage: 'showExternalPassageList',
   dialogue: 'showDialogueList',
   grammar: 'showGrammarList',
   problem: 'showProblemList',
@@ -48,6 +50,7 @@ export function contentManagerReducer(state: ContentManagerState, action: Conten
 export const contentManagerInitialState: ContentManagerState = {
   showVocabList: false,
   showPassageList: false,
+  showExternalPassageList: false,
   showDialogueList: false,
   showGrammarList: false,
   showProblemList: false,

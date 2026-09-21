@@ -4,6 +4,7 @@ import { problemCreateSchema, problemPatchSchema, idSchema } from '@/lib/api/sch
 import { requireContentPermission } from '@/lib/api/require-content-permission';
 import { regradeSheet } from '@/lib/naesin/regrade-sheet';
 import { syncSheetToTemplate } from '@/lib/naesin/sync-template';
+import { sheetListGroup } from '@/lib/naesin/sheet-categories';
 import type { NaesinProblemQuestion } from '@/types/naesin';
 import { SHEET_ADMIN_LITE_COLUMNS } from '@/types/naesin';
 import { sanitizeQuestions } from '@/lib/validation/problem-validator';
@@ -44,13 +45,6 @@ export const GET = createApiHandler(
     return NextResponse.json(data);
   }
 );
-
-/** 관리자·학생 화면에서 한 목록으로 묶여 정렬되는 카테고리 그룹 (fetch-stage-data·use-unit-content-data와 동일) */
-function sheetListGroup(category: string): string[] {
-  return ['problem', 'external_passage', 'eng_eng_def'].includes(category)
-    ? ['problem', 'external_passage', 'eng_eng_def']
-    : [category];
-}
 
 export const POST = createApiHandler(
   { roles: [...ADMIN_ROLES], schema: problemCreateSchema },
