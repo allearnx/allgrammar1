@@ -21,6 +21,9 @@ import type { ExternalPassageSentence } from '@/types/naesin';
 
 type Step = 'input' | 'extracting' | 'edit';
 
+/** 사진 여러 장(두 페이지에 걸친 지문 등) — 서버 MAX_IMAGES와 동일 */
+const MAX_IMAGES = 6;
+
 interface SentenceRow {
   original: string;
   korean: string;
@@ -39,25 +42,45 @@ export function CreateExternalPassageDialog({ unitId, onAdd }: { unitId: string;
   const [manualText, setManualText] = useState('');
   const [sentences, setSentences] = useState<SentenceRow[]>([]);
   const [videoUrl, setVideoUrl] = useState('');
+  const [extractSource, setExtractSource] = useState<'pdf' | 'image'>('pdf');
   const [editingIdx, setEditingIdx] = useState<number | null>(null);
   const [editForm, setEditForm] = useState<SentenceRow>({ original: '', korean: '' });
 
-  async function handlePdfUpload(e: React.ChangeEvent<HTMLInputElement>) {
-    const file = e.target.files?.[0];
-    if (!file) return;
+  /** PDF 1개 또는 사진 여러 장(페이지 순서대로 선택) → Storage 업로드 → AI 문장 추출 */
+  async function handleFileUpload(e: React.ChangeEvent<HTMLInputElement>) {
+    const files = Array.from(e.target.files ?? []);
+    e.target.value = ''; // 같은 파일 재선택 허용
+    if (files.length === 0) return;
 
+    const pdfs = files.filter((f) => f.type === 'application/pdf');
+    const images = files.filter((f) => f.type.startsWith('image/'));
+    if (pdfs.length + images.length !== files.length) {
+      toast.error('PDF 또는 사진(jpg/png/webp) 파일만 업로드할 수 있습니다.');
+      return;
+    }
+    if (pdfs.length > 1 || (pdfs.length > 0 && images.length > 0)) {
+      toast.error('PDF는 1개만, 사진은 여러 장까지 — 둘을 섞어서는 올릴 수 없습니다.');
+      return;
+    }
+    if (images.length > MAX_IMAGES) {
+      toast.error(`사진은 최대 ${MAX_IMAGES}장까지 가능합니다.`);
+      return;
+    }
+
+    setExtractSource(pdfs.length > 0 ? 'pdf' : 'image');
     setStep('extracting');
     try {
       const { uploadForExtract } = await import('@/lib/upload-for-extract');
-      const { publicUrl, storagePath } = await uploadForExtract(file);
+      // 사진은 선택 순서 = 페이지 순서. 순서 보존을 위해 병렬 업로드 후 인덱스대로 정렬됨.
+      const uploads = await Promise.all(files.map((f) => uploadForExtract(f)));
+      const body = pdfs.length > 0
+        ? { pdfUrl: uploads[0].publicUrl, storagePath: uploads[0].storagePath }
+        : { imageUrls: uploads.map((u) => u.publicUrl), storagePaths: uploads.map((u) => u.storagePath) };
 
       const data = await fetchWithToast<{
         title: string;
         sentences?: { original: string; korean: string }[];
-      }>('/api/naesin/passages/extract-text', {
-        body: { pdfUrl: publicUrl, storagePath },
-        silent: true,
-      });
+      }>('/api/naesin/passages/extract-text', { body, silent: true });
 
       if (data.title && !title) setTitle(data.title);
       if (data.sentences && data.sentences.length > 0) {
@@ -70,8 +93,6 @@ export function CreateExternalPassageDialog({ unitId, onAdd }: { unitId: string;
     } catch {
       setStep('input');
     }
-    // Reset file input
-    e.target.value = '';
   }
 
   function handleManualParse() {
@@ -206,23 +227,27 @@ export function CreateExternalPassageDialog({ unitId, onAdd }: { unitId: string;
             </div>
 
             <div className="space-y-2">
-              <Label>PDF 업로드 (자동 추출)</Label>
+              <Label>PDF 또는 사진 업로드 (자동 추출)</Label>
               <div className="flex items-center gap-2">
                 <Label
-                  htmlFor="ep-pdf"
+                  htmlFor="ep-file"
                   className="flex items-center gap-2 px-4 py-2 rounded-md border border-dashed cursor-pointer hover:bg-muted/50 transition-colors"
                 >
                   <Upload className="h-4 w-4" />
-                  <span className="text-sm">PDF 파일 선택</span>
+                  <span className="text-sm">PDF 또는 사진 선택</span>
                 </Label>
                 <input
-                  id="ep-pdf"
+                  id="ep-file"
                   type="file"
-                  accept=".pdf"
+                  accept="application/pdf,image/png,image/jpeg,image/webp"
+                  multiple
                   className="hidden"
-                  onChange={handlePdfUpload}
+                  onChange={handleFileUpload}
                 />
               </div>
+              <p className="text-xs text-muted-foreground">
+                교과서를 찍은 사진도 됩니다. 두 페이지에 걸친 지문은 사진을 페이지 순서대로 함께 선택하세요 (최대 {MAX_IMAGES}장).
+              </p>
             </div>
 
             <div className="relative">
@@ -254,7 +279,7 @@ export function CreateExternalPassageDialog({ unitId, onAdd }: { unitId: string;
         {step === 'extracting' && (
           <div className="flex flex-col items-center py-12 space-y-4">
             <Loader2 className="h-8 w-8 animate-spin text-primary" />
-            <p className="text-muted-foreground">PDF에서 문장을 추출하고 있습니다...</p>
+            <p className="text-muted-foreground">{extractSource === 'image' ? '사진' : 'PDF'}에서 문장을 추출하고 있습니다...</p>
             <p className="text-xs text-muted-foreground">최대 2분 소요</p>
           </div>
         )}
