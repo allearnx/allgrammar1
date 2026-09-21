@@ -4,6 +4,8 @@ import { Topbar } from '@/components/layout/topbar';
 import { VocaDashboard } from '@/components/dashboard/voca-dashboard';
 import { SubscriptionBanner } from '@/components/billing/subscription-banner';
 import { fetchVocaDashboardData } from '@/lib/dashboard/fetch-voca-data';
+import { buildQuickStart } from '@/lib/dashboard/quick-start';
+import { QuickStartCards } from '@/components/dashboard/quick-start-cards';
 import { canUseFeature } from '@/lib/billing/feature-gate';
 import type { AuthUser } from '@/types/auth';
 import type { PlanContext } from '@/lib/billing/get-plan-context';
@@ -35,10 +37,12 @@ export async function VocaSection({ user, planContext, isIndependent }: Props) {
     .single();
   const round2PlanLocked =
     !vocaAssignment?.round2_unlocked && !canUseFeature(planContext.tier, 'voca:round2');
+  const quickStart = await buildQuickStart(supabase, user.id, { naesin: false, voca: true });
 
   return (
     <>
-      <Topbar user={user} title="올킬보카" />
+      <Topbar user={user} title="홈" />
+      <div className="px-4 md:px-6 pt-4 md:pt-6"><QuickStartCards quickStart={quickStart} /></div>
       {isIndependent && planContext.tier === 'free' && (
         <SubscriptionBanner
           status="active"

@@ -13,6 +13,7 @@ import { UpdateBanner } from '@/components/layout/update-banner';
 import { UpdatePopup } from '@/components/layout/update-popup';
 import { AnnouncementPopup } from '@/components/layout/announcement-popup';
 import { IdleLogout } from '@/components/layout/idle-logout';
+import { MobileTabBar } from '@/components/layout/mobile-tab-bar';
 import { QueryProvider } from '@/components/providers/query-provider';
 import { deriveTier } from '@/lib/billing/feature-gate';
 import { isAssignmentActive } from '@/lib/billing/service-expiry';
@@ -91,7 +92,7 @@ export default async function DashboardLayout({
         naesinTree={naesinTree}
         badges={vocaPendingExams > 0 ? { '/student/voca/exam': vocaPendingExams } : undefined}
       />
-      <main className="flex-1 overflow-y-auto overscroll-contain">
+      <main className={`flex-1 overflow-y-auto overscroll-contain ${user.role === 'student' ? 'pb-16 md:pb-0' : ''}`}>
         {/* 3시간 무활동 자동 로그아웃 — 전 역할 공통 */}
         <IdleLogout />
         <UpdateBanner />
@@ -102,11 +103,12 @@ export default async function DashboardLayout({
         {children}
         {user.role === 'student' && <AnnouncementBanner />}
       </main>
+      {user.role === 'student' && <MobileTabBar services={services ?? []} />}
       <a
         href="http://pf.kakao.com/_iLxcLG/chat"
         target="_blank"
         rel="noopener noreferrer"
-        className="fixed bottom-5 right-5 z-50 flex h-12 w-12 items-center justify-center rounded-full bg-[#FEE500] shadow-lg hover:shadow-xl transition-shadow"
+        className={`fixed right-5 z-50 flex h-12 w-12 ${user.role === 'student' ? 'bottom-20 md:bottom-5' : 'bottom-5'} items-center justify-center rounded-full bg-[#FEE500] shadow-lg hover:shadow-xl transition-shadow`}
         aria-label="카카오톡 문의"
       >
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none">

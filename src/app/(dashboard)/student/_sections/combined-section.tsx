@@ -10,6 +10,8 @@ import {
 } from '@/lib/dashboard/fetch-naesin-data';
 import type { AuthUser } from '@/types/auth';
 import type { PlanContext } from '@/lib/billing/get-plan-context';
+import { buildQuickStart } from '@/lib/dashboard/quick-start';
+import { QuickStartCards } from '@/components/dashboard/quick-start-cards';
 
 interface Props {
   user: AuthUser;
@@ -33,10 +35,12 @@ export async function CombinedSection({ user, planContext }: Props) {
       .single(),
   ]);
   const vocaRoundMode = (vocaAssignment.data?.voca_round_mode as 'book' | 'day') || 'book';
+  const quickStart = await buildQuickStart(supabase, user.id, { naesin: true, voca: true });
 
   return (
     <>
-      <Topbar user={user} title="학습 대시보드" />
+      <Topbar user={user} title="홈" />
+      <div className="px-4 md:px-6 pt-4 md:pt-6"><QuickStartCards quickStart={quickStart} /></div>
       <CombinedDashboard
         userName={user.full_name}
         vocaDays={vocaData.days}

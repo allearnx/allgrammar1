@@ -61,7 +61,7 @@ export const NAV_CONFIG: Record<string, NavGroup[]> = {
   student: [
     {
       items: [
-        { href: '/student', label: '대시보드', icon: LayoutDashboard },
+        { href: '/student', label: '홈', icon: LayoutDashboard },
       ],
     },
     {

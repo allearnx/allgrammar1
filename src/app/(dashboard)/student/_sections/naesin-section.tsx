@@ -5,6 +5,8 @@ import { NaesinNoTextbookScreen } from '@/components/dashboard/naesin-no-textboo
 import { SubscriptionBanner } from '@/components/billing/subscription-banner';
 import { mergeEnabledStages } from '@/lib/billing/feature-gate';
 import { fetchNaesinSettings, fetchNaesinDashboardData } from '@/lib/dashboard/fetch-naesin-data';
+import { buildQuickStart } from '@/lib/dashboard/quick-start';
+import { QuickStartCards } from '@/components/dashboard/quick-start-cards';
 import type { AuthUser } from '@/types/auth';
 import type { PlanContext } from '@/lib/billing/get-plan-context';
 
@@ -40,11 +42,13 @@ export async function NaesinSection({ user, planContext, isIndependent = false }
   }
 
   const data = await fetchNaesinDashboardData(supabase, user.id, settings.textbook_id);
+  const quickStart = await buildQuickStart(supabase, user.id, { naesin: true, voca: false });
 
   return (
     <>
-      <Topbar user={user} title="내신 대비" />
+      <Topbar user={user} title="홈" />
       {freeBanner}
+      <div className="px-4 md:px-6 pt-4 md:pt-6"><QuickStartCards quickStart={quickStart} /></div>
       <NaesinDashboard
         userName={user.full_name}
         textbookName={data.textbookName}
