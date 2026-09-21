@@ -112,7 +112,9 @@ export function ProblemSheetItem({
         {isExpanded ? <ChevronDown className="h-3 w-3 shrink-0" /> : <ChevronRight className="h-3 w-3 shrink-0" />}
         <ClipboardList className="h-3.5 w-3.5 text-red-500 shrink-0" />
         <span className="text-sm flex-1 truncate">{sheet.title}</span>
-        <Badge variant="secondary" className="text-[11px]">{totalCount}문제</Badge>
+        {sheet.category === 'external_passage' && <Badge className="text-[11px] bg-orange-100 text-orange-700 hover:bg-orange-100">외부지문</Badge>}
+        {sheet.category === 'eng_eng_def' && <Badge className="text-[11px] bg-teal-100 text-teal-700 hover:bg-teal-100">영영풀이</Badge>}
+        <Badge variant="secondary" className="text-[11px]">{sheet.category === 'external_passage' ? `${totalCount}문장` : `${totalCount}문제`}</Badge>
         {mcqCount > 0 && <Badge variant="outline" className="text-[11px]">객관식 {mcqCount}</Badge>}
         {subCount > 0 && <Badge variant="outline" className="text-[11px]">서술형 {subCount}</Badge>}
         <Button

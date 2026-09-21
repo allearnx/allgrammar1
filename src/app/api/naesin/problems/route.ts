@@ -45,6 +45,13 @@ export const GET = createApiHandler(
   }
 );
 
+/** 관리자·학생 화면에서 한 목록으로 묶여 정렬되는 카테고리 그룹 (fetch-stage-data·use-unit-content-data와 동일) */
+function sheetListGroup(category: string): string[] {
+  return ['problem', 'external_passage', 'eng_eng_def'].includes(category)
+    ? ['problem', 'external_passage', 'eng_eng_def']
+    : [category];
+}
+
 export const POST = createApiHandler(
   { roles: [...ADMIN_ROLES], schema: problemCreateSchema },
   async ({ body, supabase, user }) => {
@@ -68,6 +75,20 @@ export const POST = createApiHandler(
       category: category || 'problem',
     };
     if (videoUrl) insertData.video_url = videoUrl;
+
+    // 새 시트는 같은 목록의 맨 끝으로 — 기본값 0이면 기존 시트 사이(sort_order 0 동률)에
+    // 끼어 들어가 관리자·학생 목록에서 "사라진 것처럼" 보임 (외부지문 2건 사례)
+    if (unitId) {
+      const { data: last } = await supabase
+        .from('naesin_problem_sheets')
+        .select('sort_order')
+        .eq('unit_id', unitId)
+        .in('category', sheetListGroup(category || 'problem'))
+        .order('sort_order', { ascending: false })
+        .limit(1)
+        .maybeSingle();
+      insertData.sort_order = (last?.sort_order ?? -1) + 1;
+    }
 
     const data = dbResult(await supabase
       .from('naesin_problem_sheets')
