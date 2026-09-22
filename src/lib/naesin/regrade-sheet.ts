@@ -1,5 +1,6 @@
 import { createAdminClient } from '@/lib/supabase/admin';
 import { normalize, normalizeSeparators, matchMcqAnswer, extractAnswer, isSubstringMatch, matchSubParts, matchFilledBlanks, uncircle } from '@/lib/naesin/normalize-answer';
+import { computeSheetScore } from '@/lib/naesin/score';
 
 /**
  * 시트 1개를 재채점하고 오답 테이블을 갱신한다.
@@ -40,6 +41,7 @@ export async function regradeSheet(
     acceptedAnswers?: string[];
     explanation?: string;
     subParts?: { label: string; answer: string; acceptedAnswers?: string[] }[];
+    points?: number;
   }[];
 
   // AI·선생님 채점 결과 (subjective_grading_logs): 규칙 채점이 놓치는 서술형 정답을 보존한다.
@@ -146,7 +148,7 @@ export async function regradeSheet(
       }
     }
 
-    const newScore = Math.round((correctCount / totalQuestions) * 100);
+    const newScore = computeSheetScore(questions, totalQuestions, wrongAnswers.map((w) => w.number));
 
     // 점수 또는 오답 목록이 바뀌었는지 확인
     const oldWrongKey = [...oldWrongNums].sort((a, b) => a - b).join(',');

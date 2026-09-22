@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import { createApiHandler, NotFoundError, dbResult } from '@/lib/api';
 import { problemSubmitSchema } from '@/lib/api/schemas';
 import { normalize, normalizeSeparators, matchMcqAnswer, extractAnswer, isSubstringMatch, matchSubParts, matchFilledBlanks } from '@/lib/naesin/normalize-answer';
+import { computeSheetScore } from '@/lib/naesin/score';
 import { PROBLEM_STAGE_CATEGORIES } from '@/lib/naesin/sheet-categories';
 
 export const maxDuration = 60;
@@ -21,7 +22,7 @@ export const POST = createApiHandler(
     if (!sheet) throw new NotFoundError('시험지를 찾을 수 없습니다.');
 
     // Grade
-    const questions = sheet.questions as { number: number; question: string; answer?: string | number; options?: string[]; acceptedAnswers?: string[]; explanation?: string; imageUrl?: string; subParts?: { label: string; answer: string; acceptedAnswers?: string[] }[] }[];
+    const questions = sheet.questions as { number: number; question: string; answer?: string | number; options?: string[]; acceptedAnswers?: string[]; explanation?: string; imageUrl?: string; subParts?: { label: string; answer: string; acceptedAnswers?: string[] }[]; points?: number }[];
     // Fallback: if answer_key is empty, rebuild from questions[].answer
     const rawAnswerKey = sheet.answer_key as (string | number)[];
     const answerKey = rawAnswerKey.length > 0
@@ -86,7 +87,7 @@ export const POST = createApiHandler(
       }
     }
 
-    const score = Math.round((correctCount / totalQuestions) * 100);
+    const score = computeSheetScore(questions, totalQuestions, wrongAnswers.map((w) => w.number));
 
     // Merge retryCorrect items into wrong_answers JSONB for tracking
     const allWrongAnswers = [

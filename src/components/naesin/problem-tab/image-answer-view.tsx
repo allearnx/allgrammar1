@@ -7,6 +7,7 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { AlertTriangle } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { hasPointWeights } from '@/lib/naesin/score';
 import { extractAnswer, normalize, normalizeSeparators, isSubstringMatch, matchFilledBlanks } from '@/lib/naesin/normalize-answer';
 import { toast } from 'sonner';
 import { fetchWithToast } from '@/lib/fetch-with-toast';
@@ -136,10 +137,9 @@ export function ImageAnswerView({
       });
       clearDraft();
       setResults({ score: data.score, wrongAnswers: data.wrongAnswers });
-      if (data.score >= 80) {
-        toast.success('문제풀이를 완료했습니다!');
-        onComplete?.();
-      }
+      // 기출(OMR)은 합격선이 없다 — 제출 자체가 완료이고 점수는 참고용 (사장님 결정 2026-09-22)
+      toast.success(`제출했어요 · ${data.score}점`);
+      onComplete?.();
     } catch {
       // error already toasted by fetchWithToast
     } finally {
@@ -250,12 +250,10 @@ export function ImageAnswerView({
       ) : (
         <div className="space-y-4">
           <div className="text-center">
-            <p className={cn(
-              'text-5xl font-bold',
-              results.score >= 80 ? 'text-green-600' : results.score >= 50 ? 'text-yellow-600' : 'text-red-600'
-            )}>
-              {results.score}점
-            </p>
+            <p className="text-5xl font-bold text-foreground">{results.score}점</p>
+            {hasPointWeights(questions, totalQuestions) && (
+              <p className="mt-1 text-xs text-muted-foreground">시험지 배점 기준 (100점 만점)</p>
+            )}
           </div>
 
           {results.wrongAnswers.length > 0 && (

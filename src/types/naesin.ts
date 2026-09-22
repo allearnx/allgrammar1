@@ -391,6 +391,8 @@ export interface NaesinProblemQuestion {
   acceptedAnswers?: string[];
   imageUrl?: string;
   subParts?: SubPart[];
+  /** 문항 배점 (학교 기출 등). 시트의 모든 문항에 있을 때만 배점 가중 채점, 없으면 문항 수 기준 */
+  points?: number;
 }
 
 export interface ExternalPassageSentence {

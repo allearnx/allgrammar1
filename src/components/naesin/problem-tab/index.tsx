@@ -287,10 +287,11 @@ export function ProblemTab({ sheets, unitId, onStageComplete, bestScoreBySheet, 
 
 function AttemptSummary({ attempt, onRetry }: { attempt: LastAttempt; onRetry: () => void }) {
   const pct = attempt.score;
-  const correct = Math.round((pct / 100) * attempt.total_questions);
   const allItems = attempt.wrong_answers || [];
   const genuineWrong = allItems.filter(w => !w.retryCorrect);
   const retryCorrect = allItems.filter(w => w.retryCorrect);
+  // 배점 가중 시트는 점수에서 개수를 역산할 수 없으므로 오답 목록으로 센다
+  const correct = Math.max(0, attempt.total_questions - genuineWrong.length);
   const date = new Date(attempt.created_at);
   const dateStr = `${date.getFullYear()}.${date.getMonth() + 1}.${date.getDate()}`;
 
