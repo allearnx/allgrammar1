@@ -152,7 +152,8 @@ export const PATCH = createApiHandler(
     const questionsChanged = 'questions' in updates || 'answer_key' in updates;
     const extras: Record<string, unknown> = {};
 
-    if (questionsChanged) {
+    // 외부지문(문장 순서배열·영작)은 객관식 채점기·스팟체크·스캔 대상이 아니다 — 문장만 갱신하고 끝
+    if (questionsChanged && data.category !== 'external_passage') {
       // 재채점
       await regradeSheet(id as string);
 

@@ -23,6 +23,7 @@ import { UnitPassageList } from './unit-passage-list';
 import { UnitGrammarList } from './unit-grammar-list';
 import { UnitDialogueList } from './unit-dialogue-list';
 import { UnitProblemList } from './unit-problem-list';
+import { ExternalPassageList } from './external-passage-list';
 import type { NaesinProblemSheet } from '@/types/naesin';
 import { makeUpdateHandler } from '@/lib/naesin/make-update-handler';
 import { ContentSectionGrid, type ContentSection } from './content-section-grid';
@@ -57,13 +58,14 @@ export function UnitContentManager({ unitId }: { unitId: string }) {
     problemList, setProblemList, problemDelete,
     textbookVideoList, textbookVideoDelete,
     mockExamList, setMockExamList, mockExamDelete,
-    externalPassageList, externalPassageDelete,
+    externalPassageList, setExternalPassageList, externalPassageDelete,
     loadFullSheet, loadingSheetId,
     refresh,
     regenerateGrammarVocab,
   } = useUnitContentData(unitId);
 
   const onUpdatePassage = makeUpdateHandler(setPassageList);
+  const onUpdateExternalPassage = makeUpdateHandler(setExternalPassageList);
   const onUpdateDialogue = makeUpdateHandler(setDialogueList);
   const onUpdateProblem = (updated: NaesinProblemSheet) =>
     setProblemList((prev) => prev.map((s) => (s.id === updated.id ? updated : s)).sort((a, b) => a.sort_order - b.sort_order));
@@ -122,20 +124,12 @@ export function UnitContentManager({ unitId }: { unitId: string }) {
       {cm.showExternalPassageList && externalPassageList.length > 0 && (
         <div className="space-y-1 rounded-lg border p-3">
           <h4 className="text-sm font-semibold text-gray-700 mb-1">외부지문 목록</h4>
-          <p className="text-xs text-muted-foreground mb-2">학생 화면의 「교과서 암기」 단계에 칩으로 노출됩니다 (완료 조건에는 포함되지 않음).</p>
-          {externalPassageList.map((sheet) => (
-            <div key={sheet.id} className="flex items-center justify-between py-1.5 px-2 rounded hover:bg-muted/50">
-              <div className="flex items-center gap-2 min-w-0">
-                <FileText className="h-4 w-4 text-amber-600 shrink-0" />
-                <span className="text-sm truncate">{sheet.title}</span>
-                <span className="text-xs text-gray-400 shrink-0">{sheet.answer_key?.length ?? 0}문장</span>
-                {sheet.video_url && <PlayCircle className="h-3.5 w-3.5 text-cyan-500 shrink-0" aria-label="설명 영상 있음" />}
-              </div>
-              <Button size="sm" variant="ghost" className="text-red-500 hover:text-red-700 h-7 px-2" onClick={() => externalPassageDelete.requestDelete(sheet.id)}>
-                삭제
-              </Button>
-            </div>
-          ))}
+          <p className="text-xs text-muted-foreground mb-2">학생 화면의 「교과서 암기」 단계에 칩으로 노출됩니다 (완료 조건에는 포함되지 않음). 제목을 클릭하면 문장을 보고 고칠 수 있습니다.</p>
+          <ExternalPassageList
+            sheets={externalPassageList}
+            onUpdate={onUpdateExternalPassage}
+            onRequestDelete={externalPassageDelete.requestDelete}
+          />
         </div>
       )}
 

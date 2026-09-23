@@ -245,7 +245,7 @@ export function useUnitContentData(unitId: string) {
     problemList, setProblemList, problemDelete,
     textbookVideoList, textbookVideoDelete,
     mockExamList, setMockExamList, mockExamDelete,
-    externalPassageList, externalPassageDelete,
+    externalPassageList, setExternalPassageList, externalPassageDelete,
     loadFullSheet, loadingSheetId,
     refresh: loadCounts,
     regenerateGrammarVocab,
