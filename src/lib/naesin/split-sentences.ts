@@ -27,7 +27,10 @@ function splitParagraph(text: string): string[] {
     if (after !== '' && !/^\s/.test(after) && !NEXT_OK.test(after)) continue;
     if (!candidate) continue;
     if (ABBREV.test(candidate)) continue;      // 약어
-    if (/\d\.$/.test(candidate)) continue;     // 소수점·번호
+    // 공백 없는 경계는 "U.S."·"A.M." 같은 한 글자 약어 사슬에서 오작동 → 앞뒤가 한 글자+마침표면 건너뜀
+    if (after !== '' && !/^\s/.test(after) && (/(^|[^A-Za-z])[A-Z]\.$/.test(candidate) || /^[A-Z]\./.test(after))) continue;
+    if (/^\d/.test(after)) continue;           // 소수점 (3.5)
+    if (/^\d+\.$/.test(candidate)) continue;   // 목록 번호 ("1. Have you…")
     out.push(candidate);
     start = end;
   }
