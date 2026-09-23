@@ -28,6 +28,8 @@ const MAX_IMAGES = 6;
 interface SentenceRow {
   original: string;
   korean: string;
+  /** 추출 시 선택지·빈칸·안 보이는 글자가 섞여 선생님 확인이 필요한 문장 */
+  needsReview?: boolean;
 }
 
 export function CreateExternalPassageDialog({ unitId, onAdd }: { unitId: string; onAdd: () => void }) {
@@ -81,13 +83,17 @@ export function CreateExternalPassageDialog({ unitId, onAdd }: { unitId: string;
 
       const data = await fetchWithToast<{
         title: string;
-        sentences?: { original: string; korean: string }[];
+        sentences?: SentenceRow[];
       }>('/api/naesin/passages/extract-text', { body, silent: true });
 
       if (data.title && !title) setTitle(data.title);
       if (data.sentences && data.sentences.length > 0) {
         setSentences(data.sentences);
         setStep('edit');
+        const review = data.sentences.filter((s) => s.needsReview).length;
+        if (review > 0) {
+          toast.warning(`${review}문장에 선택지·빈칸·안 보이는 글자가 섞여 있습니다. 노란 줄을 확인해 고쳐주세요.`);
+        }
       } else {
         toast.error('문장을 추출하지 못했습니다. 수동 입력을 이용해주세요.');
         setStep('input');
@@ -168,7 +174,7 @@ export function CreateExternalPassageDialog({ unitId, onAdd }: { unitId: string;
 
   function saveEdit() {
     if (editingIdx === null) return;
-    setSentences((prev) => prev.map((s, i) => (i === editingIdx ? { ...editForm } : s)));
+    setSentences((prev) => prev.map((s, i) => (i === editingIdx ? { ...editForm, needsReview: false } : s)));
     setEditingIdx(null);
   }
 
@@ -354,7 +360,7 @@ export function CreateExternalPassageDialog({ unitId, onAdd }: { unitId: string;
                 </thead>
                 <tbody>
                   {sentences.map((s, i) => (
-                    <tr key={i} className="border-t">
+                    <tr key={i} className={`border-t ${s.needsReview ? 'bg-amber-50' : ''}`}>
                       {editingIdx === i ? (
                         <>
                           <td className="p-2 text-muted-foreground">{i + 1}</td>
@@ -383,7 +389,10 @@ export function CreateExternalPassageDialog({ unitId, onAdd }: { unitId: string;
                       ) : (
                         <>
                           <td className="p-2 text-muted-foreground">{i + 1}</td>
-                          <td className="p-2 text-xs">{s.original}</td>
+                          <td className="p-2 text-xs">
+                            {s.needsReview && <Badge variant="outline" className="mr-1 border-amber-400 text-amber-700 text-[10px] px-1 py-0">확인 필요</Badge>}
+                            {s.original}
+                          </td>
                           <td className="p-2 text-xs text-muted-foreground">{s.korean}</td>
                           <td className="p-2">
                             <div className="flex gap-0.5">
