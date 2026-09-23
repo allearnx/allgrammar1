@@ -81,11 +81,17 @@ export const POST = createApiHandler(
   반드시 인쇄된 활자("sufficient")를 옮긴다.
 - 문장을 요약·축약·재구성하지 말 것.
 
-⚠️ 문장을 버리지 말 것 — 본문의 모든 문장을 빠짐없이 sentences에 넣는다. 위 사유([?], 빈칸)에 해당하거나
-아래 문제지 표기가 섞인 문장은 그대로 옮기되 "needsReview": true 를 붙인다 (선생님이 다음 화면에서 고친다):
-- 본문 안에 "(A) because / because of" 처럼 선택지가 박혀 있으면 하나를 고르지 말고 인쇄된 대로
-  "(A) because / because of" 로 옮긴다. 손글씨로 동그라미 친 답도 반영하지 않는다.
-- 본문 단어에 ①②③④⑤ 번호·밑줄이 붙어 있으면 번호는 빼고 단어는 인쇄된 대로 옮긴다 (그중 하나가 틀린 단어일 수 있어도 고치지 않는다).
+⚠️ 문장을 버리지 말 것 — 본문의 모든 문장을 빠짐없이 sentences에 넣는다.
+
+문제지 표기가 본문에 섞여 있으면 **완성된 원문 문장으로 복원**한다 (학생은 완성 문장을 외운다):
+- 본문 안의 선택지 "(A) because / because of" → 문법·문맥에 맞는 것 하나를 골라 문장에 넣는다. 괄호·기호는 남기지 않는다.
+- ①②③④⑤ 번호·밑줄이 붙은 단어 → 번호는 빼고, 문제 발문이 "적절하지 않은 것"을 묻는 유형이면 문맥에 맞지 않는
+  그 한 단어를 올바른 단어로 고친다. 나머지는 인쇄된 대로 둔다.
+- 빈칸(_____, ( ), 네모칸) → 문맥에 맞는 단어로 채운다. 페이지에 정답이 인쇄돼 있으면 그것을 쓴다.
+- 손글씨 답은 참고하지 말고 스스로 판단한다 (학생 필기일 수 있음).
+이렇게 복원한 문장은 "needsReview": true 로 표시하고, "note"에 무엇을 어떻게 넣었는지 짧게 적는다
+(예: "(A) because/because of → because", "③ sufficient → insufficient", "빈칸 → scarce"). 선생님이 다음 화면에서 확인한다.
+흐릿해서 판독이 안 되는 단어만 [?] 로 두고 needsReview: true.
 
 본문이 아닌 것은 전부 제외:
 - 문제 발문(예: "다음 글의 밑줄 친 부분 중…")·보기·정답·해설
@@ -100,7 +106,7 @@ JSON 객체로만 응답 (다른 텍스트 없이):
   "title": "지문 제목",
   "sentences": [
     { "original": "English sentence 1.", "korean": "한국어 번역 1." },
-    { "original": "Sentence with (A) because / because of a choice.", "korean": "한국어 번역 2.", "needsReview": true }
+    { "original": "Time is scarce because he must choose.", "korean": "한국어 번역 2.", "needsReview": true, "note": "(A) because/because of → because" }
   ]
 }`,
               },
@@ -111,7 +117,7 @@ JSON 객체로만 응답 (다른 텍스트 없이):
 
       interface ExtractResult {
         title?: string;
-        sentences?: { original: string; korean: string; needsReview?: boolean }[];
+        sentences?: { original: string; korean: string; needsReview?: boolean; note?: string }[];
         // Legacy fields (backward compat)
         original_text?: string;
         korean_translation?: string;
@@ -128,12 +134,16 @@ JSON 객체로만 응답 (다른 텍스트 없이):
         const originalText = result.sentences.map((s) => s.original).join(' ');
         const koreanTranslation = result.sentences.map((s) => s.korean).join(' ');
         void cleanup();
-        // 선택지·빈칸·[?]가 남은 문장은 모델 표시와 무관하게 확인 필요로 표시 (모델이 플래그를 빠뜨려도 잡음)
-        const sentences = result.sentences.map((s) => ({
-          original: s.original,
-          korean: s.korean ?? '',
-          needsReview: Boolean(s.needsReview) || /\[\?\]|_{3,}|[①-⑩]|\([A-E]\)\s*\S+\s*\/\s*\S+/.test(s.original),
-        }));
+        // 모델이 복원했다고 표시한 문장 + 복원이 안 돼 선택지·빈칸·[?]·번호가 남은 문장 모두 확인 필요
+        const sentences = result.sentences.map((s) => {
+          const unresolved = /\[\?\]|_{3,}|[①-⑩]|\([A-E]\)\s*\S+\s*\/\s*\S+/.test(s.original);
+          return {
+            original: s.original,
+            korean: s.korean ?? '',
+            needsReview: Boolean(s.needsReview) || unresolved,
+            note: s.note || (unresolved ? '선택지·빈칸이 그대로 남음 — 직접 고쳐주세요' : undefined),
+          };
+        });
         return NextResponse.json({
           title: result.title || '',
           original_text: originalText,

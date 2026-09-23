@@ -28,8 +28,10 @@ const MAX_IMAGES = 6;
 interface SentenceRow {
   original: string;
   korean: string;
-  /** 추출 시 선택지·빈칸·안 보이는 글자가 섞여 선생님 확인이 필요한 문장 */
+  /** 추출 시 선택지·빈칸을 AI가 채워 넣어 선생님 확인이 필요한 문장 */
   needsReview?: boolean;
+  /** 무엇을 어떻게 채웠는지 (예: "(A) because/because of → because") */
+  note?: string;
 }
 
 export function CreateExternalPassageDialog({ unitId, onAdd }: { unitId: string; onAdd: () => void }) {
@@ -92,7 +94,7 @@ export function CreateExternalPassageDialog({ unitId, onAdd }: { unitId: string;
         setStep('edit');
         const review = data.sentences.filter((s) => s.needsReview).length;
         if (review > 0) {
-          toast.warning(`${review}문장에 선택지·빈칸·안 보이는 글자가 섞여 있습니다. 노란 줄을 확인해 고쳐주세요.`);
+          toast.warning(`${review}문장은 선택지·빈칸을 AI가 채웠습니다. 노란 줄의 메모를 확인해주세요.`);
         }
       } else {
         toast.error('문장을 추출하지 못했습니다. 수동 입력을 이용해주세요.');
@@ -174,7 +176,7 @@ export function CreateExternalPassageDialog({ unitId, onAdd }: { unitId: string;
 
   function saveEdit() {
     if (editingIdx === null) return;
-    setSentences((prev) => prev.map((s, i) => (i === editingIdx ? { ...editForm, needsReview: false } : s)));
+    setSentences((prev) => prev.map((s, i) => (i === editingIdx ? { ...editForm, needsReview: false, note: undefined } : s)));
     setEditingIdx(null);
   }
 
@@ -392,6 +394,7 @@ export function CreateExternalPassageDialog({ unitId, onAdd }: { unitId: string;
                           <td className="p-2 text-xs">
                             {s.needsReview && <Badge variant="outline" className="mr-1 border-amber-400 text-amber-700 text-[10px] px-1 py-0">확인 필요</Badge>}
                             {s.original}
+                            {s.note && <div className="mt-1 text-[11px] text-amber-700">{s.note}</div>}
                           </td>
                           <td className="p-2 text-xs text-muted-foreground">{s.korean}</td>
                           <td className="p-2">
