@@ -1,0 +1,1203 @@
+[
+ {
+  "id": "508a89fc-11d4-445b-bca7-9b1d978ccda5",
+  "unit_id": "cd9a66ab-ad59-473b-958d-4c2c0b2502a9",
+  "title": "올림포스 1번",
+  "mode": "interactive",
+  "questions": [
+   {
+    "words": [
+     "Action",
+     "takes",
+     "place",
+     "by",
+     "choosing/by",
+     "the",
+     "employment",
+     "of",
+     "words,",
+     "which",
+     "ends",
+     "shall",
+     "be",
+     "satisfied/by",
+     "the",
+     "employment",
+     "of",
+     "words."
+    ],
+    "answer": "Action takes place by choosing/by the employment of words, which ends shall be satisfied/by the employment of words.",
+    "korean": "행동은 단어의 선택/사용을 통해 일어나며, 그 끝은 단어의 사용으로 만족되어야 한다.",
+    "number": 1,
+    "original": "Action takes place by choosing/by the employment of words, which ends shall be satisfied/by the employment of words.",
+    "acceptedAnswers": [
+     "Action takes place by choosing/by the employment of words, which ends shall be satisfied/by the employment of words"
+    ]
+   },
+   {
+    "words": [
+     "There",
+     "is",
+     "a",
+     "necessity",
+     "for",
+     "a",
+     "choice",
+     "among",
+     "ends,",
+     "and",
+     "when",
+     "we",
+     "must",
+     "use",
+     "a",
+     "means",
+     "which",
+     "does",
+     "not",
+     "satisfy",
+     "one",
+     "of",
+     "the",
+     "ends",
+     "chosen,",
+     "there",
+     "are",
+     "others",
+     "that",
+     "must",
+     "remain",
+     "unsatisfied."
+    ],
+    "answer": "There is a necessity for a choice among ends, and when we must use a means which does not satisfy one of the ends chosen, there are others that must remain unsatisfied.",
+    "korean": "목표 중에서 선택할 필요가 있으며, 선택한 목표 중 하나를 만족시키지 못하는 수단을 사용해야 할 때, 만족되지 않은 채로 남아있어야 할 다른 목표들이 있다.",
+    "number": 2,
+    "original": "There is a necessity for a choice among ends, and when we must use a means which does not satisfy one of the ends chosen, there are others that must remain unsatisfied.",
+    "acceptedAnswers": [
+     "There is a necessity for a choice among ends, and when we must use a means which does not satisfy one of the ends chosen, there are others that must remain unsatisfied"
+    ]
+   },
+   {
+    "words": [
+     "The",
+     "necessity",
+     "for",
+     "a",
+     "choice",
+     "among",
+     "ends",
+     "is",
+     "the",
+     "source",
+     "of",
+     "a",
+     "great",
+     "many",
+     "moral",
+     "problems."
+    ],
+    "answer": "The necessity for a choice among ends is the source of a great many moral problems.",
+    "korean": "목표 중에서 선택할 필요성이 많은 도덕적 문제의 원인이다.",
+    "number": 3,
+    "original": "The necessity for a choice among ends is the source of a great many moral problems.",
+    "acceptedAnswers": [
+     "The necessity for a choice among ends is the source of a great many moral problems"
+    ]
+   },
+   {
+    "words": [
+     "For",
+     "example,",
+     "Jones",
+     "is",
+     "engaged",
+     "in",
+     "watching",
+     "a",
+     "baseball",
+     "game",
+     "on",
+     "television."
+    ],
+    "answer": "For example, Jones is engaged in watching a baseball game on television.",
+    "korean": "예를 들어, Jones는 텔레비전에서 야구 경기를 보는 중이다.",
+    "number": 4,
+    "original": "For example, Jones is engaged in watching a baseball game on television.",
+    "acceptedAnswers": [
+     "For example, Jones is engaged in watching a baseball game on television"
+    ]
+   },
+   {
+    "words": [
+     "He",
+     "is",
+     "faced",
+     "with",
+     "the",
+     "choice",
+     "of",
+     "spending",
+     "the",
+     "next",
+     "hour(b)",
+     "(a)",
+     "can",
+     "the",
+     "baseball",
+     "game,",
+     "(b)",
+     "playing",
+     "baseball",
+     "or",
+     "(c)",
+     "going",
+     "for",
+     "a",
+     "drive."
+    ],
+    "answer": "He is faced with the choice of spending the next hour(b) (a) can the baseball game, (b) playing baseball or (c) going for a drive.",
+    "korean": "그는 다음 시간을 (b) (a) 야구 경기를 보거나, (b) 야구를 하거나 (c) 드라이브를 가는 선택에 직면해 있다.",
+    "number": 5,
+    "original": "He is faced with the choice of spending the next hour(b) (a) can the baseball game, (b) playing baseball or (c) going for a drive.",
+    "acceptedAnswers": [
+     "He is faced with the choice of spending the next hour(b) (a) can the baseball game, (b) playing baseball or (c) going for a drive"
+    ]
+   },
+   {
+    "words": [
+     "He",
+     "would",
+     "like",
+     "to",
+     "do",
+     "all",
+     "three",
+     "of",
+     "these",
+     "things,",
+     "but",
+     "his",
+     "means",
+     "(time)",
+     "is",
+     "sufficient."
+    ],
+    "answer": "He would like to do all three of these things, but his means (time) is sufficient.",
+    "korean": "그는 이 세 가지를 모두 하고 싶지만, 그의 수단(시간)은 충분하지 않다.",
+    "number": 6,
+    "original": "He would like to do all three of these things, but his means (time) is sufficient.",
+    "acceptedAnswers": [
+     "He would like to do all three of these things, but his means (time) is sufficient"
+    ]
+   },
+   {
+    "words": [
+     "As",
+     "a",
+     "result,",
+     "he",
+     "must",
+     "choose",
+     "one."
+    ],
+    "answer": "As a result, he must choose one.",
+    "korean": "결과적으로, 그는 하나를 선택해야 한다.",
+    "number": 7,
+    "original": "As a result, he must choose one.",
+    "acceptedAnswers": [
+     "As a result, he must choose one"
+    ]
+   },
+   {
+    "words": [
+     "Suppose,",
+     "assuming",
+     "he",
+     "decides",
+     "on",
+     "course",
+     "A)",
+     "This",
+     "is",
+     "a",
+     "clear",
+     "indication",
+     "that",
+     "he",
+     "has",
+     "ranked",
+     "the",
+     "satisfaction",
+     "of",
+     "end",
+     "A)",
+     "higher",
+     "than",
+     "the",
+     "satisfaction",
+     "of",
+     "ends",
+     "B)",
+     "or",
+     "C)."
+    ],
+    "answer": "Suppose, assuming he decides on course A) This is a clear indication that he has ranked the satisfaction of end A) higher than the satisfaction of ends B) or C).",
+    "korean": "그가 A 과정을 결정한다고 가정하면, 이는 그가 B) 또는 C)의 끝의 만족보다 A 끝의 만족을 더 높게 평가했다는 명확한 표시이다.",
+    "number": 8,
+    "original": "Suppose, assuming he decides on course A) This is a clear indication that he has ranked the satisfaction of end A) higher than the satisfaction of ends B) or C).",
+    "acceptedAnswers": [
+     "Suppose, assuming he decides on course A) This is a clear indication that he has ranked the satisfaction of end A) higher than the satisfaction of ends B) or C)"
+    ]
+   }
+  ],
+  "pdf_url": null,
+  "answer_key": [
+   "Action takes place by choosing/by the employment of words, which ends shall be satisfied/by the employment of words.",
+   "There is a necessity for a choice among ends, and when we must use a means which does not satisfy one of the ends chosen, there are others that must remain unsatisfied.",
+   "The necessity for a choice among ends is the source of a great many moral problems.",
+   "For example, Jones is engaged in watching a baseball game on television.",
+   "He is faced with the choice of spending the next hour(b) (a) can the baseball game, (b) playing baseball or (c) going for a drive.",
+   "He would like to do all three of these things, but his means (time) is sufficient.",
+   "As a result, he must choose one.",
+   "Suppose, assuming he decides on course A) This is a clear indication that he has ranked the satisfaction of end A) higher than the satisfaction of ends B) or C)."
+  ],
+  "sort_order": 0,
+  "category": "external_passage",
+  "created_at": "2026-09-23T10:35:09.190504+00:00",
+  "is_template": false,
+  "template_topic": null,
+  "source_template_id": null,
+  "textbook_id": null,
+  "video_url": null,
+  "assigned_student_id": null,
+  "assigned_by": null,
+  "assigned_at": null,
+  "assigned_note": null
+ },
+ {
+  "id": "d6b4dad1-21e6-4c36-af92-8d14bd36bb49",
+  "unit_id": "cd9a66ab-ad59-473b-958d-4c2c0b2502a9",
+  "title": "올림포스 2번",
+  "mode": "interactive",
+  "questions": [
+   {
+    "words": [
+     "Environmental",
+     "stress",
+     "can",
+     "cause",
+     "changes",
+     "in",
+     "the",
+     "genetic",
+     "makeup",
+     "of",
+     "a",
+     "population",
+     "by",
+     "favoring",
+     "certain",
+     "gene",
+     "variants",
+     "more",
+     "than",
+     "others."
+    ],
+    "answer": "Environmental stress can cause changes in the genetic makeup of a population by favoring certain gene variants more than others.",
+    "korean": "환경 스트레스는 어떤 유전자 변이를 다른 것보다 더 선호함으로써 개체군의 유전적 구성에 변화를 일으킬 수 있다.",
+    "number": 1,
+    "original": "Environmental stress can cause changes in the genetic makeup of a population by favoring certain gene variants more than others.",
+    "acceptedAnswers": [
+     "Environmental stress can cause changes in the genetic makeup of a population by favoring certain gene variants more than others"
+    ]
+   },
+   {
+    "words": [
+     "When",
+     "organisms",
+     "are",
+     "exposed",
+     "to",
+     "environmental",
+     "stress,",
+     "individuals",
+     "with",
+     "genetic",
+     "traits",
+     "that",
+     "help",
+     "them",
+     "cope",
+     "with",
+     "the",
+     "stress",
+     "are",
+     "more",
+     "likely",
+     "to",
+     "survive",
+     "and",
+     "reproduce."
+    ],
+    "answer": "When organisms are exposed to environmental stress, individuals with genetic traits that help them cope with the stress are more likely to survive and reproduce.",
+    "korean": "생물이 환경 스트레스에 노출되었을 때, 그 스트레스에 대처하는 데 도움이 되는 유전적 특성을 가진 개체들이 생존하고 번식할 가능성이 더 높다.",
+    "number": 2,
+    "original": "When organisms are exposed to environmental stress, individuals with genetic traits that help them cope with the stress are more likely to survive and reproduce.",
+    "acceptedAnswers": [
+     "When organisms are exposed to environmental stress, individuals with genetic traits that help them cope with the stress are more likely to survive and reproduce"
+    ]
+   },
+   {
+    "words": [
+     "One",
+     "negative",
+     "impact",
+     "of",
+     "this",
+     "is",
+     "that",
+     "it",
+     "can",
+     "reduce",
+     "the",
+     "genetic",
+     "diversity",
+     "of",
+     "the",
+     "population."
+    ],
+    "answer": "One negative impact of this is that it can reduce the genetic diversity of the population.",
+    "korean": "이것의 부정적인 영향 중 하나는 개체군의 유전적 다양성을 감소시킬 수 있다는 것이다.",
+    "number": 3,
+    "original": "One negative impact of this is that it can reduce the genetic diversity of the population.",
+    "acceptedAnswers": [
+     "One negative impact of this is that it can reduce the genetic diversity of the population"
+    ]
+   },
+   {
+    "words": [
+     "Another",
+     "problem",
+     "arises",
+     "when",
+     "the",
+     "genes",
+     "that",
+     "allow",
+     "an",
+     "organism",
+     "to",
+     "survive",
+     "in",
+     "a",
+     "particular",
+     "environment",
+     "become",
+     "less",
+     "efficient."
+    ],
+    "answer": "Another problem arises when the genes that allow an organism to survive in a particular environment become less efficient.",
+    "korean": "또 다른 문제는 개체가 특정 환경에서 생존할 수 있게 해주는 유전자가 덜 효율적이 될 때 발생한다.",
+    "number": 4,
+    "original": "Another problem arises when the genes that allow an organism to survive in a particular environment become less efficient.",
+    "acceptedAnswers": [
+     "Another problem arises when the genes that allow an organism to survive in a particular environment become less efficient"
+    ]
+   },
+   {
+    "words": [
+     "As",
+     "a",
+     "result",
+     "of",
+     "the",
+     "selected",
+     "genes",
+     "becoming",
+     "less",
+     "fit,",
+     "the",
+     "organism",
+     "becomes",
+     "less",
+     "efficient."
+    ],
+    "answer": "As a result of the selected genes becoming less fit, the organism becomes less efficient.",
+    "korean": "선택된 유전자가 덜 적응하게 되면서, 개체는 덜 효율적이 된다.",
+    "number": 5,
+    "original": "As a result of the selected genes becoming less fit, the organism becomes less efficient.",
+    "acceptedAnswers": [
+     "As a result of the selected genes becoming less fit, the organism becomes less efficient"
+    ]
+   }
+  ],
+  "pdf_url": null,
+  "answer_key": [
+   "Environmental stress can cause changes in the genetic makeup of a population by favoring certain gene variants more than others.",
+   "When organisms are exposed to environmental stress, individuals with genetic traits that help them cope with the stress are more likely to survive and reproduce.",
+   "One negative impact of this is that it can reduce the genetic diversity of the population.",
+   "Another problem arises when the genes that allow an organism to survive in a particular environment become less efficient.",
+   "As a result of the selected genes becoming less fit, the organism becomes less efficient."
+  ],
+  "sort_order": 1,
+  "category": "external_passage",
+  "created_at": "2026-09-23T10:35:55.415576+00:00",
+  "is_template": false,
+  "template_topic": null,
+  "source_template_id": null,
+  "textbook_id": null,
+  "video_url": null,
+  "assigned_student_id": null,
+  "assigned_by": null,
+  "assigned_at": null,
+  "assigned_note": null
+ },
+ {
+  "id": "5bc98787-25fa-4b11-a5f6-90f78530233e",
+  "unit_id": "cd9a66ab-ad59-473b-958d-4c2c0b2502a9",
+  "title": "올림포스 3번",
+  "mode": "interactive",
+  "questions": [
+   {
+    "words": [
+     "People's",
+     "Reputation",
+     "Microfinance",
+     "told",
+     "us",
+     "their",
+     "attached",
+     "wealth",
+     "had",
+     "gone",
+     "up",
+     "on",
+     "their",
+     "wealth",
+     "because",
+     "it",
+     "grew",
+     "around."
+    ],
+    "answer": "People's Reputation Microfinance told us their attached wealth had gone up on their wealth because it grew around.",
+    "korean": "People's Reputation Microfinance는 우리에게 그들의 부착된 재산이 그들의 부에 대해 올라갔다고 말했는데 그것은 주변에서 자랐기 때문입니다.",
+    "number": 1,
+    "original": "People's Reputation Microfinance told us their attached wealth had gone up on their wealth because it grew around.",
+    "acceptedAnswers": [
+     "People's Reputation Microfinance told us their attached wealth had gone up on their wealth because it grew around"
+    ]
+   },
+   {
+    "words": [
+     "However",
+     "it",
+     "should",
+     "be",
+     "noted."
+    ],
+    "answer": "However it should be noted.",
+    "korean": "그러나 그것은 주목되어야 한다는 점을 명심해야 합니다.",
+    "number": 2,
+    "original": "However it should be noted.",
+    "acceptedAnswers": [
+     "However it should be noted"
+    ]
+   },
+   {
+    "words": [
+     "In",
+     "one",
+     "research",
+     "study",
+     "with",
+     "monkeys",
+     "and",
+     "grapes,",
+     "a",
+     "researcher",
+     "successfully",
+     "performed",
+     "a",
+     "task",
+     "when",
+     "one",
+     "monkey",
+     "was",
+     "later",
+     "given",
+     "rotten",
+     "grapes",
+     "as",
+     "a",
+     "reward,",
+     "the",
+     "monkey",
+     "became",
+     "angry",
+     "and",
+     "refused",
+     "the",
+     "grapes."
+    ],
+    "answer": "In one research study with monkeys and grapes, a researcher successfully performed a task when one monkey was later given rotten grapes as a reward, the monkey became angry and refused the grapes.",
+    "korean": "원숭이와 포도에 대한 한 연구에서, 한 연구원이 한 원숭이가 나중에 썩은 포도를 보상으로 받았을 때 과제를 성공적으로 수행했고, 그 원숭이는 화가 나서 포도를 거부했습니다.",
+    "number": 3,
+    "original": "In one research study with monkeys and grapes, a researcher successfully performed a task when one monkey was later given rotten grapes as a reward, the monkey became angry and refused the grapes.",
+    "acceptedAnswers": [
+     "In one research study with monkeys and grapes, a researcher successfully performed a task when one monkey was later given rotten grapes as a reward, the monkey became angry and refused the grapes"
+    ]
+   },
+   {
+    "words": [
+     "The",
+     "monkeys",
+     "apparently",
+     "had",
+     "evaluative",
+     "salad,",
+     "vegetable",
+     "at",
+     "its",
+     "happier."
+    ],
+    "answer": "The monkeys apparently had evaluative salad, vegetable at its happier.",
+    "korean": "원숭이들은 분명히 평가적인 샐러드, 채소를 더 행복하게 가지고 있었습니다.",
+    "number": 4,
+    "original": "The monkeys apparently had evaluative salad, vegetable at its happier.",
+    "acceptedAnswers": [
+     "The monkeys apparently had evaluative salad, vegetable at its happier"
+    ]
+   },
+   {
+    "words": [
+     "It",
+     "seems",
+     "that",
+     "some",
+     "researchers",
+     "at",
+     "the",
+     "University",
+     "of",
+     "California",
+     "were",
+     "given",
+     "information",
+     "about",
+     "the",
+     "salaries",
+     "of",
+     "different",
+     "monkey",
+     "were",
+     "later",
+     "given",
+     "below",
+     "the",
+     "average",
+     "unfairly",
+     "because",
+     "they",
+     "were",
+     "satisfied",
+     "and",
+     "more",
+     "likely",
+     "to",
+     "rebel."
+    ],
+    "answer": "It seems that some researchers at the University of California were given information about the salaries of different monkey were later given below the average unfairly because they were satisfied and more likely to rebel.",
+    "korean": "캘리포니아 대학의 일부 연구원들이 다른 원숭이의 급여에 대한 정보를 받았고 나중에 평균 이하로 주어졌기 때문에 불공정하게 만족했고 더 반란할 가능성이 높았던 것 같습니다.",
+    "number": 5,
+    "original": "It seems that some researchers at the University of California were given information about the salaries of different monkey were later given below the average unfairly because they were satisfied and more likely to rebel.",
+    "acceptedAnswers": [
+     "It seems that some researchers at the University of California were given information about the salaries of different monkey were later given below the average unfairly because they were satisfied and more likely to rebel"
+    ]
+   },
+   {
+    "words": [
+     "The",
+     "attitudes",
+     "of",
+     "those",
+     "were",
+     "satisfied",
+     "and",
+     "more",
+     "likely",
+     "to",
+     "rebel",
+     "a",
+     "new",
+     "job."
+    ],
+    "answer": "The attitudes of those were satisfied and more likely to rebel a new job.",
+    "korean": "그들의 태도는 만족했고 새로운 일을 반란할 가능성이 더 높았습니다.",
+    "number": 6,
+    "original": "The attitudes of those were satisfied and more likely to rebel a new job.",
+    "acceptedAnswers": [
+     "The attitudes of those were satisfied and more likely to rebel a new job"
+    ]
+   }
+  ],
+  "pdf_url": null,
+  "answer_key": [
+   "People's Reputation Microfinance told us their attached wealth had gone up on their wealth because it grew around.",
+   "However it should be noted.",
+   "In one research study with monkeys and grapes, a researcher successfully performed a task when one monkey was later given rotten grapes as a reward, the monkey became angry and refused the grapes.",
+   "The monkeys apparently had evaluative salad, vegetable at its happier.",
+   "It seems that some researchers at the University of California were given information about the salaries of different monkey were later given below the average unfairly because they were satisfied and more likely to rebel.",
+   "The attitudes of those were satisfied and more likely to rebel a new job."
+  ],
+  "sort_order": 2,
+  "category": "external_passage",
+  "created_at": "2026-09-23T10:36:38.584114+00:00",
+  "is_template": false,
+  "template_topic": null,
+  "source_template_id": null,
+  "textbook_id": null,
+  "video_url": null,
+  "assigned_student_id": null,
+  "assigned_by": null,
+  "assigned_at": null,
+  "assigned_note": null
+ },
+ {
+  "id": "571d7d51-0013-4fc0-b4c8-5dcfa6a407f3",
+  "unit_id": "e46f8413-ee47-477b-83f3-4498f90362df",
+  "title": "올림포스 서술형",
+  "mode": "interactive",
+  "questions": [
+   {
+    "words": [
+     "Imagine",
+     "that",
+     "a",
+     "farmer",
+     "is",
+     "wondering",
+     "whether",
+     "his",
+     "black-and-white",
+     "cow,",
+     "Daisy,",
+     "is",
+     "in",
+     "the",
+     "field."
+    ],
+    "answer": "Imagine that a farmer is wondering whether his black-and-white cow, Daisy, is in the field.",
+    "korean": "한 농부가 자신의 검은색과 흰색 소 데이지가 들판에 있는지 궁금해하고 있다고 상상해보자.",
+    "number": 1,
+    "original": "Imagine that a farmer is wondering whether his black-and-white cow, Daisy, is in the field.",
+    "acceptedAnswers": [
+     "Imagine that a farmer is wondering whether his black-and-white cow, Daisy, is in the field"
+    ]
+   },
+   {
+    "words": [
+     "He",
+     "believes",
+     "she",
+     "is",
+     "in",
+     "the",
+     "field,",
+     "but",
+     "to",
+     "give",
+     "a",
+     "look",
+     "around,",
+     "he",
+     "walks",
+     "to",
+     "the",
+     "fence."
+    ],
+    "answer": "He believes she is in the field, but to give a look around, he walks to the fence.",
+    "korean": "그는 그 소가 들판에 있다고 믿지만, 확인하기 위해 울타리로 걸어간다.",
+    "number": 2,
+    "original": "He believes she is in the field, but to give a look around, he walks to the fence.",
+    "acceptedAnswers": [
+     "He believes she is in the field, but to give a look around, he walks to the fence"
+    ]
+   },
+   {
+    "words": [
+     "On",
+     "the",
+     "way,",
+     "he",
+     "sees",
+     "something",
+     "that",
+     "looks",
+     "like",
+     "a",
+     "cow",
+     "in",
+     "the",
+     "distance."
+    ],
+    "answer": "On the way, he sees something that looks like a cow in the distance.",
+    "korean": "가는 길에 그는 거리에 있는 소처럼 보이는 것을 본다.",
+    "number": 3,
+    "original": "On the way, he sees something that looks like a cow in the distance.",
+    "acceptedAnswers": [
+     "On the way, he sees something that looks like a cow in the distance"
+    ]
+   },
+   {
+    "words": [
+     "Yet,",
+     "next",
+     "door,",
+     "Ray",
+     "(the",
+     "one",
+     "really",
+     "was",
+     "in",
+     "the",
+     "field—the",
+     "sun",
+     "just",
+     "hidden",
+     "from",
+     "sight)",
+     "is",
+     "a",
+     "cow."
+    ],
+    "answer": "Yet, next door, Ray (the one really was in the field—the sun just hidden from sight) is a cow.",
+    "korean": "그런데 옆에 레이(실제로 들판에 있던 소—햇빛이 시야에서 숨겨져 있음)가 있다.",
+    "number": 4,
+    "original": "Yet, next door, Ray (the one really was in the field—the sun just hidden from sight) is a cow.",
+    "acceptedAnswers": [
+     "Yet, next door, Ray (the one really was in the field—the sun just hidden from sight) is a cow"
+    ]
+   },
+   {
+    "words": [
+     "The",
+     "farmer",
+     "had",
+     "been",
+     "looking",
+     "the",
+     "wrong",
+     "way."
+    ],
+    "answer": "The farmer had been looking the wrong way.",
+    "korean": "그 농부는 잘못된 방향을 보고 있었다.",
+    "number": 5,
+    "original": "The farmer had been looking the wrong way.",
+    "acceptedAnswers": [
+     "The farmer had been looking the wrong way"
+    ]
+   },
+   {
+    "words": [
+     "So,",
+     "he",
+     "didn't",
+     "have",
+     "good",
+     "knowledge."
+    ],
+    "answer": "So, he didn't have good knowledge.",
+    "korean": "그래서 그는 좋은 지식을 가지고 있지 않았다.",
+    "number": 6,
+    "original": "So, he didn't have good knowledge.",
+    "acceptedAnswers": [
+     "So, he didn't have good knowledge"
+    ]
+   },
+   {
+    "words": [
+     "It",
+     "was",
+     "just",
+     "a",
+     "belief",
+     "turned",
+     "out",
+     "to",
+     "be",
+     "true."
+    ],
+    "answer": "It was just a belief turned out to be true.",
+    "korean": "그것은 단지 사실로 밝혀진 믿음이었다.",
+    "number": 7,
+    "original": "It was just a belief turned out to be true.",
+    "acceptedAnswers": [
+     "It was just a belief turned out to be true"
+    ]
+   }
+  ],
+  "pdf_url": null,
+  "answer_key": [
+   "Imagine that a farmer is wondering whether his black-and-white cow, Daisy, is in the field.",
+   "He believes she is in the field, but to give a look around, he walks to the fence.",
+   "On the way, he sees something that looks like a cow in the distance.",
+   "Yet, next door, Ray (the one really was in the field—the sun just hidden from sight) is a cow.",
+   "The farmer had been looking the wrong way.",
+   "So, he didn't have good knowledge.",
+   "It was just a belief turned out to be true."
+  ],
+  "sort_order": 0,
+  "category": "external_passage",
+  "created_at": "2026-09-23T10:37:39.458289+00:00",
+  "is_template": false,
+  "template_topic": null,
+  "source_template_id": null,
+  "textbook_id": null,
+  "video_url": null,
+  "assigned_student_id": null,
+  "assigned_by": null,
+  "assigned_at": null,
+  "assigned_note": null
+ },
+ {
+  "id": "b84d2424-d909-4a8e-88cd-ec18177f667d",
+  "unit_id": "e46f8413-ee47-477b-83f3-4498f90362df",
+  "title": "올림포스 논술형",
+  "mode": "interactive",
+  "questions": [
+   {
+    "words": [
+     "Simile",
+     "is",
+     "a",
+     "figure",
+     "of",
+     "speech",
+     "that",
+     "compares",
+     "two",
+     "different",
+     "things",
+     "using",
+     "'like'",
+     "or",
+     "'as'."
+    ],
+    "answer": "Simile is a figure of speech that compares two different things using 'like' or 'as'.",
+    "korean": "직유는 '~처럼' 또는 '~같이'를 사용하여 서로 다른 두 가지를 비교하는 수사법입니다.",
+    "number": 1,
+    "original": "Simile is a figure of speech that compares two different things using 'like' or 'as'.",
+    "acceptedAnswers": [
+     "Simile is a figure of speech that compares two different things using 'like' or 'as'"
+    ]
+   },
+   {
+    "words": [
+     "For",
+     "example,",
+     "you",
+     "can",
+     "say",
+     "a",
+     "drink",
+     "for",
+     "pleasure",
+     "is",
+     "like",
+     "cold",
+     "water",
+     "on",
+     "a",
+     "hot",
+     "day."
+    ],
+    "answer": "For example, you can say a drink for pleasure is like cold water on a hot day.",
+    "korean": "예를 들어, 즐거움을 위한 음료를 더운 날씨에 마시는 찬물 같다고 할 수 있습니다.",
+    "number": 2,
+    "original": "For example, you can say a drink for pleasure is like cold water on a hot day.",
+    "acceptedAnswers": [
+     "For example, you can say a drink for pleasure is like cold water on a hot day"
+    ]
+   },
+   {
+    "words": [
+     "A",
+     "bottle",
+     "of",
+     "wine",
+     "may",
+     "be",
+     "described",
+     "as",
+     "having",
+     "characteristics",
+     "of",
+     "a",
+     "complex",
+     "and",
+     "interactive",
+     "wine."
+    ],
+    "answer": "A bottle of wine may be described as having characteristics of a complex and interactive wine.",
+    "korean": "와인 한 병은 복잡하고 상호작용하는 특성을 가지고 있다고 묘사될 수 있습니다.",
+    "number": 3,
+    "original": "A bottle of wine may be described as having characteristics of a complex and interactive wine.",
+    "acceptedAnswers": [
+     "A bottle of wine may be described as having characteristics of a complex and interactive wine"
+    ]
+   },
+   {
+    "words": [
+     "A",
+     "metaphor",
+     "is",
+     "a",
+     "figure",
+     "of",
+     "speech",
+     "that",
+     "cannot",
+     "be",
+     "explained",
+     "in",
+     "words."
+    ],
+    "answer": "A metaphor is a figure of speech that cannot be explained in words.",
+    "korean": "은유는 단어로 설명할 수 없는 수사법입니다.",
+    "number": 4,
+    "original": "A metaphor is a figure of speech that cannot be explained in words.",
+    "acceptedAnswers": [
+     "A metaphor is a figure of speech that cannot be explained in words"
+    ]
+   },
+   {
+    "words": [
+     "Even",
+     "after",
+     "experiencing",
+     "the",
+     "same",
+     "situation,",
+     "we",
+     "often",
+     "do",
+     "not",
+     "realize",
+     "that",
+     "we",
+     "have",
+     "used",
+     "to",
+     "describe",
+     "some",
+     "parts",
+     "of",
+     "your",
+     "statement."
+    ],
+    "answer": "Even after experiencing the same situation, we often do not realize that we have used to describe some parts of your statement.",
+    "korean": "같은 상황을 경험한 후에도, 우리는 종종 당신의 진술의 일부를 설명하기 위해 사용했다는 것을 깨닫지 못합니다.",
+    "number": 5,
+    "original": "Even after experiencing the same situation, we often do not realize that we have used to describe some parts of your statement.",
+    "acceptedAnswers": [
+     "Even after experiencing the same situation, we often do not realize that we have used to describe some parts of your statement"
+    ]
+   },
+   {
+    "words": [
+     "The",
+     "same",
+     "is",
+     "true",
+     "as",
+     "a",
+     "literally."
+    ],
+    "answer": "The same is true as a literally.",
+    "korean": "같은 것이 문자 그대로 사실입니다.",
+    "number": 6,
+    "original": "The same is true as a literally.",
+    "acceptedAnswers": [
+     "The same is true as a literally"
+    ]
+   },
+   {
+    "words": [
+     "Just",
+     "look",
+     "at",
+     "a",
+     "sand",
+     "as",
+     "a",
+     "type",
+     "of",
+     "smile",
+     "is",
+     "a",
+     "complex",
+     "interacting",
+     "characteristic."
+    ],
+    "answer": "Just look at a sand as a type of smile is a complex interacting characteristic.",
+    "korean": "모래를 미소의 한 유형으로 본다는 것은 복잡한 상호작용하는 특성입니다.",
+    "number": 7,
+    "original": "Just look at a sand as a type of smile is a complex interacting characteristic.",
+    "acceptedAnswers": [
+     "Just look at a sand as a type of smile is a complex interacting characteristic"
+    ]
+   }
+  ],
+  "pdf_url": null,
+  "answer_key": [
+   "Simile is a figure of speech that compares two different things using 'like' or 'as'.",
+   "For example, you can say a drink for pleasure is like cold water on a hot day.",
+   "A bottle of wine may be described as having characteristics of a complex and interactive wine.",
+   "A metaphor is a figure of speech that cannot be explained in words.",
+   "Even after experiencing the same situation, we often do not realize that we have used to describe some parts of your statement.",
+   "The same is true as a literally.",
+   "Just look at a sand as a type of smile is a complex interacting characteristic."
+  ],
+  "sort_order": 1,
+  "category": "external_passage",
+  "created_at": "2026-09-23T10:38:21.012578+00:00",
+  "is_template": false,
+  "template_topic": null,
+  "source_template_id": null,
+  "textbook_id": null,
+  "video_url": null,
+  "assigned_student_id": null,
+  "assigned_by": null,
+  "assigned_at": null,
+  "assigned_note": null
+ },
+ {
+  "id": "a1e1ea30-12d4-4f6c-9490-d222cb452ad7",
+  "unit_id": "e46f8413-ee47-477b-83f3-4498f90362df",
+  "title": "올림포스 다시 1번",
+  "mode": "interactive",
+  "questions": [
+   {
+    "words": [
+     "How",
+     "should",
+     "the",
+     "social",
+     "good",
+     "be",
+     "defined",
+     "in",
+     "english",
+     "strong",
+     "social",
+     "bonds,",
+     "friendship,",
+     "and",
+     "trust",
+     "among",
+     "people",
+     "be",
+     "considered",
+     "part",
+     "of",
+     "the",
+     "social",
+     "good?"
+    ],
+    "answer": "How should the social good be defined in english strong social bonds, friendship, and trust among people be considered part of the social good?",
+    "korean": "사회적 선이 영어로 강한 사회 결속, 우정, 그리고 사람들 사이의 신뢰를 어떻게 정의해야 할까요? 이것들이 사회적 선의 일부로 간주되어야 할까요?",
+    "number": 1,
+    "original": "How should the social good be defined in english strong social bonds, friendship, and trust among people be considered part of the social good?",
+    "acceptedAnswers": [
+     "How should the social good be defined in english strong social bonds, friendship, and trust among people be considered part of the social good"
+    ]
+   },
+   {
+    "words": [
+     "Some",
+     "people",
+     "think",
+     "of",
+     "taking",
+     "to",
+     "the",
+     "members",
+     "of",
+     "their",
+     "family",
+     "and",
+     "close",
+     "friends",
+     "as",
+     "the",
+     "most",
+     "important",
+     "thing",
+     "in",
+     "life."
+    ],
+    "answer": "Some people think of taking to the members of their family and close friends as the most important thing in life.",
+    "korean": "어떤 사람들은 가족 구성원들과 친한 친구들과 대화하는 것을 인생에서 가장 중요한 것으로 생각합니다.",
+    "number": 2,
+    "original": "Some people think of taking to the members of their family and close friends as the most important thing in life.",
+    "acceptedAnswers": [
+     "Some people think of taking to the members of their family and close friends as the most important thing in life"
+    ]
+   },
+   {
+    "words": [
+     "They",
+     "value",
+     "social",
+     "bonds",
+     "because",
+     "they",
+     "think",
+     "of",
+     "talking",
+     "to",
+     "people",
+     "they",
+     "care",
+     "about",
+     "as",
+     "rather",
+     "than",
+     "just",
+     "talking",
+     "about",
+     "their",
+     "own",
+     "interests",
+     "or",
+     "concerns."
+    ],
+    "answer": "They value social bonds because they think of talking to people they care about as rather than just talking about their own interests or concerns.",
+    "korean": "그들은 자신의 관심사나 우려에 대해 이야기하는 것보다는 자신이 걱정하는 사람들과 대화하는 것을 중요하게 여기기 때문에 사회적 결속을 소중히 합니다.",
+    "number": 3,
+    "original": "They value social bonds because they think of talking to people they care about as rather than just talking about their own interests or concerns.",
+    "acceptedAnswers": [
+     "They value social bonds because they think of talking to people they care about as rather than just talking about their own interests or concerns"
+    ]
+   }
+  ],
+  "pdf_url": null,
+  "answer_key": [
+   "How should the social good be defined in english strong social bonds, friendship, and trust among people be considered part of the social good?",
+   "Some people think of taking to the members of their family and close friends as the most important thing in life.",
+   "They value social bonds because they think of talking to people they care about as rather than just talking about their own interests or concerns."
+  ],
+  "sort_order": 2,
+  "category": "external_passage",
+  "created_at": "2026-09-23T10:39:32.908521+00:00",
+  "is_template": false,
+  "template_topic": null,
+  "source_template_id": null,
+  "textbook_id": null,
+  "video_url": null,
+  "assigned_student_id": null,
+  "assigned_by": null,
+  "assigned_at": null,
+  "assigned_note": null
+ }
+]
