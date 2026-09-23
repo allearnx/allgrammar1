@@ -18,6 +18,7 @@ import { fetchWithToast } from '@/lib/fetch-with-toast';
 import { useFormDialog } from '@/hooks/use-form-dialog';
 import { toast } from 'sonner';
 import type { ExternalPassageSentence } from '@/types/naesin';
+import { splitSentences } from '@/lib/naesin/split-sentences';
 
 type Step = 'input' | 'extracting' | 'edit';
 
@@ -40,6 +41,7 @@ export function CreateExternalPassageDialog({ unitId, onAdd }: { unitId: string;
   const [step, setStep] = useState<Step>('input');
   const [title, setTitle] = useState('');
   const [manualText, setManualText] = useState('');
+  const [manualKorean, setManualKorean] = useState('');
   const [sentences, setSentences] = useState<SentenceRow[]>([]);
   const [videoUrl, setVideoUrl] = useState('');
   const [extractSource, setExtractSource] = useState<'pdf' | 'image'>('pdf');
@@ -95,28 +97,43 @@ export function CreateExternalPassageDialog({ unitId, onAdd }: { unitId: string;
     }
   }
 
+  /**
+   * 붙여넣기 → 문장 분리 (AI 미사용 — 원문이 한 글자도 바뀌지 않는다).
+   * 1) "영어 | 한국어" 줄 형식이면 그대로 짝지음
+   * 2) 아니면 영어 지문을 문단째 받아 문장으로 나누고, 한국어 해석도 같은 방식으로 나눠 순서대로 짝지음
+   */
   function handleManualParse() {
     const lines = manualText.split('\n').filter((l) => l.trim());
     const parsed: SentenceRow[] = [];
+    const hasPairFormat = lines.some((l) => /\s\|\s|\t/.test(l));
 
-    for (const line of lines) {
-      // Support: "English sentence | 한국어 번역" or "English sentence\t한국어 번역"
-      const parts = line.split(/\s*\|\s*|\t/);
-      if (parts.length >= 2) {
-        let engPart = parts[0].trim();
-        let korPart = parts.slice(1).join(' ').trim();
+    if (hasPairFormat) {
+      for (const line of lines) {
+        // Support: "English sentence | 한국어 번역" or "English sentence\t한국어 번역"
+        const parts = line.split(/\s*\|\s*|\t/);
+        if (parts.length >= 2) {
+          let engPart = parts[0].trim();
+          let korPart = parts.slice(1).join(' ').trim();
 
-        // 자동 언어 감지: 앞쪽이 한글이고 뒤쪽이 영어면 스왑
-        if (/[가-힣]/.test(engPart) && !/[가-힣]/.test(korPart)) {
-          [engPart, korPart] = [korPart, engPart];
+          // 자동 언어 감지: 앞쪽이 한글이고 뒤쪽이 영어면 스왑
+          if (/[가-힣]/.test(engPart) && !/[가-힣]/.test(korPart)) {
+            [engPart, korPart] = [korPart, engPart];
+          }
+
+          parsed.push({ original: engPart, korean: korPart });
         }
-
-        parsed.push({ original: engPart, korean: korPart });
       }
+    } else {
+      const eng = splitSentences(manualText);
+      const kor = splitSentences(manualKorean);
+      if (manualKorean.trim() && kor.length !== eng.length) {
+        toast.warning(`영어 ${eng.length}문장 / 한국어 ${kor.length}문장 — 개수가 달라 순서대로만 짝지었습니다. 다음 화면에서 확인해주세요.`);
+      }
+      for (let i = 0; i < eng.length; i++) parsed.push({ original: eng[i], korean: kor[i] ?? '' });
     }
 
     if (parsed.length === 0) {
-      toast.error('문장을 파싱할 수 없습니다. "영어 | 한국어" 형식으로 입력해주세요.');
+      toast.error('문장을 찾을 수 없습니다. 영어 지문을 붙여넣어 주세요.');
       return;
     }
 
@@ -184,6 +201,7 @@ export function CreateExternalPassageDialog({ unitId, onAdd }: { unitId: string;
     setTitle('');
     setVideoUrl('');
     setManualText('');
+    setManualKorean('');
     setSentences([]);
     setEditingIdx(null);
   }
@@ -255,15 +273,30 @@ export function CreateExternalPassageDialog({ unitId, onAdd }: { unitId: string;
               <div className="relative flex justify-center"><span className="bg-background px-2 text-xs text-muted-foreground">또는</span></div>
             </div>
 
-            <div>
-              <Label htmlFor="ep-manual">수동 입력 (영어 | 한국어, 한 줄에 하나)</Label>
-              <Textarea
-                id="ep-manual"
-                value={manualText}
-                onChange={(e) => setManualText(e.target.value)}
-                placeholder={"She has been studying English since she was five. | 그녀는 다섯 살 때부터 영어를 공부해 오고 있다.\nHe decided to become a scientist. | 그는 과학자가 되기로 결심했다."}
-                rows={8}
-              />
+            <div className="space-y-3">
+              <div>
+                <Label htmlFor="ep-manual">텍스트 붙여넣기 — 영어 지문</Label>
+                <Textarea
+                  id="ep-manual"
+                  value={manualText}
+                  onChange={(e) => setManualText(e.target.value)}
+                  placeholder={"지문을 그대로 붙여넣으세요. 문장 단위로 자동으로 나뉩니다.\n(AI를 거치지 않아 글자가 바뀌지 않습니다.)"}
+                  rows={7}
+                />
+              </div>
+              <div>
+                <Label htmlFor="ep-manual-ko">한국어 해석 (선택)</Label>
+                <Textarea
+                  id="ep-manual-ko"
+                  value={manualKorean}
+                  onChange={(e) => setManualKorean(e.target.value)}
+                  placeholder={"해석도 붙여넣으면 영어 문장과 순서대로 짝지어집니다. 비워두고 다음 화면에서 입력해도 됩니다."}
+                  rows={5}
+                />
+              </div>
+              <p className="text-xs text-muted-foreground">
+                한 줄에 &ldquo;영어 문장 | 한국어 해석&rdquo; 형식으로 넣어도 됩니다.
+              </p>
             </div>
 
             <Button
@@ -271,7 +304,7 @@ export function CreateExternalPassageDialog({ unitId, onAdd }: { unitId: string;
               onClick={handleManualParse}
               disabled={!title.trim() || !manualText.trim()}
             >
-              문장 파싱하기
+              문장으로 나누기
             </Button>
           </div>
         )}
