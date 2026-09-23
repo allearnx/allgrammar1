@@ -102,25 +102,34 @@ export function CreateExternalPassageDialog({ unitId, onAdd }: { unitId: string;
    * 1) "영어 | 한국어" 줄 형식이면 그대로 짝지음
    * 2) 아니면 영어 지문을 문단째 받아 문장으로 나누고, 한국어 해석도 같은 방식으로 나눠 순서대로 짝지음
    */
+  /**
+   * 붙여넣기 → 문장 분리 (AI 미사용 — 원문이 한 글자도 바뀌지 않는다).
+   * 1) 대부분의 줄이 "영어 | 한국어" 형식이면 그대로 짝지음 (구분자 없는 줄은 영어만 넣고 해석은 비움)
+   * 2) 아니면 영어 지문을 문단째 받아 문장으로 나누고, 한국어 해석도 같은 방식으로 나눠 순서대로 짝지음
+   * 실패로 끝내지 않는다 — 어떻게든 문장을 만들어 다음 화면에서 고칠 수 있게 한다.
+   */
   function handleManualParse() {
     const lines = manualText.split('\n').filter((l) => l.trim());
     const parsed: SentenceRow[] = [];
-    const hasPairFormat = lines.some((l) => /\s\|\s|\t/.test(l));
+    const SEP = /\s*\|\s*|\t/;
+    const sepLines = lines.filter((l) => SEP.test(l)).length;
+    // 탭이 우연히 하나 섞여 있다고 짝 형식으로 오인하지 않도록, 과반이 구분자를 가질 때만 짝 모드
+    const hasPairFormat = lines.length > 0 && sepLines >= Math.ceil(lines.length / 2);
 
     if (hasPairFormat) {
       for (const line of lines) {
-        // Support: "English sentence | 한국어 번역" or "English sentence\t한국어 번역"
-        const parts = line.split(/\s*\|\s*|\t/);
+        const parts = line.split(SEP).map((x) => x.trim()).filter(Boolean);
         if (parts.length >= 2) {
-          let engPart = parts[0].trim();
-          let korPart = parts.slice(1).join(' ').trim();
-
+          let engPart = parts[0];
+          let korPart = parts.slice(1).join(' ');
           // 자동 언어 감지: 앞쪽이 한글이고 뒤쪽이 영어면 스왑
           if (/[가-힣]/.test(engPart) && !/[가-힣]/.test(korPart)) {
             [engPart, korPart] = [korPart, engPart];
           }
-
           parsed.push({ original: engPart, korean: korPart });
+        } else if (parts.length === 1) {
+          // 구분자가 없는 줄도 버리지 않는다 (해석은 다음 화면에서 입력)
+          parsed.push({ original: parts[0], korean: '' });
         }
       }
     } else {
@@ -132,10 +141,7 @@ export function CreateExternalPassageDialog({ unitId, onAdd }: { unitId: string;
       for (let i = 0; i < eng.length; i++) parsed.push({ original: eng[i], korean: kor[i] ?? '' });
     }
 
-    if (parsed.length === 0) {
-      toast.error('문장을 찾을 수 없습니다. 영어 지문을 붙여넣어 주세요.');
-      return;
-    }
+
 
     setSentences(parsed);
     setStep('edit');
