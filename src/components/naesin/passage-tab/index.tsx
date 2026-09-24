@@ -6,7 +6,7 @@ import { toast } from 'sonner';
 import { fetchWithToast } from '@/lib/fetch-with-toast';
 import { cn } from '@/lib/utils';
 import { Download, FileText, Lock, ArrowRight, BookOpen } from 'lucide-react';
-import { ExternalPassageView, type ExternalPassageAttempt } from '@/components/naesin/problem-tab/external-passage-view';
+import { ExternalPassageView, type ExternalPassageAttempt, type ExternalPassageAttemptBrief } from '@/components/naesin/problem-tab/external-passage-view';
 import { passageToTextbookPassage, augmentPassageStages } from '@/lib/naesin/adapters';
 import { NaesinFillBlanksView } from './fill-blanks-view';
 import { NaesinOrderingView } from './ordering-view';
@@ -32,11 +32,13 @@ interface PassageTabProps {
   externalPassageSheets?: NaesinProblemSheet[];
   /** 외부지문 시트별 최근 시도 (완료 요약 표시용) */
   externalAttempts?: Record<string, ExternalPassageAttempt>;
+  /** 외부지문 시트별 전체 시도 이력 (최신순) — 도전 기록 표시 */
+  externalAttemptHistory?: Record<string, ExternalPassageAttemptBrief[]>;
   /** 학습 세션 기록용 — 외부지문 칩 선택 시 'external_passage', 교과서 본문이면 'passage' */
   onActiveSheetChange?: (category: string) => void;
 }
 
-export function PassageTab({ passages, unitId, onStageComplete, requiredStages, translationSentencesPerPage, naesinRequiredRounds, round1Completed, subStageBests, externalPassageSheets = [], externalAttempts, onActiveSheetChange }: PassageTabProps) {
+export function PassageTab({ passages, unitId, onStageComplete, requiredStages, translationSentencesPerPage, naesinRequiredRounds, round1Completed, subStageBests, externalPassageSheets = [], externalAttempts, externalAttemptHistory, onActiveSheetChange }: PassageTabProps) {
   const augmentedStages = useMemo(
     () => augmentPassageStages(requiredStages, passages),
     [requiredStages, passages],
@@ -84,6 +86,7 @@ export function PassageTab({ passages, unitId, onStageComplete, requiredStages, 
       )}
       {externalPassageSheets.map((sheet) => {
         const attempt = externalAttempts?.[sheet.id];
+        const tries = externalAttemptHistory?.[sheet.id]?.length ?? 0;
         return (
           <button
             type="button"
@@ -98,7 +101,7 @@ export function PassageTab({ passages, unitId, onStageComplete, requiredStages, 
             외부지문 · {sheet.title}
             {attempt && (
               <span className={cn('text-xs rounded-full px-1.5', selectedExternalId === sheet.id ? 'bg-white/25' : 'bg-green-100 text-green-700')}>
-                {attempt.score}점
+                {attempt.score}점{tries > 1 ? ` · ${tries}회` : ''}
               </span>
             )}
           </button>
@@ -112,7 +115,7 @@ export function PassageTab({ passages, unitId, onStageComplete, requiredStages, 
     <>
       {externalPassageSheets.map((sheet) => (
         <div key={sheet.id} className={selectedExternalId === sheet.id ? undefined : 'hidden'}>
-          <ExternalPassageView sheet={sheet} unitId={unitId} lastAttempt={externalAttempts?.[sheet.id]} />
+          <ExternalPassageView sheet={sheet} unitId={unitId} lastAttempt={externalAttempts?.[sheet.id]} history={externalAttemptHistory?.[sheet.id]} />
         </div>
       ))}
     </>

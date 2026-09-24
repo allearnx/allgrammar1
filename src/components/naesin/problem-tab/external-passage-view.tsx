@@ -26,15 +26,27 @@ export interface ExternalPassageAttempt {
   created_at: string;
 }
 
+/** 도전 기록 한 줄 (fetch-stage-data attemptHistoryBySheet와 동일 형태) */
+export interface ExternalPassageAttemptBrief {
+  score: number;
+  /** [빈칸, 순서, 영작] 세부 점수 */
+  answers?: unknown;
+  created_at: string;
+}
+
 interface ExternalPassageViewProps {
   sheet: NaesinProblemSheet;
   unitId?: string | null;
   onComplete?: () => void;
   /** 이미 제출한 적이 있으면 완료 요약(다시 보기·다시 풀기)부터 보여준다 */
   lastAttempt?: ExternalPassageAttempt;
+  /** 전체 시도 이력 (최신순) — 완료 요약의 "도전 기록" */
+  history?: ExternalPassageAttemptBrief[];
 }
 
-function subScoresOf(attempt: ExternalPassageAttempt | undefined): { fill: number | null; ordering: number; translation: number } | null {
+type ExerciseKey = 'fillBlanks' | 'ordering' | 'translation';
+
+function subScoresOf(attempt: ExternalPassageAttemptBrief | undefined): { fill: number | null; ordering: number; translation: number } | null {
   const a = attempt?.answers;
   if (!Array.isArray(a) || !a.every((n) => typeof n === 'number')) return null;
   if (a.length === 3) return { fill: a[0], ordering: a[1], translation: a[2] };
@@ -102,7 +114,17 @@ function clearDraft(sheetId: string) {
   try { localStorage.removeItem(DRAFT_KEY(sheetId)); } catch { /* ignore */ }
 }
 
-export function ExternalPassageView({ sheet, unitId, onComplete, lastAttempt }: ExternalPassageViewProps) {
+/** 연습 하나만 임시 저장에서 지운다 (그 연습만 다시 하기) */
+function dropDraft(sheetId: string, key: ExerciseKey) {
+  try {
+    const prev = loadDraft(sheetId);
+    delete prev[key];
+    if (key === 'translation') delete prev.translationWrongs;
+    localStorage.setItem(DRAFT_KEY(sheetId), JSON.stringify(prev));
+  } catch { /* ignore */ }
+}
+
+export function ExternalPassageView({ sheet, unitId, onComplete, lastAttempt, history }: ExternalPassageViewProps) {
   const draft = useMemo(() => loadDraft(sheet.id), [sheet.id]);
   const [fillBlanksScore, setFillBlanksScore] = useState<number | null>(draft.fillBlanks ?? null);
   const [orderingScore, setOrderingScore] = useState<number | null>(draft.ordering ?? null);
@@ -116,6 +138,10 @@ export function ExternalPassageView({ sheet, unitId, onComplete, lastAttempt }: 
   const [showPassage, setShowPassage] = useState(false);
   // 리마운트 없이 연습 컴포넌트를 초기화하기 위한 키
   const [attemptKey, setAttemptKey] = useState(0);
+  // 연습 하나만 다시 할 때 그 연습만 초기화하는 키
+  const [exerciseKeys, setExerciseKeys] = useState<Record<ExerciseKey, number>>({ fillBlanks: 0, ordering: 0, translation: 0 });
+  // 이번 세션에서 제출한 기록 — 서버 이력 앞에 붙여 새로고침 없이도 "도전 기록"이 늘어난다
+  const [sessionAttempts, setSessionAttempts] = useState<ExternalPassageAttemptBrief[]>([]);
 
   // Video progress state
   const [videoProgress, setVideoProgress] = useState<NaesinEpVideoProgress | null>(null);
@@ -159,6 +185,15 @@ export function ExternalPassageView({ sheet, unitId, onComplete, lastAttempt }: 
     saveDraft(sheet.id, { translation: score, translationWrongs: wrongs });
   }, [sheet.id]);
 
+  /** 연습 하나만 다시 하기 — 셋을 다 끝내기 전에도 언제든 (사장님·학생 요청 9/24: "한 번 하면 더 못한다") */
+  function resetExercise(key: ExerciseKey) {
+    dropDraft(sheet.id, key);
+    if (key === 'fillBlanks') setFillBlanksScore(null);
+    if (key === 'ordering') setOrderingScore(null);
+    if (key === 'translation') { setTranslationScore(null); setTranslationWrongs([]); }
+    setExerciseKeys((k) => ({ ...k, [key]: k[key] + 1 }));
+  }
+
   function startRetry() {
     clearDraft(sheet.id);
     setFillBlanksScore(null);
@@ -201,6 +236,11 @@ export function ExternalPassageView({ sheet, unitId, onComplete, lastAttempt }: 
       });
       clearDraft(sheet.id);
       setSubmitted(true);
+      setSessionAttempts((prev) => [{
+        score: Math.round(((fillBlanksScore ?? 0) + (orderingScore ?? 0) + (translationScore ?? 0)) / 3),
+        answers: [fillBlanksScore, orderingScore, translationScore],
+        created_at: new Date().toISOString(),
+      }, ...prev]);
       onComplete?.();
     } catch {
       // handled by fetchWithToast
@@ -225,6 +265,8 @@ export function ExternalPassageView({ sheet, unitId, onComplete, lastAttempt }: 
       ? { avg: lastAttempt.score, fill: prevSub?.fill ?? null, ordering: prevSub?.ordering ?? null, translation: prevSub?.translation ?? null }
       : null;
   const sentences = sheet.questions as unknown as ExternalPassageSentence[];
+  const allAttempts = [...sessionAttempts, ...(history ?? [])];
+  const bestScore = allAttempts.length > 0 ? Math.max(...allAttempts.map((a) => a.score)) : null;
 
   return (
     <div className="space-y-4">
@@ -298,6 +340,33 @@ export function ExternalPassageView({ sheet, unitId, onComplete, lastAttempt }: 
               다시 풀기
             </Button>
           </div>
+          {allAttempts.length > 0 && (
+            <div className="rounded-md border bg-background px-3 py-2 text-xs">
+              <div className="flex items-center justify-between mb-1">
+                <span className="font-medium">도전 기록 {allAttempts.length}회</span>
+                {bestScore !== null && <span className="text-muted-foreground">최고 {bestScore}점</span>}
+              </div>
+              <ol className="space-y-0.5 text-muted-foreground">
+                {allAttempts.slice(0, 5).map((a, i) => {
+                  const sub = subScoresOf(a);
+                  const n = allAttempts.length - i;
+                  return (
+                    <li key={a.created_at + i} className="flex justify-between gap-2">
+                      <span>{n}회 · {new Date(a.created_at).toLocaleDateString('ko-KR', { month: 'numeric', day: 'numeric' })}</span>
+                      <span>
+                        <span className="font-medium text-foreground">{a.score}점</span>
+                        {sub && (
+                          <span className="ml-1">
+                            (빈칸 {sub.fill ?? '-'} · 순서 {sub.ordering} · 영작 {sub.translation})
+                          </span>
+                        )}
+                      </span>
+                    </li>
+                  );
+                })}
+              </ol>
+            </div>
+          )}
           {showPassage && (
             <ol className="space-y-2 text-sm">
               {sentences.map((q, i) => (
@@ -339,12 +408,17 @@ export function ExternalPassageView({ sheet, unitId, onComplete, lastAttempt }: 
 
           <TabsContent value="fillBlanks" className="mt-4">
             {fillBlanksScore !== null ? (
-              <div className="text-center py-8 text-muted-foreground">
-                <CheckCircle2 className="h-8 w-8 text-green-500 mx-auto mb-2" />
+              <div className="text-center py-8 text-muted-foreground space-y-3">
+                <CheckCircle2 className="h-8 w-8 text-green-500 mx-auto" />
                 <p>빈칸 채우기 완료! ({fillBlanksScore}점)</p>
+                <Button variant="outline" size="sm" onClick={() => resetExercise('fillBlanks')}>
+                  <RotateCcw className="h-3.5 w-3.5 mr-1" />
+                  빈칸 채우기 다시 하기
+                </Button>
               </div>
             ) : (
               <FillBlanksExercise
+                key={exerciseKeys.fillBlanks}
                 passage={passage}
                 onComplete={handleFillBlanksComplete}
               />
@@ -353,12 +427,17 @@ export function ExternalPassageView({ sheet, unitId, onComplete, lastAttempt }: 
 
           <TabsContent value="ordering" className="mt-4">
             {orderingScore !== null ? (
-              <div className="text-center py-8 text-muted-foreground">
-                <CheckCircle2 className="h-8 w-8 text-green-500 mx-auto mb-2" />
+              <div className="text-center py-8 text-muted-foreground space-y-3">
+                <CheckCircle2 className="h-8 w-8 text-green-500 mx-auto" />
                 <p>순서 배열 완료! ({orderingScore}점)</p>
+                <Button variant="outline" size="sm" onClick={() => resetExercise('ordering')}>
+                  <RotateCcw className="h-3.5 w-3.5 mr-1" />
+                  순서 배열 다시 하기
+                </Button>
               </div>
             ) : (
               <OrderingExercise
+                key={exerciseKeys.ordering}
                 passage={passage}
                 onComplete={handleOrderingComplete}
               />
@@ -367,12 +446,17 @@ export function ExternalPassageView({ sheet, unitId, onComplete, lastAttempt }: 
 
           <TabsContent value="translation" className="mt-4">
             {translationScore !== null ? (
-              <div className="text-center py-8 text-muted-foreground">
-                <CheckCircle2 className="h-8 w-8 text-green-500 mx-auto mb-2" />
+              <div className="text-center py-8 text-muted-foreground space-y-3">
+                <CheckCircle2 className="h-8 w-8 text-green-500 mx-auto" />
                 <p>영작 완료! ({translationScore}점)</p>
+                <Button variant="outline" size="sm" onClick={() => resetExercise('translation')}>
+                  <RotateCcw className="h-3.5 w-3.5 mr-1" />
+                  영작 다시 하기
+                </Button>
               </div>
             ) : (
               <TranslationExercise
+                key={exerciseKeys.translation}
                 passage={passage}
                 onComplete={handleTranslationComplete}
               />

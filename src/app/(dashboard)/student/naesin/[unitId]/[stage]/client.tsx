@@ -85,6 +85,8 @@ interface StageData {
     answers?: unknown;
     created_at: string;
   }>;
+  /** 외부지문: 시트별 전체 시도 이력 (최신순) */
+  attemptHistoryBySheet?: Record<string, { score: number; answers?: unknown; created_at: string }[]>;
   mockExamSheets?: (NaesinProblemSheet | NaesinProblemSheetLite)[];
   lastReviewProblemSheets?: (NaesinProblemSheet | NaesinProblemSheetLite)[];
   similarProblems?: NaesinSimilarProblem[];
@@ -132,6 +134,7 @@ const STAGE_RENDERERS: Record<StageKey, StageRenderer> = {
       onStageComplete={onStageComplete}
       externalPassageSheets={stageData.externalPassageSheets}
       externalAttempts={stageData.lastAttemptBySheet}
+      externalAttemptHistory={stageData.attemptHistoryBySheet}
       onActiveSheetChange={onActiveSheetChange}
       requiredStages={stageData.passageRequiredStages}
       translationSentencesPerPage={stageData.translationSentencesPerPage}

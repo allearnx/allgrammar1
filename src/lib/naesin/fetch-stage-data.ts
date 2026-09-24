@@ -79,7 +79,7 @@ async function fetchPassageData(supabase: SupabaseClient, userId: string, unitId
   ]);
   const p = progressRes.data;
   const externalPassageSheets = (externalRes.data || []) as unknown as NaesinProblemSheet[];
-  const { bestScoreBySheet, lastAttemptBySheet } = await fetchAttemptSummary(
+  const { bestScoreBySheet, lastAttemptBySheet, attemptHistoryBySheet } = await fetchAttemptSummary(
     supabase, externalPassageSheets.map((sh) => sh.id), userId,
   );
   return {
@@ -87,6 +87,7 @@ async function fetchPassageData(supabase: SupabaseClient, userId: string, unitId
     externalPassageSheets,
     bestScoreBySheet,
     lastAttemptBySheet,
+    attemptHistoryBySheet,
     passageRequiredStages: (settingsRes.data?.passage_required_stages as string[] | null) ?? ['fill_blanks', 'translation'],
     translationSentencesPerPage: (settingsRes.data?.translation_sentences_per_page as number | null) ?? 10,
     passageRound1Completed: p?.passage_completed ?? false,
@@ -220,6 +221,8 @@ async function fetchAttemptSummary(supabase: SupabaseClient, sheetIds: string[],
     answers?: unknown;
     created_at: string;
   }> = {};
+  // 시트별 전체 시도 이력 (최신순) — 외부지문 "도전 기록" 표시용
+  const attemptHistoryBySheet: Record<string, { score: number; answers?: unknown; created_at: string }[]> = {};
   for (const row of attemptsRes.data || []) {
     const prev = bestScoreBySheet[row.sheet_id];
     if (prev == null || row.score > prev) {
@@ -235,9 +238,10 @@ async function fetchAttemptSummary(supabase: SupabaseClient, sheetIds: string[],
         created_at: row.created_at,
       };
     }
+    (attemptHistoryBySheet[row.sheet_id] ??= []).push({ score: row.score, answers: row.answers, created_at: row.created_at });
   }
 
-  return { bestScoreBySheet, lastAttemptBySheet };
+  return { bestScoreBySheet, lastAttemptBySheet, attemptHistoryBySheet };
 }
 
 async function fetchLastReviewData(supabase: SupabaseClient, unitId: string) {
