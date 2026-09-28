@@ -3,6 +3,7 @@ import { createApiHandler } from '@/lib/api/handler';
 import { blogCreateSchema, blogPatchSchema, idSchema } from '@/lib/api/schemas';
 import { dbResult } from '@/lib/api/errors';
 import { sanitizeHtml } from '@/lib/sanitize-html';
+import { ensureUniqueSlug } from '@/lib/blog/unique-slug';
 
 export const GET = createApiHandler(
   { roles: ['boss'], hasBody: false },
@@ -22,6 +23,7 @@ export const POST = createApiHandler(
   async ({ body, supabase, user }) => {
     const insertData = {
       ...body,
+      slug: await ensureUniqueSlug(supabase, body.slug),
       content: sanitizeHtml(body.content),
       author_id: user.id,
       published_at: body.is_published ? new Date().toISOString() : null,
@@ -40,6 +42,11 @@ export const PATCH = createApiHandler(
     const cleanUpdates: Record<string, unknown> = Object.fromEntries(
       Object.entries(updates).filter(([, v]) => v !== undefined)
     );
+
+    // 슬러그를 바꿨다면 다른 글과 겹치지 않게 조정
+    if (typeof cleanUpdates.slug === 'string') {
+      cleanUpdates.slug = await ensureUniqueSlug(supabase, cleanUpdates.slug as string, id);
+    }
 
     // Sanitize content if provided
     if (typeof cleanUpdates.content === 'string') {
