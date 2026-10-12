@@ -118,7 +118,10 @@
   AI 무관 로직은 lib/naesin/{split-pdf-for-extract,extract-dedupe,extract-prompt}.ts, AI 호출 3개는
   lib/naesin/extract-paraphrase-service.ts(클라이언트 주입 → 가짜로 테스트). 테스트 0 → 33건.
   **추출 파이프라인 고칠 때는 서비스 파일을 고치고 테스트를 같이 갱신할 것** (라우트는 분기만).
-- 다음 후보: ① 진단 화면 diagnostic-client.tsx(966줄) 분리 ② problem-validator.ts 규칙별 분리 ③ voca/client.tsx(701줄).
+- 4차(refactor/diagnostic-client-split, 3단계 커밋): 진단 화면 966줄 → 메인 93줄 + _components/
+  (intro·quiz·contact-gate·result·lineup-card 화면, use-diagnostic-flow 상태 머신, pending-diagnostic 순수 로직+테스트 8건).
+  **진단 흐름 고칠 때는 use-diagnostic-flow.ts, 문구·레이아웃은 해당 화면 파일.** 로컬 /level-test 3라운드 완주→게이트 확인.
+- 다음 후보: ① problem-validator.ts 규칙별 분리 ② voca/client.tsx(701줄).
 - 보류: `as` 단언 경고 667건(규칙 완화 검토), select('*') 19건(유령 컬럼 원칙 유지), naesin↔voca 학습 컴포넌트 통합.
 
 ---
