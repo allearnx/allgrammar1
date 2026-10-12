@@ -12,8 +12,9 @@ import { G } from '@/app/(public)/google-palette';
  * 랜딩에서는 파랑 전면 피날레(섹션 배경 리듬의 종착점), 모달에서는 배경 없이 폼만.
  */
 export default function ConsultationForm({
+  onSuccess,
   embedded = false,
-}: { embedded?: boolean } = {}) {
+}: { onSuccess?: () => void; embedded?: boolean } = {}) {
   const [studentName, setStudentName] = useState('');
   const [studentGrade, setStudentGrade] = useState('');
   const [parentPhone, setParentPhone] = useState('');
@@ -283,7 +284,7 @@ export default function ConsultationForm({
                 감사합니다.
               </p>
               <button
-                onClick={() => setShowModal(false)}
+                onClick={() => { setShowModal(false); onSuccess?.(); }}
                 className="w-full py-4 bg-brand-600 hover:bg-brand-800 text-white font-bold rounded-full transition-colors"
               >
                 확인
