@@ -10,42 +10,10 @@ export type QuestionType =
   | 'sentence'      // 영작·오류수정·단어배열·문장 (AI 채점)
   | 'multi_part';   // 복합 (subParts)
 
-// ── 목표 스키마 (Phase 2~ 에서 채점/저장이 이걸로 전환) ──
-export interface QuestionBase {
-  number: number;
-  question: string;
-  type: QuestionType;
-  tag?: string;        // 교육적 분류 (영작/빈칸/오류수정/괄호선택/인라인마커…) — 채점 무관 메타
-  imageUrl?: string;   // 실제 사진만 (인라인 '(그림:설명)'은 question 텍스트)
-  explanation?: string;
-}
-export interface SingleChoiceQ extends QuestionBase {
-  type: 'single_choice';
-  options: string[];
-  choicesAreMarkers?: boolean; // 보기가 지문 속 ⓐ~ⓔ 밑줄을 가리킴 (렌더/작성 힌트, 채점 동일)
-  answer: { value: number };
-}
-export interface MultiChoiceQ extends QuestionBase {
-  type: 'multi_choice';
-  options: string[];
-  answer: { value: number[] };
-}
-export interface ShortAnswerQ extends QuestionBase {
-  type: 'short_answer';
-  answer: { value: string; accepted?: string[] };
-}
-export interface SentenceQ extends QuestionBase {
-  type: 'sentence';
-  answer: { value: string; accepted?: string[]; aiGraded?: boolean };
-}
-export interface MultiPartQ extends QuestionBase {
-  type: 'multi_part';
-  parts: { label: string; value: string; accepted?: string[] }[];
-}
-export type TypedQuestion = SingleChoiceQ | MultiChoiceQ | ShortAnswerQ | SentenceQ | MultiPartQ;
+// 목표 스키마(QuestionBase·SingleChoiceQ 등)는 docs/question-type-model.md 참고 — 코드로는 Phase 2에서 도입.
 
 // ── 분류기 (현재 flat 문항 → 타입 추론) ──
-export interface ClassifyResult {
+interface ClassifyResult {
   type: QuestionType;
   tag?: string;
   choicesAreMarkers?: boolean;

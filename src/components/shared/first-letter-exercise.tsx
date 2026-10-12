@@ -16,7 +16,7 @@ interface FirstLetterSentence {
   speaker?: string;
 }
 
-export interface WrongFirstLetter {
+interface WrongFirstLetter {
   type: 'first_letter';
   koreanText: string;
   userAnswer: string;

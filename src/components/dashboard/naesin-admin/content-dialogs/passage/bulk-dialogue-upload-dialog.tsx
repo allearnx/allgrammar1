@@ -39,7 +39,7 @@ function parseSpeaker(line: string): { speaker?: string; text: string } {
   return { text: line };
 }
 
-export function parseDialogueBlocks(text: string): { dialogues: ParsedDialogue[]; errors: string[] } {
+function parseDialogueBlocks(text: string): { dialogues: ParsedDialogue[]; errors: string[] } {
   const blocks = text.trim().split(/^---$/m).map((b) => b.trim()).filter(Boolean);
   const dialogues: ParsedDialogue[] = [];
   const errors: string[] = [];
@@ -180,7 +180,7 @@ export function BulkDialogueUploadDialog({ unitId, onAdd }: { unitId: string; on
       setOpen(false);
       resetForm();
       toast.success(`${successCount}개 대화문이 추가되었습니다`);
-    } catch (err) {
+    } catch {
       if (successCount > 0) {
         toast.warning(`${successCount}/${preview.length}개 저장 완료, 나머지 실패`);
         onAdd();

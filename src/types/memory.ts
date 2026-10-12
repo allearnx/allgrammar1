@@ -1,4 +1,4 @@
-export type MemoryItemType = 'vocabulary' | 'sentence' | 'grammar_rule';
+type MemoryItemType = 'vocabulary' | 'sentence' | 'grammar_rule';
 
 export interface MemoryItem {
   id: string;
@@ -27,17 +27,6 @@ export interface StudentMemoryProgress {
   spelling_correct_count: number;
   spelling_wrong_count: number;
   is_mastered: boolean;
-  created_at: string;
-  updated_at: string;
-}
-
-export interface StudentProgress {
-  id: string;
-  student_id: string;
-  grammar_id: string;
-  video_watched_seconds: number;
-  video_completed: boolean;
-  video_last_position: number;
   created_at: string;
   updated_at: string;
 }

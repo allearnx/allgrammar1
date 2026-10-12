@@ -42,7 +42,7 @@ export interface NaesinSidebarExam {
   }[];
 }
 
-export interface NavItem {
+interface NavItem {
   href: string;
   label: string;
   icon: React.ComponentType<{ className?: string }>;
@@ -57,7 +57,7 @@ export interface NavGroup {
   items: NavItem[];
 }
 
-export const NAV_CONFIG: Record<string, NavGroup[]> = {
+const NAV_CONFIG: Record<string, NavGroup[]> = {
   student: [
     {
       items: [
@@ -242,7 +242,7 @@ const SERVICE_HREF_MAP: Record<string, string> = {
   voca: '/student/voca',
 };
 
-export const HOMEPAGE_MANAGER_GROUP: NavGroup = {
+const HOMEPAGE_MANAGER_GROUP: NavGroup = {
   label: '홈페이지 관리',
   items: [
     { href: '/boss/consultations', label: '상담 신청', icon: MessageSquare },

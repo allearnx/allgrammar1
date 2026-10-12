@@ -8,12 +8,11 @@ import type { SubscriptionPlan } from '@/types/billing';
 
 interface PlanCardProps {
   plan: SubscriptionPlan;
-  isEditing: boolean;
   onToggleEdit: () => void;
   onToggleActive: () => void;
 }
 
-export function PlanCard({ plan, isEditing, onToggleEdit, onToggleActive }: PlanCardProps) {
+export function PlanCard({ plan, onToggleEdit, onToggleActive }: PlanCardProps) {
   return (
     <Card className={!plan.is_active ? 'opacity-50' : ''}>
       <CardHeader className="flex flex-row items-start justify-between space-y-0">

@@ -1,4 +1,4 @@
-import { describe, it, expect, vi } from 'vitest';
+import { describe, it, expect } from 'vitest';
 import { computeClassReview } from '@/lib/reports/compute-class-review';
 
 function mockSupabase(responses: Record<string, { data: unknown[] | null }>) {

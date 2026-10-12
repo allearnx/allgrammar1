@@ -20,7 +20,7 @@ import { AddTemplateFromPdfDialog } from '@/components/dashboard/naesin-admin/co
 import type { KokkokSet } from '@/lib/dashboard/queries';
 import type { NaesinProblemQuestion } from '@/types/naesin';
 
-export const KOKKOK_TOPIC = '내신 콕콕';
+const KOKKOK_TOPIC = '내신 콕콕';
 
 interface ContentGrammar {
   id: string;

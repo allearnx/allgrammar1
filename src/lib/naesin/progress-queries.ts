@@ -8,12 +8,10 @@ export const STAGE_COMPLETION_COLS = [
   'mock_exam_completed',
 ] as const;
 
-export const ROUND2_STAGE_COLS = [
+const ROUND2_STAGE_COLS = [
   'round2_passage_completed',
   'round2_dialogue_completed',
 ] as const;
-
-export type StageField = (typeof STAGE_COMPLETION_COLS)[number];
 
 /** 완료 스테이지 개수 카운트 */
 export function countCompletedStages(

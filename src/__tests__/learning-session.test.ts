@@ -180,7 +180,7 @@ describe('learningSessionHeartbeatSchema', () => {
 
 describe('POST /api/learning/session', () => {
   it('returns 200 for naesin heartbeat (existing row)', async () => {
-    const { from, chain } = mockSupabaseChain({
+    const { from } = mockSupabaseChain({
       data: { total_learning_seconds: 100 },
       error: null,
     });

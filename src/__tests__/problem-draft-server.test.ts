@@ -71,15 +71,6 @@ const fakeStudent = {
   is_active: true,
 };
 
-const fakeTeacher = {
-  id: 'teacher-1',
-  email: 'teacher@test.com',
-  role: 'teacher' as const,
-  full_name: 'Teacher',
-  academy_id: 'academy-1',
-  is_active: true,
-};
-
 const sampleDraftData = {
   version: 1,
   mode: 'interactive',
@@ -425,7 +416,7 @@ describe('problems/submit draft cleanup', () => {
       ],
       mode: 'interactive',
     };
-    const { from: defaultFrom, chain } = mockSupabaseChain({ data: sheetData, error: null });
+    const { chain } = mockSupabaseChain({ data: sheetData, error: null });
     // Table-aware from: return arrays for list queries, single for sheet lookup
     const from = vi.fn((table: string) => {
       if (table === 'naesin_problem_sheets' || table === 'naesin_problem_attempts') {

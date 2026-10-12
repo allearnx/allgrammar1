@@ -1,8 +1,7 @@
 'use client';
 
 import { useEffect, useState, useCallback } from 'react';
-import Link from 'next/link';
-import { Check, CheckCircle, Crown, Users } from 'lucide-react';
+import { CheckCircle, Crown } from 'lucide-react';
 import { createClient } from '@/lib/supabase/client';
 import { SubscriptionBanner } from '@/components/billing/subscription-banner';
 import { SubscriptionInfoCard } from '@/components/billing/subscription-info-card';
@@ -26,7 +25,6 @@ export function BillingPageContent({ mode }: BillingPageContentProps) {
   const [subscription, setSubscription] = useState<SubscriptionWithPlan | null>(null);
   const [payments, setPayments] = useState<PaymentHistory[]>([]);
   const [plans, setPlans] = useState<SubscriptionPlan[]>([]);
-  const [currentPlanId, setCurrentPlanId] = useState<string | null>(null);
   const [orders, setOrders] = useState<Order[]>([]);
   const [services, setServices] = useState<{ service: string }[]>([]);
   const [loading, setLoading] = useState(true);
@@ -81,7 +79,6 @@ export function BillingPageContent({ mode }: BillingPageContentProps) {
     if (sub) {
       const typedSub = sub as SubscriptionWithPlan;
       setSubscription(typedSub);
-      setCurrentPlanId(sub.plan_id);
       if (mode === 'academy') {
         setTier(deriveTier({ status: typedSub.status, tier: typedSub.tier }));
       }
@@ -212,107 +209,6 @@ export function BillingPageContent({ mode }: BillingPageContentProps) {
           </section>
         )}
       </div>
-    </div>
-  );
-}
-
-/* ─────── PlanCard (Toss-style) ─────── */
-
-const FEATURES_BY_PLAN: Record<string, string[]> = {
-  '무료': ['학생 5명', '보카·내신 둘 다 체험 (보카 3 Day · 내신 1단원)', '기본 통계'],
-  'Pro 10': ['학생 10명', '올인내신 + 올킬보카', '차트 + 랭킹', '학생 리포트'],
-  'Pro 50': ['학생 50명', '올인내신 + 올킬보카', '차트 + 랭킹', '대량 관리', '학생 리포트'],
-  'Pro 100': ['학생 100명', '올인내신 + 올킬보카', '차트 + 랭킹', '대량 관리', '학생 리포트'],
-  'Pro 180': ['학생 180명', '올인내신 + 올킬보카', '차트 + 랭킹', '대량 관리', '학생 리포트'],
-};
-
-function PlanCard({
-  plan,
-  isCurrent,
-  isFree,
-  popular,
-}: {
-  plan: SubscriptionPlan;
-  isCurrent: boolean;
-  isFree: boolean;
-  popular?: boolean;
-}) {
-  const isFreePlan = plan.price_per_unit === 0;
-  const features = FEATURES_BY_PLAN[plan.name] || [];
-
-  return (
-    <div
-      className={`relative flex flex-col rounded-2xl p-5 transition-all ${
-        popular
-          ? 'bg-[#3182F6] text-white shadow-lg shadow-blue-200/50'
-          : 'bg-white border border-gray-100 shadow-[0_2px_12px_rgba(0,0,0,0.04)]'
-      } ${isCurrent ? 'ring-2 ring-[#3182F6] ring-offset-2' : ''}`}
-    >
-      {popular && (
-        <div className="absolute -top-2.5 left-1/2 -translate-x-1/2 rounded-full bg-white px-3 py-0.5 text-[11px] font-bold text-[#3182F6] shadow-sm">
-          인기
-        </div>
-      )}
-
-      {/* 플랜명 */}
-      <div className="flex items-center gap-2 mb-3">
-        <div className={`flex h-7 w-7 items-center justify-center rounded-lg ${popular ? 'bg-white/20' : 'bg-gray-50'}`}>
-          <Users className={`h-3.5 w-3.5 ${popular ? 'text-white' : 'text-gray-400'}`} />
-        </div>
-        <h3 className={`text-[13px] font-bold ${popular ? 'text-white' : 'text-gray-900'}`}>
-          {plan.name}
-        </h3>
-      </div>
-
-      {/* 가격 */}
-      <div className="mb-4">
-        {isFreePlan ? (
-          <span className={`text-2xl font-bold ${popular ? 'text-white' : 'text-gray-900'}`}>무료</span>
-        ) : (
-          <>
-            <span className={`text-2xl font-bold tabular-nums ${popular ? 'text-white' : 'text-gray-900'}`}>
-              {plan.price_per_unit.toLocaleString('ko-KR')}
-            </span>
-            <span className={`text-xs ml-0.5 ${popular ? 'text-white/60' : 'text-gray-400'}`}>원/월</span>
-          </>
-        )}
-      </div>
-
-      {/* 기능 */}
-      <ul className="mb-5 flex-1 space-y-2">
-        {features.map((f) => (
-          <li key={f} className="flex items-start gap-1.5 text-[12px]">
-            <Check className={`h-3.5 w-3.5 mt-0.5 shrink-0 ${popular ? 'text-white/70' : 'text-[#3182F6]'}`} />
-            <span className={popular ? 'text-white/90' : 'text-gray-600'}>{f}</span>
-          </li>
-        ))}
-      </ul>
-
-      {/* CTA */}
-      {isCurrent ? (
-        <div className={`rounded-xl py-2.5 text-center text-[13px] font-semibold ${
-          popular ? 'bg-white/20 text-white' : 'bg-gray-50 text-gray-400'
-        }`}>
-          현재 플랜
-        </div>
-      ) : isFree && !isFreePlan ? (
-        <Link
-          href={`/admin/upgrade?planId=${plan.id}`}
-          className={`block rounded-xl py-2.5 text-center text-[13px] font-semibold transition-all ${
-            popular
-              ? 'bg-white text-[#3182F6] hover:bg-white/90'
-              : 'bg-[#3182F6] text-white hover:bg-[#2272EB]'
-          }`}
-        >
-          업그레이드
-        </Link>
-      ) : (
-        <div className={`rounded-xl py-2.5 text-center text-[13px] font-semibold ${
-          popular ? 'bg-white/20 text-white' : 'bg-gray-50 text-gray-400'
-        }`}>
-          플랜 변경 문의
-        </div>
-      )}
     </div>
   );
 }

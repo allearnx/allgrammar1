@@ -10,7 +10,7 @@ const norm = (s: string) =>
   s.toLowerCase().replace(/<\/?u>/g, '').replace(/[’‘]/g, "'").replace(/_{2,}/g, '_')
     .replace(/[^a-z0-9'_ ]/g, ' ').replace(/\s+/g, ' ').trim();
 
-export function extractSentences(q: Pick<NaesinProblemQuestion, 'question' | 'options'>): Set<string> {
+function extractSentences(q: Pick<NaesinProblemQuestion, 'question' | 'options'>): Set<string> {
   const out = new Set<string>();
   const grab = (t: unknown) => {
     for (const s of String(t ?? '').split(/\n|(?<=[.?!])\s+/)) {
@@ -23,7 +23,7 @@ export function extractSentences(q: Pick<NaesinProblemQuestion, 'question' | 'op
   return out;
 }
 
-export interface DuplicateHit { source: string; number: number; sentence: string }
+interface DuplicateHit { source: string; number: number; sentence: string }
 
 /** 주어진 문항들이 기존 시트·템플릿과 문장 단위로 겹치는 곳을 반환 (excludeTemplateId = 자기 자신 제외) */
 export async function findDuplicateSentences(

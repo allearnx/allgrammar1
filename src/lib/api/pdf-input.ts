@@ -4,7 +4,7 @@ type DocumentSource =
   | { type: 'base64'; media_type: 'application/pdf'; data: string }
   | { type: 'url'; url: string };
 
-export interface PdfInput {
+interface PdfInput {
   documentBlock: { type: 'document'; source: DocumentSource };
   storagePath?: string;
   /** FormData의 file 외 필드 또는 JSON body의 나머지 필드 */
@@ -57,7 +57,7 @@ export type DocOrImageBlock =
   | { type: 'document'; source: DocumentSource }
   | { type: 'image'; source: { type: 'base64'; media_type: ImageMedia; data: string } | { type: 'url'; url: string } };
 
-export interface DocOrImageInput {
+interface DocOrImageInput {
   block: DocOrImageBlock;
   storagePath?: string;
   extraFields: Record<string, string>;

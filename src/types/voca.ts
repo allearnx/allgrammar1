@@ -30,7 +30,7 @@ export interface VocaDay {
   created_at: string;
 }
 
-export interface VocaIdiom {
+interface VocaIdiom {
   en: string;
   ko: string;
   example_en?: string;
@@ -165,7 +165,7 @@ export const VOCA_VOCABULARY_COLUMNS = 'id, day_id, front_text, back_text, part_
 
 export const VOCA_STUDENT_PROGRESS_COLUMNS = 'id, student_id, day_id, flashcard_completed, quiz_score, spelling_score, exam_score, matching_score, matching_attempt, matching_completed, created_at, updated_at, round2_flashcard_completed, round2_quiz_score, round2_matching_score, round2_matching_attempt, round2_matching_completed';
 
-export type ServiceType = 'naesin' | 'voca';
+type ServiceType = 'naesin' | 'voca';
 
 export interface ServiceAssignment {
   id: string;

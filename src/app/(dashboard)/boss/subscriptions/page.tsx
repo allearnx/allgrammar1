@@ -31,7 +31,7 @@ export default function BossSubscriptionsPage() {
     }
   }, [statusFilter]);
 
-  // eslint-disable-next-line react-hooks/set-state-in-effect
+   
   useEffect(() => { fetchSubs(); }, [fetchSubs]);
 
   const requestTierChange = (subId: string, newTier: 'free' | 'paid') => {

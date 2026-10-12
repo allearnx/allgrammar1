@@ -3,7 +3,7 @@ import type { VocaBook, VocaDay, VocaStudentProgress } from '@/types/voca';
 import { VOCA_BOOKS_COLUMNS, VOCA_DAYS_COLUMNS, VOCA_STUDENT_PROGRESS_COLUMNS } from '@/types/voca';
 import { isR1Complete, isR2Complete } from '@/lib/dashboard/voca-helpers';
 
-export interface VocaDashboardData {
+interface VocaDashboardData {
   books: VocaBook[];
   days: VocaDay[];
   progressList: VocaStudentProgress[];

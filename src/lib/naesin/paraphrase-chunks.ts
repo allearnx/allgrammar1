@@ -1,7 +1,7 @@
 import { sameBank, bankWords } from './word-bank-sets';
 
 /** 연속 문항이 같은 공통 지문/보기 상자를 공유하는지 */
-export function sharesPassage(a: Record<string, unknown>, b: Record<string, unknown>): boolean {
+function sharesPassage(a: Record<string, unknown>, b: Record<string, unknown>): boolean {
   // word bank 세트: 보기 단어 집합이 같으면 같은 세트 (소거법 유지 위해 안 쪼갬)
   if (sameBank(a, b)) return true;
   // 공통 지문: 긴 공통 접두사 휴리스틱
@@ -14,7 +14,7 @@ export function sharesPassage(a: Record<string, unknown>, b: Record<string, unkn
 /** 절반 추출의 그룹 키 — 같은 유형 묶음을 전역으로 묶는다 (연속 여부 무관).
  *  첫 줄 완전 일치 방식은 추출 과정의 표현 편차·지시문+문장 한 줄 결합에 끊겨
  *  347문항 중 266문항이 유지된 실사례가 있어, 키 기반으로 전환. */
-export function thinGroupKey(q: Record<string, unknown>): string | null {
+function thinGroupKey(q: Record<string, unknown>): string | null {
   const question = String(q?.question ?? '');
   // word bank 세트: 보기 단어 집합
   const bank = bankWords(q);

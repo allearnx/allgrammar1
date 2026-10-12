@@ -7,7 +7,7 @@ import {
   getFreeVocaDayLimit,
   FREE_VOCA_DAY_LIMIT,
 } from '@/lib/billing/feature-gate';
-import type { Feature, Tier } from '@/lib/billing/feature-gate';
+import type { Feature } from '@/lib/billing/feature-gate';
 
 describe('getFreeVocaDayLimit (보카 무료 체험 7일)', () => {
   const iso = (daysAgo: number) => new Date(Date.now() - daysAgo * 86400000).toISOString();

@@ -28,7 +28,7 @@ export default function BossPlansPage() {
     }
   }, []);
 
-  // eslint-disable-next-line react-hooks/set-state-in-effect
+   
   useEffect(() => { fetchPlans(); }, [fetchPlans]);
 
   async function handleCreate(form: FormData) {
@@ -86,7 +86,6 @@ export default function BossPlansPage() {
           <PlanCard
             key={plan.id}
             plan={plan}
-            isEditing={editingId === plan.id}
             onToggleEdit={() => setEditingId(editingId === plan.id ? null : plan.id)}
             onToggleActive={() => handleToggleActive(plan)}
           />

@@ -6,7 +6,7 @@ import { useProblemDraft } from '@/hooks/use-problem-draft';
 import type { AiFeedback, WrongItem, InteractiveDraft } from '@/hooks/use-problem-draft';
 import { matchMcqAnswer, matchSubParts, matchFilledBlanks } from '@/lib/naesin/normalize-answer';
 
-export type AnswerStatus = 'correct' | 'retry_correct' | 'wrong';
+type AnswerStatus = 'correct' | 'retry_correct' | 'wrong';
 
 export const CHUNK_SIZE = 25;
 

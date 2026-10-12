@@ -156,8 +156,6 @@ export const vocaBookAssignmentDeleteSchema = z.object({
 
 // ── 어휘 레벨 진단 Schemas ──
 
-const diagnosticBand = z.enum(['L0', 'L1', 'L2', 'L3', 'L4', 'L5', 'L6']);
-
 /**
  * 토큰 라운드 — 문항은 HMAC 봉인 토큰으로 식별하고 클라이언트는 답만 보고한다:
  * 타이핑 문항은 typed, 5지선다 문항은 chosenIndex (null = "모르겠어요").

@@ -26,15 +26,15 @@ type SupabaseLike = {
 };
 
 /** 라운드 앞 배치 크기 (뒤 배치 = ROUND_SIZE − HEAD) */
-export const HEAD_SIZE = ROUND_SIZE / 2;
+const HEAD_SIZE = ROUND_SIZE / 2;
 /** 앞 배치의 타이핑 문항 수 (선다 3 + 타이핑 2) */
-export const HEAD_TYPING = 2;
+const HEAD_TYPING = 2;
 /** 뒤 배치 기본 타이핑 문항 수 — 라운드 전체 타이핑 40% */
-export const TAIL_TYPING_BASE = 2;
+const TAIL_TYPING_BASE = 2;
 /** 앞 배치 ≥80%(승급 조짐) 시 뒤 배치 타이핑 문항 수 (선다 2 + 타이핑 3) — 라운드 전체 타이핑 50% */
-export const TAIL_TYPING_HOT = 3;
+const TAIL_TYPING_HOT = 3;
 
-export type NextRoundResult =
+type NextRoundResult =
   | { kind: 'questions'; band: BandKey; questions: DiagnosticQuestion[] }
   | { kind: 'done' }
   | { kind: 'error'; status: number; message: string };

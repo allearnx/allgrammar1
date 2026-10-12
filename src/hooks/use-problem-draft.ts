@@ -55,13 +55,13 @@ export interface PaperTestDraft {
   answersMap: Record<number, string | number>;
 }
 
-export type ProblemDraft = InteractiveDraft | ImageAnswerDraft | PaperTestDraft;
+type ProblemDraft = InteractiveDraft | ImageAnswerDraft | PaperTestDraft;
 
 type CommonKeys = 'version' | 'sheetId' | 'questionCount' | 'savedAt';
 type InteractiveDraftInput = Omit<InteractiveDraft, CommonKeys>;
 type ImageAnswerDraftInput = Omit<ImageAnswerDraft, CommonKeys>;
 type PaperTestDraftInput = Omit<PaperTestDraft, CommonKeys>;
-export type DraftInput = InteractiveDraftInput | ImageAnswerDraftInput | PaperTestDraftInput;
+type DraftInput = InteractiveDraftInput | ImageAnswerDraftInput | PaperTestDraftInput;
 
 export function useProblemDraft(sheetId: string, questionCount: number) {
   const key = draftKey(sheetId);

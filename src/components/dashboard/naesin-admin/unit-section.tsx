@@ -17,7 +17,7 @@ import { UnitContentManager } from './unit-content-manager';
 import { ConfirmDialog } from '@/components/shared/confirm-dialog';
 import { fetchWithToast } from '@/lib/fetch-with-toast';
 
-export const UNIT_OPTIONS = [
+const UNIT_OPTIONS = [
   { value: '1', label: 'Lesson 1' },
   { value: '2', label: 'Lesson 2' },
   { value: '3', label: 'Lesson 3' },

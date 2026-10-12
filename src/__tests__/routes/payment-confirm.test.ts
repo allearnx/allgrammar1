@@ -62,7 +62,7 @@ function makeRequest(body: unknown) {
     method: 'POST',
     body: JSON.stringify(body),
     headers: { 'content-type': 'application/json' },
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+     
   } as any);
 }
 

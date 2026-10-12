@@ -10,7 +10,7 @@ import Link from 'next/link';
 import { X } from 'lucide-react';
 import { track } from '@vercel/analytics';
 
-export interface SeatPlan {
+interface SeatPlan {
   id: string;
   min_students: number | null;
   price_per_unit: number;

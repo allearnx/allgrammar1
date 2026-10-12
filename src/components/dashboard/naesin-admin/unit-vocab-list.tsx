@@ -15,7 +15,7 @@ interface VocabEditForm {
   antonyms: string;
 }
 
-export interface UnitVocabListProps {
+interface UnitVocabListProps {
   unitId: string;
   items: NaesinVocabulary[];
   selectedIds: Set<string>;

@@ -22,7 +22,7 @@ export interface ScoredRound {
   }[];
 }
 
-export interface DiagnosticScore {
+interface DiagnosticScore {
   rounds: ScoredRound[];
   level: FinalLevel;
   startBand: BandKey;

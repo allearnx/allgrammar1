@@ -8,7 +8,7 @@ import type {
 } from '@/types/naesin';
 import { NAESIN_UNITS_COLUMNS, NAESIN_EXAM_ASSIGNMENTS_COLUMNS, PROGRESS_SUMMARY_COLUMNS } from '@/types/naesin';
 
-export interface NaesinDashboardData {
+interface NaesinDashboardData {
   textbookName: string;
   units: NaesinUnit[];
   progressList: NaesinStudentProgress[];
@@ -19,7 +19,7 @@ export interface NaesinDashboardData {
   quizHistory: { date: string; score: number }[];
 }
 
-export interface NaesinSettings {
+interface NaesinSettings {
   textbook_id: string | null;
   enabled_stages: string[] | null;
 }

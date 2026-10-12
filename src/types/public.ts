@@ -21,10 +21,6 @@ export interface Course {
   sort_order: number;
 }
 
-export interface CourseWithTeacher extends Course {
-  teacher_profiles: TeacherProfile | null;
-}
-
 export interface TeacherProfile {
   id: string;
   created_at: string;
@@ -58,17 +54,6 @@ export interface FAQ {
   category: FAQCategory;
   display_order: number;
   is_visible: boolean;
-}
-
-export interface Consultation {
-  id: string;
-  created_at: string;
-  student_name: string;
-  grade: string;
-  parent_phone: string;
-  interest_course_ids: string[];
-  status: string;
-  memo: string;
 }
 
 // 카테고리 라벨 매핑
@@ -106,7 +91,7 @@ export const FAQ_CATEGORY_LABELS: Record<FAQCategory, string> = {
 };
 
 // 카테고리별 페이지 테마 설정
-export type CategoryPageTheme = {
+type CategoryPageTheme = {
   englishTitle: string;
   highlightedTitle: string;
   titleSuffix?: string;

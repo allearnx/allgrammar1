@@ -9,7 +9,7 @@
 
 export type BandKey = 'L0' | 'L1' | 'L2' | 'L3' | 'L4' | 'L5' | 'L6';
 
-export interface DiagnosticBand {
+interface DiagnosticBand {
   key: BandKey;
   /** 결과 화면·리포트에 쓰는 레벨 이름 */
   label: string;
@@ -91,14 +91,14 @@ export const UP_RATIO = 0.8;
  * 즉 50~80% 알 때 확정. 60% 넘게 모르면 좌절 구간이라 아래 교재로. (구 40%에서 상향:
  * 4지선다 찍기 인플레이션 보정 + 아는 책을 더 다지고 넘어가는 보수적 배정.)
  */
-export const DOWN_RATIO = 0.5;
+const DOWN_RATIO = 0.5;
 export const MAX_ROUNDS = 5;
 /**
  * 레벨 확정에 필요한 해당 밴드 누적 최소 문항 수.
  * 10문항 한 라운드 정답률은 ±15%p쯤 흔들려서 확정·커버리지 신뢰도가 부족하다 →
  * 확정 신호가 나와도 그 밴드 누적이 이 수 미만이면 같은 밴드에서 확인 라운드를 더 본다.
  */
-export const CONFIRM_ITEMS = 20;
+const CONFIRM_ITEMS = 20;
 
 export interface RoundSummary {
   band: BandKey;
@@ -112,7 +112,7 @@ export interface FinalLevel {
   qualifier: 'exact' | 'above' | 'below';
 }
 
-export type NextStep = { type: 'continue'; band: BandKey } | { type: 'done'; level: FinalLevel };
+type NextStep = { type: 'continue'; band: BandKey } | { type: 'done'; level: FinalLevel };
 
 function adjacent(band: BandKey, dir: 1 | -1, activeBands: BandKey[]): BandKey | null {
   let idx = BAND_KEYS.indexOf(band);

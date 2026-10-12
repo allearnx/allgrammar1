@@ -13,15 +13,3 @@ export interface AuthUser {
   naesin_enabled?: boolean;
 }
 
-export interface SignUpData {
-  email: string;
-  password: string;
-  full_name: string;
-  role: UserRole;
-  academy_id?: string;
-}
-
-export interface SignInData {
-  email: string;
-  password: string;
-}

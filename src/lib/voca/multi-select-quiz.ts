@@ -25,7 +25,7 @@ export interface MultiSelectSource {
   back_text: string;
 }
 
-export interface MultiSelectQuestion {
+interface MultiSelectQuestion {
   /** 화면에 제시하는 뜻 (출제 기준 단어의 back_text 원문) */
   prompt: string;
   /** 보기로 깔리는 단어들 (정답 + 오답, 섞인 순서) */

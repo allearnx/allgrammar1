@@ -28,7 +28,7 @@ function maskWordInSentence(sentence: string, word: string): string {
   return result;
 }
 
-export interface SpellingWrongItem {
+interface SpellingWrongItem {
   front_text: string;
   back_text: string;
   userAnswer: string;

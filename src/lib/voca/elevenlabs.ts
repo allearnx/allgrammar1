@@ -56,7 +56,7 @@ export async function generateSpeechWithTimestamps(
  * 문자 타임스탬프 → 단어 타임스탬프 변환
  * 공백으로 구분된 연속 문자를 하나의 단어로 합침
  */
-export function computeWordTimestamps(alignment: CharAlignment): WordTimestamp[] {
+function computeWordTimestamps(alignment: CharAlignment): WordTimestamp[] {
   const { characters, character_start_times_seconds, character_end_times_seconds } = alignment;
   const words: WordTimestamp[] = [];
   let currentWord = '';

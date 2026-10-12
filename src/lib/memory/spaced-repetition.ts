@@ -3,7 +3,7 @@ import { addDays, format } from 'date-fns';
 // Ebbinghaus intervals: 1 → 2 → 7 → 30 days
 const INTERVALS = [1, 2, 7, 30];
 
-export interface RepetitionResult {
+interface RepetitionResult {
   nextIntervalDays: number;
   nextReviewDate: string;
   newRepetitionCount: number;

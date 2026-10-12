@@ -31,7 +31,7 @@ He went to school in Seoul.
 She likes music.
 그녀는 음악을 좋아한다.`;
 
-export function parsePassageBlocks(text: string): { passages: ParsedPassage[]; errors: string[] } {
+function parsePassageBlocks(text: string): { passages: ParsedPassage[]; errors: string[] } {
   const blocks = text.trim().split(/^---$/m).map((b) => b.trim()).filter(Boolean);
   const passages: ParsedPassage[] = [];
   const errors: string[] = [];
@@ -214,7 +214,7 @@ export function BulkPassageUploadDialog({ unitId, onAdd }: { unitId: string; onA
             });
         }
       }
-    } catch (err) {
+    } catch {
       if (successCount > 0) {
         toast.warning(`${successCount}/${preview.length}개 저장 완료, 나머지 실패`);
         onAdd();

@@ -55,7 +55,3 @@ export function splitSentences(text: string): string[] {
   return out;
 }
 
-/** 한국어 해석도 같은 방식으로 나눈다 */
-export function splitKorean(text: string): string[] {
-  return splitSentences(text);
-}

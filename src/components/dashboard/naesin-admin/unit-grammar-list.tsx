@@ -11,7 +11,7 @@ interface GrammarEditForm {
   text_content: string;
 }
 
-export interface UnitGrammarListProps {
+interface UnitGrammarListProps {
   lessons: NaesinGrammarLesson[];
   editingId: string | null;
   editForm: GrammarEditForm;

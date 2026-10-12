@@ -16,9 +16,9 @@ import type {
   NaesinExamAssignment,
 } from '@/types/naesin';
 
-export const NAESIN_STAGE_KEYS = ['vocab', 'passage', 'dialogue', 'textbookVideo', 'grammar', 'problem', 'mockExam', 'lastReview'] as const;
+const NAESIN_STAGE_KEYS = ['vocab', 'passage', 'dialogue', 'textbookVideo', 'grammar', 'problem', 'mockExam', 'lastReview'] as const;
 
-export const NAESIN_STAGE_LABELS: Record<string, string> = {
+const NAESIN_STAGE_LABELS: Record<string, string> = {
   vocab: '단어 암기',
   passage: '교과서 암기',
   dialogue: '대화문 암기',
@@ -44,7 +44,7 @@ export function isNaesinUnitComplete(statuses: NaesinStageStatuses): boolean {
   );
 }
 
-export function mapNaesinStatus(s: NaesinStageStatus): 'done' | 'active' | 'locked' | null {
+function mapNaesinStatus(s: NaesinStageStatus): 'done' | 'active' | 'locked' | null {
   if (s === 'completed') return 'done';
   if (s === 'available') return 'active';
   if (s === 'hidden') return null;
@@ -113,7 +113,7 @@ export interface NaesinStage {
 
 // ── Stage meta (icons + descriptions) ──
 
-export const NAESIN_STAGE_META: Record<string, { icon: React.ReactNode; description: string; scoreRequirement: string }> = {
+const NAESIN_STAGE_META: Record<string, { icon: React.ReactNode; description: string; scoreRequirement: string }> = {
   vocab: { icon: <BookOpen className="h-6 w-6" />, description: '교과서 단어를\n암기합니다', scoreRequirement: '퀴즈+스펠링 시작' },
   passage: { icon: <FileText className="h-6 w-6" />, description: '교과서 지문을\n암기합니다', scoreRequirement: '지문 암기 완료' },
   dialogue: { icon: <MessageSquare className="h-6 w-6" />, description: '대화문을\n영작합니다', scoreRequirement: '대화문 암기 완료' },
@@ -126,7 +126,7 @@ export const NAESIN_STAGE_META: Record<string, { icon: React.ReactNode; descript
 
 // ── Badge text helpers ──
 
-export function getVocabBadgeText(progress: NaesinStudentProgress | null): string {
+function getVocabBadgeText(progress: NaesinStudentProgress | null): string {
   if (!progress) return '퀴즈+스펠링 시작';
   const q = progress.vocab_quiz_score;
   const s = progress.vocab_spelling_score;
@@ -145,7 +145,7 @@ export function getVocabBadgeText(progress: NaesinStudentProgress | null): strin
   return '퀴즈+스펠링 시작';
 }
 
-export function getPassageBadgeText(progress: NaesinStudentProgress | null): string {
+function getPassageBadgeText(progress: NaesinStudentProgress | null): string {
   if (!progress) return '지문 암기 완료';
   const fb = progress.passage_fill_blanks_best;
   const tr = progress.passage_translation_best;
@@ -156,14 +156,14 @@ export function getPassageBadgeText(progress: NaesinStudentProgress | null): str
   return parts.join(' · ') || '지문 암기 완료';
 }
 
-export function getDialogueBadgeText(progress: NaesinStudentProgress | null): string {
+function getDialogueBadgeText(progress: NaesinStudentProgress | null): string {
   if (!progress) return '대화문 암기 완료';
   const tr = progress.dialogue_translation_best;
   if (tr === null || tr === undefined) return '대화문 암기 완료';
   return `영작 ${tr}점${tr >= 80 ? ' ✓' : ''}`;
 }
 
-export function getGrammarBadgeText(progress: NaesinStudentProgress | null, videoCount: number): string {
+function getGrammarBadgeText(progress: NaesinStudentProgress | null, videoCount: number): string {
   if (!progress || videoCount === 0) return '영상 시청 완료';
   const done = progress.grammar_videos_completed ?? 0;
   if (done >= videoCount) return `${videoCount}개 영상 시청 ✓`;

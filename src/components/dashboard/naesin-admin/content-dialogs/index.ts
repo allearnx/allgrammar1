@@ -21,7 +21,6 @@ export { CreateEngEngDefDialog } from './passage/create-eng-eng-def-dialog';
 // template
 export { ImportTemplateDialog } from './template/import-template-dialog';
 export { EditTemplateDialog } from './template/edit-template-dialog';
-export { TemplateCopiesDialog } from './template/template-copies-dialog';
 
 // other
 export { AddGrammarDialog } from './add-grammar-dialog';

@@ -1,5 +1,3 @@
-import type { Level } from './level';
-
 export interface Grammar {
   id: string;
   level_id: string;
@@ -10,10 +8,6 @@ export interface Grammar {
   video_duration_seconds: number | null;
   sort_order: number;
   created_at: string;
-}
-
-export interface GrammarWithLevel extends Grammar {
-  level: Level;
 }
 
 export interface Exam {

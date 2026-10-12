@@ -10,7 +10,7 @@ import type { NaesinProblemQuestion } from '@/types/naesin';
 export type ExtractedQuestion = Record<string, unknown>;
 
 /** 정답표 결과를 추출된 문제에 머지. 정답표 답이 우선. 머지된 개수 반환. */
-export function mergeAnswerKey(
+function mergeAnswerKey(
   questions: ExtractedQuestion[],
   answerKey: Record<string, string>,
 ): number {
@@ -28,7 +28,7 @@ export function mergeAnswerKey(
   return merged;
 }
 
-export interface NormalizeResult {
+interface NormalizeResult {
   questions: ExtractedQuestion[];
   /** 정답표 항목 수 (0이면 정답표 없음) */
   answerKeyCount: number;

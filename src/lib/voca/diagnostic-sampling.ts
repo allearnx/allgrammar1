@@ -40,7 +40,7 @@ interface PoolWord {
 /** 선다형 보기 수 — 4→5 확대 (찍기 적중 25%→20%, 2026-08-06) */
 const CHOICE_COUNT = 5;
 
-export type DiagnosticQuestionType = 'en-to-ko' | 'ko-to-en';
+type DiagnosticQuestionType = 'en-to-ko' | 'ko-to-en';
 
 /**
  * 클라이언트에 내려가는 문항 — 정답 정보는 token(HMAC 봉인)에만 있다.
@@ -96,7 +96,7 @@ function distractorRank(target: PoolWord, w: PoolWord, type: DiagnosticQuestionT
   return w.day_id === target.day_id ? 0 : 1;
 }
 
-export interface BandBook {
+interface BandBook {
   id: string;
   title: string;
 }

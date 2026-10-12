@@ -15,7 +15,7 @@ export interface WrongChoicePoint {
 export type SelectionMap = Record<string, number>;
 
 /** choice point 유효성 검증: 범위가 문장 단어 수 안에 있고, 서로 겹치지 않는 것만 반환 */
-export function getValidChoicePoints(item: GrammarVocabItem): GrammarVocabChoicePoint[] {
+function getValidChoicePoints(item: GrammarVocabItem): GrammarVocabChoicePoint[] {
   const words = item.original.split(/\s+/);
   const valid: GrammarVocabChoicePoint[] = [];
 
