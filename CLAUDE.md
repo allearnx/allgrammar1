@@ -121,7 +121,10 @@
 - 4차(refactor/diagnostic-client-split, 3단계 커밋): 진단 화면 966줄 → 메인 93줄 + _components/
   (intro·quiz·contact-gate·result·lineup-card 화면, use-diagnostic-flow 상태 머신, pending-diagnostic 순수 로직+테스트 8건).
   **진단 흐름 고칠 때는 use-diagnostic-flow.ts, 문구·레이아웃은 해당 화면 파일.** 로컬 /level-test 3라운드 완주→게이트 확인.
-- 다음 후보: ① problem-validator.ts 규칙별 분리 ② voca/client.tsx(701줄).
+- 5차(refactor/voca-home-split): 학생 보카 홈 701줄 → 메인 213줄 + _components 5파일. 진도 규칙(무료 한도·1회독 면제·
+  잠금·모드별 완료·Day 행 단계·이용권 D-day)은 `lib/voca/home-progress.ts` + 테스트 20건. QA 계정으로 로컬 홈·토글·교재 전환 확인.
+  **회독/진도 규칙 바꿀 땐 home-progress.ts + 테스트를 먼저, 화면은 day-list.tsx.**
+- 다음 후보: problem-validator.ts 규칙별 분리 (급하지 않음 — 정답 규칙 추가할 때 같이).
 - 보류: `as` 단언 경고 667건(규칙 완화 검토), select('*') 19건(유령 컬럼 원칙 유지), naesin↔voca 학습 컴포넌트 통합.
 
 ---
