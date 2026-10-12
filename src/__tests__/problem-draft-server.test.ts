@@ -1,9 +1,9 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { NextRequest } from 'next/server';
 import {
   problemDraftSaveSchema,
   problemDraftDeleteSchema,
 } from '@/lib/api/schemas';
+import { createMockRequest } from './helpers/api-test-utils';
 
 // ── Mocks ──
 
@@ -24,21 +24,7 @@ vi.mock('@/lib/api/rate-limit', () => ({
 
 // ── Helpers ──
 
-function makeRequest(
-  method: string,
-  body?: unknown,
-  url = 'http://localhost/api/test'
-) {
-  const init: RequestInit = { method };
-  const headers: Record<string, string> = {};
-
-  if (body !== undefined) {
-    init.body = JSON.stringify(body);
-    headers['content-type'] = 'application/json';
-  }
-
-  return new NextRequest(url, { ...init, headers } as any);
-}
+const makeRequest = (method: string, body?: unknown, url = 'http://localhost/api/test') => createMockRequest(method, body, url);
 
 function mockSupabaseChain(result: { data: unknown; error: unknown }) {
   const chain: Record<string, ReturnType<typeof vi.fn>> = {

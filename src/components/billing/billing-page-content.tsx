@@ -12,6 +12,7 @@ import { requestTossCardAuth, cancelSubscription, calcTrialDaysLeft } from '@/li
 import { deriveTier } from '@/lib/billing/feature-gate';
 import { SUBSCRIPTION_PLAN_COLUMNS, ORDER_COLUMNS, PAYMENT_HISTORY_COLUMNS, type Subscription, type PaymentHistory, type SubscriptionPlan, type Order } from '@/types/billing';
 import type { Tier, FreeService } from '@/lib/billing/feature-gate';
+import { formatDateKo } from '@/lib/format';
 
 interface SubscriptionWithPlan extends Subscription {
   plan: SubscriptionPlan;
@@ -244,10 +245,6 @@ function StudentServiceCard({ services }: { services: { service: string }[] }) {
   );
 }
 
-function formatDate(d: string) {
-  return new Date(d).toLocaleDateString('ko', { year: 'numeric', month: 'short', day: 'numeric' });
-}
-
 const ORDER_STATUS_MAP: Record<string, { label: string; color: string; bg: string }> = {
   paid: { label: '완료', color: 'text-emerald-700', bg: 'bg-emerald-50' },
   failed: { label: '실패', color: 'text-red-700', bg: 'bg-red-50' },
@@ -285,7 +282,7 @@ function StudentOrderHistory({ orders }: { orders: Order[] }) {
                   </span>
                   <div className="flex items-center gap-2">
                     <span className="text-[12px] text-gray-400">
-                      {formatDate(o.paid_at || o.created_at)}
+                      {formatDateKo(o.paid_at || o.created_at)}
                     </span>
                     <span className={`inline-flex items-center rounded-full px-2 py-0.5 text-[11px] font-semibold ${info.color} ${info.bg}`}>
                       {info.label}

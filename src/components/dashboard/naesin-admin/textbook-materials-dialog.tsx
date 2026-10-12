@@ -9,11 +9,7 @@ import { toast } from 'sonner';
 import { fetchWithToast } from '@/lib/fetch-with-toast';
 import type { NaesinTextbook } from '@/types/database';
 import type { NaesinTextbookMaterial } from '@/types/naesin';
-
-function formatFileSize(bytes: number) {
-  if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(0)} KB`;
-  return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
-}
+import { formatFileSize } from '@/lib/format';
 
 interface TextbookMaterialsDialogProps {
   textbook: NaesinTextbook | null;

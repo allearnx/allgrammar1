@@ -1,6 +1,7 @@
 'use client';
 
 import { CreditCard, Calendar, Wallet, XCircle } from 'lucide-react';
+import { formatDateKo } from '@/lib/format';
 
 interface SubscriptionInfoCardProps {
   planName: string;
@@ -20,10 +21,6 @@ const STATUS_LABELS: Record<string, { label: string; color: string; bg: string }
   canceled: { label: '해지됨', color: 'text-gray-500', bg: 'bg-gray-100' },
   expired: { label: '만료됨', color: 'text-gray-500', bg: 'bg-gray-100' },
 };
-
-function formatDate(d: string) {
-  return new Date(d).toLocaleDateString('ko', { year: 'numeric', month: 'long', day: 'numeric' });
-}
 
 export function SubscriptionInfoCard({
   planName,
@@ -56,7 +53,7 @@ export function SubscriptionInfoCard({
 
       {/* 정보 rows */}
       <div className="border-t border-gray-50">
-        <InfoRow icon={<Calendar className="h-[18px] w-[18px] text-gray-400" />} label="이용 기간" value={`${formatDate(periodStart)} — ${formatDate(periodEnd)}`} />
+        <InfoRow icon={<Calendar className="h-[18px] w-[18px] text-gray-400" />} label="이용 기간" value={`${formatDateKo(periodStart, 'long')} — ${formatDateKo(periodEnd, 'long')}`} />
         <InfoRow
           icon={<Wallet className="h-[18px] w-[18px] text-gray-400" />}
           label="결제 수단"

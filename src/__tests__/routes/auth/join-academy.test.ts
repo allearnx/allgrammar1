@@ -1,6 +1,6 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { NextRequest } from 'next/server';
 import { testStudent, testTeacher } from '../../helpers/fixtures';
+import { createMockRequest } from '../../helpers/api-test-utils';
 
 const mockGetUser = vi.fn();
 const mockAdminFrom = vi.fn();
@@ -43,18 +43,7 @@ function mockChain(opts: { single?: unknown; count?: number } = {}) {
   return chain;
 }
 
-function makeRequest(body?: unknown) {
-  const init: RequestInit = { method: 'POST' };
-  const headers: Record<string, string> = {};
-  if (body !== undefined) {
-    init.body = JSON.stringify(body);
-    headers['content-type'] = 'application/json';
-  }
-  return new NextRequest('http://localhost/api/auth/join-academy', {
-    ...init,
-    headers,
-  } as any);
-}
+const makeRequest = (body?: unknown) => createMockRequest('POST', body, 'http://localhost/api/auth/join-academy');
 
 const freeAcademy = { id: 'academy-1', name: '테스트학원', max_students: 5 };
 

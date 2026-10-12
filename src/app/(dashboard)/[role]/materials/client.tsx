@@ -8,6 +8,7 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Upload, Trash2, Download, FileText } from 'lucide-react';
 import { fetchWithToast } from '@/lib/fetch-with-toast';
+import { formatDateKo, formatFileSize } from '@/lib/format';
 
 interface Material {
   id: string;
@@ -24,20 +25,6 @@ interface Props {
   initialMaterials: Material[];
   userId: string;
   userRole: string;
-}
-
-function formatFileSize(bytes: number) {
-  if (bytes < 1024) return `${bytes} B`;
-  if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} KB`;
-  return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
-}
-
-function formatDate(dateStr: string) {
-  return new Date(dateStr).toLocaleDateString('ko-KR', {
-    year: 'numeric',
-    month: 'short',
-    day: 'numeric',
-  });
 }
 
 export function MaterialsClient({ initialMaterials, userId, userRole }: Props) {
@@ -154,7 +141,7 @@ export function MaterialsClient({ initialMaterials, userId, userRole }: Props) {
                         <p className="text-sm text-muted-foreground line-clamp-1">{m.description}</p>
                       )}
                       <p className="text-xs text-muted-foreground mt-1">
-                        {formatDate(m.created_at)} · {formatFileSize(m.file_size)}
+                        {formatDateKo(m.created_at)} · {formatFileSize(m.file_size)}
                         {m.academy_id === null && ' · 전체 공개'}
                       </p>
                     </div>

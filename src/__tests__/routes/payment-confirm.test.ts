@@ -1,6 +1,6 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { NextRequest } from 'next/server';
 import { testStudent } from '../helpers/fixtures';
+import { createMockRequest } from '../helpers/api-test-utils';
 
 /**
  * 결제 승인 멱등성 회귀 테스트 (2026-07-19 실사고).
@@ -57,14 +57,7 @@ function table(opts: {
   return chain;
 }
 
-function makeRequest(body: unknown) {
-  return new NextRequest('http://localhost/api/payment/confirm', {
-    method: 'POST',
-    body: JSON.stringify(body),
-    headers: { 'content-type': 'application/json' },
-     
-  } as any);
-}
+const makeRequest = (body?: unknown) => createMockRequest('POST', body, 'http://localhost/api/payment/confirm');
 
 const VALID_BODY = {
   paymentKey: 'pay_key_1',

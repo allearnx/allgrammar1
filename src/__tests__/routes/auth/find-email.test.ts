@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { NextRequest } from 'next/server';
+import { createMockRequest } from '../../helpers/api-test-utils';
 
 const mockCheckRateLimit = vi.fn();
 const mockAdminFrom = vi.fn();
@@ -25,13 +25,7 @@ function makeChain(result: { data: unknown; error: unknown }) {
   return chain;
 }
 
-function makeRequest(body: unknown) {
-  return new NextRequest('http://localhost/api/auth/find-email', {
-    method: 'POST',
-    body: JSON.stringify(body),
-    headers: { 'content-type': 'application/json' },
-  });
-}
+const makeRequest = (body?: unknown) => createMockRequest('POST', body, 'http://localhost/api/auth/find-email');
 
 beforeEach(() => {
   vi.clearAllMocks();

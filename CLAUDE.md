@@ -109,9 +109,13 @@
   미사용 export 166건(export 해제 139·선언 삭제 27), 미사용 변수·죽은 prop 정리, scripts/ 일회성 49개 → scripts/archive/.
 - ⚠️ `eslint-disable-next-line react-hooks/*` 하나만 있어도 React Compiler 린트가 그 파일의 다른 react-hooks 진단
   (refs 등)을 통째로 건너뜀 — 디렉티브 지우면 숨어 있던 에러가 드러날 수 있음 (youtube-player 사례).
-- 다음 후보 (우선순위순): ① formatDate 7곳·splitSentences 3곳·normalize 3곳 통합(채점 관련은 테스트로 동치 확인 후)
-  ② 테스트 makeRequest 24곳 → helpers/api-test-utils 공용 ③ 진단 화면 diagnostic-client.tsx(966줄) 분리
-  ④ extract-paraphrase route(313줄) lib 분리 ⑤ problem-validator.ts 규칙별 분리.
+- 2차(refactor/dedupe-helpers-2026-10): formatDate 6곳·formatFileSize 3곳 → `src/lib/format.ts`(formatDateKo/formatFileSize),
+  shuffle·getCurrentMonday 중복 제거, 테스트 makeRequest 24곳 → helpers/api-test-utils.createMockRequest 위임.
+  ⚠️ 테스트 헬퍼 파일에 `vi.mock()` 금지 — 함수 안이어도 vitest가 최상단으로 끌어올려 import하는 모든 테스트의 mock을 덮어씀.
+- **통합 안 함(이름만 같고 역할 다름)**: splitSentences 3곳(지문 쌍 분리/붙여넣기 분할/채점용 lookbehind-free),
+  normalize 3곳(체험시험/LCS/내신 축약형 확장), StatCard 3곳(디자인 다름), retentionColor(hex vs 클래스), mockChain 9변형.
+- 다음 후보: ① 진단 화면 diagnostic-client.tsx(966줄) 분리 ② extract-paraphrase route(313줄) lib 분리
+  ③ problem-validator.ts 규칙별 분리 ④ voca/client.tsx(701줄).
 - 보류: `as` 단언 경고 667건(규칙 완화 검토), select('*') 19건(유령 컬럼 원칙 유지), naesin↔voca 학습 컴포넌트 통합.
 
 ---

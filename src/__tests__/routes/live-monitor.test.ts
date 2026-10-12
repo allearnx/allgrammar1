@@ -1,6 +1,7 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { NextRequest } from 'next/server';
 import { testTeacher, testAdmin, testStudent } from '../helpers/fixtures';
+import { createMockRequest } from '../helpers/api-test-utils';
 
 // ── Mocks ──
 
@@ -23,9 +24,7 @@ vi.mock('@/lib/api/rate-limit', () => ({
 
 // ── Helpers ──
 
-function makeRequest(url = 'http://localhost/api/live-monitor') {
-  return new NextRequest(url, { method: 'GET' });
-}
+const makeRequest = (url = 'http://localhost/api/live-monitor') => createMockRequest('GET', undefined, url);
 
 function buildChain(overrides: Record<string, ReturnType<typeof vi.fn>> = {}) {
   const chain: Record<string, ReturnType<typeof vi.fn>> = {

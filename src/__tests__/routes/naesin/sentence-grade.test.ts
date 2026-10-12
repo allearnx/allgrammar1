@@ -1,6 +1,6 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { NextRequest } from 'next/server';
 import { testStudent } from '../../helpers/fixtures';
+import { createMockRequest } from '../../helpers/api-test-utils';
 
 const mockGetUser = vi.fn();
 const mockCreateClient = vi.fn();
@@ -15,13 +15,7 @@ vi.mock('@/lib/api/rate-limit', () => ({
   checkRateLimit: () => null,
 }));
 
-function makeRequest(body: unknown) {
-  return new NextRequest('http://localhost/api/naesin/passage/grade-translation', {
-    method: 'POST',
-    body: JSON.stringify(body),
-    headers: { 'content-type': 'application/json' },
-  });
-}
+const makeRequest = (body?: unknown) => createMockRequest('POST', body, 'http://localhost/api/naesin/passage/grade-translation');
 
 beforeEach(() => {
   vi.clearAllMocks();
