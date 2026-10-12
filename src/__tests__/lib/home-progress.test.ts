@@ -102,15 +102,17 @@ describe('dayRowStatus', () => {
 });
 
 describe('expiryInfo', () => {
-  const now = new Date('2026-10-12T00:00:00+09:00').getTime();
+  // 로컬 시간 생성자로 만든 날짜 — getMonth/getDate가 실행 환경 시간대를 따르므로(CI는 UTC) ISO 문자열 고정값은 하루가 밀릴 수 있다
+  const local = (m: number, d: number) => new Date(2026, m - 1, d, 12).toISOString();
+  const now = new Date(2026, 9, 12, 12).getTime();
   it('없거나 지났으면 null', () => {
     expect(expiryInfo(null, now)).toBeNull();
-    expect(expiryInfo('2026-10-01T00:00:00+09:00', now)).toBeNull();
+    expect(expiryInfo(local(10, 1), now)).toBeNull();
   });
   it('7일 이내면 urgent + D-day', () => {
-    expect(expiryInfo('2026-10-17T00:00:00+09:00', now)).toEqual({ label: '10월 17일까지 (D-5)', urgent: true });
+    expect(expiryInfo(local(10, 17), now)).toEqual({ label: '10월 17일까지 (D-5)', urgent: true });
   });
   it('30일 넘게 남으면 D-day 표기 없음', () => {
-    expect(expiryInfo('2026-12-01T00:00:00+09:00', now)).toEqual({ label: '12월 1일까지', urgent: false });
+    expect(expiryInfo(local(12, 1), now)).toEqual({ label: '12월 1일까지', urgent: false });
   });
 });
