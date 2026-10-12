@@ -91,3 +91,10 @@ export function chunkPreservingGroups(qs: Record<string, unknown>[], size: numbe
   }
   return chunks;
 }
+
+/** 고정 크기 청크 — 그룹 보존이 필요 없는 경우(검산 배치 등) */
+export function chunkFixed<T>(items: T[], size: number): T[][] {
+  const chunks: T[][] = [];
+  for (let i = 0; i < items.length; i += size) chunks.push(items.slice(i, i + size));
+  return chunks;
+}

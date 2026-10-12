@@ -114,8 +114,11 @@
   ⚠️ 테스트 헬퍼 파일에 `vi.mock()` 금지 — 함수 안이어도 vitest가 최상단으로 끌어올려 import하는 모든 테스트의 mock을 덮어씀.
 - **통합 안 함(이름만 같고 역할 다름)**: splitSentences 3곳(지문 쌍 분리/붙여넣기 분할/채점용 lookbehind-free),
   normalize 3곳(체험시험/LCS/내신 축약형 확장), StatCard 3곳(디자인 다름), retentionColor(hex vs 클래스), mockChain 9변형.
-- 다음 후보: ① 진단 화면 diagnostic-client.tsx(966줄) 분리 ② extract-paraphrase route(313줄) lib 분리
-  ③ problem-validator.ts 규칙별 분리 ④ voca/client.tsx(701줄).
+- 3차(refactor/extract-paraphrase-split, 3단계 커밋): extract-paraphrase 라우트 313줄 → 104줄.
+  AI 무관 로직은 lib/naesin/{split-pdf-for-extract,extract-dedupe,extract-prompt}.ts, AI 호출 3개는
+  lib/naesin/extract-paraphrase-service.ts(클라이언트 주입 → 가짜로 테스트). 테스트 0 → 33건.
+  **추출 파이프라인 고칠 때는 서비스 파일을 고치고 테스트를 같이 갱신할 것** (라우트는 분기만).
+- 다음 후보: ① 진단 화면 diagnostic-client.tsx(966줄) 분리 ② problem-validator.ts 규칙별 분리 ③ voca/client.tsx(701줄).
 - 보류: `as` 단언 경고 667건(규칙 완화 검토), select('*') 19건(유령 컬럼 원칙 유지), naesin↔voca 학습 컴포넌트 통합.
 
 ---
