@@ -28,3 +28,15 @@ export interface SubmitResponse {
   missed?: MissedWord[];
   missedCount?: number;
 }
+
+/** 정오는 클라이언트가 모른다 — 봉인 토큰과 답(타이핑 or 보기 인덱스)만 보관·전송 (null = 모르겠어요) */
+export interface AnsweredItem {
+  token: string;
+  typed?: string | null;
+  chosenIndex?: number | null;
+}
+
+export interface CompletedRound {
+  band: BandKey;
+  items: AnsweredItem[];
+}
