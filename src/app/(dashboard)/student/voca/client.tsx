@@ -11,10 +11,11 @@ import { ParentLinkButton } from '@/components/voca/parent-link-button';
 import { CoverageGauge } from '@/components/voca/coverage-gauge';
 import { WrongMissionCard } from '@/components/voca/wrong-mission-card';
 import { TodayStudyCard } from '@/components/voca/today-study-card';
-import { isR1Complete, isR2Complete } from '@/lib/dashboard/voca-helpers';
+import {
+  buildProgressMap, isBookRound1Complete, resolveBookRound, countCompletedDays, dayRowStatus, expiryInfo,
+  type RoundMode,
+} from '@/lib/voca/home-progress';
 import type { VocaBook, VocaDay, VocaStudentProgress } from '@/types/voca';
-
-type RoundMode = 'book' | 'day';
 
 interface VocaHomeClientProps {
   books: VocaBook[];
@@ -37,25 +38,6 @@ interface VocaHomeClientProps {
 
 // Day 배지·진행 바는 구글 4색 순환 (랜딩 statBand·7단계 카드와 같은 리듬)
 
-function getStepsDone(prog: VocaStudentProgress | undefined): number {
-  if (!prog) return 0;
-  let done = 0;
-  if (prog.flashcard_completed) done++;
-  if ((prog.quiz_score ?? 0) >= 80) done++;
-  if ((prog.spelling_score ?? 0) >= 80) done++;
-  if (prog.matching_completed) done++;
-  return done;
-}
-
-function getRound2StepsDone(prog: VocaStudentProgress | undefined): number {
-  if (!prog) return 0;
-  let done = 0;
-  if (prog.round2_flashcard_completed) done++;
-  if ((prog.round2_quiz_score ?? 0) >= 80) done++;
-  if (prog.round2_matching_completed) done++;
-  return done;
-}
-
 export function VocaHomeClient({ books, days, progressList, submissionStatuses = {}, studentId, initialBookId, freeDayLimit = 0, round2Locked = false, round2Forced = false, roundMode: initialRoundMode = 'book', firstTimeGuide = false, expiresAt = null }: VocaHomeClientProps) {
   const router = useRouter();
   // 계정별 키 — 전역 키('voca:selectedBookId')를 쓰면 같은 브라우저에서
@@ -66,16 +48,7 @@ export function VocaHomeClient({ books, days, progressList, submissionStatuses =
   const [guideOpen, setGuideOpen] = useState(false);
 
   // 이용권 만료 표시 — D-7 이내면 경고 톤 + 연장 링크
-  const expiryInfo = useMemo(() => {
-    if (!expiresAt) return null;
-    const exp = new Date(expiresAt);
-    const daysLeft = Math.ceil((exp.getTime() - Date.now()) / 86_400_000);
-    if (daysLeft < 0) return null; // 이미 만료 — 조회 시점 정리 대기 중
-    return {
-      label: `${exp.getMonth() + 1}월 ${exp.getDate()}일까지${daysLeft <= 30 ? ` (D-${daysLeft})` : ''}`,
-      urgent: daysLeft <= 7,
-    };
-  }, [expiresAt]);
+  const expiry = useMemo(() => expiryInfo(expiresAt), [expiresAt]);
 
   const defaultBookId = (initialBookId && books.some((b) => b.id === initialBookId))
     ? initialBookId
@@ -114,39 +87,29 @@ export function VocaHomeClient({ books, days, progressList, submissionStatuses =
     [days, selectedBookId]
   );
 
-  const progressMap = useMemo(() => {
-    const map = new Map<string, VocaStudentProgress>();
-    progressList.forEach((p) => map.set(p.day_id, p));
-    return map;
-  }, [progressList]);
+  const progressMap = useMemo(() => buildProgressMap(progressList), [progressList]);
 
   // 책 단위: 모든 Day 1회독 완료 → 2회독
-  const bookRound1Complete = useMemo(() => {
-    const targetDays = freeDayLimit > 0 ? filteredDays.slice(0, freeDayLimit) : filteredDays;
-    return targetDays.length > 0 && targetDays.every((d) => isR1Complete(progressMap.get(d.id) ?? null));
-  }, [filteredDays, progressMap, freeDayLimit]);
+  const bookRound1Complete = useMemo(
+    () => isBookRound1Complete(filteredDays, progressMap, freeDayLimit),
+    [filteredDays, progressMap, freeDayLimit],
+  );
 
   // 현재 라운드: 모드에 따라 다르게 (book 모드는 전체 기준, 1회독 면제 시 바로 2회독)
-  const bookCurrentRound: '1' | '2' = (!round2Locked && (round2Forced || bookRound1Complete)) ? '2' : '1';
+  const bookCurrentRound = resolveBookRound({ round2Locked, round2Forced, bookRound1Complete });
+  const roundRules = useMemo(
+    () => ({ roundMode, bookCurrentRound, round2Locked, round2Forced }),
+    [roundMode, bookCurrentRound, round2Locked, round2Forced],
+  );
 
   // 무료 체험(Day 3개) 완료 — 업그레이드 안내를 페이지 상단으로 승격
   const freeTrialDone = freeDayLimit > 0 && bookRound1Complete;
 
   const totalDays = freeDayLimit > 0 ? Math.min(filteredDays.length, freeDayLimit) : filteredDays.length;
-  const completedCount = useMemo(() => {
-    const target = filteredDays.slice(0, freeDayLimit > 0 ? freeDayLimit : undefined);
-    if (roundMode === 'day') {
-      // Day 모드: 1회독+2회독 모두 완료한 Day 수 (1회독 면제 시 2회독만)
-      return target.filter((d) => {
-        const p = progressMap.get(d.id) ?? null;
-        return (round2Forced || isR1Complete(p)) && (round2Locked || isR2Complete(p));
-      }).length;
-    }
-    if (bookCurrentRound === '2') {
-      return target.filter((day) => isR2Complete(progressMap.get(day.id) ?? null)).length;
-    }
-    return target.filter((day) => isR1Complete(progressMap.get(day.id) ?? null)).length;
-  }, [filteredDays, progressMap, freeDayLimit, bookCurrentRound, roundMode, round2Locked, round2Forced]);
+  const completedCount = useMemo(
+    () => countCompletedDays(filteredDays, progressMap, freeDayLimit, roundRules),
+    [filteredDays, progressMap, freeDayLimit, roundRules],
+  );
 
   const handleModeChange = async (mode: RoundMode) => {
     setRoundMode(mode);
@@ -297,14 +260,14 @@ export function VocaHomeClient({ books, days, progressList, submissionStatuses =
                 1·2회독 자유
               </span>
             )}
-            {expiryInfo && (
+            {expiry && (
               <span className={`text-[11px] font-bold px-2 py-0.5 rounded-full ${
-                expiryInfo.urgent ? 'bg-[#FCE8E6] text-[#A50E0E]' : 'bg-white/70 text-gray-500'
+                expiry.urgent ? 'bg-[#FCE8E6] text-[#A50E0E]' : 'bg-white/70 text-gray-500'
               }`}>
-                이용권 {expiryInfo.label}
+                이용권 {expiry.label}
               </span>
             )}
-            {expiryInfo?.urgent && (
+            {expiry?.urgent && (
               <Link href="/allkill#price" className="text-[11px] font-bold text-primary underline underline-offset-2">
                 연장하기
               </Link>
@@ -425,8 +388,6 @@ export function VocaHomeClient({ books, days, progressList, submissionStatuses =
         <div className="space-y-2.5">
           {filteredDays.map((day, index) => {
             const prog = progressMap.get(day.id);
-            const steps = getStepsDone(prog);
-            const completed = isR1Complete(prog ?? null);
             const locked = freeDayLimit > 0 && index >= freeDayLimit;
             const dayColor = VOCA_STEP_THEMES[index % VOCA_STEP_THEMES.length].solid;
 
@@ -445,39 +406,11 @@ export function VocaHomeClient({ books, days, progressList, submissionStatuses =
               );
             }
 
-            const r2Steps = getRound2StepsDone(prog);
-            const r2Completed = isR2Complete(prog ?? null);
-
-            let isCompleted: boolean;
-            let stepsNow: number;
-            let totalSteps: number;
-            let dayRoundLabel: string | null = null;
-
-            if (roundMode === 'day') {
-              // Day별 모드: 1회독+2회독 모두 완료 = 완료 (1회독 면제 시 2회독만)
-              const r1Done = round2Forced || completed;
-              const bothDone = r1Done && (round2Locked || r2Completed);
-              isCompleted = bothDone;
-              if (!r1Done) {
-                // 1회독 진행중
-                stepsNow = steps;
-                totalSteps = 4;
-                dayRoundLabel = '1회독';
-              } else if (!round2Locked && !r2Completed) {
-                // 2회독 진행중
-                stepsNow = r2Steps;
-                totalSteps = 3;
-                dayRoundLabel = '2회독';
-              } else {
-                stepsNow = 0;
-                totalSteps = 0;
-              }
-            } else {
-              // 책 단위 모드: 현재 라운드 기준
-              isCompleted = bookCurrentRound === '2' ? r2Completed : completed;
-              stepsNow = bookCurrentRound === '2' ? r2Steps : steps;
-              totalSteps = bookCurrentRound === '2' ? 3 : 4;
-            }
+            // 진행 상태 계산은 lib/voca/home-progress.dayRowStatus (모드·면제·잠금 규칙 포함)
+            const {
+              isCompleted, stepsNow, totalSteps, roundLabel: dayRoundLabel, completedLabel,
+              r1Completed: completed, r2Completed,
+            } = dayRowStatus(prog, roundRules);
 
             return (
               <Link key={day.id} href={`/student/voca/${day.id}`}>
@@ -516,7 +449,7 @@ export function VocaHomeClient({ books, days, progressList, submissionStatuses =
                     )}
                     {isCompleted && (
                       <p className="text-[11px] font-medium text-green-600 mt-0.5">
-                        {roundMode === 'day' ? '1+2회독 완료' : `${bookCurrentRound}회독 완료`}
+                        {completedLabel}
                       </p>
                     )}
                     {(roundMode === 'day' || bookCurrentRound === '1') && <ProgressBadges progress={prog} submissionStatus={submissionStatuses[day.id]} />}
