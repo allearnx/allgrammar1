@@ -4,7 +4,7 @@ import type { SupabaseClient } from '@supabase/supabase-js';
  * 학생 홈 "바로 가기" — 사이드 메뉴를 못 찾는 학생을 위해 홈 맨 위에 큰 진입 버튼 2개.
  * 각 버튼은 "마지막에 하던 곳"으로 곧장 보낸다 (2026-09-21 사장님: 기본 리포트를 앱 전체로 착각).
  */
-export interface QuickStartEntry {
+interface QuickStartEntry {
   href: string;
   headline: string;   // 예: "5과 · 문제풀이 이어서 하기"
   sub: string | null; // 예: "내신 콕콕 1개 기다리는 중"

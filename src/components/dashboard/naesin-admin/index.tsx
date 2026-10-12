@@ -249,7 +249,6 @@ export function NaesinAdminClient({ textbooks: initialTextbooks, unitCounts: ini
               {/* 시험 대비 섹션 (교과서 레벨) */}
               <TextbookExamSection
                 textbookId={selectedTextbook.id}
-                textbookName={selectedTextbook.display_name}
                 canManageContent={canManageContent}
               />
             </div>

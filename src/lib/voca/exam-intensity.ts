@@ -22,9 +22,9 @@ export const DEFAULT_EXAM_INTENSITY: ExamIntensity = {
   retryWrong: false,
 };
 
-export type ExamPresetKey = 'basic' | 'standard' | 'perfect';
+type ExamPresetKey = 'basic' | 'standard' | 'perfect';
 
-export interface ExamPreset {
+interface ExamPreset {
   key: ExamPresetKey;
   label: string;
   hint: string;
@@ -38,14 +38,14 @@ export const EXAM_PRESETS: ExamPreset[] = [
 ];
 
 /** 학생 예외 행 (service_assignments) */
-export interface StudentExamRow {
+interface StudentExamRow {
   voca_exam_pass_score?: number | null;
   voca_exam_seconds_per_word?: number | null;
   voca_exam_retry_wrong?: boolean | null;
 }
 
 /** 학원 기본 행 (academies) */
-export interface AcademyExamRow {
+interface AcademyExamRow {
   voca_exam_pass_score_default?: number | null;
   voca_exam_seconds_per_word_default?: number | null;
   voca_exam_retry_wrong_default?: boolean | null;

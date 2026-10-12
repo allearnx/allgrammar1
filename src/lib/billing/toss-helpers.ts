@@ -19,28 +19,6 @@ export function requestTossCardAuth(customerKey: string) {
   });
 }
 
-export function requestTossPayment({
-  amount,
-  orderId,
-  orderName,
-}: {
-  amount: number;
-  orderId: string;
-  orderName: string;
-}) {
-  const tp = getTossSDK();
-  if (!tp) return;
-
-  tp.payment({ customerKey: 'ANONYMOUS' }).requestPayment({
-    method: '카드',
-    amount: { currency: 'KRW', value: amount },
-    orderId,
-    orderName,
-    successUrl: `${window.location.origin}/payment/callback?name=${encodeURIComponent(orderName)}`,
-    failUrl: `${window.location.origin}/payment/callback`,
-  });
-}
-
 export async function cancelSubscription(subscriptionId: string, onSuccess: () => void) {
   if (!confirm('정말 구독을 해지하시겠습니까? 현재 기간이 끝나면 서비스가 중단됩니다.')) return;
 

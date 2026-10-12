@@ -1,7 +1,7 @@
 'use client';
 
 import { Suspense, useState } from 'react';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
 import { createClient } from '@/lib/supabase/client';
@@ -16,7 +16,6 @@ import { isSafeRedirect } from '@/lib/auth/redirect';
 import type { UserRole } from '@/types/database';
 
 function SignUpForm() {
-  const router = useRouter();
   const searchParams = useSearchParams();
   const nextParam = searchParams.get('next');
 
@@ -32,7 +31,6 @@ function SignUpForm() {
   const [academyName, setAcademyName] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [newAcademyName, setNewAcademyName] = useState('');
-  const [contactNumber, setContactNumber] = useState('');
   const [phone, setPhone] = useState('');
 
   const isAdminRole = role === 'admin';
@@ -44,7 +42,6 @@ function SignUpForm() {
     if (isAdminRole) {
       data.academy_name = newAcademyName.trim();
       // free_service 미전송 → 학원 트리거가 NULL 생성 = 둘 다 체험 (택1 폐지 정책)
-      data.contact_number = contactNumber.trim() || undefined;
     } else {
       const code = inviteCode.trim().toUpperCase();
       if (code.length === 6 && academyName) data.invite_code = code;

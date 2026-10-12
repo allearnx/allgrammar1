@@ -4,8 +4,8 @@ export const PAYMENT_HISTORY_COLUMNS = 'id, subscription_id, toss_payment_key, t
 
 export type PlanTarget = 'academy' | 'individual';
 export type SubscriptionStatus = 'trialing' | 'active' | 'past_due' | 'canceled' | 'expired';
-export type SubscriptionTier = 'free' | 'paid';
-export type PaymentStatus = 'success' | 'failed' | 'refunded';
+type SubscriptionTier = 'free' | 'paid';
+type PaymentStatus = 'success' | 'failed' | 'refunded';
 export type OrderStatus = 'pending' | 'paid' | 'failed' | 'refunded' | 'canceled';
 
 export interface SubscriptionPlan {

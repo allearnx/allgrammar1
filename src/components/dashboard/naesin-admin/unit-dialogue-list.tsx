@@ -3,7 +3,7 @@
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import { MessageSquare, Pencil, Trash2, Loader2, Plus, X } from 'lucide-react';
+import { MessageSquare, Pencil, Trash2, Loader2, Plus } from 'lucide-react';
 import { useDialogueEditForm } from '@/hooks/use-dialogue-edit-form';
 import type { NaesinDialogue } from '@/types/naesin';
 

@@ -62,7 +62,6 @@ export async function regradeSheet(
   for (const attempt of attempts) {
     const answers = attempt.answers as (string | number)[];
     const totalQuestions = attempt.total_questions;
-    let correctCount = 0;
     // 제출 당시 오답이 아니었던 문항 (retryCorrect는 재도전 정답이므로 정답으로 취급)
     const oldWrongNums = new Set(
       ((attempt.wrong_answers ?? []) as { number: number; retryCorrect?: boolean }[])
@@ -136,9 +135,7 @@ export async function regradeSheet(
         }
       }
 
-      if (isCorrect) {
-        correctCount++;
-      } else {
+      if (!isCorrect) {
         wrongAnswers.push({
           number: i + 1,
           userAnswer: (answers[i] as string | number) ?? '',

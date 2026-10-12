@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { fetchWithToast } from '@/lib/fetch-with-toast';
 import type { NaesinPassage } from '@/types/database';
 
-export interface PassageSentence {
+interface PassageSentence {
   original: string;
   korean: string;
   acceptedAnswers: string[];

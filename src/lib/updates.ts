@@ -1,9 +1,9 @@
 // 플랫폼 업데이트·사용법 공지 (최신순으로 위에 추가).
 // 기능 배포 시 여기에 한 항목 추가하면 사이드바 '업데이트·사용법' + 상단 배너에 자동 반영됩니다.
 
-export type UpdateTag = 'new' | 'improve' | 'guide';
+type UpdateTag = 'new' | 'improve' | 'guide';
 
-export interface PlatformUpdate {
+interface PlatformUpdate {
   id: string;        // 고유값 (배너 '닫기' 기억용). 새 항목마다 새 id.
   date: string;      // YYYY-MM-DD
   tag: UpdateTag;

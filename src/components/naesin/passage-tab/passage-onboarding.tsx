@@ -10,7 +10,7 @@ import { cn } from '@/lib/utils';
 import { FileText, Shuffle, PenLine, BookOpen, Target, Lightbulb, ArrowRight } from 'lucide-react';
 import type { PassageStageType } from '.';
 
-export const ALL_STEPS = [
+const ALL_STEPS = [
   {
     key: 'fill_blanks' as const,
     icon: FileText,

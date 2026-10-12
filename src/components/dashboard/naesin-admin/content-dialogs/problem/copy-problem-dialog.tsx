@@ -65,7 +65,7 @@ export function CopyProblemDialog({ sheet, open, onOpenChange }: Props) {
       return;
     }
     loadUnits(selectedTextbookId);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+   
   }, [selectedTextbookId]);
 
   async function loadTextbooks() {

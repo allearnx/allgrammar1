@@ -10,11 +10,11 @@ import { logger } from '@/lib/logger';
  * 썸네일(blogthumb.pstatic.net)은 Referer가 붙으면 403 → <img referrerPolicy="no-referrer">로 표시.
  */
 
-export const NAVER_BLOG_ID = 'allrounder_eng';
+const NAVER_BLOG_ID = 'allrounder_eng';
 export const NAVER_BLOG_URL = `https://blog.naver.com/${NAVER_BLOG_ID}`;
 const RSS_URL = `https://rss.blog.naver.com/${NAVER_BLOG_ID}.xml`;
 
-export interface NaverBlogPost {
+interface NaverBlogPost {
   id: string;
   title: string;
   link: string;

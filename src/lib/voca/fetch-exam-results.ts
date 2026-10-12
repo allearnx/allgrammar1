@@ -25,7 +25,7 @@ export interface ExamGroup {
   wrongWords: WrongWord[];
 }
 
-export interface StudentExamGroups {
+interface StudentExamGroups {
   studentId: string;
   exams: ExamGroup[];
 }

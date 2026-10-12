@@ -1,7 +1,7 @@
 import { createAdminClient } from '@/lib/supabase/admin';
 import type { NaesinExamData } from './fetch-exam-data';
 
-export interface NaesinProgressResult {
+interface NaesinProgressResult {
   naesinProgress: {
     unit_id: string;
     vocab_completed: boolean;

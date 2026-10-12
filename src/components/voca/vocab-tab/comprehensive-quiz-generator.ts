@@ -14,7 +14,7 @@ export type QuestionType =
   | 'idiom_example_translate' // 8. 숙어 예문 해석
   | 'word_arrange';    // 9. 단어 배열 영작
 
-export interface BaseQuestion {
+interface BaseQuestion {
   type: QuestionType;
   word: string;
   prompt: string;

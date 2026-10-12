@@ -1,6 +1,6 @@
 import { createClient } from '@/lib/supabase/server';
 
-export interface KokkokAssignment { sheetId: string; studentId: string; studentName: string; bestScore: number | null; assignedAt: string | null }
+interface KokkokAssignment { sheetId: string; studentId: string; studentName: string; bestScore: number | null; assignedAt: string | null }
 export interface KokkokSet { id: string; title: string; grammar_id: string; questionCount: number; videoUrl: string | null; assignments: KokkokAssignment[] }
 
 export async function fetchContentData() {

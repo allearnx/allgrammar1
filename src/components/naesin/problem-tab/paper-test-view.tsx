@@ -32,7 +32,6 @@ function PaperQuestion({
   onAnswerChange: (value: string | number) => void;
 }) {
   const hasOptions = question.options && question.options.length > 0;
-  const isSubjective = !hasOptions;
   const isMulti = hasOptions && isMultiSelectQuestion(question);
 
   // Parse multi-select answer from comma-separated string

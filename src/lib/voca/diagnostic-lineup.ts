@@ -25,7 +25,7 @@ import type { BandKey } from './diagnostic-bands';
 
 export type LineupColumnKey = 'elem' | 'm1' | 'm2' | 'm3' | 'h1' | 'h2' | 'h3';
 
-export interface LineupColumn {
+interface LineupColumn {
   key: LineupColumnKey;
   /** 칸 헤더 — 교재를 설명하는 학년 라벨 (중1~고3) */
   gradeLabel: string;
@@ -126,7 +126,7 @@ export const LINEUP_ACCENTS: Record<LineupColumnKey, { vivid: string; tint: stri
   h3: { vivid: '#1F1F1F', tint: '#F1F3F4', deep: '#1F1F1F' },
 };
 
-export interface LineupPlacement {
+interface LineupPlacement {
   columnKey: LineupColumnKey;
   /** 칸 안에서 배지가 붙는 추천 교재 — 항상 사다리(시중 교재)의 칸 대표 */
   highlightTitle: string;

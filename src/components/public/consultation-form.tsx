@@ -284,7 +284,7 @@ export default function ConsultationForm({
                 감사합니다.
               </p>
               <button
-                onClick={() => setShowModal(false)}
+                onClick={() => { setShowModal(false); onSuccess?.(); }}
                 className="w-full py-4 bg-brand-600 hover:bg-brand-800 text-white font-bold rounded-full transition-colors"
               >
                 확인

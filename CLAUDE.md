@@ -104,6 +104,16 @@
 - wrong-answer-detail-panel.tsx(655줄) 분리는 여유 있을 때. 나머지 대형 컴포넌트는 "그대로 둠" 판정.
 - my-report/parent-share는 토큰 기반 특수 인증이라 수동 라우트 유지 (정당).
 
+## 2026-10-12 정리 (refactor/cleanup-2026-10)
+- 완료: 죽은 파일 14개(관리자 온보딩 위자드·구 OMR 탭·vocab-tab index·템플릿 복사본 다이얼로그 등) 삭제,
+  미사용 export 166건(export 해제 139·선언 삭제 27), 미사용 변수·죽은 prop 정리, scripts/ 일회성 49개 → scripts/archive/.
+- ⚠️ `eslint-disable-next-line react-hooks/*` 하나만 있어도 React Compiler 린트가 그 파일의 다른 react-hooks 진단
+  (refs 등)을 통째로 건너뜀 — 디렉티브 지우면 숨어 있던 에러가 드러날 수 있음 (youtube-player 사례).
+- 다음 후보 (우선순위순): ① formatDate 7곳·splitSentences 3곳·normalize 3곳 통합(채점 관련은 테스트로 동치 확인 후)
+  ② 테스트 makeRequest 24곳 → helpers/api-test-utils 공용 ③ 진단 화면 diagnostic-client.tsx(966줄) 분리
+  ④ extract-paraphrase route(313줄) lib 분리 ⑤ problem-validator.ts 규칙별 분리.
+- 보류: `as` 단언 경고 667건(규칙 완화 검토), select('*') 19건(유령 컬럼 원칙 유지), naesin↔voca 학습 컴포넌트 통합.
+
 ---
 
 # select('*') → 컬럼 명시 전환 (egress 절감) — ⏸️ 보류 (2026-07-05)

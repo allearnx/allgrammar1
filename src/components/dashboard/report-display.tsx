@@ -23,7 +23,7 @@ function MetricCard({
   );
 }
 
-export interface ReportDisplayProps {
+interface ReportDisplayProps {
   report: EnhancedReportData;
   currentReportId: string | null;
   onCopyShareLink: () => void;

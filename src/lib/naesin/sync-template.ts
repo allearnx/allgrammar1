@@ -2,7 +2,7 @@ import { createAdminClient } from '@/lib/supabase/admin';
 import { regradeSheet } from './regrade-sheet';
 import { logger } from '@/lib/logger';
 
-export interface TemplateSyncResult {
+interface TemplateSyncResult {
   templateSynced: boolean;
   copiesSynced: number;
 }

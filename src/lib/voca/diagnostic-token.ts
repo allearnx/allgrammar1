@@ -12,7 +12,7 @@
 import type { BandKey } from './diagnostic-bands';
 import { normalizeTyped } from './normalize-typed';
 
-export interface DiagnosticTokenPayload {
+interface DiagnosticTokenPayload {
   /** 정답 단어 id */
   v: string;
   /** front_text (영어) — 타이핑 정답 비교 대상 */
@@ -65,7 +65,7 @@ export async function signDiagnosticToken(
 }
 
 /** 서명·만료 검증 후 payload 반환. 실패 시 null. */
-export async function verifyDiagnosticToken(token: string): Promise<DiagnosticTokenPayload | null> {
+async function verifyDiagnosticToken(token: string): Promise<DiagnosticTokenPayload | null> {
   const dot = token.indexOf('.');
   if (dot <= 0) return null;
   const body = token.slice(0, dot);
@@ -104,7 +104,7 @@ export function normalizeTypedAnswer(s: string): string {
   return normalizeTyped(s).replace(/[.?!]+$/, '').trim();
 }
 
-export interface VerifiedItem {
+interface VerifiedItem {
   vocabId: string;
   front_text: string;
   back_text: string;

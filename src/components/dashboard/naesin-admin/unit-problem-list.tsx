@@ -16,7 +16,7 @@ import { toast } from 'sonner';
 import { fetchWithToast } from '@/lib/fetch-with-toast';
 import type { NaesinProblemSheet, NaesinTemplate } from '@/types/naesin';
 import { toGenerated, toDbQuestion } from './content-dialogs/shared/question-utils';
-import { AiProblemImproveDialog, CopyProblemDialog, TemplateCopiesDialog } from './content-dialogs';
+import { AiProblemImproveDialog, CopyProblemDialog } from './content-dialogs';
 import { useQuestionEditor } from '@/hooks/use-question-editor';
 import { ProblemSheetItem } from './problem-sheet-item';
 
@@ -38,8 +38,6 @@ export function UnitProblemList({ sheets, onUpdate, onRequestDelete, loadFullShe
   const [saving, setSaving] = useState(false);
   const [improveSheetId, setImproveSheetId] = useState<string | null>(null);
   const [copySheetId, setCopySheetId] = useState<string | null>(null);
-  const [copiesTemplateId, setCopiesTemplateId] = useState<string | null>(null);
-  const [copiesTemplateTitle, setCopiesTemplateTitle] = useState('');
   const [templateDialogId, setTemplateDialogId] = useState<string | null>(null);
   const [templateTopic, setTemplateTopic] = useState('');
   const [savingTemplate, setSavingTemplate] = useState(false);
@@ -238,7 +236,6 @@ export function UnitProblemList({ sheets, onUpdate, onRequestDelete, loadFullShe
           onMoveSheet={moveSheet}
           onSaveTemplate={handleSaveTemplate}
           onCopy={async (id) => { if (loadFullSheet) await loadFullSheet(id); setCopySheetId(id); }}
-          onCopies={(templateId, title) => { setCopiesTemplateId(templateId); setCopiesTemplateTitle(title); }}
           onImprove={async (id) => { if (loadFullSheet) await loadFullSheet(id); setImproveSheetId(id); }}
           onRequestDelete={onRequestDelete}
           onEditQuestion={(field, idx, value) => editor.updateQuestion(idx, field, value)}
@@ -268,15 +265,6 @@ export function UnitProblemList({ sheets, onUpdate, onRequestDelete, loadFullShe
           sheet={sheets.find((s) => s.id === copySheetId)!}
           open={true}
           onOpenChange={(v) => { if (!v) setCopySheetId(null); }}
-        />
-      )}
-
-      {copiesTemplateId && (
-        <TemplateCopiesDialog
-          templateId={copiesTemplateId}
-          templateTitle={copiesTemplateTitle}
-          open={true}
-          onOpenChange={(v) => { if (!v) { setCopiesTemplateId(null); setCopiesTemplateTitle(''); } }}
         />
       )}
 

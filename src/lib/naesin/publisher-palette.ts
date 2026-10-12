@@ -1,5 +1,5 @@
 // 교과서 카드의 출판사별 컬러(책등·아이콘 배경) — 학생 선택 화면과 관리자 목록 공용
-export const PUBLISHER_PALETTES = [
+const PUBLISHER_PALETTES = [
   { bg: 'linear-gradient(135deg, #DBEAFE 0%, #BFDBFE 100%)', spine: '#3B82F6', text: '#1E40AF' },
   { bg: 'linear-gradient(135deg, #FCE7F3 0%, #FBCFE8 100%)', spine: '#EC4899', text: '#BE185D' },
   { bg: 'linear-gradient(135deg, #D1FAE5 0%, #A7F3D0 100%)', spine: '#10B981', text: '#065F46' },

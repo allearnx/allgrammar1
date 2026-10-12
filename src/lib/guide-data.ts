@@ -9,12 +9,12 @@ import {
   type LucideIcon,
 } from 'lucide-react';
 
-export interface GuideStep {
+interface GuideStep {
   title: string;
   description: string;
 }
 
-export interface GuideEntry {
+interface GuideEntry {
   slug: string;
   title: string;
   description: string;

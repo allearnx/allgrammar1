@@ -28,7 +28,6 @@ interface ProblemSheetItemProps {
   onMoveSheet: (index: number, direction: 'up' | 'down') => void;
   onSaveTemplate: (sheetId: string) => void;
   onCopy: (sheetId: string) => void;
-  onCopies: (templateId: string, title: string) => void;
   onImprove: (sheetId: string) => void;
   onRequestDelete: (sheetId: string) => void;
   onEditQuestion: (field: keyof GeneratedQuestion, idx: number, value: string) => void;
@@ -65,7 +64,6 @@ export function ProblemSheetItem({
   onMoveSheet,
   onSaveTemplate,
   onCopy,
-  onCopies,
   onImprove,
   onRequestDelete,
   onEditQuestion,
@@ -121,7 +119,7 @@ export function ProblemSheetItem({
           variant="ghost"
           size="icon"
           className="h-6 w-6 opacity-0 group-hover:opacity-100"
-          onClick={(e) => { e.stopPropagation(); isEditing ? onCancelEdit() : onStartEdit(); }}
+          onClick={(e) => { e.stopPropagation(); if (isEditing) onCancelEdit(); else onStartEdit(); }}
           aria-label="수정"
         >
           <Pencil className="h-3.5 w-3.5" />

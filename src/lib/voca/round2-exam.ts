@@ -17,8 +17,8 @@ export interface Round2Vocab {
   antonyms: string | null;
 }
 
-export type Relation = 'synonym' | 'antonym';
-export type ExamFormat = 'spelling' | 'choice';
+type Relation = 'synonym' | 'antonym';
+type ExamFormat = 'spelling' | 'choice';
 
 export interface Round2ExamQuestion {
   vocabId: string;
@@ -44,7 +44,7 @@ export function parseRelated(field: string | null): string[] {
 }
 
 /** 채점용 정규화 — 소문자, 앞뒤·중복 공백 + 유니코드 문장부호(곱슬따옴표 등) 통일 */
-export function normalizeRelated(s: string): string {
+function normalizeRelated(s: string): string {
   return normalizeTyped(s);
 }
 
@@ -75,7 +75,7 @@ export function buildCandidates(vocab: Round2Vocab[]): Candidate[] {
   return out;
 }
 
-export interface BuildOptions {
+interface BuildOptions {
   /** 총 문항 수 (난이도). 후보가 부족하면 있는 만큼 */
   totalCount: number;
   /** 4지선다 비율 0~1 (나머지는 스펠링). 기본 0.5 */

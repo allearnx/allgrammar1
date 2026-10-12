@@ -1,4 +1,4 @@
-export interface ContentManagerState {
+interface ContentManagerState {
   showVocabList: boolean;
   showPassageList: boolean;
   showExternalPassageList: boolean;
@@ -13,7 +13,7 @@ export interface ContentManagerState {
   regeneratingGV: string | null;
 }
 
-export type ContentManagerAction =
+type ContentManagerAction =
   | { type: 'TOGGLE_SECTION'; section: 'vocab' | 'passage' | 'externalPassage' | 'dialogue' | 'grammar' | 'problem' | 'textbookVideo' | 'mockExam' }
   | { type: 'SET_BULK_DELETE_OPEN'; open: boolean }
   | { type: 'SET_COUNTS'; omrCount: number; lastReviewCount: number }

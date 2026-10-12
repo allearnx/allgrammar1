@@ -17,7 +17,7 @@ interface DialogueLine {
   originalIndex: number;
 }
 
-export interface WrongOrdering {
+interface WrongOrdering {
   type: 'ordering';
   correctOrder: string;
   userOrder: string;
@@ -41,7 +41,7 @@ export function DialogueLineOrdering({ sentences, onComplete }: DialogueLineOrde
       if (i % HINT_INTERVAL === 0) set.add(i);
     }
     return set;
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+     
   }, [lines.length]);
 
   const nonHintPositions = useMemo(

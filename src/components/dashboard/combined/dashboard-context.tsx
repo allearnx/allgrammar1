@@ -48,7 +48,7 @@ export interface DashboardProps {
 
 // ── Context value ──
 
-export interface DashboardContextValue {
+interface DashboardContextValue {
   activeTab: 'voca' | 'naesin';
   setActiveTab: (tab: 'voca' | 'naesin') => void;
 

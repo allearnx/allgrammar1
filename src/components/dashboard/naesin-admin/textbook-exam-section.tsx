@@ -13,11 +13,10 @@ import { SHEET_ADMIN_LITE_COLUMNS, type NaesinProblemSheet } from '@/types/naesi
 
 interface TextbookExamSectionProps {
   textbookId: string;
-  textbookName: string;
   canManageContent?: boolean;
 }
 
-export function TextbookExamSection({ textbookId, textbookName, canManageContent = false }: TextbookExamSectionProps) {
+export function TextbookExamSection({ textbookId, canManageContent = false }: TextbookExamSectionProps) {
   const [sheets, setSheets] = useState<NaesinProblemSheet[]>([]);
   const [deleteId, setDeleteId] = useState<string | null>(null);
   const [loadingSheetId, setLoadingSheetId] = useState<string | null>(null);

@@ -1,6 +1,6 @@
 import { createAdminClient } from '@/lib/supabase/admin';
 
-export interface HealthIssue {
+interface HealthIssue {
   code: string;
   severity: 'error' | 'warning';
   message: string;

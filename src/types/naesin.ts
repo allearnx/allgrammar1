@@ -128,7 +128,7 @@ export interface NaesinEpVideoProgress {
   updated_at: string;
 }
 
-export type NaesinGrammarContentType = 'video' | 'text';
+type NaesinGrammarContentType = 'video' | 'text';
 
 export interface NaesinGrammarLesson {
   id: string;
@@ -141,27 +141,6 @@ export interface NaesinGrammarLesson {
   text_content: string | null;
   sort_order: number;
   created_at: string;
-}
-
-/** @deprecated OMR은 문제풀이(problem)로 대체됨. 히스토리용으로 유지 */
-export interface NaesinOmrSheet {
-  id: string;
-  unit_id: string;
-  title: string;
-  total_questions: number;
-  answer_key: number[];
-  points_per_question: number[] | null;
-  sort_order: number;
-  created_at: string;
-}
-
-export interface NaesinStudentSettings {
-  id: string;
-  student_id: string;
-  textbook_id: string;
-  enabled_stages?: string[];
-  created_at: string;
-  updated_at: string;
 }
 
 export interface NaesinStudentProgress {
@@ -208,18 +187,6 @@ export interface NaesinStudentProgress {
   mock_exam_completed: boolean;
   created_at: string;
   updated_at: string;
-}
-
-/** @deprecated OMR은 문제풀이(problem)로 대체됨. 히스토리용으로 유지 */
-export interface NaesinOmrAttempt {
-  id: string;
-  student_id: string;
-  omr_sheet_id: string;
-  student_answers: number[];
-  correct_count: number;
-  total_questions: number;
-  score_percent: number;
-  created_at: string;
 }
 
 export interface NaesinVocabQuizResult {
@@ -284,15 +251,6 @@ export interface NaesinVocabQuizSet {
   created_at: string;
 }
 
-export interface NaesinVocabQuizSetResult {
-  id: string;
-  student_id: string;
-  quiz_set_id: string;
-  score: number;
-  wrong_words: { front_text: string; back_text: string }[];
-  created_at: string;
-}
-
 export interface NaesinGrammarVideoProgress {
   id: string;
   student_id: string;
@@ -306,8 +264,8 @@ export interface NaesinGrammarVideoProgress {
   updated_at: string;
 }
 
-export type NaesinProblemMode = 'interactive' | 'image_answer';
-export type NaesinProblemCategory = 'problem' | 'last_review' | 'mock_exam' | 'external_passage' | 'eng_eng_def';
+type NaesinProblemMode = 'interactive' | 'image_answer';
+type NaesinProblemCategory = 'problem' | 'last_review' | 'mock_exam' | 'external_passage' | 'eng_eng_def';
 
 export interface NaesinProblemSheet {
   id: string;
@@ -363,7 +321,6 @@ export const NAESIN_EXAM_ASSIGNMENTS_COLUMNS = 'id, student_id, textbook_id, exa
 
 export const NAESIN_VOCAB_QUIZ_SETS_COLUMNS = 'id, unit_id, title, set_order, vocab_ids, created_at';
 
-
 export interface NaesinTemplate {
   id: string;
   title: string;
@@ -403,17 +360,6 @@ export interface ExternalPassageSentence {
   acceptedAnswers?: string[];
 }
 
-export interface NaesinProblemAttempt {
-  id: string;
-  student_id: string;
-  sheet_id: string;
-  answers: (string | number)[];
-  score: number;
-  total_questions: number;
-  wrong_answers: { number: number; userAnswer: string | number; correctAnswer: string | number; question?: string }[];
-  created_at: string;
-}
-
 export type NaesinWrongAnswerStage = 'vocab' | 'passage' | 'dialogue' | 'grammar' | 'problem' | 'mockExam' | 'lastReview';
 
 export interface NaesinWrongAnswer {
@@ -434,9 +380,9 @@ export interface NaesinWrongAnswer {
   draftProgress?: string;
 }
 
-export type NaesinSimilarProblemStatus = 'pending' | 'approved' | 'rejected';
+type NaesinSimilarProblemStatus = 'pending' | 'approved' | 'rejected';
 
-export type RejectionReason =
+type RejectionReason =
   | 'wrong_answer'
   | 'grammar_error'
   | 'too_easy'
@@ -473,7 +419,7 @@ export interface NaesinExamAssignment {
   updated_at: string;
 }
 
-export type NaesinLastReviewContentType = 'video' | 'pdf' | 'text';
+type NaesinLastReviewContentType = 'video' | 'pdf' | 'text';
 
 export interface NaesinLastReviewContent {
   id: string;
@@ -540,7 +486,7 @@ export interface NaesinWorkbookOmrAttempt {
   created_at: string;
 }
 
-export type NaesinGrammarChatMessageRole = 'ai' | 'student';
+type NaesinGrammarChatMessageRole = 'ai' | 'student';
 
 export interface NaesinGrammarChatMessage {
   role: NaesinGrammarChatMessageRole;

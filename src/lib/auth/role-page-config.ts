@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation';
 import type { UserRole } from '@/types/database';
 
-export type DashboardRole = 'admin' | 'boss' | 'teacher';
+type DashboardRole = 'admin' | 'boss' | 'teacher';
 
 const VALID_ROLES = new Set<string>(['admin', 'boss', 'teacher']);
 

@@ -36,7 +36,7 @@ export function loadYouTubeAPI(): Promise<void> {
   return apiLoadPromise;
 }
 
-export interface YouTubePlayerOptions {
+interface YouTubePlayerOptions {
   videoId: string;
   elementId: string;
   onReady?: (player: YT.Player) => void;

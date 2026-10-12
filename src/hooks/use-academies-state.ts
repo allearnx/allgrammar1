@@ -19,7 +19,7 @@ export interface Academy {
   owner_phone: string | null;
 }
 
-export interface AcademyState {
+interface AcademyState {
   addOpen: boolean;
   editOpen: boolean;
   editingAcademy: Academy | null;
@@ -33,7 +33,7 @@ export interface AcademyState {
   regenerating: string | null;
 }
 
-export type AcademyAction =
+type AcademyAction =
   | { type: 'SET_ADD_OPEN'; open: boolean }
   | { type: 'OPEN_EDIT'; academy: Academy }
   | { type: 'CLOSE_EDIT' }

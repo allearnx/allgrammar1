@@ -3,20 +3,20 @@
 // ============================================
 
 /** Phase 1 영상 학습 */
-export interface ReportVideoProgress {
+interface ReportVideoProgress {
   completed: number;
   total: number;
 }
 
 /** Phase 1 암기 학습 */
-export interface ReportMemoryProgress {
+interface ReportMemoryProgress {
   mastered: number;
   total: number;
   dueReviews: number;
 }
 
 /** Phase 1 교과서 학습 */
-export interface ReportTextbookProgress {
+interface ReportTextbookProgress {
   completed: number;
 }
 

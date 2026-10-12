@@ -1,7 +1,7 @@
 import type { SupabaseClient } from '@supabase/supabase-js';
 
 /** 올킬오답 정복 졸업 기준 (연속 정답 횟수) */
-export const WRONG_GRADUATE_THRESHOLD = 3;
+const WRONG_GRADUATE_THRESHOLD = 3;
 
 /** 현재 주 월요일 (UTC 기준) */
 export function getCurrentMonday(): string {
@@ -14,13 +14,13 @@ export function getCurrentMonday(): string {
 }
 
 /** 3주 롤링 윈도우 시작일 */
-export function getThreeWeeksAgo(mondayStr: string): string {
+function getThreeWeeksAgo(mondayStr: string): string {
   const d = new Date(mondayStr + 'T00:00:00Z');
   d.setUTCDate(d.getUTCDate() - 14);
   return d.toISOString().slice(0, 10);
 }
 
-export interface WrongPool {
+interface WrongPool {
   /** lowercase front_text → 단어 (중복 제거) */
   wordMap: Map<string, { front_text: string; back_text: string }>;
   /** 이번 주 정복 진행 (lowercase front_text → 연속 정답 수) */

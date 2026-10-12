@@ -60,7 +60,7 @@ export const POST = createApiHandler(
   await requireContentPermission(user, supabase);
 
   try {
-    const { unitId, unitTitle, pdfBase64, mediaType, pdfUrl, storagePath, phase, questions: inputQuestions, halfSampling } = await request.json();
+    const { unitId, unitTitle, pdfBase64, pdfUrl, storagePath, phase, questions: inputQuestions, halfSampling } = await request.json();
 
     // 변형을 청크 단위로 병렬 실행 (지문·word bank 그룹은 경계에서 안 쪼갬)
     const paraphraseQuestions = async (originals: Record<string, unknown>[]) => {

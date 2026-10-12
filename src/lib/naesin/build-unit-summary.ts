@@ -17,7 +17,7 @@ export interface ExamGroup {
   units: UnitSummary[];
 }
 
-export interface BuildContext {
+interface BuildContext {
   vocabUnitIds: Set<string>;
   passageUnitIds: Set<string>;
   dialogueUnitIds: Set<string>;
@@ -47,7 +47,7 @@ export function groupBy<T extends Record<string, unknown>>(items: T[], key: stri
   return result;
 }
 
-export function computeStageProgress(
+function computeStageProgress(
   progress: NaesinStudentProgress | null,
   quizSetCount: number,
   videoCount: number,

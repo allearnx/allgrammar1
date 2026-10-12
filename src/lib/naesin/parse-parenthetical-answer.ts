@@ -13,10 +13,6 @@ function containsKorean(text: string): boolean {
   return /[\u3131-\uD79D]/.test(text);
 }
 
-function isPrimarilyEnglish(text: string): boolean {
-  const latin = (text.match(/[a-zA-Z]/g) || []).length;
-  return latin >= 3;
-}
 
 function isNumberedPattern(answer: string): boolean {
   return /^\(\d+\)/.test(answer.trim());

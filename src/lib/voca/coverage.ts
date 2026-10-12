@@ -3,7 +3,7 @@ import { isR1Complete } from '@/lib/dashboard/voca-helpers';
 import { selectInChunks } from '@/lib/supabase/in-chunks';
 import { fetchWrongPool, activeWrongKeys, getCurrentMonday } from '@/lib/voca/wrong-pool';
 
-export interface VocaCoverage {
+interface VocaCoverage {
   /** 0~100. 대상 교재에 단어가 없으면 null */
   coverage: number | null;
   /** 대상 교재 단어 중 학생이 아는 단어 수 */
@@ -78,7 +78,7 @@ export async function computeVocaCoverage(
   };
 }
 
-export interface VocaTotalKnown {
+interface VocaTotalKnown {
   /** 누적 암기 단어 수 (교재 무관 고유 단어, 정복 대기 오답 제외) */
   knownWords: number;
   /** 이번 주(월요일~)에 새로 외운 단어 수 */

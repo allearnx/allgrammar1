@@ -24,11 +24,13 @@ export function YouTubePlayer({
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const lastSavedRef = useRef(0);
 
-  // Stable refs for callbacks to avoid useEffect re-runs
+  // Stable refs for callbacks to avoid useEffect re-runs (렌더 중 ref 쓰기 금지 → effect에서 동기화)
   const onProgressUpdateRef = useRef(onProgressUpdate);
-  onProgressUpdateRef.current = onProgressUpdate;
   const onCompleteRef = useRef(onComplete);
-  onCompleteRef.current = onComplete;
+  useEffect(() => {
+    onProgressUpdateRef.current = onProgressUpdate;
+    onCompleteRef.current = onComplete;
+  }, [onProgressUpdate, onComplete]);
 
   const saveProgress = useCallback(
     async (seconds: number, completed: boolean = false) => {
@@ -60,7 +62,9 @@ export function YouTubePlayer({
 
   // Stable ref for saveProgress so useEffect doesn't depend on it
   const saveProgressRef = useRef(saveProgress);
-  saveProgressRef.current = saveProgress;
+  useEffect(() => {
+    saveProgressRef.current = saveProgress;
+  }, [saveProgress]);
 
   useEffect(() => {
     let mounted = true;
@@ -150,7 +154,6 @@ export function YouTubePlayer({
         playerRef.current.destroy();
       }
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [videoId, grammarId, initialPosition]);
 
   return (

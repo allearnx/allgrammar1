@@ -14,11 +14,10 @@
  * 규칙 검증 이력: 라이브 시트 2,270문항에 적용, 경로 (b) 표본 40건 수동 검수 — 상세는 위 스크립트 커밋(f90329ce).
  */
 /** 밑줄 복구 대상 문항의 최소 형태 (NaesinProblemQuestion과 구조 호환) */
-export type UnderlineQuestion = { number: number; question: string; answer?: unknown; options?: string[]; explanation?: string };
+type UnderlineQuestion = { number: number; question: string; answer?: unknown; options?: string[]; explanation?: string };
 type Q = UnderlineQuestion;
-export type UnderlinePath = 'a' | 'b' | 'c' | 'manual';
-export type UnderlineResult = { path: UnderlinePath; notes: string[] };
-
+type UnderlinePath = 'a' | 'b' | 'c' | 'manual';
+type UnderlineResult = { path: UnderlinePath; notes: string[] };
 
 // ───────────────────────── 감지 ─────────────────────────
 export const hasMissingUnderline = (q: Q) =>

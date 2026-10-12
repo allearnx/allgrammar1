@@ -62,9 +62,3 @@ export const STAT_COLORS = {
   amber: BRAND.amber,   // yellow
 } as const;
 
-/** Activity calendar dot colors */
-export const DOT_COLORS = {
-  voca: '#1A73E8',
-  naesin: '#34A853',
-  mixed: '#F9AB00',
-} as const;

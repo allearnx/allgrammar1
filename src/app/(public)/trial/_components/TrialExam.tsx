@@ -1,7 +1,6 @@
 'use client';
 
 import { useState, useCallback } from 'react';
-import { EXAM_SETS } from '../_data';
 import type { ExamSet } from '../_data';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';

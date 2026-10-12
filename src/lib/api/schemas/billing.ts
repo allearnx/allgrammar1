@@ -29,10 +29,6 @@ export const billingRegisterCardSchema = z.object({
   customerKey: z.string().min(1),
 });
 
-export const subscriptionCancelSchema = z.object({
-  subscriptionId: ID,
-});
-
 export const paymentConfirmSchema = z.object({
   paymentKey: z.string().min(1),
   orderId: z.string().min(1),

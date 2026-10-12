@@ -1,6 +1,6 @@
 'use client';
 
-import { Check, Copy, Plus, ChevronDown, User, BookOpen, ToggleRight, Search, Save, CreditCard, BarChart3 } from 'lucide-react';
+import { Check, Copy, Plus, ChevronDown, User, BookOpen, Search, Save, CreditCard, BarChart3 } from 'lucide-react';
 
 /* ─────────── shared ─────────── */
 const Card = ({ children, className = '' }: { children: React.ReactNode; className?: string }) => (
@@ -28,7 +28,7 @@ const StudentRow = ({ name, sub, tag }: { name: string; sub?: string; tag?: Reac
 );
 
 /* ─────────── students ─────────── */
-export function StudentsStepIllustration({ step }: { step: number }) {
+function StudentsStepIllustration({ step }: { step: number }) {
   if (step === 0) {
     return (
       <Card>
@@ -85,7 +85,7 @@ export function StudentsStepIllustration({ step }: { step: number }) {
   );
 }
 
-export function StudentsCompletedIllustration() {
+function StudentsCompletedIllustration() {
   return (
     <Card>
       <div className="py-1">
@@ -98,7 +98,7 @@ export function StudentsCompletedIllustration() {
 }
 
 /* ─────────── textbook ─────────── */
-export function TextbookStepIllustration({ step }: { step: number }) {
+function TextbookStepIllustration({ step }: { step: number }) {
   if (step === 0) {
     return (
       <Card>
@@ -149,7 +149,7 @@ export function TextbookStepIllustration({ step }: { step: number }) {
   );
 }
 
-export function TextbookCompletedIllustration() {
+function TextbookCompletedIllustration() {
   return (
     <Card>
       <div className="py-1">
@@ -162,7 +162,7 @@ export function TextbookCompletedIllustration() {
 }
 
 /* ─────────── services ─────────── */
-export function ServicesStepIllustration({ step }: { step: number }) {
+function ServicesStepIllustration({ step }: { step: number }) {
   if (step === 0) {
     return (
       <Card>
@@ -215,7 +215,7 @@ export function ServicesStepIllustration({ step }: { step: number }) {
   );
 }
 
-export function ServicesCompletedIllustration() {
+function ServicesCompletedIllustration() {
   return (
     <Card>
       <div className="py-1">
@@ -228,7 +228,7 @@ export function ServicesCompletedIllustration() {
 }
 
 /* ─────────── teachers ─────────── */
-export function TeachersStepIllustration({ step }: { step: number }) {
+function TeachersStepIllustration({ step }: { step: number }) {
   if (step === 0) {
     return (
       <Card>
@@ -262,7 +262,7 @@ export function TeachersStepIllustration({ step }: { step: number }) {
   );
 }
 
-export function TeachersCompletedIllustration() {
+function TeachersCompletedIllustration() {
   return (
     <Card>
       <div className="py-1">
@@ -274,7 +274,7 @@ export function TeachersCompletedIllustration() {
 }
 
 /* ─────────── analytics ─────────── */
-export function AnalyticsStepIllustration({ step }: { step: number }) {
+function AnalyticsStepIllustration({ step }: { step: number }) {
   if (step === 0) {
     return (
       <Card>
@@ -313,7 +313,7 @@ export function AnalyticsStepIllustration({ step }: { step: number }) {
   );
 }
 
-export function AnalyticsCompletedIllustration() {
+function AnalyticsCompletedIllustration() {
   return (
     <Card>
       <div className="p-3 space-y-2.5">
@@ -338,7 +338,7 @@ export function AnalyticsCompletedIllustration() {
 }
 
 /* ─────────── settings ─────────── */
-export function SettingsStepIllustration({ step }: { step: number }) {
+function SettingsStepIllustration({ step }: { step: number }) {
   if (step === 0) {
     return (
       <Card>
@@ -373,7 +373,7 @@ export function SettingsStepIllustration({ step }: { step: number }) {
   );
 }
 
-export function SettingsCompletedIllustration() {
+function SettingsCompletedIllustration() {
   return (
     <Card>
       <div className="p-3 space-y-1.5">
@@ -397,7 +397,7 @@ export function SettingsCompletedIllustration() {
 }
 
 /* ─────────── billing ─────────── */
-export function BillingStepIllustration({ step }: { step: number }) {
+function BillingStepIllustration({ step }: { step: number }) {
   if (step === 0) {
     return (
       <Card>
@@ -432,7 +432,7 @@ export function BillingStepIllustration({ step }: { step: number }) {
   );
 }
 
-export function BillingCompletedIllustration() {
+function BillingCompletedIllustration() {
   return (
     <Card>
       <div className="p-3 space-y-2">
