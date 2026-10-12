@@ -6,6 +6,7 @@ import { Badge } from '@/components/ui/badge';
 import { StatCard } from '@/components/shared/stat-card';
 import { Receipt, DollarSign, CheckCircle2, XCircle, RotateCcw, Inbox, ExternalLink } from 'lucide-react';
 import type { Order, OrderStatus } from '@/types/billing';
+import { formatDateKo } from '@/lib/format';
 
 interface OrderWithJoins extends Order {
   user: { full_name: string; email: string; phone: string | null } | null;
@@ -36,17 +37,6 @@ const STATUS_COLORS: Record<OrderStatus, string> = {
 
 function formatKRW(amount: number) {
   return amount.toLocaleString('ko-KR') + '원';
-}
-
-function formatDate(dateStr: string | null) {
-  if (!dateStr) return '-';
-  return new Date(dateStr).toLocaleDateString('ko-KR', {
-    year: 'numeric',
-    month: '2-digit',
-    day: '2-digit',
-    hour: '2-digit',
-    minute: '2-digit',
-  });
 }
 
 export function OrdersClient({ orders }: OrdersClientProps) {
@@ -156,7 +146,7 @@ export function OrdersClient({ orders }: OrdersClientProps) {
                         {STATUS_LABELS[order.status]}
                       </Badge>
                     </td>
-                    <td className="px-5 py-3 text-gray-500 whitespace-nowrap">{formatDate(order.paid_at || order.created_at)}</td>
+                    <td className="px-5 py-3 text-gray-500 whitespace-nowrap">{formatDateKo(order.paid_at || order.created_at, 'datetime')}</td>
                     <td className="px-5 py-3">
                       {order.receipt_url ? (
                         <a

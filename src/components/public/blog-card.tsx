@@ -3,17 +3,13 @@ import Image from 'next/image';
 import type { BlogPostSummary, BlogFeedItem } from '@/types/blog';
 import { BLOG_CATEGORY_LABELS } from '@/types/blog';
 import { NaverPostPoster } from './naver-post-poster';
+import { formatDateKo } from '@/lib/format';
 
 interface BlogCardProps {
   /** 목록 카드 — 자체 글 + 네이버 글 공용 */
   item?: BlogFeedItem;
   /** 관련 글 등 자체 글만 넘기는 기존 호출부 호환 */
   post?: BlogPostSummary;
-}
-
-function formatDate(iso: string | null | undefined) {
-  if (!iso) return null;
-  return new Date(iso).toLocaleDateString('ko-KR', { year: 'numeric', month: 'long', day: 'numeric' });
 }
 
 const cardClass =
@@ -49,7 +45,7 @@ export default function BlogCard({ item, post }: BlogCardProps) {
         <div className="p-5">
           <p className="text-sm text-[#3C4043] line-clamp-3 mb-3 leading-relaxed">{resolved.excerpt}</p>
           <div className="flex items-center justify-between text-xs text-[#9AA0A6]">
-            <time>{formatDate(resolved.publishedAt)}</time>
+            <time>{formatDateKo(resolved.publishedAt, 'long')}</time>
             <span className="group-hover:text-[#1A73E8] transition-colors">네이버에서 읽기 →</span>
           </div>
         </div>
@@ -83,7 +79,7 @@ export default function BlogCard({ item, post }: BlogCardProps) {
         </h3>
         <p className="text-sm text-[#5F6368] line-clamp-2 mb-3 leading-relaxed">{p.excerpt}</p>
         <div className="flex items-center justify-between text-xs text-[#9AA0A6]">
-          <time>{formatDate(p.published_at)}</time>
+          <time>{formatDateKo(p.published_at, 'long')}</time>
           <span>조회 {p.view_count.toLocaleString()}</span>
         </div>
       </div>

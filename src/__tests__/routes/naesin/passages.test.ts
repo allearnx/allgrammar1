@@ -1,6 +1,6 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { NextRequest } from 'next/server';
 import { testTeacher, testStudent, testPassage } from '../../helpers/fixtures';
+import { createMockRequest } from '../../helpers/api-test-utils';
 
 const mockGetUser = vi.fn();
 const mockCreateClient = vi.fn();
@@ -34,15 +34,7 @@ function mockChain(result: { data: unknown; error: unknown }) {
   return { from: vi.fn().mockReturnValue(chain), chain };
 }
 
-function makeRequest(method: string, body?: unknown) {
-  const init: RequestInit = { method };
-  const headers: Record<string, string> = {};
-  if (body !== undefined) {
-    init.body = JSON.stringify(body);
-    headers['content-type'] = 'application/json';
-  }
-  return new NextRequest('http://localhost/api/naesin/passages', { ...init, headers } as any);
-}
+const makeRequest = (method: string, body?: unknown) => createMockRequest(method, body, 'http://localhost/api/naesin/passages');
 
 beforeEach(() => {
   vi.clearAllMocks();

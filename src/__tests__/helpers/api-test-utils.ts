@@ -7,14 +7,15 @@ import type { AuthUser } from '@/types/auth';
 export function createMockRequest(
   method: string,
   body?: unknown,
-  url = 'http://localhost/api/test'
+  url = 'http://localhost/api/test',
+  contentType = 'application/json'
 ) {
   const init: RequestInit = { method };
   const headers: Record<string, string> = {};
 
   if (body !== undefined) {
     init.body = JSON.stringify(body);
-    headers['content-type'] = 'application/json';
+    headers['content-type'] = contentType;
   }
 
   return new NextRequest(url, { ...init, headers } as any);
@@ -100,31 +101,5 @@ export async function expectJsonResponse(
   return res.json();
 }
 
-// ── Standard mock setup ──
-
-export function setupMocks() {
-  const mockGetUser = vi.fn();
-  const mockCreateClient = vi.fn();
-
-  vi.mock('@/lib/auth/helpers', () => ({
-    getUser: (...args: unknown[]) => mockGetUser(...args),
-  }));
-
-  vi.mock('@/lib/supabase/server', () => ({
-    createClient: (...args: unknown[]) => mockCreateClient(...args),
-  }));
-
-  vi.mock('@/lib/api/rate-limit', () => ({
-    checkRateLimit: () => null,
-  }));
-
-  vi.mock('@/lib/utils/invite-code', () => ({
-    generateInviteCode: () => 'TESTCD',
-  }));
-
-  vi.mock('@/lib/api/audit', () => ({
-    auditLog: vi.fn(),
-  }));
-
-  return { mockGetUser, mockCreateClient };
-}
+// ⚠️ 이 파일에 vi.mock()을 두지 말 것 — 함수 안에 있어도 vitest가 모듈 최상단으로 끌어올려
+// 이 헬퍼를 import하는 모든 테스트의 mock을 덮어쓴다 (setupMocks 삭제 사유, 2026-10-12).

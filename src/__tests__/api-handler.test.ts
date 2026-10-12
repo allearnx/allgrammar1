@@ -20,25 +20,10 @@ vi.mock('@/lib/api/rate-limit', () => ({
 }));
 
 import { createApiHandler } from '@/lib/api/handler';
+import { createMockRequest } from './helpers/api-test-utils';
 
-function makeRequest(
-  method: string,
-  body?: unknown,
-  contentType = 'application/json'
-) {
-  const init: RequestInit = { method };
-  const headers: Record<string, string> = {};
-
-  if (body !== undefined) {
-    init.body = JSON.stringify(body);
-    headers['content-type'] = contentType;
-  }
-
-  return new NextRequest('http://localhost/api/test', {
-    ...init,
-    headers,
-  } as any);
-}
+const makeRequest = (method: string, body?: unknown, contentType?: string) =>
+  createMockRequest(method, body, 'http://localhost/api/test', contentType);
 
 const fakeUser = {
   id: 'user-1',

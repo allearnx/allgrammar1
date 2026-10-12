@@ -2,16 +2,13 @@
 
 import { Receipt, ExternalLink } from 'lucide-react';
 import type { PaymentHistory } from '@/types/billing';
+import { formatDateKo } from '@/lib/format';
 
 const STATUS_MAP: Record<string, { label: string; color: string; bg: string }> = {
   success: { label: '완료', color: 'text-emerald-700', bg: 'bg-emerald-50' },
   failed: { label: '실패', color: 'text-red-700', bg: 'bg-red-50' },
   refunded: { label: '환불', color: 'text-amber-700', bg: 'bg-amber-50' },
 };
-
-function formatDate(d: string) {
-  return new Date(d).toLocaleDateString('ko', { year: 'numeric', month: 'short', day: 'numeric' });
-}
 
 export function PaymentHistoryCard({ payments }: { payments: PaymentHistory[] }) {
   return (
@@ -41,7 +38,7 @@ export function PaymentHistoryCard({ payments }: { payments: PaymentHistory[] })
                 <div className="flex items-center gap-3">
                   <div className="flex flex-col">
                     <span className="text-[13px] font-medium text-gray-900">
-                      {formatDate(p.paid_at || p.created_at)}
+                      {formatDateKo(p.paid_at || p.created_at)}
                     </span>
                     <span className={`inline-flex items-center w-fit rounded-full px-2 py-0.5 mt-1 text-[11px] font-semibold ${info.color} ${info.bg}`}>
                       {info.label}

@@ -1,16 +1,7 @@
 import { NextResponse } from 'next/server';
 import { createApiHandler, ForbiddenError } from '@/lib/api';
 import { createAdminClient } from '@/lib/supabase/admin';
-
-// 현재 주 월요일 (UTC 기준)
-function getCurrentMonday(): string {
-  const now = new Date();
-  const day = now.getUTCDay();
-  const diff = day === 0 ? 6 : day - 1;
-  const monday = new Date(now);
-  monday.setUTCDate(monday.getUTCDate() - diff);
-  return monday.toISOString().slice(0, 10);
-}
+import { getCurrentMonday } from '@/lib/voca/wrong-pool';
 
 // GET: 선생님용 — 학원 학생들의 이번 주 올킬오답 현황
 export const GET = createApiHandler(

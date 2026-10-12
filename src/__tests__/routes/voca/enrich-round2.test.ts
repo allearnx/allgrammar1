@@ -1,6 +1,6 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { NextRequest } from 'next/server';
 import { testTeacher, testStudent } from '../../helpers/fixtures';
+import { createMockRequest } from '../../helpers/api-test-utils';
 
 const mockGetUser = vi.fn();
 const mockCreateClient = vi.fn();
@@ -40,13 +40,7 @@ function mockChain(result: { data: unknown; error: unknown }) {
   return { from: vi.fn().mockReturnValue(chain), chain };
 }
 
-function makeRequest(body: unknown) {
-  return new NextRequest('http://localhost/api/voca/vocabulary/enrich-round2', {
-    method: 'POST',
-    headers: { 'content-type': 'application/json' },
-    body: JSON.stringify(body),
-  });
-}
+const makeRequest = (body?: unknown) => createMockRequest('POST', body, 'http://localhost/api/voca/vocabulary/enrich-round2');
 
 function aiResponse(data: unknown) {
   return { content: [{ type: 'text', text: JSON.stringify(data) }] };
