@@ -52,6 +52,12 @@ interface NavItem {
   requireNaesin?: boolean;
 }
 
+/** 메뉴 옆 작은 표시 — 예: 무료 학생의 '무료 체험' + 무료 범위 */
+export interface NavTag {
+  label: string;
+  hint: string;
+}
+
 export interface NavGroup {
   label?: string;
   items: NavItem[];

@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import {
   getStepsDone, getRound2StepsDone, buildProgressMap, isBookRound1Complete, resolveBookRound,
-  countCompletedDays, dayRowStatus, expiryInfo,
+  countCompletedDays, dayRowStatus, expiryInfo, isRound2LockedAt, rulesForDay,
 } from '@/lib/voca/home-progress';
 import type { VocaDay, VocaStudentProgress } from '@/types/voca';
 
@@ -114,5 +114,35 @@ describe('expiryInfo', () => {
   });
   it('30일 넘게 남으면 D-day 표기 없음', () => {
     expect(expiryInfo(local(12, 1), now)).toEqual({ label: '12월 1일까지', urgent: false });
+  });
+});
+
+describe('무료 2회독 예외 (앞 Day N개)', () => {
+  const free = { roundMode: 'book' as const, bookCurrentRound: '2' as const, round2Locked: true, round2Forced: false, round2FreeDays: 3 };
+
+  it('앞 3개 Day만 2회독이 열린다', () => {
+    expect([0, 1, 2, 3, 4].map((i) => isRound2LockedAt(free, i))).toEqual([false, false, false, true, true]);
+    expect(isRound2LockedAt({ round2Locked: false, round2FreeDays: 0 }, 10)).toBe(false); // 유료
+    expect(isRound2LockedAt({ round2Locked: true, round2FreeDays: 0 }, 0)).toBe(true); // 예외 없음
+  });
+
+  it('잠긴 Day는 책 모드에서도 1회독 기준', () => {
+    expect(rulesForDay(free, 1)).toMatchObject({ round2Locked: false, bookCurrentRound: '2' });
+    expect(rulesForDay(free, 3)).toMatchObject({ round2Locked: true, bookCurrentRound: '1' });
+  });
+
+  it('예외가 있으면 앞 Day 1회독을 마친 뒤 책 모드 2회독으로 넘어간다', () => {
+    expect(resolveBookRound({ round2Locked: true, round2Forced: false, bookRound1Complete: true, round2FreeDays: 3 })).toBe('2');
+    expect(resolveBookRound({ round2Locked: true, round2Forced: false, bookRound1Complete: false, round2FreeDays: 3 })).toBe('1');
+  });
+
+  it('완료 Day 수 — 열린 Day는 2회독, 잠긴 Day는 1회독 기준', () => {
+    const map = buildProgressMap([
+      prog('d1', { ...R1, ...R2 }), prog('d2', R1), prog('d3', R1), prog('d4', R1), prog('d5', R1),
+    ]);
+    // d1(2회독 완료) + d4·d5(잠김 → 1회독 완료) = 3
+    expect(countCompletedDays(days, map, 0, free)).toBe(3);
+    // Day 모드: d1(1+2) + d4·d5(1회독만 필요) = 3
+    expect(countCompletedDays(days, map, 0, { ...free, roundMode: 'day' })).toBe(3);
   });
 });

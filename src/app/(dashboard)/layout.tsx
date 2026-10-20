@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 import { requireUser } from '@/lib/auth/helpers';
 import { getPlanContext } from '@/lib/billing/get-plan-context';
+import { FREE_SERVICE_INFO } from '@/lib/billing/free-service-info';
+import type { NavTag } from '@/components/layout/sidebar-nav-config';
 import { createClient } from '@/lib/supabase/server';
 import { createAdminClient } from '@/lib/supabase/admin';
 import { cached, TTL } from '@/lib/cache/server-cache';
@@ -51,6 +53,7 @@ export default async function DashboardLayout({
   let naesinTree: NaesinSidebarExam[] | undefined;
 
   let vocaPendingExams = 0;
+  let navTags: Record<string, NavTag> | undefined;
 
   if (user.role === 'student') {
     services = await getCachedServices(user.id);
@@ -58,9 +61,14 @@ export default async function DashboardLayout({
     // 무료 tier(개인·학원 공통): 보카·내신 둘 다 체험 가능하므로 사이드바에 두 메뉴 모두 노출.
     // 첫 화면 안내 "나머지도 사이드 메뉴에서 언제든 체험" 카피와 동작 일치.
     // (각 서비스의 무료 한도는 페이지에서 적용: 보카 3 Day, 내신 1단원·암기 3종)
-    const { tier } = await getPlanContext(user.academy_id, user.id);
+    const { tier, naesinMemorizeOnly } = await getPlanContext(user.academy_id, user.id);
     if (tier === 'free') {
       services = [...new Set([...services, 'naesin', 'voca'])];
+      // 메뉴만 봐서는 쓸 수 있는지 모르니 '무료 체험' + 무료 범위를 붙인다
+      navTags = { '/student/voca': { label: '무료 체험', hint: FREE_SERVICE_INFO.voca.freeScope } };
+      if (!naesinMemorizeOnly) {
+        navTags['/student/naesin'] = { label: '무료 체험', hint: FREE_SERVICE_INFO.naesin.freeScope };
+      }
     }
 
     // Fetch naesin sidebar tree if student has naesin service (cached 60s)
@@ -91,6 +99,7 @@ export default async function DashboardLayout({
         services={services}
         naesinTree={naesinTree}
         badges={vocaPendingExams > 0 ? { '/student/voca/exam': vocaPendingExams } : undefined}
+        tags={navTags}
       />
       <main className={`flex-1 overflow-y-auto overscroll-contain ${user.role === 'student' ? 'pb-16 md:pb-0' : ''}`}>
         {/* 3시간 무활동 자동 로그아웃 — 전 역할 공통 */}

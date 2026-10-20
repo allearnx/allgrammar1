@@ -7,10 +7,11 @@ import { ParentLinkButton } from '@/components/voca/parent-link-button';
 import { CoverageGauge } from '@/components/voca/coverage-gauge';
 
 /** 히어로 배너 — /allkill 랜딩 톤: 파스텔 하늘 + 알파벳 카펫 + GmarketSans. 교재명·진행 바·이용권·커버리지 */
-export function VocaHomeHero({ bookId, title, round2Locked, freeDayLimit, expiry, canSwitchBook, onOpenGuide, totalDays, completedCount }: {
+export function VocaHomeHero({ bookId, title, round2Locked, round2FreeDays = 0, freeDayLimit, expiry, canSwitchBook, onOpenGuide, totalDays, completedCount }: {
   bookId: string;
   title: string | undefined;
   round2Locked: boolean;
+  round2FreeDays?: number;
   freeDayLimit: number;
   expiry: { label: string; urgent: boolean } | null;
   canSwitchBook: boolean;
@@ -42,7 +43,12 @@ export function VocaHomeHero({ bookId, title, round2Locked, freeDayLimit, expiry
               연장하기
             </Link>
           )}
-          {round2Locked && freeDayLimit > 0 && (
+          {round2Locked && round2FreeDays > 0 && (
+            <span className="text-[11px] font-bold px-2 py-0.5 rounded-full bg-white text-primary">
+              Day 1~{round2FreeDays} 1·2회독 무료
+            </span>
+          )}
+          {round2Locked && round2FreeDays === 0 && freeDayLimit > 0 && (
             <span className="text-[11px] font-bold px-2 py-0.5 rounded-full bg-white/70 text-gray-400">
               2회독 🔒 유료
             </span>

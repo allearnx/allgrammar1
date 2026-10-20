@@ -1,10 +1,12 @@
 import { requireRole } from '@/lib/auth/helpers';
 import { createClient } from '@/lib/supabase/server';
 import { redirect } from 'next/navigation';
+import { FreeWelcomeModal } from '@/components/billing/free-welcome-modal';
+import { FreeTryOtherCard } from '@/components/billing/free-try-other-card';
 import { Topbar } from '@/components/layout/topbar';
 import { VocaHomeClient } from './client';
 import { getPlanContext } from '@/lib/billing/get-plan-context';
-import { canUseFeature } from '@/lib/billing/feature-gate';
+import { canUseFeature, getFreeVocaRound2Days } from '@/lib/billing/feature-gate';
 import { resolveFreeVocaDayLimit } from '@/lib/billing/voca-free-limit';
 import { DiagnosticEntryCard } from '@/components/voca/diagnostic-entry-card';
 import { isR1Complete } from '@/lib/dashboard/voca-helpers';
@@ -107,7 +109,13 @@ export default async function StudentVocaPage({
   return (
     <>
       <Topbar user={user} title="올킬보카" />
+      {planContext.tier === 'free' && (
+        <FreeWelcomeModal service="voca" userId={user.id} userName={user.full_name} />
+      )}
       <div className="p-4 md:p-6">
+        {planContext.tier === 'free' && (
+          <div className="mb-4"><FreeTryOtherCard current="voca" userId={user.id} /></div>
+        )}
         <DiagnosticEntryCard latest={latestDiagnostic} retestBook={retestBook} />
         <VocaHomeClient
           books={(books as VocaBook[]) || []}
@@ -118,6 +126,7 @@ export default async function StudentVocaPage({
           initialBookId={initialBookId}
           freeDayLimit={freeVocaDayLimit}
           round2Locked={round2Locked}
+          round2FreeDays={getFreeVocaRound2Days(planContext.tier)}
           round2Forced={!!assignment?.round2_unlocked}
           roundMode={(assignment?.voca_round_mode as 'book' | 'day') || 'book'}
           firstTimeGuide={progressList.length === 0}

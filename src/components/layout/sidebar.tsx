@@ -15,7 +15,7 @@ import { NavLinks } from './sidebar-nav-links';
 import { ChangePasswordDialog } from './change-password-dialog';
 import { DeleteAccountDialog } from './delete-account-dialog';
 import type { AuthUser } from '@/types/auth';
-import type { NaesinSidebarExam } from './sidebar-nav-config';
+import type { NavTag, NaesinSidebarExam } from './sidebar-nav-config';
 
 export type { NaesinSidebarExam };
 
@@ -25,9 +25,11 @@ interface SidebarProps {
   naesinTree?: NaesinSidebarExam[];
   /** href → 미확인 개수 (예: 올킬시험 미응시) — 빨간 배지로 표시 */
   badges?: Record<string, number>;
+  /** 메뉴 옆 무료 체험 표시 */
+  tags?: Record<string, NavTag>;
 }
 
-export function Sidebar({ user, services, naesinTree, badges }: SidebarProps) {
+export function Sidebar({ user, services, naesinTree, badges, tags }: SidebarProps) {
   const pathname = usePathname();
   const router = useRouter();
   const [open, setOpen] = useState(false);
@@ -55,7 +57,7 @@ export function Sidebar({ user, services, naesinTree, badges }: SidebarProps) {
         </span>
       </div>
       <ScrollArea className="flex-1 min-h-0 py-3">
-        <NavLinks groups={navGroups} pathname={pathname} naesinTree={naesinTree} onNavigate={() => setOpen(false)} hoverWhite={hasCustomBg} badges={badges} />
+        <NavLinks groups={navGroups} pathname={pathname} naesinTree={naesinTree} onNavigate={() => setOpen(false)} hoverWhite={hasCustomBg} badges={badges} tags={tags} />
       </ScrollArea>
       <div className="shrink-0 border-t border-sidebar-border p-4">
         <div className="mb-3 px-3">

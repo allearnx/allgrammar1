@@ -5,7 +5,7 @@ import { resolveFreeVocaDayLimit } from '@/lib/billing/voca-free-limit';
 import { Topbar } from '@/components/layout/topbar';
 import { VocaDayClient } from './client';
 import { getPlanContext } from '@/lib/billing/get-plan-context';
-import { canUseFeature } from '@/lib/billing/feature-gate';
+import { canUseFeature, getFreeVocaRound2Days } from '@/lib/billing/feature-gate';
 import { isR1Complete } from '@/lib/dashboard/voca-helpers';
 import type { VocaVocabulary, VocaStudentProgress, VocaDay } from '@/types/voca';
 import { VOCA_DAYS_COLUMNS, VOCA_VOCABULARY_COLUMNS, VOCA_STUDENT_PROGRESS_COLUMNS } from '@/types/voca';
@@ -56,13 +56,17 @@ export default async function StudentVocaDayPage({
   // 무료 플랜: 가입 7일 이내는 전체 Day, 이후 앞 N개까지만
   const planContext = planForGate;
   const freeVocaDayLimit = await resolveFreeVocaDayLimit(supabase, planContext.tier, user.academy_id, user.id);
-  if (freeVocaDayLimit > 0) {
+  // 무료 2회독 예외(앞 N개 Day)도 같은 순번으로 판단
+  const round2FreeDays = getFreeVocaRound2Days(planContext.tier);
+  let dayIndex = 0;
+  if (freeVocaDayLimit > 0 || round2FreeDays > 0) {
     const { count } = await supabase
       .from('voca_days')
       .select('id', { count: 'exact', head: true })
       .eq('book_id', (day as VocaDay).book_id)
       .lt('sort_order', (day as VocaDay).sort_order);
-    if ((count ?? 0) >= freeVocaDayLimit) redirect('/student/voca');
+    dayIndex = count ?? 0;
+    if (freeVocaDayLimit > 0 && dayIndex >= freeVocaDayLimit) redirect('/student/voca');
   }
 
   // Get vocabulary
@@ -126,7 +130,9 @@ export default async function StudentVocaDayPage({
   const wrongWords = Array.from(wrongWordsMap.values());
   const hasMatchingSubmission = (matchingSubmissions?.length ?? 0) > 0;
 
-  const round2Locked = !assignment?.round2_unlocked && !canUseFeature(planContext.tier, 'voca:round2');
+  // 무료는 2회독 잠금이지만 앞 round2FreeDays개 Day는 2회독까지 열어 준다
+  const round2Locked = !assignment?.round2_unlocked && !canUseFeature(planContext.tier, 'voca:round2')
+    && dayIndex >= round2FreeDays;
   const roundMode = (assignment?.voca_round_mode as 'book' | 'day') || 'book';
   // 관리자 '2회독' 토글 = 1회독 면제 — 다른 곳에서 이미 1회독을 마친 학생을 바로 2회독으로
   const round2Forced = !!assignment?.round2_unlocked;

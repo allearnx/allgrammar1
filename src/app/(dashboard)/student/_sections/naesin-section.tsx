@@ -3,6 +3,8 @@ import { Topbar } from '@/components/layout/topbar';
 import { NaesinDashboard } from '@/components/dashboard/naesin-dashboard';
 import { NaesinNoTextbookScreen } from '@/components/dashboard/naesin-no-textbook-screen';
 import { SubscriptionBanner } from '@/components/billing/subscription-banner';
+import { FreeWelcomeModal } from '@/components/billing/free-welcome-modal';
+import { FreeTryOtherCard } from '@/components/billing/free-try-other-card';
 import { mergeEnabledStages } from '@/lib/billing/feature-gate';
 import { fetchNaesinSettings, fetchNaesinDashboardData } from '@/lib/dashboard/fetch-naesin-data';
 import { buildQuickStart } from '@/lib/dashboard/quick-start';
@@ -21,14 +23,22 @@ export async function NaesinSection({ user, planContext, isIndependent = false }
   const settings = await fetchNaesinSettings(supabase, user.id);
   const enabledStages = mergeEnabledStages(planContext.tier, settings.enabled_stages, planContext.naesinMemorizeOnly);
 
+  // 무료: 안내 띠 + (처음이면) 올인내신 환영 팝업 + 올킬보카 체험 추천
   const freeBanner = planContext.tier === 'free' && (
-    <SubscriptionBanner
-      status="active"
-      tier="free"
-      freeService={planContext.freeService}
-      billingPageHref="/student/billing"
-      isIndividual={isIndependent}
-    />
+    <>
+      <SubscriptionBanner
+        status="active"
+        tier="free"
+        freeService={planContext.freeService}
+        billingPageHref="/student/billing"
+        isIndividual={isIndependent}
+        forStudent
+      />
+      {!planContext.naesinMemorizeOnly && (
+        <FreeWelcomeModal service="naesin" userId={user.id} userName={user.full_name} />
+      )}
+      <div className="px-4 md:px-6 pt-4"><FreeTryOtherCard current="naesin" userId={user.id} /></div>
+    </>
   );
 
   if (!settings.textbook_id) {

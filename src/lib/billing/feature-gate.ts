@@ -17,10 +17,10 @@ const ALL_NAESIN_STAGES = ['vocab', 'passage', 'dialogue', 'textbookVideo', 'gra
 const MEMORIZE_STAGES = ['vocab', 'passage', 'dialogue'];
 
 /** 무료 체험 시 올인내신 단원 제한 (1개만) */
-const FREE_NAESIN_UNIT_LIMIT = 1;
+export const FREE_NAESIN_UNIT_LIMIT = 1;
 
 /** 보카 무료 체험 — 가입 후 이 기간은 전체 Day 무제한, 이후 맛보기 Day 수로 축소 */
-const FREE_VOCA_TRIAL_DAYS = 7;
+export const FREE_VOCA_TRIAL_DAYS = 7;
 /** 체험 종료 후 무료로 볼 수 있는 Day 수 */
 export const FREE_VOCA_DAY_LIMIT = 3;
 
@@ -36,6 +36,15 @@ export function getFreeVocaDayLimit(tier: Tier, signupIso: string | null | undef
     if (elapsed >= 0 && elapsed <= FREE_VOCA_TRIAL_DAYS * 24 * 60 * 60 * 1000) return 0;
   }
   return FREE_VOCA_DAY_LIMIT;
+}
+
+/**
+ * 무료에서 2회독까지 열어 주는 앞 Day 수 (교재마다 앞 N개).
+ * 'voca:round2'는 여전히 유료 기능이고, 무료는 이 범위 안에서만 예외로 열린다.
+ * 유료(또는 관리자 2회독 토글)는 이미 전체가 열려 있으므로 0.
+ */
+export function getFreeVocaRound2Days(tier: Tier): number {
+  return tier === 'free' ? FREE_VOCA_DAY_LIMIT : 0;
 }
 
 const PAID_ONLY_FEATURES: ReadonlySet<Feature> = new Set([

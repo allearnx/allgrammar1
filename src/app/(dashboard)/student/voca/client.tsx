@@ -27,6 +27,8 @@ interface VocaHomeClientProps {
   initialBookId?: string;
   freeDayLimit?: number;
   round2Locked?: boolean;
+  /** 무료라도 2회독이 열리는 앞 Day 수 */
+  round2FreeDays?: number;
   /** 관리자 '2회독' 토글 = 1회독 면제 (다른 곳에서 1회독을 마친 학생) */
   round2Forced?: boolean;
   roundMode?: RoundMode;
@@ -38,7 +40,7 @@ interface VocaHomeClientProps {
 
 // Day 배지·진행 바는 구글 4색 순환 (랜딩 statBand·7단계 카드와 같은 리듬)
 
-export function VocaHomeClient({ books, days, progressList, submissionStatuses = {}, studentId, initialBookId, freeDayLimit = 0, round2Locked = false, round2Forced = false, roundMode: initialRoundMode = 'book', firstTimeGuide = false, expiresAt = null }: VocaHomeClientProps) {
+export function VocaHomeClient({ books, days, progressList, submissionStatuses = {}, studentId, initialBookId, freeDayLimit = 0, round2Locked = false, round2FreeDays = 0, round2Forced = false, roundMode: initialRoundMode = 'book', firstTimeGuide = false, expiresAt = null }: VocaHomeClientProps) {
   const router = useRouter();
   // 계정별 키 — 전역 키('voca:selectedBookId')를 쓰면 같은 브라우저에서
   // 다른 계정이 보던 교재가 복원되어 첫 진입 가이드가 건너뛰어진다
@@ -96,10 +98,10 @@ export function VocaHomeClient({ books, days, progressList, submissionStatuses =
   );
 
   // 현재 라운드: 모드에 따라 다르게 (book 모드는 전체 기준, 1회독 면제 시 바로 2회독)
-  const bookCurrentRound = resolveBookRound({ round2Locked, round2Forced, bookRound1Complete });
+  const bookCurrentRound = resolveBookRound({ round2Locked, round2Forced, bookRound1Complete, round2FreeDays });
   const roundRules = useMemo(
-    () => ({ roundMode, bookCurrentRound, round2Locked, round2Forced }),
-    [roundMode, bookCurrentRound, round2Locked, round2Forced],
+    () => ({ roundMode, bookCurrentRound, round2Locked, round2Forced, round2FreeDays }),
+    [roundMode, bookCurrentRound, round2Locked, round2Forced, round2FreeDays],
   );
 
   // 무료 체험(Day 3개) 완료 — 업그레이드 안내를 페이지 상단으로 승격
@@ -158,6 +160,7 @@ export function VocaHomeClient({ books, days, progressList, submissionStatuses =
         bookId={selectedBookId}
         title={selectedBook?.title}
         round2Locked={round2Locked}
+        round2FreeDays={round2FreeDays}
         freeDayLimit={freeDayLimit}
         expiry={expiry}
         canSwitchBook={books.length > 1}
@@ -173,6 +176,7 @@ export function VocaHomeClient({ books, days, progressList, submissionStatuses =
         progressMap={progressMap}
         freeDayLimit={freeDayLimit}
         round2Locked={round2Locked}
+        round2FreeDays={round2FreeDays}
         round2Forced={round2Forced}
         onSelectBook={selectBook}
       />
@@ -183,7 +187,7 @@ export function VocaHomeClient({ books, days, progressList, submissionStatuses =
       {/* 무료 체험 완료 → 업그레이드 안내를 최상단에 */}
       {freeTrialDone && freeUpgradeNotice}
 
-      <RoundModeToggle roundMode={roundMode} round2Locked={round2Locked} isPending={isPending} onChange={handleModeChange} />
+      <RoundModeToggle roundMode={roundMode} round2Locked={round2Locked} round2FreeDays={round2FreeDays} isPending={isPending} onChange={handleModeChange} />
 
       {/* Book selector */}
       {books.length > 1 && (
