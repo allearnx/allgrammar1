@@ -4,7 +4,7 @@ import { redirect } from 'next/navigation';
 import { Topbar } from '@/components/layout/topbar';
 import { VocaHomeClient } from './client';
 import { getPlanContext } from '@/lib/billing/get-plan-context';
-import { canUseFeature } from '@/lib/billing/feature-gate';
+import { canUseFeature, getFreeVocaRound2Days } from '@/lib/billing/feature-gate';
 import { resolveFreeVocaDayLimit } from '@/lib/billing/voca-free-limit';
 import { DiagnosticEntryCard } from '@/components/voca/diagnostic-entry-card';
 import { isR1Complete } from '@/lib/dashboard/voca-helpers';
@@ -118,6 +118,7 @@ export default async function StudentVocaPage({
           initialBookId={initialBookId}
           freeDayLimit={freeVocaDayLimit}
           round2Locked={round2Locked}
+          round2FreeDays={getFreeVocaRound2Days(planContext.tier)}
           round2Forced={!!assignment?.round2_unlocked}
           roundMode={(assignment?.voca_round_mode as 'book' | 'day') || 'book'}
           firstTimeGuide={progressList.length === 0}

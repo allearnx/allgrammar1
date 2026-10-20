@@ -38,6 +38,8 @@ interface Props {
   submissionStatuses?: Record<string, string>;
   /** 플랜 때문에 2회독 잠김 (무료 플랜) — 업셀 티저 표시 */
   round2PlanLocked?: boolean;
+  /** 잠금(무료)이어도 2회독이 열리는 앞 Day 수 */
+  round2FreeDays?: number;
   /** 업그레이드 CTA 링크 — 개인 학생만 (학원 학생은 null → 원장 문의 안내) */
   upgradeHref?: string | null;
 }
@@ -63,7 +65,7 @@ const COLORS = {
 
 // ── Component ──
 
-export function VocaDashboard({ userName, books, days, progressList, wordCount, wrongWordCounts = {}, quizHistory = [], submissionStatuses = {}, round2PlanLocked = false, upgradeHref = null }: Props) {
+export function VocaDashboard({ userName, books, days, progressList, wordCount, wrongWordCounts = {}, quizHistory = [], submissionStatuses = {}, round2PlanLocked = false, round2FreeDays = 0, upgradeHref = null }: Props) {
   const progressMap = new Map<string, VocaStudentProgress>();
   progressList.forEach((p) => progressMap.set(p.day_id, p));
 
@@ -196,7 +198,9 @@ export function VocaDashboard({ userName, books, days, progressList, wordCount, 
             <div>
               <div className="text-base font-bold flex items-center gap-1.5"><BookMarked className="h-4 w-4" /> 2회독 — 유의어 · 반의어 · 숙어</div>
               <div className="text-sm text-gray-400 mt-0.5">
-                {round2PlanLocked
+                {round2PlanLocked && round2FreeDays > 0
+                  ? `무료 체험은 교재마다 Day 1~${round2FreeDays}까지 2회독을 해 볼 수 있어요`
+                  : round2PlanLocked
                   ? '유료 플랜에서 열리는 심화 과정이에요'
                   : bookR1Complete ? '3단계를 모두 통과해야 2회독이 완료됩니다' : `모든 Day의 1회독을 마치면 시작돼요 (${completedDays}/${sortedDays.length})`}
               </div>
@@ -205,7 +209,7 @@ export function VocaDashboard({ userName, books, days, progressList, wordCount, 
               background: r2AllDone ? '#DCFCE7' : (round2PlanLocked || !bookR1Complete) ? '#F3F4F6' : '#E8F0FE',
               color: r2AllDone ? COLORS.green : (round2PlanLocked || !bookR1Complete) ? '#9CA3AF' : '#1A73E8',
             }}>
-              {r2AllDone ? '완료 ✓' : round2PlanLocked ? '유료 전용' : !bookR1Complete ? '잠김' : '진행 중'}
+              {r2AllDone ? '완료 ✓' : round2PlanLocked ? (round2FreeDays > 0 ? `Day ${round2FreeDays}개 무료` : '유료 전용') : !bookR1Complete ? '잠김' : '진행 중'}
             </span>
           </div>
 
@@ -225,6 +229,11 @@ export function VocaDashboard({ userName, books, days, progressList, wordCount, 
               <p className="text-sm font-bold text-gray-800">
                 🔓 2회독을 열면 &lsquo;외운 단어&rsquo;가 &lsquo;시험에서 쓰는 단어&rsquo;가 돼요
               </p>
+              {round2FreeDays > 0 && (
+                <Link href="/student/voca" className="mt-1 inline-block text-xs font-semibold text-primary underline underline-offset-2">
+                  Day 1~{round2FreeDays} 2회독 무료로 해 보기 →
+                </Link>
+              )}
               <ul className="mt-2 space-y-1 text-xs text-gray-500">
                 <li>· 유의어 · 반의어 · 숙어까지 묶어서 한 번 더 암기</li>
                 <li>· 9가지 유형 종합 문제 + AI 서술형 채점</li>

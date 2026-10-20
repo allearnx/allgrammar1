@@ -5,7 +5,7 @@
  * 규칙 요약 (사장님 확정 이력):
  * - 무료 체험은 앞 freeDayLimit개 Day만 대상 (0 = 제한 없음)
  * - 관리자 '2회독' 토글(round2Forced) = 1회독 면제 → 바로 2회독
- * - round2Locked(무료)면 2회독은 없는 것으로 계산
+ * - round2Locked(무료)면 2회독은 없는 것으로 계산 — 단 앞 round2FreeDays개 Day는 무료로 2회독까지 열림
  */
 import { isR1Complete, isR2Complete } from '@/lib/dashboard/voca-helpers';
 import type { VocaDay, VocaStudentProgress } from '@/types/voca';
@@ -51,9 +51,10 @@ export function isBookRound1Complete(days: VocaDay[], progressMap: ProgressMap, 
   return target.length > 0 && target.every((d) => isR1Complete(progressMap.get(d.id) ?? null));
 }
 
-/** 책 단위 모드의 현재 회독 — 잠금이면 항상 1, 면제거나 1회독을 다 돌았으면 2 */
-export function resolveBookRound(opts: { round2Locked: boolean; round2Forced: boolean; bookRound1Complete: boolean }): '1' | '2' {
-  return (!opts.round2Locked && (opts.round2Forced || opts.bookRound1Complete)) ? '2' : '1';
+/** 책 단위 모드의 현재 회독 — 전부 잠금이면 항상 1, 면제거나 1회독을 다 돌았으면 2 */
+export function resolveBookRound(opts: { round2Locked: boolean; round2Forced: boolean; bookRound1Complete: boolean; round2FreeDays?: number }): '1' | '2' {
+  const fullyLocked = opts.round2Locked && !(opts.round2FreeDays && opts.round2FreeDays > 0);
+  return (!fullyLocked && (opts.round2Forced || opts.bookRound1Complete)) ? '2' : '1';
 }
 
 export interface RoundRules {
@@ -61,6 +62,19 @@ export interface RoundRules {
   bookCurrentRound: '1' | '2';
   round2Locked: boolean;
   round2Forced: boolean;
+  /** 잠금(무료)이어도 2회독이 열리는 앞 Day 수 (0 = 예외 없음) */
+  round2FreeDays?: number;
+}
+
+/** 교재 안 index번째 Day의 2회독이 잠겼는지 — 무료라도 앞 round2FreeDays개는 열림 */
+export function isRound2LockedAt(rules: Pick<RoundRules, 'round2Locked' | 'round2FreeDays'>, index: number): boolean {
+  return rules.round2Locked && index >= (rules.round2FreeDays ?? 0);
+}
+
+/** index번째 Day에 적용할 규칙 — 2회독이 잠긴 Day는 책 모드에서도 1회독 기준으로 본다 */
+export function rulesForDay(rules: RoundRules, index: number): RoundRules {
+  if (!isRound2LockedAt(rules, index)) return { ...rules, round2Locked: false };
+  return { ...rules, round2Locked: true, bookCurrentRound: '1' };
 }
 
 /** 히어로 진행 바의 완료 Day 수 — 모드별로 "완료"의 뜻이 다르다 */
@@ -68,17 +82,15 @@ export function countCompletedDays(
   days: VocaDay[], progressMap: ProgressMap, freeDayLimit: number, rules: RoundRules,
 ): number {
   const target = targetDays(days, freeDayLimit);
-  if (rules.roundMode === 'day') {
-    // Day 모드: 1회독+2회독 모두 완료한 Day 수 (1회독 면제 시 2회독만, 잠금 시 1회독만)
-    return target.filter((d) => {
-      const p = progressMap.get(d.id) ?? null;
-      return (rules.round2Forced || isR1Complete(p)) && (rules.round2Locked || isR2Complete(p));
-    }).length;
-  }
-  if (rules.bookCurrentRound === '2') {
-    return target.filter((d) => isR2Complete(progressMap.get(d.id) ?? null)).length;
-  }
-  return target.filter((d) => isR1Complete(progressMap.get(d.id) ?? null)).length;
+  return target.filter((d, i) => {
+    const p = progressMap.get(d.id) ?? null;
+    const r = rulesForDay(rules, i);
+    if (r.roundMode === 'day') {
+      // Day 모드: 1회독+2회독 모두 완료 (1회독 면제 시 2회독만, 잠금 Day는 1회독만)
+      return (r.round2Forced || isR1Complete(p)) && (r.round2Locked || isR2Complete(p));
+    }
+    return r.bookCurrentRound === '2' ? isR2Complete(p) : isR1Complete(p);
+  }).length;
 }
 
 export interface DayRowStatus {

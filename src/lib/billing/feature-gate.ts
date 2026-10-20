@@ -38,6 +38,15 @@ export function getFreeVocaDayLimit(tier: Tier, signupIso: string | null | undef
   return FREE_VOCA_DAY_LIMIT;
 }
 
+/**
+ * 무료에서 2회독까지 열어 주는 앞 Day 수 (교재마다 앞 N개).
+ * 'voca:round2'는 여전히 유료 기능이고, 무료는 이 범위 안에서만 예외로 열린다.
+ * 유료(또는 관리자 2회독 토글)는 이미 전체가 열려 있으므로 0.
+ */
+export function getFreeVocaRound2Days(tier: Tier): number {
+  return tier === 'free' ? FREE_VOCA_DAY_LIMIT : 0;
+}
+
 const PAID_ONLY_FEATURES: ReadonlySet<Feature> = new Set([
   'naesin:grammar',
   'naesin:problem',

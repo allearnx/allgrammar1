@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { Lock, ChevronRight } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { VOCA_STEP_THEMES } from '@/components/voca/voca-brand';
-import { dayRowStatus, type ProgressMap, type RoundRules } from '@/lib/voca/home-progress';
+import { dayRowStatus, rulesForDay, type ProgressMap, type RoundRules } from '@/lib/voca/home-progress';
 import type { VocaDay, VocaStudentProgress } from '@/types/voca';
 
 /**
@@ -48,10 +48,12 @@ export function DayList({ days, progressMap, freeDayLimit, roundRules, submissio
           }
 
           // 진행 상태 계산은 lib/voca/home-progress.dayRowStatus (모드·면제·잠금 규칙 포함)
+          // 무료라도 앞 Day 몇 개는 2회독이 열려 있어 Day마다 규칙을 따로 본다
+          const dayRules = rulesForDay(roundRules, index);
           const {
             isCompleted, stepsNow, totalSteps, roundLabel: dayRoundLabel, completedLabel,
             r1Completed: completed, r2Completed,
-          } = dayRowStatus(prog, roundRules);
+          } = dayRowStatus(prog, dayRules);
 
           return (
             <Link key={day.id} href={`/student/voca/${day.id}`}>
@@ -93,7 +95,7 @@ export function DayList({ days, progressMap, freeDayLimit, roundRules, submissio
                       {completedLabel}
                     </p>
                   )}
-                  {(roundRules.roundMode === 'day' || roundRules.bookCurrentRound === '1') && <ProgressBadges progress={prog} submissionStatus={submissionStatuses[day.id]} />}
+                  {(dayRules.roundMode === 'day' || dayRules.bookCurrentRound === '1') && <ProgressBadges progress={prog} submissionStatus={submissionStatuses[day.id]} />}
                 </div>
                 <div className="flex items-center gap-1.5 shrink-0">
                   {/* 회독 직행 칩 — 진도 표시 겸 바로가기 (2026-07-22 완전 개방) */}
@@ -108,7 +110,7 @@ export function DayList({ days, progressMap, freeDayLimit, roundRules, submissio
                   >
                     1회독{completed && ' ✓'}
                   </button>
-                  {roundRules.round2Locked ? (
+                  {dayRules.round2Locked ? (
                     <span className="flex items-center gap-0.5 rounded-full bg-gray-50 px-2 py-0.5 text-[10px] font-bold text-gray-300">
                       <Lock className="h-2.5 w-2.5" />2회독
                     </span>

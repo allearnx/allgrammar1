@@ -6,7 +6,7 @@ import { SubscriptionBanner } from '@/components/billing/subscription-banner';
 import { fetchVocaDashboardData } from '@/lib/dashboard/fetch-voca-data';
 import { buildQuickStart } from '@/lib/dashboard/quick-start';
 import { QuickStartCards } from '@/components/dashboard/quick-start-cards';
-import { canUseFeature } from '@/lib/billing/feature-gate';
+import { canUseFeature, getFreeVocaRound2Days } from '@/lib/billing/feature-gate';
 import type { AuthUser } from '@/types/auth';
 import type { PlanContext } from '@/lib/billing/get-plan-context';
 import type { VocaBook } from '@/types/voca';
@@ -62,6 +62,7 @@ export async function VocaSection({ user, planContext, isIndependent }: Props) {
         quizHistory={data.quizHistory}
         submissionStatuses={data.submissionStatuses}
         round2PlanLocked={round2PlanLocked}
+        round2FreeDays={getFreeVocaRound2Days(planContext.tier)}
         upgradeHref={isIndependent ? '/allkill#price' : null}
       />
     </>
