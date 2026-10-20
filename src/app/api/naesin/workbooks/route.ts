@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { createApiHandler, dbResult } from '@/lib/api';
 import { workbookCreateSchema, workbookPatchSchema, idSchema } from '@/lib/api/schemas';
+import { requireContentPermission } from '@/lib/api/require-content-permission';
 
 const ADMIN_ROLES = ['teacher', 'admin', 'boss'] as const;
 
@@ -19,7 +20,8 @@ export const GET = createApiHandler(
 
 export const POST = createApiHandler(
   { roles: [...ADMIN_ROLES], schema: workbookCreateSchema },
-  async ({ body, supabase }) => {
+  async ({ body, supabase, user }) => {
+    await requireContentPermission(user, supabase);
     const data = dbResult(await supabase
       .from('naesin_workbooks')
       .insert({
@@ -37,7 +39,8 @@ export const POST = createApiHandler(
 
 export const PATCH = createApiHandler(
   { roles: [...ADMIN_ROLES], schema: workbookPatchSchema },
-  async ({ body, supabase }) => {
+  async ({ body, supabase, user }) => {
+    await requireContentPermission(user, supabase);
     const { id, ...updates } = body;
 
     const data = dbResult(await supabase
@@ -52,7 +55,8 @@ export const PATCH = createApiHandler(
 
 export const DELETE = createApiHandler(
   { roles: [...ADMIN_ROLES], schema: idSchema, hasBody: true },
-  async ({ body, supabase }) => {
+  async ({ body, supabase, user }) => {
+    await requireContentPermission(user, supabase);
     dbResult(await supabase.from('naesin_workbooks').delete().eq('id', body.id));
     return NextResponse.json({ success: true });
   }

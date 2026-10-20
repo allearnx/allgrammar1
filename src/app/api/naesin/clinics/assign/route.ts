@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { createApiHandler, dbResult } from '@/lib/api';
+import { createApiHandler, dbResult, ForbiddenError } from '@/lib/api';
 import { clinicAssignSchema } from '@/lib/api/schemas';
 import { requireContentPermission } from '@/lib/api/require-content-permission';
 import { sanitizeQuestions, validateBeforeSave } from '@/lib/validation/problem-validator';
@@ -18,6 +18,19 @@ export const POST = createApiHandler(
   async ({ body, supabase, user }) => {
     await requireContentPermission(user, supabase);
     const { templateId, studentIds, note } = body;
+
+    // 학원 범위: boss가 아니면 같은 학원 학생에게만 배정 (학원 없는 스태프는 배정 불가)
+    if (user.role !== 'boss') {
+      if (!user.academy_id) throw new ForbiddenError('학원 소속이 아닙니다.');
+      const { data: own } = await supabase
+        .from('users')
+        .select('id')
+        .in('id', studentIds)
+        .eq('academy_id', user.academy_id);
+      if ((own ?? []).length !== new Set(studentIds).size) {
+        throw new ForbiddenError('해당 학생에 대한 접근 권한이 없습니다.');
+      }
+    }
 
     const template = dbResult(await supabase
       .from('naesin_templates')
