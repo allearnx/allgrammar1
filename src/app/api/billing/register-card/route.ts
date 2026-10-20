@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import { createApiHandler } from '@/lib/api/handler';
 import { billingRegisterCardSchema } from '@/lib/api/schemas';
 import { issueBillingKey, TossPaymentError } from '@/lib/payments/toss';
+import { createAdminClient } from '@/lib/supabase/admin';
 
 export const POST = createApiHandler(
   { schema: billingRegisterCardSchema },
@@ -50,8 +51,9 @@ export const POST = createApiHandler(
       );
     }
 
-    // billingKey 업데이트
-    const { error: updateErr } = await supabase
+    // billingKey 업데이트 — 위에서 RLS로 소유권을 확인한 구독만, 서버(admin 클라이언트)가 저장.
+    // (구독 직접 쓰기 정책은 119에서 제거. 학생·개인 구독은 원래도 RLS UPDATE 정책이 없어 저장이 조용히 0행이었음)
+    const { error: updateErr } = await createAdminClient()
       .from('subscriptions')
       .update({ billing_key: result.billingKey })
       .eq('id', subscription.id);

@@ -3,11 +3,13 @@ import { createApiHandler } from '@/lib/api/handler';
 import { vocaDaysWithVocabSchema } from '@/lib/api/schemas';
 import { invalidateVocaContent } from '@/lib/cache/invalidate';
 import { filterVocabItems } from '@/lib/voca/vocab-guard';
+import { requireContentPermission } from '@/lib/api/require-content-permission';
 
 // POST — Day + 단어 일괄 생성 (PDF 대량 추출용)
 export const POST = createApiHandler(
   { roles: ['teacher', 'admin', 'boss'], schema: vocaDaysWithVocabSchema },
-  async ({ body, supabase }) => {
+  async ({ body, supabase, user }) => {
+    await requireContentPermission(user, supabase);
     const { book_id, words_per_day } = body;
 
     // 오염 방지: AI 응답 문장 등 표제어 형식이 아닌 항목은 걸러내고 저장

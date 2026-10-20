@@ -14,6 +14,10 @@ vi.mock('@/lib/supabase/server', () => ({
 vi.mock('@/lib/api/rate-limit', () => ({
   checkRateLimit: () => null,
 }));
+const mockRequireContentPermission = vi.fn();
+vi.mock('@/lib/api/require-content-permission', () => ({
+  requireContentPermission: (...args: unknown[]) => mockRequireContentPermission(...args),
+}));
 vi.mock('@/lib/logger', () => ({
   logger: { info: vi.fn(), warn: vi.fn(), error: vi.fn() },
 }));
@@ -48,6 +52,7 @@ function aiResponse(data: unknown) {
 
 beforeEach(() => {
   vi.clearAllMocks();
+  mockRequireContentPermission.mockResolvedValue(undefined);
 });
 
 describe('voca/vocabulary/enrich-round2', () => {
@@ -104,6 +109,18 @@ describe('voca/vocabulary/enrich-round2', () => {
     const { POST } = await import('@/app/api/voca/vocabulary/enrich-round2/route');
     const res = await POST(makeRequest({ items: [{ id: 'v1', front_text: 'test', back_text: '테스트', part_of_speech: null }] }));
     expect(res.status).toBe(403);
+  });
+
+  it('콘텐츠 관리 권한 없는 학원 선생님 거부 (403)', async () => {
+    mockGetUser.mockResolvedValue(testTeacher);
+    mockCreateClient.mockResolvedValue({ from: vi.fn() });
+    const { ForbiddenError } = await import('@/lib/api/errors');
+    mockRequireContentPermission.mockRejectedValue(new ForbiddenError('콘텐츠 관리 권한이 없습니다.'));
+
+    const { POST } = await import('@/app/api/voca/vocabulary/enrich-round2/route');
+    const res = await POST(makeRequest({ items: [{ id: 'v1', front_text: 'test', back_text: '테스트', part_of_speech: null }] }));
+    expect(res.status).toBe(403);
+    expect(mockCreate).not.toHaveBeenCalled();
   });
 
   it('빈 목록 → 400', async () => {

@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { z } from 'zod';
 import { createApiHandler } from '@/lib/api/handler';
+import { requireContentPermission } from '@/lib/api/require-content-permission';
 import { logger } from '@/lib/logger';
 import { parseAiJsonArray } from '@/lib/ai-json';
 import Anthropic from '@anthropic-ai/sdk';
@@ -90,7 +91,8 @@ export const POST = createApiHandler(
   // 5/시간이던 것 — 대량 추출 후 2회독 자동 보강이 Day마다 호출해 6개 Day부터
   // 조용히 실패하던 잠복 버그. 분당 기준으로 명시
   { roles: ['teacher', 'admin', 'boss'], schema: enrichSchema, rateLimit: { max: 10, windowMs: 60_000 } },
-  async ({ body, supabase }) => {
+  async ({ body, supabase, user }) => {
+    await requireContentPermission(user, supabase);
     const { items, bookId, dayId } = body;
 
     // 교재 정의 언어 조회 (영영 교재면 한글 해석 생성 안 함)
