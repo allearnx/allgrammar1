@@ -3,6 +3,7 @@ import { createClient } from '@/lib/supabase/server';
 import { Topbar } from '@/components/layout/topbar';
 import { VocaDashboard } from '@/components/dashboard/voca-dashboard';
 import { SubscriptionBanner } from '@/components/billing/subscription-banner';
+import { FreeTryOtherCard } from '@/components/billing/free-try-other-card';
 import { fetchVocaDashboardData } from '@/lib/dashboard/fetch-voca-data';
 import { buildQuickStart } from '@/lib/dashboard/quick-start';
 import { QuickStartCards } from '@/components/dashboard/quick-start-cards';
@@ -43,14 +44,18 @@ export async function VocaSection({ user, planContext, isIndependent }: Props) {
     <>
       <Topbar user={user} title="홈" />
       <div className="px-4 md:px-6 pt-4 md:pt-6"><QuickStartCards quickStart={quickStart} /></div>
-      {isIndependent && planContext.tier === 'free' && (
-        <SubscriptionBanner
-          status="active"
-          tier="free"
-          freeService={planContext.freeService}
-          billingPageHref="/student/billing"
-          isIndividual
-        />
+      {planContext.tier === 'free' && (
+        <>
+          <SubscriptionBanner
+            status="active"
+            tier="free"
+            freeService={planContext.freeService}
+            billingPageHref="/student/billing"
+            isIndividual={isIndependent}
+            forStudent
+          />
+          <div className="px-4 md:px-6 pt-4"><FreeTryOtherCard current="voca" userId={user.id} /></div>
+        </>
       )}
       <VocaDashboard
         userName={user.full_name}

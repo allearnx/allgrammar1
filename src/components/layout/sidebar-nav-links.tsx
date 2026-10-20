@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import { cn } from '@/lib/utils';
-import type { NavGroup, NaesinSidebarExam } from './sidebar-nav-config';
+import type { NavGroup, NavTag, NaesinSidebarExam } from './sidebar-nav-config';
 import { NaesinTree } from './sidebar-naesin-tree';
 
 export function NavLinks({
@@ -13,6 +13,7 @@ export function NavLinks({
   onNavigate,
   hoverWhite,
   badges,
+  tags,
 }: {
   groups: NavGroup[];
   pathname: string;
@@ -21,6 +22,8 @@ export function NavLinks({
   hoverWhite?: boolean;
   /** href → 미확인 개수 — 빨간 배지로 표시 */
   badges?: Record<string, number>;
+  /** href → 무료 체험 표시 (짧은 배지 + 무료 범위 한 줄) */
+  tags?: Record<string, NavTag>;
 }) {
   const searchParams = useSearchParams();
 
@@ -75,7 +78,19 @@ export function NavLinks({
                   )}
                 >
                   <item.icon className={cn('h-4 w-4 shrink-0', isActive ? 'text-brand-600' : 'text-slate-400')} />
-                  {item.label}
+                  {tags?.[item.href] ? (
+                    <span className="flex min-w-0 flex-col leading-tight" title={tags[item.href].hint}>
+                      <span className="flex items-center gap-1.5">
+                        {item.label}
+                        <span className="rounded-full bg-[#EFF6FF] px-1.5 py-0.5 text-[10px] font-bold text-[#3182F6]">
+                          {tags[item.href].label}
+                        </span>
+                      </span>
+                      <span className="truncate text-[10px] font-normal text-slate-400">{tags[item.href].hint}</span>
+                    </span>
+                  ) : (
+                    item.label
+                  )}
                   {(badges?.[item.href] ?? 0) > 0 && (
                     <span className="ml-auto flex h-5 min-w-5 items-center justify-center rounded-full bg-[#D93025] px-1.5 text-[11px] font-bold text-white">
                       {badges![item.href]}

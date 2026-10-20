@@ -1,6 +1,8 @@
 import { requireRole } from '@/lib/auth/helpers';
 import { createClient } from '@/lib/supabase/server';
 import { redirect } from 'next/navigation';
+import { FreeWelcomeModal } from '@/components/billing/free-welcome-modal';
+import { FreeTryOtherCard } from '@/components/billing/free-try-other-card';
 import { Topbar } from '@/components/layout/topbar';
 import { VocaHomeClient } from './client';
 import { getPlanContext } from '@/lib/billing/get-plan-context';
@@ -107,7 +109,13 @@ export default async function StudentVocaPage({
   return (
     <>
       <Topbar user={user} title="올킬보카" />
+      {planContext.tier === 'free' && (
+        <FreeWelcomeModal service="voca" userId={user.id} userName={user.full_name} />
+      )}
       <div className="p-4 md:p-6">
+        {planContext.tier === 'free' && (
+          <div className="mb-4"><FreeTryOtherCard current="voca" userId={user.id} /></div>
+        )}
         <DiagnosticEntryCard latest={latestDiagnostic} retestBook={retestBook} />
         <VocaHomeClient
           books={(books as VocaBook[]) || []}

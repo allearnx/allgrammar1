@@ -1,6 +1,8 @@
 import { requireRole } from '@/lib/auth/helpers';
 import { createClient } from '@/lib/supabase/server';
 import { Topbar } from '@/components/layout/topbar';
+import { FreeWelcomeModal } from '@/components/billing/free-welcome-modal';
+import { FreeTryOtherCard } from '@/components/billing/free-try-other-card';
 import { NaesinHome } from './client';
 import { requireNaesinAccess } from '@/lib/naesin/require-naesin-access';
 import { mergeEnabledStages, getNaesinUnitLimit } from '@/lib/billing/feature-gate';
@@ -251,7 +253,13 @@ export default async function NaesinPage() {
   return (
     <>
       <Topbar user={user} title="내신 대비" />
+      {planContext.tier === 'free' && !planContext.naesinMemorizeOnly && (
+        <FreeWelcomeModal service="naesin" userId={user.id} userName={user.full_name} />
+      )}
       <div className="p-4 md:p-6">
+        {planContext.tier === 'free' && (
+          <div className="mb-4"><FreeTryOtherCard current="naesin" userId={user.id} /></div>
+        )}
         <NaesinHome
           textbooks={textbooks || []}
           selectedTextbook={setting?.textbook ? setting.textbook : null}

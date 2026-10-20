@@ -17,10 +17,10 @@ const ALL_NAESIN_STAGES = ['vocab', 'passage', 'dialogue', 'textbookVideo', 'gra
 const MEMORIZE_STAGES = ['vocab', 'passage', 'dialogue'];
 
 /** 무료 체험 시 올인내신 단원 제한 (1개만) */
-const FREE_NAESIN_UNIT_LIMIT = 1;
+export const FREE_NAESIN_UNIT_LIMIT = 1;
 
 /** 보카 무료 체험 — 가입 후 이 기간은 전체 Day 무제한, 이후 맛보기 Day 수로 축소 */
-const FREE_VOCA_TRIAL_DAYS = 7;
+export const FREE_VOCA_TRIAL_DAYS = 7;
 /** 체험 종료 후 무료로 볼 수 있는 Day 수 */
 export const FREE_VOCA_DAY_LIMIT = 3;
 

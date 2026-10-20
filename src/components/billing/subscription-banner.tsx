@@ -1,10 +1,7 @@
 'use client';
 
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
-import { AlertTriangle, CreditCard, Clock, Sparkles, ArrowRight, RefreshCw, Loader2 } from 'lucide-react';
+import { AlertTriangle, CreditCard, Clock, Sparkles, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
-import { fetchWithToast } from '@/lib/fetch-with-toast';
 import type { SubscriptionStatus } from '@/types/billing';
 import type { Tier } from '@/lib/billing/feature-gate';
 
@@ -15,6 +12,8 @@ interface SubscriptionBannerProps {
   tier?: Tier;
   freeService?: 'naesin' | 'voca' | null;
   isIndividual?: boolean;
+  /** 학생 화면이면 true — 무료 문구를 학생용으로 */
+  forStudent?: boolean;
 }
 
 const BANNER_STYLES = {
@@ -24,12 +23,13 @@ const BANNER_STYLES = {
   expired: { bg: 'bg-gray-50', border: 'border-gray-200', text: 'text-gray-600', icon: AlertTriangle },
 } as const;
 
-export function SubscriptionBanner({ status, trialDaysLeft, billingPageHref, tier, freeService, isIndividual }: SubscriptionBannerProps) {
+export function SubscriptionBanner({ status, trialDaysLeft, billingPageHref, tier, freeService, isIndividual, forStudent }: SubscriptionBannerProps) {
   if (tier === 'free') {
     return (
       <FreeBanner
         freeService={freeService}
         isIndividual={isIndividual}
+        forStudent={forStudent}
       />
     );
   }
@@ -64,53 +64,33 @@ export function SubscriptionBanner({ status, trialDaysLeft, billingPageHref, tie
   );
 }
 
-function FreeBanner({ freeService, isIndividual }: { freeService?: 'naesin' | 'voca' | null; isIndividual?: boolean }) {
-  const router = useRouter();
-  const [switching, setSwitching] = useState(false);
-
+function FreeBanner({ freeService, isIndividual, forStudent }: { freeService?: 'naesin' | 'voca' | null; isIndividual?: boolean; forStudent?: boolean }) {
+  // 2026-07부터 무료도 양쪽 서비스가 열려 있어 '전환' 버튼은 없앴다.
+  // 학생에게는 둘 다 체험 중이라고, 학원 결제 화면에는 기존 학원 플랜 문구를 보여 준다.
   const serviceLabel = freeService === 'voca' ? '올킬보카' : '올인내신';
-  const otherService = freeService === 'voca' ? 'naesin' : 'voca';
-  const otherLabel = freeService === 'voca' ? '올인내신' : '올킬보카';
-  const description = isIndividual
-    ? `무료 플랜 사용 중 · ${serviceLabel} 1회독`
-    : `무료 플랜 사용 중 · 5명, ${serviceLabel}만 이용 가능`;
+  const description = forStudent
+    ? '무료 플랜 · 올킬보카·올인내신 체험 중'
+    : isIndividual
+      ? `무료 플랜 사용 중 · ${serviceLabel} 1회독`
+      : `무료 플랜 사용 중 · 5명, ${serviceLabel}만 이용 가능`;
   const s = BANNER_STYLES.free;
   const Icon = s.icon;
-
-  const handleSwitch = async () => {
-    if (!confirm(`${otherLabel}(으)로 전환하시겠습니까?\n기존 학습 기록은 유지됩니다.`)) return;
-    setSwitching(true);
-    try {
-      await fetchWithToast('/api/student/select-free-service', {
-        body: { service: otherService },
-        successMessage: `${otherLabel}(으)로 전환되었습니다`,
-        errorMessage: '서비스 전환에 실패했습니다',
-      });
-      router.refresh();
-    } catch { /* fetchWithToast handles toast */ } finally {
-      setSwitching(false);
-    }
-  };
+  // 학원 학생은 직접 결제하지 않으므로 업그레이드 링크 대신 안내만
+  const showUpgrade = !forStudent || isIndividual;
 
   return (
-    <div className={`${s.bg} border-b ${s.border} px-5 py-3 flex items-center justify-between`}>
+    <div className={`${s.bg} border-b ${s.border} px-5 py-3 flex items-center justify-between gap-3`}>
       <div className={`flex items-center gap-2.5 ${s.text} text-[13px] font-medium`}>
-        <Icon className="h-4 w-4" />
+        <Icon className="h-4 w-4 shrink-0" />
         <span>{description}</span>
       </div>
-      <div className="flex items-center gap-3">
-        <button
-          onClick={handleSwitch}
-          disabled={switching}
-          className={`flex items-center gap-1 ${s.text} text-[13px] font-medium hover:opacity-70 transition-opacity disabled:opacity-50`}
-        >
-          {switching ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <RefreshCw className="h-3.5 w-3.5" />}
-          {otherLabel}로 전환
-        </button>
-        <Link href="/pricing" className={`flex items-center gap-1 ${s.text} text-[13px] font-semibold hover:opacity-70 transition-opacity`}>
+      {showUpgrade ? (
+        <Link href="/pricing" className={`flex shrink-0 items-center gap-1 ${s.text} text-[13px] font-semibold hover:opacity-70 transition-opacity`}>
           업그레이드 <ArrowRight className="h-3.5 w-3.5" />
         </Link>
-      </div>
+      ) : (
+        <span className={`shrink-0 ${s.text} text-[12px] opacity-80`}>더 쓰려면 선생님께 문의</span>
+      )}
     </div>
   );
 }
